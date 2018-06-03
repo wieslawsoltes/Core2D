@@ -41,6 +41,8 @@
         <!-- Dock -->
 
         <Assembly Name="Dock.Model" Dynamic="Required All" />
+        <Assembly Name="Dock.Model.INPC" Dynamic="Required All" />
+        <Assembly Name="Dock.Serializer" Dynamic="Required All" />
         <Assembly Name="Dock.Avalonia" Dynamic="Required All" />
 
         <!-- Avalonia -->

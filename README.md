@@ -301,6 +301,7 @@ dotnet publish -r ubuntu.16.10-x64 -o ubuntu.16.10-x64
 * https://www.myget.org/F/avalonia-ci/api/v2
 * https://www.myget.org/F/xamlbehaviors-nightly/api/v2
 * https://www.myget.org/F/panandzoom-nightly/api/v2
+* https://www.myget.org/F/dock-nightly/api/v2
 * https://ci.appveyor.com/nuget/portable-xaml
 
 ## SkiaSharp

@@ -23,6 +23,7 @@
   <Import Project="..\..\build\Avalonia.Desktop.props" />
   <Import Project="..\..\build\SkiaSharp.props" />
   <Import Project="..\..\build\SharpDX.props" />
+  <Import Project="..\..\build\Dock.props" />
 
   <ItemGroup>
     <Compile Include="**\*.cs" Exclude="obj\**" />
@@ -45,8 +46,6 @@
     <ProjectReference Include="..\Core2D.TextFieldReader.CsvHelper\Core2D.TextFieldReader.CsvHelper.csproj" />
     <ProjectReference Include="..\Core2D.TextFieldWriter.CsvHelper\Core2D.TextFieldWriter.CsvHelper.csproj" />
     <ProjectReference Include="..\Core2D.Utilities.Avalonia\Core2D.Utilities.Avalonia.csproj" />
-    <ProjectReference Include="..\..\dock\src\Dock.Avalonia\Dock.Avalonia.csproj" />
-    <ProjectReference Include="..\..\dock\src\Dock.Model\Dock.Model.csproj" />
   </ItemGroup>
 
   <ItemGroup Condition="$(TargetFramework.StartsWith('net4'))">

@@ -96,6 +96,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "props", "props", "{3C45CABF
 		build\Avalonia.props = build\Avalonia.props
 		build\Base.props = build\Base.props
 		build\CsvHelper.props = build\CsvHelper.props
+		build\Dock.props = build\Dock.props
 		build\EmbedXaml.props = build\EmbedXaml.props
 		build\ILCompiler.props = build\ILCompiler.props
 		build\Math.Spatial.props = build\Math.Spatial.props
@@ -122,14 +123,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "native", "native", "{0DD549
 	ProjectSection(SolutionItems) = preProject
 		build\native\rd.xml = build\native\rd.xml
 	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "dock", "dock", "{7C91417D-362B-42BC-A979-72758BFB9B24}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dock.Model", "dock\src\Dock.Model\Dock.Model.csproj", "{19D98A0D-FEEB-4F5D-BEA2-DF7EDFDD1E59}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dock.Avalonia", "dock\src\Dock.Avalonia\Dock.Avalonia.csproj", "{E8D24D0A-5432-4467-BD66-DF36A2D20840}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dock.Serializer", "dock\src\Dock.Serializer\Dock.Serializer.csproj", "{EF81E71C-784C-4F37-807F-31E8BE2ADAFE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -297,18 +290,6 @@ Global
 		{0C7EA04E-94D8-49B7-B387-C031B2422F3B}.Debug|AnyCPU.Build.0 = Debug|Any CPU
 		{0C7EA04E-94D8-49B7-B387-C031B2422F3B}.Release|AnyCPU.ActiveCfg = Release|Any CPU
 		{0C7EA04E-94D8-49B7-B387-C031B2422F3B}.Release|AnyCPU.Build.0 = Release|Any CPU
-		{19D98A0D-FEEB-4F5D-BEA2-DF7EDFDD1E59}.Debug|AnyCPU.ActiveCfg = Debug|Any CPU
-		{19D98A0D-FEEB-4F5D-BEA2-DF7EDFDD1E59}.Debug|AnyCPU.Build.0 = Debug|Any CPU
-		{19D98A0D-FEEB-4F5D-BEA2-DF7EDFDD1E59}.Release|AnyCPU.ActiveCfg = Release|Any CPU
-		{19D98A0D-FEEB-4F5D-BEA2-DF7EDFDD1E59}.Release|AnyCPU.Build.0 = Release|Any CPU
-		{E8D24D0A-5432-4467-BD66-DF36A2D20840}.Debug|AnyCPU.ActiveCfg = Debug|Any CPU
-		{E8D24D0A-5432-4467-BD66-DF36A2D20840}.Debug|AnyCPU.Build.0 = Debug|Any CPU
-		{E8D24D0A-5432-4467-BD66-DF36A2D20840}.Release|AnyCPU.ActiveCfg = Release|Any CPU
-		{E8D24D0A-5432-4467-BD66-DF36A2D20840}.Release|AnyCPU.Build.0 = Release|Any CPU
-		{EF81E71C-784C-4F37-807F-31E8BE2ADAFE}.Debug|AnyCPU.ActiveCfg = Debug|Any CPU
-		{EF81E71C-784C-4F37-807F-31E8BE2ADAFE}.Debug|AnyCPU.Build.0 = Debug|Any CPU
-		{EF81E71C-784C-4F37-807F-31E8BE2ADAFE}.Release|AnyCPU.ActiveCfg = Release|Any CPU
-		{EF81E71C-784C-4F37-807F-31E8BE2ADAFE}.Release|AnyCPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -357,9 +338,6 @@ Global
 		{3C45CABF-3E2E-455B-AACF-1FB63D331F9C} = {C7162582-C1FD-45FB-99FD-6770D67B5A21}
 		{DDE59F10-F84A-4919-B221-38414B958103} = {C7162582-C1FD-45FB-99FD-6770D67B5A21}
 		{0DD5491E-0BDA-4366-A353-549820A65E12} = {C7162582-C1FD-45FB-99FD-6770D67B5A21}
-		{19D98A0D-FEEB-4F5D-BEA2-DF7EDFDD1E59} = {7C91417D-362B-42BC-A979-72758BFB9B24}
-		{E8D24D0A-5432-4467-BD66-DF36A2D20840} = {7C91417D-362B-42BC-A979-72758BFB9B24}
-		{EF81E71C-784C-4F37-807F-31E8BE2ADAFE} = {7C91417D-362B-42BC-A979-72758BFB9B24}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2614B90F-C6F8-435C-8BD0-09AEE3ABAD2B}

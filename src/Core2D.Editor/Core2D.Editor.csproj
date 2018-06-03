@@ -12,7 +12,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Core2D\Core2D.csproj" />
-      <ProjectReference Include="..\..\dock\src\Dock.Model\Dock.Model.csproj" />
   </ItemGroup>
 
 </Project>
