@@ -154,7 +154,7 @@
         <Style Selector="ContextMenu.default">
             <Setter Property="BorderThickness" Value="1"/>
             <Setter Property="Padding" Value="2,2"/>
-            <Setter Property="TextBlock.FontSize" Value="12" />
+            <Setter Property="TextBlock.FontSize" Value="14" />
             <Setter Property="TextBlock.FontWeight" Value="Normal" />
         </Style>
         <!-- DropDown.default -->
