@@ -23,7 +23,8 @@
   <Import Project="..\..\build\Avalonia.Desktop.props" />
   <Import Project="..\..\build\SkiaSharp.props" />
   <Import Project="..\..\build\SharpDX.props" />
-  <Import Project="..\..\build\Dock.props" />
+  <Import Project="..\..\build\Dock.Model.props" />
+  <Import Project="..\..\build\Dock.Avalonia.props" />
 
   <ItemGroup>
     <Compile Include="**\*.cs" Exclude="obj\**" />

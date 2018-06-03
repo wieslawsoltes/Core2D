@@ -2,12 +2,12 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using Core2D.Shape;
 using Avalonia;
-using Avalonia.Markup;
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Globalization;
 using System.Linq;
+using Avalonia.Data.Converters;
 
 namespace Core2D.Avalonia.Converters
 {
@@ -20,11 +20,6 @@ namespace Core2D.Avalonia.Converters
         /// Default stats result.
         /// </summary>
         public static readonly string DefaultStats = "";
-
-        /// <summary>
-        /// Gets an instance of a <see cref="EditorToStatsMultiConverter"/>.
-        /// </summary>
-        public static readonly EditorToStatsMultiConverter Instance = new EditorToStatsMultiConverter();
 
         /// <summary>
         /// Converts multi-binding inputs to a final value.

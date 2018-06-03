@@ -6,9 +6,6 @@
              xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
              xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
              xmlns:id="clr-namespace:Dock.Avalonia;assembly=Dock.Avalonia"
-             xmlns:idd="clr-namespace:Dock.Avalonia.Dock;assembly=Dock.Avalonia"
-             xmlns:idh="clr-namespace:Dock.Avalonia.Handlers;assembly=Dock.Avalonia"
-             xmlns:dock="clr-namespace:Core2D.Avalonia.Dock;assembly=Core2D.Avalonia"
              xmlns:handlers="clr-namespace:Core2D.Avalonia.Dock.Handlers;assembly=Core2D.Avalonia"
              xmlns:converters="clr-namespace:Core2D.Avalonia.Converters;assembly=Core2D.Avalonia"
              xmlns:Designer="clr-namespace:Core2D.Editor.Designer;assembly=Core2D.Editor"
@@ -16,16 +13,20 @@
              xmlns:views="clr-namespace:Core2D.Avalonia.Views;assembly=Core2D.Avalonia"
              Design.DataContext="{x:Static Designer:DesignerContext.Editor}"
              Design.Width="1200" Design.Height="540">
+    <UserControl.Resources>
+        <id:DockDropHandler x:Key="DockDropHandler"/>
+        <handlers:EditorDropHandler x:Key="EditorDropHandler"/>
+    </UserControl.Resources>
     <Border Classes="container">
         <i:Interaction.Behaviors>
-            <id:DropBehavior Context="{Binding Layout}" Handler="{x:Static handlers:EditorDropHandler.Instance}"/>
-            <id:DropBehavior Context="{Binding Layout}" Handler="{x:Static idh:DockDropHandler.Instance}"/>
+            <id:DropBehavior Context="{Binding Layout}" Handler="{StaticResource EditorDropHandler}"/>
+            <id:DropBehavior Context="{Binding Layout}" Handler="{StaticResource DockDropHandler}"/>
         </i:Interaction.Behaviors>
         <Border Classes="transparent" ClipToBounds="True">
-            <paz:ZoomBorder Name="zoomBorder" Stretch="None" ZoomSpeed="1.2" PanButton="Right" EnableInput="{Binding IsToolIdle}" Background="Transparent" ClipToBounds="False" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-                <views:ContainerControl Name="containerControl" Renderer="{Binding Renderers[0]}" Container="{Binding Project.CurrentContainer}" ClipToBounds="False">
+            <paz:ZoomBorder x:Name="zoomBorder" Stretch="None" ZoomSpeed="1.2" PanButton="Right" EnableInput="{Binding IsToolIdle}" Background="Transparent" ClipToBounds="False" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                <views:ContainerControl x:Name="containerControl" Renderer="{Binding Renderers[0]}" Container="{Binding Project.CurrentContainer}" ClipToBounds="False">
                     <i:Interaction.Behaviors>
-                        <id:DropBehavior Context="{Binding}" Handler="{x:Static handlers:EditorDropHandler.Instance}"/>
+                        <id:DropBehavior Context="{Binding}" Handler="{StaticResource EditorDropHandler}"/>
                     </i:Interaction.Behaviors>
                 </views:ContainerControl>
             </paz:ZoomBorder>

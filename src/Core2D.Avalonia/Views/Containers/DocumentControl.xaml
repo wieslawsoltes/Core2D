@@ -24,7 +24,7 @@
                     <DataTemplate DataType="Containers:PageContainer">
                         <TextBlock Text="{Binding Name}" Classes="list drag">
                             <i:Interaction.Behaviors>
-                                <id:DragBehavior/>
+                                <id:DragBehavior Context="{Binding}"/>
                             </i:Interaction.Behaviors>
                         </TextBlock>
                     </DataTemplate>

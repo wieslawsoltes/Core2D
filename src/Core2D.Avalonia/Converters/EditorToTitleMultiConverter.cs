@@ -4,8 +4,8 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using Avalonia.Markup;
 using Avalonia;
+using Avalonia.Data.Converters;
 
 namespace Core2D.Avalonia.Converters
 {
@@ -18,11 +18,6 @@ namespace Core2D.Avalonia.Converters
         /// Default title result.
         /// </summary>
         public static readonly string DefaultTitle = "Core2D";
-
-        /// <summary>
-        /// Gets an instance of a <see cref="EditorToTitleMultiConverter"/>.
-        /// </summary>
-        public static readonly EditorToTitleMultiConverter Instance = new EditorToTitleMultiConverter();
 
         /// <summary>
         /// Converts multi-binding inputs to a final value.

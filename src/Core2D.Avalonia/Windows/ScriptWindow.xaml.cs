@@ -1,9 +1,8 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using Avalonia;
-using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
-using Dock.Avalonia;
+using Dock.Avalonia.Controls;
 
 namespace Core2D.Avalonia.Windows
 {

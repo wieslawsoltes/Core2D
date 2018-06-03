@@ -46,18 +46,18 @@
                 <MenuItem.Styles>
                     <Style Selector="MenuItem">
                         <Setter Property="Header" Value="{Binding Title}"/>
-                        <Setter Property="Command" Value="{Binding $parent[UserControl].DataContext.Layout.OnChangeCurrentView}"/>
+                        <Setter Property="Command" Value="{Binding $parent[UserControl].DataContext.OnNavigate}"/>
                         <Setter Property="CommandParameter" Value="{Binding}"/>
                         <Setter Property="Icon">
                             <Template>
-                                <CheckBox Name="icon" Classes="menu">
+                                <CheckBox x:Name="icon" Classes="menu">
                                     <i:Interaction.Behaviors>
                                         <iac:BindTagToVisualRootDataContextBehavior/>
                                     </i:Interaction.Behaviors>
                                     <CheckBox.IsChecked>
-                                        <MultiBinding Mode="OneWay" Converter="{x:Static converters:ObjectEqualityMultiConverter.Instance}">
-                                            <Binding ElementName="icon" Path="DataContext" Converter="{x:Static converters:ObjectToObjectConverter.Instance}"/>
-                                            <Binding ElementName="icon" Path="Tag.Layout.CurrentView" Converter="{x:Static converters:ObjectToObjectConverter.Instance}"/>
+                                        <MultiBinding Mode="OneWay" Converter="{StaticResource ObjectEqualityMultiConverter}">
+                                            <Binding ElementName="icon" Path="DataContext" Converter="{StaticResource ObjectToObjectConverter}"/>
+                                            <Binding ElementName="icon" Path="Tag.Layout.CurrentView" Converter="{StaticResource ObjectToObjectConverter}"/>
                                         </MultiBinding>
                                     </CheckBox.IsChecked>
                                 </CheckBox>

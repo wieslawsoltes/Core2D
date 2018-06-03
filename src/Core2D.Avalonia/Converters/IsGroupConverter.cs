@@ -1,7 +1,7 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using Avalonia.Data.Converters;
 using Core2D.Shapes;
-using Avalonia.Markup;
 using System;
 using System.Globalization;
 
@@ -12,11 +12,6 @@ namespace Core2D.Avalonia.Converters
     /// </summary>
     public class IsGroupConverter : IValueConverter
     {
-        /// <summary>
-        /// Gets an instance of a <see cref="IsGroupConverter"/>.
-        /// </summary>
-        public static readonly IsGroupConverter Instance = new IsGroupConverter();
-
         /// <summary>
         /// Converts a value.
         /// </summary>

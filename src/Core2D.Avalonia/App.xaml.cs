@@ -121,7 +121,8 @@ namespace Core2D.Avalonia
                 }
 
                 var dockFactory = serviceProvider.GetService<IDockFactory>();
-                dockFactory.CreateOrUpdateLayout();
+                editor.Layout = editor.Layout ?? dockFactory.CreateLayout();
+                dockFactory.InitLayout(editor.Layout, editor);
 
                 var recentPath = System.IO.Path.Combine(fileIO.GetBaseDirectory(), "Core2D.recent");
                 if (fileIO.Exists(recentPath))
@@ -137,7 +138,7 @@ namespace Core2D.Avalonia
                 var window = serviceProvider.GetService<Windows.MainWindow>();
                 window.Closed += (sender, e) =>
                 {
-                    editor.Layout?.CurrentView?.CloseWindows();
+                    dockFactory.CloseLayout(editor.Layout);
                     editor.OnSaveLayout(layoutPath);
                     editor.OnSaveRecent(recentPath);
                 };
@@ -172,7 +173,8 @@ namespace Core2D.Avalonia
             var editor = serviceProvider.GetService<ProjectEditor>();
 
             var dockFactory = serviceProvider.GetService<IDockFactory>();
-            dockFactory.CreateOrUpdateLayout();
+            editor.Layout = editor.Layout ?? dockFactory.CreateLayout();
+            dockFactory.InitLayout(editor.Layout, editor);
 
             editor.CurrentTool = editor.Tools.FirstOrDefault(t => t.Title == "Selection");
             editor.CurrentPathTool = editor.PathTools.FirstOrDefault(t => t.Title == "Line");

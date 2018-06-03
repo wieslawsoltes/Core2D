@@ -3,7 +3,7 @@
 using System;
 using System.Globalization;
 using Avalonia;
-using Avalonia.Markup;
+using Avalonia.Data.Converters;
 
 namespace Core2D.Avalonia.Converters
 {
@@ -12,11 +12,6 @@ namespace Core2D.Avalonia.Converters
     /// </summary>
     public class ByteToDoubleConverter : IValueConverter
     {
-        /// <summary>
-        /// Gets an instance of a <see cref="ByteToDoubleConverter"/>.
-        /// </summary>
-        public static readonly ByteToDoubleConverter Instance = new ByteToDoubleConverter();
-
         /// <summary>
         /// Converts a value.
         /// </summary>

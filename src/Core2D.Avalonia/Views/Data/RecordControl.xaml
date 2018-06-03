@@ -21,7 +21,7 @@
                     <DataTemplate DataType="Data:Column">
                         <Grid VerticalAlignment="Top" Classes="drag">
                             <i:Interaction.Behaviors>
-                                <id:DragBehavior/>
+                                <id:DragBehavior Context="{Binding}"/>
                             </i:Interaction.Behaviors>
                             <TextBox VerticalAlignment="Center" Text="{Binding Name, Mode=TwoWay}" Classes="property"/>
                         </Grid>
@@ -33,7 +33,7 @@
                     <DataTemplate DataType="Data:Value">
                         <Grid VerticalAlignment="Top" Classes="drag">
                             <i:Interaction.Behaviors>
-                                <id:DragBehavior/>
+                                <id:DragBehavior Context="{Binding}"/>
                             </i:Interaction.Behaviors>
                             <TextBox VerticalAlignment="Center" Text="{Binding Content, Mode=TwoWay}" Classes="property"/>
                         </Grid>

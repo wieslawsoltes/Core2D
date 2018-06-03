@@ -3,7 +3,7 @@
 using System;
 using System.Globalization;
 using Avalonia;
-using Avalonia.Markup;
+using Avalonia.Data.Converters;
 
 namespace Core2D.Avalonia.Converters
 {
@@ -12,11 +12,6 @@ namespace Core2D.Avalonia.Converters
     /// </summary>
     public class ObjectToTypeStringConverter : IValueConverter
     {
-        /// <summary>
-        /// Gets an instance of a <see cref="ObjectToTypeStringConverter"/>.
-        /// </summary>
-        public static readonly ObjectToTypeStringConverter Instance = new ObjectToTypeStringConverter();
-
         /// <summary>
         /// Converts a value.
         /// </summary>

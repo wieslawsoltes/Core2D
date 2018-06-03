@@ -2,16 +2,20 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System.Linq;
 using Avalonia.Input;
+using Avalonia.Interactivity;
 using Core2D.Containers;
 using Core2D.Data;
 using Core2D.Editor;
 using Core2D.Shape;
 using Core2D.Style;
 using Dock.Avalonia;
-using Dock.Avalonia.Helpers;
+using Dock.Model;
 
 namespace Core2D.Avalonia.Dock.Handlers
 {
+    /// <summary>
+    /// Project editor drop handler.
+    /// </summary>
     public class EditorDropHandler : IDropHandler
     {
         public static IDropHandler Instance = new EditorDropHandler();
@@ -64,22 +68,31 @@ namespace Core2D.Avalonia.Dock.Handlers
             return false;
         }
 
-        public bool Validate(object context, object sender, DragEventArgs e)
+        /// <inheritdoc/>
+        public bool Validate(object sourceContext, object targetContext, object sender, DockOperation operation, DragEventArgs e)
         {
-            if (context is ProjectEditor editor)
+            // FIXME:
+            if (sourceContext is ProjectEditor editor)
             {
                 return Validate(editor, sender, e, false);
             }
             return false;
         }
 
-        public bool Execute(object context, object sender, DragEventArgs e)
+        /// <inheritdoc/>
+        public bool Execute(object sourceContext, object targetContext, object sender, DockOperation operation, DragEventArgs e)
         {
-            if (context is ProjectEditor editor)
+            // FIXME:
+            if (sourceContext is ProjectEditor editor)
             {
                 return Validate(editor, sender, e, true);
             }
             return false;
+        }
+
+        /// <inheritdoc/>
+        public void Cancel(object sender, RoutedEventArgs e)
+        {
         }
     }
 }

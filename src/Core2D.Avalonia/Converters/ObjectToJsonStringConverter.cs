@@ -4,7 +4,7 @@ using System;
 using System.Diagnostics;
 using System.Globalization;
 using Avalonia;
-using Avalonia.Markup;
+using Avalonia.Data.Converters;
 using Core2D.Interfaces;
 
 namespace Core2D.Avalonia.Converters
@@ -18,11 +18,6 @@ namespace Core2D.Avalonia.Converters
         /// Gets or sets json serializer.
         /// </summary>
         internal static Lazy<IJsonSerializer> JsonSerializer { get; set; }
-
-        /// <summary>
-        /// Gets an instance of a <see cref="ObjectToJsonStringConverter"/>.
-        /// </summary>
-        public static readonly ObjectToJsonStringConverter Instance = new ObjectToJsonStringConverter();
 
         /// <summary>
         /// Converts a value.

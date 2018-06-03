@@ -17,8 +17,9 @@
              xmlns:Shapes="clr-namespace:Core2D.Shapes;assembly=Core2D" 
              xmlns:Style="clr-namespace:Core2D.Style;assembly=Core2D"
              xmlns:Views="clr-namespace:Core2D.Avalonia.Dock.Views;assembly=Core2D.Avalonia"
+             xmlns:Documents="clr-namespace:Core2D.Avalonia.Dock.Documents;assembly=Core2D.Avalonia"
+             xmlns:Tools="clr-namespace:Core2D.Avalonia.Dock.Tools;assembly=Core2D.Avalonia"
              xmlns:data="clr-namespace:Core2D.Avalonia.Views.Data;assembly=Core2D.Avalonia"
-             xmlns:dock="clr-namespace:Core2D.Avalonia.Views.Dock;assembly=Core2D.Avalonia"
              xmlns:path="clr-namespace:Core2D.Avalonia.Views.Path;assembly=Core2D.Avalonia"
              xmlns:containers="clr-namespace:Core2D.Avalonia.Views.Containers;assembly=Core2D.Avalonia"
              xmlns:settings="clr-namespace:Core2D.Avalonia.Views.Settings;assembly=Core2D.Avalonia"  
@@ -532,6 +533,7 @@
         </Style>
     </Application.Styles>
     <Application.Resources>
+        <!-- Brushes -->
         <SolidColorBrush x:Key="TransparentBrush">#00FFFFFF</SolidColorBrush>
         <VisualBrush x:Key="ColorCheckerBoard" TileMode="Tile" Stretch="None" AlignmentX="Left" AlignmentY="Top" SourceRect="0,0,20,20" DestinationRect="0,0,20,20">
             <VisualBrush.Visual>
@@ -561,6 +563,22 @@
                 </StackPanel>
             </VisualBrush.Visual>
         </VisualBrush>
+        <!-- Converters -->
+        <converters:ArgbColorToBrushMultiConverter x:Key="ArgbColorToBrushMultiConverter"/>
+        <converters:ByteToDoubleConverter x:Key="ByteToDoubleConverter"/>
+        <converters:ByteToStringConverter x:Key="ByteToStringConverter"/>
+        <converters:EditorToStatsMultiConverter x:Key="EditorToStatsMultiConverter"/>
+        <converters:EditorToTitleMultiConverter x:Key="EditorToTitleMultiConverter"/>
+        <converters:IsGroupConverter x:Key="IsGroupConverter"/>
+        <converters:IsNotNullConverter x:Key="IsNotNullConverter"/>
+        <converters:IsNullConverter x:Key="IsNullConverter"/>
+        <converters:ObjectEqualityMultiConverter x:Key="ObjectEqualityMultiConverter"/>
+        <converters:ObjectEqualsConverter x:Key="ObjectEqualsConverter"/>
+        <converters:ObjectToJsonStringConverter x:Key="ObjectToJsonStringConverter"/>
+        <converters:ObjectToObjectConverter x:Key="ObjectToObjectConverter"/>
+        <converters:ObjectToTypeStringConverter x:Key="ObjectToTypeStringConverter"/>
+        <converters:ObjectToXamlStringConverter x:Key="ObjectToXamlStringConverter"/>
+        <converters:TreeViewSelectedItemToObjectConverter x:Key="TreeViewSelectedItemToObjectConverter"/>
     </Application.Resources>
     <Application.DataTemplates>
         <!-- Editor -->
@@ -776,49 +794,51 @@
                 <views:AboutControl Grid.Row="1" DataContext="{Binding Context}"/>
             </Grid>
         </DataTemplate>
-        <DataTemplate DataType="Views:PageView">
+        <!-- Documents -->
+        <DataTemplate DataType="Documents:PageDocument">
             <views:PageControl DataContext="{Binding Context}"/>
         </DataTemplate>
-        <DataTemplate DataType="Views:ProjectView">
+        <!-- Tools -->
+        <DataTemplate DataType="Tools:ProjectTool">
             <containers:ProjectControl DataContext="{Binding Context.Project}"/>
         </DataTemplate>
-        <DataTemplate DataType="Views:OptionsView">
+        <DataTemplate DataType="Tools:OptionsTool">
             <ContentControl Content="{Binding Context.Project.Options}"/>
         </DataTemplate>
-        <DataTemplate DataType="Views:ImagesView">
+        <DataTemplate DataType="Tools:ImagesTool">
             <containers:ImagesControl DataContext="{Binding Context.Project}"/>
         </DataTemplate>
-        <DataTemplate DataType="Views:GroupsView">
+        <DataTemplate DataType="Tools:GroupsTool">
             <containers:GroupsControl DataContext="{Binding Context.Project.CurrentGroupLibrary}"/>
         </DataTemplate>
-        <DataTemplate DataType="Views:DatabasesView">
+        <DataTemplate DataType="Tools:DatabasesTool">
             <containers:DatabasesControl DataContext="{Binding Context.Project}"/>
         </DataTemplate>
-        <DataTemplate DataType="Views:StylesView">
+        <DataTemplate DataType="Tools:StylesTool">
             <containers:StylesControl DataContext="{Binding Context.Project.CurrentStyleLibrary}"/>
         </DataTemplate>
-        <DataTemplate DataType="Views:TemplatesView">
+        <DataTemplate DataType="Tools:TemplatesTool">
             <containers:TemplatesControl DataContext="{Binding Context.Project}"/>
         </DataTemplate>
-        <DataTemplate DataType="Views:ContainerView">
+        <DataTemplate DataType="Tools:ContainerTool">
             <ContentControl Content="{Binding Context.Project.CurrentContainer}"/>
         </DataTemplate>
-        <DataTemplate DataType="Views:ZoomView">
+        <DataTemplate DataType="Tools:ZoomTool">
             <containers:ZoomControl DataContext="{Binding Context.Canvas.Zoom}"/>
         </DataTemplate>
-        <DataTemplate DataType="Views:ToolsView">
+        <DataTemplate DataType="Tools:ToolsTool">
             <settings:ToolsControl DataContext="{Binding Context}"/>
         </DataTemplate>
-        <DataTemplate DataType="Views:ShapeView">
+        <DataTemplate DataType="Tools:ShapeTool">
             <ContentControl Content="{Binding Context.Project.CurrentContainer.CurrentShape}"/>
         </DataTemplate>
-        <DataTemplate DataType="Views:DataView">
+        <DataTemplate DataType="Tools:DataTool">
             <data:DataControl DataContext="{Binding Context.Renderers[0].State.SelectedShape.Data}"/>
         </DataTemplate>
-        <DataTemplate DataType="Views:StyleView">
+        <DataTemplate DataType="Tools:StyleTool">
             <style:ShapeStyleControl DataContext="{Binding Context.Project.CurrentStyleLibrary.Selected}"/>
         </DataTemplate>
-        <DataTemplate DataType="Views:TemplateView">
+        <DataTemplate DataType="Tools:TemplateTool">
             <ContentControl Content="{Binding Context.Project.CurrentTemplate}"/>
         </DataTemplate>
     </Application.DataTemplates>

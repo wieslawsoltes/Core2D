@@ -23,7 +23,7 @@
                     <DataTemplate DataType="Renderer:ImageKey">
                         <Grid VerticalAlignment="Top" ColumnDefinitions="*,30" Classes="drag">
                             <i:Interaction.Behaviors>
-                                <id:DragBehavior/>
+                                <id:DragBehavior Context="{Binding}"/>
                             </i:Interaction.Behaviors>
                             <TextBox VerticalAlignment="Center" Text="{Binding Key, Mode=OneWay}" Classes="property" Grid.Column="0"/>
                             <Button VerticalAlignment="Center" Content="-" Classes="property" Grid.Column="1" Command="{Binding $parent[Window].DataContext.OnRemoveImageKey}" CommandParameter="{Binding Key}"/>

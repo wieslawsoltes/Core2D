@@ -1,14 +1,13 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
-using System;
-using Dock.Model;
+using Dock.Model.Controls;
 
-namespace Core2D.Avalonia.Dock.Views
+namespace Core2D.Avalonia.Dock.Documents
 {
     /// <summary>
-    /// Project view.
+    /// Page document.
     /// </summary>
-    public class ProjectView : DockView
+    public class PageDocument : DocumentTab
     {
     }
 }

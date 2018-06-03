@@ -19,6 +19,7 @@ using Core2D.Shape;
 using Core2D.Shapes;
 using Core2D.Style;
 using Dock.Model;
+using Dock.Model.Controls;
 using Spatial;
 using static System.Math;
 
@@ -193,7 +194,7 @@ namespace Core2D.Editor
         {
             OnUnload();
             OnLoad(ProjectFactory?.GetProject() ?? ProjectContainer.Create(), string.Empty);
-            Layout?.OnChangeCurrentView("Editor");
+            OnNavigate("EditorView");
             Canvas?.Invalidate?.Invoke();
         }
 
@@ -237,7 +238,7 @@ namespace Core2D.Editor
                     OnUnload();
                     OnLoad(project, path);
                     OnAddRecent(path, project.Name);
-                    Layout?.OnChangeCurrentView("Editor");
+                    OnNavigate("EditorView");
                 }
             }
             catch (Exception ex)
@@ -251,7 +252,7 @@ namespace Core2D.Editor
         /// </summary>
         public void OnCloseProject()
         {
-            Layout?.OnChangeCurrentView("Dashboard");
+            OnNavigate("DashboardView");
             Project?.History?.Reset();
             OnUnload();
         }
@@ -2134,7 +2135,7 @@ namespace Core2D.Editor
                 try
                 {
                     var json = FileIO.ReadUtf8Text(path);
-                    var layout = JsonSerializer.Deserialize<DockRoot>(json);
+                    var layout = JsonSerializer.Deserialize<RootDock>(json);
                     if (layout != null)
                     {
                         Layout = layout;
@@ -2164,6 +2165,18 @@ namespace Core2D.Editor
                 {
                     LogError(ex);
                 }
+            }
+        }
+
+        /// <summary>
+        /// Navigate to view.
+        /// </summary>
+        /// <param name="view">The view to navigate to.</param>
+        public void OnNavigate(object view)
+        {
+            if (Layout is IViewsHost layoutViewsHost)
+            {
+                layoutViewsHost.Navigate(view);
             }
         }
 

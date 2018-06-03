@@ -6,7 +6,6 @@
              xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
              xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
              xmlns:id="clr-namespace:Dock.Avalonia;assembly=Dock.Avalonia"
-             xmlns:dock="clr-namespace:Core2D.Avalonia.Dock;assembly=Core2D.Avalonia"
              xmlns:handlers="clr-namespace:Core2D.Avalonia.Dock.Handlers;assembly=Core2D.Avalonia"
              xmlns:converters="clr-namespace:Core2D.Avalonia.Converters;assembly=Core2D.Avalonia"
              xmlns:Editor="clr-namespace:Core2D.Editor;assembly=Core2D.Editor"
@@ -14,29 +13,34 @@
              xmlns:Designer="clr-namespace:Core2D.Editor.Designer;assembly=Core2D.Editor"
              Design.DataContext="{x:Static Designer:DesignerContext.CurrentStyleLibrary}"
              Design.Width="250" Design.Height="400">
+    <UserControl.Resources>
+        <converters:IsGroupConverter x:Key="IsGroupConverter"/>
+        <converters:IsNotNullConverter x:Key="IsNotNullConverter"/>
+        <handlers:ListBoxDropHandler x:Key="ListBoxDropHandler"/>
+    </UserControl.Resources>
     <Grid RowDefinitions="Auto,Auto,Auto,*,Auto">
         <Grid RowDefinitions="*" ColumnDefinitions="*,Auto" Grid.Row="0">
-            <TextBox Text="{Binding Name, Mode=TwoWay}" Classes="left" Grid.Column="0" IsVisible="{Binding Converter={x:Static converters:IsNotNullConverter.Instance}}"/>
+            <TextBox Text="{Binding Name, Mode=TwoWay}" Classes="left" Grid.Column="0" IsVisible="{Binding Converter={StaticResource IsNotNullConverter}}"/>
             <Menu Grid.Column="1" HorizontalAlignment="Right">
                 <MenuItem Header="+" Command="{Binding $parent[Window].DataContext.OnAddGroupLibrary}"/>
-                <MenuItem Header="-" Command="{Binding $parent[Window].DataContext.OnRemoveGroupLibrary}" CommandParameter="{Binding}" IsVisible="{Binding Converter={x:Static converters:IsNotNullConverter.Instance}}"/>
+                <MenuItem Header="-" Command="{Binding $parent[Window].DataContext.OnRemoveGroupLibrary}" CommandParameter="{Binding}" IsVisible="{Binding Converter={StaticResource IsNotNullConverter}}"/>
             </Menu>
         </Grid>
-        <DropDown Items="{Binding $parent[Window].DataContext.Project.GroupLibraries}" SelectedItem="{Binding $parent[Window].DataContext.Project.CurrentGroupLibrary, Mode=TwoWay}" Classes="default" Grid.Row="1" IsVisible="{Binding Converter={x:Static converters:IsNotNullConverter.Instance}}">
+        <DropDown Items="{Binding $parent[Window].DataContext.Project.GroupLibraries}" SelectedItem="{Binding $parent[Window].DataContext.Project.CurrentGroupLibrary, Mode=TwoWay}" Classes="default" Grid.Row="1" IsVisible="{Binding Converter={StaticResource IsNotNullConverter}}">
             <DropDown.DataTemplates>
                 <DataTemplate>
                     <TextBlock Text="{Binding Name}" Classes="default"/>
                 </DataTemplate>
             </DropDown.DataTemplates>
         </DropDown>
-        <Menu Grid.Row="2" HorizontalAlignment="Right" IsVisible="{Binding Converter={x:Static converters:IsNotNullConverter.Instance}}">
-            <MenuItem Header="insert" Command="{Binding $parent[Window].DataContext.OnInsertGroup}" CommandParameter="{Binding Selected}" IsVisible="{Binding Selected, Converter={x:Static converters:IsNotNullConverter.Instance}}"/>
-            <MenuItem Header="+" Command="{Binding $parent[Window].DataContext.OnAddGroup}" CommandParameter="{Binding}" IsVisible="{Binding CurrentContainer.CurrentShape, Converter={x:Static converters:IsGroupConverter.Instance}}"/>
-            <MenuItem Header="-" Command="{Binding $parent[Window].DataContext.OnRemoveGroup}" CommandParameter="{Binding Selected}" IsVisible="{Binding Selected, Converter={x:Static converters:IsNotNullConverter.Instance}}"/>
+        <Menu Grid.Row="2" HorizontalAlignment="Right" IsVisible="{Binding Converter={StaticResource IsNotNullConverter}}">
+            <MenuItem Header="insert" Command="{Binding $parent[Window].DataContext.OnInsertGroup}" CommandParameter="{Binding Selected}" IsVisible="{Binding Selected, Converter={StaticResource IsNotNullConverter}}"/>
+            <MenuItem Header="+" Command="{Binding $parent[Window].DataContext.OnAddGroup}" CommandParameter="{Binding}" IsVisible="{Binding CurrentContainer.CurrentShape, Converter={StaticResource IsGroupConverter}}"/>
+            <MenuItem Header="-" Command="{Binding $parent[Window].DataContext.OnRemoveGroup}" CommandParameter="{Binding Selected}" IsVisible="{Binding Selected, Converter={StaticResource IsNotNullConverter}}"/>
         </Menu>
-        <ListBox Name="groups" Items="{Binding Items}" SelectedItem="{Binding Selected, Mode=TwoWay}" Grid.Row="3" Classes="default">
+        <ListBox x:Name="groups" Items="{Binding Items}" SelectedItem="{Binding Selected, Mode=TwoWay}" Grid.Row="3" Classes="default">
             <i:Interaction.Behaviors>
-                <id:DropBehavior Context="{Binding $parent[Window].DataContext}" Handler="{x:Static handlers:ListBoxDropHandler.Instance}"/>
+                <id:DropBehavior Context="{Binding $parent[Window].DataContext}" Handler="{StaticResource ListBoxDropHandler}"/>
             </i:Interaction.Behaviors>
             <ListBox.KeyBindings>
                 <KeyBinding Command="{Binding $parent[Window].DataContext.OnAddGroup}" CommandParameter="{Binding #groups.DataContext}" Gesture="Ctrl+N"/>
@@ -45,12 +49,12 @@
             </ListBox.KeyBindings>
             <ListBox.DataTemplates>
                 <DataTemplate DataType="Shapes:GroupShape">
-                    <TextBlock Name="group" Text="{Binding Name}" Classes="list drag">
+                    <TextBlock x:Name="group" Text="{Binding Name}" Classes="list drag">
                         <i:Interaction.Behaviors>
                             <ia:EventTriggerBehavior EventName="DoubleTapped" SourceObject="{Binding #group}">
                                 <ia:InvokeCommandAction Command="{Binding $parent[Window].DataContext.OnInsertGroup}" CommandParameter="{Binding Mode=OneWay}"/>
                             </ia:EventTriggerBehavior>
-                            <id:DragBehavior/>
+                            <id:DragBehavior Context="{Binding}"/>
                         </i:Interaction.Behaviors>
                         <TextBlock.ContextMenu>
                             <ContextMenu Classes="default">
@@ -63,7 +67,7 @@
                 </DataTemplate>
             </ListBox.DataTemplates>
         </ListBox>
-        <Grid RowDefinitions="Auto" ColumnDefinitions="Auto,*" Grid.Row="4" IsVisible="{Binding #groups.SelectedItem, Converter={x:Static converters:IsNotNullConverter.Instance}}">
+        <Grid RowDefinitions="Auto" ColumnDefinitions="Auto,*" Grid.Row="4" IsVisible="{Binding #groups.SelectedItem, Converter={StaticResource IsNotNullConverter}}">
             <TextBlock Text="Name" Classes="left" Grid.Row="0" Grid.Column="0"/>
             <TextBox Text="{Binding #groups.SelectedItem.Name, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
         </Grid>

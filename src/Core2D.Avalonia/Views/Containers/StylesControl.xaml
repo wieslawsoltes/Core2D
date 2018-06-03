@@ -6,7 +6,6 @@
              xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
              xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
              xmlns:id="clr-namespace:Dock.Avalonia;assembly=Dock.Avalonia"
-             xmlns:dock="clr-namespace:Core2D.Avalonia.Dock;assembly=Core2D.Avalonia"
              xmlns:handlers="clr-namespace:Core2D.Avalonia.Dock.Handlers;assembly=Core2D.Avalonia"
              xmlns:converters="clr-namespace:Core2D.Avalonia.Converters;assembly=Core2D.Avalonia"
              xmlns:Editor="clr-namespace:Core2D.Editor;assembly=Core2D.Editor"
@@ -14,29 +13,33 @@
              xmlns:Designer="clr-namespace:Core2D.Editor.Designer;assembly=Core2D.Editor"
              Design.DataContext="{x:Static Designer:DesignerContext.CurrentStyleLibrary}"
              Design.Width="250" Design.Height="400">
+    <UserControl.Resources>
+        <converters:IsNotNullConverter x:Key="IsNotNullConverter"/>
+        <handlers:ListBoxDropHandler x:Key="ListBoxDropHandler"/>
+    </UserControl.Resources>
     <Grid RowDefinitions="Auto,Auto,Auto,*,Auto">
         <Grid RowDefinitions="*" ColumnDefinitions="*,Auto" Grid.Row="0">
-            <TextBox Text="{Binding Name, Mode=TwoWay}" Classes="left" Grid.Column="0" IsVisible="{Binding Converter={x:Static converters:IsNotNullConverter.Instance}}"/>
+            <TextBox Text="{Binding Name, Mode=TwoWay}" Classes="left" Grid.Column="0" IsVisible="{Binding Converter={StaticResource IsNotNullConverter}}"/>
             <Menu Grid.Column="1" HorizontalAlignment="Right">
                 <MenuItem Header="+" Command="{Binding $parent[Window].DataContext.OnAddStyleLibrary}"/>
-                <MenuItem Header="-" Command="{Binding $parent[Window].DataContext.OnRemoveStyleLibrary}" CommandParameter="{Binding}" IsVisible="{Binding Converter={x:Static converters:IsNotNullConverter.Instance}}"/>
+                <MenuItem Header="-" Command="{Binding $parent[Window].DataContext.OnRemoveStyleLibrary}" CommandParameter="{Binding}" IsVisible="{Binding Converter={StaticResource IsNotNullConverter}}"/>
             </Menu>
         </Grid>
-        <DropDown Items="{Binding $parent[Window].DataContext.Project.StyleLibraries}" SelectedItem="{Binding $parent[Window].DataContext.Project.CurrentStyleLibrary, Mode=TwoWay}" Grid.Row="1" Classes="default" IsVisible="{Binding Converter={x:Static converters:IsNotNullConverter.Instance}}">
+        <DropDown Items="{Binding $parent[Window].DataContext.Project.StyleLibraries}" SelectedItem="{Binding $parent[Window].DataContext.Project.CurrentStyleLibrary, Mode=TwoWay}" Grid.Row="1" Classes="default" IsVisible="{Binding Converter={StaticResource IsNotNullConverter}}">
             <DropDown.DataTemplates>
                 <DataTemplate>
                     <TextBlock Text="{Binding Name}" Classes="default"/>
                 </DataTemplate>
             </DropDown.DataTemplates>
         </DropDown>
-        <Menu Grid.Row="2" HorizontalAlignment="Right" IsVisible="{Binding Converter={x:Static converters:IsNotNullConverter.Instance}}">
-            <MenuItem Header="apply" Command="{Binding $parent[Window].DataContext.OnApplyStyle}" CommandParameter="{Binding Selected}" IsVisible="{Binding Selected, Converter={x:Static converters:IsNotNullConverter.Instance}}"/>
+        <Menu Grid.Row="2" HorizontalAlignment="Right" IsVisible="{Binding Converter={StaticResource IsNotNullConverter}}">
+            <MenuItem Header="apply" Command="{Binding $parent[Window].DataContext.OnApplyStyle}" CommandParameter="{Binding Selected}" IsVisible="{Binding Selected, Converter={StaticResource IsNotNullConverter}}"/>
             <MenuItem Header="+" Command="{Binding $parent[Window].DataContext.OnAddStyle}" CommandParameter="{Binding}"/>
-            <MenuItem Header="-" Command="{Binding $parent[Window].DataContext.OnRemoveStyle}" CommandParameter="{Binding Selected}" IsVisible="{Binding Selected, Converter={x:Static converters:IsNotNullConverter.Instance}}"/>
+            <MenuItem Header="-" Command="{Binding $parent[Window].DataContext.OnRemoveStyle}" CommandParameter="{Binding Selected}" IsVisible="{Binding Selected, Converter={StaticResource IsNotNullConverter}}"/>
         </Menu>
-        <ListBox Name="styles" Items="{Binding Items}" SelectedItem="{Binding Selected, Mode=TwoWay}" Grid.Row="3" Classes="default">
+        <ListBox x:Name="styles" Items="{Binding Items}" SelectedItem="{Binding Selected, Mode=TwoWay}" Grid.Row="3" Classes="default">
             <i:Interaction.Behaviors>
-                <id:DropBehavior Context="{Binding $parent[Window].DataContext}" Handler="{x:Static handlers:ListBoxDropHandler.Instance}"/>
+                <id:DropBehavior Context="{Binding $parent[Window].DataContext}" Handler="{StaticResource ListBoxDropHandler}"/>
             </i:Interaction.Behaviors>
             <ListBox.KeyBindings>
                 <KeyBinding Command="{Binding $parent[Window].DataContext.OnAddStyle}" CommandParameter="{Binding #styles.DataContext, Mode=OneWay}" Gesture="Ctrl+N"/>
@@ -45,12 +48,12 @@
             </ListBox.KeyBindings>
             <ListBox.DataTemplates>
                 <DataTemplate DataType="Style:ShapeStyle">
-                    <TextBlock Name="style" Text="{Binding Name}" Classes="list drag">
+                    <TextBlock x:Name="style" Text="{Binding Name}" Classes="list drag">
                         <i:Interaction.Behaviors>
                             <ia:EventTriggerBehavior EventName="DoubleTapped" SourceObject="{Binding #style}">
                                 <ia:InvokeCommandAction Command="{Binding $parent[Window].DataContext.OnApplyStyle}" CommandParameter="{Binding Mode=OneWay}"/>
                             </ia:EventTriggerBehavior>
-                            <id:DragBehavior/>
+                            <id:DragBehavior Context="{Binding}"/>
                         </i:Interaction.Behaviors>
                         <TextBlock.ContextMenu>
                             <ContextMenu Classes="default">
@@ -63,7 +66,7 @@
                 </DataTemplate>
             </ListBox.DataTemplates>
         </ListBox>
-        <Grid RowDefinitions="Auto" ColumnDefinitions="Auto,*" Grid.Row="4" IsVisible="{Binding #styles.SelectedItem, Converter={x:Static converters:IsNotNullConverter.Instance}}">
+        <Grid RowDefinitions="Auto" ColumnDefinitions="Auto,*" Grid.Row="4" IsVisible="{Binding #styles.SelectedItem, Converter={StaticResource IsNotNullConverter}}">
             <TextBlock Text="Name" Classes="left" Grid.Row="0" Grid.Column="0"/>
             <TextBox Text="{Binding #styles.SelectedItem.Name, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
         </Grid>

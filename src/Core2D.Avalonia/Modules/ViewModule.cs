@@ -4,7 +4,7 @@ using System.Reflection;
 using Autofac;
 using Core2D.Avalonia.Dock.Factories;
 using Core2D.Avalonia.Windows;
-using Dock.Avalonia.Dock;
+using Dock.Avalonia.Controls;
 using Dock.Model;
 
 namespace Core2D.Avalonia.Modules

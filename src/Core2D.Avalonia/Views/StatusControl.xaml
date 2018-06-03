@@ -10,16 +10,21 @@
              xmlns:Designer="clr-namespace:Core2D.Editor.Designer;assembly=Core2D.Editor"
              Design.DataContext="{x:Static Designer:DesignerContext.Editor}"
              Design.Width="1200" Design.Height="540">
+    <UserControl.Resources>
+        <converters:EditorToStatsMultiConverter x:Key="EditorToStatsMultiConverter"/>
+        <converters:ObjectToObjectConverter x:Key="ObjectToObjectConverter"/>
+        <converters:ObjectEqualityMultiConverter x:Key="ObjectEqualityMultiConverter"/>
+    </UserControl.Resources>
     <Grid ColumnDefinitions="Auto,*">
         <TextBlock Classes="stats" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center">
             <TextBlock.Text>
-                <MultiBinding Mode="OneWay" Converter="{x:Static converters:EditorToStatsMultiConverter.Instance}">
+                <MultiBinding Mode="OneWay" Converter="{StaticResource EditorToStatsMultiConverter}">
                     <Binding Path="Project.Documents.Length"/>
                     <Binding Path="Project.CurrentDocument.Pages.Length"/>
                     <Binding Path="Project.CurrentContainer.Layers.Length"/>
                     <Binding Path="Project.CurrentContainer.CurrentLayer.Shapes.Length"/>
-                    <Binding Path="Renderers[0].State.SelectedShape" Converter="{x:Static converters:ObjectToObjectConverter.Instance}"/>
-                    <Binding Path="Renderers[0].State.SelectedShapes" Converter="{x:Static converters:ObjectToObjectConverter.Instance}"/>
+                    <Binding Path="Renderers[0].State.SelectedShape" Converter="{StaticResource ObjectToObjectConverter}"/>
+                    <Binding Path="Renderers[0].State.SelectedShapes" Converter="{StaticResource ObjectToObjectConverter}"/>
                 </MultiBinding>
             </TextBlock.Text>
         </TextBlock>
@@ -38,7 +43,7 @@
                     </DataTemplate>
                 </DropDown.DataTemplates>
                 <DropDown.IsVisible>
-                    <MultiBinding Mode="OneWay" Converter="{x:Static converters:ObjectEqualityMultiConverter.Instance}">
+                    <MultiBinding Mode="OneWay" Converter="{StaticResource ObjectEqualityMultiConverter}">
                         <Binding Path="CurrentTool.Title"/>
                         <Binding Source="Path"/>
                     </MultiBinding>

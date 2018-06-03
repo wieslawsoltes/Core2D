@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using Avalonia;
-using Avalonia.Markup;
+using Avalonia.Data.Converters;
 
 namespace Core2D.Avalonia.Converters
 {
@@ -13,11 +13,6 @@ namespace Core2D.Avalonia.Converters
     /// </summary>
     public class ObjectEqualityMultiConverter : IMultiValueConverter
     {
-        /// <summary>
-        /// Gets an instance of a <see cref="ObjectEqualityMultiConverter"/>.
-        /// </summary>
-        public static readonly ObjectEqualityMultiConverter Instance = new ObjectEqualityMultiConverter();
-
         /// <summary>
         /// Converts multi-binding inputs to a final value.
         /// </summary>

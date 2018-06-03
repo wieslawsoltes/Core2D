@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using Avalonia;
-using Avalonia.Markup;
+using Avalonia.Data.Converters;
 using Avalonia.Media;
 
 namespace Core2D.Avalonia.Converters
@@ -15,11 +15,6 @@ namespace Core2D.Avalonia.Converters
     /// </summary>
     public class ArgbColorToBrushMultiConverter : IMultiValueConverter
     {
-        /// <summary>
-        /// Gets an instance of a <see cref="ArgbColorToBrushMultiConverter"/>.
-        /// </summary>
-        public static readonly ArgbColorToBrushMultiConverter Instance = new ArgbColorToBrushMultiConverter();
-
         /// <summary>
         /// Converts multi-binding inputs to a final value.
         /// </summary>

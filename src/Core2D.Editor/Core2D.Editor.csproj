@@ -9,6 +9,7 @@
   <Import Project="..\..\build\Base.props" />
   <Import Project="..\..\build\Rx.props" />
   <Import Project="..\..\build\Math.Spatial.props" />
+  <Import Project="..\..\build\Dock.Model.props" />
 
   <ItemGroup>
     <ProjectReference Include="..\Core2D\Core2D.csproj" />

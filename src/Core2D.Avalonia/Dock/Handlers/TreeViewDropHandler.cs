@@ -2,17 +2,23 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using Avalonia.Controls;
 using Avalonia.Input;
+using Avalonia.Interactivity;
 using Core2D.Containers;
 using Core2D.Editor;
 using Dock.Avalonia;
-using Dock.Avalonia.Helpers;
+using Dock.Model;
 
 namespace Core2D.Avalonia.Dock.Handlers
 {
+    /// <summary>
+    /// Tree view drop handler.
+    /// </summary>
     public class TreeViewDropHandler : IDropHandler
     {
         public static IDropHandler Instance = new TreeViewDropHandler();
 
+        // FIXME:
+        /*
         private bool ValidateTreeView(ProjectEditor editor, DragEventArgs e, bool bExecute, TreeView tree)
         {
             var sourceItem = e.Data.Get(DragDataFormats.Parent);
@@ -187,23 +193,33 @@ namespace Core2D.Avalonia.Dock.Handlers
 
             return false;
         }
+        */
 
-        public bool Validate(object context, object sender, DragEventArgs e)
+        /// <inheritdoc/>
+        public bool Validate(object sourceContext, object targetContext, object sender, DockOperation operation, DragEventArgs e)
         {
-            if (context is ProjectEditor editor)
-            {
-                return Validate(editor, sender, e, false);
-            }
+            // FIXME:
+            //if (context is ProjectEditor editor)
+            //{
+            //    return Validate(editor, sender, e, false);
+            //}
             return false;
         }
 
-        public bool Execute(object context, object sender, DragEventArgs e)
+        /// <inheritdoc/>
+        public bool Execute(object sourceContext, object targetContext, object sender, DockOperation operation, DragEventArgs e)
         {
-            if (context is ProjectEditor editor)
-            {
-                return Validate(editor, sender, e, true);
-            }
+            // FIXME:
+            //if (context is ProjectEditor editor)
+            //{
+            //    return Validate(editor, sender, e, true);
+            //}
             return false;
+        }
+
+        /// <inheritdoc/>
+        public void Cancel(object sender, RoutedEventArgs e)
+        {
         }
     }
 }
