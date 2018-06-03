@@ -104,6 +104,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "props", "props", "{3C45CABF
 		build\NETCore.props = build\NETCore.props
 		build\netDXF.props = build\netDXF.props
 		build\Newtonsoft.Json.props = build\Newtonsoft.Json.props
+		build\NSubsys.props = build\NSubsys.props
 		build\PDFsharp.props = build\PDFsharp.props
 		build\Portable.Xaml.props = build\Portable.Xaml.props
 		build\Roslyn.props = build\Roslyn.props

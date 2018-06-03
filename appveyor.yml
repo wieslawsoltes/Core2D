@@ -6,8 +6,9 @@ environment:
   DOTNET_CLI_TELEMETRY_OPTOUT: 1
 configuration: Release
 platform: AnyCPU
-before_build:
-- cmd: git submodule update --init
+install:
+  - if not exist dotnet-sdk-2.1.300-win-x64.exe appveyor DownloadFile https://download.microsoft.com/download/8/8/5/88544F33-836A-49A5-8B67-451C24709A8F/dotnet-sdk-2.1.300-win-x64.exe -FileName "dotnet-sdk-2.1.300-win-x64.exe"
+  - ps: Start-Process -FilePath "dotnet-sdk-2.1.300-win-x64.exe" -ArgumentList "/quiet" -Wait
 build_script:
 - ps: .\build.ps1 -Target "AppVeyor" -Platform $env:platform -Configuration $env:configuration
 test: off
@@ -20,3 +21,5 @@ notifications:
 artifacts:
   - path: artifacts\test-results\*.xml
   - path: artifacts\zip\*.zip
+cache:
+  - dotnet-sdk-2.1.300-win-x64.exe
