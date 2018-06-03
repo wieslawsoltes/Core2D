@@ -30,6 +30,10 @@
     <Compile Include="**\*.cs" Exclude="obj\**" />
   </ItemGroup>
 
+  <ItemGroup>
+    <EmbeddedResource Include="Assets\*" Exclude="bin\**;obj\**;**\*.xproj;packages\**;@(EmbeddedResource)" />
+  </ItemGroup>
+
   <Import Project="..\..\build\EmbedXaml.props" />
 
   <ItemGroup>
