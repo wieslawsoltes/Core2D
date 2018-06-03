@@ -7,7 +7,6 @@
         xmlns:Designer="clr-namespace:Core2D.Editor.Designer;assembly=Core2D.Editor"
         xmlns:views="clr-namespace:Core2D.Avalonia.Views;assembly=Core2D.Avalonia"
         Width="1324" Height="690"
-        FontFamily="{DynamicResource UiFont}" FontSize="14"
         UseLayoutRounding="True"
         WindowState="Normal" WindowStartupLocation="CenterScreen"
         Design.DataContext="{x:Static Designer:DesignerContext.Editor}"
