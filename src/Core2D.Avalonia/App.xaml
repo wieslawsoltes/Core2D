@@ -77,13 +77,13 @@
         <!-- Button.default -->
         <Style Selector="Button.default">
             <Setter Property="Margin" Value="3,0,3,0"/>
-            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontSize" Value="12"/>
         </Style>
         <!-- Button.property -->
         <Style Selector="Button.property">
             <Setter Property="Margin" Value="3,1,3,1"/>
             <Setter Property="Padding" Value="0"/>
-            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontSize" Value="12"/>
             <Setter Property="BorderThickness" Value="1"/>
         </Style>
         <Style Selector="Button.property /template/ ContentPresenter">
@@ -100,19 +100,19 @@
         <Style Selector="Button.autofit">
             <Setter Property="Margin" Value="2"/>
             <Setter Property="Padding" Value="4,0,4,0"/>
-            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontSize" Value="12"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
             <Setter Property="BorderThickness" Value="1"/>
         </Style>
         <!-- Button.code -->
         <Style Selector="Button.code">
             <Setter Property="Margin" Value="3,0,3,0"/>
-            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontSize" Value="12"/>
         </Style>
         <!-- CheckBox.default -->
         <Style Selector="CheckBox.default">
             <Setter Property="Margin" Value="0,1,0,1"/>
-            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontSize" Value="12"/>
             <Setter Property="BorderThickness" Value="1"/>
         </Style>
         <Style Selector="CheckBox.default:pointerover /template/ Border#border">
@@ -124,7 +124,7 @@
         <!-- CheckBox.left -->
         <Style Selector="CheckBox.left">
             <Setter Property="Margin" Value="0,1,0,1"/>
-            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontSize" Value="12"/>
             <Setter Property="BorderThickness" Value="1"/>
         </Style>
         <Style Selector="CheckBox.left:pointerover /template/ Border#border">
@@ -136,7 +136,7 @@
         <!-- CheckBox.options -->
         <Style Selector="CheckBox.options">
             <Setter Property="Margin" Value="2"/>
-            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontSize" Value="12"/>
             <Setter Property="BorderThickness" Value="1"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
         </Style>
@@ -155,14 +155,14 @@
         <Style Selector="ContextMenu.default">
             <Setter Property="BorderThickness" Value="1"/>
             <Setter Property="Padding" Value="2,2"/>
-            <Setter Property="TextBlock.FontSize" Value="14" />
+            <Setter Property="TextBlock.FontSize" Value="12" />
             <Setter Property="TextBlock.FontWeight" Value="Normal" />
         </Style>
         <!-- DropDown.default -->
         <Style Selector="DropDown.default">
             <Setter Property="Padding" Value="4,0,4,0"/>
             <Setter Property="Margin" Value="0,1,0,1"/>
-            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontSize" Value="12"/>
             <Setter Property="BorderThickness" Value="1"/>
         </Style>
         <Style Selector="DropDown.default:pointerover /template/ Border#border">
@@ -175,7 +175,7 @@
         <Style Selector="DropDown.tool">
             <Setter Property="Padding" Value="4,0,4,0"/>
             <Setter Property="Margin" Value="2"/>
-            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontSize" Value="12"/>
             <Setter Property="BorderThickness" Value="1"/>
         </Style>
         <Style Selector="DropDown.tool:pointerover /template/ Border#border">
@@ -188,7 +188,7 @@
         <Style Selector="DropDown.autofit">
             <Setter Property="Padding" Value="4,0,4,0"/>
             <Setter Property="Margin" Value="2"/>
-            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontSize" Value="12"/>
             <Setter Property="BorderThickness" Value="1"/>
         </Style>
         <Style Selector="DropDown.autofit:pointerover /template/ Border#border">
@@ -252,7 +252,7 @@
         <!-- MenuItem -->
         <Style Selector="MenuItem">
             <Setter Property="BorderThickness" Value="0"/>
-            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontSize" Value="12"/>
         </Style>
         <!-- Slider -->
         <Style Selector="Slider.slider">
@@ -301,14 +301,14 @@
         <!-- TabItem -->
         <Style Selector="TabItem.property">
             <Setter Property="Margin" Value="3"/>
-            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontSize" Value="12"/>
             <Setter Property="FontWeight" Value="Normal"/>
         </Style>
         <!-- TabStripItem -->
         <Style Selector="TabStripItem">
             <Setter Property="Margin" Value="0 0 0 -1"/>
             <Setter Property="Padding" Value="4 0 4 0"/>
-            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontSize" Value="12"/>
             <Setter Property="Height" Value="20"/>
             <Setter Property="BorderThickness" Value="0"/>
         </Style>
@@ -319,23 +319,23 @@
         </Style>
         <Style Selector="TextBlock.aboutText">
             <Setter Property="Margin" Value="2"/>
-            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontSize" Value="12"/>
         </Style>
         <Style Selector="TextBlock.autofit">
             <Setter Property="Margin" Value="3,0,3,0"/>
-            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontSize" Value="12"/>
             <Setter Property="TextAlignment" Value="Left"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
         </Style>
         <Style Selector="TextBlock.center">
             <Setter Property="Margin" Value="3,4,3,4"/>
-            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontSize" Value="12"/>
             <Setter Property="TextAlignment" Value="Center"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
         </Style>
         <Style Selector="TextBlock.default">
             <Setter Property="Margin" Value="1"/>
-            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontSize" Value="12"/>
         </Style>
         <Style Selector="TextBlock.drag">
             <Setter Property="Background" Value="Transparent"/>
@@ -344,22 +344,22 @@
         </Style>
         <Style Selector="TextBlock.header">
             <Setter Property="Margin" Value="3,4,3,4"/>
-            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontSize" Value="12"/>
             <Setter Property="FontWeight" Value="Bold"/>
         </Style>
         <Style Selector="TextBlock.left">
             <Setter Property="Margin" Value="3,4,3,4"/>
-            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontSize" Value="12"/>
             <Setter Property="TextAlignment" Value="Left"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
         </Style>
         <Style Selector="TextBlock.list">
             <Setter Property="Margin" Value="1"/>
-            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontSize" Value="12"/>
         </Style>
         <Style Selector="TextBlock.project">
             <Setter Property="Margin" Value="1"/>
-            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontSize" Value="12"/>
         </Style>
         <Style Selector="TextBlock.recent">
             <Setter Property="Margin" Value="0"/>
@@ -369,16 +369,16 @@
         </Style>
         <Style Selector="TextBlock.recents">
             <Setter Property="Margin" Value="9,6,9,6"/>
-            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontSize" Value="12"/>
         </Style>
         <Style Selector="TextBlock.stats">
             <Setter Property="Margin" Value="0"/>
-            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontSize" Value="12"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
         </Style>
         <Style Selector="TextBlock.tree">
             <Setter Property="Margin" Value="1"/>
-            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontSize" Value="12"/>
         </Style>
         <Style Selector="TextBlock.title">
             <Setter Property="Margin" Value="0"/>
@@ -389,7 +389,7 @@
         <Style Selector="TextBox.default">
             <Setter Property="Padding" Value="2"/>
             <Setter Property="Margin" Value="0"/>
-            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontSize" Value="12"/>
             <Setter Property="BorderThickness" Value="1"/>
         </Style>
         <Style Selector="TextBox.default:pointerover /template/ Border#border">
@@ -402,7 +402,7 @@
         <Style Selector="TextBox.left">
             <Setter Property="Padding" Value="2"/>
             <Setter Property="Margin" Value="0"/>
-            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontSize" Value="12"/>
             <Setter Property="TextAlignment" Value="Left"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
             <Setter Property="BorderThickness" Value="1"/>
@@ -417,7 +417,7 @@
         <Style Selector="TextBox.center">
             <Setter Property="Padding" Value="2"/>
             <Setter Property="Margin" Value="0"/>
-            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontSize" Value="12"/>
             <Setter Property="TextAlignment" Value="Center"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
             <Setter Property="BorderThickness" Value="1"/>
@@ -432,7 +432,7 @@
         <Style Selector="TextBox.property">
             <Setter Property="Padding" Value="2"/>
             <Setter Property="Margin" Value="3,1,3,1"/>
-            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontSize" Value="12"/>
             <Setter Property="TextAlignment" Value="Left"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
             <Setter Property="BorderThickness" Value="1"/>
@@ -447,7 +447,7 @@
         <Style Selector="TextBox.autofit">
             <Setter Property="Padding" Value="4,0,4,0"/>
             <Setter Property="Margin" Value="2"/>
-            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontSize" Value="12"/>
             <Setter Property="TextAlignment" Value="Center"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
             <Setter Property="BorderThickness" Value="1"/>
@@ -461,7 +461,7 @@
         <!-- TextBox.browser -->
         <Style Selector="TextBox.browser">
             <Setter Property="Padding" Value="4"/>
-            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontSize" Value="12"/>
             <Setter Property="TextAlignment" Value="Left"/>
             <Setter Property="BorderThickness" Value="1"/>
             <Setter Property="AcceptsReturn" Value="True"/>
@@ -478,7 +478,7 @@
         <!-- TextBox.project -->
         <Style Selector="TextBox.project">
             <Setter Property="Padding" Value="2"/>
-            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontSize" Value="12"/>
             <Setter Property="TextAlignment" Value="Left"/>
             <Setter Property="BorderThickness" Value="0"/>
             <Setter Property="AcceptsReturn" Value="True"/>
@@ -495,7 +495,7 @@
         <!-- TextBox.code -->
         <Style Selector="TextBox.code">
             <Setter Property="Padding" Value="4"/>
-            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontSize" Value="12"/>
             <Setter Property="TextAlignment" Value="Left"/>
             <Setter Property="BorderThickness" Value="1"/>
             <Setter Property="AcceptsReturn" Value="True"/>

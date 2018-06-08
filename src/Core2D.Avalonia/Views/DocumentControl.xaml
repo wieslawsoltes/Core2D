@@ -25,7 +25,7 @@
                     <Style Selector="TabStripItem">
                         <Setter Property="Margin" Value="0 0 0 0"/>
                         <Setter Property="Padding" Value="4 1 4 1"/>
-                        <Setter Property="FontSize" Value="14"/>
+                        <Setter Property="FontSize" Value="12"/>
                         <Setter Property="FontWeight" Value="Normal"/>
                         <Setter Property="Height" Value="24"/>
                         <Setter Property="BorderThickness" Value="0"/>
