@@ -4,22 +4,27 @@ skip_branch_with_pr: true
 environment:
   DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 1
   DOTNET_CLI_TELEMETRY_OPTOUT: 1
-configuration: Release
-platform: AnyCPU
+  NUGET_API_KEY:
+    secure: iSkm19DNdKOLxxCvHiaKikWXy25ZMwGBKpv+EgEprliGl0qX5HtKohLmwJsLnx5O
+  NUGET_API_URL: https://www.nuget.org/api/v2/package
+  MYGET_API_KEY:
+    secure: xhYvrWYPHdNI+mQD+f4Zu3baL7fqW+nO/hYXJdN070Lej8wpa6gfrLi1NGtnQlAs
+  MYGET_API_URL: https://www.myget.org/F/core2d-nightly/api/v2/package
+test: off
+deploy: off
 install:
   - if not exist dotnet-sdk-2.1.300-win-x64.exe appveyor DownloadFile https://download.microsoft.com/download/8/8/5/88544F33-836A-49A5-8B67-451C24709A8F/dotnet-sdk-2.1.300-win-x64.exe -FileName "dotnet-sdk-2.1.300-win-x64.exe"
   - ps: Start-Process -FilePath "dotnet-sdk-2.1.300-win-x64.exe" -ArgumentList "/quiet" -Wait
 build_script:
-- ps: .\build.ps1 -Target "AppVeyor" -Platform $env:platform -Configuration $env:configuration
-test: off
+- ps: .\build.ps1 -BuildSources -TestSources -PackSources -BuildApps -PublishApps -CopyRedist -ZipApps
+artifacts:
+  - path: artifacts\*.nupkg
+  - path: artifacts\*.zip
 notifications:
 - provider: Webhook
   url: https://webhooks.gitter.im/e/1ff736226b47ccf79930
   on_build_success: true
   on_build_failure: true
   on_build_status_changed: true
-artifacts:
-  - path: artifacts\test-results\*.xml
-  - path: artifacts\zip\*.zip
 cache:
   - dotnet-sdk-2.1.300-win-x64.exe

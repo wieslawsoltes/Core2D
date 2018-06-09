@@ -1,14 +1,20 @@
 language: csharp
 os: linux
 dist: trusty
+sudo: required
 env:
   global:
     - DOTNET_SKIP_FIRST_TIME_EXPERIENCE=1
     - DOTNET_CLI_TELEMETRY_OPTOUT=1
 mono: latest
 dotnet: 2.1.300
-script:
-  - ./build.sh --target "Travis" --platform "AnyCPU" --configuration "Release"
+before_install:
+  - curl https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add -
+  - curl https://packages.microsoft.com/config/ubuntu/14.04/prod.list | sudo tee /etc/apt/sources.list.d/microsoft.list
+  - sudo apt-get update
+  - sudo apt-get install -y powershell
+  - dotnet --info
+script: pwsh -File build.ps1 -BuildSources -TestSources -BuildApps -DisabledFrameworks net461
 notifications:
   email: false
   webhooks:

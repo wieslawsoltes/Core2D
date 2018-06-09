@@ -6,7 +6,8 @@
 [![Build Status](https://travis-ci.org/wieslawsoltes/Core2D.svg?branch=master)](https://travis-ci.org/wieslawsoltes/Core2D)
 [![CircleCI](https://circleci.com/gh/wieslawsoltes/Core2D/tree/master.svg?style=svg)](https://circleci.com/gh/wieslawsoltes/Core2D/tree/master)
 
-[![CodeFactor](https://www.codefactor.io/repository/github/wieslawsoltes/core2d/badge)](https://www.codefactor.io/repository/github/wieslawsoltes/core2d)
+[![NuGet](https://img.shields.io/nuget/v/Core2D.svg)](https://www.nuget.org/packages/Core2D)
+[![MyGet](https://img.shields.io/myget/dock-nightly/vpre/Core2D.svg?label=myget)](https://www.myget.org/gallery/core2d-nightly) 
 
 A multi-platform data driven 2D diagram editor.
 
@@ -225,6 +226,15 @@ The core libraries are portable and should work on all platforms where C# is sup
 |-------------------|-------------------------------------------------------------------------------|
 | Ctrl+Enter        | Execute code script in repl.                                                  |
 
+## Downloads
+
+| Version               | Framework      | Download                                                                                                                                                                                              |
+|-----------------------|----------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Debian 8 x64          | netcoreapp2.1  | [Core2D.Avalonia-netcoreapp2.1-debian.8-x64.zip](https://ci.appveyor.com/api/projects/wieslawsoltes/Core2D/artifacts/artifacts/Core2D.Avalonia-netcoreapp2.1-debian.8-x64.zip?branch=master)                  |
+| MacOSX 10.12 x64      | netcoreapp2.1  | [Core2D.Avalonia-netcoreapp2.1-osx.10.12-x64.zip](https://ci.appveyor.com/api/projects/wieslawsoltes/Core2D/artifacts/artifacts/Core2D.Avalonia-netcoreapp2.1-osx.10.12-x64.zip?branch=master)                |
+| Ubuntu 14.04+ x64     | netcoreapp2.1  | [Core2D.Avalonia-netcoreapp2.1-ubuntu.14.04-x64.zip](https://ci.appveyor.com/api/projects/wieslawsoltes/Core2D/artifacts/artifacts/Core2D.Avalonia-netcoreapp2.1-ubuntu.14.04-x64.zip?branch=master)          |
+| Windows 7 8.1 10 x64  | netcoreapp2.1  | [Core2D.Avalonia-netcoreapp2.1-win7-x64.zip](https://ci.appveyor.com/api/projects/wieslawsoltes/Core2D/artifacts/artifacts/Core2D.Avalonia-netcoreapp2.1-win7-x64.zip?branch=master)                          |
+
 ## Building Core2D
 
 First, clone the repository or download the latest zip.
@@ -243,15 +253,16 @@ Open `Core2D.sln` in selected IDE and run `Build` command.
 
 Open up a Powershell prompt and execute the bootstrapper script:
 ```PowerShell
-PS> .\build.ps1 -Target "Default" -Platform "AnyCPU" -Configuration "Release"
+PS> .\build.ps1 -BuildSources -TestSources -PackSources -BuildApps -PublishApps -CopyRedist -ZipApps
 ```
 
 ### Build on Linux/OSX using script
 
 Open up a terminal prompt and execute the bootstrapper script:
-```Bash
-$ ./build.sh --target "Default" --platform "AnyCPU" --configuration "Release"
+```PowerShell
+$ pwsh -File build.ps1 -BuildSources -TestSources -BuildApps -DisabledFrameworks net461
 ```
+
 ### Build using .NET Core
 
 * [.NET Core](https://www.microsoft.com/net/download/core) for `Windows`, `Linux` and `macOS` builds.
@@ -292,7 +303,7 @@ Open up a terminal prompt and execute:
 ```Bash
 cd src/Core2D.Avalonia
 dotnet restore
-dotnet publish -r ubuntu.16.10-x64 -o ubuntu.16.10-x64
+dotnet publish -r ubuntu.14.04-x64 -o ubuntu.14.04-x64
 ```
 
 ## Package Sources
@@ -316,15 +327,15 @@ Projects referencing `SkiaSharp` require `Visual C++ Runtime Files` from `Visual
 #### x86 Platform
 
 ```
-c:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Redist\MSVC\14.10.25008\x86\Microsoft.VC150.CRT\msvcp140.dll
-c:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Redist\MSVC\14.10.25008\x86\Microsoft.VC150.CRT\vcruntime140.dll
+c:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Redist\MSVC\14.14.26405\x86\Microsoft.VC150.CRT\msvcp140.dll
+c:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Redist\MSVC\14.14.26405\x86\Microsoft.VC150.CRT\vcruntime140.dll
 ```
 
 #### x64 Platform
 
 ```
-c:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Redist\MSVC\14.10.25008\x64\Microsoft.VC150.CRT\msvcp140.dll
-c:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Redist\MSVC\14.10.25008\x64\Microsoft.VC150.CRT\vcruntime140.dll
+c:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Redist\MSVC\14.14.26405\x64\Microsoft.VC150.CRT\msvcp140.dll
+c:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Redist\MSVC\14.14.26405\x64\Microsoft.VC150.CRT\vcruntime140.dll
 ```
 
 ## Resources
