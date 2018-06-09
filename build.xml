@@ -266,6 +266,9 @@
       </Frameworks>
       <Runtimes>
         <Runtime>win7-x64</Runtime>
+        <Runtime>ubuntu.14.04-x64</Runtime>
+        <Runtime>debian.8-x64</Runtime>
+        <Runtime>osx.10.12-x64</Runtime>
       </Runtimes>
     </Project>
   </Apps>
