@@ -1,193 +1,311 @@
-##########################################################################
-# This is the Cake bootstrapper script for PowerShell.
-# This file was downloaded from https://github.com/cake-build/resources
-# Feel free to change this file to fit your needs.
-##########################################################################
-
-<#
-
-.SYNOPSIS
-This is a Powershell script to bootstrap a Cake build.
-
-.DESCRIPTION
-This Powershell script will download NuGet if missing, restore NuGet tools (including Cake)
-and execute your Cake build script with the parameters you provide.
-
-.PARAMETER Script
-The build script to execute.
-.PARAMETER Target
-The build script target to run.
-.PARAMETER Platform
-The build platform to use.
-.PARAMETER Configuration
-The build configuration to use.
-.PARAMETER Verbosity
-Specifies the amount of information to be displayed.
-.PARAMETER Experimental
-Tells Cake to use the latest Roslyn release.
-.PARAMETER WhatIf
-Performs a dry run of the build script.
-No tasks will be executed.
-.PARAMETER Mono
-Tells Cake to use the Mono scripting engine.
-.PARAMETER SkipToolPackageRestore
-Skips restoring of packages.
-.PARAMETER ScriptArgs
-Remaining arguments are added here.
-
-.LINK
-http://cakebuild.net
-
-#>
-
 [CmdletBinding()]
 Param(
-    [string]$Script = "build.cake",
-    [string]$Target = "Default",
-    [ValidateSet("AnyCPU", "x86", "x64", "Mono")]
-    [string]$Platform = "AnyCPU",
-    [ValidateSet("Release", "Debug")]
+    [string]$ConfigFileName = "$pwd\build.xml",
     [string]$Configuration = "Release",
-    [ValidateSet("Quiet", "Minimal", "Normal", "Verbose", "Diagnostic")]
-    [string]$Verbosity = "Verbose",
-    [switch]$Experimental,
-    [Alias("DryRun","Noop")]
-    [switch]$WhatIf,
-    [switch]$Mono,
-    [switch]$SkipToolPackageRestore,
-    [Parameter(Position=0,Mandatory=$false,ValueFromRemainingArguments=$true)]
-    [string[]]$ScriptArgs
+    [string[]]$DisabledFrameworks,
+    [string]$VersionSuffix = $null,
+    [switch]$BuildSources,
+    [switch]$TestSources,
+    [switch]$PackSources,
+    [switch]$BuildApps,
+    [switch]$PublishApps,
+    [switch]$ZipApps,
+    [switch]$CopyRedist,
+    [switch]$PushNuGet,
+    [switch]$IsNugetRelease,
+    [String]$Artifacts
 )
 
-[Reflection.Assembly]::LoadWithPartialName("System.Security") | Out-Null
-function MD5HashFile([string] $filePath)
-{
-    if ([string]::IsNullOrEmpty($filePath) -or !(Test-Path $filePath -PathType Leaf))
-    {
-        return $null
-    }
+$ConfigFileItem = Get-ChildItem $ConfigFileName
+[xml]$Config = Get-Content -Path $ConfigFileItem.FullName
 
-    [System.IO.Stream] $file = $null;
-    [System.Security.Cryptography.MD5] $md5 = $null;
-    try
-    {
-        $md5 = [System.Security.Cryptography.MD5]::Create()
-        $file = [System.IO.File]::OpenRead($filePath)
-        return [System.BitConverter]::ToString($md5.ComputeHash($file))
+$VersionSuffixParam = $null
+
+if (-Not $Artifacts) {
+    $Artifacts = "$pwd\artifacts"
+} else {
+    Remove-Item "$Artifacts\*.zip" -ErrorAction SilentlyContinue
+    Remove-Item "$Artifacts\*.nupkg" -ErrorAction SilentlyContinue
+}
+
+if (-Not (Test-Path $Artifacts)) {
+    New-Item -ItemType directory -Path $Artifacts
+}
+
+if (-Not ($VersionSuffix)) {
+    if ($env:APPVEYOR_BUILD_VERSION) {
+        $VersionSuffix = "-build" + $env:APPVEYOR_BUILD_VERSION
+        $VersionSuffixParam = "\`"$VersionSuffix\`""
+        Write-Host "AppVeyor override VersionSuffix: $VersionSuffix" -ForegroundColor Yellow
+    } else {
+        $VersionSuffixParam = "\`"\`""
     }
-    finally
-    {
-        if ($file -ne $null)
-        {
-            $file.Dispose()
+} else {
+    $VersionSuffixParam = "\`"$VersionSuffix\`""
+}
+
+if (-Not ($PushNuGet))
+{
+    if($env:APPVEYOR_REPO_NAME -eq 'wieslawsoltes/Dock' -And $env:APPVEYOR_REPO_BRANCH -eq 'master') {
+        $PushNuGet = $true
+        Write-Host "AppVeyor override PushNuGet: $PushNuGet" -ForegroundColor Yellow
+    }
+}
+
+if (-Not ($IsNugetRelease)) {
+    if ($env:APPVEYOR_REPO_TAG -eq 'True' -And $env:APPVEYOR_REPO_TAG_NAME) {
+        $IsNugetRelease = $true
+        Write-Host "AppVeyor override IsNugetRelease: $IsNugetRelease" -ForegroundColor Yellow
+    }
+}
+
+if ($env:APPVEYOR_PULL_REQUEST_TITLE) {
+    $PushNuGet = $false
+    $IsNugetRelease = $false
+    $PublishApps = $false
+    $CopyRedist = $false
+    $ZipApps = $false
+    Write-Host "Pull Request #" + $env:APPVEYOR_PULL_REQUEST_NUMBER
+    Write-Host "AppVeyor override PushNuGet: $PushNuGet" -ForegroundColor Yellow
+    Write-Host "AppVeyor override IsNugetRelease: $IsNugetRelease" -ForegroundColor Yellow
+    Write-Host "AppVeyor override PublishApps: $PublishApps" -ForegroundColor Yellow
+    Write-Host "AppVeyor override CopyRedist: $CopyRedist" -ForegroundColor Yellow
+    Write-Host "AppVeyor override ZipApps: $ZipApps" -ForegroundColor Yellow
+}
+
+Write-Host "ConfigFileName: $ConfigFileName" -ForegroundColor White
+Write-Host "Configuration: $Configuration" -ForegroundColor White
+Write-Host "DisabledFrameworks: $DisabledFrameworks" -ForegroundColor White
+Write-Host "VersionSuffix: $VersionSuffix" -ForegroundColor White
+Write-Host "BuildSources: $BuildSources" -ForegroundColor White
+Write-Host "TestSources: $TestSources" -ForegroundColor White
+Write-Host "PackSources: $PackSources" -ForegroundColor White
+Write-Host "BuildApps: $BuildApps" -ForegroundColor White
+Write-Host "PublishApps: $PublishApps" -ForegroundColor White
+Write-Host "ZipApps: $ZipApps" -ForegroundColor White
+Write-Host "CopyRedist: $CopyRedist" -ForegroundColor White
+Write-Host "PushNuGet: $PushNuGet" -ForegroundColor White
+Write-Host "IsNugetRelease: $IsNugetRelease" -ForegroundColor White
+Write-Host "Artifacts: $Artifacts" -ForegroundColor White
+
+function Validate
+{
+    param()
+    if ($LastExitCode -ne 0) { Exit 1 }
+}
+
+function Zip
+{
+    param($source, $destination)
+    if(Test-Path $destination) { Remove-item $destination }
+    Add-Type -assembly "System.IO.Compression.FileSystem"
+    [IO.Compression.ZipFile]::CreateFromDirectory($source, $destination)
+}
+
+function Invoke-BuildSources
+{
+    param()
+    $Projects = $Config.Build.Sources.Project
+    ForEach ($project in $Projects) {
+        $Name = $project.Name
+        $Path = $project.Path
+        $Frameworks = $project.Frameworks.Framework
+        ForEach ($framework in $Frameworks) {
+            if (-Not ($DisabledFrameworks -match $framework)) {
+                Write-Host "Build: $Name, $Configuration, $framework" -ForegroundColor Cyan
+                $args = @('build', "$pwd\$Path\$Name\$Name.csproj", '-c', $Configuration, '-f', $framework, '--version-suffix', $VersionSuffixParam)
+                & dotnet $args
+                Validate
+            }
         }
     }
 }
 
-Write-Host "Preparing to run build script..."
-
-if(!$PSScriptRoot){
-    $PSScriptRoot = Split-Path $MyInvocation.MyCommand.Path -Parent
-}
-
-$TOOLS_DIR = Join-Path $PSScriptRoot "tools"
-$NUGET_EXE = Join-Path $TOOLS_DIR "nuget.exe"
-$CAKE_EXE = Join-Path $TOOLS_DIR "Cake/Cake.exe"
-$NUGET_URL = "https://dist.nuget.org/win-x86-commandline/v4.0.0-rc4/nuget.exe"
-$PACKAGES_CONFIG = Join-Path $TOOLS_DIR "packages.config"
-$PACKAGES_CONFIG_MD5 = Join-Path $TOOLS_DIR "packages.config.md5sum"
-
-# Should we use mono?
-$UseMono = "";
-if($Mono.IsPresent) {
-    Write-Verbose -Message "Using the Mono based scripting engine."
-    $UseMono = "-mono"
-}
-
-# Should we use the new Roslyn?
-$UseExperimental = "";
-if($Experimental.IsPresent -and !($Mono.IsPresent)) {
-    Write-Verbose -Message "Using experimental version of Roslyn."
-    $UseExperimental = "-experimental"
-}
-
-# Is this a dry run?
-$UseDryRun = "";
-if($WhatIf.IsPresent) {
-    $UseDryRun = "-dryrun"
-}
-
-# Make sure tools folder exists
-if ((Test-Path $PSScriptRoot) -and !(Test-Path $TOOLS_DIR)) {
-    Write-Verbose -Message "Creating tools directory..."
-    New-Item -Path $TOOLS_DIR -Type directory | out-null
-}
-
-# Make sure that packages.config exist.
-if (!(Test-Path $PACKAGES_CONFIG)) {
-    Write-Verbose -Message "Downloading packages.config..."
-    try { (New-Object System.Net.WebClient).DownloadFile("http://cakebuild.net/download/bootstrapper/packages", $PACKAGES_CONFIG) } catch {
-        Throw "Could not download packages.config."
+function Invoke-TestSources
+{
+    param()
+    $Projects = $Config.Build.Tests.Project
+    ForEach ($project in $Projects) {
+        $Name = $project.Name
+        $Path = $project.Path
+        $Frameworks = $project.Frameworks.Framework
+        ForEach ($framework in $Frameworks) {
+            if (-Not ($DisabledFrameworks -match $framework)) {
+                Write-Host "Test: $Name, $Configuration, $framework" -ForegroundColor Cyan
+                $args = @('test', "$pwd\$Path\$Name\$Name.csproj", '-c', $Configuration, '-f', $framework)
+                & dotnet $args
+                Validate
+            }
+        }
     }
 }
 
-# Try find NuGet.exe in path if not exists
-if (!(Test-Path $NUGET_EXE)) {
-    Write-Verbose -Message "Trying to find nuget.exe in PATH..."
-    $existingPaths = $Env:Path -Split ';' | Where-Object { (![string]::IsNullOrEmpty($_)) -and (Test-Path $_) }
-    $NUGET_EXE_IN_PATH = Get-ChildItem -Path $existingPaths -Filter "nuget.exe" | Select -First 1
-    if ($NUGET_EXE_IN_PATH -ne $null -and (Test-Path $NUGET_EXE_IN_PATH.FullName)) {
-        Write-Verbose -Message "Found in PATH at $($NUGET_EXE_IN_PATH.FullName)."
-        $NUGET_EXE = $NUGET_EXE_IN_PATH.FullName
+function Invoke-PackSources
+{
+    param()
+    $Projects = $Config.Build.Sources.Project
+    ForEach ($project in $Projects) {
+        $Name = $project.Name
+        $Path = $project.Path
+        $args = @('pack', "$pwd\$Path\$Name\$Name.csproj", '-c', $Configuration, '--version-suffix', $VersionSuffixParam)
+        & dotnet $args
+        Validate
+        if (Test-Path $Artifacts) {
+            $files = Get-Item "$pwd\$Path\$Name\bin\AnyCPU\$Configuration\*.nupkg"
+            ForEach ($file in $files) {
+                Write-Host "Copy: $file" -ForegroundColor Cyan
+                Copy-Item $file.FullName -Destination $Artifacts
+            }
+        }
     }
 }
 
-# Try download NuGet.exe if not exists
-if (!(Test-Path $NUGET_EXE)) {
-    Write-Verbose -Message "Downloading NuGet.exe..."
-    try {
-        (New-Object System.Net.WebClient).DownloadFile($NUGET_URL, $NUGET_EXE)
-    } catch {
-        Throw "Could not download NuGet.exe."
+function Invoke-BuildApps
+{
+    param()
+    $Projects = $Config.Build.Apps.Project
+    ForEach ($project in $Projects) {
+        $Name = $project.Name
+        $Path = $project.Path
+        $Frameworks = $project.Frameworks.Framework
+        ForEach ($framework in $Frameworks) {
+            if (-Not ($DisabledFrameworks -match $framework)) {
+                Write-Host "Build: $Name, $Configuration, $framework" -ForegroundColor Cyan
+                $args = @('build', "$pwd\$Path\$Name\$Name.csproj", '-c', $Configuration, '-f', $framework, '--version-suffix', $VersionSuffixParam)
+                & dotnet $args
+                Validate
+            }
+        }
     }
 }
 
-# Save nuget.exe path to environment to be available to child processed
-$ENV:NUGET_EXE = $NUGET_EXE
-
-# Restore tools from NuGet?
-if(-Not $SkipToolPackageRestore.IsPresent) {
-    Push-Location
-    Set-Location $TOOLS_DIR
-
-    # Check for changes in packages.config and remove installed tools if true.
-    [string] $md5Hash = MD5HashFile($PACKAGES_CONFIG)
-    if((!(Test-Path $PACKAGES_CONFIG_MD5)) -Or
-      ($md5Hash -ne (Get-Content $PACKAGES_CONFIG_MD5 ))) {
-        Write-Verbose -Message "Missing or changed package.config hash..."
-        Remove-Item * -Recurse -Exclude packages.config,nuget.exe
+function Invoke-PublishApps
+{
+    param()
+    $Projects = $Config.Build.Apps.Project
+    ForEach ($project in $Projects) {
+        $Name = $project.Name
+        $Path = $project.Path
+        $Frameworks = $project.Frameworks.Framework
+        $Runtimes = $project.Runtimes.Runtime
+        ForEach ($framework in $Frameworks) {
+            ForEach ($runtime in $Runtimes) {
+                if (-Not ($DisabledFrameworks -match $framework)) {
+                    Write-Host "Publish: $Name, $Configuration, $framework, $runtime" -ForegroundColor Cyan
+                    $args = @('publish', "$pwd\$Path\$Name\$Name.csproj", '-c', $Configuration, '-f', $framework, '-r', $runtime, '--version-suffix', $VersionSuffixParam)
+                    & dotnet $args
+                    Validate
+                }
+            }
+        }
     }
-
-    Write-Verbose -Message "Restoring tools from NuGet..."
-    $NuGetOutput = Invoke-Expression "&`"$NUGET_EXE`" install -ExcludeVersion -OutputDirectory `"$TOOLS_DIR`""
-
-    if ($LASTEXITCODE -ne 0) {
-        Throw "An error occured while restoring NuGet tools."
-    }
-    else
-    {
-        $md5Hash | Out-File $PACKAGES_CONFIG_MD5 -Encoding "ASCII"
-    }
-    Write-Verbose -Message ($NuGetOutput | out-string)
-    Pop-Location
 }
 
-# Make sure that Cake has been installed.
-if (!(Test-Path $CAKE_EXE)) {
-    Throw "Could not find Cake.exe at $CAKE_EXE"
+function Invoke-CopyRedist
+{
+    param()
+    $RedistVersion = "14.14.26405"
+    $RedistPath = "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Redist\MSVC\$RedistVersion\x64\Microsoft.VC141.CRT\"
+    $RedistRuntime = "win7-x64"
+    $Projects = $Config.Build.Apps.Project
+    ForEach ($project in $Projects) {
+        $Name = $project.Name
+        $Path = $project.Path
+        $Frameworks = $project.Frameworks.Framework
+        $Runtimes = $project.Runtimes.Runtime
+        ForEach ($framework in $Frameworks) {
+            ForEach ($runtime in $Runtimes) {
+                if ($runtime -eq $RedistRuntime) {
+                    $RedistDest = "$pwd\$Path\$Name\bin\AnyCPU\$Configuration\$framework\$RedistRuntime\publish"
+                    if(Test-Path -Path $RedistDest) {
+                        Write-Host "CopyRedist: $RedistDest, runtime: $RedistRuntime, version: $RedistVersion" -ForegroundColor Cyan
+                        Copy-Item "$RedistPath\msvcp140.dll" -Destination $RedistDest
+                        Copy-Item "$RedistPath\vcruntime140.dll" -Destination $RedistDest
+                    } else {
+                        Write-Host "CopyRedist: Path does not exists: $RedistDest" -ForegroundColor Red
+                    }
+                }
+            }
+        }
+    }
 }
 
-# Start Cake
-Write-Host "Running build script..."
-Invoke-Expression "& `"$CAKE_EXE`" `"$Script`" -target=`"$Target`" -platform=`"$Platform`" -configuration=`"$Configuration`" -verbosity=`"$Verbosity`" $UseMono $UseDryRun $UseExperimental $ScriptArgs"
-exit $LASTEXITCODE
+function Invoke-ZipApps
+{
+    param()
+    $Projects = $Config.Build.Apps.Project
+    ForEach ($project in $Projects) {
+        $Name = $project.Name
+        $Path = $project.Path
+        $Frameworks = $project.Frameworks.Framework
+        $Runtimes = $project.Runtimes.Runtime
+        ForEach ($framework in $Frameworks) {
+            ForEach ($runtime in $Runtimes) {
+                if (-Not ($DisabledFrameworks -match $framework)) {
+                    Write-Host "Zip: $Name, $Configuration, $framework, $runtime" -ForegroundColor Cyan
+                    $source = "$pwd\$Path\$Name\bin\AnyCPU\$Configuration\$framework\$runtime\publish\"
+                    $destination = "$Artifacts\$Name-$framework-$runtime.zip"
+                    Zip $source $destination
+                    Write-Host "Zip: $destination" -ForegroundColor Cyan
+                }
+            }
+        }
+    }
+}
+
+function Invoke-PushNuGet
+{
+    param()
+    $Projects = $Config.Build.Sources.Project
+    ForEach ($project in $Projects) {
+        $Name = $project.Name
+        $Path = $project.Path
+        if($IsNugetRelease) {
+            if ($env:NUGET_API_URL -And $env:NUGET_API_KEY) {
+                Write-Host "Push NuGet: $Name, $Configuration" -ForegroundColor Cyan
+                $args = @('nuget', 'push', "$pwd\$Path\$Name\bin\AnyCPU\$Configuration\*.nupkg", '-s', $env:NUGET_API_URL, '-k', $env:NUGET_API_KEY)
+                & dotnet $args
+                Validate
+            }
+        } else {
+            if ($env:MYGET_API_URL -And $env:MYGET_API_KEY) {
+                Write-Host "Push MyGet: $Name, $Configuration" -ForegroundColor Cyan
+                $args = @('nuget', 'push', "$pwd\$Path\$Name\bin\AnyCPU\$Configuration\*.nupkg", '-s', $env:MYGET_API_URL, '-k', $env:MYGET_API_KEY)
+                & dotnet $args
+                Validate
+            }
+        }
+    }
+}
+
+if($BuildSources) {
+    Invoke-BuildSources
+}
+
+if($TestSources) {
+    Invoke-TestSources
+}
+
+if($BuildApps) {
+    Invoke-BuildApps
+}
+
+if($PublishApps) {
+    Invoke-PublishApps
+}
+
+if($CopyRedist) {
+    Invoke-CopyRedist
+}
+
+if($ZipApps) {
+    Invoke-ZipApps
+}
+
+if($PackSources) {
+    Invoke-PackSources
+}
+
+if($PushNuGet) {
+    Invoke-PushNuGet
+}
