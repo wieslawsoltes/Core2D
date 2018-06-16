@@ -2174,9 +2174,9 @@ namespace Core2D.Editor
         /// <param name="view">The view to navigate to.</param>
         public void OnNavigate(object view)
         {
-            if (Layout is IViewsHost layoutViewsHost)
+            if (Layout is IDock dock)
             {
-                layoutViewsHost.Navigate(view);
+                dock.Navigate(view);
             }
         }
 
