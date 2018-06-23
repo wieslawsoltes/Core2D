@@ -92,6 +92,29 @@
             <MenuItem Header="_Reset Zoom" Command="{x:Static editor:ProjectEditorCommands.ZoomResetCommand}" InputGestureText="Z"/>
             <Separator/>
             <MenuItem Header="_AutoFit Zoom" Command="{x:Static editor:ProjectEditorCommands.ZoomAutoFitCommand}" InputGestureText="X"/>
+            <Separator/>
+            <MenuItem Header="_Views" Tag="{Binding Layout}" ItemsSource="{Binding Layout.Views}">
+                <MenuItem.ItemContainerStyle>
+                    <Style TargetType="MenuItem">
+                        <Setter Property="Header" Value="{Binding Title}"/>
+                        <Setter Property="Command" Value="{x:Static editor:ProjectEditorCommands.ChangeCurrentViewCommand}"/>
+                        <Setter Property="CommandParameter" Value="{Binding}"/>
+                        <Setter Property="IsCheckable" Value="True"/>
+                        <Setter Property="IsChecked" Value="False"/>
+                        <Style.Triggers>
+                            <DataTrigger Value="True">
+                                <DataTrigger.Binding>
+                                    <MultiBinding Converter="{StaticResource ObjectEqualityConverter}">
+                                        <Binding Path="Tag.CurrentView" RelativeSource="{RelativeSource FindAncestor, AncestorType={x:Type MenuItem}}"/>
+                                        <Binding Path="DataContext" RelativeSource="{RelativeSource Self}"/>
+                                    </MultiBinding>
+                                </DataTrigger.Binding>
+                                <Setter Property="IsChecked" Value="True"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </MenuItem.ItemContainerStyle>
+            </MenuItem>
         </MenuItem>
         <MenuItem Header="_Tool">
             <MenuItem Header="_None" Command="{x:Static editor:ProjectEditorCommands.ToolNoneCommand}" IsCheckable="False" IsChecked="{Binding Path=CurrentTool.Title, Mode=OneWay, Converter={StaticResource ObjectEqualsConverter}, ConverterParameter=None}" InputGestureText="N"/>

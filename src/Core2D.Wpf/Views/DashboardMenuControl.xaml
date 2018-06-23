@@ -37,5 +37,29 @@
             <Separator/>
             <MenuItem Header="E_xit" Command="{x:Static editor:ProjectEditorCommands.ExitCommand}" InputGestureText="Alt+F4"/>
         </MenuItem>
+        <MenuItem Header="_View">
+            <MenuItem Header="_Views" Tag="{Binding Layout}" ItemsSource="{Binding Layout.Views}">
+                <MenuItem.ItemContainerStyle>
+                    <Style TargetType="MenuItem">
+                        <Setter Property="Header" Value="{Binding Title}"/>
+                        <Setter Property="Command" Value="{x:Static editor:ProjectEditorCommands.ChangeCurrentViewCommand}"/>
+                        <Setter Property="CommandParameter" Value="{Binding}"/>
+                        <Setter Property="IsCheckable" Value="True"/>
+                        <Setter Property="IsChecked" Value="False"/>
+                        <Style.Triggers>
+                            <DataTrigger Value="True">
+                                <DataTrigger.Binding>
+                                    <MultiBinding Converter="{StaticResource ObjectEqualityConverter}">
+                                        <Binding Path="Tag.CurrentView" RelativeSource="{RelativeSource FindAncestor, AncestorType={x:Type MenuItem}}"/>
+                                        <Binding Path="DataContext" RelativeSource="{RelativeSource Self}"/>
+                                    </MultiBinding>
+                                </DataTrigger.Binding>
+                                <Setter Property="IsChecked" Value="True"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </MenuItem.ItemContainerStyle>
+            </MenuItem>
+        </MenuItem>
     </Menu>
 </UserControl>
