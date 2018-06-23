@@ -88,6 +88,13 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D.Avalonia", "src\Core2D.Avalonia\Core2D.Avalonia.csproj", "{0C7EA04E-94D8-49B7-B387-C031B2422F3B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{C7162582-C1FD-45FB-99FD-6770D67B5A21}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+		_config.yml = _config.yml
+		build.ps1 = build.ps1
+		build.xml = build.xml
+		config.ps1 = config.ps1
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "props", "props", "{3C45CABF-3E2E-455B-AACF-1FB63D331F9C}"
 	ProjectSection(SolutionItems) = preProject
@@ -131,6 +138,19 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D.Utilities.Wpf", "src\Core2D.Utilities.Wpf\Core2D.Utilities.Wpf.csproj", "{55F8A599-1EA5-4EF8-BA51-01DE24B49F43}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core2D.Wpf", "src\Core2D.Wpf\Core2D.Wpf.csproj", "{12889680-3769-4914-BE60-5D09E83DF5B2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ci", "ci", "{6009319B-91B7-43FD-ABAF-1BE105FD91A9}"
+	ProjectSection(SolutionItems) = preProject
+		.travis.yml = .travis.yml
+		appveyor.yml = appveyor.yml
+		circle.yml = circle.yml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "git", "git", "{0AE9F90A-3798-42B0-A58D-AA9A9E08BED2}"
+	ProjectSection(SolutionItems) = preProject
+		.gitattributes = .gitattributes
+		.gitignore = .gitignore
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -361,6 +381,8 @@ Global
 		{7463A001-BCC8-403A-B83B-B96F5EEF7052} = {BC6BAFE6-1735-4549-A7CC-819274780B38}
 		{55F8A599-1EA5-4EF8-BA51-01DE24B49F43} = {BC6BAFE6-1735-4549-A7CC-819274780B38}
 		{12889680-3769-4914-BE60-5D09E83DF5B2} = {BC6BAFE6-1735-4549-A7CC-819274780B38}
+		{6009319B-91B7-43FD-ABAF-1BE105FD91A9} = {C7162582-C1FD-45FB-99FD-6770D67B5A21}
+		{0AE9F90A-3798-42B0-A58D-AA9A9E08BED2} = {C7162582-C1FD-45FB-99FD-6770D67B5A21}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2614B90F-C6F8-435C-8BD0-09AEE3ABAD2B}
