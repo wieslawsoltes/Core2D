@@ -47,7 +47,7 @@
     </Window.InputBindings>
     <ContentControl Content="{Binding CurrentView, Mode=TwoWay}">
         <ContentControl.Resources>
-            <DataTemplate DataType="{x:Type Views:DashboardView}">
+            <DataTemplate DataType="{x:Type Views:DashboardControl}">
                 <Grid FocusVisualStyle="{x:Null}" DataContext="{Binding Context}">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
