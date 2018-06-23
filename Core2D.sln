@@ -4,9 +4,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 15.0.26730.16
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{BC6BAFE6-1735-4549-A7CC-819274780B38}"
-	ProjectSection(SolutionItems) = preProject
-		src\Core2D.Utilities.Wpf\Core2D.Utilities.Wpf.csproj = src\Core2D.Utilities.Wpf\Core2D.Utilities.Wpf.csproj
-	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D", "src\Core2D\Core2D.csproj", "{F822EC0C-2501-487D-87A8-B8D28A761385}"
 EndProject
