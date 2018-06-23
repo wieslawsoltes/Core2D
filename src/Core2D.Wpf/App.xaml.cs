@@ -13,6 +13,7 @@ using Core2D.Shapes;
 using Core2D.Style;
 using Core2D.Wpf.Editor;
 using Core2D.Wpf.Modules;
+using Dock.Model;
 
 namespace Core2D.Wpf
 {
@@ -61,6 +62,10 @@ namespace Core2D.Wpf
             try
             {
                 var editor = serviceProvider.GetService<ProjectEditor>();
+
+                var dockFactory = serviceProvider.GetService<IDockFactory>();
+                editor.Layout = editor.Layout ?? dockFactory.CreateLayout();
+                dockFactory.InitLayout(editor.Layout, editor);
 
                 var path = System.IO.Path.Combine(fileIO.GetBaseDirectory(), "Core2D.recent");
                 if (fileIO.Exists(path))

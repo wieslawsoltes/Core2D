@@ -10,6 +10,7 @@
         xmlns:designer="clr-namespace:Core2D.Wpf.Designer"
         xmlns:editor="clr-namespace:Core2D.Wpf.Editor"
         xmlns:views="clr-namespace:Core2D.Wpf.Views"
+        xmlns:Views="clr-namespace:Core2D.Wpf.Dock.Views"
         mc:Ignorable="d" 
         d:DataContext="{x:Static designer:DesignerHelper.Editor}"
         Width="1324" Height="724"
@@ -43,14 +44,32 @@
         <KeyBinding Command="{x:Static editor:ProjectEditorCommands.GroupCommand}" Gesture="Ctrl+G"/>
         <KeyBinding Command="{x:Static editor:ProjectEditorCommands.UngroupCommand}" Gesture="Ctrl+U"/>
     </Window.InputBindings>
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="3"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="3"/>
-        </Grid.RowDefinitions>
-        <views:EditorMenuControl Grid.Row="0"/>
-        <views:EditorControl Grid.Row="2"/>
-    </Grid>
+    <ContentControl Content="{Binding Layout.CurrentView, Mode=TwoWay}">
+        <ContentControl.Resources>
+            <DataTemplate DataType="{x:Type Views:DashboardView}">
+                <Grid FocusVisualStyle="{x:Null}" DataContext="{Binding Context}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="3"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="3"/>
+                    </Grid.RowDefinitions>
+                    <views:DashboardMenuControl Grid.Row="0"/>
+                    <views:DashboardControl Grid.Row="2"/>
+                </Grid>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type Views:EditorView}">
+                <Grid FocusVisualStyle="{x:Null}" DataContext="{Binding Context}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="3"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="3"/>
+                    </Grid.RowDefinitions>
+                    <views:EditorMenuControl Grid.Row="0"/>
+                    <views:EditorControl Grid.Row="2"/>
+                </Grid>
+            </DataTemplate>
+        </ContentControl.Resources>
+    </ContentControl>
 </Window>

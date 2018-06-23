@@ -30,6 +30,7 @@
   <Import Project="..\..\build\Base.props" />
   <Import Project="..\..\build\Autofac.props" />
   <Import Project="..\..\build\Rx.props" />
+  <Import Project="..\..\build\Dock.Model.props" />
   <Import Project="..\..\build\SkiaSharp.props" />
   <Import Project="..\..\build\WPF.props" />
   <ItemGroup>
@@ -68,6 +69,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Compile Include="Dock\Factories\EditorDockFactory.cs" />
+    <Compile Include="Dock\Views\DashboardView.cs" />
+    <Compile Include="Dock\Views\EditorView.cs" />
     <Compile Include="Editor\WpfEditorLayoutPlatform.cs" />
     <Compile Include="Editor\Command.cs" />
     <Compile Include="Editor\ProjectEditorCommands.cs" />
