@@ -58,6 +58,12 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Views\DashboardControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\DashboardMenuControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Windows\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -67,6 +73,12 @@
     <Compile Include="Editor\ProjectEditorCommands.cs" />
     <Compile Include="Editor\WpfEditorCanvasPlatform.cs" />
     <Compile Include="Editor\WpfProjectEditorPlatform.cs" />
+    <Compile Include="Views\DashboardControl.xaml.cs">
+      <DependentUpon>DashboardControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\DashboardMenuControl.xaml.cs">
+      <DependentUpon>DashboardMenuControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
