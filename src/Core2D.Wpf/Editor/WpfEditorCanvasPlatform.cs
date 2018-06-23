@@ -8,7 +8,7 @@ namespace Core2D.Wpf.Editor
     /// <summary>
     /// Editor canvas WPF platform.
     /// </summary>
-    public class WpfCanvasPlatform : ObservableObject, IEditorCanvasPlatform
+    public class WpfEditorCanvasPlatform : ObservableObject, IEditorCanvasPlatform
     {
         private readonly IServiceProvider _serviceProvider;
 
@@ -18,10 +18,10 @@ namespace Core2D.Wpf.Editor
         private object _zoom;
 
         /// <summary>
-        /// Initialize new instance of <see cref="WpfCanvasPlatform"/> class.
+        /// Initialize new instance of <see cref="WpfEditorCanvasPlatform"/> class.
         /// </summary>
         /// <param name="serviceProvider">The service provider.</param>
-        public WpfCanvasPlatform(IServiceProvider serviceProvider)
+        public WpfEditorCanvasPlatform(IServiceProvider serviceProvider)
         {
             _serviceProvider = serviceProvider;
         }

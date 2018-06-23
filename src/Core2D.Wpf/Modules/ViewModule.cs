@@ -2,7 +2,6 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System.Windows.Input;
 using Autofac;
-using Core2D.Avalonia.Dock.Views.Interfaces;
 using Core2D.Wpf.Windows;
 
 namespace Core2D.Wpf.Modules
@@ -16,7 +15,6 @@ namespace Core2D.Wpf.Modules
         protected override void Load(ContainerBuilder builder)
         {
             builder.RegisterAssemblyTypes(typeof(App).Assembly).AssignableTo<ICommand>().AsImplementedInterfaces().AsSelf().PropertiesAutowired().InstancePerLifetimeScope();
-            builder.RegisterAssemblyTypes(typeof(App).Assembly).As<IView>().InstancePerLifetimeScope();
             builder.RegisterType<MainWindow>().As<MainWindow>().InstancePerLifetimeScope();
         }
     }

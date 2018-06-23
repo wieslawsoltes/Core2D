@@ -49,19 +49,18 @@ namespace Core2D.Wpf
             var log = serviceProvider.GetService<ILog>();
             var fileIO = serviceProvider.GetService<IFileSystem>();
 
-            log?.Initialize(System.IO.Path.Combine(fileIO.GetAssemblyPath(null), "Core2D.log"));
+            log?.Initialize(System.IO.Path.Combine(fileIO.GetBaseDirectory(), "Core2D.log"));
 
             try
             {
                 var editor = serviceProvider.GetService<ProjectEditor>();
 
-                var path = System.IO.Path.Combine(fileIO.GetAssemblyPath(null), "Core2D.recent");
+                var path = System.IO.Path.Combine(fileIO.GetBaseDirectory(), "Core2D.recent");
                 if (fileIO.Exists(path))
                 {
                     editor.OnLoadRecent(path);
                 }
 
-                editor.CurrentView = editor.Views.FirstOrDefault(v => v.Title == "Dashboard");
                 editor.CurrentTool = editor.Tools.FirstOrDefault(t => t.Title == "Selection");
                 editor.CurrentPathTool = editor.PathTools.FirstOrDefault(t => t.Title == "Line");
                 editor.IsToolIdle = true;

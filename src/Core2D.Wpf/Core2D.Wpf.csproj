@@ -451,13 +451,6 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Views\DashboardMenuControl.xaml.cs">
-      <DependentUpon>DashboardMenuControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\DashboardControl.xaml.cs">
-      <DependentUpon>DashboardControl.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="Views\EditorControl.xaml.cs">
       <DependentUpon>EditorControl.xaml</DependentUpon>
     </Compile>
@@ -474,14 +467,6 @@
     <Compile Include="Views\StatusControl.xaml.cs">
       <DependentUpon>StatusControl.xaml</DependentUpon>
     </Compile>
-    <Page Include="Views\DashboardControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\DashboardMenuControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Views\EditorControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -510,25 +495,6 @@
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Properties\Settings.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Settings.settings</DependentUpon>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-    </Compile>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
-    <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <None Include="Properties\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
-    </None>
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
@@ -538,6 +504,14 @@
     <ProjectReference Include="..\Core2D.Editor\Core2D.Editor.csproj">
       <Project>{528f510f-1fa0-4ab5-93fa-ef10abfe2c37}</Project>
       <Name>Core2D.Editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Core2D.Renderer.Wpf\Core2D.Renderer.Wpf.csproj">
+      <Project>{7463a001-bcc8-403a-b83b-b96f5eef7052}</Project>
+      <Name>Core2D.Renderer.Wpf</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Core2D.Utilities.Wpf\Core2D.Utilities.Wpf.csproj">
+      <Project>{55f8a599-1ea5-4ef8-ba51-01de24b49f43}</Project>
+      <Name>Core2D.Utilities.Wpf</Name>
     </ProjectReference>
     <ProjectReference Include="..\Core2D\Core2D.csproj">
       <Project>{F822EC0C-2501-487D-87A8-B8D28A761385}</Project>
@@ -583,10 +557,6 @@
       <Project>{9B8FA9BD-63BE-4560-BA55-0D86AEE1809E}</Project>
       <Name>Core2D.Renderer.SkiaSharp</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Core2D.Renderer.Wpf\Core2D.Renderer.Wpf.csproj">
-      <Project>{3BFBD239-8979-480D-B1CB-B763F7C915C8}</Project>
-      <Name>Core2D.Renderer.Wpf</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Core2D.ScriptRunner.Roslyn\Core2D.ScriptRunner.Roslyn.csproj">
       <Project>{352C23CD-8A6D-4C91-9FD2-FC35ECBC8AFE}</Project>
       <Name>Core2D.ScriptRunner.Roslyn</Name>
@@ -610,10 +580,6 @@
     <ProjectReference Include="..\Core2D.TextFieldWriter.CsvHelper\Core2D.TextFieldWriter.CsvHelper.csproj">
       <Project>{AE7FF1B5-ABE3-45BF-87CC-44AC580A666A}</Project>
       <Name>Core2D.TextFieldWriter.CsvHelper</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Core2D.Utilities.Wpf\Core2D.Utilities.Wpf.csproj">
-      <Project>{E8D9036D-7E08-4405-B767-FB1E654EF66A}</Project>
-      <Name>Core2D.Utilities.Wpf</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

@@ -12,6 +12,7 @@
              xmlns:Path="clr-namespace:Core2D.Path;assembly=Core2D"
              xmlns:Segments="clr-namespace:Core2D.Path.Segments;assembly=Core2D"
              xmlns:custom="clr-namespace:Core2D.Wpf.Views.Custom"
+             xmlns:Editor="clr-namespace:Core2D.Editor;assembly=Core2D.Editor"
              mc:Ignorable="d" 
              d:DataContext="{x:Static designer:DesignerHelper.PathGeometry}"
              d:DesignWidth="250" d:DesignHeight="400">
