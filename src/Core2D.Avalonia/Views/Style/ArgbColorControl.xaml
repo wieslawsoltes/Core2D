@@ -12,7 +12,7 @@
             <Border Classes="color" Background="{DynamicResource ColorCheckerBoard}" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3"/>
             <Border Classes="color" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3">
                 <Border.Background>
-                    <MultiBinding Mode="OneWay" Converter="{StaticResourceArgbColorToBrushMultiConverter}">
+                    <MultiBinding Mode="OneWay" Converter="{StaticResource ArgbColorToBrushMultiConverter}">
                         <Binding Path="A"/>
                         <Binding Path="R"/>
                         <Binding Path="G"/>
