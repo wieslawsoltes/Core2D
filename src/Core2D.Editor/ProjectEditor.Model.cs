@@ -48,7 +48,8 @@ namespace Core2D.Editor
         private readonly Lazy<IImageImporter> _imageImporter;
         private readonly Lazy<IScriptRunner> _scriptRunner;
         private readonly Lazy<IProjectEditorPlatform> _platform;
-        private readonly Lazy<IEditorCanvasPlatform> _canvas;
+        private readonly Lazy<IEditorCanvasPlatform> _canvasPlatform;
+        private readonly Lazy<IEditorLayoutPlatform> _layoutPlatform;
 
         /// <summary>
         /// Gets or sets current project.
@@ -237,7 +238,12 @@ namespace Core2D.Editor
         /// <summary>
         /// Gets editor canvas platform.
         /// </summary>
-        public IEditorCanvasPlatform Canvas => _canvas.Value;
+        public IEditorCanvasPlatform CanvasPlatform => _canvasPlatform.Value;
+
+        /// <summary>
+        /// Gets editor layout platform.
+        /// </summary>
+        public IEditorLayoutPlatform LayoutPlatform => _layoutPlatform.Value;
 
         /// <summary>
         /// Initialize new instance of <see cref="ProjectEditor"/> class.
@@ -265,7 +271,8 @@ namespace Core2D.Editor
             _imageImporter = _serviceProvider.GetServiceLazily<IImageImporter>();
             _scriptRunner = _serviceProvider.GetServiceLazily<IScriptRunner>();
             _platform = _serviceProvider.GetServiceLazily<IProjectEditorPlatform>();
-            _canvas = _serviceProvider.GetServiceLazily<IEditorCanvasPlatform>();
+            _canvasPlatform = _serviceProvider.GetServiceLazily<IEditorCanvasPlatform>();
+            _layoutPlatform = _serviceProvider.GetServiceLazily<IEditorLayoutPlatform>();
         }
     }
 }

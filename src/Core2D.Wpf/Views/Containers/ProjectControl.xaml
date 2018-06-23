@@ -9,7 +9,7 @@
              xmlns:local="clr-namespace:Core2D.Wpf" 
              xmlns:converters="clr-namespace:Core2D.Wpf.Converters" 
              xmlns:designer="clr-namespace:Core2D.Wpf.Designer"
-             xmlns:Editor="clr-namespace:Core2D.Editor;assembly=Core2D.Editor"
+             xmlns:editor="clr-namespace:Core2D.Wpf.Editor"
              xmlns:custom="clr-namespace:Core2D.Wpf.Views.Custom"
              xmlns:project="clr-namespace:Core2D.Wpf.Views.Containers"
              mc:Ignorable="d" 
@@ -19,21 +19,21 @@
         <Grid.Resources>
             <ControlTemplate x:Key="ProjectMenu">
                 <Menu Background="Transparent" HorizontalAlignment="Right">
-                    <MenuItem Command="{x:Static Editor:ProjectEditorCommands.NewCommand}" CommandParameter="{Binding Path=SelectedItem, ElementName=projectTreeView}" Header="+"/>
-                    <MenuItem Command="{x:Static Editor:ProjectEditorCommands.DeleteCommand}" CommandParameter="{Binding Path=SelectedItem, ElementName=projectTreeView}" Header="-"/>
+                    <MenuItem Command="{x:Static editor:ProjectEditorCommands.NewCommand}" CommandParameter="{Binding Path=SelectedItem, ElementName=projectTreeView}" Header="+"/>
+                    <MenuItem Command="{x:Static editor:ProjectEditorCommands.DeleteCommand}" CommandParameter="{Binding Path=SelectedItem, ElementName=projectTreeView}" Header="-"/>
                 </Menu>
             </ControlTemplate>
             <ContextMenu x:Key="LayerContextMenuKey" DataContext="{Binding PlacementTarget.DataContext, RelativeSource={RelativeSource Self}}">
-                <MenuItem Header="_Add Layer" InputGestureText="Ctrl+N" Command="{x:Static Editor:ProjectEditorCommands.AddLayerCommand}" CommandParameter="{Binding Owner}"/>
+                <MenuItem Header="_Add Layer" InputGestureText="Ctrl+N" Command="{x:Static editor:ProjectEditorCommands.AddLayerCommand}" CommandParameter="{Binding Owner}"/>
                 <Separator/>
-                <MenuItem Header="_Delete" InputGestureText="Del" Command="{x:Static Editor:ProjectEditorCommands.RemoveLayerCommand}" CommandParameter="{Binding}"/>
+                <MenuItem Header="_Delete" InputGestureText="Del" Command="{x:Static editor:ProjectEditorCommands.RemoveLayerCommand}" CommandParameter="{Binding}"/>
             </ContextMenu>
             <ContextMenu x:Key="PageContextMenuKey" DataContext="{Binding PlacementTarget.DataContext, RelativeSource={RelativeSource Self}}">
                 <MenuItem Header="Te_mplate" Tag="{Binding Path=DataContext, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" DataContext="{Binding Path=DataContext, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" ItemsSource="{Binding Templates}">
                     <MenuItem.ItemContainerStyle>
                         <Style TargetType="MenuItem">
                             <Setter Property="Header" Value="{Binding Name}"/>
-                            <Setter Property="Command" Value="{x:Static Editor:ProjectEditorCommands.ApplyTemplateCommand}"/>
+                            <Setter Property="Command" Value="{x:Static editor:ProjectEditorCommands.ApplyTemplateCommand}"/>
                             <Setter Property="CommandParameter" Value="{Binding}"/>
                             <Setter Property="IsCheckable" Value="True"/>
                             <Setter Property="IsChecked" Value="False"/>
@@ -52,35 +52,35 @@
                     </MenuItem.ItemContainerStyle>
                 </MenuItem>
                 <Separator/>
-                <MenuItem Header="Insert Page Bef_ore" InputGestureText="" Command="{x:Static Editor:ProjectEditorCommands.InsertPageBeforeCommand}" CommandParameter="{Binding}"/>
-                <MenuItem Header="Insert Page Aft_er" InputGestureText="" Command="{x:Static Editor:ProjectEditorCommands.InsertPageAfterCommand}" CommandParameter="{Binding}"/>
+                <MenuItem Header="Insert Page Bef_ore" InputGestureText="" Command="{x:Static editor:ProjectEditorCommands.InsertPageBeforeCommand}" CommandParameter="{Binding}"/>
+                <MenuItem Header="Insert Page Aft_er" InputGestureText="" Command="{x:Static editor:ProjectEditorCommands.InsertPageAfterCommand}" CommandParameter="{Binding}"/>
                 <Separator/>
-                <MenuItem Header="Cu_t" InputGestureText="Ctrl+X" Command="{x:Static Editor:ProjectEditorCommands.CutCommand}" CommandParameter="{Binding}"/>
-                <MenuItem Header="_Copy" InputGestureText="Ctrl+C" Command="{x:Static Editor:ProjectEditorCommands.CopyCommand}" CommandParameter="{Binding}"/>
-                <MenuItem Header="_Paste" InputGestureText="Ctrl+V" Command="{x:Static Editor:ProjectEditorCommands.PasteCommand}" CommandParameter="{Binding}"/>
+                <MenuItem Header="Cu_t" InputGestureText="Ctrl+X" Command="{x:Static editor:ProjectEditorCommands.CutCommand}" CommandParameter="{Binding}"/>
+                <MenuItem Header="_Copy" InputGestureText="Ctrl+C" Command="{x:Static editor:ProjectEditorCommands.CopyCommand}" CommandParameter="{Binding}"/>
+                <MenuItem Header="_Paste" InputGestureText="Ctrl+V" Command="{x:Static editor:ProjectEditorCommands.PasteCommand}" CommandParameter="{Binding}"/>
                 <Separator/>
-                <MenuItem Header="_Delete" InputGestureText="Del" Command="{x:Static Editor:ProjectEditorCommands.DeleteCommand}" CommandParameter="{Binding}"/>
+                <MenuItem Header="_Delete" InputGestureText="Del" Command="{x:Static editor:ProjectEditorCommands.DeleteCommand}" CommandParameter="{Binding}"/>
                 <Separator/>
-                <MenuItem Header="E_xport" InputGestureText="Ctrl+E" Command="{x:Static Editor:ProjectEditorCommands.ExportCommand}" CommandParameter="{Binding}"/>
+                <MenuItem Header="E_xport" InputGestureText="Ctrl+E" Command="{x:Static editor:ProjectEditorCommands.ExportCommand}" CommandParameter="{Binding}"/>
             </ContextMenu>
             <ContextMenu x:Key="DocumentContextMenuKey" DataContext="{Binding PlacementTarget.DataContext, RelativeSource={RelativeSource Self}}">
-                <MenuItem Header="_Add Page" InputGestureText="Ctrl+N" Command="{x:Static Editor:ProjectEditorCommands.AddPageCommand}" CommandParameter="{Binding}"/>
+                <MenuItem Header="_Add Page" InputGestureText="Ctrl+N" Command="{x:Static editor:ProjectEditorCommands.AddPageCommand}" CommandParameter="{Binding}"/>
                 <Separator/>
-                <MenuItem Header="Insert Document Bef_ore" InputGestureText="" Command="{x:Static Editor:ProjectEditorCommands.InsertDocumentBeforeCommand}" CommandParameter="{Binding}"/>
-                <MenuItem Header="Insert Document Aft_er" InputGestureText="" Command="{x:Static Editor:ProjectEditorCommands.InsertDocumentAfterCommand}" CommandParameter="{Binding}"/>
+                <MenuItem Header="Insert Document Bef_ore" InputGestureText="" Command="{x:Static editor:ProjectEditorCommands.InsertDocumentBeforeCommand}" CommandParameter="{Binding}"/>
+                <MenuItem Header="Insert Document Aft_er" InputGestureText="" Command="{x:Static editor:ProjectEditorCommands.InsertDocumentAfterCommand}" CommandParameter="{Binding}"/>
                 <Separator/>
-                <MenuItem Header="Cu_t" InputGestureText="Ctrl+X" Command="{x:Static Editor:ProjectEditorCommands.CutCommand}" CommandParameter="{Binding}"/>
-                <MenuItem Header="_Copy" InputGestureText="Ctrl+C" Command="{x:Static Editor:ProjectEditorCommands.CopyCommand}" CommandParameter="{Binding}"/>
-                <MenuItem Header="_Paste" InputGestureText="Ctrl+V" Command="{x:Static Editor:ProjectEditorCommands.PasteCommand}" CommandParameter="{Binding}"/>
+                <MenuItem Header="Cu_t" InputGestureText="Ctrl+X" Command="{x:Static editor:ProjectEditorCommands.CutCommand}" CommandParameter="{Binding}"/>
+                <MenuItem Header="_Copy" InputGestureText="Ctrl+C" Command="{x:Static editor:ProjectEditorCommands.CopyCommand}" CommandParameter="{Binding}"/>
+                <MenuItem Header="_Paste" InputGestureText="Ctrl+V" Command="{x:Static editor:ProjectEditorCommands.PasteCommand}" CommandParameter="{Binding}"/>
                 <Separator/>
-                <MenuItem Header="_Delete" InputGestureText="Del" Command="{x:Static Editor:ProjectEditorCommands.DeleteCommand}" CommandParameter="{Binding}"/>
+                <MenuItem Header="_Delete" InputGestureText="Del" Command="{x:Static editor:ProjectEditorCommands.DeleteCommand}" CommandParameter="{Binding}"/>
                 <Separator/>
-                <MenuItem Header="E_xport" InputGestureText="Ctrl+E" Command="{x:Static Editor:ProjectEditorCommands.ExportCommand}" CommandParameter="{Binding}"/>
+                <MenuItem Header="E_xport" InputGestureText="Ctrl+E" Command="{x:Static editor:ProjectEditorCommands.ExportCommand}" CommandParameter="{Binding}"/>
             </ContextMenu>
             <ContextMenu x:Key="PojectContextMenuKey" DataContext="{Binding PlacementTarget.DataContext, RelativeSource={RelativeSource Self}}">
-                <MenuItem Header="_Add Document" InputGestureText="Ctrl+N" Command="{x:Static Editor:ProjectEditorCommands.AddDocumentCommand}" CommandParameter="{Binding}"/>
+                <MenuItem Header="_Add Document" InputGestureText="Ctrl+N" Command="{x:Static editor:ProjectEditorCommands.AddDocumentCommand}" CommandParameter="{Binding}"/>
                 <Separator/>
-                <MenuItem Header="E_xport" InputGestureText="Ctrl+E" Command="{x:Static Editor:ProjectEditorCommands.ExportCommand}" CommandParameter="{Binding}"/>
+                <MenuItem Header="E_xport" InputGestureText="Ctrl+E" Command="{x:Static editor:ProjectEditorCommands.ExportCommand}" CommandParameter="{Binding}"/>
             </ContextMenu>
         </Grid.Resources>
         <Grid.ColumnDefinitions>
@@ -133,16 +133,16 @@
             </TreeView.Resources>
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="SelectedItemChanged">
-                    <i:InvokeCommandAction Command="{x:Static Editor:ProjectEditorCommands.SelectedItemChangedCommand}" CommandParameter="{Binding ElementName=projectTreeView, Path=SelectedItem}"/>
+                    <i:InvokeCommandAction Command="{x:Static editor:ProjectEditorCommands.SelectedItemChangedCommand}" CommandParameter="{Binding ElementName=projectTreeView, Path=SelectedItem}"/>
                 </i:EventTrigger>
             </i:Interaction.Triggers>
             <TreeView.InputBindings>
-                <KeyBinding Command="{x:Static Editor:ProjectEditorCommands.NewCommand}" CommandParameter="{Binding Path=SelectedItem, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" Gesture="Ctrl+N"/>
-                <KeyBinding Command="{x:Static Editor:ProjectEditorCommands.CutCommand}" CommandParameter="{Binding Path=SelectedItem, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" Gesture="Ctrl+X"/>
-                <KeyBinding Command="{x:Static Editor:ProjectEditorCommands.CopyCommand}" CommandParameter="{Binding Path=SelectedItem, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" Gesture="Ctrl+C"/>
-                <KeyBinding Command="{x:Static Editor:ProjectEditorCommands.PasteCommand}" CommandParameter="{Binding Path=SelectedItem, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" Gesture="Ctrl+V"/>
-                <KeyBinding Command="{x:Static Editor:ProjectEditorCommands.DeleteCommand}" CommandParameter="{Binding Path=SelectedItem, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" Gesture="Del"/>
-                <KeyBinding Command="{x:Static Editor:ProjectEditorCommands.ExportCommand}" CommandParameter="{Binding Path=SelectedItem, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" Gesture="Ctrl+E"/>
+                <KeyBinding Command="{x:Static editor:ProjectEditorCommands.NewCommand}" CommandParameter="{Binding Path=SelectedItem, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" Gesture="Ctrl+N"/>
+                <KeyBinding Command="{x:Static editor:ProjectEditorCommands.CutCommand}" CommandParameter="{Binding Path=SelectedItem, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" Gesture="Ctrl+X"/>
+                <KeyBinding Command="{x:Static editor:ProjectEditorCommands.CopyCommand}" CommandParameter="{Binding Path=SelectedItem, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" Gesture="Ctrl+C"/>
+                <KeyBinding Command="{x:Static editor:ProjectEditorCommands.PasteCommand}" CommandParameter="{Binding Path=SelectedItem, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" Gesture="Ctrl+V"/>
+                <KeyBinding Command="{x:Static editor:ProjectEditorCommands.DeleteCommand}" CommandParameter="{Binding Path=SelectedItem, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" Gesture="Del"/>
+                <KeyBinding Command="{x:Static editor:ProjectEditorCommands.ExportCommand}" CommandParameter="{Binding Path=SelectedItem, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" Gesture="Ctrl+E"/>
             </TreeView.InputBindings>
             <TreeView.Style>
                 <Style TargetType="TreeView">

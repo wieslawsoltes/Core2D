@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:Core2D.Wpf" 
              xmlns:converters="clr-namespace:Core2D.Wpf.Converters" 
              xmlns:Data="clr-namespace:Core2D.Data;assembly=Core2D"
-             xmlns:Editor="clr-namespace:Core2D.Editor;assembly=Core2D.Editor"
+             xmlns:editor="clr-namespace:Core2D.Wpf.Editor"
              xmlns:Path="clr-namespace:Core2D.Path;assembly=Core2D"
              xmlns:Segments="clr-namespace:Core2D.Path.Segments;assembly=Core2D"
              xmlns:Containers="clr-namespace:Core2D.Containers;assembly=Core2D"
@@ -22,8 +22,7 @@
              xmlns:renderer="clr-namespace:Core2D.Wpf.Views.Renderer"
              xmlns:shapes="clr-namespace:Core2D.Wpf.Views.Shapes"
              xmlns:state="clr-namespace:Core2D.Wpf.Views.State"
-             xmlns:style="clr-namespace:Core2D.Wpf.Views.Style"
-             xmlns:p="clr-namespace:Core2D.Wpf.Properties">
+             xmlns:style="clr-namespace:Core2D.Wpf.Views.Style">
     <Application.Resources>
         <!-- Converters -->
         <converters:ArgbColorToBrushConverter x:Key="ArgbColorToBrushConverter"/>

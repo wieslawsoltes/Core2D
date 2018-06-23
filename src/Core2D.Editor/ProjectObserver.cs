@@ -203,7 +203,7 @@ namespace Core2D.Editor
 
         private void ObserveInvalidateLayer(object sender, InvalidateLayerEventArgs e)
         {
-            _editor?.Canvas?.Invalidate?.Invoke();
+            _editor?.CanvasPlatform?.Invalidate?.Invoke();
         }
 
         private void ObserveLayer(object sender, System.ComponentModel.PropertyChangedEventArgs e)

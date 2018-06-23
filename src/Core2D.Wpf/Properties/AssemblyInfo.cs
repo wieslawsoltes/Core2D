@@ -5,14 +5,14 @@ using System.Runtime.InteropServices;
 using System.Windows;
 
 [assembly: AssemblyCompany("Wiesław Šoltés")]
-[assembly: AssemblyCopyright("Copyright © Wiesław Šoltés 2017")]
+[assembly: AssemblyCopyright("Copyright © Wiesław Šoltés 2018")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyVersion("0.4.0")]
 [assembly: AssemblyFileVersion("0.4.0")]
 [assembly: AssemblyInformationalVersion("0.4.0")]
 
 [assembly: AssemblyTitle("Core2D.Wpf")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("A multi-platform data driven 2D diagram editor.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyProduct("Core2D.Wpf")]
 [assembly: AssemblyCulture("")]

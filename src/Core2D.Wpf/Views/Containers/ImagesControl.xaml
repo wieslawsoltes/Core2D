@@ -8,7 +8,7 @@
              xmlns:local="clr-namespace:Core2D.Wpf" 
              xmlns:converters="clr-namespace:Core2D.Wpf.Converters" 
              xmlns:designer="clr-namespace:Core2D.Wpf.Designer"
-             xmlns:Editor="clr-namespace:Core2D.Editor;assembly=Core2D.Editor"
+             xmlns:editor="clr-namespace:Core2D.Wpf.Editor"
              xmlns:custom="clr-namespace:Core2D.Wpf.Views.Custom"
              mc:Ignorable="d" 
              d:DataContext="{x:Static designer:DesignerHelper.Project}"
@@ -17,7 +17,7 @@
         <Grid.Resources>
             <ControlTemplate x:Key="ImagesMenuControlTemplateKey">
                 <Menu Background="Transparent" HorizontalAlignment="Right">
-                    <MenuItem Command="{x:Static Editor:ProjectEditorCommands.AddImageKeyCommand}" Header="+"/>
+                    <MenuItem Command="{x:Static editor:ProjectEditorCommands.AddImageKeyCommand}" Header="+"/>
                 </Menu>
             </ControlTemplate>
         </Grid.Resources>
@@ -40,7 +40,7 @@
                             <ColumnDefinition Width="30"/>
                         </Grid.ColumnDefinitions>
                         <TextBox Grid.Column="0" Margin="5,2,5,2" VerticalAlignment="Center" Text="{Binding Path=Key, Mode=OneWay}"/>
-                        <Button Grid.Column="1" Margin="5,0,5,0" VerticalAlignment="Center" Content="-" Command="{x:Static Editor:ProjectEditorCommands.RemoveImageKeyCommand}" CommandParameter="{Binding Key}"/>
+                        <Button Grid.Column="1" Margin="5,0,5,0" VerticalAlignment="Center" Content="-" Command="{x:Static editor:ProjectEditorCommands.RemoveImageKeyCommand}" CommandParameter="{Binding Key}"/>
                     </Grid>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>

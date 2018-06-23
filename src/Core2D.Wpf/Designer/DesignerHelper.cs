@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Windows;
 using Autofac;
 using Core2D.Editor.Designer;
+using Core2D.Wpf.Editor;
 using Core2D.Wpf.Modules;
 
 namespace Core2D.Wpf.Designer
@@ -31,6 +32,7 @@ namespace Core2D.Wpf.Designer
 
                 var container = builder.Build();
 
+                ProjectEditorCommands.Initialize(container.Resolve<IServiceProvider>());
                 InitializeContext(container.Resolve<IServiceProvider>());
             }
         }

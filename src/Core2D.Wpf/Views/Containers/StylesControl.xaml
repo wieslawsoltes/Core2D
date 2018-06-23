@@ -8,7 +8,7 @@
              xmlns:local="clr-namespace:Core2D.Wpf" 
              xmlns:converters="clr-namespace:Core2D.Wpf.Converters" 
              xmlns:designer="clr-namespace:Core2D.Wpf.Designer"
-             xmlns:Editor="clr-namespace:Core2D.Editor;assembly=Core2D.Editor"
+             xmlns:editor="clr-namespace:Core2D.Wpf.Editor"
              xmlns:custom="clr-namespace:Core2D.Wpf.Views.Custom"
              xmlns:lists="clr-namespace:Core2D.Wpf.Views.Custom.Lists"
              mc:Ignorable="d" 
@@ -18,15 +18,15 @@
         <Grid.Resources>
             <ControlTemplate x:Key="StyleLibrariesMenu">
                 <Menu Background="Transparent" HorizontalAlignment="Right">
-                    <MenuItem Command="{x:Static Editor:ProjectEditorCommands.AddStyleLibraryCommand}" Header="+"/>
-                    <MenuItem Command="{x:Static Editor:ProjectEditorCommands.RemoveStyleLibraryCommand}" CommandParameter="{Binding CurrentStyleLibrary}" Header="-"/>
+                    <MenuItem Command="{x:Static editor:ProjectEditorCommands.AddStyleLibraryCommand}" Header="+"/>
+                    <MenuItem Command="{x:Static editor:ProjectEditorCommands.RemoveStyleLibraryCommand}" CommandParameter="{Binding CurrentStyleLibrary}" Header="-"/>
                 </Menu>
             </ControlTemplate>
             <ControlTemplate x:Key="StylesMenu">
                 <Menu Background="Transparent" HorizontalAlignment="Right">
-                    <MenuItem Header="apply" Command="{x:Static Editor:ProjectEditorCommands.ApplyStyleCommand}" CommandParameter="{Binding CurrentStyleLibrary.Selected}"/>
-                    <MenuItem Command="{x:Static Editor:ProjectEditorCommands.AddStyleCommand}" CommandParameter="{Binding CurrentStyleLibrary}" Header="+"/>
-                    <MenuItem Command="{x:Static Editor:ProjectEditorCommands.RemoveStyleCommand}" CommandParameter="{Binding CurrentStyleLibrary.Selected}" Header="-"/>
+                    <MenuItem Header="apply" Command="{x:Static editor:ProjectEditorCommands.ApplyStyleCommand}" CommandParameter="{Binding CurrentStyleLibrary.Selected}"/>
+                    <MenuItem Command="{x:Static editor:ProjectEditorCommands.AddStyleCommand}" CommandParameter="{Binding CurrentStyleLibrary}" Header="+"/>
+                    <MenuItem Command="{x:Static editor:ProjectEditorCommands.RemoveStyleCommand}" CommandParameter="{Binding CurrentStyleLibrary.Selected}" Header="-"/>
                 </Menu>
             </ControlTemplate>
         </Grid.Resources>
@@ -65,17 +65,17 @@
         <lists:ShapeStyleDragAndDropListBox DataContext="{Binding CurrentStyleLibrary.Items}" Tag="{Binding DataContext, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" ItemsSource="{Binding}" SelectedItem="{Binding DataContext.CurrentStyleLibrary.Selected, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" BorderBrush="{x:Null}" HorizontalContentAlignment="Stretch" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2">
             <lists:ShapeStyleDragAndDropListBox.Resources>
                 <ContextMenu x:Key="StyleContextMenu" DataContext="{Binding PlacementTarget.DataContext, RelativeSource={RelativeSource Self}}">
-                    <MenuItem Header="_Add Style" InputGestureText="Ctrl+N" Command="{x:Static Editor:ProjectEditorCommands.AddStyleCommand}" CommandParameter="{Binding DataContext.CurrentStyleLibrary, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}"/>
+                    <MenuItem Header="_Add Style" InputGestureText="Ctrl+N" Command="{x:Static editor:ProjectEditorCommands.AddStyleCommand}" CommandParameter="{Binding DataContext.CurrentStyleLibrary, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}"/>
                     <Separator/>
-                    <MenuItem Header="_Delete" InputGestureText="Del" Command="{x:Static Editor:ProjectEditorCommands.RemoveStyleCommand}" CommandParameter="{Binding}"/>
+                    <MenuItem Header="_Delete" InputGestureText="Del" Command="{x:Static editor:ProjectEditorCommands.RemoveStyleCommand}" CommandParameter="{Binding}"/>
                     <Separator/>
-                    <MenuItem Header="E_xport" InputGestureText="Ctrl+E" Command="{x:Static Editor:ProjectEditorCommands.ExportObjectCommand}" CommandParameter="{Binding}"/>
+                    <MenuItem Header="E_xport" InputGestureText="Ctrl+E" Command="{x:Static editor:ProjectEditorCommands.ExportObjectCommand}" CommandParameter="{Binding}"/>
                 </ContextMenu>
             </lists:ShapeStyleDragAndDropListBox.Resources>
             <lists:ShapeStyleDragAndDropListBox.InputBindings>
-                <KeyBinding Command="{x:Static Editor:ProjectEditorCommands.AddStyleCommand}" CommandParameter="{Binding DataContext.CurrentStyleLibrary, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" Gesture="Ctrl+N"/>
-                <KeyBinding Command="{x:Static Editor:ProjectEditorCommands.RemoveStyleCommand}" CommandParameter="{Binding Path=SelectedItem, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type lists:ShapeStyleDragAndDropListBox}}}" Gesture="Del"/>
-                <KeyBinding Command="{x:Static Editor:ProjectEditorCommands.ExportObjectCommand}" CommandParameter="{Binding Path=SelectedItem, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type lists:ShapeStyleDragAndDropListBox}}}" Gesture="Ctrl+E"/>
+                <KeyBinding Command="{x:Static editor:ProjectEditorCommands.AddStyleCommand}" CommandParameter="{Binding DataContext.CurrentStyleLibrary, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" Gesture="Ctrl+N"/>
+                <KeyBinding Command="{x:Static editor:ProjectEditorCommands.RemoveStyleCommand}" CommandParameter="{Binding Path=SelectedItem, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type lists:ShapeStyleDragAndDropListBox}}}" Gesture="Del"/>
+                <KeyBinding Command="{x:Static editor:ProjectEditorCommands.ExportObjectCommand}" CommandParameter="{Binding Path=SelectedItem, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type lists:ShapeStyleDragAndDropListBox}}}" Gesture="Ctrl+E"/>
             </lists:ShapeStyleDragAndDropListBox.InputBindings>
             <lists:ShapeStyleDragAndDropListBox.ItemContainerStyle>
                 <Style TargetType="ListBoxItem">

@@ -132,5 +132,20 @@ namespace Core2D.Editor
         /// Reset view size to defaults.
         /// </summary>
         void OnZoomReset();
+
+        /// <summary>
+        /// Load layout configuration.
+        /// </summary>
+        void OnLoadLayout();
+
+        /// <summary>
+        /// Save layout configuration.
+        /// </summary>
+        void OnSaveLayout();
+
+        /// <summary>
+        /// Reset layout configuration.
+        /// </summary>
+        void OnResetLayout();
     }
 }

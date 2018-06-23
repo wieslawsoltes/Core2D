@@ -12,7 +12,6 @@
              xmlns:custom="clr-namespace:Core2D.Wpf.Views.Custom"
              xmlns:lists="clr-namespace:Core2D.Wpf.Views.Custom.Lists"
              xmlns:project="clr-namespace:Core2D.Wpf.Views.Containers"
-             xmlns:p="clr-namespace:Core2D.Wpf.Properties"
              mc:Ignorable="d" 
              d:DataContext="{x:Static designer:DesignerHelper.Page}"
              d:DesignWidth="250" d:DesignHeight="400">
@@ -25,16 +24,16 @@
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <TextBlock Text="{x:Static p:Resources.ContainerName}" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="0" Grid.Column="0"/>
+        <TextBlock Text="Name" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="0" Grid.Column="0"/>
         <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" BorderBrush="{x:Null}" Style="{StaticResource TextBoxLeftStyleKey}" Grid.Row="0" Grid.Column="1"/>
         <TabControl Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
-            <TabItem Header="{x:Static p:Resources.WindowTitleLayers}">
+            <TabItem Header="Layers">
                 <project:LayersControl/>
             </TabItem>
-            <TabItem Header="{x:Static p:Resources.WindowTitleShapes}">
+            <TabItem Header="Shapes">
                 <project:ShapesControl/>
             </TabItem>
-            <TabItem Header="{x:Static p:Resources.ContainerSize}">
+            <TabItem Header="Size">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
@@ -44,16 +43,16 @@
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                    <TextBlock Text="{x:Static p:Resources.ContainerWidth}" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="0" Grid.Column="0"/>
-                    <TextBlock Text="{x:Static p:Resources.ContainerHeight}" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="1" Grid.Column="0"/>
+                    <TextBlock Text="Width" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="0" Grid.Column="0"/>
+                    <TextBlock Text="Height" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="1" Grid.Column="0"/>
                     <TextBox Text="{Binding Width, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBoxLeftStyleKey}" Grid.Row="0" Grid.Column="1"/>
                     <TextBox Text="{Binding Height, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBoxLeftStyleKey}" Grid.Row="1" Grid.Column="1"/>
                 </Grid>
             </TabItem>
-            <TabItem Header="{x:Static p:Resources.ContainerBackground}">
+            <TabItem Header="Background">
                 <ContentControl Content="{Binding Background}"/>
             </TabItem>
-            <TabItem Header="{x:Static p:Resources.ContainerData}">
+            <TabItem Header="Data">
                 <ContentControl Content="{Binding Data}"/>
             </TabItem>
         </TabControl>

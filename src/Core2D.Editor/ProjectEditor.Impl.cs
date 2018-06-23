@@ -195,7 +195,7 @@ namespace Core2D.Editor
             OnUnload();
             OnLoad(ProjectFactory?.GetProject() ?? ProjectContainer.Create(), string.Empty);
             OnNavigate("EditorView");
-            Canvas?.Invalidate?.Invoke();
+            CanvasPlatform?.Invalidate?.Invoke();
         }
 
         /// <summary>
@@ -3082,7 +3082,7 @@ namespace Core2D.Editor
             }
             else
             {
-                Canvas?.Invalidate?.Invoke();
+                CanvasPlatform?.Invalidate?.Invoke();
             }
         }
 
@@ -3106,7 +3106,7 @@ namespace Core2D.Editor
             }
             else
             {
-                Canvas?.Invalidate?.Invoke();
+                CanvasPlatform?.Invalidate?.Invoke();
             }
         }
 
@@ -3129,9 +3129,9 @@ namespace Core2D.Editor
             }
             else
             {
-                if (Canvas?.Invalidate != null)
+                if (CanvasPlatform?.Invalidate != null)
                 {
-                    Canvas?.Invalidate();
+                    CanvasPlatform?.Invalidate();
                 }
             }
         }
@@ -3792,25 +3792,6 @@ namespace Core2D.Editor
                 }
             }
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
         /// <summary>
         /// Move items in the library.

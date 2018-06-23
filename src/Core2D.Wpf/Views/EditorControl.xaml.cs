@@ -3,10 +3,10 @@
 using System;
 using System.Windows;
 using System.Windows.Controls;
+using Core2D.Containers;
 using Core2D.Data;
 using Core2D.Editor;
 using Core2D.Editor.Input;
-using Core2D.Containers;
 using Core2D.Shape;
 using Core2D.Shapes;
 using Core2D.Style;
@@ -224,12 +224,13 @@ namespace Core2D.Wpf.Views
 
             if (_projectEditor != null)
             {
-                _projectEditor.Invalidate = () => { };
-                _projectEditor.ResetZoom = () => zoomBorder.Reset();
-                _projectEditor.AutoFitZoom = () => zoomBorder.AutoFit();
-                _projectEditor.LoadLayout = () => OnLoadLayout();
-                _projectEditor.SaveLayout = () => OnSaveLayout();
-                _projectEditor.ResetLayout = () => OnResetLayout();
+                _projectEditor.CanvasPlatform.Invalidate = () => { };
+                _projectEditor.CanvasPlatform.ResetZoom = () => zoomBorder.Reset();
+                _projectEditor.CanvasPlatform.AutoFitZoom = () => zoomBorder.AutoFit();
+
+                _projectEditor.LayoutPlatform.LoadLayout = () => OnLoadLayout();
+                _projectEditor.LayoutPlatform.SaveLayout = () => OnSaveLayout();
+                _projectEditor.LayoutPlatform.ResetLayout = () => OnResetLayout();
 
                 zoomBorder.InvalidatedChild = InvalidateChild;
 
@@ -253,12 +254,13 @@ namespace Core2D.Wpf.Views
         {
             if (_projectEditor != null)
             {
-                _projectEditor.Invalidate = null;
-                _projectEditor.ResetZoom = null;
-                _projectEditor.AutoFitZoom = null;
-                _projectEditor.LoadLayout = null;
-                _projectEditor.SaveLayout = null;
-                _projectEditor.ResetLayout = null;
+                _projectEditor.CanvasPlatform.Invalidate = null;
+                _projectEditor.CanvasPlatform.ResetZoom = null;
+                _projectEditor.CanvasPlatform.AutoFitZoom = null;
+
+                _projectEditor.LayoutPlatform.LoadLayout = null;
+                _projectEditor.LayoutPlatform.SaveLayout = null;
+                _projectEditor.LayoutPlatform.ResetLayout = null;
 
                 zoomBorder.InvalidatedChild = null;
 
@@ -345,7 +347,7 @@ namespace Core2D.Wpf.Views
         {
             try
             {
-                LoadLayout(System.IO.Path.Combine(_projectEditor?.FileIO?.GetAssemblyPath(null), _defaultLayoutFileName));
+                LoadLayout(System.IO.Path.Combine(_projectEditor?.FileIO?.GetBaseDirectory(), _defaultLayoutFileName));
             }
             catch (Exception ex)
             {
@@ -360,7 +362,7 @@ namespace Core2D.Wpf.Views
         {
             try
             {
-                SaveLayout(System.IO.Path.Combine(_projectEditor?.FileIO?.GetAssemblyPath(null), _defaultLayoutFileName));
+                SaveLayout(System.IO.Path.Combine(_projectEditor?.FileIO?.GetBaseDirectory(), _defaultLayoutFileName));
             }
             catch (Exception ex)
             {

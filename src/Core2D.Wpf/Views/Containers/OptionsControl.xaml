@@ -8,14 +8,14 @@
              xmlns:local="clr-namespace:Core2D.Wpf" 
              xmlns:converters="clr-namespace:Core2D.Wpf.Converters" 
              xmlns:designer="clr-namespace:Core2D.Wpf.Designer"
-             xmlns:Editor="clr-namespace:Core2D.Editor;assembly=Core2D.Editor"
+             xmlns:editor="clr-namespace:Core2D.Wpf.Editor"
              xmlns:custom="clr-namespace:Core2D.Wpf.Views.Custom"
-             xmlns:p="clr-namespace:Core2D.Wpf.Properties"
+             xmlns:Editor="clr-namespace:Core2D.Editor;assembly=Core2D.Editor"
              mc:Ignorable="d" 
              d:DataContext="{x:Static designer:DesignerHelper.Options}"
              d:DesignWidth="250" d:DesignHeight="400">
     <TabControl>
-        <TabItem Header="{x:Static p:Resources.OptionsHeaderGeneral}">
+        <TabItem Header="General">
             <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
                 <Grid>
                     <Grid.RowDefinitions>
@@ -31,24 +31,24 @@
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                    <TextBlock Text="{x:Static p:Resources.OptionsSnapToGrid}" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="0" Grid.Column="0"/>
+                    <TextBlock Text="SnapToGrid" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="0" Grid.Column="0"/>
                     <CheckBox Content="" IsChecked="{Binding SnapToGrid}" Style="{StaticResource CheckBoxStyleKey}" Grid.Row="0" Grid.Column="1"/>
-                    <TextBlock Text="{x:Static p:Resources.OptionsSnapX}" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="1" Grid.Column="0"/>
+                    <TextBlock Text="SnapX" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="1" Grid.Column="0"/>
                     <TextBox Text="{Binding SnapX, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBoxLeftStyleKey}" Grid.Row="1" Grid.Column="1"/>
-                    <TextBlock Text="{x:Static p:Resources.OptionsSnapY}" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="2" Grid.Column="0"/>
+                    <TextBlock Text="SnapY" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="2" Grid.Column="0"/>
                     <TextBox Text="{Binding SnapY, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBoxLeftStyleKey}" Grid.Row="2" Grid.Column="1"/>
-                    <TextBlock Text="{x:Static p:Resources.OptionsHitThreshold}" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="3" Grid.Column="0"/>
+                    <TextBlock Text="HitThreshold" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="3" Grid.Column="0"/>
                     <TextBox Text="{Binding HitThreshold, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBoxLeftStyleKey}" Grid.Row="3" Grid.Column="1"/>
-                    <TextBlock Text="{x:Static p:Resources.OptionsMoveMode}" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="4" Grid.Column="0"/>
+                    <TextBlock Text="MoveMode" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="4" Grid.Column="0"/>
                     <ComboBox ItemsSource="{x:Static Editor:Enums.MoveModeValues}" SelectedItem="{Binding MoveMode}" Style="{StaticResource ComboBoxStyleKey}" Grid.Row="4" Grid.Column="1"/>
-                    <TextBlock Text="{x:Static p:Resources.OptionsTryToConnect}" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="5" Grid.Column="0"/>
+                    <TextBlock Text="TryToConnect" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="5" Grid.Column="0"/>
                     <CheckBox Content="" IsChecked="{Binding TryToConnect}" Style="{StaticResource CheckBoxStyleKey}" Grid.Row="5" Grid.Column="1"/>
-                    <TextBlock Text="{x:Static p:Resources.OptionsCloneStyle}" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="6" Grid.Column="0"/>
+                    <TextBlock Text="CloneStyle" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="6" Grid.Column="0"/>
                     <CheckBox Content="" IsChecked="{Binding CloneStyle}" Style="{StaticResource CheckBoxStyleKey}" Grid.Row="6" Grid.Column="1"/>
                 </Grid>
             </ScrollViewer>
         </TabItem>
-        <TabItem Header="{x:Static p:Resources.OptionsHeaderDefaults}">
+        <TabItem Header="Defaults">
             <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
                 <Grid>
                     <Grid.RowDefinitions>
@@ -62,20 +62,20 @@
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                    <TextBlock Text="{x:Static p:Resources.OptionsDefaultIsStroked}" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="0" Grid.Column="0"/>
+                    <TextBlock Text="IsStroked" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="0" Grid.Column="0"/>
                     <CheckBox Content="" IsChecked="{Binding DefaultIsStroked}" Style="{StaticResource CheckBoxStyleKey}" Grid.Row="0" Grid.Column="1"/>
-                    <TextBlock Text="{x:Static p:Resources.OptionsDefaultIsFilled}" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="1" Grid.Column="0"/>
+                    <TextBlock Text="IsFilled" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="1" Grid.Column="0"/>
                     <CheckBox Content="" IsChecked="{Binding DefaultIsFilled}" Style="{StaticResource CheckBoxStyleKey}" Grid.Row="1" Grid.Column="1"/>
-                    <TextBlock Text="{x:Static p:Resources.OptionsDefaultIsClosed}" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="2" Grid.Column="0"/>
+                    <TextBlock Text="IsClosed}" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="2" Grid.Column="0"/>
                     <CheckBox Content="" IsChecked="{Binding DefaultIsClosed}" Style="{StaticResource CheckBoxStyleKey}" Grid.Row="2" Grid.Column="1"/>
-                    <TextBlock Text="{x:Static p:Resources.OptionsDefaultIsSmoothJoin}" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="3" Grid.Column="0"/>
+                    <TextBlock Text="IsSmoothJoin" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="3" Grid.Column="0"/>
                     <CheckBox Content="" IsChecked="{Binding DefaultIsSmoothJoin}" Style="{StaticResource CheckBoxStyleKey}" Grid.Row="3" Grid.Column="1"/>
-                    <TextBlock Text="{x:Static p:Resources.OptionsDefaultFillRule}" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="4" Grid.Column="0"/>
+                    <TextBlock Text="FillRule" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="4" Grid.Column="0"/>
                     <ComboBox ItemsSource="{x:Static Editor:Enums.XFillRuleValues}" SelectedItem="{Binding DefaultFillRule}" Style="{StaticResource ComboBoxStyleKey}" Grid.Row="4" Grid.Column="1"/>
                 </Grid>
             </ScrollViewer>
         </TabItem>
-        <TabItem Header="{x:Static p:Resources.OptionsHeaderAdvanced}">
+        <TabItem Header="Advanced">
             <TabControl>
                 <TabItem x:Name="pointShape" Header="PointShape">
                     <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">

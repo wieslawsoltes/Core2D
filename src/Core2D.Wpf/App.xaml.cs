@@ -4,9 +4,16 @@ using System;
 using System.Linq;
 using System.Windows;
 using Autofac;
+using Core2D.Containers;
+using Core2D.Data;
 using Core2D.Editor;
 using Core2D.Interfaces;
+using Core2D.Shape;
+using Core2D.Shapes;
+using Core2D.Style;
+using Core2D.Wpf.Editor;
 using Core2D.Wpf.Modules;
+using Dock.Model;
 
 namespace Core2D.Wpf
 {
@@ -35,6 +42,7 @@ namespace Core2D.Wpf
             {
                 using (var log = container.Resolve<ILog>())
                 {
+                    ProjectEditorCommands.Initialize(container.Resolve<IServiceProvider>());
                     Start(container.Resolve<IServiceProvider>());
                 }
             }
@@ -44,24 +52,27 @@ namespace Core2D.Wpf
         /// Initialize application context and displays main window.
         /// </summary>
         /// <param name="serviceProvider">The service provider.</param>
-        private void Start(IServiceProvider serviceProvider)
+        public void Start(IServiceProvider serviceProvider)
         {
             var log = serviceProvider.GetService<ILog>();
             var fileIO = serviceProvider.GetService<IFileSystem>();
 
-            log?.Initialize(System.IO.Path.Combine(fileIO.GetAssemblyPath(null), "Core2D.log"));
+            log?.Initialize(System.IO.Path.Combine(fileIO.GetBaseDirectory(), "Core2D.log"));
 
             try
             {
                 var editor = serviceProvider.GetService<ProjectEditor>();
 
-                var path = System.IO.Path.Combine(fileIO.GetAssemblyPath(null), "Core2D.recent");
+                var dockFactory = serviceProvider.GetService<IDockFactory>();
+                editor.Layout = editor.Layout ?? dockFactory.CreateLayout();
+                dockFactory.InitLayout(editor.Layout, editor);
+
+                var path = System.IO.Path.Combine(fileIO.GetBaseDirectory(), "Core2D.recent");
                 if (fileIO.Exists(path))
                 {
                     editor.OnLoadRecent(path);
                 }
 
-                editor.CurrentView = editor.Views.FirstOrDefault(v => v.Title == "Dashboard");
                 editor.CurrentTool = editor.Tools.FirstOrDefault(t => t.Title == "Selection");
                 editor.CurrentPathTool = editor.PathTools.FirstOrDefault(t => t.Title == "Line");
                 editor.IsToolIdle = true;
