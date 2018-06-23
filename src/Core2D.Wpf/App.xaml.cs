@@ -4,8 +4,14 @@ using System;
 using System.Linq;
 using System.Windows;
 using Autofac;
+using Core2D.Containers;
+using Core2D.Data;
 using Core2D.Editor;
 using Core2D.Interfaces;
+using Core2D.Shape;
+using Core2D.Shapes;
+using Core2D.Style;
+using Core2D.Wpf.Editor;
 using Core2D.Wpf.Modules;
 
 namespace Core2D.Wpf
@@ -35,6 +41,7 @@ namespace Core2D.Wpf
             {
                 using (var log = container.Resolve<ILog>())
                 {
+                    ProjectEditorCommands.Initialize(container.Resolve<IServiceProvider>());
                     Start(container.Resolve<IServiceProvider>());
                 }
             }
@@ -44,7 +51,7 @@ namespace Core2D.Wpf
         /// Initialize application context and displays main window.
         /// </summary>
         /// <param name="serviceProvider">The service provider.</param>
-        private void Start(IServiceProvider serviceProvider)
+        public void Start(IServiceProvider serviceProvider)
         {
             var log = serviceProvider.GetService<ILog>();
             var fileIO = serviceProvider.GetService<IFileSystem>();

@@ -19,6 +19,7 @@ namespace Core2D.Wpf.Modules
             builder.RegisterType<Win32ImageImporter>().As<IImageImporter>().InstancePerLifetimeScope();
             builder.RegisterType<WpfProjectEditorPlatform>().As<IProjectEditorPlatform>().InstancePerLifetimeScope();
             builder.RegisterType<WpfEditorCanvasPlatform>().As<IEditorCanvasPlatform>().InstancePerLifetimeScope();
+            builder.RegisterType<WpfEditorLayoutPlatform>().As<IEditorLayoutPlatform>().InstancePerLifetimeScope();
         }
     }
 }

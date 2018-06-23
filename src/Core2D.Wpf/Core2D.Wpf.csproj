@@ -62,6 +62,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Compile Include="Editor\WpfEditorLayoutPlatform.cs" />
     <Compile Include="Editor\Command.cs" />
     <Compile Include="Editor\ProjectEditorCommands.cs" />
     <Compile Include="Editor\WpfEditorCanvasPlatform.cs" />

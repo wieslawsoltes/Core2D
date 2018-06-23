@@ -13,8 +13,10 @@ namespace Core2D.Wpf.Editor
         private readonly Func<object, bool> _canExecute;
         private readonly Action<object> _execute;
 
+#pragma warning disable CS0067
         /// <inheritdoc/>
         public event EventHandler CanExecuteChanged;
+#pragma warning restore CS0067
 
         /// <summary>
         /// Initialize new instance of <see cref="Command"/> class.

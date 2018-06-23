@@ -87,10 +87,10 @@ namespace Core2D.Avalonia.Views
 
             if (_projectEditor != null && _containerControl != null && _zoomBorder != null)
             {
-                _projectEditor.Canvas.Invalidate = () => _containerControl.InvalidateVisual();
-                _projectEditor.Canvas.ResetZoom = () => _zoomBorder.Reset();
-                _projectEditor.Canvas.AutoFitZoom = () => _zoomBorder.AutoFit();
-                _projectEditor.Canvas.Zoom = _zoomBorder;
+                _projectEditor.CanvasPlatform.Invalidate = () => _containerControl.InvalidateVisual();
+                _projectEditor.CanvasPlatform.ResetZoom = () => _zoomBorder.Reset();
+                _projectEditor.CanvasPlatform.AutoFitZoom = () => _zoomBorder.AutoFit();
+                _projectEditor.CanvasPlatform.Zoom = _zoomBorder;
 
                 _zoomBorder.InvalidatedChild = InvalidateChild;
 
@@ -110,10 +110,10 @@ namespace Core2D.Avalonia.Views
         {
             if (_projectEditor != null && _containerControl != null && _zoomBorder != null)
             {
-                _projectEditor.Canvas.Invalidate = null;
-                _projectEditor.Canvas.ResetZoom = null;
-                _projectEditor.Canvas.AutoFitZoom = null;
-                _projectEditor.Canvas.Zoom = null;
+                _projectEditor.CanvasPlatform.Invalidate = null;
+                _projectEditor.CanvasPlatform.ResetZoom = null;
+                _projectEditor.CanvasPlatform.AutoFitZoom = null;
+                _projectEditor.CanvasPlatform.Zoom = null;
 
                 _zoomBorder.InvalidatedChild = null;
 

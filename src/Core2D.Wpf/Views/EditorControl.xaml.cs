@@ -224,14 +224,13 @@ namespace Core2D.Wpf.Views
 
             if (_projectEditor != null)
             {
-                _projectEditor.Canvas.Invalidate = () => { };
-                _projectEditor.Canvas.ResetZoom = () => zoomBorder.Reset();
-                _projectEditor.Canvas.AutoFitZoom = () => zoomBorder.AutoFit();
+                _projectEditor.CanvasPlatform.Invalidate = () => { };
+                _projectEditor.CanvasPlatform.ResetZoom = () => zoomBorder.Reset();
+                _projectEditor.CanvasPlatform.AutoFitZoom = () => zoomBorder.AutoFit();
 
-                // TODO:
-                //_projectEditor.LoadLayout = () => OnLoadLayout();
-                //_projectEditor.SaveLayout = () => OnSaveLayout();
-                //_projectEditor.ResetLayout = () => OnResetLayout();
+                _projectEditor.LayoutPlatform.LoadLayout = () => OnLoadLayout();
+                _projectEditor.LayoutPlatform.SaveLayout = () => OnSaveLayout();
+                _projectEditor.LayoutPlatform.ResetLayout = () => OnResetLayout();
 
                 zoomBorder.InvalidatedChild = InvalidateChild;
 
@@ -255,14 +254,13 @@ namespace Core2D.Wpf.Views
         {
             if (_projectEditor != null)
             {
-                _projectEditor.Canvas.Invalidate = null;
-                _projectEditor.Canvas.ResetZoom = null;
-                _projectEditor.Canvas.AutoFitZoom = null;
+                _projectEditor.CanvasPlatform.Invalidate = null;
+                _projectEditor.CanvasPlatform.ResetZoom = null;
+                _projectEditor.CanvasPlatform.AutoFitZoom = null;
 
-                // TODO:
-                //_projectEditor.LoadLayout = null;
-                //_projectEditor.SaveLayout = null;
-                //_projectEditor.ResetLayout = null;
+                _projectEditor.LayoutPlatform.LoadLayout = null;
+                _projectEditor.LayoutPlatform.SaveLayout = null;
+                _projectEditor.LayoutPlatform.ResetLayout = null;
 
                 zoomBorder.InvalidatedChild = null;
 
