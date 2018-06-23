@@ -8,7 +8,7 @@
         xmlns:local="clr-namespace:Core2D.Wpf" 
         xmlns:converters="clr-namespace:Core2D.Wpf.Converters" 
         xmlns:designer="clr-namespace:Core2D.Wpf.Designer"
-        xmlns:Editor="clr-namespace:Core2D.Editor;assembly=Core2D.Editor" 
+        xmlns:editor="clr-namespace:Core2D.Wpf.Editor"
         xmlns:Views="clr-namespace:Core2D.Avalonia.Dock.Views;assembly=Core2D.Avalonia" 
         xmlns:views="clr-namespace:Core2D.Wpf.Views"
         xmlns:p="clr-namespace:Core2D.Wpf.Properties" 
@@ -26,24 +26,24 @@
         </MultiBinding>
     </Window.Title>
     <Window.InputBindings>
-        <KeyBinding Command="{x:Static Editor:ProjectEditorCommands.NewCommand}" CommandParameter="{Binding}" Gesture="Ctrl+N"/>
-        <KeyBinding Command="{x:Static Editor:ProjectEditorCommands.OpenCommand}" Gesture="Ctrl+O"/>
-        <KeyBinding Command="{x:Static Editor:ProjectEditorCommands.CloseCommand}" Gesture="Ctrl+F4"/>
-        <KeyBinding Command="{x:Static Editor:ProjectEditorCommands.SaveCommand}" Gesture="Ctrl+S"/>
-        <KeyBinding Command="{x:Static Editor:ProjectEditorCommands.SaveAsCommand}" Gesture="Ctrl+Shift+S"/>
-        <KeyBinding Command="{x:Static Editor:ProjectEditorCommands.ImportXamlCommand}" Gesture="Ctrl+Shift+X"/>
-        <KeyBinding Command="{x:Static Editor:ProjectEditorCommands.ImportJsonCommand}" Gesture="Ctrl+Shift+J"/>
-        <KeyBinding Command="{x:Static Editor:ProjectEditorCommands.ExportCommand}" Gesture="Ctrl+E"/>
-        <KeyBinding Command="{x:Static Editor:ProjectEditorCommands.ExitCommand}" Gesture="Alt+F4"/>
-        <KeyBinding Command="{x:Static Editor:ProjectEditorCommands.UndoCommand}" Gesture="Ctrl+Z"/>
-        <KeyBinding Command="{x:Static Editor:ProjectEditorCommands.RedoCommand}" Gesture="Ctrl+Y"/>
-        <KeyBinding Command="{x:Static Editor:ProjectEditorCommands.CopyAsEmfCommand}" Gesture="Ctrl+Shift+C"/>
-        <KeyBinding Command="{x:Static Editor:ProjectEditorCommands.CutCommand}" Gesture="Ctrl+X"/>
-        <KeyBinding Command="{x:Static Editor:ProjectEditorCommands.CopyCommand}" Gesture="Ctrl+C"/>
-        <KeyBinding Command="{x:Static Editor:ProjectEditorCommands.PasteCommand}" Gesture="Ctrl+V"/>
-        <KeyBinding Command="{x:Static Editor:ProjectEditorCommands.SelectAllCommand}" Gesture="Ctrl+A"/>
-        <KeyBinding Command="{x:Static Editor:ProjectEditorCommands.GroupCommand}" Gesture="Ctrl+G"/>
-        <KeyBinding Command="{x:Static Editor:ProjectEditorCommands.UngroupCommand}" Gesture="Ctrl+U"/>
+        <KeyBinding Command="{x:Static editor:ProjectEditorCommands.NewCommand}" CommandParameter="{Binding}" Gesture="Ctrl+N"/>
+        <KeyBinding Command="{x:Static editor:ProjectEditorCommands.OpenCommand}" Gesture="Ctrl+O"/>
+        <KeyBinding Command="{x:Static editor:ProjectEditorCommands.CloseCommand}" Gesture="Ctrl+F4"/>
+        <KeyBinding Command="{x:Static editor:ProjectEditorCommands.SaveCommand}" Gesture="Ctrl+S"/>
+        <KeyBinding Command="{x:Static editor:ProjectEditorCommands.SaveAsCommand}" Gesture="Ctrl+Shift+S"/>
+        <KeyBinding Command="{x:Static editor:ProjectEditorCommands.ImportXamlCommand}" Gesture="Ctrl+Shift+X"/>
+        <KeyBinding Command="{x:Static editor:ProjectEditorCommands.ImportJsonCommand}" Gesture="Ctrl+Shift+J"/>
+        <KeyBinding Command="{x:Static editor:ProjectEditorCommands.ExportCommand}" Gesture="Ctrl+E"/>
+        <KeyBinding Command="{x:Static editor:ProjectEditorCommands.ExitCommand}" Gesture="Alt+F4"/>
+        <KeyBinding Command="{x:Static editor:ProjectEditorCommands.UndoCommand}" Gesture="Ctrl+Z"/>
+        <KeyBinding Command="{x:Static editor:ProjectEditorCommands.RedoCommand}" Gesture="Ctrl+Y"/>
+        <KeyBinding Command="{x:Static editor:ProjectEditorCommands.CopyAsEmfCommand}" Gesture="Ctrl+Shift+C"/>
+        <KeyBinding Command="{x:Static editor:ProjectEditorCommands.CutCommand}" Gesture="Ctrl+X"/>
+        <KeyBinding Command="{x:Static editor:ProjectEditorCommands.CopyCommand}" Gesture="Ctrl+C"/>
+        <KeyBinding Command="{x:Static editor:ProjectEditorCommands.PasteCommand}" Gesture="Ctrl+V"/>
+        <KeyBinding Command="{x:Static editor:ProjectEditorCommands.SelectAllCommand}" Gesture="Ctrl+A"/>
+        <KeyBinding Command="{x:Static editor:ProjectEditorCommands.GroupCommand}" Gesture="Ctrl+G"/>
+        <KeyBinding Command="{x:Static editor:ProjectEditorCommands.UngroupCommand}" Gesture="Ctrl+U"/>
     </Window.InputBindings>
     <ContentControl Content="{Binding CurrentView, Mode=TwoWay}">
         <ContentControl.Resources>
@@ -59,7 +59,7 @@
                     <views:DashboardControl Grid.Row="2"/>
                 </Grid>
             </DataTemplate>
-            <DataTemplate DataType="{x:Type Views:EditorView}">
+            <DataTemplate DataType="{x:Type Views:EditorControl}">
                 <Grid FocusVisualStyle="{x:Null}" DataContext="{Binding Context}">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>

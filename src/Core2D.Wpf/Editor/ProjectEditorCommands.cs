@@ -1,0 +1,113 @@
+﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
+// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using System.Windows.Input;
+
+namespace Core2D.Wpf.Editor
+{
+    public static class ProjectEditorCommands
+    {
+        public static ICommand NewCommand { get; set; }
+        public static ICommand OpenCommand { get; set; }
+        public static ICommand CloseCommand { get; set; }
+        public static ICommand SaveCommand { get; set; }
+        public static ICommand SaveAsCommand { get; set; }
+        public static ICommand ExecuteScriptCommand { get; set; }
+        public static ICommand ImportObjectCommand { get; set; }
+        public static ICommand ExportObjectCommand { get; set; }
+        public static ICommand ImportXamlCommand { get; set; }
+        public static ICommand ExportXamlCommand { get; set; }
+        public static ICommand ImportJsonCommand { get; set; }
+        public static ICommand ExportJsonCommand { get; set; }
+        public static ICommand ExportCommand { get; set; }
+        public static ICommand ExitCommand { get; set; }
+        public static ICommand ImportDataCommand { get; set; }
+        public static ICommand ExportDataCommand { get; set; }
+        public static ICommand UpdateDataCommand { get; set; }
+        public static ICommand UndoCommand { get; set; }
+        public static ICommand RedoCommand { get; set; }
+        public static ICommand CopyAsEmfCommand { get; set; }
+        public static ICommand CutCommand { get; set; }
+        public static ICommand CopyCommand { get; set; }
+        public static ICommand PasteCommand { get; set; }
+        public static ICommand DeleteCommand { get; set; }
+        public static ICommand SelectAllCommand { get; set; }
+        public static ICommand DeselectAllCommand { get; set; }
+        public static ICommand ClearAllCommand { get; set; }
+        public static ICommand GroupCommand { get; set; }
+        public static ICommand UngroupCommand { get; set; }
+        public static ICommand BringToFrontCommand { get; set; }
+        public static ICommand BringForwardCommand { get; set; }
+        public static ICommand SendBackwardCommand { get; set; }
+        public static ICommand SendToBackCommand { get; set; }
+        public static ICommand MoveUpCommand { get; set; }
+        public static ICommand MoveDownCommand { get; set; }
+        public static ICommand MoveLeftCommand { get; set; }
+        public static ICommand MoveRightCommand { get; set; }
+        public static ICommand ToolNoneCommand { get; set; }
+        public static ICommand ToolSelectionCommand { get; set; }
+        public static ICommand ToolPointCommand { get; set; }
+        public static ICommand ToolLineCommand { get; set; }
+        public static ICommand ToolArcCommand { get; set; }
+        public static ICommand ToolCubicBezierCommand { get; set; }
+        public static ICommand ToolQuadraticBezierCommand { get; set; }
+        public static ICommand ToolPathCommand { get; set; }
+        public static ICommand ToolRectangleCommand { get; set; }
+        public static ICommand ToolEllipseCommand { get; set; }
+        public static ICommand ToolTextCommand { get; set; }
+        public static ICommand ToolImageCommand { get; set; }
+        public static ICommand ToolMoveCommand { get; set; }
+        public static ICommand DefaultIsStrokedCommand { get; set; }
+        public static ICommand DefaultIsFilledCommand { get; set; }
+        public static ICommand DefaultIsClosedCommand { get; set; }
+        public static ICommand DefaultIsSmoothJoinCommand { get; set; }
+        public static ICommand SnapToGridCommand { get; set; }
+        public static ICommand TryToConnectCommand { get; set; }
+        public static ICommand CloneStyleCommand { get; set; }
+        public static ICommand AddDatabaseCommand { get; set; }
+        public static ICommand RemoveDatabaseCommand { get; set; }
+        public static ICommand AddColumnCommand { get; set; }
+        public static ICommand RemoveColumnCommand { get; set; }
+        public static ICommand AddRecordCommand { get; set; }
+        public static ICommand RemoveRecordCommand { get; set; }
+        public static ICommand ResetRecordCommand { get; set; }
+        public static ICommand ApplyRecordCommand { get; set; }
+        public static ICommand AddShapeCommand { get; set; }
+        public static ICommand RemoveShapeCommand { get; set; }
+        public static ICommand AddPropertyCommand { get; set; }
+        public static ICommand RemovePropertyCommand { get; set; }
+        public static ICommand AddGroupLibraryCommand { get; set; }
+        public static ICommand RemoveGroupLibraryCommand { get; set; }
+        public static ICommand AddGroupCommand { get; set; }
+        public static ICommand RemoveGroupCommand { get; set; }
+        public static ICommand InsertGroupCommand { get; set; }
+        public static ICommand AddLayerCommand { get; set; }
+        public static ICommand RemoveLayerCommand { get; set; }
+        public static ICommand AddStyleLibraryCommand { get; set; }
+        public static ICommand RemoveStyleLibraryCommand { get; set; }
+        public static ICommand AddStyleCommand { get; set; }
+        public static ICommand RemoveStyleCommand { get; set; }
+        public static ICommand ApplyStyleCommand { get; set; }
+        public static ICommand AddTemplateCommand { get; set; }
+        public static ICommand RemoveTemplateCommand { get; set; }
+        public static ICommand EditTemplateCommand { get; set; }
+        public static ICommand ApplyTemplateCommand { get; set; }
+        public static ICommand AddImageKeyCommand { get; set; }
+        public static ICommand RemoveImageKeyCommand { get; set; }
+        public static ICommand SelectedItemChangedCommand { get; set; }
+        public static ICommand AddPageCommand { get; set; }
+        public static ICommand InsertPageBeforeCommand { get; set; }
+        public static ICommand InsertPageAfterCommand { get; set; }
+        public static ICommand AddDocumentCommand { get; set; }
+        public static ICommand InsertDocumentBeforeCommand { get; set; }
+        public static ICommand InsertDocumentAfterCommand { get; set; }
+        public static ICommand ZoomResetCommand { get; set; }
+        public static ICommand ZoomAutoFitCommand { get; set; }
+        public static ICommand LoadWindowLayoutCommand { get; set; }
+        public static ICommand SaveWindowLayoutCommand { get; set; }
+        public static ICommand ResetWindowLayoutCommand { get; set; }
+        public static ICommand ObjectBrowserCommand { get; set; }
+        public static ICommand DocumentViewerCommand { get; set; }
+        public static ICommand AboutDialogCommand { get; set; }
+        public static ICommand ChangeCurrentViewCommand { get; set; }
+    }
+}

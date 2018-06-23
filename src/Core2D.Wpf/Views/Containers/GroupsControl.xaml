@@ -8,7 +8,7 @@
              xmlns:local="clr-namespace:Core2D.Wpf" 
              xmlns:converters="clr-namespace:Core2D.Wpf.Converters" 
              xmlns:designer="clr-namespace:Core2D.Wpf.Designer"
-             xmlns:Editor="clr-namespace:Core2D.Editor;assembly=Core2D.Editor"
+             xmlns:editor="clr-namespace:Core2D.Wpf.Editor"
              xmlns:custom="clr-namespace:Core2D.Wpf.Views.Custom"
              xmlns:lists="clr-namespace:Core2D.Wpf.Views.Custom.Lists"
              mc:Ignorable="d" 
@@ -18,15 +18,15 @@
         <Grid.Resources>
             <ControlTemplate x:Key="GroupLibrariesMenu">
                 <Menu Background="Transparent" HorizontalAlignment="Right">
-                    <MenuItem Command="{x:Static Editor:ProjectEditorCommands.AddGroupLibraryCommand}" Header="+"/>
-                    <MenuItem Command="{x:Static Editor:ProjectEditorCommands.RemoveGroupLibraryCommand}" CommandParameter="{Binding CurrentGroupLibrary}" Header="-"/>
+                    <MenuItem Command="{x:Static editor:ProjectEditorCommands.AddGroupLibraryCommand}" Header="+"/>
+                    <MenuItem Command="{x:Static editor:ProjectEditorCommands.RemoveGroupLibraryCommand}" CommandParameter="{Binding CurrentGroupLibrary}" Header="-"/>
                 </Menu>
             </ControlTemplate>
             <ControlTemplate x:Key="GroupsMenu">
                 <Menu Background="Transparent" HorizontalAlignment="Right">
-                    <MenuItem Header="insert" Command="{x:Static Editor:ProjectEditorCommands.InsertGroupCommand}" CommandParameter="{Binding CurrentGroupLibrary.Selected}"/>
-                    <MenuItem Command="{x:Static Editor:ProjectEditorCommands.AddGroupCommand}" CommandParameter="{Binding CurrentGroupLibrary}" Header="+"/>
-                    <MenuItem Command="{x:Static Editor:ProjectEditorCommands.RemoveGroupCommand}" CommandParameter="{Binding CurrentGroupLibrary.Selected}" Header="-"/>
+                    <MenuItem Header="insert" Command="{x:Static editor:ProjectEditorCommands.InsertGroupCommand}" CommandParameter="{Binding CurrentGroupLibrary.Selected}"/>
+                    <MenuItem Command="{x:Static editor:ProjectEditorCommands.AddGroupCommand}" CommandParameter="{Binding CurrentGroupLibrary}" Header="+"/>
+                    <MenuItem Command="{x:Static editor:ProjectEditorCommands.RemoveGroupCommand}" CommandParameter="{Binding CurrentGroupLibrary.Selected}" Header="-"/>
                 </Menu>
             </ControlTemplate>
         </Grid.Resources>
@@ -65,17 +65,17 @@
         <lists:GroupShapeDragAndDropListBox x:Name="groupsListBox" DataContext="{Binding CurrentGroupLibrary.Items}" Tag="{Binding DataContext, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" ItemsSource="{Binding}" SelectedItem="{Binding DataContext.CurrentGroupLibrary.Selected, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" BorderBrush="{x:Null}" HorizontalContentAlignment="Stretch" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2">
             <lists:GroupShapeDragAndDropListBox.Resources>
                 <ContextMenu x:Key="GroupContextMenu" DataContext="{Binding PlacementTarget.DataContext, RelativeSource={RelativeSource Self}}">
-                    <MenuItem Header="_Add Group" InputGestureText="Ctrl+N" Command="{x:Static Editor:ProjectEditorCommands.AddGroupCommand}" CommandParameter="{Binding DataContext.CurrentGroupLibrary, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}"/>
+                    <MenuItem Header="_Add Group" InputGestureText="Ctrl+N" Command="{x:Static editor:ProjectEditorCommands.AddGroupCommand}" CommandParameter="{Binding DataContext.CurrentGroupLibrary, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}"/>
                     <Separator/>
-                    <MenuItem Header="_Delete" InputGestureText="Del" Command="{x:Static Editor:ProjectEditorCommands.RemoveGroupCommand}" CommandParameter="{Binding}"/>
+                    <MenuItem Header="_Delete" InputGestureText="Del" Command="{x:Static editor:ProjectEditorCommands.RemoveGroupCommand}" CommandParameter="{Binding}"/>
                     <Separator/>
-                    <MenuItem Header="E_xport" InputGestureText="Ctrl+E" Command="{x:Static Editor:ProjectEditorCommands.ExportObjectCommand}" CommandParameter="{Binding}"/>
+                    <MenuItem Header="E_xport" InputGestureText="Ctrl+E" Command="{x:Static editor:ProjectEditorCommands.ExportObjectCommand}" CommandParameter="{Binding}"/>
                 </ContextMenu>
             </lists:GroupShapeDragAndDropListBox.Resources>
             <lists:GroupShapeDragAndDropListBox.InputBindings>
-                <KeyBinding Command="{x:Static Editor:ProjectEditorCommands.AddGroupCommand}" CommandParameter="{Binding DataContext.CurrentGroupLibrary, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" Gesture="Ctrl+N"/>
-                <KeyBinding Command="{x:Static Editor:ProjectEditorCommands.RemoveGroupCommand}" CommandParameter="{Binding Path=SelectedItem, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type lists:GroupShapeDragAndDropListBox}}}" Gesture="Del"/>
-                <KeyBinding Command="{x:Static Editor:ProjectEditorCommands.ExportObjectCommand}" CommandParameter="{Binding Path=SelectedItem, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type lists:GroupShapeDragAndDropListBox}}}" Gesture="Ctrl+E"/>
+                <KeyBinding Command="{x:Static editor:ProjectEditorCommands.AddGroupCommand}" CommandParameter="{Binding DataContext.CurrentGroupLibrary, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" Gesture="Ctrl+N"/>
+                <KeyBinding Command="{x:Static editor:ProjectEditorCommands.RemoveGroupCommand}" CommandParameter="{Binding Path=SelectedItem, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type lists:GroupShapeDragAndDropListBox}}}" Gesture="Del"/>
+                <KeyBinding Command="{x:Static editor:ProjectEditorCommands.ExportObjectCommand}" CommandParameter="{Binding Path=SelectedItem, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type lists:GroupShapeDragAndDropListBox}}}" Gesture="Ctrl+E"/>
             </lists:GroupShapeDragAndDropListBox.InputBindings>
             <lists:GroupShapeDragAndDropListBox.ItemContainerStyle>
                 <Style TargetType="ListBoxItem">

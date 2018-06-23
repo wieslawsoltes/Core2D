@@ -8,7 +8,7 @@
              xmlns:local="clr-namespace:Core2D.Wpf" 
              xmlns:converters="clr-namespace:Core2D.Wpf.Converters" 
              xmlns:designer="clr-namespace:Core2D.Wpf.Designer"
-             xmlns:Editor="clr-namespace:Core2D.Editor;assembly=Core2D.Editor"  
+             xmlns:editor="clr-namespace:Core2D.Wpf.Editor"  
              xmlns:custom="clr-namespace:Core2D.Wpf.Views.Custom"
              xmlns:p="clr-namespace:Core2D.Wpf.Properties" 
              mc:Ignorable="d" 
@@ -104,25 +104,25 @@
         <StatusBarItem Grid.Column="2">
             <StatusBarItem.ContextMenu>
                 <ContextMenu>
-                    <MenuItem Header="{x:Static p:Resources.MenuToolNone}" Command="{x:Static Editor:ProjectEditorCommands.ToolNoneCommand}" IsCheckable="False" IsChecked="{Binding Path=CurrentTool.Title, Mode=OneWay, Converter={StaticResource ObjectEqualsConverter}, ConverterParameter=None}" InputGestureText="N"/>
+                    <MenuItem Header="{x:Static p:Resources.MenuToolNone}" Command="{x:Static editor:ProjectEditorCommands.ToolNoneCommand}" IsCheckable="False" IsChecked="{Binding Path=CurrentTool.Title, Mode=OneWay, Converter={StaticResource ObjectEqualsConverter}, ConverterParameter=None}" InputGestureText="N"/>
                     <Separator/>
-                    <MenuItem Header="{x:Static p:Resources.MenuToolSelection}" Command="{x:Static Editor:ProjectEditorCommands.ToolSelectionCommand}" IsCheckable="False" IsChecked="{Binding Path=CurrentTool.Title, Mode=OneWay, Converter={StaticResource ObjectEqualsConverter}, ConverterParameter=Selection}" InputGestureText="S"/>
+                    <MenuItem Header="{x:Static p:Resources.MenuToolSelection}" Command="{x:Static editor:ProjectEditorCommands.ToolSelectionCommand}" IsCheckable="False" IsChecked="{Binding Path=CurrentTool.Title, Mode=OneWay, Converter={StaticResource ObjectEqualsConverter}, ConverterParameter=Selection}" InputGestureText="S"/>
                     <Separator/>
-                    <MenuItem Header="{x:Static p:Resources.MenuToolPoint}" Command="{x:Static Editor:ProjectEditorCommands.ToolPointCommand}" IsCheckable="False" IsChecked="{Binding Path=CurrentTool.Title, Mode=OneWay, Converter={StaticResource ObjectEqualsConverter}, ConverterParameter=Point}" InputGestureText="P"/>
+                    <MenuItem Header="{x:Static p:Resources.MenuToolPoint}" Command="{x:Static editor:ProjectEditorCommands.ToolPointCommand}" IsCheckable="False" IsChecked="{Binding Path=CurrentTool.Title, Mode=OneWay, Converter={StaticResource ObjectEqualsConverter}, ConverterParameter=Point}" InputGestureText="P"/>
                     <Separator/>
-                    <MenuItem Header="{x:Static p:Resources.MenuToolLine}" Command="{x:Static Editor:ProjectEditorCommands.ToolLineCommand}" IsCheckable="False" IsChecked="{Binding Path=CurrentTool.Title, Mode=OneWay, Converter={StaticResource ObjectEqualsConverter}, ConverterParameter=Line}" InputGestureText="L"/>
-                    <MenuItem Header="{x:Static p:Resources.MenuToolArc}" Command="{x:Static Editor:ProjectEditorCommands.ToolArcCommand}" IsCheckable="False" IsChecked="{Binding Path=CurrentTool.Title, Mode=OneWay, Converter={StaticResource ObjectEqualsConverter}, ConverterParameter=Arc}" InputGestureText="A"/>
-                    <MenuItem Header="{x:Static p:Resources.MenuToolCubicBezier}" Command="{x:Static Editor:ProjectEditorCommands.ToolCubicBezierCommand}" IsCheckable="False" IsChecked="{Binding Path=CurrentTool.Title, Mode=OneWay, Converter={StaticResource ObjectEqualsConverter}, ConverterParameter=CubicBezier}" InputGestureText="B"/>
-                    <MenuItem Header="{x:Static p:Resources.MenuToolQuadraticBezier}" Command="{x:Static Editor:ProjectEditorCommands.ToolQuadraticBezierCommand}" IsCheckable="False" IsChecked="{Binding Path=CurrentTool.Title, Mode=OneWay, Converter={StaticResource ObjectEqualsConverter}, ConverterParameter=QuadraticBezier}" InputGestureText="Q"/>
+                    <MenuItem Header="{x:Static p:Resources.MenuToolLine}" Command="{x:Static editor:ProjectEditorCommands.ToolLineCommand}" IsCheckable="False" IsChecked="{Binding Path=CurrentTool.Title, Mode=OneWay, Converter={StaticResource ObjectEqualsConverter}, ConverterParameter=Line}" InputGestureText="L"/>
+                    <MenuItem Header="{x:Static p:Resources.MenuToolArc}" Command="{x:Static editor:ProjectEditorCommands.ToolArcCommand}" IsCheckable="False" IsChecked="{Binding Path=CurrentTool.Title, Mode=OneWay, Converter={StaticResource ObjectEqualsConverter}, ConverterParameter=Arc}" InputGestureText="A"/>
+                    <MenuItem Header="{x:Static p:Resources.MenuToolCubicBezier}" Command="{x:Static editor:ProjectEditorCommands.ToolCubicBezierCommand}" IsCheckable="False" IsChecked="{Binding Path=CurrentTool.Title, Mode=OneWay, Converter={StaticResource ObjectEqualsConverter}, ConverterParameter=CubicBezier}" InputGestureText="B"/>
+                    <MenuItem Header="{x:Static p:Resources.MenuToolQuadraticBezier}" Command="{x:Static editor:ProjectEditorCommands.ToolQuadraticBezierCommand}" IsCheckable="False" IsChecked="{Binding Path=CurrentTool.Title, Mode=OneWay, Converter={StaticResource ObjectEqualsConverter}, ConverterParameter=QuadraticBezier}" InputGestureText="Q"/>
                     <Separator/>
-                    <MenuItem Header="{x:Static p:Resources.MenuToolPath}" Command="{x:Static Editor:ProjectEditorCommands.ToolPathCommand}" IsCheckable="False" IsChecked="{Binding Path=CurrentTool.Title, Mode=OneWay, Converter={StaticResource ObjectEqualsConverter}, ConverterParameter=Path}" InputGestureText="H"/>
+                    <MenuItem Header="{x:Static p:Resources.MenuToolPath}" Command="{x:Static editor:ProjectEditorCommands.ToolPathCommand}" IsCheckable="False" IsChecked="{Binding Path=CurrentTool.Title, Mode=OneWay, Converter={StaticResource ObjectEqualsConverter}, ConverterParameter=Path}" InputGestureText="H"/>
                     <Separator/>
-                    <MenuItem Header="{x:Static p:Resources.MenuToolRectangle}" Command="{x:Static Editor:ProjectEditorCommands.ToolRectangleCommand}" IsCheckable="False" IsChecked="{Binding Path=CurrentTool.Title, Mode=OneWay, Converter={StaticResource ObjectEqualsConverter}, ConverterParameter=Rectangle}" InputGestureText="R"/>
-                    <MenuItem Header="{x:Static p:Resources.MenuToolEllipse}" Command="{x:Static Editor:ProjectEditorCommands.ToolEllipseCommand}" IsCheckable="False" IsChecked="{Binding Path=CurrentTool.Title, Mode=OneWay, Converter={StaticResource ObjectEqualsConverter}, ConverterParameter=Ellipse}" InputGestureText="E"/>
+                    <MenuItem Header="{x:Static p:Resources.MenuToolRectangle}" Command="{x:Static editor:ProjectEditorCommands.ToolRectangleCommand}" IsCheckable="False" IsChecked="{Binding Path=CurrentTool.Title, Mode=OneWay, Converter={StaticResource ObjectEqualsConverter}, ConverterParameter=Rectangle}" InputGestureText="R"/>
+                    <MenuItem Header="{x:Static p:Resources.MenuToolEllipse}" Command="{x:Static editor:ProjectEditorCommands.ToolEllipseCommand}" IsCheckable="False" IsChecked="{Binding Path=CurrentTool.Title, Mode=OneWay, Converter={StaticResource ObjectEqualsConverter}, ConverterParameter=Ellipse}" InputGestureText="E"/>
                     <Separator/>
-                    <MenuItem Header="{x:Static p:Resources.MenuToolText}" Command="{x:Static Editor:ProjectEditorCommands.ToolTextCommand}" IsCheckable="False" IsChecked="{Binding Path=CurrentTool.Title, Mode=OneWay, Converter={StaticResource ObjectEqualsConverter}, ConverterParameter=Text}" InputGestureText="T"/>
+                    <MenuItem Header="{x:Static p:Resources.MenuToolText}" Command="{x:Static editor:ProjectEditorCommands.ToolTextCommand}" IsCheckable="False" IsChecked="{Binding Path=CurrentTool.Title, Mode=OneWay, Converter={StaticResource ObjectEqualsConverter}, ConverterParameter=Text}" InputGestureText="T"/>
                     <Separator/>
-                    <MenuItem Header="{x:Static p:Resources.MenuToolImage}" Command="{x:Static Editor:ProjectEditorCommands.ToolImageCommand}" IsCheckable="False" IsChecked="{Binding Path=CurrentTool.Title, Mode=OneWay, Converter={StaticResource ObjectEqualsConverter}, ConverterParameter=Image}" InputGestureText="I"/>
+                    <MenuItem Header="{x:Static p:Resources.MenuToolImage}" Command="{x:Static editor:ProjectEditorCommands.ToolImageCommand}" IsCheckable="False" IsChecked="{Binding Path=CurrentTool.Title, Mode=OneWay, Converter={StaticResource ObjectEqualsConverter}, ConverterParameter=Image}" InputGestureText="I"/>
                 </ContextMenu>
             </StatusBarItem.ContextMenu>
             <TextBlock VerticalAlignment="Center">
@@ -196,12 +196,12 @@
             </StatusBarItem.Style>
             <StatusBarItem.ContextMenu>
                 <ContextMenu>
-                    <MenuItem Header="{x:Static p:Resources.MenuPathToolLine}" Command="{x:Static Editor:ProjectEditorCommands.ToolLineCommand}" IsCheckable="False" IsChecked="{Binding Path=CurrentPathTool.Title, Mode=OneWay, Converter={StaticResource ObjectEqualsConverter}, ConverterParameter=Line}" InputGestureText="L"/>
-                    <MenuItem Header="{x:Static p:Resources.MenuPathToolArc}" Command="{x:Static Editor:ProjectEditorCommands.ToolArcCommand}" IsCheckable="False" IsChecked="{Binding Path=CurrentPathTool.Title, Mode=OneWay, Converter={StaticResource ObjectEqualsConverter}, ConverterParameter=Arc}" InputGestureText="A"/>
-                    <MenuItem Header="{x:Static p:Resources.MenuPathToolCubicBezier}" Command="{x:Static Editor:ProjectEditorCommands.ToolCubicBezierCommand}" IsCheckable="False" IsChecked="{Binding Path=CurrentPathTool.Title, Mode=OneWay, Converter={StaticResource ObjectEqualsConverter}, ConverterParameter=CubicBezier}" InputGestureText="B"/>
-                    <MenuItem Header="{x:Static p:Resources.MenuPathToolQuadraticBezier}" Command="{x:Static Editor:ProjectEditorCommands.ToolQuadraticBezierCommand}" IsCheckable="False" IsChecked="{Binding Path=CurrentPathTool.Title, Mode=OneWay, Converter={StaticResource ObjectEqualsConverter}, ConverterParameter=QuadraticBezier}" InputGestureText="Q"/>
+                    <MenuItem Header="{x:Static p:Resources.MenuPathToolLine}" Command="{x:Static editor:ProjectEditorCommands.ToolLineCommand}" IsCheckable="False" IsChecked="{Binding Path=CurrentPathTool.Title, Mode=OneWay, Converter={StaticResource ObjectEqualsConverter}, ConverterParameter=Line}" InputGestureText="L"/>
+                    <MenuItem Header="{x:Static p:Resources.MenuPathToolArc}" Command="{x:Static editor:ProjectEditorCommands.ToolArcCommand}" IsCheckable="False" IsChecked="{Binding Path=CurrentPathTool.Title, Mode=OneWay, Converter={StaticResource ObjectEqualsConverter}, ConverterParameter=Arc}" InputGestureText="A"/>
+                    <MenuItem Header="{x:Static p:Resources.MenuPathToolCubicBezier}" Command="{x:Static editor:ProjectEditorCommands.ToolCubicBezierCommand}" IsCheckable="False" IsChecked="{Binding Path=CurrentPathTool.Title, Mode=OneWay, Converter={StaticResource ObjectEqualsConverter}, ConverterParameter=CubicBezier}" InputGestureText="B"/>
+                    <MenuItem Header="{x:Static p:Resources.MenuPathToolQuadraticBezier}" Command="{x:Static editor:ProjectEditorCommands.ToolQuadraticBezierCommand}" IsCheckable="False" IsChecked="{Binding Path=CurrentPathTool.Title, Mode=OneWay, Converter={StaticResource ObjectEqualsConverter}, ConverterParameter=QuadraticBezier}" InputGestureText="Q"/>
                     <Separator/>
-                    <MenuItem Header="{x:Static p:Resources.MenuPathToolMove}" Command="{x:Static Editor:ProjectEditorCommands.ToolMoveCommand}" IsCheckable="False" IsChecked="{Binding Path=CurrentPathTool.Title, Mode=OneWay, Converter={StaticResource ObjectEqualsConverter}, ConverterParameter=Move}" InputGestureText="M"/>
+                    <MenuItem Header="{x:Static p:Resources.MenuPathToolMove}" Command="{x:Static editor:ProjectEditorCommands.ToolMoveCommand}" IsCheckable="False" IsChecked="{Binding Path=CurrentPathTool.Title, Mode=OneWay, Converter={StaticResource ObjectEqualsConverter}, ConverterParameter=Move}" InputGestureText="M"/>
                 </ContextMenu>
             </StatusBarItem.ContextMenu>
             <TextBlock VerticalAlignment="Center">

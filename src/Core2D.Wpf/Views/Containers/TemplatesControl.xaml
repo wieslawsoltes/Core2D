@@ -8,7 +8,7 @@
              xmlns:local="clr-namespace:Core2D.Wpf" 
              xmlns:converters="clr-namespace:Core2D.Wpf.Converters" 
              xmlns:designer="clr-namespace:Core2D.Wpf.Designer"
-             xmlns:Editor="clr-namespace:Core2D.Editor;assembly=Core2D.Editor"
+             xmlns:editor="clr-namespace:Core2D.Wpf.Editor"
              xmlns:custom="clr-namespace:Core2D.Wpf.Views.Custom"
              xmlns:lists="clr-namespace:Core2D.Wpf.Views.Custom.Lists"
              mc:Ignorable="d" 
@@ -18,10 +18,10 @@
         <Grid.Resources>
             <ControlTemplate x:Key="TemplatesMenu">
                 <Menu Background="Transparent" HorizontalAlignment="Right" Grid.Row="0" Margin="2,0,2,0">
-                    <MenuItem Header="apply" Command="{x:Static Editor:ProjectEditorCommands.ApplyTemplateCommand}" CommandParameter="{Binding CurrentTemplate}"/>
-                    <MenuItem Command="{x:Static Editor:ProjectEditorCommands.EditTemplateCommand}" CommandParameter="{Binding CurrentTemplate}" Header="edit"/>
-                    <MenuItem Command="{x:Static Editor:ProjectEditorCommands.AddTemplateCommand}" Header="+"/>
-                    <MenuItem Command="{x:Static Editor:ProjectEditorCommands.RemoveTemplateCommand}" CommandParameter="{Binding CurrentTemplate}" Header="-"/>
+                    <MenuItem Header="apply" Command="{x:Static editor:ProjectEditorCommands.ApplyTemplateCommand}" CommandParameter="{Binding CurrentTemplate}"/>
+                    <MenuItem Command="{x:Static editor:ProjectEditorCommands.EditTemplateCommand}" CommandParameter="{Binding CurrentTemplate}" Header="edit"/>
+                    <MenuItem Command="{x:Static editor:ProjectEditorCommands.AddTemplateCommand}" Header="+"/>
+                    <MenuItem Command="{x:Static editor:ProjectEditorCommands.RemoveTemplateCommand}" CommandParameter="{Binding CurrentTemplate}" Header="-"/>
                 </Menu>
             </ControlTemplate>
         </Grid.Resources>
@@ -34,19 +34,19 @@
         <lists:XTemplateDragAndDropListBox DataContext="{Binding Templates}" Tag="{Binding DataContext, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" ItemsSource="{Binding}" SelectedItem="{Binding DataContext.CurrentTemplate, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" BorderBrush="{x:Null}" HorizontalContentAlignment="Stretch" Grid.Row="1">
             <lists:XTemplateDragAndDropListBox.Resources>
                 <ContextMenu x:Key="TemplateContextMenu" DataContext="{Binding PlacementTarget.DataContext, RelativeSource={RelativeSource Self}}">
-                    <MenuItem Header="_Edit Template" InputGestureText="" Command="{x:Static Editor:ProjectEditorCommands.EditTemplateCommand}" CommandParameter="{Binding}"/>
+                    <MenuItem Header="_Edit Template" InputGestureText="" Command="{x:Static editor:ProjectEditorCommands.EditTemplateCommand}" CommandParameter="{Binding}"/>
                     <Separator/>
-                    <MenuItem Header="_Add Template" InputGestureText="Ctrl+N" Command="{x:Static Editor:ProjectEditorCommands.AddTemplateCommand}"/>
+                    <MenuItem Header="_Add Template" InputGestureText="Ctrl+N" Command="{x:Static editor:ProjectEditorCommands.AddTemplateCommand}"/>
                     <Separator/>
-                    <MenuItem Header="_Delete" InputGestureText="Del" Command="{x:Static Editor:ProjectEditorCommands.RemoveTemplateCommand}" CommandParameter="{Binding}"/>
+                    <MenuItem Header="_Delete" InputGestureText="Del" Command="{x:Static editor:ProjectEditorCommands.RemoveTemplateCommand}" CommandParameter="{Binding}"/>
                     <Separator/>
-                    <MenuItem Header="E_xport" InputGestureText="Ctrl+E" Command="{x:Static Editor:ProjectEditorCommands.ExportObjectCommand}" CommandParameter="{Binding}"/>
+                    <MenuItem Header="E_xport" InputGestureText="Ctrl+E" Command="{x:Static editor:ProjectEditorCommands.ExportObjectCommand}" CommandParameter="{Binding}"/>
                 </ContextMenu>
             </lists:XTemplateDragAndDropListBox.Resources>
             <lists:XTemplateDragAndDropListBox.InputBindings>
-                <KeyBinding Command="{x:Static Editor:ProjectEditorCommands.AddTemplateCommand}" Gesture="Ctrl+N"/>
-                <KeyBinding Command="{x:Static Editor:ProjectEditorCommands.RemoveTemplateCommand}" CommandParameter="{Binding Path=SelectedItem, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type lists:XTemplateDragAndDropListBox}}}" Gesture="Del"/>
-                <KeyBinding Command="{x:Static Editor:ProjectEditorCommands.ExportObjectCommand}" CommandParameter="{Binding Path=SelectedItem, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type lists:XTemplateDragAndDropListBox}}}" Gesture="Ctrl+E"/>
+                <KeyBinding Command="{x:Static editor:ProjectEditorCommands.AddTemplateCommand}" Gesture="Ctrl+N"/>
+                <KeyBinding Command="{x:Static editor:ProjectEditorCommands.RemoveTemplateCommand}" CommandParameter="{Binding Path=SelectedItem, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type lists:XTemplateDragAndDropListBox}}}" Gesture="Del"/>
+                <KeyBinding Command="{x:Static editor:ProjectEditorCommands.ExportObjectCommand}" CommandParameter="{Binding Path=SelectedItem, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type lists:XTemplateDragAndDropListBox}}}" Gesture="Ctrl+E"/>
             </lists:XTemplateDragAndDropListBox.InputBindings>
             <lists:XTemplateDragAndDropListBox.ItemContainerStyle>
                 <Style TargetType="ListBoxItem">

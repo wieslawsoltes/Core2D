@@ -8,7 +8,7 @@
              xmlns:local="clr-namespace:Core2D.Wpf" 
              xmlns:converters="clr-namespace:Core2D.Wpf.Converters" 
              xmlns:designer="clr-namespace:Core2D.Wpf.Designer"
-             xmlns:Editor="clr-namespace:Core2D.Editor;assembly=Core2D.Editor" 
+             xmlns:editor="clr-namespace:Core2D.Wpf.Editor" 
              xmlns:Containers="clr-namespace:Core2D.Containers;assembly=Core2D" 
              xmlns:custom="clr-namespace:Core2D.Wpf.Views.Custom"
              xmlns:p="clr-namespace:Core2D.Wpf.Properties" 
@@ -17,11 +17,11 @@
              d:DesignWidth="1324" d:DesignHeight="20">
     <Menu Background="Transparent">
         <MenuItem Header="{x:Static p:Resources.MenuFile}">
-            <MenuItem Header="{x:Static p:Resources.MenuFileNew}" Command="{x:Static Editor:ProjectEditorCommands.NewCommand}" CommandParameter="{Binding}" InputGestureText="Ctrl+N"/>
+            <MenuItem Header="{x:Static p:Resources.MenuFileNew}" Command="{x:Static editor:ProjectEditorCommands.NewCommand}" CommandParameter="{Binding}" InputGestureText="Ctrl+N"/>
             <Separator/>
-            <MenuItem Header="{x:Static p:Resources.MenuFileOpen}" Command="{x:Static Editor:ProjectEditorCommands.OpenCommand}" InputGestureText="Ctrl+O"/>
+            <MenuItem Header="{x:Static p:Resources.MenuFileOpen}" Command="{x:Static editor:ProjectEditorCommands.OpenCommand}" InputGestureText="Ctrl+O"/>
             <Separator/>
-            <MenuItem Header="{x:Static p:Resources.MenuFileExecuteScript}" Command="{x:Static Editor:ProjectEditorCommands.ExecuteScriptCommand}"/>
+            <MenuItem Header="{x:Static p:Resources.MenuFileExecuteScript}" Command="{x:Static editor:ProjectEditorCommands.ExecuteScriptCommand}"/>
             <Separator/>
             <MenuItem Header="{x:Static p:Resources.MenuFileRecent}" ItemsSource="{Binding RecentProjects}">
                 <MenuItem.ItemTemplate>
@@ -31,20 +31,20 @@
                 </MenuItem.ItemTemplate>
                 <MenuItem.ItemContainerStyle>
                     <Style TargetType="MenuItem">
-                        <Setter Property="Command" Value="{x:Static Editor:ProjectEditorCommands.OpenCommand}"/>
+                        <Setter Property="Command" Value="{x:Static editor:ProjectEditorCommands.OpenCommand}"/>
                         <Setter Property="CommandParameter" Value="{Binding Path}"/>
                     </Style>
                 </MenuItem.ItemContainerStyle>
             </MenuItem>
             <Separator/>
-            <MenuItem Header="{x:Static p:Resources.MenuFileExit}" Command="{x:Static Editor:ProjectEditorCommands.ExitCommand}" InputGestureText="Alt+F4"/>
+            <MenuItem Header="{x:Static p:Resources.MenuFileExit}" Command="{x:Static editor:ProjectEditorCommands.ExitCommand}" InputGestureText="Alt+F4"/>
         </MenuItem>
         <MenuItem Header="{x:Static p:Resources.MenuView}">
             <MenuItem Header="{x:Static p:Resources.MenuViewViews}" Tag="{Binding}" ItemsSource="{Binding Views}">
                 <MenuItem.ItemContainerStyle>
                     <Style TargetType="MenuItem">
                         <Setter Property="Header" Value="{Binding Title}"/>
-                        <Setter Property="Command" Value="{x:Static Editor:ProjectEditorCommands.ChangeCurrentViewCommand}"/>
+                        <Setter Property="Command" Value="{x:Static editor:ProjectEditorCommands.ChangeCurrentViewCommand}"/>
                         <Setter Property="CommandParameter" Value="{Binding}"/>
                         <Setter Property="IsCheckable" Value="True"/>
                         <Setter Property="IsChecked" Value="False"/>

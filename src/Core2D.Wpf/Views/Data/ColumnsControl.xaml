@@ -8,7 +8,7 @@
              xmlns:local="clr-namespace:Core2D.Wpf" 
              xmlns:converters="clr-namespace:Core2D.Wpf.Converters" 
              xmlns:designer="clr-namespace:Core2D.Wpf.Designer"
-             xmlns:Editor="clr-namespace:Core2D.Editor;assembly=Core2D.Editor" 
+             xmlns:editor="clr-namespace:Core2D.Wpf.Editor" 
              xmlns:custom="clr-namespace:Core2D.Wpf.Views.Custom"
              mc:Ignorable="d" 
              d:DataContext="{x:Static designer:DesignerHelper.Database}"
@@ -17,7 +17,7 @@
         <Grid.Resources>
             <ControlTemplate x:Key="ColumnsMenuControlTemplateKey">
                 <Menu Background="Transparent" HorizontalAlignment="Right">
-                    <MenuItem Command="{x:Static Editor:ProjectEditorCommands.AddColumnCommand}" CommandParameter="{Binding}" Header="+"/>
+                    <MenuItem Command="{x:Static editor:ProjectEditorCommands.AddColumnCommand}" CommandParameter="{Binding}" Header="+"/>
                 </Menu>
             </ControlTemplate>
         </Grid.Resources>
@@ -64,7 +64,7 @@
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
                         <TextBox Grid.Column="0" Grid.Row="0" Margin="5,2,5,2" VerticalAlignment="Center" Text="{Binding Path=Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                        <Button Grid.Column="1" Grid.Row="0" Margin="5,2,5,2" VerticalAlignment="Center" Content="-" Command="{x:Static Editor:ProjectEditorCommands.RemoveColumnCommand}" CommandParameter="{Binding}"/>
+                        <Button Grid.Column="1" Grid.Row="0" Margin="5,2,5,2" VerticalAlignment="Center" Content="-" Command="{x:Static editor:ProjectEditorCommands.RemoveColumnCommand}" CommandParameter="{Binding}"/>
                     </Grid>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
