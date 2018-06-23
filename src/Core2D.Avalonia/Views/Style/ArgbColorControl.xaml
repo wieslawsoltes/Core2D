@@ -7,6 +7,11 @@
              xmlns:Designer="clr-namespace:Core2D.Editor.Designer;assembly=Core2D.Editor"
              Design.DataContext="{x:Static Designer:DesignerContext.ArgbColor}"
              Design.Width="250" Design.Height="400">
+    <UserControl.Resources>
+        <converters:ArgbColorToBrushMultiConverter x:Key="ArgbColorToBrushMultiConverter"/>
+        <converters:ByteToDoubleConverter x:Key="ByteToDoubleConverter"/>
+        <converters:ByteToStringConverter x:Key="ByteToStringConverter"/>
+    </UserControl.Resources>
     <ScrollViewer>
         <Grid RowDefinitions="22,Auto,Auto,Auto,Auto" ColumnDefinitions="Auto,50,*">
             <Border Classes="color" Background="{DynamicResource ColorCheckerBoard}" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3"/>
