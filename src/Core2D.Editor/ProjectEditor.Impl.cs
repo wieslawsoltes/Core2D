@@ -3793,25 +3793,6 @@ namespace Core2D.Editor
             }
         }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         /// <summary>
         /// Move items in the library.
         /// </summary>
