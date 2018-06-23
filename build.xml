@@ -271,6 +271,7 @@
         <Runtime>osx.10.12-x64</Runtime>
       </Runtimes>
     </Project>
+    <!--
     <Project Name="Core2D.Wpf" Path="src">
       <Frameworks>
         <Framework>net461</Framework>
@@ -278,5 +279,6 @@
       <Runtimes>
       </Runtimes>
     </Project>
+    -->
   </Apps>
 </Build> 
