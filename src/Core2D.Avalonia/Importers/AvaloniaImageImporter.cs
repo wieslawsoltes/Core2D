@@ -31,7 +31,7 @@ namespace Core2D.Avalonia.Importers
         {
             try
             {
-                var dlg = new OpenFileDialog();
+                var dlg = new OpenFileDialog() { Title = "Open" };
                 dlg.Filters.Add(new FileDialogFilter() { Name = "All", Extensions = { "*" } });
                 var result = await dlg.ShowAsync(_serviceProvider.GetService<MainWindow>());
                 if (result != null)

@@ -36,10 +36,11 @@ namespace Core2D.Avalonia.Editor
         {
             if (path == null)
             {
-                var dlg = new OpenFileDialog();
+                var dlg = new OpenFileDialog() { Title = "Open" };
                 dlg.Filters.Add(new FileDialogFilter() { Name = "Project", Extensions = { "project" } });
                 dlg.Filters.Add(new FileDialogFilter() { Name = "All", Extensions = { "*" } });
-                var result = await dlg.ShowAsync(_serviceProvider.GetService<MainWindow>());
+                var window = _serviceProvider.GetService<MainWindow>();
+                var result = await dlg.ShowAsync(window);
                 if (result != null)
                 {
                     var editor = _serviceProvider.GetService<ProjectEditor>();
@@ -74,7 +75,7 @@ namespace Core2D.Avalonia.Editor
         public async void OnSaveAs()
         {
             var editor = _serviceProvider.GetService<ProjectEditor>();
-            var dlg = new SaveFileDialog();
+            var dlg = new SaveFileDialog() { Title = "Save" };
             dlg.Filters.Add(new FileDialogFilter() { Name = "Project", Extensions = { "project" } });
             dlg.Filters.Add(new FileDialogFilter() { Name = "All", Extensions = { "*" } });
             dlg.InitialFileName = editor.Project?.Name;
@@ -91,7 +92,7 @@ namespace Core2D.Avalonia.Editor
         {
             if (path == null)
             {
-                var dlg = new OpenFileDialog();
+                var dlg = new OpenFileDialog() { Title = "Open" };
                 dlg.AllowMultiple = true;
                 dlg.Filters.Add(new FileDialogFilter() { Name = "Json", Extensions = { "json" } });
                 dlg.Filters.Add(new FileDialogFilter() { Name = "All", Extensions = { "*" } });
@@ -119,7 +120,7 @@ namespace Core2D.Avalonia.Editor
         {
             if (path == null)
             {
-                var dlg = new OpenFileDialog();
+                var dlg = new OpenFileDialog() { Title = "Open" };
                 dlg.AllowMultiple = true;
                 dlg.Filters.Add(new FileDialogFilter() { Name = "Json", Extensions = { "json" } });
                 dlg.Filters.Add(new FileDialogFilter() { Name = "Xaml", Extensions = { "xaml" } });
@@ -162,7 +163,7 @@ namespace Core2D.Avalonia.Editor
         {
             if (path == null)
             {
-                var dlg = new OpenFileDialog();
+                var dlg = new OpenFileDialog() { Title = "Open" };
                 dlg.AllowMultiple = true;
                 dlg.Filters.Add(new FileDialogFilter() { Name = "Xaml", Extensions = { "xaml" } });
                 dlg.Filters.Add(new FileDialogFilter() { Name = "All", Extensions = { "*" } });
@@ -189,7 +190,7 @@ namespace Core2D.Avalonia.Editor
         public async void OnExportJson(object item)
         {
             var editor = _serviceProvider.GetService<ProjectEditor>();
-            var dlg = new SaveFileDialog();
+            var dlg = new SaveFileDialog() { Title = "Save" };
             dlg.Filters.Add(new FileDialogFilter() { Name = "Json", Extensions = { "json" } });
             dlg.Filters.Add(new FileDialogFilter() { Name = "All", Extensions = { "*" } });
             dlg.InitialFileName = editor?.GetName(item);
@@ -207,7 +208,7 @@ namespace Core2D.Avalonia.Editor
             var editor = _serviceProvider.GetService<ProjectEditor>();
             if (item != null)
             {
-                var dlg = new SaveFileDialog();
+                var dlg = new SaveFileDialog() { Title = "Save" };
                 dlg.Filters.Add(new FileDialogFilter() { Name = "Json", Extensions = { "json" } });
                 dlg.Filters.Add(new FileDialogFilter() { Name = "Xaml", Extensions = { "xaml" } });
                 dlg.InitialFileName = editor?.GetName(item);
@@ -232,7 +233,7 @@ namespace Core2D.Avalonia.Editor
         public async void OnExportXaml(object item)
         {
             var editor = _serviceProvider.GetService<ProjectEditor>();
-            var dlg = new SaveFileDialog();
+            var dlg = new SaveFileDialog() { Title = "Save" };
             dlg.Filters.Add(new FileDialogFilter() { Name = "Xaml", Extensions = { "xaml" } });
             dlg.Filters.Add(new FileDialogFilter() { Name = "All", Extensions = { "*" } });
             dlg.InitialFileName = editor?.GetName(item);
@@ -274,7 +275,7 @@ namespace Core2D.Avalonia.Editor
                 name = (item as PageContainer).Name;
             }
 
-            var dlg = new SaveFileDialog();
+            var dlg = new SaveFileDialog() { Title = "Save" };
             foreach (var writer in editor?.FileWriters)
             {
                 dlg.Filters.Add(new FileDialogFilter() { Name = writer.Name, Extensions = { writer.Extension } });
@@ -300,7 +301,7 @@ namespace Core2D.Avalonia.Editor
         {
             if (path == null)
             {
-                var dlg = new OpenFileDialog();
+                var dlg = new OpenFileDialog() { Title = "Open" };
                 dlg.Filters.Add(new FileDialogFilter() { Name = "Script", Extensions = { "csx", "cs" } });
                 dlg.Filters.Add(new FileDialogFilter() { Name = "All", Extensions = { "*" } });
                 dlg.AllowMultiple = true;
@@ -361,7 +362,7 @@ namespace Core2D.Avalonia.Editor
         /// <inheritdoc/>
         public async void OnImportData(ProjectContainer project)
         {
-            var dlg = new OpenFileDialog();
+            var dlg = new OpenFileDialog() { Title = "Open" };
             dlg.Filters.Add(new FileDialogFilter() { Name = "Csv", Extensions = { "csv" } });
             dlg.Filters.Add(new FileDialogFilter() { Name = "All", Extensions = { "*" } });
             var result = await dlg.ShowAsync(_serviceProvider.GetService<MainWindow>());
@@ -376,7 +377,7 @@ namespace Core2D.Avalonia.Editor
         {
             if (db != null)
             {
-                var dlg = new SaveFileDialog();
+                var dlg = new SaveFileDialog() { Title = "Save" };
                 dlg.Filters.Add(new FileDialogFilter() { Name = "Csv", Extensions = { "csv" } });
                 dlg.Filters.Add(new FileDialogFilter() { Name = "All", Extensions = { "*" } });
                 dlg.InitialFileName = db.Name;
@@ -394,7 +395,7 @@ namespace Core2D.Avalonia.Editor
         {
             if (db != null)
             {
-                var dlg = new OpenFileDialog();
+                var dlg = new OpenFileDialog() { Title = "Open" };
                 dlg.Filters.Add(new FileDialogFilter() { Name = "Csv", Extensions = { "csv" } });
                 dlg.Filters.Add(new FileDialogFilter() { Name = "All", Extensions = { "*" } });
                 var result = await dlg.ShowAsync(_serviceProvider.GetService<MainWindow>());
