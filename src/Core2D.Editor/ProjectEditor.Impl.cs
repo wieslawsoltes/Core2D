@@ -9,7 +9,6 @@ using Core2D.Containers;
 using Core2D.Data;
 using Core2D.Editor.Bounds;
 using Core2D.Editor.Input;
-using Core2D.Editor.Path;
 using Core2D.Editor.Recent;
 using Core2D.Editor.Tools;
 using Core2D.History;
@@ -2253,29 +2252,6 @@ namespace Core2D.Editor
             try
             {
                 var exception = default(Exception);
-
-                // Try to parse SVG path geometry. 
-                try
-                {
-                    var geometry = PathGeometryParser.Parse(text);
-                    var style = Project?.CurrentStyleLibrary?.Selected;
-                    if (style != null)
-                    {
-                        var path = PathShape.Create(
-                            "Path",
-                            Project.Options.CloneStyle ? style.Clone() : style,
-                            geometry,
-                            Project.Options.DefaultIsStroked,
-                            Project.Options.DefaultIsFilled);
-
-                        OnPasteShapes(Enumerable.Repeat(path, 1));
-                        return;
-                    }
-                }
-                catch (Exception ex)
-                {
-                    exception = ex;
-                }
 
                 // Try to deserialize Xaml.
                 try
