@@ -99,8 +99,8 @@
                                                             </i:Interaction.Behaviors>
                                                             <CheckBox.IsChecked>
                                                                 <MultiBinding Mode="OneWay" Converter="{StaticResource ObjectEqualityMultiConverter}">
-                                                                    <Binding ElementName="icon" Path="DataContext" Converter="{StaticResource ObjectToObjectConverter}"/>
-                                                                    <Binding ElementName="icon" Path="Tag.Template" Converter="{StaticResource ObjectToObjectConverter}"/>
+                                                                    <Binding ElementName="icon" Path="DataContext"/>
+                                                                    <Binding ElementName="icon" Path="Tag.Template"/>
                                                                 </MultiBinding>
                                                             </CheckBox.IsChecked>
                                                         </CheckBox>

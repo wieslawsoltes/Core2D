@@ -37,8 +37,8 @@
                                     </i:Interaction.Behaviors>
                                     <CheckBox.IsChecked>
                                         <MultiBinding Mode="OneWay" Converter="{StaticResource ObjectEqualityMultiConverter}">
-                                            <Binding ElementName="icon" Path="DataContext" Converter="{StaticResource ObjectToObjectConverter}"/>
-                                            <Binding ElementName="icon" Path="Tag.Layout.CurrentView" Converter="{StaticResource ObjectToObjectConverter}"/>
+                                            <Binding ElementName="icon" Path="DataContext"/>
+                                            <Binding ElementName="icon" Path="Tag.Layout.CurrentView"/>
                                         </MultiBinding>
                                     </CheckBox.IsChecked>
                                 </CheckBox>
