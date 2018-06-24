@@ -129,14 +129,12 @@
   <Tests>
     <Project Name="Core2D.UnitTests" Path="tests">
       <Frameworks>
-        <Framework>netcoreapp2.0</Framework>
         <Framework>netcoreapp2.1</Framework>
         <Framework>net461</Framework>
       </Frameworks>
     </Project>
     <Project Name="Core2D.FileSystem.DotNet.UnitTests" Path="tests">
       <Frameworks>
-        <Framework>netcoreapp2.0</Framework>
         <Framework>netcoreapp2.1</Framework>
         <Framework>net461</Framework>
       </Frameworks>
@@ -158,21 +156,18 @@
     </Project>
     <Project Name="Core2D.FileWriter.SkiaSharp.UnitTests" Path="tests">
       <Frameworks>
-        <Framework>netcoreapp2.0</Framework>
         <Framework>netcoreapp2.1</Framework>
         <Framework>net461</Framework>
       </Frameworks>
     </Project>
     <Project Name="Core2D.Log.Trace.UnitTests" Path="tests">
       <Frameworks>
-        <Framework>netcoreapp2.0</Framework>
         <Framework>netcoreapp2.1</Framework>
         <Framework>net461</Framework>
       </Frameworks>
     </Project>
     <Project Name="Core2D.Renderer.Avalonia.UnitTests" Path="tests">
       <Frameworks>
-        <Framework>netcoreapp2.0</Framework>
         <Framework>netcoreapp2.1</Framework>
         <Framework>net461</Framework>
       </Frameworks>
@@ -189,7 +184,6 @@
     </Project>
     <Project Name="Core2D.Renderer.SkiaSharp.UnitTests" Path="tests">
       <Frameworks>
-        <Framework>netcoreapp2.0</Framework>
         <Framework>netcoreapp2.1</Framework>
         <Framework>net461</Framework>
       </Frameworks>
@@ -206,49 +200,42 @@
     </Project>
     <Project Name="Core2D.ScriptRunner.Roslyn.UnitTests" Path="tests">
       <Frameworks>
-        <Framework>netcoreapp2.0</Framework>
         <Framework>netcoreapp2.1</Framework>
         <Framework>net461</Framework>
       </Frameworks>
     </Project>
     <Project Name="Core2D.Serializer.Newtonsoft.UnitTests" Path="tests">
       <Frameworks>
-        <Framework>netcoreapp2.0</Framework>
         <Framework>netcoreapp2.1</Framework>
         <Framework>net461</Framework>
       </Frameworks>
     </Project>
     <Project Name="Core2D.Serializer.Xaml.UnitTests" Path="tests">
       <Frameworks>
-        <Framework>netcoreapp2.0</Framework>
         <Framework>netcoreapp2.1</Framework>
         <Framework>net461</Framework>
       </Frameworks>
     </Project>
     <Project Name="Core2D.ServiceProvider.Autofac.UnitTests" Path="tests">
       <Frameworks>
-        <Framework>netcoreapp2.0</Framework>
         <Framework>netcoreapp2.1</Framework>
         <Framework>net461</Framework>
       </Frameworks>
     </Project>
     <Project Name="Core2D.TextFieldReader.CsvHelper.UnitTests" Path="tests">
       <Frameworks>
-        <Framework>netcoreapp2.0</Framework>
         <Framework>netcoreapp2.1</Framework>
         <Framework>net461</Framework>
       </Frameworks>
     </Project>
     <Project Name="Core2D.TextFieldWriter.CsvHelper.UnitTests" Path="tests">
       <Frameworks>
-        <Framework>netcoreapp2.0</Framework>
         <Framework>netcoreapp2.1</Framework>
         <Framework>net461</Framework>
       </Frameworks>
     </Project>
     <Project Name="Core2D.Utilities.Avalonia.UnitTests" Path="tests">
       <Frameworks>
-        <Framework>netcoreapp2.0</Framework>
         <Framework>netcoreapp2.1</Framework>
         <Framework>net461</Framework>
       </Frameworks>
