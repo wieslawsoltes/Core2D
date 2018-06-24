@@ -16,20 +16,5 @@ namespace Core2D.Wpf.Windows
         {
             InitializeComponent();
         }
-
-        /// <inheritdoc/>
-        public object Context { get; }
-
-        /// <inheritdoc/>
-        public void Present()
-        {
-            ShowDialog();
-        }
-
-        /// <inheritdoc/>
-        public void Destroy()
-        {
-            Close();
-        }
     }
 }
