@@ -15,7 +15,7 @@ namespace Core2D.Avalonia.Dock.Handlers
     /// <summary>
     /// List box drop handler.
     /// </summary>
-    public class ListBoxDropHandler : IDropHandler
+    public class ListBoxDropHandler : DefaultDropHandler
     {
         public static IDropHandler Instance = new ListBoxDropHandler();
 
@@ -132,7 +132,7 @@ namespace Core2D.Avalonia.Dock.Handlers
         */
 
         /// <inheritdoc/>
-        public bool Validate(object sourceContext, object targetContext, object sender, DockOperation operation, DragEventArgs e)
+        public override bool Validate(object sender, DragEventArgs e, object sourceContext, object targetContext, object state)
         {
             // FIXME:
             //if (context is ProjectEditor editor)
@@ -143,7 +143,7 @@ namespace Core2D.Avalonia.Dock.Handlers
         }
 
         /// <inheritdoc/>
-        public bool Execute(object sourceContext, object targetContext, object sender, DockOperation operation, DragEventArgs e)
+        public override bool Execute(object sender, DragEventArgs e, object sourceContext, object targetContext, object state)
         {
             // FIXME:
             //if (context is ProjectEditor editor)
@@ -151,11 +151,6 @@ namespace Core2D.Avalonia.Dock.Handlers
             //    return Validate(editor, sender, e, true);
             //}
             return false;
-        }
-
-        /// <inheritdoc/>
-        public void Cancel(object sender, RoutedEventArgs e)
-        {
         }
     }
 }
