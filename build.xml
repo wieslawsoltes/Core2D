@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <Build>
   <Sources>
+    <!--
     <Project Name="Core2D" Path="src">
       <Frameworks>
         <Framework>netstandard2.0</Framework>
@@ -125,8 +126,10 @@
         <Framework>net461</Framework>
       </Frameworks>
     </Project>
+    -->
   </Sources>
   <Tests>
+    <!--
     <Project Name="Core2D.UnitTests" Path="tests">
       <Frameworks>
         <Framework>netcoreapp2.1</Framework>
@@ -139,8 +142,10 @@
         <Framework>net461</Framework>
       </Frameworks>
     </Project>
+    -->
   </Tests>
   <Apps>
+    <!--
     <Project Name="Core2D.Avalonia" Path="src">
       <Frameworks>
         <Framework>netcoreapp2.1</Framework>
@@ -149,7 +154,8 @@
         <Runtime>win7-x64</Runtime>
       </Runtimes>
     </Project>
-    <Project Name="Core2D.Wpf" Path="src">
+    -->
+    <Project Name="Core2D.Wpf.Sdk" Path="src">
       <Frameworks>
         <Framework>net461</Framework>
       </Frameworks>
