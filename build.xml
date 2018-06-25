@@ -149,5 +149,12 @@
         <Runtime>win7-x64</Runtime>
       </Runtimes>
     </Project>
+    <Project Name="Core2D.Wpf" Path="src">
+      <Frameworks>
+        <Framework>net461</Framework>
+      </Frameworks>
+      <Runtimes>
+      </Runtimes>
+    </Project>
   </Apps>
 </Build> 
