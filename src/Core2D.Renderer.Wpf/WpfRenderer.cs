@@ -9,10 +9,10 @@ using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using Core2D.Data;
-using Spatial.Arc;
 using Core2D.Shapes;
 using Core2D.Style;
 using Spatial;
+using Spatial.Arc;
 
 namespace Core2D.Renderer.Wpf
 {
