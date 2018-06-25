@@ -3,7 +3,7 @@
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Windows;
-/*
+
 [assembly: AssemblyCompany("Wiesław Šoltés")]
 [assembly: AssemblyCopyright("Copyright © Wiesław Šoltés 2018")]
 [assembly: AssemblyTrademark("")]
@@ -16,6 +16,6 @@ using System.Windows;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyProduct("Core2D.Wpf")]
 [assembly: AssemblyCulture("")]
-*/
+
 [assembly: ComVisible(false)]
 [assembly: ThemeInfo(ResourceDictionaryLocation.None, ResourceDictionaryLocation.SourceAssembly)]
