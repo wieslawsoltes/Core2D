@@ -1,15 +1,14 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
-using System.Collections.Generic;
 using System.Collections.Immutable;
 using Core2D.Data;
-using Spatial;
-using Spatial.Arc;
 using Core2D.Shape;
 using Core2D.Shapes;
 using Core2D.Style;
 using SkiaSharp;
+using Spatial;
+using Spatial.Arc;
 
 namespace Core2D.Renderer.SkiaSharp
 {
@@ -19,8 +18,7 @@ namespace Core2D.Renderer.SkiaSharp
     public class SkiaSharpRenderer : ShapeRenderer
     {
         private bool _isAntialias = true;
-        private bool _enableImageCache = true;
-        private IDictionary<string, SKBitmap> _biCache;
+        private ICache<string, SKBitmap> _biCache = Cache<string, SKBitmap>.Create(bi => bi.Dispose());
         private Func<double, float> _scaleToPage;
         private double _sourceDpi = 96.0;
         private double _targetDpi = 72.0;
@@ -359,15 +357,7 @@ namespace Core2D.Renderer.SkiaSharp
         {
             if (!isZooming)
             {
-                if (_biCache != null)
-                {
-                    foreach (var kvp in _biCache)
-                    {
-                        kvp.Value.Dispose();
-                    }
-                    _biCache.Clear();
-                }
-                _biCache = new Dictionary<string, SKBitmap>();
+                _biCache.Reset();
             }
         }
 
@@ -601,10 +591,10 @@ namespace Core2D.Renderer.SkiaSharp
                 }
             }
 
-            if (_enableImageCache
-                && _biCache.ContainsKey(image.Key))
+            var imageCached = _biCache.Get(image.Key);
+            if (imageCached != null)
             {
-                canvas.DrawBitmap(_biCache[image.Key], rect);
+                canvas.DrawBitmap(imageCached, rect);
             }
             else
             {
@@ -615,13 +605,10 @@ namespace Core2D.Renderer.SkiaSharp
                 if (bytes != null)
                 {
                     var bi = SKBitmap.Decode(bytes);
-                    if (_enableImageCache)
-                        _biCache[image.Key] = bi;
+
+                    _biCache.Set(image.Key, bi);
 
                     canvas.DrawBitmap(bi, rect);
-
-                    if (!_enableImageCache)
-                        bi.Dispose();
                 }
             }
         }

@@ -1,7 +1,6 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
-using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Drawing;
 using System.Drawing.Drawing2D;
@@ -19,8 +18,7 @@ namespace Core2D.Renderer.WinForms
     /// </summary>
     public class WinFormsRenderer : ShapeRenderer
     {
-        private bool _enableImageCache = true;
-        private IDictionary<string, Image> _biCache;
+        private ICache<string, Image> _biCache = Cache<string, Image>.Create(bi => bi.Dispose());
         private Func<double, float> _scaleToPage;
         private double _textScaleFactor;
 
@@ -301,15 +299,7 @@ namespace Core2D.Renderer.WinForms
         {
             if (!isZooming)
             {
-                if (_biCache != null)
-                {
-                    foreach (var kvp in _biCache)
-                    {
-                        kvp.Value.Dispose();
-                    }
-                    _biCache.Clear();
-                }
-                _biCache = new Dictionary<string, Image>();
+                _biCache.Reset();
             }
         }
 
@@ -721,10 +711,10 @@ namespace Core2D.Renderer.WinForms
                     srect.Height);
             }
 
-            if (_enableImageCache
-                && _biCache.ContainsKey(image.Key))
+            var imageCached = _biCache.Get(image.Key);
+            if (imageCached != null)
             {
-                _gfx.DrawImage(_biCache[image.Key], srect);
+                _gfx.DrawImage(imageCached, srect);
             }
             else
             {
@@ -738,13 +728,9 @@ namespace Core2D.Renderer.WinForms
                     var bi = Image.FromStream(ms);
                     ms.Dispose();
 
-                    if (_enableImageCache)
-                        _biCache[image.Key] = bi;
+                    _biCache.Set(image.Key, bi);
 
                     _gfx.DrawImage(bi, srect);
-
-                    if (!_enableImageCache)
-                        bi.Dispose();
                 }
             }
 

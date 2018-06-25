@@ -1,13 +1,12 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
-using System.Collections.Generic;
 using System.Collections.Immutable;
-using Core2D.Style;
+using Core2D.Data;
 using Core2D.Shapes;
+using Core2D.Style;
 using PdfSharp.Drawing;
 using PdfSharp.Pdf;
-using Core2D.Data;
 
 namespace Core2D.Renderer.PdfSharp
 {
@@ -16,8 +15,7 @@ namespace Core2D.Renderer.PdfSharp
     /// </summary>
     public partial class PdfSharpRenderer : ShapeRenderer
     {
-        private bool _enableImageCache = true;
-        private IDictionary<string, XImage> _biCache;
+        private ICache<string, XImage> _biCache = Cache<string, XImage>.Create(bi => bi.Dispose());
         private Func<double, double> _scaleToPage;
         private double _sourceDpi = 96.0;
         private double _targetDpi = 72.0;
@@ -259,15 +257,7 @@ namespace Core2D.Renderer.PdfSharp
         {
             if (!isZooming)
             {
-                if (_biCache != null)
-                {
-                    foreach (var kvp in _biCache)
-                    {
-                        kvp.Value.Dispose();
-                    }
-                    _biCache.Clear();
-                }
-                _biCache = new Dictionary<string, XImage>();
+                _biCache.Reset();
             }
         }
 
@@ -705,10 +695,10 @@ namespace Core2D.Renderer.PdfSharp
                     ref srect);
             }
 
-            if (_enableImageCache
-                && _biCache.ContainsKey(image.Key))
+            var imageCached = _biCache.Get(image.Key);
+            if (imageCached != null)
             {
-                _gfx.DrawImage(_biCache[image.Key], srect);
+                _gfx.DrawImage(imageCached, srect);
             }
             else
             {
@@ -729,13 +719,9 @@ namespace Core2D.Renderer.PdfSharp
 #else
                     var bi = XImage.FromStream(ms);
 #endif
-                    if (_enableImageCache)
-                        _biCache[image.Key] = bi;
+                    _biCache.Set(image.Key, bi);
 
                     _gfx.DrawImage(bi, srect);
-
-                    if (!_enableImageCache)
-                        bi.Dispose();
                 }
             }
         }

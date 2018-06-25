@@ -1,7 +1,6 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
-using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Diagnostics;
 using Core2D.Data;
@@ -22,8 +21,7 @@ namespace Core2D.Renderer.Avalonia
     /// </summary>
     public class AvaloniaRenderer : ShapeRenderer
     {
-        private bool _enableImageCache = true;
-        private IDictionary<string, AMI.Bitmap> _biCache;
+        private ICache<string, AMI.Bitmap> _biCache = Cache<string, AMI.Bitmap>.Create(bi => bi.Dispose());
         private Func<double, float> _scaleToPage;
         private double _textScaleFactor;
 
@@ -326,11 +324,7 @@ namespace Core2D.Renderer.Avalonia
         {
             if (!isZooming)
             {
-                if (_biCache != null)
-                {
-                    _biCache.Clear();
-                }
-                _biCache = new Dictionary<string, AMI.Bitmap>();
+                _biCache.Reset();
             }
         }
 
@@ -622,16 +616,15 @@ namespace Core2D.Renderer.Avalonia
                     ref rect);
             }
 
-            if (_enableImageCache
-                && _biCache.ContainsKey(image.Key))
+            var imageCached = _biCache.Get(image.Key);
+            if (imageCached != null)
             {
                 try
                 {
-                    var bi = _biCache[image.Key];
                     _dc.DrawImage(
-                        bi,
+                        imageCached,
                         1.0,
-                        new A.Rect(0, 0, bi.PixelWidth, bi.PixelHeight),
+                        new A.Rect(0, 0, imageCached.PixelWidth, imageCached.PixelHeight),
                         new A.Rect(rect.X, rect.Y, rect.Width, rect.Height));
                 }
                 catch (Exception ex)
@@ -654,8 +647,7 @@ namespace Core2D.Renderer.Avalonia
                         {
                             var bi = new AMI.Bitmap(ms);
 
-                            if (_enableImageCache)
-                                _biCache[image.Key] = bi;
+                            _biCache.Set(image.Key, bi);
 
                             _dc.DrawImage(
                                 bi,
