@@ -253,7 +253,7 @@ namespace Core2D.Avalonia.Dock.Factories
                         Width = double.NaN,
                         Height = double.NaN,
                         Title = "EditorRightBottom",
-                        CurrentView = toolsView,
+                        CurrentView = shapeView,
                         Views = new ObservableCollection<IView>
                         {
                             shapeView,
