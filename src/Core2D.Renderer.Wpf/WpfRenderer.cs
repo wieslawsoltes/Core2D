@@ -22,7 +22,7 @@ namespace Core2D.Renderer.Wpf
     public class WpfRenderer : ShapeRenderer
     {
         private Cache<ShapeStyle, (Brush, Pen)> _styleCache = Cache<ShapeStyle, (Brush, Pen)>.Create();
-        private Cache<ArrowStyle, Tuple<Brush, Pen>> _arrowStyleCache = Cache<ArrowStyle, Tuple<Brush, Pen>>.Create();
+        private Cache<ArrowStyle, (Brush, Pen)> _arrowStyleCache = Cache<ArrowStyle, (Brush, Pen)>.Create();
         private Cache<LineShape, PathGeometry> _curvedLineCache = Cache<LineShape, PathGeometry>.Create();
         private Cache<ArcShape, PathGeometry> _arcCache = Cache<ArcShape, PathGeometry>.Create();
         private Cache<CubicBezierShape, PathGeometry> _cubicBezierCache = Cache<CubicBezierShape, PathGeometry>.Create();
@@ -205,35 +205,21 @@ namespace Core2D.Renderer.Wpf
         private void DrawLineArrowsInternal(DrawingContext dc, LineShape line, ShapeStyle style, double halfStart, double halfEnd, double thicknessStart, double thicknessEnd, double dx, double dy, out Point pt1, out Point pt2)
         {
             // Start arrow style.
-            Tuple<Brush, Pen> startArrowCache = _arrowStyleCache.Get(style.StartArrowStyle);
-            Brush fillStartArrow;
-            Pen strokeStartArrow;
-            if (startArrowCache != null)
-            {
-                fillStartArrow = startArrowCache.Item1;
-                strokeStartArrow = startArrowCache.Item2;
-            }
-            else
+            (Brush fillStartArrow, Pen strokeStartArrow) = _arrowStyleCache.Get(style.StartArrowStyle);
+            if (fillStartArrow == null || strokeStartArrow == null)
             {
                 fillStartArrow = CreateBrush(style.StartArrowStyle.Fill);
                 strokeStartArrow = CreatePen(style.StartArrowStyle, thicknessStart);
-                _arrowStyleCache.Set(style.StartArrowStyle, Tuple.Create(fillStartArrow, strokeStartArrow));
+                _arrowStyleCache.Set(style.StartArrowStyle, (fillStartArrow, strokeStartArrow));
             }
 
             // End arrow style.
-            Tuple<Brush, Pen> endArrowCache = _arrowStyleCache.Get(style.EndArrowStyle);
-            Brush fillEndArrow;
-            Pen strokeEndArrow;
-            if (endArrowCache != null)
-            {
-                fillEndArrow = endArrowCache.Item1;
-                strokeEndArrow = endArrowCache.Item2;
-            }
-            else
+            (Brush fillEndArrow, Pen strokeEndArrow) = _arrowStyleCache.Get(style.EndArrowStyle);
+            if (fillEndArrow == null || strokeEndArrow == null)
             {
                 fillEndArrow = CreateBrush(style.EndArrowStyle.Fill);
                 strokeEndArrow = CreatePen(style.EndArrowStyle, thicknessEnd);
-                _arrowStyleCache.Set(style.EndArrowStyle, Tuple.Create(fillEndArrow, strokeEndArrow));
+                _arrowStyleCache.Set(style.EndArrowStyle, (fillEndArrow, strokeEndArrow));
             }
 
             // Line max length.
