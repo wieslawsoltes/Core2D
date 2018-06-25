@@ -139,112 +139,6 @@
         <Framework>net461</Framework>
       </Frameworks>
     </Project>
-    <Project Name="Core2D.FileWriter.Dxf.UnitTests" Path="tests">
-      <Frameworks>
-        <Framework>net461</Framework>
-      </Frameworks>
-    </Project>
-    <Project Name="Core2D.FileWriter.Emf.UnitTests" Path="tests">
-      <Frameworks>
-        <Framework>net461</Framework>
-      </Frameworks>
-    </Project>
-    <Project Name="Core2D.FileWriter.PdfSharp.UnitTests" Path="tests">
-      <Frameworks>
-        <Framework>net461</Framework>
-      </Frameworks>
-    </Project>
-    <Project Name="Core2D.FileWriter.SkiaSharp.UnitTests" Path="tests">
-      <Frameworks>
-        <Framework>netcoreapp2.1</Framework>
-        <Framework>net461</Framework>
-      </Frameworks>
-    </Project>
-    <Project Name="Core2D.Log.Trace.UnitTests" Path="tests">
-      <Frameworks>
-        <Framework>netcoreapp2.1</Framework>
-        <Framework>net461</Framework>
-      </Frameworks>
-    </Project>
-    <Project Name="Core2D.Renderer.Avalonia.UnitTests" Path="tests">
-      <Frameworks>
-        <Framework>netcoreapp2.1</Framework>
-        <Framework>net461</Framework>
-      </Frameworks>
-    </Project>
-    <Project Name="Core2D.Renderer.Dxf.UnitTests" Path="tests">
-      <Frameworks>
-        <Framework>net461</Framework>
-      </Frameworks>
-    </Project>
-    <Project Name="Core2D.Renderer.PdfSharp.UnitTests" Path="tests">
-      <Frameworks>
-        <Framework>net461</Framework>
-      </Frameworks>
-    </Project>
-    <Project Name="Core2D.Renderer.SkiaSharp.UnitTests" Path="tests">
-      <Frameworks>
-        <Framework>netcoreapp2.1</Framework>
-        <Framework>net461</Framework>
-      </Frameworks>
-    </Project>
-    <Project Name="Core2D.Renderer.WinForms.UnitTests" Path="tests">
-      <Frameworks>
-        <Framework>net461</Framework>
-      </Frameworks>
-    </Project>
-    <Project Name="Core2D.Renderer.Wpf.UnitTests" Path="tests">
-      <Frameworks>
-        <Framework>net461</Framework>
-      </Frameworks>
-    </Project>
-    <Project Name="Core2D.ScriptRunner.Roslyn.UnitTests" Path="tests">
-      <Frameworks>
-        <Framework>netcoreapp2.1</Framework>
-        <Framework>net461</Framework>
-      </Frameworks>
-    </Project>
-    <Project Name="Core2D.Serializer.Newtonsoft.UnitTests" Path="tests">
-      <Frameworks>
-        <Framework>netcoreapp2.1</Framework>
-        <Framework>net461</Framework>
-      </Frameworks>
-    </Project>
-    <Project Name="Core2D.Serializer.Xaml.UnitTests" Path="tests">
-      <Frameworks>
-        <Framework>netcoreapp2.1</Framework>
-        <Framework>net461</Framework>
-      </Frameworks>
-    </Project>
-    <Project Name="Core2D.ServiceProvider.Autofac.UnitTests" Path="tests">
-      <Frameworks>
-        <Framework>netcoreapp2.1</Framework>
-        <Framework>net461</Framework>
-      </Frameworks>
-    </Project>
-    <Project Name="Core2D.TextFieldReader.CsvHelper.UnitTests" Path="tests">
-      <Frameworks>
-        <Framework>netcoreapp2.1</Framework>
-        <Framework>net461</Framework>
-      </Frameworks>
-    </Project>
-    <Project Name="Core2D.TextFieldWriter.CsvHelper.UnitTests" Path="tests">
-      <Frameworks>
-        <Framework>netcoreapp2.1</Framework>
-        <Framework>net461</Framework>
-      </Frameworks>
-    </Project>
-    <Project Name="Core2D.Utilities.Avalonia.UnitTests" Path="tests">
-      <Frameworks>
-        <Framework>netcoreapp2.1</Framework>
-        <Framework>net461</Framework>
-      </Frameworks>
-    </Project>
-    <Project Name="Core2D.Utilities.Wpf.UnitTests" Path="tests">
-      <Frameworks>
-        <Framework>net461</Framework>
-      </Frameworks>
-    </Project>
   </Tests>
   <Apps>
     <Project Name="Core2D.Avalonia" Path="src">
@@ -253,19 +147,7 @@
       </Frameworks>
       <Runtimes>
         <Runtime>win7-x64</Runtime>
-        <Runtime>ubuntu.14.04-x64</Runtime>
-        <Runtime>debian.8-x64</Runtime>
-        <Runtime>osx.10.12-x64</Runtime>
       </Runtimes>
     </Project>
-    <!--
-    <Project Name="Core2D.Wpf" Path="src">
-      <Frameworks>
-        <Framework>net461</Framework>
-      </Frameworks>
-      <Runtimes>
-      </Runtimes>
-    </Project>
-    -->
   </Apps>
 </Build> 

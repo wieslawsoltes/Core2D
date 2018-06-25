@@ -230,10 +230,7 @@ The core libraries are portable and should work on all platforms where C# is sup
 
 | Version               | Framework      | Download                                                                                                                                                                                              |
 |-----------------------|----------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Debian 8 x64          | netcoreapp2.1  | [Core2D.Avalonia-netcoreapp2.1-debian.8-x64.zip](https://ci.appveyor.com/api/projects/wieslawsoltes/Core2D/artifacts/artifacts/Core2D.Avalonia-netcoreapp2.1-debian.8-x64.zip?branch=master)                  |
-| MacOSX 10.12 x64      | netcoreapp2.1  | [Core2D.Avalonia-netcoreapp2.1-osx.10.12-x64.zip](https://ci.appveyor.com/api/projects/wieslawsoltes/Core2D/artifacts/artifacts/Core2D.Avalonia-netcoreapp2.1-osx.10.12-x64.zip?branch=master)                |
-| Ubuntu 14.04+ x64     | netcoreapp2.1  | [Core2D.Avalonia-netcoreapp2.1-ubuntu.14.04-x64.zip](https://ci.appveyor.com/api/projects/wieslawsoltes/Core2D/artifacts/artifacts/Core2D.Avalonia-netcoreapp2.1-ubuntu.14.04-x64.zip?branch=master)          |
-| Windows 7 8.1 10 x64  | netcoreapp2.1  | [Core2D.Avalonia-netcoreapp2.1-win7-x64.zip](https://ci.appveyor.com/api/projects/wieslawsoltes/Core2D/artifacts/artifacts/Core2D.Avalonia-netcoreapp2.1-win7-x64.zip?branch=master)                          |
+| Windows 7 8.1 10 x64  | netcoreapp2.1  | [Core2D.Avalonia-netcoreapp2.1-win7-x64.zip](https://ci.appveyor.com/api/projects/wieslawsoltes/Core2D/artifacts/artifacts/Core2D.Avalonia-netcoreapp2.1-win7-x64.zip?branch=master)                  |
 
 ## Building Core2D
 

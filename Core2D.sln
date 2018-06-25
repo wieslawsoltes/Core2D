@@ -3,90 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26730.16
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{BC6BAFE6-1735-4549-A7CC-819274780B38}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D", "src\Core2D\Core2D.csproj", "{F822EC0C-2501-487D-87A8-B8D28A761385}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D.Editor", "src\Core2D.Editor\Core2D.Editor.csproj", "{528F510F-1FA0-4AB5-93FA-EF10ABFE2C37}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D.FileSystem.DotNet", "src\Core2D.FileSystem.DotNet\Core2D.FileSystem.DotNet.csproj", "{D1F867F7-9029-480D-B1E1-B0BE4658B182}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D.FileWriter.Dxf", "src\Core2D.FileWriter.Dxf\Core2D.FileWriter.Dxf.csproj", "{D40B3BCD-0A26-40BB-960B-9464D248C934}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D.FileWriter.Emf", "src\Core2D.FileWriter.Emf\Core2D.FileWriter.Emf.csproj", "{3660FCE5-3D0F-412E-93A7-D0D992B4DA65}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D.FileWriter.PdfSharp", "src\Core2D.FileWriter.PdfSharp\Core2D.FileWriter.PdfSharp.csproj", "{EC0EFA51-83F0-4439-BE9F-FAEBD3418C94}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D.FileWriter.SkiaSharp", "src\Core2D.FileWriter.SkiaSharp\Core2D.FileWriter.SkiaSharp.csproj", "{CE2D5901-94D6-491F-A78E-4446160E621F}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D.Log.Trace", "src\Core2D.Log.Trace\Core2D.Log.Trace.csproj", "{68A36926-DF55-4F05-9F89-B9AB1463227E}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D.Renderer.Avalonia", "src\Core2D.Renderer.Avalonia\Core2D.Renderer.Avalonia.csproj", "{E05F3F7E-2176-43DC-90BB-F5C66CFDB12F}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D.Renderer.Dxf", "src\Core2D.Renderer.Dxf\Core2D.Renderer.Dxf.csproj", "{ACC2C898-B49B-4ED9-B18C-389F50801B39}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D.Renderer.PdfSharp", "src\Core2D.Renderer.PdfSharp\Core2D.Renderer.PdfSharp.csproj", "{34C8EE31-A1FE-4A74-BE36-C1F38BC06FEC}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D.Renderer.SkiaSharp", "src\Core2D.Renderer.SkiaSharp\Core2D.Renderer.SkiaSharp.csproj", "{9B8FA9BD-63BE-4560-BA55-0D86AEE1809E}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D.Renderer.WinForms", "src\Core2D.Renderer.WinForms\Core2D.Renderer.WinForms.csproj", "{3DC476E6-5032-4888-9337-221B88653C40}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D.Serializer.Newtonsoft", "src\Core2D.Serializer.Newtonsoft\Core2D.Serializer.Newtonsoft.csproj", "{11E61A53-13D5-4447-8D66-3F328BBFC30A}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D.Serializer.Xaml", "src\Core2D.Serializer.Xaml\Core2D.Serializer.Xaml.csproj", "{1DCA99EA-F8FE-4DDD-AB81-BF0380C1B33D}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D.ServiceProvider.Autofac", "src\Core2D.ServiceProvider.Autofac\Core2D.ServiceProvider.Autofac.csproj", "{7D5D7DF6-058D-4F2E-A3A8-47F89B6E2E7C}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D.ScriptRunner.Roslyn", "src\Core2D.ScriptRunner.Roslyn\Core2D.ScriptRunner.Roslyn.csproj", "{352C23CD-8A6D-4C91-9FD2-FC35ECBC8AFE}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D.TextFieldReader.CsvHelper", "src\Core2D.TextFieldReader.CsvHelper\Core2D.TextFieldReader.CsvHelper.csproj", "{F215ADF5-74C1-4E26-9045-B6BBDA736092}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D.TextFieldWriter.CsvHelper", "src\Core2D.TextFieldWriter.CsvHelper\Core2D.TextFieldWriter.CsvHelper.csproj", "{AE7FF1B5-ABE3-45BF-87CC-44AC580A666A}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D.Utilities.Avalonia", "src\Core2D.Utilities.Avalonia\Core2D.Utilities.Avalonia.csproj", "{C6DBD1FD-C462-4005-B382-97BB4AEF26F2}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{8756F874-0C1B-4AB8-83E0-0BEDA782D212}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D.FileSystem.DotNet.UnitTests", "tests\Core2D.FileSystem.DotNet.UnitTests\Core2D.FileSystem.DotNet.UnitTests.csproj", "{E9C30F6F-00DD-494A-8E7C-253A5C76E999}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D.FileWriter.Dxf.UnitTests", "tests\Core2D.FileWriter.Dxf.UnitTests\Core2D.FileWriter.Dxf.UnitTests.csproj", "{DE9590DA-EAD9-4139-A45D-AE84B363F411}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D.FileWriter.Emf.UnitTests", "tests\Core2D.FileWriter.Emf.UnitTests\Core2D.FileWriter.Emf.UnitTests.csproj", "{90BDDA9E-DB51-4055-8226-C798D862684E}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D.FileWriter.PdfSharp.UnitTests", "tests\Core2D.FileWriter.PdfSharp.UnitTests\Core2D.FileWriter.PdfSharp.UnitTests.csproj", "{69DE084C-DEBB-46E0-B844-467406673610}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D.FileWriter.SkiaSharp.UnitTests", "tests\Core2D.FileWriter.SkiaSharp.UnitTests\Core2D.FileWriter.SkiaSharp.UnitTests.csproj", "{26FC44B3-8D00-4071-A006-D0B2A1D93AE5}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D.Log.Trace.UnitTests", "tests\Core2D.Log.Trace.UnitTests\Core2D.Log.Trace.UnitTests.csproj", "{E8968A54-ADBC-4A66-8FAC-85B3D8975481}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D.Renderer.Avalonia.UnitTests", "tests\Core2D.Renderer.Avalonia.UnitTests\Core2D.Renderer.Avalonia.UnitTests.csproj", "{099402A4-F525-47D9-B885-9B8271DAC417}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D.Renderer.Dxf.UnitTests", "tests\Core2D.Renderer.Dxf.UnitTests\Core2D.Renderer.Dxf.UnitTests.csproj", "{FA74CE51-6488-4D56-936F-3CF4D2C087F2}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D.Renderer.PdfSharp.UnitTests", "tests\Core2D.Renderer.PdfSharp.UnitTests\Core2D.Renderer.PdfSharp.UnitTests.csproj", "{2D4D7521-C999-4FB5-8EE2-F5A938ED59BA}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D.Renderer.SkiaSharp.UnitTests", "tests\Core2D.Renderer.SkiaSharp.UnitTests\Core2D.Renderer.SkiaSharp.UnitTests.csproj", "{93FFAD3C-E234-421C-AB63-C3B2F37252A7}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D.Renderer.WinForms.UnitTests", "tests\Core2D.Renderer.WinForms.UnitTests\Core2D.Renderer.WinForms.UnitTests.csproj", "{9E5AB444-01F3-4DE2-A895-AC63203DABEA}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D.ScriptRunner.Roslyn.UnitTests", "tests\Core2D.ScriptRunner.Roslyn.UnitTests\Core2D.ScriptRunner.Roslyn.UnitTests.csproj", "{2B11DDF3-72F4-4963-8407-CB02864C2141}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D.Serializer.Newtonsoft.UnitTests", "tests\Core2D.Serializer.Newtonsoft.UnitTests\Core2D.Serializer.Newtonsoft.UnitTests.csproj", "{A3192E1D-B92A-4DCB-B4F5-FA6CCF24762E}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D.Serializer.Xaml.UnitTests", "tests\Core2D.Serializer.Xaml.UnitTests\Core2D.Serializer.Xaml.UnitTests.csproj", "{18A5D24D-39AA-431F-84A3-BC6CFA76DB57}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D.ServiceProvider.Autofac.UnitTests", "tests\Core2D.ServiceProvider.Autofac.UnitTests\Core2D.ServiceProvider.Autofac.UnitTests.csproj", "{7F06D650-0C2D-4258-B06E-270A73617774}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D.TextFieldReader.CsvHelper.UnitTests", "tests\Core2D.TextFieldReader.CsvHelper.UnitTests\Core2D.TextFieldReader.CsvHelper.UnitTests.csproj", "{BCE06A45-280A-4399-985C-7C7E64F43D3B}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D.TextFieldWriter.CsvHelper.UnitTests", "tests\Core2D.TextFieldWriter.CsvHelper.UnitTests\Core2D.TextFieldWriter.CsvHelper.UnitTests.csproj", "{7B4D5F28-ADDA-495A-B133-45602C55592C}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D.UnitTests", "tests\Core2D.UnitTests\Core2D.UnitTests.csproj", "{AB31E0E2-9090-4461-84BE-5C5AAA19758F}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D.Utilities.Avalonia.UnitTests", "tests\Core2D.Utilities.Avalonia.UnitTests\Core2D.Utilities.Avalonia.UnitTests.csproj", "{74E77113-796F-4F50-945F-8836BE9043DE}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D.Avalonia", "src\Core2D.Avalonia\Core2D.Avalonia.csproj", "{0C7EA04E-94D8-49B7-B387-C031B2422F3B}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{C7162582-C1FD-45FB-99FD-6770D67B5A21}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
@@ -133,12 +49,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "native", "native", "{0DD549
 		build\native\rd.xml = build\native\rd.xml
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D.Renderer.Wpf", "src\Core2D.Renderer.Wpf\Core2D.Renderer.Wpf.csproj", "{7463A001-BCC8-403A-B83B-B96F5EEF7052}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D.Utilities.Wpf", "src\Core2D.Utilities.Wpf\Core2D.Utilities.Wpf.csproj", "{55F8A599-1EA5-4EF8-BA51-01DE24B49F43}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core2D.Wpf", "src\Core2D.Wpf\Core2D.Wpf.csproj", "{12889680-3769-4914-BE60-5D09E83DF5B2}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ci", "ci", "{6009319B-91B7-43FD-ABAF-1BE105FD91A9}"
 	ProjectSection(SolutionItems) = preProject
 		.travis.yml = .travis.yml
@@ -152,15 +62,67 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "git", "git", "{0AE9F90A-379
 		.gitignore = .gitignore
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D.Renderer.Wpf.UnitTests", "tests\Core2D.Renderer.Wpf.UnitTests\Core2D.Renderer.Wpf.UnitTests.csproj", "{7B7FC8C5-3374-44E1-B09D-FE1FD1BB76E5}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D.Utilities.Wpf.UnitTests", "tests\Core2D.Utilities.Wpf.UnitTests\Core2D.Utilities.Wpf.UnitTests.csproj", "{C0CDF150-C380-4229-A594-AD3F98B2973B}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{FB0B299E-7D14-4217-8C2A-C1F5A16DF234}"
 	ProjectSection(SolutionItems) = preProject
 		LICENSE.TXT = LICENSE.TXT
 		README.md = README.md
 	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{BC6BAFE6-1735-4549-A7CC-819274780B38}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D", "src\Core2D\Core2D.csproj", "{F822EC0C-2501-487D-87A8-B8D28A761385}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D.Avalonia", "src\Core2D.Avalonia\Core2D.Avalonia.csproj", "{0C7EA04E-94D8-49B7-B387-C031B2422F3B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D.Editor", "src\Core2D.Editor\Core2D.Editor.csproj", "{528F510F-1FA0-4AB5-93FA-EF10ABFE2C37}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D.FileSystem.DotNet", "src\Core2D.FileSystem.DotNet\Core2D.FileSystem.DotNet.csproj", "{D1F867F7-9029-480D-B1E1-B0BE4658B182}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D.FileWriter.Dxf", "src\Core2D.FileWriter.Dxf\Core2D.FileWriter.Dxf.csproj", "{D40B3BCD-0A26-40BB-960B-9464D248C934}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D.FileWriter.Emf", "src\Core2D.FileWriter.Emf\Core2D.FileWriter.Emf.csproj", "{3660FCE5-3D0F-412E-93A7-D0D992B4DA65}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D.FileWriter.PdfSharp", "src\Core2D.FileWriter.PdfSharp\Core2D.FileWriter.PdfSharp.csproj", "{EC0EFA51-83F0-4439-BE9F-FAEBD3418C94}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D.FileWriter.SkiaSharp", "src\Core2D.FileWriter.SkiaSharp\Core2D.FileWriter.SkiaSharp.csproj", "{CE2D5901-94D6-491F-A78E-4446160E621F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D.Log.Trace", "src\Core2D.Log.Trace\Core2D.Log.Trace.csproj", "{68A36926-DF55-4F05-9F89-B9AB1463227E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D.Renderer.Avalonia", "src\Core2D.Renderer.Avalonia\Core2D.Renderer.Avalonia.csproj", "{E05F3F7E-2176-43DC-90BB-F5C66CFDB12F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D.Renderer.Dxf", "src\Core2D.Renderer.Dxf\Core2D.Renderer.Dxf.csproj", "{ACC2C898-B49B-4ED9-B18C-389F50801B39}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D.Renderer.PdfSharp", "src\Core2D.Renderer.PdfSharp\Core2D.Renderer.PdfSharp.csproj", "{34C8EE31-A1FE-4A74-BE36-C1F38BC06FEC}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D.Renderer.SkiaSharp", "src\Core2D.Renderer.SkiaSharp\Core2D.Renderer.SkiaSharp.csproj", "{9B8FA9BD-63BE-4560-BA55-0D86AEE1809E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D.Renderer.WinForms", "src\Core2D.Renderer.WinForms\Core2D.Renderer.WinForms.csproj", "{3DC476E6-5032-4888-9337-221B88653C40}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D.Renderer.Wpf", "src\Core2D.Renderer.Wpf\Core2D.Renderer.Wpf.csproj", "{7463A001-BCC8-403A-B83B-B96F5EEF7052}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D.Serializer.Newtonsoft", "src\Core2D.Serializer.Newtonsoft\Core2D.Serializer.Newtonsoft.csproj", "{11E61A53-13D5-4447-8D66-3F328BBFC30A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D.Serializer.Xaml", "src\Core2D.Serializer.Xaml\Core2D.Serializer.Xaml.csproj", "{1DCA99EA-F8FE-4DDD-AB81-BF0380C1B33D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D.ServiceProvider.Autofac", "src\Core2D.ServiceProvider.Autofac\Core2D.ServiceProvider.Autofac.csproj", "{7D5D7DF6-058D-4F2E-A3A8-47F89B6E2E7C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D.ScriptRunner.Roslyn", "src\Core2D.ScriptRunner.Roslyn\Core2D.ScriptRunner.Roslyn.csproj", "{352C23CD-8A6D-4C91-9FD2-FC35ECBC8AFE}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D.TextFieldReader.CsvHelper", "src\Core2D.TextFieldReader.CsvHelper\Core2D.TextFieldReader.CsvHelper.csproj", "{F215ADF5-74C1-4E26-9045-B6BBDA736092}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D.TextFieldWriter.CsvHelper", "src\Core2D.TextFieldWriter.CsvHelper\Core2D.TextFieldWriter.CsvHelper.csproj", "{AE7FF1B5-ABE3-45BF-87CC-44AC580A666A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D.Utilities.Avalonia", "src\Core2D.Utilities.Avalonia\Core2D.Utilities.Avalonia.csproj", "{C6DBD1FD-C462-4005-B382-97BB4AEF26F2}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D.Utilities.Wpf", "src\Core2D.Utilities.Wpf\Core2D.Utilities.Wpf.csproj", "{55F8A599-1EA5-4EF8-BA51-01DE24B49F43}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core2D.Wpf", "src\Core2D.Wpf\Core2D.Wpf.csproj", "{12889680-3769-4914-BE60-5D09E83DF5B2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{8756F874-0C1B-4AB8-83E0-0BEDA782D212}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D.FileSystem.DotNet.UnitTests", "tests\Core2D.FileSystem.DotNet.UnitTests\Core2D.FileSystem.DotNet.UnitTests.csproj", "{E9C30F6F-00DD-494A-8E7C-253A5C76E999}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D.UnitTests", "tests\Core2D.UnitTests\Core2D.UnitTests.csproj", "{AB31E0E2-9090-4461-84BE-5C5AAA19758F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -252,78 +214,10 @@ Global
 		{E9C30F6F-00DD-494A-8E7C-253A5C76E999}.Debug|AnyCPU.Build.0 = Debug|Any CPU
 		{E9C30F6F-00DD-494A-8E7C-253A5C76E999}.Release|AnyCPU.ActiveCfg = Release|Any CPU
 		{E9C30F6F-00DD-494A-8E7C-253A5C76E999}.Release|AnyCPU.Build.0 = Release|Any CPU
-		{DE9590DA-EAD9-4139-A45D-AE84B363F411}.Debug|AnyCPU.ActiveCfg = Debug|Any CPU
-		{DE9590DA-EAD9-4139-A45D-AE84B363F411}.Debug|AnyCPU.Build.0 = Debug|Any CPU
-		{DE9590DA-EAD9-4139-A45D-AE84B363F411}.Release|AnyCPU.ActiveCfg = Release|Any CPU
-		{DE9590DA-EAD9-4139-A45D-AE84B363F411}.Release|AnyCPU.Build.0 = Release|Any CPU
-		{90BDDA9E-DB51-4055-8226-C798D862684E}.Debug|AnyCPU.ActiveCfg = Debug|Any CPU
-		{90BDDA9E-DB51-4055-8226-C798D862684E}.Debug|AnyCPU.Build.0 = Debug|Any CPU
-		{90BDDA9E-DB51-4055-8226-C798D862684E}.Release|AnyCPU.ActiveCfg = Release|Any CPU
-		{90BDDA9E-DB51-4055-8226-C798D862684E}.Release|AnyCPU.Build.0 = Release|Any CPU
-		{69DE084C-DEBB-46E0-B844-467406673610}.Debug|AnyCPU.ActiveCfg = Debug|Any CPU
-		{69DE084C-DEBB-46E0-B844-467406673610}.Debug|AnyCPU.Build.0 = Debug|Any CPU
-		{69DE084C-DEBB-46E0-B844-467406673610}.Release|AnyCPU.ActiveCfg = Release|Any CPU
-		{69DE084C-DEBB-46E0-B844-467406673610}.Release|AnyCPU.Build.0 = Release|Any CPU
-		{26FC44B3-8D00-4071-A006-D0B2A1D93AE5}.Debug|AnyCPU.ActiveCfg = Debug|Any CPU
-		{26FC44B3-8D00-4071-A006-D0B2A1D93AE5}.Debug|AnyCPU.Build.0 = Debug|Any CPU
-		{26FC44B3-8D00-4071-A006-D0B2A1D93AE5}.Release|AnyCPU.ActiveCfg = Release|Any CPU
-		{26FC44B3-8D00-4071-A006-D0B2A1D93AE5}.Release|AnyCPU.Build.0 = Release|Any CPU
-		{E8968A54-ADBC-4A66-8FAC-85B3D8975481}.Debug|AnyCPU.ActiveCfg = Debug|Any CPU
-		{E8968A54-ADBC-4A66-8FAC-85B3D8975481}.Debug|AnyCPU.Build.0 = Debug|Any CPU
-		{E8968A54-ADBC-4A66-8FAC-85B3D8975481}.Release|AnyCPU.ActiveCfg = Release|Any CPU
-		{E8968A54-ADBC-4A66-8FAC-85B3D8975481}.Release|AnyCPU.Build.0 = Release|Any CPU
-		{099402A4-F525-47D9-B885-9B8271DAC417}.Debug|AnyCPU.ActiveCfg = Debug|Any CPU
-		{099402A4-F525-47D9-B885-9B8271DAC417}.Debug|AnyCPU.Build.0 = Debug|Any CPU
-		{099402A4-F525-47D9-B885-9B8271DAC417}.Release|AnyCPU.ActiveCfg = Release|Any CPU
-		{099402A4-F525-47D9-B885-9B8271DAC417}.Release|AnyCPU.Build.0 = Release|Any CPU
-		{FA74CE51-6488-4D56-936F-3CF4D2C087F2}.Debug|AnyCPU.ActiveCfg = Debug|Any CPU
-		{FA74CE51-6488-4D56-936F-3CF4D2C087F2}.Debug|AnyCPU.Build.0 = Debug|Any CPU
-		{FA74CE51-6488-4D56-936F-3CF4D2C087F2}.Release|AnyCPU.ActiveCfg = Release|Any CPU
-		{FA74CE51-6488-4D56-936F-3CF4D2C087F2}.Release|AnyCPU.Build.0 = Release|Any CPU
-		{2D4D7521-C999-4FB5-8EE2-F5A938ED59BA}.Debug|AnyCPU.ActiveCfg = Debug|Any CPU
-		{2D4D7521-C999-4FB5-8EE2-F5A938ED59BA}.Debug|AnyCPU.Build.0 = Debug|Any CPU
-		{2D4D7521-C999-4FB5-8EE2-F5A938ED59BA}.Release|AnyCPU.ActiveCfg = Release|Any CPU
-		{2D4D7521-C999-4FB5-8EE2-F5A938ED59BA}.Release|AnyCPU.Build.0 = Release|Any CPU
-		{93FFAD3C-E234-421C-AB63-C3B2F37252A7}.Debug|AnyCPU.ActiveCfg = Debug|Any CPU
-		{93FFAD3C-E234-421C-AB63-C3B2F37252A7}.Debug|AnyCPU.Build.0 = Debug|Any CPU
-		{93FFAD3C-E234-421C-AB63-C3B2F37252A7}.Release|AnyCPU.ActiveCfg = Release|Any CPU
-		{93FFAD3C-E234-421C-AB63-C3B2F37252A7}.Release|AnyCPU.Build.0 = Release|Any CPU
-		{9E5AB444-01F3-4DE2-A895-AC63203DABEA}.Debug|AnyCPU.ActiveCfg = Debug|Any CPU
-		{9E5AB444-01F3-4DE2-A895-AC63203DABEA}.Debug|AnyCPU.Build.0 = Debug|Any CPU
-		{9E5AB444-01F3-4DE2-A895-AC63203DABEA}.Release|AnyCPU.ActiveCfg = Release|Any CPU
-		{9E5AB444-01F3-4DE2-A895-AC63203DABEA}.Release|AnyCPU.Build.0 = Release|Any CPU
-		{2B11DDF3-72F4-4963-8407-CB02864C2141}.Debug|AnyCPU.ActiveCfg = Debug|Any CPU
-		{2B11DDF3-72F4-4963-8407-CB02864C2141}.Debug|AnyCPU.Build.0 = Debug|Any CPU
-		{2B11DDF3-72F4-4963-8407-CB02864C2141}.Release|AnyCPU.ActiveCfg = Release|Any CPU
-		{2B11DDF3-72F4-4963-8407-CB02864C2141}.Release|AnyCPU.Build.0 = Release|Any CPU
-		{A3192E1D-B92A-4DCB-B4F5-FA6CCF24762E}.Debug|AnyCPU.ActiveCfg = Debug|Any CPU
-		{A3192E1D-B92A-4DCB-B4F5-FA6CCF24762E}.Debug|AnyCPU.Build.0 = Debug|Any CPU
-		{A3192E1D-B92A-4DCB-B4F5-FA6CCF24762E}.Release|AnyCPU.ActiveCfg = Release|Any CPU
-		{A3192E1D-B92A-4DCB-B4F5-FA6CCF24762E}.Release|AnyCPU.Build.0 = Release|Any CPU
-		{18A5D24D-39AA-431F-84A3-BC6CFA76DB57}.Debug|AnyCPU.ActiveCfg = Debug|Any CPU
-		{18A5D24D-39AA-431F-84A3-BC6CFA76DB57}.Debug|AnyCPU.Build.0 = Debug|Any CPU
-		{18A5D24D-39AA-431F-84A3-BC6CFA76DB57}.Release|AnyCPU.ActiveCfg = Release|Any CPU
-		{18A5D24D-39AA-431F-84A3-BC6CFA76DB57}.Release|AnyCPU.Build.0 = Release|Any CPU
-		{7F06D650-0C2D-4258-B06E-270A73617774}.Debug|AnyCPU.ActiveCfg = Debug|Any CPU
-		{7F06D650-0C2D-4258-B06E-270A73617774}.Debug|AnyCPU.Build.0 = Debug|Any CPU
-		{7F06D650-0C2D-4258-B06E-270A73617774}.Release|AnyCPU.ActiveCfg = Release|Any CPU
-		{7F06D650-0C2D-4258-B06E-270A73617774}.Release|AnyCPU.Build.0 = Release|Any CPU
-		{BCE06A45-280A-4399-985C-7C7E64F43D3B}.Debug|AnyCPU.ActiveCfg = Debug|Any CPU
-		{BCE06A45-280A-4399-985C-7C7E64F43D3B}.Debug|AnyCPU.Build.0 = Debug|Any CPU
-		{BCE06A45-280A-4399-985C-7C7E64F43D3B}.Release|AnyCPU.ActiveCfg = Release|Any CPU
-		{BCE06A45-280A-4399-985C-7C7E64F43D3B}.Release|AnyCPU.Build.0 = Release|Any CPU
-		{7B4D5F28-ADDA-495A-B133-45602C55592C}.Debug|AnyCPU.ActiveCfg = Debug|Any CPU
-		{7B4D5F28-ADDA-495A-B133-45602C55592C}.Debug|AnyCPU.Build.0 = Debug|Any CPU
-		{7B4D5F28-ADDA-495A-B133-45602C55592C}.Release|AnyCPU.ActiveCfg = Release|Any CPU
-		{7B4D5F28-ADDA-495A-B133-45602C55592C}.Release|AnyCPU.Build.0 = Release|Any CPU
 		{AB31E0E2-9090-4461-84BE-5C5AAA19758F}.Debug|AnyCPU.ActiveCfg = Debug|Any CPU
 		{AB31E0E2-9090-4461-84BE-5C5AAA19758F}.Debug|AnyCPU.Build.0 = Debug|Any CPU
 		{AB31E0E2-9090-4461-84BE-5C5AAA19758F}.Release|AnyCPU.ActiveCfg = Release|Any CPU
 		{AB31E0E2-9090-4461-84BE-5C5AAA19758F}.Release|AnyCPU.Build.0 = Release|Any CPU
-		{74E77113-796F-4F50-945F-8836BE9043DE}.Debug|AnyCPU.ActiveCfg = Debug|Any CPU
-		{74E77113-796F-4F50-945F-8836BE9043DE}.Debug|AnyCPU.Build.0 = Debug|Any CPU
-		{74E77113-796F-4F50-945F-8836BE9043DE}.Release|AnyCPU.ActiveCfg = Release|Any CPU
-		{74E77113-796F-4F50-945F-8836BE9043DE}.Release|AnyCPU.Build.0 = Release|Any CPU
 		{0C7EA04E-94D8-49B7-B387-C031B2422F3B}.Debug|AnyCPU.ActiveCfg = Debug|Any CPU
 		{0C7EA04E-94D8-49B7-B387-C031B2422F3B}.Debug|AnyCPU.Build.0 = Debug|Any CPU
 		{0C7EA04E-94D8-49B7-B387-C031B2422F3B}.Release|AnyCPU.ActiveCfg = Release|Any CPU
@@ -340,14 +234,6 @@ Global
 		{12889680-3769-4914-BE60-5D09E83DF5B2}.Debug|AnyCPU.Build.0 = Debug|Any CPU
 		{12889680-3769-4914-BE60-5D09E83DF5B2}.Release|AnyCPU.ActiveCfg = Release|Any CPU
 		{12889680-3769-4914-BE60-5D09E83DF5B2}.Release|AnyCPU.Build.0 = Release|Any CPU
-		{7B7FC8C5-3374-44E1-B09D-FE1FD1BB76E5}.Debug|AnyCPU.ActiveCfg = Debug|Any CPU
-		{7B7FC8C5-3374-44E1-B09D-FE1FD1BB76E5}.Debug|AnyCPU.Build.0 = Debug|Any CPU
-		{7B7FC8C5-3374-44E1-B09D-FE1FD1BB76E5}.Release|AnyCPU.ActiveCfg = Release|Any CPU
-		{7B7FC8C5-3374-44E1-B09D-FE1FD1BB76E5}.Release|AnyCPU.Build.0 = Release|Any CPU
-		{C0CDF150-C380-4229-A594-AD3F98B2973B}.Debug|AnyCPU.ActiveCfg = Debug|Any CPU
-		{C0CDF150-C380-4229-A594-AD3F98B2973B}.Debug|AnyCPU.Build.0 = Debug|Any CPU
-		{C0CDF150-C380-4229-A594-AD3F98B2973B}.Release|AnyCPU.ActiveCfg = Release|Any CPU
-		{C0CDF150-C380-4229-A594-AD3F98B2973B}.Release|AnyCPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -374,24 +260,7 @@ Global
 		{AE7FF1B5-ABE3-45BF-87CC-44AC580A666A} = {BC6BAFE6-1735-4549-A7CC-819274780B38}
 		{C6DBD1FD-C462-4005-B382-97BB4AEF26F2} = {BC6BAFE6-1735-4549-A7CC-819274780B38}
 		{E9C30F6F-00DD-494A-8E7C-253A5C76E999} = {8756F874-0C1B-4AB8-83E0-0BEDA782D212}
-		{DE9590DA-EAD9-4139-A45D-AE84B363F411} = {8756F874-0C1B-4AB8-83E0-0BEDA782D212}
-		{90BDDA9E-DB51-4055-8226-C798D862684E} = {8756F874-0C1B-4AB8-83E0-0BEDA782D212}
-		{69DE084C-DEBB-46E0-B844-467406673610} = {8756F874-0C1B-4AB8-83E0-0BEDA782D212}
-		{26FC44B3-8D00-4071-A006-D0B2A1D93AE5} = {8756F874-0C1B-4AB8-83E0-0BEDA782D212}
-		{E8968A54-ADBC-4A66-8FAC-85B3D8975481} = {8756F874-0C1B-4AB8-83E0-0BEDA782D212}
-		{099402A4-F525-47D9-B885-9B8271DAC417} = {8756F874-0C1B-4AB8-83E0-0BEDA782D212}
-		{FA74CE51-6488-4D56-936F-3CF4D2C087F2} = {8756F874-0C1B-4AB8-83E0-0BEDA782D212}
-		{2D4D7521-C999-4FB5-8EE2-F5A938ED59BA} = {8756F874-0C1B-4AB8-83E0-0BEDA782D212}
-		{93FFAD3C-E234-421C-AB63-C3B2F37252A7} = {8756F874-0C1B-4AB8-83E0-0BEDA782D212}
-		{9E5AB444-01F3-4DE2-A895-AC63203DABEA} = {8756F874-0C1B-4AB8-83E0-0BEDA782D212}
-		{2B11DDF3-72F4-4963-8407-CB02864C2141} = {8756F874-0C1B-4AB8-83E0-0BEDA782D212}
-		{A3192E1D-B92A-4DCB-B4F5-FA6CCF24762E} = {8756F874-0C1B-4AB8-83E0-0BEDA782D212}
-		{18A5D24D-39AA-431F-84A3-BC6CFA76DB57} = {8756F874-0C1B-4AB8-83E0-0BEDA782D212}
-		{7F06D650-0C2D-4258-B06E-270A73617774} = {8756F874-0C1B-4AB8-83E0-0BEDA782D212}
-		{BCE06A45-280A-4399-985C-7C7E64F43D3B} = {8756F874-0C1B-4AB8-83E0-0BEDA782D212}
-		{7B4D5F28-ADDA-495A-B133-45602C55592C} = {8756F874-0C1B-4AB8-83E0-0BEDA782D212}
 		{AB31E0E2-9090-4461-84BE-5C5AAA19758F} = {8756F874-0C1B-4AB8-83E0-0BEDA782D212}
-		{74E77113-796F-4F50-945F-8836BE9043DE} = {8756F874-0C1B-4AB8-83E0-0BEDA782D212}
 		{0C7EA04E-94D8-49B7-B387-C031B2422F3B} = {BC6BAFE6-1735-4549-A7CC-819274780B38}
 		{3C45CABF-3E2E-455B-AACF-1FB63D331F9C} = {C7162582-C1FD-45FB-99FD-6770D67B5A21}
 		{DDE59F10-F84A-4919-B221-38414B958103} = {C7162582-C1FD-45FB-99FD-6770D67B5A21}
@@ -401,8 +270,6 @@ Global
 		{12889680-3769-4914-BE60-5D09E83DF5B2} = {BC6BAFE6-1735-4549-A7CC-819274780B38}
 		{6009319B-91B7-43FD-ABAF-1BE105FD91A9} = {C7162582-C1FD-45FB-99FD-6770D67B5A21}
 		{0AE9F90A-3798-42B0-A58D-AA9A9E08BED2} = {C7162582-C1FD-45FB-99FD-6770D67B5A21}
-		{7B7FC8C5-3374-44E1-B09D-FE1FD1BB76E5} = {8756F874-0C1B-4AB8-83E0-0BEDA782D212}
-		{C0CDF150-C380-4229-A594-AD3F98B2973B} = {8756F874-0C1B-4AB8-83E0-0BEDA782D212}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2614B90F-C6F8-435C-8BD0-09AEE3ABAD2B}
