@@ -21,7 +21,7 @@ namespace Core2D.Renderer.Wpf
     /// </summary>
     public class WpfRenderer : ShapeRenderer
     {
-        private Cache<ShapeStyle, Tuple<Brush, Pen>> _styleCache = Cache<ShapeStyle, Tuple<Brush, Pen>>.Create();
+        private Cache<ShapeStyle, (Brush, Pen)> _styleCache = Cache<ShapeStyle, (Brush, Pen)>.Create();
         private Cache<ArrowStyle, Tuple<Brush, Pen>> _arrowStyleCache = Cache<ArrowStyle, Tuple<Brush, Pen>>.Create();
         private Cache<LineShape, System.Windows.Media.PathGeometry> _curvedLineCache = Cache<LineShape, System.Windows.Media.PathGeometry>.Create();
         private Cache<ArcShape, System.Windows.Media.PathGeometry> _arcCache = Cache<ArcShape, System.Windows.Media.PathGeometry>.Create();
@@ -472,30 +472,23 @@ namespace Core2D.Renderer.Wpf
             double halfEndArrow = thicknessEndArrow / 2.0;
 
             // Line style.
-            Tuple<Brush, Pen> styleCached = _styleCache.Get(style);
-            Brush fillLine;
-            Pen strokeLine;
-            if (styleCached != null)
+            (Brush fill, Pen stroke) = _styleCache.Get(style);
+            if (fill == null || stroke == null)
             {
-                fillLine = styleCached.Item1;
-                strokeLine = styleCached.Item2;
-            }
-            else
-            {
-                fillLine = CreateBrush(style.Fill);
-                strokeLine = CreatePen(style, thicknessLine);
-                _styleCache.Set(style, Tuple.Create(fillLine, strokeLine));
+                fill = CreateBrush(style.Fill);
+                stroke = CreatePen(style, thicknessLine);
+                _styleCache.Set(style, (fill, stroke));
             }
 
             DrawLineArrowsInternal(_dc, line, style, halfStartArrow, halfEndArrow, thicknessStartArrow, thicknessEndArrow, dx, dy, out Point pt1, out Point pt2);
 
             if (line.Style.LineStyle.IsCurved)
             {
-                DrawLineCurveInternal(_dc, halfLine, strokeLine, line, ref pt1, ref pt2, dx, dy);
+                DrawLineCurveInternal(_dc, halfLine, stroke, line, ref pt1, ref pt2, dx, dy);
             }
             else
             {
-                DrawLineInternal(_dc, halfLine, strokeLine, line.IsStroked, ref pt1, ref pt2);
+                DrawLineInternal(_dc, halfLine, stroke, line.IsStroked, ref pt1, ref pt2);
             }
         }
 
@@ -511,19 +504,12 @@ namespace Core2D.Renderer.Wpf
             double thickness = style.Thickness / _state.ZoomX;
             double half = thickness / 2.0;
 
-            Tuple<Brush, Pen> styleCached = _styleCache.Get(style);
-            Brush fill;
-            Pen stroke;
-            if (styleCached != null)
-            {
-                fill = styleCached.Item1;
-                stroke = styleCached.Item2;
-            }
-            else
+            (Brush fill, Pen stroke) = _styleCache.Get(style);
+            if (fill == null || stroke == null)
             {
                 fill = CreateBrush(style.Fill);
                 stroke = CreatePen(style, thickness);
-                _styleCache.Set(style, Tuple.Create(fill, stroke));
+                _styleCache.Set(style, (fill, stroke));
             }
 
             var rect = CreateRect(rectangle.TopLeft, rectangle.BottomRight, dx, dy);
@@ -548,19 +534,12 @@ namespace Core2D.Renderer.Wpf
             double thickness = style.Thickness / _state.ZoomX;
             double half = thickness / 2.0;
 
-            Tuple<Brush, Pen> styleCached = _styleCache.Get(style);
-            Brush fill;
-            Pen stroke;
-            if (styleCached != null)
-            {
-                fill = styleCached.Item1;
-                stroke = styleCached.Item2;
-            }
-            else
+            (Brush fill, Pen stroke) = _styleCache.Get(style);
+            if (fill == null || stroke == null)
             {
                 fill = CreateBrush(style.Fill);
                 stroke = CreatePen(style, thickness);
-                _styleCache.Set(style, Tuple.Create(fill, stroke));
+                _styleCache.Set(style, (fill, stroke));
             }
 
             var rect = CreateRect(ellipse.TopLeft, ellipse.BottomRight, dx, dy);
@@ -583,19 +562,12 @@ namespace Core2D.Renderer.Wpf
             double thickness = style.Thickness / _state.ZoomX;
             double half = thickness / 2.0;
 
-            Tuple<Brush, Pen> styleCached = _styleCache.Get(style);
-            Brush fill;
-            Pen stroke;
-            if (styleCached != null)
-            {
-                fill = styleCached.Item1;
-                stroke = styleCached.Item2;
-            }
-            else
+            (Brush fill, Pen stroke) = _styleCache.Get(style);
+            if (fill == null || stroke == null)
             {
                 fill = CreateBrush(style.Fill);
                 stroke = CreatePen(style, thickness);
-                _styleCache.Set(style, Tuple.Create(fill, stroke));
+                _styleCache.Set(style, (fill, stroke));
             }
 
             var a = new WpfArc(
@@ -656,19 +628,12 @@ namespace Core2D.Renderer.Wpf
             double thickness = style.Thickness / _state.ZoomX;
             double half = thickness / 2.0;
 
-            Tuple<Brush, Pen> styleCached = _styleCache.Get(style);
-            Brush fill;
-            Pen stroke;
-            if (styleCached != null)
-            {
-                fill = styleCached.Item1;
-                stroke = styleCached.Item2;
-            }
-            else
+            (Brush fill, Pen stroke) = _styleCache.Get(style);
+            if (fill == null || stroke == null)
             {
                 fill = CreateBrush(style.Fill);
                 stroke = CreatePen(style, thickness);
-                _styleCache.Set(style, Tuple.Create(fill, stroke));
+                _styleCache.Set(style, (fill, stroke));
             }
 
             System.Windows.Media.PathGeometry pg = _cubicBezierCache.Get(cubicBezier);
@@ -720,19 +685,12 @@ namespace Core2D.Renderer.Wpf
             double thickness = style.Thickness / _state.ZoomX;
             double half = thickness / 2.0;
 
-            Tuple<Brush, Pen> styleCached = _styleCache.Get(style);
-            Brush fill;
-            Pen stroke;
-            if (styleCached != null)
-            {
-                fill = styleCached.Item1;
-                stroke = styleCached.Item2;
-            }
-            else
+            (Brush fill, Pen stroke) = _styleCache.Get(style);
+            if (fill == null || stroke == null)
             {
                 fill = CreateBrush(style.Fill);
                 stroke = CreatePen(style, thickness);
-                _styleCache.Set(style, Tuple.Create(fill, stroke));
+                _styleCache.Set(style, (fill, stroke));
             }
 
             System.Windows.Media.PathGeometry pg = _quadraticBezierCache.Get(quadraticBezier);
@@ -789,19 +747,12 @@ namespace Core2D.Renderer.Wpf
             double thickness = style.Thickness / _state.ZoomX;
             double half = thickness / 2.0;
 
-            Tuple<Brush, Pen> styleCached = _styleCache.Get(style);
-            Brush fill;
-            Pen stroke;
-            if (styleCached != null)
-            {
-                fill = styleCached.Item1;
-                stroke = styleCached.Item2;
-            }
-            else
+            (Brush fill, Pen stroke) = _styleCache.Get(style);
+            if (fill == null || stroke == null)
             {
                 fill = CreateBrush(style.Fill);
                 stroke = CreatePen(style, thickness);
-                _styleCache.Set(style, Tuple.Create(fill, stroke));
+                _styleCache.Set(style, (fill, stroke));
             }
 
             var rect = CreateRect(text.TopLeft, text.BottomRight, dx, dy);
@@ -889,19 +840,12 @@ namespace Core2D.Renderer.Wpf
             double thickness = style.Thickness / _state.ZoomX;
             double half = thickness / 2.0;
 
-            Tuple<Brush, Pen> styleCached = _styleCache.Get(style);
-            Brush fill;
-            Pen stroke;
-            if (styleCached != null)
-            {
-                fill = styleCached.Item1;
-                stroke = styleCached.Item2;
-            }
-            else
+            (Brush fill, Pen stroke) = _styleCache.Get(style);
+            if (fill == null || stroke == null)
             {
                 fill = CreateBrush(style.Fill);
                 stroke = CreatePen(style, thickness);
-                _styleCache.Set(style, Tuple.Create(fill, stroke));
+                _styleCache.Set(style, (fill, stroke));
             }
 
             var rect = CreateRect(image.TopLeft, image.BottomRight, dx, dy);
@@ -966,19 +910,12 @@ namespace Core2D.Renderer.Wpf
             double thickness = style.Thickness / _state.ZoomX;
             double half = thickness / 2.0;
 
-            Tuple<Brush, Pen> styleCached = _styleCache.Get(style);
-            Brush fill;
-            Pen stroke;
-            if (styleCached != null)
-            {
-                fill = styleCached.Item1;
-                stroke = styleCached.Item2;
-            }
-            else
+            (Brush fill, Pen stroke) = _styleCache.Get(style);
+            if (fill == null || stroke == null)
             {
                 fill = CreateBrush(style.Fill);
                 stroke = CreatePen(style, thickness);
-                _styleCache.Set(style, Tuple.Create(fill, stroke));
+                _styleCache.Set(style, (fill, stroke));
             }
 
             Tuple<Path.PathGeometry, StreamGeometry, ShapeStyle> pcache = _pathCache.Get(path);
