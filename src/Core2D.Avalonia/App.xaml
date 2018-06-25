@@ -827,7 +827,7 @@
             <ContentControl Content="{Binding Context.Project.CurrentContainer}"/>
         </DataTemplate>
         <DataTemplate DataType="Tools:ZoomTool">
-            <containers:ZoomControl DataContext="{Binding Context.Canvas.Zoom}"/>
+            <containers:ZoomControl DataContext="{Binding Context.CanvasPlatform.Zoom}"/>
         </DataTemplate>
         <DataTemplate DataType="Tools:ToolsTool">
             <settings:ToolsControl DataContext="{Binding Context}"/>
