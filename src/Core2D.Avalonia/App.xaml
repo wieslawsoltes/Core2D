@@ -776,7 +776,7 @@
             <Grid RowDefinitions="Auto,*,Auto">
                 <views:EditorMenuControl Grid.Row="0" DataContext="{Binding Context}"/>
                 <views:EditorControl Grid.Row="1" Margin="6,6,6,2"/>
-                <views:StatusControl Grid.Column="0" Grid.Row="2" Margin="6,2,6,2" DataContext="{Binding Context}"/>
+                <views:StatusControl Grid.Column="0" Grid.Row="2" Margin="6,2,6,4" DataContext="{Binding Context}"/>
             </Grid>
         </DataTemplate>
         <DataTemplate DataType="Views:BrowserView">
