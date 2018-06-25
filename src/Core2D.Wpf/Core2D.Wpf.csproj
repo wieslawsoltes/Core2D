@@ -3,6 +3,8 @@
   <PropertyGroup>
     <TargetFramework>net461</TargetFramework>
     <OutputType>WinExe</OutputType>
+    <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
+    <EnableDefaultCompileItems>False</EnableDefaultCompileItems>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
 
