@@ -5,7 +5,9 @@
     <OutputType>WinExe</OutputType>
     <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
     <EnableDefaultCompileItems>False</EnableDefaultCompileItems>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <EnableDefaultNoneItems>True</EnableDefaultNoneItems>
+    <EnableDefaultItems>True</EnableDefaultItems>
+    <AutoGenerateBindingRedirects>True</AutoGenerateBindingRedirects>
   </PropertyGroup>
 
   <Import Project="..\..\build\Base.props" />
@@ -32,27 +34,26 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Include="..\Core2D.Wpf\**\*.cs" Exclude="..\Core2D.Wpf\obj\**;obj\**" />
+    <Compile Include="**\*.cs" Exclude="obj\**;bin\**;Properties\AssemblyInfo.cs" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="..\Core2D.Wpf\**\*.xaml" />
     <ApplicationDefinition Include="App.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="..\Core2D.Wpf\**\*.xaml" Exclude="App.xaml">
+    <Page Include="**\*.xaml" Exclude="App.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Compile Update="..\Core2D.Wpf\**\*.xaml.cs">
+    <Compile Update="**\*.xaml.cs">
       <DependentUpon>%(Filename)</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="..\Core2D.Wpf\Assets\*;..\Core2D.Wpf\Layouts\*" Exclude="..\Core2D.Wpf\bin\**;..\Core2D.Wpf\obj\**;..\Core2D.Wpf\**\*.xproj;..\Core2D.Wpf\packages\**;@(EmbeddedResource)" />
+    <EmbeddedResource Include="Assets\*;Layouts\*" Exclude="bin\**;obj\**;**\*.xproj;packages\**;@(EmbeddedResource)" />
   </ItemGroup>
 
   <ItemGroup>
