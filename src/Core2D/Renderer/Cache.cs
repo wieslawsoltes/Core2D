@@ -6,11 +6,11 @@ using System.Collections.Generic;
 namespace Core2D.Renderer
 {
     /// <summary>
-    /// Generic key value cache.
+    /// Generic key value cache implemented with generic dictionary collection.
     /// </summary>
     /// <typeparam name="TKey">The input type.</typeparam>
     /// <typeparam name="TValue">The output type.</typeparam>
-    public class Cache<TKey, TValue>
+    public class Cache<TKey, TValue> : ICache<TKey, TValue>
     {
         private IDictionary<TKey, TValue> _storage;
         private readonly Action<TValue> _dispose;
@@ -35,9 +35,30 @@ namespace Core2D.Renderer
             return new Cache<TKey, TValue>(dispose);
         }
 
-        /// <summary>
-        /// Resets cache storage.
-        /// </summary>
+        /// <inheritdoc/>
+        public TValue Get(TKey key)
+        {
+            if (_storage.TryGetValue(key, out TValue data))
+            {
+                return data;
+            }
+            return default(TValue);
+        }
+
+        /// <inheritdoc/>
+        public void Set(TKey key, TValue value)
+        {
+            if (_storage.ContainsKey(key))
+            {
+                _storage[key] = value;
+            }
+            else
+            { 
+                _storage.Add(key, value);
+            }
+        }
+
+        /// <inheritdoc/>
         public void Reset()
         {
             if (_storage != null)
@@ -52,37 +73,6 @@ namespace Core2D.Renderer
                 _storage.Clear();
             }
             _storage = new Dictionary<TKey, TValue>();
-        }
-
-        /// <summary>
-        /// Sets or adds new value to storage.
-        /// </summary>
-        /// <param name="key">The key object.</param>
-        /// <param name="value">The value object.</param>
-        public void Set(TKey key, TValue value)
-        {
-            if (_storage.ContainsKey(key))
-            {
-                _storage[key] = value;
-            }
-            else
-            { 
-                _storage.Add(key, value);
-            }
-        }
-
-        /// <summary>
-        /// Gets value from storage.
-        /// </summary>
-        /// <param name="key">The key object.</param>
-        /// <returns>The value from storage.</returns>
-        public TValue Get(TKey key)
-        {
-            if (_storage.TryGetValue(key, out TValue data))
-            {
-                return data;
-            }
-            return default(TValue);
         }
     }
 }

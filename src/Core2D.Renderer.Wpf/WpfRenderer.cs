@@ -21,15 +21,15 @@ namespace Core2D.Renderer.Wpf
     /// </summary>
     public class WpfRenderer : ShapeRenderer
     {
-        private Cache<ShapeStyle, (Brush, Pen)> _styleCache = Cache<ShapeStyle, (Brush, Pen)>.Create();
-        private Cache<ArrowStyle, (Brush, Pen)> _arrowStyleCache = Cache<ArrowStyle, (Brush, Pen)>.Create();
-        private Cache<LineShape, PathGeometry> _curvedLineCache = Cache<LineShape, PathGeometry>.Create();
-        private Cache<ArcShape, PathGeometry> _arcCache = Cache<ArcShape, PathGeometry>.Create();
-        private Cache<CubicBezierShape, PathGeometry> _cubicBezierCache = Cache<CubicBezierShape, PathGeometry>.Create();
-        private Cache<QuadraticBezierShape, PathGeometry> _quadraticBezierCache = Cache<QuadraticBezierShape, PathGeometry>.Create();
-        private Cache<TextShape, (string, FormattedText, ShapeStyle)> _textCache = Cache<TextShape, (string, FormattedText, ShapeStyle)>.Create();
-        private Cache<string, BitmapImage> _biCache = Cache<string, BitmapImage>.Create(bi => bi.StreamSource.Dispose());
-        private Cache<PathShape, (Path.PathGeometry, StreamGeometry, ShapeStyle)> _pathCache = Cache<PathShape, (Path.PathGeometry, StreamGeometry, ShapeStyle)>.Create();
+        private ICache<ShapeStyle, (Brush, Pen)> _styleCache = Cache<ShapeStyle, (Brush, Pen)>.Create();
+        private ICache<ArrowStyle, (Brush, Pen)> _arrowStyleCache = Cache<ArrowStyle, (Brush, Pen)>.Create();
+        private ICache<LineShape, PathGeometry> _curvedLineCache = Cache<LineShape, PathGeometry>.Create();
+        private ICache<ArcShape, PathGeometry> _arcCache = Cache<ArcShape, PathGeometry>.Create();
+        private ICache<CubicBezierShape, PathGeometry> _cubicBezierCache = Cache<CubicBezierShape, PathGeometry>.Create();
+        private ICache<QuadraticBezierShape, PathGeometry> _quadraticBezierCache = Cache<QuadraticBezierShape, PathGeometry>.Create();
+        private ICache<TextShape, (string, FormattedText, ShapeStyle)> _textCache = Cache<TextShape, (string, FormattedText, ShapeStyle)>.Create();
+        private ICache<string, BitmapImage> _biCache = Cache<string, BitmapImage>.Create(bi => bi.StreamSource.Dispose());
+        private ICache<PathShape, (Path.PathGeometry, StreamGeometry, ShapeStyle)> _pathCache = Cache<PathShape, (Path.PathGeometry, StreamGeometry, ShapeStyle)>.Create();
         private ShapeRendererState _state = new ShapeRendererState();
 
         /// <inheritdoc/>

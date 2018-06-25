@@ -21,7 +21,7 @@ namespace Core2D.Renderer.Dxf
     /// </summary>
     public partial class DxfRenderer : ShapeRenderer
     {
-        private Cache<string, ImageDefinition> _biCache = Cache<string, ImageDefinition>.Create();
+        private ICache<string, ImageDefinition> _biCache = Cache<string, ImageDefinition>.Create();
         private double _pageWidth;
         private double _pageHeight;
         private string _outputPath;
