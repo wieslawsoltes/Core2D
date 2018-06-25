@@ -23,10 +23,10 @@ namespace Core2D.Renderer.Wpf
     {
         private Cache<ShapeStyle, (Brush, Pen)> _styleCache = Cache<ShapeStyle, (Brush, Pen)>.Create();
         private Cache<ArrowStyle, Tuple<Brush, Pen>> _arrowStyleCache = Cache<ArrowStyle, Tuple<Brush, Pen>>.Create();
-        private Cache<LineShape, System.Windows.Media.PathGeometry> _curvedLineCache = Cache<LineShape, System.Windows.Media.PathGeometry>.Create();
-        private Cache<ArcShape, System.Windows.Media.PathGeometry> _arcCache = Cache<ArcShape, System.Windows.Media.PathGeometry>.Create();
-        private Cache<CubicBezierShape, System.Windows.Media.PathGeometry> _cubicBezierCache = Cache<CubicBezierShape, System.Windows.Media.PathGeometry>.Create();
-        private Cache<QuadraticBezierShape, System.Windows.Media.PathGeometry> _quadraticBezierCache = Cache<QuadraticBezierShape, System.Windows.Media.PathGeometry>.Create();
+        private Cache<LineShape, PathGeometry> _curvedLineCache = Cache<LineShape, PathGeometry>.Create();
+        private Cache<ArcShape, PathGeometry> _arcCache = Cache<ArcShape, PathGeometry>.Create();
+        private Cache<CubicBezierShape, PathGeometry> _cubicBezierCache = Cache<CubicBezierShape, PathGeometry>.Create();
+        private Cache<QuadraticBezierShape, PathGeometry> _quadraticBezierCache = Cache<QuadraticBezierShape, PathGeometry>.Create();
         private Cache<TextShape, Tuple<string, FormattedText, ShapeStyle>> _textCache = Cache<TextShape, Tuple<string, FormattedText, ShapeStyle>>.Create();
         private Cache<string, BitmapImage> _biCache = Cache<string, BitmapImage>.Create(bi => bi.StreamSource.Dispose());
         private Cache<PathShape, Tuple<Path.PathGeometry, StreamGeometry, ShapeStyle>> _pathCache = Cache<PathShape, Tuple<Path.PathGeometry, StreamGeometry, ShapeStyle>>.Create();
@@ -165,7 +165,7 @@ namespace Core2D.Renderer.Wpf
                 ref p1x, ref p1y,
                 ref p2x, ref p2y);
 
-            System.Windows.Media.PathGeometry pg = _curvedLineCache.Get(line);
+            PathGeometry pg = _curvedLineCache.Get(line);
             if (pg != null)
             {
                 var pf = pg.Figures[0];
@@ -192,7 +192,7 @@ namespace Core2D.Renderer.Wpf
                 //bs.Freeze();
                 pf.Segments.Add(bs);
                 //pf.Freeze();
-                pg = new System.Windows.Media.PathGeometry();
+                pg = new PathGeometry();
                 pg.Figures.Add(pf);
                 //pg.Freeze();
 
@@ -359,7 +359,7 @@ namespace Core2D.Renderer.Wpf
             dc.Pop();
         }
 
-        private static void DrawPathGeometryInternal(DrawingContext dc, double half, Brush brush, Pen pen, bool isStroked, bool isFilled, System.Windows.Media.PathGeometry pg)
+        private static void DrawPathGeometryInternal(DrawingContext dc, double half, Brush brush, Pen pen, bool isStroked, bool isFilled, PathGeometry pg)
         {
             if (!isStroked && !isFilled)
                 return;
@@ -576,7 +576,7 @@ namespace Core2D.Renderer.Wpf
                 Point2.FromXY(arc.Point3.X, arc.Point3.Y),
                 Point2.FromXY(arc.Point4.X, arc.Point4.Y));
 
-            System.Windows.Media.PathGeometry pg = _arcCache.Get(arc);
+            PathGeometry pg = _arcCache.Get(arc);
             if (pg != null)
             {
                 var pf = pg.Figures[0];
@@ -606,7 +606,7 @@ namespace Core2D.Renderer.Wpf
                 //segment.Freeze();
                 pf.Segments.Add(segment);
                 //pf.Freeze();
-                pg = new System.Windows.Media.PathGeometry();
+                pg = new PathGeometry();
                 pg.Figures.Add(pf);
                 //pg.Freeze();
 
@@ -636,7 +636,7 @@ namespace Core2D.Renderer.Wpf
                 _styleCache.Set(style, (fill, stroke));
             }
 
-            System.Windows.Media.PathGeometry pg = _cubicBezierCache.Get(cubicBezier);
+            PathGeometry pg = _cubicBezierCache.Get(cubicBezier);
             if (pg != null)
             {
                 var pf = pg.Figures[0];
@@ -663,7 +663,7 @@ namespace Core2D.Renderer.Wpf
                 //bs.Freeze();
                 pf.Segments.Add(bs);
                 //pf.Freeze();
-                pg = new System.Windows.Media.PathGeometry();
+                pg = new PathGeometry();
                 pg.Figures.Add(pf);
                 //pg.Freeze();
 
@@ -693,7 +693,7 @@ namespace Core2D.Renderer.Wpf
                 _styleCache.Set(style, (fill, stroke));
             }
 
-            System.Windows.Media.PathGeometry pg = _quadraticBezierCache.Get(quadraticBezier);
+            PathGeometry pg = _quadraticBezierCache.Get(quadraticBezier);
             if (pg != null)
             {
                 var pf = pg.Figures[0];
@@ -719,7 +719,7 @@ namespace Core2D.Renderer.Wpf
                 //bs.Freeze();
                 pf.Segments.Add(qbs);
                 //pf.Freeze();
-                pg = new System.Windows.Media.PathGeometry();
+                pg = new PathGeometry();
                 pg.Figures.Add(pf);
                 //pg.Freeze();
 
