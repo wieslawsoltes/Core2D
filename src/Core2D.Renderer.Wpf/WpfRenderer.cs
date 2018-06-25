@@ -27,9 +27,9 @@ namespace Core2D.Renderer.Wpf
         private Cache<ArcShape, PathGeometry> _arcCache = Cache<ArcShape, PathGeometry>.Create();
         private Cache<CubicBezierShape, PathGeometry> _cubicBezierCache = Cache<CubicBezierShape, PathGeometry>.Create();
         private Cache<QuadraticBezierShape, PathGeometry> _quadraticBezierCache = Cache<QuadraticBezierShape, PathGeometry>.Create();
-        private Cache<TextShape, Tuple<string, FormattedText, ShapeStyle>> _textCache = Cache<TextShape, Tuple<string, FormattedText, ShapeStyle>>.Create();
+        private Cache<TextShape, (string, FormattedText, ShapeStyle)> _textCache = Cache<TextShape, (string, FormattedText, ShapeStyle)>.Create();
         private Cache<string, BitmapImage> _biCache = Cache<string, BitmapImage>.Create(bi => bi.StreamSource.Dispose());
-        private Cache<PathShape, Tuple<Path.PathGeometry, StreamGeometry, ShapeStyle>> _pathCache = Cache<PathShape, Tuple<Path.PathGeometry, StreamGeometry, ShapeStyle>>.Create();
+        private Cache<PathShape, (Path.PathGeometry, StreamGeometry, ShapeStyle)> _pathCache = Cache<PathShape, (Path.PathGeometry, StreamGeometry, ShapeStyle)>.Create();
         private ShapeRendererState _state = new ShapeRendererState();
 
         /// <inheritdoc/>
@@ -743,13 +743,9 @@ namespace Core2D.Renderer.Wpf
 
             var rect = CreateRect(text.TopLeft, text.BottomRight, dx, dy);
 
-            Tuple<string, FormattedText, ShapeStyle> tcache = _textCache.Get(text);
-            FormattedText ft;
-            string ct;
-            if (tcache != null && string.Compare(tcache.Item1, tbind) == 0 && tcache.Item3 == style)
+            (string ct, FormattedText ft, ShapeStyle cs) = _textCache.Get(text);
+            if (string.Compare(ct, tbind) == 0 && cs == style)
             {
-                ct = tcache.Item1;
-                ft = tcache.Item2;
                 _dc.DrawText(ft, GetTextOrigin(style, ref rect, ft));
             }
             else
@@ -805,7 +801,7 @@ namespace Core2D.Renderer.Wpf
                     }
                 }
 
-                _textCache.Set(text, Tuple.Create(tbind, ft, style));
+                _textCache.Set(text, (tbind, ft, style));
 
                 _dc.DrawText(ft, GetTextOrigin(style, ref rect, ft));
             }
@@ -904,14 +900,10 @@ namespace Core2D.Renderer.Wpf
                 _styleCache.Set(style, (fill, stroke));
             }
 
-            Tuple<Path.PathGeometry, StreamGeometry, ShapeStyle> pcache = _pathCache.Get(path);
-            StreamGeometry sg;
+            (Path.PathGeometry pg, StreamGeometry sg, ShapeStyle cs) = _pathCache.Get(path);
 
-            if (pcache != null
-                && pcache.Item1 == path.Geometry
-                && pcache.Item3 == style)
+            if (pg == path.Geometry && cs == style)
             {
-                sg = pcache.Item2;
                 _dc.DrawGeometry(path.IsFilled ? fill : null, path.IsStroked ? stroke : null, sg);
             }
             else
@@ -919,7 +911,7 @@ namespace Core2D.Renderer.Wpf
                 sg = path.Geometry.ToStreamGeometry(dx, dy);
 
                 // TODO: Enable PathShape caching, cache is disabled to enable PathHelper to work.
-                //_pathCache.Set(path, Tuple.Create(path.Geometry, sg, style));
+                //_pathCache.Set(path, (path.Geometry, sg, style));
 
                 _dc.DrawGeometry(path.IsFilled ? fill : null, path.IsStroked ? stroke : null, sg);
             }
