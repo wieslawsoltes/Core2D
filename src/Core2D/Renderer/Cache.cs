@@ -13,7 +13,7 @@ namespace Core2D.Renderer
     public class Cache<TKey, TValue>
     {
         private IDictionary<TKey, TValue> _storage;
-        private Action<TValue> _dispose;
+        private readonly Action<TValue> _dispose;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Cache{TKey, TValue}"/> class.
