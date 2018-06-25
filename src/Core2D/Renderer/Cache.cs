@@ -11,8 +11,6 @@ namespace Core2D.Renderer
     /// <typeparam name="TKey">The input type.</typeparam>
     /// <typeparam name="TValue">The output type.</typeparam>
     public class Cache<TKey, TValue>
-        where TKey : class
-        where TValue : class
     {
         private IDictionary<TKey, TValue> _storage;
         private Action<TValue> _dispose;
