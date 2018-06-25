@@ -5,14 +5,14 @@ using System.Windows.Controls;
 namespace Core2D.Wpf.Views
 {
     /// <summary>
-    /// Interaction logic for <see cref="ContainerControl"/> xaml.
+    /// Interaction logic for <see cref="PageControl"/> xaml.
     /// </summary>
-    public partial class ContainerControl : UserControl
+    public partial class PageControl : UserControl
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="ContainerControl"/> class.
+        /// Initializes a new instance of the <see cref="PageControl"/> class.
         /// </summary>
-        public ContainerControl()
+        public PageControl()
         {
             InitializeComponent();
         }

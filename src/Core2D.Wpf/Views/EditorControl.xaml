@@ -155,7 +155,7 @@
                                     <ContentControl x:Name="drawableControl" Content="{Binding Project.CurrentContainer}" ClipToBounds="False" custom:LayerElement.Renderer="{Binding Renderers[0]}">
                                         <ContentControl.Resources>
                                             <DataTemplate DataType="{x:Type Containers:PageContainer}">
-                                                <views:ContainerControl/>
+                                                <views:PageControl/>
                                             </DataTemplate>
                                         </ContentControl.Resources>
                                         <ContentControl.Style>

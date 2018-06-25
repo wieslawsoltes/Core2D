@@ -475,8 +475,8 @@
     <Compile Include="Views\EditorMenuControl.xaml.cs">
       <DependentUpon>EditorMenuControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\ContainerControl.xaml.cs">
-      <DependentUpon>ContainerControl.xaml</DependentUpon>
+    <Compile Include="Views\PageControl.xaml.cs">
+      <DependentUpon>PageControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ShapeControl.xaml.cs">
       <DependentUpon>ShapeControl.xaml</DependentUpon>
@@ -493,7 +493,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\ContainerControl.xaml">
+    <Page Include="Views\PageControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
