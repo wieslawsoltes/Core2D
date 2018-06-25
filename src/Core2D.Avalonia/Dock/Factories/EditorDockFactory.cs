@@ -122,20 +122,20 @@ namespace Core2D.Avalonia.Dock.Factories
 
             // Right / Bottom
 
-            var toolsView = new ToolsTool
-            {
-                Id = nameof(ToolsTool),
-                Width = double.NaN,
-                Height = double.NaN,
-                Title = "Tools"
-            };
-
             var shapeView = new ShapeTool
             {
                 Id = nameof(ShapeTool),
                 Width = double.NaN,
                 Height = double.NaN,
                 Title = "Shape"
+            };
+
+            var toolsView = new ToolsTool
+            {
+                Id = nameof(ToolsTool),
+                Width = double.NaN,
+                Height = double.NaN,
+                Title = "Tools"
             };
 
             var dataView = new DataTool
@@ -256,8 +256,8 @@ namespace Core2D.Avalonia.Dock.Factories
                         CurrentView = toolsView,
                         Views = new ObservableCollection<IView>
                         {
-                            toolsView,
                             shapeView,
+                            toolsView,
                             dataView,
                             styleView,
                             templateView
