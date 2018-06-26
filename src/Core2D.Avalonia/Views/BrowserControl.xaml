@@ -24,7 +24,7 @@
         <converters:ObjectToJsonStringConverter x:Key="ObjectToJsonStringConverter"/>
         <converters:ObjectToTypeStringConverter x:Key="ObjectToTypeStringConverter"/>
         <converters:ObjectToXamlStringConverter x:Key="ObjectToXamlStringConverter"/>
-        <converters:IsNotNullConverter x:Key="TreeViewSelectedItemToObjectConverter"/>
+        <converters:TreeViewSelectedItemToObjectConverter x:Key="TreeViewSelectedItemToObjectConverter"/>
     </UserControl.Resources>
     <Grid ColumnDefinitions="250,Auto,*" RowDefinitions="*">
         <TreeView x:Name="project" Classes="browser" Grid.Column="0" Grid.Row="0" Margin="6,6,0,6">
