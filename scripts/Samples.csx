@@ -32,12 +32,12 @@ Editor.Move(p1);
 Editor.LeftUp(p1);
 
 
-// Canvas
+// CanvasPlatform
 
 
-Editor.Canvas.Invalidate();
-Editor.Canvas.ResetZoom();
-Editor.Canvas.AutoFitZoom();
+Editor.CanvasPlatform.Invalidate();
+Editor.CanvasPlatform.ResetZoom();
+Editor.CanvasPlatform.AutoFitZoom();
 
 
 // Undo Redo
@@ -50,7 +50,7 @@ Editor.OnRedo();
 // Execute Code
 
 
-Editor.OnExecuteCode("Editor.Canvas.ResetZoom();");
+Editor.OnExecuteCode("Editor.CanvasPlatform.ResetZoom();");
 
 
 // Copy Page
