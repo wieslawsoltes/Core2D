@@ -30,14 +30,6 @@ namespace Core2D.Renderer.Wpf
         private ICache<TextShape, (string, FormattedText, ShapeStyle)> _textCache = Cache<TextShape, (string, FormattedText, ShapeStyle)>.Create();
         private ICache<string, BitmapImage> _biCache = Cache<string, BitmapImage>.Create(bi => bi.StreamSource.Dispose());
         private ICache<PathShape, (Path.PathGeometry, StreamGeometry, ShapeStyle)> _pathCache = Cache<PathShape, (Path.PathGeometry, StreamGeometry, ShapeStyle)>.Create();
-        private ShapeRendererState _state = new ShapeRendererState();
-
-        /// <inheritdoc/>
-        public override ShapeRendererState State
-        {
-            get { return _state; }
-            set { Update(ref _state, value); }
-        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="WpfRenderer"/> class.
@@ -449,7 +441,7 @@ namespace Core2D.Renderer.Wpf
             if (style == null)
                 return;
 
-            double zoom = _state.ZoomX;
+            double zoom = State.ZoomX;
             double thicknessLine = style.Thickness / zoom;
             double halfLine = thicknessLine / 2.0;
             double thicknessStartArrow = style.StartArrowStyle.Thickness / zoom;
@@ -487,7 +479,7 @@ namespace Core2D.Renderer.Wpf
             if (style == null)
                 return;
 
-            double thickness = style.Thickness / _state.ZoomX;
+            double thickness = style.Thickness / State.ZoomX;
             double half = thickness / 2.0;
 
             (Brush fill, Pen stroke) = _styleCache.Get(style);
@@ -517,7 +509,7 @@ namespace Core2D.Renderer.Wpf
             if (style == null)
                 return;
 
-            double thickness = style.Thickness / _state.ZoomX;
+            double thickness = style.Thickness / State.ZoomX;
             double half = thickness / 2.0;
 
             (Brush fill, Pen stroke) = _styleCache.Get(style);
@@ -545,7 +537,7 @@ namespace Core2D.Renderer.Wpf
             if (style == null)
                 return;
 
-            double thickness = style.Thickness / _state.ZoomX;
+            double thickness = style.Thickness / State.ZoomX;
             double half = thickness / 2.0;
 
             (Brush fill, Pen stroke) = _styleCache.Get(style);
@@ -611,7 +603,7 @@ namespace Core2D.Renderer.Wpf
             if (style == null)
                 return;
 
-            double thickness = style.Thickness / _state.ZoomX;
+            double thickness = style.Thickness / State.ZoomX;
             double half = thickness / 2.0;
 
             (Brush fill, Pen stroke) = _styleCache.Get(style);
@@ -668,7 +660,7 @@ namespace Core2D.Renderer.Wpf
             if (style == null)
                 return;
 
-            double thickness = style.Thickness / _state.ZoomX;
+            double thickness = style.Thickness / State.ZoomX;
             double half = thickness / 2.0;
 
             (Brush fill, Pen stroke) = _styleCache.Get(style);
@@ -730,7 +722,7 @@ namespace Core2D.Renderer.Wpf
             if (string.IsNullOrEmpty(tbind))
                 return;
 
-            double thickness = style.Thickness / _state.ZoomX;
+            double thickness = style.Thickness / State.ZoomX;
             double half = thickness / 2.0;
 
             (Brush fill, Pen stroke) = _styleCache.Get(style);
@@ -819,7 +811,7 @@ namespace Core2D.Renderer.Wpf
             if (style == null)
                 return;
 
-            double thickness = style.Thickness / _state.ZoomX;
+            double thickness = style.Thickness / State.ZoomX;
             double half = thickness / 2.0;
 
             (Brush fill, Pen stroke) = _styleCache.Get(style);
@@ -849,12 +841,12 @@ namespace Core2D.Renderer.Wpf
             }
             else
             {
-                if (_state.ImageCache == null || string.IsNullOrEmpty(image.Key))
+                if (State.ImageCache == null || string.IsNullOrEmpty(image.Key))
                     return;
 
                 try
                 {
-                    var bytes = _state.ImageCache.GetImage(image.Key);
+                    var bytes = State.ImageCache.GetImage(image.Key);
                     if (bytes != null)
                     {
                         var ms = new System.IO.MemoryStream(bytes);
@@ -889,7 +881,7 @@ namespace Core2D.Renderer.Wpf
             if (style == null)
                 return;
 
-            double thickness = style.Thickness / _state.ZoomX;
+            double thickness = style.Thickness / State.ZoomX;
             double half = thickness / 2.0;
 
             (Brush fill, Pen stroke) = _styleCache.Get(style);
