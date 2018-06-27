@@ -449,7 +449,6 @@ namespace Core2D.Renderer.Wpf
             double thicknessEndArrow = style.EndArrowStyle.Thickness / zoom;
             double halfEndArrow = thicknessEndArrow / 2.0;
 
-            // Line style.
             (Brush fill, Pen stroke) = _styleCache.Get(style);
             if (fill == null || stroke == null)
             {
