@@ -24,6 +24,7 @@ namespace Core2D.Renderer.Avalonia
         private ICache<ShapeStyle, (AM.IBrush, AM.Pen)> _styleCache = Cache<ShapeStyle, (AM.IBrush, AM.Pen)>.Create();
         private ICache<ArrowStyle, (AM.IBrush, AM.Pen)> _arrowStyleCache = Cache<ArrowStyle, (AM.IBrush, AM.Pen)>.Create();
         // TODO: Add LineShape cache.
+        // TODO: Add EllipseShape cache.
         // TODO: Add ArcShape cache.
         // TODO: Add CubicBezierShape cache.
         // TODO: Add QuadraticBezierShape cache.
@@ -524,7 +525,7 @@ namespace Core2D.Renderer.Avalonia
 
             _dc.DrawGeometry(
                 arc.IsFilled ? fill : null,
-                arc.IsStroked ? pen : null,
+                arc.IsStroked ? stroke : null,
                 sg);
         }
 
