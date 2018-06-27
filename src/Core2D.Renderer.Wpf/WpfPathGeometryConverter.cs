@@ -53,7 +53,7 @@ namespace Core2D.Renderer.Wpf
                             new Size(arcSegment.Size.Width, arcSegment.Size.Height),
                             arcSegment.RotationAngle,
                             arcSegment.IsLargeArc,
-                            arcSegment.SweepDirection == Path.SweepDirection.Clockwise ? System.Windows.Media.SweepDirection.Clockwise : System.Windows.Media.SweepDirection.Counterclockwise,
+                            arcSegment.SweepDirection == Path.SweepDirection.Clockwise ? SweepDirection.Clockwise : SweepDirection.Counterclockwise,
                             arcSegment.IsStroked,
                             arcSegment.IsSmoothJoin);
                     }
@@ -116,7 +116,7 @@ namespace Core2D.Renderer.Wpf
             }
 
             sgc.Close();
-            sg.FillRule = xpg.FillRule == Path.FillRule.Nonzero ? System.Windows.Media.FillRule.Nonzero : System.Windows.Media.FillRule.EvenOdd;
+            sg.FillRule = xpg.FillRule == Path.FillRule.Nonzero ? FillRule.Nonzero : FillRule.EvenOdd;
             sg.Freeze();
 
             return sg;
@@ -129,10 +129,10 @@ namespace Core2D.Renderer.Wpf
         /// <param name="dx"></param>
         /// <param name="dy"></param>
         /// <returns></returns>
-        public static System.Windows.Media.PathGeometry ToPathGeometry(this Path.PathGeometry xpg, double dx, double dy)
+        public static PathGeometry ToPathGeometry(this Path.PathGeometry xpg, double dx, double dy)
         {
             var sg = ToStreamGeometry(xpg, dx, dy);
-            return System.Windows.Media.PathGeometry.CreateFromGeometry(sg);
+            return PathGeometry.CreateFromGeometry(sg);
         }
 
         /// <summary>
