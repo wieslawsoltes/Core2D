@@ -82,16 +82,16 @@ namespace Core2D.Renderer.Wpf
 
         private static Color ToColor(ArgbColor color) => Color.FromArgb(color.A, color.R, color.G, color.B);
 
-        private static Brush CreateBrush(ArgbColor color)
+        private static Brush ToBrush(ArgbColor color)
         {
             var brush = new SolidColorBrush(ToColor(color));
             brush.Freeze();
             return brush;
         }
 
-        private static Pen CreatePen(BaseStyle style, double thickness)
+        private static Pen ToPen(BaseStyle style, double thickness)
         {
-            var brush = CreateBrush(style.Stroke);
+            var brush = ToBrush(style.Stroke);
             var pen = new Pen(brush, thickness);
             switch (style.LineCap)
             {
@@ -200,8 +200,8 @@ namespace Core2D.Renderer.Wpf
             (Brush fillStartArrow, Pen strokeStartArrow) = _arrowStyleCache.Get(style.StartArrowStyle);
             if (fillStartArrow == null || strokeStartArrow == null)
             {
-                fillStartArrow = CreateBrush(style.StartArrowStyle.Fill);
-                strokeStartArrow = CreatePen(style.StartArrowStyle, thicknessStart);
+                fillStartArrow = ToBrush(style.StartArrowStyle.Fill);
+                strokeStartArrow = ToPen(style.StartArrowStyle, thicknessStart);
                 _arrowStyleCache.Set(style.StartArrowStyle, (fillStartArrow, strokeStartArrow));
             }
 
@@ -209,8 +209,8 @@ namespace Core2D.Renderer.Wpf
             (Brush fillEndArrow, Pen strokeEndArrow) = _arrowStyleCache.Get(style.EndArrowStyle);
             if (fillEndArrow == null || strokeEndArrow == null)
             {
-                fillEndArrow = CreateBrush(style.EndArrowStyle.Fill);
-                strokeEndArrow = CreatePen(style.EndArrowStyle, thicknessEnd);
+                fillEndArrow = ToBrush(style.EndArrowStyle.Fill);
+                strokeEndArrow = ToPen(style.EndArrowStyle, thicknessEnd);
                 _arrowStyleCache.Set(style.EndArrowStyle, (fillEndArrow, strokeEndArrow));
             }
 
@@ -412,7 +412,7 @@ namespace Core2D.Renderer.Wpf
         public override void Fill(object dc, double x, double y, double width, double height, ArgbColor color)
         {
             var _dc = dc as DrawingContext;
-            var brush = CreateBrush(color);
+            var brush = ToBrush(color);
             var rect = new Rect(x, y, width, height);
             DrawRectangleInternal(_dc, 0.5, brush, null, false, true, ref rect);
         }
@@ -452,8 +452,8 @@ namespace Core2D.Renderer.Wpf
             (Brush fill, Pen stroke) = _styleCache.Get(style);
             if (fill == null || stroke == null)
             {
-                fill = CreateBrush(style.Fill);
-                stroke = CreatePen(style, thicknessLine);
+                fill = ToBrush(style.Fill);
+                stroke = ToPen(style, thicknessLine);
                 _styleCache.Set(style, (fill, stroke));
             }
 
@@ -484,8 +484,8 @@ namespace Core2D.Renderer.Wpf
             (Brush fill, Pen stroke) = _styleCache.Get(style);
             if (fill == null || stroke == null)
             {
-                fill = CreateBrush(style.Fill);
-                stroke = CreatePen(style, thickness);
+                fill = ToBrush(style.Fill);
+                stroke = ToPen(style, thickness);
                 _styleCache.Set(style, (fill, stroke));
             }
 
@@ -514,8 +514,8 @@ namespace Core2D.Renderer.Wpf
             (Brush fill, Pen stroke) = _styleCache.Get(style);
             if (fill == null || stroke == null)
             {
-                fill = CreateBrush(style.Fill);
-                stroke = CreatePen(style, thickness);
+                fill = ToBrush(style.Fill);
+                stroke = ToPen(style, thickness);
                 _styleCache.Set(style, (fill, stroke));
             }
 
@@ -542,8 +542,8 @@ namespace Core2D.Renderer.Wpf
             (Brush fill, Pen stroke) = _styleCache.Get(style);
             if (fill == null || stroke == null)
             {
-                fill = CreateBrush(style.Fill);
-                stroke = CreatePen(style, thickness);
+                fill = ToBrush(style.Fill);
+                stroke = ToPen(style, thickness);
                 _styleCache.Set(style, (fill, stroke));
             }
 
@@ -608,8 +608,8 @@ namespace Core2D.Renderer.Wpf
             (Brush fill, Pen stroke) = _styleCache.Get(style);
             if (fill == null || stroke == null)
             {
-                fill = CreateBrush(style.Fill);
-                stroke = CreatePen(style, thickness);
+                fill = ToBrush(style.Fill);
+                stroke = ToPen(style, thickness);
                 _styleCache.Set(style, (fill, stroke));
             }
 
@@ -665,8 +665,8 @@ namespace Core2D.Renderer.Wpf
             (Brush fill, Pen stroke) = _styleCache.Get(style);
             if (fill == null || stroke == null)
             {
-                fill = CreateBrush(style.Fill);
-                stroke = CreatePen(style, thickness);
+                fill = ToBrush(style.Fill);
+                stroke = ToPen(style, thickness);
                 _styleCache.Set(style, (fill, stroke));
             }
 
@@ -727,8 +727,8 @@ namespace Core2D.Renderer.Wpf
             (Brush fill, Pen stroke) = _styleCache.Get(style);
             if (fill == null || stroke == null)
             {
-                fill = CreateBrush(style.Fill);
-                stroke = CreatePen(style, thickness);
+                fill = ToBrush(style.Fill);
+                stroke = ToPen(style, thickness);
                 _styleCache.Set(style, (fill, stroke));
             }
 
@@ -805,25 +805,24 @@ namespace Core2D.Renderer.Wpf
                 return;
 
             var _dc = dc as DrawingContext;
-
             var style = image.Style;
-            if (style == null)
-                return;
-
-            double thickness = style.Thickness / State.ZoomX;
-            double half = thickness / 2.0;
-
-            (Brush fill, Pen stroke) = _styleCache.Get(style);
-            if (fill == null || stroke == null)
-            {
-                fill = CreateBrush(style.Fill);
-                stroke = CreatePen(style, thickness);
-                _styleCache.Set(style, (fill, stroke));
-            }
-
             var rect = CreateRect(image.TopLeft, image.BottomRight, dx, dy);
 
-            DrawRectangleInternal(_dc, half, fill, stroke, image.IsStroked, image.IsFilled, ref rect);
+            if (style != null)
+            {
+                double thickness = style.Thickness / State.ZoomX;
+                double half = thickness / 2.0;
+
+                (Brush fill, Pen stroke) = _styleCache.Get(style);
+                if (fill == null || stroke == null)
+                {
+                    fill = ToBrush(style.Fill);
+                    stroke = ToPen(style, thickness);
+                    _styleCache.Set(style, (fill, stroke));
+                }
+
+                DrawRectangleInternal(_dc, half, fill, stroke, image.IsStroked, image.IsFilled, ref rect);
+            }
 
             var imageCached = _biCache.Get(image.Key);
             if (imageCached != null)
@@ -886,8 +885,8 @@ namespace Core2D.Renderer.Wpf
             (Brush fill, Pen stroke) = _styleCache.Get(style);
             if (fill == null || stroke == null)
             {
-                fill = CreateBrush(style.Fill);
-                stroke = CreatePen(style, thickness);
+                fill = ToBrush(style.Fill);
+                stroke = ToPen(style, thickness);
                 _styleCache.Set(style, (fill, stroke));
             }
 
