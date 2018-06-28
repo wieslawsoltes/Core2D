@@ -10,6 +10,9 @@
     <PackageTags>2d;editor;data;diagram;graphics;geometry;data;shapes;wysiwyg-editor</PackageTags>
   </PropertyGroup>
   <PropertyGroup>
+     <LangVersion>latest</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup>
     <OutputPath>bin\$(Platform)\$(Configuration)\</OutputPath>
     <IntermediateOutputPath>obj\$(Platform)\$(Configuration)\</IntermediateOutputPath>
     <ErrorReport>prompt</ErrorReport>
