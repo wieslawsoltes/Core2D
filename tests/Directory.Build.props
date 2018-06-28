@@ -1,4 +1,3 @@
 ﻿<Project>
-  <Import Project="..\Directory.Build.props" />
-  <Import Project="..\build\XUnit.props" />
+  <Import Project="..\build\SharedVersion.props" />
 </Project>
