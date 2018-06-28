@@ -197,22 +197,10 @@ namespace Core2D.Renderer.Wpf
         private void DrawLineArrowsInternal(DrawingContext dc, LineShape line, ShapeStyle style, double halfStart, double halfEnd, double thicknessStart, double thicknessEnd, double dx, double dy, out Point pt1, out Point pt2)
         {
             // Start arrow style.
-            (Brush fillStartArrow, Pen strokeStartArrow) = _arrowStyleCache.Get(style.StartArrowStyle);
-            if (fillStartArrow == null || strokeStartArrow == null)
-            {
-                fillStartArrow = ToBrush(style.StartArrowStyle.Fill);
-                strokeStartArrow = ToPen(style.StartArrowStyle, thicknessStart);
-                _arrowStyleCache.Set(style.StartArrowStyle, (fillStartArrow, strokeStartArrow));
-            }
+            GetCached(style.StartArrowStyle, thicknessStart, out Brush fillStartArrow, out Pen strokeStartArrow);
 
             // End arrow style.
-            (Brush fillEndArrow, Pen strokeEndArrow) = _arrowStyleCache.Get(style.EndArrowStyle);
-            if (fillEndArrow == null || strokeEndArrow == null)
-            {
-                fillEndArrow = ToBrush(style.EndArrowStyle.Fill);
-                strokeEndArrow = ToPen(style.EndArrowStyle, thicknessEnd);
-                _arrowStyleCache.Set(style.EndArrowStyle, (fillEndArrow, strokeEndArrow));
-            }
+            GetCached(style.EndArrowStyle, thicknessEnd, out Brush fillEndArrow, out Pen strokeEndArrow);
 
             // Line max length.
             double x1 = line.Start.X + dx;
@@ -385,6 +373,17 @@ namespace Core2D.Renderer.Wpf
         private MatrixTransform ToMatrixTransform(MatrixObject m)
         {
             return new MatrixTransform(m.M11, m.M12, m.M21, m.M22, m.OffsetX, m.OffsetY);
+        }
+
+        private void GetCached(ArrowStyle style, double thickness, out Brush fill, out Pen stroke)
+        {
+            (fill, stroke) = _arrowStyleCache.Get(style);
+            if (fill == null || stroke == null)
+            {
+                fill = ToBrush(style.Fill);
+                stroke = ToPen(style, thickness);
+                _arrowStyleCache.Set(style, (fill, stroke));
+            }
         }
 
         private void GetCached(ShapeStyle style, double thickness, out Brush fill, out Pen stroke)
