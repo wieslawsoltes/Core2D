@@ -14,8 +14,8 @@ namespace Core2D.Renderer.Presenters
         /// <inheritdoc/>
         public override void Render(object dc, ShapeRenderer renderer, PageContainer container, double dx, double dy)
         {
-            var db = container.Data == null ? default(ImmutableArray<Property>) : container.Data.Properties;
-            var r = container.Data == null ? default(Record) : container.Data.Record;
+            var db = container.Data == null ? default : container.Data.Properties;
+            var r = container.Data == null ? default : container.Data.Record;
 
             renderer.Draw(dc, container, dx, dy, db, r);
 

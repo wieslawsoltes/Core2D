@@ -42,7 +42,7 @@ namespace Core2D.Containers
             : base()
         {
             _items = ImmutableArray.Create<T>();
-            _selected = default(T);
+            _selected = default;
         }
 
         /// <summary>

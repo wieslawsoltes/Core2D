@@ -178,13 +178,13 @@ namespace Core2D.Shape
         /// Check whether the <see cref="IsStroked"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeIsStroked() => _isStroked != default(bool);
+        public virtual bool ShouldSerializeIsStroked() => _isStroked != default;
 
         /// <summary>
         /// Check whether the <see cref="IsFilled"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeIsFilled() => _isFilled != default(bool);
+        public virtual bool ShouldSerializeIsFilled() => _isFilled != default;
 
         /// <summary>
         /// Check whether the <see cref="Data"/> property has changed from its default value.

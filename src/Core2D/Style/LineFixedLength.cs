@@ -183,7 +183,7 @@ namespace Core2D.Style
         /// Check whether the <see cref="Flags"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeFlags() => _flags != default(LineFixedLengthFlags);
+        public virtual bool ShouldSerializeFlags() => _flags != default;
 
         /// <summary>
         /// The <see cref="Disabled"/> property is not serialized.
@@ -237,6 +237,6 @@ namespace Core2D.Style
         /// Check whether the <see cref="Length"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeLength() => _length != default(double);
+        public virtual bool ShouldSerializeLength() => _length != default;
     }
 }

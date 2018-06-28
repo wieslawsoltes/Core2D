@@ -46,7 +46,7 @@ namespace Core2D.Editor.Factories
             var sgdl = Library<ShapeStyle>.Create("Lines");
 
             var solid = ShapeStyle.Create("Solid", 255, 0, 0, 0, 80, 0, 0, 0, 2.0);
-            solid.Dashes = default(string);
+            solid.Dashes = default;
             solid.DashOffset = 0.0;
 
             var dash = ShapeStyle.Create("Dash", 255, 0, 0, 0, 80, 0, 0, 0, 2.0);

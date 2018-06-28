@@ -199,7 +199,7 @@ namespace Core2D.Renderer.Avalonia
 
         private static A.Point DrawLineArrowInternal(AM.DrawingContext dc, AM.Pen pen, AM.IBrush brush, float x, float y, double angle, ArrowStyle style)
         {
-            A.Point pt = default(A.Point);
+            A.Point pt = default;
             var rt = APAZ.MatrixHelper.Rotation(angle, new A.Vector(x, y));
             double rx = style.RadiusX;
             double ry = style.RadiusY;

@@ -172,30 +172,30 @@ namespace Core2D.Shapes
         /// Check whether the <see cref="IsGrid"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeIsGrid() => _isGrid != default(bool);
+        public virtual bool ShouldSerializeIsGrid() => _isGrid != default;
 
         /// <summary>
         /// Check whether the <see cref="OffsetX"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeOffsetX() => _offsetX != default(double);
+        public virtual bool ShouldSerializeOffsetX() => _offsetX != default;
 
         /// <summary>
         /// Check whether the <see cref="OffsetY"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeOffsetY() => _offsetY != default(double);
+        public virtual bool ShouldSerializeOffsetY() => _offsetY != default;
 
         /// <summary>
         /// Check whether the <see cref="CellWidth"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeCellWidth() => _cellWidth != default(double);
+        public virtual bool ShouldSerializeCellWidth() => _cellWidth != default;
 
         /// <summary>
         /// Check whether the <see cref="CellHeight"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeCellHeight() => _cellHeight != default(double);
+        public virtual bool ShouldSerializeCellHeight() => _cellHeight != default;
     }
 }

@@ -33,7 +33,7 @@ namespace Core2D.Shapes
             {
                 if (Update(ref _shapes, value))
                 {
-                    _shapesProperties = default(ImmutableArray<Property>);
+                    _shapesProperties = default;
                 }
             }
         }

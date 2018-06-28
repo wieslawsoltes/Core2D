@@ -160,36 +160,36 @@ namespace Core2D.Renderer
         /// Check whether the <see cref="M11"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeM11() => _m11 != default(double);
+        public virtual bool ShouldSerializeM11() => _m11 != default;
 
         /// <summary>
         /// Check whether the <see cref="M12"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeM12() => _m12 != default(double);
+        public virtual bool ShouldSerializeM12() => _m12 != default;
 
         /// <summary>
         /// Check whether the <see cref="M21"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeM21() => _m21 != default(double);
+        public virtual bool ShouldSerializeM21() => _m21 != default;
 
         /// <summary>
         /// Check whether the <see cref="M22"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeM22() => _m22 != default(double);
+        public virtual bool ShouldSerializeM22() => _m22 != default;
 
         /// <summary>
         /// Check whether the <see cref="OffsetX"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeOffsetX() => _offsetX != default(double);
+        public virtual bool ShouldSerializeOffsetX() => _offsetX != default;
 
         /// <summary>
         /// Check whether the <see cref="OffsetY"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeOffsetY() => _offsetY != default(double);
+        public virtual bool ShouldSerializeOffsetY() => _offsetY != default;
     }
 }

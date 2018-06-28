@@ -209,7 +209,7 @@ namespace Core2D.Renderer.SkiaSharp
 
         private SKPoint DrawLineArrowInternal(SKCanvas canvas, SKPaint pen, SKPaint brush, float x, float y, double angle, ArrowStyle style)
         {
-            SKPoint pt = default(SKPoint);
+            SKPoint pt = default;
             var rt = MatrixHelper.Rotation(angle, new SKPoint(x, y));
             double rx = style.RadiusX;
             double ry = style.RadiusY;

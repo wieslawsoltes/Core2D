@@ -87,7 +87,7 @@ namespace Core2D.Style
                  source.Fill.B);
             Thickness = source.Thickness;
             LineCap = source.LineCap;
-            Dashes = source.Dashes != null ? source.Dashes : default(string);
+            Dashes = source.Dashes != null ? source.Dashes : default;
             DashOffset = source.DashOffset;
         }
 
@@ -190,30 +190,30 @@ namespace Core2D.Style
         /// Check whether the <see cref="ArrowType"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeArrowType() => _arrowType != default(ArrowType);
+        public virtual bool ShouldSerializeArrowType() => _arrowType != default;
 
         /// <summary>
         /// Check whether the <see cref="IsStroked"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeIsStroked() => _isStroked != default(bool);
+        public virtual bool ShouldSerializeIsStroked() => _isStroked != default;
 
         /// <summary>
         /// Check whether the <see cref="IsFilled"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeIsFilled() => _isFilled != default(bool);
+        public virtual bool ShouldSerializeIsFilled() => _isFilled != default;
 
         /// <summary>
         /// Check whether the <see cref="RadiusX"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeRadiusX() => _radiusX != default(double);
+        public virtual bool ShouldSerializeRadiusX() => _radiusX != default;
 
         /// <summary>
         /// Check whether the <see cref="RadiusY"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeRadiusY() => _radiusY != default(double);
+        public virtual bool ShouldSerializeRadiusY() => _radiusY != default;
     }
 }

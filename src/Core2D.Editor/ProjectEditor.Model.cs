@@ -253,7 +253,7 @@ namespace Core2D.Editor
         {
             _serviceProvider = serviceProvider;
             _recentProjects = ImmutableArray.Create<RecentFile>();
-            _currentRecentProject = default(RecentFile);
+            _currentRecentProject = default;
             _tools = _serviceProvider.GetServiceLazily<ToolBase[], ImmutableArray<ToolBase>>((tools) => tools.Where(tool => !tool.GetType().Name.StartsWith("PathTool")).ToImmutableArray());
             _pathTools = _serviceProvider.GetServiceLazily<PathToolBase[], ImmutableArray<PathToolBase>>((tools) => tools.ToImmutableArray());
             _hitTest = _serviceProvider.GetServiceLazily<HitTest>(hitTests => hitTests.Register(_serviceProvider.GetService<HitTestBase[]>()));

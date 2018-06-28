@@ -133,7 +133,7 @@ namespace Core2D.Style
         /// Check whether the <see cref="Flags"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeFlags() => _flags != default(FontStyleFlags);
+        public virtual bool ShouldSerializeFlags() => _flags != default;
 
         /// <summary>
         /// The <see cref="Regular"/> property is not serialized.

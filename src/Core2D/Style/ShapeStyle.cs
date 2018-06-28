@@ -79,7 +79,7 @@ namespace Core2D.Style
         /// <param name="dashes">The line dashes.</param>
         /// <param name="dashOffset">The line dash offset.</param>
         /// <returns>The new instance of the <see cref="ShapeStyle"/> class.</returns>
-        public static ShapeStyle Create(string name = null, byte sa = 0xFF, byte sr = 0x00, byte sg = 0x00, byte sb = 0x00, byte fa = 0xFF, byte fr = 0x00, byte fg = 0x00, byte fb = 0x00, double thickness = 2.0, TextStyle textStyle = null, LineStyle lineStyle = null, ArrowStyle startArrowStyle = null, ArrowStyle endArrowStyle = null, LineCap lineCap = LineCap.Round, string dashes = default(string), double dashOffset = 0.0)
+        public static ShapeStyle Create(string name = null, byte sa = 0xFF, byte sr = 0x00, byte sg = 0x00, byte sb = 0x00, byte fa = 0xFF, byte fr = 0x00, byte fg = 0x00, byte fb = 0x00, double thickness = 2.0, TextStyle textStyle = null, LineStyle lineStyle = null, ArrowStyle startArrowStyle = null, ArrowStyle endArrowStyle = null, LineCap lineCap = LineCap.Round, string dashes = default, double dashOffset = 0.0)
         {
             var style = new ShapeStyle()
             {
@@ -121,7 +121,7 @@ namespace Core2D.Style
                 Fill = fill,
                 Thickness = thickness,
                 LineCap = LineCap.Round,
-                Dashes = default(string),
+                Dashes = default,
                 DashOffset = 0.0,
                 LineStyle = lineStyle,
                 TextStyle = textStyle,

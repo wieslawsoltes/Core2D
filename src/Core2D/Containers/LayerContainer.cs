@@ -109,7 +109,7 @@ namespace Core2D.Containers
         /// Check whether the <see cref="IsVisible"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeIsVisible() => _isVisible != default(bool);
+        public virtual bool ShouldSerializeIsVisible() => _isVisible != default;
 
         /// <summary>
         /// Check whether the <see cref="Shapes"/> property has changed from its default value.

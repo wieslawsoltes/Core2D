@@ -16,8 +16,8 @@ namespace Core2D.Renderer.Presenters
         {
             renderer.Fill(dc, dx, dy, container.Width, container.Height, container.Background);
 
-            var db = container.Data == null ? default(ImmutableArray<Property>) : container.Data.Properties;
-            var r = container.Data == null ? default(Record) : container.Data.Record;
+            var db = container.Data == null ? default : container.Data.Properties;
+            var r = container.Data == null ? default : container.Data.Record;
 
             if (container.Template != null)
             {

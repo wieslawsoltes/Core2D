@@ -30,9 +30,9 @@ namespace Core2D.Editor
     public partial class ProjectEditor
     {
         private object _scriptState;
-        private PageContainer _pageToCopy = default(PageContainer);
-        private DocumentContainer _documentToCopy = default(DocumentContainer);
-        private BaseShape _hover = default(BaseShape);
+        private PageContainer _pageToCopy = default;
+        private DocumentContainer _documentToCopy = default;
+        private BaseShape _hover = default;
 
         private void LogError(Exception ex)
         {
@@ -776,14 +776,14 @@ namespace Core2D.Editor
             {
                 var page = item as PageContainer;
                 _pageToCopy = page;
-                _documentToCopy = default(DocumentContainer);
+                _documentToCopy = default;
                 Project?.RemovePage(page);
                 Project?.SetCurrentContainer(Project?.CurrentDocument?.Pages.FirstOrDefault());
             }
             else if (item is DocumentContainer)
             {
                 var document = item as DocumentContainer;
-                _pageToCopy = default(PageContainer);
+                _pageToCopy = default;
                 _documentToCopy = document;
                 Project?.RemoveDocument(document);
 
@@ -811,12 +811,12 @@ namespace Core2D.Editor
             {
                 var page = item as PageContainer;
                 _pageToCopy = page;
-                _documentToCopy = default(DocumentContainer);
+                _documentToCopy = default;
             }
             else if (item is DocumentContainer)
             {
                 var document = item as DocumentContainer;
-                _pageToCopy = default(PageContainer);
+                _pageToCopy = default;
                 _documentToCopy = document;
             }
             else if (item is ProjectEditor || item == null)
@@ -2485,7 +2485,7 @@ namespace Core2D.Editor
                 LogError(ex);
             }
 
-            return default(T);
+            return default;
         }
 
         /// <summary>
@@ -2515,7 +2515,7 @@ namespace Core2D.Editor
                 LogError(ex);
             }
 
-            return default(LayerContainer);
+            return default;
         }
 
         /// <summary>
@@ -2547,7 +2547,7 @@ namespace Core2D.Editor
                 LogError(ex);
             }
 
-            return default(PageContainer);
+            return default;
         }
 
         /// <summary>
@@ -2583,7 +2583,7 @@ namespace Core2D.Editor
                 LogError(ex);
             }
 
-            return default(DocumentContainer);
+            return default;
         }
 
         /// <summary>
@@ -2964,7 +2964,7 @@ namespace Core2D.Editor
                 Project?.History?.Snapshot(previous, next, (p) => layer.Shapes = p);
                 layer.Shapes = next;
 
-                Renderers[0].State.SelectedShape = default(BaseShape);
+                Renderers[0].State.SelectedShape = default;
                 layer.Invalidate();
             }
 
@@ -2983,7 +2983,7 @@ namespace Core2D.Editor
                 Project?.History?.Snapshot(previous, next, (p) => layer.Shapes = p);
                 layer.Shapes = next;
 
-                Renderers[0].State.SelectedShapes = default(ImmutableHashSet<BaseShape>);
+                Renderers[0].State.SelectedShapes = default;
                 layer.Invalidate();
             }
         }
@@ -3000,7 +3000,7 @@ namespace Core2D.Editor
 
                 if (Renderers[0].State.SelectedShapes != null)
                 {
-                    Renderers[0].State.SelectedShapes = default(ImmutableHashSet<BaseShape>);
+                    Renderers[0].State.SelectedShapes = default;
                 }
             }
         }
@@ -3015,7 +3015,7 @@ namespace Core2D.Editor
             {
                 if (Renderers[0].State.SelectedShape != null)
                 {
-                    Renderers[0].State.SelectedShape = default(BaseShape);
+                    Renderers[0].State.SelectedShape = default;
                 }
 
                 Renderers[0].State.SelectedShapes = shapes;
@@ -3029,12 +3029,12 @@ namespace Core2D.Editor
         {
             if (Renderers?[0].State?.SelectedShape != null)
             {
-                Renderers[0].State.SelectedShape = default(BaseShape);
+                Renderers[0].State.SelectedShape = default;
             }
 
             if (Renderers?[0].State?.SelectedShapes != null)
             {
-                Renderers[0].State.SelectedShapes = default(ImmutableHashSet<BaseShape>);
+                Renderers[0].State.SelectedShapes = default;
             }
         }
 
@@ -3073,7 +3073,7 @@ namespace Core2D.Editor
 
             if (layer?.Owner?.CurrentShape != null)
             {
-                layer.Owner.CurrentShape = default(BaseShape);
+                layer.Owner.CurrentShape = default;
             }
 
             if (layer != null)
@@ -3096,7 +3096,7 @@ namespace Core2D.Editor
 
             if (layer?.Owner?.CurrentShape != null)
             {
-                layer.Owner.CurrentShape = default(BaseShape);
+                layer.Owner.CurrentShape = default;
             }
 
             if (layer != null)
@@ -3203,7 +3203,7 @@ namespace Core2D.Editor
         {
             if (layer != null && _hover != null)
             {
-                _hover = default(BaseShape);
+                _hover = default;
                 Deselect(layer);
             }
         }

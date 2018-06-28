@@ -48,12 +48,12 @@ namespace Core2D.Path
         /// Check whether the <see cref="IsStroked"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeIsStroked() => _isStroked != default(bool);
+        public virtual bool ShouldSerializeIsStroked() => _isStroked != default;
 
         /// <summary>
         /// Check whether the <see cref="IsSmoothJoin"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeIsSmoothJoin() => _isSmoothJoin != default(bool);
+        public virtual bool ShouldSerializeIsSmoothJoin() => _isSmoothJoin != default;
     }
 }

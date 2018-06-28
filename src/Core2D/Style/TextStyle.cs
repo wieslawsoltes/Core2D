@@ -136,7 +136,7 @@ namespace Core2D.Style
         /// Check whether the <see cref="FontSize"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeFontSize() => _fontSize != default(double);
+        public virtual bool ShouldSerializeFontSize() => _fontSize != default;
 
         /// <summary>
         /// Check whether the <see cref="FontStyle"/> property has changed from its default value.
@@ -148,12 +148,12 @@ namespace Core2D.Style
         /// Check whether the <see cref="TextHAlignment"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeTextHAlignment() => _textHAlignment != default(TextHAlignment);
+        public virtual bool ShouldSerializeTextHAlignment() => _textHAlignment != default;
 
         /// <summary>
         /// Check whether the <see cref="TextVAlignment"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeTextVAlignment() => _textVAlignment != default(TextVAlignment);
+        public virtual bool ShouldSerializeTextVAlignment() => _textVAlignment != default;
     }
 }

@@ -101,33 +101,33 @@ namespace Core2D.Renderer
             _zoomX = 1.0;
             _zoomY = 1.0;
             _drawShapeState = ShapeState.Create(ShapeStateFlags.Visible);
-            _selectedShape = default(BaseShape);
-            _selectedShapes = default(ImmutableHashSet<BaseShape>);
+            _selectedShape = default;
+            _selectedShapes = default;
         }
 
         /// <summary>
         /// Check whether the <see cref="PanX"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializePanX() => _panX != default(double);
+        public virtual bool ShouldSerializePanX() => _panX != default;
 
         /// <summary>
         /// Check whether the <see cref="PanY"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializePanY() => _panY != default(double);
+        public virtual bool ShouldSerializePanY() => _panY != default;
 
         /// <summary>
         /// Check whether the <see cref="ZoomX"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeZoomX() => _zoomX != default(double);
+        public virtual bool ShouldSerializeZoomX() => _zoomX != default;
 
         /// <summary>
         /// Check whether the <see cref="ZoomY"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeZoomY() => _zoomY != default(double);
+        public virtual bool ShouldSerializeZoomY() => _zoomY != default;
 
         /// <summary>
         /// Check whether the <see cref="DrawShapeState"/> property has changed from its default value.

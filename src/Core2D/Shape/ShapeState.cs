@@ -174,7 +174,7 @@ namespace Core2D.Shape
         /// Check whether the <see cref="Flags"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeFlags() => _flags != default(ShapeStateFlags);
+        public virtual bool ShouldSerializeFlags() => _flags != default;
 
         /// <summary>
         /// The <see cref="Default"/> property is not serialized.

@@ -296,67 +296,67 @@ namespace Core2D.Containers
         /// Check whether the <see cref="SnapToGrid"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeSnapToGrid() => _snapToGrid != default(bool);
+        public virtual bool ShouldSerializeSnapToGrid() => _snapToGrid != default;
 
         /// <summary>
         /// Check whether the <see cref="SnapX"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeSnapX() => _snapX != default(double);
+        public virtual bool ShouldSerializeSnapX() => _snapX != default;
 
         /// <summary>
         /// Check whether the <see cref="SnapY"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeSnapY() => _snapY != default(double);
+        public virtual bool ShouldSerializeSnapY() => _snapY != default;
 
         /// <summary>
         /// Check whether the <see cref="HitThreshold"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeHitThreshold() => _hitThreshold != default(double);
+        public virtual bool ShouldSerializeHitThreshold() => _hitThreshold != default;
 
         /// <summary>
         /// Check whether the <see cref="MoveMode"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeMoveMode() => _moveMode != default(MoveMode);
+        public virtual bool ShouldSerializeMoveMode() => _moveMode != default;
 
         /// <summary>
         /// Check whether the <see cref="DefaultIsStroked"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeDefaultIsStroked() => _defaultIsStroked != default(bool);
+        public virtual bool ShouldSerializeDefaultIsStroked() => _defaultIsStroked != default;
 
         /// <summary>
         /// Check whether the <see cref="DefaultIsFilled"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeDefaultIsFilled() => _defaultIsFilled != default(bool);
+        public virtual bool ShouldSerializeDefaultIsFilled() => _defaultIsFilled != default;
 
         /// <summary>
         /// Check whether the <see cref="DefaultIsClosed"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeDefaultIsClosed() => _defaultIsClosed != default(bool);
+        public virtual bool ShouldSerializeDefaultIsClosed() => _defaultIsClosed != default;
 
         /// <summary>
         /// Check whether the <see cref="DefaultIsSmoothJoin"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeDefaultIsSmoothJoin() => _defaultIsSmoothJoin != default(bool);
+        public virtual bool ShouldSerializeDefaultIsSmoothJoin() => _defaultIsSmoothJoin != default;
 
         /// <summary>
         /// Check whether the <see cref="DefaultFillRule"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeDefaultFillRule() => _defaultFillRule != default(FillRule);
+        public virtual bool ShouldSerializeDefaultFillRule() => _defaultFillRule != default;
 
         /// <summary>
         /// Check whether the <see cref="TryToConnect"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeTryToConnect() => _tryToConnect != default(bool);
+        public virtual bool ShouldSerializeTryToConnect() => _tryToConnect != default;
 
         /// <summary>
         /// Check whether the <see cref="PointShape"/> property has changed from its default value.
@@ -386,6 +386,6 @@ namespace Core2D.Containers
         /// Check whether the <see cref="CloneStyle"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeCloneStyle() => _cloneStyle != default(bool);
+        public virtual bool ShouldSerializeCloneStyle() => _cloneStyle != default;
     }
 }

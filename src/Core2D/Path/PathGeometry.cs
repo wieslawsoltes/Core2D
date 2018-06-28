@@ -113,6 +113,6 @@ namespace Core2D.Path
         /// Check whether the <see cref="FillRule"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeFillRule() => _fillRule != default(FillRule);
+        public virtual bool ShouldSerializeFillRule() => _fillRule != default;
     }
 }

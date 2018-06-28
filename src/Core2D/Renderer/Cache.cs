@@ -42,7 +42,7 @@ namespace Core2D.Renderer
             {
                 return data;
             }
-            return default(TValue);
+            return default;
         }
 
         /// <inheritdoc/>

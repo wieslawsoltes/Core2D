@@ -204,13 +204,13 @@ namespace Core2D.Style
         /// Check whether the <see cref="Thickness"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeThickness() => _thickness != default(double);
+        public virtual bool ShouldSerializeThickness() => _thickness != default;
 
         /// <summary>
         /// Check whether the <see cref="LineCap"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeLineCap() => _lineCap != default(LineCap);
+        public virtual bool ShouldSerializeLineCap() => _lineCap != default;
 
         /// <summary>
         /// Check whether the <see cref="Dashes"/> property has changed from its default value.
@@ -222,6 +222,6 @@ namespace Core2D.Style
         /// Check whether the <see cref="DashOffset"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeDashOffset() => _dashOffset != default(double);
+        public virtual bool ShouldSerializeDashOffset() => _dashOffset != default;
     }
 }

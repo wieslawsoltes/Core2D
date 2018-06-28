@@ -106,7 +106,7 @@ namespace Core2D.Shapes
             return new PointShape()
             {
                 Name = name,
-                Style = default(ShapeStyle),
+                Style = default,
                 X = x,
                 Y = y,
                 Alignment = alignment,
@@ -159,19 +159,19 @@ namespace Core2D.Shapes
         /// Check whether the <see cref="X"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeX() => _x != default(double);
+        public virtual bool ShouldSerializeX() => _x != default;
 
         /// <summary>
         /// Check whether the <see cref="Y"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeY() => _y != default(double);
+        public virtual bool ShouldSerializeY() => _y != default;
 
         /// <summary>
         /// Check whether the <see cref="Alignment"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeAlignment() => _alignment != default(PointAlignment);
+        public virtual bool ShouldSerializeAlignment() => _alignment != default;
 
         /// <summary>
         /// Check whether the <see cref="Shape"/> property has changed from its default value.

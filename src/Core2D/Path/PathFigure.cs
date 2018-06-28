@@ -148,12 +148,12 @@ namespace Core2D.Path
         /// Check whether the <see cref="IsFilled"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeIsFilled() => _isFilled != default(bool);
+        public virtual bool ShouldSerializeIsFilled() => _isFilled != default;
 
         /// <summary>
         /// Check whether the <see cref="IsClosed"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeIsClosed() => _isClosed != default(bool);
+        public virtual bool ShouldSerializeIsClosed() => _isClosed != default;
     }
 }
