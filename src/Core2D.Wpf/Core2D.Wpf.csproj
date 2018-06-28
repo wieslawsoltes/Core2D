@@ -27,7 +27,6 @@
   <PropertyGroup>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
-  <Import Project="..\..\build\Base.props" />
   <Import Project="..\..\build\Autofac.props" />
   <Import Project="..\..\build\Rx.props" />
   <Import Project="..\..\build\Dock.Model.props" />

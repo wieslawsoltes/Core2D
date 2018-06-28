@@ -6,7 +6,6 @@
     <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
   </PropertyGroup>
 
-  <Import Project="..\..\build\Base.props" />
   <Import Project="..\..\build\Math.Spatial.props" />
   <Import Project="..\..\build\SkiaSharp.props" />
 
