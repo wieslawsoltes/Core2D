@@ -166,22 +166,10 @@ namespace Core2D.Renderer.Avalonia
         private void DrawLineArrowsInternal(AM.DrawingContext dc, LineShape line, ShapeStyle style, double dx, double dy, out A.Point pt1, out A.Point pt2)
         {
             // Start arrow style.
-            (AM.IBrush fillStartArrow, AM.Pen strokeStartArrow) = _arrowStyleCache.Get(style.StartArrowStyle);
-            if (fillStartArrow == null || strokeStartArrow == null)
-            {
-                fillStartArrow =  ToBrush(style.StartArrowStyle.Fill);
-                strokeStartArrow = ToPen(style.StartArrowStyle, _scaleToPage);
-                _arrowStyleCache.Set(style.StartArrowStyle, (fillStartArrow, strokeStartArrow));
-            }
+            GetCached(style.StartArrowStyle, out AM.IBrush fillStartArrow, out AM.Pen strokeStartArrow);
 
             // End arrow style.
-            (AM.IBrush fillEndArrow, AM.Pen strokeEndArrow) = _arrowStyleCache.Get(style.EndArrowStyle);
-            if (fillEndArrow == null || strokeEndArrow == null)
-            {
-                fillEndArrow = ToBrush(style.EndArrowStyle.Fill);
-                strokeEndArrow = ToPen(style.EndArrowStyle, _scaleToPage);
-                _arrowStyleCache.Set(style.EndArrowStyle, (fillEndArrow, strokeEndArrow));
-            }
+            GetCached(style.EndArrowStyle, out AM.IBrush fillEndArrow, out AM.Pen strokeEndArrow);
 
             // Line max length.
             double _x1 = line.Start.X + dx;
@@ -328,10 +316,18 @@ namespace Core2D.Renderer.Avalonia
 
         private A.Matrix ToMatrix(MatrixObject m)
         {
-            return new A.Matrix(
-                m.M11, m.M12,
-                m.M21, m.M22,
-                m.OffsetX, m.OffsetY);
+            return new A.Matrix(m.M11, m.M12, m.M21, m.M22, m.OffsetX, m.OffsetY);
+        }
+
+        private void GetCached(ArrowStyle style, out AM.IBrush fill, out AM.Pen stroke)
+        {
+            (fill, stroke) = _arrowStyleCache.Get(style);
+            if (fill == null || stroke == null)
+            {
+                fill = ToBrush(style.Fill);
+                stroke = ToPen(style, _scaleToPage);
+                _arrowStyleCache.Set(style, (fill, stroke));
+            }
         }
 
         private void GetCached(ShapeStyle style, out AM.IBrush fill, out AM.Pen stroke)
