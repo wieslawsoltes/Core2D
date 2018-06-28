@@ -20,6 +20,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "props", "props", "{3C45CABF
 		build\CsvHelper.props = build\CsvHelper.props
 		src\Directory.Build.props = src\Directory.Build.props
 		tests\Directory.Build.props = tests\Directory.Build.props
+		Directory.Build.props = Directory.Build.props
 		build\Dock.Avalonia.props = build\Dock.Avalonia.props
 		build\Dock.Model.props = build\Dock.Model.props
 		build\EmbedXaml.props = build\EmbedXaml.props
