@@ -342,6 +342,17 @@ namespace Core2D.Renderer.Avalonia
                 matrix.OffsetX, matrix.OffsetY);
         }
 
+        private void GetCached(ShapeStyle style, out AM.IBrush fill, out AM.Pen stroke)
+        {
+            (fill, stroke) = _styleCache.Get(style);
+            if (fill == null || stroke == null)
+            {
+                fill = ToBrush(style.Fill);
+                stroke = ToPen(style, _scaleToPage);
+                _styleCache.Set(style, (fill, stroke));
+            }
+        }
+
         /// <inheritdoc/>
         public override void ClearCache(bool isZooming)
         {
@@ -386,13 +397,7 @@ namespace Core2D.Renderer.Avalonia
             if (style == null)
                 return;
 
-            (AM.IBrush fill, AM.Pen stroke) = _styleCache.Get(style);
-            if (fill == null || stroke == null)
-            {
-                fill = ToBrush(style.Fill);
-                stroke = ToPen(style, _scaleToPage);
-                _styleCache.Set(style, (fill, stroke));
-            }
+            GetCached(style, out AM.IBrush fill, out AM.Pen stroke);
 
             DrawLineArrowsInternal(_dc, line, style, dx, dy, out A.Point pt1, out A.Point pt2);
 
@@ -422,13 +427,7 @@ namespace Core2D.Renderer.Avalonia
             if (style == null)
                 return;
 
-            (AM.IBrush fill, AM.Pen stroke) = _styleCache.Get(style);
-            if (fill == null || stroke == null)
-            {
-                fill = ToBrush(style.Fill);
-                stroke = ToPen(style, _scaleToPage);
-                _styleCache.Set(style, (fill, stroke));
-            }
+            GetCached(style, out AM.IBrush fill, out AM.Pen stroke);
 
             var rect = CreateRect(rectangle.TopLeft, rectangle.BottomRight, dx, dy);
 
@@ -461,13 +460,7 @@ namespace Core2D.Renderer.Avalonia
             if (style == null)
                 return;
 
-            (AM.IBrush fill, AM.Pen stroke) = _styleCache.Get(style);
-            if (fill == null || stroke == null)
-            {
-                fill = ToBrush(style.Fill);
-                stroke = ToPen(style, _scaleToPage);
-                _styleCache.Set(style, (fill, stroke));
-            }
+            GetCached(style, out AM.IBrush fill, out AM.Pen stroke);
 
             var rect = CreateRect(ellipse.TopLeft, ellipse.BottomRight, dx, dy);
 
@@ -492,13 +485,7 @@ namespace Core2D.Renderer.Avalonia
             if (style == null)
                 return;
 
-            (AM.IBrush fill, AM.Pen stroke) = _styleCache.Get(style);
-            if (fill == null || stroke == null)
-            {
-                fill = ToBrush(style.Fill);
-                stroke = ToPen(style, _scaleToPage);
-                _styleCache.Set(style, (fill, stroke));
-            }
+            GetCached(style, out AM.IBrush fill, out AM.Pen stroke);
 
             var sg = new AM.StreamGeometry();
             using (var sgc = sg.Open())
@@ -541,13 +528,7 @@ namespace Core2D.Renderer.Avalonia
             if (style == null)
                 return;
 
-            (AM.IBrush fill, AM.Pen stroke) = _styleCache.Get(style);
-            if (fill == null || stroke == null)
-            {
-                fill = ToBrush(style.Fill);
-                stroke = ToPen(style, _scaleToPage);
-                _styleCache.Set(style, (fill, stroke));
-            }
+            GetCached(style, out AM.IBrush fill, out AM.Pen stroke);
 
             var sg = new AM.StreamGeometry();
             using (var sgc = sg.Open())
@@ -582,13 +563,7 @@ namespace Core2D.Renderer.Avalonia
             if (style == null)
                 return;
 
-            (AM.IBrush fill, AM.Pen stroke) = _styleCache.Get(style);
-            if (fill == null || stroke == null)
-            {
-                fill = ToBrush(style.Fill);
-                stroke = ToPen(style, _scaleToPage);
-                _styleCache.Set(style, (fill, stroke));
-            }
+            GetCached(style, out AM.IBrush fill, out AM.Pen stroke);
 
             var sg = new AM.StreamGeometry();
             using (var sgc = sg.Open())
@@ -625,13 +600,7 @@ namespace Core2D.Renderer.Avalonia
             if (style == null)
                 return;
 
-            (AM.IBrush fill, AM.Pen stroke) = _styleCache.Get(style);
-            if (fill == null || stroke == null)
-            {
-                fill = ToBrush(style.Fill);
-                stroke = ToPen(style, _scaleToPage);
-                _styleCache.Set(style, (fill, stroke));
-            }
+            GetCached(style, out AM.IBrush fill, out AM.Pen stroke);
 
             var fontStyle = AM.FontStyle.Normal;
             var fontWeight = AM.FontWeight.Normal;
@@ -699,13 +668,7 @@ namespace Core2D.Renderer.Avalonia
 
             if ((image.IsStroked || image.IsFilled) && style != null)
             {
-                (AM.IBrush fill, AM.Pen stroke) = _styleCache.Get(style);
-                if (fill == null || stroke == null)
-                {
-                    fill = ToBrush(style.Fill);
-                    stroke = ToPen(style, _scaleToPage);
-                    _styleCache.Set(style, (fill, stroke));
-                }
+                GetCached(style, out AM.IBrush fill, out AM.Pen stroke);
 
                 DrawRectangleInternal(
                     _dc,
@@ -777,13 +740,7 @@ namespace Core2D.Renderer.Avalonia
             if (style == null)
                 return;
 
-            (AM.IBrush fill, AM.Pen stroke) = _styleCache.Get(style);
-            if (fill == null || stroke == null)
-            {
-                fill = ToBrush(style.Fill);
-                stroke = ToPen(style, _scaleToPage);
-                _styleCache.Set(style, (fill, stroke));
-            }
+            GetCached(style, out AM.IBrush fill, out AM.Pen stroke);
 
             var g = path.Geometry.ToGeometry(dx, dy);
 
