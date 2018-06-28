@@ -31,8 +31,8 @@ namespace Core2D.Renderer.Avalonia
         // TODO: Add TextShape cache.
         private ICache<string, AMI.Bitmap> _biCache = Cache<string, AMI.Bitmap>.Create(bi => bi.Dispose());
         // TODO: Add PathShape cache.
-        private Func<double, float> _scaleToPage;
-        private double _textScaleFactor;
+        private readonly Func<double, float> _scaleToPage;
+        private readonly double _textScaleFactor;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="AvaloniaRenderer"/> class.
