@@ -75,6 +75,24 @@ namespace Core2D.Shapes
         }
 
         /// <summary>
+        /// Check if text is a property binding.
+        /// </summary>
+        /// <param name="text">The text to check for binding.</param>
+        /// <param name="binding">The binding property name.</param>
+        /// <returns>True if text is a binding.</returns>
+        public static bool IsBinding(string text, out string binding)
+        {
+            var trimmed = text.Trim();
+            if (trimmed.Length >= 3 && trimmed.TrimStart().StartsWith("{") && trimmed.TrimEnd().EndsWith("}"))
+            {
+                binding = trimmed.Substring(1, trimmed.Length - 2);
+                return true;
+            }
+            binding = default;
+            return false;
+        }
+
+        /// <summary>
         /// Bind properties or data record to <see cref="TextShape.Text"/> property.
         /// </summary>
         /// <param name="text">The text shape instance.</param>
@@ -87,15 +105,12 @@ namespace Core2D.Shapes
 
             if (!string.IsNullOrEmpty(text.Text))
             {
-                var trimmed = text.Text.Trim();
-                if (trimmed.Length >= 3 && trimmed.TrimStart().StartsWith("{") && trimmed.TrimEnd().EndsWith("}"))
+                if (IsBinding(text.Text, out string binding))
                 {
-                    var bidning = trimmed.Substring(1, trimmed.Length - 2);
-
                     // Try to bind to internal Record or external (r) data record using Text property as Column.Name name.
                     if (record != null)
                     {
-                        bool success = TryToBind(record, bidning, out string value);
+                        bool success = TryToBind(record, binding, out string value);
                         if (success)
                         {
                             return value;
@@ -105,7 +120,7 @@ namespace Core2D.Shapes
                     // Try to bind to external Properties database (e.g. Container.Data.Properties) using Text property as Property.Name name.
                     if (db != null)
                     {
-                        bool success = TryToBind(db, bidning, out string value);
+                        bool success = TryToBind(db, binding, out string value);
                         if (success)
                         {
                             return value;
