@@ -382,12 +382,9 @@ namespace Core2D.Renderer.Wpf
             }
         }
 
-        private MatrixTransform ToMatrixTransform(MatrixObject matrix)
+        private MatrixTransform ToMatrixTransform(MatrixObject m)
         {
-            return new MatrixTransform(
-                matrix.M11, matrix.M12,
-                matrix.M21, matrix.M22,
-                matrix.OffsetX, matrix.OffsetY);
+            return new MatrixTransform(m.M11, m.M12, m.M21, m.M22, m.OffsetX, m.OffsetY);
         }
 
         private void GetCached(ShapeStyle style, double thickness, out Brush fill, out Pen stroke)

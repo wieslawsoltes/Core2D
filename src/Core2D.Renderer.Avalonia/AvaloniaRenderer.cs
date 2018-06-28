@@ -313,33 +313,25 @@ namespace Core2D.Renderer.Avalonia
 
             for (double x = sx; x < ex; x += cellWidth)
             {
-                var p0 = new A.Point(
-                    _scaleToPage(x),
-                    _scaleToPage(oy));
-                var p1 = new A.Point(
-                    _scaleToPage(x),
-                    _scaleToPage(ey));
+                var p0 = new A.Point(_scaleToPage(x), _scaleToPage(oy));
+                var p1 = new A.Point(_scaleToPage(x), _scaleToPage(ey));
                 DrawLineInternal(dc, stroke, isStroked, ref p0, ref p1);
             }
 
             for (double y = sy; y < ey; y += cellHeight)
             {
-                var p0 = new A.Point(
-                    _scaleToPage(ox),
-                    _scaleToPage(y));
-                var p1 = new A.Point(
-                    _scaleToPage(ex),
-                    _scaleToPage(y));
+                var p0 = new A.Point(_scaleToPage(ox), _scaleToPage(y));
+                var p1 = new A.Point(_scaleToPage(ex), _scaleToPage(y));
                 DrawLineInternal(dc, stroke, isStroked, ref p0, ref p1);
             }
         }
 
-        private A.Matrix ToMatrix(MatrixObject matrix)
+        private A.Matrix ToMatrix(MatrixObject m)
         {
             return new A.Matrix(
-                matrix.M11, matrix.M12,
-                matrix.M21, matrix.M22,
-                matrix.OffsetX, matrix.OffsetY);
+                m.M11, m.M12,
+                m.M21, m.M22,
+                m.OffsetX, m.OffsetY);
         }
 
         private void GetCached(ShapeStyle style, out AM.IBrush fill, out AM.Pen stroke)
