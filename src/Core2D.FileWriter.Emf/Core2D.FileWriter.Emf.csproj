@@ -6,6 +6,8 @@
     <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
   </PropertyGroup>
 
+  <Import Project="..\..\build\Base.props" />
+
   <ItemGroup Condition="$(TargetFramework.StartsWith('net4')) and '$(OS)' == 'Windows_NT'">
     <Reference Include="PresentationCore" />
   </ItemGroup>

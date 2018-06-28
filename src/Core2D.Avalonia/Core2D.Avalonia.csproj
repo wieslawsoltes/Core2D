@@ -14,6 +14,7 @@
     <IlcArg Include="--stacktracedata" />
   </ItemGroup>
 
+  <Import Project="..\..\build\Base.props" />
   <Import Project="..\..\build\ILCompiler.props" Condition="'$(CoreRT)' == 'True'" />
   <Import Project="..\..\build\NETCore.props" Condition="'$(CoreRT)' == 'False'" />
   <!--<Import Project="..\..\build\NSubsys.props" Condition="'$(CoreRT)' == 'False'" />-->

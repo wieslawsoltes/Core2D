@@ -6,6 +6,7 @@
     <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
   </PropertyGroup>
 
+  <Import Project="..\..\build\Base.props" />
   <Import Project="..\..\build\Newtonsoft.Json.props" />
 
   <ItemGroup>
