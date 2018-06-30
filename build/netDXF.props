@@ -1,5 +1,5 @@
 ﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <PackageReference Include="netDXF" Version="2.0.2" />
+    <PackageReference Include="netDXF" Version="2.1.0" />
   </ItemGroup>
 </Project>

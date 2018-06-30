@@ -7,7 +7,7 @@ using System.Reflection;
 
 namespace Core2D.Serializer.Xaml
 {
-    internal class CoreAttributeProvider : Portable.Xaml.ComponentModel.ICustomAttributeProvider
+    internal class CoreAttributeProvider : ICustomAttributeProvider
     {
         private readonly Type _type;
 

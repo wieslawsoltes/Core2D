@@ -280,7 +280,7 @@ namespace Core2D.Renderer.Dxf
             dxf.AddEntity(hatch);
         }
 
-        private void DrawGridInternal(DxfDocument dxf, Layer layer, ShapeStyle style, double offsetX, double offsetY, double cellWidth, double cellHeight, ref Spatial.Rect2 rect)
+        private void DrawGridInternal(DxfDocument dxf, Layer layer, Style.ShapeStyle style, double offsetX, double offsetY, double cellWidth, double cellHeight, ref Spatial.Rect2 rect)
         {
             double ox = rect.X;
             double oy = rect.Y;
