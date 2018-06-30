@@ -328,7 +328,7 @@ namespace Core2D.Wpf.Editor
             {
                 var dlg = new OpenFileDialog()
                 {
-                    Filter = "Script (*.cs)|*.cs|All (*.*)|*.*",
+                    Filter = "Script (*.csx)|*.csx|All (*.*)|*.*",
                     FilterIndex = 0,
                     FileName = "",
                     Multiselect = true
