@@ -1,6 +1,8 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
+using System.Collections.Generic;
+using System.Collections.Immutable;
 using Core2D.Path;
 using Core2D.Path.Segments;
 using Core2D.Shapes;
@@ -14,6 +16,77 @@ namespace Core2D.Renderer.Avalonia
     /// </summary>
     public static class PathGeometryConverter
     {
+        private static ImmutableArray<PointShape> ToPointShapes(this IEnumerable<A.Point> points, double dx, double dy)
+        {
+            var PointShapes = ImmutableArray.CreateBuilder<PointShape>();
+            foreach (var point in points)
+            {
+                PointShapes.Add(PointShape.Create(point.X + dx, point.Y + dy));
+            }
+            return PointShapes.ToImmutable();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="pg"></param>
+        /// <param name="dx"></param>
+        /// <param name="dy"></param>
+        /// <returns></returns>
+        public static PathGeometry ToPathGeometry(this AM.PathGeometry pg, double dx, double dy)
+        {
+            var geometry = PathGeometry.Create(
+                ImmutableArray.Create<PathFigure>(),
+                pg.FillRule == AM.FillRule.EvenOdd ? FillRule.EvenOdd : FillRule.Nonzero);
+
+            var context = new PathGeometryContext(geometry);
+
+            foreach (var pf in pg.Figures)
+            {
+                context.BeginFigure(
+                    PointShape.Create(pf.StartPoint.X + dx, pf.StartPoint.Y + dy),
+                    pf.IsFilled,
+                    pf.IsClosed);
+
+                foreach (var segment in pf.Segments)
+                {
+                    if (segment is AM.ArcSegment arcSegment)
+                    {
+                        context.ArcTo(
+                            PointShape.Create(arcSegment.Point.X + dx, arcSegment.Point.Y + dy),
+                            PathSize.Create(arcSegment.Size.Width, arcSegment.Size.Height),
+                            arcSegment.RotationAngle,
+                            arcSegment.IsLargeArc,
+                            arcSegment.SweepDirection == AM.SweepDirection.Clockwise ? SweepDirection.Clockwise : SweepDirection.Counterclockwise);
+                    }
+                    else if (segment is AM.BezierSegment cubicBezierSegment)
+                    {
+                        context.CubicBezierTo(
+                            PointShape.Create(cubicBezierSegment.Point1.X + dx, cubicBezierSegment.Point1.Y + dy),
+                            PointShape.Create(cubicBezierSegment.Point2.X + dx, cubicBezierSegment.Point2.Y + dy),
+                            PointShape.Create(cubicBezierSegment.Point3.X + dx, cubicBezierSegment.Point3.Y + dy));
+                    }
+                    else if (segment is AM.LineSegment lineSegment)
+                    {
+                        context.LineTo(
+                            PointShape.Create(lineSegment.Point.X + dx, lineSegment.Point.Y + dy));
+                    }
+                    else if (segment is AM.QuadraticBezierSegment quadraticBezierSegment)
+                    {
+                        context.QuadraticBezierTo(
+                            PointShape.Create(quadraticBezierSegment.Point1.X + dx, quadraticBezierSegment.Point1.Y + dy),
+                            PointShape.Create(quadraticBezierSegment.Point2.X + dx, quadraticBezierSegment.Point2.Y + dy));
+                    }
+                    else
+                    {
+                        throw new NotSupportedException("Not supported segment type: " + segment.GetType());
+                    }
+                }
+            }
+
+            return geometry;
+        }
+
         /// <summary>
         /// 
         /// </summary>
@@ -184,6 +257,17 @@ namespace Core2D.Renderer.Avalonia
             }
 
             return sg;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="source"></param>
+        /// <returns></returns>
+        public static PathGeometry ToPathGeometry(this string source)
+        {
+            var pg = AM.PathGeometry.Parse(source);
+            return ToPathGeometry(pg, 0.0, 0.0);
         }
 
         /// <summary>
