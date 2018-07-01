@@ -3,9 +3,9 @@
 using System;
 using Core2D.Interfaces;
 using Core2D.Containers;
-using netDxf;
-using netDxf.Header;
-using netDxf.Objects;
+using DXF=netDxf;
+using DXFH=netDxf.Header;
+using DXFO=netDxf.Objects;
 
 namespace Core2D.Renderer.Dxf
 {
@@ -18,7 +18,7 @@ namespace Core2D.Renderer.Dxf
         void IProjectExporter.Save(string path, PageContainer container)
         {
             _outputPath = System.IO.Path.GetDirectoryName(path);
-            var dxf = new DxfDocument(DxfVersion.AutoCad2010);
+            var dxf = new DXF.DxfDocument(DXFH.DxfVersion.AutoCad2010);
 
             Add(dxf, container);
 
@@ -30,7 +30,7 @@ namespace Core2D.Renderer.Dxf
         void IProjectExporter.Save(string path, DocumentContainer document)
         {
             _outputPath = System.IO.Path.GetDirectoryName(path);
-            var dxf = new DxfDocument(DxfVersion.AutoCad2010);
+            var dxf = new DXF.DxfDocument(DXFH.DxfVersion.AutoCad2010);
 
             Add(dxf, document);
 
@@ -42,7 +42,7 @@ namespace Core2D.Renderer.Dxf
         void IProjectExporter.Save(string path, ProjectContainer project)
         {
             _outputPath = System.IO.Path.GetDirectoryName(path);
-            var dxf = new DxfDocument(DxfVersion.AutoCad2010);
+            var dxf = new DXF.DxfDocument(DXFH.DxfVersion.AutoCad2010);
 
             Add(dxf, project);
 
@@ -50,7 +50,7 @@ namespace Core2D.Renderer.Dxf
             ClearCache(isZooming: false);
         }
 
-        private void Add(DxfDocument dxf, PageContainer container)
+        private void Add(DXF.DxfDocument dxf, PageContainer container)
         {
             if (container.Template != null)
             {
@@ -66,23 +66,23 @@ namespace Core2D.Renderer.Dxf
             Draw(dxf, container, 0.0, 0.0, (object)container.Data.Properties, (object)container.Data.Record);
         }
 
-        private void Add(DxfDocument dxf, DocumentContainer document)
+        private void Add(DXF.DxfDocument dxf, DocumentContainer document)
         {
             foreach (var page in document.Pages)
             {
-                var layout = new Layout(page.Name)
+                var layout = new DXFO.Layout(page.Name)
                 {
-                    PlotSettings = new PlotSettings()
+                    PlotSettings = new DXFO.PlotSettings()
                     {
                         PaperSizeName = $"{page.Template.Name}_({page.Template.Width}_x_{page.Template.Height}_MM)",
                         LeftMargin = 0.0,
                         BottomMargin = 0.0,
                         RightMargin = 0.0,
                         TopMargin = 0.0,
-                        PaperSize = new Vector2(page.Template.Width, page.Template.Height),
-                        Origin = new Vector2(0.0, 0.0),
-                        PaperUnits = PlotPaperUnits.Milimeters,
-                        PaperRotation = PlotRotation.NoRotation
+                        PaperSize = new DXF.Vector2(page.Template.Width, page.Template.Height),
+                        Origin = new DXF.Vector2(0.0, 0.0),
+                        PaperUnits = DXFO.PlotPaperUnits.Milimeters,
+                        PaperRotation = DXFO.PlotRotation.NoRotation
                     }
                 };
                 dxf.Layouts.Add(layout);
@@ -92,7 +92,7 @@ namespace Core2D.Renderer.Dxf
             }
         }
 
-        private void Add(DxfDocument dxf, ProjectContainer project)
+        private void Add(DXF.DxfDocument dxf, ProjectContainer project)
         {
             foreach (var document in project.Documents)
             {

@@ -23,8 +23,10 @@ namespace Core2D.Renderer.SkiaSharp
         /// <returns></returns>
         public static SKPath ToSKPath(this PathGeometry xpg, double dx, double dy, Func<double, float> scale)
         {
-            var path = new SKPath();
-            path.FillType = xpg.FillRule == FillRule.EvenOdd ? SKPathFillType.EvenOdd : SKPathFillType.Winding;
+            var path = new SKPath
+            {
+                FillType = xpg.FillRule == FillRule.EvenOdd ? SKPathFillType.EvenOdd : SKPathFillType.Winding
+            };
 
             foreach (var xpf in xpg.Figures)
             {
@@ -39,9 +41,8 @@ namespace Core2D.Renderer.SkiaSharp
 
                 foreach (var segment in xpf.Segments)
                 {
-                    if (segment is ArcSegment)
+                    if (segment is ArcSegment arcSegment)
                     {
-                        var arcSegment = segment as ArcSegment;
                         path.ArcTo(
                             scale(arcSegment.Size.Width),
                             scale(arcSegment.Size.Height), 
@@ -53,9 +54,8 @@ namespace Core2D.Renderer.SkiaSharp
 
                         previous = arcSegment.Point;
                     }
-                    else if (segment is CubicBezierSegment)
+                    else if (segment is CubicBezierSegment cubicBezierSegment)
                     {
-                        var cubicBezierSegment = segment as CubicBezierSegment;
                         path.CubicTo(
                             scale(cubicBezierSegment.Point1.X + dx),
                             scale(cubicBezierSegment.Point1.Y + dy),
@@ -66,18 +66,16 @@ namespace Core2D.Renderer.SkiaSharp
 
                         previous = cubicBezierSegment.Point3;
                     }
-                    else if (segment is LineSegment)
+                    else if (segment is LineSegment lineSegment)
                     {
-                        var lineSegment = segment as LineSegment;
                         path.LineTo(
                             scale(lineSegment.Point.X + dx),
                             scale(lineSegment.Point.Y + dy));
 
                         previous = lineSegment.Point;
                     }
-                    else if (segment is PolyCubicBezierSegment)
+                    else if (segment is PolyCubicBezierSegment polyCubicBezierSegment)
                     {
-                        var polyCubicBezierSegment = segment as PolyCubicBezierSegment;
                         if (polyCubicBezierSegment.Points.Length >= 3)
                         {
                             path.CubicTo(
@@ -108,9 +106,8 @@ namespace Core2D.Renderer.SkiaSharp
                             }
                         }
                     }
-                    else if (segment is PolyLineSegment)
+                    else if (segment is PolyLineSegment polyLineSegment)
                     {
-                        var polyLineSegment = segment as PolyLineSegment;
                         if (polyLineSegment.Points.Length >= 1)
                         {
                             path.LineTo(
@@ -132,9 +129,8 @@ namespace Core2D.Renderer.SkiaSharp
                             }
                         }
                     }
-                    else if (segment is PolyQuadraticBezierSegment)
+                    else if (segment is PolyQuadraticBezierSegment polyQuadraticSegment)
                     {
-                        var polyQuadraticSegment = segment as PolyQuadraticBezierSegment;
                         if (polyQuadraticSegment.Points.Length >= 2)
                         {
                             path.QuadTo(
@@ -161,9 +157,8 @@ namespace Core2D.Renderer.SkiaSharp
                             }
                         }
                     }
-                    else if (segment is QuadraticBezierSegment)
+                    else if (segment is QuadraticBezierSegment quadraticBezierSegment)
                     {
-                        var quadraticBezierSegment = segment as QuadraticBezierSegment;
                         path.QuadTo(
                             scale(quadraticBezierSegment.Point1.X + dx),
                             scale(quadraticBezierSegment.Point1.Y + dy),
