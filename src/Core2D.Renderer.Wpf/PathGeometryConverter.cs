@@ -44,11 +44,11 @@ namespace Core2D.Renderer.Wpf
         /// <param name="dx"></param>
         /// <param name="dy"></param>
         /// <returns></returns>
-        public static Path.PathGeometry ToPathGeometry(this WM.PathGeometry pg, double dx, double dy)
+        public static PathGeometry ToPathGeometry(this WM.PathGeometry pg, double dx, double dy)
         {
-            var geometry = Path.PathGeometry.Create(
-                ImmutableArray.Create<Path.PathFigure>(),
-                pg.FillRule == WM.FillRule.EvenOdd ? Path.FillRule.EvenOdd : Path.FillRule.Nonzero);
+            var geometry = PathGeometry.Create(
+                ImmutableArray.Create<PathFigure>(),
+                pg.FillRule == WM.FillRule.EvenOdd ? FillRule.EvenOdd : FillRule.Nonzero);
 
             var context = new PathGeometryContext(geometry);
 
@@ -61,9 +61,8 @@ namespace Core2D.Renderer.Wpf
 
                 foreach (var segment in pf.Segments)
                 {
-                    if (segment is WM.ArcSegment)
+                    if (segment is WM.ArcSegment arcSegment)
                     {
-                        var arcSegment = segment as WM.ArcSegment;
                         context.ArcTo(
                             PointShape.Create(arcSegment.Point.X + dx, arcSegment.Point.Y + dy),
                             PathSize.Create(arcSegment.Size.Width, arcSegment.Size.Height),
@@ -73,9 +72,8 @@ namespace Core2D.Renderer.Wpf
                             arcSegment.IsStroked,
                             arcSegment.IsSmoothJoin);
                     }
-                    else if (segment is WM.BezierSegment)
+                    else if (segment is WM.BezierSegment cubicBezierSegment)
                     {
-                        var cubicBezierSegment = segment as WM.BezierSegment;
                         context.CubicBezierTo(
                             PointShape.Create(cubicBezierSegment.Point1.X + dx, cubicBezierSegment.Point1.Y + dy),
                             PointShape.Create(cubicBezierSegment.Point2.X + dx, cubicBezierSegment.Point2.Y + dy),
@@ -83,41 +81,36 @@ namespace Core2D.Renderer.Wpf
                             cubicBezierSegment.IsStroked,
                             cubicBezierSegment.IsSmoothJoin);
                     }
-                    else if (segment is WM.LineSegment)
+                    else if (segment is WM.LineSegment lineSegment)
                     {
-                        var lineSegment = segment as WM.LineSegment;
                         context.LineTo(
                             PointShape.Create(lineSegment.Point.X + dx, lineSegment.Point.Y + dy),
                             lineSegment.IsStroked,
                             lineSegment.IsSmoothJoin);
                     }
-                    else if (segment is WM.PolyBezierSegment)
+                    else if (segment is WM.PolyBezierSegment polyCubicBezierSegment)
                     {
-                        var polyCubicBezierSegment = segment as WM.PolyBezierSegment;
                         context.PolyCubicBezierTo(
                             ToPointShapes(polyCubicBezierSegment.Points, dx, dy),
                             polyCubicBezierSegment.IsStroked,
                             polyCubicBezierSegment.IsSmoothJoin);
                     }
-                    else if (segment is WM.PolyLineSegment)
+                    else if (segment is WM.PolyLineSegment polyLineSegment)
                     {
-                        var polyLineSegment = segment as WM.PolyLineSegment;
                         context.PolyLineTo(
                             ToPointShapes(polyLineSegment.Points, dx, dy),
                             polyLineSegment.IsStroked,
                             polyLineSegment.IsSmoothJoin);
                     }
-                    else if (segment is WM.PolyQuadraticBezierSegment)
+                    else if (segment is WM.PolyQuadraticBezierSegment polyQuadraticSegment)
                     {
-                        var polyQuadraticSegment = segment as WM.PolyQuadraticBezierSegment;
                         context.PolyQuadraticBezierTo(
                             ToPointShapes(polyQuadraticSegment.Points, dx, dy),
                             polyQuadraticSegment.IsStroked,
                             polyQuadraticSegment.IsSmoothJoin);
                     }
-                    else if (segment is WM.QuadraticBezierSegment)
+                    else if (segment is WM.QuadraticBezierSegment quadraticBezierSegment)
                     {
-                        var quadraticBezierSegment = segment as WM.QuadraticBezierSegment;
                         context.QuadraticBezierTo(
                             PointShape.Create(quadraticBezierSegment.Point1.X + dx, quadraticBezierSegment.Point1.Y + dy),
                             PointShape.Create(quadraticBezierSegment.Point2.X + dx, quadraticBezierSegment.Point2.Y + dy),
@@ -137,23 +130,11 @@ namespace Core2D.Renderer.Wpf
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="source"></param>
-        /// <returns></returns>
-        public static Path.PathGeometry ToPathGeometry(this string source)
-        {
-            var g = WM.Geometry.Parse(source);
-            var pg = WM.PathGeometry.CreateFromGeometry(g);
-            return ToPathGeometry(pg, 0.0, 0.0);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
         /// <param name="xpg"></param>
         /// <param name="dx"></param>
         /// <param name="dy"></param>
         /// <returns></returns>
-        public static WM.StreamGeometry ToStreamGeometry(this Path.PathGeometry xpg, double dx, double dy)
+        public static WM.StreamGeometry ToStreamGeometry(this PathGeometry xpg, double dx, double dy)
         {
             var sg = new WM.StreamGeometry();
 
@@ -236,6 +217,18 @@ namespace Core2D.Renderer.Wpf
             sg.Freeze();
 
             return sg;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="source"></param>
+        /// <returns></returns>
+        public static PathGeometry ToPathGeometry(this string source)
+        {
+            var g = WM.Geometry.Parse(source);
+            var pg = WM.PathGeometry.CreateFromGeometry(g);
+            return ToPathGeometry(pg, 0.0, 0.0);
         }
 
         /// <summary>
