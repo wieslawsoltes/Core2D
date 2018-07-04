@@ -29,14 +29,9 @@ namespace Core2D.Avalonia
         /// Program entry point.
         /// </summary>
         /// <param name="args">The program arguments.</param>
-#if NET461
-       [STAThread]
-#endif
+        [STAThread]
         static void Main(string[] args)
         {
-#if !NET461
-            Thread.CurrentThread.TrySetApartmentState(ApartmentState.STA);
-#endif
             bool deferredRendering = true;
             bool useDirect2D1 = false;
             bool useSkia = false;
