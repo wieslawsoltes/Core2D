@@ -1,0 +1,5 @@
+<linker>
+    <assembly fullname="System.ComponentModel.TypeConverter">
+        <type fullname="System.ComponentModel.*" preserve="all"/>
+    </assembly>
+</linker>

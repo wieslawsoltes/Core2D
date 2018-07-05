@@ -1,0 +1,17 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <TrimUnusedDependencies>False</TrimUnusedDependencies>
+    <LinkDuringPublish>True</LinkDuringPublish>
+    <ShowLinkerSizeComparison>True</ShowLinkerSizeComparison>
+    <ILLinkClearInitLocals>True</ILLinkClearInitLocals>
+  </PropertyGroup>
+  <ItemGroup>
+    <LinkerRootDescriptors Include="linker\linker.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Packaging.Tools.Trimming" Version="1.1.0-preview1-26619-01" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="ILLink.Tasks" Version="0.1.5-preview-1461378" />
+  </ItemGroup>
+</Project>
