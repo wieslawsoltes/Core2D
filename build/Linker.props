@@ -3,7 +3,7 @@
     <TrimUnusedDependencies>False</TrimUnusedDependencies>
     <LinkDuringPublish>True</LinkDuringPublish>
     <ShowLinkerSizeComparison>True</ShowLinkerSizeComparison>
-    <ILLinkClearInitLocals>True</ILLinkClearInitLocals>
+    <!--<ILLinkClearInitLocals>True</ILLinkClearInitLocals>-->
   </PropertyGroup>
   <ItemGroup>
     <LinkerRootDescriptors Include="$(MSBuildThisFileDirectory)\linker\linker.xml" />
