@@ -25,7 +25,7 @@
   <Import Project="..\..\build\SkiaSharp.props" />
   <Import Project="..\..\build\SharpDX.props" />
   <Import Project="..\..\build\Dock.Model.props" />
-  <Import Project="..\..\build\Dock.Avalonia.props" /
+  <Import Project="..\..\build\Dock.Avalonia.props" />
   <Import Project="..\..\build\Linker.props" Condition="'$(CoreRT)' == 'False'" />
 
   <ItemGroup>
