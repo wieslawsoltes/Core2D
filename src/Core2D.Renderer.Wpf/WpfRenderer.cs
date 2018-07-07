@@ -550,7 +550,7 @@ namespace Core2D.Renderer.Wpf
             }
             else
             {
-                var pf = new System.Windows.Media.PathFigure()
+                var pf = new PathFigure()
                 {
                     StartPoint = new Point(a.Start.X, a.Start.Y),
                     IsFilled = arc.IsFilled
@@ -560,7 +560,7 @@ namespace Core2D.Renderer.Wpf
                     new Point(a.End.X, a.End.Y),
                     new Size(a.Radius.Width, a.Radius.Height),
                     0.0,
-                    a.IsLargeArc, System.Windows.Media.SweepDirection.Clockwise,
+                    a.IsLargeArc, SweepDirection.Clockwise,
                     arc.IsStroked);
 
                 //segment.Freeze();
@@ -654,7 +654,7 @@ namespace Core2D.Renderer.Wpf
             }
             else
             {
-                var pf = new System.Windows.Media.PathFigure()
+                var pf = new PathFigure()
                 {
                     StartPoint = new Point(quadraticBezier.Point1.X + dx, quadraticBezier.Point1.Y + dy),
                     IsFilled = quadraticBezier.IsFilled
@@ -708,17 +708,17 @@ namespace Core2D.Renderer.Wpf
             {
                 var ci = CultureInfo.InvariantCulture;
 
-                var fontStyle = System.Windows.FontStyles.Normal;
+                var fontStyle = FontStyles.Normal;
                 var fontWeight = FontWeights.Regular;
 
                 if (style.TextStyle.FontStyle != null)
                 {
-                    if (style.TextStyle.FontStyle.Flags.HasFlag(Core2D.Style.FontStyleFlags.Italic))
+                    if (style.TextStyle.FontStyle.Flags.HasFlag(FontStyleFlags.Italic))
                     {
-                        fontStyle = System.Windows.FontStyles.Italic;
+                        fontStyle = FontStyles.Italic;
                     }
 
-                    if (style.TextStyle.FontStyle.Flags.HasFlag(Core2D.Style.FontStyleFlags.Bold))
+                    if (style.TextStyle.FontStyle.Flags.HasFlag(FontStyleFlags.Bold))
                     {
                         fontWeight = FontWeights.Bold;
                     }
@@ -736,18 +736,18 @@ namespace Core2D.Renderer.Wpf
 
                 if (style.TextStyle.FontStyle != null)
                 {
-                    if (style.TextStyle.FontStyle.Flags.HasFlag(Core2D.Style.FontStyleFlags.Underline)
-                    || style.TextStyle.FontStyle.Flags.HasFlag(Core2D.Style.FontStyleFlags.Strikeout))
+                    if (style.TextStyle.FontStyle.Flags.HasFlag(FontStyleFlags.Underline)
+                    || style.TextStyle.FontStyle.Flags.HasFlag(FontStyleFlags.Strikeout))
                     {
                         var decorations = new TextDecorationCollection();
 
-                        if (style.TextStyle.FontStyle.Flags.HasFlag(Core2D.Style.FontStyleFlags.Underline))
+                        if (style.TextStyle.FontStyle.Flags.HasFlag(FontStyleFlags.Underline))
                         {
                             decorations = new TextDecorationCollection(
                                 decorations.Union(TextDecorations.Underline));
                         }
 
-                        if (style.TextStyle.FontStyle.Flags.HasFlag(Core2D.Style.FontStyleFlags.Strikeout))
+                        if (style.TextStyle.FontStyle.Flags.HasFlag(FontStyleFlags.Strikeout))
                         {
                             decorations = new TextDecorationCollection(
                                 decorations.Union(TextDecorations.Strikethrough));
