@@ -9,10 +9,10 @@ using Core2D.Shapes;
 using Core2D.Style;
 using Spatial;
 using Spatial.Arc;
-using A = Avalonia;
-using AM = Avalonia.Media;
-using AMI = Avalonia.Media.Imaging;
-using APAZ = Avalonia.Controls.PanAndZoom;
+using A=Avalonia;
+using AM=Avalonia.Media;
+using AMI=Avalonia.Media.Imaging;
+using APAZ=Avalonia.Controls.PanAndZoom;
 
 namespace Core2D.Renderer.Avalonia
 {
@@ -28,7 +28,7 @@ namespace Core2D.Renderer.Avalonia
         // TODO: Add ArcShape cache.
         // TODO: Add CubicBezierShape cache.
         // TODO: Add QuadraticBezierShape cache.
-        // TODO: Add TextShape cache.
+        private ICache<TextShape, (string, AM.FormattedText, ShapeStyle)> _textCache = Cache<TextShape, (string, AM.FormattedText, ShapeStyle)>.Create();
         private ICache<string, AMI.Bitmap> _biCache = Cache<string, AMI.Bitmap>.Create(bi => bi.Dispose());
         // TODO: Add PathShape cache.
         private readonly Func<double, float> _scaleToPage;
@@ -314,6 +314,76 @@ namespace Core2D.Renderer.Avalonia
             }
         }
 
+        private static AM.StreamGeometry ToStreamGeometry(ArcShape arc, double dx, double dy)
+        {
+            var sg = new AM.StreamGeometry();
+
+            using (var sgc = sg.Open())
+            {
+                var a = new WpfArc(
+                    Point2.FromXY(arc.Point1.X, arc.Point1.Y),
+                    Point2.FromXY(arc.Point2.X, arc.Point2.Y),
+                    Point2.FromXY(arc.Point3.X, arc.Point3.Y),
+                    Point2.FromXY(arc.Point4.X, arc.Point4.Y));
+
+                sgc.BeginFigure(
+                    new A.Point(a.Start.X + dx, a.Start.Y),
+                    arc.IsFilled);
+
+                sgc.ArcTo(
+                    new A.Point(a.End.X + dx, a.End.Y + dy),
+                    new A.Size(a.Radius.Width, a.Radius.Height),
+                    0.0,
+                    a.IsLargeArc,
+                    AM.SweepDirection.Clockwise);
+
+                sgc.EndFigure(false);
+            }
+
+            return sg;
+        }
+
+        private static AM.StreamGeometry ToStreamGeometry(CubicBezierShape cubicBezier, double dx, double dy)
+        {
+            var sg = new AM.StreamGeometry();
+
+            using (var sgc = sg.Open())
+            {
+                sgc.BeginFigure(
+                    new A.Point(cubicBezier.Point1.X, cubicBezier.Point1.Y),
+                    cubicBezier.IsFilled);
+
+                sgc.CubicBezierTo(
+                    new A.Point(cubicBezier.Point2.X, cubicBezier.Point2.Y),
+                    new A.Point(cubicBezier.Point3.X, cubicBezier.Point3.Y),
+                    new A.Point(cubicBezier.Point4.X, cubicBezier.Point4.Y));
+
+                sgc.EndFigure(false);
+            }
+
+            return sg;
+        }
+
+        private static AM.StreamGeometry ToStreamGeometry(QuadraticBezierShape quadraticBezier, double dx, double dy)
+        {
+            var sg = new AM.StreamGeometry();
+
+            using (var sgc = sg.Open())
+            {
+                sgc.BeginFigure(
+                    new A.Point(quadraticBezier.Point1.X, quadraticBezier.Point1.Y),
+                    quadraticBezier.IsFilled);
+
+                sgc.QuadraticBezierTo(
+                    new A.Point(quadraticBezier.Point2.X, quadraticBezier.Point2.Y),
+                    new A.Point(quadraticBezier.Point3.X, quadraticBezier.Point3.Y));
+
+                sgc.EndFigure(false);
+            }
+
+            return sg;
+        }
+
         private A.Matrix ToMatrix(MatrixObject m)
         {
             return new A.Matrix(m.M11, m.M12, m.M21, m.M22, m.OffsetX, m.OffsetY);
@@ -349,6 +419,7 @@ namespace Core2D.Renderer.Avalonia
 
             if (!isZooming)
             {
+                _textCache.Reset();
                 _biCache.Reset();
             }
         }
@@ -475,28 +546,7 @@ namespace Core2D.Renderer.Avalonia
 
             GetCached(style, out AM.IBrush fill, out AM.Pen stroke);
 
-            var sg = new AM.StreamGeometry();
-            using (var sgc = sg.Open())
-            {
-                var a = new WpfArc(
-                    Point2.FromXY(arc.Point1.X, arc.Point1.Y),
-                    Point2.FromXY(arc.Point2.X, arc.Point2.Y),
-                    Point2.FromXY(arc.Point3.X, arc.Point3.Y),
-                    Point2.FromXY(arc.Point4.X, arc.Point4.Y));
-
-                sgc.BeginFigure(
-                    new A.Point(a.Start.X + dx, a.Start.Y),
-                    arc.IsFilled);
-
-                sgc.ArcTo(
-                    new A.Point(a.End.X + dx, a.End.Y + dy),
-                    new A.Size(a.Radius.Width, a.Radius.Height),
-                    0.0,
-                    a.IsLargeArc,
-                    AM.SweepDirection.Clockwise);
-
-                sgc.EndFigure(false);
-            }
+            var sg = ToStreamGeometry(arc, dx, dy);
 
             _dc.DrawGeometry(
                 arc.IsFilled ? fill : null,
@@ -518,20 +568,7 @@ namespace Core2D.Renderer.Avalonia
 
             GetCached(style, out AM.IBrush fill, out AM.Pen stroke);
 
-            var sg = new AM.StreamGeometry();
-            using (var sgc = sg.Open())
-            {
-                sgc.BeginFigure(
-                    new A.Point(cubicBezier.Point1.X, cubicBezier.Point1.Y),
-                    cubicBezier.IsFilled);
-
-                sgc.CubicBezierTo(
-                    new A.Point(cubicBezier.Point2.X, cubicBezier.Point2.Y),
-                    new A.Point(cubicBezier.Point3.X, cubicBezier.Point3.Y),
-                    new A.Point(cubicBezier.Point4.X, cubicBezier.Point4.Y));
-
-                sgc.EndFigure(false);
-            }
+            var sg = ToStreamGeometry(cubicBezier, dx, dy);
 
             _dc.DrawGeometry(
                 cubicBezier.IsFilled ? fill : null,
@@ -553,19 +590,7 @@ namespace Core2D.Renderer.Avalonia
 
             GetCached(style, out AM.IBrush fill, out AM.Pen stroke);
 
-            var sg = new AM.StreamGeometry();
-            using (var sgc = sg.Open())
-            {
-                sgc.BeginFigure(
-                    new A.Point(quadraticBezier.Point1.X, quadraticBezier.Point1.Y),
-                    quadraticBezier.IsFilled);
-
-                sgc.QuadraticBezierTo(
-                    new A.Point(quadraticBezier.Point2.X, quadraticBezier.Point2.Y),
-                    new A.Point(quadraticBezier.Point3.X, quadraticBezier.Point3.Y));
-
-                sgc.EndFigure(false);
-            }
+            var sg = ToStreamGeometry(quadraticBezier, dx, dy);
 
             _dc.DrawGeometry(
                 quadraticBezier.IsFilled ? fill : null,
@@ -576,7 +601,11 @@ namespace Core2D.Renderer.Avalonia
         /// <inheritdoc/>
         public override void Draw(object dc, TextShape text, double dx, double dy, object db, object r)
         {
-            var _gfx = dc as AM.DrawingContext;
+            var _dc = dc as AM.DrawingContext;
+
+            var style = text.Style;
+            if (style == null)
+                return;
 
             var properties = (ImmutableArray<Property>)db;
             var record = (Record)r;
@@ -584,63 +613,72 @@ namespace Core2D.Renderer.Avalonia
             if (string.IsNullOrEmpty(tbind))
                 return;
 
-            var style = text.Style;
-            if (style == null)
-                return;
-
             GetCached(style, out AM.IBrush fill, out AM.Pen stroke);
 
-            var fontStyle = AM.FontStyle.Normal;
-            var fontWeight = AM.FontWeight.Normal;
-            //var fontDecoration = AM.FontDecoration.None;
+            var rect = CreateRect(text.TopLeft, text.BottomRight, dx, dy);
 
-            if (style.TextStyle.FontStyle != null)
+            (string ct, AM.FormattedText ft, ShapeStyle cs) = _textCache.Get(text);
+            if (string.Compare(ct, tbind) == 0 && cs == style)
             {
-                if (style.TextStyle.FontStyle.Flags.HasFlag(FontStyleFlags.Italic))
-                {
-                    fontStyle |= AM.FontStyle.Italic;
-                }
-
-                if (style.TextStyle.FontStyle.Flags.HasFlag(FontStyleFlags.Bold))
-                {
-                    fontWeight |= AM.FontWeight.Bold;
-                }
-
-                // TODO: Implement font decoration after Avalonia adds support.
-                /*
-                if (style.TextStyle.FontStyle.Flags.HasFlag(FontStyleFlags.Underline))
-                {
-                    fontDecoration |= AM.FontDecoration.Underline;
-                }
-
-                if (style.TextStyle.FontStyle.Flags.HasFlag(FontStyleFlags.Strikeout))
-                {
-                    fontDecoration |= AM.FontDecoration.Strikethrough;
-                }
-                */
-            }
-
-            if (style.TextStyle.FontSize >= 0.0)
-            {
-                var tf = new AM.Typeface(
-                    style.TextStyle.FontName,
-                    style.TextStyle.FontSize * _textScaleFactor,
-                    fontStyle,
-                    fontWeight);
-
-                var ft = new AM.FormattedText()
-                {
-                    Typeface = tf,
-                    Text = tbind,
-                    TextAlignment = AM.TextAlignment.Left,
-                    Wrapping = AM.TextWrapping.NoWrap
-                };
-
-                var rect = CreateRect(text.TopLeft, text.BottomRight, dx, dy);
                 var size = ft.Measure();
                 var origin = GetTextOrigin(style, ref rect, ref size);
+                _dc.DrawText(stroke.Brush, origin, ft);
+            }
+            else
+            {
+                var fontStyle = AM.FontStyle.Normal;
+                var fontWeight = AM.FontWeight.Normal;
+                //var fontDecoration = AM.FontDecoration.None;
 
-                _gfx.DrawText(stroke.Brush, origin, ft);
+                if (style.TextStyle.FontStyle != null)
+                {
+                    if (style.TextStyle.FontStyle.Flags.HasFlag(FontStyleFlags.Italic))
+                    {
+                        fontStyle |= AM.FontStyle.Italic;
+                    }
+
+                    if (style.TextStyle.FontStyle.Flags.HasFlag(FontStyleFlags.Bold))
+                    {
+                        fontWeight |= AM.FontWeight.Bold;
+                    }
+
+                    // TODO: Implement font decoration after Avalonia adds support.
+                    /*
+                    if (style.TextStyle.FontStyle.Flags.HasFlag(FontStyleFlags.Underline))
+                    {
+                        fontDecoration |= AM.FontDecoration.Underline;
+                    }
+
+                    if (style.TextStyle.FontStyle.Flags.HasFlag(FontStyleFlags.Strikeout))
+                    {
+                        fontDecoration |= AM.FontDecoration.Strikethrough;
+                    }
+                    */
+                }
+
+                if (style.TextStyle.FontSize >= 0.0)
+                {
+                    var tf = new AM.Typeface(
+                        style.TextStyle.FontName,
+                        style.TextStyle.FontSize * _textScaleFactor,
+                        fontStyle,
+                        fontWeight);
+
+                    ft = new AM.FormattedText()
+                    {
+                        Typeface = tf,
+                        Text = tbind,
+                        TextAlignment = AM.TextAlignment.Left,
+                        Wrapping = AM.TextWrapping.NoWrap
+                    };
+
+                    var size = ft.Measure();
+                    var origin = GetTextOrigin(style, ref rect, ref size);
+
+                    _textCache.Set(text, (tbind, ft, style));
+
+                    _dc.DrawText(stroke.Brush, origin, ft);
+                }
             }
         }
 
@@ -719,6 +757,9 @@ namespace Core2D.Renderer.Avalonia
         /// <inheritdoc/>
         public override void Draw(object dc, PathShape path, double dx, double dy, object db, object r)
         {
+            if (path.Geometry == null)
+                return;
+
             if (!path.IsFilled && !path.IsStroked)
                 return;
 
