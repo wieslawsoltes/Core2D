@@ -370,6 +370,134 @@ namespace Core2D.Renderer.Wpf
             }
         }
 
+        private WM.PathGeometry ToPathGeometry(ArcShape arc, double dx, double dy)
+        {
+            var a = new WpfArc(
+                Point2.FromXY(arc.Point1.X, arc.Point1.Y),
+                Point2.FromXY(arc.Point2.X, arc.Point2.Y),
+                Point2.FromXY(arc.Point3.X, arc.Point3.Y),
+                Point2.FromXY(arc.Point4.X, arc.Point4.Y));
+
+            WM.PathGeometry pg = _arcCache.Get(arc);
+
+            if (pg != null)
+            {
+                var pf = pg.Figures[0];
+                pf.StartPoint = new W.Point(a.Start.X + dx, a.Start.Y + dy);
+                pf.IsFilled = arc.IsFilled;
+                var segment = pf.Segments[0] as WM.ArcSegment;
+                segment.Point = new W.Point(a.End.X + dx, a.End.Y + dy);
+                segment.Size = new W.Size(a.Radius.Width, a.Radius.Height);
+                segment.IsLargeArc = a.IsLargeArc;
+                segment.IsStroked = arc.IsStroked;
+            }
+            else
+            {
+                var pf = new WM.PathFigure()
+                {
+                    StartPoint = new W.Point(a.Start.X, a.Start.Y),
+                    IsFilled = arc.IsFilled
+                };
+
+                var segment = new WM.ArcSegment(
+                    new W.Point(a.End.X, a.End.Y),
+                    new W.Size(a.Radius.Width, a.Radius.Height),
+                    0.0,
+                    a.IsLargeArc, WM.SweepDirection.Clockwise,
+                    arc.IsStroked);
+
+                //segment.Freeze();
+                pf.Segments.Add(segment);
+                //pf.Freeze();
+                pg = new WM.PathGeometry();
+                pg.Figures.Add(pf);
+                //pg.Freeze();
+
+                _arcCache.Set(arc, pg);
+            }
+
+            return pg;
+        }
+
+        private WM.PathGeometry ToPathGeometry(CubicBezierShape cubicBezier, double dx, double dy)
+        {
+            WM.PathGeometry pg = _cubicBezierCache.Get(cubicBezier);
+
+            if (pg != null)
+            {
+                var pf = pg.Figures[0];
+                pf.StartPoint = new W.Point(cubicBezier.Point1.X + dx, cubicBezier.Point1.Y + dy);
+                pf.IsFilled = cubicBezier.IsFilled;
+                var bs = pf.Segments[0] as WM.BezierSegment;
+                bs.Point1 = new W.Point(cubicBezier.Point2.X + dx, cubicBezier.Point2.Y + dy);
+                bs.Point2 = new W.Point(cubicBezier.Point3.X + dx, cubicBezier.Point3.Y + dy);
+                bs.Point3 = new W.Point(cubicBezier.Point4.X + dx, cubicBezier.Point4.Y + dy);
+                bs.IsStroked = cubicBezier.IsStroked;
+            }
+            else
+            {
+                var pf = new WM.PathFigure()
+                {
+                    StartPoint = new W.Point(cubicBezier.Point1.X + dx, cubicBezier.Point1.Y + dy),
+                    IsFilled = cubicBezier.IsFilled
+                };
+                var bs = new WM.BezierSegment(
+                        new W.Point(cubicBezier.Point2.X + dx, cubicBezier.Point2.Y + dy),
+                        new W.Point(cubicBezier.Point3.X + dx, cubicBezier.Point3.Y + dy),
+                        new W.Point(cubicBezier.Point4.X + dx, cubicBezier.Point4.Y + dy),
+                        cubicBezier.IsStroked);
+                //bs.Freeze();
+                pf.Segments.Add(bs);
+                //pf.Freeze();
+                pg = new WM.PathGeometry();
+                pg.Figures.Add(pf);
+                //pg.Freeze();
+
+                _cubicBezierCache.Set(cubicBezier, pg);
+            }
+
+            return pg;
+        }
+
+        private WM.PathGeometry ToPathGeometry(QuadraticBezierShape quadraticBezier, double dx, double dy)
+        {
+            WM.PathGeometry pg = _quadraticBezierCache.Get(quadraticBezier);
+
+            if (pg != null)
+            {
+                var pf = pg.Figures[0];
+                pf.StartPoint = new W.Point(quadraticBezier.Point1.X + dx, quadraticBezier.Point1.Y + dy);
+                pf.IsFilled = quadraticBezier.IsFilled;
+                var qbs = pf.Segments[0] as WM.QuadraticBezierSegment;
+                qbs.Point1 = new W.Point(quadraticBezier.Point2.X + dx, quadraticBezier.Point2.Y + dy);
+                qbs.Point2 = new W.Point(quadraticBezier.Point3.X + dx, quadraticBezier.Point3.Y + dy);
+                qbs.IsStroked = quadraticBezier.IsStroked;
+            }
+            else
+            {
+                var pf = new WM.PathFigure()
+                {
+                    StartPoint = new W.Point(quadraticBezier.Point1.X + dx, quadraticBezier.Point1.Y + dy),
+                    IsFilled = quadraticBezier.IsFilled
+                };
+
+                var qbs = new WM.QuadraticBezierSegment(
+                        new W.Point(quadraticBezier.Point2.X + dx, quadraticBezier.Point2.Y + dy),
+                        new W.Point(quadraticBezier.Point3.X + dx, quadraticBezier.Point3.Y + dy),
+                        quadraticBezier.IsStroked);
+                //bs.Freeze();
+                pf.Segments.Add(qbs);
+                //pf.Freeze();
+                pg = new WM.PathGeometry();
+                pg.Figures.Add(pf);
+                //pg.Freeze();
+
+                _quadraticBezierCache.Set(quadraticBezier, pg);
+            }
+
+            return pg;
+        }
+
         private WM.MatrixTransform ToMatrixTransform(MatrixObject m)
         {
             return new WM.MatrixTransform(m.M11, m.M12, m.M21, m.M22, m.OffsetX, m.OffsetY);
@@ -530,48 +658,7 @@ namespace Core2D.Renderer.Wpf
 
             GetCached(style, thickness, out WM.Brush fill, out WM.Pen stroke);
 
-            var a = new WpfArc(
-                Point2.FromXY(arc.Point1.X, arc.Point1.Y),
-                Point2.FromXY(arc.Point2.X, arc.Point2.Y),
-                Point2.FromXY(arc.Point3.X, arc.Point3.Y),
-                Point2.FromXY(arc.Point4.X, arc.Point4.Y));
-
-            WM.PathGeometry pg = _arcCache.Get(arc);
-            if (pg != null)
-            {
-                var pf = pg.Figures[0];
-                pf.StartPoint = new W.Point(a.Start.X + dx, a.Start.Y + dy);
-                pf.IsFilled = arc.IsFilled;
-                var segment = pf.Segments[0] as WM.ArcSegment;
-                segment.Point = new W.Point(a.End.X + dx, a.End.Y + dy);
-                segment.Size = new W.Size(a.Radius.Width, a.Radius.Height);
-                segment.IsLargeArc = a.IsLargeArc;
-                segment.IsStroked = arc.IsStroked;
-            }
-            else
-            {
-                var pf = new WM.PathFigure()
-                {
-                    StartPoint = new W.Point(a.Start.X, a.Start.Y),
-                    IsFilled = arc.IsFilled
-                };
-
-                var segment = new WM.ArcSegment(
-                    new W.Point(a.End.X, a.End.Y),
-                    new W.Size(a.Radius.Width, a.Radius.Height),
-                    0.0,
-                    a.IsLargeArc, WM.SweepDirection.Clockwise,
-                    arc.IsStroked);
-
-                //segment.Freeze();
-                pf.Segments.Add(segment);
-                //pf.Freeze();
-                pg = new WM.PathGeometry();
-                pg.Figures.Add(pf);
-                //pg.Freeze();
-
-                _arcCache.Set(arc, pg);
-            }
+            var pg = ToPathGeometry(arc, dx, dy);
 
             DrawPathGeometryInternal(_dc, half, fill, stroke, arc.IsStroked, arc.IsFilled, pg);
         }
@@ -590,39 +677,7 @@ namespace Core2D.Renderer.Wpf
 
             GetCached(style, thickness, out WM.Brush fill, out WM.Pen stroke);
 
-            WM.PathGeometry pg = _cubicBezierCache.Get(cubicBezier);
-            if (pg != null)
-            {
-                var pf = pg.Figures[0];
-                pf.StartPoint = new W.Point(cubicBezier.Point1.X + dx, cubicBezier.Point1.Y + dy);
-                pf.IsFilled = cubicBezier.IsFilled;
-                var bs = pf.Segments[0] as WM.BezierSegment;
-                bs.Point1 = new W.Point(cubicBezier.Point2.X + dx, cubicBezier.Point2.Y + dy);
-                bs.Point2 = new W.Point(cubicBezier.Point3.X + dx, cubicBezier.Point3.Y + dy);
-                bs.Point3 = new W.Point(cubicBezier.Point4.X + dx, cubicBezier.Point4.Y + dy);
-                bs.IsStroked = cubicBezier.IsStroked;
-            }
-            else
-            {
-                var pf = new WM.PathFigure()
-                {
-                    StartPoint = new W.Point(cubicBezier.Point1.X + dx, cubicBezier.Point1.Y + dy),
-                    IsFilled = cubicBezier.IsFilled
-                };
-                var bs = new WM.BezierSegment(
-                        new W.Point(cubicBezier.Point2.X + dx, cubicBezier.Point2.Y + dy),
-                        new W.Point(cubicBezier.Point3.X + dx, cubicBezier.Point3.Y + dy),
-                        new W.Point(cubicBezier.Point4.X + dx, cubicBezier.Point4.Y + dy),
-                        cubicBezier.IsStroked);
-                //bs.Freeze();
-                pf.Segments.Add(bs);
-                //pf.Freeze();
-                pg = new WM.PathGeometry();
-                pg.Figures.Add(pf);
-                //pg.Freeze();
-
-                _cubicBezierCache.Set(cubicBezier, pg);
-            }
+            var pg = ToPathGeometry(cubicBezier, dx, dy);
 
             DrawPathGeometryInternal(_dc, half, fill, stroke, cubicBezier.IsStroked, cubicBezier.IsFilled, pg);
         }
@@ -641,38 +696,7 @@ namespace Core2D.Renderer.Wpf
 
             GetCached(style, thickness, out WM.Brush fill, out WM.Pen stroke);
 
-            WM.PathGeometry pg = _quadraticBezierCache.Get(quadraticBezier);
-            if (pg != null)
-            {
-                var pf = pg.Figures[0];
-                pf.StartPoint = new W.Point(quadraticBezier.Point1.X + dx, quadraticBezier.Point1.Y + dy);
-                pf.IsFilled = quadraticBezier.IsFilled;
-                var qbs = pf.Segments[0] as WM.QuadraticBezierSegment;
-                qbs.Point1 = new W.Point(quadraticBezier.Point2.X + dx, quadraticBezier.Point2.Y + dy);
-                qbs.Point2 = new W.Point(quadraticBezier.Point3.X + dx, quadraticBezier.Point3.Y + dy);
-                qbs.IsStroked = quadraticBezier.IsStroked;
-            }
-            else
-            {
-                var pf = new WM.PathFigure()
-                {
-                    StartPoint = new W.Point(quadraticBezier.Point1.X + dx, quadraticBezier.Point1.Y + dy),
-                    IsFilled = quadraticBezier.IsFilled
-                };
-
-                var qbs = new WM.QuadraticBezierSegment(
-                        new W.Point(quadraticBezier.Point2.X + dx, quadraticBezier.Point2.Y + dy),
-                        new W.Point(quadraticBezier.Point3.X + dx, quadraticBezier.Point3.Y + dy),
-                        quadraticBezier.IsStroked);
-                //bs.Freeze();
-                pf.Segments.Add(qbs);
-                //pf.Freeze();
-                pg = new WM.PathGeometry();
-                pg.Figures.Add(pf);
-                //pg.Freeze();
-
-                _quadraticBezierCache.Set(quadraticBezier, pg);
-            }
+            var pg = ToPathGeometry(quadraticBezier, dx, dy);
 
             DrawPathGeometryInternal(_dc, half, fill, stroke, quadraticBezier.IsStroked, quadraticBezier.IsFilled, pg);
         }
