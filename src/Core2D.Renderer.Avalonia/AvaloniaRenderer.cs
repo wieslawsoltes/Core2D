@@ -327,7 +327,7 @@ namespace Core2D.Renderer.Avalonia
                     Point2.FromXY(arc.Point4.X, arc.Point4.Y));
 
                 sgc.BeginFigure(
-                    new A.Point(a.Start.X + dx, a.Start.Y),
+                    new A.Point(a.Start.X + dx, a.Start.Y + dy),
                     arc.IsFilled);
 
                 sgc.ArcTo(
@@ -350,13 +350,13 @@ namespace Core2D.Renderer.Avalonia
             using (var sgc = sg.Open())
             {
                 sgc.BeginFigure(
-                    new A.Point(cubicBezier.Point1.X, cubicBezier.Point1.Y),
+                    new A.Point(cubicBezier.Point1.X + dx, cubicBezier.Point1.Y + dy),
                     cubicBezier.IsFilled);
 
                 sgc.CubicBezierTo(
-                    new A.Point(cubicBezier.Point2.X, cubicBezier.Point2.Y),
-                    new A.Point(cubicBezier.Point3.X, cubicBezier.Point3.Y),
-                    new A.Point(cubicBezier.Point4.X, cubicBezier.Point4.Y));
+                    new A.Point(cubicBezier.Point2.X + dx, cubicBezier.Point2.Y + dy),
+                    new A.Point(cubicBezier.Point3.X + dx, cubicBezier.Point3.Y + dy),
+                    new A.Point(cubicBezier.Point4.X + dx, cubicBezier.Point4.Y + dy));
 
                 sgc.EndFigure(false);
             }
@@ -371,12 +371,12 @@ namespace Core2D.Renderer.Avalonia
             using (var sgc = sg.Open())
             {
                 sgc.BeginFigure(
-                    new A.Point(quadraticBezier.Point1.X, quadraticBezier.Point1.Y),
+                    new A.Point(quadraticBezier.Point1.X + dx, quadraticBezier.Point1.Y + dy),
                     quadraticBezier.IsFilled);
 
                 sgc.QuadraticBezierTo(
-                    new A.Point(quadraticBezier.Point2.X, quadraticBezier.Point2.Y),
-                    new A.Point(quadraticBezier.Point3.X, quadraticBezier.Point3.Y));
+                    new A.Point(quadraticBezier.Point2.X + dx, quadraticBezier.Point2.Y + dy),
+                    new A.Point(quadraticBezier.Point3.X + dx, quadraticBezier.Point3.Y + dy));
 
                 sgc.EndFigure(false);
             }
