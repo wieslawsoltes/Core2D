@@ -79,6 +79,7 @@
             <Type Name="Avalonia.Markup.Xaml.Converters.ParseTypeConverter`1[[Avalonia.Point,Avalonia.Visuals]]" Dynamic="Required All" />
             <Type Name="Avalonia.Markup.Xaml.Converters.ParseTypeConverter`1[[Avalonia.Media.Color,Avalonia.Visuals]]" Dynamic="Required All" />
             <Type Name="Avalonia.Markup.Xaml.Converters.ParseTypeConverter`1[[Avalonia.Media.PathGeometry,Avalonia.Visuals]]" Dynamic="Required All" />
+            <Type Name="Avalonia.Markup.Xaml.Converters.ParseTypeConverter`1[[Avalonia.RelativeRect,Avalonia.Visuals]]" Dynamic="Required All" />
         </Assembly>
 
         <Assembly Name="Avalonia.DotNetCoreRuntime" Dynamic="Required All" />
