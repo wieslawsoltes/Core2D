@@ -5,14 +5,14 @@ using System.Collections.Immutable;
 using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
-using System.Windows;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using Core2D.Data;
 using Core2D.Shapes;
 using Core2D.Style;
 using Spatial;
 using Spatial.Arc;
+using W=System.Windows;
+using WM=System.Windows.Media;
+using WMI=System.Windows.Media.Imaging;
 
 namespace Core2D.Renderer.Wpf
 {
@@ -21,15 +21,15 @@ namespace Core2D.Renderer.Wpf
     /// </summary>
     public class WpfRenderer : ShapeRenderer
     {
-        private ICache<ShapeStyle, (Brush, Pen)> _styleCache = Cache<ShapeStyle, (Brush, Pen)>.Create();
-        private ICache<ArrowStyle, (Brush, Pen)> _arrowStyleCache = Cache<ArrowStyle, (Brush, Pen)>.Create();
-        private ICache<LineShape, PathGeometry> _curvedLineCache = Cache<LineShape, PathGeometry>.Create();
-        private ICache<ArcShape, PathGeometry> _arcCache = Cache<ArcShape, PathGeometry>.Create();
-        private ICache<CubicBezierShape, PathGeometry> _cubicBezierCache = Cache<CubicBezierShape, PathGeometry>.Create();
-        private ICache<QuadraticBezierShape, PathGeometry> _quadraticBezierCache = Cache<QuadraticBezierShape, PathGeometry>.Create();
-        private ICache<TextShape, (string, FormattedText, ShapeStyle)> _textCache = Cache<TextShape, (string, FormattedText, ShapeStyle)>.Create();
-        private ICache<string, BitmapImage> _biCache = Cache<string, BitmapImage>.Create(bi => bi.StreamSource.Dispose());
-        private ICache<PathShape, (Path.PathGeometry, StreamGeometry, ShapeStyle)> _pathCache = Cache<PathShape, (Path.PathGeometry, StreamGeometry, ShapeStyle)>.Create();
+        private ICache<ShapeStyle, (WM.Brush, WM.Pen)> _styleCache = Cache<ShapeStyle, (WM.Brush, WM.Pen)>.Create();
+        private ICache<ArrowStyle, (WM.Brush, WM.Pen)> _arrowStyleCache = Cache<ArrowStyle, (WM.Brush, WM.Pen)>.Create();
+        private ICache<LineShape, WM.PathGeometry> _curvedLineCache = Cache<LineShape, WM.PathGeometry>.Create();
+        private ICache<ArcShape, WM.PathGeometry> _arcCache = Cache<ArcShape, WM.PathGeometry>.Create();
+        private ICache<CubicBezierShape, WM.PathGeometry> _cubicBezierCache = Cache<CubicBezierShape, WM.PathGeometry>.Create();
+        private ICache<QuadraticBezierShape, WM.PathGeometry> _quadraticBezierCache = Cache<QuadraticBezierShape, WM.PathGeometry>.Create();
+        private ICache<TextShape, (string, WM.FormattedText, ShapeStyle)> _textCache = Cache<TextShape, (string, WM.FormattedText, ShapeStyle)>.Create();
+        private ICache<string, WMI.BitmapImage> _biCache = Cache<string, WMI.BitmapImage>.Create(bi => bi.StreamSource.Dispose());
+        private ICache<PathShape, (Path.PathGeometry, WM.StreamGeometry, ShapeStyle)> _pathCache = Cache<PathShape, (Path.PathGeometry, WM.StreamGeometry, ShapeStyle)>.Create();
 
         /// <summary>
         /// Initializes a new instance of the <see cref="WpfRenderer"/> class.
@@ -45,7 +45,7 @@ namespace Core2D.Renderer.Wpf
         /// <returns>The new instance of the <see cref="WpfRenderer"/> class.</returns>
         public static ShapeRenderer Create() => new WpfRenderer();
 
-        private static Point GetTextOrigin(ShapeStyle style, ref Rect rect, FormattedText ft)
+        private static W.Point GetTextOrigin(ShapeStyle style, ref W.Rect rect, WM.FormattedText ft)
         {
             double ox, oy;
 
@@ -77,41 +77,41 @@ namespace Core2D.Renderer.Wpf
                     break;
             }
 
-            return new Point(ox, oy);
+            return new W.Point(ox, oy);
         }
 
-        private static Color ToColor(ArgbColor color) => Color.FromArgb(color.A, color.R, color.G, color.B);
+        private static WM.Color ToColor(ArgbColor color) => WM.Color.FromArgb(color.A, color.R, color.G, color.B);
 
-        private static Brush ToBrush(ArgbColor color)
+        private static WM.Brush ToBrush(ArgbColor color)
         {
-            var brush = new SolidColorBrush(ToColor(color));
+            var brush = new WM.SolidColorBrush(ToColor(color));
             brush.Freeze();
             return brush;
         }
 
-        private static Pen ToPen(BaseStyle style, double thickness)
+        private static WM.Pen ToPen(BaseStyle style, double thickness)
         {
             var brush = ToBrush(style.Stroke);
-            var pen = new Pen(brush, thickness);
+            var pen = new WM.Pen(brush, thickness);
             switch (style.LineCap)
             {
                 case LineCap.Flat:
-                    pen.StartLineCap = PenLineCap.Flat;
-                    pen.EndLineCap = PenLineCap.Flat;
-                    pen.DashCap = PenLineCap.Flat;
+                    pen.StartLineCap = WM.PenLineCap.Flat;
+                    pen.EndLineCap = WM.PenLineCap.Flat;
+                    pen.DashCap = WM.PenLineCap.Flat;
                     break;
                 case LineCap.Square:
-                    pen.StartLineCap = PenLineCap.Square;
-                    pen.EndLineCap = PenLineCap.Square;
-                    pen.DashCap = PenLineCap.Square;
+                    pen.StartLineCap = WM.PenLineCap.Square;
+                    pen.EndLineCap = WM.PenLineCap.Square;
+                    pen.DashCap = WM.PenLineCap.Square;
                     break;
                 case LineCap.Round:
-                    pen.StartLineCap = PenLineCap.Round;
-                    pen.EndLineCap = PenLineCap.Round;
-                    pen.DashCap = PenLineCap.Round;
+                    pen.StartLineCap = WM.PenLineCap.Round;
+                    pen.EndLineCap = WM.PenLineCap.Round;
+                    pen.DashCap = WM.PenLineCap.Round;
                     break;
             }
-            pen.DashStyle = new DashStyle(
+            pen.DashStyle = new WM.DashStyle(
                 ShapeStyle.ConvertDashesToDoubleArray(style.Dashes),
                 style.DashOffset);
             pen.DashStyle.Offset = style.DashOffset;
@@ -119,23 +119,23 @@ namespace Core2D.Renderer.Wpf
             return pen;
         }
 
-        private static Rect CreateRect(PointShape tl, PointShape br, double dx, double dy)
+        private static W.Rect CreateRect(PointShape tl, PointShape br, double dx, double dy)
         {
             double tlx = Math.Min(tl.X, br.X);
             double tly = Math.Min(tl.Y, br.Y);
             double brx = Math.Max(tl.X, br.X);
             double bry = Math.Max(tl.Y, br.Y);
-            return new Rect(
-                new Point(tlx + dx, tly + dy),
-                new Point(brx + dx, bry + dy));
+            return new W.Rect(
+                new W.Point(tlx + dx, tly + dy),
+                new W.Point(brx + dx, bry + dy));
         }
 
-        private static void DrawLineInternal(DrawingContext dc, double half, Pen pen, bool isStroked, ref Point p0, ref Point p1)
+        private static void DrawLineInternal(WM.DrawingContext dc, double half, WM.Pen pen, bool isStroked, ref W.Point p0, ref W.Point p1)
         {
             if (!isStroked)
                 return;
 
-            var gs = new GuidelineSet(
+            var gs = new WM.GuidelineSet(
                 new double[] { p0.X + half, p1.X + half },
                 new double[] { p0.Y + half, p1.Y + half });
             dc.PushGuidelineSet(gs);
@@ -143,7 +143,7 @@ namespace Core2D.Renderer.Wpf
             dc.Pop();
         }
 
-        private void DrawLineCurveInternal(DrawingContext dc, double half, Pen pen, LineShape line, ref Point pt1, ref Point pt2, double dx, double dy)
+        private void DrawLineCurveInternal(WM.DrawingContext dc, double half, WM.Pen pen, LineShape line, ref W.Point pt1, ref W.Point pt2, double dx, double dy)
         {
             double p1x = pt1.X;
             double p1y = pt1.Y;
@@ -157,34 +157,34 @@ namespace Core2D.Renderer.Wpf
                 ref p1x, ref p1y,
                 ref p2x, ref p2y);
 
-            PathGeometry pg = _curvedLineCache.Get(line);
+            WM.PathGeometry pg = _curvedLineCache.Get(line);
             if (pg != null)
             {
                 var pf = pg.Figures[0];
-                pf.StartPoint = new Point(pt1.X + dx, pt1.Y + dy);
+                pf.StartPoint = new W.Point(pt1.X + dx, pt1.Y + dy);
                 pf.IsFilled = false;
-                var bs = pf.Segments[0] as BezierSegment;
-                bs.Point1 = new Point(p1x + dx, p1y + dy);
-                bs.Point2 = new Point(p2x + dx, p2y + dy);
-                bs.Point3 = new Point(pt2.X + dx, pt2.Y + dy);
+                var bs = pf.Segments[0] as WM.BezierSegment;
+                bs.Point1 = new W.Point(p1x + dx, p1y + dy);
+                bs.Point2 = new W.Point(p2x + dx, p2y + dy);
+                bs.Point3 = new W.Point(pt2.X + dx, pt2.Y + dy);
                 bs.IsStroked = line.IsStroked;
             }
             else
             {
-                var pf = new System.Windows.Media.PathFigure()
+                var pf = new WM.PathFigure()
                 {
-                    StartPoint = new Point(pt1.X + dx, pt1.Y + dy),
+                    StartPoint = new W.Point(pt1.X + dx, pt1.Y + dy),
                     IsFilled = false
                 };
-                var bs = new BezierSegment(
-                        new Point(p1x + dx, p1y + dy),
-                        new Point(p2x + dx, p2y + dy),
-                        new Point(pt2.X + dx, pt2.Y + dy),
+                var bs = new WM.BezierSegment(
+                        new W.Point(p1x + dx, p1y + dy),
+                        new W.Point(p2x + dx, p2y + dy),
+                        new W.Point(pt2.X + dx, pt2.Y + dy),
                         line.IsStroked);
                 //bs.Freeze();
                 pf.Segments.Add(bs);
                 //pf.Freeze();
-                pg = new PathGeometry();
+                pg = new WM.PathGeometry();
                 pg.Figures.Add(pf);
                 //pg.Freeze();
 
@@ -194,13 +194,13 @@ namespace Core2D.Renderer.Wpf
             DrawPathGeometryInternal(dc, half, null, pen, line.IsStroked, false, pg);
         }
 
-        private void DrawLineArrowsInternal(DrawingContext dc, LineShape line, ShapeStyle style, double halfStart, double halfEnd, double thicknessStart, double thicknessEnd, double dx, double dy, out Point pt1, out Point pt2)
+        private void DrawLineArrowsInternal(WM.DrawingContext dc, LineShape line, ShapeStyle style, double halfStart, double halfEnd, double thicknessStart, double thicknessEnd, double dx, double dy, out W.Point pt1, out W.Point pt2)
         {
             // Start arrow style.
-            GetCached(style.StartArrowStyle, thicknessStart, out Brush fillStartArrow, out Pen strokeStartArrow);
+            GetCached(style.StartArrowStyle, thicknessStart, out WM.Brush fillStartArrow, out WM.Pen strokeStartArrow);
 
             // End arrow style.
-            GetCached(style.EndArrowStyle, thicknessEnd, out Brush fillEndArrow, out Pen strokeEndArrow);
+            GetCached(style.EndArrowStyle, thicknessEnd, out WM.Brush fillEndArrow, out WM.Pen strokeEndArrow);
 
             // Line max length.
             double x1 = line.Start.X + dx;
@@ -223,11 +223,11 @@ namespace Core2D.Renderer.Wpf
             pt2 = DrawLineArrowInternal(dc, halfEnd, strokeEndArrow, fillEndArrow, x2, y2, a2, eas);
         }
 
-        private static Point DrawLineArrowInternal(DrawingContext dc, double half, Pen pen, Brush brush, double x, double y, double angle, ArrowStyle style)
+        private static W.Point DrawLineArrowInternal(WM.DrawingContext dc, double half, WM.Pen pen, WM.Brush brush, double x, double y, double angle, ArrowStyle style)
         {
-            Point pt;
+            W.Point pt;
             bool doRectTransform = angle % 90.0 != 0.0;
-            var rt = new RotateTransform(angle, x, y);
+            var rt = new WM.RotateTransform(angle, x, y);
             double rx = style.RadiusX;
             double ry = style.RadiusY;
             double sx = 2.0 * rx;
@@ -238,13 +238,13 @@ namespace Core2D.Renderer.Wpf
                 default:
                 case ArrowType.None:
                     {
-                        pt = new Point(x, y);
+                        pt = new W.Point(x, y);
                     }
                     break;
                 case ArrowType.Rectangle:
                     {
-                        pt = rt.Transform(new Point(x - sx, y));
-                        var rect = new Rect(x - sx, y - ry, sx, sy);
+                        pt = rt.Transform(new W.Point(x - sx, y));
+                        var rect = new W.Rect(x - sx, y - ry, sx, sy);
                         if (doRectTransform)
                         {
                             dc.PushTransform(rt);
@@ -260,20 +260,20 @@ namespace Core2D.Renderer.Wpf
                     break;
                 case ArrowType.Ellipse:
                     {
-                        pt = rt.Transform(new Point(x - sx, y));
+                        pt = rt.Transform(new W.Point(x - sx, y));
                         dc.PushTransform(rt);
-                        var c = new Point(x - rx, y);
+                        var c = new W.Point(x - rx, y);
                         DrawEllipseInternal(dc, half, brush, pen, style.IsStroked, style.IsFilled, ref c, rx, ry);
                         dc.Pop();
                     }
                     break;
                 case ArrowType.Arrow:
                     {
-                        pt = rt.Transform(new Point(x, y));
-                        var p11 = rt.Transform(new Point(x - sx, y + sy));
-                        var p21 = rt.Transform(new Point(x, y));
-                        var p12 = rt.Transform(new Point(x - sx, y - sy));
-                        var p22 = rt.Transform(new Point(x, y));
+                        pt = rt.Transform(new W.Point(x, y));
+                        var p11 = rt.Transform(new W.Point(x - sx, y + sy));
+                        var p21 = rt.Transform(new W.Point(x, y));
+                        var p12 = rt.Transform(new W.Point(x - sx, y - sy));
+                        var p22 = rt.Transform(new W.Point(x, y));
                         DrawLineInternal(dc, half, pen, style.IsStroked, ref p11, ref p21);
                         DrawLineInternal(dc, half, pen, style.IsStroked, ref p12, ref p22);
                     }
@@ -283,12 +283,12 @@ namespace Core2D.Renderer.Wpf
             return pt;
         }
 
-        private static void DrawRectangleInternal(DrawingContext dc, double half, Brush brush, Pen pen, bool isStroked, bool isFilled, ref Rect rect)
+        private static void DrawRectangleInternal(WM.DrawingContext dc, double half, WM.Brush brush, WM.Pen pen, bool isStroked, bool isFilled, ref W.Rect rect)
         {
             if (!isStroked && !isFilled)
                 return;
 
-            var gs = new GuidelineSet(
+            var gs = new WM.GuidelineSet(
                 new double[]
                     {
                         rect.TopLeft.X + half,
@@ -304,12 +304,12 @@ namespace Core2D.Renderer.Wpf
             dc.Pop();
         }
 
-        private static void DrawEllipseInternal(DrawingContext dc, double half, Brush brush, Pen pen, bool isStroked, bool isFilled, ref Point center, double rx, double ry)
+        private static void DrawEllipseInternal(WM.DrawingContext dc, double half, WM.Brush brush, WM.Pen pen, bool isStroked, bool isFilled, ref W.Point center, double rx, double ry)
         {
             if (!isStroked && !isFilled)
                 return;
 
-            var gs = new GuidelineSet(
+            var gs = new WM.GuidelineSet(
                 new double[]
                     {
                         center.X - rx + half,
@@ -325,12 +325,12 @@ namespace Core2D.Renderer.Wpf
             dc.Pop();
         }
 
-        private static void DrawPathGeometryInternal(DrawingContext dc, double half, Brush brush, Pen pen, bool isStroked, bool isFilled, PathGeometry pg)
+        private static void DrawPathGeometryInternal(WM.DrawingContext dc, double half, WM.Brush brush, WM.Pen pen, bool isStroked, bool isFilled, WM.PathGeometry pg)
         {
             if (!isStroked && !isFilled)
                 return;
 
-            var gs = new GuidelineSet(
+            var gs = new WM.GuidelineSet(
                 new double[]
                     {
                         pg.Bounds.TopLeft.X + half,
@@ -346,7 +346,7 @@ namespace Core2D.Renderer.Wpf
             dc.Pop();
         }
 
-        private static void DrawGridInternal(DrawingContext dc, double half, Pen stroke, ref Rect rect, double offsetX, double offsetY, double cellWidth, double cellHeight, bool isStroked)
+        private static void DrawGridInternal(WM.DrawingContext dc, double half, WM.Pen stroke, ref W.Rect rect, double offsetX, double offsetY, double cellWidth, double cellHeight, bool isStroked)
         {
             double ox = rect.X;
             double oy = rect.Y;
@@ -357,25 +357,25 @@ namespace Core2D.Renderer.Wpf
 
             for (double x = sx; x < ex; x += cellWidth)
             {
-                var p0 = new Point(x, oy);
-                var p1 = new Point(x, ey);
+                var p0 = new W.Point(x, oy);
+                var p1 = new W.Point(x, ey);
                 DrawLineInternal(dc, half, stroke, isStroked, ref p0, ref p1);
             }
 
             for (double y = sy; y < ey; y += cellHeight)
             {
-                var p0 = new Point(ox, y);
-                var p1 = new Point(ex, y);
+                var p0 = new W.Point(ox, y);
+                var p1 = new W.Point(ex, y);
                 DrawLineInternal(dc, half, stroke, isStroked, ref p0, ref p1);
             }
         }
 
-        private MatrixTransform ToMatrixTransform(MatrixObject m)
+        private WM.MatrixTransform ToMatrixTransform(MatrixObject m)
         {
-            return new MatrixTransform(m.M11, m.M12, m.M21, m.M22, m.OffsetX, m.OffsetY);
+            return new WM.MatrixTransform(m.M11, m.M12, m.M21, m.M22, m.OffsetX, m.OffsetY);
         }
 
-        private void GetCached(ArrowStyle style, double thickness, out Brush fill, out Pen stroke)
+        private void GetCached(ArrowStyle style, double thickness, out WM.Brush fill, out WM.Pen stroke)
         {
             (fill, stroke) = _arrowStyleCache.Get(style);
             if (fill == null || stroke == null)
@@ -386,7 +386,7 @@ namespace Core2D.Renderer.Wpf
             }
         }
 
-        private void GetCached(ShapeStyle style, double thickness, out Brush fill, out Pen stroke)
+        private void GetCached(ShapeStyle style, double thickness, out WM.Brush fill, out WM.Pen stroke)
         {
             (fill, stroke) = _styleCache.Get(style);
             if (fill == null || stroke == null)
@@ -418,16 +418,16 @@ namespace Core2D.Renderer.Wpf
         /// <inheritdoc/>
         public override void Fill(object dc, double x, double y, double width, double height, ArgbColor color)
         {
-            var _dc = dc as DrawingContext;
+            var _dc = dc as WM.DrawingContext;
             var brush = ToBrush(color);
-            var rect = new Rect(x, y, width, height);
+            var rect = new W.Rect(x, y, width, height);
             DrawRectangleInternal(_dc, 0.5, brush, null, false, true, ref rect);
         }
 
         /// <inheritdoc/>
         public override object PushMatrix(object dc, MatrixObject matrix)
         {
-            var _dc = dc as DrawingContext;
+            var _dc = dc as WM.DrawingContext;
             _dc.PushTransform(ToMatrixTransform(matrix));
             return null;
         }
@@ -435,14 +435,14 @@ namespace Core2D.Renderer.Wpf
         /// <inheritdoc/>
         public override void PopMatrix(object dc, object state)
         {
-            var _dc = dc as DrawingContext;
+            var _dc = dc as WM.DrawingContext;
             _dc.Pop();
         }
 
         /// <inheritdoc/>
         public override void Draw(object dc, LineShape line, double dx, double dy, object db, object r)
         {
-            var _dc = dc as DrawingContext;
+            var _dc = dc as WM.DrawingContext;
 
             var style = line.Style;
             if (style == null)
@@ -456,9 +456,9 @@ namespace Core2D.Renderer.Wpf
             double thicknessEndArrow = style.EndArrowStyle.Thickness / zoom;
             double halfEndArrow = thicknessEndArrow / 2.0;
 
-            GetCached(style, thickness, out Brush fill, out Pen stroke);
+            GetCached(style, thickness, out WM.Brush fill, out WM.Pen stroke);
 
-            DrawLineArrowsInternal(_dc, line, style, halfStartArrow, halfEndArrow, thicknessStartArrow, thicknessEndArrow, dx, dy, out Point pt1, out Point pt2);
+            DrawLineArrowsInternal(_dc, line, style, halfStartArrow, halfEndArrow, thicknessStartArrow, thicknessEndArrow, dx, dy, out W.Point pt1, out W.Point pt2);
 
             if (line.Style.LineStyle.IsCurved)
             {
@@ -473,7 +473,7 @@ namespace Core2D.Renderer.Wpf
         /// <inheritdoc/>
         public override void Draw(object dc, RectangleShape rectangle, double dx, double dy, object db, object r)
         {
-            var _dc = dc as DrawingContext;
+            var _dc = dc as WM.DrawingContext;
 
             var style = rectangle.Style;
             if (style == null)
@@ -482,7 +482,7 @@ namespace Core2D.Renderer.Wpf
             double thickness = style.Thickness / State.ZoomX;
             double half = thickness / 2.0;
 
-            GetCached(style, thickness, out Brush fill, out Pen stroke);
+            GetCached(style, thickness, out WM.Brush fill, out WM.Pen stroke);
 
             var rect = CreateRect(rectangle.TopLeft, rectangle.BottomRight, dx, dy);
 
@@ -497,7 +497,7 @@ namespace Core2D.Renderer.Wpf
         /// <inheritdoc/>
         public override void Draw(object dc, EllipseShape ellipse, double dx, double dy, object db, object r)
         {
-            var _dc = dc as DrawingContext;
+            var _dc = dc as WM.DrawingContext;
 
             var style = ellipse.Style;
             if (style == null)
@@ -506,12 +506,12 @@ namespace Core2D.Renderer.Wpf
             double thickness = style.Thickness / State.ZoomX;
             double half = thickness / 2.0;
 
-            GetCached(style, thickness, out Brush fill, out Pen stroke);
+            GetCached(style, thickness, out WM.Brush fill, out WM.Pen stroke);
 
             var rect = CreateRect(ellipse.TopLeft, ellipse.BottomRight, dx, dy);
             double rx = rect.Width / 2.0;
             double ry = rect.Height / 2.0;
-            var center = new Point(rect.X + rx, rect.Y + ry);
+            var center = new W.Point(rect.X + rx, rect.Y + ry);
 
             DrawEllipseInternal(_dc, half, fill, stroke, ellipse.IsStroked, ellipse.IsFilled, ref center, rx, ry);
         }
@@ -519,7 +519,7 @@ namespace Core2D.Renderer.Wpf
         /// <inheritdoc/>
         public override void Draw(object dc, ArcShape arc, double dx, double dy, object db, object r)
         {
-            var _dc = dc as DrawingContext;
+            var _dc = dc as WM.DrawingContext;
 
             var style = arc.Style;
             if (style == null)
@@ -528,7 +528,7 @@ namespace Core2D.Renderer.Wpf
             double thickness = style.Thickness / State.ZoomX;
             double half = thickness / 2.0;
 
-            GetCached(style, thickness, out Brush fill, out Pen stroke);
+            GetCached(style, thickness, out WM.Brush fill, out WM.Pen stroke);
 
             var a = new WpfArc(
                 Point2.FromXY(arc.Point1.X, arc.Point1.Y),
@@ -536,37 +536,37 @@ namespace Core2D.Renderer.Wpf
                 Point2.FromXY(arc.Point3.X, arc.Point3.Y),
                 Point2.FromXY(arc.Point4.X, arc.Point4.Y));
 
-            PathGeometry pg = _arcCache.Get(arc);
+            WM.PathGeometry pg = _arcCache.Get(arc);
             if (pg != null)
             {
                 var pf = pg.Figures[0];
-                pf.StartPoint = new Point(a.Start.X + dx, a.Start.Y + dy);
+                pf.StartPoint = new W.Point(a.Start.X + dx, a.Start.Y + dy);
                 pf.IsFilled = arc.IsFilled;
-                var segment = pf.Segments[0] as ArcSegment;
-                segment.Point = new Point(a.End.X + dx, a.End.Y + dy);
-                segment.Size = new Size(a.Radius.Width, a.Radius.Height);
+                var segment = pf.Segments[0] as WM.ArcSegment;
+                segment.Point = new W.Point(a.End.X + dx, a.End.Y + dy);
+                segment.Size = new W.Size(a.Radius.Width, a.Radius.Height);
                 segment.IsLargeArc = a.IsLargeArc;
                 segment.IsStroked = arc.IsStroked;
             }
             else
             {
-                var pf = new PathFigure()
+                var pf = new WM.PathFigure()
                 {
-                    StartPoint = new Point(a.Start.X, a.Start.Y),
+                    StartPoint = new W.Point(a.Start.X, a.Start.Y),
                     IsFilled = arc.IsFilled
                 };
 
-                var segment = new ArcSegment(
-                    new Point(a.End.X, a.End.Y),
-                    new Size(a.Radius.Width, a.Radius.Height),
+                var segment = new WM.ArcSegment(
+                    new W.Point(a.End.X, a.End.Y),
+                    new W.Size(a.Radius.Width, a.Radius.Height),
                     0.0,
-                    a.IsLargeArc, SweepDirection.Clockwise,
+                    a.IsLargeArc, WM.SweepDirection.Clockwise,
                     arc.IsStroked);
 
                 //segment.Freeze();
                 pf.Segments.Add(segment);
                 //pf.Freeze();
-                pg = new PathGeometry();
+                pg = new WM.PathGeometry();
                 pg.Figures.Add(pf);
                 //pg.Freeze();
 
@@ -579,7 +579,7 @@ namespace Core2D.Renderer.Wpf
         /// <inheritdoc/>
         public override void Draw(object dc, CubicBezierShape cubicBezier, double dx, double dy, object db, object r)
         {
-            var _dc = dc as DrawingContext;
+            var _dc = dc as WM.DrawingContext;
 
             var style = cubicBezier.Style;
             if (style == null)
@@ -588,36 +588,36 @@ namespace Core2D.Renderer.Wpf
             double thickness = style.Thickness / State.ZoomX;
             double half = thickness / 2.0;
 
-            GetCached(style, thickness, out Brush fill, out Pen stroke);
+            GetCached(style, thickness, out WM.Brush fill, out WM.Pen stroke);
 
-            PathGeometry pg = _cubicBezierCache.Get(cubicBezier);
+            WM.PathGeometry pg = _cubicBezierCache.Get(cubicBezier);
             if (pg != null)
             {
                 var pf = pg.Figures[0];
-                pf.StartPoint = new Point(cubicBezier.Point1.X + dx, cubicBezier.Point1.Y + dy);
+                pf.StartPoint = new W.Point(cubicBezier.Point1.X + dx, cubicBezier.Point1.Y + dy);
                 pf.IsFilled = cubicBezier.IsFilled;
-                var bs = pf.Segments[0] as BezierSegment;
-                bs.Point1 = new Point(cubicBezier.Point2.X + dx, cubicBezier.Point2.Y + dy);
-                bs.Point2 = new Point(cubicBezier.Point3.X + dx, cubicBezier.Point3.Y + dy);
-                bs.Point3 = new Point(cubicBezier.Point4.X + dx, cubicBezier.Point4.Y + dy);
+                var bs = pf.Segments[0] as WM.BezierSegment;
+                bs.Point1 = new W.Point(cubicBezier.Point2.X + dx, cubicBezier.Point2.Y + dy);
+                bs.Point2 = new W.Point(cubicBezier.Point3.X + dx, cubicBezier.Point3.Y + dy);
+                bs.Point3 = new W.Point(cubicBezier.Point4.X + dx, cubicBezier.Point4.Y + dy);
                 bs.IsStroked = cubicBezier.IsStroked;
             }
             else
             {
-                var pf = new System.Windows.Media.PathFigure()
+                var pf = new WM.PathFigure()
                 {
-                    StartPoint = new Point(cubicBezier.Point1.X + dx, cubicBezier.Point1.Y + dy),
+                    StartPoint = new W.Point(cubicBezier.Point1.X + dx, cubicBezier.Point1.Y + dy),
                     IsFilled = cubicBezier.IsFilled
                 };
-                var bs = new BezierSegment(
-                        new Point(cubicBezier.Point2.X + dx, cubicBezier.Point2.Y + dy),
-                        new Point(cubicBezier.Point3.X + dx, cubicBezier.Point3.Y + dy),
-                        new Point(cubicBezier.Point4.X + dx, cubicBezier.Point4.Y + dy),
+                var bs = new WM.BezierSegment(
+                        new W.Point(cubicBezier.Point2.X + dx, cubicBezier.Point2.Y + dy),
+                        new W.Point(cubicBezier.Point3.X + dx, cubicBezier.Point3.Y + dy),
+                        new W.Point(cubicBezier.Point4.X + dx, cubicBezier.Point4.Y + dy),
                         cubicBezier.IsStroked);
                 //bs.Freeze();
                 pf.Segments.Add(bs);
                 //pf.Freeze();
-                pg = new PathGeometry();
+                pg = new WM.PathGeometry();
                 pg.Figures.Add(pf);
                 //pg.Freeze();
 
@@ -630,7 +630,7 @@ namespace Core2D.Renderer.Wpf
         /// <inheritdoc/>
         public override void Draw(object dc, QuadraticBezierShape quadraticBezier, double dx, double dy, object db, object r)
         {
-            var _dc = dc as DrawingContext;
+            var _dc = dc as WM.DrawingContext;
 
             var style = quadraticBezier.Style;
             if (style == null)
@@ -639,35 +639,35 @@ namespace Core2D.Renderer.Wpf
             double thickness = style.Thickness / State.ZoomX;
             double half = thickness / 2.0;
 
-            GetCached(style, thickness, out Brush fill, out Pen stroke);
+            GetCached(style, thickness, out WM.Brush fill, out WM.Pen stroke);
 
-            PathGeometry pg = _quadraticBezierCache.Get(quadraticBezier);
+            WM.PathGeometry pg = _quadraticBezierCache.Get(quadraticBezier);
             if (pg != null)
             {
                 var pf = pg.Figures[0];
-                pf.StartPoint = new Point(quadraticBezier.Point1.X + dx, quadraticBezier.Point1.Y + dy);
+                pf.StartPoint = new W.Point(quadraticBezier.Point1.X + dx, quadraticBezier.Point1.Y + dy);
                 pf.IsFilled = quadraticBezier.IsFilled;
-                var qbs = pf.Segments[0] as QuadraticBezierSegment;
-                qbs.Point1 = new Point(quadraticBezier.Point2.X + dx, quadraticBezier.Point2.Y + dy);
-                qbs.Point2 = new Point(quadraticBezier.Point3.X + dx, quadraticBezier.Point3.Y + dy);
+                var qbs = pf.Segments[0] as WM.QuadraticBezierSegment;
+                qbs.Point1 = new W.Point(quadraticBezier.Point2.X + dx, quadraticBezier.Point2.Y + dy);
+                qbs.Point2 = new W.Point(quadraticBezier.Point3.X + dx, quadraticBezier.Point3.Y + dy);
                 qbs.IsStroked = quadraticBezier.IsStroked;
             }
             else
             {
-                var pf = new PathFigure()
+                var pf = new WM.PathFigure()
                 {
-                    StartPoint = new Point(quadraticBezier.Point1.X + dx, quadraticBezier.Point1.Y + dy),
+                    StartPoint = new W.Point(quadraticBezier.Point1.X + dx, quadraticBezier.Point1.Y + dy),
                     IsFilled = quadraticBezier.IsFilled
                 };
 
-                var qbs = new QuadraticBezierSegment(
-                        new Point(quadraticBezier.Point2.X + dx, quadraticBezier.Point2.Y + dy),
-                        new Point(quadraticBezier.Point3.X + dx, quadraticBezier.Point3.Y + dy),
+                var qbs = new WM.QuadraticBezierSegment(
+                        new W.Point(quadraticBezier.Point2.X + dx, quadraticBezier.Point2.Y + dy),
+                        new W.Point(quadraticBezier.Point3.X + dx, quadraticBezier.Point3.Y + dy),
                         quadraticBezier.IsStroked);
                 //bs.Freeze();
                 pf.Segments.Add(qbs);
                 //pf.Freeze();
-                pg = new PathGeometry();
+                pg = new WM.PathGeometry();
                 pg.Figures.Add(pf);
                 //pg.Freeze();
 
@@ -680,7 +680,7 @@ namespace Core2D.Renderer.Wpf
         /// <inheritdoc/>
         public override void Draw(object dc, TextShape text, double dx, double dy, object db, object r)
         {
-            var _dc = dc as DrawingContext;
+            var _dc = dc as WM.DrawingContext;
 
             var style = text.Style;
             if (style == null)
@@ -695,11 +695,11 @@ namespace Core2D.Renderer.Wpf
             double thickness = style.Thickness / State.ZoomX;
             double half = thickness / 2.0;
 
-            GetCached(style, thickness, out Brush fill, out Pen stroke);
+            GetCached(style, thickness, out WM.Brush fill, out WM.Pen stroke);
 
             var rect = CreateRect(text.TopLeft, text.BottomRight, dx, dy);
 
-            (string ct, FormattedText ft, ShapeStyle cs) = _textCache.Get(text);
+            (string ct, WM.FormattedText ft, ShapeStyle cs) = _textCache.Get(text);
             if (string.Compare(ct, tbind) == 0 && cs == style)
             {
                 _dc.DrawText(ft, GetTextOrigin(style, ref rect, ft));
@@ -708,49 +708,49 @@ namespace Core2D.Renderer.Wpf
             {
                 var ci = CultureInfo.InvariantCulture;
 
-                var fontStyle = FontStyles.Normal;
-                var fontWeight = FontWeights.Regular;
+                var fontStyle = W.FontStyles.Normal;
+                var fontWeight = W.FontWeights.Regular;
 
                 if (style.TextStyle.FontStyle != null)
                 {
                     if (style.TextStyle.FontStyle.Flags.HasFlag(FontStyleFlags.Italic))
                     {
-                        fontStyle = FontStyles.Italic;
+                        fontStyle = W.FontStyles.Italic;
                     }
 
                     if (style.TextStyle.FontStyle.Flags.HasFlag(FontStyleFlags.Bold))
                     {
-                        fontWeight = FontWeights.Bold;
+                        fontWeight = W.FontWeights.Bold;
                     }
                 }
 
-                var tf = new Typeface(new FontFamily(style.TextStyle.FontName), fontStyle, fontWeight, FontStretches.Normal);
+                var tf = new WM.Typeface(new WM.FontFamily(style.TextStyle.FontName), fontStyle, fontWeight, W.FontStretches.Normal);
 
-                ft = new FormattedText(
+                ft = new WM.FormattedText(
                     tbind,
                     ci,
-                    ci.TextInfo.IsRightToLeft ? FlowDirection.RightToLeft : FlowDirection.LeftToRight,
+                    ci.TextInfo.IsRightToLeft ? W.FlowDirection.RightToLeft : W.FlowDirection.LeftToRight,
                     tf,
                     style.TextStyle.FontSize > 0.0 ? style.TextStyle.FontSize : double.Epsilon,
-                    stroke.Brush, null, TextFormattingMode.Ideal);
+                    stroke.Brush, null, WM.TextFormattingMode.Ideal);
 
                 if (style.TextStyle.FontStyle != null)
                 {
                     if (style.TextStyle.FontStyle.Flags.HasFlag(FontStyleFlags.Underline)
                     || style.TextStyle.FontStyle.Flags.HasFlag(FontStyleFlags.Strikeout))
                     {
-                        var decorations = new TextDecorationCollection();
+                        var decorations = new W.TextDecorationCollection();
 
                         if (style.TextStyle.FontStyle.Flags.HasFlag(FontStyleFlags.Underline))
                         {
-                            decorations = new TextDecorationCollection(
-                                decorations.Union(TextDecorations.Underline));
+                            decorations = new W.TextDecorationCollection(
+                                decorations.Union(W.TextDecorations.Underline));
                         }
 
                         if (style.TextStyle.FontStyle.Flags.HasFlag(FontStyleFlags.Strikeout))
                         {
-                            decorations = new TextDecorationCollection(
-                                decorations.Union(TextDecorations.Strikethrough));
+                            decorations = new W.TextDecorationCollection(
+                                decorations.Union(W.TextDecorations.Strikethrough));
                         }
 
                         ft.SetTextDecorations(decorations);
@@ -769,7 +769,7 @@ namespace Core2D.Renderer.Wpf
             if (image.Key == null)
                 return;
 
-            var _dc = dc as DrawingContext;
+            var _dc = dc as WM.DrawingContext;
             var style = image.Style;
             var rect = CreateRect(image.TopLeft, image.BottomRight, dx, dy);
 
@@ -778,7 +778,7 @@ namespace Core2D.Renderer.Wpf
                 double thickness = style.Thickness / State.ZoomX;
                 double half = thickness / 2.0;
 
-                GetCached(style, thickness, out Brush fill, out Pen stroke);
+                GetCached(style, thickness, out WM.Brush fill, out WM.Pen stroke);
 
                 DrawRectangleInternal(_dc, half, fill, stroke, image.IsStroked, image.IsFilled, ref rect);
             }
@@ -807,7 +807,7 @@ namespace Core2D.Renderer.Wpf
                     if (bytes != null)
                     {
                         var ms = new System.IO.MemoryStream(bytes);
-                        var bi = new BitmapImage();
+                        var bi = new WMI.BitmapImage();
                         bi.BeginInit();
                         bi.StreamSource = ms;
                         bi.EndInit();
@@ -832,7 +832,7 @@ namespace Core2D.Renderer.Wpf
             if (path.Geometry == null)
                 return;
 
-            var _dc = dc as DrawingContext;
+            var _dc = dc as WM.DrawingContext;
 
             var style = path.Style;
             if (style == null)
@@ -841,9 +841,9 @@ namespace Core2D.Renderer.Wpf
             double thickness = style.Thickness / State.ZoomX;
             double half = thickness / 2.0;
 
-            GetCached(style, thickness, out Brush fill, out Pen stroke);
+            GetCached(style, thickness, out WM.Brush fill, out WM.Pen stroke);
 
-            (Path.PathGeometry pg, StreamGeometry sg, ShapeStyle cs) = _pathCache.Get(path);
+            (Path.PathGeometry pg, WM.StreamGeometry sg, ShapeStyle cs) = _pathCache.Get(path);
 
             if (pg == path.Geometry && cs == style)
             {
