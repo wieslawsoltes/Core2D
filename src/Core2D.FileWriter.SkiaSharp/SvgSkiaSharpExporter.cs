@@ -45,7 +45,7 @@ namespace Core2D.FileWriter.SkiaSharpSvg
             throw new NotSupportedException("Saving projects as svg drawing is not supported.");
         }
 
-        void Save(string path, PageContainer container)
+        private void Save(string path, PageContainer container)
         {
             using (var stream = new SKFileWStream(path))
             using (var writer = new SKXmlStreamWriter(stream))

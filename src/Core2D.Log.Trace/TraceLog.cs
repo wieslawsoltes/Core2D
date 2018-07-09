@@ -25,7 +25,7 @@ namespace Core2D.Log.Trace
             get { return _lastMessage; }
         }
 
-        void SetLastMessage(string message)
+        private void SetLastMessage(string message)
         {
             _lastMessage = message;
             Notify("LastMessage");

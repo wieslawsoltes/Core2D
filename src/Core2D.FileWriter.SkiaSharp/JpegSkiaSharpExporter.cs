@@ -46,7 +46,7 @@ namespace Core2D.FileWriter.SkiaSharpJpeg
             throw new NotSupportedException("Saving projects as jpeg drawing is not supported.");
         }
 
-        void Save(string path, PageContainer container)
+        private void Save(string path, PageContainer container)
         {
             var info = new SKImageInfo((int)container.Width, (int)container.Height);
             using (var bitmap = new SKBitmap(info))

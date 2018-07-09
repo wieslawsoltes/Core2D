@@ -12,9 +12,9 @@ namespace Core2D.Avalonia
     /// <summary>
     /// Encapsulates an Core2D avalonia program.
     /// </summary>
-    class Program
+    internal class Program
     {
-        static void Print(Exception ex)
+        private static void Print(Exception ex)
         {
             Console.WriteLine(ex.Message);
             Console.WriteLine(ex.StackTrace);
@@ -29,7 +29,7 @@ namespace Core2D.Avalonia
         /// </summary>
         /// <param name="args">The program arguments.</param>
         [STAThread]
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             bool deferredRendering = true;
             bool useDirect2D1 = false;

@@ -46,7 +46,7 @@ namespace Core2D.FileWriter.SkiaSharpGif
             throw new NotSupportedException("Saving projects as gif drawing is not supported.");
         }
 
-        void Save(string path, PageContainer container)
+        private void Save(string path, PageContainer container)
         {
             var info = new SKImageInfo((int)container.Width, (int)container.Height);
             using (var bitmap = new SKBitmap(info))
