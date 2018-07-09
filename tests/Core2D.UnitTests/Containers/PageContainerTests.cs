@@ -125,7 +125,7 @@ namespace Core2D.UnitTests
 
         [Fact]
         [Trait("Core2D.Containers", "Project")]
-        public void this_Operator_Returns_Null()
+        public void This_Operator_Returns_Null()
         {
             var target = new PageContainer();
             Assert.Null(target["Name1"]);
@@ -133,7 +133,7 @@ namespace Core2D.UnitTests
 
         [Fact]
         [Trait("Core2D.Containers", "Project")]
-        public void this_Operator_Returns_Property_Value()
+        public void This_Operator_Returns_Property_Value()
         {
             var target = new PageContainer();
             target.Data.Properties = target.Data.Properties.Add(Property.Create(target.Data, "Name1", "Value1"));
@@ -143,7 +143,7 @@ namespace Core2D.UnitTests
 
         [Fact]
         [Trait("Core2D.Containers", "Project")]
-        public void this_Operator_Sets_Property_Value()
+        public void This_Operator_Sets_Property_Value()
         {
             var target = new PageContainer();
             target.Data.Properties = target.Data.Properties.Add(Property.Create(target.Data, "Name1", "Value1"));
@@ -154,7 +154,7 @@ namespace Core2D.UnitTests
 
         [Fact]
         [Trait("Core2D.Containers", "Project")]
-        public void this_Operator_Creates_Property()
+        public void This_Operator_Creates_Property()
         {
             var target = new PageContainer();
             Assert.Empty(target.Data.Properties);
