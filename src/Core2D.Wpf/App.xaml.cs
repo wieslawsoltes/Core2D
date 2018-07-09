@@ -38,7 +38,7 @@ namespace Core2D.Wpf
             builder.RegisterModule<AppModule>();
             builder.RegisterModule<ViewModule>();
 
-            using (IContainer container = builder.Build())
+            using (var container = builder.Build())
             {
                 using (var log = container.Resolve<ILog>())
                 {

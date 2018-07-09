@@ -157,7 +157,7 @@ namespace Core2D.Renderer.Wpf
                 ref p1x, ref p1y,
                 ref p2x, ref p2y);
 
-            WM.PathGeometry pg = _curvedLineCache.Get(line);
+            var pg = _curvedLineCache.Get(line);
             if (pg != null)
             {
                 var pf = pg.Figures[0];
@@ -197,10 +197,10 @@ namespace Core2D.Renderer.Wpf
         private void DrawLineArrowsInternal(WM.DrawingContext dc, LineShape line, ShapeStyle style, double halfStart, double halfEnd, double thicknessStart, double thicknessEnd, double dx, double dy, out W.Point pt1, out W.Point pt2)
         {
             // Start arrow style.
-            GetCached(style.StartArrowStyle, thicknessStart, out WM.Brush fillStartArrow, out WM.Pen strokeStartArrow);
+            GetCached(style.StartArrowStyle, thicknessStart, out var fillStartArrow, out var strokeStartArrow);
 
             // End arrow style.
-            GetCached(style.EndArrowStyle, thicknessEnd, out WM.Brush fillEndArrow, out WM.Pen strokeEndArrow);
+            GetCached(style.EndArrowStyle, thicknessEnd, out var fillEndArrow, out var strokeEndArrow);
 
             // Line max length.
             double x1 = line.Start.X + dx;
@@ -378,7 +378,7 @@ namespace Core2D.Renderer.Wpf
                 Point2.FromXY(arc.Point3.X, arc.Point3.Y),
                 Point2.FromXY(arc.Point4.X, arc.Point4.Y));
 
-            WM.PathGeometry pg = _arcCache.Get(arc);
+            var pg = _arcCache.Get(arc);
 
             if (pg != null)
             {
@@ -421,7 +421,7 @@ namespace Core2D.Renderer.Wpf
 
         private WM.PathGeometry ToPathGeometry(CubicBezierShape cubicBezier, double dx, double dy)
         {
-            WM.PathGeometry pg = _cubicBezierCache.Get(cubicBezier);
+            var pg = _cubicBezierCache.Get(cubicBezier);
 
             if (pg != null)
             {
@@ -461,7 +461,7 @@ namespace Core2D.Renderer.Wpf
 
         private WM.PathGeometry ToPathGeometry(QuadraticBezierShape quadraticBezier, double dx, double dy)
         {
-            WM.PathGeometry pg = _quadraticBezierCache.Get(quadraticBezier);
+            var pg = _quadraticBezierCache.Get(quadraticBezier);
 
             if (pg != null)
             {
@@ -584,9 +584,9 @@ namespace Core2D.Renderer.Wpf
             double thicknessEndArrow = style.EndArrowStyle.Thickness / zoom;
             double halfEndArrow = thicknessEndArrow / 2.0;
 
-            GetCached(style, thickness, out WM.Brush fill, out WM.Pen stroke);
+            GetCached(style, thickness, out var fill, out var stroke);
 
-            DrawLineArrowsInternal(_dc, line, style, halfStartArrow, halfEndArrow, thicknessStartArrow, thicknessEndArrow, dx, dy, out W.Point pt1, out W.Point pt2);
+            DrawLineArrowsInternal(_dc, line, style, halfStartArrow, halfEndArrow, thicknessStartArrow, thicknessEndArrow, dx, dy, out var pt1, out var pt2);
 
             if (line.Style.LineStyle.IsCurved)
             {
@@ -610,7 +610,7 @@ namespace Core2D.Renderer.Wpf
             double thickness = style.Thickness / State.ZoomX;
             double half = thickness / 2.0;
 
-            GetCached(style, thickness, out WM.Brush fill, out WM.Pen stroke);
+            GetCached(style, thickness, out var fill, out var stroke);
 
             var rect = CreateRect(rectangle.TopLeft, rectangle.BottomRight, dx, dy);
 
@@ -634,7 +634,7 @@ namespace Core2D.Renderer.Wpf
             double thickness = style.Thickness / State.ZoomX;
             double half = thickness / 2.0;
 
-            GetCached(style, thickness, out WM.Brush fill, out WM.Pen stroke);
+            GetCached(style, thickness, out var fill, out var stroke);
 
             var rect = CreateRect(ellipse.TopLeft, ellipse.BottomRight, dx, dy);
             double rx = rect.Width / 2.0;
@@ -656,7 +656,7 @@ namespace Core2D.Renderer.Wpf
             double thickness = style.Thickness / State.ZoomX;
             double half = thickness / 2.0;
 
-            GetCached(style, thickness, out WM.Brush fill, out WM.Pen stroke);
+            GetCached(style, thickness, out var fill, out var stroke);
 
             var pg = ToPathGeometry(arc, dx, dy);
 
@@ -675,7 +675,7 @@ namespace Core2D.Renderer.Wpf
             double thickness = style.Thickness / State.ZoomX;
             double half = thickness / 2.0;
 
-            GetCached(style, thickness, out WM.Brush fill, out WM.Pen stroke);
+            GetCached(style, thickness, out var fill, out var stroke);
 
             var pg = ToPathGeometry(cubicBezier, dx, dy);
 
@@ -694,7 +694,7 @@ namespace Core2D.Renderer.Wpf
             double thickness = style.Thickness / State.ZoomX;
             double half = thickness / 2.0;
 
-            GetCached(style, thickness, out WM.Brush fill, out WM.Pen stroke);
+            GetCached(style, thickness, out var fill, out var stroke);
 
             var pg = ToPathGeometry(quadraticBezier, dx, dy);
 
@@ -719,11 +719,11 @@ namespace Core2D.Renderer.Wpf
             double thickness = style.Thickness / State.ZoomX;
             double half = thickness / 2.0;
 
-            GetCached(style, thickness, out WM.Brush fill, out WM.Pen stroke);
+            GetCached(style, thickness, out var fill, out var stroke);
 
             var rect = CreateRect(text.TopLeft, text.BottomRight, dx, dy);
 
-            (string ct, WM.FormattedText ft, ShapeStyle cs) = _textCache.Get(text);
+            (string ct, var ft, var cs) = _textCache.Get(text);
             if (string.Compare(ct, tbind) == 0 && cs == style)
             {
                 _dc.DrawText(ft, GetTextOrigin(style, ref rect, ft));
@@ -802,7 +802,7 @@ namespace Core2D.Renderer.Wpf
                 double thickness = style.Thickness / State.ZoomX;
                 double half = thickness / 2.0;
 
-                GetCached(style, thickness, out WM.Brush fill, out WM.Pen stroke);
+                GetCached(style, thickness, out var fill, out var stroke);
 
                 DrawRectangleInternal(_dc, half, fill, stroke, image.IsStroked, image.IsFilled, ref rect);
             }
@@ -865,9 +865,9 @@ namespace Core2D.Renderer.Wpf
             double thickness = style.Thickness / State.ZoomX;
             double half = thickness / 2.0;
 
-            GetCached(style, thickness, out WM.Brush fill, out WM.Pen stroke);
+            GetCached(style, thickness, out var fill, out var stroke);
 
-            (Path.PathGeometry pg, WM.StreamGeometry sg, ShapeStyle cs) = _pathCache.Get(path);
+            (var pg, var sg, var cs) = _pathCache.Get(path);
 
             if (pg == path.Geometry && cs == style)
             {

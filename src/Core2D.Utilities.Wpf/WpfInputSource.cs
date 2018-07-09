@@ -16,7 +16,7 @@ namespace Core2D.Utilities.Wpf
     {
         private static ModifierFlags GetModifier()
         {
-            ModifierFlags modifier = ModifierFlags.None;
+            var modifier = ModifierFlags.None;
 
             if (Keyboard.Modifiers.HasFlag(ModifierKeys.Alt))
             {

@@ -119,7 +119,7 @@ namespace Core2D.UnitTests
 
             var source = Database.FromFields("Source", sourceFields, "Id");
 
-            bool isDirty = Database.Update(destination, source, out ImmutableArray<Data.Record>.Builder target);
+            bool isDirty = Database.Update(destination, source, out var target);
 
             Assert.True(isDirty);
             Assert.NotNull(target);

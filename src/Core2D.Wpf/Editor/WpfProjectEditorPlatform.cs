@@ -313,7 +313,7 @@ namespace Core2D.Wpf.Editor
             if (dlg.ShowDialog(_serviceProvider.GetService<MainWindow>()) == true)
             {
                 string result = dlg.FileName;
-                IFileWriter writer = editor.FileWriters[dlg.FilterIndex - 1];
+                var writer = editor.FileWriters[dlg.FilterIndex - 1];
                 if (writer != null)
                 {
                     editor.OnExport(result, item, writer);

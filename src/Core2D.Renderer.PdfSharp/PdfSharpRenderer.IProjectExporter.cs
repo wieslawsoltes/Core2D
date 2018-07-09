@@ -110,7 +110,7 @@ namespace Core2D.Renderer.PdfSharp
         private PdfPage Add(PdfDocument pdf, PageContainer container)
         {
             // Create A3 page size with Landscape orientation.
-            PdfPage pdfPage = pdf.AddPage();
+            var pdfPage = pdf.AddPage();
             pdfPage.Size = PageSize.A3;
             pdfPage.Orientation = PageOrientation.Landscape;
 

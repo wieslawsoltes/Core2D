@@ -45,7 +45,7 @@ namespace Core2D.TextFieldReader.CsvHelper
         /// <returns>The new instance of the <see cref="Database"/> class</returns>
         Database ITextFieldReader<Database>.Read(string path, IFileSystem fs)
         {
-            using (System.IO.Stream stream = fs.Open(path))
+            using (var stream = fs.Open(path))
             {
                 var fields = ReadInternal(stream).ToList();
                 var name = System.IO.Path.GetFileNameWithoutExtension(path);

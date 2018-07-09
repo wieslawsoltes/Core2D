@@ -154,8 +154,8 @@ namespace Core2D.Wpf.Views.Custom
 
         private void ListView_PreviewMouseMove(object sender, MouseEventArgs e)
         {
-            Point point = e.GetPosition(null);
-            Vector diff = dragStartPoint - point;
+            var point = e.GetPosition(null);
+            var diff = dragStartPoint - point;
             if (e.LeftButton == MouseButtonState.Pressed &&
                 (Abs(diff.X) > SystemParameters.MinimumHorizontalDragDistance ||
                  Abs(diff.Y) > SystemParameters.MinimumVerticalDragDistance))

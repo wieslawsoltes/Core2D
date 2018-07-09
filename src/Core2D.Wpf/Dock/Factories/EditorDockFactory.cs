@@ -65,7 +65,7 @@ namespace Core2D.Wpf.Dock.Factories
         /// <inheritdoc/>
         public override void InitLayout(IView layout, object context)
         {
-            this.ContextLocator = new Dictionary<string, Func<object>>
+            ContextLocator = new Dictionary<string, Func<object>>
             {
                 [nameof(IRootDock)] = () => context,
                 [nameof(ILayoutDock)] = () => context,
@@ -79,7 +79,7 @@ namespace Core2D.Wpf.Dock.Factories
                 [nameof(DashboardView)] = () => context
             };
 
-            this.HostLocator = new Dictionary<string, Func<IDockHost>>
+            HostLocator = new Dictionary<string, Func<IDockHost>>
             {
                 [nameof(IDockWindow)] = () => _serviceProvider.GetService<IDockHost>()
             };

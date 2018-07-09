@@ -18,7 +18,7 @@ namespace Core2D.Serializer.Xaml
 
         public override XamlType GetXamlType(Type type)
         {
-            if (!_typeCache.TryGetValue(type, out XamlType xamlType))
+            if (!_typeCache.TryGetValue(type, out var xamlType))
             {
                 xamlType = new CoreXamlType(type, this);
                 _typeCache.Add(type, xamlType);

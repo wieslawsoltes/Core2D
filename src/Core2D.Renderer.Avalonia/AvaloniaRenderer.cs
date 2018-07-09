@@ -166,10 +166,10 @@ namespace Core2D.Renderer.Avalonia
         private void DrawLineArrowsInternal(AM.DrawingContext dc, LineShape line, ShapeStyle style, double dx, double dy, out A.Point pt1, out A.Point pt2)
         {
             // Start arrow style.
-            GetCached(style.StartArrowStyle, out AM.IBrush fillStartArrow, out AM.Pen strokeStartArrow);
+            GetCached(style.StartArrowStyle, out var fillStartArrow, out var strokeStartArrow);
 
             // End arrow style.
-            GetCached(style.EndArrowStyle, out AM.IBrush fillEndArrow, out AM.Pen strokeEndArrow);
+            GetCached(style.EndArrowStyle, out var fillEndArrow, out var strokeEndArrow);
 
             // Line max length.
             double _x1 = line.Start.X + dx;
@@ -456,9 +456,9 @@ namespace Core2D.Renderer.Avalonia
             if (style == null)
                 return;
 
-            GetCached(style, out AM.IBrush fill, out AM.Pen stroke);
+            GetCached(style, out var fill, out var stroke);
 
-            DrawLineArrowsInternal(_dc, line, style, dx, dy, out A.Point pt1, out A.Point pt2);
+            DrawLineArrowsInternal(_dc, line, style, dx, dy, out var pt1, out var pt2);
 
             if (style.LineStyle.IsCurved)
             {
@@ -486,7 +486,7 @@ namespace Core2D.Renderer.Avalonia
             if (style == null)
                 return;
 
-            GetCached(style, out AM.IBrush fill, out AM.Pen stroke);
+            GetCached(style, out var fill, out var stroke);
 
             var rect = CreateRect(rectangle.TopLeft, rectangle.BottomRight, dx, dy);
 
@@ -519,7 +519,7 @@ namespace Core2D.Renderer.Avalonia
             if (style == null)
                 return;
 
-            GetCached(style, out AM.IBrush fill, out AM.Pen stroke);
+            GetCached(style, out var fill, out var stroke);
 
             var rect = CreateRect(ellipse.TopLeft, ellipse.BottomRight, dx, dy);
 
@@ -544,7 +544,7 @@ namespace Core2D.Renderer.Avalonia
             if (style == null)
                 return;
 
-            GetCached(style, out AM.IBrush fill, out AM.Pen stroke);
+            GetCached(style, out var fill, out var stroke);
 
             var sg = ToStreamGeometry(arc, dx, dy);
 
@@ -566,7 +566,7 @@ namespace Core2D.Renderer.Avalonia
             if (style == null)
                 return;
 
-            GetCached(style, out AM.IBrush fill, out AM.Pen stroke);
+            GetCached(style, out var fill, out var stroke);
 
             var sg = ToStreamGeometry(cubicBezier, dx, dy);
 
@@ -588,7 +588,7 @@ namespace Core2D.Renderer.Avalonia
             if (style == null)
                 return;
 
-            GetCached(style, out AM.IBrush fill, out AM.Pen stroke);
+            GetCached(style, out var fill, out var stroke);
 
             var sg = ToStreamGeometry(quadraticBezier, dx, dy);
 
@@ -613,11 +613,11 @@ namespace Core2D.Renderer.Avalonia
             if (string.IsNullOrEmpty(tbind))
                 return;
 
-            GetCached(style, out AM.IBrush fill, out AM.Pen stroke);
+            GetCached(style, out var fill, out var stroke);
 
             var rect = CreateRect(text.TopLeft, text.BottomRight, dx, dy);
 
-            (string ct, AM.FormattedText ft, ShapeStyle cs) = _textCache.Get(text);
+            (string ct, var ft, var cs) = _textCache.Get(text);
             if (string.Compare(ct, tbind) == 0 && cs == style)
             {
                 var size = ft.Measure();
@@ -694,7 +694,7 @@ namespace Core2D.Renderer.Avalonia
 
             if ((image.IsStroked || image.IsFilled) && style != null)
             {
-                GetCached(style, out AM.IBrush fill, out AM.Pen stroke);
+                GetCached(style, out var fill, out var stroke);
 
                 DrawRectangleInternal(
                     _dc,
@@ -769,7 +769,7 @@ namespace Core2D.Renderer.Avalonia
             if (style == null)
                 return;
 
-            GetCached(style, out AM.IBrush fill, out AM.Pen stroke);
+            GetCached(style, out var fill, out var stroke);
 
             var g = path.Geometry.ToGeometry(dx, dy);
 

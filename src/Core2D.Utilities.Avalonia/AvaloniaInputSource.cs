@@ -18,7 +18,7 @@ namespace Core2D.Utilities.Avalonia
     {
         private static ModifierFlags ToModifierFlags(InputModifiers inputModifiers)
         {
-            ModifierFlags modifier = ModifierFlags.None;
+            var modifier = ModifierFlags.None;
 
             if (inputModifiers.HasFlag(InputModifiers.Alt))
             {

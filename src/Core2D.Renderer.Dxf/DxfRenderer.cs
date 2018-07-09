@@ -954,7 +954,7 @@ namespace Core2D.Renderer.Dxf
             var dxf = dc as DXF.DxfDocument;
             var style = path.Style;
 
-            CreateHatchBoundsAndEntitiess(path.Geometry, dx, dy, out IList<DXFE.HatchBoundaryPath> bounds, out ICollection<DXFE.EntityObject> entities);
+            CreateHatchBoundsAndEntitiess(path.Geometry, dx, dy, out var bounds, out var entities);
             if (entities == null || bounds == null)
                 return;
 

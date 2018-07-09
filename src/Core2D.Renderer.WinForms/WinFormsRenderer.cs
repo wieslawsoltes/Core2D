@@ -106,10 +106,10 @@ namespace Core2D.Renderer.WinForms
         private void DrawLineArrowsInternal(LineShape line, double dx, double dy, Graphics gfx, out PointF pt1, out PointF pt2)
         {
             Brush fillStartArrow = ToSolidBrush(line.Style.StartArrowStyle.Fill);
-            Pen strokeStartArrow = ToPen(line.Style.StartArrowStyle, _scaleToPage);
+            var strokeStartArrow = ToPen(line.Style.StartArrowStyle, _scaleToPage);
 
             Brush fillEndArrow = ToSolidBrush(line.Style.EndArrowStyle.Fill);
-            Pen strokeEndArrow = ToPen(line.Style.EndArrowStyle, _scaleToPage);
+            var strokeEndArrow = ToPen(line.Style.EndArrowStyle, _scaleToPage);
 
             double _x1 = line.Start.X + dx;
             double _y1 = line.Start.Y + dy;
@@ -339,8 +339,8 @@ namespace Core2D.Renderer.WinForms
         {
             var _gfx = dc as Graphics;
 
-            Pen strokeLine = ToPen(line.Style, _scaleToPage);
-            DrawLineArrowsInternal(line, dx, dy, _gfx, out PointF pt1, out PointF pt2);
+            var strokeLine = ToPen(line.Style, _scaleToPage);
+            DrawLineArrowsInternal(line, dx, dy, _gfx, out var pt1, out var pt2);
 
             if (line.Style.LineStyle.IsCurved)
             {
@@ -367,7 +367,7 @@ namespace Core2D.Renderer.WinForms
             var _gfx = dc as Graphics;
 
             Brush brush = ToSolidBrush(rectangle.Style.Fill);
-            Pen pen = ToPen(rectangle.Style, _scaleToPage);
+            var pen = ToPen(rectangle.Style, _scaleToPage);
 
             var rect = CreateRect(
                 rectangle.TopLeft,
@@ -415,7 +415,7 @@ namespace Core2D.Renderer.WinForms
             var _gfx = dc as Graphics;
 
             Brush brush = ToSolidBrush(ellipse.Style.Fill);
-            Pen pen = ToPen(ellipse.Style, _scaleToPage);
+            var pen = ToPen(ellipse.Style, _scaleToPage);
 
             var rect = CreateRect(
                 ellipse.TopLeft,
@@ -460,7 +460,7 @@ namespace Core2D.Renderer.WinForms
             var _gfx = dc as Graphics;
 
             Brush brush = ToSolidBrush(arc.Style.Fill);
-            Pen pen = ToPen(arc.Style, _scaleToPage);
+            var pen = ToPen(arc.Style, _scaleToPage);
 
             if (arc.IsFilled)
             {
@@ -497,7 +497,7 @@ namespace Core2D.Renderer.WinForms
             var _gfx = dc as Graphics;
 
             Brush brush = ToSolidBrush(cubicBezier.Style.Fill);
-            Pen pen = ToPen(cubicBezier.Style, _scaleToPage);
+            var pen = ToPen(cubicBezier.Style, _scaleToPage);
 
             if (cubicBezier.IsFilled)
             {
@@ -538,7 +538,7 @@ namespace Core2D.Renderer.WinForms
             var _gfx = dc as Graphics;
 
             Brush brush = ToSolidBrush(quadraticBezier.Style.Fill);
-            Pen pen = ToPen(quadraticBezier.Style, _scaleToPage);
+            var pen = ToPen(quadraticBezier.Style, _scaleToPage);
 
             double x1 = quadraticBezier.Point1.X;
             double y1 = quadraticBezier.Point1.Y;

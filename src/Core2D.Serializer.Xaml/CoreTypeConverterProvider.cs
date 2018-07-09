@@ -21,7 +21,7 @@ namespace Core2D.Serializer.Xaml
 
         public static Type Find(Type type)
         {
-            _registered.TryGetValue(type, out Type result);
+            _registered.TryGetValue(type, out var result);
             return result;
         }
     }

@@ -95,11 +95,11 @@ namespace Core2D.Renderer.PdfSharp
 
         private void DrawLineArrowsInternal(XGraphics gfx, LineShape line, double dx, double dy, out XPoint pt1, out XPoint pt2)
         {
-            XSolidBrush fillStartArrow = ToXSolidBrush(line.Style.StartArrowStyle.Fill);
-            XPen strokeStartArrow = ToXPen(line.Style.StartArrowStyle, _scaleToPage, _sourceDpi, _targetDpi);
+            var fillStartArrow = ToXSolidBrush(line.Style.StartArrowStyle.Fill);
+            var strokeStartArrow = ToXPen(line.Style.StartArrowStyle, _scaleToPage, _sourceDpi, _targetDpi);
 
-            XSolidBrush fillEndArrow = ToXSolidBrush(line.Style.EndArrowStyle.Fill);
-            XPen strokeEndArrow = ToXPen(line.Style.EndArrowStyle, _scaleToPage, _sourceDpi, _targetDpi);
+            var fillEndArrow = ToXSolidBrush(line.Style.EndArrowStyle.Fill);
+            var strokeEndArrow = ToXPen(line.Style.EndArrowStyle, _scaleToPage, _sourceDpi, _targetDpi);
 
             double _x1 = line.Start.X + dx;
             double _y1 = line.Start.Y + dy;
@@ -298,8 +298,8 @@ namespace Core2D.Renderer.PdfSharp
 
             var _gfx = dc as XGraphics;
 
-            XPen strokeLine = ToXPen(line.Style, _scaleToPage, _sourceDpi, _targetDpi);
-            DrawLineArrowsInternal(_gfx, line, dx, dy, out XPoint pt1, out XPoint pt2);
+            var strokeLine = ToXPen(line.Style, _scaleToPage, _sourceDpi, _targetDpi);
+            DrawLineArrowsInternal(_gfx, line, dx, dy, out var pt1, out var pt2);
 
             if (line.Style.LineStyle.IsCurved)
             {
