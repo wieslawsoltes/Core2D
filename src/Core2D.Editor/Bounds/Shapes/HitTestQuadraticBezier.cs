@@ -14,8 +14,7 @@ namespace Core2D.Editor.Bounds.Shapes
 
         public override PointShape TryToGetPoint(BaseShape shape, Point2 target, double radius, IDictionary<Type, HitTestBase> registered)
         {
-            var quadratic = shape as QuadraticBezierShape;
-            if (quadratic == null)
+            if (!(shape is QuadraticBezierShape quadratic))
                 throw new ArgumentNullException(nameof(shape));
 
             var pointHitTest = registered[typeof(PointShape)];
@@ -40,8 +39,7 @@ namespace Core2D.Editor.Bounds.Shapes
 
         public override bool Contains(BaseShape shape, Point2 target, double radius, IDictionary<Type, HitTestBase> registered)
         {
-            var quadratic = shape as QuadraticBezierShape;
-            if (quadratic == null)
+            if (!(shape is QuadraticBezierShape quadratic))
                 throw new ArgumentNullException(nameof(shape));
 
             return HitTestHelper.Contains(quadratic.GetPoints(), target);
@@ -49,8 +47,7 @@ namespace Core2D.Editor.Bounds.Shapes
 
         public override bool Overlaps(BaseShape shape, Rect2 target, double radius, IDictionary<Type, HitTestBase> registered)
         {
-            var quadratic = shape as QuadraticBezierShape;
-            if (quadratic == null)
+            if (!(shape is QuadraticBezierShape quadratic))
                 throw new ArgumentNullException(nameof(shape));
 
             return HitTestHelper.Overlap(quadratic.GetPoints(), target);

@@ -2331,7 +2331,7 @@ namespace Core2D.Editor
 
                     if (!string.IsNullOrWhiteSpace(shape.Style.Name))
                     {
-                        if (styles.TryGetValue(shape.Style.Name, out ShapeStyle style))
+                        if (styles.TryGetValue(shape.Style.Name, out var style))
                         {
                             // Use existing style.
                             shape.Style = style;
@@ -2388,7 +2388,7 @@ namespace Core2D.Editor
                     if (shape?.Data?.Record == null)
                         continue;
 
-                    if (records.TryGetValue((string)shape.Data.Record.Id, out Record record))
+                    if (records.TryGetValue((string)shape.Data.Record.Id, out var record))
                     {
                         // Use existing record.
                         shape.Data.Record = record;
@@ -3449,8 +3449,8 @@ namespace Core2D.Editor
                 bool success = false;
                 foreach (var kv in lineToPoints)
                 {
-                    LineShape line = kv.Key;
-                    IList<PointShape> points = kv.Value;
+                    var line = kv.Key;
+                    var points = kv.Value;
                     if (points.Count == 2)
                     {
                         var p0 = points[0];

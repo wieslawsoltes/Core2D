@@ -39,7 +39,7 @@ namespace Core2D.Editor.Bounds
 
         public static bool Contains(IEnumerable<PointShape> points, Point2 point)
         {
-            ToConvexHull(points, out int k, out Vector2[] convexHull);
+            ToConvexHull(points, out int k, out var convexHull);
             bool contains = false;
             for (int i = 0, j = k - 2; i < k - 1; j = i++)
             {
@@ -54,8 +54,8 @@ namespace Core2D.Editor.Bounds
 
         public static bool Overlap(IEnumerable<PointShape> points, Vector2[] selection)
         {
-            ToConvexHull(points, out int k, out Vector2[] convexHull);
-            Vector2[] vertices = convexHull.Take(k).ToArray();
+            ToConvexHull(points, out int k, out var convexHull);
+            var vertices = convexHull.Take(k).ToArray();
             return SAT.Overlap(selection, vertices);
         }
 

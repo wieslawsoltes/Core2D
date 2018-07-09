@@ -31,22 +31,22 @@ namespace Core2D.Editor.Input
         /// <param name="modifier">The input modifier flags.</param>
         public InputArgs(double x, double y, ModifierFlags modifier)
         {
-            this.X = x;
-            this.Y = y;
-            this.Modifier = modifier;
+            X = x;
+            Y = y;
+            Modifier = modifier;
         }
         
         public void Deconstruct(out double x, out double y)
         {
-            x = this.X;
-            y = this.Y;
+            x = X;
+            y = Y;
         }
         
         public void Deconstruct(out double x, out double y, out ModifierFlags modifier)
         {
-            x = this.X;
-            y = this.Y;
-            modifier = this.Modifier;
+            x = X;
+            y = Y;
+            modifier = Modifier;
         }
     }
 }

@@ -11,7 +11,7 @@ namespace Core2D.Editor
     /// </summary>
     public abstract class Tool : ObservableObject
     {
-        internal static bool EnableDebug = false;
+        internal static bool s_enableDebug = false;
 
         /// <summary>
         /// Gets the tool title.
@@ -24,7 +24,7 @@ namespace Core2D.Editor
         /// <param name="args">The input arguments.</param>
         public virtual void LeftDown(InputArgs args)
         {
-            Debug.WriteLineIf(EnableDebug, $"[{Title}] LeftDown X={args.X} Y={args.Y}, Modifier {args.Modifier}");
+            Debug.WriteLineIf(s_enableDebug, $"[{Title}] LeftDown X={args.X} Y={args.Y}, Modifier {args.Modifier}");
         }
 
         /// <summary>
@@ -33,7 +33,7 @@ namespace Core2D.Editor
         /// <param name="args">The input arguments.</param>
         public virtual void LeftUp(InputArgs args)
         {
-            Debug.WriteLineIf(EnableDebug, $"[{Title}] LeftDown X={args.X} Y={args.Y}, Modifier {args.Modifier}");
+            Debug.WriteLineIf(s_enableDebug, $"[{Title}] LeftDown X={args.X} Y={args.Y}, Modifier {args.Modifier}");
         }
 
         /// <summary>
@@ -42,7 +42,7 @@ namespace Core2D.Editor
         /// <param name="args">The input arguments.</param>
         public virtual void RightDown(InputArgs args)
         {
-            Debug.WriteLineIf(EnableDebug, $"[{Title}] LeftDown X={args.X} Y={args.Y}, Modifier {args.Modifier}");
+            Debug.WriteLineIf(s_enableDebug, $"[{Title}] LeftDown X={args.X} Y={args.Y}, Modifier {args.Modifier}");
         }
 
         /// <summary>
@@ -51,7 +51,7 @@ namespace Core2D.Editor
         /// <param name="args">The input arguments.</param>
         public virtual void RightUp(InputArgs args)
         {
-            Debug.WriteLineIf(EnableDebug, $"[{Title}] LeftDown X={args.X} Y={args.Y}, Modifier {args.Modifier}");
+            Debug.WriteLineIf(s_enableDebug, $"[{Title}] LeftDown X={args.X} Y={args.Y}, Modifier {args.Modifier}");
         }
 
         /// <summary>
@@ -60,7 +60,7 @@ namespace Core2D.Editor
         /// <param name="args">The input arguments.</param>
         public virtual void Move(InputArgs args)
         {
-            Debug.WriteLineIf(EnableDebug, $"[{Title}] LeftDown X={args.X} Y={args.Y}, Modifier {args.Modifier}");
+            Debug.WriteLineIf(s_enableDebug, $"[{Title}] LeftDown X={args.X} Y={args.Y}, Modifier {args.Modifier}");
         }
 
         /// <summary>

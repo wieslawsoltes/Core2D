@@ -15,8 +15,7 @@ namespace Core2D.Editor.Bounds.Shapes
 
         public override PointShape TryToGetPoint(BaseShape shape, Point2 target, double radius, IDictionary<Type, HitTestBase> registered)
         {
-            var group = shape as GroupShape;
-            if (group == null)
+            if (!(shape is GroupShape group))
                 throw new ArgumentNullException(nameof(shape));
 
             var pointHitTest = registered[typeof(PointShape)];
@@ -34,8 +33,7 @@ namespace Core2D.Editor.Bounds.Shapes
 
         public override bool Contains(BaseShape shape, Point2 target, double radius, IDictionary<Type, HitTestBase> registered)
         {
-            var group = shape as GroupShape;
-            if (group == null)
+            if (!(shape is GroupShape group))
                 throw new ArgumentNullException(nameof(shape));
 
             foreach (var GroupShape in group.Shapes.Reverse())
@@ -52,8 +50,7 @@ namespace Core2D.Editor.Bounds.Shapes
 
         public override bool Overlaps(BaseShape shape, Rect2 target, double radius, IDictionary<Type, HitTestBase> registered)
         {
-            var group = shape as GroupShape;
-            if (group == null)
+            if (!(shape is GroupShape group))
                 throw new ArgumentNullException(nameof(shape));
 
             foreach (var GroupShape in group.Shapes.Reverse())

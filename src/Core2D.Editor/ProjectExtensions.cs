@@ -494,7 +494,7 @@ namespace Core2D.Editor
         {
             if (destination != null && source != null)
             {
-                bool isDirty = Database.Update(destination, source, out ImmutableArray<Record>.Builder records);
+                bool isDirty = Database.Update(destination, source, out var records);
 
                 if (isDirty && records != null)
                 {
