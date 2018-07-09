@@ -8,6 +8,9 @@
     <PackageReference Include="System.ValueTuple" Version="4.3.1" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="Microsoft.CSharp" Version="4.5.0" />
+  </ItemGroup>
+  <ItemGroup>
     <PackageReference Include="Avalonia.Xaml.Interactions" Version="0.6.2-build524" />
     <PackageReference Include="Avalonia.Xaml.Interactions.Custom" Version="0.6.2-build524" />
   </ItemGroup>
