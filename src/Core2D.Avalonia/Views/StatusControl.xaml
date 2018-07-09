@@ -19,10 +19,10 @@
         <TextBlock Classes="stats" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center">
             <TextBlock.Text>
                 <MultiBinding Mode="OneWay" Converter="{StaticResource EditorToStatsMultiConverter}">
-                    <Binding Path="Project.Documents.Length"/>
-                    <Binding Path="Project.CurrentDocument.Pages.Length"/>
-                    <Binding Path="Project.CurrentContainer.Layers.Length"/>
-                    <Binding Path="Project.CurrentContainer.CurrentLayer.Shapes.Length"/>
+                    <Binding Path="Project.Documents"/>
+                    <Binding Path="Project.CurrentDocument.Pages"/>
+                    <Binding Path="Project.CurrentContainer.Layers"/>
+                    <Binding Path="Project.CurrentContainer.CurrentLayer.Shapes"/>
                     <Binding Path="Renderers[0].State.SelectedShape" Converter="{StaticResource ObjectToObjectConverter}"/>
                     <Binding Path="Renderers[0].State.SelectedShapes" Converter="{StaticResource ObjectToObjectConverter}"/>
                 </MultiBinding>

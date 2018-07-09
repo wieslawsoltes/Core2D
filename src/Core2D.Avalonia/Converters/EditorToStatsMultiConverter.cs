@@ -1,13 +1,14 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
-using Core2D.Shape;
-using Avalonia;
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Globalization;
 using System.Linq;
+using Avalonia;
 using Avalonia.Data.Converters;
+using Core2D.Containers;
+using Core2D.Shape;
 
 namespace Core2D.Avalonia.Converters
 {
@@ -19,7 +20,7 @@ namespace Core2D.Avalonia.Converters
         /// <summary>
         /// Default stats result.
         /// </summary>
-        public static readonly string DefaultStats = "";
+        public static readonly string s_defaultStats = "";
 
         /// <summary>
         /// Converts multi-binding inputs to a final value.
@@ -33,22 +34,45 @@ namespace Core2D.Avalonia.Converters
         {
             if (values != null && values.Count() == 6 && values.All(x => x != AvaloniaProperty.UnsetValue))
             {
-                int documentsLength = values[0] != null && values[0].GetType() == typeof(int) ? (int)values[0] : 0;
-                int pagesLength = values[1] != null && values[1].GetType() == typeof(int) ? (int)values[1] : 0;
-                int layersLength = values[2] != null && values[2].GetType() == typeof(int) ? (int)values[2] : 0;
-                int shapesLength = values[3] != null && values[3].GetType() == typeof(int) ? (int)values[3] : 0;
-                BaseShape selectedShape = values[4] != null && values[4].GetType() == typeof(BaseShape) ? (BaseShape)values[4] : null;
-                ImmutableHashSet<BaseShape> selectedShapes = values[5] != null && values[5].GetType() == typeof(ImmutableHashSet<BaseShape>) ? (ImmutableHashSet<BaseShape>)values[5] : null;
-                return string.Format(
-                    "Documents: {0} - Pages: {1} - Layers: {2} - Shapes: {3} - Selected: {4}",
-                    documentsLength,
-                    pagesLength,
-                    layersLength,
-                    shapesLength,
-                    selectedShape != null ? 1 : (selectedShapes != null) ? selectedShapes.Count : 0);
-            }
+                int nDocuments = 0;
+                int nPages = 0;
+                int nLayers = 0;
+                int nShapes = 0;
+                int nSelectedShapes = 0;
 
-            return DefaultStats;
+                if (values[0] is ImmutableArray<DocumentContainer> documents)
+                {
+                    nDocuments = documents.Length;
+                }
+
+                if (values[1] is ImmutableArray<PageContainer> pages)
+                {
+                    nPages = pages.Length;
+                }
+
+                if (values[2] is ImmutableArray<LayerContainer> layers)
+                {
+                    nLayers = layers.Length;
+                }
+
+                if (values[3] is ImmutableArray<BaseShape> shapes)
+                {
+                    nShapes = shapes.Length;
+                }
+
+                if (values[4] is BaseShape selectedShape)
+                {
+                    nSelectedShapes = 1;
+                }
+
+                if (values[5] is ImmutableHashSet<BaseShape> selectedShapes)
+                {
+                    nSelectedShapes = selectedShapes.Count;
+                }
+
+                return $"Documents: {nDocuments} - Pages: {nPages} - Layers: {nLayers} - Shapes: {nShapes} - Selected: {nSelectedShapes}";
+            }
+            return s_defaultStats;
         }
     }
 }
