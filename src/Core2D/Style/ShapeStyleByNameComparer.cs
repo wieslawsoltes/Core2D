@@ -18,10 +18,10 @@ namespace Core2D.Style
         /// <returns>True if the specified objects are equal; otherwise, false.</returns>
         public bool Equals(ShapeStyle x, ShapeStyle y)
         {
-            if (Object.ReferenceEquals(x, y))
+            if (object.ReferenceEquals(x, y))
                 return true;
 
-            if (Object.ReferenceEquals(x, null) || Object.ReferenceEquals(y, null))
+            if (x is null || y is null)
                 return false;
 
             return x.Name == y.Name;
@@ -34,7 +34,7 @@ namespace Core2D.Style
         /// <returns>A hash code for the specified object.</returns>
         public int GetHashCode(ShapeStyle style)
         {
-            if (Object.ReferenceEquals(style, null))
+            if (style is null)
                 return 0;
             int hashProductName = style.Name == null ? 0 : style.Name.GetHashCode();
             return hashProductName;

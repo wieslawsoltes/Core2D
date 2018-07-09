@@ -49,7 +49,7 @@ namespace Core2D.Shapes
         {
             var state = base.BeginTransform(dc, renderer);
 
-            var record = this.Data?.Record ?? r;
+            var record = Data?.Record ?? r;
 
             if (State.Flags.HasFlag(ShapeStateFlags.Visible))
             {
@@ -210,6 +210,6 @@ namespace Core2D.Shapes
         /// Check whether the <see cref="Text"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeText() => !String.IsNullOrWhiteSpace(_text);
+        public virtual bool ShouldSerializeText() => !string.IsNullOrWhiteSpace(_text);
     }
 }

@@ -26,8 +26,8 @@ namespace Core2D.History
         /// <param name="redo"></param>
         public UndoRedo(Action undo, Action redo)
         {
-            this.Undo = undo;
-            this.Redo = redo;
+            Undo = undo;
+            Redo = redo;
         }
 
         /// <summary>

@@ -83,13 +83,13 @@ namespace Core2D
         /// Check whether the <see cref="Id"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeId() => !String.IsNullOrWhiteSpace(_id);
+        public virtual bool ShouldSerializeId() => !string.IsNullOrWhiteSpace(_id);
 
         /// <summary>
         /// Check whether the <see cref="Name"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeName() => !String.IsNullOrWhiteSpace(_name);
+        public virtual bool ShouldSerializeName() => !string.IsNullOrWhiteSpace(_name);
 
         /// <summary>
         /// The <see cref="IsDirty"/> property is not serialized.

@@ -36,7 +36,7 @@ namespace Core2D.Shapes
         {
             var state = base.BeginTransform(dc, renderer);
 
-            var record = this.Data?.Record ?? r;
+            var record = Data?.Record ?? r;
 
             if (State.Flags.HasFlag(ShapeStateFlags.Visible))
             {
@@ -47,7 +47,7 @@ namespace Core2D.Shapes
             {
                 if (this == renderer.State.SelectedShape)
                 {
-                    var points = this.GetPoints();
+                    var points = GetPoints();
                     foreach (var point in points)
                     {
                         point.Draw(dc, renderer, dx, dy, db, record);
@@ -55,7 +55,7 @@ namespace Core2D.Shapes
                 }
                 else
                 {
-                    var points = this.GetPoints();
+                    var points = GetPoints();
                     foreach (var point in points)
                     {
                         if (point == renderer.State.SelectedShape)
@@ -70,7 +70,7 @@ namespace Core2D.Shapes
             {
                 if (renderer.State.SelectedShapes.Contains(this))
                 {
-                    var points = this.GetPoints();
+                    var points = GetPoints();
                     foreach (var point in points)
                     {
                         point.Draw(dc, renderer, dx, dy, db, record);
@@ -84,7 +84,7 @@ namespace Core2D.Shapes
         /// <inheritdoc/>
         public override void Move(ISet<BaseShape> selected, double dx, double dy)
         {
-            var points = this.GetPoints();
+            var points = GetPoints();
             foreach (var point in points)
             {
                 point.Move(selected, dx, dy);
@@ -96,7 +96,7 @@ namespace Core2D.Shapes
         {
             base.Select(selected);
 
-            var points = this.GetPoints();
+            var points = GetPoints();
             foreach (var point in points)
             {
                 point.Select(selected);
@@ -108,7 +108,7 @@ namespace Core2D.Shapes
         {
             base.Deselect(selected);
 
-            var points = this.GetPoints();
+            var points = GetPoints();
             foreach (var point in points)
             {
                 point.Deselect(selected);

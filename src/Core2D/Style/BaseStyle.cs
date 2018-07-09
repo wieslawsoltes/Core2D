@@ -216,7 +216,7 @@ namespace Core2D.Style
         /// Check whether the <see cref="Dashes"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeDashes() => !String.IsNullOrWhiteSpace(_dashes);
+        public virtual bool ShouldSerializeDashes() => !string.IsNullOrWhiteSpace(_dashes);
 
         /// <summary>
         /// Check whether the <see cref="DashOffset"/> property has changed from its default value.

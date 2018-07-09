@@ -36,7 +36,7 @@ namespace Core2D.Shapes
         /// <inheritdoc/>
         public override void Draw(object dc, ShapeRenderer renderer, double dx, double dy, object db, object r)
         {
-            var record = this.Data?.Record ?? r;
+            var record = Data?.Record ?? r;
 
             if (renderer.State.SelectedShape != null)
             {

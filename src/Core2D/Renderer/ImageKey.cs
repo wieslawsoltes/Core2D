@@ -18,6 +18,6 @@ namespace Core2D.Renderer
         /// Check whether the <see cref="Key"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public bool ShouldSerializeKey() => !String.IsNullOrWhiteSpace(Key);
+        public bool ShouldSerializeKey() => !string.IsNullOrWhiteSpace(Key);
     }
 }

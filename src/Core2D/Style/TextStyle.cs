@@ -124,13 +124,13 @@ namespace Core2D.Style
         /// Check whether the <see cref="FontName"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeFontName() => !String.IsNullOrWhiteSpace(_fontName);
+        public virtual bool ShouldSerializeFontName() => !string.IsNullOrWhiteSpace(_fontName);
 
         /// <summary>
         /// Check whether the <see cref="FontFile"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeFontFile() => !String.IsNullOrWhiteSpace(_fontFile);
+        public virtual bool ShouldSerializeFontFile() => !string.IsNullOrWhiteSpace(_fontFile);
 
         /// <summary>
         /// Check whether the <see cref="FontSize"/> property has changed from its default value.

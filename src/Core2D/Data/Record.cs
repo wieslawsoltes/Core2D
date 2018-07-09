@@ -80,7 +80,7 @@ namespace Core2D.Data
                 Owner = owner
             };
 
-            if (!String.IsNullOrWhiteSpace(id))
+            if (!string.IsNullOrWhiteSpace(id))
             {
                 record.Id = id;
             }

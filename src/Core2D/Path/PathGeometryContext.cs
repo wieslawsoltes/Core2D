@@ -20,12 +20,7 @@ namespace Core2D.Path
         /// </summary>
         public PathGeometryContext(PathGeometry geometry)
         {
-            if (geometry == null)
-            {
-                throw new ArgumentNullException(nameof(geometry));
-            }
-
-            _geometry = geometry;
+            _geometry = geometry ?? throw new ArgumentNullException(nameof(geometry));
         }
 
         /// <inheritdoc/>

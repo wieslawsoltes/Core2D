@@ -87,7 +87,7 @@ namespace Core2D.Style
                  source.Fill.B);
             Thickness = source.Thickness;
             LineCap = source.LineCap;
-            Dashes = source.Dashes != null ? source.Dashes : default;
+            Dashes = source.Dashes ?? (default);
             DashOffset = source.DashOffset;
         }
 

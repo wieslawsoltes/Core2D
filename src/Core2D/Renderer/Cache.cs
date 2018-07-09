@@ -38,7 +38,7 @@ namespace Core2D.Renderer
         /// <inheritdoc/>
         public TValue Get(TKey key)
         {
-            if (_storage.TryGetValue(key, out TValue data))
+            if (_storage.TryGetValue(key, out var data))
             {
                 return data;
             }

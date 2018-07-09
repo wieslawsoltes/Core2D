@@ -272,7 +272,7 @@ namespace Core2D.Data
         /// Check whether the <see cref="IdColumnName"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeIdColumnName() => !String.IsNullOrWhiteSpace(_idColumnName);
+        public virtual bool ShouldSerializeIdColumnName() => !string.IsNullOrWhiteSpace(_idColumnName);
 
         /// <summary>
         /// Check whether the <see cref="Columns"/> property has changed from its default value.

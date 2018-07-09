@@ -63,7 +63,7 @@ namespace Core2D.Data
         /// Check whether the <see cref="Value"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeValue() => !String.IsNullOrWhiteSpace(_value);
+        public virtual bool ShouldSerializeValue() => !string.IsNullOrWhiteSpace(_value);
 
         /// <summary>
         /// Check whether the <see cref="Owner"/> property has changed from its default value.

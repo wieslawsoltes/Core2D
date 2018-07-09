@@ -58,7 +58,7 @@ namespace Core2D.Shapes
         /// <inheritdoc/>
         public override void Draw(object dc, ShapeRenderer renderer, double dx, double dy, object db, object r)
         {
-            var record = this.Data?.Record ?? r;
+            var record = Data?.Record ?? r;
 
             if (_shape != null)
             {
@@ -120,13 +120,13 @@ namespace Core2D.Shapes
         /// <returns>The new instance of the <see cref="PointShape"/> class.</returns>
         public PointShape Clone()
         {
-            var data = Context.Create(this.Data.Record);
+            var data = Context.Create(Data.Record);
 
             // The property Value is of type object and is not cloned.
-            if (this.Data.Properties.Length > 0)
+            if (Data.Properties.Length > 0)
             {
                 var builder = data.Properties.ToBuilder();
-                foreach (var property in this.Data.Properties)
+                foreach (var property in Data.Properties)
                 {
                     builder.Add(
                         Property.Create(
@@ -139,13 +139,13 @@ namespace Core2D.Shapes
 
             return new PointShape()
             {
-                Name = this.Name,
-                Style = this.Style,
+                Name = Name,
+                Style = Style,
                 Data = data,
-                X = this.X,
-                Y = this.Y,
-                Alignment = this.Alignment,
-                Shape = this.Shape
+                X = X,
+                Y = Y,
+                Alignment = Alignment,
+                Shape = Shape
             };
         }
 

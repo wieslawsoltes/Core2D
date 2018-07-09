@@ -27,7 +27,7 @@ namespace Core2D.Shapes
         /// <inheritdoc/>
         public override void Draw(object dc, ShapeRenderer renderer, double dx, double dy, object db, object r)
         {
-            var record = this.Data?.Record ?? r;
+            var record = Data?.Record ?? r;
 
             if (State.Flags.HasFlag(ShapeStateFlags.Visible))
             {
@@ -127,6 +127,6 @@ namespace Core2D.Shapes
         /// Check whether the <see cref="Key"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeKey() => !String.IsNullOrWhiteSpace(_key);
+        public virtual bool ShouldSerializeKey() => !string.IsNullOrWhiteSpace(_key);
     }
 }

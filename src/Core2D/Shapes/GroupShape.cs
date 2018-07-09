@@ -82,7 +82,7 @@ namespace Core2D.Shapes
         {
             var state = base.BeginTransform(dc, renderer);
 
-            var record = this.Data?.Record ?? r;
+            var record = Data?.Record ?? r;
 
             if (State.Flags.HasFlag(ShapeStateFlags.Visible))
             {
