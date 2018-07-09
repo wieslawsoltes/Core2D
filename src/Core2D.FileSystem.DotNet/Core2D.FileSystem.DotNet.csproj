@@ -8,16 +8,6 @@
 
   <Import Project="..\..\build\Base.props" />
 
-  <ItemGroup Condition="$(TargetFramework.StartsWith('net4'))">
-    <Reference Include="System" />
-    <Reference Include="System.ComponentModel.Composition" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
-  </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\Core2D\Core2D.csproj" />
   </ItemGroup>
