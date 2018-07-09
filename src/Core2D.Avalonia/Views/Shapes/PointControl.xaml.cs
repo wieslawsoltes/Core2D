@@ -15,7 +15,7 @@ namespace Core2D.Avalonia.Views.Shapes
         /// </summary>
         public PointControl()
         {
-            this.InitializeComponent();
+            InitializeComponent();
         }
 
         /// <summary>

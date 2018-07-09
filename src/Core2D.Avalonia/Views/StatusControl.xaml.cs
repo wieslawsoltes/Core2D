@@ -15,7 +15,7 @@ namespace Core2D.Avalonia.Views
         /// </summary>
         public StatusControl()
         {
-            this.InitializeComponent();
+            InitializeComponent();
         }
 
         /// <summary>

@@ -15,7 +15,7 @@ namespace Core2D.Avalonia.Views.Containers
         /// </summary>
         public OptionsControl()
         {
-            this.InitializeComponent();
+            InitializeComponent();
         }
 
         /// <summary>

@@ -15,7 +15,7 @@ namespace Core2D.Avalonia.Views.Shapes
         /// </summary>
         public CubicBezierControl()
         {
-            this.InitializeComponent();
+            InitializeComponent();
         }
 
         /// <summary>

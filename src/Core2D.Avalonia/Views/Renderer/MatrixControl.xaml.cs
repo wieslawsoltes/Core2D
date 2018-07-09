@@ -15,7 +15,7 @@ namespace Core2D.Avalonia.Views.Renderer
         /// </summary>
         public MatrixControl()
         {
-            this.InitializeComponent();
+            InitializeComponent();
         }
 
         /// <summary>

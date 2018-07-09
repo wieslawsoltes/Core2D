@@ -11,7 +11,7 @@ namespace Core2D.Serializer.Xaml
 {
     internal static class CoreTypeConverterProvider
     {
-        private static Dictionary<Type, Type> _registered = new Dictionary<Type, Type>
+        private static Dictionary<Type, Type> s_registered = new Dictionary<Type, Type>
         {
             { typeof(ArgbColor), typeof(ArgbColorTypeConverter) },
             { typeof(FontStyle), typeof(FontStyleTypeConverter) },
@@ -21,7 +21,7 @@ namespace Core2D.Serializer.Xaml
 
         public static Type Find(Type type)
         {
-            _registered.TryGetValue(type, out var result);
+            s_registered.TryGetValue(type, out var result);
             return result;
         }
     }

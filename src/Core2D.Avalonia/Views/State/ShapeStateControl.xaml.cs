@@ -15,7 +15,7 @@ namespace Core2D.Avalonia.Views.State
         /// </summary>
         public ShapeStateControl()
         {
-            this.InitializeComponent();
+            InitializeComponent();
         }
 
         /// <summary>

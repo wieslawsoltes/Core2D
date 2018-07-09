@@ -15,7 +15,7 @@ namespace Core2D.Avalonia.Views.Style
         /// </summary>
         public ArrowStyleControl()
         {
-            this.InitializeComponent();
+            InitializeComponent();
         }
 
         /// <summary>

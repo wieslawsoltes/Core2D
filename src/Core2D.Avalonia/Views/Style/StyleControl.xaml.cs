@@ -15,7 +15,7 @@ namespace Core2D.Avalonia.Views.Style
         /// </summary>
         public StyleControl()
         {
-            this.InitializeComponent();
+            InitializeComponent();
         }
 
         /// <summary>

@@ -35,7 +35,7 @@ namespace Core2D.Avalonia.Views
         /// </summary>
         public EditorMenuControl()
         {
-            this.InitializeComponent();
+            InitializeComponent();
         }
 
         /// <summary>

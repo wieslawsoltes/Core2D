@@ -26,7 +26,7 @@ namespace Core2D.Avalonia.Views
         /// </summary>
         public PageControl()
         {
-            this.InitializeComponent();
+            InitializeComponent();
 
             this.GetObservable(DataContextProperty).Subscribe((value) =>
             {
@@ -34,13 +34,13 @@ namespace Core2D.Avalonia.Views
                 AttachEditor();
             });
 
-            this.AttachedToVisualTree += (sender, e) =>
+            AttachedToVisualTree += (sender, e) =>
             {
                 DetachEditor();
                 AttachEditor();
             };
 
-            this.DetachedFromVisualTree += (sender, e) =>
+            DetachedFromVisualTree += (sender, e) =>
             {
                 DetachEditor();
             };
@@ -81,7 +81,7 @@ namespace Core2D.Avalonia.Views
         /// </summary>
         public void AttachEditor()
         {
-            _projectEditor = this.DataContext as ProjectEditor;
+            _projectEditor = DataContext as ProjectEditor;
             _containerControl = this.Find<ContainerControl>("containerControl");
             _zoomBorder = this.Find<ZoomBorder>("zoomBorder");
 

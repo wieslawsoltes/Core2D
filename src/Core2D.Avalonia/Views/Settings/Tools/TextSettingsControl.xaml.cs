@@ -15,7 +15,7 @@ namespace Core2D.Avalonia.Views.Settings.Tools
         /// </summary>
         public TextSettingsControl()
         {
-            this.InitializeComponent();
+            InitializeComponent();
         }
 
         /// <summary>

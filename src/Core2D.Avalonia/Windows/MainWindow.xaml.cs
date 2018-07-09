@@ -16,7 +16,7 @@ namespace Core2D.Avalonia.Windows
         /// </summary>
         public MainWindow()
         {
-            this.InitializeComponent();
+            InitializeComponent();
             this.AttachDevTools();
         }
 

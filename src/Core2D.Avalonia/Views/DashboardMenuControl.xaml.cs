@@ -35,7 +35,7 @@ namespace Core2D.Avalonia.Views
         /// </summary>
         public DashboardMenuControl()
         {
-            this.InitializeComponent();
+            InitializeComponent();
         }
 
         /// <summary>

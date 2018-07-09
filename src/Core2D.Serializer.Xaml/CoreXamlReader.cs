@@ -8,11 +8,11 @@ namespace Core2D.Serializer.Xaml
 {
     internal static class CoreXamlReader
     {
-        internal static readonly XamlSchemaContext context = new CoreXamlSchemaContext();
+        internal static readonly XamlSchemaContext s_context = new CoreXamlSchemaContext();
 
         private static object Load(XamlXmlReader reader)
         {
-            using (var writer = new XamlObjectWriter(context, new XamlObjectWriterSettings()))
+            using (var writer = new XamlObjectWriter(s_context, new XamlObjectWriterSettings()))
             {
                 XamlServices.Transform(reader, writer);
                 return writer.Result;
@@ -21,7 +21,7 @@ namespace Core2D.Serializer.Xaml
 
         public static object Load(Stream stream)
         {
-            using (var reader = new XamlXmlReader(stream, context))
+            using (var reader = new XamlXmlReader(stream, s_context))
             {
                 return Load(reader);
             }
@@ -29,7 +29,7 @@ namespace Core2D.Serializer.Xaml
 
         public static object Load(string path)
         {
-            using (var reader = new XamlXmlReader(path, context))
+            using (var reader = new XamlXmlReader(path, s_context))
             {
                 return Load(reader);
             }
@@ -37,7 +37,7 @@ namespace Core2D.Serializer.Xaml
 
         public static object Load(TextReader textReader)
         {
-            using (var reader = new XamlXmlReader(textReader, context))
+            using (var reader = new XamlXmlReader(textReader, s_context))
             {
                 return Load(reader);
             }
@@ -45,7 +45,7 @@ namespace Core2D.Serializer.Xaml
 
         public static object Load(XmlReader xmlReader)
         {
-            using (var reader = new XamlXmlReader(xmlReader, context))
+            using (var reader = new XamlXmlReader(xmlReader, s_context))
             {
                 return Load(reader);
             }

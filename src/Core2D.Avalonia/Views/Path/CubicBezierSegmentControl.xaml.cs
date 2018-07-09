@@ -15,7 +15,7 @@ namespace Core2D.Avalonia.Views.Path
         /// </summary>
         public CubicBezierSegmentControl()
         {
-            this.InitializeComponent();
+            InitializeComponent();
         }
 
         /// <summary>

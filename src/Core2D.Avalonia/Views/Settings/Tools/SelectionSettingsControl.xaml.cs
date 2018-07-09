@@ -15,7 +15,7 @@ namespace Core2D.Avalonia.Views.Settings.Tools
         /// </summary>
         public SelectionSettingsControl()
         {
-            this.InitializeComponent();
+            InitializeComponent();
         }
 
         /// <summary>

@@ -15,7 +15,7 @@ namespace Core2D.Avalonia.Views.Containers
         /// </summary>
         public LayerControl()
         {
-            this.InitializeComponent();
+            InitializeComponent();
         }
 
         /// <summary>

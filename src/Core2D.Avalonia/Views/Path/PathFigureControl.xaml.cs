@@ -15,7 +15,7 @@ namespace Core2D.Avalonia.Views.Path
         /// </summary>
         public PathFigureControl()
         {
-            this.InitializeComponent();
+            InitializeComponent();
         }
 
         /// <summary>

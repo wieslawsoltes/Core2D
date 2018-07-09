@@ -15,7 +15,7 @@ namespace Core2D.Avalonia.Views.Settings.Tools
         /// </summary>
         public RectangleSettingsControl()
         {
-            this.InitializeComponent();
+            InitializeComponent();
         }
 
         /// <summary>

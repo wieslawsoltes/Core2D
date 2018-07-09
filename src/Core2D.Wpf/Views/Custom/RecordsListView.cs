@@ -59,8 +59,8 @@ namespace Core2D.Wpf.Views.Custom
                     InitializeColumnsView();
                 };
 
-            this.PreviewMouseLeftButtonDown += ListView_PreviewMouseLeftButtonDown;
-            this.PreviewMouseMove += ListView_PreviewMouseMove;
+            PreviewMouseLeftButtonDown += ListView_PreviewMouseLeftButtonDown;
+            PreviewMouseMove += ListView_PreviewMouseMove;
         }
 
         /// <summary>
@@ -70,13 +70,13 @@ namespace Core2D.Wpf.Views.Custom
         {
             if (DataContext is Database database)
             {
-                this.View = CreateColumnsView(database.Columns);
+                View = CreateColumnsView(database.Columns);
                 StopObservingColumns(database);
                 StartObservingColumns(database);
             }
             else
             {
-                this.View = null;
+                View = null;
             }
         }
 

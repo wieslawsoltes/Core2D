@@ -15,7 +15,7 @@ namespace Core2D.Avalonia.Views.Containers
         /// </summary>
         public DocumentControl()
         {
-            this.InitializeComponent();
+            InitializeComponent();
         }
 
         /// <summary>

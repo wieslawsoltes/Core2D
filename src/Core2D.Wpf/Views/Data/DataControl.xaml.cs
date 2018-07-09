@@ -26,9 +26,9 @@ namespace Core2D.Wpf.Views.Data
         /// </summary>
         public void InitializeDrop()
         {
-            this.AllowDrop = true;
+            AllowDrop = true;
 
-            this.DragEnter +=
+            DragEnter +=
                 (s, e) =>
                 {
                     if (!e.Data.GetDataPresent(typeof(Record)))
@@ -38,7 +38,7 @@ namespace Core2D.Wpf.Views.Data
                     }
                 };
 
-            this.Drop +=
+            Drop +=
                 (s, e) =>
                 {
                     if (e.Data.GetDataPresent(typeof(Record)))
@@ -47,9 +47,9 @@ namespace Core2D.Wpf.Views.Data
                         {
                             if (e.Data.GetData(typeof(Record)) is Record record)
                             {
-                                if (this.DataContext != null)
+                                if (DataContext != null)
                                 {
-                                    if (this.DataContext is Context data)
+                                    if (DataContext is Context data)
                                     {
                                         data.Record = record;
                                     }

@@ -15,7 +15,7 @@ namespace Core2D.Avalonia.Views.Settings.Tools.Path
         /// </summary>
         public MoveSettingsControl()
         {
-            this.InitializeComponent();
+            InitializeComponent();
         }
 
         /// <summary>

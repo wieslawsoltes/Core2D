@@ -15,7 +15,7 @@ namespace Core2D.Avalonia.Views.Shapes
         /// </summary>
         public RectangleControl()
         {
-            this.InitializeComponent();
+            InitializeComponent();
         }
 
         /// <summary>

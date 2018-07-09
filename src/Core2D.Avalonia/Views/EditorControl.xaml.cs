@@ -15,7 +15,7 @@ namespace Core2D.Avalonia.Views
         /// </summary>
         public EditorControl()
         {
-            this.InitializeComponent();
+            InitializeComponent();
         }
 
         /// <summary>

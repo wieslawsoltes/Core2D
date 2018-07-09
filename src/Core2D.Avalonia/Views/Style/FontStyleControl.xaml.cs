@@ -15,7 +15,7 @@ namespace Core2D.Avalonia.Views.Style
         /// </summary>
         public FontStyleControl()
         {
-            this.InitializeComponent();
+            InitializeComponent();
         }
 
         /// <summary>

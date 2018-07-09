@@ -15,7 +15,7 @@ namespace Core2D.Avalonia.Views.Settings.Tools
         /// </summary>
         public PointSettingsControl()
         {
-            this.InitializeComponent();
+            InitializeComponent();
         }
 
         /// <summary>

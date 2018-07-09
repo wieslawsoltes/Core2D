@@ -54,7 +54,7 @@ namespace Core2D.Avalonia.Views
         /// </summary>
         public ContainerControl()
         {
-            this.InitializeComponent();
+            InitializeComponent();
         }
 
         /// <summary>

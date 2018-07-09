@@ -15,7 +15,7 @@ namespace Core2D.Avalonia.Views.Containers
         /// </summary>
         public ShapesControl()
         {
-            this.InitializeComponent();
+            InitializeComponent();
         }
 
         /// <summary>

@@ -36,8 +36,8 @@ namespace Core2D.Wpf.Views
         {
             InitializeComponent();
 
-            this.Loaded += (sender, e) => OnLoaded();
-            this.Unloaded += (sender, e) => OnUnloaded();
+            Loaded += (sender, e) => OnLoaded();
+            Unloaded += (sender, e) => OnUnloaded();
         }
 
         /// <summary>
@@ -54,7 +54,7 @@ namespace Core2D.Wpf.Views
 
             if (_restoreLayout)
             {
-                this.AutoLoadLayout();
+                AutoLoadLayout();
             }
         }
 
@@ -70,7 +70,7 @@ namespace Core2D.Wpf.Views
 
             if (_restoreLayout)
             {
-                this.AutoSaveLayout();
+                AutoSaveLayout();
             }
 
             DetachEditor();
@@ -220,7 +220,7 @@ namespace Core2D.Wpf.Views
         /// </summary>
         public void AttachEditor()
         {
-            _projectEditor = this.DataContext as ProjectEditor;
+            _projectEditor = DataContext as ProjectEditor;
 
             if (_projectEditor != null)
             {
@@ -291,7 +291,7 @@ namespace Core2D.Wpf.Views
                     }
                 };
 
-            var assembly = this.GetType().Assembly;
+            var assembly = GetType().Assembly;
             using (var stream = assembly.GetManifestResourceStream(path))
             {
                 using (var reader = new System.IO.StreamReader(stream))

@@ -15,7 +15,7 @@ namespace Core2D.Avalonia.Views.Style
         /// </summary>
         public LineFixedLengthControl()
         {
-            this.InitializeComponent();
+            InitializeComponent();
         }
 
         /// <summary>

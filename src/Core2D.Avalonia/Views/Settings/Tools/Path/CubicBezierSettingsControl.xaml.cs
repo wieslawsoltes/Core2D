@@ -15,7 +15,7 @@ namespace Core2D.Avalonia.Views.Settings.Tools.Path
         /// </summary>
         public CubicBezierSettingsControl()
         {
-            this.InitializeComponent();
+            InitializeComponent();
         }
 
         /// <summary>

@@ -16,7 +16,7 @@ namespace Core2D.Avalonia.Windows
         /// </summary>
         public DocumentWindow()
         {
-            this.InitializeComponent();
+            InitializeComponent();
             this.AttachDevTools();
         }
 

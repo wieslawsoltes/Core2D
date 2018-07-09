@@ -15,7 +15,7 @@ namespace Core2D.Avalonia.Views.Containers
         /// </summary>
         public StylesControl()
         {
-            this.InitializeComponent();
+            InitializeComponent();
         }
 
         /// <summary>

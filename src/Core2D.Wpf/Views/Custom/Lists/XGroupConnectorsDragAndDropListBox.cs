@@ -17,7 +17,7 @@ namespace Core2D.Wpf.Views.Custom.Lists
         public GroupShapeConnectorsDragAndDropListBox()
             : base()
         {
-            this.Initialized += (s, e) => base.Initialize();
+            Initialized += (s, e) => base.Initialize();
         }
 
         /// <summary>
@@ -26,8 +26,8 @@ namespace Core2D.Wpf.Views.Custom.Lists
         /// <param name="array">The updated immutable array.</param>
         protected override void UpdateDataContext(ImmutableArray<PointShape> array)
         {
-            var editor = (ProjectEditor)this.Tag;
-            var group = this.DataContext as GroupShape;
+            var editor = (ProjectEditor)Tag;
+            var group = DataContext as GroupShape;
             if (group == null)
                 return;
 

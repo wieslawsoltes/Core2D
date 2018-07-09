@@ -12,7 +12,7 @@ namespace Core2D.Serializer.Xaml
     /// </summary>
     internal static class CoreXamlSerializer
     {
-        internal static readonly XmlWriterSettings settings = new XmlWriterSettings()
+        internal static readonly XmlWriterSettings s_settings = new XmlWriterSettings()
         {
             OmitXmlDeclaration = true,
             Encoding = Encoding.UTF8,
@@ -34,7 +34,7 @@ namespace Core2D.Serializer.Xaml
         {
             using (var textWriter = new StringWriter())
             {
-                using (var xmlWriter = XmlWriter.Create(textWriter, settings))
+                using (var xmlWriter = XmlWriter.Create(textWriter, s_settings))
                 {
                     CoreXamlWriter.Save(xmlWriter, value);
                     return textWriter.ToString();

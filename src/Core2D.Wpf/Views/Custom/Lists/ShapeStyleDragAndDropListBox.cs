@@ -17,7 +17,7 @@ namespace Core2D.Wpf.Views.Custom.Lists
         public ShapeStyleDragAndDropListBox()
             : base()
         {
-            this.Initialized += (s, e) => base.Initialize();
+            Initialized += (s, e) => base.Initialize();
         }
 
         /// <summary>
@@ -26,7 +26,7 @@ namespace Core2D.Wpf.Views.Custom.Lists
         /// <param name="array">The updated immutable array.</param>
         protected override void UpdateDataContext(ImmutableArray<ShapeStyle> array)
         {
-            var editor = (ProjectEditor)this.Tag;
+            var editor = (ProjectEditor)Tag;
 
             var sg = editor.Project.CurrentStyleLibrary;
 

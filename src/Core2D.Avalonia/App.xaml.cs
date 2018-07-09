@@ -80,7 +80,7 @@ namespace Core2D.Avalonia
             return new AboutInfo()
             {
                 Title = "Core2D",
-                Version = $"{this.GetType().GetTypeInfo().Assembly.GetName().Version}",
+                Version = $"{GetType().GetTypeInfo().Assembly.GetName().Version}",
                 Description = "A multi-platform data driven 2D diagram editor.",
                 Copyright = "Copyright (c) Wiesław Šoltés. All rights reserved.",
                 License = "Licensed under the MIT license. See LICENSE file in the project root for full license information.",

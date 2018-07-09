@@ -8,13 +8,13 @@ namespace Core2D.Serializer.Xaml
 {
     internal static class CoreXamlWriter
     {
-        internal static readonly XamlSchemaContext context = new CoreXamlSchemaContext();
+        internal static readonly XamlSchemaContext s_context = new CoreXamlSchemaContext();
 
-        internal static readonly XamlObjectReaderSettings settings = new XamlObjectReaderSettings();
+        internal static readonly XamlObjectReaderSettings s_settings = new XamlObjectReaderSettings();
 
         private static void Save(XamlXmlWriter writer, object instance)
         {
-            using (var reader = new XamlObjectReader(instance, context, settings))
+            using (var reader = new XamlObjectReader(instance, s_context, s_settings))
             {
                 XamlServices.Transform(reader, writer);
             }
@@ -22,7 +22,7 @@ namespace Core2D.Serializer.Xaml
 
         public static void Save(Stream stream, object instance)
         {
-            using (var writer = new XamlXmlWriter(stream, context))
+            using (var writer = new XamlXmlWriter(stream, s_context))
             {
                 Save(writer, instance);
             }
@@ -30,7 +30,7 @@ namespace Core2D.Serializer.Xaml
 
         public static void Save(TextWriter textWriter, object instance)
         {
-            using (var writer = new XamlXmlWriter(textWriter, context))
+            using (var writer = new XamlXmlWriter(textWriter, s_context))
             {
                 Save(writer, instance);
             }
@@ -38,7 +38,7 @@ namespace Core2D.Serializer.Xaml
 
         public static void Save(XmlWriter xmlWriter, object instance)
         {
-            using (var writer = new XamlXmlWriter(xmlWriter, context))
+            using (var writer = new XamlXmlWriter(xmlWriter, s_context))
             {
                 Save(writer, instance);
             }

@@ -15,7 +15,7 @@ namespace Core2D.Avalonia.Views
         /// </summary>
         public BrowserControl()
         {
-            this.InitializeComponent();
+            InitializeComponent();
         }
 
         /// <summary>

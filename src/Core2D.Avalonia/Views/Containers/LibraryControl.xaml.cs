@@ -15,7 +15,7 @@ namespace Core2D.Avalonia.Views.Containers
         /// </summary>
         public LibraryControl()
         {
-            this.InitializeComponent();
+            InitializeComponent();
         }
 
         /// <summary>

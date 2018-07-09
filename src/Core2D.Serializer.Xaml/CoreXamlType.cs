@@ -17,12 +17,12 @@ namespace Core2D.Serializer.Xaml
 
         protected override ICustomAttributeProvider LookupCustomAttributeProvider()
         {
-            return new CoreAttributeProvider(this.UnderlyingType);
+            return new CoreAttributeProvider(UnderlyingType);
         }
 
         protected override XamlValueConverter<TypeConverter> LookupTypeConverter()
         {
-            var result = CoreTypeConverterProvider.Find(this.UnderlyingType);
+            var result = CoreTypeConverterProvider.Find(UnderlyingType);
             if (result != null)
             {
                 return new XamlValueConverter<TypeConverter>(result, this);

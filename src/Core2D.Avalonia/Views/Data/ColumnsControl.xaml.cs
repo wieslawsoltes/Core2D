@@ -15,7 +15,7 @@ namespace Core2D.Avalonia.Views.Data
         /// </summary>
         public ColumnsControl()
         {
-            this.InitializeComponent();
+            InitializeComponent();
         }
 
         /// <summary>

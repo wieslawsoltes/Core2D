@@ -48,7 +48,7 @@ namespace Core2D.Wpf.Views.Custom
         /// </summary>
         public void Initialize()
         {
-            var style = this.ItemContainerStyle;
+            var style = ItemContainerStyle;
             if (style != null)
             {
                 if (style.IsSealed)
@@ -73,8 +73,8 @@ namespace Core2D.Wpf.Views.Custom
                         ListBoxItem.DropEvent,
                         new DragEventHandler(ListBoxItem_Drop)));
 
-            if (this.ItemContainerStyle == null)
-                this.ItemContainerStyle = style;
+            if (ItemContainerStyle == null)
+                ItemContainerStyle = style;
         }
 
         private void ListBox_PreviewMouseMove(object sender, MouseEventArgs e)
@@ -116,8 +116,8 @@ namespace Core2D.Wpf.Views.Custom
                     var listBoxItem = sender as ListBoxItem;
                     var target = listBoxItem.DataContext as T;
 
-                    int sourceIndex = this.Items.IndexOf(source);
-                    int targetIndex = this.Items.IndexOf(target);
+                    int sourceIndex = Items.IndexOf(source);
+                    int targetIndex = Items.IndexOf(target);
 
                     switch (DropMode)
                     {
@@ -129,9 +129,9 @@ namespace Core2D.Wpf.Views.Custom
                             break;
                     }
 
-                    this.UpdateLayout();
-                    var item = this.Items[targetIndex];
-                    var container = this.ItemContainerGenerator.ContainerFromItem(item);
+                    UpdateLayout();
+                    var item = Items[targetIndex];
+                    var container = ItemContainerGenerator.ContainerFromItem(item);
                     (container as ListBoxItem).IsSelected = true;
                 }
             }
@@ -147,7 +147,7 @@ namespace Core2D.Wpf.Views.Custom
         {
             if (sourceIndex < targetIndex)
             {
-                var items = (ImmutableArray<T>)this.ItemsSource;
+                var items = (ImmutableArray<T>)ItemsSource;
                 if (items != null)
                 {
                     var builder = items.ToBuilder();
@@ -158,7 +158,7 @@ namespace Core2D.Wpf.Views.Custom
             }
             else
             {
-                var items = (ImmutableArray<T>)this.ItemsSource;
+                var items = (ImmutableArray<T>)ItemsSource;
                 if (items != null)
                 {
                     int removeIndex = sourceIndex + 1;
@@ -175,7 +175,7 @@ namespace Core2D.Wpf.Views.Custom
 
         private void Swap(T source, int sourceIndex, int targetIndex)
         {
-            var items = (ImmutableArray<T>)this.DataContext;
+            var items = (ImmutableArray<T>)DataContext;
             if (items != null)
             {
                 var target = items[targetIndex];
