@@ -4,19 +4,16 @@
     <Project Name="Core2D" Path="src">
       <Frameworks>
         <Framework>netstandard2.0</Framework>
-        <Framework>net461</Framework>
       </Frameworks>
     </Project>
     <Project Name="Core2D.Editor" Path="src">
       <Frameworks>
         <Framework>netstandard2.0</Framework>
-        <Framework>net461</Framework>
       </Frameworks>
     </Project>
     <Project Name="Core2D.FileSystem.DotNet" Path="src">
       <Frameworks>
         <Framework>netstandard2.0</Framework>
-        <Framework>net461</Framework>
       </Frameworks>
     </Project>
     <Project Name="Core2D.FileWriter.Dxf" Path="src">
@@ -37,19 +34,16 @@
     <Project Name="Core2D.FileWriter.SkiaSharp" Path="src">
       <Frameworks>
         <Framework>netstandard2.0</Framework>
-        <Framework>net461</Framework>
       </Frameworks>
     </Project>
     <Project Name="Core2D.Log.Trace" Path="src">
       <Frameworks>
         <Framework>netstandard2.0</Framework>
-        <Framework>net461</Framework>
       </Frameworks>
     </Project>
     <Project Name="Core2D.Renderer.Avalonia" Path="src">
       <Frameworks>
         <Framework>netstandard2.0</Framework>
-        <Framework>net461</Framework>
       </Frameworks>
     </Project>
     <Project Name="Core2D.Renderer.Dxf" Path="src">
@@ -65,7 +59,6 @@
     <Project Name="Core2D.Renderer.SkiaSharp" Path="src">
       <Frameworks>
         <Framework>netstandard2.0</Framework>
-        <Framework>net461</Framework>
       </Frameworks>
     </Project>
     <Project Name="Core2D.Renderer.WinForms" Path="src">
@@ -81,43 +74,36 @@
     <Project Name="Core2D.ScriptRunner.Roslyn" Path="src">
       <Frameworks>
         <Framework>netstandard2.0</Framework>
-        <Framework>net461</Framework>
       </Frameworks>
     </Project>
     <Project Name="Core2D.Serializer.Newtonsoft" Path="src">
       <Frameworks>
         <Framework>netstandard2.0</Framework>
-        <Framework>net461</Framework>
       </Frameworks>
     </Project>
     <Project Name="Core2D.Serializer.Xaml" Path="src">
       <Frameworks>
         <Framework>netstandard2.0</Framework>
-        <Framework>net461</Framework>
       </Frameworks>
     </Project>
     <Project Name="Core2D.ServiceProvider.Autofac" Path="src">
       <Frameworks>
         <Framework>netstandard2.0</Framework>
-        <Framework>net461</Framework>
       </Frameworks>
     </Project>
     <Project Name="Core2D.TextFieldReader.CsvHelper" Path="src">
       <Frameworks>
         <Framework>netstandard2.0</Framework>
-        <Framework>net461</Framework>
       </Frameworks>
     </Project>
     <Project Name="Core2D.TextFieldWriter.CsvHelper" Path="src">
       <Frameworks>
         <Framework>netstandard2.0</Framework>
-        <Framework>net461</Framework>
       </Frameworks>
     </Project>
     <Project Name="Core2D.Utilities.Avalonia" Path="src">
       <Frameworks>
         <Framework>netstandard2.0</Framework>
-        <Framework>net461</Framework>
       </Frameworks>
     </Project>
     <Project Name="Core2D.Utilities.Wpf" Path="src">
@@ -130,13 +116,11 @@
     <Project Name="Core2D.UnitTests" Path="tests">
       <Frameworks>
         <Framework>netcoreapp2.1</Framework>
-        <Framework>net461</Framework>
       </Frameworks>
     </Project>
     <Project Name="Core2D.FileSystem.DotNet.UnitTests" Path="tests">
       <Frameworks>
         <Framework>netcoreapp2.1</Framework>
-        <Framework>net461</Framework>
       </Frameworks>
     </Project>
   </Tests>
