@@ -391,7 +391,7 @@ namespace Core2D.Avalonia.Dock.Factories
         /// <inheritdoc/>
         public override void InitLayout(IView layout, object context)
         {
-            this.ContextLocator = new Dictionary<string, Func<object>>
+            ContextLocator = new Dictionary<string, Func<object>>
             {
                 // Defaults
                 [nameof(IRootDock)] = () => context,
@@ -426,8 +426,8 @@ namespace Core2D.Avalonia.Dock.Factories
                 [nameof(DocumentView)] = () => context,
                 [nameof(DashboardView)] = () => context
             };
-            
-            this.HostLocator = new Dictionary<string, Func<IDockHost>>
+
+            HostLocator = new Dictionary<string, Func<IDockHost>>
             {
                 [nameof(IDockWindow)] = () => _serviceProvider.GetService<IDockHost>()
             };
