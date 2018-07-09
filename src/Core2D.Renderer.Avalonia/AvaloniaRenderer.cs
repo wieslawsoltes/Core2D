@@ -9,10 +9,10 @@ using Core2D.Shapes;
 using Core2D.Style;
 using Spatial;
 using Spatial.Arc;
-using A=Avalonia;
-using AM=Avalonia.Media;
-using AMI=Avalonia.Media.Imaging;
-using APAZ=Avalonia.Controls.PanAndZoom;
+using A = Avalonia;
+using AM = Avalonia.Media;
+using AMI = Avalonia.Media.Imaging;
+using APAZ = Avalonia.Controls.PanAndZoom;
 
 namespace Core2D.Renderer.Avalonia
 {

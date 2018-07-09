@@ -6,8 +6,8 @@ using System.Collections.Immutable;
 using Core2D.Path;
 using Core2D.Path.Segments;
 using Core2D.Shapes;
-using A=Avalonia;
-using AM=Avalonia.Media;
+using A = Avalonia;
+using AM = Avalonia.Media;
 
 namespace Core2D.Renderer.Avalonia
 {
@@ -116,7 +116,7 @@ namespace Core2D.Renderer.Avalonia
                         {
                             sgc.ArcTo(
                                 new A.Point(arcSegment.Point.X + dx, arcSegment.Point.Y + dy),
-                                new A.Size(arcSegment.Size.Width,  arcSegment.Size.Height),
+                                new A.Size(arcSegment.Size.Width, arcSegment.Size.Height),
                                 arcSegment.RotationAngle,
                                 arcSegment.IsLargeArc,
                                 arcSegment.SweepDirection == SweepDirection.Clockwise ? AM.SweepDirection.Clockwise : AM.SweepDirection.CounterClockwise);

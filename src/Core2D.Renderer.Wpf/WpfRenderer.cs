@@ -10,9 +10,9 @@ using Core2D.Shapes;
 using Core2D.Style;
 using Spatial;
 using Spatial.Arc;
-using W=System.Windows;
-using WM=System.Windows.Media;
-using WMI=System.Windows.Media.Imaging;
+using W = System.Windows;
+using WM = System.Windows.Media;
+using WMI = System.Windows.Media.Imaging;
 
 namespace Core2D.Renderer.Wpf
 {

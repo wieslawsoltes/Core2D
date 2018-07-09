@@ -4,7 +4,7 @@ using System;
 using System.Linq;
 using Core2D.Path;
 using Core2D.Path.Segments;
-using PDF=PdfSharp.Drawing;
+using PDF = PdfSharp.Drawing;
 
 namespace Core2D.Renderer.PdfSharp
 {

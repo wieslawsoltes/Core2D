@@ -7,8 +7,8 @@ using System.Globalization;
 using Core2D.Path;
 using Core2D.Path.Segments;
 using Core2D.Shapes;
-using W=System.Windows;
-using WM=System.Windows.Media;
+using W = System.Windows;
+using WM = System.Windows.Media;
 
 namespace Core2D.Renderer.Wpf
 {

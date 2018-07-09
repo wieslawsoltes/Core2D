@@ -10,10 +10,10 @@ using Core2D.Path;
 using Core2D.Path.Segments;
 using Core2D.Shapes;
 using Core2D.Style;
-using DXF=netDxf;
-using DXFE=netDxf.Entities;
-using DXFO=netDxf.Objects;
-using DXFT=netDxf.Tables;
+using DXF = netDxf;
+using DXFE = netDxf.Entities;
+using DXFO = netDxf.Objects;
+using DXFT = netDxf.Tables;
 
 namespace Core2D.Renderer.Dxf
 {

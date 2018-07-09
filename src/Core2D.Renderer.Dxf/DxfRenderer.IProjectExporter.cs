@@ -3,9 +3,9 @@
 using System;
 using Core2D.Interfaces;
 using Core2D.Containers;
-using DXF=netDxf;
-using DXFH=netDxf.Header;
-using DXFO=netDxf.Objects;
+using DXF = netDxf;
+using DXFH = netDxf.Header;
+using DXFO = netDxf.Objects;
 
 namespace Core2D.Renderer.Dxf
 {
