@@ -288,7 +288,7 @@ namespace Core2D.Avalonia.Editor
             if (result != null)
             {
                 string ext = System.IO.Path.GetExtension(result).ToLower().TrimStart('.');
-                IFileWriter writer = editor.FileWriters.Where(w => string.Compare(w.Extension, ext, StringComparison.OrdinalIgnoreCase) == 0).FirstOrDefault();
+                var writer = editor.FileWriters.Where(w => string.Compare(w.Extension, ext, StringComparison.OrdinalIgnoreCase) == 0).FirstOrDefault();
                 if (writer != null)
                 {
                     editor.OnExport(result, item, writer);

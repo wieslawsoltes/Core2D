@@ -17,7 +17,7 @@ namespace Core2D.Avalonia.Converters
         /// <summary>
         /// Default title result.
         /// </summary>
-        public static readonly string DefaultTitle = "Core2D";
+        public static readonly string s_defaultTitle = "Core2D";
 
         /// <summary>
         /// Converts multi-binding inputs to a final value.
@@ -33,20 +33,20 @@ namespace Core2D.Avalonia.Converters
             {
                 if (values[0] == null || values[0].GetType() != typeof(string))
                 {
-                    return DefaultTitle;
+                    return s_defaultTitle;
                 }
 
                 if (values[1] == null || values[1].GetType() != typeof(bool))
                 {
-                    return DefaultTitle;
+                    return s_defaultTitle;
                 }
 
                 string name = (string)values[0];
                 bool isDirty = (bool)values[1];
-                return string.Concat(name, isDirty ? "*" : "", " - ", DefaultTitle);
+                return string.Concat(name, isDirty ? "*" : "", " - ", s_defaultTitle);
             }
 
-            return DefaultTitle;
+            return s_defaultTitle;
         }
     }
 }

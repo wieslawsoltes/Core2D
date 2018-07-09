@@ -74,9 +74,9 @@ namespace Core2D.Avalonia
                 builder.RegisterModule<DependenciesModule>();
                 builder.RegisterModule<AppModule>();
                 builder.RegisterModule<ViewModule>();
-                using (IContainer container = builder.Build())
+                using (var container = builder.Build())
                 {
-                    using (ILog log = container.Resolve<ILog>())
+                    using (var log = container.Resolve<ILog>())
                     {
                         var appBuilder = BuildAvaloniaApp();
                         if (useDirect2D1 == true)
