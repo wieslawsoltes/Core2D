@@ -136,7 +136,7 @@ namespace Core2D.Avalonia
                 editor.AboutInfo = aboutInfo;
 
                 var window = serviceProvider.GetService<Windows.MainWindow>();
-                window.Closed += (sender, e) =>
+                window.Closing += (sender, e) =>
                 {
                     editor.Layout.Close();
                     editor.OnSaveLayout(layoutPath);
