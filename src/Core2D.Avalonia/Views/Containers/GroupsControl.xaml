@@ -40,7 +40,7 @@
         </Menu>
         <ListBox x:Name="groups" Items="{Binding Items}" SelectedItem="{Binding Selected, Mode=TwoWay}" Grid.Row="3" Classes="default">
             <i:Interaction.Behaviors>
-                <id:DropBehavior Context="{Binding $parent[Window].DataContext}" Handler="{StaticResource ListBoxDropHandler}"/>
+                <!--<id:DropBehavior Context="{Binding $parent[Window].DataContext}" Handler="{StaticResource ListBoxDropHandler}"/>-->
             </i:Interaction.Behaviors>
             <ListBox.KeyBindings>
                 <KeyBinding Command="{Binding $parent[Window].DataContext.OnAddGroup}" CommandParameter="{Binding #groups.DataContext}" Gesture="Ctrl+N"/>
