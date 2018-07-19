@@ -19,13 +19,14 @@
     </UserControl.Resources>
     <Border Classes="container">
         <i:Interaction.Behaviors>
-            <id:DropBehavior Context="{Binding Layout}" Handler="{StaticResource EditorDropHandler}"/>
             <id:DropBehavior Context="{Binding Layout}" Handler="{StaticResource DockDropHandler}"/>
+            <id:DropBehavior Context="{Binding}" Handler="{StaticResource EditorDropHandler}"/>
         </i:Interaction.Behaviors>
         <Border Classes="transparent" ClipToBounds="True">
             <paz:ZoomBorder x:Name="zoomBorder" Stretch="None" ZoomSpeed="1.2" PanButton="Right" EnableInput="{Binding IsToolIdle}" Background="Transparent" ClipToBounds="False" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
                 <views:ContainerControl x:Name="containerControl" Renderer="{Binding Renderers[0]}" Container="{Binding Project.CurrentContainer}" ClipToBounds="False">
                     <i:Interaction.Behaviors>
+                        <id:DropBehavior Context="{Binding Layout}" Handler="{StaticResource DockDropHandler}"/>
                         <id:DropBehavior Context="{Binding}" Handler="{StaticResource EditorDropHandler}"/>
                     </i:Interaction.Behaviors>
                 </views:ContainerControl>
