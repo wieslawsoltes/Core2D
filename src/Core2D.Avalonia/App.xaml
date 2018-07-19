@@ -36,6 +36,7 @@
         <StyleInclude Source="resm:Avalonia.Themes.Default.Accents.BaseLight.xaml?assembly=Avalonia.Themes.Default"/>
         <!-- Dock -->
         <StyleInclude Source="resm:Dock.Avalonia.Controls.DockPanelSplitter.xaml?assembly=Dock.Avalonia"/>
+        <StyleInclude Source="resm:Dock.Avalonia.Controls.ProportionalStackPanelSplitter.xaml?assembly=Dock.Avalonia"/>
         <StyleInclude Source="resm:Dock.Avalonia.Controls.DockTarget.xaml?assembly=Dock.Avalonia"/>
         <StyleInclude Source="resm:Dock.Avalonia.Controls.DockToolChrome.xaml?assembly=Dock.Avalonia"/>
         <StyleInclude Source="resm:Dock.Avalonia.Controls.MetroWindow.xaml?assembly=Dock.Avalonia"/>
@@ -542,6 +543,10 @@
         </Style>
     </Application.Styles>
     <Application.Resources>
+        <!-- Dock -->
+        <SolidColorBrush x:Key="ApplicationAccentBrush">#007ACC</SolidColorBrush>
+        <SolidColorBrush x:Key="ApplicationAccentBrushLight">#1C97EA</SolidColorBrush>
+        <SolidColorBrush x:Key="ApplicationAccentForegroundBrush">#F0F0F0</SolidColorBrush>
         <!-- Fonts -->
         <FontFamily x:Key="UiFont">resm:Core2D.Avalonia.Assets.selaw*.ttf?assembly=Core2D.Avalonia#Selawik Light</FontFamily>
         <!-- Brushes -->

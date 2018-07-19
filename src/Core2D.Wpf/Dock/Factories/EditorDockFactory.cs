@@ -31,24 +31,18 @@ namespace Core2D.Wpf.Dock.Factories
             var editorView = new EditorView
             {
                 Id = nameof(EditorView),
-                Width = double.NaN,
-                Height = double.NaN,
                 Title = "Editor"
             };
 
             var dashboardView = new DashboardView
             {
                 Id = nameof(DashboardView),
-                Width = double.NaN,
-                Height = double.NaN,
                 Title = "Dashboard"
             };
 
             var layout = new RootDock
             {
                 Id = nameof(IRootDock),
-                Width = double.NaN,
-                Height = double.NaN,
                 Title = "Root",
                 CurrentView = dashboardView,
                 DefaultView = dashboardView,

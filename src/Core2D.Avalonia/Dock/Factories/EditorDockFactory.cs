@@ -6,10 +6,8 @@ using System.Collections.ObjectModel;
 using Core2D.Avalonia.Dock.Views;
 using Core2D.Avalonia.Dock.Documents;
 using Core2D.Avalonia.Dock.Tools;
-using Core2D.Editor;
 using Dock.Model;
 using Dock.Model.Controls;
-using Dock.Avalonia.Controls;
 
 namespace Core2D.Avalonia.Dock.Factories
 {
@@ -37,8 +35,6 @@ namespace Core2D.Avalonia.Dock.Factories
             var pageDocument = new PageDocument
             {
                 Id = nameof(PageDocument),
-                Width = double.NaN,
-                Height = double.NaN,
                 Title = "Page"
             };
 
@@ -47,24 +43,18 @@ namespace Core2D.Avalonia.Dock.Factories
             var projectView = new ProjectTool
             {
                 Id = nameof(ProjectTool),
-                Width = double.NaN,
-                Height = double.NaN,
                 Title = "Project"
             };
 
             var optionsView = new OptionsTool
             {
                 Id = nameof(OptionsTool),
-                Width = 200,
-                Height = 200,
                 Title = "Options"
             };
 
             var imagesView = new ImagesTool
             {
                 Id = nameof(ImagesTool),
-                Width = double.NaN,
-                Height = double.NaN,
                 Title = "Images"
             };
 
@@ -73,16 +63,12 @@ namespace Core2D.Avalonia.Dock.Factories
             var groupsView = new GroupsTool
             {
                 Id = nameof(GroupsTool),
-                Width = double.NaN,
-                Height = double.NaN,
                 Title = "Groups"
             };
 
             var databasesView = new DatabasesTool
             {
                 Id = nameof(DatabasesTool),
-                Width = double.NaN,
-                Height = double.NaN,
                 Title = "Databases"
             };
 
@@ -91,32 +77,24 @@ namespace Core2D.Avalonia.Dock.Factories
             var stylesView = new StylesTool
             {
                 Id = nameof(StylesTool),
-                Width = double.NaN,
-                Height = double.NaN,
                 Title = "Styles"
             };
 
             var templatesView = new TemplatesTool
             {
                 Id = nameof(TemplatesTool),
-                Width = double.NaN,
-                Height = double.NaN,
                 Title = "Templates"
             };
 
             var containerView = new ContainerTool
             {
                 Id = nameof(ContainerTool),
-                Width = double.NaN,
-                Height = double.NaN,
                 Title = "Container"
             };
 
             var zoomView = new ZoomTool
             {
                 Id = nameof(ZoomTool),
-                Width = double.NaN,
-                Height = double.NaN,
                 Title = "Zoom"
             };
 
@@ -125,40 +103,30 @@ namespace Core2D.Avalonia.Dock.Factories
             var shapeView = new ShapeTool
             {
                 Id = nameof(ShapeTool),
-                Width = double.NaN,
-                Height = double.NaN,
                 Title = "Shape"
             };
 
             var toolsView = new ToolsTool
             {
                 Id = nameof(ToolsTool),
-                Width = double.NaN,
-                Height = double.NaN,
                 Title = "Tools"
             };
 
             var dataView = new DataTool
             {
                 Id = nameof(DataTool),
-                Width = double.NaN,
-                Height = double.NaN,
                 Title = "Data"
             };
 
             var styleView = new StyleTool
             {
                 Id = nameof(StyleTool),
-                Width = double.NaN,
-                Height = double.NaN,
                 Title = "Style"
             };
 
             var templateView = new TemplateTool
             {
                 Id = nameof(TemplateTool),
-                Width = double.NaN,
-                Height = double.NaN,
                 Title = "Template"
             };
 
@@ -167,20 +135,17 @@ namespace Core2D.Avalonia.Dock.Factories
             var leftPane = new LayoutDock
             {
                 Id = nameof(ILayoutDock),
-                Dock = "Left",
-                Width = 200,
-                Height = double.NaN,
                 Title = "EditorLeft",
+                Orientation = Orientation.Vertical,
+                Proportion = double.NaN,
                 CurrentView = null,
                 Views = new ObservableCollection<IView>
                 {
                     new ToolDock
                     {
                         Id = nameof(IToolDock),
-                        Dock = "Top",
-                        Width = double.NaN,
-                        Height = 340,
                         Title = "EditorLeftTop",
+                        Proportion = double.NaN,
                         CurrentView = projectView,
                         Views = new ObservableCollection<IView>
                         {
@@ -192,16 +157,13 @@ namespace Core2D.Avalonia.Dock.Factories
                     new SplitterDock()
                     {
                         Id = nameof(ISplitterDock),
-                        Dock = "Top",
                         Title = "LeftTopSplitter"
                     },
                     new ToolDock
                     {
                         Id = nameof(IToolDock),
-                        Dock = "Bottom",
-                        Width = double.NaN,
-                        Height = double.NaN,
                         Title = "EditorLeftBottom",
+                        Proportion = double.NaN,
                         CurrentView = groupsView,
                         Views = new ObservableCollection<IView>
                         {
@@ -217,20 +179,17 @@ namespace Core2D.Avalonia.Dock.Factories
             var rightPane = new LayoutDock
             {
                 Id = nameof(ILayoutDock),
-                Dock = "Right",
-                Width = 240,
-                Height = double.NaN,
                 Title = "EditorRight",
+                Orientation = Orientation.Vertical,
+                Proportion = double.NaN,
                 CurrentView = null,
                 Views = new ObservableCollection<IView>
                 {
                     new ToolDock
                     {
                         Id = nameof(IToolDock),
-                        Dock = "Top",
-                        Width = double.NaN,
-                        Height = 340,
                         Title = "EditorRightTop",
+                        Proportion = double.NaN,
                         CurrentView = stylesView,
                         Views = new ObservableCollection<IView>
                         {
@@ -243,16 +202,13 @@ namespace Core2D.Avalonia.Dock.Factories
                     new SplitterDock()
                     {
                         Id = nameof(ISplitterDock),
-                        Dock = "Top",
                         Title = "RightTopSplitter"
                     },
                     new ToolDock
                     {
                         Id = nameof(IToolDock),
-                        Dock = "Bottom",
-                        Width = double.NaN,
-                        Height = double.NaN,
                         Title = "EditorRightBottom",
+                        Proportion = double.NaN,
                         CurrentView = shapeView,
                         Views = new ObservableCollection<IView>
                         {
@@ -271,10 +227,8 @@ namespace Core2D.Avalonia.Dock.Factories
             var documentsPane = new DocumentDock
             {
                 Id = nameof(IDocumentDock),
-                Dock = "",
-                Width = double.NaN,
-                Height = double.NaN,
                 Title = "DocumentsPane",
+                Proportion = double.NaN,
                 CurrentView = pageDocument,
                 Views = new ObservableCollection<IView>
                 {
@@ -287,10 +241,9 @@ namespace Core2D.Avalonia.Dock.Factories
             var editorLayout = new LayoutDock
             {
                 Id = nameof(ILayoutDock),
-                Dock = "",
-                Width = double.NaN,
-                Height = double.NaN,
                 Title = "EditorLayout",
+                Orientation = Orientation.Horizontal,
+                Proportion = double.NaN,
                 CurrentView = null,
                 Views = new ObservableCollection<IView>
                 {
@@ -298,25 +251,21 @@ namespace Core2D.Avalonia.Dock.Factories
                     new SplitterDock()
                     {
                         Id = nameof(ISplitterDock),
-                        Dock = "Left",
                         Title = "LeftSplitter"
                     },
-                    rightPane,
+                    documentsPane,
                     new SplitterDock()
                     {
                         Id = nameof(ISplitterDock),
-                        Dock = "Right",
                         Title = "RightSplitter"
                     },
-                    documentsPane
+                    rightPane
                 }
             };
 
             var editorView = new EditorView
             {
                 Id = nameof(EditorView),
-                Width = double.NaN,
-                Height = double.NaN,
                 Title = "Editor",
                 CurrentView = editorLayout,
                 Views = new ObservableCollection<IView>
@@ -330,8 +279,6 @@ namespace Core2D.Avalonia.Dock.Factories
             var aboutView = new AboutView
             {
                 Id = nameof(AboutView),
-                Width = double.NaN,
-                Height = double.NaN,
                 Title = "About"
             };
 
@@ -340,8 +287,6 @@ namespace Core2D.Avalonia.Dock.Factories
             var browserView = new BrowserView
             {
                 Id = nameof(BrowserView),
-                Width = double.NaN,
-                Height = double.NaN,
                 Title = "Browser"
             };
 
@@ -350,8 +295,6 @@ namespace Core2D.Avalonia.Dock.Factories
             var documentView = new DocumentView
             {
                 Id = nameof(DocumentView),
-                Width = double.NaN,
-                Height = double.NaN,
                 Title = "Document"
             };
 
@@ -360,8 +303,6 @@ namespace Core2D.Avalonia.Dock.Factories
             var dashboardView = new DashboardView
             {
                 Id = nameof(DashboardView),
-                Width = double.NaN,
-                Height = double.NaN,
                 Title = "Dashboard"
             };
 
@@ -370,8 +311,6 @@ namespace Core2D.Avalonia.Dock.Factories
             var layout = new RootDock
             {
                 Id = nameof(IRootDock),
-                Width = double.NaN,
-                Height = double.NaN,
                 Title = "Root",
                 CurrentView = dashboardView,
                 DefaultView = dashboardView,
