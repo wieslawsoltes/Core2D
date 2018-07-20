@@ -1,6 +1,6 @@
 ﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <PackageReference Include="Dock.Model" Version="0.0.1-build491" />
-    <PackageReference Include="Dock.Model.INPC" Version="0.0.1-build491" />
+    <PackageReference Include="Dock.Model" Version="0.0.1-build505" />
+    <PackageReference Include="Dock.Model.INPC" Version="0.0.1-build505" />
   </ItemGroup>
 </Project>
