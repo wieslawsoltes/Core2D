@@ -11,7 +11,7 @@
                  xmlns:Designer="clr-namespace:Core2D.Editor.Designer;assembly=Core2D.Editor"
                  xmlns:views="clr-namespace:Core2D.Avalonia.Views;assembly=Core2D.Avalonia"
                  Width="1000" Height="600"
-                 UseLayoutRounding="True"
+                 UseLayoutRounding="True" RenderOptions.BitmapInterpolationMode="HighQuality"
                  WindowState="Normal" WindowStartupLocation="CenterScreen"
                  FontFamily="Segoe UI, Arial" BorderThickness="1" BorderBrush="{DynamicResource ThemeBorderLightBrush}"
                  Design.DataContext="{x:Static Designer:DesignerContext.Editor}"

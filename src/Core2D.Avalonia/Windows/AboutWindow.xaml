@@ -9,7 +9,7 @@
                  xmlns:idc="clr-namespace:Dock.Avalonia.Controls;assembly=Dock.Avalonia"
                  xmlns:views="clr-namespace:Core2D.Avalonia.Views;assembly=Core2D.Avalonia"
                  Width="700" Height="340"
-                 UseLayoutRounding="True"
+                 UseLayoutRounding="True" RenderOptions.BitmapInterpolationMode="HighQuality"
                  WindowState="Normal" WindowStartupLocation="CenterScreen"
                  FontFamily="Segoe UI, Arial" BorderThickness="1" BorderBrush="{DynamicResource ThemeBorderLightBrush}"
                  Title="About Core2D">
