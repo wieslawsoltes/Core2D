@@ -65,7 +65,7 @@ namespace Core2D.Wpf
 
                 var dockFactory = serviceProvider.GetService<IDockFactory>();
                 editor.Layout = editor.Layout ?? dockFactory.CreateLayout();
-                dockFactory.InitLayout(editor.Layout, editor);
+                dockFactory.InitLayout(editor.Layout);
 
                 var path = System.IO.Path.Combine(fileIO.GetBaseDirectory(), "Core2D.recent");
                 if (fileIO.Exists(path))

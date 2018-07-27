@@ -57,20 +57,20 @@ namespace Core2D.Wpf.Dock.Factories
         }
 
         /// <inheritdoc/>
-        public override void InitLayout(IView layout, object context)
+        public override void InitLayout(IView layout)
         {
             ContextLocator = new Dictionary<string, Func<object>>
             {
-                [nameof(IRootDock)] = () => context,
-                [nameof(ILayoutDock)] = () => context,
-                [nameof(IDocumentDock)] = () => context,
-                [nameof(IToolDock)] = () => context,
-                [nameof(ISplitterDock)] = () => context,
-                [nameof(IDockWindow)] = () => context,
-                [nameof(IDocumentTab)] = () => context,
-                [nameof(IToolTab)] = () => context,
-                [nameof(EditorView)] = () => context,
-                [nameof(DashboardView)] = () => context
+                [nameof(IRootDock)] = () => _serviceProvider.GetService<ProjectEditor>(),
+                [nameof(ILayoutDock)] = () => _serviceProvider.GetService<ProjectEditor>(),
+                [nameof(IDocumentDock)] = () => _serviceProvider.GetService<ProjectEditor>(),
+                [nameof(IToolDock)] = () => _serviceProvider.GetService<ProjectEditor>(),
+                [nameof(ISplitterDock)] = () => _serviceProvider.GetService<ProjectEditor>(),
+                [nameof(IDockWindow)] = () => _serviceProvider.GetService<ProjectEditor>(),
+                [nameof(IDocumentTab)] = () => _serviceProvider.GetService<ProjectEditor>(),
+                [nameof(IToolTab)] = () => _serviceProvider.GetService<ProjectEditor>(),
+                [nameof(EditorView)] = () => _serviceProvider.GetService<ProjectEditor>(),
+                [nameof(DashboardView)] = () => _serviceProvider.GetService<ProjectEditor>()
             };
 
             HostLocator = new Dictionary<string, Func<IDockHost>>
@@ -78,7 +78,7 @@ namespace Core2D.Wpf.Dock.Factories
                 [nameof(IDockWindow)] = () => _serviceProvider.GetService<IDockHost>()
             };
 
-            base.InitLayout(layout, context);
+            base.InitLayout(layout);
         }
     }
 }

@@ -328,42 +328,42 @@ namespace Core2D.Avalonia.Dock.Factories
         }
 
         /// <inheritdoc/>
-        public override void InitLayout(IView layout, object context)
+        public override void InitLayout(IView layout)
         {
             ContextLocator = new Dictionary<string, Func<object>>
             {
                 // Defaults
-                [nameof(IRootDock)] = () => context,
-                [nameof(ILayoutDock)] = () => context,
-                [nameof(IDocumentDock)] = () => context,
-                [nameof(IToolDock)] = () => context,
-                [nameof(ISplitterDock)] = () => context,
-                [nameof(IDockWindow)] = () => context,
-                [nameof(IDocumentTab)] = () => context,
-                [nameof(IToolTab)] = () => context,
+                [nameof(IRootDock)] = () => _serviceProvider.GetService<ProjectEditor>(),
+                [nameof(ILayoutDock)] = () => _serviceProvider.GetService<ProjectEditor>(),
+                [nameof(IDocumentDock)] = () => _serviceProvider.GetService<ProjectEditor>(),
+                [nameof(IToolDock)] = () => _serviceProvider.GetService<ProjectEditor>(),
+                [nameof(ISplitterDock)] = () => _serviceProvider.GetService<ProjectEditor>(),
+                [nameof(IDockWindow)] = () => _serviceProvider.GetService<ProjectEditor>(),
+                [nameof(IDocumentTab)] = () => _serviceProvider.GetService<ProjectEditor>(),
+                [nameof(IToolTab)] = () => _serviceProvider.GetService<ProjectEditor>(),
                 // Documents
-                [nameof(PageDocument)] = () => context,
+                [nameof(PageDocument)] = () => _serviceProvider.GetService<ProjectEditor>(),
                 // Tools
-                [nameof(ProjectTool)] = () => context,
-                [nameof(OptionsTool)] = () => context,
-                [nameof(ImagesTool)] = () => context,
-                [nameof(GroupsTool)] = () => context,
-                [nameof(DatabasesTool)] = () => context,
-                [nameof(StylesTool)] = () => context,
-                [nameof(TemplatesTool)] = () => context,
-                [nameof(ContainerTool)] = () => context,
-                [nameof(ZoomTool)] = () => context,
-                [nameof(ToolsTool)] = () => context,
-                [nameof(ShapeTool)] = () => context,
-                [nameof(DataTool)] = () => context,
-                [nameof(StyleTool)] = () => context,
-                [nameof(TemplateTool)] = () => context,
+                [nameof(ProjectTool)] = () => _serviceProvider.GetService<ProjectEditor>(),
+                [nameof(OptionsTool)] = () => _serviceProvider.GetService<ProjectEditor>(),
+                [nameof(ImagesTool)] = () => _serviceProvider.GetService<ProjectEditor>(),
+                [nameof(GroupsTool)] = () => _serviceProvider.GetService<ProjectEditor>(),
+                [nameof(DatabasesTool)] = () => _serviceProvider.GetService<ProjectEditor>(),
+                [nameof(StylesTool)] = () => _serviceProvider.GetService<ProjectEditor>(),
+                [nameof(TemplatesTool)] = () => _serviceProvider.GetService<ProjectEditor>(),
+                [nameof(ContainerTool)] = () => _serviceProvider.GetService<ProjectEditor>(),
+                [nameof(ZoomTool)] = () => _serviceProvider.GetService<ProjectEditor>(),
+                [nameof(ToolsTool)] = () => _serviceProvider.GetService<ProjectEditor>(),
+                [nameof(ShapeTool)] = () => _serviceProvider.GetService<ProjectEditor>(),
+                [nameof(DataTool)] = () => _serviceProvider.GetService<ProjectEditor>(),
+                [nameof(StyleTool)] = () => _serviceProvider.GetService<ProjectEditor>(),
+                [nameof(TemplateTool)] = () => _serviceProvider.GetService<ProjectEditor>(),
                 // Views
-                [nameof(EditorView)] = () => context,
-                [nameof(AboutView)] = () => context,
-                [nameof(BrowserView)] = () => context,
-                [nameof(DocumentView)] = () => context,
-                [nameof(DashboardView)] = () => context
+                [nameof(EditorView)] = () => _serviceProvider.GetService<ProjectEditor>(),
+                [nameof(AboutView)] = () => _serviceProvider.GetService<ProjectEditor>(),
+                [nameof(BrowserView)] = () => _serviceProvider.GetService<ProjectEditor>(),
+                [nameof(DocumentView)] = () => _serviceProvider.GetService<ProjectEditor>(),
+                [nameof(DashboardView)] = () => _serviceProvider.GetService<ProjectEditor>()
             };
 
             HostLocator = new Dictionary<string, Func<IDockHost>>
@@ -371,7 +371,7 @@ namespace Core2D.Avalonia.Dock.Factories
                 [nameof(IDockWindow)] = () => _serviceProvider.GetService<IDockHost>()
             };
 
-            base.InitLayout(layout, context);
+            base.InitLayout(layout);
         }
     }
 }

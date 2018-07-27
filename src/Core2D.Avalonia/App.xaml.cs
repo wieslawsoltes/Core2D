@@ -122,7 +122,7 @@ namespace Core2D.Avalonia
 
                 var dockFactory = serviceProvider.GetService<IDockFactory>();
                 editor.Layout = editor.Layout ?? dockFactory.CreateLayout();
-                dockFactory.InitLayout(editor.Layout, editor);
+                dockFactory.InitLayout(editor.Layout);
 
                 var recentPath = System.IO.Path.Combine(fileIO.GetBaseDirectory(), "Core2D.recent");
                 if (fileIO.Exists(recentPath))
@@ -174,7 +174,7 @@ namespace Core2D.Avalonia
 
             var dockFactory = serviceProvider.GetService<IDockFactory>();
             editor.Layout = editor.Layout ?? dockFactory.CreateLayout();
-            dockFactory.InitLayout(editor.Layout, editor);
+            dockFactory.InitLayout(editor.Layout);
 
             editor.CurrentTool = editor.Tools.FirstOrDefault(t => t.Title == "Selection");
             editor.CurrentPathTool = editor.PathTools.FirstOrDefault(t => t.Title == "Line");
