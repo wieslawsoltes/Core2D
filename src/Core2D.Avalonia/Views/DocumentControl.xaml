@@ -40,7 +40,7 @@
                 </TabStrip.Styles>
                 <TabStrip.DataTemplates>
                     <DataTemplate DataType="Containers:DocumentContainer">
-                        <StackPanel Orientation="Horizontal" Gap="2">
+                        <StackPanel Orientation="Horizontal" Spacing="2">
                             <TextBlock Text="{Binding Name}" Margin="2"/>
                         </StackPanel>
                     </DataTemplate>
