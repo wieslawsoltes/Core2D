@@ -6,6 +6,7 @@ using System.Collections.ObjectModel;
 using Core2D.Avalonia.Dock.Views;
 using Core2D.Avalonia.Dock.Documents;
 using Core2D.Avalonia.Dock.Tools;
+using Core2D.Editor;
 using Dock.Model;
 using Dock.Model.Controls;
 

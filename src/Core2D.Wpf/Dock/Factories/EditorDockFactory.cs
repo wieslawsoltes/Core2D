@@ -3,6 +3,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using Core2D.Editor;
 using Core2D.Wpf.Dock.Views;
 using Dock.Model;
 using Dock.Model.Controls;
