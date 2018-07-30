@@ -138,7 +138,7 @@ namespace Core2D.Avalonia.Dock.Factories
                 Id = nameof(ILayoutDock),
                 Title = "EditorLeft",
                 Orientation = Orientation.Vertical,
-                Proportion = double.NaN,
+                Proportion = 0.17,
                 CurrentView = null,
                 Views = new ObservableCollection<IView>
                 {
@@ -182,7 +182,7 @@ namespace Core2D.Avalonia.Dock.Factories
                 Id = nameof(ILayoutDock),
                 Title = "EditorRight",
                 Orientation = Orientation.Vertical,
-                Proportion = double.NaN,
+                Proportion = 0.17,
                 CurrentView = null,
                 Views = new ObservableCollection<IView>
                 {
