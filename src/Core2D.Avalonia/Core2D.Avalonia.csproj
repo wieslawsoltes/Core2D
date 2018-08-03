@@ -7,6 +7,7 @@
     <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
     <EnableDefaultCompileItems>False</EnableDefaultCompileItems>
     <CoreRT>False</CoreRT>
+    <TieredCompilation>True</TieredCompilation>
   </PropertyGroup>
 
   <ItemGroup Condition="'$(CoreRT)' == 'True'">
