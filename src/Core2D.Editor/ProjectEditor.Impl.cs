@@ -749,17 +749,15 @@ namespace Core2D.Editor
         /// <param name="item">The item to cut.</param>
         public void OnCut(object item)
         {
-            if (item is PageContainer)
+            if (item is IPageContainer page)
             {
-                var page = item as PageContainer;
                 _pageToCopy = page;
                 _documentToCopy = default;
                 Project?.RemovePage(page);
                 Project?.SetCurrentContainer(Project?.CurrentDocument?.Pages.FirstOrDefault());
             }
-            else if (item is DocumentContainer)
+            else if (item is IDocumentContainer document)
             {
-                var document = item as DocumentContainer;
                 _pageToCopy = default;
                 _documentToCopy = document;
                 Project?.RemoveDocument(document);
@@ -784,15 +782,13 @@ namespace Core2D.Editor
         /// <param name="item">The item to copy.</param>
         public void OnCopy(object item)
         {
-            if (item is PageContainer)
+            if (item is IPageContainer page)
             {
-                var page = item as PageContainer;
                 _pageToCopy = page;
                 _documentToCopy = default;
             }
-            else if (item is DocumentContainer)
+            else if (item is IDocumentContainer document)
             {
-                var document = item as DocumentContainer;
                 _pageToCopy = default;
                 _documentToCopy = document;
             }
@@ -819,11 +815,10 @@ namespace Core2D.Editor
         /// <param name="item">The item to paste.</param>
         public async void OnPaste(object item)
         {
-            if (Project != null && item is PageContainer)
+            if (Project != null && item is IPageContainer page)
             {
                 if (_pageToCopy != null)
                 {
-                    var page = item as PageContainer;
                     var document = Project?.Documents.FirstOrDefault(d => d.Pages.Contains(page));
                     if (document != null)
                     {
@@ -834,18 +829,16 @@ namespace Core2D.Editor
                     }
                 }
             }
-            else if (Project != null && item is DocumentContainer)
+            else if (Project != null && item is IDocumentContainer document)
             {
                 if (_pageToCopy != null)
                 {
-                    var document = item as DocumentContainer;
                     var clone = Clone(_pageToCopy);
                     Project?.AddPage(document, clone);
                     Project.SetCurrentContainer(clone);
                 }
                 else if (_documentToCopy != null)
                 {
-                    var document = item as DocumentContainer;
                     int index = Project.Documents.IndexOf(document);
                     var clone = Clone(_documentToCopy);
                     Project.ReplaceDocument(clone, index);
@@ -879,24 +872,23 @@ namespace Core2D.Editor
         /// <param name="item">The item to delete.</param>
         public void OnDelete(object item)
         {
-            if (item is LayerContainer)
+            if (item is ILayerContainer layer)
             {
-                var layer = item as LayerContainer;
-                Project?.RemoveLayer(item as LayerContainer);
+                Project?.RemoveLayer(layer);
 
                 var selected = Project?.CurrentContainer?.Layers.FirstOrDefault();
-                layer?.Owner?.SetCurrentLayer(selected);
+                layer.Owner?.SetCurrentLayer(selected);
             }
-            if (item is PageContainer)
+            if (item is IPageContainer page)
             {
-                Project?.RemovePage(item as PageContainer);
+                Project?.RemovePage(page);
 
                 var selected = Project?.CurrentDocument?.Pages.FirstOrDefault();
                 Project?.SetCurrentContainer(selected);
             }
-            else if (item is DocumentContainer)
+            else if (item is IDocumentContainer document)
             {
-                Project?.RemoveDocument(item as DocumentContainer);
+                Project?.RemoveDocument(document);
 
                 var selected = Project?.Documents.FirstOrDefault();
                 Project?.SetCurrentDocument(selected);
@@ -918,7 +910,7 @@ namespace Core2D.Editor
                 Deselect(Project?.CurrentContainer?.CurrentLayer);
                 Select(
                     Project?.CurrentContainer?.CurrentLayer,
-                    ImmutableHashSet.CreateRange<BaseShape>(Project?.CurrentContainer?.CurrentLayer?.Shapes));
+                    ImmutableHashSet.CreateRange<IShape>(Project?.CurrentContainer?.CurrentLayer?.Shapes));
             }
             catch (Exception ex)
             {
@@ -956,8 +948,8 @@ namespace Core2D.Editor
                         Project?.ClearLayer(layer);
                     }
 
-                    container.WorkingLayer.Shapes = ImmutableArray.Create<BaseShape>();
-                    container.HelperLayer.Shapes = ImmutableArray.Create<BaseShape>();
+                    container.WorkingLayer.Shapes = ImmutableArray.Create<IShape>();
+                    container.HelperLayer.Shapes = ImmutableArray.Create<IShape>();
 
                     Project.CurrentContainer.Invalidate();
                 }
