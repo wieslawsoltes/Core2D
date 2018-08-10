@@ -117,7 +117,7 @@ namespace Core2D.Shapes
         }
 
         /// <inheritdoc/>
-        public override IEnumerable<PointShape> GetPoints()
+        public override IEnumerable<IPointShape> GetPoints()
         {
             return Geometry.Figures.SelectMany(f => f.GetPoints());
         }

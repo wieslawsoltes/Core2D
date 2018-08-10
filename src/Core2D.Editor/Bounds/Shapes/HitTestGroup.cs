@@ -3,22 +3,21 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Core2D.Shape;
-using Core2D.Shapes;
+using Core2D.Shapes.Interfaces;
 using Spatial;
 
 namespace Core2D.Editor.Bounds.Shapes
 {
     public class HitTestGroup : HitTestBase
     {
-        public override Type TargetType => typeof(GroupShape);
+        public override Type TargetType => typeof(IGroupShape);
 
-        public override PointShape TryToGetPoint(BaseShape shape, Point2 target, double radius, IDictionary<Type, HitTestBase> registered)
+        public override IPointShape TryToGetPoint(IShape shape, Point2 target, double radius, IDictionary<Type, HitTestBase> registered)
         {
-            if (!(shape is GroupShape group))
+            if (!(shape is IGroupShape group))
                 throw new ArgumentNullException(nameof(shape));
 
-            var pointHitTest = registered[typeof(PointShape)];
+            var pointHitTest = registered[typeof(IPointShape)];
 
             foreach (var groupPoint in group.Connectors.Reverse())
             {
@@ -31,9 +30,9 @@ namespace Core2D.Editor.Bounds.Shapes
             return null;
         }
 
-        public override bool Contains(BaseShape shape, Point2 target, double radius, IDictionary<Type, HitTestBase> registered)
+        public override bool Contains(IShape shape, Point2 target, double radius, IDictionary<Type, HitTestBase> registered)
         {
-            if (!(shape is GroupShape group))
+            if (!(shape is IGroupShape group))
                 throw new ArgumentNullException(nameof(shape));
 
             foreach (var GroupShape in group.Shapes.Reverse())
@@ -48,9 +47,9 @@ namespace Core2D.Editor.Bounds.Shapes
             return false;
         }
 
-        public override bool Overlaps(BaseShape shape, Rect2 target, double radius, IDictionary<Type, HitTestBase> registered)
+        public override bool Overlaps(IShape shape, Rect2 target, double radius, IDictionary<Type, HitTestBase> registered)
         {
-            if (!(shape is GroupShape group))
+            if (!(shape is IGroupShape group))
                 throw new ArgumentNullException(nameof(shape));
 
             foreach (var GroupShape in group.Shapes.Reverse())

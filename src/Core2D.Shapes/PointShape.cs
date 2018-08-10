@@ -17,7 +17,7 @@ namespace Core2D.Shapes
         private double _x;
         private double _y;
         private PointAlignment _alignment;
-        private BaseShape _shape;
+        private IShape _shape;
 
         /// <summary>
         /// Gets or sets X coordinate of point.
@@ -49,7 +49,7 @@ namespace Core2D.Shapes
         /// <summary>
         /// Gets or sets point template shape.
         /// </summary>
-        public BaseShape Shape
+        public IShape Shape
         {
             get => _shape;
             set => Update(ref _shape, value);
@@ -81,7 +81,7 @@ namespace Core2D.Shapes
         }
 
         /// <inheritdoc/>
-        public override IEnumerable<PointShape> GetPoints()
+        public override IEnumerable<IPointShape> GetPoints()
         {
             yield return this;
         }

@@ -5,8 +5,9 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using Core2D.Attributes;
+using Core2D.Containers.Interfaces;
 using Core2D.Data;
-using Core2D.Shape;
+using Core2D.Shapes.Interfaces;
 using Core2D.Style;
 
 namespace Core2D.Containers
@@ -14,17 +15,17 @@ namespace Core2D.Containers
     /// <summary>
     /// Page container.
     /// </summary>
-    public class PageContainer : SelectableObject, ICopyable
+    public class PageContainer : SelectableObject, IPageContainer
     {
         private double _width;
         private double _height;
         private ArgbColor _background;
-        private ImmutableArray<LayerContainer> _layers;
-        private LayerContainer _currentLayer;
-        private LayerContainer _workingLayer;
-        private LayerContainer _helperLayer;
-        private BaseShape _currentShape;
-        private PageContainer _template;
+        private ImmutableArray<ILayerContainer> _layers;
+        private ILayerContainer _currentLayer;
+        private ILayerContainer _workingLayer;
+        private ILayerContainer _helperLayer;
+        private IShape _currentShape;
+        private IPageContainer _template;
         private Context _data;
         private bool _isExpanded = false;
 
@@ -101,7 +102,7 @@ namespace Core2D.Containers
         /// Gets or sets container layers.
         /// </summary>
         [Content]
-        public ImmutableArray<LayerContainer> Layers
+        public ImmutableArray<ILayerContainer> Layers
         {
             get => _layers;
             set => Update(ref _layers, value);
@@ -110,7 +111,7 @@ namespace Core2D.Containers
         /// <summary>
         /// Gets or sets current container layer.
         /// </summary>
-        public LayerContainer CurrentLayer
+        public ILayerContainer CurrentLayer
         {
             get => _currentLayer;
             set => Update(ref _currentLayer, value);
@@ -119,7 +120,7 @@ namespace Core2D.Containers
         /// <summary>
         /// Gets or sets working container layer.
         /// </summary>
-        public LayerContainer WorkingLayer
+        public ILayerContainer WorkingLayer
         {
             get => _workingLayer;
             set => Update(ref _workingLayer, value);
@@ -128,7 +129,7 @@ namespace Core2D.Containers
         /// <summary>
         /// Gets or sets helper container layer.
         /// </summary>
-        public LayerContainer HelperLayer
+        public ILayerContainer HelperLayer
         {
             get => _helperLayer;
             set => Update(ref _helperLayer, value);
@@ -137,7 +138,7 @@ namespace Core2D.Containers
         /// <summary>
         /// Gets or sets current container shape.
         /// </summary>
-        public BaseShape CurrentShape
+        public IShape CurrentShape
         {
             get => _currentShape;
             set => Update(ref _currentShape, value);
@@ -146,7 +147,7 @@ namespace Core2D.Containers
         /// <summary>
         /// Gets or sets container template.
         /// </summary>
-        public PageContainer Template
+        public IPageContainer Template
         {
             get => _template;
             set => Update(ref _template, value);
@@ -211,7 +212,7 @@ namespace Core2D.Containers
         public PageContainer()
             : base()
         {
-            _layers = ImmutableArray.Create<LayerContainer>();
+            _layers = ImmutableArray.Create<ILayerContainer>();
             _data = new Context();
         }
 
@@ -219,7 +220,7 @@ namespace Core2D.Containers
         /// Set current layer.
         /// </summary>
         /// <param name="layer">The layer instance.</param>
-        public void SetCurrentLayer(LayerContainer layer) => CurrentLayer = layer;
+        public void SetCurrentLayer(ILayerContainer layer) => CurrentLayer = layer;
 
         /// <summary>
         /// Invalidate container layers.

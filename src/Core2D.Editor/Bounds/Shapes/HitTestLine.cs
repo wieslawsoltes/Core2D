@@ -2,22 +2,21 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
 using System.Collections.Generic;
-using Core2D.Shape;
-using Core2D.Shapes;
+using Core2D.Shapes.Interfaces;
 using Spatial;
 
 namespace Core2D.Editor.Bounds.Shapes
 {
     public class HitTestLine : HitTestBase
     {
-        public override Type TargetType => typeof(LineShape);
+        public override Type TargetType => typeof(ILineShape);
 
-        public override PointShape TryToGetPoint(BaseShape shape, Point2 target, double radius, IDictionary<Type, HitTestBase> registered)
+        public override IPointShape TryToGetPoint(IShape shape, Point2 target, double radius, IDictionary<Type, HitTestBase> registered)
         {
-            if (!(shape is LineShape line))
+            if (!(shape is ILineShape line))
                 throw new ArgumentNullException(nameof(shape));
 
-            var pointHitTest = registered[typeof(PointShape)];
+            var pointHitTest = registered[typeof(IPointShape)];
 
             if (pointHitTest.TryToGetPoint(line.Start, target, radius, registered) != null)
             {
@@ -32,9 +31,9 @@ namespace Core2D.Editor.Bounds.Shapes
             return null;
         }
 
-        public override bool Contains(BaseShape shape, Point2 target, double radius, IDictionary<Type, HitTestBase> registered)
+        public override bool Contains(IShape shape, Point2 target, double radius, IDictionary<Type, HitTestBase> registered)
         {
-            if (!(shape is LineShape line))
+            if (!(shape is ILineShape line))
                 throw new ArgumentNullException(nameof(shape));
 
             var a = new Point2(line.Start.X, line.Start.Y);
@@ -44,9 +43,9 @@ namespace Core2D.Editor.Bounds.Shapes
             return distance < radius;
         }
 
-        public override bool Overlaps(BaseShape shape, Rect2 target, double radius, IDictionary<Type, HitTestBase> registered)
+        public override bool Overlaps(IShape shape, Rect2 target, double radius, IDictionary<Type, HitTestBase> registered)
         {
-            if (!(shape is LineShape line))
+            if (!(shape is ILineShape line))
                 throw new ArgumentNullException(nameof(shape));
 
             var a = new Point2(line.Start.X, line.Start.Y);

@@ -6,7 +6,6 @@ using Core2D.Editor.Tools.Selection;
 using Core2D.Editor.Tools.Settings;
 using Spatial.Arc;
 using Core2D.Shape;
-using Core2D.Shapes;
 using Spatial;
 
 namespace Core2D.Editor.Tools

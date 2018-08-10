@@ -3,7 +3,6 @@
 using System;
 using Core2D.Editor.Input;
 using Core2D.Editor.Tools.Settings;
-using Core2D.Shapes;
 
 namespace Core2D.Editor.Tools
 {

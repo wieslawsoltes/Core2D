@@ -1,6 +1,6 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
-using Core2D.Containers;
+using Core2D.Containers.Interfaces;
 using Core2D.Shapes.Interfaces;
 using Core2D.Style;
 
@@ -61,15 +61,15 @@ namespace Core2D.Renderer
         public abstract void PopMatrix(object dc, object state);
 
         /// <summary>
-        /// Draws a <see cref="PageContainer"/> using drawing context.
+        /// Draws a <see cref="IPageContainer"/> using drawing context.
         /// </summary>
         /// <param name="dc">The native drawing context.</param>
-        /// <param name="container">The <see cref="PageContainer"/> object.</param>
+        /// <param name="container">The <see cref="IPageContainer"/> object.</param>
         /// <param name="dx">The X coordinate offset.</param>
         /// <param name="dy">The Y coordinate offset.</param>
         /// <param name="db">The properties database.</param>
         /// <param name="r">The data record.</param>
-        public virtual void Draw(object dc, PageContainer container, double dx, double dy, object db, object r)
+        public virtual void Draw(object dc, IPageContainer container, double dx, double dy, object db, object r)
         {
             foreach (var layer in container.Layers)
             {
@@ -81,15 +81,15 @@ namespace Core2D.Renderer
         }
 
         /// <summary>
-        /// Draws a <see cref="LayerContainer"/> using drawing context.
+        /// Draws a <see cref="ILayerContainer"/> using drawing context.
         /// </summary>
         /// <param name="dc">The native drawing context.</param>
-        /// <param name="layer">The <see cref="LayerContainer"/> object.</param>
+        /// <param name="layer">The <see cref="ILayerContainer"/> object.</param>
         /// <param name="dx">The X coordinate offset.</param>
         /// <param name="dy">The Y coordinate offset.</param>
         /// <param name="db">The properties database.</param>
         /// <param name="r">The data record.</param>
-        public virtual void Draw(object dc, LayerContainer layer, double dx, double dy, object db, object r)
+        public virtual void Draw(object dc, ILayerContainer layer, double dx, double dy, object db, object r)
         {
             foreach (var shape in layer.Shapes)
             {

@@ -14,13 +14,13 @@ namespace Core2D.Shapes
     /// </summary>
     public class LineShape : BaseShape, ILineShape
     {
-        private PointShape _start;
-        private PointShape _end;
+        private IPointShape _start;
+        private IPointShape _end;
 
         /// <summary>
         /// Gets or sets start point.
         /// </summary>
-        public PointShape Start
+        public IPointShape Start
         {
             get => _start;
             set => Update(ref _start, value);
@@ -29,7 +29,7 @@ namespace Core2D.Shapes
         /// <summary>
         /// Gets or sets end point.
         /// </summary>
-        public PointShape End
+        public IPointShape End
         {
             get => _end;
             set => Update(ref _end, value);
@@ -107,7 +107,7 @@ namespace Core2D.Shapes
         }
 
         /// <inheritdoc/>
-        public override IEnumerable<PointShape> GetPoints()
+        public override IEnumerable<IPointShape> GetPoints()
         {
             yield return Start;
             yield return End;

@@ -2,7 +2,7 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System.Collections.Generic;
 using System.Linq;
-using Core2D.Shapes;
+using Core2D.Shapes.Interfaces;
 using Spatial;
 using Spatial.ConvexHull;
 using Spatial.Sat;
@@ -25,7 +25,7 @@ namespace Core2D.Editor.Bounds
             };
         }
 
-        public static void ToConvexHull(IEnumerable<PointShape> points, out int k, out Vector2[] convexHull)
+        public static void ToConvexHull(IEnumerable<IPointShape> points, out int k, out Vector2[] convexHull)
         {
             Vector2[] vertices = new Vector2[points.Count()];
             int i = 0;
@@ -37,7 +37,7 @@ namespace Core2D.Editor.Bounds
             MC.ConvexHull(vertices, out convexHull, out k);
         }
 
-        public static bool Contains(IEnumerable<PointShape> points, Point2 point)
+        public static bool Contains(IEnumerable<IPointShape> points, Point2 point)
         {
             ToConvexHull(points, out int k, out var convexHull);
             bool contains = false;
@@ -52,14 +52,14 @@ namespace Core2D.Editor.Bounds
             return contains;
         }
 
-        public static bool Overlap(IEnumerable<PointShape> points, Vector2[] selection)
+        public static bool Overlap(IEnumerable<IPointShape> points, Vector2[] selection)
         {
             ToConvexHull(points, out int k, out var convexHull);
             var vertices = convexHull.Take(k).ToArray();
             return SAT.Overlap(selection, vertices);
         }
 
-        public static bool Overlap(IEnumerable<PointShape> points, Rect2 rect)
+        public static bool Overlap(IEnumerable<IPointShape> points, Rect2 rect)
         {
             return Overlap(points, ToSelection(rect));
         }

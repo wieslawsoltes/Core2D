@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using Core2D.Attributes;
+using Core2D.Containers.Interfaces;
 using Core2D.Data;
 using Core2D.History;
 using Core2D.Shape;
@@ -16,27 +17,27 @@ namespace Core2D.Containers
     /// <summary>
     /// Project container.
     /// </summary>
-    public partial class ProjectContainer : SelectableObject, ICopyable
+    public partial class ProjectContainer : SelectableObject, IProjectContainer
     {
-        private Options _options;
+        private IOptions _options;
         private IHistory _history;
         private ImmutableArray<Library<ShapeStyle>> _styleLibraries;
         private ImmutableArray<Library<IGroupShape>> _groupLibraries;
         private ImmutableArray<Database> _databases;
-        private ImmutableArray<PageContainer> _templates;
-        private ImmutableArray<DocumentContainer> _documents;
+        private ImmutableArray<IPageContainer> _templates;
+        private ImmutableArray<IDocumentContainer> _documents;
         private Library<ShapeStyle> _currentStyleLibrary;
         private Library<IGroupShape> _currentGroupLibrary;
         private Database _currentDatabase;
-        private PageContainer _currentTemplate;
-        private DocumentContainer _currentDocument;
-        private PageContainer _currentContainer;
+        private IPageContainer _currentTemplate;
+        private IDocumentContainer _currentDocument;
+        private IPageContainer _currentContainer;
         private SelectableObject _selected;
 
         /// <summary>
         /// Gets or sets project options.
         /// </summary>
-        public Options Options
+        public IOptions Options
         {
             get => _options;
             set => Update(ref _options, value);
@@ -81,7 +82,7 @@ namespace Core2D.Containers
         /// <summary>
         /// Gets or sets project templates.
         /// </summary>
-        public ImmutableArray<PageContainer> Templates
+        public ImmutableArray<IPageContainer> Templates
         {
             get => _templates;
             set => Update(ref _templates, value);
@@ -91,7 +92,7 @@ namespace Core2D.Containers
         /// Gets or sets project documents.
         /// </summary>
         [Content]
-        public ImmutableArray<DocumentContainer> Documents
+        public ImmutableArray<IDocumentContainer> Documents
         {
             get => _documents;
             set => Update(ref _documents, value);
@@ -127,7 +128,7 @@ namespace Core2D.Containers
         /// <summary>
         /// Gets or sets project current template.
         /// </summary>
-        public PageContainer CurrentTemplate
+        public IPageContainer CurrentTemplate
         {
             get => _currentTemplate;
             set => Update(ref _currentTemplate, value);
@@ -136,7 +137,7 @@ namespace Core2D.Containers
         /// <summary>
         /// Gets or sets project current document.
         /// </summary>
-        public DocumentContainer CurrentDocument
+        public IDocumentContainer CurrentDocument
         {
             get => _currentDocument;
             set => Update(ref _currentDocument, value);
@@ -145,7 +146,7 @@ namespace Core2D.Containers
         /// <summary>
         /// Gets or sets project current container.
         /// </summary>
-        public PageContainer CurrentContainer
+        public IPageContainer CurrentContainer
         {
             get => _currentContainer;
             set => Update(ref _currentContainer, value);
@@ -170,12 +171,12 @@ namespace Core2D.Containers
         public ProjectContainer()
             : base()
         {
-            _options = Options.Create();
+            _options = Containers.Options.Create();
             _styleLibraries = ImmutableArray.Create<Library<ShapeStyle>>();
             _groupLibraries = ImmutableArray.Create<Library<IGroupShape>>();
             _databases = ImmutableArray.Create<Database>();
-            _templates = ImmutableArray.Create<PageContainer>();
-            _documents = ImmutableArray.Create<DocumentContainer>();
+            _templates = ImmutableArray.Create<IPageContainer>();
+            _documents = ImmutableArray.Create<IDocumentContainer>();
         }
 
         /// <summary>
@@ -228,7 +229,7 @@ namespace Core2D.Containers
         /// <param name="value">The value instance.</param>
         public void SetSelected(SelectableObject value)
         {
-            if (value is LayerContainer layer)
+            if (value is ILayerContainer layer)
             {
                 var owner = layer?.Owner;
                 if (owner != null)
@@ -239,7 +240,7 @@ namespace Core2D.Containers
                     }
                 }
             }
-            else if (value is PageContainer container && _documents != null)
+            else if (value is IPageContainer container && _documents != null)
             {
                 var document = _documents.FirstOrDefault(d => d.Pages.Contains(container));
                 if (document != null)
@@ -256,7 +257,7 @@ namespace Core2D.Containers
                     }
                 }
             }
-            else if (value is DocumentContainer document)
+            else if (value is IDocumentContainer document)
             {
                 if (CurrentDocument != document)
                 {

@@ -1,8 +1,8 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
-using Core2D.Containers;
+using Core2D.Containers.Interfaces;
 using Core2D.Shape;
-using Core2D.Shapes;
+using Core2D.Shapes.Interfaces;
 using Core2D.Style;
 
 namespace Core2D.Editor.Tools.Selection
@@ -12,12 +12,12 @@ namespace Core2D.Editor.Tools.Selection
     /// </summary>
     public class ToolImageSelection
     {
-        private readonly LayerContainer _layer;
-        private readonly ImageShape _image;
+        private readonly ILayerContainer _layer;
+        private readonly IImageShape _image;
         private readonly ShapeStyle _style;
         private readonly BaseShape _point;
-        private PointShape _topLeftHelperPoint;
-        private PointShape _bottomRightHelperPoint;
+        private IPointShape _topLeftHelperPoint;
+        private IPointShape _bottomRightHelperPoint;
 
         /// <summary>
         /// Initialize new instance of <see cref="ToolImageSelection"/> class.
@@ -26,7 +26,7 @@ namespace Core2D.Editor.Tools.Selection
         /// <param name="shape">The selected shape.</param>
         /// <param name="style">The selection shapes style.</param>
         /// <param name="point">The selection point shape.</param>
-        public ToolImageSelection(LayerContainer layer, ImageShape shape, ShapeStyle style, BaseShape point)
+        public ToolImageSelection(ILayerContainer layer, IImageShape shape, ShapeStyle style, BaseShape point)
         {
             _layer = layer;
             _image = shape;

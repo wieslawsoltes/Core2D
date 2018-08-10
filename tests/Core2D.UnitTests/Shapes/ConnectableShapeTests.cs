@@ -3,7 +3,7 @@
 using Core2D.Data;
 using Core2D.Renderer;
 using Core2D.Shape;
-using Core2D.Shapes;
+using Core2D.Shapes.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -104,7 +104,7 @@ namespace Core2D.UnitTests
                 throw new NotImplementedException();
             }
 
-            public override IEnumerable<PointShape> GetPoints()
+            public override IEnumerable<IPointShape> GetPoints()
             {
                 throw new NotImplementedException();
             }

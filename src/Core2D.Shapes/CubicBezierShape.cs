@@ -14,15 +14,15 @@ namespace Core2D.Shapes
     /// </summary>
     public class CubicBezierShape : BaseShape, ICubicBezierShape, ICopyable
     {
-        private PointShape _point1;
-        private PointShape _point2;
-        private PointShape _point3;
-        private PointShape _point4;
+        private IPointShape _point1;
+        private IPointShape _point2;
+        private IPointShape _point3;
+        private IPointShape _point4;
 
         /// <summary>
         /// Gets or sets start point.
         /// </summary>
-        public PointShape Point1
+        public IPointShape Point1
         {
             get => _point1;
             set => Update(ref _point1, value);
@@ -31,7 +31,7 @@ namespace Core2D.Shapes
         /// <summary>
         /// Gets or sets first control point.
         /// </summary>
-        public PointShape Point2
+        public IPointShape Point2
         {
             get => _point2;
             set => Update(ref _point2, value);
@@ -40,7 +40,7 @@ namespace Core2D.Shapes
         /// <summary>
         /// Gets or sets second control point.
         /// </summary>
-        public PointShape Point3
+        public IPointShape Point3
         {
             get => _point3;
             set => Update(ref _point3, value);
@@ -49,7 +49,7 @@ namespace Core2D.Shapes
         /// <summary>
         /// Gets or sets end point.
         /// </summary>
-        public PointShape Point4
+        public IPointShape Point4
         {
             get => _point4;
             set => Update(ref _point4, value);
@@ -153,7 +153,7 @@ namespace Core2D.Shapes
         }
 
         /// <inheritdoc/>
-        public override IEnumerable<PointShape> GetPoints()
+        public override IEnumerable<IPointShape> GetPoints()
         {
             yield return Point1;
             yield return Point2;

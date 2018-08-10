@@ -2,8 +2,7 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
 using System.Collections.Generic;
-using Core2D.Shape;
-using Core2D.Shapes;
+using Core2D.Shapes.Interfaces;
 using Spatial;
 
 namespace Core2D.Editor.Bounds
@@ -30,12 +29,12 @@ namespace Core2D.Editor.Bounds
             }
         }
 
-        public PointShape TryToGetPoint(BaseShape shape, Point2 target, double radius)
+        public IPointShape TryToGetPoint(IShape shape, Point2 target, double radius)
         {
             return Registered[shape.GetType()].TryToGetPoint(shape, target, radius, Registered);
         }
 
-        public PointShape TryToGetPoint(IEnumerable<BaseShape> shapes, Point2 target, double radius)
+        public IPointShape TryToGetPoint(IEnumerable<IShape> shapes, Point2 target, double radius)
         {
             foreach (var shape in shapes)
             {
@@ -48,17 +47,17 @@ namespace Core2D.Editor.Bounds
             return null;
         }
 
-        public bool Contains(BaseShape shape, Point2 target, double radius)
+        public bool Contains(IShape shape, Point2 target, double radius)
         {
             return Registered[shape.GetType()].Contains(shape, target, radius, Registered);
         }
 
-        public bool Overlaps(BaseShape shape, Rect2 target, double radius)
+        public bool Overlaps(IShape shape, Rect2 target, double radius)
         {
             return Registered[shape.GetType()].Overlaps(shape, target, radius, Registered);
         }
 
-        public BaseShape TryToGetShape(IEnumerable<BaseShape> shapes, Point2 target, double radius)
+        public IShape TryToGetShape(IEnumerable<IShape> shapes, Point2 target, double radius)
         {
             foreach (var shape in shapes)
             {
@@ -71,9 +70,9 @@ namespace Core2D.Editor.Bounds
             return null;
         }
 
-        public HashSet<BaseShape> TryToGetShapes(IEnumerable<BaseShape> shapes, Rect2 target, double radius)
+        public HashSet<IShape> TryToGetShapes(IEnumerable<IShape> shapes, Rect2 target, double radius)
         {
-            var selected = new HashSet<BaseShape>();
+            var selected = new HashSet<IShape>();
             foreach (var shape in shapes)
             {
                 var result = Registered[shape.GetType()].Overlaps(shape, target, radius, Registered);

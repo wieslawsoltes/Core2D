@@ -5,7 +5,6 @@ using Core2D.Editor.Input;
 using Core2D.Editor.Tools.Selection;
 using Core2D.Editor.Tools.Settings;
 using Core2D.Shape;
-using Core2D.Shapes;
 using static System.Math;
 
 namespace Core2D.Editor.Tools

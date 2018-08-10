@@ -1,8 +1,8 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
+using Core2D.Containers.Interfaces;
 using Core2D.Path;
-using Core2D.Containers;
 using Core2D.Shape;
 using Core2D.Style;
 

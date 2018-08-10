@@ -1,6 +1,6 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
-using Core2D.Containers;
+using Core2D.Containers.Interfaces;
 
 namespace Core2D.Renderer.Presenters
 {
@@ -10,7 +10,7 @@ namespace Core2D.Renderer.Presenters
     public class TemplatePresenter : ContainerPresenter
     {
         /// <inheritdoc/>
-        public override void Render(object dc, ShapeRenderer renderer, PageContainer container, double dx, double dy)
+        public override void Render(object dc, ShapeRenderer renderer, IPageContainer container, double dx, double dy)
         {
             renderer.Fill(dc, dx, dy, container.Width, container.Height, container.Background);
 

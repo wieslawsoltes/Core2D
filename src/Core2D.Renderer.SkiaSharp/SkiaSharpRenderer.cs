@@ -5,6 +5,7 @@ using System.Collections.Immutable;
 using Core2D.Data;
 using Core2D.Shape;
 using Core2D.Shapes;
+using Core2D.Shapes.Interfaces;
 using Core2D.Style;
 using SkiaSharp;
 using Spatial;
@@ -131,7 +132,7 @@ namespace Core2D.Renderer.SkiaSharp
             return new SKRect(left, top, right, bottom);
         }
 
-        private SKRect CreateRect(PointShape tl, PointShape br, double dx, double dy, Func<double, float> scale)
+        private SKRect CreateRect(IPointShape tl, IPointShape br, double dx, double dy, Func<double, float> scale)
         {
             double tlx = Math.Min(tl.X, br.X);
             double tly = Math.Min(tl.Y, br.Y);
@@ -175,7 +176,7 @@ namespace Core2D.Renderer.SkiaSharp
             }
         }
 
-        private void DrawLineArrowsInternal(SKCanvas canvas, LineShape line, double dx, double dy, out SKPoint pt1, out SKPoint pt2)
+        private void DrawLineArrowsInternal(SKCanvas canvas, ILineShape line, double dx, double dy, out SKPoint pt1, out SKPoint pt2)
         {
             using (var fillStartArrow = ToSKPaintBrush(line.Style.StartArrowStyle.Fill))
             using (var strokeStartArrow = ToSKPaintPen(line.Style.StartArrowStyle, _scaleToPage, _sourceDpi, _targetDpi))
@@ -390,7 +391,7 @@ namespace Core2D.Renderer.SkiaSharp
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, LineShape line, double dx, double dy, object db, object r)
+        public override void Draw(object dc, ILineShape line, double dx, double dy, object db, object r)
         {
             var canvas = dc as SKCanvas;
 
@@ -417,7 +418,7 @@ namespace Core2D.Renderer.SkiaSharp
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, RectangleShape rectangle, double dx, double dy, object db, object r)
+        public override void Draw(object dc, IRectangleShape rectangle, double dx, double dy, object db, object r)
         {
             var canvas = dc as SKCanvas;
 
@@ -442,7 +443,7 @@ namespace Core2D.Renderer.SkiaSharp
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, EllipseShape ellipse, double dx, double dy, object db, object r)
+        public override void Draw(object dc, IEllipseShape ellipse, double dx, double dy, object db, object r)
         {
             var canvas = dc as SKCanvas;
 
@@ -455,7 +456,7 @@ namespace Core2D.Renderer.SkiaSharp
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, ArcShape arc, double dx, double dy, object db, object r)
+        public override void Draw(object dc, IArcShape arc, double dx, double dy, object db, object r)
         {
             var canvas = dc as SKCanvas;
 
@@ -479,7 +480,7 @@ namespace Core2D.Renderer.SkiaSharp
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, CubicBezierShape cubicBezier, double dx, double dy, object db, object r)
+        public override void Draw(object dc, ICubicBezierShape cubicBezier, double dx, double dy, object db, object r)
         {
             var canvas = dc as SKCanvas;
 
@@ -502,7 +503,7 @@ namespace Core2D.Renderer.SkiaSharp
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, QuadraticBezierShape quadraticBezier, double dx, double dy, object db, object r)
+        public override void Draw(object dc, IQuadraticBezierShape quadraticBezier, double dx, double dy, object db, object r)
         {
             var canvas = dc as SKCanvas;
 
@@ -523,7 +524,7 @@ namespace Core2D.Renderer.SkiaSharp
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, TextShape text, double dx, double dy, object db, object r)
+        public override void Draw(object dc, ITextShape text, double dx, double dy, object db, object r)
         {
             var canvas = dc as SKCanvas;
 
@@ -576,7 +577,7 @@ namespace Core2D.Renderer.SkiaSharp
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, ImageShape image, double dx, double dy, object db, object r)
+        public override void Draw(object dc, IImageShape image, double dx, double dy, object db, object r)
         {
             var canvas = dc as SKCanvas;
 
@@ -614,7 +615,7 @@ namespace Core2D.Renderer.SkiaSharp
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, PathShape path, double dx, double dy, object db, object r)
+        public override void Draw(object dc, IPathShape path, double dx, double dy, object db, object r)
         {
             var canvas = dc as SKCanvas;
 

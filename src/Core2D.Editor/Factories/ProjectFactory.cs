@@ -1,10 +1,11 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System.Linq;
+using Core2D.Containers.Interfaces;
 using Core2D.Data;
-using Core2D.Containers;
+using Core2D.Interfaces;
 using Core2D.Shape;
-using Core2D.Shapes;
+using Core2D.Shapes.Interfaces;
 using Core2D.Style;
 
 namespace Core2D.Editor.Factories
@@ -103,7 +104,7 @@ namespace Core2D.Editor.Factories
         /// <param name="project">The new container owner project.</param>
         /// <param name="name">The new container name.</param>
         /// <returns>The new instance of the <see cref="PageContainer"/>.</returns>
-        private PageContainer CreateGridTemplate(IProjectFactory factory, ProjectContainer project, string name)
+        private IPageContainer CreateGridTemplate(IProjectFactory factory, IProjectContainer project, string name)
         {
             var template = factory.GetTemplate(project, name);
 
@@ -132,7 +133,7 @@ namespace Core2D.Editor.Factories
         }
 
         /// <inheritdoc/>
-        PageContainer IProjectFactory.GetTemplate(ProjectContainer project, string name)
+        IPageContainer IProjectFactory.GetTemplate(IProjectContainer project, string name)
         {
             var template = PageContainer.CreateTemplate(name);
             template.Background = ArgbColor.Create(0xFF, 0xFF, 0xFF, 0xFF);
@@ -140,7 +141,7 @@ namespace Core2D.Editor.Factories
         }
 
         /// <inheritdoc/>
-        PageContainer IProjectFactory.GetPage(ProjectContainer project, string name)
+        IPageContainer IProjectFactory.GetPage(IProjectContainer project, string name)
         {
             var container = PageContainer.CreatePage(name);
             container.Template = project.CurrentTemplate ?? (this as IProjectFactory).GetTemplate(project, "Empty");
@@ -148,21 +149,21 @@ namespace Core2D.Editor.Factories
         }
 
         /// <inheritdoc/>
-        DocumentContainer IProjectFactory.GetDocument(ProjectContainer project, string name)
+        IDocumentContainer IProjectFactory.GetDocument(IProjectContainer project, string name)
         {
             var document = DocumentContainer.Create(name);
             return document;
         }
 
         /// <inheritdoc/>
-        ProjectContainer IProjectFactory.GetProject()
+        IProjectContainer IProjectFactory.GetProject()
         {
             var factory = this as IProjectFactory;
             var project = ProjectContainer.Create();
 
             // Group Libraries
             var glBuilder = project.GroupLibraries.ToBuilder();
-            glBuilder.Add(Library<GroupShape>.Create("Default"));
+            glBuilder.Add(Library<IGroupShape>.Create("Default"));
             project.GroupLibraries = glBuilder.ToImmutable();
 
             project.SetCurrentGroupLibrary(project.GroupLibraries.FirstOrDefault());

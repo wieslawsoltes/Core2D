@@ -4,16 +4,17 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using Core2D.Attributes;
+using Core2D.Containers.Interfaces;
 
 namespace Core2D.Containers
 {
     /// <summary>
     /// Document container.
     /// </summary>
-    public class DocumentContainer : SelectableObject, ICopyable
+    public class DocumentContainer : SelectableObject, IDocumentContainer
     {
         private bool _isExpanded = true;
-        private ImmutableArray<PageContainer> _pages;
+        private ImmutableArray<IPageContainer> _pages;
 
         /// <summary>
         /// Gets or sets flag indicating whether document is expanded.
@@ -28,7 +29,7 @@ namespace Core2D.Containers
         /// Gets or sets document pages.
         /// </summary>
         [Content]
-        public ImmutableArray<PageContainer> Pages
+        public ImmutableArray<IPageContainer> Pages
         {
             get => _pages;
             set => Update(ref _pages, value);
@@ -37,7 +38,7 @@ namespace Core2D.Containers
         /// <summary>
         /// Initializes a new instance of the <see cref="DocumentContainer"/> class.
         /// </summary>
-        public DocumentContainer() : base() => _pages = ImmutableArray.Create<PageContainer>();
+        public DocumentContainer() : base() => _pages = ImmutableArray.Create<IPageContainer>();
 
         /// <inheritdoc/>
         public virtual object Copy(IDictionary<object, object> shared)

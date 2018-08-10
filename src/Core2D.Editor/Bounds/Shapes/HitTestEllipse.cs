@@ -3,21 +3,21 @@
 using System;
 using System.Collections.Generic;
 using Core2D.Shape;
-using Core2D.Shapes;
+using Core2D.Shapes.Interfaces;
 using Spatial;
 
 namespace Core2D.Editor.Bounds.Shapes
 {
     public class HitTestEllipse : HitTestBase
     {
-        public override Type TargetType => typeof(EllipseShape);
+        public override Type TargetType => typeof(IEllipseShape);
 
-        public override PointShape TryToGetPoint(BaseShape shape, Point2 target, double radius, IDictionary<Type, HitTestBase> registered)
+        public override IPointShape TryToGetPoint(IShape shape, Point2 target, double radius, IDictionary<Type, HitTestBase> registered)
         {
-            if (!(shape is EllipseShape ellipse))
+            if (!(shape is IEllipseShape ellipse))
                 throw new ArgumentNullException(nameof(shape));
 
-            var pointHitTest = registered[typeof(PointShape)];
+            var pointHitTest = registered[typeof(IPointShape)];
 
             if (pointHitTest.TryToGetPoint(ellipse.TopLeft, target, radius, registered) != null)
             {
@@ -32,9 +32,9 @@ namespace Core2D.Editor.Bounds.Shapes
             return null;
         }
 
-        public override bool Contains(BaseShape shape, Point2 target, double radius, IDictionary<Type, HitTestBase> registered)
+        public override bool Contains(IShape shape, Point2 target, double radius, IDictionary<Type, HitTestBase> registered)
         {
-            if (!(shape is EllipseShape ellipse))
+            if (!(shape is IEllipseShape ellipse))
                 throw new ArgumentNullException(nameof(shape));
 
             return Rect2.FromPoints(
@@ -44,9 +44,9 @@ namespace Core2D.Editor.Bounds.Shapes
                 ellipse.BottomRight.Y).Contains(target);
         }
 
-        public override bool Overlaps(BaseShape shape, Rect2 target, double radius, IDictionary<Type, HitTestBase> registered)
+        public override bool Overlaps(IShape shape, Rect2 target, double radius, IDictionary<Type, HitTestBase> registered)
         {
-            if (!(shape is EllipseShape ellipse))
+            if (!(shape is IEllipseShape ellipse))
                 throw new ArgumentNullException(nameof(shape));
 
             return Rect2.FromPoints(

@@ -1,8 +1,9 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System.Collections.Immutable;
+using Core2D.Interfaces;
 using Core2D.Path;
-using Core2D.Shapes;
+using Core2D.Shapes.Interfaces;
 
 namespace Core2D.Editor.Factories
 {
@@ -23,7 +24,7 @@ namespace Core2D.Editor.Factories
         }
 
         /// <inheritdoc/>
-        PointShape IShapeFactory.Point(double x, double y, bool isStandalone)
+        IPointShape IShapeFactory.Point(double x, double y, bool isStandalone)
         {
             var point = PointShape.Create(
                 x, y,
@@ -36,7 +37,7 @@ namespace Core2D.Editor.Factories
         }
 
         /// <inheritdoc/>
-        LineShape IShapeFactory.Line(double x1, double y1, double x2, double y2, bool isStroked)
+        ILineShape IShapeFactory.Line(double x1, double y1, double x2, double y2, bool isStroked)
         {
             var style = _editor.Project.CurrentStyleLibrary.Selected;
             var line = LineShape.Create(
@@ -50,7 +51,7 @@ namespace Core2D.Editor.Factories
         }
 
         /// <inheritdoc/>
-        LineShape IShapeFactory.Line(PointShape start, PointShape end, bool isStroked)
+        ILineShape IShapeFactory.Line(IPointShape start, IPointShape end, bool isStroked)
         {
             var style = _editor.Project.CurrentStyleLibrary.Selected;
             var line = LineShape.Create(
@@ -64,7 +65,7 @@ namespace Core2D.Editor.Factories
         }
 
         /// <inheritdoc/>
-        ArcShape IShapeFactory.Arc(double x1, double y1, double x2, double y2, double x3, double y3, double x4, double y4, bool isStroked, bool isFilled)
+        IArcShape IShapeFactory.Arc(double x1, double y1, double x2, double y2, double x3, double y3, double x4, double y4, bool isStroked, bool isFilled)
         {
             var style = _editor.Project.CurrentStyleLibrary.Selected;
             var arc = ArcShape.Create(
@@ -81,7 +82,7 @@ namespace Core2D.Editor.Factories
         }
 
         /// <inheritdoc/>
-        ArcShape IShapeFactory.Arc(PointShape point1, PointShape point2, PointShape point3, PointShape point4, bool isStroked, bool isFilled)
+        IArcShape IShapeFactory.Arc(IPointShape point1, IPointShape point2, IPointShape point3, IPointShape point4, bool isStroked, bool isFilled)
         {
             var style = _editor.Project.CurrentStyleLibrary.Selected;
             var arc = ArcShape.Create(
@@ -98,7 +99,7 @@ namespace Core2D.Editor.Factories
         }
 
         /// <inheritdoc/>
-        CubicBezierShape IShapeFactory.CubicBezier(double x1, double y1, double x2, double y2, double x3, double y3, double x4, double y4, bool isStroked, bool isFilled)
+        ICubicBezierShape IShapeFactory.CubicBezier(double x1, double y1, double x2, double y2, double x3, double y3, double x4, double y4, bool isStroked, bool isFilled)
         {
             var style = _editor.Project.CurrentStyleLibrary.Selected;
             var cubicBezier = CubicBezierShape.Create(
@@ -115,7 +116,7 @@ namespace Core2D.Editor.Factories
         }
 
         /// <inheritdoc/>
-        CubicBezierShape IShapeFactory.CubicBezier(PointShape point1, PointShape point2, PointShape point3, PointShape point4, bool isStroked, bool isFilled)
+        ICubicBezierShape IShapeFactory.CubicBezier(IPointShape point1, IPointShape point2, IPointShape point3, IPointShape point4, bool isStroked, bool isFilled)
         {
             var style = _editor.Project.CurrentStyleLibrary.Selected;
             var cubicBezier = CubicBezierShape.Create(
@@ -132,7 +133,7 @@ namespace Core2D.Editor.Factories
         }
 
         /// <inheritdoc/>
-        QuadraticBezierShape IShapeFactory.QuadraticBezier(double x1, double y1, double x2, double y2, double x3, double y3, bool isStroked, bool isFilled)
+        IQuadraticBezierShape IShapeFactory.QuadraticBezier(double x1, double y1, double x2, double y2, double x3, double y3, bool isStroked, bool isFilled)
         {
             var style = _editor.Project.CurrentStyleLibrary.Selected;
             var quadraticBezier = QuadraticBezierShape.Create(
@@ -148,7 +149,7 @@ namespace Core2D.Editor.Factories
         }
 
         /// <inheritdoc/>
-        QuadraticBezierShape IShapeFactory.QuadraticBezier(PointShape point1, PointShape point2, PointShape point3, bool isStroked, bool isFilled)
+        IQuadraticBezierShape IShapeFactory.QuadraticBezier(IPointShape point1, IPointShape point2, IPointShape point3, bool isStroked, bool isFilled)
         {
             var style = _editor.Project.CurrentStyleLibrary.Selected;
             var quadraticBezier = QuadraticBezierShape.Create(
@@ -172,7 +173,7 @@ namespace Core2D.Editor.Factories
         }
 
         /// <inheritdoc/>
-        PathShape IShapeFactory.Path(PathGeometry geometry, bool isStroked, bool isFilled)
+        IPathShape IShapeFactory.Path(PathGeometry geometry, bool isStroked, bool isFilled)
         {
             var style = _editor.Project.CurrentStyleLibrary.Selected;
             var path = PathShape.Create(
@@ -186,7 +187,7 @@ namespace Core2D.Editor.Factories
         }
 
         /// <inheritdoc/>
-        RectangleShape IShapeFactory.Rectangle(double x1, double y1, double x2, double y2, bool isStroked, bool isFilled, string text)
+        IRectangleShape IShapeFactory.Rectangle(double x1, double y1, double x2, double y2, bool isStroked, bool isFilled, string text)
         {
             var style = _editor.Project.CurrentStyleLibrary.Selected;
             var rectangle = RectangleShape.Create(
@@ -202,7 +203,7 @@ namespace Core2D.Editor.Factories
         }
 
         /// <inheritdoc/>
-        RectangleShape IShapeFactory.Rectangle(PointShape topLeft, PointShape bottomRight, bool isStroked, bool isFilled, string text)
+        IRectangleShape IShapeFactory.Rectangle(IPointShape topLeft, IPointShape bottomRight, bool isStroked, bool isFilled, string text)
         {
             var style = _editor.Project.CurrentStyleLibrary.Selected;
             var rectangle = RectangleShape.Create(
@@ -218,7 +219,7 @@ namespace Core2D.Editor.Factories
         }
 
         /// <inheritdoc/>
-        EllipseShape IShapeFactory.Ellipse(double x1, double y1, double x2, double y2, bool isStroked, bool isFilled, string text)
+        IEllipseShape IShapeFactory.Ellipse(double x1, double y1, double x2, double y2, bool isStroked, bool isFilled, string text)
         {
             var style = _editor.Project.CurrentStyleLibrary.Selected;
             var ellipse = EllipseShape.Create(
@@ -234,7 +235,7 @@ namespace Core2D.Editor.Factories
         }
 
         /// <inheritdoc/>
-        EllipseShape IShapeFactory.Ellipse(PointShape topLeft, PointShape bottomRight, bool isStroked, bool isFilled, string text)
+        IEllipseShape IShapeFactory.Ellipse(IPointShape topLeft, IPointShape bottomRight, bool isStroked, bool isFilled, string text)
         {
             var style = _editor.Project.CurrentStyleLibrary.Selected;
             var ellipse = EllipseShape.Create(
@@ -250,7 +251,7 @@ namespace Core2D.Editor.Factories
         }
 
         /// <inheritdoc/>
-        TextShape IShapeFactory.Text(double x1, double y1, double x2, double y2, string text, bool isStroked)
+        ITextShape IShapeFactory.Text(double x1, double y1, double x2, double y2, string text, bool isStroked)
         {
             var style = _editor.Project.CurrentStyleLibrary.Selected;
             var txt = TextShape.Create(
@@ -265,7 +266,7 @@ namespace Core2D.Editor.Factories
         }
 
         /// <inheritdoc/>
-        TextShape IShapeFactory.Text(PointShape topLeft, PointShape bottomRight, string text, bool isStroked)
+        ITextShape IShapeFactory.Text(IPointShape topLeft, IPointShape bottomRight, string text, bool isStroked)
         {
             var style = _editor.Project.CurrentStyleLibrary.Selected;
             var txt = TextShape.Create(
@@ -280,7 +281,7 @@ namespace Core2D.Editor.Factories
         }
 
         /// <inheritdoc/>
-        ImageShape IShapeFactory.Image(string path, double x1, double y1, double x2, double y2, bool isStroked, bool isFilled, string text)
+        IImageShape IShapeFactory.Image(string path, double x1, double y1, double x2, double y2, bool isStroked, bool isFilled, string text)
         {
             var style = _editor.Project.CurrentStyleLibrary.Selected;
             var image = ImageShape.Create(
@@ -297,7 +298,7 @@ namespace Core2D.Editor.Factories
         }
 
         /// <inheritdoc/>
-        ImageShape IShapeFactory.Image(string path, PointShape topLeft, PointShape bottomRight, bool isStroked, bool isFilled, string text)
+        IImageShape IShapeFactory.Image(string path, IPointShape topLeft, IPointShape bottomRight, bool isStroked, bool isFilled, string text)
         {
             byte[] bytes;
             using (var stream = _editor.FileIO?.Open(path))

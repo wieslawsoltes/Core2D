@@ -4,6 +4,7 @@ using System;
 using System.Collections.Immutable;
 using System.Linq;
 using Core2D.Data;
+using Core2D.Shapes.Interfaces;
 
 namespace Core2D.Shapes
 {
@@ -13,7 +14,7 @@ namespace Core2D.Shapes
     public static class TextShapeExtensions
     {
         /// <summary>
-        /// Try binding data record to <see cref="TextShape.Text"/> shape property containing column name.
+        /// Try binding data record to <see cref="ITextShape.Text"/> shape property containing column name.
         /// </summary>
         /// <param name="r">The external data record used for binding.</param>
         /// <param name="columnName">The column name.</param>
@@ -99,7 +100,7 @@ namespace Core2D.Shapes
         /// <param name="db">The properties database used for binding.</param>
         /// <param name="r">The external data record used for binding.</param>
         /// <returns>The string bound to properties or data record.</returns>
-        public static string BindText(this TextShape text, ImmutableArray<Property> db, Record r)
+        public static string BindText(this ITextShape text, ImmutableArray<Property> db, Record r)
         {
             var record = text.Data?.Record ?? r;
 

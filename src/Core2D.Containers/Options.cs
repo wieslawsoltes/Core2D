@@ -2,8 +2,10 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
 using System.Collections.Generic;
+using Core2D.Containers.Interfaces;
 using Core2D.Path;
-using Core2D.Shape;
+using Core2D.Shapes;
+using Core2D.Shapes.Interfaces;
 using Core2D.Style;
 
 namespace Core2D.Containers
@@ -11,7 +13,7 @@ namespace Core2D.Containers
     /// <summary>
     /// Project options.
     /// </summary>
-    public class Options : ObservableObject, ICopyable
+    public class Options : ObservableObject, IOptions
     {
         private bool _snapToGrid = true;
         private double _snapX = 15.0;
@@ -24,7 +26,7 @@ namespace Core2D.Containers
         private bool _defaultIsSmoothJoin = true;
         private FillRule _defaultFillRule = FillRule.EvenOdd;
         private bool _tryToConnect = false;
-        private BaseShape _pointShape;
+        private IShape _pointShape;
         private ShapeStyle _pointStyle;
         private ShapeStyle _selectionStyle;
         private ShapeStyle _helperStyle;
@@ -132,7 +134,7 @@ namespace Core2D.Containers
         /// <summary>
         /// Gets or sets shape used to draw points.
         /// </summary>
-        public BaseShape PointShape
+        public IShape PointShape
         {
             get => _pointShape;
             set => Update(ref _pointShape, value);
@@ -184,7 +186,7 @@ namespace Core2D.Containers
         /// Creates a new <see cref="Options"/> instance.
         /// </summary>
         /// <returns>The new instance of the <see cref="Options"/> class.</returns>
-        public static Options Create()
+        public static IOptions Create()
         {
             var options = new Options()
             {
@@ -229,11 +231,11 @@ namespace Core2D.Containers
         }
 
         /// <summary>
-        /// Creates a new <see cref="BaseShape"/> instance.
+        /// Creates a new <see cref="IShape"/> instance.
         /// </summary>
         /// <param name="pss">The point shape <see cref="ShapeStyle"/>.</param>
-        /// <returns>The new instance of the <see cref="BaseShape"/> class.</returns>
-        public static BaseShape EllipsePointShape(ShapeStyle pss)
+        /// <returns>The new instance of the <see cref="IShape"/> class.</returns>
+        public static IShape EllipsePointShape(ShapeStyle pss)
         {
             var ellipse = EllipseShape.Create(-4, -4, 4, 4, pss, null, true, false);
             ellipse.Name = "EllipsePoint";
@@ -241,11 +243,11 @@ namespace Core2D.Containers
         }
 
         /// <summary>
-        /// Creates a new <see cref="BaseShape"/> instance.
+        /// Creates a new <see cref="IShape"/> instance.
         /// </summary>
         /// <param name="pss">The point shape <see cref="ShapeStyle"/>.</param>
-        /// <returns>The new instance of the <see cref="BaseShape"/> class.</returns>
-        public static BaseShape FilledEllipsePointShape(ShapeStyle pss)
+        /// <returns>The new instance of the <see cref="IShape"/> class.</returns>
+        public static IShape FilledEllipsePointShape(ShapeStyle pss)
         {
             var ellipse = EllipseShape.Create(-3, -3, 3, 3, pss, null, true, true);
             ellipse.Name = "FilledEllipsePoint";
@@ -253,11 +255,11 @@ namespace Core2D.Containers
         }
 
         /// <summary>
-        /// Creates a new <see cref="BaseShape"/> instance.
+        /// Creates a new <see cref="IShape"/> instance.
         /// </summary>
         /// <param name="pss">The point shape <see cref="ShapeStyle"/>.</param>
-        /// <returns>The new instance of the <see cref="BaseShape"/> class.</returns>
-        public static BaseShape RectanglePointShape(ShapeStyle pss)
+        /// <returns>The new instance of the <see cref="IShape"/> class.</returns>
+        public static IShape RectanglePointShape(ShapeStyle pss)
         {
             var rectangle = RectangleShape.Create(-4, -4, 4, 4, pss, null, true, false);
             rectangle.Name = "RectanglePoint";
@@ -265,11 +267,11 @@ namespace Core2D.Containers
         }
 
         /// <summary>
-        /// Creates a new <see cref="BaseShape"/> instance.
+        /// Creates a new <see cref="IShape"/> instance.
         /// </summary>
         /// <param name="pss">The point shape <see cref="ShapeStyle"/>.</param>
-        /// <returns>The new instance of the <see cref="BaseShape"/> class.</returns>
-        public static BaseShape FilledRectanglePointShape(ShapeStyle pss)
+        /// <returns>The new instance of the <see cref="IShape"/> class.</returns>
+        public static IShape FilledRectanglePointShape(ShapeStyle pss)
         {
             var rectangle = RectangleShape.Create(-3, -3, 3, 3, pss, null, true, true);
             rectangle.Name = "FilledRectanglePoint";
@@ -277,11 +279,11 @@ namespace Core2D.Containers
         }
 
         /// <summary>
-        /// Creates a new <see cref="BaseShape"/> instance.
+        /// Creates a new <see cref="IShape"/> instance.
         /// </summary>
         /// <param name="pss">The point shape <see cref="ShapeStyle"/>.</param>
-        /// <returns>The new instance of the <see cref="BaseShape"/> class.</returns>
-        public static BaseShape CrossPointShape(ShapeStyle pss)
+        /// <returns>The new instance of the <see cref="IShape"/> class.</returns>
+        public static IShape CrossPointShape(ShapeStyle pss)
         {
             var group = GroupShape.Create("CrossPoint");
             var builder = group.Shapes.ToBuilder();

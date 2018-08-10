@@ -4,40 +4,29 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using Core2D.Attributes;
-using Core2D.Shape;
+using Core2D.Containers.Interfaces;
+using Core2D.Shapes.Interfaces;
 
 namespace Core2D.Containers
 {
     /// <summary>
-    /// Invalidate layer event arguments.
-    /// </summary>
-    public class InvalidateLayerEventArgs : EventArgs { }
-
-    /// <summary>
-    /// Invalidate layer event handler.
-    /// </summary>
-    /// <param name="sender">The sender object.</param>
-    /// <param name="e">The event arguments.</param>
-    public delegate void InvalidateLayerEventHandler(object sender, InvalidateLayerEventArgs e);
-
-    /// <summary>
     /// Layer container.
     /// </summary>
-    public class LayerContainer : SelectableObject, ICopyable
+    public class LayerContainer : SelectableObject, ILayerContainer
     {
         /// <summary>
         /// Invalidate layer event.
         /// </summary>
         public event InvalidateLayerEventHandler InvalidateLayer;
 
-        private PageContainer _owner;
+        private IPageContainer _owner;
         private bool _isVisible = true;
-        private ImmutableArray<BaseShape> _shapes;
+        private ImmutableArray<IShape> _shapes;
 
         /// <summary>
         /// Gets or sets layer owner.
         /// </summary>
-        public PageContainer Owner
+        public IPageContainer Owner
         {
             get => _owner;
             set => Update(ref _owner, value);
@@ -60,7 +49,7 @@ namespace Core2D.Containers
         /// Gets or sets layer shapes.
         /// </summary>
         [Content]
-        public ImmutableArray<BaseShape> Shapes
+        public ImmutableArray<IShape> Shapes
         {
             get => _shapes;
             set => Update(ref _shapes, value);
@@ -69,7 +58,7 @@ namespace Core2D.Containers
         /// <summary>
         /// Initializes a new instance of the <see cref="LayerContainer"/> class.
         /// </summary>
-        public LayerContainer() : base() => _shapes = ImmutableArray.Create<BaseShape>();
+        public LayerContainer() : base() => _shapes = ImmutableArray.Create<IShape>();
 
         /// <summary>
         /// Invalidate layer shapes.
@@ -89,7 +78,7 @@ namespace Core2D.Containers
         /// <param name="owner">The layer owner.</param>
         /// <param name="isVisible">The flag indicating whether layer is visible.</param>
         /// <returns>The new instance of the <see cref="LayerContainer"/>.</returns>
-        public static LayerContainer Create(string name = "Layer", PageContainer owner = null, bool isVisible = true)
+        public static LayerContainer Create(string name = "Layer", IPageContainer owner = null, bool isVisible = true)
         {
             return new LayerContainer()
             {

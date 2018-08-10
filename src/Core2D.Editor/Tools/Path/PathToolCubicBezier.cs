@@ -8,7 +8,6 @@ using Core2D.Editor.Tools.Path.Settings;
 using Core2D.Editor.Tools.Selection;
 using Core2D.Path.Segments;
 using Core2D.Shape;
-using Core2D.Shapes;
 
 namespace Core2D.Editor.Tools.Path
 {

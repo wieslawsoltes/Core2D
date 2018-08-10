@@ -14,14 +14,14 @@ namespace Core2D.Shapes
     /// </summary>
     public class TextShape : BaseShape, ITextShape
     {
-        private PointShape _topLeft;
-        private PointShape _bottomRight;
+        private IPointShape _topLeft;
+        private IPointShape _bottomRight;
         private string _text;
 
         /// <summary>
         /// Gets or sets top-left corner point.
         /// </summary>
-        public PointShape TopLeft
+        public IPointShape TopLeft
         {
             get => _topLeft;
             set => Update(ref _topLeft, value);
@@ -30,7 +30,7 @@ namespace Core2D.Shapes
         /// <summary>
         /// Gets or sets bottom-right corner point.
         /// </summary>
-        public PointShape BottomRight
+        public IPointShape BottomRight
         {
             get => _bottomRight;
             set => Update(ref _bottomRight, value);
@@ -117,7 +117,7 @@ namespace Core2D.Shapes
         }
 
         /// <inheritdoc/>
-        public override IEnumerable<PointShape> GetPoints()
+        public override IEnumerable<IPointShape> GetPoints()
         {
             yield return TopLeft;
             yield return BottomRight;

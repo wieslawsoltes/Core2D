@@ -54,7 +54,7 @@ namespace Core2D.Editor
         public const string DefaulGroupLibraryName = "Groups";
 
         /// <summary>
-        /// Default <see cref="Core2D.Shapes.GroupShape"/> name.
+        /// Default <see cref="Shapes.GroupShape"/> name.
         /// </summary>
         public const string DefaulGroupName = "Group";
 
