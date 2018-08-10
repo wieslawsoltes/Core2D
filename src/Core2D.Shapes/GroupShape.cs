@@ -7,16 +7,17 @@ using System.Linq;
 using Core2D.Data;
 using Core2D.Renderer;
 using Core2D.Shape;
+using Core2D.Shapes.Interfaces;
 
 namespace Core2D.Shapes
 {
     /// <summary>
     /// Group shape.
     /// </summary>
-    public class GroupShape : ConnectableShape, ICopyable
+    public class GroupShape : ConnectableShape, IGroupShape
     {
         private ImmutableArray<Property> _shapesProperties;
-        private ImmutableArray<BaseShape> _shapes;
+        private ImmutableArray<IShape> _shapes;
 
         /// <summary>
         /// Gets all properties from <see cref="Shapes"/> collection.
@@ -26,7 +27,7 @@ namespace Core2D.Shapes
         /// <summary>
         /// Gets or sets shapes collection.
         /// </summary>
-        public ImmutableArray<BaseShape> Shapes
+        public ImmutableArray<IShape> Shapes
         {
             get => _shapes;
             set
@@ -44,7 +45,7 @@ namespace Core2D.Shapes
         public GroupShape()
             : base()
         {
-            _shapes = ImmutableArray.Create<BaseShape>();
+            _shapes = ImmutableArray.Create<IShape>();
         }
 
         private ImmutableArray<Property> GetShapeProperties()
@@ -98,7 +99,7 @@ namespace Core2D.Shapes
         }
 
         /// <inheritdoc/>
-        public override void Move(ISet<BaseShape> selected, double dx, double dy)
+        public override void Move(ISet<IShape> selected, double dx, double dy)
         {
             foreach (var shape in Shapes)
             {
@@ -112,19 +113,19 @@ namespace Core2D.Shapes
         }
 
         /// <inheritdoc/>
-        public override void Select(ISet<BaseShape> selected)
+        public override void Select(ISet<IShape> selected)
         {
             base.Select(selected);
         }
 
         /// <inheritdoc/>
-        public override void Deselect(ISet<BaseShape> selected)
+        public override void Deselect(ISet<IShape> selected)
         {
             base.Deselect(selected);
         }
 
         /// <inheritdoc/>
-        public override IEnumerable<PointShape> GetPoints()
+        public override IEnumerable<IPointShape> GetPoints()
         {
             return Enumerable.Concat(Shapes.SelectMany(s => s.GetPoints()), base.GetPoints());
         }

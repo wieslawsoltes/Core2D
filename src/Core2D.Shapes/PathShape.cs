@@ -6,6 +6,7 @@ using System.Linq;
 using Core2D.Path;
 using Core2D.Renderer;
 using Core2D.Shape;
+using Core2D.Shapes.Interfaces;
 using Core2D.Style;
 
 namespace Core2D.Shapes
@@ -13,7 +14,7 @@ namespace Core2D.Shapes
     /// <summary>
     /// Path shape.
     /// </summary>
-    public class PathShape : BaseShape, ICopyable
+    public class PathShape : BaseShape, IPathShape
     {
         private PathGeometry _geometry;
 
@@ -82,7 +83,7 @@ namespace Core2D.Shapes
         }
 
         /// <inheritdoc/>
-        public override void Move(ISet<BaseShape> selected, double dx, double dy)
+        public override void Move(ISet<IShape> selected, double dx, double dy)
         {
             var points = GetPoints();
             foreach (var point in points)
@@ -92,7 +93,7 @@ namespace Core2D.Shapes
         }
 
         /// <inheritdoc/>
-        public override void Select(ISet<BaseShape> selected)
+        public override void Select(ISet<IShape> selected)
         {
             base.Select(selected);
 
@@ -104,7 +105,7 @@ namespace Core2D.Shapes
         }
 
         /// <inheritdoc/>
-        public override void Deselect(ISet<BaseShape> selected)
+        public override void Deselect(ISet<IShape> selected)
         {
             base.Deselect(selected);
 
@@ -122,7 +123,7 @@ namespace Core2D.Shapes
         }
 
         /// <inheritdoc/>
-        public virtual object Copy(IDictionary<object, object> shared)
+        public override object Copy(IDictionary<object, object> shared)
         {
             throw new NotImplementedException();
         }

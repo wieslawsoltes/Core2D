@@ -2,7 +2,7 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
 using System.Collections.Generic;
-using Core2D.Shapes;
+using Core2D.Shapes.Interfaces;
 
 namespace Core2D.Path.Segments
 {
@@ -11,7 +11,7 @@ namespace Core2D.Path.Segments
     /// </summary>
     public class ArcSegment : PathSegment, ICopyable
     {
-        private PointShape _point;
+        private IPointShape _point;
         private PathSize _size;
         private double _rotationAngle;
         private bool _isLargeArc;
@@ -20,7 +20,7 @@ namespace Core2D.Path.Segments
         /// <summary>
         /// Gets or sets end point.
         /// </summary>
-        public PointShape Point
+        public IPointShape Point
         {
             get => _point;
             set => Update(ref _point, value);
@@ -63,7 +63,7 @@ namespace Core2D.Path.Segments
         }
 
         /// <inheritdoc/>
-        public override IEnumerable<PointShape> GetPoints()
+        public override IEnumerable<IPointShape> GetPoints()
         {
             yield return Point;
         }
@@ -85,7 +85,7 @@ namespace Core2D.Path.Segments
         /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
         /// <param name="isSmoothJoin">The flag indicating whether shape is smooth join.</param>
         /// <returns>The new instance of the <see cref="ArcSegment"/> class.</returns>
-        public static ArcSegment Create(PointShape point, PathSize size, double rotationAngle, bool isLargeArc, SweepDirection sweepDirection, bool isStroked, bool isSmoothJoin)
+        public static ArcSegment Create(IPointShape point, PathSize size, double rotationAngle, bool isLargeArc, SweepDirection sweepDirection, bool isStroked, bool isSmoothJoin)
         {
             return new ArcSegment()
             {

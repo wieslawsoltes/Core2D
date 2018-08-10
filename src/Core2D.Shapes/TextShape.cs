@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using Core2D.Renderer;
 using Core2D.Shape;
+using Core2D.Shapes.Interfaces;
 using Core2D.Style;
 
 namespace Core2D.Shapes
@@ -11,7 +12,7 @@ namespace Core2D.Shapes
     /// <summary>
     /// Text shape.
     /// </summary>
-    public class TextShape : BaseShape, ICopyable
+    public class TextShape : BaseShape, ITextShape
     {
         private PointShape _topLeft;
         private PointShape _bottomRight;
@@ -86,7 +87,7 @@ namespace Core2D.Shapes
         }
 
         /// <inheritdoc/>
-        public override void Move(ISet<BaseShape> selected, double dx, double dy)
+        public override void Move(ISet<IShape> selected, double dx, double dy)
         {
             if (!TopLeft.State.Flags.HasFlag(ShapeStateFlags.Connector))
             {
@@ -100,7 +101,7 @@ namespace Core2D.Shapes
         }
 
         /// <inheritdoc/>
-        public override void Select(ISet<BaseShape> selected)
+        public override void Select(ISet<IShape> selected)
         {
             base.Select(selected);
             TopLeft.Select(selected);
@@ -108,7 +109,7 @@ namespace Core2D.Shapes
         }
 
         /// <inheritdoc/>
-        public override void Deselect(ISet<BaseShape> selected)
+        public override void Deselect(ISet<IShape> selected)
         {
             base.Deselect(selected);
             TopLeft.Deselect(selected);
@@ -123,7 +124,7 @@ namespace Core2D.Shapes
         }
 
         /// <inheritdoc/>
-        public virtual object Copy(IDictionary<object, object> shared)
+        public override object Copy(IDictionary<object, object> shared)
         {
             throw new NotImplementedException();
         }

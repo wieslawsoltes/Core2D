@@ -5,14 +5,14 @@ using System.Collections.Generic;
 using Core2D.Data;
 using Core2D.Renderer;
 using Core2D.Shape;
-using Core2D.Style;
+using Core2D.Shapes.Interfaces;
 
 namespace Core2D.Shapes
 {
     /// <summary>
     /// Point shape.
     /// </summary>
-    public class PointShape : BaseShape, ICopyable
+    public class PointShape : BaseShape, IPointShape
     {
         private double _x;
         private double _y;
@@ -74,7 +74,7 @@ namespace Core2D.Shapes
         }
 
         /// <inheritdoc/>
-        public override void Move(ISet<BaseShape> selected, double dx, double dy)
+        public override void Move(ISet<IShape> selected, double dx, double dy)
         {
             X += dx;
             Y += dy;
@@ -87,7 +87,7 @@ namespace Core2D.Shapes
         }
 
         /// <inheritdoc/>
-        public virtual object Copy(IDictionary<object, object> shared)
+        public override object Copy(IDictionary<object, object> shared)
         {
             throw new NotImplementedException();
         }

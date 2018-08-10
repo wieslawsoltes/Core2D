@@ -12,7 +12,7 @@ namespace Core2D.Shapes
     /// <summary>
     /// Quadratic bezier shape.
     /// </summary>
-    public class QuadraticBezierShape : BaseShape, IQuadraticBezier, ICopyable
+    public class QuadraticBezierShape : BaseShape, IQuadraticBezierShape, ICopyable
     {
         private PointShape _point1;
         private PointShape _point2;
@@ -93,7 +93,7 @@ namespace Core2D.Shapes
         }
 
         /// <inheritdoc/>
-        public override void Move(ISet<BaseShape> selected, double dx, double dy)
+        public override void Move(ISet<IShape> selected, double dx, double dy)
         {
             if (!Point1.State.Flags.HasFlag(ShapeStateFlags.Connector))
             {
@@ -112,7 +112,7 @@ namespace Core2D.Shapes
         }
 
         /// <inheritdoc/>
-        public override void Select(ISet<BaseShape> selected)
+        public override void Select(ISet<IShape> selected)
         {
             base.Select(selected);
             Point1.Select(selected);
@@ -121,7 +121,7 @@ namespace Core2D.Shapes
         }
 
         /// <inheritdoc/>
-        public override void Deselect(ISet<BaseShape> selected)
+        public override void Deselect(ISet<IShape> selected)
         {
             base.Deselect(selected);
             Point1.Deselect(selected);
@@ -138,7 +138,7 @@ namespace Core2D.Shapes
         }
 
         /// <inheritdoc/>
-        public virtual object Copy(IDictionary<object, object> shared)
+        public override object Copy(IDictionary<object, object> shared)
         {
             throw new NotImplementedException();
         }

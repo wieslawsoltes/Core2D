@@ -1,7 +1,7 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System.Collections.Generic;
-using Core2D.Shape;
+using Core2D.Shapes.Interfaces;
 
 namespace Core2D
 {
@@ -16,18 +16,18 @@ namespace Core2D
         /// <param name="selected">The selected shapes set.</param>
         /// <param name="dx">The X axis position offset.</param>
         /// <param name="dy">The Y axis position offset.</param>
-        void Move(ISet<BaseShape> selected, double dx, double dy);
+        void Move(ISet<IShape> selected, double dx, double dy);
 
         /// <summary>
         /// Selects the shape.
         /// </summary>
         /// <param name="selected">The selected shapes set.</param>
-        void Select(ISet<BaseShape> selected);
+        void Select(ISet<IShape> selected);
 
         /// <summary>
         /// Deselects the shape.
         /// </summary>
         /// <param name="selected">The selected shapes set.</param>
-        void Deselect(ISet<BaseShape> selected);
+        void Deselect(ISet<IShape> selected);
     }
 }

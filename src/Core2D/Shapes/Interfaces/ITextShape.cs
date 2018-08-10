@@ -4,28 +4,23 @@
 namespace Core2D.Shapes.Interfaces
 {
     /// <summary>
-    /// Defines arc shape contract.
+    /// Defines text shape contract.
     /// </summary>
-    public interface IArc
+    public interface ITextShape : IShape
     {
         /// <summary>
         /// Gets or sets top-left corner point.
         /// </summary>
-        PointShape Point1 { get; set; }
+        IPointShape TopLeft { get; set; }
 
         /// <summary>
         /// Gets or sets bottom-right corner point.
         /// </summary>
-        PointShape Point2 { get; set; }
+        IPointShape BottomRight { get; set; }
 
         /// <summary>
-        /// Gets or sets point used to calculate arc start angle.
+        /// Gets or sets text string.
         /// </summary>
-        PointShape Point3 { get; set; }
-
-        /// <summary>
-        /// Gets or sets point used to calculate arc end angle.
-        /// </summary>
-        PointShape Point4 { get; set; }
+        string Text { get; set; }
     }
 }

@@ -2,7 +2,7 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
 using System.Collections.Generic;
-using Core2D.Shapes;
+using Core2D.Shapes.Interfaces;
 
 namespace Core2D.Path
 {
@@ -36,7 +36,7 @@ namespace Core2D.Path
         /// Get all points in the segment.
         /// </summary>
         /// <returns>All points in the segment.</returns>
-        public abstract IEnumerable<PointShape> GetPoints();
+        public abstract IEnumerable<IPointShape> GetPoints();
 
         /// <inheritdoc/>
         public virtual object Copy(IDictionary<object, object> shared)

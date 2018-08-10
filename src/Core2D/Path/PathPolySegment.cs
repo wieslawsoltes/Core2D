@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Text;
 using Core2D.Attributes;
-using Core2D.Shapes;
+using Core2D.Shapes.Interfaces;
 
 namespace Core2D.Path
 {
@@ -14,13 +14,13 @@ namespace Core2D.Path
     /// </summary>
     public abstract class PathPolySegment : PathSegment, ICopyable
     {
-        private ImmutableArray<PointShape> _points;
+        private ImmutableArray<IPointShape> _points;
 
         /// <summary>
         /// Gets or sets points array.
         /// </summary>
         [Content]
-        public ImmutableArray<PointShape> Points
+        public ImmutableArray<IPointShape> Points
         {
             get => _points;
             set => Update(ref _points, value);
@@ -29,10 +29,10 @@ namespace Core2D.Path
         /// <summary>
         /// Initializes a new instance of the <see cref="PathPolySegment"/> class.
         /// </summary>
-        public PathPolySegment() : base() => Points = ImmutableArray.Create<PointShape>();
+        public PathPolySegment() : base() => Points = ImmutableArray.Create<IPointShape>();
 
         /// <inheritdoc/>
-        public override IEnumerable<PointShape> GetPoints() => Points;
+        public override IEnumerable<IPointShape> GetPoints() => Points;
 
         /// <inheritdoc/>
         public override object Copy(IDictionary<object, object> shared)
@@ -45,7 +45,7 @@ namespace Core2D.Path
         /// </summary>
         /// <param name="points">The points collection.</param>
         /// <returns>A string representation of points collection.</returns>
-        public string ToString(ImmutableArray<PointShape> points)
+        public string ToString(ImmutableArray<IPointShape> points)
         {
             if (points.Length == 0)
             {

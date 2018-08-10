@@ -2,6 +2,7 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System.Collections.Generic;
 using Core2D.Shape;
+using Core2D.Shapes.Interfaces;
 
 namespace Core2D.Shapes
 {
@@ -11,11 +12,11 @@ namespace Core2D.Shapes
     public static class GroupShapeExtensions
     {
         /// <summary>
-        /// Adds <see cref="BaseShape"/> to <see cref="GroupShape.Shapes"/> collection.
+        /// Adds <see cref="IShape"/> to <see cref="IGroupShape.Shapes"/> collection.
         /// </summary>
         /// <param name="group">The group shape.</param>
         /// <param name="shape">The shape object.</param>
-        public static void AddShape(this GroupShape group, BaseShape shape)
+        public static void AddShape(this IGroupShape group, IShape shape)
         {
             shape.Owner = group;
             shape.State.Flags &= ~ShapeStateFlags.Standalone;
@@ -23,13 +24,13 @@ namespace Core2D.Shapes
         }
 
         /// <summary>
-        /// Creates a new <see cref="GroupShape"/> instance.
+        /// Creates a new <see cref="IGroupShape"/> instance.
         /// </summary>
         /// <param name="shapes">The shapes collection.</param>
         /// <param name="name">The group name.</param>
         /// <param name="source">The source shapes collection.</param>
-        /// <returns>The new instance of the <see cref="GroupShape"/> class.</returns>
-        public static GroupShape Group(this IEnumerable<BaseShape> shapes, string name = "g", IList<BaseShape> source = null)
+        /// <returns>The new instance of the <see cref="IGroupShape"/> class.</returns>
+        public static IGroupShape Group(this IEnumerable<IShape> shapes, string name = "g", IList<IShape> source = null)
         {
             var group = GroupShape.Create(name);
 
@@ -37,9 +38,9 @@ namespace Core2D.Shapes
             {
                 foreach (var shape in shapes)
                 {
-                    if (shape is PointShape)
+                    if (shape is IPointShape)
                     {
-                        group.AddConnectorAsNone(shape as PointShape);
+                        group.AddConnectorAsNone(shape as IPointShape);
                     }
                     else
                     {
@@ -66,7 +67,7 @@ namespace Core2D.Shapes
         /// </summary>
         /// <param name="shapes">The shapes collection.</param>
         /// <param name="source">The source shapes collection.</param>
-        private static void Ungroup(IEnumerable<BaseShape> shapes, IList<BaseShape> source)
+        private static void Ungroup(IEnumerable<IShape> shapes, IList<IShape> source)
         {
             if (shapes != null && source != null)
             {
@@ -96,7 +97,7 @@ namespace Core2D.Shapes
         /// </summary>
         /// <param name="group">The group instance.</param>
         /// <param name="source">The source shapes collection.</param>
-        public static void Ungroup(this GroupShape group, IList<BaseShape> source)
+        public static void Ungroup(this IGroupShape group, IList<IShape> source)
         {
             Ungroup(group.Shapes, source);
             Ungroup(group.Connectors, source);

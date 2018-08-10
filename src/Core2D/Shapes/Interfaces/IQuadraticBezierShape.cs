@@ -4,28 +4,23 @@
 namespace Core2D.Shapes.Interfaces
 {
     /// <summary>
-    /// Defines cubic bezier shape contract.
+    /// Defines quadratic bezier shape contract.
     /// </summary>
-    public interface ICubicBezier
+    public interface IQuadraticBezierShape : IShape
     {
         /// <summary>
         /// Gets or sets start point.
         /// </summary>
-        PointShape Point1 { get; set; }
+        IPointShape Point1 { get; set; }
 
         /// <summary>
-        /// Gets or sets first control point.
+        /// Gets or sets control point.
         /// </summary>
-        PointShape Point2 { get; set; }
-
-        /// <summary>
-        /// Gets or sets second control point.
-        /// </summary>
-        PointShape Point3 { get; set; }
+        IPointShape Point2 { get; set; }
 
         /// <summary>
         /// Gets or sets end point.
         /// </summary>
-        PointShape Point4 { get; set; }
+        IPointShape Point3 { get; set; }
     }
 }

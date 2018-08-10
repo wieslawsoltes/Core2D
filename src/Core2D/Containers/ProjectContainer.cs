@@ -8,7 +8,7 @@ using Core2D.Attributes;
 using Core2D.Data;
 using Core2D.History;
 using Core2D.Shape;
-using Core2D.Shapes;
+using Core2D.Shapes.Interfaces;
 using Core2D.Style;
 
 namespace Core2D.Containers
@@ -21,12 +21,12 @@ namespace Core2D.Containers
         private Options _options;
         private IHistory _history;
         private ImmutableArray<Library<ShapeStyle>> _styleLibraries;
-        private ImmutableArray<Library<GroupShape>> _groupLibraries;
+        private ImmutableArray<Library<IGroupShape>> _groupLibraries;
         private ImmutableArray<Database> _databases;
         private ImmutableArray<PageContainer> _templates;
         private ImmutableArray<DocumentContainer> _documents;
         private Library<ShapeStyle> _currentStyleLibrary;
-        private Library<GroupShape> _currentGroupLibrary;
+        private Library<IGroupShape> _currentGroupLibrary;
         private Database _currentDatabase;
         private PageContainer _currentTemplate;
         private DocumentContainer _currentDocument;
@@ -63,7 +63,7 @@ namespace Core2D.Containers
         /// <summary>
         /// Gets or sets project group libraries.
         /// </summary>
-        public ImmutableArray<Library<GroupShape>> GroupLibraries
+        public ImmutableArray<Library<IGroupShape>> GroupLibraries
         {
             get => _groupLibraries;
             set => Update(ref _groupLibraries, value);
@@ -109,7 +109,7 @@ namespace Core2D.Containers
         /// <summary>
         /// Gets or sets project current group library.
         /// </summary>
-        public Library<GroupShape> CurrentGroupLibrary
+        public Library<IGroupShape> CurrentGroupLibrary
         {
             get => _currentGroupLibrary;
             set => Update(ref _currentGroupLibrary, value);
@@ -172,7 +172,7 @@ namespace Core2D.Containers
         {
             _options = Options.Create();
             _styleLibraries = ImmutableArray.Create<Library<ShapeStyle>>();
-            _groupLibraries = ImmutableArray.Create<Library<GroupShape>>();
+            _groupLibraries = ImmutableArray.Create<Library<IGroupShape>>();
             _databases = ImmutableArray.Create<Database>();
             _templates = ImmutableArray.Create<PageContainer>();
             _documents = ImmutableArray.Create<DocumentContainer>();
@@ -214,7 +214,7 @@ namespace Core2D.Containers
         /// Set current group library.
         /// </summary>
         /// <param name="library">The group library instance.</param>
-        public void SetCurrentGroupLibrary(Library<GroupShape> library) => CurrentGroupLibrary = library;
+        public void SetCurrentGroupLibrary(Library<IGroupShape> library) => CurrentGroupLibrary = library;
 
         /// <summary>
         /// Set current group.
@@ -278,16 +278,16 @@ namespace Core2D.Containers
         /// </summary>
         /// <param name="shapes">The shapes collection.</param>
         /// <returns>All shapes including grouped shapes.</returns>
-        public static IEnumerable<BaseShape> GetAllShapes(IEnumerable<BaseShape> shapes)
+        public static IEnumerable<IShape> GetAllShapes(IEnumerable<IShape> shapes)
         {
             if (shapes == null)
                 yield break;
 
             foreach (var shape in shapes)
             {
-                if (shape is GroupShape)
+                if (shape is IGroupShape groupShape)
                 {
-                    foreach (var s in GetAllShapes((shape as GroupShape)?.Shapes))
+                    foreach (var s in GetAllShapes(groupShape.Shapes))
                     {
                         yield return s;
                     }

@@ -11,7 +11,7 @@ namespace Core2D.Shapes
     /// <summary>
     /// Rectangle shape.
     /// </summary>
-    public class RectangleShape : TextShape, ICopyable
+    public class RectangleShape : TextShape
     {
         private bool _isGrid;
         private double _offsetX;

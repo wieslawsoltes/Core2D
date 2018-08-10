@@ -2,7 +2,7 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
 using System.Collections.Generic;
-using Core2D.Shapes;
+using Core2D.Shapes.Interfaces;
 
 namespace Core2D.Path.Segments
 {
@@ -11,19 +11,19 @@ namespace Core2D.Path.Segments
     /// </summary>
     public class LineSegment : PathSegment, ICopyable
     {
-        private PointShape _point;
+        private IPointShape _point;
 
         /// <summary>
         /// Gets or sets end point.
         /// </summary>
-        public PointShape Point
+        public IPointShape Point
         {
             get => _point;
             set => Update(ref _point, value);
         }
 
         /// <inheritdoc/>
-        public override IEnumerable<PointShape> GetPoints()
+        public override IEnumerable<IPointShape> GetPoints()
         {
             yield return Point;
         }
@@ -41,7 +41,7 @@ namespace Core2D.Path.Segments
         /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
         /// <param name="isSmoothJoin">The flag indicating whether shape is smooth join.</param>
         /// <returns>The new instance of the <see cref="LineSegment"/> class.</returns>
-        public static LineSegment Create(PointShape point, bool isStroked, bool isSmoothJoin)
+        public static LineSegment Create(IPointShape point, bool isStroked, bool isSmoothJoin)
         {
             return new LineSegment()
             {

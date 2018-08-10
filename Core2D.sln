@@ -124,6 +124,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D.FileSystem.DotNet.Un
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D.UnitTests", "tests\Core2D.UnitTests\Core2D.UnitTests.csproj", "{AB31E0E2-9090-4461-84BE-5C5AAA19758F}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D.Shapes", "src\Core2D.Shapes\Core2D.Shapes.csproj", "{2304A6B6-B64A-4E10-AC4D-0C56AE9126D5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|AnyCPU = Debug|AnyCPU
@@ -234,6 +236,10 @@ Global
 		{AB31E0E2-9090-4461-84BE-5C5AAA19758F}.Debug|AnyCPU.Build.0 = Debug|Any CPU
 		{AB31E0E2-9090-4461-84BE-5C5AAA19758F}.Release|AnyCPU.ActiveCfg = Release|Any CPU
 		{AB31E0E2-9090-4461-84BE-5C5AAA19758F}.Release|AnyCPU.Build.0 = Release|Any CPU
+		{2304A6B6-B64A-4E10-AC4D-0C56AE9126D5}.Debug|AnyCPU.ActiveCfg = Debug|Any CPU
+		{2304A6B6-B64A-4E10-AC4D-0C56AE9126D5}.Debug|AnyCPU.Build.0 = Debug|Any CPU
+		{2304A6B6-B64A-4E10-AC4D-0C56AE9126D5}.Release|AnyCPU.ActiveCfg = Release|Any CPU
+		{2304A6B6-B64A-4E10-AC4D-0C56AE9126D5}.Release|AnyCPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -270,6 +276,7 @@ Global
 		{12889680-3769-4914-BE60-5D09E83DF5B2} = {BC6BAFE6-1735-4549-A7CC-819274780B38}
 		{E9C30F6F-00DD-494A-8E7C-253A5C76E999} = {8756F874-0C1B-4AB8-83E0-0BEDA782D212}
 		{AB31E0E2-9090-4461-84BE-5C5AAA19758F} = {8756F874-0C1B-4AB8-83E0-0BEDA782D212}
+		{2304A6B6-B64A-4E10-AC4D-0C56AE9126D5} = {BC6BAFE6-1735-4549-A7CC-819274780B38}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2614B90F-C6F8-435C-8BD0-09AEE3ABAD2B}

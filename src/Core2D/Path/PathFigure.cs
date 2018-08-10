@@ -6,7 +6,7 @@ using System.Collections.Immutable;
 using System.Linq;
 using System.Text;
 using Core2D.Attributes;
-using Core2D.Shapes;
+using Core2D.Shapes.Interfaces;
 
 namespace Core2D.Path
 {
@@ -15,7 +15,7 @@ namespace Core2D.Path
     /// </summary>
     public class PathFigure : ObservableObject, ICopyable
     {
-        private PointShape _startPoint;
+        private IPointShape _startPoint;
         private ImmutableArray<PathSegment> _segments;
         private bool _isFilled;
         private bool _isClosed;
@@ -23,7 +23,7 @@ namespace Core2D.Path
         /// <summary>
         /// Gets or sets start point.
         /// </summary>
-        public PointShape StartPoint
+        public IPointShape StartPoint
         {
             get => _startPoint;
             set => Update(ref _startPoint, value);
@@ -70,7 +70,7 @@ namespace Core2D.Path
         /// Get all points in the figure.
         /// </summary>
         /// <returns>All points in the figure.</returns>
-        public IEnumerable<PointShape> GetPoints()
+        public IEnumerable<IPointShape> GetPoints()
         {
             yield return StartPoint;
 
@@ -93,7 +93,7 @@ namespace Core2D.Path
         /// <param name="isFilled">The flag indicating whether path is filled.</param>
         /// <param name="isClosed">The flag indicating whether path is closed.</param>
         /// <returns>The new instance of the <see cref="PathFigure"/> class.</returns>
-        public static PathFigure Create(PointShape startPoint, bool isFilled = true, bool isClosed = true)
+        public static PathFigure Create(IPointShape startPoint, bool isFilled = true, bool isClosed = true)
         {
             return new PathFigure()
             {

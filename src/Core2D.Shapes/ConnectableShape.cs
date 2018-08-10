@@ -5,20 +5,21 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using Core2D.Renderer;
 using Core2D.Shape;
+using Core2D.Shapes.Interfaces;
 
 namespace Core2D.Shapes
 {
     /// <summary>
     /// Connectable shape.
     /// </summary>
-    public abstract class ConnectableShape : BaseShape, ICopyable
+    public abstract class ConnectableShape : BaseShape, IConnectableShape
     {
-        private ImmutableArray<PointShape> _connectors;
+        private ImmutableArray<IPointShape> _connectors;
 
         /// <summary>
         /// Gets or sets connectors collection.
         /// </summary>
-        public ImmutableArray<PointShape> Connectors
+        public ImmutableArray<IPointShape> Connectors
         {
             get => _connectors;
             set => Update(ref _connectors, value);
@@ -30,7 +31,7 @@ namespace Core2D.Shapes
         public ConnectableShape()
             : base()
         {
-            _connectors = ImmutableArray.Create<PointShape>();
+            _connectors = ImmutableArray.Create<IPointShape>();
         }
 
         /// <inheritdoc/>
@@ -72,7 +73,7 @@ namespace Core2D.Shapes
         }
 
         /// <inheritdoc/>
-        public override void Move(ISet<BaseShape> selected, double dx, double dy)
+        public override void Move(ISet<IShape> selected, double dx, double dy)
         {
             foreach (var connector in Connectors)
             {
@@ -81,7 +82,7 @@ namespace Core2D.Shapes
         }
 
         /// <inheritdoc/>
-        public override void Select(ISet<BaseShape> selected)
+        public override void Select(ISet<IShape> selected)
         {
             base.Select(selected);
 
@@ -92,7 +93,7 @@ namespace Core2D.Shapes
         }
 
         /// <inheritdoc/>
-        public override void Deselect(ISet<BaseShape> selected)
+        public override void Deselect(ISet<IShape> selected)
         {
             base.Deselect(selected);
 
@@ -103,13 +104,13 @@ namespace Core2D.Shapes
         }
 
         /// <inheritdoc/>
-        public override IEnumerable<PointShape> GetPoints()
+        public override IEnumerable<IPointShape> GetPoints()
         {
             return Connectors;
         }
 
         /// <inheritdoc/>
-        public virtual object Copy(IDictionary<object, object> shared)
+        public override object Copy(IDictionary<object, object> shared)
         {
             throw new NotImplementedException();
         }

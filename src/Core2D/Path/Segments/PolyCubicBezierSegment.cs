@@ -3,7 +3,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
-using Core2D.Shapes;
+using Core2D.Shapes.Interfaces;
 
 namespace Core2D.Path.Segments
 {
@@ -25,7 +25,7 @@ namespace Core2D.Path.Segments
         /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
         /// <param name="isSmoothJoin">The flag indicating whether shape is smooth join.</param>
         /// <returns>The new instance of the <see cref="PolyCubicBezierSegment"/> class.</returns>
-        public static PolyCubicBezierSegment Create(ImmutableArray<PointShape> points, bool isStroked, bool isSmoothJoin)
+        public static PolyCubicBezierSegment Create(ImmutableArray<IPointShape> points, bool isStroked, bool isSmoothJoin)
         {
             return new PolyCubicBezierSegment()
             {

@@ -2,7 +2,7 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
 using System.Collections.Generic;
-using Core2D.Shapes;
+using Core2D.Shapes.Interfaces;
 
 namespace Core2D.Path.Segments
 {
@@ -11,13 +11,13 @@ namespace Core2D.Path.Segments
     /// </summary>
     public class QuadraticBezierSegment : PathSegment, ICopyable
     {
-        private PointShape _point1;
-        private PointShape _point2;
+        private IPointShape _point1;
+        private IPointShape _point2;
 
         /// <summary>
         /// Gets or sets control point.
         /// </summary>
-        public PointShape Point1
+        public IPointShape Point1
         {
             get => _point1;
             set => Update(ref _point1, value);
@@ -26,14 +26,14 @@ namespace Core2D.Path.Segments
         /// <summary>
         /// Gets or sets end point.
         /// </summary>
-        public PointShape Point2
+        public IPointShape Point2
         {
             get => _point2;
             set => Update(ref _point2, value);
         }
 
         /// <inheritdoc/>
-        public override IEnumerable<PointShape> GetPoints()
+        public override IEnumerable<IPointShape> GetPoints()
         {
             yield return Point1;
             yield return Point2;
@@ -53,7 +53,7 @@ namespace Core2D.Path.Segments
         /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
         /// <param name="isSmoothJoin">The flag indicating whether shape is smooth join.</param>
         /// <returns>The new instance of the <see cref="QuadraticBezierSegment"/> class.</returns>
-        public static QuadraticBezierSegment Create(PointShape point1, PointShape point2, bool isStroked, bool isSmoothJoin)
+        public static QuadraticBezierSegment Create(IPointShape point1, IPointShape point2, bool isStroked, bool isSmoothJoin)
         {
             return new QuadraticBezierSegment()
             {

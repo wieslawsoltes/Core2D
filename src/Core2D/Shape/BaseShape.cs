@@ -3,7 +3,7 @@
 using System.Collections.Generic;
 using Core2D.Data;
 using Core2D.Renderer;
-using Core2D.Shapes;
+using Core2D.Shapes.Interfaces;
 using Core2D.Style;
 
 namespace Core2D.Shape
@@ -11,9 +11,9 @@ namespace Core2D.Shape
     /// <summary>
     /// Base class for shapes.
     /// </summary>
-    public abstract class BaseShape : ObservableObject, IDrawable, ISelectable
+    public abstract class BaseShape : ObservableObject, IShape
     {
-        private BaseShape _owner;
+        private IShape _owner;
         private ShapeState _state;
         private ShapeStyle _style;
         private MatrixObject _transform;
@@ -35,7 +35,7 @@ namespace Core2D.Shape
         /// <summary>
         /// Gets or sets shape owner.
         /// </summary>
-        public virtual BaseShape Owner
+        public virtual IShape Owner
         {
             get => _owner;
             set => Update(ref _owner, value);
@@ -124,10 +124,10 @@ namespace Core2D.Shape
         }
 
         /// <inheritdoc/>
-        public abstract void Move(ISet<BaseShape> selected, double dx, double dy);
+        public abstract void Move(ISet<IShape> selected, double dx, double dy);
 
         /// <inheritdoc/>
-        public virtual void Select(ISet<BaseShape> selected)
+        public virtual void Select(ISet<IShape> selected)
         {
             if (!selected.Contains(this))
             {
@@ -136,7 +136,7 @@ namespace Core2D.Shape
         }
 
         /// <inheritdoc/>
-        public virtual void Deselect(ISet<BaseShape> selected)
+        public virtual void Deselect(ISet<IShape> selected)
         {
             if (selected.Contains(this))
             {
@@ -144,11 +144,14 @@ namespace Core2D.Shape
             }
         }
 
+        /// <inheritdoc/>
+        public abstract object Copy(IDictionary<object, object> shared);
+
         /// <summary>
         /// Get all points in the shape.
         /// </summary>
         /// <returns>All points in the shape.</returns>
-        public abstract IEnumerable<PointShape> GetPoints();
+        public abstract IEnumerable<IPointShape> GetPoints();
 
         /// <summary>
         /// Check whether the <see cref="Owner"/> property has changed from its default value.

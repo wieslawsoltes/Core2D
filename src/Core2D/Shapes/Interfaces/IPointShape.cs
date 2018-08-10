@@ -4,18 +4,18 @@
 namespace Core2D.Shapes.Interfaces
 {
     /// <summary>
-    /// Defines line shape contract.
+    /// Defines point shape contract.
     /// </summary>
-    public interface ILine
+    public interface IPointShape : IShape
     {
         /// <summary>
-        /// Gets or sets start point.
+        /// Gets or sets X coordinate of point.
         /// </summary>
-        PointShape Start { get; set; }
+        double X { get; set; }
 
         /// <summary>
-        /// Gets or sets end point.
+        /// Gets or sets Y coordinate of point.
         /// </summary>
-        PointShape End { get; set; }
+        double Y { get; set; }
     }
 }

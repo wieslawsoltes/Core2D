@@ -14,7 +14,7 @@ namespace Core2D.Editor.Tools.Selection
     public class ToolLineSelection
     {
         private readonly LayerContainer _layer;
-        private readonly ILine _line;
+        private readonly ILineShape _line;
         private readonly ShapeStyle _style;
         private readonly BaseShape _point;
         private PointShape _startHelperPoint;
@@ -27,7 +27,7 @@ namespace Core2D.Editor.Tools.Selection
         /// <param name="shape">The selected shape.</param>
         /// <param name="style">The selection shapes style.</param>
         /// <param name="point">The selection point shape.</param>
-        public ToolLineSelection(LayerContainer layer, ILine shape, ShapeStyle style, BaseShape point)
+        public ToolLineSelection(LayerContainer layer, ILineShape shape, ShapeStyle style, BaseShape point)
         {
             _layer = layer;
             _line = shape;

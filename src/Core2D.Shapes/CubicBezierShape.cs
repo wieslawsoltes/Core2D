@@ -10,9 +10,9 @@ using Core2D.Style;
 namespace Core2D.Shapes
 {
     /// <summary>
-    /// Arc shape.
+    /// Cubic bezier shape.
     /// </summary>
-    public class ArcShape : BaseShape, IArc, ICopyable
+    public class CubicBezierShape : BaseShape, ICubicBezierShape, ICopyable
     {
         private PointShape _point1;
         private PointShape _point2;
@@ -20,7 +20,7 @@ namespace Core2D.Shapes
         private PointShape _point4;
 
         /// <summary>
-        /// Gets or sets top-left corner point.
+        /// Gets or sets start point.
         /// </summary>
         public PointShape Point1
         {
@@ -29,7 +29,7 @@ namespace Core2D.Shapes
         }
 
         /// <summary>
-        /// Gets or sets bottom-right corner point.
+        /// Gets or sets first control point.
         /// </summary>
         public PointShape Point2
         {
@@ -38,7 +38,7 @@ namespace Core2D.Shapes
         }
 
         /// <summary>
-        /// Gets or sets point used to calculate arc start angle.
+        /// Gets or sets second control point.
         /// </summary>
         public PointShape Point3
         {
@@ -47,7 +47,7 @@ namespace Core2D.Shapes
         }
 
         /// <summary>
-        /// Gets or sets point used to calculate arc end angle.
+        /// Gets or sets end point.
         /// </summary>
         public PointShape Point4
         {
@@ -109,7 +109,7 @@ namespace Core2D.Shapes
         }
 
         /// <inheritdoc/>
-        public override void Move(ISet<BaseShape> selected, double dx, double dy)
+        public override void Move(ISet<IShape> selected, double dx, double dy)
         {
             if (!Point1.State.Flags.HasFlag(ShapeStateFlags.Connector))
             {
@@ -133,7 +133,7 @@ namespace Core2D.Shapes
         }
 
         /// <inheritdoc/>
-        public override void Select(ISet<BaseShape> selected)
+        public override void Select(ISet<IShape> selected)
         {
             base.Select(selected);
             Point1.Select(selected);
@@ -143,7 +143,7 @@ namespace Core2D.Shapes
         }
 
         /// <inheritdoc/>
-        public override void Deselect(ISet<BaseShape> selected)
+        public override void Deselect(ISet<IShape> selected)
         {
             base.Deselect(selected);
             Point1.Deselect(selected);
@@ -162,31 +162,31 @@ namespace Core2D.Shapes
         }
 
         /// <inheritdoc/>
-        public virtual object Copy(IDictionary<object, object> shared)
+        public override object Copy(IDictionary<object, object> shared)
         {
             throw new NotImplementedException();
         }
 
         /// <summary>
-        /// Creates a new <see cref="ArcShape"/> instance.
+        /// Creates a new <see cref="CubicBezierShape"/> instance.
         /// </summary>
-        /// <param name="x1">The X coordinate of <see cref="ArcShape.Point1"/> point.</param>
-        /// <param name="y1">The Y coordinate of <see cref="ArcShape.Point1"/> point.</param>
-        /// <param name="x2">The X coordinate of <see cref="ArcShape.Point2"/> point.</param>
-        /// <param name="y2">The Y coordinate of <see cref="ArcShape.Point2"/> point.</param>
-        /// <param name="x3">The X coordinate of <see cref="ArcShape.Point3"/> point.</param>
-        /// <param name="y3">The Y coordinate of <see cref="ArcShape.Point3"/> point.</param>
-        /// <param name="x4">The X coordinate of <see cref="ArcShape.Point4"/> point.</param>
-        /// <param name="y4">The Y coordinate of <see cref="ArcShape.Point4"/> point.</param>
+        /// <param name="x1">The X coordinate of <see cref="CubicBezierShape.Point1"/> point.</param>
+        /// <param name="y1">The Y coordinate of <see cref="CubicBezierShape.Point1"/> point.</param>
+        /// <param name="x2">The X coordinate of <see cref="CubicBezierShape.Point2"/> point.</param>
+        /// <param name="y2">The Y coordinate of <see cref="CubicBezierShape.Point2"/> point.</param>
+        /// <param name="x3">The X coordinate of <see cref="CubicBezierShape.Point3"/> point.</param>
+        /// <param name="y3">The Y coordinate of <see cref="CubicBezierShape.Point3"/> point.</param>
+        /// <param name="x4">The X coordinate of <see cref="CubicBezierShape.Point4"/> point.</param>
+        /// <param name="y4">The Y coordinate of <see cref="CubicBezierShape.Point4"/> point.</param>
         /// <param name="style">The shape style.</param>
         /// <param name="point">The point template.</param>
         /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
         /// <param name="isFilled">The flag indicating whether shape is filled.</param>
         /// <param name="name">The shape name.</param>
-        /// <returns>The new instance of the <see cref="ArcShape"/> class.</returns>
-        public static ArcShape Create(double x1, double y1, double x2, double y2, double x3, double y3, double x4, double y4, ShapeStyle style, BaseShape point, bool isStroked = true, bool isFilled = false, string name = "")
+        /// <returns>The new instance of the <see cref="CubicBezierShape"/> class.</returns>
+        public static CubicBezierShape Create(double x1, double y1, double x2, double y2, double x3, double y3, double x4, double y4, ShapeStyle style, BaseShape point, bool isStroked = true, bool isFilled = false, string name = "")
         {
-            return new ArcShape()
+            return new CubicBezierShape()
             {
                 Name = name,
                 Style = style,
@@ -200,37 +200,37 @@ namespace Core2D.Shapes
         }
 
         /// <summary>
-        /// Creates a new <see cref="ArcShape"/> instance.
+        /// Creates a new <see cref="CubicBezierShape"/> instance.
         /// </summary>
-        /// <param name="x">The X coordinate of <see cref="ArcShape.Point1"/>, <see cref="ArcShape.Point2"/>, <see cref="ArcShape.Point3"/> and <see cref="ArcShape.Point4"/> points.</param>
-        /// <param name="y">The Y coordinate of <see cref="ArcShape.Point1"/>, <see cref="ArcShape.Point2"/>, <see cref="ArcShape.Point3"/> and <see cref="ArcShape.Point4"/> points.</param>
+        /// <param name="x">The X coordinate of <see cref="CubicBezierShape.Point1"/>, <see cref="CubicBezierShape.Point2"/>, <see cref="CubicBezierShape.Point3"/> and <see cref="CubicBezierShape.Point4"/> points.</param>
+        /// <param name="y">The Y coordinate of <see cref="CubicBezierShape.Point1"/>, <see cref="CubicBezierShape.Point2"/>, <see cref="CubicBezierShape.Point3"/> and <see cref="CubicBezierShape.Point4"/> points.</param>
         /// <param name="style">The shape style.</param>
         /// <param name="point">The point template.</param>
         /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
         /// <param name="isFilled">The flag indicating whether shape is filled.</param>
         /// <param name="name">The shape name.</param>
-        /// <returns>The new instance of the <see cref="ArcShape"/> class.</returns>
-        public static ArcShape Create(double x, double y, ShapeStyle style, BaseShape point, bool isStroked = true, bool isFilled = false, string name = "")
+        /// <returns>The new instance of the <see cref="CubicBezierShape"/> class.</returns>
+        public static CubicBezierShape Create(double x, double y, ShapeStyle style, BaseShape point, bool isStroked = true, bool isFilled = false, string name = "")
         {
             return Create(x, y, x, y, x, y, x, y, style, point, isStroked, isFilled, name);
         }
 
         /// <summary>
-        /// Creates a new <see cref="ArcShape"/> instance.
+        /// Creates a new <see cref="CubicBezierShape"/> instance.
         /// </summary>
-        /// <param name="point1">The <see cref="ArcShape.Point1"/> point.</param>
-        /// <param name="point2">The <see cref="ArcShape.Point2"/> point.</param>
-        /// <param name="point3">The <see cref="ArcShape.Point3"/> point.</param>
-        /// <param name="point4">The <see cref="ArcShape.Point4"/> point.</param>
+        /// <param name="point1">The <see cref="CubicBezierShape.Point1"/> point.</param>
+        /// <param name="point2">The <see cref="CubicBezierShape.Point2"/> point.</param>
+        /// <param name="point3">The <see cref="CubicBezierShape.Point3"/> point.</param>
+        /// <param name="point4">The <see cref="CubicBezierShape.Point4"/> point.</param>
         /// <param name="style">The shape style.</param>
         /// <param name="point">The point template.</param>
         /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
         /// <param name="isFilled">The flag indicating whether shape is filled.</param>
         /// <param name="name">The shape name.</param>
-        /// <returns>The new instance of the <see cref="ArcShape"/> class.</returns>
-        public static ArcShape Create(PointShape point1, PointShape point2, PointShape point3, PointShape point4, ShapeStyle style, BaseShape point, bool isStroked = true, bool isFilled = false, string name = "")
+        /// <returns>The new instance of the <see cref="CubicBezierShape"/> class.</returns>
+        public static CubicBezierShape Create(PointShape point1, PointShape point2, PointShape point3, PointShape point4, ShapeStyle style, BaseShape point, bool isStroked = true, bool isFilled = false, string name = "")
         {
-            return new ArcShape()
+            return new CubicBezierShape()
             {
                 Name = name,
                 Style = style,

@@ -1,6 +1,6 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
-using Core2D.Shapes;
+using Core2D.Shapes.Interfaces;
 
 namespace Core2D
 {
@@ -15,7 +15,7 @@ namespace Core2D
         /// <param name="point">The source point used for target connection.</param>
         /// <param name="target">The target point to connect to source point.</param>
         /// <returns>Returns true if connected successfully; otherwise, returns false.</returns>
-        bool Connect(PointShape point, PointShape target);
+        bool Connect(IPointShape point, IPointShape target);
 
         /// <summary>
         /// Disconnects point.
@@ -23,7 +23,7 @@ namespace Core2D
         /// <param name="point">The target point to disconnect.</param>
         /// <param name="result">The point created as result of disconnection.</param>
         /// <returns>Returns true if disconnected successfully; otherwise, returns false.</returns>
-        bool Disconnect(PointShape point, out PointShape result);
+        bool Disconnect(IPointShape point, out IPointShape result);
 
         /// <summary>
         /// Disconnects all points.

@@ -4,26 +4,16 @@ using System;
 using System.Collections.Generic;
 using Core2D.Renderer;
 using Core2D.Shape;
+using Core2D.Shapes.Interfaces;
 using Core2D.Style;
 
 namespace Core2D.Shapes
 {
     /// <summary>
-    /// Image shape.
+    /// Ellipse shape.
     /// </summary>
-    public class ImageShape : TextShape, ICopyable
+    public class EllipseShape : TextShape, IEllipseShape
     {
-        private string _key;
-
-        /// <summary>
-        /// Gets or sets image key used to retrieve bytes from <see cref="IImageCache"/> repository.
-        /// </summary>
-        public string Key
-        {
-            get => _key;
-            set => Update(ref _key, value);
-        }
-
         /// <inheritdoc/>
         public override void Draw(object dc, ShapeRenderer renderer, double dx, double dy, object db, object r)
         {
@@ -48,7 +38,7 @@ namespace Core2D.Shapes
         }
 
         /// <summary>
-        /// Creates a new <see cref="ImageShape"/> instance.
+        /// Creates a new <see cref="EllipseShape"/> instance.
         /// </summary>
         /// <param name="x1">The X coordinate of <see cref="TextShape.TopLeft"/> corner point.</param>
         /// <param name="y1">The Y coordinate of <see cref="TextShape.TopLeft"/> corner point.</param>
@@ -56,15 +46,14 @@ namespace Core2D.Shapes
         /// <param name="y2">The Y coordinate of <see cref="TextShape.BottomRight"/> corner point.</param>
         /// <param name="style">The shape style.</param>
         /// <param name="point">The point template.</param>
-        /// <param name="key">The image key.</param>
         /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
         /// <param name="isFilled">The flag indicating whether shape is filled.</param>
         /// <param name="text">The text string.</param>
         /// <param name="name">The shape name.</param>
-        /// <returns>The new instance of the <see cref="ImageShape"/> class.</returns>
-        public static ImageShape Create(double x1, double y1, double x2, double y2, ShapeStyle style, BaseShape point, string key, bool isStroked = false, bool isFilled = false, string text = null, string name = "")
+        /// <returns>The new instance of the <see cref="EllipseShape"/> class.</returns>
+        public static EllipseShape Create(double x1, double y1, double x2, double y2, ShapeStyle style, BaseShape point, bool isStroked = true, bool isFilled = false, string text = null, string name = "")
         {
-            return new ImageShape()
+            return new EllipseShape()
             {
                 Name = name,
                 Style = style,
@@ -72,45 +61,42 @@ namespace Core2D.Shapes
                 IsFilled = isFilled,
                 TopLeft = PointShape.Create(x1, y1, point),
                 BottomRight = PointShape.Create(x2, y2, point),
-                Key = key,
-                Text = text
+                Text = text,
             };
         }
 
         /// <summary>
-        /// Creates a new <see cref="ImageShape"/> instance.
+        /// Creates a new <see cref="EllipseShape"/> instance.
         /// </summary>
         /// <param name="x">The X coordinate of <see cref="TextShape.TopLeft"/> and <see cref="TextShape.BottomRight"/> corner points.</param>
         /// <param name="y">The Y coordinate of <see cref="TextShape.TopLeft"/> and <see cref="TextShape.BottomRight"/> corner points.</param>
         /// <param name="style">The shape style.</param>
         /// <param name="point">The point template.</param>
-        /// <param name="key">The image key.</param>
         /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
         /// <param name="isFilled">The flag indicating whether shape is filled.</param>
         /// <param name="text">The text string.</param>
         /// <param name="name">The shape name.</param>
-        /// <returns>The new instance of the <see cref="ImageShape"/> class.</returns>
-        public static ImageShape Create(double x, double y, ShapeStyle style, BaseShape point, string key, bool isStroked = false, bool isFilled = false, string text = null, string name = "")
+        /// <returns>The new instance of the <see cref="EllipseShape"/> class.</returns>
+        public static EllipseShape Create(double x, double y, ShapeStyle style, BaseShape point, bool isStroked = true, bool isFilled = false, string text = null, string name = "")
         {
-            return Create(x, y, x, y, style, point, key, isStroked, isFilled, text, name);
+            return Create(x, y, x, y, style, point, isStroked, isFilled, text, name);
         }
 
         /// <summary>
-        /// Creates a new <see cref="ImageShape"/> instance.
+        /// Creates a new <see cref="EllipseShape"/> instance.
         /// </summary>
         /// <param name="topLeft">The <see cref="TextShape.TopLeft"/> corner point.</param>
         /// <param name="bottomRight">The <see cref="TextShape.BottomRight"/> corner point.</param>
         /// <param name="style">The shape style.</param>
         /// <param name="point">The point template.</param>
-        /// <param name="key">The image key.</param>
         /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
         /// <param name="isFilled">The flag indicating whether shape is filled.</param>
         /// <param name="text">The text string.</param>
         /// <param name="name">The shape name.</param>
-        /// <returns>The new instance of the <see cref="ImageShape"/> class.</returns>
-        public static ImageShape Create(PointShape topLeft, PointShape bottomRight, ShapeStyle style, BaseShape point, string key, bool isStroked = false, bool isFilled = false, string text = null, string name = "")
+        /// <returns>The new instance of the <see cref="EllipseShape"/> class.</returns>
+        public static EllipseShape Create(PointShape topLeft, PointShape bottomRight, ShapeStyle style, BaseShape point, bool isStroked = true, bool isFilled = false, string text = null, string name = "")
         {
-            return new ImageShape()
+            return new EllipseShape()
             {
                 Name = name,
                 Style = style,
@@ -118,15 +104,8 @@ namespace Core2D.Shapes
                 IsFilled = isFilled,
                 TopLeft = topLeft,
                 BottomRight = bottomRight,
-                Key = key,
-                Text = text
+                Text = text,
             };
         }
-
-        /// <summary>
-        /// Check whether the <see cref="Key"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeKey() => !string.IsNullOrWhiteSpace(_key);
     }
 }

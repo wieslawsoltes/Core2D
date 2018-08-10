@@ -5,7 +5,7 @@ using Core2D.Shapes.Interfaces;
 
 namespace Core2D.Editor.Tools.Path.Shapes
 {
-    internal class PathShapeCubicBezier : ICubicBezier
+    internal class PathShapeCubicBezier : ICubicBezierShape
     {
         public PointShape Point1 { get; set; }
         public PointShape Point2 { get; set; }

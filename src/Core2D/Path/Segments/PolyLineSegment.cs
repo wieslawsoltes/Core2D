@@ -3,7 +3,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
-using Core2D.Shapes;
+using Core2D.Shapes.Interfaces;
 
 namespace Core2D.Path.Segments
 {
@@ -25,7 +25,7 @@ namespace Core2D.Path.Segments
         /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
         /// <param name="isSmoothJoin">The flag indicating whether shape is smooth join.</param>
         /// <returns>The new instance of the <see cref="PolyLineSegment"/> class.</returns>
-        public static PolyLineSegment Create(ImmutableArray<PointShape> points, bool isStroked, bool isSmoothJoin)
+        public static PolyLineSegment Create(ImmutableArray<IPointShape> points, bool isStroked, bool isSmoothJoin)
         {
             return new PolyLineSegment()
             {
