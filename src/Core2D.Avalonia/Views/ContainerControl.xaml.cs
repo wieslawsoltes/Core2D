@@ -5,7 +5,6 @@ using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 using Avalonia.Media;
 using Core2D.Avalonia.Renderer;
-using Core2D.Containers;
 using Core2D.Renderer;
 using Core2D.Renderer.Presenters;
 

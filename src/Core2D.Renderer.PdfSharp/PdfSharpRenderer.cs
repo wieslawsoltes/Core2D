@@ -3,7 +3,6 @@
 using System;
 using System.Collections.Immutable;
 using Core2D.Data;
-using Core2D.Shapes;
 using Core2D.Style;
 using PdfSharp.Drawing;
 using PdfSharp.Pdf;

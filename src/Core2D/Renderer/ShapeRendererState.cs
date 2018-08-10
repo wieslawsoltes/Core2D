@@ -1,7 +1,7 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System.Collections.Immutable;
-using Core2D.Shape;
+using Core2D.Shapes.Interfaces;
 
 namespace Core2D.Renderer
 {
@@ -15,8 +15,8 @@ namespace Core2D.Renderer
         private double _zoomX;
         private double _zoomY;
         private ShapeState _drawShapeState;
-        private BaseShape _selectedShape;
-        private ImmutableHashSet<BaseShape> _selectedShapes;
+        private IShape _selectedShape;
+        private ImmutableHashSet<IShape> _selectedShapes;
         private IImageCache _imageCache;
 
         /// <summary>
@@ -67,7 +67,7 @@ namespace Core2D.Renderer
         /// <summary>
         /// Currently selected shape.
         /// </summary>
-        public BaseShape SelectedShape
+        public IShape SelectedShape
         {
             get => _selectedShape;
             set => Update(ref _selectedShape, value);
@@ -76,7 +76,7 @@ namespace Core2D.Renderer
         /// <summary>
         /// Currently selected shapes.
         /// </summary>
-        public ImmutableHashSet<BaseShape> SelectedShapes
+        public ImmutableHashSet<IShape> SelectedShapes
         {
             get => _selectedShapes;
             set => Update(ref _selectedShapes, value);

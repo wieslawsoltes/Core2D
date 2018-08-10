@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using Core2D.Path;
 using Core2D.Path.Segments;
-using Core2D.Shapes;
 using A = Avalonia;
 using AM = Avalonia.Media;
 

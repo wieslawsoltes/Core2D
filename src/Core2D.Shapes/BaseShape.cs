@@ -6,7 +6,7 @@ using Core2D.Renderer;
 using Core2D.Shapes.Interfaces;
 using Core2D.Style;
 
-namespace Core2D.Shape
+namespace Core2D.Shapes
 {
     /// <summary>
     /// Base class for shapes.

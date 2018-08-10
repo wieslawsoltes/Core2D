@@ -4,7 +4,6 @@ using System.Linq;
 using Core2D.Containers.Interfaces;
 using Core2D.Data;
 using Core2D.Interfaces;
-using Core2D.Shape;
 using Core2D.Shapes.Interfaces;
 using Core2D.Style;
 

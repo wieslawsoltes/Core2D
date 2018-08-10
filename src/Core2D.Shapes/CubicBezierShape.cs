@@ -3,7 +3,6 @@
 using System;
 using System.Collections.Generic;
 using Core2D.Renderer;
-using Core2D.Shape;
 using Core2D.Shapes.Interfaces;
 using Core2D.Style;
 
@@ -12,7 +11,7 @@ namespace Core2D.Shapes
     /// <summary>
     /// Cubic bezier shape.
     /// </summary>
-    public class CubicBezierShape : BaseShape, ICubicBezierShape, ICopyable
+    public class CubicBezierShape : BaseShape, ICubicBezierShape
     {
         private IPointShape _point1;
         private IPointShape _point2;

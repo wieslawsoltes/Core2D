@@ -2,9 +2,7 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using Core2D.Data;
 using Core2D.Interfaces;
-using Core2D.Containers;
 using Core2D.Renderer;
-using Core2D.Shape;
 using Core2D.Renderer.WinForms;
 using System;
 using System.Collections.Generic;

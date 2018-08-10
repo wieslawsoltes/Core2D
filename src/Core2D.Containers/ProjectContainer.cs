@@ -8,7 +8,6 @@ using Core2D.Attributes;
 using Core2D.Containers.Interfaces;
 using Core2D.Data;
 using Core2D.History;
-using Core2D.Shape;
 using Core2D.Shapes.Interfaces;
 using Core2D.Style;
 
@@ -308,7 +307,7 @@ namespace Core2D.Containers
         /// <typeparam name="T">The type of shape to include.</typeparam>
         /// <param name="shapes">The shapes collection.</param>
         /// <returns>All shapes including grouped shapes of specified type.</returns>
-        public static IEnumerable<T> GetAllShapes<T>(IEnumerable<BaseShape> shapes)
+        public static IEnumerable<T> GetAllShapes<T>(IEnumerable<IShape> shapes)
         {
             return GetAllShapes(shapes)?.Where(s => s is T).Cast<T>();
         }

@@ -2,7 +2,6 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System.Diagnostics;
 using Core2D.Editor.Input;
-using Core2D.Shape;
 
 namespace Core2D.Editor
 {

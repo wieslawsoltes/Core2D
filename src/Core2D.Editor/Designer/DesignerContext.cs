@@ -11,7 +11,6 @@ using Core2D.Interfaces;
 using Core2D.Path;
 using Core2D.Path.Segments;
 using Core2D.Renderer;
-using Core2D.Shape;
 using Core2D.Shapes.Interfaces;
 using Core2D.Style;
 

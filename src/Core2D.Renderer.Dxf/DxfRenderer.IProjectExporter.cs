@@ -2,7 +2,6 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
 using Core2D.Interfaces;
-using Core2D.Containers;
 using DXF = netDxf;
 using DXFH = netDxf.Header;
 using DXFO = netDxf.Objects;

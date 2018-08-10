@@ -3,7 +3,6 @@
 using System;
 using Core2D.Containers.Interfaces;
 using Core2D.Path;
-using Core2D.Shape;
 using Core2D.Style;
 
 namespace Core2D.Editor

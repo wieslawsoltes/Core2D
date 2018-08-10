@@ -4,7 +4,6 @@ using System;
 using System.Collections.Generic;
 using Core2D.Data;
 using Core2D.Renderer;
-using Core2D.Shape;
 using Core2D.Shapes.Interfaces;
 
 namespace Core2D.Shapes

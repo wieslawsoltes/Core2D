@@ -3,12 +3,9 @@
 using System;
 using System.Windows;
 using System.Windows.Controls;
-using Core2D.Containers;
 using Core2D.Data;
 using Core2D.Editor;
 using Core2D.Editor.Input;
-using Core2D.Shape;
-using Core2D.Shapes;
 using Core2D.Style;
 using Core2D.Utilities.Wpf;
 using Microsoft.Win32;

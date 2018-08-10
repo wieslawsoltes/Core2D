@@ -3,7 +3,7 @@
 using System;
 using System.Collections.Generic;
 using Core2D.Renderer;
-using Core2D.Shape;
+using Core2D.Shapes.Interfaces;
 using Core2D.Style;
 
 namespace Core2D.Shapes
@@ -11,7 +11,7 @@ namespace Core2D.Shapes
     /// <summary>
     /// Rectangle shape.
     /// </summary>
-    public class RectangleShape : TextShape
+    public class RectangleShape : TextShape, IRectangleShape
     {
         private bool _isGrid;
         private double _offsetX;

@@ -7,8 +7,6 @@ using System.Globalization;
 using System.Linq;
 using Avalonia;
 using Avalonia.Data.Converters;
-using Core2D.Containers;
-using Core2D.Shape;
 
 namespace Core2D.Avalonia.Converters
 {

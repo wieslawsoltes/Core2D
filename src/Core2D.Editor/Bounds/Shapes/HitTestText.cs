@@ -2,7 +2,6 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
 using System.Collections.Generic;
-using Core2D.Shape;
 using Core2D.Shapes.Interfaces;
 using Spatial;
 

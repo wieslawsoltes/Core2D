@@ -2,7 +2,7 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
 
-namespace Core2D.Shape
+namespace Core2D.Shapes.Interfaces
 {
     /// <summary>
     /// Specifies shape state flags.
