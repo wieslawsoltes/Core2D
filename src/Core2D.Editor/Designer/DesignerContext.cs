@@ -26,37 +26,37 @@ namespace Core2D.Editor.Designer
         public static ProjectEditor Editor { get; set; }
 
         /// <summary>
-        /// The design time <see cref="Core2D.Renderer.MatrixObject"/> template.
+        /// The design time <see cref="MatrixObject"/> template.
         /// </summary>
         public static MatrixObject Transform { get; set; }
 
         /// <summary>
-        /// The design time <see cref="Core2D.Containers.PageContainer"/> template.
+        /// The design time <see cref="IPageContainer"/> template.
         /// </summary>
         public static IPageContainer Template { get; set; }
 
         /// <summary>
-        /// The design time <see cref="Core2D.Containers.PageContainer"/> page.
+        /// The design time <see cref="IPageContainer"/> page.
         /// </summary>
         public static IPageContainer Page { get; set; }
 
         /// <summary>
-        /// The design time <see cref="Core2D.Containers.DocumentContainer"/>.
+        /// The design time <see cref="IDocumentContainer"/>.
         /// </summary>
         public static IDocumentContainer Document { get; set; }
 
         /// <summary>
-        /// The design time <see cref="Core2D.Containers.LayerContainer"/>.
+        /// The design time <see cref="ILayerContainer"/>.
         /// </summary>
         public static ILayerContainer Layer { get; set; }
 
         /// <summary>
-        /// The design time <see cref="Core2D.Containers.Options"/>.
+        /// The design time <see cref="IOptions"/>.
         /// </summary>
         public static IOptions Options { get; set; }
 
         /// <summary>
-        /// The design time <see cref="Core2D.Containers.ProjectContainer"/>.
+        /// The design time <see cref="IProjectContainer"/>.
         /// </summary>
         public static IProjectContainer Project { get; set; }
 
@@ -66,167 +66,167 @@ namespace Core2D.Editor.Designer
         public static Library<ShapeStyle> CurrentStyleLibrary { get; set; }
 
         /// <summary>
-        /// The design time <see cref="Library{GroupShape}"/>.
+        /// The design time <see cref="Library{IGroupShape}"/>.
         /// </summary>
         public static Library<IGroupShape> CurrentGroupLibrary { get; set; }
 
         /// <summary>
-        /// The design time <see cref="Core2D.Shape.ShapeState"/>.
+        /// The design time <see cref="ShapeState"/>.
         /// </summary>
         public static ShapeState State { get; set; }
 
         /// <summary>
-        /// The design time <see cref="Database"/>.
+        /// The design time <see cref="Data.Database"/>.
         /// </summary>
         public static Database Database { get; set; }
 
         /// <summary>
-        /// The design time <see cref="Context"/>.
+        /// The design time <see cref="Data.Context"/>.
         /// </summary>
         public static Context Data { get; set; }
 
         /// <summary>
-        /// The design time <see cref="Record"/>.
+        /// The design time <see cref="Data.Record"/>.
         /// </summary>
         public static Record Record { get; set; }
 
         /// <summary>
-        /// The design time <see cref="Core2D.Style.ArgbColor"/>.
+        /// The design time <see cref="Style.ArgbColor"/>.
         /// </summary>
         public static ArgbColor ArgbColor { get; set; }
 
         /// <summary>
-        /// The design time <see cref="Core2D.Style.ArrowStyle"/>.
+        /// The design time <see cref="Style.ArrowStyle"/>.
         /// </summary>
         public static ArrowStyle ArrowStyle { get; set; }
 
         /// <summary>
-        /// The design time <see cref="Core2D.Style.FontStyle"/>.
+        /// The design time <see cref="Style.FontStyle"/>.
         /// </summary>
         public static FontStyle FontStyle { get; set; }
 
         /// <summary>
-        /// The design time <see cref="Core2D.Style.LineFixedLength"/>.
+        /// The design time <see cref="Style.LineFixedLength"/>.
         /// </summary>
         public static LineFixedLength LineFixedLength { get; set; }
 
         /// <summary>
-        /// The design time <see cref="Core2D.Style.LineStyle"/>.
+        /// The design time <see cref="Style.LineStyle"/>.
         /// </summary>
         public static LineStyle LineStyle { get; set; }
 
         /// <summary>
-        /// The design time <see cref="Core2D.Style.ShapeStyle"/>.
+        /// The design time <see cref="Style.ShapeStyle"/>.
         /// </summary>
         public static ShapeStyle Style { get; set; }
 
         /// <summary>
-        /// The design time <see cref="Core2D.Style.TextStyle"/>.
+        /// The design time <see cref="Style.TextStyle"/>.
         /// </summary>
         public static TextStyle TextStyle { get; set; }
 
         /// <summary>
-        /// The design time <see cref="Shapes.ArcShape"/>.
+        /// The design time <see cref="IArcShape"/>.
         /// </summary>
         public static IArcShape Arc { get; set; }
 
         /// <summary>
-        /// The design time <see cref="Shapes.CubicBezierShape"/>.
+        /// The design time <see cref="ICubicBezierShape"/>.
         /// </summary>
         public static ICubicBezierShape CubicBezier { get; set; }
 
         /// <summary>
-        /// The design time <see cref="Shapes.EllipseShape"/>.
+        /// The design time <see cref="IEllipseShape"/>.
         /// </summary>
         public static IEllipseShape Ellipse { get; set; }
 
         /// <summary>
-        /// The design time <see cref="Shapes.GroupShape"/>.
+        /// The design time <see cref="IGroupShape"/>.
         /// </summary>
         public static IGroupShape Group { get; set; }
 
         /// <summary>
-        /// The design time <see cref="Shapes.ImageShape"/>.
+        /// The design time <see cref=IImageShape"/>.
         /// </summary>
         public static IImageShape Image { get; set; }
 
         /// <summary>
-        /// The design time <see cref="Shapes.LineShape"/>.
+        /// The design time <see cref="ILineShape"/>.
         /// </summary>
         public static ILineShape Line { get; set; }
 
         /// <summary>
-        /// The design time <see cref="Shapes.PathShape"/>.
+        /// The design time <see cref="IPathShape"/>.
         /// </summary>
         public static IPathShape Path { get; set; }
 
         /// <summary>
-        /// The design time <see cref="Shapes.PointShape"/>.
+        /// The design time <see cref="IPointShape"/>.
         /// </summary>
         public static IPointShape Point { get; set; }
 
         /// <summary>
-        /// The design time <see cref="Shapes.QuadraticBezierShape"/>.
+        /// The design time <see cref="IQuadraticBezierShape"/>.
         /// </summary>
         public static IQuadraticBezierShape QuadraticBezier { get; set; }
 
         /// <summary>
-        /// The design time <see cref="Shapes.RectangleShape"/>.
+        /// The design time <see cref="IRectangleShape"/>.
         /// </summary>
         public static IRectangleShape Rectangle { get; set; }
 
         /// <summary>
-        /// The design time <see cref="Shapes.TextShape"/>.
+        /// The design time <see cref="ITextShape"/>.
         /// </summary>
         public static ITextShape Text { get; set; }
 
         /// <summary>
-        /// The design time <see cref="Core2D.Path.Segments.ArcSegment"/>.
+        /// The design time <see cref="Path.Segments.ArcSegment"/>.
         /// </summary>
         public static ArcSegment ArcSegment { get; set; }
 
         /// <summary>
-        /// The design time <see cref="Core2D.Path.Segments.CubicBezierSegment"/>.
+        /// The design time <see cref="Path.Segments.CubicBezierSegment"/>.
         /// </summary>
         public static CubicBezierSegment CubicBezierSegment { get; set; }
 
         /// <summary>
-        /// The design time <see cref="Core2D.Path.Segments.LineSegment"/>.
+        /// The design time <see cref="Path.Segments.LineSegment"/>.
         /// </summary>
         public static LineSegment LineSegment { get; set; }
 
         /// <summary>
-        /// The design time <see cref="Core2D.Path.PathFigure"/>.
+        /// The design time <see cref="Path.PathFigure"/>.
         /// </summary>
         public static PathFigure PathFigure { get; set; }
 
         /// <summary>
-        /// The design time <see cref="Core2D.Path.PathGeometry"/>.
+        /// The design time <see cref="Path.PathGeometry"/>.
         /// </summary>
         public static PathGeometry PathGeometry { get; set; }
 
         /// <summary>
-        /// The design time <see cref="Core2D.Path.PathSize"/>.
+        /// The design time <see cref="Path.PathSize"/>.
         /// </summary>
         public static PathSize PathSize { get; set; }
 
         /// <summary>
-        /// The design time <see cref="Core2D.Path.Segments.PolyCubicBezierSegment"/>.
+        /// The design time <see cref="Path.Segments.PolyCubicBezierSegment"/>.
         /// </summary>
         public static PolyCubicBezierSegment PolyCubicBezierSegment { get; set; }
 
         /// <summary>
-        /// The design time <see cref="Core2D.Path.Segments.PolyLineSegment"/>.
+        /// The design time <see cref="Path.Segments.PolyLineSegment"/>.
         /// </summary>
         public static PolyLineSegment PolyLineSegment { get; set; }
 
         /// <summary>
-        /// The design time <see cref="Core2D.Path.Segments.PolyQuadraticBezierSegment"/>.
+        /// The design time <see cref="Path.Segments.PolyQuadraticBezierSegment"/>.
         /// </summary>
         public static PolyQuadraticBezierSegment PolyQuadraticBezierSegment { get; set; }
 
         /// <summary>
-        /// The design time <see cref="Core2D.Path.Segments.QuadraticBezierSegment"/>.
+        /// The design time <see cref="Path.Segments.QuadraticBezierSegment"/>.
         /// </summary>
         public static QuadraticBezierSegment QuadraticBezierSegment { get; set; }
 
@@ -272,9 +272,10 @@ namespace Core2D.Editor.Designer
 
             // Project
 
-            IProjectFactory factory = new ProjectFactory();
+            IProjectFactory projectFactory = serviceProvider.GetService<IProjectFactory>();
+            IShapeFactory shapeFactory = serviceProvider.GetService<IShapeFactory>();
 
-            Project = factory.GetProject();
+            Project = projectFactory.GetProject();
 
             Template = PageContainer.CreateTemplate();
 
