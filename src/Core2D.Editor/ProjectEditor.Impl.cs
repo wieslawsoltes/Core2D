@@ -139,7 +139,7 @@ namespace Core2D.Editor
             if (document != null)
             {
                 var page =
-                    ProjectFactory?.GetPage(Project, Constants.DefaultPageName)
+                    ContainerFactory?.GetPage(Project, Constants.DefaultPageName)
                     ?? PageContainer.CreatePage(Constants.DefaultPageName);
 
                 Project?.AddPage(document, page);
@@ -154,7 +154,7 @@ namespace Core2D.Editor
         public void OnNewPage(IDocumentContainer selected)
         {
             var page =
-                ProjectFactory?.GetPage(Project, Constants.DefaultPageName)
+                ContainerFactory?.GetPage(Project, Constants.DefaultPageName)
                 ?? PageContainer.CreatePage(Constants.DefaultPageName);
 
             Project?.AddPage(selected, page);
@@ -167,7 +167,7 @@ namespace Core2D.Editor
         public void OnNewDocument()
         {
             var document =
-                ProjectFactory?.GetDocument(Project, Constants.DefaultDocumentName)
+                ContainerFactory?.GetDocument(Project, Constants.DefaultDocumentName)
                 ?? DocumentContainer.Create(Constants.DefaultDocumentName);
 
             Project?.AddDocument(document);
@@ -181,7 +181,7 @@ namespace Core2D.Editor
         public void OnNewProject()
         {
             OnUnload();
-            OnLoad(ProjectFactory?.GetProject() ?? ProjectContainer.Create(), string.Empty);
+            OnLoad(ContainerFactory?.GetProject() ?? ProjectContainer.Create(), string.Empty);
             OnNavigate("EditorView");
             CanvasPlatform?.Invalidate?.Invoke();
         }
@@ -1687,7 +1687,7 @@ namespace Core2D.Editor
         {
             if (Project != null)
             {
-                var template = ProjectFactory.GetTemplate(Project, "Empty");
+                var template = ContainerFactory.GetTemplate(Project, "Empty");
                 if (template == null)
                 {
                     template = PageContainer.CreateTemplate(Constants.DefaultTemplateName);
@@ -1801,7 +1801,7 @@ namespace Core2D.Editor
             if (Project?.CurrentDocument != null)
             {
                 var page =
-                    ProjectFactory?.GetPage(Project, Constants.DefaultPageName)
+                    ContainerFactory?.GetPage(Project, Constants.DefaultPageName)
                     ?? PageContainer.CreatePage(Constants.DefaultPageName);
 
                 Project.AddPage(Project.CurrentDocument, page);
@@ -1821,7 +1821,7 @@ namespace Core2D.Editor
                 {
                     int index = Project.CurrentDocument.Pages.IndexOf(selected);
                     var page =
-                        ProjectFactory?.GetPage(Project, Constants.DefaultPageName)
+                        ContainerFactory?.GetPage(Project, Constants.DefaultPageName)
                         ?? PageContainer.CreatePage(Constants.DefaultPageName);
 
                     Project.AddPageAt(Project.CurrentDocument, page, index);
@@ -1842,7 +1842,7 @@ namespace Core2D.Editor
                 {
                     int index = Project.CurrentDocument.Pages.IndexOf(selected);
                     var page =
-                        ProjectFactory?.GetPage(Project, Constants.DefaultPageName)
+                        ContainerFactory?.GetPage(Project, Constants.DefaultPageName)
                         ?? PageContainer.CreatePage(Constants.DefaultPageName);
 
                     Project.AddPageAt(Project.CurrentDocument, page, index + 1);
@@ -1860,7 +1860,7 @@ namespace Core2D.Editor
             if (Project != null)
             {
                 var document =
-                    ProjectFactory?.GetDocument(Project, Constants.DefaultDocumentName)
+                    ContainerFactory?.GetDocument(Project, Constants.DefaultDocumentName)
                     ?? DocumentContainer.Create(Constants.DefaultDocumentName);
 
                 Project.AddDocument(document);
@@ -1881,7 +1881,7 @@ namespace Core2D.Editor
                 {
                     int index = Project.Documents.IndexOf(selected);
                     var document =
-                        ProjectFactory?.GetDocument(Project, Constants.DefaultDocumentName)
+                        ContainerFactory?.GetDocument(Project, Constants.DefaultDocumentName)
                         ?? DocumentContainer.Create(Constants.DefaultDocumentName);
 
                     Project.AddDocumentAt(document, index);
@@ -1903,7 +1903,7 @@ namespace Core2D.Editor
                 {
                     int index = Project.Documents.IndexOf(selected);
                     var document =
-                        ProjectFactory?.GetDocument(Project, Constants.DefaultDocumentName)
+                        ContainerFactory?.GetDocument(Project, Constants.DefaultDocumentName)
                         ?? DocumentContainer.Create(Constants.DefaultDocumentName);
 
                     Project.AddDocumentAt(document, index + 1);

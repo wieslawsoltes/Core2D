@@ -12,7 +12,7 @@ namespace Core2D.Containers
     /// <summary>
     /// Factory used to create containers.
     /// </summary>
-    public sealed class ProjectFactory : IContainerFactory
+    public sealed class ContainerFactory : IContainerFactory
     {
         /// <summary>
         /// Creates a new instance of the <see cref="Library{ShapeStyle}"/> class.
@@ -99,7 +99,7 @@ namespace Core2D.Containers
         /// <summary>
         /// Creates a new instance of the <see cref="PageContainer"/> class.
         /// </summary>
-        /// <param name="factory">The project factory.</param>
+        /// <param name="factory">The container factory.</param>
         /// <param name="project">The new container owner project.</param>
         /// <param name="name">The new container name.</param>
         /// <returns>The new instance of the <see cref="PageContainer"/>.</returns>
