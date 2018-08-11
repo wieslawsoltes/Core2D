@@ -5,9 +5,9 @@ using Core2D.Containers.Interfaces;
 namespace Core2D.Interfaces
 {
     /// <summary>
-    /// Defines project factory contract.
+    /// Defines container factory contract.
     /// </summary>
-    public interface IProjectFactory
+    public interface IContainerFactory
     {
         /// <summary>
         /// Creates a new instance of the <see cref="IPageContainer"/> class.

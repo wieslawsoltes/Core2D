@@ -1784,7 +1784,7 @@ namespace Core2D.Editor
         /// Notifies when selected project tree item changed.
         /// </summary>
         /// <param name="item">The selected item.</param>
-        public void OnSelectedItemChanged(SelectableObject item)
+        public void OnSelectedItemChanged(IObservableObject item)
         {
             if (Project != null)
             {

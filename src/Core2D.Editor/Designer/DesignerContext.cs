@@ -272,7 +272,7 @@ namespace Core2D.Editor.Designer
 
             // Project
 
-            IProjectFactory projectFactory = serviceProvider.GetService<IProjectFactory>();
+            IContainerFactory projectFactory = serviceProvider.GetService<IContainerFactory>();
             IShapeFactory shapeFactory = serviceProvider.GetService<IShapeFactory>();
 
             Project = projectFactory.GetProject();

@@ -15,7 +15,7 @@ namespace Core2D.Containers
     /// <summary>
     /// Page container.
     /// </summary>
-    public class PageContainer : SelectableObject, IPageContainer
+    public class PageContainer : ObservableObject, IPageContainer
     {
         private double _width;
         private double _height;

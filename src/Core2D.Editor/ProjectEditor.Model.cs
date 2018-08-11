@@ -36,7 +36,7 @@ namespace Core2D.Editor
         private readonly Lazy<ILog> _log;
         private readonly Lazy<ShapeRenderer[]> _renderers;
         private readonly Lazy<IFileSystem> _fileIO;
-        private readonly Lazy<IProjectFactory> _projectFactory;
+        private readonly Lazy<IContainerFactory> _projectFactory;
         private readonly Lazy<IShapeFactory> _shapeFactory;
         private readonly Lazy<ITextClipboard> _textClipboard;
         private readonly Lazy<IJsonSerializer> _jsonSerializer;
@@ -182,7 +182,7 @@ namespace Core2D.Editor
         /// <summary>
         /// Gets project factory.
         /// </summary>
-        public IProjectFactory ProjectFactory => _projectFactory.Value;
+        public IContainerFactory ProjectFactory => _projectFactory.Value;
 
         /// <summary>
         /// Gets shape factory.
@@ -259,7 +259,7 @@ namespace Core2D.Editor
             _log = _serviceProvider.GetServiceLazily<ILog>();
             _renderers = new Lazy<ShapeRenderer[]>(() => new[] { _serviceProvider.GetService<ShapeRenderer>(), _serviceProvider.GetService<ShapeRenderer>() });
             _fileIO = _serviceProvider.GetServiceLazily<IFileSystem>();
-            _projectFactory = _serviceProvider.GetServiceLazily<IProjectFactory>();
+            _projectFactory = _serviceProvider.GetServiceLazily<IContainerFactory>();
             _shapeFactory = _serviceProvider.GetServiceLazily<IShapeFactory>();
             _textClipboard = _serviceProvider.GetServiceLazily<ITextClipboard>();
             _jsonSerializer = _serviceProvider.GetServiceLazily<IJsonSerializer>();

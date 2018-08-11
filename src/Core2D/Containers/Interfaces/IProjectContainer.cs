@@ -81,6 +81,6 @@ namespace Core2D.Containers.Interfaces
         /// <summary>
         /// Gets or sets currently selected object.
         /// </summary>
-        SelectableObject Selected { get; set; }
+        IObservableObject Selected { get; set; }
     }
 }

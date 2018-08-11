@@ -10,9 +10,9 @@ using Core2D.Style;
 namespace Core2D.Containers
 {
     /// <summary>
-    /// Factory used to create new projects, documents and containers.
+    /// Factory used to create containers.
     /// </summary>
-    public sealed class ProjectFactory : IProjectFactory
+    public sealed class ProjectFactory : IContainerFactory
     {
         /// <summary>
         /// Creates a new instance of the <see cref="Library{ShapeStyle}"/> class.
@@ -103,7 +103,7 @@ namespace Core2D.Containers
         /// <param name="project">The new container owner project.</param>
         /// <param name="name">The new container name.</param>
         /// <returns>The new instance of the <see cref="PageContainer"/>.</returns>
-        private IPageContainer CreateGridTemplate(IProjectFactory factory, IProjectContainer project, string name)
+        private IPageContainer CreateGridTemplate(IContainerFactory factory, IProjectContainer project, string name)
         {
             var template = factory.GetTemplate(project, name);
 
@@ -132,7 +132,7 @@ namespace Core2D.Containers
         }
 
         /// <inheritdoc/>
-        IPageContainer IProjectFactory.GetTemplate(IProjectContainer project, string name)
+        IPageContainer IContainerFactory.GetTemplate(IProjectContainer project, string name)
         {
             var template = PageContainer.CreateTemplate(name);
             template.Background = ArgbColor.Create(0xFF, 0xFF, 0xFF, 0xFF);
@@ -140,24 +140,24 @@ namespace Core2D.Containers
         }
 
         /// <inheritdoc/>
-        IPageContainer IProjectFactory.GetPage(IProjectContainer project, string name)
+        IPageContainer IContainerFactory.GetPage(IProjectContainer project, string name)
         {
             var container = PageContainer.CreatePage(name);
-            container.Template = project.CurrentTemplate ?? (this as IProjectFactory).GetTemplate(project, "Empty");
+            container.Template = project.CurrentTemplate ?? (this as IContainerFactory).GetTemplate(project, "Empty");
             return container;
         }
 
         /// <inheritdoc/>
-        IDocumentContainer IProjectFactory.GetDocument(IProjectContainer project, string name)
+        IDocumentContainer IContainerFactory.GetDocument(IProjectContainer project, string name)
         {
             var document = DocumentContainer.Create(name);
             return document;
         }
 
         /// <inheritdoc/>
-        IProjectContainer IProjectFactory.GetProject()
+        IProjectContainer IContainerFactory.GetProject()
         {
-            var factory = this as IProjectFactory;
+            var factory = this as IContainerFactory;
             var project = ProjectContainer.Create();
 
             // Group Libraries

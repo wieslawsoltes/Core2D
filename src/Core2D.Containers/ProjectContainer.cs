@@ -16,7 +16,7 @@ namespace Core2D.Containers
     /// <summary>
     /// Project container.
     /// </summary>
-    public partial class ProjectContainer : SelectableObject, IProjectContainer
+    public partial class ProjectContainer : ObservableObject, IProjectContainer
     {
         private IOptions _options;
         private IHistory _history;
@@ -31,7 +31,7 @@ namespace Core2D.Containers
         private IPageContainer _currentTemplate;
         private IDocumentContainer _currentDocument;
         private IPageContainer _currentContainer;
-        private SelectableObject _selected;
+        private IObservableObject _selected;
 
         /// <summary>
         /// Gets or sets project options.
@@ -154,7 +154,7 @@ namespace Core2D.Containers
         /// <summary>
         /// Gets or sets currently selected object.
         /// </summary>
-        public SelectableObject Selected
+        public IObservableObject Selected
         {
             get => _selected;
             set
@@ -165,7 +165,7 @@ namespace Core2D.Containers
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ProjectContainer"/> class.
+        /// Initializes a new instance of the <see cref="IProjectContainer"/> class.
         /// </summary>
         public ProjectContainer()
             : base()
@@ -182,7 +182,7 @@ namespace Core2D.Containers
         /// Set current document.
         /// </summary>
         /// <param name="document">The document instance.</param>
-        public void SetCurrentDocument(DocumentContainer document)
+        public void SetCurrentDocument(IDocumentContainer document)
         {
             CurrentDocument = document;
             Selected = document;
@@ -192,7 +192,7 @@ namespace Core2D.Containers
         /// Set current container.
         /// </summary>
         /// <param name="container">The container instance.</param>
-        public void SetCurrentContainer(PageContainer container)
+        public void SetCurrentContainer(IPageContainer container)
         {
             CurrentContainer = container;
             Selected = container;
@@ -202,7 +202,7 @@ namespace Core2D.Containers
         /// Set current template.
         /// </summary>
         /// <param name="template">The template instance.</param>
-        public void SetCurrentTemplate(PageContainer template) => CurrentTemplate = template;
+        public void SetCurrentTemplate(IPageContainer template) => CurrentTemplate = template;
 
         /// <summary>
         /// Set current database.
@@ -226,7 +226,7 @@ namespace Core2D.Containers
         /// Set selected value.
         /// </summary>
         /// <param name="value">The value instance.</param>
-        public void SetSelected(SelectableObject value)
+        public void SetSelected(IObservableObject value)
         {
             if (value is ILayerContainer layer)
             {
@@ -318,7 +318,7 @@ namespace Core2D.Containers
         /// <typeparam name="T">The type of shapes to include.</typeparam>
         /// <param name="project">The project object.</param>
         /// <returns>All shapes including grouped shapes of specified type.</returns>
-        public static IEnumerable<T> GetAllShapes<T>(ProjectContainer project)
+        public static IEnumerable<T> GetAllShapes<T>(IProjectContainer project)
         {
             var shapes = project?.Documents
                 .SelectMany(d => d.Pages)
@@ -335,11 +335,11 @@ namespace Core2D.Containers
         }
 
         /// <summary>
-        /// Creates a new <see cref="ProjectContainer"/> instance.
+        /// Creates a new <see cref="IProjectContainer"/> instance.
         /// </summary>
         /// <param name="name">The project name.</param>
-        /// <returns>The new instance of the <see cref="ProjectContainer"/> class.</returns>
-        public static ProjectContainer Create(string name = "Project")
+        /// <returns>The new instance of the <see cref="IProjectContainer"/> class.</returns>
+        public static IProjectContainer Create(string name = "Project")
         {
             return new ProjectContainer()
             {

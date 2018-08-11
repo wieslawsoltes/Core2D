@@ -11,7 +11,7 @@ namespace Core2D.Containers
     /// <summary>
     /// Document container.
     /// </summary>
-    public class DocumentContainer : SelectableObject, IDocumentContainer
+    public class DocumentContainer : ObservableObject, IDocumentContainer
     {
         private bool _isExpanded = true;
         private ImmutableArray<IPageContainer> _pages;

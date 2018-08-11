@@ -12,7 +12,7 @@ namespace Core2D.Containers
     /// <summary>
     /// Layer container.
     /// </summary>
-    public class LayerContainer : SelectableObject, ILayerContainer
+    public class LayerContainer : ObservableObject, ILayerContainer
     {
         /// <summary>
         /// Invalidate layer event.
