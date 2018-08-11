@@ -4,7 +4,6 @@ using System.Reflection;
 using Autofac;
 using Core2D.Editor;
 using Core2D.Editor.Bounds;
-using Core2D.Editor.Factories;
 
 namespace Core2D.Avalonia.Modules
 {
