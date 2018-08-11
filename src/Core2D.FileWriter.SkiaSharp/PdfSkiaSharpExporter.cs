@@ -1,5 +1,6 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using Core2D.Containers.Interfaces;
 using Core2D.Interfaces;
 using Core2D.Renderer;
 using SkiaSharp;
@@ -29,7 +30,7 @@ namespace Core2D.FileWriter.SkiaSharpPdf
         }
 
         /// <inheritdoc/>
-        void IProjectExporter.Save(string path, PageContainer container)
+        void IProjectExporter.Save(string path, IPageContainer container)
         {
             using (var stream = new SKFileWStream(path))
             {
@@ -42,7 +43,7 @@ namespace Core2D.FileWriter.SkiaSharpPdf
         }
 
         /// <inheritdoc/>
-        void IProjectExporter.Save(string path, DocumentContainer document)
+        void IProjectExporter.Save(string path, IDocumentContainer document)
         {
             using (var stream = new SKFileWStream(path))
             {
@@ -60,7 +61,7 @@ namespace Core2D.FileWriter.SkiaSharpPdf
         }
 
         /// <inheritdoc/>
-        void IProjectExporter.Save(string path, ProjectContainer project)
+        void IProjectExporter.Save(string path, IProjectContainer project)
         {
             using (var stream = new SKFileWStream(path))
             {
@@ -80,7 +81,7 @@ namespace Core2D.FileWriter.SkiaSharpPdf
             }
         }
 
-        private void Add(SKDocument pdf, PageContainer container)
+        private void Add(SKDocument pdf, IPageContainer container)
         {
             using (var canvas = pdf.BeginPage((float)container.Template.Width, (float)container.Template.Height))
             {

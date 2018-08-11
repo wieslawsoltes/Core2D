@@ -18,7 +18,7 @@ namespace Core2D.Shapes.Interfaces
         /// <summary>
         ///  Gets or sets shapes collection.
         /// </summary>
-        ImmutableArray<IShape> Shapes { get; set; }
+        ImmutableArray<IBaseShape> Shapes { get; set; }
 
     }
 }

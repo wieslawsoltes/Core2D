@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using Core2D.Data;
+using Core2D.Shapes.Interfaces;
 using Core2D.Style;
 using Spatial;
 using Spatial.Arc;
@@ -22,13 +23,13 @@ namespace Core2D.Renderer.Wpf
     {
         private ICache<ShapeStyle, (WM.Brush, WM.Pen)> _styleCache = Cache<ShapeStyle, (WM.Brush, WM.Pen)>.Create();
         private ICache<ArrowStyle, (WM.Brush, WM.Pen)> _arrowStyleCache = Cache<ArrowStyle, (WM.Brush, WM.Pen)>.Create();
-        private ICache<LineShape, WM.PathGeometry> _curvedLineCache = Cache<LineShape, WM.PathGeometry>.Create();
-        private ICache<ArcShape, WM.PathGeometry> _arcCache = Cache<ArcShape, WM.PathGeometry>.Create();
-        private ICache<CubicBezierShape, WM.PathGeometry> _cubicBezierCache = Cache<CubicBezierShape, WM.PathGeometry>.Create();
-        private ICache<QuadraticBezierShape, WM.PathGeometry> _quadraticBezierCache = Cache<QuadraticBezierShape, WM.PathGeometry>.Create();
-        private ICache<TextShape, (string, WM.FormattedText, ShapeStyle)> _textCache = Cache<TextShape, (string, WM.FormattedText, ShapeStyle)>.Create();
+        private ICache<ILineShape, WM.PathGeometry> _curvedLineCache = Cache<ILineShape, WM.PathGeometry>.Create();
+        private ICache<IArcShape, WM.PathGeometry> _arcCache = Cache<IArcShape, WM.PathGeometry>.Create();
+        private ICache<ICubicBezierShape, WM.PathGeometry> _cubicBezierCache = Cache<ICubicBezierShape, WM.PathGeometry>.Create();
+        private ICache<IQuadraticBezierShape, WM.PathGeometry> _quadraticBezierCache = Cache<IQuadraticBezierShape, WM.PathGeometry>.Create();
+        private ICache<ITextShape, (string, WM.FormattedText, ShapeStyle)> _textCache = Cache<ITextShape, (string, WM.FormattedText, ShapeStyle)>.Create();
         private ICache<string, WMI.BitmapImage> _biCache = Cache<string, WMI.BitmapImage>.Create(bi => bi.StreamSource.Dispose());
-        private ICache<PathShape, (Path.PathGeometry, WM.StreamGeometry, ShapeStyle)> _pathCache = Cache<PathShape, (Path.PathGeometry, WM.StreamGeometry, ShapeStyle)>.Create();
+        private ICache<IPathShape, (Path.PathGeometry, WM.StreamGeometry, ShapeStyle)> _pathCache = Cache<IPathShape, (Path.PathGeometry, WM.StreamGeometry, ShapeStyle)>.Create();
 
         /// <summary>
         /// Initializes a new instance of the <see cref="WpfRenderer"/> class.
@@ -118,7 +119,7 @@ namespace Core2D.Renderer.Wpf
             return pen;
         }
 
-        private static W.Rect CreateRect(PointShape tl, PointShape br, double dx, double dy)
+        private static W.Rect CreateRect(IPointShape tl, IPointShape br, double dx, double dy)
         {
             double tlx = Math.Min(tl.X, br.X);
             double tly = Math.Min(tl.Y, br.Y);
@@ -142,7 +143,7 @@ namespace Core2D.Renderer.Wpf
             dc.Pop();
         }
 
-        private void DrawLineCurveInternal(WM.DrawingContext dc, double half, WM.Pen pen, LineShape line, ref W.Point pt1, ref W.Point pt2, double dx, double dy)
+        private void DrawLineCurveInternal(WM.DrawingContext dc, double half, WM.Pen pen, ILineShape line, ref W.Point pt1, ref W.Point pt2, double dx, double dy)
         {
             double p1x = pt1.X;
             double p1y = pt1.Y;
@@ -193,7 +194,7 @@ namespace Core2D.Renderer.Wpf
             DrawPathGeometryInternal(dc, half, null, pen, line.IsStroked, false, pg);
         }
 
-        private void DrawLineArrowsInternal(WM.DrawingContext dc, LineShape line, ShapeStyle style, double halfStart, double halfEnd, double thicknessStart, double thicknessEnd, double dx, double dy, out W.Point pt1, out W.Point pt2)
+        private void DrawLineArrowsInternal(WM.DrawingContext dc, ILineShape line, ShapeStyle style, double halfStart, double halfEnd, double thicknessStart, double thicknessEnd, double dx, double dy, out W.Point pt1, out W.Point pt2)
         {
             // Start arrow style.
             GetCached(style.StartArrowStyle, thicknessStart, out var fillStartArrow, out var strokeStartArrow);
@@ -369,7 +370,7 @@ namespace Core2D.Renderer.Wpf
             }
         }
 
-        private WM.PathGeometry ToPathGeometry(ArcShape arc, double dx, double dy)
+        private WM.PathGeometry ToPathGeometry(IArcShape arc, double dx, double dy)
         {
             var a = new WpfArc(
                 Point2.FromXY(arc.Point1.X, arc.Point1.Y),
@@ -418,7 +419,7 @@ namespace Core2D.Renderer.Wpf
             return pg;
         }
 
-        private WM.PathGeometry ToPathGeometry(CubicBezierShape cubicBezier, double dx, double dy)
+        private WM.PathGeometry ToPathGeometry(ICubicBezierShape cubicBezier, double dx, double dy)
         {
             var pg = _cubicBezierCache.Get(cubicBezier);
 
@@ -458,7 +459,7 @@ namespace Core2D.Renderer.Wpf
             return pg;
         }
 
-        private WM.PathGeometry ToPathGeometry(QuadraticBezierShape quadraticBezier, double dx, double dy)
+        private WM.PathGeometry ToPathGeometry(IQuadraticBezierShape quadraticBezier, double dx, double dy)
         {
             var pg = _quadraticBezierCache.Get(quadraticBezier);
 
@@ -567,7 +568,7 @@ namespace Core2D.Renderer.Wpf
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, LineShape line, double dx, double dy, object db, object r)
+        public override void Draw(object dc, ILineShape line, double dx, double dy, object db, object r)
         {
             var _dc = dc as WM.DrawingContext;
 
@@ -598,7 +599,7 @@ namespace Core2D.Renderer.Wpf
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, RectangleShape rectangle, double dx, double dy, object db, object r)
+        public override void Draw(object dc, IRectangleShape rectangle, double dx, double dy, object db, object r)
         {
             var _dc = dc as WM.DrawingContext;
 
@@ -622,7 +623,7 @@ namespace Core2D.Renderer.Wpf
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, EllipseShape ellipse, double dx, double dy, object db, object r)
+        public override void Draw(object dc, IEllipseShape ellipse, double dx, double dy, object db, object r)
         {
             var _dc = dc as WM.DrawingContext;
 
@@ -644,7 +645,7 @@ namespace Core2D.Renderer.Wpf
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, ArcShape arc, double dx, double dy, object db, object r)
+        public override void Draw(object dc, IArcShape arc, double dx, double dy, object db, object r)
         {
             var _dc = dc as WM.DrawingContext;
 
@@ -663,7 +664,7 @@ namespace Core2D.Renderer.Wpf
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, CubicBezierShape cubicBezier, double dx, double dy, object db, object r)
+        public override void Draw(object dc, ICubicBezierShape cubicBezier, double dx, double dy, object db, object r)
         {
             var _dc = dc as WM.DrawingContext;
 
@@ -682,7 +683,7 @@ namespace Core2D.Renderer.Wpf
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, QuadraticBezierShape quadraticBezier, double dx, double dy, object db, object r)
+        public override void Draw(object dc, IQuadraticBezierShape quadraticBezier, double dx, double dy, object db, object r)
         {
             var _dc = dc as WM.DrawingContext;
 
@@ -701,7 +702,7 @@ namespace Core2D.Renderer.Wpf
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, TextShape text, double dx, double dy, object db, object r)
+        public override void Draw(object dc, ITextShape text, double dx, double dy, object db, object r)
         {
             var _dc = dc as WM.DrawingContext;
 
@@ -787,7 +788,7 @@ namespace Core2D.Renderer.Wpf
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, ImageShape image, double dx, double dy, object db, object r)
+        public override void Draw(object dc, IImageShape image, double dx, double dy, object db, object r)
         {
             if (image.Key == null)
                 return;
@@ -850,7 +851,7 @@ namespace Core2D.Renderer.Wpf
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, PathShape path, double dx, double dy, object db, object r)
+        public override void Draw(object dc, IPathShape path, double dx, double dy, object db, object r)
         {
             if (path.Geometry == null)
                 return;

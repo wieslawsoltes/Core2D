@@ -2,6 +2,7 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using Core2D.Data;
 using Core2D.Renderer;
+using Core2D.Shapes.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -208,7 +209,7 @@ namespace Core2D.UnitTests
                 throw new NotImplementedException();
             }
 
-            public override void Move(ISet<IShape> selected, double dx, double dy)
+            public override void Move(ISet<IBaseShape> selected, double dx, double dy)
             {
                 throw new NotImplementedException();
             }

@@ -1,24 +1,25 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using Core2D.Containers.Interfaces;
 using Core2D.Shapes.Interfaces;
 using Core2D.Style;
 
 namespace Core2D.Editor.Tools.Selection
 {
     /// <summary>
-    /// Helper class for <see cref="QuadraticBezierShape"/> shape selection.
+    /// Helper class for <see cref="IQuadraticBezierShape"/> shape selection.
     /// </summary>
     public class ToolQuadraticBezierSelection
     {
-        private readonly LayerContainer _layer;
+        private readonly ILayerContainer _layer;
         private readonly IQuadraticBezierShape _quadraticBezier;
         private readonly ShapeStyle _style;
-        private readonly BaseShape _point;
-        private LineShape _line12;
-        private LineShape _line32;
-        private PointShape _helperPoint1;
-        private PointShape _helperPoint2;
-        private PointShape _helperPoint3;
+        private readonly IBaseShape _point;
+        private ILineShape _line12;
+        private ILineShape _line32;
+        private IPointShape _helperPoint1;
+        private IPointShape _helperPoint2;
+        private IPointShape _helperPoint3;
 
         /// <summary>
         /// Initialize new instance of <see cref="ToolQuadraticBezierSelection"/> class.
@@ -27,7 +28,7 @@ namespace Core2D.Editor.Tools.Selection
         /// <param name="shape">The selected shape.</param>
         /// <param name="style">The selection shapes style.</param>
         /// <param name="point">The selection point shape.</param>
-        public ToolQuadraticBezierSelection(LayerContainer layer, IQuadraticBezierShape shape, ShapeStyle style, BaseShape point)
+        public ToolQuadraticBezierSelection(ILayerContainer layer, IQuadraticBezierShape shape, ShapeStyle style, IBaseShape point)
         {
             _layer = layer;
             _quadraticBezier = shape;

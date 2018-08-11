@@ -7,7 +7,7 @@ namespace Core2D.Shapes.Interfaces
     /// <summary>
     /// Defines point shape contract.
     /// </summary>
-    public interface IConnectableShape : IShape
+    public interface IConnectableShape : IBaseShape
     {
         /// <summary>
         /// Gets or sets connectors collection.

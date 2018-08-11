@@ -24,7 +24,7 @@ namespace Core2D.Containers
         private ILayerContainer _currentLayer;
         private ILayerContainer _workingLayer;
         private ILayerContainer _helperLayer;
-        private IShape _currentShape;
+        private IBaseShape _currentShape;
         private IPageContainer _template;
         private Context _data;
         private bool _isExpanded = false;
@@ -138,7 +138,7 @@ namespace Core2D.Containers
         /// <summary>
         /// Gets or sets current container shape.
         /// </summary>
-        public IShape CurrentShape
+        public IBaseShape CurrentShape
         {
             get => _currentShape;
             set => Update(ref _currentShape, value);

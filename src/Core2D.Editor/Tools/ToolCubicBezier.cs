@@ -4,6 +4,7 @@ using System;
 using Core2D.Editor.Input;
 using Core2D.Editor.Tools.Selection;
 using Core2D.Editor.Tools.Settings;
+using Core2D.Shapes.Interfaces;
 
 namespace Core2D.Editor.Tools
 {
@@ -16,7 +17,7 @@ namespace Core2D.Editor.Tools
         private readonly IServiceProvider _serviceProvider;
         private ToolSettingsCubicBezier _settings;
         private State _currentState = State.Point1;
-        private CubicBezierShape _cubicBezier;
+        private ICubicBezierShape _cubicBezier;
         private ToolCubicBezierSelection _selection;
 
         /// <inheritdoc/>
@@ -263,7 +264,7 @@ namespace Core2D.Editor.Tools
         }
 
         /// <inheritdoc/>
-        public override void Move(BaseShape shape)
+        public override void Move(IBaseShape shape)
         {
             base.Move(shape);
 

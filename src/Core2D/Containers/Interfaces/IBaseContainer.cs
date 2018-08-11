@@ -4,9 +4,9 @@
 namespace Core2D.Containers.Interfaces
 {
     /// <summary>
-    /// Defines container interface.
+    /// Defines base container interface.
     /// </summary>
-    public interface IContainer : ICopyable
+    public interface IBaseContainer : IObservableObject, ICopyable
     {
     }
 }

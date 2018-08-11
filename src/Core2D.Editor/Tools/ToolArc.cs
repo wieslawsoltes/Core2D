@@ -6,6 +6,7 @@ using Core2D.Editor.Tools.Selection;
 using Core2D.Editor.Tools.Settings;
 using Spatial.Arc;
 using Spatial;
+using Core2D.Shapes.Interfaces;
 
 namespace Core2D.Editor.Tools
 {
@@ -18,7 +19,7 @@ namespace Core2D.Editor.Tools
         private readonly IServiceProvider _serviceProvider;
         private ToolSettingsArc _settings;
         private State _currentState = State.Point1;
-        private ArcShape _arc;
+        private IArcShape _arc;
         private bool _connectedPoint3;
         private bool _connectedPoint4;
         private ToolArcSelection _selection;
@@ -277,7 +278,7 @@ namespace Core2D.Editor.Tools
         }
 
         /// <inheritdoc/>
-        public override void Move(BaseShape shape)
+        public override void Move(IBaseShape shape)
         {
             base.Move(shape);
 
@@ -285,11 +286,11 @@ namespace Core2D.Editor.Tools
         }
 
         /// <inheritdoc/>
-        public override void Finalize(BaseShape shape)
+        public override void Finalize(IBaseShape shape)
         {
             base.Finalize(shape);
 
-            var arc = shape as ArcShape;
+            var arc = shape as IArcShape;
             var a = new WpfArc(
                 Point2.FromXY(arc.Point1.X, arc.Point1.Y),
                 Point2.FromXY(arc.Point2.X, arc.Point2.Y),

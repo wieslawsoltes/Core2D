@@ -11,11 +11,11 @@ namespace Core2D.Shapes
     public static class GroupShapeExtensions
     {
         /// <summary>
-        /// Adds <see cref="IShape"/> to <see cref="IGroupShape.Shapes"/> collection.
+        /// Adds <see cref="IBaseShape"/> to <see cref="IGroupShape.Shapes"/> collection.
         /// </summary>
         /// <param name="group">The group shape.</param>
         /// <param name="shape">The shape object.</param>
-        public static void AddShape(this IGroupShape group, IShape shape)
+        public static void AddShape(this IGroupShape group, IBaseShape shape)
         {
             shape.Owner = group;
             shape.State.Flags &= ~ShapeStateFlags.Standalone;
@@ -29,7 +29,7 @@ namespace Core2D.Shapes
         /// <param name="name">The group name.</param>
         /// <param name="source">The source shapes collection.</param>
         /// <returns>The new instance of the <see cref="IGroupShape"/> class.</returns>
-        public static IGroupShape Group(this IEnumerable<IShape> shapes, string name = "g", IList<IShape> source = null)
+        public static IGroupShape Group(this IEnumerable<IBaseShape> shapes, string name = "g", IList<IBaseShape> source = null)
         {
             var group = GroupShape.Create(name);
 
@@ -66,7 +66,7 @@ namespace Core2D.Shapes
         /// </summary>
         /// <param name="shapes">The shapes collection.</param>
         /// <param name="source">The source shapes collection.</param>
-        private static void Ungroup(IEnumerable<IShape> shapes, IList<IShape> source)
+        private static void Ungroup(IEnumerable<IBaseShape> shapes, IList<IBaseShape> source)
         {
             if (shapes != null && source != null)
             {
@@ -96,7 +96,7 @@ namespace Core2D.Shapes
         /// </summary>
         /// <param name="group">The group instance.</param>
         /// <param name="source">The source shapes collection.</param>
-        public static void Ungroup(this IGroupShape group, IList<IShape> source)
+        public static void Ungroup(this IGroupShape group, IList<IBaseShape> source)
         {
             Ungroup(group.Shapes, source);
             Ungroup(group.Connectors, source);

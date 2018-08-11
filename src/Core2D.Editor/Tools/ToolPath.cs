@@ -8,6 +8,7 @@ using Core2D.Editor.Tools.Path;
 using Core2D.Editor.Tools.Settings;
 using Core2D.Path;
 using Core2D.Path.Segments;
+using Core2D.Shapes.Interfaces;
 
 namespace Core2D.Editor.Tools
 {
@@ -32,7 +33,7 @@ namespace Core2D.Editor.Tools
         /// <summary>
         /// Gets or sets current path.
         /// </summary>
-        internal PathShape Path { get; set; }
+        internal IPathShape Path { get; set; }
 
         /// <summary>
         /// Gets or sets current geometry.
@@ -128,7 +129,7 @@ namespace Core2D.Editor.Tools
         /// Gets last point in the current path.
         /// </summary>
         /// <returns>The last path point.</returns>
-        public PointShape GetLastPathPoint()
+        public IPointShape GetLastPathPoint()
         {
             var figure = Geometry.Figures.LastOrDefault();
             if (figure != null)
@@ -155,7 +156,7 @@ namespace Core2D.Editor.Tools
         /// Initializes working path.
         /// </summary>
         /// <param name="start">The path start point.</param>
-        public void InitializeWorkingPath(PointShape start)
+        public void InitializeWorkingPath(IPointShape start)
         {
             var editor = _serviceProvider.GetService<ProjectEditor>();
 
@@ -217,14 +218,14 @@ namespace Core2D.Editor.Tools
         }
 
         /// <inheritdoc/>
-        public override void Move(BaseShape shape)
+        public override void Move(IBaseShape shape)
         {
             base.Move(shape);
             _serviceProvider.GetService<ProjectEditor>().CurrentPathTool.Move(shape);
         }
 
         /// <inheritdoc/>
-        public override void Finalize(BaseShape shape)
+        public override void Finalize(IBaseShape shape)
         {
             base.Finalize(shape);
             _serviceProvider.GetService<ProjectEditor>().CurrentPathTool.Finalize(shape);

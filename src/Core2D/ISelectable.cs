@@ -16,18 +16,18 @@ namespace Core2D
         /// <param name="selected">The selected shapes set.</param>
         /// <param name="dx">The X axis position offset.</param>
         /// <param name="dy">The Y axis position offset.</param>
-        void Move(ISet<IShape> selected, double dx, double dy);
+        void Move(ISet<IBaseShape> selected, double dx, double dy);
 
         /// <summary>
         /// Selects the shape.
         /// </summary>
         /// <param name="selected">The selected shapes set.</param>
-        void Select(ISet<IShape> selected);
+        void Select(ISet<IBaseShape> selected);
 
         /// <summary>
         /// Deselects the shape.
         /// </summary>
         /// <param name="selected">The selected shapes set.</param>
-        void Deselect(ISet<IShape> selected);
+        void Deselect(ISet<IBaseShape> selected);
     }
 }

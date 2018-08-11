@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using Core2D.Renderer;
+using Core2D.Shapes.Interfaces;
 using System;
 using System.Collections.Generic;
 using Xunit;
@@ -56,12 +57,12 @@ namespace Core2D.UnitTests
                 throw new NotImplementedException();
             }
 
-            public override IEnumerable<PointShape> GetPoints()
+            public override IEnumerable<IPointShape> GetPoints()
             {
                 throw new NotImplementedException();
             }
 
-            public override void Move(ISet<IShape> selected, double dx, double dy)
+            public override void Move(ISet<IBaseShape> selected, double dx, double dy)
             {
                 throw new NotImplementedException();
             }

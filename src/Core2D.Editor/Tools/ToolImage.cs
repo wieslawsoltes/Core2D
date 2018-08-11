@@ -4,6 +4,7 @@ using System;
 using Core2D.Editor.Input;
 using Core2D.Editor.Tools.Selection;
 using Core2D.Editor.Tools.Settings;
+using Core2D.Shapes.Interfaces;
 
 namespace Core2D.Editor.Tools
 {
@@ -16,7 +17,7 @@ namespace Core2D.Editor.Tools
         private readonly IServiceProvider _serviceProvider;
         private ToolSettingsImage _settings;
         private State _currentState = State.TopLeft;
-        private ImageShape _image;
+        private IImageShape _image;
         private ToolImageSelection _selection;
 
         /// <inheritdoc/>
@@ -173,7 +174,7 @@ namespace Core2D.Editor.Tools
         }
 
         /// <inheritdoc/>
-        public override void Move(BaseShape shape)
+        public override void Move(IBaseShape shape)
         {
             base.Move(shape);
 

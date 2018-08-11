@@ -1,21 +1,23 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using Core2D.Containers.Interfaces;
+using Core2D.Shapes.Interfaces;
 using Core2D.Style;
 
 namespace Core2D.Editor.Tools.Selection
 {
     /// <summary>
-    /// Helper class for <see cref="TextShape"/> shape selection.
+    /// Helper class for <see cref="ITextShape"/> shape selection.
     /// </summary>
     public class ToolTextSelection
     {
-        private readonly LayerContainer _layer;
-        private readonly TextShape _text;
+        private readonly ILayerContainer _layer;
+        private readonly ITextShape _text;
         private readonly ShapeStyle _style;
-        private readonly BaseShape _point;
-        private PointShape _topLeftHelperPoint;
-        private PointShape _bottomRightHelperPoint;
-        private RectangleShape _helperRectangle;
+        private readonly IBaseShape _point;
+        private IPointShape _topLeftHelperPoint;
+        private IPointShape _bottomRightHelperPoint;
+        private IRectangleShape _helperRectangle;
 
         /// <summary>
         /// Initialize new instance of <see cref="ToolTextSelection"/> class.
@@ -24,7 +26,7 @@ namespace Core2D.Editor.Tools.Selection
         /// <param name="shape">The selected shape.</param>
         /// <param name="style">The selection shapes style.</param>
         /// <param name="point">The selection point shape.</param>
-        public ToolTextSelection(LayerContainer layer, TextShape shape, ShapeStyle style, BaseShape point)
+        public ToolTextSelection(ILayerContainer layer, ITextShape shape, ShapeStyle style, IBaseShape point)
         {
             _layer = layer;
             _text = shape;

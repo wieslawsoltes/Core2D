@@ -6,7 +6,7 @@ namespace Core2D.Shapes.Interfaces
     /// <summary>
     /// Defines point shape contract.
     /// </summary>
-    public interface IPointShape : IShape
+    public interface IPointShape : IBaseShape
     {
         /// <summary>
         /// Gets or sets X coordinate of point.
@@ -26,6 +26,6 @@ namespace Core2D.Shapes.Interfaces
         /// <summary>
         /// Gets or sets point template shape.
         /// </summary>
-        IShape Shape { get; set; }
+        IBaseShape Shape { get; set; }
     }
 }

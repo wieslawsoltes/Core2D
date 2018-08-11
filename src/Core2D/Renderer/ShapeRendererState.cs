@@ -15,8 +15,8 @@ namespace Core2D.Renderer
         private double _zoomX;
         private double _zoomY;
         private ShapeState _drawShapeState;
-        private IShape _selectedShape;
-        private ImmutableHashSet<IShape> _selectedShapes;
+        private IBaseShape _selectedShape;
+        private ImmutableHashSet<IBaseShape> _selectedShapes;
         private IImageCache _imageCache;
 
         /// <summary>
@@ -67,7 +67,7 @@ namespace Core2D.Renderer
         /// <summary>
         /// Currently selected shape.
         /// </summary>
-        public IShape SelectedShape
+        public IBaseShape SelectedShape
         {
             get => _selectedShape;
             set => Update(ref _selectedShape, value);
@@ -76,7 +76,7 @@ namespace Core2D.Renderer
         /// <summary>
         /// Currently selected shapes.
         /// </summary>
-        public ImmutableHashSet<IShape> SelectedShapes
+        public ImmutableHashSet<IBaseShape> SelectedShapes
         {
             get => _selectedShapes;
             set => Update(ref _selectedShapes, value);

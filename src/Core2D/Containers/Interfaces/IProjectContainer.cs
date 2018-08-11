@@ -11,7 +11,7 @@ namespace Core2D.Containers.Interfaces
     /// <summary>
     /// Defines project container interface.
     /// </summary>
-    public interface IProjectContainer : IContainer
+    public interface IProjectContainer : IBaseContainer
     {
         /// <summary>
         /// Gets or sets project options.

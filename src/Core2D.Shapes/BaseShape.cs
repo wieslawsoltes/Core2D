@@ -11,9 +11,9 @@ namespace Core2D.Shapes
     /// <summary>
     /// Base class for shapes.
     /// </summary>
-    public abstract class BaseShape : ObservableObject, IShape
+    public abstract class BaseShape : ObservableObject, IBaseShape
     {
-        private IShape _owner;
+        private IBaseShape _owner;
         private ShapeState _state;
         private ShapeStyle _style;
         private MatrixObject _transform;
@@ -35,7 +35,7 @@ namespace Core2D.Shapes
         /// <summary>
         /// Gets or sets shape owner.
         /// </summary>
-        public virtual IShape Owner
+        public virtual IBaseShape Owner
         {
             get => _owner;
             set => Update(ref _owner, value);
@@ -124,10 +124,10 @@ namespace Core2D.Shapes
         }
 
         /// <inheritdoc/>
-        public abstract void Move(ISet<IShape> selected, double dx, double dy);
+        public abstract void Move(ISet<IBaseShape> selected, double dx, double dy);
 
         /// <inheritdoc/>
-        public virtual void Select(ISet<IShape> selected)
+        public virtual void Select(ISet<IBaseShape> selected)
         {
             if (!selected.Contains(this))
             {
@@ -136,7 +136,7 @@ namespace Core2D.Shapes
         }
 
         /// <inheritdoc/>
-        public virtual void Deselect(ISet<IShape> selected)
+        public virtual void Deselect(ISet<IBaseShape> selected)
         {
             if (selected.Contains(this))
             {

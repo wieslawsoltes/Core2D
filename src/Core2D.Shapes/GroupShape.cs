@@ -16,7 +16,7 @@ namespace Core2D.Shapes
     public class GroupShape : ConnectableShape, IGroupShape
     {
         private ImmutableArray<Property> _shapesProperties;
-        private ImmutableArray<IShape> _shapes;
+        private ImmutableArray<IBaseShape> _shapes;
 
         /// <summary>
         /// Gets all properties from <see cref="Shapes"/> collection.
@@ -26,7 +26,7 @@ namespace Core2D.Shapes
         /// <summary>
         /// Gets or sets shapes collection.
         /// </summary>
-        public ImmutableArray<IShape> Shapes
+        public ImmutableArray<IBaseShape> Shapes
         {
             get => _shapes;
             set
@@ -44,7 +44,7 @@ namespace Core2D.Shapes
         public GroupShape()
             : base()
         {
-            _shapes = ImmutableArray.Create<IShape>();
+            _shapes = ImmutableArray.Create<IBaseShape>();
         }
 
         private ImmutableArray<Property> GetShapeProperties()
@@ -98,7 +98,7 @@ namespace Core2D.Shapes
         }
 
         /// <inheritdoc/>
-        public override void Move(ISet<IShape> selected, double dx, double dy)
+        public override void Move(ISet<IBaseShape> selected, double dx, double dy)
         {
             foreach (var shape in Shapes)
             {
@@ -112,13 +112,13 @@ namespace Core2D.Shapes
         }
 
         /// <inheritdoc/>
-        public override void Select(ISet<IShape> selected)
+        public override void Select(ISet<IBaseShape> selected)
         {
             base.Select(selected);
         }
 
         /// <inheritdoc/>
-        public override void Deselect(ISet<IShape> selected)
+        public override void Deselect(ISet<IBaseShape> selected)
         {
             base.Deselect(selected);
         }

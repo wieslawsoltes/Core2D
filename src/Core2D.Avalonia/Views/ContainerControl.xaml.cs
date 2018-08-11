@@ -5,6 +5,7 @@ using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 using Avalonia.Media;
 using Core2D.Avalonia.Renderer;
+using Core2D.Containers.Interfaces;
 using Core2D.Renderer;
 using Core2D.Renderer.Presenters;
 
@@ -15,14 +16,14 @@ namespace Core2D.Avalonia.Views
     /// </summary>
     public class ContainerControl : UserControl
     {
-        private static ContainerPresenter _editorPresenter = new EditorPresenter();
-        private static ContainerPresenter _templatePresenter = new TemplatePresenter();
+        private static ContainerPresenter s_editorPresenter = new EditorPresenter();
+        private static ContainerPresenter s_templatePresenter = new TemplatePresenter();
 
         /// <summary>
         /// Gets or sets container property.
         /// </summary>
-        public static readonly AvaloniaProperty<PageContainer> ContainerProperty =
-            AvaloniaProperty.Register<ContainerControl, PageContainer>(nameof(Container));
+        public static readonly AvaloniaProperty<IPageContainer> ContainerProperty =
+            AvaloniaProperty.Register<ContainerControl, IPageContainer>(nameof(Container));
 
         /// <summary>
         /// Gets or sets renderer property.
@@ -33,7 +34,7 @@ namespace Core2D.Avalonia.Views
         /// <summary>
         /// Gets or sets container property.
         /// </summary>
-        public PageContainer Container
+        public IPageContainer Container
         {
             get { return GetValue(ContainerProperty); }
             set { SetValue(ContainerProperty, value); }
@@ -76,16 +77,16 @@ namespace Core2D.Avalonia.Views
             {
                 if (Renderer != null)
                 {
-                    _templatePresenter.Render(context, Renderer, Container, 0.0, 0.0);
-                    _editorPresenter.Render(context, Renderer, Container, 0.0, 0.0);
+                    s_templatePresenter.Render(context, Renderer, Container, 0.0, 0.0);
+                    s_editorPresenter.Render(context, Renderer, Container, 0.0, 0.0);
                 }
                 else
                 {
                     var renderer = GetValue(RendererOptions.RendererProperty);
                     if (renderer != null)
                     {
-                        _templatePresenter.Render(context, renderer, Container, 0.0, 0.0);
-                        _editorPresenter.Render(context, renderer, Container, 0.0, 0.0);
+                        s_templatePresenter.Render(context, renderer, Container, 0.0, 0.0);
+                        s_editorPresenter.Render(context, renderer, Container, 0.0, 0.0);
                     }
                 }
             }

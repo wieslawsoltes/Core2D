@@ -10,14 +10,12 @@ namespace Core2D
     /// <summary>
     /// Observable object base class.
     /// </summary>
-    public abstract class ObservableObject : INotifyPropertyChanged
+    public abstract class ObservableObject : INotifyPropertyChanged, IObservableObject
     {
         private string _id = Guid.NewGuid().ToString();
         private string _name = "";
 
-        /// <summary>
-        /// Gets or sets observable object name.
-        /// </summary>
+        /// <inheritdoc/>
         [Name]
         public virtual string Id
         {
@@ -25,9 +23,7 @@ namespace Core2D
             set => Update(ref _id, value);
         }
 
-        /// <summary>
-        /// Gets or sets observable object name.
-        /// </summary>
+        /// <inheritdoc/>
         public virtual string Name
         {
             get => _name;
@@ -39,10 +35,7 @@ namespace Core2D
         /// </summary>
         internal bool IsDirty { get; set; }
 
-        /// <summary>
-        /// Set the <see cref="IsDirty"/> flag value.
-        /// </summary>
-        /// <param name="value">The new value of <see cref="IsDirty"/> flag.</param>
+        /// <inheritdoc/>
         public void MarkAsDirty(bool value) => IsDirty = value;
 
         /// <summary>
@@ -50,23 +43,13 @@ namespace Core2D
         /// </summary>
         public event PropertyChangedEventHandler PropertyChanged;
 
-        /// <summary>
-        /// Notify observers about property changes.
-        /// </summary>
-        /// <param name="propertyName">The property name that changed.</param>
+        /// <inheritdoc/>
         public void Notify([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        /// <summary>
-        /// Update property backing field and notify observers about property change.
-        /// </summary>
-        /// <typeparam name="T">The type of field.</typeparam>
-        /// <param name="field">The field to update.</param>
-        /// <param name="value">The new field value.</param>
-        /// <param name="propertyName">The property name that changed.</param>
-        /// <returns>True if backing field value changed.</returns>
+        /// <inheritdoc/>
         public bool Update<T>(ref T field, T value, [CallerMemberName] string propertyName = null)
         {
             if (!Equals(field, value))

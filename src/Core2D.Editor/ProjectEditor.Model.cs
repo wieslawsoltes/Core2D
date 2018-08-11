@@ -3,6 +3,7 @@
 using System;
 using System.Collections.Immutable;
 using System.Linq;
+using Core2D.Containers.Interfaces;
 using Core2D.Data;
 using Core2D.Editor.Bounds;
 using Core2D.Editor.Recent;
@@ -18,7 +19,7 @@ namespace Core2D.Editor
     public partial class ProjectEditor : ObservableObject
     {
         private readonly IServiceProvider _serviceProvider;
-        private ProjectContainer _project;
+        private IProjectContainer _project;
         private string _projectPath;
         private bool _isProjectDirty;
         private ProjectObserver _observer;
@@ -52,7 +53,7 @@ namespace Core2D.Editor
         /// <summary>
         /// Gets or sets current project.
         /// </summary>
-        public ProjectContainer Project
+        public IProjectContainer Project
         {
             get => _project;
             set => Update(ref _project, value);

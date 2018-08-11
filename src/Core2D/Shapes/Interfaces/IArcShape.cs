@@ -6,7 +6,7 @@ namespace Core2D.Shapes.Interfaces
     /// <summary>
     /// Defines arc shape contract.
     /// </summary>
-    public interface IArcShape : IShape
+    public interface IArcShape : IBaseShape
     {
         /// <summary>
         /// Gets or sets top-left corner point.

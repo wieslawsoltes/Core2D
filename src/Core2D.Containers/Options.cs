@@ -26,7 +26,7 @@ namespace Core2D.Containers
         private bool _defaultIsSmoothJoin = true;
         private FillRule _defaultFillRule = FillRule.EvenOdd;
         private bool _tryToConnect = false;
-        private IShape _pointShape;
+        private IBaseShape _pointShape;
         private ShapeStyle _pointStyle;
         private ShapeStyle _selectionStyle;
         private ShapeStyle _helperStyle;
@@ -134,7 +134,7 @@ namespace Core2D.Containers
         /// <summary>
         /// Gets or sets shape used to draw points.
         /// </summary>
-        public IShape PointShape
+        public IBaseShape PointShape
         {
             get => _pointShape;
             set => Update(ref _pointShape, value);
@@ -231,11 +231,11 @@ namespace Core2D.Containers
         }
 
         /// <summary>
-        /// Creates a new <see cref="IShape"/> instance.
+        /// Creates a new <see cref="IBaseShape"/> instance.
         /// </summary>
         /// <param name="pss">The point shape <see cref="ShapeStyle"/>.</param>
-        /// <returns>The new instance of the <see cref="IShape"/> class.</returns>
-        public static IShape EllipsePointShape(ShapeStyle pss)
+        /// <returns>The new instance of the <see cref="IBaseShape"/> class.</returns>
+        public static IBaseShape EllipsePointShape(ShapeStyle pss)
         {
             var ellipse = EllipseShape.Create(-4, -4, 4, 4, pss, null, true, false);
             ellipse.Name = "EllipsePoint";
@@ -243,11 +243,11 @@ namespace Core2D.Containers
         }
 
         /// <summary>
-        /// Creates a new <see cref="IShape"/> instance.
+        /// Creates a new <see cref="IBaseShape"/> instance.
         /// </summary>
         /// <param name="pss">The point shape <see cref="ShapeStyle"/>.</param>
-        /// <returns>The new instance of the <see cref="IShape"/> class.</returns>
-        public static IShape FilledEllipsePointShape(ShapeStyle pss)
+        /// <returns>The new instance of the <see cref="IBaseShape"/> class.</returns>
+        public static IBaseShape FilledEllipsePointShape(ShapeStyle pss)
         {
             var ellipse = EllipseShape.Create(-3, -3, 3, 3, pss, null, true, true);
             ellipse.Name = "FilledEllipsePoint";
@@ -255,11 +255,11 @@ namespace Core2D.Containers
         }
 
         /// <summary>
-        /// Creates a new <see cref="IShape"/> instance.
+        /// Creates a new <see cref="IBaseShape"/> instance.
         /// </summary>
         /// <param name="pss">The point shape <see cref="ShapeStyle"/>.</param>
-        /// <returns>The new instance of the <see cref="IShape"/> class.</returns>
-        public static IShape RectanglePointShape(ShapeStyle pss)
+        /// <returns>The new instance of the <see cref="IBaseShape"/> class.</returns>
+        public static IBaseShape RectanglePointShape(ShapeStyle pss)
         {
             var rectangle = RectangleShape.Create(-4, -4, 4, 4, pss, null, true, false);
             rectangle.Name = "RectanglePoint";
@@ -267,11 +267,11 @@ namespace Core2D.Containers
         }
 
         /// <summary>
-        /// Creates a new <see cref="IShape"/> instance.
+        /// Creates a new <see cref="IBaseShape"/> instance.
         /// </summary>
         /// <param name="pss">The point shape <see cref="ShapeStyle"/>.</param>
-        /// <returns>The new instance of the <see cref="IShape"/> class.</returns>
-        public static IShape FilledRectanglePointShape(ShapeStyle pss)
+        /// <returns>The new instance of the <see cref="IBaseShape"/> class.</returns>
+        public static IBaseShape FilledRectanglePointShape(ShapeStyle pss)
         {
             var rectangle = RectangleShape.Create(-3, -3, 3, 3, pss, null, true, true);
             rectangle.Name = "FilledRectanglePoint";
@@ -279,11 +279,11 @@ namespace Core2D.Containers
         }
 
         /// <summary>
-        /// Creates a new <see cref="IShape"/> instance.
+        /// Creates a new <see cref="IBaseShape"/> instance.
         /// </summary>
         /// <param name="pss">The point shape <see cref="ShapeStyle"/>.</param>
-        /// <returns>The new instance of the <see cref="IShape"/> class.</returns>
-        public static IShape CrossPointShape(ShapeStyle pss)
+        /// <returns>The new instance of the <see cref="IBaseShape"/> class.</returns>
+        public static IBaseShape CrossPointShape(ShapeStyle pss)
         {
             var group = GroupShape.Create("CrossPoint");
             var builder = group.Shapes.ToBuilder();

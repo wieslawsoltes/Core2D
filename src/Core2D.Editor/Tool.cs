@@ -2,6 +2,7 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System.Diagnostics;
 using Core2D.Editor.Input;
+using Core2D.Shapes.Interfaces;
 
 namespace Core2D.Editor
 {
@@ -66,7 +67,7 @@ namespace Core2D.Editor
         /// Move edited shape.
         /// </summary>
         /// <param name="shape">The shape object.</param>
-        public virtual void Move(BaseShape shape)
+        public virtual void Move(IBaseShape shape)
         {
         }
 
@@ -74,7 +75,7 @@ namespace Core2D.Editor
         /// Finalize edited shape.
         /// </summary>
         /// <param name="shape">The shape object.</param>
-        public virtual void Finalize(BaseShape shape)
+        public virtual void Finalize(IBaseShape shape)
         {
         }
 

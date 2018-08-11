@@ -29,12 +29,12 @@ namespace Core2D.Editor.Bounds
             }
         }
 
-        public IPointShape TryToGetPoint(IShape shape, Point2 target, double radius)
+        public IPointShape TryToGetPoint(IBaseShape shape, Point2 target, double radius)
         {
             return Registered[shape.GetType()].TryToGetPoint(shape, target, radius, Registered);
         }
 
-        public IPointShape TryToGetPoint(IEnumerable<IShape> shapes, Point2 target, double radius)
+        public IPointShape TryToGetPoint(IEnumerable<IBaseShape> shapes, Point2 target, double radius)
         {
             foreach (var shape in shapes)
             {
@@ -47,17 +47,17 @@ namespace Core2D.Editor.Bounds
             return null;
         }
 
-        public bool Contains(IShape shape, Point2 target, double radius)
+        public bool Contains(IBaseShape shape, Point2 target, double radius)
         {
             return Registered[shape.GetType()].Contains(shape, target, radius, Registered);
         }
 
-        public bool Overlaps(IShape shape, Rect2 target, double radius)
+        public bool Overlaps(IBaseShape shape, Rect2 target, double radius)
         {
             return Registered[shape.GetType()].Overlaps(shape, target, radius, Registered);
         }
 
-        public IShape TryToGetShape(IEnumerable<IShape> shapes, Point2 target, double radius)
+        public IBaseShape TryToGetShape(IEnumerable<IBaseShape> shapes, Point2 target, double radius)
         {
             foreach (var shape in shapes)
             {
@@ -70,9 +70,9 @@ namespace Core2D.Editor.Bounds
             return null;
         }
 
-        public HashSet<IShape> TryToGetShapes(IEnumerable<IShape> shapes, Rect2 target, double radius)
+        public HashSet<IBaseShape> TryToGetShapes(IEnumerable<IBaseShape> shapes, Rect2 target, double radius)
         {
-            var selected = new HashSet<IShape>();
+            var selected = new HashSet<IBaseShape>();
             foreach (var shape in shapes)
             {
                 var result = Registered[shape.GetType()].Overlaps(shape, target, radius, Registered);

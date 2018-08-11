@@ -69,7 +69,7 @@ namespace Core2D.Containers.Interfaces
         /// <summary>
         /// Gets or sets shape used to draw points.
         /// </summary>
-        IShape PointShape { get; set; }
+        IBaseShape PointShape { get; set; }
 
         /// <summary>
         /// Gets or sets point shape style.

@@ -1,21 +1,22 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using Core2D.Containers.Interfaces;
 using Core2D.Shapes.Interfaces;
 using Core2D.Style;
 
 namespace Core2D.Editor.Tools.Selection
 {
     /// <summary>
-    /// Helper class for <see cref="LineShape"/> shape selection.
+    /// Helper class for <see cref="ILineShape"/> shape selection.
     /// </summary>
     public class ToolLineSelection
     {
-        private readonly LayerContainer _layer;
+        private readonly ILayerContainer _layer;
         private readonly ILineShape _line;
         private readonly ShapeStyle _style;
-        private readonly BaseShape _point;
-        private PointShape _startHelperPoint;
-        private PointShape _endHelperPoint;
+        private readonly IBaseShape _point;
+        private IPointShape _startHelperPoint;
+        private IPointShape _endHelperPoint;
 
         /// <summary>
         /// Initialize new instance of <see cref="ToolLineSelection"/> class.
@@ -24,7 +25,7 @@ namespace Core2D.Editor.Tools.Selection
         /// <param name="shape">The selected shape.</param>
         /// <param name="style">The selection shapes style.</param>
         /// <param name="point">The selection point shape.</param>
-        public ToolLineSelection(LayerContainer layer, ILineShape shape, ShapeStyle style, BaseShape point)
+        public ToolLineSelection(ILayerContainer layer, ILineShape shape, ShapeStyle style, IBaseShape point)
         {
             _layer = layer;
             _line = shape;

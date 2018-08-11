@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
+using Core2D.Containers.Interfaces;
 using Core2D.Interfaces;
 using PdfSharp;
 using PdfSharp.Drawing;
@@ -14,7 +15,7 @@ namespace Core2D.Renderer.PdfSharp
     public partial class PdfSharpRenderer : ShapeRenderer, IProjectExporter
     {
         /// <inheritdoc/>
-        void IProjectExporter.Save(string path, PageContainer container)
+        void IProjectExporter.Save(string path, IPageContainer container)
         {
             using (var pdf = new PdfDocument())
             {
@@ -24,7 +25,7 @@ namespace Core2D.Renderer.PdfSharp
         }
 
         /// <inheritdoc/>
-        void IProjectExporter.Save(string path, DocumentContainer document)
+        void IProjectExporter.Save(string path, IDocumentContainer document)
         {
             using (var pdf = new PdfDocument())
             {
@@ -58,7 +59,7 @@ namespace Core2D.Renderer.PdfSharp
         }
 
         /// <inheritdoc/>
-        void IProjectExporter.Save(string path, ProjectContainer project)
+        void IProjectExporter.Save(string path, IProjectContainer project)
         {
             using (var pdf = new PdfDocument())
             {
@@ -106,7 +107,7 @@ namespace Core2D.Renderer.PdfSharp
             }
         }
 
-        private PdfPage Add(PdfDocument pdf, PageContainer container)
+        private PdfPage Add(PdfDocument pdf, IPageContainer container)
         {
             // Create A3 page size with Landscape orientation.
             var pdfPage = pdf.AddPage();

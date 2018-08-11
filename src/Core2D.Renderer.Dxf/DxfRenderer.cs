@@ -4,9 +4,11 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
+using Core2D.Containers.Interfaces;
 using Core2D.Data;
 using Core2D.Path;
 using Core2D.Path.Segments;
+using Core2D.Shapes.Interfaces;
 using Core2D.Style;
 using DXF = netDxf;
 using DXFE = netDxf.Entities;
@@ -42,14 +44,14 @@ namespace Core2D.Renderer.Dxf
         /// <returns>The new instance of the <see cref="DxfRenderer"/> class.</returns>
         public static ShapeRenderer Create() => new DxfRenderer();
 
-        private static double LineweightFactor = 96.0 / 2540.0;
+        private static double s_lineweightFactor = 96.0 / 2540.0;
 
-        private static short[] Lineweights = { -3, -2, -1, 0, 5, 9, 13, 15, 18, 20, 25, 30, 35, 40, 50, 53, 60, 70, 80, 90, 100, 106, 120, 140, 158, 200, 211 };
+        private static short[] s_lineweights = { -3, -2, -1, 0, 5, 9, 13, 15, 18, 20, 25, 30, 35, 40, 50, 53, 60, 70, 80, 90, 100, 106, 120, 140, 158, 200, 211 };
 
         private static DXF.Lineweight ToLineweight(double thickness)
         {
-            short lineweight = (short)(thickness / LineweightFactor);
-            return (DXF.Lineweight)Lineweights.OrderBy(x => Math.Abs((long)x - lineweight)).First();
+            short lineweight = (short)(thickness / s_lineweightFactor);
+            return (DXF.Lineweight)s_lineweights.OrderBy(x => Math.Abs((long)x - lineweight)).First();
         }
 
         private static DXF.AciColor ToColor(ArgbColor color) => new DXF.AciColor(color.R, color.G, color.B);
@@ -87,7 +89,7 @@ namespace Core2D.Renderer.Dxf
             };
         }
 
-        private DXFE.Ellipse CreateEllipticalArc(ArcShape arc, double dx, double dy)
+        private DXFE.Ellipse CreateEllipticalArc(IArcShape arc, double dx, double dy)
         {
             var a = new Spatial.Arc.GdiArc(
                 Spatial.Point2.FromXY(arc.Point1.X, arc.Point1.Y),
@@ -503,7 +505,7 @@ namespace Core2D.Renderer.Dxf
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, PageContainer container, double dx, double dy, object db, object r)
+        public override void Draw(object dc, IPageContainer container, double dx, double dy, object db, object r)
         {
             var dxf = dc as DXF.DxfDocument;
 
@@ -523,7 +525,7 @@ namespace Core2D.Renderer.Dxf
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, LayerContainer layer, double dx, double dy, object db, object r)
+        public override void Draw(object dc, ILayerContainer layer, double dx, double dy, object db, object r)
         {
             var dxf = dc as DXF.DxfDocument;
 
@@ -537,7 +539,7 @@ namespace Core2D.Renderer.Dxf
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, LineShape line, double dx, double dy, object db, object r)
+        public override void Draw(object dc, ILineShape line, double dx, double dy, object db, object r)
         {
             if (!line.IsStroked)
                 return;
@@ -561,7 +563,7 @@ namespace Core2D.Renderer.Dxf
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, RectangleShape rectangle, double dx, double dy, object db, object r)
+        public override void Draw(object dc, IRectangleShape rectangle, double dx, double dy, object db, object r)
         {
             if (!rectangle.IsStroked && !rectangle.IsFilled && !rectangle.IsGrid)
                 return;
@@ -590,7 +592,7 @@ namespace Core2D.Renderer.Dxf
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, EllipseShape ellipse, double dx, double dy, object db, object r)
+        public override void Draw(object dc, IEllipseShape ellipse, double dx, double dy, object db, object r)
         {
             if (!ellipse.IsStroked && !ellipse.IsFilled)
                 return;
@@ -608,7 +610,7 @@ namespace Core2D.Renderer.Dxf
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, ArcShape arc, double dx, double dy, object db, object r)
+        public override void Draw(object dc, IArcShape arc, double dx, double dy, object db, object r)
         {
             var dxf = dc as DXF.DxfDocument;
             var style = arc.Style;
@@ -655,7 +657,7 @@ namespace Core2D.Renderer.Dxf
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, CubicBezierShape cubicBezier, double dx, double dy, object db, object r)
+        public override void Draw(object dc, ICubicBezierShape cubicBezier, double dx, double dy, object db, object r)
         {
             if (!cubicBezier.IsStroked && !cubicBezier.IsFilled)
                 return;
@@ -712,7 +714,7 @@ namespace Core2D.Renderer.Dxf
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, QuadraticBezierShape quadraticBezier, double dx, double dy, object db, object r)
+        public override void Draw(object dc, IQuadraticBezierShape quadraticBezier, double dx, double dy, object db, object r)
         {
             if (!quadraticBezier.IsStroked && !quadraticBezier.IsFilled)
                 return;
@@ -767,7 +769,7 @@ namespace Core2D.Renderer.Dxf
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, TextShape text, double dx, double dy, object db, object r)
+        public override void Draw(object dc, ITextShape text, double dx, double dy, object db, object r)
         {
             var dxf = dc as DXF.DxfDocument;
 
@@ -898,7 +900,7 @@ namespace Core2D.Renderer.Dxf
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, ImageShape image, double dx, double dy, object db, object r)
+        public override void Draw(object dc, IImageShape image, double dx, double dy, object db, object r)
         {
             var dxf = dc as DXF.DxfDocument;
 
@@ -944,7 +946,7 @@ namespace Core2D.Renderer.Dxf
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, PathShape path, double dx, double dy, object db, object r)
+        public override void Draw(object dc, IPathShape path, double dx, double dy, object db, object r)
         {
             if (!path.IsStroked && !path.IsFilled)
                 return;

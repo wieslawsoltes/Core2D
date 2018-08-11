@@ -278,7 +278,7 @@ namespace Core2D.Containers
         /// </summary>
         /// <param name="shapes">The shapes collection.</param>
         /// <returns>All shapes including grouped shapes.</returns>
-        public static IEnumerable<IShape> GetAllShapes(IEnumerable<IShape> shapes)
+        public static IEnumerable<IBaseShape> GetAllShapes(IEnumerable<IBaseShape> shapes)
         {
             if (shapes == null)
                 yield break;
@@ -307,7 +307,7 @@ namespace Core2D.Containers
         /// <typeparam name="T">The type of shape to include.</typeparam>
         /// <param name="shapes">The shapes collection.</param>
         /// <returns>All shapes including grouped shapes of specified type.</returns>
-        public static IEnumerable<T> GetAllShapes<T>(IEnumerable<IShape> shapes)
+        public static IEnumerable<T> GetAllShapes<T>(IEnumerable<IBaseShape> shapes)
         {
             return GetAllShapes(shapes)?.Where(s => s is T).Cast<T>();
         }

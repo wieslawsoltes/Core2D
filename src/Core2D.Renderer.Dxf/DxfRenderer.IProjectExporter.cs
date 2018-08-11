@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
+using Core2D.Containers.Interfaces;
 using Core2D.Interfaces;
 using DXF = netDxf;
 using DXFH = netDxf.Header;
@@ -14,7 +15,7 @@ namespace Core2D.Renderer.Dxf
     public partial class DxfRenderer : ShapeRenderer, IProjectExporter
     {
         /// <inheritdoc/>
-        void IProjectExporter.Save(string path, PageContainer container)
+        void IProjectExporter.Save(string path, IPageContainer container)
         {
             _outputPath = System.IO.Path.GetDirectoryName(path);
             var dxf = new DXF.DxfDocument(DXFH.DxfVersion.AutoCad2010);
@@ -26,7 +27,7 @@ namespace Core2D.Renderer.Dxf
         }
 
         /// <inheritdoc/>
-        void IProjectExporter.Save(string path, DocumentContainer document)
+        void IProjectExporter.Save(string path, IDocumentContainer document)
         {
             _outputPath = System.IO.Path.GetDirectoryName(path);
             var dxf = new DXF.DxfDocument(DXFH.DxfVersion.AutoCad2010);
@@ -38,7 +39,7 @@ namespace Core2D.Renderer.Dxf
         }
 
         /// <inheritdoc/>
-        void IProjectExporter.Save(string path, ProjectContainer project)
+        void IProjectExporter.Save(string path, IProjectContainer project)
         {
             _outputPath = System.IO.Path.GetDirectoryName(path);
             var dxf = new DXF.DxfDocument(DXFH.DxfVersion.AutoCad2010);
@@ -49,7 +50,7 @@ namespace Core2D.Renderer.Dxf
             ClearCache(isZooming: false);
         }
 
-        private void Add(DXF.DxfDocument dxf, PageContainer container)
+        private void Add(DXF.DxfDocument dxf, IPageContainer container)
         {
             if (container.Template != null)
             {
@@ -65,7 +66,7 @@ namespace Core2D.Renderer.Dxf
             Draw(dxf, container, 0.0, 0.0, (object)container.Data.Properties, (object)container.Data.Record);
         }
 
-        private void Add(DXF.DxfDocument dxf, DocumentContainer document)
+        private void Add(DXF.DxfDocument dxf, IDocumentContainer document)
         {
             foreach (var page in document.Pages)
             {
@@ -91,7 +92,7 @@ namespace Core2D.Renderer.Dxf
             }
         }
 
-        private void Add(DXF.DxfDocument dxf, ProjectContainer project)
+        private void Add(DXF.DxfDocument dxf, IProjectContainer project)
         {
             foreach (var document in project.Documents)
             {

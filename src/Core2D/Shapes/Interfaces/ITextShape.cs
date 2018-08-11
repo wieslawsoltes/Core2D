@@ -6,7 +6,7 @@ namespace Core2D.Shapes.Interfaces
     /// <summary>
     /// Defines text shape contract.
     /// </summary>
-    public interface ITextShape : IShape
+    public interface ITextShape : IBaseShape
     {
         /// <summary>
         /// Gets or sets top-left corner point.

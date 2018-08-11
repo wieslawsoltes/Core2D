@@ -7,7 +7,7 @@ namespace Core2D.Containers.Interfaces
     /// <summary>
     /// Defines document container interface.
     /// </summary>
-    public interface IDocumentContainer : IContainer
+    public interface IDocumentContainer : IBaseContainer
     {
         /// <summary>
         /// Gets or sets flag indicating whether document is expanded.

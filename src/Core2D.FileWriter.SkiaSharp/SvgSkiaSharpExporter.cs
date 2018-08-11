@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
+using Core2D.Containers.Interfaces;
 using Core2D.Interfaces;
 using Core2D.Renderer;
 using SkiaSharp;
@@ -27,24 +28,24 @@ namespace Core2D.FileWriter.SkiaSharpSvg
         }
 
         /// <inheritdoc/>
-        void IProjectExporter.Save(string path, PageContainer container)
+        void IProjectExporter.Save(string path, IPageContainer container)
         {
             Save(path, container);
         }
 
         /// <inheritdoc/>
-        void IProjectExporter.Save(string path, DocumentContainer document)
+        void IProjectExporter.Save(string path, IDocumentContainer document)
         {
             throw new NotSupportedException("Saving documents as svg drawing is not supported.");
         }
 
         /// <inheritdoc/>
-        void IProjectExporter.Save(string path, ProjectContainer project)
+        void IProjectExporter.Save(string path, IProjectContainer project)
         {
             throw new NotSupportedException("Saving projects as svg drawing is not supported.");
         }
 
-        private void Save(string path, PageContainer container)
+        private void Save(string path, IPageContainer container)
         {
             using (var stream = new SKFileWStream(path))
             using (var writer = new SKXmlStreamWriter(stream))

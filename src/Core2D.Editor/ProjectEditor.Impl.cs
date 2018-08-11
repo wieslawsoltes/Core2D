@@ -31,9 +31,13 @@ namespace Core2D.Editor
         private object _scriptState;
         private IPageContainer _pageToCopy = default;
         private IDocumentContainer _documentToCopy = default;
-        private IShape _hover = default;
+        private IBaseShape _hover = default;
 
-        public IShape Hover1 { get => _hover; set => _hover = value; }
+        public IBaseShape Hover1
+        {
+            get => _hover;
+            set => _hover = value;
+        }
 
         private void LogError(Exception ex)
         {
@@ -355,7 +359,7 @@ namespace Core2D.Editor
             {
                 Project.AddItems(Project?.CurrentStyleLibrary, item as IList<ShapeStyle>);
             }
-            else if (item is IShape)
+            else if (item is IBaseShape)
             {
                 if (item is IGroupShape group)
                 {
@@ -369,7 +373,7 @@ namespace Core2D.Editor
                 }
                 else
                 {
-                    Project?.AddShape(Project?.CurrentContainer?.CurrentLayer, item as IShape);
+                    Project?.AddShape(Project?.CurrentContainer?.CurrentLayer, item as IBaseShape);
                 }
             }
             else if (item is IList<IGroupShape> groups)
@@ -910,7 +914,7 @@ namespace Core2D.Editor
                 Deselect(Project?.CurrentContainer?.CurrentLayer);
                 Select(
                     Project?.CurrentContainer?.CurrentLayer,
-                    ImmutableHashSet.CreateRange<IShape>(Project?.CurrentContainer?.CurrentLayer?.Shapes));
+                    ImmutableHashSet.CreateRange<IBaseShape>(Project?.CurrentContainer?.CurrentLayer?.Shapes));
             }
             catch (Exception ex)
             {
@@ -948,8 +952,8 @@ namespace Core2D.Editor
                         Project?.ClearLayer(layer);
                     }
 
-                    container.WorkingLayer.Shapes = ImmutableArray.Create<IShape>();
-                    container.HelperLayer.Shapes = ImmutableArray.Create<IShape>();
+                    container.WorkingLayer.Shapes = ImmutableArray.Create<IBaseShape>();
+                    container.HelperLayer.Shapes = ImmutableArray.Create<IBaseShape>();
 
                     Project.CurrentContainer.Invalidate();
                 }
@@ -1482,7 +1486,7 @@ namespace Core2D.Editor
         /// </summary>
         public void OnAddGroupLibrary()
         {
-            var gl = Library<GroupShape>.Create(Constants.DefaulGroupLibraryName);
+            var gl = Library<IGroupShape>.Create(Constants.DefaulGroupLibraryName);
             Project.AddGroupLibrary(gl);
             Project.SetCurrentGroupLibrary(gl);
         }
@@ -1491,7 +1495,7 @@ namespace Core2D.Editor
         /// Remove group library.
         /// </summary>
         /// <param name="library">The group library to remove.</param>
-        public void OnRemoveGroupLibrary(Library<GroupShape> library)
+        public void OnRemoveGroupLibrary(Library<IGroupShape> library)
         {
             Project.RemoveGroupLibrary(library);
             Project.SetCurrentGroupLibrary(Project?.GroupLibraries.FirstOrDefault());
@@ -1501,11 +1505,11 @@ namespace Core2D.Editor
         /// Add group.
         /// </summary>
         /// <param name="library">The group library.</param>
-        public void OnAddGroup(Library<GroupShape> library)
+        public void OnAddGroup(Library<IGroupShape> library)
         {
             if (Project != null && library != null)
             {
-                if (Renderers?[0]?.State?.SelectedShape is GroupShape group)
+                if (Renderers?[0]?.State?.SelectedShape is IGroupShape group)
                 {
                     var clone = CloneShape(group);
                     if (clone != null)
@@ -1520,7 +1524,7 @@ namespace Core2D.Editor
         /// Remove group.
         /// </summary>
         /// <param name="group">The group item.</param>
-        public void OnRemoveGroup(GroupShape group)
+        public void OnRemoveGroup(IGroupShape group)
         {
             if (Project != null && group != null)
             {
@@ -1533,7 +1537,7 @@ namespace Core2D.Editor
         /// Insert current group to container.
         /// </summary>
         /// <param name="group">The group instance.</param>
-        public void OnInsertGroup(GroupShape group)
+        public void OnInsertGroup(IGroupShape group)
         {
             if (Project?.CurrentContainer != null)
             {
@@ -1545,7 +1549,7 @@ namespace Core2D.Editor
         /// Add layer to container.
         /// </summary>
         /// <param name="container">The container instance.</param>
-        public void OnAddLayer(PageContainer container)
+        public void OnAddLayer(IPageContainer container)
         {
             Project.AddLayer(container, LayerContainer.Create(Constants.DefaultLayerName, container));
         }
@@ -1554,7 +1558,7 @@ namespace Core2D.Editor
         /// Remove layer.
         /// </summary>
         /// <param name="layer">The layer to remove.</param>
-        public void OnRemoveLayer(LayerContainer layer)
+        public void OnRemoveLayer(ILayerContainer layer)
         {
             Project.RemoveLayer(layer);
             layer.Owner.SetCurrentLayer(layer.Owner.Layers.FirstOrDefault());
@@ -1653,7 +1657,7 @@ namespace Core2D.Editor
         /// Add shape.
         /// </summary>
         /// <param name="shape">The shape instance.</param>
-        public void OnAddShape(BaseShape shape)
+        public void OnAddShape(IBaseShape shape)
         {
             var layer = Project?.CurrentContainer?.CurrentLayer;
             if (layer != null && shape != null)
@@ -1666,7 +1670,7 @@ namespace Core2D.Editor
         /// Remove shape.
         /// </summary>
         /// <param name="shape">The shape instance.</param>
-        public void OnRemoveShape(BaseShape shape)
+        public void OnRemoveShape(IBaseShape shape)
         {
             var layer = Project?.CurrentContainer?.CurrentLayer;
             if (layer != null && shape != null)
@@ -1697,7 +1701,7 @@ namespace Core2D.Editor
         /// Remove template.
         /// </summary>
         /// <param name="template">The template object.</param>
-        public void OnRemoveTemplate(PageContainer template)
+        public void OnRemoveTemplate(IPageContainer template)
         {
             if (template != null)
             {
@@ -1709,7 +1713,7 @@ namespace Core2D.Editor
         /// <summary>
         /// Edit template.
         /// </summary>
-        public void OnEditTemplate(PageContainer template)
+        public void OnEditTemplate(IPageContainer template)
         {
             if (Project != null && template != null)
             {
@@ -1723,7 +1727,7 @@ namespace Core2D.Editor
         /// Set page template.
         /// </summary>
         /// <param name="template">The template object.</param>
-        public void OnApplyTemplate(PageContainer template)
+        public void OnApplyTemplate(IPageContainer template)
         {
             var page = Project?.CurrentContainer;
             if (page != null && template != null && page != template)
@@ -1813,9 +1817,8 @@ namespace Core2D.Editor
         {
             if (Project?.CurrentDocument != null)
             {
-                if (item is PageContainer)
+                if (item is IPageContainer selected)
                 {
-                    var selected = item as PageContainer;
                     int index = Project.CurrentDocument.Pages.IndexOf(selected);
                     var page =
                         ProjectFactory?.GetPage(Project, Constants.DefaultPageName)
@@ -1835,9 +1838,8 @@ namespace Core2D.Editor
         {
             if (Project?.CurrentDocument != null)
             {
-                if (item is PageContainer)
+                if (item is IPageContainer selected)
                 {
-                    var selected = item as PageContainer;
                     int index = Project.CurrentDocument.Pages.IndexOf(selected);
                     var page =
                         ProjectFactory?.GetPage(Project, Constants.DefaultPageName)
@@ -1875,9 +1877,8 @@ namespace Core2D.Editor
         {
             if (Project != null)
             {
-                if (item is DocumentContainer)
+                if (item is IDocumentContainer selected)
                 {
-                    var selected = item as DocumentContainer;
                     int index = Project.Documents.IndexOf(selected);
                     var document =
                         ProjectFactory?.GetDocument(Project, Constants.DefaultDocumentName)
@@ -1898,9 +1899,8 @@ namespace Core2D.Editor
         {
             if (Project != null)
             {
-                if (item is DocumentContainer)
+                if (item is IDocumentContainer selected)
                 {
-                    var selected = item as DocumentContainer;
                     int index = Project.Documents.IndexOf(selected);
                     var document =
                         ProjectFactory?.GetDocument(Project, Constants.DefaultDocumentName)
@@ -1934,7 +1934,7 @@ namespace Core2D.Editor
         /// </summary>
         /// <param name="project">The project instance.</param>
         /// <param name="path">The project path.</param>
-        public void OnLoad(ProjectContainer project, string path = null)
+        public void OnLoad(IProjectContainer project, string path = null)
         {
             if (project != null)
             {
@@ -2196,7 +2196,7 @@ namespace Core2D.Editor
         /// Copy selected shapes to clipboard.
         /// </summary>
         /// <param name="shapes"></param>
-        public void OnCopyShapes(IList<BaseShape> shapes)
+        public void OnCopyShapes(IList<IBaseShape> shapes)
         {
             try
             {
@@ -2239,7 +2239,7 @@ namespace Core2D.Editor
                 // Try to deserialize Json.
                 try
                 {
-                    var shapes = JsonSerializer?.Deserialize<IList<BaseShape>>(text);
+                    var shapes = JsonSerializer?.Deserialize<IList<IBaseShape>>(text);
                     if (shapes?.Count() > 0)
                     {
                         OnPasteShapes(shapes);
@@ -2259,7 +2259,7 @@ namespace Core2D.Editor
             }
         }
 
-        private void ResetPointShapeToDefault(IEnumerable<BaseShape> shapes)
+        private void ResetPointShapeToDefault(IEnumerable<IBaseShape> shapes)
         {
             foreach (var point in shapes?.SelectMany(s => s?.GetPoints()))
             {
@@ -2280,7 +2280,7 @@ namespace Core2D.Editor
         /// Try to restore shape styles.
         /// </summary>
         /// <param name="shapes">The shapes collection.</param>
-        private void TryToRestoreStyles(IEnumerable<BaseShape> shapes)
+        private void TryToRestoreStyles(IEnumerable<IBaseShape> shapes)
         {
             try
             {
@@ -2342,7 +2342,7 @@ namespace Core2D.Editor
         /// Try to restore shape records.
         /// </summary>
         /// <param name="shapes">The shapes collection.</param>
-        private void TryToRestoreRecords(IEnumerable<BaseShape> shapes)
+        private void TryToRestoreRecords(IEnumerable<IBaseShape> shapes)
         {
             try
             {
@@ -2391,7 +2391,7 @@ namespace Core2D.Editor
         /// Paste shapes to current container.
         /// </summary>
         /// <param name="shapes">The shapes collection.</param>
-        public void OnPasteShapes(IEnumerable<BaseShape> shapes)
+        public void OnPasteShapes(IEnumerable<IBaseShape> shapes)
         {
             try
             {
@@ -2414,7 +2414,7 @@ namespace Core2D.Editor
         /// Select shapes.
         /// </summary>
         /// <param name="shapes">The shapes collection.</param>
-        public void OnSelect(IEnumerable<BaseShape> shapes)
+        public void OnSelect(IEnumerable<IBaseShape> shapes)
         {
             if (shapes?.Count() == 1)
             {
@@ -2422,7 +2422,7 @@ namespace Core2D.Editor
             }
             else
             {
-                Select(Project?.CurrentContainer?.CurrentLayer, ImmutableHashSet.CreateRange<BaseShape>(shapes));
+                Select(Project?.CurrentContainer?.CurrentLayer, ImmutableHashSet.CreateRange<IBaseShape>(shapes));
             }
         }
 
@@ -2432,7 +2432,7 @@ namespace Core2D.Editor
         /// <typeparam name="T">The shape type.</typeparam>
         /// <param name="shape">The <see cref="BaseShape"/> object.</param>
         /// <returns>The cloned <see cref="BaseShape"/> object.</returns>
-        public T CloneShape<T>(T shape) where T : BaseShape
+        public T CloneShape<T>(T shape) where T : IBaseShape
         {
             try
             {
@@ -2462,14 +2462,14 @@ namespace Core2D.Editor
         /// </summary>
         /// <param name="container">The <see cref="LayerContainer"/> object.</param>
         /// <returns>The cloned <see cref="LayerContainer"/> object.</returns>
-        public LayerContainer Clone(LayerContainer container)
+        public ILayerContainer Clone(ILayerContainer container)
         {
             try
             {
                 var json = JsonSerializer?.Serialize(container);
                 if (!string.IsNullOrEmpty(json))
                 {
-                    var clone = JsonSerializer?.Deserialize<LayerContainer>(json);
+                    var clone = JsonSerializer?.Deserialize<ILayerContainer>(json);
                     if (clone != null)
                     {
                         var shapes = clone.Shapes;
@@ -2492,7 +2492,7 @@ namespace Core2D.Editor
         /// </summary>
         /// <param name="container">The <see cref="PageContainer"/> object.</param>
         /// <returns>The cloned <see cref="PageContainer"/> object.</returns>
-        public PageContainer Clone(PageContainer container)
+        public IPageContainer Clone(IPageContainer container)
         {
             try
             {
@@ -2500,7 +2500,7 @@ namespace Core2D.Editor
                 var json = JsonSerializer?.Serialize(container);
                 if (!string.IsNullOrEmpty(json))
                 {
-                    var clone = JsonSerializer?.Deserialize<PageContainer>(json);
+                    var clone = JsonSerializer?.Deserialize<IPageContainer>(json);
                     if (clone != null)
                     {
                         var shapes = clone.Layers.SelectMany(l => l.Shapes);
@@ -2524,7 +2524,7 @@ namespace Core2D.Editor
         /// </summary>
         /// <param name="document">The <see cref="DocumentContainer"/> object.</param>
         /// <returns>The cloned <see cref="DocumentContainer"/> object.</returns>
-        public DocumentContainer Clone(DocumentContainer document)
+        public IDocumentContainer Clone(IDocumentContainer document)
         {
             try
             {
@@ -2532,7 +2532,7 @@ namespace Core2D.Editor
                 var json = JsonSerializer?.Serialize(document);
                 if (!string.IsNullOrEmpty(json))
                 {
-                    var clone = JsonSerializer?.Deserialize<DocumentContainer>(json);
+                    var clone = JsonSerializer?.Deserialize<IDocumentContainer>(json);
                     if (clone != null)
                     {
                         for (int i = 0; i < clone.Pages.Length; i++)
@@ -2615,46 +2615,40 @@ namespace Core2D.Editor
         /// <summary>
         /// Drop <see cref="BaseShape"/> object in current container at specified location.
         /// </summary>
-        /// <param name="shape">The <see cref="BaseShape"/> object.</param>
+        /// <param name="shape">The <see cref="IBaseShape"/> object.</param>
         /// <param name="x">The X coordinate in container.</param>
         /// <param name="y">The Y coordinate in container.</param>
         /// <param name="bExecute">The flag indicating whether to execute action.</param>
         /// <returns>Returns true if success.</returns>
-        public bool OnDropShape(BaseShape shape, double x, double y, bool bExecute = true)
+        public bool OnDropShape(IBaseShape shape, double x, double y, bool bExecute = true)
         {
             try
             {
                 if (Renderers?[0]?.State?.SelectedShape != null)
                 {
                     var target = Renderers[0].State.SelectedShape;
-                    if (target is PointShape)
+                    if (target is IPointShape point)
                     {
-                        if (target is PointShape point)
+                        if (bExecute == true)
                         {
-                            if (bExecute == true)
-                            {
-                                point.Shape = shape;
-                            }
-                            return true;
+                            point.Shape = shape;
                         }
+                        return true;
                     }
                 }
                 else if (Renderers?[0]?.State?.SelectedShapes != null && Renderers?[0]?.State?.SelectedShapes?.Count > 0)
                 {
                     foreach (var target in Renderers[0].State.SelectedShapes)
                     {
-                        if (target is PointShape)
+                        if (target is IPointShape point)
                         {
-                            if (target is PointShape point)
+                            if (bExecute == true)
                             {
-                                if (bExecute == true)
-                                {
-                                    point.Shape = shape;
-                                }
-                                else
-                                {
-                                    return true;
-                                }
+                                point.Shape = shape;
+                            }
+                            else
+                            {
+                                return true;
                             }
                         }
                     }
@@ -2701,7 +2695,7 @@ namespace Core2D.Editor
         /// <param name="shape">The <see cref="BaseShape"/> object.</param>
         /// <param name="x">The X coordinate in container.</param>
         /// <param name="y">The Y coordinate in container.</param>
-        public void OnDropShapeAsClone<T>(T shape, double x, double y) where T : BaseShape
+        public void OnDropShapeAsClone<T>(T shape, double x, double y) where T : IBaseShape
         {
             double sx = Project.Options.SnapToGrid ? Snap(x, Project.Options.SnapX) : x;
             double sy = Project.Options.SnapToGrid ? Snap(y, Project.Options.SnapY) : y;
@@ -2720,11 +2714,11 @@ namespace Core2D.Editor
 
                     if (Project.Options.TryToConnect)
                     {
-                        if (clone is GroupShape)
+                        if (clone is IGroupShape group)
                         {
                             TryToConnectLines(
-                                ProjectContainer.GetAllShapes<LineShape>(Project?.CurrentContainer?.CurrentLayer?.Shapes),
-                                (clone as GroupShape).Connectors,
+                                ProjectContainer.GetAllShapes<ILineShape>(Project?.CurrentContainer?.CurrentLayer?.Shapes),
+                                group.Connectors,
                                 Project.Options.HitThreshold);
                         }
                     }
@@ -2895,7 +2889,7 @@ namespace Core2D.Editor
         /// <param name="y">The Y coordinate in container.</param>
         /// <param name="bExecute">The flag indicating whether to execute action.</param>
         /// <returns>Returns true if success.</returns>
-        public bool OnDropTemplate(PageContainer template, double x, double y, bool bExecute = true)
+        public bool OnDropTemplate(IPageContainer template, double x, double y, bool bExecute = true)
         {
             try
             {
@@ -2961,7 +2955,7 @@ namespace Core2D.Editor
         /// Select shape.
         /// </summary>
         /// <param name="shape">The shape to select.</param>
-        public void Select(BaseShape shape)
+        public void Select(IBaseShape shape)
         {
             if (Renderers?[0]?.State != null)
             {
@@ -2978,7 +2972,7 @@ namespace Core2D.Editor
         /// Select shapes.
         /// </summary>
         /// <param name="shapes">The shapes to select.</param>
-        public void Select(ImmutableHashSet<BaseShape> shapes)
+        public void Select(ImmutableHashSet<IBaseShape> shapes)
         {
             if (Renderers?[0]?.State != null)
             {
@@ -3012,7 +3006,7 @@ namespace Core2D.Editor
         /// </summary>
         /// <param name="layer">The owner layer.</param>
         /// <param name="shape">The shape to select.</param>
-        public void Select(LayerContainer layer, BaseShape shape)
+        public void Select(ILayerContainer layer, IBaseShape shape)
         {
             Select(shape);
 
@@ -3036,7 +3030,7 @@ namespace Core2D.Editor
         /// </summary>
         /// <param name="layer">The owner layer.</param>
         /// <param name="shapes">The shapes to select.</param>
-        public void Select(LayerContainer layer, ImmutableHashSet<BaseShape> shapes)
+        public void Select(ILayerContainer layer, ImmutableHashSet<IBaseShape> shapes)
         {
             Select(shapes);
 
@@ -3059,7 +3053,7 @@ namespace Core2D.Editor
         /// De-select shape(s).
         /// </summary>
         /// <param name="layer">The layer object.</param>
-        public void Deselect(LayerContainer layer)
+        public void Deselect(ILayerContainer layer)
         {
             Deselect();
 
@@ -3088,7 +3082,7 @@ namespace Core2D.Editor
         /// <param name="x">The X coordinate in layer.</param>
         /// <param name="y">The Y coordinate in layer.</param>
         /// <returns>True if selecting shape was successful.</returns>
-        public bool TryToSelectShape(LayerContainer layer, double x, double y)
+        public bool TryToSelectShape(ILayerContainer layer, double x, double y)
         {
             if (layer != null)
             {
@@ -3118,7 +3112,7 @@ namespace Core2D.Editor
         /// <param name="layer">The layer object.</param>
         /// <param name="rectangle">The selection rectangle.</param>
         /// <returns>True if selecting shapes was successful.</returns>
-        public bool TryToSelectShapes(LayerContainer layer, RectangleShape rectangle)
+        public bool TryToSelectShapes(ILayerContainer layer, IRectangleShape rectangle)
         {
             if (layer != null)
             {
@@ -3155,7 +3149,7 @@ namespace Core2D.Editor
         /// </summary>
         /// <param name="layer">The layer object.</param>
         /// <param name="shape">The shape to hover.</param>
-        public void Hover(LayerContainer layer, BaseShape shape)
+        public void Hover(ILayerContainer layer, IBaseShape shape)
         {
             if (layer != null)
             {
@@ -3168,7 +3162,7 @@ namespace Core2D.Editor
         /// De-hover shape.
         /// </summary>
         /// <param name="layer">The layer object.</param>
-        public void Dehover(LayerContainer layer)
+        public void Dehover(ILayerContainer layer)
         {
             if (layer != null && Hover1 != null)
             {
@@ -3224,7 +3218,7 @@ namespace Core2D.Editor
         /// <param name="x">The X coordinate of point.</param>
         /// <param name="y">The Y coordinate of point.</param>
         /// <returns>The connected point if success.</returns>
-        public PointShape TryToGetConnectionPoint(double x, double y)
+        public IPointShape TryToGetConnectionPoint(double x, double y)
         {
             if (Project.Options.TryToConnect)
             {
@@ -3236,7 +3230,7 @@ namespace Core2D.Editor
             return null;
         }
 
-        private void SwapLineStart(LineShape line, PointShape point)
+        private void SwapLineStart(ILineShape line, IPointShape point)
         {
             if (line?.Start != null && point != null)
             {
@@ -3247,7 +3241,7 @@ namespace Core2D.Editor
             }
         }
 
-        private void SwapLineEnd(LineShape line, PointShape point)
+        private void SwapLineEnd(ILineShape line, IPointShape point)
         {
             if (line?.End != null && point != null)
             {
@@ -3266,7 +3260,7 @@ namespace Core2D.Editor
         /// <param name="point">The point used for split line start or end.</param>
         /// <param name="select">The flag indicating whether to select split line.</param>
         /// <returns>True if line split was successful.</returns>
-        public bool TryToSplitLine(double x, double y, PointShape point, bool select = false)
+        public bool TryToSplitLine(double x, double y, IPointShape point, bool select = false)
         {
             if (Project?.CurrentContainer == null || Project?.Options == null)
                 return false;
@@ -3276,10 +3270,8 @@ namespace Core2D.Editor
                 new Point2(x, y),
                 Project.Options.HitThreshold);
 
-            if (result is LineShape)
+            if (result is ILineShape line)
             {
-                var line = result as LineShape;
-
                 if (!Project.Options.SnapToGrid)
                 {
                     var a = new Point2(line.Start.X, line.Start.Y);
@@ -3332,7 +3324,7 @@ namespace Core2D.Editor
         /// <param name="p0">The first connector point.</param>
         /// <param name="p1">The second connector point.</param>
         /// <returns>True if line split was successful.</returns>
-        public bool TryToSplitLine(LineShape line, PointShape p0, PointShape p1)
+        public bool TryToSplitLine(ILineShape line, IPointShape p0, IPointShape p1)
         {
             if (Project?.Options == null)
                 return false;
@@ -3345,7 +3337,7 @@ namespace Core2D.Editor
             if (line.Start.X != line.End.X && line.Start.Y != line.End.Y)
                 return false;
 
-            LineShape split;
+            ILineShape split;
             if (line.Start.X > line.End.X || line.Start.Y > line.End.Y)
             {
                 split = LineShape.Create(
@@ -3381,16 +3373,16 @@ namespace Core2D.Editor
         /// <param name="connectors">The connectors array.</param>
         /// <param name="threshold">The connection threshold.</param>
         /// <returns>True if connection was successful.</returns>
-        public bool TryToConnectLines(IEnumerable<LineShape> lines, ImmutableArray<PointShape> connectors, double threshold)
+        public bool TryToConnectLines(IEnumerable<ILineShape> lines, ImmutableArray<IPointShape> connectors, double threshold)
         {
             if (connectors.Length > 0)
             {
-                var lineToPoints = new Dictionary<LineShape, IList<PointShape>>();
+                var lineToPoints = new Dictionary<ILineShape, IList<IPointShape>>();
 
                 // Find possible connector to line connections.
                 foreach (var connector in connectors)
                 {
-                    LineShape result = null;
+                    ILineShape result = null;
                     foreach (var line in lines)
                     {
                         if (HitTest.Contains(line, new Point2(connector.X, connector.Y), threshold))
@@ -3408,7 +3400,7 @@ namespace Core2D.Editor
                         }
                         else
                         {
-                            lineToPoints.Add(result, new List<PointShape>());
+                            lineToPoints.Add(result, new List<IPointShape>());
                             lineToPoints[result].Add(connector);
                         }
                     }
@@ -3461,7 +3453,7 @@ namespace Core2D.Editor
             return false;
         }
 
-        private GroupShape Group(LayerContainer layer, ImmutableHashSet<BaseShape> shapes, string name)
+        private IGroupShape Group(ILayerContainer layer, ImmutableHashSet<IBaseShape> shapes, string name)
         {
             if (layer != null && shapes != null)
             {
@@ -3479,7 +3471,7 @@ namespace Core2D.Editor
             return null;
         }
 
-        private void Ungroup(LayerContainer layer, ImmutableHashSet<BaseShape> shapes)
+        private void Ungroup(ILayerContainer layer, ImmutableHashSet<IBaseShape> shapes)
         {
             if (layer != null && shapes != null)
             {
@@ -3487,7 +3479,7 @@ namespace Core2D.Editor
 
                 foreach (var shape in shapes)
                 {
-                    if (shape is GroupShape group)
+                    if (shape is IGroupShape group)
                     {
                         group.Ungroup(source);
                     }
@@ -3500,7 +3492,7 @@ namespace Core2D.Editor
             }
         }
 
-        private void Ungroup(LayerContainer layer, GroupShape group)
+        private void Ungroup(ILayerContainer layer, IGroupShape group)
         {
             if (layer != null && group != null)
             {
@@ -3520,7 +3512,7 @@ namespace Core2D.Editor
         /// </summary>
         /// <param name="shapes">The selected shapes.</param>
         /// <param name="name">The group name.</param>
-        public GroupShape Group(ImmutableHashSet<BaseShape> shapes, string name)
+        public IGroupShape Group(ImmutableHashSet<IBaseShape> shapes, string name)
         {
             var layer = Project?.CurrentContainer?.CurrentLayer;
             if (layer != null)
@@ -3536,12 +3528,12 @@ namespace Core2D.Editor
         /// </summary>
         /// <param name="shape">The selected shape.</param>
         /// <param name="shapes">The selected shapes.</param>
-        public bool Ungroup(BaseShape shape, ImmutableHashSet<BaseShape> shapes)
+        public bool Ungroup(IBaseShape shape, ImmutableHashSet<IBaseShape> shapes)
         {
             var layer = Project?.CurrentContainer?.CurrentLayer;
             if (layer != null)
             {
-                if (shape != null && shape is GroupShape group)
+                if (shape != null && shape is IGroupShape group)
                 {
                     Ungroup(layer, group);
                     return true;
@@ -3563,7 +3555,7 @@ namespace Core2D.Editor
         /// <param name="shape">The source shape.</param>
         /// <param name="sourceIndex">The source shape index.</param>
         /// <param name="targetIndex">The target shape index.</param>
-        private void Swap(BaseShape shape, int sourceIndex, int targetIndex)
+        private void Swap(IBaseShape shape, int sourceIndex, int targetIndex)
         {
             var layer = Project?.CurrentContainer?.CurrentLayer;
             if (layer?.Shapes != null)
@@ -3586,7 +3578,7 @@ namespace Core2D.Editor
         /// Bring a shape to the top of the stack.
         /// </summary>
         /// <param name="source">The source shape.</param>
-        public void BringToFront(BaseShape source)
+        public void BringToFront(IBaseShape source)
         {
             var layer = Project?.CurrentContainer?.CurrentLayer;
             if (layer != null)
@@ -3605,7 +3597,7 @@ namespace Core2D.Editor
         /// Move a shape one step closer to the front of the stack.
         /// </summary>
         /// <param name="source">The source shape.</param>
-        public void BringForward(BaseShape source)
+        public void BringForward(IBaseShape source)
         {
             var layer = Project?.CurrentContainer?.CurrentLayer;
             if (layer != null)
@@ -3624,7 +3616,7 @@ namespace Core2D.Editor
         /// Move a shape one step down within the stack.
         /// </summary>
         /// <param name="source">The source shape.</param>
-        public void SendBackward(BaseShape source)
+        public void SendBackward(IBaseShape source)
         {
             var layer = Project?.CurrentContainer?.CurrentLayer;
             if (layer != null)
@@ -3643,7 +3635,7 @@ namespace Core2D.Editor
         /// Move a shape to the bottom of the stack.
         /// </summary>
         /// <param name="source">The source shape.</param>
-        public void SendToBack(BaseShape source)
+        public void SendToBack(IBaseShape source)
         {
             var layer = Project?.CurrentContainer?.CurrentLayer;
             if (layer != null)
@@ -3664,7 +3656,7 @@ namespace Core2D.Editor
         /// <param name="shapes">The shapes collection.</param>
         /// <param name="dx">The X coordinate offset.</param>
         /// <param name="dy">The Y coordinate offset.</param>
-        public static void MoveShapesBy(IEnumerable<IShape> shapes, double dx, double dy)
+        public static void MoveShapesBy(IEnumerable<IBaseShape> shapes, double dx, double dy)
         {
             foreach (var shape in shapes)
             {
@@ -3675,7 +3667,7 @@ namespace Core2D.Editor
             }
         }
 
-        private void MoveShapesByWithHistory(IEnumerable<IShape> shapes, double dx, double dy)
+        private void MoveShapesByWithHistory(IEnumerable<IBaseShape> shapes, double dx, double dy)
         {
             MoveShapesBy(shapes, dx, dy);
 
@@ -3691,7 +3683,7 @@ namespace Core2D.Editor
         /// <param name="shapes">The selected shapes.</param>
         /// <param name="dx">The X coordinate offset.</param>
         /// <param name="dy">The Y coordinate offset.</param>
-        public void MoveBy(BaseShape shape, ImmutableHashSet<BaseShape> shapes, double dx, double dy)
+        public void MoveBy(IBaseShape shape, ImmutableHashSet<IBaseShape> shapes, double dx, double dy)
         {
             if (shape != null)
             {

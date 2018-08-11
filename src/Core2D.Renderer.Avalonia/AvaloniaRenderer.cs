@@ -4,6 +4,7 @@ using System;
 using System.Collections.Immutable;
 using System.Diagnostics;
 using Core2D.Data;
+using Core2D.Shapes.Interfaces;
 using Core2D.Style;
 using Spatial;
 using Spatial.Arc;
@@ -26,7 +27,7 @@ namespace Core2D.Renderer.Avalonia
         // TODO: Add ArcShape cache.
         // TODO: Add CubicBezierShape cache.
         // TODO: Add QuadraticBezierShape cache.
-        private ICache<TextShape, (string, AM.FormattedText, ShapeStyle)> _textCache = Cache<TextShape, (string, AM.FormattedText, ShapeStyle)>.Create();
+        private ICache<ITextShape, (string, AM.FormattedText, ShapeStyle)> _textCache = Cache<ITextShape, (string, AM.FormattedText, ShapeStyle)>.Create();
         private ICache<string, AMI.Bitmap> _biCache = Cache<string, AMI.Bitmap>.Create(bi => bi.Dispose());
         // TODO: Add PathShape cache.
         private readonly Func<double, float> _scaleToPage;
@@ -125,7 +126,7 @@ namespace Core2D.Renderer.Avalonia
             return pen;
         }
 
-        private static Rect2 CreateRect(PointShape tl, PointShape br, double dx, double dy)
+        private static Rect2 CreateRect(IPointShape tl, IPointShape br, double dx, double dy)
         {
             return Rect2.FromPoints(tl.X, tl.Y, br.X, br.Y, dx, dy);
         }
@@ -161,7 +162,7 @@ namespace Core2D.Renderer.Avalonia
             }
         }
 
-        private void DrawLineArrowsInternal(AM.DrawingContext dc, LineShape line, ShapeStyle style, double dx, double dy, out A.Point pt1, out A.Point pt2)
+        private void DrawLineArrowsInternal(AM.DrawingContext dc, ILineShape line, ShapeStyle style, double dx, double dy, out A.Point pt1, out A.Point pt2)
         {
             // Start arrow style.
             GetCached(style.StartArrowStyle, out var fillStartArrow, out var strokeStartArrow);
@@ -312,7 +313,7 @@ namespace Core2D.Renderer.Avalonia
             }
         }
 
-        private static AM.StreamGeometry ToStreamGeometry(ArcShape arc, double dx, double dy)
+        private static AM.StreamGeometry ToStreamGeometry(IArcShape arc, double dx, double dy)
         {
             var sg = new AM.StreamGeometry();
 
@@ -341,7 +342,7 @@ namespace Core2D.Renderer.Avalonia
             return sg;
         }
 
-        private static AM.StreamGeometry ToStreamGeometry(CubicBezierShape cubicBezier, double dx, double dy)
+        private static AM.StreamGeometry ToStreamGeometry(ICubicBezierShape cubicBezier, double dx, double dy)
         {
             var sg = new AM.StreamGeometry();
 
@@ -362,7 +363,7 @@ namespace Core2D.Renderer.Avalonia
             return sg;
         }
 
-        private static AM.StreamGeometry ToStreamGeometry(QuadraticBezierShape quadraticBezier, double dx, double dy)
+        private static AM.StreamGeometry ToStreamGeometry(IQuadraticBezierShape quadraticBezier, double dx, double dy)
         {
             var sg = new AM.StreamGeometry();
 
@@ -446,7 +447,7 @@ namespace Core2D.Renderer.Avalonia
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, LineShape line, double dx, double dy, object db, object r)
+        public override void Draw(object dc, ILineShape line, double dx, double dy, object db, object r)
         {
             var _dc = dc as AM.DrawingContext;
 
@@ -476,7 +477,7 @@ namespace Core2D.Renderer.Avalonia
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, RectangleShape rectangle, double dx, double dy, object db, object r)
+        public override void Draw(object dc, IRectangleShape rectangle, double dx, double dy, object db, object r)
         {
             var _dc = dc as AM.DrawingContext;
 
@@ -509,7 +510,7 @@ namespace Core2D.Renderer.Avalonia
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, EllipseShape ellipse, double dx, double dy, object db, object r)
+        public override void Draw(object dc, IEllipseShape ellipse, double dx, double dy, object db, object r)
         {
             var _dc = dc as AM.DrawingContext;
 
@@ -531,7 +532,7 @@ namespace Core2D.Renderer.Avalonia
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, ArcShape arc, double dx, double dy, object db, object r)
+        public override void Draw(object dc, IArcShape arc, double dx, double dy, object db, object r)
         {
             if (!arc.IsFilled && !arc.IsStroked)
                 return;
@@ -553,7 +554,7 @@ namespace Core2D.Renderer.Avalonia
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, CubicBezierShape cubicBezier, double dx, double dy, object db, object r)
+        public override void Draw(object dc, ICubicBezierShape cubicBezier, double dx, double dy, object db, object r)
         {
             if (!cubicBezier.IsFilled && !cubicBezier.IsStroked)
                 return;
@@ -575,7 +576,7 @@ namespace Core2D.Renderer.Avalonia
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, QuadraticBezierShape quadraticBezier, double dx, double dy, object db, object r)
+        public override void Draw(object dc, IQuadraticBezierShape quadraticBezier, double dx, double dy, object db, object r)
         {
             if (!quadraticBezier.IsFilled && !quadraticBezier.IsStroked)
                 return;
@@ -597,7 +598,7 @@ namespace Core2D.Renderer.Avalonia
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, TextShape text, double dx, double dy, object db, object r)
+        public override void Draw(object dc, ITextShape text, double dx, double dy, object db, object r)
         {
             var _dc = dc as AM.DrawingContext;
 
@@ -681,7 +682,7 @@ namespace Core2D.Renderer.Avalonia
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, ImageShape image, double dx, double dy, object db, object r)
+        public override void Draw(object dc, IImageShape image, double dx, double dy, object db, object r)
         {
             if (image.Key == null)
                 return;
@@ -753,7 +754,7 @@ namespace Core2D.Renderer.Avalonia
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, PathShape path, double dx, double dy, object db, object r)
+        public override void Draw(object dc, IPathShape path, double dx, double dy, object db, object r)
         {
             if (path.Geometry == null)
                 return;

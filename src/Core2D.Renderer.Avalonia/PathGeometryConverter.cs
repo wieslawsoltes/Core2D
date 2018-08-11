@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using Core2D.Path;
 using Core2D.Path.Segments;
+using Core2D.Shapes.Interfaces;
 using A = Avalonia;
 using AM = Avalonia.Media;
 
@@ -15,9 +16,9 @@ namespace Core2D.Renderer.Avalonia
     /// </summary>
     public static class PathGeometryConverter
     {
-        private static ImmutableArray<PointShape> ToPointShapes(this IEnumerable<A.Point> points, double dx, double dy)
+        private static ImmutableArray<IPointShape> ToPointShapes(this IEnumerable<A.Point> points, double dx, double dy)
         {
-            var PointShapes = ImmutableArray.CreateBuilder<PointShape>();
+            var PointShapes = ImmutableArray.CreateBuilder<IPointShape>();
             foreach (var point in points)
             {
                 PointShapes.Add(PointShape.Create(point.X + dx, point.Y + dy));
@@ -99,7 +100,7 @@ namespace Core2D.Renderer.Avalonia
 
             using (var sgc = sg.Open())
             {
-                var previous = default(PointShape);
+                IPointShape previous = default;
 
                 sgc.SetFillRule(xpg.FillRule == FillRule.Nonzero ? AM.FillRule.NonZero : AM.FillRule.EvenOdd);
 

@@ -7,6 +7,8 @@ using Core2D.Editor.Tools.Path.Shapes;
 using Core2D.Editor.Tools.Path.Settings;
 using Core2D.Editor.Tools.Selection;
 using Core2D.Path.Segments;
+using Core2D.Shapes.Interfaces;
+
 namespace Core2D.Editor.Tools.Path
 {
     /// <summary>
@@ -236,7 +238,7 @@ namespace Core2D.Editor.Tools.Path
         }
 
         /// <inheritdoc/>
-        public override void Move(BaseShape shape)
+        public override void Move(IBaseShape shape)
         {
             base.Move(shape);
 

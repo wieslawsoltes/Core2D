@@ -8,12 +8,12 @@ namespace Core2D.Shapes.Interfaces
     /// <summary>
     /// Defines base shape contract.
     /// </summary>
-    public interface IShape : IDrawable, ISelectable, ICopyable
+    public interface IBaseShape : IObservableObject, IDrawable, ISelectable, ICopyable
     {        
         /// <summary>
         /// Gets or sets shape owner.
         /// </summary>
-        IShape Owner { get; set; }
+        IBaseShape Owner { get; set; }
 
         /// <summary>
         /// Indicates shape state options.

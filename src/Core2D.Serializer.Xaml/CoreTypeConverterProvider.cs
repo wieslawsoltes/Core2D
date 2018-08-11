@@ -5,6 +5,7 @@ using Core2D.Style;
 using Core2D.Serializer.Xaml.Converters;
 using System;
 using System.Collections.Generic;
+using Core2D.Shapes.Interfaces;
 
 namespace Core2D.Serializer.Xaml
 {

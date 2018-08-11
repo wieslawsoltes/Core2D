@@ -16,7 +16,7 @@ namespace Core2D.Shapes
         private double _x;
         private double _y;
         private PointAlignment _alignment;
-        private IShape _shape;
+        private IBaseShape _shape;
 
         /// <summary>
         /// Gets or sets X coordinate of point.
@@ -48,7 +48,7 @@ namespace Core2D.Shapes
         /// <summary>
         /// Gets or sets point template shape.
         /// </summary>
-        public IShape Shape
+        public IBaseShape Shape
         {
             get => _shape;
             set => Update(ref _shape, value);
@@ -73,7 +73,7 @@ namespace Core2D.Shapes
         }
 
         /// <inheritdoc/>
-        public override void Move(ISet<IShape> selected, double dx, double dy)
+        public override void Move(ISet<IBaseShape> selected, double dx, double dy)
         {
             X += dx;
             Y += dy;

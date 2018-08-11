@@ -12,7 +12,7 @@ namespace Core2D.Editor.Bounds.Shapes
     {
         public override Type TargetType => typeof(IGroupShape);
 
-        public override IPointShape TryToGetPoint(IShape shape, Point2 target, double radius, IDictionary<Type, HitTestBase> registered)
+        public override IPointShape TryToGetPoint(IBaseShape shape, Point2 target, double radius, IDictionary<Type, HitTestBase> registered)
         {
             if (!(shape is IGroupShape group))
                 throw new ArgumentNullException(nameof(shape));
@@ -30,7 +30,7 @@ namespace Core2D.Editor.Bounds.Shapes
             return null;
         }
 
-        public override bool Contains(IShape shape, Point2 target, double radius, IDictionary<Type, HitTestBase> registered)
+        public override bool Contains(IBaseShape shape, Point2 target, double radius, IDictionary<Type, HitTestBase> registered)
         {
             if (!(shape is IGroupShape group))
                 throw new ArgumentNullException(nameof(shape));
@@ -47,7 +47,7 @@ namespace Core2D.Editor.Bounds.Shapes
             return false;
         }
 
-        public override bool Overlaps(IShape shape, Rect2 target, double radius, IDictionary<Type, HitTestBase> registered)
+        public override bool Overlaps(IBaseShape shape, Rect2 target, double radius, IDictionary<Type, HitTestBase> registered)
         {
             if (!(shape is IGroupShape group))
                 throw new ArgumentNullException(nameof(shape));

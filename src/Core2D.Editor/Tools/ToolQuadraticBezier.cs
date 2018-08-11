@@ -4,6 +4,7 @@ using System;
 using Core2D.Editor.Input;
 using Core2D.Editor.Tools.Selection;
 using Core2D.Editor.Tools.Settings;
+using Core2D.Shapes.Interfaces;
 
 namespace Core2D.Editor.Tools
 {
@@ -16,7 +17,7 @@ namespace Core2D.Editor.Tools
         private readonly IServiceProvider _serviceProvider;
         private ToolSettingsQuadraticBezier _settings;
         private State _currentState = State.Point1;
-        private QuadraticBezierShape _quadraticBezier;
+        private IQuadraticBezierShape _quadraticBezier;
         private ToolQuadraticBezierSelection _selection;
 
         /// <inheritdoc/>
@@ -217,7 +218,7 @@ namespace Core2D.Editor.Tools
         }
 
         /// <inheritdoc/>
-        public override void Move(BaseShape shape)
+        public override void Move(IBaseShape shape)
         {
             base.Move(shape);
 

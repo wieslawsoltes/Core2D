@@ -108,7 +108,7 @@ namespace Core2D.UnitTests
                 throw new NotImplementedException();
             }
 
-            public override void Move(ISet<IShape> selected, double dx, double dy)
+            public override void Move(ISet<IBaseShape> selected, double dx, double dy)
             {
                 throw new NotImplementedException();
             }

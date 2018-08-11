@@ -7,14 +7,14 @@ using Core2D.Style;
 namespace Core2D.Editor.Tools.Selection
 {
     /// <summary>
-    /// Helper class for <see cref="ImageShape"/> shape selection.
+    /// Helper class for <see cref="IImageShape"/> shape selection.
     /// </summary>
     public class ToolImageSelection
     {
         private readonly ILayerContainer _layer;
         private readonly IImageShape _image;
         private readonly ShapeStyle _style;
-        private readonly BaseShape _point;
+        private readonly IBaseShape _point;
         private IPointShape _topLeftHelperPoint;
         private IPointShape _bottomRightHelperPoint;
 
@@ -25,7 +25,7 @@ namespace Core2D.Editor.Tools.Selection
         /// <param name="shape">The selected shape.</param>
         /// <param name="style">The selection shapes style.</param>
         /// <param name="point">The selection point shape.</param>
-        public ToolImageSelection(ILayerContainer layer, IImageShape shape, ShapeStyle style, BaseShape point)
+        public ToolImageSelection(ILayerContainer layer, IImageShape shape, ShapeStyle style, IBaseShape point)
         {
             _layer = layer;
             _image = shape;

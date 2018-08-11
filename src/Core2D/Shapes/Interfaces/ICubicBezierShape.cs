@@ -6,7 +6,7 @@ namespace Core2D.Shapes.Interfaces
     /// <summary>
     /// Defines cubic bezier shape contract.
     /// </summary>
-    public interface ICubicBezierShape : IShape
+    public interface ICubicBezierShape : IBaseShape
     {
         /// <summary>
         /// Gets or sets start point.

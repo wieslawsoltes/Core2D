@@ -3,6 +3,7 @@
 using System;
 using Core2D.Path;
 using Core2D.Path.Segments;
+using Core2D.Shapes.Interfaces;
 using SkiaSharp;
 
 namespace Core2D.Renderer.SkiaSharp
@@ -29,7 +30,7 @@ namespace Core2D.Renderer.SkiaSharp
 
             foreach (var xpf in xpg.Figures)
             {
-                var previous = default(PointShape);
+                IPointShape previous = default;
 
                 // Begin new figure.
                 path.MoveTo(

@@ -1,9 +1,11 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using Core2D.Containers.Interfaces;
 using Core2D.Data;
 using Core2D.Interfaces;
 using Core2D.Renderer;
 using Core2D.Renderer.WinForms;
+using Core2D.Shapes.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
@@ -41,7 +43,7 @@ namespace Core2D.FileWriter.Emf
         /// <param name="record"></param>
         /// <param name="ic"></param>
         /// <returns></returns>
-        public static MemoryStream MakeMetafileStream(Bitmap bitmap, IEnumerable<BaseShape> shapes, ImmutableArray<Property> properties, Record record, IImageCache ic)
+        public static MemoryStream MakeMetafileStream(Bitmap bitmap, IEnumerable<IBaseShape> shapes, ImmutableArray<Property> properties, Record record, IImageCache ic)
         {
             var g = default(Graphics);
             var mf = default(Metafile);
@@ -103,7 +105,7 @@ namespace Core2D.FileWriter.Emf
         /// <param name="container"></param>
         /// <param name="ic"></param>
         /// <returns></returns>
-        public static MemoryStream MakeMetafileStream(Bitmap bitmap, PageContainer container, IImageCache ic)
+        public static MemoryStream MakeMetafileStream(Bitmap bitmap, IPageContainer container, IImageCache ic)
         {
             var g = default(Graphics);
             var mf = default(Metafile);
@@ -162,7 +164,7 @@ namespace Core2D.FileWriter.Emf
         /// <param name="properties"></param>
         /// <param name="record"></param>
         /// <param name="ic"></param>
-        public static void SetClipboard(IEnumerable<BaseShape> shapes, double width, double height, ImmutableArray<Property> properties, Record record, IImageCache ic)
+        public static void SetClipboard(IEnumerable<IBaseShape> shapes, double width, double height, ImmutableArray<Property> properties, Record record, IImageCache ic)
         {
             try
             {
@@ -188,7 +190,7 @@ namespace Core2D.FileWriter.Emf
         /// </summary>
         /// <param name="container"></param>
         /// <param name="ic"></param>
-        public static void SetClipboard(PageContainer container, IImageCache ic)
+        public static void SetClipboard(IPageContainer container, IImageCache ic)
         {
             try
             {
@@ -218,7 +220,7 @@ namespace Core2D.FileWriter.Emf
         /// <param name="path"></param>
         /// <param name="container"></param>
         /// <param name="ic"></param>
-        public static void Save(string path, PageContainer container, IImageCache ic)
+        public static void Save(string path, IPageContainer container, IImageCache ic)
         {
             if (container == null || container.Template == null)
                 return;
@@ -245,19 +247,19 @@ namespace Core2D.FileWriter.Emf
             if (options == null)
                 return;
 
-            if (item is PageContainer)
+            if (item is IPageContainer page)
             {
 #if _WINDOWS
-                Save(path, item as PageContainer, ic);
+                Save(path, page, ic);
 #else
                 throw new NotImplementedException("Not implemented for this platform.");
 #endif
             }
-            else if (item is DocumentContainer)
+            else if (item is IDocumentContainer document)
             {
                 throw new NotSupportedException("Saving documents as emf drawing is not supported.");
             }
-            else if (item is ProjectContainer)
+            else if (item is IProjectContainer project)
             {
                 throw new NotSupportedException("Saving projects as emf drawing is not supported.");
             }

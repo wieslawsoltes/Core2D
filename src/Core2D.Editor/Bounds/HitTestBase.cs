@@ -10,8 +10,8 @@ namespace Core2D.Editor.Bounds
     public abstract class HitTestBase
     {
         public abstract Type TargetType { get; }
-        public abstract IPointShape TryToGetPoint(IShape shape, Point2 target, double radius, IDictionary<Type, HitTestBase> registered);
-        public abstract bool Contains(IShape shape, Point2 target, double radius, IDictionary<Type, HitTestBase> registered);
-        public abstract bool Overlaps(IShape shape, Rect2 target, double radius, IDictionary<Type, HitTestBase> registered);
+        public abstract IPointShape TryToGetPoint(IBaseShape shape, Point2 target, double radius, IDictionary<Type, HitTestBase> registered);
+        public abstract bool Contains(IBaseShape shape, Point2 target, double radius, IDictionary<Type, HitTestBase> registered);
+        public abstract bool Overlaps(IBaseShape shape, Rect2 target, double radius, IDictionary<Type, HitTestBase> registered);
     }
 }

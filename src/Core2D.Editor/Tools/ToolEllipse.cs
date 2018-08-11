@@ -4,6 +4,7 @@ using System;
 using Core2D.Editor.Input;
 using Core2D.Editor.Tools.Selection;
 using Core2D.Editor.Tools.Settings;
+using Core2D.Shapes.Interfaces;
 using static System.Math;
 
 namespace Core2D.Editor.Tools
@@ -19,7 +20,7 @@ namespace Core2D.Editor.Tools
         private ToolSettingsEllipse _settings;
         private State _currentState = State.TopLeft;
         private Mode _currentMode = Mode.Rectangle;
-        private EllipseShape _ellipse;
+        private IEllipseShape _ellipse;
         private ToolEllipseSelection _selection;
         private double _centerX;
         private double _centerY;
@@ -46,7 +47,7 @@ namespace Core2D.Editor.Tools
             _settings = new ToolSettingsEllipse();
         }
 
-        private static void CircleConstrain(PointShape tl, PointShape br, double cx, double cy, double px, double py)
+        private static void CircleConstrain(IPointShape tl, IPointShape br, double cx, double cy, double px, double py)
         {
             double r = Max(Abs(cx - px), Abs(cy - py));
             tl.X = cx - r;
@@ -205,7 +206,7 @@ namespace Core2D.Editor.Tools
         }
 
         /// <inheritdoc/>
-        public override void Move(BaseShape shape)
+        public override void Move(IBaseShape shape)
         {
             base.Move(shape);
 

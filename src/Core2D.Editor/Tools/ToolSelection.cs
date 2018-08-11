@@ -26,7 +26,7 @@ namespace Core2D.Editor.Tools
         private double _historyX;
         private double _historyY;
         private IEnumerable<IPointShape> _pointsCache;
-        private IEnumerable<IShape> _shapesCache;
+        private IEnumerable<IBaseShape> _shapesCache;
 
         /// <inheritdoc/>
         public override string Title => "Selection";
@@ -57,7 +57,7 @@ namespace Core2D.Editor.Tools
         /// <param name="shape">The shape object.</param>
         /// <param name="point">The point to validate.</param>
         /// <returns>True if point is valid, otherwise false.</returns>
-        private static bool Validate(IShape shape, IPointShape point)
+        private static bool Validate(IBaseShape shape, IPointShape point)
         {
             if (point.State.Flags.HasFlag(ShapeStateFlags.Locked))
             {
@@ -77,7 +77,7 @@ namespace Core2D.Editor.Tools
         /// </summary>
         /// <param name="shapes">The shapes to scan.</param>
         /// <returns>All points in the shape.</returns>
-        private static IEnumerable<IPointShape> GetMovePoints(IEnumerable<IShape> shapes)
+        private static IEnumerable<IPointShape> GetMovePoints(IEnumerable<IBaseShape> shapes)
         {
             return shapes.SelectMany(s => s.GetPoints().Where(p => Validate(s, p))).Distinct();
         }

@@ -21,7 +21,7 @@ namespace Core2D.Containers.Interfaces
     /// <summary>
     /// Defines layer container interface.
     /// </summary>
-    public interface ILayerContainer : IContainer
+    public interface ILayerContainer : IBaseContainer
     {
         /// <summary>
         /// Invalidate layer event.
@@ -41,7 +41,7 @@ namespace Core2D.Containers.Interfaces
         /// <summary>
         /// Gets or sets layer shapes.
         /// </summary>
-        ImmutableArray<IShape> Shapes { get; set; }
+        ImmutableArray<IBaseShape> Shapes { get; set; }
 
         /// <summary>
         /// Invalidate layer shapes.

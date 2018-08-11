@@ -4,11 +4,9 @@ using Core2D.Shapes.Interfaces;
 
 namespace Core2D.Editor.Tools.Path.Shapes
 {
-    internal class PathShapeCubicBezier : ICubicBezierShape
+    internal class PathShapeLine : PathShapeBase, ILineShape
     {
-        public PointShape Point1 { get; set; }
-        public PointShape Point2 { get; set; }
-        public PointShape Point3 { get; set; }
-        public PointShape Point4 { get; set; }
+        public IPointShape Start { get; set; }
+        public IPointShape End { get; set; }
     }
 }

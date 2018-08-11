@@ -6,7 +6,7 @@ namespace Core2D.Shapes.Interfaces
     /// <summary>
     /// Defines quadratic bezier shape contract.
     /// </summary>
-    public interface IQuadraticBezierShape : IShape
+    public interface IQuadraticBezierShape : IBaseShape
     {
         /// <summary>
         /// Gets or sets start point.

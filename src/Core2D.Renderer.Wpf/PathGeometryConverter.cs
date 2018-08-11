@@ -6,6 +6,7 @@ using System.Collections.Immutable;
 using System.Globalization;
 using Core2D.Path;
 using Core2D.Path.Segments;
+using Core2D.Shapes.Interfaces;
 using W = System.Windows;
 using WM = System.Windows.Media;
 
@@ -16,9 +17,9 @@ namespace Core2D.Renderer.Wpf
     /// </summary>
     public static class PathGeometryConverter
     {
-        private static ImmutableArray<PointShape> ToPointShapes(this IEnumerable<W.Point> points, double dx, double dy)
+        private static ImmutableArray<IPointShape> ToPointShapes(this IEnumerable<W.Point> points, double dx, double dy)
         {
-            var PointShapes = ImmutableArray.CreateBuilder<PointShape>();
+            var PointShapes = ImmutableArray.CreateBuilder<IPointShape>();
             foreach (var point in points)
             {
                 PointShapes.Add(PointShape.Create(point.X + dx, point.Y + dy));
@@ -26,7 +27,7 @@ namespace Core2D.Renderer.Wpf
             return PointShapes.ToImmutable();
         }
 
-        private static IList<W.Point> ToPoints(this IList<PointShape> PointShapes, double dx, double dy)
+        private static IList<W.Point> ToPoints(this IList<IPointShape> PointShapes, double dx, double dy)
         {
             var points = new List<W.Point>();
             foreach (var point in PointShapes)

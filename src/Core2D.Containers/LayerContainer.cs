@@ -21,7 +21,7 @@ namespace Core2D.Containers
 
         private IPageContainer _owner;
         private bool _isVisible = true;
-        private ImmutableArray<IShape> _shapes;
+        private ImmutableArray<IBaseShape> _shapes;
 
         /// <summary>
         /// Gets or sets layer owner.
@@ -49,7 +49,7 @@ namespace Core2D.Containers
         /// Gets or sets layer shapes.
         /// </summary>
         [Content]
-        public ImmutableArray<IShape> Shapes
+        public ImmutableArray<IBaseShape> Shapes
         {
             get => _shapes;
             set => Update(ref _shapes, value);
@@ -58,7 +58,7 @@ namespace Core2D.Containers
         /// <summary>
         /// Initializes a new instance of the <see cref="LayerContainer"/> class.
         /// </summary>
-        public LayerContainer() : base() => _shapes = ImmutableArray.Create<IShape>();
+        public LayerContainer() : base() => _shapes = ImmutableArray.Create<IBaseShape>();
 
         /// <summary>
         /// Invalidate layer shapes.

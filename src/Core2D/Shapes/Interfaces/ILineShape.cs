@@ -6,7 +6,7 @@ namespace Core2D.Shapes.Interfaces
     /// <summary>
     /// Defines line shape contract.
     /// </summary>
-    public interface ILineShape : IShape
+    public interface ILineShape : IBaseShape
     {
         /// <summary>
         /// Gets or sets start point.

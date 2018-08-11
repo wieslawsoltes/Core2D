@@ -11,7 +11,7 @@ namespace Core2D.Containers.Interfaces
     /// <summary>
     /// Defines page container interface.
     /// </summary>
-    public interface IPageContainer : IContainer
+    public interface IPageContainer : IBaseContainer
     {
         /// <summary>
         /// Gets or sets container width.
@@ -60,7 +60,7 @@ namespace Core2D.Containers.Interfaces
         /// <summary>
         /// Gets or sets current container shape.
         /// </summary>
-        IShape CurrentShape { get; set; }
+        IBaseShape CurrentShape { get; set; }
 
         /// <summary>
         /// Gets or sets container template.
