@@ -6,9 +6,9 @@ namespace Core2D.UnitTests
 {
     public class TestPointShape : TestBaseShape, IPointShape
     {
-        public double X { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
-        public double Y { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
-        public PointAlignment Alignment { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
-        public IBaseShape Shape { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
+        public double X { get; set; }
+        public double Y { get; set; }
+        public PointAlignment Alignment { get; set; }
+        public IBaseShape Shape { get; set; }
     }
 }
