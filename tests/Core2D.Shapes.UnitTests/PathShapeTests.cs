@@ -1,17 +1,18 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using Core2D.Shapes;
 using Xunit;
 
-namespace Core2D.UnitTests
+namespace Core2D.Shapes.UnitTests
 {
-    public class EllipseShapeTests
+    public class PathShapeTests
     {
         [Fact]
         [Trait("Core2D.Shapes", "Shapes")]
-        public void Inherits_From_TextShape()
+        public void Inherits_From_BaseShape()
         {
-            var target = new EllipseShape();
-            Assert.True(target is TextShape);
+            var target = new PathShape();
+            Assert.True(target is BaseShape);
         }
     }
 }

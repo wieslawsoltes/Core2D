@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using Core2D.Path;
+using Core2D.Shapes.Interfaces;
 using Xunit;
 
 namespace Core2D.UnitTests
@@ -48,10 +49,10 @@ namespace Core2D.UnitTests
         {
             var figure = new PathFigure();
 
-            var segment1 = new Class1() { Point = new PointShape() };
+            var segment1 = new TestSegment() { Point = new TestPointShape() };
             figure.Segments = figure.Segments.Add(segment1);
 
-            var segment2 = new Class1() { Point = new PointShape() };
+            var segment2 = new TestSegment() { Point = new TestPointShape() };
             figure.Segments = figure.Segments.Add(segment2);
 
             var target = figure.GetPoints();
@@ -97,11 +98,11 @@ namespace Core2D.UnitTests
             Assert.Equal("M0,0z", actual);
         }
 
-        public class Class1 : PathSegment
+        public class TestSegment : PathSegment
         {
-            public PointShape Point { get; set; }
+            public IPointShape Point { get; set; }
 
-            public override IEnumerable<PointShape> GetPoints()
+            public override IEnumerable<IPointShape> GetPoints()
             {
                 yield return Point;
             }

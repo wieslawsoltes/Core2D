@@ -14,9 +14,9 @@ namespace Core2D.UnitTests
         {
             var segment = new CubicBezierSegment()
             {
-                Point1 = new PointShape(),
-                Point2 = new PointShape(),
-                Point3 = new PointShape()
+                Point1 = new TestPointShape(),
+                Point2 = new TestPointShape(),
+                Point3 = new TestPointShape()
             };
 
             var target = segment.GetPoints();
@@ -34,9 +34,9 @@ namespace Core2D.UnitTests
         {
             var target = new CubicBezierSegment()
             {
-                Point1 = new PointShape(),
-                Point2 = new PointShape(),
-                Point3 = new PointShape()
+                Point1 = new TestPointShape(),
+                Point2 = new TestPointShape(),
+                Point3 = new TestPointShape()
             };
 
             var actual = target.ToString();

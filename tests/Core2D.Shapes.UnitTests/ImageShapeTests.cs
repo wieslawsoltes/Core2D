@@ -1,17 +1,18 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using Core2D.Shapes;
 using Xunit;
 
-namespace Core2D.UnitTests
+namespace Core2D.Shapes.UnitTests
 {
-    public class ArcShapeTests
+    public class ImageShapeTests
     {
         [Fact]
         [Trait("Core2D.Shapes", "Shapes")]
-        public void Inherits_From_BaseShape()
+        public void Inherits_From_TextShape()
         {
-            var target = new ArcShape();
-            Assert.True(target is BaseShape);
+            var target = new ImageShape();
+            Assert.True(target is TextShape);
         }
     }
 }

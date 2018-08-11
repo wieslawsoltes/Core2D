@@ -14,7 +14,7 @@ namespace Core2D.UnitTests
         {
             var segment = new LineSegment()
             {
-                Point = new PointShape()
+                Point = new TestPointShape()
             };
 
             var target = segment.GetPoints();
@@ -30,7 +30,7 @@ namespace Core2D.UnitTests
         {
             var target = new LineSegment()
             {
-                Point = new PointShape()
+                Point = new TestPointShape()
             };
 
             var actual = target.ToString();

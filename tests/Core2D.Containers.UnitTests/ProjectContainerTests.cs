@@ -1,6 +1,9 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using Core2D.Containers;
+using Core2D.Containers.Interfaces;
 using Core2D.Data;
+using Core2D.Shapes.Interfaces;
 using Core2D.Style;
 using Xunit;
 
@@ -13,7 +16,7 @@ namespace Core2D.UnitTests
         public void Inherits_From_Selectable()
         {
             var target = new ProjectContainer();
-            Assert.True(target is SelectableObject);
+            Assert.True(target is ObservableObject);
         }
 
         [Fact]
@@ -130,7 +133,7 @@ namespace Core2D.UnitTests
         {
             var target = new ProjectContainer();
 
-            var library = Library<GroupShape>.Create("Library1");
+            var library = Library<IGroupShape>.Create("Library1");
             target.GroupLibraries = target.GroupLibraries.Add(library);
 
             target.SetCurrentGroupLibrary(library);

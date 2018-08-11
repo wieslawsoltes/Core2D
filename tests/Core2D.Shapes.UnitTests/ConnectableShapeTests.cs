@@ -2,13 +2,14 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using Core2D.Data;
 using Core2D.Renderer;
+using Core2D.Shapes;
 using Core2D.Shapes.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using Xunit;
 
-namespace Core2D.UnitTests
+namespace Core2D.Shapes.UnitTests
 {
     public class ConnectableShapeTests
     {
@@ -98,6 +99,11 @@ namespace Core2D.UnitTests
         
         public class Class1 : BaseShape
         {
+            public override object Copy(IDictionary<object, object> shared)
+            {
+                throw new NotImplementedException();
+            }
+
             public override void Draw(object dc, ShapeRenderer renderer, double dx, double dy, object db, object r)
             {
                 throw new NotImplementedException();

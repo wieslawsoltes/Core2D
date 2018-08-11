@@ -15,7 +15,7 @@ namespace Core2D.UnitTests
         {
             var segment = new ArcSegment()
             {
-                Point = new PointShape(),
+                Point = new TestPointShape(),
                 Size = new PathSize() { Width = 10, Height = 20 },
                 RotationAngle = 90,
                 IsLargeArc = true,
@@ -35,7 +35,7 @@ namespace Core2D.UnitTests
         {
             var target = new ArcSegment()
             {
-                Point = new PointShape(),
+                Point = new TestPointShape(),
                 Size = new PathSize() { Width = 10, Height = 20 },
                 RotationAngle = 90,
                 IsLargeArc = true,

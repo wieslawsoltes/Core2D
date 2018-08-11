@@ -14,8 +14,8 @@ namespace Core2D.UnitTests
         {
             var segment = new QuadraticBezierSegment()
             {
-                Point1 = new PointShape(),
-                Point2 = new PointShape()
+                Point1 = new TestPointShape(),
+                Point2 = new TestPointShape()
             };
 
             var target = segment.GetPoints();
@@ -32,8 +32,8 @@ namespace Core2D.UnitTests
         {
             var target = new QuadraticBezierSegment()
             {
-                Point1 = new PointShape(),
-                Point2 = new PointShape()
+                Point1 = new TestPointShape(),
+                Point2 = new TestPointShape()
             };
 
             var actual = target.ToString();

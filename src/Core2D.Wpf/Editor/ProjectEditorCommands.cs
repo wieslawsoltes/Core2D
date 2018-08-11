@@ -2,8 +2,10 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
 using System.Windows.Input;
+using Core2D.Containers.Interfaces;
 using Core2D.Data;
 using Core2D.Editor;
+using Core2D.Shapes.Interfaces;
 using Core2D.Style;
 
 namespace Core2D.Wpf.Editor
@@ -548,7 +550,7 @@ namespace Core2D.Wpf.Editor
             ExportJsonCommand = new Command((p) => true, (p) => serviceProvider.GetService<ProjectEditor>().Platform.OnImportJson(p as string));
             ExportCommand = new Command((p) => true, (p) => serviceProvider.GetService<ProjectEditor>().Platform.OnExport(p));
             ExitCommand = new Command((p) => true, (p) => serviceProvider.GetService<ProjectEditor>().Platform.OnExit());
-            ImportDataCommand = new Command((p) => true, (p) => serviceProvider.GetService<ProjectEditor>().Platform.OnImportData(p as ProjectContainer));
+            ImportDataCommand = new Command((p) => true, (p) => serviceProvider.GetService<ProjectEditor>().Platform.OnImportData(p as IProjectContainer));
             ExportDataCommand = new Command((p) => true, (p) => serviceProvider.GetService<ProjectEditor>().Platform.OnExportData(p as Database));
             UpdateDataCommand = new Command((p) => true, (p) => serviceProvider.GetService<ProjectEditor>().Platform.OnUpdateData(p as Database));
 
@@ -603,29 +605,29 @@ namespace Core2D.Wpf.Editor
             RemoveRecordCommand = new Command((p) => true, (p) => serviceProvider.GetService<ProjectEditor>().OnRemoveRecord(p as Record));
             ResetRecordCommand = new Command((p) => true, (p) => serviceProvider.GetService<ProjectEditor>().OnResetRecord(p as Context));
             ApplyRecordCommand = new Command((p) => true, (p) => serviceProvider.GetService<ProjectEditor>().OnApplyRecord(p as Record));
-            AddShapeCommand = new Command((p) => true, (p) => serviceProvider.GetService<ProjectEditor>().OnAddShape(p as BaseShape));
-            RemoveShapeCommand = new Command((p) => true, (p) => serviceProvider.GetService<ProjectEditor>().OnRemoveShape(p as BaseShape));
+            AddShapeCommand = new Command((p) => true, (p) => serviceProvider.GetService<ProjectEditor>().OnAddShape(p as IBaseShape));
+            RemoveShapeCommand = new Command((p) => true, (p) => serviceProvider.GetService<ProjectEditor>().OnRemoveShape(p as IBaseShape));
             AddPropertyCommand = new Command((p) => true, (p) => serviceProvider.GetService<ProjectEditor>().OnAddProperty(p as Context));
             RemovePropertyCommand = new Command((p) => true, (p) => serviceProvider.GetService<ProjectEditor>().OnRemoveProperty(p as Property));
             AddGroupLibraryCommand = new Command((p) => true, (p) => serviceProvider.GetService<ProjectEditor>().OnAddGroupLibrary());
-            RemoveGroupLibraryCommand = new Command((p) => true, (p) => serviceProvider.GetService<ProjectEditor>().OnRemoveGroupLibrary(p as Library<GroupShape>));
-            AddGroupCommand = new Command((p) => true, (p) => serviceProvider.GetService<ProjectEditor>().OnAddGroup(p as Library<GroupShape>));
-            RemoveGroupCommand = new Command((p) => true, (p) => serviceProvider.GetService<ProjectEditor>().OnRemoveGroup(p as GroupShape));
-            InsertGroupCommand = new Command((p) => true, (p) => serviceProvider.GetService<ProjectEditor>().OnInsertGroup(p as GroupShape));
-            AddLayerCommand = new Command((p) => true, (p) => serviceProvider.GetService<ProjectEditor>().OnAddLayer(p as PageContainer));
-            RemoveLayerCommand = new Command((p) => true, (p) => serviceProvider.GetService<ProjectEditor>().OnRemoveLayer(p as LayerContainer));
+            RemoveGroupLibraryCommand = new Command((p) => true, (p) => serviceProvider.GetService<ProjectEditor>().OnRemoveGroupLibrary(p as Library<IGroupShape>));
+            AddGroupCommand = new Command((p) => true, (p) => serviceProvider.GetService<ProjectEditor>().OnAddGroup(p as Library<IGroupShape>));
+            RemoveGroupCommand = new Command((p) => true, (p) => serviceProvider.GetService<ProjectEditor>().OnRemoveGroup(p as IGroupShape));
+            InsertGroupCommand = new Command((p) => true, (p) => serviceProvider.GetService<ProjectEditor>().OnInsertGroup(p as IGroupShape));
+            AddLayerCommand = new Command((p) => true, (p) => serviceProvider.GetService<ProjectEditor>().OnAddLayer(p as IPageContainer));
+            RemoveLayerCommand = new Command((p) => true, (p) => serviceProvider.GetService<ProjectEditor>().OnRemoveLayer(p as ILayerContainer));
             AddStyleLibraryCommand = new Command((p) => true, (p) => serviceProvider.GetService<ProjectEditor>().OnAddStyleLibrary());
             RemoveStyleLibraryCommand = new Command((p) => true, (p) => serviceProvider.GetService<ProjectEditor>().OnRemoveStyleLibrary(p as Library<ShapeStyle>));
             AddStyleCommand = new Command((p) => true, (p) => serviceProvider.GetService<ProjectEditor>().OnAddStyle(p as Library<ShapeStyle>));
             RemoveStyleCommand = new Command((p) => true, (p) => serviceProvider.GetService<ProjectEditor>().OnRemoveStyle(p as ShapeStyle));
             ApplyStyleCommand = new Command((p) => true, (p) => serviceProvider.GetService<ProjectEditor>().OnApplyStyle(p as ShapeStyle));
             AddTemplateCommand = new Command((p) => true, (p) => serviceProvider.GetService<ProjectEditor>().OnAddTemplate());
-            RemoveTemplateCommand = new Command((p) => true, (p) => serviceProvider.GetService<ProjectEditor>().OnRemoveTemplate(p as PageContainer));
-            EditTemplateCommand = new Command((p) => true, (p) => serviceProvider.GetService<ProjectEditor>().OnEditTemplate(p as PageContainer));
-            ApplyTemplateCommand = new Command((p) => true, (p) => serviceProvider.GetService<ProjectEditor>().OnApplyTemplate(p as PageContainer));
+            RemoveTemplateCommand = new Command((p) => true, (p) => serviceProvider.GetService<ProjectEditor>().OnRemoveTemplate(p as IPageContainer));
+            EditTemplateCommand = new Command((p) => true, (p) => serviceProvider.GetService<ProjectEditor>().OnEditTemplate(p as IPageContainer));
+            ApplyTemplateCommand = new Command((p) => true, (p) => serviceProvider.GetService<ProjectEditor>().OnApplyTemplate(p as IPageContainer));
             AddImageKeyCommand = new Command((p) => true, async (p) => await serviceProvider.GetService<ProjectEditor>().OnAddImageKey(p as string));
             RemoveImageKeyCommand = new Command((p) => true, (p) => serviceProvider.GetService<ProjectEditor>().OnRemoveImageKey(p as string));
-            SelectedItemChangedCommand = new Command((p) => true, (p) => serviceProvider.GetService<ProjectEditor>().OnSelectedItemChanged(p as SelectableObject));
+            SelectedItemChangedCommand = new Command((p) => true, (p) => serviceProvider.GetService<ProjectEditor>().OnSelectedItemChanged(p as ObservableObject));
             AddPageCommand = new Command((p) => true, (p) => serviceProvider.GetService<ProjectEditor>().OnAddPage(p));
             InsertPageBeforeCommand = new Command((p) => true, (p) => serviceProvider.GetService<ProjectEditor>().OnInsertPageBefore(p));
             InsertPageAfterCommand = new Command((p) => true, (p) => serviceProvider.GetService<ProjectEditor>().OnInsertPageAfter(p));

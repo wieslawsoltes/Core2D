@@ -2,6 +2,7 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System.Collections.Immutable;
 using Core2D.Path;
+using Core2D.Shapes.Interfaces;
 using Xunit;
 
 namespace Core2D.UnitTests
@@ -14,7 +15,7 @@ namespace Core2D.UnitTests
         {
             var segment = new Class1();
 
-            var target = ImmutableArray.Create<PointShape>();
+            var target = ImmutableArray.Create<IPointShape>();
             var actual = segment.ToString(target);
 
             Assert.Equal(string.Empty, actual);
@@ -26,10 +27,10 @@ namespace Core2D.UnitTests
         {
             var segment = new Class1();
 
-            var target = ImmutableArray.Create<PointShape>();
-            target = target.Add(new PointShape());
-            target = target.Add(new PointShape());
-            target = target.Add(new PointShape());
+            var target = ImmutableArray.Create<IPointShape>();
+            target = target.Add(new TestPointShape());
+            target = target.Add(new TestPointShape());
+            target = target.Add(new TestPointShape());
 
             var actual = segment.ToString(target);
 

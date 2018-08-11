@@ -2,13 +2,14 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using Core2D.Data;
 using Core2D.Renderer;
+using Core2D.Shapes;
 using Core2D.Shapes.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using Xunit;
 
-namespace Core2D.UnitTests
+namespace Core2D.Shapes.UnitTests
 {
     public class GroupShapeTests
     {
@@ -111,7 +112,7 @@ namespace Core2D.UnitTests
             var point1 = new PointShape();
             var point2 = new PointShape();
 
-            var shapes = new BaseShape[] { shape1, shape2, point1, point2 };
+            var shapes = new List<IBaseShape>{ shape1, shape2, point1, point2 };
             var source = shapes.ToList();
 
             var target = shapes.Group("g", source);
@@ -175,7 +176,7 @@ namespace Core2D.UnitTests
             target.AddConnectorAsInput(point2);
             target.AddConnectorAsOutput(point3);
 
-            var source = new List<BaseShape> { target };
+            var source = new List<IBaseShape> { target };
 
             target.Ungroup(source);
 
@@ -199,12 +200,17 @@ namespace Core2D.UnitTests
 
         public class Class1 : BaseShape
         {
+            public override object Copy(IDictionary<object, object> shared)
+            {
+                throw new NotImplementedException();
+            }
+
             public override void Draw(object dc, ShapeRenderer renderer, double dx, double dy, object db, object r)
             {
                 throw new NotImplementedException();
             }
 
-            public override IEnumerable<PointShape> GetPoints()
+            public override IEnumerable<IPointShape> GetPoints()
             {
                 throw new NotImplementedException();
             }

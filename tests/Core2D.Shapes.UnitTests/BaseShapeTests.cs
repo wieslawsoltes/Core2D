@@ -6,12 +6,12 @@ using System;
 using System.Collections.Generic;
 using Xunit;
 
-namespace Core2D.UnitTests
+namespace Core2D.Shapes.UnitTests
 {
     public class BaseShapeTests
     {
         [Fact]
-        [Trait("Core2D.Shape", "Shape")]
+       [Trait("Core2D.Shapes", "Shapes")]
         public void Inherits_From_ObservableObject()
         {
             var target = new Class1();
@@ -19,7 +19,7 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
-        [Trait("Core2D.Shape", "Shape")]
+       [Trait("Core2D.Shapes", "Shapes")]
         public void State_Not_Null()
         {
             var target = new Class1();
@@ -27,7 +27,7 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
-        [Trait("Core2D.Shape", "Shape")]
+       [Trait("Core2D.Shapes", "Shapes")]
         public void Default_ShapeStateFlags_Value()
         {
             var target = new Class1();
@@ -35,7 +35,7 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
-        [Trait("Core2D.Shape", "Shape")]
+       [Trait("Core2D.Shapes", "Shapes")]
         public void Data_Not_Null()
         {
             var target = new Class1();
@@ -43,7 +43,7 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
-        [Trait("Core2D.Shape", "Shape")]
+       [Trait("Core2D.Shapes", "Shapes")]
         public void Transform_Not_Null()
         {
             var target = new Class1();
@@ -52,6 +52,11 @@ namespace Core2D.UnitTests
 
         private class Class1 : BaseShape
         {
+            public override object Copy(IDictionary<object, object> shared)
+            {
+                throw new NotImplementedException();
+            }
+
             public override void Draw(object dc, ShapeRenderer renderer, double dx, double dy, object db, object r)
             {
                 throw new NotImplementedException();

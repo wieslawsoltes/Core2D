@@ -21,11 +21,11 @@ namespace Core2D.UnitTests
         public void GetPoints_Should_Return_All_Segment_Points()
         {
             var segment = new PolyCubicBezierSegment();
-            segment.Points = segment.Points.Add(new PointShape());
-            segment.Points = segment.Points.Add(new PointShape());
-            segment.Points = segment.Points.Add(new PointShape());
-            segment.Points = segment.Points.Add(new PointShape());
-            segment.Points = segment.Points.Add(new PointShape());
+            segment.Points = segment.Points.Add(new TestPointShape());
+            segment.Points = segment.Points.Add(new TestPointShape());
+            segment.Points = segment.Points.Add(new TestPointShape());
+            segment.Points = segment.Points.Add(new TestPointShape());
+            segment.Points = segment.Points.Add(new TestPointShape());
 
             var target = segment.GetPoints();
             var count = target.Count();
@@ -40,11 +40,11 @@ namespace Core2D.UnitTests
         public void ToString_Should_Return_Path_Markup()
         {
             var target = new PolyCubicBezierSegment();
-            target.Points = target.Points.Add(new PointShape());
-            target.Points = target.Points.Add(new PointShape());
-            target.Points = target.Points.Add(new PointShape());
-            target.Points = target.Points.Add(new PointShape());
-            target.Points = target.Points.Add(new PointShape());
+            target.Points = target.Points.Add(new TestPointShape());
+            target.Points = target.Points.Add(new TestPointShape());
+            target.Points = target.Points.Add(new TestPointShape());
+            target.Points = target.Points.Add(new TestPointShape());
+            target.Points = target.Points.Add(new TestPointShape());
 
             var actual = target.ToString();
 
