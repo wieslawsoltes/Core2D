@@ -5,7 +5,7 @@ using Core2D.Interfaces;
 using Core2D.Path;
 using Core2D.Shapes.Interfaces;
 
-namespace Core2D.Editor.Factories
+namespace Core2D.Shapes
 {
     /// <summary>
     /// Factory used to create shapes.

@@ -7,7 +7,7 @@ using Core2D.Interfaces;
 using Core2D.Shapes.Interfaces;
 using Core2D.Style;
 
-namespace Core2D.Editor.Factories
+namespace Core2D.Containers
 {
     /// <summary>
     /// Factory used to create new projects, documents and containers.
