@@ -15,9 +15,7 @@ namespace Core2D.Shapes
     {
         private string _key;
 
-        /// <summary>
-        /// Gets or sets image key used to retrieve bytes from <see cref="IImageCache"/> repository.
-        /// </summary>
+        /// <inheritdoc/>
         public string Key
         {
             get => _key;

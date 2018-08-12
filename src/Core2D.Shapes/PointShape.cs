@@ -18,36 +18,28 @@ namespace Core2D.Shapes
         private PointAlignment _alignment;
         private IBaseShape _shape;
 
-        /// <summary>
-        /// Gets or sets X coordinate of point.
-        /// </summary>
+        /// <inheritdoc/>
         public double X
         {
             get => _x;
             set => Update(ref _x, value);
         }
 
-        /// <summary>
-        /// Gets or sets Y coordinate of point.
-        /// </summary>
+        /// <inheritdoc/>
         public double Y
         {
             get => _y;
             set => Update(ref _y, value);
         }
 
-        /// <summary>
-        /// Gets or sets point alignment.
-        /// </summary>
+        /// <inheritdoc/>
         public PointAlignment Alignment
         {
             get => _alignment;
             set => Update(ref _alignment, value);
         }
 
-        /// <summary>
-        /// Gets or sets point template shape.
-        /// </summary>
+        /// <inheritdoc/>
         public IBaseShape Shape
         {
             get => _shape;

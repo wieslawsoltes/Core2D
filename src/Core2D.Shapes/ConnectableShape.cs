@@ -15,9 +15,7 @@ namespace Core2D.Shapes
     {
         private ImmutableArray<IPointShape> _connectors;
 
-        /// <summary>
-        /// Gets or sets connectors collection.
-        /// </summary>
+        /// <inheritdoc/>
         public ImmutableArray<IPointShape> Connectors
         {
             get => _connectors;

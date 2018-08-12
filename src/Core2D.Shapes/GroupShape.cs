@@ -18,14 +18,10 @@ namespace Core2D.Shapes
         private ImmutableArray<Property> _shapesProperties;
         private ImmutableArray<IBaseShape> _shapes;
 
-        /// <summary>
-        /// Gets all properties from <see cref="Shapes"/> collection.
-        /// </summary>
+        /// <inheritdoc/>
         public ImmutableArray<Property> ShapesProperties => GetShapeProperties();
 
-        /// <summary>
-        /// Gets or sets shapes collection.
-        /// </summary>
+        /// <inheritdoc/>
         public ImmutableArray<IBaseShape> Shapes
         {
             get => _shapes;

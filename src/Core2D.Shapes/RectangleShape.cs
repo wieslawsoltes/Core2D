@@ -19,45 +19,35 @@ namespace Core2D.Shapes
         private double _cellWidth;
         private double _cellHeight;
 
-        /// <summary>
-        /// Gets or sets flag indicating whether shape is grid.
-        /// </summary>
+        /// <inheritdoc/>
         public bool IsGrid
         {
             get => _isGrid;
             set => Update(ref _isGrid, value);
         }
 
-        /// <summary>
-        /// Gets or sets grid X coordinate offset.
-        /// </summary>
+        /// <inheritdoc/>
         public double OffsetX
         {
             get => _offsetX;
             set => Update(ref _offsetX, value);
         }
 
-        /// <summary>
-        /// Gets or sets grid Y coordinate offset.
-        /// </summary>
+        /// <inheritdoc/>
         public double OffsetY
         {
             get => _offsetY;
             set => Update(ref _offsetY, value);
         }
 
-        /// <summary>
-        /// Gets or sets grid cell width.
-        /// </summary>
+        /// <inheritdoc/>
         public double CellWidth
         {
             get => _cellWidth;
             set => Update(ref _cellWidth, value);
         }
 
-        /// <summary>
-        /// Gets or sets grid cell height.
-        /// </summary>
+        /// <inheritdoc/>
         public double CellHeight
         {
             get => _cellHeight;

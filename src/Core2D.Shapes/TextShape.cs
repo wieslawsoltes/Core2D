@@ -17,27 +17,21 @@ namespace Core2D.Shapes
         private IPointShape _bottomRight;
         private string _text;
 
-        /// <summary>
-        /// Gets or sets top-left corner point.
-        /// </summary>
+        /// <inheritdoc/>
         public IPointShape TopLeft
         {
             get => _topLeft;
             set => Update(ref _topLeft, value);
         }
 
-        /// <summary>
-        /// Gets or sets bottom-right corner point.
-        /// </summary>
+        /// <inheritdoc/>
         public IPointShape BottomRight
         {
             get => _bottomRight;
             set => Update(ref _bottomRight, value);
         }
 
-        /// <summary>
-        /// Gets or sets text string.
-        /// </summary>
+        /// <inheritdoc/>
         public string Text
         {
             get => _text;

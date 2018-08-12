@@ -21,6 +21,55 @@ namespace Core2D.Shapes
         private bool _isFilled;
         private Context _data;
 
+        /// <inheritdoc/>
+        public virtual IBaseShape Owner
+        {
+            get => _owner;
+            set => Update(ref _owner, value);
+        }
+
+        /// <inheritdoc/>
+        public virtual ShapeState State
+        {
+            get => _state;
+            set => Update(ref _state, value);
+        }
+
+        /// <inheritdoc/>
+        public virtual ShapeStyle Style
+        {
+            get => _style;
+            set => Update(ref _style, value);
+        }
+
+        /// <inheritdoc/>
+        public MatrixObject Transform
+        {
+            get => _transform;
+            set => Update(ref _transform, value);
+        }
+
+        /// <inheritdoc/>
+        public virtual bool IsStroked
+        {
+            get => _isStroked;
+            set => Update(ref _isStroked, value);
+        }
+
+        /// <inheritdoc/>
+        public virtual bool IsFilled
+        {
+            get => _isFilled;
+            set => Update(ref _isFilled, value);
+        }
+
+        /// <inheritdoc/>
+        public virtual Context Data
+        {
+            get => _data;
+            set => Update(ref _data, value);
+        }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="BaseShape"/> class.
         /// </summary>
@@ -30,69 +79,6 @@ namespace Core2D.Shapes
             State = ShapeState.Create(ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone);
             Transform = MatrixObject.Create();
             Data = Context.Create();
-        }
-
-        /// <summary>
-        /// Gets or sets shape owner.
-        /// </summary>
-        public virtual IBaseShape Owner
-        {
-            get => _owner;
-            set => Update(ref _owner, value);
-        }
-
-        /// <summary>
-        /// Indicates shape state options.
-        /// </summary>
-        public virtual ShapeState State
-        {
-            get => _state;
-            set => Update(ref _state, value);
-        }
-
-        /// <summary>
-        /// Get or sets shape drawing style.
-        /// </summary>
-        public virtual ShapeStyle Style
-        {
-            get => _style;
-            set => Update(ref _style, value);
-        }
-
-        /// <summary>
-        /// Get or sets shape matrix transform.
-        /// </summary>
-        public MatrixObject Transform
-        {
-            get => _transform;
-            set => Update(ref _transform, value);
-        }
-
-        /// <summary>
-        /// Gets or sets flag indicating whether shape is stroked.
-        /// </summary>
-        public virtual bool IsStroked
-        {
-            get => _isStroked;
-            set => Update(ref _isStroked, value);
-        }
-
-        /// <summary>
-        /// Gets or sets flag indicating whether shape is filled.
-        /// </summary>
-        public virtual bool IsFilled
-        {
-            get => _isFilled;
-            set => Update(ref _isFilled, value);
-        }
-
-        /// <summary>
-        /// Gets or sets shape <see cref="Context"/>.
-        /// </summary>
-        public virtual Context Data
-        {
-            get => _data;
-            set => Update(ref _data, value);
         }
 
         /// <inheritdoc/>

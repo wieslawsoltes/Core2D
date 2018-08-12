@@ -16,18 +16,14 @@ namespace Core2D.Shapes
         private IPointShape _start;
         private IPointShape _end;
 
-        /// <summary>
-        /// Gets or sets start point.
-        /// </summary>
+        /// <inheritdoc/>
         public IPointShape Start
         {
             get => _start;
             set => Update(ref _start, value);
         }
 
-        /// <summary>
-        /// Gets or sets end point.
-        /// </summary>
+        /// <inheritdoc/>
         public IPointShape End
         {
             get => _end;
