@@ -72,7 +72,7 @@ namespace Core2D.Shapes
             {
                 foreach (var shape in shapes)
                 {
-                    if (shape is PointShape point)
+                    if (shape is IPointShape point)
                     {
                         // Remove connector related state flags.
                         point.State.Flags &=
