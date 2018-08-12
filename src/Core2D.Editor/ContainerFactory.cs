@@ -7,7 +7,7 @@ using Core2D.Interfaces;
 using Core2D.Shapes.Interfaces;
 using Core2D.Style;
 
-namespace Core2D.Containers
+namespace Core2D.Editor
 {
     /// <summary>
     /// Factory used to create containers.
