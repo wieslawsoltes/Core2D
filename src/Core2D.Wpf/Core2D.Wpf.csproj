@@ -526,6 +526,10 @@
       <Project>{7463a001-bcc8-403a-b83b-b96f5eef7052}</Project>
       <Name>Core2D.Renderer.Wpf</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Core2D.Shapes.Extensions\Core2D.Shapes.Extensions.csproj">
+      <Project>{06497a22-5b6b-40a3-988b-546fe9f8c32b}</Project>
+      <Name>Core2D.Shapes.Extensions</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Core2D.Utilities.Wpf\Core2D.Utilities.Wpf.csproj">
       <Project>{55f8a599-1ea5-4ef8-ba51-01de24b49f43}</Project>
       <Name>Core2D.Utilities.Wpf</Name>
