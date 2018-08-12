@@ -2400,6 +2400,17 @@ namespace Core2D.Editor
         }
 
         /// <summary>
+        /// Restore shape project references afer closing.
+        /// </summary>
+        /// <param name="shape">The shape to restore.</param>
+        private void RestoreShape(IBaseShape shape)
+        {
+            var shapes = Enumerable.Repeat(shape, 1).ToList();
+            TryToRestoreStyles(shapes);
+            TryToRestoreRecords(shapes);
+        }
+
+        /// <summary>
         /// Paste shapes to current container.
         /// </summary>
         /// <param name="shapes">The shapes collection.</param>
@@ -2444,20 +2455,21 @@ namespace Core2D.Editor
         /// <typeparam name="T">The shape type.</typeparam>
         /// <param name="shape">The <see cref="IBaseShape"/> object.</param>
         /// <returns>The cloned <see cref="IBaseShape"/> object.</returns>
-        public T CloneShape<T>(IBaseShape shape) where T : class
+        public T CloneShape<T>(T shape) where T : IBaseShape
         {
             try
             {
-                var json = JsonSerializer?.Serialize(shape);
-                if (!string.IsNullOrEmpty(json))
+                if (JsonSerializer is IJsonSerializer serializer)
                 {
-                    var clone = JsonSerializer?.Deserialize<T>(json);
-                    if (clone != null)
+                    var json = serializer.Serialize(shape);
+                    if (!string.IsNullOrEmpty(json))
                     {
-                        var shapes = Enumerable.Repeat(clone, 1).ToList();
-                        TryToRestoreStyles(shapes);
-                        TryToRestoreRecords(shapes);
-                        return clone;
+                        var clone = serializer.Deserialize<T>(json);
+                        if (clone != null)
+                        {
+                            RestoreShape(clone);
+                            return clone;
+                        }
                     }
                 }
             }
