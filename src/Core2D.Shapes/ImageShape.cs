@@ -50,10 +50,10 @@ namespace Core2D.Shapes
         /// <summary>
         /// Creates a new <see cref="ImageShape"/> instance.
         /// </summary>
-        /// <param name="x1">The X coordinate of <see cref="TextShape.TopLeft"/> corner point.</param>
-        /// <param name="y1">The Y coordinate of <see cref="TextShape.TopLeft"/> corner point.</param>
-        /// <param name="x2">The X coordinate of <see cref="TextShape.BottomRight"/> corner point.</param>
-        /// <param name="y2">The Y coordinate of <see cref="TextShape.BottomRight"/> corner point.</param>
+        /// <param name="x1">The X coordinate of <see cref="ITextShape.TopLeft"/> corner point.</param>
+        /// <param name="y1">The Y coordinate of <see cref="ITextShape.TopLeft"/> corner point.</param>
+        /// <param name="x2">The X coordinate of <see cref="ITextShape.BottomRight"/> corner point.</param>
+        /// <param name="y2">The Y coordinate of <see cref="ITextShape.BottomRight"/> corner point.</param>
         /// <param name="style">The shape style.</param>
         /// <param name="point">The point template.</param>
         /// <param name="key">The image key.</param>
@@ -62,7 +62,7 @@ namespace Core2D.Shapes
         /// <param name="text">The text string.</param>
         /// <param name="name">The shape name.</param>
         /// <returns>The new instance of the <see cref="ImageShape"/> class.</returns>
-        public static ImageShape Create(double x1, double y1, double x2, double y2, ShapeStyle style, BaseShape point, string key, bool isStroked = false, bool isFilled = false, string text = null, string name = "")
+        public static ImageShape Create(double x1, double y1, double x2, double y2, ShapeStyle style, IBaseShape point, string key, bool isStroked = false, bool isFilled = false, string text = null, string name = "")
         {
             return new ImageShape()
             {
@@ -80,8 +80,8 @@ namespace Core2D.Shapes
         /// <summary>
         /// Creates a new <see cref="ImageShape"/> instance.
         /// </summary>
-        /// <param name="x">The X coordinate of <see cref="TextShape.TopLeft"/> and <see cref="TextShape.BottomRight"/> corner points.</param>
-        /// <param name="y">The Y coordinate of <see cref="TextShape.TopLeft"/> and <see cref="TextShape.BottomRight"/> corner points.</param>
+        /// <param name="x">The X coordinate of <see cref="ITextShape.TopLeft"/> and <see cref="ITextShape.BottomRight"/> corner points.</param>
+        /// <param name="y">The Y coordinate of <see cref="ITextShape.TopLeft"/> and <see cref="ITextShape.BottomRight"/> corner points.</param>
         /// <param name="style">The shape style.</param>
         /// <param name="point">The point template.</param>
         /// <param name="key">The image key.</param>
@@ -90,7 +90,7 @@ namespace Core2D.Shapes
         /// <param name="text">The text string.</param>
         /// <param name="name">The shape name.</param>
         /// <returns>The new instance of the <see cref="ImageShape"/> class.</returns>
-        public static ImageShape Create(double x, double y, ShapeStyle style, BaseShape point, string key, bool isStroked = false, bool isFilled = false, string text = null, string name = "")
+        public static ImageShape Create(double x, double y, ShapeStyle style, IBaseShape point, string key, bool isStroked = false, bool isFilled = false, string text = null, string name = "")
         {
             return Create(x, y, x, y, style, point, key, isStroked, isFilled, text, name);
         }
@@ -98,8 +98,8 @@ namespace Core2D.Shapes
         /// <summary>
         /// Creates a new <see cref="ImageShape"/> instance.
         /// </summary>
-        /// <param name="topLeft">The <see cref="TextShape.TopLeft"/> corner point.</param>
-        /// <param name="bottomRight">The <see cref="TextShape.BottomRight"/> corner point.</param>
+        /// <param name="topLeft">The <see cref="ITextShape.TopLeft"/> corner point.</param>
+        /// <param name="bottomRight">The <see cref="ITextShape.BottomRight"/> corner point.</param>
         /// <param name="style">The shape style.</param>
         /// <param name="point">The point template.</param>
         /// <param name="key">The image key.</param>
@@ -108,7 +108,7 @@ namespace Core2D.Shapes
         /// <param name="text">The text string.</param>
         /// <param name="name">The shape name.</param>
         /// <returns>The new instance of the <see cref="ImageShape"/> class.</returns>
-        public static ImageShape Create(PointShape topLeft, PointShape bottomRight, ShapeStyle style, BaseShape point, string key, bool isStroked = false, bool isFilled = false, string text = null, string name = "")
+        public static ImageShape Create(IPointShape topLeft, IPointShape bottomRight, ShapeStyle style, IBaseShape point, string key, bool isStroked = false, bool isFilled = false, string text = null, string name = "")
         {
             return new ImageShape()
             {

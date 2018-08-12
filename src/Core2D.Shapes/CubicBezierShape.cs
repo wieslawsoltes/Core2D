@@ -169,21 +169,21 @@ namespace Core2D.Shapes
         /// <summary>
         /// Creates a new <see cref="CubicBezierShape"/> instance.
         /// </summary>
-        /// <param name="x1">The X coordinate of <see cref="CubicBezierShape.Point1"/> point.</param>
-        /// <param name="y1">The Y coordinate of <see cref="CubicBezierShape.Point1"/> point.</param>
-        /// <param name="x2">The X coordinate of <see cref="CubicBezierShape.Point2"/> point.</param>
-        /// <param name="y2">The Y coordinate of <see cref="CubicBezierShape.Point2"/> point.</param>
-        /// <param name="x3">The X coordinate of <see cref="CubicBezierShape.Point3"/> point.</param>
-        /// <param name="y3">The Y coordinate of <see cref="CubicBezierShape.Point3"/> point.</param>
-        /// <param name="x4">The X coordinate of <see cref="CubicBezierShape.Point4"/> point.</param>
-        /// <param name="y4">The Y coordinate of <see cref="CubicBezierShape.Point4"/> point.</param>
+        /// <param name="x1">The X coordinate of <see cref="ICubicBezierShape.Point1"/> point.</param>
+        /// <param name="y1">The Y coordinate of <see cref="ICubicBezierShape.Point1"/> point.</param>
+        /// <param name="x2">The X coordinate of <see cref="ICubicBezierShape.Point2"/> point.</param>
+        /// <param name="y2">The Y coordinate of <see cref="ICubicBezierShape.Point2"/> point.</param>
+        /// <param name="x3">The X coordinate of <see cref="ICubicBezierShape.Point3"/> point.</param>
+        /// <param name="y3">The Y coordinate of <see cref="ICubicBezierShape.Point3"/> point.</param>
+        /// <param name="x4">The X coordinate of <see cref="ICubicBezierShape.Point4"/> point.</param>
+        /// <param name="y4">The Y coordinate of <see cref="ICubicBezierShape.Point4"/> point.</param>
         /// <param name="style">The shape style.</param>
         /// <param name="point">The point template.</param>
         /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
         /// <param name="isFilled">The flag indicating whether shape is filled.</param>
         /// <param name="name">The shape name.</param>
         /// <returns>The new instance of the <see cref="CubicBezierShape"/> class.</returns>
-        public static CubicBezierShape Create(double x1, double y1, double x2, double y2, double x3, double y3, double x4, double y4, ShapeStyle style, BaseShape point, bool isStroked = true, bool isFilled = false, string name = "")
+        public static CubicBezierShape Create(double x1, double y1, double x2, double y2, double x3, double y3, double x4, double y4, ShapeStyle style, IBaseShape point, bool isStroked = true, bool isFilled = false, string name = "")
         {
             return new CubicBezierShape()
             {
@@ -201,15 +201,15 @@ namespace Core2D.Shapes
         /// <summary>
         /// Creates a new <see cref="CubicBezierShape"/> instance.
         /// </summary>
-        /// <param name="x">The X coordinate of <see cref="CubicBezierShape.Point1"/>, <see cref="CubicBezierShape.Point2"/>, <see cref="CubicBezierShape.Point3"/> and <see cref="CubicBezierShape.Point4"/> points.</param>
-        /// <param name="y">The Y coordinate of <see cref="CubicBezierShape.Point1"/>, <see cref="CubicBezierShape.Point2"/>, <see cref="CubicBezierShape.Point3"/> and <see cref="CubicBezierShape.Point4"/> points.</param>
+        /// <param name="x">The X coordinate of <see cref="ICubicBezierShape.Point1"/>, <see cref="ICubicBezierShape.Point2"/>, <see cref="ICubicBezierShape.Point3"/> and <see cref="ICubicBezierShape.Point4"/> points.</param>
+        /// <param name="y">The Y coordinate of <see cref="ICubicBezierShape.Point1"/>, <see cref="ICubicBezierShape.Point2"/>, <see cref="ICubicBezierShape.Point3"/> and <see cref="ICubicBezierShape.Point4"/> points.</param>
         /// <param name="style">The shape style.</param>
         /// <param name="point">The point template.</param>
         /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
         /// <param name="isFilled">The flag indicating whether shape is filled.</param>
         /// <param name="name">The shape name.</param>
         /// <returns>The new instance of the <see cref="CubicBezierShape"/> class.</returns>
-        public static CubicBezierShape Create(double x, double y, ShapeStyle style, BaseShape point, bool isStroked = true, bool isFilled = false, string name = "")
+        public static CubicBezierShape Create(double x, double y, ShapeStyle style, IBaseShape point, bool isStroked = true, bool isFilled = false, string name = "")
         {
             return Create(x, y, x, y, x, y, x, y, style, point, isStroked, isFilled, name);
         }
@@ -217,17 +217,17 @@ namespace Core2D.Shapes
         /// <summary>
         /// Creates a new <see cref="CubicBezierShape"/> instance.
         /// </summary>
-        /// <param name="point1">The <see cref="CubicBezierShape.Point1"/> point.</param>
-        /// <param name="point2">The <see cref="CubicBezierShape.Point2"/> point.</param>
-        /// <param name="point3">The <see cref="CubicBezierShape.Point3"/> point.</param>
-        /// <param name="point4">The <see cref="CubicBezierShape.Point4"/> point.</param>
+        /// <param name="point1">The <see cref="ICubicBezierShape.Point1"/> point.</param>
+        /// <param name="point2">The <see cref="ICubicBezierShape.Point2"/> point.</param>
+        /// <param name="point3">The <see cref="ICubicBezierShape.Point3"/> point.</param>
+        /// <param name="point4">The <see cref="ICubicBezierShape.Point4"/> point.</param>
         /// <param name="style">The shape style.</param>
         /// <param name="point">The point template.</param>
         /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
         /// <param name="isFilled">The flag indicating whether shape is filled.</param>
         /// <param name="name">The shape name.</param>
         /// <returns>The new instance of the <see cref="CubicBezierShape"/> class.</returns>
-        public static CubicBezierShape Create(PointShape point1, PointShape point2, PointShape point3, PointShape point4, ShapeStyle style, BaseShape point, bool isStroked = true, bool isFilled = false, string name = "")
+        public static CubicBezierShape Create(IPointShape point1, IPointShape point2, IPointShape point3, IPointShape point4, ShapeStyle style, IBaseShape point, bool isStroked = true, bool isFilled = false, string name = "")
         {
             return new CubicBezierShape()
             {

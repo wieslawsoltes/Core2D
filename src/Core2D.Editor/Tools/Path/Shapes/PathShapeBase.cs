@@ -12,8 +12,9 @@ namespace Core2D.Editor.Tools.Path.Shapes
 {
     internal abstract class PathShapeBase : IBaseShape
     {
+#pragma warning disable CS0067
         public event PropertyChangedEventHandler PropertyChanged;
-
+#pragma warning restore CS0067
         public string Id { get; set; }
         public string Name { get; set; }
         public IBaseShape Owner { get; set; }

@@ -47,11 +47,14 @@ namespace Core2D.Containers
         /// <param name="path"></param>
         /// <param name="fileIO"></param>
         /// <param name="serializer"></param>
-        public static void Save(ProjectContainer project, string path, IFileSystem fileIO, IJsonSerializer serializer)
+        public static void Save(IProjectContainer project, string path, IFileSystem fileIO, IJsonSerializer serializer)
         {
-            using (var stream = fileIO.Create(path))
+            if (project is IImageCache imageCache)
             {
-                Save(project, stream, fileIO, serializer);
+                using (var stream = fileIO.Create(path))
+                {
+                    Save(project, imageCache, stream, fileIO, serializer);
+                }
             }
         }
 
@@ -68,7 +71,10 @@ namespace Core2D.Containers
             {
                 var projectEntry = archive.Entries.FirstOrDefault(e => e.FullName == ProjectJsonEntryName);
                 var project = ReadProject(projectEntry, fileIO, serializer);
-                ReadImages(project, archive, fileIO);
+                if (project is IImageCache imageCache)
+                {
+                    ReadImages(imageCache, archive, fileIO);
+                }
                 return project;
             }
         }
@@ -77,21 +83,22 @@ namespace Core2D.Containers
         /// 
         /// </summary>
         /// <param name="project"></param>
+        /// <param name="imageCache"></param>
         /// <param name="stream"></param>
         /// <param name="fileIO"></param>
         /// <param name="serializer"></param>
-        public static void Save(ProjectContainer project, Stream stream, IFileSystem fileIO, IJsonSerializer serializer)
+        public static void Save(IProjectContainer project, IImageCache imageCache, Stream stream, IFileSystem fileIO, IJsonSerializer serializer)
         {
             using (var archive = new ZipArchive(stream, ZipArchiveMode.Create))
             {
                 var projectEntry = archive.CreateEntry(ProjectJsonEntryName);
                 WriteProject(project, projectEntry, fileIO, serializer);
                 var keys = GetUsedKeys(project);
-                WriteImages(project, keys, archive, fileIO);
+                WriteImages(imageCache, keys, archive, fileIO);
             }
         }
 
-        private static IEnumerable<string> GetUsedKeys(ProjectContainer project)
+        private static IEnumerable<string> GetUsedKeys(IProjectContainer project)
         {
             return ProjectContainer.GetAllShapes<IImageShape>(project).Select(i => i.Key).Distinct();
         }
@@ -104,7 +111,7 @@ namespace Core2D.Containers
             }
         }
 
-        private static void WriteProject(ProjectContainer project, ZipArchiveEntry projectEntry, IFileSystem fileIO, IJsonSerializer serializer)
+        private static void WriteProject(IProjectContainer project, ZipArchiveEntry projectEntry, IFileSystem fileIO, IJsonSerializer serializer)
         {
             using (var jsonStream = projectEntry.Open())
             {

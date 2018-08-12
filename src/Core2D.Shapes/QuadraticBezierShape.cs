@@ -145,19 +145,19 @@ namespace Core2D.Shapes
         /// <summary>
         /// Creates a new <see cref="QuadraticBezierShape"/> instance.
         /// </summary>
-        /// <param name="x1">The X coordinate of <see cref="QuadraticBezierShape.Point1"/> point.</param>
-        /// <param name="y1">The Y coordinate of <see cref="QuadraticBezierShape.Point1"/> point.</param>
-        /// <param name="x2">The X coordinate of <see cref="QuadraticBezierShape.Point2"/> point.</param>
-        /// <param name="y2">The Y coordinate of <see cref="QuadraticBezierShape.Point2"/> point.</param>
-        /// <param name="x3">The X coordinate of <see cref="QuadraticBezierShape.Point3"/> point.</param>
-        /// <param name="y3">The Y coordinate of <see cref="QuadraticBezierShape.Point3"/> point.</param>
+        /// <param name="x1">The X coordinate of <see cref="IQuadraticBezierShape.Point1"/> point.</param>
+        /// <param name="y1">The Y coordinate of <see cref="IQuadraticBezierShape.Point1"/> point.</param>
+        /// <param name="x2">The X coordinate of <see cref="IQuadraticBezierShape.Point2"/> point.</param>
+        /// <param name="y2">The Y coordinate of <see cref="IQuadraticBezierShape.Point2"/> point.</param>
+        /// <param name="x3">The X coordinate of <see cref="IQuadraticBezierShape.Point3"/> point.</param>
+        /// <param name="y3">The Y coordinate of <see cref="IQuadraticBezierShape.Point3"/> point.</param>
         /// <param name="style">The shape style.</param>
         /// <param name="point">The point template.</param>
         /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
         /// <param name="isFilled">The flag indicating whether shape is filled.</param>
         /// <param name="name">The shape name.</param>
         /// <returns>The new instance of the <see cref="QuadraticBezierShape"/> class.</returns>
-        public static QuadraticBezierShape Create(double x1, double y1, double x2, double y2, double x3, double y3, ShapeStyle style, BaseShape point, bool isStroked = true, bool isFilled = false, string name = "")
+        public static QuadraticBezierShape Create(double x1, double y1, double x2, double y2, double x3, double y3, ShapeStyle style, IBaseShape point, bool isStroked = true, bool isFilled = false, string name = "")
         {
             return new QuadraticBezierShape()
             {
@@ -174,15 +174,15 @@ namespace Core2D.Shapes
         /// <summary>
         /// Creates a new <see cref="QuadraticBezierShape"/> instance.
         /// </summary>
-        /// <param name="x">The X coordinate of <see cref="QuadraticBezierShape.Point1"/>, <see cref="QuadraticBezierShape.Point2"/> and <see cref="QuadraticBezierShape.Point3"/> points.</param>
-        /// <param name="y">The Y coordinate of <see cref="QuadraticBezierShape.Point1"/>, <see cref="QuadraticBezierShape.Point2"/> and <see cref="QuadraticBezierShape.Point3"/> points.</param>
+        /// <param name="x">The X coordinate of <see cref="IQuadraticBezierShape.Point1"/>, <see cref="IQuadraticBezierShape.Point2"/> and <see cref="IQuadraticBezierShape.Point3"/> points.</param>
+        /// <param name="y">The Y coordinate of <see cref="IQuadraticBezierShape.Point1"/>, <see cref="IQuadraticBezierShape.Point2"/> and <see cref="IQuadraticBezierShape.Point3"/> points.</param>
         /// <param name="style">The shape style.</param>
         /// <param name="point">The point template.</param>
         /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
         /// <param name="isFilled">The flag indicating whether shape is filled.</param>
         /// <param name="name">The shape name.</param>
         /// <returns>The new instance of the <see cref="QuadraticBezierShape"/> class.</returns>
-        public static QuadraticBezierShape Create(double x, double y, ShapeStyle style, BaseShape point, bool isStroked = true, bool isFilled = false, string name = "")
+        public static QuadraticBezierShape Create(double x, double y, ShapeStyle style, IBaseShape point, bool isStroked = true, bool isFilled = false, string name = "")
         {
             return Create(x, y, x, y, x, y, style, point, isStroked, isFilled, name);
         }
@@ -190,16 +190,16 @@ namespace Core2D.Shapes
         /// <summary>
         /// Creates a new <see cref="QuadraticBezierShape"/> instance.
         /// </summary>
-        /// <param name="point1">The <see cref="QuadraticBezierShape.Point1"/> point.</param>
-        /// <param name="point2">The <see cref="QuadraticBezierShape.Point2"/> point.</param>
-        /// <param name="point3">The <see cref="QuadraticBezierShape.Point3"/> point.</param>
+        /// <param name="point1">The <see cref="IQuadraticBezierShape.Point1"/> point.</param>
+        /// <param name="point2">The <see cref="IQuadraticBezierShape.Point2"/> point.</param>
+        /// <param name="point3">The <see cref="IQuadraticBezierShape.Point3"/> point.</param>
         /// <param name="style">The shape style.</param>
         /// <param name="point">The point template.</param>
         /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
         /// <param name="isFilled">The flag indicating whether shape is filled.</param>
         /// <param name="name">The shape name.</param>
         /// <returns>The new instance of the <see cref="QuadraticBezierShape"/> class.</returns>
-        public static QuadraticBezierShape Create(PointShape point1, PointShape point2, PointShape point3, ShapeStyle style, BaseShape point, bool isStroked = true, bool isFilled = false, string name = "")
+        public static QuadraticBezierShape Create(IPointShape point1, IPointShape point2, IPointShape point3, ShapeStyle style, IBaseShape point, bool isStroked = true, bool isFilled = false, string name = "")
         {
             return new QuadraticBezierShape()
             {

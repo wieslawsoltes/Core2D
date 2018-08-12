@@ -4,7 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using Core2D.Attributes;
-using Core2D.Containers;
 
 namespace Core2D.Containers
 {
@@ -16,18 +15,14 @@ namespace Core2D.Containers
         private bool _isExpanded = true;
         private ImmutableArray<IPageContainer> _pages;
 
-        /// <summary>
-        /// Gets or sets flag indicating whether document is expanded.
-        /// </summary>
+        /// <inheritdoc/>
         public bool IsExpanded
         {
             get => _isExpanded;
             set => Update(ref _isExpanded, value);
         }
 
-        /// <summary>
-        /// Gets or sets document pages.
-        /// </summary>
+        /// <inheritdoc/>
         [Content]
         public ImmutableArray<IPageContainer> Pages
         {

@@ -3,6 +3,7 @@
 using System;
 using Core2D.Editor.Input;
 using Core2D.Editor.Tools.Path.Settings;
+using Core2D.Shapes;
 
 namespace Core2D.Editor.Tools.Path
 {
@@ -14,7 +15,7 @@ namespace Core2D.Editor.Tools.Path
         public enum State { Move }
         private readonly IServiceProvider _serviceProvider;
         private PathToolSettingsMove _settings;
-        private State _currentState = State.Move;
+        private readonly State _currentState = State.Move;
 
         /// <inheritdoc/>
         public override string Title => "Move";

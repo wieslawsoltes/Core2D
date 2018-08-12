@@ -9,10 +9,11 @@
              xmlns:editor="clr-namespace:Core2D.Wpf.Editor"
              xmlns:Path="clr-namespace:Core2D.Path;assembly=Core2D"
              xmlns:Segments="clr-namespace:Core2D.Path.Segments;assembly=Core2D"
-             xmlns:Containers="clr-namespace:Core2D.Containers;assembly=Core2D"
+             xmlns:ContainersCore="clr-namespace:Core2D.Containers;assembly=Core2D"
+             xmlns:Containers="clr-namespace:Core2D.Containers;assembly=Core2D.Containers"
              xmlns:Renderer="clr-namespace:Core2D.Renderer;assembly=Core2D"
-             xmlns:Shape="clr-namespace:Core2D.Shape;assembly=Core2D" 
-             xmlns:Shapes="clr-namespace:Core2D.Shapes;assembly=Core2D" 
+             xmlns:ShapesCore="clr-namespace:Core2D.Shapes;assembly=Core2D" 
+             xmlns:Shapes="clr-namespace:Core2D.Shapes;assembly=Core2D.Shapes"
              xmlns:Style="clr-namespace:Core2D.Style;assembly=Core2D" 
              xmlns:custom="clr-namespace:Core2D.Wpf.Views.Custom"
              xmlns:lists="clr-namespace:Core2D.Wpf.Views.Custom.Lists"
@@ -142,7 +143,7 @@
             <data:DataControl/>
         </DataTemplate>
         <!-- State -->
-        <DataTemplate DataType="{x:Type Shape:ShapeState}">
+        <DataTemplate DataType="{x:Type ShapesCore:ShapeState}">
             <state:ShapeStateControl/>
         </DataTemplate>
         <!-- Renderer -->

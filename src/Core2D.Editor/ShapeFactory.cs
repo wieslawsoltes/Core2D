@@ -3,6 +3,7 @@
 using System.Collections.Immutable;
 using Core2D.Interfaces;
 using Core2D.Path;
+using Core2D.Renderer;
 using Core2D.Shapes;
 
 namespace Core2D.Editor
@@ -322,19 +323,23 @@ namespace Core2D.Editor
             {
                 bytes = fileIO?.ReadBinary(stream);
             }
-            var key = project.AddImageFromFile(path, bytes);
-            var style = project.CurrentStyleLibrary.Selected;
-            var image = ImageShape.Create(
-                topLeft,
-                bottomRight,
-                project.Options.CloneStyle ? style.Clone() : style,
-                project.Options.PointShape,
-                key,
-                isStroked,
-                isFilled,
-                text);
-            project.AddShape(project.CurrentContainer.CurrentLayer, image);
-            return image;
+            if (project is IImageCache imageCache)
+            {
+                var key = imageCache.AddImageFromFile(path, bytes);
+                var style = project.CurrentStyleLibrary.Selected;
+                var image = ImageShape.Create(
+                    topLeft,
+                    bottomRight,
+                    project.Options.CloneStyle ? style.Clone() : style,
+                    project.Options.PointShape,
+                    key,
+                    isStroked,
+                    isFilled,
+                    text);
+                project.AddShape(project.CurrentContainer.CurrentLayer, image);
+                return image;
+            }
+            return null;
         }
     }
 }

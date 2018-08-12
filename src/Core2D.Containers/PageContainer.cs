@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using Core2D.Attributes;
-using Core2D.Containers;
 using Core2D.Data;
 using Core2D.Shapes;
 using Core2D.Style;
@@ -29,12 +28,7 @@ namespace Core2D.Containers
         private Context _data;
         private bool _isExpanded = false;
 
-        /// <summary>
-        /// Gets or sets container width.
-        /// </summary>
-        /// <remarks>
-        /// If template is not null Template.Width property is used.
-        /// </remarks>
+        /// <inheritdoc/>
         public double Width
         {
             get => _template != null ? _template.Width : _width;
@@ -52,12 +46,7 @@ namespace Core2D.Containers
             }
         }
 
-        /// <summary>
-        /// Gets or sets container height.
-        /// </summary>
-        /// <remarks>
-        /// If template is not null Template.Height property is used.
-        /// </remarks>
+        /// <inheritdoc/>
         public double Height
         {
             get => _template != null ? _template.Height : _height;
@@ -75,12 +64,7 @@ namespace Core2D.Containers
             }
         }
 
-        /// <summary>
-        /// Gets or sets container background color.
-        /// </summary>
-        /// <remarks>
-        /// If template is not null Template.Background property is used.
-        /// </remarks>
+        /// <inheritdoc/>
         public ArgbColor Background
         {
             get => _template != null ? _template.Background : _background;
@@ -98,9 +82,7 @@ namespace Core2D.Containers
             }
         }
 
-        /// <summary>
-        /// Gets or sets container layers.
-        /// </summary>
+        /// <inheritdoc/>
         [Content]
         public ImmutableArray<ILayerContainer> Layers
         {
@@ -108,63 +90,49 @@ namespace Core2D.Containers
             set => Update(ref _layers, value);
         }
 
-        /// <summary>
-        /// Gets or sets current container layer.
-        /// </summary>
+        /// <inheritdoc/>
         public ILayerContainer CurrentLayer
         {
             get => _currentLayer;
             set => Update(ref _currentLayer, value);
         }
 
-        /// <summary>
-        /// Gets or sets working container layer.
-        /// </summary>
+        /// <inheritdoc/>
         public ILayerContainer WorkingLayer
         {
             get => _workingLayer;
             set => Update(ref _workingLayer, value);
         }
 
-        /// <summary>
-        /// Gets or sets helper container layer.
-        /// </summary>
+        /// <inheritdoc/>
         public ILayerContainer HelperLayer
         {
             get => _helperLayer;
             set => Update(ref _helperLayer, value);
         }
 
-        /// <summary>
-        /// Gets or sets current container shape.
-        /// </summary>
+        /// <inheritdoc/>
         public IBaseShape CurrentShape
         {
             get => _currentShape;
             set => Update(ref _currentShape, value);
         }
 
-        /// <summary>
-        /// Gets or sets container template.
-        /// </summary>
+        /// <inheritdoc/>
         public IPageContainer Template
         {
             get => _template;
             set => Update(ref _template, value);
         }
 
-        /// <summary>
-        /// Gets or sets container data.
-        /// </summary>
+        /// <inheritdoc/>
         public Context Data
         {
             get => _data;
             set => Update(ref _data, value);
         }
 
-        /// <summary>
-        /// Gets or sets flag indicating whether container is expanded.
-        /// </summary>
+        /// <inheritdoc/>
         public bool IsExpanded
         {
             get => _isExpanded;
@@ -216,15 +184,10 @@ namespace Core2D.Containers
             _data = new Context();
         }
 
-        /// <summary>
-        /// Set current layer.
-        /// </summary>
-        /// <param name="layer">The layer instance.</param>
+        /// <inheritdoc/>
         public void SetCurrentLayer(ILayerContainer layer) => CurrentLayer = layer;
 
-        /// <summary>
-        /// Invalidate container layers.
-        /// </summary>
+        /// <inheritdoc/>
         public virtual void Invalidate()
         {
             if (Template != null)

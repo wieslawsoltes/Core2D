@@ -272,8 +272,8 @@ namespace Core2D.Editor.Designer
 
             // Project
 
-            IContainerFactory containerFactory = serviceProvider.GetService<IContainerFactory>();
-            IShapeFactory shapeFactory = serviceProvider.GetService<IShapeFactory>();
+            var containerFactory = serviceProvider.GetService<IContainerFactory>();
+            var shapeFactory = serviceProvider.GetService<IShapeFactory>();
 
             Project = containerFactory.GetProject();
 
@@ -288,7 +288,7 @@ namespace Core2D.Editor.Designer
 
             Document = DocumentContainer.Create();
             Layer = LayerContainer.Create();
-            Options = Options.Create();
+            Options = Containers.Options.Create();
 
             CurrentStyleLibrary = Project.CurrentStyleLibrary;
             CurrentGroupLibrary = Project.CurrentGroupLibrary;

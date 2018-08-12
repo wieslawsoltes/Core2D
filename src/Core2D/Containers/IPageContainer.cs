@@ -78,6 +78,12 @@ namespace Core2D.Containers
         bool IsExpanded { get; set; }
 
         /// <summary>
+        /// Set current layer.
+        /// </summary>
+        /// <param name="layer">The layer instance.</param>
+        void SetCurrentLayer(ILayerContainer layer);
+
+        /// <summary>
         /// Invalidate container layers.
         /// </summary>
         void Invalidate();

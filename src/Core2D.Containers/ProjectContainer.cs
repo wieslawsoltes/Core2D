@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using Core2D.Attributes;
-using Core2D.Containers;
 using Core2D.Data;
 using Core2D.History;
 using Core2D.Shapes;
@@ -33,63 +32,49 @@ namespace Core2D.Containers
         private IPageContainer _currentContainer;
         private IObservableObject _selected;
 
-        /// <summary>
-        /// Gets or sets project options.
-        /// </summary>
+        /// <inheritdoc/>
         public IOptions Options
         {
             get => _options;
             set => Update(ref _options, value);
         }
 
-        /// <summary>
-        /// Gets or sets undo/redo history handler.
-        /// </summary>
+        /// <inheritdoc/>
         public IHistory History
         {
             get => _history;
             set => Update(ref _history, value);
         }
 
-        /// <summary>
-        /// Gets or sets project style libraries.
-        /// </summary>
+        /// <inheritdoc/>
         public ImmutableArray<Library<ShapeStyle>> StyleLibraries
         {
             get => _styleLibraries;
             set => Update(ref _styleLibraries, value);
         }
 
-        /// <summary>
-        /// Gets or sets project group libraries.
-        /// </summary>
+        /// <inheritdoc/>
         public ImmutableArray<Library<IGroupShape>> GroupLibraries
         {
             get => _groupLibraries;
             set => Update(ref _groupLibraries, value);
         }
 
-        /// <summary>
-        /// Gets or sets project databases.
-        /// </summary>
+        /// <inheritdoc/>
         public ImmutableArray<Database> Databases
         {
             get => _databases;
             set => Update(ref _databases, value);
         }
 
-        /// <summary>
-        /// Gets or sets project templates.
-        /// </summary>
+        /// <inheritdoc/>
         public ImmutableArray<IPageContainer> Templates
         {
             get => _templates;
             set => Update(ref _templates, value);
         }
 
-        /// <summary>
-        /// Gets or sets project documents.
-        /// </summary>
+        /// <inheritdoc/>
         [Content]
         public ImmutableArray<IDocumentContainer> Documents
         {
@@ -97,63 +82,49 @@ namespace Core2D.Containers
             set => Update(ref _documents, value);
         }
 
-        /// <summary>
-        /// Gets or sets project current style library.
-        /// </summary>
+        /// <inheritdoc/>
         public Library<ShapeStyle> CurrentStyleLibrary
         {
             get => _currentStyleLibrary;
             set => Update(ref _currentStyleLibrary, value);
         }
 
-        /// <summary>
-        /// Gets or sets project current group library.
-        /// </summary>
+        /// <inheritdoc/>
         public Library<IGroupShape> CurrentGroupLibrary
         {
             get => _currentGroupLibrary;
             set => Update(ref _currentGroupLibrary, value);
         }
 
-        /// <summary>
-        /// Gets or sets project current database.
-        /// </summary>
+        /// <inheritdoc/>
         public Database CurrentDatabase
         {
             get => _currentDatabase;
             set => Update(ref _currentDatabase, value);
         }
 
-        /// <summary>
-        /// Gets or sets project current template.
-        /// </summary>
+        /// <inheritdoc/>
         public IPageContainer CurrentTemplate
         {
             get => _currentTemplate;
             set => Update(ref _currentTemplate, value);
         }
 
-        /// <summary>
-        /// Gets or sets project current document.
-        /// </summary>
+        /// <inheritdoc/>
         public IDocumentContainer CurrentDocument
         {
             get => _currentDocument;
             set => Update(ref _currentDocument, value);
         }
 
-        /// <summary>
-        /// Gets or sets project current container.
-        /// </summary>
+        /// <inheritdoc/>
         public IPageContainer CurrentContainer
         {
             get => _currentContainer;
             set => Update(ref _currentContainer, value);
         }
 
-        /// <summary>
-        /// Gets or sets currently selected object.
-        /// </summary>
+        /// <inheritdoc/>
         public IObservableObject Selected
         {
             get => _selected;
@@ -161,115 +132,6 @@ namespace Core2D.Containers
             {
                 SetSelected(value);
                 Update(ref _selected, value);
-            }
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="IProjectContainer"/> class.
-        /// </summary>
-        public ProjectContainer()
-            : base()
-        {
-            _options = Containers.Options.Create();
-            _styleLibraries = ImmutableArray.Create<Library<ShapeStyle>>();
-            _groupLibraries = ImmutableArray.Create<Library<IGroupShape>>();
-            _databases = ImmutableArray.Create<Database>();
-            _templates = ImmutableArray.Create<IPageContainer>();
-            _documents = ImmutableArray.Create<IDocumentContainer>();
-        }
-
-        /// <summary>
-        /// Set current document.
-        /// </summary>
-        /// <param name="document">The document instance.</param>
-        public void SetCurrentDocument(IDocumentContainer document)
-        {
-            CurrentDocument = document;
-            Selected = document;
-        }
-
-        /// <summary>
-        /// Set current container.
-        /// </summary>
-        /// <param name="container">The container instance.</param>
-        public void SetCurrentContainer(IPageContainer container)
-        {
-            CurrentContainer = container;
-            Selected = container;
-        }
-
-        /// <summary>
-        /// Set current template.
-        /// </summary>
-        /// <param name="template">The template instance.</param>
-        public void SetCurrentTemplate(IPageContainer template) => CurrentTemplate = template;
-
-        /// <summary>
-        /// Set current database.
-        /// </summary>
-        /// <param name="db">The database instance.</param>
-        public void SetCurrentDatabase(Database db) => CurrentDatabase = db;
-
-        /// <summary>
-        /// Set current group library.
-        /// </summary>
-        /// <param name="library">The group library instance.</param>
-        public void SetCurrentGroupLibrary(Library<IGroupShape> library) => CurrentGroupLibrary = library;
-
-        /// <summary>
-        /// Set current group.
-        /// </summary>
-        /// <param name="library">The style library instance.</param>
-        public void SetCurrentStyleLibrary(Library<ShapeStyle> library) => CurrentStyleLibrary = library;
-
-        /// <summary>
-        /// Set selected value.
-        /// </summary>
-        /// <param name="value">The value instance.</param>
-        public void SetSelected(IObservableObject value)
-        {
-            if (value is ILayerContainer layer)
-            {
-                var owner = layer?.Owner;
-                if (owner != null)
-                {
-                    if (owner.CurrentLayer != layer)
-                    {
-                        owner.CurrentLayer = layer;
-                    }
-                }
-            }
-            else if (value is IPageContainer container && _documents != null)
-            {
-                var document = _documents.FirstOrDefault(d => d.Pages.Contains(container));
-                if (document != null)
-                {
-                    if (CurrentDocument != document)
-                    {
-                        CurrentDocument = document;
-                    }
-
-                    if (CurrentContainer != container)
-                    {
-                        CurrentContainer = container;
-                        CurrentContainer.Invalidate();
-                    }
-                }
-            }
-            else if (value is IDocumentContainer document)
-            {
-                if (CurrentDocument != document)
-                {
-                    CurrentDocument = document;
-                    if (!CurrentDocument?.Pages.Contains(CurrentContainer) ?? false)
-                    {
-                        var current = CurrentDocument.Pages.FirstOrDefault();
-                        if (CurrentContainer != current)
-                        {
-                            CurrentContainer = current;
-                        }
-                    }
-                }
             }
         }
 
@@ -326,6 +188,94 @@ namespace Core2D.Containers
                 .SelectMany(l => l.Shapes);
 
             return GetAllShapes(shapes)?.Where(s => s is T).Cast<T>();
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="IProjectContainer"/> class.
+        /// </summary>
+        public ProjectContainer()
+            : base()
+        {
+            _options = Containers.Options.Create();
+            _styleLibraries = ImmutableArray.Create<Library<ShapeStyle>>();
+            _groupLibraries = ImmutableArray.Create<Library<IGroupShape>>();
+            _databases = ImmutableArray.Create<Database>();
+            _templates = ImmutableArray.Create<IPageContainer>();
+            _documents = ImmutableArray.Create<IDocumentContainer>();
+        }
+
+        /// <inheritdoc/>
+        public void SetCurrentDocument(IDocumentContainer document)
+        {
+            CurrentDocument = document;
+            Selected = document;
+        }
+
+        /// <inheritdoc/>
+        public void SetCurrentContainer(IPageContainer container)
+        {
+            CurrentContainer = container;
+            Selected = container;
+        }
+
+        /// <inheritdoc/>
+        public void SetCurrentTemplate(IPageContainer template) => CurrentTemplate = template;
+
+        /// <inheritdoc/>
+        public void SetCurrentDatabase(Database db) => CurrentDatabase = db;
+
+        /// <inheritdoc/>
+        public void SetCurrentGroupLibrary(Library<IGroupShape> library) => CurrentGroupLibrary = library;
+
+        /// <inheritdoc/>
+        public void SetCurrentStyleLibrary(Library<ShapeStyle> library) => CurrentStyleLibrary = library;
+
+        /// <inheritdoc/>
+        public void SetSelected(IObservableObject value)
+        {
+            if (value is ILayerContainer layer)
+            {
+                var owner = layer?.Owner;
+                if (owner != null)
+                {
+                    if (owner.CurrentLayer != layer)
+                    {
+                        owner.CurrentLayer = layer;
+                    }
+                }
+            }
+            else if (value is IPageContainer container && _documents != null)
+            {
+                var document = _documents.FirstOrDefault(d => d.Pages.Contains(container));
+                if (document != null)
+                {
+                    if (CurrentDocument != document)
+                    {
+                        CurrentDocument = document;
+                    }
+
+                    if (CurrentContainer != container)
+                    {
+                        CurrentContainer = container;
+                        CurrentContainer.Invalidate();
+                    }
+                }
+            }
+            else if (value is IDocumentContainer document)
+            {
+                if (CurrentDocument != document)
+                {
+                    CurrentDocument = document;
+                    if (!CurrentDocument?.Pages.Contains(CurrentContainer) ?? false)
+                    {
+                        var current = CurrentDocument.Pages.FirstOrDefault();
+                        if (CurrentContainer != current)
+                        {
+                            CurrentContainer = current;
+                        }
+                    }
+                }
+            }
         }
 
         /// <inheritdoc/>

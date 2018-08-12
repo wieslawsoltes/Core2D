@@ -1760,8 +1760,12 @@ namespace Core2D.Editor
                     {
                         bytes = FileIO?.ReadBinary(stream);
                     }
-                    var key = Project.AddImageFromFile(path, bytes);
-                    return key;
+                    if (Project is IImageCache imageCache)
+                    {
+                        var key = imageCache.AddImageFromFile(path, bytes);
+                        return key;
+                    }
+                    return null;
                 }
             }
 
@@ -1776,7 +1780,10 @@ namespace Core2D.Editor
         {
             if (key != null)
             {
-                Project?.RemoveImage(key);
+                if (Project is IImageCache imageCache)
+                {
+                    imageCache.RemoveImage(key);
+                }
             }
         }
 
@@ -1939,7 +1946,10 @@ namespace Core2D.Editor
             if (project != null)
             {
                 Deselect();
-                SetRenderersImageCache(project);
+                if (project is IImageCache imageCache)
+                {
+                    SetRenderersImageCache(imageCache);
+                }
                 Project = project;
                 Project.History = new StackHistory();
                 ProjectPath = path;
@@ -1967,8 +1977,10 @@ namespace Core2D.Editor
 
             if (Project != null)
             {
-                Project?.PurgeUnusedImages(Enumerable.Empty<string>().ToImmutableHashSet());
-
+                if (Project is IImageCache imageCache)
+                {
+                    imageCache.PurgeUnusedImages(Enumerable.Empty<string>().ToImmutableHashSet());
+                }
                 Deselect();
                 SetRenderersImageCache(null);
                 Project = null;
@@ -2430,9 +2442,9 @@ namespace Core2D.Editor
         /// Clone the <see cref="BaseShape"/> object.
         /// </summary>
         /// <typeparam name="T">The shape type.</typeparam>
-        /// <param name="shape">The <see cref="BaseShape"/> object.</param>
-        /// <returns>The cloned <see cref="BaseShape"/> object.</returns>
-        public T CloneShape<T>(T shape) where T : IBaseShape
+        /// <param name="shape">The <see cref="IBaseShape"/> object.</param>
+        /// <returns>The cloned <see cref="IBaseShape"/> object.</returns>
+        public T CloneShape<T>(IBaseShape shape) where T : class
         {
             try
             {

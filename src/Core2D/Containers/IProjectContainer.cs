@@ -82,5 +82,47 @@ namespace Core2D.Containers
         /// Gets or sets currently selected object.
         /// </summary>
         IObservableObject Selected { get; set; }
+
+        /// <summary>
+        /// Set current document.
+        /// </summary>
+        /// <param name="document">The document instance.</param>
+        void SetCurrentDocument(IDocumentContainer document);
+
+        /// <summary>
+        /// Set current container.
+        /// </summary>
+        /// <param name="container">The container instance.</param>
+        void SetCurrentContainer(IPageContainer container);
+
+        /// <summary>
+        /// Set current template.
+        /// </summary>
+        /// <param name="template">The template instance.</param>
+        void SetCurrentTemplate(IPageContainer template);
+
+        /// <summary>
+        /// Set current database.
+        /// </summary>
+        /// <param name="db">The database instance.</param>
+        void SetCurrentDatabase(Database db);
+
+        /// <summary>
+        /// Set current group library.
+        /// </summary>
+        /// <param name="library">The group library instance.</param>
+        void SetCurrentGroupLibrary(Library<IGroupShape> library);
+
+        /// <summary>
+        /// Set current group.
+        /// </summary>
+        /// <param name="library">The style library instance.</param>
+        void SetCurrentStyleLibrary(Library<ShapeStyle> library);
+
+        /// <summary>
+        /// Set selected value.
+        /// </summary>
+        /// <param name="value">The value instance.</param>
+        void SetSelected(IObservableObject value);
     }
 }

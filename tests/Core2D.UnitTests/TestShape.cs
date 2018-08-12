@@ -22,9 +22,9 @@ namespace Core2D.UnitTests
         public bool IsFilled { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
         public MatrixObject Transform { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
 
-#pragma warning disable 0067
+#pragma warning disable CS0067
         public event PropertyChangedEventHandler PropertyChanged;
-#pragma warning restore 0067
+#pragma warning restore CS0067
 
         public object BeginTransform(object dc, ShapeRenderer renderer)
         {

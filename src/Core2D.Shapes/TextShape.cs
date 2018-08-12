@@ -131,17 +131,17 @@ namespace Core2D.Shapes
         /// <summary>
         /// Creates a new <see cref="TextShape"/> instance.
         /// </summary>
-        /// <param name="x1">The X coordinate of <see cref="TextShape.TopLeft"/> corner point.</param>
-        /// <param name="y1">The Y coordinate of <see cref="TextShape.TopLeft"/> corner point.</param>
-        /// <param name="x2">The X coordinate of <see cref="TextShape.BottomRight"/> corner point.</param>
-        /// <param name="y2">The Y coordinate of <see cref="TextShape.BottomRight"/> corner point.</param>
+        /// <param name="x1">The X coordinate of <see cref="ITextShape.TopLeft"/> corner point.</param>
+        /// <param name="y1">The Y coordinate of <see cref="ITextShape.TopLeft"/> corner point.</param>
+        /// <param name="x2">The X coordinate of <see cref="ITextShape.BottomRight"/> corner point.</param>
+        /// <param name="y2">The Y coordinate of <see cref="ITextShape.BottomRight"/> corner point.</param>
         /// <param name="style">The shape style.</param>
         /// <param name="point">The point template.</param>
         /// <param name="text">The text string.</param>
         /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
         /// <param name="name">The shape name.</param>
         /// <returns>The new instance of the <see cref="TextShape"/> class.</returns>
-        public static TextShape Create(double x1, double y1, double x2, double y2, ShapeStyle style, BaseShape point, string text, bool isStroked = true, string name = "")
+        public static TextShape Create(double x1, double y1, double x2, double y2, ShapeStyle style, IBaseShape point, string text, bool isStroked = true, string name = "")
         {
             return new TextShape()
             {
@@ -157,15 +157,15 @@ namespace Core2D.Shapes
         /// <summary>
         /// Creates a new <see cref="TextShape"/> instance.
         /// </summary>
-        /// <param name="x">The X coordinate of <see cref="TextShape.TopLeft"/> and <see cref="TextShape.BottomRight"/> corner points.</param>
-        /// <param name="y">The Y coordinate of <see cref="TextShape.TopLeft"/> and <see cref="TextShape.BottomRight"/> corner points.</param>
+        /// <param name="x">The X coordinate of <see cref="ITextShape.TopLeft"/> and <see cref="ITextShape.BottomRight"/> corner points.</param>
+        /// <param name="y">The Y coordinate of <see cref="ITextShape.TopLeft"/> and <see cref="ITextShape.BottomRight"/> corner points.</param>
         /// <param name="style">The shape style.</param>
         /// <param name="point">The point template.</param>
         /// <param name="text">The text string.</param>
         /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
         /// <param name="name">The shape name.</param>
         /// <returns>The new instance of the <see cref="TextShape"/> class.</returns>
-        public static TextShape Create(double x, double y, ShapeStyle style, BaseShape point, string text, bool isStroked = true, string name = "")
+        public static TextShape Create(double x, double y, ShapeStyle style, IBaseShape point, string text, bool isStroked = true, string name = "")
         {
             return Create(x, y, x, y, style, point, text, isStroked, name);
         }
@@ -173,15 +173,15 @@ namespace Core2D.Shapes
         /// <summary>
         /// Creates a new <see cref="TextShape"/> instance.
         /// </summary>
-        /// <param name="topLeft">The <see cref="TextShape.TopLeft"/> corner point.</param>
-        /// <param name="bottomRight">The <see cref="TextShape.BottomRight"/> corner point.</param>
+        /// <param name="topLeft">The <see cref="ITextShape.TopLeft"/> corner point.</param>
+        /// <param name="bottomRight">The <see cref="ITextShape.BottomRight"/> corner point.</param>
         /// <param name="style">The shape style.</param>
         /// <param name="point">The point template.</param>
         /// <param name="text">The text string.</param>
         /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
         /// <param name="name">The shape name.</param>
         /// <returns>The new instance of the <see cref="TextShape"/> class.</returns>
-        public static TextShape Create(PointShape topLeft, PointShape bottomRight, ShapeStyle style, BaseShape point, string text, bool isStroked = true, string name = "")
+        public static TextShape Create(IPointShape topLeft, IPointShape bottomRight, ShapeStyle style, IBaseShape point, string text, bool isStroked = true, string name = "")
         {
             return new TextShape()
             {

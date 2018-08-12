@@ -4,7 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using Core2D.Attributes;
-using Core2D.Containers;
 using Core2D.Shapes;
 
 namespace Core2D.Containers
@@ -14,27 +13,21 @@ namespace Core2D.Containers
     /// </summary>
     public class LayerContainer : ObservableObject, ILayerContainer
     {
-        /// <summary>
-        /// Invalidate layer event.
-        /// </summary>
+        /// <inheritdoc/>
         public event InvalidateLayerEventHandler InvalidateLayer;
 
         private IPageContainer _owner;
         private bool _isVisible = true;
         private ImmutableArray<IBaseShape> _shapes;
 
-        /// <summary>
-        /// Gets or sets layer owner.
-        /// </summary>
+        /// <inheritdoc/>
         public IPageContainer Owner
         {
             get => _owner;
             set => Update(ref _owner, value);
         }
 
-        /// <summary>
-        /// Gets or sets flag indicating whether layer is visible.
-        /// </summary>
+        /// <inheritdoc/>
         public bool IsVisible
         {
             get => _isVisible;
@@ -45,9 +38,7 @@ namespace Core2D.Containers
             }
         }
 
-        /// <summary>
-        /// Gets or sets layer shapes.
-        /// </summary>
+        /// <inheritdoc/>
         [Content]
         public ImmutableArray<IBaseShape> Shapes
         {
@@ -60,9 +51,7 @@ namespace Core2D.Containers
         /// </summary>
         public LayerContainer() : base() => _shapes = ImmutableArray.Create<IBaseShape>();
 
-        /// <summary>
-        /// Invalidate layer shapes.
-        /// </summary>
+        /// <inheritdoc/>
         public void Invalidate() => InvalidateLayer?.Invoke(this, new InvalidateLayerEventArgs());
 
         /// <inheritdoc/>
