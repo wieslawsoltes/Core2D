@@ -154,6 +154,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TextFieldReader", "TextFiel
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TextFieldWriter", "TextFieldWriter", "{B2173907-773F-401C-A893-5FC9E0A58A44}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D.Shapes.Extensions", "src\Core2D.Shapes.Extensions\Core2D.Shapes.Extensions.csproj", "{06497A22-5B6B-40A3-988B-546FE9F8C32B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|AnyCPU = Debug|AnyCPU
@@ -280,6 +282,10 @@ Global
 		{C6FD981A-A5CF-48EE-B627-2B17CA12E236}.Debug|AnyCPU.Build.0 = Debug|Any CPU
 		{C6FD981A-A5CF-48EE-B627-2B17CA12E236}.Release|AnyCPU.ActiveCfg = Release|Any CPU
 		{C6FD981A-A5CF-48EE-B627-2B17CA12E236}.Release|AnyCPU.Build.0 = Release|Any CPU
+		{06497A22-5B6B-40A3-988B-546FE9F8C32B}.Debug|AnyCPU.ActiveCfg = Debug|Any CPU
+		{06497A22-5B6B-40A3-988B-546FE9F8C32B}.Debug|AnyCPU.Build.0 = Debug|Any CPU
+		{06497A22-5B6B-40A3-988B-546FE9F8C32B}.Release|AnyCPU.ActiveCfg = Release|Any CPU
+		{06497A22-5B6B-40A3-988B-546FE9F8C32B}.Release|AnyCPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -331,6 +337,7 @@ Global
 		{9325D645-3081-4DC3-9F0A-F597B4AE926F} = {BC6BAFE6-1735-4549-A7CC-819274780B38}
 		{80CEAF74-03B4-4609-BCD0-E0D56E726252} = {BC6BAFE6-1735-4549-A7CC-819274780B38}
 		{B2173907-773F-401C-A893-5FC9E0A58A44} = {BC6BAFE6-1735-4549-A7CC-819274780B38}
+		{06497A22-5B6B-40A3-988B-546FE9F8C32B} = {BC6BAFE6-1735-4549-A7CC-819274780B38}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2614B90F-C6F8-435C-8BD0-09AEE3ABAD2B}
