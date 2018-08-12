@@ -3,7 +3,7 @@
 using System;
 using System.Collections.Generic;
 using Core2D.Attributes;
-using Core2D.Shapes.Interfaces;
+using Core2D.Shapes;
 
 namespace Core2D.Style
 {

@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Text;
 using Core2D.Attributes;
-using Core2D.Shapes.Interfaces;
+using Core2D.Shapes;
 
 namespace Core2D.Path
 {

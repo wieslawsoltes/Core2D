@@ -3,7 +3,7 @@
 using System;
 using System.Collections.Immutable;
 using Core2D.Data;
-using Core2D.Shapes.Interfaces;
+using Core2D.Shapes;
 using Core2D.Style;
 using PdfSharp.Drawing;
 using PdfSharp.Pdf;
@@ -74,7 +74,7 @@ namespace Core2D.Renderer.PdfSharp
             }
         }
 
-        private static void DrawLineCurveInternal(XGraphics gfx, XPen pen, bool isStroked, ref XPoint pt1, ref XPoint pt2, double curvature, CurveOrientation orientation, Core2D.Shapes.Interfaces.PointAlignment pt1a, Core2D.Shapes.Interfaces.PointAlignment pt2a)
+        private static void DrawLineCurveInternal(XGraphics gfx, XPen pen, bool isStroked, ref XPoint pt1, ref XPoint pt2, double curvature, CurveOrientation orientation, Core2D.Shapes.PointAlignment pt1a, Core2D.Shapes.PointAlignment pt2a)
         {
             if (isStroked)
             {

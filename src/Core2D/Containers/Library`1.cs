@@ -6,7 +6,7 @@ using System.Collections.Immutable;
 using System.Linq;
 using Core2D.Attributes;
 
-namespace Core2D.Containers.Interfaces
+namespace Core2D.Containers
 {
     /// <summary>
     /// Named items library.

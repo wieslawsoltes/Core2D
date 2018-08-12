@@ -1,21 +1,21 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-namespace Core2D.Shapes.Interfaces
+namespace Core2D.Containers
 {
     /// <summary>
-    /// Defines line shape contract.
+    /// Specifies move modes.
     /// </summary>
-    public interface ILineShape : IBaseShape
+    public enum MoveMode
     {
         /// <summary>
-        /// Gets or sets start point.
+        /// Point move mode.
         /// </summary>
-        IPointShape Start { get; set; }
+        Point,
 
         /// <summary>
-        /// Gets or sets end point.
+        /// Shape move mode.
         /// </summary>
-        IPointShape End { get; set; }
+        Shape
     }
 }

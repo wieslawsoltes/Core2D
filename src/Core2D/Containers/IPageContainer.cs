@@ -3,10 +3,10 @@
 
 using System.Collections.Immutable;
 using Core2D.Data;
-using Core2D.Shapes.Interfaces;
+using Core2D.Shapes;
 using Core2D.Style;
 
-namespace Core2D.Containers.Interfaces
+namespace Core2D.Containers
 {
     /// <summary>
     /// Defines page container interface.

@@ -4,7 +4,7 @@ using System;
 using System.Collections.Immutable;
 using Core2D.Path;
 using Core2D.Path.Segments;
-using Core2D.Shapes.Interfaces;
+using Core2D.Shapes;
 using Xunit;
 
 namespace Core2D.UnitTests

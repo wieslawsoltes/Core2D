@@ -9,7 +9,7 @@ using Core2D.Editor.Tools.Selection;
 using Core2D.Path;
 using Core2D.Path.Segments;
 using static System.Math;
-using Core2D.Shapes.Interfaces;
+using Core2D.Shapes;
 
 namespace Core2D.Editor.Tools.Path
 {

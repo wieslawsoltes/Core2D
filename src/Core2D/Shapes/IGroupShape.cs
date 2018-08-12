@@ -3,7 +3,7 @@
 using System.Collections.Immutable;
 using Core2D.Data;
 
-namespace Core2D.Shapes.Interfaces
+namespace Core2D.Shapes
 {
     /// <summary>
     /// Defines group shape contract.

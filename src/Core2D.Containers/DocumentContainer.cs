@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using Core2D.Attributes;
-using Core2D.Containers.Interfaces;
+using Core2D.Containers;
 
 namespace Core2D.Containers
 {

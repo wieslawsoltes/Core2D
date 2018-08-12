@@ -6,7 +6,7 @@ using System.IO.Compression;
 using System.Linq;
 using Core2D.Interfaces;
 using Core2D.Renderer;
-using Core2D.Shapes.Interfaces;
+using Core2D.Shapes;
 
 namespace Core2D.Containers
 {

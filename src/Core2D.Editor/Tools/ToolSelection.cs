@@ -3,10 +3,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Core2D.Containers.Interfaces;
+using Core2D.Containers;
 using Core2D.Editor.Input;
 using Core2D.Editor.Tools.Settings;
-using Core2D.Shapes.Interfaces;
+using Core2D.Shapes;
 using Spatial;
 
 namespace Core2D.Editor.Tools

@@ -4,7 +4,7 @@ using System;
 using System.Collections.Immutable;
 using System.Diagnostics;
 using Core2D.Data;
-using Core2D.Shapes.Interfaces;
+using Core2D.Shapes;
 using Core2D.Style;
 using Spatial;
 using Spatial.Arc;

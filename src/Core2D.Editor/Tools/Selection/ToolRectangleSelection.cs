@@ -1,7 +1,7 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
-using Core2D.Containers.Interfaces;
-using Core2D.Shapes.Interfaces;
+using Core2D.Containers;
+using Core2D.Shapes;
 using Core2D.Style;
 
 namespace Core2D.Editor.Tools.Selection

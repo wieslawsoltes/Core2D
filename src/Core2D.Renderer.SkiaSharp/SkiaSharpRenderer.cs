@@ -3,7 +3,7 @@
 using System;
 using System.Collections.Immutable;
 using Core2D.Data;
-using Core2D.Shapes.Interfaces;
+using Core2D.Shapes;
 using Core2D.Style;
 using SkiaSharp;
 using Spatial;

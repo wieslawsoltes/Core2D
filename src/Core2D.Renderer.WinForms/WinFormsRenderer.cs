@@ -8,7 +8,7 @@ using Core2D.Data;
 using Spatial;
 using Spatial.Arc;
 using Core2D.Style;
-using Core2D.Shapes.Interfaces;
+using Core2D.Shapes;
 
 namespace Core2D.Renderer.WinForms
 {

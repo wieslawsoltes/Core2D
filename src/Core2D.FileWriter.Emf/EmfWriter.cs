@@ -1,11 +1,11 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
-using Core2D.Containers.Interfaces;
+using Core2D.Containers;
 using Core2D.Data;
 using Core2D.Interfaces;
 using Core2D.Renderer;
 using Core2D.Renderer.WinForms;
-using Core2D.Shapes.Interfaces;
+using Core2D.Shapes;
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;

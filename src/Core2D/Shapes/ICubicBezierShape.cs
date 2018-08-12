@@ -1,12 +1,12 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-namespace Core2D.Shapes.Interfaces
+namespace Core2D.Shapes
 {
     /// <summary>
-    /// Defines quadratic bezier shape contract.
+    /// Defines cubic bezier shape contract.
     /// </summary>
-    public interface IQuadraticBezierShape : IBaseShape
+    public interface ICubicBezierShape : IBaseShape
     {
         /// <summary>
         /// Gets or sets start point.
@@ -14,13 +14,18 @@ namespace Core2D.Shapes.Interfaces
         IPointShape Point1 { get; set; }
 
         /// <summary>
-        /// Gets or sets control point.
+        /// Gets or sets first control point.
         /// </summary>
         IPointShape Point2 { get; set; }
 
         /// <summary>
-        /// Gets or sets end point.
+        /// Gets or sets second control point.
         /// </summary>
         IPointShape Point3 { get; set; }
+
+        /// <summary>
+        /// Gets or sets end point.
+        /// </summary>
+        IPointShape Point4 { get; set; }
     }
 }

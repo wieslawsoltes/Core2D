@@ -6,7 +6,7 @@ using System.Collections.Immutable;
 using System.Globalization;
 using Core2D.Path;
 using Core2D.Path.Segments;
-using Core2D.Shapes.Interfaces;
+using Core2D.Shapes;
 using W = System.Windows;
 using WM = System.Windows.Media;
 

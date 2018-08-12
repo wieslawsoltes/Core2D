@@ -3,14 +3,14 @@
 using System;
 using System.Collections.Immutable;
 using System.Linq;
-using Core2D.Containers.Interfaces;
+using Core2D.Containers;
 using Core2D.Data;
 using Core2D.Editor.Recent;
 using Core2D.Interfaces;
 using Core2D.Path;
 using Core2D.Path.Segments;
 using Core2D.Renderer;
-using Core2D.Shapes.Interfaces;
+using Core2D.Shapes;
 using Core2D.Style;
 
 namespace Core2D.Editor.Designer

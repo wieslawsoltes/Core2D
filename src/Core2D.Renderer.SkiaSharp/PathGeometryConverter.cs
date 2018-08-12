@@ -3,7 +3,7 @@
 using System;
 using Core2D.Path;
 using Core2D.Path.Segments;
-using Core2D.Shapes.Interfaces;
+using Core2D.Shapes;
 using SkiaSharp;
 
 namespace Core2D.Renderer.SkiaSharp

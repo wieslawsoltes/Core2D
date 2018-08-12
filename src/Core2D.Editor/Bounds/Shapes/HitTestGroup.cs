@@ -3,7 +3,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Core2D.Shapes.Interfaces;
+using Core2D.Shapes;
 using Spatial;
 
 namespace Core2D.Editor.Bounds.Shapes
