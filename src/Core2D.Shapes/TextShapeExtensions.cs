@@ -94,7 +94,7 @@ namespace Core2D.Shapes
         }
 
         /// <summary>
-        /// Bind properties or data record to <see cref="TextShape.Text"/> property.
+        /// Bind properties or data record to <see cref="ITextShape.Text"/> property.
         /// </summary>
         /// <param name="text">The text shape instance.</param>
         /// <param name="db">The properties database used for binding.</param>
