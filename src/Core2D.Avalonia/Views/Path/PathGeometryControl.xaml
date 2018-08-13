@@ -29,14 +29,14 @@
                     </Style>
                 </TreeView.Styles>
                 <TreeView.DataTemplates>
-                    <TreeDataTemplate DataType="PathCore:PathFigure" ItemsSource="{Binding Segments}">
+                    <TreeDataTemplate DataType="PathCore:IPathFigure" ItemsSource="{Binding Segments}">
                         <TextBlock Text="{Binding Mode=OneWay, Converter={StaticResource ObjectToTypeStringConverter}}" Classes="tree drag">
                             <i:Interaction.Behaviors>
                                 <id:DragBehavior Context="{Binding}"/>
                             </i:Interaction.Behaviors>
                         </TextBlock>
                     </TreeDataTemplate>
-                    <DataTemplate DataType="PathCore:PathSegment">
+                    <DataTemplate DataType="PathCore:IPathSegment">
                         <TextBlock Text="{Binding Mode=OneWay, Converter={StaticResource ObjectToTypeStringConverter}}" Classes="tree drag">
                             <i:Interaction.Behaviors>
                                 <id:DragBehavior Context="{Binding}"/>

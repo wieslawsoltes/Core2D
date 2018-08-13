@@ -62,6 +62,7 @@ namespace Core2D.Path
         /// </summary>
         public PathFigure()
         {
+            StartPoint = PointShape.Create();
             Segments = ImmutableArray.Create<IPathSegment>();
         }
 

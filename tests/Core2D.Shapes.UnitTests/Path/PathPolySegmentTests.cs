@@ -1,7 +1,6 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System.Collections.Immutable;
-using Core2D.Common.UnitTests;
 using Core2D.Path;
 using Core2D.Shapes;
 using Xunit;
@@ -22,16 +21,16 @@ namespace Core2D.UnitTests
             Assert.Equal(string.Empty, actual);
         }
 
-        [Fact(Skip = "Path types will be refactored.")]
+        [Fact]
         [Trait("Core2D.Path", "Geometry")]
         public void ToString_Should_Return_Points()
         {
             var segment = new Class1();
 
             var target = ImmutableArray.Create<IPointShape>();
-            target = target.Add(new TestPointShape());
-            target = target.Add(new TestPointShape());
-            target = target.Add(new TestPointShape());
+            target = target.Add(new PointShape());
+            target = target.Add(new PointShape());
+            target = target.Add(new PointShape());
 
             var actual = segment.ToString(target);
 

@@ -2,7 +2,6 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
 using System.Collections.Immutable;
-using Core2D.Common.UnitTests;
 using Core2D.Path;
 using Core2D.Path.Segments;
 using Core2D.Shapes;
@@ -35,7 +34,7 @@ namespace Core2D.UnitTests
             var target = new PathGeometryContext(geometry);
             Assert.Empty(geometry.Figures);
 
-            target.BeginFigure(new TestPointShape());
+            target.BeginFigure(new PointShape());
             Assert.NotNull(geometry.Figures[0]);
             Assert.True(geometry.Figures[0].IsFilled);
             Assert.True(geometry.Figures[0].IsClosed);
@@ -50,10 +49,10 @@ namespace Core2D.UnitTests
         {
             var geometry = new PathGeometry();
             var target = new PathGeometryContext(geometry);
-            target.BeginFigure(new TestPointShape());
+            target.BeginFigure(new PointShape());
             Assert.Empty(geometry.Figures[0].Segments);
 
-            target.LineTo(new TestPointShape());
+            target.LineTo(new PointShape());
 
             var segment = geometry.Figures[0].Segments[0];
             Assert.IsType<LineSegment>(segment);
@@ -67,10 +66,10 @@ namespace Core2D.UnitTests
         {
             var geometry = new PathGeometry();
             var target = new PathGeometryContext(geometry);
-            target.BeginFigure(new TestPointShape());
+            target.BeginFigure(new PointShape());
             Assert.Empty(geometry.Figures[0].Segments);
 
-            target.ArcTo(new TestPointShape(), new PathSize());
+            target.ArcTo(new PointShape(), new PathSize());
 
             var segment = geometry.Figures[0].Segments[0];
             Assert.IsType<ArcSegment>(segment);
@@ -84,10 +83,10 @@ namespace Core2D.UnitTests
         {
             var geometry = new PathGeometry();
             var target = new PathGeometryContext(geometry);
-            target.BeginFigure(new TestPointShape());
+            target.BeginFigure(new PointShape());
             Assert.Empty(geometry.Figures[0].Segments);
 
-            target.CubicBezierTo(new TestPointShape(), new TestPointShape(), new TestPointShape());
+            target.CubicBezierTo(new PointShape(), new PointShape(), new PointShape());
 
             var segment = geometry.Figures[0].Segments[0];
             Assert.IsType<CubicBezierSegment>(segment);
@@ -101,10 +100,10 @@ namespace Core2D.UnitTests
         {
             var geometry = new PathGeometry();
             var target = new PathGeometryContext(geometry);
-            target.BeginFigure(new TestPointShape());
+            target.BeginFigure(new PointShape());
             Assert.Empty(geometry.Figures[0].Segments);
 
-            target.QuadraticBezierTo(new TestPointShape(), new TestPointShape());
+            target.QuadraticBezierTo(new PointShape(), new PointShape());
 
             var segment = geometry.Figures[0].Segments[0];
             Assert.IsType<QuadraticBezierSegment>(segment);
@@ -118,10 +117,10 @@ namespace Core2D.UnitTests
         {
             var geometry = new PathGeometry();
             var target = new PathGeometryContext(geometry);
-            target.BeginFigure(new TestPointShape());
+            target.BeginFigure(new PointShape());
             Assert.Empty(geometry.Figures[0].Segments);
             
-            target.PolyLineTo(ImmutableArray.Create<IPointShape>(new TestPointShape(), new TestPointShape(), new TestPointShape()));
+            target.PolyLineTo(ImmutableArray.Create<IPointShape>(new PointShape(), new PointShape(), new PointShape()));
 
             var segment = geometry.Figures[0].Segments[0];
             Assert.IsType<PolyLineSegment>(segment);
@@ -135,10 +134,10 @@ namespace Core2D.UnitTests
         {
             var geometry = new PathGeometry();
             var target = new PathGeometryContext(geometry);
-            target.BeginFigure(new TestPointShape());
+            target.BeginFigure(new PointShape());
             Assert.Empty(geometry.Figures[0].Segments);
 
-            target.PolyCubicBezierTo(ImmutableArray.Create<IPointShape>(new TestPointShape(), new TestPointShape(), new TestPointShape()));
+            target.PolyCubicBezierTo(ImmutableArray.Create<IPointShape>(new PointShape(), new PointShape(), new PointShape()));
 
             var segment = geometry.Figures[0].Segments[0];
             Assert.IsType<PolyCubicBezierSegment>(segment);
@@ -152,10 +151,10 @@ namespace Core2D.UnitTests
         {
             var geometry = new PathGeometry();
             var target = new PathGeometryContext(geometry);
-            target.BeginFigure(new TestPointShape());
+            target.BeginFigure(new PointShape());
             Assert.Empty(geometry.Figures[0].Segments);
 
-            target.PolyQuadraticBezierTo(ImmutableArray.Create<IPointShape>(new TestPointShape(), new TestPointShape(), new TestPointShape()));
+            target.PolyQuadraticBezierTo(ImmutableArray.Create<IPointShape>(new PointShape(), new PointShape(), new PointShape()));
 
             var segment = geometry.Figures[0].Segments[0];
             Assert.IsType<PolyQuadraticBezierSegment>(segment);

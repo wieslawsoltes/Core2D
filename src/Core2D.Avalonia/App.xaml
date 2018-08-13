@@ -728,7 +728,7 @@
             <shapes:PathControl/>
         </DataTemplate>
         <!-- Path -->
-        <DataTemplate DataType="PathCore:PathSize">
+        <DataTemplate DataType="PathCore:IPathSize">
             <path:PathSizeControl/>
         </DataTemplate>
         <DataTemplate DataType="Segments:ArcSegment">
@@ -752,10 +752,10 @@
         <DataTemplate DataType="Segments:QuadraticBezierSegment">
             <path:QuadraticBezierSegmentControl/>
         </DataTemplate>
-        <DataTemplate DataType="PathCore:PathFigure">
+        <DataTemplate DataType="PathCore:IPathFigure">
             <path:PathFigureControl/>
         </DataTemplate>
-        <DataTemplate DataType="PathCore:PathGeometry">
+        <DataTemplate DataType="PathCore:IPathGeometry">
             <path:PathGeometryControl/>
         </DataTemplate>
         <!-- Containers -->
