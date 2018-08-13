@@ -138,7 +138,7 @@ namespace Core2D.Shapes
         /// </summary>
         /// <param name="name">The group name.</param>
         /// <returns>The new instance of the <see cref="GroupShape"/> class.</returns>
-        public static GroupShape Create(string name)
+        public static IGroupShape Create(string name)
         {
             return new GroupShape()
             {

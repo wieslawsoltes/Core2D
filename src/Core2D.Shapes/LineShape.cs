@@ -126,7 +126,7 @@ namespace Core2D.Shapes
         /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
         /// <param name="name">The shape name.</param>
         /// <returns>The new instance of the <see cref="LineShape"/> class.</returns>
-        public static LineShape Create(IPointShape start, IPointShape end, ShapeStyle style, IBaseShape point, bool isStroked = true, string name = "")
+        public static ILineShape Create(IPointShape start, IPointShape end, ShapeStyle style, IBaseShape point, bool isStroked = true, string name = "")
         {
             return new LineShape()
             {
@@ -151,7 +151,7 @@ namespace Core2D.Shapes
         /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
         /// <param name="name">The shape name.</param>
         /// <returns>The new instance of the <see cref="LineShape"/> class.</returns>
-        public static LineShape Create(double x1, double y1, double x2, double y2, ShapeStyle style, IBaseShape point, bool isStroked = true, string name = "")
+        public static ILineShape Create(double x1, double y1, double x2, double y2, ShapeStyle style, IBaseShape point, bool isStroked = true, string name = "")
         {
             return new LineShape()
             {
@@ -174,7 +174,7 @@ namespace Core2D.Shapes
         /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
         /// <param name="name">The shape name.</param>
         /// <returns>The new instance of the <see cref="LineShape"/> class.</returns>
-        public static LineShape Create(double x, double y, ShapeStyle style, IBaseShape point, bool isStroked = true, string name = "")
+        public static ILineShape Create(double x, double y, ShapeStyle style, IBaseShape point, bool isStroked = true, string name = "")
         {
             return Create(x, y, x, y, style, point, isStroked, name);
         }

@@ -177,7 +177,7 @@ namespace Core2D.Shapes
         /// <param name="isFilled">The flag indicating whether shape is filled.</param>
         /// <param name="name">The shape name.</param>
         /// <returns>The new instance of the <see cref="ArcShape"/> class.</returns>
-        public static ArcShape Create(double x1, double y1, double x2, double y2, double x3, double y3, double x4, double y4, ShapeStyle style, IBaseShape point, bool isStroked = true, bool isFilled = false, string name = "")
+        public static IArcShape Create(double x1, double y1, double x2, double y2, double x3, double y3, double x4, double y4, ShapeStyle style, IBaseShape point, bool isStroked = true, bool isFilled = false, string name = "")
         {
             return new ArcShape()
             {
@@ -203,7 +203,7 @@ namespace Core2D.Shapes
         /// <param name="isFilled">The flag indicating whether shape is filled.</param>
         /// <param name="name">The shape name.</param>
         /// <returns>The new instance of the <see cref="ArcShape"/> class.</returns>
-        public static ArcShape Create(double x, double y, ShapeStyle style, IBaseShape point, bool isStroked = true, bool isFilled = false, string name = "")
+        public static IArcShape Create(double x, double y, ShapeStyle style, IBaseShape point, bool isStroked = true, bool isFilled = false, string name = "")
         {
             return Create(x, y, x, y, x, y, x, y, style, point, isStroked, isFilled, name);
         }
@@ -221,7 +221,7 @@ namespace Core2D.Shapes
         /// <param name="isFilled">The flag indicating whether shape is filled.</param>
         /// <param name="name">The shape name.</param>
         /// <returns>The new instance of the <see cref="ArcShape"/> class.</returns>
-        public static ArcShape Create(IPointShape point1, IPointShape point2, IPointShape point3, IPointShape point4, ShapeStyle style, IBaseShape point, bool isStroked = true, bool isFilled = false, string name = "")
+        public static IArcShape Create(IPointShape point1, IPointShape point2, IPointShape point3, IPointShape point4, ShapeStyle style, IBaseShape point, bool isStroked = true, bool isFilled = false, string name = "")
         {
             return new ArcShape()
             {

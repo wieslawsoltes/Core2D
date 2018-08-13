@@ -11,7 +11,7 @@ namespace Core2D.UnitTests
         [Trait("Core2D.Containers", "Project")]
         public void Inherits_From_ObservableObject()
         {
-            var target = new Library<PageContainer>();
+            var target = new Library<IPageContainer>();
             Assert.True(target is ObservableObject);
         }
 
@@ -19,7 +19,7 @@ namespace Core2D.UnitTests
         [Trait("Core2D.Containers", "Project")]
         public void Items_Not_Null()
         {
-            var target = new Library<PageContainer>();
+            var target = new Library<IPageContainer>();
             Assert.False(target.Items.IsDefault);
         }
 
@@ -27,7 +27,7 @@ namespace Core2D.UnitTests
         [Trait("Core2D.Containers", "Project")]
         public void Selected_Is_Null()
         {
-            var target = new Library<PageContainer>();
+            var target = new Library<IPageContainer>();
             Assert.Null(target.Selected);
         }
 
@@ -35,7 +35,7 @@ namespace Core2D.UnitTests
         [Trait("Core2D.Containers", "Project")]
         public void SetSelected_Sets_Selected()
         {
-            var target = new Library<PageContainer>();
+            var target = new Library<IPageContainer>();
 
             var item = PageContainer.CreateTemplate();
             target.Items = target.Items.Add(item);

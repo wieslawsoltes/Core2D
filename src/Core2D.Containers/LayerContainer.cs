@@ -67,7 +67,7 @@ namespace Core2D.Containers
         /// <param name="owner">The layer owner.</param>
         /// <param name="isVisible">The flag indicating whether layer is visible.</param>
         /// <returns>The new instance of the <see cref="LayerContainer"/>.</returns>
-        public static LayerContainer Create(string name = "Layer", IPageContainer owner = null, bool isVisible = true)
+        public static ILayerContainer Create(string name = "Layer", IPageContainer owner = null, bool isVisible = true)
         {
             return new LayerContainer()
             {

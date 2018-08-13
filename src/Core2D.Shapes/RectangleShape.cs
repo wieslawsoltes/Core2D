@@ -93,7 +93,7 @@ namespace Core2D.Shapes
         /// <param name="text">The text string.</param>
         /// <param name="name">The shape name.</param>
         /// <returns>The new instance of the <see cref="RectangleShape"/> class.</returns>
-        public static RectangleShape Create(double x1, double y1, double x2, double y2, ShapeStyle style, IBaseShape point, bool isStroked = true, bool isFilled = false, string text = null, string name = "")
+        public static IRectangleShape Create(double x1, double y1, double x2, double y2, ShapeStyle style, IBaseShape point, bool isStroked = true, bool isFilled = false, string text = null, string name = "")
         {
             return new RectangleShape()
             {
@@ -124,7 +124,7 @@ namespace Core2D.Shapes
         /// <param name="text">The text string.</param>
         /// <param name="name">The shape name.</param>
         /// <returns>The new instance of the <see cref="RectangleShape"/> class.</returns>
-        public static RectangleShape Create(double x, double y, ShapeStyle style, IBaseShape point, bool isStroked = true, bool isFilled = false, string text = null, string name = "")
+        public static IRectangleShape Create(double x, double y, ShapeStyle style, IBaseShape point, bool isStroked = true, bool isFilled = false, string text = null, string name = "")
         {
             return Create(x, y, x, y, style, point, isStroked, isFilled, text, name);
         }
@@ -141,7 +141,7 @@ namespace Core2D.Shapes
         /// <param name="text">The text string.</param>
         /// <param name="name">The shape name.</param>
         /// <returns>The new instance of the <see cref="RectangleShape"/> class.</returns>
-        public static RectangleShape Create(IPointShape topLeft, IPointShape bottomRight, ShapeStyle style, IBaseShape point, bool isStroked = true, bool isFilled = false, string text = null, string name = "")
+        public static IRectangleShape Create(IPointShape topLeft, IPointShape bottomRight, ShapeStyle style, IBaseShape point, bool isStroked = true, bool isFilled = false, string text = null, string name = "")
         {
             return new RectangleShape()
             {

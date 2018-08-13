@@ -137,7 +137,7 @@ namespace Core2D.Shapes
         /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
         /// <param name="name">The shape name.</param>
         /// <returns>The new instance of the <see cref="TextShape"/> class.</returns>
-        public static TextShape Create(double x1, double y1, double x2, double y2, ShapeStyle style, IBaseShape point, string text, bool isStroked = true, string name = "")
+        public static ITextShape Create(double x1, double y1, double x2, double y2, ShapeStyle style, IBaseShape point, string text, bool isStroked = true, string name = "")
         {
             return new TextShape()
             {
@@ -161,7 +161,7 @@ namespace Core2D.Shapes
         /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
         /// <param name="name">The shape name.</param>
         /// <returns>The new instance of the <see cref="TextShape"/> class.</returns>
-        public static TextShape Create(double x, double y, ShapeStyle style, IBaseShape point, string text, bool isStroked = true, string name = "")
+        public static ITextShape Create(double x, double y, ShapeStyle style, IBaseShape point, string text, bool isStroked = true, string name = "")
         {
             return Create(x, y, x, y, style, point, text, isStroked, name);
         }
@@ -177,7 +177,7 @@ namespace Core2D.Shapes
         /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
         /// <param name="name">The shape name.</param>
         /// <returns>The new instance of the <see cref="TextShape"/> class.</returns>
-        public static TextShape Create(IPointShape topLeft, IPointShape bottomRight, ShapeStyle style, IBaseShape point, string text, bool isStroked = true, string name = "")
+        public static ITextShape Create(IPointShape topLeft, IPointShape bottomRight, ShapeStyle style, IBaseShape point, string text, bool isStroked = true, string name = "")
         {
             return new TextShape()
             {

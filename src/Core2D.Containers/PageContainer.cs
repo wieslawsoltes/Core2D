@@ -225,7 +225,7 @@ namespace Core2D.Containers
         /// </summary>
         /// <param name="name">The page name.</param>
         /// <returns>The new instance of the <see cref="PageContainer"/>.</returns>
-        public static PageContainer CreatePage(string name = "Page")
+        public static IPageContainer CreatePage(string name = "Page")
         {
             var page = new PageContainer()
             {
@@ -252,7 +252,7 @@ namespace Core2D.Containers
         /// <param name="width">The template width.</param>
         /// <param name="height">The template height.</param>
         /// <returns>The new instance of the <see cref="PageContainer"/>.</returns>
-        public static PageContainer CreateTemplate(string name = "Template", double width = 840, double height = 600)
+        public static IPageContainer CreateTemplate(string name = "Template", double width = 840, double height = 600)
         {
             var template = new PageContainer()
             {

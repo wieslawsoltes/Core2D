@@ -52,7 +52,7 @@ namespace Core2D.Shapes
         /// <param name="text">The text string.</param>
         /// <param name="name">The shape name.</param>
         /// <returns>The new instance of the <see cref="EllipseShape"/> class.</returns>
-        public static EllipseShape Create(double x1, double y1, double x2, double y2, ShapeStyle style, IBaseShape point, bool isStroked = true, bool isFilled = false, string text = null, string name = "")
+        public static IEllipseShape Create(double x1, double y1, double x2, double y2, ShapeStyle style, IBaseShape point, bool isStroked = true, bool isFilled = false, string text = null, string name = "")
         {
             return new EllipseShape()
             {
@@ -78,7 +78,7 @@ namespace Core2D.Shapes
         /// <param name="text">The text string.</param>
         /// <param name="name">The shape name.</param>
         /// <returns>The new instance of the <see cref="EllipseShape"/> class.</returns>
-        public static EllipseShape Create(double x, double y, ShapeStyle style, IBaseShape point, bool isStroked = true, bool isFilled = false, string text = null, string name = "")
+        public static IEllipseShape Create(double x, double y, ShapeStyle style, IBaseShape point, bool isStroked = true, bool isFilled = false, string text = null, string name = "")
         {
             return Create(x, y, x, y, style, point, isStroked, isFilled, text, name);
         }
@@ -95,7 +95,7 @@ namespace Core2D.Shapes
         /// <param name="text">The text string.</param>
         /// <param name="name">The shape name.</param>
         /// <returns>The new instance of the <see cref="EllipseShape"/> class.</returns>
-        public static EllipseShape Create(IPointShape topLeft, IPointShape bottomRight, ShapeStyle style, IBaseShape point, bool isStroked = true, bool isFilled = false, string text = null, string name = "")
+        public static IEllipseShape Create(IPointShape topLeft, IPointShape bottomRight, ShapeStyle style, IBaseShape point, bool isStroked = true, bool isFilled = false, string text = null, string name = "")
         {
             return new EllipseShape()
             {

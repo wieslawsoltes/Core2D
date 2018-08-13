@@ -130,7 +130,7 @@ namespace Core2D.Shapes
         /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
         /// <param name="isFilled">The flag indicating whether shape is filled.</param>
         /// <returns>The new instance of the <see cref="PathShape"/> class.</returns>
-        public static PathShape Create(ShapeStyle style, IPathGeometry geometry, bool isStroked = true, bool isFilled = true)
+        public static IPathShape Create(ShapeStyle style, IPathGeometry geometry, bool isStroked = true, bool isFilled = true)
         {
             return new PathShape()
             {
@@ -150,7 +150,7 @@ namespace Core2D.Shapes
         /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
         /// <param name="isFilled">The flag indicating whether shape is filled.</param>
         /// <returns>The new instance of the <see cref="PathShape"/> class.</returns>
-        public static PathShape Create(string name, ShapeStyle style, IPathGeometry geometry, bool isStroked = true, bool isFilled = true)
+        public static IPathShape Create(string name, ShapeStyle style, IPathGeometry geometry, bool isStroked = true, bool isFilled = true)
         {
             return new PathShape()
             {

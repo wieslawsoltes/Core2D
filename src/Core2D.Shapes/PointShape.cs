@@ -94,7 +94,7 @@ namespace Core2D.Shapes
         /// <param name="alignment">The point alignment.</param>
         /// <param name="name">The shape name.</param>
         /// <returns>The new instance of the <see cref="PointShape"/> class.</returns>
-        public static PointShape Create(double x = 0.0, double y = 0.0, IBaseShape shape = null, PointAlignment alignment = PointAlignment.None, string name = "")
+        public static IPointShape Create(double x = 0.0, double y = 0.0, IBaseShape shape = null, PointAlignment alignment = PointAlignment.None, string name = "")
         {
             return new PointShape()
             {
@@ -111,7 +111,7 @@ namespace Core2D.Shapes
         /// Clone current instance of the <see cref="PointShape"/>.
         /// </summary>
         /// <returns>The new instance of the <see cref="PointShape"/> class.</returns>
-        public PointShape Clone()
+        public IPointShape Clone()
         {
             var data = Context.Create(Data.Record);
 

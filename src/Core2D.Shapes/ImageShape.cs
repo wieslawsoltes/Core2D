@@ -62,7 +62,7 @@ namespace Core2D.Shapes
         /// <param name="text">The text string.</param>
         /// <param name="name">The shape name.</param>
         /// <returns>The new instance of the <see cref="ImageShape"/> class.</returns>
-        public static ImageShape Create(double x1, double y1, double x2, double y2, ShapeStyle style, IBaseShape point, string key, bool isStroked = false, bool isFilled = false, string text = null, string name = "")
+        public static IImageShape Create(double x1, double y1, double x2, double y2, ShapeStyle style, IBaseShape point, string key, bool isStroked = false, bool isFilled = false, string text = null, string name = "")
         {
             return new ImageShape()
             {
@@ -90,7 +90,7 @@ namespace Core2D.Shapes
         /// <param name="text">The text string.</param>
         /// <param name="name">The shape name.</param>
         /// <returns>The new instance of the <see cref="ImageShape"/> class.</returns>
-        public static ImageShape Create(double x, double y, ShapeStyle style, IBaseShape point, string key, bool isStroked = false, bool isFilled = false, string text = null, string name = "")
+        public static IImageShape Create(double x, double y, ShapeStyle style, IBaseShape point, string key, bool isStroked = false, bool isFilled = false, string text = null, string name = "")
         {
             return Create(x, y, x, y, style, point, key, isStroked, isFilled, text, name);
         }
@@ -108,7 +108,7 @@ namespace Core2D.Shapes
         /// <param name="text">The text string.</param>
         /// <param name="name">The shape name.</param>
         /// <returns>The new instance of the <see cref="ImageShape"/> class.</returns>
-        public static ImageShape Create(IPointShape topLeft, IPointShape bottomRight, ShapeStyle style, IBaseShape point, string key, bool isStroked = false, bool isFilled = false, string text = null, string name = "")
+        public static IImageShape Create(IPointShape topLeft, IPointShape bottomRight, ShapeStyle style, IBaseShape point, string key, bool isStroked = false, bool isFilled = false, string text = null, string name = "")
         {
             return new ImageShape()
             {
