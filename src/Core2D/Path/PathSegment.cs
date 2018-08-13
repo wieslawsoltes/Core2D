@@ -9,33 +9,26 @@ namespace Core2D.Path
     /// <summary>
     /// <see cref="PathFigure"/> segment base class.
     /// </summary>
-    public abstract class PathSegment : ObservableObject, ICopyable
+    public abstract class PathSegment : ObservableObject, IPathSegment
     {
         private bool _isStroked;
         private bool _isSmoothJoin;
 
-        /// <summary>
-        /// Gets or sets flag indicating whether segment is stroked.
-        /// </summary>
+        /// <inheritdoc/>
         public bool IsStroked
         {
             get => _isStroked;
             set => Update(ref _isStroked, value);
         }
 
-        /// <summary>
-        /// Gets or sets flag indicating whether segment is smooth join.
-        /// </summary>
+        /// <inheritdoc/>
         public bool IsSmoothJoin
         {
             get => _isSmoothJoin;
             set => Update(ref _isSmoothJoin, value);
         }
 
-        /// <summary>
-        /// Get all points in the segment.
-        /// </summary>
-        /// <returns>All points in the segment.</returns>
+        /// <inheritdoc/>
         public abstract IEnumerable<IPointShape> GetPoints();
 
         /// <inheritdoc/>

@@ -301,7 +301,7 @@ namespace Core2D.Renderer.Dxf
             }
         }
 
-        private void CreateHatchBoundsAndEntitiess(PathGeometry pg, double dx, double dy, out IList<DXFE.HatchBoundaryPath> bounds, out ICollection<DXFE.EntityObject> entities)
+        private void CreateHatchBoundsAndEntitiess(IPathGeometry pg, double dx, double dy, out IList<DXFE.HatchBoundaryPath> bounds, out ICollection<DXFE.EntityObject> entities)
         {
             bounds = new List<DXFE.HatchBoundaryPath>();
             entities = new List<DXFE.EntityObject>();

@@ -21,7 +21,7 @@ namespace Core2D.Renderer.SkiaSharp
         /// <param name="dy"></param>
         /// <param name="scale"></param>
         /// <returns></returns>
-        public static SKPath ToSKPath(this PathGeometry xpg, double dx, double dy, Func<double, float> scale)
+        public static SKPath ToSKPath(this IPathGeometry xpg, double dx, double dy, Func<double, float> scale)
         {
             var path = new SKPath
             {

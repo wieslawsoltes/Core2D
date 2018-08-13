@@ -121,11 +121,11 @@ namespace Core2D.Interfaces
         IQuadraticBezierShape QuadraticBezier(IPointShape point1, IPointShape point2, IPointShape point3, bool isStroked, bool isFilled);
 
         /// <summary>
-        /// Creates a new instance of the <see cref="PathGeometry"/> class.
+        /// Creates a new instance of the <see cref="IPathGeometry"/> class.
         /// </summary>
         /// <param name="fillRule">The path geometry fill rule.</param>
-        /// <returns>The new instance of the <see cref="PathGeometry"/> class.</returns>
-        PathGeometry Geometry(FillRule fillRule);
+        /// <returns>The new instance of the <see cref="IPathGeometry"/> class.</returns>
+        IPathGeometry Geometry(FillRule fillRule);
 
         /// <summary>
         /// Creates a new instance of the <see cref="IPathShape"/> class.
@@ -134,7 +134,7 @@ namespace Core2D.Interfaces
         /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
         /// <param name="isFilled">The flag indicating whether shape is filled.</param>
         /// <returns>The new instance of the <see cref="IPathShape"/> class.</returns>
-        IPathShape Path(PathGeometry geometry, bool isStroked, bool isFilled);
+        IPathShape Path(IPathGeometry geometry, bool isStroked, bool isFilled);
 
         /// <summary>
         /// Creates a new instance of the <see cref="IRectangleShape"/> class.

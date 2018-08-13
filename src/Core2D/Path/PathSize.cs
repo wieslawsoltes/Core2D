@@ -1,6 +1,5 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
-
 using System;
 using System.Collections.Generic;
 
@@ -9,23 +8,19 @@ namespace Core2D.Path
     /// <summary>
     /// Path size.
     /// </summary>
-    public class PathSize : ObservableObject, ICopyable
+    public class PathSize : ObservableObject, IPathSize
     {
         private double _width;
         private double _height;
 
-        /// <summary>
-        /// Gets or sets width value.
-        /// </summary>
+        /// <inheritdoc/>
         public double Width
         {
             get => _width;
             set => Update(ref _width, value);
         }
 
-        /// <summary>
-        /// Gets or sets height value.
-        /// </summary>
+        /// <inheritdoc/>
         public double Height
         {
             get => _height;
@@ -44,7 +39,7 @@ namespace Core2D.Path
         /// <param name="width">The width value.</param>
         /// <param name="height">The height value.</param>
         /// <returns>The new instance of the <see cref="PathSize"/> class.</returns>
-        public static PathSize Create(double width = 0.0, double height = 0.0)
+        public static IPathSize Create(double width = 0.0, double height = 0.0)
         {
             return new PathSize()
             {

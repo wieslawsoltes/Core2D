@@ -991,7 +991,7 @@ namespace Core2D.Editor
             }
         }
 
-        private void Add(PathGeometry geometry)
+        private void Add(IPathGeometry geometry)
         {
             if (geometry == null)
                 return;
@@ -1004,7 +1004,7 @@ namespace Core2D.Editor
             }
         }
 
-        private void Remove(PathGeometry geometry)
+        private void Remove(IPathGeometry geometry)
         {
             if (geometry == null)
                 return;
@@ -1017,7 +1017,7 @@ namespace Core2D.Editor
             }
         }
 
-        private void Add(PathFigure figure)
+        private void Add(IPathFigure figure)
         {
             if (figure == null)
                 return;
@@ -1035,7 +1035,7 @@ namespace Core2D.Editor
             }
         }
 
-        private void Remove(PathFigure figure)
+        private void Remove(IPathFigure figure)
         {
             if (figure == null)
                 return;
@@ -1053,7 +1053,7 @@ namespace Core2D.Editor
             }
         }
 
-        private void Add(PathSegment segment)
+        private void Add(IPathSegment segment)
         {
             if (segment == null)
                 return;
@@ -1108,7 +1108,7 @@ namespace Core2D.Editor
             }
         }
 
-        private void Remove(PathSegment segment)
+        private void Remove(IPathSegment segment)
         {
             if (segment == null)
                 return;
@@ -1569,7 +1569,7 @@ namespace Core2D.Editor
             }
         }
 
-        private void Add(IEnumerable<PathFigure> figures)
+        private void Add(IEnumerable<IPathFigure> figures)
         {
             if (figures == null)
                 return;
@@ -1580,7 +1580,7 @@ namespace Core2D.Editor
             }
         }
 
-        private void Remove(IEnumerable<PathFigure> figures)
+        private void Remove(IEnumerable<IPathFigure> figures)
         {
             if (figures == null)
                 return;
@@ -1591,7 +1591,7 @@ namespace Core2D.Editor
             }
         }
 
-        private void Add(IEnumerable<PathSegment> segments)
+        private void Add(IEnumerable<IPathSegment> segments)
         {
             if (segments == null)
                 return;
@@ -1602,7 +1602,7 @@ namespace Core2D.Editor
             }
         }
 
-        private void Remove(IEnumerable<PathSegment> segments)
+        private void Remove(IEnumerable<IPathSegment> segments)
         {
             if (segments == null)
                 return;

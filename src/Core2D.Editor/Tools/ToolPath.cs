@@ -38,7 +38,7 @@ namespace Core2D.Editor.Tools
         /// <summary>
         /// Gets or sets current geometry.
         /// </summary>
-        internal PathGeometry Geometry { get; set; }
+        internal IPathGeometry Geometry { get; set; }
 
         /// <summary>
         /// Gets or sets current geometry context.
@@ -161,7 +161,7 @@ namespace Core2D.Editor.Tools
             var editor = _serviceProvider.GetService<ProjectEditor>();
 
             Geometry = PathGeometry.Create(
-                ImmutableArray.Create<PathFigure>(),
+                ImmutableArray.Create<IPathFigure>(),
                 editor.Project.Options.DefaultFillRule);
 
             GeometryContext = new PathGeometryContext(Geometry);

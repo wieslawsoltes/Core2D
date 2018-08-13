@@ -196,19 +196,19 @@ namespace Core2D.Editor.Designer
         public static LineSegment LineSegment { get; set; }
 
         /// <summary>
-        /// The design time <see cref="Path.PathFigure"/>.
+        /// The design time <see cref="IPathFigure"/>.
         /// </summary>
-        public static PathFigure PathFigure { get; set; }
+        public static IPathFigure PathFigure { get; set; }
 
         /// <summary>
-        /// The design time <see cref="Path.PathGeometry"/>.
+        /// The design time <see cref="IPathGeometry"/>.
         /// </summary>
-        public static PathGeometry PathGeometry { get; set; }
+        public static IPathGeometry PathGeometry { get; set; }
 
         /// <summary>
-        /// The design time <see cref="Path.PathSize"/>.
+        /// The design time <see cref="IPathSize"/>.
         /// </summary>
-        public static PathSize PathSize { get; set; }
+        public static IPathSize PathSize { get; set; }
 
         /// <summary>
         /// The design time <see cref="Path.Segments.PolyCubicBezierSegment"/>.
@@ -323,12 +323,12 @@ namespace Core2D.Editor.Designer
 
             // Path
 
-            ArcSegment = ArcSegment.Create(PointShape.Create(), PathSize.Create(), 180, true, SweepDirection.Clockwise, true, true);
+            ArcSegment = ArcSegment.Create(PointShape.Create(), Core2D.Path.PathSize.Create(), 180, true, SweepDirection.Clockwise, true, true);
             CubicBezierSegment = CubicBezierSegment.Create(PointShape.Create(), PointShape.Create(), PointShape.Create(), true, true);
             LineSegment = LineSegment.Create(PointShape.Create(), true, true);
-            PathFigure = PathFigure.Create(PointShape.Create(), false, true);
-            PathGeometry = PathGeometry.Create(ImmutableArray.Create<PathFigure>(), FillRule.EvenOdd);
-            PathSize = PathSize.Create();
+            PathFigure = Core2D.Path.PathFigure.Create(PointShape.Create(), false, true);
+            PathGeometry = Core2D.Path.PathGeometry.Create(ImmutableArray.Create<IPathFigure>(), FillRule.EvenOdd);
+            PathSize = Core2D.Path.PathSize.Create();
             PolyCubicBezierSegment = PolyCubicBezierSegment.Create(ImmutableArray.Create<IPointShape>(), true, true);
             PolyLineSegment = PolyLineSegment.Create(ImmutableArray.Create<IPointShape>(), true, true);
             PolyQuadraticBezierSegment = PolyQuadraticBezierSegment.Create(ImmutableArray.Create<IPointShape>(), true, true);

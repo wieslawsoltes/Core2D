@@ -71,7 +71,7 @@ namespace Core2D.UnitTests
         {
             var figure = new PathFigure();
 
-            var target = ImmutableArray.Create<PathSegment>();
+            var target = ImmutableArray.Create<IPathSegment>();
             var actual = figure.ToString(target);
 
             Assert.Equal(string.Empty, actual);

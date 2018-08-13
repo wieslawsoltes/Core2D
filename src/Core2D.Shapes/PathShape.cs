@@ -14,13 +14,13 @@ namespace Core2D.Shapes
     /// </summary>
     public class PathShape : BaseShape, IPathShape
     {
-        private PathGeometry _geometry;
+        private IPathGeometry _geometry;
 
         /// <inheritdoc/>
         public override Type TargetType => typeof(IPathShape);
 
         /// <inheritdoc/>
-        public PathGeometry Geometry
+        public IPathGeometry Geometry
         {
             get => _geometry;
             set => Update(ref _geometry, value);
@@ -130,7 +130,7 @@ namespace Core2D.Shapes
         /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
         /// <param name="isFilled">The flag indicating whether shape is filled.</param>
         /// <returns>The new instance of the <see cref="PathShape"/> class.</returns>
-        public static PathShape Create(ShapeStyle style, PathGeometry geometry, bool isStroked = true, bool isFilled = true)
+        public static PathShape Create(ShapeStyle style, IPathGeometry geometry, bool isStroked = true, bool isFilled = true)
         {
             return new PathShape()
             {
@@ -150,7 +150,7 @@ namespace Core2D.Shapes
         /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
         /// <param name="isFilled">The flag indicating whether shape is filled.</param>
         /// <returns>The new instance of the <see cref="PathShape"/> class.</returns>
-        public static PathShape Create(string name, ShapeStyle style, PathGeometry geometry, bool isStroked = true, bool isFilled = true)
+        public static PathShape Create(string name, ShapeStyle style, IPathGeometry geometry, bool isStroked = true, bool isFilled = true)
         {
             return new PathShape()
             {

@@ -13,10 +13,10 @@ namespace Core2D.Path
     /// <summary>
     /// Path figure.
     /// </summary>
-    public class PathFigure : ObservableObject, ICopyable
+    public class PathFigure : ObservableObject, IPathFigure
     {
         private IPointShape _startPoint;
-        private ImmutableArray<PathSegment> _segments;
+        private ImmutableArray<IPathSegment> _segments;
         private bool _isFilled;
         private bool _isClosed;
 
@@ -33,7 +33,7 @@ namespace Core2D.Path
         /// Gets or sets segments collection.
         /// </summary>
         [Content]
-        public ImmutableArray<PathSegment> Segments
+        public ImmutableArray<IPathSegment> Segments
         {
             get => _segments;
             set => Update(ref _segments, value);
@@ -62,13 +62,10 @@ namespace Core2D.Path
         /// </summary>
         public PathFigure()
         {
-            Segments = ImmutableArray.Create<PathSegment>();
+            Segments = ImmutableArray.Create<IPathSegment>();
         }
 
-        /// <summary>
-        /// Get all points in the figure.
-        /// </summary>
-        /// <returns>All points in the figure.</returns>
+        /// <inheritdoc/>
         public IEnumerable<IPointShape> GetPoints()
         {
             yield return StartPoint;
@@ -92,7 +89,7 @@ namespace Core2D.Path
         /// <param name="isFilled">The flag indicating whether path is filled.</param>
         /// <param name="isClosed">The flag indicating whether path is closed.</param>
         /// <returns>The new instance of the <see cref="PathFigure"/> class.</returns>
-        public static PathFigure Create(IPointShape startPoint, bool isFilled = true, bool isClosed = true)
+        public static IPathFigure Create(IPointShape startPoint, bool isFilled = true, bool isClosed = true)
         {
             return new PathFigure()
             {
@@ -107,7 +104,7 @@ namespace Core2D.Path
         /// </summary>
         /// <param name="segments">The segments collection.</param>
         /// <returns>A string representation of segments collection.</returns>
-        public string ToString(ImmutableArray<PathSegment> segments)
+        public string ToString(ImmutableArray<IPathSegment> segments)
         {
             if (segments.Length == 0)
             {

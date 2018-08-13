@@ -12,13 +12,11 @@ namespace Core2D.Path
     /// <summary>
     /// <see cref="PathFigure"/> poly segment base class.
     /// </summary>
-    public abstract class PathPolySegment : PathSegment, ICopyable
+    public abstract class PathPolySegment : PathSegment, IPathPolySegment
     {
         private ImmutableArray<IPointShape> _points;
 
-        /// <summary>
-        /// Gets or sets points array.
-        /// </summary>
+        /// <inheritdoc/>
         [Content]
         public ImmutableArray<IPointShape> Points
         {

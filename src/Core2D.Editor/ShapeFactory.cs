@@ -175,13 +175,13 @@ namespace Core2D.Editor
         }
 
         /// <inheritdoc/>
-        PathGeometry IShapeFactory.Geometry(FillRule fillRule)
+        IPathGeometry IShapeFactory.Geometry(FillRule fillRule)
         {
-            return PathGeometry.Create(ImmutableArray.Create<PathFigure>(), fillRule);
+            return PathGeometry.Create(ImmutableArray.Create<IPathFigure>(), fillRule);
         }
 
         /// <inheritdoc/>
-        IPathShape IShapeFactory.Path(PathGeometry geometry, bool isStroked, bool isFilled)
+        IPathShape IShapeFactory.Path(IPathGeometry geometry, bool isStroked, bool isFilled)
         {
             var project = _editor.Project;
             var style = project.CurrentStyleLibrary.Selected;

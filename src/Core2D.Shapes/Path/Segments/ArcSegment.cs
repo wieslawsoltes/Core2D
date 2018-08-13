@@ -12,7 +12,7 @@ namespace Core2D.Path.Segments
     public class ArcSegment : PathSegment, ICopyable
     {
         private IPointShape _point;
-        private PathSize _size;
+        private IPathSize _size;
         private double _rotationAngle;
         private bool _isLargeArc;
         private SweepDirection _sweepDirection;
@@ -29,7 +29,7 @@ namespace Core2D.Path.Segments
         /// <summary>
         /// Gets or sets arc size.
         /// </summary>
-        public PathSize Size
+        public IPathSize Size
         {
             get => _size;
             set => Update(ref _size, value);
@@ -85,7 +85,7 @@ namespace Core2D.Path.Segments
         /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
         /// <param name="isSmoothJoin">The flag indicating whether shape is smooth join.</param>
         /// <returns>The new instance of the <see cref="ArcSegment"/> class.</returns>
-        public static ArcSegment Create(IPointShape point, PathSize size, double rotationAngle, bool isLargeArc, SweepDirection sweepDirection, bool isStroked, bool isSmoothJoin)
+        public static ArcSegment Create(IPointShape point, IPathSize size, double rotationAngle, bool isLargeArc, SweepDirection sweepDirection, bool isStroked, bool isSmoothJoin)
         {
             return new ArcSegment()
             {

@@ -42,7 +42,7 @@ namespace Core2D.Path
         /// <param name="sweepDirection">The sweep direction flag.</param>
         /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
         /// <param name="isSmoothJoin">The flag indicating whether shape is smooth join.</param>
-        public abstract void ArcTo(IPointShape point, PathSize size, double rotationAngle, bool isLargeArc = false, SweepDirection sweepDirection = SweepDirection.Clockwise, bool isStroked = true, bool isSmoothJoin = true);
+        public abstract void ArcTo(IPointShape point, IPathSize size, double rotationAngle, bool isLargeArc = false, SweepDirection sweepDirection = SweepDirection.Clockwise, bool isStroked = true, bool isSmoothJoin = true);
 
         /// <summary>
         /// Adds cubic bezier segment.

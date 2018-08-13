@@ -29,7 +29,7 @@ namespace Core2D.Renderer.Wpf
         private ICache<IQuadraticBezierShape, WM.PathGeometry> _quadraticBezierCache = Cache<IQuadraticBezierShape, WM.PathGeometry>.Create();
         private ICache<ITextShape, (string, WM.FormattedText, ShapeStyle)> _textCache = Cache<ITextShape, (string, WM.FormattedText, ShapeStyle)>.Create();
         private ICache<string, WMI.BitmapImage> _biCache = Cache<string, WMI.BitmapImage>.Create(bi => bi.StreamSource.Dispose());
-        private ICache<IPathShape, (Path.PathGeometry, WM.StreamGeometry, ShapeStyle)> _pathCache = Cache<IPathShape, (Path.PathGeometry, WM.StreamGeometry, ShapeStyle)>.Create();
+        private ICache<IPathShape, (Path.IPathGeometry, WM.StreamGeometry, ShapeStyle)> _pathCache = Cache<IPathShape, (Path.IPathGeometry, WM.StreamGeometry, ShapeStyle)>.Create();
 
         /// <summary>
         /// Initializes a new instance of the <see cref="WpfRenderer"/> class.

@@ -11,24 +11,20 @@ namespace Core2D.Path
     /// <summary>
     /// Path geometry.
     /// </summary>
-    public class PathGeometry : ObservableObject, ICopyable
+    public class PathGeometry : ObservableObject, IPathGeometry
     {
-        private ImmutableArray<PathFigure> _figures;
+        private ImmutableArray<IPathFigure> _figures;
         private FillRule _fillRule;
 
-        /// <summary>
-        /// Gets or sets figures collection.
-        /// </summary>
+        /// <inheritdoc/>
         [Content]
-        public ImmutableArray<PathFigure> Figures
+        public ImmutableArray<IPathFigure> Figures
         {
             get => _figures;
             set => Update(ref _figures, value);
         }
 
-        /// <summary>
-        /// Gets or sets fill rule.
-        /// </summary>
+        /// <inheritdoc/>
         public FillRule FillRule
         {
             get => _fillRule;
@@ -38,7 +34,7 @@ namespace Core2D.Path
         /// <summary>
         /// Initializes a new instance of the <see cref="PathGeometry"/> class.
         /// </summary>
-        public PathGeometry() => Figures = ImmutableArray.Create<PathFigure>();
+        public PathGeometry() => Figures = ImmutableArray.Create<IPathFigure>();
 
         /// <inheritdoc/>
         public virtual object Copy(IDictionary<object, object> shared)
@@ -52,7 +48,7 @@ namespace Core2D.Path
         /// <param name="figures">The figures collection.</param>
         /// <param name="fillRule">The fill rule.</param>
         /// <returns>The new instance of the <see cref="PathGeometry"/> class.</returns>
-        public static PathGeometry Create(ImmutableArray<PathFigure> figures, FillRule fillRule)
+        public static IPathGeometry Create(ImmutableArray<IPathFigure> figures, FillRule fillRule)
         {
             return new PathGeometry()
             {
@@ -66,7 +62,7 @@ namespace Core2D.Path
         /// </summary>
         /// <param name="figures">The figures collection.</param>
         /// <returns>A string representation of figures collection.</returns>
-        public string ToString(ImmutableArray<PathFigure> figures)
+        public string ToString(ImmutableArray<IPathFigure> figures)
         {
             if (figures.Length == 0)
             {

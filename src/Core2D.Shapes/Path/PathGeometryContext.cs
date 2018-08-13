@@ -12,13 +12,13 @@ namespace Core2D.Path
     /// </summary>
     public class PathGeometryContext : GeometryContext
     {
-        private PathGeometry _geometry;
-        private PathFigure _currentFigure;
+        private IPathGeometry _geometry;
+        private IPathFigure _currentFigure;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="PathGeometryContext"/> class.
         /// </summary>
-        public PathGeometryContext(PathGeometry geometry)
+        public PathGeometryContext(IPathGeometry geometry)
         {
             _geometry = geometry ?? throw new ArgumentNullException(nameof(geometry));
         }
@@ -47,7 +47,7 @@ namespace Core2D.Path
         }
 
         /// <inheritdoc/>
-        public override void ArcTo(IPointShape point, PathSize size, double rotationAngle = 0.0, bool isLargeArc = false, SweepDirection sweepDirection = SweepDirection.Clockwise, bool isStroked = true, bool isSmoothJoin = true)
+        public override void ArcTo(IPointShape point, IPathSize size, double rotationAngle = 0.0, bool isLargeArc = false, SweepDirection sweepDirection = SweepDirection.Clockwise, bool isStroked = true, bool isSmoothJoin = true)
         {
             var segment = ArcSegment.Create(
                 point,
