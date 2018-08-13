@@ -12,7 +12,9 @@
   <Import Project="..\..\build\Dock.Model.props" />
 
   <ItemGroup>
+    <ProjectReference Include="..\Core2D.Containers\Core2D.Containers.csproj" />
     <ProjectReference Include="..\Core2D.Shapes.Extensions\Core2D.Shapes.Extensions.csproj" />
+    <ProjectReference Include="..\Core2D.Shapes\Core2D.Shapes.csproj" />
     <ProjectReference Include="..\Core2D\Core2D.csproj" />
   </ItemGroup>
 
