@@ -3,7 +3,6 @@
 using Core2D.Data;
 using Core2D.Renderer;
 using Core2D.Shapes;
-using Core2D.Shapes;
 using System;
 using System.Collections.Generic;
 using System.Linq;

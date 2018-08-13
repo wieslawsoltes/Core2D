@@ -25,14 +25,11 @@ namespace Core2D.Shapes
         /// <summary>
         /// Creates a new <see cref="IGroupShape"/> instance.
         /// </summary>
+        /// <param name="group">The group shape.</param>
         /// <param name="shapes">The shapes collection.</param>
-        /// <param name="name">The group name.</param>
         /// <param name="source">The source shapes collection.</param>
-        /// <returns>The new instance of the <see cref="IGroupShape"/> class.</returns>
-        public static IGroupShape Group(this IEnumerable<IBaseShape> shapes, string name = "g", IList<IBaseShape> source = null)
+        public static void Group(this IGroupShape group, IEnumerable<IBaseShape> shapes, IList<IBaseShape> source = null)
         {
-            var group = GroupShape.Create(name);
-
             if (shapes != null)
             {
                 foreach (var shape in shapes)
@@ -57,8 +54,6 @@ namespace Core2D.Shapes
             {
                 source.Add(group);
             }
-
-            return group;
         }
 
         /// <summary>

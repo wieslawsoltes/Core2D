@@ -50,7 +50,7 @@ namespace Core2D.Shapes
         }
 
         /// <summary>
-        /// Try binding properties array to one of <see cref="TextShape"/> shape properties.
+        /// Try binding properties array to one of <see cref="ITextShape"/> shape properties.
         /// </summary>
         /// <param name="db">The properties database used for binding.</param>
         /// <param name="propertyName">The target property name.</param>

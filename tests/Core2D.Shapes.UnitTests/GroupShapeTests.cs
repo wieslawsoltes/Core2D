@@ -3,7 +3,6 @@
 using Core2D.Data;
 using Core2D.Renderer;
 using Core2D.Shapes;
-using Core2D.Shapes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -115,7 +114,8 @@ namespace Core2D.Shapes.UnitTests
             var shapes = new List<IBaseShape>{ shape1, shape2, point1, point2 };
             var source = shapes.ToList();
 
-            var target = shapes.Group("g", source);
+            var target = GroupShape.Create("g");
+            target.Group(shapes, source);
 
             Assert.Equal("g", target.Name);
 
@@ -149,7 +149,8 @@ namespace Core2D.Shapes.UnitTests
             var shapes = new BaseShape[] { shape1, shape2, point1, point2 };
             var source = shapes.ToList();
 
-            shapes.Group("g", null);
+            var target = GroupShape.Create("g");
+            target.Group(shapes, null);
 
             Assert.Contains(shape1, source);
             Assert.Contains(shape2, source);

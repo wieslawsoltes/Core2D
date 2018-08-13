@@ -3482,7 +3482,8 @@ namespace Core2D.Editor
             if (layer != null && shapes != null)
             {
                 var source = layer.Shapes.ToBuilder();
-                var group = shapes.Group(name, source);
+                var group = GroupShape.Create(name);
+                group.Group(shapes, source);
 
                 var previous = layer.Shapes;
                 var next = source.ToImmutable();
