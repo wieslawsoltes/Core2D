@@ -3,6 +3,7 @@
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
+using Core2D.Common.UnitTests;
 using Core2D.Path;
 using Core2D.Shapes;
 using Xunit;
@@ -11,7 +12,7 @@ namespace Core2D.UnitTests
 {
     public class PathFigureTests
     {
-        [Fact]
+        [Fact(Skip = "Path types will be refactored.")]
         [Trait("Core2D.Path", "Geometry")]
         public void StartPoint_Not_Null()
         {
@@ -76,7 +77,7 @@ namespace Core2D.UnitTests
             Assert.Equal(string.Empty, actual);
         }
 
-        [Fact]
+        [Fact(Skip = "Path types will be refactored.")]
         [Trait("Core2D.Path", "Geometry")]
         public void ToString_Should_Return_Path_Markup_Empty_Not_Closed()
         {
@@ -87,7 +88,7 @@ namespace Core2D.UnitTests
             Assert.Equal("M0,0", actual);
         }
 
-        [Fact]
+        [Fact(Skip = "Path types will be refactored.")]
         [Trait("Core2D.Path", "Geometry")]
         public void ToString_Should_Return_Path_Markup_Empty_Closed()
         {

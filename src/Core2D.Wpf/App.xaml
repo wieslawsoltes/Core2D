@@ -7,8 +7,8 @@
              xmlns:converters="clr-namespace:Core2D.Wpf.Converters" 
              xmlns:Data="clr-namespace:Core2D.Data;assembly=Core2D"
              xmlns:editor="clr-namespace:Core2D.Wpf.Editor"
-             xmlns:Path="clr-namespace:Core2D.Path;assembly=Core2D"
-             xmlns:Segments="clr-namespace:Core2D.Path.Segments;assembly=Core2D"
+             xmlns:PathCore="clr-namespace:Core2D.Path;assembly=Core2D"
+             xmlns:Segments="clr-namespace:Core2D.Path.Segments;assembly=Core2D.Shapes"
              xmlns:ContainersCore="clr-namespace:Core2D.Containers;assembly=Core2D"
              xmlns:Containers="clr-namespace:Core2D.Containers;assembly=Core2D.Containers"
              xmlns:Renderer="clr-namespace:Core2D.Renderer;assembly=Core2D"
@@ -185,7 +185,7 @@
             <shapes:PathControl/>
         </DataTemplate>
         <!-- Path -->
-        <DataTemplate DataType="{x:Type Path:PathSize}">
+        <DataTemplate DataType="{x:Type PathCore:PathSize}">
             <path:PathSizeControl/>
         </DataTemplate>
         <DataTemplate DataType="{x:Type Segments:ArcSegment}">
@@ -209,10 +209,10 @@
         <DataTemplate DataType="{x:Type Segments:QuadraticBezierSegment}">
             <path:QuadraticBezierSegmentControl/>
         </DataTemplate>
-        <DataTemplate DataType="{x:Type Path:PathFigure}">
+        <DataTemplate DataType="{x:Type PathCore:PathFigure}">
             <path:PathFigureControl/>
         </DataTemplate>
-        <DataTemplate DataType="{x:Type Path:PathGeometry}">
+        <DataTemplate DataType="{x:Type PathCore:PathGeometry}">
             <path:PathGeometryControl/>
         </DataTemplate>
         <!-- Containers -->

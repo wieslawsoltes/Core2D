@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System.Collections.Immutable;
+using Core2D.Common.UnitTests;
 using Core2D.Path;
 using Core2D.Shapes;
 using Xunit;
@@ -21,7 +22,7 @@ namespace Core2D.UnitTests
             Assert.Equal(string.Empty, actual);
         }
 
-        [Fact]
+        [Fact(Skip = "Path types will be refactored.")]
         [Trait("Core2D.Path", "Geometry")]
         public void ToString_Should_Return_Points()
         {

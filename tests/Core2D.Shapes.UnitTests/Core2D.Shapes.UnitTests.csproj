@@ -14,6 +14,7 @@
     <ProjectReference Include="..\..\src\Core2D.Shapes.Extensions\Core2D.Shapes.Extensions.csproj" />
     <ProjectReference Include="..\..\src\Core2D.Shapes\Core2D.Shapes.csproj" />
     <ProjectReference Include="..\..\src\Core2D\Core2D.csproj" />
+    <ProjectReference Include="..\Core2D.Common.UnitTests\Core2D.Common.UnitTests.csproj" />
   </ItemGroup>
 
   <ItemGroup>

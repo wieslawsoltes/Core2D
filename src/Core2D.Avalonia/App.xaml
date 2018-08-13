@@ -7,8 +7,8 @@
              xmlns:Data="clr-namespace:Core2D.Data;assembly=Core2D"
              xmlns:Dock="clr-namespace:Dock.Model;assembly=Dock.Model"
              xmlns:Editor="clr-namespace:Core2D.Editor;assembly=Core2D.Editor"
-             xmlns:Path="clr-namespace:Core2D.Path;assembly=Core2D"
-             xmlns:Segments="clr-namespace:Core2D.Path.Segments;assembly=Core2D"
+             xmlns:PathCore="clr-namespace:Core2D.Path;assembly=Core2D"
+             xmlns:Segments="clr-namespace:Core2D.Path.Segments;assembly=Core2D.Shapes"
              xmlns:ContainersCore="clr-namespace:Core2D.Containers;assembly=Core2D"
              xmlns:Renderer="clr-namespace:Core2D.Renderer;assembly=Core2D"
              xmlns:SettingsTools="clr-namespace:Core2D.Editor.Tools.Settings;assembly=Core2D.Editor"
@@ -728,7 +728,7 @@
             <shapes:PathControl/>
         </DataTemplate>
         <!-- Path -->
-        <DataTemplate DataType="Path:PathSize">
+        <DataTemplate DataType="PathCore:PathSize">
             <path:PathSizeControl/>
         </DataTemplate>
         <DataTemplate DataType="Segments:ArcSegment">
@@ -752,10 +752,10 @@
         <DataTemplate DataType="Segments:QuadraticBezierSegment">
             <path:QuadraticBezierSegmentControl/>
         </DataTemplate>
-        <DataTemplate DataType="Path:PathFigure">
+        <DataTemplate DataType="PathCore:PathFigure">
             <path:PathFigureControl/>
         </DataTemplate>
-        <DataTemplate DataType="Path:PathGeometry">
+        <DataTemplate DataType="PathCore:PathGeometry">
             <path:PathGeometryControl/>
         </DataTemplate>
         <!-- Containers -->

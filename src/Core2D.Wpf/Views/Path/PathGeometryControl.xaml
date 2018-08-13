@@ -9,8 +9,8 @@
              xmlns:converters="clr-namespace:Core2D.Wpf.Converters"
              xmlns:designer="clr-namespace:Core2D.Wpf.Designer"
              xmlns:editor="clr-namespace:Core2D.Wpf.Editor"
-             xmlns:Path="clr-namespace:Core2D.Path;assembly=Core2D"
-             xmlns:Segments="clr-namespace:Core2D.Path.Segments;assembly=Core2D"
+             xmlns:PathCore="clr-namespace:Core2D.Path;assembly=Core2D"
+             xmlns:Segments="clr-namespace:Core2D.Path.Segments;assembly=Core2D.Shapes"
              xmlns:custom="clr-namespace:Core2D.Wpf.Views.Custom"
              xmlns:Editor="clr-namespace:Core2D.Editor;assembly=Core2D.Editor"
              mc:Ignorable="d" 
@@ -33,7 +33,7 @@
         <TabItem Header="Figures">
             <TreeView x:Name="tree" ItemsSource="{Binding Figures}" BorderBrush="{x:Null}" BorderThickness="0" HorizontalContentAlignment="Stretch" VerticalAlignment="Stretch">
                 <TreeView.Resources>
-                    <DataTemplate DataType="{x:Type Path:PathFigure}">
+                    <DataTemplate DataType="{x:Type PathCore:PathFigure}">
                         <TextBlock Text="Figure"/>
                     </DataTemplate>
                     <DataTemplate DataType="{x:Type Segments:LineSegment}">

@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using Core2D.Path.Segments;
+using Core2D.Shapes;
 using System.Linq;
 using Xunit;
 
@@ -21,11 +22,11 @@ namespace Core2D.UnitTests
         public void GetPoints_Should_Return_All_Segment_Points()
         {
             var segment = new PolyQuadraticBezierSegment();
-            segment.Points = segment.Points.Add(new TestPointShape());
-            segment.Points = segment.Points.Add(new TestPointShape());
-            segment.Points = segment.Points.Add(new TestPointShape());
-            segment.Points = segment.Points.Add(new TestPointShape());
-            segment.Points = segment.Points.Add(new TestPointShape());
+            segment.Points = segment.Points.Add(new PointShape());
+            segment.Points = segment.Points.Add(new PointShape());
+            segment.Points = segment.Points.Add(new PointShape());
+            segment.Points = segment.Points.Add(new PointShape());
+            segment.Points = segment.Points.Add(new PointShape());
 
             var target = segment.GetPoints();
             var count = target.Count();
@@ -40,11 +41,11 @@ namespace Core2D.UnitTests
         public void ToString_Should_Return_Path_Markup()
         {
             var target = new PolyQuadraticBezierSegment();
-            target.Points = target.Points.Add(new TestPointShape());
-            target.Points = target.Points.Add(new TestPointShape());
-            target.Points = target.Points.Add(new TestPointShape());
-            target.Points = target.Points.Add(new TestPointShape());
-            target.Points = target.Points.Add(new TestPointShape());
+            target.Points = target.Points.Add(new PointShape());
+            target.Points = target.Points.Add(new PointShape());
+            target.Points = target.Points.Add(new PointShape());
+            target.Points = target.Points.Add(new PointShape());
+            target.Points = target.Points.Add(new PointShape());
 
             var actual = target.ToString();
 

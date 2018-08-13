@@ -4,14 +4,14 @@
     <TargetFrameworks>netstandard2.0</TargetFrameworks>
     <OutputType>Library</OutputType>
     <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
-    <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\$(AssemblyName).xml</DocumentationFile>
   </PropertyGroup>
 
   <Import Project="..\..\build\Base.props" />
   <Import Project="..\..\build\Rx.props" />
   
   <ItemGroup>
-    <ProjectReference Include="..\Core2D\Core2D.csproj" />
+    <ProjectReference Include="..\..\src\Core2D.Shapes.Extensions\Core2D.Shapes.Extensions.csproj" />
+    <ProjectReference Include="..\..\src\Core2D\Core2D.csproj" />
   </ItemGroup>
 
 </Project>
