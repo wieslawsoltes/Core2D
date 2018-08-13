@@ -201,6 +201,8 @@ namespace Core2D.Shapes.UnitTests
 
         public class Class1 : BaseShape
         {
+            public override Type TargetType => typeof(Class1);
+
             public override object Copy(IDictionary<object, object> shared)
             {
                 throw new NotImplementedException();

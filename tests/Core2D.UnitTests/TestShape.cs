@@ -1,5 +1,6 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
@@ -12,6 +13,7 @@ namespace Core2D.UnitTests
 {
     public abstract class TestBaseShape : IBaseShape
     {
+        public abstract Type TargetType { get; }
         public IBaseShape Owner { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
         public ShapeState State { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
         public Context Data { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
