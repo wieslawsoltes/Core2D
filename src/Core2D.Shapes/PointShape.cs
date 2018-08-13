@@ -4,7 +4,6 @@ using System;
 using System.Collections.Generic;
 using Core2D.Data;
 using Core2D.Renderer;
-using Core2D.Shapes;
 
 namespace Core2D.Shapes
 {
@@ -17,6 +16,9 @@ namespace Core2D.Shapes
         private double _y;
         private PointAlignment _alignment;
         private IBaseShape _shape;
+
+        /// <inheritdoc/>
+        public override Type TargetType => typeof(IPointShape);
 
         /// <inheritdoc/>
         public double X

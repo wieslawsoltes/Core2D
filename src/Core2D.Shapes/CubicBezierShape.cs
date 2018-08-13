@@ -3,7 +3,6 @@
 using System;
 using System.Collections.Generic;
 using Core2D.Renderer;
-using Core2D.Shapes;
 using Core2D.Style;
 
 namespace Core2D.Shapes
@@ -17,6 +16,9 @@ namespace Core2D.Shapes
         private IPointShape _point2;
         private IPointShape _point3;
         private IPointShape _point4;
+
+        /// <inheritdoc/>
+        public override Type TargetType => typeof(ICubicBezierShape);
 
         /// <inheritdoc/>
         public IPointShape Point1

@@ -3,7 +3,6 @@
 using System;
 using System.Collections.Generic;
 using Core2D.Renderer;
-using Core2D.Shapes;
 using Core2D.Style;
 
 namespace Core2D.Shapes
@@ -15,6 +14,9 @@ namespace Core2D.Shapes
     {
         private IPointShape _start;
         private IPointShape _end;
+
+        /// <inheritdoc/>
+        public override Type TargetType => typeof(ILineShape);
 
         /// <inheritdoc/>
         public IPointShape Start

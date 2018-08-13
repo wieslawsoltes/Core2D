@@ -3,7 +3,6 @@
 using System;
 using System.Collections.Generic;
 using Core2D.Renderer;
-using Core2D.Shapes;
 using Core2D.Style;
 
 namespace Core2D.Shapes
@@ -18,6 +17,9 @@ namespace Core2D.Shapes
         private double _offsetY;
         private double _cellWidth;
         private double _cellHeight;
+
+        /// <inheritdoc/>
+        public override Type TargetType => typeof(IRectangleShape);
 
         /// <inheritdoc/>
         public bool IsGrid

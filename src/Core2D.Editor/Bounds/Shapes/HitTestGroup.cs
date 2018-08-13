@@ -37,7 +37,7 @@ namespace Core2D.Editor.Bounds.Shapes
 
             foreach (var GroupShape in group.Shapes.Reverse())
             {
-                var hitTest = registered[GroupShape.GetType()];
+                var hitTest = registered[GroupShape.TargetType];
                 var result = hitTest.Contains(GroupShape, target, radius, registered);
                 if (result == true)
                 {
@@ -54,7 +54,7 @@ namespace Core2D.Editor.Bounds.Shapes
 
             foreach (var GroupShape in group.Shapes.Reverse())
             {
-                var hitTest = registered[GroupShape.GetType()];
+                var hitTest = registered[GroupShape.TargetType];
                 var result = hitTest.Overlaps(GroupShape, target, radius, registered);
                 if (result == true)
                 {

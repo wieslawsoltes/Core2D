@@ -5,10 +5,12 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows;
+using Core2D.Containers;
 using Core2D.Data;
 using Core2D.Editor;
 using Core2D.FileWriter.Emf;
 using Core2D.Interfaces;
+using Core2D.Renderer;
 using Core2D.Wpf.Windows;
 using Microsoft.Win32;
 
@@ -282,17 +284,17 @@ namespace Core2D.Wpf.Editor
                 name = editor.Project.Name;
                 item = editor.Project;
             }
-            else if (item is ProjectContainer)
+            else if (item is IProjectContainer project)
             {
-                name = (item as ProjectContainer).Name;
+                name = project.Name;
             }
-            else if (item is DocumentContainer)
+            else if (item is IDocumentContainer document)
             {
-                name = (item as DocumentContainer).Name;
+                name = document.Name;
             }
-            else if (item is PageContainer)
+            else if (item is IPageContainer page)
             {
-                name = (item as PageContainer).Name;
+                name = page.Name;
             }
 
             var sb = new StringBuilder();
@@ -407,7 +409,7 @@ namespace Core2D.Wpf.Editor
         {
             var editor = _serviceProvider.GetService<ProjectEditor>();
             var page = editor.Project?.CurrentContainer;
-            if (page != null)
+            if (page != null && editor.Project is IImageCache imageChache)
             {
                 if (editor.Renderers[0]?.State?.SelectedShape != null)
                 {
@@ -418,7 +420,7 @@ namespace Core2D.Wpf.Editor
                         page.Template.Height,
                         page.Data.Properties,
                         page.Data.Record,
-                        editor.Project);
+                        imageChache);
                 }
                 else if (editor.Renderers?[0]?.State?.SelectedShapes != null)
                 {
@@ -429,17 +431,17 @@ namespace Core2D.Wpf.Editor
                         page.Template.Height,
                         page.Data.Properties,
                         page.Data.Record,
-                        editor.Project);
+                        imageChache);
                 }
                 else
                 {
-                    EmfWriter.SetClipboard(page, editor.Project);
+                    EmfWriter.SetClipboard(page, imageChache);
                 }
             }
         }
 
         /// <inheritdoc/>
-        public void OnImportData(ProjectContainer project)
+        public void OnImportData(IProjectContainer project)
         {
             var dlg = new OpenFileDialog()
             {

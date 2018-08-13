@@ -1,5 +1,6 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
@@ -17,6 +18,7 @@ namespace Core2D.Editor.Tools.Path.Shapes
 #pragma warning restore CS0067
         public string Id { get; set; }
         public string Name { get; set; }
+        public abstract Type TargetType { get; }
         public IBaseShape Owner { get; set; }
         public ShapeState State { get; set; }
         public Context Data { get; set; }

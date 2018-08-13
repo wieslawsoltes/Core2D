@@ -6,7 +6,6 @@ using System.Collections.Immutable;
 using System.Linq;
 using Core2D.Data;
 using Core2D.Renderer;
-using Core2D.Shapes;
 
 namespace Core2D.Shapes
 {
@@ -17,6 +16,9 @@ namespace Core2D.Shapes
     {
         private ImmutableArray<Property> _shapesProperties;
         private ImmutableArray<IBaseShape> _shapes;
+
+        /// <inheritdoc/>
+        public override Type TargetType => typeof(IGroupShape);
 
         /// <inheritdoc/>
         public ImmutableArray<Property> ShapesProperties => GetShapeProperties();

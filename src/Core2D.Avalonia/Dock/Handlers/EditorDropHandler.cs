@@ -2,8 +2,10 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System.Linq;
 using Avalonia.Input;
+using Core2D.Containers;
 using Core2D.Data;
 using Core2D.Editor;
+using Core2D.Shapes;
 using Core2D.Style;
 using Dock.Avalonia;
 
@@ -38,13 +40,13 @@ namespace Core2D.Avalonia.Dock.Handlers
 
                 switch (data)
                 {
-                    case BaseShape shape:
+                    case IBaseShape shape:
                         return editor?.OnDropShape(shape, point.X, point.Y, bExecute) == true;
                     case Record record:
                         return editor?.OnDropRecord(record, point.X, point.Y, bExecute) == true;
                     case ShapeStyle style:
                         return editor?.OnDropStyle(style, point.X, point.Y, bExecute) == true;
-                    case PageContainer page:
+                    case IPageContainer page:
                         return editor?.OnDropTemplate(page, point.X, point.Y, bExecute) == true;
                     default:
                         break;

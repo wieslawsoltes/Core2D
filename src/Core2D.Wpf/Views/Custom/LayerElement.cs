@@ -1,8 +1,8 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using Core2D.Containers;
 using Core2D.Data;
 using Core2D.Renderer;
-using System.Collections.Immutable;
 using System.Windows;
 using System.Windows.Media;
 
@@ -86,7 +86,7 @@ namespace Core2D.Wpf.Views.Custom
                     FrameworkPropertyMetadataOptions.SubPropertiesDoNotAffectRender));
 
         private bool _isLoaded = false;
-        private LayerContainer _layer = default(LayerContainer);
+        private ILayerContainer _layer = default;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="LayerElement"/> class.
@@ -123,7 +123,7 @@ namespace Core2D.Wpf.Views.Custom
 
                     if (_layer != null)
                     {
-                        var layer = DataContext as LayerContainer;
+                        var layer = DataContext as ILayerContainer;
                         if (layer == _layer)
                             return;
                     }
@@ -145,7 +145,7 @@ namespace Core2D.Wpf.Views.Custom
                 DeInitialize();
             }
 
-            if (DataContext is LayerContainer layer)
+            if (DataContext is ILayerContainer layer)
             {
                 _layer = layer;
                 _layer.InvalidateLayer += Invalidate;
@@ -157,7 +157,7 @@ namespace Core2D.Wpf.Views.Custom
             if (_layer != null)
             {
                 _layer.InvalidateLayer -= Invalidate;
-                _layer = default(LayerContainer);
+                _layer = default;
             }
         }
 
@@ -170,14 +170,14 @@ namespace Core2D.Wpf.Views.Custom
 
         private void Render(DrawingContext drawingContext)
         {
-            if (DataContext is LayerContainer layer && layer.IsVisible)
+            if (DataContext is ILayerContainer layer && layer.IsVisible)
             {
                 var renderer = LayerElement.GetRenderer(this);
                 if (renderer != null)
                 {
                     var data = LayerElement.GetData(this);
-                    var properties = data != null ? data.Properties : default(ImmutableArray<Property>);
-                    var record = data != null ? data.Record : default(Record);
+                    var properties = data != null ? data.Properties : default;
+                    var record = data != null ? data.Record : default;
                     renderer.Draw(drawingContext, layer, 0.0, 0.0, properties, record);
                 }
             }

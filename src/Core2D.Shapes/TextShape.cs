@@ -3,7 +3,6 @@
 using System;
 using System.Collections.Generic;
 using Core2D.Renderer;
-using Core2D.Shapes;
 using Core2D.Style;
 
 namespace Core2D.Shapes
@@ -16,6 +15,9 @@ namespace Core2D.Shapes
         private IPointShape _topLeft;
         private IPointShape _bottomRight;
         private string _text;
+
+        /// <inheritdoc/>
+        public override Type TargetType => typeof(ITextShape);
 
         /// <inheritdoc/>
         public IPointShape TopLeft

@@ -7,6 +7,8 @@ using System.Globalization;
 using System.Linq;
 using Avalonia;
 using Avalonia.Data.Converters;
+using Core2D.Containers;
+using Core2D.Shapes;
 
 namespace Core2D.Avalonia.Converters
 {
@@ -38,22 +40,22 @@ namespace Core2D.Avalonia.Converters
                 int nShapes = 0;
                 int nSelectedShapes = 0;
 
-                if (values[0] is ImmutableArray<DocumentContainer> documents)
+                if (values[0] is ImmutableArray<IDocumentContainer> documents)
                 {
                     nDocuments = documents.Length;
                 }
 
-                if (values[1] is ImmutableArray<PageContainer> pages)
+                if (values[1] is ImmutableArray<IPageContainer> pages)
                 {
                     nPages = pages.Length;
                 }
 
-                if (values[2] is ImmutableArray<LayerContainer> layers)
+                if (values[2] is ImmutableArray<ILayerContainer> layers)
                 {
                     nLayers = layers.Length;
                 }
 
-                if (values[3] is ImmutableArray<BaseShape> shapes)
+                if (values[3] is ImmutableArray<IBaseShape> shapes)
                 {
                     nShapes = shapes.Length;
                 }

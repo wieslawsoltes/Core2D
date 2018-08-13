@@ -1,5 +1,6 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using Core2D.Shapes;
 using Core2D.Style;
 using System;
 using System.Windows;
@@ -49,7 +50,7 @@ namespace Core2D.Wpf.Views
                             {
                                 if (content.Content != null)
                                 {
-                                    if (content.Content is BaseShape shape)
+                                    if (content.Content is IBaseShape shape)
                                     {
                                         shape.Style = style;
                                     }

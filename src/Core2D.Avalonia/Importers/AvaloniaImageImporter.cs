@@ -7,6 +7,7 @@ using Avalonia.Controls;
 using Core2D.Avalonia.Windows;
 using Core2D.Editor;
 using Core2D.Interfaces;
+using Core2D.Renderer;
 
 namespace Core2D.Avalonia.Importers
 {
@@ -26,6 +27,22 @@ namespace Core2D.Avalonia.Importers
             _serviceProvider = serviceProvider;
         }
 
+        private string GetImageKey(string path)
+        {
+            var fileIO = _serviceProvider.GetService<IFileSystem>();
+            using (var stream = fileIO.Open(path))
+            {
+                var bytes = fileIO.ReadBinary(stream);
+                var project = _serviceProvider.GetService<ProjectEditor>().Project;
+                if (project is IImageCache imageCache)
+                {
+                    var key = imageCache.AddImageFromFile(path, bytes);
+                    return key;
+                }
+                return default;
+            }
+        }
+
         /// <inheritdoc/>
         public async Task<string> GetImageKeyAsync()
         {
@@ -36,14 +53,8 @@ namespace Core2D.Avalonia.Importers
                 var result = await dlg.ShowAsync(_serviceProvider.GetService<MainWindow>());
                 if (result != null)
                 {
-                    var fileIO = _serviceProvider.GetService<IFileSystem>();
                     var path = result.FirstOrDefault();
-                    using (var stream = fileIO.Open(path))
-                    {
-                        var bytes = fileIO.ReadBinary(stream);
-                        var key = _serviceProvider.GetService<ProjectEditor>().Project?.AddImageFromFile(path, bytes);
-                        return key;
-                    }
+                    return GetImageKey(path);
                 }
             }
             catch (Exception ex)
@@ -51,7 +62,7 @@ namespace Core2D.Avalonia.Importers
                 _serviceProvider.GetService<ILog>().LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
             }
 
-            return null;
+            return default;
         }
     }
 }

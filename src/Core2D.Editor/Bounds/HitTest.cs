@@ -31,7 +31,7 @@ namespace Core2D.Editor.Bounds
 
         public IPointShape TryToGetPoint(IBaseShape shape, Point2 target, double radius)
         {
-            return Registered[shape.GetType()].TryToGetPoint(shape, target, radius, Registered);
+            return Registered[shape.TargetType].TryToGetPoint(shape, target, radius, Registered);
         }
 
         public IPointShape TryToGetPoint(IEnumerable<IBaseShape> shapes, Point2 target, double radius)
@@ -49,19 +49,19 @@ namespace Core2D.Editor.Bounds
 
         public bool Contains(IBaseShape shape, Point2 target, double radius)
         {
-            return Registered[shape.GetType()].Contains(shape, target, radius, Registered);
+            return Registered[shape.TargetType].Contains(shape, target, radius, Registered);
         }
 
         public bool Overlaps(IBaseShape shape, Rect2 target, double radius)
         {
-            return Registered[shape.GetType()].Overlaps(shape, target, radius, Registered);
+            return Registered[shape.TargetType].Overlaps(shape, target, radius, Registered);
         }
 
         public IBaseShape TryToGetShape(IEnumerable<IBaseShape> shapes, Point2 target, double radius)
         {
             foreach (var shape in shapes)
             {
-                var result = Registered[shape.GetType()].Contains(shape, target, radius, Registered);
+                var result = Registered[shape.TargetType].Contains(shape, target, radius, Registered);
                 if (result == true)
                 {
                     return shape;
@@ -75,7 +75,7 @@ namespace Core2D.Editor.Bounds
             var selected = new HashSet<IBaseShape>();
             foreach (var shape in shapes)
             {
-                var result = Registered[shape.GetType()].Overlaps(shape, target, radius, Registered);
+                var result = Registered[shape.TargetType].Overlaps(shape, target, radius, Registered);
                 if (result == true)
                 {
                     selected.Add(shape);

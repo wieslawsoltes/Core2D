@@ -1,5 +1,6 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using System;
 using System.Collections.Generic;
 using Core2D.Data;
 
@@ -9,7 +10,12 @@ namespace Core2D.Shapes
     /// Defines base shape contract.
     /// </summary>
     public interface IBaseShape : IObservableObject, IDrawable, ISelectable, ICopyable
-    {        
+    {
+        /// <summary>
+        /// Gets shape target type.
+        /// </summary>
+        Type TargetType { get; }
+
         /// <summary>
         /// Gets or sets shape owner.
         /// </summary>
