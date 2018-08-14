@@ -227,9 +227,9 @@ namespace Core2D.Editor
 
         private void ObserveStyleLibrary(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == nameof(Library<ShapeStyle>.Items))
+            if (e.PropertyName == nameof(ILibrary<ShapeStyle>.Items))
             {
-                var sg = sender as Library<ShapeStyle>;
+                var sg = sender as ILibrary<ShapeStyle>;
                 Remove(sg.Items);
                 Add(sg.Items);
             }
@@ -237,7 +237,7 @@ namespace Core2D.Editor
             _invalidateStyles();
 
             // NOTE: Do not mark project as dirty when current style changes.
-            if (e.PropertyName != nameof(Library<ShapeStyle>.Selected))
+            if (e.PropertyName != nameof(ILibrary<ShapeStyle>.Selected))
             {
                 MarkAsDirty();
             }
@@ -245,9 +245,9 @@ namespace Core2D.Editor
 
         private void ObserveGroupLibrary(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == nameof(Library<IGroupShape>.Items))
+            if (e.PropertyName == nameof(ILibrary<IGroupShape>.Items))
             {
-                var sg = sender as Library<IGroupShape>;
+                var sg = sender as ILibrary<IGroupShape>;
                 Remove(sg.Items);
                 Add(sg.Items);
             }
@@ -1189,7 +1189,7 @@ namespace Core2D.Editor
             data.PropertyChanged -= ObserveData;
         }
 
-        private void Add(Library<ShapeStyle> sg)
+        private void Add(ILibrary<ShapeStyle> sg)
         {
             if (sg == null)
                 return;
@@ -1202,7 +1202,7 @@ namespace Core2D.Editor
             sg.PropertyChanged += ObserveStyleLibrary;
         }
 
-        private void Remove(Library<ShapeStyle> sg)
+        private void Remove(ILibrary<ShapeStyle> sg)
         {
             if (sg == null)
                 return;
@@ -1215,7 +1215,7 @@ namespace Core2D.Editor
             sg.PropertyChanged -= ObserveStyleLibrary;
         }
 
-        private void Add(Library<IGroupShape> gl)
+        private void Add(ILibrary<IGroupShape> gl)
         {
             if (gl == null)
                 return;
@@ -1228,7 +1228,7 @@ namespace Core2D.Editor
             gl.PropertyChanged += ObserveGroupLibrary;
         }
 
-        private void Remove(Library<IGroupShape> gl)
+        private void Remove(ILibrary<IGroupShape> gl)
         {
             if (gl == null)
                 return;
@@ -1635,7 +1635,7 @@ namespace Core2D.Editor
             }
         }
 
-        private void Add(IEnumerable<Library<ShapeStyle>> sgs)
+        private void Add(IEnumerable<ILibrary<ShapeStyle>> sgs)
         {
             if (sgs == null)
                 return;
@@ -1646,7 +1646,7 @@ namespace Core2D.Editor
             }
         }
 
-        private void Remove(IEnumerable<Library<ShapeStyle>> sgs)
+        private void Remove(IEnumerable<ILibrary<ShapeStyle>> sgs)
         {
             if (sgs == null)
                 return;
@@ -1657,7 +1657,7 @@ namespace Core2D.Editor
             }
         }
 
-        private void Add(IEnumerable<Library<IGroupShape>> gl)
+        private void Add(IEnumerable<ILibrary<IGroupShape>> gl)
         {
             if (gl == null)
                 return;
@@ -1668,7 +1668,7 @@ namespace Core2D.Editor
             }
         }
 
-        private void Remove(IEnumerable<Library<IGroupShape>> gl)
+        private void Remove(IEnumerable<ILibrary<IGroupShape>> gl)
         {
             if (gl == null)
                 return;

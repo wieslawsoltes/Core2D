@@ -26,12 +26,12 @@ namespace Core2D.Containers
         /// <summary>
         /// Gets or sets project style libraries.
         /// </summary>
-        ImmutableArray<Library<ShapeStyle>> StyleLibraries { get; set; }
+        ImmutableArray<ILibrary<ShapeStyle>> StyleLibraries { get; set; }
 
         /// <summary>
         /// Gets or sets project group libraries.
         /// </summary>
-        ImmutableArray<Library<IGroupShape>> GroupLibraries { get; set; }
+        ImmutableArray<ILibrary<IGroupShape>> GroupLibraries { get; set; }
 
         /// <summary>
         /// Gets or sets project databases.
@@ -51,12 +51,12 @@ namespace Core2D.Containers
         /// <summary>
         /// Gets or sets project current style library.
         /// </summary>
-        Library<ShapeStyle> CurrentStyleLibrary { get; set; }
+        ILibrary<ShapeStyle> CurrentStyleLibrary { get; set; }
 
         /// <summary>
         /// Gets or sets project current group library.
         /// </summary>
-        Library<IGroupShape> CurrentGroupLibrary { get; set; }
+        ILibrary<IGroupShape> CurrentGroupLibrary { get; set; }
 
         /// <summary>
         /// Gets or sets project current database.
@@ -111,13 +111,13 @@ namespace Core2D.Containers
         /// Set current group library.
         /// </summary>
         /// <param name="library">The group library instance.</param>
-        void SetCurrentGroupLibrary(Library<IGroupShape> library);
+        void SetCurrentGroupLibrary(ILibrary<IGroupShape> library);
 
         /// <summary>
         /// Set current group.
         /// </summary>
         /// <param name="library">The style library instance.</param>
-        void SetCurrentStyleLibrary(Library<ShapeStyle> library);
+        void SetCurrentStyleLibrary(ILibrary<ShapeStyle> library);
 
         /// <summary>
         /// Set selected value.

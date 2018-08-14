@@ -11,14 +11,12 @@ namespace Core2D.Containers
     /// <summary>
     /// Named items library.
     /// </summary>
-    public class Library<T> : ObservableObject, ILibrary, ICopyable
+    public class Library<T> : ObservableObject, ILibrary<T>
     {
         private ImmutableArray<T> _items;
         private T _selected;
 
-        /// <summary>
-        /// Gets or sets a items collection.
-        /// </summary>
+        /// <inheritdoc/>
         [Content]
         public ImmutableArray<T> Items
         {
@@ -26,9 +24,7 @@ namespace Core2D.Containers
             set => Update(ref _items, value);
         }
 
-        /// <summary>
-        /// Gets or sets currently selected item from <see cref="Items"/> collection.
-        /// </summary>
+        /// <inheritdoc/>
         public T Selected
         {
             get => _selected;
@@ -45,10 +41,7 @@ namespace Core2D.Containers
             _selected = default;
         }
 
-        /// <summary>
-        /// Set selected.
-        /// </summary>
-        /// <param name="item">The item instance.</param>
+        /// <inheritdoc/>
         public void SetSelected(T item) => Selected = item;
 
         /// <inheritdoc/>
@@ -62,7 +55,7 @@ namespace Core2D.Containers
         /// </summary>
         /// <param name="name">The library name.</param>
         /// <returns>The new instance of the <see cref="Library{T}"/> class.</returns>
-        public static Library<T> Create(string name) => new Library<T>() { Name = name };
+        public static ILibrary<T> Create(string name) => new Library<T>() { Name = name };
 
         /// <summary>
         /// Creates a new instance of the <see cref="Library{T}"/> class.
@@ -70,7 +63,7 @@ namespace Core2D.Containers
         /// <param name="name">The library name.</param>
         /// <param name="items">The items collection.</param>
         /// <returns>The new instance of the <see cref="Library{T}"/> class.</returns>
-        public static Library<T> Create(string name, IEnumerable<T> items)
+        public static ILibrary<T> Create(string name, IEnumerable<T> items)
         {
             return new Library<T>()
             {

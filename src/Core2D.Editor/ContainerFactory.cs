@@ -15,10 +15,10 @@ namespace Core2D.Editor
     public sealed class ContainerFactory : IContainerFactory
     {
         /// <summary>
-        /// Creates a new instance of the <see cref="Library{ShapeStyle}"/> class.
+        /// Creates a new instance of the <see cref="ILibrary{ShapeStyle}"/> class.
         /// </summary>
-        /// <returns>The new instance of the <see cref="Library{ShapeStyle}"/>.</returns>
-        public static Library<ShapeStyle> DefaultStyleLibrary()
+        /// <returns>The new instance of the <see cref="ILibrary{ShapeStyle}"/>.</returns>
+        public static ILibrary<ShapeStyle> DefaultStyleLibrary()
         {
             var sgd = Library<ShapeStyle>.Create("Default");
 
@@ -38,10 +38,10 @@ namespace Core2D.Editor
         }
 
         /// <summary>
-        /// Creates a new instance of the <see cref="Library{ShapeStyle}"/> class.
+        /// Creates a new instance of the <see cref="ILibrary{ShapeStyle}"/> class.
         /// </summary>
-        /// <returns>The new instance of the <see cref="Library{ShapeStyle}"/>.</returns>
-        public static Library<ShapeStyle> LinesStyleLibrary()
+        /// <returns>The new instance of the <see cref="ILibrary{ShapeStyle}"/>.</returns>
+        public static ILibrary<ShapeStyle> LinesStyleLibrary()
         {
             var sgdl = Library<ShapeStyle>.Create("Lines");
 
@@ -79,10 +79,10 @@ namespace Core2D.Editor
         }
 
         /// <summary>
-        /// Creates a new instance of the <see cref="Library{ShapeStyle}"/> class.
+        /// Creates a new instance of the <see cref="ILibrary{ShapeStyle}"/> class.
         /// </summary>
-        /// <returns>The new instance of the <see cref="Library{ShapeStyle}"/>.</returns>
-        public static Library<ShapeStyle> TemplateStyleLibrary()
+        /// <returns>The new instance of the <see cref="ILibrary{ShapeStyle}"/>.</returns>
+        public static ILibrary<ShapeStyle> TemplateStyleLibrary()
         {
             var sgt = Library<ShapeStyle>.Create("Template");
             var gs = ShapeStyle.Create("Grid", 255, 222, 222, 222, 255, 222, 222, 222, 1.0);

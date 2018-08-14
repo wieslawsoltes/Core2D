@@ -385,21 +385,21 @@ namespace Core2D.Editor
                 }
                 Project.AddItems(Project?.CurrentGroupLibrary, groups);
             }
-            else if (item is Library<ShapeStyle>)
+            else if (item is ILibrary<ShapeStyle>)
             {
-                Project.AddStyleLibrary(item as Library<ShapeStyle>);
+                Project.AddStyleLibrary(item as ILibrary<ShapeStyle>);
             }
-            else if (item is IList<Library<ShapeStyle>>)
+            else if (item is IList<ILibrary<ShapeStyle>>)
             {
-                Project.AddStyleLibraries(item as IList<Library<ShapeStyle>>);
+                Project.AddStyleLibraries(item as IList<ILibrary<ShapeStyle>>);
             }
-            else if (item is Library<IGroupShape> gl)
+            else if (item is ILibrary<IGroupShape> gl)
             {
                 TryToRestoreStyles(gl.Items);
                 TryToRestoreRecords(gl.Items);
                 Project.AddGroupLibrary(gl);
             }
-            else if (item is IList<Library<IGroupShape>> gll)
+            else if (item is IList<ILibrary<IGroupShape>> gll)
             {
                 var shapes = gll.SelectMany(x => x.Items);
                 TryToRestoreStyles(shapes);
@@ -1495,7 +1495,7 @@ namespace Core2D.Editor
         /// Remove group library.
         /// </summary>
         /// <param name="library">The group library to remove.</param>
-        public void OnRemoveGroupLibrary(Library<IGroupShape> library)
+        public void OnRemoveGroupLibrary(ILibrary<IGroupShape> library)
         {
             Project.RemoveGroupLibrary(library);
             Project.SetCurrentGroupLibrary(Project?.GroupLibraries.FirstOrDefault());
@@ -1505,7 +1505,7 @@ namespace Core2D.Editor
         /// Add group.
         /// </summary>
         /// <param name="library">The group library.</param>
-        public void OnAddGroup(Library<IGroupShape> library)
+        public void OnAddGroup(ILibrary<IGroupShape> library)
         {
             if (Project != null && library != null)
             {
@@ -1578,7 +1578,7 @@ namespace Core2D.Editor
         /// Remove style library.
         /// </summary>
         /// <param name="library">The style library to remove.</param>
-        public void OnRemoveStyleLibrary(Library<ShapeStyle> library)
+        public void OnRemoveStyleLibrary(ILibrary<ShapeStyle> library)
         {
             Project.RemoveStyleLibrary(library);
             Project.SetCurrentStyleLibrary(Project?.StyleLibraries.FirstOrDefault());
@@ -1588,7 +1588,7 @@ namespace Core2D.Editor
         /// Add style.
         /// </summary>
         /// <param name="library">The style library.</param>
-        public void OnAddStyle(Library<ShapeStyle> library)
+        public void OnAddStyle(ILibrary<ShapeStyle> library)
         {
             Project.AddStyle(library, ShapeStyle.Create(Constants.DefaulStyleName));
         }
@@ -3762,7 +3762,7 @@ namespace Core2D.Editor
         /// <param name="library">The items library.</param>
         /// <param name="sourceIndex">The source item index.</param>
         /// <param name="targetIndex">The target item index.</param>
-        public void MoveItem<T>(Library<T> library, int sourceIndex, int targetIndex)
+        public void MoveItem<T>(ILibrary<T> library, int sourceIndex, int targetIndex)
         {
             if (sourceIndex < targetIndex)
             {
@@ -3801,7 +3801,7 @@ namespace Core2D.Editor
         /// <param name="library">The items library.</param>
         /// <param name="sourceIndex">The source item index.</param>
         /// <param name="targetIndex">The target item index.</param>
-        public void SwapItem<T>(Library<T> library, int sourceIndex, int targetIndex)
+        public void SwapItem<T>(ILibrary<T> library, int sourceIndex, int targetIndex)
         {
             var item1 = library.Items[sourceIndex];
             var item2 = library.Items[targetIndex];

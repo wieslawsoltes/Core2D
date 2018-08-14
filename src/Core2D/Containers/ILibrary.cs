@@ -6,11 +6,7 @@ namespace Core2D.Containers
     /// <summary>
     /// Defines library contract.
     /// </summary>
-    public interface ILibrary
+    public interface ILibrary : IObservableObject, ICopyable
     {
-        /// <summary>
-        /// Gets or sets library name.
-        /// </summary>
-        string Name { get; set; }
     }
 }

@@ -53,7 +53,7 @@ namespace Core2D.Editor
         public const string DefaulValue = "<empty>";
 
         /// <summary>
-        /// Default <see cref="Library{IGroupShape}"/> name.
+        /// Default <see cref="ILibrary{IGroupShape}"/> name.
         /// </summary>
         public const string DefaulGroupLibraryName = "Groups";
 
@@ -63,7 +63,7 @@ namespace Core2D.Editor
         public const string DefaulGroupName = "Group";
 
         /// <summary>
-        /// Default <see cref="Library{ShapeStyle}"/> name.
+        /// Default <see cref="ILibrary{ShapeStyle}"/> name.
         /// </summary>
         public const string DefaulStyleLibraryName = "Styles";
 
@@ -73,7 +73,7 @@ namespace Core2D.Editor
         public const string DefaulStyleName = "Style";
 
         /// <summary>
-        /// Default imported <see cref="Library{ShapeStyle}"/> name.
+        /// Default imported <see cref="ILibrary{ShapeStyle}"/> name.
         /// </summary>
         public const string ImportedStyleLibraryName = "Imported";
 

@@ -634,7 +634,7 @@ namespace Core2D.Editor
         /// </summary>
         /// <param name="project">The project instance.</param>
         /// <param name="library">The group library instance.</param>
-        public static void AddGroupLibrary(this IProjectContainer project, Library<IGroupShape> library)
+        public static void AddGroupLibrary(this IProjectContainer project, ILibrary<IGroupShape> library)
         {
             if (project?.GroupLibraries != null && library != null)
             {
@@ -650,7 +650,7 @@ namespace Core2D.Editor
         /// </summary>
         /// <param name="project">The project instance.</param>
         /// <param name="libraries">The group libraries collection.</param>
-        public static void AddGroupLibraries(this IProjectContainer project, IEnumerable<Library<IGroupShape>> libraries)
+        public static void AddGroupLibraries(this IProjectContainer project, IEnumerable<ILibrary<IGroupShape>> libraries)
         {
             if (project?.GroupLibraries != null && libraries != null)
             {
@@ -669,7 +669,7 @@ namespace Core2D.Editor
         /// </summary>
         /// <param name="project">The project instance.</param>
         /// <param name="library">The group library instance.</param>
-        public static void RemoveGroupLibrary(this IProjectContainer project, Library<IGroupShape> library)
+        public static void RemoveGroupLibrary(this IProjectContainer project, ILibrary<IGroupShape> library)
         {
             if (project?.GroupLibraries != null && library != null)
             {
@@ -685,7 +685,7 @@ namespace Core2D.Editor
         /// </summary>
         /// <param name="project">The project instance.</param>
         /// <param name="library">The style library instance.</param>
-        public static void AddStyleLibrary(this IProjectContainer project, Library<ShapeStyle> library)
+        public static void AddStyleLibrary(this IProjectContainer project, ILibrary<ShapeStyle> library)
         {
             if (project?.StyleLibraries != null && library != null)
             {
@@ -701,7 +701,7 @@ namespace Core2D.Editor
         /// </summary>
         /// <param name="project">The project instance.</param>
         /// <param name="libraries">The style libraries collection.</param>
-        public static void AddStyleLibraries(this IProjectContainer project, IEnumerable<Library<ShapeStyle>> libraries)
+        public static void AddStyleLibraries(this IProjectContainer project, IEnumerable<ILibrary<ShapeStyle>> libraries)
         {
             if (project?.StyleLibraries != null && libraries != null)
             {
@@ -720,7 +720,7 @@ namespace Core2D.Editor
         /// </summary>
         /// <param name="project">The project instance.</param>
         /// <param name="library">The style library instance.</param>
-        public static void RemoveStyleLibrary(this IProjectContainer project, Library<ShapeStyle> library)
+        public static void RemoveStyleLibrary(this IProjectContainer project, ILibrary<ShapeStyle> library)
         {
             if (project?.CurrentStyleLibrary != null && library != null)
             {
@@ -737,7 +737,7 @@ namespace Core2D.Editor
         /// <param name="project">The project instance.</param>
         /// <param name="library">The style library instance.</param>
         /// <param name="style">The style instance.</param>
-        public static void AddStyle(this IProjectContainer project, Library<ShapeStyle> library, ShapeStyle style)
+        public static void AddStyle(this IProjectContainer project, ILibrary<ShapeStyle> library, ShapeStyle style)
         {
             AddItem(project, library, style);
         }
@@ -748,7 +748,7 @@ namespace Core2D.Editor
         /// <param name="project">The project instance.</param>
         /// <param name="style">The style instance.</param>
         /// <returns>The owner style library.</returns>
-        public static Library<ShapeStyle> RemoveStyle(this IProjectContainer project, ShapeStyle style)
+        public static ILibrary<ShapeStyle> RemoveStyle(this IProjectContainer project, ShapeStyle style)
         {
             if (project?.StyleLibraries != null && style != null)
             {
@@ -802,7 +802,7 @@ namespace Core2D.Editor
         /// <param name="project">The project instance.</param>
         /// <param name="library">The group library instance.</param>
         /// <param name="group">The group instance.</param>
-        public static void AddGroup(this IProjectContainer project, Library<IGroupShape> library, IGroupShape group)
+        public static void AddGroup(this IProjectContainer project, ILibrary<IGroupShape> library, IGroupShape group)
         {
             AddItem(project, library, group);
         }
@@ -813,7 +813,7 @@ namespace Core2D.Editor
         /// <param name="project">The project instance.</param>
         /// <param name="group">The group instance.</param>
         /// <returns>The owner group library.</returns>
-        public static Library<IGroupShape> RemoveGroup(this IProjectContainer project, IGroupShape group)
+        public static ILibrary<IGroupShape> RemoveGroup(this IProjectContainer project, IGroupShape group)
         {
             if (project?.GroupLibraries != null && group != null)
             {
@@ -836,7 +836,7 @@ namespace Core2D.Editor
         /// <param name="project">The project instance.</param>
         /// <param name="library">The library instance.</param>
         /// <param name="item">The item instance.</param>
-        public static void AddItem<T>(this IProjectContainer project, Library<T> library, T item)
+        public static void AddItem<T>(this IProjectContainer project, ILibrary<T> library, T item)
         {
             if (library?.Items != null && item != null)
             {
@@ -853,7 +853,7 @@ namespace Core2D.Editor
         /// <param name="project">The project instance.</param>
         /// <param name="library">The library instance.</param>
         /// <param name="items">The items collection.</param>
-        public static void AddItems<T>(this IProjectContainer project, Library<T> library, IEnumerable<T> items)
+        public static void AddItems<T>(this IProjectContainer project, ILibrary<T> library, IEnumerable<T> items)
         {
             if (library?.Items != null && items != null)
             {

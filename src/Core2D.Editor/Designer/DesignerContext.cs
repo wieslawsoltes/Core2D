@@ -61,14 +61,14 @@ namespace Core2D.Editor.Designer
         public static IProjectContainer Project { get; set; }
 
         /// <summary>
-        /// The design time <see cref="Library{ShapeStyle}"/>.
+        /// The design time <see cref="ILibrary{ShapeStyle}"/>.
         /// </summary>
-        public static Library<ShapeStyle> CurrentStyleLibrary { get; set; }
+        public static ILibrary<ShapeStyle> CurrentStyleLibrary { get; set; }
 
         /// <summary>
-        /// The design time <see cref="Library{IGroupShape}"/>.
+        /// The design time <see cref="ILibrary{IGroupShape}"/>.
         /// </summary>
-        public static Library<IGroupShape> CurrentGroupLibrary { get; set; }
+        public static ILibrary<IGroupShape> CurrentGroupLibrary { get; set; }
 
         /// <summary>
         /// The design time <see cref="ShapeState"/>.

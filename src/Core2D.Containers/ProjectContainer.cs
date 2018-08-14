@@ -19,13 +19,13 @@ namespace Core2D.Containers
     {
         private IOptions _options;
         private IHistory _history;
-        private ImmutableArray<Library<ShapeStyle>> _styleLibraries;
-        private ImmutableArray<Library<IGroupShape>> _groupLibraries;
+        private ImmutableArray<ILibrary<ShapeStyle>> _styleLibraries;
+        private ImmutableArray<ILibrary<IGroupShape>> _groupLibraries;
         private ImmutableArray<Database> _databases;
         private ImmutableArray<IPageContainer> _templates;
         private ImmutableArray<IDocumentContainer> _documents;
-        private Library<ShapeStyle> _currentStyleLibrary;
-        private Library<IGroupShape> _currentGroupLibrary;
+        private ILibrary<ShapeStyle> _currentStyleLibrary;
+        private ILibrary<IGroupShape> _currentGroupLibrary;
         private Database _currentDatabase;
         private IPageContainer _currentTemplate;
         private IDocumentContainer _currentDocument;
@@ -47,14 +47,14 @@ namespace Core2D.Containers
         }
 
         /// <inheritdoc/>
-        public ImmutableArray<Library<ShapeStyle>> StyleLibraries
+        public ImmutableArray<ILibrary<ShapeStyle>> StyleLibraries
         {
             get => _styleLibraries;
             set => Update(ref _styleLibraries, value);
         }
 
         /// <inheritdoc/>
-        public ImmutableArray<Library<IGroupShape>> GroupLibraries
+        public ImmutableArray<ILibrary<IGroupShape>> GroupLibraries
         {
             get => _groupLibraries;
             set => Update(ref _groupLibraries, value);
@@ -83,14 +83,14 @@ namespace Core2D.Containers
         }
 
         /// <inheritdoc/>
-        public Library<ShapeStyle> CurrentStyleLibrary
+        public ILibrary<ShapeStyle> CurrentStyleLibrary
         {
             get => _currentStyleLibrary;
             set => Update(ref _currentStyleLibrary, value);
         }
 
         /// <inheritdoc/>
-        public Library<IGroupShape> CurrentGroupLibrary
+        public ILibrary<IGroupShape> CurrentGroupLibrary
         {
             get => _currentGroupLibrary;
             set => Update(ref _currentGroupLibrary, value);
@@ -197,8 +197,8 @@ namespace Core2D.Containers
             : base()
         {
             _options = Containers.Options.Create();
-            _styleLibraries = ImmutableArray.Create<Library<ShapeStyle>>();
-            _groupLibraries = ImmutableArray.Create<Library<IGroupShape>>();
+            _styleLibraries = ImmutableArray.Create<ILibrary<ShapeStyle>>();
+            _groupLibraries = ImmutableArray.Create<ILibrary<IGroupShape>>();
             _databases = ImmutableArray.Create<Database>();
             _templates = ImmutableArray.Create<IPageContainer>();
             _documents = ImmutableArray.Create<IDocumentContainer>();
@@ -225,10 +225,10 @@ namespace Core2D.Containers
         public void SetCurrentDatabase(Database db) => CurrentDatabase = db;
 
         /// <inheritdoc/>
-        public void SetCurrentGroupLibrary(Library<IGroupShape> library) => CurrentGroupLibrary = library;
+        public void SetCurrentGroupLibrary(ILibrary<IGroupShape> library) => CurrentGroupLibrary = library;
 
         /// <inheritdoc/>
-        public void SetCurrentStyleLibrary(Library<ShapeStyle> library) => CurrentStyleLibrary = library;
+        public void SetCurrentStyleLibrary(ILibrary<ShapeStyle> library) => CurrentStyleLibrary = library;
 
         /// <inheritdoc/>
         public void SetSelected(IObservableObject value)
