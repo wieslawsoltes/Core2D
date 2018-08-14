@@ -1,11 +1,33 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
-
 using System;
 using System.Collections.Generic;
 
 namespace Core2D.Style
 {
+    /// <summary>
+    /// Line style extensions.
+    /// </summary>
+    public static class LineStyleExtensions
+    {
+        /// <summary>
+        /// Clones line style.
+        /// </summary>
+        /// <param name="lineStyle">The line style to clone.</param>
+        /// <returns>The new instance of the <see cref="LineStyle"/> class.</returns>
+        public static LineStyle Clone(this LineStyle lineStyle)
+        {
+            return new LineStyle()
+            {
+                Name = lineStyle.Name,
+                IsCurved = lineStyle.IsCurved,
+                Curvature = lineStyle.Curvature,
+                CurveOrientation = lineStyle.CurveOrientation,
+                FixedLength = lineStyle.FixedLength.Clone()
+            };
+        }
+    }
+
     /// <summary>
     /// Line style.
     /// </summary>
@@ -81,22 +103,6 @@ namespace Core2D.Style
                 Curvature = curvature,
                 CurveOrientation = curveOrientation,
                 FixedLength = fixedLength ?? LineFixedLength.Create()
-            };
-        }
-
-        /// <summary>
-        /// Clones line style.
-        /// </summary>
-        /// <returns>The new instance of the <see cref="LineStyle"/> class.</returns>
-        public LineStyle Clone()
-        {
-            return new LineStyle()
-            {
-                Name = Name,
-                IsCurved = _isCurved,
-                Curvature = _curvature,
-                CurveOrientation = _curveOrientation,
-                FixedLength = _fixedLength.Clone()
             };
         }
 

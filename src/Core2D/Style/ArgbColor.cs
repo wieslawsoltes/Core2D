@@ -9,6 +9,28 @@ using System.Reflection;
 namespace Core2D.Style
 {
     /// <summary>
+    /// Argb color extensions.
+    /// </summary>
+    public static class ArgbColorExtensions
+    {
+        /// <summary>
+        /// Clones color.
+        /// </summary>
+        /// <param name="argbColor">The argb color to clone.</param>
+        /// <returns>The new instance of the <see cref="ArgbColor"/> class.</returns>
+        public static ArgbColor Clone(this ArgbColor argbColor)
+        {
+            return new ArgbColor()
+            {
+                A = argbColor.A,
+                R = argbColor.R,
+                G = argbColor.G,
+                B = argbColor.B
+            };
+        }
+    }
+
+    /// <summary>
     /// Color definition using alpha, red, green and blue channels.
     /// </summary>
     public class ArgbColor : ObservableObject, ICopyable
@@ -140,21 +162,6 @@ namespace Core2D.Style
         public static string ToHtml(ArgbColor c)
         {
             return string.Concat('#', c.A.ToString("X2"), c.R.ToString("X2"), c.G.ToString("X2"), c.B.ToString("X2"));
-        }
-
-        /// <summary>
-        /// Clones color.
-        /// </summary>
-        /// <returns>The new instance of the <see cref="ArgbColor"/> class.</returns>
-        public ArgbColor Clone()
-        {
-            return new ArgbColor()
-            {
-                A = _a,
-                R = _r,
-                G = _g,
-                B = _b
-            };
         }
 
         /// <summary>

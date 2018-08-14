@@ -35,16 +35,16 @@ namespace Core2D.UnitTests
 
             var propertyNames = new string[]
             {
-                nameof(ShapeState.Flags),
-                nameof(ShapeState.Default),
-                nameof(ShapeState.Visible),
-                nameof(ShapeState.Printable),
-                nameof(ShapeState.Locked),
-                nameof(ShapeState.Connector),
-                nameof(ShapeState.None),
-                nameof(ShapeState.Standalone),
-                nameof(ShapeState.Input),
-                nameof(ShapeState.Output)
+                nameof(IShapeState.Flags),
+                nameof(IShapeState.Default),
+                nameof(IShapeState.Visible),
+                nameof(IShapeState.Printable),
+                nameof(IShapeState.Locked),
+                nameof(IShapeState.Connector),
+                nameof(IShapeState.None),
+                nameof(IShapeState.Standalone),
+                nameof(IShapeState.Input),
+                nameof(IShapeState.Output)
             };
 
             Assert.Equal(propertyNames, target.PropertyNames);

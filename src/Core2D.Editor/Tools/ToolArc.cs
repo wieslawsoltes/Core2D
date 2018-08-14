@@ -7,6 +7,7 @@ using Core2D.Editor.Tools.Settings;
 using Spatial.Arc;
 using Spatial;
 using Core2D.Shapes;
+using Core2D.Style;
 
 namespace Core2D.Editor.Tools
 {

@@ -24,7 +24,7 @@ namespace Core2D.Shapes
         /// <summary>
         /// Indicates shape state options.
         /// </summary>
-        ShapeState State { get; set; }
+        IShapeState State { get; set; }
 
         /// <summary>
         /// Gets or sets shape <see cref="Context"/>.

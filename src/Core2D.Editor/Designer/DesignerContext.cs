@@ -71,9 +71,9 @@ namespace Core2D.Editor.Designer
         public static ILibrary<IGroupShape> CurrentGroupLibrary { get; set; }
 
         /// <summary>
-        /// The design time <see cref="ShapeState"/>.
+        /// The design time <see cref="IShapeState"/>.
         /// </summary>
-        public static ShapeState State { get; set; }
+        public static IShapeState State { get; set; }
 
         /// <summary>
         /// The design time <see cref="Data.Database"/>.

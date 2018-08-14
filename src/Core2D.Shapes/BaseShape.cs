@@ -14,7 +14,7 @@ namespace Core2D.Shapes
     public abstract class BaseShape : ObservableObject, IBaseShape
     {
         private IBaseShape _owner;
-        private ShapeState _state;
+        private IShapeState _state;
         private ShapeStyle _style;
         private MatrixObject _transform;
         private bool _isStroked;
@@ -32,7 +32,7 @@ namespace Core2D.Shapes
         }
 
         /// <inheritdoc/>
-        public virtual ShapeState State
+        public virtual IShapeState State
         {
             get => _state;
             set => Update(ref _state, value);

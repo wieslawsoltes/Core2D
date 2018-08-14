@@ -7,15 +7,32 @@ using Core2D.Attributes;
 namespace Core2D.Shapes
 {
     /// <summary>
+    /// Shape state extensions.
+    /// </summary>
+    public static class ShapeStateExtensions
+    {
+        /// <summary>
+        /// Clones shape state.
+        /// </summary>
+        /// <param name="shapeState">The shape state to clone.</param>
+        /// <returns>The new instance of the <see cref="ShapeState"/> class.</returns>
+        public static IShapeState Clone(this IShapeState shapeState)
+        {
+            return new ShapeState()
+            {
+                Flags = shapeState.Flags
+            };
+        }
+    }
+
+    /// <summary>
     /// Shape state.
     /// </summary>
-    public class ShapeState : ObservableObject, ICopyable
+    public class ShapeState : ObservableObject, IShapeState
     {
         private ShapeStateFlags _flags;
 
-        /// <summary>
-        /// Gets or sets shape state flags.
-        /// </summary>
+        /// <inheritdoc/>
         [Content]
         public ShapeStateFlags Flags
         {
@@ -40,81 +57,63 @@ namespace Core2D.Shapes
             Notify(nameof(Output));
         }
 
-        /// <summary>
-        /// Gets or sets <see cref="ShapeStateFlags.Default"/> flag.
-        /// </summary>
+        /// <inheritdoc/>
         public bool Default
         {
             get => _flags == ShapeStateFlags.Default;
             set => Flags = value ? _flags | ShapeStateFlags.Default : _flags & ~ShapeStateFlags.Default;
         }
 
-        /// <summary>
-        /// Gets or sets <see cref="ShapeStateFlags.Visible"/> flag.
-        /// </summary>
+        /// <inheritdoc/>
         public bool Visible
         {
             get => _flags.HasFlag(ShapeStateFlags.Visible);
             set => Flags = value ? _flags | ShapeStateFlags.Visible : _flags & ~ShapeStateFlags.Visible;
         }
 
-        /// <summary>
-        /// Gets or sets <see cref="ShapeStateFlags.Printable"/> flag.
-        /// </summary>
+        /// <inheritdoc/>
         public bool Printable
         {
             get => _flags.HasFlag(ShapeStateFlags.Printable);
             set => Flags = value ? _flags | ShapeStateFlags.Printable : _flags & ~ShapeStateFlags.Printable;
         }
 
-        /// <summary>
-        /// Gets or sets <see cref="ShapeStateFlags.Default"/> flag.
-        /// </summary>
+        /// <inheritdoc/>
         public bool Locked
         {
             get => _flags.HasFlag(ShapeStateFlags.Locked);
             set => Flags = value ? _flags | ShapeStateFlags.Locked : _flags & ~ShapeStateFlags.Locked;
         }
 
-        /// <summary>
-        /// Gets or sets <see cref="ShapeStateFlags.Connector"/> flag.
-        /// </summary>
+        /// <inheritdoc/>
         public bool Connector
         {
             get => _flags.HasFlag(ShapeStateFlags.Connector);
             set => Flags = value ? _flags | ShapeStateFlags.Connector : _flags & ~ShapeStateFlags.Connector;
         }
 
-        /// <summary>
-        /// Gets or sets <see cref="ShapeStateFlags.None"/> flag.
-        /// </summary>
+        /// <inheritdoc/>
         public bool None
         {
             get => _flags.HasFlag(ShapeStateFlags.None);
             set => Flags = value ? _flags | ShapeStateFlags.None : _flags & ~ShapeStateFlags.None;
         }
 
-        /// <summary>
-        /// Gets or sets <see cref="ShapeStateFlags.Standalone"/> flag.
-        /// </summary>
+        /// <inheritdoc/>
         public bool Standalone
         {
             get => _flags.HasFlag(ShapeStateFlags.Standalone);
             set => Flags = value ? _flags | ShapeStateFlags.Standalone : _flags & ~ShapeStateFlags.Standalone;
         }
 
-        /// <summary>
-        /// Gets or sets <see cref="ShapeStateFlags.Input"/> flag.
-        /// </summary>
+        /// <inheritdoc/>
         public bool Input
         {
             get => _flags.HasFlag(ShapeStateFlags.Input);
             set => Flags = value ? _flags | ShapeStateFlags.Input : _flags & ~ShapeStateFlags.Input;
         }
 
-        /// <summary>
-        /// Gets or sets <see cref="ShapeStateFlags.Output"/> flag.
-        /// </summary>
+        /// <inheritdoc/>
         public bool Output
         {
             get => _flags.HasFlag(ShapeStateFlags.Output);
@@ -132,7 +131,7 @@ namespace Core2D.Shapes
         /// </summary>
         /// <param name="flags">The state flags.</param>
         /// <returns>The new instance of the <see cref="ShapeState"/> class.</returns>
-        public static ShapeState Create(ShapeStateFlags flags = ShapeStateFlags.Default)
+        public static IShapeState Create(ShapeStateFlags flags = ShapeStateFlags.Default)
         {
             return new ShapeState()
             {
@@ -145,7 +144,7 @@ namespace Core2D.Shapes
         /// </summary>
         /// <param name="s">The shape state string.</param>
         /// <returns>The <see cref="ShapeState"/>.</returns>
-        public static ShapeState Parse(string s)
+        public static IShapeState Parse(string s)
         {
             var flags = (ShapeStateFlags)Enum.Parse(typeof(ShapeStateFlags), s, true);
 
@@ -156,18 +155,6 @@ namespace Core2D.Shapes
         public override string ToString()
         {
             return _flags.ToString();
-        }
-
-        /// <summary>
-        /// Clones shape state.
-        /// </summary>
-        /// <returns>The new instance of the <see cref="ShapeState"/> class.</returns>
-        public ShapeState Clone()
-        {
-            return new ShapeState()
-            {
-                Flags = _flags
-            };
         }
 
         /// <summary>

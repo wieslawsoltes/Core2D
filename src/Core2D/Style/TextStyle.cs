@@ -6,6 +6,31 @@ using System.Collections.Generic;
 namespace Core2D.Style
 {
     /// <summary>
+    /// Text style extensions.
+    /// </summary>
+    public static class TextStyleExtensions
+    {
+        /// <summary>
+        /// Clones text style.
+        /// </summary>
+        /// <param name="textStyle">The text style to clone.</param>
+        /// <returns>The new instance of the <see cref="TextStyle"/> class.</returns>
+        public static TextStyle Clone(this TextStyle textStyle)
+        {
+            return new TextStyle()
+            {
+                Name = textStyle.Name,
+                FontName = textStyle.FontName,
+                FontFile = textStyle.FontFile,
+                FontSize = textStyle.FontSize,
+                FontStyle = textStyle.FontStyle.Clone(),
+                TextHAlignment = textStyle.TextHAlignment,
+                TextVAlignment = textStyle.TextVAlignment
+            };
+        }
+    }
+
+    /// <summary>
     /// Text style.
     /// </summary>
     public class TextStyle : ObservableObject, ICopyable
@@ -99,24 +124,6 @@ namespace Core2D.Style
                 FontStyle = fontStyle ?? FontStyle.Create(FontStyleFlags.Regular),
                 TextHAlignment = textHAlignment,
                 TextVAlignment = textVAlignment
-            };
-        }
-
-        /// <summary>
-        /// Clones text style.
-        /// </summary>
-        /// <returns>The new instance of the <see cref="TextStyle"/> class.</returns>
-        public TextStyle Clone()
-        {
-            return new TextStyle()
-            {
-                Name = Name,
-                FontName = _fontName,
-                FontFile = _fontFile,
-                FontSize = _fontSize,
-                FontStyle = _fontStyle.Clone(),
-                TextHAlignment = _textHAlignment,
-                TextVAlignment = _textVAlignment
             };
         }
 

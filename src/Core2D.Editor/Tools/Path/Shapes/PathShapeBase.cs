@@ -20,7 +20,7 @@ namespace Core2D.Editor.Tools.Path.Shapes
         public string Name { get; set; }
         public abstract Type TargetType { get; }
         public IBaseShape Owner { get; set; }
-        public ShapeState State { get; set; }
+        public IShapeState State { get; set; }
         public Context Data { get; set; }
         public ShapeStyle Style { get; set; }
         public bool IsStroked { get; set; }

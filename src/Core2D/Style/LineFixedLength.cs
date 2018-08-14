@@ -8,13 +8,34 @@ using Core2D.Shapes;
 namespace Core2D.Style
 {
     /// <summary>
+    /// Line fixed length extensions.
+    /// </summary>
+    public static class LineFixedLengthExtensions
+    {
+        /// <summary>
+        /// Clones line fixed length.
+        /// </summary>
+        /// <param name="fixedLength">The line fixed length to clone.</param>
+        /// <returns>The new instance of the <see cref="LineFixedLength"/> class.</returns>
+        public static LineFixedLength Clone(this LineFixedLength fixedLength)
+        {
+            return new LineFixedLength()
+            {
+                Flags = fixedLength.Flags,
+                StartTrigger = fixedLength.StartTrigger.Clone(),
+                EndTrigger = fixedLength.EndTrigger.Clone()
+            };
+        }
+    }
+
+    /// <summary>
     /// Line fixed length.
     /// </summary>
     public class LineFixedLength : ObservableObject, ICopyable
     {
         private LineFixedLengthFlags _flags;
-        private ShapeState _startTrigger;
-        private ShapeState _endTrigger;
+        private IShapeState _startTrigger;
+        private IShapeState _endTrigger;
         private double _length;
 
         /// <summary>
@@ -98,7 +119,7 @@ namespace Core2D.Style
         /// <summary>
         /// Gets or sets line start point state trigger.
         /// </summary>
-        public ShapeState StartTrigger
+        public IShapeState StartTrigger
         {
             get => _startTrigger;
             set => Update(ref _startTrigger, value);
@@ -107,7 +128,7 @@ namespace Core2D.Style
         /// <summary>
         /// Gets or sets line end point state trigger.
         /// </summary>
-        public ShapeState EndTrigger
+        public IShapeState EndTrigger
         {
             get => _endTrigger;
             set => Update(ref _endTrigger, value);
@@ -136,7 +157,7 @@ namespace Core2D.Style
         /// <param name="endTrigger">The line end point state trigger.</param>
         /// <param name="length">The line fixed length.</param>
         /// <returns>he new instance of the <see cref="LineFixedLength"/> class.</returns>
-        public static LineFixedLength Create(LineFixedLengthFlags flags = LineFixedLengthFlags.Disabled, ShapeState startTrigger = null, ShapeState endTrigger = null, double length = 15.0)
+        public static LineFixedLength Create(LineFixedLengthFlags flags = LineFixedLengthFlags.Disabled, IShapeState startTrigger = null, IShapeState endTrigger = null, double length = 15.0)
         {
             return new LineFixedLength()
             {
@@ -163,20 +184,6 @@ namespace Core2D.Style
         public override string ToString()
         {
             return _flags.ToString();
-        }
-
-        /// <summary>
-        /// Clones line fixed length.
-        /// </summary>
-        /// <returns>The new instance of the <see cref="LineFixedLength"/> class.</returns>
-        public LineFixedLength Clone()
-        {
-            return new LineFixedLength()
-            {
-                Flags = _flags,
-                StartTrigger = _startTrigger.Clone(),
-                EndTrigger = _endTrigger.Clone()
-            };
         }
 
         /// <summary>

@@ -14,7 +14,7 @@ namespace Core2D.Renderer
         private double _panY;
         private double _zoomX;
         private double _zoomY;
-        private ShapeState _drawShapeState;
+        private IShapeState _drawShapeState;
         private IBaseShape _selectedShape;
         private ImmutableHashSet<IBaseShape> _selectedShapes;
         private IImageCache _imageCache;
@@ -58,7 +58,7 @@ namespace Core2D.Renderer
         /// <summary>
         /// Flag indicating shape state to enable its drawing.
         /// </summary>
-        public ShapeState DrawShapeState
+        public IShapeState DrawShapeState
         {
             get => _drawShapeState;
             set => Update(ref _drawShapeState, value);

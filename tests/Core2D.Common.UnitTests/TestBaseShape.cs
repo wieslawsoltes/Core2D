@@ -14,15 +14,15 @@ namespace Core2D.Common.UnitTests
     public abstract class TestBaseShape : IBaseShape
     {
         public abstract Type TargetType { get; }
-        public IBaseShape Owner { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
-        public ShapeState State { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
-        public Context Data { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
-        public string Id { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
-        public string Name { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
-        public ShapeStyle Style { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
-        public bool IsStroked { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
-        public bool IsFilled { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
-        public MatrixObject Transform { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
+        public IBaseShape Owner { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public IShapeState State { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public Context Data { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public string Id { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public string Name { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public ShapeStyle Style { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public bool IsStroked { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public bool IsFilled { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public MatrixObject Transform { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
 #pragma warning disable CS0067
         public event PropertyChangedEventHandler PropertyChanged;
@@ -30,62 +30,62 @@ namespace Core2D.Common.UnitTests
 
         public object BeginTransform(object dc, ShapeRenderer renderer)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         public object Copy(IDictionary<object, object> shared)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         public void Deselect(ISet<IBaseShape> selected)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         public void Draw(object dc, ShapeRenderer renderer, double dx, double dy, object db, object r)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         public void EndTransform(object dc, ShapeRenderer renderer, object state)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         public IEnumerable<IPointShape> GetPoints()
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         public bool Invalidate(ShapeRenderer renderer, double dx, double dy)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         public void MarkAsDirty(bool value)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         public void Move(ISet<IBaseShape> selected, double dx, double dy)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         public void Notify([CallerMemberName] string propertyName = null)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         public void Select(ISet<IBaseShape> selected)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         public bool Update<T>(ref T field, T value, [CallerMemberName] string propertyName = null)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
     }
 }

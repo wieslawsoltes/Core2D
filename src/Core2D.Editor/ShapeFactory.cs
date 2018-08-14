@@ -5,6 +5,7 @@ using Core2D.Interfaces;
 using Core2D.Path;
 using Core2D.Renderer;
 using Core2D.Shapes;
+using Core2D.Style;
 
 namespace Core2D.Editor
 {
