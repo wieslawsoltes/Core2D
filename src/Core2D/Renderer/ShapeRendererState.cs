@@ -10,7 +10,7 @@ namespace Core2D.Renderer
     /// <summary>
     /// Shape renderer state.
     /// </summary>
-    public class ShapeRendererState : ObservableObject
+    public class ShapeRendererState : ObservableObject, IShapeRendererState
     {
         private double _panX;
         private double _panY;
@@ -21,72 +21,56 @@ namespace Core2D.Renderer
         private ImmutableHashSet<IBaseShape> _selectedShapes;
         private IImageCache _imageCache;
 
-        /// <summary>
-        /// The X coordinate of current pan position.
-        /// </summary>
+        /// <inheritdoc/>
         public double PanX
         {
             get => _panX;
             set => Update(ref _panX, value);
         }
 
-        /// <summary>
-        /// The Y coordinate of current pan position.
-        /// </summary>
+        /// <inheritdoc/>
         public double PanY
         {
             get => _panY;
             set => Update(ref _panY, value);
         }
 
-        /// <summary>
-        /// The X component of current zoom value.
-        /// </summary>
+        /// <inheritdoc/>
         public double ZoomX
         {
             get => _zoomX;
             set => Update(ref _zoomX, value);
         }
 
-        /// <summary>
-        /// The Y component of current zoom value.
-        /// </summary>
+        /// <inheritdoc/>
         public double ZoomY
         {
             get => _zoomY;
             set => Update(ref _zoomY, value);
         }
 
-        /// <summary>
-        /// Flag indicating shape state to enable its drawing.
-        /// </summary>
+        /// <inheritdoc/>
         public IShapeState DrawShapeState
         {
             get => _drawShapeState;
             set => Update(ref _drawShapeState, value);
         }
 
-        /// <summary>
-        /// Currently selected shape.
-        /// </summary>
+        /// <inheritdoc/>
         public IBaseShape SelectedShape
         {
             get => _selectedShape;
             set => Update(ref _selectedShape, value);
         }
 
-        /// <summary>
-        /// Currently selected shapes.
-        /// </summary>
+        /// <inheritdoc/>
         public ImmutableHashSet<IBaseShape> SelectedShapes
         {
             get => _selectedShapes;
             set => Update(ref _selectedShapes, value);
         }
 
-        /// <summary>
-        /// Image cache repository.
-        /// </summary>
+        /// <inheritdoc/>
         public IImageCache ImageCache
         {
             get => _imageCache;

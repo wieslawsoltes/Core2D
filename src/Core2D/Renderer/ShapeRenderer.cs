@@ -11,12 +11,12 @@ namespace Core2D.Renderer
     /// </summary>
     public abstract class ShapeRenderer : ObservableObject
     {
-        private ShapeRendererState _state = new ShapeRendererState();
+        private IShapeRendererState _state = new ShapeRendererState();
 
         /// <summary>
         /// Gets or sets renderer state.
         /// </summary>
-        public virtual ShapeRendererState State
+        public virtual IShapeRendererState State
         {
             get => _state;
             set => Update(ref _state, value);
