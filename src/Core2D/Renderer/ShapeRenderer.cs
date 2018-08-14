@@ -43,7 +43,7 @@ namespace Core2D.Renderer
         /// <param name="width">The width of rectangle.</param>
         /// <param name="height">The height of rectangle.</param>
         /// <param name="color">The fill color.</param>
-        public abstract void Fill(object dc, double x, double y, double width, double height, IArgbColor color);
+        public abstract void Fill(object dc, double x, double y, double width, double height, IColor color);
 
         /// <summary>
         /// Push matrix.

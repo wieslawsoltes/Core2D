@@ -6,7 +6,7 @@ namespace Core2D.Style
     /// <summary>
     /// Defines ARGB color contract.
     /// </summary>
-    public interface IArgbColor : IObservableObject
+    public interface IArgbColor : IColor
     {
         /// <summary>
         /// Alpha color channel.

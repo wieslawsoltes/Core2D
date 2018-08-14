@@ -19,9 +19,9 @@ namespace Core2D.Renderer.SkiaSharp
     {
         private bool _isAntialias = true;
         private ICache<string, SKBitmap> _biCache = Cache<string, SKBitmap>.Create(bi => bi.Dispose());
-        private Func<double, float> _scaleToPage;
-        private double _sourceDpi = 96.0;
-        private double _targetDpi = 72.0;
+        private readonly Func<double, float> _scaleToPage;
+        private readonly double _sourceDpi = 96.0;
+        private readonly double _targetDpi = 72.0;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SkiaSharpRenderer"/> class.
@@ -87,7 +87,16 @@ namespace Core2D.Renderer.SkiaSharp
             return new SKPoint((float)ox, (float)oy);
         }
 
-        private SKColor ToSKColor(IArgbColor color) => new SKColor(color.R, color.G, color.B, color.A);
+        private SKColor ToSKColor(IColor color)
+        {
+            switch (color)
+            {
+                case IArgbColor argbColor:
+                    return new SKColor(argbColor.R, argbColor.G, argbColor.B, argbColor.A);
+                default:
+                    throw new NotSupportedException($"The {color.GetType()} color type is not supported.");
+            }
+        }
 
         private static SKStrokeCap ToStrokeCap(BaseStyle style)
         {
@@ -116,7 +125,7 @@ namespace Core2D.Renderer.SkiaSharp
             };
         }
 
-        private SKPaint ToSKPaintBrush(IArgbColor color)
+        private SKPaint ToSKPaintBrush(IColor color)
         {
             return new SKPaint()
             {
@@ -337,7 +346,7 @@ namespace Core2D.Renderer.SkiaSharp
             }
         }
 
-        private void DrawBackgroundInternal(SKCanvas canvas, IArgbColor color, Rect2 rect)
+        private void DrawBackgroundInternal(SKCanvas canvas, IColor color, Rect2 rect)
         {
             using (var brush = ToSKPaintBrush(color))
             {
@@ -368,7 +377,7 @@ namespace Core2D.Renderer.SkiaSharp
         }
 
         /// <inheritdoc/>
-        public override void Fill(object dc, double x, double y, double width, double height, IArgbColor color)
+        public override void Fill(object dc, double x, double y, double width, double height, IColor color)
         {
             var canvas = dc as SKCanvas;
             var rect = SKRect.Create((float)x, (float)y, (float)width, (float)height);

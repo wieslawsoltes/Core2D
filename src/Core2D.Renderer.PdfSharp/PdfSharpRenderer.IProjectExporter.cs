@@ -125,10 +125,7 @@ namespace Core2D.Renderer.PdfSharp
                 _scaleToPage = (value) => value * scale;
 
                 // Draw container template contents to pdf graphics.
-                if (container.Template.Background.A > 0)
-                {
-                    Fill(gfx, 0, 0, pdfPage.Width.Value / scale, pdfPage.Height.Value / scale, container.Template.Background);
-                }
+                Fill(gfx, 0, 0, pdfPage.Width.Value / scale, pdfPage.Height.Value / scale, container.Template.Background);
 
                 // Draw template contents to pdf graphics.
                 base.Draw(gfx, container.Template, 0.0, 0.0, (object)container.Data.Properties, (object)container.Data.Record);

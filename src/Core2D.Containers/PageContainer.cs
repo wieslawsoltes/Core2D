@@ -18,7 +18,7 @@ namespace Core2D.Containers
     {
         private double _width;
         private double _height;
-        private IArgbColor _background;
+        private IColor _background;
         private ImmutableArray<ILayerContainer> _layers;
         private ILayerContainer _currentLayer;
         private ILayerContainer _workingLayer;
@@ -65,7 +65,7 @@ namespace Core2D.Containers
         }
 
         /// <inheritdoc/>
-        public IArgbColor Background
+        public IColor Background
         {
             get => _template != null ? _template.Background : _background;
             set

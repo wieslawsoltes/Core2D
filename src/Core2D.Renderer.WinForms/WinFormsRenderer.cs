@@ -45,7 +45,27 @@ namespace Core2D.Renderer.WinForms
         /// <returns>The new instance of the <see cref="WinFormsRenderer"/> class.</returns>
         public static ShapeRenderer Create() => new WinFormsRenderer();
 
-        private static Color ToColor(IArgbColor color) => Color.FromArgb(color.A, color.R, color.G, color.B);
+        private static Color ToColor(IColor color)
+        {
+            switch (color)
+            {
+                case IArgbColor argbColor:
+                    return Color.FromArgb(argbColor.A, argbColor.R, argbColor.G, argbColor.B);
+                default:
+                    throw new NotSupportedException($"The {color.GetType()} color type is not supported.");
+            }
+        }
+
+        private Brush ToBrush(IColor color)
+        {
+            switch (color)
+            {
+                case IArgbColor argbColor:
+                    return new SolidBrush(ToColor(argbColor));
+                default:
+                    throw new NotSupportedException($"The {color.GetType()} color type is not supported.");
+            }
+        }
 
         private Pen ToPen(BaseStyle style, Func<double, float> scale)
         {
@@ -76,8 +96,6 @@ namespace Core2D.Renderer.WinForms
             pen.DashOffset = (float)style.DashOffset;
             return pen;
         }
-
-        private SolidBrush ToSolidBrush(IArgbColor color) => new SolidBrush(ToColor(color));
 
         private static Rect2 CreateRect(IPointShape tl, IPointShape br, double dx, double dy) => Rect2.FromPoints(tl.X, tl.Y, br.X, br.Y, dx, dy);
 
@@ -111,10 +129,10 @@ namespace Core2D.Renderer.WinForms
 
         private void DrawLineArrowsInternal(ILineShape line, double dx, double dy, Graphics gfx, out PointF pt1, out PointF pt2)
         {
-            Brush fillStartArrow = ToSolidBrush(line.Style.StartArrowStyle.Fill);
+            Brush fillStartArrow = ToBrush(line.Style.StartArrowStyle.Fill);
             var strokeStartArrow = ToPen(line.Style.StartArrowStyle, _scaleToPage);
 
-            Brush fillEndArrow = ToSolidBrush(line.Style.EndArrowStyle.Fill);
+            Brush fillEndArrow = ToBrush(line.Style.EndArrowStyle.Fill);
             var strokeEndArrow = ToPen(line.Style.EndArrowStyle, _scaleToPage);
 
             double _x1 = line.Start.X + dx;
@@ -310,10 +328,10 @@ namespace Core2D.Renderer.WinForms
         }
 
         /// <inheritdoc/>
-        public override void Fill(object dc, double x, double y, double width, double height, IArgbColor color)
+        public override void Fill(object dc, double x, double y, double width, double height, IColor color)
         {
             var _gfx = dc as Graphics;
-            Brush brush = ToSolidBrush(color);
+            Brush brush = ToBrush(color);
             _gfx.FillRectangle(
                 brush,
                 (float)x,
@@ -372,7 +390,7 @@ namespace Core2D.Renderer.WinForms
         {
             var _gfx = dc as Graphics;
 
-            Brush brush = ToSolidBrush(rectangle.Style.Fill);
+            Brush brush = ToBrush(rectangle.Style.Fill);
             var pen = ToPen(rectangle.Style, _scaleToPage);
 
             var rect = CreateRect(
@@ -420,7 +438,7 @@ namespace Core2D.Renderer.WinForms
         {
             var _gfx = dc as Graphics;
 
-            Brush brush = ToSolidBrush(ellipse.Style.Fill);
+            Brush brush = ToBrush(ellipse.Style.Fill);
             var pen = ToPen(ellipse.Style, _scaleToPage);
 
             var rect = CreateRect(
@@ -465,7 +483,7 @@ namespace Core2D.Renderer.WinForms
 
             var _gfx = dc as Graphics;
 
-            Brush brush = ToSolidBrush(arc.Style.Fill);
+            Brush brush = ToBrush(arc.Style.Fill);
             var pen = ToPen(arc.Style, _scaleToPage);
 
             if (arc.IsFilled)
@@ -502,7 +520,7 @@ namespace Core2D.Renderer.WinForms
         {
             var _gfx = dc as Graphics;
 
-            Brush brush = ToSolidBrush(cubicBezier.Style.Fill);
+            Brush brush = ToBrush(cubicBezier.Style.Fill);
             var pen = ToPen(cubicBezier.Style, _scaleToPage);
 
             if (cubicBezier.IsFilled)
@@ -543,7 +561,7 @@ namespace Core2D.Renderer.WinForms
         {
             var _gfx = dc as Graphics;
 
-            Brush brush = ToSolidBrush(quadraticBezier.Style.Fill);
+            Brush brush = ToBrush(quadraticBezier.Style.Fill);
             var pen = ToPen(quadraticBezier.Style, _scaleToPage);
 
             double x1 = quadraticBezier.Point1.X;
@@ -599,7 +617,7 @@ namespace Core2D.Renderer.WinForms
             if (string.IsNullOrEmpty(tbind))
                 return;
 
-            Brush brush = ToSolidBrush(text.Style.Stroke);
+            Brush brush = ToBrush(text.Style.Stroke);
 
             var fontStyle = System.Drawing.FontStyle.Regular;
             if (text.Style.TextStyle.FontStyle != null)
@@ -674,7 +692,7 @@ namespace Core2D.Renderer.WinForms
             _gfx.DrawString(
                 tbind,
                 font,
-                ToSolidBrush(text.Style.Stroke),
+                ToBrush(text.Style.Stroke),
                 srect,
                 format);
 
@@ -687,7 +705,7 @@ namespace Core2D.Renderer.WinForms
         {
             var _gfx = dc as Graphics;
 
-            Brush brush = ToSolidBrush(image.Style.Stroke);
+            Brush brush = ToBrush(image.Style.Stroke);
 
             var rect = CreateRect(
                 image.TopLeft,
@@ -703,7 +721,7 @@ namespace Core2D.Renderer.WinForms
             if (image.IsFilled)
             {
                 _gfx.FillRectangle(
-                    ToSolidBrush(image.Style.Fill),
+                    ToBrush(image.Style.Fill),
                     srect);
             }
 
@@ -752,7 +770,7 @@ namespace Core2D.Renderer.WinForms
 
             if (path.IsFilled && path.IsStroked)
             {
-                var brush = ToSolidBrush(path.Style.Fill);
+                var brush = ToBrush(path.Style.Fill);
                 var pen = ToPen(path.Style, _scaleToPage);
                 _gfx.FillPath(
                     brush,
@@ -765,7 +783,7 @@ namespace Core2D.Renderer.WinForms
             }
             else if (path.IsFilled && !path.IsStroked)
             {
-                var brush = ToSolidBrush(path.Style.Fill);
+                var brush = ToBrush(path.Style.Fill);
                 _gfx.FillPath(
                     brush,
                     gp);

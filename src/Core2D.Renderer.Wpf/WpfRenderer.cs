@@ -87,13 +87,28 @@ namespace Core2D.Renderer.Wpf
             return new W.Point(ox, oy);
         }
 
-        private static WM.Color ToColor(IArgbColor color) => WM.Color.FromArgb(color.A, color.R, color.G, color.B);
-
-        private static WM.Brush ToBrush(IArgbColor color)
+        private static WM.Color ToColor(IColor color)
         {
-            var brush = new WM.SolidColorBrush(ToColor(color));
-            brush.Freeze();
-            return brush;
+            switch (color)
+            {
+                case IArgbColor argbColor:
+                    return WM.Color.FromArgb(argbColor.A, argbColor.R, argbColor.G, argbColor.B);
+                default:
+                    throw new NotSupportedException($"The {color.GetType()} color type is not supported.");
+            }
+        }
+
+        private static WM.Brush ToBrush(IColor color)
+        {
+            switch (color)
+            {
+                case IArgbColor argbColor:
+                    var brush = new WM.SolidColorBrush(ToColor(argbColor));
+                    brush.Freeze();
+                    return brush;
+                default:
+                    throw new NotSupportedException($"The {color.GetType()} color type is not supported.");
+            }
         }
 
         private static WM.Pen ToPen(BaseStyle style, double thickness)
@@ -551,7 +566,7 @@ namespace Core2D.Renderer.Wpf
         }
 
         /// <inheritdoc/>
-        public override void Fill(object dc, double x, double y, double width, double height, IArgbColor color)
+        public override void Fill(object dc, double x, double y, double width, double height, IColor color)
         {
             var _dc = dc as WM.DrawingContext;
             var brush = ToBrush(color);

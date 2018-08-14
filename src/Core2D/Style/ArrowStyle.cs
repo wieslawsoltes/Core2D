@@ -104,16 +104,8 @@ namespace Core2D.Style
         /// <param name="source">The source style.</param>
         public ArrowStyle(BaseStyle source) : this()
         {
-            Stroke = ArgbColor.Create
-                (source.Stroke.A,
-                 source.Stroke.R,
-                 source.Stroke.G,
-                 source.Stroke.B);
-            Fill = ArgbColor.Create
-                (source.Fill.A,
-                 source.Fill.R,
-                 source.Fill.G,
-                 source.Fill.B);
+            Stroke = source.Stroke.Clone();
+            Fill = source.Fill.Clone();
             Thickness = source.Thickness;
             LineCap = source.LineCap;
             Dashes = source.Dashes ?? (default);

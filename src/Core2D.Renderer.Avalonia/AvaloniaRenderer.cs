@@ -92,11 +92,26 @@ namespace Core2D.Renderer.Avalonia
             return new A.Point(ox, oy);
         }
 
-        private static AM.Color ToColor(IArgbColor color) => AM.Color.FromArgb(color.A, color.R, color.G, color.B);
-
-        private AM.IBrush ToBrush(IArgbColor color)
+        private static AM.Color ToColor(IColor color)
         {
-            return new AM.SolidColorBrush(ToColor(color));
+            switch (color)
+            {
+                case IArgbColor argbColor:
+                    return AM.Color.FromArgb(argbColor.A, argbColor.R, argbColor.G, argbColor.B);
+                default:
+                    throw new NotSupportedException($"The {color.GetType()} color type is not supported.");
+            }
+        }
+
+        private AM.IBrush ToBrush(IColor color)
+        {
+            switch (color)
+            {
+                case IArgbColor argbColor:
+                    return new AM.SolidColorBrush(ToColor(argbColor));
+                default:
+                    throw new NotSupportedException($"The {color.GetType()} color type is not supported.");
+            }
         }
 
         private AM.Pen ToPen(BaseStyle style, Func<double, float> scale)
@@ -431,7 +446,7 @@ namespace Core2D.Renderer.Avalonia
         }
 
         /// <inheritdoc/>
-        public override void Fill(object dc, double x, double y, double width, double height, IArgbColor color)
+        public override void Fill(object dc, double x, double y, double width, double height, IColor color)
         {
             var _dc = dc as AM.DrawingContext;
             var brush = ToBrush(color);

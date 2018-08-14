@@ -140,7 +140,7 @@ namespace Core2D.Style
         /// <param name="startArrowStyle">The start arrow style.</param>
         /// <param name="endArrowStyle">The end arrow style.</param>
         /// <returns>The new instance of the <see cref="ShapeStyle"/> class.</returns>
-        public static ShapeStyle Create(string name, IArgbColor stroke, IArgbColor fill, double thickness, TextStyle textStyle, LineStyle lineStyle, ArrowStyle startArrowStyle, ArrowStyle endArrowStyle)
+        public static ShapeStyle Create(string name, IColor stroke, IColor fill, double thickness, TextStyle textStyle, LineStyle lineStyle, ArrowStyle startArrowStyle, ArrowStyle endArrowStyle)
         {
             return new ShapeStyle()
             {

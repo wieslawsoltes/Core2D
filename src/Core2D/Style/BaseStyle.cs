@@ -9,12 +9,48 @@ using System.Linq;
 namespace Core2D.Style
 {
     /// <summary>
+    /// Define base style contract.
+    /// </summary>
+    public interface IBaseStyle : IObservableObject
+    {
+        /// <summary>
+        /// Gets or sets stroke color.
+        /// </summary>
+        IColor Stroke { get; set; }
+
+        /// <summary>
+        /// Gets or sets fill color.
+        /// </summary>
+        IColor Fill { get; set; }
+
+        /// <summary>
+        /// Gets or sets stroke thickness.
+        /// </summary>
+        double Thickness { get; set; }
+
+        /// <summary>
+        /// Gets or sets line cap.
+        /// </summary>
+        LineCap LineCap { get; set; }
+
+        /// <summary>
+        /// Gets or sets line dashes.
+        /// </summary>
+        string Dashes { get; set; }
+
+        /// <summary>
+        /// Gets or sets line dash offset.
+        /// </summary>
+        double DashOffset { get; set; }
+    }
+
+    /// <summary>
     /// Base style.
     /// </summary>
-    public abstract class BaseStyle : ObservableObject
+    public abstract class BaseStyle : ObservableObject, IBaseStyle
     {
-        private IArgbColor _stroke;
-        private IArgbColor _fill;
+        private IColor _stroke;
+        private IColor _fill;
         private double _thickness;
         private LineCap _lineCap;
         private string _dashes;
@@ -23,7 +59,7 @@ namespace Core2D.Style
         /// <summary>
         /// Gets or sets stroke color.
         /// </summary>
-        public IArgbColor Stroke
+        public IColor Stroke
         {
             get => _stroke;
             set => Update(ref _stroke, value);
@@ -32,7 +68,7 @@ namespace Core2D.Style
         /// <summary>
         /// Gets or sets fill color.
         /// </summary>
-        public IArgbColor Fill
+        public IColor Fill
         {
             get => _fill;
             set => Update(ref _fill, value);

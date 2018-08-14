@@ -9,6 +9,28 @@ using System.Reflection;
 namespace Core2D.Style
 {
     /// <summary>
+    /// Color extensions.
+    /// </summary>
+    public static class ColorExtensions
+    {
+        /// <summary>
+        /// Clones color.
+        /// </summary>
+        /// <param name="color">The color to clone.</param>
+        /// <returns>The new instance of the <see cref="IColor"/> class.</returns>
+        public static IColor Clone(this IColor color)
+        {
+            switch (color)
+            {
+                case IArgbColor argbColor:
+                    return argbColor.Clone();
+                default:
+                    throw new NotSupportedException($"The {color.GetType()} color type is not supported.");
+            }
+        }
+    }
+
+    /// <summary>
     /// Argb color extensions.
     /// </summary>
     public static class ArgbColorExtensions
