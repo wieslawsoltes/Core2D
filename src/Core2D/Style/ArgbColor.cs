@@ -40,36 +40,28 @@ namespace Core2D.Style
         private byte _g;
         private byte _b;
 
-        /// <summary>
-        /// Alpha color channel.
-        /// </summary>
+        /// <inheritdoc/>
         public byte A
         {
             get => _a;
             set => Update(ref _a, value);
         }
 
-        /// <summary>
-        /// Red color channel.
-        /// </summary>
+        /// <inheritdoc/>
         public byte R
         {
             get => _r;
             set => Update(ref _r, value);
         }
 
-        /// <summary>
-        /// Green color channel.
-        /// </summary>
+        /// <inheritdoc/>
         public byte G
         {
             get => _g;
             set => Update(ref _g, value);
         }
 
-        /// <summary>
-        /// Blue color channel.
-        /// </summary>
+        /// <inheritdoc/>
         public byte B
         {
             get => _b;
