@@ -98,7 +98,7 @@ namespace Core2D.Renderer.SkiaSharp
             }
         }
 
-        private static SKStrokeCap ToStrokeCap(BaseStyle style)
+        private static SKStrokeCap ToStrokeCap(IBaseStyle style)
         {
             switch (style.LineCap)
             {
@@ -112,7 +112,7 @@ namespace Core2D.Renderer.SkiaSharp
             }
         }
 
-        private SKPaint ToSKPaintPen(BaseStyle style, Func<double, float> scale, double sourceDpi, double targetDpi)
+        private SKPaint ToSKPaintPen(IBaseStyle style, Func<double, float> scale, double sourceDpi, double targetDpi)
         {
             return new SKPaint()
             {

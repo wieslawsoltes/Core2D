@@ -102,7 +102,7 @@ namespace Core2D.Style
         /// Initializes a new instance of the <see cref="ArrowStyle"/> class.
         /// </summary>
         /// <param name="source">The source style.</param>
-        public ArrowStyle(BaseStyle source) : this()
+        public ArrowStyle(IBaseStyle source) : this()
         {
             Stroke = source.Stroke.Clone();
             Fill = source.Fill.Clone();
@@ -148,7 +148,7 @@ namespace Core2D.Style
         /// <param name="radiusX">The arrow X axis radius.</param>
         /// <param name="radiusY">The arrow Y axis radius.</param>
         /// <returns>The new instance of the <see cref="ArrowStyle"/> class.</returns>
-        public static ArrowStyle Create(BaseStyle source, ArrowType arrowType = ArrowType.None, bool isStroked = true, bool isFilled = false, double radiusX = 5.0, double radiusY = 5.0)
+        public static ArrowStyle Create(IBaseStyle source, ArrowType arrowType = ArrowType.None, bool isStroked = true, bool isFilled = false, double radiusX = 5.0, double radiusY = 5.0)
         {
             return new ArrowStyle(source)
             {
@@ -171,7 +171,7 @@ namespace Core2D.Style
         /// <param name="radiusX">The arrow X axis radius.</param>
         /// <param name="radiusY">The arrow Y axis radius.</param>
         /// <returns>The new instance of the <see cref="ArrowStyle"/> class.</returns>
-        public static ArrowStyle Create(string name, BaseStyle source, ArrowType arrowType = ArrowType.None, bool isStroked = true, bool isFilled = false, double radiusX = 5.0, double radiusY = 5.0)
+        public static ArrowStyle Create(string name, IBaseStyle source, ArrowType arrowType = ArrowType.None, bool isStroked = true, bool isFilled = false, double radiusX = 5.0, double radiusY = 5.0)
         {
             return new ArrowStyle(source)
             {

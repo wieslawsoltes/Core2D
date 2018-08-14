@@ -67,7 +67,7 @@ namespace Core2D.Renderer.WinForms
             }
         }
 
-        private Pen ToPen(BaseStyle style, Func<double, float> scale)
+        private Pen ToPen(IBaseStyle style, Func<double, float> scale)
         {
             var pen = new Pen(ToColor(style.Stroke), (float)(style.Thickness / State.ZoomX));
             switch (style.LineCap)

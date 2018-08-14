@@ -9,42 +9,6 @@ using System.Linq;
 namespace Core2D.Style
 {
     /// <summary>
-    /// Define base style contract.
-    /// </summary>
-    public interface IBaseStyle : IObservableObject
-    {
-        /// <summary>
-        /// Gets or sets stroke color.
-        /// </summary>
-        IColor Stroke { get; set; }
-
-        /// <summary>
-        /// Gets or sets fill color.
-        /// </summary>
-        IColor Fill { get; set; }
-
-        /// <summary>
-        /// Gets or sets stroke thickness.
-        /// </summary>
-        double Thickness { get; set; }
-
-        /// <summary>
-        /// Gets or sets line cap.
-        /// </summary>
-        LineCap LineCap { get; set; }
-
-        /// <summary>
-        /// Gets or sets line dashes.
-        /// </summary>
-        string Dashes { get; set; }
-
-        /// <summary>
-        /// Gets or sets line dash offset.
-        /// </summary>
-        double DashOffset { get; set; }
-    }
-
-    /// <summary>
     /// Base style.
     /// </summary>
     public abstract class BaseStyle : ObservableObject, IBaseStyle
@@ -56,54 +20,42 @@ namespace Core2D.Style
         private string _dashes;
         private double _dashOffset;
 
-        /// <summary>
-        /// Gets or sets stroke color.
-        /// </summary>
+        /// <inheritdoc/>
         public IColor Stroke
         {
             get => _stroke;
             set => Update(ref _stroke, value);
         }
 
-        /// <summary>
-        /// Gets or sets fill color.
-        /// </summary>
+        /// <inheritdoc/>
         public IColor Fill
         {
             get => _fill;
             set => Update(ref _fill, value);
         }
 
-        /// <summary>
-        /// Gets or sets stroke thickness.
-        /// </summary>
+        /// <inheritdoc/>
         public double Thickness
         {
             get => _thickness;
             set => Update(ref _thickness, value);
         }
 
-        /// <summary>
-        /// Gets or sets line cap.
-        /// </summary>
+        /// <inheritdoc/>
         public LineCap LineCap
         {
             get => _lineCap;
             set => Update(ref _lineCap, value);
         }
 
-        /// <summary>
-        /// Gets or sets line dashes.
-        /// </summary>
+        /// <inheritdoc/>
         public string Dashes
         {
             get => _dashes;
             set => Update(ref _dashes, value);
         }
 
-        /// <summary>
-        /// Gets or sets line dash offset.
-        /// </summary>
+        /// <inheritdoc/>
         public double DashOffset
         {
             get => _dashOffset;

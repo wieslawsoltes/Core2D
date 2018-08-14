@@ -186,7 +186,7 @@ namespace Core2D.Renderer.Dxf
                 }, 3);
         }
 
-        private void DrawLineInternal(DXF.DxfDocument dxf, DXFT.Layer layer, BaseStyle style, bool isStroked, double x1, double y1, double x2, double y2)
+        private void DrawLineInternal(DXF.DxfDocument dxf, DXFT.Layer layer, IBaseStyle style, bool isStroked, double x1, double y1, double x2, double y2)
         {
             if (isStroked)
             {
@@ -205,7 +205,7 @@ namespace Core2D.Renderer.Dxf
             }
         }
 
-        private void DrawRectangleInternal(DXF.DxfDocument dxf, DXFT.Layer layer, bool isFilled, bool isStroked, BaseStyle style, ref Spatial.Rect2 rect)
+        private void DrawRectangleInternal(DXF.DxfDocument dxf, DXFT.Layer layer, bool isFilled, bool isStroked, IBaseStyle style, ref Spatial.Rect2 rect)
         {
             if (isFilled)
             {
@@ -244,7 +244,7 @@ namespace Core2D.Renderer.Dxf
             dxf.AddEntity(hatch);
         }
 
-        private void StrokeRectangle(DXF.DxfDocument dxf, DXFT.Layer layer, BaseStyle style, double x, double y, double width, double height)
+        private void StrokeRectangle(DXF.DxfDocument dxf, DXFT.Layer layer, IBaseStyle style, double x, double y, double width, double height)
         {
             DrawLineInternal(dxf, layer, style, true, x, y, x + width, y);
             DrawLineInternal(dxf, layer, style, true, x + width, y, x + width, y + height);
@@ -252,7 +252,7 @@ namespace Core2D.Renderer.Dxf
             DrawLineInternal(dxf, layer, style, true, x, y + height, x, y);
         }
 
-        private void DrawEllipseInternal(DXF.DxfDocument dxf, DXFT.Layer layer, bool isFilled, bool isStroked, BaseStyle style, ref Spatial.Rect2 rect)
+        private void DrawEllipseInternal(DXF.DxfDocument dxf, DXFT.Layer layer, bool isFilled, bool isStroked, IBaseStyle style, ref Spatial.Rect2 rect)
         {
             var dxfEllipse = CreateEllipse(rect.X, rect.Y, rect.Width, rect.Height);
 

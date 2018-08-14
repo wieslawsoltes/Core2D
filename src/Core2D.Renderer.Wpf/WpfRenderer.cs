@@ -111,7 +111,7 @@ namespace Core2D.Renderer.Wpf
             }
         }
 
-        private static WM.Pen ToPen(BaseStyle style, double thickness)
+        private static WM.Pen ToPen(IBaseStyle style, double thickness)
         {
             var brush = ToBrush(style.Stroke);
             var pen = new WM.Pen(brush, thickness);

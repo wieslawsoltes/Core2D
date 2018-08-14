@@ -114,7 +114,7 @@ namespace Core2D.Renderer.Avalonia
             }
         }
 
-        private AM.Pen ToPen(BaseStyle style, Func<double, float> scale)
+        private AM.Pen ToPen(IBaseStyle style, Func<double, float> scale)
         {
             var lineCap = default(AM.PenLineCap);
             var dashStyle = default(AM.DashStyle);
