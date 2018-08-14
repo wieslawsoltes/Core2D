@@ -31,7 +31,7 @@ namespace Core2D.Style
     /// <summary>
     /// Line style.
     /// </summary>
-    public class LineStyle : ObservableObject, ICopyable
+    public class LineStyle : ObservableObject
     {
         private bool _isCurved;
         private double _curvature;
@@ -75,7 +75,7 @@ namespace Core2D.Style
         }
 
         /// <inheritdoc/>
-        public virtual object Copy(IDictionary<object, object> shared)
+        public override object Copy(IDictionary<object, object> shared)
         {
             throw new NotImplementedException();
         }

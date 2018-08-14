@@ -37,7 +37,7 @@ namespace Core2D.Style
     /// <summary>
     /// Shape style.
     /// </summary>
-    public class ShapeStyle : BaseStyle, ICopyable
+    public class ShapeStyle : BaseStyle
     {
         private LineStyle _lineStyle;
         private ArrowStyle _startArrowStyle;

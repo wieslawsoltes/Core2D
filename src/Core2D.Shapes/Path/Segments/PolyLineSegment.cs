@@ -10,7 +10,7 @@ namespace Core2D.Path.Segments
     /// <summary>
     /// Poly line path segment.
     /// </summary>
-    public class PolyLineSegment : PathPolySegment, ICopyable
+    public class PolyLineSegment : PathPolySegment
     {
         /// <inheritdoc/>
         public override object Copy(IDictionary<object, object> shared)

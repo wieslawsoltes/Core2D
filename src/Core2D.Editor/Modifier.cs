@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
+using System.Collections.Generic;
 using Core2D.Attributes;
 
 namespace Core2D.Editor
@@ -63,6 +64,12 @@ namespace Core2D.Editor
         {
             get => _flags.HasFlag(ModifierFlags.Shift);
             set => Flags = value ? _flags | ModifierFlags.Shift : _flags & ~ModifierFlags.Shift;
+        }
+
+        /// <inheritdoc/>
+        public override object Copy(IDictionary<object, object> shared)
+        {
+            throw new NotImplementedException();
         }
 
         /// <summary>

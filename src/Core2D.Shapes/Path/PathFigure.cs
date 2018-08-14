@@ -78,7 +78,7 @@ namespace Core2D.Path
         }
 
         /// <inheritdoc/>
-        public virtual object Copy(IDictionary<object, object> shared)
+        public override object Copy(IDictionary<object, object> shared)
         {
             throw new NotImplementedException();
         }

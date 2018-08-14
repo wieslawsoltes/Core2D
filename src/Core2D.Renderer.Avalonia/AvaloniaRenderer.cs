@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
+using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Diagnostics;
 using Core2D.Data;
@@ -42,6 +43,12 @@ namespace Core2D.Renderer.Avalonia
             ClearCache(isZooming: false);
             _textScaleFactor = textScaleFactor;
             _scaleToPage = (value) => (float)(value);
+        }
+
+        /// <inheritdoc/>
+        public override object Copy(IDictionary<object, object> shared)
+        {
+            throw new NotImplementedException();
         }
 
         /// <summary>

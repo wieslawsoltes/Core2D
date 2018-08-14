@@ -6,7 +6,7 @@ namespace Core2D.Path
     /// <summary>
     /// Defines path size contract.
     /// </summary>
-    public interface IPathSize : IObservableObject, ICopyable
+    public interface IPathSize : IObservableObject
     {
         /// <summary>
         /// Gets or sets width value.

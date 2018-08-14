@@ -133,9 +133,6 @@ namespace Core2D.Shapes
             }
         }
 
-        /// <inheritdoc/>
-        public abstract object Copy(IDictionary<object, object> shared);
-
         /// <summary>
         /// Get all points in the shape.
         /// </summary>

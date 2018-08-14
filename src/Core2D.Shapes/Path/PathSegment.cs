@@ -31,12 +31,6 @@ namespace Core2D.Path
         /// <inheritdoc/>
         public abstract IEnumerable<IPointShape> GetPoints();
 
-        /// <inheritdoc/>
-        public virtual object Copy(IDictionary<object, object> shared)
-        {
-            throw new NotImplementedException();
-        }
-
         /// <summary>
         /// Check whether the <see cref="IsStroked"/> property has changed from its default value.
         /// </summary>

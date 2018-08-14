@@ -1,6 +1,8 @@
 
-﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
+// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using System;
+using System.Collections.Generic;
 using System.Collections.Immutable;
 
 namespace Core2D.Editor.Recent
@@ -29,6 +31,12 @@ namespace Core2D.Editor.Recent
         {
             get => _current;
             set => Update(ref _current, value);
+        }
+
+        /// <inheritdoc/>
+        public override object Copy(IDictionary<object, object> shared)
+        {
+            throw new NotImplementedException();
         }
 
         /// <summary>

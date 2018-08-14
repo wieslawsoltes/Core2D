@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
+using System.Collections.Generic;
 using Core2D.Editor.Input;
 using Core2D.Editor.Tools.Path.Settings;
 using Core2D.Shapes;
@@ -37,6 +38,12 @@ namespace Core2D.Editor.Tools.Path
         {
             _serviceProvider = serviceProvider;
             _settings = new PathToolSettingsMove();
+        }
+
+        /// <inheritdoc/>
+        public override object Copy(IDictionary<object, object> shared)
+        {
+            throw new NotImplementedException();
         }
 
         /// <inheritdoc/>

@@ -33,7 +33,7 @@ namespace Core2D.Style
     /// <summary>
     /// Text style.
     /// </summary>
-    public class TextStyle : ObservableObject, ICopyable
+    public class TextStyle : ObservableObject
     {
         private string _fontName;
         private string _fontFile;
@@ -97,7 +97,7 @@ namespace Core2D.Style
         }
 
         /// <inheritdoc/>
-        public virtual object Copy(IDictionary<object, object> shared)
+        public override object Copy(IDictionary<object, object> shared)
         {
             throw new NotImplementedException();
         }

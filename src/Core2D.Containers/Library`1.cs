@@ -45,7 +45,7 @@ namespace Core2D.Containers
         public void SetSelected(T item) => Selected = item;
 
         /// <inheritdoc/>
-        public virtual object Copy(IDictionary<object, object> shared)
+        public override object Copy(IDictionary<object, object> shared)
         {
             throw new NotImplementedException();
         }

@@ -1,6 +1,5 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
-
 using System;
 using System.Collections.Generic;
 
@@ -9,7 +8,7 @@ namespace Core2D.Data
     /// <summary>
     /// Database column.
     /// </summary>
-    public class Column : ObservableObject, ICopyable
+    public class Column : ObservableObject
     {
         private double _width;
         private bool _isVisible;
@@ -43,7 +42,7 @@ namespace Core2D.Data
         }
 
         /// <inheritdoc/>
-        public virtual object Copy(IDictionary<object, object> shared)
+        public override object Copy(IDictionary<object, object> shared)
         {
             throw new NotImplementedException();
         }

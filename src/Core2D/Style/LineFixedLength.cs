@@ -31,7 +31,7 @@ namespace Core2D.Style
     /// <summary>
     /// Line fixed length.
     /// </summary>
-    public class LineFixedLength : ObservableObject, ICopyable
+    public class LineFixedLength : ObservableObject
     {
         private LineFixedLengthFlags _flags;
         private IShapeState _startTrigger;
@@ -144,7 +144,7 @@ namespace Core2D.Style
         }
 
         /// <inheritdoc/>
-        public virtual object Copy(IDictionary<object, object> shared)
+        public override object Copy(IDictionary<object, object> shared)
         {
             throw new NotImplementedException();
         }

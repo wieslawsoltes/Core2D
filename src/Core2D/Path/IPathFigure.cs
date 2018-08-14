@@ -9,7 +9,7 @@ namespace Core2D.Path
     /// <summary>
     /// Defines path figure contract.
     /// </summary>
-    public interface IPathFigure : IObservableObject, ICopyable
+    public interface IPathFigure : IObservableObject
     {
         /// <summary>
         /// Gets or sets start point.

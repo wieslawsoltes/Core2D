@@ -9,7 +9,7 @@ namespace Core2D.Path.Segments
     /// <summary>
     /// Quadratic bezier path segment.
     /// </summary>
-    public class QuadraticBezierSegment : PathSegment, ICopyable
+    public class QuadraticBezierSegment : PathSegment
     {
         private IPointShape _point1;
         private IPointShape _point2;

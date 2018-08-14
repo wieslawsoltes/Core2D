@@ -28,7 +28,7 @@ namespace Core2D.Style
     /// <summary>
     /// Specifies style flags proxy information applied to text.
     /// </summary>
-    public class FontStyle : ObservableObject, ICopyable
+    public class FontStyle : ObservableObject
     {
         private FontStyleFlags _flags;
 
@@ -101,7 +101,7 @@ namespace Core2D.Style
         }
 
         /// <inheritdoc/>
-        public virtual object Copy(IDictionary<object, object> shared)
+        public override object Copy(IDictionary<object, object> shared)
         {
             throw new NotImplementedException();
         }

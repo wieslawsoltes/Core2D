@@ -8,7 +8,7 @@ namespace Core2D
     /// <summary>
     /// Defines observable object contract.
     /// </summary>
-    public interface IObservableObject : INotifyPropertyChanged
+    public interface IObservableObject : INotifyPropertyChanged, ICopyable
     {
         /// <summary>
         /// Gets or sets observable object name.

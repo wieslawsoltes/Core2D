@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
+using System.Collections.Generic;
 using Core2D.Editor.Input;
 using Core2D.Editor.Tools.Selection;
 using Core2D.Editor.Tools.Settings;
@@ -46,6 +47,12 @@ namespace Core2D.Editor.Tools
         {
             _serviceProvider = serviceProvider;
             _settings = new ToolSettingsEllipse();
+        }
+
+        /// <inheritdoc/>
+        public override object Copy(IDictionary<object, object> shared)
+        {
+            throw new NotImplementedException();
         }
 
         private static void CircleConstrain(IPointShape tl, IPointShape br, double cx, double cy, double px, double py)

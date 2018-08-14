@@ -50,6 +50,12 @@ namespace Core2D.Editor.Tools
             _settings = new ToolSettingsSelection();
         }
 
+        /// <inheritdoc/>
+        public override object Copy(IDictionary<object, object> shared)
+        {
+            throw new NotImplementedException();
+        }
+
         /// <summary>
         /// Validate if point can move.
         /// </summary>

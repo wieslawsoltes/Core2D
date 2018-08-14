@@ -9,7 +9,7 @@ namespace Core2D.Path.Segments
     /// <summary>
     /// Cubic bezier path segment.
     /// </summary>
-    public class CubicBezierSegment : PathSegment, ICopyable
+    public class CubicBezierSegment : PathSegment
     {
         private IPointShape _point1;
         private IPointShape _point2;

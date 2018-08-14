@@ -9,6 +9,7 @@ using Spatial;
 using Spatial.Arc;
 using Core2D.Style;
 using Core2D.Shapes;
+using System.Collections.Generic;
 
 namespace Core2D.Renderer.WinForms
 {
@@ -30,6 +31,12 @@ namespace Core2D.Renderer.WinForms
             ClearCache(isZooming: false);
             _textScaleFactor = textScaleFactor;
             _scaleToPage = (value) => (float)(value);
+        }
+
+        /// <inheritdoc/>
+        public override object Copy(IDictionary<object, object> shared)
+        {
+            throw new NotImplementedException();
         }
 
         /// <summary>

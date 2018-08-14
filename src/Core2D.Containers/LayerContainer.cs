@@ -55,7 +55,7 @@ namespace Core2D.Containers
         public void Invalidate() => InvalidateLayer?.Invoke(this, new InvalidateLayerEventArgs());
 
         /// <inheritdoc/>
-        public virtual object Copy(IDictionary<object, object> shared)
+        public override object Copy(IDictionary<object, object> shared)
         {
             throw new NotImplementedException();
         }

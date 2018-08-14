@@ -36,7 +36,7 @@ namespace Core2D.Containers
         public DocumentContainer() : base() => _pages = ImmutableArray.Create<IPageContainer>();
 
         /// <inheritdoc/>
-        public virtual object Copy(IDictionary<object, object> shared)
+        public override object Copy(IDictionary<object, object> shared)
         {
             throw new NotImplementedException();
         }

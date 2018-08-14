@@ -9,7 +9,7 @@ namespace Core2D.Path.Segments
     /// <summary>
     /// Line path segment.
     /// </summary>
-    public class LineSegment : PathSegment, ICopyable
+    public class LineSegment : PathSegment
     {
         private IPointShape _point;
 

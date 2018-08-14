@@ -11,7 +11,7 @@ namespace Core2D.Style
     /// <summary>
     /// Base style.
     /// </summary>
-    public abstract class BaseStyle : ObservableObject, ICopyable
+    public abstract class BaseStyle : ObservableObject
     {
         private ArgbColor _stroke;
         private ArgbColor _fill;
@@ -72,12 +72,6 @@ namespace Core2D.Style
         {
             get => _dashOffset;
             set => Update(ref _dashOffset, value);
-        }
-
-        /// <inheritdoc/>
-        public virtual object Copy(IDictionary<object, object> shared)
-        {
-            throw new NotImplementedException();
         }
 
         /// <summary>

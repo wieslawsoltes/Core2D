@@ -38,6 +38,12 @@ namespace Core2D.Renderer.Dxf
             ClearCache(isZooming: false);
         }
 
+        /// <inheritdoc/>
+        public override object Copy(IDictionary<object, object> shared)
+        {
+            throw new NotImplementedException();
+        }
+
         /// <summary>
         /// Creates a new <see cref="DxfRenderer"/> instance.
         /// </summary>

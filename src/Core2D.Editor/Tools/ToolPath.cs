@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
+using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using Core2D.Editor.Input;
@@ -77,6 +78,12 @@ namespace Core2D.Editor.Tools
             _pathToolQuadraticBezier = serviceProvider.GetService<PathToolQuadraticBezier>();
             _pathToolMove = serviceProvider.GetService<PathToolMove>();
             IsInitialized = false;
+        }
+
+        /// <inheritdoc/>
+        public override object Copy(IDictionary<object, object> shared)
+        {
+            throw new NotImplementedException();
         }
 
         /// <summary>

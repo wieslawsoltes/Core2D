@@ -8,6 +8,7 @@ using Core2D.Editor.Tools.Path.Settings;
 using Core2D.Editor.Tools.Selection;
 using Core2D.Path.Segments;
 using Core2D.Shapes;
+using System.Collections.Generic;
 
 namespace Core2D.Editor.Tools.Path
 {
@@ -43,6 +44,12 @@ namespace Core2D.Editor.Tools.Path
         {
             _serviceProvider = serviceProvider;
             _settings = new PathToolSettingsCubicBezier();
+        }
+
+        /// <inheritdoc/>
+        public override object Copy(IDictionary<object, object> shared)
+        {
+            throw new NotImplementedException();
         }
 
         /// <inheritdoc/>

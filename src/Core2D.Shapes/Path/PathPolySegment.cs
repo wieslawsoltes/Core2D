@@ -32,12 +32,6 @@ namespace Core2D.Path
         /// <inheritdoc/>
         public override IEnumerable<IPointShape> GetPoints() => Points;
 
-        /// <inheritdoc/>
-        public override object Copy(IDictionary<object, object> shared)
-        {
-            throw new NotImplementedException();
-        }
-
         /// <summary>
         /// Creates a string representation of points collection.
         /// </summary>

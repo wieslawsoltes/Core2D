@@ -1,5 +1,7 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using System;
+using System.Collections.Generic;
 using Core2D.Style;
 using Xunit;
 
@@ -99,6 +101,10 @@ namespace Core2D.UnitTests
 
         private class Class1 : BaseStyle
         {
+            public override object Copy(IDictionary<object, object> shared)
+            {
+                throw new NotImplementedException();
+            }
         }
     }
 }

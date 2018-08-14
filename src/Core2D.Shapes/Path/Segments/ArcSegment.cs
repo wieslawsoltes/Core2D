@@ -9,7 +9,7 @@ namespace Core2D.Path.Segments
     /// <summary>
     /// Arc path segment.
     /// </summary>
-    public class ArcSegment : PathSegment, ICopyable
+    public class ArcSegment : PathSegment
     {
         private IPointShape _point;
         private IPathSize _size;

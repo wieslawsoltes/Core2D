@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
+using System.Collections.Generic;
 using System.Collections.Immutable;
 using Core2D.Data;
 using Core2D.Shapes;
@@ -33,6 +34,12 @@ namespace Core2D.Renderer.SkiaSharp
             _isAntialias = isAntialias;
             _scaleToPage = (value) => (float)(value * 1.0);
             _targetDpi = targetDpi;
+        }
+
+        /// <inheritdoc/>
+        public override object Copy(IDictionary<object, object> shared)
+        {
+            throw new NotImplementedException();
         }
 
         /// <summary>

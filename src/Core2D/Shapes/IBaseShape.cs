@@ -9,7 +9,7 @@ namespace Core2D.Shapes
     /// <summary>
     /// Defines base shape contract.
     /// </summary>
-    public interface IBaseShape : IObservableObject, IDrawable, ISelectable, ICopyable
+    public interface IBaseShape : IObservableObject, IDrawable, ISelectable
     {
         /// <summary>
         /// Gets shape target type.

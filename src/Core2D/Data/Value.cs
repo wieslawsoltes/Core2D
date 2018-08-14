@@ -9,7 +9,7 @@ namespace Core2D.Data
     /// <summary>
     /// Record value.
     /// </summary>
-    public class Value : ObservableObject, ICopyable
+    public class Value : ObservableObject
     {
         private string _content;
 
@@ -24,7 +24,7 @@ namespace Core2D.Data
         }
 
         /// <inheritdoc/>
-        public virtual object Copy(IDictionary<object, object> shared)
+        public override object Copy(IDictionary<object, object> shared)
         {
             throw new NotImplementedException();
         }

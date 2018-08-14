@@ -8,6 +8,7 @@ using Spatial.Arc;
 using Spatial;
 using Core2D.Shapes;
 using Core2D.Style;
+using System.Collections.Generic;
 
 namespace Core2D.Editor.Tools
 {
@@ -45,6 +46,12 @@ namespace Core2D.Editor.Tools
         {
             _serviceProvider = serviceProvider;
             _settings = new ToolSettingsArc();
+        }
+
+        /// <inheritdoc/>
+        public override object Copy(IDictionary<object, object> shared)
+        {
+            throw new NotImplementedException();
         }
 
         /// <inheritdoc/>

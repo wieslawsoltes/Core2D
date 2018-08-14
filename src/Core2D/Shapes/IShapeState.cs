@@ -6,7 +6,7 @@ namespace Core2D.Shapes
     /// <summary>
     /// Defines shape state contract.
     /// </summary>
-    public interface IShapeState : IObservableObject, ICopyable
+    public interface IShapeState : IObservableObject
     {
         /// <summary>
         /// Gets or sets shape state flags.

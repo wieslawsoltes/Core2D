@@ -9,7 +9,7 @@ namespace Core2D.Path
     /// <summary>
     /// Defines path segment contract.
     /// </summary>
-    public interface IPathSegment : IObservableObject, ICopyable
+    public interface IPathSegment : IObservableObject
     {
         /// <summary>
         /// Gets or sets flag indicating whether segment is stroked.

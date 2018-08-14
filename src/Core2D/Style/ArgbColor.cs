@@ -33,7 +33,7 @@ namespace Core2D.Style
     /// <summary>
     /// Color definition using alpha, red, green and blue channels.
     /// </summary>
-    public class ArgbColor : ObservableObject, ICopyable
+    public class ArgbColor : ObservableObject
     {
         private byte _a;
         private byte _r;
@@ -77,7 +77,7 @@ namespace Core2D.Style
         }
 
         /// <inheritdoc/>
-        public virtual object Copy(IDictionary<object, object> shared)
+        public override object Copy(IDictionary<object, object> shared)
         {
             throw new NotImplementedException();
         }

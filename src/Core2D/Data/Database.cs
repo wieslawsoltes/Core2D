@@ -11,7 +11,7 @@ namespace Core2D.Data
     /// <summary>
     /// Records database.
     /// </summary>
-    public class Database : ObservableObject, ICopyable
+    public class Database : ObservableObject
     {
         private string _idColumnName;
         private ImmutableArray<Column> _columns;
@@ -71,7 +71,7 @@ namespace Core2D.Data
         }
 
         /// <inheritdoc/>
-        public virtual object Copy(IDictionary<object, object> shared)
+        public override object Copy(IDictionary<object, object> shared)
         {
             throw new NotImplementedException();
         }

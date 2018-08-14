@@ -11,7 +11,7 @@ namespace Core2D.Data
     /// <summary>
     /// Data context.
     /// </summary>
-    public class Context : ObservableObject, ICopyable
+    public class Context : ObservableObject
     {
         private ImmutableArray<Property> _properties;
         private Record _record;
@@ -78,7 +78,7 @@ namespace Core2D.Data
         }
 
         /// <inheritdoc/>
-        public virtual object Copy(IDictionary<object, object> shared)
+        public override object Copy(IDictionary<object, object> shared)
         {
             throw new NotImplementedException();
         }
