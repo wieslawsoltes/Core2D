@@ -35,7 +35,7 @@ namespace Core2D.Containers
         /// <remarks>
         /// If template is not null Template.Background property is used.
         /// </remarks>
-        ArgbColor Background { get; set; }
+        IArgbColor Background { get; set; }
 
         /// <summary>
         /// Gets or sets container layers.

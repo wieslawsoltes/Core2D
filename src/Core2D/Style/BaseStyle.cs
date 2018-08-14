@@ -13,8 +13,8 @@ namespace Core2D.Style
     /// </summary>
     public abstract class BaseStyle : ObservableObject
     {
-        private ArgbColor _stroke;
-        private ArgbColor _fill;
+        private IArgbColor _stroke;
+        private IArgbColor _fill;
         private double _thickness;
         private LineCap _lineCap;
         private string _dashes;
@@ -23,7 +23,7 @@ namespace Core2D.Style
         /// <summary>
         /// Gets or sets stroke color.
         /// </summary>
-        public ArgbColor Stroke
+        public IArgbColor Stroke
         {
             get => _stroke;
             set => Update(ref _stroke, value);
@@ -32,7 +32,7 @@ namespace Core2D.Style
         /// <summary>
         /// Gets or sets fill color.
         /// </summary>
-        public ArgbColor Fill
+        public IArgbColor Fill
         {
             get => _fill;
             set => Update(ref _fill, value);

@@ -87,9 +87,9 @@ namespace Core2D.Renderer.Wpf
             return new W.Point(ox, oy);
         }
 
-        private static WM.Color ToColor(ArgbColor color) => WM.Color.FromArgb(color.A, color.R, color.G, color.B);
+        private static WM.Color ToColor(IArgbColor color) => WM.Color.FromArgb(color.A, color.R, color.G, color.B);
 
-        private static WM.Brush ToBrush(ArgbColor color)
+        private static WM.Brush ToBrush(IArgbColor color)
         {
             var brush = new WM.SolidColorBrush(ToColor(color));
             brush.Freeze();
@@ -551,7 +551,7 @@ namespace Core2D.Renderer.Wpf
         }
 
         /// <inheritdoc/>
-        public override void Fill(object dc, double x, double y, double width, double height, ArgbColor color)
+        public override void Fill(object dc, double x, double y, double width, double height, IArgbColor color)
         {
             var _dc = dc as WM.DrawingContext;
             var brush = ToBrush(color);

@@ -60,9 +60,9 @@ namespace Core2D.Renderer.Dxf
             return (DXF.Lineweight)s_lineweights.OrderBy(x => Math.Abs((long)x - lineweight)).First();
         }
 
-        private static DXF.AciColor ToColor(ArgbColor color) => new DXF.AciColor(color.R, color.G, color.B);
+        private static DXF.AciColor ToColor(IArgbColor color) => new DXF.AciColor(color.R, color.G, color.B);
 
-        private static short ToTransparency(ArgbColor color) => (short)(90.0 - color.A * 90.0 / 255.0);
+        private static short ToTransparency(IArgbColor color) => (short)(90.0 - color.A * 90.0 / 255.0);
 
         private double ToDxfX(double x) => x;
 
@@ -200,7 +200,7 @@ namespace Core2D.Renderer.Dxf
             }
         }
 
-        private void FillRectangle(DXF.DxfDocument dxf, DXFT.Layer layer, double x, double y, double width, double height, ArgbColor color)
+        private void FillRectangle(DXF.DxfDocument dxf, DXFT.Layer layer, double x, double y, double width, double height, IArgbColor color)
         {
             var fill = ToColor(color);
             var fillTransparency = ToTransparency(color);
@@ -249,7 +249,7 @@ namespace Core2D.Renderer.Dxf
             }
         }
 
-        private void StrokeEllipse(DXF.DxfDocument dxf, DXFT.Layer layer, DXFE.Ellipse dxfEllipse, ArgbColor color, double thickness)
+        private void StrokeEllipse(DXF.DxfDocument dxf, DXFT.Layer layer, DXFE.Ellipse dxfEllipse, IArgbColor color, double thickness)
         {
             var stroke = ToColor(color);
             var strokeTansparency = ToTransparency(color);
@@ -263,7 +263,7 @@ namespace Core2D.Renderer.Dxf
             dxf.AddEntity(dxfEllipse);
         }
 
-        private void FillEllipse(DXF.DxfDocument dxf, DXFT.Layer layer, DXFE.Ellipse dxfEllipse, ArgbColor color)
+        private void FillEllipse(DXF.DxfDocument dxf, DXFT.Layer layer, DXFE.Ellipse dxfEllipse, IArgbColor color)
         {
             var fill = ToColor(color);
             var fillTransparency = ToTransparency(color);
@@ -490,7 +490,7 @@ namespace Core2D.Renderer.Dxf
         }
 
         /// <inheritdoc/>
-        public override void Fill(object dc, double x, double y, double width, double height, ArgbColor color)
+        public override void Fill(object dc, double x, double y, double width, double height, IArgbColor color)
         {
             var dxf = dc as DXF.DxfDocument;
             var rect = Spatial.Rect2.FromPoints(x, y, x + width, y + height);

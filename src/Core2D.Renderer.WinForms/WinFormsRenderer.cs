@@ -45,7 +45,7 @@ namespace Core2D.Renderer.WinForms
         /// <returns>The new instance of the <see cref="WinFormsRenderer"/> class.</returns>
         public static ShapeRenderer Create() => new WinFormsRenderer();
 
-        private static Color ToColor(ArgbColor color) => Color.FromArgb(color.A, color.R, color.G, color.B);
+        private static Color ToColor(IArgbColor color) => Color.FromArgb(color.A, color.R, color.G, color.B);
 
         private Pen ToPen(BaseStyle style, Func<double, float> scale)
         {
@@ -77,7 +77,7 @@ namespace Core2D.Renderer.WinForms
             return pen;
         }
 
-        private SolidBrush ToSolidBrush(ArgbColor color) => new SolidBrush(ToColor(color));
+        private SolidBrush ToSolidBrush(IArgbColor color) => new SolidBrush(ToColor(color));
 
         private static Rect2 CreateRect(IPointShape tl, IPointShape br, double dx, double dy) => Rect2.FromPoints(tl.X, tl.Y, br.X, br.Y, dx, dy);
 
@@ -310,7 +310,7 @@ namespace Core2D.Renderer.WinForms
         }
 
         /// <inheritdoc/>
-        public override void Fill(object dc, double x, double y, double width, double height, ArgbColor color)
+        public override void Fill(object dc, double x, double y, double width, double height, IArgbColor color)
         {
             var _gfx = dc as Graphics;
             Brush brush = ToSolidBrush(color);

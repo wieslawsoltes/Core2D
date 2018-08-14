@@ -18,7 +18,7 @@ namespace Core2D.Style
         /// </summary>
         /// <param name="argbColor">The argb color to clone.</param>
         /// <returns>The new instance of the <see cref="ArgbColor"/> class.</returns>
-        public static ArgbColor Clone(this ArgbColor argbColor)
+        public static IArgbColor Clone(this IArgbColor argbColor)
         {
             return new ArgbColor()
             {
@@ -33,7 +33,7 @@ namespace Core2D.Style
     /// <summary>
     /// Color definition using alpha, red, green and blue channels.
     /// </summary>
-    public class ArgbColor : ObservableObject
+    public class ArgbColor : ObservableObject, IArgbColor
     {
         private byte _a;
         private byte _r;
@@ -90,7 +90,7 @@ namespace Core2D.Style
         /// <param name="g">The green color channel.</param>
         /// <param name="b">The blue color channel.</param>
         /// <returns>The new instance of the <see cref="ArgbColor"/> class.</returns>
-        public static ArgbColor Create(byte a = 0xFF, byte r = 0x00, byte g = 0x00, byte b = 0x00)
+        public static IArgbColor Create(byte a = 0xFF, byte r = 0x00, byte g = 0x00, byte b = 0x00)
         {
             return new ArgbColor()
             {
@@ -106,7 +106,7 @@ namespace Core2D.Style
         /// </summary>
         /// <param name="value">The integer value.</param>
         /// <returns>The color.</returns>
-        public static ArgbColor FromUInt32(uint value)
+        public static IArgbColor FromUInt32(uint value)
         {
             return new ArgbColor
             {
@@ -122,7 +122,7 @@ namespace Core2D.Style
         /// </summary>
         /// <param name="s">The color string.</param>
         /// <returns>The new instance of the <see cref="ArgbColor"/> class.</returns>
-        public static ArgbColor Parse(string s)
+        public static IArgbColor Parse(string s)
         {
             if (s[0] == '#')
             {
@@ -159,7 +159,7 @@ namespace Core2D.Style
         /// </summary>
         /// <param name="c">The color instance.</param>
         /// <returns>The color string.</returns>
-        public static string ToHtml(ArgbColor c)
+        public static string ToHtml(IArgbColor c)
         {
             return string.Concat('#', c.A.ToString("X2"), c.R.ToString("X2"), c.G.ToString("X2"), c.B.ToString("X2"));
         }

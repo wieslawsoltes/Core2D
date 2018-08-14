@@ -12,19 +12,19 @@ namespace Core2D.Serializer.Newtonsoft
         /// <inheritdoc/>
         public override bool CanConvert(Type objectType)
         {
-            return objectType == typeof(ArgbColor);
+            return objectType == typeof(IArgbColor) || objectType == typeof(ArgbColor);
         }
 
         /// <inheritdoc/>
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
-            writer.WriteValue(ArgbColor.ToHtml((ArgbColor)value));
+            writer.WriteValue(ArgbColor.ToHtml((IArgbColor)value));
         }
 
         /// <inheritdoc/>
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
         {
-            if (objectType == typeof(ArgbColor))
+            if (objectType == typeof(IArgbColor) || objectType == typeof(ArgbColor))
             {
                 return ArgbColor.Parse((string)reader.Value);
             }

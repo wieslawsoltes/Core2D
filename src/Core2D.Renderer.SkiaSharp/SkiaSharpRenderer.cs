@@ -87,7 +87,7 @@ namespace Core2D.Renderer.SkiaSharp
             return new SKPoint((float)ox, (float)oy);
         }
 
-        private SKColor ToSKColor(ArgbColor color) => new SKColor(color.R, color.G, color.B, color.A);
+        private SKColor ToSKColor(IArgbColor color) => new SKColor(color.R, color.G, color.B, color.A);
 
         private static SKStrokeCap ToStrokeCap(BaseStyle style)
         {
@@ -116,7 +116,7 @@ namespace Core2D.Renderer.SkiaSharp
             };
         }
 
-        private SKPaint ToSKPaintBrush(ArgbColor color)
+        private SKPaint ToSKPaintBrush(IArgbColor color)
         {
             return new SKPaint()
             {
@@ -337,7 +337,7 @@ namespace Core2D.Renderer.SkiaSharp
             }
         }
 
-        private void DrawBackgroundInternal(SKCanvas canvas, ArgbColor color, Rect2 rect)
+        private void DrawBackgroundInternal(SKCanvas canvas, IArgbColor color, Rect2 rect)
         {
             using (var brush = ToSKPaintBrush(color))
             {
@@ -368,7 +368,7 @@ namespace Core2D.Renderer.SkiaSharp
         }
 
         /// <inheritdoc/>
-        public override void Fill(object dc, double x, double y, double width, double height, ArgbColor color)
+        public override void Fill(object dc, double x, double y, double width, double height, IArgbColor color)
         {
             var canvas = dc as SKCanvas;
             var rect = SKRect.Create((float)x, (float)y, (float)width, (float)height);

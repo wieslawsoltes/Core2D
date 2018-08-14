@@ -42,7 +42,7 @@ namespace Core2D.Renderer.PdfSharp
         /// <returns>The new instance of the <see cref="PdfSharpRenderer"/> class.</returns>
         public static ShapeRenderer Create() => new PdfSharpRenderer();
 
-        private static XColor ToXColor(ArgbColor color) => XColor.FromArgb(color.A, color.R, color.G, color.B);
+        private static XColor ToXColor(IArgbColor color) => XColor.FromArgb(color.A, color.R, color.G, color.B);
 
         private static XPen ToXPen(BaseStyle style, Func<double, double> scale, double sourceDpi, double targetDpi)
         {
@@ -68,7 +68,7 @@ namespace Core2D.Renderer.PdfSharp
             return pen;
         }
 
-        private static XSolidBrush ToXSolidBrush(ArgbColor color)
+        private static XSolidBrush ToXSolidBrush(IArgbColor color)
         {
             return new XSolidBrush(ToXColor(color));
         }
@@ -269,7 +269,7 @@ namespace Core2D.Renderer.PdfSharp
         }
 
         /// <inheritdoc/>
-        public override void Fill(object dc, double x, double y, double width, double height, ArgbColor color)
+        public override void Fill(object dc, double x, double y, double width, double height, IArgbColor color)
         {
             var _gfx = dc as XGraphics;
             _gfx.DrawRectangle(

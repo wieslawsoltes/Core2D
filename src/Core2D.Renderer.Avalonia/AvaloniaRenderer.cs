@@ -92,9 +92,9 @@ namespace Core2D.Renderer.Avalonia
             return new A.Point(ox, oy);
         }
 
-        private static AM.Color ToColor(ArgbColor color) => AM.Color.FromArgb(color.A, color.R, color.G, color.B);
+        private static AM.Color ToColor(IArgbColor color) => AM.Color.FromArgb(color.A, color.R, color.G, color.B);
 
-        private AM.IBrush ToBrush(ArgbColor color)
+        private AM.IBrush ToBrush(IArgbColor color)
         {
             return new AM.SolidColorBrush(ToColor(color));
         }
@@ -431,7 +431,7 @@ namespace Core2D.Renderer.Avalonia
         }
 
         /// <inheritdoc/>
-        public override void Fill(object dc, double x, double y, double width, double height, ArgbColor color)
+        public override void Fill(object dc, double x, double y, double width, double height, IArgbColor color)
         {
             var _dc = dc as AM.DrawingContext;
             var brush = ToBrush(color);

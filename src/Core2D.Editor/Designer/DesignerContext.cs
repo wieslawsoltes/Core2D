@@ -93,7 +93,7 @@ namespace Core2D.Editor.Designer
         /// <summary>
         /// The design time <see cref="Style.ArgbColor"/>.
         /// </summary>
-        public static ArgbColor ArgbColor { get; set; }
+        public static IArgbColor ArgbColor { get; set; }
 
         /// <summary>
         /// The design time <see cref="Style.ArrowStyle"/>.
@@ -299,7 +299,7 @@ namespace Core2D.Editor.Designer
 
             // Style
 
-            ArgbColor = ArgbColor.Create(128, 255, 0, 0);
+            ArgbColor = Core2D.Style.ArgbColor.Create(128, 255, 0, 0);
             ArrowStyle = ArrowStyle.Create();
             FontStyle = FontStyle.Create();
             LineFixedLength = LineFixedLength.Create();
