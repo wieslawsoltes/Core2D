@@ -4,7 +4,7 @@
              xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:converters="clr-namespace:Core2D.Avalonia.Converters;assembly=Core2D.Avalonia"
-             xmlns:Data="clr-namespace:Core2D.Data;assembly=Core2D"
+             xmlns:DataCore="clr-namespace:Core2D.Data;assembly=Core2D"
              xmlns:Dock="clr-namespace:Dock.Model;assembly=Dock.Model"
              xmlns:Editor="clr-namespace:Core2D.Editor;assembly=Core2D.Editor"
              xmlns:PathCore="clr-namespace:Core2D.Path;assembly=Core2D"
@@ -14,7 +14,7 @@
              xmlns:SettingsTools="clr-namespace:Core2D.Editor.Tools.Settings;assembly=Core2D.Editor"
              xmlns:SettingsPath="clr-namespace:Core2D.Editor.Tools.Path.Settings;assembly=Core2D.Editor"
              xmlns:ShapesCore="clr-namespace:Core2D.Shapes;assembly=Core2D"
-             xmlns:Style="clr-namespace:Core2D.Style;assembly=Core2D"
+             xmlns:StyleCore="clr-namespace:Core2D.Style;assembly=Core2D"
              xmlns:Views="clr-namespace:Core2D.Avalonia.Dock.Views;assembly=Core2D.Avalonia"
              xmlns:Documents="clr-namespace:Core2D.Avalonia.Dock.Documents;assembly=Core2D.Avalonia"
              xmlns:Tools="clr-namespace:Core2D.Avalonia.Dock.Tools;assembly=Core2D.Avalonia"
@@ -601,39 +601,39 @@
             <Grid/>
         </DataTemplate>
         <!-- Style -->
-        <DataTemplate DataType="Style:ArgbColor">
+        <DataTemplate DataType="StyleCore:IArgbColor">
             <style:ArgbColorControl/>
         </DataTemplate>
-        <DataTemplate DataType="Style:ArrowStyle">
+        <DataTemplate DataType="StyleCore:IArrowStyle">
             <style:ArrowStyleControl/>
         </DataTemplate>
-        <DataTemplate DataType="Style:FontStyle">
+        <DataTemplate DataType="StyleCore:IFontStyle">
             <style:FontStyleControl/>
         </DataTemplate>
-        <DataTemplate DataType="Style:TextStyle">
+        <DataTemplate DataType="StyleCore:ITextStyle">
             <style:TextStyleControl/>
         </DataTemplate>
-        <DataTemplate DataType="Style:LineFixedLength">
+        <DataTemplate DataType="StyleCore:ILineFixedLength">
             <style:LineFixedLengthControl/>
         </DataTemplate>
-        <DataTemplate DataType="Style:LineStyle">
+        <DataTemplate DataType="StyleCore:ILineStyle">
             <style:LineStyleControl/>
         </DataTemplate>
-        <DataTemplate DataType="Style:ShapeStyle">
+        <DataTemplate DataType="StyleCore:IShapeStyle">
             <style:ShapeStyleControl/>
         </DataTemplate>
         <!-- Data -->
-        <DataTemplate DataType="Data:Record">
+        <DataTemplate DataType="DataCore:IRecord">
             <data:RecordControl/>
         </DataTemplate>
-        <DataTemplate DataType="Data:Database">
+        <DataTemplate DataType="DataCore:IDatabase">
             <data:DatabaseControl/>
         </DataTemplate>
-        <DataTemplate DataType="Data:Context">
+        <DataTemplate DataType="DataCore:IContext">
             <data:DataControl/>
         </DataTemplate>
         <!-- State -->
-        <DataTemplate DataType="ShapesCore:ShapeState">
+        <DataTemplate DataType="ShapesCore:IShapeState">
             <state:ShapeStateControl/>
         </DataTemplate>
         <!-- Renderer -->

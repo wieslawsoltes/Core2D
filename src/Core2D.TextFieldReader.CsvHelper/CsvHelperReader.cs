@@ -18,11 +18,13 @@ namespace Core2D.TextFieldReader.CsvHelper
         {
             using (var reader = new System.IO.StreamReader(stream))
             {
-                var configuration = new CSV.Configuration.Configuration();
-                configuration.Delimiter = CultureInfo.CurrentCulture.TextInfo.ListSeparator;
-                configuration.CultureInfo = CultureInfo.CurrentCulture;
-                configuration.AllowComments = true;
-                configuration.Comment = '#';
+                var configuration = new CSV.Configuration.Configuration
+                {
+                    Delimiter = CultureInfo.CurrentCulture.TextInfo.ListSeparator,
+                    CultureInfo = CultureInfo.CurrentCulture,
+                    AllowComments = true,
+                    Comment = '#'
+                };
                 using (var parser = new CSV.CsvParser(reader, configuration))
                 {
                     while (true)

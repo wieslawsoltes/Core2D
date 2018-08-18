@@ -6,7 +6,27 @@
         <Framework>netstandard2.0</Framework>
       </Frameworks>
     </Project>
+    <Project Name="Core2D.Data" Path="src">
+      <Frameworks>
+        <Framework>netstandard2.0</Framework>
+      </Frameworks>
+    </Project>
+    <Project Name="Core2D.Data.Extensions" Path="src">
+      <Frameworks>
+        <Framework>netstandard2.0</Framework>
+      </Frameworks>
+    </Project>
+    <Project Name="Core2D.Style" Path="src">
+      <Frameworks>
+        <Framework>netstandard2.0</Framework>
+      </Frameworks>
+    </Project>
     <Project Name="Core2D.Shapes" Path="src">
+      <Frameworks>
+        <Framework>netstandard2.0</Framework>
+      </Frameworks>
+    </Project>
+    <Project Name="Core2D.Shapes.Extensions" Path="src">
       <Frameworks>
         <Framework>netstandard2.0</Framework>
       </Frameworks>

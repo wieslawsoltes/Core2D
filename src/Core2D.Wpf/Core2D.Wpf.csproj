@@ -522,6 +522,14 @@
       <Project>{15568654-d411-44c7-88b0-f33734541be9}</Project>
       <Name>Core2D.Containers</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Core2D.Data.Extensions\Core2D.Data.Extensions.csproj">
+      <Project>{6776ac94-aa0c-4abb-a97e-73e8c71e45f6}</Project>
+      <Name>Core2D.Data.Extensions</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Core2D.Data\Core2D.Data.csproj">
+      <Project>{b3e5d9f1-ebdb-45a9-be24-e9b6c98395cf}</Project>
+      <Name>Core2D.Data</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Core2D.Editor\Core2D.Editor.csproj">
       <Project>{528f510f-1fa0-4ab5-93fa-ef10abfe2c37}</Project>
       <Name>Core2D.Editor</Name>
@@ -537,6 +545,10 @@
     <ProjectReference Include="..\Core2D.Shapes\Core2D.Shapes.csproj">
       <Project>{2304a6b6-b64a-4e10-ac4d-0c56ae9126d5}</Project>
       <Name>Core2D.Shapes</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Core2D.Style\Core2D.Style.csproj">
+      <Project>{fe18fb1f-bebe-44a6-ad0c-354aca035266}</Project>
+      <Name>Core2D.Style</Name>
     </ProjectReference>
     <ProjectReference Include="..\Core2D.Utilities.Wpf\Core2D.Utilities.Wpf.csproj">
       <Project>{55f8a599-1ea5-4ef8-ba51-01de24b49f43}</Project>

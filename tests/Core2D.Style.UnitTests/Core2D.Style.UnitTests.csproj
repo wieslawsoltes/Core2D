@@ -11,6 +11,7 @@
   <Import Project="..\..\build\XUnit.props" />
 
   <ItemGroup>
+    <ProjectReference Include="..\..\src\Core2D.Style\Core2D.Style.csproj" />
     <ProjectReference Include="..\..\src\Core2D\Core2D.csproj" />
     <ProjectReference Include="..\Core2D.Common.UnitTests\Core2D.Common.UnitTests.csproj" />
   </ItemGroup>
