@@ -3,9 +3,9 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 
-namespace Core2D.UnitTests
+namespace Core2D.Common.UnitTests
 {
-    internal class PropertyChangedObserver
+    public class PropertyChangedObserver
     {
         public List<string> PropertyNames { get; } = new List<string>();
 

@@ -1,0 +1,26 @@
+﻿<Project Sdk="Microsoft.NET.Sdk" ToolsVersion="15.0">
+
+  <PropertyGroup>
+    <TargetFrameworks>netcoreapp2.1</TargetFrameworks>
+    <OutputType>Library</OutputType>
+    <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
+  </PropertyGroup>
+
+  <Import Project="..\..\build\Base.props" />
+  <Import Project="..\..\build\Rx.props" />
+  <Import Project="..\..\build\XUnit.props" />
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Core2D.Containers\Core2D.Containers.csproj" />
+    <ProjectReference Include="..\..\src\Core2D.Editor\Core2D.Editor.csproj" />
+    <ProjectReference Include="..\..\src\Core2D.Shapes.Extensions\Core2D.Shapes.Extensions.csproj" />
+    <ProjectReference Include="..\..\src\Core2D.Shapes\Core2D.Shapes.csproj" />
+    <ProjectReference Include="..\..\src\Core2D\Core2D.csproj" />
+    <ProjectReference Include="..\Core2D.Common.UnitTests\Core2D.Common.UnitTests.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Service Include="{82a7f48d-3b50-4b1e-b82e-3ada8210c358}" />
+  </ItemGroup>
+
+</Project>

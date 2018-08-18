@@ -3,7 +3,7 @@
 using Core2D.Data;
 using Xunit;
 
-namespace Core2D.UnitTests
+namespace Core2D.Data.UnitTests
 {
     public class PropertyTests
     {

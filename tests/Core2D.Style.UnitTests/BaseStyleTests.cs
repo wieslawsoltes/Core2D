@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using Core2D.Style;
 using Xunit;
 
-namespace Core2D.UnitTests
+namespace Core2D.Style.UnitTests
 {
     public class BaseStyleTests
     {

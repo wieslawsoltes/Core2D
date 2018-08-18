@@ -128,12 +128,27 @@
         <Framework>netcoreapp2.1</Framework>
       </Frameworks>
     </Project>
+    <Project Name="Core2D.Style.UnitTests" Path="tests">
+      <Frameworks>
+        <Framework>netcoreapp2.1</Framework>
+      </Frameworks>
+    </Project>
+    <Project Name="Core2D.Data.UnitTests" Path="tests">
+      <Frameworks>
+        <Framework>netcoreapp2.1</Framework>
+      </Frameworks>
+    </Project>
     <Project Name="Core2D.Shapes.UnitTests" Path="tests">
       <Frameworks>
         <Framework>netcoreapp2.1</Framework>
       </Frameworks>
     </Project>
     <Project Name="Core2D.Containers.UnitTests" Path="tests">
+      <Frameworks>
+        <Framework>netcoreapp2.1</Framework>
+      </Frameworks>
+    </Project>
+    <Project Name="Core2D.Editor.UnitTests" Path="tests">
       <Frameworks>
         <Framework>netcoreapp2.1</Framework>
       </Frameworks>

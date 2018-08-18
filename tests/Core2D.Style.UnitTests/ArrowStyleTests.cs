@@ -3,16 +3,16 @@
 using Core2D.Style;
 using Xunit;
 
-namespace Core2D.UnitTests
+namespace Core2D.Style.UnitTests
 {
-    public class TextStyleTests
+    public class ArrowStyleTests
     {
         [Fact]
         [Trait("Core2D.Style", "Style")]
         public void Inherits_From_ObservableObject()
         {
-            var target = new TextStyle();
-            Assert.True(target is ObservableObject);
+            var target = new ArrowStyle();
+            Assert.True(target is BaseStyle);
         }
     }
 }

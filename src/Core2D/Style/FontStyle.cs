@@ -7,25 +7,6 @@ using Core2D.Attributes;
 namespace Core2D.Style
 {
     /// <summary>
-    /// Font style extensions.
-    /// </summary>
-    public static class FontStyleExtensions
-    {
-        /// <summary>
-        /// Clones font style.
-        /// </summary>
-        /// <param name="fontStyle">The font style to clone.</param>
-        /// <returns>The new instance of the <see cref="FontStyle"/> class.</returns>
-        public static IFontStyle Clone(this IFontStyle fontStyle)
-        {
-            return new FontStyle()
-            {
-                Flags = fontStyle.Flags
-            };
-        }
-    }
-
-    /// <summary>
     /// Specifies style flags proxy information applied to text.
     /// </summary>
     public class FontStyle : ObservableObject, IFontStyle

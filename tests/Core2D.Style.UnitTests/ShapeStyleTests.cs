@@ -3,15 +3,15 @@
 using Core2D.Style;
 using Xunit;
 
-namespace Core2D.UnitTests
+namespace Core2D.Style.UnitTests
 {
-    public class LineStyleTests
+    public class ShapeStyleTests
     {
         [Fact]
         [Trait("Core2D.Style", "Style")]
         public void Inherits_From_ObservableObject()
         {
-            var target = new LineStyle();
+            var target = new ShapeStyle();
             Assert.True(target is ObservableObject);
         }
     }

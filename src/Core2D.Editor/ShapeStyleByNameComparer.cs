@@ -1,8 +1,9 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System.Collections.Generic;
+using Core2D.Style;
 
-namespace Core2D.Style
+namespace Core2D.Editor
 {
     /// <summary>
     /// Defines methods to support the comparison of <see cref="IShapeStyle"/> objects for equality.
