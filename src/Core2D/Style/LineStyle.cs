@@ -29,32 +29,6 @@ namespace Core2D.Style
     }
 
     /// <summary>
-    /// Define line style contract.
-    /// </summary>
-    public interface ILineStyle : IObservableObject
-    {
-        /// <summary>
-        /// Gets or sets value indicating whether line is curved.
-        /// </summary>
-        bool IsCurved { get; set; }
-
-        /// <summary>
-        /// Gets or sets line curvature.
-        /// </summary>
-        double Curvature { get; set; }
-
-        /// <summary>
-        /// Gets or sets curve orientation.
-        /// </summary>
-        CurveOrientation CurveOrientation { get; set; }
-
-        /// <summary>
-        /// Gets or sets line fixed length.
-        /// </summary>
-        ILineFixedLength FixedLength { get; set; }
-    }
-
-    /// <summary>
     /// Line style.
     /// </summary>
     public class LineStyle : ObservableObject, ILineStyle
