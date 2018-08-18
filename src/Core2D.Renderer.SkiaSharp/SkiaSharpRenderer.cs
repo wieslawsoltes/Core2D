@@ -1,9 +1,9 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
+using System.Collections.Generic;
 using System.Collections.Immutable;
 using Core2D.Data;
-using Core2D.Shape;
 using Core2D.Shapes;
 using Core2D.Style;
 using SkiaSharp;
@@ -19,9 +19,9 @@ namespace Core2D.Renderer.SkiaSharp
     {
         private bool _isAntialias = true;
         private ICache<string, SKBitmap> _biCache = Cache<string, SKBitmap>.Create(bi => bi.Dispose());
-        private Func<double, float> _scaleToPage;
-        private double _sourceDpi = 96.0;
-        private double _targetDpi = 72.0;
+        private readonly Func<double, float> _scaleToPage;
+        private readonly double _sourceDpi = 96.0;
+        private readonly double _targetDpi = 72.0;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SkiaSharpRenderer"/> class.
@@ -36,13 +36,19 @@ namespace Core2D.Renderer.SkiaSharp
             _targetDpi = targetDpi;
         }
 
+        /// <inheritdoc/>
+        public override object Copy(IDictionary<object, object> shared)
+        {
+            throw new NotImplementedException();
+        }
+
         /// <summary>
         /// Creates a new <see cref="SkiaSharpRenderer"/> instance.
         /// </summary>
         /// <returns>The new instance of the <see cref="SkiaSharpRenderer"/> class.</returns>
         public static ShapeRenderer Create() => new SkiaSharpRenderer();
 
-        private SKPoint GetTextOrigin(ShapeStyle style, ref SKRect rect, ref SKRect size)
+        private SKPoint GetTextOrigin(IShapeStyle style, ref SKRect rect, ref SKRect size)
         {
             double rwidth = Math.Abs(rect.Right - rect.Left);
             double rheight = Math.Abs(rect.Bottom - rect.Top);
@@ -81,9 +87,18 @@ namespace Core2D.Renderer.SkiaSharp
             return new SKPoint((float)ox, (float)oy);
         }
 
-        private SKColor ToSKColor(ArgbColor color) => new SKColor(color.R, color.G, color.B, color.A);
+        private SKColor ToSKColor(IColor color)
+        {
+            switch (color)
+            {
+                case IArgbColor argbColor:
+                    return new SKColor(argbColor.R, argbColor.G, argbColor.B, argbColor.A);
+                default:
+                    throw new NotSupportedException($"The {color.GetType()} color type is not supported.");
+            }
+        }
 
-        private static SKStrokeCap ToStrokeCap(BaseStyle style)
+        private static SKStrokeCap ToStrokeCap(IBaseStyle style)
         {
             switch (style.LineCap)
             {
@@ -97,7 +112,7 @@ namespace Core2D.Renderer.SkiaSharp
             }
         }
 
-        private SKPaint ToSKPaintPen(BaseStyle style, Func<double, float> scale, double sourceDpi, double targetDpi)
+        private SKPaint ToSKPaintPen(IBaseStyle style, Func<double, float> scale, double sourceDpi, double targetDpi)
         {
             return new SKPaint()
             {
@@ -110,7 +125,7 @@ namespace Core2D.Renderer.SkiaSharp
             };
         }
 
-        private SKPaint ToSKPaintBrush(ArgbColor color)
+        private SKPaint ToSKPaintBrush(IColor color)
         {
             return new SKPaint()
             {
@@ -131,7 +146,7 @@ namespace Core2D.Renderer.SkiaSharp
             return new SKRect(left, top, right, bottom);
         }
 
-        private SKRect CreateRect(PointShape tl, PointShape br, double dx, double dy, Func<double, float> scale)
+        private SKRect CreateRect(IPointShape tl, IPointShape br, double dx, double dy, Func<double, float> scale)
         {
             double tlx = Math.Min(tl.X, br.X);
             double tly = Math.Min(tl.Y, br.Y);
@@ -175,7 +190,7 @@ namespace Core2D.Renderer.SkiaSharp
             }
         }
 
-        private void DrawLineArrowsInternal(SKCanvas canvas, LineShape line, double dx, double dy, out SKPoint pt1, out SKPoint pt2)
+        private void DrawLineArrowsInternal(SKCanvas canvas, ILineShape line, double dx, double dy, out SKPoint pt1, out SKPoint pt2)
         {
             using (var fillStartArrow = ToSKPaintBrush(line.Style.StartArrowStyle.Fill))
             using (var strokeStartArrow = ToSKPaintPen(line.Style.StartArrowStyle, _scaleToPage, _sourceDpi, _targetDpi))
@@ -207,7 +222,7 @@ namespace Core2D.Renderer.SkiaSharp
             }
         }
 
-        private SKPoint DrawLineArrowInternal(SKCanvas canvas, SKPaint pen, SKPaint brush, float x, float y, double angle, ArrowStyle style)
+        private SKPoint DrawLineArrowInternal(SKCanvas canvas, SKPaint pen, SKPaint brush, float x, float y, double angle, IArrowStyle style)
         {
             SKPoint pt = default;
             var rt = MatrixHelper.Rotation(angle, new SKPoint(x, y));
@@ -331,7 +346,7 @@ namespace Core2D.Renderer.SkiaSharp
             }
         }
 
-        private void DrawBackgroundInternal(SKCanvas canvas, ArgbColor color, Rect2 rect)
+        private void DrawBackgroundInternal(SKCanvas canvas, IColor color, Rect2 rect)
         {
             using (var brush = ToSKPaintBrush(color))
             {
@@ -362,7 +377,7 @@ namespace Core2D.Renderer.SkiaSharp
         }
 
         /// <inheritdoc/>
-        public override void Fill(object dc, double x, double y, double width, double height, ArgbColor color)
+        public override void Fill(object dc, double x, double y, double width, double height, IColor color)
         {
             var canvas = dc as SKCanvas;
             var rect = SKRect.Create((float)x, (float)y, (float)width, (float)height);
@@ -390,7 +405,7 @@ namespace Core2D.Renderer.SkiaSharp
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, LineShape line, double dx, double dy, object db, object r)
+        public override void Draw(object dc, ILineShape line, double dx, double dy, object db, object r)
         {
             var canvas = dc as SKCanvas;
 
@@ -417,7 +432,7 @@ namespace Core2D.Renderer.SkiaSharp
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, RectangleShape rectangle, double dx, double dy, object db, object r)
+        public override void Draw(object dc, IRectangleShape rectangle, double dx, double dy, object db, object r)
         {
             var canvas = dc as SKCanvas;
 
@@ -442,7 +457,7 @@ namespace Core2D.Renderer.SkiaSharp
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, EllipseShape ellipse, double dx, double dy, object db, object r)
+        public override void Draw(object dc, IEllipseShape ellipse, double dx, double dy, object db, object r)
         {
             var canvas = dc as SKCanvas;
 
@@ -455,7 +470,7 @@ namespace Core2D.Renderer.SkiaSharp
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, ArcShape arc, double dx, double dy, object db, object r)
+        public override void Draw(object dc, IArcShape arc, double dx, double dy, object db, object r)
         {
             var canvas = dc as SKCanvas;
 
@@ -479,7 +494,7 @@ namespace Core2D.Renderer.SkiaSharp
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, CubicBezierShape cubicBezier, double dx, double dy, object db, object r)
+        public override void Draw(object dc, ICubicBezierShape cubicBezier, double dx, double dy, object db, object r)
         {
             var canvas = dc as SKCanvas;
 
@@ -502,7 +517,7 @@ namespace Core2D.Renderer.SkiaSharp
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, QuadraticBezierShape quadraticBezier, double dx, double dy, object db, object r)
+        public override void Draw(object dc, IQuadraticBezierShape quadraticBezier, double dx, double dy, object db, object r)
         {
             var canvas = dc as SKCanvas;
 
@@ -523,12 +538,12 @@ namespace Core2D.Renderer.SkiaSharp
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, TextShape text, double dx, double dy, object db, object r)
+        public override void Draw(object dc, ITextShape text, double dx, double dy, object db, object r)
         {
             var canvas = dc as SKCanvas;
 
-            var properties = (ImmutableArray<Property>)db;
-            var record = (Record)r;
+            var properties = (ImmutableArray<IProperty>)db;
+            var record = (IRecord)r;
             var tbind = text.BindText(properties, record);
             if (string.IsNullOrEmpty(tbind))
                 return;
@@ -576,7 +591,7 @@ namespace Core2D.Renderer.SkiaSharp
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, ImageShape image, double dx, double dy, object db, object r)
+        public override void Draw(object dc, IImageShape image, double dx, double dy, object db, object r)
         {
             var canvas = dc as SKCanvas;
 
@@ -614,7 +629,7 @@ namespace Core2D.Renderer.SkiaSharp
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, PathShape path, double dx, double dy, object db, object r)
+        public override void Draw(object dc, IPathShape path, double dx, double dy, object db, object r)
         {
             var canvas = dc as SKCanvas;
 

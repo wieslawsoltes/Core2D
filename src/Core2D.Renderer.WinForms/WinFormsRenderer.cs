@@ -7,9 +7,9 @@ using System.Drawing.Drawing2D;
 using Core2D.Data;
 using Spatial;
 using Spatial.Arc;
-using Core2D.Shape;
-using Core2D.Shapes;
 using Core2D.Style;
+using Core2D.Shapes;
+using System.Collections.Generic;
 
 namespace Core2D.Renderer.WinForms
 {
@@ -33,15 +33,41 @@ namespace Core2D.Renderer.WinForms
             _scaleToPage = (value) => (float)(value);
         }
 
+        /// <inheritdoc/>
+        public override object Copy(IDictionary<object, object> shared)
+        {
+            throw new NotImplementedException();
+        }
+
         /// <summary>
         /// Creates a new <see cref="WinFormsRenderer"/> instance.
         /// </summary>
         /// <returns>The new instance of the <see cref="WinFormsRenderer"/> class.</returns>
         public static ShapeRenderer Create() => new WinFormsRenderer();
 
-        private static Color ToColor(ArgbColor color) => Color.FromArgb(color.A, color.R, color.G, color.B);
+        private static Color ToColor(IColor color)
+        {
+            switch (color)
+            {
+                case IArgbColor argbColor:
+                    return Color.FromArgb(argbColor.A, argbColor.R, argbColor.G, argbColor.B);
+                default:
+                    throw new NotSupportedException($"The {color.GetType()} color type is not supported.");
+            }
+        }
 
-        private Pen ToPen(BaseStyle style, Func<double, float> scale)
+        private Brush ToBrush(IColor color)
+        {
+            switch (color)
+            {
+                case IArgbColor argbColor:
+                    return new SolidBrush(ToColor(argbColor));
+                default:
+                    throw new NotSupportedException($"The {color.GetType()} color type is not supported.");
+            }
+        }
+
+        private Pen ToPen(IBaseStyle style, Func<double, float> scale)
         {
             var pen = new Pen(ToColor(style.Stroke), (float)(style.Thickness / State.ZoomX));
             switch (style.LineCap)
@@ -71,9 +97,7 @@ namespace Core2D.Renderer.WinForms
             return pen;
         }
 
-        private SolidBrush ToSolidBrush(ArgbColor color) => new SolidBrush(ToColor(color));
-
-        private static Rect2 CreateRect(PointShape tl, PointShape br, double dx, double dy) => Rect2.FromPoints(tl.X, tl.Y, br.X, br.Y, dx, dy);
+        private static Rect2 CreateRect(IPointShape tl, IPointShape br, double dx, double dy) => Rect2.FromPoints(tl.X, tl.Y, br.X, br.Y, dx, dy);
 
         private static void DrawLineInternal(Graphics gfx, Pen pen, bool isStroked, ref PointF p0, ref PointF p1)
         {
@@ -103,12 +127,12 @@ namespace Core2D.Renderer.WinForms
             }
         }
 
-        private void DrawLineArrowsInternal(LineShape line, double dx, double dy, Graphics gfx, out PointF pt1, out PointF pt2)
+        private void DrawLineArrowsInternal(ILineShape line, double dx, double dy, Graphics gfx, out PointF pt1, out PointF pt2)
         {
-            Brush fillStartArrow = ToSolidBrush(line.Style.StartArrowStyle.Fill);
+            Brush fillStartArrow = ToBrush(line.Style.StartArrowStyle.Fill);
             var strokeStartArrow = ToPen(line.Style.StartArrowStyle, _scaleToPage);
 
-            Brush fillEndArrow = ToSolidBrush(line.Style.EndArrowStyle.Fill);
+            Brush fillEndArrow = ToBrush(line.Style.EndArrowStyle.Fill);
             var strokeEndArrow = ToPen(line.Style.EndArrowStyle, _scaleToPage);
 
             double _x1 = line.Start.X + dx;
@@ -141,7 +165,7 @@ namespace Core2D.Renderer.WinForms
             strokeEndArrow.Dispose();
         }
 
-        private static PointF DrawLineArrowInternal(Graphics gfx, Pen pen, Brush brush, float x, float y, float angle, ArrowStyle style)
+        private static PointF DrawLineArrowInternal(Graphics gfx, Pen pen, Brush brush, float x, float y, float angle, IArrowStyle style)
         {
             PointF pt;
             var rt = new Matrix();
@@ -304,10 +328,10 @@ namespace Core2D.Renderer.WinForms
         }
 
         /// <inheritdoc/>
-        public override void Fill(object dc, double x, double y, double width, double height, ArgbColor color)
+        public override void Fill(object dc, double x, double y, double width, double height, IColor color)
         {
             var _gfx = dc as Graphics;
-            Brush brush = ToSolidBrush(color);
+            Brush brush = ToBrush(color);
             _gfx.FillRectangle(
                 brush,
                 (float)x,
@@ -335,7 +359,7 @@ namespace Core2D.Renderer.WinForms
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, LineShape line, double dx, double dy, object db, object r)
+        public override void Draw(object dc, ILineShape line, double dx, double dy, object db, object r)
         {
             var _gfx = dc as Graphics;
 
@@ -362,11 +386,11 @@ namespace Core2D.Renderer.WinForms
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, RectangleShape rectangle, double dx, double dy, object db, object r)
+        public override void Draw(object dc, IRectangleShape rectangle, double dx, double dy, object db, object r)
         {
             var _gfx = dc as Graphics;
 
-            Brush brush = ToSolidBrush(rectangle.Style.Fill);
+            Brush brush = ToBrush(rectangle.Style.Fill);
             var pen = ToPen(rectangle.Style, _scaleToPage);
 
             var rect = CreateRect(
@@ -410,11 +434,11 @@ namespace Core2D.Renderer.WinForms
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, EllipseShape ellipse, double dx, double dy, object db, object r)
+        public override void Draw(object dc, IEllipseShape ellipse, double dx, double dy, object db, object r)
         {
             var _gfx = dc as Graphics;
 
-            Brush brush = ToSolidBrush(ellipse.Style.Fill);
+            Brush brush = ToBrush(ellipse.Style.Fill);
             var pen = ToPen(ellipse.Style, _scaleToPage);
 
             var rect = CreateRect(
@@ -447,7 +471,7 @@ namespace Core2D.Renderer.WinForms
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, ArcShape arc, double dx, double dy, object db, object r)
+        public override void Draw(object dc, IArcShape arc, double dx, double dy, object db, object r)
         {
             var a = new GdiArc(
                 Point2.FromXY(arc.Point1.X, arc.Point1.Y),
@@ -459,7 +483,7 @@ namespace Core2D.Renderer.WinForms
 
             var _gfx = dc as Graphics;
 
-            Brush brush = ToSolidBrush(arc.Style.Fill);
+            Brush brush = ToBrush(arc.Style.Fill);
             var pen = ToPen(arc.Style, _scaleToPage);
 
             if (arc.IsFilled)
@@ -492,11 +516,11 @@ namespace Core2D.Renderer.WinForms
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, CubicBezierShape cubicBezier, double dx, double dy, object db, object r)
+        public override void Draw(object dc, ICubicBezierShape cubicBezier, double dx, double dy, object db, object r)
         {
             var _gfx = dc as Graphics;
 
-            Brush brush = ToSolidBrush(cubicBezier.Style.Fill);
+            Brush brush = ToBrush(cubicBezier.Style.Fill);
             var pen = ToPen(cubicBezier.Style, _scaleToPage);
 
             if (cubicBezier.IsFilled)
@@ -533,11 +557,11 @@ namespace Core2D.Renderer.WinForms
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, QuadraticBezierShape quadraticBezier, double dx, double dy, object db, object r)
+        public override void Draw(object dc, IQuadraticBezierShape quadraticBezier, double dx, double dy, object db, object r)
         {
             var _gfx = dc as Graphics;
 
-            Brush brush = ToSolidBrush(quadraticBezier.Style.Fill);
+            Brush brush = ToBrush(quadraticBezier.Style.Fill);
             var pen = ToPen(quadraticBezier.Style, _scaleToPage);
 
             double x1 = quadraticBezier.Point1.X;
@@ -583,17 +607,17 @@ namespace Core2D.Renderer.WinForms
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, TextShape text, double dx, double dy, object db, object r)
+        public override void Draw(object dc, ITextShape text, double dx, double dy, object db, object r)
         {
             var _gfx = dc as Graphics;
 
-            var properties = (ImmutableArray<Property>)db;
-            var record = (Record)r;
+            var properties = (ImmutableArray<IProperty>)db;
+            var record = (IRecord)r;
             var tbind = text.BindText(properties, record);
             if (string.IsNullOrEmpty(tbind))
                 return;
 
-            Brush brush = ToSolidBrush(text.Style.Stroke);
+            Brush brush = ToBrush(text.Style.Stroke);
 
             var fontStyle = System.Drawing.FontStyle.Regular;
             if (text.Style.TextStyle.FontStyle != null)
@@ -668,7 +692,7 @@ namespace Core2D.Renderer.WinForms
             _gfx.DrawString(
                 tbind,
                 font,
-                ToSolidBrush(text.Style.Stroke),
+                ToBrush(text.Style.Stroke),
                 srect,
                 format);
 
@@ -677,11 +701,11 @@ namespace Core2D.Renderer.WinForms
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, ImageShape image, double dx, double dy, object db, object r)
+        public override void Draw(object dc, IImageShape image, double dx, double dy, object db, object r)
         {
             var _gfx = dc as Graphics;
 
-            Brush brush = ToSolidBrush(image.Style.Stroke);
+            Brush brush = ToBrush(image.Style.Stroke);
 
             var rect = CreateRect(
                 image.TopLeft,
@@ -697,7 +721,7 @@ namespace Core2D.Renderer.WinForms
             if (image.IsFilled)
             {
                 _gfx.FillRectangle(
-                    ToSolidBrush(image.Style.Fill),
+                    ToBrush(image.Style.Fill),
                     srect);
             }
 
@@ -738,7 +762,7 @@ namespace Core2D.Renderer.WinForms
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, PathShape path, double dx, double dy, object db, object r)
+        public override void Draw(object dc, IPathShape path, double dx, double dy, object db, object r)
         {
             var _gfx = dc as Graphics;
 
@@ -746,7 +770,7 @@ namespace Core2D.Renderer.WinForms
 
             if (path.IsFilled && path.IsStroked)
             {
-                var brush = ToSolidBrush(path.Style.Fill);
+                var brush = ToBrush(path.Style.Fill);
                 var pen = ToPen(path.Style, _scaleToPage);
                 _gfx.FillPath(
                     brush,
@@ -759,7 +783,7 @@ namespace Core2D.Renderer.WinForms
             }
             else if (path.IsFilled && !path.IsStroked)
             {
-                var brush = ToSolidBrush(path.Style.Fill);
+                var brush = ToBrush(path.Style.Fill);
                 _gfx.FillPath(
                     brush,
                     gp);

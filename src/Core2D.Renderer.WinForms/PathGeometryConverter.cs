@@ -21,7 +21,7 @@ namespace Core2D.Renderer.WinForms
         /// <param name="dy"></param>
         /// <param name="scale"></param>
         /// <returns></returns>
-        public static D2D.GraphicsPath ToGraphicsPath(this PathGeometry pg, double dx, double dy, Func<double, float> scale)
+        public static D2D.GraphicsPath ToGraphicsPath(this IPathGeometry pg, double dx, double dy, Func<double, float> scale)
         {
             var gp = new D2D.GraphicsPath
             {

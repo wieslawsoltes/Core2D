@@ -9,7 +9,7 @@ namespace Core2D.Wpf.Views.Custom.Lists
     /// <summary>
     /// The <see cref="ListBox"/> control for <see cref="GroupShape.Connectors"/> items with drag and drop support.
     /// </summary>
-    public class GroupShapeConnectorsDragAndDropListBox : DragAndDropListBox<PointShape>
+    public class GroupShapeConnectorsDragAndDropListBox : DragAndDropListBox<IPointShape>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="GroupShapeConnectorsDragAndDropListBox"/> class.
@@ -24,10 +24,10 @@ namespace Core2D.Wpf.Views.Custom.Lists
         /// Updates DataContext binding to ImmutableArray collection property.
         /// </summary>
         /// <param name="array">The updated immutable array.</param>
-        protected override void UpdateDataContext(ImmutableArray<PointShape> array)
+        protected override void UpdateDataContext(ImmutableArray<IPointShape> array)
         {
             var editor = (ProjectEditor)Tag;
-            var group = DataContext as GroupShape;
+            var group = DataContext as IGroupShape;
             if (group == null)
                 return;
 

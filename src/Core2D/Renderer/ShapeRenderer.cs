@@ -11,12 +11,12 @@ namespace Core2D.Renderer
     /// </summary>
     public abstract class ShapeRenderer : ObservableObject
     {
-        private ShapeRendererState _state = new ShapeRendererState();
+        private IShapeRendererState _state = new ShapeRendererState();
 
         /// <summary>
         /// Gets or sets renderer state.
         /// </summary>
-        public virtual ShapeRendererState State
+        public virtual IShapeRendererState State
         {
             get => _state;
             set => Update(ref _state, value);
@@ -43,7 +43,7 @@ namespace Core2D.Renderer
         /// <param name="width">The width of rectangle.</param>
         /// <param name="height">The height of rectangle.</param>
         /// <param name="color">The fill color.</param>
-        public abstract void Fill(object dc, double x, double y, double width, double height, ArgbColor color);
+        public abstract void Fill(object dc, double x, double y, double width, double height, IColor color);
 
         /// <summary>
         /// Push matrix.
@@ -61,15 +61,15 @@ namespace Core2D.Renderer
         public abstract void PopMatrix(object dc, object state);
 
         /// <summary>
-        /// Draws a <see cref="PageContainer"/> using drawing context.
+        /// Draws a <see cref="IPageContainer"/> using drawing context.
         /// </summary>
         /// <param name="dc">The native drawing context.</param>
-        /// <param name="container">The <see cref="PageContainer"/> object.</param>
+        /// <param name="container">The <see cref="IPageContainer"/> object.</param>
         /// <param name="dx">The X coordinate offset.</param>
         /// <param name="dy">The Y coordinate offset.</param>
         /// <param name="db">The properties database.</param>
         /// <param name="r">The data record.</param>
-        public virtual void Draw(object dc, PageContainer container, double dx, double dy, object db, object r)
+        public virtual void Draw(object dc, IPageContainer container, double dx, double dy, object db, object r)
         {
             foreach (var layer in container.Layers)
             {
@@ -81,15 +81,15 @@ namespace Core2D.Renderer
         }
 
         /// <summary>
-        /// Draws a <see cref="LayerContainer"/> using drawing context.
+        /// Draws a <see cref="ILayerContainer"/> using drawing context.
         /// </summary>
         /// <param name="dc">The native drawing context.</param>
-        /// <param name="layer">The <see cref="LayerContainer"/> object.</param>
+        /// <param name="layer">The <see cref="ILayerContainer"/> object.</param>
         /// <param name="dx">The X coordinate offset.</param>
         /// <param name="dy">The Y coordinate offset.</param>
         /// <param name="db">The properties database.</param>
         /// <param name="r">The data record.</param>
-        public virtual void Draw(object dc, LayerContainer layer, double dx, double dy, object db, object r)
+        public virtual void Draw(object dc, ILayerContainer layer, double dx, double dy, object db, object r)
         {
             foreach (var shape in layer.Shapes)
             {
@@ -101,102 +101,102 @@ namespace Core2D.Renderer
         }
 
         /// <summary>
-        /// Draws a <see cref="LineShape"/> shape using drawing context.
+        /// Draws a <see cref="ILineShape"/> shape using drawing context.
         /// </summary>
         /// <param name="dc">The native drawing context.</param>
-        /// <param name="line">The <see cref="LineShape"/> shape.</param>
+        /// <param name="line">The <see cref="ILineShape"/> shape.</param>
         /// <param name="dx">The X coordinate offset.</param>
         /// <param name="dy">The Y coordinate offset.</param>
         /// <param name="db">The properties database.</param>
         /// <param name="r">The data record.</param>
-        public abstract void Draw(object dc, LineShape line, double dx, double dy, object db, object r);
+        public abstract void Draw(object dc, ILineShape line, double dx, double dy, object db, object r);
 
         /// <summary>
-        /// Draws a <see cref="RectangleShape"/> shape using drawing context.
+        /// Draws a <see cref="IRectangleShape"/> shape using drawing context.
         /// </summary>
         /// <param name="dc">The native drawing context.</param>
-        /// <param name="rectangle">The <see cref="RectangleShape"/> shape.</param>
+        /// <param name="rectangle">The <see cref="IRectangleShape"/> shape.</param>
         /// <param name="dx">The X coordinate offset.</param>
         /// <param name="dy">The Y coordinate offset.</param>
         /// <param name="db">The properties database.</param>
         /// <param name="r">The data record.</param>
-        public abstract void Draw(object dc, RectangleShape rectangle, double dx, double dy, object db, object r);
+        public abstract void Draw(object dc, IRectangleShape rectangle, double dx, double dy, object db, object r);
 
         /// <summary>
-        /// Draws a <see cref="EllipseShape"/> shape using drawing context.
+        /// Draws a <see cref="IEllipseShape"/> shape using drawing context.
         /// </summary>
         /// <param name="dc">The native drawing context.</param>
-        /// <param name="ellipse">The <see cref="EllipseShape"/> shape.</param>
+        /// <param name="ellipse">The <see cref="IEllipseShape"/> shape.</param>
         /// <param name="dx">The X coordinate offset.</param>
         /// <param name="dy">The Y coordinate offset.</param>
         /// <param name="db">The properties database.</param>
         /// <param name="r">The data record.</param>
-        public abstract void Draw(object dc, EllipseShape ellipse, double dx, double dy, object db, object r);
+        public abstract void Draw(object dc, IEllipseShape ellipse, double dx, double dy, object db, object r);
 
         /// <summary>
-        /// Draws a <see cref="ArcShape"/> shape using drawing context.
+        /// Draws a <see cref="IArcShape"/> shape using drawing context.
         /// </summary>
         /// <param name="dc">The native drawing context.</param>
-        /// <param name="arc">The <see cref="ArcShape"/> shape.</param>
+        /// <param name="arc">The <see cref="IArcShape"/> shape.</param>
         /// <param name="dx">The X coordinate offset.</param>
         /// <param name="dy">The Y coordinate offset.</param>
         /// <param name="db">The properties database.</param>
         /// <param name="r">The data record.</param>
-        public abstract void Draw(object dc, ArcShape arc, double dx, double dy, object db, object r);
+        public abstract void Draw(object dc, IArcShape arc, double dx, double dy, object db, object r);
 
         /// <summary>
-        /// Draws a <see cref="CubicBezierShape"/> shape using drawing context.
+        /// Draws a <see cref="ICubicBezierShape"/> shape using drawing context.
         /// </summary>
         /// <param name="dc">The native drawing context.</param>
-        /// <param name="cubicBezier">The <see cref="CubicBezierShape"/> shape.</param>
+        /// <param name="cubicBezier">The <see cref="ICubicBezierShape"/> shape.</param>
         /// <param name="dx">The X coordinate offset.</param>
         /// <param name="dy">The Y coordinate offset.</param>
         /// <param name="db">The properties database.</param>
         /// <param name="r">The data record.</param>
-        public abstract void Draw(object dc, CubicBezierShape cubicBezier, double dx, double dy, object db, object r);
+        public abstract void Draw(object dc, ICubicBezierShape cubicBezier, double dx, double dy, object db, object r);
 
         /// <summary>
-        /// Draws a <see cref="QuadraticBezierShape"/> shape using drawing context.
+        /// Draws a <see cref="IQuadraticBezierShape"/> shape using drawing context.
         /// </summary>
         /// <param name="dc">The native drawing context.</param>
-        /// <param name="quadraticBezier">The <see cref="QuadraticBezierShape"/> shape.</param>
+        /// <param name="quadraticBezier">The <see cref="IQuadraticBezierShape"/> shape.</param>
         /// <param name="dx">The X coordinate offset.</param>
         /// <param name="dy">The Y coordinate offset.</param>
         /// <param name="db">The properties database.</param>
         /// <param name="r">The data record.</param>
-        public abstract void Draw(object dc, QuadraticBezierShape quadraticBezier, double dx, double dy, object db, object r);
+        public abstract void Draw(object dc, IQuadraticBezierShape quadraticBezier, double dx, double dy, object db, object r);
 
         /// <summary>
-        /// Draws a <see cref="TextShape"/> shape using drawing context.
+        /// Draws a <see cref="ITextShape"/> shape using drawing context.
         /// </summary>
         /// <param name="dc">The native drawing context.</param>
-        /// <param name="text">The <see cref="TextShape"/> shape.</param>
+        /// <param name="text">The <see cref="ITextShape"/> shape.</param>
         /// <param name="dx">The X coordinate offset.</param>
         /// <param name="dy">The Y coordinate offset.</param>
         /// <param name="db">The properties database.</param>
         /// <param name="r">The data record.</param>
-        public abstract void Draw(object dc, TextShape text, double dx, double dy, object db, object r);
+        public abstract void Draw(object dc, ITextShape text, double dx, double dy, object db, object r);
 
         /// <summary>
-        /// Draws a <see cref="ImageShape"/> shape using drawing context.
+        /// Draws a <see cref="IImageShape"/> shape using drawing context.
         /// </summary>
         /// <param name="dc">The native drawing context.</param>
-        /// <param name="image">The <see cref="ImageShape"/> shape.</param>
+        /// <param name="image">The <see cref="IImageShape"/> shape.</param>
         /// <param name="dx">The X coordinate offset.</param>
         /// <param name="dy">The Y coordinate offset.</param>
         /// <param name="db">The properties database.</param>
         /// <param name="r">The data record.</param>
-        public abstract void Draw(object dc, ImageShape image, double dx, double dy, object db, object r);
+        public abstract void Draw(object dc, IImageShape image, double dx, double dy, object db, object r);
 
         /// <summary>
-        /// Draws a <see cref="PathShape"/> shape using drawing context.
+        /// Draws a <see cref="IPathShape"/> shape using drawing context.
         /// </summary>
         /// <param name="dc">The native drawing context.</param>
-        /// <param name="path">The <see cref="PathShape"/> shape.</param>
+        /// <param name="path">The <see cref="IPathShape"/> shape.</param>
         /// <param name="dx">The X coordinate offset.</param>
         /// <param name="dy">The Y coordinate offset.</param>
         /// <param name="db">The properties database.</param>
         /// <param name="r">The data record.</param>
-        public abstract void Draw(object dc, PathShape path, double dx, double dy, object db, object r);
+        public abstract void Draw(object dc, IPathShape path, double dx, double dy, object db, object r);
     }
 }

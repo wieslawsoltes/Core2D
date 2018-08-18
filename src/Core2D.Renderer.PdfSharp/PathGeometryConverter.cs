@@ -21,7 +21,7 @@ namespace Core2D.Renderer.PdfSharp
         /// <param name="dy"></param>
         /// <param name="scale"></param>
         /// <returns></returns>
-        public static PDF.XGraphicsPath ToXGraphicsPath(this PathGeometry pg, double dx, double dy, Func<double, double> scale)
+        public static PDF.XGraphicsPath ToXGraphicsPath(this IPathGeometry pg, double dx, double dy, Func<double, double> scale)
         {
             var gp = new PDF.XGraphicsPath()
             {

@@ -1,11 +1,12 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
+using System.Collections.Generic;
 using Core2D.Editor.Input;
 using Core2D.Editor.Tools.Selection;
 using Core2D.Editor.Tools.Settings;
-using Core2D.Shape;
 using Core2D.Shapes;
+using Core2D.Style;
 
 namespace Core2D.Editor.Tools
 {
@@ -18,7 +19,7 @@ namespace Core2D.Editor.Tools
         private readonly IServiceProvider _serviceProvider;
         private ToolSettingsImage _settings;
         private State _currentState = State.TopLeft;
-        private ImageShape _image;
+        private IImageShape _image;
         private ToolImageSelection _selection;
 
         /// <inheritdoc/>
@@ -41,6 +42,12 @@ namespace Core2D.Editor.Tools
         {
             _serviceProvider = serviceProvider;
             _settings = new ToolSettingsImage();
+        }
+
+        /// <inheritdoc/>
+        public override object Copy(IDictionary<object, object> shared)
+        {
+            throw new NotImplementedException();
         }
 
         /// <inheritdoc/>
@@ -175,7 +182,7 @@ namespace Core2D.Editor.Tools
         }
 
         /// <inheritdoc/>
-        public override void Move(BaseShape shape)
+        public override void Move(IBaseShape shape)
         {
             base.Move(shape);
 

@@ -8,7 +8,7 @@
              xmlns:id="clr-namespace:Dock.Avalonia;assembly=Dock.Avalonia"
              xmlns:converters="clr-namespace:Core2D.Avalonia.Converters;assembly=Core2D.Avalonia"
              xmlns:Editor="clr-namespace:Core2D.Editor;assembly=Core2D.Editor"
-             xmlns:Path="clr-namespace:Core2D.Path;assembly=Core2D"
+             xmlns:PathCore="clr-namespace:Core2D.Path;assembly=Core2D"
              xmlns:Designer="clr-namespace:Core2D.Editor.Designer;assembly=Core2D.Editor"
              Design.DataContext="{x:Static Designer:DesignerContext.PathGeometry}"
              Design.Width="250" Design.Height="400">
@@ -29,14 +29,14 @@
                     </Style>
                 </TreeView.Styles>
                 <TreeView.DataTemplates>
-                    <TreeDataTemplate DataType="Path:PathFigure" ItemsSource="{Binding Segments}">
+                    <TreeDataTemplate DataType="PathCore:IPathFigure" ItemsSource="{Binding Segments}">
                         <TextBlock Text="{Binding Mode=OneWay, Converter={StaticResource ObjectToTypeStringConverter}}" Classes="tree drag">
                             <i:Interaction.Behaviors>
                                 <id:DragBehavior Context="{Binding}"/>
                             </i:Interaction.Behaviors>
                         </TextBlock>
                     </TreeDataTemplate>
-                    <DataTemplate DataType="Path:PathSegment">
+                    <DataTemplate DataType="PathCore:IPathSegment">
                         <TextBlock Text="{Binding Mode=OneWay, Converter={StaticResource ObjectToTypeStringConverter}}" Classes="tree drag">
                             <i:Interaction.Behaviors>
                                 <id:DragBehavior Context="{Binding}"/>

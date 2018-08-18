@@ -3,12 +3,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Core2D.Containers;
 using Core2D.Editor.Input;
 using Core2D.Editor.Tools.Settings;
-using Spatial;
-using Core2D.Containers;
-using Core2D.Shape;
 using Core2D.Shapes;
+using Spatial;
 
 namespace Core2D.Editor.Tools
 {
@@ -21,13 +20,13 @@ namespace Core2D.Editor.Tools
         private readonly IServiceProvider _serviceProvider;
         private ToolSettingsSelection _settings;
         private State _currentState = State.None;
-        private RectangleShape _rectangle;
+        private IRectangleShape _rectangle;
         private double _startX;
         private double _startY;
         private double _historyX;
         private double _historyY;
-        private IEnumerable<PointShape> _pointsCache;
-        private IEnumerable<BaseShape> _shapesCache;
+        private IEnumerable<IPointShape> _pointsCache;
+        private IEnumerable<IBaseShape> _shapesCache;
 
         /// <inheritdoc/>
         public override string Title => "Selection";
@@ -51,6 +50,12 @@ namespace Core2D.Editor.Tools
             _settings = new ToolSettingsSelection();
         }
 
+        /// <inheritdoc/>
+        public override object Copy(IDictionary<object, object> shared)
+        {
+            throw new NotImplementedException();
+        }
+
         /// <summary>
         /// Validate if point can move.
         /// </summary>
@@ -58,7 +63,7 @@ namespace Core2D.Editor.Tools
         /// <param name="shape">The shape object.</param>
         /// <param name="point">The point to validate.</param>
         /// <returns>True if point is valid, otherwise false.</returns>
-        private static bool Validate(BaseShape shape, PointShape point)
+        private static bool Validate(IBaseShape shape, IPointShape point)
         {
             if (point.State.Flags.HasFlag(ShapeStateFlags.Locked))
             {
@@ -78,7 +83,7 @@ namespace Core2D.Editor.Tools
         /// </summary>
         /// <param name="shapes">The shapes to scan.</param>
         /// <returns>All points in the shape.</returns>
-        private static IEnumerable<PointShape> GetMovePoints(IEnumerable<BaseShape> shapes)
+        private static IEnumerable<IPointShape> GetMovePoints(IEnumerable<IBaseShape> shapes)
         {
             return shapes.SelectMany(s => s.GetPoints().Where(p => Validate(s, p))).Distinct();
         }

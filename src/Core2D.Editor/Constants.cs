@@ -1,5 +1,9 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using Core2D.Containers;
+using Core2D.Data;
+using Core2D.Shapes;
+using Core2D.Style;
 
 namespace Core2D.Editor
 {
@@ -9,37 +13,37 @@ namespace Core2D.Editor
     public static class Constants
     {
         /// <summary>
-        /// Default <see cref="Core2D.Containers.LayerContainer"/> name.
+        /// Default <see cref="ILayerContainer"/> name.
         /// </summary>
         public const string DefaultLayerName = "Layer";
 
         /// <summary>
-        /// Default <see cref="Core2D.Containers.PageContainer"/> template name.
+        /// Default <see cref="IPageContainer"/> template name.
         /// </summary>
         public const string DefaultTemplateName = "Template";
 
         /// <summary>
-        /// Default <see cref="Core2D.Containers.PageContainer"/> page name.
+        /// Default <see cref="IPageContainer"/> page name.
         /// </summary>
         public const string DefaultPageName = "Page";
 
         /// <summary>
-        /// Default <see cref="Core2D.Containers.DocumentContainer"/> name.
+        /// Default <see cref="IDocumentContainer"/> name.
         /// </summary>
         public const string DefaultDocumentName = "Document";
 
         /// <summary>
-        /// Default <see cref="Database"/> name.
+        /// Default <see cref="IDatabase"/> name.
         /// </summary>
         public const string DefaultDatabaseName = "Db";
 
         /// <summary>
-        /// Default <see cref="Column"/> name.
+        /// Default <see cref="IColumn"/> name.
         /// </summary>
         public const string DefaulColumnName = "Column";
 
         /// <summary>
-        /// Default <see cref="Property"/> name.
+        /// Default <see cref="IProperty"/> name.
         /// </summary>
         public const string DefaulPropertyName = "Property";
 
@@ -49,32 +53,32 @@ namespace Core2D.Editor
         public const string DefaulValue = "<empty>";
 
         /// <summary>
-        /// Default <see cref="Core2D.Containers.Library{GroupShape}"/> name.
+        /// Default <see cref="ILibrary{IGroupShape}"/> name.
         /// </summary>
         public const string DefaulGroupLibraryName = "Groups";
 
         /// <summary>
-        /// Default <see cref="Core2D.Shapes.GroupShape"/> name.
+        /// Default <see cref="IGroupShape"/> name.
         /// </summary>
         public const string DefaulGroupName = "Group";
 
         /// <summary>
-        /// Default <see cref="Core2D.Containers.Library{ShapeStyle}"/> name.
+        /// Default <see cref="ILibrary{ShapeStyle}"/> name.
         /// </summary>
         public const string DefaulStyleLibraryName = "Styles";
 
         /// <summary>
-        /// Default <see cref="Core2D.Style.ShapeStyle"/> name.
+        /// Default <see cref="IShapeStyle"/> name.
         /// </summary>
         public const string DefaulStyleName = "Style";
 
         /// <summary>
-        /// Default imported <see cref="Core2D.Containers.Library{ShapeStyle}"/> name.
+        /// Default imported <see cref="ILibrary{ShapeStyle}"/> name.
         /// </summary>
         public const string ImportedStyleLibraryName = "Imported";
 
         /// <summary>
-        /// Default imported <see cref="Database"/> name.
+        /// Default imported <see cref="IDatabase"/> name.
         /// </summary>
         public const string ImportedDatabaseName = "Imported";
 

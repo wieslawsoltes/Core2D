@@ -12,7 +12,7 @@ using static System.Math;
 namespace Core2D.Wpf.Views.Custom
 {
     /// <summary>
-    /// The <see cref="Database.Records"/> view control.
+    /// The <see cref="IDatabase.Records"/> view control.
     /// </summary>
     public class RecordsListView : ListView
     {
@@ -51,7 +51,7 @@ namespace Core2D.Wpf.Views.Custom
             DataContextChanged +=
                 (sender, e) =>
                 {
-                    if (e.OldValue is Database old)
+                    if (e.OldValue is IDatabase old)
                     {
                         StopObservingColumns(old);
                     }
@@ -68,7 +68,7 @@ namespace Core2D.Wpf.Views.Custom
         /// </summary>
         public void InitializeColumnsView()
         {
-            if (DataContext is Database database)
+            if (DataContext is IDatabase database)
             {
                 View = CreateColumnsView(database.Columns);
                 StopObservingColumns(database);
@@ -80,7 +80,7 @@ namespace Core2D.Wpf.Views.Custom
             }
         }
 
-        private GridView CreateColumnsView(ImmutableArray<Column> columns)
+        private GridView CreateColumnsView(ImmutableArray<IColumn> columns)
         {
             var gv = new GridView();
 
@@ -115,13 +115,13 @@ namespace Core2D.Wpf.Views.Custom
 
         private void DatabaseObserver(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == nameof(Database.Columns))
+            if (e.PropertyName == nameof(IDatabase.Columns))
             {
                 InitializeColumnsView();
             }
         }
 
-        private void StartObservingColumns(Database database)
+        private void StartObservingColumns(IDatabase database)
         {
             if (database == null || database.Columns == null)
                 return;
@@ -134,7 +134,7 @@ namespace Core2D.Wpf.Views.Custom
             database.PropertyChanged += DatabaseObserver;
         }
 
-        private void StopObservingColumns(Database database)
+        private void StopObservingColumns(IDatabase database)
         {
             if (database == null || database.Columns == null)
                 return;
@@ -164,10 +164,10 @@ namespace Core2D.Wpf.Views.Custom
                 var listViewItem = FindVisualParent<ListViewItem>((DependencyObject)e.OriginalSource);
                 if (listViewItem != null)
                 {
-                    var record = (Record)listView
+                    var record = (IRecord)listView
                         .ItemContainerGenerator
                         .ItemFromContainer(listViewItem);
-                    DataObject dragData = new DataObject(typeof(Record), record);
+                    DataObject dragData = new DataObject(typeof(IRecord), record);
                     DragDrop.DoDragDrop(
                         listViewItem,
                         dragData,

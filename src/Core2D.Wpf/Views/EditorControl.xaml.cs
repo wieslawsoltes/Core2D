@@ -7,7 +7,6 @@ using Core2D.Containers;
 using Core2D.Data;
 using Core2D.Editor;
 using Core2D.Editor.Input;
-using Core2D.Shape;
 using Core2D.Shapes;
 using Core2D.Style;
 using Core2D.Utilities.Wpf;
@@ -96,10 +95,10 @@ namespace Core2D.Wpf.Views
         private void ZoomBorder_DragEnter(object sender, DragEventArgs e)
         {
             if (!e.Data.GetDataPresent(DataFormats.FileDrop)
-                && !e.Data.GetDataPresent(typeof(BaseShape))
-                && !e.Data.GetDataPresent(typeof(GroupShape))
-                && !e.Data.GetDataPresent(typeof(Record))
-                && !e.Data.GetDataPresent(typeof(ShapeStyle)))
+                && !e.Data.GetDataPresent(typeof(IBaseShape))
+                && !e.Data.GetDataPresent(typeof(IGroupShape))
+                && !e.Data.GetDataPresent(typeof(IRecord))
+                && !e.Data.GetDataPresent(typeof(IShapeStyle)))
             {
                 e.Effects = DragDropEffects.None;
                 e.Handled = true;
@@ -126,11 +125,11 @@ namespace Core2D.Wpf.Views
             }
 
             // Shapes.
-            if (e.Data.GetDataPresent(typeof(BaseShape)))
+            if (e.Data.GetDataPresent(typeof(IBaseShape)))
             {
                 try
                 {
-                    if (e.Data.GetData(typeof(BaseShape)) is BaseShape shape)
+                    if (e.Data.GetData(typeof(IBaseShape)) is IBaseShape shape)
                     {
                         var p = e.GetPosition(drawableControl);
                         _projectEditor.OnDropShape(shape, p.X, p.Y);
@@ -144,11 +143,11 @@ namespace Core2D.Wpf.Views
             }
 
             // Groups.
-            if (e.Data.GetDataPresent(typeof(GroupShape)))
+            if (e.Data.GetDataPresent(typeof(IGroupShape)))
             {
                 try
                 {
-                    if (e.Data.GetData(typeof(GroupShape)) is GroupShape group)
+                    if (e.Data.GetData(typeof(IGroupShape)) is IGroupShape group)
                     {
                         var p = e.GetPosition(drawableControl);
                         _projectEditor.OnDropShapeAsClone(group, p.X, p.Y);
@@ -162,11 +161,11 @@ namespace Core2D.Wpf.Views
             }
 
             // Records.
-            if (e.Data.GetDataPresent(typeof(Record)))
+            if (e.Data.GetDataPresent(typeof(IRecord)))
             {
                 try
                 {
-                    if (e.Data.GetData(typeof(Record)) is Record record)
+                    if (e.Data.GetData(typeof(IRecord)) is IRecord record)
                     {
                         var p = e.GetPosition(drawableControl);
                         _projectEditor.OnDropRecord(record, p.X, p.Y);
@@ -180,11 +179,11 @@ namespace Core2D.Wpf.Views
             }
 
             // Styles.
-            if (e.Data.GetDataPresent(typeof(ShapeStyle)))
+            if (e.Data.GetDataPresent(typeof(IShapeStyle)))
             {
                 try
                 {
-                    if (e.Data.GetData(typeof(ShapeStyle)) is ShapeStyle style)
+                    if (e.Data.GetData(typeof(IShapeStyle)) is IShapeStyle style)
                     {
                         var p = e.GetPosition(drawableControl);
                         _projectEditor.OnDropStyle(style, p.X, p.Y);
@@ -198,11 +197,11 @@ namespace Core2D.Wpf.Views
             }
 
             // Templates.
-            if (e.Data.GetDataPresent(typeof(PageContainer)))
+            if (e.Data.GetDataPresent(typeof(IPageContainer)))
             {
                 try
                 {
-                    if (e.Data.GetData(typeof(PageContainer)) is PageContainer template)
+                    if (e.Data.GetData(typeof(IPageContainer)) is IPageContainer template)
                     {
                         _projectEditor.OnApplyTemplate(template);
                         e.Handled = true;

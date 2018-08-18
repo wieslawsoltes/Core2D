@@ -13,7 +13,17 @@ namespace Core2D
         /// <summary>
         /// Get or sets shape drawing style.
         /// </summary>
-        ShapeStyle Style { get; set; }
+        IShapeStyle Style { get; set; }
+
+        /// <summary>
+        /// Gets or sets flag indicating whether shape is stroked.
+        /// </summary>
+        bool IsStroked { get; set; }
+
+        /// <summary>
+        /// Gets or sets flag indicating whether shape is filled.
+        /// </summary>
+        bool IsFilled { get; set; }
 
         /// <summary>
         /// Get or sets shape matrix transform.

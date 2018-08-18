@@ -2,11 +2,11 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using Core2D.Containers;
 using Core2D.Data;
 using Core2D.Path;
 using Core2D.Path.Segments;
-using Core2D.Containers;
-using Core2D.Shape;
 using Core2D.Shapes;
 using Core2D.Style;
 
@@ -70,18 +70,18 @@ namespace Core2D.Editor
             }
         }
 
-        private void ObserveDatabase(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        private void ObserveDatabase(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == nameof(Database.Columns))
+            if (e.PropertyName == nameof(IDatabase.Columns))
             {
-                var database = sender as Database;
+                var database = sender as IDatabase;
                 Remove(database.Columns);
                 Add(database.Columns);
             }
 
-            if (e.PropertyName == nameof(Database.Records))
+            if (e.PropertyName == nameof(IDatabase.Records))
             {
-                var database = sender as Database;
+                var database = sender as IDatabase;
                 Remove(database.Records);
                 Add(database.Records);
             }
@@ -90,17 +90,17 @@ namespace Core2D.Editor
             MarkAsDirty();
         }
 
-        private void ObserveColumn(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        private void ObserveColumn(object sender, PropertyChangedEventArgs e)
         {
             _invalidateShapes();
             MarkAsDirty();
         }
 
-        private void ObserveRecord(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        private void ObserveRecord(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == nameof(Record.Values))
+            if (e.PropertyName == nameof(IRecord.Values))
             {
-                var record = sender as Record;
+                var record = sender as IRecord;
                 Remove(record.Values);
                 Add(record.Values);
             }
@@ -109,45 +109,45 @@ namespace Core2D.Editor
             MarkAsDirty();
         }
 
-        private void ObserveValue(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        private void ObserveValue(object sender, PropertyChangedEventArgs e)
         {
             _invalidateShapes();
             MarkAsDirty();
         }
 
-        private void ObserveProject(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        private void ObserveProject(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == nameof(ProjectContainer.Databases))
+            if (e.PropertyName == nameof(IProjectContainer.Databases))
             {
-                var project = sender as ProjectContainer;
+                var project = sender as IProjectContainer;
                 Remove(project.Databases);
                 Add(project.Databases);
             }
 
-            if (e.PropertyName == nameof(ProjectContainer.StyleLibraries))
+            if (e.PropertyName == nameof(IProjectContainer.StyleLibraries))
             {
-                var project = sender as ProjectContainer;
+                var project = sender as IProjectContainer;
                 Remove(project.StyleLibraries);
                 Add(project.StyleLibraries);
             }
 
-            if (e.PropertyName == nameof(ProjectContainer.GroupLibraries))
+            if (e.PropertyName == nameof(IProjectContainer.GroupLibraries))
             {
-                var project = sender as ProjectContainer;
+                var project = sender as IProjectContainer;
                 Remove(project.GroupLibraries);
                 Add(project.GroupLibraries);
             }
 
-            if (e.PropertyName == nameof(ProjectContainer.Templates))
+            if (e.PropertyName == nameof(IProjectContainer.Templates))
             {
-                var project = sender as ProjectContainer;
+                var project = sender as IProjectContainer;
                 Remove(project.Templates);
                 Add(project.Templates);
             }
 
-            if (e.PropertyName == nameof(ProjectContainer.Documents))
+            if (e.PropertyName == nameof(IProjectContainer.Documents))
             {
-                var project = sender as ProjectContainer;
+                var project = sender as IProjectContainer;
                 Remove(project.Documents);
                 Add(project.Documents);
             }
@@ -156,11 +156,11 @@ namespace Core2D.Editor
             MarkAsDirty();
         }
 
-        private void ObserveDocument(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        private void ObserveDocument(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == nameof(DocumentContainer.Pages))
+            if (e.PropertyName == nameof(IDocumentContainer.Pages))
             {
-                var document = sender as DocumentContainer;
+                var document = sender as IDocumentContainer;
                 Remove(document.Pages);
                 Add(document.Pages);
             }
@@ -169,18 +169,18 @@ namespace Core2D.Editor
             MarkAsDirty();
         }
 
-        private void ObservePage(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        private void ObservePage(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == nameof(Context.Properties))
+            if (e.PropertyName == nameof(IContext.Properties))
             {
-                var container = sender as PageContainer;
-                Remove((IEnumerable<Property>)container.Data.Properties);
-                Add((IEnumerable<Property>)container.Data.Properties);
+                var container = sender as IPageContainer;
+                Remove((IEnumerable<IProperty>)container.Data.Properties);
+                Add((IEnumerable<IProperty>)container.Data.Properties);
             }
 
-            if (e.PropertyName == nameof(PageContainer.Layers))
+            if (e.PropertyName == nameof(IPageContainer.Layers))
             {
-                var container = sender as PageContainer;
+                var container = sender as IPageContainer;
                 Remove(container.Layers);
                 Add(container.Layers);
             }
@@ -189,13 +189,13 @@ namespace Core2D.Editor
             MarkAsDirty();
         }
 
-        private void ObserveTemplateBackgroud(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        private void ObserveTemplateBackgroud(object sender, PropertyChangedEventArgs e)
         {
-            _editor.Project.CurrentContainer.Notify(nameof(PageContainer.Background));
+            _editor.Project.CurrentContainer.Notify(nameof(IPageContainer.Background));
             var page = _editor.Project.CurrentContainer;
             if (page != null)
             {
-                page.Template.Notify(nameof(PageContainer.Background));
+                page.Template.Notify(nameof(IPageContainer.Background));
             }
             _invalidateLayers();
             MarkAsDirty();
@@ -206,11 +206,11 @@ namespace Core2D.Editor
             _editor?.CanvasPlatform?.Invalidate?.Invoke();
         }
 
-        private void ObserveLayer(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        private void ObserveLayer(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == nameof(LayerContainer.Shapes))
+            if (e.PropertyName == nameof(ILayerContainer.Shapes))
             {
-                var layer = sender as LayerContainer;
+                var layer = sender as ILayerContainer;
                 Remove(layer.Shapes);
                 Add(layer.Shapes);
             }
@@ -219,17 +219,17 @@ namespace Core2D.Editor
             MarkAsDirty();
         }
 
-        private void ObserveShape(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        private void ObserveShape(object sender, PropertyChangedEventArgs e)
         {
             _invalidateShapes();
             MarkAsDirty();
         }
 
-        private void ObserveStyleLibrary(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        private void ObserveStyleLibrary(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == nameof(Library<ShapeStyle>.Items))
+            if (e.PropertyName == nameof(ILibrary<IShapeStyle>.Items))
             {
-                var sg = sender as Library<ShapeStyle>;
+                var sg = sender as ILibrary<IShapeStyle>;
                 Remove(sg.Items);
                 Add(sg.Items);
             }
@@ -237,40 +237,40 @@ namespace Core2D.Editor
             _invalidateStyles();
 
             // NOTE: Do not mark project as dirty when current style changes.
-            if (e.PropertyName != nameof(Library<ShapeStyle>.Selected))
+            if (e.PropertyName != nameof(ILibrary<IShapeStyle>.Selected))
             {
                 MarkAsDirty();
             }
         }
 
-        private void ObserveGroupLibrary(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        private void ObserveGroupLibrary(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == nameof(Library<GroupShape>.Items))
+            if (e.PropertyName == nameof(ILibrary<IGroupShape>.Items))
             {
-                var sg = sender as Library<GroupShape>;
+                var sg = sender as ILibrary<IGroupShape>;
                 Remove(sg.Items);
                 Add(sg.Items);
             }
             MarkAsDirty();
         }
 
-        private void ObserveStyle(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        private void ObserveStyle(object sender, PropertyChangedEventArgs e)
         {
             _invalidateStyles();
             MarkAsDirty();
         }
 
-        private void ObserveProperty(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        private void ObserveProperty(object sender, PropertyChangedEventArgs e)
         {
             _invalidateShapes();
             MarkAsDirty();
         }
 
-        private void ObserveData(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        private void ObserveData(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == nameof(Context.Properties))
+            if (e.PropertyName == nameof(IContext.Properties))
             {
-                var data = sender as Context;
+                var data = sender as IContext;
                 Remove(data.Properties);
                 Add(data.Properties);
             }
@@ -279,19 +279,19 @@ namespace Core2D.Editor
             MarkAsDirty();
         }
 
-        private void ObserveState(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        private void ObserveState(object sender, PropertyChangedEventArgs e)
         {
             _invalidateShapes();
             MarkAsDirty();
         }
 
-        private void ObserveTransform(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        private void ObserveTransform(object sender, PropertyChangedEventArgs e)
         {
             _invalidateShapes();
             MarkAsDirty();
         }
 
-        private void Add(Database database)
+        private void Add(IDatabase database)
         {
             if (database == null)
                 return;
@@ -309,7 +309,7 @@ namespace Core2D.Editor
             }
         }
 
-        private void Remove(Database database)
+        private void Remove(IDatabase database)
         {
             if (database == null)
                 return;
@@ -327,7 +327,7 @@ namespace Core2D.Editor
             }
         }
 
-        private void Add(Column column)
+        private void Add(IColumn column)
         {
             if (column == null)
                 return;
@@ -335,7 +335,7 @@ namespace Core2D.Editor
             column.PropertyChanged += ObserveColumn;
         }
 
-        private void Remove(Column column)
+        private void Remove(IColumn column)
         {
             if (column == null)
                 return;
@@ -343,7 +343,7 @@ namespace Core2D.Editor
             column.PropertyChanged -= ObserveColumn;
         }
 
-        private void Add(Record record)
+        private void Add(IRecord record)
         {
             if (record == null)
                 return;
@@ -356,7 +356,7 @@ namespace Core2D.Editor
             }
         }
 
-        private void Remove(Record record)
+        private void Remove(IRecord record)
         {
             if (record == null)
                 return;
@@ -369,7 +369,7 @@ namespace Core2D.Editor
             }
         }
 
-        private void Add(Value value)
+        private void Add(IValue value)
         {
             if (value == null)
                 return;
@@ -377,7 +377,7 @@ namespace Core2D.Editor
             value.PropertyChanged += ObserveValue;
         }
 
-        private void Remove(Value value)
+        private void Remove(IValue value)
         {
             if (value == null)
                 return;
@@ -385,7 +385,7 @@ namespace Core2D.Editor
             value.PropertyChanged -= ObserveValue;
         }
 
-        private void Add(Options options)
+        private void Add(IOptions options)
         {
             if (options == null)
                 return;
@@ -411,7 +411,7 @@ namespace Core2D.Editor
             }
         }
 
-        private void Remove(Options options)
+        private void Remove(IOptions options)
         {
             if (options == null)
                 return;
@@ -437,7 +437,7 @@ namespace Core2D.Editor
             }
         }
 
-        private void Add(ProjectContainer project)
+        private void Add(IProjectContainer project)
         {
             if (project == null)
                 return;
@@ -479,7 +479,7 @@ namespace Core2D.Editor
             }
         }
 
-        private void Remove(ProjectContainer project)
+        private void Remove(IProjectContainer project)
         {
             if (project == null)
                 return;
@@ -521,7 +521,7 @@ namespace Core2D.Editor
             }
         }
 
-        private void Add(DocumentContainer document)
+        private void Add(IDocumentContainer document)
         {
             if (document == null)
                 return;
@@ -537,7 +537,7 @@ namespace Core2D.Editor
             }
         }
 
-        private void Remove(DocumentContainer document)
+        private void Remove(IDocumentContainer document)
         {
             if (document == null)
                 return;
@@ -553,7 +553,7 @@ namespace Core2D.Editor
             }
         }
 
-        private void Add(PageContainer container)
+        private void Add(IPageContainer container)
         {
             if (container == null)
                 return;
@@ -572,7 +572,7 @@ namespace Core2D.Editor
 
             if (container.Data != null)
             {
-                Add((Context)container.Data);
+                Add(container.Data);
             }
 
             if (container.WorkingLayer != null)
@@ -586,7 +586,7 @@ namespace Core2D.Editor
             }
         }
 
-        private void Remove(PageContainer container)
+        private void Remove(IPageContainer container)
         {
             if (container == null)
                 return;
@@ -605,7 +605,7 @@ namespace Core2D.Editor
 
             if (container.Data != null)
             {
-                Remove((Context)container.Data);
+                Remove(container.Data);
             }
 
             if (container.WorkingLayer != null)
@@ -619,7 +619,7 @@ namespace Core2D.Editor
             }
         }
 
-        private void Add(LayerContainer layer)
+        private void Add(ILayerContainer layer)
         {
             if (layer == null)
                 return;
@@ -634,7 +634,7 @@ namespace Core2D.Editor
             layer.InvalidateLayer += ObserveInvalidateLayer;
         }
 
-        private void Remove(LayerContainer layer)
+        private void Remove(ILayerContainer layer)
         {
             if (layer == null)
                 return;
@@ -649,7 +649,7 @@ namespace Core2D.Editor
             layer.InvalidateLayer -= ObserveInvalidateLayer;
         }
 
-        private void Add(BaseShape shape)
+        private void Add(IBaseShape shape)
         {
             if (shape == null)
                 return;
@@ -658,7 +658,7 @@ namespace Core2D.Editor
 
             if (shape.Data != null)
             {
-                Add((Context)shape.Data);
+                Add(shape.Data);
             }
 
             if (shape.State != null)
@@ -671,18 +671,15 @@ namespace Core2D.Editor
                 shape.Transform.PropertyChanged += ObserveTransform;
             }
 
-            if (shape is PointShape)
+            if (shape is IPointShape point)
             {
-                var point = shape as PointShape;
                 if (point.Shape != null)
                 {
                     point.Shape.PropertyChanged += ObserveShape;
                 }
             }
-            else if (shape is LineShape)
+            else if (shape is ILineShape line)
             {
-                var line = shape as LineShape;
-
                 if (line.Start != null)
                 {
                     line.Start.PropertyChanged += ObserveShape;
@@ -693,10 +690,8 @@ namespace Core2D.Editor
                     line.End.PropertyChanged += ObserveShape;
                 }
             }
-            else if (shape is RectangleShape)
+            else if (shape is IRectangleShape rectangle)
             {
-                var rectangle = shape as RectangleShape;
-
                 if (rectangle.TopLeft != null)
                 {
                     rectangle.TopLeft.PropertyChanged += ObserveShape;
@@ -707,10 +702,8 @@ namespace Core2D.Editor
                     rectangle.BottomRight.PropertyChanged += ObserveShape;
                 }
             }
-            else if (shape is EllipseShape)
+            else if (shape is IEllipseShape ellipse)
             {
-                var ellipse = shape as EllipseShape;
-
                 if (ellipse.TopLeft != null)
                 {
                     ellipse.TopLeft.PropertyChanged += ObserveShape;
@@ -721,10 +714,8 @@ namespace Core2D.Editor
                     ellipse.BottomRight.PropertyChanged += ObserveShape;
                 }
             }
-            else if (shape is ArcShape)
+            else if (shape is IArcShape arc)
             {
-                var arc = shape as ArcShape;
-
                 if (arc.Point1 != null)
                 {
                     arc.Point1.PropertyChanged += ObserveShape;
@@ -745,10 +736,8 @@ namespace Core2D.Editor
                     arc.Point4.PropertyChanged += ObserveShape;
                 }
             }
-            else if (shape is CubicBezierShape)
+            else if (shape is ICubicBezierShape cubicBezier)
             {
-                var cubicBezier = shape as CubicBezierShape;
-
                 if (cubicBezier.Point1 != null)
                 {
                     cubicBezier.Point1.PropertyChanged += ObserveShape;
@@ -769,10 +758,8 @@ namespace Core2D.Editor
                     cubicBezier.Point4.PropertyChanged += ObserveShape;
                 }
             }
-            else if (shape is QuadraticBezierShape)
+            else if (shape is IQuadraticBezierShape quadraticBezier)
             {
-                var quadraticBezier = shape as QuadraticBezierShape;
-
                 if (quadraticBezier.Point1 != null)
                 {
                     quadraticBezier.Point1.PropertyChanged += ObserveShape;
@@ -788,10 +775,8 @@ namespace Core2D.Editor
                     quadraticBezier.Point3.PropertyChanged += ObserveShape;
                 }
             }
-            else if (shape is TextShape)
+            else if (shape is ITextShape text)
             {
-                var text = shape as TextShape;
-
                 if (text.TopLeft != null)
                 {
                     text.TopLeft.PropertyChanged += ObserveShape;
@@ -802,10 +787,8 @@ namespace Core2D.Editor
                     text.BottomRight.PropertyChanged += ObserveShape;
                 }
             }
-            else if (shape is ImageShape)
+            else if (shape is IImageShape image)
             {
-                var image = shape as ImageShape;
-
                 if (image.TopLeft != null)
                 {
                     image.TopLeft.PropertyChanged += ObserveShape;
@@ -816,34 +799,28 @@ namespace Core2D.Editor
                     image.BottomRight.PropertyChanged += ObserveShape;
                 }
             }
-            else if (shape is PathShape)
+            else if (shape is IPathShape path)
             {
-                var path = shape as PathShape;
-
                 if (path.Geometry != null)
                 {
                     Add(path.Geometry);
                 }
             }
-            else if (shape is GroupShape)
+            else if (shape is IGroupShape group)
             {
-
-                if (shape is GroupShape group)
+                if (group.Shapes != null)
                 {
-                    if (group.Shapes != null)
-                    {
-                        Add(group.Shapes);
-                    }
+                    Add(group.Shapes);
+                }
 
-                    if (group.Connectors != null)
-                    {
-                        Add(group.Connectors);
-                    }
+                if (group.Connectors != null)
+                {
+                    Add(group.Connectors);
                 }
             }
         }
 
-        private void Remove(BaseShape shape)
+        private void Remove(IBaseShape shape)
         {
             if (shape == null)
                 return;
@@ -852,7 +829,7 @@ namespace Core2D.Editor
 
             if (shape.Data != null)
             {
-                Remove((Context)shape.Data);
+                Remove(shape.Data);
             }
 
             if (shape.State != null)
@@ -865,18 +842,15 @@ namespace Core2D.Editor
                 shape.Transform.PropertyChanged -= ObserveTransform;
             }
 
-            if (shape is PointShape)
+            if (shape is IPointShape point)
             {
-                var point = shape as PointShape;
                 if (point.Shape != null)
                 {
                     point.Shape.PropertyChanged -= ObserveShape;
                 }
             }
-            else if (shape is LineShape)
+            else if (shape is ILineShape line)
             {
-                var line = shape as LineShape;
-
                 if (line.Start != null)
                 {
                     line.Start.PropertyChanged -= ObserveShape;
@@ -887,10 +861,8 @@ namespace Core2D.Editor
                     line.End.PropertyChanged -= ObserveShape;
                 }
             }
-            else if (shape is RectangleShape)
+            else if (shape is IRectangleShape rectangle)
             {
-                var rectangle = shape as RectangleShape;
-
                 if (rectangle.TopLeft != null)
                 {
                     rectangle.TopLeft.PropertyChanged -= ObserveShape;
@@ -901,10 +873,8 @@ namespace Core2D.Editor
                     rectangle.BottomRight.PropertyChanged -= ObserveShape;
                 }
             }
-            else if (shape is EllipseShape)
+            else if (shape is IEllipseShape ellipse)
             {
-                var ellipse = shape as EllipseShape;
-
                 if (ellipse.TopLeft != null)
                 {
                     ellipse.TopLeft.PropertyChanged -= ObserveShape;
@@ -915,10 +885,8 @@ namespace Core2D.Editor
                     ellipse.BottomRight.PropertyChanged -= ObserveShape;
                 }
             }
-            else if (shape is ArcShape)
+            else if (shape is IArcShape arc)
             {
-                var arc = shape as ArcShape;
-
                 if (arc.Point1 != null)
                 {
                     arc.Point1.PropertyChanged -= ObserveShape;
@@ -939,10 +907,8 @@ namespace Core2D.Editor
                     arc.Point4.PropertyChanged -= ObserveShape;
                 }
             }
-            else if (shape is CubicBezierShape)
+            else if (shape is ICubicBezierShape cubicBezier)
             {
-                var cubicBezier = shape as CubicBezierShape;
-
                 if (cubicBezier.Point1 != null)
                 {
                     cubicBezier.Point1.PropertyChanged -= ObserveShape;
@@ -963,10 +929,8 @@ namespace Core2D.Editor
                     cubicBezier.Point4.PropertyChanged -= ObserveShape;
                 }
             }
-            else if (shape is QuadraticBezierShape)
+            else if (shape is IQuadraticBezierShape quadraticBezier)
             {
-                var quadraticBezier = shape as QuadraticBezierShape;
-
                 if (quadraticBezier.Point1 != null)
                 {
                     quadraticBezier.Point1.PropertyChanged -= ObserveShape;
@@ -982,10 +946,8 @@ namespace Core2D.Editor
                     quadraticBezier.Point3.PropertyChanged -= ObserveShape;
                 }
             }
-            else if (shape is TextShape)
+            else if (shape is ITextShape text)
             {
-                var text = shape as TextShape;
-
                 if (text.TopLeft != null)
                 {
                     text.TopLeft.PropertyChanged -= ObserveShape;
@@ -996,10 +958,8 @@ namespace Core2D.Editor
                     text.BottomRight.PropertyChanged -= ObserveShape;
                 }
             }
-            else if (shape is ImageShape)
+            else if (shape is IImageShape image)
             {
-                var image = shape as ImageShape;
-
                 if (image.TopLeft != null)
                 {
                     image.TopLeft.PropertyChanged -= ObserveShape;
@@ -1010,34 +970,28 @@ namespace Core2D.Editor
                     image.BottomRight.PropertyChanged -= ObserveShape;
                 }
             }
-            else if (shape is PathShape)
+            else if (shape is IPathShape path)
             {
-                var path = shape as PathShape;
-
                 if (path.Geometry != null)
                 {
                     Remove(path.Geometry);
                 }
             }
-            else if (shape is GroupShape)
+            else if (shape is IGroupShape group)
             {
-
-                if (shape is GroupShape group)
+                if (group.Shapes != null)
                 {
-                    if (group.Shapes != null)
-                    {
-                        Remove(group.Shapes);
-                    }
+                    Remove(group.Shapes);
+                }
 
-                    if (group.Connectors != null)
-                    {
-                        Remove(group.Connectors);
-                    }
+                if (group.Connectors != null)
+                {
+                    Remove(group.Connectors);
                 }
             }
         }
 
-        private void Add(PathGeometry geometry)
+        private void Add(IPathGeometry geometry)
         {
             if (geometry == null)
                 return;
@@ -1050,7 +1004,7 @@ namespace Core2D.Editor
             }
         }
 
-        private void Remove(PathGeometry geometry)
+        private void Remove(IPathGeometry geometry)
         {
             if (geometry == null)
                 return;
@@ -1063,7 +1017,7 @@ namespace Core2D.Editor
             }
         }
 
-        private void Add(PathFigure figure)
+        private void Add(IPathFigure figure)
         {
             if (figure == null)
                 return;
@@ -1081,7 +1035,7 @@ namespace Core2D.Editor
             }
         }
 
-        private void Remove(PathFigure figure)
+        private void Remove(IPathFigure figure)
         {
             if (figure == null)
                 return;
@@ -1099,7 +1053,7 @@ namespace Core2D.Editor
             }
         }
 
-        private void Add(PathSegment segment)
+        private void Add(IPathSegment segment)
         {
             if (segment == null)
                 return;
@@ -1154,7 +1108,7 @@ namespace Core2D.Editor
             }
         }
 
-        private void Remove(PathSegment segment)
+        private void Remove(IPathSegment segment)
         {
             if (segment == null)
                 return;
@@ -1209,7 +1163,7 @@ namespace Core2D.Editor
             }
         }
 
-        private void Add(Context data)
+        private void Add(IContext data)
         {
             if (data == null)
                 return;
@@ -1222,7 +1176,7 @@ namespace Core2D.Editor
             data.PropertyChanged += ObserveData;
         }
 
-        private void Remove(Context data)
+        private void Remove(IContext data)
         {
             if (data == null)
                 return;
@@ -1235,7 +1189,7 @@ namespace Core2D.Editor
             data.PropertyChanged -= ObserveData;
         }
 
-        private void Add(Library<ShapeStyle> sg)
+        private void Add(ILibrary<IShapeStyle> sg)
         {
             if (sg == null)
                 return;
@@ -1248,7 +1202,7 @@ namespace Core2D.Editor
             sg.PropertyChanged += ObserveStyleLibrary;
         }
 
-        private void Remove(Library<ShapeStyle> sg)
+        private void Remove(ILibrary<IShapeStyle> sg)
         {
             if (sg == null)
                 return;
@@ -1261,7 +1215,7 @@ namespace Core2D.Editor
             sg.PropertyChanged -= ObserveStyleLibrary;
         }
 
-        private void Add(Library<GroupShape> gl)
+        private void Add(ILibrary<IGroupShape> gl)
         {
             if (gl == null)
                 return;
@@ -1274,7 +1228,7 @@ namespace Core2D.Editor
             gl.PropertyChanged += ObserveGroupLibrary;
         }
 
-        private void Remove(Library<GroupShape> gl)
+        private void Remove(ILibrary<IGroupShape> gl)
         {
             if (gl == null)
                 return;
@@ -1287,7 +1241,7 @@ namespace Core2D.Editor
             gl.PropertyChanged -= ObserveGroupLibrary;
         }
 
-        private void Add(ShapeStyle style)
+        private void Add(IShapeStyle style)
         {
             if (style == null)
                 return;
@@ -1355,7 +1309,7 @@ namespace Core2D.Editor
             }
         }
 
-        private void Remove(ShapeStyle style)
+        private void Remove(IShapeStyle style)
         {
             if (style == null)
                 return;
@@ -1423,7 +1377,7 @@ namespace Core2D.Editor
             }
         }
 
-        private void Add(Property property)
+        private void Add(IProperty property)
         {
             if (property == null)
                 return;
@@ -1431,7 +1385,7 @@ namespace Core2D.Editor
             property.PropertyChanged += ObserveProperty;
         }
 
-        private void Remove(Property property)
+        private void Remove(IProperty property)
         {
             if (property == null)
                 return;
@@ -1439,7 +1393,7 @@ namespace Core2D.Editor
             property.PropertyChanged -= ObserveProperty;
         }
 
-        private void Add(IEnumerable<Database> databases)
+        private void Add(IEnumerable<IDatabase> databases)
         {
             if (databases == null)
                 return;
@@ -1450,7 +1404,7 @@ namespace Core2D.Editor
             }
         }
 
-        private void Remove(IEnumerable<Database> databases)
+        private void Remove(IEnumerable<IDatabase> databases)
         {
             if (databases == null)
                 return;
@@ -1461,7 +1415,7 @@ namespace Core2D.Editor
             }
         }
 
-        private void Add(IEnumerable<Column> columns)
+        private void Add(IEnumerable<IColumn> columns)
         {
             if (columns == null)
                 return;
@@ -1472,7 +1426,7 @@ namespace Core2D.Editor
             }
         }
 
-        private void Remove(IEnumerable<Column> columns)
+        private void Remove(IEnumerable<IColumn> columns)
         {
             if (columns == null)
                 return;
@@ -1483,7 +1437,7 @@ namespace Core2D.Editor
             }
         }
 
-        private void Add(IEnumerable<Record> records)
+        private void Add(IEnumerable<IRecord> records)
         {
             if (records == null)
                 return;
@@ -1494,7 +1448,7 @@ namespace Core2D.Editor
             }
         }
 
-        private void Remove(IEnumerable<Record> records)
+        private void Remove(IEnumerable<IRecord> records)
         {
             if (records == null)
                 return;
@@ -1505,7 +1459,7 @@ namespace Core2D.Editor
             }
         }
 
-        private void Add(IEnumerable<Value> values)
+        private void Add(IEnumerable<IValue> values)
         {
             if (values == null)
                 return;
@@ -1516,7 +1470,7 @@ namespace Core2D.Editor
             }
         }
 
-        private void Remove(IEnumerable<Value> values)
+        private void Remove(IEnumerable<IValue> values)
         {
             if (values == null)
                 return;
@@ -1527,7 +1481,7 @@ namespace Core2D.Editor
             }
         }
 
-        private void Add(IEnumerable<DocumentContainer> documents)
+        private void Add(IEnumerable<IDocumentContainer> documents)
         {
             if (documents == null)
                 return;
@@ -1538,7 +1492,7 @@ namespace Core2D.Editor
             }
         }
 
-        private void Remove(IEnumerable<DocumentContainer> documents)
+        private void Remove(IEnumerable<IDocumentContainer> documents)
         {
             if (documents == null)
                 return;
@@ -1549,7 +1503,7 @@ namespace Core2D.Editor
             }
         }
 
-        private void Add(IEnumerable<PageContainer> containers)
+        private void Add(IEnumerable<IPageContainer> containers)
         {
             if (containers == null)
                 return;
@@ -1560,7 +1514,7 @@ namespace Core2D.Editor
             }
         }
 
-        private void Remove(IEnumerable<PageContainer> containers)
+        private void Remove(IEnumerable<IPageContainer> containers)
         {
             if (containers == null)
                 return;
@@ -1571,7 +1525,7 @@ namespace Core2D.Editor
             }
         }
 
-        private void Add(IEnumerable<LayerContainer> layers)
+        private void Add(IEnumerable<ILayerContainer> layers)
         {
             if (layers == null)
                 return;
@@ -1582,7 +1536,7 @@ namespace Core2D.Editor
             }
         }
 
-        private void Remove(IEnumerable<LayerContainer> layers)
+        private void Remove(IEnumerable<ILayerContainer> layers)
         {
             if (layers == null)
                 return;
@@ -1593,7 +1547,7 @@ namespace Core2D.Editor
             }
         }
 
-        private void Add(IEnumerable<BaseShape> shapes)
+        private void Add(IEnumerable<IBaseShape> shapes)
         {
             if (shapes == null)
                 return;
@@ -1604,7 +1558,7 @@ namespace Core2D.Editor
             }
         }
 
-        private void Remove(IEnumerable<BaseShape> shapes)
+        private void Remove(IEnumerable<IBaseShape> shapes)
         {
             if (shapes == null)
                 return;
@@ -1615,7 +1569,7 @@ namespace Core2D.Editor
             }
         }
 
-        private void Add(IEnumerable<PathFigure> figures)
+        private void Add(IEnumerable<IPathFigure> figures)
         {
             if (figures == null)
                 return;
@@ -1626,7 +1580,7 @@ namespace Core2D.Editor
             }
         }
 
-        private void Remove(IEnumerable<PathFigure> figures)
+        private void Remove(IEnumerable<IPathFigure> figures)
         {
             if (figures == null)
                 return;
@@ -1637,7 +1591,7 @@ namespace Core2D.Editor
             }
         }
 
-        private void Add(IEnumerable<PathSegment> segments)
+        private void Add(IEnumerable<IPathSegment> segments)
         {
             if (segments == null)
                 return;
@@ -1648,7 +1602,7 @@ namespace Core2D.Editor
             }
         }
 
-        private void Remove(IEnumerable<PathSegment> segments)
+        private void Remove(IEnumerable<IPathSegment> segments)
         {
             if (segments == null)
                 return;
@@ -1659,7 +1613,7 @@ namespace Core2D.Editor
             }
         }
 
-        private void Add(IEnumerable<ShapeStyle> styles)
+        private void Add(IEnumerable<IShapeStyle> styles)
         {
             if (styles == null)
                 return;
@@ -1670,7 +1624,7 @@ namespace Core2D.Editor
             }
         }
 
-        private void Remove(IEnumerable<ShapeStyle> styles)
+        private void Remove(IEnumerable<IShapeStyle> styles)
         {
             if (styles == null)
                 return;
@@ -1681,7 +1635,7 @@ namespace Core2D.Editor
             }
         }
 
-        private void Add(IEnumerable<Library<ShapeStyle>> sgs)
+        private void Add(IEnumerable<ILibrary<IShapeStyle>> sgs)
         {
             if (sgs == null)
                 return;
@@ -1692,7 +1646,7 @@ namespace Core2D.Editor
             }
         }
 
-        private void Remove(IEnumerable<Library<ShapeStyle>> sgs)
+        private void Remove(IEnumerable<ILibrary<IShapeStyle>> sgs)
         {
             if (sgs == null)
                 return;
@@ -1703,7 +1657,7 @@ namespace Core2D.Editor
             }
         }
 
-        private void Add(IEnumerable<Library<GroupShape>> gl)
+        private void Add(IEnumerable<ILibrary<IGroupShape>> gl)
         {
             if (gl == null)
                 return;
@@ -1714,7 +1668,7 @@ namespace Core2D.Editor
             }
         }
 
-        private void Remove(IEnumerable<Library<GroupShape>> gl)
+        private void Remove(IEnumerable<ILibrary<IGroupShape>> gl)
         {
             if (gl == null)
                 return;
@@ -1725,7 +1679,7 @@ namespace Core2D.Editor
             }
         }
 
-        private void Add(IEnumerable<Property> properties)
+        private void Add(IEnumerable<IProperty> properties)
         {
             if (properties == null)
                 return;
@@ -1736,7 +1690,7 @@ namespace Core2D.Editor
             }
         }
 
-        private void Remove(IEnumerable<Property> properties)
+        private void Remove(IEnumerable<IProperty> properties)
         {
             if (properties == null)
                 return;

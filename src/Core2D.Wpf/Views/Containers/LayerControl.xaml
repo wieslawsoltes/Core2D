@@ -8,7 +8,7 @@
              xmlns:local="clr-namespace:Core2D.Wpf" 
              xmlns:converters="clr-namespace:Core2D.Wpf.Converters" 
              xmlns:designer="clr-namespace:Core2D.Wpf.Designer"
-             xmlns:Shape="clr-namespace:Core2D.Shape;assembly=Core2D" 
+             xmlns:Shapes="clr-namespace:Core2D.Shapes;assembly=Core2D.Shapes" 
              xmlns:custom="clr-namespace:Core2D.Wpf.Views.Custom"
              mc:Ignorable="d" 
              d:DataContext="{x:Static designer:DesignerHelper.Layer}"
@@ -38,7 +38,7 @@
                 <TabItem Header="Shapes">
                     <ListBox Name="shapes" ItemsSource="{Binding Path=Shapes}">
                         <ListBox.Resources>
-                            <DataTemplate DataType="{x:Type Shape:BaseShape}">
+                            <DataTemplate DataType="{x:Type Shapes:BaseShape}">
                                 <TextBlock Text="{Binding}"/>
                             </DataTemplate>
                         </ListBox.Resources>

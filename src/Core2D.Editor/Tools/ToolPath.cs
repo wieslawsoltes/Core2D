@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
+using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using Core2D.Editor.Input;
@@ -8,8 +9,8 @@ using Core2D.Editor.Tools.Path;
 using Core2D.Editor.Tools.Settings;
 using Core2D.Path;
 using Core2D.Path.Segments;
-using Core2D.Shape;
 using Core2D.Shapes;
+using Core2D.Style;
 
 namespace Core2D.Editor.Tools
 {
@@ -34,12 +35,12 @@ namespace Core2D.Editor.Tools
         /// <summary>
         /// Gets or sets current path.
         /// </summary>
-        internal PathShape Path { get; set; }
+        internal IPathShape Path { get; set; }
 
         /// <summary>
         /// Gets or sets current geometry.
         /// </summary>
-        internal PathGeometry Geometry { get; set; }
+        internal IPathGeometry Geometry { get; set; }
 
         /// <summary>
         /// Gets or sets current geometry context.
@@ -77,6 +78,12 @@ namespace Core2D.Editor.Tools
             _pathToolQuadraticBezier = serviceProvider.GetService<PathToolQuadraticBezier>();
             _pathToolMove = serviceProvider.GetService<PathToolMove>();
             IsInitialized = false;
+        }
+
+        /// <inheritdoc/>
+        public override object Copy(IDictionary<object, object> shared)
+        {
+            throw new NotImplementedException();
         }
 
         /// <summary>
@@ -130,7 +137,7 @@ namespace Core2D.Editor.Tools
         /// Gets last point in the current path.
         /// </summary>
         /// <returns>The last path point.</returns>
-        public PointShape GetLastPathPoint()
+        public IPointShape GetLastPathPoint()
         {
             var figure = Geometry.Figures.LastOrDefault();
             if (figure != null)
@@ -157,12 +164,12 @@ namespace Core2D.Editor.Tools
         /// Initializes working path.
         /// </summary>
         /// <param name="start">The path start point.</param>
-        public void InitializeWorkingPath(PointShape start)
+        public void InitializeWorkingPath(IPointShape start)
         {
             var editor = _serviceProvider.GetService<ProjectEditor>();
 
             Geometry = PathGeometry.Create(
-                ImmutableArray.Create<PathFigure>(),
+                ImmutableArray.Create<IPathFigure>(),
                 editor.Project.Options.DefaultFillRule);
 
             GeometryContext = new PathGeometryContext(Geometry);
@@ -219,14 +226,14 @@ namespace Core2D.Editor.Tools
         }
 
         /// <inheritdoc/>
-        public override void Move(BaseShape shape)
+        public override void Move(IBaseShape shape)
         {
             base.Move(shape);
             _serviceProvider.GetService<ProjectEditor>().CurrentPathTool.Move(shape);
         }
 
         /// <inheritdoc/>
-        public override void Finalize(BaseShape shape)
+        public override void Finalize(IBaseShape shape)
         {
             base.Finalize(shape);
             _serviceProvider.GetService<ProjectEditor>().CurrentPathTool.Finalize(shape);

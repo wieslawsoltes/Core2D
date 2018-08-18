@@ -9,7 +9,7 @@
              xmlns:handlers="clr-namespace:Core2D.Avalonia.Dock.Handlers;assembly=Core2D.Avalonia"
              xmlns:converters="clr-namespace:Core2D.Avalonia.Converters;assembly=Core2D.Avalonia"
              xmlns:Editor="clr-namespace:Core2D.Editor;assembly=Core2D.Editor"
-             xmlns:Style="clr-namespace:Core2D.Style;assembly=Core2D"
+             xmlns:StyleCore="clr-namespace:Core2D.Style;assembly=Core2D"
              xmlns:Designer="clr-namespace:Core2D.Editor.Designer;assembly=Core2D.Editor"
              Design.DataContext="{x:Static Designer:DesignerContext.CurrentStyleLibrary}"
              Design.Width="250" Design.Height="400">
@@ -47,7 +47,7 @@
                 <KeyBinding Command="{Binding $parent[Window].DataContext.Platform.OnExportObject}" CommandParameter="{Binding #styles.SelectedItem}" Gesture="Ctrl+E"/>
             </ListBox.KeyBindings>
             <ListBox.DataTemplates>
-                <DataTemplate DataType="Style:ShapeStyle">
+                <DataTemplate DataType="StyleCore:IShapeStyle">
                     <TextBlock x:Name="style" Text="{Binding Name}" Classes="list drag">
                         <i:Interaction.Behaviors>
                             <ia:EventTriggerBehavior EventName="DoubleTapped" SourceObject="{Binding #style}">

@@ -1,8 +1,8 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
-using Core2D.Interfaces;
 using Core2D.Containers;
+using Core2D.Interfaces;
 using PdfSharp;
 using PdfSharp.Drawing;
 using PdfSharp.Pdf;
@@ -15,7 +15,7 @@ namespace Core2D.Renderer.PdfSharp
     public partial class PdfSharpRenderer : ShapeRenderer, IProjectExporter
     {
         /// <inheritdoc/>
-        void IProjectExporter.Save(string path, PageContainer container)
+        void IProjectExporter.Save(string path, IPageContainer container)
         {
             using (var pdf = new PdfDocument())
             {
@@ -25,7 +25,7 @@ namespace Core2D.Renderer.PdfSharp
         }
 
         /// <inheritdoc/>
-        void IProjectExporter.Save(string path, DocumentContainer document)
+        void IProjectExporter.Save(string path, IDocumentContainer document)
         {
             using (var pdf = new PdfDocument())
             {
@@ -59,7 +59,7 @@ namespace Core2D.Renderer.PdfSharp
         }
 
         /// <inheritdoc/>
-        void IProjectExporter.Save(string path, ProjectContainer project)
+        void IProjectExporter.Save(string path, IProjectContainer project)
         {
             using (var pdf = new PdfDocument())
             {
@@ -107,7 +107,7 @@ namespace Core2D.Renderer.PdfSharp
             }
         }
 
-        private PdfPage Add(PdfDocument pdf, PageContainer container)
+        private PdfPage Add(PdfDocument pdf, IPageContainer container)
         {
             // Create A3 page size with Landscape orientation.
             var pdfPage = pdf.AddPage();
@@ -125,10 +125,7 @@ namespace Core2D.Renderer.PdfSharp
                 _scaleToPage = (value) => value * scale;
 
                 // Draw container template contents to pdf graphics.
-                if (container.Template.Background.A > 0)
-                {
-                    Fill(gfx, 0, 0, pdfPage.Width.Value / scale, pdfPage.Height.Value / scale, container.Template.Background);
-                }
+                Fill(gfx, 0, 0, pdfPage.Width.Value / scale, pdfPage.Height.Value / scale, container.Template.Background);
 
                 // Draw template contents to pdf graphics.
                 base.Draw(gfx, container.Template, 0.0, 0.0, (object)container.Data.Properties, (object)container.Data.Record);

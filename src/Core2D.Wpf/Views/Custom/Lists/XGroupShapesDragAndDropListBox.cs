@@ -1,7 +1,6 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using Core2D.Editor;
-using Core2D.Shape;
 using Core2D.Shapes;
 using System.Collections.Immutable;
 
@@ -10,7 +9,7 @@ namespace Core2D.Wpf.Views.Custom.Lists
     /// <summary>
     /// The <see cref="ListBox"/> control for <see cref="GroupShape.Shapes"/> items with drag and drop support.
     /// </summary>
-    public class GroupShapeShapesDragAndDropListBox : DragAndDropListBox<BaseShape>
+    public class GroupShapeShapesDragAndDropListBox : DragAndDropListBox<IBaseShape>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="GroupShapeShapesDragAndDropListBox"/> class.
@@ -25,10 +24,10 @@ namespace Core2D.Wpf.Views.Custom.Lists
         /// Updates DataContext binding to ImmutableArray collection property.
         /// </summary>
         /// <param name="array">The updated immutable array.</param>
-        protected override void UpdateDataContext(ImmutableArray<BaseShape> array)
+        protected override void UpdateDataContext(ImmutableArray<IBaseShape> array)
         {
             var editor = (ProjectEditor)Tag;
-            var group = DataContext as GroupShape;
+            var group = DataContext as IGroupShape;
             if (group == null)
                 return;
 

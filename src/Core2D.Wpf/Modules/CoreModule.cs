@@ -3,7 +3,7 @@
 using Autofac;
 using Core2D.Editor;
 using Core2D.Editor.Bounds;
-using Core2D.Editor.Factories;
+using Core2D.Interfaces;
 
 namespace Core2D.Wpf.Modules
 {
@@ -16,7 +16,7 @@ namespace Core2D.Wpf.Modules
         protected override void Load(ContainerBuilder builder)
         {
             builder.RegisterType<ProjectEditor>().As<ProjectEditor>().InstancePerLifetimeScope();
-            builder.RegisterType<ProjectFactory>().As<IProjectFactory>().InstancePerLifetimeScope();
+            builder.RegisterType<ContainerFactory>().As<IContainerFactory>().InstancePerLifetimeScope();
             builder.RegisterType<ShapeFactory>().As<IShapeFactory>().InstancePerLifetimeScope();
             builder.RegisterAssemblyTypes(typeof(ToolBase).Assembly).As<ToolBase>().AsSelf().InstancePerLifetimeScope();
             builder.RegisterAssemblyTypes(typeof(PathToolBase).Assembly).As<PathToolBase>().AsSelf().InstancePerLifetimeScope();

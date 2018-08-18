@@ -11,6 +11,8 @@
   <Import Project="..\..\build\netDXF.props" />
 
   <ItemGroup>
+    <ProjectReference Include="..\Core2D.Shapes.Extensions\Core2D.Shapes.Extensions.csproj" />
+    <ProjectReference Include="..\Core2D.Shapes\Core2D.Shapes.csproj" />
     <ProjectReference Include="..\Core2D\Core2D.csproj" />
   </ItemGroup>
 

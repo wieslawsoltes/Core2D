@@ -1,7 +1,7 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
-using Core2D.Data;
 using Core2D.Containers;
+using Core2D.Data;
 
 namespace Core2D.Editor
 {
@@ -89,19 +89,19 @@ namespace Core2D.Editor
         /// Import database.
         /// </summary>
         /// <param name="project">The target project.</param>
-        void OnImportData(ProjectContainer project);
+        void OnImportData(IProjectContainer project);
 
         /// <summary>
         /// Export database.
         /// </summary>
         /// <param name="db">The database to export.</param>
-        void OnExportData(Database db);
+        void OnExportData(IDatabase db);
 
         /// <summary>
         /// Update database.
         /// </summary>
         /// <param name="db">The database to update.</param>
-        void OnUpdateData(Database db);
+        void OnUpdateData(IDatabase db);
 
         /// <summary>
         /// Show document viewer.

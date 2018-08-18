@@ -10,24 +10,24 @@ namespace Core2D.Interfaces
     public interface IProjectExporter
     {
         /// <summary>
-        /// Save <see cref="PageContainer"/> to a file.
+        /// Save <see cref="IPageContainer"/> to a file.
         /// </summary>
         /// <param name="path">The file path.</param>
         /// <param name="container">The container instance.</param>
-        void Save(string path, PageContainer container);
+        void Save(string path, IPageContainer container);
 
         /// <summary>
-        /// Save <see cref="DocumentContainer"/> to a file.
+        /// Save <see cref="IDocumentContainer"/> to a file.
         /// </summary>
         /// <param name="path">The file path.</param>
         /// <param name="document">The document instance.</param>
-        void Save(string path, DocumentContainer document);
+        void Save(string path, IDocumentContainer document);
 
         /// <summary>
-        /// Save <see cref="ProjectContainer"/> to a file.
+        /// Save <see cref="IProjectContainer"/> to a file.
         /// </summary>
         /// <param name="path">The file path.</param>
         /// <param name="project">The project instance.</param>
-        void Save(string path, ProjectContainer project);
+        void Save(string path, IProjectContainer project);
     }
 }

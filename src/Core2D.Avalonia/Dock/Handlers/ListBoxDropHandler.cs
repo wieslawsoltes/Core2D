@@ -1,14 +1,7 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
-using Avalonia.Controls;
 using Avalonia.Input;
-using Avalonia.Interactivity;
-using Core2D.Containers;
-using Core2D.Editor;
-using Core2D.Shapes;
-using Core2D.Style;
 using Dock.Avalonia;
-using Dock.Model;
 
 namespace Core2D.Avalonia.Dock.Handlers
 {

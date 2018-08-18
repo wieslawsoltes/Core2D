@@ -16,9 +16,9 @@ namespace Core2D.Renderer.Avalonia
     /// </summary>
     public static class PathGeometryConverter
     {
-        private static ImmutableArray<PointShape> ToPointShapes(this IEnumerable<A.Point> points, double dx, double dy)
+        private static ImmutableArray<IPointShape> ToPointShapes(this IEnumerable<A.Point> points, double dx, double dy)
         {
-            var PointShapes = ImmutableArray.CreateBuilder<PointShape>();
+            var PointShapes = ImmutableArray.CreateBuilder<IPointShape>();
             foreach (var point in points)
             {
                 PointShapes.Add(PointShape.Create(point.X + dx, point.Y + dy));
@@ -33,10 +33,10 @@ namespace Core2D.Renderer.Avalonia
         /// <param name="dx"></param>
         /// <param name="dy"></param>
         /// <returns></returns>
-        public static PathGeometry ToPathGeometry(this AM.PathGeometry pg, double dx, double dy)
+        public static IPathGeometry ToPathGeometry(this AM.PathGeometry pg, double dx, double dy)
         {
             var geometry = PathGeometry.Create(
-                ImmutableArray.Create<PathFigure>(),
+                ImmutableArray.Create<IPathFigure>(),
                 pg.FillRule == AM.FillRule.EvenOdd ? FillRule.EvenOdd : FillRule.Nonzero);
 
             var context = new PathGeometryContext(geometry);
@@ -94,13 +94,13 @@ namespace Core2D.Renderer.Avalonia
         /// <param name="dx"></param>
         /// <param name="dy"></param>
         /// <returns></returns>
-        public static AM.StreamGeometry ToStreamGeometry(this PathGeometry xpg, double dx, double dy)
+        public static AM.StreamGeometry ToStreamGeometry(this IPathGeometry xpg, double dx, double dy)
         {
             var sg = new AM.StreamGeometry();
 
             using (var sgc = sg.Open())
             {
-                var previous = default(PointShape);
+                IPointShape previous = default;
 
                 sgc.SetFillRule(xpg.FillRule == FillRule.Nonzero ? AM.FillRule.NonZero : AM.FillRule.EvenOdd);
 
@@ -264,7 +264,7 @@ namespace Core2D.Renderer.Avalonia
         /// </summary>
         /// <param name="source"></param>
         /// <returns></returns>
-        public static PathGeometry ToPathGeometry(this string source)
+        public static IPathGeometry ToPathGeometry(this string source)
         {
             var pg = AM.PathGeometry.Parse(source);
             return ToPathGeometry(pg, 0.0, 0.0);
@@ -277,7 +277,7 @@ namespace Core2D.Renderer.Avalonia
         /// <param name="dx"></param>
         /// <param name="dy"></param>
         /// <returns></returns>
-        public static AM.Geometry ToGeometry(this PathGeometry xpg, double dx, double dy)
+        public static AM.Geometry ToGeometry(this IPathGeometry xpg, double dx, double dy)
         {
             return ToStreamGeometry(xpg, dx, dy);
         }
@@ -287,7 +287,7 @@ namespace Core2D.Renderer.Avalonia
         /// </summary>
         /// <param name="xpg"></param>
         /// <returns></returns>
-        public static string ToSource(this PathGeometry xpg)
+        public static string ToSource(this IPathGeometry xpg)
         {
             return ToStreamGeometry(xpg, 0.0, 0.0).ToString();
         }

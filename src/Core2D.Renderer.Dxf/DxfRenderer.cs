@@ -38,25 +38,49 @@ namespace Core2D.Renderer.Dxf
             ClearCache(isZooming: false);
         }
 
+        /// <inheritdoc/>
+        public override object Copy(IDictionary<object, object> shared)
+        {
+            throw new NotImplementedException();
+        }
+
         /// <summary>
         /// Creates a new <see cref="DxfRenderer"/> instance.
         /// </summary>
         /// <returns>The new instance of the <see cref="DxfRenderer"/> class.</returns>
         public static ShapeRenderer Create() => new DxfRenderer();
 
-        private static double LineweightFactor = 96.0 / 2540.0;
+        private static double s_lineweightFactor = 96.0 / 2540.0;
 
-        private static short[] Lineweights = { -3, -2, -1, 0, 5, 9, 13, 15, 18, 20, 25, 30, 35, 40, 50, 53, 60, 70, 80, 90, 100, 106, 120, 140, 158, 200, 211 };
+        private static short[] s_lineweights = { -3, -2, -1, 0, 5, 9, 13, 15, 18, 20, 25, 30, 35, 40, 50, 53, 60, 70, 80, 90, 100, 106, 120, 140, 158, 200, 211 };
 
         private static DXF.Lineweight ToLineweight(double thickness)
         {
-            short lineweight = (short)(thickness / LineweightFactor);
-            return (DXF.Lineweight)Lineweights.OrderBy(x => Math.Abs((long)x - lineweight)).First();
+            short lineweight = (short)(thickness / s_lineweightFactor);
+            return (DXF.Lineweight)s_lineweights.OrderBy(x => Math.Abs((long)x - lineweight)).First();
         }
 
-        private static DXF.AciColor ToColor(ArgbColor color) => new DXF.AciColor(color.R, color.G, color.B);
+        private static DXF.AciColor ToColor(IColor color)
+        {
+            switch (color)
+            {
+                case IArgbColor argbColor:
+                    return new DXF.AciColor(argbColor.R, argbColor.G, argbColor.B);
+                default:
+                    throw new NotSupportedException($"The {color.GetType()} color type is not supported.");
+            }
+        }
 
-        private static short ToTransparency(ArgbColor color) => (short)(90.0 - color.A * 90.0 / 255.0);
+        private static short ToTransparency(IColor color)
+        {
+            switch (color)
+            {
+                case IArgbColor argbColor:
+                    return (short)(90.0 - argbColor.A * 90.0 / 255.0);;
+                default:
+                    throw new NotSupportedException($"The {color.GetType()} color type is not supported.");
+            }
+        }
 
         private double ToDxfX(double x) => x;
 
@@ -89,7 +113,7 @@ namespace Core2D.Renderer.Dxf
             };
         }
 
-        private DXFE.Ellipse CreateEllipticalArc(ArcShape arc, double dx, double dy)
+        private DXFE.Ellipse CreateEllipticalArc(IArcShape arc, double dx, double dy)
         {
             var a = new Spatial.Arc.GdiArc(
                 Spatial.Point2.FromXY(arc.Point1.X, arc.Point1.Y),
@@ -162,7 +186,7 @@ namespace Core2D.Renderer.Dxf
                 }, 3);
         }
 
-        private void DrawLineInternal(DXF.DxfDocument dxf, DXFT.Layer layer, BaseStyle style, bool isStroked, double x1, double y1, double x2, double y2)
+        private void DrawLineInternal(DXF.DxfDocument dxf, DXFT.Layer layer, IBaseStyle style, bool isStroked, double x1, double y1, double x2, double y2)
         {
             if (isStroked)
             {
@@ -181,7 +205,7 @@ namespace Core2D.Renderer.Dxf
             }
         }
 
-        private void DrawRectangleInternal(DXF.DxfDocument dxf, DXFT.Layer layer, bool isFilled, bool isStroked, BaseStyle style, ref Spatial.Rect2 rect)
+        private void DrawRectangleInternal(DXF.DxfDocument dxf, DXFT.Layer layer, bool isFilled, bool isStroked, IBaseStyle style, ref Spatial.Rect2 rect)
         {
             if (isFilled)
             {
@@ -194,7 +218,7 @@ namespace Core2D.Renderer.Dxf
             }
         }
 
-        private void FillRectangle(DXF.DxfDocument dxf, DXFT.Layer layer, double x, double y, double width, double height, ArgbColor color)
+        private void FillRectangle(DXF.DxfDocument dxf, DXFT.Layer layer, double x, double y, double width, double height, IColor color)
         {
             var fill = ToColor(color);
             var fillTransparency = ToTransparency(color);
@@ -220,7 +244,7 @@ namespace Core2D.Renderer.Dxf
             dxf.AddEntity(hatch);
         }
 
-        private void StrokeRectangle(DXF.DxfDocument dxf, DXFT.Layer layer, BaseStyle style, double x, double y, double width, double height)
+        private void StrokeRectangle(DXF.DxfDocument dxf, DXFT.Layer layer, IBaseStyle style, double x, double y, double width, double height)
         {
             DrawLineInternal(dxf, layer, style, true, x, y, x + width, y);
             DrawLineInternal(dxf, layer, style, true, x + width, y, x + width, y + height);
@@ -228,7 +252,7 @@ namespace Core2D.Renderer.Dxf
             DrawLineInternal(dxf, layer, style, true, x, y + height, x, y);
         }
 
-        private void DrawEllipseInternal(DXF.DxfDocument dxf, DXFT.Layer layer, bool isFilled, bool isStroked, BaseStyle style, ref Spatial.Rect2 rect)
+        private void DrawEllipseInternal(DXF.DxfDocument dxf, DXFT.Layer layer, bool isFilled, bool isStroked, IBaseStyle style, ref Spatial.Rect2 rect)
         {
             var dxfEllipse = CreateEllipse(rect.X, rect.Y, rect.Width, rect.Height);
 
@@ -243,7 +267,7 @@ namespace Core2D.Renderer.Dxf
             }
         }
 
-        private void StrokeEllipse(DXF.DxfDocument dxf, DXFT.Layer layer, DXFE.Ellipse dxfEllipse, ArgbColor color, double thickness)
+        private void StrokeEllipse(DXF.DxfDocument dxf, DXFT.Layer layer, DXFE.Ellipse dxfEllipse, IColor color, double thickness)
         {
             var stroke = ToColor(color);
             var strokeTansparency = ToTransparency(color);
@@ -257,7 +281,7 @@ namespace Core2D.Renderer.Dxf
             dxf.AddEntity(dxfEllipse);
         }
 
-        private void FillEllipse(DXF.DxfDocument dxf, DXFT.Layer layer, DXFE.Ellipse dxfEllipse, ArgbColor color)
+        private void FillEllipse(DXF.DxfDocument dxf, DXFT.Layer layer, DXFE.Ellipse dxfEllipse, IColor color)
         {
             var fill = ToColor(color);
             var fillTransparency = ToTransparency(color);
@@ -281,7 +305,7 @@ namespace Core2D.Renderer.Dxf
             dxf.AddEntity(hatch);
         }
 
-        private void DrawGridInternal(DXF.DxfDocument dxf, DXFT.Layer layer, ShapeStyle style, double offsetX, double offsetY, double cellWidth, double cellHeight, ref Spatial.Rect2 rect)
+        private void DrawGridInternal(DXF.DxfDocument dxf, DXFT.Layer layer, IShapeStyle style, double offsetX, double offsetY, double cellWidth, double cellHeight, ref Spatial.Rect2 rect)
         {
             double ox = rect.X;
             double oy = rect.Y;
@@ -301,7 +325,7 @@ namespace Core2D.Renderer.Dxf
             }
         }
 
-        private void CreateHatchBoundsAndEntitiess(PathGeometry pg, double dx, double dy, out IList<DXFE.HatchBoundaryPath> bounds, out ICollection<DXFE.EntityObject> entities)
+        private void CreateHatchBoundsAndEntitiess(IPathGeometry pg, double dx, double dy, out IList<DXFE.HatchBoundaryPath> bounds, out ICollection<DXFE.EntityObject> entities)
         {
             bounds = new List<DXFE.HatchBoundaryPath>();
             entities = new List<DXFE.EntityObject>();
@@ -484,7 +508,7 @@ namespace Core2D.Renderer.Dxf
         }
 
         /// <inheritdoc/>
-        public override void Fill(object dc, double x, double y, double width, double height, ArgbColor color)
+        public override void Fill(object dc, double x, double y, double width, double height, IColor color)
         {
             var dxf = dc as DXF.DxfDocument;
             var rect = Spatial.Rect2.FromPoints(x, y, x + width, y + height);
@@ -505,7 +529,7 @@ namespace Core2D.Renderer.Dxf
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, PageContainer container, double dx, double dy, object db, object r)
+        public override void Draw(object dc, IPageContainer container, double dx, double dy, object db, object r)
         {
             var dxf = dc as DXF.DxfDocument;
 
@@ -525,7 +549,7 @@ namespace Core2D.Renderer.Dxf
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, LayerContainer layer, double dx, double dy, object db, object r)
+        public override void Draw(object dc, ILayerContainer layer, double dx, double dy, object db, object r)
         {
             var dxf = dc as DXF.DxfDocument;
 
@@ -539,7 +563,7 @@ namespace Core2D.Renderer.Dxf
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, LineShape line, double dx, double dy, object db, object r)
+        public override void Draw(object dc, ILineShape line, double dx, double dy, object db, object r)
         {
             if (!line.IsStroked)
                 return;
@@ -563,7 +587,7 @@ namespace Core2D.Renderer.Dxf
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, RectangleShape rectangle, double dx, double dy, object db, object r)
+        public override void Draw(object dc, IRectangleShape rectangle, double dx, double dy, object db, object r)
         {
             if (!rectangle.IsStroked && !rectangle.IsFilled && !rectangle.IsGrid)
                 return;
@@ -592,7 +616,7 @@ namespace Core2D.Renderer.Dxf
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, EllipseShape ellipse, double dx, double dy, object db, object r)
+        public override void Draw(object dc, IEllipseShape ellipse, double dx, double dy, object db, object r)
         {
             if (!ellipse.IsStroked && !ellipse.IsFilled)
                 return;
@@ -610,7 +634,7 @@ namespace Core2D.Renderer.Dxf
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, ArcShape arc, double dx, double dy, object db, object r)
+        public override void Draw(object dc, IArcShape arc, double dx, double dy, object db, object r)
         {
             var dxf = dc as DXF.DxfDocument;
             var style = arc.Style;
@@ -657,7 +681,7 @@ namespace Core2D.Renderer.Dxf
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, CubicBezierShape cubicBezier, double dx, double dy, object db, object r)
+        public override void Draw(object dc, ICubicBezierShape cubicBezier, double dx, double dy, object db, object r)
         {
             if (!cubicBezier.IsStroked && !cubicBezier.IsFilled)
                 return;
@@ -714,7 +738,7 @@ namespace Core2D.Renderer.Dxf
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, QuadraticBezierShape quadraticBezier, double dx, double dy, object db, object r)
+        public override void Draw(object dc, IQuadraticBezierShape quadraticBezier, double dx, double dy, object db, object r)
         {
             if (!quadraticBezier.IsStroked && !quadraticBezier.IsFilled)
                 return;
@@ -769,12 +793,12 @@ namespace Core2D.Renderer.Dxf
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, TextShape text, double dx, double dy, object db, object r)
+        public override void Draw(object dc, ITextShape text, double dx, double dy, object db, object r)
         {
             var dxf = dc as DXF.DxfDocument;
 
-            var properties = (ImmutableArray<Property>)db;
-            var record = (Record)r;
+            var properties = (ImmutableArray<IProperty>)db;
+            var record = (IRecord)r;
             var tbind = text.BindText(properties, record);
             if (string.IsNullOrEmpty(tbind))
                 return;
@@ -900,7 +924,7 @@ namespace Core2D.Renderer.Dxf
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, ImageShape image, double dx, double dy, object db, object r)
+        public override void Draw(object dc, IImageShape image, double dx, double dy, object db, object r)
         {
             var dxf = dc as DXF.DxfDocument;
 
@@ -946,7 +970,7 @@ namespace Core2D.Renderer.Dxf
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, PathShape path, double dx, double dy, object db, object r)
+        public override void Draw(object dc, IPathShape path, double dx, double dy, object db, object r)
         {
             if (!path.IsStroked && !path.IsFilled)
                 return;

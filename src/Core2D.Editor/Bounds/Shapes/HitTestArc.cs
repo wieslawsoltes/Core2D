@@ -2,7 +2,6 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
 using System.Collections.Generic;
-using Core2D.Shape;
 using Core2D.Shapes;
 using Spatial;
 
@@ -10,14 +9,14 @@ namespace Core2D.Editor.Bounds.Shapes
 {
     public class HitTestArc : HitTestBase
     {
-        public override Type TargetType => typeof(ArcShape);
+        public override Type TargetType => typeof(IArcShape);
 
-        public override PointShape TryToGetPoint(BaseShape shape, Point2 target, double radius, IDictionary<Type, HitTestBase> registered)
+        public override IPointShape TryToGetPoint(IBaseShape shape, Point2 target, double radius, IDictionary<Type, HitTestBase> registered)
         {
-            if (!(shape is ArcShape arc))
+            if (!(shape is IArcShape arc))
                 throw new ArgumentNullException(nameof(shape));
 
-            var pointHitTest = registered[typeof(PointShape)];
+            var pointHitTest = registered[typeof(IPointShape)];
 
             if (pointHitTest.TryToGetPoint(arc.Point1, target, radius, registered) != null)
             {
@@ -42,23 +41,23 @@ namespace Core2D.Editor.Bounds.Shapes
             return null;
         }
 
-        public override bool Contains(BaseShape shape, Point2 target, double radius, IDictionary<Type, HitTestBase> registered)
+        public override bool Contains(IBaseShape shape, Point2 target, double radius, IDictionary<Type, HitTestBase> registered)
         {
-            if (!(shape is ArcShape arc))
+            if (!(shape is IArcShape arc))
                 throw new ArgumentNullException(nameof(shape));
 
             return ArcBounds(arc).Contains(target);
         }
 
-        public override bool Overlaps(BaseShape shape, Rect2 target, double radius, IDictionary<Type, HitTestBase> registered)
+        public override bool Overlaps(IBaseShape shape, Rect2 target, double radius, IDictionary<Type, HitTestBase> registered)
         {
-            if (!(shape is ArcShape arc))
+            if (!(shape is IArcShape arc))
                 throw new ArgumentNullException(nameof(shape));
 
             return ArcBounds(arc).IntersectsWith(target);
         }
 
-        public static Rect2 ArcBounds(ArcShape arc)
+        public static Rect2 ArcBounds(IArcShape arc)
         {
             double x1 = arc.Point1.X;
             double y1 = arc.Point1.Y;

@@ -9,7 +9,7 @@ namespace Core2D.Renderer
     /// <summary>
     /// Transformation matrix.
     /// </summary>
-    public class MatrixObject : ObservableObject, ICopyable
+    public class MatrixObject : ObservableObject
     {
         private double _m11;
         private double _m12;
@@ -101,7 +101,7 @@ namespace Core2D.Renderer
         }
 
         /// <inheritdoc/>
-        public virtual object Copy(IDictionary<object, object> shared)
+        public override object Copy(IDictionary<object, object> shared)
         {
             throw new NotImplementedException();
         }

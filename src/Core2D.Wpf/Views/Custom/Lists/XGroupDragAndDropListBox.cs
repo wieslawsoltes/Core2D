@@ -9,7 +9,7 @@ namespace Core2D.Wpf.Views.Custom.Lists
     /// <summary>
     /// The <see cref="ListBox"/> control for <see cref="GroupShape"/> items with drag and drop support.
     /// </summary>
-    public class GroupShapeDragAndDropListBox : DragAndDropListBox<GroupShape>
+    public class GroupShapeDragAndDropListBox : DragAndDropListBox<IGroupShape>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="GroupShapeDragAndDropListBox"/> class.
@@ -24,7 +24,7 @@ namespace Core2D.Wpf.Views.Custom.Lists
         /// Updates DataContext collection ImmutableArray property.
         /// </summary>
         /// <param name="array">The updated immutable array.</param>
-        protected override void UpdateDataContext(ImmutableArray<GroupShape> array)
+        protected override void UpdateDataContext(ImmutableArray<IGroupShape> array)
         {
             var editor = (ProjectEditor)Tag;
 

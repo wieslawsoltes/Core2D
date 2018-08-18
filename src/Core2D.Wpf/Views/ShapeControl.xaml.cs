@@ -1,6 +1,6 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
-using Core2D.Shape;
+using Core2D.Shapes;
 using Core2D.Style;
 using System;
 using System.Windows;
@@ -32,7 +32,7 @@ namespace Core2D.Wpf.Views
             content.DragEnter +=
                 (s, e) =>
                 {
-                    if (!e.Data.GetDataPresent(typeof(ShapeStyle)))
+                    if (!e.Data.GetDataPresent(typeof(IShapeStyle)))
                     {
                         e.Effects = DragDropEffects.None;
                         e.Handled = true;
@@ -42,15 +42,15 @@ namespace Core2D.Wpf.Views
             content.Drop +=
                 (s, e) =>
                 {
-                    if (e.Data.GetDataPresent(typeof(ShapeStyle)))
+                    if (e.Data.GetDataPresent(typeof(IShapeStyle)))
                     {
                         try
                         {
-                            if (e.Data.GetData(typeof(ShapeStyle)) is ShapeStyle style)
+                            if (e.Data.GetData(typeof(IShapeStyle)) is IShapeStyle style)
                             {
                                 if (content.Content != null)
                                 {
-                                    if (content.Content is BaseShape shape)
+                                    if (content.Content is IBaseShape shape)
                                     {
                                         shape.Style = style;
                                     }

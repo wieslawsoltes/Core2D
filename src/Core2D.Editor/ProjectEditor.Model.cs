@@ -1,14 +1,14 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
+using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
+using Core2D.Containers;
 using Core2D.Data;
 using Core2D.Editor.Bounds;
-using Core2D.Editor.Factories;
 using Core2D.Editor.Recent;
 using Core2D.Interfaces;
-using Core2D.Containers;
 using Core2D.Renderer;
 using Dock.Model;
 
@@ -20,7 +20,7 @@ namespace Core2D.Editor
     public partial class ProjectEditor : ObservableObject
     {
         private readonly IServiceProvider _serviceProvider;
-        private ProjectContainer _project;
+        private IProjectContainer _project;
         private string _projectPath;
         private bool _isProjectDirty;
         private ProjectObserver _observer;
@@ -37,14 +37,14 @@ namespace Core2D.Editor
         private readonly Lazy<ILog> _log;
         private readonly Lazy<ShapeRenderer[]> _renderers;
         private readonly Lazy<IFileSystem> _fileIO;
-        private readonly Lazy<IProjectFactory> _projectFactory;
+        private readonly Lazy<IContainerFactory> _containerFactory;
         private readonly Lazy<IShapeFactory> _shapeFactory;
         private readonly Lazy<ITextClipboard> _textClipboard;
         private readonly Lazy<IJsonSerializer> _jsonSerializer;
         private readonly Lazy<IXamlSerializer> _xamlSerializer;
         private readonly Lazy<ImmutableArray<IFileWriter>> _fileWriters;
-        private readonly Lazy<ITextFieldReader<Database>> _csvReader;
-        private readonly Lazy<ITextFieldWriter<Database>> _csvWriter;
+        private readonly Lazy<ITextFieldReader<IDatabase>> _csvReader;
+        private readonly Lazy<ITextFieldWriter<IDatabase>> _csvWriter;
         private readonly Lazy<IImageImporter> _imageImporter;
         private readonly Lazy<IScriptRunner> _scriptRunner;
         private readonly Lazy<IProjectEditorPlatform> _platform;
@@ -54,7 +54,7 @@ namespace Core2D.Editor
         /// <summary>
         /// Gets or sets current project.
         /// </summary>
-        public ProjectContainer Project
+        public IProjectContainer Project
         {
             get => _project;
             set => Update(ref _project, value);
@@ -183,7 +183,7 @@ namespace Core2D.Editor
         /// <summary>
         /// Gets project factory.
         /// </summary>
-        public IProjectFactory ProjectFactory => _projectFactory.Value;
+        public IContainerFactory ContainerFactory => _containerFactory.Value;
 
         /// <summary>
         /// Gets shape factory.
@@ -213,12 +213,12 @@ namespace Core2D.Editor
         /// <summary>
         /// Gets Csv file reader.
         /// </summary>
-        public ITextFieldReader<Database> CsvReader => _csvReader.Value;
+        public ITextFieldReader<IDatabase> CsvReader => _csvReader.Value;
 
         /// <summary>
         /// Gets Csv file writer.
         /// </summary>
-        public ITextFieldWriter<Database> CsvWriter => _csvWriter.Value;
+        public ITextFieldWriter<IDatabase> CsvWriter => _csvWriter.Value;
 
         /// <summary>
         /// Gets image key importer.
@@ -260,19 +260,25 @@ namespace Core2D.Editor
             _log = _serviceProvider.GetServiceLazily<ILog>();
             _renderers = new Lazy<ShapeRenderer[]>(() => new[] { _serviceProvider.GetService<ShapeRenderer>(), _serviceProvider.GetService<ShapeRenderer>() });
             _fileIO = _serviceProvider.GetServiceLazily<IFileSystem>();
-            _projectFactory = _serviceProvider.GetServiceLazily<IProjectFactory>();
+            _containerFactory = _serviceProvider.GetServiceLazily<IContainerFactory>();
             _shapeFactory = _serviceProvider.GetServiceLazily<IShapeFactory>();
             _textClipboard = _serviceProvider.GetServiceLazily<ITextClipboard>();
             _jsonSerializer = _serviceProvider.GetServiceLazily<IJsonSerializer>();
             _xamlSerializer = _serviceProvider.GetServiceLazily<IXamlSerializer>();
             _fileWriters = _serviceProvider.GetServiceLazily<IFileWriter[], ImmutableArray<IFileWriter>>((writers) => writers.ToImmutableArray());
-            _csvReader = _serviceProvider.GetServiceLazily<ITextFieldReader<Database>>();
-            _csvWriter = _serviceProvider.GetServiceLazily<ITextFieldWriter<Database>>();
+            _csvReader = _serviceProvider.GetServiceLazily<ITextFieldReader<IDatabase>>();
+            _csvWriter = _serviceProvider.GetServiceLazily<ITextFieldWriter<IDatabase>>();
             _imageImporter = _serviceProvider.GetServiceLazily<IImageImporter>();
             _scriptRunner = _serviceProvider.GetServiceLazily<IScriptRunner>();
             _platform = _serviceProvider.GetServiceLazily<IProjectEditorPlatform>();
             _canvasPlatform = _serviceProvider.GetServiceLazily<IEditorCanvasPlatform>();
             _layoutPlatform = _serviceProvider.GetServiceLazily<IEditorLayoutPlatform>();
+        }
+
+        /// <inheritdoc/>
+        public override object Copy(IDictionary<object, object> shared)
+        {
+            throw new NotImplementedException();
         }
     }
 }

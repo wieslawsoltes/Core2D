@@ -17,9 +17,9 @@ namespace Core2D.Renderer.Wpf
     /// </summary>
     public static class PathGeometryConverter
     {
-        private static ImmutableArray<PointShape> ToPointShapes(this IEnumerable<W.Point> points, double dx, double dy)
+        private static ImmutableArray<IPointShape> ToPointShapes(this IEnumerable<W.Point> points, double dx, double dy)
         {
-            var PointShapes = ImmutableArray.CreateBuilder<PointShape>();
+            var PointShapes = ImmutableArray.CreateBuilder<IPointShape>();
             foreach (var point in points)
             {
                 PointShapes.Add(PointShape.Create(point.X + dx, point.Y + dy));
@@ -27,7 +27,7 @@ namespace Core2D.Renderer.Wpf
             return PointShapes.ToImmutable();
         }
 
-        private static IList<W.Point> ToPoints(this IList<PointShape> PointShapes, double dx, double dy)
+        private static IList<W.Point> ToPoints(this IList<IPointShape> PointShapes, double dx, double dy)
         {
             var points = new List<W.Point>();
             foreach (var point in PointShapes)
@@ -44,10 +44,10 @@ namespace Core2D.Renderer.Wpf
         /// <param name="dx"></param>
         /// <param name="dy"></param>
         /// <returns></returns>
-        public static PathGeometry ToPathGeometry(this WM.PathGeometry pg, double dx, double dy)
+        public static IPathGeometry ToPathGeometry(this WM.PathGeometry pg, double dx, double dy)
         {
             var geometry = PathGeometry.Create(
-                ImmutableArray.Create<PathFigure>(),
+                ImmutableArray.Create<IPathFigure>(),
                 pg.FillRule == WM.FillRule.EvenOdd ? FillRule.EvenOdd : FillRule.Nonzero);
 
             var context = new PathGeometryContext(geometry);
@@ -134,7 +134,7 @@ namespace Core2D.Renderer.Wpf
         /// <param name="dx"></param>
         /// <param name="dy"></param>
         /// <returns></returns>
-        public static WM.StreamGeometry ToStreamGeometry(this PathGeometry xpg, double dx, double dy)
+        public static WM.StreamGeometry ToStreamGeometry(this IPathGeometry xpg, double dx, double dy)
         {
             var sg = new WM.StreamGeometry();
 
@@ -224,7 +224,7 @@ namespace Core2D.Renderer.Wpf
         /// </summary>
         /// <param name="source"></param>
         /// <returns></returns>
-        public static PathGeometry ToPathGeometry(this string source)
+        public static IPathGeometry ToPathGeometry(this string source)
         {
             var g = WM.Geometry.Parse(source);
             var pg = WM.PathGeometry.CreateFromGeometry(g);
@@ -238,7 +238,7 @@ namespace Core2D.Renderer.Wpf
         /// <param name="dx"></param>
         /// <param name="dy"></param>
         /// <returns></returns>
-        public static WM.PathGeometry ToPathGeometry(this PathGeometry xpg, double dx, double dy)
+        public static WM.PathGeometry ToPathGeometry(this IPathGeometry xpg, double dx, double dy)
         {
             return WM.PathGeometry.CreateFromGeometry(ToStreamGeometry(xpg, dx, dy));
         }
@@ -248,7 +248,7 @@ namespace Core2D.Renderer.Wpf
         /// </summary>
         /// <param name="xpg"></param>
         /// <returns></returns>
-        public static string ToSource(this PathGeometry xpg)
+        public static string ToSource(this IPathGeometry xpg)
         {
             return ToStreamGeometry(xpg, 0.0, 0.0).ToString(CultureInfo.InvariantCulture);
         }

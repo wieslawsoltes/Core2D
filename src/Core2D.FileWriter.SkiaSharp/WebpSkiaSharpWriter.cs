@@ -1,12 +1,12 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
-using Core2D.Interfaces;
 using Core2D.Containers;
+using Core2D.Interfaces;
 using Core2D.Renderer;
 using Core2D.Renderer.Presenters;
-using Core2D.Shape;
 using Core2D.Renderer.SkiaSharp;
+using Core2D.Shapes;
 
 namespace Core2D.FileWriter.SkiaSharpWebp
 {
@@ -39,15 +39,15 @@ namespace Core2D.FileWriter.SkiaSharpWebp
 
             IProjectExporter exporter = new WebpSkiaSharpExporter(renderer, presenter);
 
-            if (item is PageContainer)
+            if (item is IPageContainer page)
             {
-                exporter.Save(path, item as PageContainer);
+                exporter.Save(path, page);
             }
-            else if (item is DocumentContainer)
+            else if (item is IDocumentContainer document)
             {
                 throw new NotSupportedException("Saving documents as webp drawing is not supported.");
             }
-            else if (item is ProjectContainer)
+            else if (item is IProjectContainer project)
             {
                 throw new NotSupportedException("Saving projects as webp drawing is not supported.");
             }

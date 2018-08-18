@@ -8,9 +8,9 @@ using CSV = CsvHelper;
 namespace Core2D.TextFieldWriter.CsvHelper
 {
     /// <summary>
-    /// Defines <see cref="Database"/> to the text fields writer.
+    /// Defines <see cref="IDatabase"/> to the text fields writer.
     /// </summary>
-    public sealed class CsvHelperWriter : ITextFieldWriter<Database>
+    public sealed class CsvHelperWriter : ITextFieldWriter<IDatabase>
     {
         /// <summary>
         /// Write database records to text based file format.
@@ -18,13 +18,15 @@ namespace Core2D.TextFieldWriter.CsvHelper
         /// <param name="path">The fields file path.</param>
         /// <param name="fs">The file system.</param>
         /// <param name="database">The source records database.</param>
-        void ITextFieldWriter<Database>.Write(string path, IFileSystem fs, Database database)
+        void ITextFieldWriter<IDatabase>.Write(string path, IFileSystem fs, IDatabase database)
         {
             using (var writer = new System.IO.StringWriter())
             {
-                var configuration = new CSV.Configuration.Configuration();
-                configuration.Delimiter = CultureInfo.CurrentCulture.TextInfo.ListSeparator;
-                configuration.CultureInfo = CultureInfo.CurrentCulture;
+                var configuration = new CSV.Configuration.Configuration
+                {
+                    Delimiter = CultureInfo.CurrentCulture.TextInfo.ListSeparator,
+                    CultureInfo = CultureInfo.CurrentCulture
+                };
 
                 using (var csv = new CSV.CsvWriter(writer, configuration))
                 {

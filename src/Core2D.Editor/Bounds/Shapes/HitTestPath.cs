@@ -3,7 +3,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Core2D.Shape;
 using Core2D.Shapes;
 using Spatial;
 
@@ -11,14 +10,14 @@ namespace Core2D.Editor.Bounds.Shapes
 {
     public class HitTestPath : HitTestBase
     {
-        public override Type TargetType => typeof(PathShape);
+        public override Type TargetType => typeof(IPathShape);
 
-        public override PointShape TryToGetPoint(BaseShape shape, Point2 target, double radius, IDictionary<Type, HitTestBase> registered)
+        public override IPointShape TryToGetPoint(IBaseShape shape, Point2 target, double radius, IDictionary<Type, HitTestBase> registered)
         {
-            if (!(shape is PathShape path))
+            if (!(shape is IPathShape path))
                 throw new ArgumentNullException(nameof(shape));
 
-            var pointHitTest = registered[typeof(PointShape)];
+            var pointHitTest = registered[typeof(IPointShape)];
 
             foreach (var pathPoint in path.GetPoints())
             {
@@ -31,9 +30,9 @@ namespace Core2D.Editor.Bounds.Shapes
             return null;
         }
 
-        public override bool Contains(BaseShape shape, Point2 target, double radius, IDictionary<Type, HitTestBase> registered)
+        public override bool Contains(IBaseShape shape, Point2 target, double radius, IDictionary<Type, HitTestBase> registered)
         {
-            if (!(shape is PathShape path))
+            if (!(shape is IPathShape path))
                 throw new ArgumentNullException(nameof(shape));
 
             var points = path.GetPoints();
@@ -42,9 +41,9 @@ namespace Core2D.Editor.Bounds.Shapes
             return false;
         }
 
-        public override bool Overlaps(BaseShape shape, Rect2 target, double radius, IDictionary<Type, HitTestBase> registered)
+        public override bool Overlaps(IBaseShape shape, Rect2 target, double radius, IDictionary<Type, HitTestBase> registered)
         {
-            if (!(shape is PathShape path))
+            if (!(shape is IPathShape path))
                 throw new ArgumentNullException(nameof(shape));
 
             var points = path.GetPoints();

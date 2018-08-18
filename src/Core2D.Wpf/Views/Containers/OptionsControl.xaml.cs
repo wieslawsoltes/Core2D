@@ -1,7 +1,7 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using Core2D.Containers;
-using Core2D.Shape;
+using Core2D.Shapes;
 using Core2D.Style;
 using System;
 using System.Windows;
@@ -36,7 +36,7 @@ namespace Core2D.Wpf.Views.Containers
             pointShape.DragEnter +=
                 (s, e) =>
                 {
-                    if (!e.Data.GetDataPresent(typeof(BaseShape)))
+                    if (!e.Data.GetDataPresent(typeof(IBaseShape)))
                     {
                         e.Effects = DragDropEffects.None;
                         e.Handled = true;
@@ -46,15 +46,15 @@ namespace Core2D.Wpf.Views.Containers
             pointShape.Drop +=
                 (s, e) =>
                 {
-                    if (e.Data.GetDataPresent(typeof(BaseShape)))
+                    if (e.Data.GetDataPresent(typeof(IBaseShape)))
                     {
                         try
                         {
-                            if (e.Data.GetData(typeof(BaseShape)) is BaseShape shape)
+                            if (e.Data.GetData(typeof(IBaseShape)) is IBaseShape shape)
                             {
                                 if (pointShape.DataContext != null)
                                 {
-                                    if (pointShape.DataContext is Options options)
+                                    if (pointShape.DataContext is IOptions options)
                                     {
                                         options.PointShape = shape;
                                     }
@@ -77,7 +77,7 @@ namespace Core2D.Wpf.Views.Containers
             pointStyle.DragEnter +=
                 (s, e) =>
                 {
-                    if (!e.Data.GetDataPresent(typeof(ShapeStyle)))
+                    if (!e.Data.GetDataPresent(typeof(IShapeStyle)))
                     {
                         e.Effects = DragDropEffects.None;
                         e.Handled = true;
@@ -87,15 +87,15 @@ namespace Core2D.Wpf.Views.Containers
             pointStyle.Drop +=
                 (s, e) =>
                 {
-                    if (e.Data.GetDataPresent(typeof(ShapeStyle)))
+                    if (e.Data.GetDataPresent(typeof(IShapeStyle)))
                     {
                         try
                         {
-                            if (e.Data.GetData(typeof(ShapeStyle)) is ShapeStyle style)
+                            if (e.Data.GetData(typeof(IShapeStyle)) is IShapeStyle style)
                             {
                                 if (pointStyle.DataContext != null)
                                 {
-                                    if (pointStyle.DataContext is Options options)
+                                    if (pointStyle.DataContext is IOptions options)
                                     {
                                         options.PointStyle = style;
                                     }
@@ -118,7 +118,7 @@ namespace Core2D.Wpf.Views.Containers
             selectionStyle.DragEnter +=
                 (s, e) =>
                 {
-                    if (!e.Data.GetDataPresent(typeof(ShapeStyle)))
+                    if (!e.Data.GetDataPresent(typeof(IShapeStyle)))
                     {
                         e.Effects = DragDropEffects.None;
                         e.Handled = true;
@@ -128,15 +128,15 @@ namespace Core2D.Wpf.Views.Containers
             selectionStyle.Drop +=
                 (s, e) =>
                 {
-                    if (e.Data.GetDataPresent(typeof(ShapeStyle)))
+                    if (e.Data.GetDataPresent(typeof(IShapeStyle)))
                     {
                         try
                         {
-                            if (e.Data.GetData(typeof(ShapeStyle)) is ShapeStyle style)
+                            if (e.Data.GetData(typeof(IShapeStyle)) is IShapeStyle style)
                             {
                                 if (selectionStyle.DataContext != null)
                                 {
-                                    if (selectionStyle.DataContext is Options options)
+                                    if (selectionStyle.DataContext is IOptions options)
                                     {
                                         options.SelectionStyle = style;
                                     }
@@ -159,7 +159,7 @@ namespace Core2D.Wpf.Views.Containers
             helperStyle.DragEnter +=
                 (s, e) =>
                 {
-                    if (!e.Data.GetDataPresent(typeof(ShapeStyle)))
+                    if (!e.Data.GetDataPresent(typeof(IShapeStyle)))
                     {
                         e.Effects = DragDropEffects.None;
                         e.Handled = true;
@@ -169,15 +169,15 @@ namespace Core2D.Wpf.Views.Containers
             helperStyle.Drop +=
                 (s, e) =>
                 {
-                    if (e.Data.GetDataPresent(typeof(ShapeStyle)))
+                    if (e.Data.GetDataPresent(typeof(IShapeStyle)))
                     {
                         try
                         {
-                            if (e.Data.GetData(typeof(ShapeStyle)) is ShapeStyle style)
+                            if (e.Data.GetData(typeof(IShapeStyle)) is IShapeStyle style)
                             {
                                 if (helperStyle.DataContext != null)
                                 {
-                                    if (helperStyle.DataContext is Options options)
+                                    if (helperStyle.DataContext is IOptions options)
                                     {
                                         options.HelperStyle = style;
                                     }

@@ -8,9 +8,9 @@ using Core2D.Editor.Tools.Path.Settings;
 using Core2D.Editor.Tools.Selection;
 using Core2D.Path;
 using Core2D.Path.Segments;
-using Core2D.Shape;
-using Core2D.Shapes;
 using static System.Math;
+using Core2D.Shapes;
+using System.Collections.Generic;
 
 namespace Core2D.Editor.Tools.Path
 {
@@ -49,6 +49,12 @@ namespace Core2D.Editor.Tools.Path
         {
             _serviceProvider = serviceProvider;
             _settings = new PathToolSettingsArc();
+        }
+
+        /// <inheritdoc/>
+        public override object Copy(IDictionary<object, object> shared)
+        {
+            throw new NotImplementedException();
         }
 
         /// <inheritdoc/>
@@ -209,7 +215,7 @@ namespace Core2D.Editor.Tools.Path
         }
 
         /// <inheritdoc/>
-        public override void Move(BaseShape shape)
+        public override void Move(IBaseShape shape)
         {
             base.Move(shape);
 

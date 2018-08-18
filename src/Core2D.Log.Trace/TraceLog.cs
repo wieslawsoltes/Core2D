@@ -2,6 +2,7 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using Core2D.Interfaces;
 using System;
+using System.Collections.Generic;
 using SD = System.Diagnostics;
 
 namespace Core2D.Log.Trace
@@ -23,6 +24,12 @@ namespace Core2D.Log.Trace
         string ILog.LastMessage
         {
             get { return _lastMessage; }
+        }
+
+        /// <inheritdoc/>
+        public override object Copy(IDictionary<object, object> shared)
+        {
+            throw new NotImplementedException();
         }
 
         private void SetLastMessage(string message)

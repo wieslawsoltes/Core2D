@@ -1,7 +1,7 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
-using Core2D.Editor;
 using Core2D.Containers;
+using Core2D.Editor;
 using System.Collections.Immutable;
 
 namespace Core2D.Wpf.Views.Custom.Lists
@@ -9,7 +9,7 @@ namespace Core2D.Wpf.Views.Custom.Lists
     /// <summary>
     /// The <see cref="ListBox"/> control for <see cref="PageContainer"/> items with drag and drop support.
     /// </summary>
-    public class XTemplateDragAndDropListBox : DragAndDropListBox<PageContainer>
+    public class XTemplateDragAndDropListBox : DragAndDropListBox<IPageContainer>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="XTemplateDragAndDropListBox"/> class.
@@ -24,7 +24,7 @@ namespace Core2D.Wpf.Views.Custom.Lists
         /// Updates DataContext collection ImmutableArray property.
         /// </summary>
         /// <param name="array">The updated immutable array.</param>
-        protected override void UpdateDataContext(ImmutableArray<PageContainer> array)
+        protected override void UpdateDataContext(ImmutableArray<IPageContainer> array)
         {
             var editor = (ProjectEditor)Tag;
 

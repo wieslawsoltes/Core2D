@@ -10,6 +10,7 @@
   <Import Project="..\..\build\CsvHelper.props" />
 
   <ItemGroup>
+    <ProjectReference Include="..\Core2D.Data\Core2D.Data.csproj" />
     <ProjectReference Include="..\Core2D\Core2D.csproj" />
   </ItemGroup>
 

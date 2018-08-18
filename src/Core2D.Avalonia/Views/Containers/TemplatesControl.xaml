@@ -9,7 +9,7 @@
              xmlns:handlers="clr-namespace:Core2D.Avalonia.Dock.Handlers;assembly=Core2D.Avalonia"
              xmlns:converters="clr-namespace:Core2D.Avalonia.Converters;assembly=Core2D.Avalonia"
              xmlns:Editor="clr-namespace:Core2D.Editor;assembly=Core2D.Editor"
-             xmlns:Containers="clr-namespace:Core2D.Containers;assembly=Core2D"
+             xmlns:ContainersCore="clr-namespace:Core2D.Containers;assembly=Core2D"
              xmlns:Designer="clr-namespace:Core2D.Editor.Designer;assembly=Core2D.Editor"
              Design.DataContext="{x:Static Designer:DesignerContext.Project}"
              Design.Width="250" Design.Height="400">
@@ -29,7 +29,7 @@
                 <KeyBinding Command="{Binding $parent[Window].DataContext.Platform.OnExportObject}" CommandParameter="{Binding #templates.SelectedItem}" Gesture="Ctrl+E"/>
             </ListBox.KeyBindings>
             <ListBox.DataTemplates>
-                <DataTemplate DataType="Containers:PageContainer">
+                <DataTemplate DataType="ContainersCore:IPageContainer">
                     <TextBlock x:Name="template" Text="{Binding Name}" Classes="list drag">
                         <i:Interaction.Behaviors>
                             <ia:EventTriggerBehavior EventName="DoubleTapped" SourceObject="{Binding #template}">

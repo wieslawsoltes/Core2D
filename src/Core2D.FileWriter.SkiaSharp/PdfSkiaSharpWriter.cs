@@ -1,11 +1,11 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
-using Core2D.Interfaces;
 using Core2D.Containers;
+using Core2D.Interfaces;
 using Core2D.Renderer;
 using Core2D.Renderer.Presenters;
-using Core2D.Shape;
 using Core2D.Renderer.SkiaSharp;
+using Core2D.Shapes;
 
 namespace Core2D.FileWriter.SkiaSharpPdf
 {
@@ -38,17 +38,17 @@ namespace Core2D.FileWriter.SkiaSharpPdf
 
             IProjectExporter exporter = new PdfSkiaSharpExporter(renderer, presenter, 72.0f);
 
-            if (item is PageContainer)
+            if (item is IPageContainer page)
             {
-                exporter.Save(path, item as PageContainer);
+                exporter.Save(path, page);
             }
-            else if (item is DocumentContainer)
+            else if (item is IDocumentContainer document)
             {
-                exporter.Save(path, item as DocumentContainer);
+                exporter.Save(path, document);
             }
-            else if (item is ProjectContainer)
+            else if (item is IProjectContainer project)
             {
-                exporter.Save(path, item as ProjectContainer);
+                exporter.Save(path, project);
             }
         }
     }

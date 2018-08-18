@@ -1,32 +1,30 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
-using Spatial.Arc;
 using Core2D.Containers;
-using Core2D.Shape;
 using Core2D.Shapes;
-using Core2D.Shapes.Interfaces;
 using Core2D.Style;
 using Spatial;
+using Spatial.Arc;
 
 namespace Core2D.Editor.Tools.Selection
 {
     /// <summary>
-    /// Helper class for <see cref="ArcShape"/> shape selection.
+    /// Helper class for <see cref="IArcShape"/> shape selection.
     /// </summary>
     public class ToolArcSelection
     {
-        private readonly LayerContainer _layer;
-        private readonly IArc _arc;
-        private readonly ShapeStyle _style;
-        private readonly BaseShape _point;
-        private LineShape _startLine;
-        private LineShape _endLine;
-        private EllipseShape _ellipse;
-        private PointShape _p1HelperPoint;
-        private PointShape _p2HelperPoint;
-        private PointShape _centerHelperPoint;
-        private PointShape _startHelperPoint;
-        private PointShape _endHelperPoint;
+        private readonly ILayerContainer _layer;
+        private readonly IArcShape _arc;
+        private readonly IShapeStyle _style;
+        private readonly IBaseShape _point;
+        private ILineShape _startLine;
+        private ILineShape _endLine;
+        private IEllipseShape _ellipse;
+        private IPointShape _p1HelperPoint;
+        private IPointShape _p2HelperPoint;
+        private IPointShape _centerHelperPoint;
+        private IPointShape _startHelperPoint;
+        private IPointShape _endHelperPoint;
 
         /// <summary>
         /// Initialize new instance of <see cref="ToolArcSelection"/> class.
@@ -35,7 +33,7 @@ namespace Core2D.Editor.Tools.Selection
         /// <param name="shape">The selected shape.</param>
         /// <param name="style">The selection shapes style.</param>
         /// <param name="point">The selection point shape.</param>
-        public ToolArcSelection(LayerContainer layer, IArc shape, ShapeStyle style, BaseShape point)
+        public ToolArcSelection(ILayerContainer layer, IArcShape shape, IShapeStyle style, IBaseShape point)
         {
             _layer = layer;
             _arc = shape;

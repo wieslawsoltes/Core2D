@@ -7,9 +7,9 @@ using System.Collections.Immutable;
 namespace Core2D.Wpf.Views.Custom.Lists
 {
     /// <summary>
-    /// The <see cref="ListBox"/> control for <see cref="ShapeStyle"/> items with drag and drop support.
+    /// The <see cref="ListBox"/> control for <see cref="IShapeStyle"/> items with drag and drop support.
     /// </summary>
-    public class ShapeStyleDragAndDropListBox : DragAndDropListBox<ShapeStyle>
+    public class ShapeStyleDragAndDropListBox : DragAndDropListBox<IShapeStyle>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ShapeStyleDragAndDropListBox"/> class.
@@ -24,7 +24,7 @@ namespace Core2D.Wpf.Views.Custom.Lists
         /// Updates DataContext binding to ImmutableArray collection property.
         /// </summary>
         /// <param name="array">The updated immutable array.</param>
-        protected override void UpdateDataContext(ImmutableArray<ShapeStyle> array)
+        protected override void UpdateDataContext(ImmutableArray<IShapeStyle> array)
         {
             var editor = (ProjectEditor)Tag;
 

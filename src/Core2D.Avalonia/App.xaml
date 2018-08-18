@@ -4,18 +4,17 @@
              xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:converters="clr-namespace:Core2D.Avalonia.Converters;assembly=Core2D.Avalonia"
-             xmlns:Data="clr-namespace:Core2D.Data;assembly=Core2D"
+             xmlns:DataCore="clr-namespace:Core2D.Data;assembly=Core2D"
              xmlns:Dock="clr-namespace:Dock.Model;assembly=Dock.Model"
              xmlns:Editor="clr-namespace:Core2D.Editor;assembly=Core2D.Editor"
-             xmlns:Path="clr-namespace:Core2D.Path;assembly=Core2D"
-             xmlns:Segments="clr-namespace:Core2D.Path.Segments;assembly=Core2D"
-             xmlns:Containers="clr-namespace:Core2D.Containers;assembly=Core2D"
+             xmlns:PathCore="clr-namespace:Core2D.Path;assembly=Core2D"
+             xmlns:Segments="clr-namespace:Core2D.Path.Segments;assembly=Core2D.Shapes"
+             xmlns:ContainersCore="clr-namespace:Core2D.Containers;assembly=Core2D"
              xmlns:Renderer="clr-namespace:Core2D.Renderer;assembly=Core2D"
              xmlns:SettingsTools="clr-namespace:Core2D.Editor.Tools.Settings;assembly=Core2D.Editor"
              xmlns:SettingsPath="clr-namespace:Core2D.Editor.Tools.Path.Settings;assembly=Core2D.Editor"
-             xmlns:Shape="clr-namespace:Core2D.Shape;assembly=Core2D"
-             xmlns:Shapes="clr-namespace:Core2D.Shapes;assembly=Core2D"
-             xmlns:Style="clr-namespace:Core2D.Style;assembly=Core2D"
+             xmlns:ShapesCore="clr-namespace:Core2D.Shapes;assembly=Core2D"
+             xmlns:StyleCore="clr-namespace:Core2D.Style;assembly=Core2D"
              xmlns:Views="clr-namespace:Core2D.Avalonia.Dock.Views;assembly=Core2D.Avalonia"
              xmlns:Documents="clr-namespace:Core2D.Avalonia.Dock.Documents;assembly=Core2D.Avalonia"
              xmlns:Tools="clr-namespace:Core2D.Avalonia.Dock.Tools;assembly=Core2D.Avalonia"
@@ -602,39 +601,39 @@
             <Grid/>
         </DataTemplate>
         <!-- Style -->
-        <DataTemplate DataType="Style:ArgbColor">
+        <DataTemplate DataType="StyleCore:IArgbColor">
             <style:ArgbColorControl/>
         </DataTemplate>
-        <DataTemplate DataType="Style:ArrowStyle">
+        <DataTemplate DataType="StyleCore:IArrowStyle">
             <style:ArrowStyleControl/>
         </DataTemplate>
-        <DataTemplate DataType="Style:FontStyle">
+        <DataTemplate DataType="StyleCore:IFontStyle">
             <style:FontStyleControl/>
         </DataTemplate>
-        <DataTemplate DataType="Style:TextStyle">
+        <DataTemplate DataType="StyleCore:ITextStyle">
             <style:TextStyleControl/>
         </DataTemplate>
-        <DataTemplate DataType="Style:LineFixedLength">
+        <DataTemplate DataType="StyleCore:ILineFixedLength">
             <style:LineFixedLengthControl/>
         </DataTemplate>
-        <DataTemplate DataType="Style:LineStyle">
+        <DataTemplate DataType="StyleCore:ILineStyle">
             <style:LineStyleControl/>
         </DataTemplate>
-        <DataTemplate DataType="Style:ShapeStyle">
+        <DataTemplate DataType="StyleCore:IShapeStyle">
             <style:ShapeStyleControl/>
         </DataTemplate>
         <!-- Data -->
-        <DataTemplate DataType="Data:Record">
+        <DataTemplate DataType="DataCore:IRecord">
             <data:RecordControl/>
         </DataTemplate>
-        <DataTemplate DataType="Data:Database">
+        <DataTemplate DataType="DataCore:IDatabase">
             <data:DatabaseControl/>
         </DataTemplate>
-        <DataTemplate DataType="Data:Context">
+        <DataTemplate DataType="DataCore:IContext">
             <data:DataControl/>
         </DataTemplate>
         <!-- State -->
-        <DataTemplate DataType="Shape:ShapeState">
+        <DataTemplate DataType="ShapesCore:IShapeState">
             <state:ShapeStateControl/>
         </DataTemplate>
         <!-- Renderer -->
@@ -695,41 +694,41 @@
             <settingsPath:QuadraticBezierSettingsControl/>
         </DataTemplate>
         <!-- Shapes -->
-        <DataTemplate DataType="Shapes:PointShape">
+        <DataTemplate DataType="ShapesCore:IPointShape">
             <shapes:PointControl/>
         </DataTemplate>
-        <DataTemplate DataType="Shapes:LineShape">
+        <DataTemplate DataType="ShapesCore:ILineShape">
             <shapes:LineControl/>
         </DataTemplate>
-        <DataTemplate DataType="Shapes:RectangleShape">
+        <DataTemplate DataType="ShapesCore:IRectangleShape">
             <shapes:RectangleControl/>
         </DataTemplate>
-        <DataTemplate DataType="Shapes:EllipseShape">
+        <DataTemplate DataType="ShapesCore:IEllipseShape">
             <shapes:EllipseControl/>
         </DataTemplate>
-        <DataTemplate DataType="Shapes:ImageShape">
+        <DataTemplate DataType="ShapesCore:IImageShape">
             <shapes:ImageControl/>
         </DataTemplate>
-        <DataTemplate DataType="Shapes:TextShape">
+        <DataTemplate DataType="ShapesCore:ITextShape">
             <shapes:TextControl/>
         </DataTemplate>
-        <DataTemplate DataType="Shapes:ArcShape">
+        <DataTemplate DataType="ShapesCore:IArcShape">
             <shapes:ArcControl/>
         </DataTemplate>
-        <DataTemplate DataType="Shapes:CubicBezierShape">
+        <DataTemplate DataType="ShapesCore:ICubicBezierShape">
             <shapes:CubicBezierControl/>
         </DataTemplate>
-        <DataTemplate DataType="Shapes:QuadraticBezierShape">
+        <DataTemplate DataType="ShapesCore:IQuadraticBezierShape">
             <shapes:QuadraticBezierControl/>
         </DataTemplate>
-        <DataTemplate DataType="Shapes:GroupShape">
+        <DataTemplate DataType="ShapesCore:IGroupShape">
             <shapes:GroupControl/>
         </DataTemplate>
-        <DataTemplate DataType="Shapes:PathShape">
+        <DataTemplate DataType="ShapesCore:IPathShape">
             <shapes:PathControl/>
         </DataTemplate>
         <!-- Path -->
-        <DataTemplate DataType="Path:PathSize">
+        <DataTemplate DataType="PathCore:IPathSize">
             <path:PathSizeControl/>
         </DataTemplate>
         <DataTemplate DataType="Segments:ArcSegment">
@@ -753,29 +752,29 @@
         <DataTemplate DataType="Segments:QuadraticBezierSegment">
             <path:QuadraticBezierSegmentControl/>
         </DataTemplate>
-        <DataTemplate DataType="Path:PathFigure">
+        <DataTemplate DataType="PathCore:IPathFigure">
             <path:PathFigureControl/>
         </DataTemplate>
-        <DataTemplate DataType="Path:PathGeometry">
+        <DataTemplate DataType="PathCore:IPathGeometry">
             <path:PathGeometryControl/>
         </DataTemplate>
         <!-- Containers -->
-        <DataTemplate DataType="Containers:ILibrary">
+        <DataTemplate DataType="ContainersCore:ILibrary">
             <containers:LibraryControl/>
         </DataTemplate>
-        <DataTemplate DataType="Containers:Options">
+        <DataTemplate DataType="ContainersCore:IOptions">
             <containers:OptionsControl/>
         </DataTemplate>
-        <DataTemplate DataType="Containers:ProjectContainer">
+        <DataTemplate DataType="ContainersCore:IProjectContainer">
             <containers:ProjectControl/>
         </DataTemplate>
-        <DataTemplate DataType="Containers:DocumentContainer">
+        <DataTemplate DataType="ContainersCore:IDocumentContainer">
             <containers:DocumentControl/>
         </DataTemplate>
-        <DataTemplate DataType="Containers:PageContainer">
+        <DataTemplate DataType="ContainersCore:IPageContainer">
             <containers:ContainerControl/>
         </DataTemplate>
-        <DataTemplate DataType="Containers:LayerContainer">
+        <DataTemplate DataType="ContainersCore:ILayerContainer">
             <containers:LayerControl/>
         </DataTemplate>
         <!-- Views -->
