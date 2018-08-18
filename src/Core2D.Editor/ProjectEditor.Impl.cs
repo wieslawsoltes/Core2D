@@ -3610,8 +3610,8 @@ namespace Core2D.Editor
             {
                 var items = layer.Shapes;
                 int sourceIndex = items.IndexOf(source);
-                int targetIndex = items.Length - 1;
-                if (targetIndex >= 0 && sourceIndex != targetIndex)
+                int targetIndex = 0;
+                if (sourceIndex != targetIndex)
                 {
                     Swap(source, sourceIndex, targetIndex);
                 }
@@ -3629,8 +3629,8 @@ namespace Core2D.Editor
             {
                 var items = layer.Shapes;
                 int sourceIndex = items.IndexOf(source);
-                int targetIndex = sourceIndex + 1;
-                if (targetIndex < items.Length)
+                int targetIndex = sourceIndex - 1;
+                if (targetIndex >= 0)
                 {
                     Swap(source, sourceIndex, targetIndex);
                 }
@@ -3648,8 +3648,8 @@ namespace Core2D.Editor
             {
                 var items = layer.Shapes;
                 int sourceIndex = items.IndexOf(source);
-                int targetIndex = sourceIndex - 1;
-                if (targetIndex >= 0)
+                int targetIndex = sourceIndex + 1;
+                if (targetIndex < items.Length)
                 {
                     Swap(source, sourceIndex, targetIndex);
                 }
@@ -3667,8 +3667,8 @@ namespace Core2D.Editor
             {
                 var items = layer.Shapes;
                 int sourceIndex = items.IndexOf(source);
-                int targetIndex = 0;
-                if (sourceIndex != targetIndex)
+                int targetIndex = items.Length - 1;
+                if (targetIndex >= 0 && sourceIndex != targetIndex)
                 {
                     Swap(source, sourceIndex, targetIndex);
                 }
