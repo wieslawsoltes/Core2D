@@ -10,9 +10,9 @@ using CSV = CsvHelper;
 namespace Core2D.TextFieldReader.CsvHelper
 {
     /// <summary>
-    /// Defines the text fields to <see cref="Database"/> reader.
+    /// Defines the text fields to <see cref="IDatabase"/> reader.
     /// </summary>
-    public sealed class CsvHelperReader : ITextFieldReader<Database>
+    public sealed class CsvHelperReader : ITextFieldReader<IDatabase>
     {
         private static IEnumerable<string[]> ReadInternal(System.IO.Stream stream)
         {
@@ -42,8 +42,8 @@ namespace Core2D.TextFieldReader.CsvHelper
         /// </summary>
         /// <param name="path">The fields file path.</param>
         /// <param name="fs">The file system.</param>
-        /// <returns>The new instance of the <see cref="Database"/> class</returns>
-        Database ITextFieldReader<Database>.Read(string path, IFileSystem fs)
+        /// <returns>The new instance of the <see cref="IDatabase"/> class</returns>
+        IDatabase ITextFieldReader<IDatabase>.Read(string path, IFileSystem fs)
         {
             using (var stream = fs.Open(path))
             {

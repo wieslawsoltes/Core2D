@@ -19,7 +19,7 @@ namespace Core2D.Shapes
         private MatrixObject _transform;
         private bool _isStroked;
         private bool _isFilled;
-        private Context _data;
+        private IContext _data;
 
         /// <inheritdoc/>
         public abstract Type TargetType { get; }
@@ -67,7 +67,7 @@ namespace Core2D.Shapes
         }
 
         /// <inheritdoc/>
-        public virtual Context Data
+        public virtual IContext Data
         {
             get => _data;
             set => Update(ref _data, value);

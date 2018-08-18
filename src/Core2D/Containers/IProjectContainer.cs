@@ -36,7 +36,7 @@ namespace Core2D.Containers
         /// <summary>
         /// Gets or sets project databases.
         /// </summary>
-        ImmutableArray<Database> Databases { get; set; }
+        ImmutableArray<IDatabase> Databases { get; set; }
 
         /// <summary>
         /// Gets or sets project templates.
@@ -61,7 +61,7 @@ namespace Core2D.Containers
         /// <summary>
         /// Gets or sets project current database.
         /// </summary>
-        Database CurrentDatabase { get; set; }
+        IDatabase CurrentDatabase { get; set; }
 
         /// <summary>
         /// Gets or sets project current template.
@@ -105,7 +105,7 @@ namespace Core2D.Containers
         /// Set current database.
         /// </summary>
         /// <param name="db">The database instance.</param>
-        void SetCurrentDatabase(Database db);
+        void SetCurrentDatabase(IDatabase db);
 
         /// <summary>
         /// Set current group library.

@@ -97,7 +97,7 @@ namespace Core2D.Wpf.Views
             if (!e.Data.GetDataPresent(DataFormats.FileDrop)
                 && !e.Data.GetDataPresent(typeof(IBaseShape))
                 && !e.Data.GetDataPresent(typeof(IGroupShape))
-                && !e.Data.GetDataPresent(typeof(Record))
+                && !e.Data.GetDataPresent(typeof(IRecord))
                 && !e.Data.GetDataPresent(typeof(IShapeStyle)))
             {
                 e.Effects = DragDropEffects.None;
@@ -161,11 +161,11 @@ namespace Core2D.Wpf.Views
             }
 
             // Records.
-            if (e.Data.GetDataPresent(typeof(Record)))
+            if (e.Data.GetDataPresent(typeof(IRecord)))
             {
                 try
                 {
-                    if (e.Data.GetData(typeof(Record)) is Record record)
+                    if (e.Data.GetData(typeof(IRecord)) is IRecord record)
                     {
                         var p = e.GetPosition(drawableControl);
                         _projectEditor.OnDropRecord(record, p.X, p.Y);

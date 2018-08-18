@@ -11,10 +11,10 @@ namespace Core2D.Data
     /// <summary>
     /// Database record.
     /// </summary>
-    public class Record : ObservableObject
+    public class Record : ObservableObject, IRecord
     {
-        private ImmutableArray<Value> _values;
-        private Database _owner;
+        private ImmutableArray<IValue> _values;
+        private IDatabase _owner;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Record"/> class.
@@ -22,23 +22,19 @@ namespace Core2D.Data
         public Record()
             : base()
         {
-            _values = ImmutableArray.Create<Value>();
+            _values = ImmutableArray.Create<IValue>();
         }
 
-        /// <summary>
-        /// Gets or sets record values.
-        /// </summary>
+        /// <inheritdoc/>
         [Content]
-        public ImmutableArray<Value> Values
+        public ImmutableArray<IValue> Values
         {
             get => _values;
             set => Update(ref _values, value);
         }
 
-        /// <summary>
-        /// Gets or sets record owner.
-        /// </summary>
-        public Database Owner
+        /// <inheritdoc/>
+        public IDatabase Owner
         {
             get => _owner;
             set => Update(ref _owner, value);
@@ -56,7 +52,7 @@ namespace Core2D.Data
         /// <param name="owner">The record owner.</param>
         /// <param name="values">The record values.</param>
         /// <returns>The new instance of the <see cref="Record"/> class.</returns>
-        public static Record Create(Database owner, ImmutableArray<Value> values)
+        public static IRecord Create(IDatabase owner, ImmutableArray<IValue> values)
         {
             return new Record()
             {
@@ -72,7 +68,7 @@ namespace Core2D.Data
         /// <param name="id">The record Id.</param>
         /// <param name="values">The record values.</param>
         /// <returns>The new instance of the <see cref="Record"/> class.</returns>
-        public static Record Create(Database owner, string id, ImmutableArray<Value> values)
+        public static IRecord Create(IDatabase owner, string id, ImmutableArray<IValue> values)
         {
             var record = new Record()
             {
@@ -94,7 +90,7 @@ namespace Core2D.Data
         /// <param name="owner">The record owner.</param>
         /// <param name="value">The record value.</param>
         /// <returns>The new instance of the <see cref="Record"/> class.</returns>
-        public static Record Create(Database owner, string value)
+        public static IRecord Create(IDatabase owner, string value)
         {
             return new Record()
             {

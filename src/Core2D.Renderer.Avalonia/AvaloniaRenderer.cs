@@ -628,8 +628,8 @@ namespace Core2D.Renderer.Avalonia
             if (style == null)
                 return;
 
-            var properties = (ImmutableArray<Property>)db;
-            var record = (Record)r;
+            var properties = (ImmutableArray<IProperty>)db;
+            var record = (IRecord)r;
             var tbind = text.BindText(properties, record);
             if (string.IsNullOrEmpty(tbind))
                 return;

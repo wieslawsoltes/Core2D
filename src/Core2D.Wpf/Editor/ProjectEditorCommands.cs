@@ -551,8 +551,8 @@ namespace Core2D.Wpf.Editor
             ExportCommand = new Command((p) => true, (p) => serviceProvider.GetService<ProjectEditor>().Platform.OnExport(p));
             ExitCommand = new Command((p) => true, (p) => serviceProvider.GetService<ProjectEditor>().Platform.OnExit());
             ImportDataCommand = new Command((p) => true, (p) => serviceProvider.GetService<ProjectEditor>().Platform.OnImportData(p as IProjectContainer));
-            ExportDataCommand = new Command((p) => true, (p) => serviceProvider.GetService<ProjectEditor>().Platform.OnExportData(p as Database));
-            UpdateDataCommand = new Command((p) => true, (p) => serviceProvider.GetService<ProjectEditor>().Platform.OnUpdateData(p as Database));
+            ExportDataCommand = new Command((p) => true, (p) => serviceProvider.GetService<ProjectEditor>().Platform.OnExportData(p as IDatabase));
+            UpdateDataCommand = new Command((p) => true, (p) => serviceProvider.GetService<ProjectEditor>().Platform.OnUpdateData(p as IDatabase));
 
             UndoCommand = new Command((p) => true, (p) => serviceProvider.GetService<ProjectEditor>().OnUndo());
             RedoCommand = new Command((p) => true, (p) => serviceProvider.GetService<ProjectEditor>().OnRedo());
@@ -598,17 +598,17 @@ namespace Core2D.Wpf.Editor
             CloneStyleCommand = new Command((p) => true, (p) => serviceProvider.GetService<ProjectEditor>().OnToggleCloneStyle());
 
             AddDatabaseCommand = new Command((p) => true, (p) => serviceProvider.GetService<ProjectEditor>().OnAddDatabase());
-            RemoveDatabaseCommand = new Command((p) => true, (p) => serviceProvider.GetService<ProjectEditor>().OnRemoveDatabase(p as Database));
-            AddColumnCommand = new Command((p) => true, (p) => serviceProvider.GetService<ProjectEditor>().OnAddColumn(p as Database));
-            RemoveColumnCommand = new Command((p) => true, (p) => serviceProvider.GetService<ProjectEditor>().OnRemoveColumn(p as Column));
-            AddRecordCommand = new Command((p) => true, (p) => serviceProvider.GetService<ProjectEditor>().OnAddRecord(p as Database));
-            RemoveRecordCommand = new Command((p) => true, (p) => serviceProvider.GetService<ProjectEditor>().OnRemoveRecord(p as Record));
-            ResetRecordCommand = new Command((p) => true, (p) => serviceProvider.GetService<ProjectEditor>().OnResetRecord(p as Context));
-            ApplyRecordCommand = new Command((p) => true, (p) => serviceProvider.GetService<ProjectEditor>().OnApplyRecord(p as Record));
+            RemoveDatabaseCommand = new Command((p) => true, (p) => serviceProvider.GetService<ProjectEditor>().OnRemoveDatabase(p as IDatabase));
+            AddColumnCommand = new Command((p) => true, (p) => serviceProvider.GetService<ProjectEditor>().OnAddColumn(p as IDatabase));
+            RemoveColumnCommand = new Command((p) => true, (p) => serviceProvider.GetService<ProjectEditor>().OnRemoveColumn(p as IColumn));
+            AddRecordCommand = new Command((p) => true, (p) => serviceProvider.GetService<ProjectEditor>().OnAddRecord(p as IDatabase));
+            RemoveRecordCommand = new Command((p) => true, (p) => serviceProvider.GetService<ProjectEditor>().OnRemoveRecord(p as IRecord));
+            ResetRecordCommand = new Command((p) => true, (p) => serviceProvider.GetService<ProjectEditor>().OnResetRecord(p as IContext));
+            ApplyRecordCommand = new Command((p) => true, (p) => serviceProvider.GetService<ProjectEditor>().OnApplyRecord(p as IRecord));
             AddShapeCommand = new Command((p) => true, (p) => serviceProvider.GetService<ProjectEditor>().OnAddShape(p as IBaseShape));
             RemoveShapeCommand = new Command((p) => true, (p) => serviceProvider.GetService<ProjectEditor>().OnRemoveShape(p as IBaseShape));
-            AddPropertyCommand = new Command((p) => true, (p) => serviceProvider.GetService<ProjectEditor>().OnAddProperty(p as Context));
-            RemovePropertyCommand = new Command((p) => true, (p) => serviceProvider.GetService<ProjectEditor>().OnRemoveProperty(p as Property));
+            AddPropertyCommand = new Command((p) => true, (p) => serviceProvider.GetService<ProjectEditor>().OnAddProperty(p as IContext));
+            RemovePropertyCommand = new Command((p) => true, (p) => serviceProvider.GetService<ProjectEditor>().OnRemoveProperty(p as IProperty));
             AddGroupLibraryCommand = new Command((p) => true, (p) => serviceProvider.GetService<ProjectEditor>().OnAddGroupLibrary());
             RemoveGroupLibraryCommand = new Command((p) => true, (p) => serviceProvider.GetService<ProjectEditor>().OnRemoveGroupLibrary(p as ILibrary<IGroupShape>));
             AddGroupCommand = new Command((p) => true, (p) => serviceProvider.GetService<ProjectEditor>().OnAddGroup(p as ILibrary<IGroupShape>));

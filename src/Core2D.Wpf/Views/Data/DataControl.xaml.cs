@@ -31,7 +31,7 @@ namespace Core2D.Wpf.Views.Data
             DragEnter +=
                 (s, e) =>
                 {
-                    if (!e.Data.GetDataPresent(typeof(Record)))
+                    if (!e.Data.GetDataPresent(typeof(IRecord)))
                     {
                         e.Effects = DragDropEffects.None;
                         e.Handled = true;
@@ -41,15 +41,15 @@ namespace Core2D.Wpf.Views.Data
             Drop +=
                 (s, e) =>
                 {
-                    if (e.Data.GetDataPresent(typeof(Record)))
+                    if (e.Data.GetDataPresent(typeof(IRecord)))
                     {
                         try
                         {
-                            if (e.Data.GetData(typeof(Record)) is Record record)
+                            if (e.Data.GetData(typeof(IRecord)) is IRecord record)
                             {
                                 if (DataContext != null)
                                 {
-                                    if (DataContext is Context data)
+                                    if (DataContext is IContext data)
                                     {
                                         data.Record = record;
                                     }

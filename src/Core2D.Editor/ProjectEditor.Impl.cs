@@ -311,7 +311,7 @@ namespace Core2D.Editor
         /// </summary>
         /// <param name="path">The database file path.</param>
         /// <param name="database">The database object.</param>
-        public void OnExportData(string path, Database database)
+        public void OnExportData(string path, IDatabase database)
         {
             try
             {
@@ -328,7 +328,7 @@ namespace Core2D.Editor
         /// </summary>
         /// <param name="path">The database file path.</param>
         /// <param name="database">The database object.</param>
-        public void OnUpdateData(string path, Database database)
+        public void OnUpdateData(string path, IDatabase database)
         {
             try
             {
@@ -406,24 +406,23 @@ namespace Core2D.Editor
                 TryToRestoreRecords(shapes);
                 Project.AddGroupLibraries(gll);
             }
-            else if (item is Context)
+            else if (item is IContext context)
             {
                 if (Renderers?[0]?.State?.SelectedShape != null || (Renderers?[0]?.State?.SelectedShapes?.Count > 0))
                 {
-                    OnApplyData(item as Context);
+                    OnApplyData(context);
                 }
                 else
                 {
                     var container = Project?.CurrentContainer;
                     if (container != null)
                     {
-                        container.Data = item as Context;
+                        container.Data = context;
                     }
                 }
             }
-            else if (item is Database)
+            else if (item is IDatabase db)
             {
-                var db = item as Database;
                 Project?.AddDatabase(db);
                 Project?.SetCurrentDatabase(db);
             }
@@ -1377,7 +1376,7 @@ namespace Core2D.Editor
         /// Remove database.
         /// </summary>
         /// <param name="db">The database to remove.</param>
-        public void OnRemoveDatabase(Database db)
+        public void OnRemoveDatabase(IDatabase db)
         {
             Project.RemoveDatabase(db);
             Project.SetCurrentDatabase(Project.Databases.FirstOrDefault());
@@ -1387,7 +1386,7 @@ namespace Core2D.Editor
         /// Add column to database.
         /// </summary>
         /// <param name="db">The records database.</param>
-        public void OnAddColumn(Database db)
+        public void OnAddColumn(IDatabase db)
         {
             Project.AddColumn(db, Column.Create(db, Constants.DefaulColumnName));
         }
@@ -1396,7 +1395,7 @@ namespace Core2D.Editor
         /// Remove column from database.
         /// </summary>
         /// <param name="column">The column to remove.</param>
-        public void OnRemoveColumn(Column column)
+        public void OnRemoveColumn(IColumn column)
         {
             Project.RemoveColumn(column);
         }
@@ -1405,7 +1404,7 @@ namespace Core2D.Editor
         /// Add record to database.
         /// </summary>
         /// <param name="db">The records database.</param>
-        public void OnAddRecord(Database db)
+        public void OnAddRecord(IDatabase db)
         {
             Project.AddRecord(db, Record.Create(db, Constants.DefaulValue));
         }
@@ -1414,7 +1413,7 @@ namespace Core2D.Editor
         /// Remove record from database.
         /// </summary>
         /// <param name="record">The data record.</param>
-        public void OnRemoveRecord(Record record)
+        public void OnRemoveRecord(IRecord record)
         {
             Project.RemoveRecord(record);
         }
@@ -1423,7 +1422,7 @@ namespace Core2D.Editor
         /// Reset data context record.
         /// </summary>
         /// <param name="data">The data context.</param>
-        public void OnResetRecord(Context data)
+        public void OnResetRecord(IContext data)
         {
             Project.ResetRecord(data);
         }
@@ -1432,7 +1431,7 @@ namespace Core2D.Editor
         /// Set current record as selected shape(s) or current page data record.
         /// </summary>
         /// <param name="record">The data record.</param>
-        public void OnApplyRecord(Record record)
+        public void OnApplyRecord(IRecord record)
         {
             if (record != null)
             {
@@ -1447,7 +1446,7 @@ namespace Core2D.Editor
                 {
                     foreach (var shape in Renderers[0].State.SelectedShapes)
                     {
-                        Project.ApplyRecord((Context)shape.Data, record);
+                        Project.ApplyRecord(shape.Data, record);
                     }
                 }
 
@@ -1467,7 +1466,7 @@ namespace Core2D.Editor
         /// Add property to data context.
         /// </summary>
         /// <param name="data">The data context.</param>
-        public void OnAddProperty(Context data)
+        public void OnAddProperty(IContext data)
         {
             Project.AddProperty(data, Property.Create(data, Constants.DefaulPropertyName, Constants.DefaulValue));
         }
@@ -1476,7 +1475,7 @@ namespace Core2D.Editor
         /// Remove property from data context.
         /// </summary>
         /// <param name="property">The property to remove.</param>
-        public void OnRemoveProperty(Property property)
+        public void OnRemoveProperty(IProperty property)
         {
             Project.RemoveProperty(property);
         }
@@ -1632,7 +1631,7 @@ namespace Core2D.Editor
         /// Set current data as selected shape data.
         /// </summary>
         /// <param name="data">The data item.</param>
-        public void OnApplyData(Context data)
+        public void OnApplyData(IContext data)
         {
             if (data != null)
             {
@@ -2342,7 +2341,7 @@ namespace Core2D.Editor
             }
         }
 
-        private IDictionary<string, Record> GenerateRecordDictionaryById()
+        private IDictionary<string, IRecord> GenerateRecordDictionaryById()
         {
             return Project?.Databases
                 .Where(d => d?.Records != null && d?.Records.Length > 0)
@@ -2379,14 +2378,14 @@ namespace Core2D.Editor
                         // Create Imported database.
                         if (Project?.CurrentDatabase == null)
                         {
-                            var db = Database.Create(Constants.ImportedDatabaseName, (ImmutableArray<Column>)shape.Data.Record.Owner.Columns);
+                            var db = Database.Create(Constants.ImportedDatabaseName, (ImmutableArray<IColumn>)shape.Data.Record.Owner.Columns);
                             Project.AddDatabase(db);
                             Project.SetCurrentDatabase(db);
                         }
 
                         // Add missing data record.
                         shape.Data.Record.Owner = Project.CurrentDatabase;
-                        Project?.AddRecord(Project?.CurrentDatabase, (Record)shape.Data.Record);
+                        Project?.AddRecord(Project?.CurrentDatabase, (IRecord)shape.Data.Record);
 
                         // Recreate records dictionary.
                         records = GenerateRecordDictionaryById();
@@ -2755,14 +2754,14 @@ namespace Core2D.Editor
         }
 
         /// <summary>
-        /// Drop <see cref="Record"/> object in current container at specified location.
+        /// Drop <see cref="IRecord"/> object in current container at specified location.
         /// </summary>
-        /// <param name="record">The <see cref="Record"/> object.</param>
+        /// <param name="record">The <see cref="IRecord"/> object.</param>
         /// <param name="x">The X coordinate in container.</param>
         /// <param name="y">The Y coordinate in container.</param>
         /// <param name="bExecute">The flag indicating whether to execute action.</param>
         /// <returns>Returns true if success.</returns>
-        public bool OnDropRecord(Record record, double x, double y, bool bExecute = true)
+        public bool OnDropRecord(IRecord record, double x, double y, bool bExecute = true)
         {
             try
             {
@@ -2808,12 +2807,12 @@ namespace Core2D.Editor
         }
 
         /// <summary>
-        /// Drop <see cref="Record"/> object in current container at specified location as group bound to this record.
+        /// Drop <see cref="IRecord"/> object in current container at specified location as group bound to this record.
         /// </summary>
-        /// <param name="record">The <see cref="Record"/> object.</param>
+        /// <param name="record">The <see cref="IRecord"/> object.</param>
         /// <param name="x">The X coordinate in container.</param>
         /// <param name="y">The Y coordinate in container.</param>
-        public void OnDropRecordAsGroup(Record record, double x, double y)
+        public void OnDropRecordAsGroup(IRecord record, double x, double y)
         {
             var selected = Project.CurrentStyleLibrary.Selected;
             var style = Project.Options.CloneStyle ? selected.Clone() : selected;

@@ -42,7 +42,7 @@ namespace Core2D.Avalonia.Dock.Handlers
                 {
                     case IBaseShape shape:
                         return editor?.OnDropShape(shape, point.X, point.Y, bExecute) == true;
-                    case Record record:
+                    case IRecord record:
                         return editor?.OnDropRecord(record, point.X, point.Y, bExecute) == true;
                     case IShapeStyle style:
                         return editor?.OnDropStyle(style, point.X, point.Y, bExecute) == true;

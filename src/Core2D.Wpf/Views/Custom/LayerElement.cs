@@ -14,32 +14,32 @@ namespace Core2D.Wpf.Views.Custom
     public class LayerElement : FrameworkElement
     {
         /// <summary>
-        /// Gets the <see cref="Context"/> from <see cref="DependencyProperty"/> object.
+        /// Gets the <see cref="IContext"/> from <see cref="DependencyProperty"/> object.
         /// </summary>
         /// <param name="obj">The <see cref="DependencyProperty"/> object.</param>
-        /// <returns>The <see cref="Context"/> value.</returns>
-        public static Context GetData(DependencyObject obj)
+        /// <returns>The <see cref="IContext"/> value.</returns>
+        public static IContext GetData(DependencyObject obj)
         {
-            return (Context)obj.GetValue(DataProperty);
+            return (IContext)obj.GetValue(DataProperty);
         }
 
         /// <summary>
-        /// Sets the <see cref="DependencyProperty"/> object value as <see cref="Context"/>.
+        /// Sets the <see cref="DependencyProperty"/> object value as <see cref="IContext"/>.
         /// </summary>
         /// <param name="obj">The <see cref="DependencyProperty"/> object.</param>
-        /// <param name="value">The <see cref="Context"/> value.</param>
-        public static void SetData(DependencyObject obj, Context value)
+        /// <param name="value">The <see cref="IContext"/> value.</param>
+        public static void SetData(DependencyObject obj, IContext value)
         {
             obj.SetValue(DataProperty, value);
         }
 
         /// <summary>
-        /// The attached <see cref="DependencyProperty"/> for <see cref="Context"/> type.
+        /// The attached <see cref="DependencyProperty"/> for <see cref="IContext"/> type.
         /// </summary>
         public static readonly DependencyProperty DataProperty =
             DependencyProperty.RegisterAttached(
                 "Data",
-                typeof(Context),
+                typeof(IContext),
                 typeof(LayerElement),
                 new FrameworkPropertyMetadata(
                     null,

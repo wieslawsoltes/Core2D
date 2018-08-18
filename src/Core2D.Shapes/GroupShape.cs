@@ -14,14 +14,14 @@ namespace Core2D.Shapes
     /// </summary>
     public class GroupShape : ConnectableShape, IGroupShape
     {
-        private ImmutableArray<Property> _shapesProperties;
+        private ImmutableArray<IProperty> _shapesProperties;
         private ImmutableArray<IBaseShape> _shapes;
 
         /// <inheritdoc/>
         public override Type TargetType => typeof(IGroupShape);
 
         /// <inheritdoc/>
-        public ImmutableArray<Property> ShapesProperties => GetShapeProperties();
+        public ImmutableArray<IProperty> ShapesProperties => GetShapeProperties();
 
         /// <inheritdoc/>
         public ImmutableArray<IBaseShape> Shapes
@@ -45,13 +45,13 @@ namespace Core2D.Shapes
             _shapes = ImmutableArray.Create<IBaseShape>();
         }
 
-        private ImmutableArray<Property> GetShapeProperties()
+        private ImmutableArray<IProperty> GetShapeProperties()
         {
             if (_shapesProperties == null)
             {
                 if (_shapes != null)
                 {
-                    var builder = ImmutableArray.CreateBuilder<Property>();
+                    var builder = ImmutableArray.CreateBuilder<IProperty>();
 
                     foreach (var shape in _shapes)
                     {

@@ -43,8 +43,8 @@ namespace Core2D.Editor
         private readonly Lazy<IJsonSerializer> _jsonSerializer;
         private readonly Lazy<IXamlSerializer> _xamlSerializer;
         private readonly Lazy<ImmutableArray<IFileWriter>> _fileWriters;
-        private readonly Lazy<ITextFieldReader<Database>> _csvReader;
-        private readonly Lazy<ITextFieldWriter<Database>> _csvWriter;
+        private readonly Lazy<ITextFieldReader<IDatabase>> _csvReader;
+        private readonly Lazy<ITextFieldWriter<IDatabase>> _csvWriter;
         private readonly Lazy<IImageImporter> _imageImporter;
         private readonly Lazy<IScriptRunner> _scriptRunner;
         private readonly Lazy<IProjectEditorPlatform> _platform;
@@ -213,12 +213,12 @@ namespace Core2D.Editor
         /// <summary>
         /// Gets Csv file reader.
         /// </summary>
-        public ITextFieldReader<Database> CsvReader => _csvReader.Value;
+        public ITextFieldReader<IDatabase> CsvReader => _csvReader.Value;
 
         /// <summary>
         /// Gets Csv file writer.
         /// </summary>
-        public ITextFieldWriter<Database> CsvWriter => _csvWriter.Value;
+        public ITextFieldWriter<IDatabase> CsvWriter => _csvWriter.Value;
 
         /// <summary>
         /// Gets image key importer.
@@ -266,8 +266,8 @@ namespace Core2D.Editor
             _jsonSerializer = _serviceProvider.GetServiceLazily<IJsonSerializer>();
             _xamlSerializer = _serviceProvider.GetServiceLazily<IXamlSerializer>();
             _fileWriters = _serviceProvider.GetServiceLazily<IFileWriter[], ImmutableArray<IFileWriter>>((writers) => writers.ToImmutableArray());
-            _csvReader = _serviceProvider.GetServiceLazily<ITextFieldReader<Database>>();
-            _csvWriter = _serviceProvider.GetServiceLazily<ITextFieldWriter<Database>>();
+            _csvReader = _serviceProvider.GetServiceLazily<ITextFieldReader<IDatabase>>();
+            _csvWriter = _serviceProvider.GetServiceLazily<ITextFieldWriter<IDatabase>>();
             _imageImporter = _serviceProvider.GetServiceLazily<IImageImporter>();
             _scriptRunner = _serviceProvider.GetServiceLazily<IScriptRunner>();
             _platform = _serviceProvider.GetServiceLazily<IProjectEditorPlatform>();

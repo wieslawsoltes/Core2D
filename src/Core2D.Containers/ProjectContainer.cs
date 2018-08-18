@@ -21,12 +21,12 @@ namespace Core2D.Containers
         private IHistory _history;
         private ImmutableArray<ILibrary<IShapeStyle>> _styleLibraries;
         private ImmutableArray<ILibrary<IGroupShape>> _groupLibraries;
-        private ImmutableArray<Database> _databases;
+        private ImmutableArray<IDatabase> _databases;
         private ImmutableArray<IPageContainer> _templates;
         private ImmutableArray<IDocumentContainer> _documents;
         private ILibrary<IShapeStyle> _currentStyleLibrary;
         private ILibrary<IGroupShape> _currentGroupLibrary;
-        private Database _currentDatabase;
+        private IDatabase _currentDatabase;
         private IPageContainer _currentTemplate;
         private IDocumentContainer _currentDocument;
         private IPageContainer _currentContainer;
@@ -61,7 +61,7 @@ namespace Core2D.Containers
         }
 
         /// <inheritdoc/>
-        public ImmutableArray<Database> Databases
+        public ImmutableArray<IDatabase> Databases
         {
             get => _databases;
             set => Update(ref _databases, value);
@@ -97,7 +97,7 @@ namespace Core2D.Containers
         }
 
         /// <inheritdoc/>
-        public Database CurrentDatabase
+        public IDatabase CurrentDatabase
         {
             get => _currentDatabase;
             set => Update(ref _currentDatabase, value);
@@ -199,7 +199,7 @@ namespace Core2D.Containers
             _options = Containers.Options.Create();
             _styleLibraries = ImmutableArray.Create<ILibrary<IShapeStyle>>();
             _groupLibraries = ImmutableArray.Create<ILibrary<IGroupShape>>();
-            _databases = ImmutableArray.Create<Database>();
+            _databases = ImmutableArray.Create<IDatabase>();
             _templates = ImmutableArray.Create<IPageContainer>();
             _documents = ImmutableArray.Create<IDocumentContainer>();
         }
@@ -222,7 +222,7 @@ namespace Core2D.Containers
         public void SetCurrentTemplate(IPageContainer template) => CurrentTemplate = template;
 
         /// <inheritdoc/>
-        public void SetCurrentDatabase(Database db) => CurrentDatabase = db;
+        public void SetCurrentDatabase(IDatabase db) => CurrentDatabase = db;
 
         /// <inheritdoc/>
         public void SetCurrentGroupLibrary(ILibrary<IGroupShape> library) => CurrentGroupLibrary = library;

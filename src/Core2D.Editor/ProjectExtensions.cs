@@ -423,7 +423,7 @@ namespace Core2D.Editor
         /// <param name="project">The project instance.</param>
         /// <param name="data">The data instance.</param>
         /// <param name="property">The property instance.</param>
-        public static void AddProperty(this IProjectContainer project, Context data, Property property)
+        public static void AddProperty(this IProjectContainer project, IContext data, IProperty property)
         {
             if (data?.Properties != null && property != null)
             {
@@ -439,7 +439,7 @@ namespace Core2D.Editor
         /// </summary>
         /// <param name="project">The project instance.</param>
         /// <param name="property">The property instance.</param>
-        public static void RemoveProperty(this IProjectContainer project, Property property)
+        public static void RemoveProperty(this IProjectContainer project, IProperty property)
         {
             var data = property?.Owner;
             if (data != null && data.Properties != null)
@@ -456,7 +456,7 @@ namespace Core2D.Editor
         /// </summary>
         /// <param name="project">The project instance.</param>
         /// <param name="db">The database instance.</param>
-        public static void AddDatabase(this IProjectContainer project, Database db)
+        public static void AddDatabase(this IProjectContainer project, IDatabase db)
         {
             if (project?.Databases != null && db != null)
             {
@@ -471,8 +471,8 @@ namespace Core2D.Editor
         /// Remove database.
         /// </summary>
         /// <param name="project">The project instance.</param>
-        /// <param name="db">The <see cref="Database"/> to remove.</param>
-        public static void RemoveDatabase(this IProjectContainer project, Database db)
+        /// <param name="db">The <see cref="IDatabase"/> to remove.</param>
+        public static void RemoveDatabase(this IProjectContainer project, IDatabase db)
         {
             if (project?.Databases != null && db != null)
             {
@@ -489,11 +489,11 @@ namespace Core2D.Editor
         /// <param name="project">The project instance.</param>
         /// <param name="destination">The destination database.</param>
         /// <param name="source">The source database.</param>
-        public static void UpdateDatabase(this IProjectContainer project, Database destination, Database source)
+        public static void UpdateDatabase(this IProjectContainer project, IDatabase destination, IDatabase source)
         {
             if (destination != null && source != null)
             {
-                bool isDirty = Database.Update(destination, source, out var records);
+                bool isDirty = destination.Update(source, out var records);
 
                 if (isDirty && records != null)
                 {
@@ -516,7 +516,7 @@ namespace Core2D.Editor
         /// <param name="project">The project instance.</param>
         /// <param name="db">The database instance.</param>
         /// <param name="column">The column instance.</param>
-        public static void AddColumn(this IProjectContainer project, Database db, Column column)
+        public static void AddColumn(this IProjectContainer project, IDatabase db, IColumn column)
         {
             if (db?.Columns != null && column != null)
             {
@@ -531,8 +531,8 @@ namespace Core2D.Editor
         /// Remove column from database columns collection.
         /// </summary>
         /// <param name="project">The project instance.</param>
-        /// <param name="column">The <see cref="Column"/> to remove.</param>
-        public static void RemoveColumn(this IProjectContainer project, Column column)
+        /// <param name="column">The <see cref="IColumn"/> to remove.</param>
+        public static void RemoveColumn(this IProjectContainer project, IColumn column)
         {
             var db = column?.Owner;
             if (db != null && db.Columns != null)
@@ -550,7 +550,7 @@ namespace Core2D.Editor
         /// <param name="project">The project instance.</param>
         /// <param name="db">The database instance.</param>
         /// <param name="record">The record instance.</param>
-        public static void AddRecord(this IProjectContainer project, Database db, Record record)
+        public static void AddRecord(this IProjectContainer project, IDatabase db, IRecord record)
         {
             if (db?.Records != null)
             {
@@ -566,7 +566,7 @@ namespace Core2D.Editor
         /// </summary>
         /// <param name="project">The project instance.</param>
         /// <param name="record">The record instance.</param>
-        public static void RemoveRecord(this IProjectContainer project, Record record)
+        public static void RemoveRecord(this IProjectContainer project, IRecord record)
         {
             var db = record?.Owner;
             if (db != null && db.Records != null)
@@ -583,13 +583,13 @@ namespace Core2D.Editor
         /// </summary>
         /// <param name="project">The project instance.</param>
         /// <param name="data">The data instance.</param>
-        public static void ResetRecord(this IProjectContainer project, Context data)
+        public static void ResetRecord(this IProjectContainer project, IContext data)
         {
             var record = data?.Record;
             if (record != null)
             {
                 var previous = record;
-                var next = default(Record);
+                var next = default(IRecord);
                 project?.History?.Snapshot(previous, next, (p) => data.Record = p);
                 data.Record = next;
             }
@@ -601,7 +601,7 @@ namespace Core2D.Editor
         /// <param name="project">The project instance.</param>
         /// <param name="data">The data instance.</param>
         /// <param name="record">The record instance.</param>
-        public static void ApplyRecord(this IProjectContainer project, Context data, Record record)
+        public static void ApplyRecord(this IProjectContainer project, IContext data, IRecord record)
         {
             if (data != null && record != null)
             {
@@ -618,7 +618,7 @@ namespace Core2D.Editor
         /// <param name="project">The project instance.</param>
         /// <param name="shape">The shape instance.</param>
         /// <param name="data">The data instance.</param>
-        public static void ApplyData(this IProjectContainer project, IBaseShape shape, Context data)
+        public static void ApplyData(this IProjectContainer project, IBaseShape shape, IContext data)
         {
             if (shape != null && data != null)
             {

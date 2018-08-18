@@ -76,19 +76,19 @@ namespace Core2D.Editor.Designer
         public static IShapeState State { get; set; }
 
         /// <summary>
-        /// The design time <see cref="Data.Database"/>.
+        /// The design time <see cref="Data.IDatabase"/>.
         /// </summary>
-        public static Database Database { get; set; }
+        public static IDatabase Database { get; set; }
 
         /// <summary>
-        /// The design time <see cref="Data.Context"/>.
+        /// The design time <see cref="Data.IContext"/>.
         /// </summary>
-        public static Context Data { get; set; }
+        public static IContext Data { get; set; }
 
         /// <summary>
-        /// The design time <see cref="Data.Record"/>.
+        /// The design time <see cref="Data.IRecord"/>.
         /// </summary>
-        public static Record Record { get; set; }
+        public static IRecord Record { get; set; }
 
         /// <summary>
         /// The design time <see cref="Style.ArgbColor"/>.
@@ -255,19 +255,19 @@ namespace Core2D.Editor.Designer
 
             // Data
 
-            var db = Database.Create("Db");
+            var db = Core2D.Data.Database.Create("Db");
             var fields = new string[] { "Column0", "Column1" };
             var columns = ImmutableArray.CreateRange(fields.Select(c => Column.Create(db, c)));
             db.Columns = columns;
             var values = Enumerable.Repeat("<empty>", db.Columns.Length).Select(c => Value.Create(c));
-            var record = Record.Create(
+            var record = Core2D.Data.Record.Create(
                 db,
                 ImmutableArray.CreateRange(values));
             db.Records = db.Records.Add(record);
             db.CurrentRecord = record;
 
             Database = db;
-            Data = Context.Create(record);
+            Data = Core2D.Data.Context.Create(record);
             Record = record;
 
             // Project

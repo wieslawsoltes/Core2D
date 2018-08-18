@@ -95,13 +95,13 @@ namespace Core2D.Editor
         /// Export database.
         /// </summary>
         /// <param name="db">The database to export.</param>
-        void OnExportData(Database db);
+        void OnExportData(IDatabase db);
 
         /// <summary>
         /// Update database.
         /// </summary>
         /// <param name="db">The database to update.</param>
-        void OnUpdateData(Database db);
+        void OnUpdateData(IDatabase db);
 
         /// <summary>
         /// Show document viewer.

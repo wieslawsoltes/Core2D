@@ -13,7 +13,7 @@ namespace Core2D.Shapes
         /// <summary>
         /// Gets all properties from <see cref="Shapes"/> collection.
         /// </summary>
-        ImmutableArray<Property> ShapesProperties { get; }
+        ImmutableArray<IProperty> ShapesProperties { get; }
 
         /// <summary>
         ///  Gets or sets shapes collection.

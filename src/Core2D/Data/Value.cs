@@ -9,13 +9,11 @@ namespace Core2D.Data
     /// <summary>
     /// Record value.
     /// </summary>
-    public class Value : ObservableObject
+    public class Value : ObservableObject, IValue
     {
         private string _content;
 
-        /// <summary>
-        /// Gets or sets value content.
-        /// </summary>
+        /// <inheritdoc/>
         [Content]
         public string Content
         {
@@ -34,7 +32,7 @@ namespace Core2D.Data
         /// </summary>
         /// <param name="content">The value content.</param>
         /// <returns>The new instance of the <see cref="Value"/> class.</returns>
-        public static Value Create(string content) => new Value() { Content = content };
+        public static IValue Create(string content) => new Value() { Content = content };
 
         /// <summary>
         /// Check whether the <see cref="Content"/> property has changed from its default value.

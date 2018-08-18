@@ -43,7 +43,7 @@ namespace Core2D.FileWriter.Emf
         /// <param name="record"></param>
         /// <param name="ic"></param>
         /// <returns></returns>
-        public static MemoryStream MakeMetafileStream(Bitmap bitmap, IEnumerable<IBaseShape> shapes, ImmutableArray<Property> properties, Record record, IImageCache ic)
+        public static MemoryStream MakeMetafileStream(Bitmap bitmap, IEnumerable<IBaseShape> shapes, ImmutableArray<IProperty> properties, IRecord record, IImageCache ic)
         {
             var g = default(Graphics);
             var mf = default(Metafile);
@@ -164,7 +164,7 @@ namespace Core2D.FileWriter.Emf
         /// <param name="properties"></param>
         /// <param name="record"></param>
         /// <param name="ic"></param>
-        public static void SetClipboard(IEnumerable<IBaseShape> shapes, double width, double height, ImmutableArray<Property> properties, Record record, IImageCache ic)
+        public static void SetClipboard(IEnumerable<IBaseShape> shapes, double width, double height, ImmutableArray<IProperty> properties, IRecord record, IImageCache ic)
         {
             try
             {

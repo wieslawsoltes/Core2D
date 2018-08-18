@@ -373,7 +373,7 @@ namespace Core2D.Avalonia.Editor
         }
 
         /// <inheritdoc/>
-        public async void OnExportData(Database db)
+        public async void OnExportData(IDatabase db)
         {
             if (db != null)
             {
@@ -391,7 +391,7 @@ namespace Core2D.Avalonia.Editor
         }
 
         /// <inheritdoc/>
-        public async void OnUpdateData(Database db)
+        public async void OnUpdateData(IDatabase db)
         {
             if (db != null)
             {

@@ -9,14 +9,12 @@ namespace Core2D.Data
     /// <summary>
     /// Data property.
     /// </summary>
-    public class Property : ObservableObject
+    public class Property : ObservableObject, IProperty
     {
         private string _value;
-        private Context _owner;
+        private IContext _owner;
 
-        /// <summary>
-        /// Gets or sets property value.
-        /// </summary>
+        /// <inheritdoc/>
         [Content]
         public string Value
         {
@@ -24,10 +22,8 @@ namespace Core2D.Data
             set => Update(ref _value, value);
         }
 
-        /// <summary>
-        /// Gets or sets property owner.
-        /// </summary>
-        public Context Owner
+        /// <inheritdoc/>
+        public IContext Owner
         {
             get => _owner;
             set => Update(ref _owner, value);
@@ -46,7 +42,7 @@ namespace Core2D.Data
         /// <param name="name">The property name.</param>
         /// <param name="value">The property value.</param>
         /// <returns>The new instance of the <see cref="Property"/> class.</returns>
-        public static Property Create(Context owner, string name, string value)
+        public static IProperty Create(IContext owner, string name, string value)
         {
             return new Property()
             {

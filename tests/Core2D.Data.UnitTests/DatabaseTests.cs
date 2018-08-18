@@ -118,7 +118,7 @@ namespace Core2D.Data.UnitTests
 
             var source = Database.FromFields("Source", sourceFields, "Id");
 
-            bool isDirty = Database.Update(destination, source, out var target);
+            bool isDirty = destination.Update(source, out var target);
 
             Assert.True(isDirty);
             Assert.NotNull(target);

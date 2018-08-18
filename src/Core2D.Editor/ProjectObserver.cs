@@ -72,16 +72,16 @@ namespace Core2D.Editor
 
         private void ObserveDatabase(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == nameof(Database.Columns))
+            if (e.PropertyName == nameof(IDatabase.Columns))
             {
-                var database = sender as Database;
+                var database = sender as IDatabase;
                 Remove(database.Columns);
                 Add(database.Columns);
             }
 
-            if (e.PropertyName == nameof(Database.Records))
+            if (e.PropertyName == nameof(IDatabase.Records))
             {
-                var database = sender as Database;
+                var database = sender as IDatabase;
                 Remove(database.Records);
                 Add(database.Records);
             }
@@ -98,9 +98,9 @@ namespace Core2D.Editor
 
         private void ObserveRecord(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == nameof(Record.Values))
+            if (e.PropertyName == nameof(IRecord.Values))
             {
-                var record = sender as Record;
+                var record = sender as IRecord;
                 Remove(record.Values);
                 Add(record.Values);
             }
@@ -171,11 +171,11 @@ namespace Core2D.Editor
 
         private void ObservePage(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == nameof(Context.Properties))
+            if (e.PropertyName == nameof(IContext.Properties))
             {
                 var container = sender as IPageContainer;
-                Remove((IEnumerable<Property>)container.Data.Properties);
-                Add((IEnumerable<Property>)container.Data.Properties);
+                Remove((IEnumerable<IProperty>)container.Data.Properties);
+                Add((IEnumerable<IProperty>)container.Data.Properties);
             }
 
             if (e.PropertyName == nameof(IPageContainer.Layers))
@@ -268,9 +268,9 @@ namespace Core2D.Editor
 
         private void ObserveData(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == nameof(Context.Properties))
+            if (e.PropertyName == nameof(IContext.Properties))
             {
-                var data = sender as Context;
+                var data = sender as IContext;
                 Remove(data.Properties);
                 Add(data.Properties);
             }
@@ -291,7 +291,7 @@ namespace Core2D.Editor
             MarkAsDirty();
         }
 
-        private void Add(Database database)
+        private void Add(IDatabase database)
         {
             if (database == null)
                 return;
@@ -309,7 +309,7 @@ namespace Core2D.Editor
             }
         }
 
-        private void Remove(Database database)
+        private void Remove(IDatabase database)
         {
             if (database == null)
                 return;
@@ -327,7 +327,7 @@ namespace Core2D.Editor
             }
         }
 
-        private void Add(Column column)
+        private void Add(IColumn column)
         {
             if (column == null)
                 return;
@@ -335,7 +335,7 @@ namespace Core2D.Editor
             column.PropertyChanged += ObserveColumn;
         }
 
-        private void Remove(Column column)
+        private void Remove(IColumn column)
         {
             if (column == null)
                 return;
@@ -343,7 +343,7 @@ namespace Core2D.Editor
             column.PropertyChanged -= ObserveColumn;
         }
 
-        private void Add(Record record)
+        private void Add(IRecord record)
         {
             if (record == null)
                 return;
@@ -356,7 +356,7 @@ namespace Core2D.Editor
             }
         }
 
-        private void Remove(Record record)
+        private void Remove(IRecord record)
         {
             if (record == null)
                 return;
@@ -369,7 +369,7 @@ namespace Core2D.Editor
             }
         }
 
-        private void Add(Value value)
+        private void Add(IValue value)
         {
             if (value == null)
                 return;
@@ -377,7 +377,7 @@ namespace Core2D.Editor
             value.PropertyChanged += ObserveValue;
         }
 
-        private void Remove(Value value)
+        private void Remove(IValue value)
         {
             if (value == null)
                 return;
@@ -572,7 +572,7 @@ namespace Core2D.Editor
 
             if (container.Data != null)
             {
-                Add((Context)container.Data);
+                Add(container.Data);
             }
 
             if (container.WorkingLayer != null)
@@ -605,7 +605,7 @@ namespace Core2D.Editor
 
             if (container.Data != null)
             {
-                Remove((Context)container.Data);
+                Remove(container.Data);
             }
 
             if (container.WorkingLayer != null)
@@ -658,7 +658,7 @@ namespace Core2D.Editor
 
             if (shape.Data != null)
             {
-                Add((Context)shape.Data);
+                Add(shape.Data);
             }
 
             if (shape.State != null)
@@ -829,7 +829,7 @@ namespace Core2D.Editor
 
             if (shape.Data != null)
             {
-                Remove((Context)shape.Data);
+                Remove(shape.Data);
             }
 
             if (shape.State != null)
@@ -1163,7 +1163,7 @@ namespace Core2D.Editor
             }
         }
 
-        private void Add(Context data)
+        private void Add(IContext data)
         {
             if (data == null)
                 return;
@@ -1176,7 +1176,7 @@ namespace Core2D.Editor
             data.PropertyChanged += ObserveData;
         }
 
-        private void Remove(Context data)
+        private void Remove(IContext data)
         {
             if (data == null)
                 return;
@@ -1377,7 +1377,7 @@ namespace Core2D.Editor
             }
         }
 
-        private void Add(Property property)
+        private void Add(IProperty property)
         {
             if (property == null)
                 return;
@@ -1385,7 +1385,7 @@ namespace Core2D.Editor
             property.PropertyChanged += ObserveProperty;
         }
 
-        private void Remove(Property property)
+        private void Remove(IProperty property)
         {
             if (property == null)
                 return;
@@ -1393,7 +1393,7 @@ namespace Core2D.Editor
             property.PropertyChanged -= ObserveProperty;
         }
 
-        private void Add(IEnumerable<Database> databases)
+        private void Add(IEnumerable<IDatabase> databases)
         {
             if (databases == null)
                 return;
@@ -1404,7 +1404,7 @@ namespace Core2D.Editor
             }
         }
 
-        private void Remove(IEnumerable<Database> databases)
+        private void Remove(IEnumerable<IDatabase> databases)
         {
             if (databases == null)
                 return;
@@ -1415,7 +1415,7 @@ namespace Core2D.Editor
             }
         }
 
-        private void Add(IEnumerable<Column> columns)
+        private void Add(IEnumerable<IColumn> columns)
         {
             if (columns == null)
                 return;
@@ -1426,7 +1426,7 @@ namespace Core2D.Editor
             }
         }
 
-        private void Remove(IEnumerable<Column> columns)
+        private void Remove(IEnumerable<IColumn> columns)
         {
             if (columns == null)
                 return;
@@ -1437,7 +1437,7 @@ namespace Core2D.Editor
             }
         }
 
-        private void Add(IEnumerable<Record> records)
+        private void Add(IEnumerable<IRecord> records)
         {
             if (records == null)
                 return;
@@ -1448,7 +1448,7 @@ namespace Core2D.Editor
             }
         }
 
-        private void Remove(IEnumerable<Record> records)
+        private void Remove(IEnumerable<IRecord> records)
         {
             if (records == null)
                 return;
@@ -1459,7 +1459,7 @@ namespace Core2D.Editor
             }
         }
 
-        private void Add(IEnumerable<Value> values)
+        private void Add(IEnumerable<IValue> values)
         {
             if (values == null)
                 return;
@@ -1470,7 +1470,7 @@ namespace Core2D.Editor
             }
         }
 
-        private void Remove(IEnumerable<Value> values)
+        private void Remove(IEnumerable<IValue> values)
         {
             if (values == null)
                 return;
@@ -1679,7 +1679,7 @@ namespace Core2D.Editor
             }
         }
 
-        private void Add(IEnumerable<Property> properties)
+        private void Add(IEnumerable<IProperty> properties)
         {
             if (properties == null)
                 return;
@@ -1690,7 +1690,7 @@ namespace Core2D.Editor
             }
         }
 
-        private void Remove(IEnumerable<Property> properties)
+        private void Remove(IEnumerable<IProperty> properties)
         {
             if (properties == null)
                 return;

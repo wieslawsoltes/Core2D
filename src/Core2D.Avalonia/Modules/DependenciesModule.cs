@@ -62,8 +62,8 @@ namespace Core2D.Avalonia.Modules
             builder.RegisterType<EmfWriter>().As<IFileWriter>().InstancePerLifetimeScope();
             builder.RegisterType<PdfSharpWriter>().As<IFileWriter>().InstancePerLifetimeScope();
 #endif 
-            builder.RegisterType<CsvHelperReader>().As<ITextFieldReader<Database>>().InstancePerLifetimeScope();
-            builder.RegisterType<CsvHelperWriter>().As<ITextFieldWriter<Database>>().InstancePerLifetimeScope();
+            builder.RegisterType<CsvHelperReader>().As<ITextFieldReader<IDatabase>>().InstancePerLifetimeScope();
+            builder.RegisterType<CsvHelperWriter>().As<ITextFieldWriter<IDatabase>>().InstancePerLifetimeScope();
         }
     }
 }

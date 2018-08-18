@@ -8,34 +8,28 @@ namespace Core2D.Data
     /// <summary>
     /// Database column.
     /// </summary>
-    public class Column : ObservableObject
+    public class Column : ObservableObject, IColumn
     {
         private double _width;
         private bool _isVisible;
-        private Database _owner;
+        private IDatabase _owner;
 
-        /// <summary>
-        /// Gets or sets column display width.
-        /// </summary>
+        /// <inheritdoc/>
         public double Width
         {
             get => _width;
             set => Update(ref _width, value);
         }
 
-        /// <summary>
-        /// Gets or sets flag indicating whether column is visible.
-        /// </summary>
+        /// <inheritdoc/>
         public bool IsVisible
         {
             get => _isVisible;
             set => Update(ref _isVisible, value);
         }
 
-        /// <summary>
-        /// Gets or sets column owner object.
-        /// </summary>
-        public Database Owner
+        /// <inheritdoc/>
+        public IDatabase Owner
         {
             get => _owner;
             set => Update(ref _owner, value);
@@ -55,7 +49,7 @@ namespace Core2D.Data
         /// <param name="width">The column width.</param>
         /// <param name="isVisible">The flag indicating whether column is visible.</param>
         /// <returns>The new instance of the <see cref="Column"/> class.</returns>
-        public static Column Create(Database owner, string name, double width = double.NaN, bool isVisible = true)
+        public static IColumn Create(IDatabase owner, string name, double width = double.NaN, bool isVisible = true)
         {
             return new Column()
             {

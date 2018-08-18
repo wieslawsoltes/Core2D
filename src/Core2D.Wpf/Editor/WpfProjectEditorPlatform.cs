@@ -457,7 +457,7 @@ namespace Core2D.Wpf.Editor
         }
 
         /// <inheritdoc/>
-        public void OnExportData(Database db)
+        public void OnExportData(IDatabase db)
         {
             if (db != null)
             {
@@ -476,7 +476,7 @@ namespace Core2D.Wpf.Editor
         }
 
         /// <inheritdoc/>
-        public void OnUpdateData(Database db)
+        public void OnUpdateData(IDatabase db)
         {
             if (db != null)
             {

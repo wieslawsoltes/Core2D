@@ -25,7 +25,7 @@ namespace Core2D.Containers
         private ILayerContainer _helperLayer;
         private IBaseShape _currentShape;
         private IPageContainer _template;
-        private Context _data;
+        private IContext _data;
         private bool _isExpanded = false;
 
         /// <inheritdoc/>
@@ -126,7 +126,7 @@ namespace Core2D.Containers
         }
 
         /// <inheritdoc/>
-        public Context Data
+        public IContext Data
         {
             get => _data;
             set => Update(ref _data, value);
@@ -181,7 +181,7 @@ namespace Core2D.Containers
             : base()
         {
             _layers = ImmutableArray.Create<ILayerContainer>();
-            _data = new Context();
+            _data = Context.Create();
         }
 
         /// <inheritdoc/>

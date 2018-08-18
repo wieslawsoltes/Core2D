@@ -70,7 +70,7 @@ namespace Core2D.Containers
         /// <summary>
         /// Gets or sets container data.
         /// </summary>
-        Context Data { get; set; }
+        IContext Data { get; set; }
 
         /// <summary>
         /// Gets or sets flag indicating whether container is expanded.

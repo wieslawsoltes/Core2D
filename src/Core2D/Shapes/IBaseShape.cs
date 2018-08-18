@@ -27,9 +27,9 @@ namespace Core2D.Shapes
         IShapeState State { get; set; }
 
         /// <summary>
-        /// Gets or sets shape <see cref="Context"/>.
+        /// Gets or sets shape <see cref="IContext"/>.
         /// </summary>
-        Context Data { get; set; }
+        IContext Data { get; set; }
 
         /// <summary>
         /// Get all points in the shape.
