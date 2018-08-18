@@ -617,10 +617,10 @@ namespace Core2D.Wpf.Editor
             AddLayerCommand = new Command((p) => true, (p) => serviceProvider.GetService<ProjectEditor>().OnAddLayer(p as IPageContainer));
             RemoveLayerCommand = new Command((p) => true, (p) => serviceProvider.GetService<ProjectEditor>().OnRemoveLayer(p as ILayerContainer));
             AddStyleLibraryCommand = new Command((p) => true, (p) => serviceProvider.GetService<ProjectEditor>().OnAddStyleLibrary());
-            RemoveStyleLibraryCommand = new Command((p) => true, (p) => serviceProvider.GetService<ProjectEditor>().OnRemoveStyleLibrary(p as ILibrary<ShapeStyle>));
-            AddStyleCommand = new Command((p) => true, (p) => serviceProvider.GetService<ProjectEditor>().OnAddStyle(p as ILibrary<ShapeStyle>));
-            RemoveStyleCommand = new Command((p) => true, (p) => serviceProvider.GetService<ProjectEditor>().OnRemoveStyle(p as ShapeStyle));
-            ApplyStyleCommand = new Command((p) => true, (p) => serviceProvider.GetService<ProjectEditor>().OnApplyStyle(p as ShapeStyle));
+            RemoveStyleLibraryCommand = new Command((p) => true, (p) => serviceProvider.GetService<ProjectEditor>().OnRemoveStyleLibrary(p as ILibrary<IShapeStyle>));
+            AddStyleCommand = new Command((p) => true, (p) => serviceProvider.GetService<ProjectEditor>().OnAddStyle(p as ILibrary<IShapeStyle>));
+            RemoveStyleCommand = new Command((p) => true, (p) => serviceProvider.GetService<ProjectEditor>().OnRemoveStyle(p as IShapeStyle));
+            ApplyStyleCommand = new Command((p) => true, (p) => serviceProvider.GetService<ProjectEditor>().OnApplyStyle(p as IShapeStyle));
             AddTemplateCommand = new Command((p) => true, (p) => serviceProvider.GetService<ProjectEditor>().OnAddTemplate());
             RemoveTemplateCommand = new Command((p) => true, (p) => serviceProvider.GetService<ProjectEditor>().OnRemoveTemplate(p as IPageContainer));
             EditTemplateCommand = new Command((p) => true, (p) => serviceProvider.GetService<ProjectEditor>().OnEditTemplate(p as IPageContainer));

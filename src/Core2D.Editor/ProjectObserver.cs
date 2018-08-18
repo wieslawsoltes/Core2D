@@ -227,9 +227,9 @@ namespace Core2D.Editor
 
         private void ObserveStyleLibrary(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == nameof(ILibrary<ShapeStyle>.Items))
+            if (e.PropertyName == nameof(ILibrary<IShapeStyle>.Items))
             {
-                var sg = sender as ILibrary<ShapeStyle>;
+                var sg = sender as ILibrary<IShapeStyle>;
                 Remove(sg.Items);
                 Add(sg.Items);
             }
@@ -237,7 +237,7 @@ namespace Core2D.Editor
             _invalidateStyles();
 
             // NOTE: Do not mark project as dirty when current style changes.
-            if (e.PropertyName != nameof(ILibrary<ShapeStyle>.Selected))
+            if (e.PropertyName != nameof(ILibrary<IShapeStyle>.Selected))
             {
                 MarkAsDirty();
             }
@@ -1189,7 +1189,7 @@ namespace Core2D.Editor
             data.PropertyChanged -= ObserveData;
         }
 
-        private void Add(ILibrary<ShapeStyle> sg)
+        private void Add(ILibrary<IShapeStyle> sg)
         {
             if (sg == null)
                 return;
@@ -1202,7 +1202,7 @@ namespace Core2D.Editor
             sg.PropertyChanged += ObserveStyleLibrary;
         }
 
-        private void Remove(ILibrary<ShapeStyle> sg)
+        private void Remove(ILibrary<IShapeStyle> sg)
         {
             if (sg == null)
                 return;
@@ -1241,7 +1241,7 @@ namespace Core2D.Editor
             gl.PropertyChanged -= ObserveGroupLibrary;
         }
 
-        private void Add(ShapeStyle style)
+        private void Add(IShapeStyle style)
         {
             if (style == null)
                 return;
@@ -1309,7 +1309,7 @@ namespace Core2D.Editor
             }
         }
 
-        private void Remove(ShapeStyle style)
+        private void Remove(IShapeStyle style)
         {
             if (style == null)
                 return;
@@ -1613,7 +1613,7 @@ namespace Core2D.Editor
             }
         }
 
-        private void Add(IEnumerable<ShapeStyle> styles)
+        private void Add(IEnumerable<IShapeStyle> styles)
         {
             if (styles == null)
                 return;
@@ -1624,7 +1624,7 @@ namespace Core2D.Editor
             }
         }
 
-        private void Remove(IEnumerable<ShapeStyle> styles)
+        private void Remove(IEnumerable<IShapeStyle> styles)
         {
             if (styles == null)
                 return;
@@ -1635,7 +1635,7 @@ namespace Core2D.Editor
             }
         }
 
-        private void Add(IEnumerable<ILibrary<ShapeStyle>> sgs)
+        private void Add(IEnumerable<ILibrary<IShapeStyle>> sgs)
         {
             if (sgs == null)
                 return;
@@ -1646,7 +1646,7 @@ namespace Core2D.Editor
             }
         }
 
-        private void Remove(IEnumerable<ILibrary<ShapeStyle>> sgs)
+        private void Remove(IEnumerable<ILibrary<IShapeStyle>> sgs)
         {
             if (sgs == null)
                 return;

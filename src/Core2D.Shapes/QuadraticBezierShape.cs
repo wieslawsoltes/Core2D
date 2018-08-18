@@ -153,7 +153,7 @@ namespace Core2D.Shapes
         /// <param name="isFilled">The flag indicating whether shape is filled.</param>
         /// <param name="name">The shape name.</param>
         /// <returns>The new instance of the <see cref="QuadraticBezierShape"/> class.</returns>
-        public static IQuadraticBezierShape Create(double x1, double y1, double x2, double y2, double x3, double y3, ShapeStyle style, IBaseShape point, bool isStroked = true, bool isFilled = false, string name = "")
+        public static IQuadraticBezierShape Create(double x1, double y1, double x2, double y2, double x3, double y3, IShapeStyle style, IBaseShape point, bool isStroked = true, bool isFilled = false, string name = "")
         {
             return new QuadraticBezierShape()
             {
@@ -178,7 +178,7 @@ namespace Core2D.Shapes
         /// <param name="isFilled">The flag indicating whether shape is filled.</param>
         /// <param name="name">The shape name.</param>
         /// <returns>The new instance of the <see cref="QuadraticBezierShape"/> class.</returns>
-        public static IQuadraticBezierShape Create(double x, double y, ShapeStyle style, IBaseShape point, bool isStroked = true, bool isFilled = false, string name = "")
+        public static IQuadraticBezierShape Create(double x, double y, IShapeStyle style, IBaseShape point, bool isStroked = true, bool isFilled = false, string name = "")
         {
             return Create(x, y, x, y, x, y, style, point, isStroked, isFilled, name);
         }
@@ -195,7 +195,7 @@ namespace Core2D.Shapes
         /// <param name="isFilled">The flag indicating whether shape is filled.</param>
         /// <param name="name">The shape name.</param>
         /// <returns>The new instance of the <see cref="QuadraticBezierShape"/> class.</returns>
-        public static IQuadraticBezierShape Create(IPointShape point1, IPointShape point2, IPointShape point3, ShapeStyle style, IBaseShape point, bool isStroked = true, bool isFilled = false, string name = "")
+        public static IQuadraticBezierShape Create(IPointShape point1, IPointShape point2, IPointShape point3, IShapeStyle style, IBaseShape point, bool isStroked = true, bool isFilled = false, string name = "")
         {
             return new QuadraticBezierShape()
             {

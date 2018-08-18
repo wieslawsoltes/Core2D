@@ -13,7 +13,7 @@ namespace Core2D.Editor.Tools.Selection
     {
         private readonly ILayerContainer _layer;
         private readonly IPathShape _path;
-        private readonly ShapeStyle _style;
+        private readonly IShapeStyle _style;
         private readonly IBaseShape _point;
 
         /// <summary>
@@ -23,7 +23,7 @@ namespace Core2D.Editor.Tools.Selection
         /// <param name="shape">The selected shape.</param>
         /// <param name="style">The selection shapes style.</param>
         /// <param name="point">The selection point shape.</param>
-        public ToolPathSelection(ILayerContainer layer, IPathShape shape, ShapeStyle style, IBaseShape point)
+        public ToolPathSelection(ILayerContainer layer, IPathShape shape, IShapeStyle style, IBaseShape point)
         {
             _layer = layer;
             _path = shape;

@@ -685,7 +685,7 @@ namespace Core2D.Editor
         /// </summary>
         /// <param name="project">The project instance.</param>
         /// <param name="library">The style library instance.</param>
-        public static void AddStyleLibrary(this IProjectContainer project, ILibrary<ShapeStyle> library)
+        public static void AddStyleLibrary(this IProjectContainer project, ILibrary<IShapeStyle> library)
         {
             if (project?.StyleLibraries != null && library != null)
             {
@@ -701,7 +701,7 @@ namespace Core2D.Editor
         /// </summary>
         /// <param name="project">The project instance.</param>
         /// <param name="libraries">The style libraries collection.</param>
-        public static void AddStyleLibraries(this IProjectContainer project, IEnumerable<ILibrary<ShapeStyle>> libraries)
+        public static void AddStyleLibraries(this IProjectContainer project, IEnumerable<ILibrary<IShapeStyle>> libraries)
         {
             if (project?.StyleLibraries != null && libraries != null)
             {
@@ -720,7 +720,7 @@ namespace Core2D.Editor
         /// </summary>
         /// <param name="project">The project instance.</param>
         /// <param name="library">The style library instance.</param>
-        public static void RemoveStyleLibrary(this IProjectContainer project, ILibrary<ShapeStyle> library)
+        public static void RemoveStyleLibrary(this IProjectContainer project, ILibrary<IShapeStyle> library)
         {
             if (project?.CurrentStyleLibrary != null && library != null)
             {
@@ -737,7 +737,7 @@ namespace Core2D.Editor
         /// <param name="project">The project instance.</param>
         /// <param name="library">The style library instance.</param>
         /// <param name="style">The style instance.</param>
-        public static void AddStyle(this IProjectContainer project, ILibrary<ShapeStyle> library, ShapeStyle style)
+        public static void AddStyle(this IProjectContainer project, ILibrary<IShapeStyle> library, IShapeStyle style)
         {
             AddItem(project, library, style);
         }
@@ -748,7 +748,7 @@ namespace Core2D.Editor
         /// <param name="project">The project instance.</param>
         /// <param name="style">The style instance.</param>
         /// <returns>The owner style library.</returns>
-        public static ILibrary<ShapeStyle> RemoveStyle(this IProjectContainer project, ShapeStyle style)
+        public static ILibrary<IShapeStyle> RemoveStyle(this IProjectContainer project, IShapeStyle style)
         {
             if (project?.StyleLibraries != null && style != null)
             {
@@ -771,7 +771,7 @@ namespace Core2D.Editor
         /// <param name="project">The project instance.</param>
         /// <param name="shape">The shape instance.</param>
         /// <param name="style">The style instance.</param>
-        public static void ApplyStyle(this IProjectContainer project, IBaseShape shape, ShapeStyle style)
+        public static void ApplyStyle(this IProjectContainer project, IBaseShape shape, IShapeStyle style)
         {
             if (shape != null && style != null)
             {

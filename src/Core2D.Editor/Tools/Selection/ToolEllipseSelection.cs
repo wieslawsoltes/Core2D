@@ -13,7 +13,7 @@ namespace Core2D.Editor.Tools.Selection
     {
         private readonly ILayerContainer _layer;
         private readonly IEllipseShape _ellipse;
-        private readonly ShapeStyle _style;
+        private readonly IShapeStyle _style;
         private readonly IBaseShape _point;
         private IPointShape _topLeftHelperPoint;
         private IPointShape _bottomRightHelperPoint;
@@ -25,7 +25,7 @@ namespace Core2D.Editor.Tools.Selection
         /// <param name="shape">The selected shape.</param>
         /// <param name="style">The selection shapes style.</param>
         /// <param name="point">The selection point shape.</param>
-        public ToolEllipseSelection(ILayerContainer layer, IEllipseShape shape, ShapeStyle style, IBaseShape point)
+        public ToolEllipseSelection(ILayerContainer layer, IEllipseShape shape, IShapeStyle style, IBaseShape point)
         {
             _layer = layer;
             _ellipse = shape;

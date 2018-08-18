@@ -26,7 +26,7 @@ namespace Core2D.Containers
         /// <summary>
         /// Gets or sets project style libraries.
         /// </summary>
-        ImmutableArray<ILibrary<ShapeStyle>> StyleLibraries { get; set; }
+        ImmutableArray<ILibrary<IShapeStyle>> StyleLibraries { get; set; }
 
         /// <summary>
         /// Gets or sets project group libraries.
@@ -51,7 +51,7 @@ namespace Core2D.Containers
         /// <summary>
         /// Gets or sets project current style library.
         /// </summary>
-        ILibrary<ShapeStyle> CurrentStyleLibrary { get; set; }
+        ILibrary<IShapeStyle> CurrentStyleLibrary { get; set; }
 
         /// <summary>
         /// Gets or sets project current group library.
@@ -117,7 +117,7 @@ namespace Core2D.Containers
         /// Set current group.
         /// </summary>
         /// <param name="library">The style library instance.</param>
-        void SetCurrentStyleLibrary(ILibrary<ShapeStyle> library);
+        void SetCurrentStyleLibrary(ILibrary<IShapeStyle> library);
 
         /// <summary>
         /// Set selected value.

@@ -13,7 +13,7 @@ namespace Core2D.UnitTests
         public void Implements_IEqualityComparer_Interface()
         {
             var target = new ShapeStyleByNameComparer();
-            Assert.True(target is IEqualityComparer<ShapeStyle>);
+            Assert.True(target is IEqualityComparer<IShapeStyle>);
         }
 
         [Fact]

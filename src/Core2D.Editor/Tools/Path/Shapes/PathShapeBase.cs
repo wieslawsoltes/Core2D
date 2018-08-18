@@ -22,7 +22,7 @@ namespace Core2D.Editor.Tools.Path.Shapes
         public IBaseShape Owner { get; set; }
         public IShapeState State { get; set; }
         public Context Data { get; set; }
-        public ShapeStyle Style { get; set; }
+        public IShapeStyle Style { get; set; }
         public bool IsStroked { get; set; }
         public bool IsFilled { get; set; }
         public MatrixObject Transform { get; set; }

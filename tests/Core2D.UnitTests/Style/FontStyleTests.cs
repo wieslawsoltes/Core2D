@@ -38,12 +38,12 @@ namespace Core2D.UnitTests
 
             var propertyNames = new string[]
             {
-                nameof(FontStyle.Flags),
-                nameof(FontStyle.Regular),
-                nameof(FontStyle.Bold),
-                nameof(FontStyle.Italic),
-                nameof(FontStyle.Underline),
-                nameof(FontStyle.Strikeout)
+                nameof(IFontStyle.Flags),
+                nameof(IFontStyle.Regular),
+                nameof(IFontStyle.Bold),
+                nameof(IFontStyle.Italic),
+                nameof(IFontStyle.Underline),
+                nameof(IFontStyle.Strikeout)
             };
 
             Assert.Equal(propertyNames, target.PropertyNames);

@@ -19,12 +19,12 @@ namespace Core2D.Containers
     {
         private IOptions _options;
         private IHistory _history;
-        private ImmutableArray<ILibrary<ShapeStyle>> _styleLibraries;
+        private ImmutableArray<ILibrary<IShapeStyle>> _styleLibraries;
         private ImmutableArray<ILibrary<IGroupShape>> _groupLibraries;
         private ImmutableArray<Database> _databases;
         private ImmutableArray<IPageContainer> _templates;
         private ImmutableArray<IDocumentContainer> _documents;
-        private ILibrary<ShapeStyle> _currentStyleLibrary;
+        private ILibrary<IShapeStyle> _currentStyleLibrary;
         private ILibrary<IGroupShape> _currentGroupLibrary;
         private Database _currentDatabase;
         private IPageContainer _currentTemplate;
@@ -47,7 +47,7 @@ namespace Core2D.Containers
         }
 
         /// <inheritdoc/>
-        public ImmutableArray<ILibrary<ShapeStyle>> StyleLibraries
+        public ImmutableArray<ILibrary<IShapeStyle>> StyleLibraries
         {
             get => _styleLibraries;
             set => Update(ref _styleLibraries, value);
@@ -83,7 +83,7 @@ namespace Core2D.Containers
         }
 
         /// <inheritdoc/>
-        public ILibrary<ShapeStyle> CurrentStyleLibrary
+        public ILibrary<IShapeStyle> CurrentStyleLibrary
         {
             get => _currentStyleLibrary;
             set => Update(ref _currentStyleLibrary, value);
@@ -197,7 +197,7 @@ namespace Core2D.Containers
             : base()
         {
             _options = Containers.Options.Create();
-            _styleLibraries = ImmutableArray.Create<ILibrary<ShapeStyle>>();
+            _styleLibraries = ImmutableArray.Create<ILibrary<IShapeStyle>>();
             _groupLibraries = ImmutableArray.Create<ILibrary<IGroupShape>>();
             _databases = ImmutableArray.Create<Database>();
             _templates = ImmutableArray.Create<IPageContainer>();
@@ -228,7 +228,7 @@ namespace Core2D.Containers
         public void SetCurrentGroupLibrary(ILibrary<IGroupShape> library) => CurrentGroupLibrary = library;
 
         /// <inheritdoc/>
-        public void SetCurrentStyleLibrary(ILibrary<ShapeStyle> library) => CurrentStyleLibrary = library;
+        public void SetCurrentStyleLibrary(ILibrary<IShapeStyle> library) => CurrentStyleLibrary = library;
 
         /// <inheritdoc/>
         public void SetSelected(IObservableObject value)

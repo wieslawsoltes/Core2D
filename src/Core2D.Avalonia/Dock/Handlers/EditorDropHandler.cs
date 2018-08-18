@@ -44,7 +44,7 @@ namespace Core2D.Avalonia.Dock.Handlers
                         return editor?.OnDropShape(shape, point.X, point.Y, bExecute) == true;
                     case Record record:
                         return editor?.OnDropRecord(record, point.X, point.Y, bExecute) == true;
-                    case ShapeStyle style:
+                    case IShapeStyle style:
                         return editor?.OnDropStyle(style, point.X, point.Y, bExecute) == true;
                     case IPageContainer page:
                         return editor?.OnDropTemplate(page, point.X, point.Y, bExecute) == true;

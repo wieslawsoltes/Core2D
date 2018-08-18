@@ -15,7 +15,7 @@ namespace Core2D.Style
         /// </summary>
         /// <param name="lineStyle">The line style to clone.</param>
         /// <returns>The new instance of the <see cref="LineStyle"/> class.</returns>
-        public static LineStyle Clone(this LineStyle lineStyle)
+        public static ILineStyle Clone(this ILineStyle lineStyle)
         {
             return new LineStyle()
             {
@@ -29,46 +29,64 @@ namespace Core2D.Style
     }
 
     /// <summary>
+    /// Define line style contract.
+    /// </summary>
+    public interface ILineStyle : IObservableObject
+    {
+        /// <summary>
+        /// Gets or sets value indicating whether line is curved.
+        /// </summary>
+        bool IsCurved { get; set; }
+
+        /// <summary>
+        /// Gets or sets line curvature.
+        /// </summary>
+        double Curvature { get; set; }
+
+        /// <summary>
+        /// Gets or sets curve orientation.
+        /// </summary>
+        CurveOrientation CurveOrientation { get; set; }
+
+        /// <summary>
+        /// Gets or sets line fixed length.
+        /// </summary>
+        ILineFixedLength FixedLength { get; set; }
+    }
+
+    /// <summary>
     /// Line style.
     /// </summary>
-    public class LineStyle : ObservableObject
+    public class LineStyle : ObservableObject, ILineStyle
     {
         private bool _isCurved;
         private double _curvature;
         private CurveOrientation _curveOrientation;
-        private LineFixedLength _fixedLength;
+        private ILineFixedLength _fixedLength;
 
-        /// <summary>
-        /// Gets or sets value indicating whether line is curved.
-        /// </summary>
+        /// <inheritdoc/>
         public bool IsCurved
         {
             get => _isCurved;
             set => Update(ref _isCurved, value);
         }
 
-        /// <summary>
-        /// Gets or sets line curvature.
-        /// </summary>
+        /// <inheritdoc/>
         public double Curvature
         {
             get => _curvature;
             set => Update(ref _curvature, value);
         }
 
-        /// <summary>
-        /// Gets or sets curve orientation.
-        /// </summary>
+        /// <inheritdoc/>
         public CurveOrientation CurveOrientation
         {
             get => _curveOrientation;
             set => Update(ref _curveOrientation, value);
         }
 
-        /// <summary>
-        /// Gets or sets line fixed length.
-        /// </summary>
-        public LineFixedLength FixedLength
+        /// <inheritdoc/>
+        public ILineFixedLength FixedLength
         {
             get => _fixedLength;
             set => Update(ref _fixedLength, value);
@@ -89,12 +107,7 @@ namespace Core2D.Style
         /// <param name="curveOrientation">The curve orientation.</param>
         /// <param name="fixedLength">The line style fixed length.</param>
         /// <returns>The new instance of the <see cref="LineStyle"/> class.</returns>
-        public static LineStyle Create(
-            string name = "",
-            bool isCurved = false,
-            double curvature = 50.0,
-            CurveOrientation curveOrientation = CurveOrientation.Auto,
-            LineFixedLength fixedLength = null)
+        public static ILineStyle Create(string name = "", bool isCurved = false, double curvature = 50.0, CurveOrientation curveOrientation = CurveOrientation.Auto, ILineFixedLength fixedLength = null)
         {
             return new LineStyle()
             {

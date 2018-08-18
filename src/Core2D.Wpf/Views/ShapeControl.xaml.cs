@@ -32,7 +32,7 @@ namespace Core2D.Wpf.Views
             content.DragEnter +=
                 (s, e) =>
                 {
-                    if (!e.Data.GetDataPresent(typeof(ShapeStyle)))
+                    if (!e.Data.GetDataPresent(typeof(IShapeStyle)))
                     {
                         e.Effects = DragDropEffects.None;
                         e.Handled = true;
@@ -42,11 +42,11 @@ namespace Core2D.Wpf.Views
             content.Drop +=
                 (s, e) =>
                 {
-                    if (e.Data.GetDataPresent(typeof(ShapeStyle)))
+                    if (e.Data.GetDataPresent(typeof(IShapeStyle)))
                     {
                         try
                         {
-                            if (e.Data.GetData(typeof(ShapeStyle)) is ShapeStyle style)
+                            if (e.Data.GetData(typeof(IShapeStyle)) is IShapeStyle style)
                             {
                                 if (content.Content != null)
                                 {

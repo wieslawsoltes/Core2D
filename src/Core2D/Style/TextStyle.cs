@@ -15,7 +15,7 @@ namespace Core2D.Style
         /// </summary>
         /// <param name="textStyle">The text style to clone.</param>
         /// <returns>The new instance of the <see cref="TextStyle"/> class.</returns>
-        public static TextStyle Clone(this TextStyle textStyle)
+        public static ITextStyle Clone(this ITextStyle textStyle)
         {
             return new TextStyle()
             {
@@ -31,65 +31,89 @@ namespace Core2D.Style
     }
 
     /// <summary>
+    /// Define text style contract.
+    /// </summary>
+    public interface ITextStyle : IObservableObject
+    {
+        /// <summary>
+        /// Gets or sets font name.
+        /// </summary>
+        string FontName { get; set; }
+
+        /// <summary>
+        /// Gets or sets font file path.
+        /// </summary>
+        string FontFile { get; set; }
+
+        /// <summary>
+        /// Gets or sets font size.
+        /// </summary>
+        double FontSize { get; set; }
+
+        /// <summary>
+        /// Gets or sets font style.
+        /// </summary>
+        IFontStyle FontStyle { get; set; }
+
+        /// <summary>
+        /// Gets or sets text horizontal alignment.
+        /// </summary>
+        TextHAlignment TextHAlignment { get; set; }
+
+        /// <summary>
+        /// Gets or sets text vertical alignment.
+        /// </summary>
+        TextVAlignment TextVAlignment { get; set; }
+    }
+
+    /// <summary>
     /// Text style.
     /// </summary>
-    public class TextStyle : ObservableObject
+    public class TextStyle : ObservableObject, ITextStyle
     {
         private string _fontName;
         private string _fontFile;
         private double _fontSize;
-        private FontStyle _fontStyle;
+        private IFontStyle _fontStyle;
         private TextHAlignment _textHAlignment;
         private TextVAlignment _textVAlignment;
 
-        /// <summary>
-        /// Gets or sets font name.
-        /// </summary>
+        /// <inheritdoc/>
         public string FontName
         {
             get => _fontName;
             set => Update(ref _fontName, value);
         }
 
-        /// <summary>
-        /// Gets or sets font file path.
-        /// </summary>
+        /// <inheritdoc/>
         public string FontFile
         {
             get => _fontFile;
             set => Update(ref _fontFile, value);
         }
 
-        /// <summary>
-        /// Gets or sets font size.
-        /// </summary>
+        /// <inheritdoc/>
         public double FontSize
         {
             get => _fontSize;
             set => Update(ref _fontSize, value);
         }
 
-        /// <summary>
-        /// Gets or sets font style.
-        /// </summary>
-        public FontStyle FontStyle
+        /// <inheritdoc/>
+        public IFontStyle FontStyle
         {
             get => _fontStyle;
             set => Update(ref _fontStyle, value);
         }
 
-        /// <summary>
-        /// Gets or sets text horizontal alignment.
-        /// </summary>
+        /// <inheritdoc/>
         public TextHAlignment TextHAlignment
         {
             get => _textHAlignment;
             set => Update(ref _textHAlignment, value);
         }
 
-        /// <summary>
-        /// Gets or sets text vertical alignment.
-        /// </summary>
+        /// <inheritdoc/>
         public TextVAlignment TextVAlignment
         {
             get => _textVAlignment;
@@ -113,7 +137,7 @@ namespace Core2D.Style
         /// <param name="textHAlignment">The text horizontal alignment.</param>
         /// <param name="textVAlignment">The text vertical alignment.</param>
         /// <returns>The new instance of the <see cref="TextStyle"/> class.</returns>
-        public static TextStyle Create(string name = "", string fontName = "Calibri", string fontFile = @"C:\Windows\Fonts\calibri.ttf", double fontSize = 12.0, FontStyle fontStyle = null, TextHAlignment textHAlignment = TextHAlignment.Center, TextVAlignment textVAlignment = TextVAlignment.Center)
+        public static ITextStyle Create(string name = "", string fontName = "Calibri", string fontFile = @"C:\Windows\Fonts\calibri.ttf", double fontSize = 12.0, IFontStyle fontStyle = null, TextHAlignment textHAlignment = TextHAlignment.Center, TextVAlignment textVAlignment = TextVAlignment.Center)
         {
             return new TextStyle()
             {
@@ -121,7 +145,7 @@ namespace Core2D.Style
                 FontName = fontName,
                 FontFile = fontFile,
                 FontSize = fontSize,
-                FontStyle = fontStyle ?? FontStyle.Create(FontStyleFlags.Regular),
+                FontStyle = fontStyle ?? Style.FontStyle.Create(FontStyleFlags.Regular),
                 TextHAlignment = textHAlignment,
                 TextVAlignment = textVAlignment
             };

@@ -68,7 +68,7 @@ namespace Core2D.Editor
         public const string DefaulStyleLibraryName = "Styles";
 
         /// <summary>
-        /// Default <see cref="ShapeStyle"/> name.
+        /// Default <see cref="IShapeStyle"/> name.
         /// </summary>
         public const string DefaulStyleName = "Style";
 

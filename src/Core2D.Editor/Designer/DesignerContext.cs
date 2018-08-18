@@ -63,7 +63,7 @@ namespace Core2D.Editor.Designer
         /// <summary>
         /// The design time <see cref="ILibrary{ShapeStyle}"/>.
         /// </summary>
-        public static ILibrary<ShapeStyle> CurrentStyleLibrary { get; set; }
+        public static ILibrary<IShapeStyle> CurrentStyleLibrary { get; set; }
 
         /// <summary>
         /// The design time <see cref="ILibrary{IGroupShape}"/>.
@@ -101,29 +101,29 @@ namespace Core2D.Editor.Designer
         public static IArrowStyle ArrowStyle { get; set; }
 
         /// <summary>
-        /// The design time <see cref="Style.FontStyle"/>.
+        /// The design time <see cref="Style.IFontStyle"/>.
         /// </summary>
-        public static FontStyle FontStyle { get; set; }
+        public static IFontStyle FontStyle { get; set; }
 
         /// <summary>
-        /// The design time <see cref="Style.LineFixedLength"/>.
+        /// The design time <see cref="Style.ILineFixedLength"/>.
         /// </summary>
-        public static LineFixedLength LineFixedLength { get; set; }
+        public static ILineFixedLength LineFixedLength { get; set; }
 
         /// <summary>
-        /// The design time <see cref="Style.LineStyle"/>.
+        /// The design time <see cref="Style.ILineStyle"/>.
         /// </summary>
-        public static LineStyle LineStyle { get; set; }
+        public static ILineStyle LineStyle { get; set; }
 
         /// <summary>
-        /// The design time <see cref="Style.ShapeStyle"/>.
+        /// The design time <see cref="Style.IShapeStyle"/>.
         /// </summary>
-        public static ShapeStyle Style { get; set; }
+        public static IShapeStyle Style { get; set; }
 
         /// <summary>
-        /// The design time <see cref="Style.TextStyle"/>.
+        /// The design time <see cref="Style.ITextStyle"/>.
         /// </summary>
-        public static TextStyle TextStyle { get; set; }
+        public static ITextStyle TextStyle { get; set; }
 
         /// <summary>
         /// The design time <see cref="IArcShape"/>.
@@ -301,11 +301,11 @@ namespace Core2D.Editor.Designer
 
             ArgbColor = Core2D.Style.ArgbColor.Create(128, 255, 0, 0);
             ArrowStyle = Core2D.Style.ArrowStyle.Create();
-            FontStyle = FontStyle.Create();
-            LineFixedLength = LineFixedLength.Create();
-            LineStyle = LineStyle.Create();
-            Style = ShapeStyle.Create("Default");
-            TextStyle = TextStyle.Create();
+            FontStyle = Core2D.Style.FontStyle.Create();
+            LineFixedLength = Core2D.Style.LineFixedLength.Create();
+            LineStyle = Core2D.Style.LineStyle.Create();
+            Style = Core2D.Style.ShapeStyle.Create("Default");
+            TextStyle = Core2D.Style.TextStyle.Create();
 
             // Shapes
 

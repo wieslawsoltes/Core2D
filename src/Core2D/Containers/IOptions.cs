@@ -74,17 +74,17 @@ namespace Core2D.Containers
         /// <summary>
         /// Gets or sets point shape style.
         /// </summary>
-        ShapeStyle PointStyle { get; set; }
+        IShapeStyle PointStyle { get; set; }
 
         /// <summary>
         /// Gets or sets selection rectangle style.
         /// </summary>
-        ShapeStyle SelectionStyle { get; set; }
+        IShapeStyle SelectionStyle { get; set; }
 
         /// <summary>
         /// Gets or sets editor helper shapes style.
         /// </summary>
-        ShapeStyle HelperStyle { get; set; }
+        IShapeStyle HelperStyle { get; set; }
 
         /// <summary>
         /// Gets or sets value indicating whether style is cloned during creation.

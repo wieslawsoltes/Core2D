@@ -15,7 +15,7 @@ namespace Core2D.Shapes
     {
         private IBaseShape _owner;
         private IShapeState _state;
-        private ShapeStyle _style;
+        private IShapeStyle _style;
         private MatrixObject _transform;
         private bool _isStroked;
         private bool _isFilled;
@@ -39,7 +39,7 @@ namespace Core2D.Shapes
         }
 
         /// <inheritdoc/>
-        public virtual ShapeStyle Style
+        public virtual IShapeStyle Style
         {
             get => _style;
             set => Update(ref _style, value);

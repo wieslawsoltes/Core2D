@@ -22,15 +22,15 @@ namespace Core2D.Renderer.Wpf
     /// </summary>
     public class WpfRenderer : ShapeRenderer
     {
-        private ICache<ShapeStyle, (WM.Brush, WM.Pen)> _styleCache = Cache<ShapeStyle, (WM.Brush, WM.Pen)>.Create();
+        private ICache<IShapeStyle, (WM.Brush, WM.Pen)> _styleCache = Cache<IShapeStyle, (WM.Brush, WM.Pen)>.Create();
         private ICache<IArrowStyle, (WM.Brush, WM.Pen)> _arrowStyleCache = Cache<IArrowStyle, (WM.Brush, WM.Pen)>.Create();
         private ICache<ILineShape, WM.PathGeometry> _curvedLineCache = Cache<ILineShape, WM.PathGeometry>.Create();
         private ICache<IArcShape, WM.PathGeometry> _arcCache = Cache<IArcShape, WM.PathGeometry>.Create();
         private ICache<ICubicBezierShape, WM.PathGeometry> _cubicBezierCache = Cache<ICubicBezierShape, WM.PathGeometry>.Create();
         private ICache<IQuadraticBezierShape, WM.PathGeometry> _quadraticBezierCache = Cache<IQuadraticBezierShape, WM.PathGeometry>.Create();
-        private ICache<ITextShape, (string, WM.FormattedText, ShapeStyle)> _textCache = Cache<ITextShape, (string, WM.FormattedText, ShapeStyle)>.Create();
+        private ICache<ITextShape, (string, WM.FormattedText, IShapeStyle)> _textCache = Cache<ITextShape, (string, WM.FormattedText, IShapeStyle)>.Create();
         private ICache<string, WMI.BitmapImage> _biCache = Cache<string, WMI.BitmapImage>.Create(bi => bi.StreamSource.Dispose());
-        private ICache<IPathShape, (Path.IPathGeometry, WM.StreamGeometry, ShapeStyle)> _pathCache = Cache<IPathShape, (Path.IPathGeometry, WM.StreamGeometry, ShapeStyle)>.Create();
+        private ICache<IPathShape, (Path.IPathGeometry, WM.StreamGeometry, IShapeStyle)> _pathCache = Cache<IPathShape, (Path.IPathGeometry, WM.StreamGeometry, IShapeStyle)>.Create();
 
         /// <summary>
         /// Initializes a new instance of the <see cref="WpfRenderer"/> class.
@@ -52,7 +52,7 @@ namespace Core2D.Renderer.Wpf
         /// <returns>The new instance of the <see cref="WpfRenderer"/> class.</returns>
         public static ShapeRenderer Create() => new WpfRenderer();
 
-        private static W.Point GetTextOrigin(ShapeStyle style, ref W.Rect rect, WM.FormattedText ft)
+        private static W.Point GetTextOrigin(IShapeStyle style, ref W.Rect rect, WM.FormattedText ft)
         {
             double ox, oy;
 
@@ -216,7 +216,7 @@ namespace Core2D.Renderer.Wpf
             DrawPathGeometryInternal(dc, half, null, pen, line.IsStroked, false, pg);
         }
 
-        private void DrawLineArrowsInternal(WM.DrawingContext dc, ILineShape line, ShapeStyle style, double halfStart, double halfEnd, double thicknessStart, double thicknessEnd, double dx, double dy, out W.Point pt1, out W.Point pt2)
+        private void DrawLineArrowsInternal(WM.DrawingContext dc, ILineShape line, IShapeStyle style, double halfStart, double halfEnd, double thicknessStart, double thicknessEnd, double dx, double dy, out W.Point pt1, out W.Point pt2)
         {
             // Start arrow style.
             GetCached(style.StartArrowStyle, thicknessStart, out var fillStartArrow, out var strokeStartArrow);
@@ -536,7 +536,7 @@ namespace Core2D.Renderer.Wpf
             }
         }
 
-        private void GetCached(ShapeStyle style, double thickness, out WM.Brush fill, out WM.Pen stroke)
+        private void GetCached(IShapeStyle style, double thickness, out WM.Brush fill, out WM.Pen stroke)
         {
             (fill, stroke) = _styleCache.Get(style);
             if (fill == null || stroke == null)

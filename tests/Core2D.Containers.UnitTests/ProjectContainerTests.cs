@@ -146,7 +146,7 @@ namespace Core2D.UnitTests
         {
             var target = new ProjectContainer();
 
-            var library = Library<ShapeStyle>.Create("Library1");
+            var library = Library<IShapeStyle>.Create("Library1");
             target.StyleLibraries = target.StyleLibraries.Add(library);
 
             target.SetCurrentStyleLibrary(library);

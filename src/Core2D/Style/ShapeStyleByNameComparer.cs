@@ -5,17 +5,17 @@ using System.Collections.Generic;
 namespace Core2D.Style
 {
     /// <summary>
-    /// Defines methods to support the comparison of <see cref="ShapeStyle"/> objects for equality.
+    /// Defines methods to support the comparison of <see cref="IShapeStyle"/> objects for equality.
     /// </summary>
-    public class ShapeStyleByNameComparer : IEqualityComparer<ShapeStyle>
+    public class ShapeStyleByNameComparer : IEqualityComparer<IShapeStyle>
     {
         /// <summary>
         /// Determines whether the specified objects are equal.
         /// </summary>
-        /// <param name="x">The first object of type <see cref="ShapeStyle"/> to compare.</param>
-        /// <param name="y">The second object of type <see cref="ShapeStyle"/> to compare.</param>
+        /// <param name="x">The first object of type <see cref="IShapeStyle"/> to compare.</param>
+        /// <param name="y">The second object of type <see cref="IShapeStyle"/> to compare.</param>
         /// <returns>True if the specified objects are equal; otherwise, false.</returns>
-        public bool Equals(ShapeStyle x, ShapeStyle y)
+        public bool Equals(IShapeStyle x, IShapeStyle y)
         {
             if (object.ReferenceEquals(x, y))
                 return true;
@@ -29,9 +29,9 @@ namespace Core2D.Style
         /// <summary>
         /// Returns a hash code for the specified object.
         /// </summary>
-        /// <param name="style">The <see cref="ShapeStyle"/> for which a hash code is to be returned.</param>
+        /// <param name="style">The <see cref="IShapeStyle"/> for which a hash code is to be returned.</param>
         /// <returns>A hash code for the specified object.</returns>
-        public int GetHashCode(ShapeStyle style)
+        public int GetHashCode(IShapeStyle style)
         {
             if (style is null)
                 return 0;

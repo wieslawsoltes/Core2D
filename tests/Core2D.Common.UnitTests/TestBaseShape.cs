@@ -19,7 +19,7 @@ namespace Core2D.Common.UnitTests
         public Context Data { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
         public string Id { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
         public string Name { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public ShapeStyle Style { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public IShapeStyle Style { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
         public bool IsStroked { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
         public bool IsFilled { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
         public MatrixObject Transform { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }

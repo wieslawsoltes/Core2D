@@ -16,7 +16,7 @@ namespace Core2D.Style
         /// </summary>
         /// <param name="fontStyle">The font style to clone.</param>
         /// <returns>The new instance of the <see cref="FontStyle"/> class.</returns>
-        public static FontStyle Clone(this FontStyle fontStyle)
+        public static IFontStyle Clone(this IFontStyle fontStyle)
         {
             return new FontStyle()
             {
@@ -26,15 +26,49 @@ namespace Core2D.Style
     }
 
     /// <summary>
-    /// Specifies style flags proxy information applied to text.
+    /// Define font style contract.
     /// </summary>
-    public class FontStyle : ObservableObject
+    public interface IFontStyle : IObservableObject
     {
-        private FontStyleFlags _flags;
-
         /// <summary>
         /// Get or sets font style flags.
         /// </summary>
+        FontStyleFlags Flags { get; set; }
+
+        /// <summary>
+        /// Gets or sets <see cref="FontStyleFlags.Regular"/> flag.
+        /// </summary>
+        bool Regular { get; set; }
+
+        /// <summary>
+        /// Gets or sets <see cref="FontStyleFlags.Bold"/> flag.
+        /// </summary>
+        bool Bold { get; set; }
+
+        /// <summary>
+        /// Gets or sets <see cref="FontStyleFlags.Italic"/> flag.
+        /// </summary>
+        bool Italic { get; set; }
+
+        /// <summary>
+        /// Gets or sets <see cref="FontStyleFlags.Underline"/> flag.
+        /// </summary>
+        bool Underline { get; set; }
+
+        /// <summary>
+        /// Gets or sets <see cref="FontStyleFlags.Strikeout"/> flag.
+        /// </summary>
+        bool Strikeout { get; set; }
+    }
+
+    /// <summary>
+    /// Specifies style flags proxy information applied to text.
+    /// </summary>
+    public class FontStyle : ObservableObject, IFontStyle
+    {
+        private FontStyleFlags _flags;
+
+        /// <inheritdoc/>
         [Content]
         public FontStyleFlags Flags
         {
@@ -55,45 +89,35 @@ namespace Core2D.Style
             Notify(nameof(Strikeout));
         }
 
-        /// <summary>
-        /// Gets or sets <see cref="FontStyleFlags.Regular"/> flag.
-        /// </summary>
+        /// <inheritdoc/>
         public bool Regular
         {
             get => _flags == FontStyleFlags.Regular;
             set => Flags = value ? _flags | FontStyleFlags.Regular : _flags & ~FontStyleFlags.Regular;
         }
 
-        /// <summary>
-        /// Gets or sets <see cref="FontStyleFlags.Bold"/> flag.
-        /// </summary>
+        /// <inheritdoc/>
         public bool Bold
         {
             get => _flags.HasFlag(FontStyleFlags.Bold);
             set => Flags = value ? _flags | FontStyleFlags.Bold : _flags & ~FontStyleFlags.Bold;
         }
 
-        /// <summary>
-        /// Gets or sets <see cref="FontStyleFlags.Italic"/> flag.
-        /// </summary>
+        /// <inheritdoc/>
         public bool Italic
         {
             get => _flags.HasFlag(FontStyleFlags.Italic);
             set => Flags = value ? _flags | FontStyleFlags.Italic : _flags & ~FontStyleFlags.Italic;
         }
 
-        /// <summary>
-        /// Gets or sets <see cref="FontStyleFlags.Underline"/> flag.
-        /// </summary>
+        /// <inheritdoc/>
         public bool Underline
         {
             get => _flags.HasFlag(FontStyleFlags.Underline);
             set => Flags = value ? _flags | FontStyleFlags.Underline : _flags & ~FontStyleFlags.Underline;
         }
 
-        /// <summary>
-        /// Gets or sets <see cref="FontStyleFlags.Strikeout"/> flag.
-        /// </summary>
+        /// <inheritdoc/>
         public bool Strikeout
         {
             get => _flags.HasFlag(FontStyleFlags.Strikeout);
@@ -111,7 +135,7 @@ namespace Core2D.Style
         /// </summary>
         /// <param name="flags">The style flags information applied to text.</param>
         /// <returns>The new instance of the <see cref="FontStyle"/> class.</returns>
-        public static FontStyle Create(FontStyleFlags flags = FontStyleFlags.Regular)
+        public static IFontStyle Create(FontStyleFlags flags = FontStyleFlags.Regular)
         {
             return new FontStyle()
             {
@@ -124,7 +148,7 @@ namespace Core2D.Style
         /// </summary>
         /// <param name="s">The font style string.</param>
         /// <returns>The <see cref="FontStyle"/>.</returns>
-        public static FontStyle Parse(string s)
+        public static IFontStyle Parse(string s)
         {
             var flags = (FontStyleFlags)Enum.Parse(typeof(FontStyleFlags), s, true);
             return FontStyle.Create(flags);

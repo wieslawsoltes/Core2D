@@ -15,12 +15,12 @@ namespace Core2D.Editor
     public sealed class ContainerFactory : IContainerFactory
     {
         /// <summary>
-        /// Creates a new instance of the <see cref="ILibrary{ShapeStyle}"/> class.
+        /// Creates a new instance of the <see cref="ILibrary{IShapeStyle}"/> class.
         /// </summary>
-        /// <returns>The new instance of the <see cref="ILibrary{ShapeStyle}"/>.</returns>
-        public static ILibrary<ShapeStyle> DefaultStyleLibrary()
+        /// <returns>The new instance of the <see cref="ILibrary{IShapeStyle}"/>.</returns>
+        public static ILibrary<IShapeStyle> DefaultStyleLibrary()
         {
-            var sgd = Library<ShapeStyle>.Create("Default");
+            var sgd = Library<IShapeStyle>.Create("Default");
 
             var builder = sgd.Items.ToBuilder();
             builder.Add(ShapeStyle.Create("Black", 255, 0, 0, 0, 80, 0, 0, 0, 2.0));
@@ -41,9 +41,9 @@ namespace Core2D.Editor
         /// Creates a new instance of the <see cref="ILibrary{ShapeStyle}"/> class.
         /// </summary>
         /// <returns>The new instance of the <see cref="ILibrary{ShapeStyle}"/>.</returns>
-        public static ILibrary<ShapeStyle> LinesStyleLibrary()
+        public static ILibrary<IShapeStyle> LinesStyleLibrary()
         {
-            var sgdl = Library<ShapeStyle>.Create("Lines");
+            var sgdl = Library<IShapeStyle>.Create("Lines");
 
             var solid = ShapeStyle.Create("Solid", 255, 0, 0, 0, 80, 0, 0, 0, 2.0);
             solid.Dashes = default;
@@ -82,9 +82,9 @@ namespace Core2D.Editor
         /// Creates a new instance of the <see cref="ILibrary{ShapeStyle}"/> class.
         /// </summary>
         /// <returns>The new instance of the <see cref="ILibrary{ShapeStyle}"/>.</returns>
-        public static ILibrary<ShapeStyle> TemplateStyleLibrary()
+        public static ILibrary<IShapeStyle> TemplateStyleLibrary()
         {
-            var sgt = Library<ShapeStyle>.Create("Template");
+            var sgt = Library<IShapeStyle>.Create("Template");
             var gs = ShapeStyle.Create("Grid", 255, 222, 222, 222, 255, 222, 222, 222, 1.0);
 
             var builder = sgt.Items.ToBuilder();

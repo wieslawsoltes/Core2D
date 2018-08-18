@@ -351,13 +351,13 @@ namespace Core2D.Editor
         /// <param name="restore">Try to restore objects by name.</param>
         public void OnImportObject(object item, bool restore)
         {
-            if (item is ShapeStyle)
+            if (item is IShapeStyle style)
             {
-                Project?.AddStyle(Project?.CurrentStyleLibrary, item as ShapeStyle);
+                Project?.AddStyle(Project?.CurrentStyleLibrary, style);
             }
-            else if (item is IList<ShapeStyle>)
+            else if (item is IList<IShapeStyle> styleList)
             {
-                Project.AddItems(Project?.CurrentStyleLibrary, item as IList<ShapeStyle>);
+                Project.AddItems(Project?.CurrentStyleLibrary, styleList);
             }
             else if (item is IBaseShape)
             {
@@ -385,13 +385,13 @@ namespace Core2D.Editor
                 }
                 Project.AddItems(Project?.CurrentGroupLibrary, groups);
             }
-            else if (item is ILibrary<ShapeStyle>)
+            else if (item is ILibrary<IShapeStyle> sl)
             {
-                Project.AddStyleLibrary(item as ILibrary<ShapeStyle>);
+                Project.AddStyleLibrary(sl);
             }
-            else if (item is IList<ILibrary<ShapeStyle>>)
+            else if (item is IList<ILibrary<IShapeStyle>> sll)
             {
-                Project.AddStyleLibraries(item as IList<ILibrary<ShapeStyle>>);
+                Project.AddStyleLibraries(sll);
             }
             else if (item is ILibrary<IGroupShape> gl)
             {
@@ -1569,7 +1569,7 @@ namespace Core2D.Editor
         /// </summary>
         public void OnAddStyleLibrary()
         {
-            var sl = Library<ShapeStyle>.Create(Constants.DefaulStyleLibraryName);
+            var sl = Library<IShapeStyle>.Create(Constants.DefaulStyleLibraryName);
             Project.AddStyleLibrary(sl);
             Project.SetCurrentStyleLibrary(sl);
         }
@@ -1578,7 +1578,7 @@ namespace Core2D.Editor
         /// Remove style library.
         /// </summary>
         /// <param name="library">The style library to remove.</param>
-        public void OnRemoveStyleLibrary(ILibrary<ShapeStyle> library)
+        public void OnRemoveStyleLibrary(ILibrary<IShapeStyle> library)
         {
             Project.RemoveStyleLibrary(library);
             Project.SetCurrentStyleLibrary(Project?.StyleLibraries.FirstOrDefault());
@@ -1588,7 +1588,7 @@ namespace Core2D.Editor
         /// Add style.
         /// </summary>
         /// <param name="library">The style library.</param>
-        public void OnAddStyle(ILibrary<ShapeStyle> library)
+        public void OnAddStyle(ILibrary<IShapeStyle> library)
         {
             Project.AddStyle(library, ShapeStyle.Create(Constants.DefaulStyleName));
         }
@@ -1597,7 +1597,7 @@ namespace Core2D.Editor
         /// Remove style.
         /// </summary>
         /// <param name="style">The style to remove.</param>
-        public void OnRemoveStyle(ShapeStyle style)
+        public void OnRemoveStyle(IShapeStyle style)
         {
             var library = Project.RemoveStyle(style);
             library?.SetSelected(library?.Items.FirstOrDefault());
@@ -1607,7 +1607,7 @@ namespace Core2D.Editor
         /// Set current style as selected shape style.
         /// </summary>
         /// <param name="style">The shape style item.</param>
-        public void OnApplyStyle(ShapeStyle style)
+        public void OnApplyStyle(IShapeStyle style)
         {
             if (style != null)
             {
@@ -2279,7 +2279,7 @@ namespace Core2D.Editor
             }
         }
 
-        private IDictionary<string, ShapeStyle> GenerateStyleDictionaryByName()
+        private IDictionary<string, IShapeStyle> GenerateStyleDictionaryByName()
         {
             return Project?.StyleLibraries
                 .Where(sl => sl?.Items != null && sl?.Items.Length > 0)
@@ -2322,7 +2322,7 @@ namespace Core2D.Editor
                             // Create Imported style library.
                             if (Project?.CurrentStyleLibrary == null)
                             {
-                                var sl = Library<ShapeStyle>.Create(Constants.ImportedStyleLibraryName);
+                                var sl = Library<IShapeStyle>.Create(Constants.ImportedStyleLibraryName);
                                 Project.AddStyleLibrary(sl);
                                 Project.SetCurrentStyleLibrary(sl);
                             }
@@ -2861,14 +2861,14 @@ namespace Core2D.Editor
         }
 
         /// <summary>
-        /// Drop <see cref="ShapeStyle"/> object in current container at specified location.
+        /// Drop <see cref="IShapeStyle"/> object in current container at specified location.
         /// </summary>
-        /// <param name="style">The <see cref="ShapeStyle"/> object.</param>
+        /// <param name="style">The <see cref="IShapeStyle"/> object.</param>
         /// <param name="x">The X coordinate in container.</param>
         /// <param name="y">The Y coordinate in container.</param>
         /// <param name="bExecute">The flag indicating whether to execute action.</param>
         /// <returns>Returns true if success.</returns>
-        public bool OnDropStyle(ShapeStyle style, double x, double y, bool bExecute = true)
+        public bool OnDropStyle(IShapeStyle style, double x, double y, bool bExecute = true)
         {
             try
             {

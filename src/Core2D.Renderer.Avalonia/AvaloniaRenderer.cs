@@ -21,14 +21,14 @@ namespace Core2D.Renderer.Avalonia
     /// </summary>
     public class AvaloniaRenderer : ShapeRenderer
     {
-        private ICache<ShapeStyle, (AM.IBrush, AM.Pen)> _styleCache = Cache<ShapeStyle, (AM.IBrush, AM.Pen)>.Create();
+        private ICache<IShapeStyle, (AM.IBrush, AM.Pen)> _styleCache = Cache<IShapeStyle, (AM.IBrush, AM.Pen)>.Create();
         private ICache<IArrowStyle, (AM.IBrush, AM.Pen)> _arrowStyleCache = Cache<IArrowStyle, (AM.IBrush, AM.Pen)>.Create();
         // TODO: Add LineShape cache.
         // TODO: Add EllipseShape cache.
         // TODO: Add ArcShape cache.
         // TODO: Add CubicBezierShape cache.
         // TODO: Add QuadraticBezierShape cache.
-        private ICache<ITextShape, (string, AM.FormattedText, ShapeStyle)> _textCache = Cache<ITextShape, (string, AM.FormattedText, ShapeStyle)>.Create();
+        private ICache<ITextShape, (string, AM.FormattedText, IShapeStyle)> _textCache = Cache<ITextShape, (string, AM.FormattedText, IShapeStyle)>.Create();
         private ICache<string, AMI.Bitmap> _biCache = Cache<string, AMI.Bitmap>.Create(bi => bi.Dispose());
         // TODO: Add PathShape cache.
         private readonly Func<double, float> _scaleToPage;
@@ -57,7 +57,7 @@ namespace Core2D.Renderer.Avalonia
         /// <returns>The new instance of the <see cref="AvaloniaRenderer"/> class.</returns>
         public static ShapeRenderer Create() => new AvaloniaRenderer();
 
-        private A.Point GetTextOrigin(ShapeStyle style, ref Rect2 rect, ref A.Size size)
+        private A.Point GetTextOrigin(IShapeStyle style, ref Rect2 rect, ref A.Size size)
         {
             double ox, oy;
 
@@ -184,7 +184,7 @@ namespace Core2D.Renderer.Avalonia
             }
         }
 
-        private void DrawLineArrowsInternal(AM.DrawingContext dc, ILineShape line, ShapeStyle style, double dx, double dy, out A.Point pt1, out A.Point pt2)
+        private void DrawLineArrowsInternal(AM.DrawingContext dc, ILineShape line, IShapeStyle style, double dx, double dy, out A.Point pt1, out A.Point pt2)
         {
             // Start arrow style.
             GetCached(style.StartArrowStyle, out var fillStartArrow, out var strokeStartArrow);
@@ -421,7 +421,7 @@ namespace Core2D.Renderer.Avalonia
             }
         }
 
-        private void GetCached(ShapeStyle style, out AM.IBrush fill, out AM.Pen stroke)
+        private void GetCached(IShapeStyle style, out AM.IBrush fill, out AM.Pen stroke)
         {
             (fill, stroke) = _styleCache.Get(style);
             if (fill == null || stroke == null)

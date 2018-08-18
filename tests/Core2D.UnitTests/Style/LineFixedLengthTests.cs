@@ -35,13 +35,13 @@ namespace Core2D.UnitTests
 
             var propertyNames = new string[]
             {
-                nameof(LineFixedLength.Flags),
-                nameof(LineFixedLength.Disabled),
-                nameof(LineFixedLength.Start),
-                nameof(LineFixedLength.End),
-                nameof(LineFixedLength.Vertical),
-                nameof(LineFixedLength.Horizontal),
-                nameof(LineFixedLength.All)
+                nameof(ILineFixedLength.Flags),
+                nameof(ILineFixedLength.Disabled),
+                nameof(ILineFixedLength.Start),
+                nameof(ILineFixedLength.End),
+                nameof(ILineFixedLength.Vertical),
+                nameof(ILineFixedLength.Horizontal),
+                nameof(ILineFixedLength.All)
             };
 
             Assert.Equal(propertyNames, target.PropertyNames);

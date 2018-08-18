@@ -48,7 +48,7 @@ namespace Core2D.Renderer.SkiaSharp
         /// <returns>The new instance of the <see cref="SkiaSharpRenderer"/> class.</returns>
         public static ShapeRenderer Create() => new SkiaSharpRenderer();
 
-        private SKPoint GetTextOrigin(ShapeStyle style, ref SKRect rect, ref SKRect size)
+        private SKPoint GetTextOrigin(IShapeStyle style, ref SKRect rect, ref SKRect size)
         {
             double rwidth = Math.Abs(rect.Right - rect.Left);
             double rheight = Math.Abs(rect.Bottom - rect.Top);

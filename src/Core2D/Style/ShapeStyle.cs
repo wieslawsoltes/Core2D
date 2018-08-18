@@ -15,7 +15,7 @@ namespace Core2D.Style
         /// </summary>
         /// <param name="shapeStyle">The shape style to clone.</param>
         /// <returns>The new instance of the <see cref="ShapeStyle"/> class.</returns>
-        public static ShapeStyle Clone(this ShapeStyle shapeStyle)
+        public static IShapeStyle Clone(this IShapeStyle shapeStyle)
         {
             return new ShapeStyle()
             {
@@ -35,46 +35,64 @@ namespace Core2D.Style
     }
 
     /// <summary>
-    /// Shape style.
+    /// Define shape style contract.
     /// </summary>
-    public class ShapeStyle : BaseStyle
+    public interface IShapeStyle : IBaseStyle
     {
-        private LineStyle _lineStyle;
-        private IArrowStyle _startArrowStyle;
-        private IArrowStyle _endArrowStyle;
-        private TextStyle _textStyle;
-
         /// <summary>
         /// Gets or sets line style.
         /// </summary>
-        public LineStyle LineStyle
+        ILineStyle LineStyle { get; set; }
+
+        /// <summary>
+        /// Gets or sets start arrow style.
+        /// </summary>
+        IArrowStyle StartArrowStyle { get; set; }
+
+        /// <summary>
+        /// Gets or sets end arrow style.
+        /// </summary>
+        IArrowStyle EndArrowStyle { get; set; }
+
+        /// <summary>
+        /// Gets or sets text style.
+        /// </summary>
+        ITextStyle TextStyle { get; set; }
+    }
+
+    /// <summary>
+    /// Shape style.
+    /// </summary>
+    public class ShapeStyle : BaseStyle, IShapeStyle
+    {
+        private ILineStyle _lineStyle;
+        private IArrowStyle _startArrowStyle;
+        private IArrowStyle _endArrowStyle;
+        private ITextStyle _textStyle;
+
+        /// <inheritdoc/>
+        public ILineStyle LineStyle
         {
             get => _lineStyle;
             set => Update(ref _lineStyle, value);
         }
 
-        /// <summary>
-        /// Gets or sets start arrow style.
-        /// </summary>
+        /// <inheritdoc/>
         public IArrowStyle StartArrowStyle
         {
             get => _startArrowStyle;
             set => Update(ref _startArrowStyle, value);
         }
 
-        /// <summary>
-        /// Gets or sets end arrow style.
-        /// </summary>
+        /// <inheritdoc/>
         public IArrowStyle EndArrowStyle
         {
             get => _endArrowStyle;
             set => Update(ref _endArrowStyle, value);
         }
 
-        /// <summary>
-        /// Gets or sets text style.
-        /// </summary>
-        public TextStyle TextStyle
+        /// <inheritdoc/>
+        public ITextStyle TextStyle
         {
             get => _textStyle;
             set => Update(ref _textStyle, value);
@@ -107,7 +125,7 @@ namespace Core2D.Style
         /// <param name="dashes">The line dashes.</param>
         /// <param name="dashOffset">The line dash offset.</param>
         /// <returns>The new instance of the <see cref="ShapeStyle"/> class.</returns>
-        public static ShapeStyle Create(string name = null, byte sa = 0xFF, byte sr = 0x00, byte sg = 0x00, byte sb = 0x00, byte fa = 0xFF, byte fr = 0x00, byte fg = 0x00, byte fb = 0x00, double thickness = 2.0, TextStyle textStyle = null, LineStyle lineStyle = null, IArrowStyle startArrowStyle = null, IArrowStyle endArrowStyle = null, LineCap lineCap = LineCap.Round, string dashes = default, double dashOffset = 0.0)
+        public static IShapeStyle Create(string name = null, byte sa = 0xFF, byte sr = 0x00, byte sg = 0x00, byte sb = 0x00, byte fa = 0xFF, byte fr = 0x00, byte fg = 0x00, byte fb = 0x00, double thickness = 2.0, ITextStyle textStyle = null, ILineStyle lineStyle = null, IArrowStyle startArrowStyle = null, IArrowStyle endArrowStyle = null, LineCap lineCap = LineCap.Round, string dashes = default, double dashOffset = 0.0)
         {
             var style = new ShapeStyle()
             {
@@ -118,8 +136,8 @@ namespace Core2D.Style
                 LineCap = lineCap,
                 Dashes = dashes,
                 DashOffset = dashOffset,
-                LineStyle = lineStyle ?? LineStyle.Create(),
-                TextStyle = textStyle ?? TextStyle.Create()
+                LineStyle = lineStyle ?? Style.LineStyle.Create(),
+                TextStyle = textStyle ?? Style.TextStyle.Create()
             };
 
             style.StartArrowStyle = startArrowStyle ?? ArrowStyle.Create(style);
@@ -140,7 +158,7 @@ namespace Core2D.Style
         /// <param name="startArrowStyle">The start arrow style.</param>
         /// <param name="endArrowStyle">The end arrow style.</param>
         /// <returns>The new instance of the <see cref="ShapeStyle"/> class.</returns>
-        public static ShapeStyle Create(string name, IColor stroke, IColor fill, double thickness, TextStyle textStyle, LineStyle lineStyle, IArrowStyle startArrowStyle, IArrowStyle endArrowStyle)
+        public static IShapeStyle Create(string name, IColor stroke, IColor fill, double thickness, ITextStyle textStyle, ILineStyle lineStyle, IArrowStyle startArrowStyle, IArrowStyle endArrowStyle)
         {
             return new ShapeStyle()
             {

@@ -13,7 +13,7 @@ namespace Core2D.Editor.Tools.Selection
     {
         private readonly ILayerContainer _layer;
         private readonly IQuadraticBezierShape _quadraticBezier;
-        private readonly ShapeStyle _style;
+        private readonly IShapeStyle _style;
         private readonly IBaseShape _point;
         private ILineShape _line12;
         private ILineShape _line32;
@@ -28,7 +28,7 @@ namespace Core2D.Editor.Tools.Selection
         /// <param name="shape">The selected shape.</param>
         /// <param name="style">The selection shapes style.</param>
         /// <param name="point">The selection point shape.</param>
-        public ToolQuadraticBezierSelection(ILayerContainer layer, IQuadraticBezierShape shape, ShapeStyle style, IBaseShape point)
+        public ToolQuadraticBezierSelection(ILayerContainer layer, IQuadraticBezierShape shape, IShapeStyle style, IBaseShape point)
         {
             _layer = layer;
             _quadraticBezier = shape;

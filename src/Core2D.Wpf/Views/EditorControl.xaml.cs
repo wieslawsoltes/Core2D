@@ -98,7 +98,7 @@ namespace Core2D.Wpf.Views
                 && !e.Data.GetDataPresent(typeof(IBaseShape))
                 && !e.Data.GetDataPresent(typeof(IGroupShape))
                 && !e.Data.GetDataPresent(typeof(Record))
-                && !e.Data.GetDataPresent(typeof(ShapeStyle)))
+                && !e.Data.GetDataPresent(typeof(IShapeStyle)))
             {
                 e.Effects = DragDropEffects.None;
                 e.Handled = true;
@@ -179,11 +179,11 @@ namespace Core2D.Wpf.Views
             }
 
             // Styles.
-            if (e.Data.GetDataPresent(typeof(ShapeStyle)))
+            if (e.Data.GetDataPresent(typeof(IShapeStyle)))
             {
                 try
                 {
-                    if (e.Data.GetData(typeof(ShapeStyle)) is ShapeStyle style)
+                    if (e.Data.GetData(typeof(IShapeStyle)) is IShapeStyle style)
                     {
                         var p = e.GetPosition(drawableControl);
                         _projectEditor.OnDropStyle(style, p.X, p.Y);
