@@ -165,7 +165,7 @@ namespace Core2D.Renderer.WinForms
             strokeEndArrow.Dispose();
         }
 
-        private static PointF DrawLineArrowInternal(Graphics gfx, Pen pen, Brush brush, float x, float y, float angle, ArrowStyle style)
+        private static PointF DrawLineArrowInternal(Graphics gfx, Pen pen, Brush brush, float x, float y, float angle, IArrowStyle style)
         {
             PointF pt;
             var rt = new Matrix();

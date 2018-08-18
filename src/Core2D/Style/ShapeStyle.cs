@@ -40,8 +40,8 @@ namespace Core2D.Style
     public class ShapeStyle : BaseStyle
     {
         private LineStyle _lineStyle;
-        private ArrowStyle _startArrowStyle;
-        private ArrowStyle _endArrowStyle;
+        private IArrowStyle _startArrowStyle;
+        private IArrowStyle _endArrowStyle;
         private TextStyle _textStyle;
 
         /// <summary>
@@ -56,7 +56,7 @@ namespace Core2D.Style
         /// <summary>
         /// Gets or sets start arrow style.
         /// </summary>
-        public ArrowStyle StartArrowStyle
+        public IArrowStyle StartArrowStyle
         {
             get => _startArrowStyle;
             set => Update(ref _startArrowStyle, value);
@@ -65,7 +65,7 @@ namespace Core2D.Style
         /// <summary>
         /// Gets or sets end arrow style.
         /// </summary>
-        public ArrowStyle EndArrowStyle
+        public IArrowStyle EndArrowStyle
         {
             get => _endArrowStyle;
             set => Update(ref _endArrowStyle, value);
@@ -107,7 +107,7 @@ namespace Core2D.Style
         /// <param name="dashes">The line dashes.</param>
         /// <param name="dashOffset">The line dash offset.</param>
         /// <returns>The new instance of the <see cref="ShapeStyle"/> class.</returns>
-        public static ShapeStyle Create(string name = null, byte sa = 0xFF, byte sr = 0x00, byte sg = 0x00, byte sb = 0x00, byte fa = 0xFF, byte fr = 0x00, byte fg = 0x00, byte fb = 0x00, double thickness = 2.0, TextStyle textStyle = null, LineStyle lineStyle = null, ArrowStyle startArrowStyle = null, ArrowStyle endArrowStyle = null, LineCap lineCap = LineCap.Round, string dashes = default, double dashOffset = 0.0)
+        public static ShapeStyle Create(string name = null, byte sa = 0xFF, byte sr = 0x00, byte sg = 0x00, byte sb = 0x00, byte fa = 0xFF, byte fr = 0x00, byte fg = 0x00, byte fb = 0x00, double thickness = 2.0, TextStyle textStyle = null, LineStyle lineStyle = null, IArrowStyle startArrowStyle = null, IArrowStyle endArrowStyle = null, LineCap lineCap = LineCap.Round, string dashes = default, double dashOffset = 0.0)
         {
             var style = new ShapeStyle()
             {
@@ -140,7 +140,7 @@ namespace Core2D.Style
         /// <param name="startArrowStyle">The start arrow style.</param>
         /// <param name="endArrowStyle">The end arrow style.</param>
         /// <returns>The new instance of the <see cref="ShapeStyle"/> class.</returns>
-        public static ShapeStyle Create(string name, IColor stroke, IColor fill, double thickness, TextStyle textStyle, LineStyle lineStyle, ArrowStyle startArrowStyle, ArrowStyle endArrowStyle)
+        public static ShapeStyle Create(string name, IColor stroke, IColor fill, double thickness, TextStyle textStyle, LineStyle lineStyle, IArrowStyle startArrowStyle, IArrowStyle endArrowStyle)
         {
             return new ShapeStyle()
             {

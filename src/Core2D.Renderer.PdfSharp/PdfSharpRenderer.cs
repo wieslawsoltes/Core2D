@@ -147,7 +147,7 @@ namespace Core2D.Renderer.PdfSharp
             pt2 = DrawLineArrowInternal(gfx, strokeEndArrow, fillEndArrow, x2, y2, a2, eas);
         }
 
-        private static XPoint DrawLineArrowInternal(XGraphics gfx, XPen pen, XBrush brush, double x, double y, double angle, ArrowStyle style)
+        private static XPoint DrawLineArrowInternal(XGraphics gfx, XPen pen, XBrush brush, double x, double y, double angle, IArrowStyle style)
         {
             XPoint pt;
             var rt = new XMatrix();

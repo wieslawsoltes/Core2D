@@ -22,7 +22,7 @@ namespace Core2D.Renderer.Avalonia
     public class AvaloniaRenderer : ShapeRenderer
     {
         private ICache<ShapeStyle, (AM.IBrush, AM.Pen)> _styleCache = Cache<ShapeStyle, (AM.IBrush, AM.Pen)>.Create();
-        private ICache<ArrowStyle, (AM.IBrush, AM.Pen)> _arrowStyleCache = Cache<ArrowStyle, (AM.IBrush, AM.Pen)>.Create();
+        private ICache<IArrowStyle, (AM.IBrush, AM.Pen)> _arrowStyleCache = Cache<IArrowStyle, (AM.IBrush, AM.Pen)>.Create();
         // TODO: Add LineShape cache.
         // TODO: Add EllipseShape cache.
         // TODO: Add ArcShape cache.
@@ -218,7 +218,7 @@ namespace Core2D.Renderer.Avalonia
             pt2 = DrawLineArrowInternal(dc, strokeEndArrow, fillEndArrow, x2, y2, a2, eas);
         }
 
-        private static A.Point DrawLineArrowInternal(AM.DrawingContext dc, AM.Pen pen, AM.IBrush brush, float x, float y, double angle, ArrowStyle style)
+        private static A.Point DrawLineArrowInternal(AM.DrawingContext dc, AM.Pen pen, AM.IBrush brush, float x, float y, double angle, IArrowStyle style)
         {
             A.Point pt = default;
             var rt = APAZ.MatrixHelper.Rotation(angle, new A.Vector(x, y));
@@ -410,7 +410,7 @@ namespace Core2D.Renderer.Avalonia
             return new A.Matrix(m.M11, m.M12, m.M21, m.M22, m.OffsetX, m.OffsetY);
         }
 
-        private void GetCached(ArrowStyle style, out AM.IBrush fill, out AM.Pen stroke)
+        private void GetCached(IArrowStyle style, out AM.IBrush fill, out AM.Pen stroke)
         {
             (fill, stroke) = _arrowStyleCache.Get(style);
             if (fill == null || stroke == null)

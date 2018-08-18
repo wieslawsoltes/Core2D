@@ -23,7 +23,7 @@ namespace Core2D.Renderer.Wpf
     public class WpfRenderer : ShapeRenderer
     {
         private ICache<ShapeStyle, (WM.Brush, WM.Pen)> _styleCache = Cache<ShapeStyle, (WM.Brush, WM.Pen)>.Create();
-        private ICache<ArrowStyle, (WM.Brush, WM.Pen)> _arrowStyleCache = Cache<ArrowStyle, (WM.Brush, WM.Pen)>.Create();
+        private ICache<IArrowStyle, (WM.Brush, WM.Pen)> _arrowStyleCache = Cache<IArrowStyle, (WM.Brush, WM.Pen)>.Create();
         private ICache<ILineShape, WM.PathGeometry> _curvedLineCache = Cache<ILineShape, WM.PathGeometry>.Create();
         private ICache<IArcShape, WM.PathGeometry> _arcCache = Cache<IArcShape, WM.PathGeometry>.Create();
         private ICache<ICubicBezierShape, WM.PathGeometry> _cubicBezierCache = Cache<ICubicBezierShape, WM.PathGeometry>.Create();
@@ -245,7 +245,7 @@ namespace Core2D.Renderer.Wpf
             pt2 = DrawLineArrowInternal(dc, halfEnd, strokeEndArrow, fillEndArrow, x2, y2, a2, eas);
         }
 
-        private static W.Point DrawLineArrowInternal(WM.DrawingContext dc, double half, WM.Pen pen, WM.Brush brush, double x, double y, double angle, ArrowStyle style)
+        private static W.Point DrawLineArrowInternal(WM.DrawingContext dc, double half, WM.Pen pen, WM.Brush brush, double x, double y, double angle, IArrowStyle style)
         {
             W.Point pt;
             bool doRectTransform = angle % 90.0 != 0.0;
@@ -525,7 +525,7 @@ namespace Core2D.Renderer.Wpf
             return new WM.MatrixTransform(m.M11, m.M12, m.M21, m.M22, m.OffsetX, m.OffsetY);
         }
 
-        private void GetCached(ArrowStyle style, double thickness, out WM.Brush fill, out WM.Pen stroke)
+        private void GetCached(IArrowStyle style, double thickness, out WM.Brush fill, out WM.Pen stroke)
         {
             (fill, stroke) = _arrowStyleCache.Get(style);
             if (fill == null || stroke == null)

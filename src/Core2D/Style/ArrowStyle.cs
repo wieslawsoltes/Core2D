@@ -15,7 +15,7 @@ namespace Core2D.Style
         /// Clones arrow style.
         /// </summary>
         /// <returns>The new instance of the <see cref="ArrowStyle"/> class.</returns>
-        public static ArrowStyle Clone(this ArrowStyle arrowStyle)
+        public static IArrowStyle Clone(this IArrowStyle arrowStyle)
         {
             return new ArrowStyle()
             {
@@ -38,7 +38,7 @@ namespace Core2D.Style
     /// <summary>
     /// Line ending arrow style.
     /// </summary>
-    public class ArrowStyle : BaseStyle
+    public class ArrowStyle : BaseStyle, IArrowStyle
     {
         private ArrowType _arrowType;
         private bool _isStroked;
@@ -46,45 +46,35 @@ namespace Core2D.Style
         private double _radiusX;
         private double _radiusY;
 
-        /// <summary>
-        /// Gets or sets arrow type.
-        /// </summary>
+        /// <inheritdoc/>
         public ArrowType ArrowType
         {
             get => _arrowType;
             set => Update(ref _arrowType, value);
         }
 
-        /// <summary>
-        /// Gets or sets value indicating whether arrow shape is stroked.
-        /// </summary>
+        /// <inheritdoc/>
         public bool IsStroked
         {
             get => _isStroked;
             set => Update(ref _isStroked, value);
         }
 
-        /// <summary>
-        /// Gets or sets value indicating whether arrow shape is filled.
-        /// </summary>
+        /// <inheritdoc/>
         public bool IsFilled
         {
             get => _isFilled;
             set => Update(ref _isFilled, value);
         }
 
-        /// <summary>
-        /// Gets or sets arrow X axis radius.
-        /// </summary>
+        /// <inheritdoc/>
         public double RadiusX
         {
             get => _radiusX;
             set => Update(ref _radiusX, value);
         }
 
-        /// <summary>
-        /// Gets or sets arrow Y axis radius.
-        /// </summary>
+        /// <inheritdoc/>
         public double RadiusY
         {
             get => _radiusY;
@@ -127,7 +117,7 @@ namespace Core2D.Style
         /// <param name="radiusX">The arrow X axis radius.</param>
         /// <param name="radiusY">The arrow Y axis radius.</param>
         /// <returns>The new instance of the <see cref="ArrowStyle"/> class.</returns>
-        public static ArrowStyle Create(ArrowType arrowType = ArrowType.None, bool isStroked = true, bool isFilled = false, double radiusX = 5.0, double radiusY = 3.0)
+        public static IArrowStyle Create(ArrowType arrowType = ArrowType.None, bool isStroked = true, bool isFilled = false, double radiusX = 5.0, double radiusY = 3.0)
         {
             return new ArrowStyle()
             {
@@ -148,7 +138,7 @@ namespace Core2D.Style
         /// <param name="radiusX">The arrow X axis radius.</param>
         /// <param name="radiusY">The arrow Y axis radius.</param>
         /// <returns>The new instance of the <see cref="ArrowStyle"/> class.</returns>
-        public static ArrowStyle Create(IBaseStyle source, ArrowType arrowType = ArrowType.None, bool isStroked = true, bool isFilled = false, double radiusX = 5.0, double radiusY = 5.0)
+        public static IArrowStyle Create(IBaseStyle source, ArrowType arrowType = ArrowType.None, bool isStroked = true, bool isFilled = false, double radiusX = 5.0, double radiusY = 5.0)
         {
             return new ArrowStyle(source)
             {
@@ -171,7 +161,7 @@ namespace Core2D.Style
         /// <param name="radiusX">The arrow X axis radius.</param>
         /// <param name="radiusY">The arrow Y axis radius.</param>
         /// <returns>The new instance of the <see cref="ArrowStyle"/> class.</returns>
-        public static ArrowStyle Create(string name, IBaseStyle source, ArrowType arrowType = ArrowType.None, bool isStroked = true, bool isFilled = false, double radiusX = 5.0, double radiusY = 5.0)
+        public static IArrowStyle Create(string name, IBaseStyle source, ArrowType arrowType = ArrowType.None, bool isStroked = true, bool isFilled = false, double radiusX = 5.0, double radiusY = 5.0)
         {
             return new ArrowStyle(source)
             {
