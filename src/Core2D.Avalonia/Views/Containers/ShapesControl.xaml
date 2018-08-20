@@ -12,14 +12,11 @@
              xmlns:Designer="clr-namespace:Core2D.Editor.Designer;assembly=Core2D.Editor"
              Design.DataContext="{x:Static Designer:DesignerContext.Page}"
              Design.Width="250" Design.Height="400">
-    <UserControl.Resources>
-        <converters:IsNotNullConverter x:Key="IsNotNullConverter"/>
-    </UserControl.Resources>
     <TabControl Classes="default">
         <TabItem Header="Shapes" Classes="property">
             <Grid RowDefinitions="Auto,*,Auto">
                 <Menu Grid.Row="0" HorizontalAlignment="Right">
-                    <MenuItem Header="-" Command="{Binding $parent[Window].DataContext.OnRemoveShape}" CommandParameter="{Binding CurrentShape}" IsVisible="{Binding CurrentShape, Converter={StaticResource IsNotNullConverter}}"/>
+                    <MenuItem Header="-" Command="{Binding $parent[Window].DataContext.OnRemoveShape}" CommandParameter="{Binding CurrentShape}" IsVisible="{Binding !!CurrentShape}"/>
                 </Menu>
                 <ListBox x:Name="shapes" Items="{Binding CurrentLayer.Shapes}" SelectedItem="{Binding CurrentShape, Mode=TwoWay}" VirtualizationMode="Simple" Classes="default" Grid.Row="1">
                     <ListBox.ItemsPanel>
@@ -45,7 +42,7 @@
                         </DataTemplate>
                     </ListBox.DataTemplates>
                 </ListBox>
-                <Grid RowDefinitions="Auto" ColumnDefinitions="Auto,*" Grid.Row="2" IsVisible="{Binding CurrentShape, Converter={StaticResource IsNotNullConverter}}">
+                <Grid RowDefinitions="Auto" ColumnDefinitions="Auto,*" Grid.Row="2" IsVisible="{Binding !!CurrentShape}">
                     <TextBlock Text="Name" Classes="left" Grid.Row="0" Grid.Column="0"/>
                     <TextBox Text="{Binding CurrentShape.Name, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
                 </Grid>

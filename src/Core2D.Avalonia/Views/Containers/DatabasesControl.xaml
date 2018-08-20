@@ -9,15 +9,12 @@
              xmlns:Designer="clr-namespace:Core2D.Editor.Designer;assembly=Core2D.Editor"
              Design.DataContext="{x:Static Designer:DesignerContext.Project}"
              Design.Width="250" Design.Height="400">
-    <UserControl.Resources>
-        <converters:IsNotNullConverter x:Key="IsNotNullConverter"/>
-    </UserControl.Resources>
     <Grid RowDefinitions="Auto,Auto,*">
         <Menu Grid.Row="0" HorizontalAlignment="Right">
             <MenuItem Header="+" Command="{Binding $parent[Window].DataContext.OnAddDatabase}"/>
-            <MenuItem Header="-" Command="{Binding $parent[Window].DataContext.OnRemoveDatabase}" CommandParameter="{Binding CurrentDatabase}" IsVisible="{Binding CurrentDatabase, Converter={StaticResource IsNotNullConverter}}"/>
+            <MenuItem Header="-" Command="{Binding $parent[Window].DataContext.OnRemoveDatabase}" CommandParameter="{Binding CurrentDatabase}" IsVisible="{Binding !!CurrentDatabase}"/>
         </Menu>
-        <DropDown Items="{Binding Databases}" SelectedItem="{Binding CurrentDatabase, Mode=TwoWay}" Grid.Row="1" Classes="default" IsVisible="{Binding CurrentDatabase, Converter={StaticResource IsNotNullConverter}}">
+        <DropDown Items="{Binding Databases}" SelectedItem="{Binding CurrentDatabase, Mode=TwoWay}" Grid.Row="1" Classes="default" IsVisible="{Binding !!CurrentDatabase}">
             <DropDown.DataTemplates>
                 <DataTemplate DataType="DataCore:IDatabase">
                     <TextBlock Text="{Binding Name}" Classes="default"/>

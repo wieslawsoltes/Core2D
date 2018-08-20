@@ -14,7 +14,6 @@
              Design.DataContext="{x:Static Designer:DesignerContext.Project}"
              Design.Width="250" Design.Height="400">
     <UserControl.Resources>
-        <converters:IsNotNullConverter x:Key="IsNotNullConverter"/>
         <handlers:ListBoxDropHandler x:Key="ListBoxDropHandler"/>
     </UserControl.Resources>
     <Grid RowDefinitions="Auto,*,Auto">
@@ -53,12 +52,12 @@
             </ListBox.DataTemplates>
         </ListBox>
         <Menu Grid.Row="0" HorizontalAlignment="Right">
-            <MenuItem Header="apply" Command="{Binding $parent[Window].DataContext.OnApplyTemplate}" CommandParameter="{Binding CurrentTemplate}" IsVisible="{Binding #templates.SelectedItem, Converter={StaticResource IsNotNullConverter}}"/>
-            <MenuItem Header="edit" Command="{Binding $parent[Window].DataContext.OnEditTemplate}" CommandParameter="{Binding CurrentTemplate}" IsVisible="{Binding #templates.SelectedItem, Converter={StaticResource IsNotNullConverter}}"/>
+            <MenuItem Header="apply" Command="{Binding $parent[Window].DataContext.OnApplyTemplate}" CommandParameter="{Binding CurrentTemplate}" IsVisible="{Binding !!#templates.SelectedItem}"/>
+            <MenuItem Header="edit" Command="{Binding $parent[Window].DataContext.OnEditTemplate}" CommandParameter="{Binding CurrentTemplate}" IsVisible="{Binding !!#templates.SelectedItem}"/>
             <MenuItem Header="+" Command="{Binding $parent[Window].DataContext.OnAddTemplate}"/>
-            <MenuItem Header="-" Command="{Binding $parent[Window].DataContext.OnRemoveTemplate}" CommandParameter="{Binding CurrentTemplate}" IsVisible="{Binding #templates.SelectedItem, Converter={StaticResource IsNotNullConverter}}"/>
+            <MenuItem Header="-" Command="{Binding $parent[Window].DataContext.OnRemoveTemplate}" CommandParameter="{Binding CurrentTemplate}" IsVisible="{Binding !!#templates.SelectedItem}"/>
         </Menu>
-        <Grid RowDefinitions="Auto" ColumnDefinitions="Auto,*" Grid.Row="2" IsVisible="{Binding #templates.SelectedItem, Converter={StaticResource IsNotNullConverter}}">
+        <Grid RowDefinitions="Auto" ColumnDefinitions="Auto,*" Grid.Row="2" IsVisible="{Binding !!#templates.SelectedItem}">
             <TextBlock Text="Name" Classes="left" Grid.Row="0" Grid.Column="0"/>
             <TextBox Text="{Binding #templates.SelectedItem.Name, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
         </Grid>

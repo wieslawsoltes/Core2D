@@ -583,7 +583,6 @@
         <converters:EditorToStatsMultiConverter x:Key="EditorToStatsMultiConverter"/>
         <converters:EditorToTitleMultiConverter x:Key="EditorToTitleMultiConverter"/>
         <converters:IsGroupConverter x:Key="IsGroupConverter"/>
-        <converters:IsNotNullConverter x:Key="IsNotNullConverter"/>
         <converters:IsNullConverter x:Key="IsNullConverter"/>
         <converters:ObjectEqualityMultiConverter x:Key="ObjectEqualityMultiConverter"/>
         <converters:ObjectEqualsConverter x:Key="ObjectEqualsConverter"/>

@@ -12,15 +12,12 @@
              xmlns:Designer="clr-namespace:Core2D.Editor.Designer;assembly=Core2D.Editor"
              Design.DataContext="{x:Static Designer:DesignerContext.Page}"
              Design.Width="250" Design.Height="400">
-    <UserControl.Resources>
-        <converters:IsNotNullConverter x:Key="IsNotNullConverter"/>
-    </UserControl.Resources>
     <TabControl Classes="default">
         <TabItem Header="Layers" Classes="property">
             <Grid RowDefinitions="Auto,*,Auto">
                 <Menu Grid.Row="0" HorizontalAlignment="Right">
                     <MenuItem Header="+" Command="{Binding $parent[Window].DataContext.OnAddLayer}" CommandParameter="{Binding}"/>
-                    <MenuItem Header="-" Command="{Binding $parent[Window].DataContext.OnRemoveLayer}" CommandParameter="{Binding CurrentLayer}" IsVisible="{Binding CurrentLayer, Converter={StaticResource IsNotNullConverter}}"/>
+                    <MenuItem Header="-" Command="{Binding $parent[Window].DataContext.OnRemoveLayer}" CommandParameter="{Binding CurrentLayer}" IsVisible="{Binding !!CurrentLayer}"/>
                 </Menu>
                 <ListBox x:Name="layers" Items="{Binding Layers}" SelectedItem="{Binding CurrentLayer, Mode=TwoWay}" Classes="default" Grid.Row="1">
                     <ListBox.KeyBindings>
@@ -44,7 +41,7 @@
                         </DataTemplate>
                     </ListBox.DataTemplates>
                 </ListBox>
-                <Grid RowDefinitions="Auto" ColumnDefinitions="Auto,*" Grid.Row="2" IsVisible="{Binding CurrentLayer, Converter={StaticResource IsNotNullConverter}}">
+                <Grid RowDefinitions="Auto" ColumnDefinitions="Auto,*" Grid.Row="2" IsVisible="{Binding !!CurrentLayer}">
                     <TextBlock Text="Name" Classes="left" Grid.Row="0" Grid.Column="0"/>
                     <TextBox Text="{Binding CurrentLayer.Name, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
                 </Grid>

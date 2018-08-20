@@ -14,28 +14,27 @@
              Design.DataContext="{x:Static Designer:DesignerContext.CurrentStyleLibrary}"
              Design.Width="250" Design.Height="400">
     <UserControl.Resources>
-        <converters:IsNotNullConverter x:Key="IsNotNullConverter"/>
         <handlers:ListBoxDropHandler x:Key="ListBoxDropHandler"/>
     </UserControl.Resources>
     <Grid RowDefinitions="Auto,Auto,Auto,*,Auto">
         <Grid RowDefinitions="*" ColumnDefinitions="*,Auto" Grid.Row="0">
-            <TextBox Text="{Binding Name, Mode=TwoWay}" Classes="left" Grid.Column="0" IsVisible="{Binding Converter={StaticResource IsNotNullConverter}}"/>
+            <TextBox Text="{Binding Name, Mode=TwoWay}" Classes="left" Grid.Column="0" IsVisible="{Binding !!$self.DataContext}"/>
             <Menu Grid.Column="1" HorizontalAlignment="Right">
                 <MenuItem Header="+" Command="{Binding $parent[Window].DataContext.OnAddStyleLibrary}"/>
-                <MenuItem Header="-" Command="{Binding $parent[Window].DataContext.OnRemoveStyleLibrary}" CommandParameter="{Binding}" IsVisible="{Binding Converter={StaticResource IsNotNullConverter}}"/>
+                <MenuItem Header="-" Command="{Binding $parent[Window].DataContext.OnRemoveStyleLibrary}" CommandParameter="{Binding}" IsVisible="{Binding !!$self.DataContext}"/>
             </Menu>
         </Grid>
-        <DropDown Items="{Binding $parent[Window].DataContext.Project.StyleLibraries}" SelectedItem="{Binding $parent[Window].DataContext.Project.CurrentStyleLibrary, Mode=TwoWay}" Grid.Row="1" Classes="default" IsVisible="{Binding Converter={StaticResource IsNotNullConverter}}">
+        <DropDown Items="{Binding $parent[Window].DataContext.Project.StyleLibraries}" SelectedItem="{Binding $parent[Window].DataContext.Project.CurrentStyleLibrary, Mode=TwoWay}" Grid.Row="1" Classes="default" IsVisible="{Binding !!$self.DataContext}">
             <DropDown.DataTemplates>
                 <DataTemplate>
                     <TextBlock Text="{Binding Name}" Classes="default"/>
                 </DataTemplate>
             </DropDown.DataTemplates>
         </DropDown>
-        <Menu Grid.Row="2" HorizontalAlignment="Right" IsVisible="{Binding Converter={StaticResource IsNotNullConverter}}">
-            <MenuItem Header="apply" Command="{Binding $parent[Window].DataContext.OnApplyStyle}" CommandParameter="{Binding Selected}" IsVisible="{Binding Selected, Converter={StaticResource IsNotNullConverter}}"/>
+        <Menu Grid.Row="2" HorizontalAlignment="Right" IsVisible="{Binding !!$self.DataContext}">
+            <MenuItem Header="apply" Command="{Binding $parent[Window].DataContext.OnApplyStyle}" CommandParameter="{Binding Selected}" IsVisible="{Binding !!Selected}"/>
             <MenuItem Header="+" Command="{Binding $parent[Window].DataContext.OnAddStyle}" CommandParameter="{Binding}"/>
-            <MenuItem Header="-" Command="{Binding $parent[Window].DataContext.OnRemoveStyle}" CommandParameter="{Binding Selected}" IsVisible="{Binding Selected, Converter={StaticResource IsNotNullConverter}}"/>
+            <MenuItem Header="-" Command="{Binding $parent[Window].DataContext.OnRemoveStyle}" CommandParameter="{Binding Selected}" IsVisible="{Binding !!Selected}"/>
         </Menu>
         <ListBox x:Name="styles" Items="{Binding Items}" SelectedItem="{Binding Selected, Mode=TwoWay}" Grid.Row="3" Classes="default">
             <i:Interaction.Behaviors>
@@ -66,7 +65,7 @@
                 </DataTemplate>
             </ListBox.DataTemplates>
         </ListBox>
-        <Grid RowDefinitions="Auto" ColumnDefinitions="Auto,*" Grid.Row="4" IsVisible="{Binding #styles.SelectedItem, Converter={StaticResource IsNotNullConverter}}">
+        <Grid RowDefinitions="Auto" ColumnDefinitions="Auto,*" Grid.Row="4" IsVisible="{Binding !!#styles.SelectedItem}">
             <TextBlock Text="Name" Classes="left" Grid.Row="0" Grid.Column="0"/>
             <TextBox Text="{Binding #styles.SelectedItem.Name, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
         </Grid>
