@@ -578,8 +578,6 @@
         </VisualBrush>
         <!-- Converters -->
         <converters:ArgbColorToBrushMultiConverter x:Key="ArgbColorToBrushMultiConverter"/>
-        <converters:ByteToDoubleConverter x:Key="ByteToDoubleConverter"/>
-        <converters:ByteToStringConverter x:Key="ByteToStringConverter"/>
         <converters:EditorToStatsMultiConverter x:Key="EditorToStatsMultiConverter"/>
         <converters:EditorToTitleMultiConverter x:Key="EditorToTitleMultiConverter"/>
         <converters:IsGroupConverter x:Key="IsGroupConverter"/>
