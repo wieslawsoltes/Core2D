@@ -16,8 +16,8 @@
         <Menu Grid.Row="0" Grid.Column="0" HorizontalAlignment="Right">
             <MenuItem Header="+" Command="{Binding $parent[Window].DataContext.OnAddColumn}" CommandParameter="{Binding}"/>
         </Menu>
-        <TextBlock Grid.Column="0" Grid.Row="1" VerticalAlignment="Center" Text="Name" Classes="default"/>
-        <ScrollViewer Grid.Column="0" Grid.Row="2">
+        <TextBlock Grid.Column="0" Grid.Row="1" VerticalAlignment="Center" Text="Name" Classes="default" IsVisible="{Binding !!Columns.Length}"/>
+        <ScrollViewer Grid.Column="0" Grid.Row="2" IsVisible="{Binding !!Columns.Length}">
             <ItemsControl Items="{Binding Columns}" VerticalAlignment="Stretch">
                 <ItemsControl.DataTemplates>
                     <DataTemplate DataType="DataCore:IColumn">
