@@ -3,7 +3,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 
-namespace Core2D.Common.UnitTests
+namespace Core2D.Common
 {
     public class PropertyChangedObserver
     {

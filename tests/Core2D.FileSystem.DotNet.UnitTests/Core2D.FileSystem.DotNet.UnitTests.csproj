@@ -13,6 +13,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\src\Core2D\Core2D.csproj" />
     <ProjectReference Include="..\..\src\Core2D.FileSystem.DotNet\Core2D.FileSystem.DotNet.csproj" />
+    <ProjectReference Include="..\Core2D.Common\Core2D.Common.csproj" />
   </ItemGroup>
 
   <ItemGroup>

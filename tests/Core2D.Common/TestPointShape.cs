@@ -3,7 +3,7 @@
 using System;
 using Core2D.Shapes;
 
-namespace Core2D.Common.UnitTests
+namespace Core2D.Common
 {
     public class TestPointShape : TestBaseShape, IPointShape
     {
