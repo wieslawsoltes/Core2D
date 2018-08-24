@@ -18,41 +18,27 @@ Teardown<Parameters>((context, parameters) =>
 Task("Clean")
     .Does<Parameters>(parameters => 
 {
-    foreach(var project in parameters.BuildProjects)
+    DotNetCoreClean(parameters.Solution, new DotNetCoreCleanSettings
     {
-        (string path, string name) = project;
-        Information($"Clean: {name}");
-        DotNetCoreClean($"{path}/{name}/{name}.csproj", new DotNetCoreCleanSettings {
-            Configuration = parameters.Configuration
-        });
-    }
+        Configuration = parameters.Configuration
+    });
 });
 
 Task("Restore")
     .Does<Parameters>(parameters => 
 {
-    foreach(var project in parameters.BuildProjects)
-    {
-        (string path, string name) = project;
-        Information($"Restore: {name}");
-        DotNetCoreRestore($"{path}/{name}/{name}.csproj", new DotNetCoreRestoreSettings {
-            DisableParallel = false
-        });
-    }
+    DotNetCoreRestore(parameters.Solution, new DotNetCoreRestoreSettings {
+        DisableParallel = false
+    });
 });
 
 Task("Build")
     .Does<Parameters>(parameters => 
 {
-    foreach(var project in parameters.BuildProjects)
-    {
-        (string path, string name) = project;
-        Information($"Build: {name}");
-        DotNetCoreBuild($"{path}/{name}/{name}.csproj", new DotNetCoreBuildSettings {
-            Configuration = parameters.Configuration,
-            VersionSuffix = parameters.VersionSuffix
-        });
-    }
+    DotNetCoreBuild(parameters.Solution, new DotNetCoreBuildSettings {
+        Configuration = parameters.Configuration,
+        VersionSuffix = parameters.VersionSuffix
+    });
 });
 
 Task("Test")
