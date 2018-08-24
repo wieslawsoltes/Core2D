@@ -5,12 +5,14 @@ using Core2D.Serializer.Xaml;
 
 [assembly: XmlnsDefinition(XamlConstants.EditorNamespace, "Core2D.Editor", AssemblyName = "Core2D.Editor")]
 [assembly: XmlnsDefinition(XamlConstants.EditorNamespace, "Core2D.Editor.Bounds", AssemblyName = "Core2D.Editor")]
+[assembly: XmlnsDefinition(XamlConstants.EditorNamespace, "Core2D.Editor.Bounds.Shapes", AssemblyName = "Core2D.Editor")]
 [assembly: XmlnsDefinition(XamlConstants.EditorNamespace, "Core2D.Editor.Designer", AssemblyName = "Core2D.Editor")]
-[assembly: XmlnsDefinition(XamlConstants.EditorNamespace, "Core2D.Editor.Factories", AssemblyName = "Core2D.Editor")]
 [assembly: XmlnsDefinition(XamlConstants.EditorNamespace, "Core2D.Editor.Input", AssemblyName = "Core2D.Editor")]
-[assembly: XmlnsDefinition(XamlConstants.EditorNamespace, "Core2D.Editor.Interfaces", AssemblyName = "Core2D.Editor")]
-[assembly: XmlnsDefinition(XamlConstants.EditorNamespace, "Core2D.Editor.Tools", AssemblyName = "Core2D.Editor")]
-[assembly: XmlnsDefinition(XamlConstants.EditorNamespace, "Core2D.Avalonia.Dock.Views", AssemblyName = "Core2D.Editor")]
 [assembly: XmlnsDefinition(XamlConstants.EditorNamespace, "Core2D.Editor.Recent", AssemblyName = "Core2D.Editor")]
+[assembly: XmlnsDefinition(XamlConstants.EditorNamespace, "Core2D.Editor.Tools", AssemblyName = "Core2D.Editor")]
+[assembly: XmlnsDefinition(XamlConstants.EditorNamespace, "Core2D.Editor.Tools.Path.Settings", AssemblyName = "Core2D.Editor")]
+[assembly: XmlnsDefinition(XamlConstants.EditorNamespace, "Core2D.Editor.Tools.Path.Shapes", AssemblyName = "Core2D.Editor")]
+[assembly: XmlnsDefinition(XamlConstants.EditorNamespace, "Core2D.Editor.Tools.Selection", AssemblyName = "Core2D.Editor")]
+[assembly: XmlnsDefinition(XamlConstants.EditorNamespace, "Core2D.Editor.Tools.Settings", AssemblyName = "Core2D.Editor")]
 
 [assembly: XmlnsPrefix(XamlConstants.EditorNamespace, "e")]

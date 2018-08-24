@@ -56,8 +56,14 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Core2D.Containers\Core2D.Containers.csproj" />
+    <ProjectReference Include="..\Core2D.Data.Extensions\Core2D.Data.Extensions.csproj" />
+    <ProjectReference Include="..\Core2D.Data\Core2D.Data.csproj" />
     <ProjectReference Include="..\Core2D.Editor\Core2D.Editor.csproj" />
     <ProjectReference Include="..\Core2D.Renderer.Wpf\Core2D.Renderer.Wpf.csproj" />
+    <ProjectReference Include="..\Core2D.Shapes.Extensions\Core2D.Shapes.Extensions.csproj" />
+    <ProjectReference Include="..\Core2D.Shapes\Core2D.Shapes.csproj" />
+    <ProjectReference Include="..\Core2D.Style\Core2D.Style.csproj" />
     <ProjectReference Include="..\Core2D.Utilities.Wpf\Core2D.Utilities.Wpf.csproj" />
     <ProjectReference Include="..\Core2D\Core2D.csproj" />
     <ProjectReference Include="..\Core2D.FileSystem.DotNet\Core2D.FileSystem.DotNet.csproj" />
