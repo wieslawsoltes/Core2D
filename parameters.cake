@@ -8,7 +8,6 @@ public class Parameters
     public string NuGetPushRepoName { get; private set; }
     public bool PushNuGet { get; private set; }
     public bool IsNugetRelease { get; private set; }
-    public bool CopyRedist { get; private set; }
     public (string path, string name)[] BuildProjects { get; private set; }
     public (string path, string name)[] TestProjects { get; private set; }
     public (string path, string name, string framework, string runtime)[] PublishProjects { get; private set; }
