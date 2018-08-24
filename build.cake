@@ -72,17 +72,26 @@ Task("Publish")
     .Does<Parameters>(parameters => 
 {
     CleanDirectory($"{parameters.Artifacts}/zip");
+    var redistVersion = "14.15.26706";//"14.14.26405";
+    var redistPath = $"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Community\\VC\\Redist\\MSVC\\{redistVersion}\\x64\\Microsoft.VC141.CRT\\";
+    var redistRuntime = "win7-x64";
     foreach(var project in parameters.PublishProjects)
     {
         (string path, string name, string framework, string runtime) = project;
+        var output = $"./{parameters.Artifacts}/publish/{name}-{framework}-{runtime}";
         Information($"Publish: {name}, {framework}, {runtime}");
         DotNetCorePublish($"{path}/{name}/{name}.csproj", new DotNetCorePublishSettings {
             Configuration = parameters.Configuration,
             VersionSuffix = parameters.VersionSuffix,
             Framework = framework,
             Runtime = runtime,
-            OutputDirectory = $"./{parameters.Artifacts}/publish/{name}-{framework}-{runtime}"
+            OutputDirectory = output
         });
+        if (string.Compare(runtime, redistRuntime, StringComparison.OrdinalIgnoreCase) == 0)
+        {
+            CopyFileToDirectory($"{redistPath}msvcp140.dll", output);
+            CopyFileToDirectory($"{redistPath}vcruntime140.dll",  output);
+        }
         Zip($"{parameters.Artifacts}/publish/{name}-{framework}-{runtime}", $"{parameters.Artifacts}/zip/{name}-{framework}-{runtime}.zip");
     }
 });
@@ -104,18 +113,21 @@ Task("Pack")
 });
 
 Task("Push")
+    .WithCriteria<Parameters>((context, parameters) => parameters.PushNuGet)
     .Does<Parameters>(parameters => 
 {
+    var apiKey = EnvironmentVariable(parameters.IsNugetRelease ? "NUGET_API_KEY" : "MYGET_API_KEY");
+    var apiUrl = EnvironmentVariable(parameters.IsNugetRelease ? "NUGET_API_URL" : "MYGET_API_URL");
     DotNetCoreNuGetPush($"{parameters.Artifacts}/nuget/*.nupkg", new DotNetCoreNuGetPushSettings {
-        Source = "",
-        ApiKey = ""
+        Source = apiUrl,
+        ApiKey = apiKey
     });
 });
 
 Task("Default")
   .IsDependentOn("Build");
 
-Task("CI")
+Task("AppVeyor")
   .IsDependentOn("Clean")
   .IsDependentOn("Restore")
   .IsDependentOn("Build")
@@ -123,5 +135,11 @@ Task("CI")
   .IsDependentOn("Publish")
   .IsDependentOn("Pack")
   .IsDependentOn("Push");
+
+Task("Travis")
+  .IsDependentOn("Test");
+
+Task("CircleCI")
+  .IsDependentOn("Test");
 
 RunTarget(Context.Argument("target", "Default"));

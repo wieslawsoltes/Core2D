@@ -1,9 +1,14 @@
 
 public class Parameters
 {
-    public string Configuration {get; private set; }
-    public string Artifacts {get; private set; }
-    public string VersionSuffix {get; private set; }
+    public string Configuration { get; private set; }
+    public string Artifacts { get; private set; }
+    public string VersionSuffix { get; private set; }
+    public string NuGetPushBranch { get; private set; }
+    public string NuGetPushRepoName { get; private set; }
+    public bool PushNuGet { get; private set; }
+    public bool IsNugetRelease { get; private set; }
+    public bool CopyRedist { get; private set; }
     public (string path, string name)[] BuildProjects { get; private set; }
     public (string path, string name)[] TestProjects { get; private set; }
     public (string path, string name, string framework, string runtime)[] PublishProjects { get; private set; }
@@ -13,7 +18,36 @@ public class Parameters
     {
         Configuration = context.Argument("configuration", "Release");
         Artifacts = context.Argument("artifacts", "./artifacts");
-        VersionSuffix = context.Argument("suffix", "-alpha");
+
+        VersionSuffix = context.Argument("suffix", default(string));
+        if (VersionSuffix == null)
+        {
+            var build = context.EnvironmentVariable("APPVEYOR_BUILD_VERSION");
+            VersionSuffix = build != null ? $"-build{build}" : "";
+        }
+
+        NuGetPushBranch = "master";
+        NuGetPushRepoName = "wieslawsoltes/Core2D";
+
+        var repoName = context.EnvironmentVariable("APPVEYOR_REPO_NAME");
+        var repoBranch = context.EnvironmentVariable("APPVEYOR_REPO_BRANCH");
+        var repoTag = context.EnvironmentVariable("APPVEYOR_REPO_TAG");
+        var repoTagName = context.EnvironmentVariable("APPVEYOR_REPO_TAG_NAME");
+        var pullRequestTitle = context.EnvironmentVariable("APPVEYOR_PULL_REQUEST_TITLE");
+
+        if (pullRequestTitle == null 
+            && string.Compare(repoName, NuGetPushRepoName, StringComparison.OrdinalIgnoreCase) == 0
+            && string.Compare(repoBranch, NuGetPushBranch, StringComparison.OrdinalIgnoreCase) == 0)
+        {
+            PushNuGet = true;
+        }
+
+        if (pullRequestTitle == null 
+            && string.Compare(repoTag, "True", StringComparison.OrdinalIgnoreCase) == 0
+            && repoTagName != null)
+        {
+            IsNugetRelease = true;
+        }
 
         BuildProjects = new []
         {
@@ -61,10 +95,7 @@ public class Parameters
 
         PublishProjects = new []
         {
-            ( "./src", "Core2D.Avalonia", "netcoreapp2.1", "win7-x64" ),
-            ( "./src", "Core2D.Avalonia", "netcoreapp2.1", "ubuntu.14.04-x64" ),
-            ( "./src", "Core2D.Avalonia", "netcoreapp2.1", "debian.8-x64" ),
-            ( "./src", "Core2D.Avalonia", "netcoreapp2.1", "osx.10.12-x64" )
+            ( "./src", "Core2D.Avalonia", "netcoreapp2.1", "win7-x64" )
         };
 
         PackProjects = new []
