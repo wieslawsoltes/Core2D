@@ -18,9 +18,12 @@ public class Parameters
         BuildProjects = new []
         {
             ( "./src", "Core2D" ),
-            ( "./src", "Core2D.Containers" ),
+            ( "./src", "Core2D.Style" ),
             ( "./src", "Core2D.Data" ),
             ( "./src", "Core2D.Data.Extensions" ),
+            ( "./src", "Core2D.Shapes" ),
+            ( "./src", "Core2D.Shapes.Extensions" ),
+            ( "./src", "Core2D.Containers" ),
             ( "./src", "Core2D.Editor" ),
             ( "./src", "Core2D.FileSystem.DotNet" ),
             ( "./src", "Core2D.FileWriter.Dxf" ),
@@ -38,9 +41,6 @@ public class Parameters
             ( "./src", "Core2D.Serializer.Newtonsoft" ),
             ( "./src", "Core2D.Serializer.Xaml" ),
             ( "./src", "Core2D.ServiceProvider.Autofac" ),
-            ( "./src", "Core2D.Shapes" ),
-            ( "./src", "Core2D.Shapes.Extensions" ),
-            ( "./src", "Core2D.Style" ),
             ( "./src", "Core2D.TextFieldReader.CsvHelper" ),
             ( "./src", "Core2D.TextFieldWriter.CsvHelper" ),
             ( "./src", "Core2D.Utilities.Avalonia" ),
