@@ -23,7 +23,8 @@ Task("Clean")
         (string path, string name) = project;
         Information($"Clean: {name}");
         DotNetCoreClean($"{path}/{name}/{name}.csproj", new DotNetCoreCleanSettings {
-            Configuration = parameters.Configuration
+            Configuration = parameters.Configuration,
+            Verbosity = DotNetCoreVerbosity.Minimal
         });
     }
 });
