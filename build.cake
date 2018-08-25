@@ -122,7 +122,7 @@ Task("Push")
     var packages = GetFiles($"{parameters.Artifacts}/nuget/*.nupkg");
     foreach (var package in packages)
     {
-        DotNetCoreNuGetPush(package, new DotNetCoreNuGetPushSettings {
+        DotNetCoreNuGetPush(package.FullPath, new DotNetCoreNuGetPushSettings {
             Source = apiUrl,
             ApiKey = apiKey
         });
