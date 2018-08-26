@@ -12,8 +12,8 @@ namespace Core2D.FileWriter.SkiaSharpPdf
     /// </summary>
     public sealed class PdfSkiaSharpExporter : IProjectExporter
     {
-        private readonly ShapeRenderer _renderer;
-        private readonly ContainerPresenter _presenter;
+        private readonly IShapeRenderer _renderer;
+        private readonly IContainerPresenter _presenter;
         private readonly float _targetDpi;
 
         /// <summary>
@@ -22,7 +22,7 @@ namespace Core2D.FileWriter.SkiaSharpPdf
         /// <param name="renderer">The shape renderer.</param>
         /// <param name="presenter">The container presenter.</param>
         /// <param name="targetDpi">The target renderer dpi.</param>
-        public PdfSkiaSharpExporter(ShapeRenderer renderer, ContainerPresenter presenter, float targetDpi = 72.0f)
+        public PdfSkiaSharpExporter(IShapeRenderer renderer, IContainerPresenter presenter, float targetDpi = 72.0f)
         {
             _renderer = renderer;
             _presenter = presenter;

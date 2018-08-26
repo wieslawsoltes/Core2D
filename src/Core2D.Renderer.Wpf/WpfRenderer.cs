@@ -50,7 +50,7 @@ namespace Core2D.Renderer.Wpf
         /// Creates a new <see cref="WpfRenderer"/> instance.
         /// </summary>
         /// <returns>The new instance of the <see cref="WpfRenderer"/> class.</returns>
-        public static ShapeRenderer Create() => new WpfRenderer();
+        public static IShapeRenderer Create() => new WpfRenderer();
 
         private static W.Point GetTextOrigin(IShapeStyle style, ref W.Rect rect, WM.FormattedText ft)
         {
@@ -520,7 +520,7 @@ namespace Core2D.Renderer.Wpf
             return pg;
         }
 
-        private WM.MatrixTransform ToMatrixTransform(MatrixObject m)
+        private WM.MatrixTransform ToMatrixTransform(IMatrixObject m)
         {
             return new WM.MatrixTransform(m.M11, m.M12, m.M21, m.M22, m.OffsetX, m.OffsetY);
         }
@@ -575,7 +575,7 @@ namespace Core2D.Renderer.Wpf
         }
 
         /// <inheritdoc/>
-        public override object PushMatrix(object dc, MatrixObject matrix)
+        public override object PushMatrix(object dc, IMatrixObject matrix)
         {
             var _dc = dc as WM.DrawingContext;
             _dc.PushTransform(ToMatrixTransform(matrix));

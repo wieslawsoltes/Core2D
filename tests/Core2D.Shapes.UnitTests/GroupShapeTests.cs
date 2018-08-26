@@ -207,7 +207,7 @@ namespace Core2D.Shapes.UnitTests
                 throw new NotImplementedException();
             }
 
-            public override void Draw(object dc, ShapeRenderer renderer, double dx, double dy, object db, object r)
+            public override void Draw(object dc, IShapeRenderer renderer, double dx, double dy, object db, object r)
             {
                 throw new NotImplementedException();
             }

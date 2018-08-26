@@ -7,10 +7,10 @@ namespace Core2D.Renderer.Presenters
     /// <summary>
     /// Editor container presenter.
     /// </summary>
-    public class EditorPresenter : ContainerPresenter
+    public class EditorPresenter : IContainerPresenter
     {
         /// <inheritdoc/>
-        public override void Render(object dc, ShapeRenderer renderer, IPageContainer container, double dx, double dy)
+        public void Render(object dc, IShapeRenderer renderer, IPageContainer container, double dx, double dy)
         {
             var db = container.Data == null ? default : container.Data.Properties;
             var r = container.Data == null ? default : container.Data.Record;

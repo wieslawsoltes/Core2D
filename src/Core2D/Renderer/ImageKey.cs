@@ -6,7 +6,7 @@ namespace Core2D.Renderer
     /// <summary>
     /// Image key.
     /// </summary>
-    public struct ImageKey
+    public class ImageKey : IImageKey
     {
         /// <summary>
         /// Gets or sets image key.

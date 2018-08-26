@@ -19,8 +19,8 @@ namespace Core2D.Renderer.WinForms
     public class WinFormsRenderer : ShapeRenderer
     {
         private ICache<string, Image> _biCache = Cache<string, Image>.Create(bi => bi.Dispose());
-        private Func<double, float> _scaleToPage;
-        private double _textScaleFactor;
+        private readonly Func<double, float> _scaleToPage;
+        private readonly double _textScaleFactor;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="WinFormsRenderer"/> class.
@@ -43,7 +43,7 @@ namespace Core2D.Renderer.WinForms
         /// Creates a new <see cref="WinFormsRenderer"/> instance.
         /// </summary>
         /// <returns>The new instance of the <see cref="WinFormsRenderer"/> class.</returns>
-        public static ShapeRenderer Create() => new WinFormsRenderer();
+        public static IShapeRenderer Create() => new WinFormsRenderer();
 
         private static Color ToColor(IColor color)
         {
@@ -129,10 +129,10 @@ namespace Core2D.Renderer.WinForms
 
         private void DrawLineArrowsInternal(ILineShape line, double dx, double dy, Graphics gfx, out PointF pt1, out PointF pt2)
         {
-            Brush fillStartArrow = ToBrush(line.Style.StartArrowStyle.Fill);
+            var fillStartArrow = ToBrush(line.Style.StartArrowStyle.Fill);
             var strokeStartArrow = ToPen(line.Style.StartArrowStyle, _scaleToPage);
 
-            Brush fillEndArrow = ToBrush(line.Style.EndArrowStyle.Fill);
+            var fillEndArrow = ToBrush(line.Style.EndArrowStyle.Fill);
             var strokeEndArrow = ToPen(line.Style.EndArrowStyle, _scaleToPage);
 
             double _x1 = line.Start.X + dx;
@@ -310,7 +310,7 @@ namespace Core2D.Renderer.WinForms
             }
         }
 
-        private Matrix ToMatrix(MatrixObject matrix)
+        private Matrix ToMatrix(IMatrixObject matrix)
         {
             return new Matrix(
                 (float)matrix.M11, (float)matrix.M12,
@@ -331,7 +331,7 @@ namespace Core2D.Renderer.WinForms
         public override void Fill(object dc, double x, double y, double width, double height, IColor color)
         {
             var _gfx = dc as Graphics;
-            Brush brush = ToBrush(color);
+            var brush = ToBrush(color);
             _gfx.FillRectangle(
                 brush,
                 (float)x,
@@ -342,7 +342,7 @@ namespace Core2D.Renderer.WinForms
         }
 
         /// <inheritdoc/>
-        public override object PushMatrix(object dc, MatrixObject matrix)
+        public override object PushMatrix(object dc, IMatrixObject matrix)
         {
             var _gfx = dc as Graphics;
             var state = _gfx.Save();
@@ -390,7 +390,7 @@ namespace Core2D.Renderer.WinForms
         {
             var _gfx = dc as Graphics;
 
-            Brush brush = ToBrush(rectangle.Style.Fill);
+            var brush = ToBrush(rectangle.Style.Fill);
             var pen = ToPen(rectangle.Style, _scaleToPage);
 
             var rect = CreateRect(
@@ -438,7 +438,7 @@ namespace Core2D.Renderer.WinForms
         {
             var _gfx = dc as Graphics;
 
-            Brush brush = ToBrush(ellipse.Style.Fill);
+            var brush = ToBrush(ellipse.Style.Fill);
             var pen = ToPen(ellipse.Style, _scaleToPage);
 
             var rect = CreateRect(
@@ -483,7 +483,7 @@ namespace Core2D.Renderer.WinForms
 
             var _gfx = dc as Graphics;
 
-            Brush brush = ToBrush(arc.Style.Fill);
+            var brush = ToBrush(arc.Style.Fill);
             var pen = ToPen(arc.Style, _scaleToPage);
 
             if (arc.IsFilled)
@@ -520,7 +520,7 @@ namespace Core2D.Renderer.WinForms
         {
             var _gfx = dc as Graphics;
 
-            Brush brush = ToBrush(cubicBezier.Style.Fill);
+            var brush = ToBrush(cubicBezier.Style.Fill);
             var pen = ToPen(cubicBezier.Style, _scaleToPage);
 
             if (cubicBezier.IsFilled)
@@ -561,7 +561,7 @@ namespace Core2D.Renderer.WinForms
         {
             var _gfx = dc as Graphics;
 
-            Brush brush = ToBrush(quadraticBezier.Style.Fill);
+            var brush = ToBrush(quadraticBezier.Style.Fill);
             var pen = ToPen(quadraticBezier.Style, _scaleToPage);
 
             double x1 = quadraticBezier.Point1.X;
@@ -617,7 +617,7 @@ namespace Core2D.Renderer.WinForms
             if (string.IsNullOrEmpty(tbind))
                 return;
 
-            Brush brush = ToBrush(text.Style.Stroke);
+            var brush = ToBrush(text.Style.Stroke);
 
             var fontStyle = System.Drawing.FontStyle.Regular;
             if (text.Style.TextStyle.FontStyle != null)
@@ -705,7 +705,7 @@ namespace Core2D.Renderer.WinForms
         {
             var _gfx = dc as Graphics;
 
-            Brush brush = ToBrush(image.Style.Stroke);
+            var brush = ToBrush(image.Style.Stroke);
 
             var rect = CreateRect(
                 image.TopLeft,

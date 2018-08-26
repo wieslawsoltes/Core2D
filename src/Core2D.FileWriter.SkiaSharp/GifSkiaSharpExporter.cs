@@ -14,15 +14,15 @@ namespace Core2D.FileWriter.SkiaSharpGif
     /// </summary>
     public sealed class GifSkiaSharpExporter : IProjectExporter
     {
-        private readonly ShapeRenderer _renderer;
-        private readonly ContainerPresenter _presenter;
+        private readonly IShapeRenderer _renderer;
+        private readonly IContainerPresenter _presenter;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="GifSkiaSharpExporter"/> class.
         /// </summary>
         /// <param name="renderer">The shape renderer.</param>
         /// <param name="presenter">The container presenter.</param>
-        public GifSkiaSharpExporter(ShapeRenderer renderer, ContainerPresenter presenter)
+        public GifSkiaSharpExporter(IShapeRenderer renderer, IContainerPresenter presenter)
         {
             _renderer = renderer;
             _presenter = presenter;

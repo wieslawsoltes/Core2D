@@ -7,32 +7,20 @@ using Core2D.Style;
 namespace Core2D.Renderer
 {
     /// <summary>
-    /// Native shape renderer base class.
+    /// Defines shape renderer contract.
     /// </summary>
-    public abstract class ShapeRenderer : ObservableObject
+    public interface IShapeRenderer
     {
-        private IShapeRendererState _state = new ShapeRendererState();
-
         /// <summary>
         /// Gets or sets renderer state.
         /// </summary>
-        public virtual IShapeRendererState State
-        {
-            get => _state;
-            set => Update(ref _state, value);
-        }
-
-        /// <summary>
-        /// Check whether the <see cref="State"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeState() => _state != null;
+        IShapeRendererState State { get; set; }
 
         /// <summary>
         /// Clears renderer cache.
         /// </summary>
         /// <param name="isZooming">The flag indicating zooming state.</param>
-        public virtual void ClearCache(bool isZooming) { }
+        void ClearCache(bool isZooming);
 
         /// <summary>
         /// Fills rectangle with specified color using drawing context.
@@ -43,7 +31,7 @@ namespace Core2D.Renderer
         /// <param name="width">The width of rectangle.</param>
         /// <param name="height">The height of rectangle.</param>
         /// <param name="color">The fill color.</param>
-        public abstract void Fill(object dc, double x, double y, double width, double height, IColor color);
+        void Fill(object dc, double x, double y, double width, double height, IColor color);
 
         /// <summary>
         /// Push matrix.
@@ -51,14 +39,14 @@ namespace Core2D.Renderer
         /// <param name="dc">The native drawing context.</param>
         /// <param name="matrix">The matrix to push.</param>
         /// <returns>The previous matrix state.</returns>
-        public abstract object PushMatrix(object dc, MatrixObject matrix);
+        object PushMatrix(object dc, IMatrixObject matrix);
 
         /// <summary>
         /// Pop matrix.
         /// </summary>
         /// <param name="dc">The native drawing context.</param>
         /// <param name="state">The previous matrix state.</param>
-        public abstract void PopMatrix(object dc, object state);
+        void PopMatrix(object dc, object state);
 
         /// <summary>
         /// Draws a <see cref="IPageContainer"/> using drawing context.
@@ -69,16 +57,7 @@ namespace Core2D.Renderer
         /// <param name="dy">The Y coordinate offset.</param>
         /// <param name="db">The properties database.</param>
         /// <param name="r">The data record.</param>
-        public virtual void Draw(object dc, IPageContainer container, double dx, double dy, object db, object r)
-        {
-            foreach (var layer in container.Layers)
-            {
-                if (layer.IsVisible)
-                {
-                    Draw(dc, layer, dx, dy, db, r);
-                }
-            }
-        }
+        void Draw(object dc, IPageContainer container, double dx, double dy, object db, object r);
 
         /// <summary>
         /// Draws a <see cref="ILayerContainer"/> using drawing context.
@@ -89,16 +68,7 @@ namespace Core2D.Renderer
         /// <param name="dy">The Y coordinate offset.</param>
         /// <param name="db">The properties database.</param>
         /// <param name="r">The data record.</param>
-        public virtual void Draw(object dc, ILayerContainer layer, double dx, double dy, object db, object r)
-        {
-            foreach (var shape in layer.Shapes)
-            {
-                if (shape.State.Flags.HasFlag(State.DrawShapeState.Flags))
-                {
-                    shape.Draw(dc, this, dx, dy, db, r);
-                }
-            }
-        }
+        void Draw(object dc, ILayerContainer layer, double dx, double dy, object db, object r);
 
         /// <summary>
         /// Draws a <see cref="ILineShape"/> shape using drawing context.
@@ -109,7 +79,7 @@ namespace Core2D.Renderer
         /// <param name="dy">The Y coordinate offset.</param>
         /// <param name="db">The properties database.</param>
         /// <param name="r">The data record.</param>
-        public abstract void Draw(object dc, ILineShape line, double dx, double dy, object db, object r);
+        void Draw(object dc, ILineShape line, double dx, double dy, object db, object r);
 
         /// <summary>
         /// Draws a <see cref="IRectangleShape"/> shape using drawing context.
@@ -120,7 +90,7 @@ namespace Core2D.Renderer
         /// <param name="dy">The Y coordinate offset.</param>
         /// <param name="db">The properties database.</param>
         /// <param name="r">The data record.</param>
-        public abstract void Draw(object dc, IRectangleShape rectangle, double dx, double dy, object db, object r);
+        void Draw(object dc, IRectangleShape rectangle, double dx, double dy, object db, object r);
 
         /// <summary>
         /// Draws a <see cref="IEllipseShape"/> shape using drawing context.
@@ -131,7 +101,7 @@ namespace Core2D.Renderer
         /// <param name="dy">The Y coordinate offset.</param>
         /// <param name="db">The properties database.</param>
         /// <param name="r">The data record.</param>
-        public abstract void Draw(object dc, IEllipseShape ellipse, double dx, double dy, object db, object r);
+        void Draw(object dc, IEllipseShape ellipse, double dx, double dy, object db, object r);
 
         /// <summary>
         /// Draws a <see cref="IArcShape"/> shape using drawing context.
@@ -142,7 +112,7 @@ namespace Core2D.Renderer
         /// <param name="dy">The Y coordinate offset.</param>
         /// <param name="db">The properties database.</param>
         /// <param name="r">The data record.</param>
-        public abstract void Draw(object dc, IArcShape arc, double dx, double dy, object db, object r);
+        void Draw(object dc, IArcShape arc, double dx, double dy, object db, object r);
 
         /// <summary>
         /// Draws a <see cref="ICubicBezierShape"/> shape using drawing context.
@@ -153,7 +123,7 @@ namespace Core2D.Renderer
         /// <param name="dy">The Y coordinate offset.</param>
         /// <param name="db">The properties database.</param>
         /// <param name="r">The data record.</param>
-        public abstract void Draw(object dc, ICubicBezierShape cubicBezier, double dx, double dy, object db, object r);
+        void Draw(object dc, ICubicBezierShape cubicBezier, double dx, double dy, object db, object r);
 
         /// <summary>
         /// Draws a <see cref="IQuadraticBezierShape"/> shape using drawing context.
@@ -164,7 +134,7 @@ namespace Core2D.Renderer
         /// <param name="dy">The Y coordinate offset.</param>
         /// <param name="db">The properties database.</param>
         /// <param name="r">The data record.</param>
-        public abstract void Draw(object dc, IQuadraticBezierShape quadraticBezier, double dx, double dy, object db, object r);
+        void Draw(object dc, IQuadraticBezierShape quadraticBezier, double dx, double dy, object db, object r);
 
         /// <summary>
         /// Draws a <see cref="ITextShape"/> shape using drawing context.
@@ -175,7 +145,7 @@ namespace Core2D.Renderer
         /// <param name="dy">The Y coordinate offset.</param>
         /// <param name="db">The properties database.</param>
         /// <param name="r">The data record.</param>
-        public abstract void Draw(object dc, ITextShape text, double dx, double dy, object db, object r);
+        void Draw(object dc, ITextShape text, double dx, double dy, object db, object r);
 
         /// <summary>
         /// Draws a <see cref="IImageShape"/> shape using drawing context.
@@ -186,7 +156,7 @@ namespace Core2D.Renderer
         /// <param name="dy">The Y coordinate offset.</param>
         /// <param name="db">The properties database.</param>
         /// <param name="r">The data record.</param>
-        public abstract void Draw(object dc, IImageShape image, double dx, double dy, object db, object r);
+        void Draw(object dc, IImageShape image, double dx, double dy, object db, object r);
 
         /// <summary>
         /// Draws a <see cref="IPathShape"/> shape using drawing context.
@@ -197,6 +167,6 @@ namespace Core2D.Renderer
         /// <param name="dy">The Y coordinate offset.</param>
         /// <param name="db">The properties database.</param>
         /// <param name="r">The data record.</param>
-        public abstract void Draw(object dc, IPathShape path, double dx, double dy, object db, object r);
+        void Draw(object dc, IPathShape path, double dx, double dy, object db, object r);
     }
 }

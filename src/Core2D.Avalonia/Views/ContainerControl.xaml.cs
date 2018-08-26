@@ -16,8 +16,8 @@ namespace Core2D.Avalonia.Views
     /// </summary>
     public class ContainerControl : UserControl
     {
-        private static ContainerPresenter s_editorPresenter = new EditorPresenter();
-        private static ContainerPresenter s_templatePresenter = new TemplatePresenter();
+        private static IContainerPresenter s_editorPresenter = new EditorPresenter();
+        private static IContainerPresenter s_templatePresenter = new TemplatePresenter();
 
         /// <summary>
         /// Gets or sets container property.
@@ -28,8 +28,8 @@ namespace Core2D.Avalonia.Views
         /// <summary>
         /// Gets or sets renderer property.
         /// </summary>
-        public static readonly AvaloniaProperty<ShapeRenderer> RendererProperty =
-            AvaloniaProperty.Register<ContainerControl, ShapeRenderer>(nameof(Renderer));
+        public static readonly AvaloniaProperty<IShapeRenderer> RendererProperty =
+            AvaloniaProperty.Register<ContainerControl, IShapeRenderer>(nameof(Renderer));
 
         /// <summary>
         /// Gets or sets container property.
@@ -43,7 +43,7 @@ namespace Core2D.Avalonia.Views
         /// <summary>
         ///  Gets or sets renderer property.
         /// </summary>
-        public ShapeRenderer Renderer
+        public IShapeRenderer Renderer
         {
             get { return GetValue(RendererProperty); }
             set { SetValue(RendererProperty, value); }

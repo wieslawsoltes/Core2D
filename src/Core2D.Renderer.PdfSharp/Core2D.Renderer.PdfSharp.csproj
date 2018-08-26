@@ -22,6 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Core2D.Renderer\Core2D.Renderer.csproj" />
     <ProjectReference Include="..\Core2D.Shapes.Extensions\Core2D.Shapes.Extensions.csproj" />
     <ProjectReference Include="..\Core2D.Shapes\Core2D.Shapes.csproj" />
     <ProjectReference Include="..\Core2D.Style\Core2D.Style.csproj" />

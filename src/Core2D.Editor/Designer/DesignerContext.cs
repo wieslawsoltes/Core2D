@@ -26,9 +26,9 @@ namespace Core2D.Editor.Designer
         public static ProjectEditor Editor { get; set; }
 
         /// <summary>
-        /// The design time <see cref="MatrixObject"/> template.
+        /// The design time <see cref="IMatrixObject"/> template.
         /// </summary>
-        public static MatrixObject Transform { get; set; }
+        public static IMatrixObject Transform { get; set; }
 
         /// <summary>
         /// The design time <see cref="IPageContainer"/> template.

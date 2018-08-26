@@ -46,7 +46,7 @@ namespace Core2D.Renderer.SkiaSharp
         /// Creates a new <see cref="SkiaSharpRenderer"/> instance.
         /// </summary>
         /// <returns>The new instance of the <see cref="SkiaSharpRenderer"/> class.</returns>
-        public static ShapeRenderer Create() => new SkiaSharpRenderer();
+        public static IShapeRenderer Create() => new SkiaSharpRenderer();
 
         private SKPoint GetTextOrigin(IShapeStyle style, ref SKRect rect, ref SKRect size)
         {
@@ -359,7 +359,7 @@ namespace Core2D.Renderer.SkiaSharp
             }
         }
 
-        private SKMatrix ToSKMatrix(MatrixObject matrix)
+        private SKMatrix ToSKMatrix(IMatrixObject matrix)
         {
             return MatrixHelper.ToSKMatrix(
                 matrix.M11, matrix.M12,
@@ -388,7 +388,7 @@ namespace Core2D.Renderer.SkiaSharp
         }
 
         /// <inheritdoc/>
-        public override object PushMatrix(object dc, MatrixObject matrix)
+        public override object PushMatrix(object dc, IMatrixObject matrix)
         {
             var canvas = dc as SKCanvas;
             int count = canvas.Save();

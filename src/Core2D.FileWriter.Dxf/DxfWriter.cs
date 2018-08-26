@@ -31,7 +31,7 @@ namespace Core2D.FileWriter.Dxf
 
             IProjectExporter exporter = new DxfRenderer();
 
-            ShapeRenderer renderer = (DxfRenderer)exporter;
+            IShapeRenderer renderer = (DxfRenderer)exporter;
             renderer.State.DrawShapeState.Flags = ShapeStateFlags.Printable;
             renderer.State.ImageCache = ic;
 

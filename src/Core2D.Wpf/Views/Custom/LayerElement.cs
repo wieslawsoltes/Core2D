@@ -53,29 +53,29 @@ namespace Core2D.Wpf.Views.Custom
         /// Gets the <see cref="Core2D.Renderer"/> from <see cref="DependencyProperty"/> object.
         /// </summary>
         /// <param name="obj">The <see cref="DependencyProperty"/> object.</param>
-        /// <returns>The <see cref="ShapeRenderer"/> value.</returns>
-        public static ShapeRenderer GetRenderer(DependencyObject obj)
+        /// <returns>The <see cref="IShapeRenderer"/> value.</returns>
+        public static IShapeRenderer GetRenderer(DependencyObject obj)
         {
-            return (ShapeRenderer)obj.GetValue(RendererProperty);
+            return (IShapeRenderer)obj.GetValue(RendererProperty);
         }
 
         /// <summary>
-        /// Sets the <see cref="DependencyProperty"/> object value as <see cref="ShapeRenderer"/>.
+        /// Sets the <see cref="DependencyProperty"/> object value as <see cref="IShapeRenderer"/>.
         /// </summary>
         /// <param name="obj">The <see cref="DependencyProperty"/> object.</param>
-        /// <param name="value">The <see cref="ShapeRenderer"/> value.</param>
-        public static void SetRenderer(DependencyObject obj, ShapeRenderer value)
+        /// <param name="value">The <see cref="IShapeRenderer"/> value.</param>
+        public static void SetRenderer(DependencyObject obj, IShapeRenderer value)
         {
             obj.SetValue(RendererProperty, value);
         }
 
         /// <summary>
-        /// The attached <see cref="DependencyProperty"/> for <see cref="ShapeRenderer"/> type.
+        /// The attached <see cref="DependencyProperty"/> for <see cref="IShapeRenderer"/> type.
         /// </summary>
         public static readonly DependencyProperty RendererProperty =
             DependencyProperty.RegisterAttached(
                 "Renderer",
-                typeof(ShapeRenderer),
+                typeof(IShapeRenderer),
                 typeof(LayerElement),
                 new FrameworkPropertyMetadata(
                     null,

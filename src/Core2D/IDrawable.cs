@@ -28,7 +28,7 @@ namespace Core2D
         /// <summary>
         /// Get or sets shape matrix transform.
         /// </summary>
-        MatrixObject Transform { get; set; }
+        IMatrixObject Transform { get; set; }
 
         /// <summary>
         /// Begins matrix transform.
@@ -36,7 +36,7 @@ namespace Core2D
         /// <param name="dc">The generic drawing context object.</param>
         /// <param name="renderer">The generic renderer object used to draw shape.</param>
         /// <returns>The previous transform state.</returns>
-        object BeginTransform(object dc, ShapeRenderer renderer);
+        object BeginTransform(object dc, IShapeRenderer renderer);
 
         /// <summary>
         /// Ends matrix transform.
@@ -44,10 +44,10 @@ namespace Core2D
         /// <param name="dc">The generic drawing context object.</param>
         /// <param name="renderer">The generic renderer object used to draw shape.</param>
         /// <param name="state">The previous transform state.</param>
-        void EndTransform(object dc, ShapeRenderer renderer, object state);
+        void EndTransform(object dc, IShapeRenderer renderer, object state);
 
         /// <summary>
-        /// Draws shape using current <see cref="ShapeRenderer"/>.
+        /// Draws shape using current <see cref="IShapeRenderer"/>.
         /// </summary>
         /// <param name="dc">The generic drawing context object.</param>
         /// <param name="renderer">The generic renderer object used to draw shape.</param>
@@ -55,7 +55,7 @@ namespace Core2D
         /// <param name="dy">The Y axis draw position offset.</param>
         /// <param name="db">The properties database.</param>
         /// <param name="r">The database record.</param>
-        void Draw(object dc, ShapeRenderer renderer, double dx, double dy, object db, object r);
+        void Draw(object dc, IShapeRenderer renderer, double dx, double dy, object db, object r);
 
         /// <summary>
         /// Invalidates shape renderer cache.
@@ -64,6 +64,6 @@ namespace Core2D
         /// <param name="dx">The X axis draw position offset.</param>
         /// <param name="dy">The Y axis draw position offset.</param>
         /// <returns>Returns true if shape was invalidated; otherwise, returns false.</returns>
-        bool Invalidate(ShapeRenderer renderer, double dx, double dy);
+        bool Invalidate(IShapeRenderer renderer, double dx, double dy);
     }
 }

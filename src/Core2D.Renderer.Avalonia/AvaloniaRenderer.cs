@@ -55,7 +55,7 @@ namespace Core2D.Renderer.Avalonia
         /// Creates a new <see cref="AvaloniaRenderer"/> instance.
         /// </summary>
         /// <returns>The new instance of the <see cref="AvaloniaRenderer"/> class.</returns>
-        public static ShapeRenderer Create() => new AvaloniaRenderer();
+        public static IShapeRenderer Create() => new AvaloniaRenderer();
 
         private A.Point GetTextOrigin(IShapeStyle style, ref Rect2 rect, ref A.Size size)
         {
@@ -405,7 +405,7 @@ namespace Core2D.Renderer.Avalonia
             return sg;
         }
 
-        private A.Matrix ToMatrix(MatrixObject m)
+        private A.Matrix ToMatrix(IMatrixObject m)
         {
             return new A.Matrix(m.M11, m.M12, m.M21, m.M22, m.OffsetX, m.OffsetY);
         }
@@ -455,7 +455,7 @@ namespace Core2D.Renderer.Avalonia
         }
 
         /// <inheritdoc/>
-        public override object PushMatrix(object dc, MatrixObject matrix)
+        public override object PushMatrix(object dc, IMatrixObject matrix)
         {
             var _dc = dc as AM.DrawingContext;
             return _dc.PushPreTransform(ToMatrix(matrix));

@@ -40,7 +40,7 @@ namespace Core2D.Renderer.PdfSharp
         /// Creates a new <see cref="PdfSharpRenderer"/> instance.
         /// </summary>
         /// <returns>The new instance of the <see cref="PdfSharpRenderer"/> class.</returns>
-        public static ShapeRenderer Create() => new PdfSharpRenderer();
+        public static IShapeRenderer Create() => new PdfSharpRenderer();
 
         private static XColor ToXColor(IColor color)
         {
@@ -266,7 +266,7 @@ namespace Core2D.Renderer.PdfSharp
             }
         }
 
-        private XMatrix ToXMatrix(MatrixObject matrix)
+        private XMatrix ToXMatrix(IMatrixObject matrix)
         {
             return new XMatrix(
                 matrix.M11, matrix.M12,
@@ -296,7 +296,7 @@ namespace Core2D.Renderer.PdfSharp
         }
 
         /// <inheritdoc/>
-        public override object PushMatrix(object dc, MatrixObject matrix)
+        public override object PushMatrix(object dc, IMatrixObject matrix)
         {
             var _gfx = dc as XGraphics;
             var state = _gfx.Save();

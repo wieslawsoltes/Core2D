@@ -25,7 +25,7 @@ namespace Core2D.Editor.Tools.Path.Shapes
         public IShapeStyle Style { get; set; }
         public bool IsStroked { get; set; }
         public bool IsFilled { get; set; }
-        public MatrixObject Transform { get; set; }
+        public IMatrixObject Transform { get; set; }
 
         public void MarkAsDirty(bool value)
         {
@@ -40,20 +40,20 @@ namespace Core2D.Editor.Tools.Path.Shapes
             return true;
         }
 
-        public object BeginTransform(object dc, ShapeRenderer renderer)
+        public object BeginTransform(object dc, IShapeRenderer renderer)
         {
             return null;
         }
 
-        public void EndTransform(object dc, ShapeRenderer renderer, object state)
+        public void EndTransform(object dc, IShapeRenderer renderer, object state)
         {
         }
 
-        public void Draw(object dc, ShapeRenderer renderer, double dx, double dy, object db, object r)
+        public void Draw(object dc, IShapeRenderer renderer, double dx, double dy, object db, object r)
         {
         }
 
-        public bool Invalidate(ShapeRenderer renderer, double dx, double dy)
+        public bool Invalidate(IShapeRenderer renderer, double dx, double dy)
         {
             return false;
         }

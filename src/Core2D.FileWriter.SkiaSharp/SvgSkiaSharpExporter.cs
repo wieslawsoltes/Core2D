@@ -13,15 +13,15 @@ namespace Core2D.FileWriter.SkiaSharpSvg
     /// </summary>
     public sealed class SvgSkiaSharpExporter : IProjectExporter
     {
-        private readonly ShapeRenderer _renderer;
-        private readonly ContainerPresenter _presenter;
+        private readonly IShapeRenderer _renderer;
+        private readonly IContainerPresenter _presenter;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SvgSkiaSharpExporter"/> class.
         /// </summary>
         /// <param name="renderer">The shape renderer.</param>
         /// <param name="presenter">The container presenter.</param>
-        public SvgSkiaSharpExporter(ShapeRenderer renderer, ContainerPresenter presenter)
+        public SvgSkiaSharpExporter(IShapeRenderer renderer, IContainerPresenter presenter)
         {
             _renderer = renderer;
             _presenter = presenter;

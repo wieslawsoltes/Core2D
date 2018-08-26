@@ -16,7 +16,7 @@ namespace Core2D.Shapes
         private IBaseShape _owner;
         private IShapeState _state;
         private IShapeStyle _style;
-        private MatrixObject _transform;
+        private IMatrixObject _transform;
         private bool _isStroked;
         private bool _isFilled;
         private IContext _data;
@@ -46,7 +46,7 @@ namespace Core2D.Shapes
         }
 
         /// <inheritdoc/>
-        public MatrixObject Transform
+        public IMatrixObject Transform
         {
             get => _transform;
             set => Update(ref _transform, value);
@@ -85,7 +85,7 @@ namespace Core2D.Shapes
         }
 
         /// <inheritdoc/>
-        public virtual object BeginTransform(object dc, ShapeRenderer renderer)
+        public virtual object BeginTransform(object dc, IShapeRenderer renderer)
         {
             if (Transform != null)
             {
@@ -95,7 +95,7 @@ namespace Core2D.Shapes
         }
 
         /// <inheritdoc/>
-        public virtual void EndTransform(object dc, ShapeRenderer renderer, object state)
+        public virtual void EndTransform(object dc, IShapeRenderer renderer, object state)
         {
             if (Transform != null)
             {
@@ -104,10 +104,10 @@ namespace Core2D.Shapes
         }
 
         /// <inheritdoc/>
-        public abstract void Draw(object dc, ShapeRenderer renderer, double dx, double dy, object db, object r);
+        public abstract void Draw(object dc, IShapeRenderer renderer, double dx, double dy, object db, object r);
 
         /// <inheritdoc/>
-        public virtual bool Invalidate(ShapeRenderer renderer, double dx, double dy)
+        public virtual bool Invalidate(IShapeRenderer renderer, double dx, double dy)
         {
             return false;
         }

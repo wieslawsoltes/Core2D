@@ -22,13 +22,13 @@ namespace Core2D.Common
         public IShapeStyle Style { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
         public bool IsStroked { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
         public bool IsFilled { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public MatrixObject Transform { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public IMatrixObject Transform { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
 #pragma warning disable CS0067
         public event PropertyChangedEventHandler PropertyChanged;
 #pragma warning restore CS0067
 
-        public object BeginTransform(object dc, ShapeRenderer renderer)
+        public object BeginTransform(object dc, IShapeRenderer renderer)
         {
             throw new NotImplementedException();
         }
@@ -43,12 +43,12 @@ namespace Core2D.Common
             throw new NotImplementedException();
         }
 
-        public void Draw(object dc, ShapeRenderer renderer, double dx, double dy, object db, object r)
+        public void Draw(object dc, IShapeRenderer renderer, double dx, double dy, object db, object r)
         {
             throw new NotImplementedException();
         }
 
-        public void EndTransform(object dc, ShapeRenderer renderer, object state)
+        public void EndTransform(object dc, IShapeRenderer renderer, object state)
         {
             throw new NotImplementedException();
         }
@@ -58,7 +58,7 @@ namespace Core2D.Common
             throw new NotImplementedException();
         }
 
-        public bool Invalidate(ShapeRenderer renderer, double dx, double dy)
+        public bool Invalidate(IShapeRenderer renderer, double dx, double dy)
         {
             throw new NotImplementedException();
         }

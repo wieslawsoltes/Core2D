@@ -35,7 +35,7 @@ namespace Core2D.Editor
         private readonly Lazy<ImmutableArray<PathToolBase>> _pathTools;
         private readonly Lazy<HitTest> _hitTest;
         private readonly Lazy<ILog> _log;
-        private readonly Lazy<ShapeRenderer[]> _renderers;
+        private readonly Lazy<IShapeRenderer[]> _renderers;
         private readonly Lazy<IFileSystem> _fileIO;
         private readonly Lazy<IContainerFactory> _containerFactory;
         private readonly Lazy<IShapeFactory> _shapeFactory;
@@ -173,7 +173,7 @@ namespace Core2D.Editor
         /// <summary>
         /// Gets current renderer's.
         /// </summary>
-        public ShapeRenderer[] Renderers => _renderers.Value;
+        public IShapeRenderer[] Renderers => _renderers.Value;
 
         /// <summary>
         /// Gets current file system.
@@ -258,7 +258,7 @@ namespace Core2D.Editor
             _pathTools = _serviceProvider.GetServiceLazily<PathToolBase[], ImmutableArray<PathToolBase>>((tools) => tools.ToImmutableArray());
             _hitTest = _serviceProvider.GetServiceLazily<HitTest>(hitTests => hitTests.Register(_serviceProvider.GetService<HitTestBase[]>()));
             _log = _serviceProvider.GetServiceLazily<ILog>();
-            _renderers = new Lazy<ShapeRenderer[]>(() => new[] { _serviceProvider.GetService<ShapeRenderer>(), _serviceProvider.GetService<ShapeRenderer>() });
+            _renderers = new Lazy<IShapeRenderer[]>(() => new[] { _serviceProvider.GetService<IShapeRenderer>(), _serviceProvider.GetService<IShapeRenderer>() });
             _fileIO = _serviceProvider.GetServiceLazily<IFileSystem>();
             _containerFactory = _serviceProvider.GetServiceLazily<IContainerFactory>();
             _shapeFactory = _serviceProvider.GetServiceLazily<IShapeFactory>();

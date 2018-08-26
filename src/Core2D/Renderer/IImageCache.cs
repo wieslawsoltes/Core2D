@@ -12,7 +12,7 @@ namespace Core2D.Renderer
         /// <summary>
         /// Gets image keys collection.
         /// </summary>
-        IEnumerable<ImageKey> Keys { get; }
+        IEnumerable<IImageKey> Keys { get; }
 
         /// <summary>
         /// Add image key using file name as key.

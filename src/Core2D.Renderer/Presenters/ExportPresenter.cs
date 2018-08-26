@@ -5,12 +5,12 @@ using Core2D.Containers;
 namespace Core2D.Renderer.Presenters
 {
     /// <summary>
-    /// Template container presenter.
+    /// Export container presenter.
     /// </summary>
-    public class TemplatePresenter : ContainerPresenter
+    public class ExportPresenter : IContainerPresenter
     {
         /// <inheritdoc/>
-        public override void Render(object dc, ShapeRenderer renderer, IPageContainer container, double dx, double dy)
+        public void Render(object dc, IShapeRenderer renderer, IPageContainer container, double dx, double dy)
         {
             renderer.Fill(dc, dx, dy, container.Width, container.Height, container.Background);
 
@@ -19,8 +19,10 @@ namespace Core2D.Renderer.Presenters
 
             if (container.Template != null)
             {
-                renderer.Draw(dc, container.Template, dx, dy, db, r); 
+                renderer.Draw(dc, container.Template, dx, dy, db, r);
             }
+
+            renderer.Draw(dc, container, dx, dy, db, r);
         }
     }
 }

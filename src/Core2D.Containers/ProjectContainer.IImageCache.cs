@@ -13,10 +13,10 @@ namespace Core2D.Containers
     {
         private IDictionary<string, byte[]> _images = new Dictionary<string, byte[]>();
 
-        private IEnumerable<ImageKey> GetKeys() => _images.Select(i => new ImageKey() { Key = i.Key }).ToList();
+        private IEnumerable<IImageKey> GetKeys() => _images.Select(i => new ImageKey() { Key = i.Key }).ToList();
 
         /// <inheritdoc/>
-        public IEnumerable<ImageKey> Keys => GetKeys();
+        public IEnumerable<IImageKey> Keys => GetKeys();
 
         /// <inheritdoc/>
         public string AddImageFromFile(string path, byte[] bytes)

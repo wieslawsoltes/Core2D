@@ -9,7 +9,7 @@ namespace Core2D.Renderer
     /// <summary>
     /// Transformation matrix.
     /// </summary>
-    public class MatrixObject : ObservableObject
+    public class MatrixObject : ObservableObject, IMatrixObject
     {
         private double _m11;
         private double _m12;
@@ -46,54 +46,42 @@ namespace Core2D.Renderer
             _offsetY = offsetY;
         }
 
-        /// <summary>
-        /// Gets or sets the value of the first row and first column of this <see cref="MatrixObject"/>.
-        /// </summary>
+        /// <inheritdoc/>
         public double M11
         {
             get => _m11;
             set => Update(ref _m11, value);
         }
 
-        /// <summary>
-        /// Gets or sets the value of the first row and second column of this <see cref="MatrixObject"/>.
-        /// </summary>
+        /// <inheritdoc/>
         public double M12
         {
             get => _m12;
             set => Update(ref _m12, value);
         }
 
-        /// <summary>
-        /// Gets or sets the value of the second row and first column of this <see cref="MatrixObject"/>.
-        /// </summary>
+        /// <inheritdoc/>
         public double M21
         {
             get => _m21;
             set => Update(ref _m21, value);
         }
 
-        /// <summary>
-        /// Gets or sets the value of the second row and second column of this <see cref="MatrixObject"/>.
-        /// </summary>
+        /// <inheritdoc/>
         public double M22
         {
             get => _m22;
             set => Update(ref _m22, value);
         }
 
-        /// <summary>
-        /// Gets or sets the value of the third row and first column of this <see cref="MatrixObject"/>.
-        /// </summary>
+        /// <inheritdoc/>
         public double OffsetX
         {
             get => _offsetX;
             set => Update(ref _offsetX, value);
         }
 
-        /// <summary>
-        /// Gets or sets the value of the third row and second column of this <see cref="MatrixObject"/>.
-        /// </summary>
+        /// <inheritdoc/>
         public double OffsetY
         {
             get => _offsetY;
@@ -109,7 +97,7 @@ namespace Core2D.Renderer
         /// <summary>
         /// Gets an identity <see cref="MatrixObject"/>.
         /// </summary>
-        public static readonly MatrixObject Identity = new MatrixObject(1.0, 0.0, 0.0, 1.0, 0.0, 0.0);
+        public static readonly IMatrixObject Identity = new MatrixObject(1.0, 0.0, 0.0, 1.0, 0.0, 0.0);
 
         /// <summary>
         /// Creates a new <see cref="MatrixObject"/> instance.
@@ -121,7 +109,7 @@ namespace Core2D.Renderer
         /// <param name="offsetX">The value of the third row and first column.</param>
         /// <param name="offsetY">The value of the third row and second column.</param>
         /// <returns>The new instance of the <see cref="MatrixObject"/> class.</returns>
-        public static MatrixObject Create(double m11 = 1.0, double m12 = 0.0, double m21 = 0.0, double m22 = 1.0, double offsetX = 0.0, double offsetY = 0.0)
+        public static IMatrixObject Create(double m11 = 1.0, double m12 = 0.0, double m21 = 0.0, double m22 = 1.0, double offsetX = 0.0, double offsetY = 0.0)
         {
             return new MatrixObject(m11, m12, m21, m22, offsetX, offsetY);
         }
@@ -133,11 +121,11 @@ namespace Core2D.Renderer
         }
 
         /// <summary>
-        /// Parses a <see cref="MatrixObject"/> string.
+        /// Parses a <see cref="IMatrixObject"/> string.
         /// </summary>
         /// <param name="s">The string.</param>
-        /// <returns>The parsed <see cref="MatrixObject"/>.</returns>
-        public static MatrixObject Parse(string s)
+        /// <returns>The parsed <see cref="IMatrixObject"/>.</returns>
+        public static IMatrixObject Parse(string s)
         {
             var parts = s.Split(new[] { ',', ' ' }, StringSplitOptions.RemoveEmptyEntries).Select(x => x.Trim()).ToList();
             if (parts.Count == 6)

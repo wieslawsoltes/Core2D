@@ -40,7 +40,7 @@ namespace Core2D.Avalonia.Modules
         /// <inheritdoc/>
         protected override void Load(ContainerBuilder builder)
         {
-            builder.RegisterType<AvaloniaRenderer>().As<ShapeRenderer>().InstancePerDependency();
+            builder.RegisterType<AvaloniaRenderer>().As<IShapeRenderer>().InstancePerDependency();
             builder.RegisterType<AvaloniaTextClipboard>().As<ITextClipboard>().InstancePerLifetimeScope();
             builder.RegisterType<TraceLog>().As<ILog>().SingleInstance();
             builder.RegisterType<DotNetFileSystem>().As<IFileSystem>().InstancePerLifetimeScope();

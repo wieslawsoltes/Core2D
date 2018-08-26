@@ -48,7 +48,7 @@ namespace Core2D.Renderer.Dxf
         /// Creates a new <see cref="DxfRenderer"/> instance.
         /// </summary>
         /// <returns>The new instance of the <see cref="DxfRenderer"/> class.</returns>
-        public static ShapeRenderer Create() => new DxfRenderer();
+        public static IShapeRenderer Create() => new DxfRenderer();
 
         private static double s_lineweightFactor = 96.0 / 2540.0;
 
@@ -516,7 +516,7 @@ namespace Core2D.Renderer.Dxf
         }
 
         /// <inheritdoc/>
-        public override object PushMatrix(object dc, MatrixObject matrix)
+        public override object PushMatrix(object dc, IMatrixObject matrix)
         {
             // TODO: Implement push matrix.
             return null;

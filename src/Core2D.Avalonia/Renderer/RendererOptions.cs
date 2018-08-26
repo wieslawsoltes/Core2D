@@ -14,15 +14,15 @@ namespace Core2D.Avalonia.Renderer
         /// <summary>
         /// Renderer options attached property.
         /// </summary>
-        public static readonly AttachedProperty<ShapeRenderer> RendererProperty =
-            AvaloniaProperty.RegisterAttached<RendererOptions, AvaloniaObject, ShapeRenderer>(nameof(Renderer), null, true, BindingMode.TwoWay);
+        public static readonly AttachedProperty<IShapeRenderer> RendererProperty =
+            AvaloniaProperty.RegisterAttached<RendererOptions, AvaloniaObject, IShapeRenderer>(nameof(Renderer), null, true, BindingMode.TwoWay);
 
         /// <summary>
         /// Gets renderer options attached property.
         /// </summary>
         /// <param name="obj">The avalonia object.</param>
         /// <returns>The shape renderer property.</returns>
-        public static ShapeRenderer GetRenderer(AvaloniaObject obj)
+        public static IShapeRenderer GetRenderer(AvaloniaObject obj)
         {
             return obj.GetValue(RendererProperty);
         }
@@ -32,7 +32,7 @@ namespace Core2D.Avalonia.Renderer
         /// </summary>
         /// <param name="obj">The avalonia object.</param>
         /// <param name="value">The shape render value.</param>
-        public static void SetRenderer(AvaloniaObject obj, ShapeRenderer value)
+        public static void SetRenderer(AvaloniaObject obj, IShapeRenderer value)
         {
             obj.SetValue(RendererProperty, value);
         }

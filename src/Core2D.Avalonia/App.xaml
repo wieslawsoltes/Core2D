@@ -10,7 +10,7 @@
              xmlns:PathCore="clr-namespace:Core2D.Path;assembly=Core2D"
              xmlns:Segments="clr-namespace:Core2D.Path.Segments;assembly=Core2D.Shapes"
              xmlns:ContainersCore="clr-namespace:Core2D.Containers;assembly=Core2D"
-             xmlns:Renderer="clr-namespace:Core2D.Renderer;assembly=Core2D"
+             xmlns:RendererCore="clr-namespace:Core2D.Renderer;assembly=Core2D"
              xmlns:SettingsTools="clr-namespace:Core2D.Editor.Tools.Settings;assembly=Core2D.Editor"
              xmlns:SettingsPath="clr-namespace:Core2D.Editor.Tools.Path.Settings;assembly=Core2D.Editor"
              xmlns:ShapesCore="clr-namespace:Core2D.Shapes;assembly=Core2D"
@@ -632,7 +632,7 @@
             <state:ShapeStateControl/>
         </DataTemplate>
         <!-- Renderer -->
-        <DataTemplate DataType="Renderer:MatrixObject">
+        <DataTemplate DataType="RendererCore:IMatrixObject">
             <renderer:MatrixControl/>
         </DataTemplate>
         <!-- Settings Tools -->

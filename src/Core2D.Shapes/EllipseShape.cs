@@ -16,7 +16,7 @@ namespace Core2D.Shapes
         public override Type TargetType => typeof(IEllipseShape);
 
         /// <inheritdoc/>
-        public override void Draw(object dc, ShapeRenderer renderer, double dx, double dy, object db, object r)
+        public override void Draw(object dc, IShapeRenderer renderer, double dx, double dy, object db, object r)
         {
             var record = Data?.Record ?? r;
 
