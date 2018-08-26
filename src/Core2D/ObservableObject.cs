@@ -9,7 +9,7 @@ using Core2D.Attributes;
 namespace Core2D
 {
     /// <summary>
-    /// Observable object base class.
+    /// Observable object.
     /// </summary>
     public abstract class ObservableObject : IObservableObject
     {
