@@ -307,7 +307,7 @@ namespace Core2D.Containers
         /// Check whether the <see cref="History"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeHistory() => _history != null;
+        public virtual bool ShouldSerializeHistory() => false;
 
         /// <summary>
         /// Check whether the <see cref="StyleLibraries"/> property has changed from its default value.

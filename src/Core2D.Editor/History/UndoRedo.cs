@@ -2,12 +2,12 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
 
-namespace Core2D.History
+namespace Core2D.Editor.History
 {
     /// <summary>
     /// Undo/redo action pair.
     /// </summary>
-    public struct UndoRedo
+    internal struct UndoRedo
     {
         /// <summary>
         /// The undo <see cref="Action"/>.

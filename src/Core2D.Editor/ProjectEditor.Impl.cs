@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Core2D.Containers;
 using Core2D.Data;
 using Core2D.Editor.Bounds;
+using Core2D.Editor.History;
 using Core2D.Editor.Input;
 using Core2D.Editor.Recent;
 using Core2D.Editor.Tools;

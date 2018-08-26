@@ -2,13 +2,14 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
 using System.Collections.Generic;
+using Core2D.History;
 
-namespace Core2D.History
+namespace Core2D.Editor.History
 {
     /// <summary>
     /// Undo/redo stack based action history.
     /// </summary>
-    public sealed class StackHistory : IHistory
+    internal sealed class StackHistory : IHistory
     {
         private readonly Stack<UndoRedo> _undos = new Stack<UndoRedo>();
         private readonly Stack<UndoRedo> _redos = new Stack<UndoRedo>();
