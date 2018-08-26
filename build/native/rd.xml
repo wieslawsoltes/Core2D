@@ -20,10 +20,17 @@
             <Type Name="Core2D.Path.FillRule[]" Dynamic="Required All"/>
             <Type Name="Core2D.Path.SweepDirection" Dynamic="Required All"/>
             <Type Name="Core2D.Path.SweepDirection[]" Dynamic="Required All"/>
-            <Type Name="Core2D.Shape.PointAlignment" Dynamic="Required All"/>
-            <Type Name="Core2D.Shape.PointAlignment[]" Dynamic="Required All"/>
+            <Type Name="Core2D.Renderer.PointAlignment" Dynamic="Required All"/>
+            <Type Name="Core2D.Renderer.PointAlignment[]" Dynamic="Required All"/>
         </Assembly>
-        <Assembly Name="Core2D.Avalonia" Dynamic="Required All" />
+        <Assembly Name="Core2D.Containers" Dynamic="Required All" />
+        <Assembly Name="Core2D.Data" Dynamic="Required All" />
+        <Assembly Name="Core2D.Data.Extensions" Dynamic="Required All" />
+        <Assembly Name="Core2D.Editor" Dynamic="Required All" />
+        <Assembly Name="Core2D.Renderer" Dynamic="Required All" />
+        <Assembly Name="Core2D.Shapes" Dynamic="Required All" />
+        <Assembly Name="Core2D.Shapes.Extensions" Dynamic="Required All" />
+        <Assembly Name="Core2D.Style" Dynamic="Required All" />
         <Assembly Name="Core2D.Editor" Dynamic="Required All" />
         <Assembly Name="Core2D.FileSystem.DotNet" Dynamic="Required All" />
         <Assembly Name="Core2D.FileWriter.SkiaSharp" Dynamic="Required All" />
@@ -37,6 +44,7 @@
         <Assembly Name="Core2D.TextFieldReader.CsvHelper" Dynamic="Required All" />
         <Assembly Name="Core2D.TextFieldWriter.CsvHelper" Dynamic="Required All" />
         <Assembly Name="Core2D.Utilities.Avalonia" Dynamic="Required All" />
+        <Assembly Name="Core2D.Avalonia" Dynamic="Required All" />
 
         <!-- Dock -->
 
