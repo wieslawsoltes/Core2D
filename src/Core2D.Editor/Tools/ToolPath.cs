@@ -45,7 +45,7 @@ namespace Core2D.Editor.Tools
         /// <summary>
         /// Gets or sets current geometry context.
         /// </summary>
-        internal GeometryContext GeometryContext { get; set; }
+        internal IGeometryContext GeometryContext { get; set; }
 
         /// <summary>
         /// Gets or sets previous path tool.

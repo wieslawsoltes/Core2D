@@ -10,7 +10,7 @@ namespace Core2D.Path
     /// <summary>
     /// Path geometry context.
     /// </summary>
-    public class PathGeometryContext : GeometryContext
+    public class PathGeometryContext : IGeometryContext
     {
         private IPathGeometry _geometry;
         private IPathFigure _currentFigure;
@@ -24,20 +24,20 @@ namespace Core2D.Path
         }
 
         /// <inheritdoc/>
-        public override void BeginFigure(IPointShape startPoint, bool isFilled = true, bool isClosed = true)
+        public void BeginFigure(IPointShape startPoint, bool isFilled = true, bool isClosed = true)
         {
             _currentFigure = PathFigure.Create(startPoint, isFilled, isClosed);
             _geometry.Figures = _geometry.Figures.Add(_currentFigure);
         }
 
         /// <inheritdoc/>
-        public override void SetClosedState(bool isClosed)
+        public void SetClosedState(bool isClosed)
         {
             _currentFigure.IsClosed = isClosed;
         }
 
         /// <inheritdoc/>
-        public override void LineTo(IPointShape point, bool isStroked = true, bool isSmoothJoin = true)
+        public void LineTo(IPointShape point, bool isStroked = true, bool isSmoothJoin = true)
         {
             var segment = LineSegment.Create(
                 point,
@@ -47,7 +47,7 @@ namespace Core2D.Path
         }
 
         /// <inheritdoc/>
-        public override void ArcTo(IPointShape point, IPathSize size, double rotationAngle = 0.0, bool isLargeArc = false, SweepDirection sweepDirection = SweepDirection.Clockwise, bool isStroked = true, bool isSmoothJoin = true)
+        public void ArcTo(IPointShape point, IPathSize size, double rotationAngle = 0.0, bool isLargeArc = false, SweepDirection sweepDirection = SweepDirection.Clockwise, bool isStroked = true, bool isSmoothJoin = true)
         {
             var segment = ArcSegment.Create(
                 point,
@@ -61,7 +61,7 @@ namespace Core2D.Path
         }
 
         /// <inheritdoc/>
-        public override void CubicBezierTo(IPointShape point1, IPointShape point2, IPointShape point3, bool isStroked = true, bool isSmoothJoin = true)
+        public void CubicBezierTo(IPointShape point1, IPointShape point2, IPointShape point3, bool isStroked = true, bool isSmoothJoin = true)
         {
             var segment = CubicBezierSegment.Create(
                 point1,
@@ -73,7 +73,7 @@ namespace Core2D.Path
         }
 
         /// <inheritdoc/>
-        public override void QuadraticBezierTo(IPointShape point1, IPointShape point2, bool isStroked = true, bool isSmoothJoin = true)
+        public void QuadraticBezierTo(IPointShape point1, IPointShape point2, bool isStroked = true, bool isSmoothJoin = true)
         {
             var segment = QuadraticBezierSegment.Create(
                 point1,
@@ -84,7 +84,7 @@ namespace Core2D.Path
         }
 
         /// <inheritdoc/>
-        public override void PolyLineTo(ImmutableArray<IPointShape> points, bool isStroked = true, bool isSmoothJoin = true)
+        public void PolyLineTo(ImmutableArray<IPointShape> points, bool isStroked = true, bool isSmoothJoin = true)
         {
             var segment = PolyLineSegment.Create(
                 points,
@@ -94,7 +94,7 @@ namespace Core2D.Path
         }
 
         /// <inheritdoc/>
-        public override void PolyCubicBezierTo(ImmutableArray<IPointShape> points, bool isStroked = true, bool isSmoothJoin = true)
+        public void PolyCubicBezierTo(ImmutableArray<IPointShape> points, bool isStroked = true, bool isSmoothJoin = true)
         {
             var segment = PolyCubicBezierSegment.Create(
                 points,
@@ -104,7 +104,7 @@ namespace Core2D.Path
         }
 
         /// <inheritdoc/>
-        public override void PolyQuadraticBezierTo(ImmutableArray<IPointShape> points, bool isStroked = true, bool isSmoothJoin = true)
+        public void PolyQuadraticBezierTo(ImmutableArray<IPointShape> points, bool isStroked = true, bool isSmoothJoin = true)
         {
             var segment = PolyQuadraticBezierSegment.Create(
                 points,

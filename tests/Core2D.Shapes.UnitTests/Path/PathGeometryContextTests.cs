@@ -16,7 +16,7 @@ namespace Core2D.UnitTests
         public void Inherits_From_XGeometryContext()
         {
             var target = new PathGeometryContext(new PathGeometry());
-            Assert.True(target is GeometryContext);
+            Assert.True(target is IGeometryContext);
         }
 
         [Fact]
