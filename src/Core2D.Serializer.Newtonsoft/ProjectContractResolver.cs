@@ -1,12 +1,12 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
-using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Reflection;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 
 namespace Core2D.Serializer.Newtonsoft
 {

@@ -26,7 +26,6 @@
              xmlns:project="clr-namespace:Core2D.Wpf.Views.Containers"
              xmlns:renderer="clr-namespace:Core2D.Wpf.Views.Renderer"
              xmlns:shapes="clr-namespace:Core2D.Wpf.Views.Shapes"
-             xmlns:state="clr-namespace:Core2D.Wpf.Views.State"
              xmlns:style="clr-namespace:Core2D.Wpf.Views.Style">
     <Application.Resources>
         <!-- Converters -->
@@ -146,13 +145,12 @@
         <DataTemplate DataType="{x:Type Data:Context}">
             <data:DataControl/>
         </DataTemplate>
-        <!-- State -->
-        <DataTemplate DataType="{x:Type ShapesCore:ShapeState}">
-            <state:ShapeStateControl/>
-        </DataTemplate>
         <!-- Renderer -->
         <DataTemplate DataType="{x:Type Renderer:MatrixObject}">
             <renderer:MatrixControl/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type Renderer:ShapeState}">
+            <renderer:ShapeStateControl/>
         </DataTemplate>
         <!-- Shapes -->
         <DataTemplate DataType="{x:Type Shapes:PointShape}">

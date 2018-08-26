@@ -26,7 +26,6 @@
              xmlns:settingsTools="clr-namespace:Core2D.Avalonia.Views.Settings.Tools;assembly=Core2D.Avalonia"
              xmlns:settingsPath="clr-namespace:Core2D.Avalonia.Views.Settings.Tools.Path;assembly=Core2D.Avalonia"
              xmlns:shapes="clr-namespace:Core2D.Avalonia.Views.Shapes;assembly=Core2D.Avalonia"
-             xmlns:state="clr-namespace:Core2D.Avalonia.Views.State;assembly=Core2D.Avalonia"
              xmlns:style="clr-namespace:Core2D.Avalonia.Views.Style;assembly=Core2D.Avalonia"
              xmlns:views="clr-namespace:Core2D.Avalonia.Views;assembly=Core2D.Avalonia">
     <Application.Styles>
@@ -627,13 +626,12 @@
         <DataTemplate DataType="DataCore:IContext">
             <data:DataControl/>
         </DataTemplate>
-        <!-- State -->
-        <DataTemplate DataType="ShapesCore:IShapeState">
-            <state:ShapeStateControl/>
-        </DataTemplate>
         <!-- Renderer -->
         <DataTemplate DataType="RendererCore:IMatrixObject">
             <renderer:MatrixControl/>
+        </DataTemplate>
+        <DataTemplate DataType="RendererCore:IShapeState">
+            <renderer:ShapeStateControl/>
         </DataTemplate>
         <!-- Settings Tools -->
         <DataTemplate DataType="SettingsTools:ToolSettingsArc">

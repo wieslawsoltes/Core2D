@@ -15,7 +15,6 @@
              xmlns:path="clr-namespace:Core2D.Wpf.Views.Path"
              xmlns:project="clr-namespace:Core2D.Wpf.Views.Containers"
              xmlns:shapes="clr-namespace:Core2D.Wpf.Views.Shapes"
-             xmlns:state="clr-namespace:Core2D.Wpf.Views.State"
              xmlns:style="clr-namespace:Core2D.Wpf.Views.Style"
              xmlns:views="clr-namespace:Core2D.Wpf.Views"
              xmlns:ad="http://schemas.xceed.com/wpf/xaml/avalondock" 

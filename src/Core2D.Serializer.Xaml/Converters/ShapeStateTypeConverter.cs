@@ -3,7 +3,7 @@
 using System;
 using System.Globalization;
 using System.ComponentModel;
-using Core2D.Shapes;
+using Core2D.Renderer;
 
 namespace Core2D.Serializer.Xaml.Converters
 {

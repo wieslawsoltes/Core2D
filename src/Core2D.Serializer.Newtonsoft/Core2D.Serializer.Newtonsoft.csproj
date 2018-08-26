@@ -10,6 +10,7 @@
   <Import Project="..\..\build\Newtonsoft.Json.props" />
 
   <ItemGroup>
+    <ProjectReference Include="..\Core2D.Renderer\Core2D.Renderer.csproj" />
     <ProjectReference Include="..\Core2D.Style\Core2D.Style.csproj" />
     <ProjectReference Include="..\Core2D\Core2D.csproj" />
   </ItemGroup>

@@ -96,7 +96,7 @@ namespace Core2D.Renderer.PdfSharp
             }
         }
 
-        private static void DrawLineCurveInternal(XGraphics gfx, XPen pen, bool isStroked, ref XPoint pt1, ref XPoint pt2, double curvature, CurveOrientation orientation, Core2D.Shapes.PointAlignment pt1a, Core2D.Shapes.PointAlignment pt2a)
+        private static void DrawLineCurveInternal(XGraphics gfx, XPen pen, bool isStroked, ref XPoint pt1, ref XPoint pt2, double curvature, CurveOrientation orientation, Core2D.Renderer.PointAlignment pt1a, Core2D.Renderer.PointAlignment pt2a)
         {
             if (isStroked)
             {

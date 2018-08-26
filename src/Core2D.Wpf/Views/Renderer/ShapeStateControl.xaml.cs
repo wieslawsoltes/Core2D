@@ -2,7 +2,7 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System.Windows.Controls;
 
-namespace Core2D.Wpf.Views.State
+namespace Core2D.Wpf.Views.Renderer
 {
     /// <summary>
     /// Interaction logic for <see cref="ShapeStateControl"/> xaml.

@@ -1,8 +1,8 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
-using Core2D.Shapes;
-using Newtonsoft.Json;
 using System;
+using Core2D.Renderer;
+using Newtonsoft.Json;
 
 namespace Core2D.Serializer.Newtonsoft
 {

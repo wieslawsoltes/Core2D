@@ -1,15 +1,15 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using Core2D.Common;
-using Core2D.Shapes;
+using Core2D.Renderer;
 using Xunit;
 
-namespace Core2D.UnitTests
+namespace Core2D.Renderer.UnitTests
 {
     public class ShapeStateTests
     {
         [Fact]
-        [Trait("Core2D.Shapes", "Shapes")]
+        [Trait("Core2D.Renderer", "Renderer")]
         public void Inherits_From_ObservableObject()
         {
             var target = new ShapeState();
@@ -17,7 +17,7 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
-        [Trait("Core2D.Shapes", "Shapes")]
+        [Trait("Core2D.Renderer", "Renderer")]
         public void Flags_On_Set_Notify_Events_Are_Raised()
         {
             var state = new ShapeState();
@@ -52,7 +52,7 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
-        [Trait("Core2D.Shapes", "Shapes")]
+        [Trait("Core2D.Renderer", "Renderer")]
         public void Default_Property()
         {
             var target = new ShapeState();
@@ -65,7 +65,7 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
-        [Trait("Core2D.Shapes", "Shapes")]
+        [Trait("Core2D.Renderer", "Renderer")]
         public void Visible_Property()
         {
             var target = new ShapeState();
@@ -78,7 +78,7 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
-        [Trait("Core2D.Shapes", "Shapes")]
+        [Trait("Core2D.Renderer", "Renderer")]
         public void Printable_Property()
         {
             var target = new ShapeState();
@@ -91,7 +91,7 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
-        [Trait("Core2D.Shapes", "Shapes")]
+        [Trait("Core2D.Renderer", "Renderer")]
         public void Locked_Property()
         {
             var target = new ShapeState();
@@ -104,7 +104,7 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
-        [Trait("Core2D.Shapes", "Shapes")]
+        [Trait("Core2D.Renderer", "Renderer")]
         public void Connector_Property()
         {
             var target = new ShapeState();
@@ -117,7 +117,7 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
-        [Trait("Core2D.Shapes", "Shapes")]
+        [Trait("Core2D.Renderer", "Renderer")]
         public void None_Property()
         {
             var target = new ShapeState();
@@ -130,7 +130,7 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
-        [Trait("Core2D.Shapes", "Shapes")]
+        [Trait("Core2D.Renderer", "Renderer")]
         public void Standalone_Property()
         {
             var target = new ShapeState();
@@ -143,7 +143,7 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
-        [Trait("Core2D.Shapes", "Shapes")]
+        [Trait("Core2D.Renderer", "Renderer")]
         public void Input_Property()
         {
             var target = new ShapeState();
@@ -156,7 +156,7 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
-        [Trait("Core2D.Shapes", "Shapes")]
+        [Trait("Core2D.Renderer", "Renderer")]
         public void Output_Property()
         {
             var target = new ShapeState();
@@ -169,7 +169,7 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
-        [Trait("Core2D.Shapes", "Shapes")]
+        [Trait("Core2D.Renderer", "Renderer")]
         public void Parse_ShapeStateFlags_String()
         {
             var target = ShapeState.Parse("Visible, Printable, Standalone");
@@ -181,7 +181,7 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
-        [Trait("Core2D.Shapes", "Shapes")]
+        [Trait("Core2D.Renderer", "Renderer")]
         public void ToString_Should_Return_Flags_String()
         {
             var target = ShapeState.Create(

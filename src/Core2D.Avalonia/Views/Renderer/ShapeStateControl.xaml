@@ -1,6 +1,6 @@
 ﻿<!-- Copyright (c) Wiesław Šoltés. All rights reserved. -->
 <!-- Licensed under the MIT license. See LICENSE file in the project root for full license information. -->
-<UserControl x:Class="Core2D.Avalonia.Views.State.ShapeStateControl"
+<UserControl x:Class="Core2D.Avalonia.Views.Renderer.ShapeStateControl"
              xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:converters="clr-namespace:Core2D.Avalonia.Converters;assembly=Core2D.Avalonia"

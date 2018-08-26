@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using Core2D.Attributes;
 
-namespace Core2D.Shapes
+namespace Core2D.Renderer
 {
     /// <summary>
     /// Shape state extensions.

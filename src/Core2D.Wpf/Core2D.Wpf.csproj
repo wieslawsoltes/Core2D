@@ -236,7 +236,7 @@
     <Compile Include="Views\Shapes\TextControl.xaml.cs">
       <DependentUpon>TextControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\State\ShapeStateControl.xaml.cs">
+    <Compile Include="Views\Renderer\ShapeStateControl.xaml.cs">
       <DependentUpon>ShapeStateControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Style\ArgbColorControl.xaml.cs">
@@ -418,7 +418,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\State\ShapeStateControl.xaml">
+    <Page Include="Views\Renderer\ShapeStateControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

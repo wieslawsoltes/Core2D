@@ -3,7 +3,7 @@
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 
-namespace Core2D.Avalonia.Views.State
+namespace Core2D.Avalonia.Views.Renderer
 {
     /// <summary>
     /// Interaction logic for <see cref="ShapeStateControl"/> xaml.

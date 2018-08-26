@@ -87,6 +87,7 @@ public class Parameters
             ( "./tests", "Core2D.UnitTests" ),
             ( "./tests", "Core2D.Style.UnitTests" ),
             ( "./tests", "Core2D.Data.UnitTests" ),
+            ( "./tests", "Core2D.Renderer.UnitTests" ),
             ( "./tests", "Core2D.Shapes.UnitTests" ),
             ( "./tests", "Core2D.Containers.UnitTests" ),
             ( "./tests", "Core2D.Editor.UnitTests" ),
