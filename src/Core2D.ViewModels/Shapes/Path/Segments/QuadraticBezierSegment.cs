@@ -9,23 +9,19 @@ namespace Core2D.Path.Segments
     /// <summary>
     /// Quadratic bezier path segment.
     /// </summary>
-    public class QuadraticBezierSegment : PathSegment
+    public class QuadraticBezierSegment : PathSegment, IQuadraticBezierSegment
     {
         private IPointShape _point1;
         private IPointShape _point2;
 
-        /// <summary>
-        /// Gets or sets control point.
-        /// </summary>
+        /// <inheritdoc/>
         public IPointShape Point1
         {
             get => _point1;
             set => Update(ref _point1, value);
         }
 
-        /// <summary>
-        /// Gets or sets end point.
-        /// </summary>
+        /// <inheritdoc/>
         public IPointShape Point2
         {
             get => _point2;

@@ -9,13 +9,11 @@ namespace Core2D.Path.Segments
     /// <summary>
     /// Line path segment.
     /// </summary>
-    public class LineSegment : PathSegment
+    public class LineSegment : PathSegment, ILineSegment
     {
         private IPointShape _point;
 
-        /// <summary>
-        /// Gets or sets end point.
-        /// </summary>
+        /// <inheritdoc/>
         public IPointShape Point
         {
             get => _point;

@@ -10,7 +10,7 @@ namespace Core2D.Path.Segments
     /// <summary>
     /// Poly cubic bezier path segment.
     /// </summary>
-    public class PolyCubicBezierSegment : PathPolySegment
+    public class PolyCubicBezierSegment : PathPolySegment, IPolyCubicBezierSegment
     {
         /// <inheritdoc/>
         public override object Copy(IDictionary<object, object> shared)

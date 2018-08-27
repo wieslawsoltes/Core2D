@@ -9,7 +9,7 @@ namespace Core2D.Path.Segments
     /// <summary>
     /// Arc path segment.
     /// </summary>
-    public class ArcSegment : PathSegment
+    public class ArcSegment : PathSegment, IArcSegment
     {
         private IPointShape _point;
         private IPathSize _size;
@@ -17,45 +17,35 @@ namespace Core2D.Path.Segments
         private bool _isLargeArc;
         private SweepDirection _sweepDirection;
 
-        /// <summary>
-        /// Gets or sets end point.
-        /// </summary>
+        /// <inheritdoc/>
         public IPointShape Point
         {
             get => _point;
             set => Update(ref _point, value);
         }
 
-        /// <summary>
-        /// Gets or sets arc size.
-        /// </summary>
+        /// <inheritdoc/>
         public IPathSize Size
         {
             get => _size;
             set => Update(ref _size, value);
         }
 
-        /// <summary>
-        /// Gets or sets arc rotation angle.
-        /// </summary>
+        /// <inheritdoc/>
         public double RotationAngle
         {
             get => _rotationAngle;
             set => Update(ref _rotationAngle, value);
         }
 
-        /// <summary>
-        /// Gets or sets flag indicating whether arc is large.
-        /// </summary>
+        /// <inheritdoc/>
         public bool IsLargeArc
         {
             get => _isLargeArc;
             set => Update(ref _isLargeArc, value);
         }
 
-        /// <summary>
-        /// Gets or sets sweep direction.
-        /// </summary>
+        /// <inheritdoc/>
         public SweepDirection SweepDirection
         {
             get => _sweepDirection;
