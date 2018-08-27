@@ -50,14 +50,8 @@ public class Parameters
 
         BuildProjects = new []
         {
-            ( "./src", "Core2D" ),
-            ( "./src", "Core2D.Style" ),
-            ( "./src", "Core2D.Data" ),
-            ( "./src", "Core2D.Data.Extensions" ),
-            ( "./src", "Core2D.Renderer" ),
-            ( "./src", "Core2D.Shapes" ),
-            ( "./src", "Core2D.Shapes.Extensions" ),
-            ( "./src", "Core2D.Containers" ),
+            ( "./src", "Core2D.Model" ),
+            ( "./src", "Core2D.ViewModels" ),
             ( "./src", "Core2D.Editor" ),
             ( "./src", "Core2D.FileSystem.DotNet" ),
             ( "./src", "Core2D.FileWriter.Dxf" ),
@@ -77,38 +71,26 @@ public class Parameters
             ( "./src", "Core2D.ServiceProvider.Autofac" ),
             ( "./src", "Core2D.TextFieldReader.CsvHelper" ),
             ( "./src", "Core2D.TextFieldWriter.CsvHelper" ),
-            ( "./src", "Core2D.Utilities.Avalonia" ),
-            ( "./src", "Core2D.Utilities.Wpf" ),
-            ( "./src", "Core2D.Avalonia" )
+            ( "./src", "Core2D.UI.Avalonia" )
         };
 
         TestProjects = new []
         {
-            ( "./tests", "Core2D.UnitTests" ),
-            ( "./tests", "Core2D.Style.UnitTests" ),
-            ( "./tests", "Core2D.Data.UnitTests" ),
-            ( "./tests", "Core2D.Renderer.UnitTests" ),
-            ( "./tests", "Core2D.Shapes.UnitTests" ),
-            ( "./tests", "Core2D.Containers.UnitTests" ),
+            ( "./tests", "Core2D.Model.UnitTests" ),
+            ( "./tests", "Core2D.ViewModels.UnitTests" ),
             ( "./tests", "Core2D.Editor.UnitTests" ),
             ( "./tests", "Core2D.FileSystem.DotNet.UnitTests" )
         };
 
         PublishProjects = new []
         {
-            ( "./src", "Core2D.Avalonia", "netcoreapp2.1", "win7-x64" )
+            ( "./src", "Core2D.UI.Avalonia", "netcoreapp2.1", "win7-x64" )
         };
 
         PackProjects = new []
         {
-            ( "./src", "Core2D" ),
-            ( "./src", "Core2D.Style" ),
-            ( "./src", "Core2D.Data" ),
-            ( "./src", "Core2D.Data.Extensions" ),
-            ( "./src", "Core2D.Renderer" ),
-            ( "./src", "Core2D.Shapes" ),
-            ( "./src", "Core2D.Shapes.Extensions" ),
-            ( "./src", "Core2D.Containers" ),
+            ( "./src", "Core2D.Model" ),
+            ( "./src", "Core2D.ViewModels" ),
             ( "./src", "Core2D.Editor" ),
             ( "./src", "Core2D.FileSystem.DotNet" ),
             ( "./src", "Core2D.FileWriter.Dxf" ),
@@ -127,9 +109,7 @@ public class Parameters
             ( "./src", "Core2D.Serializer.Xaml" ),
             ( "./src", "Core2D.ServiceProvider.Autofac" ),
             ( "./src", "Core2D.TextFieldReader.CsvHelper" ),
-            ( "./src", "Core2D.TextFieldWriter.CsvHelper" ),
-            ( "./src", "Core2D.Utilities.Avalonia" ),
-            ( "./src", "Core2D.Utilities.Wpf" )
+            ( "./src", "Core2D.TextFieldWriter.CsvHelper" )
         };
     }
 }

@@ -1,0 +1,25 @@
+﻿<!-- Copyright (c) Wiesław Šoltés. All rights reserved. -->
+<!-- Licensed under the MIT license. See LICENSE file in the project root for full license information. -->
+<UserControl x:Class="Core2D.UI.Avalonia.Views.Data.DataControl"
+             xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:converters="clr-namespace:Core2D.UI.Avalonia.Converters;assembly=Core2D.UI.Avalonia"
+             xmlns:Editor="clr-namespace:Core2D.Editor;assembly=Core2D.Editor"
+             xmlns:Designer="clr-namespace:Core2D.Editor.Designer;assembly=Core2D.Editor"
+             xmlns:data="clr-namespace:Core2D.UI.Avalonia.Views.Data;assembly=Core2D.UI.Avalonia"
+             Design.DataContext="{x:Static Designer:DesignerContext.Data}"
+             Design.Width="250" Design.Height="400">
+    <TabControl Classes="default" IsVisible="{Binding !!$self.DataContext}">
+        <TabItem Header="Record" Classes="property">
+            <Grid RowDefinitions="Auto,*" ColumnDefinitions="*">
+                <Menu Grid.Row="0" HorizontalAlignment="Right" IsVisible="{Binding !!Record}">
+                    <MenuItem Header="X" Command="{Binding $parent[Window].DataContext.OnResetRecord}" CommandParameter="{Binding}" IsVisible="{Binding !!Record}"/>
+                </Menu>
+                <ContentControl Content="{Binding Record}" Grid.Row="1"/>
+            </Grid>
+        </TabItem>
+        <TabItem Header="Properties" Classes="property">
+            <data:PropertiesControl/>
+        </TabItem>
+    </TabControl>
+</UserControl>

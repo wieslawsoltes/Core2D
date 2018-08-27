@@ -10,7 +10,7 @@
   <Import Project="..\..\build\System.Diagnostics.props" />
 
   <ItemGroup>
-    <ProjectReference Include="..\Core2D\Core2D.csproj" />
+    <ProjectReference Include="..\Core2D.Model\Core2D.Model.csproj" />
   </ItemGroup>
 
 </Project>

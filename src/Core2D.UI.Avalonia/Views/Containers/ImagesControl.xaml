@@ -1,0 +1,36 @@
+﻿<!-- Copyright (c) Wiesław Šoltés. All rights reserved. -->
+<!-- Licensed under the MIT license. See LICENSE file in the project root for full license information. -->
+<UserControl x:Class="Core2D.UI.Avalonia.Views.Containers.ImagesControl"
+             xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
+             xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
+             xmlns:id="clr-namespace:Dock.Avalonia;assembly=Dock.Avalonia"
+             xmlns:converters="clr-namespace:Core2D.UI.Avalonia.Converters;assembly=Core2D.UI.Avalonia"
+             xmlns:Editor="clr-namespace:Core2D.Editor;assembly=Core2D.Editor"
+             xmlns:Designer="clr-namespace:Core2D.Editor.Designer;assembly=Core2D.Editor"
+             xmlns:RendererCore="clr-namespace:Core2D.Renderer;assembly=Core2D.Model"
+             Design.DataContext="{x:Static Designer:DesignerContext.Project}"
+             Design.Width="250" Design.Height="400">
+    <ScrollViewer>
+        <Grid RowDefinitions="Auto,Auto,*" ColumnDefinitions="*" >
+            <Menu Grid.Row="0" Grid.Column="0" HorizontalAlignment="Right">
+                <MenuItem Command="{Binding $parent[Window].DataContext.OnAddImageKey}" Header="+"/>
+            </Menu>
+            <TextBlock Grid.Column="0" Grid.Row="1" VerticalAlignment="Center" Text="Key" Classes="default"/>
+            <ItemsControl VerticalAlignment="Stretch" Grid.Column="0" Grid.Row="2" Items="{Binding Keys}">
+                <ItemsControl.DataTemplates>
+                    <DataTemplate DataType="RendererCore:IImageKey">
+                        <Grid VerticalAlignment="Top" ColumnDefinitions="*,30" Classes="drag">
+                            <i:Interaction.Behaviors>
+                                <id:DragBehavior Context="{Binding}"/>
+                            </i:Interaction.Behaviors>
+                            <TextBox VerticalAlignment="Center" Text="{Binding Key, Mode=OneWay}" Classes="property" Grid.Column="0"/>
+                            <Button VerticalAlignment="Center" Content="-" Classes="property" Grid.Column="1" Command="{Binding $parent[Window].DataContext.OnRemoveImageKey}" CommandParameter="{Binding Key}"/>
+                        </Grid>
+                    </DataTemplate>
+                </ItemsControl.DataTemplates>
+            </ItemsControl>
+        </Grid>
+    </ScrollViewer>
+</UserControl>
