@@ -6,8 +6,8 @@
 [![Build Status](https://travis-ci.org/wieslawsoltes/Core2D.svg?branch=master)](https://travis-ci.org/wieslawsoltes/Core2D)
 [![CircleCI](https://circleci.com/gh/wieslawsoltes/Core2D/tree/master.svg?style=svg)](https://circleci.com/gh/wieslawsoltes/Core2D/tree/master)
 
-[![NuGet](https://img.shields.io/nuget/v/Core2D.svg)](https://www.nuget.org/packages/Core2D)
-[![MyGet](https://img.shields.io/myget/core2d-nightly/vpre/Core2D.svg?label=myget)](https://www.myget.org/gallery/core2d-nightly) 
+[![NuGet](https://img.shields.io/nuget/v/Core2D.Model.svg)](https://www.nuget.org/packages/Core2D.Model)
+[![MyGet](https://img.shields.io/myget/core2d-nightly/vpre/Core2D.Model.svg?label=myget)](https://www.myget.org/gallery/core2d-nightly) 
 
 A multi-platform data driven 2D diagram editor.
 
