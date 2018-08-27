@@ -1,0 +1,66 @@
+﻿<!-- Copyright (c) Wiesław Šoltés. All rights reserved. -->
+<!-- Licensed under the MIT license. See LICENSE file in the project root for full license information. -->
+<UserControl x:Class="Core2D.UI.Avalonia.Views.DocumentControl"
+             xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
+             xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
+             xmlns:id="clr-namespace:Dock.Avalonia;assembly=Dock.Avalonia"
+             xmlns:converters="clr-namespace:Core2D.UI.Avalonia.Converters;assembly=Core2D.UI.Avalonia"
+             xmlns:ContainersCore="clr-namespace:Core2D.Containers;assembly=Core2D.Model"
+             xmlns:Designer="clr-namespace:Core2D.Editor.Designer;assembly=Core2D.Editor"
+             xmlns:renderer="clr-namespace:Core2D.UI.Avalonia.Renderer;assembly=Core2D.UI.Avalonia"
+             xmlns:views="clr-namespace:Core2D.UI.Avalonia.Views;assembly=Core2D.UI.Avalonia"
+             Design.DataContext="{x:Static Designer:DesignerContext.Editor}"
+             Design.Width="1200" Design.Height="540">
+    <DockPanel renderer:RendererOptions.Renderer="{Binding Renderers[1]}">
+        <StackPanel DockPanel.Dock="Top">
+            <TabStrip x:Name="documents" Items="{Binding Project.Documents}" SelectedItem="{Binding Project.CurrentDocument, Mode=OneTime}" Focusable="false" ClipToBounds="False" ZIndex="1">
+                <TabStrip.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel ClipToBounds="False"/>
+                    </ItemsPanelTemplate>
+                </TabStrip.ItemsPanel>
+                <TabStrip.Styles>
+                    <Style Selector="TabStripItem">
+                        <Setter Property="Margin" Value="0 0 0 0"/>
+                        <Setter Property="Padding" Value="4 1 4 1"/>
+                        <Setter Property="FontSize" Value="12"/>
+                        <Setter Property="FontWeight" Value="Normal"/>
+                        <Setter Property="Height" Value="24"/>
+                        <Setter Property="BorderThickness" Value="0"/>
+                    </Style>
+                    <Style Selector="TabStripItem:pointerover">
+                        <Setter Property="FontWeight" Value="Normal"/>
+                        <Setter Property="Background" Value="{DynamicResource ThemeAccentBrush4}"/>
+                    </Style>
+                    <Style Selector="TabStripItem:selected">
+                        <Setter Property="FontWeight" Value="Normal"/>
+                    </Style>
+                </TabStrip.Styles>
+                <TabStrip.DataTemplates>
+                    <DataTemplate DataType="ContainersCore:IDocumentContainer">
+                        <StackPanel Orientation="Horizontal" Spacing="2">
+                            <TextBlock Text="{Binding Name}" Margin="2"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </TabStrip.DataTemplates>
+            </TabStrip>
+        </StackPanel>
+        <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" ZIndex="-1">
+            <Carousel Items="{Binding Project.Documents}" SelectedIndex="{Binding #documents.SelectedIndex}" IsVirtualized="False" VerticalAlignment="Center" Margin="2">
+                <Carousel.DataTemplates>
+                    <DataTemplate DataType="ContainersCore:IDocumentContainer">
+                        <ItemsControl VerticalAlignment="Stretch" Items="{Binding Pages}">
+                            <ItemsControl.DataTemplates>
+                                <DataTemplate DataType="ContainersCore:IPageContainer">
+                                    <views:ContainerControl Container="{Binding}" ClipToBounds="False" Margin="0,4,0,4"/>
+                                </DataTemplate>
+                            </ItemsControl.DataTemplates>
+                        </ItemsControl>
+                    </DataTemplate>
+                </Carousel.DataTemplates>
+            </Carousel>
+        </ScrollViewer>
+    </DockPanel>
+</UserControl>

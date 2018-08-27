@@ -3,7 +3,7 @@
 
         <!-- App -->
 
-        <Assembly Name="Core2D.Core" Dynamic="Required All">
+        <Assembly Name="Core2D.Model" Dynamic="Required All">
             <Type Name="Core2D.Style.LineCap" Dynamic="Required All"/>
             <Type Name="Core2D.Style.LineCap[]" Dynamic="Required All"/>
             <Type Name="Core2D.Style.CurveOrientation" Dynamic="Required All"/>
@@ -44,7 +44,7 @@
         <Assembly Name="Core2D.TextFieldReader.CsvHelper" Dynamic="Required All" />
         <Assembly Name="Core2D.TextFieldWriter.CsvHelper" Dynamic="Required All" />
         <Assembly Name="Core2D.Utilities.Avalonia" Dynamic="Required All" />
-        <Assembly Name="Core2D.Avalonia" Dynamic="Required All" />
+        <Assembly Name="Core2D.UI.Avalonia" Dynamic="Required All" />
 
         <!-- Dock -->
 

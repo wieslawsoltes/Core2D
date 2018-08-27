@@ -12,7 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\Core2D.Containers\Core2D.Containers.csproj" />
-    <ProjectReference Include="..\..\src\Core2D.Core\Core2D.Core.csproj" />
+    <ProjectReference Include="..\..\src\Core2D.Model\Core2D.Model.csproj" />
     <ProjectReference Include="..\Core2D.Common\Core2D.Common.csproj" />
   </ItemGroup>
 

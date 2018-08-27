@@ -1,0 +1,36 @@
+﻿<!-- Copyright (c) Wiesław Šoltés. All rights reserved. -->
+<!-- Licensed under the MIT license. See LICENSE file in the project root for full license information. -->
+<UserControl x:Class="Core2D.UI.Avalonia.Views.PageControl"
+             xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
+             xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
+             xmlns:id="clr-namespace:Dock.Avalonia;assembly=Dock.Avalonia"
+             xmlns:handlers="clr-namespace:Core2D.UI.Avalonia.Dock.Handlers;assembly=Core2D.UI.Avalonia"
+             xmlns:converters="clr-namespace:Core2D.UI.Avalonia.Converters;assembly=Core2D.UI.Avalonia"
+             xmlns:Designer="clr-namespace:Core2D.Editor.Designer;assembly=Core2D.Editor"
+             xmlns:paz="clr-namespace:Avalonia.Controls.PanAndZoom;assembly=Avalonia.Controls.PanAndZoom"
+             xmlns:views="clr-namespace:Core2D.UI.Avalonia.Views;assembly=Core2D.UI.Avalonia"
+             Design.DataContext="{x:Static Designer:DesignerContext.Editor}"
+             Design.Width="1200" Design.Height="540">
+    <UserControl.Resources>
+        <id:DockDropHandler x:Key="DockDropHandler"/>
+        <handlers:EditorDropHandler x:Key="EditorDropHandler"/>
+    </UserControl.Resources>
+    <Border Classes="container">
+        <i:Interaction.Behaviors>
+            <id:DropBehavior Context="{Binding Layout}" Handler="{StaticResource DockDropHandler}"/>
+            <id:DropBehavior Context="{Binding}" Handler="{StaticResource EditorDropHandler}"/>
+        </i:Interaction.Behaviors>
+        <Border Classes="transparent" ClipToBounds="True">
+            <paz:ZoomBorder x:Name="zoomBorder" Stretch="None" ZoomSpeed="1.2" PanButton="Right" EnableInput="{Binding IsToolIdle}" Background="Transparent" ClipToBounds="False" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                <views:ContainerControl x:Name="containerControl" Renderer="{Binding Renderers[0]}" Container="{Binding Project.CurrentContainer}" ClipToBounds="False">
+                    <i:Interaction.Behaviors>
+                        <id:DropBehavior Context="{Binding Layout}" Handler="{StaticResource DockDropHandler}"/>
+                        <id:DropBehavior Context="{Binding}" Handler="{StaticResource EditorDropHandler}"/>
+                    </i:Interaction.Behaviors>
+                </views:ContainerControl>
+            </paz:ZoomBorder>
+        </Border>
+    </Border>
+</UserControl>

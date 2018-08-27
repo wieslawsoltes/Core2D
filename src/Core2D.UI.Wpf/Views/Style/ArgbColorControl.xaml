@@ -1,0 +1,55 @@
+﻿<!-- Copyright (c) Wiesław Šoltés. All rights reserved. -->
+<!-- Licensed under the MIT license. See LICENSE file in the project root for full license information. -->
+<UserControl x:Class="Core2D.UI.Wpf.Views.Style.ArgbColorControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Core2D.UI.Wpf" 
+             xmlns:converters="clr-namespace:Core2D.UI.Wpf.Converters" 
+             xmlns:designer="clr-namespace:Core2D.UI.Wpf.Designer"
+             xmlns:core="clr-namespace:Core2D;assembly=Core2D.Model" 
+             xmlns:custom="clr-namespace:Core2D.UI.Wpf.Views.Custom"
+             mc:Ignorable="d" 
+             d:DataContext="{x:Static designer:DesignerHelper.ArgbColor}"
+             d:DesignWidth="250" d:DesignHeight="400">
+    <Grid>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="50"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Rectangle Fill="{DynamicResource ColorCheckerBoard}" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Margin="5,2,5,2" Height="20"/>
+            <Rectangle Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Margin="5,2,5,2" Height="20">
+                <Rectangle.Fill>
+                    <MultiBinding Converter="{StaticResource ArgbColorToBrushMultiConverter}">
+                        <Binding Path="A"/>
+                        <Binding Path="R"/>
+                        <Binding Path="G"/>
+                        <Binding Path="B"/>
+                    </MultiBinding>
+                </Rectangle.Fill>
+            </Rectangle>
+            <TextBlock Text="A" Style="{StaticResource TextBlockCenterStyleKey}" Grid.Row="1" Grid.Column="0"/>
+            <TextBox Text="{Binding A, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBoxCenterStyleKey}" Grid.Row="1" Grid.Column="1"/>
+            <Slider Value="{Binding A}" Style="{StaticResource SliderStyleKey}" Minimum="0" Maximum="255" TickFrequency="1" IsSnapToTickEnabled="True" Grid.Row="1" Grid.Column="2"/>
+            <TextBlock Text="R" Style="{StaticResource TextBlockCenterStyleKey}" Grid.Row="2" Grid.Column="0"/>
+            <TextBox Text="{Binding R, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBoxCenterStyleKey}" Grid.Row="2" Grid.Column="1"/>
+            <Slider Value="{Binding R}" Style="{StaticResource SliderStyleKey}" Minimum="0" Maximum="255" TickFrequency="1" IsSnapToTickEnabled="True" Grid.Row="2" Grid.Column="2"/>
+            <TextBlock Text="G" Style="{StaticResource TextBlockCenterStyleKey}" Grid.Row="3" Grid.Column="0"/>
+            <TextBox Text="{Binding G, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBoxCenterStyleKey}" Grid.Row="3" Grid.Column="1"/>
+            <Slider Value="{Binding G}" Style="{StaticResource SliderStyleKey}" Minimum="0" Maximum="255" TickFrequency="1" IsSnapToTickEnabled="True" Grid.Row="3" Grid.Column="2"/>
+            <TextBlock Text="B" Style="{StaticResource TextBlockCenterStyleKey}" Grid.Row="4" Grid.Column="0"/>
+            <TextBox Text="{Binding B, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBoxCenterStyleKey}" Grid.Row="4" Grid.Column="1"/>
+            <Slider Value="{Binding B}" Style="{StaticResource SliderStyleKey}" Minimum="0" Maximum="255" TickFrequency="1" IsSnapToTickEnabled="True" Grid.Row="4" Grid.Column="2"/>
+        </Grid>
+    </Grid>
+</UserControl>

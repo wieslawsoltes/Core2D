@@ -16,7 +16,7 @@
     <ProjectReference Include="..\..\src\Core2D.Shapes.Extensions\Core2D.Shapes.Extensions.csproj" />
     <ProjectReference Include="..\..\src\Core2D.Shapes\Core2D.Shapes.csproj" />
     <ProjectReference Include="..\..\src\Core2D.Style\Core2D.Style.csproj" />
-    <ProjectReference Include="..\..\src\Core2D.Core\Core2D.Core.csproj" />
+    <ProjectReference Include="..\..\src\Core2D.Model\Core2D.Model.csproj" />
     <ProjectReference Include="..\Core2D.Common\Core2D.Common.csproj" />
   </ItemGroup>
 

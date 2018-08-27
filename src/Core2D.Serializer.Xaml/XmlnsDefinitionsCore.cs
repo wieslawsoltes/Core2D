@@ -3,17 +3,17 @@
 using Portable.Xaml.Markup;
 using Core2D.Serializer.Xaml;
 
-[assembly: XmlnsDefinition(XamlConstants.CoreNamespace, "Core2D", AssemblyName = "Core2D.Core")]
-[assembly: XmlnsDefinition(XamlConstants.CoreNamespace, "Core2D.Attributes", AssemblyName = "Core2D.Core")]
-[assembly: XmlnsDefinition(XamlConstants.CoreNamespace, "Core2D.Containers", AssemblyName = "Core2D.Core")]
-[assembly: XmlnsDefinition(XamlConstants.CoreNamespace, "Core2D.Data", AssemblyName = "Core2D.Core")]
-[assembly: XmlnsDefinition(XamlConstants.CoreNamespace, "Core2D.History", AssemblyName = "Core2D.Core")]
-[assembly: XmlnsDefinition(XamlConstants.CoreNamespace, "Core2D.Interfaces", AssemblyName = "Core2D.Core")]
-[assembly: XmlnsDefinition(XamlConstants.CoreNamespace, "Core2D.Path", AssemblyName = "Core2D.Core")]
-[assembly: XmlnsDefinition(XamlConstants.CoreNamespace, "Core2D.Renderer", AssemblyName = "Core2D.Core")]
-[assembly: XmlnsDefinition(XamlConstants.CoreNamespace, "Core2D.Renderer.Presenters", AssemblyName = "Core2D.Core")]
-[assembly: XmlnsDefinition(XamlConstants.CoreNamespace, "Core2D.Shapes", AssemblyName = "Core2D.Core")]
-[assembly: XmlnsDefinition(XamlConstants.CoreNamespace, "Core2D.Style", AssemblyName = "Core2D.Core")]
+[assembly: XmlnsDefinition(XamlConstants.CoreNamespace, "Core2D", AssemblyName = "Core2D.Model")]
+[assembly: XmlnsDefinition(XamlConstants.CoreNamespace, "Core2D.Attributes", AssemblyName = "Core2D.Model")]
+[assembly: XmlnsDefinition(XamlConstants.CoreNamespace, "Core2D.Containers", AssemblyName = "Core2D.Model")]
+[assembly: XmlnsDefinition(XamlConstants.CoreNamespace, "Core2D.Data", AssemblyName = "Core2D.Model")]
+[assembly: XmlnsDefinition(XamlConstants.CoreNamespace, "Core2D.History", AssemblyName = "Core2D.Model")]
+[assembly: XmlnsDefinition(XamlConstants.CoreNamespace, "Core2D.Interfaces", AssemblyName = "Core2D.Model")]
+[assembly: XmlnsDefinition(XamlConstants.CoreNamespace, "Core2D.Path", AssemblyName = "Core2D.Model")]
+[assembly: XmlnsDefinition(XamlConstants.CoreNamespace, "Core2D.Renderer", AssemblyName = "Core2D.Model")]
+[assembly: XmlnsDefinition(XamlConstants.CoreNamespace, "Core2D.Renderer.Presenters", AssemblyName = "Core2D.Model")]
+[assembly: XmlnsDefinition(XamlConstants.CoreNamespace, "Core2D.Shapes", AssemblyName = "Core2D.Model")]
+[assembly: XmlnsDefinition(XamlConstants.CoreNamespace, "Core2D.Style", AssemblyName = "Core2D.Model")]
 
 [assembly: XmlnsDefinition(XamlConstants.CoreNamespace, "Core2D.Containers", AssemblyName = "Core2D.Containers")]
 [assembly: XmlnsDefinition(XamlConstants.CoreNamespace, "Core2D.Data", AssemblyName = "Core2D.Data")]

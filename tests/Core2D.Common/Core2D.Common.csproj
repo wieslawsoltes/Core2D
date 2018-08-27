@@ -11,7 +11,7 @@
   
   <ItemGroup>
     <ProjectReference Include="..\..\src\Core2D.Shapes.Extensions\Core2D.Shapes.Extensions.csproj" />
-    <ProjectReference Include="..\..\src\Core2D.Core\Core2D.Core.csproj" />
+    <ProjectReference Include="..\..\src\Core2D.Model\Core2D.Model.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,0 +1,17 @@
+﻿<!-- Copyright (c) Wiesław Šoltés. All rights reserved. -->
+<!-- Licensed under the MIT license. See LICENSE file in the project root for full license information. -->
+<idc:MetroWindow x:Class="Core2D.UI.Avalonia.Windows.AboutWindow"
+                 xmlns="https://github.com/avaloniaui"
+                 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                 xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
+                 xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
+                 xmlns:id="clr-namespace:Dock.Avalonia;assembly=Dock.Avalonia"
+                 xmlns:idc="clr-namespace:Dock.Avalonia.Controls;assembly=Dock.Avalonia"
+                 xmlns:views="clr-namespace:Core2D.UI.Avalonia.Views;assembly=Core2D.UI.Avalonia"
+                 Width="700" Height="340"
+                 UseLayoutRounding="True" RenderOptions.BitmapInterpolationMode="HighQuality"
+                 WindowState="Normal" WindowStartupLocation="CenterScreen"
+                 FontFamily="Segoe UI, Arial" BorderThickness="1" BorderBrush="{DynamicResource ThemeBorderLightBrush}"
+                 Title="About Core2D">
+    <views:AboutControl VerticalAlignment="Center" HorizontalAlignment="Center"/>
+</idc:MetroWindow>
