@@ -25,7 +25,7 @@ using Core2D.Serializer.Newtonsoft;
 using Core2D.Serializer.Xaml;
 using Core2D.TextFieldReader.CsvHelper;
 using Core2D.TextFieldWriter.CsvHelper;
-using Core2D.Utilities.Wpf;
+using Core2D.UI.Wpf.Utilities;
 
 namespace Core2D.UI.Wpf.Modules
 {

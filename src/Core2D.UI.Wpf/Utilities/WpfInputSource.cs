@@ -7,7 +7,7 @@ using System.Windows.Input;
 using Core2D.Editor;
 using Core2D.Editor.Input;
 
-namespace Core2D.Utilities.Wpf
+namespace Core2D.UI.Wpf.Utilities
 {
     /// <summary>
     /// Provides mouse input from <see cref="UIElement"/>.

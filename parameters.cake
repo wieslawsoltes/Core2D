@@ -51,6 +51,7 @@ public class Parameters
         BuildProjects = new []
         {
             ( "./src", "Core2D.Model" ),
+            ( "./src", "Core2D.ViewModels" ),
             ( "./src", "Core2D.Editor" ),
             ( "./src", "Core2D.FileSystem.DotNet" ),
             ( "./src", "Core2D.FileWriter.Dxf" ),
@@ -76,11 +77,7 @@ public class Parameters
         TestProjects = new []
         {
             ( "./tests", "Core2D.Model.UnitTests" ),
-            ( "./tests", "Core2D.Style.UnitTests" ),
-            ( "./tests", "Core2D.Data.UnitTests" ),
-            ( "./tests", "Core2D.Renderer.UnitTests" ),
-            ( "./tests", "Core2D.Shapes.UnitTests" ),
-            ( "./tests", "Core2D.Containers.UnitTests" ),
+            ( "./tests", "Core2D.ViewModels.UnitTests" ),
             ( "./tests", "Core2D.Editor.UnitTests" ),
             ( "./tests", "Core2D.FileSystem.DotNet.UnitTests" )
         };
@@ -93,6 +90,7 @@ public class Parameters
         PackProjects = new []
         {
             ( "./src", "Core2D.Model" ),
+            ( "./src", "Core2D.ViewModels" ),
             ( "./src", "Core2D.Editor" ),
             ( "./src", "Core2D.FileSystem.DotNet" ),
             ( "./src", "Core2D.FileWriter.Dxf" ),

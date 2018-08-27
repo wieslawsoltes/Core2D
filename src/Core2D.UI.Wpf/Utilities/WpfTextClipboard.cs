@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using Core2D.Interfaces;
 
-namespace Core2D.Utilities.Wpf
+namespace Core2D.UI.Wpf.Utilities
 {
     /// <summary>
     /// Wrapper class for <see cref="System.Windows.Clipboard"/> clipboard class.

@@ -15,11 +15,11 @@ using Core2D.Serializer.Xaml;
 [assembly: XmlnsDefinition(XamlConstants.CoreNamespace, "Core2D.Shapes", AssemblyName = "Core2D.Model")]
 [assembly: XmlnsDefinition(XamlConstants.CoreNamespace, "Core2D.Style", AssemblyName = "Core2D.Model")]
 
-[assembly: XmlnsDefinition(XamlConstants.CoreNamespace, "Core2D.Containers", AssemblyName = "Core2D.Containers")]
-[assembly: XmlnsDefinition(XamlConstants.CoreNamespace, "Core2D.Data", AssemblyName = "Core2D.Data")]
-[assembly: XmlnsDefinition(XamlConstants.CoreNamespace, "Core2D.Shapes", AssemblyName = "Core2D.Shapes")]
-[assembly: XmlnsDefinition(XamlConstants.CoreNamespace, "Core2D.Shapes.Path", AssemblyName = "Core2D.Shapes")]
-[assembly: XmlnsDefinition(XamlConstants.CoreNamespace, "Core2D.Shapes.Path.Segments", AssemblyName = "Core2D.Shapes")]
-[assembly: XmlnsDefinition(XamlConstants.CoreNamespace, "Core2D.Style", AssemblyName = "Core2D.Style")]
+[assembly: XmlnsDefinition(XamlConstants.CoreNamespace, "Core2D.Containers", AssemblyName = "Core2D.ViewModels")]
+[assembly: XmlnsDefinition(XamlConstants.CoreNamespace, "Core2D.Data", AssemblyName = "Core2D.ViewModels")]
+[assembly: XmlnsDefinition(XamlConstants.CoreNamespace, "Core2D.Shapes", AssemblyName = "Core2D.ViewModels")]
+[assembly: XmlnsDefinition(XamlConstants.CoreNamespace, "Core2D.Shapes.Path", AssemblyName = "Core2D.ViewModels")]
+[assembly: XmlnsDefinition(XamlConstants.CoreNamespace, "Core2D.Shapes.Path.Segments", AssemblyName = "Core2D.ViewModels")]
+[assembly: XmlnsDefinition(XamlConstants.CoreNamespace, "Core2D.Style", AssemblyName = "Core2D.ViewModels")]
 
 [assembly: XmlnsPrefix(XamlConstants.CoreNamespace, "c")]

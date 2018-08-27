@@ -22,7 +22,7 @@ using Core2D.Serializer.Newtonsoft;
 using Core2D.Serializer.Xaml;
 using Core2D.TextFieldReader.CsvHelper;
 using Core2D.TextFieldWriter.CsvHelper;
-using Core2D.Utilities.Avalonia;
+using Core2D.UI.Avalonia.Utilities;
 
 #if NET461
 using Core2D.FileWriter.Dxf;

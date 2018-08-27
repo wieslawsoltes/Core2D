@@ -40,14 +40,7 @@
   <Import Project="..\..\build\EmbedXaml.props" />
 
   <ItemGroup>
-    <ProjectReference Include="..\Core2D.Containers\Core2D.Containers.csproj" />
-    <ProjectReference Include="..\Core2D.Data.Extensions\Core2D.Data.Extensions.csproj" />
-    <ProjectReference Include="..\Core2D.Data\Core2D.Data.csproj" />
     <ProjectReference Include="..\Core2D.Editor\Core2D.Editor.csproj" />
-    <ProjectReference Include="..\Core2D.Renderer\Core2D.Renderer.csproj" />
-    <ProjectReference Include="..\Core2D.Shapes.Extensions\Core2D.Shapes.Extensions.csproj" />
-    <ProjectReference Include="..\Core2D.Shapes\Core2D.Shapes.csproj" />
-    <ProjectReference Include="..\Core2D.Style\Core2D.Style.csproj" />
     <ProjectReference Include="..\Core2D.Model\Core2D.Model.csproj" />
     <ProjectReference Include="..\Core2D.FileSystem.DotNet\Core2D.FileSystem.DotNet.csproj" />
     <ProjectReference Include="..\Core2D.FileWriter.SkiaSharp\Core2D.FileWriter.SkiaSharp.csproj" />
@@ -60,7 +53,6 @@
     <ProjectReference Include="..\Core2D.ServiceProvider.Autofac\Core2D.ServiceProvider.Autofac.csproj" />
     <ProjectReference Include="..\Core2D.TextFieldReader.CsvHelper\Core2D.TextFieldReader.CsvHelper.csproj" />
     <ProjectReference Include="..\Core2D.TextFieldWriter.CsvHelper\Core2D.TextFieldWriter.CsvHelper.csproj" />
-    <ProjectReference Include="..\Core2D.Utilities.Avalonia\Core2D.Utilities.Avalonia.csproj" />
   </ItemGroup>
 
   <ItemGroup Condition="$(TargetFramework.StartsWith('net4'))">

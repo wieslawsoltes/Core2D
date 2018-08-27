@@ -8,7 +8,7 @@
              xmlns:local="clr-namespace:Core2D.UI.Wpf" 
              xmlns:converters="clr-namespace:Core2D.UI.Wpf.Converters" 
              xmlns:designer="clr-namespace:Core2D.UI.Wpf.Designer"
-             xmlns:Shapes="clr-namespace:Core2D.Shapes;assembly=Core2D.Shapes" 
+             xmlns:Shapes="clr-namespace:Core2D.Shapes;assembly=Core2D.ViewModels" 
              xmlns:custom="clr-namespace:Core2D.UI.Wpf.Views.Custom"
              mc:Ignorable="d" 
              d:DataContext="{x:Static designer:DesignerHelper.Layer}"

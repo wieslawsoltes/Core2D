@@ -9,7 +9,7 @@ using Core2D.Editor;
 using Core2D.Editor.Input;
 using Core2D.Shapes;
 using Core2D.Style;
-using Core2D.Utilities.Wpf;
+using Core2D.UI.Wpf.Utilities;
 using Microsoft.Win32;
 using Xceed.Wpf.AvalonDock.Layout.Serialization;
 

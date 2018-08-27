@@ -8,7 +8,7 @@
              xmlns:designer="clr-namespace:Core2D.UI.Wpf.Designer" 
              xmlns:editor="clr-namespace:Core2D.UI.Wpf.Editor" 
              xmlns:ContainersCore="clr-namespace:Core2D.Containers;assembly=Core2D.Model" 
-             xmlns:Containers="clr-namespace:Core2D.Containers;assembly=Core2D.Containers" 
+             xmlns:Containers="clr-namespace:Core2D.Containers;assembly=Core2D.ViewModels" 
              xmlns:custom="clr-namespace:Core2D.UI.Wpf.Views.Custom"
              xmlns:lists="clr-namespace:Core2D.UI.Wpf.Views.Custom.Lists"
              xmlns:data="clr-namespace:Core2D.UI.Wpf.Views.Data"
