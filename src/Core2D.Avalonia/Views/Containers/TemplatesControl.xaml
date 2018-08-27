@@ -9,7 +9,7 @@
              xmlns:handlers="clr-namespace:Core2D.Avalonia.Dock.Handlers;assembly=Core2D.Avalonia"
              xmlns:converters="clr-namespace:Core2D.Avalonia.Converters;assembly=Core2D.Avalonia"
              xmlns:Editor="clr-namespace:Core2D.Editor;assembly=Core2D.Editor"
-             xmlns:ContainersCore="clr-namespace:Core2D.Containers;assembly=Core2D"
+             xmlns:ContainersCore="clr-namespace:Core2D.Containers;assembly=Core2D.Core"
              xmlns:Designer="clr-namespace:Core2D.Editor.Designer;assembly=Core2D.Editor"
              Design.DataContext="{x:Static Designer:DesignerContext.Project}"
              Design.Width="250" Design.Height="400">

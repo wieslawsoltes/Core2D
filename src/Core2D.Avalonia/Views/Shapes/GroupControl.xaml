@@ -7,8 +7,8 @@
              xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
              xmlns:id="clr-namespace:Dock.Avalonia;assembly=Dock.Avalonia"
              xmlns:converters="clr-namespace:Core2D.Avalonia.Converters;assembly=Core2D.Avalonia"
-             xmlns:DataCore="clr-namespace:Core2D.Data;assembly=Core2D"
-             xmlns:ShapesCore="clr-namespace:Core2D.Shapes;assembly=Core2D"
+             xmlns:DataCore="clr-namespace:Core2D.Data;assembly=Core2D.Core"
+             xmlns:ShapesCore="clr-namespace:Core2D.Shapes;assembly=Core2D.Core"
              xmlns:Designer="clr-namespace:Core2D.Editor.Designer;assembly=Core2D.Editor"
              Design.DataContext="{x:Static Designer:DesignerContext.Group}"
              Design.Width="250" Design.Height="400">

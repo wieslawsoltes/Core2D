@@ -50,7 +50,7 @@ public class Parameters
 
         BuildProjects = new []
         {
-            ( "./src", "Core2D" ),
+            ( "./src", "Core2D.Core" ),
             ( "./src", "Core2D.Style" ),
             ( "./src", "Core2D.Data" ),
             ( "./src", "Core2D.Data.Extensions" ),
@@ -84,7 +84,7 @@ public class Parameters
 
         TestProjects = new []
         {
-            ( "./tests", "Core2D.UnitTests" ),
+            ( "./tests", "Core2D.Core.UnitTests" ),
             ( "./tests", "Core2D.Style.UnitTests" ),
             ( "./tests", "Core2D.Data.UnitTests" ),
             ( "./tests", "Core2D.Renderer.UnitTests" ),
@@ -101,7 +101,7 @@ public class Parameters
 
         PackProjects = new []
         {
-            ( "./src", "Core2D" ),
+            ( "./src", "Core2D.Core" ),
             ( "./src", "Core2D.Style" ),
             ( "./src", "Core2D.Data" ),
             ( "./src", "Core2D.Data.Extensions" ),

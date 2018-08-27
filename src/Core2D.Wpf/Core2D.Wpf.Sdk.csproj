@@ -65,7 +65,7 @@
     <ProjectReference Include="..\Core2D.Shapes\Core2D.Shapes.csproj" />
     <ProjectReference Include="..\Core2D.Style\Core2D.Style.csproj" />
     <ProjectReference Include="..\Core2D.Utilities.Wpf\Core2D.Utilities.Wpf.csproj" />
-    <ProjectReference Include="..\Core2D\Core2D.csproj" />
+    <ProjectReference Include="..\Core2D.Core\Core2D.Core.csproj" />
     <ProjectReference Include="..\Core2D.FileSystem.DotNet\Core2D.FileSystem.DotNet.csproj" />
     <ProjectReference Include="..\Core2D.FileWriter.Dxf\Core2D.FileWriter.Dxf.csproj" />
     <ProjectReference Include="..\Core2D.FileWriter.Emf\Core2D.FileWriter.Emf.csproj" />

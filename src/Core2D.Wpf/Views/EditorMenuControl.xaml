@@ -9,7 +9,7 @@
              xmlns:converters="clr-namespace:Core2D.Wpf.Converters" 
              xmlns:designer="clr-namespace:Core2D.Wpf.Designer"
              xmlns:editor="clr-namespace:Core2D.Wpf.Editor" 
-             xmlns:Containers="clr-namespace:Core2D.Containers;assembly=Core2D" 
+             xmlns:Containers="clr-namespace:Core2D.Containers;assembly=Core2D.Core" 
              xmlns:custom="clr-namespace:Core2D.Wpf.Views.Custom"
              mc:Ignorable="d" 
              d:DataContext="{x:Static designer:DesignerHelper.Editor}"

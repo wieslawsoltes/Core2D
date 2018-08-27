@@ -69,7 +69,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{FB0B299E-7
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{BC6BAFE6-1735-4549-A7CC-819274780B38}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D", "src\Core2D\Core2D.csproj", "{F822EC0C-2501-487D-87A8-B8D28A761385}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D.Core", "src\Core2D.Core\Core2D.Core.csproj", "{F822EC0C-2501-487D-87A8-B8D28A761385}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D.Avalonia", "src\Core2D.Avalonia\Core2D.Avalonia.csproj", "{0C7EA04E-94D8-49B7-B387-C031B2422F3B}"
 EndProject
@@ -121,7 +121,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{8756F874
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D.FileSystem.DotNet.UnitTests", "tests\Core2D.FileSystem.DotNet.UnitTests\Core2D.FileSystem.DotNet.UnitTests.csproj", "{E9C30F6F-00DD-494A-8E7C-253A5C76E999}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D.UnitTests", "tests\Core2D.UnitTests\Core2D.UnitTests.csproj", "{AB31E0E2-9090-4461-84BE-5C5AAA19758F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D.Core.UnitTests", "tests\Core2D.Core.UnitTests\Core2D.Core.UnitTests.csproj", "{AB31E0E2-9090-4461-84BE-5C5AAA19758F}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D.Shapes", "src\Core2D.Shapes\Core2D.Shapes.csproj", "{2304A6B6-B64A-4E10-AC4D-0C56AE9126D5}"
 EndProject

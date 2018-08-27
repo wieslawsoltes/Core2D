@@ -558,7 +558,7 @@
       <Project>{55f8a599-1ea5-4ef8-ba51-01de24b49f43}</Project>
       <Name>Core2D.Utilities.Wpf</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Core2D\Core2D.csproj">
+    <ProjectReference Include="..\Core2D.Core\Core2D.Core.csproj">
       <Project>{F822EC0C-2501-487D-87A8-B8D28A761385}</Project>
       <Name>Core2D</Name>
     </ProjectReference>

@@ -24,7 +24,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Core2D\Core2D.csproj" />
+    <ProjectReference Include="..\Core2D.Core\Core2D.Core.csproj" />
     <ProjectReference Include="..\Core2D.Renderer.WinForms\Core2D.Renderer.WinForms.csproj" />
   </ItemGroup>
 

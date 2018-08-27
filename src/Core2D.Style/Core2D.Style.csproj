@@ -11,7 +11,7 @@
   <Import Project="..\..\build\Rx.props" />
   <ItemGroup>
     <ProjectReference Include="..\Core2D.Renderer\Core2D.Renderer.csproj" />
-    <ProjectReference Include="..\Core2D\Core2D.csproj" />
+    <ProjectReference Include="..\Core2D.Core\Core2D.Core.csproj" />
   </ItemGroup>
 
 </Project>

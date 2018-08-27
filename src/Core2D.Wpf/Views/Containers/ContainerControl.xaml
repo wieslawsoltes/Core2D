@@ -8,7 +8,7 @@
              xmlns:local="clr-namespace:Core2D.Wpf" 
              xmlns:converters="clr-namespace:Core2D.Wpf.Converters" 
              xmlns:designer="clr-namespace:Core2D.Wpf.Designer"
-             xmlns:core="clr-namespace:Core2D;assembly=Core2D" 
+             xmlns:core="clr-namespace:Core2D;assembly=Core2D.Core" 
              xmlns:custom="clr-namespace:Core2D.Wpf.Views.Custom"
              xmlns:lists="clr-namespace:Core2D.Wpf.Views.Custom.Lists"
              xmlns:project="clr-namespace:Core2D.Wpf.Views.Containers"

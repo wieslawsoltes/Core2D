@@ -9,7 +9,7 @@
              xmlns:converters="clr-namespace:Core2D.Wpf.Converters"
              xmlns:designer="clr-namespace:Core2D.Wpf.Designer"
              xmlns:editor="clr-namespace:Core2D.Wpf.Editor"
-             xmlns:PathCore="clr-namespace:Core2D.Path;assembly=Core2D"
+             xmlns:PathCore="clr-namespace:Core2D.Path;assembly=Core2D.Core"
              xmlns:Path="clr-namespace:Core2D.Path;assembly=Core2D.Shapes"
              xmlns:Segments="clr-namespace:Core2D.Path.Segments;assembly=Core2D.Shapes"
              xmlns:custom="clr-namespace:Core2D.Wpf.Views.Custom"
