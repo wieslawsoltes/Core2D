@@ -39,99 +39,105 @@ namespace Core2D.UI.Avalonia.Dock.Factories
                 Title = "Page"
             };
 
-            // Left / Top
+            // Tools
 
-            var projectView = new ProjectTool
+            var projectTool = new ProjectTool
             {
                 Id = nameof(ProjectTool),
                 Title = "Project"
             };
 
-            var optionsView = new OptionsTool
+            var optionsTool = new OptionsTool
             {
                 Id = nameof(OptionsTool),
                 Title = "Options"
             };
 
-            var imagesView = new ImagesTool
+            var imagesTool = new ImagesTool
             {
                 Id = nameof(ImagesTool),
                 Title = "Images"
             };
 
-            // Left / Bottom
-
-            var groupsView = new GroupsTool
+            var groupsTool = new GroupsTool
             {
                 Id = nameof(GroupsTool),
                 Title = "Groups"
             };
 
-            var databasesView = new DatabasesTool
+            var databasesTool = new DatabasesTool
             {
                 Id = nameof(DatabasesTool),
                 Title = "Databases"
             };
 
-            // Right / Top
+            var scriptTool = new ScriptTool
+            {
+                Id = nameof(ScriptTool),
+                Title = "Script"
+            };
 
-            var stylesView = new StylesTool
+            var browserTool = new BrowserTool
+            {
+                Id = nameof(BrowserTool),
+                Title = "Browser"
+            };
+
+            var stylesTool = new StylesTool
             {
                 Id = nameof(StylesTool),
                 Title = "Styles"
             };
 
-            var templatesView = new TemplatesTool
+            var templatesTool = new TemplatesTool
             {
                 Id = nameof(TemplatesTool),
                 Title = "Templates"
             };
 
-            var containerView = new ContainerTool
+            var containerTool = new ContainerTool
             {
                 Id = nameof(ContainerTool),
                 Title = "Container"
             };
 
-            var zoomView = new ZoomTool
+            var zoomTool = new ZoomTool
             {
                 Id = nameof(ZoomTool),
                 Title = "Zoom"
             };
 
-            // Right / Bottom
-
-            var shapeView = new ShapeTool
+            var shapeTool = new ShapeTool
             {
                 Id = nameof(ShapeTool),
                 Title = "Shape"
             };
 
-            var toolsView = new ToolsTool
+            var toolsTool = new ToolsTool
             {
                 Id = nameof(ToolsTool),
                 Title = "Tools"
             };
 
-            var dataView = new DataTool
+            var dataTool = new DataTool
             {
                 Id = nameof(DataTool),
                 Title = "Data"
             };
 
-            var styleView = new StyleTool
+            var styleTool = new StyleTool
             {
                 Id = nameof(StyleTool),
                 Title = "Style"
             };
 
-            var templateView = new TemplateTool
+            var templateTool = new TemplateTool
             {
                 Id = nameof(TemplateTool),
                 Title = "Template"
             };
 
-            // Left Pane
+            // Panes
 
             var leftPane = new LayoutDock
             {
@@ -147,12 +153,12 @@ namespace Core2D.UI.Avalonia.Dock.Factories
                         Id = nameof(IToolDock),
                         Title = "EditorLeftTop",
                         Proportion = double.NaN,
-                        CurrentView = projectView,
+                        CurrentView = projectTool,
                         Views = new ObservableCollection<IView>
                         {
-                            projectView,
-                            optionsView,
-                            imagesView
+                            projectTool,
+                            optionsTool,
+                            imagesTool
                         }
                     },
                     new SplitterDock()
@@ -165,17 +171,17 @@ namespace Core2D.UI.Avalonia.Dock.Factories
                         Id = nameof(IToolDock),
                         Title = "EditorLeftBottom",
                         Proportion = double.NaN,
-                        CurrentView = groupsView,
+                        CurrentView = groupsTool,
                         Views = new ObservableCollection<IView>
                         {
-                            groupsView,
-                            databasesView
+                            groupsTool,
+                            databasesTool,
+                            scriptTool,
+                            browserTool
                         }
                     }
                 }
             };
-
-            // Right Pane
 
             var rightPane = new LayoutDock
             {
@@ -191,13 +197,13 @@ namespace Core2D.UI.Avalonia.Dock.Factories
                         Id = nameof(IToolDock),
                         Title = "EditorRightTop",
                         Proportion = double.NaN,
-                        CurrentView = stylesView,
+                        CurrentView = stylesTool,
                         Views = new ObservableCollection<IView>
                         {
-                            stylesView,
-                            templatesView,
-                            containerView,
-                            zoomView
+                            stylesTool,
+                            templatesTool,
+                            containerTool,
+                            zoomTool
                         }
                     },
                     new SplitterDock()
@@ -210,20 +216,18 @@ namespace Core2D.UI.Avalonia.Dock.Factories
                         Id = nameof(IToolDock),
                         Title = "EditorRightBottom",
                         Proportion = double.NaN,
-                        CurrentView = shapeView,
+                        CurrentView = shapeTool,
                         Views = new ObservableCollection<IView>
                         {
-                            shapeView,
-                            toolsView,
-                            dataView,
-                            styleView,
-                            templateView
+                            shapeTool,
+                            toolsTool,
+                            dataTool,
+                            styleTool,
+                            templateTool
                         }
                     }
                 }
             };
-
-            // Documents
 
             var documentsPane = new DocumentDock
             {
@@ -237,7 +241,7 @@ namespace Core2D.UI.Avalonia.Dock.Factories
                 }
             };
 
-            // Main
+            // Editor
 
             var editorLayout = new LayoutDock
             {
@@ -264,6 +268,8 @@ namespace Core2D.UI.Avalonia.Dock.Factories
                 }
             };
 
+            // Views
+
             var editorView = new EditorView
             {
                 Id = nameof(EditorView),
@@ -275,15 +281,11 @@ namespace Core2D.UI.Avalonia.Dock.Factories
                 }
             };
 
-            // About
-
             var aboutView = new AboutView
             {
                 Id = nameof(AboutView),
                 Title = "About"
             };
-
-            // Browser
 
             var browserView = new BrowserView
             {
@@ -291,7 +293,11 @@ namespace Core2D.UI.Avalonia.Dock.Factories
                 Title = "Browser"
             };
 
-            // Document
+            var scriptView = new ScriptView
+            {
+                Id = nameof(ScriptView),
+                Title = "Script"
+            };
 
             var documentView = new DocumentView
             {
@@ -299,15 +305,13 @@ namespace Core2D.UI.Avalonia.Dock.Factories
                 Title = "Document"
             };
 
-            // Dashboard
-
             var dashboardView = new DashboardView
             {
                 Id = nameof(DashboardView),
                 Title = "Dashboard"
             };
 
-            // Main
+            // Root
 
             var layout = new RootDock
             {
@@ -321,6 +325,7 @@ namespace Core2D.UI.Avalonia.Dock.Factories
                     editorView,
                     aboutView,
                     browserView,
+                    scriptView,
                     documentView
                 }
             };
@@ -345,6 +350,8 @@ namespace Core2D.UI.Avalonia.Dock.Factories
                 // Documents
                 [nameof(PageDocument)] = () => _serviceProvider.GetService<ProjectEditor>(),
                 // Tools
+                [nameof(ScriptTool)] = () => _serviceProvider.GetService<ProjectEditor>(),
+                [nameof(BrowserTool)] = () => _serviceProvider.GetService<ProjectEditor>(),
                 [nameof(ProjectTool)] = () => _serviceProvider.GetService<ProjectEditor>(),
                 [nameof(OptionsTool)] = () => _serviceProvider.GetService<ProjectEditor>(),
                 [nameof(ImagesTool)] = () => _serviceProvider.GetService<ProjectEditor>(),
@@ -362,6 +369,7 @@ namespace Core2D.UI.Avalonia.Dock.Factories
                 // Views
                 [nameof(EditorView)] = () => _serviceProvider.GetService<ProjectEditor>(),
                 [nameof(AboutView)] = () => _serviceProvider.GetService<ProjectEditor>(),
+                [nameof(ScriptView)] = () => _serviceProvider.GetService<ProjectEditor>(),
                 [nameof(BrowserView)] = () => _serviceProvider.GetService<ProjectEditor>(),
                 [nameof(DocumentView)] = () => _serviceProvider.GetService<ProjectEditor>(),
                 [nameof(DashboardView)] = () => _serviceProvider.GetService<ProjectEditor>()

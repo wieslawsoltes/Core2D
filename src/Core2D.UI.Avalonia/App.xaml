@@ -785,6 +785,11 @@
                 <views:StatusControl Grid.Column="0" Grid.Row="2" Margin="6,2,6,4" DataContext="{Binding Context}"/>
             </Grid>
         </DataTemplate>
+        <DataTemplate DataType="Views:ScriptView">
+            <Grid RowDefinitions="*">
+                <views:ScriptControl Grid.Row="0" DataContext="{Binding Context}"/>
+            </Grid>
+        </DataTemplate>
         <DataTemplate DataType="Views:BrowserView">
             <Grid RowDefinitions="Auto,*">
                 <views:BrowserMenuControl Grid.Row="0" DataContext="{Binding Context}"/>
@@ -808,6 +813,12 @@
             <views:PageControl DataContext="{Binding Context}"/>
         </DataTemplate>
         <!-- Tools -->
+        <DataTemplate DataType="Tools:ScriptTool">
+            <views:ScriptControl DataContext="{Binding Context}"/>
+        </DataTemplate>
+        <DataTemplate DataType="Tools:BrowserTool">
+            <views:BrowserControl DataContext="{Binding Context}"/>
+        </DataTemplate>
         <DataTemplate DataType="Tools:ProjectTool">
             <containers:ProjectControl DataContext="{Binding Context.Project}"/>
         </DataTemplate>
