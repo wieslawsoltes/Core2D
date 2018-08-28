@@ -10,7 +10,7 @@ namespace Core2D.Log.Trace
     /// <summary>
     /// Trace message logger.
     /// </summary>
-    public sealed class TraceLog : ObservableObject, ILog
+    public sealed class TraceLog : ILog
     {
         private const string InformationPrefix = "Information: ";
         private const string WarningPrefix = "Warning: ";
@@ -24,12 +24,6 @@ namespace Core2D.Log.Trace
         string ILog.LastMessage
         {
             get { return _lastMessage; }
-        }
-
-        /// <inheritdoc/>
-        public override object Copy(IDictionary<object, object> shared)
-        {
-            throw new NotImplementedException();
         }
 
         private void SetLastMessage(string message)

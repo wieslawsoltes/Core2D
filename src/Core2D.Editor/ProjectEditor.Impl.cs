@@ -82,7 +82,7 @@ namespace Core2D.Editor
         {
             if (item != null)
             {
-                if (item is ObservableObject observable)
+                if (item is IObservableObject observable)
                     return observable.Name;
             }
             return string.Empty;

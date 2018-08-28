@@ -627,7 +627,7 @@ namespace Core2D.UI.Wpf.Editor
             ApplyTemplateCommand = new Command((p) => true, (p) => serviceProvider.GetService<ProjectEditor>().OnApplyTemplate(p as IPageContainer));
             AddImageKeyCommand = new Command((p) => true, async (p) => await serviceProvider.GetService<ProjectEditor>().OnAddImageKey(p as string));
             RemoveImageKeyCommand = new Command((p) => true, (p) => serviceProvider.GetService<ProjectEditor>().OnRemoveImageKey(p as string));
-            SelectedItemChangedCommand = new Command((p) => true, (p) => serviceProvider.GetService<ProjectEditor>().OnSelectedItemChanged(p as ObservableObject));
+            SelectedItemChangedCommand = new Command((p) => true, (p) => serviceProvider.GetService<ProjectEditor>().OnSelectedItemChanged(p as IObservableObject));
             AddPageCommand = new Command((p) => true, (p) => serviceProvider.GetService<ProjectEditor>().OnAddPage(p));
             InsertPageBeforeCommand = new Command((p) => true, (p) => serviceProvider.GetService<ProjectEditor>().OnInsertPageBefore(p));
             InsertPageAfterCommand = new Command((p) => true, (p) => serviceProvider.GetService<ProjectEditor>().OnInsertPageAfter(p));
