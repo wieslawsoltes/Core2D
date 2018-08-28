@@ -12,7 +12,7 @@ namespace Core2D.Data.UnitTests
         public void Inherits_From_ObservableObject()
         {
             var target = new Context();
-            Assert.True(target is ObservableObject);
+            Assert.True(target is IObservableObject);
         }
 
         [Fact]
