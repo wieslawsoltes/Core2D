@@ -127,19 +127,6 @@ namespace Core2D.Renderer
         }
 
         /// <summary>
-        /// Creates a new <see cref="ShapeState"/> instance.
-        /// </summary>
-        /// <param name="flags">The state flags.</param>
-        /// <returns>The new instance of the <see cref="ShapeState"/> class.</returns>
-        public static IShapeState Create(ShapeStateFlags flags = ShapeStateFlags.Default)
-        {
-            return new ShapeState()
-            {
-                Flags = flags
-            };
-        }
-
-        /// <summary>
         /// Parses a shape state string.
         /// </summary>
         /// <param name="s">The shape state string.</param>
@@ -148,7 +135,7 @@ namespace Core2D.Renderer
         {
             var flags = (ShapeStateFlags)Enum.Parse(typeof(ShapeStateFlags), s, true);
 
-            return ShapeState.Create(flags);
+            return Factory.CreateShapeState(flags);
         }
 
         /// <inheritdoc/>

@@ -196,7 +196,7 @@ namespace Core2D.Containers
         public ProjectContainer()
             : base()
         {
-            _options = Containers.Options.Create();
+            _options = Factory.CreateOptions();
             _styleLibraries = ImmutableArray.Create<ILibrary<IShapeStyle>>();
             _groupLibraries = ImmutableArray.Create<ILibrary<IGroupShape>>();
             _databases = ImmutableArray.Create<IDatabase>();
@@ -282,19 +282,6 @@ namespace Core2D.Containers
         public override object Copy(IDictionary<object, object> shared)
         {
             throw new NotImplementedException();
-        }
-
-        /// <summary>
-        /// Creates a new <see cref="IProjectContainer"/> instance.
-        /// </summary>
-        /// <param name="name">The project name.</param>
-        /// <returns>The new instance of the <see cref="IProjectContainer"/> class.</returns>
-        public static IProjectContainer Create(string name = "Project")
-        {
-            return new ProjectContainer()
-            {
-                Name = name
-            };
         }
 
         /// <summary>

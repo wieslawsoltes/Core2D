@@ -16,7 +16,7 @@ namespace Core2D.Renderer.PdfSharp
     /// </summary>
     public partial class PdfSharpRenderer : ShapeRenderer
     {
-        private ICache<string, XImage> _biCache = Cache<string, XImage>.Create(bi => bi.Dispose());
+        private ICache<string, XImage> _biCache = Factory.CreateCache<string, XImage>(bi => bi.Dispose());
         private Func<double, double> _scaleToPage;
         private double _sourceDpi = 96.0;
         private double _targetDpi = 72.0;

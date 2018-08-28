@@ -64,31 +64,6 @@ namespace Core2D.Path.Segments
             throw new NotImplementedException();
         }
 
-        /// <summary>
-        /// Creates a new <see cref="ArcSegment"/> instance.
-        /// </summary>
-        /// <param name="point">The end point.</param>
-        /// <param name="size">The arc size.</param>
-        /// <param name="rotationAngle">The rotation angle.</param>
-        /// <param name="isLargeArc">The is large flag.</param>
-        /// <param name="sweepDirection">The sweep direction flag.</param>
-        /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
-        /// <param name="isSmoothJoin">The flag indicating whether shape is smooth join.</param>
-        /// <returns>The new instance of the <see cref="ArcSegment"/> class.</returns>
-        public static ArcSegment Create(IPointShape point, IPathSize size, double rotationAngle, bool isLargeArc, SweepDirection sweepDirection, bool isStroked, bool isSmoothJoin)
-        {
-            return new ArcSegment()
-            {
-                Point = point,
-                Size = size,
-                RotationAngle = rotationAngle,
-                IsLargeArc = isLargeArc,
-                SweepDirection = sweepDirection,
-                IsStroked = isStroked,
-                IsSmoothJoin = isSmoothJoin
-            };
-        }
-
         /// <inheritdoc/>
         public override string ToString()
         {

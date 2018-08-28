@@ -47,62 +47,6 @@ namespace Core2D.Data
         }
 
         /// <summary>
-        /// Creates a new <see cref="Record"/> instance.
-        /// </summary>
-        /// <param name="owner">The record owner.</param>
-        /// <param name="values">The record values.</param>
-        /// <returns>The new instance of the <see cref="Record"/> class.</returns>
-        public static IRecord Create(IDatabase owner, ImmutableArray<IValue> values)
-        {
-            return new Record()
-            {
-                Values = values,
-                Owner = owner
-            };
-        }
-
-        /// <summary>
-        /// Creates a new <see cref="Record"/> instance.
-        /// </summary>
-        /// <param name="owner">The record owner.</param>
-        /// <param name="id">The record Id.</param>
-        /// <param name="values">The record values.</param>
-        /// <returns>The new instance of the <see cref="Record"/> class.</returns>
-        public static IRecord Create(IDatabase owner, string id, ImmutableArray<IValue> values)
-        {
-            var record = new Record()
-            {
-                Values = values,
-                Owner = owner
-            };
-
-            if (!string.IsNullOrWhiteSpace(id))
-            {
-                record.Id = id;
-            }
-
-            return record;
-        }
-
-        /// <summary>
-        /// Creates a new <see cref="Record"/> instance.
-        /// </summary>
-        /// <param name="owner">The record owner.</param>
-        /// <param name="value">The record value.</param>
-        /// <returns>The new instance of the <see cref="Record"/> class.</returns>
-        public static IRecord Create(IDatabase owner, string value)
-        {
-            return new Record()
-            {
-                Values = ImmutableArray.CreateRange(
-                    Enumerable.Repeat(
-                        value, 
-                        owner.Columns.Length).Select(c => Value.Create(c))),
-                Owner = owner
-            };
-        }
-
-        /// <summary>
         /// Check whether the <see cref="Values"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>

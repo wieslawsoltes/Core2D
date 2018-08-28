@@ -61,7 +61,7 @@ namespace Core2D.Editor.Tools
                 case State.TopLeft:
                     {
                         var style = editor.Project.CurrentStyleLibrary.Selected;
-                        _text = TextShape.Create(
+                        _text = Factory.CreateTextShape(
                             sx, sy,
                             editor.Project.Options.CloneStyle ? style.Clone() : style,
                             editor.Project.Options.PointShape,

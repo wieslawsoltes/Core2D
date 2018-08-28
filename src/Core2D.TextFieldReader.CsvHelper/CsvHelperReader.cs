@@ -51,7 +51,7 @@ namespace Core2D.TextFieldReader.CsvHelper
             {
                 var fields = ReadInternal(stream).ToList();
                 var name = System.IO.Path.GetFileNameWithoutExtension(path);
-                return Database.FromFields(name, fields);
+                return Factory.FromFields(name, fields);
             }
         }
     }

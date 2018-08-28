@@ -18,7 +18,7 @@ namespace Core2D.Renderer.WinForms
     /// </summary>
     public class WinFormsRenderer : ShapeRenderer
     {
-        private ICache<string, Image> _biCache = Cache<string, Image>.Create(bi => bi.Dispose());
+        private ICache<string, Image> _biCache = Factory.CreateCache<string, Image>(bi => bi.Dispose());
         private readonly Func<double, float> _scaleToPage;
         private readonly double _textScaleFactor;
 

@@ -29,7 +29,7 @@ namespace Core2D.Editor
         IPointShape IShapeFactory.Point(double x, double y, bool isStandalone)
         {
             var project = _editor.Project;
-            var point = PointShape.Create(
+            var point = Factory.CreatePointShape(
                 x, y,
                 project.Options.PointShape);
             if (isStandalone)
@@ -44,7 +44,7 @@ namespace Core2D.Editor
         {
             var project = _editor.Project;
             var style = project.CurrentStyleLibrary.Selected;
-            var line = LineShape.Create(
+            var line = Factory.CreateLineShape(
                 x1, y1,
                 x2, y2,
                 project.Options.CloneStyle ? style.Clone() : style,
@@ -59,7 +59,7 @@ namespace Core2D.Editor
         {
             var project = _editor.Project;
             var style = project.CurrentStyleLibrary.Selected;
-            var line = LineShape.Create(
+            var line = Factory.CreateLineShape(
                 start,
                 end,
                 project.Options.CloneStyle ? style.Clone() : style,
@@ -74,7 +74,7 @@ namespace Core2D.Editor
         {
             var project = _editor.Project;
             var style = project.CurrentStyleLibrary.Selected;
-            var arc = ArcShape.Create(
+            var arc = Factory.CreateArcShape(
                 x1, y1,
                 x2, y2,
                 x3, y3,
@@ -92,7 +92,7 @@ namespace Core2D.Editor
         {
             var project = _editor.Project;
             var style = project.CurrentStyleLibrary.Selected;
-            var arc = ArcShape.Create(
+            var arc = Factory.CreateArcShape(
                 point1,
                 point2,
                 point3,
@@ -110,7 +110,7 @@ namespace Core2D.Editor
         {
             var project = _editor.Project;
             var style = project.CurrentStyleLibrary.Selected;
-            var cubicBezier = CubicBezierShape.Create(
+            var cubicBezier = Factory.CreateCubicBezierShape(
                 x1, y1,
                 x2, y2,
                 x3, y3,
@@ -128,7 +128,7 @@ namespace Core2D.Editor
         {
             var project = _editor.Project;
             var style = project.CurrentStyleLibrary.Selected;
-            var cubicBezier = CubicBezierShape.Create(
+            var cubicBezier = Factory.CreateCubicBezierShape(
                 point1,
                 point2,
                 point3,
@@ -146,7 +146,7 @@ namespace Core2D.Editor
         {
             var project = _editor.Project;
             var style = project.CurrentStyleLibrary.Selected;
-            var quadraticBezier = QuadraticBezierShape.Create(
+            var quadraticBezier = Factory.CreateQuadraticBezierShape(
                 x1, y1,
                 x2, y2,
                 x3, y3,
@@ -163,7 +163,7 @@ namespace Core2D.Editor
         {
             var project = _editor.Project;
             var style = project.CurrentStyleLibrary.Selected;
-            var quadraticBezier = QuadraticBezierShape.Create(
+            var quadraticBezier = Factory.CreateQuadraticBezierShape(
                 point1,
                 point2,
                 point3,
@@ -178,7 +178,7 @@ namespace Core2D.Editor
         /// <inheritdoc/>
         IPathGeometry IShapeFactory.Geometry(FillRule fillRule)
         {
-            return PathGeometry.Create(ImmutableArray.Create<IPathFigure>(), fillRule);
+            return Factory.CreatePathGeometry(ImmutableArray.Create<IPathFigure>(), fillRule);
         }
 
         /// <inheritdoc/>
@@ -186,7 +186,7 @@ namespace Core2D.Editor
         {
             var project = _editor.Project;
             var style = project.CurrentStyleLibrary.Selected;
-            var path = PathShape.Create(
+            var path = Factory.CreatePathShape(
                 "",
                 project.Options.CloneStyle ? style.Clone() : style,
                 geometry,
@@ -201,7 +201,7 @@ namespace Core2D.Editor
         {
             var project = _editor.Project;
             var style = project.CurrentStyleLibrary.Selected;
-            var rectangle = RectangleShape.Create(
+            var rectangle = Factory.CreateRectangleShape(
                 x1, y1,
                 x2, y2,
                 project.Options.CloneStyle ? style.Clone() : style,
@@ -218,7 +218,7 @@ namespace Core2D.Editor
         {
             var project = _editor.Project;
             var style = project.CurrentStyleLibrary.Selected;
-            var rectangle = RectangleShape.Create(
+            var rectangle = Factory.CreateRectangleShape(
                 topLeft,
                 bottomRight,
                 project.Options.CloneStyle ? style.Clone() : style,
@@ -235,7 +235,7 @@ namespace Core2D.Editor
         {
             var project = _editor.Project;
             var style = project.CurrentStyleLibrary.Selected;
-            var ellipse = EllipseShape.Create(
+            var ellipse = Factory.CreateEllipseShape(
                 x1, y1,
                 x2, y2,
                 project.Options.CloneStyle ? style.Clone() : style,
@@ -252,7 +252,7 @@ namespace Core2D.Editor
         {
             var project = _editor.Project;
             var style = project.CurrentStyleLibrary.Selected;
-            var ellipse = EllipseShape.Create(
+            var ellipse = Factory.CreateEllipseShape(
                 topLeft,
                 bottomRight,
                 project.Options.CloneStyle ? style.Clone() : style,
@@ -269,7 +269,7 @@ namespace Core2D.Editor
         {
             var project = _editor.Project;
             var style = project.CurrentStyleLibrary.Selected;
-            var txt = TextShape.Create(
+            var txt = Factory.CreateTextShape(
                 x1, y1,
                 x2, y2,
                 project.Options.CloneStyle ? style.Clone() : style,
@@ -285,7 +285,7 @@ namespace Core2D.Editor
         {
             var project = _editor.Project;
             var style = project.CurrentStyleLibrary.Selected;
-            var txt = TextShape.Create(
+            var txt = Factory.CreateTextShape(
                 topLeft,
                 bottomRight,
                 project.Options.CloneStyle ? style.Clone() : style,
@@ -301,7 +301,7 @@ namespace Core2D.Editor
         {
             var project = _editor.Project;
             var style = project.CurrentStyleLibrary.Selected;
-            var image = ImageShape.Create(
+            var image = Factory.CreateImageShape(
                 x1, y1,
                 x2, y2,
                 project.Options.CloneStyle ? style.Clone() : style,
@@ -328,7 +328,7 @@ namespace Core2D.Editor
             {
                 var key = imageCache.AddImageFromFile(path, bytes);
                 var style = project.CurrentStyleLibrary.Selected;
-                var image = ImageShape.Create(
+                var image = Factory.CreateImageShape(
                     topLeft,
                     bottomRight,
                     project.Options.CloneStyle ? style.Clone() : style,

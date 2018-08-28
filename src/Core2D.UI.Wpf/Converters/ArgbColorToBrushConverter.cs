@@ -50,7 +50,7 @@ namespace Core2D.UI.Wpf.Converters
         {
             if (value is SolidColorBrush brush && value != DependencyProperty.UnsetValue)
             {
-                return ArgbColor.Create(
+                return Factory.CreateArgbColor(
                     brush.Color.A,
                     brush.Color.R,
                     brush.Color.G,

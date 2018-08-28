@@ -20,7 +20,7 @@ namespace Core2D.Editor.UnitTests
         [Trait("Core2D.Editor", "Style")]
         public void Equals_Same_Object_Return_True()
         {
-            var x = ShapeStyle.Create();
+            var x = Factory.CreateShapeStyle();
             Assert.Equal(x, x, new ShapeStyleByNameComparer());
         }
 
@@ -28,7 +28,7 @@ namespace Core2D.Editor.UnitTests
         [Trait("Core2D.Editor", "Style")]
         public void Equals_First_Object_Null_Return_False()
         {
-            var x = ShapeStyle.Create();
+            var x = Factory.CreateShapeStyle();
             var c = new ShapeStyleByNameComparer();
             Assert.False(c.Equals(null, x));
         }
@@ -37,7 +37,7 @@ namespace Core2D.Editor.UnitTests
         [Trait("Core2D.Editor", "Style")]
         public void Equals_Second_Object_Null_Return_False()
         {
-            var y = ShapeStyle.Create();
+            var y = Factory.CreateShapeStyle();
             var c = new ShapeStyleByNameComparer();
             Assert.False(c.Equals(y, null));
         }
@@ -46,8 +46,8 @@ namespace Core2D.Editor.UnitTests
         [Trait("Core2D.Editor", "Style")]
         public void Equals_Same_Name_Return_True()
         {
-            var x = ShapeStyle.Create("Style1");
-            var y = ShapeStyle.Create("Style1");
+            var x = Factory.CreateShapeStyle("Style1");
+            var y = Factory.CreateShapeStyle("Style1");
             Assert.Equal(x, y, new ShapeStyleByNameComparer());
         }
 
@@ -55,8 +55,8 @@ namespace Core2D.Editor.UnitTests
         [Trait("Core2D.Editor", "Style")]
         public void Equals_Different_Name_Return_False()
         {
-            var x = ShapeStyle.Create("Style1");
-            var y = ShapeStyle.Create("Style2");
+            var x = Factory.CreateShapeStyle("Style1");
+            var y = Factory.CreateShapeStyle("Style2");
             Assert.NotEqual(x, y, new ShapeStyleByNameComparer());
         }
     }

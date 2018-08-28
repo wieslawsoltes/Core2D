@@ -123,46 +123,6 @@ namespace Core2D.Shapes
         }
 
         /// <summary>
-        /// Creates a new <see cref="PathShape"/> instance.
-        /// </summary>
-        /// <param name="style">The shape style.</param>
-        /// <param name="geometry">The path geometry.</param>
-        /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
-        /// <param name="isFilled">The flag indicating whether shape is filled.</param>
-        /// <returns>The new instance of the <see cref="PathShape"/> class.</returns>
-        public static IPathShape Create(IShapeStyle style, IPathGeometry geometry, bool isStroked = true, bool isFilled = true)
-        {
-            return new PathShape()
-            {
-                Style = style,
-                IsStroked = isStroked,
-                IsFilled = isFilled,
-                Geometry = geometry
-            };
-        }
-
-        /// <summary>
-        /// Creates a new <see cref="PathShape"/> instance.
-        /// </summary>
-        /// <param name="name">The shape name.</param>
-        /// <param name="style">The shape style.</param>
-        /// <param name="geometry">The path geometry.</param>
-        /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
-        /// <param name="isFilled">The flag indicating whether shape is filled.</param>
-        /// <returns>The new instance of the <see cref="PathShape"/> class.</returns>
-        public static IPathShape Create(string name, IShapeStyle style, IPathGeometry geometry, bool isStroked = true, bool isFilled = true)
-        {
-            return new PathShape()
-            {
-                Name = name,
-                Style = style,
-                IsStroked = isStroked,
-                IsFilled = isFilled,
-                Geometry = geometry
-            };
-        }
-
-        /// <summary>
         /// Check whether the <see cref="Geometry"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>

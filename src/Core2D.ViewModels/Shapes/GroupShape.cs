@@ -134,19 +134,6 @@ namespace Core2D.Shapes
         }
 
         /// <summary>
-        /// Creates a new <see cref="GroupShape"/> instance.
-        /// </summary>
-        /// <param name="name">The group name.</param>
-        /// <returns>The new instance of the <see cref="GroupShape"/> class.</returns>
-        public static IGroupShape Create(string name)
-        {
-            return new GroupShape()
-            {
-                Name = name
-            };
-        }
-
-        /// <summary>
         /// Check whether the <see cref="Shapes"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>

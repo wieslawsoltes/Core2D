@@ -66,31 +66,6 @@ namespace Core2D.Style
         }
 
         /// <summary>
-        /// Creates a new <see cref="TextStyle"/> instance.
-        /// </summary>
-        /// <param name="name">The text style name.</param>
-        /// <param name="fontName">The font name.</param>
-        /// <param name="fontFile">The font file path.</param>
-        /// <param name="fontSize">The font size.</param>
-        /// <param name="fontStyle">The font style.</param>
-        /// <param name="textHAlignment">The text horizontal alignment.</param>
-        /// <param name="textVAlignment">The text vertical alignment.</param>
-        /// <returns>The new instance of the <see cref="TextStyle"/> class.</returns>
-        public static ITextStyle Create(string name = "", string fontName = "Calibri", string fontFile = @"C:\Windows\Fonts\calibri.ttf", double fontSize = 12.0, IFontStyle fontStyle = null, TextHAlignment textHAlignment = TextHAlignment.Center, TextVAlignment textVAlignment = TextVAlignment.Center)
-        {
-            return new TextStyle()
-            {
-                Name = name,
-                FontName = fontName,
-                FontFile = fontFile,
-                FontSize = fontSize,
-                FontStyle = fontStyle ?? Style.FontStyle.Create(FontStyleFlags.Regular),
-                TextHAlignment = textHAlignment,
-                TextVAlignment = textVAlignment
-            };
-        }
-
-        /// <summary>
         /// Check whether the <see cref="FontName"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>

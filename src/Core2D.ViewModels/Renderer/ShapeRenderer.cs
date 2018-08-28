@@ -11,7 +11,7 @@ namespace Core2D.Renderer
     /// </summary>
     public abstract class ShapeRenderer : ObservableObject, IShapeRenderer
     {
-        private IShapeRendererState _state = new ShapeRendererState();
+        private IShapeRendererState _state = Factory.CreateShapeRendererState();
 
         /// <inheritdoc/>
         public virtual IShapeRendererState State

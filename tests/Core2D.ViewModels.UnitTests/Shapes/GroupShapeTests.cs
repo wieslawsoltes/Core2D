@@ -113,7 +113,7 @@ namespace Core2D.Shapes.UnitTests
             var shapes = new List<IBaseShape>{ shape1, shape2, point1, point2 };
             var source = shapes.ToList();
 
-            var target = GroupShape.Create("g");
+            var target = Factory.CreateGroupShape("g");
             target.Group(shapes, source);
 
             Assert.Equal("g", target.Name);
@@ -148,7 +148,7 @@ namespace Core2D.Shapes.UnitTests
             var shapes = new BaseShape[] { shape1, shape2, point1, point2 };
             var source = shapes.ToList();
 
-            var target = GroupShape.Create("g");
+            var target = Factory.CreateGroupShape("g");
             target.Group(shapes, null);
 
             Assert.Contains(shape1, source);

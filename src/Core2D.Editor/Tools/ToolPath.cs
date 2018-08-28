@@ -168,7 +168,7 @@ namespace Core2D.Editor.Tools
         {
             var editor = _serviceProvider.GetService<ProjectEditor>();
 
-            Geometry = PathGeometry.Create(
+            Geometry = Factory.CreatePathGeometry(
                 ImmutableArray.Create<IPathFigure>(),
                 editor.Project.Options.DefaultFillRule);
 
@@ -180,7 +180,7 @@ namespace Core2D.Editor.Tools
                 editor.Project.Options.DefaultIsClosed);
 
             var style = editor.Project.CurrentStyleLibrary.Selected;
-            Path = PathShape.Create(
+            Path = Factory.CreatePathShape(
                 "Path",
                 editor.Project.Options.CloneStyle ? style.Clone() : style,
                 Geometry,

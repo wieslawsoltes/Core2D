@@ -86,34 +86,12 @@ namespace Core2D.Shapes
         }
 
         /// <summary>
-        /// Creates a new <see cref="PointShape"/> instance.
-        /// </summary>
-        /// <param name="x">The X coordinate of point.</param>
-        /// <param name="y">The Y coordinate of point.</param>
-        /// <param name="shape">The point template.</param>
-        /// <param name="alignment">The point alignment.</param>
-        /// <param name="name">The shape name.</param>
-        /// <returns>The new instance of the <see cref="PointShape"/> class.</returns>
-        public static IPointShape Create(double x = 0.0, double y = 0.0, IBaseShape shape = null, PointAlignment alignment = PointAlignment.None, string name = "")
-        {
-            return new PointShape()
-            {
-                Name = name,
-                Style = default,
-                X = x,
-                Y = y,
-                Alignment = alignment,
-                Shape = shape
-            };
-        }
-
-        /// <summary>
         /// Clone current instance of the <see cref="PointShape"/>.
         /// </summary>
         /// <returns>The new instance of the <see cref="PointShape"/> class.</returns>
         public IPointShape Clone()
         {
-            var data = Context.Create(Data.Record);
+            var data = Factory.CreateContext(Data.Record);
 
             // The property Value is of type object and is not cloned.
             if (Data.Properties.Length > 0)
@@ -122,7 +100,7 @@ namespace Core2D.Shapes
                 foreach (var property in Data.Properties)
                 {
                     builder.Add(
-                        Property.Create(
+                        Factory.CreateProperty(
                             data,
                             property.Name,
                             property.Value));

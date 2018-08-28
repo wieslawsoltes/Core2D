@@ -224,7 +224,7 @@ namespace Core2D.Editor.Tools
                             break;
                         }
 
-                        _rectangle = RectangleShape.Create(
+                        _rectangle = Factory.CreateRectangleShape(
                             x, y,
                             editor.Project.Options.SelectionStyle,
                             null,

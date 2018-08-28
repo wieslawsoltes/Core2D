@@ -50,27 +50,6 @@ namespace Core2D.Style
         }
 
         /// <summary>
-        /// Creates a new <see cref="LineStyle"/> instance.
-        /// </summary>
-        /// <param name="name">The line style name.</param>
-        /// <param name="isCurved">The flag indicating whether line is curved.</param>
-        /// <param name="curvature">The line curvature.</param>
-        /// <param name="curveOrientation">The curve orientation.</param>
-        /// <param name="fixedLength">The line style fixed length.</param>
-        /// <returns>The new instance of the <see cref="LineStyle"/> class.</returns>
-        public static ILineStyle Create(string name = "", bool isCurved = false, double curvature = 50.0, CurveOrientation curveOrientation = CurveOrientation.Auto, ILineFixedLength fixedLength = null)
-        {
-            return new LineStyle()
-            {
-                Name = name,
-                IsCurved = isCurved,
-                Curvature = curvature,
-                CurveOrientation = curveOrientation,
-                FixedLength = fixedLength ?? LineFixedLength.Create()
-            };
-        }
-
-        /// <summary>
         /// Check whether the <see cref="IsCurved"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>

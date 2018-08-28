@@ -50,27 +50,6 @@ namespace Core2D.Path.Segments
             throw new NotImplementedException();
         }
 
-        /// <summary>
-        /// Creates a new <see cref="CubicBezierSegment"/> instance.
-        /// </summary>
-        /// <param name="point1">The first control point.</param>
-        /// <param name="point2">The second control point.</param>
-        /// <param name="point3">The end point.</param>
-        /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
-        /// <param name="isSmoothJoin">The flag indicating whether shape is smooth join.</param>
-        /// <returns>The new instance of the <see cref="CubicBezierSegment"/> class.</returns>
-        public static CubicBezierSegment Create(IPointShape point1, IPointShape point2, IPointShape point3, bool isStroked, bool isSmoothJoin)
-        {
-            return new CubicBezierSegment()
-            {
-                Point1 = point1,
-                Point2 = point2,
-                Point3 = point3,
-                IsStroked = isStroked,
-                IsSmoothJoin = isSmoothJoin
-            };
-        }
-
         /// <inheritdoc/>
         public override string ToString()
         {

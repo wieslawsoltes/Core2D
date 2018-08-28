@@ -76,19 +76,6 @@ namespace Core2D.Style
         }
 
         /// <summary>
-        /// Creates a new <see cref="FontStyle"/> instance.
-        /// </summary>
-        /// <param name="flags">The style flags information applied to text.</param>
-        /// <returns>The new instance of the <see cref="FontStyle"/> class.</returns>
-        public static IFontStyle Create(FontStyleFlags flags = FontStyleFlags.Regular)
-        {
-            return new FontStyle()
-            {
-                Flags = flags
-            };
-        }
-
-        /// <summary>
         /// Parses a font style string.
         /// </summary>
         /// <param name="s">The font style string.</param>
@@ -96,7 +83,7 @@ namespace Core2D.Style
         public static IFontStyle Parse(string s)
         {
             var flags = (FontStyleFlags)Enum.Parse(typeof(FontStyleFlags), s, true);
-            return FontStyle.Create(flags);
+            return Factory.CreateFontStyle(flags);
         }
 
         /// <inheritdoc/>

@@ -38,8 +38,8 @@ namespace Core2D.Editor.Tools.Selection
         /// </summary>
         public void ToStateBottomRight()
         {
-            _topLeftHelperPoint = PointShape.Create(0, 0, _point);
-            _bottomRightHelperPoint = PointShape.Create(0, 0, _point);
+            _topLeftHelperPoint = Factory.CreatePointShape(0, 0, _point);
+            _bottomRightHelperPoint = Factory.CreatePointShape(0, 0, _point);
 
             _layer.Shapes = _layer.Shapes.Add(_topLeftHelperPoint);
             _layer.Shapes = _layer.Shapes.Add(_bottomRightHelperPoint);

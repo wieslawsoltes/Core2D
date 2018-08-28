@@ -18,23 +18,6 @@ namespace Core2D.Path.Segments
             throw new NotImplementedException();
         }
 
-        /// <summary>
-        /// Creates a new <see cref="PolyLineSegment"/> instance.
-        /// </summary>
-        /// <param name="points">The points array.</param>
-        /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
-        /// <param name="isSmoothJoin">The flag indicating whether shape is smooth join.</param>
-        /// <returns>The new instance of the <see cref="PolyLineSegment"/> class.</returns>
-        public static PolyLineSegment Create(ImmutableArray<IPointShape> points, bool isStroked, bool isSmoothJoin)
-        {
-            return new PolyLineSegment()
-            {
-                Points = points,
-                IsStroked = isStroked,
-                IsSmoothJoin = isSmoothJoin
-            };
-        }
-
         /// <inheritdoc/>
         public override string ToString() => (Points != null) && (Points.Length >= 1) ? "L" + ToString(Points) : "";
     }

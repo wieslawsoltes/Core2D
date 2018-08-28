@@ -19,7 +19,7 @@ namespace Core2D.Data.UnitTests
         [Trait("Core2D.Data", "Data")]
         public void ToString_Should_Return_Value_String()
         {
-            var target = Property.Create(null, "Property1", "Value1");
+            var target = Factory.CreateProperty(null, "Property1", "Value1");
 
             Assert.Equal("Value1", target.ToString());
         }

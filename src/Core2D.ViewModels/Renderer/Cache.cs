@@ -25,16 +25,6 @@ namespace Core2D.Renderer
             _storage = new Dictionary<TKey, TValue>();
         }
 
-        /// <summary>
-        /// Creates a new <see cref="Cache{TKey, TValue}"/> instance.
-        /// </summary>
-        /// <param name="dispose">The dispose action.</param>
-        /// <returns>The new instance of the <see cref="Cache{TKey, TValue}"/> class.</returns>
-        public static Cache<TKey, TValue> Create(Action<TValue> dispose = null)
-        {
-            return new Cache<TKey, TValue>(dispose);
-        }
-
         /// <inheritdoc/>
         public TValue Get(TKey key)
         {

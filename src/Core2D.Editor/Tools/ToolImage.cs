@@ -68,7 +68,7 @@ namespace Core2D.Editor.Tools
                             return;
 
                         var style = editor.Project.CurrentStyleLibrary.Selected;
-                        _image = ImageShape.Create(
+                        _image = Factory.CreateImageShape(
                             sx, sy,
                             editor.Project.Options.CloneStyle ? style.Clone() : style,
                             editor.Project.Options.PointShape,

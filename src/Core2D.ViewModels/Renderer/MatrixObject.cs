@@ -99,21 +99,6 @@ namespace Core2D.Renderer
         /// </summary>
         public static readonly IMatrixObject Identity = new MatrixObject(1.0, 0.0, 0.0, 1.0, 0.0, 0.0);
 
-        /// <summary>
-        /// Creates a new <see cref="MatrixObject"/> instance.
-        /// </summary>
-        /// <param name="m11">The value of the first row and first column.</param>
-        /// <param name="m12">The value of the first row and second column.</param>
-        /// <param name="m21">The value of the second row and first column.</param>
-        /// <param name="m22">The value of the second row and second column.</param>
-        /// <param name="offsetX">The value of the third row and first column.</param>
-        /// <param name="offsetY">The value of the third row and second column.</param>
-        /// <returns>The new instance of the <see cref="MatrixObject"/> class.</returns>
-        public static IMatrixObject Create(double m11 = 1.0, double m12 = 0.0, double m21 = 0.0, double m22 = 1.0, double offsetX = 0.0, double offsetY = 0.0)
-        {
-            return new MatrixObject(m11, m12, m21, m22, offsetX, offsetY);
-        }
-
         /// <inheritdoc/>
         public override string ToString()
         {
@@ -130,7 +115,7 @@ namespace Core2D.Renderer
             var parts = s.Split(new[] { ',', ' ' }, StringSplitOptions.RemoveEmptyEntries).Select(x => x.Trim()).ToList();
             if (parts.Count == 6)
             {
-                return MatrixObject.Create(
+                return Factory.CreateMatrixObject(
                     double.Parse(parts[0]),
                     double.Parse(parts[1]),
                     double.Parse(parts[2]),

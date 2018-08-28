@@ -42,25 +42,6 @@ namespace Core2D.Data
         }
 
         /// <summary>
-        /// Creates a new <see cref="Column"/> instance.
-        /// </summary>
-        /// <param name="owner">The owner instance.</param>
-        /// <param name="name">The column name.</param>
-        /// <param name="width">The column width.</param>
-        /// <param name="isVisible">The flag indicating whether column is visible.</param>
-        /// <returns>The new instance of the <see cref="Column"/> class.</returns>
-        public static IColumn Create(IDatabase owner, string name, double width = double.NaN, bool isVisible = true)
-        {
-            return new Column()
-            {
-                Name = name,
-                Width = width,
-                IsVisible = isVisible,
-                Owner = owner
-            };
-        }
-
-        /// <summary>
         /// Check whether the <see cref="Width"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>

@@ -184,7 +184,7 @@ namespace Core2D.Renderer.UnitTests
         [Trait("Core2D.Renderer", "Renderer")]
         public void ToString_Should_Return_Flags_String()
         {
-            var target = ShapeState.Create(
+            var target = Factory.CreateShapeState(
                 ShapeStateFlags.Visible
                 | ShapeStateFlags.Printable
                 | ShapeStateFlags.Standalone);

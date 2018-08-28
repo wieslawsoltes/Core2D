@@ -18,7 +18,7 @@ namespace Core2D.Renderer.SkiaSharp
     public class SkiaSharpRenderer : ShapeRenderer
     {
         private bool _isAntialias = true;
-        private ICache<string, SKBitmap> _biCache = Cache<string, SKBitmap>.Create(bi => bi.Dispose());
+        private ICache<string, SKBitmap> _biCache = Factory.CreateCache<string, SKBitmap>(bi => bi.Dispose());
         private readonly Func<double, float> _scaleToPage;
         private readonly double _sourceDpi = 96.0;
         private readonly double _targetDpi = 72.0;

@@ -142,7 +142,7 @@ namespace Core2D.Style
         [Trait("Core2D.Style", "Style")]
         public void ToString_Should_Return_Flags_String()
         {
-            var target = LineFixedLength.Create(
+            var target = Factory.CreateLineFixedLength(
                 LineFixedLengthFlags.Start
                 | LineFixedLengthFlags.Vertical
                 | LineFixedLengthFlags.Horizontal);

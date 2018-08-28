@@ -26,7 +26,7 @@ namespace Core2D.Path
         /// <inheritdoc/>
         public void BeginFigure(IPointShape startPoint, bool isFilled = true, bool isClosed = true)
         {
-            _currentFigure = PathFigure.Create(startPoint, isFilled, isClosed);
+            _currentFigure = Factory.CreatePathFigure(startPoint, isFilled, isClosed);
             _geometry.Figures = _geometry.Figures.Add(_currentFigure);
         }
 
@@ -39,7 +39,7 @@ namespace Core2D.Path
         /// <inheritdoc/>
         public void LineTo(IPointShape point, bool isStroked = true, bool isSmoothJoin = true)
         {
-            var segment = LineSegment.Create(
+            var segment = Factory.CreateLineSegment(
                 point,
                 isStroked,
                 isSmoothJoin);
@@ -49,7 +49,7 @@ namespace Core2D.Path
         /// <inheritdoc/>
         public void ArcTo(IPointShape point, IPathSize size, double rotationAngle = 0.0, bool isLargeArc = false, SweepDirection sweepDirection = SweepDirection.Clockwise, bool isStroked = true, bool isSmoothJoin = true)
         {
-            var segment = ArcSegment.Create(
+            var segment = Factory.CreateArcSegment(
                 point,
                 size,
                 rotationAngle,
@@ -63,7 +63,7 @@ namespace Core2D.Path
         /// <inheritdoc/>
         public void CubicBezierTo(IPointShape point1, IPointShape point2, IPointShape point3, bool isStroked = true, bool isSmoothJoin = true)
         {
-            var segment = CubicBezierSegment.Create(
+            var segment = Factory.CreateCubicBezierSegment(
                 point1,
                 point2,
                 point3,
@@ -75,7 +75,7 @@ namespace Core2D.Path
         /// <inheritdoc/>
         public void QuadraticBezierTo(IPointShape point1, IPointShape point2, bool isStroked = true, bool isSmoothJoin = true)
         {
-            var segment = QuadraticBezierSegment.Create(
+            var segment = Factory.CreateQuadraticBezierSegment(
                 point1,
                 point2,
                 isStroked,
@@ -86,7 +86,7 @@ namespace Core2D.Path
         /// <inheritdoc/>
         public void PolyLineTo(ImmutableArray<IPointShape> points, bool isStroked = true, bool isSmoothJoin = true)
         {
-            var segment = PolyLineSegment.Create(
+            var segment = Factory.CreatePolyLineSegment(
                 points,
                 isStroked,
                 isSmoothJoin);
@@ -96,7 +96,7 @@ namespace Core2D.Path
         /// <inheritdoc/>
         public void PolyCubicBezierTo(ImmutableArray<IPointShape> points, bool isStroked = true, bool isSmoothJoin = true)
         {
-            var segment = PolyCubicBezierSegment.Create(
+            var segment = Factory.CreatePolyCubicBezierSegment(
                 points,
                 isStroked,
                 isSmoothJoin);
@@ -106,7 +106,7 @@ namespace Core2D.Path
         /// <inheritdoc/>
         public void PolyQuadraticBezierTo(ImmutableArray<IPointShape> points, bool isStroked = true, bool isSmoothJoin = true)
         {
-            var segment = PolyQuadraticBezierSegment.Create(
+            var segment = Factory.CreatePolyQuadraticBezierSegment(
                 points,
                 isStroked,
                 isSmoothJoin);

@@ -62,7 +62,7 @@ namespace Core2D.Editor.Tools
                 case State.Start:
                     {
                         var style = editor.Project.CurrentStyleLibrary.Selected;
-                        _line = LineShape.Create(
+                        _line = Factory.CreateLineShape(
                             sx, sy,
                             editor.Project.Options.CloneStyle ? style.Clone() : style,
                             editor.Project.Options.PointShape,

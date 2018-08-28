@@ -43,9 +43,9 @@ namespace Core2D.Editor.Tools.Selection
         /// </summary>
         public void ToStatePoint4()
         {
-            _helperPoint1 = PointShape.Create(0, 0, _point);
+            _helperPoint1 = Factory.CreatePointShape(0, 0, _point);
             _layer.Shapes = _layer.Shapes.Add(_helperPoint1);
-            _helperPoint4 = PointShape.Create(0, 0, _point);
+            _helperPoint4 = Factory.CreatePointShape(0, 0, _point);
             _layer.Shapes = _layer.Shapes.Add(_helperPoint4);
         }
 
@@ -54,8 +54,8 @@ namespace Core2D.Editor.Tools.Selection
         /// </summary>
         public void ToStatePoint2()
         {
-            _line12 = LineShape.Create(0, 0, _style, null);
-            _helperPoint2 = PointShape.Create(0, 0, _point);
+            _line12 = Factory.CreateLineShape(0, 0, _style, null);
+            _helperPoint2 = Factory.CreatePointShape(0, 0, _point);
 
             _layer.Shapes = _layer.Shapes.Add(_line12);
             _layer.Shapes = _layer.Shapes.Add(_helperPoint2);
@@ -66,9 +66,9 @@ namespace Core2D.Editor.Tools.Selection
         /// </summary>
         public void ToStatePoint3()
         {
-            _line43 = LineShape.Create(0, 0, _style, null);
-            _line23 = LineShape.Create(0, 0, _style, null);
-            _helperPoint3 = PointShape.Create(0, 0, _point);
+            _line43 = Factory.CreateLineShape(0, 0, _style, null);
+            _line23 = Factory.CreateLineShape(0, 0, _style, null);
+            _helperPoint3 = Factory.CreatePointShape(0, 0, _point);
 
             _layer.Shapes = _layer.Shapes.Add(_line43);
             _layer.Shapes = _layer.Shapes.Add(_line23);

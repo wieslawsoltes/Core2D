@@ -28,13 +28,6 @@ namespace Core2D.Data
         }
 
         /// <summary>
-        /// Creates a new <see cref="Value"/> instance.
-        /// </summary>
-        /// <param name="content">The value content.</param>
-        /// <returns>The new instance of the <see cref="Value"/> class.</returns>
-        public static IValue Create(string content) => new Value() { Content = content };
-
-        /// <summary>
         /// Check whether the <see cref="Content"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>

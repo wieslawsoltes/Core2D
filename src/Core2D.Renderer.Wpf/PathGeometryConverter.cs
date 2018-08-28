@@ -22,7 +22,7 @@ namespace Core2D.Renderer.Wpf
             var PointShapes = ImmutableArray.CreateBuilder<IPointShape>();
             foreach (var point in points)
             {
-                PointShapes.Add(PointShape.Create(point.X + dx, point.Y + dy));
+                PointShapes.Add(Factory.CreatePointShape(point.X + dx, point.Y + dy));
             }
             return PointShapes.ToImmutable();
         }
@@ -46,7 +46,7 @@ namespace Core2D.Renderer.Wpf
         /// <returns></returns>
         public static IPathGeometry ToPathGeometry(this WM.PathGeometry pg, double dx, double dy)
         {
-            var geometry = PathGeometry.Create(
+            var geometry = Factory.CreatePathGeometry(
                 ImmutableArray.Create<IPathFigure>(),
                 pg.FillRule == WM.FillRule.EvenOdd ? FillRule.EvenOdd : FillRule.Nonzero);
 
@@ -55,7 +55,7 @@ namespace Core2D.Renderer.Wpf
             foreach (var pf in pg.Figures)
             {
                 context.BeginFigure(
-                    PointShape.Create(pf.StartPoint.X + dx, pf.StartPoint.Y + dy),
+                    Factory.CreatePointShape(pf.StartPoint.X + dx, pf.StartPoint.Y + dy),
                     pf.IsFilled,
                     pf.IsClosed);
 
@@ -64,8 +64,8 @@ namespace Core2D.Renderer.Wpf
                     if (segment is WM.ArcSegment arcSegment)
                     {
                         context.ArcTo(
-                            PointShape.Create(arcSegment.Point.X + dx, arcSegment.Point.Y + dy),
-                            PathSize.Create(arcSegment.Size.Width, arcSegment.Size.Height),
+                            Factory.CreatePointShape(arcSegment.Point.X + dx, arcSegment.Point.Y + dy),
+                            Factory.CreatePathSize(arcSegment.Size.Width, arcSegment.Size.Height),
                             arcSegment.RotationAngle,
                             arcSegment.IsLargeArc,
                             arcSegment.SweepDirection == WM.SweepDirection.Clockwise ? SweepDirection.Clockwise : SweepDirection.Counterclockwise,
@@ -75,16 +75,16 @@ namespace Core2D.Renderer.Wpf
                     else if (segment is WM.BezierSegment cubicBezierSegment)
                     {
                         context.CubicBezierTo(
-                            PointShape.Create(cubicBezierSegment.Point1.X + dx, cubicBezierSegment.Point1.Y + dy),
-                            PointShape.Create(cubicBezierSegment.Point2.X + dx, cubicBezierSegment.Point2.Y + dy),
-                            PointShape.Create(cubicBezierSegment.Point3.X + dx, cubicBezierSegment.Point3.Y + dy),
+                            Factory.CreatePointShape(cubicBezierSegment.Point1.X + dx, cubicBezierSegment.Point1.Y + dy),
+                            Factory.CreatePointShape(cubicBezierSegment.Point2.X + dx, cubicBezierSegment.Point2.Y + dy),
+                            Factory.CreatePointShape(cubicBezierSegment.Point3.X + dx, cubicBezierSegment.Point3.Y + dy),
                             cubicBezierSegment.IsStroked,
                             cubicBezierSegment.IsSmoothJoin);
                     }
                     else if (segment is WM.LineSegment lineSegment)
                     {
                         context.LineTo(
-                            PointShape.Create(lineSegment.Point.X + dx, lineSegment.Point.Y + dy),
+                            Factory.CreatePointShape(lineSegment.Point.X + dx, lineSegment.Point.Y + dy),
                             lineSegment.IsStroked,
                             lineSegment.IsSmoothJoin);
                     }
@@ -112,8 +112,8 @@ namespace Core2D.Renderer.Wpf
                     else if (segment is WM.QuadraticBezierSegment quadraticBezierSegment)
                     {
                         context.QuadraticBezierTo(
-                            PointShape.Create(quadraticBezierSegment.Point1.X + dx, quadraticBezierSegment.Point1.Y + dy),
-                            PointShape.Create(quadraticBezierSegment.Point2.X + dx, quadraticBezierSegment.Point2.Y + dy),
+                            Factory.CreatePointShape(quadraticBezierSegment.Point1.X + dx, quadraticBezierSegment.Point1.Y + dy),
+                            Factory.CreatePointShape(quadraticBezierSegment.Point2.X + dx, quadraticBezierSegment.Point2.Y + dy),
                             quadraticBezierSegment.IsStroked,
                             quadraticBezierSegment.IsSmoothJoin);
                     }

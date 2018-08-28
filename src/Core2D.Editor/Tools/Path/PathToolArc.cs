@@ -68,7 +68,7 @@ namespace Core2D.Editor.Tools.Path
             {
                 case State.Start:
                     {
-                        _arc.Start = editor.TryToGetConnectionPoint(sx, sy) ?? PointShape.Create(sx, sy, editor.Project.Options.PointShape);
+                        _arc.Start = editor.TryToGetConnectionPoint(sx, sy) ?? Factory.CreatePointShape(sx, sy, editor.Project.Options.PointShape);
                         if (!pathTool.IsInitialized)
                         {
                             pathTool.InitializeWorkingPath(_arc.Start);
@@ -78,10 +78,10 @@ namespace Core2D.Editor.Tools.Path
                             _arc.Start = pathTool.GetLastPathPoint();
                         }
 
-                        _arc.End = PointShape.Create(sx, sy, editor.Project.Options.PointShape);
+                        _arc.End = Factory.CreatePointShape(sx, sy, editor.Project.Options.PointShape);
                         pathTool.GeometryContext.ArcTo(
                             _arc.End,
-                            PathSize.Create(
+                            Factory.CreatePathSize(
                                 Abs(_arc.Start.X - _arc.End.X),
                                 Abs(_arc.Start.Y - _arc.End.Y)),
                             _defaultRotationAngle,
@@ -109,10 +109,10 @@ namespace Core2D.Editor.Tools.Path
                             }
                         }
                         _arc.Start = _arc.End;
-                        _arc.End = PointShape.Create(sx, sy, editor.Project.Options.PointShape);
+                        _arc.End = Factory.CreatePointShape(sx, sy, editor.Project.Options.PointShape);
                         pathTool.GeometryContext.ArcTo(
                             _arc.End,
-                            PathSize.Create(
+                            Factory.CreatePathSize(
                                 Abs(_arc.Start.X - _arc.End.X),
                                 Abs(_arc.Start.Y - _arc.End.Y)),
                             _defaultRotationAngle,

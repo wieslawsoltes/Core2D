@@ -37,7 +37,7 @@ namespace Core2D.UnitTests
         {
             var target = new Library<IPageContainer>();
 
-            var item = PageContainer.CreateTemplate();
+            var item = Factory.CreateTemplateContainer();
             target.Items = target.Items.Add(item);
 
             target.SetSelected(item);

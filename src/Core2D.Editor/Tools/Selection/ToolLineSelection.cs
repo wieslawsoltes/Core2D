@@ -38,8 +38,8 @@ namespace Core2D.Editor.Tools.Selection
         /// </summary>
         public void ToStateEnd()
         {
-            _startHelperPoint = PointShape.Create(0, 0, _point);
-            _endHelperPoint = PointShape.Create(0, 0, _point);
+            _startHelperPoint = Factory.CreatePointShape(0, 0, _point);
+            _endHelperPoint = Factory.CreatePointShape(0, 0, _point);
 
             _layer.Shapes = _layer.Shapes.Add(_startHelperPoint);
             _layer.Shapes = _layer.Shapes.Add(_endHelperPoint);

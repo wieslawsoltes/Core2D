@@ -79,9 +79,9 @@ namespace Core2D.Shapes
         public BaseShape()
             : base()
         {
-            State = ShapeState.Create(ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone);
-            Transform = MatrixObject.Create();
-            Data = Context.Create();
+            State = Factory.CreateShapeState(ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone);
+            Transform = Factory.CreateMatrixObject();
+            Data = Factory.CreateContext();
         }
 
         /// <inheritdoc/>

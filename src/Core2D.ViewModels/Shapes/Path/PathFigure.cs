@@ -62,7 +62,7 @@ namespace Core2D.Path
         /// </summary>
         public PathFigure()
         {
-            StartPoint = PointShape.Create();
+            StartPoint = Factory.CreatePointShape();
             Segments = ImmutableArray.Create<IPathSegment>();
         }
 
@@ -81,23 +81,6 @@ namespace Core2D.Path
         public override object Copy(IDictionary<object, object> shared)
         {
             throw new NotImplementedException();
-        }
-
-        /// <summary>
-        /// Creates a new <see cref="PathFigure"/> instance.
-        /// </summary>
-        /// <param name="startPoint">The start point.</param>
-        /// <param name="isFilled">The flag indicating whether path is filled.</param>
-        /// <param name="isClosed">The flag indicating whether path is closed.</param>
-        /// <returns>The new instance of the <see cref="PathFigure"/> class.</returns>
-        public static IPathFigure Create(IPointShape startPoint, bool isFilled = true, bool isClosed = true)
-        {
-            return new PathFigure()
-            {
-                StartPoint = startPoint,
-                IsFilled = isFilled,
-                IsClosed = isClosed
-            };
         }
 
         /// <summary>

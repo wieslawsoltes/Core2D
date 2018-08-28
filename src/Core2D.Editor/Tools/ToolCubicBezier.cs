@@ -61,7 +61,7 @@ namespace Core2D.Editor.Tools
                 case State.Point1:
                     {
                         var style = editor.Project.CurrentStyleLibrary.Selected;
-                        _cubicBezier = CubicBezierShape.Create(
+                        _cubicBezier = Factory.CreateCubicBezierShape(
                             sx, sy,
                             editor.Project.Options.CloneStyle ? style.Clone() : style,
                             editor.Project.Options.PointShape,

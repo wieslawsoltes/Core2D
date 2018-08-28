@@ -81,7 +81,7 @@ namespace Core2D.Editor.Tools
                         }
 
                         var style = editor.Project.CurrentStyleLibrary.Selected;
-                        _ellipse = EllipseShape.Create(
+                        _ellipse = Factory.CreateEllipseShape(
                             sx, sy,
                             editor.Project.Options.CloneStyle ? style.Clone() : style,
                             editor.Project.Options.PointShape,

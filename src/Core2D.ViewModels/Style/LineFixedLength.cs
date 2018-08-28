@@ -109,25 +109,6 @@ namespace Core2D.Style
         }
 
         /// <summary>
-        /// Creates a new <see cref="LineFixedLength"/> instance.
-        /// </summary>
-        /// <param name="flags">The line fixed length flags.</param>
-        /// <param name="startTrigger">The line start point state trigger.</param>
-        /// <param name="endTrigger">The line end point state trigger.</param>
-        /// <param name="length">The line fixed length.</param>
-        /// <returns>he new instance of the <see cref="LineFixedLength"/> class.</returns>
-        public static ILineFixedLength Create(LineFixedLengthFlags flags = LineFixedLengthFlags.Disabled, IShapeState startTrigger = null, IShapeState endTrigger = null, double length = 15.0)
-        {
-            return new LineFixedLength()
-            {
-                Flags = flags,
-                StartTrigger = startTrigger ?? ShapeState.Create(ShapeStateFlags.Connector | ShapeStateFlags.Output),
-                EndTrigger = endTrigger ?? ShapeState.Create(ShapeStateFlags.Connector | ShapeStateFlags.Input),
-                Length = length
-            };
-        }
-
-        /// <summary>
         /// Parses a line fixed length string.
         /// </summary>
         /// <param name="s">The line fixed length string.</param>
@@ -136,7 +117,7 @@ namespace Core2D.Style
         {
             var flags = (LineFixedLengthFlags)Enum.Parse(typeof(LineFixedLengthFlags), s, true);
 
-            return LineFixedLength.Create(flags);
+            return Factory.CreateLineFixedLength(flags);
         }
 
         /// <inheritdoc/>

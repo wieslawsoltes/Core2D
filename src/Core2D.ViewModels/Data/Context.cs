@@ -61,7 +61,7 @@ namespace Core2D.Data
                     }
                     else
                     {
-                        var property = Property.Create(this, name, value);
+                        var property = Factory.CreateProperty(this, name, value);
                         Properties = Properties.Add(property);
                     }
                 }
@@ -78,19 +78,6 @@ namespace Core2D.Data
         {
             throw new NotImplementedException();
         }
-
-        /// <summary>
-        /// Creates a new <see cref="Context"/> instance.
-        /// </summary>
-        /// <returns>The new instance of the <see cref="Context"/> class.</returns>
-        public static IContext Create() => new Context();
-
-        /// <summary>
-        /// Creates a new <see cref="Context"/> instance.
-        /// </summary>
-        /// <param name="record">The record instance.</param>
-        /// <returns>The new instance of the <see cref="Context"/> class.</returns>
-        public static IContext Create(IRecord record) => new Context() { Record = record };
 
         /// <summary>
         /// Check whether the <see cref="Properties"/> property has changed from its default value.

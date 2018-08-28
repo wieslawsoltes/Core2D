@@ -183,17 +183,17 @@ namespace Core2D.Editor.Designer
         /// <summary>
         /// The design time <see cref="Path.Segments.ArcSegment"/>.
         /// </summary>
-        public static ArcSegment ArcSegment { get; set; }
+        public static IArcSegment ArcSegment { get; set; }
 
         /// <summary>
         /// The design time <see cref="Path.Segments.CubicBezierSegment"/>.
         /// </summary>
-        public static CubicBezierSegment CubicBezierSegment { get; set; }
+        public static ICubicBezierSegment CubicBezierSegment { get; set; }
 
         /// <summary>
         /// The design time <see cref="Path.Segments.LineSegment"/>.
         /// </summary>
-        public static LineSegment LineSegment { get; set; }
+        public static ILineSegment LineSegment { get; set; }
 
         /// <summary>
         /// The design time <see cref="IPathFigure"/>.
@@ -213,22 +213,22 @@ namespace Core2D.Editor.Designer
         /// <summary>
         /// The design time <see cref="Path.Segments.PolyCubicBezierSegment"/>.
         /// </summary>
-        public static PolyCubicBezierSegment PolyCubicBezierSegment { get; set; }
+        public static IPolyCubicBezierSegment PolyCubicBezierSegment { get; set; }
 
         /// <summary>
         /// The design time <see cref="Path.Segments.PolyLineSegment"/>.
         /// </summary>
-        public static PolyLineSegment PolyLineSegment { get; set; }
+        public static IPolyLineSegment PolyLineSegment { get; set; }
 
         /// <summary>
         /// The design time <see cref="Path.Segments.PolyQuadraticBezierSegment"/>.
         /// </summary>
-        public static PolyQuadraticBezierSegment PolyQuadraticBezierSegment { get; set; }
+        public static IPolyQuadraticBezierSegment PolyQuadraticBezierSegment { get; set; }
 
         /// <summary>
         /// The design time <see cref="Path.Segments.QuadraticBezierSegment"/>.
         /// </summary>
-        public static QuadraticBezierSegment QuadraticBezierSegment { get; set; }
+        public static IQuadraticBezierSegment QuadraticBezierSegment { get; set; }
 
         /// <summary>
         /// Initializes static designer context.
@@ -255,19 +255,19 @@ namespace Core2D.Editor.Designer
 
             // Data
 
-            var db = Core2D.Data.Database.Create("Db");
+            var db = Factory.CreateDatabase("Db");
             var fields = new string[] { "Column0", "Column1" };
-            var columns = ImmutableArray.CreateRange(fields.Select(c => Column.Create(db, c)));
+            var columns = ImmutableArray.CreateRange(fields.Select(c => Factory.CreateColumn(db, c)));
             db.Columns = columns;
-            var values = Enumerable.Repeat("<empty>", db.Columns.Length).Select(c => Value.Create(c));
-            var record = Core2D.Data.Record.Create(
+            var values = Enumerable.Repeat("<empty>", db.Columns.Length).Select(c => Factory.CreateValue(c));
+            var record = Factory.CreateRecord(
                 db,
                 ImmutableArray.CreateRange(values));
             db.Records = db.Records.Add(record);
             db.CurrentRecord = record;
 
             Database = db;
-            Data = Core2D.Data.Context.Create(record);
+            Data = Factory.CreateContext(record);
             Record = record;
 
             // Project
@@ -277,62 +277,62 @@ namespace Core2D.Editor.Designer
 
             Project = containerFactory.GetProject();
 
-            Template = PageContainer.CreateTemplate();
+            Template = Factory.CreateTemplateContainer();
 
-            Page = PageContainer.CreatePage();
+            Page = Factory.CreatePageContainer();
             var layer = Page.Layers.FirstOrDefault();
-            layer.Shapes = layer.Shapes.Add(LineShape.Create(0, 0, null, null));
+            layer.Shapes = layer.Shapes.Add(Factory.CreateLineShape(0, 0, null, null));
             Page.CurrentLayer = layer;
             Page.CurrentShape = layer.Shapes.FirstOrDefault();
             Page.Template = Template;
 
-            Document = DocumentContainer.Create();
-            Layer = LayerContainer.Create();
-            Options = Containers.Options.Create();
+            Document = Factory.CreateDocumentContainer();
+            Layer = Factory.CreateLayerContainer();
+            Options =Factory.CreateOptions();
 
             CurrentStyleLibrary = Project.CurrentStyleLibrary;
             CurrentGroupLibrary = Project.CurrentGroupLibrary;
 
             // State
 
-            State = ShapeState.Create();
+            State = Factory.CreateShapeState();
 
             // Style
 
-            ArgbColor = Core2D.Style.ArgbColor.Create(128, 255, 0, 0);
-            ArrowStyle = Core2D.Style.ArrowStyle.Create();
-            FontStyle = Core2D.Style.FontStyle.Create();
-            LineFixedLength = Core2D.Style.LineFixedLength.Create();
-            LineStyle = Core2D.Style.LineStyle.Create();
-            Style = Core2D.Style.ShapeStyle.Create("Default");
-            TextStyle = Core2D.Style.TextStyle.Create();
+            ArgbColor = Factory.CreateArgbColor(128, 255, 0, 0);
+            ArrowStyle = Factory.CreateArrowStyle();
+            FontStyle = Factory.CreateFontStyle();
+            LineFixedLength = Factory.CreateLineFixedLength();
+            LineStyle = Factory.CreateLineStyle();
+            Style = Factory.CreateShapeStyle("Default");
+            TextStyle = Factory.CreateTextStyle();
 
             // Shapes
 
-            Arc = ArcShape.Create(0, 0, Style, null);
-            CubicBezier = CubicBezierShape.Create(0, 0, Style, null);
-            Ellipse = EllipseShape.Create(0, 0, Style, null);
-            Group = GroupShape.Create(Constants.DefaulGroupName);
-            Image = ImageShape.Create(0, 0, Style, null, "key");
-            Line = LineShape.Create(0, 0, Style, null);
-            Path = PathShape.Create(Style, null);
-            Point = PointShape.Create();
-            QuadraticBezier = QuadraticBezierShape.Create(0, 0, Style, null);
-            Rectangle = RectangleShape.Create(0, 0, Style, null);
-            Text = TextShape.Create(0, 0, Style, null, "Text");
+            Arc = Factory.CreateArcShape(0, 0, Style, null);
+            CubicBezier = Factory.CreateCubicBezierShape(0, 0, Style, null);
+            Ellipse = Factory.CreateEllipseShape(0, 0, Style, null);
+            Group = Factory.CreateGroupShape(Constants.DefaulGroupName);
+            Image = Factory.CreateImageShape(0, 0, Style, null, "key");
+            Line = Factory.CreateLineShape(0, 0, Style, null);
+            Path = Factory.CreatePathShape(Style, null);
+            Point = Factory.CreatePointShape();
+            QuadraticBezier = Factory.CreateQuadraticBezierShape(0, 0, Style, null);
+            Rectangle = Factory.CreateRectangleShape(0, 0, Style, null);
+            Text = Factory.CreateTextShape(0, 0, Style, null, "Text");
 
             // Path
 
-            ArcSegment = ArcSegment.Create(PointShape.Create(), Core2D.Path.PathSize.Create(), 180, true, SweepDirection.Clockwise, true, true);
-            CubicBezierSegment = CubicBezierSegment.Create(PointShape.Create(), PointShape.Create(), PointShape.Create(), true, true);
-            LineSegment = LineSegment.Create(PointShape.Create(), true, true);
-            PathFigure = Core2D.Path.PathFigure.Create(PointShape.Create(), false, true);
-            PathGeometry = Core2D.Path.PathGeometry.Create(ImmutableArray.Create<IPathFigure>(), FillRule.EvenOdd);
-            PathSize = Core2D.Path.PathSize.Create();
-            PolyCubicBezierSegment = PolyCubicBezierSegment.Create(ImmutableArray.Create<IPointShape>(), true, true);
-            PolyLineSegment = PolyLineSegment.Create(ImmutableArray.Create<IPointShape>(), true, true);
-            PolyQuadraticBezierSegment = PolyQuadraticBezierSegment.Create(ImmutableArray.Create<IPointShape>(), true, true);
-            QuadraticBezierSegment = QuadraticBezierSegment.Create(PointShape.Create(), PointShape.Create(), true, true);
+            ArcSegment = Factory.CreateArcSegment(Factory.CreatePointShape(), Factory.CreatePathSize(), 180, true, SweepDirection.Clockwise, true, true);
+            CubicBezierSegment = Factory.CreateCubicBezierSegment(Factory.CreatePointShape(), Factory.CreatePointShape(), Factory.CreatePointShape(), true, true);
+            LineSegment = Factory.CreateLineSegment(Factory.CreatePointShape(), true, true);
+            PathFigure = Factory.CreatePathFigure(Factory.CreatePointShape(), false, true);
+            PathGeometry = Factory.CreatePathGeometry(ImmutableArray.Create<IPathFigure>(), FillRule.EvenOdd);
+            PathSize = Factory.CreatePathSize();
+            PolyCubicBezierSegment = Factory.CreatePolyCubicBezierSegment(ImmutableArray.Create<IPointShape>(), true, true);
+            PolyLineSegment = Factory.CreatePolyLineSegment(ImmutableArray.Create<IPointShape>(), true, true);
+            PolyQuadraticBezierSegment = Factory.CreatePolyQuadraticBezierSegment(ImmutableArray.Create<IPointShape>(), true, true);
+            QuadraticBezierSegment = Factory.CreateQuadraticBezierSegment(Factory.CreatePointShape(), Factory.CreatePointShape(), true, true);
         }
     }
 }

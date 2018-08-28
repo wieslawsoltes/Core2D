@@ -46,10 +46,10 @@ namespace Core2D.Editor.Tools.Selection
         /// </summary>
         public void ToStatePoint2()
         {
-            _ellipse = EllipseShape.Create(0, 0, _style, null);
-            _p1HelperPoint = PointShape.Create(0, 0, _point);
-            _p2HelperPoint = PointShape.Create(0, 0, _point);
-            _centerHelperPoint = PointShape.Create(0, 0, _point);
+            _ellipse = Factory.CreateEllipseShape(0, 0, _style, null);
+            _p1HelperPoint = Factory.CreatePointShape(0, 0, _point);
+            _p2HelperPoint = Factory.CreatePointShape(0, 0, _point);
+            _centerHelperPoint = Factory.CreatePointShape(0, 0, _point);
 
             _layer.Shapes = _layer.Shapes.Add(_ellipse);
             _layer.Shapes = _layer.Shapes.Add(_p1HelperPoint);
@@ -74,8 +74,8 @@ namespace Core2D.Editor.Tools.Selection
                 _p2HelperPoint = null;
             }
 
-            _startLine = LineShape.Create(0, 0, _style, null);
-            _startHelperPoint = PointShape.Create(0, 0, _point);
+            _startLine = Factory.CreateLineShape(0, 0, _style, null);
+            _startHelperPoint = Factory.CreatePointShape(0, 0, _point);
 
             _layer.Shapes = _layer.Shapes.Add(_startLine);
             _layer.Shapes = _layer.Shapes.Add(_startHelperPoint);
@@ -92,8 +92,8 @@ namespace Core2D.Editor.Tools.Selection
                 _ellipse = null;
             }
 
-            _endLine = LineShape.Create(0, 0, _style, null);
-            _endHelperPoint = PointShape.Create(0, 0, _point);
+            _endLine = Factory.CreateLineShape(0, 0, _style, null);
+            _endHelperPoint = Factory.CreatePointShape(0, 0, _point);
 
             _layer.Shapes = _layer.Shapes.Add(_endLine);
             _layer.Shapes = _layer.Shapes.Add(_endHelperPoint);

@@ -61,7 +61,7 @@ namespace Core2D.Editor.Tools
                 case State.Point1:
                     {
                         var style = editor.Project.CurrentStyleLibrary.Selected;
-                        _quadraticBezier = QuadraticBezierShape.Create(
+                        _quadraticBezier = Factory.CreateQuadraticBezierShape(
                             sx, sy,
                             editor.Project.Options.CloneStyle ? style.Clone() : style,
                             editor.Project.Options.PointShape,

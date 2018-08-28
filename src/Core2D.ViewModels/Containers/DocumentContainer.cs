@@ -42,13 +42,6 @@ namespace Core2D.Containers
         }
 
         /// <summary>
-        /// Creates a new <see cref="DocumentContainer"/> instance.
-        /// </summary>
-        /// <param name="name">The document name.</param>
-        /// <returns>The new instance of the <see cref="DocumentContainer"/> class.</returns>
-        public static IDocumentContainer Create(string name = "Document") => new DocumentContainer() { Name = name };
-
-        /// <summary>
         /// Check whether the <see cref="IsExpanded"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>

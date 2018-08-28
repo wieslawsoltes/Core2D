@@ -35,23 +35,6 @@ namespace Core2D.Data
             throw new NotImplementedException();
         }
 
-        /// <summary>
-        /// Creates a new <see cref="Property"/> instance.
-        /// </summary>
-        /// <param name="owner">The property owner.</param>
-        /// <param name="name">The property name.</param>
-        /// <param name="value">The property value.</param>
-        /// <returns>The new instance of the <see cref="Property"/> class.</returns>
-        public static IProperty Create(IContext owner, string name, string value)
-        {
-            return new Property()
-            {
-                Name = name,
-                Value = value,
-                Owner = owner
-            };
-        }
-
         /// <inheritdoc/>
         public override string ToString() => _value.ToString();
 

@@ -77,20 +77,6 @@ namespace Core2D.Renderer
             set => Update(ref _imageCache, value);
         }
 
-        /// <summary>
-        /// Initializes a new <see cref="ShapeRendererState"/> instance.
-        /// </summary>
-        public ShapeRendererState()
-        {
-            _panX = 0.0;
-            _panY = 0.0;
-            _zoomX = 1.0;
-            _zoomY = 1.0;
-            _drawShapeState = ShapeState.Create(ShapeStateFlags.Visible);
-            _selectedShape = default;
-            _selectedShapes = default;
-        }
-
         /// <inheritdoc/>
         public override object Copy(IDictionary<object, object> shared)
         {

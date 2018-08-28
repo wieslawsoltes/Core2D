@@ -39,9 +39,9 @@ namespace Core2D.Editor.Tools.Selection
         /// </summary>
         public void ToStateBottomRight()
         {
-            _helperRectangle = RectangleShape.Create(0, 0, _style, null);
-            _topLeftHelperPoint = PointShape.Create(0, 0, _point);
-            _bottomRightHelperPoint = PointShape.Create(0, 0, _point);
+            _helperRectangle = Factory.CreateRectangleShape(0, 0, _style, null);
+            _topLeftHelperPoint = Factory.CreatePointShape(0, 0, _point);
+            _bottomRightHelperPoint = Factory.CreatePointShape(0, 0, _point);
 
             _layer.Shapes = _layer.Shapes.Add(_helperRectangle);
             _layer.Shapes = _layer.Shapes.Add(_topLeftHelperPoint);

@@ -167,7 +167,7 @@ namespace Core2D.Containers
                     }
                     else
                     {
-                        var property = Property.Create(_data, name, value);
+                        var property = Factory.CreateProperty(_data, name, value);
                         _data.Properties = _data.Properties.Add(property);
                     }
                 }
@@ -181,7 +181,7 @@ namespace Core2D.Containers
             : base()
         {
             _layers = ImmutableArray.Create<ILayerContainer>();
-            _data = Context.Create();
+            _data = Factory.CreateContext();
         }
 
         /// <inheritdoc/>
@@ -218,62 +218,6 @@ namespace Core2D.Containers
         public override object Copy(IDictionary<object, object> shared)
         {
             throw new NotImplementedException();
-        }
-
-        /// <summary>
-        /// Creates a new <see cref="PageContainer"/> page instance.
-        /// </summary>
-        /// <param name="name">The page name.</param>
-        /// <returns>The new instance of the <see cref="PageContainer"/>.</returns>
-        public static IPageContainer CreatePage(string name = "Page")
-        {
-            var page = new PageContainer()
-            {
-                Name = name
-            };
-
-            var builder = page.Layers.ToBuilder();
-            builder.Add(LayerContainer.Create("Layer1", page));
-            builder.Add(LayerContainer.Create("Layer2", page));
-            builder.Add(LayerContainer.Create("Layer3", page));
-            page.Layers = builder.ToImmutable();
-
-            page.CurrentLayer = page.Layers.FirstOrDefault();
-            page.WorkingLayer = LayerContainer.Create("Working", page);
-            page.HelperLayer = LayerContainer.Create("Helper", page);
-
-            return page;
-        }
-
-        /// <summary>
-        /// Creates a new <see cref="PageContainer"/> template instance.
-        /// </summary>
-        /// <param name="name">The template name.</param>
-        /// <param name="width">The template width.</param>
-        /// <param name="height">The template height.</param>
-        /// <returns>The new instance of the <see cref="PageContainer"/>.</returns>
-        public static IPageContainer CreateTemplate(string name = "Template", double width = 840, double height = 600)
-        {
-            var template = new PageContainer()
-            {
-                Name = name
-            };
-
-            template.Background = ArgbColor.Create(0x00, 0xFF, 0xFF, 0xFF);
-            template.Width = width;
-            template.Height = height;
-
-            var builder = template.Layers.ToBuilder();
-            builder.Add(LayerContainer.Create("TemplateLayer1", template));
-            builder.Add(LayerContainer.Create("TemplateLayer2", template));
-            builder.Add(LayerContainer.Create("TemplateLayer3", template));
-            template.Layers = builder.ToImmutable();
-
-            template.CurrentLayer = template.Layers.FirstOrDefault();
-            template.WorkingLayer = LayerContainer.Create("TemplateWorking", template);
-            template.HelperLayer = LayerContainer.Create("TemplateHelper", template);
-
-            return template;
         }
 
         /// <summary>

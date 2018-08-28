@@ -21,7 +21,7 @@ namespace Core2D.Renderer.Avalonia
             var PointShapes = ImmutableArray.CreateBuilder<IPointShape>();
             foreach (var point in points)
             {
-                PointShapes.Add(PointShape.Create(point.X + dx, point.Y + dy));
+                PointShapes.Add(Factory.CreatePointShape(point.X + dx, point.Y + dy));
             }
             return PointShapes.ToImmutable();
         }
@@ -35,7 +35,7 @@ namespace Core2D.Renderer.Avalonia
         /// <returns></returns>
         public static IPathGeometry ToPathGeometry(this AM.PathGeometry pg, double dx, double dy)
         {
-            var geometry = PathGeometry.Create(
+            var geometry = Factory.CreatePathGeometry(
                 ImmutableArray.Create<IPathFigure>(),
                 pg.FillRule == AM.FillRule.EvenOdd ? FillRule.EvenOdd : FillRule.Nonzero);
 
@@ -44,7 +44,7 @@ namespace Core2D.Renderer.Avalonia
             foreach (var pf in pg.Figures)
             {
                 context.BeginFigure(
-                    PointShape.Create(pf.StartPoint.X + dx, pf.StartPoint.Y + dy),
+                    Factory.CreatePointShape(pf.StartPoint.X + dx, pf.StartPoint.Y + dy),
                     pf.IsFilled,
                     pf.IsClosed);
 
@@ -53,8 +53,8 @@ namespace Core2D.Renderer.Avalonia
                     if (segment is AM.ArcSegment arcSegment)
                     {
                         context.ArcTo(
-                            PointShape.Create(arcSegment.Point.X + dx, arcSegment.Point.Y + dy),
-                            PathSize.Create(arcSegment.Size.Width, arcSegment.Size.Height),
+                            Factory.CreatePointShape(arcSegment.Point.X + dx, arcSegment.Point.Y + dy),
+                            Factory.CreatePathSize(arcSegment.Size.Width, arcSegment.Size.Height),
                             arcSegment.RotationAngle,
                             arcSegment.IsLargeArc,
                             arcSegment.SweepDirection == AM.SweepDirection.Clockwise ? SweepDirection.Clockwise : SweepDirection.Counterclockwise);
@@ -62,20 +62,20 @@ namespace Core2D.Renderer.Avalonia
                     else if (segment is AM.BezierSegment cubicBezierSegment)
                     {
                         context.CubicBezierTo(
-                            PointShape.Create(cubicBezierSegment.Point1.X + dx, cubicBezierSegment.Point1.Y + dy),
-                            PointShape.Create(cubicBezierSegment.Point2.X + dx, cubicBezierSegment.Point2.Y + dy),
-                            PointShape.Create(cubicBezierSegment.Point3.X + dx, cubicBezierSegment.Point3.Y + dy));
+                            Factory.CreatePointShape(cubicBezierSegment.Point1.X + dx, cubicBezierSegment.Point1.Y + dy),
+                            Factory.CreatePointShape(cubicBezierSegment.Point2.X + dx, cubicBezierSegment.Point2.Y + dy),
+                            Factory.CreatePointShape(cubicBezierSegment.Point3.X + dx, cubicBezierSegment.Point3.Y + dy));
                     }
                     else if (segment is AM.LineSegment lineSegment)
                     {
                         context.LineTo(
-                            PointShape.Create(lineSegment.Point.X + dx, lineSegment.Point.Y + dy));
+                            Factory.CreatePointShape(lineSegment.Point.X + dx, lineSegment.Point.Y + dy));
                     }
                     else if (segment is AM.QuadraticBezierSegment quadraticBezierSegment)
                     {
                         context.QuadraticBezierTo(
-                            PointShape.Create(quadraticBezierSegment.Point1.X + dx, quadraticBezierSegment.Point1.Y + dy),
-                            PointShape.Create(quadraticBezierSegment.Point2.X + dx, quadraticBezierSegment.Point2.Y + dy));
+                            Factory.CreatePointShape(quadraticBezierSegment.Point1.X + dx, quadraticBezierSegment.Point1.Y + dy),
+                            Factory.CreatePointShape(quadraticBezierSegment.Point2.X + dx, quadraticBezierSegment.Point2.Y + dy));
                     }
                     else
                     {

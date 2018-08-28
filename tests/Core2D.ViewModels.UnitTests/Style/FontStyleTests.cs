@@ -131,7 +131,7 @@ namespace Core2D.Style.UnitTests
         [Trait("Core2D.Style", "Style")]
         public void ToString_Should_Return_Flags_String()
         {
-            var target = FontStyle.Create(
+            var target = Factory.CreateFontStyle(
                 FontStyleFlags.Bold
                 | FontStyleFlags.Italic
                 | FontStyleFlags.Strikeout);

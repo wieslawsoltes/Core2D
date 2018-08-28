@@ -53,25 +53,6 @@ namespace Core2D.Style
         }
 
         /// <summary>
-        /// Creates a new <see cref="ArgbColor"/> instance.
-        /// </summary>
-        /// <param name="a">The alpha color channel.</param>
-        /// <param name="r">The red color channel.</param>
-        /// <param name="g">The green color channel.</param>
-        /// <param name="b">The blue color channel.</param>
-        /// <returns>The new instance of the <see cref="ArgbColor"/> class.</returns>
-        public static IArgbColor Create(byte a = 0xFF, byte r = 0x00, byte g = 0x00, byte b = 0x00)
-        {
-            return new ArgbColor()
-            {
-                A = a,
-                R = r,
-                G = g,
-                B = b
-            };
-        }
-
-        /// <summary>
         /// Creates a <see cref="ArgbColor"/> from an integer.
         /// </summary>
         /// <param name="value">The integer value.</param>

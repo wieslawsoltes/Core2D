@@ -32,23 +32,6 @@ namespace Core2D.Path.Segments
             throw new NotImplementedException();
         }
 
-        /// <summary>
-        /// Creates a new <see cref="LineSegment"/> instance.
-        /// </summary>
-        /// <param name="point">The end point.</param>
-        /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
-        /// <param name="isSmoothJoin">The flag indicating whether shape is smooth join.</param>
-        /// <returns>The new instance of the <see cref="LineSegment"/> class.</returns>
-        public static LineSegment Create(IPointShape point, bool isStroked, bool isSmoothJoin)
-        {
-            return new LineSegment()
-            {
-                Point = point,
-                IsStroked = isStroked,
-                IsSmoothJoin = isSmoothJoin
-            };
-        }
-
         /// <inheritdoc/>
         public override string ToString() => "L" + Point.ToString();
 

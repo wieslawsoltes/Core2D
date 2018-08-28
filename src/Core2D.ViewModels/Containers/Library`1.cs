@@ -51,29 +51,6 @@ namespace Core2D.Containers
         }
 
         /// <summary>
-        /// Creates a new instance of the <see cref="Library{T}"/> class.
-        /// </summary>
-        /// <param name="name">The library name.</param>
-        /// <returns>The new instance of the <see cref="Library{T}"/> class.</returns>
-        public static ILibrary<T> Create(string name) => new Library<T>() { Name = name };
-
-        /// <summary>
-        /// Creates a new instance of the <see cref="Library{T}"/> class.
-        /// </summary>
-        /// <param name="name">The library name.</param>
-        /// <param name="items">The items collection.</param>
-        /// <returns>The new instance of the <see cref="Library{T}"/> class.</returns>
-        public static ILibrary<T> Create(string name, IEnumerable<T> items)
-        {
-            return new Library<T>()
-            {
-                Name = name,
-                Items = ImmutableArray.CreateRange<T>(items),
-                Selected = items.FirstOrDefault()
-            };
-        }
-
-        /// <summary>
         /// Check whether the <see cref="Items"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>

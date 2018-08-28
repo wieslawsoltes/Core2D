@@ -43,21 +43,6 @@ namespace Core2D.Path
         }
 
         /// <summary>
-        /// Creates a new <see cref="PathGeometry"/> instance.
-        /// </summary>
-        /// <param name="figures">The figures collection.</param>
-        /// <param name="fillRule">The fill rule.</param>
-        /// <returns>The new instance of the <see cref="PathGeometry"/> class.</returns>
-        public static IPathGeometry Create(ImmutableArray<IPathFigure> figures, FillRule fillRule)
-        {
-            return new PathGeometry()
-            {
-                Figures = figures,
-                FillRule = fillRule
-            };
-        }
-
-        /// <summary>
         /// Creates a string representation of figures collection.
         /// </summary>
         /// <param name="figures">The figures collection.</param>

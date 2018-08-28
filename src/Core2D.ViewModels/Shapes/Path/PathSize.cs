@@ -33,21 +33,6 @@ namespace Core2D.Path
             throw new NotImplementedException();
         }
 
-        /// <summary>
-        /// Creates a new <see cref="PathSize"/> instance.
-        /// </summary>
-        /// <param name="width">The width value.</param>
-        /// <param name="height">The height value.</param>
-        /// <returns>The new instance of the <see cref="PathSize"/> class.</returns>
-        public static IPathSize Create(double width = 0.0, double height = 0.0)
-        {
-            return new PathSize()
-            {
-                Width = width,
-                Height = height
-            };
-        }
-
         /// <inheritdoc/>
         public override string ToString() => $"{Width},{Height}";
 

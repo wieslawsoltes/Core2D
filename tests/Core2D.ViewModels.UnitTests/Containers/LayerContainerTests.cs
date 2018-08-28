@@ -27,7 +27,7 @@ namespace Core2D.UnitTests
         [Trait("Core2D.Containers", "Project")]
         public void Setting_IsVisible_Should_Invalidate_Layer()
         {
-            var target = LayerContainer.Create("Layer1");
+            var target = Factory.CreateLayerContainer("Layer1");
 
             bool raised = false;
 
@@ -45,7 +45,7 @@ namespace Core2D.UnitTests
         [Trait("Core2D.Containers", "Project")]
         public void Invalidate_Raises_InvalidateLayer_Event()
         {
-            var target = LayerContainer.Create("Layer1");
+            var target = Factory.CreateLayerContainer("Layer1");
 
             bool raised = false;
 
@@ -63,7 +63,7 @@ namespace Core2D.UnitTests
         [Trait("Core2D.Containers", "Project")]
         public void Invalidate_Sets_EventArgs()
         {
-            var target = LayerContainer.Create("Layer1");
+            var target = Factory.CreateLayerContainer("Layer1");
 
             InvalidateLayerEventArgs args = null;
 

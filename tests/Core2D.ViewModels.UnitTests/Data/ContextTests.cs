@@ -36,7 +36,7 @@ namespace Core2D.Data.UnitTests
         public void This_Operator_Returns_Property_Value()
         {
             var target = new Context();
-            target.Properties = target.Properties.Add(Property.Create(target, "Name1", "Value1"));
+            target.Properties = target.Properties.Add(Factory.CreateProperty(target, "Name1", "Value1"));
 
             Assert.Equal("Value1", target["Name1"]);
         }
@@ -46,7 +46,7 @@ namespace Core2D.Data.UnitTests
         public void This_Operator_Sets_Property_Value()
         {
             var target = new Context();
-            target.Properties = target.Properties.Add(Property.Create(target, "Name1", "Value1"));
+            target.Properties = target.Properties.Add(Factory.CreateProperty(target, "Name1", "Value1"));
 
             target["Name1"] = "NewValue1";
             Assert.Equal("NewValue1", target["Name1"]);

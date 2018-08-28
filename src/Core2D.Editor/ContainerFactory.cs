@@ -21,16 +21,16 @@ namespace Core2D.Editor
         /// <returns>The new instance of the <see cref="ILibrary{IShapeStyle}"/>.</returns>
         public static ILibrary<IShapeStyle> DefaultStyleLibrary()
         {
-            var sgd = Library<IShapeStyle>.Create("Default");
+            var sgd = Factory.CreateLibrary<IShapeStyle>("Default");
 
             var builder = sgd.Items.ToBuilder();
-            builder.Add(ShapeStyle.Create("Black", 255, 0, 0, 0, 80, 0, 0, 0, 2.0));
-            builder.Add(ShapeStyle.Create("Red", 255, 255, 0, 0, 80, 255, 0, 0, 2.0));
-            builder.Add(ShapeStyle.Create("Green", 255, 0, 255, 0, 80, 0, 255, 0, 2.0));
-            builder.Add(ShapeStyle.Create("Blue", 255, 0, 0, 255, 80, 0, 0, 255, 2.0));
-            builder.Add(ShapeStyle.Create("Cyan", 255, 0, 255, 255, 80, 0, 255, 255, 2.0));
-            builder.Add(ShapeStyle.Create("Magenta", 255, 255, 0, 255, 80, 255, 0, 255, 2.0));
-            builder.Add(ShapeStyle.Create("Yellow", 255, 255, 255, 0, 80, 255, 255, 0, 2.0));
+            builder.Add(Factory.CreateShapeStyle("Black", 255, 0, 0, 0, 80, 0, 0, 0, 2.0));
+            builder.Add(Factory.CreateShapeStyle("Red", 255, 255, 0, 0, 80, 255, 0, 0, 2.0));
+            builder.Add(Factory.CreateShapeStyle("Green", 255, 0, 255, 0, 80, 0, 255, 0, 2.0));
+            builder.Add(Factory.CreateShapeStyle("Blue", 255, 0, 0, 255, 80, 0, 0, 255, 2.0));
+            builder.Add(Factory.CreateShapeStyle("Cyan", 255, 0, 255, 255, 80, 0, 255, 255, 2.0));
+            builder.Add(Factory.CreateShapeStyle("Magenta", 255, 255, 0, 255, 80, 255, 0, 255, 2.0));
+            builder.Add(Factory.CreateShapeStyle("Yellow", 255, 255, 255, 0, 80, 255, 255, 0, 2.0));
             sgd.Items = builder.ToImmutable();
 
             sgd.Selected = sgd.Items.FirstOrDefault();
@@ -44,25 +44,25 @@ namespace Core2D.Editor
         /// <returns>The new instance of the <see cref="ILibrary{ShapeStyle}"/>.</returns>
         public static ILibrary<IShapeStyle> LinesStyleLibrary()
         {
-            var sgdl = Library<IShapeStyle>.Create("Lines");
+            var sgdl = Factory.CreateLibrary<IShapeStyle>("Lines");
 
-            var solid = ShapeStyle.Create("Solid", 255, 0, 0, 0, 80, 0, 0, 0, 2.0);
+            var solid = Factory.CreateShapeStyle("Solid", 255, 0, 0, 0, 80, 0, 0, 0, 2.0);
             solid.Dashes = default;
             solid.DashOffset = 0.0;
 
-            var dash = ShapeStyle.Create("Dash", 255, 0, 0, 0, 80, 0, 0, 0, 2.0);
+            var dash = Factory.CreateShapeStyle("Dash", 255, 0, 0, 0, 80, 0, 0, 0, 2.0);
             dash.Dashes = "2 2";
             dash.DashOffset = 1.0;
 
-            var dot = ShapeStyle.Create("Dot", 255, 0, 0, 0, 80, 0, 0, 0, 2.0);
+            var dot = Factory.CreateShapeStyle("Dot", 255, 0, 0, 0, 80, 0, 0, 0, 2.0);
             dot.Dashes = "0 2";
             dot.DashOffset = 0.0;
 
-            var dashDot = ShapeStyle.Create("DashDot", 255, 0, 0, 0, 80, 0, 0, 0, 2.0);
+            var dashDot = Factory.CreateShapeStyle("DashDot", 255, 0, 0, 0, 80, 0, 0, 0, 2.0);
             dashDot.Dashes = "2 2 0 2";
             dashDot.DashOffset = 1.0;
 
-            var dashDotDot = ShapeStyle.Create("DashDotDot", 255, 0, 0, 0, 80, 0, 0, 0, 2.0);
+            var dashDotDot = Factory.CreateShapeStyle("DashDotDot", 255, 0, 0, 0, 80, 0, 0, 0, 2.0);
             dashDotDot.Dashes = "2 2 0 2 0 2";
             dashDotDot.DashOffset = 1.0;
 
@@ -85,8 +85,8 @@ namespace Core2D.Editor
         /// <returns>The new instance of the <see cref="ILibrary{ShapeStyle}"/>.</returns>
         public static ILibrary<IShapeStyle> TemplateStyleLibrary()
         {
-            var sgt = Library<IShapeStyle>.Create("Template");
-            var gs = ShapeStyle.Create("Grid", 255, 222, 222, 222, 255, 222, 222, 222, 1.0);
+            var sgt = Factory.CreateLibrary<IShapeStyle>("Template");
+            var gs = Factory.CreateShapeStyle("Grid", 255, 222, 222, 222, 255, 222, 222, 222, 1.0);
 
             var builder = sgt.Items.ToBuilder();
             builder.Add(gs);
@@ -113,7 +113,7 @@ namespace Core2D.Editor
                 .Items.FirstOrDefault(s => s.Name == "Grid");
             var layer = template.Layers.FirstOrDefault();
             var builder = layer.Shapes.ToBuilder();
-            var grid = RectangleShape.Create(
+            var grid = Factory.CreateRectangleShape(
                 0, 0,
                 template.Width, template.Height,
                 style,
@@ -135,15 +135,15 @@ namespace Core2D.Editor
         /// <inheritdoc/>
         IPageContainer IContainerFactory.GetTemplate(IProjectContainer project, string name)
         {
-            var template = PageContainer.CreateTemplate(name);
-            template.Background = ArgbColor.Create(0xFF, 0xFF, 0xFF, 0xFF);
+            var template = Factory.CreateTemplateContainer(name);
+            template.Background = Factory.CreateArgbColor(0xFF, 0xFF, 0xFF, 0xFF);
             return template;
         }
 
         /// <inheritdoc/>
         IPageContainer IContainerFactory.GetPage(IProjectContainer project, string name)
         {
-            var container = PageContainer.CreatePage(name);
+            var container = Factory.CreatePageContainer(name);
             container.Template = project.CurrentTemplate ?? (this as IContainerFactory).GetTemplate(project, "Empty");
             return container;
         }
@@ -151,7 +151,7 @@ namespace Core2D.Editor
         /// <inheritdoc/>
         IDocumentContainer IContainerFactory.GetDocument(IProjectContainer project, string name)
         {
-            var document = DocumentContainer.Create(name);
+            var document = Factory.CreateDocumentContainer(name);
             return document;
         }
 
@@ -159,11 +159,11 @@ namespace Core2D.Editor
         IProjectContainer IContainerFactory.GetProject()
         {
             var factory = this as IContainerFactory;
-            var project = ProjectContainer.Create();
+            var project = Factory.CreateProjectContainer();
 
             // Group Libraries
             var glBuilder = project.GroupLibraries.ToBuilder();
-            glBuilder.Add(Library<IGroupShape>.Create("Default"));
+            glBuilder.Add(Factory.CreateLibrary<IGroupShape>("Default"));
             project.GroupLibraries = glBuilder.ToImmutable();
 
             project.SetCurrentGroupLibrary(project.GroupLibraries.FirstOrDefault());
@@ -200,10 +200,10 @@ namespace Core2D.Editor
             project.Selected = document.Pages.FirstOrDefault();
 
             // Databases
-            var db = Database.Create("Db");
+            var db = Factory.CreateDatabase("Db");
             var columnsBuilder = db.Columns.ToBuilder();
-            columnsBuilder.Add(Column.Create(db, "Column0"));
-            columnsBuilder.Add(Column.Create(db, "Column1"));
+            columnsBuilder.Add(Factory.CreateColumn(db, "Column0"));
+            columnsBuilder.Add(Factory.CreateColumn(db, "Column1"));
             db.Columns = columnsBuilder.ToImmutable();
             project.Databases = project.Databases.Add(db);
 

@@ -72,7 +72,7 @@ namespace Core2D.UnitTests
         {
             var target = new ProjectContainer();
 
-            var document = DocumentContainer.Create();
+            var document = Factory.CreateDocumentContainer();
             target.Documents = target.Documents.Add(document);
 
             target.SetCurrentDocument(document);
@@ -86,10 +86,10 @@ namespace Core2D.UnitTests
         {
             var target = new ProjectContainer();
 
-            var document = DocumentContainer.Create();
+            var document = Factory.CreateDocumentContainer();
             target.Documents = target.Documents.Add(document);
 
-            var page = PageContainer.CreatePage();
+            var page = Factory.CreatePageContainer();
             document.Pages = document.Pages.Add(page);
 
             target.SetCurrentContainer(page);
@@ -104,7 +104,7 @@ namespace Core2D.UnitTests
         {
             var target = new ProjectContainer();
 
-            var template = PageContainer.CreateTemplate();
+            var template = Factory.CreateTemplateContainer();
             target.Templates = target.Templates.Add(template);
 
             target.SetCurrentTemplate(template);
@@ -118,7 +118,7 @@ namespace Core2D.UnitTests
         {
             var target = new ProjectContainer();
 
-            var db = Database.Create("Db");
+            var db = Factory.CreateDatabase("Db");
             target.Databases = target.Databases.Add(db);
 
             target.SetCurrentDatabase(db);
@@ -132,7 +132,7 @@ namespace Core2D.UnitTests
         {
             var target = new ProjectContainer();
 
-            var library = Library<IGroupShape>.Create("Library1");
+            var library = Factory.CreateLibrary<IGroupShape>("Library1");
             target.GroupLibraries = target.GroupLibraries.Add(library);
 
             target.SetCurrentGroupLibrary(library);
@@ -146,7 +146,7 @@ namespace Core2D.UnitTests
         {
             var target = new ProjectContainer();
 
-            var library = Library<IShapeStyle>.Create("Library1");
+            var library = Factory.CreateLibrary<IShapeStyle>("Library1");
             target.StyleLibraries = target.StyleLibraries.Add(library);
 
             target.SetCurrentStyleLibrary(library);
@@ -161,7 +161,7 @@ namespace Core2D.UnitTests
             var target = new ProjectContainer();
 
             var page = new PageContainer();
-            var layer = LayerContainer.Create("Layer1", page);
+            var layer = Factory.CreateLayerContainer("Layer1", page);
 
             target.SetSelected(layer);
 
@@ -174,13 +174,13 @@ namespace Core2D.UnitTests
         {
             var target = new ProjectContainer();
 
-            var document = DocumentContainer.Create();
+            var document = Factory.CreateDocumentContainer();
             target.Documents = target.Documents.Add(document);
 
-            var page = PageContainer.CreatePage();
+            var page = Factory.CreatePageContainer();
             document.Pages = document.Pages.Add(page);
 
-            var layer = LayerContainer.Create("Layer1", page);
+            var layer = Factory.CreateLayerContainer("Layer1", page);
             page.Layers = page.Layers.Add(layer);
 
             bool raised = false;
@@ -203,7 +203,7 @@ namespace Core2D.UnitTests
         {
             var target = new ProjectContainer();
 
-            var document = DocumentContainer.Create();
+            var document = Factory.CreateDocumentContainer();
             target.Documents = target.Documents.Add(document);
 
             target.SetSelected(document);
@@ -217,7 +217,7 @@ namespace Core2D.UnitTests
         {
             var target = new ProjectContainer();
 
-            var document = DocumentContainer.Create();
+            var document = Factory.CreateDocumentContainer();
             target.Documents = target.Documents.Add(document);
 
             target.Selected = document;

@@ -61,7 +61,7 @@ namespace Core2D.Editor.Tools
                 case State.TopLeft:
                     {
                         var style = editor.Project.CurrentStyleLibrary.Selected;
-                        _rectangle = RectangleShape.Create(
+                        _rectangle = Factory.CreateRectangleShape(
                             sx, sy,
                             editor.Project.Options.CloneStyle ? style.Clone() : style,
                             editor.Project.Options.PointShape,

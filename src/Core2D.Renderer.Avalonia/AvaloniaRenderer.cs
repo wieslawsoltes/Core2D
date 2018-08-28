@@ -21,15 +21,15 @@ namespace Core2D.Renderer.Avalonia
     /// </summary>
     public class AvaloniaRenderer : ShapeRenderer
     {
-        private ICache<IShapeStyle, (AM.IBrush, AM.Pen)> _styleCache = Cache<IShapeStyle, (AM.IBrush, AM.Pen)>.Create();
-        private ICache<IArrowStyle, (AM.IBrush, AM.Pen)> _arrowStyleCache = Cache<IArrowStyle, (AM.IBrush, AM.Pen)>.Create();
+        private ICache<IShapeStyle, (AM.IBrush, AM.Pen)> _styleCache = Factory.CreateCache<IShapeStyle, (AM.IBrush, AM.Pen)>();
+        private ICache<IArrowStyle, (AM.IBrush, AM.Pen)> _arrowStyleCache = Factory.CreateCache<IArrowStyle, (AM.IBrush, AM.Pen)>();
         // TODO: Add LineShape cache.
         // TODO: Add EllipseShape cache.
         // TODO: Add ArcShape cache.
         // TODO: Add CubicBezierShape cache.
         // TODO: Add QuadraticBezierShape cache.
-        private ICache<ITextShape, (string, AM.FormattedText, IShapeStyle)> _textCache = Cache<ITextShape, (string, AM.FormattedText, IShapeStyle)>.Create();
-        private ICache<string, AMI.Bitmap> _biCache = Cache<string, AMI.Bitmap>.Create(bi => bi.Dispose());
+        private ICache<ITextShape, (string, AM.FormattedText, IShapeStyle)> _textCache = Factory.CreateCache<ITextShape, (string, AM.FormattedText, IShapeStyle)>();
+        private ICache<string, AMI.Bitmap> _biCache = Factory.CreateCache<string, AMI.Bitmap>(bi => bi.Dispose());
         // TODO: Add PathShape cache.
         private readonly Func<double, float> _scaleToPage;
         private readonly double _textScaleFactor;
