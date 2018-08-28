@@ -10,9 +10,9 @@
             "request": "launch",
             "preLaunchTask": "build",
             // If you have changed target frameworks, make sure to update the program path.
-            "program": "${workspaceFolder}/src/Core2D.Avalonia/bin/AnyCPU/Debug/netcoreapp2.0/Core2D.Avalonia.dll",
+            "program": "${workspaceFolder}/src/Core2D.UI.Avalonia/bin/AnyCPU/Debug/netcoreapp2.1/Core2D.UI.Avalonia.dll",
             "args": [],
-            "cwd": "${workspaceFolder}/src/Core2D.Avalonia",
+            "cwd": "${workspaceFolder}/src/Core2D.UI.Avalonia",
             // For more information about the 'console' field, see https://github.com/OmniSharp/omnisharp-vscode/blob/master/debugger-launchjson.md#console-terminal-window
             "console": "internalConsole",
             "stopAtEntry": false,
