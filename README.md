@@ -28,7 +28,7 @@ The core libraries are portable and should work on all platforms where C# is sup
 
 | Version               | Framework      | Download                                                                                                                                                                                              |
 |-----------------------|----------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Windows 7 8.1 10 x64  | netcoreapp2.1  | [Core2D.UI.Avalonia-netcoreapp2.1-win7-x64.zip](https://ci.appveyor.com/api/projects/wieslawsoltes/Core2D/artifacts/artifacts/Core2D.UI.Avalonia-netcoreapp2.1-win7-x64.zip?branch=master)                  |
+| Windows 7 8.1 10 x64  | netcoreapp2.1  | [Core2D.UI.Avalonia-netcoreapp2.1-win7-x64.zip](https://ci.appveyor.com/api/projects/wieslawsoltes/Core2D/artifacts/artifacts/zip/Core2D.UI.Avalonia-netcoreapp2.1-win7-x64.zip?branch=master)                  |
 
 ## Resources
 
