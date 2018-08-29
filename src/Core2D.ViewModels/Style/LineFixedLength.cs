@@ -121,7 +121,7 @@ namespace Core2D.Style
                 Flags = flags,
                 StartTrigger = new ShapeState() { Flags = ShapeStateFlags.Connector | ShapeStateFlags.Output },
                 EndTrigger = new ShapeState() { Flags = ShapeStateFlags.Connector | ShapeStateFlags.Input },
-                Length = length
+                Length = 15.0
             };
         }
 

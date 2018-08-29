@@ -922,35 +922,35 @@ namespace Core2D
             };
         }
 
-        private static IBaseShape EllipsePointShape(IShapeStyle pss)
+        private IBaseShape EllipsePointShape(IShapeStyle pss)
         {
             var ellipse = CreateEllipseShape(-4, -4, 4, 4, pss, null, true, false);
             ellipse.Name = "EllipsePoint";
             return ellipse;
         }
 
-        private static IBaseShape FilledEllipsePointShape(IShapeStyle pss)
+        private IBaseShape FilledEllipsePointShape(IShapeStyle pss)
         {
             var ellipse = CreateEllipseShape(-3, -3, 3, 3, pss, null, true, true);
             ellipse.Name = "FilledEllipsePoint";
             return ellipse;
         }
 
-        private static IBaseShape RectanglePointShape(IShapeStyle pss)
+        private IBaseShape RectanglePointShape(IShapeStyle pss)
         {
             var rectangle = CreateRectangleShape(-4, -4, 4, 4, pss, null, true, false);
             rectangle.Name = "RectanglePoint";
             return rectangle;
         }
 
-        private static IBaseShape FilledRectanglePointShape(IShapeStyle pss)
+        private IBaseShape FilledRectanglePointShape(IShapeStyle pss)
         {
             var rectangle = CreateRectangleShape(-3, -3, 3, 3, pss, null, true, true);
             rectangle.Name = "FilledRectanglePoint";
             return rectangle;
         }
 
-        private static IBaseShape CrossPointShape(IShapeStyle pss)
+        private IBaseShape CrossPointShape(IShapeStyle pss)
         {
             var group = CreateGroupShape("CrossPoint");
             var builder = group.Shapes.ToBuilder();
@@ -1090,12 +1090,12 @@ namespace Core2D
             };
         }
 
-        private static IEnumerable<string> GetUsedKeys(IProjectContainer project)
+        private IEnumerable<string> GetUsedKeys(IProjectContainer project)
         {
             return ProjectContainer.GetAllShapes<IImageShape>(project).Select(i => i.Key).Distinct();
         }
 
-        private static IProjectContainer ReadProjectContainer(ZipArchiveEntry projectEntry, IFileSystem fileIO, IJsonSerializer serializer)
+        private IProjectContainer ReadProjectContainer(ZipArchiveEntry projectEntry, IFileSystem fileIO, IJsonSerializer serializer)
         {
             using (var entryStream = projectEntry.Open())
             {
@@ -1103,7 +1103,7 @@ namespace Core2D
             }
         }
 
-        private static void WriteProjectContainer(IProjectContainer project, ZipArchiveEntry projectEntry, IFileSystem fileIO, IJsonSerializer serializer)
+        private void WriteProjectContainer(IProjectContainer project, ZipArchiveEntry projectEntry, IFileSystem fileIO, IJsonSerializer serializer)
         {
             using (var jsonStream = projectEntry.Open())
             {
@@ -1111,7 +1111,7 @@ namespace Core2D
             }
         }
 
-        private static void ReadImages(IImageCache cache, ZipArchive archive, IFileSystem fileIO)
+        private void ReadImages(IImageCache cache, ZipArchive archive, IFileSystem fileIO)
         {
             foreach (var entry in archive.Entries)
             {
@@ -1126,7 +1126,7 @@ namespace Core2D
             }
         }
 
-        private static void WriteImages(IImageCache cache, IEnumerable<string> keys, ZipArchive archive, IFileSystem fileIO)
+        private void WriteImages(IImageCache cache, IEnumerable<string> keys, ZipArchive archive, IFileSystem fileIO)
         {
             foreach (var key in keys)
             {

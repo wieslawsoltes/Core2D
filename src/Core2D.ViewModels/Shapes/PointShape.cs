@@ -2,6 +2,7 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using Core2D.Data;
 using Core2D.Renderer;
 
@@ -104,10 +105,12 @@ namespace Core2D.Shapes
                 foreach (var property in Data.Properties)
                 {
                     builder.Add(
-                        new Property(
-                            data,
-                            property.Name,
-                            property.Value));
+                        new Property()
+                        {
+                            Name = property.Name,
+                            Value = property.Value,
+                            Owner = data
+                        });
                 }
                 data.Properties = builder.ToImmutable();
             }

@@ -134,7 +134,10 @@ namespace Core2D.Renderer
         public static IShapeState Parse(string s)
         {
             var flags = (ShapeStateFlags)Enum.Parse(typeof(ShapeStateFlags), s, true);
-            return new ShapeState(flags);
+            return new ShapeState()
+            {
+                Flags = flags
+            };
         }
 
         /// <inheritdoc/>

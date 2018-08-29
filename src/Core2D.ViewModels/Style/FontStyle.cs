@@ -83,7 +83,10 @@ namespace Core2D.Style
         public static IFontStyle Parse(string s)
         {
             var flags = (FontStyleFlags)Enum.Parse(typeof(FontStyleFlags), s, true);
-            return new FontStyle(flags);
+            return new FontStyle()
+            {
+                Flags = flags
+            };
         }
 
         /// <inheritdoc/>
