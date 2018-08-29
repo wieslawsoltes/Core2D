@@ -95,10 +95,10 @@ namespace Core2D.Interfaces
         IContext CreateContext();
 
         /// <summary>
-        /// Creates a new <see cref="Context"/> instance.
+        /// Creates a new <see cref="IContext"/> instance.
         /// </summary>
         /// <param name="record">The record instance.</param>
-        /// <returns>The new instance of the <see cref="Context"/> class.</returns>
+        /// <returns>The new instance of the <see cref="IContext"/> class.</returns>
         IContext CreateContext(IRecord record);
 
         /// <summary>
@@ -335,8 +335,8 @@ namespace Core2D.Interfaces
         /// <summary>
         /// Creates a new <see cref="IArcShape"/> instance.
         /// </summary>
-        /// <param name="x">The X coordinate of <see cref="IArcShape.Point1"/>, <see cref="IArcShape.Point2"/>, <see cref="IArcShape.Point3"/> and <see cref="ArcShape.Point4"/> points.</param>
-        /// <param name="y">The Y coordinate of <see cref="IArcShape.Point1"/>, <see cref="IArcShape.Point2"/>, <see cref="IArcShape.Point3"/> and <see cref="ArcShape.Point4"/> points.</param>
+        /// <param name="x">The X coordinate of <see cref="IArcShape.Point1"/>, <see cref="IArcShape.Point2"/>, <see cref="IArcShape.Point3"/> and <see cref="IArcShape.Point4"/> points.</param>
+        /// <param name="y">The Y coordinate of <see cref="IArcShape.Point1"/>, <see cref="IArcShape.Point2"/>, <see cref="IArcShape.Point3"/> and <see cref="IArcShape.Point4"/> points.</param>
         /// <param name="style">The shape style.</param>
         /// <param name="point">The point template.</param>
         /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
