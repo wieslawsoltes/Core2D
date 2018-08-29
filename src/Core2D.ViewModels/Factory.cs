@@ -18,7 +18,7 @@ using Core2D.Style;
 namespace Core2D
 {
     /// <summary>
-    /// View model facotry.
+    /// View model factory.
     /// </summary>
     public static class Factory
     {
