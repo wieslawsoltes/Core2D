@@ -22,7 +22,7 @@ namespace Core2D.Containers
         public string AddImageFromFile(string path, byte[] bytes)
         {
             var name = System.IO.Path.GetFileName(path);
-            var key = Factory.ImageEntryNamePrefix + name;
+            var key = "Images\\" + name;
 
             if (_images.Keys.Contains(key))
                 return key;

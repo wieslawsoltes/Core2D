@@ -48,7 +48,7 @@ namespace Core2D.UnitTests
 
             var key = target.AddImageFromFile(@"C:/Images/image.jpg", new byte[] { });
 
-            Assert.Equal(Factory.ImageEntryNamePrefix + "image.jpg", key);
+            Assert.Equal("Images\\" + "image.jpg", key);
             Assert.Contains(target.Keys, item => item.Key == key);
             Assert.Equal("Keys", actual);
         }
@@ -65,7 +65,7 @@ namespace Core2D.UnitTests
                 count++;
             };
 
-            var key = Factory.ImageEntryNamePrefix + "image.jpg";
+            var key = "Images\\" + "image.jpg";
             var key1 = target.AddImageFromFile(@"C:/Images/image.jpg", new byte[] { });
             var key2 = target.AddImageFromFile(@"C:/Images/image.jpg", new byte[] { });
 
@@ -87,7 +87,7 @@ namespace Core2D.UnitTests
                 actual = e.PropertyName;
             };
 
-            var key = Factory.ImageEntryNamePrefix + "image.jpg";
+            var key = "Images\\" + "image.jpg";
 
             target.AddImage(key, new byte[] { });
 
@@ -108,7 +108,7 @@ namespace Core2D.UnitTests
                 count++;
             };
 
-            var key = Factory.ImageEntryNamePrefix + "image.jpg";
+            var key = "Images\\" + "image.jpg";
 
             target.AddImage(key, new byte[] { });
             target.AddImage(key, new byte[] { });
@@ -124,7 +124,7 @@ namespace Core2D.UnitTests
         {
             var project = new ProjectContainer();
 
-            var key = Factory.ImageEntryNamePrefix + "image.jpg";
+            var key = "Images\\" + "image.jpg";
             var data = new byte[] { 0x12, 0x34, 0x56, 0x78 };
 
             project.AddImage(key, data);
@@ -140,7 +140,7 @@ namespace Core2D.UnitTests
         {
             var project = new ProjectContainer();
 
-            var key = Factory.ImageEntryNamePrefix + "image.jpg";
+            var key = "Images\\" + "image.jpg";
 
             var target = project.GetImage(key);
 
@@ -159,7 +159,7 @@ namespace Core2D.UnitTests
                 count++;
             };
 
-            var key = Factory.ImageEntryNamePrefix + "image.jpg";
+            var key = "Images\\" + "image.jpg";
 
             target.AddImage(key, new byte[] { });
             target.RemoveImage(key);
@@ -180,9 +180,9 @@ namespace Core2D.UnitTests
                 count++;
             };
 
-            var key1 = Factory.ImageEntryNamePrefix + "image1.jpg";
-            var key2 = Factory.ImageEntryNamePrefix + "image2.jpg";
-            var key3 = Factory.ImageEntryNamePrefix + "image3.jpg";
+            var key1 = "Images\\" + "image1.jpg";
+            var key2 = "Images\\" + "image2.jpg";
+            var key3 = "Images\\" + "image3.jpg";
 
             target.AddImage(key1, new byte[] { });
             target.AddImage(key2, new byte[] { });
@@ -208,9 +208,9 @@ namespace Core2D.UnitTests
                 count++;
             };
 
-            var key1 = Factory.ImageEntryNamePrefix + "image1.jpg";
-            var key2 = Factory.ImageEntryNamePrefix + "image2.jpg";
-            var key3 = Factory.ImageEntryNamePrefix + "image3.jpg";
+            var key1 = "Images\\" + "image1.jpg";
+            var key2 = "Images\\" + "image2.jpg";
+            var key3 = "Images\\" + "image3.jpg";
 
             target.AddImage(key1, new byte[] { });
             target.AddImage(key2, new byte[] { });

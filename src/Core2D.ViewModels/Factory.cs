@@ -23,84 +23,6 @@ namespace Core2D
     public static class Factory
     {
         /// <summary>
-        /// Default Id column name.
-        /// </summary>
-        public const string DefaultIdColumnName = "Id";
-
-        /// <summary>
-        /// Project Json data entry name.
-        /// </summary>
-        public const string ProjectJsonEntryName = "Project.json";
-
-        /// <summary>
-        /// Image Key prefix entry name.
-        /// </summary>
-        public const string ImageEntryNamePrefix = "Images\\";
-
-        /// <summary>
-        /// Creates a new <see cref="IBaseShape"/> instance.
-        /// </summary>
-        /// <param name="pss">The point shape <see cref="IShapeStyle"/>.</param>
-        /// <returns>The new instance of the <see cref="IBaseShape"/> class.</returns>
-        public static IBaseShape EllipsePointShape(IShapeStyle pss)
-        {
-            var ellipse = CreateEllipseShape(-4, -4, 4, 4, pss, null, true, false);
-            ellipse.Name = "EllipsePoint";
-            return ellipse;
-        }
-
-        /// <summary>
-        /// Creates a new <see cref="IBaseShape"/> instance.
-        /// </summary>
-        /// <param name="pss">The point shape <see cref="IShapeStyle"/>.</param>
-        /// <returns>The new instance of the <see cref="IBaseShape"/> class.</returns>
-        public static IBaseShape FilledEllipsePointShape(IShapeStyle pss)
-        {
-            var ellipse = CreateEllipseShape(-3, -3, 3, 3, pss, null, true, true);
-            ellipse.Name = "FilledEllipsePoint";
-            return ellipse;
-        }
-
-        /// <summary>
-        /// Creates a new <see cref="IBaseShape"/> instance.
-        /// </summary>
-        /// <param name="pss">The point shape <see cref="IShapeStyle"/>.</param>
-        /// <returns>The new instance of the <see cref="IBaseShape"/> class.</returns>
-        public static IBaseShape RectanglePointShape(IShapeStyle pss)
-        {
-            var rectangle = CreateRectangleShape(-4, -4, 4, 4, pss, null, true, false);
-            rectangle.Name = "RectanglePoint";
-            return rectangle;
-        }
-
-        /// <summary>
-        /// Creates a new <see cref="IBaseShape"/> instance.
-        /// </summary>
-        /// <param name="pss">The point shape <see cref="IShapeStyle"/>.</param>
-        /// <returns>The new instance of the <see cref="IBaseShape"/> class.</returns>
-        public static IBaseShape FilledRectanglePointShape(IShapeStyle pss)
-        {
-            var rectangle = CreateRectangleShape(-3, -3, 3, 3, pss, null, true, true);
-            rectangle.Name = "FilledRectanglePoint";
-            return rectangle;
-        }
-
-        /// <summary>
-        /// Creates a new <see cref="IBaseShape"/> instance.
-        /// </summary>
-        /// <param name="pss">The point shape <see cref="IShapeStyle"/>.</param>
-        /// <returns>The new instance of the <see cref="IBaseShape"/> class.</returns>
-        public static IBaseShape CrossPointShape(IShapeStyle pss)
-        {
-            var group = CreateGroupShape("CrossPoint");
-            var builder = group.Shapes.ToBuilder();
-            builder.Add(CreateLineShape(-4, 0, 4, 0, pss, null));
-            builder.Add(CreateLineShape(0, -4, 0, 4, pss, null));
-            group.Shapes = builder.ToImmutable();
-            return group;
-        }
-
-        /// <summary>
         /// Creates a new instance of the <see cref="ILibrary{T}"/> class.
         /// </summary>
         /// <param name="name">The library name.</param>
@@ -262,7 +184,7 @@ namespace Core2D
         /// <param name="name">The database name.</param>
         /// <param name="idColumnName">The Id column name.</param>
         /// <returns>The new instance of the <see cref="IDatabase"/> class.</returns>
-        public static IDatabase CreateDatabase(string name, string idColumnName = DefaultIdColumnName)
+        public static IDatabase CreateDatabase(string name, string idColumnName = "Id")
         {
             return new Database()
             {
@@ -280,7 +202,7 @@ namespace Core2D
         /// <param name="columns">The database columns.</param>
         /// <param name="idColumnName">The Id column name.</param>
         /// <returns>The new instance of the <see cref="IDatabase"/> class.</returns>
-        public static IDatabase CreateDatabase(string name, ImmutableArray<IColumn> columns, string idColumnName = DefaultIdColumnName)
+        public static IDatabase CreateDatabase(string name, ImmutableArray<IColumn> columns, string idColumnName = "Id")
         {
             return new Database()
             {
@@ -299,7 +221,7 @@ namespace Core2D
         /// <param name="records">The database records.</param>
         /// <param name="idColumnName">The Id column name.</param>
         /// <returns>The new instance of the <see cref="IDatabase"/> class.</returns>
-        public static IDatabase CreateDatabase(string name, ImmutableArray<IColumn> columns, ImmutableArray<IRecord> records, string idColumnName = DefaultIdColumnName)
+        public static IDatabase CreateDatabase(string name, ImmutableArray<IColumn> columns, ImmutableArray<IRecord> records, string idColumnName = "Id")
         {
             return new Database()
             {
@@ -317,7 +239,7 @@ namespace Core2D
         /// <param name="fields">The fields collection.</param>
         /// <param name="idColumnName">The Id column name.</param>
         /// <returns>The new instance of the <see cref="IDatabase"/> class.</returns>
-        public static IDatabase FromFields(string name, IEnumerable<string[]> fields, string idColumnName = DefaultIdColumnName)
+        public static IDatabase FromFields(string name, IEnumerable<string[]> fields, string idColumnName = "Id")
         {
             var db = CreateDatabase(name, idColumnName);
             var tempColumns = fields.FirstOrDefault().Select(c => CreateColumn(db, c));
@@ -1482,6 +1404,44 @@ namespace Core2D
             };
         }
 
+        private static IBaseShape EllipsePointShape(IShapeStyle pss)
+        {
+            var ellipse = CreateEllipseShape(-4, -4, 4, 4, pss, null, true, false);
+            ellipse.Name = "EllipsePoint";
+            return ellipse;
+        }
+
+        private static IBaseShape FilledEllipsePointShape(IShapeStyle pss)
+        {
+            var ellipse = CreateEllipseShape(-3, -3, 3, 3, pss, null, true, true);
+            ellipse.Name = "FilledEllipsePoint";
+            return ellipse;
+        }
+
+        private static IBaseShape RectanglePointShape(IShapeStyle pss)
+        {
+            var rectangle = CreateRectangleShape(-4, -4, 4, 4, pss, null, true, false);
+            rectangle.Name = "RectanglePoint";
+            return rectangle;
+        }
+
+        private static IBaseShape FilledRectanglePointShape(IShapeStyle pss)
+        {
+            var rectangle = CreateRectangleShape(-3, -3, 3, 3, pss, null, true, true);
+            rectangle.Name = "FilledRectanglePoint";
+            return rectangle;
+        }
+
+        private static IBaseShape CrossPointShape(IShapeStyle pss)
+        {
+            var group = CreateGroupShape("CrossPoint");
+            var builder = group.Shapes.ToBuilder();
+            builder.Add(CreateLineShape(-4, 0, 4, 0, pss, null));
+            builder.Add(CreateLineShape(0, -4, 0, 4, pss, null));
+            group.Shapes = builder.ToImmutable();
+            return group;
+        }
+
         /// <summary>
         /// Creates a new <see cref="IOptions"/> instance.
         /// </summary>
@@ -1629,6 +1589,54 @@ namespace Core2D
             };
         }
 
+        private static IEnumerable<string> GetUsedKeys(IProjectContainer project)
+        {
+            return ProjectContainer.GetAllShapes<IImageShape>(project).Select(i => i.Key).Distinct();
+        }
+
+        private static IProjectContainer ReadProjectContainer(ZipArchiveEntry projectEntry, IFileSystem fileIO, IJsonSerializer serializer)
+        {
+            using (var entryStream = projectEntry.Open())
+            {
+                return serializer.Deserialize<ProjectContainer>(fileIO.ReadUtf8Text(entryStream));
+            }
+        }
+
+        private static void WriteProjectContainer(IProjectContainer project, ZipArchiveEntry projectEntry, IFileSystem fileIO, IJsonSerializer serializer)
+        {
+            using (var jsonStream = projectEntry.Open())
+            {
+                fileIO.WriteUtf8Text(jsonStream, serializer.Serialize(project));
+            }
+        }
+
+        private static void ReadImages(IImageCache cache, ZipArchive archive, IFileSystem fileIO)
+        {
+            foreach (var entry in archive.Entries)
+            {
+                if (entry.FullName.StartsWith("Images\\"))
+                {
+                    using (var entryStream = entry.Open())
+                    {
+                        var bytes = fileIO.ReadBinary(entryStream);
+                        cache.AddImage(entry.FullName, bytes);
+                    }
+                }
+            }
+        }
+
+        private static void WriteImages(IImageCache cache, IEnumerable<string> keys, ZipArchive archive, IFileSystem fileIO)
+        {
+            foreach (var key in keys)
+            {
+                var imageEntry = archive.CreateEntry(key);
+                using (var imageStream = imageEntry.Open())
+                {
+                    fileIO.WriteBinary(imageStream, cache.GetImage(key));
+                }
+            }
+        }
+
         /// <summary>
         /// Opens project container.
         /// </summary>
@@ -1673,7 +1681,7 @@ namespace Core2D
         {
             using (var archive = new ZipArchive(stream, ZipArchiveMode.Read))
             {
-                var projectEntry = archive.Entries.FirstOrDefault(e => e.FullName == ProjectJsonEntryName);
+                var projectEntry = archive.Entries.FirstOrDefault(e => e.FullName == "Project.json");
                 var project = ReadProjectContainer(projectEntry, fileIO, serializer);
                 if (project is IImageCache imageCache)
                 {
@@ -1695,58 +1703,10 @@ namespace Core2D
         {
             using (var archive = new ZipArchive(stream, ZipArchiveMode.Create))
             {
-                var projectEntry = archive.CreateEntry(ProjectJsonEntryName);
+                var projectEntry = archive.CreateEntry("Project.json");
                 WriteProjectContainer(project, projectEntry, fileIO, serializer);
                 var keys = GetUsedKeys(project);
                 WriteImages(imageCache, keys, archive, fileIO);
-            }
-        }
-
-        private static IEnumerable<string> GetUsedKeys(IProjectContainer project)
-        {
-            return ProjectContainer.GetAllShapes<IImageShape>(project).Select(i => i.Key).Distinct();
-        }
-
-        private static IProjectContainer ReadProjectContainer(ZipArchiveEntry projectEntry, IFileSystem fileIO, IJsonSerializer serializer)
-        {
-            using (var entryStream = projectEntry.Open())
-            {
-                return serializer.Deserialize<ProjectContainer>(fileIO.ReadUtf8Text(entryStream));
-            }
-        }
-
-        private static void WriteProjectContainer(IProjectContainer project, ZipArchiveEntry projectEntry, IFileSystem fileIO, IJsonSerializer serializer)
-        {
-            using (var jsonStream = projectEntry.Open())
-            {
-                fileIO.WriteUtf8Text(jsonStream, serializer.Serialize(project));
-            }
-        }
-
-        private static void ReadImages(IImageCache cache, ZipArchive archive, IFileSystem fileIO)
-        {
-            foreach (var entry in archive.Entries)
-            {
-                if (entry.FullName.StartsWith(ImageEntryNamePrefix))
-                {
-                    using (var entryStream = entry.Open())
-                    {
-                        var bytes = fileIO.ReadBinary(entryStream);
-                        cache.AddImage(entry.FullName, bytes);
-                    }
-                }
-            }
-        }
-
-        private static void WriteImages(IImageCache cache, IEnumerable<string> keys, ZipArchive archive, IFileSystem fileIO)
-        {
-            foreach (var key in keys)
-            {
-                var imageEntry = archive.CreateEntry(key);
-                using (var imageStream = imageEntry.Open())
-                {
-                    fileIO.WriteBinary(imageStream, cache.GetImage(key));
-                }
             }
         }
     }
