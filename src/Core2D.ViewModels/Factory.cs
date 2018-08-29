@@ -105,7 +105,13 @@ namespace Core2D
         /// </summary>
         /// <param name="name">The library name.</param>
         /// <returns>The new instance of the <see cref="ILibrary{T}"/> class.</returns>
-        public static ILibrary<T> CreateLibrary<T>(string name) => new Library<T>() { Name = name };
+        public static ILibrary<T> CreateLibrary<T>(string name)
+        {
+            return new Library<T>()
+            {
+                Name = name
+            };
+        }
 
         /// <summary>
         /// Creates a new instance of the <see cref="ILibrary{T}"/> class.
@@ -128,7 +134,13 @@ namespace Core2D
         /// </summary>
         /// <param name="content">The value content.</param>
         /// <returns>The new instance of the <see cref="IValue"/> class.</returns>
-        public static IValue CreateValue(string content) => new Value() { Content = content };
+        public static IValue CreateValue(string content)
+        {
+            return new Value()
+            {
+                Content = content
+            };
+        }
 
         /// <summary>
         /// Creates a new <see cref="IProperty"/> instance.
@@ -226,14 +238,23 @@ namespace Core2D
         /// Creates a new <see cref="IContext"/> instance.
         /// </summary>
         /// <returns>The new instance of the <see cref="IContext"/> class.</returns>
-        public static IContext CreateContext() => new Context();
+        public static IContext CreateContext()
+        {
+            return new Context();
+        }
 
         /// <summary>
         /// Creates a new <see cref="Context"/> instance.
         /// </summary>
         /// <param name="record">The record instance.</param>
         /// <returns>The new instance of the <see cref="Context"/> class.</returns>
-        public static IContext CreateContext(IRecord record) => new Context() { Record = record };
+        public static IContext CreateContext(IRecord record)
+        {
+            return new Context()
+            {
+                Record = record
+            };
+        }
 
         /// <summary>
         /// Creates a new <see cref="IDatabase"/> instance.
