@@ -12,7 +12,7 @@ namespace Core2D.Renderer.Dxf
     /// <summary>
     /// netDxf dxf <see cref="IProjectExporter"/> implementation.
     /// </summary>
-    public partial class DxfRenderer : ShapeRenderer, IProjectExporter
+    public partial class DxfRenderer : IProjectExporter
     {
         /// <inheritdoc/>
         void IProjectExporter.Save(string path, IPageContainer container)

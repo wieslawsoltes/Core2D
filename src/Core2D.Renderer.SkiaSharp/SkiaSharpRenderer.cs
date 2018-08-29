@@ -15,7 +15,7 @@ namespace Core2D.Renderer.SkiaSharp
     /// <summary>
     /// Native SkiaSharp shape renderer.
     /// </summary>
-    public class SkiaSharpRenderer : ShapeRenderer
+    public class SkiaSharpRenderer : ObservableObject, IShapeRenderer
     {
         private readonly IServiceProvider _serviceProvider;
         private IShapeRendererState _state;
@@ -381,7 +381,7 @@ namespace Core2D.Renderer.SkiaSharp
         }
 
         /// <inheritdoc/>
-        public override void ClearCache(bool isZooming)
+        public void ClearCache(bool isZooming)
         {
             if (!isZooming)
             {
@@ -390,7 +390,7 @@ namespace Core2D.Renderer.SkiaSharp
         }
 
         /// <inheritdoc/>
-        public override void Fill(object dc, double x, double y, double width, double height, IColor color)
+        public void Fill(object dc, double x, double y, double width, double height, IColor color)
         {
             var canvas = dc as SKCanvas;
             var rect = SKRect.Create((float)x, (float)y, (float)width, (float)height);
@@ -401,7 +401,7 @@ namespace Core2D.Renderer.SkiaSharp
         }
 
         /// <inheritdoc/>
-        public override object PushMatrix(object dc, IMatrixObject matrix)
+        public object PushMatrix(object dc, IMatrixObject matrix)
         {
             var canvas = dc as SKCanvas;
             int count = canvas.Save();
@@ -410,7 +410,7 @@ namespace Core2D.Renderer.SkiaSharp
         }
 
         /// <inheritdoc/>
-        public override void PopMatrix(object dc, object state)
+        public void PopMatrix(object dc, object state)
         {
             var canvas = dc as SKCanvas;
             var count = (int)state;
@@ -418,7 +418,31 @@ namespace Core2D.Renderer.SkiaSharp
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, ILineShape line, double dx, double dy, object db, object r)
+        public void Draw(object dc, IPageContainer container, double dx, double dy, object db, object r)
+        {
+            foreach (var layer in container.Layers)
+            {
+                if (layer.IsVisible)
+                {
+                    Draw(dc, layer, dx, dy, db, r);
+                }
+            }
+        }
+
+        /// <inheritdoc/>
+        public void Draw(object dc, ILayerContainer layer, double dx, double dy, object db, object r)
+        {
+            foreach (var shape in layer.Shapes)
+            {
+                if (shape.State.Flags.HasFlag(State.DrawShapeState.Flags))
+                {
+                    shape.Draw(dc, this, dx, dy, db, r);
+                }
+            }
+        }
+
+        /// <inheritdoc/>
+        public void Draw(object dc, ILineShape line, double dx, double dy, object db, object r)
         {
             var canvas = dc as SKCanvas;
 
@@ -445,7 +469,7 @@ namespace Core2D.Renderer.SkiaSharp
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, IRectangleShape rectangle, double dx, double dy, object db, object r)
+        public void Draw(object dc, IRectangleShape rectangle, double dx, double dy, object db, object r)
         {
             var canvas = dc as SKCanvas;
 
@@ -470,7 +494,7 @@ namespace Core2D.Renderer.SkiaSharp
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, IEllipseShape ellipse, double dx, double dy, object db, object r)
+        public void Draw(object dc, IEllipseShape ellipse, double dx, double dy, object db, object r)
         {
             var canvas = dc as SKCanvas;
 
@@ -483,7 +507,7 @@ namespace Core2D.Renderer.SkiaSharp
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, IArcShape arc, double dx, double dy, object db, object r)
+        public void Draw(object dc, IArcShape arc, double dx, double dy, object db, object r)
         {
             var canvas = dc as SKCanvas;
 
@@ -507,7 +531,7 @@ namespace Core2D.Renderer.SkiaSharp
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, ICubicBezierShape cubicBezier, double dx, double dy, object db, object r)
+        public void Draw(object dc, ICubicBezierShape cubicBezier, double dx, double dy, object db, object r)
         {
             var canvas = dc as SKCanvas;
 
@@ -530,7 +554,7 @@ namespace Core2D.Renderer.SkiaSharp
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, IQuadraticBezierShape quadraticBezier, double dx, double dy, object db, object r)
+        public void Draw(object dc, IQuadraticBezierShape quadraticBezier, double dx, double dy, object db, object r)
         {
             var canvas = dc as SKCanvas;
 
@@ -551,7 +575,7 @@ namespace Core2D.Renderer.SkiaSharp
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, ITextShape text, double dx, double dy, object db, object r)
+        public void Draw(object dc, ITextShape text, double dx, double dy, object db, object r)
         {
             var canvas = dc as SKCanvas;
 
@@ -604,7 +628,7 @@ namespace Core2D.Renderer.SkiaSharp
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, IImageShape image, double dx, double dy, object db, object r)
+        public void Draw(object dc, IImageShape image, double dx, double dy, object db, object r)
         {
             var canvas = dc as SKCanvas;
 
@@ -642,7 +666,7 @@ namespace Core2D.Renderer.SkiaSharp
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, IPathShape path, double dx, double dy, object db, object r)
+        public void Draw(object dc, IPathShape path, double dx, double dy, object db, object r)
         {
             var canvas = dc as SKCanvas;
 
