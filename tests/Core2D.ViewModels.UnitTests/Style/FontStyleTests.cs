@@ -8,6 +8,8 @@ namespace Core2D.Style.UnitTests
 {
     public class FontStyleTests
     {
+        private readonly IFactory _factory = new Factory();
+
         [Fact]
         [Trait("Core2D.Style", "Style")]
         public void Inherits_From_ObservableObject()
@@ -131,7 +133,7 @@ namespace Core2D.Style.UnitTests
         [Trait("Core2D.Style", "Style")]
         public void ToString_Should_Return_Flags_String()
         {
-            var target = Factory.CreateFontStyle(
+            var target = _factory.CreateFontStyle(
                 FontStyleFlags.Bold
                 | FontStyleFlags.Italic
                 | FontStyleFlags.Strikeout);

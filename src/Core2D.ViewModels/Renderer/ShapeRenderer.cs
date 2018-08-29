@@ -11,21 +11,6 @@ namespace Core2D.Renderer
     /// </summary>
     public abstract class ShapeRenderer : ObservableObject, IShapeRenderer
     {
-        private IShapeRendererState _state = Factory.CreateShapeRendererState();
-
-        /// <inheritdoc/>
-        public virtual IShapeRendererState State
-        {
-            get => _state;
-            set => Update(ref _state, value);
-        }
-
-        /// <summary>
-        /// Check whether the <see cref="State"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeState() => _state != null;
-
         /// <inheritdoc/>
         public virtual void ClearCache(bool isZooming) { }
 

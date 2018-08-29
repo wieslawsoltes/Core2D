@@ -7,6 +7,8 @@ namespace Core2D.UnitTests
 {
     public class LibraryOfTTests
     {
+        private readonly IFactory _factory = new Factory();
+
         [Fact]
         [Trait("Core2D.Containers", "Project")]
         public void Inherits_From_ObservableObject()
@@ -37,7 +39,7 @@ namespace Core2D.UnitTests
         {
             var target = new Library<IPageContainer>();
 
-            var item = Factory.CreateTemplateContainer();
+            var item = _factory.CreateTemplateContainer();
             target.Items = target.Items.Add(item);
 
             target.SetSelected(item);

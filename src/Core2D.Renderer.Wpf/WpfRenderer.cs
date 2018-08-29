@@ -23,6 +23,7 @@ namespace Core2D.Renderer.Wpf
     public class WpfRenderer : ShapeRenderer
     {
         private readonly IServiceProvider _serviceProvider;
+        private IShapeRendererState _state;
         private ICache<IShapeStyle, (WM.Brush, WM.Pen)> _styleCache;
         private ICache<IArrowStyle, (WM.Brush, WM.Pen)> _arrowStyleCache;
         private ICache<ILineShape, WM.PathGeometry> _curvedLineCache;
@@ -33,6 +34,13 @@ namespace Core2D.Renderer.Wpf
         private ICache<string, WMI.BitmapImage> _biCache;
         private ICache<IPathShape, (Path.IPathGeometry, WM.StreamGeometry, IShapeStyle)> _pathCache;
 
+        /// <inheritdoc/>
+        public IShapeRendererState State
+        {
+            get => _state;
+            set => Update(ref _state, value);
+        }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="WpfRenderer"/> class.
         /// </summary>
@@ -40,7 +48,7 @@ namespace Core2D.Renderer.Wpf
         public WpfRenderer(IServiceProvider serviceProvider)
         {
             _serviceProvider = serviceProvider;
-
+            _state = _serviceProvider.GetService<IFactory>().CreateShapeRendererState();
             _styleCache = _serviceProvider.GetService<IFactory>().CreateCache<IShapeStyle, (WM.Brush, WM.Pen)>();
             _arrowStyleCache = _serviceProvider.GetService<IFactory>().CreateCache<IArrowStyle, (WM.Brush, WM.Pen)>();
             _curvedLineCache = _serviceProvider.GetService<IFactory>().CreateCache<ILineShape, WM.PathGeometry>();
@@ -50,7 +58,6 @@ namespace Core2D.Renderer.Wpf
             _textCache = _serviceProvider.GetService<IFactory>().CreateCache<ITextShape, (string, WM.FormattedText, IShapeStyle)>();
             _biCache = _serviceProvider.GetService<IFactory>().CreateCache<string, WMI.BitmapImage>(bi => bi.StreamSource.Dispose());
             _pathCache = _serviceProvider.GetService<IFactory>().CreateCache<IPathShape, (Path.IPathGeometry, WM.StreamGeometry, IShapeStyle)>();
-
             ClearCache(isZooming: false);
         }
 
@@ -919,5 +926,11 @@ namespace Core2D.Renderer.Wpf
                 _dc.DrawGeometry(path.IsFilled ? fill : null, path.IsStroked ? stroke : null, sg);
             }
         }
+
+        /// <summary>
+        /// Check whether the <see cref="State"/> property has changed from its default value.
+        /// </summary>
+        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
+        public bool ShouldSerializeState() => _state != null;
     }
 }

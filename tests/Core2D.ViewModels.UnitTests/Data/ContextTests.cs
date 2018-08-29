@@ -7,6 +7,8 @@ namespace Core2D.Data.UnitTests
 {
     public class ContextTests
     {
+        private readonly IFactory _factory = new Factory();
+
         [Fact]
         [Trait("Core2D.Data", "Database")]
         public void Inherits_From_ObservableObject()
@@ -36,7 +38,7 @@ namespace Core2D.Data.UnitTests
         public void This_Operator_Returns_Property_Value()
         {
             var target = new Context();
-            target.Properties = target.Properties.Add(Factory.CreateProperty(target, "Name1", "Value1"));
+            target.Properties = target.Properties.Add(_factory.CreateProperty(target, "Name1", "Value1"));
 
             Assert.Equal("Value1", target["Name1"]);
         }
@@ -46,7 +48,7 @@ namespace Core2D.Data.UnitTests
         public void This_Operator_Sets_Property_Value()
         {
             var target = new Context();
-            target.Properties = target.Properties.Add(Factory.CreateProperty(target, "Name1", "Value1"));
+            target.Properties = target.Properties.Add(_factory.CreateProperty(target, "Name1", "Value1"));
 
             target["Name1"] = "NewValue1";
             Assert.Equal("NewValue1", target["Name1"]);

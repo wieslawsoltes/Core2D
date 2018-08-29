@@ -9,6 +9,8 @@ namespace Core2D.UnitTests
 {
     public class PageContainerTests
     {
+        private readonly IFactory _factory = new Factory();
+
         [Fact]
         [Trait("Core2D.Containers", "Project")]
         public void Inherits_From_ObservableObject()
@@ -31,7 +33,7 @@ namespace Core2D.UnitTests
         {
             var target = new Class1();
 
-            var layer = Factory.CreateLayerContainer("Layer1", target);
+            var layer = _factory.CreateLayerContainer("Layer1", target);
             target.Layers = target.Layers.Add(layer);
 
             target.SetCurrentLayer(layer);
@@ -45,13 +47,13 @@ namespace Core2D.UnitTests
         {
             var target = new Class1();
 
-            var layer1 = Factory.CreateLayerContainer("Layer1", target);
-            var layer2 = Factory.CreateLayerContainer("Layer2", target);
+            var layer1 = _factory.CreateLayerContainer("Layer1", target);
+            var layer2 = _factory.CreateLayerContainer("Layer2", target);
             target.Layers = target.Layers.Add(layer1);
             target.Layers = target.Layers.Add(layer2);
 
-            var workingLayer = Factory.CreateLayerContainer("WorkingLayer", target);
-            var helperLayer = Factory.CreateLayerContainer("HelperLayer", target);
+            var workingLayer = _factory.CreateLayerContainer("WorkingLayer", target);
+            var helperLayer = _factory.CreateLayerContainer("HelperLayer", target);
             target.WorkingLayer = workingLayer;
             target.HelperLayer = helperLayer;
 
@@ -105,10 +107,10 @@ namespace Core2D.UnitTests
         {
             var target = new Class1()
             {
-                Background = Factory.CreateArgbColor(),
+                Background = _factory.CreateArgbColor(),
                 Template = new Class1()
                 {
-                    Background = Factory.CreateArgbColor()
+                    Background = _factory.CreateArgbColor()
                 }
             };
 
@@ -136,7 +138,7 @@ namespace Core2D.UnitTests
         public void This_Operator_Returns_Property_Value()
         {
             var target = new PageContainer();
-            target.Data.Properties = target.Data.Properties.Add(Factory.CreateProperty(target.Data, "Name1", "Value1"));
+            target.Data.Properties = target.Data.Properties.Add(_factory.CreateProperty(target.Data, "Name1", "Value1"));
 
             Assert.Equal("Value1", target["Name1"]);
         }
@@ -146,7 +148,7 @@ namespace Core2D.UnitTests
         public void This_Operator_Sets_Property_Value()
         {
             var target = new PageContainer();
-            target.Data.Properties = target.Data.Properties.Add(Factory.CreateProperty(target.Data, "Name1", "Value1"));
+            target.Data.Properties = target.Data.Properties.Add(_factory.CreateProperty(target.Data, "Name1", "Value1"));
 
             target["Name1"] = "NewValue1";
             Assert.Equal("NewValue1", target["Name1"]);
@@ -174,7 +176,7 @@ namespace Core2D.UnitTests
                 Template = new PageContainer()
             };
 
-            var layer = Factory.CreateLayerContainer("Layer1", target);
+            var layer = _factory.CreateLayerContainer("Layer1", target);
             target.Template.Layers = target.Template.Layers.Add(layer);
 
             bool raised = false;

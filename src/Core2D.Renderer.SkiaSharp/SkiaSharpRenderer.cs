@@ -18,11 +18,19 @@ namespace Core2D.Renderer.SkiaSharp
     public class SkiaSharpRenderer : ShapeRenderer
     {
         private readonly IServiceProvider _serviceProvider;
+        private IShapeRendererState _state;
         private bool _isAntialias = true;
         private ICache<string, SKBitmap> _biCache;
         private readonly Func<double, float> _scaleToPage;
         private readonly double _sourceDpi = 96.0;
         private readonly double _targetDpi = 72.0;
+
+        /// <inheritdoc/>
+        public IShapeRendererState State
+        {
+            get => _state;
+            set => Update(ref _state, value);
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SkiaSharpRenderer"/> class.
@@ -33,14 +41,12 @@ namespace Core2D.Renderer.SkiaSharp
         public SkiaSharpRenderer(IServiceProvider serviceProvider, bool isAntialias = true, double targetDpi = 72.0)
         {
             _serviceProvider = serviceProvider;
-
+            _state = _serviceProvider.GetService<IFactory>().CreateShapeRendererState();
             _biCache = _serviceProvider.GetService<IFactory>().CreateCache<string, SKBitmap>(bi => bi.Dispose())
-
-            ClearCache(isZooming: false);
-
             _isAntialias = isAntialias;
             _scaleToPage = (value) => (float)(value * 1.0);
             _targetDpi = targetDpi;
+            ClearCache(isZooming: false);
         }
 
         /// <inheritdoc/>
@@ -647,5 +653,11 @@ namespace Core2D.Renderer.SkiaSharp
                 DrawPathInternal(canvas, brush, pen, path.IsStroked, path.IsFilled, spath);
             }
         }
+
+        /// <summary>
+        /// Check whether the <see cref="State"/> property has changed from its default value.
+        /// </summary>
+        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
+        public bool ShouldSerializeState() => _state != null;
     }
 }

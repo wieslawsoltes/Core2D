@@ -17,10 +17,18 @@ namespace Core2D.Renderer.PdfSharp
     public partial class PdfSharpRenderer : ShapeRenderer
     {
         private readonly IServiceProvider _serviceProvider;
+        private IShapeRendererState _state;
         private ICache<string, XImage> _biCache;
         private Func<double, double> _scaleToPage;
         private double _sourceDpi = 96.0;
         private double _targetDpi = 72.0;
+
+        /// <inheritdoc/>
+        public IShapeRendererState State
+        {
+            get => _state;
+            set => Update(ref _state, value);
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="PdfSharpRenderer"/> class.
@@ -29,12 +37,10 @@ namespace Core2D.Renderer.PdfSharp
         public PdfSharpRenderer(IServiceProvider serviceProvider)
         {
             _serviceProvider = serviceProvider;
-
+            _state = _serviceProvider.GetService<IFactory>().CreateShapeRendererState();
             _biCache = _serviceProvider.GetService<IFactory>().CreateCache<string, XImage>(bi => bi.Dispose())
-
-            ClearCache(isZooming: false);
-
             _scaleToPage = (value) => (float)(value * 1.0);
+            ClearCache(isZooming: false);
         }
 
         /// <inheritdoc/>
@@ -782,5 +788,11 @@ namespace Core2D.Renderer.PdfSharp
                     gp);
             }
         }
+
+        /// <summary>
+        /// Check whether the <see cref="State"/> property has changed from its default value.
+        /// </summary>
+        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
+        public bool ShouldSerializeState() => _state != null;
     }
 }

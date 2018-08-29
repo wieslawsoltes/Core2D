@@ -23,6 +23,7 @@ namespace Core2D.Renderer.Dxf
     public partial class DxfRenderer : ShapeRenderer
     {
         private readonly IServiceProvider _serviceProvider;
+        private IShapeRendererState _state;
         private ICache<string, DXFO.ImageDefinition> _biCache;
         private double _pageWidth;
         private double _pageHeight;
@@ -31,6 +32,13 @@ namespace Core2D.Renderer.Dxf
         private double _sourceDpi = 96.0;
         private double _targetDpi = 72.0;
 
+        /// <inheritdoc/>
+        public IShapeRendererState State
+        {
+            get => _state;
+            set => Update(ref _state, value);
+        }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="DxfRenderer"/> class.
         /// </summary>
@@ -38,9 +46,8 @@ namespace Core2D.Renderer.Dxf
         public DxfRenderer(IServiceProvider serviceProvider)
         {
             _serviceProvider = serviceProvider;
-
+            _state = _serviceProvider.GetService<IFactory>().CreateShapeRendererState();
             _biCache = _serviceProvider.GetService<IFactory>().CreateCache<string, DXFO.ImageDefinition>();
-
             ClearCache(isZooming: false);
         }
 
@@ -1019,5 +1026,11 @@ namespace Core2D.Renderer.Dxf
                 }
             }
         }
+
+        /// <summary>
+        /// Check whether the <see cref="State"/> property has changed from its default value.
+        /// </summary>
+        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
+        public bool ShouldSerializeState() => _state != null;
     }
 }

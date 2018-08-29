@@ -48,15 +48,7 @@ namespace Core2D.UI.Wpf.Converters
         /// <returns>A converted value.</returns>
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value is SolidColorBrush brush && value != DependencyProperty.UnsetValue)
-            {
-                return Factory.CreateArgbColor(
-                    brush.Color.A,
-                    brush.Color.R,
-                    brush.Color.G,
-                    brush.Color.B);
-            }
-            return DependencyProperty.UnsetValue;
+            throw new NotImplementedException();
         }
     }
 }

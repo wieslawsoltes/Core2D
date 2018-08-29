@@ -22,6 +22,7 @@ namespace Core2D.Renderer.Avalonia
     public class AvaloniaRenderer : ShapeRenderer
     {
         private readonly IServiceProvider _serviceProvider;
+        private IShapeRendererState _state;
         private ICache<IShapeStyle, (AM.IBrush, AM.Pen)> _styleCache;
         private ICache<IArrowStyle, (AM.IBrush, AM.Pen)> _arrowStyleCache;
         // TODO: Add LineShape cache.
@@ -35,6 +36,13 @@ namespace Core2D.Renderer.Avalonia
         private readonly Func<double, float> _scaleToPage;
         private readonly double _textScaleFactor;
 
+        /// <inheritdoc/>
+        public IShapeRendererState State
+        {
+            get => _state;
+            set => Update(ref _state, value);
+        }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="AvaloniaRenderer"/> class.
         /// </summary>
@@ -43,16 +51,14 @@ namespace Core2D.Renderer.Avalonia
         public AvaloniaRenderer(IServiceProvider serviceProvider, double textScaleFactor = 1.0)
         {
             _serviceProvider = serviceProvider;
-
+            _state = _serviceProvider.GetService<IFactory>().CreateShapeRendererState();
             _styleCache = _serviceProvider.GetService<IFactory>().CreateCache<IShapeStyle, (AM.IBrush, AM.Pen)>()
             _arrowStyleCache = _serviceProvider.GetService<IFactory>().CreateCache<IArrowStyle, (AM.IBrush, AM.Pen)>();
             _textCache = _serviceProvider.GetService<IFactory>().CreateCache<ITextShape, (string, AM.FormattedText, IShapeStyle)>();
             _biCache = _serviceProvider.GetService<IFactory>().CreateCache<string, AMI.Bitmap>(bi => bi.Dispose());
-
-            ClearCache(isZooming: false);
-
             _textScaleFactor = textScaleFactor;
             _scaleToPage = (value) => (float)(value);
+            ClearCache(isZooming: false);
         }
 
         /// <inheritdoc/>

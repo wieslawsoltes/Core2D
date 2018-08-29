@@ -19,9 +19,17 @@ namespace Core2D.Renderer.WinForms
     public class WinFormsRenderer : ShapeRenderer
     {
         private readonly IServiceProvider _serviceProvider;
+        private IShapeRendererState _state;
         private ICache<string, Image> _biCache;
         private readonly Func<double, float> _scaleToPage;
         private readonly double _textScaleFactor;
+
+        /// <inheritdoc/>
+        public IShapeRendererState State
+        {
+            get => _state;
+            set => Update(ref _state, value);
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="WinFormsRenderer"/> class.
@@ -31,13 +39,11 @@ namespace Core2D.Renderer.WinForms
         public WinFormsRenderer(IServiceProvider serviceProvider, double textScaleFactor = 1.0)
         {
             _serviceProvider = serviceProvider;
-
+            _state = _serviceProvider.GetService<IFactory>().CreateShapeRendererState();
             _biCache = _serviceProvider.GetService<IFactory>().CreateCache<string, Image>(bi => bi.Dispose())
-
-            ClearCache(isZooming: false);
-
             _textScaleFactor = textScaleFactor;
             _scaleToPage = (value) => (float)(value);
+            ClearCache(isZooming: false);
         }
 
         /// <inheritdoc/>
@@ -805,5 +811,11 @@ namespace Core2D.Renderer.WinForms
                 pen.Dispose();
             }
         }
+
+        /// <summary>
+        /// Check whether the <see cref="State"/> property has changed from its default value.
+        /// </summary>
+        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
+        public bool ShouldSerializeState() => _state != null;
     }
 }

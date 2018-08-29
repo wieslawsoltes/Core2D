@@ -7,6 +7,8 @@ namespace Core2D.Data.UnitTests
 {
     public class DatabaseTests
     {
+        private readonly IFactory _factory = new Factory();
+
         [Fact]
         [Trait("Core2D.Data", "Database")]
         public void Inherits_From_ObservableObject()
@@ -42,7 +44,7 @@ namespace Core2D.Data.UnitTests
                 new string[] { "547fe8cf-b3ab-4abb-843b-acb3df0f7ad1", "Row1Value0", "Row1Value1", "Row1Value2" }
             };
 
-            var target = Factory.FromFields("Test", fields, "Id");
+            var target = _factory.FromFields("Test", fields, "Id");
 
             Assert.Equal("Id", target.IdColumnName);
 
@@ -70,7 +72,7 @@ namespace Core2D.Data.UnitTests
                 new string[] { "Row1Value0", "Row1Value1", "Row1Value2" }
             };
 
-            var target = Factory.FromFields("Test", fields);
+            var target = _factory.FromFields("Test", fields);
 
             Assert.Equal(3, target.Columns.Length);
 
@@ -101,7 +103,7 @@ namespace Core2D.Data.UnitTests
                 new string[] { "Row2Value0", "Row2Value1", "Row2Value2" }
             };
 
-            var destination = Factory.FromFields("Destination", destinationFields, "Id");
+            var destination = _factory.FromFields("Destination", destinationFields, "Id");
 
             var sourceFields = new string[][]
             {
@@ -116,7 +118,7 @@ namespace Core2D.Data.UnitTests
                 new string[] { "410b0378-8ea5-4a21-8260-9aa929b2a57b", "Row4Value0", "Row4Value1", "Row4Value2" }
             };
 
-            var source = Factory.FromFields("Source", sourceFields, "Id");
+            var source = _factory.FromFields("Source", sourceFields, "Id");
 
             bool isDirty = destination.Update(source, out var target);
 

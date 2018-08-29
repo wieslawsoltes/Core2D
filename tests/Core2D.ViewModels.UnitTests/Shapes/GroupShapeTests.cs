@@ -11,6 +11,8 @@ namespace Core2D.Shapes.UnitTests
 {
     public class GroupShapeTests
     {
+        private readonly IFactory _factory = new Factory();
+
         [Fact]
         [Trait("Core2D.Shapes", "Shapes")]
         public void Inherits_From_ConnectableShape()
@@ -113,7 +115,7 @@ namespace Core2D.Shapes.UnitTests
             var shapes = new List<IBaseShape>{ shape1, shape2, point1, point2 };
             var source = shapes.ToList();
 
-            var target = Factory.CreateGroupShape("g");
+            var target = _factory.CreateGroupShape("g");
             target.Group(shapes, source);
 
             Assert.Equal("g", target.Name);
@@ -148,7 +150,7 @@ namespace Core2D.Shapes.UnitTests
             var shapes = new BaseShape[] { shape1, shape2, point1, point2 };
             var source = shapes.ToList();
 
-            var target = Factory.CreateGroupShape("g");
+            var target = _factory.CreateGroupShape("g");
             target.Group(shapes, null);
 
             Assert.Contains(shape1, source);

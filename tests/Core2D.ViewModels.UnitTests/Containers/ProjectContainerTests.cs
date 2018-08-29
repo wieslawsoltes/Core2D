@@ -10,6 +10,8 @@ namespace Core2D.UnitTests
 {
     public class ProjectContainerTests
     {
+        private readonly IFactory _factory = new Factory();
+
         [Fact]
         [Trait("Core2D.Containers", "Project")]
         public void Inherits_From_Selectable()
@@ -72,7 +74,7 @@ namespace Core2D.UnitTests
         {
             var target = new ProjectContainer();
 
-            var document = Factory.CreateDocumentContainer();
+            var document = _factory.CreateDocumentContainer();
             target.Documents = target.Documents.Add(document);
 
             target.SetCurrentDocument(document);
@@ -86,10 +88,10 @@ namespace Core2D.UnitTests
         {
             var target = new ProjectContainer();
 
-            var document = Factory.CreateDocumentContainer();
+            var document = _factory.CreateDocumentContainer();
             target.Documents = target.Documents.Add(document);
 
-            var page = Factory.CreatePageContainer();
+            var page = _factory.CreatePageContainer();
             document.Pages = document.Pages.Add(page);
 
             target.SetCurrentContainer(page);
@@ -104,7 +106,7 @@ namespace Core2D.UnitTests
         {
             var target = new ProjectContainer();
 
-            var template = Factory.CreateTemplateContainer();
+            var template = _factory.CreateTemplateContainer();
             target.Templates = target.Templates.Add(template);
 
             target.SetCurrentTemplate(template);
@@ -118,7 +120,7 @@ namespace Core2D.UnitTests
         {
             var target = new ProjectContainer();
 
-            var db = Factory.CreateDatabase("Db");
+            var db = _factory.CreateDatabase("Db");
             target.Databases = target.Databases.Add(db);
 
             target.SetCurrentDatabase(db);
@@ -132,7 +134,7 @@ namespace Core2D.UnitTests
         {
             var target = new ProjectContainer();
 
-            var library = Factory.CreateLibrary<IGroupShape>("Library1");
+            var library = _factory.CreateLibrary<IGroupShape>("Library1");
             target.GroupLibraries = target.GroupLibraries.Add(library);
 
             target.SetCurrentGroupLibrary(library);
@@ -146,7 +148,7 @@ namespace Core2D.UnitTests
         {
             var target = new ProjectContainer();
 
-            var library = Factory.CreateLibrary<IShapeStyle>("Library1");
+            var library = _factory.CreateLibrary<IShapeStyle>("Library1");
             target.StyleLibraries = target.StyleLibraries.Add(library);
 
             target.SetCurrentStyleLibrary(library);
@@ -161,7 +163,7 @@ namespace Core2D.UnitTests
             var target = new ProjectContainer();
 
             var page = new PageContainer();
-            var layer = Factory.CreateLayerContainer("Layer1", page);
+            var layer = _factory.CreateLayerContainer("Layer1", page);
 
             target.SetSelected(layer);
 
@@ -174,13 +176,13 @@ namespace Core2D.UnitTests
         {
             var target = new ProjectContainer();
 
-            var document = Factory.CreateDocumentContainer();
+            var document = _factory.CreateDocumentContainer();
             target.Documents = target.Documents.Add(document);
 
-            var page = Factory.CreatePageContainer();
+            var page = _factory.CreatePageContainer();
             document.Pages = document.Pages.Add(page);
 
-            var layer = Factory.CreateLayerContainer("Layer1", page);
+            var layer = _factory.CreateLayerContainer("Layer1", page);
             page.Layers = page.Layers.Add(layer);
 
             bool raised = false;
@@ -203,7 +205,7 @@ namespace Core2D.UnitTests
         {
             var target = new ProjectContainer();
 
-            var document = Factory.CreateDocumentContainer();
+            var document = _factory.CreateDocumentContainer();
             target.Documents = target.Documents.Add(document);
 
             target.SetSelected(document);
@@ -217,7 +219,7 @@ namespace Core2D.UnitTests
         {
             var target = new ProjectContainer();
 
-            var document = Factory.CreateDocumentContainer();
+            var document = _factory.CreateDocumentContainer();
             target.Documents = target.Documents.Add(document);
 
             target.Selected = document;
