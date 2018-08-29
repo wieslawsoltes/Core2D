@@ -2,6 +2,7 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
 using System.Collections.Immutable;
+using Core2D.Interfaces;
 using Core2D.Path.Segments;
 using Core2D.Shapes;
 
