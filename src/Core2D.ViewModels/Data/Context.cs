@@ -31,11 +31,6 @@ namespace Core2D.Data
             set => Update(ref _record, value);
         }
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Context"/> class.
-        /// </summary>
-        public Context() : base() => ;
-
         /// <inheritdoc/>
         public override object Copy(IDictionary<object, object> shared)
         {
