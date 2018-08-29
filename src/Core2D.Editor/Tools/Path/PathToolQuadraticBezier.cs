@@ -56,6 +56,7 @@ namespace Core2D.Editor.Tools.Path
         public override void LeftDown(InputArgs args)
         {
             base.LeftDown(args);
+            var factory = _serviceProvider.GetService<IFactory>();
             var editor = _serviceProvider.GetService<ProjectEditor>();
             var pathTool = _serviceProvider.GetService<ToolPath>();
             (double sx, double sy) = editor.TryToSnap(args);
@@ -63,7 +64,7 @@ namespace Core2D.Editor.Tools.Path
             {
                 case State.Point1:
                     {
-                        _quadraticBezier.Point1 = editor.TryToGetConnectionPoint(sx, sy) ?? Factory.CreatePointShape(sx, sy, editor.Project.Options.PointShape);
+                        _quadraticBezier.Point1 = editor.TryToGetConnectionPoint(sx, sy) ?? factory.CreatePointShape(sx, sy, editor.Project.Options.PointShape);
                         if (!pathTool.IsInitialized)
                         {
                             pathTool.InitializeWorkingPath(_quadraticBezier.Point1);
@@ -73,8 +74,8 @@ namespace Core2D.Editor.Tools.Path
                             _quadraticBezier.Point1 = pathTool.GetLastPathPoint();
                         }
 
-                        _quadraticBezier.Point2 = Factory.CreatePointShape(sx, sy, editor.Project.Options.PointShape);
-                        _quadraticBezier.Point3 = Factory.CreatePointShape(sx, sy, editor.Project.Options.PointShape);
+                        _quadraticBezier.Point2 = factory.CreatePointShape(sx, sy, editor.Project.Options.PointShape);
+                        _quadraticBezier.Point3 = factory.CreatePointShape(sx, sy, editor.Project.Options.PointShape);
                         pathTool.GeometryContext.QuadraticBezierTo(
                             _quadraticBezier.Point2,
                             _quadraticBezier.Point3,
@@ -125,8 +126,8 @@ namespace Core2D.Editor.Tools.Path
                         }
 
                         _quadraticBezier.Point1 = _quadraticBezier.Point3;
-                        _quadraticBezier.Point2 = Factory.CreatePointShape(sx, sy, editor.Project.Options.PointShape);
-                        _quadraticBezier.Point3 = Factory.CreatePointShape(sx, sy, editor.Project.Options.PointShape);
+                        _quadraticBezier.Point2 = factory.CreatePointShape(sx, sy, editor.Project.Options.PointShape);
+                        _quadraticBezier.Point3 = factory.CreatePointShape(sx, sy, editor.Project.Options.PointShape);
                         pathTool.GeometryContext.QuadraticBezierTo(
                             _quadraticBezier.Point2,
                             _quadraticBezier.Point3,

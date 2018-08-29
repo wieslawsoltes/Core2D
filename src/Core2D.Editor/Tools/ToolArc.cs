@@ -58,16 +58,17 @@ namespace Core2D.Editor.Tools
         public override void LeftDown(InputArgs args)
         {
             base.LeftDown(args);
+            var factory = _serviceProvider.GetService<IFactory>();
             var editor = _serviceProvider.GetService<ProjectEditor>();
             (double sx, double sy) = editor.TryToSnap(args);
             switch (_currentState)
             {
                 case State.Point1:
-                    {
+                    {z
                         var style = editor.Project.CurrentStyleLibrary.Selected;
                         _connectedPoint3 = false;
                         _connectedPoint4 = false;
-                        _arc = Factory.CreateArcShape(
+                        _arc = factory.CreateArcShape(
                             sx, sy,
                             editor.Project.Options.CloneStyle ? style.Clone() : style,
                             editor.Project.Options.PointShape,

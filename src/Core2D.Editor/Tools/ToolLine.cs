@@ -54,6 +54,7 @@ namespace Core2D.Editor.Tools
         public override void LeftDown(InputArgs args)
         {
             base.LeftDown(args);
+            var factory = _serviceProvider.GetService<IFactory>();
             var editor = _serviceProvider.GetService<ProjectEditor>();
             (double x, double y) = args;
             (double sx, double sy) = editor.TryToSnap(args);
@@ -62,7 +63,7 @@ namespace Core2D.Editor.Tools
                 case State.Start:
                     {
                         var style = editor.Project.CurrentStyleLibrary.Selected;
-                        _line = Factory.CreateLineShape(
+                        _line = factory.CreateLineShape(
                             sx, sy,
                             editor.Project.Options.CloneStyle ? style.Clone() : style,
                             editor.Project.Options.PointShape,

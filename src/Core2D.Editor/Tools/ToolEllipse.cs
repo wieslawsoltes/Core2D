@@ -68,6 +68,7 @@ namespace Core2D.Editor.Tools
         public override void LeftDown(InputArgs args)
         {
             base.LeftDown(args);
+            var factory = _serviceProvider.GetService<IFactory>();
             var editor = _serviceProvider.GetService<ProjectEditor>();
             (double sx, double sy) = editor.TryToSnap(args);
             switch (_currentState)
@@ -81,7 +82,7 @@ namespace Core2D.Editor.Tools
                         }
 
                         var style = editor.Project.CurrentStyleLibrary.Selected;
-                        _ellipse = Factory.CreateEllipseShape(
+                        _ellipse = factory.CreateEllipseShape(
                             sx, sy,
                             editor.Project.Options.CloneStyle ? style.Clone() : style,
                             editor.Project.Options.PointShape,

@@ -187,6 +187,7 @@ namespace Core2D.Editor.Tools
         public override void LeftDown(InputArgs args)
         {
             base.LeftDown(args);
+            var factory = _serviceProvider.GetService<IFactory>();
             var editor = _serviceProvider.GetService<ProjectEditor>();
             (double x, double y) = args;
             (double sx, double sy) = editor.TryToSnap(args);
@@ -224,7 +225,7 @@ namespace Core2D.Editor.Tools
                             break;
                         }
 
-                        _rectangle = Factory.CreateRectangleShape(
+                        _rectangle = factory.CreateRectangleShape(
                             x, y,
                             editor.Project.Options.SelectionStyle,
                             null,

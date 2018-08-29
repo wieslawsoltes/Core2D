@@ -21,6 +21,11 @@ namespace Core2D.Editor.Designer
     public class DesignerContext
     {
         /// <summary>
+        /// The design time <see cref="IFactory"/>.
+        /// </summary>
+        public static IFactory Factory { get; set; }
+
+        /// <summary>
         /// The design time <see cref="ProjectEditor"/>.
         /// </summary>
         public static ProjectEditor Editor { get; set; }
@@ -236,6 +241,10 @@ namespace Core2D.Editor.Designer
         /// <param name="serviceProvider">The service provider.</param>
         public static void InitializeContext(IServiceProvider serviceProvider)
         {
+            // Factory
+
+            Factory = serviceProvider.GetService<IFactory>();
+
             // Editor
 
             Editor = serviceProvider.GetService<ProjectEditor>();

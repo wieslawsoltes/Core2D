@@ -54,6 +54,7 @@ namespace Core2D.Editor.Tools
         public override async void LeftDown(InputArgs args)
         {
             base.LeftDown(args);
+            var factory = _serviceProvider.GetService<IFactory>();
             var editor = _serviceProvider.GetService<ProjectEditor>();
             (double sx, double sy) = editor.TryToSnap(args);
             switch (_currentState)
@@ -68,7 +69,7 @@ namespace Core2D.Editor.Tools
                             return;
 
                         var style = editor.Project.CurrentStyleLibrary.Selected;
-                        _image = Factory.CreateImageShape(
+                        _image = factory.CreateImageShape(
                             sx, sy,
                             editor.Project.Options.CloneStyle ? style.Clone() : style,
                             editor.Project.Options.PointShape,

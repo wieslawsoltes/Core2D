@@ -166,9 +166,10 @@ namespace Core2D.Editor.Tools
         /// <param name="start">The path start point.</param>
         public void InitializeWorkingPath(IPointShape start)
         {
+            var factory = _serviceProvider.GetService<IFactory>();
             var editor = _serviceProvider.GetService<ProjectEditor>();
 
-            Geometry = Factory.CreatePathGeometry(
+            Geometry = factory.CreatePathGeometry(
                 ImmutableArray.Create<IPathFigure>(),
                 editor.Project.Options.DefaultFillRule);
 
@@ -180,7 +181,7 @@ namespace Core2D.Editor.Tools
                 editor.Project.Options.DefaultIsClosed);
 
             var style = editor.Project.CurrentStyleLibrary.Selected;
-            Path = Factory.CreatePathShape(
+            Path = factory.CreatePathShape(
                 "Path",
                 editor.Project.Options.CloneStyle ? style.Clone() : style,
                 Geometry,

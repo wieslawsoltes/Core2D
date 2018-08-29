@@ -56,6 +56,7 @@ namespace Core2D.Editor.Tools.Path
         public override void LeftDown(InputArgs args)
         {
             base.LeftDown(args);
+            var factory = _serviceProvider.GetService<IFactory>();
             var editor = _serviceProvider.GetService<ProjectEditor>();
             var pathTool = _serviceProvider.GetService<ToolPath>();
             (double sx, double sy) = editor.TryToSnap(args);
@@ -63,7 +64,7 @@ namespace Core2D.Editor.Tools.Path
             {
                 case State.Start:
                     {
-                        _line.Start = editor.TryToGetConnectionPoint(sx, sy) ?? Factory.CreatePointShape(sx, sy, editor.Project.Options.PointShape);
+                        _line.Start = editor.TryToGetConnectionPoint(sx, sy) ?? factory.CreatePointShape(sx, sy, editor.Project.Options.PointShape);
                         if (!pathTool.IsInitialized)
                         {
                             pathTool.InitializeWorkingPath(_line.Start);
@@ -73,7 +74,7 @@ namespace Core2D.Editor.Tools.Path
                             _line.Start = pathTool.GetLastPathPoint();
                         }
 
-                        _line.End = Factory.CreatePointShape(sx, sy, editor.Project.Options.PointShape);
+                        _line.End = factory.CreatePointShape(sx, sy, editor.Project.Options.PointShape);
                         pathTool.GeometryContext.LineTo(
                             _line.End,
                             editor.Project.Options.DefaultIsStroked,
@@ -101,7 +102,7 @@ namespace Core2D.Editor.Tools.Path
                         }
 
                         _line.Start = _line.End;
-                        _line.End = Factory.CreatePointShape(sx, sy, editor.Project.Options.PointShape);
+                        _line.End = factory.CreatePointShape(sx, sy, editor.Project.Options.PointShape);
                         pathTool.GeometryContext.LineTo(_line.End,
                             editor.Project.Options.DefaultIsStroked,
                             editor.Project.Options.DefaultIsSmoothJoin);

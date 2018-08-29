@@ -51,13 +51,14 @@ namespace Core2D.Editor.Tools
         public override void LeftDown(InputArgs args)
         {
             base.LeftDown(args);
+            var factory = _serviceProvider.GetService<IFactory>();
             var editor = _serviceProvider.GetService<ProjectEditor>();
             (double sx, double sy) = editor.TryToSnap(args);
             switch (_currentState)
             {
                 case State.Point:
                     {
-                        _point = Factory.CreatePointShape(sx, sy, editor.Project.Options.PointShape);
+                        _point = factory.CreatePointShape(sx, sy, editor.Project.Options.PointShape);
 
                         if (editor.Project.Options.TryToConnect)
                         {

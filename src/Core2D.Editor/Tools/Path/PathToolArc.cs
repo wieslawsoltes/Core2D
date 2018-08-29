@@ -61,6 +61,7 @@ namespace Core2D.Editor.Tools.Path
         public override void LeftDown(InputArgs args)
         {
             base.LeftDown(args);
+            var factory = _serviceProvider.GetService<IFactory>();
             var editor = _serviceProvider.GetService<ProjectEditor>();
             var pathTool = _serviceProvider.GetService<ToolPath>();
             (double sx, double sy) = editor.TryToSnap(args);
@@ -68,7 +69,7 @@ namespace Core2D.Editor.Tools.Path
             {
                 case State.Start:
                     {
-                        _arc.Start = editor.TryToGetConnectionPoint(sx, sy) ?? Factory.CreatePointShape(sx, sy, editor.Project.Options.PointShape);
+                        _arc.Start = editor.TryToGetConnectionPoint(sx, sy) ?? factory.CreatePointShape(sx, sy, editor.Project.Options.PointShape);
                         if (!pathTool.IsInitialized)
                         {
                             pathTool.InitializeWorkingPath(_arc.Start);
@@ -78,10 +79,10 @@ namespace Core2D.Editor.Tools.Path
                             _arc.Start = pathTool.GetLastPathPoint();
                         }
 
-                        _arc.End = Factory.CreatePointShape(sx, sy, editor.Project.Options.PointShape);
+                        _arc.End = factory.CreatePointShape(sx, sy, editor.Project.Options.PointShape);
                         pathTool.GeometryContext.ArcTo(
                             _arc.End,
-                            Factory.CreatePathSize(
+                            factory.CreatePathSize(
                                 Abs(_arc.Start.X - _arc.End.X),
                                 Abs(_arc.Start.Y - _arc.End.Y)),
                             _defaultRotationAngle,
@@ -109,10 +110,10 @@ namespace Core2D.Editor.Tools.Path
                             }
                         }
                         _arc.Start = _arc.End;
-                        _arc.End = Factory.CreatePointShape(sx, sy, editor.Project.Options.PointShape);
+                        _arc.End = factory.CreatePointShape(sx, sy, editor.Project.Options.PointShape);
                         pathTool.GeometryContext.ArcTo(
                             _arc.End,
-                            Factory.CreatePathSize(
+                            factory.CreatePathSize(
                                 Abs(_arc.Start.X - _arc.End.X),
                                 Abs(_arc.Start.Y - _arc.End.Y)),
                             _defaultRotationAngle,
