@@ -14,7 +14,11 @@ namespace Core2D.UnitTests
         [Trait("Core2D.Path", "Geometry")]
         public void ToString_Should_Return_Width_And_Height()
         {
-            var target = _factory.CreatePathSize() { Width = 50, Height = 30 };
+            var target = _factory.CreatePathSize();
+
+            target.Width = 50;
+            target.Height = 30;
+
             var actual = target.ToString();
             Assert.Equal("50,30", actual);
         }

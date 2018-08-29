@@ -35,7 +35,7 @@ namespace Core2D.UnitTests
         [Trait("Core2D.Path", "Segments")]
         public void ToString_Should_Return_Path_Markup()
         {
-            var target = _factory.CreateCubicBezierSegment()
+            var target = _factory.CreateCubicBezierSegment();
 
             target.Point1 = _factory.CreatePointShape();
             target.Point2 = _factory.CreatePointShape();
