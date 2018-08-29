@@ -15,6 +15,17 @@ namespace Core2D.FileWriter.SkiaSharpGif
     /// </summary>
     public sealed class GifSkiaSharpWriter : IFileWriter
     {
+        private readonly IServiceProvider _serviceProvider;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="GifSkiaSharpWriter"/> class.
+        /// </summary>
+        /// <param name="serviceProvider">The service provider.</param>
+        public GifSkiaSharpWriter(IServiceProvider serviceProvider)
+        {
+            _serviceProvider = serviceProvider;
+        }
+
         /// <inheritdoc/>
         string IFileWriter.Name { get; } = "Gif (SkiaSharp)";
 

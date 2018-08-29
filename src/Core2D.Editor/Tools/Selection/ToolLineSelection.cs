@@ -1,5 +1,6 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using System;
 using Core2D.Containers;
 using Core2D.Shapes;
 using Core2D.Style;
@@ -11,6 +12,7 @@ namespace Core2D.Editor.Tools.Selection
     /// </summary>
     public class ToolLineSelection
     {
+        private readonly IServiceProvider _serviceProvider;
         private readonly ILayerContainer _layer;
         private readonly ILineShape _line;
         private readonly IShapeStyle _style;
@@ -21,12 +23,14 @@ namespace Core2D.Editor.Tools.Selection
         /// <summary>
         /// Initialize new instance of <see cref="ToolLineSelection"/> class.
         /// </summary>
+        /// <param name="serviceProvider">The service provider.</param>
         /// <param name="layer">The selection shapes layer.</param>
         /// <param name="shape">The selected shape.</param>
         /// <param name="style">The selection shapes style.</param>
         /// <param name="point">The selection point shape.</param>
-        public ToolLineSelection(ILayerContainer layer, ILineShape shape, IShapeStyle style, IBaseShape point)
+        public ToolLineSelection(IServiceProvider serviceProvider, ILayerContainer layer, ILineShape shape, IShapeStyle style, IBaseShape point)
         {
+            _serviceProvider = serviceProvider;
             _layer = layer;
             _line = shape;
             _style = style;
@@ -38,8 +42,8 @@ namespace Core2D.Editor.Tools.Selection
         /// </summary>
         public void ToStateEnd()
         {
-            _startHelperPoint = Factory.CreatePointShape(0, 0, _point);
-            _endHelperPoint = Factory.CreatePointShape(0, 0, _point);
+            _startHelperPoint = _serviceProvider.GetService<IFactory>().CreatePointShape(0, 0, _point);
+            _endHelperPoint = _serviceProvider.GetService<IFactory>().CreatePointShape(0, 0, _point);
 
             _layer.Shapes = _layer.Shapes.Add(_startHelperPoint);
             _layer.Shapes = _layer.Shapes.Add(_endHelperPoint);

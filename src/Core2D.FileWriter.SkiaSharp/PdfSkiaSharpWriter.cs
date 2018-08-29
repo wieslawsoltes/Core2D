@@ -14,6 +14,17 @@ namespace Core2D.FileWriter.SkiaSharpPdf
     /// </summary>
     public sealed class PdfSkiaSharpWriter : IFileWriter
     {
+        private readonly IServiceProvider _serviceProvider;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="PdfSkiaSharpWriter"/> class.
+        /// </summary>
+        /// <param name="serviceProvider">The service provider.</param>
+        public PdfSkiaSharpWriter(IServiceProvider serviceProvider)
+        {
+            _serviceProvider = serviceProvider;
+        }
+
         /// <inheritdoc/>
         string IFileWriter.Name { get; } = "Pdf (SkiaSharp)";
 

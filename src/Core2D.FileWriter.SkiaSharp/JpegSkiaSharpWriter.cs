@@ -15,6 +15,17 @@ namespace Core2D.FileWriter.SkiaSharpJpeg
     /// </summary>
     public sealed class JpegSkiaSharpWriter : IFileWriter
     {
+        private readonly IServiceProvider _serviceProvider;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="JpegSkiaSharpWriter"/> class.
+        /// </summary>
+        /// <param name="serviceProvider">The service provider.</param>
+        public JpegSkiaSharpWriter(IServiceProvider serviceProvider)
+        {
+            _serviceProvider = serviceProvider;
+        }
+
         /// <inheritdoc/>
         string IFileWriter.Name { get; } = "Jpeg (SkiaSharp)";
 

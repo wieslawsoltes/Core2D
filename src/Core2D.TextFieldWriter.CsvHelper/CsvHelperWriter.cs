@@ -1,5 +1,6 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using System;
 using Core2D.Data;
 using Core2D.Interfaces;
 using System.Globalization;
@@ -12,6 +13,17 @@ namespace Core2D.TextFieldWriter.CsvHelper
     /// </summary>
     public sealed class CsvHelperWriter : ITextFieldWriter<IDatabase>
     {
+        private readonly IServiceProvider _serviceProvider;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CsvHelperWriter"/> class.
+        /// </summary>
+        /// <param name="serviceProvider">The service provider.</param>
+        public CsvHelperWriter(IServiceProvider serviceProvider)
+        {
+            _serviceProvider = serviceProvider;
+        }
+
         /// <summary>
         /// Write database records to text based file format.
         /// </summary>

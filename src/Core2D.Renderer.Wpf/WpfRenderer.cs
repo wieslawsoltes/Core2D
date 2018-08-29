@@ -22,21 +22,35 @@ namespace Core2D.Renderer.Wpf
     /// </summary>
     public class WpfRenderer : ShapeRenderer
     {
-        private ICache<IShapeStyle, (WM.Brush, WM.Pen)> _styleCache = Factory.CreateCache<IShapeStyle, (WM.Brush, WM.Pen)>();
-        private ICache<IArrowStyle, (WM.Brush, WM.Pen)> _arrowStyleCache = Factory.CreateCache<IArrowStyle, (WM.Brush, WM.Pen)>();
-        private ICache<ILineShape, WM.PathGeometry> _curvedLineCache = Factory.CreateCache<ILineShape, WM.PathGeometry>();
-        private ICache<IArcShape, WM.PathGeometry> _arcCache = Factory.CreateCache<IArcShape, WM.PathGeometry>();
-        private ICache<ICubicBezierShape, WM.PathGeometry> _cubicBezierCache = Factory.CreateCache<ICubicBezierShape, WM.PathGeometry>();
-        private ICache<IQuadraticBezierShape, WM.PathGeometry> _quadraticBezierCache = Factory.CreateCache<IQuadraticBezierShape, WM.PathGeometry>();
-        private ICache<ITextShape, (string, WM.FormattedText, IShapeStyle)> _textCache = Factory.CreateCache<ITextShape, (string, WM.FormattedText, IShapeStyle)>();
-        private ICache<string, WMI.BitmapImage> _biCache = Factory.CreateCache<string, WMI.BitmapImage>(bi => bi.StreamSource.Dispose());
-        private ICache<IPathShape, (Path.IPathGeometry, WM.StreamGeometry, IShapeStyle)> _pathCache = Factory.CreateCache<IPathShape, (Path.IPathGeometry, WM.StreamGeometry, IShapeStyle)>();
+        private readonly IServiceProvider _serviceProvider;
+        private ICache<IShapeStyle, (WM.Brush, WM.Pen)> _styleCache;
+        private ICache<IArrowStyle, (WM.Brush, WM.Pen)> _arrowStyleCache;
+        private ICache<ILineShape, WM.PathGeometry> _curvedLineCache;
+        private ICache<IArcShape, WM.PathGeometry> _arcCache;
+        private ICache<ICubicBezierShape, WM.PathGeometry> _cubicBezierCache;
+        private ICache<IQuadraticBezierShape, WM.PathGeometry> _quadraticBezierCache;
+        private ICache<ITextShape, (string, WM.FormattedText, IShapeStyle)> _textCache;
+        private ICache<string, WMI.BitmapImage> _biCache;
+        private ICache<IPathShape, (Path.IPathGeometry, WM.StreamGeometry, IShapeStyle)> _pathCache;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="WpfRenderer"/> class.
         /// </summary>
-        public WpfRenderer()
+        /// <param name="serviceProvider">The service provider.</param>
+        public WpfRenderer(IServiceProvider serviceProvider)
         {
+            _serviceProvider = serviceProvider;
+
+            _styleCache = _serviceProvider.GetService<IFactory>().CreateCache<IShapeStyle, (WM.Brush, WM.Pen)>();
+            _arrowStyleCache = _serviceProvider.GetService<IFactory>().CreateCache<IArrowStyle, (WM.Brush, WM.Pen)>();
+            _curvedLineCache = _serviceProvider.GetService<IFactory>().CreateCache<ILineShape, WM.PathGeometry>();
+            _arcCache = _serviceProvider.GetService<IFactory>().CreateCache<IArcShape, WM.PathGeometry>();
+            _cubicBezierCache = _serviceProvider.GetService<IFactory>().CreateCache<ICubicBezierShape, WM.PathGeometry>();
+            _quadraticBezierCache = _serviceProvider.GetService<IFactory>().CreateCache<IQuadraticBezierShape, WM.PathGeometry>();
+            _textCache = _serviceProvider.GetService<IFactory>().CreateCache<ITextShape, (string, WM.FormattedText, IShapeStyle)>();
+            _biCache = _serviceProvider.GetService<IFactory>().CreateCache<string, WMI.BitmapImage>(bi => bi.StreamSource.Dispose());
+            _pathCache = _serviceProvider.GetService<IFactory>().CreateCache<IPathShape, (Path.IPathGeometry, WM.StreamGeometry, IShapeStyle)>();
+
             ClearCache(isZooming: false);
         }
 

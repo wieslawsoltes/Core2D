@@ -13,6 +13,17 @@ namespace Core2D.FileWriter.Dxf
     /// </summary>
     public sealed class DxfWriter : IFileWriter
     {
+        private readonly IServiceProvider _serviceProvider;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DxfWriter"/> class.
+        /// </summary>
+        /// <param name="serviceProvider">The service provider.</param>
+        public DxfWriter(IServiceProvider serviceProvider)
+        {
+            _serviceProvider = serviceProvider;
+        }
+
         /// <inheritdoc/>
         string IFileWriter.Name { get; } = "Dxf (netDxf)";
 

@@ -1,5 +1,6 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using System;
 using Core2D.Interfaces;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
@@ -11,6 +12,8 @@ namespace Core2D.Serializer.Newtonsoft
     /// </summary>
     public sealed class NewtonsoftJsonSerializer : IJsonSerializer
     {
+        private readonly IServiceProvider _serviceProvider;
+
         /// <summary>
         /// Specifies the settings on a <see cref="JsonSerializer"/> object.
         /// </summary>
@@ -37,6 +40,15 @@ namespace Core2D.Serializer.Newtonsoft
                     new ShapeStateConverter()
                 }
             };
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="NewtonsoftJsonSerializer"/> class.
+        /// </summary>
+        /// <param name="serviceProvider">The service provider.</param>
+        public NewtonsoftJsonSerializer(IServiceProvider serviceProvider)
+        {
+            _serviceProvider = serviceProvider;
         }
 
         /// <inheritdoc/>

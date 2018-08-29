@@ -12,21 +12,25 @@ namespace Core2D.Path
     /// </summary>
     public class PathGeometryContext : IGeometryContext
     {
+        private readonly IServiceProvider _serviceProvider;
         private IPathGeometry _geometry;
         private IPathFigure _currentFigure;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="PathGeometryContext"/> class.
         /// </summary>
-        public PathGeometryContext(IPathGeometry geometry)
+        /// <param name="serviceProvider">The service provider.</param>
+        /// <param name="geometry">The path geometry.</param>
+        public PathGeometryContext(IServiceProvider serviceProvider, IPathGeometry geometry)
         {
+            _serviceProvider = serviceProvider;
             _geometry = geometry ?? throw new ArgumentNullException(nameof(geometry));
         }
 
         /// <inheritdoc/>
         public void BeginFigure(IPointShape startPoint, bool isFilled = true, bool isClosed = true)
         {
-            _currentFigure = Factory.CreatePathFigure(startPoint, isFilled, isClosed);
+            _currentFigure = _serviceProvider.GetService<IFactory>().CreatePathFigure(startPoint, isFilled, isClosed);
             _geometry.Figures = _geometry.Figures.Add(_currentFigure);
         }
 
@@ -39,7 +43,7 @@ namespace Core2D.Path
         /// <inheritdoc/>
         public void LineTo(IPointShape point, bool isStroked = true, bool isSmoothJoin = true)
         {
-            var segment = Factory.CreateLineSegment(
+            var segment = _serviceProvider.GetService<IFactory>().CreateLineSegment(
                 point,
                 isStroked,
                 isSmoothJoin);
@@ -49,7 +53,7 @@ namespace Core2D.Path
         /// <inheritdoc/>
         public void ArcTo(IPointShape point, IPathSize size, double rotationAngle = 0.0, bool isLargeArc = false, SweepDirection sweepDirection = SweepDirection.Clockwise, bool isStroked = true, bool isSmoothJoin = true)
         {
-            var segment = Factory.CreateArcSegment(
+            var segment = _serviceProvider.GetService<IFactory>().CreateArcSegment(
                 point,
                 size,
                 rotationAngle,
@@ -63,7 +67,7 @@ namespace Core2D.Path
         /// <inheritdoc/>
         public void CubicBezierTo(IPointShape point1, IPointShape point2, IPointShape point3, bool isStroked = true, bool isSmoothJoin = true)
         {
-            var segment = Factory.CreateCubicBezierSegment(
+            var segment = _serviceProvider.GetService<IFactory>().CreateCubicBezierSegment(
                 point1,
                 point2,
                 point3,
@@ -75,7 +79,7 @@ namespace Core2D.Path
         /// <inheritdoc/>
         public void QuadraticBezierTo(IPointShape point1, IPointShape point2, bool isStroked = true, bool isSmoothJoin = true)
         {
-            var segment = Factory.CreateQuadraticBezierSegment(
+            var segment = _serviceProvider.GetService<IFactory>().CreateQuadraticBezierSegment(
                 point1,
                 point2,
                 isStroked,
@@ -86,7 +90,7 @@ namespace Core2D.Path
         /// <inheritdoc/>
         public void PolyLineTo(ImmutableArray<IPointShape> points, bool isStroked = true, bool isSmoothJoin = true)
         {
-            var segment = Factory.CreatePolyLineSegment(
+            var segment = _serviceProvider.GetService<IFactory>().CreatePolyLineSegment(
                 points,
                 isStroked,
                 isSmoothJoin);
@@ -96,7 +100,7 @@ namespace Core2D.Path
         /// <inheritdoc/>
         public void PolyCubicBezierTo(ImmutableArray<IPointShape> points, bool isStroked = true, bool isSmoothJoin = true)
         {
-            var segment = Factory.CreatePolyCubicBezierSegment(
+            var segment = _serviceProvider.GetService<IFactory>().CreatePolyCubicBezierSegment(
                 points,
                 isStroked,
                 isSmoothJoin);
@@ -106,7 +110,7 @@ namespace Core2D.Path
         /// <inheritdoc/>
         public void PolyQuadraticBezierTo(ImmutableArray<IPointShape> points, bool isStroked = true, bool isSmoothJoin = true)
         {
-            var segment = Factory.CreatePolyQuadraticBezierSegment(
+            var segment = _serviceProvider.GetService<IFactory>().CreatePolyQuadraticBezierSegment(
                 points,
                 isStroked,
                 isSmoothJoin);

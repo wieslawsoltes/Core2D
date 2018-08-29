@@ -11,6 +11,17 @@ namespace Core2D.FileSystem.DotNet
     /// </summary>
     public sealed class DotNetFileSystem : IFileSystem
     {
+        private readonly IServiceProvider _serviceProvider;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DotNetFileSystem"/> class.
+        /// </summary>
+        /// <param name="serviceProvider">The service provider.</param>
+        public DotNetFileSystem(IServiceProvider serviceProvider)
+        {
+            _serviceProvider = serviceProvider;
+        }
+
         /// <inheritdoc/>
         string IFileSystem.GetBaseDirectory()
         {

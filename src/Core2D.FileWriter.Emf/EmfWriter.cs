@@ -1,11 +1,5 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
-using Core2D.Containers;
-using Core2D.Data;
-using Core2D.Interfaces;
-using Core2D.Renderer;
-using Core2D.Renderer.WinForms;
-using Core2D.Shapes;
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
@@ -15,6 +9,12 @@ using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.Drawing.Text;
 using System.IO;
+using Core2D.Containers;
+using Core2D.Data;
+using Core2D.Interfaces;
+using Core2D.Renderer;
+using Core2D.Renderer.WinForms;
+using Core2D.Shapes;
 
 #if _WINDOWS
 using WPF = System.Windows;
@@ -27,6 +27,17 @@ namespace Core2D.FileWriter.Emf
     /// </summary>
     public sealed class EmfWriter : IFileWriter
     {
+        private readonly IServiceProvider _serviceProvider;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="EmfWriter"/> class.
+        /// </summary>
+        /// <param name="serviceProvider">The service provider.</param>
+        public EmfWriter(IServiceProvider serviceProvider)
+        {
+            _serviceProvider = serviceProvider;
+        }
+
         /// <inheritdoc/>
         string IFileWriter.Name { get; } = "Emf (WinForms)";
 

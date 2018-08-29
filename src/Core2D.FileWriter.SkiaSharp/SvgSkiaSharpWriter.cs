@@ -15,6 +15,17 @@ namespace Core2D.FileWriter.SkiaSharpSvg
     /// </summary>
     public sealed class SvgSkiaSharpWriter : IFileWriter
     {
+        private readonly IServiceProvider _serviceProvider;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SvgSkiaSharpWriter"/> class.
+        /// </summary>
+        /// <param name="serviceProvider">The service provider.</param>
+        public SvgSkiaSharpWriter(IServiceProvider serviceProvider)
+        {
+            _serviceProvider = serviceProvider;
+        }
+
         /// <inheritdoc/>
         string IFileWriter.Name { get; } = "Svg (SkiaSharp)";
 

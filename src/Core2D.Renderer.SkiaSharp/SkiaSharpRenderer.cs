@@ -17,8 +17,9 @@ namespace Core2D.Renderer.SkiaSharp
     /// </summary>
     public class SkiaSharpRenderer : ShapeRenderer
     {
+        private readonly IServiceProvider _serviceProvider;
         private bool _isAntialias = true;
-        private ICache<string, SKBitmap> _biCache = Factory.CreateCache<string, SKBitmap>(bi => bi.Dispose());
+        private ICache<string, SKBitmap> _biCache;
         private readonly Func<double, float> _scaleToPage;
         private readonly double _sourceDpi = 96.0;
         private readonly double _targetDpi = 72.0;
@@ -26,11 +27,17 @@ namespace Core2D.Renderer.SkiaSharp
         /// <summary>
         /// Initializes a new instance of the <see cref="SkiaSharpRenderer"/> class.
         /// </summary>
+        /// <param name="serviceProvider">The service provider.</param>
         /// <param name="isAntialias">The flag indicating whether paint is antialiased.</param>
         /// <param name="targetDpi">The target renderer dpi.</param>
-        public SkiaSharpRenderer(bool isAntialias = true, double targetDpi = 72.0)
+        public SkiaSharpRenderer(IServiceProvider serviceProvider, bool isAntialias = true, double targetDpi = 72.0)
         {
+            _serviceProvider = serviceProvider;
+
+            _biCache = _serviceProvider.GetService<IFactory>().CreateCache<string, SKBitmap>(bi => bi.Dispose())
+
             ClearCache(isZooming: false);
+
             _isAntialias = isAntialias;
             _scaleToPage = (value) => (float)(value * 1.0);
             _targetDpi = targetDpi;

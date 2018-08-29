@@ -21,15 +21,16 @@ namespace Core2D.Renderer.Avalonia
     /// </summary>
     public class AvaloniaRenderer : ShapeRenderer
     {
-        private ICache<IShapeStyle, (AM.IBrush, AM.Pen)> _styleCache = Factory.CreateCache<IShapeStyle, (AM.IBrush, AM.Pen)>();
-        private ICache<IArrowStyle, (AM.IBrush, AM.Pen)> _arrowStyleCache = Factory.CreateCache<IArrowStyle, (AM.IBrush, AM.Pen)>();
+        private readonly IServiceProvider _serviceProvider;
+        private ICache<IShapeStyle, (AM.IBrush, AM.Pen)> _styleCache;
+        private ICache<IArrowStyle, (AM.IBrush, AM.Pen)> _arrowStyleCache;
         // TODO: Add LineShape cache.
         // TODO: Add EllipseShape cache.
         // TODO: Add ArcShape cache.
         // TODO: Add CubicBezierShape cache.
         // TODO: Add QuadraticBezierShape cache.
-        private ICache<ITextShape, (string, AM.FormattedText, IShapeStyle)> _textCache = Factory.CreateCache<ITextShape, (string, AM.FormattedText, IShapeStyle)>();
-        private ICache<string, AMI.Bitmap> _biCache = Factory.CreateCache<string, AMI.Bitmap>(bi => bi.Dispose());
+        private ICache<ITextShape, (string, AM.FormattedText, IShapeStyle)> _textCache;
+        private ICache<string, AMI.Bitmap> _biCache;
         // TODO: Add PathShape cache.
         private readonly Func<double, float> _scaleToPage;
         private readonly double _textScaleFactor;
@@ -37,10 +38,19 @@ namespace Core2D.Renderer.Avalonia
         /// <summary>
         /// Initializes a new instance of the <see cref="AvaloniaRenderer"/> class.
         /// </summary>
-        /// <param name="textScaleFactor"></param>
-        public AvaloniaRenderer(double textScaleFactor = 1.0)
+        /// <param name="serviceProvider">The service provider.</param>
+        /// <param name="textScaleFactor">The text scale factor.</param>
+        public AvaloniaRenderer(IServiceProvider serviceProvider, double textScaleFactor = 1.0)
         {
+            _serviceProvider = serviceProvider;
+
+            _styleCache = _serviceProvider.GetService<IFactory>().CreateCache<IShapeStyle, (AM.IBrush, AM.Pen)>()
+            _arrowStyleCache = _serviceProvider.GetService<IFactory>().CreateCache<IArrowStyle, (AM.IBrush, AM.Pen)>();
+            _textCache = _serviceProvider.GetService<IFactory>().CreateCache<ITextShape, (string, AM.FormattedText, IShapeStyle)>();
+            _biCache = _serviceProvider.GetService<IFactory>().CreateCache<string, AMI.Bitmap>(bi => bi.Dispose());
+
             ClearCache(isZooming: false);
+
             _textScaleFactor = textScaleFactor;
             _scaleToPage = (value) => (float)(value);
         }

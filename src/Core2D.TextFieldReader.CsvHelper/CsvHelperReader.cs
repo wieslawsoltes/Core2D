@@ -1,5 +1,6 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using System;
 using Core2D.Data;
 using Core2D.Interfaces;
 using System.Collections.Generic;
@@ -14,6 +15,17 @@ namespace Core2D.TextFieldReader.CsvHelper
     /// </summary>
     public sealed class CsvHelperReader : ITextFieldReader<IDatabase>
     {
+        private readonly IServiceProvider _serviceProvider;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CsvHelperReader"/> class.
+        /// </summary>
+        /// <param name="serviceProvider">The service provider.</param>
+        public CsvHelperReader(IServiceProvider serviceProvider)
+        {
+            _serviceProvider = serviceProvider;
+        }
+
         private static IEnumerable<string[]> ReadInternal(System.IO.Stream stream)
         {
             using (var reader = new System.IO.StreamReader(stream))
@@ -51,7 +63,7 @@ namespace Core2D.TextFieldReader.CsvHelper
             {
                 var fields = ReadInternal(stream).ToList();
                 var name = System.IO.Path.GetFileNameWithoutExtension(path);
-                return Factory.FromFields(name, fields);
+                return _serviceProvider.GetService<IFactory>().FromFields(name, fields);
             }
         }
     }

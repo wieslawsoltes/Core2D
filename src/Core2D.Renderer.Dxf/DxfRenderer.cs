@@ -22,7 +22,8 @@ namespace Core2D.Renderer.Dxf
     /// </summary>
     public partial class DxfRenderer : ShapeRenderer
     {
-        private ICache<string, DXFO.ImageDefinition> _biCache = Factory.CreateCache<string, DXFO.ImageDefinition>();
+        private readonly IServiceProvider _serviceProvider;
+        private ICache<string, DXFO.ImageDefinition> _biCache;
         private double _pageWidth;
         private double _pageHeight;
         private string _outputPath;
@@ -33,8 +34,13 @@ namespace Core2D.Renderer.Dxf
         /// <summary>
         /// Initializes a new instance of the <see cref="DxfRenderer"/> class.
         /// </summary>
-        public DxfRenderer()
+        /// <param name="serviceProvider">The service provider.</param>
+        public DxfRenderer(IServiceProvider serviceProvider)
         {
+            _serviceProvider = serviceProvider;
+
+            _biCache = _serviceProvider.GetService<IFactory>().CreateCache<string, DXFO.ImageDefinition>();
+
             ClearCache(isZooming: false);
         }
 

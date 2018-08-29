@@ -17,20 +17,32 @@ namespace Core2D.Renderer.Wpf
     /// </summary>
     public static class PathGeometryConverter
     {
-        private static ImmutableArray<IPointShape> ToPointShapes(this IEnumerable<W.Point> points, double dx, double dy)
+        private readonly IServiceProvider _serviceProvider;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="PathGeometryConverter"/> class.
+        /// </summary>
+        /// <param name="serviceProvider">The service provider.</param>
+        public PathGeometryConverter(IServiceProvider serviceProvider)
         {
-            var PointShapes = ImmutableArray.CreateBuilder<IPointShape>();
-            foreach (var point in points)
-            {
-                PointShapes.Add(Factory.CreatePointShape(point.X + dx, point.Y + dy));
-            }
-            return PointShapes.ToImmutable();
+            _serviceProvider = serviceProvider;
         }
 
-        private static IList<W.Point> ToPoints(this IList<IPointShape> PointShapes, double dx, double dy)
+        private ImmutableArray<IPointShape> ToPointShapes(this IEnumerable<W.Point> points, double dx, double dy)
+        {
+            var factory = _serviceProvider.GetService<IFactory>();
+            var pointShapes = ImmutableArray.CreateBuilder<IPointShape>();
+            foreach (var point in points)
+            {
+                pointShapes.Add(factory.CreatePointShape(point.X + dx, point.Y + dy));
+            }
+            return pointShapes.ToImmutable();
+        }
+
+        private IList<W.Point> ToPoints(this IList<IPointShape> pointShapes, double dx, double dy)
         {
             var points = new List<W.Point>();
-            foreach (var point in PointShapes)
+            foreach (var point in pointShapes)
             {
                 points.Add(new W.Point(point.X + dx, point.Y + dy));
             }
@@ -44,9 +56,10 @@ namespace Core2D.Renderer.Wpf
         /// <param name="dx"></param>
         /// <param name="dy"></param>
         /// <returns></returns>
-        public static IPathGeometry ToPathGeometry(this WM.PathGeometry pg, double dx, double dy)
+        public IPathGeometry ToPathGeometry(this WM.PathGeometry pg, double dx, double dy)
         {
-            var geometry = Factory.CreatePathGeometry(
+            var factory = _serviceProvider.GetService<IFactory>();
+            var geometry = factory.CreatePathGeometry(
                 ImmutableArray.Create<IPathFigure>(),
                 pg.FillRule == WM.FillRule.EvenOdd ? FillRule.EvenOdd : FillRule.Nonzero);
 
@@ -55,7 +68,7 @@ namespace Core2D.Renderer.Wpf
             foreach (var pf in pg.Figures)
             {
                 context.BeginFigure(
-                    Factory.CreatePointShape(pf.StartPoint.X + dx, pf.StartPoint.Y + dy),
+                    factory.CreatePointShape(pf.StartPoint.X + dx, pf.StartPoint.Y + dy),
                     pf.IsFilled,
                     pf.IsClosed);
 
@@ -64,8 +77,8 @@ namespace Core2D.Renderer.Wpf
                     if (segment is WM.ArcSegment arcSegment)
                     {
                         context.ArcTo(
-                            Factory.CreatePointShape(arcSegment.Point.X + dx, arcSegment.Point.Y + dy),
-                            Factory.CreatePathSize(arcSegment.Size.Width, arcSegment.Size.Height),
+                            factory.CreatePointShape(arcSegment.Point.X + dx, arcSegment.Point.Y + dy),
+                            factory.CreatePathSize(arcSegment.Size.Width, arcSegment.Size.Height),
                             arcSegment.RotationAngle,
                             arcSegment.IsLargeArc,
                             arcSegment.SweepDirection == WM.SweepDirection.Clockwise ? SweepDirection.Clockwise : SweepDirection.Counterclockwise,
@@ -75,16 +88,16 @@ namespace Core2D.Renderer.Wpf
                     else if (segment is WM.BezierSegment cubicBezierSegment)
                     {
                         context.CubicBezierTo(
-                            Factory.CreatePointShape(cubicBezierSegment.Point1.X + dx, cubicBezierSegment.Point1.Y + dy),
-                            Factory.CreatePointShape(cubicBezierSegment.Point2.X + dx, cubicBezierSegment.Point2.Y + dy),
-                            Factory.CreatePointShape(cubicBezierSegment.Point3.X + dx, cubicBezierSegment.Point3.Y + dy),
+                            factory.CreatePointShape(cubicBezierSegment.Point1.X + dx, cubicBezierSegment.Point1.Y + dy),
+                            factory.CreatePointShape(cubicBezierSegment.Point2.X + dx, cubicBezierSegment.Point2.Y + dy),
+                            factory.CreatePointShape(cubicBezierSegment.Point3.X + dx, cubicBezierSegment.Point3.Y + dy),
                             cubicBezierSegment.IsStroked,
                             cubicBezierSegment.IsSmoothJoin);
                     }
                     else if (segment is WM.LineSegment lineSegment)
                     {
                         context.LineTo(
-                            Factory.CreatePointShape(lineSegment.Point.X + dx, lineSegment.Point.Y + dy),
+                            factory.CreatePointShape(lineSegment.Point.X + dx, lineSegment.Point.Y + dy),
                             lineSegment.IsStroked,
                             lineSegment.IsSmoothJoin);
                     }
@@ -112,8 +125,8 @@ namespace Core2D.Renderer.Wpf
                     else if (segment is WM.QuadraticBezierSegment quadraticBezierSegment)
                     {
                         context.QuadraticBezierTo(
-                            Factory.CreatePointShape(quadraticBezierSegment.Point1.X + dx, quadraticBezierSegment.Point1.Y + dy),
-                            Factory.CreatePointShape(quadraticBezierSegment.Point2.X + dx, quadraticBezierSegment.Point2.Y + dy),
+                            factory.CreatePointShape(quadraticBezierSegment.Point1.X + dx, quadraticBezierSegment.Point1.Y + dy),
+                            factory.CreatePointShape(quadraticBezierSegment.Point2.X + dx, quadraticBezierSegment.Point2.Y + dy),
                             quadraticBezierSegment.IsStroked,
                             quadraticBezierSegment.IsSmoothJoin);
                     }
@@ -134,7 +147,7 @@ namespace Core2D.Renderer.Wpf
         /// <param name="dx"></param>
         /// <param name="dy"></param>
         /// <returns></returns>
-        public static WM.StreamGeometry ToStreamGeometry(this IPathGeometry xpg, double dx, double dy)
+        public WM.StreamGeometry ToStreamGeometry(this IPathGeometry xpg, double dx, double dy)
         {
             var sg = new WM.StreamGeometry();
 
@@ -224,7 +237,7 @@ namespace Core2D.Renderer.Wpf
         /// </summary>
         /// <param name="source"></param>
         /// <returns></returns>
-        public static IPathGeometry ToPathGeometry(this string source)
+        public IPathGeometry ToPathGeometry(this string source)
         {
             var g = WM.Geometry.Parse(source);
             var pg = WM.PathGeometry.CreateFromGeometry(g);
@@ -238,7 +251,7 @@ namespace Core2D.Renderer.Wpf
         /// <param name="dx"></param>
         /// <param name="dy"></param>
         /// <returns></returns>
-        public static WM.PathGeometry ToPathGeometry(this IPathGeometry xpg, double dx, double dy)
+        public WM.PathGeometry ToPathGeometry(this IPathGeometry xpg, double dx, double dy)
         {
             return WM.PathGeometry.CreateFromGeometry(ToStreamGeometry(xpg, dx, dy));
         }
@@ -248,7 +261,7 @@ namespace Core2D.Renderer.Wpf
         /// </summary>
         /// <param name="xpg"></param>
         /// <returns></returns>
-        public static string ToSource(this IPathGeometry xpg)
+        public string ToSource(this IPathGeometry xpg)
         {
             return ToStreamGeometry(xpg, 0.0, 0.0).ToString(CultureInfo.InvariantCulture);
         }
@@ -258,7 +271,7 @@ namespace Core2D.Renderer.Wpf
         /// </summary>
         /// <param name="sg"></param>
         /// <returns></returns>
-        public static string ToSource(this WM.StreamGeometry sg)
+        public string ToSource(this WM.StreamGeometry sg)
         {
             return sg.ToString(CultureInfo.InvariantCulture);
         }

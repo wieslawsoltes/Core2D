@@ -18,17 +18,24 @@ namespace Core2D.Renderer.WinForms
     /// </summary>
     public class WinFormsRenderer : ShapeRenderer
     {
-        private ICache<string, Image> _biCache = Factory.CreateCache<string, Image>(bi => bi.Dispose());
+        private readonly IServiceProvider _serviceProvider;
+        private ICache<string, Image> _biCache;
         private readonly Func<double, float> _scaleToPage;
         private readonly double _textScaleFactor;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="WinFormsRenderer"/> class.
         /// </summary>
-        /// <param name="textScaleFactor"></param>
-        public WinFormsRenderer(double textScaleFactor = 1.0)
+        /// <param name="serviceProvider">The service provider.</param>
+        /// <param name="textScaleFactor">The text scale factor.</param>
+        public WinFormsRenderer(IServiceProvider serviceProvider, double textScaleFactor = 1.0)
         {
+            _serviceProvider = serviceProvider;
+
+            _biCache = _serviceProvider.GetService<IFactory>().CreateCache<string, Image>(bi => bi.Dispose())
+
             ClearCache(isZooming: false);
+
             _textScaleFactor = textScaleFactor;
             _scaleToPage = (value) => (float)(value);
         }
