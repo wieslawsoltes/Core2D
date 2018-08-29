@@ -18,7 +18,7 @@ namespace Core2D.Shapes.UnitTests
         [Trait("Core2D.Shapes", "Shapes")]
         public void Inherits_From_ConnectableShape()
         {
-            var target = new GroupShape();
+            var target = _factory.CreateGroupShape();
             Assert.True(target is ConnectableShape);
         }
 
@@ -26,7 +26,7 @@ namespace Core2D.Shapes.UnitTests
         [Trait("Core2D.Shapes", "Shapes")]
         public void Shapes_Not_Null()
         {
-            var target = new GroupShape();
+            var target = _factory.CreateGroupShape();
             Assert.False(target.Shapes.IsDefault);
         }
 
@@ -34,14 +34,14 @@ namespace Core2D.Shapes.UnitTests
         [Trait("Core2D.Shapes", "Shapes")]
         public void ShapesProperties_Gets_Shapes_And_Connectors_Properties()
         {
-            var target = new GroupShape();
+            var target = _factory.CreateGroupShape();
 
             var shape = new Class1();
-            shape.Data.Properties = shape.Data.Properties.Add(new Property());
+            shape.Data.Properties = shape.Data.Properties.Add(_factory.CreateProperty());
             target.Shapes = target.Shapes.Add(shape);
 
-            var point = new PointShape();
-            point.Data.Properties = point.Data.Properties.Add(new Property());
+            var point = _factory.CreatePointShape();
+            point.Data.Properties = point.Data.Properties.Add(_factory.CreateProperty());
             target.Connectors = target.Connectors.Add(point);
 
             var length = target.ShapesProperties.Length;
@@ -52,17 +52,17 @@ namespace Core2D.Shapes.UnitTests
         [Trait("Core2D.Shapes", "Shapes")]
         public void ShapesProperties_Cache_Should_Reset_After_Shapes_Updated()
         {
-            var target = new GroupShape();
+            var target = _factory.CreateGroupShape();
 
             var shape1 = new Class1();
-            shape1.Data.Properties = shape1.Data.Properties.Add(new Property());
+            shape1.Data.Properties = shape1.Data.Properties.Add(_factory.CreateProperty());
             target.Shapes = target.Shapes.Add(shape1);
 
             var length1 = target.ShapesProperties.Length;
             Assert.Equal(1, length1);
 
             var shape2 = new Class1();
-            shape2.Data.Properties = shape2.Data.Properties.Add(new Property());
+            shape2.Data.Properties = shape2.Data.Properties.Add(_factory.CreateProperty());
             target.Shapes = target.Shapes.Add(shape2);
 
             var length2 = target.ShapesProperties.Length;
@@ -73,14 +73,14 @@ namespace Core2D.Shapes.UnitTests
         [Trait("Core2D.Shapes", "Shapes")]
         public void GetPoints_Returns_Shapes_And_Connector_Points()
         {
-            var target = new GroupShape();
+            var target = _factory.CreateGroupShape();
 
-            var text = new TextShape();
-            text.Data.Properties = text.Data.Properties.Add(new Property());
+            var text = _factory.CreateTextShape();
+            text.Data.Properties = text.Data.Properties.Add(_factory.CreateProperty());
             target.Shapes = target.Shapes.Add(text);
 
-            var point = new PointShape();
-            point.Data.Properties = point.Data.Properties.Add(new Property());
+            var point = _factory.CreatePointShape();
+            point.Data.Properties = point.Data.Properties.Add(_factory.CreateProperty());
             target.Connectors = target.Connectors.Add(point);
 
             var count = target.GetPoints().Count();
@@ -91,7 +91,7 @@ namespace Core2D.Shapes.UnitTests
         [Trait("Core2D.Shapes", "Shapes")]
         public void AddShape_Add_Shape_To_Shapes()
         {
-            var target = new GroupShape();
+            var target = _factory.CreateGroupShape();
             var shape = new Class1();
 
             target.AddShape(shape);
@@ -110,8 +110,8 @@ namespace Core2D.Shapes.UnitTests
         {
             var shape1 = new Class1();
             var shape2 = new Class1();
-            var point1 = new PointShape();
-            var point2 = new PointShape();
+            var point1 = _factory.CreatePointShape();
+            var point2 = _factory.CreatePointShape();
 
             var shapes = new List<IBaseShape>{ shape1, shape2, point1, point2 };
             var source = shapes.ToList();
@@ -145,8 +145,8 @@ namespace Core2D.Shapes.UnitTests
         {
             var shape1 = new Class1();
             var shape2 = new Class1();
-            var point1 = new PointShape();
-            var point2 = new PointShape();
+            var point1 = _factory.CreatePointShape();
+            var point2 = _factory.CreatePointShape();
 
             var shapes = new BaseShape[] { shape1, shape2, point1, point2 };
             var source = shapes.ToList();
@@ -168,11 +168,11 @@ namespace Core2D.Shapes.UnitTests
         public void Ungroup_Shape_Remove_And_Add_To_Source()
         {
             var shape = new Class1();
-            var point1 = new PointShape();
-            var point2 = new PointShape();
-            var point3 = new PointShape();
+            var point1 = _factory.CreatePointShape();
+            var point2 = _factory.CreatePointShape();
+            var point3 = _factory.CreatePointShape();
 
-            var target = new GroupShape();
+            var target = _factory.CreateGroupShape();
 
             target.AddShape(shape);
             target.AddConnectorAsNone(point1);

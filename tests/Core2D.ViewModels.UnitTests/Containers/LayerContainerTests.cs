@@ -14,7 +14,7 @@ namespace Core2D.UnitTests
         [Trait("Core2D.Containers", "Project")]
         public void Inherits_From_ObservableObject()
         {
-            var target = new LayerContainer();
+            var target = _factory.CreateLayerContainer();
             Assert.True(target is IObservableObject);
         }
 
@@ -22,7 +22,7 @@ namespace Core2D.UnitTests
         [Trait("Core2D.Containers", "Project")]
         public void Shapes_Not_Null()
         {
-            var target = new LayerContainer();
+            var target = _factory.CreateLayerContainer();
             Assert.False(target.Shapes.IsDefault);
         }
 

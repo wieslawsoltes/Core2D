@@ -15,7 +15,7 @@ namespace Core2D.Style
         [Trait("Core2D.Style", "Style")]
         public void Inherits_From_ObservableObject()
         {
-            var target = new LineFixedLength();
+            var target = _factory.CreateLineFixedLength();
             Assert.True(target is IObservableObject);
         }
 
@@ -23,7 +23,7 @@ namespace Core2D.Style
         [Trait("Core2D.Style", "Style")]
         public void Flags_On_Set_Notify_Events_Are_Raised()
         {
-            var state = new LineFixedLength();
+            var state = _factory.CreateLineFixedLength();
             var target = new PropertyChangedObserver(state);
 
             state.Flags = 
@@ -55,7 +55,7 @@ namespace Core2D.Style
         [Trait("Core2D.Style", "Style")]
         public void Disabled_Property()
         {
-            var target = new LineFixedLength();
+            var target = _factory.CreateLineFixedLength();
 
             target.Disabled = true;
             Assert.Equal(LineFixedLengthFlags.Disabled, target.Flags);
@@ -68,7 +68,7 @@ namespace Core2D.Style
         [Trait("Core2D.Style", "Style")]
         public void Start_Property()
         {
-            var target = new LineFixedLength();
+            var target = _factory.CreateLineFixedLength();
 
             target.Start = true;
             Assert.Equal(LineFixedLengthFlags.Start, target.Flags);
@@ -81,7 +81,7 @@ namespace Core2D.Style
         [Trait("Core2D.Style", "Style")]
         public void End_Property()
         {
-            var target = new LineFixedLength();
+            var target = _factory.CreateLineFixedLength();
 
             target.End = true;
             Assert.Equal(LineFixedLengthFlags.End, target.Flags);
@@ -94,7 +94,7 @@ namespace Core2D.Style
         [Trait("Core2D.Style", "Style")]
         public void Vertical_Property()
         {
-            var target = new LineFixedLength();
+            var target = _factory.CreateLineFixedLength();
 
             target.Vertical = true;
             Assert.Equal(LineFixedLengthFlags.Vertical, target.Flags);
@@ -107,7 +107,7 @@ namespace Core2D.Style
         [Trait("Core2D.Style", "Style")]
         public void Horizontal_Property()
         {
-            var target = new LineFixedLength();
+            var target = _factory.CreateLineFixedLength();
 
             target.Horizontal = true;
             Assert.Equal(LineFixedLengthFlags.Horizontal, target.Flags);
@@ -120,7 +120,7 @@ namespace Core2D.Style
         [Trait("Core2D.Style", "Style")]
         public void All_Property()
         {
-            var target = new LineFixedLength();
+            var target = _factory.CreateLineFixedLength();
 
             target.All = true;
             Assert.Equal(LineFixedLengthFlags.All, target.Flags);

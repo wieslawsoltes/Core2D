@@ -14,7 +14,7 @@ namespace Core2D.Data.UnitTests
         [Trait("Core2D.Data", "Database")]
         public void Inherits_From_ObservableObject()
         {
-            var target = new Database();
+            var target = _factory.CreateDatabase();
             Assert.True(target is IObservableObject);
         }
 
@@ -22,7 +22,7 @@ namespace Core2D.Data.UnitTests
         [Trait("Core2D.Data", "Database")]
         public void Columns_Not_Null()
         {
-            var target = new Database();
+            var target = _factory.CreateDatabase();
             Assert.False(target.Columns.IsDefault);
         }
 
@@ -30,7 +30,7 @@ namespace Core2D.Data.UnitTests
         [Trait("Core2D.Data", "Database")]
         public void Records_Not_Null()
         {
-            var target = new Database();
+            var target = _factory.CreateDatabase();
             Assert.False(target.Records.IsDefault);
         }
 

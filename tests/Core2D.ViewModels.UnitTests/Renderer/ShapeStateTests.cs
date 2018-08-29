@@ -15,7 +15,7 @@ namespace Core2D.Renderer.UnitTests
         [Trait("Core2D.Renderer", "Renderer")]
         public void Inherits_From_ObservableObject()
         {
-            var target = new ShapeState();
+            var target = _factory.CreateShapeState();
             Assert.True(target is IObservableObject);
         }
 
@@ -23,7 +23,7 @@ namespace Core2D.Renderer.UnitTests
         [Trait("Core2D.Renderer", "Renderer")]
         public void Flags_On_Set_Notify_Events_Are_Raised()
         {
-            var state = new ShapeState();
+            var state = _factory.CreateShapeState();
             var target = new PropertyChangedObserver(state);
 
             state.Flags = 
@@ -58,7 +58,7 @@ namespace Core2D.Renderer.UnitTests
         [Trait("Core2D.Renderer", "Renderer")]
         public void Default_Property()
         {
-            var target = new ShapeState();
+            var target = _factory.CreateShapeState();
 
             target.Default = true;
             Assert.Equal(ShapeStateFlags.Default, target.Flags);
@@ -71,7 +71,7 @@ namespace Core2D.Renderer.UnitTests
         [Trait("Core2D.Renderer", "Renderer")]
         public void Visible_Property()
         {
-            var target = new ShapeState();
+            var target = _factory.CreateShapeState();
 
             target.Visible = true;
             Assert.Equal(ShapeStateFlags.Visible, target.Flags);
@@ -84,7 +84,7 @@ namespace Core2D.Renderer.UnitTests
         [Trait("Core2D.Renderer", "Renderer")]
         public void Printable_Property()
         {
-            var target = new ShapeState();
+            var target = _factory.CreateShapeState();
 
             target.Printable = true;
             Assert.Equal(ShapeStateFlags.Printable, target.Flags);
@@ -97,7 +97,7 @@ namespace Core2D.Renderer.UnitTests
         [Trait("Core2D.Renderer", "Renderer")]
         public void Locked_Property()
         {
-            var target = new ShapeState();
+            var target = _factory.CreateShapeState();
 
             target.Locked = true;
             Assert.Equal(ShapeStateFlags.Locked, target.Flags);
@@ -110,7 +110,7 @@ namespace Core2D.Renderer.UnitTests
         [Trait("Core2D.Renderer", "Renderer")]
         public void Connector_Property()
         {
-            var target = new ShapeState();
+            var target = _factory.CreateShapeState();
 
             target.Connector = true;
             Assert.Equal(ShapeStateFlags.Connector, target.Flags);
@@ -123,7 +123,7 @@ namespace Core2D.Renderer.UnitTests
         [Trait("Core2D.Renderer", "Renderer")]
         public void None_Property()
         {
-            var target = new ShapeState();
+            var target = _factory.CreateShapeState();
 
             target.None = true;
             Assert.Equal(ShapeStateFlags.None, target.Flags);
@@ -136,7 +136,7 @@ namespace Core2D.Renderer.UnitTests
         [Trait("Core2D.Renderer", "Renderer")]
         public void Standalone_Property()
         {
-            var target = new ShapeState();
+            var target = _factory.CreateShapeState();
 
             target.Standalone = true;
             Assert.Equal(ShapeStateFlags.Standalone, target.Flags);
@@ -149,7 +149,7 @@ namespace Core2D.Renderer.UnitTests
         [Trait("Core2D.Renderer", "Renderer")]
         public void Input_Property()
         {
-            var target = new ShapeState();
+            var target = _factory.CreateShapeState();
 
             target.Input = true;
             Assert.Equal(ShapeStateFlags.Input, target.Flags);
@@ -162,7 +162,7 @@ namespace Core2D.Renderer.UnitTests
         [Trait("Core2D.Renderer", "Renderer")]
         public void Output_Property()
         {
-            var target = new ShapeState();
+            var target = _factory.CreateShapeState();
 
             target.Output = true;
             Assert.Equal(ShapeStateFlags.Output, target.Flags);

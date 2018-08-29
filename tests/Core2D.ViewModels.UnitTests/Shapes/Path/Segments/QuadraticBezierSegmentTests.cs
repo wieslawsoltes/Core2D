@@ -1,23 +1,25 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using System.Linq;
+using Core2D.Interfaces;
 using Core2D.Path.Segments;
 using Core2D.Shapes;
-using System.Linq;
 using Xunit;
 
 namespace Core2D.UnitTests
 {
     public class QuadraticBezierSegmentTests
     {
+        private readonly IFactory _factory = new Factory();
+
         [Fact]
         [Trait("Core2D.Path", "Segments")]
         public void GetPoints_Should_Return_All_Segment_Points()
         {
-            var segment = new QuadraticBezierSegment()
-            {
-                Point1 = new PointShape(),
-                Point2 = new PointShape()
-            };
+            var segment = _factory.CreateQuadraticBezierSegment()
+
+            segment.Point1 = _factory.CreatePointShape();
+            segment.Point2 = _factory.CreatePointShape();
 
             var target = segment.GetPoints();
 
@@ -31,11 +33,10 @@ namespace Core2D.UnitTests
         [Trait("Core2D.Path", "Segments")]
         public void ToString_Should_Return_Path_Markup()
         {
-            var target = new QuadraticBezierSegment()
-            {
-                Point1 = new PointShape(),
-                Point2 = new PointShape()
-            };
+            var target = _factory.CreateQuadraticBezierSegment()
+
+            target.Point1 = _factory.CreatePointShape();
+            target.Point2 = _factory.CreatePointShape();
 
             var actual = target.ToString();
 

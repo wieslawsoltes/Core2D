@@ -1,16 +1,19 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
-using Core2D.Data;
-using Core2D.Renderer;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Core2D.Data;
+using Core2D.Interfaces;
+using Core2D.Renderer;
 using Xunit;
 
 namespace Core2D.Shapes.UnitTests
 {
     public class ConnectableShapeTests
     {
+        private readonly IFactory _factory = new Factory();
+
         [Fact]
         [Trait("Core2D.Shapes", "Shapes")]
         public void Inherits_From_BaseShape()
@@ -46,7 +49,7 @@ namespace Core2D.Shapes.UnitTests
         public void AddConnectorAsNone_Add_Point_To_Connectors_As_None()
         {
             var target = new Class2();
-            var point = new PointShape();
+            var point = _factory.CreatePointShape();
 
             target.AddConnectorAsNone(point);
 
@@ -64,7 +67,7 @@ namespace Core2D.Shapes.UnitTests
         public void AddConnectorAsInput_Add_Point_To_Connectors_As_Input()
         {
             var target = new Class2();
-            var point = new PointShape();
+            var point = _factory.CreatePointShape();
 
             target.AddConnectorAsInput(point);
 
@@ -82,7 +85,7 @@ namespace Core2D.Shapes.UnitTests
         public void AddConnectorAsOutput_Add_Point_To_Connectors_As_Output()
         {
             var target = new Class2();
-            var point = new PointShape();
+            var point = _factory.CreatePointShape();
 
             target.AddConnectorAsOutput(point);
 

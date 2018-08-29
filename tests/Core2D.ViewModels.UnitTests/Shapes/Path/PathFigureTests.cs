@@ -53,10 +53,10 @@ namespace Core2D.UnitTests
         {
             var figure = _factory.CreatePathFigure();
 
-            var segment1 = new TestSegment() { Point = new PointShape() };
+            var segment1 = new TestSegment() { Point = _factory.CreatePointShape() };
             figure.Segments = figure.Segments.Add(segment1);
 
-            var segment2 = new TestSegment() { Point = new PointShape() };
+            var segment2 = new TestSegment() { Point = _factory.CreatePointShape() };
             figure.Segments = figure.Segments.Add(segment2);
 
             var target = figure.GetPoints();

@@ -1,19 +1,22 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using System.Linq;
+using Core2D.Interfaces;
 using Core2D.Path.Segments;
 using Core2D.Shapes;
-using System.Linq;
 using Xunit;
 
 namespace Core2D.UnitTests
 {
     public class PolyLineSegmentTests
     {
+        private readonly IFactory _factory = new Factory();
+
         [Fact]
         [Trait("Core2D.Path", "Segments")]
         public void Points_Not_Null()
         {
-            var target = new PolyLineSegment();
+            var target = _factory.CreatePolyLineSegment();
             Assert.False(target.Points.IsDefault);
         }
 
@@ -21,12 +24,12 @@ namespace Core2D.UnitTests
         [Trait("Core2D.Path", "Segments")]
         public void GetPoints_Should_Return_All_Segment_Points()
         {
-            var segment = new PolyLineSegment();
-            segment.Points = segment.Points.Add(new PointShape());
-            segment.Points = segment.Points.Add(new PointShape());
-            segment.Points = segment.Points.Add(new PointShape());
-            segment.Points = segment.Points.Add(new PointShape());
-            segment.Points = segment.Points.Add(new PointShape());
+            var segment = _factory.CreatePolyLineSegment();
+            segment.Points = segment.Points.Add(_factory.CreatePointShape());
+            segment.Points = segment.Points.Add(_factory.CreatePointShape());
+            segment.Points = segment.Points.Add(_factory.CreatePointShape());
+            segment.Points = segment.Points.Add(_factory.CreatePointShape());
+            segment.Points = segment.Points.Add(_factory.CreatePointShape());
 
             var target = segment.GetPoints();
             var count = target.Count();
@@ -40,12 +43,12 @@ namespace Core2D.UnitTests
         [Trait("Core2D.Path", "Segments")]
         public void ToString_Should_Return_Path_Markup()
         {
-            var target = new PolyLineSegment();
-            target.Points = target.Points.Add(new PointShape());
-            target.Points = target.Points.Add(new PointShape());
-            target.Points = target.Points.Add(new PointShape());
-            target.Points = target.Points.Add(new PointShape());
-            target.Points = target.Points.Add(new PointShape());
+            var target = _factory.CreatePolyLineSegment();
+            target.Points = target.Points.Add(_factory.CreatePointShape());
+            target.Points = target.Points.Add(_factory.CreatePointShape());
+            target.Points = target.Points.Add(_factory.CreatePointShape());
+            target.Points = target.Points.Add(_factory.CreatePointShape());
+            target.Points = target.Points.Add(_factory.CreatePointShape());
 
             var actual = target.ToString();
 
