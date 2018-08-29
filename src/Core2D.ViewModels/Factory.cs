@@ -120,7 +120,7 @@ namespace Core2D
             return new Context()
             {
                 Properties = ImmutableArray.Create<IProperty>()
-            }
+            };
         }
 
         /// <inheritdoc/>
