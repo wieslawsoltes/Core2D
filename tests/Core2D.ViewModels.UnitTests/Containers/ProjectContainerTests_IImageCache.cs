@@ -14,7 +14,7 @@ namespace Core2D.UnitTests
         [Trait("Core2D.Containers", "IImageCache")]
         public void Implements_IImageCache_Interface()
         {
-            var target = new ProjectContainer();
+            var target = _factory.CreateProjectContainer();
             Assert.True(target is IImageCache);
         }
 
@@ -22,7 +22,7 @@ namespace Core2D.UnitTests
         [Trait("Core2D.Containers", "IImageCache")]
         public void Inherits_From_ObservableObject()
         {
-            var target = new ProjectContainer();
+            var target = _factory.CreateProjectContainer();
             Assert.True(target is IObservableObject);
         }
 
@@ -30,7 +30,7 @@ namespace Core2D.UnitTests
         [Trait("Core2D.Containers", "IImageCache")]
         public void Keys_Not_Null()
         {
-            var target = new ProjectContainer();
+            var target = _factory.CreateProjectContainer();
             Assert.NotNull(target.Keys);
         }
 
@@ -38,7 +38,7 @@ namespace Core2D.UnitTests
         [Trait("Core2D.Containers", "IImageCache")]
         public void AddImageFromFile_Add_Key_And_Notify()
         {
-            var target = new ProjectContainer();
+            var target = _factory.CreateProjectContainer();
             string actual = null;
 
             target.PropertyChanged += (sender, e) =>
@@ -57,7 +57,7 @@ namespace Core2D.UnitTests
         [Trait("Core2D.Containers", "IImageCache")]
         public void AddImageFromFile_Do_Not_Add_Duplicate()
         {
-            var target = new ProjectContainer();
+            var target = _factory.CreateProjectContainer();
             int count = 0;
 
             target.PropertyChanged += (sender, e) =>
@@ -79,7 +79,7 @@ namespace Core2D.UnitTests
         [Trait("Core2D.Containers", "IImageCache")]
         public void AddImage_Add_Key_And_Notify()
         {
-            var target = new ProjectContainer();
+            var target = _factory.CreateProjectContainer();
             string actual = null;
 
             target.PropertyChanged += (sender, e) =>
@@ -100,7 +100,7 @@ namespace Core2D.UnitTests
         [Trait("Core2D.Containers", "IImageCache")]
         public void AddImage_Do_Not_Add_Duplicate()
         {
-            var target = new ProjectContainer();
+            var target = _factory.CreateProjectContainer();
             int count = 0;
 
             target.PropertyChanged += (sender, e) =>
@@ -122,7 +122,7 @@ namespace Core2D.UnitTests
         [Trait("Core2D.Containers", "IImageCache")]
         public void GetImage_Returns_Byte_Array()
         {
-            var project = new ProjectContainer();
+            var project = _factory.CreateProjectContainer();
 
             var key = "Images\\" + "image.jpg";
             var data = new byte[] { 0x12, 0x34, 0x56, 0x78 };
@@ -138,7 +138,7 @@ namespace Core2D.UnitTests
         [Trait("Core2D.Containers", "IImageCache")]
         public void GetImage_Returns_Null()
         {
-            var project = new ProjectContainer();
+            var project = _factory.CreateProjectContainer();
 
             var key = "Images\\" + "image.jpg";
 
@@ -151,7 +151,7 @@ namespace Core2D.UnitTests
         [Trait("Core2D.Containers", "IImageCache")]
         public void RemoveImage_Remove_Key_And_Notify()
         {
-            var target = new ProjectContainer();
+            var target = _factory.CreateProjectContainer();
             int count = 0;
 
             target.PropertyChanged += (sender, e) =>
@@ -172,7 +172,7 @@ namespace Core2D.UnitTests
         [Trait("Core2D.Containers", "IImageCache")]
         public void PurgeUnusedImages_Remove_All_Keys_And_Notify()
         {
-            var target = new ProjectContainer();
+            var target = _factory.CreateProjectContainer();
             int count = 0;
 
             target.PropertyChanged += (sender, e) =>
@@ -200,7 +200,7 @@ namespace Core2D.UnitTests
         [Trait("Core2D.Containers", "IImageCache")]
         public void PurgeUnusedImages_Remove_Only_Unused_Keys_And_Notify()
         {
-            var target = new ProjectContainer();
+            var target = _factory.CreateProjectContainer();
             int count = 0;
 
             target.PropertyChanged += (sender, e) =>

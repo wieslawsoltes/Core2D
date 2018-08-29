@@ -117,7 +117,10 @@ namespace Core2D
         /// <inheritdoc/>
         public IContext CreateContext()
         {
-            return new Context();
+            return new Context()
+            {
+                Properties = ImmutableArray.Create<IProperty>()
+            }
         }
 
         /// <inheritdoc/>
@@ -125,6 +128,7 @@ namespace Core2D
         {
             return new Context()
             {
+                Properties = ImmutableArray.Create<IProperty>(),
                 Record = record
             };
         }
@@ -346,11 +350,24 @@ namespace Core2D
         }
 
         /// <inheritdoc/>
+        public IPathFigure CreatePathFigure(bool isFilled = true, bool isClosed = true)
+        {
+            return new PathFigure()
+            {
+                StartPoint = CreatePointShape(),
+                Segments = ImmutableArray.Create<IPathSegment>(),
+                IsFilled = isFilled,
+                IsClosed = isClosed
+            };
+        }
+
+        /// <inheritdoc/>
         public IPathFigure CreatePathFigure(IPointShape startPoint, bool isFilled = true, bool isClosed = true)
         {
             return new PathFigure()
             {
                 StartPoint = startPoint,
+                Segments = ImmutableArray.Create<IPathSegment>(),
                 IsFilled = isFilled,
                 IsClosed = isClosed
             };
@@ -362,6 +379,9 @@ namespace Core2D
             return new PointShape()
             {
                 Name = name,
+                State = CreateShapeState(ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone),
+                Transform = CreateMatrixObject(),
+                Data = CreateContext(),
                 Style = default,
                 X = x,
                 Y = y,
@@ -376,6 +396,9 @@ namespace Core2D
             return new LineShape()
             {
                 Name = name,
+                State = CreateShapeState(ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone),
+                Transform = CreateMatrixObject(),
+                Data = CreateContext(),
                 Style = style,
                 IsStroked = isStroked,
                 IsFilled = false,
@@ -390,6 +413,9 @@ namespace Core2D
             return new LineShape()
             {
                 Name = name,
+                State = CreateShapeState(ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone),
+                Transform = CreateMatrixObject(),
+                Data = CreateContext(),
                 Style = style,
                 IsStroked = isStroked,
                 IsFilled = false,
@@ -410,6 +436,9 @@ namespace Core2D
             return new ArcShape()
             {
                 Name = name,
+                State = CreateShapeState(ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone),
+                Transform = CreateMatrixObject(),
+                Data = CreateContext(),
                 Style = style,
                 IsStroked = isStroked,
                 IsFilled = isFilled,
@@ -432,6 +461,9 @@ namespace Core2D
             return new ArcShape()
             {
                 Name = name,
+                State = CreateShapeState(ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone),
+                Transform = CreateMatrixObject(),
+                Data = CreateContext(),
                 Style = style,
                 IsStroked = isStroked,
                 IsFilled = isFilled,
@@ -448,6 +480,9 @@ namespace Core2D
             return new QuadraticBezierShape()
             {
                 Name = name,
+                State = CreateShapeState(ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone),
+                Transform = CreateMatrixObject(),
+                Data = CreateContext(),
                 Style = style,
                 IsStroked = isStroked,
                 IsFilled = isFilled,
@@ -469,6 +504,9 @@ namespace Core2D
             return new QuadraticBezierShape()
             {
                 Name = name,
+                State = CreateShapeState(ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone),
+                Transform = CreateMatrixObject(),
+                Data = CreateContext(),
                 Style = style,
                 IsStroked = isStroked,
                 IsFilled = isFilled,
@@ -484,6 +522,9 @@ namespace Core2D
             return new CubicBezierShape()
             {
                 Name = name,
+                State = CreateShapeState(ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone),
+                Transform = CreateMatrixObject(),
+                Data = CreateContext(),
                 Style = style,
                 IsStroked = isStroked,
                 IsFilled = isFilled,
@@ -506,6 +547,9 @@ namespace Core2D
             return new CubicBezierShape()
             {
                 Name = name,
+                State = CreateShapeState(ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone),
+                Transform = CreateMatrixObject(),
+                Data = CreateContext(),
                 Style = style,
                 IsStroked = isStroked,
                 IsFilled = isFilled,
@@ -522,6 +566,9 @@ namespace Core2D
             return new RectangleShape()
             {
                 Name = name,
+                State = CreateShapeState(ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone),
+                Transform = CreateMatrixObject(),
+                Data = CreateContext(),
                 Style = style,
                 IsStroked = isStroked,
                 IsFilled = isFilled,
@@ -548,6 +595,9 @@ namespace Core2D
             return new RectangleShape()
             {
                 Name = name,
+                State = CreateShapeState(ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone),
+                Transform = CreateMatrixObject(),
+                Data = CreateContext(),
                 Style = style,
                 IsStroked = isStroked,
                 IsFilled = isFilled,
@@ -568,6 +618,9 @@ namespace Core2D
             return new EllipseShape()
             {
                 Name = name,
+                State = CreateShapeState(ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone),
+                Transform = CreateMatrixObject(),
+                Data = CreateContext(),
                 Style = style,
                 IsStroked = isStroked,
                 IsFilled = isFilled,
@@ -589,6 +642,9 @@ namespace Core2D
             return new EllipseShape()
             {
                 Name = name,
+                State = CreateShapeState(ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone),
+                Transform = CreateMatrixObject(),
+                Data = CreateContext(),
                 Style = style,
                 IsStroked = isStroked,
                 IsFilled = isFilled,
@@ -603,6 +659,9 @@ namespace Core2D
         {
             return new PathShape()
             {
+                State = CreateShapeState(ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone),
+                Transform = CreateMatrixObject(),
+                Data = CreateContext(),
                 Style = style,
                 IsStroked = isStroked,
                 IsFilled = isFilled,
@@ -616,6 +675,9 @@ namespace Core2D
             return new PathShape()
             {
                 Name = name,
+                State = CreateShapeState(ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone),
+                Transform = CreateMatrixObject(),
+                Data = CreateContext(),
                 Style = style,
                 IsStroked = isStroked,
                 IsFilled = isFilled,
@@ -629,6 +691,9 @@ namespace Core2D
             return new TextShape()
             {
                 Name = name,
+                State = CreateShapeState(ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone),
+                Transform = CreateMatrixObject(),
+                Data = CreateContext(),
                 Style = style,
                 IsStroked = isStroked,
                 TopLeft = CreatePointShape(x1, y1, point),
@@ -649,6 +714,9 @@ namespace Core2D
             return new TextShape()
             {
                 Name = name,
+                State = CreateShapeState(ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone),
+                Transform = CreateMatrixObject(),
+                Data = CreateContext(),
                 Style = style,
                 IsStroked = isStroked,
                 TopLeft = topLeft,
@@ -663,6 +731,9 @@ namespace Core2D
             return new ImageShape()
             {
                 Name = name,
+                State = CreateShapeState(ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone),
+                Transform = CreateMatrixObject(),
+                Data = CreateContext(),
                 Style = style,
                 IsStroked = isStroked,
                 IsFilled = isFilled,
@@ -685,6 +756,9 @@ namespace Core2D
             return new ImageShape()
             {
                 Name = name,
+                State = CreateShapeState(ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone),
+                Transform = CreateMatrixObject(),
+                Data = CreateContext(),
                 Style = style,
                 IsStroked = isStroked,
                 IsFilled = isFilled,
@@ -700,7 +774,10 @@ namespace Core2D
         {
             return new GroupShape()
             {
-                Name = name
+                Name = name,
+                State = CreateShapeState(ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone),
+                Transform = CreateMatrixObject(),
+                Data = CreateContext(),
             };
         }
 
@@ -944,7 +1021,9 @@ namespace Core2D
         {
             var page = new PageContainer()
             {
-                Name = name
+                Name = name,
+                Layers = ImmutableArray.Create<ILayerContainer>(),
+                Data = CreateContext()
             };
 
             var builder = page.Layers.ToBuilder();
@@ -965,7 +1044,9 @@ namespace Core2D
         {
             var template = new PageContainer()
             {
-                Name = name
+                Name = name,
+                Layers = ImmutableArray.Create<ILayerContainer>(),
+                Data = CreateContext()
             };
 
             template.Background = CreateArgbColor(0x00, 0xFF, 0xFF, 0xFF);
@@ -999,7 +1080,13 @@ namespace Core2D
         {
             return new ProjectContainer()
             {
-                Name = name
+                Name = name,
+                Options = CreateOptions(),
+                StyleLibraries = ImmutableArray.Create<ILibrary<IShapeStyle>>(),
+                GroupLibraries = ImmutableArray.Create<ILibrary<IGroupShape>>(),
+                Databases = ImmutableArray.Create<IDatabase>(),
+                Templates = ImmutableArray.Create<IPageContainer>(),
+                Documents = ImmutableArray.Create<IDocumentContainer>()
             };
         }
 

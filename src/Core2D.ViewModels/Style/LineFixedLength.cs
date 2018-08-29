@@ -116,8 +116,13 @@ namespace Core2D.Style
         public static ILineFixedLength Parse(string s)
         {
             var flags = (LineFixedLengthFlags)Enum.Parse(typeof(LineFixedLengthFlags), s, true);
-
-            return Factory.CreateLineFixedLength(flags);
+            return new LineFixedLength()
+            {
+                Flags = flags,
+                StartTrigger = new ShapeState() { Flags = ShapeStateFlags.Connector | ShapeStateFlags.Output },
+                EndTrigger = new ShapeState() { Flags = ShapeStateFlags.Connector | ShapeStateFlags.Input },
+                Length = length
+            };
         }
 
         /// <inheritdoc/>

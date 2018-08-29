@@ -258,6 +258,14 @@ namespace Core2D.Interfaces
         /// <summary>
         /// Creates a new <see cref="IPathFigure"/> instance.
         /// </summary>
+        /// <param name="isFilled">The flag indicating whether path is filled.</param>
+        /// <param name="isClosed">The flag indicating whether path is closed.</param>
+        /// <returns>The new instance of the <see cref="IPathFigure"/> class.</returns>
+        IPathFigure CreatePathFigure(bool isFilled = true, bool isClosed = true);
+
+        /// <summary>
+        /// Creates a new <see cref="IPathFigure"/> instance.
+        /// </summary>
         /// <param name="startPoint">The start point.</param>
         /// <param name="isFilled">The flag indicating whether path is filled.</param>
         /// <param name="isClosed">The flag indicating whether path is closed.</param>

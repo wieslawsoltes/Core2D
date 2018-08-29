@@ -139,51 +139,6 @@ namespace Core2D.Containers
             set => Update(ref _isExpanded, value);
         }
 
-        /// <summary>
-        /// Gets or sets property Value using Name as key for data Properties array values. 
-        /// </summary>
-        /// <remarks>If property with the specified key does not exist it is created.</remarks>
-        /// <param name="name">The property name value.</param>
-        /// <returns>The property value.</returns>
-        public string this[string name]
-        {
-            get
-            {
-                var result = _data.Properties.FirstOrDefault(p => p.Name == name);
-                if (result != null)
-                {
-                    return result.Value;
-                }
-                return null;
-            }
-            set
-            {
-                if (value != null)
-                {
-                    var result = _data.Properties.FirstOrDefault(p => p.Name == name);
-                    if (result != null)
-                    {
-                        result.Value = value;
-                    }
-                    else
-                    {
-                        var property = Factory.CreateProperty(_data, name, value);
-                        _data.Properties = _data.Properties.Add(property);
-                    }
-                }
-            }
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="PageContainer"/> class.
-        /// </summary>
-        public PageContainer()
-            : base()
-        {
-            _layers = ImmutableArray.Create<ILayerContainer>();
-            _data = Factory.CreateContext();
-        }
-
         /// <inheritdoc/>
         public void SetCurrentLayer(ILayerContainer layer) => CurrentLayer = layer;
 

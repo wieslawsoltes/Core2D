@@ -12,11 +12,13 @@ namespace Core2D.UnitTests
 {
     public class PathFigureTests
     {
+        private readonly IFactory _factory = new Factory();
+
         [Fact]
         [Trait("Core2D.Path", "Geometry")]
         public void StartPoint_Not_Null()
         {
-            var target = new PathFigure();
+            var target = _factory.CreatePathFigure();
             Assert.NotNull(target.StartPoint);
         }
 
@@ -24,7 +26,7 @@ namespace Core2D.UnitTests
         [Trait("Core2D.Path", "Geometry")]
         public void Segments_Not_Null()
         {
-            var target = new PathFigure();
+            var target = _factory.CreatePathFigure();
             Assert.False(target.Segments.IsDefault);
         }
 
@@ -32,7 +34,7 @@ namespace Core2D.UnitTests
         [Trait("Core2D.Path", "Geometry")]
         public void IsFilled_By_Default_Is_False()
         {
-            var target = new PathFigure();
+            var target = _factory.CreatePathFigure();
             Assert.False(target.IsFilled);
         }
 
@@ -40,7 +42,7 @@ namespace Core2D.UnitTests
         [Trait("Core2D.Path", "Geometry")]
         public void IsClosed_By_Default_Is_False()
         {
-            var target = new PathFigure();
+            var target = _factory.CreatePathFigure();
             Assert.False(target.IsClosed);
         }
 
@@ -48,7 +50,7 @@ namespace Core2D.UnitTests
         [Trait("Core2D.Path", "Geometry")]
         public void GetPoints_Should_Return_All_Segment_Points()
         {
-            var figure = new PathFigure();
+            var figure = _factory.CreatePathFigure();
 
             var segment1 = new TestSegment() { Point = new PointShape() };
             figure.Segments = figure.Segments.Add(segment1);
@@ -69,7 +71,7 @@ namespace Core2D.UnitTests
         [Trait("Core2D.Path", "Geometry")]
         public void ToString_Should_Return_Empty()
         {
-            var figure = new PathFigure();
+            var figure = _factory.CreatePathFigure();
 
             var target = ImmutableArray.Create<IPathSegment>();
             var actual = figure.ToString(target);
@@ -81,7 +83,7 @@ namespace Core2D.UnitTests
         [Trait("Core2D.Path", "Geometry")]
         public void ToString_Should_Return_Path_Markup_Empty_Not_Closed()
         {
-            var target = new PathFigure();
+            var target = _factory.CreatePathFigure();
 
             var actual = target.ToString();
 
@@ -92,7 +94,9 @@ namespace Core2D.UnitTests
         [Trait("Core2D.Path", "Geometry")]
         public void ToString_Should_Return_Path_Markup_Empty_Closed()
         {
-            var target = new PathFigure() { IsClosed = true };
+            var target = _factory.CreatePathFigure();
+            
+            target.IsClosed = true;
 
             var actual = target.ToString();
 

@@ -21,11 +21,6 @@ namespace Core2D.Editor.Designer
     public class DesignerContext
     {
         /// <summary>
-        /// The design time <see cref="IFactory"/>.
-        /// </summary>
-        public static IFactory Factory { get; set; }
-
-        /// <summary>
         /// The design time <see cref="ProjectEditor"/>.
         /// </summary>
         public static ProjectEditor Editor { get; set; }
@@ -241,9 +236,7 @@ namespace Core2D.Editor.Designer
         /// <param name="serviceProvider">The service provider.</param>
         public static void InitializeContext(IServiceProvider serviceProvider)
         {
-            // Factory
-
-            Factory = serviceProvider.GetService<IFactory>();
+            var factory = serviceProvider.GetService<IFactory>();
 
             // Editor
 
@@ -264,19 +257,19 @@ namespace Core2D.Editor.Designer
 
             // Data
 
-            var db = Factory.CreateDatabase("Db");
+            var db = factory.CreateDatabase("Db");
             var fields = new string[] { "Column0", "Column1" };
-            var columns = ImmutableArray.CreateRange(fields.Select(c => Factory.CreateColumn(db, c)));
+            var columns = ImmutableArray.CreateRange(fields.Select(c => factory.CreateColumn(db, c)));
             db.Columns = columns;
-            var values = Enumerable.Repeat("<empty>", db.Columns.Length).Select(c => Factory.CreateValue(c));
-            var record = Factory.CreateRecord(
+            var values = Enumerable.Repeat("<empty>", db.Columns.Length).Select(c => factory.CreateValue(c));
+            var record = factory.CreateRecord(
                 db,
                 ImmutableArray.CreateRange(values));
             db.Records = db.Records.Add(record);
             db.CurrentRecord = record;
 
             Database = db;
-            Data = Factory.CreateContext(record);
+            Data = factory.CreateContext(record);
             Record = record;
 
             // Project
@@ -286,62 +279,62 @@ namespace Core2D.Editor.Designer
 
             Project = containerFactory.GetProject();
 
-            Template = Factory.CreateTemplateContainer();
+            Template = factory.CreateTemplateContainer();
 
-            Page = Factory.CreatePageContainer();
+            Page = factory.CreatePageContainer();
             var layer = Page.Layers.FirstOrDefault();
-            layer.Shapes = layer.Shapes.Add(Factory.CreateLineShape(0, 0, null, null));
+            layer.Shapes = layer.Shapes.Add(factory.CreateLineShape(0, 0, null, null));
             Page.CurrentLayer = layer;
             Page.CurrentShape = layer.Shapes.FirstOrDefault();
             Page.Template = Template;
 
-            Document = Factory.CreateDocumentContainer();
-            Layer = Factory.CreateLayerContainer();
-            Options =Factory.CreateOptions();
+            Document = factory.CreateDocumentContainer();
+            Layer = factory.CreateLayerContainer();
+            Options =factory.CreateOptions();
 
             CurrentStyleLibrary = Project.CurrentStyleLibrary;
             CurrentGroupLibrary = Project.CurrentGroupLibrary;
 
             // State
 
-            State = Factory.CreateShapeState();
+            State = factory.CreateShapeState();
 
             // Style
 
-            ArgbColor = Factory.CreateArgbColor(128, 255, 0, 0);
-            ArrowStyle = Factory.CreateArrowStyle();
-            FontStyle = Factory.CreateFontStyle();
-            LineFixedLength = Factory.CreateLineFixedLength();
-            LineStyle = Factory.CreateLineStyle();
-            Style = Factory.CreateShapeStyle("Default");
-            TextStyle = Factory.CreateTextStyle();
+            ArgbColor = factory.CreateArgbColor(128, 255, 0, 0);
+            ArrowStyle = factory.CreateArrowStyle();
+            FontStyle = factory.CreateFontStyle();
+            LineFixedLength = factory.CreateLineFixedLength();
+            LineStyle = factory.CreateLineStyle();
+            Style = factory.CreateShapeStyle("Default");
+            TextStyle = factory.CreateTextStyle();
 
             // Shapes
 
-            Arc = Factory.CreateArcShape(0, 0, Style, null);
-            CubicBezier = Factory.CreateCubicBezierShape(0, 0, Style, null);
-            Ellipse = Factory.CreateEllipseShape(0, 0, Style, null);
-            Group = Factory.CreateGroupShape(Constants.DefaulGroupName);
-            Image = Factory.CreateImageShape(0, 0, Style, null, "key");
-            Line = Factory.CreateLineShape(0, 0, Style, null);
-            Path = Factory.CreatePathShape(Style, null);
-            Point = Factory.CreatePointShape();
-            QuadraticBezier = Factory.CreateQuadraticBezierShape(0, 0, Style, null);
-            Rectangle = Factory.CreateRectangleShape(0, 0, Style, null);
-            Text = Factory.CreateTextShape(0, 0, Style, null, "Text");
+            Arc = factory.CreateArcShape(0, 0, Style, null);
+            CubicBezier = factory.CreateCubicBezierShape(0, 0, Style, null);
+            Ellipse = factory.CreateEllipseShape(0, 0, Style, null);
+            Group = factory.CreateGroupShape(Constants.DefaulGroupName);
+            Image = factory.CreateImageShape(0, 0, Style, null, "key");
+            Line = factory.CreateLineShape(0, 0, Style, null);
+            Path = factory.CreatePathShape(Style, null);
+            Point = factory.CreatePointShape();
+            QuadraticBezier = factory.CreateQuadraticBezierShape(0, 0, Style, null);
+            Rectangle = factory.CreateRectangleShape(0, 0, Style, null);
+            Text = factory.CreateTextShape(0, 0, Style, null, "Text");
 
             // Path
 
-            ArcSegment = Factory.CreateArcSegment(Factory.CreatePointShape(), Factory.CreatePathSize(), 180, true, SweepDirection.Clockwise, true, true);
-            CubicBezierSegment = Factory.CreateCubicBezierSegment(Factory.CreatePointShape(), Factory.CreatePointShape(), Factory.CreatePointShape(), true, true);
-            LineSegment = Factory.CreateLineSegment(Factory.CreatePointShape(), true, true);
-            PathFigure = Factory.CreatePathFigure(Factory.CreatePointShape(), false, true);
-            PathGeometry = Factory.CreatePathGeometry(ImmutableArray.Create<IPathFigure>(), FillRule.EvenOdd);
-            PathSize = Factory.CreatePathSize();
-            PolyCubicBezierSegment = Factory.CreatePolyCubicBezierSegment(ImmutableArray.Create<IPointShape>(), true, true);
-            PolyLineSegment = Factory.CreatePolyLineSegment(ImmutableArray.Create<IPointShape>(), true, true);
-            PolyQuadraticBezierSegment = Factory.CreatePolyQuadraticBezierSegment(ImmutableArray.Create<IPointShape>(), true, true);
-            QuadraticBezierSegment = Factory.CreateQuadraticBezierSegment(Factory.CreatePointShape(), Factory.CreatePointShape(), true, true);
+            ArcSegment = factory.CreateArcSegment(factory.CreatePointShape(), factory.CreatePathSize(), 180, true, SweepDirection.Clockwise, true, true);
+            CubicBezierSegment = factory.CreateCubicBezierSegment(factory.CreatePointShape(), factory.CreatePointShape(), factory.CreatePointShape(), true, true);
+            LineSegment = factory.CreateLineSegment(factory.CreatePointShape(), true, true);
+            PathFigure = factory.CreatePathFigure(factory.CreatePointShape(), false, true);
+            PathGeometry = factory.CreatePathGeometry(ImmutableArray.Create<IPathFigure>(), FillRule.EvenOdd);
+            PathSize = factory.CreatePathSize();
+            PolyCubicBezierSegment = factory.CreatePolyCubicBezierSegment(ImmutableArray.Create<IPointShape>(), true, true);
+            PolyLineSegment = factory.CreatePolyLineSegment(ImmutableArray.Create<IPointShape>(), true, true);
+            PolyQuadraticBezierSegment = factory.CreatePolyQuadraticBezierSegment(ImmutableArray.Create<IPointShape>(), true, true);
+            QuadraticBezierSegment = factory.CreateQuadraticBezierSegment(factory.CreatePointShape(), factory.CreatePointShape(), true, true);
         }
     }
 }

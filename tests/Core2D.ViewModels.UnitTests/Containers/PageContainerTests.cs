@@ -121,7 +121,7 @@ namespace Core2D.UnitTests
         [Trait("Core2D.Containers", "Project")]
         public void Data_Not_Null()
         {
-            var target = new PageContainer();
+            var target = _factory.CreatePageContainer();
             Assert.NotNull(target.Data);
         }
 
@@ -129,7 +129,7 @@ namespace Core2D.UnitTests
         [Trait("Core2D.Containers", "Project")]
         public void This_Operator_Returns_Null()
         {
-            var target = new PageContainer();
+            var target = _factory.CreatePageContainer();
             Assert.Null(target["Name1"]);
         }
 
@@ -137,7 +137,7 @@ namespace Core2D.UnitTests
         [Trait("Core2D.Containers", "Project")]
         public void This_Operator_Returns_Property_Value()
         {
-            var target = new PageContainer();
+            var target = _factory.CreatePageContainer();
             target.Data.Properties = target.Data.Properties.Add(_factory.CreateProperty(target.Data, "Name1", "Value1"));
 
             Assert.Equal("Value1", target["Name1"]);
@@ -147,7 +147,7 @@ namespace Core2D.UnitTests
         [Trait("Core2D.Containers", "Project")]
         public void This_Operator_Sets_Property_Value()
         {
-            var target = new PageContainer();
+            var target = _factory.CreatePageContainer();
             target.Data.Properties = target.Data.Properties.Add(_factory.CreateProperty(target.Data, "Name1", "Value1"));
 
             target["Name1"] = "NewValue1";
@@ -158,7 +158,7 @@ namespace Core2D.UnitTests
         [Trait("Core2D.Containers", "Project")]
         public void This_Operator_Creates_Property()
         {
-            var target = new PageContainer();
+            var target = _factory.CreatePageContainer();
             Assert.Empty(target.Data.Properties);
 
             target["Name1"] = "Value1";
@@ -171,10 +171,9 @@ namespace Core2D.UnitTests
         [Trait("Core2D.Containers", "Project")]
         public void Invalidate_Should_Invalidate_Template()
         {
-            var target = new PageContainer()
-            {
-                Template = new PageContainer()
-            };
+            var target = _factory.CreatePageContainer();
+
+            target.Template = _factory.CreateTemplateContainer();
 
             var layer = _factory.CreateLayerContainer("Layer1", target);
             target.Template.Layers = target.Template.Layers.Add(layer);

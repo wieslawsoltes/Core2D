@@ -190,20 +190,6 @@ namespace Core2D.Containers
             return GetAllShapes(shapes)?.Where(s => s is T).Cast<T>();
         }
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="IProjectContainer"/> class.
-        /// </summary>
-        public ProjectContainer()
-            : base()
-        {
-            _options = Factory.CreateOptions();
-            _styleLibraries = ImmutableArray.Create<ILibrary<IShapeStyle>>();
-            _groupLibraries = ImmutableArray.Create<ILibrary<IGroupShape>>();
-            _databases = ImmutableArray.Create<IDatabase>();
-            _templates = ImmutableArray.Create<IPageContainer>();
-            _documents = ImmutableArray.Create<IDocumentContainer>();
-        }
-
         /// <inheritdoc/>
         public void SetCurrentDocument(IDocumentContainer document)
         {

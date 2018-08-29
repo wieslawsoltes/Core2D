@@ -32,46 +32,9 @@ namespace Core2D.Data
         }
 
         /// <summary>
-        /// Gets or sets <see cref="IProperty.Value"/> using name as key for <see cref="Properties"/> array values.
-        /// </summary>
-        /// <remarks>
-        /// If property with the specified key does not exist it is created.
-        /// </remarks>
-        /// <param name="name">The property value.</param>
-        /// <returns>The property value.</returns>
-        public string this[string name]
-        {
-            get
-            {
-                var result = _properties.FirstOrDefault(p => p.Name == name);
-                if (result != null)
-                {
-                    return result.Value;
-                }
-                return null;
-            }
-            set
-            {
-                if (value != null)
-                {
-                    var result = _properties.FirstOrDefault(p => p.Name == name);
-                    if (result != null)
-                    {
-                        result.Value = value;
-                    }
-                    else
-                    {
-                        var property = Factory.CreateProperty(this, name, value);
-                        Properties = Properties.Add(property);
-                    }
-                }
-            }
-        }
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="Context"/> class.
         /// </summary>
-        public Context() : base() => _properties = ImmutableArray.Create<IProperty>();
+        public Context() : base() => ;
 
         /// <inheritdoc/>
         public override object Copy(IDictionary<object, object> shared)

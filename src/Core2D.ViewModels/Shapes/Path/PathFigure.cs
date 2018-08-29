@@ -57,15 +57,6 @@ namespace Core2D.Path
             set => Update(ref _isClosed, value);
         }
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="PathFigure"/> class.
-        /// </summary>
-        public PathFigure()
-        {
-            StartPoint = Factory.CreatePointShape();
-            Segments = ImmutableArray.Create<IPathSegment>();
-        }
-
         /// <inheritdoc/>
         public IEnumerable<IPointShape> GetPoints()
         {
