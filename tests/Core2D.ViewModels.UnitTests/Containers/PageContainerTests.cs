@@ -128,48 +128,6 @@ namespace Core2D.UnitTests
 
         [Fact]
         [Trait("Core2D.Containers", "Project")]
-        public void This_Operator_Returns_Null()
-        {
-            var target = _factory.CreatePageContainer();
-            Assert.Null(target["Name1"]);
-        }
-
-        [Fact]
-        [Trait("Core2D.Containers", "Project")]
-        public void This_Operator_Returns_Property_Value()
-        {
-            var target = _factory.CreatePageContainer();
-            target.Data.Properties = target.Data.Properties.Add(_factory.CreateProperty(target.Data, "Name1", "Value1"));
-
-            Assert.Equal("Value1", target["Name1"]);
-        }
-
-        [Fact]
-        [Trait("Core2D.Containers", "Project")]
-        public void This_Operator_Sets_Property_Value()
-        {
-            var target = _factory.CreatePageContainer();
-            target.Data.Properties = target.Data.Properties.Add(_factory.CreateProperty(target.Data, "Name1", "Value1"));
-
-            target["Name1"] = "NewValue1";
-            Assert.Equal("NewValue1", target["Name1"]);
-        }
-
-        [Fact]
-        [Trait("Core2D.Containers", "Project")]
-        public void This_Operator_Creates_Property()
-        {
-            var target = _factory.CreatePageContainer();
-            Assert.Empty(target.Data.Properties);
-
-            target["Name1"] = "Value1";
-            Assert.Equal("Value1", target.Data.Properties[0].Value);
-
-            Assert.Equal(target.Data, target.Data.Properties[0].Owner);
-        }
-
-        [Fact]
-        [Trait("Core2D.Containers", "Project")]
         public void Invalidate_Should_Invalidate_Template()
         {
             var target = _factory.CreatePageContainer();
