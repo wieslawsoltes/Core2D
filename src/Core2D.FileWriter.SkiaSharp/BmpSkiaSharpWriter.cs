@@ -42,7 +42,7 @@ namespace Core2D.FileWriter.SkiaSharpBmp
             if (options == null)
                 return;
 
-            var renderer = new SkiaSharpRenderer(true, 96.0);
+            var renderer = new SkiaSharpRenderer(_serviceProvider, true, 96.0);
             renderer.State.DrawShapeState.Flags = ShapeStateFlags.Printable;
             renderer.State.ImageCache = ic;
 

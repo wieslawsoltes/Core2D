@@ -68,12 +68,6 @@ namespace Core2D.Renderer.Avalonia
             throw new NotImplementedException();
         }
 
-        /// <summary>
-        /// Creates a new <see cref="AvaloniaRenderer"/> instance.
-        /// </summary>
-        /// <returns>The new instance of the <see cref="AvaloniaRenderer"/> class.</returns>
-        public static IShapeRenderer Create() => new AvaloniaRenderer();
-
         private A.Point GetTextOrigin(IShapeStyle style, ref Rect2 rect, ref A.Size size)
         {
             double ox, oy;

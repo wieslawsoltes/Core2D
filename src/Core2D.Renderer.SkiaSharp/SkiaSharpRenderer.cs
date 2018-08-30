@@ -56,12 +56,6 @@ namespace Core2D.Renderer.SkiaSharp
             throw new NotImplementedException();
         }
 
-        /// <summary>
-        /// Creates a new <see cref="SkiaSharpRenderer"/> instance.
-        /// </summary>
-        /// <returns>The new instance of the <see cref="SkiaSharpRenderer"/> class.</returns>
-        public static IShapeRenderer Create() => new SkiaSharpRenderer();
-
         private SKPoint GetTextOrigin(IShapeStyle style, ref SKRect rect, ref SKRect size)
         {
             double rwidth = Math.Abs(rect.Right - rect.Left);

@@ -68,12 +68,6 @@ namespace Core2D.Renderer.Wpf
             throw new NotImplementedException();
         }
 
-        /// <summary>
-        /// Creates a new <see cref="WpfRenderer"/> instance.
-        /// </summary>
-        /// <returns>The new instance of the <see cref="WpfRenderer"/> class.</returns>
-        public static IShapeRenderer Create() => new WpfRenderer();
-
         private static W.Point GetTextOrigin(IShapeStyle style, ref W.Rect rect, WM.FormattedText ft)
         {
             double ox, oy;

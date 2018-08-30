@@ -53,12 +53,6 @@ namespace Core2D.Renderer.WinForms
             throw new NotImplementedException();
         }
 
-        /// <summary>
-        /// Creates a new <see cref="WinFormsRenderer"/> instance.
-        /// </summary>
-        /// <returns>The new instance of the <see cref="WinFormsRenderer"/> class.</returns>
-        public static IShapeRenderer Create() => new WinFormsRenderer();
-
         private static Color ToColor(IColor color)
         {
             switch (color)

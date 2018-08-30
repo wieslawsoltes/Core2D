@@ -58,12 +58,6 @@ namespace Core2D.Renderer.Dxf
             throw new NotImplementedException();
         }
 
-        /// <summary>
-        /// Creates a new <see cref="DxfRenderer"/> instance.
-        /// </summary>
-        /// <returns>The new instance of the <see cref="DxfRenderer"/> class.</returns>
-        public static IShapeRenderer Create() => new DxfRenderer();
-
         private static double s_lineweightFactor = 96.0 / 2540.0;
 
         private static short[] s_lineweights = { -3, -2, -1, 0, 5, 9, 13, 15, 18, 20, 25, 30, 35, 40, 50, 53, 60, 70, 80, 90, 100, 106, 120, 140, 158, 200, 211 };

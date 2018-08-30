@@ -50,12 +50,6 @@ namespace Core2D.Renderer.PdfSharp
             throw new NotImplementedException();
         }
 
-        /// <summary>
-        /// Creates a new <see cref="PdfSharpRenderer"/> instance.
-        /// </summary>
-        /// <returns>The new instance of the <see cref="PdfSharpRenderer"/> class.</returns>
-        public static IShapeRenderer Create() => new PdfSharpRenderer();
-
         private static XColor ToXColor(IColor color)
         {
             switch (color)

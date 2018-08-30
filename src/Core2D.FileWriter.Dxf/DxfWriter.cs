@@ -40,9 +40,9 @@ namespace Core2D.FileWriter.Dxf
             if (options == null)
                 return;
 
-            IProjectExporter exporter = new DxfRenderer();
+            IProjectExporter exporter = new DxfRenderer(_serviceProvider);
 
-            IShapeRenderer renderer = (DxfRenderer)exporter;
+            IShapeRenderer renderer = (IShapeRenderer)exporter;
             renderer.State.DrawShapeState.Flags = ShapeStateFlags.Printable;
             renderer.State.ImageCache = ic;
 

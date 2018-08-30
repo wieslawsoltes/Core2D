@@ -41,7 +41,7 @@ namespace Core2D.FileWriter.SkiaSharpPdf
             if (options == null)
                 return;
 
-            IShapeRenderer renderer = new SkiaSharpRenderer(true, 72.0);
+            IShapeRenderer renderer = new SkiaSharpRenderer(_serviceProvider, true, 72.0);
             renderer.State.DrawShapeState.Flags = ShapeStateFlags.Printable;
             renderer.State.ImageCache = ic;
 

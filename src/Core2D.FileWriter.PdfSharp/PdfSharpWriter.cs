@@ -41,9 +41,9 @@ namespace Core2D.FileWriter.PdfSharp
             if (options == null)
                 return;
 
-            IProjectExporter exporter = new PdfSharpRenderer();
+            IProjectExporter exporter = new PdfSharpRenderer(_serviceProvider);
 
-            IShapeRenderer renderer = (PdfSharpRenderer)exporter;
+            IShapeRenderer renderer = (IShapeRenderer)exporter;
             renderer.State.DrawShapeState.Flags = ShapeStateFlags.Printable;
             renderer.State.ImageCache = ic;
 
