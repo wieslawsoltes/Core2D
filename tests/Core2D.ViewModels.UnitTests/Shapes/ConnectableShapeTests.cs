@@ -18,7 +18,10 @@ namespace Core2D.Shapes.UnitTests
         [Trait("Core2D.Shapes", "Shapes")]
         public void Inherits_From_BaseShape()
         {
-            var target = new Class2();
+            var target = new Class2()
+            {
+                State = _factory.CreateShapeState()
+            };
             Assert.True(target is BaseShape);
         }
 
@@ -26,7 +29,10 @@ namespace Core2D.Shapes.UnitTests
         [Trait("Core2D.Shapes", "Shapes")]
         public void Connectors_Not_Null()
         {
-            var target = new Class2();
+            var target = new Class2()
+            {
+                State = _factory.CreateShapeState()
+            };
             Assert.False(target.Connectors.IsDefault);
         }
 
@@ -34,10 +40,13 @@ namespace Core2D.Shapes.UnitTests
         [Trait("Core2D.Shapes", "Shapes")]
         public void GetPoints_Returns_Connector_Points()
         {
-            var target = new Class2();
+            var target = new Class2()
+            {
+                State = _factory.CreateShapeState()
+            };
 
-            var point = new PointShape();
-            point.Data.Properties = point.Data.Properties.Add(new Property());
+            var point = _factory.CreatePointShape();
+            point.Data.Properties = point.Data.Properties.Add(_factory.CreateProperty(null, "", ""));
             target.Connectors = target.Connectors.Add(point);
 
             var count = target.GetPoints().Count();
@@ -48,7 +57,10 @@ namespace Core2D.Shapes.UnitTests
         [Trait("Core2D.Shapes", "Shapes")]
         public void AddConnectorAsNone_Add_Point_To_Connectors_As_None()
         {
-            var target = new Class2();
+            var target = new Class2()
+            {
+                State = _factory.CreateShapeState()
+            };
             var point = _factory.CreatePointShape();
 
             target.AddConnectorAsNone(point);
@@ -66,7 +78,10 @@ namespace Core2D.Shapes.UnitTests
         [Trait("Core2D.Shapes", "Shapes")]
         public void AddConnectorAsInput_Add_Point_To_Connectors_As_Input()
         {
-            var target = new Class2();
+            var target = new Class2()
+            {
+                State = _factory.CreateShapeState()
+            };
             var point = _factory.CreatePointShape();
 
             target.AddConnectorAsInput(point);
@@ -84,7 +99,10 @@ namespace Core2D.Shapes.UnitTests
         [Trait("Core2D.Shapes", "Shapes")]
         public void AddConnectorAsOutput_Add_Point_To_Connectors_As_Output()
         {
-            var target = new Class2();
+            var target = new Class2()
+            {
+                State = _factory.CreateShapeState()
+            };
             var point = _factory.CreatePointShape();
 
             target.AddConnectorAsOutput(point);

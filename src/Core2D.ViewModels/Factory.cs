@@ -345,12 +345,12 @@ namespace Core2D
             return new PathGeometry()
             {
                 Figures = ImmutableArray.Create<IPathFigure>(),
-                FillRule = FillRule.EvenOdd
+                FillRule = FillRule.Nonzero
             };
         }
 
         /// <inheritdoc/>
-        public IPathGeometry CreatePathGeometry(ImmutableArray<IPathFigure> figures, FillRule fillRule)
+        public IPathGeometry CreatePathGeometry(ImmutableArray<IPathFigure> figures, FillRule fillRule = FillRule.Nonzero)
         {
             return new PathGeometry()
             {
@@ -360,7 +360,7 @@ namespace Core2D
         }
 
         /// <inheritdoc/>
-        public IPathFigure CreatePathFigure(bool isFilled = true, bool isClosed = true)
+        public IPathFigure CreatePathFigure(bool isFilled = false, bool isClosed = false)
         {
             return new PathFigure()
             {
@@ -372,7 +372,7 @@ namespace Core2D
         }
 
         /// <inheritdoc/>
-        public IPathFigure CreatePathFigure(IPointShape startPoint, bool isFilled = true, bool isClosed = true)
+        public IPathFigure CreatePathFigure(IPointShape startPoint, bool isFilled = false, bool isClosed = false)
         {
             return new PathFigure()
             {
@@ -788,6 +788,7 @@ namespace Core2D
                 State = CreateShapeState(ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone),
                 Transform = CreateMatrixObject(),
                 Data = CreateContext(),
+                Shapes = ImmutableArray.Create<IBaseShape>()
             };
         }
 

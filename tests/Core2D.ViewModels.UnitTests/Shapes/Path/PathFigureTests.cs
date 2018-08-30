@@ -41,7 +41,7 @@ namespace Core2D.UnitTests
 
         [Fact]
         [Trait("Core2D.Path", "Geometry")]
-        public void IsClosed_By_Default_Is_False()
+        public void IsClosed_By_Default_Is_True()
         {
             var target = _factory.CreatePathFigure();
             Assert.False(target.IsClosed);

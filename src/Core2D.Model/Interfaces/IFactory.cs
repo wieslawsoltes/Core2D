@@ -258,7 +258,7 @@ namespace Core2D.Interfaces
         /// <param name="figures">The figures collection.</param>
         /// <param name="fillRule">The fill rule.</param>
         /// <returns>The new instance of the <see cref="IPathGeometry"/> class.</returns>
-        IPathGeometry CreatePathGeometry(ImmutableArray<IPathFigure> figures, FillRule fillRule);
+        IPathGeometry CreatePathGeometry(ImmutableArray<IPathFigure> figures, FillRule fillRule = FillRule.Nonzero);
 
         /// <summary>
         /// Creates a new <see cref="IPathFigure"/> instance.
@@ -266,7 +266,7 @@ namespace Core2D.Interfaces
         /// <param name="isFilled">The flag indicating whether path is filled.</param>
         /// <param name="isClosed">The flag indicating whether path is closed.</param>
         /// <returns>The new instance of the <see cref="IPathFigure"/> class.</returns>
-        IPathFigure CreatePathFigure(bool isFilled = true, bool isClosed = true);
+        IPathFigure CreatePathFigure(bool isFilled = false, bool isClosed = false);
 
         /// <summary>
         /// Creates a new <see cref="IPathFigure"/> instance.
@@ -275,7 +275,7 @@ namespace Core2D.Interfaces
         /// <param name="isFilled">The flag indicating whether path is filled.</param>
         /// <param name="isClosed">The flag indicating whether path is closed.</param>
         /// <returns>The new instance of the <see cref="IPathFigure"/> class.</returns>
-        IPathFigure CreatePathFigure(IPointShape startPoint, bool isFilled = true, bool isClosed = true);
+        IPathFigure CreatePathFigure(IPointShape startPoint, bool isFilled = false, bool isClosed = false);
 
         /// <summary>
         /// Creates a new <see cref="IPointShape"/> instance.

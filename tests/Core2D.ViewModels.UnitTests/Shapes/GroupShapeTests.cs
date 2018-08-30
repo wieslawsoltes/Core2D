@@ -3,7 +3,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Core2D.Data;
 using Core2D.Interfaces;
 using Core2D.Renderer;
 using Xunit;
@@ -36,7 +35,11 @@ namespace Core2D.Shapes.UnitTests
         {
             var target = _factory.CreateGroupShape();
 
-            var shape = new Class1();
+            var shape = new Class1()
+            {
+                State = _factory.CreateShapeState(),
+                Data = _factory.CreateContext()
+            };
             shape.Data.Properties = shape.Data.Properties.Add(_factory.CreateProperty(null, "", ""));
             target.Shapes = target.Shapes.Add(shape);
 
@@ -54,14 +57,22 @@ namespace Core2D.Shapes.UnitTests
         {
             var target = _factory.CreateGroupShape();
 
-            var shape1 = new Class1();
+            var shape1 = new Class1()
+            {
+                State = _factory.CreateShapeState(),
+                Data = _factory.CreateContext()
+            };
             shape1.Data.Properties = shape1.Data.Properties.Add(_factory.CreateProperty(null, "", ""));
             target.Shapes = target.Shapes.Add(shape1);
 
             var length1 = target.ShapesProperties.Length;
             Assert.Equal(1, length1);
 
-            var shape2 = new Class1();
+            var shape2 = new Class1()
+            {
+                State = _factory.CreateShapeState(),
+                Data = _factory.CreateContext()
+            };
             shape2.Data.Properties = shape2.Data.Properties.Add(_factory.CreateProperty(null, "", ""));
             target.Shapes = target.Shapes.Add(shape2);
 
@@ -93,7 +104,10 @@ namespace Core2D.Shapes.UnitTests
         public void AddShape_Add_Shape_To_Shapes()
         {
             var target = _factory.CreateGroupShape();
-            var shape = new Class1();
+            var shape = new Class1()
+            {
+                State = _factory.CreateShapeState()
+            };
 
             target.AddShape(shape);
 
@@ -109,8 +123,14 @@ namespace Core2D.Shapes.UnitTests
         [Trait("Core2D.Shapes", "Shapes")]
         public void Group_Shapes_Remove_And_Add_To_Source()
         {
-            var shape1 = new Class1();
-            var shape2 = new Class1();
+            var shape1 = new Class1()
+            {
+                State = _factory.CreateShapeState()
+            };
+            var shape2 = new Class1()
+            {
+                State = _factory.CreateShapeState()
+            };
             var point1 = _factory.CreatePointShape();
             var point2 = _factory.CreatePointShape();
 
@@ -144,8 +164,14 @@ namespace Core2D.Shapes.UnitTests
         [Trait("Core2D.Shapes", "Shapes")]
         public void Group_Shapes_Do_Not_Update_Source()
         {
-            var shape1 = new Class1();
-            var shape2 = new Class1();
+            var shape1 = new Class1()
+            {
+                State = _factory.CreateShapeState()
+            };
+            var shape2 = new Class1()
+            {
+                State = _factory.CreateShapeState()
+            };
             var point1 = _factory.CreatePointShape();
             var point2 = _factory.CreatePointShape();
 
@@ -168,7 +194,10 @@ namespace Core2D.Shapes.UnitTests
         [Trait("Core2D.Shapes", "Shapes")]
         public void Ungroup_Shape_Remove_And_Add_To_Source()
         {
-            var shape = new Class1();
+            var shape = new Class1()
+            {
+                State = _factory.CreateShapeState()
+            };
             var point1 = _factory.CreatePointShape();
             var point2 = _factory.CreatePointShape();
             var point3 = _factory.CreatePointShape();

@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Globalization;
+using Core2D.Interfaces;
 using Core2D.Path;
 using Core2D.Path.Segments;
 using Core2D.Shapes;
@@ -271,7 +272,7 @@ namespace Core2D.Renderer.Wpf
         /// </summary>
         /// <param name="sg"></param>
         /// <returns></returns>
-        public string ToSource(this WM.StreamGeometry sg)
+        public string ToSource(WM.StreamGeometry sg)
         {
             return sg.ToString(CultureInfo.InvariantCulture);
         }

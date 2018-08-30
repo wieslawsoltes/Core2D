@@ -16,7 +16,7 @@ namespace Core2D.UnitTests
         [Trait("Core2D.Containers", "Project")]
         public void Inherits_From_ObservableObject()
         {
-            var target = new Class1();
+            var target = _factory.CreatePageContainer();
             Assert.True(target is IObservableObject);
         }
 
@@ -24,7 +24,7 @@ namespace Core2D.UnitTests
         [Trait("Core2D.Containers", "Project")]
         public void Layers_Not_Null()
         {
-            var target = new Class1();
+            var target = _factory.CreatePageContainer();
             Assert.False(target.Layers.IsDefault);
         }
 
@@ -32,7 +32,7 @@ namespace Core2D.UnitTests
         [Trait("Core2D.Containers", "Project")]
         public void SetCurrentLayer_Sets_CurrentLayer()
         {
-            var target = new Class1();
+            var target = _factory.CreatePageContainer();
 
             var layer = _factory.CreateLayerContainer("Layer1", target);
             target.Layers = target.Layers.Add(layer);
@@ -46,7 +46,7 @@ namespace Core2D.UnitTests
         [Trait("Core2D.Containers", "Project")]
         public void Invalidate_Should_Invalidate_All_Layers()
         {
-            var target = new Class1();
+            var target = _factory.CreatePageContainer();
 
             var layer1 = _factory.CreateLayerContainer("Layer1", target);
             var layer2 = _factory.CreateLayerContainer("Layer2", target);
@@ -74,14 +74,11 @@ namespace Core2D.UnitTests
         [Trait("Core2D.Containers", "Project")]
         public void Template_Not_Null_Width_Returns_Template_Width()
         {
-            var target = new Class1()
-            {
-                Width = 300,
-                Template = new Class1()
-                {
-                    Width = 400
-                }
-            };
+            var target = _factory.CreatePageContainer();
+
+            target.Width = 300;
+            target.Template = _factory.CreateTemplateContainer();
+            target.Template.Width = 400;
 
             Assert.Equal(400, target.Width);
         }
@@ -90,14 +87,11 @@ namespace Core2D.UnitTests
         [Trait("Core2D.Containers", "Project")]
         public void Template_Not_Null_Width_Returns_Template_Height()
         {
-            var target = new Class1()
-            {
-                Height = 300,
-                Template = new Class1()
-                {
-                    Height = 400
-                }
-            };
+            var target = _factory.CreatePageContainer();
+
+            target.Height = 300;
+            target.Template = _factory.CreateTemplateContainer();
+            target.Template.Height = 400;
 
             Assert.Equal(400, target.Height);
         }
@@ -106,14 +100,11 @@ namespace Core2D.UnitTests
         [Trait("Core2D.Containers", "Project")]
         public void Template_Not_Null_Background_Returns_Template_Background()
         {
-            var target = new Class1()
-            {
-                Background = _factory.CreateArgbColor(),
-                Template = new Class1()
-                {
-                    Background = _factory.CreateArgbColor()
-                }
-            };
+            var target = _factory.CreatePageContainer();
+
+            target.Background = _factory.CreateArgbColor();
+            target.Template = _factory.CreateTemplateContainer();
+            target.Template.Background = _factory.CreateArgbColor();
 
             Assert.Equal(target.Template.Background, target.Background);
         }
@@ -147,10 +138,6 @@ namespace Core2D.UnitTests
             target.Invalidate();
 
             Assert.True(raised);
-        }
-
-        public class Class1 : PageContainer
-        {
         }
     }
 }

@@ -16,7 +16,10 @@ namespace Core2D.Shapes.UnitTests
         [Trait("Core2D.Shapes", "Shapes")]
         public void Inherits_From_ObservableObject()
         {
-            var target = new Class1();
+            var target = new Class1()
+            {
+                State = _factory.CreateShapeState()
+            };
             Assert.True(target is IObservableObject);
         }
 

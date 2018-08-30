@@ -36,15 +36,6 @@ namespace Core2D.Shapes
             }
         }
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="GroupShape"/> class.
-        /// </summary>
-        public GroupShape()
-            : base()
-        {
-            _shapes = ImmutableArray.Create<IBaseShape>();
-        }
-
         private ImmutableArray<IProperty> GetShapeProperties()
         {
             if (_shapesProperties == null)
