@@ -128,10 +128,10 @@ namespace Core2D.Renderer.PdfSharp
                 Fill(gfx, 0, 0, pdfPage.Width.Value / scale, pdfPage.Height.Value / scale, container.Template.Background);
 
                 // Draw template contents to pdf graphics.
-                base.Draw(gfx, container.Template, 0.0, 0.0, (object)container.Data.Properties, (object)container.Data.Record);
+                Draw(gfx, container.Template, 0.0, 0.0, (object)container.Data.Properties, (object)container.Data.Record);
 
                 // Draw page contents to pdf graphics.
-                base.Draw(gfx, container, 0.0, 0.0, (object)container.Data.Properties, (object)container.Data.Record);
+                Draw(gfx, container, 0.0, 0.0, (object)container.Data.Properties, (object)container.Data.Record);
             }
 
             return pdfPage;
