@@ -63,7 +63,7 @@ namespace Core2D.Renderer.Wpf
                 ImmutableArray.Create<IPathFigure>(),
                 pg.FillRule == WM.FillRule.EvenOdd ? FillRule.EvenOdd : FillRule.Nonzero);
 
-            var context = new PathGeometryContext(geometry);
+            var context = new PathGeometryContext(factory, geometry);
 
             foreach (var pf in pg.Figures)
             {

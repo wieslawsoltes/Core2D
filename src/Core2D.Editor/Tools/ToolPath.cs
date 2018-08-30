@@ -174,7 +174,7 @@ namespace Core2D.Editor.Tools
                 ImmutableArray.Create<IPathFigure>(),
                 editor.Project.Options.DefaultFillRule);
 
-            GeometryContext = new PathGeometryContext(Geometry);
+            GeometryContext = new PathGeometryContext(factory, Geometry);
 
             GeometryContext.BeginFigure(
                 start,

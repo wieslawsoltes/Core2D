@@ -18,7 +18,7 @@ namespace Core2D.UnitTests
         [Trait("Core2D.Path", "Geometry")]
         public void Inherits_From_XGeometryContext()
         {
-            var target = new PathGeometryContext(new PathGeometry());
+            var target = new PathGeometryContext(_factory, new PathGeometry());
             Assert.True(target is IGeometryContext);
         }
 
@@ -26,7 +26,7 @@ namespace Core2D.UnitTests
         [Trait("Core2D.Path", "Geometry")]
         public void Should_Throw_ArgumentNullException()
         {
-            Assert.Throws<ArgumentNullException>(() => new PathGeometryContext(null, null));
+            Assert.Throws<ArgumentNullException>(() => new PathGeometryContext(_factory, null));
         }
 
         [Fact]
@@ -34,7 +34,7 @@ namespace Core2D.UnitTests
         public void BeginFigure_Adds_New_Figure()
         {
             var geometry = _factory.CreatePathGeometry();
-            var target = new PathGeometryContext(geometry);
+            var target = new PathGeometryContext(_factory, geometry);
             Assert.Empty(geometry.Figures);
 
             target.BeginFigure(_factory.CreatePointShape());
@@ -51,7 +51,7 @@ namespace Core2D.UnitTests
         public void LineTo_Adds_New_LineSegment()
         {
             var geometry = _factory.CreatePathGeometry();
-            var target = new PathGeometryContext(geometry);
+            var target = new PathGeometryContext(_factory, geometry);
             target.BeginFigure(_factory.CreatePointShape());
             Assert.Empty(geometry.Figures[0].Segments);
 
@@ -68,7 +68,7 @@ namespace Core2D.UnitTests
         public void ArcTo_Adds_New_ArcSegment()
         {
             var geometry = _factory.CreatePathGeometry();
-            var target = new PathGeometryContext(geometry);
+            var target = new PathGeometryContext(_factory, geometry);
             target.BeginFigure(_factory.CreatePointShape());
             Assert.Empty(geometry.Figures[0].Segments);
 
@@ -85,7 +85,7 @@ namespace Core2D.UnitTests
         public void CubicBezierTo_Adds_New_CubicBezierSegment()
         {
             var geometry = _factory.CreatePathGeometry();
-            var target = new PathGeometryContext(geometry);
+            var target = new PathGeometryContext(_factory, geometry);
             target.BeginFigure(_factory.CreatePointShape());
             Assert.Empty(geometry.Figures[0].Segments);
 
@@ -102,7 +102,7 @@ namespace Core2D.UnitTests
         public void QuadraticBezierTo_Adds_New_QuadraticBezierSegment()
         {
             var geometry = _factory.CreatePathGeometry();
-            var target = new PathGeometryContext(geometry);
+            var target = new PathGeometryContext(_factory, geometry);
             target.BeginFigure(_factory.CreatePointShape());
             Assert.Empty(geometry.Figures[0].Segments);
 
@@ -119,7 +119,7 @@ namespace Core2D.UnitTests
         public void PolyLineTo_Adds_New_XPolyLineSegment()
         {
             var geometry = _factory.CreatePathGeometry();
-            var target = new PathGeometryContext(geometry);
+            var target = new PathGeometryContext(_factory, geometry);
             target.BeginFigure(_factory.CreatePointShape());
             Assert.Empty(geometry.Figures[0].Segments);
             
@@ -136,7 +136,7 @@ namespace Core2D.UnitTests
         public void PolyCubicBezierTo_Adds_New_XPolyCubicBezierSegment()
         {
             var geometry = _factory.CreatePathGeometry();
-            var target = new PathGeometryContext(geometry);
+            var target = new PathGeometryContext(_factory, geometry);
             target.BeginFigure(_factory.CreatePointShape());
             Assert.Empty(geometry.Figures[0].Segments);
 
@@ -153,7 +153,7 @@ namespace Core2D.UnitTests
         public void PolyQuadraticBezierTo_Adds_New_XPolyQuadraticBezierSegment()
         {
             var geometry = _factory.CreatePathGeometry();
-            var target = new PathGeometryContext(geometry);
+            var target = new PathGeometryContext(_factory, geometry);
             target.BeginFigure(_factory.CreatePointShape());
             Assert.Empty(geometry.Figures[0].Segments);
 
