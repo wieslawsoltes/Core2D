@@ -2,14 +2,15 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
 using System.Collections.Immutable;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using Core2D.Data;
-using Spatial;
-using Spatial.Arc;
+using Core2D.Interfaces;
 using Core2D.Style;
 using Core2D.Shapes;
-using System.Collections.Generic;
+using Spatial;
+using Spatial.Arc;
 
 namespace Core2D.Renderer.WinForms
 {
