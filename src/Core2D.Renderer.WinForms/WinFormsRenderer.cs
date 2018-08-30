@@ -41,7 +41,7 @@ namespace Core2D.Renderer.WinForms
         {
             _serviceProvider = serviceProvider;
             _state = _serviceProvider.GetService<IFactory>().CreateShapeRendererState();
-            _biCache = _serviceProvider.GetService<IFactory>().CreateCache<string, Image>(bi => bi.Dispose())
+            _biCache = _serviceProvider.GetService<IFactory>().CreateCache<string, Image>(bi => bi.Dispose());
             _textScaleFactor = textScaleFactor;
             _scaleToPage = (value) => (float)(value);
             ClearCache(isZooming: false);
