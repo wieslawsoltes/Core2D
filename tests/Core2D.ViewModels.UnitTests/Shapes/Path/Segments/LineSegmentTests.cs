@@ -16,9 +16,7 @@ namespace Core2D.UnitTests
         [Trait("Core2D.Path", "Segments")]
         public void GetPoints_Should_Return_All_Segment_Points()
         {
-            var segment = _factory.CreateLineSegment();
-
-            segment.Point = _factory.CreatePointShape();
+            var segment = _factory.CreateLineSegment(_factory.CreatePointShape(), true, true);
 
             var target = segment.GetPoints();
             var count = target.Count();
@@ -31,9 +29,7 @@ namespace Core2D.UnitTests
         [Trait("Core2D.Path", "Segments")]
         public void ToString_Should_Return_Path_Markup()
         {
-            var target = _factory.CreateLineSegment();
-
-            target.Point = _factory.CreatePointShape();
+            var target = _factory.CreateLineSegment(_factory.CreatePointShape(), true, true);
 
             var actual = target.ToString();
 

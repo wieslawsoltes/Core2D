@@ -17,15 +17,7 @@ namespace Core2D.UnitTests
         [Trait("Core2D.Path", "Segments")]
         public void GetPoints_Should_Return_All_Segment_Points()
         {
-            var segment = _factory.CreateArcSegment();
-
-            segment.Point = _factory.CreatePointShape();
-            segment.Size = _factory.CreatePathSize();
-            segment.Size.Width = 10;
-            segment.Size.Height = 20;
-            segment.RotationAngle = 90;
-            segment.IsLargeArc = true;
-            segment.SweepDirection = SweepDirection.Clockwise;
+            var segment = _factory.CreateArcSegment(_factory.CreatePointShape(), _factory.CreatePathSize(), 180, true, SweepDirection.Clockwise, true, true);
 
             var target = segment.GetPoints();
             var count = target.Count();
@@ -38,15 +30,10 @@ namespace Core2D.UnitTests
         [Trait("Core2D.Path", "Segments")]
         public void ToString_Should_Return_Path_Markup()
         {
-            var target = _factory.CreateArcSegment();
+            var target = _factory.CreateArcSegment(_factory.CreatePointShape(), _factory.CreatePathSize(), 90, true, SweepDirection.Clockwise, true, true);
 
-            target.Point = _factory.CreatePointShape();
-            target.Size = _factory.CreatePathSize();
             target.Size.Width = 10;
             target.Size.Height = 20;
-            target.RotationAngle = 90;
-            target.IsLargeArc = true;
-            target.SweepDirection = SweepDirection.Clockwise;
 
             var actual = target.ToString();
 

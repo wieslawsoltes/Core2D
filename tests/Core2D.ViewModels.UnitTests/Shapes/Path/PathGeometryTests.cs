@@ -34,7 +34,7 @@ namespace Core2D.UnitTests
             var geometry = _factory.CreatePathGeometry();
 
             var target = ImmutableArray.Create<IPathFigure>();
-            var actual = geometry.ToString(target);
+            var actual = (geometry as PathGeometry).ToString(target);
 
             Assert.Equal(string.Empty, actual);
         }

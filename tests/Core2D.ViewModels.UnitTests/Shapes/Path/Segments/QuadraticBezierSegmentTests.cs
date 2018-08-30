@@ -16,10 +16,7 @@ namespace Core2D.UnitTests
         [Trait("Core2D.Path", "Segments")]
         public void GetPoints_Should_Return_All_Segment_Points()
         {
-            var segment = _factory.CreateQuadraticBezierSegment();
-
-            segment.Point1 = _factory.CreatePointShape();
-            segment.Point2 = _factory.CreatePointShape();
+            var segment = _factory.CreateQuadraticBezierSegment(_factory.CreatePointShape(), _factory.CreatePointShape(), true, true);
 
             var target = segment.GetPoints();
 
@@ -33,10 +30,7 @@ namespace Core2D.UnitTests
         [Trait("Core2D.Path", "Segments")]
         public void ToString_Should_Return_Path_Markup()
         {
-            var target = _factory.CreateQuadraticBezierSegment();
-
-            target.Point1 = _factory.CreatePointShape();
-            target.Point2 = _factory.CreatePointShape();
+            var target = _factory.CreateQuadraticBezierSegment(_factory.CreatePointShape(), _factory.CreatePointShape(), true, true);
 
             var actual = target.ToString();
 

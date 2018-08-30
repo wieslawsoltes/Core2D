@@ -246,7 +246,7 @@ namespace Core2D
         }
 
         /// <inheritdoc/>
-        public ILineSegment CreateLineSegment(IPointShape point, bool isStroked, bool isSmoothJoin)
+        public ILineSegment CreateLineSegment(IPointShape point, bool isStroked = true, bool isSmoothJoin = true)
         {
             return new LineSegment()
             {
@@ -257,7 +257,7 @@ namespace Core2D
         }
 
         /// <inheritdoc/>
-        public IArcSegment CreateArcSegment(IPointShape point, IPathSize size, double rotationAngle, bool isLargeArc, SweepDirection sweepDirection, bool isStroked, bool isSmoothJoin)
+        public IArcSegment CreateArcSegment(IPointShape point, IPathSize size, double rotationAngle, bool isLargeArc, SweepDirection sweepDirection, bool isStroked = true, bool isSmoothJoin = true)
         {
             return new ArcSegment()
             {
@@ -272,7 +272,7 @@ namespace Core2D
         }
 
         /// <inheritdoc/>
-        public IQuadraticBezierSegment CreateQuadraticBezierSegment(IPointShape point1, IPointShape point2, bool isStroked, bool isSmoothJoin)
+        public IQuadraticBezierSegment CreateQuadraticBezierSegment(IPointShape point1, IPointShape point2, bool isStroked = true, bool isSmoothJoin = true)
         {
             return new QuadraticBezierSegment()
             {
@@ -284,7 +284,7 @@ namespace Core2D
         }
 
         /// <inheritdoc/>
-        public ICubicBezierSegment CreateCubicBezierSegment(IPointShape point1, IPointShape point2, IPointShape point3, bool isStroked, bool isSmoothJoin)
+        public ICubicBezierSegment CreateCubicBezierSegment(IPointShape point1, IPointShape point2, IPointShape point3, bool isStroked = true, bool isSmoothJoin = true)
         {
             return new CubicBezierSegment()
             {
@@ -297,7 +297,7 @@ namespace Core2D
         }
 
         /// <inheritdoc/>
-        public IPolyLineSegment CreatePolyLineSegment(ImmutableArray<IPointShape> points, bool isStroked, bool isSmoothJoin)
+        public IPolyLineSegment CreatePolyLineSegment(ImmutableArray<IPointShape> points, bool isStroked = true, bool isSmoothJoin = true)
         {
             return new PolyLineSegment()
             {
@@ -308,7 +308,7 @@ namespace Core2D
         }
 
         /// <inheritdoc/>
-        public IPolyQuadraticBezierSegment CreatePolyQuadraticBezierSegment(ImmutableArray<IPointShape> points, bool isStroked, bool isSmoothJoin)
+        public IPolyQuadraticBezierSegment CreatePolyQuadraticBezierSegment(ImmutableArray<IPointShape> points, bool isStroked = true, bool isSmoothJoin = true)
         {
             return new PolyQuadraticBezierSegment()
             {
@@ -319,7 +319,7 @@ namespace Core2D
         }
 
         /// <inheritdoc/>
-        public IPolyCubicBezierSegment CreatePolyCubicBezierSegment(ImmutableArray<IPointShape> points, bool isStroked, bool isSmoothJoin)
+        public IPolyCubicBezierSegment CreatePolyCubicBezierSegment(ImmutableArray<IPointShape> points, bool isStroked = true, bool isSmoothJoin = true)
         {
             return new PolyCubicBezierSegment()
             {

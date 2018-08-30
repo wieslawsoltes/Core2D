@@ -37,11 +37,11 @@ namespace Core2D.Shapes.UnitTests
             var target = _factory.CreateGroupShape();
 
             var shape = new Class1();
-            shape.Data.Properties = shape.Data.Properties.Add(_factory.CreateProperty());
+            shape.Data.Properties = shape.Data.Properties.Add(_factory.CreateProperty(null, "", ""));
             target.Shapes = target.Shapes.Add(shape);
 
             var point = _factory.CreatePointShape();
-            point.Data.Properties = point.Data.Properties.Add(_factory.CreateProperty());
+            point.Data.Properties = point.Data.Properties.Add(_factory.CreateProperty(null, "", ""));
             target.Connectors = target.Connectors.Add(point);
 
             var length = target.ShapesProperties.Length;
@@ -55,14 +55,14 @@ namespace Core2D.Shapes.UnitTests
             var target = _factory.CreateGroupShape();
 
             var shape1 = new Class1();
-            shape1.Data.Properties = shape1.Data.Properties.Add(_factory.CreateProperty());
+            shape1.Data.Properties = shape1.Data.Properties.Add(_factory.CreateProperty(null, "", ""));
             target.Shapes = target.Shapes.Add(shape1);
 
             var length1 = target.ShapesProperties.Length;
             Assert.Equal(1, length1);
 
             var shape2 = new Class1();
-            shape2.Data.Properties = shape2.Data.Properties.Add(_factory.CreateProperty());
+            shape2.Data.Properties = shape2.Data.Properties.Add(_factory.CreateProperty(null, "", ""));
             target.Shapes = target.Shapes.Add(shape2);
 
             var length2 = target.ShapesProperties.Length;
@@ -76,11 +76,11 @@ namespace Core2D.Shapes.UnitTests
             var target = _factory.CreateGroupShape();
 
             var text = _factory.CreateTextShape();
-            text.Data.Properties = text.Data.Properties.Add(_factory.CreateProperty());
+            text.Data.Properties = text.Data.Properties.Add(_factory.CreateProperty(null, "", ""));
             target.Shapes = target.Shapes.Add(text);
 
             var point = _factory.CreatePointShape();
-            point.Data.Properties = point.Data.Properties.Add(_factory.CreateProperty());
+            point.Data.Properties = point.Data.Properties.Add(_factory.CreateProperty(null, "", ""));
             target.Connectors = target.Connectors.Add(point);
 
             var count = target.GetPoints().Count();
