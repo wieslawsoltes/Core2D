@@ -2,6 +2,7 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using Core2D.Data;
 using Core2D.Interfaces;
@@ -20,7 +21,8 @@ namespace Core2D.Shapes.UnitTests
         {
             var target = new Class2()
             {
-                State = _factory.CreateShapeState()
+                State = _factory.CreateShapeState(),
+                Connectors = ImmutableArray.Create<IPointShape>()
             };
             Assert.True(target is BaseShape);
         }
@@ -31,7 +33,8 @@ namespace Core2D.Shapes.UnitTests
         {
             var target = new Class2()
             {
-                State = _factory.CreateShapeState()
+                State = _factory.CreateShapeState(),
+                Connectors = ImmutableArray.Create<IPointShape>()
             };
             Assert.False(target.Connectors.IsDefault);
         }
@@ -42,7 +45,8 @@ namespace Core2D.Shapes.UnitTests
         {
             var target = new Class2()
             {
-                State = _factory.CreateShapeState()
+                State = _factory.CreateShapeState(),
+                Connectors = ImmutableArray.Create<IPointShape>()
             };
 
             var point = _factory.CreatePointShape();
@@ -59,7 +63,8 @@ namespace Core2D.Shapes.UnitTests
         {
             var target = new Class2()
             {
-                State = _factory.CreateShapeState()
+                State = _factory.CreateShapeState(),
+                Connectors = ImmutableArray.Create<IPointShape>()
             };
             var point = _factory.CreatePointShape();
 
@@ -80,7 +85,8 @@ namespace Core2D.Shapes.UnitTests
         {
             var target = new Class2()
             {
-                State = _factory.CreateShapeState()
+                State = _factory.CreateShapeState(),
+                Connectors = ImmutableArray.Create<IPointShape>()
             };
             var point = _factory.CreatePointShape();
 
@@ -101,7 +107,8 @@ namespace Core2D.Shapes.UnitTests
         {
             var target = new Class2()
             {
-                State = _factory.CreateShapeState()
+                State = _factory.CreateShapeState(),
+                Connectors = ImmutableArray.Create<IPointShape>()
             };
             var point = _factory.CreatePointShape();
 
