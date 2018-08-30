@@ -340,6 +340,16 @@ namespace Core2D
         }
 
         /// <inheritdoc/>
+        public IPathGeometry CreatePathGeometry()
+        {
+            return new PathGeometry()
+            {
+                Figures = ImmutableArray.Create<IPathFigure>(),
+                FillRule = FillRule.EvenOdd
+            };
+        }
+
+        /// <inheritdoc/>
         public IPathGeometry CreatePathGeometry(ImmutableArray<IPathFigure> figures, FillRule fillRule)
         {
             return new PathGeometry()
@@ -770,7 +780,7 @@ namespace Core2D
         }
 
         /// <inheritdoc/>
-        public IGroupShape CreateGroupShape(string name)
+        public IGroupShape CreateGroupShape(string name = "g")
         {
             return new GroupShape()
             {

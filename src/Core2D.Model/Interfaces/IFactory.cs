@@ -250,6 +250,12 @@ namespace Core2D.Interfaces
         /// <summary>
         /// Creates a new <see cref="IPathGeometry"/> instance.
         /// </summary>
+        /// <returns>The new instance of the <see cref="IPathGeometry"/> class.</returns>
+        IPathGeometry CreatePathGeometry();
+
+        /// <summary>
+        /// Creates a new <see cref="IPathGeometry"/> instance.
+        /// </summary>
         /// <param name="figures">The figures collection.</param>
         /// <param name="fillRule">The fill rule.</param>
         /// <returns>The new instance of the <see cref="IPathGeometry"/> class.</returns>
@@ -661,7 +667,7 @@ namespace Core2D.Interfaces
         /// </summary>
         /// <param name="name">The group name.</param>
         /// <returns>The new instance of the <see cref="IGroupShape"/> class.</returns>
-        IGroupShape CreateGroupShape(string name);
+        IGroupShape CreateGroupShape(string name = "g");
 
         /// <summary>
         /// Creates a new <see cref="IArgbColor"/> instance.

@@ -26,7 +26,7 @@ namespace Core2D.UnitTests
         [Trait("Core2D.Path", "Geometry")]
         public void Should_Throw_ArgumentNullException()
         {
-            Assert.Throws<ArgumentNullException>(() => new PathGeometryContext(null));
+            Assert.Throws<ArgumentNullException>(() => new PathGeometryContext(null, null));
         }
 
         [Fact]

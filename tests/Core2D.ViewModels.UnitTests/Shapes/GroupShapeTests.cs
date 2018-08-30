@@ -148,7 +148,7 @@ namespace Core2D.Shapes.UnitTests
             var point1 = _factory.CreatePointShape();
             var point2 = _factory.CreatePointShape();
 
-            var shapes = new BaseShape[] { shape1, shape2, point1, point2 };
+            var shapes = new IBaseShape[] { shape1, shape2, point1, point2 };
             var source = shapes.ToList();
 
             var target = _factory.CreateGroupShape("g");
