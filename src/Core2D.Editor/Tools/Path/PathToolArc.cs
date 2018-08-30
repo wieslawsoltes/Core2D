@@ -208,6 +208,7 @@ namespace Core2D.Editor.Tools.Path
         {
             var editor = _serviceProvider.GetService<ProjectEditor>();
             _selection = new ToolLineSelection(
+                _serviceProvider,
                 editor.Project.CurrentContainer.HelperLayer,
                 _arc,
                 editor.Project.Options.HelperStyle,

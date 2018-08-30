@@ -211,6 +211,7 @@ namespace Core2D.Editor.Tools
         {
             var editor = _serviceProvider.GetService<ProjectEditor>();
             _selection = new ToolQuadraticBezierSelection(
+                _serviceProvider,
                 editor.Project.CurrentContainer.HelperLayer,
                 _quadraticBezier,
                 editor.Project.Options.HelperStyle,

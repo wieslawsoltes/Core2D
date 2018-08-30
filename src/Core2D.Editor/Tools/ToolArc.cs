@@ -263,6 +263,7 @@ namespace Core2D.Editor.Tools
         {
             var editor = _serviceProvider.GetService<ProjectEditor>();
             _selection = new ToolArcSelection(
+                _serviceProvider,
                 editor.Project.CurrentContainer.HelperLayer,
                 _arc,
                 editor.Project.Options.HelperStyle,

@@ -171,6 +171,7 @@ namespace Core2D.Editor.Tools
         {
             var editor = _serviceProvider.GetService<ProjectEditor>();
             _selection = new ToolRectangleSelection(
+                _serviceProvider,
                 editor.Project.CurrentContainer.HelperLayer,
                 _rectangle,
                 editor.Project.Options.HelperStyle,

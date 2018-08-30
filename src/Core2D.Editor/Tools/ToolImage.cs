@@ -175,6 +175,7 @@ namespace Core2D.Editor.Tools
         {
             var editor = _serviceProvider.GetService<ProjectEditor>();
             _selection = new ToolImageSelection(
+                _serviceProvider,
                 editor.Project.CurrentContainer.HelperLayer,
                 _image,
                 editor.Project.Options.HelperStyle,

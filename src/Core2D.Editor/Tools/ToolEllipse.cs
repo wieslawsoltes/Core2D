@@ -207,6 +207,7 @@ namespace Core2D.Editor.Tools
         {
             var editor = _serviceProvider.GetService<ProjectEditor>();
             _selection = new ToolEllipseSelection(
+                _serviceProvider,
                 editor.Project.CurrentContainer.HelperLayer,
                 _ellipse,
                 editor.Project.Options.HelperStyle,

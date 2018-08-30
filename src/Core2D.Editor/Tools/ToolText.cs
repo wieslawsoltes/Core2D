@@ -6,7 +6,6 @@ using Core2D.Editor.Input;
 using Core2D.Editor.Tools.Selection;
 using Core2D.Editor.Tools.Settings;
 using Core2D.Interfaces;
-using Core2D.Interfaces;
 using Core2D.Shapes;
 using Core2D.Style;
 
@@ -170,6 +169,7 @@ namespace Core2D.Editor.Tools
         {
             var editor = _serviceProvider.GetService<ProjectEditor>();
             _selection = new ToolTextSelection(
+                _serviceProvider,
                 editor.Project.CurrentContainer.HelperLayer,
                 _text,
                 editor.Project.Options.HelperStyle,

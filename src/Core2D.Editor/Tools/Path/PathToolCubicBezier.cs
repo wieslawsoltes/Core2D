@@ -270,6 +270,7 @@ namespace Core2D.Editor.Tools.Path
         {
             var editor = _serviceProvider.GetService<ProjectEditor>();
             _selection = new ToolCubicBezierSelection(
+                _serviceProvider,
                 editor.Project.CurrentContainer.HelperLayer,
                 _cubicBezier,
                 editor.Project.Options.HelperStyle,
