@@ -106,6 +106,6 @@ namespace Core2D.Shapes
         /// Check whether the <see cref="Connectors"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeConnectors() => _connectors.IsEmpty == false;
+        public virtual bool ShouldSerializeConnectors() => true;
     }
 }

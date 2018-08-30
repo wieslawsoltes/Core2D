@@ -46,6 +46,6 @@ namespace Core2D.Containers
         /// Check whether the <see cref="Pages"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializePages() => _pages.IsEmpty == false;
+        public virtual bool ShouldSerializePages() => true;
     }
 }

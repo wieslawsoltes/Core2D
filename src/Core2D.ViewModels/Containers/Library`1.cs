@@ -44,7 +44,7 @@ namespace Core2D.Containers
         /// Check whether the <see cref="Items"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeItems() => _items.IsEmpty == false;
+        public virtual bool ShouldSerializeItems() => true;
 
         /// <summary>
         /// Check whether the <see cref="Selected"/> property has changed from its default value.

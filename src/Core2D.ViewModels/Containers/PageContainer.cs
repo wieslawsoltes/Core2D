@@ -197,7 +197,7 @@ namespace Core2D.Containers
         /// Check whether the <see cref="Layers"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeLayers() => _layers.IsEmpty == false;
+        public virtual bool ShouldSerializeLayers() => true;
 
         /// <summary>
         /// Check whether the <see cref="CurrentLayer"/> property has changed from its default value.

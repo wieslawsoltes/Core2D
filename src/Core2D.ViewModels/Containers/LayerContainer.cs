@@ -71,6 +71,6 @@ namespace Core2D.Containers
         /// Check whether the <see cref="Shapes"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeShapes() => _shapes.IsEmpty == false;
+        public virtual bool ShouldSerializeShapes() => true;
     }
 }

@@ -113,7 +113,7 @@ namespace Core2D.Path
         /// Check whether the <see cref="Segments"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeSegments() => _segments.IsEmpty == false;
+        public virtual bool ShouldSerializeSegments() => true;
 
         /// <summary>
         /// Check whether the <see cref="IsFilled"/> property has changed from its default value.

@@ -83,7 +83,7 @@ namespace Core2D.Path
         /// Check whether the <see cref="Figures"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeFigures() => _figures.IsEmpty == false;
+        public virtual bool ShouldSerializeFigures() => true;
 
         /// <summary>
         /// Check whether the <see cref="FillRule"/> property has changed from its default value.

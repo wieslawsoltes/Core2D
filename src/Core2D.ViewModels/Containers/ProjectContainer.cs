@@ -286,31 +286,31 @@ namespace Core2D.Containers
         /// Check whether the <see cref="StyleLibraries"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeStyleLibraries() => _styleLibraries.IsEmpty == false;
+        public virtual bool ShouldSerializeStyleLibraries() => true;
 
         /// <summary>
         /// Check whether the <see cref="GroupLibraries"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeGroupLibraries() => _groupLibraries.IsEmpty == false;
+        public virtual bool ShouldSerializeGroupLibraries() => true;
 
         /// <summary>
         /// Check whether the <see cref="Databases"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeDatabases() => _databases.IsEmpty == false;
+        public virtual bool ShouldSerializeDatabases() => true;
 
         /// <summary>
         /// Check whether the <see cref="Templates"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeTemplates() => _templates.IsEmpty == false;
+        public virtual bool ShouldSerializeTemplates() => true;
 
         /// <summary>
         /// Check whether the <see cref="Documents"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeDocuments() => _documents.IsEmpty == false;
+        public virtual bool ShouldSerializeDocuments() => true;
 
         /// <summary>
         /// Check whether the <see cref="CurrentStyleLibrary"/> property has changed from its default value.
