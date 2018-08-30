@@ -73,6 +73,7 @@ namespace Core2D.Shapes.UnitTests
         [Trait("Core2D.Shapes", "Shapes")]
         public void GetPoints_Returns_Shapes_And_Connector_Points()
         {
+            var style = _factory.CreateShapeStyle();
             var target = _factory.CreateGroupShape();
 
             var text = _factory.CreateTextShape(0, 0, style, null, "Text");

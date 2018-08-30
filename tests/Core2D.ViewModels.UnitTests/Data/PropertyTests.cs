@@ -14,7 +14,7 @@ namespace Core2D.Data.UnitTests
         [Trait("Core2D.Data", "Data")]
         public void Inherits_From_ObservableObject()
         {
-            var target = _factory.CreateProperty();
+            var target = _factory.CreateProperty(null, "", "");
             Assert.True(target is IObservableObject);
         }
         
