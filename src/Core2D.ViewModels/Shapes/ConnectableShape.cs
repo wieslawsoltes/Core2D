@@ -21,15 +21,6 @@ namespace Core2D.Shapes
             set => Update(ref _connectors, value);
         }
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ConnectableShape"/> class.
-        /// </summary>
-        public ConnectableShape()
-            : base()
-        {
-            _connectors = ImmutableArray.Create<IPointShape>();
-        }
-
         /// <inheritdoc/>
         public override void Draw(object dc, IShapeRenderer renderer, double dx, double dy, object db, object r)
         {

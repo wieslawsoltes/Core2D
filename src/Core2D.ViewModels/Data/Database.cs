@@ -47,16 +47,6 @@ namespace Core2D.Data
             set => Update(ref _currentRecord, value);
         }
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Database"/> class.
-        /// </summary>
-        public Database()
-            : base()
-        {
-            _columns = ImmutableArray.Create<IColumn>();
-            _records = ImmutableArray.Create<IRecord>();
-        }
-
         /// <inheritdoc/>
         public override object Copy(IDictionary<object, object> shared)
         {

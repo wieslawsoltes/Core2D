@@ -31,16 +31,6 @@ namespace Core2D.Containers
             set => Update(ref _selected, value);
         }
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Library{T}"/> class.
-        /// </summary>
-        public Library()
-            : base()
-        {
-            _items = ImmutableArray.Create<T>();
-            _selected = default;
-        }
-
         /// <inheritdoc/>
         public void SetSelected(T item) => Selected = item;
 

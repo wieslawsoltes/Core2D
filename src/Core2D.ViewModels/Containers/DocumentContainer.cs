@@ -30,11 +30,6 @@ namespace Core2D.Containers
             set => Update(ref _pages, value);
         }
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="DocumentContainer"/> class.
-        /// </summary>
-        public DocumentContainer() : base() => _pages = ImmutableArray.Create<IPageContainer>();
-
         /// <inheritdoc/>
         public override object Copy(IDictionary<object, object> shared)
         {

@@ -46,11 +46,6 @@ namespace Core2D.Containers
             set => Update(ref _shapes, value);
         }
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="LayerContainer"/> class.
-        /// </summary>
-        public LayerContainer() : base() => _shapes = ImmutableArray.Create<IBaseShape>();
-
         /// <inheritdoc/>
         public void Invalidate() => InvalidateLayer?.Invoke(this, new InvalidateLayerEventArgs());
 

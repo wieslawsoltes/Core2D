@@ -31,11 +31,6 @@ namespace Core2D.Path
             set => Update(ref _fillRule, value);
         }
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="PathGeometry"/> class.
-        /// </summary>
-        public PathGeometry() => Figures = ImmutableArray.Create<IPathFigure>();
-
         /// <inheritdoc/>
         public override object Copy(IDictionary<object, object> shared)
         {

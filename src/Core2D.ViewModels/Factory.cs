@@ -27,7 +27,9 @@ namespace Core2D
         {
             return new Library<T>()
             {
-                Name = name
+                Name = name,
+                Items = ImmutableArray.Create<T>(),
+                Selected = default
             };
         }
 
@@ -788,6 +790,7 @@ namespace Core2D
                 State = CreateShapeState(ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone),
                 Transform = CreateMatrixObject(),
                 Data = CreateContext(),
+                Connectors = ImmutableArray.Create<IPointShape>(),
                 Shapes = ImmutableArray.Create<IBaseShape>()
             };
         }
@@ -1023,6 +1026,7 @@ namespace Core2D
             {
                 Name = name,
                 Owner = owner,
+                Shapes = ImmutableArray.Create<IBaseShape>(),
                 IsVisible = isVisible
             };
         }
@@ -1082,7 +1086,8 @@ namespace Core2D
         {
             return new DocumentContainer()
             {
-                Name = name
+                Name = name,
+                Pages = ImmutableArray.Create<IPageContainer>()
             };
         }
 
