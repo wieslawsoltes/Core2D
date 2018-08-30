@@ -64,7 +64,7 @@ namespace Core2D.Editor.Tools
             switch (_currentState)
             {
                 case State.Point1:
-                    {z
+                    {
                         var style = editor.Project.CurrentStyleLibrary.Selected;
                         _connectedPoint3 = false;
                         _connectedPoint4 = false;
