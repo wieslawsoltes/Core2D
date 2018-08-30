@@ -7,7 +7,7 @@ namespace Core2D.Renderer
     /// <summary>
     /// Defines key based image data cache contract.
     /// </summary>
-    public interface IImageCache
+    public interface IImageCache : IObservableObject
     {
         /// <summary>
         /// Gets image keys collection.
