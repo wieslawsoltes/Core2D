@@ -44,7 +44,7 @@ namespace Core2D.Renderer.SkiaSharp
         {
             _serviceProvider = serviceProvider;
             _state = _serviceProvider.GetService<IFactory>().CreateShapeRendererState();
-            _biCache = _serviceProvider.GetService<IFactory>().CreateCache<string, SKBitmap>(bi => bi.Dispose())
+            _biCache = _serviceProvider.GetService<IFactory>().CreateCache<string, SKBitmap>(bi => bi.Dispose());
             _isAntialias = isAntialias;
             _scaleToPage = (value) => (float)(value * 1.0);
             _targetDpi = targetDpi;

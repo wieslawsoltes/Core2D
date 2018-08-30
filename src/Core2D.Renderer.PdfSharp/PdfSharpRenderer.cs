@@ -40,7 +40,7 @@ namespace Core2D.Renderer.PdfSharp
         {
             _serviceProvider = serviceProvider;
             _state = _serviceProvider.GetService<IFactory>().CreateShapeRendererState();
-            _biCache = _serviceProvider.GetService<IFactory>().CreateCache<string, XImage>(bi => bi.Dispose())
+            _biCache = _serviceProvider.GetService<IFactory>().CreateCache<string, XImage>(bi => bi.Dispose());
             _scaleToPage = (value) => (float)(value * 1.0);
             ClearCache(isZooming: false);
         }
