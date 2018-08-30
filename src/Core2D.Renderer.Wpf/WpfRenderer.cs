@@ -35,6 +35,7 @@ namespace Core2D.Renderer.Wpf
         private ICache<ITextShape, (string, WM.FormattedText, IShapeStyle)> _textCache;
         private ICache<string, WMI.BitmapImage> _biCache;
         private ICache<IPathShape, (Path.IPathGeometry, WM.StreamGeometry, IShapeStyle)> _pathCache;
+        private readonly PathGeometryConverter _converter;
 
         /// <inheritdoc/>
         public IShapeRendererState State
@@ -60,6 +61,7 @@ namespace Core2D.Renderer.Wpf
             _textCache = _serviceProvider.GetService<IFactory>().CreateCache<ITextShape, (string, WM.FormattedText, IShapeStyle)>();
             _biCache = _serviceProvider.GetService<IFactory>().CreateCache<string, WMI.BitmapImage>(bi => bi.StreamSource.Dispose());
             _pathCache = _serviceProvider.GetService<IFactory>().CreateCache<IPathShape, (Path.IPathGeometry, WM.StreamGeometry, IShapeStyle)>();
+            _converter = new PathGeometryConverter(_serviceProvider);
             ClearCache(isZooming: false);
         }
 
@@ -938,7 +940,7 @@ namespace Core2D.Renderer.Wpf
             }
             else
             {
-                sg = path.Geometry.ToStreamGeometry(dx, dy);
+                sg = _converter.ToStreamGeometry(path.Geometry, dx, dy);
 
                 // TODO: Enable PathShape caching, cache is disabled to enable PathHelper to work.
                 //_pathCache.Set(path, (path.Geometry, sg, style));

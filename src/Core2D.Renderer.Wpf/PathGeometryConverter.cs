@@ -15,7 +15,7 @@ namespace Core2D.Renderer.Wpf
     /// <summary>
     /// 
     /// </summary>
-    public static class PathGeometryConverter
+    public class PathGeometryConverter
     {
         private readonly IServiceProvider _serviceProvider;
 
@@ -28,7 +28,7 @@ namespace Core2D.Renderer.Wpf
             _serviceProvider = serviceProvider;
         }
 
-        private ImmutableArray<IPointShape> ToPointShapes(this IEnumerable<W.Point> points, double dx, double dy)
+        private ImmutableArray<IPointShape> ToPointShapes(IEnumerable<W.Point> points, double dx, double dy)
         {
             var factory = _serviceProvider.GetService<IFactory>();
             var pointShapes = ImmutableArray.CreateBuilder<IPointShape>();
@@ -39,7 +39,7 @@ namespace Core2D.Renderer.Wpf
             return pointShapes.ToImmutable();
         }
 
-        private IList<W.Point> ToPoints(this IList<IPointShape> pointShapes, double dx, double dy)
+        private IList<W.Point> ToPoints(IList<IPointShape> pointShapes, double dx, double dy)
         {
             var points = new List<W.Point>();
             foreach (var point in pointShapes)
@@ -56,7 +56,7 @@ namespace Core2D.Renderer.Wpf
         /// <param name="dx"></param>
         /// <param name="dy"></param>
         /// <returns></returns>
-        public IPathGeometry ToPathGeometry(this WM.PathGeometry pg, double dx, double dy)
+        public IPathGeometry ToPathGeometry(WM.PathGeometry pg, double dx, double dy)
         {
             var factory = _serviceProvider.GetService<IFactory>();
             var geometry = factory.CreatePathGeometry(
@@ -147,7 +147,7 @@ namespace Core2D.Renderer.Wpf
         /// <param name="dx"></param>
         /// <param name="dy"></param>
         /// <returns></returns>
-        public WM.StreamGeometry ToStreamGeometry(this IPathGeometry xpg, double dx, double dy)
+        public WM.StreamGeometry ToStreamGeometry(IPathGeometry xpg, double dx, double dy)
         {
             var sg = new WM.StreamGeometry();
 
@@ -237,7 +237,7 @@ namespace Core2D.Renderer.Wpf
         /// </summary>
         /// <param name="source"></param>
         /// <returns></returns>
-        public IPathGeometry ToPathGeometry(this string source)
+        public IPathGeometry ToPathGeometry(string source)
         {
             var g = WM.Geometry.Parse(source);
             var pg = WM.PathGeometry.CreateFromGeometry(g);
@@ -251,7 +251,7 @@ namespace Core2D.Renderer.Wpf
         /// <param name="dx"></param>
         /// <param name="dy"></param>
         /// <returns></returns>
-        public WM.PathGeometry ToPathGeometry(this IPathGeometry xpg, double dx, double dy)
+        public WM.PathGeometry ToPathGeometry(IPathGeometry xpg, double dx, double dy)
         {
             return WM.PathGeometry.CreateFromGeometry(ToStreamGeometry(xpg, dx, dy));
         }
@@ -261,7 +261,7 @@ namespace Core2D.Renderer.Wpf
         /// </summary>
         /// <param name="xpg"></param>
         /// <returns></returns>
-        public string ToSource(this IPathGeometry xpg)
+        public string ToSource(IPathGeometry xpg)
         {
             return ToStreamGeometry(xpg, 0.0, 0.0).ToString(CultureInfo.InvariantCulture);
         }
