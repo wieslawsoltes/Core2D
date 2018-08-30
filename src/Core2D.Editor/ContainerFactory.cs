@@ -31,7 +31,7 @@ namespace Core2D.Editor
         /// Creates a new instance of the <see cref="ILibrary{IShapeStyle}"/> class.
         /// </summary>
         /// <returns>The new instance of the <see cref="ILibrary{IShapeStyle}"/>.</returns>
-        public static ILibrary<IShapeStyle> DefaultStyleLibrary()
+        public ILibrary<IShapeStyle> DefaultStyleLibrary()
         {
             var factory = _serviceProvider.GetService<IFactory>();
             var sgd = factory.CreateLibrary<IShapeStyle>("Default");
@@ -55,7 +55,7 @@ namespace Core2D.Editor
         /// Creates a new instance of the <see cref="ILibrary{ShapeStyle}"/> class.
         /// </summary>
         /// <returns>The new instance of the <see cref="ILibrary{ShapeStyle}"/>.</returns>
-        public static ILibrary<IShapeStyle> LinesStyleLibrary()
+        public ILibrary<IShapeStyle> LinesStyleLibrary()
         {
             var factory = _serviceProvider.GetService<IFactory>();
             var sgdl = factory.CreateLibrary<IShapeStyle>("Lines");
@@ -97,7 +97,7 @@ namespace Core2D.Editor
         /// Creates a new instance of the <see cref="ILibrary{ShapeStyle}"/> class.
         /// </summary>
         /// <returns>The new instance of the <see cref="ILibrary{ShapeStyle}"/>.</returns>
-        public static ILibrary<IShapeStyle> TemplateStyleLibrary()
+        public ILibrary<IShapeStyle> TemplateStyleLibrary()
         {
             var factory = _serviceProvider.GetService<IFactory>();
             var sgt = factory.CreateLibrary<IShapeStyle>("Template");
