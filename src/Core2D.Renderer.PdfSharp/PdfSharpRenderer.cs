@@ -3,6 +3,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using Core2D.Containers;
 using Core2D.Data;
 using Core2D.Interfaces;
 using Core2D.Shapes;

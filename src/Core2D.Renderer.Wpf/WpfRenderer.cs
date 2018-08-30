@@ -6,6 +6,7 @@ using System.Collections.Immutable;
 using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
+using Core2D.Containers;
 using Core2D.Data;
 using Core2D.Interfaces;
 using Core2D.Shapes;

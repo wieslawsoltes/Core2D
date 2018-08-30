@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Diagnostics;
+using Core2D.Containers;
 using Core2D.Data;
 using Core2D.Interfaces;
 using Core2D.Shapes;
