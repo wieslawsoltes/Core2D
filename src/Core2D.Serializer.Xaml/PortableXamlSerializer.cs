@@ -1,5 +1,6 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using System;
 using Core2D.Interfaces;
 
 namespace Core2D.Serializer.Xaml
@@ -9,6 +10,17 @@ namespace Core2D.Serializer.Xaml
     /// </summary>
     public sealed class PortableXamlSerializer : IXamlSerializer
     {
+        private readonly IServiceProvider _serviceProvider;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="PortableXamlSerializer"/> class.
+        /// </summary>
+        /// <param name="serviceProvider">The service provider.</param>
+        public PortableXamlSerializer(IServiceProvider serviceProvider)
+        {
+            _serviceProvider = serviceProvider;
+        }
+
         /// <inheritdoc/>
         string IXamlSerializer.Serialize<T>(T value)
         {

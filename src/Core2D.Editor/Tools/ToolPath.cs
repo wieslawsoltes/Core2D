@@ -7,6 +7,7 @@ using System.Linq;
 using Core2D.Editor.Input;
 using Core2D.Editor.Tools.Path;
 using Core2D.Editor.Tools.Settings;
+using Core2D.Interfaces;
 using Core2D.Path;
 using Core2D.Path.Segments;
 using Core2D.Shapes;
@@ -166,13 +167,14 @@ namespace Core2D.Editor.Tools
         /// <param name="start">The path start point.</param>
         public void InitializeWorkingPath(IPointShape start)
         {
+            var factory = _serviceProvider.GetService<IFactory>();
             var editor = _serviceProvider.GetService<ProjectEditor>();
 
-            Geometry = Factory.CreatePathGeometry(
+            Geometry = factory.CreatePathGeometry(
                 ImmutableArray.Create<IPathFigure>(),
                 editor.Project.Options.DefaultFillRule);
 
-            GeometryContext = new PathGeometryContext(Geometry);
+            GeometryContext = new PathGeometryContext(factory, Geometry);
 
             GeometryContext.BeginFigure(
                 start,
@@ -180,7 +182,7 @@ namespace Core2D.Editor.Tools
                 editor.Project.Options.DefaultIsClosed);
 
             var style = editor.Project.CurrentStyleLibrary.Selected;
-            Path = Factory.CreatePathShape(
+            Path = factory.CreatePathShape(
                 "Path",
                 editor.Project.Options.CloneStyle ? style.Clone() : style,
                 Geometry,

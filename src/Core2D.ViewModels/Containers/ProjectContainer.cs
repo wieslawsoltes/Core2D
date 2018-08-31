@@ -190,20 +190,6 @@ namespace Core2D.Containers
             return GetAllShapes(shapes)?.Where(s => s is T).Cast<T>();
         }
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="IProjectContainer"/> class.
-        /// </summary>
-        public ProjectContainer()
-            : base()
-        {
-            _options = Factory.CreateOptions();
-            _styleLibraries = ImmutableArray.Create<ILibrary<IShapeStyle>>();
-            _groupLibraries = ImmutableArray.Create<ILibrary<IGroupShape>>();
-            _databases = ImmutableArray.Create<IDatabase>();
-            _templates = ImmutableArray.Create<IPageContainer>();
-            _documents = ImmutableArray.Create<IDocumentContainer>();
-        }
-
         /// <inheritdoc/>
         public void SetCurrentDocument(IDocumentContainer document)
         {
@@ -300,31 +286,31 @@ namespace Core2D.Containers
         /// Check whether the <see cref="StyleLibraries"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeStyleLibraries() => _styleLibraries.IsEmpty == false;
+        public virtual bool ShouldSerializeStyleLibraries() => true;
 
         /// <summary>
         /// Check whether the <see cref="GroupLibraries"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeGroupLibraries() => _groupLibraries.IsEmpty == false;
+        public virtual bool ShouldSerializeGroupLibraries() => true;
 
         /// <summary>
         /// Check whether the <see cref="Databases"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeDatabases() => _databases.IsEmpty == false;
+        public virtual bool ShouldSerializeDatabases() => true;
 
         /// <summary>
         /// Check whether the <see cref="Templates"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeTemplates() => _templates.IsEmpty == false;
+        public virtual bool ShouldSerializeTemplates() => true;
 
         /// <summary>
         /// Check whether the <see cref="Documents"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeDocuments() => _documents.IsEmpty == false;
+        public virtual bool ShouldSerializeDocuments() => true;
 
         /// <summary>
         /// Check whether the <see cref="CurrentStyleLibrary"/> property has changed from its default value.

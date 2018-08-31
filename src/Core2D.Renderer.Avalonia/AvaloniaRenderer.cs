@@ -4,7 +4,9 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Diagnostics;
+using Core2D.Containers;
 using Core2D.Data;
+using Core2D.Interfaces;
 using Core2D.Shapes;
 using Core2D.Style;
 using Spatial;
@@ -19,30 +21,48 @@ namespace Core2D.Renderer.Avalonia
     /// <summary>
     /// Native Avalonia shape renderer.
     /// </summary>
-    public class AvaloniaRenderer : ShapeRenderer
+    public class AvaloniaRenderer : ObservableObject, IShapeRenderer
     {
-        private ICache<IShapeStyle, (AM.IBrush, AM.Pen)> _styleCache = Factory.CreateCache<IShapeStyle, (AM.IBrush, AM.Pen)>();
-        private ICache<IArrowStyle, (AM.IBrush, AM.Pen)> _arrowStyleCache = Factory.CreateCache<IArrowStyle, (AM.IBrush, AM.Pen)>();
+        private readonly IServiceProvider _serviceProvider;
+        private IShapeRendererState _state;
+        private ICache<IShapeStyle, (AM.IBrush, AM.Pen)> _styleCache;
+        private ICache<IArrowStyle, (AM.IBrush, AM.Pen)> _arrowStyleCache;
         // TODO: Add LineShape cache.
         // TODO: Add EllipseShape cache.
         // TODO: Add ArcShape cache.
         // TODO: Add CubicBezierShape cache.
         // TODO: Add QuadraticBezierShape cache.
-        private ICache<ITextShape, (string, AM.FormattedText, IShapeStyle)> _textCache = Factory.CreateCache<ITextShape, (string, AM.FormattedText, IShapeStyle)>();
-        private ICache<string, AMI.Bitmap> _biCache = Factory.CreateCache<string, AMI.Bitmap>(bi => bi.Dispose());
+        private ICache<ITextShape, (string, AM.FormattedText, IShapeStyle)> _textCache;
+        private ICache<string, AMI.Bitmap> _biCache;
         // TODO: Add PathShape cache.
         private readonly Func<double, float> _scaleToPage;
         private readonly double _textScaleFactor;
+        private readonly PathGeometryConverter _converter;
+
+        /// <inheritdoc/>
+        public IShapeRendererState State
+        {
+            get => _state;
+            set => Update(ref _state, value);
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="AvaloniaRenderer"/> class.
         /// </summary>
-        /// <param name="textScaleFactor"></param>
-        public AvaloniaRenderer(double textScaleFactor = 1.0)
+        /// <param name="serviceProvider">The service provider.</param>
+        /// <param name="textScaleFactor">The text scale factor.</param>
+        public AvaloniaRenderer(IServiceProvider serviceProvider, double textScaleFactor = 1.0)
         {
-            ClearCache(isZooming: false);
+            _serviceProvider = serviceProvider;
+            _state = _serviceProvider.GetService<IFactory>().CreateShapeRendererState();
+            _styleCache = _serviceProvider.GetService<IFactory>().CreateCache<IShapeStyle, (AM.IBrush, AM.Pen)>();
+            _arrowStyleCache = _serviceProvider.GetService<IFactory>().CreateCache<IArrowStyle, (AM.IBrush, AM.Pen)>();
+            _textCache = _serviceProvider.GetService<IFactory>().CreateCache<ITextShape, (string, AM.FormattedText, IShapeStyle)>();
+            _biCache = _serviceProvider.GetService<IFactory>().CreateCache<string, AMI.Bitmap>(bi => bi.Dispose());
             _textScaleFactor = textScaleFactor;
             _scaleToPage = (value) => (float)(value);
+            _converter = new PathGeometryConverter(_serviceProvider);
+            ClearCache(isZooming: false);
         }
 
         /// <inheritdoc/>
@@ -50,12 +70,6 @@ namespace Core2D.Renderer.Avalonia
         {
             throw new NotImplementedException();
         }
-
-        /// <summary>
-        /// Creates a new <see cref="AvaloniaRenderer"/> instance.
-        /// </summary>
-        /// <returns>The new instance of the <see cref="AvaloniaRenderer"/> class.</returns>
-        public static IShapeRenderer Create() => new AvaloniaRenderer();
 
         private A.Point GetTextOrigin(IShapeStyle style, ref Rect2 rect, ref A.Size size)
         {
@@ -433,7 +447,7 @@ namespace Core2D.Renderer.Avalonia
         }
 
         /// <inheritdoc/>
-        public override void ClearCache(bool isZooming)
+        public void ClearCache(bool isZooming)
         {
             _styleCache.Reset();
             _arrowStyleCache.Reset();
@@ -446,7 +460,7 @@ namespace Core2D.Renderer.Avalonia
         }
 
         /// <inheritdoc/>
-        public override void Fill(object dc, double x, double y, double width, double height, IColor color)
+        public void Fill(object dc, double x, double y, double width, double height, IColor color)
         {
             var _dc = dc as AM.DrawingContext;
             var brush = ToBrush(color);
@@ -455,21 +469,45 @@ namespace Core2D.Renderer.Avalonia
         }
 
         /// <inheritdoc/>
-        public override object PushMatrix(object dc, IMatrixObject matrix)
+        public object PushMatrix(object dc, IMatrixObject matrix)
         {
             var _dc = dc as AM.DrawingContext;
             return _dc.PushPreTransform(ToMatrix(matrix));
         }
 
         /// <inheritdoc/>
-        public override void PopMatrix(object dc, object state)
+        public void PopMatrix(object dc, object state)
         {
             var _state = (AM.DrawingContext.PushedState)state;
             _state.Dispose();
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, ILineShape line, double dx, double dy, object db, object r)
+        public void Draw(object dc, IPageContainer container, double dx, double dy, object db, object r)
+        {
+            foreach (var layer in container.Layers)
+            {
+                if (layer.IsVisible)
+                {
+                    Draw(dc, layer, dx, dy, db, r);
+                }
+            }
+        }
+
+        /// <inheritdoc/>
+        public void Draw(object dc, ILayerContainer layer, double dx, double dy, object db, object r)
+        {
+            foreach (var shape in layer.Shapes)
+            {
+                if (shape.State.Flags.HasFlag(State.DrawShapeState.Flags))
+                {
+                    shape.Draw(dc, this, dx, dy, db, r);
+                }
+            }
+        }
+
+        /// <inheritdoc/>
+        public void Draw(object dc, ILineShape line, double dx, double dy, object db, object r)
         {
             var _dc = dc as AM.DrawingContext;
 
@@ -499,7 +537,7 @@ namespace Core2D.Renderer.Avalonia
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, IRectangleShape rectangle, double dx, double dy, object db, object r)
+        public void Draw(object dc, IRectangleShape rectangle, double dx, double dy, object db, object r)
         {
             var _dc = dc as AM.DrawingContext;
 
@@ -532,7 +570,7 @@ namespace Core2D.Renderer.Avalonia
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, IEllipseShape ellipse, double dx, double dy, object db, object r)
+        public void Draw(object dc, IEllipseShape ellipse, double dx, double dy, object db, object r)
         {
             var _dc = dc as AM.DrawingContext;
 
@@ -554,7 +592,7 @@ namespace Core2D.Renderer.Avalonia
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, IArcShape arc, double dx, double dy, object db, object r)
+        public void Draw(object dc, IArcShape arc, double dx, double dy, object db, object r)
         {
             if (!arc.IsFilled && !arc.IsStroked)
                 return;
@@ -576,7 +614,7 @@ namespace Core2D.Renderer.Avalonia
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, ICubicBezierShape cubicBezier, double dx, double dy, object db, object r)
+        public void Draw(object dc, ICubicBezierShape cubicBezier, double dx, double dy, object db, object r)
         {
             if (!cubicBezier.IsFilled && !cubicBezier.IsStroked)
                 return;
@@ -598,7 +636,7 @@ namespace Core2D.Renderer.Avalonia
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, IQuadraticBezierShape quadraticBezier, double dx, double dy, object db, object r)
+        public void Draw(object dc, IQuadraticBezierShape quadraticBezier, double dx, double dy, object db, object r)
         {
             if (!quadraticBezier.IsFilled && !quadraticBezier.IsStroked)
                 return;
@@ -620,7 +658,7 @@ namespace Core2D.Renderer.Avalonia
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, ITextShape text, double dx, double dy, object db, object r)
+        public void Draw(object dc, ITextShape text, double dx, double dy, object db, object r)
         {
             var _dc = dc as AM.DrawingContext;
 
@@ -704,7 +742,7 @@ namespace Core2D.Renderer.Avalonia
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, IImageShape image, double dx, double dy, object db, object r)
+        public void Draw(object dc, IImageShape image, double dx, double dy, object db, object r)
         {
             if (image.Key == null)
                 return;
@@ -776,7 +814,7 @@ namespace Core2D.Renderer.Avalonia
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, IPathShape path, double dx, double dy, object db, object r)
+        public void Draw(object dc, IPathShape path, double dx, double dy, object db, object r)
         {
             if (path.Geometry == null)
                 return;
@@ -792,7 +830,7 @@ namespace Core2D.Renderer.Avalonia
 
             GetCached(style, out var fill, out var stroke);
 
-            var g = path.Geometry.ToGeometry(dx, dy);
+            var g = _converter.ToGeometry(path.Geometry, dx, dy);
 
             _dc.DrawGeometry(
                 path.IsFilled ? fill : null,

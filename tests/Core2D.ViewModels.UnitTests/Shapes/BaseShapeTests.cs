@@ -1,52 +1,26 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
-using Core2D.Renderer;
 using System;
 using System.Collections.Generic;
+using Core2D.Interfaces;
+using Core2D.Renderer;
 using Xunit;
 
 namespace Core2D.Shapes.UnitTests
 {
     public class BaseShapeTests
     {
+        private readonly IFactory _factory = new Factory();
+
         [Fact]
-       [Trait("Core2D.Shapes", "Shapes")]
+        [Trait("Core2D.Shapes", "Shapes")]
         public void Inherits_From_ObservableObject()
         {
-            var target = new Class1();
+            var target = new Class1()
+            {
+                State = _factory.CreateShapeState()
+            };
             Assert.True(target is IObservableObject);
-        }
-
-        [Fact]
-       [Trait("Core2D.Shapes", "Shapes")]
-        public void State_Not_Null()
-        {
-            var target = new Class1();
-            Assert.NotNull(target.State);
-        }
-
-        [Fact]
-       [Trait("Core2D.Shapes", "Shapes")]
-        public void Default_ShapeStateFlags_Value()
-        {
-            var target = new Class1();
-            Assert.Equal(ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone, target.State.Flags);
-        }
-
-        [Fact]
-       [Trait("Core2D.Shapes", "Shapes")]
-        public void Data_Not_Null()
-        {
-            var target = new Class1();
-            Assert.NotNull(target.Data);
-        }
-
-        [Fact]
-       [Trait("Core2D.Shapes", "Shapes")]
-        public void Transform_Not_Null()
-        {
-            var target = new Class1();
-            Assert.NotNull(target.Transform);
         }
 
         private class Class1 : BaseShape

@@ -20,28 +20,21 @@ namespace Core2D
     /// <summary>
     /// View model factory.
     /// </summary>
-    public static class Factory
+    public class Factory : IFactory
     {
-        /// <summary>
-        /// Creates a new instance of the <see cref="ILibrary{T}"/> class.
-        /// </summary>
-        /// <param name="name">The library name.</param>
-        /// <returns>The new instance of the <see cref="ILibrary{T}"/> class.</returns>
-        public static ILibrary<T> CreateLibrary<T>(string name)
+        /// <inheritdoc/>
+        public ILibrary<T> CreateLibrary<T>(string name)
         {
             return new Library<T>()
             {
-                Name = name
+                Name = name,
+                Items = ImmutableArray.Create<T>(),
+                Selected = default
             };
         }
 
-        /// <summary>
-        /// Creates a new instance of the <see cref="ILibrary{T}"/> class.
-        /// </summary>
-        /// <param name="name">The library name.</param>
-        /// <param name="items">The items collection.</param>
-        /// <returns>The new instance of the <see cref="ILibrary{T}"/> class.</returns>
-        public static ILibrary<T> CreateLibrary<T>(string name, IEnumerable<T> items)
+        /// <inheritdoc/>
+        public ILibrary<T> CreateLibrary<T>(string name, IEnumerable<T> items)
         {
             return new Library<T>()
             {
@@ -51,12 +44,8 @@ namespace Core2D
             };
         }
 
-        /// <summary>
-        /// Creates a new <see cref="IValue"/> instance.
-        /// </summary>
-        /// <param name="content">The value content.</param>
-        /// <returns>The new instance of the <see cref="IValue"/> class.</returns>
-        public static IValue CreateValue(string content)
+        /// <inheritdoc/>
+        public IValue CreateValue(string content)
         {
             return new Value()
             {
@@ -64,14 +53,8 @@ namespace Core2D
             };
         }
 
-        /// <summary>
-        /// Creates a new <see cref="IProperty"/> instance.
-        /// </summary>
-        /// <param name="owner">The property owner.</param>
-        /// <param name="name">The property name.</param>
-        /// <param name="value">The property value.</param>
-        /// <returns>The new instance of the <see cref="IProperty"/> class.</returns>
-        public static IProperty CreateProperty(IContext owner, string name, string value)
+        /// <inheritdoc/>
+        public IProperty CreateProperty(IContext owner, string name, string value)
         {
             return new Property()
             {
@@ -81,15 +64,8 @@ namespace Core2D
             };
         }
 
-        /// <summary>
-        /// Creates a new <see cref="IColumn"/> instance.
-        /// </summary>
-        /// <param name="owner">The owner instance.</param>
-        /// <param name="name">The column name.</param>
-        /// <param name="width">The column width.</param>
-        /// <param name="isVisible">The flag indicating whether column is visible.</param>
-        /// <returns>The new instance of the <see cref="IColumn"/> class.</returns>
-        public static IColumn CreateColumn(IDatabase owner, string name, double width = double.NaN, bool isVisible = true)
+        /// <inheritdoc/>
+        public IColumn CreateColumn(IDatabase owner, string name, double width = double.NaN, bool isVisible = true)
         {
             return new Column()
             {
@@ -100,13 +76,8 @@ namespace Core2D
             };
         }
 
-        /// <summary>
-        /// Creates a new <see cref="IRecord"/> instance.
-        /// </summary>
-        /// <param name="owner">The record owner.</param>
-        /// <param name="values">The record values.</param>
-        /// <returns>The new instance of the <see cref="IRecord"/> class.</returns>
-        public static IRecord CreateRecord(IDatabase owner, ImmutableArray<IValue> values)
+        /// <inheritdoc/>
+        public IRecord CreateRecord(IDatabase owner, ImmutableArray<IValue> values)
         {
             return new Record()
             {
@@ -115,14 +86,8 @@ namespace Core2D
             };
         }
 
-        /// <summary>
-        /// Creates a new <see cref="IRecord"/> instance.
-        /// </summary>
-        /// <param name="owner">The record owner.</param>
-        /// <param name="id">The record Id.</param>
-        /// <param name="values">The record values.</param>
-        /// <returns>The new instance of the <see cref="IRecord"/> class.</returns>
-        public static IRecord CreateRecord(IDatabase owner, string id, ImmutableArray<IValue> values)
+        /// <inheritdoc/>
+        public IRecord CreateRecord(IDatabase owner, string id, ImmutableArray<IValue> values)
         {
             var record = new Record()
             {
@@ -138,13 +103,8 @@ namespace Core2D
             return record;
         }
 
-        /// <summary>
-        /// Creates a new <see cref="IRecord"/> instance.
-        /// </summary>
-        /// <param name="owner">The record owner.</param>
-        /// <param name="value">The record value.</param>
-        /// <returns>The new instance of the <see cref="IRecord"/> class.</returns>
-        public static IRecord CreateRecord(IDatabase owner, string value)
+        /// <inheritdoc/>
+        public IRecord CreateRecord(IDatabase owner, string value)
         {
             return new Record()
             {
@@ -156,35 +116,27 @@ namespace Core2D
             };
         }
 
-        /// <summary>
-        /// Creates a new <see cref="IContext"/> instance.
-        /// </summary>
-        /// <returns>The new instance of the <see cref="IContext"/> class.</returns>
-        public static IContext CreateContext()
-        {
-            return new Context();
-        }
-
-        /// <summary>
-        /// Creates a new <see cref="IContext"/> instance.
-        /// </summary>
-        /// <param name="record">The record instance.</param>
-        /// <returns>The new instance of the <see cref="IContext"/> class.</returns>
-        public static IContext CreateContext(IRecord record)
+        /// <inheritdoc/>
+        public IContext CreateContext()
         {
             return new Context()
             {
+                Properties = ImmutableArray.Create<IProperty>()
+            };
+        }
+
+        /// <inheritdoc/>
+        public IContext CreateContext(IRecord record)
+        {
+            return new Context()
+            {
+                Properties = ImmutableArray.Create<IProperty>(),
                 Record = record
             };
         }
 
-        /// <summary>
-        /// Creates a new <see cref="IDatabase"/> instance.
-        /// </summary>
-        /// <param name="name">The database name.</param>
-        /// <param name="idColumnName">The Id column name.</param>
-        /// <returns>The new instance of the <see cref="IDatabase"/> class.</returns>
-        public static IDatabase CreateDatabase(string name, string idColumnName = "Id")
+        /// <inheritdoc/>
+        public IDatabase CreateDatabase(string name, string idColumnName = "Id")
         {
             return new Database()
             {
@@ -195,14 +147,8 @@ namespace Core2D
             };
         }
 
-        /// <summary>
-        /// Creates a new <see cref="IDatabase"/> instance.
-        /// </summary>
-        /// <param name="name">The database name.</param>
-        /// <param name="columns">The database columns.</param>
-        /// <param name="idColumnName">The Id column name.</param>
-        /// <returns>The new instance of the <see cref="IDatabase"/> class.</returns>
-        public static IDatabase CreateDatabase(string name, ImmutableArray<IColumn> columns, string idColumnName = "Id")
+        /// <inheritdoc/>
+        public IDatabase CreateDatabase(string name, ImmutableArray<IColumn> columns, string idColumnName = "Id")
         {
             return new Database()
             {
@@ -213,15 +159,8 @@ namespace Core2D
             };
         }
 
-        /// <summary>
-        /// Creates a new <see cref="IDatabase"/> instance.
-        /// </summary>
-        /// <param name="name">The database name.</param>
-        /// <param name="columns">The database columns.</param>
-        /// <param name="records">The database records.</param>
-        /// <param name="idColumnName">The Id column name.</param>
-        /// <returns>The new instance of the <see cref="IDatabase"/> class.</returns>
-        public static IDatabase CreateDatabase(string name, ImmutableArray<IColumn> columns, ImmutableArray<IRecord> records, string idColumnName = "Id")
+        /// <inheritdoc/>
+        public IDatabase CreateDatabase(string name, ImmutableArray<IColumn> columns, ImmutableArray<IRecord> records, string idColumnName = "Id")
         {
             return new Database()
             {
@@ -232,14 +171,8 @@ namespace Core2D
             };
         }
 
-        /// <summary>
-        /// Creates a new <see cref="IDatabase"/> instance.
-        /// </summary>
-        /// <param name="name">The database name.</param>
-        /// <param name="fields">The fields collection.</param>
-        /// <param name="idColumnName">The Id column name.</param>
-        /// <returns>The new instance of the <see cref="IDatabase"/> class.</returns>
-        public static IDatabase FromFields(string name, IEnumerable<string[]> fields, string idColumnName = "Id")
+        /// <inheritdoc/>
+        public IDatabase FromFields(string name, IEnumerable<string[]> fields, string idColumnName = "Id")
         {
             var db = CreateDatabase(name, idColumnName);
             var tempColumns = fields.FirstOrDefault().Select(c => CreateColumn(db, c));
@@ -278,37 +211,20 @@ namespace Core2D
             return db;
         }
 
-        /// <summary>
-        /// Creates a new <see cref="ICache{TKey, TValue}"/> instance.
-        /// </summary>
-        /// <param name="dispose">The dispose action.</param>
-        /// <returns>The new instance of the <see cref="ICache{TKey, TValue}"/> class.</returns>
-        public static ICache<TKey, TValue> CreateCache<TKey, TValue>(Action<TValue> dispose = null)
+        /// <inheritdoc/>
+        public ICache<TKey, TValue> CreateCache<TKey, TValue>(Action<TValue> dispose = null)
         {
             return new Cache<TKey, TValue>(dispose);
         }
 
-        /// <summary>
-        /// Creates a new <see cref="IMatrixObject"/> instance.
-        /// </summary>
-        /// <param name="m11">The value of the first row and first column.</param>
-        /// <param name="m12">The value of the first row and second column.</param>
-        /// <param name="m21">The value of the second row and first column.</param>
-        /// <param name="m22">The value of the second row and second column.</param>
-        /// <param name="offsetX">The value of the third row and first column.</param>
-        /// <param name="offsetY">The value of the third row and second column.</param>
-        /// <returns>The new instance of the <see cref="IMatrixObject"/> class.</returns>
-        public static IMatrixObject CreateMatrixObject(double m11 = 1.0, double m12 = 0.0, double m21 = 0.0, double m22 = 1.0, double offsetX = 0.0, double offsetY = 0.0)
+        /// <inheritdoc/>
+        public IMatrixObject CreateMatrixObject(double m11 = 1.0, double m12 = 0.0, double m21 = 0.0, double m22 = 1.0, double offsetX = 0.0, double offsetY = 0.0)
         {
             return new MatrixObject(m11, m12, m21, m22, offsetX, offsetY);
         }
 
-        /// <summary>
-        /// Creates a new <see cref="IShapeState"/> instance.
-        /// </summary>
-        /// <param name="flags">The state flags.</param>
-        /// <returns>The new instance of the <see cref="IShapeState"/> class.</returns>
-        public static IShapeState CreateShapeState(ShapeStateFlags flags = ShapeStateFlags.Default)
+        /// <inheritdoc/>
+        public IShapeState CreateShapeState(ShapeStateFlags flags = ShapeStateFlags.Default)
         {
             return new ShapeState()
             {
@@ -316,11 +232,8 @@ namespace Core2D
             };
         }
 
-        /// <summary>
-        /// Creates a new <see cref="IShapeRendererState"/> instance.
-        /// </summary>
-        /// <returns>The new instance of the <see cref="IShapeRendererState"/> class.</returns>
-        public static IShapeRendererState CreateShapeRendererState()
+        /// <inheritdoc/>
+        public IShapeRendererState CreateShapeRendererState()
         {
             return new ShapeRendererState()
             {
@@ -334,14 +247,8 @@ namespace Core2D
             };
         }
 
-        /// <summary>
-        /// Creates a new <see cref="ILineSegment"/> instance.
-        /// </summary>
-        /// <param name="point">The end point.</param>
-        /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
-        /// <param name="isSmoothJoin">The flag indicating whether shape is smooth join.</param>
-        /// <returns>The new instance of the <see cref="ILineSegment"/> class.</returns>
-        public static ILineSegment CreateLineSegment(IPointShape point, bool isStroked, bool isSmoothJoin)
+        /// <inheritdoc/>
+        public ILineSegment CreateLineSegment(IPointShape point, bool isStroked = true, bool isSmoothJoin = true)
         {
             return new LineSegment()
             {
@@ -351,18 +258,8 @@ namespace Core2D
             };
         }
 
-        /// <summary>
-        /// Creates a new <see cref="IArcSegment"/> instance.
-        /// </summary>
-        /// <param name="point">The end point.</param>
-        /// <param name="size">The arc size.</param>
-        /// <param name="rotationAngle">The rotation angle.</param>
-        /// <param name="isLargeArc">The is large flag.</param>
-        /// <param name="sweepDirection">The sweep direction flag.</param>
-        /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
-        /// <param name="isSmoothJoin">The flag indicating whether shape is smooth join.</param>
-        /// <returns>The new instance of the <see cref="IArcSegment"/> class.</returns>
-        public static IArcSegment CreateArcSegment(IPointShape point, IPathSize size, double rotationAngle, bool isLargeArc, SweepDirection sweepDirection, bool isStroked, bool isSmoothJoin)
+        /// <inheritdoc/>
+        public IArcSegment CreateArcSegment(IPointShape point, IPathSize size, double rotationAngle, bool isLargeArc, SweepDirection sweepDirection, bool isStroked = true, bool isSmoothJoin = true)
         {
             return new ArcSegment()
             {
@@ -376,15 +273,8 @@ namespace Core2D
             };
         }
 
-        /// <summary>
-        /// Creates a new <see cref="IQuadraticBezierSegment"/> instance.
-        /// </summary>
-        /// <param name="point1">The control point.</param>
-        /// <param name="point2">The end point.</param>
-        /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
-        /// <param name="isSmoothJoin">The flag indicating whether shape is smooth join.</param>
-        /// <returns>The new instance of the <see cref="IQuadraticBezierSegment"/> class.</returns>
-        public static IQuadraticBezierSegment CreateQuadraticBezierSegment(IPointShape point1, IPointShape point2, bool isStroked, bool isSmoothJoin)
+        /// <inheritdoc/>
+        public IQuadraticBezierSegment CreateQuadraticBezierSegment(IPointShape point1, IPointShape point2, bool isStroked = true, bool isSmoothJoin = true)
         {
             return new QuadraticBezierSegment()
             {
@@ -395,16 +285,8 @@ namespace Core2D
             };
         }
 
-        /// <summary>
-        /// Creates a new <see cref="ICubicBezierSegment"/> instance.
-        /// </summary>
-        /// <param name="point1">The first control point.</param>
-        /// <param name="point2">The second control point.</param>
-        /// <param name="point3">The end point.</param>
-        /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
-        /// <param name="isSmoothJoin">The flag indicating whether shape is smooth join.</param>
-        /// <returns>The new instance of the <see cref="ICubicBezierSegment"/> class.</returns>
-        public static ICubicBezierSegment CreateCubicBezierSegment(IPointShape point1, IPointShape point2, IPointShape point3, bool isStroked, bool isSmoothJoin)
+        /// <inheritdoc/>
+        public ICubicBezierSegment CreateCubicBezierSegment(IPointShape point1, IPointShape point2, IPointShape point3, bool isStroked = true, bool isSmoothJoin = true)
         {
             return new CubicBezierSegment()
             {
@@ -416,14 +298,8 @@ namespace Core2D
             };
         }
 
-        /// <summary>
-        /// Creates a new <see cref="IPolyLineSegment"/> instance.
-        /// </summary>
-        /// <param name="points">The points array.</param>
-        /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
-        /// <param name="isSmoothJoin">The flag indicating whether shape is smooth join.</param>
-        /// <returns>The new instance of the <see cref="IPolyLineSegment"/> class.</returns>
-        public static IPolyLineSegment CreatePolyLineSegment(ImmutableArray<IPointShape> points, bool isStroked, bool isSmoothJoin)
+        /// <inheritdoc/>
+        public IPolyLineSegment CreatePolyLineSegment(ImmutableArray<IPointShape> points, bool isStroked = true, bool isSmoothJoin = true)
         {
             return new PolyLineSegment()
             {
@@ -433,14 +309,8 @@ namespace Core2D
             };
         }
 
-        /// <summary>
-        /// Creates a new <see cref="IPolyQuadraticBezierSegment"/> instance.
-        /// </summary>
-        /// <param name="points">The points array.</param>
-        /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
-        /// <param name="isSmoothJoin">The flag indicating whether shape is smooth join.</param>
-        /// <returns>The new instance of the <see cref="IPolyQuadraticBezierSegment"/> class.</returns>
-        public static IPolyQuadraticBezierSegment CreatePolyQuadraticBezierSegment(ImmutableArray<IPointShape> points, bool isStroked, bool isSmoothJoin)
+        /// <inheritdoc/>
+        public IPolyQuadraticBezierSegment CreatePolyQuadraticBezierSegment(ImmutableArray<IPointShape> points, bool isStroked = true, bool isSmoothJoin = true)
         {
             return new PolyQuadraticBezierSegment()
             {
@@ -450,14 +320,8 @@ namespace Core2D
             };
         }
 
-        /// <summary>
-        /// Creates a new <see cref="IPolyCubicBezierSegment"/> instance.
-        /// </summary>
-        /// <param name="points">The points array.</param>
-        /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
-        /// <param name="isSmoothJoin">The flag indicating whether shape is smooth join.</param>
-        /// <returns>The new instance of the <see cref="IPolyCubicBezierSegment"/> class.</returns>
-        public static IPolyCubicBezierSegment CreatePolyCubicBezierSegment(ImmutableArray<IPointShape> points, bool isStroked, bool isSmoothJoin)
+        /// <inheritdoc/>
+        public IPolyCubicBezierSegment CreatePolyCubicBezierSegment(ImmutableArray<IPointShape> points, bool isStroked = true, bool isSmoothJoin = true)
         {
             return new PolyCubicBezierSegment()
             {
@@ -467,13 +331,8 @@ namespace Core2D
             };
         }
 
-        /// <summary>
-        /// Creates a new <see cref="IPathSize"/> instance.
-        /// </summary>
-        /// <param name="width">The width value.</param>
-        /// <param name="height">The height value.</param>
-        /// <returns>The new instance of the <see cref="IPathSize"/> class.</returns>
-        public static IPathSize CreatePathSize(double width = 0.0, double height = 0.0)
+        /// <inheritdoc/>
+        public IPathSize CreatePathSize(double width = 0.0, double height = 0.0)
         {
             return new PathSize()
             {
@@ -482,13 +341,18 @@ namespace Core2D
             };
         }
 
-        /// <summary>
-        /// Creates a new <see cref="IPathGeometry"/> instance.
-        /// </summary>
-        /// <param name="figures">The figures collection.</param>
-        /// <param name="fillRule">The fill rule.</param>
-        /// <returns>The new instance of the <see cref="IPathGeometry"/> class.</returns>
-        public static IPathGeometry CreatePathGeometry(ImmutableArray<IPathFigure> figures, FillRule fillRule)
+        /// <inheritdoc/>
+        public IPathGeometry CreatePathGeometry()
+        {
+            return new PathGeometry()
+            {
+                Figures = ImmutableArray.Create<IPathFigure>(),
+                FillRule = FillRule.Nonzero
+            };
+        }
+
+        /// <inheritdoc/>
+        public IPathGeometry CreatePathGeometry(ImmutableArray<IPathFigure> figures, FillRule fillRule = FillRule.Nonzero)
         {
             return new PathGeometry()
             {
@@ -497,37 +361,39 @@ namespace Core2D
             };
         }
 
-        /// <summary>
-        /// Creates a new <see cref="IPathFigure"/> instance.
-        /// </summary>
-        /// <param name="startPoint">The start point.</param>
-        /// <param name="isFilled">The flag indicating whether path is filled.</param>
-        /// <param name="isClosed">The flag indicating whether path is closed.</param>
-        /// <returns>The new instance of the <see cref="IPathFigure"/> class.</returns>
-        public static IPathFigure CreatePathFigure(IPointShape startPoint, bool isFilled = true, bool isClosed = true)
+        /// <inheritdoc/>
+        public IPathFigure CreatePathFigure(bool isFilled = false, bool isClosed = false)
         {
             return new PathFigure()
             {
-                StartPoint = startPoint,
+                StartPoint = CreatePointShape(),
+                Segments = ImmutableArray.Create<IPathSegment>(),
                 IsFilled = isFilled,
                 IsClosed = isClosed
             };
         }
 
-        /// <summary>
-        /// Creates a new <see cref="IPointShape"/> instance.
-        /// </summary>
-        /// <param name="x">The X coordinate of point.</param>
-        /// <param name="y">The Y coordinate of point.</param>
-        /// <param name="shape">The point template.</param>
-        /// <param name="alignment">The point alignment.</param>
-        /// <param name="name">The shape name.</param>
-        /// <returns>The new instance of the <see cref="IPointShape"/> class.</returns>
-        public static IPointShape CreatePointShape(double x = 0.0, double y = 0.0, IBaseShape shape = null, PointAlignment alignment = PointAlignment.None, string name = "")
+        /// <inheritdoc/>
+        public IPathFigure CreatePathFigure(IPointShape startPoint, bool isFilled = false, bool isClosed = false)
+        {
+            return new PathFigure()
+            {
+                StartPoint = startPoint,
+                Segments = ImmutableArray.Create<IPathSegment>(),
+                IsFilled = isFilled,
+                IsClosed = isClosed
+            };
+        }
+
+        /// <inheritdoc/>
+        public IPointShape CreatePointShape(double x = 0.0, double y = 0.0, IBaseShape shape = null, PointAlignment alignment = PointAlignment.None, string name = "")
         {
             return new PointShape()
             {
                 Name = name,
+                State = CreateShapeState(ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone),
+                Transform = CreateMatrixObject(),
+                Data = CreateContext(),
                 Style = default,
                 X = x,
                 Y = y,
@@ -536,21 +402,15 @@ namespace Core2D
             };
         }
 
-        /// <summary>
-        /// Creates a new <see cref="ILineShape"/> instance.
-        /// </summary>
-        /// <param name="start">The <see cref="ILineShape.Start"/> point.</param>
-        /// <param name="end">The <see cref="ILineShape.End"/> point.</param>
-        /// <param name="style">The shape style.</param>
-        /// <param name="point">The point template.</param>
-        /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
-        /// <param name="name">The shape name.</param>
-        /// <returns>The new instance of the <see cref="ILineShape"/> class.</returns>
-        public static ILineShape CreateLineShape(IPointShape start, IPointShape end, IShapeStyle style, IBaseShape point, bool isStroked = true, string name = "")
+        /// <inheritdoc/>
+        public ILineShape CreateLineShape(IPointShape start, IPointShape end, IShapeStyle style, IBaseShape point, bool isStroked = true, string name = "")
         {
             return new LineShape()
             {
                 Name = name,
+                State = CreateShapeState(ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone),
+                Transform = CreateMatrixObject(),
+                Data = CreateContext(),
                 Style = style,
                 IsStroked = isStroked,
                 IsFilled = false,
@@ -559,23 +419,15 @@ namespace Core2D
             };
         }
 
-        /// <summary>
-        /// Creates a new <see cref="ILineShape"/> instance.
-        /// </summary>
-        /// <param name="x1">The X coordinate of <see cref="ILineShape.Start"/> point.</param>
-        /// <param name="y1">The Y coordinate of <see cref="ILineShape.Start"/> point.</param>
-        /// <param name="x2">The X coordinate of <see cref="ILineShape.End"/> point.</param>
-        /// <param name="y2">The Y coordinate of <see cref="ILineShape.End"/> point.</param>
-        /// <param name="style">The shape style.</param>
-        /// <param name="point">The point template.</param>
-        /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
-        /// <param name="name">The shape name.</param>
-        /// <returns>The new instance of the <see cref="ILineShape"/> class.</returns>
-        public static ILineShape CreateLineShape(double x1, double y1, double x2, double y2, IShapeStyle style, IBaseShape point, bool isStroked = true, string name = "")
+        /// <inheritdoc/>
+        public ILineShape CreateLineShape(double x1, double y1, double x2, double y2, IShapeStyle style, IBaseShape point, bool isStroked = true, string name = "")
         {
             return new LineShape()
             {
                 Name = name,
+                State = CreateShapeState(ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone),
+                Transform = CreateMatrixObject(),
+                Data = CreateContext(),
                 Style = style,
                 IsStroked = isStroked,
                 IsFilled = false,
@@ -584,43 +436,21 @@ namespace Core2D
             };
         }
 
-        /// <summary>
-        /// Creates a new <see cref="ILineShape"/> instance.
-        /// </summary>
-        /// <param name="x">The X coordinate of <see cref="ILineShape.Start"/> and <see cref="ILineShape.End"/> points.</param>
-        /// <param name="y">The Y coordinate of <see cref="ILineShape.Start"/> and <see cref="ILineShape.End"/> points.</param>
-        /// <param name="style">The shape style.</param>
-        /// <param name="point">The point template.</param>
-        /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
-        /// <param name="name">The shape name.</param>
-        /// <returns>The new instance of the <see cref="ILineShape"/> class.</returns>
-        public static ILineShape CreateLineShape(double x, double y, IShapeStyle style, IBaseShape point, bool isStroked = true, string name = "")
+        /// <inheritdoc/>
+        public ILineShape CreateLineShape(double x, double y, IShapeStyle style, IBaseShape point, bool isStroked = true, string name = "")
         {
             return CreateLineShape(x, y, x, y, style, point, isStroked, name);
         }
 
-        /// <summary>
-        /// Creates a new <see cref="IArcShape"/> instance.
-        /// </summary>
-        /// <param name="x1">The X coordinate of <see cref="IArcShape.Point1"/> point.</param>
-        /// <param name="y1">The Y coordinate of <see cref="IArcShape.Point1"/> point.</param>
-        /// <param name="x2">The X coordinate of <see cref="IArcShape.Point2"/> point.</param>
-        /// <param name="y2">The Y coordinate of <see cref="IArcShape.Point2"/> point.</param>
-        /// <param name="x3">The X coordinate of <see cref="IArcShape.Point3"/> point.</param>
-        /// <param name="y3">The Y coordinate of <see cref="IArcShape.Point3"/> point.</param>
-        /// <param name="x4">The X coordinate of <see cref="IArcShape.Point4"/> point.</param>
-        /// <param name="y4">The Y coordinate of <see cref="IArcShape.Point4"/> point.</param>
-        /// <param name="style">The shape style.</param>
-        /// <param name="point">The point template.</param>
-        /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
-        /// <param name="isFilled">The flag indicating whether shape is filled.</param>
-        /// <param name="name">The shape name.</param>
-        /// <returns>The new instance of the <see cref="IArcShape"/> class.</returns>
-        public static IArcShape CreateArcShape(double x1, double y1, double x2, double y2, double x3, double y3, double x4, double y4, IShapeStyle style, IBaseShape point, bool isStroked = true, bool isFilled = false, string name = "")
+        /// <inheritdoc/>
+        public IArcShape CreateArcShape(double x1, double y1, double x2, double y2, double x3, double y3, double x4, double y4, IShapeStyle style, IBaseShape point, bool isStroked = true, bool isFilled = false, string name = "")
         {
             return new ArcShape()
             {
                 Name = name,
+                State = CreateShapeState(ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone),
+                Transform = CreateMatrixObject(),
+                Data = CreateContext(),
                 Style = style,
                 IsStroked = isStroked,
                 IsFilled = isFilled,
@@ -631,40 +461,21 @@ namespace Core2D
             };
         }
 
-        /// <summary>
-        /// Creates a new <see cref="IArcShape"/> instance.
-        /// </summary>
-        /// <param name="x">The X coordinate of <see cref="IArcShape.Point1"/>, <see cref="IArcShape.Point2"/>, <see cref="IArcShape.Point3"/> and <see cref="IArcShape.Point4"/> points.</param>
-        /// <param name="y">The Y coordinate of <see cref="IArcShape.Point1"/>, <see cref="IArcShape.Point2"/>, <see cref="IArcShape.Point3"/> and <see cref="IArcShape.Point4"/> points.</param>
-        /// <param name="style">The shape style.</param>
-        /// <param name="point">The point template.</param>
-        /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
-        /// <param name="isFilled">The flag indicating whether shape is filled.</param>
-        /// <param name="name">The shape name.</param>
-        /// <returns>The new instance of the <see cref="IArcShape"/> class.</returns>
-        public static IArcShape CreateArcShape(double x, double y, IShapeStyle style, IBaseShape point, bool isStroked = true, bool isFilled = false, string name = "")
+        /// <inheritdoc/>
+        public IArcShape CreateArcShape(double x, double y, IShapeStyle style, IBaseShape point, bool isStroked = true, bool isFilled = false, string name = "")
         {
             return CreateArcShape(x, y, x, y, x, y, x, y, style, point, isStroked, isFilled, name);
         }
 
-        /// <summary>
-        /// Creates a new <see cref="IArcShape"/> instance.
-        /// </summary>
-        /// <param name="point1">The <see cref="IArcShape.Point1"/> point.</param>
-        /// <param name="point2">The <see cref="IArcShape.Point2"/> point.</param>
-        /// <param name="point3">The <see cref="IArcShape.Point3"/> point.</param>
-        /// <param name="point4">The <see cref="IArcShape.Point4"/> point.</param>
-        /// <param name="style">The shape style.</param>
-        /// <param name="point">The point template.</param>
-        /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
-        /// <param name="isFilled">The flag indicating whether shape is filled.</param>
-        /// <param name="name">The shape name.</param>
-        /// <returns>The new instance of the <see cref="IArcShape"/> class.</returns>
-        public static IArcShape CreateArcShape(IPointShape point1, IPointShape point2, IPointShape point3, IPointShape point4, IShapeStyle style, IBaseShape point, bool isStroked = true, bool isFilled = false, string name = "")
+        /// <inheritdoc/>
+        public IArcShape CreateArcShape(IPointShape point1, IPointShape point2, IPointShape point3, IPointShape point4, IShapeStyle style, IBaseShape point, bool isStroked = true, bool isFilled = false, string name = "")
         {
             return new ArcShape()
             {
                 Name = name,
+                State = CreateShapeState(ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone),
+                Transform = CreateMatrixObject(),
+                Data = CreateContext(),
                 Style = style,
                 IsStroked = isStroked,
                 IsFilled = isFilled,
@@ -675,26 +486,15 @@ namespace Core2D
             };
         }
 
-        /// <summary>
-        /// Creates a new <see cref="IQuadraticBezierShape"/> instance.
-        /// </summary>
-        /// <param name="x1">The X coordinate of <see cref="IQuadraticBezierShape.Point1"/> point.</param>
-        /// <param name="y1">The Y coordinate of <see cref="IQuadraticBezierShape.Point1"/> point.</param>
-        /// <param name="x2">The X coordinate of <see cref="IQuadraticBezierShape.Point2"/> point.</param>
-        /// <param name="y2">The Y coordinate of <see cref="IQuadraticBezierShape.Point2"/> point.</param>
-        /// <param name="x3">The X coordinate of <see cref="IQuadraticBezierShape.Point3"/> point.</param>
-        /// <param name="y3">The Y coordinate of <see cref="IQuadraticBezierShape.Point3"/> point.</param>
-        /// <param name="style">The shape style.</param>
-        /// <param name="point">The point template.</param>
-        /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
-        /// <param name="isFilled">The flag indicating whether shape is filled.</param>
-        /// <param name="name">The shape name.</param>
-        /// <returns>The new instance of the <see cref="IQuadraticBezierShape"/> class.</returns>
-        public static IQuadraticBezierShape CreateQuadraticBezierShape(double x1, double y1, double x2, double y2, double x3, double y3, IShapeStyle style, IBaseShape point, bool isStroked = true, bool isFilled = false, string name = "")
+        /// <inheritdoc/>
+        public IQuadraticBezierShape CreateQuadraticBezierShape(double x1, double y1, double x2, double y2, double x3, double y3, IShapeStyle style, IBaseShape point, bool isStroked = true, bool isFilled = false, string name = "")
         {
             return new QuadraticBezierShape()
             {
                 Name = name,
+                State = CreateShapeState(ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone),
+                Transform = CreateMatrixObject(),
+                Data = CreateContext(),
                 Style = style,
                 IsStroked = isStroked,
                 IsFilled = isFilled,
@@ -704,39 +504,21 @@ namespace Core2D
             };
         }
 
-        /// <summary>
-        /// Creates a new <see cref="IQuadraticBezierShape"/> instance.
-        /// </summary>
-        /// <param name="x">The X coordinate of <see cref="IQuadraticBezierShape.Point1"/>, <see cref="IQuadraticBezierShape.Point2"/> and <see cref="IQuadraticBezierShape.Point3"/> points.</param>
-        /// <param name="y">The Y coordinate of <see cref="IQuadraticBezierShape.Point1"/>, <see cref="IQuadraticBezierShape.Point2"/> and <see cref="IQuadraticBezierShape.Point3"/> points.</param>
-        /// <param name="style">The shape style.</param>
-        /// <param name="point">The point template.</param>
-        /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
-        /// <param name="isFilled">The flag indicating whether shape is filled.</param>
-        /// <param name="name">The shape name.</param>
-        /// <returns>The new instance of the <see cref="IQuadraticBezierShape"/> class.</returns>
-        public static IQuadraticBezierShape CreateQuadraticBezierShape(double x, double y, IShapeStyle style, IBaseShape point, bool isStroked = true, bool isFilled = false, string name = "")
+        /// <inheritdoc/>
+        public IQuadraticBezierShape CreateQuadraticBezierShape(double x, double y, IShapeStyle style, IBaseShape point, bool isStroked = true, bool isFilled = false, string name = "")
         {
             return CreateQuadraticBezierShape(x, y, x, y, x, y, style, point, isStroked, isFilled, name);
         }
 
-        /// <summary>
-        /// Creates a new <see cref="IQuadraticBezierShape"/> instance.
-        /// </summary>
-        /// <param name="point1">The <see cref="IQuadraticBezierShape.Point1"/> point.</param>
-        /// <param name="point2">The <see cref="IQuadraticBezierShape.Point2"/> point.</param>
-        /// <param name="point3">The <see cref="IQuadraticBezierShape.Point3"/> point.</param>
-        /// <param name="style">The shape style.</param>
-        /// <param name="point">The point template.</param>
-        /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
-        /// <param name="isFilled">The flag indicating whether shape is filled.</param>
-        /// <param name="name">The shape name.</param>
-        /// <returns>The new instance of the <see cref="IQuadraticBezierShape"/> class.</returns>
-        public static IQuadraticBezierShape CreateQuadraticBezierShape(IPointShape point1, IPointShape point2, IPointShape point3, IShapeStyle style, IBaseShape point, bool isStroked = true, bool isFilled = false, string name = "")
+        /// <inheritdoc/>
+        public IQuadraticBezierShape CreateQuadraticBezierShape(IPointShape point1, IPointShape point2, IPointShape point3, IShapeStyle style, IBaseShape point, bool isStroked = true, bool isFilled = false, string name = "")
         {
             return new QuadraticBezierShape()
             {
                 Name = name,
+                State = CreateShapeState(ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone),
+                Transform = CreateMatrixObject(),
+                Data = CreateContext(),
                 Style = style,
                 IsStroked = isStroked,
                 IsFilled = isFilled,
@@ -746,28 +528,15 @@ namespace Core2D
             };
         }
 
-        /// <summary>
-        /// Creates a new <see cref="ICubicBezierShape"/> instance.
-        /// </summary>
-        /// <param name="x1">The X coordinate of <see cref="ICubicBezierShape.Point1"/> point.</param>
-        /// <param name="y1">The Y coordinate of <see cref="ICubicBezierShape.Point1"/> point.</param>
-        /// <param name="x2">The X coordinate of <see cref="ICubicBezierShape.Point2"/> point.</param>
-        /// <param name="y2">The Y coordinate of <see cref="ICubicBezierShape.Point2"/> point.</param>
-        /// <param name="x3">The X coordinate of <see cref="ICubicBezierShape.Point3"/> point.</param>
-        /// <param name="y3">The Y coordinate of <see cref="ICubicBezierShape.Point3"/> point.</param>
-        /// <param name="x4">The X coordinate of <see cref="ICubicBezierShape.Point4"/> point.</param>
-        /// <param name="y4">The Y coordinate of <see cref="ICubicBezierShape.Point4"/> point.</param>
-        /// <param name="style">The shape style.</param>
-        /// <param name="point">The point template.</param>
-        /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
-        /// <param name="isFilled">The flag indicating whether shape is filled.</param>
-        /// <param name="name">The shape name.</param>
-        /// <returns>The new instance of the <see cref="ICubicBezierShape"/> class.</returns>
-        public static ICubicBezierShape CreateCubicBezierShape(double x1, double y1, double x2, double y2, double x3, double y3, double x4, double y4, IShapeStyle style, IBaseShape point, bool isStroked = true, bool isFilled = false, string name = "")
+        /// <inheritdoc/>
+        public ICubicBezierShape CreateCubicBezierShape(double x1, double y1, double x2, double y2, double x3, double y3, double x4, double y4, IShapeStyle style, IBaseShape point, bool isStroked = true, bool isFilled = false, string name = "")
         {
             return new CubicBezierShape()
             {
                 Name = name,
+                State = CreateShapeState(ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone),
+                Transform = CreateMatrixObject(),
+                Data = CreateContext(),
                 Style = style,
                 IsStroked = isStroked,
                 IsFilled = isFilled,
@@ -778,40 +547,21 @@ namespace Core2D
             };
         }
 
-        /// <summary>
-        /// Creates a new <see cref="ICubicBezierShape"/> instance.
-        /// </summary>
-        /// <param name="x">The X coordinate of <see cref="ICubicBezierShape.Point1"/>, <see cref="ICubicBezierShape.Point2"/>, <see cref="ICubicBezierShape.Point3"/> and <see cref="ICubicBezierShape.Point4"/> points.</param>
-        /// <param name="y">The Y coordinate of <see cref="ICubicBezierShape.Point1"/>, <see cref="ICubicBezierShape.Point2"/>, <see cref="ICubicBezierShape.Point3"/> and <see cref="ICubicBezierShape.Point4"/> points.</param>
-        /// <param name="style">The shape style.</param>
-        /// <param name="point">The point template.</param>
-        /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
-        /// <param name="isFilled">The flag indicating whether shape is filled.</param>
-        /// <param name="name">The shape name.</param>
-        /// <returns>The new instance of the <see cref="ICubicBezierShape"/> class.</returns>
-        public static ICubicBezierShape CreateCubicBezierShape(double x, double y, IShapeStyle style, IBaseShape point, bool isStroked = true, bool isFilled = false, string name = "")
+        /// <inheritdoc/>
+        public ICubicBezierShape CreateCubicBezierShape(double x, double y, IShapeStyle style, IBaseShape point, bool isStroked = true, bool isFilled = false, string name = "")
         {
             return CreateCubicBezierShape(x, y, x, y, x, y, x, y, style, point, isStroked, isFilled, name);
         }
 
-        /// <summary>
-        /// Creates a new <see cref="ICubicBezierShape"/> instance.
-        /// </summary>
-        /// <param name="point1">The <see cref="ICubicBezierShape.Point1"/> point.</param>
-        /// <param name="point2">The <see cref="ICubicBezierShape.Point2"/> point.</param>
-        /// <param name="point3">The <see cref="ICubicBezierShape.Point3"/> point.</param>
-        /// <param name="point4">The <see cref="ICubicBezierShape.Point4"/> point.</param>
-        /// <param name="style">The shape style.</param>
-        /// <param name="point">The point template.</param>
-        /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
-        /// <param name="isFilled">The flag indicating whether shape is filled.</param>
-        /// <param name="name">The shape name.</param>
-        /// <returns>The new instance of the <see cref="ICubicBezierShape"/> class.</returns>
-        public static ICubicBezierShape CreateCubicBezierShape(IPointShape point1, IPointShape point2, IPointShape point3, IPointShape point4, IShapeStyle style, IBaseShape point, bool isStroked = true, bool isFilled = false, string name = "")
+        /// <inheritdoc/>
+        public ICubicBezierShape CreateCubicBezierShape(IPointShape point1, IPointShape point2, IPointShape point3, IPointShape point4, IShapeStyle style, IBaseShape point, bool isStroked = true, bool isFilled = false, string name = "")
         {
             return new CubicBezierShape()
             {
                 Name = name,
+                State = CreateShapeState(ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone),
+                Transform = CreateMatrixObject(),
+                Data = CreateContext(),
                 Style = style,
                 IsStroked = isStroked,
                 IsFilled = isFilled,
@@ -822,25 +572,15 @@ namespace Core2D
             };
         }
 
-        /// <summary>
-        /// Creates a new <see cref="IRectangleShape"/> instance.
-        /// </summary>
-        /// <param name="x1">The X coordinate of <see cref="ITextShape.TopLeft"/> corner point.</param>
-        /// <param name="y1">The Y coordinate of <see cref="ITextShape.TopLeft"/> corner point.</param>
-        /// <param name="x2">The X coordinate of <see cref="ITextShape.BottomRight"/> corner point.</param>
-        /// <param name="y2">The Y coordinate of <see cref="ITextShape.BottomRight"/> corner point.</param>
-        /// <param name="style">The shape style.</param>
-        /// <param name="point">The point template.</param>
-        /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
-        /// <param name="isFilled">The flag indicating whether shape is filled.</param>
-        /// <param name="text">The text string.</param>
-        /// <param name="name">The shape name.</param>
-        /// <returns>The new instance of the <see cref="IRectangleShape"/> class.</returns>
-        public static IRectangleShape CreateRectangleShape(double x1, double y1, double x2, double y2, IShapeStyle style, IBaseShape point, bool isStroked = true, bool isFilled = false, string text = null, string name = "")
+        /// <inheritdoc/>
+        public IRectangleShape CreateRectangleShape(double x1, double y1, double x2, double y2, IShapeStyle style, IBaseShape point, bool isStroked = true, bool isFilled = false, string text = null, string name = "")
         {
             return new RectangleShape()
             {
                 Name = name,
+                State = CreateShapeState(ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone),
+                Transform = CreateMatrixObject(),
+                Data = CreateContext(),
                 Style = style,
                 IsStroked = isStroked,
                 IsFilled = isFilled,
@@ -855,40 +595,21 @@ namespace Core2D
             };
         }
 
-        /// <summary>
-        /// Creates a new <see cref="IRectangleShape"/> instance.
-        /// </summary>
-        /// <param name="x">The X coordinate of <see cref="ITextShape.TopLeft"/> and <see cref="ITextShape.BottomRight"/> corner points.</param>
-        /// <param name="y">The Y coordinate of <see cref="ITextShape.TopLeft"/> and <see cref="ITextShape.BottomRight"/> corner points.</param>
-        /// <param name="style">The shape style.</param>
-        /// <param name="point">The point template.</param>
-        /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
-        /// <param name="isFilled">The flag indicating whether shape is filled.</param>
-        /// <param name="text">The text string.</param>
-        /// <param name="name">The shape name.</param>
-        /// <returns>The new instance of the <see cref="IRectangleShape"/> class.</returns>
-        public static IRectangleShape CreateRectangleShape(double x, double y, IShapeStyle style, IBaseShape point, bool isStroked = true, bool isFilled = false, string text = null, string name = "")
+        /// <inheritdoc/>
+        public IRectangleShape CreateRectangleShape(double x, double y, IShapeStyle style, IBaseShape point, bool isStroked = true, bool isFilled = false, string text = null, string name = "")
         {
             return CreateRectangleShape(x, y, x, y, style, point, isStroked, isFilled, text, name);
         }
 
-        /// <summary>
-        /// Creates a new <see cref="IRectangleShape"/> instance.
-        /// </summary>
-        /// <param name="topLeft">The <see cref="ITextShape.TopLeft"/> corner point.</param>
-        /// <param name="bottomRight">The <see cref="ITextShape.BottomRight"/> corner point.</param>
-        /// <param name="style">The shape style.</param>
-        /// <param name="point">The point template.</param>
-        /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
-        /// <param name="isFilled">The flag indicating whether shape is filled.</param>
-        /// <param name="text">The text string.</param>
-        /// <param name="name">The shape name.</param>
-        /// <returns>The new instance of the <see cref="IRectangleShape"/> class.</returns>
-        public static IRectangleShape CreateRectangleShape(IPointShape topLeft, IPointShape bottomRight, IShapeStyle style, IBaseShape point, bool isStroked = true, bool isFilled = false, string text = null, string name = "")
+        /// <inheritdoc/>
+        public IRectangleShape CreateRectangleShape(IPointShape topLeft, IPointShape bottomRight, IShapeStyle style, IBaseShape point, bool isStroked = true, bool isFilled = false, string text = null, string name = "")
         {
             return new RectangleShape()
             {
                 Name = name,
+                State = CreateShapeState(ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone),
+                Transform = CreateMatrixObject(),
+                Data = CreateContext(),
                 Style = style,
                 IsStroked = isStroked,
                 IsFilled = isFilled,
@@ -903,25 +624,15 @@ namespace Core2D
             };
         }
 
-        /// <summary>
-        /// Creates a new <see cref="IEllipseShape"/> instance.
-        /// </summary>
-        /// <param name="x1">The X coordinate of <see cref="ITextShape.TopLeft"/> corner point.</param>
-        /// <param name="y1">The Y coordinate of <see cref="ITextShape.TopLeft"/> corner point.</param>
-        /// <param name="x2">The X coordinate of <see cref="ITextShape.BottomRight"/> corner point.</param>
-        /// <param name="y2">The Y coordinate of <see cref="ITextShape.BottomRight"/> corner point.</param>
-        /// <param name="style">The shape style.</param>
-        /// <param name="point">The point template.</param>
-        /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
-        /// <param name="isFilled">The flag indicating whether shape is filled.</param>
-        /// <param name="text">The text string.</param>
-        /// <param name="name">The shape name.</param>
-        /// <returns>The new instance of the <see cref="IEllipseShape"/> class.</returns>
-        public static IEllipseShape CreateEllipseShape(double x1, double y1, double x2, double y2, IShapeStyle style, IBaseShape point, bool isStroked = true, bool isFilled = false, string text = null, string name = "")
+        /// <inheritdoc/>
+        public IEllipseShape CreateEllipseShape(double x1, double y1, double x2, double y2, IShapeStyle style, IBaseShape point, bool isStroked = true, bool isFilled = false, string text = null, string name = "")
         {
             return new EllipseShape()
             {
                 Name = name,
+                State = CreateShapeState(ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone),
+                Transform = CreateMatrixObject(),
+                Data = CreateContext(),
                 Style = style,
                 IsStroked = isStroked,
                 IsFilled = isFilled,
@@ -931,40 +642,21 @@ namespace Core2D
             };
         }
 
-        /// <summary>
-        /// Creates a new <see cref="IEllipseShape"/> instance.
-        /// </summary>
-        /// <param name="x">The X coordinate of <see cref="ITextShape.TopLeft"/> and <see cref="ITextShape.BottomRight"/> corner points.</param>
-        /// <param name="y">The Y coordinate of <see cref="ITextShape.TopLeft"/> and <see cref="ITextShape.BottomRight"/> corner points.</param>
-        /// <param name="style">The shape style.</param>
-        /// <param name="point">The point template.</param>
-        /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
-        /// <param name="isFilled">The flag indicating whether shape is filled.</param>
-        /// <param name="text">The text string.</param>
-        /// <param name="name">The shape name.</param>
-        /// <returns>The new instance of the <see cref="IEllipseShape"/> class.</returns>
-        public static IEllipseShape CreateEllipseShape(double x, double y, IShapeStyle style, IBaseShape point, bool isStroked = true, bool isFilled = false, string text = null, string name = "")
+        /// <inheritdoc/>
+        public IEllipseShape CreateEllipseShape(double x, double y, IShapeStyle style, IBaseShape point, bool isStroked = true, bool isFilled = false, string text = null, string name = "")
         {
             return CreateEllipseShape(x, y, x, y, style, point, isStroked, isFilled, text, name);
         }
 
-        /// <summary>
-        /// Creates a new <see cref="IEllipseShape"/> instance.
-        /// </summary>
-        /// <param name="topLeft">The <see cref="ITextShape.TopLeft"/> corner point.</param>
-        /// <param name="bottomRight">The <see cref="ITextShape.BottomRight"/> corner point.</param>
-        /// <param name="style">The shape style.</param>
-        /// <param name="point">The point template.</param>
-        /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
-        /// <param name="isFilled">The flag indicating whether shape is filled.</param>
-        /// <param name="text">The text string.</param>
-        /// <param name="name">The shape name.</param>
-        /// <returns>The new instance of the <see cref="IEllipseShape"/> class.</returns>
-        public static IEllipseShape CreateEllipseShape(IPointShape topLeft, IPointShape bottomRight, IShapeStyle style, IBaseShape point, bool isStroked = true, bool isFilled = false, string text = null, string name = "")
+        /// <inheritdoc/>
+        public IEllipseShape CreateEllipseShape(IPointShape topLeft, IPointShape bottomRight, IShapeStyle style, IBaseShape point, bool isStroked = true, bool isFilled = false, string text = null, string name = "")
         {
             return new EllipseShape()
             {
                 Name = name,
+                State = CreateShapeState(ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone),
+                Transform = CreateMatrixObject(),
+                Data = CreateContext(),
                 Style = style,
                 IsStroked = isStroked,
                 IsFilled = isFilled,
@@ -974,18 +666,14 @@ namespace Core2D
             };
         }
 
-        /// <summary>
-        /// Creates a new <see cref="IPathShape"/> instance.
-        /// </summary>
-        /// <param name="style">The shape style.</param>
-        /// <param name="geometry">The path geometry.</param>
-        /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
-        /// <param name="isFilled">The flag indicating whether shape is filled.</param>
-        /// <returns>The new instance of the <see cref="IPathShape"/> class.</returns>
-        public static IPathShape CreatePathShape(IShapeStyle style, IPathGeometry geometry, bool isStroked = true, bool isFilled = true)
+        /// <inheritdoc/>
+        public IPathShape CreatePathShape(IShapeStyle style, IPathGeometry geometry, bool isStroked = true, bool isFilled = true)
         {
             return new PathShape()
             {
+                State = CreateShapeState(ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone),
+                Transform = CreateMatrixObject(),
+                Data = CreateContext(),
                 Style = style,
                 IsStroked = isStroked,
                 IsFilled = isFilled,
@@ -993,20 +681,15 @@ namespace Core2D
             };
         }
 
-        /// <summary>
-        /// Creates a new <see cref="IPathShape"/> instance.
-        /// </summary>
-        /// <param name="name">The shape name.</param>
-        /// <param name="style">The shape style.</param>
-        /// <param name="geometry">The path geometry.</param>
-        /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
-        /// <param name="isFilled">The flag indicating whether shape is filled.</param>
-        /// <returns>The new instance of the <see cref="IPathShape"/> class.</returns>
-        public static IPathShape CreatePathShape(string name, IShapeStyle style, IPathGeometry geometry, bool isStroked = true, bool isFilled = true)
+        /// <inheritdoc/>
+        public IPathShape CreatePathShape(string name, IShapeStyle style, IPathGeometry geometry, bool isStroked = true, bool isFilled = true)
         {
             return new PathShape()
             {
                 Name = name,
+                State = CreateShapeState(ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone),
+                Transform = CreateMatrixObject(),
+                Data = CreateContext(),
                 Style = style,
                 IsStroked = isStroked,
                 IsFilled = isFilled,
@@ -1014,64 +697,38 @@ namespace Core2D
             };
         }
 
-        /// <summary>
-        /// Creates a new <see cref="ITextShape"/> instance.
-        /// </summary>
-        /// <param name="x1">The X coordinate of <see cref="ITextShape.TopLeft"/> corner point.</param>
-        /// <param name="y1">The Y coordinate of <see cref="ITextShape.TopLeft"/> corner point.</param>
-        /// <param name="x2">The X coordinate of <see cref="ITextShape.BottomRight"/> corner point.</param>
-        /// <param name="y2">The Y coordinate of <see cref="ITextShape.BottomRight"/> corner point.</param>
-        /// <param name="style">The shape style.</param>
-        /// <param name="point">The point template.</param>
-        /// <param name="text">The text string.</param>
-        /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
-        /// <param name="name">The shape name.</param>
-        /// <returns>The new instance of the <see cref="ITextShape"/> class.</returns>
-        public static ITextShape CreateTextShape(double x1, double y1, double x2, double y2, IShapeStyle style, IBaseShape point, string text, bool isStroked = true, string name = "")
+        /// <inheritdoc/>
+        public ITextShape CreateTextShape(double x1, double y1, double x2, double y2, IShapeStyle style, IBaseShape point, string text, bool isStroked = true, string name = "")
         {
             return new TextShape()
             {
                 Name = name,
+                State = CreateShapeState(ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone),
+                Transform = CreateMatrixObject(),
+                Data = CreateContext(),
                 Style = style,
                 IsStroked = isStroked,
-                TopLeft = Factory.CreatePointShape(x1, y1, point),
-                BottomRight = Factory.CreatePointShape(x2, y2, point),
+                TopLeft = CreatePointShape(x1, y1, point),
+                BottomRight = CreatePointShape(x2, y2, point),
                 Text = text
             };
         }
 
-        /// <summary>
-        /// Creates a new <see cref="ITextShape"/> instance.
-        /// </summary>
-        /// <param name="x">The X coordinate of <see cref="ITextShape.TopLeft"/> and <see cref="ITextShape.BottomRight"/> corner points.</param>
-        /// <param name="y">The Y coordinate of <see cref="ITextShape.TopLeft"/> and <see cref="ITextShape.BottomRight"/> corner points.</param>
-        /// <param name="style">The shape style.</param>
-        /// <param name="point">The point template.</param>
-        /// <param name="text">The text string.</param>
-        /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
-        /// <param name="name">The shape name.</param>
-        /// <returns>The new instance of the <see cref="ITextShape"/> class.</returns>
-        public static ITextShape CreateTextShape(double x, double y, IShapeStyle style, IBaseShape point, string text, bool isStroked = true, string name = "")
+        /// <inheritdoc/>
+        public ITextShape CreateTextShape(double x, double y, IShapeStyle style, IBaseShape point, string text, bool isStroked = true, string name = "")
         {
             return CreateTextShape(x, y, x, y, style, point, text, isStroked, name);
         }
 
-        /// <summary>
-        /// Creates a new <see cref="ITextShape"/> instance.
-        /// </summary>
-        /// <param name="topLeft">The <see cref="ITextShape.TopLeft"/> corner point.</param>
-        /// <param name="bottomRight">The <see cref="ITextShape.BottomRight"/> corner point.</param>
-        /// <param name="style">The shape style.</param>
-        /// <param name="point">The point template.</param>
-        /// <param name="text">The text string.</param>
-        /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
-        /// <param name="name">The shape name.</param>
-        /// <returns>The new instance of the <see cref="ITextShape"/> class.</returns>
-        public static ITextShape CreateTextShape(IPointShape topLeft, IPointShape bottomRight, IShapeStyle style, IBaseShape point, string text, bool isStroked = true, string name = "")
+        /// <inheritdoc/>
+        public ITextShape CreateTextShape(IPointShape topLeft, IPointShape bottomRight, IShapeStyle style, IBaseShape point, string text, bool isStroked = true, string name = "")
         {
             return new TextShape()
             {
                 Name = name,
+                State = CreateShapeState(ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone),
+                Transform = CreateMatrixObject(),
+                Data = CreateContext(),
                 Style = style,
                 IsStroked = isStroked,
                 TopLeft = topLeft,
@@ -1080,72 +737,40 @@ namespace Core2D
             };
         }
 
-        /// <summary>
-        /// Creates a new <see cref="IImageShape"/> instance.
-        /// </summary>
-        /// <param name="x1">The X coordinate of <see cref="ITextShape.TopLeft"/> corner point.</param>
-        /// <param name="y1">The Y coordinate of <see cref="ITextShape.TopLeft"/> corner point.</param>
-        /// <param name="x2">The X coordinate of <see cref="ITextShape.BottomRight"/> corner point.</param>
-        /// <param name="y2">The Y coordinate of <see cref="ITextShape.BottomRight"/> corner point.</param>
-        /// <param name="style">The shape style.</param>
-        /// <param name="point">The point template.</param>
-        /// <param name="key">The image key.</param>
-        /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
-        /// <param name="isFilled">The flag indicating whether shape is filled.</param>
-        /// <param name="text">The text string.</param>
-        /// <param name="name">The shape name.</param>
-        /// <returns>The new instance of the <see cref="IImageShape"/> class.</returns>
-        public static IImageShape CreateImageShape(double x1, double y1, double x2, double y2, IShapeStyle style, IBaseShape point, string key, bool isStroked = false, bool isFilled = false, string text = null, string name = "")
+        /// <inheritdoc/>
+        public IImageShape CreateImageShape(double x1, double y1, double x2, double y2, IShapeStyle style, IBaseShape point, string key, bool isStroked = false, bool isFilled = false, string text = null, string name = "")
         {
             return new ImageShape()
             {
                 Name = name,
+                State = CreateShapeState(ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone),
+                Transform = CreateMatrixObject(),
+                Data = CreateContext(),
                 Style = style,
                 IsStroked = isStroked,
                 IsFilled = isFilled,
-                TopLeft = Factory.CreatePointShape(x1, y1, point),
-                BottomRight = Factory.CreatePointShape(x2, y2, point),
+                TopLeft = CreatePointShape(x1, y1, point),
+                BottomRight = CreatePointShape(x2, y2, point),
                 Key = key,
                 Text = text
             };
         }
 
-        /// <summary>
-        /// Creates a new <see cref="IImageShape"/> instance.
-        /// </summary>
-        /// <param name="x">The X coordinate of <see cref="ITextShape.TopLeft"/> and <see cref="ITextShape.BottomRight"/> corner points.</param>
-        /// <param name="y">The Y coordinate of <see cref="ITextShape.TopLeft"/> and <see cref="ITextShape.BottomRight"/> corner points.</param>
-        /// <param name="style">The shape style.</param>
-        /// <param name="point">The point template.</param>
-        /// <param name="key">The image key.</param>
-        /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
-        /// <param name="isFilled">The flag indicating whether shape is filled.</param>
-        /// <param name="text">The text string.</param>
-        /// <param name="name">The shape name.</param>
-        /// <returns>The new instance of the <see cref="IImageShape"/> class.</returns>
-        public static IImageShape CreateImageShape(double x, double y, IShapeStyle style, IBaseShape point, string key, bool isStroked = false, bool isFilled = false, string text = null, string name = "")
+        /// <inheritdoc/>
+        public IImageShape CreateImageShape(double x, double y, IShapeStyle style, IBaseShape point, string key, bool isStroked = false, bool isFilled = false, string text = null, string name = "")
         {
             return CreateImageShape(x, y, x, y, style, point, key, isStroked, isFilled, text, name);
         }
 
-        /// <summary>
-        /// Creates a new <see cref="IImageShape"/> instance.
-        /// </summary>
-        /// <param name="topLeft">The <see cref="ITextShape.TopLeft"/> corner point.</param>
-        /// <param name="bottomRight">The <see cref="ITextShape.BottomRight"/> corner point.</param>
-        /// <param name="style">The shape style.</param>
-        /// <param name="point">The point template.</param>
-        /// <param name="key">The image key.</param>
-        /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
-        /// <param name="isFilled">The flag indicating whether shape is filled.</param>
-        /// <param name="text">The text string.</param>
-        /// <param name="name">The shape name.</param>
-        /// <returns>The new instance of the <see cref="IImageShape"/> class.</returns>
-        public static IImageShape CreateImageShape(IPointShape topLeft, IPointShape bottomRight, IShapeStyle style, IBaseShape point, string key, bool isStroked = false, bool isFilled = false, string text = null, string name = "")
+        /// <inheritdoc/>
+        public IImageShape CreateImageShape(IPointShape topLeft, IPointShape bottomRight, IShapeStyle style, IBaseShape point, string key, bool isStroked = false, bool isFilled = false, string text = null, string name = "")
         {
             return new ImageShape()
             {
                 Name = name,
+                State = CreateShapeState(ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone),
+                Transform = CreateMatrixObject(),
+                Data = CreateContext(),
                 Style = style,
                 IsStroked = isStroked,
                 IsFilled = isFilled,
@@ -1156,28 +781,22 @@ namespace Core2D
             };
         }
 
-        /// <summary>
-        /// Creates a new <see cref="IGroupShape"/> instance.
-        /// </summary>
-        /// <param name="name">The group name.</param>
-        /// <returns>The new instance of the <see cref="IGroupShape"/> class.</returns>
-        public static IGroupShape CreateGroupShape(string name)
+        /// <inheritdoc/>
+        public IGroupShape CreateGroupShape(string name = "g")
         {
             return new GroupShape()
             {
-                Name = name
+                Name = name,
+                State = CreateShapeState(ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone),
+                Transform = CreateMatrixObject(),
+                Data = CreateContext(),
+                Connectors = ImmutableArray.Create<IPointShape>(),
+                Shapes = ImmutableArray.Create<IBaseShape>()
             };
         }
 
-        /// <summary>
-        /// Creates a new <see cref="IArgbColor"/> instance.
-        /// </summary>
-        /// <param name="a">The alpha color channel.</param>
-        /// <param name="r">The red color channel.</param>
-        /// <param name="g">The green color channel.</param>
-        /// <param name="b">The blue color channel.</param>
-        /// <returns>The new instance of the <see cref="IArgbColor"/> class.</returns>
-        public static IArgbColor CreateArgbColor(byte a = 0xFF, byte r = 0x00, byte g = 0x00, byte b = 0x00)
+        /// <inheritdoc/>
+        public IArgbColor CreateArgbColor(byte a = 0xFF, byte r = 0x00, byte g = 0x00, byte b = 0x00)
         {
             return new ArgbColor()
             {
@@ -1188,16 +807,8 @@ namespace Core2D
             };
         }
 
-        /// <summary>
-        /// Creates a new <see cref="IArrowStyle"/> instance.
-        /// </summary>
-        /// <param name="arrowType">The arrow type.</param>
-        /// <param name="isStroked">The arrow shape stroke flag.</param>
-        /// <param name="isFilled">The arrow shape fill flag.</param>
-        /// <param name="radiusX">The arrow X axis radius.</param>
-        /// <param name="radiusY">The arrow Y axis radius.</param>
-        /// <returns>The new instance of the <see cref="IArrowStyle"/> class.</returns>
-        public static IArrowStyle CreateArrowStyle(ArrowType arrowType = ArrowType.None, bool isStroked = true, bool isFilled = false, double radiusX = 5.0, double radiusY = 3.0)
+        /// <inheritdoc/>
+        public IArrowStyle CreateArrowStyle(ArrowType arrowType = ArrowType.None, bool isStroked = true, bool isFilled = false, double radiusX = 5.0, double radiusY = 3.0)
         {
             return new ArrowStyle()
             {
@@ -1208,17 +819,8 @@ namespace Core2D
             };
         }
 
-        /// <summary>
-        /// Creates a new <see cref="IArrowStyle"/> instance.
-        /// </summary>
-        /// <param name="source">The source style.</param>
-        /// <param name="arrowType">The arrow type.</param>
-        /// <param name="isStroked">The arrow shape stroke flag.</param>
-        /// <param name="isFilled">The arrow shape fill flag.</param>
-        /// <param name="radiusX">The arrow X axis radius.</param>
-        /// <param name="radiusY">The arrow Y axis radius.</param>
-        /// <returns>The new instance of the <see cref="IArrowStyle"/> class.</returns>
-        public static IArrowStyle CreateArrowStyle(IBaseStyle source, ArrowType arrowType = ArrowType.None, bool isStroked = true, bool isFilled = false, double radiusX = 5.0, double radiusY = 5.0)
+        /// <inheritdoc/>
+        public IArrowStyle CreateArrowStyle(IBaseStyle source, ArrowType arrowType = ArrowType.None, bool isStroked = true, bool isFilled = false, double radiusX = 5.0, double radiusY = 5.0)
         {
             return new ArrowStyle(source)
             {
@@ -1230,18 +832,8 @@ namespace Core2D
             };
         }
 
-        /// <summary>
-        /// Creates a new <see cref="IArrowStyle"/> instance.
-        /// </summary>
-        /// <param name="name">The arrow style name.</param>
-        /// <param name="source">The source style.</param>
-        /// <param name="arrowType">The arrow type.</param>
-        /// <param name="isStroked">The arrow shape stroke flag.</param>
-        /// <param name="isFilled">The arrow shape fill flag.</param>
-        /// <param name="radiusX">The arrow X axis radius.</param>
-        /// <param name="radiusY">The arrow Y axis radius.</param>
-        /// <returns>The new instance of the <see cref="IArrowStyle"/> class.</returns>
-        public static IArrowStyle CreateArrowStyle(string name, IBaseStyle source, ArrowType arrowType = ArrowType.None, bool isStroked = true, bool isFilled = false, double radiusX = 5.0, double radiusY = 5.0)
+        /// <inheritdoc/>
+        public IArrowStyle CreateArrowStyle(string name, IBaseStyle source, ArrowType arrowType = ArrowType.None, bool isStroked = true, bool isFilled = false, double radiusX = 5.0, double radiusY = 5.0)
         {
             return new ArrowStyle(source)
             {
@@ -1254,12 +846,8 @@ namespace Core2D
             };
         }
 
-        /// <summary>
-        /// Creates a new <see cref="IFontStyle"/> instance.
-        /// </summary>
-        /// <param name="flags">The style flags information applied to text.</param>
-        /// <returns>The new instance of the <see cref="IFontStyle"/> class.</returns>
-        public static IFontStyle CreateFontStyle(FontStyleFlags flags = FontStyleFlags.Regular)
+        /// <inheritdoc/>
+        public IFontStyle CreateFontStyle(FontStyleFlags flags = FontStyleFlags.Regular)
         {
             return new FontStyle()
             {
@@ -1267,15 +855,8 @@ namespace Core2D
             };
         }
 
-        /// <summary>
-        /// Creates a new <see cref="ILineFixedLength"/> instance.
-        /// </summary>
-        /// <param name="flags">The line fixed length flags.</param>
-        /// <param name="startTrigger">The line start point state trigger.</param>
-        /// <param name="endTrigger">The line end point state trigger.</param>
-        /// <param name="length">The line fixed length.</param>
-        /// <returns>he new instance of the <see cref="ILineFixedLength"/> class.</returns>
-        public static ILineFixedLength CreateLineFixedLength(LineFixedLengthFlags flags = LineFixedLengthFlags.Disabled, IShapeState startTrigger = null, IShapeState endTrigger = null, double length = 15.0)
+        /// <inheritdoc/>
+        public ILineFixedLength CreateLineFixedLength(LineFixedLengthFlags flags = LineFixedLengthFlags.Disabled, IShapeState startTrigger = null, IShapeState endTrigger = null, double length = 15.0)
         {
             return new LineFixedLength()
             {
@@ -1286,16 +867,8 @@ namespace Core2D
             };
         }
 
-        /// <summary>
-        /// Creates a new <see cref="ILineStyle"/> instance.
-        /// </summary>
-        /// <param name="name">The line style name.</param>
-        /// <param name="isCurved">The flag indicating whether line is curved.</param>
-        /// <param name="curvature">The line curvature.</param>
-        /// <param name="curveOrientation">The curve orientation.</param>
-        /// <param name="fixedLength">The line style fixed length.</param>
-        /// <returns>The new instance of the <see cref="ILineStyle"/> class.</returns>
-        public static ILineStyle CreateLineStyle(string name = "", bool isCurved = false, double curvature = 50.0, CurveOrientation curveOrientation = CurveOrientation.Auto, ILineFixedLength fixedLength = null)
+        /// <inheritdoc/>
+        public ILineStyle CreateLineStyle(string name = "", bool isCurved = false, double curvature = 50.0, CurveOrientation curveOrientation = CurveOrientation.Auto, ILineFixedLength fixedLength = null)
         {
             return new LineStyle()
             {
@@ -1307,28 +880,8 @@ namespace Core2D
             };
         }
 
-        /// <summary>
-        /// Creates a new <see cref="IShapeStyle"/> instance.
-        /// </summary>
-        /// <param name="name">The shape style name.</param>
-        /// <param name="sa">The stroke color alpha channel.</param>
-        /// <param name="sr">The stroke color red channel.</param>
-        /// <param name="sg">The stroke color green channel.</param>
-        /// <param name="sb">The stroke color blue channel.</param>
-        /// <param name="fa">The fill color alpha channel.</param>
-        /// <param name="fr">The fill color red channel.</param>
-        /// <param name="fg">The fill color green channel.</param>
-        /// <param name="fb">The fill color blue channel.</param>
-        /// <param name="thickness">The stroke thickness.</param>
-        /// <param name="textStyle">The text style.</param>
-        /// <param name="lineStyle">The line style.</param>
-        /// <param name="startArrowStyle">The start arrow style.</param>
-        /// <param name="endArrowStyle">The end arrow style.</param>
-        /// <param name="lineCap">The line cap.</param>
-        /// <param name="dashes">The line dashes.</param>
-        /// <param name="dashOffset">The line dash offset.</param>
-        /// <returns>The new instance of the <see cref="IShapeStyle"/> class.</returns>
-        public static IShapeStyle CreateShapeStyle(string name = null, byte sa = 0xFF, byte sr = 0x00, byte sg = 0x00, byte sb = 0x00, byte fa = 0xFF, byte fr = 0x00, byte fg = 0x00, byte fb = 0x00, double thickness = 2.0, ITextStyle textStyle = null, ILineStyle lineStyle = null, IArrowStyle startArrowStyle = null, IArrowStyle endArrowStyle = null, LineCap lineCap = LineCap.Round, string dashes = default, double dashOffset = 0.0)
+        /// <inheritdoc/>
+        public IShapeStyle CreateShapeStyle(string name = null, byte sa = 0xFF, byte sr = 0x00, byte sg = 0x00, byte sb = 0x00, byte fa = 0xFF, byte fr = 0x00, byte fg = 0x00, byte fb = 0x00, double thickness = 2.0, ITextStyle textStyle = null, ILineStyle lineStyle = null, IArrowStyle startArrowStyle = null, IArrowStyle endArrowStyle = null, LineCap lineCap = LineCap.Round, string dashes = default, double dashOffset = 0.0)
         {
             var style = new ShapeStyle()
             {
@@ -1349,19 +902,8 @@ namespace Core2D
             return style;
         }
 
-        /// <summary>
-        /// Creates a new <see cref="IShapeStyle"/> instance.
-        /// </summary>
-        /// <param name="name">The shape style name.</param>
-        /// <param name="stroke">The stroke color.</param>
-        /// <param name="fill">The fill color.</param>
-        /// <param name="thickness">The stroke thickness.</param>
-        /// <param name="textStyle">The text style.</param>
-        /// <param name="lineStyle">The line style.</param>
-        /// <param name="startArrowStyle">The start arrow style.</param>
-        /// <param name="endArrowStyle">The end arrow style.</param>
-        /// <returns>The new instance of the <see cref="IShapeStyle"/> class.</returns>
-        public static IShapeStyle CreateShapeStyle(string name, IColor stroke, IColor fill, double thickness, ITextStyle textStyle, ILineStyle lineStyle, IArrowStyle startArrowStyle, IArrowStyle endArrowStyle)
+        /// <inheritdoc/>
+        public IShapeStyle CreateShapeStyle(string name, IColor stroke, IColor fill, double thickness, ITextStyle textStyle, ILineStyle lineStyle, IArrowStyle startArrowStyle, IArrowStyle endArrowStyle)
         {
             return new ShapeStyle()
             {
@@ -1379,18 +921,8 @@ namespace Core2D
             };
         }
 
-        /// <summary>
-        /// Creates a new <see cref="ITextStyle"/> instance.
-        /// </summary>
-        /// <param name="name">The text style name.</param>
-        /// <param name="fontName">The font name.</param>
-        /// <param name="fontFile">The font file path.</param>
-        /// <param name="fontSize">The font size.</param>
-        /// <param name="fontStyle">The font style.</param>
-        /// <param name="textHAlignment">The text horizontal alignment.</param>
-        /// <param name="textVAlignment">The text vertical alignment.</param>
-        /// <returns>The new instance of the <see cref="ITextStyle"/> class.</returns>
-        public static ITextStyle CreateTextStyle(string name = "", string fontName = "Calibri", string fontFile = @"C:\Windows\Fonts\calibri.ttf", double fontSize = 12.0, IFontStyle fontStyle = null, TextHAlignment textHAlignment = TextHAlignment.Center, TextVAlignment textVAlignment = TextVAlignment.Center)
+        /// <inheritdoc/>
+        public ITextStyle CreateTextStyle(string name = "", string fontName = "Calibri", string fontFile = @"C:\Windows\Fonts\calibri.ttf", double fontSize = 12.0, IFontStyle fontStyle = null, TextHAlignment textHAlignment = TextHAlignment.Center, TextVAlignment textVAlignment = TextVAlignment.Center)
         {
             return new TextStyle()
             {
@@ -1404,35 +936,35 @@ namespace Core2D
             };
         }
 
-        private static IBaseShape EllipsePointShape(IShapeStyle pss)
+        private IBaseShape EllipsePointShape(IShapeStyle pss)
         {
             var ellipse = CreateEllipseShape(-4, -4, 4, 4, pss, null, true, false);
             ellipse.Name = "EllipsePoint";
             return ellipse;
         }
 
-        private static IBaseShape FilledEllipsePointShape(IShapeStyle pss)
+        private IBaseShape FilledEllipsePointShape(IShapeStyle pss)
         {
             var ellipse = CreateEllipseShape(-3, -3, 3, 3, pss, null, true, true);
             ellipse.Name = "FilledEllipsePoint";
             return ellipse;
         }
 
-        private static IBaseShape RectanglePointShape(IShapeStyle pss)
+        private IBaseShape RectanglePointShape(IShapeStyle pss)
         {
             var rectangle = CreateRectangleShape(-4, -4, 4, 4, pss, null, true, false);
             rectangle.Name = "RectanglePoint";
             return rectangle;
         }
 
-        private static IBaseShape FilledRectanglePointShape(IShapeStyle pss)
+        private IBaseShape FilledRectanglePointShape(IShapeStyle pss)
         {
             var rectangle = CreateRectangleShape(-3, -3, 3, 3, pss, null, true, true);
             rectangle.Name = "FilledRectanglePoint";
             return rectangle;
         }
 
-        private static IBaseShape CrossPointShape(IShapeStyle pss)
+        private IBaseShape CrossPointShape(IShapeStyle pss)
         {
             var group = CreateGroupShape("CrossPoint");
             var builder = group.Shapes.ToBuilder();
@@ -1442,11 +974,8 @@ namespace Core2D
             return group;
         }
 
-        /// <summary>
-        /// Creates a new <see cref="IOptions"/> instance.
-        /// </summary>
-        /// <returns>The new instance of the <see cref="IOptions"/> class.</returns>
-        public static IOptions CreateOptions()
+        /// <inheritdoc/>
+        public IOptions CreateOptions()
         {
             var options = new Options()
             {
@@ -1490,33 +1019,26 @@ namespace Core2D
             return options;
         }
 
-        /// <summary>
-        /// Creates a new <see cref="ILayerContainer"/> instance.
-        /// </summary>
-        /// <param name="name">The layer name.</param>
-        /// <param name="owner">The layer owner.</param>
-        /// <param name="isVisible">The flag indicating whether layer is visible.</param>
-        /// <returns>The new instance of the <see cref="ILayerContainer"/>.</returns>
-        public static ILayerContainer CreateLayerContainer(string name = "Layer", IPageContainer owner = null, bool isVisible = true)
+        /// <inheritdoc/>
+        public ILayerContainer CreateLayerContainer(string name = "Layer", IPageContainer owner = null, bool isVisible = true)
         {
             return new LayerContainer()
             {
                 Name = name,
                 Owner = owner,
+                Shapes = ImmutableArray.Create<IBaseShape>(),
                 IsVisible = isVisible
             };
         }
 
-        /// <summary>
-        /// Creates a new <see cref="IPageContainer"/> page instance.
-        /// </summary>
-        /// <param name="name">The page name.</param>
-        /// <returns>The new instance of the <see cref="IPageContainer"/>.</returns>
-        public static IPageContainer CreatePageContainer(string name = "Page")
+        /// <inheritdoc/>
+        public IPageContainer CreatePageContainer(string name = "Page")
         {
             var page = new PageContainer()
             {
-                Name = name
+                Name = name,
+                Layers = ImmutableArray.Create<ILayerContainer>(),
+                Data = CreateContext()
             };
 
             var builder = page.Layers.ToBuilder();
@@ -1532,18 +1054,14 @@ namespace Core2D
             return page;
         }
 
-        /// <summary>
-        /// Creates a new <see cref="IPageContainer"/> template instance.
-        /// </summary>
-        /// <param name="name">The template name.</param>
-        /// <param name="width">The template width.</param>
-        /// <param name="height">The template height.</param>
-        /// <returns>The new instance of the <see cref="IPageContainer"/>.</returns>
-        public static IPageContainer CreateTemplateContainer(string name = "Template", double width = 840, double height = 600)
+        /// <inheritdoc/>
+        public IPageContainer CreateTemplateContainer(string name = "Template", double width = 840, double height = 600)
         {
             var template = new PageContainer()
             {
-                Name = name
+                Name = name,
+                Layers = ImmutableArray.Create<ILayerContainer>(),
+                Data = CreateContext()
             };
 
             template.Background = CreateArgbColor(0x00, 0xFF, 0xFF, 0xFF);
@@ -1563,38 +1081,37 @@ namespace Core2D
             return template;
         }
 
-        /// <summary>
-        /// Creates a new <see cref="IDocumentContainer"/> instance.
-        /// </summary>
-        /// <param name="name">The document name.</param>
-        /// <returns>The new instance of the <see cref="IDocumentContainer"/> class.</returns>
-        public static IDocumentContainer CreateDocumentContainer(string name = "Document")
+        /// <inheritdoc/>
+        public IDocumentContainer CreateDocumentContainer(string name = "Document")
         {
             return new DocumentContainer()
             {
-                Name = name
+                Name = name,
+                Pages = ImmutableArray.Create<IPageContainer>()
             };
         }
 
-        /// <summary>
-        /// Creates a new <see cref="IProjectContainer"/> instance.
-        /// </summary>
-        /// <param name="name">The project name.</param>
-        /// <returns>The new instance of the <see cref="IProjectContainer"/> class.</returns>
-        public static IProjectContainer CreateProjectContainer(string name = "Project")
+        /// <inheritdoc/>
+        public IProjectContainer CreateProjectContainer(string name = "Project")
         {
             return new ProjectContainer()
             {
-                Name = name
+                Name = name,
+                Options = CreateOptions(),
+                StyleLibraries = ImmutableArray.Create<ILibrary<IShapeStyle>>(),
+                GroupLibraries = ImmutableArray.Create<ILibrary<IGroupShape>>(),
+                Databases = ImmutableArray.Create<IDatabase>(),
+                Templates = ImmutableArray.Create<IPageContainer>(),
+                Documents = ImmutableArray.Create<IDocumentContainer>()
             };
         }
 
-        private static IEnumerable<string> GetUsedKeys(IProjectContainer project)
+        private IEnumerable<string> GetUsedKeys(IProjectContainer project)
         {
             return ProjectContainer.GetAllShapes<IImageShape>(project).Select(i => i.Key).Distinct();
         }
 
-        private static IProjectContainer ReadProjectContainer(ZipArchiveEntry projectEntry, IFileSystem fileIO, IJsonSerializer serializer)
+        private IProjectContainer ReadProjectContainer(ZipArchiveEntry projectEntry, IFileSystem fileIO, IJsonSerializer serializer)
         {
             using (var entryStream = projectEntry.Open())
             {
@@ -1602,7 +1119,7 @@ namespace Core2D
             }
         }
 
-        private static void WriteProjectContainer(IProjectContainer project, ZipArchiveEntry projectEntry, IFileSystem fileIO, IJsonSerializer serializer)
+        private void WriteProjectContainer(IProjectContainer project, ZipArchiveEntry projectEntry, IFileSystem fileIO, IJsonSerializer serializer)
         {
             using (var jsonStream = projectEntry.Open())
             {
@@ -1610,7 +1127,7 @@ namespace Core2D
             }
         }
 
-        private static void ReadImages(IImageCache cache, ZipArchive archive, IFileSystem fileIO)
+        private void ReadImages(IImageCache cache, ZipArchive archive, IFileSystem fileIO)
         {
             foreach (var entry in archive.Entries)
             {
@@ -1625,7 +1142,7 @@ namespace Core2D
             }
         }
 
-        private static void WriteImages(IImageCache cache, IEnumerable<string> keys, ZipArchive archive, IFileSystem fileIO)
+        private void WriteImages(IImageCache cache, IEnumerable<string> keys, ZipArchive archive, IFileSystem fileIO)
         {
             foreach (var key in keys)
             {
@@ -1637,14 +1154,8 @@ namespace Core2D
             }
         }
 
-        /// <summary>
-        /// Opens project container.
-        /// </summary>
-        /// <param name="path">The file path.</param>
-        /// <param name="fileIO">The file system.</param>
-        /// <param name="serializer">The json serializer.</param>
-        /// <returns>The new instance of the <see cref="IProjectContainer"/> class.</returns>
-        public static IProjectContainer OpenProjectContainer(string path, IFileSystem fileIO, IJsonSerializer serializer)
+        /// <inheritdoc/>
+        public IProjectContainer OpenProjectContainer(string path, IFileSystem fileIO, IJsonSerializer serializer)
         {
             using (var stream = fileIO.Open(path))
             {
@@ -1652,14 +1163,8 @@ namespace Core2D
             }
         }
 
-        /// <summary>
-        /// Saves project container.
-        /// </summary>
-        /// <param name="project">The project instance.</param>
-        /// <param name="path">The file path.</param>
-        /// <param name="fileIO"></param>
-        /// <param name="serializer">The json serializer.</param>
-        public static void SaveProjectContainer(IProjectContainer project, string path, IFileSystem fileIO, IJsonSerializer serializer)
+        /// <inheritdoc/>
+        public void SaveProjectContainer(IProjectContainer project, string path, IFileSystem fileIO, IJsonSerializer serializer)
         {
             if (project is IImageCache imageCache)
             {
@@ -1670,14 +1175,8 @@ namespace Core2D
             }
         }
 
-        /// <summary>
-        /// Opens project container.
-        /// </summary>
-        /// <param name="stream">The file stream./</param>
-        /// <param name="fileIO">The file system.</param>
-        /// <param name="serializer">The json serializer.</param>
-        /// <returns>The new instance of the <see cref="IProjectContainer"/> class.</returns>
-        public static IProjectContainer OpenProjectContainer(Stream stream, IFileSystem fileIO, IJsonSerializer serializer)
+        /// <inheritdoc/>
+        public IProjectContainer OpenProjectContainer(Stream stream, IFileSystem fileIO, IJsonSerializer serializer)
         {
             using (var archive = new ZipArchive(stream, ZipArchiveMode.Read))
             {
@@ -1691,15 +1190,8 @@ namespace Core2D
             }
         }
 
-        /// <summary>
-        /// Save project container.
-        /// </summary>
-        /// <param name="project">The project instance.</param>
-        /// <param name="imageCache">The image cache.</param>
-        /// <param name="stream">The file stream.</param>
-        /// <param name="fileIO">The file system.</param>
-        /// <param name="serializer">The json serializer.</param>
-        public static void SaveProjectContainer(IProjectContainer project, IImageCache imageCache, Stream stream, IFileSystem fileIO, IJsonSerializer serializer)
+        /// <inheritdoc/>
+        public void SaveProjectContainer(IProjectContainer project, IImageCache imageCache, Stream stream, IFileSystem fileIO, IJsonSerializer serializer)
         {
             using (var archive = new ZipArchive(stream, ZipArchiveMode.Create))
             {

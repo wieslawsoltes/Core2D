@@ -1,17 +1,20 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using Core2D.Containers;
+using Core2D.Interfaces;
 using Xunit;
 
 namespace Core2D.UnitTests
 {
     public class LayerContainerTests
     {
+        private readonly IFactory _factory = new Factory();
+
         [Fact]
         [Trait("Core2D.Containers", "Project")]
         public void Inherits_From_ObservableObject()
         {
-            var target = new LayerContainer();
+            var target = _factory.CreateLayerContainer();
             Assert.True(target is IObservableObject);
         }
 
@@ -19,7 +22,7 @@ namespace Core2D.UnitTests
         [Trait("Core2D.Containers", "Project")]
         public void Shapes_Not_Null()
         {
-            var target = new LayerContainer();
+            var target = _factory.CreateLayerContainer();
             Assert.False(target.Shapes.IsDefault);
         }
 
@@ -27,7 +30,7 @@ namespace Core2D.UnitTests
         [Trait("Core2D.Containers", "Project")]
         public void Setting_IsVisible_Should_Invalidate_Layer()
         {
-            var target = Factory.CreateLayerContainer("Layer1");
+            var target = _factory.CreateLayerContainer("Layer1");
 
             bool raised = false;
 
@@ -45,7 +48,7 @@ namespace Core2D.UnitTests
         [Trait("Core2D.Containers", "Project")]
         public void Invalidate_Raises_InvalidateLayer_Event()
         {
-            var target = Factory.CreateLayerContainer("Layer1");
+            var target = _factory.CreateLayerContainer("Layer1");
 
             bool raised = false;
 
@@ -63,7 +66,7 @@ namespace Core2D.UnitTests
         [Trait("Core2D.Containers", "Project")]
         public void Invalidate_Sets_EventArgs()
         {
-            var target = Factory.CreateLayerContainer("Layer1");
+            var target = _factory.CreateLayerContainer("Layer1");
 
             InvalidateLayerEventArgs args = null;
 

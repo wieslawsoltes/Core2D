@@ -46,11 +46,6 @@ namespace Core2D.Containers
             set => Update(ref _shapes, value);
         }
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="LayerContainer"/> class.
-        /// </summary>
-        public LayerContainer() : base() => _shapes = ImmutableArray.Create<IBaseShape>();
-
         /// <inheritdoc/>
         public void Invalidate() => InvalidateLayer?.Invoke(this, new InvalidateLayerEventArgs());
 
@@ -76,6 +71,6 @@ namespace Core2D.Containers
         /// Check whether the <see cref="Shapes"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeShapes() => _shapes.IsEmpty == false;
+        public virtual bool ShouldSerializeShapes() => true;
     }
 }

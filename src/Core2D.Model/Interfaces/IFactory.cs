@@ -8,7 +8,6 @@ using System.IO.Compression;
 using System.Linq;
 using Core2D.Containers;
 using Core2D.Data;
-using Core2D.Interfaces;
 using Core2D.Path;
 using Core2D.Path.Segments;
 using Core2D.Renderer;
@@ -176,7 +175,7 @@ namespace Core2D.Interfaces
         /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
         /// <param name="isSmoothJoin">The flag indicating whether shape is smooth join.</param>
         /// <returns>The new instance of the <see cref="ILineSegment"/> class.</returns>
-        ILineSegment CreateLineSegment(IPointShape point, bool isStroked, bool isSmoothJoin);
+        ILineSegment CreateLineSegment(IPointShape point, bool isStroked = true, bool isSmoothJoin = true);
 
         /// <summary>
         /// Creates a new <see cref="IArcSegment"/> instance.
@@ -189,7 +188,7 @@ namespace Core2D.Interfaces
         /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
         /// <param name="isSmoothJoin">The flag indicating whether shape is smooth join.</param>
         /// <returns>The new instance of the <see cref="IArcSegment"/> class.</returns>
-        IArcSegment CreateArcSegment(IPointShape point, IPathSize size, double rotationAngle, bool isLargeArc, SweepDirection sweepDirection, bool isStroked, bool isSmoothJoin);
+        IArcSegment CreateArcSegment(IPointShape point, IPathSize size, double rotationAngle, bool isLargeArc, SweepDirection sweepDirection, bool isStroked = true, bool isSmoothJoin = true);
 
         /// <summary>
         /// Creates a new <see cref="IQuadraticBezierSegment"/> instance.
@@ -199,7 +198,7 @@ namespace Core2D.Interfaces
         /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
         /// <param name="isSmoothJoin">The flag indicating whether shape is smooth join.</param>
         /// <returns>The new instance of the <see cref="IQuadraticBezierSegment"/> class.</returns>
-        IQuadraticBezierSegment CreateQuadraticBezierSegment(IPointShape point1, IPointShape point2, bool isStroked, bool isSmoothJoin);
+        IQuadraticBezierSegment CreateQuadraticBezierSegment(IPointShape point1, IPointShape point2, bool isStroked = true, bool isSmoothJoin = true);
 
         /// <summary>
         /// Creates a new <see cref="ICubicBezierSegment"/> instance.
@@ -210,7 +209,7 @@ namespace Core2D.Interfaces
         /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
         /// <param name="isSmoothJoin">The flag indicating whether shape is smooth join.</param>
         /// <returns>The new instance of the <see cref="ICubicBezierSegment"/> class.</returns>
-        ICubicBezierSegment CreateCubicBezierSegment(IPointShape point1, IPointShape point2, IPointShape point3, bool isStroked, bool isSmoothJoin);
+        ICubicBezierSegment CreateCubicBezierSegment(IPointShape point1, IPointShape point2, IPointShape point3, bool isStroked = true, bool isSmoothJoin = true);
 
         /// <summary>
         /// Creates a new <see cref="IPolyLineSegment"/> instance.
@@ -219,7 +218,7 @@ namespace Core2D.Interfaces
         /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
         /// <param name="isSmoothJoin">The flag indicating whether shape is smooth join.</param>
         /// <returns>The new instance of the <see cref="IPolyLineSegment"/> class.</returns>
-        IPolyLineSegment CreatePolyLineSegment(ImmutableArray<IPointShape> points, bool isStroked, bool isSmoothJoin);
+        IPolyLineSegment CreatePolyLineSegment(ImmutableArray<IPointShape> points, bool isStroked = true, bool isSmoothJoin = true);
 
         /// <summary>
         /// Creates a new <see cref="IPolyQuadraticBezierSegment"/> instance.
@@ -228,7 +227,7 @@ namespace Core2D.Interfaces
         /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
         /// <param name="isSmoothJoin">The flag indicating whether shape is smooth join.</param>
         /// <returns>The new instance of the <see cref="IPolyQuadraticBezierSegment"/> class.</returns>
-        IPolyQuadraticBezierSegment CreatePolyQuadraticBezierSegment(ImmutableArray<IPointShape> points, bool isStroked, bool isSmoothJoin);
+        IPolyQuadraticBezierSegment CreatePolyQuadraticBezierSegment(ImmutableArray<IPointShape> points, bool isStroked = true, bool isSmoothJoin = true);
 
         /// <summary>
         /// Creates a new <see cref="IPolyCubicBezierSegment"/> instance.
@@ -237,7 +236,7 @@ namespace Core2D.Interfaces
         /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
         /// <param name="isSmoothJoin">The flag indicating whether shape is smooth join.</param>
         /// <returns>The new instance of the <see cref="IPolyCubicBezierSegment"/> class.</returns>
-        IPolyCubicBezierSegment CreatePolyCubicBezierSegment(ImmutableArray<IPointShape> points, bool isStroked, bool isSmoothJoin);
+        IPolyCubicBezierSegment CreatePolyCubicBezierSegment(ImmutableArray<IPointShape> points, bool isStroked = true, bool isSmoothJoin = true);
 
         /// <summary>
         /// Creates a new <see cref="IPathSize"/> instance.
@@ -250,10 +249,24 @@ namespace Core2D.Interfaces
         /// <summary>
         /// Creates a new <see cref="IPathGeometry"/> instance.
         /// </summary>
+        /// <returns>The new instance of the <see cref="IPathGeometry"/> class.</returns>
+        IPathGeometry CreatePathGeometry();
+
+        /// <summary>
+        /// Creates a new <see cref="IPathGeometry"/> instance.
+        /// </summary>
         /// <param name="figures">The figures collection.</param>
         /// <param name="fillRule">The fill rule.</param>
         /// <returns>The new instance of the <see cref="IPathGeometry"/> class.</returns>
-        IPathGeometry CreatePathGeometry(ImmutableArray<IPathFigure> figures, FillRule fillRule);
+        IPathGeometry CreatePathGeometry(ImmutableArray<IPathFigure> figures, FillRule fillRule = FillRule.Nonzero);
+
+        /// <summary>
+        /// Creates a new <see cref="IPathFigure"/> instance.
+        /// </summary>
+        /// <param name="isFilled">The flag indicating whether path is filled.</param>
+        /// <param name="isClosed">The flag indicating whether path is closed.</param>
+        /// <returns>The new instance of the <see cref="IPathFigure"/> class.</returns>
+        IPathFigure CreatePathFigure(bool isFilled = false, bool isClosed = false);
 
         /// <summary>
         /// Creates a new <see cref="IPathFigure"/> instance.
@@ -262,7 +275,7 @@ namespace Core2D.Interfaces
         /// <param name="isFilled">The flag indicating whether path is filled.</param>
         /// <param name="isClosed">The flag indicating whether path is closed.</param>
         /// <returns>The new instance of the <see cref="IPathFigure"/> class.</returns>
-        IPathFigure CreatePathFigure(IPointShape startPoint, bool isFilled = true, bool isClosed = true);
+        IPathFigure CreatePathFigure(IPointShape startPoint, bool isFilled = false, bool isClosed = false);
 
         /// <summary>
         /// Creates a new <see cref="IPointShape"/> instance.
@@ -653,7 +666,7 @@ namespace Core2D.Interfaces
         /// </summary>
         /// <param name="name">The group name.</param>
         /// <returns>The new instance of the <see cref="IGroupShape"/> class.</returns>
-        IGroupShape CreateGroupShape(string name);
+        IGroupShape CreateGroupShape(string name = "g");
 
         /// <summary>
         /// Creates a new <see cref="IArgbColor"/> instance.

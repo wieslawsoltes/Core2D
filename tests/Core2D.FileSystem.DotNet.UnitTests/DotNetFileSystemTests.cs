@@ -1,20 +1,24 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
-using Core2D.Interfaces;
+using System;
 using System.IO;
 using System.Linq;
 using System.Text;
+using Core2D.Common;
+using Core2D.Interfaces;
 using Xunit;
 
 namespace Core2D.FileSystem.DotNet.UnitTests
 {
     public class DotNetFileSystemTests
     {
+        private IServiceProvider _serviceProvider = new TestServiceProvider();
+
         [Fact]
         [Trait("FileSystem.DotNet", "Util")]
         public void Implements_IFileSystem_Interface()
         {
-            var target = new DotNetFileSystem();
+            var target = new DotNetFileSystem(_serviceProvider);
             Assert.True(target is IFileSystem);
         }
 
@@ -22,7 +26,7 @@ namespace Core2D.FileSystem.DotNet.UnitTests
         [Trait("FileSystem.DotNet", "Util")]
         public void Open_Path_Throws_FileNotFoundException()
         {
-            IFileSystem target = new DotNetFileSystem();
+            IFileSystem target = new DotNetFileSystem(_serviceProvider);
             Assert.Throws<FileNotFoundException>(
                 () =>
                 {
@@ -34,7 +38,7 @@ namespace Core2D.FileSystem.DotNet.UnitTests
         [Trait("FileSystem.DotNet", "Util")]
         public void Create_Path_Creates_New_File()
         {
-            IFileSystem target = new DotNetFileSystem();
+            IFileSystem target = new DotNetFileSystem(_serviceProvider);
 
             using (var stream = target.Create("new1.txt")) { }
             Assert.True(File.Exists("new1.txt"));
@@ -47,7 +51,7 @@ namespace Core2D.FileSystem.DotNet.UnitTests
         [Trait("FileSystem.DotNet", "Util")]
         public void ReadBinary_Read_All_Bytes_From_Stream()
         {
-            IFileSystem target = new DotNetFileSystem();
+            IFileSystem target = new DotNetFileSystem(_serviceProvider);
             var expceted = new byte[] { 0x12, 0x34, 0x56, 0x67 };
             byte[] actual;
 
@@ -63,7 +67,7 @@ namespace Core2D.FileSystem.DotNet.UnitTests
         [Trait("FileSystem.DotNet", "Util")]
         public void WriteBinary_Write_All_Bytes_To_Stream()
         {
-            IFileSystem target = new DotNetFileSystem();
+            IFileSystem target = new DotNetFileSystem(_serviceProvider);
             var expceted = new byte[] { 0x12, 0x34, 0x56, 0x67 };
             byte[] actual;
 
@@ -80,7 +84,7 @@ namespace Core2D.FileSystem.DotNet.UnitTests
         [Trait("FileSystem.DotNet", "Util")]
         public void ReadUtf8Text_Read_String_From_Stream()
         {
-            IFileSystem target = new DotNetFileSystem();
+            IFileSystem target = new DotNetFileSystem(_serviceProvider);
             var expceted = "κόσμε";
             string actual;
             
@@ -96,7 +100,7 @@ namespace Core2D.FileSystem.DotNet.UnitTests
         [Trait("FileSystem.DotNet", "Util")]
         public void WriteUtf8Text_Write_String_To_Stream()
         {
-            IFileSystem target = new DotNetFileSystem();
+            IFileSystem target = new DotNetFileSystem(_serviceProvider);
             var expceted = "κόσμε";
 
             byte[] actual;
@@ -115,7 +119,7 @@ namespace Core2D.FileSystem.DotNet.UnitTests
         [Trait("FileSystem.DotNet", "Util")]
         public void ReadUtf8Text_Read_String_From_Path()
         {
-            IFileSystem target = new DotNetFileSystem();
+            IFileSystem target = new DotNetFileSystem(_serviceProvider);
             Assert.Throws<FileNotFoundException>(
                 () =>
                 {
@@ -127,7 +131,7 @@ namespace Core2D.FileSystem.DotNet.UnitTests
         [Trait("FileSystem.DotNet", "Util")]
         public void WriteUtf8Text_Write_String_To_Path()
         {
-            IFileSystem target = new DotNetFileSystem();
+            IFileSystem target = new DotNetFileSystem(_serviceProvider);
             var expceted = "κόσμε";
 
             target.WriteUtf8Text("new2.txt", expceted);

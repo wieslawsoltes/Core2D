@@ -2,35 +2,50 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
 using System.Collections.Immutable;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using Core2D.Containers;
 using Core2D.Data;
-using Spatial;
-using Spatial.Arc;
+using Core2D.Interfaces;
 using Core2D.Style;
 using Core2D.Shapes;
-using System.Collections.Generic;
+using Spatial;
+using Spatial.Arc;
 
 namespace Core2D.Renderer.WinForms
 {
     /// <summary>
     /// Native Windows Forms shape renderer.
     /// </summary>
-    public class WinFormsRenderer : ShapeRenderer
+    public class WinFormsRenderer : ObservableObject, IShapeRenderer
     {
-        private ICache<string, Image> _biCache = Factory.CreateCache<string, Image>(bi => bi.Dispose());
+        private readonly IServiceProvider _serviceProvider;
+        private IShapeRendererState _state;
+        private ICache<string, Image> _biCache;
         private readonly Func<double, float> _scaleToPage;
         private readonly double _textScaleFactor;
+
+        /// <inheritdoc/>
+        public IShapeRendererState State
+        {
+            get => _state;
+            set => Update(ref _state, value);
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="WinFormsRenderer"/> class.
         /// </summary>
-        /// <param name="textScaleFactor"></param>
-        public WinFormsRenderer(double textScaleFactor = 1.0)
+        /// <param name="serviceProvider">The service provider.</param>
+        /// <param name="textScaleFactor">The text scale factor.</param>
+        public WinFormsRenderer(IServiceProvider serviceProvider, double textScaleFactor = 1.0)
         {
-            ClearCache(isZooming: false);
+            _serviceProvider = serviceProvider;
+            _state = _serviceProvider.GetService<IFactory>().CreateShapeRendererState();
+            _biCache = _serviceProvider.GetService<IFactory>().CreateCache<string, Image>(bi => bi.Dispose());
             _textScaleFactor = textScaleFactor;
             _scaleToPage = (value) => (float)(value);
+            ClearCache(isZooming: false);
         }
 
         /// <inheritdoc/>
@@ -38,12 +53,6 @@ namespace Core2D.Renderer.WinForms
         {
             throw new NotImplementedException();
         }
-
-        /// <summary>
-        /// Creates a new <see cref="WinFormsRenderer"/> instance.
-        /// </summary>
-        /// <returns>The new instance of the <see cref="WinFormsRenderer"/> class.</returns>
-        public static IShapeRenderer Create() => new WinFormsRenderer();
 
         private static Color ToColor(IColor color)
         {
@@ -319,7 +328,7 @@ namespace Core2D.Renderer.WinForms
         }
 
         /// <inheritdoc/>
-        public override void ClearCache(bool isZooming)
+        public void ClearCache(bool isZooming)
         {
             if (!isZooming)
             {
@@ -328,7 +337,7 @@ namespace Core2D.Renderer.WinForms
         }
 
         /// <inheritdoc/>
-        public override void Fill(object dc, double x, double y, double width, double height, IColor color)
+        public void Fill(object dc, double x, double y, double width, double height, IColor color)
         {
             var _gfx = dc as Graphics;
             var brush = ToBrush(color);
@@ -342,7 +351,7 @@ namespace Core2D.Renderer.WinForms
         }
 
         /// <inheritdoc/>
-        public override object PushMatrix(object dc, IMatrixObject matrix)
+        public object PushMatrix(object dc, IMatrixObject matrix)
         {
             var _gfx = dc as Graphics;
             var state = _gfx.Save();
@@ -351,7 +360,7 @@ namespace Core2D.Renderer.WinForms
         }
 
         /// <inheritdoc/>
-        public override void PopMatrix(object dc, object state)
+        public void PopMatrix(object dc, object state)
         {
             var _gfx = dc as Graphics;
             var _state = state as GraphicsState;
@@ -359,7 +368,31 @@ namespace Core2D.Renderer.WinForms
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, ILineShape line, double dx, double dy, object db, object r)
+        public void Draw(object dc, IPageContainer container, double dx, double dy, object db, object r)
+        {
+            foreach (var layer in container.Layers)
+            {
+                if (layer.IsVisible)
+                {
+                    Draw(dc, layer, dx, dy, db, r);
+                }
+            }
+        }
+
+        /// <inheritdoc/>
+        public void Draw(object dc, ILayerContainer layer, double dx, double dy, object db, object r)
+        {
+            foreach (var shape in layer.Shapes)
+            {
+                if (shape.State.Flags.HasFlag(State.DrawShapeState.Flags))
+                {
+                    shape.Draw(dc, this, dx, dy, db, r);
+                }
+            }
+        }
+
+        /// <inheritdoc/>
+        public void Draw(object dc, ILineShape line, double dx, double dy, object db, object r)
         {
             var _gfx = dc as Graphics;
 
@@ -386,7 +419,7 @@ namespace Core2D.Renderer.WinForms
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, IRectangleShape rectangle, double dx, double dy, object db, object r)
+        public void Draw(object dc, IRectangleShape rectangle, double dx, double dy, object db, object r)
         {
             var _gfx = dc as Graphics;
 
@@ -434,7 +467,7 @@ namespace Core2D.Renderer.WinForms
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, IEllipseShape ellipse, double dx, double dy, object db, object r)
+        public void Draw(object dc, IEllipseShape ellipse, double dx, double dy, object db, object r)
         {
             var _gfx = dc as Graphics;
 
@@ -471,7 +504,7 @@ namespace Core2D.Renderer.WinForms
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, IArcShape arc, double dx, double dy, object db, object r)
+        public void Draw(object dc, IArcShape arc, double dx, double dy, object db, object r)
         {
             var a = new GdiArc(
                 Point2.FromXY(arc.Point1.X, arc.Point1.Y),
@@ -516,7 +549,7 @@ namespace Core2D.Renderer.WinForms
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, ICubicBezierShape cubicBezier, double dx, double dy, object db, object r)
+        public void Draw(object dc, ICubicBezierShape cubicBezier, double dx, double dy, object db, object r)
         {
             var _gfx = dc as Graphics;
 
@@ -557,7 +590,7 @@ namespace Core2D.Renderer.WinForms
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, IQuadraticBezierShape quadraticBezier, double dx, double dy, object db, object r)
+        public void Draw(object dc, IQuadraticBezierShape quadraticBezier, double dx, double dy, object db, object r)
         {
             var _gfx = dc as Graphics;
 
@@ -607,7 +640,7 @@ namespace Core2D.Renderer.WinForms
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, ITextShape text, double dx, double dy, object db, object r)
+        public void Draw(object dc, ITextShape text, double dx, double dy, object db, object r)
         {
             var _gfx = dc as Graphics;
 
@@ -701,7 +734,7 @@ namespace Core2D.Renderer.WinForms
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, IImageShape image, double dx, double dy, object db, object r)
+        public void Draw(object dc, IImageShape image, double dx, double dy, object db, object r)
         {
             var _gfx = dc as Graphics;
 
@@ -762,7 +795,7 @@ namespace Core2D.Renderer.WinForms
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, IPathShape path, double dx, double dy, object db, object r)
+        public void Draw(object dc, IPathShape path, double dx, double dy, object db, object r)
         {
             var _gfx = dc as Graphics;
 
@@ -798,5 +831,11 @@ namespace Core2D.Renderer.WinForms
                 pen.Dispose();
             }
         }
+
+        /// <summary>
+        /// Check whether the <see cref="State"/> property has changed from its default value.
+        /// </summary>
+        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
+        public bool ShouldSerializeState() => _state != null;
     }
 }

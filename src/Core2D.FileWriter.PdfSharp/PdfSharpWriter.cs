@@ -1,5 +1,6 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using System;
 using Core2D.Containers;
 using Core2D.Interfaces;
 using Core2D.Renderer;
@@ -13,6 +14,17 @@ namespace Core2D.FileWriter.PdfSharp
     /// </summary>
     public sealed class PdfSharpWriter : IFileWriter
     {
+        private readonly IServiceProvider _serviceProvider;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="PdfSharpWriter"/> class.
+        /// </summary>
+        /// <param name="serviceProvider">The service provider.</param>
+        public PdfSharpWriter(IServiceProvider serviceProvider)
+        {
+            _serviceProvider = serviceProvider;
+        }
+
         /// <inheritdoc/>
         string IFileWriter.Name { get; } = "Pdf (PdfSharp)";
 
@@ -29,9 +41,9 @@ namespace Core2D.FileWriter.PdfSharp
             if (options == null)
                 return;
 
-            IProjectExporter exporter = new PdfSharpRenderer();
+            IProjectExporter exporter = new PdfSharpRenderer(_serviceProvider);
 
-            IShapeRenderer renderer = (PdfSharpRenderer)exporter;
+            IShapeRenderer renderer = (IShapeRenderer)exporter;
             renderer.State.DrawShapeState.Flags = ShapeStateFlags.Printable;
             renderer.State.ImageCache = ic;
 

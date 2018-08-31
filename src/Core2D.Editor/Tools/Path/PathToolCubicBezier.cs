@@ -2,13 +2,14 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
 using System.Linq;
+using System.Collections.Generic;
 using Core2D.Editor.Input;
 using Core2D.Editor.Tools.Path.Shapes;
 using Core2D.Editor.Tools.Path.Settings;
 using Core2D.Editor.Tools.Selection;
+using Core2D.Interfaces;
 using Core2D.Path.Segments;
 using Core2D.Shapes;
-using System.Collections.Generic;
 
 namespace Core2D.Editor.Tools.Path
 {
@@ -56,6 +57,7 @@ namespace Core2D.Editor.Tools.Path
         public override void LeftDown(InputArgs args)
         {
             base.LeftDown(args);
+            var factory = _serviceProvider.GetService<IFactory>();
             var editor = _serviceProvider.GetService<ProjectEditor>();
             var pathTool = _serviceProvider.GetService<ToolPath>();
             (double sx, double sy) = editor.TryToSnap(args);
@@ -63,7 +65,7 @@ namespace Core2D.Editor.Tools.Path
             {
                 case State.Point1:
                     {
-                        _cubicBezier.Point1 = editor.TryToGetConnectionPoint(sx, sy) ?? Factory.CreatePointShape(sx, sy, editor.Project.Options.PointShape);
+                        _cubicBezier.Point1 = editor.TryToGetConnectionPoint(sx, sy) ?? factory.CreatePointShape(sx, sy, editor.Project.Options.PointShape);
                         if (!pathTool.IsInitialized)
                         {
                             pathTool.InitializeWorkingPath(_cubicBezier.Point1);
@@ -73,9 +75,9 @@ namespace Core2D.Editor.Tools.Path
                             _cubicBezier.Point1 = pathTool.GetLastPathPoint();
                         }
 
-                        _cubicBezier.Point2 = Factory.CreatePointShape(sx, sy, editor.Project.Options.PointShape);
-                        _cubicBezier.Point3 = Factory.CreatePointShape(sx, sy, editor.Project.Options.PointShape);
-                        _cubicBezier.Point4 = Factory.CreatePointShape(sx, sy, editor.Project.Options.PointShape);
+                        _cubicBezier.Point2 = factory.CreatePointShape(sx, sy, editor.Project.Options.PointShape);
+                        _cubicBezier.Point3 = factory.CreatePointShape(sx, sy, editor.Project.Options.PointShape);
+                        _cubicBezier.Point4 = factory.CreatePointShape(sx, sy, editor.Project.Options.PointShape);
                         pathTool.GeometryContext.CubicBezierTo(
                             _cubicBezier.Point2,
                             _cubicBezier.Point3,
@@ -148,9 +150,9 @@ namespace Core2D.Editor.Tools.Path
                         }
 
                         _cubicBezier.Point1 = _cubicBezier.Point4;
-                        _cubicBezier.Point2 = Factory.CreatePointShape(sx, sy, editor.Project.Options.PointShape);
-                        _cubicBezier.Point3 = Factory.CreatePointShape(sx, sy, editor.Project.Options.PointShape);
-                        _cubicBezier.Point4 = Factory.CreatePointShape(sx, sy, editor.Project.Options.PointShape);
+                        _cubicBezier.Point2 = factory.CreatePointShape(sx, sy, editor.Project.Options.PointShape);
+                        _cubicBezier.Point3 = factory.CreatePointShape(sx, sy, editor.Project.Options.PointShape);
+                        _cubicBezier.Point4 = factory.CreatePointShape(sx, sy, editor.Project.Options.PointShape);
                         pathTool.GeometryContext.CubicBezierTo(
                             _cubicBezier.Point2,
                             _cubicBezier.Point3,
@@ -268,6 +270,7 @@ namespace Core2D.Editor.Tools.Path
         {
             var editor = _serviceProvider.GetService<ProjectEditor>();
             _selection = new ToolCubicBezierSelection(
+                _serviceProvider,
                 editor.Project.CurrentContainer.HelperLayer,
                 _cubicBezier,
                 editor.Project.Options.HelperStyle,

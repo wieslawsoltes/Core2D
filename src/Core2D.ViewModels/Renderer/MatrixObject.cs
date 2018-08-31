@@ -115,7 +115,7 @@ namespace Core2D.Renderer
             var parts = s.Split(new[] { ',', ' ' }, StringSplitOptions.RemoveEmptyEntries).Select(x => x.Trim()).ToList();
             if (parts.Count == 6)
             {
-                return Factory.CreateMatrixObject(
+                return new MatrixObject(
                     double.Parse(parts[0]),
                     double.Parse(parts[1]),
                     double.Parse(parts[2]),

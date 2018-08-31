@@ -1,11 +1,5 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
-using Core2D.Containers;
-using Core2D.Data;
-using Core2D.Interfaces;
-using Core2D.Renderer;
-using Core2D.Renderer.WinForms;
-using Core2D.Shapes;
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
@@ -15,6 +9,12 @@ using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.Drawing.Text;
 using System.IO;
+using Core2D.Containers;
+using Core2D.Data;
+using Core2D.Interfaces;
+using Core2D.Renderer;
+using Core2D.Renderer.WinForms;
+using Core2D.Shapes;
 
 #if _WINDOWS
 using WPF = System.Windows;
@@ -27,6 +27,17 @@ namespace Core2D.FileWriter.Emf
     /// </summary>
     public sealed class EmfWriter : IFileWriter
     {
+        private readonly IServiceProvider _serviceProvider;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="EmfWriter"/> class.
+        /// </summary>
+        /// <param name="serviceProvider">The service provider.</param>
+        public EmfWriter(IServiceProvider serviceProvider)
+        {
+            _serviceProvider = serviceProvider;
+        }
+
         /// <inheritdoc/>
         string IFileWriter.Name { get; } = "Emf (WinForms)";
 
@@ -43,7 +54,7 @@ namespace Core2D.FileWriter.Emf
         /// <param name="record"></param>
         /// <param name="ic"></param>
         /// <returns></returns>
-        public static MemoryStream MakeMetafileStream(Bitmap bitmap, IEnumerable<IBaseShape> shapes, ImmutableArray<IProperty> properties, IRecord record, IImageCache ic)
+        public MemoryStream MakeMetafileStream(Bitmap bitmap, IEnumerable<IBaseShape> shapes, ImmutableArray<IProperty> properties, IRecord record, IImageCache ic)
         {
             var g = default(Graphics);
             var mf = default(Metafile);
@@ -60,7 +71,7 @@ namespace Core2D.FileWriter.Emf
 
                 using (g = Graphics.FromImage(mf))
                 {
-                    var r = new WinFormsRenderer(72.0 / 96.0);
+                    var r = new WinFormsRenderer(_serviceProvider, 72.0 / 96.0);
                     r.State.DrawShapeState.Flags = ShapeStateFlags.Printable;
                     r.State.ImageCache = ic;
 
@@ -105,7 +116,7 @@ namespace Core2D.FileWriter.Emf
         /// <param name="container"></param>
         /// <param name="ic"></param>
         /// <returns></returns>
-        public static MemoryStream MakeMetafileStream(Bitmap bitmap, IPageContainer container, IImageCache ic)
+        public MemoryStream MakeMetafileStream(Bitmap bitmap, IPageContainer container, IImageCache ic)
         {
             var g = default(Graphics);
             var mf = default(Metafile);
@@ -122,7 +133,7 @@ namespace Core2D.FileWriter.Emf
 
                 using (g = Graphics.FromImage(mf))
                 {
-                    var r = new WinFormsRenderer(72.0 / 96.0);
+                    var r = new WinFormsRenderer(_serviceProvider, 72.0 / 96.0);
                     r.State.DrawShapeState.Flags = ShapeStateFlags.Printable;
                     r.State.ImageCache = ic;
 
@@ -164,7 +175,7 @@ namespace Core2D.FileWriter.Emf
         /// <param name="properties"></param>
         /// <param name="record"></param>
         /// <param name="ic"></param>
-        public static void SetClipboard(IEnumerable<IBaseShape> shapes, double width, double height, ImmutableArray<IProperty> properties, IRecord record, IImageCache ic)
+        public void SetClipboard(IEnumerable<IBaseShape> shapes, double width, double height, ImmutableArray<IProperty> properties, IRecord record, IImageCache ic)
         {
             try
             {
@@ -190,7 +201,7 @@ namespace Core2D.FileWriter.Emf
         /// </summary>
         /// <param name="container"></param>
         /// <param name="ic"></param>
-        public static void SetClipboard(IPageContainer container, IImageCache ic)
+        public void SetClipboard(IPageContainer container, IImageCache ic)
         {
             try
             {
@@ -220,7 +231,7 @@ namespace Core2D.FileWriter.Emf
         /// <param name="path"></param>
         /// <param name="container"></param>
         /// <param name="ic"></param>
-        public static void Save(string path, IPageContainer container, IImageCache ic)
+        public void Save(string path, IPageContainer container, IImageCache ic)
         {
             if (container == null || container.Template == null)
                 return;

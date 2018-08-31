@@ -37,6 +37,7 @@ namespace Core2D.Editor
         private readonly Lazy<ILog> _log;
         private readonly Lazy<IShapeRenderer[]> _renderers;
         private readonly Lazy<IFileSystem> _fileIO;
+        private readonly Lazy<IFactory> _factory;
         private readonly Lazy<IContainerFactory> _containerFactory;
         private readonly Lazy<IShapeFactory> _shapeFactory;
         private readonly Lazy<ITextClipboard> _textClipboard;
@@ -181,7 +182,12 @@ namespace Core2D.Editor
         public IFileSystem FileIO => _fileIO.Value;
 
         /// <summary>
-        /// Gets project factory.
+        /// Gets factory.
+        /// </summary>
+        public IFactory Factory => _factory.Value;
+
+        /// <summary>
+        /// Gets container factory.
         /// </summary>
         public IContainerFactory ContainerFactory => _containerFactory.Value;
 
@@ -260,6 +266,7 @@ namespace Core2D.Editor
             _log = _serviceProvider.GetServiceLazily<ILog>();
             _renderers = new Lazy<IShapeRenderer[]>(() => new[] { _serviceProvider.GetService<IShapeRenderer>(), _serviceProvider.GetService<IShapeRenderer>() });
             _fileIO = _serviceProvider.GetServiceLazily<IFileSystem>();
+            _factory = _serviceProvider.GetServiceLazily<IFactory>();
             _containerFactory = _serviceProvider.GetServiceLazily<IContainerFactory>();
             _shapeFactory = _serviceProvider.GetServiceLazily<IShapeFactory>();
             _textClipboard = _serviceProvider.GetServiceLazily<ITextClipboard>();

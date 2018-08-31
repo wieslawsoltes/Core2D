@@ -6,6 +6,7 @@ using System.Collections.Immutable;
 using System.Linq;
 using Core2D.Containers;
 using Core2D.Data;
+using Core2D.Interfaces;
 using Core2D.Path;
 using Core2D.Path.Segments;
 using Core2D.Shapes;
@@ -20,9 +21,11 @@ namespace Core2D.Renderer.Dxf
     /// <summary>
     /// Native netDxf shape renderer.
     /// </summary>
-    public partial class DxfRenderer : ShapeRenderer
+    public partial class DxfRenderer : ObservableObject, IShapeRenderer
     {
-        private ICache<string, DXFO.ImageDefinition> _biCache = Factory.CreateCache<string, DXFO.ImageDefinition>();
+        private readonly IServiceProvider _serviceProvider;
+        private IShapeRendererState _state;
+        private ICache<string, DXFO.ImageDefinition> _biCache;
         private double _pageWidth;
         private double _pageHeight;
         private string _outputPath;
@@ -30,11 +33,22 @@ namespace Core2D.Renderer.Dxf
         private double _sourceDpi = 96.0;
         private double _targetDpi = 72.0;
 
+        /// <inheritdoc/>
+        public IShapeRendererState State
+        {
+            get => _state;
+            set => Update(ref _state, value);
+        }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="DxfRenderer"/> class.
         /// </summary>
-        public DxfRenderer()
+        /// <param name="serviceProvider">The service provider.</param>
+        public DxfRenderer(IServiceProvider serviceProvider)
         {
+            _serviceProvider = serviceProvider;
+            _state = _serviceProvider.GetService<IFactory>().CreateShapeRendererState();
+            _biCache = _serviceProvider.GetService<IFactory>().CreateCache<string, DXFO.ImageDefinition>();
             ClearCache(isZooming: false);
         }
 
@@ -43,12 +57,6 @@ namespace Core2D.Renderer.Dxf
         {
             throw new NotImplementedException();
         }
-
-        /// <summary>
-        /// Creates a new <see cref="DxfRenderer"/> instance.
-        /// </summary>
-        /// <returns>The new instance of the <see cref="DxfRenderer"/> class.</returns>
-        public static IShapeRenderer Create() => new DxfRenderer();
 
         private static double s_lineweightFactor = 96.0 / 2540.0;
 
@@ -499,7 +507,7 @@ namespace Core2D.Renderer.Dxf
         }
 
         /// <inheritdoc/>
-        public override void ClearCache(bool isZooming)
+        public void ClearCache(bool isZooming)
         {
             if (!isZooming)
             {
@@ -508,7 +516,7 @@ namespace Core2D.Renderer.Dxf
         }
 
         /// <inheritdoc/>
-        public override void Fill(object dc, double x, double y, double width, double height, IColor color)
+        public void Fill(object dc, double x, double y, double width, double height, IColor color)
         {
             var dxf = dc as DXF.DxfDocument;
             var rect = Spatial.Rect2.FromPoints(x, y, x + width, y + height);
@@ -516,20 +524,20 @@ namespace Core2D.Renderer.Dxf
         }
 
         /// <inheritdoc/>
-        public override object PushMatrix(object dc, IMatrixObject matrix)
+        public object PushMatrix(object dc, IMatrixObject matrix)
         {
             // TODO: Implement push matrix.
             return null;
         }
 
         /// <inheritdoc/>
-        public override void PopMatrix(object dc, object state)
+        public void PopMatrix(object dc, object state)
         {
             // TODO: Implement pop matrix.
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, IPageContainer container, double dx, double dy, object db, object r)
+        public void Draw(object dc, IPageContainer container, double dx, double dy, object db, object r)
         {
             var dxf = dc as DXF.DxfDocument;
 
@@ -549,7 +557,7 @@ namespace Core2D.Renderer.Dxf
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, ILayerContainer layer, double dx, double dy, object db, object r)
+        public void Draw(object dc, ILayerContainer layer, double dx, double dy, object db, object r)
         {
             var dxf = dc as DXF.DxfDocument;
 
@@ -563,7 +571,7 @@ namespace Core2D.Renderer.Dxf
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, ILineShape line, double dx, double dy, object db, object r)
+        public void Draw(object dc, ILineShape line, double dx, double dy, object db, object r)
         {
             if (!line.IsStroked)
                 return;
@@ -587,7 +595,7 @@ namespace Core2D.Renderer.Dxf
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, IRectangleShape rectangle, double dx, double dy, object db, object r)
+        public void Draw(object dc, IRectangleShape rectangle, double dx, double dy, object db, object r)
         {
             if (!rectangle.IsStroked && !rectangle.IsFilled && !rectangle.IsGrid)
                 return;
@@ -616,7 +624,7 @@ namespace Core2D.Renderer.Dxf
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, IEllipseShape ellipse, double dx, double dy, object db, object r)
+        public void Draw(object dc, IEllipseShape ellipse, double dx, double dy, object db, object r)
         {
             if (!ellipse.IsStroked && !ellipse.IsFilled)
                 return;
@@ -634,7 +642,7 @@ namespace Core2D.Renderer.Dxf
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, IArcShape arc, double dx, double dy, object db, object r)
+        public void Draw(object dc, IArcShape arc, double dx, double dy, object db, object r)
         {
             var dxf = dc as DXF.DxfDocument;
             var style = arc.Style;
@@ -681,7 +689,7 @@ namespace Core2D.Renderer.Dxf
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, ICubicBezierShape cubicBezier, double dx, double dy, object db, object r)
+        public void Draw(object dc, ICubicBezierShape cubicBezier, double dx, double dy, object db, object r)
         {
             if (!cubicBezier.IsStroked && !cubicBezier.IsFilled)
                 return;
@@ -738,7 +746,7 @@ namespace Core2D.Renderer.Dxf
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, IQuadraticBezierShape quadraticBezier, double dx, double dy, object db, object r)
+        public void Draw(object dc, IQuadraticBezierShape quadraticBezier, double dx, double dy, object db, object r)
         {
             if (!quadraticBezier.IsStroked && !quadraticBezier.IsFilled)
                 return;
@@ -793,7 +801,7 @@ namespace Core2D.Renderer.Dxf
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, ITextShape text, double dx, double dy, object db, object r)
+        public void Draw(object dc, ITextShape text, double dx, double dy, object db, object r)
         {
             var dxf = dc as DXF.DxfDocument;
 
@@ -924,7 +932,7 @@ namespace Core2D.Renderer.Dxf
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, IImageShape image, double dx, double dy, object db, object r)
+        public void Draw(object dc, IImageShape image, double dx, double dy, object db, object r)
         {
             var dxf = dc as DXF.DxfDocument;
 
@@ -970,7 +978,7 @@ namespace Core2D.Renderer.Dxf
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, IPathShape path, double dx, double dy, object db, object r)
+        public void Draw(object dc, IPathShape path, double dx, double dy, object db, object r)
         {
             if (!path.IsStroked && !path.IsFilled)
                 return;
@@ -1013,5 +1021,11 @@ namespace Core2D.Renderer.Dxf
                 }
             }
         }
+
+        /// <summary>
+        /// Check whether the <see cref="State"/> property has changed from its default value.
+        /// </summary>
+        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
+        public bool ShouldSerializeState() => _state != null;
     }
 }

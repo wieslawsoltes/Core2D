@@ -15,6 +15,17 @@ namespace Core2D.FileWriter.SkiaSharpIco
     /// </summary>
     public sealed class IcoSkiaSharpWriter : IFileWriter
     {
+        private readonly IServiceProvider _serviceProvider;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="IcoSkiaSharpWriter"/> class.
+        /// </summary>
+        /// <param name="serviceProvider">The service provider.</param>
+        public IcoSkiaSharpWriter(IServiceProvider serviceProvider)
+        {
+            _serviceProvider = serviceProvider;
+        }
+
         /// <inheritdoc/>
         string IFileWriter.Name { get; } = "Ico (SkiaSharp)";
 
@@ -31,7 +42,7 @@ namespace Core2D.FileWriter.SkiaSharpIco
             if (options == null)
                 return;
 
-            var renderer = new SkiaSharpRenderer(true, 96.0);
+            var renderer = new SkiaSharpRenderer(_serviceProvider, true, 96.0);
             renderer.State.DrawShapeState.Flags = ShapeStateFlags.Printable;
             renderer.State.ImageCache = ic;
 

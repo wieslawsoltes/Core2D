@@ -414,7 +414,8 @@ namespace Core2D.UI.Wpf.Editor
                 if (editor.Renderers[0]?.State?.SelectedShape != null)
                 {
                     var shapes = Enumerable.Repeat(editor.Renderers[0].State.SelectedShape, 1).ToList();
-                    EmfWriter.SetClipboard(
+                    var writer = new EmfWriter(_serviceProvider);
+                    writer.SetClipboard(
                         shapes,
                         page.Template.Width,
                         page.Template.Height,
@@ -425,7 +426,8 @@ namespace Core2D.UI.Wpf.Editor
                 else if (editor.Renderers?[0]?.State?.SelectedShapes != null)
                 {
                     var shapes = editor.Renderers[0].State.SelectedShapes.ToList();
-                    EmfWriter.SetClipboard(
+                    var writer = new EmfWriter(_serviceProvider);
+                    writer.SetClipboard(
                         shapes,
                         page.Template.Width,
                         page.Template.Height,
@@ -435,7 +437,8 @@ namespace Core2D.UI.Wpf.Editor
                 }
                 else
                 {
-                    EmfWriter.SetClipboard(page, imageChache);
+                    var writer = new EmfWriter(_serviceProvider);
+                    writer.SetClipboard(page, imageChache);
                 }
             }
         }

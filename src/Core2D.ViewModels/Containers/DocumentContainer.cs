@@ -30,11 +30,6 @@ namespace Core2D.Containers
             set => Update(ref _pages, value);
         }
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="DocumentContainer"/> class.
-        /// </summary>
-        public DocumentContainer() : base() => _pages = ImmutableArray.Create<IPageContainer>();
-
         /// <inheritdoc/>
         public override object Copy(IDictionary<object, object> shared)
         {
@@ -51,6 +46,6 @@ namespace Core2D.Containers
         /// Check whether the <see cref="Pages"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializePages() => _pages.IsEmpty == false;
+        public virtual bool ShouldSerializePages() => true;
     }
 }

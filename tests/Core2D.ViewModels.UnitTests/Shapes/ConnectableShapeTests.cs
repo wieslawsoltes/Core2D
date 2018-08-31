@@ -1,21 +1,29 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
-using Core2D.Data;
-using Core2D.Renderer;
 using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
+using Core2D.Data;
+using Core2D.Interfaces;
+using Core2D.Renderer;
 using Xunit;
 
 namespace Core2D.Shapes.UnitTests
 {
     public class ConnectableShapeTests
     {
+        private readonly IFactory _factory = new Factory();
+
         [Fact]
         [Trait("Core2D.Shapes", "Shapes")]
         public void Inherits_From_BaseShape()
         {
-            var target = new Class2();
+            var target = new Class2()
+            {
+                State = _factory.CreateShapeState(),
+                Connectors = ImmutableArray.Create<IPointShape>()
+            };
             Assert.True(target is BaseShape);
         }
 
@@ -23,7 +31,11 @@ namespace Core2D.Shapes.UnitTests
         [Trait("Core2D.Shapes", "Shapes")]
         public void Connectors_Not_Null()
         {
-            var target = new Class2();
+            var target = new Class2()
+            {
+                State = _factory.CreateShapeState(),
+                Connectors = ImmutableArray.Create<IPointShape>()
+            };
             Assert.False(target.Connectors.IsDefault);
         }
 
@@ -31,10 +43,14 @@ namespace Core2D.Shapes.UnitTests
         [Trait("Core2D.Shapes", "Shapes")]
         public void GetPoints_Returns_Connector_Points()
         {
-            var target = new Class2();
+            var target = new Class2()
+            {
+                State = _factory.CreateShapeState(),
+                Connectors = ImmutableArray.Create<IPointShape>()
+            };
 
-            var point = new PointShape();
-            point.Data.Properties = point.Data.Properties.Add(new Property());
+            var point = _factory.CreatePointShape();
+            point.Data.Properties = point.Data.Properties.Add(_factory.CreateProperty(null, "", ""));
             target.Connectors = target.Connectors.Add(point);
 
             var count = target.GetPoints().Count();
@@ -45,8 +61,12 @@ namespace Core2D.Shapes.UnitTests
         [Trait("Core2D.Shapes", "Shapes")]
         public void AddConnectorAsNone_Add_Point_To_Connectors_As_None()
         {
-            var target = new Class2();
-            var point = new PointShape();
+            var target = new Class2()
+            {
+                State = _factory.CreateShapeState(),
+                Connectors = ImmutableArray.Create<IPointShape>()
+            };
+            var point = _factory.CreatePointShape();
 
             target.AddConnectorAsNone(point);
 
@@ -63,8 +83,12 @@ namespace Core2D.Shapes.UnitTests
         [Trait("Core2D.Shapes", "Shapes")]
         public void AddConnectorAsInput_Add_Point_To_Connectors_As_Input()
         {
-            var target = new Class2();
-            var point = new PointShape();
+            var target = new Class2()
+            {
+                State = _factory.CreateShapeState(),
+                Connectors = ImmutableArray.Create<IPointShape>()
+            };
+            var point = _factory.CreatePointShape();
 
             target.AddConnectorAsInput(point);
 
@@ -81,8 +105,12 @@ namespace Core2D.Shapes.UnitTests
         [Trait("Core2D.Shapes", "Shapes")]
         public void AddConnectorAsOutput_Add_Point_To_Connectors_As_Output()
         {
-            var target = new Class2();
-            var point = new PointShape();
+            var target = new Class2()
+            {
+                State = _factory.CreateShapeState(),
+                Connectors = ImmutableArray.Create<IPointShape>()
+            };
+            var point = _factory.CreatePointShape();
 
             target.AddConnectorAsOutput(point);
 

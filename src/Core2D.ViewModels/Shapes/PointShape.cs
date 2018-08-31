@@ -2,6 +2,7 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using Core2D.Data;
 using Core2D.Renderer;
 
@@ -91,7 +92,11 @@ namespace Core2D.Shapes
         /// <returns>The new instance of the <see cref="PointShape"/> class.</returns>
         public IPointShape Clone()
         {
-            var data = Factory.CreateContext(Data.Record);
+            var data = new Context()
+            {
+                Properties = ImmutableArray.Create<IProperty>(),
+                Record = Data.Record
+            };
 
             // The property Value is of type object and is not cloned.
             if (Data.Properties.Length > 0)
@@ -100,10 +105,12 @@ namespace Core2D.Shapes
                 foreach (var property in Data.Properties)
                 {
                     builder.Add(
-                        Factory.CreateProperty(
-                            data,
-                            property.Name,
-                            property.Value));
+                        new Property()
+                        {
+                            Name = property.Name,
+                            Value = property.Value,
+                            Owner = data
+                        });
                 }
                 data.Properties = builder.ToImmutable();
             }

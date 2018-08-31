@@ -2,6 +2,7 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using Core2D.Containers;
 using Core2D.Data;
+using Core2D.Interfaces;
 using Core2D.Style;
 using Xunit;
 
@@ -9,11 +10,13 @@ namespace Core2D.UnitTests
 {
     public class PageContainerTests
     {
+        private readonly IFactory _factory = new Factory();
+
         [Fact]
         [Trait("Core2D.Containers", "Project")]
         public void Inherits_From_ObservableObject()
         {
-            var target = new Class1();
+            var target = _factory.CreatePageContainer();
             Assert.True(target is IObservableObject);
         }
 
@@ -21,7 +24,7 @@ namespace Core2D.UnitTests
         [Trait("Core2D.Containers", "Project")]
         public void Layers_Not_Null()
         {
-            var target = new Class1();
+            var target = _factory.CreatePageContainer();
             Assert.False(target.Layers.IsDefault);
         }
 
@@ -29,9 +32,9 @@ namespace Core2D.UnitTests
         [Trait("Core2D.Containers", "Project")]
         public void SetCurrentLayer_Sets_CurrentLayer()
         {
-            var target = new Class1();
+            var target = _factory.CreatePageContainer();
 
-            var layer = Factory.CreateLayerContainer("Layer1", target);
+            var layer = _factory.CreateLayerContainer("Layer1", target);
             target.Layers = target.Layers.Add(layer);
 
             target.SetCurrentLayer(layer);
@@ -43,15 +46,15 @@ namespace Core2D.UnitTests
         [Trait("Core2D.Containers", "Project")]
         public void Invalidate_Should_Invalidate_All_Layers()
         {
-            var target = new Class1();
+            var target = _factory.CreatePageContainer();
 
-            var layer1 = Factory.CreateLayerContainer("Layer1", target);
-            var layer2 = Factory.CreateLayerContainer("Layer2", target);
+            var layer1 = _factory.CreateLayerContainer("Layer1", target);
+            var layer2 = _factory.CreateLayerContainer("Layer2", target);
             target.Layers = target.Layers.Add(layer1);
             target.Layers = target.Layers.Add(layer2);
 
-            var workingLayer = Factory.CreateLayerContainer("WorkingLayer", target);
-            var helperLayer = Factory.CreateLayerContainer("HelperLayer", target);
+            var workingLayer = _factory.CreateLayerContainer("WorkingLayer", target);
+            var helperLayer = _factory.CreateLayerContainer("HelperLayer", target);
             target.WorkingLayer = workingLayer;
             target.HelperLayer = helperLayer;
 
@@ -71,14 +74,11 @@ namespace Core2D.UnitTests
         [Trait("Core2D.Containers", "Project")]
         public void Template_Not_Null_Width_Returns_Template_Width()
         {
-            var target = new Class1()
-            {
-                Width = 300,
-                Template = new Class1()
-                {
-                    Width = 400
-                }
-            };
+            var target = _factory.CreatePageContainer();
+
+            target.Width = 300;
+            target.Template = _factory.CreateTemplateContainer();
+            target.Template.Width = 400;
 
             Assert.Equal(400, target.Width);
         }
@@ -87,14 +87,11 @@ namespace Core2D.UnitTests
         [Trait("Core2D.Containers", "Project")]
         public void Template_Not_Null_Width_Returns_Template_Height()
         {
-            var target = new Class1()
-            {
-                Height = 300,
-                Template = new Class1()
-                {
-                    Height = 400
-                }
-            };
+            var target = _factory.CreatePageContainer();
+
+            target.Height = 300;
+            target.Template = _factory.CreateTemplateContainer();
+            target.Template.Height = 400;
 
             Assert.Equal(400, target.Height);
         }
@@ -103,14 +100,11 @@ namespace Core2D.UnitTests
         [Trait("Core2D.Containers", "Project")]
         public void Template_Not_Null_Background_Returns_Template_Background()
         {
-            var target = new Class1()
-            {
-                Background = Factory.CreateArgbColor(),
-                Template = new Class1()
-                {
-                    Background = Factory.CreateArgbColor()
-                }
-            };
+            var target = _factory.CreatePageContainer();
+
+            target.Background = _factory.CreateArgbColor();
+            target.Template = _factory.CreateTemplateContainer();
+            target.Template.Background = _factory.CreateArgbColor();
 
             Assert.Equal(target.Template.Background, target.Background);
         }
@@ -119,62 +113,19 @@ namespace Core2D.UnitTests
         [Trait("Core2D.Containers", "Project")]
         public void Data_Not_Null()
         {
-            var target = new PageContainer();
+            var target = _factory.CreatePageContainer();
             Assert.NotNull(target.Data);
-        }
-
-        [Fact]
-        [Trait("Core2D.Containers", "Project")]
-        public void This_Operator_Returns_Null()
-        {
-            var target = new PageContainer();
-            Assert.Null(target["Name1"]);
-        }
-
-        [Fact]
-        [Trait("Core2D.Containers", "Project")]
-        public void This_Operator_Returns_Property_Value()
-        {
-            var target = new PageContainer();
-            target.Data.Properties = target.Data.Properties.Add(Factory.CreateProperty(target.Data, "Name1", "Value1"));
-
-            Assert.Equal("Value1", target["Name1"]);
-        }
-
-        [Fact]
-        [Trait("Core2D.Containers", "Project")]
-        public void This_Operator_Sets_Property_Value()
-        {
-            var target = new PageContainer();
-            target.Data.Properties = target.Data.Properties.Add(Factory.CreateProperty(target.Data, "Name1", "Value1"));
-
-            target["Name1"] = "NewValue1";
-            Assert.Equal("NewValue1", target["Name1"]);
-        }
-
-        [Fact]
-        [Trait("Core2D.Containers", "Project")]
-        public void This_Operator_Creates_Property()
-        {
-            var target = new PageContainer();
-            Assert.Empty(target.Data.Properties);
-
-            target["Name1"] = "Value1";
-            Assert.Equal("Value1", target.Data.Properties[0].Value);
-
-            Assert.Equal(target.Data, target.Data.Properties[0].Owner);
         }
 
         [Fact]
         [Trait("Core2D.Containers", "Project")]
         public void Invalidate_Should_Invalidate_Template()
         {
-            var target = new PageContainer()
-            {
-                Template = new PageContainer()
-            };
+            var target = _factory.CreatePageContainer();
 
-            var layer = Factory.CreateLayerContainer("Layer1", target);
+            target.Template = _factory.CreateTemplateContainer();
+
+            var layer = _factory.CreateLayerContainer("Layer1", target);
             target.Template.Layers = target.Template.Layers.Add(layer);
 
             bool raised = false;
@@ -187,10 +138,6 @@ namespace Core2D.UnitTests
             target.Invalidate();
 
             Assert.True(raised);
-        }
-
-        public class Class1 : PageContainer
-        {
         }
     }
 }

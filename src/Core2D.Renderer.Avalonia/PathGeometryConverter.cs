@@ -3,6 +3,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using Core2D.Interfaces;
 using Core2D.Path;
 using Core2D.Path.Segments;
 using Core2D.Shapes;
@@ -14,16 +15,28 @@ namespace Core2D.Renderer.Avalonia
     /// <summary>
     /// 
     /// </summary>
-    public static class PathGeometryConverter
+    public class PathGeometryConverter
     {
-        private static ImmutableArray<IPointShape> ToPointShapes(this IEnumerable<A.Point> points, double dx, double dy)
+        private readonly IServiceProvider _serviceProvider;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="PathGeometryConverter"/> class.
+        /// </summary>
+        /// <param name="serviceProvider">The service provider.</param>
+        public PathGeometryConverter(IServiceProvider serviceProvider)
         {
-            var PointShapes = ImmutableArray.CreateBuilder<IPointShape>();
+            _serviceProvider = serviceProvider;
+        }
+
+        private ImmutableArray<IPointShape> ToPointShapes(IEnumerable<A.Point> points, double dx, double dy)
+        {
+            var factory = _serviceProvider.GetService<IFactory>();
+            var pointShapes = ImmutableArray.CreateBuilder<IPointShape>();
             foreach (var point in points)
             {
-                PointShapes.Add(Factory.CreatePointShape(point.X + dx, point.Y + dy));
+                pointShapes.Add(factory.CreatePointShape(point.X + dx, point.Y + dy));
             }
-            return PointShapes.ToImmutable();
+            return pointShapes.ToImmutable();
         }
 
         /// <summary>
@@ -33,18 +46,20 @@ namespace Core2D.Renderer.Avalonia
         /// <param name="dx"></param>
         /// <param name="dy"></param>
         /// <returns></returns>
-        public static IPathGeometry ToPathGeometry(this AM.PathGeometry pg, double dx, double dy)
+        public IPathGeometry ToPathGeometry(AM.PathGeometry pg, double dx, double dy)
         {
-            var geometry = Factory.CreatePathGeometry(
+            var factory = _serviceProvider.GetService<IFactory>();
+
+            var geometry = factory.CreatePathGeometry(
                 ImmutableArray.Create<IPathFigure>(),
                 pg.FillRule == AM.FillRule.EvenOdd ? FillRule.EvenOdd : FillRule.Nonzero);
 
-            var context = new PathGeometryContext(geometry);
+            var context = new PathGeometryContext(factory, geometry);
 
             foreach (var pf in pg.Figures)
             {
                 context.BeginFigure(
-                    Factory.CreatePointShape(pf.StartPoint.X + dx, pf.StartPoint.Y + dy),
+                    factory.CreatePointShape(pf.StartPoint.X + dx, pf.StartPoint.Y + dy),
                     pf.IsFilled,
                     pf.IsClosed);
 
@@ -53,8 +68,8 @@ namespace Core2D.Renderer.Avalonia
                     if (segment is AM.ArcSegment arcSegment)
                     {
                         context.ArcTo(
-                            Factory.CreatePointShape(arcSegment.Point.X + dx, arcSegment.Point.Y + dy),
-                            Factory.CreatePathSize(arcSegment.Size.Width, arcSegment.Size.Height),
+                            factory.CreatePointShape(arcSegment.Point.X + dx, arcSegment.Point.Y + dy),
+                            factory.CreatePathSize(arcSegment.Size.Width, arcSegment.Size.Height),
                             arcSegment.RotationAngle,
                             arcSegment.IsLargeArc,
                             arcSegment.SweepDirection == AM.SweepDirection.Clockwise ? SweepDirection.Clockwise : SweepDirection.Counterclockwise);
@@ -62,20 +77,20 @@ namespace Core2D.Renderer.Avalonia
                     else if (segment is AM.BezierSegment cubicBezierSegment)
                     {
                         context.CubicBezierTo(
-                            Factory.CreatePointShape(cubicBezierSegment.Point1.X + dx, cubicBezierSegment.Point1.Y + dy),
-                            Factory.CreatePointShape(cubicBezierSegment.Point2.X + dx, cubicBezierSegment.Point2.Y + dy),
-                            Factory.CreatePointShape(cubicBezierSegment.Point3.X + dx, cubicBezierSegment.Point3.Y + dy));
+                            factory.CreatePointShape(cubicBezierSegment.Point1.X + dx, cubicBezierSegment.Point1.Y + dy),
+                            factory.CreatePointShape(cubicBezierSegment.Point2.X + dx, cubicBezierSegment.Point2.Y + dy),
+                            factory.CreatePointShape(cubicBezierSegment.Point3.X + dx, cubicBezierSegment.Point3.Y + dy));
                     }
                     else if (segment is AM.LineSegment lineSegment)
                     {
                         context.LineTo(
-                            Factory.CreatePointShape(lineSegment.Point.X + dx, lineSegment.Point.Y + dy));
+                            factory.CreatePointShape(lineSegment.Point.X + dx, lineSegment.Point.Y + dy));
                     }
                     else if (segment is AM.QuadraticBezierSegment quadraticBezierSegment)
                     {
                         context.QuadraticBezierTo(
-                            Factory.CreatePointShape(quadraticBezierSegment.Point1.X + dx, quadraticBezierSegment.Point1.Y + dy),
-                            Factory.CreatePointShape(quadraticBezierSegment.Point2.X + dx, quadraticBezierSegment.Point2.Y + dy));
+                            factory.CreatePointShape(quadraticBezierSegment.Point1.X + dx, quadraticBezierSegment.Point1.Y + dy),
+                            factory.CreatePointShape(quadraticBezierSegment.Point2.X + dx, quadraticBezierSegment.Point2.Y + dy));
                     }
                     else
                     {
@@ -94,7 +109,7 @@ namespace Core2D.Renderer.Avalonia
         /// <param name="dx"></param>
         /// <param name="dy"></param>
         /// <returns></returns>
-        public static AM.StreamGeometry ToStreamGeometry(this IPathGeometry xpg, double dx, double dy)
+        public AM.StreamGeometry ToStreamGeometry(IPathGeometry xpg, double dx, double dy)
         {
             var sg = new AM.StreamGeometry();
 
@@ -264,7 +279,7 @@ namespace Core2D.Renderer.Avalonia
         /// </summary>
         /// <param name="source"></param>
         /// <returns></returns>
-        public static IPathGeometry ToPathGeometry(this string source)
+        public IPathGeometry ToPathGeometry(string source)
         {
             var pg = AM.PathGeometry.Parse(source);
             return ToPathGeometry(pg, 0.0, 0.0);
@@ -277,7 +292,7 @@ namespace Core2D.Renderer.Avalonia
         /// <param name="dx"></param>
         /// <param name="dy"></param>
         /// <returns></returns>
-        public static AM.Geometry ToGeometry(this IPathGeometry xpg, double dx, double dy)
+        public AM.Geometry ToGeometry(IPathGeometry xpg, double dx, double dy)
         {
             return ToStreamGeometry(xpg, dx, dy);
         }
@@ -287,7 +302,7 @@ namespace Core2D.Renderer.Avalonia
         /// </summary>
         /// <param name="xpg"></param>
         /// <returns></returns>
-        public static string ToSource(this IPathGeometry xpg)
+        public string ToSource(IPathGeometry xpg)
         {
             return ToStreamGeometry(xpg, 0.0, 0.0).ToString();
         }
@@ -297,7 +312,7 @@ namespace Core2D.Renderer.Avalonia
         /// </summary>
         /// <param name="sg"></param>
         /// <returns></returns>
-        public static string ToSource(this AM.StreamGeometry sg)
+        public string ToSource(AM.StreamGeometry sg)
         {
             return sg.ToString();
         }

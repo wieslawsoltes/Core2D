@@ -50,7 +50,7 @@ namespace Core2D.Data
         /// Check whether the <see cref="Values"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeValues() => _values.IsEmpty == false;
+        public virtual bool ShouldSerializeValues() => true;
 
         /// <summary>
         /// Check whether the <see cref="Owner"/> property has changed from its default value.

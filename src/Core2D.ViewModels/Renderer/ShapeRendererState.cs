@@ -123,7 +123,7 @@ namespace Core2D.Renderer
         /// Check whether the <see cref="SelectedShapes"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeSelectedShapes() => _selectedShapes.IsEmpty == false;
+        public virtual bool ShouldSerializeSelectedShapes() => true;
 
         /// <summary>
         /// Check whether the <see cref="ImageCache"/> property has changed from its default value.

@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using Core2D.Editor.Input;
 using Core2D.Editor.Tools.Path.Settings;
+using Core2D.Interfaces;
 using Core2D.Shapes;
 
 namespace Core2D.Editor.Tools.Path
@@ -50,6 +51,7 @@ namespace Core2D.Editor.Tools.Path
         public override void LeftDown(InputArgs args)
         {
             base.LeftDown(args);
+            var factory = _serviceProvider.GetService<IFactory>();
             var editor = _serviceProvider.GetService<ProjectEditor>();
             (double sx, double sy) = editor.TryToSnap(args);
             switch (_currentState)
@@ -59,7 +61,7 @@ namespace Core2D.Editor.Tools.Path
                         var pathTool = _serviceProvider.GetService<ToolPath>();
                         editor.CurrentPathTool = pathTool.PreviousPathTool;
 
-                        var start = editor.TryToGetConnectionPoint(sx, sy) ?? Factory.CreatePointShape(sx, sy, editor.Project.Options.PointShape);
+                        var start = editor.TryToGetConnectionPoint(sx, sy) ?? factory.CreatePointShape(sx, sy, editor.Project.Options.PointShape);
                         pathTool.GeometryContext.BeginFigure(
                                 start,
                                 editor.Project.Options.DefaultIsFilled,

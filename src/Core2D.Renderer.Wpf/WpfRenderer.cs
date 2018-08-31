@@ -6,7 +6,9 @@ using System.Collections.Immutable;
 using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
+using Core2D.Containers;
 using Core2D.Data;
+using Core2D.Interfaces;
 using Core2D.Shapes;
 using Core2D.Style;
 using Spatial;
@@ -20,23 +22,46 @@ namespace Core2D.Renderer.Wpf
     /// <summary>
     /// Native Windows Presentation Foundation shape renderer.
     /// </summary>
-    public class WpfRenderer : ShapeRenderer
+    public class WpfRenderer : ObservableObject, IShapeRenderer
     {
-        private ICache<IShapeStyle, (WM.Brush, WM.Pen)> _styleCache = Factory.CreateCache<IShapeStyle, (WM.Brush, WM.Pen)>();
-        private ICache<IArrowStyle, (WM.Brush, WM.Pen)> _arrowStyleCache = Factory.CreateCache<IArrowStyle, (WM.Brush, WM.Pen)>();
-        private ICache<ILineShape, WM.PathGeometry> _curvedLineCache = Factory.CreateCache<ILineShape, WM.PathGeometry>();
-        private ICache<IArcShape, WM.PathGeometry> _arcCache = Factory.CreateCache<IArcShape, WM.PathGeometry>();
-        private ICache<ICubicBezierShape, WM.PathGeometry> _cubicBezierCache = Factory.CreateCache<ICubicBezierShape, WM.PathGeometry>();
-        private ICache<IQuadraticBezierShape, WM.PathGeometry> _quadraticBezierCache = Factory.CreateCache<IQuadraticBezierShape, WM.PathGeometry>();
-        private ICache<ITextShape, (string, WM.FormattedText, IShapeStyle)> _textCache = Factory.CreateCache<ITextShape, (string, WM.FormattedText, IShapeStyle)>();
-        private ICache<string, WMI.BitmapImage> _biCache = Factory.CreateCache<string, WMI.BitmapImage>(bi => bi.StreamSource.Dispose());
-        private ICache<IPathShape, (Path.IPathGeometry, WM.StreamGeometry, IShapeStyle)> _pathCache = Factory.CreateCache<IPathShape, (Path.IPathGeometry, WM.StreamGeometry, IShapeStyle)>();
+        private readonly IServiceProvider _serviceProvider;
+        private IShapeRendererState _state;
+        private ICache<IShapeStyle, (WM.Brush, WM.Pen)> _styleCache;
+        private ICache<IArrowStyle, (WM.Brush, WM.Pen)> _arrowStyleCache;
+        private ICache<ILineShape, WM.PathGeometry> _curvedLineCache;
+        private ICache<IArcShape, WM.PathGeometry> _arcCache;
+        private ICache<ICubicBezierShape, WM.PathGeometry> _cubicBezierCache;
+        private ICache<IQuadraticBezierShape, WM.PathGeometry> _quadraticBezierCache;
+        private ICache<ITextShape, (string, WM.FormattedText, IShapeStyle)> _textCache;
+        private ICache<string, WMI.BitmapImage> _biCache;
+        private ICache<IPathShape, (Path.IPathGeometry, WM.StreamGeometry, IShapeStyle)> _pathCache;
+        private readonly PathGeometryConverter _converter;
+
+        /// <inheritdoc/>
+        public IShapeRendererState State
+        {
+            get => _state;
+            set => Update(ref _state, value);
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="WpfRenderer"/> class.
         /// </summary>
-        public WpfRenderer()
+        /// <param name="serviceProvider">The service provider.</param>
+        public WpfRenderer(IServiceProvider serviceProvider)
         {
+            _serviceProvider = serviceProvider;
+            _state = _serviceProvider.GetService<IFactory>().CreateShapeRendererState();
+            _styleCache = _serviceProvider.GetService<IFactory>().CreateCache<IShapeStyle, (WM.Brush, WM.Pen)>();
+            _arrowStyleCache = _serviceProvider.GetService<IFactory>().CreateCache<IArrowStyle, (WM.Brush, WM.Pen)>();
+            _curvedLineCache = _serviceProvider.GetService<IFactory>().CreateCache<ILineShape, WM.PathGeometry>();
+            _arcCache = _serviceProvider.GetService<IFactory>().CreateCache<IArcShape, WM.PathGeometry>();
+            _cubicBezierCache = _serviceProvider.GetService<IFactory>().CreateCache<ICubicBezierShape, WM.PathGeometry>();
+            _quadraticBezierCache = _serviceProvider.GetService<IFactory>().CreateCache<IQuadraticBezierShape, WM.PathGeometry>();
+            _textCache = _serviceProvider.GetService<IFactory>().CreateCache<ITextShape, (string, WM.FormattedText, IShapeStyle)>();
+            _biCache = _serviceProvider.GetService<IFactory>().CreateCache<string, WMI.BitmapImage>(bi => bi.StreamSource.Dispose());
+            _pathCache = _serviceProvider.GetService<IFactory>().CreateCache<IPathShape, (Path.IPathGeometry, WM.StreamGeometry, IShapeStyle)>();
+            _converter = new PathGeometryConverter(_serviceProvider);
             ClearCache(isZooming: false);
         }
 
@@ -45,12 +70,6 @@ namespace Core2D.Renderer.Wpf
         {
             throw new NotImplementedException();
         }
-
-        /// <summary>
-        /// Creates a new <see cref="WpfRenderer"/> instance.
-        /// </summary>
-        /// <returns>The new instance of the <see cref="WpfRenderer"/> class.</returns>
-        public static IShapeRenderer Create() => new WpfRenderer();
 
         private static W.Point GetTextOrigin(IShapeStyle style, ref W.Rect rect, WM.FormattedText ft)
         {
@@ -548,7 +567,7 @@ namespace Core2D.Renderer.Wpf
         }
 
         /// <inheritdoc/>
-        public override void ClearCache(bool isZooming)
+        public void ClearCache(bool isZooming)
         {
             _styleCache.Reset();
             _arrowStyleCache.Reset();
@@ -566,7 +585,7 @@ namespace Core2D.Renderer.Wpf
         }
 
         /// <inheritdoc/>
-        public override void Fill(object dc, double x, double y, double width, double height, IColor color)
+        public void Fill(object dc, double x, double y, double width, double height, IColor color)
         {
             var _dc = dc as WM.DrawingContext;
             var brush = ToBrush(color);
@@ -575,7 +594,7 @@ namespace Core2D.Renderer.Wpf
         }
 
         /// <inheritdoc/>
-        public override object PushMatrix(object dc, IMatrixObject matrix)
+        public object PushMatrix(object dc, IMatrixObject matrix)
         {
             var _dc = dc as WM.DrawingContext;
             _dc.PushTransform(ToMatrixTransform(matrix));
@@ -583,14 +602,38 @@ namespace Core2D.Renderer.Wpf
         }
 
         /// <inheritdoc/>
-        public override void PopMatrix(object dc, object state)
+        public void PopMatrix(object dc, object state)
         {
             var _dc = dc as WM.DrawingContext;
             _dc.Pop();
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, ILineShape line, double dx, double dy, object db, object r)
+        public void Draw(object dc, IPageContainer container, double dx, double dy, object db, object r)
+        {
+            foreach (var layer in container.Layers)
+            {
+                if (layer.IsVisible)
+                {
+                    Draw(dc, layer, dx, dy, db, r);
+                }
+            }
+        }
+
+        /// <inheritdoc/>
+        public void Draw(object dc, ILayerContainer layer, double dx, double dy, object db, object r)
+        {
+            foreach (var shape in layer.Shapes)
+            {
+                if (shape.State.Flags.HasFlag(State.DrawShapeState.Flags))
+                {
+                    shape.Draw(dc, this, dx, dy, db, r);
+                }
+            }
+        }
+
+        /// <inheritdoc/>
+        public void Draw(object dc, ILineShape line, double dx, double dy, object db, object r)
         {
             var _dc = dc as WM.DrawingContext;
 
@@ -621,7 +664,7 @@ namespace Core2D.Renderer.Wpf
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, IRectangleShape rectangle, double dx, double dy, object db, object r)
+        public void Draw(object dc, IRectangleShape rectangle, double dx, double dy, object db, object r)
         {
             var _dc = dc as WM.DrawingContext;
 
@@ -645,7 +688,7 @@ namespace Core2D.Renderer.Wpf
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, IEllipseShape ellipse, double dx, double dy, object db, object r)
+        public void Draw(object dc, IEllipseShape ellipse, double dx, double dy, object db, object r)
         {
             var _dc = dc as WM.DrawingContext;
 
@@ -667,7 +710,7 @@ namespace Core2D.Renderer.Wpf
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, IArcShape arc, double dx, double dy, object db, object r)
+        public void Draw(object dc, IArcShape arc, double dx, double dy, object db, object r)
         {
             var _dc = dc as WM.DrawingContext;
 
@@ -686,7 +729,7 @@ namespace Core2D.Renderer.Wpf
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, ICubicBezierShape cubicBezier, double dx, double dy, object db, object r)
+        public void Draw(object dc, ICubicBezierShape cubicBezier, double dx, double dy, object db, object r)
         {
             var _dc = dc as WM.DrawingContext;
 
@@ -705,7 +748,7 @@ namespace Core2D.Renderer.Wpf
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, IQuadraticBezierShape quadraticBezier, double dx, double dy, object db, object r)
+        public void Draw(object dc, IQuadraticBezierShape quadraticBezier, double dx, double dy, object db, object r)
         {
             var _dc = dc as WM.DrawingContext;
 
@@ -724,7 +767,7 @@ namespace Core2D.Renderer.Wpf
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, ITextShape text, double dx, double dy, object db, object r)
+        public void Draw(object dc, ITextShape text, double dx, double dy, object db, object r)
         {
             var _dc = dc as WM.DrawingContext;
 
@@ -810,7 +853,7 @@ namespace Core2D.Renderer.Wpf
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, IImageShape image, double dx, double dy, object db, object r)
+        public void Draw(object dc, IImageShape image, double dx, double dy, object db, object r)
         {
             if (image.Key == null)
                 return;
@@ -873,7 +916,7 @@ namespace Core2D.Renderer.Wpf
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, IPathShape path, double dx, double dy, object db, object r)
+        public void Draw(object dc, IPathShape path, double dx, double dy, object db, object r)
         {
             if (path.Geometry == null)
                 return;
@@ -897,7 +940,7 @@ namespace Core2D.Renderer.Wpf
             }
             else
             {
-                sg = path.Geometry.ToStreamGeometry(dx, dy);
+                sg = _converter.ToStreamGeometry(path.Geometry, dx, dy);
 
                 // TODO: Enable PathShape caching, cache is disabled to enable PathHelper to work.
                 //_pathCache.Set(path, (path.Geometry, sg, style));
@@ -905,5 +948,11 @@ namespace Core2D.Renderer.Wpf
                 _dc.DrawGeometry(path.IsFilled ? fill : null, path.IsStroked ? stroke : null, sg);
             }
         }
+
+        /// <summary>
+        /// Check whether the <see cref="State"/> property has changed from its default value.
+        /// </summary>
+        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
+        public bool ShouldSerializeState() => _state != null;
     }
 }

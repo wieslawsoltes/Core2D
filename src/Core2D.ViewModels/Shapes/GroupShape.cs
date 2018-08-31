@@ -36,15 +36,6 @@ namespace Core2D.Shapes
             }
         }
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="GroupShape"/> class.
-        /// </summary>
-        public GroupShape()
-            : base()
-        {
-            _shapes = ImmutableArray.Create<IBaseShape>();
-        }
-
         private ImmutableArray<IProperty> GetShapeProperties()
         {
             if (_shapesProperties == null)
@@ -137,6 +128,6 @@ namespace Core2D.Shapes
         /// Check whether the <see cref="Shapes"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeShapes() => _shapes.IsEmpty == false;
+        public virtual bool ShouldSerializeShapes() => true;
     }
 }

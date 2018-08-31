@@ -57,15 +57,6 @@ namespace Core2D.Path
             set => Update(ref _isClosed, value);
         }
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="PathFigure"/> class.
-        /// </summary>
-        public PathFigure()
-        {
-            StartPoint = Factory.CreatePointShape();
-            Segments = ImmutableArray.Create<IPathSegment>();
-        }
-
         /// <inheritdoc/>
         public IEnumerable<IPointShape> GetPoints()
         {
@@ -122,7 +113,7 @@ namespace Core2D.Path
         /// Check whether the <see cref="Segments"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeSegments() => _segments.IsEmpty == false;
+        public virtual bool ShouldSerializeSegments() => true;
 
         /// <summary>
         /// Check whether the <see cref="IsFilled"/> property has changed from its default value.

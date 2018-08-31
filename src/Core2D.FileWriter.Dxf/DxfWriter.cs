@@ -1,5 +1,6 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using System;
 using Core2D.Containers;
 using Core2D.Interfaces;
 using Core2D.Renderer;
@@ -13,6 +14,17 @@ namespace Core2D.FileWriter.Dxf
     /// </summary>
     public sealed class DxfWriter : IFileWriter
     {
+        private readonly IServiceProvider _serviceProvider;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DxfWriter"/> class.
+        /// </summary>
+        /// <param name="serviceProvider">The service provider.</param>
+        public DxfWriter(IServiceProvider serviceProvider)
+        {
+            _serviceProvider = serviceProvider;
+        }
+
         /// <inheritdoc/>
         string IFileWriter.Name { get; } = "Dxf (netDxf)";
 
@@ -29,9 +41,9 @@ namespace Core2D.FileWriter.Dxf
             if (options == null)
                 return;
 
-            IProjectExporter exporter = new DxfRenderer();
+            IProjectExporter exporter = new DxfRenderer(_serviceProvider);
 
-            IShapeRenderer renderer = (DxfRenderer)exporter;
+            IShapeRenderer renderer = (IShapeRenderer)exporter;
             renderer.State.DrawShapeState.Flags = ShapeStateFlags.Printable;
             renderer.State.ImageCache = ic;
 

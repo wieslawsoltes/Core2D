@@ -3,7 +3,9 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using Core2D.Containers;
 using Core2D.Data;
+using Core2D.Interfaces;
 using Core2D.Shapes;
 using Core2D.Style;
 using PdfSharp.Drawing;
@@ -14,20 +16,33 @@ namespace Core2D.Renderer.PdfSharp
     /// <summary>
     /// Native PdfSharp shape renderer.
     /// </summary>
-    public partial class PdfSharpRenderer : ShapeRenderer
+    public partial class PdfSharpRenderer : ObservableObject, IShapeRenderer
     {
-        private ICache<string, XImage> _biCache = Factory.CreateCache<string, XImage>(bi => bi.Dispose());
+        private readonly IServiceProvider _serviceProvider;
+        private IShapeRendererState _state;
+        private ICache<string, XImage> _biCache;
         private Func<double, double> _scaleToPage;
         private double _sourceDpi = 96.0;
         private double _targetDpi = 72.0;
 
+        /// <inheritdoc/>
+        public IShapeRendererState State
+        {
+            get => _state;
+            set => Update(ref _state, value);
+        }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="PdfSharpRenderer"/> class.
         /// </summary>
-        public PdfSharpRenderer()
+        /// <param name="serviceProvider">The service provider.</param>
+        public PdfSharpRenderer(IServiceProvider serviceProvider)
         {
-            ClearCache(isZooming: false);
+            _serviceProvider = serviceProvider;
+            _state = _serviceProvider.GetService<IFactory>().CreateShapeRendererState();
+            _biCache = _serviceProvider.GetService<IFactory>().CreateCache<string, XImage>(bi => bi.Dispose());
             _scaleToPage = (value) => (float)(value * 1.0);
+            ClearCache(isZooming: false);
         }
 
         /// <inheritdoc/>
@@ -35,12 +50,6 @@ namespace Core2D.Renderer.PdfSharp
         {
             throw new NotImplementedException();
         }
-
-        /// <summary>
-        /// Creates a new <see cref="PdfSharpRenderer"/> instance.
-        /// </summary>
-        /// <returns>The new instance of the <see cref="PdfSharpRenderer"/> class.</returns>
-        public static IShapeRenderer Create() => new PdfSharpRenderer();
 
         private static XColor ToXColor(IColor color)
         {
@@ -275,7 +284,7 @@ namespace Core2D.Renderer.PdfSharp
         }
 
         /// <inheritdoc/>
-        public override void ClearCache(bool isZooming)
+        public void ClearCache(bool isZooming)
         {
             if (!isZooming)
             {
@@ -284,7 +293,7 @@ namespace Core2D.Renderer.PdfSharp
         }
 
         /// <inheritdoc/>
-        public override void Fill(object dc, double x, double y, double width, double height, IColor color)
+        public void Fill(object dc, double x, double y, double width, double height, IColor color)
         {
             var _gfx = dc as XGraphics;
             _gfx.DrawRectangle(
@@ -296,7 +305,7 @@ namespace Core2D.Renderer.PdfSharp
         }
 
         /// <inheritdoc/>
-        public override object PushMatrix(object dc, IMatrixObject matrix)
+        public object PushMatrix(object dc, IMatrixObject matrix)
         {
             var _gfx = dc as XGraphics;
             var state = _gfx.Save();
@@ -305,7 +314,7 @@ namespace Core2D.Renderer.PdfSharp
         }
 
         /// <inheritdoc/>
-        public override void PopMatrix(object dc, object state)
+        public void PopMatrix(object dc, object state)
         {
             var _gfx = dc as XGraphics;
             var _state = state as XGraphicsState;
@@ -313,7 +322,31 @@ namespace Core2D.Renderer.PdfSharp
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, ILineShape line, double dx, double dy, object db, object r)
+        public void Draw(object dc, IPageContainer container, double dx, double dy, object db, object r)
+        {
+            foreach (var layer in container.Layers)
+            {
+                if (layer.IsVisible)
+                {
+                    Draw(dc, layer, dx, dy, db, r);
+                }
+            }
+        }
+
+        /// <inheritdoc/>
+        public void Draw(object dc, ILayerContainer layer, double dx, double dy, object db, object r)
+        {
+            foreach (var shape in layer.Shapes)
+            {
+                if (shape.State.Flags.HasFlag(State.DrawShapeState.Flags))
+                {
+                    shape.Draw(dc, this, dx, dy, db, r);
+                }
+            }
+        }
+
+        /// <inheritdoc/>
+        public void Draw(object dc, ILineShape line, double dx, double dy, object db, object r)
         {
             if (!line.IsStroked)
                 return;
@@ -341,7 +374,7 @@ namespace Core2D.Renderer.PdfSharp
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, IRectangleShape rectangle, double dx, double dy, object db, object r)
+        public void Draw(object dc, IRectangleShape rectangle, double dx, double dy, object db, object r)
         {
             var _gfx = dc as XGraphics;
 
@@ -394,7 +427,7 @@ namespace Core2D.Renderer.PdfSharp
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, IEllipseShape ellipse, double dx, double dy, object db, object r)
+        public void Draw(object dc, IEllipseShape ellipse, double dx, double dy, object db, object r)
         {
             var _gfx = dc as XGraphics;
 
@@ -436,7 +469,7 @@ namespace Core2D.Renderer.PdfSharp
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, IArcShape arc, double dx, double dy, object db, object r)
+        public void Draw(object dc, IArcShape arc, double dx, double dy, object db, object r)
         {
             var _gfx = dc as XGraphics;
 
@@ -489,7 +522,7 @@ namespace Core2D.Renderer.PdfSharp
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, ICubicBezierShape cubicBezier, double dx, double dy, object db, object r)
+        public void Draw(object dc, ICubicBezierShape cubicBezier, double dx, double dy, object db, object r)
         {
             var _gfx = dc as XGraphics;
 
@@ -539,7 +572,7 @@ namespace Core2D.Renderer.PdfSharp
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, IQuadraticBezierShape quadraticBezier, double dx, double dy, object db, object r)
+        public void Draw(object dc, IQuadraticBezierShape quadraticBezier, double dx, double dy, object db, object r)
         {
             var _gfx = dc as XGraphics;
 
@@ -598,7 +631,7 @@ namespace Core2D.Renderer.PdfSharp
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, ITextShape text, double dx, double dy, object db, object r)
+        public void Draw(object dc, ITextShape text, double dx, double dy, object db, object r)
         {
             var _gfx = dc as XGraphics;
 
@@ -689,7 +722,7 @@ namespace Core2D.Renderer.PdfSharp
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, IImageShape image, double dx, double dy, object db, object r)
+        public void Draw(object dc, IImageShape image, double dx, double dy, object db, object r)
         {
             var _gfx = dc as XGraphics;
 
@@ -749,7 +782,7 @@ namespace Core2D.Renderer.PdfSharp
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, IPathShape path, double dx, double dy, object db, object r)
+        public void Draw(object dc, IPathShape path, double dx, double dy, object db, object r)
         {
             var _gfx = dc as XGraphics;
 
@@ -775,5 +808,11 @@ namespace Core2D.Renderer.PdfSharp
                     gp);
             }
         }
+
+        /// <summary>
+        /// Check whether the <see cref="State"/> property has changed from its default value.
+        /// </summary>
+        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
+        public bool ShouldSerializeState() => _state != null;
     }
 }

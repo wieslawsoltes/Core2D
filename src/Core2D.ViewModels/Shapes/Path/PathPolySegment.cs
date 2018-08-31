@@ -24,11 +24,6 @@ namespace Core2D.Path
             set => Update(ref _points, value);
         }
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="PathPolySegment"/> class.
-        /// </summary>
-        public PathPolySegment() : base() => Points = ImmutableArray.Create<IPointShape>();
-
         /// <inheritdoc/>
         public override IEnumerable<IPointShape> GetPoints() => Points;
 
@@ -60,6 +55,6 @@ namespace Core2D.Path
         /// Check whether the <see cref="Points"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializePoints() => _points.IsEmpty == false;
+        public virtual bool ShouldSerializePoints() => true;
     }
 }

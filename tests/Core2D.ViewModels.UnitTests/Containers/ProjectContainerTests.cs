@@ -2,6 +2,7 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using Core2D.Containers;
 using Core2D.Data;
+using Core2D.Interfaces;
 using Core2D.Shapes;
 using Core2D.Style;
 using Xunit;
@@ -10,11 +11,13 @@ namespace Core2D.UnitTests
 {
     public class ProjectContainerTests
     {
+        private readonly IFactory _factory = new Factory();
+
         [Fact]
         [Trait("Core2D.Containers", "Project")]
         public void Inherits_From_Selectable()
         {
-            var target = new ProjectContainer();
+            var target = _factory.CreateProjectContainer();
             Assert.True(target is IObservableObject);
         }
 
@@ -22,7 +25,7 @@ namespace Core2D.UnitTests
         [Trait("Core2D.Containers", "Project")]
         public void Options_Not_Null()
         {
-            var target = new ProjectContainer();
+            var target = _factory.CreateProjectContainer();
             Assert.NotNull(target.Options);
         }
 
@@ -30,7 +33,7 @@ namespace Core2D.UnitTests
         [Trait("Core2D.Containers", "Project")]
         public void StyleLibraries_Not_Null()
         {
-            var target = new ProjectContainer();
+            var target = _factory.CreateProjectContainer();
             Assert.False(target.StyleLibraries.IsDefault);
         }
 
@@ -38,7 +41,7 @@ namespace Core2D.UnitTests
         [Trait("Core2D.Containers", "Project")]
         public void GroupLibraries_Not_Null()
         {
-            var target = new ProjectContainer();
+            var target = _factory.CreateProjectContainer();
             Assert.False(target.GroupLibraries.IsDefault);
         }
 
@@ -46,7 +49,7 @@ namespace Core2D.UnitTests
         [Trait("Core2D.Containers", "Project")]
         public void Databases_Not_Null()
         {
-            var target = new ProjectContainer();
+            var target = _factory.CreateProjectContainer();
             Assert.False(target.Databases.IsDefault);
         }
 
@@ -54,7 +57,7 @@ namespace Core2D.UnitTests
         [Trait("Core2D.Containers", "Project")]
         public void Templates_Not_Null()
         {
-            var target = new ProjectContainer();
+            var target = _factory.CreateProjectContainer();
             Assert.False(target.Templates.IsDefault);
         }
 
@@ -62,7 +65,7 @@ namespace Core2D.UnitTests
         [Trait("Core2D.Containers", "Project")]
         public void Documents_Not_Null()
         {
-            var target = new ProjectContainer();
+            var target = _factory.CreateProjectContainer();
             Assert.False(target.Documents.IsDefault);
         }
 
@@ -70,9 +73,9 @@ namespace Core2D.UnitTests
         [Trait("Core2D.Containers", "Project")]
         public void SetCurrentDocument_Sets_CurrentDocument()
         {
-            var target = new ProjectContainer();
+            var target = _factory.CreateProjectContainer();
 
-            var document = Factory.CreateDocumentContainer();
+            var document = _factory.CreateDocumentContainer();
             target.Documents = target.Documents.Add(document);
 
             target.SetCurrentDocument(document);
@@ -84,12 +87,12 @@ namespace Core2D.UnitTests
         [Trait("Core2D.Containers", "Project")]
         public void SetCurrentContainer_Sets_CurrentContainer_And_Selected()
         {
-            var target = new ProjectContainer();
+            var target = _factory.CreateProjectContainer();
 
-            var document = Factory.CreateDocumentContainer();
+            var document = _factory.CreateDocumentContainer();
             target.Documents = target.Documents.Add(document);
 
-            var page = Factory.CreatePageContainer();
+            var page = _factory.CreatePageContainer();
             document.Pages = document.Pages.Add(page);
 
             target.SetCurrentContainer(page);
@@ -102,9 +105,9 @@ namespace Core2D.UnitTests
         [Trait("Core2D.Containers", "Project")]
         public void SetCurrentTemplate_Sets_CurrentTemplate()
         {
-            var target = new ProjectContainer();
+            var target = _factory.CreateProjectContainer();
 
-            var template = Factory.CreateTemplateContainer();
+            var template = _factory.CreateTemplateContainer();
             target.Templates = target.Templates.Add(template);
 
             target.SetCurrentTemplate(template);
@@ -116,9 +119,9 @@ namespace Core2D.UnitTests
         [Trait("Core2D.Containers", "Project")]
         public void SetCurrentDatabase_Sets_CurrentDatabase()
         {
-            var target = new ProjectContainer();
+            var target = _factory.CreateProjectContainer();
 
-            var db = Factory.CreateDatabase("Db");
+            var db = _factory.CreateDatabase("Db");
             target.Databases = target.Databases.Add(db);
 
             target.SetCurrentDatabase(db);
@@ -130,9 +133,9 @@ namespace Core2D.UnitTests
         [Trait("Core2D.Containers", "Project")]
         public void SetCurrentGroupLibrary_Sets_CurrentGroupLibrary()
         {
-            var target = new ProjectContainer();
+            var target = _factory.CreateProjectContainer();
 
-            var library = Factory.CreateLibrary<IGroupShape>("Library1");
+            var library = _factory.CreateLibrary<IGroupShape>("Library1");
             target.GroupLibraries = target.GroupLibraries.Add(library);
 
             target.SetCurrentGroupLibrary(library);
@@ -144,9 +147,9 @@ namespace Core2D.UnitTests
         [Trait("Core2D.Containers", "Project")]
         public void SetCurrentStyleLibrary_Sets_CurrentStyleLibrary()
         {
-            var target = new ProjectContainer();
+            var target = _factory.CreateProjectContainer();
 
-            var library = Factory.CreateLibrary<IShapeStyle>("Library1");
+            var library = _factory.CreateLibrary<IShapeStyle>("Library1");
             target.StyleLibraries = target.StyleLibraries.Add(library);
 
             target.SetCurrentStyleLibrary(library);
@@ -158,10 +161,10 @@ namespace Core2D.UnitTests
         [Trait("Core2D.Containers", "Project")]
         public void SetSelected_Layer()
         {
-            var target = new ProjectContainer();
+            var target = _factory.CreateProjectContainer();
 
-            var page = new PageContainer();
-            var layer = Factory.CreateLayerContainer("Layer1", page);
+            var page = _factory.CreatePageContainer();
+            var layer = _factory.CreateLayerContainer("Layer1", page);
 
             target.SetSelected(layer);
 
@@ -172,15 +175,15 @@ namespace Core2D.UnitTests
         [Trait("Core2D.Containers", "Project")]
         public void SetSelected_Container()
         {
-            var target = new ProjectContainer();
+            var target = _factory.CreateProjectContainer();
 
-            var document = Factory.CreateDocumentContainer();
+            var document = _factory.CreateDocumentContainer();
             target.Documents = target.Documents.Add(document);
 
-            var page = Factory.CreatePageContainer();
+            var page = _factory.CreatePageContainer();
             document.Pages = document.Pages.Add(page);
 
-            var layer = Factory.CreateLayerContainer("Layer1", page);
+            var layer = _factory.CreateLayerContainer("Layer1", page);
             page.Layers = page.Layers.Add(layer);
 
             bool raised = false;
@@ -201,9 +204,9 @@ namespace Core2D.UnitTests
         [Trait("Core2D.Containers", "Project")]
         public void SetSelected_Document()
         {
-            var target = new ProjectContainer();
+            var target = _factory.CreateProjectContainer();
 
-            var document = Factory.CreateDocumentContainer();
+            var document = _factory.CreateDocumentContainer();
             target.Documents = target.Documents.Add(document);
 
             target.SetSelected(document);
@@ -215,9 +218,9 @@ namespace Core2D.UnitTests
         [Trait("Core2D.Containers", "Project")]
         public void Setting_Selected_Should_Call_SetSelected()
         {
-            var target = new ProjectContainer();
+            var target = _factory.CreateProjectContainer();
 
-            var document = Factory.CreateDocumentContainer();
+            var document = _factory.CreateDocumentContainer();
             target.Documents = target.Documents.Add(document);
 
             target.Selected = document;

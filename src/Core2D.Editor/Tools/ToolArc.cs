@@ -1,14 +1,15 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
+using System.Collections.Generic;
 using Core2D.Editor.Input;
 using Core2D.Editor.Tools.Selection;
 using Core2D.Editor.Tools.Settings;
-using Spatial.Arc;
-using Spatial;
+using Core2D.Interfaces;
 using Core2D.Shapes;
 using Core2D.Style;
-using System.Collections.Generic;
+using Spatial.Arc;
+using Spatial;
 
 namespace Core2D.Editor.Tools
 {
@@ -58,6 +59,7 @@ namespace Core2D.Editor.Tools
         public override void LeftDown(InputArgs args)
         {
             base.LeftDown(args);
+            var factory = _serviceProvider.GetService<IFactory>();
             var editor = _serviceProvider.GetService<ProjectEditor>();
             (double sx, double sy) = editor.TryToSnap(args);
             switch (_currentState)
@@ -67,7 +69,7 @@ namespace Core2D.Editor.Tools
                         var style = editor.Project.CurrentStyleLibrary.Selected;
                         _connectedPoint3 = false;
                         _connectedPoint4 = false;
-                        _arc = Factory.CreateArcShape(
+                        _arc = factory.CreateArcShape(
                             sx, sy,
                             editor.Project.Options.CloneStyle ? style.Clone() : style,
                             editor.Project.Options.PointShape,
@@ -261,6 +263,7 @@ namespace Core2D.Editor.Tools
         {
             var editor = _serviceProvider.GetService<ProjectEditor>();
             _selection = new ToolArcSelection(
+                _serviceProvider,
                 editor.Project.CurrentContainer.HelperLayer,
                 _arc,
                 editor.Project.Options.HelperStyle,

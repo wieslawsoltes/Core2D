@@ -1,19 +1,23 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using System.Collections.Immutable;
+using System.Linq;
+using Core2D.Interfaces;
 using Core2D.Path.Segments;
 using Core2D.Shapes;
-using System.Linq;
 using Xunit;
 
 namespace Core2D.UnitTests
 {
     public class PolyCubicBezierSegmentTests
     {
+        private readonly IFactory _factory = new Factory();
+
         [Fact]
         [Trait("Core2D.Path", "Segments")]
         public void Points_Not_Null()
         {
-            var target = new PolyCubicBezierSegment();
+            var target = _factory.CreatePolyCubicBezierSegment(ImmutableArray.Create<IPointShape>(), true, true);
             Assert.False(target.Points.IsDefault);
         }
 
@@ -21,12 +25,13 @@ namespace Core2D.UnitTests
         [Trait("Core2D.Path", "Segments")]
         public void GetPoints_Should_Return_All_Segment_Points()
         {
-            var segment = new PolyCubicBezierSegment();
-            segment.Points = segment.Points.Add(new PointShape());
-            segment.Points = segment.Points.Add(new PointShape());
-            segment.Points = segment.Points.Add(new PointShape());
-            segment.Points = segment.Points.Add(new PointShape());
-            segment.Points = segment.Points.Add(new PointShape());
+            var segment = _factory.CreatePolyCubicBezierSegment(ImmutableArray.Create<IPointShape>(), true, true);
+
+            segment.Points = segment.Points.Add(_factory.CreatePointShape());
+            segment.Points = segment.Points.Add(_factory.CreatePointShape());
+            segment.Points = segment.Points.Add(_factory.CreatePointShape());
+            segment.Points = segment.Points.Add(_factory.CreatePointShape());
+            segment.Points = segment.Points.Add(_factory.CreatePointShape());
 
             var target = segment.GetPoints();
             var count = target.Count();
@@ -40,12 +45,13 @@ namespace Core2D.UnitTests
         [Trait("Core2D.Path", "Segments")]
         public void ToString_Should_Return_Path_Markup()
         {
-            var target = new PolyCubicBezierSegment();
-            target.Points = target.Points.Add(new PointShape());
-            target.Points = target.Points.Add(new PointShape());
-            target.Points = target.Points.Add(new PointShape());
-            target.Points = target.Points.Add(new PointShape());
-            target.Points = target.Points.Add(new PointShape());
+            var target = _factory.CreatePolyCubicBezierSegment(ImmutableArray.Create<IPointShape>(), true, true);
+
+            target.Points = target.Points.Add(_factory.CreatePointShape());
+            target.Points = target.Points.Add(_factory.CreatePointShape());
+            target.Points = target.Points.Add(_factory.CreatePointShape());
+            target.Points = target.Points.Add(_factory.CreatePointShape());
+            target.Points = target.Points.Add(_factory.CreatePointShape());
 
             var actual = target.ToString();
 

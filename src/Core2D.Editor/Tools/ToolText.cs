@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using Core2D.Editor.Input;
 using Core2D.Editor.Tools.Selection;
 using Core2D.Editor.Tools.Settings;
+using Core2D.Interfaces;
 using Core2D.Shapes;
 using Core2D.Style;
 
@@ -54,6 +55,7 @@ namespace Core2D.Editor.Tools
         public override void LeftDown(InputArgs args)
         {
             base.LeftDown(args);
+            var factory = _serviceProvider.GetService<IFactory>();
             var editor = _serviceProvider.GetService<ProjectEditor>();
             (double sx, double sy) = editor.TryToSnap(args);
             switch (_currentState)
@@ -61,7 +63,7 @@ namespace Core2D.Editor.Tools
                 case State.TopLeft:
                     {
                         var style = editor.Project.CurrentStyleLibrary.Selected;
-                        _text = Factory.CreateTextShape(
+                        _text = factory.CreateTextShape(
                             sx, sy,
                             editor.Project.Options.CloneStyle ? style.Clone() : style,
                             editor.Project.Options.PointShape,
@@ -167,6 +169,7 @@ namespace Core2D.Editor.Tools
         {
             var editor = _serviceProvider.GetService<ProjectEditor>();
             _selection = new ToolTextSelection(
+                _serviceProvider,
                 editor.Project.CurrentContainer.HelperLayer,
                 _text,
                 editor.Project.Options.HelperStyle,

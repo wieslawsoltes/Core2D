@@ -73,17 +73,6 @@ namespace Core2D.Shapes
             set => Update(ref _data, value);
         }
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="BaseShape"/> class.
-        /// </summary>
-        public BaseShape()
-            : base()
-        {
-            State = Factory.CreateShapeState(ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone);
-            Transform = Factory.CreateMatrixObject();
-            Data = Factory.CreateContext();
-        }
-
         /// <inheritdoc/>
         public virtual object BeginTransform(object dc, IShapeRenderer renderer)
         {

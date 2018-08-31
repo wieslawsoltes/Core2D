@@ -1,6 +1,8 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using System;
 using Core2D.Containers;
+using Core2D.Interfaces;
 using Core2D.Shapes;
 using Core2D.Style;
 
@@ -11,6 +13,7 @@ namespace Core2D.Editor.Tools.Selection
     /// </summary>
     public class ToolTextSelection
     {
+        private readonly IServiceProvider _serviceProvider;
         private readonly ILayerContainer _layer;
         private readonly ITextShape _text;
         private readonly IShapeStyle _style;
@@ -22,12 +25,14 @@ namespace Core2D.Editor.Tools.Selection
         /// <summary>
         /// Initialize new instance of <see cref="ToolTextSelection"/> class.
         /// </summary>
+        /// <param name="serviceProvider">The service provider.</param>
         /// <param name="layer">The selection shapes layer.</param>
         /// <param name="shape">The selected shape.</param>
         /// <param name="style">The selection shapes style.</param>
         /// <param name="point">The selection point shape.</param>
-        public ToolTextSelection(ILayerContainer layer, ITextShape shape, IShapeStyle style, IBaseShape point)
+        public ToolTextSelection(IServiceProvider serviceProvider, ILayerContainer layer, ITextShape shape, IShapeStyle style, IBaseShape point)
         {
+            _serviceProvider = serviceProvider;
             _layer = layer;
             _text = shape;
             _style = style;
@@ -39,9 +44,9 @@ namespace Core2D.Editor.Tools.Selection
         /// </summary>
         public void ToStateBottomRight()
         {
-            _helperRectangle = Factory.CreateRectangleShape(0, 0, _style, null);
-            _topLeftHelperPoint = Factory.CreatePointShape(0, 0, _point);
-            _bottomRightHelperPoint = Factory.CreatePointShape(0, 0, _point);
+            _helperRectangle = _serviceProvider.GetService<IFactory>().CreateRectangleShape(0, 0, _style, null);
+            _topLeftHelperPoint = _serviceProvider.GetService<IFactory>().CreatePointShape(0, 0, _point);
+            _bottomRightHelperPoint = _serviceProvider.GetService<IFactory>().CreatePointShape(0, 0, _point);
 
             _layer.Shapes = _layer.Shapes.Add(_helperRectangle);
             _layer.Shapes = _layer.Shapes.Add(_topLeftHelperPoint);

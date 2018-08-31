@@ -1,5 +1,6 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using System;
 using Core2D.Containers;
 using Core2D.Interfaces;
 using Core2D.Renderer;
@@ -14,6 +15,17 @@ namespace Core2D.FileWriter.SkiaSharpPdf
     /// </summary>
     public sealed class PdfSkiaSharpWriter : IFileWriter
     {
+        private readonly IServiceProvider _serviceProvider;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="PdfSkiaSharpWriter"/> class.
+        /// </summary>
+        /// <param name="serviceProvider">The service provider.</param>
+        public PdfSkiaSharpWriter(IServiceProvider serviceProvider)
+        {
+            _serviceProvider = serviceProvider;
+        }
+
         /// <inheritdoc/>
         string IFileWriter.Name { get; } = "Pdf (SkiaSharp)";
 
@@ -30,7 +42,7 @@ namespace Core2D.FileWriter.SkiaSharpPdf
             if (options == null)
                 return;
 
-            IShapeRenderer renderer = new SkiaSharpRenderer(true, 72.0);
+            IShapeRenderer renderer = new SkiaSharpRenderer(_serviceProvider, true, 72.0);
             renderer.State.DrawShapeState.Flags = ShapeStateFlags.Printable;
             renderer.State.ImageCache = ic;
 

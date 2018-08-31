@@ -12,6 +12,8 @@ namespace Core2D.Log.Trace
     /// </summary>
     public sealed class TraceLog : ILog
     {
+        private readonly IServiceProvider _serviceProvider;
+
         private const string InformationPrefix = "Information: ";
         private const string WarningPrefix = "Warning: ";
         private const string ErrorPrefix = "Error: ";
@@ -19,6 +21,15 @@ namespace Core2D.Log.Trace
         private string _lastMessage;
         private SD.TraceListener _listener;
         private System.IO.Stream _stream;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TraceLog"/> class.
+        /// </summary>
+        /// <param name="serviceProvider">The service provider.</param>
+        public TraceLog(IServiceProvider serviceProvider)
+        {
+            _serviceProvider = serviceProvider;
+        }
 
         /// <inheritdoc/>
         string ILog.LastMessage

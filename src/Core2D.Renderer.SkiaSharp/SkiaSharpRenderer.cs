@@ -3,7 +3,9 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using Core2D.Containers;
 using Core2D.Data;
+using Core2D.Interfaces;
 using Core2D.Shapes;
 using Core2D.Style;
 using SkiaSharp;
@@ -15,25 +17,38 @@ namespace Core2D.Renderer.SkiaSharp
     /// <summary>
     /// Native SkiaSharp shape renderer.
     /// </summary>
-    public class SkiaSharpRenderer : ShapeRenderer
+    public class SkiaSharpRenderer : ObservableObject, IShapeRenderer
     {
+        private readonly IServiceProvider _serviceProvider;
+        private IShapeRendererState _state;
         private bool _isAntialias = true;
-        private ICache<string, SKBitmap> _biCache = Factory.CreateCache<string, SKBitmap>(bi => bi.Dispose());
+        private ICache<string, SKBitmap> _biCache;
         private readonly Func<double, float> _scaleToPage;
         private readonly double _sourceDpi = 96.0;
         private readonly double _targetDpi = 72.0;
 
+        /// <inheritdoc/>
+        public IShapeRendererState State
+        {
+            get => _state;
+            set => Update(ref _state, value);
+        }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="SkiaSharpRenderer"/> class.
         /// </summary>
+        /// <param name="serviceProvider">The service provider.</param>
         /// <param name="isAntialias">The flag indicating whether paint is antialiased.</param>
         /// <param name="targetDpi">The target renderer dpi.</param>
-        public SkiaSharpRenderer(bool isAntialias = true, double targetDpi = 72.0)
+        public SkiaSharpRenderer(IServiceProvider serviceProvider, bool isAntialias = true, double targetDpi = 72.0)
         {
-            ClearCache(isZooming: false);
+            _serviceProvider = serviceProvider;
+            _state = _serviceProvider.GetService<IFactory>().CreateShapeRendererState();
+            _biCache = _serviceProvider.GetService<IFactory>().CreateCache<string, SKBitmap>(bi => bi.Dispose());
             _isAntialias = isAntialias;
             _scaleToPage = (value) => (float)(value * 1.0);
             _targetDpi = targetDpi;
+            ClearCache(isZooming: false);
         }
 
         /// <inheritdoc/>
@@ -41,12 +56,6 @@ namespace Core2D.Renderer.SkiaSharp
         {
             throw new NotImplementedException();
         }
-
-        /// <summary>
-        /// Creates a new <see cref="SkiaSharpRenderer"/> instance.
-        /// </summary>
-        /// <returns>The new instance of the <see cref="SkiaSharpRenderer"/> class.</returns>
-        public static IShapeRenderer Create() => new SkiaSharpRenderer();
 
         private SKPoint GetTextOrigin(IShapeStyle style, ref SKRect rect, ref SKRect size)
         {
@@ -368,7 +377,7 @@ namespace Core2D.Renderer.SkiaSharp
         }
 
         /// <inheritdoc/>
-        public override void ClearCache(bool isZooming)
+        public void ClearCache(bool isZooming)
         {
             if (!isZooming)
             {
@@ -377,7 +386,7 @@ namespace Core2D.Renderer.SkiaSharp
         }
 
         /// <inheritdoc/>
-        public override void Fill(object dc, double x, double y, double width, double height, IColor color)
+        public void Fill(object dc, double x, double y, double width, double height, IColor color)
         {
             var canvas = dc as SKCanvas;
             var rect = SKRect.Create((float)x, (float)y, (float)width, (float)height);
@@ -388,7 +397,7 @@ namespace Core2D.Renderer.SkiaSharp
         }
 
         /// <inheritdoc/>
-        public override object PushMatrix(object dc, IMatrixObject matrix)
+        public object PushMatrix(object dc, IMatrixObject matrix)
         {
             var canvas = dc as SKCanvas;
             int count = canvas.Save();
@@ -397,7 +406,7 @@ namespace Core2D.Renderer.SkiaSharp
         }
 
         /// <inheritdoc/>
-        public override void PopMatrix(object dc, object state)
+        public void PopMatrix(object dc, object state)
         {
             var canvas = dc as SKCanvas;
             var count = (int)state;
@@ -405,7 +414,31 @@ namespace Core2D.Renderer.SkiaSharp
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, ILineShape line, double dx, double dy, object db, object r)
+        public void Draw(object dc, IPageContainer container, double dx, double dy, object db, object r)
+        {
+            foreach (var layer in container.Layers)
+            {
+                if (layer.IsVisible)
+                {
+                    Draw(dc, layer, dx, dy, db, r);
+                }
+            }
+        }
+
+        /// <inheritdoc/>
+        public void Draw(object dc, ILayerContainer layer, double dx, double dy, object db, object r)
+        {
+            foreach (var shape in layer.Shapes)
+            {
+                if (shape.State.Flags.HasFlag(State.DrawShapeState.Flags))
+                {
+                    shape.Draw(dc, this, dx, dy, db, r);
+                }
+            }
+        }
+
+        /// <inheritdoc/>
+        public void Draw(object dc, ILineShape line, double dx, double dy, object db, object r)
         {
             var canvas = dc as SKCanvas;
 
@@ -432,7 +465,7 @@ namespace Core2D.Renderer.SkiaSharp
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, IRectangleShape rectangle, double dx, double dy, object db, object r)
+        public void Draw(object dc, IRectangleShape rectangle, double dx, double dy, object db, object r)
         {
             var canvas = dc as SKCanvas;
 
@@ -457,7 +490,7 @@ namespace Core2D.Renderer.SkiaSharp
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, IEllipseShape ellipse, double dx, double dy, object db, object r)
+        public void Draw(object dc, IEllipseShape ellipse, double dx, double dy, object db, object r)
         {
             var canvas = dc as SKCanvas;
 
@@ -470,7 +503,7 @@ namespace Core2D.Renderer.SkiaSharp
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, IArcShape arc, double dx, double dy, object db, object r)
+        public void Draw(object dc, IArcShape arc, double dx, double dy, object db, object r)
         {
             var canvas = dc as SKCanvas;
 
@@ -494,7 +527,7 @@ namespace Core2D.Renderer.SkiaSharp
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, ICubicBezierShape cubicBezier, double dx, double dy, object db, object r)
+        public void Draw(object dc, ICubicBezierShape cubicBezier, double dx, double dy, object db, object r)
         {
             var canvas = dc as SKCanvas;
 
@@ -517,7 +550,7 @@ namespace Core2D.Renderer.SkiaSharp
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, IQuadraticBezierShape quadraticBezier, double dx, double dy, object db, object r)
+        public void Draw(object dc, IQuadraticBezierShape quadraticBezier, double dx, double dy, object db, object r)
         {
             var canvas = dc as SKCanvas;
 
@@ -538,7 +571,7 @@ namespace Core2D.Renderer.SkiaSharp
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, ITextShape text, double dx, double dy, object db, object r)
+        public void Draw(object dc, ITextShape text, double dx, double dy, object db, object r)
         {
             var canvas = dc as SKCanvas;
 
@@ -591,7 +624,7 @@ namespace Core2D.Renderer.SkiaSharp
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, IImageShape image, double dx, double dy, object db, object r)
+        public void Draw(object dc, IImageShape image, double dx, double dy, object db, object r)
         {
             var canvas = dc as SKCanvas;
 
@@ -629,7 +662,7 @@ namespace Core2D.Renderer.SkiaSharp
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, IPathShape path, double dx, double dy, object db, object r)
+        public void Draw(object dc, IPathShape path, double dx, double dy, object db, object r)
         {
             var canvas = dc as SKCanvas;
 
@@ -640,5 +673,11 @@ namespace Core2D.Renderer.SkiaSharp
                 DrawPathInternal(canvas, brush, pen, path.IsStroked, path.IsFilled, spath);
             }
         }
+
+        /// <summary>
+        /// Check whether the <see cref="State"/> property has changed from its default value.
+        /// </summary>
+        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
+        public bool ShouldSerializeState() => _state != null;
     }
 }
