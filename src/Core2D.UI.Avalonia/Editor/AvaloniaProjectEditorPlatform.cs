@@ -8,6 +8,7 @@ using Core2D.Containers;
 using Core2D.Data;
 using Core2D.Editor;
 using Core2D.Interfaces;
+using Core2D.Renderer;
 
 #if NET461
 using Core2D.FileWriter.Emf;
@@ -337,7 +338,7 @@ namespace Core2D.UI.Avalonia.Editor
                         page.Template.Height,
                         page.Data.Properties,
                         page.Data.Record,
-                        editor.Project);
+                        editor.Project as IImageCache);
                 }
                 else if (editor.Renderers?[0]?.State?.SelectedShapes != null)
                 {
@@ -349,12 +350,12 @@ namespace Core2D.UI.Avalonia.Editor
                         page.Template.Height,
                         page.Data.Properties,
                         page.Data.Record,
-                        editor.Project);
+                        editor.Project as IImageCache);
                 }
                 else
                 {
                     var writer = new EmfWriter(_serviceProvider);
-                    writer.SetClipboard(page, editor.Project);
+                    writer.SetClipboard(page, editor.Project as IImageCache);
                 }
             }
 #else
