@@ -9,4 +9,5 @@ steps:
 - script: 'dotnet --info'
 - script: 'dotnet tool install -g Cake.Tool --version 0.30.0'
 - script: 'set PATH=%PATH%;%USERPROFILE%\.dotnet\tools'
+- script: 'PATH'
 - script: 'dotnet cake build.cake -Target="Build" -Platform="$(buildPlatform)" -Configuration="$(buildConfiguration)"'
