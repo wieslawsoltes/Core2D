@@ -1,8 +1,28 @@
-pool:
-  vmImage: 'Hosted VS2017'
-steps:
-- script: |
-    dotnet --info
-    dotnet tool install -g Cake.Tool --version 0.30.0
-    set PATH=%PATH%;%USERPROFILE%\.dotnet\tools
-    dotnet cake build.cake -Target="Build" -Platform="Any CPU" -Configuration="Release"
+jobs:
+- job: Linux
+  pool:
+    vmImage: 'ubuntu-16.04'
+  steps:
+  - script: |
+      dotnet --info
+      dotnet tool install -g Cake.Tool --version 0.30.0
+      export PATH="$PATH:$HOME/.dotnet/tools"
+      dotnet cake build.cake -Target="Build" -Platform="Any CPU" -Configuration="Release"
+- job: macOS
+  pool:
+    vmImage: 'xcode9-macos10.13'
+  steps:
+  - script: |
+      dotnet --info
+      dotnet tool install -g Cake.Tool --version 0.30.0
+      export PATH="$PATH:$HOME/.dotnet/tools"
+      dotnet cake build.cake -Target="Build" -Platform="Any CPU" -Configuration="Release"
+- job: Windows
+  pool:
+    vmImage: 'vs2017-win2017'
+  steps:
+  - script: |
+      dotnet --info
+      dotnet tool install -g Cake.Tool --version 0.30.0
+      set PATH=%PATH%;%USERPROFILE%\.dotnet\tools
+      dotnet cake build.cake -Target="Build" -Platform="Any CPU" -Configuration="Release"
