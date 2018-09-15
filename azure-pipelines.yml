@@ -7,6 +7,8 @@ jobs:
       dotnet --info
       dotnet tool install -g Cake.Tool --version 0.30.0
       export PATH="$PATH:$HOME/.dotnet/tools"
+      which dotnet
+      export COREHOST_TRACE=1
       dotnet cake build.cake -Target="Test" -Platform="Any CPU" -Configuration="Release"
 - job: macOS
   pool:
