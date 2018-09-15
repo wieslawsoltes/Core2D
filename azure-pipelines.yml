@@ -16,6 +16,7 @@ jobs:
       dotnet --info
       dotnet tool install -g Cake.Tool --version 0.30.0
       export PATH="$PATH:$HOME/.dotnet/tools"
+      export PATH="$PATH:/usr/local/share/dotnet"
       dotnet cake build.cake -Target="Test" -Platform="Any CPU" -Configuration="Release"
 - job: Windows
   pool:
