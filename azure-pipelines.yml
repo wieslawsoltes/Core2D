@@ -1,5 +1,5 @@
 pool:
-  vmImage: 'VS2017-Win2016'
+  vmImage: 'Hosted VS2017'
 
 variables:
   buildPlatform: 'Any CPU'
