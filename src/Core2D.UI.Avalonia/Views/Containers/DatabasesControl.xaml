@@ -12,7 +12,7 @@
     <Grid RowDefinitions="Auto,Auto,*">
         <Menu Grid.Row="0" HorizontalAlignment="Right">
             <MenuItem Header="+" Command="{Binding $parent[Window].DataContext.OnAddDatabase}"/>
-            <MenuItem Header="X" Command="{Binding $parent[Window].DataContext.OnRemoveDatabase}" CommandParameter="{Binding CurrentDatabase}" IsVisible="{Binding !!CurrentDatabase}"/>
+            <MenuItem Header="&#727;" Command="{Binding $parent[Window].DataContext.OnRemoveDatabase}" CommandParameter="{Binding CurrentDatabase}" IsVisible="{Binding !!CurrentDatabase}"/>
         </Menu>
         <DropDown Items="{Binding Databases}" SelectedItem="{Binding CurrentDatabase, Mode=TwoWay}" Grid.Row="1" Classes="default" IsVisible="{Binding !!CurrentDatabase}">
             <DropDown.DataTemplates>

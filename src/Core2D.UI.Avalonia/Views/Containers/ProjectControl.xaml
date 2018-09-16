@@ -22,7 +22,7 @@
             <TextBox Text="{Binding Name, Mode=TwoWay}" Classes="left" Grid.Column="0"/>
             <Menu Grid.Column="1" HorizontalAlignment="Right">
                 <MenuItem Header="+" Command="{Binding $parent[Window].DataContext.OnNew}" CommandParameter="{Binding Selected}"/>
-                <MenuItem Header="X" Command="{Binding $parent[Window].DataContext.OnDelete}" CommandParameter="{Binding Selected}" IsVisible="{Binding !!Selected}"/>
+                <MenuItem Header="&#727;" Command="{Binding $parent[Window].DataContext.OnDelete}" CommandParameter="{Binding Selected}" IsVisible="{Binding !!Selected}"/>
             </Menu>
         </Grid>
         <TreeView x:Name="documents" Items="{Binding Documents}" SelectedItem="{Binding Selected, Mode=TwoWay}" Grid.Row="1" Classes="default">

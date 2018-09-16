@@ -19,14 +19,14 @@
             <ControlTemplate x:Key="GroupLibrariesMenu">
                 <Menu Background="Transparent" HorizontalAlignment="Right">
                     <MenuItem Command="{x:Static editor:ProjectEditorCommands.AddGroupLibraryCommand}" Header="+"/>
-                    <MenuItem Command="{x:Static editor:ProjectEditorCommands.RemoveGroupLibraryCommand}" CommandParameter="{Binding CurrentGroupLibrary}" Header="X"/>
+                    <MenuItem Command="{x:Static editor:ProjectEditorCommands.RemoveGroupLibraryCommand}" CommandParameter="{Binding CurrentGroupLibrary}" Header="&#727;"/>
                 </Menu>
             </ControlTemplate>
             <ControlTemplate x:Key="GroupsMenu">
                 <Menu Background="Transparent" HorizontalAlignment="Right">
                     <MenuItem Header="insert" Command="{x:Static editor:ProjectEditorCommands.InsertGroupCommand}" CommandParameter="{Binding CurrentGroupLibrary.Selected}"/>
                     <MenuItem Command="{x:Static editor:ProjectEditorCommands.AddGroupCommand}" CommandParameter="{Binding CurrentGroupLibrary}" Header="+"/>
-                    <MenuItem Command="{x:Static editor:ProjectEditorCommands.RemoveGroupCommand}" CommandParameter="{Binding CurrentGroupLibrary.Selected}" Header="X"/>
+                    <MenuItem Command="{x:Static editor:ProjectEditorCommands.RemoveGroupCommand}" CommandParameter="{Binding CurrentGroupLibrary.Selected}" Header="&#727;"/>
                 </Menu>
             </ControlTemplate>
         </Grid.Resources>

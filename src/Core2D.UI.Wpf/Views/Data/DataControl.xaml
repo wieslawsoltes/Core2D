@@ -20,7 +20,7 @@
                 <Grid.Resources>
                     <ControlTemplate x:Key="RecordMenuControlTemplateKey">
                         <Menu Background="Transparent" HorizontalAlignment="Right">
-                            <MenuItem Command="{x:Static editor:ProjectEditorCommands.ResetRecordCommand}" CommandParameter="{Binding}" Header="X"/>
+                            <MenuItem Command="{x:Static editor:ProjectEditorCommands.ResetRecordCommand}" CommandParameter="{Binding}" Header="&#727;"/>
                         </Menu>
                     </ControlTemplate>
                 </Grid.Resources>

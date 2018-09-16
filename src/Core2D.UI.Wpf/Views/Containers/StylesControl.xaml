@@ -19,14 +19,14 @@
             <ControlTemplate x:Key="StyleLibrariesMenu">
                 <Menu Background="Transparent" HorizontalAlignment="Right">
                     <MenuItem Command="{x:Static editor:ProjectEditorCommands.AddStyleLibraryCommand}" Header="+"/>
-                    <MenuItem Command="{x:Static editor:ProjectEditorCommands.RemoveStyleLibraryCommand}" CommandParameter="{Binding CurrentStyleLibrary}" Header="X"/>
+                    <MenuItem Command="{x:Static editor:ProjectEditorCommands.RemoveStyleLibraryCommand}" CommandParameter="{Binding CurrentStyleLibrary}" Header="&#727;"/>
                 </Menu>
             </ControlTemplate>
             <ControlTemplate x:Key="StylesMenu">
                 <Menu Background="Transparent" HorizontalAlignment="Right">
                     <MenuItem Header="apply" Command="{x:Static editor:ProjectEditorCommands.ApplyStyleCommand}" CommandParameter="{Binding CurrentStyleLibrary.Selected}"/>
                     <MenuItem Command="{x:Static editor:ProjectEditorCommands.AddStyleCommand}" CommandParameter="{Binding CurrentStyleLibrary}" Header="+"/>
-                    <MenuItem Command="{x:Static editor:ProjectEditorCommands.RemoveStyleCommand}" CommandParameter="{Binding CurrentStyleLibrary.Selected}" Header="X"/>
+                    <MenuItem Command="{x:Static editor:ProjectEditorCommands.RemoveStyleCommand}" CommandParameter="{Binding CurrentStyleLibrary.Selected}" Header="&#727;"/>
                 </Menu>
             </ControlTemplate>
         </Grid.Resources>

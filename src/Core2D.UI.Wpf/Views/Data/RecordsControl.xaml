@@ -19,12 +19,12 @@
                 <Menu Background="Transparent" HorizontalAlignment="Right">
                     <MenuItem Header="apply" Command="{x:Static editor:ProjectEditorCommands.ApplyRecordCommand}" CommandParameter="{Binding CurrentRecord}"/>
                     <MenuItem Command="{x:Static editor:ProjectEditorCommands.AddRecordCommand}" CommandParameter="{Binding}" Header="+"/>
-                    <MenuItem Command="{x:Static editor:ProjectEditorCommands.RemoveRecordCommand}" CommandParameter="{Binding CurrentRecord}" Header="X"/>
+                    <MenuItem Command="{x:Static editor:ProjectEditorCommands.RemoveRecordCommand}" CommandParameter="{Binding CurrentRecord}" Header="&#727;"/>
                 </Menu>
             </ControlTemplate>
             <ControlTemplate x:Key="ColumnsMenuControlTemplateKey">
                 <Menu Background="Transparent" HorizontalAlignment="Right">
-                    <MenuItem Command="{x:Static editor:ProjectEditorCommands.RemoveColumnCommand}" CommandParameter="{Binding ElementName=columns, Path=SelectedItem}" Header="X"/>
+                    <MenuItem Command="{x:Static editor:ProjectEditorCommands.RemoveColumnCommand}" CommandParameter="{Binding ElementName=columns, Path=SelectedItem}" Header="&#727;"/>
                     <MenuItem Command="{x:Static editor:ProjectEditorCommands.AddColumnCommand}" CommandParameter="{Binding}" Header="+"/>
                 </Menu>
             </ControlTemplate>

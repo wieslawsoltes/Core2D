@@ -19,7 +19,7 @@
             <ControlTemplate x:Key="LayersMenu">
                 <Menu Background="Transparent" HorizontalAlignment="Right">
                     <MenuItem Command="{x:Static editor:ProjectEditorCommands.AddLayerCommand}" CommandParameter="{Binding}" Header="+"/>
-                    <MenuItem Command="{x:Static editor:ProjectEditorCommands.RemoveLayerCommand}" CommandParameter="{Binding CurrentLayer}" Header="X"/>
+                    <MenuItem Command="{x:Static editor:ProjectEditorCommands.RemoveLayerCommand}" CommandParameter="{Binding CurrentLayer}" Header="&#727;"/>
                 </Menu>
             </ControlTemplate>
         </Grid.Resources>
