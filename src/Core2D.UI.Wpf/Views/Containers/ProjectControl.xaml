@@ -20,7 +20,7 @@
             <ControlTemplate x:Key="ProjectMenu">
                 <Menu Background="Transparent" HorizontalAlignment="Right">
                     <MenuItem Command="{x:Static editor:ProjectEditorCommands.NewCommand}" CommandParameter="{Binding Path=SelectedItem, ElementName=projectTreeView}" Header="+"/>
-                    <MenuItem Command="{x:Static editor:ProjectEditorCommands.DeleteCommand}" CommandParameter="{Binding Path=SelectedItem, ElementName=projectTreeView}" Header="-"/>
+                    <MenuItem Command="{x:Static editor:ProjectEditorCommands.DeleteCommand}" CommandParameter="{Binding Path=SelectedItem, ElementName=projectTreeView}" Header="X"/>
                 </Menu>
             </ControlTemplate>
             <ContextMenu x:Key="LayerContextMenuKey" DataContext="{Binding PlacementTarget.DataContext, RelativeSource={RelativeSource Self}}">

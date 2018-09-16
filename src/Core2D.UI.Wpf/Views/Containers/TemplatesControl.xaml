@@ -21,7 +21,7 @@
                     <MenuItem Header="apply" Command="{x:Static editor:ProjectEditorCommands.ApplyTemplateCommand}" CommandParameter="{Binding CurrentTemplate}"/>
                     <MenuItem Command="{x:Static editor:ProjectEditorCommands.EditTemplateCommand}" CommandParameter="{Binding CurrentTemplate}" Header="edit"/>
                     <MenuItem Command="{x:Static editor:ProjectEditorCommands.AddTemplateCommand}" Header="+"/>
-                    <MenuItem Command="{x:Static editor:ProjectEditorCommands.RemoveTemplateCommand}" CommandParameter="{Binding CurrentTemplate}" Header="-"/>
+                    <MenuItem Command="{x:Static editor:ProjectEditorCommands.RemoveTemplateCommand}" CommandParameter="{Binding CurrentTemplate}" Header="X"/>
                 </Menu>
             </ControlTemplate>
         </Grid.Resources>

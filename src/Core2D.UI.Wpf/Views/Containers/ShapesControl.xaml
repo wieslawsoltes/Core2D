@@ -18,7 +18,7 @@
         <Grid.Resources>
             <ControlTemplate x:Key="ShapesMenu">
                 <Menu Background="Transparent" HorizontalAlignment="Right">
-                    <MenuItem Command="{x:Static editor:ProjectEditorCommands.RemoveShapeCommand}" CommandParameter="{Binding CurrentShape}" Header="-"/>
+                    <MenuItem Command="{x:Static editor:ProjectEditorCommands.RemoveShapeCommand}" CommandParameter="{Binding CurrentShape}" Header="X"/>
                 </Menu>
             </ControlTemplate>
         </Grid.Resources>

@@ -17,7 +17,7 @@
             <Grid RowDefinitions="Auto,*,Auto">
                 <Menu Grid.Row="0" HorizontalAlignment="Right">
                     <MenuItem Header="+" Command="{Binding $parent[Window].DataContext.OnAddLayer}" CommandParameter="{Binding}"/>
-                    <MenuItem Header="-" Command="{Binding $parent[Window].DataContext.OnRemoveLayer}" CommandParameter="{Binding CurrentLayer}" IsVisible="{Binding !!CurrentLayer}"/>
+                    <MenuItem Header="X" Command="{Binding $parent[Window].DataContext.OnRemoveLayer}" CommandParameter="{Binding CurrentLayer}" IsVisible="{Binding !!CurrentLayer}"/>
                 </Menu>
                 <ListBox x:Name="layers" Items="{Binding Layers}" SelectedItem="{Binding CurrentLayer, Mode=TwoWay}" Classes="default" Grid.Row="1">
                     <ListBox.KeyBindings>

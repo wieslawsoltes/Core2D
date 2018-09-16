@@ -18,7 +18,7 @@
             <ControlTemplate x:Key="DatabasesMenu">
                 <Menu Background="Transparent" HorizontalAlignment="Right">
                     <MenuItem Command="{x:Static editor:ProjectEditorCommands.AddDatabaseCommand}" Header="+"/>
-                    <MenuItem Command="{x:Static editor:ProjectEditorCommands.RemoveDatabaseCommand}" CommandParameter="{Binding CurrentDatabase}" Header="-"/>
+                    <MenuItem Command="{x:Static editor:ProjectEditorCommands.RemoveDatabaseCommand}" CommandParameter="{Binding CurrentDatabase}" Header="X"/>
                 </Menu>
             </ControlTemplate>
         </Grid.Resources>
