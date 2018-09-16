@@ -75,10 +75,7 @@ namespace Core2D.Renderer.Dxf
                     PlotSettings = new DXFO.PlotSettings()
                     {
                         PaperSizeName = $"{page.Template.Name}_({page.Template.Width}_x_{page.Template.Height}_MM)",
-                        LeftMargin = 0.0,
-                        BottomMargin = 0.0,
-                        RightMargin = 0.0,
-                        TopMargin = 0.0,
+                        PaperMargin = new DXFO.PaperMargin(0, 0, 0, 0),
                         PaperSize = new DXF.Vector2(page.Template.Width, page.Template.Height),
                         Origin = new DXF.Vector2(0.0, 0.0),
                         PaperUnits = DXFO.PlotPaperUnits.Milimeters,
