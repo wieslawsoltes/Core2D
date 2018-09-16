@@ -33,6 +33,9 @@
   <PropertyGroup Condition="$(Platform.Contains('AnyCPU'))">
     <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
+  <PropertyGroup Condition="$(Platform.Contains('.NET Core'))">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'"/>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'"/>
   <PropertyGroup Condition="'$(OS)' == 'Windows_NT'">
