@@ -13,7 +13,7 @@
              xmlns:views="clr-namespace:Core2D.UI.Avalonia.Views;assembly=Core2D.UI.Avalonia"
              Design.DataContext="{x:Static Designer:DesignerContext.Editor}"
              Design.Width="1200" Design.Height="540">
-    <Grid renderer:RendererOptions.Renderer="{Binding Renderers[1]}">
+    <Grid Classes="container" renderer:RendererOptions.Renderer="{Binding Renderers[1]}">
         <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
             <Carousel Items="{Binding Project.Documents}" SelectedItem="{Binding Project.CurrentDocument}" IsVirtualized="False" VerticalAlignment="Center" Margin="2">
                 <Carousel.DataTemplates>
