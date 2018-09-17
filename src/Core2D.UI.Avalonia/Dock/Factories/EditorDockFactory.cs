@@ -83,6 +83,12 @@ namespace Core2D.UI.Avalonia.Dock.Factories
                 Title = "Browser"
             };
 
+            var documentTool = new DocumentTool
+            {
+                Id = nameof(DocumentTool),
+                Title = "Document"
+            };
+
             var stylesTool = new StylesTool
             {
                 Id = nameof(StylesTool),
@@ -175,9 +181,7 @@ namespace Core2D.UI.Avalonia.Dock.Factories
                         Views = new ObservableCollection<IView>
                         {
                             groupsTool,
-                            databasesTool,
-                            scriptTool,
-                            browserTool
+                            databasesTool
                         }
                     }
                 }
@@ -237,7 +241,10 @@ namespace Core2D.UI.Avalonia.Dock.Factories
                 CurrentView = pageDocument,
                 Views = new ObservableCollection<IView>
                 {
-                    pageDocument
+                    pageDocument,
+                    documentTool,
+                    scriptTool,
+                    browserTool
                 }
             };
 
@@ -352,6 +359,7 @@ namespace Core2D.UI.Avalonia.Dock.Factories
                 // Tools
                 [nameof(ScriptTool)] = () => _serviceProvider.GetService<ProjectEditor>(),
                 [nameof(BrowserTool)] = () => _serviceProvider.GetService<ProjectEditor>(),
+                [nameof(DocumentTool)] = () => _serviceProvider.GetService<ProjectEditor>(),
                 [nameof(ProjectTool)] = () => _serviceProvider.GetService<ProjectEditor>(),
                 [nameof(OptionsTool)] = () => _serviceProvider.GetService<ProjectEditor>(),
                 [nameof(ImagesTool)] = () => _serviceProvider.GetService<ProjectEditor>(),

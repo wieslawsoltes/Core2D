@@ -819,6 +819,9 @@
         <DataTemplate DataType="Tools:BrowserTool">
             <views:BrowserControl DataContext="{Binding Context}"/>
         </DataTemplate>
+        <DataTemplate DataType="Tools:DocumentTool">
+            <views:DocumentControl DataContext="{Binding Context}"/>
+        </DataTemplate>
         <DataTemplate DataType="Tools:ProjectTool">
             <containers:ProjectControl DataContext="{Binding Context.Project}"/>
         </DataTemplate>
