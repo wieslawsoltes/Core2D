@@ -3,12 +3,15 @@ jobs:
   pool:
     vmImage: 'ubuntu-16.04'
   steps:
+  - task: DotNetCoreInstaller@0
+    inputs:
+      version: '2.1.401'
   - script: |
       dotnet --info
       dotnet tool install -g Cake.Tool --version 0.30.0
       export PATH="$PATH:$HOME/.dotnet/tools"
-      which dotnet
-      export COREHOST_TRACE=1
+#      which dotnet
+#      export COREHOST_TRACE=1
       dotnet cake build.cake -Target="Test" -Platform="Any CPU" -Configuration="Release"
 - job: macOS
   pool:
@@ -21,15 +24,20 @@ jobs:
       dotnet --info
       dotnet tool install -g Cake.Tool --version 0.30.0
       export PATH="$PATH:$HOME/.dotnet/tools"
-      which dotnet
-      export COREHOST_TRACE=1
+#      which dotnet
+#      export COREHOST_TRACE=1
       dotnet cake build.cake -Target="Test" -Platform="Any CPU" -Configuration="Release"
 - job: Windows
   pool:
     vmImage: 'vs2017-win2017'
   steps:
+  - task: DotNetCoreInstaller@0
+    inputs:
+      version: '2.1.401'
   - script: |
       dotnet --info
       dotnet tool install -g Cake.Tool --version 0.30.0
       set PATH=%PATH%;%USERPROFILE%\.dotnet\tools
+#      where dotnet
+#      set COREHOST_TRACE=1
       dotnet cake build.cake -Target="Test" -Platform="Any CPU" -Configuration="Release"
