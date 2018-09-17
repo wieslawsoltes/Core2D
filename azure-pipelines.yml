@@ -14,6 +14,9 @@ jobs:
   pool:
     vmImage: 'xcode9-macos10.13'
   steps:
+  - task: DotNetCoreInstaller@0
+    inputs:
+      version: '2.1.401'
   - script: |
       dotnet --info
       dotnet tool install -g Cake.Tool --version 0.30.0
