@@ -10,6 +10,8 @@
 [![NuGet](https://img.shields.io/nuget/v/Core2D.Model.svg)](https://www.nuget.org/packages/Core2D.Model)
 [![MyGet](https://img.shields.io/myget/core2d-nightly/vpre/Core2D.Model.svg?label=myget)](https://www.myget.org/gallery/core2d-nightly) 
 
+[![BuitlWithDot.Net shield](https://builtwithdot.net/project/116/core2d/badge)](https://builtwithdot.net/project/116/core2d)
+
 A multi-platform data driven 2D diagram editor.
 
 ## About
