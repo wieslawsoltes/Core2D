@@ -9,6 +9,7 @@ using Core2D.Data;
 using Core2D.Editor;
 using Core2D.Interfaces;
 using Core2D.Renderer;
+using Dock.Model;
 
 #if NET461
 using Core2D.FileWriter.Emf;
@@ -463,21 +464,46 @@ namespace Core2D.UI.Avalonia.Editor
         }
 
         /// <inheritdoc/>
-        public void OnLoadLayout()
+        public async void OnLoadLayout()
         {
-            _serviceProvider.GetService<ProjectEditor>().LayoutPlatform?.LoadLayout?.Invoke();
+            var dlg = new OpenFileDialog() { Title = "Open" };
+            dlg.Filters.Add(new FileDialogFilter() { Name = "Layout", Extensions = { "layout" } });
+            dlg.Filters.Add(new FileDialogFilter() { Name = "All", Extensions = { "*" } });
+            var window = _serviceProvider.GetService<MainWindow>();
+            var result = await dlg.ShowAsync(window);
+            if (result != null)
+            {
+                var editor = _serviceProvider.GetService<ProjectEditor>();
+                editor.OnLoadLayout(result.FirstOrDefault());
+
+                var dockFactory = _serviceProvider.GetService<IDockFactory>();
+                dockFactory.InitLayout(editor.Layout);
+            }
         }
 
         /// <inheritdoc/>
-        public void OnSaveLayout()
+        public async void OnSaveLayout()
         {
-            _serviceProvider.GetService<ProjectEditor>().LayoutPlatform?.SaveLayout?.Invoke();
+            var dlg = new SaveFileDialog() { Title = "Save" };
+            dlg.Filters.Add(new FileDialogFilter() { Name = "Layout", Extensions = { "layout" } });
+            dlg.Filters.Add(new FileDialogFilter() { Name = "All", Extensions = { "*" } });
+            dlg.InitialFileName = "Core2D";
+            dlg.DefaultExtension = "layout";
+            var result = await dlg.ShowAsync(_serviceProvider.GetService<MainWindow>());
+            if (result != null)
+            {
+                var editor = _serviceProvider.GetService<ProjectEditor>();
+                editor.OnSaveLayout(result);
+            }
         }
 
         /// <inheritdoc/>
         public void OnResetLayout()
         {
-            _serviceProvider.GetService<ProjectEditor>().LayoutPlatform?.ResetLayout?.Invoke();
+            var editor = _serviceProvider.GetService<ProjectEditor>();
+            var dockFactory = _serviceProvider.GetService<IDockFactory>();
+            editor.Layout = dockFactory.CreateLayout();
+            dockFactory.InitLayout(editor.Layout);
         }
     }
 }

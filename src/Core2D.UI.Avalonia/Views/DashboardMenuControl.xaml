@@ -67,6 +67,13 @@
                 </MenuItem.Styles>
             </MenuItem>
         </MenuItem>
+        <MenuItem Header="_Window">
+            <MenuItem Header="_Load Layout..." Command="{Binding LayoutPlatform.LoadLayout}"/>
+            <Separator/>
+            <MenuItem Header="_Save Layout..." Command="{Binding LayoutPlatform.SaveLayout}"/>
+            <Separator/>
+            <MenuItem Header="_Reset Layout" Command="{Binding LayoutPlatform.ResetLayout}"/>
+        </MenuItem>
         <MenuItem Header="_Debug">
             <MenuItem Header="Draw_DirtyRects" Click="DebugDrawDirtyRects_Click">
                 <MenuItem.Icon>

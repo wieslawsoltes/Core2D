@@ -114,6 +114,10 @@ namespace Core2D.UI.Avalonia
             {
                 var editor = serviceProvider.GetService<ProjectEditor>();
 
+                editor.LayoutPlatform.LoadLayout = () => editor.Platform.OnLoadLayout();
+                editor.LayoutPlatform.SaveLayout = () => editor.Platform.OnSaveLayout();
+                editor.LayoutPlatform.ResetLayout = () => editor.Platform.OnResetLayout();
+
                 var layoutPath = System.IO.Path.Combine(fileIO.GetBaseDirectory(), "Core2D.layout");
                 if (fileIO.Exists(layoutPath))
                 {
