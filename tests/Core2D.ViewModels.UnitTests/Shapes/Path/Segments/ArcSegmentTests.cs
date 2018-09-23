@@ -3,8 +3,6 @@
 using System.Linq;
 using Core2D.Interfaces;
 using Core2D.Path;
-using Core2D.Path.Segments;
-using Core2D.Shapes;
 using Xunit;
 
 namespace Core2D.UnitTests

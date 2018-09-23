@@ -12,7 +12,6 @@ using Core2D.Editor.History;
 using Core2D.Editor.Input;
 using Core2D.Editor.Recent;
 using Core2D.Editor.Tools;
-using Core2D.History;
 using Core2D.Interfaces;
 using Core2D.Renderer;
 using Core2D.Shapes;

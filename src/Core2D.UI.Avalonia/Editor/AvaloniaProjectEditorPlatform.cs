@@ -8,7 +8,6 @@ using Core2D.Containers;
 using Core2D.Data;
 using Core2D.Editor;
 using Core2D.Interfaces;
-using Core2D.Renderer;
 using Dock.Model;
 
 #if NET461

@@ -6,7 +6,6 @@ using Core2D.Interfaces;
 using Core2D.Renderer;
 using Core2D.Renderer.Presenters;
 using Core2D.Renderer.SkiaSharp;
-using Core2D.Shapes;
 
 namespace Core2D.FileWriter.SkiaSharpSvg
 {

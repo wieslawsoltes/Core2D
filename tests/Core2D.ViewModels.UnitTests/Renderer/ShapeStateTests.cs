@@ -2,7 +2,6 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using Core2D.Common;
 using Core2D.Interfaces;
-using Core2D.Renderer;
 using Xunit;
 
 namespace Core2D.Renderer.UnitTests

@@ -3,7 +3,6 @@
 using System;
 using System.Collections.Generic;
 using Core2D.Interfaces;
-using Core2D.Style;
 using Xunit;
 
 namespace Core2D.Style.UnitTests

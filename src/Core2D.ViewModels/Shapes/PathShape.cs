@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Core2D.Path;
 using Core2D.Renderer;
-using Core2D.Style;
 
 namespace Core2D.Shapes
 {

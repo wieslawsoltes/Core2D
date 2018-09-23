@@ -4,8 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.IO;
-using System.IO.Compression;
-using System.Linq;
 using Core2D.Containers;
 using Core2D.Data;
 using Core2D.Path;

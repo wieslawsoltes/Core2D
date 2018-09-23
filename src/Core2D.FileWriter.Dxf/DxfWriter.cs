@@ -5,7 +5,6 @@ using Core2D.Containers;
 using Core2D.Interfaces;
 using Core2D.Renderer;
 using Core2D.Renderer.Dxf;
-using Core2D.Shapes;
 
 namespace Core2D.FileWriter.Dxf
 {

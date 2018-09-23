@@ -3,7 +3,6 @@
 using System;
 using System.Collections.Generic;
 using Core2D.Editor.Tools.Settings;
-using Core2D.Interfaces;
 
 namespace Core2D.Editor.Tools
 {
