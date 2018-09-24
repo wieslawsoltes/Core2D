@@ -2,6 +2,7 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System.Reflection;
 using Autofac;
+using Core2D.Data;
 using Core2D.Editor;
 using Core2D.Editor.Bounds;
 using Core2D.Interfaces;
@@ -24,6 +25,7 @@ namespace Core2D.UI.Avalonia.Modules
             builder.RegisterAssemblyTypes(typeof(PathToolBase).GetTypeInfo().Assembly).As<PathToolBase>().AsSelf().InstancePerLifetimeScope();
             builder.RegisterType<HitTest>().As<HitTest>().InstancePerLifetimeScope();
             builder.RegisterAssemblyTypes(typeof(HitTestBase).GetTypeInfo().Assembly).As<HitTestBase>().AsSelf().InstancePerLifetimeScope();
+            builder.RegisterType<DataFlow>().As<IDataFlow>().InstancePerLifetimeScope();
         }
     }
 }
