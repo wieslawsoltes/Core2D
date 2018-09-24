@@ -1,5 +1,6 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using System.Collections.Immutable;
 using Core2D.Containers;
 using Core2D.Shapes;
 
@@ -61,6 +62,10 @@ namespace Core2D.Data
         /// <inheritdoc/>
         public void Bind(ITextShape text, object db, object r)
         {
+            var properties = (ImmutableArray<IProperty>)db;
+            var record = (IRecord)r;
+            var tbind = text.BindText(properties, record);
+            text.SetProperty(nameof(ITextShape.Text), tbind);
         }
 
         /// <inheritdoc/>

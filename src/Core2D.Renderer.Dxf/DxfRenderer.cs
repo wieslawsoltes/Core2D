@@ -805,10 +805,7 @@ namespace Core2D.Renderer.Dxf
         {
             var dxf = dc as DXF.DxfDocument;
 
-            var properties = (ImmutableArray<IProperty>)db;
-            var record = (IRecord)r;
-            var tbind = text.BindText(properties, record);
-            if (string.IsNullOrEmpty(tbind))
+            if (!(text.GetProperty(nameof(ITextShape.Text)) is string tbind))
                 return;
 
             var style = text.Style;

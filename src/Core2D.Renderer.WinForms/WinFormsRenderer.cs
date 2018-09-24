@@ -644,10 +644,7 @@ namespace Core2D.Renderer.WinForms
         {
             var _gfx = dc as Graphics;
 
-            var properties = (ImmutableArray<IProperty>)db;
-            var record = (IRecord)r;
-            var tbind = text.BindText(properties, record);
-            if (string.IsNullOrEmpty(tbind))
+            if (!(text.GetProperty(nameof(ITextShape.Text)) is string tbind))
                 return;
 
             var brush = ToBrush(text.Style.Stroke);

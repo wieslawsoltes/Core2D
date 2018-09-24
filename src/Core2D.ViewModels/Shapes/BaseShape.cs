@@ -104,6 +104,20 @@ namespace Core2D.Shapes
         /// <inheritdoc/>
         public abstract void Bind(IDataFlow dataFlow, object db, object r);
 
+        private IDictionary<string, object> _properties = new Dictionary<string, object>();
+
+        /// <inheritdoc/>
+        public virtual void SetProperty(string name, object value)
+        {
+            _properties[name] = value;
+        }
+
+        /// <inheritdoc/>
+        public virtual object GetProperty(string name)
+        {
+            return _properties?[name];
+        }
+
         /// <inheritdoc/>
         public abstract void Move(ISet<IBaseShape> selected, double dx, double dy);
 

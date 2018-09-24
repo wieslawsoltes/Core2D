@@ -16,5 +16,19 @@ namespace Core2D
         /// <param name="db">The properties database.</param>
         /// <param name="r">The database record.</param>
         void Bind(IDataFlow dataFlow, object db, object r);
+
+        /// <summary>
+        /// Sets property value.
+        /// </summary>
+        /// <param name="name">The property name.</param>
+        /// <param name="value">The property value.</param>
+        void SetProperty(string name, object value);
+
+        /// <summary>
+        /// Gets property value.
+        /// </summary>
+        /// <param name="name">The property name.</param>
+        /// <returns>The property value.</returns>
+        object GetProperty(string name);
     }
 }

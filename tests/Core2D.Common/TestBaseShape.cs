@@ -63,6 +63,21 @@ namespace Core2D.Common
             throw new NotImplementedException();
         }
 
+        public void Bind(IDataFlow dataFlow, object db, object r)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void SetProperty(string name, object value)
+        {
+            throw new NotImplementedException();
+        }
+
+        public object GetProperty(string name)
+        {
+            throw new NotImplementedException();
+        }
+
         public void MarkAsDirty(bool value)
         {
             throw new NotImplementedException();

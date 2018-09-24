@@ -775,10 +775,7 @@ namespace Core2D.Renderer.Wpf
             if (style == null)
                 return;
 
-            var properties = (ImmutableArray<IProperty>)db;
-            var record = (IRecord)r;
-            var tbind = text.BindText(properties, record);
-            if (string.IsNullOrEmpty(tbind))
+            if (!(text.GetProperty(nameof(ITextShape.Text)) is string tbind))
                 return;
 
             double thickness = style.Thickness / State.ZoomX;

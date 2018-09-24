@@ -666,10 +666,7 @@ namespace Core2D.Renderer.Avalonia
             if (style == null)
                 return;
 
-            var properties = (ImmutableArray<IProperty>)db;
-            var record = (IRecord)r;
-            var tbind = text.BindText(properties, record);
-            if (string.IsNullOrEmpty(tbind))
+            if (!(text.GetProperty(nameof(ITextShape.Text)) is string tbind))
                 return;
 
             GetCached(style, out var fill, out var stroke);

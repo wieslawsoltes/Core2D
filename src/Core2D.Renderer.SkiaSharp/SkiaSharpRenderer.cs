@@ -575,10 +575,7 @@ namespace Core2D.Renderer.SkiaSharp
         {
             var canvas = dc as SKCanvas;
 
-            var properties = (ImmutableArray<IProperty>)db;
-            var record = (IRecord)r;
-            var tbind = text.BindText(properties, record);
-            if (string.IsNullOrEmpty(tbind))
+            if (!(text.GetProperty(nameof(ITextShape.Text)) is string tbind))
                 return;
 
             var style = SKTypefaceStyle.Normal;
