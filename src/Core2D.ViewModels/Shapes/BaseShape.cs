@@ -13,6 +13,7 @@ namespace Core2D.Shapes
     /// </summary>
     public abstract class BaseShape : ObservableObject, IBaseShape
     {
+        private IDictionary<string, object> _properties = new Dictionary<string, object>();
         private IBaseShape _owner;
         private IShapeState _state;
         private IShapeStyle _style;
@@ -103,8 +104,6 @@ namespace Core2D.Shapes
 
         /// <inheritdoc/>
         public abstract void Bind(IDataFlow dataFlow, object db, object r);
-
-        private IDictionary<string, object> _properties = new Dictionary<string, object>();
 
         /// <inheritdoc/>
         public virtual void SetProperty(string name, object value)
