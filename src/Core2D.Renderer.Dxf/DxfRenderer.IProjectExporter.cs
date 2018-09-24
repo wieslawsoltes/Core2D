@@ -52,18 +52,21 @@ namespace Core2D.Renderer.Dxf
 
         private void Add(DXF.DxfDocument dxf, IPageContainer container)
         {
+            var db = (object)container.Data.Properties;
+            var record = (object)container.Data.Record;
+
             if (container.Template != null)
             {
                 _pageWidth = container.Template.Width;
                 _pageHeight = container.Template.Height;
-                Draw(dxf, container.Template, 0.0, 0.0, (object)container.Data.Properties, (object)container.Data.Record);
+                Draw(dxf, container.Template, 0.0, 0.0, db, record);
             }
             else
             {
                 throw new NullReferenceException("Container template must be set.");
             }
 
-            Draw(dxf, container, 0.0, 0.0, (object)container.Data.Properties, (object)container.Data.Record);
+            Draw(dxf, container, 0.0, 0.0, db, record);
         }
 
         private void Add(DXF.DxfDocument dxf, IDocumentContainer document)
