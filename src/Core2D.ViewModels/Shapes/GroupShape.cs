@@ -67,23 +67,34 @@ namespace Core2D.Shapes
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, IShapeRenderer renderer, double dx, double dy, object db, object r)
+        public override void Draw(object dc, IShapeRenderer renderer, double dx, double dy)
         {
             var state = base.BeginTransform(dc, renderer);
-
-            var record = Data?.Record ?? r;
 
             if (State.Flags.HasFlag(ShapeStateFlags.Visible))
             {
                 foreach (var shape in Shapes)
                 {
-                    shape.Draw(dc, renderer, dx, dy, db, record);
+                    shape.Draw(dc, renderer, dx, dy);
                 }
             }
 
-            base.Draw(dc, renderer, dx, dy, db, record);
+            base.Draw(dc, renderer, dx, dy);
 
             base.EndTransform(dc, renderer, state);
+        }
+
+        /// <inheritdoc/>
+        public override void Bind(IDataFlow dataFlow, object db, object r)
+        {
+            var record = Data?.Record ?? r;
+
+            foreach (var shape in Shapes)
+            {
+                shape.Bind(dataFlow, db, record);
+            }
+
+            base.Bind(dataFlow, db, record);
         }
 
         /// <inheritdoc/>

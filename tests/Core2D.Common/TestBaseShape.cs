@@ -43,7 +43,7 @@ namespace Core2D.Common
             throw new NotImplementedException();
         }
 
-        public void Draw(object dc, IShapeRenderer renderer, double dx, double dy, object db, object r)
+        public void Draw(object dc, IShapeRenderer renderer, double dx, double dy)
         {
             throw new NotImplementedException();
         }

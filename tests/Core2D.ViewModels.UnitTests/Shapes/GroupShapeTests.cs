@@ -3,6 +3,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Core2D.Data;
 using Core2D.Interfaces;
 using Core2D.Renderer;
 using Xunit;
@@ -240,7 +241,12 @@ namespace Core2D.Shapes.UnitTests
                 throw new NotImplementedException();
             }
 
-            public override void Draw(object dc, IShapeRenderer renderer, double dx, double dy, object db, object r)
+            public override void Draw(object dc, IShapeRenderer renderer, double dx, double dy)
+            {
+                throw new NotImplementedException();
+            }
+
+            public override void Bind(IDataFlow dataFlow, object db, object r)
             {
                 throw new NotImplementedException();
             }

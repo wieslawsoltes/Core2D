@@ -2,6 +2,7 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
 using System.Collections.Generic;
+using Core2D.Data;
 using Core2D.Renderer;
 
 namespace Core2D.Shapes
@@ -40,31 +41,29 @@ namespace Core2D.Shapes
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, IShapeRenderer renderer, double dx, double dy, object db, object r)
+        public override void Draw(object dc, IShapeRenderer renderer, double dx, double dy)
         {
             var state = base.BeginTransform(dc, renderer);
 
-            var record = Data?.Record ?? r;
-
             if (State.Flags.HasFlag(ShapeStateFlags.Visible))
             {
-                renderer.Draw(dc, this, dx, dy, db, record);
+                renderer.Draw(dc, this, dx, dy);
             }
 
             if (renderer.State.SelectedShape != null)
             {
                 if (this == renderer.State.SelectedShape)
                 {
-                    _topLeft.Draw(dc, renderer, dx, dy, db, record);
-                    _bottomRight.Draw(dc, renderer, dx, dy, db, record);
+                    _topLeft.Draw(dc, renderer, dx, dy);
+                    _bottomRight.Draw(dc, renderer, dx, dy);
                 }
                 else if (_topLeft == renderer.State.SelectedShape)
                 {
-                    _topLeft.Draw(dc, renderer, dx, dy, db, record);
+                    _topLeft.Draw(dc, renderer, dx, dy);
                 }
                 else if (_bottomRight == renderer.State.SelectedShape)
                 {
-                    _bottomRight.Draw(dc, renderer, dx, dy, db, record);
+                    _bottomRight.Draw(dc, renderer, dx, dy);
                 }
             }
 
@@ -72,12 +71,23 @@ namespace Core2D.Shapes
             {
                 if (renderer.State.SelectedShapes.Contains(this))
                 {
-                    _topLeft.Draw(dc, renderer, dx, dy, db, record);
-                    _bottomRight.Draw(dc, renderer, dx, dy, db, record);
+                    _topLeft.Draw(dc, renderer, dx, dy);
+                    _bottomRight.Draw(dc, renderer, dx, dy);
                 }
             }
 
             base.EndTransform(dc, renderer, state);
+        }
+
+        /// <inheritdoc/>
+        public override void Bind(IDataFlow dataFlow, object db, object r)
+        {
+            var record = Data?.Record ?? r;
+
+            dataFlow.Bind(this, db, record);
+
+            _topLeft.Bind(dataFlow, db, record);
+            _bottomRight.Bind(dataFlow, db, record);
         }
 
         /// <inheritdoc/>

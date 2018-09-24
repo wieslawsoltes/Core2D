@@ -609,31 +609,31 @@ namespace Core2D.Renderer.Wpf
         }
 
         /// <inheritdoc/>
-        public void Draw(object dc, IPageContainer container, double dx, double dy, object db, object r)
+        public void Draw(object dc, IPageContainer container, double dx, double dy)
         {
             foreach (var layer in container.Layers)
             {
                 if (layer.IsVisible)
                 {
-                    Draw(dc, layer, dx, dy, db, r);
+                    Draw(dc, layer, dx, dy);
                 }
             }
         }
 
         /// <inheritdoc/>
-        public void Draw(object dc, ILayerContainer layer, double dx, double dy, object db, object r)
+        public void Draw(object dc, ILayerContainer layer, double dx, double dy)
         {
             foreach (var shape in layer.Shapes)
             {
                 if (shape.State.Flags.HasFlag(State.DrawShapeState.Flags))
                 {
-                    shape.Draw(dc, this, dx, dy, db, r);
+                    shape.Draw(dc, this, dx, dy);
                 }
             }
         }
 
         /// <inheritdoc/>
-        public void Draw(object dc, ILineShape line, double dx, double dy, object db, object r)
+        public void Draw(object dc, ILineShape line, double dx, double dy)
         {
             var _dc = dc as WM.DrawingContext;
 
@@ -664,7 +664,7 @@ namespace Core2D.Renderer.Wpf
         }
 
         /// <inheritdoc/>
-        public void Draw(object dc, IRectangleShape rectangle, double dx, double dy, object db, object r)
+        public void Draw(object dc, IRectangleShape rectangle, double dx, double dy)
         {
             var _dc = dc as WM.DrawingContext;
 
@@ -688,7 +688,7 @@ namespace Core2D.Renderer.Wpf
         }
 
         /// <inheritdoc/>
-        public void Draw(object dc, IEllipseShape ellipse, double dx, double dy, object db, object r)
+        public void Draw(object dc, IEllipseShape ellipse, double dx, double dy)
         {
             var _dc = dc as WM.DrawingContext;
 
@@ -710,7 +710,7 @@ namespace Core2D.Renderer.Wpf
         }
 
         /// <inheritdoc/>
-        public void Draw(object dc, IArcShape arc, double dx, double dy, object db, object r)
+        public void Draw(object dc, IArcShape arc, double dx, double dy)
         {
             var _dc = dc as WM.DrawingContext;
 
@@ -729,7 +729,7 @@ namespace Core2D.Renderer.Wpf
         }
 
         /// <inheritdoc/>
-        public void Draw(object dc, ICubicBezierShape cubicBezier, double dx, double dy, object db, object r)
+        public void Draw(object dc, ICubicBezierShape cubicBezier, double dx, double dy)
         {
             var _dc = dc as WM.DrawingContext;
 
@@ -748,7 +748,7 @@ namespace Core2D.Renderer.Wpf
         }
 
         /// <inheritdoc/>
-        public void Draw(object dc, IQuadraticBezierShape quadraticBezier, double dx, double dy, object db, object r)
+        public void Draw(object dc, IQuadraticBezierShape quadraticBezier, double dx, double dy)
         {
             var _dc = dc as WM.DrawingContext;
 
@@ -767,7 +767,7 @@ namespace Core2D.Renderer.Wpf
         }
 
         /// <inheritdoc/>
-        public void Draw(object dc, ITextShape text, double dx, double dy, object db, object r)
+        public void Draw(object dc, ITextShape text, double dx, double dy)
         {
             var _dc = dc as WM.DrawingContext;
 
@@ -853,7 +853,7 @@ namespace Core2D.Renderer.Wpf
         }
 
         /// <inheritdoc/>
-        public void Draw(object dc, IImageShape image, double dx, double dy, object db, object r)
+        public void Draw(object dc, IImageShape image, double dx, double dy)
         {
             if (image.Key == null)
                 return;
@@ -916,7 +916,7 @@ namespace Core2D.Renderer.Wpf
         }
 
         /// <inheritdoc/>
-        public void Draw(object dc, IPathShape path, double dx, double dy, object db, object r)
+        public void Draw(object dc, IPathShape path, double dx, double dy)
         {
             if (path.Geometry == null)
                 return;

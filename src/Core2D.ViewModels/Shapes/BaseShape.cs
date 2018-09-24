@@ -93,13 +93,16 @@ namespace Core2D.Shapes
         }
 
         /// <inheritdoc/>
-        public abstract void Draw(object dc, IShapeRenderer renderer, double dx, double dy, object db, object r);
+        public abstract void Draw(object dc, IShapeRenderer renderer, double dx, double dy);
 
         /// <inheritdoc/>
         public virtual bool Invalidate(IShapeRenderer renderer, double dx, double dy)
         {
             return false;
         }
+
+        /// <inheritdoc/>
+        public abstract void Bind(IDataFlow dataFlow, object db, object r);
 
         /// <inheritdoc/>
         public abstract void Move(ISet<IBaseShape> selected, double dx, double dy);
