@@ -645,7 +645,14 @@ namespace Core2D.Renderer.WinForms
             var _gfx = dc as Graphics;
 
             if (!(text.GetProperty(nameof(ITextShape.Text)) is string tbind))
+            {
+                tbind = text.Text;
+            }
+
+            if (tbind == null)
+            {
                 return;
+            }
 
             var brush = ToBrush(text.Style.Stroke);
 

@@ -667,7 +667,14 @@ namespace Core2D.Renderer.Avalonia
                 return;
 
             if (!(text.GetProperty(nameof(ITextShape.Text)) is string tbind))
+            {
+                tbind = text.Text;
+            }
+
+            if (tbind == null)
+            {
                 return;
+            }
 
             GetCached(style, out var fill, out var stroke);
 

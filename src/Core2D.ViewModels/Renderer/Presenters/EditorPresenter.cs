@@ -12,19 +12,16 @@ namespace Core2D.Renderer.Presenters
         /// <inheritdoc/>
         public void Render(object dc, IShapeRenderer renderer, IPageContainer container, double dx, double dy)
         {
-            var db = container.Data == null ? default : container.Data.Properties;
-            var r = container.Data == null ? default : container.Data.Record;
-
-            renderer.Draw(dc, container, dx, dy, db, r);
+            renderer.Draw(dc, container, dx, dy);
 
             if (container.WorkingLayer != null)
             {
-                renderer.Draw(dc, container.WorkingLayer, dx, dy, db, r);
+                renderer.Draw(dc, container.WorkingLayer, dx, dy);
             }
 
             if (container.HelperLayer != null)
             {
-                renderer.Draw(dc, container.HelperLayer, dx, dy, db, r);
+                renderer.Draw(dc, container.HelperLayer, dx, dy);
             }
         }
     }

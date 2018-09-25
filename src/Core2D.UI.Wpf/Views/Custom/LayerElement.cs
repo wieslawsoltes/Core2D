@@ -85,6 +85,42 @@ namespace Core2D.UI.Wpf.Views.Custom
                     FrameworkPropertyMetadataOptions.AffectsArrange |
                     FrameworkPropertyMetadataOptions.SubPropertiesDoNotAffectRender));
 
+        /// <summary>
+        /// Gets the <see cref="Core2D.Renderer"/> from <see cref="DependencyProperty"/> object.
+        /// </summary>
+        /// <param name="obj">The <see cref="DependencyProperty"/> object.</param>
+        /// <returns>The <see cref="IDataFlow"/> value.</returns>
+        public static IDataFlow GetDataFlow(DependencyObject obj)
+        {
+            return (IDataFlow)obj.GetValue(DataFlowProperty);
+        }
+
+        /// <summary>
+        /// Sets the <see cref="DependencyProperty"/> object value as <see cref="IDataFlow"/>.
+        /// </summary>
+        /// <param name="obj">The <see cref="DependencyProperty"/> object.</param>
+        /// <param name="value">The <see cref="IDataFlow"/> value.</param>
+        public static void SetDataFlow(DependencyObject obj, IDataFlow value)
+        {
+            obj.SetValue(DataFlowProperty, value);
+        }
+
+        /// <summary>
+        /// The attached <see cref="DependencyProperty"/> for <see cref="IDataFlow"/> type.
+        /// </summary>
+        public static readonly DependencyProperty DataFlowProperty =
+            DependencyProperty.RegisterAttached(
+                "DataFlow",
+                typeof(IDataFlow),
+                typeof(LayerElement),
+                new FrameworkPropertyMetadata(
+                    null,
+                    FrameworkPropertyMetadataOptions.Inherits |
+                    FrameworkPropertyMetadataOptions.AffectsRender |
+                    FrameworkPropertyMetadataOptions.AffectsMeasure |
+                    FrameworkPropertyMetadataOptions.AffectsArrange |
+                    FrameworkPropertyMetadataOptions.SubPropertiesDoNotAffectRender));
+
         private bool _isLoaded = false;
         private ILayerContainer _layer = default;
 
@@ -173,12 +209,20 @@ namespace Core2D.UI.Wpf.Views.Custom
             if (DataContext is ILayerContainer layer && layer.IsVisible)
             {
                 var renderer = LayerElement.GetRenderer(this);
+                var data = LayerElement.GetData(this);
+                var dataFlow = LayerElement.GetDataFlow(this);
+
+                if (data != null && dataFlow != null)
+                {
+                    var db = data.Properties;
+                    var record = data.Record;
+
+                    dataFlow.Bind(layer, db, record);
+                }
+
                 if (renderer != null)
                 {
-                    var data = LayerElement.GetData(this);
-                    var properties = data != null ? data.Properties : default;
-                    var record = data != null ? data.Record : default;
-                    renderer.Draw(drawingContext, layer, 0.0, 0.0, properties, record);
+                    renderer.Draw(drawingContext, layer, 0.0, 0.0);
                 }
             }
         }

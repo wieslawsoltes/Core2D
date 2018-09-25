@@ -8,6 +8,7 @@ using Core2D.UI.Avalonia.Renderer;
 using Core2D.Containers;
 using Core2D.Renderer;
 using Core2D.Renderer.Presenters;
+using Core2D.Data;
 
 namespace Core2D.UI.Avalonia.Views
 {
@@ -32,12 +33,18 @@ namespace Core2D.UI.Avalonia.Views
             AvaloniaProperty.Register<ContainerControl, IShapeRenderer>(nameof(Renderer));
 
         /// <summary>
+        /// Gets or sets data flow property.
+        /// </summary>
+        public static readonly AvaloniaProperty<IDataFlow> DataFlowProperty =
+            AvaloniaProperty.Register<ContainerControl, IDataFlow>(nameof(DataFlow));
+
+        /// <summary>
         /// Gets or sets container property.
         /// </summary>
         public IPageContainer Container
         {
-            get { return GetValue(ContainerProperty); }
-            set { SetValue(ContainerProperty, value); }
+            get => GetValue(ContainerProperty);
+            set => SetValue(ContainerProperty, value);
         }
 
         /// <summary>
@@ -45,8 +52,17 @@ namespace Core2D.UI.Avalonia.Views
         /// </summary>
         public IShapeRenderer Renderer
         {
-            get { return GetValue(RendererProperty); }
-            set { SetValue(RendererProperty, value); }
+            get => GetValue(RendererProperty);
+            set => SetValue(RendererProperty, value);
+        }
+
+        /// <summary>
+        ///  Gets or sets data flow property.
+        /// </summary>
+        public IDataFlow DataFlow
+        {
+            get => GetValue(DataFlowProperty);
+            set => SetValue(DataFlowProperty, value);
         }
 
         /// <summary>
@@ -73,22 +89,24 @@ namespace Core2D.UI.Avalonia.Views
         {
             base.Render(context);
 
-            if (Container != null)
+            var container = Container;
+            var renderer = Renderer ?? GetValue(RendererOptions.RendererProperty);
+
+            var df = GetValue(RendererOptions.DataFlowProperty);
+
+
+            var dataFlow = DataFlow ?? GetValue(RendererOptions.DataFlowProperty);
+
+            if (container != null && renderer != null && dataFlow != null)
             {
-                if (Renderer != null)
-                {
-                    s_templatePresenter.Render(context, Renderer, Container, 0.0, 0.0);
-                    s_editorPresenter.Render(context, Renderer, Container, 0.0, 0.0);
-                }
-                else
-                {
-                    var renderer = GetValue(RendererOptions.RendererProperty);
-                    if (renderer != null)
-                    {
-                        s_templatePresenter.Render(context, renderer, Container, 0.0, 0.0);
-                        s_editorPresenter.Render(context, renderer, Container, 0.0, 0.0);
-                    }
-                }
+                var db = (object)container.Data.Properties;
+                var record = (object)container.Data.Record;
+
+                dataFlow.Bind(container.Template, db, record);
+                dataFlow.Bind(container, db, record);
+
+                s_templatePresenter.Render(context, renderer, Container, 0.0, 0.0);
+                s_editorPresenter.Render(context, renderer, Container, 0.0, 0.0);
             }
         }
     }

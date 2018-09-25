@@ -409,6 +409,14 @@ namespace Core2D.UI.Wpf.Editor
         {
             var editor = _serviceProvider.GetService<ProjectEditor>();
             var page = editor.Project?.CurrentContainer;
+
+            var dataFlow = _serviceProvider.GetService<IDataFlow>();
+            var db = (object)page.Data.Properties;
+            var record = (object)page.Data.Record;
+
+            dataFlow.Bind(page.Template, db, record);
+            dataFlow.Bind(page, db, record);
+
             if (page != null && editor.Project is IImageCache imageChache)
             {
                 if (editor.Renderers[0]?.State?.SelectedShape != null)
@@ -419,8 +427,6 @@ namespace Core2D.UI.Wpf.Editor
                         shapes,
                         page.Template.Width,
                         page.Template.Height,
-                        page.Data.Properties,
-                        page.Data.Record,
                         imageChache);
                 }
                 else if (editor.Renderers?[0]?.State?.SelectedShapes != null)
@@ -431,8 +437,6 @@ namespace Core2D.UI.Wpf.Editor
                         shapes,
                         page.Template.Width,
                         page.Template.Height,
-                        page.Data.Properties,
-                        page.Data.Record,
                         imageChache);
                 }
                 else

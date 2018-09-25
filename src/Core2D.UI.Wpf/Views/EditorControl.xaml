@@ -152,7 +152,9 @@
                                         <KeyBinding Command="{x:Static editor:ProjectEditorCommands.TryToConnectCommand}" Key="C" Modifiers=""/>
                                         <KeyBinding Command="{x:Static editor:ProjectEditorCommands.CloneStyleCommand}" Key="Y" Modifiers=""/>
                                     </custom:ZoomBorder.InputBindings>
-                                    <ContentControl x:Name="drawableControl" Content="{Binding Project.CurrentContainer}" ClipToBounds="False" custom:LayerElement.Renderer="{Binding Renderers[0]}">
+                                    <ContentControl x:Name="drawableControl" Content="{Binding Project.CurrentContainer}" ClipToBounds="False" 
+                                                    custom:LayerElement.Renderer="{Binding Renderers[0]}"
+                                                    custom:LayerElement.DataFlow="{Binding DataFlow}">
                                         <ContentControl.Resources>
                                             <DataTemplate DataType="{x:Type Containers:PageContainer}">
                                                 <views:PageControl/>

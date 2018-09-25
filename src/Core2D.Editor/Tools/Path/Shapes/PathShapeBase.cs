@@ -62,6 +62,15 @@ namespace Core2D.Editor.Tools.Path.Shapes
         {
         }
 
+        public void SetProperty(string name, object value)
+        {
+        }
+
+        public object GetProperty(string name)
+        {
+            return null;
+        }
+
         public void Move(ISet<IBaseShape> selected, double dx, double dy)
         {
         }

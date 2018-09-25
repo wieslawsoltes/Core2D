@@ -636,7 +636,14 @@ namespace Core2D.Renderer.PdfSharp
             var _gfx = dc as XGraphics;
 
             if (!(text.GetProperty(nameof(ITextShape.Text)) is string tbind))
+            {
+                tbind = text.Text;
+            }
+
+            if (tbind == null)
+            {
                 return;
+            }
 
             var options = new XPdfFontOptions(PdfFontEncoding.Unicode);
 

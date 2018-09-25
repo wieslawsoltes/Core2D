@@ -12,6 +12,28 @@ namespace Core2D.Data
     public class DataFlow : IDataFlow
     {
         /// <inheritdoc/>
+        public void Bind(IProjectContainer project)
+        {
+            foreach (var document in project.Documents)
+            {
+                Bind(document);
+            }
+        }
+
+        /// <inheritdoc/>
+        public void Bind(IDocumentContainer document)
+        {
+            foreach (var container in document.Pages)
+            {
+                var db = container.Data.Properties;
+                var r = container.Data.Record;
+
+                Bind(container.Template, db, r);
+                Bind(container, db, r);
+            }
+        }
+
+        /// <inheritdoc/>
         public void Bind(IPageContainer container, object db, object r)
         {
             foreach (var layer in container.Layers)

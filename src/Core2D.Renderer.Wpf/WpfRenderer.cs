@@ -776,7 +776,14 @@ namespace Core2D.Renderer.Wpf
                 return;
 
             if (!(text.GetProperty(nameof(ITextShape.Text)) is string tbind))
+            {
+                tbind = text.Text;
+            }
+
+            if (tbind == null)
+            {
                 return;
+            }
 
             double thickness = style.Thickness / State.ZoomX;
             double half = thickness / 2.0;

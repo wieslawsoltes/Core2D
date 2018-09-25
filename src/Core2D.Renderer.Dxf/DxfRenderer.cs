@@ -806,7 +806,14 @@ namespace Core2D.Renderer.Dxf
             var dxf = dc as DXF.DxfDocument;
 
             if (!(text.GetProperty(nameof(ITextShape.Text)) is string tbind))
+            {
+                tbind = text.Text;
+            }
+
+            if (tbind == null)
+            {
                 return;
+            }
 
             var style = text.Style;
             var stroke = ToColor(style.Stroke);

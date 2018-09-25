@@ -114,7 +114,9 @@ namespace Core2D.Shapes
         /// <inheritdoc/>
         public virtual object GetProperty(string name)
         {
-            return _properties?[name];
+            if (_properties.ContainsKey(name))
+                return _properties[name];
+            return null;
         }
 
         /// <inheritdoc/>

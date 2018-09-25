@@ -11,6 +11,18 @@ namespace Core2D.Data
     public interface IDataFlow
     {
         /// <summary>
+        /// Binds data to <see cref="IProjectContainer"/> using data context.
+        /// </summary>
+        /// <param name="project">The <see cref="IProjectContainer"/> object.</param>
+        void Bind(IProjectContainer project);
+
+        /// <summary>
+        /// Binds data to <see cref="IDocumentContainer"/> using data context.
+        /// </summary>
+        /// <param name="document">The <see cref="IDocumentContainer"/> object.</param>
+        void Bind(IDocumentContainer document);
+
+        /// <summary>
         /// Binds data to <see cref="IPageContainer"/> using data context.
         /// </summary>
         /// <param name="container">The <see cref="IPageContainer"/> object.</param>

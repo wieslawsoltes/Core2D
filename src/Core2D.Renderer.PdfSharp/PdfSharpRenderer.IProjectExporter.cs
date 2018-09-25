@@ -2,6 +2,7 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
 using Core2D.Containers;
+using Core2D.Data;
 using Core2D.Interfaces;
 using PdfSharp;
 using PdfSharp.Drawing;
@@ -114,6 +115,13 @@ namespace Core2D.Renderer.PdfSharp
             pdfPage.Size = PageSize.A3;
             pdfPage.Orientation = PageOrientation.Landscape;
 
+            var dataFlow = _serviceProvider.GetService<IDataFlow>();
+            var db = (object)container.Data.Properties;
+            var record = (object)container.Data.Record;
+
+            dataFlow.Bind(container.Template, db, record);
+            dataFlow.Bind(container, db, record);
+
             using (XGraphics gfx = XGraphics.FromPdfPage(pdfPage))
             {
                 // Calculate x and y page scale factors.
@@ -128,10 +136,10 @@ namespace Core2D.Renderer.PdfSharp
                 Fill(gfx, 0, 0, pdfPage.Width.Value / scale, pdfPage.Height.Value / scale, container.Template.Background);
 
                 // Draw template contents to pdf graphics.
-                Draw(gfx, container.Template, 0.0, 0.0, (object)container.Data.Properties, (object)container.Data.Record);
+                Draw(gfx, container.Template, 0.0, 0.0);
 
                 // Draw page contents to pdf graphics.
-                Draw(gfx, container, 0.0, 0.0, (object)container.Data.Properties, (object)container.Data.Record);
+                Draw(gfx, container, 0.0, 0.0);
             }
 
             return pdfPage;
