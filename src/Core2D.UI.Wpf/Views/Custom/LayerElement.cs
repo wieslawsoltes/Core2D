@@ -50,7 +50,7 @@ namespace Core2D.UI.Wpf.Views.Custom
                     FrameworkPropertyMetadataOptions.SubPropertiesDoNotAffectRender));
 
         /// <summary>
-        /// Gets the <see cref="Core2D.Renderer"/> from <see cref="DependencyProperty"/> object.
+        /// Gets the <see cref="IShapeRenderer"/> from <see cref="DependencyProperty"/> object.
         /// </summary>
         /// <param name="obj">The <see cref="DependencyProperty"/> object.</param>
         /// <returns>The <see cref="IShapeRenderer"/> value.</returns>
@@ -86,7 +86,7 @@ namespace Core2D.UI.Wpf.Views.Custom
                     FrameworkPropertyMetadataOptions.SubPropertiesDoNotAffectRender));
 
         /// <summary>
-        /// Gets the <see cref="Core2D.Renderer"/> from <see cref="DependencyProperty"/> object.
+        /// Gets the <see cref="IDataFlow"/> from <see cref="DependencyProperty"/> object.
         /// </summary>
         /// <param name="obj">The <see cref="DependencyProperty"/> object.</param>
         /// <returns>The <see cref="IDataFlow"/> value.</returns>

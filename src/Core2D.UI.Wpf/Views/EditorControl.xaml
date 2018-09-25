@@ -20,7 +20,8 @@
              xmlns:ad="http://schemas.xceed.com/wpf/xaml/avalondock" 
              mc:Ignorable="d" 
              d:DataContext="{x:Static designer:DesignerHelper.Editor}"
-             d:DesignHeight="724" d:DesignWidth="1324">
+             d:DesignHeight="724" d:DesignWidth="1324"
+             custom:LayerElement.DataFlow="{Binding DataFlow}">
     <UserControl.Resources>
         <Style TargetType="{x:Type ad:LayoutDocumentPaneControl}">
             <Setter Property="Background" Value="{StaticResource BackgroundColor}"/>
