@@ -13,6 +13,7 @@ namespace Core2D.Shapes
     /// </summary>
     public abstract class BaseShape : ObservableObject, IBaseShape
     {
+        private IDictionary<string, object> _properties = new Dictionary<string, object>();
         private IBaseShape _owner;
         private IShapeState _state;
         private IShapeStyle _style;
@@ -93,12 +94,29 @@ namespace Core2D.Shapes
         }
 
         /// <inheritdoc/>
-        public abstract void Draw(object dc, IShapeRenderer renderer, double dx, double dy, object db, object r);
+        public abstract void Draw(object dc, IShapeRenderer renderer, double dx, double dy);
 
         /// <inheritdoc/>
         public virtual bool Invalidate(IShapeRenderer renderer, double dx, double dy)
         {
             return false;
+        }
+
+        /// <inheritdoc/>
+        public abstract void Bind(IDataFlow dataFlow, object db, object r);
+
+        /// <inheritdoc/>
+        public virtual void SetProperty(string name, object value)
+        {
+            _properties[name] = value;
+        }
+
+        /// <inheritdoc/>
+        public virtual object GetProperty(string name)
+        {
+            if (_properties.ContainsKey(name))
+                return _properties[name];
+            return null;
         }
 
         /// <inheritdoc/>

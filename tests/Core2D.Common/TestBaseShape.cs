@@ -43,7 +43,7 @@ namespace Core2D.Common
             throw new NotImplementedException();
         }
 
-        public void Draw(object dc, IShapeRenderer renderer, double dx, double dy, object db, object r)
+        public void Draw(object dc, IShapeRenderer renderer, double dx, double dy)
         {
             throw new NotImplementedException();
         }
@@ -59,6 +59,21 @@ namespace Core2D.Common
         }
 
         public bool Invalidate(IShapeRenderer renderer, double dx, double dy)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Bind(IDataFlow dataFlow, object db, object r)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void SetProperty(string name, object value)
+        {
+            throw new NotImplementedException();
+        }
+
+        public object GetProperty(string name)
         {
             throw new NotImplementedException();
         }

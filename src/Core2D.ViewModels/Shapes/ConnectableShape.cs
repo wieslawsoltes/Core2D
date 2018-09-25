@@ -3,6 +3,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using Core2D.Data;
 using Core2D.Renderer;
 
 namespace Core2D.Shapes
@@ -22,17 +23,15 @@ namespace Core2D.Shapes
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, IShapeRenderer renderer, double dx, double dy, object db, object r)
+        public override void Draw(object dc, IShapeRenderer renderer, double dx, double dy)
         {
-            var record = Data?.Record ?? r;
-
             if (renderer.State.SelectedShape != null)
             {
                 if (this == renderer.State.SelectedShape)
                 {
                     foreach (var connector in Connectors)
                     {
-                        connector.Draw(dc, renderer, dx, dy, db, record);
+                        connector.Draw(dc, renderer, dx, dy);
                     }
                 }
                 else
@@ -41,7 +40,7 @@ namespace Core2D.Shapes
                     {
                         if (connector == renderer.State.SelectedShape)
                         {
-                            connector.Draw(dc, renderer, dx, dy, db, record);
+                            connector.Draw(dc, renderer, dx, dy);
                         }
                     }
                 }
@@ -53,9 +52,20 @@ namespace Core2D.Shapes
                 {
                     foreach (var connector in Connectors)
                     {
-                        connector.Draw(dc, renderer, dx, dy, db, record);
+                        connector.Draw(dc, renderer, dx, dy);
                     }
                 }
+            }
+        }
+
+        /// <inheritdoc/>
+        public override void Bind(IDataFlow dataFlow, object db, object r)
+        {
+            var record = Data?.Record ?? r;
+
+            foreach (var connector in Connectors)
+            {
+                connector.Bind(dataFlow, db, record);
             }
         }
 

@@ -54,7 +54,7 @@ namespace Core2D.FileWriter.Emf
         /// <param name="record"></param>
         /// <param name="ic"></param>
         /// <returns></returns>
-        public MemoryStream MakeMetafileStream(Bitmap bitmap, IEnumerable<IBaseShape> shapes, ImmutableArray<IProperty> properties, IRecord record, IImageCache ic)
+        public MemoryStream MakeMetafileStream(Bitmap bitmap, IEnumerable<IBaseShape> shapes, IImageCache ic)
         {
             var g = default(Graphics);
             var mf = default(Metafile);
@@ -87,7 +87,7 @@ namespace Core2D.FileWriter.Emf
                     {
                         foreach (var shape in shapes)
                         {
-                            shape.Draw(g, r, 0, 0, properties, record);
+                            shape.Draw(g, r, 0, 0);
                         }
                     }
 
@@ -145,8 +145,8 @@ namespace Core2D.FileWriter.Emf
 
                     g.PageUnit = GraphicsUnit.Display;
 
-                    r.Draw(g, container.Template, 0.0, 0.0, (object)container.Data.Properties, (object)container.Data.Record);
-                    r.Draw(g, container, 0.0, 0.0, (object)container.Data.Properties, (object)container.Data.Record);
+                    r.Draw(g, container.Template, 0.0, 0.0);
+                    r.Draw(g, container, 0.0, 0.0);
 
                     r.ClearCache(isZooming: false);
                 }
@@ -172,16 +172,14 @@ namespace Core2D.FileWriter.Emf
         /// <param name="shapes"></param>
         /// <param name="width"></param>
         /// <param name="height"></param>
-        /// <param name="properties"></param>
-        /// <param name="record"></param>
         /// <param name="ic"></param>
-        public void SetClipboard(IEnumerable<IBaseShape> shapes, double width, double height, ImmutableArray<IProperty> properties, IRecord record, IImageCache ic)
+        public void SetClipboard(IEnumerable<IBaseShape> shapes, double width, double height, IImageCache ic)
         {
             try
             {
                 using (var bitmap = new Bitmap((int)width, (int)height))
                 {
-                    using (var ms = MakeMetafileStream(bitmap, shapes, properties, record, ic))
+                    using (var ms = MakeMetafileStream(bitmap, shapes, ic))
                     {
                         var data = new WPF.DataObject();
                         data.SetData(WPF.DataFormats.EnhancedMetafile, ms);
@@ -257,10 +255,17 @@ namespace Core2D.FileWriter.Emf
             var ic = options as IImageCache;
             if (options == null)
                 return;
-
+            
             if (item is IPageContainer page)
             {
 #if _WINDOWS
+                var dataFlow = _serviceProvider.GetService<IDataFlow>();
+                var db = (object)page.Data.Properties;
+                var record = (object)page.Data.Record;
+
+                dataFlow.Bind(page.Template, db, record);
+                dataFlow.Bind(page, db, record);
+
                 Save(path, page, ic);
 #else
                 throw new NotImplementedException("Not implemented for this platform.");

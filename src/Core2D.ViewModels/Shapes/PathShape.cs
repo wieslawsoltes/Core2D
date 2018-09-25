@@ -3,6 +3,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Core2D.Data;
 using Core2D.Path;
 using Core2D.Renderer;
 
@@ -26,15 +27,13 @@ namespace Core2D.Shapes
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, IShapeRenderer renderer, double dx, double dy, object db, object r)
+        public override void Draw(object dc, IShapeRenderer renderer, double dx, double dy)
         {
             var state = base.BeginTransform(dc, renderer);
 
-            var record = Data?.Record ?? r;
-
             if (State.Flags.HasFlag(ShapeStateFlags.Visible))
             {
-                renderer.Draw(dc, this, dx, dy, db, record);
+                renderer.Draw(dc, this, dx, dy);
             }
 
             if (renderer.State.SelectedShape != null)
@@ -44,7 +43,7 @@ namespace Core2D.Shapes
                     var points = GetPoints();
                     foreach (var point in points)
                     {
-                        point.Draw(dc, renderer, dx, dy, db, record);
+                        point.Draw(dc, renderer, dx, dy);
                     }
                 }
                 else
@@ -54,7 +53,7 @@ namespace Core2D.Shapes
                     {
                         if (point == renderer.State.SelectedShape)
                         {
-                            point.Draw(dc, renderer, dx, dy, db, record);
+                            point.Draw(dc, renderer, dx, dy);
                         }
                     }
                 }
@@ -67,12 +66,27 @@ namespace Core2D.Shapes
                     var points = GetPoints();
                     foreach (var point in points)
                     {
-                        point.Draw(dc, renderer, dx, dy, db, record);
+                        point.Draw(dc, renderer, dx, dy);
                     }
                 }
             }
 
             base.EndTransform(dc, renderer, state);
+        }
+
+        /// <inheritdoc/>
+        public override void Bind(IDataFlow dataFlow, object db, object r)
+        {
+            var record = Data?.Record ?? r;
+
+            dataFlow.Bind(this, db, record);
+
+            var points = GetPoints();
+
+            foreach (var point in points)
+            {
+                point.Bind(dataFlow, db, record);
+            }
         }
 
         /// <inheritdoc/>

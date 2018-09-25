@@ -55,9 +55,7 @@ namespace Core2D.Renderer
         /// <param name="container">The <see cref="IPageContainer"/> object.</param>
         /// <param name="dx">The X coordinate offset.</param>
         /// <param name="dy">The Y coordinate offset.</param>
-        /// <param name="db">The properties database.</param>
-        /// <param name="r">The data record.</param>
-        void Draw(object dc, IPageContainer container, double dx, double dy, object db, object r);
+        void Draw(object dc, IPageContainer container, double dx, double dy);
 
         /// <summary>
         /// Draws a <see cref="ILayerContainer"/> using drawing context.
@@ -66,9 +64,7 @@ namespace Core2D.Renderer
         /// <param name="layer">The <see cref="ILayerContainer"/> object.</param>
         /// <param name="dx">The X coordinate offset.</param>
         /// <param name="dy">The Y coordinate offset.</param>
-        /// <param name="db">The properties database.</param>
-        /// <param name="r">The data record.</param>
-        void Draw(object dc, ILayerContainer layer, double dx, double dy, object db, object r);
+        void Draw(object dc, ILayerContainer layer, double dx, double dy);
 
         /// <summary>
         /// Draws a <see cref="ILineShape"/> shape using drawing context.
@@ -77,9 +73,7 @@ namespace Core2D.Renderer
         /// <param name="line">The <see cref="ILineShape"/> shape.</param>
         /// <param name="dx">The X coordinate offset.</param>
         /// <param name="dy">The Y coordinate offset.</param>
-        /// <param name="db">The properties database.</param>
-        /// <param name="r">The data record.</param>
-        void Draw(object dc, ILineShape line, double dx, double dy, object db, object r);
+        void Draw(object dc, ILineShape line, double dx, double dy);
 
         /// <summary>
         /// Draws a <see cref="IRectangleShape"/> shape using drawing context.
@@ -88,9 +82,7 @@ namespace Core2D.Renderer
         /// <param name="rectangle">The <see cref="IRectangleShape"/> shape.</param>
         /// <param name="dx">The X coordinate offset.</param>
         /// <param name="dy">The Y coordinate offset.</param>
-        /// <param name="db">The properties database.</param>
-        /// <param name="r">The data record.</param>
-        void Draw(object dc, IRectangleShape rectangle, double dx, double dy, object db, object r);
+        void Draw(object dc, IRectangleShape rectangle, double dx, double dy);
 
         /// <summary>
         /// Draws a <see cref="IEllipseShape"/> shape using drawing context.
@@ -99,9 +91,7 @@ namespace Core2D.Renderer
         /// <param name="ellipse">The <see cref="IEllipseShape"/> shape.</param>
         /// <param name="dx">The X coordinate offset.</param>
         /// <param name="dy">The Y coordinate offset.</param>
-        /// <param name="db">The properties database.</param>
-        /// <param name="r">The data record.</param>
-        void Draw(object dc, IEllipseShape ellipse, double dx, double dy, object db, object r);
+        void Draw(object dc, IEllipseShape ellipse, double dx, double dy);
 
         /// <summary>
         /// Draws a <see cref="IArcShape"/> shape using drawing context.
@@ -110,9 +100,7 @@ namespace Core2D.Renderer
         /// <param name="arc">The <see cref="IArcShape"/> shape.</param>
         /// <param name="dx">The X coordinate offset.</param>
         /// <param name="dy">The Y coordinate offset.</param>
-        /// <param name="db">The properties database.</param>
-        /// <param name="r">The data record.</param>
-        void Draw(object dc, IArcShape arc, double dx, double dy, object db, object r);
+        void Draw(object dc, IArcShape arc, double dx, double dy);
 
         /// <summary>
         /// Draws a <see cref="ICubicBezierShape"/> shape using drawing context.
@@ -121,9 +109,7 @@ namespace Core2D.Renderer
         /// <param name="cubicBezier">The <see cref="ICubicBezierShape"/> shape.</param>
         /// <param name="dx">The X coordinate offset.</param>
         /// <param name="dy">The Y coordinate offset.</param>
-        /// <param name="db">The properties database.</param>
-        /// <param name="r">The data record.</param>
-        void Draw(object dc, ICubicBezierShape cubicBezier, double dx, double dy, object db, object r);
+        void Draw(object dc, ICubicBezierShape cubicBezier, double dx, double dy);
 
         /// <summary>
         /// Draws a <see cref="IQuadraticBezierShape"/> shape using drawing context.
@@ -132,9 +118,7 @@ namespace Core2D.Renderer
         /// <param name="quadraticBezier">The <see cref="IQuadraticBezierShape"/> shape.</param>
         /// <param name="dx">The X coordinate offset.</param>
         /// <param name="dy">The Y coordinate offset.</param>
-        /// <param name="db">The properties database.</param>
-        /// <param name="r">The data record.</param>
-        void Draw(object dc, IQuadraticBezierShape quadraticBezier, double dx, double dy, object db, object r);
+        void Draw(object dc, IQuadraticBezierShape quadraticBezier, double dx, double dy);
 
         /// <summary>
         /// Draws a <see cref="ITextShape"/> shape using drawing context.
@@ -143,9 +127,7 @@ namespace Core2D.Renderer
         /// <param name="text">The <see cref="ITextShape"/> shape.</param>
         /// <param name="dx">The X coordinate offset.</param>
         /// <param name="dy">The Y coordinate offset.</param>
-        /// <param name="db">The properties database.</param>
-        /// <param name="r">The data record.</param>
-        void Draw(object dc, ITextShape text, double dx, double dy, object db, object r);
+        void Draw(object dc, ITextShape text, double dx, double dy);
 
         /// <summary>
         /// Draws a <see cref="IImageShape"/> shape using drawing context.
@@ -154,9 +136,7 @@ namespace Core2D.Renderer
         /// <param name="image">The <see cref="IImageShape"/> shape.</param>
         /// <param name="dx">The X coordinate offset.</param>
         /// <param name="dy">The Y coordinate offset.</param>
-        /// <param name="db">The properties database.</param>
-        /// <param name="r">The data record.</param>
-        void Draw(object dc, IImageShape image, double dx, double dy, object db, object r);
+        void Draw(object dc, IImageShape image, double dx, double dy);
 
         /// <summary>
         /// Draws a <see cref="IPathShape"/> shape using drawing context.
@@ -165,8 +145,6 @@ namespace Core2D.Renderer
         /// <param name="path">The <see cref="IPathShape"/> shape.</param>
         /// <param name="dx">The X coordinate offset.</param>
         /// <param name="dy">The Y coordinate offset.</param>
-        /// <param name="db">The properties database.</param>
-        /// <param name="r">The data record.</param>
-        void Draw(object dc, IPathShape path, double dx, double dy, object db, object r);
+        void Draw(object dc, IPathShape path, double dx, double dy);
     }
 }

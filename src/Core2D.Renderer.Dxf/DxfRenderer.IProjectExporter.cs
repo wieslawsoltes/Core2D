@@ -2,6 +2,7 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
 using Core2D.Containers;
+using Core2D.Data;
 using Core2D.Interfaces;
 using DXF = netDxf;
 using DXFH = netDxf.Header;
@@ -52,18 +53,25 @@ namespace Core2D.Renderer.Dxf
 
         private void Add(DXF.DxfDocument dxf, IPageContainer container)
         {
+            var dataFlow = _serviceProvider.GetService<IDataFlow>();
+            var db = (object)container.Data.Properties;
+            var record = (object)container.Data.Record;
+
+            dataFlow.Bind(container.Template, db, record);
+            dataFlow.Bind(container, db, record);
+
             if (container.Template != null)
             {
                 _pageWidth = container.Template.Width;
                 _pageHeight = container.Template.Height;
-                Draw(dxf, container.Template, 0.0, 0.0, (object)container.Data.Properties, (object)container.Data.Record);
+                Draw(dxf, container.Template, 0.0, 0.0);
             }
             else
             {
                 throw new NullReferenceException("Container template must be set.");
             }
 
-            Draw(dxf, container, 0.0, 0.0, (object)container.Data.Properties, (object)container.Data.Record);
+            Draw(dxf, container, 0.0, 0.0);
         }
 
         private void Add(DXF.DxfDocument dxf, IDocumentContainer document)

@@ -118,7 +118,7 @@ namespace Core2D.Shapes
                     }
 
                     // Try to bind to external Properties database (e.g. Container.Data.Properties) using Text property as Property.Name name.
-                    if (db != null)
+                    if (db != null && db.Length > 0)
                     {
                         bool success = TryToBind(db, binding, out string value);
                         if (success)
@@ -126,21 +126,31 @@ namespace Core2D.Shapes
                             return value;
                         }
                     }
-                }
-            }
 
-            // Try to bind to Properties using Text as formatting.
-            if (text.Data?.Properties != null && text.Data.Properties.Length > 0)
-            {
-                try
-                {
-                    var args = text.Data.Properties.Where(x => x != null).Select(x => x.Value).ToArray();
-                    if (text.Text != null && args != null && args.Length > 0)
+                    // Try to bind to internal Properties database (e.g. Data.Properties) using Text property as Property.Name name.
+                    if (text.Data?.Properties != null && text.Data.Properties.Length > 0)
                     {
-                        return string.Format(text.Text, args);
+                        bool success = TryToBind(text.Data.Properties, binding, out string value);
+                        if (success)
+                        {
+                            return value;
+                        }
                     }
                 }
-                catch (FormatException) { }
+
+                // Try to bind to Properties using Text as formatting.
+                if (text.Data?.Properties != null && text.Data.Properties.Length > 0)
+                {
+                    try
+                    {
+                        var args = text.Data.Properties.Where(x => x != null).Select(x => x.Value).ToArray();
+                        if (text.Text != null && args != null && args.Length > 0)
+                        {
+                            return string.Format(text.Text, args);
+                        }
+                    }
+                    catch (FormatException) { }
+                }
             }
 
             return text.Text;

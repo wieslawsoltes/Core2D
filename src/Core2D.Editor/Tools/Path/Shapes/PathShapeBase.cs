@@ -49,13 +49,26 @@ namespace Core2D.Editor.Tools.Path.Shapes
         {
         }
 
-        public void Draw(object dc, IShapeRenderer renderer, double dx, double dy, object db, object r)
+        public void Draw(object dc, IShapeRenderer renderer, double dx, double dy)
         {
         }
 
         public bool Invalidate(IShapeRenderer renderer, double dx, double dy)
         {
             return false;
+        }
+
+        public void Bind(IDataFlow dataFlow, object db, object r)
+        {
+        }
+
+        public void SetProperty(string name, object value)
+        {
+        }
+
+        public object GetProperty(string name)
+        {
+            return null;
         }
 
         public void Move(ISet<IBaseShape> selected, double dx, double dy)
