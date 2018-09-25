@@ -7,12 +7,12 @@ using Core2D.UI.Avalonia.Windows;
 using Core2D.Containers;
 using Core2D.Data;
 using Core2D.Editor;
-using Core2D.Interfaces;
-using Dock.Model;
-
 #if NET461
 using Core2D.FileWriter.Emf;
 #endif
+using Core2D.Interfaces;
+using Core2D.Renderer;
+using Dock.Model;
 
 namespace Core2D.UI.Avalonia.Editor
 {
@@ -336,8 +336,6 @@ namespace Core2D.UI.Avalonia.Editor
                         shapes,
                         page.Template.Width,
                         page.Template.Height,
-                        page.Data.Properties,
-                        page.Data.Record,
                         editor.Project as IImageCache);
                 }
                 else if (editor.Renderers?[0]?.State?.SelectedShapes != null)
@@ -348,8 +346,6 @@ namespace Core2D.UI.Avalonia.Editor
                         shapes,
                         page.Template.Width,
                         page.Template.Height,
-                        page.Data.Properties,
-                        page.Data.Record,
                         editor.Project as IImageCache);
                 }
                 else
