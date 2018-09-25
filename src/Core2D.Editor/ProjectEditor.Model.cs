@@ -270,7 +270,7 @@ namespace Core2D.Editor
             _pathTools = _serviceProvider.GetServiceLazily<PathToolBase[], ImmutableArray<PathToolBase>>((tools) => tools.ToImmutableArray());
             _hitTest = _serviceProvider.GetServiceLazily<HitTest>(hitTests => hitTests.Register(_serviceProvider.GetService<HitTestBase[]>()));
             _log = _serviceProvider.GetServiceLazily<ILog>();
-            _dataFlow = new Lazy<IDataFlow>(() => _serviceProvider.GetService<IDataFlow>());
+            _dataFlow = _serviceProvider.GetServiceLazily<IDataFlow>();
             _renderers = new Lazy<IShapeRenderer[]>(() => new[] { _serviceProvider.GetService<IShapeRenderer>(), _serviceProvider.GetService<IShapeRenderer>() });
             _fileIO = _serviceProvider.GetServiceLazily<IFileSystem>();
             _factory = _serviceProvider.GetServiceLazily<IFactory>();
