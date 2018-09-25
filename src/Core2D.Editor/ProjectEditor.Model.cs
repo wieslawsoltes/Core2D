@@ -175,7 +175,7 @@ namespace Core2D.Editor
         /// <summary>
         /// Gets current data flow.
         /// </summary>
-        public IDataFlow DataFLow => _dataFlow.Value;
+        public IDataFlow DataFlow => _dataFlow.Value;
 
         /// <summary>
         /// Gets current renderer's.
