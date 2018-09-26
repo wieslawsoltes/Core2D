@@ -91,10 +91,6 @@ namespace Core2D.UI.Avalonia.Views
 
             var container = Container;
             var renderer = Renderer ?? GetValue(RendererOptions.RendererProperty);
-
-            var df = GetValue(RendererOptions.DataFlowProperty);
-
-
             var dataFlow = DataFlow ?? GetValue(RendererOptions.DataFlowProperty);
 
             if (container != null && renderer != null && dataFlow != null)
