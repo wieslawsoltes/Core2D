@@ -49,6 +49,7 @@
         <Assembly Name="Avalonia.Animation" Dynamic="Required All" />
         <Assembly Name="Avalonia.Base" Dynamic="Required All" >
             <Type Name="Avalonia.Collections.AvaloniaListConverter`1[[System.Double,System.Private.CoreLib]]" Dynamic="Required All" />
+            <Type Name="Avalonia.Collections.AvaloniaListConverter`1[[Avalonia.Media.Drawing,Avalonia.Visuals]]" Dynamic="Required All" />
         </Assembly>
         <Assembly Name="Avalonia.Controls" Dynamic="Required All" />
         <Assembly Name="Avalonia.DesignerSupport" Dynamic="Required All" />
