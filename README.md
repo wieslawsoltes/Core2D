@@ -16,7 +16,11 @@ A multi-platform data driven 2D diagram editor.
 
 ## About
 
-Core2D is a multi-platform application for making data driven 2D diagrams.
+Core2D is a multi-platform application for making data driven 2D diagrams. 
+The application has built-in wyswig vector graphics editor where you can bind data to shapes, 
+share data across multiple documents, edit documents using layers. 
+It also supports exporting documents to many popular file formats like pdf, bitmaps and dxf. 
+You can automate drawing and processing by using C# scripting.
 
 ## Supported Platforms
 
