@@ -19,7 +19,7 @@ namespace Core2D.Editor.Tools.Path.Shapes
         public string Id { get; set; }
         public string Name { get; set; }
         public abstract Type TargetType { get; }
-        public IBaseShape Owner { get; set; }
+        public IObservableObject Owner { get; set; }
         public IShapeState State { get; set; }
         public IContext Data { get; set; }
         public IShapeStyle Style { get; set; }
