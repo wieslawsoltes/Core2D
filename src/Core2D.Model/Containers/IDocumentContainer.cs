@@ -10,6 +10,11 @@ namespace Core2D.Containers
     public interface IDocumentContainer : IBaseContainer
     {
         /// <summary>
+        /// Gets or sets document owner.
+        /// </summary>
+        IProjectContainer Owner { get; set; }
+
+        /// <summary>
         /// Gets or sets flag indicating whether document is expanded.
         /// </summary>
         bool IsExpanded { get; set; }
