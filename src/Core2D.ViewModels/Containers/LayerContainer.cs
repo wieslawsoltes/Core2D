@@ -16,16 +16,8 @@ namespace Core2D.Containers
         /// <inheritdoc/>
         public event InvalidateLayerEventHandler InvalidateLayer;
 
-        private IPageContainer _owner;
         private bool _isVisible = true;
         private ImmutableArray<IBaseShape> _shapes;
-
-        /// <inheritdoc/>
-        public IPageContainer Owner
-        {
-            get => _owner;
-            set => Update(ref _owner, value);
-        }
 
         /// <inheritdoc/>
         public bool IsVisible
@@ -54,12 +46,6 @@ namespace Core2D.Containers
         {
             throw new NotImplementedException();
         }
-
-        /// <summary>
-        /// Check whether the <see cref="Owner"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeOwner() => _owner != null;
 
         /// <summary>
         /// Check whether the <see cref="IsVisible"/> property has changed from its default value.

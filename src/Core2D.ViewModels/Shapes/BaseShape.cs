@@ -14,7 +14,6 @@ namespace Core2D.Shapes
     public abstract class BaseShape : ObservableObject, IBaseShape
     {
         private IDictionary<string, object> _properties = new Dictionary<string, object>();
-        private IObservableObject _owner;
         private IShapeState _state;
         private IShapeStyle _style;
         private IMatrixObject _transform;
@@ -24,13 +23,6 @@ namespace Core2D.Shapes
 
         /// <inheritdoc/>
         public abstract Type TargetType { get; }
-
-        /// <inheritdoc/>
-        public virtual IObservableObject Owner
-        {
-            get => _owner;
-            set => Update(ref _owner, value);
-        }
 
         /// <inheritdoc/>
         public virtual IShapeState State
@@ -145,12 +137,6 @@ namespace Core2D.Shapes
         /// </summary>
         /// <returns>All points in the shape.</returns>
         public abstract IEnumerable<IPointShape> GetPoints();
-
-        /// <summary>
-        /// Check whether the <see cref="Owner"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeOwner() => _owner != null;
 
         /// <summary>
         /// Check whether the <see cref="State"/> property has changed from its default value.

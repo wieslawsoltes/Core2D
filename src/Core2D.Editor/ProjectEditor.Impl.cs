@@ -880,7 +880,10 @@ namespace Core2D.Editor
                 Project?.RemoveLayer(layer);
 
                 var selected = Project?.CurrentContainer?.Layers.FirstOrDefault();
-                layer.Owner?.SetCurrentLayer(selected);
+                if (layer.Owner is IPageContainer owner)
+                {
+                    owner.SetCurrentLayer(selected);
+                }
             }
             if (item is IPageContainer page)
             {
@@ -1560,7 +1563,10 @@ namespace Core2D.Editor
         public void OnRemoveLayer(ILayerContainer layer)
         {
             Project.RemoveLayer(layer);
-            layer.Owner.SetCurrentLayer(layer.Owner.Layers.FirstOrDefault());
+            if (layer.Owner is IPageContainer owner)
+            {
+                owner.SetCurrentLayer(owner.Layers.FirstOrDefault());
+            }
         }
 
         /// <summary>
@@ -2375,9 +2381,11 @@ namespace Core2D.Editor
                     else
                     {
                         // Create Imported database.
-                        if (Project?.CurrentDatabase == null)
+                        if (Project?.CurrentDatabase == null && shape.Data.Record.Owner is IDatabase owner)
                         {
-                            var db = Factory.CreateDatabase(Constants.ImportedDatabaseName, (ImmutableArray<IColumn>)shape.Data.Record.Owner.Columns);
+                            var db = Factory.CreateDatabase(
+                                Constants.ImportedDatabaseName, 
+                                (ImmutableArray<IColumn>)owner.Columns);
                             Project.AddDatabase(db);
                             Project.SetCurrentDatabase(db);
                         }
@@ -2830,12 +2838,14 @@ namespace Core2D.Editor
             double width = 150;
             double height = 15;
 
+            var db = record.Owner as IDatabase;
+
             for (int i = 0; i < length; i++)
             {
-                var column = record.Owner.Columns[i];
+                var column = db.Columns[i];
                 if (column.IsVisible)
                 {
-                    var binding = "{" + record.Owner.Columns[i].Name + "}";
+                    var binding = "{" + db.Columns[i].Name + "}";
                     var text = Factory.CreateTextShape(px, py, px + width, py + height, style, point, binding);
                     g.AddShape(text);
                     py += height;
@@ -3032,9 +3042,9 @@ namespace Core2D.Editor
         {
             Select(shape);
 
-            if (layer?.Owner != null)
+            if (layer.Owner is IPageContainer owner)
             {
-                layer.Owner.CurrentShape = shape;
+                owner.CurrentShape = shape;
             }
 
             if (layer != null)
@@ -3056,9 +3066,9 @@ namespace Core2D.Editor
         {
             Select(shapes);
 
-            if (layer?.Owner?.CurrentShape != null)
+            if (layer.Owner is IPageContainer owner && owner.CurrentShape != null)
             {
-                layer.Owner.CurrentShape = default;
+                owner.CurrentShape = default;
             }
 
             if (layer != null)
@@ -3079,9 +3089,9 @@ namespace Core2D.Editor
         {
             Deselect();
 
-            if (layer?.Owner?.CurrentShape != null)
+            if (layer.Owner is IPageContainer owner && owner.CurrentShape != null)
             {
-                layer.Owner.CurrentShape = default;
+                owner.CurrentShape = default;
             }
 
             if (layer != null)

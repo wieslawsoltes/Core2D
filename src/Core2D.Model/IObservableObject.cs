@@ -11,6 +11,11 @@ namespace Core2D
     public interface IObservableObject : INotifyPropertyChanged, ICopyable
     {
         /// <summary>
+        /// Gets or sets object owner.
+        /// </summary>
+        IObservableObject Owner { get; set; }
+
+        /// <summary>
         /// Gets or sets observable object name.
         /// </summary>
         string Id { get; set; }

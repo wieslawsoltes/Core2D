@@ -14,11 +14,6 @@ namespace Core2D.Containers
     public interface IPageContainer : IBaseContainer
     {
         /// <summary>
-        /// Gets or sets page owner.
-        /// </summary>
-        IDocumentContainer Owner { get; set; }
-
-        /// <summary>
         /// Gets or sets container width.
         /// </summary>
         /// <remarks>

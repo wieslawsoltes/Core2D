@@ -12,7 +12,6 @@ namespace Core2D.Data
     {
         private double _width;
         private bool _isVisible;
-        private IDatabase _owner;
 
         /// <inheritdoc/>
         public double Width
@@ -26,13 +25,6 @@ namespace Core2D.Data
         {
             get => _isVisible;
             set => Update(ref _isVisible, value);
-        }
-
-        /// <inheritdoc/>
-        public IDatabase Owner
-        {
-            get => _owner;
-            set => Update(ref _owner, value);
         }
 
         /// <inheritdoc/>
@@ -52,11 +44,5 @@ namespace Core2D.Data
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
         public virtual bool ShouldSerializeIsVisible() => _isVisible != default;
-
-        /// <summary>
-        /// Check whether the <see cref="Owner"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeOwner() => _owner != null;
     }
 }

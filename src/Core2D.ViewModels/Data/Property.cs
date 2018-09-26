@@ -12,7 +12,6 @@ namespace Core2D.Data
     public class Property : ObservableObject, IProperty
     {
         private string _value;
-        private IContext _owner;
 
         /// <inheritdoc/>
         [Content]
@@ -20,13 +19,6 @@ namespace Core2D.Data
         {
             get => _value;
             set => Update(ref _value, value);
-        }
-
-        /// <inheritdoc/>
-        public IContext Owner
-        {
-            get => _owner;
-            set => Update(ref _owner, value);
         }
 
         /// <inheritdoc/>
@@ -43,11 +35,5 @@ namespace Core2D.Data
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
         public virtual bool ShouldSerializeValue() => !string.IsNullOrWhiteSpace(_value);
-
-        /// <summary>
-        /// Check whether the <see cref="Owner"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeOwner() => _owner != null;
     }
 }

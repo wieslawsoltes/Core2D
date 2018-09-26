@@ -12,10 +12,5 @@ namespace Core2D.Data
         /// Gets or sets property value.
         /// </summary>
         string Value { get; set; }
-
-        /// <summary>
-        /// Gets or sets property owner.
-        /// </summary>
-        IContext Owner { get; set; }
     }
 }

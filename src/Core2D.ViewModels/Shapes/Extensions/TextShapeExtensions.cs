@@ -27,7 +27,8 @@ namespace Core2D.Shapes
                 return false;
             }
 
-            var columns = r.Owner.Columns;
+            var db = r.Owner as IDatabase;
+            var columns = db.Columns;
             var values = r.Values;
             if (columns == null || values == null || columns.Length != values.Length)
             {

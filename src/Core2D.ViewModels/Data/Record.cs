@@ -13,7 +13,6 @@ namespace Core2D.Data
     public class Record : ObservableObject, IRecord
     {
         private ImmutableArray<IValue> _values;
-        private IDatabase _owner;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Record"/> class.
@@ -33,13 +32,6 @@ namespace Core2D.Data
         }
 
         /// <inheritdoc/>
-        public IDatabase Owner
-        {
-            get => _owner;
-            set => Update(ref _owner, value);
-        }
-
-        /// <inheritdoc/>
         public override object Copy(IDictionary<object, object> shared)
         {
             throw new NotImplementedException();
@@ -50,11 +42,5 @@ namespace Core2D.Data
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
         public virtual bool ShouldSerializeValues() => true;
-
-        /// <summary>
-        /// Check whether the <see cref="Owner"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeOwner() => _owner != null;
     }
 }

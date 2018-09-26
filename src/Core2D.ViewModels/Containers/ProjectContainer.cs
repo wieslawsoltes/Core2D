@@ -221,8 +221,7 @@ namespace Core2D.Containers
         {
             if (value is ILayerContainer layer)
             {
-                var owner = layer?.Owner;
-                if (owner != null)
+                if (layer.Owner is IPageContainer owner)
                 {
                     if (owner.CurrentLayer != layer)
                     {

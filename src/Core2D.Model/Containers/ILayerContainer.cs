@@ -29,11 +29,6 @@ namespace Core2D.Containers
         event InvalidateLayerEventHandler InvalidateLayer;
 
         /// <summary>
-        /// Gets or sets layer owner.
-        /// </summary>
-        IPageContainer Owner { get; set; }
-
-        /// <summary>
         /// Gets or sets flag indicating whether layer is visible.
         /// </summary>
         bool IsVisible { get; set; }

@@ -17,10 +17,5 @@ namespace Core2D.Data
         /// Gets or sets flag indicating whether column is visible.
         /// </summary>
         bool IsVisible { get; set; }
-
-        /// <summary>
-        /// Gets or sets column owner object.
-        /// </summary>
-        IDatabase Owner { get; set; }
     }
 }

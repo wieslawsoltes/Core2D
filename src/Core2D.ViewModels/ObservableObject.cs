@@ -13,8 +13,16 @@ namespace Core2D
     /// </summary>
     public abstract class ObservableObject : IObservableObject
     {
+        private IObservableObject _owner = null;
         private string _id = Guid.NewGuid().ToString();
         private string _name = "";
+
+        /// <inheritdoc/>
+        public virtual IObservableObject Owner
+        {
+            get => _owner;
+            set => Update(ref _owner, value);
+        }
 
         /// <inheritdoc/>
         [Name]
@@ -65,6 +73,12 @@ namespace Core2D
             }
             return false;
         }
+
+        /// <summary>
+        /// Check whether the <see cref="Owner"/> property has changed from its default value.
+        /// </summary>
+        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
+        public virtual bool ShouldSerializeOwner() => _owner != null;
 
         /// <summary>
         /// Check whether the <see cref="Id"/> property has changed from its default value.

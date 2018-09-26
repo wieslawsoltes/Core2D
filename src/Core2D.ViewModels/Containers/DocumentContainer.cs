@@ -12,16 +12,8 @@ namespace Core2D.Containers
     /// </summary>
     public class DocumentContainer : ObservableObject, IDocumentContainer
     {
-        private IProjectContainer _owner;
         private bool _isExpanded = true;
         private ImmutableArray<IPageContainer> _pages;
-
-        /// <inheritdoc/>
-        public IProjectContainer Owner
-        {
-            get => _owner;
-            set => Update(ref _owner, value);
-        }
 
         /// <inheritdoc/>
         public bool IsExpanded
@@ -43,12 +35,6 @@ namespace Core2D.Containers
         {
             throw new NotImplementedException();
         }
-
-        /// <summary>
-        /// Check whether the <see cref="Owner"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeOwner() => _owner != null;
 
         /// <summary>
         /// Check whether the <see cref="IsExpanded"/> property has changed from its default value.

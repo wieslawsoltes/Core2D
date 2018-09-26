@@ -15,7 +15,6 @@ namespace Core2D.Containers
     /// </summary>
     public class PageContainer : ObservableObject, IPageContainer
     {
-        private IDocumentContainer _owner;
         private double _width;
         private double _height;
         private IColor _background;
@@ -27,13 +26,6 @@ namespace Core2D.Containers
         private IPageContainer _template;
         private IContext _data;
         private bool _isExpanded = false;
-
-        /// <inheritdoc/>
-        public IDocumentContainer Owner
-        {
-            get => _owner;
-            set => Update(ref _owner, value);
-        }
 
         /// <inheritdoc/>
         public double Width
@@ -181,12 +173,6 @@ namespace Core2D.Containers
         {
             throw new NotImplementedException();
         }
-
-        /// <summary>
-        /// Check whether the <see cref="Owner"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeOwner() => _owner != null;
 
         /// <summary>
         /// Check whether the <see cref="Width"/> property has changed from its default value.

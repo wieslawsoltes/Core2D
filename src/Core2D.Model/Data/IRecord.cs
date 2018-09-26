@@ -13,10 +13,5 @@ namespace Core2D.Data
         /// Gets or sets record values.
         /// </summary>
         ImmutableArray<IValue> Values { get; set; }
-
-        /// <summary>
-        /// Gets or sets record owner.
-        /// </summary>
-        IDatabase Owner { get; set; }
     }
 }

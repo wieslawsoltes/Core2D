@@ -18,11 +18,6 @@ namespace Core2D.Shapes
         Type TargetType { get; }
 
         /// <summary>
-        /// Gets or sets shape owner.
-        /// </summary>
-        IObservableObject Owner { get; set; }
-
-        /// <summary>
         /// Indicates shape state options.
         /// </summary>
         IShapeState State { get; set; }

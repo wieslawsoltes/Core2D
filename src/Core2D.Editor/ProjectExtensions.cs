@@ -255,8 +255,7 @@ namespace Core2D.Editor
         /// <param name="layer">The layer instance.</param>
         public static void RemoveLayer(this IProjectContainer project, ILayerContainer layer)
         {
-            var container = layer?.Owner;
-            if (container != null && container.Layers != null)
+            if (layer.Owner is IPageContainer container && container.Layers != null)
             {
                 var previous = container.Layers;
                 var next = container.Layers.Remove(layer);
@@ -441,8 +440,7 @@ namespace Core2D.Editor
         /// <param name="property">The property instance.</param>
         public static void RemoveProperty(this IProjectContainer project, IProperty property)
         {
-            var data = property?.Owner;
-            if (data != null && data.Properties != null)
+            if (property.Owner is IContext data && data.Properties != null)
             {
                 var previous = data.Properties;
                 var next = data.Properties.Remove(property);
@@ -534,8 +532,7 @@ namespace Core2D.Editor
         /// <param name="column">The <see cref="IColumn"/> to remove.</param>
         public static void RemoveColumn(this IProjectContainer project, IColumn column)
         {
-            var db = column?.Owner;
-            if (db != null && db.Columns != null)
+            if (column.Owner is IDatabase db && db.Columns != null)
             {
                 var previous = db.Columns;
                 var next = db.Columns.Remove(column);
@@ -568,8 +565,7 @@ namespace Core2D.Editor
         /// <param name="record">The record instance.</param>
         public static void RemoveRecord(this IProjectContainer project, IRecord record)
         {
-            var db = record?.Owner;
-            if (db != null && db.Records != null)
+            if (record.Owner is IDatabase db && db.Records != null)
             {
                 var previous = db.Records;
                 var next = db.Records.Remove(record);
