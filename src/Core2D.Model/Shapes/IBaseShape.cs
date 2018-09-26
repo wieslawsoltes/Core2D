@@ -20,7 +20,7 @@ namespace Core2D.Shapes
         /// <summary>
         /// Gets or sets shape owner.
         /// </summary>
-        IBaseShape Owner { get; set; }
+        IObservableObject Owner { get; set; }
 
         /// <summary>
         /// Indicates shape state options.

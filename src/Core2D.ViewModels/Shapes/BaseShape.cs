@@ -14,7 +14,7 @@ namespace Core2D.Shapes
     public abstract class BaseShape : ObservableObject, IBaseShape
     {
         private IDictionary<string, object> _properties = new Dictionary<string, object>();
-        private IBaseShape _owner;
+        private IObservableObject _owner;
         private IShapeState _state;
         private IShapeStyle _style;
         private IMatrixObject _transform;
@@ -26,7 +26,7 @@ namespace Core2D.Shapes
         public abstract Type TargetType { get; }
 
         /// <inheritdoc/>
-        public virtual IBaseShape Owner
+        public virtual IObservableObject Owner
         {
             get => _owner;
             set => Update(ref _owner, value);

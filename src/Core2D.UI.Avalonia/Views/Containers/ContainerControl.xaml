@@ -38,6 +38,9 @@
                 </TabControl>
             </Grid>
         </TabItem>
+        <TabItem Header="Owner" Classes="property">
+            <ContentControl Content="{Binding Owner}"/>
+        </TabItem>
         <TabItem Header="Data" Classes="property">
             <ContentControl Content="{Binding Data}"/>
         </TabItem>

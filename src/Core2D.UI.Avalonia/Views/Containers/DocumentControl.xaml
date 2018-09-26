@@ -18,6 +18,9 @@
                 <TextBox Text="{Binding Name, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
             </Grid>
         </TabItem>
+        <TabItem Header="Owner" Classes="property">
+            <ContentControl Content="{Binding Owner}"/>
+        </TabItem>
         <TabItem Header="Pages" Classes="property">
             <ListBox Items="{Binding Pages}" Classes="default">
                 <ListBox.DataTemplates>
