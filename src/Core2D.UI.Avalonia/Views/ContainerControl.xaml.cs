@@ -98,7 +98,11 @@ namespace Core2D.UI.Avalonia.Views
                 var db = (object)container.Data.Properties;
                 var record = (object)container.Data.Record;
 
-                dataFlow.Bind(container.Template, db, record);
+                if (container.Template != null)
+                {
+                    dataFlow.Bind(container.Template, db, record);
+                }
+
                 dataFlow.Bind(container, db, record);
 
                 s_templatePresenter.Render(context, renderer, Container, 0.0, 0.0);
