@@ -497,8 +497,16 @@ namespace Core2D.UI.Avalonia.Editor
         {
             var editor = _serviceProvider.GetService<ProjectEditor>();
             var dockFactory = _serviceProvider.GetService<IDockFactory>();
+
+            var currentViewId = editor.Layout.CurrentView.Id;
             editor.Layout = dockFactory.CreateLayout();
             dockFactory.InitLayout(editor.Layout);
+
+            var view = dockFactory.FindView(editor.Layout, (v) => v.Id == currentViewId);
+            if (view != null)
+            {
+                editor.Layout.Navigate(view);
+            }
         }
     }
 }
