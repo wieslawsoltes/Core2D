@@ -3,6 +3,7 @@
 using System;
 using Autofac;
 using Avalonia;
+using Avalonia.Gtk3;
 using Avalonia.Logging.Serilog;
 using Core2D.UI.Avalonia.Modules;
 using Core2D.Interfaces;
@@ -31,6 +32,7 @@ namespace Core2D.UI.Avalonia
         [STAThread]
         private static void Main(string[] args)
         {
+            bool useGpu = true;
             bool deferredRendering = true;
             bool useDirect2D1 = false;
             bool useSkia = false;
@@ -42,6 +44,9 @@ namespace Core2D.UI.Avalonia
             {
                 switch (arg)
                 {
+                    case "--software":
+                        useGpu = false;
+                        break;
                     case "--immediate":
                         deferredRendering = false;
                         break;
@@ -93,7 +98,12 @@ namespace Core2D.UI.Avalonia
                         }
                         if (useGtk3 == true)
                         {
-                            appBuilder.UseGtk3(deferredRendering);
+                            var options = new Gtk3PlatformOptions
+                            {
+                                UseDeferredRendering = deferredRendering,
+                                UseGpuAcceleration = useGpu
+                            };
+                            appBuilder.UseGtk3(options);
                         }
                         if (useMonoMac == true)
                         {
