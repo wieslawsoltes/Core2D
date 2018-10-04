@@ -18,7 +18,9 @@ namespace Core2D.UI.Avalonia.Views
     {
         private ProjectEditor _projectEditor;
         private InputProcessor _inputProcessor;
-        private ContainerControl _containerControl;
+        private ContainerControl _containerControlData;
+        private ContainerControl _containerControlTemplate;
+        private ContainerControl _containerControlEditor;
         private ZoomBorder _zoomBorder;
 
         /// <summary>
@@ -82,12 +84,19 @@ namespace Core2D.UI.Avalonia.Views
         public void AttachEditor()
         {
             _projectEditor = DataContext as ProjectEditor;
-            _containerControl = this.Find<ContainerControl>("containerControl");
+            _containerControlData = this.Find<ContainerControl>("containerControlData");
+            _containerControlTemplate = this.Find<ContainerControl>("containerControlTemplate");
+            _containerControlEditor = this.Find<ContainerControl>("containerControlEditor");
             _zoomBorder = this.Find<ZoomBorder>("zoomBorder");
 
-            if (_projectEditor != null && _containerControl != null && _zoomBorder != null)
+            if (_projectEditor != null && _containerControlEditor != null && _zoomBorder != null)
             {
-                _projectEditor.CanvasPlatform.Invalidate = () => _containerControl.InvalidateVisual();
+                _projectEditor.CanvasPlatform.Invalidate = () =>
+                {
+                    _containerControlData.InvalidateVisual();
+                    _containerControlTemplate.InvalidateVisual();
+                    _containerControlEditor.InvalidateVisual();
+                };
                 _projectEditor.CanvasPlatform.ResetZoom = () => _zoomBorder.Reset();
                 _projectEditor.CanvasPlatform.AutoFitZoom = () => _zoomBorder.AutoFit();
                 _projectEditor.CanvasPlatform.Zoom = _zoomBorder;
@@ -97,7 +106,7 @@ namespace Core2D.UI.Avalonia.Views
                 _inputProcessor = new InputProcessor(
                     new AvaloniaInputSource(
                         _zoomBorder,
-                        _containerControl,
+                        _containerControlEditor,
                         _zoomBorder.FixInvalidPointPosition), 
                     _projectEditor);
             }
@@ -108,7 +117,7 @@ namespace Core2D.UI.Avalonia.Views
         /// </summary>
         public void DetachEditor()
         {
-            if (_projectEditor != null && _containerControl != null && _zoomBorder != null)
+            if (_projectEditor != null && _containerControlEditor != null && _zoomBorder != null)
             {
                 _projectEditor.CanvasPlatform.Invalidate = null;
                 _projectEditor.CanvasPlatform.ResetZoom = null;
@@ -121,7 +130,9 @@ namespace Core2D.UI.Avalonia.Views
             }
 
             _projectEditor = null;
-            _containerControl = null;
+            _containerControlData = null;
+            _containerControlTemplate = null;
+            _containerControlEditor = null;
             _zoomBorder = null;
         }
     }

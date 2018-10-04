@@ -23,7 +23,10 @@
                         <ItemsControl VerticalAlignment="Stretch" Items="{Binding Pages}">
                             <ItemsControl.DataTemplates>
                                 <DataTemplate DataType="ContainersCore:IPageContainer">
-                                    <views:ContainerControl Container="{Binding}" ClipToBounds="False" Margin="0,4,0,4"/>
+                                    <Grid ClipToBounds="False" Margin="0,4,0,4">
+                                        <views:ContainerControl Container="{Binding}" PresenterType="Data" ClipToBounds="False"/>
+                                        <views:ContainerControl Container="{Binding}" PresenterType="Export" ClipToBounds="False"/>
+                                    </Grid>
                                 </DataTemplate>
                             </ItemsControl.DataTemplates>
                         </ItemsControl>

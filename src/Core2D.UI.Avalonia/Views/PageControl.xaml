@@ -5,6 +5,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
              xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
+             xmlns:iac="clr-namespace:Avalonia.Xaml.Interactions.Custom;assembly=Avalonia.Xaml.Interactions.Custom"
              xmlns:id="clr-namespace:Dock.Avalonia;assembly=Dock.Avalonia"
              xmlns:handlers="clr-namespace:Core2D.UI.Avalonia.Dock.Handlers;assembly=Core2D.UI.Avalonia"
              xmlns:converters="clr-namespace:Core2D.UI.Avalonia.Converters;assembly=Core2D.UI.Avalonia"
@@ -17,6 +18,54 @@
         <id:DockDropHandler x:Key="DockDropHandler"/>
         <handlers:EditorDropHandler x:Key="EditorDropHandler"/>
     </UserControl.Resources>
+    <UserControl.KeyBindings>
+        <!-- Edit -->
+        <KeyBinding Command="{Binding OnDelete}" CommandParameter="{Binding}" Gesture="Delete"/>
+        <KeyBinding Command="{Binding OnDeselectAll}" Gesture="Escape"/>
+        <KeyBinding Command="{Binding OnSendToBackSelected}" Gesture="Shift+OemMinus"/>
+        <KeyBinding Command="{Binding OnSendBackwardSelected}" Gesture="OemMinus"/>
+        <KeyBinding Command="{Binding OnBringForwardSelected}" Gesture="OemPlus"/>
+        <KeyBinding Command="{Binding OnBringToFrontSelected}" Gesture="Shift+OemPlus"/>
+        <KeyBinding Command="{Binding OnSendToBackSelected}" Gesture="Shift+Subtract"/>
+        <KeyBinding Command="{Binding OnSendBackwardSelected}" Gesture="Subtract"/>
+        <KeyBinding Command="{Binding OnBringForwardSelected}" Gesture="Add"/>
+        <KeyBinding Command="{Binding OnBringToFrontSelected}" Gesture="Shift+Add"/>
+        <KeyBinding Command="{Binding OnMoveUpSelected}" Gesture="Up"/>
+        <KeyBinding Command="{Binding OnMoveDownSelected}" Gesture="Down"/>
+        <KeyBinding Command="{Binding OnMoveLeftSelected}" Gesture="Left"/>
+        <KeyBinding Command="{Binding OnMoveRightSelected}" Gesture="Right"/>
+        <!-- View -->
+        <KeyBinding Command="{Binding Platform.OnZoomReset}" Gesture="Z"/>
+        <KeyBinding Command="{Binding Platform.OnZoomAutoFit}" Gesture="X"/>
+        <!-- Tool -->
+        <KeyBinding Command="{Binding OnToolNone}" Gesture="N"/>
+        <KeyBinding Command="{Binding OnToolSelection}" Gesture="S"/>
+        <KeyBinding Command="{Binding OnToolPoint}" Gesture="P"/>
+        <KeyBinding Command="{Binding OnToolLine}" Gesture="L"/>
+        <KeyBinding Command="{Binding OnToolArc}" Gesture="A"/>
+        <KeyBinding Command="{Binding OnToolCubicBezier}" Gesture="B"/>
+        <KeyBinding Command="{Binding OnToolQuadraticBezier}" Gesture="Q"/>
+        <KeyBinding Command="{Binding OnToolPath}" Gesture="H"/>
+        <KeyBinding Command="{Binding OnToolMove}" Gesture="M"/>
+        <KeyBinding Command="{Binding OnToolRectangle}" Gesture="R"/>
+        <KeyBinding Command="{Binding OnToolEllipse}" Gesture="E"/>
+        <KeyBinding Command="{Binding OnToolText}" Gesture="T"/>
+        <KeyBinding Command="{Binding OnToolImage}" Gesture="I"/>
+        <!-- Options -->
+        <KeyBinding Command="{Binding OnToggleDefaultIsStroked}" Gesture="K"/>
+        <KeyBinding Command="{Binding OnToggleDefaultIsFilled}" Gesture="F"/>
+        <KeyBinding Command="{Binding OnToggleDefaultIsClosed}" Gesture="D"/>
+        <KeyBinding Command="{Binding OnToggleDefaultIsSmoothJoin}" Gesture="J"/>
+        <KeyBinding Command="{Binding OnToggleSnapToGrid}" Gesture="G"/>
+        <KeyBinding Command="{Binding OnToggleTryToConnect}" Gesture="C"/>
+        <KeyBinding Command="{Binding OnToggleCloneStyle}" Gesture="Y"/>
+    </UserControl.KeyBindings>
+    <i:Interaction.Behaviors>
+        <iac:FocusOnAttachedToVisualTreeBehavior/>
+        <iac:FocusOnPointerMovedBehavior/>
+        <id:DropBehavior Context="{Binding Layout}" Handler="{StaticResource DockDropHandler}"/>
+        <id:DropBehavior Context="{Binding}" Handler="{StaticResource EditorDropHandler}"/>
+    </i:Interaction.Behaviors>
     <Border Classes="container">
         <i:Interaction.Behaviors>
             <id:DropBehavior Context="{Binding Layout}" Handler="{StaticResource DockDropHandler}"/>
@@ -24,12 +73,11 @@
         </i:Interaction.Behaviors>
         <Border Classes="transparent" ClipToBounds="True">
             <paz:ZoomBorder x:Name="zoomBorder" Stretch="None" ZoomSpeed="1.2" PanButton="Right" EnableInput="{Binding IsToolIdle}" Background="Transparent" ClipToBounds="False" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-                <views:ContainerControl x:Name="containerControl" Renderer="{Binding Renderers[0]}" DataFlow="{Binding DataFlow}" Container="{Binding Project.CurrentContainer}" ClipToBounds="False">
-                    <i:Interaction.Behaviors>
-                        <id:DropBehavior Context="{Binding Layout}" Handler="{StaticResource DockDropHandler}"/>
-                        <id:DropBehavior Context="{Binding}" Handler="{StaticResource EditorDropHandler}"/>
-                    </i:Interaction.Behaviors>
-                </views:ContainerControl>
+                <Grid ClipToBounds="False">
+                    <views:ContainerControl x:Name="containerControlData" Renderer="{Binding Renderers[0]}" DataFlow="{Binding DataFlow}" Container="{Binding Project.CurrentContainer}" PresenterType="Data" ClipToBounds="False"/>
+                    <views:ContainerControl x:Name="containerControlTemplate" Renderer="{Binding Renderers[0]}" DataFlow="{Binding DataFlow}" Container="{Binding Project.CurrentContainer}" PresenterType="Template" ClipToBounds="False"/>
+                    <views:ContainerControl x:Name="containerControlEditor" Renderer="{Binding Renderers[0]}" DataFlow="{Binding DataFlow}" Container="{Binding Project.CurrentContainer}" PresenterType="Editor" ClipToBounds="False"/>
+                </Grid>
             </paz:ZoomBorder>
         </Border>
     </Border>
