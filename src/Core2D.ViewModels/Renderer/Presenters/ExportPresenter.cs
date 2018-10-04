@@ -12,6 +12,10 @@ namespace Core2D.Renderer.Presenters
         /// <inheritdoc/>
         public void Render(object dc, IShapeRenderer renderer, IPageContainer container, double dx, double dy)
         {
+            var flags = renderer.State.DrawShapeState.Flags;
+
+            renderer.State.DrawShapeState.Flags = ShapeStateFlags.Printable;
+
             renderer.Fill(dc, dx, dy, container.Width, container.Height, container.Background);
 
             if (container.Template != null)
@@ -20,6 +24,8 @@ namespace Core2D.Renderer.Presenters
             }
 
             renderer.Draw(dc, container, dx, dy);
+
+            renderer.State.DrawShapeState.Flags = flags;
         }
     }
 }
