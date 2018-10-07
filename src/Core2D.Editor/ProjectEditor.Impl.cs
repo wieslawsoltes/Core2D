@@ -31,12 +31,12 @@ namespace Core2D.Editor
         private object _scriptState;
         private IPageContainer _pageToCopy = default;
         private IDocumentContainer _documentToCopy = default;
-        private IBaseShape _hover = default;
+        private IBaseShape _hoveredShape = default;
 
-        public IBaseShape Hover1
+        public IBaseShape HoveredShape
         {
-            get => _hover;
-            set => _hover = value;
+            get => _hoveredShape;
+            set => _hoveredShape = value;
         }
 
         private void LogError(Exception ex)
@@ -3186,7 +3186,7 @@ namespace Core2D.Editor
             if (layer != null)
             {
                 Select(layer, shape);
-                Hover1 = shape;
+                HoveredShape = shape;
             }
         }
 
@@ -3196,9 +3196,9 @@ namespace Core2D.Editor
         /// <param name="layer">The layer object.</param>
         public void Dehover(ILayerContainer layer)
         {
-            if (layer != null && Hover1 != null)
+            if (layer != null && HoveredShape != null)
             {
-                Hover1 = default;
+                HoveredShape = default;
                 Deselect(layer);
             }
         }
@@ -3215,7 +3215,7 @@ namespace Core2D.Editor
                 return false;
 
             if (Renderers?[0]?.State?.SelectedShapes == null
-                && !(Renderers?[0]?.State?.SelectedShape != null && Hover1 != Renderers?[0]?.State?.SelectedShape))
+                && !(Renderers?[0]?.State?.SelectedShape != null && HoveredShape != Renderers?[0]?.State?.SelectedShape))
             {
                 var point = HitTest.TryToGetPoint(Project.CurrentContainer?.CurrentLayer?.Shapes, new Point2(x, y), Project.Options.HitThreshold);
                 if (point != null)
@@ -3233,7 +3233,7 @@ namespace Core2D.Editor
                     }
                     else
                     {
-                        if (Renderers[0].State.SelectedShape != null && Renderers[0].State.SelectedShape == Hover1)
+                        if (Renderers[0].State.SelectedShape != null && Renderers[0].State.SelectedShape == HoveredShape)
                         {
                             Dehover(Project.CurrentContainer?.CurrentLayer);
                         }
