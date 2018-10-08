@@ -1,0 +1,44 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFrameworks>netcoreapp2.1</TargetFrameworks>
+    <RuntimeIdentifiers>win7-x64;ubuntu.14.04-x64;debian.8-x64;osx.10.12-x64</RuntimeIdentifiers>
+    <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
+    <EnableDefaultCompileItems>False</EnableDefaultCompileItems>
+    <CoreRT>False</CoreRT>
+    <TieredCompilation>True</TieredCompilation>
+    <AssemblyName>Core2D.UI.Avalonia</AssemblyName>
+    <RootNamespace>Core2D.UI.Avalonia</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup Condition="'$(CoreRT)' == 'True'">
+    <RdXmlFile Include="$(MSBuildThisFileDirectory)..\..\build\native\rd.xml" />
+    <IlcArg Include="--stacktracedata" />
+  </ItemGroup>
+
+  <Import Project="..\..\build\Base.props" />
+  <Import Project="..\..\build\ILCompiler.props" Condition="'$(CoreRT)' == 'True'" />
+  <Import Project="..\..\build\NETCore.props" Condition="'$(CoreRT)' == 'False'" />
+  <!--<Import Project="..\..\build\NSubsys.props" Condition="'$(CoreRT)' == 'False'" />-->
+  <Import Project="..\..\build\Autofac.props" />
+  <Import Project="..\..\build\Rx.props" />
+  <Import Project="..\..\build\Avalonia.props" />
+  <Import Project="..\..\build\Avalonia.Desktop.props" />
+  <Import Project="..\..\build\SkiaSharp.props" />
+  <Import Project="..\..\build\SharpDX.props" />
+  <!--<Import Project="..\..\build\Linker.props" Condition="'$(CoreRT)' == 'False'" />-->
+  <Import Project="..\..\build\Math.Spatial.props" />
+  <Import Project="..\..\build\Newtonsoft.Json.props" />
+
+  <ItemGroup>
+    <Compile Include="**\*.cs" Exclude="obj\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Assets\*" Exclude="bin\**;obj\**;**\*.xproj;packages\**;@(EmbeddedResource)" />
+  </ItemGroup>
+
+  <Import Project="..\..\build\EmbedXaml.props" />
+
+</Project>

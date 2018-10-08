@@ -1,0 +1,21 @@
+﻿<!-- Copyright (c) Wiesław Šoltés. All rights reserved. -->
+<!-- Licensed under the MIT license. See LICENSE file in the project root for full license information. -->
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:Core2D.UI.Avalonia.Views.Filters;assembly=Core2D.UI.Avalonia"
+             xmlns:ViewsStyle="clr-namespace:Core2D.UI.Avalonia.Views.Style;assembly=Core2D.UI.Avalonia">
+    <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto" ColumnDefinitions="Auto,*,50">
+        <TextBlock Classes="default" Grid.Column="0" Grid.Row="0" Text="IsEnabled"/>
+        <CheckBox Classes="default" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="0" IsChecked="{Binding IsEnabled}"/>
+        <TextBlock Classes="default" Grid.Column="0" Grid.Row="1" Text="EnableGuides"/>
+        <CheckBox Classes="default" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1" IsChecked="{Binding EnableGuides}"/>
+        <!-- TODO: Mode -->
+        <!-- TODO: Target -->
+        <TextBlock Classes="default" Grid.Column="0" Grid.Row="4" Text="Threshold"/>
+        <Slider Classes="default" Grid.Column="1" Grid.Row="4" Value="{Binding Threshold}" Minimum="0" Maximum="32"/>
+        <TextBox Classes="default" Grid.Column="2" Grid.Row="4" Text="{Binding Threshold}"/>
+        <Expander Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="5" Header="GuideStyle" IsExpanded="False">
+            <ViewsStyle:DrawStyleView DataContext="{Binding GuideStyle}"/>
+        </Expander>
+    </Grid>
+</UserControl>

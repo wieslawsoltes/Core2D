@@ -1,0 +1,25 @@
+﻿<!-- Copyright (c) Wiesław Šoltés. All rights reserved. -->
+<!-- Licensed under the MIT license. See LICENSE file in the project root for full license information. -->
+<UserControl xmlns="https://github.com/avaloniaui" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:Core2D.UI.Avalonia.Views.Style;assembly=Core2D.UI.Avalonia">
+    <Grid RowDefinitions="Auto,Auto,Auto">
+        <Expander Grid.Row="0" Header="Stroke" IsExpanded="True">
+            <local:DrawColorView DataContext="{Binding Stroke}"/>
+        </Expander>
+        <Expander Grid.Row="1" Header="Fill" IsExpanded="True">
+            <local:DrawColorView DataContext="{Binding Fill}"/>
+        </Expander>
+        <Expander Grid.Row="2" Header="Properties" IsExpanded="True">
+            <Grid RowDefinitions="Auto,Auto,Auto" ColumnDefinitions="Auto,*,50">
+                <TextBlock Classes="default" Grid.Column="0" Grid.Row="0" Text="Thickness"/>
+                <Slider Classes="default" Grid.Column="1" Grid.Row="0" Value="{Binding Thickness}" Minimum="0" Maximum="32"/>
+                <TextBox Classes="default" Grid.Column="2" Grid.Row="0" Text="{Binding Thickness}"/>
+                <TextBlock Classes="default" Grid.Column="0" Grid.Row="1" Text="IsStroked"/>
+                <CheckBox Classes="default" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1" IsChecked="{Binding IsStroked}"/>
+                <TextBlock Classes="default" Grid.Column="0" Grid.Row="2" Text="IsFilled"/>
+                <CheckBox Classes="default" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="2" IsChecked="{Binding IsFilled}"/>
+            </Grid>
+        </Expander>
+    </Grid>
+</UserControl>

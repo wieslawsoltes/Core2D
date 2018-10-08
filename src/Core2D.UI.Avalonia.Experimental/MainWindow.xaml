@@ -1,0 +1,38 @@
+﻿<!-- Copyright (c) Wiesław Šoltés. All rights reserved. -->
+<!-- Licensed under the MIT license. See LICENSE file in the project root for full license information. -->
+<Window xmlns="https://github.com/avaloniaui" 
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:views="clr-namespace:Core2D.UI.Avalonia.Views;assembly=Core2D.UI.Avalonia"
+        UseLayoutRounding="True" RenderOptions.BitmapInterpolationMode="HighQuality"
+        Title="Core2D" Height="700" Width="1320">
+    <Window.KeyBindings>
+        <!-- File -->
+        <KeyBinding Command="{Binding New}" Gesture="Ctrl+N"/>
+        <KeyBinding Command="{Binding Open}" Gesture="Ctrl+O"/>
+        <KeyBinding Command="{Binding SaveAs}" Gesture="Ctrl+S"/>
+        <KeyBinding Command="{Binding Exit}" Gesture="Alt+F4"/>
+        <!-- Edit -->
+        <KeyBinding Command="{Binding Cut}" Gesture="Ctrl+X"/>
+        <KeyBinding Command="{Binding Copy}" Gesture="Ctrl+C"/>
+        <KeyBinding Command="{Binding Paste}" Gesture="Ctrl+V"/>
+        <KeyBinding Command="{Binding Delete}" Gesture="Delete"/>
+        <KeyBinding Command="{Binding Group}" Gesture="Ctrl+G"/>
+        <KeyBinding Command="{Binding SelectAll}" Gesture="Ctrl+A"/>
+        <!-- Tool -->
+        <KeyBinding Command="{Binding SetNoneTool}" Gesture="N"/>
+        <KeyBinding Command="{Binding SetSelectionTool}" Gesture="S"/>
+        <KeyBinding Command="{Binding SetLineTool}" Gesture="L"/>
+        <KeyBinding Command="{Binding SetPointTool}" Gesture="P"/>
+        <KeyBinding Command="{Binding SetCubicBezierTool}" Gesture="C"/>
+        <KeyBinding Command="{Binding SetQuadraticBezierTool}" Gesture="Q"/>
+        <KeyBinding Command="{Binding SetPathTool}" Gesture="H"/>
+        <KeyBinding Command="{Binding SetMoveTool}" Gesture="M"/>
+        <KeyBinding Command="{Binding SetRectangleTool}" Gesture="R"/>
+        <KeyBinding Command="{Binding SetEllipseTool}" Gesture="E"/>
+        <KeyBinding Command="{Binding SetTextTool}" Gesture="T"/>
+        <!-- View -->
+        <KeyBinding Command="{Binding ResetZoom}" Gesture="Z"/>
+        <KeyBinding Command="{Binding AutoFitZoom}" Gesture="X"/>
+    </Window.KeyBindings>
+    <views:MainView x:Name="mainView"/>
+</Window>

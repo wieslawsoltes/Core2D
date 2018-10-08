@@ -1,0 +1,30 @@
+﻿<!-- Copyright (c) Wiesław Šoltés. All rights reserved. -->
+<!-- Licensed under the MIT license. See LICENSE file in the project root for full license information. -->
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:Core2D.UI.Avalonia.Views;assembly=Core2D.UI.Avalonia"
+             xmlns:ViewsIntersectionsLineSettings="clr-namespace:Core2D.UI.Avalonia.Views.Intersections;assembly=Core2D.UI.Avalonia"
+             xmlns:EditorIntersectionsLine="clr-namespace:Core2D.Editor.Intersections.Line;assembly=Core2D.UI.Avalonia">
+    <Grid RowDefinitions="Auto,*">
+        <DropDown Classes="default" Grid.Row="0" x:Name="Intersections" Items="{Binding CurrentTool.Intersections}" SelectedIndex="0">
+            <DropDown.DataTemplates>
+                <DataTemplate>
+                    <TextBlock Classes="default" Text="{Binding Title}"/>
+                </DataTemplate>
+            </DropDown.DataTemplates>
+        </DropDown>
+        <ContentControl Grid.Row="1" Content="{Binding ElementName=Intersections, Path=SelectedItem.Settings}">
+            <ContentControl.DataTemplates>
+                <DataTemplate DataType="{x:Type EditorIntersectionsLine:LineLineSettings}">
+                    <ViewsIntersectionsLineSettings:LineLineSettingsView/>
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type EditorIntersectionsLine:RectangleLineSettings}">
+                    <ViewsIntersectionsLineSettings:RectangleLineSettingsView/>
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type EditorIntersectionsLine:EllipseLineSettings}">
+                    <ViewsIntersectionsLineSettings:EllipseLineSettingsView/>
+                </DataTemplate>
+            </ContentControl.DataTemplates>
+        </ContentControl>
+    </Grid>
+</UserControl>

@@ -1,0 +1,51 @@
+﻿<!-- Copyright (c) Wiesław Šoltés. All rights reserved. -->
+<!-- Licensed under the MIT license. See LICENSE file in the project root for full license information. -->
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:Core2D.UI.Avalonia.Views;assembly=Core2D.UI.Avalonia"
+             xmlns:ViewsToolsSettings="clr-namespace:Core2D.UI.Avalonia.Views.Tools;assembly=Core2D.UI.Avalonia"
+             xmlns:EditorTools="clr-namespace:Core2D.Editor.Tools;assembly=Core2D.UI.Avalonia">
+    <ContentControl Content="{Binding CurrentTool.Settings}">
+        <ContentControl.DataTemplates>
+            <DataTemplate DataType="{x:Type EditorTools:NoneToolSettings}">
+                <ViewsToolsSettings:NoneToolSettingsView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type EditorTools:SelectionToolSettings}">
+                <ViewsToolsSettings:SelectionToolSettingsView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type EditorTools:GuideToolSettings}">
+                <ViewsToolsSettings:GuideToolSettingsView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type EditorTools:PointToolSettings}">
+                <ViewsToolsSettings:PointToolSettingsView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type EditorTools:LineToolSettings}">
+                <ViewsToolsSettings:LineToolSettingsView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type EditorTools:PolyLineToolSettings}">
+                <ViewsToolsSettings:PolyLineToolSettingsView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type EditorTools:CubicBezierToolSettings}">
+                <ViewsToolsSettings:CubicBezierToolSettingsView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type EditorTools:QuadraticBezierToolSettings}">
+                <ViewsToolsSettings:QuadraticBezierToolSettingsView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type EditorTools:PathToolSettings}">
+                <ViewsToolsSettings:PathToolSettingsView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type EditorTools:ScribbleToolSettings}">
+                <ViewsToolsSettings:ScribbleToolSettingsView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type EditorTools:RectangleToolSettings}">
+                <ViewsToolsSettings:RectangleToolSettingsView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type EditorTools:EllipseToolSettings}">
+                <ViewsToolsSettings:EllipseToolSettingsView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type EditorTools:TextToolSettings}">
+                <ViewsToolsSettings:TextToolSettingsView/>
+            </DataTemplate>
+        </ContentControl.DataTemplates>
+    </ContentControl>
+</UserControl>
