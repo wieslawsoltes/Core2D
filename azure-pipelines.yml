@@ -47,7 +47,7 @@ jobs:
       dotnet tool install -g Cake.Tool --version 0.30.0
       set PATH=%PATH%;%USERPROFILE%\.dotnet\tools
       dotnet cake build.cake -Target="Azure-Windows" -Platform="Any CPU" -Configuration="Release"
-- job: CoreRT
+- job: Windows-CoreRT
   pool:
     vmImage: 'vs2017-win2016'
   steps:
