@@ -59,7 +59,7 @@ jobs:
       sudo apt-add-repository "deb https://apt.llvm.org/xenial/ llvm-toolchain-xenial-3.9 main"
       sudo apt-get update
       sudo apt -o Acquire::AllowInsecureRepositories=true update
-      sudo apt-get install clang-3.9
+      sudo apt-get install -y clang-3.9 lldb-3.9
       clang-3.9 --version
       export COREHOST_TRACE=0
       export DOTNET_SKIP_FIRST_TIME_EXPERIENCE=1
