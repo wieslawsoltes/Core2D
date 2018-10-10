@@ -19,9 +19,6 @@ namespace Core2D.UI.Avalonia.Windows
         {
             InitializeComponent();
             this.AttachDevTools();
-#if !_CORERT
-            WindowStartupLocation = WindowStartupLocation.CenterScreen;
-#endif
         }
 
         /// <summary>
