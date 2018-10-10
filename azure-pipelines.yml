@@ -62,3 +62,18 @@ jobs:
       dotnet --info
       dotnet publish .\src\Core2D.UI.Avalonia\Core2D.UI.Avalonia.csproj -r win-x64 -c Release -f netcoreapp2.1 -p:CoreRT=True
       copy c:\Users\%USERNAME%\.nuget\packages\skiasharp\1.60.0\runtimes\win7-x64\native\libSkiaSharp.dll src\Core2D.UI.Avalonia\bin\AnyCPU\Release\netcoreapp2.1\win-x64\native
+      copy "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\VC\Redist\MSVC\14.15.26706\x64\Microsoft.VC141.CRT\msvcp140.dll" src\Core2D.UI.Avalonia\bin\AnyCPU\Release\netcoreapp2.1\win-x64\native
+      copy "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\VC\Redist\MSVC\14.15.26706\x64\Microsoft.VC141.CRT\vcruntime140.dll" src\Core2D.UI.Avalonia\bin\AnyCPU\Release\netcoreapp2.1\win-x64\native
+      copy "C:\Program Files (x86)\Google\Chrome\Application\68.0.3440.106\d3dcompiler_47.dll" src\Core2D.UI.Avalonia\bin\AnyCPU\Release\netcoreapp2.1\win-x64\native
+      copy "C:\Program Files (x86)\Google\Chrome\Application\68.0.3440.106\libegl.dll" src\Core2D.UI.Avalonia\bin\AnyCPU\Release\netcoreapp2.1\win-x64\native
+      copy "C:\Program Files (x86)\Google\Chrome\Application\68.0.3440.106\libglesv2.dll" src\Core2D.UI.Avalonia\bin\AnyCPU\Release\netcoreapp2.1\win-x64\native
+  - task: ArchiveFiles@2
+    inputs:
+      rootFolderOrFile: '$(Build.SourcesDirectory)'
+      includeRootFolder: 'src\Core2D.UI.Avalonia\bin\AnyCPU\Release\netcoreapp2.1\win-x64\native'
+      archiveType: '7z'
+      archiveFile: '$(Build.ArtifactStagingDirectory)/Core2D.UI.Avalonia-$(Build.BuildId).zip'
+  - task: PublishBuildArtifacts@1
+    inputs:
+      pathtoPublish: '$(Build.ArtifactStagingDirectory)'
+      artifactName: 'CoreRT'
