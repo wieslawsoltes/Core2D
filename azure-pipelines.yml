@@ -47,3 +47,18 @@ jobs:
       dotnet tool install -g Cake.Tool --version 0.30.0
       set PATH=%PATH%;%USERPROFILE%\.dotnet\tools
       dotnet cake build.cake -Target="Azure-Windows" -Platform="Any CPU" -Configuration="Release"
+- job: CoreRT
+  pool:
+    vmImage: 'vs2017-win2017'
+  steps:
+  - task: DotNetCoreInstaller@0
+    inputs:
+      version: '2.1.401'
+  - script: |
+      set COREHOST_TRACE=0
+      set DOTNET_SKIP_FIRST_TIME_EXPERIENCE=1
+      set DOTNET_CLI_TELEMETRY_OPTOUT=1
+      where dotnet
+      dotnet --info
+      dotnet publish .\src\Core2D.UI.Avalonia\Core2D.UI.Avalonia.csproj -r win-x64 -c Release -f netcoreapp2.1 -p:CoreRT=True
+      copy c:\Users\%USERNAME%\.nuget\packages\skiasharp\1.60.0\runtimes\win7-x64\native\libSkiaSharp.dll src\Core2D.UI.Avalonia\bin\AnyCPU\Release\netcoreapp2.1\win-x64\native
