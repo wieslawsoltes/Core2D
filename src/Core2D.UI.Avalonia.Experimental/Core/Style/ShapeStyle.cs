@@ -81,7 +81,7 @@ namespace Core2D.Style
             return false;
         }
 
-        public object Copy(IDictionary<object, object> shared)
+        public override object Copy(IDictionary<object, object> shared)
         {
             return new ShapeStyle()
             {

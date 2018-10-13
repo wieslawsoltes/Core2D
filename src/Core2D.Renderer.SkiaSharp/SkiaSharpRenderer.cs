@@ -377,6 +377,24 @@ namespace Core2D.Renderer.SkiaSharp
         }
 
         /// <inheritdoc/>
+        public void InvalidateCache(IShapeStyle style)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc/>
+        public void InvalidateCache(IMatrixObject matrix)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc/>
+        public void InvalidateCache(IBaseShape shape, IShapeStyle style, double dx, double dy)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc/>
         public void ClearCache(bool isZooming)
         {
             if (!isZooming)

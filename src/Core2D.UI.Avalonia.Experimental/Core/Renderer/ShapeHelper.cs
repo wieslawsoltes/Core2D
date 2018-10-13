@@ -6,6 +6,6 @@ namespace Core2D.Renderer
 {
     public abstract class ShapeHelper
     {
-        public abstract void Draw(object dc, ShapeRenderer renderer, BaseShape shape, ISelection selected, double dx, double dy);
+        public abstract void Draw(object dc, ShapeRenderer renderer, BaseShape shape, ISelection selection, double dx, double dy);
     }
 }

@@ -82,17 +82,17 @@ namespace Core2D.Shapes
                 renderer.DrawQuadraticBezier(dc, this, Style, dx, dy);
             }
 
-            if (renderer.Selected.Contains(_startPoint))
+            if (renderer.SelectedShapes.Contains(_startPoint))
             {
                 _startPoint.Draw(dc, renderer, dx, dy, db, r);
             }
 
-            if (renderer.Selected.Contains(_point1))
+            if (renderer.SelectedShapes.Contains(_point1))
             {
                 _point1.Draw(dc, renderer, dx, dy, db, r);
             }
 
-            if (renderer.Selected.Contains(_point2))
+            if (renderer.SelectedShapes.Contains(_point2))
             {
                 _point2.Draw(dc, renderer, dx, dy, db, r);
             }
@@ -103,17 +103,17 @@ namespace Core2D.Shapes
 
         public override void Move(ISelection selection, double dx, double dy)
         {
-            if (!selection.Selected.Contains(_startPoint))
+            if (!selection.SelectedShapes.Contains(_startPoint))
             {
                 _startPoint.Move(selection, dx, dy);
             }
 
-            if (!selection.Selected.Contains(_point1))
+            if (!selection.SelectedShapes.Contains(_point1))
             {
                 _point1.Move(selection, dx, dy);
             }
 
-            if (!selection.Selected.Contains(_point2))
+            if (!selection.SelectedShapes.Contains(_point2))
             {
                 _point2.Move(selection, dx, dy);
             }
@@ -233,7 +233,7 @@ namespace Core2D.Shapes
             return result;
         }
 
-        public object Copy(IDictionary<object, object> shared)
+        public override object Copy(IDictionary<object, object> shared)
         {
             var copy = new QuadraticBezierShape()
             {

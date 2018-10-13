@@ -112,23 +112,23 @@ namespace Core2D.Shapes
         }
 
         /// <inheritdoc/>
-        public abstract void Move(ISet<IBaseShape> selected, double dx, double dy);
+        public abstract void Move(ISelection selection, double dx, double dy);
 
         /// <inheritdoc/>
-        public virtual void Select(ISet<IBaseShape> selected)
+        public virtual void Select(ISelection selection)
         {
-            if (!selected.Contains(this))
+            if (!selection.SelectedShapes.Contains(this))
             {
-                selected.Add(this);
+                selection.SelectedShapes.Add(this);
             }
         }
 
         /// <inheritdoc/>
-        public virtual void Deselect(ISet<IBaseShape> selected)
+        public virtual void Deselect(ISelection selection)
         {
-            if (selected.Contains(this))
+            if (selection.SelectedShapes.Contains(this))
             {
-                selected.Remove(this);
+                selection.SelectedShapes.Remove(this);
             }
         }
 

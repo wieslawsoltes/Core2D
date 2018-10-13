@@ -9,8 +9,9 @@ namespace Core2D.Renderer
 {
     public abstract class ShapeRenderer : ObservableObject, ISelection
     {
-        public abstract BaseShape Hover { get; set; }
-        public abstract ISet<BaseShape> Selected { get; set; }
+        public abstract IBaseShape HoveredShape { get; set; }
+        public abstract IBaseShape SelectedShape { get; set; }
+        public abstract ISet<IBaseShape> SelectedShapes { get; set; }
         public abstract void InvalidateCache(ShapeStyle style);
         public abstract void InvalidateCache(MatrixObject matrix);
         public abstract void InvalidateCache(BaseShape shape, ShapeStyle style, double dx, double dy);

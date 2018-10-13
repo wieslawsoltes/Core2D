@@ -20,7 +20,7 @@ namespace Core2D.Presenters
 
             foreach (var shape in shapes)
             {
-                if (selection.Selected.Contains(shape))
+                if (selection.SelectedShapes.Contains(shape))
                 {
                     if (Helpers.TryGetValue(shape.GetType(), out var helper))
                     {

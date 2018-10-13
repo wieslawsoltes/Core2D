@@ -37,7 +37,7 @@ namespace Core2D.Shapes
         {
             foreach (var point in Points)
             {
-                if (renderer.Selected.Contains(point))
+                if (renderer.SelectedShapes.Contains(point))
                 {
                     point.Draw(dc, renderer, dx, dy, db , r);
                 }
@@ -48,7 +48,7 @@ namespace Core2D.Shapes
         {
             foreach (var point in Points)
             {
-                if (!selection.Selected.Contains(point))
+                if (!selection.SelectedShapes.Contains(point))
                 {
                     point.Move(selection, dx, dy);
                 }

@@ -89,7 +89,7 @@ namespace Core2D.Shapes
         {
             var state = base.BeginTransform(dc, renderer);
 
-            var isPathSelected = renderer.Selected.Contains(this);
+            var isPathSelected = renderer.SelectedShapes.Contains(this);
 
             if (Style != null)
             {
@@ -113,21 +113,21 @@ namespace Core2D.Shapes
                 {
                     case LineShape line:
                         {
-                            var isSelected = renderer.Selected.Contains(line);
+                            var isSelected = renderer.SelectedShapes.Contains(line);
 
-                            if (isPathSelected || isSelected || renderer.Selected.Contains(line.StartPoint))
+                            if (isPathSelected || isSelected || renderer.SelectedShapes.Contains(line.StartPoint))
                             {
                                 line.StartPoint.Draw(dc, renderer, dx, dy, db, r);
                             }
 
-                            if (isPathSelected || isSelected || renderer.Selected.Contains(line.Point))
+                            if (isPathSelected || isSelected || renderer.SelectedShapes.Contains(line.Point))
                             {
                                 line.Point.Draw(dc, renderer, dx, dy, db, r);
                             }
 
                             foreach (var point in line.Points)
                             {
-                                if (isPathSelected || isSelected || renderer.Selected.Contains(point))
+                                if (isPathSelected || isSelected || renderer.SelectedShapes.Contains(point))
                                 {
                                     point.Draw(dc, renderer, dx, dy, db, r);
                                 }
@@ -136,31 +136,31 @@ namespace Core2D.Shapes
                         break;
                     case CubicBezierShape cubic:
                         {
-                            var isSelected = renderer.Selected.Contains(cubic);
+                            var isSelected = renderer.SelectedShapes.Contains(cubic);
 
-                            if (isPathSelected || isSelected || renderer.Selected.Contains(cubic.StartPoint))
+                            if (isPathSelected || isSelected || renderer.SelectedShapes.Contains(cubic.StartPoint))
                             {
                                 cubic.StartPoint.Draw(dc, renderer, dx, dy, db, r);
                             }
 
-                            if (isPathSelected || isSelected || renderer.Selected.Contains(cubic.Point1))
+                            if (isPathSelected || isSelected || renderer.SelectedShapes.Contains(cubic.Point1))
                             {
                                 cubic.Point1.Draw(dc, renderer, dx, dy, db, r);
                             }
 
-                            if (isPathSelected || isSelected || renderer.Selected.Contains(cubic.Point2))
+                            if (isPathSelected || isSelected || renderer.SelectedShapes.Contains(cubic.Point2))
                             {
                                 cubic.Point2.Draw(dc, renderer, dx, dy, db, r);
                             }
 
-                            if (isPathSelected || isSelected || renderer.Selected.Contains(cubic.Point3))
+                            if (isPathSelected || isSelected || renderer.SelectedShapes.Contains(cubic.Point3))
                             {
                                 cubic.Point3.Draw(dc, renderer, dx, dy, db, r);
                             }
 
                             foreach (var point in cubic.Points)
                             {
-                                if (isPathSelected || isSelected || renderer.Selected.Contains(point))
+                                if (isPathSelected || isSelected || renderer.SelectedShapes.Contains(point))
                                 {
                                     point.Draw(dc, renderer, dx, dy, db, r);
                                 }
@@ -169,26 +169,26 @@ namespace Core2D.Shapes
                         break;
                     case QuadraticBezierShape quadratic:
                         {
-                            var isSelected = renderer.Selected.Contains(quadratic);
+                            var isSelected = renderer.SelectedShapes.Contains(quadratic);
 
-                            if (isPathSelected || isSelected || renderer.Selected.Contains(quadratic.StartPoint))
+                            if (isPathSelected || isSelected || renderer.SelectedShapes.Contains(quadratic.StartPoint))
                             {
                                 quadratic.StartPoint.Draw(dc, renderer, dx, dy, db, r);
                             }
 
-                            if (isPathSelected || isSelected || renderer.Selected.Contains(quadratic.Point1))
+                            if (isPathSelected || isSelected || renderer.SelectedShapes.Contains(quadratic.Point1))
                             {
                                 quadratic.Point1.Draw(dc, renderer, dx, dy, db, r);
                             }
 
-                            if (isPathSelected || isSelected || renderer.Selected.Contains(quadratic.Point2))
+                            if (isPathSelected || isSelected || renderer.SelectedShapes.Contains(quadratic.Point2))
                             {
                                 quadratic.Point2.Draw(dc, renderer, dx, dy, db, r);
                             }
 
                             foreach (var point in quadratic.Points)
                             {
-                                if (isPathSelected || isSelected || renderer.Selected.Contains(point))
+                                if (isPathSelected || isSelected || renderer.SelectedShapes.Contains(point))
                                 {
                                     point.Draw(dc, renderer, dx, dy, db, r);
                                 }
@@ -205,7 +205,7 @@ namespace Core2D.Shapes
 
             foreach (var point in points)
             {
-                if (!selection.Selected.Contains(point))
+                if (!selection.SelectedShapes.Contains(point))
                 {
                     point.Move(selection, dx, dy);
                 }
@@ -240,7 +240,7 @@ namespace Core2D.Shapes
             return false;
         }
 
-        public object Copy(IDictionary<object, object> shared)
+        public override object Copy(IDictionary<object, object> shared)
         {
             var copy = new PathShape()
             {

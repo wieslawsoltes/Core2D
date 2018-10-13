@@ -23,7 +23,7 @@ namespace Core2D.Editor
             foreach (var point in Intersections)
             {
                 context.WorkingContainer.Shapes.Remove(point);
-                context.Renderer.Selected.Remove(point);
+                context.Renderer.SelectedShapes.Remove(point);
             }
             Intersections.Clear();
         }

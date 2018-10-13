@@ -47,7 +47,7 @@ namespace Core2D.Style
             this.B = b;
         }
 
-        public object Copy(IDictionary<object, object> shared)
+        public override object Copy(IDictionary<object, object> shared)
         {
             return new ArgbColor()
             {

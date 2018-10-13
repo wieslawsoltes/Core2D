@@ -2,7 +2,6 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
 using System.Collections.Generic;
-using System.Collections.Immutable;
 using Core2D.Shapes;
 
 namespace Core2D.Renderer
@@ -17,8 +16,9 @@ namespace Core2D.Renderer
         private double _zoomX;
         private double _zoomY;
         private IShapeState _drawShapeState;
+        private IBaseShape _hoveredShape;
         private IBaseShape _selectedShape;
-        private ImmutableHashSet<IBaseShape> _selectedShapes;
+        private ISet<IBaseShape> _selectedShapes;
         private IImageCache _imageCache;
 
         /// <inheritdoc/>
@@ -57,6 +57,13 @@ namespace Core2D.Renderer
         }
 
         /// <inheritdoc/>
+        public IBaseShape HoveredShape
+        {
+            get => _hoveredShape;
+            set => Update(ref _hoveredShape, value);
+        }
+
+        /// <inheritdoc/>
         public IBaseShape SelectedShape
         {
             get => _selectedShape;
@@ -64,7 +71,7 @@ namespace Core2D.Renderer
         }
 
         /// <inheritdoc/>
-        public ImmutableHashSet<IBaseShape> SelectedShapes
+        public ISet<IBaseShape> SelectedShapes
         {
             get => _selectedShapes;
             set => Update(ref _selectedShapes, value);
@@ -112,6 +119,12 @@ namespace Core2D.Renderer
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
         public virtual bool ShouldSerializeDrawShapeState() => _drawShapeState != null;
+
+        /// <summary>
+        /// Check whether the <see cref="HoveredShape"/> property has changed from its default value.
+        /// </summary>
+        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
+        public virtual bool ShouldSerializeHoveredShape() => _hoveredShape != null;
 
         /// <summary>
         /// Check whether the <see cref="SelectedShape"/> property has changed from its default value.

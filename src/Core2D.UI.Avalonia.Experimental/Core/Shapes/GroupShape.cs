@@ -102,7 +102,7 @@ namespace Core2D.Shapes
 
             foreach (var point in points)
             {
-                if (!selection.Selected.Contains(point))
+                if (!selection.SelectedShapes.Contains(point))
                 {
                     point.Move(selection, dx, dy);
                 }
@@ -111,7 +111,7 @@ namespace Core2D.Shapes
             base.Move(selection, dx, dy);
         }
 
-        public object Copy(IDictionary<object, object> shared)
+        public override object Copy(IDictionary<object, object> shared)
         {
             var copy = new GroupShape()
             {

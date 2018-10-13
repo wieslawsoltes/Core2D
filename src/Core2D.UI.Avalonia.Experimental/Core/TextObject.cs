@@ -14,7 +14,7 @@ namespace Core2D
             set => Update(ref _value, value);
         }
 
-        public object Copy(IDictionary<object, object> shared)
+        public override object Copy(IDictionary<object, object> shared)
         {
             return new TextObject()
             {

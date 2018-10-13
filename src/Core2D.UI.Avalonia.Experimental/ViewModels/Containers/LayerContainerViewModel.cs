@@ -184,7 +184,7 @@ namespace Core2D.ViewModels.Containers
         public void New()
         {
             CurrentTool.Clean(this);
-            Renderer.Selected.Clear();
+            Renderer.SelectedShapes.Clear();
             var container = new LayerContainer()
             {
                 Width = 720,
@@ -205,7 +205,7 @@ namespace Core2D.ViewModels.Containers
             var container = NewtonsoftJsonSerializer.FromJson<LayerContainer>(json);
             var workingContainer = new LayerContainer();
             CurrentTool.Clean(this);
-            Renderer.Selected.Clear();
+            Renderer.SelectedShapes.Clear();
             CurrentContainer = container;
             WorkingContainer = workingContainer;
         }
@@ -409,6 +409,11 @@ namespace Core2D.ViewModels.Containers
         public void SetStretchUniformToFill()
         {
             StretchUniformToFill?.Invoke();
+        }
+
+        public override object Copy(IDictionary<object, object> shared)
+        {
+            throw new NotImplementedException();
         }
     }
 }

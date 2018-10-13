@@ -89,7 +89,7 @@ namespace Core2D.Shapes
             Y += dy;
         }
 
-        public object Copy(IDictionary<object, object> shared)
+        public override object Copy(IDictionary<object, object> shared)
         {
             return new PointShape()
             {

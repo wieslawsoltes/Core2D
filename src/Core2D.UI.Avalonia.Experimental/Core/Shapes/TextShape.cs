@@ -60,12 +60,12 @@ namespace Core2D.Shapes
                 renderer.DrawText(dc, this, Style, dx, dy);
             }
 
-            if (renderer.Selected.Contains(TopLeft))
+            if (renderer.SelectedShapes.Contains(TopLeft))
             {
                 TopLeft.Draw(dc, renderer, dx, dy, db, r);
             }
 
-            if (renderer.Selected.Contains(BottomRight))
+            if (renderer.SelectedShapes.Contains(BottomRight))
             {
                 BottomRight.Draw(dc, renderer, dx, dy, db, r);
             }
@@ -74,7 +74,7 @@ namespace Core2D.Shapes
             base.EndTransform(dc, renderer, state);
         }
 
-        public object Copy(IDictionary<object, object> shared)
+        public override object Copy(IDictionary<object, object> shared)
         {
             var copy = new TextShape()
             {

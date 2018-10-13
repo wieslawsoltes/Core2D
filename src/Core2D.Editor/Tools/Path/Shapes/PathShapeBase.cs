@@ -71,15 +71,15 @@ namespace Core2D.Editor.Tools.Path.Shapes
             return null;
         }
 
-        public void Move(ISet<IBaseShape> selected, double dx, double dy)
+        public void Move(ISelection selection, double dx, double dy)
         {
         }
 
-        public void Select(ISet<IBaseShape> selected)
+        public void Select(ISelection selection)
         {
         }
 
-        public void Deselect(ISet<IBaseShape> selected)
+        public void Deselect(ISelection selection)
         {
         }
 

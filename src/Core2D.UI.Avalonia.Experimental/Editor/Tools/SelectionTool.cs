@@ -1,11 +1,12 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using Core2D.Editor.Selection;
+using Core2D.Editor.Selection.Helpers;
 using Core2D.Shapes;
 using Spatial;
-using Core2D.Editor.Selection.Helpers;
 
 namespace Core2D.Editor.Tools
 {
@@ -65,7 +66,7 @@ namespace Core2D.Editor.Tools
             {
                 if (!modifier.HasFlag(Settings?.SelectionModifier ?? Modifier.Control))
                 {
-                    context.Renderer.Selected.Clear();
+                    context.Renderer.SelectedShapes.Clear();
                 }
 
                 if (_rectangle == null)
@@ -148,9 +149,9 @@ namespace Core2D.Editor.Tools
 
         private void MoveNoneInternal(IToolContext context, double x, double y, Modifier modifier)
         {
-            if (!(_hover == null && context.Renderer.Selected.Count > 0))
+            if (!(_hover == null && context.Renderer.SelectedShapes.Count > 0))
             {
-                lock (context.Renderer.Selected)
+                lock (context.Renderer.SelectedShapes)
                 {
                     var previous = _hover;
 
@@ -198,9 +199,9 @@ namespace Core2D.Editor.Tools
             _previousX = x;
             _previousY = y;
 
-            if (context.Renderer.Selected.Count == 1)
+            if (context.Renderer.SelectedShapes.Count == 1)
             {
-                var shape = context.Renderer.Selected.FirstOrDefault();
+                var shape = context.Renderer.SelectedShapes.FirstOrDefault();
 
                 if (shape is PointShape source)
                 {
@@ -228,7 +229,7 @@ namespace Core2D.Editor.Tools
             }
             else
             {
-                foreach (var shape in context.Renderer.Selected.ToList())
+                foreach (var shape in context.Renderer.SelectedShapes.ToList())
                 {
                     if (Settings.DisconnectPoints && modifier.HasFlag(Settings?.ConnectionModifier ?? Modifier.Shift))
                     {
@@ -239,7 +240,7 @@ namespace Core2D.Editor.Tools
                     }
                 }
 
-                foreach (var shape in context.Renderer.Selected.ToList())
+                foreach (var shape in context.Renderer.SelectedShapes.ToList())
                 {
                     shape.Move(context.Renderer, dx, dy);
                 }
@@ -264,8 +265,8 @@ namespace Core2D.Editor.Tools
 
             if (Settings?.ClearSelectionOnClean == true)
             {
-                context.Renderer.Hover = null;
-                context.Renderer.Selected.Clear();
+                context.Renderer.HoveredShape = null;
+                context.Renderer.SelectedShapes.Clear();
             }
 
             Filters?.ForEach(f => f.Clear(context));
@@ -360,6 +361,11 @@ namespace Core2D.Editor.Tools
             base.Clean(context);
 
             CleanInternal(context);
+        }
+
+        public override object Copy(IDictionary<object, object> shared)
+        {
+            throw new NotImplementedException();
         }
     }
 }

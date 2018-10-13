@@ -38,7 +38,7 @@ namespace Core2D.Common
             throw new NotImplementedException();
         }
 
-        public void Deselect(ISet<IBaseShape> selected)
+        public void Deselect(ISelection selection)
         {
             throw new NotImplementedException();
         }
@@ -83,7 +83,7 @@ namespace Core2D.Common
             throw new NotImplementedException();
         }
 
-        public void Move(ISet<IBaseShape> selected, double dx, double dy)
+        public void Move(ISelection selection, double dx, double dy)
         {
             throw new NotImplementedException();
         }
@@ -93,7 +93,7 @@ namespace Core2D.Common
             throw new NotImplementedException();
         }
 
-        public void Select(ISet<IBaseShape> selected)
+        public void Select(ISelection selection)
         {
             throw new NotImplementedException();
         }

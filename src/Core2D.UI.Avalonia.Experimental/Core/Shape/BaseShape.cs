@@ -7,7 +7,7 @@ using Core2D.Style;
 
 namespace Core2D.Shape
 {
-    public abstract class BaseShape : ObservableObject, IDrawable, ISelectable
+    public abstract class BaseShape : ObservableObject, IBaseShape
     {
         private ShapeStyle _style;
         private MatrixObject _transform;
@@ -57,17 +57,17 @@ namespace Core2D.Shape
 
         public virtual void Select(ISelection selection)
         {
-            if (!selection.Selected.Contains(this))
+            if (!selection.SelectedShapes.Contains(this))
             {
-                selection.Selected.Add(this);
+                selection.SelectedShapes.Add(this);
             }
         }
 
         public virtual void Deselect(ISelection selection)
         {
-            if (selection.Selected.Contains(this))
+            if (selection.SelectedShapes.Contains(this))
             {
-                selection.Selected.Remove(this);
+                selection.SelectedShapes.Remove(this);
             }
         }
     }

@@ -22,7 +22,7 @@ namespace Core2D.Editor
             foreach (var guide in Guides)
             {
                 context.WorkingContainer.Shapes.Remove(guide);
-                context.Renderer.Selected.Remove(guide);
+                context.Renderer.SelectedShapes.Remove(guide);
             }
             Guides.Clear();
         }

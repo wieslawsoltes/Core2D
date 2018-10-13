@@ -1,5 +1,7 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using System;
+using System.Collections.Generic;
 using System.Linq;
 using Core2D.Shapes;
 
@@ -36,8 +38,8 @@ namespace Core2D.Editor.Tools
                 Style = context.CurrentStyle
             };
             context.WorkingContainer.Shapes.Add(_text);
-            context.Renderer.Selected.Add(_text.TopLeft);
-            context.Renderer.Selected.Add(_text.BottomRight);
+            context.Renderer.SelectedShapes.Add(_text.TopLeft);
+            context.Renderer.SelectedShapes.Add(_text.BottomRight);
 
             context.Capture?.Invoke();
             context.Invalidate?.Invoke();
@@ -51,11 +53,11 @@ namespace Core2D.Editor.Tools
 
             CurrentState = State.TopLeft;
 
-            context.Renderer.Selected.Remove(_text.BottomRight);
+            context.Renderer.SelectedShapes.Remove(_text.BottomRight);
             _text.BottomRight = context.GetNextPoint(x, y, Settings?.ConnectPoints ?? false, Settings?.HitTestRadius ?? 7.0);
             _text.BottomRight.Y = y;
             context.WorkingContainer.Shapes.Remove(_text);
-            context.Renderer.Selected.Remove(_text.TopLeft);
+            context.Renderer.SelectedShapes.Remove(_text.TopLeft);
             context.CurrentContainer.Shapes.Add(_text);
             _text = null;
 
@@ -93,8 +95,8 @@ namespace Core2D.Editor.Tools
             if (_text != null)
             {
                 context.WorkingContainer.Shapes.Remove(_text);
-                context.Renderer.Selected.Remove(_text.TopLeft);
-                context.Renderer.Selected.Remove(_text.BottomRight);
+                context.Renderer.SelectedShapes.Remove(_text.TopLeft);
+                context.Renderer.SelectedShapes.Remove(_text.BottomRight);
                 _text = null;
             }
 
@@ -159,6 +161,11 @@ namespace Core2D.Editor.Tools
             base.Clean(context);
 
             CleanInternal(context);
+        }
+
+        public override object Copy(IDictionary<object, object> shared)
+        {
+            throw new NotImplementedException();
         }
     }
 }

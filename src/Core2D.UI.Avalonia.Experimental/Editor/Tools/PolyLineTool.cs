@@ -1,5 +1,6 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Core2D.Shapes;
@@ -37,8 +38,8 @@ namespace Core2D.Editor.Tools
             _points.Add(_line.StartPoint);
             _points.Add(_line.Point);
             context.WorkingContainer.Shapes.Add(_line);
-            context.Renderer.Selected.Add(_line.StartPoint);
-            context.Renderer.Selected.Add(_line.Point);
+            context.Renderer.SelectedShapes.Add(_line.StartPoint);
+            context.Renderer.SelectedShapes.Add(_line.Point);
 
             context.Capture?.Invoke();
             context.Invalidate?.Invoke();
@@ -50,13 +51,13 @@ namespace Core2D.Editor.Tools
         {
             Filters?.Any(f => f.Process(context, ref x, ref y));
 
-            context.Renderer.Selected.Remove(_line.Point);
+            context.Renderer.SelectedShapes.Remove(_line.Point);
             _line.Point = context.GetNextPoint(x, y, Settings?.ConnectPoints ?? false, Settings?.HitTestRadius ?? 7.0);
             _points[_points.Count - 1] = _line.Point;
 
-            if (!context.Renderer.Selected.Contains(_line.Point))
+            if (!context.Renderer.SelectedShapes.Contains(_line.Point))
             {
-                context.Renderer.Selected.Add(_line.Point);
+                context.Renderer.SelectedShapes.Add(_line.Point);
             }
 
             context.WorkingContainer.Shapes.Remove(_line);
@@ -70,7 +71,7 @@ namespace Core2D.Editor.Tools
             };
             _points.Add(_line.Point);
             context.WorkingContainer.Shapes.Add(_line);
-            context.Renderer.Selected.Add(_line.Point);
+            context.Renderer.SelectedShapes.Add(_line.Point);
 
             Intersections?.ForEach(i => i.Clear(context));
             Filters?.ForEach(f => f.Clear(context));
@@ -115,7 +116,7 @@ namespace Core2D.Editor.Tools
 
             if (_points != null)
             {
-                _points.ForEach(point => context.Renderer.Selected.Remove(point));
+                _points.ForEach(point => context.Renderer.SelectedShapes.Remove(point));
                 _points = null;
             }
 
@@ -180,6 +181,11 @@ namespace Core2D.Editor.Tools
             base.Clean(context);
 
             CleanInternal(context);
+        }
+
+        public override object Copy(IDictionary<object, object> shared)
+        {
+            throw new NotImplementedException();
         }
     }
 }

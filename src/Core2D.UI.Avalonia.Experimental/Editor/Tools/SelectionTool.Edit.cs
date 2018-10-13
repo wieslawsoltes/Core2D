@@ -23,9 +23,9 @@ namespace Core2D.Editor.Tools
 
         public void Copy(IToolContext context)
         {
-            lock (context.Renderer.Selected)
+            lock (context.Renderer.SelectedShapes)
             {
-                _shapesToCopy = context.Renderer.Selected.ToList();
+                _shapesToCopy = context.Renderer.SelectedShapes.ToList();
             }
         }
 
@@ -33,10 +33,10 @@ namespace Core2D.Editor.Tools
         {
             if (_shapesToCopy != null)
             {
-                lock (context.Renderer.Selected)
+                lock (context.Renderer.SelectedShapes)
                 {
                     this.DeHover(context);
-                    context.Renderer.Selected.Clear();
+                    context.Renderer.SelectedShapes.Clear();
 
                     CopyHelper.Copy(context.CurrentContainer, _shapesToCopy, context.Renderer);
 
@@ -49,12 +49,12 @@ namespace Core2D.Editor.Tools
 
         public void Delete(IToolContext context)
         {
-            lock (context.Renderer.Selected)
+            lock (context.Renderer.SelectedShapes)
             {
                 DeleteHelper.Delete(context.CurrentContainer, context.Renderer);
 
                 this.DeHover(context);
-                context.Renderer.Selected.Clear();
+                context.Renderer.SelectedShapes.Clear();
 
                 context.Invalidate?.Invoke();
 
@@ -64,11 +64,11 @@ namespace Core2D.Editor.Tools
 
         public void Group(IToolContext context)
         {
-            lock (context.Renderer.Selected)
+            lock (context.Renderer.SelectedShapes)
             {
                 this.DeHover(context);
 
-                var shapes = context.Renderer.Selected.ToList();
+                var shapes = context.Renderer.SelectedShapes.ToList();
 
                 Delete(context);
 
@@ -93,10 +93,10 @@ namespace Core2D.Editor.Tools
 
         public void SelectAll(IToolContext context)
         {
-            lock (context.Renderer.Selected)
+            lock (context.Renderer.SelectedShapes)
             {
                 this.DeHover(context);
-                context.Renderer.Selected.Clear();
+                context.Renderer.SelectedShapes.Clear();
 
                 foreach (var shape in context.CurrentContainer.Shapes)
                 {
@@ -111,7 +111,7 @@ namespace Core2D.Editor.Tools
 
         public void Hover(IToolContext context, BaseShape shape)
         {
-            context.Renderer.Hover = shape;
+            context.Renderer.HoveredShape = shape;
 
             if (shape != null)
             {
@@ -122,7 +122,7 @@ namespace Core2D.Editor.Tools
 
         public void DeHover(IToolContext context)
         {
-            context.Renderer.Hover = null;
+            context.Renderer.HoveredShape = null;
 
             if (_hover != null)
             {
@@ -165,8 +165,8 @@ namespace Core2D.Editor.Tools
                         {
                             point.X = _originX;
                             point.Y = _originY;
-                            context.Renderer.Selected.Remove(point);
-                            context.Renderer.Selected.Add(copy);
+                            context.Renderer.SelectedShapes.Remove(point);
+                            context.Renderer.SelectedShapes.Add(copy);
                             _disconnected = true;
                         }
                         break;

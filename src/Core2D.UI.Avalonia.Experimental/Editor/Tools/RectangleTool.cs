@@ -1,5 +1,7 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using System;
+using System.Collections.Generic;
 using System.Linq;
 using Core2D.Shapes;
 
@@ -32,8 +34,8 @@ namespace Core2D.Editor.Tools
                 Style = context.CurrentStyle
             };
             context.WorkingContainer.Shapes.Add(_rectangle);
-            context.Renderer.Selected.Add(_rectangle.TopLeft);
-            context.Renderer.Selected.Add(_rectangle.BottomRight);
+            context.Renderer.SelectedShapes.Add(_rectangle.TopLeft);
+            context.Renderer.SelectedShapes.Add(_rectangle.BottomRight);
 
             context.Capture?.Invoke();
             context.Invalidate?.Invoke();
@@ -47,11 +49,11 @@ namespace Core2D.Editor.Tools
 
             CurrentState = State.TopLeft;
 
-            context.Renderer.Selected.Remove(_rectangle.BottomRight);
+            context.Renderer.SelectedShapes.Remove(_rectangle.BottomRight);
             _rectangle.BottomRight = context.GetNextPoint(x, y, Settings?.ConnectPoints ?? false, Settings?.HitTestRadius ?? 7.0);
             _rectangle.BottomRight.Y = y;
             context.WorkingContainer.Shapes.Remove(_rectangle);
-            context.Renderer.Selected.Remove(_rectangle.TopLeft);
+            context.Renderer.SelectedShapes.Remove(_rectangle.TopLeft);
             context.CurrentContainer.Shapes.Add(_rectangle);
             _rectangle = null;
 
@@ -89,8 +91,8 @@ namespace Core2D.Editor.Tools
             if (_rectangle != null)
             {
                 context.WorkingContainer.Shapes.Remove(_rectangle);
-                context.Renderer.Selected.Remove(_rectangle.TopLeft);
-                context.Renderer.Selected.Remove(_rectangle.BottomRight);
+                context.Renderer.SelectedShapes.Remove(_rectangle.TopLeft);
+                context.Renderer.SelectedShapes.Remove(_rectangle.BottomRight);
                 _rectangle = null;
             }
 
@@ -155,6 +157,11 @@ namespace Core2D.Editor.Tools
             base.Clean(context);
 
             CleanInternal(context);
+        }
+
+        public override object Copy(IDictionary<object, object> shared)
+        {
+            throw new NotImplementedException();
         }
     }
 }

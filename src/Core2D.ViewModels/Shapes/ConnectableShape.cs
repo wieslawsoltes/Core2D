@@ -70,33 +70,33 @@ namespace Core2D.Shapes
         }
 
         /// <inheritdoc/>
-        public override void Move(ISet<IBaseShape> selected, double dx, double dy)
+        public override void Move(ISelection selection, double dx, double dy)
         {
             foreach (var connector in Connectors)
             {
-                connector.Move(selected, dx, dy);
+                connector.Move(selection, dx, dy);
             }
         }
 
         /// <inheritdoc/>
-        public override void Select(ISet<IBaseShape> selected)
+        public override void Select(ISelection selection)
         {
-            base.Select(selected);
+            base.Select(selection);
 
             foreach (var connector in Connectors)
             {
-                connector.Select(selected);
+                connector.Select(selection);
             }
         }
 
         /// <inheritdoc/>
-        public override void Deselect(ISet<IBaseShape> selected)
+        public override void Deselect(ISelection selection)
         {
-            base.Deselect(selected);
+            base.Deselect(selection);
 
             foreach (var connector in Connectors)
             {
-                connector.Deselect(selected);
+                connector.Deselect(selection);
             }
         }
 

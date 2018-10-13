@@ -58,12 +58,12 @@ namespace Core2D.Shapes
 
         public override void Move(ISelection selection, double dx, double dy)
         {
-            if (!selection.Selected.Contains(_topLeft))
+            if (!selection.SelectedShapes.Contains(_topLeft))
             {
                 _topLeft.Move(selection, dx, dy);
             }
 
-            if (!selection.Selected.Contains(_bottomRight))
+            if (!selection.SelectedShapes.Contains(_bottomRight))
             {
                 _bottomRight.Move(selection, dx, dy);
             }

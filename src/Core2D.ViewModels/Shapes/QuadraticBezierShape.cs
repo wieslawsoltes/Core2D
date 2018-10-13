@@ -98,40 +98,40 @@ namespace Core2D.Shapes
         }
 
         /// <inheritdoc/>
-        public override void Move(ISet<IBaseShape> selected, double dx, double dy)
+        public override void Move(ISelection selection, double dx, double dy)
         {
             if (!Point1.State.Flags.HasFlag(ShapeStateFlags.Connector))
             {
-                Point1.Move(selected, dx, dy);
+                Point1.Move(selection, dx, dy);
             }
 
             if (!Point2.State.Flags.HasFlag(ShapeStateFlags.Connector))
             {
-                Point2.Move(selected, dx, dy);
+                Point2.Move(selection, dx, dy);
             }
 
             if (!Point3.State.Flags.HasFlag(ShapeStateFlags.Connector))
             {
-                Point3.Move(selected, dx, dy);
+                Point3.Move(selection, dx, dy);
             }
         }
 
         /// <inheritdoc/>
-        public override void Select(ISet<IBaseShape> selected)
+        public override void Select(ISelection selection)
         {
-            base.Select(selected);
-            Point1.Select(selected);
-            Point2.Select(selected);
-            Point3.Select(selected);
+            base.Select(selection);
+            Point1.Select(selection);
+            Point2.Select(selection);
+            Point3.Select(selection);
         }
 
         /// <inheritdoc/>
-        public override void Deselect(ISet<IBaseShape> selected)
+        public override void Deselect(ISelection selection)
         {
-            base.Deselect(selected);
-            Point1.Deselect(selected);
-            Point2.Deselect(selected);
-            Point3.Deselect(selected);
+            base.Deselect(selection);
+            Point1.Deselect(selection);
+            Point2.Deselect(selection);
+            Point3.Deselect(selection);
         }
 
         /// <inheritdoc/>

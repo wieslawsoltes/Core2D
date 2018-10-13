@@ -3004,7 +3004,7 @@ namespace Core2D.Editor
         /// Select shapes.
         /// </summary>
         /// <param name="shapes">The shapes to select.</param>
-        public void Select(ImmutableHashSet<IBaseShape> shapes)
+        public void Select(ISet<IBaseShape> shapes)
         {
             if (Renderers?[0]?.State != null)
             {
@@ -3062,7 +3062,7 @@ namespace Core2D.Editor
         /// </summary>
         /// <param name="layer">The owner layer.</param>
         /// <param name="shapes">The shapes to select.</param>
-        public void Select(ILayerContainer layer, ImmutableHashSet<IBaseShape> shapes)
+        public void Select(ILayerContainer layer, ISet<IBaseShape> shapes)
         {
             Select(shapes);
 
@@ -3485,7 +3485,7 @@ namespace Core2D.Editor
             return false;
         }
 
-        private IGroupShape Group(ILayerContainer layer, ImmutableHashSet<IBaseShape> shapes, string name)
+        private IGroupShape Group(ILayerContainer layer, ISet<IBaseShape> shapes, string name)
         {
             if (layer != null && shapes != null)
             {
@@ -3504,7 +3504,7 @@ namespace Core2D.Editor
             return null;
         }
 
-        private void Ungroup(ILayerContainer layer, ImmutableHashSet<IBaseShape> shapes)
+        private void Ungroup(ILayerContainer layer, ISet<IBaseShape> shapes)
         {
             if (layer != null && shapes != null)
             {
@@ -3545,7 +3545,7 @@ namespace Core2D.Editor
         /// </summary>
         /// <param name="shapes">The selected shapes.</param>
         /// <param name="name">The group name.</param>
-        public IGroupShape Group(ImmutableHashSet<IBaseShape> shapes, string name)
+        public IGroupShape Group(ISet<IBaseShape> shapes, string name)
         {
             var layer = Project?.CurrentContainer?.CurrentLayer;
             if (layer != null)
@@ -3561,7 +3561,7 @@ namespace Core2D.Editor
         /// </summary>
         /// <param name="shape">The selected shape.</param>
         /// <param name="shapes">The selected shapes.</param>
-        public bool Ungroup(IBaseShape shape, ImmutableHashSet<IBaseShape> shapes)
+        public bool Ungroup(IBaseShape shape, ISet<IBaseShape> shapes)
         {
             var layer = Project?.CurrentContainer?.CurrentLayer;
             if (layer != null)
@@ -3716,7 +3716,7 @@ namespace Core2D.Editor
         /// <param name="shapes">The selected shapes.</param>
         /// <param name="dx">The X coordinate offset.</param>
         /// <param name="dy">The Y coordinate offset.</param>
-        public void MoveBy(IBaseShape shape, ImmutableHashSet<IBaseShape> shapes, double dx, double dy)
+        public void MoveBy(IBaseShape shape, ISet<IBaseShape> shapes, double dx, double dy)
         {
             if (shape != null)
             {

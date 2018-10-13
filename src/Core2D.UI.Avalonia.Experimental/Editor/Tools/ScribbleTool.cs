@@ -1,5 +1,6 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -228,6 +229,11 @@ namespace Core2D.Editor.Tools
             base.Clean(context);
 
             CleanInternal(context);
+        }
+
+        public override object Copy(IDictionary<object, object> shared)
+        {
+            throw new NotImplementedException();
         }
     }
 }

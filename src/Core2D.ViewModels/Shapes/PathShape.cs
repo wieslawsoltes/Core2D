@@ -90,36 +90,36 @@ namespace Core2D.Shapes
         }
 
         /// <inheritdoc/>
-        public override void Move(ISet<IBaseShape> selected, double dx, double dy)
+        public override void Move(ISelection selection, double dx, double dy)
         {
             var points = GetPoints();
             foreach (var point in points)
             {
-                point.Move(selected, dx, dy);
+                point.Move(selection, dx, dy);
             }
         }
 
         /// <inheritdoc/>
-        public override void Select(ISet<IBaseShape> selected)
+        public override void Select(ISelection selection)
         {
-            base.Select(selected);
+            base.Select(selection);
 
             var points = GetPoints();
             foreach (var point in points)
             {
-                point.Select(selected);
+                point.Select(selection);
             }
         }
 
         /// <inheritdoc/>
-        public override void Deselect(ISet<IBaseShape> selected)
+        public override void Deselect(ISelection selection)
         {
-            base.Deselect(selected);
+            base.Deselect(selection);
 
             var points = GetPoints();
             foreach (var point in points)
             {
-                point.Deselect(selected);
+                point.Deselect(selection);
             }
         }
 

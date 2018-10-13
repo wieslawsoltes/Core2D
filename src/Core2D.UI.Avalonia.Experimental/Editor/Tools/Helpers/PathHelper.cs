@@ -24,21 +24,21 @@ namespace Core2D.Editor.Tools.Helpers
         {
             if (shape is LineShape line)
             {
-                if (selection.Selected.Contains(line))
+                if (selection.SelectedShapes.Contains(line))
                 {
                     _lineHelper.Draw(dc, renderer, line, selection, dx, dy);
                 }
             }
             else if (shape is CubicBezierShape cubicBezier)
             {
-                if (selection.Selected.Contains(cubicBezier))
+                if (selection.SelectedShapes.Contains(cubicBezier))
                 {
                     _cubiceBezierHelper.Draw(dc, renderer, cubicBezier, selection, dx, dy);
                 }
             }
             else if (shape is QuadraticBezierShape quadraticBezier)
             {
-                if (selection.Selected.Contains(quadraticBezier))
+                if (selection.SelectedShapes.Contains(quadraticBezier))
                 {
                     _quadraticBezierHelper.Draw(dc, renderer, quadraticBezier, selection, dx, dy);
                 }

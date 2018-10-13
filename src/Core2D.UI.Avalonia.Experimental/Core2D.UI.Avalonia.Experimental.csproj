@@ -39,6 +39,10 @@
     <EmbeddedResource Include="Assets\*" Exclude="bin\**;obj\**;**\*.xproj;packages\**;@(EmbeddedResource)" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Core2D.Model\Core2D.Model.csproj" />
+  </ItemGroup>
+
   <Import Project="..\..\build\EmbedXaml.props" />
 
 </Project>

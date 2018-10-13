@@ -1,5 +1,7 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using System;
+using System.Collections.Generic;
 using Core2D.Editor.Selection;
 using Core2D.Style;
 
@@ -83,6 +85,11 @@ namespace Core2D.Editor.Tools
         {
             get => _disconnectTestRadius;
             set => Update(ref _disconnectTestRadius, value);
+        }
+
+        public override object Copy(IDictionary<object, object> shared)
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -164,7 +164,7 @@ namespace Core2D.Containers
             return result;
         }
 
-        public virtual object Copy(IDictionary<object, object> shared)
+        public override object Copy(IDictionary<object, object> shared)
         {
             var copy = new LayerContainer()
             {

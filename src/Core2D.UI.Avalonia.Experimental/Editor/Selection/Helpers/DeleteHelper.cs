@@ -16,7 +16,7 @@ namespace Core2D.Editor.Selection.Helpers
             var groups = container.Shapes.OfType<GroupShape>();
             var connectables = container.Shapes.OfType<ConnectableShape>();
 
-            foreach (var shape in selection.Selected)
+            foreach (var shape in selection.SelectedShapes)
             {
                 if (container.Shapes.Contains(shape))
                 {

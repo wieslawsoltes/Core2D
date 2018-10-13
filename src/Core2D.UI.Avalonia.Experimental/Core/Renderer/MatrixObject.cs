@@ -78,7 +78,7 @@ namespace Core2D.Renderer
             return false;
         }
 
-        public object Copy(IDictionary<object, object> shared)
+        public override object Copy(IDictionary<object, object> shared)
         {
             return new MatrixObject()
             {

@@ -25,13 +25,13 @@ namespace Core2D.UI.Avalonia.Renderers
         private BaseShape _hover;
         private ISet<BaseShape> _selected;
 
-        public override BaseShape Hover
+        public override BaseShape HoveredShape
         {
             get => _hover;
             set => Update(ref _hover, value);
         }
 
-        public override ISet<BaseShape> Selected
+        public override ISet<BaseShape> SelectedShapes
         {
             get => _selected;
             set => Update(ref _selected, value);
@@ -447,6 +447,11 @@ namespace Core2D.UI.Avalonia.Renderers
                 var ftc = GetTextCache(text, rect);
                 _dc.DrawText(cache?.Stroke, ftc.Origin, ftc.FormattedText);
             }
+        }
+
+        public override object Copy(IDictionary<object, object> shared)
+        {
+            throw new NotImplementedException();
         }
     }
 }

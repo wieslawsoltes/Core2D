@@ -48,7 +48,7 @@ namespace Core2D.Shapes.UnitTests
                 throw new NotImplementedException();
             }
 
-            public override void Move(ISet<IBaseShape> selected, double dx, double dy)
+            public override void Move(ISelection selection, double dx, double dy)
             {
                 throw new NotImplementedException();
             }
