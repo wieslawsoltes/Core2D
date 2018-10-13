@@ -117,17 +117,20 @@ namespace Core2D.UI.Avalonia.Views
         /// </summary>
         public void DetachEditor()
         {
-            if (_projectEditor != null && _containerControlEditor != null && _zoomBorder != null)
+            if (_projectEditor?.CanvasPlatform != null)
             {
                 _projectEditor.CanvasPlatform.Invalidate = null;
                 _projectEditor.CanvasPlatform.ResetZoom = null;
                 _projectEditor.CanvasPlatform.AutoFitZoom = null;
                 _projectEditor.CanvasPlatform.Zoom = null;
-
-                _zoomBorder.InvalidatedChild = null;
-
-                _inputProcessor.Dispose();
             }
+
+            if (_zoomBorder != null)
+            {
+                _zoomBorder.InvalidatedChild = null;
+            }
+
+            _inputProcessor?.Dispose();
 
             _projectEditor = null;
             _containerControlData = null;
