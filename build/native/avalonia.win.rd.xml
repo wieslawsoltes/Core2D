@@ -1,0 +1,10 @@
+<Directives>
+    <Application>
+
+        <Assembly Name="Avalonia.Win32" Dynamic="Required All" />
+
+        <Assembly Name="Avalonia.Skia" Dynamic="Required All" />
+        <Assembly Name="SkiaSharp" Dynamic="Required All" />
+
+    </Application>
+</Directives>

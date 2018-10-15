@@ -1,0 +1,9 @@
+<Directives>
+    <Application>
+
+        <Assembly Name="Avalonia.Xaml.Interactivity" Dynamic="Required All" />
+        <Assembly Name="Avalonia.Xaml.Interactions" Dynamic="Required All" />
+        <Assembly Name="Avalonia.Xaml.Interactions.Custom" Dynamic="Required All" />
+
+    </Application>
+</Directives>

@@ -1,0 +1,59 @@
+<Directives>
+    <Application>
+
+        <Assembly Name="Avalonia.Animation" Dynamic="Required All" />
+        <Assembly Name="Avalonia.Base" Dynamic="Required All" >
+            <Type Name="Avalonia.Collections.AvaloniaListConverter`1[[System.Double,System.Private.CoreLib]]" Dynamic="Required All" />
+            <Type Name="Avalonia.Collections.AvaloniaListConverter`1[[Avalonia.Media.Drawing,Avalonia.Visuals]]" Dynamic="Required All" />
+        </Assembly>
+        <Assembly Name="Avalonia.Controls" Dynamic="Required All" />
+        <Assembly Name="Avalonia.DesignerSupport" Dynamic="Required All" />
+        <Assembly Name="Avalonia.Diagnostics" Dynamic="Required All" />
+        <Assembly Name="Avalonia.Input" Dynamic="Required All" />
+        <Assembly Name="Avalonia.Interactivity" Dynamic="Required All" />
+        <Assembly Name="Avalonia.Layout" Dynamic="Required All" />
+        <Assembly Name="Avalonia.Logging.Serilog" Dynamic="Required All" />
+        <Assembly Name="Avalonia.Visuals" Dynamic="Required All" />
+        <Assembly Name="Avalonia.Styling" Dynamic="Required All" />
+        <Assembly Name="Avalonia.Themes.Default" Dynamic="Required All" />
+        <Assembly Name="Avalonia.Markup" Dynamic="Required All" />
+        <Assembly Name="Avalonia.Markup.Xaml" Dynamic="Required All">
+            <Type Name="Avalonia.Markup.Xaml.Converters.ParseTypeConverter`1[[Avalonia.Thickness,Avalonia.Visuals]]" Dynamic="Required All" />
+            <Type Name="Avalonia.Markup.Xaml.Converters.ParseTypeConverter`1[[Avalonia.CornerRadius,Avalonia.Visuals]]" Dynamic="Required All" />
+            <Type Name="Avalonia.Markup.Xaml.Converters.ParseTypeConverter`1[[Avalonia.Controls.Classes,Avalonia.Styling]]" Dynamic="Required All" />
+            <Type Name="Avalonia.Markup.Xaml.Converters.ParseTypeConverter`1[[Avalonia.RelativePoint,Avalonia.Visuals]]" Dynamic="Required All" />
+            <Type Name="Avalonia.Markup.Xaml.Converters.ParseTypeConverter`1[[Avalonia.Media.Geometry,Avalonia.Visuals]]" Dynamic="Required All" />
+            <Type Name="Avalonia.Markup.Xaml.Converters.ParseTypeConverter`1[[Avalonia.Rect,Avalonia.Visuals]]" Dynamic="Required All" />
+            <Type Name="Avalonia.Markup.Xaml.Converters.ParseTypeConverter`1[[Avalonia.Input.Cursor,Avalonia.Input]]" Dynamic="Required All" />
+            <Type Name="Avalonia.Markup.Xaml.Converters.ParseTypeConverter`1[[Avalonia.Media.FontFamily,Avalonia.Visuals]]" Dynamic="Required All" />
+            <Type Name="Avalonia.Markup.Xaml.Converters.ParseTypeConverter`1[[Avalonia.Controls.ColumnDefinitions,Avalonia.Controls]]" Dynamic="Required All" />
+            <Type Name="Avalonia.Markup.Xaml.Converters.ParseTypeConverter`1[[Avalonia.Controls.RowDefinitions,Avalonia.Controls]]" Dynamic="Required All" />
+            <Type Name="Avalonia.Markup.Xaml.Converters.ParseTypeConverter`1[[Avalonia.Input.KeyGesture,Avalonia.Input]]" Dynamic="Required All" />
+            <Type Name="Avalonia.Markup.Xaml.Converters.ParseTypeConverter`1[[Avalonia.Size,Avalonia.Visuals]]" Dynamic="Required All" />
+            <Type Name="Avalonia.Markup.Xaml.Converters.ParseTypeConverter`1[[Avalonia.Controls.GridLength,Avalonia.Controls]]" Dynamic="Required All" />
+            <Type Name="Avalonia.Markup.Xaml.Converters.ParseTypeConverter`1[[Avalonia.Media.SolidColorBrush,Avalonia.Visuals]]" Dynamic="Required All" />
+            <Type Name="Avalonia.Markup.Xaml.Converters.ParseTypeConverter`1[[Avalonia.Point,Avalonia.Visuals]]" Dynamic="Required All" />
+            <Type Name="Avalonia.Markup.Xaml.Converters.ParseTypeConverter`1[[Avalonia.Media.Color,Avalonia.Visuals]]" Dynamic="Required All" />
+            <Type Name="Avalonia.Markup.Xaml.Converters.ParseTypeConverter`1[[Avalonia.Media.PathGeometry,Avalonia.Visuals]]" Dynamic="Required All" />
+            <Type Name="Avalonia.Markup.Xaml.Converters.ParseTypeConverter`1[[Avalonia.RelativeRect,Avalonia.Visuals]]" Dynamic="Required All" />
+        </Assembly>
+
+        <Assembly Name="Avalonia.DotNetCoreRuntime" Dynamic="Required All" />
+
+        <!--
+        <Assembly Name="Avalonia.Win32" Dynamic="Required All" />
+        <Assembly Name="Avalonia.Gtk3" Dynamic="Required All" />
+        <Assembly Name="Avalonia.MonoMac" Dynamic="Required All" />
+
+        <Assembly Name="Avalonia.Direct2D1" Dynamic="Required All" />
+        <Assembly Name="SharpDX" Dynamic="Required All" />
+        <Assembly Name="SharpDX.Direct2D1" Dynamic="Required All" />
+        <Assembly Name="SharpDX.Direct3D11" Dynamic="Required All" />
+        <Assembly Name="SharpDX.DXGI" Dynamic="Required All" />
+
+        <Assembly Name="Avalonia.Skia" Dynamic="Required All" />
+        <Assembly Name="SkiaSharp" Dynamic="Required All" />
+        -->
+
+    </Application>
+</Directives>

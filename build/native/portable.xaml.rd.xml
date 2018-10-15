@@ -1,0 +1,7 @@
+<Directives>
+    <Application>
+
+        <Assembly Name="Portable.Xaml" Dynamic="Required All" />
+
+    </Application>
+</Directives>

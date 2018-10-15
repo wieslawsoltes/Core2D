@@ -1,0 +1,9 @@
+<Directives>
+    <Application>
+
+        <Assembly Name="Newtonsoft.Json" Dynamic="Required All" >
+            <Type Name="Newtonsoft.Json.Serialization.ObjectConstructor`1[[System.Object,System.Private.CoreLib]]" Dynamic="Required All" />
+        </Assembly>
+
+    </Application>
+</Directives>

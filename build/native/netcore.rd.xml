@@ -1,0 +1,26 @@
+<Directives>
+    <Application>
+
+        <Assembly Name="mscorlib"/>
+        <Assembly Name="System.ComponentModel.TypeConverter" Dynamic="Required All">
+            <Type Name="System.ComponentModel.TypeConverter" Dynamic="Required All" />
+            <Type Name="System.ComponentModel.StringConverter" Dynamic="Required All" />
+            <Type Name="System.ComponentModel.Int32Converter" Dynamic="Required All" />
+        </Assembly>
+        <Assembly Name="System.Linq.Expressions">
+            <Type Name="System.Linq.Expressions.ExpressionCreator`1[[Newtonsoft.Json.Serialization.ObjectConstructor`1[[System.Object,System.Private.CoreLib]],Newtonsoft.Json]]" Dynamic="Required All" />
+            <Type Name="System.Linq.Expressions.ExpressionCreator`1[[System.Func`2[[System.Object,System.Private.CoreLib],[System.Object,System.Private.CoreLib]],System.Private.CoreLib]]" Dynamic="Required All" />
+        </Assembly>
+        <Assembly Name="System.Memory" Dynamic="Required All" />
+        <Assembly Name="System.Private.CoreLib">
+            <Type Name="System.Action`2[System.Object,System.EventArgs]`"> 
+                <Method Name="Invoke" Dynamic="Required All" />
+            </Type>
+            <Type Name="System.Action`4[System.Double,System.Double,System.Double,System.Double]`" Dynamic="Required All"> 
+                <Method Name="Invoke" Dynamic="Required All" />
+            </Type>
+        </Assembly>
+        <Assembly Name="System.Runtime" Dynamic="Required All" />
+
+    </Application>
+</Directives>

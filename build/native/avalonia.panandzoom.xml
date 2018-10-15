@@ -1,0 +1,14 @@
+<Directives>
+    <Application>
+
+        <Assembly Name="PanAndZoom" Dynamic="Required All">
+            <Type Name="PanAndZoom.StretchMode" Dynamic="Required All"/>
+            <Type Name="PanAndZoom.StretchMode[]" Dynamic="Required All"/>
+            <Type Name="PanAndZoom.ButtonName" Dynamic="Required All"/>
+            <Type Name="PanAndZoom.ButtonName[]" Dynamic="Required All"/>
+            <Type Name="PanAndZoom.IPanAndZoom" Dynamic="Required All"/>
+        </Assembly>
+        <Assembly Name="Avalonia.Controls.PanAndZoom" Dynamic="Required All" />
+
+    </Application>
+</Directives>

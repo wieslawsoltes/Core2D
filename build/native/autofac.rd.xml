@@ -1,0 +1,7 @@
+<Directives>
+    <Application>
+
+        <Assembly Name="Autofac" Dynamic="Required All" />
+
+    </Application>
+</Directives>
