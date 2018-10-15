@@ -67,7 +67,7 @@ jobs:
       which dotnet
       dotnet --info
       dotnet publish ./src/Core2D.UI.Avalonia/Core2D.UI.Avalonia.csproj -r linux-x64 -c Release -f netcoreapp2.1 -p:CoreRT=True
-      strip --strip-debug ./src/Core2D.UI.Avalonia/bin/AnyCPU/Release/netcoreapp2.1/linux-x64/native/Core2D.UI.Avalonia
+      strip ./src/Core2D.UI.Avalonia/bin/AnyCPU/Release/netcoreapp2.1/linux-x64/native/Core2D.UI.Avalonia
       cp $HOME/.nuget/packages/avalonia.skia.linux.natives/1.60.0.1/runtimes/linux-x64/native/libSkiaSharp.so src/Core2D.UI.Avalonia/bin/AnyCPU/Release/netcoreapp2.1/linux-x64/native/libSkiaSharp.so
   - task: ArchiveFiles@2
     inputs:
@@ -92,7 +92,7 @@ jobs:
       which dotnet
       dotnet --info
       dotnet publish ./src/Core2D.UI.Avalonia/Core2D.UI.Avalonia.csproj -r osx-x64 -c Release -f netcoreapp2.1 -p:CoreRT=True
-      strip --strip-debug ./src/Core2D.UI.Avalonia/bin/AnyCPU/Release/netcoreapp2.1/osx-x64/native/Core2D.UI.Avalonia
+      strip ./src/Core2D.UI.Avalonia/bin/AnyCPU/Release/netcoreapp2.1/osx-x64/native/Core2D.UI.Avalonia
       cp $HOME/.nuget/packages/skiasharp/1.60.0/runtimes/osx/native/libSkiaSharp.dylib src/Core2D.UI.Avalonia/bin/AnyCPU/Release/netcoreapp2.1/osx-x64/native/libSkiaSharp.dylib
   - task: ArchiveFiles@2
     inputs:
