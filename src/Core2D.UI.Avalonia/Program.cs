@@ -3,7 +3,9 @@
 using System;
 using Autofac;
 using Avalonia;
+#if !_CORERT
 using Avalonia.Gtk3;
+#endif
 using Avalonia.Logging.Serilog;
 using Core2D.UI.Avalonia.Modules;
 using Core2D.Interfaces;
@@ -32,6 +34,7 @@ namespace Core2D.UI.Avalonia
         [STAThread]
         private static void Main(string[] args)
         {
+#if !_CORERT
             bool useGpu = true;
             bool deferredRendering = true;
             bool useDirect2D1 = false;
@@ -70,7 +73,7 @@ namespace Core2D.UI.Avalonia
                         break;
                 }
             }
-
+#endif
             try
             {
                 var builder = new ContainerBuilder();
@@ -84,6 +87,7 @@ namespace Core2D.UI.Avalonia
                     using (var log = container.Resolve<ILog>())
                     {
                         var appBuilder = BuildAvaloniaApp();
+#if !_CORERT
                         if (useDirect2D1 == true)
                         {
                             appBuilder.UseDirect2D1();
@@ -109,6 +113,7 @@ namespace Core2D.UI.Avalonia
                         {
                             appBuilder.UseMonoMac(deferredRendering);
                         }
+#endif
                         appBuilder.SetupWithoutStarting();
                         var app = appBuilder.Instance as App;
                         var aboutInfo = app.CreateAboutInfo(

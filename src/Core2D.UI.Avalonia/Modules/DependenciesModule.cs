@@ -17,7 +17,9 @@ using Core2D.Interfaces;
 using Core2D.Log.Trace;
 using Core2D.Renderer;
 using Core2D.Renderer.Avalonia;
+#if !_CORERT
 using Core2D.ScriptRunner.Roslyn;
+#endif
 using Core2D.Serializer.Newtonsoft;
 using Core2D.Serializer.Xaml;
 using Core2D.TextFieldReader.CsvHelper;
@@ -44,7 +46,9 @@ namespace Core2D.UI.Avalonia.Modules
             builder.RegisterType<AvaloniaTextClipboard>().As<ITextClipboard>().InstancePerLifetimeScope();
             builder.RegisterType<TraceLog>().As<ILog>().SingleInstance();
             builder.RegisterType<DotNetFileSystem>().As<IFileSystem>().InstancePerLifetimeScope();
+#if !_CORERT
             builder.RegisterType<RoslynScriptRunner>().As<IScriptRunner>().InstancePerLifetimeScope();
+#endif
             builder.RegisterType<NewtonsoftJsonSerializer>().As<IJsonSerializer>().InstancePerLifetimeScope();
             builder.RegisterType<PortableXamlSerializer>().As<IXamlSerializer>().InstancePerLifetimeScope();
             //builder.RegisterType<BmpSkiaSharpWriter>().As<IFileWriter>().InstancePerLifetimeScope();
@@ -61,7 +65,7 @@ namespace Core2D.UI.Avalonia.Modules
             builder.RegisterType<DxfWriter>().As<IFileWriter>().InstancePerLifetimeScope();
             builder.RegisterType<EmfWriter>().As<IFileWriter>().InstancePerLifetimeScope();
             builder.RegisterType<PdfSharpWriter>().As<IFileWriter>().InstancePerLifetimeScope();
-#endif 
+#endif
             builder.RegisterType<CsvHelperReader>().As<ITextFieldReader<IDatabase>>().InstancePerLifetimeScope();
             builder.RegisterType<CsvHelperWriter>().As<ITextFieldWriter<IDatabase>>().InstancePerLifetimeScope();
         }
