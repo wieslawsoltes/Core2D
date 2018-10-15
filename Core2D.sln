@@ -45,10 +45,20 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "nuget", "nuget", "{DDE59F10
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "native", "native", "{0DD5491E-0BDA-4366-A353-549820A65E12}"
 	ProjectSection(SolutionItems) = preProject
-		build\native\linux.rd.xml = build\native\linux.rd.xml
-		build\native\osx.rd.xml = build\native\osx.rd.xml
-		build\native\rd.xml = build\native\rd.xml
-		build\native\win.rd.xml = build\native\win.rd.xml
+		build\native\app.rd.xml = build\native\app.rd.xml
+		build\native\autofac.rd.xml = build\native\autofac.rd.xml
+		build\native\avalonia.behaviors.xml = build\native\avalonia.behaviors.xml
+		build\native\avalonia.linux.rd.xml = build\native\avalonia.linux.rd.xml
+		build\native\avalonia.osx.rd.xml = build\native\avalonia.osx.rd.xml
+		build\native\avalonia.panandzoom.xml = build\native\avalonia.panandzoom.xml
+		build\native\avalonia.rd.xml = build\native\avalonia.rd.xml
+		build\native\avalonia.win.rd.xml = build\native\avalonia.win.rd.xml
+		build\native\csvhelper.rd.xml = build\native\csvhelper.rd.xml
+		build\native\dock.rd.xml = build\native\dock.rd.xml
+		build\native\netcore.rd.xml = build\native\netcore.rd.xml
+		build\native\newtonsoft.json.rd.xml = build\native\newtonsoft.json.rd.xml
+		build\native\portable.xaml.rd.xml = build\native\portable.xaml.rd.xml
+		build\native\roslyn.rd.xml = build\native\roslyn.rd.xml
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ci", "ci", "{6009319B-91B7-43FD-ABAF-1BE105FD91A9}"
