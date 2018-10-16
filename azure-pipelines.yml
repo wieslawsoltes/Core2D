@@ -15,10 +15,10 @@ jobs:
       dotnet tool install -g Cake.Tool --version 0.30.0
       export PATH="$PATH:$HOME/.dotnet/tools"
       dotnet cake build.cake -Target="Azure-Linux" -Platform="Any CPU" -Configuration="Release"
-- task: PublishTestResults@2
-  inputs:
-    testResultsFormat: 'VSTest'
-    testResultsFiles: '$(Build.SourcesDirectory)/artifacts/tests/*.trx'
+  - task: PublishTestResults@2
+    inputs:
+      testResultsFormat: 'VSTest'
+      testResultsFiles: '$(Build.SourcesDirectory)/artifacts/tests/*.trx'
 - job: macOS
   pool:
     vmImage: 'xcode9-macos10.13'
@@ -35,10 +35,10 @@ jobs:
       dotnet tool install -g Cake.Tool --version 0.30.0
       export PATH="$PATH:$HOME/.dotnet/tools"
       dotnet cake build.cake -Target="Azure-macOS" -Platform="Any CPU" -Configuration="Release"
-- task: PublishTestResults@2
-  inputs:
-    testResultsFormat: 'VSTest'
-    testResultsFiles: '$(Build.SourcesDirectory)/artifacts/tests/*.trx'
+  - task: PublishTestResults@2
+    inputs:
+      testResultsFormat: 'VSTest'
+      testResultsFiles: '$(Build.SourcesDirectory)/artifacts/tests/*.trx'
 - job: Windows
   pool:
     vmImage: 'vs2017-win2016'
@@ -59,10 +59,10 @@ jobs:
     inputs:
       pathtoPublish: '$(Build.SourcesDirectory)\artifacts\nuget'
       artifactName: 'NuGet'
-- task: PublishTestResults@2
-  inputs:
-    testResultsFormat: 'VSTest'
-    testResultsFiles: '$(Build.SourcesDirectory)\artifacts\tests\*.trx'
+  - task: PublishTestResults@2
+    inputs:
+      testResultsFormat: 'VSTest'
+      testResultsFiles: '$(Build.SourcesDirectory)\artifacts\tests\*.trx'
 - job: Linux_Publish_ubuntu_14_04_x64
   pool:
     vmImage: 'ubuntu-16.04'
@@ -86,7 +86,7 @@ jobs:
   - task: PublishBuildArtifacts@1
     inputs:
       pathtoPublish: '$(Build.ArtifactStagingDirectory)'
-      artifactName: 'Publish-Linux-ubuntu.14.04-x64'
+      artifactName: 'Publish'
 - job: Linux_Publish_debian_8_x64
   pool:
     vmImage: 'ubuntu-16.04'
@@ -110,7 +110,7 @@ jobs:
   - task: PublishBuildArtifacts@1
     inputs:
       pathtoPublish: '$(Build.ArtifactStagingDirectory)'
-      artifactName: 'Publish-Linux-debian.8-x64'
+      artifactName: 'Publish'
 - job: macOS_Publish_osx_10_12_x64
   pool:
     vmImage: 'xcode9-macos10.13'
@@ -134,7 +134,7 @@ jobs:
   - task: PublishBuildArtifacts@1
     inputs:
       pathtoPublish: '$(Build.ArtifactStagingDirectory)'
-      artifactName: 'Publish-macOS-osx.10.12-x64'
+      artifactName: 'Publish'
 - job: Windows_Publish_win7_x64
   pool:
     vmImage: 'vs2017-win2016'
@@ -163,7 +163,7 @@ jobs:
   - task: PublishBuildArtifacts@1
     inputs:
       pathtoPublish: '$(Build.ArtifactStagingDirectory)'
-      artifactName: 'Publish-Windows-win7-x64'
+      artifactName: 'Publish'
 - job: Linux_CoreRT_linux_x64
   pool:
     vmImage: 'ubuntu-16.04'
@@ -194,7 +194,7 @@ jobs:
   - task: PublishBuildArtifacts@1
     inputs:
       pathtoPublish: '$(Build.ArtifactStagingDirectory)'
-      artifactName: 'CoreRT-Linux-linux-x64'
+      artifactName: 'CoreRT'
 - job: macOS_CoreRT_osx_x64
   pool:
     vmImage: 'xcode9-macos10.13'
@@ -219,7 +219,7 @@ jobs:
   - task: PublishBuildArtifacts@1
     inputs:
       pathtoPublish: '$(Build.ArtifactStagingDirectory)'
-      artifactName: 'CoreRT-macOS-osx-x64'
+      artifactName: 'CoreRT'
 - job: Windows_CoreRT_win_x64
   pool:
     vmImage: 'vs2017-win2016'
@@ -248,4 +248,4 @@ jobs:
   - task: PublishBuildArtifacts@1
     inputs:
       pathtoPublish: '$(Build.ArtifactStagingDirectory)'
-      artifactName: 'CoreRT-Windows-win-x64'
+      artifactName: 'CoreRT'
