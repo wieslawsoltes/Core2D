@@ -16,6 +16,7 @@ namespace Core2D.UI.Avalonia.Views
     /// </summary>
     public class PageControl : UserControl
     {
+        private AvaloniaInputSource _inputSource;
         private InputProcessor _inputProcessor;
         private ContainerControl _containerControlData;
         private ContainerControl _containerControlTemplate;
@@ -107,12 +108,12 @@ namespace Core2D.UI.Avalonia.Views
                     _zoomBorder.InvalidatedChild = InvalidateChild;
                 }
 
-                _inputProcessor = new InputProcessor(
-                    new AvaloniaInputSource(
+                _inputSource = new AvaloniaInputSource(
                         _zoomBorder,
                         _containerControlEditor,
-                        _zoomBorder.FixInvalidPointPosition),
-                    projectEditor);
+                        _zoomBorder.FixInvalidPointPosition);
+
+                _inputProcessor = new InputProcessor(_inputSource, projectEditor);
             }
         }
 
