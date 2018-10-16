@@ -1,0 +1,18 @@
+<Directives>
+    <Application>
+
+        <Assembly Name="Avalonia.Win32" Dynamic="Required All" />
+        <Assembly Name="Avalonia.Gtk3" Dynamic="Required All" />
+        <Assembly Name="Avalonia.MonoMac" Dynamic="Required All" />
+
+        <Assembly Name="Avalonia.Direct2D1" Dynamic="Required All" />
+        <Assembly Name="SharpDX" Dynamic="Required All" />
+        <Assembly Name="SharpDX.Direct2D1" Dynamic="Required All" />
+        <Assembly Name="SharpDX.Direct3D11" Dynamic="Required All" />
+        <Assembly Name="SharpDX.DXGI" Dynamic="Required All" />
+
+        <Assembly Name="Avalonia.Skia" Dynamic="Required All" />
+        <Assembly Name="SkiaSharp" Dynamic="Required All" />
+
+    </Application>
+</Directives>
