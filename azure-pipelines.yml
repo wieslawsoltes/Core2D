@@ -15,6 +15,10 @@ jobs:
       dotnet tool install -g Cake.Tool --version 0.30.0
       export PATH="$PATH:$HOME/.dotnet/tools"
       dotnet cake build.cake -Target="Azure-Linux" -Platform="Any CPU" -Configuration="Release"
+- task: PublishTestResults@2
+  inputs:
+    testResultsFormat: 'VSTest'
+    testResultsFiles: '$(Build.SourcesDirectory)/artifacts/tests/*.trx'
 - job: macOS
   pool:
     vmImage: 'xcode9-macos10.13'
@@ -31,6 +35,10 @@ jobs:
       dotnet tool install -g Cake.Tool --version 0.30.0
       export PATH="$PATH:$HOME/.dotnet/tools"
       dotnet cake build.cake -Target="Azure-macOS" -Platform="Any CPU" -Configuration="Release"
+- task: PublishTestResults@2
+  inputs:
+    testResultsFormat: 'VSTest'
+    testResultsFiles: '$(Build.SourcesDirectory)/artifacts/tests/*.trx'
 - job: Windows
   pool:
     vmImage: 'vs2017-win2016'
@@ -51,6 +59,10 @@ jobs:
     inputs:
       pathtoPublish: '$(Build.SourcesDirectory)\artifacts\nuget'
       artifactName: 'NuGet'
+- task: PublishTestResults@2
+  inputs:
+    testResultsFormat: 'VSTest'
+    testResultsFiles: '$(Build.SourcesDirectory)\artifacts\tests\*.trx'
 - job: Linux_Publish_ubuntu_14_04_x64
   pool:
     vmImage: 'ubuntu-16.04'

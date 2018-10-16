@@ -42,12 +42,15 @@ Task("Build")
 Task("Test")
     .Does<Parameters>(parameters => 
 {
+    CleanDirectory($"{parameters.Artifacts}/tests");
     foreach(var project in parameters.TestProjects)
     {
         (string path, string name) = project;
         Information($"Test: {name}");
         DotNetCoreTest($"{path}/{name}/{name}.csproj", new DotNetCoreTestSettings {
-            Configuration = parameters.Configuration
+            Configuration = parameters.Configuration,
+            ResultsDirectory = $"{parameters.Artifacts}/tests",
+            Logger = "trx"
         });
     }
 });
