@@ -47,7 +47,112 @@ jobs:
       dotnet tool install -g Cake.Tool --version 0.30.0
       set PATH=%PATH%;%USERPROFILE%\.dotnet\tools
       dotnet cake build.cake -Target="Azure-Windows" -Platform="Any CPU" -Configuration="Release"
-- job: Linux_CoreRT
+  - task: PublishBuildArtifacts@1
+    inputs:
+      pathtoPublish: '$(Build.SourcesDirectory)\artifacts\nuget'
+      artifactName: 'NuGet'
+- job: Linux_Publish_ubuntu_14_04_x64
+  pool:
+    vmImage: 'ubuntu-16.04'
+  steps:
+  - task: DotNetCoreInstaller@0
+    inputs:
+      version: '2.1.401'
+  - script: |
+      export COREHOST_TRACE=0
+      export DOTNET_SKIP_FIRST_TIME_EXPERIENCE=1
+      export DOTNET_CLI_TELEMETRY_OPTOUT=1
+      which dotnet
+      dotnet --info
+      dotnet publish ./src/Core2D.UI.Avalonia/Core2D.UI.Avalonia.csproj -r ubuntu.14.04-x64 -c Release -f netcoreapp2.1
+      cp $HOME/.nuget/packages/avalonia.skia.linux.natives/1.60.0.1/runtimes/linux-x64/native/libSkiaSharp.so src/Core2D.UI.Avalonia/bin/AnyCPU/Release/netcoreapp2.1/ubuntu.14.04-x64/publish/libSkiaSharp.so
+  - task: ArchiveFiles@2
+    inputs:
+      rootFolderOrFile: '$(Build.SourcesDirectory)/src/Core2D.UI.Avalonia/bin/AnyCPU/Release/netcoreapp2.1/ubuntu.14.04-x64/publish'
+      archiveType: 'zip'
+      archiveFile: '$(Build.ArtifactStagingDirectory)/Core2D.UI.Avalonia-publish-ubuntu.14.04-x64-$(Build.BuildId).zip'
+  - task: PublishBuildArtifacts@1
+    inputs:
+      pathtoPublish: '$(Build.ArtifactStagingDirectory)'
+      artifactName: 'Publish-Linux-ubuntu.14.04-x64'
+- job: Linux_Publish_debian_8_x64
+  pool:
+    vmImage: 'ubuntu-16.04'
+  steps:
+  - task: DotNetCoreInstaller@0
+    inputs:
+      version: '2.1.401'
+  - script: |
+      export COREHOST_TRACE=0
+      export DOTNET_SKIP_FIRST_TIME_EXPERIENCE=1
+      export DOTNET_CLI_TELEMETRY_OPTOUT=1
+      which dotnet
+      dotnet --info
+      dotnet publish ./src/Core2D.UI.Avalonia/Core2D.UI.Avalonia.csproj -r debian.8-x64 -c Release -f netcoreapp2.1
+      cp $HOME/.nuget/packages/avalonia.skia.linux.natives/1.60.0.1/runtimes/linux-x64/native/libSkiaSharp.so src/Core2D.UI.Avalonia/bin/AnyCPU/Release/netcoreapp2.1/debian.8-x64/publish/libSkiaSharp.so
+  - task: ArchiveFiles@2
+    inputs:
+      rootFolderOrFile: '$(Build.SourcesDirectory)/src/Core2D.UI.Avalonia/bin/AnyCPU/Release/netcoreapp2.1/debian.8-x64/publish'
+      archiveType: 'zip'
+      archiveFile: '$(Build.ArtifactStagingDirectory)/Core2D.UI.Avalonia-publish-debian.8-x64-$(Build.BuildId).zip'
+  - task: PublishBuildArtifacts@1
+    inputs:
+      pathtoPublish: '$(Build.ArtifactStagingDirectory)'
+      artifactName: 'Publish-Linux-debian.8-x64'
+- job: macOS_Publish_osx_10_12_x64
+  pool:
+    vmImage: 'xcode9-macos10.13'
+  steps:
+  - task: DotNetCoreInstaller@0
+    inputs:
+      version: '2.1.401'
+  - script: |
+      export COREHOST_TRACE=0
+      export DOTNET_SKIP_FIRST_TIME_EXPERIENCE=1
+      export DOTNET_CLI_TELEMETRY_OPTOUT=1
+      which dotnet
+      dotnet --info
+      dotnet publish ./src/Core2D.UI.Avalonia/Core2D.UI.Avalonia.csproj -r osx.10.12-x64 -c Release -f netcoreapp2.1
+      cp $HOME/.nuget/packages/skiasharp/1.60.0/runtimes/osx/native/libSkiaSharp.dylib src/Core2D.UI.Avalonia/bin/AnyCPU/Release/netcoreapp2.1/osx.10.12-x64/publish/libSkiaSharp.dylib
+  - task: ArchiveFiles@2
+    inputs:
+      rootFolderOrFile: '$(Build.SourcesDirectory)/src/Core2D.UI.Avalonia/bin/AnyCPU/Release/netcoreapp2.1/osx.10.12-x64/publish'
+      archiveType: 'zip'
+      archiveFile: '$(Build.ArtifactStagingDirectory)/Core2D.UI.Avalonia-publish-osx.10.12-x64-$(Build.BuildId).zip'
+  - task: PublishBuildArtifacts@1
+    inputs:
+      pathtoPublish: '$(Build.ArtifactStagingDirectory)'
+      artifactName: 'Publish-macOS-osx.10.12-x64'
+- job: Windows_Publish_win7_x64
+  pool:
+    vmImage: 'vs2017-win2016'
+  steps:
+  - task: DotNetCoreInstaller@0
+    inputs:
+      version: '2.1.401'
+  - script: |
+      set COREHOST_TRACE=0
+      set DOTNET_SKIP_FIRST_TIME_EXPERIENCE=1
+      set DOTNET_CLI_TELEMETRY_OPTOUT=1
+      where dotnet
+      dotnet --info
+      dotnet publish .\src\Core2D.UI.Avalonia\Core2D.UI.Avalonia.csproj -r win7-x64 -c Release -f netcoreapp2.1
+      copy c:\Users\%USERNAME%\.nuget\packages\skiasharp\1.60.0\runtimes\win7-x64\native\libSkiaSharp.dll src\Core2D.UI.Avalonia\bin\AnyCPU\Release\netcoreapp2.1\win7-x64\publish
+      copy "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\VC\Redist\MSVC\14.15.26706\x64\Microsoft.VC141.CRT\msvcp140.dll" src\Core2D.UI.Avalonia\bin\AnyCPU\Release\netcoreapp2.1\win7-x64\publish
+      copy "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\VC\Redist\MSVC\14.15.26706\x64\Microsoft.VC141.CRT\vcruntime140.dll" src\Core2D.UI.Avalonia\bin\AnyCPU\Release\netcoreapp2.1\win7-x64\publish
+      copy "C:\Program Files (x86)\Google\Chrome\Application\68.0.3440.106\d3dcompiler_47.dll" src\Core2D.UI.Avalonia\bin\AnyCPU\Release\netcoreapp2.1\win7-x64\publish
+      copy "C:\Program Files (x86)\Google\Chrome\Application\68.0.3440.106\libegl.dll" src\Core2D.UI.Avalonia\bin\AnyCPU\Release\netcoreapp2.1\win7-x64\publish
+      copy "C:\Program Files (x86)\Google\Chrome\Application\68.0.3440.106\libglesv2.dll" src\Core2D.UI.Avalonia\bin\AnyCPU\Release\netcoreapp2.1\win7-x64\publish
+  - task: ArchiveFiles@2
+    inputs:
+      rootFolderOrFile: '$(Build.SourcesDirectory)\src\Core2D.UI.Avalonia\bin\AnyCPU\Release\netcoreapp2.1\win7-x64\publish'
+      archiveType: 'zip'
+      archiveFile: '$(Build.ArtifactStagingDirectory)/Core2D.UI.Avalonia-publish-win7-x64-$(Build.BuildId).zip'
+  - task: PublishBuildArtifacts@1
+    inputs:
+      pathtoPublish: '$(Build.ArtifactStagingDirectory)'
+      artifactName: 'Publish-Windows-win7-x64'
+- job: Linux_CoreRT_linux_x64
   pool:
     vmImage: 'ubuntu-16.04'
   steps:
@@ -77,8 +182,8 @@ jobs:
   - task: PublishBuildArtifacts@1
     inputs:
       pathtoPublish: '$(Build.ArtifactStagingDirectory)'
-      artifactName: 'CoreRT-Linux'
-- job: macOS_CoreRT
+      artifactName: 'CoreRT-Linux-linux-x64'
+- job: macOS_CoreRT_osx_x64
   pool:
     vmImage: 'xcode9-macos10.13'
   steps:
@@ -102,8 +207,8 @@ jobs:
   - task: PublishBuildArtifacts@1
     inputs:
       pathtoPublish: '$(Build.ArtifactStagingDirectory)'
-      artifactName: 'CoreRT-macOS'
-- job: Windows_CoreRT
+      artifactName: 'CoreRT-macOS-osx-x64'
+- job: Windows_CoreRT_win_x64
   pool:
     vmImage: 'vs2017-win2016'
   steps:
@@ -131,4 +236,4 @@ jobs:
   - task: PublishBuildArtifacts@1
     inputs:
       pathtoPublish: '$(Build.ArtifactStagingDirectory)'
-      artifactName: 'CoreRT-Windows'
+      artifactName: 'CoreRT-Windows-win-x64'

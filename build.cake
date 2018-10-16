@@ -51,35 +51,6 @@ Task("Test")
         });
     }
 });
-
-Task("Publish")
-    .Does<Parameters>(parameters => 
-{
-    CleanDirectory($"{parameters.Artifacts}/zip");
-    var redistVersion = "14.15.26706";
-    var redistPath = $"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Community\\VC\\Redist\\MSVC\\{redistVersion}\\x64\\Microsoft.VC141.CRT\\";
-    var redistRuntime = "win7-x64";
-    foreach(var project in parameters.PublishProjects)
-    {
-        (string path, string name, string framework, string runtime) = project;
-        var output = $"./{parameters.Artifacts}/publish/{name}-{framework}-{runtime}";
-        Information($"Publish: {name}, {framework}, {runtime}");
-        DotNetCorePublish($"{path}/{name}/{name}.csproj", new DotNetCorePublishSettings {
-            Configuration = parameters.Configuration,
-            VersionSuffix = parameters.VersionSuffix,
-            Framework = framework,
-            Runtime = runtime,
-            OutputDirectory = output
-        });
-        if (string.Compare(runtime, redistRuntime, StringComparison.OrdinalIgnoreCase) == 0)
-        {
-            CopyFileToDirectory($"{redistPath}msvcp140.dll", output);
-            CopyFileToDirectory($"{redistPath}vcruntime140.dll",  output);
-        }
-        Zip($"{parameters.Artifacts}/publish/{name}-{framework}-{runtime}", $"{parameters.Artifacts}/zip/{name}-{framework}-{runtime}.zip");
-    }
-});
-
 Task("Pack")
     .Does<Parameters>(parameters => 
 {
@@ -119,7 +90,6 @@ Task("AppVeyor")
   .IsDependentOn("Clean")
   .IsDependentOn("Build")
   .IsDependentOn("Test")
-  .IsDependentOn("Publish")
   .IsDependentOn("Pack")
   .IsDependentOn("Push");
 

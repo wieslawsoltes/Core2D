@@ -10,7 +10,6 @@ public class Parameters
     public bool IsNugetRelease { get; private set; }
     public (string path, string name)[] BuildProjects { get; private set; }
     public (string path, string name)[] TestProjects { get; private set; }
-    public (string path, string name, string framework, string runtime)[] PublishProjects { get; private set; }
     public (string path, string name)[] PackProjects { get; private set; }
 
     public Parameters(ICakeContext context)
@@ -80,11 +79,6 @@ public class Parameters
             ( "./tests", "Core2D.ViewModels.UnitTests" ),
             ( "./tests", "Core2D.Editor.UnitTests" ),
             ( "./tests", "Core2D.FileSystem.DotNet.UnitTests" )
-        };
-
-        PublishProjects = new []
-        {
-            ( "./src", "Core2D.UI.Avalonia", "netcoreapp2.1", "win7-x64" )
         };
 
         PackProjects = new []
