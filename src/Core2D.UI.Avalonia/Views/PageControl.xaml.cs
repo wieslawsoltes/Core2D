@@ -121,8 +121,8 @@ namespace Core2D.UI.Avalonia.Views
                     _zoomBorder.InvalidatedChild = InvalidateChild;
                 }
 
-                Console.WriteLine("_inputProcessor?.Dispose();");
-                _inputProcessor?.Dispose();
+                Console.WriteLine("_inputProcessor.Dispose();");
+                _inputProcessor.Dispose();
                 _inputProcessor = null;
 
                 _inputSource = new AvaloniaInputSource(
@@ -164,10 +164,10 @@ namespace Core2D.UI.Avalonia.Views
                     _zoomBorder.InvalidatedChild = null;
                 }
 
-                _inputProcessor?.Dispose();
+                _inputProcessor.Dispose();
                 _inputProcessor = null;
 
-                Console.WriteLine("_inputProcessor?.Dispose();");
+                Console.WriteLine("_inputProcessor.Dispose();");
             }
         }
     }
