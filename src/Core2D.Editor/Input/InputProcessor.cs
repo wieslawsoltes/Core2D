@@ -22,9 +22,11 @@ namespace Core2D.Editor.Input
         /// <param name="target">The input target.</param>
         public InputProcessor(IInputSource source, IInputTarget target)
         {
+            Console.WriteLine("Create InputProcessor");
             _leftDownDisposable = source.LeftDown.Subscribe(
                 (args) =>
                 {
+                    Console.WriteLine("InputProcessor LeftDown");
                     if (target.IsLeftDownAvailable())
                     {
                         target.LeftDown(args);
@@ -34,6 +36,7 @@ namespace Core2D.Editor.Input
             _leftUpDisposable = source.LeftUp.Subscribe(
                 (args) =>
                 {
+                    Console.WriteLine("InputProcessor LeftUp");
                     if (target.IsLeftUpAvailable())
                     {
                         target.LeftUp(args);
@@ -43,6 +46,7 @@ namespace Core2D.Editor.Input
             _rightDownDisposable = source.RightDown.Subscribe(
                 (args) =>
                 {
+                    Console.WriteLine("InputProcessor RightDown");
                     if (target.IsRightDownAvailable())
                     {
                         target.RightDown(args);
@@ -52,6 +56,7 @@ namespace Core2D.Editor.Input
             _rightUpDisposable = source.RightUp.Subscribe(
                 (args) =>
                 {
+                    Console.WriteLine("InputProcessor RightUp");
                     if (target.IsRightUpAvailable())
                     {
                         target.RightUp(args);
@@ -61,6 +66,7 @@ namespace Core2D.Editor.Input
             _moveDisposable = source.Move.Subscribe(
                 (args) =>
                 {
+                    Console.WriteLine("InputProcessor Move");
                     if (target.IsMoveAvailable())
                     {
                         target.Move(args);
@@ -73,6 +79,7 @@ namespace Core2D.Editor.Input
         /// </summary>
         public void Dispose()
         {
+            Console.WriteLine("Dispose InputProcessor");
             _leftDownDisposable.Dispose();
             _leftUpDisposable.Dispose();
             _rightDownDisposable.Dispose();

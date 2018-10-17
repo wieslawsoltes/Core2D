@@ -40,9 +40,6 @@ namespace Core2D.UI.Avalonia.Views
                 DetachEditor();
                 AttachEditor();
             });
-
-            AttachedToVisualTree += PageControl_AttachedToVisualTree;
-            DetachedFromVisualTree += PageControl_DetachedFromVisualTree;
         }
 
         /// <summary>
@@ -53,15 +50,17 @@ namespace Core2D.UI.Avalonia.Views
             AvaloniaXamlLoader.Load(this);
         }
 
-        private void PageControl_AttachedToVisualTree(object sender, VisualTreeAttachmentEventArgs e)
+        protected override void OnAttachedToVisualTree(VisualTreeAttachmentEventArgs e)
         {
+            base.OnAttachedToVisualTree(e);
             Console.WriteLine("PageControl_AttachedToVisualTree");
             DetachEditor();
             AttachEditor();
         }
 
-        private void PageControl_DetachedFromVisualTree(object sender, VisualTreeAttachmentEventArgs e)
+        protected override void OnDetachedFromVisualTree(VisualTreeAttachmentEventArgs e)
         {
+            base.OnDetachedFromVisualTree(e);
             Console.WriteLine("PageControl_DetachedFromVisualTree");
             DetachEditor();
         }
@@ -95,6 +94,8 @@ namespace Core2D.UI.Avalonia.Views
         {
             if (DataContext is ProjectEditor projectEditor)
             {
+                Console.WriteLine("AttachEditor");
+
                 if (projectEditor.CanvasPlatform is IEditorCanvasPlatform canvasPlatform)
                 {
                     canvasPlatform.Invalidate = () =>
@@ -129,6 +130,8 @@ namespace Core2D.UI.Avalonia.Views
         {
             if (DataContext is ProjectEditor projectEditor)
             {
+                Console.WriteLine("DetachEditor");
+
                 if (projectEditor.CanvasPlatform is IEditorCanvasPlatform canvasPlatform)
                 {
                     canvasPlatform.Invalidate = null;

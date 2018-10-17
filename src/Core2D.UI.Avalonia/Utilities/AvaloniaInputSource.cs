@@ -62,6 +62,7 @@ namespace Core2D.UI.Avalonia.Utilities
                 e =>
                 {
                     var point = translate(e.EventArgs.GetPosition(relative));
+                    Console.WriteLine($"InputSource PointerPressed {point}");
                     return new InputArgs(point.X, point.Y, ToModifierFlags(e.EventArgs.InputModifiers));
                 });
         }
@@ -75,6 +76,7 @@ namespace Core2D.UI.Avalonia.Utilities
                 e =>
                 {
                     var point = translate(e.EventArgs.GetPosition(relative));
+                    Console.WriteLine($"InputSource PointerReleased {point}");
                     return new InputArgs(point.X, point.Y, ToModifierFlags(e.EventArgs.InputModifiers));
                 });
         }
@@ -88,6 +90,7 @@ namespace Core2D.UI.Avalonia.Utilities
                 e =>
                 {
                     var point = translate(e.EventArgs.GetPosition(relative));
+                    Console.WriteLine($"InputSource PointerMoved {point}");
                     return new InputArgs(point.X, point.Y, ToModifierFlags(e.EventArgs.InputModifiers));
                 });
         }
