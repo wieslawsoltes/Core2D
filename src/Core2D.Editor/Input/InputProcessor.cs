@@ -15,7 +15,7 @@ namespace Core2D.Editor.Input
         private IDisposable _rightUpDisposable = null;
         private IDisposable _moveDisposable = null;
 
-        private void ConnectLeftDown()
+        private void ConnectLeftDown(IInputSource source, IInputTarget target)
         {
             Console.WriteLine("Connect InputProcessor LeftDown begin!");
 
@@ -32,7 +32,7 @@ namespace Core2D.Editor.Input
             Console.WriteLine("Connect InputProcessor LeftDown end!");
         }
 
-        private void ConnectLeftUp()
+        private void ConnectLeftUp(IInputSource source, IInputTarget target)
         {
             Console.WriteLine("Connect InputProcessor LeftUp begin!");
 
@@ -49,7 +49,7 @@ namespace Core2D.Editor.Input
             Console.WriteLine("Connect InputProcessor LeftUp end!");
         }
 
-        private void ConnectRightDown()
+        private void ConnectRightDown(IInputSource source, IInputTarget target)
         {
             Console.WriteLine("Connect InputProcessor RightDown begin!");
 
@@ -66,7 +66,7 @@ namespace Core2D.Editor.Input
             Console.WriteLine("Connect InputProcessor RightDown end!");
         }
 
-        private void ConnectRightUp()
+        private void ConnectRightUp(IInputSource source, IInputTarget target)
         {
             Console.WriteLine("Connect InputProcessor RightUp begin!");
 
@@ -83,7 +83,7 @@ namespace Core2D.Editor.Input
             Console.WriteLine("Connect InputProcessor RightUp end!");
         }
 
-        private void ConnectMove()
+        private void ConnectMove(IInputSource source, IInputTarget target)
         {
             Console.WriteLine("Connect InputProcessor Move begin!");
 
@@ -138,11 +138,11 @@ namespace Core2D.Editor.Input
         public void Connect(IInputSource source, IInputTarget target)
         {
             Console.WriteLine("Connect InputProcessor Begin!");
-            ConnectLeftDown();
-            ConnectLeftUp();
-            ConnectRightDown();
-            ConnectRightUp();
-            ConnectMove();
+            ConnectLeftDown(source, target);
+            ConnectLeftUp(source, target);
+            ConnectRightDown(source, target);
+            ConnectRightUp(source, target);
+            ConnectMove(source, target);
             Console.WriteLine("Connect InputProcessor End!");
         }
 
