@@ -25,6 +25,7 @@
     <RdXmlFile Include="$(MSBuildThisFileDirectory)..\..\build\native\newtonsoft.json.rd.xml"/>
     <RdXmlFile Include="$(MSBuildThisFileDirectory)..\..\build\native\portable.xaml.rd.xml"/>
     <!--<RdXmlFile Include="$(MSBuildThisFileDirectory)..\..\build\native\roslyn.rd.xml"/>-->
+    <RdXmlFile Include="$(MSBuildThisFileDirectory)..\..\build\native\rx.rd.xml"/>
     <IlcArg Include="--stacktracedata" />
   </ItemGroup>
 

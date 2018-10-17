@@ -16,12 +16,12 @@ namespace Core2D.UI.Avalonia.Views
     /// </summary>
     public class PageControl : UserControl
     {
-        private AvaloniaInputSource _inputSource;
-        private InputProcessor _inputProcessor;
-        private ContainerControl _containerControlData;
-        private ContainerControl _containerControlTemplate;
-        private ContainerControl _containerControlEditor;
-        private ZoomBorder _zoomBorder;
+        private AvaloniaInputSource _inputSource = null;
+        private InputProcessor _inputProcessor = null;
+        private ContainerControl _containerControlData = null;
+        private ContainerControl _containerControlTemplate = null;
+        private ContainerControl _containerControlEditor = null;
+        private ZoomBorder _zoomBorder = null;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="PageControl"/> class.
@@ -112,6 +112,12 @@ namespace Core2D.UI.Avalonia.Views
                 if (_zoomBorder != null)
                 {
                     _zoomBorder.InvalidatedChild = InvalidateChild;
+                }
+
+                if (_inputProcessor != null)
+                {
+                    _inputProcessor.Dispose();
+                    _inputProcessor = null;
                 }
 
                 _inputSource = new AvaloniaInputSource(

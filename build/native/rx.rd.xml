@@ -1,0 +1,11 @@
+<Directives>
+    <Application>
+
+        <Assembly Name="System.Reactive.Core" Dynamic="Required All" />
+        <Assembly Name="System.Reactive" Dynamic="Required All" />
+        <Assembly Name="System.Reactive.Interfaces" Dynamic="Required All" />
+        <Assembly Name="System.Reactive.Linq" Dynamic="Required All" />
+        <Assembly Name="System.Reactive.PlatformServices" Dynamic="Required All" />
+
+    </Application>
+</Directives>
