@@ -48,6 +48,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "native", "native", "{0DD549
 		build\native\app.rd.xml = build\native\app.rd.xml
 		build\native\autofac.rd.xml = build\native\autofac.rd.xml
 		build\native\avalonia.behaviors.xml = build\native\avalonia.behaviors.xml
+		build\native\avalonia.desktop.rd.xml = build\native\avalonia.desktop.rd.xml
 		build\native\avalonia.linux.rd.xml = build\native\avalonia.linux.rd.xml
 		build\native\avalonia.osx.rd.xml = build\native\avalonia.osx.rd.xml
 		build\native\avalonia.panandzoom.xml = build\native\avalonia.panandzoom.xml
@@ -59,6 +60,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "native", "native", "{0DD549
 		build\native\newtonsoft.json.rd.xml = build\native\newtonsoft.json.rd.xml
 		build\native\portable.xaml.rd.xml = build\native\portable.xaml.rd.xml
 		build\native\roslyn.rd.xml = build\native\roslyn.rd.xml
+		build\native\rx.rd.xml = build\native\rx.rd.xml
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ci", "ci", "{6009319B-91B7-43FD-ABAF-1BE105FD91A9}"
