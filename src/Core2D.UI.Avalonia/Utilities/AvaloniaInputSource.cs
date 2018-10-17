@@ -46,6 +46,8 @@ namespace Core2D.UI.Avalonia.Utilities
         /// <param name="translate">The translate function.</param>
         public AvaloniaInputSource(Control source, Control relative, Func<Point, Point> translate)
         {
+            Console.WriteLine("Create AvaloniaInputSource");
+
             LeftDown = GetPointerPressedObservable(source, relative, translate, MouseButton.Left);
             LeftUp = GetPointerReleasedObservable(source, relative, translate, MouseButton.Left);
             RightDown = GetPointerPressedObservable(source, relative, translate, MouseButton.Right);
@@ -55,6 +57,7 @@ namespace Core2D.UI.Avalonia.Utilities
 
         private static IObservable<InputArgs> GetPointerPressedObservable(Control target, Control relative, Func<Point, Point> translate, MouseButton button)
         {
+            Console.WriteLine("AvaloniaInputSource GetPointerPressedObservable");
             return Observable.FromEventPattern<EventHandler<PointerPressedEventArgs>, PointerPressedEventArgs>(
                 handler => target.PointerPressed += handler,
                 handler => target.PointerPressed -= handler)
@@ -69,6 +72,7 @@ namespace Core2D.UI.Avalonia.Utilities
 
         private static IObservable<InputArgs> GetPointerReleasedObservable(Control target, Control relative, Func<Point, Point> translate, MouseButton button)
         {
+            Console.WriteLine("AvaloniaInputSource GetPointerReleasedObservable");
             return Observable.FromEventPattern<EventHandler<PointerReleasedEventArgs>, PointerReleasedEventArgs>(
                 handler => target.PointerReleased += handler,
                 handler => target.PointerReleased -= handler)
@@ -83,6 +87,7 @@ namespace Core2D.UI.Avalonia.Utilities
 
         private static IObservable<InputArgs> GetPointerMovedObservable(Control target, Control relative, Func<Point, Point> translate)
         {
+            Console.WriteLine("AvaloniaInputSource GetPointerMovedObservable");
             return Observable.FromEventPattern<EventHandler<PointerEventArgs>, PointerEventArgs>(
                 handler => target.PointerMoved += handler,
                 handler => target.PointerMoved -= handler)

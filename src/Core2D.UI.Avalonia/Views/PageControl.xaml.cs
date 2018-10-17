@@ -114,6 +114,7 @@ namespace Core2D.UI.Avalonia.Views
                     _zoomBorder.InvalidatedChild = InvalidateChild;
                 }
 
+                Console.WriteLine("_inputProcessor?.Dispose();");
                 _inputProcessor?.Dispose();
                 _inputProcessor = null;
 
@@ -123,6 +124,8 @@ namespace Core2D.UI.Avalonia.Views
                         _zoomBorder.FixInvalidPointPosition);
 
                 _inputProcessor = new InputProcessor(_inputSource, projectEditor);
+
+                Console.WriteLine("_inputProcessor = new InputProcessor(_inputSource, projectEditor);");
             }
         }
 
@@ -150,6 +153,8 @@ namespace Core2D.UI.Avalonia.Views
 
                 _inputProcessor?.Dispose();
                 _inputProcessor = null;
+
+                Console.WriteLine("_inputProcessor?.Dispose();");
             }
         }
     }
