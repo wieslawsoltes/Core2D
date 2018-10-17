@@ -54,7 +54,6 @@ namespace Core2D.UI.Avalonia.Views
         protected override void OnAttachedToVisualTree(VisualTreeAttachmentEventArgs e)
         {
             base.OnAttachedToVisualTree(e);
-            Console.WriteLine("PageControl_AttachedToVisualTree");
             DetachEditor();
             AttachEditor();
         }
@@ -62,7 +61,6 @@ namespace Core2D.UI.Avalonia.Views
         protected override void OnDetachedFromVisualTree(VisualTreeAttachmentEventArgs e)
         {
             base.OnDetachedFromVisualTree(e);
-            Console.WriteLine("PageControl_DetachedFromVisualTree");
             DetachEditor();
         }
 
@@ -95,12 +93,8 @@ namespace Core2D.UI.Avalonia.Views
         {
             if (DataContext is ProjectEditor projectEditor)
             {
-                Console.WriteLine($"AttachEditor ManagedThreadId: {System.Threading.Thread.CurrentThread.ManagedThreadId}");
-                Console.WriteLine($"AttachEditor isLoaded: {_isLoaded}");
                 if (_isLoaded)
                     return;
-
-                Console.WriteLine("AttachEditor");
 
                 if (projectEditor.CanvasPlatform is IEditorCanvasPlatform canvasPlatform)
                 {
@@ -124,16 +118,8 @@ namespace Core2D.UI.Avalonia.Views
                         _zoomBorder,
                         _containerControlEditor,
                         _zoomBorder.FixInvalidPointPosition);
-
-                Console.WriteLine("AttachEditor new AvaloniaInputSource");
-
                 _inputProcessor = new InputProcessor();
-
-                Console.WriteLine("AttachEditor new InputProcessor");
-
                 _inputProcessor.Connect(_inputSource, projectEditor);
-
-                Console.WriteLine("AttachEditor Connect InputProcessor");
 
                 _isLoaded = true;
             }
@@ -146,12 +132,8 @@ namespace Core2D.UI.Avalonia.Views
         {
             if (DataContext is ProjectEditor projectEditor)
             {
-                Console.WriteLine($"DetachEditor ManagedThreadId: {System.Threading.Thread.CurrentThread.ManagedThreadId}");
-                Console.WriteLine($"DetachEditor isLoaded: {_isLoaded}");
                 if (!_isLoaded)
                     return;
-
-                Console.WriteLine("DetachEditor");
 
                 if (projectEditor.CanvasPlatform is IEditorCanvasPlatform canvasPlatform)
                 {
@@ -169,8 +151,6 @@ namespace Core2D.UI.Avalonia.Views
                 _inputProcessor.Dispose();
                 _inputProcessor = null;
                 _inputSource = null;
-
-                Console.WriteLine("DetachEditor inputProcessor Disconnect()");
 
                 _isLoaded = false;
             }

@@ -42,12 +42,10 @@ namespace Core2D.Editor.Input
 
         private static IDisposable ConnectLeftDown(IInputSource source, IInputTarget target)
         {
-            Console.WriteLine("Connect InputProcessor LeftDown begin!");
             var observer = new InputArgsObserver(target, OnNextLeftDown);
             return source.LeftDown.SubscribeSafe(observer);
             void OnNextLeftDown(InputArgs args)
             {
-                Console.WriteLine("InputProcessor LeftDown");
                 if (target.IsLeftDownAvailable())
                 {
                     target.LeftDown(args);
@@ -57,12 +55,10 @@ namespace Core2D.Editor.Input
 
         private static IDisposable ConnectLeftUp(IInputSource source, IInputTarget target)
         {
-            Console.WriteLine("Connect InputProcessor LeftUp begin!");
             var observer = new InputArgsObserver(target, OnNextLeftUp);
             return source.LeftUp.SubscribeSafe(observer);
             void OnNextLeftUp(InputArgs args)
             {
-                Console.WriteLine("InputProcessor LeftUp");
                 if (target.IsLeftUpAvailable())
                 {
                     target.LeftUp(args);
@@ -72,12 +68,10 @@ namespace Core2D.Editor.Input
 
         private static IDisposable ConnectRightDown(IInputSource source, IInputTarget target)
         {
-            Console.WriteLine("Connect InputProcessor RightDown begin!");
             var observer = new InputArgsObserver(target, OnNextRightDown);
             return source.RightDown.SubscribeSafe(observer);
             void OnNextRightDown(InputArgs args)
             {
-                Console.WriteLine("InputProcessor RightDown");
                 if (target.IsRightDownAvailable())
                 {
                     target.RightDown(args);
@@ -87,12 +81,10 @@ namespace Core2D.Editor.Input
 
         private static IDisposable ConnectRightUp(IInputSource source, IInputTarget target)
         {
-            Console.WriteLine("Connect InputProcessor RightUp begin!");
             var observer = new InputArgsObserver(target, OnNextRightUp);
             return source.RightUp.SubscribeSafe(observer);
             void OnNextRightUp(InputArgs args)
             {
-                Console.WriteLine("InputProcessor RightUp");
                 if (target.IsRightUpAvailable())
                 {
                     target.RightUp(args);
@@ -102,12 +94,10 @@ namespace Core2D.Editor.Input
 
         private static IDisposable ConnectMove(IInputSource source, IInputTarget target)
         {
-            Console.WriteLine("Connect InputProcessor Move begin!");
             var observer = new InputArgsObserver(target, OnNextMove);
             return source.Move.SubscribeSafe(observer);
             void OnNextMove(InputArgs args)
             {
-                Console.WriteLine("InputProcessor Move");
                 if (target.IsMoveAvailable())
                 {
                     target.Move(args);
@@ -117,31 +107,26 @@ namespace Core2D.Editor.Input
 
         private static void DisconnectLeftDown(IDisposable disposable)
         {
-            Console.WriteLine("DisconnectLeftDown InputProcessor");
             disposable?.Dispose();
         }
 
         private static void DisconnectLeftUp(IDisposable disposable)
         {
-            Console.WriteLine("DisconnectLeftUp InputProcessor");
             disposable?.Dispose();
         }
 
         private static void DisconnectRightDown(IDisposable disposable)
         {
-            Console.WriteLine("DisconnectRightDown InputProcessor");
             disposable?.Dispose();
         }
 
         private static void DisconnectRightUp(IDisposable disposable)
         {
-            Console.WriteLine("DisconnectRightUp InputProcessor");
             disposable.Dispose();
         }
 
         private static void DisconnectMove(IDisposable disposable)
         {
-            Console.WriteLine("DisconnectMove InputProcessor");
             disposable?.Dispose();
         }
 
@@ -152,13 +137,11 @@ namespace Core2D.Editor.Input
         /// <param name="target">The input target.</param>
         public void Connect(IInputSource source, IInputTarget target)
         {
-            Console.WriteLine("Connect InputProcessor Begin!");
             _leftDownDisposable = ConnectLeftDown(source, target);
             _leftUpDisposable = ConnectLeftUp(source, target);
             _rightDownDisposable = ConnectRightDown(source, target);
             _rightUpDisposable = ConnectRightUp(source, target);
             _moveDisposable = ConnectMove(source, target);
-            Console.WriteLine("Connect InputProcessor End!");
         }
 
         /// <summary>
@@ -166,13 +149,11 @@ namespace Core2D.Editor.Input
         /// </summary>
         public void Disconnect()
         {
-            Console.WriteLine("Disconnect InputProcessor Begin!");
             DisconnectLeftDown(_leftDownDisposable);
             DisconnectLeftUp(_leftUpDisposable);
             DisconnectRightDown(_rightDownDisposable);
             DisconnectRightUp(_rightUpDisposable);
             DisconnectMove(_moveDisposable);
-            Console.WriteLine("Disconnect InputProcessor End!");
         }
 
         /// <summary>
@@ -180,9 +161,7 @@ namespace Core2D.Editor.Input
         /// </summary>
         public void Dispose()
         {
-            Console.WriteLine("Dispose InputProcessor Begin!");
             Disconnect();
-            Console.WriteLine("Dispose InputProcessor End!");
         }
     }
 }
