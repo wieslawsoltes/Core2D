@@ -127,9 +127,13 @@ namespace Core2D.UI.Avalonia.Views
 
                 Console.WriteLine("AttachEditor new AvaloniaInputSource");
 
-                _inputProcessor = new InputProcessor(_inputSource, projectEditor);
+                _inputProcessor = new InputProcessor();
 
                 Console.WriteLine("AttachEditor new InputProcessor");
+
+                _inputProcessor.Connect(_inputSource, projectEditor);
+
+                Console.WriteLine("AttachEditor Connect InputProcessor");
 
                 _isLoaded = true;
             }
@@ -164,8 +168,9 @@ namespace Core2D.UI.Avalonia.Views
 
                 _inputProcessor.Dispose();
                 _inputProcessor = null;
+                _inputSource = null;
 
-                Console.WriteLine("DetachEditor inputProcessor Dispose()");
+                Console.WriteLine("DetachEditor inputProcessor Disconnect()");
 
                 _isLoaded = false;
             }

@@ -9,20 +9,20 @@ namespace Core2D.Editor.Input
     /// </summary>
     public class InputProcessor : IDisposable
     {
-        private readonly IDisposable _leftDownDisposable;
-        private readonly IDisposable _leftUpDisposable;
-        private readonly IDisposable _rightDownDisposable;
-        private readonly IDisposable _rightUpDisposable;
-        private readonly IDisposable _moveDisposable;
+        private IDisposable _leftDownDisposable = null;
+        private IDisposable _leftUpDisposable = null;
+        private IDisposable _rightDownDisposable = null;
+        private IDisposable _rightUpDisposable = null;
+        private IDisposable _moveDisposable = null;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="InputProcessor"/> class.
+        /// Connects source and target inputs.
         /// </summary>
         /// <param name="source">The input source.</param>
         /// <param name="target">The input target.</param>
-        public InputProcessor(IInputSource source, IInputTarget target)
+        public void Connect(IInputSource source, IInputTarget target)
         {
-            Console.WriteLine("Create InputProcessor LeftDown");
+            Console.WriteLine("Connect InputProcessor LeftDown");
 
             _leftDownDisposable = source.LeftDown.Subscribe(
                 (args) =>
@@ -34,7 +34,7 @@ namespace Core2D.Editor.Input
                     }
                 });
 
-            Console.WriteLine("Create InputProcessor LeftUp");
+            Console.WriteLine("Connect InputProcessor LeftUp");
 
             _leftUpDisposable = source.LeftUp.Subscribe(
                 (args) =>
@@ -46,7 +46,7 @@ namespace Core2D.Editor.Input
                     }
                 });
 
-            Console.WriteLine("Create InputProcessor RightDown");
+            Console.WriteLine("Connect InputProcessor RightDown");
 
             _rightDownDisposable = source.RightDown.Subscribe(
                 (args) =>
@@ -58,7 +58,7 @@ namespace Core2D.Editor.Input
                     }
                 });
 
-            Console.WriteLine("Create InputProcessor RightUp");
+            Console.WriteLine("Connect InputProcessor RightUp");
 
             _rightUpDisposable = source.RightUp.Subscribe(
                 (args) =>
@@ -70,7 +70,7 @@ namespace Core2D.Editor.Input
                     }
                 });
 
-            Console.WriteLine("Create InputProcessor Move");
+            Console.WriteLine("Connect InputProcessor Move");
 
             _moveDisposable = source.Move.Subscribe(
                 (args) =>
@@ -86,16 +86,25 @@ namespace Core2D.Editor.Input
         }
 
         /// <summary>
+        /// Disconnects source and target inputs.
+        /// </summary>
+        public void Disconnect()
+        {
+            Console.WriteLine("Disconnect InputProcessor");
+            _leftDownDisposable?.Dispose();
+            _leftUpDisposable?.Dispose();
+            _rightDownDisposable?.Dispose();
+            _rightUpDisposable.Dispose();
+            _moveDisposable?.Dispose();
+        }
+
+        /// <summary>
         /// Dispose resources.
         /// </summary>
         public void Dispose()
         {
             Console.WriteLine("Dispose InputProcessor");
-            _leftDownDisposable.Dispose();
-            _leftUpDisposable.Dispose();
-            _rightDownDisposable.Dispose();
-            _rightUpDisposable.Dispose();
-            _moveDisposable.Dispose();
+            Disconnect();
         }
     }
 }
