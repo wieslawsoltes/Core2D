@@ -11,21 +11,21 @@
   </PropertyGroup>
 
   <ItemGroup Condition="'$(CoreRT)' == 'True'">
-    <RdXmlFile Include="$(MSBuildThisFileDirectory)..\..\build\native\netcore.rd.xml" />
-    <RdXmlFile Include="$(MSBuildThisFileDirectory)..\..\build\native\app.rd.xml" />
-    <RdXmlFile Include="$(MSBuildThisFileDirectory)..\..\build\native\avalonia.rd.xml" />
-    <RdXmlFile Include="$(MSBuildThisFileDirectory)..\..\build\native\avalonia.behaviors.xml" />
-    <RdXmlFile Include="$(MSBuildThisFileDirectory)..\..\build\native\avalonia.linux.rd.xml" Condition="'$(RuntimeIdentifier)' == 'linux-x64'" />
-    <RdXmlFile Include="$(MSBuildThisFileDirectory)..\..\build\native\avalonia.osx.rd.xml" Condition="'$(RuntimeIdentifier)' == 'osx-x64'" />
-    <RdXmlFile Include="$(MSBuildThisFileDirectory)..\..\build\native\avalonia.win.rd.xml" Condition="'$(RuntimeIdentifier)' == 'win-x64'" />
-    <RdXmlFile Include="$(MSBuildThisFileDirectory)..\..\build\native\avalonia.panandzoom.xml" />
-    <RdXmlFile Include="$(MSBuildThisFileDirectory)..\..\build\native\autofac.rd.xml" />
-    <RdXmlFile Include="$(MSBuildThisFileDirectory)..\..\build\native\dock.rd.xml" />
-    <RdXmlFile Include="$(MSBuildThisFileDirectory)..\..\build\native\csvhelper.rd.xml" />
-    <RdXmlFile Include="$(MSBuildThisFileDirectory)..\..\build\native\newtonsoft.json.rd.xml" />
-    <RdXmlFile Include="$(MSBuildThisFileDirectory)..\..\build\native\portable.xaml.rd.xml" />
-    <!--<RdXmlFile Include="$(MSBuildThisFileDirectory)..\..\build\native\roslyn.rd.xml"/>-->
-    <RdXmlFile Include="$(MSBuildThisFileDirectory)..\..\build\native\rx.rd.xml" />
+    <RdXmlFile Include="..\..\build\native\netcore.rd.xml" />
+    <RdXmlFile Include="..\..\build\native\app.rd.xml" />
+    <RdXmlFile Include="..\..\build\native\avalonia.rd.xml" />
+    <RdXmlFile Include="..\..\build\native\avalonia.behaviors.xml" />
+    <RdXmlFile Include="..\..\build\native\avalonia.linux.rd.xml" Condition="'$(RuntimeIdentifier)' == 'linux-x64'" />
+    <RdXmlFile Include="..\..\build\native\avalonia.osx.rd.xml" Condition="'$(RuntimeIdentifier)' == 'osx-x64'" />
+    <RdXmlFile Include="..\..\build\native\avalonia.win.rd.xml" Condition="'$(RuntimeIdentifier)' == 'win-x64'" />
+    <RdXmlFile Include="..\..\build\native\avalonia.panandzoom.xml" />
+    <RdXmlFile Include="..\..\build\native\autofac.rd.xml" />
+    <RdXmlFile Include="..\..\build\native\dock.rd.xml" />
+    <RdXmlFile Include="..\..\build\native\csvhelper.rd.xml" />
+    <RdXmlFile Include="..\..\build\native\newtonsoft.json.rd.xml" />
+    <RdXmlFile Include="..\..\build\native\portable.xaml.rd.xml" />
+    <!--<RdXmlFile Include="..\..\build\native\roslyn.rd.xml"/>-->
+    <RdXmlFile Include="..\..\build\native\rx.rd.xml" />
     <IlcArg Include="--stacktracedata" />
   </ItemGroup>
 
