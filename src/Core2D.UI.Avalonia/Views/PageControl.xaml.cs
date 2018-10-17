@@ -95,7 +95,8 @@ namespace Core2D.UI.Avalonia.Views
         {
             if (DataContext is ProjectEditor projectEditor)
             {
-                Console.WriteLine($"AttachEditor _isLoaded: {_isLoaded}");
+                Console.WriteLine($"AttachEditor ManagedThreadId: {System.Threading.Thread.CurrentThread.ManagedThreadId}");
+                Console.WriteLine($"AttachEditor isLoaded: {_isLoaded}");
                 if (_isLoaded)
                     return;
                 else
@@ -121,18 +122,16 @@ namespace Core2D.UI.Avalonia.Views
                     _zoomBorder.InvalidatedChild = InvalidateChild;
                 }
 
-                Console.WriteLine("_inputProcessor.Dispose();");
-                _inputProcessor.Dispose();
-                _inputProcessor = null;
-
                 _inputSource = new AvaloniaInputSource(
                         _zoomBorder,
                         _containerControlEditor,
                         _zoomBorder.FixInvalidPointPosition);
 
+                Console.WriteLine("AttachEditor new AvaloniaInputSource");
+
                 _inputProcessor = new InputProcessor(_inputSource, projectEditor);
 
-                Console.WriteLine("_inputProcessor = new InputProcessor(_inputSource, projectEditor);");
+                Console.WriteLine("AttachEditor new InputProcessor");
             }
         }
 
@@ -143,7 +142,8 @@ namespace Core2D.UI.Avalonia.Views
         {
             if (DataContext is ProjectEditor projectEditor)
             {
-                Console.WriteLine($"DetachEditor _isLoaded: {_isLoaded}");
+                Console.WriteLine($"DetachEditor ManagedThreadId: {System.Threading.Thread.CurrentThread.ManagedThreadId}");
+                Console.WriteLine($"DetachEditor isLoaded: {_isLoaded}");
                 if (!_isLoaded)
                     return;
                 else
@@ -167,7 +167,7 @@ namespace Core2D.UI.Avalonia.Views
                 _inputProcessor.Dispose();
                 _inputProcessor = null;
 
-                Console.WriteLine("_inputProcessor.Dispose();");
+                Console.WriteLine("DetachEditor inputProcessor Dispose()");
             }
         }
     }
