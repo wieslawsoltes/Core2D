@@ -70,6 +70,24 @@ namespace Core2D.UI.Avalonia.Controls
             PointerMoved += (sender, e) => HandlePointerMoved(e);
         }
 
+        private void Capture()
+        {
+            var mouseDevice = (this.GetVisualRoot() as IInputRoot)?.MouseDevice;
+            if (mouseDevice.Captured == null)
+            {
+                mouseDevice.Capture(this);
+            }
+        }
+
+        private void Release()
+        {
+            var mouseDevice = (this.GetVisualRoot() as IInputRoot)?.MouseDevice;
+            if (mouseDevice.Captured != null)
+            {
+                mouseDevice.Capture(null);
+            }
+        }
+
         private ModifierFlags GetModifier(InputModifiers inputModifiers)
         {
             var modifier = ModifierFlags.None;
