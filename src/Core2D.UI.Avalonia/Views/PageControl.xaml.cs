@@ -55,12 +55,14 @@ namespace Core2D.UI.Avalonia.Views
 
         private void PageControl_AttachedToVisualTree(object sender, VisualTreeAttachmentEventArgs e)
         {
+            Console.WriteLine("PageControl_AttachedToVisualTree");
             DetachEditor();
             AttachEditor();
         }
 
         private void PageControl_DetachedFromVisualTree(object sender, VisualTreeAttachmentEventArgs e)
         {
+            Console.WriteLine("PageControl_DetachedFromVisualTree");
             DetachEditor();
         }
 
