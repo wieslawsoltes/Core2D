@@ -99,8 +99,6 @@ namespace Core2D.UI.Avalonia.Views
                 Console.WriteLine($"AttachEditor isLoaded: {_isLoaded}");
                 if (_isLoaded)
                     return;
-                else
-                    _isLoaded = true;
 
                 Console.WriteLine("AttachEditor");
 
@@ -132,6 +130,8 @@ namespace Core2D.UI.Avalonia.Views
                 _inputProcessor = new InputProcessor(_inputSource, projectEditor);
 
                 Console.WriteLine("AttachEditor new InputProcessor");
+
+                _isLoaded = true;
             }
         }
 
@@ -146,8 +146,6 @@ namespace Core2D.UI.Avalonia.Views
                 Console.WriteLine($"DetachEditor isLoaded: {_isLoaded}");
                 if (!_isLoaded)
                     return;
-                else
-                    _isLoaded = false;
 
                 Console.WriteLine("DetachEditor");
 
@@ -168,6 +166,8 @@ namespace Core2D.UI.Avalonia.Views
                 _inputProcessor = null;
 
                 Console.WriteLine("DetachEditor inputProcessor Dispose()");
+
+                _isLoaded = false;
             }
         }
     }

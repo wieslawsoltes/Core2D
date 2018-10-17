@@ -22,7 +22,8 @@ namespace Core2D.Editor.Input
         /// <param name="target">The input target.</param>
         public InputProcessor(IInputSource source, IInputTarget target)
         {
-            Console.WriteLine("Create InputProcessor");
+            Console.WriteLine("Create InputProcessor LeftDown");
+
             _leftDownDisposable = source.LeftDown.Subscribe(
                 (args) =>
                 {
@@ -32,6 +33,8 @@ namespace Core2D.Editor.Input
                         target.LeftDown(args);
                     }
                 });
+
+            Console.WriteLine("Create InputProcessor LeftUp");
 
             _leftUpDisposable = source.LeftUp.Subscribe(
                 (args) =>
@@ -43,6 +46,8 @@ namespace Core2D.Editor.Input
                     }
                 });
 
+            Console.WriteLine("Create InputProcessor RightDown");
+
             _rightDownDisposable = source.RightDown.Subscribe(
                 (args) =>
                 {
@@ -52,6 +57,8 @@ namespace Core2D.Editor.Input
                         target.RightDown(args);
                     }
                 });
+
+            Console.WriteLine("Create InputProcessor RightUp");
 
             _rightUpDisposable = source.RightUp.Subscribe(
                 (args) =>
@@ -63,6 +70,8 @@ namespace Core2D.Editor.Input
                     }
                 });
 
+            Console.WriteLine("Create InputProcessor Move");
+
             _moveDisposable = source.Move.Subscribe(
                 (args) =>
                 {
@@ -72,6 +81,8 @@ namespace Core2D.Editor.Input
                         target.Move(args);
                     }
                 });
+
+            Console.WriteLine("Create InputProcessor Done!");
         }
 
         /// <summary>
