@@ -18,71 +18,71 @@ namespace Core2D.Editor.Input
         private static IDisposable ConnectLeftDown(IInputSource source, IInputTarget target)
         {
             Console.WriteLine("Connect InputProcessor LeftDown begin!");
-            return source.LeftDown.Subscribe(
-                (args) =>
+            return source.LeftDown.Subscribe(OnNext);
+            void OnNext(InputArgs args)
+            {
+                Console.WriteLine("InputProcessor LeftDown");
+                if (target.IsLeftDownAvailable())
                 {
-                    Console.WriteLine("InputProcessor LeftDown");
-                    if (target.IsLeftDownAvailable())
-                    {
-                        target.LeftDown(args);
-                    }
-                });
+                    target.LeftDown(args);
+                }
+            }
         }
 
         private static IDisposable ConnectLeftUp(IInputSource source, IInputTarget target)
         {
             Console.WriteLine("Connect InputProcessor LeftUp begin!");
-            return source.LeftUp.Subscribe(
-                (args) =>
+            return source.LeftUp.Subscribe(OnNext);
+            void OnNext(InputArgs args)
+            {
+                Console.WriteLine("InputProcessor LeftUp");
+                if (target.IsLeftUpAvailable())
                 {
-                    Console.WriteLine("InputProcessor LeftUp");
-                    if (target.IsLeftUpAvailable())
-                    {
-                        target.LeftUp(args);
-                    }
-                });
+                    target.LeftUp(args);
+                }
+            }
         }
 
         private static IDisposable ConnectRightDown(IInputSource source, IInputTarget target)
         {
             Console.WriteLine("Connect InputProcessor RightDown begin!");
-            return source.RightDown.Subscribe(
-                (args) =>
+            return source.RightDown.Subscribe(OnNext);
+            void OnNext(InputArgs args)
+            {
+                Console.WriteLine("InputProcessor RightDown");
+                if (target.IsRightDownAvailable())
                 {
-                    Console.WriteLine("InputProcessor RightDown");
-                    if (target.IsRightDownAvailable())
-                    {
-                        target.RightDown(args);
-                    }
-                });
+                    target.RightDown(args);
+                }
+            }
         }
 
         private static IDisposable ConnectRightUp(IInputSource source, IInputTarget target)
         {
             Console.WriteLine("Connect InputProcessor RightUp begin!");
-            return source.RightUp.Subscribe(
-                (args) =>
+            return source.RightUp.Subscribe(OnNext);
+            void OnNext(InputArgs args)
+            {
+                Console.WriteLine("InputProcessor RightUp");
+                if (target.IsRightUpAvailable())
                 {
-                    Console.WriteLine("InputProcessor RightUp");
-                    if (target.IsRightUpAvailable())
-                    {
-                        target.RightUp(args);
-                    }
-                });
+                    target.RightUp(args);
+                }
+            }
         }
 
         private static IDisposable ConnectMove(IInputSource source, IInputTarget target)
         {
             Console.WriteLine("Connect InputProcessor Move begin!");
-            return source.Move.Subscribe(
-                (args) =>
+            return source.Move.Subscribe(OnNext);
+            void OnNext(InputArgs args)
+            {
+                Console.WriteLine("InputProcessor Move");
+                if (target.IsMoveAvailable())
                 {
-                    Console.WriteLine("InputProcessor Move");
-                    if (target.IsMoveAvailable())
-                    {
-                        target.Move(args);
-                    }
-                });
+                    target.Move(args);
+                }
+            }
         }
 
         private static void DisconnectLeftDown(IDisposable disposable)
