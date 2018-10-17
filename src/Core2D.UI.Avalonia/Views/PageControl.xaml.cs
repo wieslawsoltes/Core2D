@@ -41,16 +41,19 @@ namespace Core2D.UI.Avalonia.Views
                 AttachEditor();
             });
 
-            AttachedToVisualTree += (sender, e) =>
-            {
-                DetachEditor();
-                AttachEditor();
-            };
+            //AttachedToVisualTree += (sender, e) =>
+            //{
+            //    DetachEditor();
+            //    AttachEditor();
+            //};
 
-            DetachedFromVisualTree += (sender, e) =>
-            {
-                DetachEditor();
-            };
+            //DetachedFromVisualTree += (sender, e) =>
+            //{
+            //    DetachEditor();
+            //};
+
+            AttachedToVisualTree += PageControl_AttachedToVisualTree;
+            DetachedFromVisualTree += PageControl_DetachedFromVisualTree;
         }
 
         /// <summary>
@@ -59,6 +62,17 @@ namespace Core2D.UI.Avalonia.Views
         private void InitializeComponent()
         {
             AvaloniaXamlLoader.Load(this);
+        }
+
+        private void PageControl_AttachedToVisualTree(object sender, VisualTreeAttachmentEventArgs e)
+        {
+            DetachEditor();
+            AttachEditor();
+        }
+
+        private void PageControl_DetachedFromVisualTree(object sender, VisualTreeAttachmentEventArgs e)
+        {
+            DetachEditor();
         }
 
         private void InvalidateChild(double zoomX, double zoomY, double offsetX, double offsetY)
