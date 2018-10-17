@@ -35,11 +35,11 @@ namespace Core2D.UI.Avalonia.Views
             _containerControlEditor = this.Find<ContainerControl>("containerControlEditor");
             _zoomBorder = this.Find<ZoomBorder>("zoomBorder");
 
-            this.GetObservable(DataContextProperty).Subscribe((value) =>
-            {
-                DetachEditor();
-                AttachEditor();
-            });
+            //this.GetObservable(DataContextProperty).Subscribe((value) =>
+            //{
+            //    DetachEditor();
+            //    AttachEditor();
+            //});
         }
 
         /// <summary>
@@ -114,11 +114,8 @@ namespace Core2D.UI.Avalonia.Views
                     _zoomBorder.InvalidatedChild = InvalidateChild;
                 }
 
-                if (_inputProcessor != null)
-                {
-                    _inputProcessor.Dispose();
-                    _inputProcessor = null;
-                }
+                _inputProcessor?.Dispose();
+                _inputProcessor = null;
 
                 _inputSource = new AvaloniaInputSource(
                         _zoomBorder,
@@ -151,11 +148,8 @@ namespace Core2D.UI.Avalonia.Views
                     _zoomBorder.InvalidatedChild = null;
                 }
 
-                if (_inputProcessor != null)
-                {
-                    _inputProcessor.Dispose();
-                    _inputProcessor = null;
-                }
+                _inputProcessor?.Dispose();
+                _inputProcessor = null;
             }
         }
     }
