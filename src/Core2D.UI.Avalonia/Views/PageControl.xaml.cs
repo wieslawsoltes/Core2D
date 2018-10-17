@@ -41,17 +41,6 @@ namespace Core2D.UI.Avalonia.Views
                 AttachEditor();
             });
 
-            //AttachedToVisualTree += (sender, e) =>
-            //{
-            //    DetachEditor();
-            //    AttachEditor();
-            //};
-
-            //DetachedFromVisualTree += (sender, e) =>
-            //{
-            //    DetachEditor();
-            //};
-
             AttachedToVisualTree += PageControl_AttachedToVisualTree;
             DetachedFromVisualTree += PageControl_DetachedFromVisualTree;
         }
