@@ -18,6 +18,7 @@ namespace Core2D.UI.Avalonia.Views
     {
         private AvaloniaInputSource _inputSource = null;
         private InputProcessor _inputProcessor = null;
+        private bool _isLoaded = false;
         private ContainerControl _containerControlData = null;
         private ContainerControl _containerControlTemplate = null;
         private ContainerControl _containerControlEditor = null;
@@ -94,6 +95,12 @@ namespace Core2D.UI.Avalonia.Views
         {
             if (DataContext is ProjectEditor projectEditor)
             {
+                Console.WriteLine($"AttachEditor _isLoaded: {_isLoaded}");
+                if (_isLoaded)
+                    return;
+                else
+                    _isLoaded = true;
+
                 Console.WriteLine("AttachEditor");
 
                 if (projectEditor.CanvasPlatform is IEditorCanvasPlatform canvasPlatform)
@@ -136,6 +143,12 @@ namespace Core2D.UI.Avalonia.Views
         {
             if (DataContext is ProjectEditor projectEditor)
             {
+                Console.WriteLine($"DetachEditor _isLoaded: {_isLoaded}");
+                if (!_isLoaded)
+                    return;
+                else
+                    _isLoaded = false;
+
                 Console.WriteLine("DetachEditor");
 
                 if (projectEditor.CanvasPlatform is IEditorCanvasPlatform canvasPlatform)
