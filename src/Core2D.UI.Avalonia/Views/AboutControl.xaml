@@ -3,9 +3,12 @@
 <UserControl x:Class="Core2D.UI.Avalonia.Views.AboutControl"
              xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:Designer="clr-namespace:Core2D.Editor.Designer;assembly=Core2D.Editor"
-             Design.DataContext="{x:Static Designer:DesignerContext.Editor}"
-             Design.Width="1000" Design.Height="600">
+             mc:Ignorable="d"
+             d:DataContext="{x:Static Designer:DesignerContext.Editor}"
+             d:DesignWidth="1000" d:DesignHeight="600">
     <ScrollViewer>
         <Grid ColumnDefinitions="Auto,*" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto">
             <TextBlock Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Classes="aboutTitle" Text="{Binding AboutInfo.Title}"/>

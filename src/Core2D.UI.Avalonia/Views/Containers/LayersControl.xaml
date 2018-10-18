@@ -3,6 +3,8 @@
 <UserControl x:Class="Core2D.UI.Avalonia.Views.Containers.LayersControl"
              xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
              xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
              xmlns:id="clr-namespace:Dock.Avalonia;assembly=Dock.Avalonia"
@@ -10,8 +12,9 @@
              xmlns:Editor="clr-namespace:Core2D.Editor;assembly=Core2D.Editor"
              xmlns:ContainersCore="clr-namespace:Core2D.Containers;assembly=Core2D.Model"
              xmlns:Designer="clr-namespace:Core2D.Editor.Designer;assembly=Core2D.Editor"
-             Design.DataContext="{x:Static Designer:DesignerContext.Page}"
-             Design.Width="250" Design.Height="400">
+             mc:Ignorable="d"
+             d:DataContext="{x:Static Designer:DesignerContext.Page}"
+             d:DesignWidth="250" d:DesignHeight="400">
     <TabControl Classes="default">
         <TabItem Header="Layers" Classes="property">
             <Grid RowDefinitions="Auto,*,Auto">

@@ -3,11 +3,14 @@
 <UserControl x:Class="Core2D.UI.Avalonia.Views.Containers.ContainerControl"
              xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:converters="clr-namespace:Core2D.UI.Avalonia.Converters;assembly=Core2D.UI.Avalonia"
-             xmlns:Designer="clr-namespace:Core2D.Editor.Designer;assembly=Core2D.Editor"
              xmlns:containers="clr-namespace:Core2D.UI.Avalonia.Views.Containers;assembly=Core2D.UI.Avalonia"
-             Design.DataContext="{x:Static Designer:DesignerContext.Page}"
-             Design.Width="250" Design.Height="400">
+             xmlns:Designer="clr-namespace:Core2D.Editor.Designer;assembly=Core2D.Editor"
+             mc:Ignorable="d"
+             d:DataContext="{x:Static Designer:DesignerContext.Page}"
+             d:DesignWidth="250" d:DesignHeight="400">
     <TabControl Classes="default">
         <TabItem Header="Container" Classes="property">
             <Grid RowDefinitions="Auto,*" ColumnDefinitions="Auto,*">
