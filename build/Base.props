@@ -19,13 +19,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition="$(Configuration.Contains('Debug'))">
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DefineConstants>$(DefineConstants);DEBUG;TRACE</DefineConstants>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
   <PropertyGroup Condition="$(Configuration.Contains('Release'))">
-    <DefineConstants>TRACE</DefineConstants>
+    <DefineConstants>$(DefineConstants);TRACE</DefineConstants>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <DebugSymbols>false</DebugSymbols>
@@ -39,11 +39,20 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'"/>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'"/>
   <PropertyGroup Condition="'$(OS)' == 'Windows_NT'">
-    <DefineConstants>_WINDOWS</DefineConstants>
+    <DefineConstants>$(DefineConstants);_WINDOWS</DefineConstants>
   </PropertyGroup>
   <PropertyGroup Condition="'$(CoreRT)' == 'True'">
-    <DefineConstants>_CORERT</DefineConstants>
+    <DefineConstants>$(DefineConstants);_CORERT</DefineConstants>
   </PropertyGroup>
+  <ItemGroup Condition="'$(CoreRT)' == 'True' And '$(RuntimeIdentifier)' == 'win-x64'">
+    <DefineConstants>$(DefineConstants);_CORERT_WIN_X64</DefineConstants>
+  </ItemGroup>
+  <ItemGroup Condition="'$(CoreRT)' == 'True' And '$(RuntimeIdentifier)' == 'linux-x64'">
+    <DefineConstants>$(DefineConstants);_CORERT_LINUX_X64</DefineConstants>
+  </ItemGroup>
+  <ItemGroup Condition="'$(CoreRT)' == 'True' And '$(RuntimeIdentifier)' == 'osx-x64'">
+    <DefineConstants>$(DefineConstants);_CORERT_OSX_X64</DefineConstants>
+  </ItemGroup>
   <PropertyGroup Condition="'$(TargetFramework)' == 'net461' and '$(OS)' == 'Unix'">
     <FrameworkPathOverride>/usr/lib/mono/4.6.1-api</FrameworkPathOverride>
     <FrameworkPathOverride Condition="$([MSBuild]::IsOsPlatform('OSX'))">/Library/Frameworks/Mono.framework/Versions/Current/lib/mono/4.6.1-api</FrameworkPathOverride>
