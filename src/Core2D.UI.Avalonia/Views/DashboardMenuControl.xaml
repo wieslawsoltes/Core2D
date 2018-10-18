@@ -3,6 +3,8 @@
 <UserControl x:Class="Core2D.UI.Avalonia.Views.DashboardMenuControl"
              xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
              xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
              xmlns:iac="clr-namespace:Avalonia.Xaml.Interactions.Custom;assembly=Avalonia.Xaml.Interactions.Custom"
@@ -12,8 +14,9 @@
              xmlns:Recent="clr-namespace:Core2D.Editor.Recent;assembly=Core2D.Editor"
              xmlns:ContainersCore="clr-namespace:Core2D.Containers;assembly=Core2D.Model"
              xmlns:Designer="clr-namespace:Core2D.Editor.Designer;assembly=Core2D.Editor"
-             Design.DataContext="{x:Static Designer:DesignerContext.Editor}"
-             Design.Width="800" Design.Height="20">
+             mc:Ignorable="d"
+             d:DataContext="{x:Static Designer:DesignerContext.Editor}"
+             d:DesignWidth="800" d:DesignHeight="20">
     <Menu Classes="default">
         <Menu.ItemsPanel>
             <ItemsPanelTemplate>
