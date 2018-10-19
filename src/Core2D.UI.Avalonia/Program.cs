@@ -136,7 +136,15 @@ namespace Core2D.UI.Avalonia
         /// <returns>The Avalonia app builder.</returns>
         public static AppBuilder BuildAvaloniaApp()
             => AppBuilder.Configure<App>()
+#if !_CORERT
                          .UsePlatformDetect()
+#elif _CORERT_WIN_X64
+                         .UseWin32().UseSkia()
+#elif _CORERT_LINUX_X64
+                         .UseGtk3().UseSkia()
+#elif _CORERT_OSX_X64
+                         .UseMonoMac().UseSkia()
+#endif
                          .LogToDebug();
     }
 }
