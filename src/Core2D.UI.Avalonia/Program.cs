@@ -7,7 +7,6 @@ using Avalonia;
 using Avalonia.Gtk3;
 #endif
 using Avalonia.Logging.Serilog;
-using Avalonia.Native;
 using Core2D.UI.Avalonia.Modules;
 using Core2D.Interfaces;
 

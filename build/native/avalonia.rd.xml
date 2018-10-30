@@ -37,8 +37,8 @@
             <Type Name="Avalonia.Markup.Xaml.Converters.ParseTypeConverter`1[[Avalonia.Media.PathGeometry,Avalonia.Visuals]]" Dynamic="Required All" />
             <Type Name="Avalonia.Markup.Xaml.Converters.ParseTypeConverter`1[[Avalonia.RelativeRect,Avalonia.Visuals]]" Dynamic="Required All" />
         </Assembly>
-
-        <Assembly Name="Avalonia.DotNetCoreRuntime" Dynamic="Required All" />
+        <Assembly Name="Avalonia.OpenGL" Dynamic="Required All" />
+        <Assembly Name="Avalonia.DesktopRuntime" Dynamic="Required All" />
 
     </Application>
 </Directives>
