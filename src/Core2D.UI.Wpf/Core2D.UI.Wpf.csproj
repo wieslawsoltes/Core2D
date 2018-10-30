@@ -530,7 +530,7 @@
     </ProjectReference>
     <ProjectReference Include="..\Core2D.Model\Core2D.Model.csproj">
       <Project>{F822EC0C-2501-487D-87A8-B8D28A761385}</Project>
-      <Name>Core2D</Name>
+      <Name>Core2D.Model</Name>
     </ProjectReference>
     <ProjectReference Include="..\Core2D.FileSystem.DotNet\Core2D.FileSystem.DotNet.csproj">
       <Project>{D1F867F7-9029-480D-B1E1-B0BE4658B182}</Project>
