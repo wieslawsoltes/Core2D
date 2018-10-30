@@ -794,7 +794,7 @@ namespace Core2D.Renderer.Avalonia
                     _dc.DrawImage(
                         imageCached,
                         1.0,
-                        new A.Rect(0, 0, imageCached.PixelWidth, imageCached.PixelHeight),
+                        new A.Rect(0, 0, imageCached.PixelSize.Width, imageCached.PixelSize.Height),
                         new A.Rect(rect.X, rect.Y, rect.Width, rect.Height));
                 }
                 catch (Exception ex)
@@ -822,7 +822,7 @@ namespace Core2D.Renderer.Avalonia
                             _dc.DrawImage(
                                 bi,
                                 1.0,
-                                new A.Rect(0, 0, bi.PixelWidth, bi.PixelHeight),
+                                new A.Rect(0, 0, bi.PixelSize.Width, bi.PixelSize.Height),
                                 new A.Rect(rect.X, rect.Y, rect.Width, rect.Height));
                         }
                     }
