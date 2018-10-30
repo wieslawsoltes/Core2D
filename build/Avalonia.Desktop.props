@@ -20,7 +20,7 @@
     <PackageReference Include="Avalonia.Skia.Linux.Natives" Version="1.60.0.1" />
   </ItemGroup>
   <ItemGroup Condition="'$(CoreRT)' == 'True' And '$(RuntimeIdentifier)' == 'osx-x64'">
-    <PackageReference Include="Avalonia.MonoMac" Version="0.7.0-build434-beta" />
+    <PackageReference Include="Avalonia.Native" Version="0.7.0-build434-beta" />
     <PackageReference Include="Avalonia.Skia" Version="0.7.0-build434-beta" />
     <PackageReference Include="SkiaSharp" Version="1.60.0" />
   </ItemGroup>
