@@ -45,6 +45,7 @@ public class Parameters
             && repoTagName != null)
         {
             IsNugetRelease = true;
+            VersionSuffix = "";
         }
 
         BuildProjects = new []
