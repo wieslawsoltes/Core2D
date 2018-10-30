@@ -14,7 +14,7 @@
                  Width="1200" Height="715"
                  UseLayoutRounding="True" RenderOptions.BitmapInterpolationMode="HighQuality"
                  WindowState="Normal" WindowStartupLocation="CenterScreen"
-                 FontFamily="Segoe UI, Arial" BorderThickness="1" BorderBrush="{DynamicResource ThemeBorderLightBrush}"
+                 BorderThickness="1" BorderBrush="{DynamicResource ThemeBorderLightBrush}"
                  Title="Object Browser"
                  xmlns:Designer="clr-namespace:Core2D.Editor.Designer;assembly=Core2D.Editor"
                  mc:Ignorable="d"

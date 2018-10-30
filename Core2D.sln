@@ -390,13 +390,9 @@ Global
 		{C4D7FE79-2300-4FF1-98A2-383E07969D43}.Release|AnyCPU.ActiveCfg = Release|Any CPU
 		{C4D7FE79-2300-4FF1-98A2-383E07969D43}.Release|AnyCPU.Build.0 = Release|Any CPU
 		{EDF5CAB8-91D5-487E-A3B2-842940673049}.Debug|.NET Core.ActiveCfg = Debug|Any CPU
-		{EDF5CAB8-91D5-487E-A3B2-842940673049}.Debug|.NET Core.Build.0 = Debug|Any CPU
 		{EDF5CAB8-91D5-487E-A3B2-842940673049}.Debug|AnyCPU.ActiveCfg = Debug|Any CPU
-		{EDF5CAB8-91D5-487E-A3B2-842940673049}.Debug|AnyCPU.Build.0 = Debug|Any CPU
 		{EDF5CAB8-91D5-487E-A3B2-842940673049}.Release|.NET Core.ActiveCfg = Release|Any CPU
-		{EDF5CAB8-91D5-487E-A3B2-842940673049}.Release|.NET Core.Build.0 = Release|Any CPU
 		{EDF5CAB8-91D5-487E-A3B2-842940673049}.Release|AnyCPU.ActiveCfg = Release|Any CPU
-		{EDF5CAB8-91D5-487E-A3B2-842940673049}.Release|AnyCPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
