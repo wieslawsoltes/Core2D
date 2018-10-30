@@ -45,8 +45,8 @@ namespace Core2D.UI.Avalonia
                             case "--gtk3":
                                 builder.UseGtk3();
                                 break;
-                            case "--mac":
-                                builder.UseMonoMac();
+                            case "--native":
+                                builder.UseAvaloniaNative();
                                 break;
 
                         }

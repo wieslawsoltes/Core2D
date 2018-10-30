@@ -7,6 +7,7 @@ using Avalonia;
 using Avalonia.Gtk3;
 #endif
 using Avalonia.Logging.Serilog;
+using Avalonia.Native;
 using Core2D.UI.Avalonia.Modules;
 using Core2D.Interfaces;
 
@@ -41,7 +42,7 @@ namespace Core2D.UI.Avalonia
             bool useSkia = false;
             bool useWin32 = false;
             bool useGtk3 = false;
-            bool useMonoMac = false;
+            bool useNative = false;
 
             foreach (var arg in args)
             {
@@ -68,8 +69,8 @@ namespace Core2D.UI.Avalonia
                     case "--gtk3":
                         useGtk3 = true;
                         break;
-                    case "--mac":
-                        useMonoMac = true;
+                    case "--native":
+                        useNative = true;
                         break;
                 }
             }
@@ -109,9 +110,13 @@ namespace Core2D.UI.Avalonia
                             };
                             appBuilder.UseGtk3(options);
                         }
-                        if (useMonoMac == true)
+                        if (useNative == true)
                         {
-                            appBuilder.UseMonoMac(deferredRendering);
+                            appBuilder.UseAvaloniaNative(null, (opts) =>
+                            {
+                                opts.UseGpu = useGpu;
+                                opts.UseDeferredRendering = deferredRendering;
+                            });
                         }
 #endif
                         appBuilder.SetupWithoutStarting();
@@ -143,7 +148,7 @@ namespace Core2D.UI.Avalonia
 #elif _CORERT_LINUX_X64
                          .UseGtk3().UseSkia()
 #elif _CORERT_OSX_X64
-                         .UseMonoMac().UseSkia()
+                         .UseAvaloniaNative().UseSkia()
 #endif
                          .LogToDebug();
     }
