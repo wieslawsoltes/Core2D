@@ -6,7 +6,6 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{C7162582-C1FD-45FB-99FD-6770D67B5A21}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
-		_config.yml = _config.yml
 		build.cake = build.cake
 		parameters.cake = parameters.cake
 	EndProjectSection
@@ -66,6 +65,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ci", "ci", "{6009319B-91B7-43FD-ABAF-1BE105FD91A9}"
 	ProjectSection(SolutionItems) = preProject
 		.travis.yml = .travis.yml
+		_config.yml = _config.yml
 		appveyor.yml = appveyor.yml
 		azure-pipelines.yml = azure-pipelines.yml
 		circle.yml = circle.yml
