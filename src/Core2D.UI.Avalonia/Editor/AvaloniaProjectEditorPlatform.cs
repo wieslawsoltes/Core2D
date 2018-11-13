@@ -13,6 +13,7 @@ using Core2D.FileWriter.Emf;
 using Core2D.Interfaces;
 using Core2D.Renderer;
 using Dock.Model;
+using System.Threading.Tasks;
 
 namespace Core2D.UI.Avalonia.Editor
 {
@@ -32,22 +33,31 @@ namespace Core2D.UI.Avalonia.Editor
             _serviceProvider = serviceProvider;
         }
 
+        private async Task OnOpen()
+        {
+            var dlg = new OpenFileDialog() { Title = "Open" };
+            dlg.Filters.Add(new FileDialogFilter() { Name = "Project", Extensions = { "project" } });
+            dlg.Filters.Add(new FileDialogFilter() { Name = "All", Extensions = { "*" } });
+            var window = _serviceProvider.GetService<MainWindow>();
+            var result = await dlg.ShowAsync(window);
+            if (result != null)
+            {
+                var path = result.FirstOrDefault();
+                if (path != null)
+                {
+                    var editor = _serviceProvider.GetService<ProjectEditor>();
+                    editor.OnOpenProject(path);
+                    editor.CanvasPlatform?.Invalidate?.Invoke(); 
+                }
+            }
+        }
+
         /// <inheritdoc/>
         public async void OnOpen(string path)
         {
             if (path == null)
             {
-                var dlg = new OpenFileDialog() { Title = "Open" };
-                dlg.Filters.Add(new FileDialogFilter() { Name = "Project", Extensions = { "project" } });
-                dlg.Filters.Add(new FileDialogFilter() { Name = "All", Extensions = { "*" } });
-                var window = _serviceProvider.GetService<MainWindow>();
-                var result = await dlg.ShowAsync(window);
-                if (result != null)
-                {
-                    var editor = _serviceProvider.GetService<ProjectEditor>();
-                    editor.OnOpenProject(result.FirstOrDefault());
-                    editor.CanvasPlatform?.Invalidate?.Invoke();
-                }
+                await OnOpen();
             }
             else
             {
@@ -88,24 +98,32 @@ namespace Core2D.UI.Avalonia.Editor
             }
         }
 
+        private async Task OnImportJson()
+        {
+            var dlg = new OpenFileDialog() { Title = "Open" };
+            dlg.AllowMultiple = true;
+            dlg.Filters.Add(new FileDialogFilter() { Name = "Json", Extensions = { "json" } });
+            dlg.Filters.Add(new FileDialogFilter() { Name = "All", Extensions = { "*" } });
+
+            var result = await dlg.ShowAsync(_serviceProvider.GetService<MainWindow>());
+            if (result != null)
+            {
+                foreach (var path in result)
+                {
+                    if (path != null)
+                    {
+                        _serviceProvider.GetService<ProjectEditor>().OnImportJson(path); 
+                    }
+                }
+            }
+        }
+
         /// <inheritdoc/>
         public async void OnImportJson(string path)
         {
             if (path == null)
             {
-                var dlg = new OpenFileDialog() { Title = "Open" };
-                dlg.AllowMultiple = true;
-                dlg.Filters.Add(new FileDialogFilter() { Name = "Json", Extensions = { "json" } });
-                dlg.Filters.Add(new FileDialogFilter() { Name = "All", Extensions = { "*" } });
-
-                var results = await dlg.ShowAsync(_serviceProvider.GetService<MainWindow>());
-                if (results != null)
-                {
-                    foreach (var result in results)
-                    {
-                        _serviceProvider.GetService<ProjectEditor>().OnImportJson(result);
-                    }
-                }
+                await OnImportJson();
             }
             else
             {
@@ -116,31 +134,39 @@ namespace Core2D.UI.Avalonia.Editor
             }
         }
 
+        private async Task OnImportObject()
+        {
+            var dlg = new OpenFileDialog() { Title = "Open" };
+            dlg.AllowMultiple = true;
+            dlg.Filters.Add(new FileDialogFilter() { Name = "Json", Extensions = { "json" } });
+            dlg.Filters.Add(new FileDialogFilter() { Name = "Xaml", Extensions = { "xaml" } });
+            var result = await dlg.ShowAsync(_serviceProvider.GetService<MainWindow>());
+            if (result != null)
+            {
+                foreach (var path in result)
+                {
+                    if (path != null)
+                    {
+                        string resultExtension = System.IO.Path.GetExtension(path);
+                        if (string.Compare(resultExtension, ".json", StringComparison.OrdinalIgnoreCase) == 0)
+                        {
+                            _serviceProvider.GetService<ProjectEditor>().OnImportJson(path);
+                        }
+                        else if (string.Compare(resultExtension, ".xaml", StringComparison.OrdinalIgnoreCase) == 0)
+                        {
+                            _serviceProvider.GetService<ProjectEditor>().OnImportJson(path);
+                        } 
+                    }
+                }
+            }
+        }
+
         /// <inheritdoc/>
         public async void OnImportObject(string path)
         {
             if (path == null)
             {
-                var dlg = new OpenFileDialog() { Title = "Open" };
-                dlg.AllowMultiple = true;
-                dlg.Filters.Add(new FileDialogFilter() { Name = "Json", Extensions = { "json" } });
-                dlg.Filters.Add(new FileDialogFilter() { Name = "Xaml", Extensions = { "xaml" } });
-                var results = await dlg.ShowAsync(_serviceProvider.GetService<MainWindow>());
-                if (results != null)
-                {
-                    foreach (var result in results)
-                    {
-                        string resultExtension = System.IO.Path.GetExtension(result);
-                        if (string.Compare(resultExtension, ".json", StringComparison.OrdinalIgnoreCase) == 0)
-                        {
-                            _serviceProvider.GetService<ProjectEditor>().OnImportJson(result);
-                        }
-                        else if (string.Compare(resultExtension, ".xaml", StringComparison.OrdinalIgnoreCase) == 0)
-                        {
-                            _serviceProvider.GetService<ProjectEditor>().OnImportJson(result);
-                        }
-                    }
-                }
+                await OnImportObject();
             }
             else
             {
@@ -159,24 +185,32 @@ namespace Core2D.UI.Avalonia.Editor
             }
         }
 
+        private async Task OnImportXaml()
+        {
+            var dlg = new OpenFileDialog() { Title = "Open" };
+            dlg.AllowMultiple = true;
+            dlg.Filters.Add(new FileDialogFilter() { Name = "Xaml", Extensions = { "xaml" } });
+            dlg.Filters.Add(new FileDialogFilter() { Name = "All", Extensions = { "*" } });
+
+            var result = await dlg.ShowAsync(_serviceProvider.GetService<MainWindow>());
+            if (result != null)
+            {
+                foreach (var path in result)
+                {
+                    if (path != null)
+                    {
+                        _serviceProvider.GetService<ProjectEditor>().OnImportXaml(path); 
+                    }
+                }
+            }
+        }
+
         /// <inheritdoc/>
         public async void OnImportXaml(string path)
         {
             if (path == null)
             {
-                var dlg = new OpenFileDialog() { Title = "Open" };
-                dlg.AllowMultiple = true;
-                dlg.Filters.Add(new FileDialogFilter() { Name = "Xaml", Extensions = { "xaml" } });
-                dlg.Filters.Add(new FileDialogFilter() { Name = "All", Extensions = { "*" } });
-
-                var results = await dlg.ShowAsync(_serviceProvider.GetService<MainWindow>());
-                if (results != null)
-                {
-                    foreach (var result in results)
-                    {
-                        _serviceProvider.GetService<ProjectEditor>().OnImportXaml(result);
-                    }
-                }
+                await OnImportXaml();
             }
             else
             {
@@ -214,17 +248,17 @@ namespace Core2D.UI.Avalonia.Editor
                 dlg.Filters.Add(new FileDialogFilter() { Name = "Xaml", Extensions = { "xaml" } });
                 dlg.InitialFileName = editor?.GetName(item);
                 dlg.DefaultExtension = "json";
-                var path = await dlg.ShowAsync(_serviceProvider.GetService<MainWindow>());
-                if (path != null)
+                var result = await dlg.ShowAsync(_serviceProvider.GetService<MainWindow>());
+                if (result != null)
                 {
-                    string resultExtension = System.IO.Path.GetExtension(path);
+                    string resultExtension = System.IO.Path.GetExtension(result);
                     if (string.Compare(resultExtension, ".json", StringComparison.OrdinalIgnoreCase) == 0)
                     {
-                        editor.OnExportJson(path, item);
+                        editor.OnExportJson(result, item);
                     }
                     else if (string.Compare(resultExtension, ".xaml", StringComparison.OrdinalIgnoreCase) == 0)
                     {
-                        editor.OnExportXaml(path, item);
+                        editor.OnExportXaml(result, item);
                     }
                 }
             }
@@ -309,7 +343,10 @@ namespace Core2D.UI.Avalonia.Editor
                 var result = await dlg.ShowAsync(_serviceProvider.GetService<MainWindow>());
                 if (result != null)
                 {
-                    _serviceProvider.GetService<ProjectEditor>().OnExecuteScript(result);
+                    if (result.All(r => r != null))
+                    {
+                        _serviceProvider.GetService<ProjectEditor>().OnExecuteScript(result);
+                    }
                 }
             }
         }
@@ -368,7 +405,11 @@ namespace Core2D.UI.Avalonia.Editor
             var result = await dlg.ShowAsync(_serviceProvider.GetService<MainWindow>());
             if (result != null)
             {
-                _serviceProvider.GetService<ProjectEditor>().OnImportData(project, result.FirstOrDefault());
+                var path = result.FirstOrDefault();
+                if (path != null)
+                {
+                    _serviceProvider.GetService<ProjectEditor>().OnImportData(project, path);
+                }
             }
         }
 
@@ -401,7 +442,11 @@ namespace Core2D.UI.Avalonia.Editor
                 var result = await dlg.ShowAsync(_serviceProvider.GetService<MainWindow>());
                 if (result != null)
                 {
-                    _serviceProvider.GetService<ProjectEditor>().OnUpdateData(result.FirstOrDefault(), db);
+                    var path = result.FirstOrDefault();
+                    if (path != null)
+                    {
+                        _serviceProvider.GetService<ProjectEditor>().OnUpdateData(path, db);
+                    }
                 }
             }
         }
@@ -468,11 +513,15 @@ namespace Core2D.UI.Avalonia.Editor
             var result = await dlg.ShowAsync(window);
             if (result != null)
             {
-                var editor = _serviceProvider.GetService<ProjectEditor>();
-                editor.OnLoadLayout(result.FirstOrDefault());
+                var path = result.FirstOrDefault();
+                if (path != null)
+                {
+                    var editor = _serviceProvider.GetService<ProjectEditor>();
+                    editor.OnLoadLayout(path);
 
-                var dockFactory = _serviceProvider.GetService<IDockFactory>();
-                dockFactory.InitLayout(editor.Layout);
+                    var dockFactory = _serviceProvider.GetService<IDockFactory>();
+                    dockFactory.InitLayout(editor.Layout);
+                }
             }
         }
 

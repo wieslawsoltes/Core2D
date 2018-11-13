@@ -54,7 +54,10 @@ namespace Core2D.UI.Avalonia.Importers
                 if (result != null)
                 {
                     var path = result.FirstOrDefault();
-                    return GetImageKey(path);
+                    if (path != null)
+                    {
+                        return GetImageKey(path);
+                    }
                 }
             }
             catch (Exception ex)
