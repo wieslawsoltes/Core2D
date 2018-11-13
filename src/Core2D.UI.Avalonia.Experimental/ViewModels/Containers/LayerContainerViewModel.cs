@@ -225,8 +225,11 @@ namespace Core2D.ViewModels.Containers
             if (result != null)
             {
                 var path = result.FirstOrDefault();
-                OpenAsJson(path);
-                Invalidate?.Invoke();
+                if (path != null)
+                {
+                    OpenAsJson(path);
+                    Invalidate?.Invoke();
+                }
             }
         }
 
