@@ -3,8 +3,6 @@
 [![Gitter](https://badges.gitter.im/wieslawsoltes/Core2D.svg)](https://gitter.im/wieslawsoltes/Core2D?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
 [![Build status](https://ci.appveyor.com/api/projects/status/7k1e0voeit7od9bw/branch/master?svg=true)](https://ci.appveyor.com/project/wieslawsoltes/core2d/branch/master)
-[![Build Status](https://travis-ci.org/wieslawsoltes/Core2D.svg?branch=master)](https://travis-ci.org/wieslawsoltes/Core2D)
-[![CircleCI](https://circleci.com/gh/wieslawsoltes/Core2D/tree/master.svg?style=svg)](https://circleci.com/gh/wieslawsoltes/Core2D/tree/master)
 [![Build Status](https://dev.azure.com/wieslawsoltes/Core2D/_apis/build/status/wieslawsoltes.Core2D)](https://dev.azure.com/wieslawsoltes/Core2D/_build/latest?definitionId=1)
 
 [![NuGet](https://img.shields.io/nuget/v/Core2D.Model.svg)](https://www.nuget.org/packages/Core2D.Model)
