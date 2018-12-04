@@ -42,17 +42,20 @@
   <PropertyGroup Condition="'$(OS)' == 'Windows_NT'">
     <DefineConstants>$(DefineConstants);_WINDOWS</DefineConstants>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(CoreRT)' == 'True'">
-    <DefineConstants>$(DefineConstants);_CORERT</DefineConstants>
+  <PropertyGroup>
+    <CoreRT>False</CoreRT>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(CoreRT)' == 'True' And '$(RuntimeIdentifier)' == 'win-x64'">
-    <DefineConstants>$(DefineConstants);_CORERT_WIN_X64</DefineConstants>
+  <PropertyGroup Condition="'$(RuntimeIdentifier)' == 'win-x64'">
+    <CoreRT>True</CoreRT>
+    <DefineConstants>$(DefineConstants);_CORERT;_CORERT_WIN_X64</DefineConstants>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(CoreRT)' == 'True' And '$(RuntimeIdentifier)' == 'linux-x64'">
-    <DefineConstants>$(DefineConstants);_CORERT_LINUX_X64</DefineConstants>
+  <PropertyGroup Condition="'$(RuntimeIdentifier)' == 'linux-x64'">
+    <CoreRT>True</CoreRT>
+    <DefineConstants>$(DefineConstants);_CORERT;_CORERT_LINUX_X64</DefineConstants>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(CoreRT)' == 'True' And '$(RuntimeIdentifier)' == 'osx-x64'">
-    <DefineConstants>$(DefineConstants);_CORERT_OSX_X64</DefineConstants>
+  <PropertyGroup Condition="'$(RuntimeIdentifier)' == 'osx-x64'">
+    <CoreRT>True</CoreRT>
+    <DefineConstants>$(DefineConstants);_CORERT;_CORERT_OSX_X64</DefineConstants>
   </PropertyGroup>
   <PropertyGroup Condition="'$(TargetFramework)' == 'net461' and '$(OS)' == 'Unix'">
     <FrameworkPathOverride>/usr/lib/mono/4.6.1-api</FrameworkPathOverride>
