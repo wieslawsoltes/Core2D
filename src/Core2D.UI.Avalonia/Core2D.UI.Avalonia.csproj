@@ -3,10 +3,10 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFrameworks>netcoreapp2.1</TargetFrameworks>
-    <RuntimeIdentifiers>win-x64;linux-x64;osx-x64;win7-x64;ubuntu.14.04-x64;debian.8-x64;osx.10.12-x64</RuntimeIdentifiers>
     <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
     <EnableDefaultCompileItems>False</EnableDefaultCompileItems>
     <TieredCompilation>True</TieredCompilation>
+    <IsPackable>False</IsPackable>
   </PropertyGroup>
 
   <ItemGroup Condition="'$(CoreRT)' == 'True'">
@@ -30,7 +30,6 @@
 
   <Import Project="..\..\build\Base.props" />
   <Import Project="..\..\build\ILCompiler.props" Condition="'$(CoreRT)' == 'True'" />
-  <Import Project="..\..\build\NETCore.props" Condition="'$(CoreRT)' == 'False'" />
   <!--<Import Project="..\..\build\NSubsys.props" Condition="'$(CoreRT)' == 'False'" />-->
   <Import Project="..\..\build\Autofac.props" />
   <Import Project="..\..\build\Rx.props" />

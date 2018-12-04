@@ -3,12 +3,12 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFrameworks>netcoreapp2.1</TargetFrameworks>
-    <RuntimeIdentifiers>win7-x64;ubuntu.14.04-x64;debian.8-x64;osx.10.12-x64</RuntimeIdentifiers>
     <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
     <EnableDefaultCompileItems>False</EnableDefaultCompileItems>
     <TieredCompilation>True</TieredCompilation>
     <AssemblyName>Core2D.UI.Avalonia</AssemblyName>
     <RootNamespace>Core2D.UI.Avalonia</RootNamespace>
+    <IsPackable>False</IsPackable>
   </PropertyGroup>
 
   <Import Project="..\..\build\Base.props" />
