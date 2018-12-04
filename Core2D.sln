@@ -6,8 +6,9 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{C7162582-C1FD-45FB-99FD-6770D67B5A21}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
-		build.cake = build.cake
-		parameters.cake = parameters.cake
+		.nuke = .nuke
+		build.ps1 = build.ps1
+		build.sh = build.sh
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "props", "props", "{3C45CABF-3E2E-455B-AACF-1FB63D331F9C}"
@@ -22,7 +23,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "props", "props", "{3C45CABF
 		build\EmbedXaml.props = build\EmbedXaml.props
 		build\ILCompiler.props = build\ILCompiler.props
 		build\Math.Spatial.props = build\Math.Spatial.props
-		build\NETCore.props = build\NETCore.props
 		build\netDXF.props = build\netDXF.props
 		build\Newtonsoft.Json.props = build\Newtonsoft.Json.props
 		build\NSubsys.props = build\NSubsys.props
@@ -60,13 +60,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "native", "native", "{0DD549
 		build\native\portable.xaml.rd.xml = build\native\portable.xaml.rd.xml
 		build\native\roslyn.rd.xml = build\native\roslyn.rd.xml
 		build\native\rx.rd.xml = build\native\rx.rd.xml
-	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ci", "ci", "{6009319B-91B7-43FD-ABAF-1BE105FD91A9}"
-	ProjectSection(SolutionItems) = preProject
-		_config.yml = _config.yml
-		appveyor.yml = appveyor.yml
-		azure-pipelines.yml = azure-pipelines.yml
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "git", "git", "{0AE9F90A-3798-42B0-A58D-AA9A9E08BED2}"
@@ -163,11 +156,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D.ViewModels.UnitTests
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D.UI.Avalonia.Experimental", "src\Core2D.UI.Avalonia.Experimental\Core2D.UI.Avalonia.Experimental.csproj", "{EDF5CAB8-91D5-487E-A3B2-842940673049}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{24037A99-DF17-44D9-88A3-F877B8C7B73E}"
-	ProjectSection(SolutionItems) = preProject
-		LICENSE.TXT = LICENSE.TXT
-		README.md = README.md
-	EndProjectSection
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "_build", "build\build\_build.csproj", "{99A39D19-3018-4394-9224-9396B8474BF6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -397,6 +386,14 @@ Global
 		{EDF5CAB8-91D5-487E-A3B2-842940673049}.Debug|AnyCPU.ActiveCfg = Debug|Any CPU
 		{EDF5CAB8-91D5-487E-A3B2-842940673049}.Release|.NET Core.ActiveCfg = Release|Any CPU
 		{EDF5CAB8-91D5-487E-A3B2-842940673049}.Release|AnyCPU.ActiveCfg = Release|Any CPU
+		{99A39D19-3018-4394-9224-9396B8474BF6}.Debug|.NET Core.ActiveCfg = Debug|Any CPU
+		{99A39D19-3018-4394-9224-9396B8474BF6}.Debug|.NET Core.Build.0 = Debug|Any CPU
+		{99A39D19-3018-4394-9224-9396B8474BF6}.Debug|AnyCPU.ActiveCfg = Debug|Any CPU
+		{99A39D19-3018-4394-9224-9396B8474BF6}.Debug|AnyCPU.Build.0 = Debug|Any CPU
+		{99A39D19-3018-4394-9224-9396B8474BF6}.Release|.NET Core.ActiveCfg = Release|Any CPU
+		{99A39D19-3018-4394-9224-9396B8474BF6}.Release|.NET Core.Build.0 = Release|Any CPU
+		{99A39D19-3018-4394-9224-9396B8474BF6}.Release|AnyCPU.ActiveCfg = Release|Any CPU
+		{99A39D19-3018-4394-9224-9396B8474BF6}.Release|AnyCPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -405,7 +402,6 @@ Global
 		{3C45CABF-3E2E-455B-AACF-1FB63D331F9C} = {C7162582-C1FD-45FB-99FD-6770D67B5A21}
 		{DDE59F10-F84A-4919-B221-38414B958103} = {C7162582-C1FD-45FB-99FD-6770D67B5A21}
 		{0DD5491E-0BDA-4366-A353-549820A65E12} = {C7162582-C1FD-45FB-99FD-6770D67B5A21}
-		{6009319B-91B7-43FD-ABAF-1BE105FD91A9} = {C7162582-C1FD-45FB-99FD-6770D67B5A21}
 		{0AE9F90A-3798-42B0-A58D-AA9A9E08BED2} = {C7162582-C1FD-45FB-99FD-6770D67B5A21}
 		{F822EC0C-2501-487D-87A8-B8D28A761385} = {BC6BAFE6-1735-4549-A7CC-819274780B38}
 		{0C7EA04E-94D8-49B7-B387-C031B2422F3B} = {A2A18C4F-8515-4FC9-A058-DC70DF7E288A}
@@ -446,7 +442,7 @@ Global
 		{FE97309E-2A00-4D89-A66A-B6A84DA7AC8D} = {BC6BAFE6-1735-4549-A7CC-819274780B38}
 		{C4D7FE79-2300-4FF1-98A2-383E07969D43} = {8756F874-0C1B-4AB8-83E0-0BEDA782D212}
 		{EDF5CAB8-91D5-487E-A3B2-842940673049} = {A2A18C4F-8515-4FC9-A058-DC70DF7E288A}
-		{24037A99-DF17-44D9-88A3-F877B8C7B73E} = {C7162582-C1FD-45FB-99FD-6770D67B5A21}
+		{99A39D19-3018-4394-9224-9396B8474BF6} = {C7162582-C1FD-45FB-99FD-6770D67B5A21}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2614B90F-C6F8-435C-8BD0-09AEE3ABAD2B}
