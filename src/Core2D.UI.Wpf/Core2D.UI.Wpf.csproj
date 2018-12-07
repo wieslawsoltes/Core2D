@@ -4,7 +4,10 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>netcoreapp3.0</TargetFramework>
     <UseWPF>true</UseWPF>
+    <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
+    <EnableDefaultCompileItems>True</EnableDefaultCompileItems>
     <TieredCompilation>True</TieredCompilation>
+    <IsPackable>False</IsPackable>
   </PropertyGroup>
 
   <Import Project="..\..\build\Base.props" />
