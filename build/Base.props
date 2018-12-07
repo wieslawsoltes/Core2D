@@ -11,7 +11,8 @@
     <PackageTags>2d;editor;data;diagram;graphics;geometry;data;shapes;wysiwyg-editor</PackageTags>
   </PropertyGroup>
   <PropertyGroup>
-     <LangVersion>latest</LangVersion>
+    <LangVersion>8.0</LangVersion>
+    <NullableReferenceTypes>True</NullableReferenceTypes>
   </PropertyGroup>
   <PropertyGroup>
     <OutputPath>bin\$(Platform)\$(Configuration)\</OutputPath>
