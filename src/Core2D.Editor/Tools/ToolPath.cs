@@ -93,7 +93,7 @@ namespace Core2D.Editor.Tools
         /// <typeparam name="T">The type of the path segment to remove.</typeparam>
         public void RemoveLastSegment<T>() where T : PathSegment
         {
-            var figure = Geometry.Figures.LastOrDefault();
+            var figure = Geometry?.Figures.LastOrDefault();
             if (figure != null)
             {
                 if (figure.Segments.LastOrDefault() is T segment)
