@@ -56,13 +56,13 @@ namespace Core2D
         public abstract object Copy(IDictionary<object, object> shared);
 
         /// <inheritdoc/>
-        public void Notify([CallerMemberName] string propertyName = null)
+        public void Notify([CallerMemberName] string? propertyName = default)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
         /// <inheritdoc/>
-        public bool Update<T>(ref T field, T value, [CallerMemberName] string propertyName = null)
+        public bool Update<T>(ref T field, T value, [CallerMemberName] string? propertyName = default)
         {
             if (!Equals(field, value))
             {
