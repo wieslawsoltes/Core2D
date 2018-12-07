@@ -1218,9 +1218,8 @@ namespace Core2D.Editor
             if (CurrentTool.Title == "Path" && CurrentPathTool.Title != "QuadraticBezier")
             {
                 var tool = Tools.FirstOrDefault(t => t.Title == "Path");
-                if (tool != null)
+                if (tool is ToolPath pathTool)
                 {
-                    var pathTool = tool as ToolPath;
                     pathTool.RemoveLastSegment();
                 }
                 CurrentPathTool = PathTools.FirstOrDefault(t => t.Title == "QuadraticBezier");
