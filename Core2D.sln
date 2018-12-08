@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26730.16
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28315.86
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{C7162582-C1FD-45FB-99FD-6770D67B5A21}"
 	ProjectSection(SolutionItems) = preProject
@@ -9,6 +9,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{C7162582
 		.nuke = .nuke
 		build.ps1 = build.ps1
 		build.sh = build.sh
+		global.json = global.json
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "props", "props", "{3C45CABF-3E2E-455B-AACF-1FB63D331F9C}"
@@ -118,7 +119,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D.TextFieldReader.CsvH
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D.TextFieldWriter.CsvHelper", "src\Core2D.TextFieldWriter.CsvHelper\Core2D.TextFieldWriter.CsvHelper.csproj", "{AE7FF1B5-ABE3-45BF-87CC-44AC580A666A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core2D.UI.Wpf", "src\Core2D.UI.Wpf\Core2D.UI.Wpf.csproj", "{12889680-3769-4914-BE60-5D09E83DF5B2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D.UI.Wpf", "src\Core2D.UI.Wpf\Core2D.UI.Wpf.csproj", "{12889680-3769-4914-BE60-5D09E83DF5B2}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{8756F874-0C1B-4AB8-83E0-0BEDA782D212}"
 EndProject
