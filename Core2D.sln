@@ -25,7 +25,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "props", "props", "{3C45CABF
 		build\ILCompiler.props = build\ILCompiler.props
 		build\Linker.props = build\Linker.props
 		build\Math.Spatial.props = build\Math.Spatial.props
-		build\NETCore.props = build\NETCore.props
 		build\netDXF.props = build\netDXF.props
 		build\Newtonsoft.Json.props = build\Newtonsoft.Json.props
 		build\NSubsys.props = build\NSubsys.props
