@@ -2,7 +2,7 @@
 
 [![Gitter](https://badges.gitter.im/wieslawsoltes/Core2D.svg)](https://gitter.im/wieslawsoltes/Core2D?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
-[![Build Status](https://dev.azure.com/wieslawsoltes/GitHub/_apis/build/status/Sources/Core2D?branchName=master)](https://dev.azure.com/wieslawsoltes/GitHub/_build/latest?definitionId=54?branchName=master)
+[![Build status](https://dev.azure.com/wieslawsoltes/GitHub/_apis/build/status/Sources/Core2D)](https://dev.azure.com/wieslawsoltes/GitHub/_build/latest?definitionId=54)
 
 [![NuGet](https://img.shields.io/nuget/v/Core2D.Model.svg)](https://www.nuget.org/packages/Core2D.Model)
 [![MyGet](https://img.shields.io/myget/core2d-nightly/vpre/Core2D.Model.svg?label=myget)](https://www.myget.org/gallery/core2d-nightly) 
