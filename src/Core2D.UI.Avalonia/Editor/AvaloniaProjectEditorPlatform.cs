@@ -488,7 +488,7 @@ namespace Core2D.UI.Avalonia.Editor
             {
                 DataContext = _serviceProvider.GetService<ProjectEditor>()
             }
-            .ShowDialog();
+            .ShowDialog(_serviceProvider.GetService<MainWindow>());
         }
 
         /// <inheritdoc/>

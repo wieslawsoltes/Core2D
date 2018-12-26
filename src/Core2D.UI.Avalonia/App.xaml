@@ -32,14 +32,14 @@
              xmlns:views="clr-namespace:Core2D.UI.Avalonia.Views;assembly=Core2D.UI.Avalonia">
     <Application.Styles>
         <!-- Theme -->
-        <StyleInclude Source="resm:Avalonia.Themes.Default.DefaultTheme.xaml?assembly=Avalonia.Themes.Default"/>
-        <StyleInclude Source="resm:Avalonia.Themes.Default.Accents.BaseLight.xaml?assembly=Avalonia.Themes.Default"/>
+        <StyleInclude Source="avares://Avalonia.Themes.Default/DefaultTheme.xaml"/>
+        <StyleInclude Source="avares://Avalonia.Themes.Default/Accents/BaseLight.xaml"/>
         <!-- Dock -->
-        <StyleInclude Source="resm:Dock.Avalonia.Controls.DockPanelSplitter.xaml?assembly=Dock.Avalonia"/>
-        <StyleInclude Source="resm:Dock.Avalonia.Controls.ProportionalStackPanelSplitter.xaml?assembly=Dock.Avalonia"/>
-        <StyleInclude Source="resm:Dock.Avalonia.Controls.DockTarget.xaml?assembly=Dock.Avalonia"/>
-        <StyleInclude Source="resm:Dock.Avalonia.Controls.DockToolChrome.xaml?assembly=Dock.Avalonia"/>
-        <StyleInclude Source="resm:Dock.Avalonia.Controls.MetroWindow.xaml?assembly=Dock.Avalonia"/>
+        <StyleInclude Source="avares://Dock.Avalonia/Controls/DockPanelSplitter.xaml"/>
+        <StyleInclude Source="avares://Dock.Avalonia/Controls/ProportionalStackPanelSplitter.xaml"/>
+        <StyleInclude Source="avares://Dock.Avalonia/Controls/DockTarget.xaml"/>
+        <StyleInclude Source="avares://Dock.Avalonia/Controls/DockToolChrome.xaml"/>
+        <StyleInclude Source="avares://Dock.Avalonia/Controls/MetroWindow.xaml"/>
         <!-- Border -->
         <Style Selector="Border.panel">
             <Setter Property="Margin" Value="2"/>
