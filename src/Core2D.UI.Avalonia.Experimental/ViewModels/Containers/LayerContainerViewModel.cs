@@ -11,7 +11,6 @@ using Core2D.Containers;
 using Core2D.Editor;
 using Core2D.Editor.Bounds;
 using Core2D.Editor.Tools;
-using Core2D.Json;
 using Core2D.Presenters;
 using Core2D.Renderer;
 using Core2D.Shape;
@@ -116,58 +115,6 @@ namespace Core2D.ViewModels.Containers
 
         public Action StretchUniformToFill { get; set; }
 
-        public static LayerContainerViewModel Load(string path)
-        {
-            var json = File.ReadAllText(path);
-            var vm = NewtonsoftJsonSerializer.FromJson<LayerContainerViewModel>(json);
-            return vm;
-        }
-
-        public static void Save(string path, LayerContainerViewModel vm)
-        {
-            var renderer = vm.Renderer;
-            var currentContainer = vm.CurrentContainer;
-            var workingContainer = vm.WorkingContainer;
-            var capture = vm.Capture;
-            var release = vm.Release;
-            var invalidate = vm.Invalidate;
-            var reset = vm.Reset;
-            var autoFit = vm.AutoFit;
-            var stretchNone = vm.StretchNone;
-            var stretchFill = vm.StretchFill;
-            var stretchUniform = vm.StretchUniform;
-            var stretchUniformToFill = vm.StretchUniformToFill;
-
-            vm.Renderer = null;
-            vm.CurrentContainer = null;
-            vm.WorkingContainer = null;
-            vm.Capture = null;
-            vm.Release = null;
-            vm.Invalidate = null;
-            vm.Reset = null;
-            vm.AutoFit = null;
-            vm.StretchNone = null;
-            vm.StretchFill = null;
-            vm.StretchUniform = null;
-            vm.StretchUniformToFill = null;
-
-            var json = NewtonsoftJsonSerializer.ToJson(vm);
-            File.WriteAllText(path, json);
-
-            vm.Renderer = renderer;
-            vm.CurrentContainer = currentContainer;
-            vm.WorkingContainer = workingContainer;
-            vm.Capture = capture;
-            vm.Release = release;
-            vm.Invalidate = invalidate;
-            vm.Reset = reset;
-            vm.AutoFit = autoFit;
-            vm.StretchNone = stretchNone;
-            vm.StretchFill = stretchFill;
-            vm.StretchUniform = stretchUniform;
-            vm.StretchUniformToFill = stretchUniformToFill;
-        }
-
         public PointShape GetNextPoint(double x, double y, bool connect, double radius)
         {
             if (connect == true)
@@ -197,55 +144,6 @@ namespace Core2D.ViewModels.Containers
             CurrentContainer = container;
             WorkingContainer = new LayerContainer();
             Invalidate?.Invoke();
-        }
-
-        public void OpenAsJson(string path)
-        {
-            var json = File.ReadAllText(path);
-            var container = NewtonsoftJsonSerializer.FromJson<LayerContainer>(json);
-            var workingContainer = new LayerContainer();
-            CurrentTool.Clean(this);
-            Renderer.SelectedShapes.Clear();
-            CurrentContainer = container;
-            WorkingContainer = workingContainer;
-        }
-
-        public void SaveAsJson(string path)
-        {
-            var json = NewtonsoftJsonSerializer.ToJson(CurrentContainer);
-            File.WriteAllText(path, json);
-        }
-
-        public async void Open()
-        {
-            var dlg = new OpenFileDialog();
-            dlg.Filters.Add(new FileDialogFilter() { Name = "Json Files", Extensions = { "json" } });
-            dlg.Filters.Add(new FileDialogFilter() { Name = "All Files", Extensions = { "*" } });
-            var result = await dlg.ShowAsync();
-            if (result != null)
-            {
-                var path = result.FirstOrDefault();
-                if (path != null)
-                {
-                    OpenAsJson(path);
-                    Invalidate?.Invoke();
-                }
-            }
-        }
-
-        public async void SaveAs()
-        {
-            var dlg = new SaveFileDialog();
-            dlg.Filters.Add(new FileDialogFilter() { Name = "Json Files", Extensions = { "json" } });
-            dlg.Filters.Add(new FileDialogFilter() { Name = "All Files", Extensions = { "*" } });
-            dlg.InitialFileName = "container";
-            dlg.DefaultExtension = "project";
-            var result = await dlg.ShowAsync(Application.Current.Windows[0]);
-            if (result != null)
-            {
-                var path = result;
-                SaveAsJson(path);
-            }
         }
 
         public void Exit()

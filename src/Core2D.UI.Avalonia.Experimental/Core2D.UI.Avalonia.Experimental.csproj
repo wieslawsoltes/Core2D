@@ -19,20 +19,25 @@
   <Import Project="..\..\build\SkiaSharp.props" />
   <Import Project="..\..\build\SharpDX.props" />
   <Import Project="..\..\build\Math.Spatial.props" />
-  <Import Project="..\..\build\Newtonsoft.Json.props" />
 
   <ItemGroup>
     <Compile Include="**\*.cs" Exclude="obj\**" />
   </ItemGroup>
 
+  <Import Project="..\..\build\EmbedXaml.props" />
+
   <ItemGroup>
-    <EmbeddedResource Include="Assets\*" Exclude="bin\**;obj\**;**\*.xproj;packages\**;@(EmbeddedResource)" />
+    <AvaloniaResource Include="Assets\*" Exclude="bin\**;obj\**;**\*.xproj;packages\**;@(EmbeddedResource)" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Core2D.Model\Core2D.Model.csproj" />
   </ItemGroup>
 
-  <Import Project="..\..\build\EmbedXaml.props" />
+  <ItemGroup>
+    <None Update="Views\ShapesView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+  </ItemGroup>
 
 </Project>

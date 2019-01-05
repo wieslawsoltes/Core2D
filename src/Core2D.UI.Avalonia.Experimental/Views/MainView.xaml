@@ -1,6 +1,7 @@
 ﻿<!-- Copyright (c) Wiesław Šoltés. All rights reserved. -->
 <!-- Licensed under the MIT license. See LICENSE file in the project root for full license information. -->
-<UserControl xmlns="https://github.com/avaloniaui"
+<UserControl x:Class="Core2D.UI.Avalonia.Views.MainView"
+             xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:Views="clr-namespace:Core2D.UI.Avalonia.Views;assembly=Core2D.UI.Avalonia"
              xmlns:ViewsStyle="clr-namespace:Core2D.UI.Avalonia.Views.Style;assembly=Core2D.UI.Avalonia"
@@ -41,7 +42,7 @@
                 </TabItem>
                 <TabItem Classes="default" Header="Shape">
                     <Border Classes="default">
-                        <Views:ShapeView DataContext="{Binding Renderer.Hover}"/>
+                        <ContentControl Content="{Binding Renderer.Hover}"/>
                     </Border>
                 </TabItem>
                 <TabItem Classes="default" Header="Guides">
