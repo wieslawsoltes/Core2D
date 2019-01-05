@@ -13,7 +13,7 @@
   </PropertyGroup>
   <PropertyGroup>
     <LangVersion>8.0</LangVersion>
-    <NullableReferenceTypes>True</NullableReferenceTypes>
+    <NullableReferenceTypes>False</NullableReferenceTypes>
   </PropertyGroup>
   <PropertyGroup>
     <OutputPath>bin\$(Platform)\$(Configuration)\</OutputPath>
