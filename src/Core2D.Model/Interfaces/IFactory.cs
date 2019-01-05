@@ -139,7 +139,7 @@ namespace Core2D.Interfaces
         /// </summary>
         /// <param name="dispose">The dispose action.</param>
         /// <returns>The new instance of the <see cref="ICache{TKey, TValue}"/> class.</returns>
-        ICache<TKey, TValue> CreateCache<TKey, TValue>(Action<TValue>? dispose = null);
+        ICache<TKey, TValue> CreateCache<TKey, TValue>(Action<TValue> dispose = null);
 
         /// <summary>
         /// Creates a new <see cref="IMatrixObject"/> instance.
@@ -284,7 +284,7 @@ namespace Core2D.Interfaces
         /// <param name="alignment">The point alignment.</param>
         /// <param name="name">The shape name.</param>
         /// <returns>The new instance of the <see cref="IPointShape"/> class.</returns>
-        IPointShape CreatePointShape(double x = 0.0, double y = 0.0, IBaseShape? shape = null, PointAlignment alignment = PointAlignment.None, string name = "");
+        IPointShape CreatePointShape(double x = 0.0, double y = 0.0, IBaseShape shape = null, PointAlignment alignment = PointAlignment.None, string name = "");
 
         /// <summary>
         /// Creates a new <see cref="ILineShape"/> instance.
@@ -476,7 +476,7 @@ namespace Core2D.Interfaces
         /// <param name="text">The text string.</param>
         /// <param name="name">The shape name.</param>
         /// <returns>The new instance of the <see cref="IRectangleShape"/> class.</returns>
-        IRectangleShape CreateRectangleShape(double x1, double y1, double x2, double y2, IShapeStyle style, IBaseShape point, bool isStroked = true, bool isFilled = false, string? text = null, string name = "");
+        IRectangleShape CreateRectangleShape(double x1, double y1, double x2, double y2, IShapeStyle style, IBaseShape point, bool isStroked = true, bool isFilled = false, string text = null, string name = "");
 
         /// <summary>
         /// Creates a new <see cref="IRectangleShape"/> instance.
@@ -490,7 +490,7 @@ namespace Core2D.Interfaces
         /// <param name="text">The text string.</param>
         /// <param name="name">The shape name.</param>
         /// <returns>The new instance of the <see cref="IRectangleShape"/> class.</returns>
-        IRectangleShape CreateRectangleShape(double x, double y, IShapeStyle style, IBaseShape point, bool isStroked = true, bool isFilled = false, string? text = null, string name = "");
+        IRectangleShape CreateRectangleShape(double x, double y, IShapeStyle style, IBaseShape point, bool isStroked = true, bool isFilled = false, string text = null, string name = "");
 
         /// <summary>
         /// Creates a new <see cref="IRectangleShape"/> instance.
@@ -504,7 +504,7 @@ namespace Core2D.Interfaces
         /// <param name="text">The text string.</param>
         /// <param name="name">The shape name.</param>
         /// <returns>The new instance of the <see cref="IRectangleShape"/> class.</returns>
-        IRectangleShape CreateRectangleShape(IPointShape topLeft, IPointShape bottomRight, IShapeStyle style, IBaseShape point, bool isStroked = true, bool isFilled = false, string? text = null, string name = "");
+        IRectangleShape CreateRectangleShape(IPointShape topLeft, IPointShape bottomRight, IShapeStyle style, IBaseShape point, bool isStroked = true, bool isFilled = false, string text = null, string name = "");
 
         /// <summary>
         /// Creates a new <see cref="IEllipseShape"/> instance.
@@ -520,7 +520,7 @@ namespace Core2D.Interfaces
         /// <param name="text">The text string.</param>
         /// <param name="name">The shape name.</param>
         /// <returns>The new instance of the <see cref="IEllipseShape"/> class.</returns>
-        IEllipseShape CreateEllipseShape(double x1, double y1, double x2, double y2, IShapeStyle style, IBaseShape point, bool isStroked = true, bool isFilled = false, string? text = null, string name = "");
+        IEllipseShape CreateEllipseShape(double x1, double y1, double x2, double y2, IShapeStyle style, IBaseShape point, bool isStroked = true, bool isFilled = false, string text = null, string name = "");
 
         /// <summary>
         /// Creates a new <see cref="IEllipseShape"/> instance.
@@ -534,7 +534,7 @@ namespace Core2D.Interfaces
         /// <param name="text">The text string.</param>
         /// <param name="name">The shape name.</param>
         /// <returns>The new instance of the <see cref="IEllipseShape"/> class.</returns>
-        IEllipseShape CreateEllipseShape(double x, double y, IShapeStyle style, IBaseShape point, bool isStroked = true, bool isFilled = false, string? text = null, string name = "");
+        IEllipseShape CreateEllipseShape(double x, double y, IShapeStyle style, IBaseShape point, bool isStroked = true, bool isFilled = false, string text = null, string name = "");
 
         /// <summary>
         /// Creates a new <see cref="IEllipseShape"/> instance.
@@ -548,7 +548,7 @@ namespace Core2D.Interfaces
         /// <param name="text">The text string.</param>
         /// <param name="name">The shape name.</param>
         /// <returns>The new instance of the <see cref="IEllipseShape"/> class.</returns>
-        IEllipseShape CreateEllipseShape(IPointShape topLeft, IPointShape bottomRight, IShapeStyle style, IBaseShape point, bool isStroked = true, bool isFilled = false, string? text = null, string name = "");
+        IEllipseShape CreateEllipseShape(IPointShape topLeft, IPointShape bottomRight, IShapeStyle style, IBaseShape point, bool isStroked = true, bool isFilled = false, string text = null, string name = "");
 
         /// <summary>
         /// Creates a new <see cref="IPathShape"/> instance.
@@ -627,7 +627,7 @@ namespace Core2D.Interfaces
         /// <param name="text">The text string.</param>
         /// <param name="name">The shape name.</param>
         /// <returns>The new instance of the <see cref="IImageShape"/> class.</returns>
-        IImageShape CreateImageShape(double x1, double y1, double x2, double y2, IShapeStyle style, IBaseShape point, string key, bool isStroked = false, bool isFilled = false, string? text = null, string name = "");
+        IImageShape CreateImageShape(double x1, double y1, double x2, double y2, IShapeStyle style, IBaseShape point, string key, bool isStroked = false, bool isFilled = false, string text = null, string name = "");
 
         /// <summary>
         /// Creates a new <see cref="IImageShape"/> instance.
@@ -642,7 +642,7 @@ namespace Core2D.Interfaces
         /// <param name="text">The text string.</param>
         /// <param name="name">The shape name.</param>
         /// <returns>The new instance of the <see cref="IImageShape"/> class.</returns>
-        IImageShape CreateImageShape(double x, double y, IShapeStyle style, IBaseShape point, string key, bool isStroked = false, bool isFilled = false, string? text = null, string name = "");
+        IImageShape CreateImageShape(double x, double y, IShapeStyle style, IBaseShape point, string key, bool isStroked = false, bool isFilled = false, string text = null, string name = "");
 
         /// <summary>
         /// Creates a new <see cref="IImageShape"/> instance.
@@ -657,7 +657,7 @@ namespace Core2D.Interfaces
         /// <param name="text">The text string.</param>
         /// <param name="name">The shape name.</param>
         /// <returns>The new instance of the <see cref="IImageShape"/> class.</returns>
-        IImageShape CreateImageShape(IPointShape topLeft, IPointShape bottomRight, IShapeStyle style, IBaseShape point, string key, bool isStroked = false, bool isFilled = false, string? text = null, string name = "");
+        IImageShape CreateImageShape(IPointShape topLeft, IPointShape bottomRight, IShapeStyle style, IBaseShape point, string key, bool isStroked = false, bool isFilled = false, string text = null, string name = "");
 
         /// <summary>
         /// Creates a new <see cref="IGroupShape"/> instance.
@@ -727,7 +727,7 @@ namespace Core2D.Interfaces
         /// <param name="endTrigger">The line end point state trigger.</param>
         /// <param name="length">The line fixed length.</param>
         /// <returns>he new instance of the <see cref="ILineFixedLength"/> class.</returns>
-        ILineFixedLength CreateLineFixedLength(LineFixedLengthFlags flags = LineFixedLengthFlags.Disabled, IShapeState? startTrigger = null, IShapeState? endTrigger = null, double length = 15.0);
+        ILineFixedLength CreateLineFixedLength(LineFixedLengthFlags flags = LineFixedLengthFlags.Disabled, IShapeState startTrigger = null, IShapeState endTrigger = null, double length = 15.0);
 
         /// <summary>
         /// Creates a new <see cref="ILineStyle"/> instance.
@@ -738,7 +738,7 @@ namespace Core2D.Interfaces
         /// <param name="curveOrientation">The curve orientation.</param>
         /// <param name="fixedLength">The line style fixed length.</param>
         /// <returns>The new instance of the <see cref="ILineStyle"/> class.</returns>
-        ILineStyle CreateLineStyle(string name = "", bool isCurved = false, double curvature = 50.0, CurveOrientation curveOrientation = CurveOrientation.Auto, ILineFixedLength? fixedLength = null);
+        ILineStyle CreateLineStyle(string name = "", bool isCurved = false, double curvature = 50.0, CurveOrientation curveOrientation = CurveOrientation.Auto, ILineFixedLength fixedLength = null);
 
         /// <summary>
         /// Creates a new <see cref="IShapeStyle"/> instance.
@@ -761,7 +761,7 @@ namespace Core2D.Interfaces
         /// <param name="dashes">The line dashes.</param>
         /// <param name="dashOffset">The line dash offset.</param>
         /// <returns>The new instance of the <see cref="IShapeStyle"/> class.</returns>
-        IShapeStyle CreateShapeStyle(string? name = null, byte sa = 0xFF, byte sr = 0x00, byte sg = 0x00, byte sb = 0x00, byte fa = 0xFF, byte fr = 0x00, byte fg = 0x00, byte fb = 0x00, double thickness = 2.0, ITextStyle? textStyle = null, ILineStyle? lineStyle = null, IArrowStyle? startArrowStyle = null, IArrowStyle? endArrowStyle = null, LineCap lineCap = LineCap.Round, string? dashes = default, double dashOffset = 0.0);
+        IShapeStyle CreateShapeStyle(string name = null, byte sa = 0xFF, byte sr = 0x00, byte sg = 0x00, byte sb = 0x00, byte fa = 0xFF, byte fr = 0x00, byte fg = 0x00, byte fb = 0x00, double thickness = 2.0, ITextStyle textStyle = null, ILineStyle lineStyle = null, IArrowStyle startArrowStyle = null, IArrowStyle endArrowStyle = null, LineCap lineCap = LineCap.Round, string dashes = default, double dashOffset = 0.0);
 
         /// <summary>
         /// Creates a new <see cref="IShapeStyle"/> instance.
@@ -788,7 +788,7 @@ namespace Core2D.Interfaces
         /// <param name="textHAlignment">The text horizontal alignment.</param>
         /// <param name="textVAlignment">The text vertical alignment.</param>
         /// <returns>The new instance of the <see cref="ITextStyle"/> class.</returns>
-        ITextStyle CreateTextStyle(string name = "", string fontName = "Calibri", string fontFile = @"C:\Windows\Fonts\calibri.ttf", double fontSize = 12.0, IFontStyle? fontStyle = null, TextHAlignment textHAlignment = TextHAlignment.Center, TextVAlignment textVAlignment = TextVAlignment.Center);
+        ITextStyle CreateTextStyle(string name = "", string fontName = "Calibri", string fontFile = @"C:\Windows\Fonts\calibri.ttf", double fontSize = 12.0, IFontStyle fontStyle = null, TextHAlignment textHAlignment = TextHAlignment.Center, TextVAlignment textVAlignment = TextVAlignment.Center);
 
         /// <summary>
         /// Creates a new <see cref="IOptions"/> instance.
@@ -803,7 +803,7 @@ namespace Core2D.Interfaces
         /// <param name="owner">The layer owner.</param>
         /// <param name="isVisible">The flag indicating whether layer is visible.</param>
         /// <returns>The new instance of the <see cref="ILayerContainer"/>.</returns>
-        ILayerContainer CreateLayerContainer(string name = "Layer", IPageContainer? owner = null, bool isVisible = true);
+        ILayerContainer CreateLayerContainer(string name = "Layer", IPageContainer owner = null, bool isVisible = true);
 
         /// <summary>
         /// Creates a new <see cref="IPageContainer"/> page instance.
