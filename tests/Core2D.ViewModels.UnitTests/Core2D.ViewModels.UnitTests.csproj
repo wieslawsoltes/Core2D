@@ -1,7 +1,7 @@
-﻿<Project Sdk="Microsoft.NET.Sdk" ToolsVersion="15.0">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>netcoreapp2.1</TargetFrameworks>
+    <TargetFrameworks>netcoreapp3.0</TargetFrameworks>
     <OutputType>Library</OutputType>
     <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
   </PropertyGroup>
@@ -14,10 +14,6 @@
     <ProjectReference Include="..\..\src\Core2D.Model\Core2D.Model.csproj" />
     <ProjectReference Include="..\..\src\Core2D.ViewModels\Core2D.ViewModels.csproj" />
     <ProjectReference Include="..\Core2D.Common\Core2D.Common.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Service Include="{82a7f48d-3b50-4b1e-b82e-3ada8210c358}" />
   </ItemGroup>
 
 </Project>

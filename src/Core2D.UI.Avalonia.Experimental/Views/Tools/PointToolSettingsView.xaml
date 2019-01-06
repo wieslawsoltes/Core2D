@@ -1,6 +1,7 @@
 ﻿<!-- Copyright (c) Wiesław Šoltés. All rights reserved. -->
 <!-- Licensed under the MIT license. See LICENSE file in the project root for full license information. -->
-<UserControl xmlns="https://github.com/avaloniaui"
+<UserControl x:Class="Core2D.UI.Avalonia.Views.Tools.PointToolSettingsView"
+             xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:Core2D.UI.Avalonia.Views.Tools;assembly=Core2D.UI.Avalonia">
     <Grid RowDefinitions="Auto,Auto" ColumnDefinitions="Auto,*,50">

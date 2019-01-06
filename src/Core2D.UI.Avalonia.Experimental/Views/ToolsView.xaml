@@ -1,6 +1,7 @@
 ﻿<!-- Copyright (c) Wiesław Šoltés. All rights reserved. -->
 <!-- Licensed under the MIT license. See LICENSE file in the project root for full license information. -->
-<UserControl xmlns="https://github.com/avaloniaui"
+<UserControl x:Class="Core2D.UI.Avalonia.Views.ToolsView"
+             xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:Core2D.UI.Avalonia.Views;assembly=Core2D.UI.Avalonia">
     <ListBox Classes="default" Items="{Binding Tools}" SelectedItem="{Binding CurrentTool}">

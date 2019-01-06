@@ -1,4 +1,5 @@
-﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <VersionPrefix>0.8.0</VersionPrefix>
     <VersionSuffix></VersionSuffix>
@@ -11,7 +12,9 @@
     <PackageTags>2d;editor;data;diagram;graphics;geometry;data;shapes;wysiwyg-editor</PackageTags>
   </PropertyGroup>
   <PropertyGroup>
-     <LangVersion>latest</LangVersion>
+    <!--<LangVersion>8.0</LangVersion>-->
+    <LangVersion>latest</LangVersion>
+    <!--<NullableReferenceTypes>False</NullableReferenceTypes>-->
   </PropertyGroup>
   <PropertyGroup>
     <OutputPath>bin\$(Platform)\$(Configuration)\</OutputPath>
@@ -37,8 +40,8 @@
   <PropertyGroup Condition="$(Platform.Contains('.NET Core'))">
     <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'"/>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'"/>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'" />
   <PropertyGroup Condition="'$(OS)' == 'Windows_NT'">
     <DefineConstants>$(DefineConstants);_WINDOWS</DefineConstants>
   </PropertyGroup>

@@ -1154,10 +1154,8 @@ namespace Core2D.Editor
         {
             if (CurrentTool.Title == "Path" && CurrentPathTool.Title != "Line")
             {
-                var tool = Tools.FirstOrDefault(t => t.Name == "Path");
-                if (tool != null)
+                if (Tools.FirstOrDefault(t => t.Title == "Path") is ToolPath pathTool)
                 {
-                    var pathTool = tool as ToolPath;
                     pathTool.RemoveLastSegment();
                 }
                 CurrentPathTool = PathTools.FirstOrDefault(t => t.Title == "Line");
@@ -1175,10 +1173,8 @@ namespace Core2D.Editor
         {
             if (CurrentTool.Title == "Path" && CurrentPathTool.Title != "Arc")
             {
-                var tool = Tools.FirstOrDefault(t => t.Title == "Path");
-                if (tool != null)
+                if (Tools.FirstOrDefault(t => t.Title == "Path") is ToolPath pathTool)
                 {
-                    var pathTool = tool as ToolPath;
                     pathTool.RemoveLastSegment();
                 }
                 CurrentPathTool = PathTools.FirstOrDefault(t => t.Title == "Arc");
@@ -1196,10 +1192,8 @@ namespace Core2D.Editor
         {
             if (CurrentTool.Title == "Path" && CurrentPathTool.Title != "CubicBezier")
             {
-                var tool = Tools.FirstOrDefault(t => t.Title == "Path");
-                if (tool != null)
+                if (Tools.FirstOrDefault(t => t.Title == "Path") is ToolPath pathTool)
                 {
-                    var pathTool = tool as ToolPath;
                     pathTool.RemoveLastSegment();
                 }
                 CurrentPathTool = PathTools.FirstOrDefault(t => t.Title == "CubicBezier");
@@ -1217,10 +1211,8 @@ namespace Core2D.Editor
         {
             if (CurrentTool.Title == "Path" && CurrentPathTool.Title != "QuadraticBezier")
             {
-                var tool = Tools.FirstOrDefault(t => t.Title == "Path");
-                if (tool != null)
+                if (Tools.FirstOrDefault(t => t.Title == "Path") is ToolPath pathTool)
                 {
-                    var pathTool = tool as ToolPath;
                     pathTool.RemoveLastSegment();
                 }
                 CurrentPathTool = PathTools.FirstOrDefault(t => t.Title == "QuadraticBezier");

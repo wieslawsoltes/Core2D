@@ -603,17 +603,21 @@ namespace Core2D.Renderer.SkiaSharp
                 return;
             }
 
-            var style = SKTypefaceStyle.Normal;
+            var weight = SKFontStyleWeight.Normal;
             if (text.Style.TextStyle.FontStyle != null)
             {
                 if (text.Style.TextStyle.FontStyle.Flags.HasFlag(FontStyleFlags.Bold))
                 {
-                    style |= SKTypefaceStyle.Bold;
+                    weight |= SKFontStyleWeight.Bold;
                 }
+            }
 
+            var style = SKFontStyleSlant.Upright;
+            if (text.Style.TextStyle.FontStyle != null)
+            {
                 if (text.Style.TextStyle.FontStyle.Flags.HasFlag(FontStyleFlags.Italic))
                 {
-                    style |= SKTypefaceStyle.Italic;
+                    style |= SKFontStyleSlant.Italic;
                 }
 
                 if (text.Style.TextStyle.FontStyle.Flags.HasFlag(FontStyleFlags.Underline))
@@ -628,7 +632,7 @@ namespace Core2D.Renderer.SkiaSharp
             }
 
             using (var pen = ToSKPaintBrush(text.Style.Stroke))
-            using (var tf = SKTypeface.FromFamilyName(text.Style.TextStyle.FontName, style))
+            using (var tf = SKTypeface.FromFamilyName(text.Style.TextStyle.FontName, weight, SKFontStyleWidth.Normal, style))
             {
                 pen.TextEncoding = SKTextEncoding.Utf16;
                 pen.TextSize = _scaleToPage(text.Style.TextStyle.FontSize * _targetDpi / _sourceDpi);

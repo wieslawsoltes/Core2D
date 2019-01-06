@@ -1,12 +1,10 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
-using System.IO;
 using Avalonia;
 using Avalonia.Logging.Serilog;
 using Core2D.UI.Avalonia.Renderers;
 using Core2D.ViewModels;
-using Core2D.ViewModels.Containers;
 
 namespace Core2D.UI.Avalonia
 {
@@ -53,23 +51,11 @@ namespace Core2D.UI.Avalonia
                     }
                 }
 
-                //var file = "vm.json";
                 var bootstrapper = new Bootstrapper();
-
-                LayerContainerViewModel vm;
-
-                //if (File.Exists(file))
-                //    vm = LayerContainerViewModel.Load(file);
-                //else
-                    vm = bootstrapper.CreateDemoViewModel();
-
+                var vm = bootstrapper.CreateDemoViewModel();
                 bootstrapper.CreateDemoContainer(vm);
-
                 vm.Renderer = new AvaloniaShapeRenderer();
-
                 builder.Start<MainWindow>(() => vm);
-
-                //LayerContainerViewModel.Save(file, vm);
             }
             catch (Exception ex)
             {
