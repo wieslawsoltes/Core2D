@@ -12,10 +12,10 @@
     <PackageReference Include="Microsoft.CSharp" Version="4.5.0" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Avalonia.Xaml.Interactions" Version="0.7.1-build925" />
-    <PackageReference Include="Avalonia.Xaml.Interactions.Custom" Version="0.7.1-build925" />
+    <PackageReference Include="Avalonia.Xaml.Interactions" Version="0.7.1-build957" />
+    <PackageReference Include="Avalonia.Xaml.Interactions.Custom" Version="0.7.1-build957" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Avalonia.Controls.PanAndZoom" Version="1.0.3-build937" />
+    <PackageReference Include="Avalonia.Controls.PanAndZoom" Version="1.0.3-build958" />
   </ItemGroup>
 </Project>
