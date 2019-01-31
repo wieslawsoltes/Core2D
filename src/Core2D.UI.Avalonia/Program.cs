@@ -4,7 +4,7 @@ using System;
 using Autofac;
 using Avalonia;
 #if !_CORERT
-using Avalonia.Gtk3;
+using Avalonia.X11;
 #endif
 using Avalonia.Logging.Serilog;
 using Core2D.UI.Avalonia.Modules;
@@ -40,7 +40,7 @@ namespace Core2D.UI.Avalonia
             bool useDirect2D1 = false;
             bool useSkia = false;
             bool useWin32 = false;
-            bool useGtk3 = false;
+            bool useX11 = false;
             bool useNative = false;
 
             foreach (var arg in args)
@@ -65,8 +65,8 @@ namespace Core2D.UI.Avalonia
                     case "--win32":
                         useWin32 = true;
                         break;
-                    case "--gtk3":
-                        useGtk3 = true;
+                    case "--x11":
+                        useX11 = true;
                         break;
                     case "--native":
                         useNative = true;
@@ -100,14 +100,13 @@ namespace Core2D.UI.Avalonia
                         {
                             appBuilder.UseWin32(deferredRendering);
                         }
-                        if (useGtk3 == true)
+                        if (useX11 == true)
                         {
-                            var options = new Gtk3PlatformOptions
+                            var options = new X11PlatformOptions
                             {
-                                UseDeferredRendering = deferredRendering,
-                                UseGpuAcceleration = useGpu
+                                UseGpu = useGpu
                             };
-                            appBuilder.UseGtk3(options);
+                            appBuilder.UseX11(options);
                         }
                         if (useNative == true)
                         {
