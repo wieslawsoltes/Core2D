@@ -144,7 +144,7 @@ namespace Core2D.UI.Avalonia
 #elif _CORERT_WIN_X64
                          .UseWin32().UseSkia()
 #elif _CORERT_LINUX_X64
-                         .UseGtk3().UseSkia()
+                         .UseX11().UseSkia()
 #elif _CORERT_OSX_X64
                          .UseAvaloniaNative().UseSkia()
 #endif
