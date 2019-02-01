@@ -27,7 +27,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "props", "props", "{3C45CABF
 		build\Math.Spatial.props = build\Math.Spatial.props
 		build\netDXF.props = build\netDXF.props
 		build\Newtonsoft.Json.props = build\Newtonsoft.Json.props
-		build\NSubsys.props = build\NSubsys.props
 		build\PDFsharp.props = build\PDFsharp.props
 		build\Portable.Xaml.props = build\Portable.Xaml.props
 		build\Roslyn.props = build\Roslyn.props
@@ -223,9 +222,7 @@ Global
 		{3DC476E6-5032-4888-9337-221B88653C40}.Release|AnyCPU.ActiveCfg = Release|Any CPU
 		{3DC476E6-5032-4888-9337-221B88653C40}.Release|AnyCPU.Build.0 = Release|Any CPU
 		{7463A001-BCC8-403A-B83B-B96F5EEF7052}.Debug|AnyCPU.ActiveCfg = Debug|Any CPU
-		{7463A001-BCC8-403A-B83B-B96F5EEF7052}.Debug|AnyCPU.Build.0 = Debug|Any CPU
 		{7463A001-BCC8-403A-B83B-B96F5EEF7052}.Release|AnyCPU.ActiveCfg = Release|Any CPU
-		{7463A001-BCC8-403A-B83B-B96F5EEF7052}.Release|AnyCPU.Build.0 = Release|Any CPU
 		{11E61A53-13D5-4447-8D66-3F328BBFC30A}.Debug|AnyCPU.ActiveCfg = Debug|Any CPU
 		{11E61A53-13D5-4447-8D66-3F328BBFC30A}.Debug|AnyCPU.Build.0 = Debug|Any CPU
 		{11E61A53-13D5-4447-8D66-3F328BBFC30A}.Release|AnyCPU.ActiveCfg = Release|Any CPU
@@ -251,9 +248,7 @@ Global
 		{AE7FF1B5-ABE3-45BF-87CC-44AC580A666A}.Release|AnyCPU.ActiveCfg = Release|Any CPU
 		{AE7FF1B5-ABE3-45BF-87CC-44AC580A666A}.Release|AnyCPU.Build.0 = Release|Any CPU
 		{12889680-3769-4914-BE60-5D09E83DF5B2}.Debug|AnyCPU.ActiveCfg = Debug|Any CPU
-		{12889680-3769-4914-BE60-5D09E83DF5B2}.Debug|AnyCPU.Build.0 = Debug|Any CPU
 		{12889680-3769-4914-BE60-5D09E83DF5B2}.Release|AnyCPU.ActiveCfg = Release|Any CPU
-		{12889680-3769-4914-BE60-5D09E83DF5B2}.Release|AnyCPU.Build.0 = Release|Any CPU
 		{E9C30F6F-00DD-494A-8E7C-253A5C76E999}.Debug|AnyCPU.ActiveCfg = Debug|Any CPU
 		{E9C30F6F-00DD-494A-8E7C-253A5C76E999}.Debug|AnyCPU.Build.0 = Debug|Any CPU
 		{E9C30F6F-00DD-494A-8E7C-253A5C76E999}.Release|AnyCPU.ActiveCfg = Release|Any CPU
