@@ -40,8 +40,8 @@ namespace Core2D.UI.Avalonia
                             case "--win32":
                                 builder.UseWin32();
                                 break;
-                            case "--gtk3":
-                                builder.UseGtk3();
+                            case "--x11":
+                                builder.UseX11();
                                 break;
                             case "--native":
                                 builder.UseAvaloniaNative();
