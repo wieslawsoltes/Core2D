@@ -30,7 +30,8 @@ namespace Core2D.FileSystem.DotNet.UnitTests
             Assert.Throws<FileNotFoundException>(
                 () =>
                 {
-                    using (var stream = target.Open("existing1.txt")) { }
+                    using (var stream = target.Open("existing1.txt"))
+                    { }
                 });
         }
 
@@ -40,10 +41,12 @@ namespace Core2D.FileSystem.DotNet.UnitTests
         {
             IFileSystem target = new DotNetFileSystem(_serviceProvider);
 
-            using (var stream = target.Create("new1.txt")) { }
+            using (var stream = target.Create("new1.txt"))
+            { }
             Assert.True(File.Exists("new1.txt"));
 
-            using (var stream = target.Open("new1.txt")) { }
+            using (var stream = target.Open("new1.txt"))
+            { }
             File.Delete("new1.txt");
         }
 
@@ -87,7 +90,7 @@ namespace Core2D.FileSystem.DotNet.UnitTests
             IFileSystem target = new DotNetFileSystem(_serviceProvider);
             var expceted = "κόσμε";
             string actual;
-            
+
             using (var stream = new MemoryStream(Encoding.UTF8.GetBytes(expceted)))
             {
                 actual = target.ReadUtf8Text(stream);

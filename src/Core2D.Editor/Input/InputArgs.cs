@@ -35,13 +35,13 @@ namespace Core2D.Editor.Input
             Y = y;
             Modifier = modifier;
         }
-        
+
         public void Deconstruct(out double x, out double y)
         {
             x = X;
             y = Y;
         }
-        
+
         public void Deconstruct(out double x, out double y, out ModifierFlags modifier)
         {
             x = X;

@@ -122,7 +122,7 @@ namespace Core2D.UnitTests
             var target = new PathGeometryContext(_factory, geometry);
             target.BeginFigure(_factory.CreatePointShape());
             Assert.Empty(geometry.Figures[0].Segments);
-            
+
             target.PolyLineTo(ImmutableArray.Create<IPointShape>(_factory.CreatePointShape(), _factory.CreatePointShape(), _factory.CreatePointShape()));
 
             var segment = geometry.Figures[0].Segments[0];

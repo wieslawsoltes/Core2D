@@ -55,7 +55,7 @@ namespace Core2D.Path.Segments
         {
             return string.Format("C{1}{0}{2}{0}{2}", " ", Point1, Point2, Point3);
         }
-        
+
         /// <summary>
         /// Check whether the <see cref="Point1"/> property has changed from its default value.
         /// </summary>

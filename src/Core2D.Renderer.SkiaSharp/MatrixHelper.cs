@@ -144,7 +144,7 @@ namespace Core2D.Renderer.SkiaSharp
         {
             return Multiply(
                 Multiply(
-                    Translate(-centerX, -centerY), 
+                    Translate(-centerX, -centerY),
                     Rotation(angle)),
                 Translate(centerX, centerY));
         }
@@ -159,8 +159,8 @@ namespace Core2D.Renderer.SkiaSharp
         {
             return Multiply(
                 Multiply(
-                    Translate(-center.X, -center.Y), 
-                    Rotation(angle)), 
+                    Translate(-center.X, -center.Y),
+                    Rotation(angle)),
                 Translate(center.X, center.Y));
         }
 

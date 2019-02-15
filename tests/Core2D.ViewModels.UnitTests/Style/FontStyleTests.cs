@@ -25,9 +25,9 @@ namespace Core2D.Style.UnitTests
             var style = _factory.CreateFontStyle();
             var target = new PropertyChangedObserver(style);
 
-            style.Flags = 
-                FontStyleFlags.Regular 
-                | FontStyleFlags.Bold 
+            style.Flags =
+                FontStyleFlags.Regular
+                | FontStyleFlags.Bold
                 | FontStyleFlags.Italic
                 | FontStyleFlags.Underline
                 | FontStyleFlags.Strikeout;
@@ -116,7 +116,7 @@ namespace Core2D.Style.UnitTests
             target.Strikeout = false;
             Assert.Equal(FontStyleFlags.Regular, target.Flags);
         }
-        
+
         [Fact]
         [Trait("Core2D.Style", "Style")]
         public void Parse_FontStyleFlags_String()
@@ -124,8 +124,8 @@ namespace Core2D.Style.UnitTests
             var target = FontStyle.Parse("Bold, Italic, Strikeout");
 
             Assert.Equal(
-                FontStyleFlags.Bold 
-                | FontStyleFlags.Italic 
+                FontStyleFlags.Bold
+                | FontStyleFlags.Italic
                 | FontStyleFlags.Strikeout, target.Flags);
         }
 

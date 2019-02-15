@@ -205,7 +205,7 @@ namespace Core2D.FileWriter.Emf
             {
                 if (container == null || container.Template == null)
                     return;
-                
+
                 using (var bitmap = new Bitmap((int)container.Template.Width, (int)container.Template.Height))
                 {
                     using (var ms = MakeMetafileStream(bitmap, container, ic))
@@ -233,7 +233,7 @@ namespace Core2D.FileWriter.Emf
         {
             if (container == null || container.Template == null)
                 return;
-            
+
             using (var bitmap = new Bitmap((int)container.Template.Width, (int)container.Template.Height))
             {
                 using (var ms = MakeMetafileStream(bitmap, container, ic))
@@ -255,7 +255,7 @@ namespace Core2D.FileWriter.Emf
             var ic = options as IImageCache;
             if (options == null)
                 return;
-            
+
             if (item is IPageContainer page)
             {
 #if _WINDOWS

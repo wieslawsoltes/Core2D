@@ -84,7 +84,8 @@ namespace Core2D.Renderer.Dxf
             switch (color)
             {
                 case IArgbColor argbColor:
-                    return (short)(90.0 - argbColor.A * 90.0 / 255.0);;
+                    return (short)(90.0 - argbColor.A * 90.0 / 255.0);
+                    ;
                 default:
                     throw new NotSupportedException($"The {color.GetType()} color type is not supported.");
             }

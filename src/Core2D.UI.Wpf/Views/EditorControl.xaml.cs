@@ -236,7 +236,7 @@ namespace Core2D.UI.Wpf.Views
 
                 _inputSource = new WpfInputSource(zoomBorder, drawableControl, (point) => point);
                 _inputProcessor = new InputProcessor();
-                _inputProcessor.Connect(_inputSource,  _projectEditor);
+                _inputProcessor.Connect(_inputSource, _projectEditor);
 
                 zoomBorder.AllowDrop = true;
                 zoomBorder.DragEnter += ZoomBorder_DragEnter;

@@ -96,7 +96,7 @@ namespace Core2D.UnitTests
         public void ToString_Should_Return_Path_Markup_Empty_Closed()
         {
             var target = _factory.CreatePathFigure();
-            
+
             target.IsClosed = true;
 
             var actual = target.ToString();

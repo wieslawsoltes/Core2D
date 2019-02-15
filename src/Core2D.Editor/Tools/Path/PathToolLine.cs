@@ -202,7 +202,7 @@ namespace Core2D.Editor.Tools.Path
 
             if (_selection != null)
             {
-                _selection.Move(); 
+                _selection.Move();
             }
         }
 
@@ -216,7 +216,7 @@ namespace Core2D.Editor.Tools.Path
             if (_selection != null)
             {
                 _selection.Remove();
-                _selection = null; 
+                _selection = null;
             }
         }
     }

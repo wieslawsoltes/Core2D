@@ -115,11 +115,11 @@ namespace Core2D.Shapes.UnitTests
             Assert.Equal(shape.Owner, target);
             Assert.False(shape.State.Flags.HasFlag(ShapeStateFlags.Standalone));
             Assert.Contains(shape, target.Shapes);
-            
+
             var length = target.Shapes.Length;
             Assert.Equal(1, length);
         }
-        
+
         [Fact]
         [Trait("Core2D.Shapes", "Shapes")]
         public void Group_Shapes_Remove_And_Add_To_Source()
@@ -135,7 +135,7 @@ namespace Core2D.Shapes.UnitTests
             var point1 = _factory.CreatePointShape();
             var point2 = _factory.CreatePointShape();
 
-            var shapes = new List<IBaseShape>{ shape1, shape2, point1, point2 };
+            var shapes = new List<IBaseShape> { shape1, shape2, point1, point2 };
             var source = shapes.ToList();
 
             var target = _factory.CreateGroupShape("g");
@@ -145,7 +145,7 @@ namespace Core2D.Shapes.UnitTests
 
             Assert.Contains(shape1, target.Shapes);
             Assert.Contains(shape2, target.Shapes);
-            
+
             var lengthShapes = target.Shapes.Length;
             Assert.Equal(2, lengthShapes);
 

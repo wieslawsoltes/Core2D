@@ -25,14 +25,14 @@ namespace Core2D.Renderer.UnitTests
             var state = _factory.CreateShapeState();
             var target = new PropertyChangedObserver(state);
 
-            state.Flags = 
-                ShapeStateFlags.Visible 
-                | ShapeStateFlags.Printable 
+            state.Flags =
+                ShapeStateFlags.Visible
+                | ShapeStateFlags.Printable
                 | ShapeStateFlags.Standalone;
 
             Assert.Equal(
-                ShapeStateFlags.Visible 
-                | ShapeStateFlags.Printable 
+                ShapeStateFlags.Visible
+                | ShapeStateFlags.Printable
                 | ShapeStateFlags.Standalone, state.Flags);
             Assert.Equal(10, target.PropertyNames.Count);
 
@@ -177,8 +177,8 @@ namespace Core2D.Renderer.UnitTests
             var target = ShapeState.Parse("Visible, Printable, Standalone");
 
             Assert.Equal(
-                ShapeStateFlags.Visible 
-                | ShapeStateFlags.Printable 
+                ShapeStateFlags.Visible
+                | ShapeStateFlags.Printable
                 | ShapeStateFlags.Standalone, target.Flags);
         }
 

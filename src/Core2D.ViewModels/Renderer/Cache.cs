@@ -43,7 +43,7 @@ namespace Core2D.Renderer
                 _storage[key] = value;
             }
             else
-            { 
+            {
                 _storage.Add(key, value);
             }
         }

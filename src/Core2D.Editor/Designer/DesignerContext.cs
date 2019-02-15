@@ -290,7 +290,7 @@ namespace Core2D.Editor.Designer
 
             Document = factory.CreateDocumentContainer();
             Layer = factory.CreateLayerContainer();
-            Options =factory.CreateOptions();
+            Options = factory.CreateOptions();
 
             CurrentStyleLibrary = Project.CurrentStyleLibrary;
             CurrentGroupLibrary = Project.CurrentGroupLibrary;

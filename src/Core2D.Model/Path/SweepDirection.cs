@@ -12,7 +12,7 @@ namespace Core2D.Path
         /// Clockwise sweep direction.
         /// </summary>
         Clockwise,
-        
+
         /// <summary>
         /// Counterclockwise sweep direction.
         /// </summary>

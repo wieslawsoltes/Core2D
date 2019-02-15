@@ -45,8 +45,8 @@ namespace Core2D.Renderer.SkiaSharp
                     {
                         path.ArcTo(
                             scale(arcSegment.Size.Width),
-                            scale(arcSegment.Size.Height), 
-                            (float)arcSegment.RotationAngle, 
+                            scale(arcSegment.Size.Height),
+                            (float)arcSegment.RotationAngle,
                             arcSegment.IsLargeArc ? SKPathArcSize.Large : SKPathArcSize.Small,
                             arcSegment.SweepDirection == SweepDirection.Clockwise ? SKPathDirection.Clockwise : SKPathDirection.CounterClockwise,
                             scale(arcSegment.Point.X + dx),

@@ -16,7 +16,7 @@ namespace Core2D.Renderer.Presenters
 
             if (container.Template != null)
             {
-                renderer.Draw(dc, container.Template, dx, dy); 
+                renderer.Draw(dc, container.Template, dx, dy);
             }
         }
     }

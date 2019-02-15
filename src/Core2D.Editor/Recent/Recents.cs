@@ -14,7 +14,7 @@ namespace Core2D.Editor.Recent
     {
         private ImmutableArray<RecentFile> _files = ImmutableArray.Create<RecentFile>();
         private RecentFile _current = default;
-        
+
         /// <summary>
         /// Gets or sets recent file entries.
         /// </summary>
@@ -23,7 +23,7 @@ namespace Core2D.Editor.Recent
             get => _files;
             set => Update(ref _files, value);
         }
-        
+
         /// <summary>
         /// Gets or sets current recent file.
         /// </summary>

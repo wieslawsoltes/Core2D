@@ -74,7 +74,7 @@ namespace Core2D.Shapes.UnitTests
             Assert.True(point.State.Flags.HasFlag(ShapeStateFlags.Connector | ShapeStateFlags.None));
             Assert.False(point.State.Flags.HasFlag(ShapeStateFlags.Standalone));
             Assert.Contains(point, target.Connectors);
-            
+
             var length = target.Connectors.Length;
             Assert.Equal(1, length);
         }
@@ -122,7 +122,7 @@ namespace Core2D.Shapes.UnitTests
             var length = target.Connectors.Length;
             Assert.Equal(1, length);
         }
-        
+
         public class Class1 : BaseShape
         {
             public override Type TargetType => typeof(Class1);

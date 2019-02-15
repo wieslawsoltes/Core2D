@@ -25,14 +25,14 @@ namespace Core2D.Style
             var state = _factory.CreateLineFixedLength();
             var target = new PropertyChangedObserver(state);
 
-            state.Flags = 
-                LineFixedLengthFlags.Start 
-                | LineFixedLengthFlags.Vertical 
+            state.Flags =
+                LineFixedLengthFlags.Start
+                | LineFixedLengthFlags.Vertical
                 | LineFixedLengthFlags.Horizontal;
 
             Assert.Equal(
-                LineFixedLengthFlags.Start 
-                | LineFixedLengthFlags.Vertical 
+                LineFixedLengthFlags.Start
+                | LineFixedLengthFlags.Vertical
                 | LineFixedLengthFlags.Horizontal, state.Flags);
             Assert.Equal(7, target.PropertyNames.Count);
 
@@ -127,7 +127,7 @@ namespace Core2D.Style
             target.All = false;
             Assert.Equal(LineFixedLengthFlags.Disabled, target.Flags);
         }
-        
+
         [Fact]
         [Trait("Core2D.Style", "Style")]
         public void Parse_LineFixedLengthFlags_String()

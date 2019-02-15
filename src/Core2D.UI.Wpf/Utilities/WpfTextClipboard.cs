@@ -22,7 +22,9 @@ namespace Core2D.UI.Wpf.Utilities
             {
                 Application.Current.Dispatcher.Invoke(() =>
                 {
-                    try { Clipboard.SetText(text, TextDataFormat.UnicodeText); } catch (Exception) { }
+                    try
+                    { Clipboard.SetText(text, TextDataFormat.UnicodeText); }
+                    catch (Exception) { }
                 });
             });
         }

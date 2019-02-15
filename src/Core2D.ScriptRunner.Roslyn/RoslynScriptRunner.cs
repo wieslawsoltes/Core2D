@@ -30,9 +30,9 @@ namespace Core2D.ScriptRunner.Roslyn
             var options = ScriptOptions.Default
                 .WithImports("System");
 
-            var globals = new ScriptBase 
-            { 
-                Editor = _serviceProvider.GetService<ProjectEditor>() 
+            var globals = new ScriptBase
+            {
+                Editor = _serviceProvider.GetService<ProjectEditor>()
             };
 
             try

@@ -16,7 +16,7 @@ namespace Core2D.Data.UnitTests
             var target = _factory.CreateProperty(null, "", "");
             Assert.True(target is IObservableObject);
         }
-        
+
         [Fact]
         [Trait("Core2D.Data", "Data")]
         public void ToString_Should_Return_Value_String()

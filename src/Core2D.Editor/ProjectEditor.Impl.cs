@@ -231,7 +231,7 @@ namespace Core2D.Editor
             }
             catch (Exception ex)
             {
-               LogError(ex);
+                LogError(ex);
             }
         }
 
@@ -2376,7 +2376,7 @@ namespace Core2D.Editor
                         if (Project?.CurrentDatabase == null && shape.Data.Record.Owner is IDatabase owner)
                         {
                             var db = Factory.CreateDatabase(
-                                Constants.ImportedDatabaseName, 
+                                Constants.ImportedDatabaseName,
                                 (ImmutableArray<IColumn>)owner.Columns);
                             Project.AddDatabase(db);
                             Project.SetCurrentDatabase(db);
