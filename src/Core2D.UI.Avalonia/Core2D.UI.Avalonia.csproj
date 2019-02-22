@@ -28,6 +28,13 @@
     <IlcArg Include="--stacktracedata" />
   </ItemGroup>
 
+  <!-- https://github.com/dotnet/corert/blob/master/Documentation/using-corert/optimizing-corert.md -->
+  <PropertyGroup>
+    <RootAllApplicationAssemblies>False</RootAllApplicationAssemblies>
+    <IlcGenerateCompleteTypeMetadata>False</IlcGenerateCompleteTypeMetadata>
+    <IlcGenerateStackTraceData>False</IlcGenerateStackTraceData>
+  </PropertyGroup>
+
   <Import Project="..\..\build\Base.props" />
   <Import Project="..\..\build\ILCompiler.props" Condition="'$(CoreRT)' == 'True'" />
   <Import Project="..\..\build\Autofac.props" />
