@@ -4,7 +4,6 @@ using System;
 using System.Linq;
 using System.Collections.Generic;
 using Core2D.Editor.Input;
-using Core2D.Editor.Tools.Path.Shapes;
 using Core2D.Editor.Tools.Path.Settings;
 using Core2D.Editor.Tools.Selection;
 using Core2D.Interfaces;
@@ -24,7 +23,7 @@ namespace Core2D.Editor.Tools.Path
         private readonly IServiceProvider _serviceProvider;
         private PathToolSettingsArc _settings;
         private State _currentState = State.Start;
-        private PathShapeArc _arc = new PathShapeArc();
+        private LineShape _arc = new LineShape();
         private ToolLineSelection _selection;
         private const double _defaultRotationAngle = 0.0;
         private const bool _defaultIsLargeArc = false;

@@ -4,7 +4,6 @@ using System;
 using System.Linq;
 using System.Collections.Generic;
 using Core2D.Editor.Input;
-using Core2D.Editor.Tools.Path.Shapes;
 using Core2D.Editor.Tools.Path.Settings;
 using Core2D.Editor.Tools.Selection;
 using Core2D.Interfaces;
@@ -22,7 +21,7 @@ namespace Core2D.Editor.Tools.Path
         private readonly IServiceProvider _serviceProvider;
         private PathToolSettingsLine _settings;
         private State _currentState = State.Start;
-        private PathShapeLine _line = new PathShapeLine();
+        private LineShape _line = new LineShape();
         private ToolLineSelection _selection;
 
         /// <inheritdoc/>
