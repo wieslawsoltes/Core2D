@@ -110,9 +110,9 @@ namespace Core2D.Editor.Tools.Selection
         }
 
         /// <summary>
-        /// Remove selection.
+        /// Reset selection.
         /// </summary>
-        public void Remove()
+        public void Reset()
         {
             if (_line12 != null)
             {

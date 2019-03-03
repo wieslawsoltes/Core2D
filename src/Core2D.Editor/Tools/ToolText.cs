@@ -98,11 +98,10 @@ namespace Core2D.Editor.Tools
                             }
 
                             editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_text);
-                            Remove();
                             Finalize(_text);
                             editor.Project.AddShape(editor.Project.CurrentContainer.CurrentLayer, _text);
-                            _currentState = State.TopLeft;
-                            editor.IsToolIdle = true;
+
+                            Reset();
                         }
                     }
                     break;
@@ -113,19 +112,12 @@ namespace Core2D.Editor.Tools
         public override void RightDown(InputArgs args)
         {
             base.RightDown(args);
-            var editor = _serviceProvider.GetService<ProjectEditor>();
             switch (_currentState)
             {
                 case State.TopLeft:
                     break;
                 case State.BottomRight:
-                    {
-                        editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_text);
-                        editor.Project.CurrentContainer.WorkingLayer.Invalidate();
-                        Remove();
-                        _currentState = State.TopLeft;
-                        editor.IsToolIdle = true;
-                    }
+                    Reset();
                     break;
             }
         }
@@ -187,12 +179,32 @@ namespace Core2D.Editor.Tools
         }
 
         /// <inheritdoc/>
-        public override void Remove()
+        public override void Reset()
         {
-            base.Remove();
+            base.Reset();
 
-            _selection.Remove();
-            _selection = null;
+            var editor = _serviceProvider.GetService<ProjectEditor>();
+
+            switch (_currentState)
+            {
+                case State.TopLeft:
+                    break;
+                case State.BottomRight:
+                    {
+                        editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_text);
+                        editor.Project.CurrentContainer.WorkingLayer.Invalidate();
+                    }
+                    break;
+            }
+
+            _currentState = State.TopLeft;
+            editor.IsToolIdle = true;
+
+            if (_selection != null)
+            {
+                _selection.Reset();
+                _selection = null;
+            }
         }
     }
 }

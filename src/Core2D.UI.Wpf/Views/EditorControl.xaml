@@ -117,7 +117,7 @@
                                 <custom:ZoomBorder x:Name="zoomBorder" Stretch="None" ZoomSpeed="1.2" PanButton="Right" EnableInput="{Binding IsToolIdle}" Background="{DynamicResource TemplateCheckerBoard}" ClipToBounds="False" BorderBrush="{x:Null}" BorderThickness="0" FocusVisualStyle="{x:Null}" Focusable="True" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
                                     <custom:ZoomBorder.InputBindings>
                                         <KeyBinding Command="{x:Static editor:ProjectEditorCommands.DeleteCommand}" CommandParameter="{Binding}" Key="Delete" Modifiers=""/>
-                                        <KeyBinding Command="{x:Static editor:ProjectEditorCommands.DeselectAllCommand}" Key="Esc" Modifiers=""/>
+                                        <KeyBinding Command="{x:Static editor:ProjectEditorCommands.CancelCommand}" Key="Esc" Modifiers=""/>
                                         <KeyBinding Command="{x:Static editor:ProjectEditorCommands.SendToBackCommand}" Key="OemMinus" Modifiers="Shift"/>
                                         <KeyBinding Command="{x:Static editor:ProjectEditorCommands.SendBackwardCommand}" Key="OemMinus" Modifiers=""/>
                                         <KeyBinding Command="{x:Static editor:ProjectEditorCommands.BringForwardCommand}" Key="OemPlus" Modifiers=""/>

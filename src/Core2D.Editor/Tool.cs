@@ -80,9 +80,9 @@ namespace Core2D.Editor
         }
 
         /// <summary>
-        /// Remove edited shape.
+        /// Reset tool.
         /// </summary>
-        public virtual void Remove()
+        public virtual void Reset()
         {
         }
     }

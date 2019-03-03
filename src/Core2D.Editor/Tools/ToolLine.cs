@@ -95,6 +95,7 @@ namespace Core2D.Editor.Tools
                         {
                             _line.End.X = sx;
                             _line.End.Y = sy;
+
                             if (editor.Project.Options.TryToConnect)
                             {
                                 var result = editor.TryToGetConnectionPoint(sx, sy);
@@ -107,12 +108,12 @@ namespace Core2D.Editor.Tools
                                     editor.TryToSplitLine(x, y, _line.End);
                                 }
                             }
+
                             editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_line);
-                            Remove();
-                            base.Finalize(_line);
+                            Finalize(_line);
                             editor.Project.AddShape(editor.Project.CurrentContainer.CurrentLayer, _line);
-                            _currentState = State.Start;
-                            editor.IsToolIdle = true;
+
+                            Reset();
                         }
                     }
                     break;
@@ -123,19 +124,12 @@ namespace Core2D.Editor.Tools
         public override void RightDown(InputArgs args)
         {
             base.RightDown(args);
-            var editor = _serviceProvider.GetService<ProjectEditor>();
             switch (_currentState)
             {
                 case State.Start:
                     break;
                 case State.End:
-                    {
-                        editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_line);
-                        editor.Project.CurrentContainer.WorkingLayer.Invalidate();
-                        Remove();
-                        _currentState = State.Start;
-                        editor.IsToolIdle = true;
-                    }
+                    Reset();
                     break;
             }
         }
@@ -199,12 +193,32 @@ namespace Core2D.Editor.Tools
         }
 
         /// <inheritdoc/>
-        public override void Remove()
+        public override void Reset()
         {
-            base.Remove();
+            base.Reset();
 
-            _selection.Remove();
-            _selection = null;
+            var editor = _serviceProvider.GetService<ProjectEditor>();
+
+            switch (_currentState)
+            {
+                case State.Start:
+                    break;
+                case State.End:
+                    {
+                        editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_line);
+                        editor.Project.CurrentContainer.WorkingLayer.Invalidate();
+                    }
+                    break;
+            }
+
+            _currentState = State.Start;
+            editor.IsToolIdle = true;
+
+            if (_selection != null)
+            {
+                _selection.Reset();
+                _selection = null;
+            }
         }
     }
 }

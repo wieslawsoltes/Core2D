@@ -119,31 +119,12 @@ namespace Core2D.Editor.Tools.Path
         public override void RightDown(InputArgs args)
         {
             base.RightDown(args);
-            var editor = _serviceProvider.GetService<ProjectEditor>();
-            var pathTool = _serviceProvider.GetService<ToolPath>();
             switch (_currentState)
             {
                 case State.Start:
                     break;
                 case State.End:
-                    {
-                        pathTool.RemoveLastSegment<LineSegment>();
-
-                        editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(pathTool.Path);
-                        Remove();
-                        if (pathTool.Path.Geometry.Figures.LastOrDefault().Segments.Length > 0)
-                        {
-                            Finalize(null);
-                            editor.Project.AddShape(editor.Project.CurrentContainer.CurrentLayer, pathTool.Path);
-                        }
-                        else
-                        {
-                            editor.Project.CurrentContainer.WorkingLayer.Invalidate();
-                        }
-                        pathTool.DeInitializeWorkingPath();
-                        _currentState = State.Start;
-                        editor.IsToolIdle = true;
-                    }
+                    Reset();
                     break;
             }
         }
@@ -185,13 +166,13 @@ namespace Core2D.Editor.Tools.Path
         public void ToStateEnd()
         {
             var editor = _serviceProvider.GetService<ProjectEditor>();
+            _selection?.Reset();
             _selection = new ToolLineSelection(
                 _serviceProvider,
                 editor.Project.CurrentContainer.HelperLayer,
                 _line,
                 editor.Project.Options.HelperStyle,
                 editor.Project.Options.PointShape);
-
             _selection.ToStateEnd();
         }
 
@@ -207,15 +188,40 @@ namespace Core2D.Editor.Tools.Path
         }
 
         /// <inheritdoc/>
-        public override void Remove()
+        public override void Reset()
         {
-            base.Remove();
+            base.Reset();
+
+            var editor = _serviceProvider.GetService<ProjectEditor>();
+            var pathTool = _serviceProvider.GetService<ToolPath>();
+
+            switch (_currentState)
+            {
+                case State.Start:
+                    break;
+                case State.End:
+                    {
+                        pathTool.RemoveLastSegment<LineSegment>();
+                        editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(pathTool.Path);
+                        if (pathTool.Path.Geometry.Figures.LastOrDefault().Segments.Length > 0)
+                        {
+                            Finalize(null);
+                            editor.Project.AddShape(editor.Project.CurrentContainer.CurrentLayer, pathTool.Path);
+                        }
+                        else
+                        {
+                            editor.Project.CurrentContainer.WorkingLayer.Invalidate();
+                        }
+                    }
+                    break;
+            }
 
             _currentState = State.Start;
+            editor.IsToolIdle = true;
 
             if (_selection != null)
             {
-                _selection.Remove();
+                _selection.Reset();
                 _selection = null;
             }
         }
