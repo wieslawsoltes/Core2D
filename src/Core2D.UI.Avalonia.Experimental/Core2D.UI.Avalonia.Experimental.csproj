@@ -34,10 +34,4 @@
     <ProjectReference Include="..\Core2D.Model\Core2D.Model.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <None Update="Views\ShapesView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </None>
-  </ItemGroup>
-
 </Project>
