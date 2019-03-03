@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <PackageReference Include="Wpf.Controls.PanAndZoom" Version="1.0.4-build20190303-01" />
+    <PackageReference Include="Wpf.Controls.PanAndZoom" Version="2.0.0-build20190303-06" />
     <PackageReference Include="System.Windows.Interactivity.WPF" Version="2.0.20525" />
     <PackageReference Include="Xceed.Wpf.AvalonDock" Version="2.9.15603.14400" />
   </ItemGroup>
