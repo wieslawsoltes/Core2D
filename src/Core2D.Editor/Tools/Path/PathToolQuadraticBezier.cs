@@ -264,7 +264,6 @@ namespace Core2D.Editor.Tools.Path
                         {
                             editor.Project.CurrentContainer.WorkingLayer.Invalidate();
                         }
-                        pathTool.DeInitializeWorkingPath();
                     }
                     break;
             }

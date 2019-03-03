@@ -1163,10 +1163,7 @@ namespace Core2D.Editor
         {
             if (CurrentTool.Title == "Path" && CurrentPathTool.Title != "Line")
             {
-                if (Tools.FirstOrDefault(t => t.Title == "Path") is ToolPath pathTool)
-                {
-                    pathTool.RemoveLastSegment();
-                }
+                CurrentPathTool?.Reset();
                 CurrentPathTool = PathTools.FirstOrDefault(t => t.Title == "Line");
             }
             else
@@ -1182,10 +1179,7 @@ namespace Core2D.Editor
         {
             if (CurrentTool.Title == "Path" && CurrentPathTool.Title != "Arc")
             {
-                if (Tools.FirstOrDefault(t => t.Title == "Path") is ToolPath pathTool)
-                {
-                    pathTool.RemoveLastSegment();
-                }
+                CurrentPathTool?.Reset();
                 CurrentPathTool = PathTools.FirstOrDefault(t => t.Title == "Arc");
             }
             else
@@ -1201,10 +1195,7 @@ namespace Core2D.Editor
         {
             if (CurrentTool.Title == "Path" && CurrentPathTool.Title != "CubicBezier")
             {
-                if (Tools.FirstOrDefault(t => t.Title == "Path") is ToolPath pathTool)
-                {
-                    pathTool.RemoveLastSegment();
-                }
+                CurrentPathTool?.Reset();
                 CurrentPathTool = PathTools.FirstOrDefault(t => t.Title == "CubicBezier");
             }
             else
@@ -1220,10 +1211,7 @@ namespace Core2D.Editor
         {
             if (CurrentTool.Title == "Path" && CurrentPathTool.Title != "QuadraticBezier")
             {
-                if (Tools.FirstOrDefault(t => t.Title == "Path") is ToolPath pathTool)
-                {
-                    pathTool.RemoveLastSegment();
-                }
+                CurrentPathTool?.Reset();
                 CurrentPathTool = PathTools.FirstOrDefault(t => t.Title == "QuadraticBezier");
             }
             else
@@ -1279,12 +1267,7 @@ namespace Core2D.Editor
         {
             if (CurrentTool.Title == "Path" && CurrentPathTool.Title != "Move")
             {
-                var tool = Tools.FirstOrDefault(t => t.Title == "Path");
-                if (tool != null)
-                {
-                    var pathTool = tool as ToolPath;
-                    pathTool.RemoveLastSegment();
-                }
+                CurrentPathTool?.Reset();
                 CurrentPathTool = PathTools.FirstOrDefault(t => t.Title == "Move");
             }
         }

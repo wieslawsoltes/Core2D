@@ -218,6 +218,7 @@ namespace Core2D.Editor.Tools
         {
             base.RightDown(args);
             _serviceProvider.GetService<ProjectEditor>().CurrentPathTool?.RightDown(args);
+            Reset();
         }
 
         /// <inheritdoc/>
@@ -246,6 +247,7 @@ namespace Core2D.Editor.Tools
         {
             base.Reset();
             _serviceProvider.GetService<ProjectEditor>().CurrentPathTool?.Reset();
+            DeInitializeWorkingPath();
         }
     }
 }
