@@ -25,7 +25,7 @@
     <UserControl.KeyBindings>
         <!-- Edit -->
         <KeyBinding Command="{Binding OnDelete}" CommandParameter="{Binding}" Gesture="Delete"/>
-        <KeyBinding Command="{Binding OnDeselectAll}" Gesture="Escape"/>
+        <KeyBinding Command="{Binding OnCancel}" Gesture="Escape"/>
         <KeyBinding Command="{Binding OnSendToBackSelected}" Gesture="Shift+OemMinus"/>
         <KeyBinding Command="{Binding OnSendBackwardSelected}" Gesture="OemMinus"/>
         <KeyBinding Command="{Binding OnBringForwardSelected}" Gesture="OemPlus"/>

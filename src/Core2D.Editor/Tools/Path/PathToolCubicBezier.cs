@@ -160,7 +160,6 @@ namespace Core2D.Editor.Tools.Path
                             editor.Project.Options.DefaultIsStroked,
                             editor.Project.Options.DefaultIsSmoothJoin);
                         editor.Project.CurrentContainer.WorkingLayer.Invalidate();
-                        Remove();
                         ToStatePoint4();
                         Move(null);
                         _currentState = State.Point4;
@@ -173,8 +172,6 @@ namespace Core2D.Editor.Tools.Path
         public override void RightDown(InputArgs args)
         {
             base.RightDown(args);
-            var editor = _serviceProvider.GetService<ProjectEditor>();
-            var pathTool = _serviceProvider.GetService<ToolPath>();
             switch (_currentState)
             {
                 case State.Point1:
@@ -182,24 +179,7 @@ namespace Core2D.Editor.Tools.Path
                 case State.Point4:
                 case State.Point2:
                 case State.Point3:
-                    {
-                        pathTool.RemoveLastSegment<CubicBezierSegment>();
-
-                        editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(pathTool.Path);
-                        Remove();
-                        if (pathTool.Path.Geometry.Figures.LastOrDefault().Segments.Length > 0)
-                        {
-                            Finalize(null);
-                            editor.Project.AddShape(editor.Project.CurrentContainer.CurrentLayer, pathTool.Path);
-                        }
-                        else
-                        {
-                            editor.Project.CurrentContainer.WorkingLayer.Invalidate();
-                        }
-                        pathTool.DeInitializeWorkingPath();
-                        _currentState = State.Point1;
-                        editor.IsToolIdle = true;
-                    }
+                    Reset();
                     break;
             }
         }
@@ -269,13 +249,13 @@ namespace Core2D.Editor.Tools.Path
         public void ToStatePoint4()
         {
             var editor = _serviceProvider.GetService<ProjectEditor>();
+            _selection?.Reset();
             _selection = new ToolCubicBezierSelection(
                 _serviceProvider,
                 editor.Project.CurrentContainer.HelperLayer,
                 _cubicBezier,
                 editor.Project.Options.HelperStyle,
                 editor.Project.Options.PointShape);
-
             _selection.ToStatePoint4();
         }
 
@@ -307,15 +287,43 @@ namespace Core2D.Editor.Tools.Path
         }
 
         /// <inheritdoc/>
-        public override void Remove()
+        public override void Reset()
         {
-            base.Remove();
+            base.Reset();
+
+            var editor = _serviceProvider.GetService<ProjectEditor>();
+            var pathTool = _serviceProvider.GetService<ToolPath>();
+
+            switch (_currentState)
+            {
+                case State.Point1:
+                    break;
+                case State.Point4:
+                case State.Point2:
+                case State.Point3:
+                    {
+                        pathTool.RemoveLastSegment<CubicBezierSegment>();
+                        editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(pathTool.Path);
+                        if (pathTool.Path.Geometry.Figures.LastOrDefault().Segments.Length > 0)
+                        {
+                            Finalize(null);
+                            editor.Project.AddShape(editor.Project.CurrentContainer.CurrentLayer, pathTool.Path);
+                        }
+                        else
+                        {
+                            editor.Project.CurrentContainer.WorkingLayer.Invalidate();
+                        }
+                        pathTool.DeInitializeWorkingPath();
+                    }
+                    break;
+            }
 
             _currentState = State.Point1;
+            editor.IsToolIdle = true;
 
             if (_selection != null)
             {
-                _selection.Remove();
+                _selection.Reset();
                 _selection = null;
             }
         }

@@ -158,11 +158,10 @@ namespace Core2D.Editor.Tools
                             }
 
                             editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_arc);
-                            Remove();
                             Finalize(_arc);
                             editor.Project.AddShape(editor.Project.CurrentContainer.CurrentLayer, _arc);
-                            _currentState = State.Point1;
-                            editor.IsToolIdle = true;
+
+                            Reset();
                         }
                     }
                     break;
@@ -173,7 +172,6 @@ namespace Core2D.Editor.Tools
         public override void RightDown(InputArgs args)
         {
             base.RightDown(args);
-            var editor = _serviceProvider.GetService<ProjectEditor>();
             switch (_currentState)
             {
                 case State.Point1:
@@ -181,13 +179,7 @@ namespace Core2D.Editor.Tools
                 case State.Point2:
                 case State.Point3:
                 case State.Point4:
-                    {
-                        editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_arc);
-                        editor.Project.CurrentContainer.WorkingLayer.Invalidate();
-                        Remove();
-                        _currentState = State.Point1;
-                        editor.IsToolIdle = true;
-                    }
+                    Reset();
                     break;
             }
         }
@@ -322,12 +314,34 @@ namespace Core2D.Editor.Tools
         }
 
         /// <inheritdoc/>
-        public override void Remove()
+        public override void Reset()
         {
-            base.Remove();
+            base.Reset();
 
-            _selection.Remove();
-            _selection = null;
+            var editor = _serviceProvider.GetService<ProjectEditor>();
+
+            switch (_currentState)
+            {
+                case State.Point1:
+                    break;
+                case State.Point2:
+                case State.Point3:
+                case State.Point4:
+                    {
+                        editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_arc);
+                        editor.Project.CurrentContainer.WorkingLayer.Invalidate();
+                    }
+                    break;
+            }
+
+            _currentState = State.Point1;
+            editor.IsToolIdle = true;
+
+            if (_selection != null)
+            {
+                _selection.Reset();
+                _selection = null;
+            }
         }
     }
 }

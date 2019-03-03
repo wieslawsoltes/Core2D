@@ -223,6 +223,8 @@
                     <CheckBox IsChecked="{Binding CurrentTool.Title, Converter={StaticResource ObjectEqualsConverter}, ConverterParameter=Image, Mode=OneWay}" Classes="menu"/>
                 </MenuItem.Icon>
             </MenuItem>
+            <Separator/>
+            <MenuItem Header="Reset" Command="{Binding OnResetTool}">
         </MenuItem>
         <MenuItem Header="_Data">
             <MenuItem Header="_Import..." Command="{Binding Platform.OnImportData}" CommandParameter="{Binding Project}"/>

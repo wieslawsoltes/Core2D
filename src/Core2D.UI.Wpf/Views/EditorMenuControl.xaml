@@ -144,6 +144,8 @@
             <MenuItem Header="_Text" Command="{x:Static editor:ProjectEditorCommands.ToolTextCommand}" IsCheckable="False" IsChecked="{Binding Path=CurrentTool.Title, Mode=OneWay, Converter={StaticResource ObjectEqualsConverter}, ConverterParameter=Text}" InputGestureText="T"/>
             <Separator/>
             <MenuItem Header="_Image" Command="{x:Static editor:ProjectEditorCommands.ToolImageCommand}" IsCheckable="False" IsChecked="{Binding Path=CurrentTool.Title, Mode=OneWay, Converter={StaticResource ObjectEqualsConverter}, ConverterParameter=Image}" InputGestureText="I"/>
+            <Separator/>
+            <MenuItem Header="Reset" Command="{x:Static editor:ProjectEditorCommands.ResetToolCommand}" InputGestureText="Esc"/>
         </MenuItem>
         <MenuItem Header="_Data">
             <MenuItem Header="_Import..." Command="{x:Static editor:ProjectEditorCommands.ImportDataCommand}" CommandParameter="{Binding Project}" InputGestureText=""/>

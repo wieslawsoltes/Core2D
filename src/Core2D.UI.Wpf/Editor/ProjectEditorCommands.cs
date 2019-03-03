@@ -151,6 +151,11 @@ namespace Core2D.UI.Wpf.Editor
         public static ICommand ClearAllCommand { get; set; }
 
         /// <summary>
+        /// Gets or sets Cancel command.
+        /// </summary>
+        public static ICommand CancelCommand { get; set; }
+
+        /// <summary>
         /// Gets or sets Group command.
         /// </summary>
         public static ICommand GroupCommand { get; set; }
@@ -264,6 +269,11 @@ namespace Core2D.UI.Wpf.Editor
         /// Gets or sets ToolMove command.
         /// </summary>
         public static ICommand ToolMoveCommand { get; set; }
+
+        /// <summary>
+        /// Gets or sets ResetTool command.
+        /// </summary>
+        public static ICommand ResetToolCommand { get; set; }
 
         /// <summary>
         /// Gets or sets DefaultIsStroked command.
@@ -564,6 +574,7 @@ namespace Core2D.UI.Wpf.Editor
             SelectAllCommand = new Command((p) => true, (p) => serviceProvider.GetService<ProjectEditor>().OnSelectAll());
             DeselectAllCommand = new Command((p) => true, (p) => serviceProvider.GetService<ProjectEditor>().OnDeselectAll());
             ClearAllCommand = new Command((p) => true, (p) => serviceProvider.GetService<ProjectEditor>().OnClearAll());
+            CancelCommand = new Command((p) => true, (p) => serviceProvider.GetService<ProjectEditor>().OnCancel());
             GroupCommand = new Command((p) => true, (p) => serviceProvider.GetService<ProjectEditor>().OnGroupSelected());
             UngroupCommand = new Command((p) => true, (p) => serviceProvider.GetService<ProjectEditor>().OnUngroupSelected());
             BringToFrontCommand = new Command((p) => true, (p) => serviceProvider.GetService<ProjectEditor>().OnBringToFrontSelected());
@@ -588,6 +599,7 @@ namespace Core2D.UI.Wpf.Editor
             ToolTextCommand = new Command((p) => true, (p) => serviceProvider.GetService<ProjectEditor>().OnToolText());
             ToolImageCommand = new Command((p) => true, (p) => serviceProvider.GetService<ProjectEditor>().OnToolImage());
             ToolMoveCommand = new Command((p) => true, (p) => serviceProvider.GetService<ProjectEditor>().OnToolMove());
+            ResetToolCommand = new Command((p) => true, (p) => serviceProvider.GetService<ProjectEditor>().OnResetTool());
 
             DefaultIsStrokedCommand = new Command((p) => true, (p) => serviceProvider.GetService<ProjectEditor>().OnToggleDefaultIsStroked());
             DefaultIsFilledCommand = new Command((p) => true, (p) => serviceProvider.GetService<ProjectEditor>().OnToggleDefaultIsFilled());

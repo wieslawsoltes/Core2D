@@ -967,6 +967,15 @@ namespace Core2D.Editor
         }
 
         /// <summary>
+        /// Cancel current action.
+        /// </summary>
+        public void OnCancel()
+        {
+            OnDeselectAll();
+            OnResetTool();
+        }
+
+        /// <summary>
         /// Group selected shapes.
         /// </summary>
         public void OnGroupSelected()
@@ -1278,6 +1287,14 @@ namespace Core2D.Editor
                 }
                 CurrentPathTool = PathTools.FirstOrDefault(t => t.Title == "Move");
             }
+        }
+
+        /// <summary>
+        /// Reset current tool.
+        /// </summary>
+        public void OnResetTool()
+        {
+            CurrentTool?.Reset();
         }
 
         /// <summary>

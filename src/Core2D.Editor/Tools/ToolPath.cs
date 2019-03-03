@@ -111,22 +111,22 @@ namespace Core2D.Editor.Tools
             if (PreviousPathTool == _pathToolLine)
             {
                 RemoveLastSegment<LineSegment>();
-                _pathToolLine.Remove();
+                _pathToolLine.Reset();
             }
             else if (PreviousPathTool == _pathToolArc)
             {
                 RemoveLastSegment<ArcSegment>();
-                _pathToolArc.Remove();
+                _pathToolArc.Reset();
             }
             else if (PreviousPathTool == _pathToolCubicBezier)
             {
                 RemoveLastSegment<CubicBezierSegment>();
-                _pathToolCubicBezier.Remove();
+                _pathToolCubicBezier.Reset();
             }
             else if (PreviousPathTool == _pathToolQuadraticBezier)
             {
                 RemoveLastSegment<QuadraticBezierSegment>();
-                _pathToolQuadraticBezier.Remove();
+                _pathToolQuadraticBezier.Reset();
             }
 
             var editor = _serviceProvider.GetService<ProjectEditor>();
@@ -210,42 +210,42 @@ namespace Core2D.Editor.Tools
         public override void LeftDown(InputArgs args)
         {
             base.LeftDown(args);
-            _serviceProvider.GetService<ProjectEditor>().CurrentPathTool.LeftDown(args);
+            _serviceProvider.GetService<ProjectEditor>().CurrentPathTool?.LeftDown(args);
         }
 
         /// <inheritdoc/>
         public override void RightDown(InputArgs args)
         {
             base.RightDown(args);
-            _serviceProvider.GetService<ProjectEditor>().CurrentPathTool.RightDown(args);
+            _serviceProvider.GetService<ProjectEditor>().CurrentPathTool?.RightDown(args);
         }
 
         /// <inheritdoc/>
         public override void Move(InputArgs args)
         {
             base.Move(args);
-            _serviceProvider.GetService<ProjectEditor>().CurrentPathTool.Move(args);
+            _serviceProvider.GetService<ProjectEditor>().CurrentPathTool?.Move(args);
         }
 
         /// <inheritdoc/>
         public override void Move(IBaseShape shape)
         {
             base.Move(shape);
-            _serviceProvider.GetService<ProjectEditor>().CurrentPathTool.Move(shape);
+            _serviceProvider.GetService<ProjectEditor>().CurrentPathTool?.Move(shape);
         }
 
         /// <inheritdoc/>
         public override void Finalize(IBaseShape shape)
         {
             base.Finalize(shape);
-            _serviceProvider.GetService<ProjectEditor>().CurrentPathTool.Finalize(shape);
+            _serviceProvider.GetService<ProjectEditor>().CurrentPathTool?.Finalize(shape);
         }
 
         /// <inheritdoc/>
-        public override void Remove()
+        public override void Reset()
         {
-            base.Remove();
-            _serviceProvider.GetService<ProjectEditor>().CurrentPathTool.Remove();
+            base.Reset();
+            _serviceProvider.GetService<ProjectEditor>().CurrentPathTool?.Reset();
         }
     }
 }
