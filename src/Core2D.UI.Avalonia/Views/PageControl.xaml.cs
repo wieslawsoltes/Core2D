@@ -111,7 +111,7 @@ namespace Core2D.UI.Avalonia.Views
                 _inputSource = new AvaloniaInputSource(
                         _zoomBorder,
                         _containerControlEditor,
-                        _zoomBorder.FixInvalidPointPosition);
+                        p => p);
                 _inputProcessor = new InputProcessor();
                 _inputProcessor.Connect(_inputSource, projectEditor);
 
