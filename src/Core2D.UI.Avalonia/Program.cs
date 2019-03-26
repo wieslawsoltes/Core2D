@@ -36,6 +36,7 @@ namespace Core2D.UI.Avalonia
         {
 #if !_CORERT
             bool useGpu = true;
+            bool useEGL = false;
             bool deferredRendering = true;
             bool useDirect2D1 = false;
             bool useSkia = false;
@@ -49,6 +50,9 @@ namespace Core2D.UI.Avalonia
                 {
                     case "--software":
                         useGpu = false;
+                        break;
+                    case "--egl":
+                        useEGL = true;
                         break;
                     case "--immediate":
                         deferredRendering = false;
@@ -98,23 +102,18 @@ namespace Core2D.UI.Avalonia
                         }
                         if (useWin32 == true)
                         {
-                            appBuilder.UseWin32(deferredRendering);
+                            appBuilder.UseWin32()
+                                      .With(new Win32PlatformOptions { AllowEglInitialization = useEGL, UseDeferredRendering = deferredRendering });
                         }
                         if (useX11 == true)
                         {
-                            var options = new X11PlatformOptions
-                            {
-                                UseGpu = useGpu
-                            };
-                            appBuilder.UseX11(options);
+                            appBuilder.UseX11()
+                                      .With(new X11PlatformOptions { UseGpu = useGpu, UseEGL = useEGL });
                         }
                         if (useNative == true)
                         {
-                            appBuilder.UseAvaloniaNative(null, (opts) =>
-                            {
-                                opts.UseGpu = useGpu;
-                                opts.UseDeferredRendering = deferredRendering;
-                            });
+                            appBuilder.UseAvaloniaNative()
+                                      .With(new AvaloniaNativePlatformOptions { UseGpu = useGpu, UseDeferredRendering = deferredRendering });
                         }
 #endif
                         appBuilder.SetupWithoutStarting();
