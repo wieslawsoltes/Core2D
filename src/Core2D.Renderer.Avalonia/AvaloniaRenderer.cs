@@ -702,7 +702,7 @@ namespace Core2D.Renderer.Avalonia
             (string ct, var ft, var cs) = _textCache.Get(text);
             if (string.Compare(ct, tbind) == 0 && cs == style)
             {
-                var size = ft.Measure();
+                var size = ft.Bounds.Size;
                 var origin = GetTextOrigin(style, ref rect, ref size);
                 _dc.DrawText(stroke.Brush, origin, ft);
             }
@@ -754,7 +754,7 @@ namespace Core2D.Renderer.Avalonia
                         Wrapping = AM.TextWrapping.NoWrap
                     };
 
-                    var size = ft.Measure();
+                    var size = ft.Bounds.Size;
                     var origin = GetTextOrigin(style, ref rect, ref size);
 
                     _textCache.Set(text, (tbind, ft, style));
