@@ -60,7 +60,7 @@
                 </ListBox>
             </Grid>
         </TabItem>
-        <TabItem Header="Columns">
+        <TabItem Header="Columns" Classes="property">
             <Grid RowDefinitions="Auto,*">
                 <Menu Grid.Row="0" HorizontalAlignment="Right">
                     <MenuItem Command="{Binding $parent[Window].DataContext.OnRemoveColumn}" CommandParameter="{Binding #columns.SelectedItem}" Header="&#727;"/>
@@ -77,14 +77,14 @@
                 </DataGrid>
             </Grid>
         </TabItem>
-        <TabItem Header="Rows">
+        <TabItem Header="Rows" Classes="property">
             <Grid RowDefinitions="Auto,*">
                 <Menu Grid.Row="1" HorizontalAlignment="Right">
                     <MenuItem Header="apply" Command="{Binding $parent[Window].DataContext.OnApplyRecord}" CommandParameter="{Binding CurrentRecord}" IsVisible="{Binding !!CurrentRecord}"/>
                     <MenuItem Header="+" Command="{Binding $parent[Window].DataContext.OnAddRecord}" CommandParameter="{Binding}"/>
                     <MenuItem Header="&#727;" Command="{Binding $parent[Window].DataContext.OnRemoveRecord}" CommandParameter="{Binding CurrentRecord}" IsVisible="{Binding !!CurrentRecord}"/>
                 </Menu>
-                <DataGrid x:Name="records" Items="{Binding Records}" SelectedItem="{Binding CurrentRecord}" AutoGenerateColumns="False" Grid.Row="1">
+                <DataGrid x:Name="rows" Items="{Binding Records}" SelectedItem="{Binding CurrentRecord}" AutoGenerateColumns="False" Grid.Row="1">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Owner" Binding="{Binding Owner.Name}" IsReadOnly="True"/>
                         <DataGridTextColumn Header="Id" Binding="{Binding Id}"/>
@@ -92,12 +92,12 @@
                     <DataGrid.RowDetailsTemplate>
                         <DataTemplate>
                             <DockPanel>
-                                <DataGrid ItemsSource="{Binding Owner.Columns}" AutoGenerateColumns="False" HeadersVisibility="None" DockPanel.Dock="Left">
+                                <DataGrid Items="{Binding Owner.Columns}" AutoGenerateColumns="False" HeadersVisibility="None" DockPanel.Dock="Left">
                                     <DataGrid.Columns>
                                         <DataGridTextColumn Header="Name" Binding="{Binding Name}" IsReadOnly="True"/>
                                     </DataGrid.Columns>
                                 </DataGrid>
-                                <DataGrid ItemsSource="{Binding Values}" AutoGenerateColumns="False" HeadersVisibility="None" DockPanel.Dock="Right">
+                                <DataGrid Items="{Binding Values}" AutoGenerateColumns="False" HeadersVisibility="None" DockPanel.Dock="Right">
                                     <DataGrid.Columns>
                                         <DataGridTextColumn Header="Content" Binding="{Binding Content}" IsReadOnly="False"/>
                                     </DataGrid.Columns>
