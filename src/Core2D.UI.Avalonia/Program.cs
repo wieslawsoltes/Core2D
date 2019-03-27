@@ -147,6 +147,7 @@ namespace Core2D.UI.Avalonia
 #elif _CORERT_OSX_X64
                          .UseAvaloniaNative().UseSkia()
 #endif
+                         .UseDataGrid()
                          .LogToDebug();
     }
 }
