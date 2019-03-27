@@ -19,10 +19,7 @@
         <Style Selector="DataGrid">
             <Setter Property="CanUserReorderColumns" Value="True"/>
             <Setter Property="CanUserResizeColumns" Value="True"/>
-            <Setter Property="CanUserResizeRows" Value="True"/>
             <Setter Property="CanUserSortColumns" Value="True"/>
-            <Setter Property="CanUserAddRows" Value="False"/>
-            <Setter Property="CanUserDeleteRows" Value="False"/>
         </Style>
     </UserControl.Styles>
     <TabControl Classes="default">
@@ -69,7 +66,7 @@
                     <MenuItem Command="{Binding $parent[Window].DataContext.OnRemoveColumn}" CommandParameter="{Binding #columns.SelectedItem}" Header="&#727;"/>
                     <MenuItem Command="{Binding $parent[Window].DataContext.OnAddColumn}" CommandParameter="{Binding}" Header="+"/>
                 </Menu>
-                <DataGrid x:Name="columns" ItemsSource="{Binding Columns}" AutoGenerateColumns="False" Grid.Row="1">
+                <DataGrid x:Name="columns" Items="{Binding Columns}" AutoGenerateColumns="False" Grid.Row="1">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Name" Binding="{Binding Name}"/>
                         <DataGridTextColumn Header="Width" Binding="{Binding Width}"/>
@@ -87,7 +84,7 @@
                     <MenuItem Header="+" Command="{Binding $parent[Window].DataContext.OnAddRecord}" CommandParameter="{Binding}"/>
                     <MenuItem Header="&#727;" Command="{Binding $parent[Window].DataContext.OnRemoveRecord}" CommandParameter="{Binding CurrentRecord}" IsVisible="{Binding !!CurrentRecord}"/>
                 </Menu>
-                <DataGrid x:Name="records" ItemsSource="{Binding Records}" SelectedItem="{Binding CurrentRecord}" AutoGenerateColumns="False" Grid.Row="1">
+                <DataGrid x:Name="records" Items="{Binding Records}" SelectedItem="{Binding CurrentRecord}" AutoGenerateColumns="False" Grid.Row="1">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Owner" Binding="{Binding Owner.Name}" IsReadOnly="True"/>
                         <DataGridTextColumn Header="Id" Binding="{Binding Id}"/>
