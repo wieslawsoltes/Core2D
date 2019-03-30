@@ -28,16 +28,10 @@ namespace Core2D.Editor
     /// </summary>
     public partial class ProjectEditor
     {
-        private object _scriptState;
-        private IPageContainer _pageToCopy = default;
-        private IDocumentContainer _documentToCopy = default;
-        private IBaseShape _hoveredShape = default;
-
-        public IBaseShape HoveredShape
-        {
-            get => _hoveredShape;
-            set => _hoveredShape = value;
-        }
+        private object ScriptState { get; set; } = default;
+        private IPageContainer PageToCopy { get; set; } = default;
+        private IDocumentContainer DocumentToCopy { get; set; } = default;
+        private IBaseShape HoveredShape { get; set; } = default;
 
         private void LogError(Exception ex)
         {
@@ -659,7 +653,7 @@ namespace Core2D.Editor
             {
                 if (!string.IsNullOrWhiteSpace(csharp))
                 {
-                    _scriptState = ScriptRunner?.Execute(csharp, _scriptState);
+                    ScriptState = ScriptRunner?.Execute(csharp, ScriptState);
                 }
             }
             catch (Exception ex)
@@ -673,7 +667,7 @@ namespace Core2D.Editor
         /// </summary>
         public void OnResetRepl()
         {
-            _scriptState = null;
+            ScriptState = null;
         }
 
         /// <summary>
@@ -754,15 +748,15 @@ namespace Core2D.Editor
         {
             if (item is IPageContainer page)
             {
-                _pageToCopy = page;
-                _documentToCopy = default;
+                PageToCopy = page;
+                DocumentToCopy = default;
                 Project?.RemovePage(page);
                 Project?.SetCurrentContainer(Project?.CurrentDocument?.Pages.FirstOrDefault());
             }
             else if (item is IDocumentContainer document)
             {
-                _pageToCopy = default;
-                _documentToCopy = document;
+                PageToCopy = default;
+                DocumentToCopy = document;
                 Project?.RemoveDocument(document);
 
                 var selected = Project?.Documents.FirstOrDefault();
@@ -787,13 +781,13 @@ namespace Core2D.Editor
         {
             if (item is IPageContainer page)
             {
-                _pageToCopy = page;
-                _documentToCopy = default;
+                PageToCopy = page;
+                DocumentToCopy = default;
             }
             else if (item is IDocumentContainer document)
             {
-                _pageToCopy = default;
-                _documentToCopy = document;
+                PageToCopy = default;
+                DocumentToCopy = document;
             }
             else if (item is ProjectEditor || item == null)
             {
@@ -820,13 +814,13 @@ namespace Core2D.Editor
         {
             if (Project != null && item is IPageContainer page)
             {
-                if (_pageToCopy != null)
+                if (PageToCopy != null)
                 {
                     var document = Project?.Documents.FirstOrDefault(d => d.Pages.Contains(page));
                     if (document != null)
                     {
                         int index = document.Pages.IndexOf(page);
-                        var clone = Clone(_pageToCopy);
+                        var clone = Clone(PageToCopy);
                         Project.ReplacePage(document, clone, index);
                         Project.SetCurrentContainer(clone);
                     }
@@ -834,16 +828,16 @@ namespace Core2D.Editor
             }
             else if (Project != null && item is IDocumentContainer document)
             {
-                if (_pageToCopy != null)
+                if (PageToCopy != null)
                 {
-                    var clone = Clone(_pageToCopy);
+                    var clone = Clone(PageToCopy);
                     Project?.AddPage(document, clone);
                     Project.SetCurrentContainer(clone);
                 }
-                else if (_documentToCopy != null)
+                else if (DocumentToCopy != null)
                 {
                     int index = Project.Documents.IndexOf(document);
-                    var clone = Clone(_documentToCopy);
+                    var clone = Clone(DocumentToCopy);
                     Project.ReplaceDocument(clone, index);
                     Project.SetCurrentDocument(clone);
                     Project.SetCurrentContainer(clone?.Pages.FirstOrDefault());
