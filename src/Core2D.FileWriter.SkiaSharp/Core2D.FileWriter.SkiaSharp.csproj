@@ -10,6 +10,7 @@
   <Import Project="..\..\build\SkiaSharp.props" />
 
   <ItemGroup>
+    <ProjectReference Include="..\Core2D.Base\Core2D.Base.csproj" />
     <ProjectReference Include="..\Core2D.Model\Core2D.Model.csproj" />
     <ProjectReference Include="..\Core2D.Renderer.SkiaSharp\Core2D.Renderer.SkiaSharp.csproj" />
   </ItemGroup>

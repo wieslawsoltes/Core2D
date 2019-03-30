@@ -46,7 +46,20 @@ namespace Core2D.Style
         /// <inheritdoc/>
         public override object Copy(IDictionary<object, object> shared)
         {
-            throw new NotImplementedException();
+            return new ShapeStyle()
+            {
+                Name = this.Name,
+                Stroke = (IColor)this.Stroke.Copy(shared),
+                Fill = (IColor)this.Fill.Copy(shared),
+                Thickness = this.Thickness,
+                LineCap = this.LineCap,
+                Dashes = this.Dashes,
+                DashOffset = 0.0,
+                LineStyle = (ILineStyle)this.LineStyle.Copy(shared),
+                TextStyle = (ITextStyle)this.TextStyle.Copy(shared),
+                StartArrowStyle = (IArrowStyle)this.StartArrowStyle.Copy(shared),
+                EndArrowStyle = (IArrowStyle)this.EndArrowStyle.Copy(shared)
+            };
         }
 
         /// <summary>

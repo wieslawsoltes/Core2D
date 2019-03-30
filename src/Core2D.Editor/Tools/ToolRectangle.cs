@@ -65,7 +65,7 @@ namespace Core2D.Editor.Tools
                         var style = editor.Project.CurrentStyleLibrary.Selected;
                         _rectangle = factory.CreateRectangleShape(
                             sx, sy,
-                            editor.Project.Options.CloneStyle ? style.Clone() : style,
+                            editor.Project.Options.CloneStyle ? (IShapeStyle)style.Copy(null) : style,
                             editor.Project.Options.PointShape,
                             editor.Project.Options.DefaultIsStroked,
                             editor.Project.Options.DefaultIsFilled);

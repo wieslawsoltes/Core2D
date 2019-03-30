@@ -46,7 +46,14 @@ namespace Core2D.Style
         /// <inheritdoc/>
         public override object Copy(IDictionary<object, object> shared)
         {
-            throw new NotImplementedException();
+            return new LineStyle()
+            {
+                Name = this.Name,
+                IsCurved = this.IsCurved,
+                Curvature = this.Curvature,
+                CurveOrientation = this.CurveOrientation,
+                FixedLength = (ILineFixedLength)this.FixedLength.Copy(shared)
+            };
         }
 
         /// <summary>

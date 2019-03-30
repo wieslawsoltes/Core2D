@@ -3,8 +3,9 @@
 using Portable.Xaml.Markup;
 using Core2D.Serializer.Xaml;
 
+[assembly: XmlnsDefinition(XamlConstants.CoreNamespace, "Core2D", AssemblyName = "Core2D.Base")]
+[assembly: XmlnsDefinition(XamlConstants.CoreNamespace, "Core2D.Attributes", AssemblyName = "Core2D.Base")]
 [assembly: XmlnsDefinition(XamlConstants.CoreNamespace, "Core2D", AssemblyName = "Core2D.Model")]
-[assembly: XmlnsDefinition(XamlConstants.CoreNamespace, "Core2D.Attributes", AssemblyName = "Core2D.Model")]
 [assembly: XmlnsDefinition(XamlConstants.CoreNamespace, "Core2D.Containers", AssemblyName = "Core2D.Model")]
 [assembly: XmlnsDefinition(XamlConstants.CoreNamespace, "Core2D.Data", AssemblyName = "Core2D.Model")]
 [assembly: XmlnsDefinition(XamlConstants.CoreNamespace, "Core2D.History", AssemblyName = "Core2D.Model")]

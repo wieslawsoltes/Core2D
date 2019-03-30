@@ -11,7 +11,9 @@
   <Import Project="..\..\build\XUnit.props" />
 
   <ItemGroup>
+    <ProjectReference Include="..\..\src\Core2D.Base\Core2D.Base.csproj" />
     <ProjectReference Include="..\..\src\Core2D.Editor\Core2D.Editor.csproj" />
+    <ProjectReference Include="..\..\src\Core2D.Model.Extensions\Core2D.Model.Extensions.csproj" />
     <ProjectReference Include="..\..\src\Core2D.Model\Core2D.Model.csproj" />
     <ProjectReference Include="..\Core2D.Common\Core2D.Common.csproj" />
   </ItemGroup>

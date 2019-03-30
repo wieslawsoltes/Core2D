@@ -72,7 +72,10 @@ namespace Core2D.Style
         /// <inheritdoc/>
         public override object Copy(IDictionary<object, object> shared)
         {
-            throw new NotImplementedException();
+            return new FontStyle()
+            {
+                Flags = this.Flags
+            };
         }
 
         /// <summary>

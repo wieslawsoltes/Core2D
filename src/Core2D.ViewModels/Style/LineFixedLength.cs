@@ -105,7 +105,12 @@ namespace Core2D.Style
         /// <inheritdoc/>
         public override object Copy(IDictionary<object, object> shared)
         {
-            throw new NotImplementedException();
+            return new LineFixedLength()
+            {
+                Flags = this.Flags,
+                StartTrigger = (IShapeState)this.StartTrigger.Copy(shared),
+                EndTrigger = (IShapeState)this.EndTrigger.Copy(shared)
+            };
         }
 
         /// <summary>
