@@ -20,9 +20,10 @@ namespace Core2D.UI.Wpf.Views
     /// </summary>
     public partial class EditorControl : UserControl
     {
-        private ProjectEditor _projectEditor;
-        private WpfInputSource _inputSource;
-        private InputProcessor _inputProcessor;
+        private ProjectEditor _projectEditor = null;
+        private WpfInputSource _inputSource = null;
+        private ProjectInputTarget _inputTarget = null;
+        private InputProcessor _inputProcessor = null;
         private bool _isLoaded = false;
         private bool _restoreLayout = true;
         private string _resourceLayoutRoot = "Core2D.UI.Wpf.Layouts.";
@@ -235,8 +236,9 @@ namespace Core2D.UI.Wpf.Views
                 zoomBorder.InvalidatedChild = InvalidateChild;
 
                 _inputSource = new WpfInputSource(zoomBorder, drawableControl, (point) => point);
+                _inputTarget = new ProjectInputTarget(_projectEditor);
                 _inputProcessor = new InputProcessor();
-                _inputProcessor.Connect(_inputSource, _projectEditor);
+                _inputProcessor.Connect(_inputSource, _inputTarget);
 
                 zoomBorder.AllowDrop = true;
                 zoomBorder.DragEnter += ZoomBorder_DragEnter;
@@ -262,6 +264,7 @@ namespace Core2D.UI.Wpf.Views
                 zoomBorder.InvalidatedChild = null;
 
                 _inputProcessor.Dispose();
+                _inputTarget = null;
                 _inputProcessor = null;
                 _inputSource = null;
 
