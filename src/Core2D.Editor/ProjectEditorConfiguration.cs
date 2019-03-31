@@ -10,7 +10,7 @@ namespace Core2D.Editor
     /// <summary>
     /// Project editor configuration.
     /// </summary>
-    public static class ProjectEditorConfiguration
+    public class ProjectEditorConfiguration
     {
         /// <summary>
         /// Default <see cref="ILayerContainer"/> name.
