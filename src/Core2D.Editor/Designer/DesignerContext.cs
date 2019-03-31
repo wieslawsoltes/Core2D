@@ -314,7 +314,7 @@ namespace Core2D.Editor.Designer
             Arc = factory.CreateArcShape(0, 0, Style, null);
             CubicBezier = factory.CreateCubicBezierShape(0, 0, Style, null);
             Ellipse = factory.CreateEllipseShape(0, 0, Style, null);
-            Group = factory.CreateGroupShape(ProjectEditorConfiguration.DefaulGroupName);
+            Group = factory.CreateGroupShape("Group");
             Image = factory.CreateImageShape(0, 0, Style, null, "key");
             Line = factory.CreateLineShape(0, 0, Style, null);
             Path = factory.CreatePathShape(Style, null);
