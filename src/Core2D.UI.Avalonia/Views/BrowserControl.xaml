@@ -11,7 +11,7 @@
              xmlns:idc="clr-namespace:Dock.Avalonia.Controls;assembly=Dock.Avalonia"
              xmlns:handlers="clr-namespace:Core2D.UI.Avalonia.Dock.Handlers;assembly=Core2D.UI.Avalonia"
              xmlns:converters="clr-namespace:Core2D.UI.Avalonia.Converters;assembly=Core2D.UI.Avalonia"
-             xmlns:Core="clr-namespace:Core2D;assembly=Core2D.Model"
+             xmlns:Base="clr-namespace:Core2D;assembly=Core2D.Base"
              xmlns:DataCore="clr-namespace:Core2D.Data;assembly=Core2D.Model"
              xmlns:Dock="clr-namespace:Dock.Model;assembly=Dock.Model"
              xmlns:Editor="clr-namespace:Core2D.Editor;assembly=Core2D.Editor"
@@ -116,7 +116,7 @@
                                 </TextBlock.ContextMenu>
                             </TextBlock>
                         </TreeDataTemplate>
-                        <DataTemplate DataType="Core:IObservableObject">
+                        <DataTemplate DataType="Base:IObservableObject">
                             <TextBlock Text="{Binding Mode=OneWay, Converter={StaticResource ObjectToTypeStringConverter}}" Classes="tree drag">
                                 <i:Interaction.Behaviors>
                                     <id:DragBehavior Context="{Binding}"/>
@@ -206,7 +206,7 @@
                                 </TextBlock.ContextMenu>
                             </TextBlock>
                         </TreeDataTemplate>
-                        <DataTemplate DataType="Core:IObservableObject">
+                        <DataTemplate DataType="Base:IObservableObject">
                             <TextBlock Text="{Binding Mode=OneWay, Converter={StaticResource ObjectToTypeStringConverter}}" Classes="tree drag">
                                 <i:Interaction.Behaviors>
                                     <id:DragBehavior Context="{Binding}"/>
@@ -281,7 +281,7 @@
                                 </TextBlock.ContextMenu>
                             </TextBlock>
                         </TreeDataTemplate>
-                        <DataTemplate DataType="Core:IObservableObject">
+                        <DataTemplate DataType="Base:IObservableObject">
                             <TextBlock Text="{Binding Mode=OneWay, Converter={StaticResource ObjectToTypeStringConverter}}" Classes="tree drag">
                                 <i:Interaction.Behaviors>
                                     <id:DragBehavior Context="{Binding}"/>
