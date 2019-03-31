@@ -66,7 +66,7 @@ namespace Core2D.Renderer.SkiaSharp
 
                         previous = cubicBezierSegment.Point3;
                     }
-                    else if (segment is LineSegment lineSegment)
+                    else if (segment is ILineSegment lineSegment)
                     {
                         path.LineTo(
                             scale(lineSegment.Point.X + dx),

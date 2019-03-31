@@ -153,7 +153,7 @@ namespace Core2D.Renderer.Wpf
                     break;
             }
             pen.DashStyle = new WM.DashStyle(
-                ShapeStyle.ConvertDashesToDoubleArray(style.Dashes),
+                StyleHelper.ConvertDashesToDoubleArray(style.Dashes),
                 style.DashOffset);
             pen.DashStyle.Offset = style.DashOffset;
             pen.Freeze();

@@ -26,7 +26,7 @@ namespace Core2D.Style.UnitTests
             var dashes = new double[] { 2.0, 2.0, 0.0, 2.0, 0.0, 2.0 };
             var expected = "2 2 0 2 0 2";
 
-            var target = BaseStyle.ConvertDoubleArrayToDashes(dashes);
+            var target = StyleHelper.ConvertDoubleArrayToDashes(dashes);
 
             Assert.Equal(expected, target);
         }
@@ -38,7 +38,7 @@ namespace Core2D.Style.UnitTests
             var dashes = new float[] { 2.0f, 2.0f, 0.0f, 2.0f, 0.0f, 2.0f };
             var expected = "2 2 0 2 0 2";
 
-            var target = BaseStyle.ConvertFloatArrayToDashes(dashes);
+            var target = StyleHelper.ConvertFloatArrayToDashes(dashes);
 
             Assert.Equal(expected, target);
         }
@@ -50,7 +50,7 @@ namespace Core2D.Style.UnitTests
             var dashes = "2 2 0 2 0 2";
             var expected = new double[] { 2.0, 2.0, 0.0, 2.0, 0.0, 2.0 };
 
-            var target = BaseStyle.ConvertDashesToDoubleArray(dashes);
+            var target = StyleHelper.ConvertDashesToDoubleArray(dashes);
 
             Assert.Equal(expected, target);
         }
@@ -62,7 +62,7 @@ namespace Core2D.Style.UnitTests
             var dashes = "2 2 0 2 0 2";
             var expected = new float[] { 2.0f, 2.0f, 0.0f, 2.0f, 0.0f, 2.0f };
 
-            var target = BaseStyle.ConvertDashesToFloatArray(dashes);
+            var target = StyleHelper.ConvertDashesToFloatArray(dashes);
 
             Assert.Equal(expected, target);
         }
@@ -71,7 +71,7 @@ namespace Core2D.Style.UnitTests
         [Trait("Core2D.Style", "Style")]
         public void ConvertDoubleArrayToDashes_Should_Not_Throw()
         {
-            var target = BaseStyle.ConvertDoubleArrayToDashes(null);
+            var target = StyleHelper.ConvertDoubleArrayToDashes(null);
             Assert.Null(target);
         }
 
@@ -79,7 +79,7 @@ namespace Core2D.Style.UnitTests
         [Trait("Core2D.Style", "Style")]
         public void ConvertFloatArrayToDashes_Should_Not_Throw()
         {
-            var target = BaseStyle.ConvertFloatArrayToDashes(null);
+            var target = StyleHelper.ConvertFloatArrayToDashes(null);
             Assert.Null(target);
         }
 
@@ -88,7 +88,7 @@ namespace Core2D.Style.UnitTests
         public void ConvertDashesToDoubleArray_Should_Not_Throw()
         {
             var dashes = "0 A";
-            var target = BaseStyle.ConvertDashesToDoubleArray(dashes);
+            var target = StyleHelper.ConvertDashesToDoubleArray(dashes);
             Assert.Null(target);
         }
 
@@ -97,7 +97,7 @@ namespace Core2D.Style.UnitTests
         public void ConvertDashesToFloatArray_Should_Not_Throw()
         {
             var dashes = "0 A";
-            var target = BaseStyle.ConvertDashesToFloatArray(dashes);
+            var target = StyleHelper.ConvertDashesToFloatArray(dashes);
             Assert.Null(target);
         }
 
