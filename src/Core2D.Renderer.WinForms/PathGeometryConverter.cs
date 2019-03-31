@@ -34,7 +34,7 @@ namespace Core2D.Renderer.WinForms
 
                 foreach (var segment in pf.Segments)
                 {
-                    if (segment is ArcSegment arcSegment)
+                    if (segment is IArcSegment arcSegment)
                     {
                         throw new NotSupportedException("Not supported segment type: " + segment.GetType());
                         // TODO: Convert WPF/SVG elliptical arc segment format to GDI+ bezier curves.

@@ -71,9 +71,9 @@ namespace Core2D.Renderer.PdfSharp
                             scale(cubicBezierSegment.Point3.Y + dy));
                         startPoint = cubicBezierSegment.Point3;
                     }
-                    else if (segment is LineSegment)
+                    else if (segment is ILineSegment)
                     {
-                        var lineSegment = segment as LineSegment;
+                        var lineSegment = segment as ILineSegment;
                         gp.AddLine(
                             scale(startPoint.X + dx),
                             scale(startPoint.Y + dy),
@@ -196,7 +196,7 @@ namespace Core2D.Renderer.PdfSharp
 
                         startPoint = polyQuadraticSegment.Points.Last();
                     }
-                    else if (segment is QuadraticBezierSegment quadraticBezierSegment)
+                    else if (segment is IQuadraticBezierSegment quadraticBezierSegment)
                     {
                         var p1 = startPoint;
                         var p2 = quadraticBezierSegment.Point1;
