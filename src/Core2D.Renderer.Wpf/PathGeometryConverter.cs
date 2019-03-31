@@ -163,7 +163,7 @@ namespace Core2D.Renderer.Wpf
 
                     foreach (var segment in xpf.Segments)
                     {
-                        if (segment is ArcSegment arcSegment)
+                        if (segment is IArcSegment arcSegment)
                         {
                             sgc.ArcTo(
                                 new W.Point(arcSegment.Point.X + dx, arcSegment.Point.Y + dy),
@@ -174,7 +174,7 @@ namespace Core2D.Renderer.Wpf
                                 arcSegment.IsStroked,
                                 arcSegment.IsSmoothJoin);
                         }
-                        else if (segment is CubicBezierSegment cubicBezierSegment)
+                        else if (segment is ICubicBezierSegment cubicBezierSegment)
                         {
                             sgc.BezierTo(
                                 new W.Point(cubicBezierSegment.Point1.X + dx, cubicBezierSegment.Point1.Y + dy),
@@ -183,35 +183,35 @@ namespace Core2D.Renderer.Wpf
                                 cubicBezierSegment.IsStroked,
                                 cubicBezierSegment.IsSmoothJoin);
                         }
-                        else if (segment is LineSegment lineSegment)
+                        else if (segment is ILineSegment lineSegment)
                         {
                             sgc.LineTo(
                                 new W.Point(lineSegment.Point.X + dx, lineSegment.Point.Y + dy),
                                 lineSegment.IsStroked,
                                 lineSegment.IsSmoothJoin);
                         }
-                        else if (segment is PolyCubicBezierSegment polyCubicBezierSegment)
+                        else if (segment is IPolyCubicBezierSegment polyCubicBezierSegment)
                         {
                             sgc.PolyBezierTo(
                                 ToPoints(polyCubicBezierSegment.Points, dx, dy),
                                 polyCubicBezierSegment.IsStroked,
                                 polyCubicBezierSegment.IsSmoothJoin);
                         }
-                        else if (segment is PolyLineSegment polyLineSegment)
+                        else if (segment is IPolyLineSegment polyLineSegment)
                         {
                             sgc.PolyLineTo(
                                 ToPoints(polyLineSegment.Points, dx, dy),
                                 polyLineSegment.IsStroked,
                                 polyLineSegment.IsSmoothJoin);
                         }
-                        else if (segment is PolyQuadraticBezierSegment polyQuadraticSegment)
+                        else if (segment is IPolyQuadraticBezierSegment polyQuadraticSegment)
                         {
                             sgc.PolyQuadraticBezierTo(
                                 ToPoints(polyQuadraticSegment.Points, dx, dy),
                                 polyQuadraticSegment.IsStroked,
                                 polyQuadraticSegment.IsSmoothJoin);
                         }
-                        else if (segment is QuadraticBezierSegment quadraticBezierSegment)
+                        else if (segment is IQuadraticBezierSegment quadraticBezierSegment)
                         {
                             sgc.QuadraticBezierTo(
                                 new W.Point(quadraticBezierSegment.Point1.X + dx, quadraticBezierSegment.Point1.Y + dy),
