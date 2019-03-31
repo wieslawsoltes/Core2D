@@ -72,7 +72,7 @@ namespace Core2D.UnitTests
             target.BeginFigure(_factory.CreatePointShape());
             Assert.Empty(geometry.Figures[0].Segments);
 
-            target.ArcTo(_factory.CreatePointShape(), _factory.CreatePathSize());
+            target.ArcTo(_factory.CreatePointShape(), _factory.CreatePathSize(), 0.0, false, SweepDirection.Clockwise, true, true);
 
             var segment = geometry.Figures[0].Segments[0];
             Assert.IsType<ArcSegment>(segment);
