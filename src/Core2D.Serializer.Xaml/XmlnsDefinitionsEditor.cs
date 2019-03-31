@@ -7,6 +7,7 @@ using Core2D.Serializer.Xaml;
 [assembly: XmlnsDefinition(XamlConstants.EditorNamespace, "Core2D.Editor.Bounds", AssemblyName = "Core2D.Editor")]
 [assembly: XmlnsDefinition(XamlConstants.EditorNamespace, "Core2D.Editor.Bounds.Shapes", AssemblyName = "Core2D.Editor")]
 [assembly: XmlnsDefinition(XamlConstants.EditorNamespace, "Core2D.Editor.Designer", AssemblyName = "Core2D.Editor")]
+[assembly: XmlnsDefinition(XamlConstants.EditorNamespace, "Core2D.Editor.Factories", AssemblyName = "Core2D.Editor")]
 [assembly: XmlnsDefinition(XamlConstants.EditorNamespace, "Core2D.Editor.Input", AssemblyName = "Core2D.Editor")]
 [assembly: XmlnsDefinition(XamlConstants.EditorNamespace, "Core2D.Editor.Recent", AssemblyName = "Core2D.Editor")]
 [assembly: XmlnsDefinition(XamlConstants.EditorNamespace, "Core2D.Editor.Tools", AssemblyName = "Core2D.Editor")]
