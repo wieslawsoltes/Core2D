@@ -5,7 +5,11 @@ namespace Core2D.Serializer.Xaml
 {
     public static class XamlConstants
     {
-        public const string CoreNamespace = "https://github.com/wieslawsoltes/Core2D";
+        public const string BaseNamespace = "https://github.com/wieslawsoltes/Core2D.Base";
+
+        public const string ModelNamespace = "https://github.com/wieslawsoltes/Core2D.Model";
+
+        public const string ViewModelsNamespace = "https://github.com/wieslawsoltes/Core2D.ViewModels";
 
         public const string EditorNamespace = "https://github.com/wieslawsoltes/Core2D.Editor";
 
