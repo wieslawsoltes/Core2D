@@ -54,7 +54,7 @@ namespace Core2D.Renderer.Avalonia
                 ImmutableArray.Create<IPathFigure>(),
                 pg.FillRule == AM.FillRule.EvenOdd ? FillRule.EvenOdd : FillRule.Nonzero);
 
-            var context = new PathGeometryContext(factory, geometry);
+            var context = factory.CreateGeometryContext(geometry);
 
             foreach (var pf in pg.Figures)
             {

@@ -259,6 +259,19 @@ namespace Core2D.Interfaces
         IPathGeometry CreatePathGeometry(ImmutableArray<IPathFigure> figures, FillRule fillRule = FillRule.Nonzero);
 
         /// <summary>
+        /// Creates a new <see cref="IGeometryContext"/> instance.
+        /// </summary>
+        /// <returns>The new instance of the <see cref="IGeometryContext"/> class.</returns>
+        IGeometryContext CreateGeometryContext();
+
+        /// <summary>
+        /// Creates a new <see cref="IGeometryContext"/> instance.
+        /// </summary>
+        /// <param name="geometry">The path geometry.</param>
+        /// <returns>The new instance of the <see cref="IGeometryContext"/> class.</returns>
+        IGeometryContext CreateGeometryContext(IPathGeometry geometry);
+
+        /// <summary>
         /// Creates a new <see cref="IPathFigure"/> instance.
         /// </summary>
         /// <param name="isFilled">The flag indicating whether path is filled.</param>
