@@ -7,15 +7,15 @@ namespace Core2D.Editor
     /// <summary>
     /// Project editor input target.
     /// </summary>
-    public class ProjectInputTarget : IInputTarget
+    public class ProjectEditorInputTarget : IInputTarget
     {
         private readonly ProjectEditor _editor;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ProjectInputTarget"/> class.
+        /// Initializes a new instance of the <see cref="ProjectEditorInputTarget"/> class.
         /// </summary>
         /// <param name="editor">The current <see cref="ProjectEditor"/> object.</param>
-        public ProjectInputTarget(ProjectEditor editor)
+        public ProjectEditorInputTarget(ProjectEditor editor)
         {
             _editor = editor;
         }

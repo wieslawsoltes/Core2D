@@ -17,7 +17,7 @@ namespace Core2D.UI.Avalonia.Views
     public class PageControl : UserControl
     {
         private AvaloniaInputSource _inputSource = null;
-        private ProjectInputTarget _inputTarget = null;
+        private ProjectEditorInputTarget _inputTarget = null;
         private InputProcessor _inputProcessor = null;
         private bool _isLoaded = false;
         private ContainerControl _containerControlData = null;
@@ -113,7 +113,7 @@ namespace Core2D.UI.Avalonia.Views
                         _zoomBorder,
                         _containerControlEditor,
                         p => p);
-                _inputTarget = new ProjectInputTarget(projectEditor);
+                _inputTarget = new ProjectEditorInputTarget(projectEditor);
                 _inputProcessor = new InputProcessor();
                 _inputProcessor.Connect(_inputSource, _inputTarget);
 

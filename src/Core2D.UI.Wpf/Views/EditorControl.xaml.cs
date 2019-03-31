@@ -22,7 +22,7 @@ namespace Core2D.UI.Wpf.Views
     {
         private ProjectEditor _projectEditor = null;
         private WpfInputSource _inputSource = null;
-        private ProjectInputTarget _inputTarget = null;
+        private ProjectEditorInputTarget _inputTarget = null;
         private InputProcessor _inputProcessor = null;
         private bool _isLoaded = false;
         private bool _restoreLayout = true;
@@ -236,7 +236,7 @@ namespace Core2D.UI.Wpf.Views
                 zoomBorder.InvalidatedChild = InvalidateChild;
 
                 _inputSource = new WpfInputSource(zoomBorder, drawableControl, (point) => point);
-                _inputTarget = new ProjectInputTarget(_projectEditor);
+                _inputTarget = new ProjectEditorInputTarget(_projectEditor);
                 _inputProcessor = new InputProcessor();
                 _inputProcessor.Connect(_inputSource, _inputTarget);
 
