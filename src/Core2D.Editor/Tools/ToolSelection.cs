@@ -184,6 +184,13 @@ namespace Core2D.Editor.Tools
             }
         }
 
+        private bool IsSelectionAvailable()
+        {
+            var editor = _serviceProvider.GetService<ProjectEditor>();
+            return editor?.Renderers?[0]?.State?.SelectedShape != null
+                || editor?.Renderers?[0]?.State?.SelectedShapes != null;
+        }
+
         /// <inheritdoc/>
         public override void LeftDown(InputArgs args)
         {
@@ -264,7 +271,7 @@ namespace Core2D.Editor.Tools
                     break;
                 case State.Selected:
                     {
-                        if (editor.IsSelectionAvailable())
+                        if (IsSelectionAvailable())
                         {
                             (double sx, double sy) = editor.TryToSnap(args);
                             if (_historyX != sx || _historyY != sy)
@@ -357,7 +364,7 @@ namespace Core2D.Editor.Tools
                     break;
                 case State.Selected:
                     {
-                        if (editor.IsSelectionAvailable())
+                        if (IsSelectionAvailable())
                         {
                             MoveSelectionCacheTo(args);
                             editor.Project.CurrentContainer.CurrentLayer.Invalidate();
