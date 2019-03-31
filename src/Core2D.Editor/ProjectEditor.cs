@@ -412,8 +412,8 @@ namespace Core2D.Editor
             if (document != null)
             {
                 var page =
-                    ContainerFactory?.GetPage(Project, Constants.DefaultPageName)
-                    ?? Factory.CreatePageContainer(Constants.DefaultPageName);
+                    ContainerFactory?.GetPage(Project, ProjectEditorConfiguration.DefaultPageName)
+                    ?? Factory.CreatePageContainer(ProjectEditorConfiguration.DefaultPageName);
 
                 Project?.AddPage(document, page);
                 Project?.SetCurrentContainer(page);
@@ -427,8 +427,8 @@ namespace Core2D.Editor
         public void OnNewPage(IDocumentContainer selected)
         {
             var page =
-                ContainerFactory?.GetPage(Project, Constants.DefaultPageName)
-                ?? Factory.CreatePageContainer(Constants.DefaultPageName);
+                ContainerFactory?.GetPage(Project, ProjectEditorConfiguration.DefaultPageName)
+                ?? Factory.CreatePageContainer(ProjectEditorConfiguration.DefaultPageName);
 
             Project?.AddPage(selected, page);
             Project?.SetCurrentContainer(page);
@@ -440,8 +440,8 @@ namespace Core2D.Editor
         public void OnNewDocument()
         {
             var document =
-                ContainerFactory?.GetDocument(Project, Constants.DefaultDocumentName)
-                ?? Factory.CreateDocumentContainer(Constants.DefaultDocumentName);
+                ContainerFactory?.GetDocument(Project, ProjectEditorConfiguration.DefaultDocumentName)
+                ?? Factory.CreateDocumentContainer(ProjectEditorConfiguration.DefaultDocumentName);
 
             Project?.AddDocument(document);
             Project?.SetCurrentDocument(document);
@@ -1253,7 +1253,7 @@ namespace Core2D.Editor
         /// </summary>
         public void OnGroupSelected()
         {
-            var group = Group(Renderers?[0]?.State?.SelectedShapes, Constants.DefaulGroupName);
+            var group = Group(Renderers?[0]?.State?.SelectedShapes, ProjectEditorConfiguration.DefaulGroupName);
             if (group != null)
             {
                 Select(Project?.CurrentContainer?.CurrentLayer, group);
@@ -1635,7 +1635,7 @@ namespace Core2D.Editor
         /// </summary>
         public void OnAddDatabase()
         {
-            var db = Factory.CreateDatabase(Constants.DefaultDatabaseName);
+            var db = Factory.CreateDatabase(ProjectEditorConfiguration.DefaultDatabaseName);
             Project.AddDatabase(db);
             Project.SetCurrentDatabase(db);
         }
@@ -1656,7 +1656,7 @@ namespace Core2D.Editor
         /// <param name="db">The records database.</param>
         public void OnAddColumn(IDatabase db)
         {
-            Project.AddColumn(db, Factory.CreateColumn(db, Constants.DefaulColumnName));
+            Project.AddColumn(db, Factory.CreateColumn(db, ProjectEditorConfiguration.DefaulColumnName));
         }
 
         /// <summary>
@@ -1674,7 +1674,7 @@ namespace Core2D.Editor
         /// <param name="db">The records database.</param>
         public void OnAddRecord(IDatabase db)
         {
-            Project.AddRecord(db, Factory.CreateRecord(db, Constants.DefaulValue));
+            Project.AddRecord(db, Factory.CreateRecord(db, ProjectEditorConfiguration.DefaulValue));
         }
 
         /// <summary>
@@ -1736,7 +1736,7 @@ namespace Core2D.Editor
         /// <param name="data">The data context.</param>
         public void OnAddProperty(IContext data)
         {
-            Project.AddProperty(data, Factory.CreateProperty(data, Constants.DefaulPropertyName, Constants.DefaulValue));
+            Project.AddProperty(data, Factory.CreateProperty(data, ProjectEditorConfiguration.DefaulPropertyName, ProjectEditorConfiguration.DefaulValue));
         }
 
         /// <summary>
@@ -1753,7 +1753,7 @@ namespace Core2D.Editor
         /// </summary>
         public void OnAddGroupLibrary()
         {
-            var gl = Factory.CreateLibrary<IGroupShape>(Constants.DefaulGroupLibraryName);
+            var gl = Factory.CreateLibrary<IGroupShape>(ProjectEditorConfiguration.DefaulGroupLibraryName);
             Project.AddGroupLibrary(gl);
             Project.SetCurrentGroupLibrary(gl);
         }
@@ -1818,7 +1818,7 @@ namespace Core2D.Editor
         /// <param name="container">The container instance.</param>
         public void OnAddLayer(IPageContainer container)
         {
-            Project.AddLayer(container, Factory.CreateLayerContainer(Constants.DefaultLayerName, container));
+            Project.AddLayer(container, Factory.CreateLayerContainer(ProjectEditorConfiguration.DefaultLayerName, container));
         }
 
         /// <summary>
@@ -1839,7 +1839,7 @@ namespace Core2D.Editor
         /// </summary>
         public void OnAddStyleLibrary()
         {
-            var sl = Factory.CreateLibrary<IShapeStyle>(Constants.DefaulStyleLibraryName);
+            var sl = Factory.CreateLibrary<IShapeStyle>(ProjectEditorConfiguration.DefaulStyleLibraryName);
             Project.AddStyleLibrary(sl);
             Project.SetCurrentStyleLibrary(sl);
         }
@@ -1860,7 +1860,7 @@ namespace Core2D.Editor
         /// <param name="library">The style library.</param>
         public void OnAddStyle(ILibrary<IShapeStyle> library)
         {
-            Project.AddStyle(library, Factory.CreateShapeStyle(Constants.DefaulStyleName));
+            Project.AddStyle(library, Factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName));
         }
 
         /// <summary>
@@ -1960,7 +1960,7 @@ namespace Core2D.Editor
                 var template = ContainerFactory.GetTemplate(Project, "Empty");
                 if (template == null)
                 {
-                    template = Factory.CreateTemplateContainer(Constants.DefaultTemplateName);
+                    template = Factory.CreateTemplateContainer(ProjectEditorConfiguration.DefaultTemplateName);
                 }
 
                 Project.AddTemplate(template);
@@ -2077,8 +2077,8 @@ namespace Core2D.Editor
             if (Project?.CurrentDocument != null)
             {
                 var page =
-                    ContainerFactory?.GetPage(Project, Constants.DefaultPageName)
-                    ?? Factory.CreatePageContainer(Constants.DefaultPageName);
+                    ContainerFactory?.GetPage(Project, ProjectEditorConfiguration.DefaultPageName)
+                    ?? Factory.CreatePageContainer(ProjectEditorConfiguration.DefaultPageName);
 
                 Project.AddPage(Project.CurrentDocument, page);
                 Project.SetCurrentContainer(page);
@@ -2097,8 +2097,8 @@ namespace Core2D.Editor
                 {
                     int index = Project.CurrentDocument.Pages.IndexOf(selected);
                     var page =
-                        ContainerFactory?.GetPage(Project, Constants.DefaultPageName)
-                        ?? Factory.CreatePageContainer(Constants.DefaultPageName);
+                        ContainerFactory?.GetPage(Project, ProjectEditorConfiguration.DefaultPageName)
+                        ?? Factory.CreatePageContainer(ProjectEditorConfiguration.DefaultPageName);
 
                     Project.AddPageAt(Project.CurrentDocument, page, index);
                     Project.SetCurrentContainer(page);
@@ -2118,8 +2118,8 @@ namespace Core2D.Editor
                 {
                     int index = Project.CurrentDocument.Pages.IndexOf(selected);
                     var page =
-                        ContainerFactory?.GetPage(Project, Constants.DefaultPageName)
-                        ?? Factory.CreatePageContainer(Constants.DefaultPageName);
+                        ContainerFactory?.GetPage(Project, ProjectEditorConfiguration.DefaultPageName)
+                        ?? Factory.CreatePageContainer(ProjectEditorConfiguration.DefaultPageName);
 
                     Project.AddPageAt(Project.CurrentDocument, page, index + 1);
                     Project.SetCurrentContainer(page);
@@ -2136,8 +2136,8 @@ namespace Core2D.Editor
             if (Project != null)
             {
                 var document =
-                    ContainerFactory?.GetDocument(Project, Constants.DefaultDocumentName)
-                    ?? Factory.CreateDocumentContainer(Constants.DefaultDocumentName);
+                    ContainerFactory?.GetDocument(Project, ProjectEditorConfiguration.DefaultDocumentName)
+                    ?? Factory.CreateDocumentContainer(ProjectEditorConfiguration.DefaultDocumentName);
 
                 Project.AddDocument(document);
                 Project.SetCurrentDocument(document);
@@ -2157,8 +2157,8 @@ namespace Core2D.Editor
                 {
                     int index = Project.Documents.IndexOf(selected);
                     var document =
-                        ContainerFactory?.GetDocument(Project, Constants.DefaultDocumentName)
-                        ?? Factory.CreateDocumentContainer(Constants.DefaultDocumentName);
+                        ContainerFactory?.GetDocument(Project, ProjectEditorConfiguration.DefaultDocumentName)
+                        ?? Factory.CreateDocumentContainer(ProjectEditorConfiguration.DefaultDocumentName);
 
                     Project.AddDocumentAt(document, index);
                     Project.SetCurrentDocument(document);
@@ -2179,8 +2179,8 @@ namespace Core2D.Editor
                 {
                     int index = Project.Documents.IndexOf(selected);
                     var document =
-                        ContainerFactory?.GetDocument(Project, Constants.DefaultDocumentName)
-                        ?? Factory.CreateDocumentContainer(Constants.DefaultDocumentName);
+                        ContainerFactory?.GetDocument(Project, ProjectEditorConfiguration.DefaultDocumentName)
+                        ?? Factory.CreateDocumentContainer(ProjectEditorConfiguration.DefaultDocumentName);
 
                     Project.AddDocumentAt(document, index + 1);
                     Project.SetCurrentDocument(document);
@@ -2592,7 +2592,7 @@ namespace Core2D.Editor
                             // Create Imported style library.
                             if (Project?.CurrentStyleLibrary == null)
                             {
-                                var sl = Factory.CreateLibrary<IShapeStyle>(Constants.ImportedStyleLibraryName);
+                                var sl = Factory.CreateLibrary<IShapeStyle>(ProjectEditorConfiguration.ImportedStyleLibraryName);
                                 Project.AddStyleLibrary(sl);
                                 Project.SetCurrentStyleLibrary(sl);
                             }
@@ -2650,7 +2650,7 @@ namespace Core2D.Editor
                         if (Project?.CurrentDatabase == null && shape.Data.Record.Owner is IDatabase owner)
                         {
                             var db = Factory.CreateDatabase(
-                                Constants.ImportedDatabaseName,
+                                ProjectEditorConfiguration.ImportedDatabaseName,
                                 (ImmutableArray<IColumn>)owner.Columns);
                             Project.AddDatabase(db);
                             Project.SetCurrentDatabase(db);
@@ -2870,27 +2870,27 @@ namespace Core2D.Editor
 
                         string ext = System.IO.Path.GetExtension(path);
 
-                        if (string.Compare(ext, Constants.ProjectExtension, StringComparison.OrdinalIgnoreCase) == 0)
+                        if (string.Compare(ext, ProjectEditorConfiguration.ProjectExtension, StringComparison.OrdinalIgnoreCase) == 0)
                         {
                             OnOpenProject(path);
                             result = true;
                         }
-                        else if (string.Compare(ext, Constants.CsvExtension, StringComparison.OrdinalIgnoreCase) == 0)
+                        else if (string.Compare(ext, ProjectEditorConfiguration.CsvExtension, StringComparison.OrdinalIgnoreCase) == 0)
                         {
                             OnImportData(path);
                             result = true;
                         }
-                        else if (string.Compare(ext, Constants.JsonExtension, StringComparison.OrdinalIgnoreCase) == 0)
+                        else if (string.Compare(ext, ProjectEditorConfiguration.JsonExtension, StringComparison.OrdinalIgnoreCase) == 0)
                         {
                             OnImportJson(path);
                             result = true;
                         }
-                        else if (string.Compare(ext, Constants.XamlExtension, StringComparison.OrdinalIgnoreCase) == 0)
+                        else if (string.Compare(ext, ProjectEditorConfiguration.XamlExtension, StringComparison.OrdinalIgnoreCase) == 0)
                         {
                             OnImportXaml(path);
                             result = true;
                         }
-                        else if (string.Compare(ext, Constants.ScriptExtension, StringComparison.OrdinalIgnoreCase) == 0)
+                        else if (string.Compare(ext, ProjectEditorConfiguration.ScriptExtension, StringComparison.OrdinalIgnoreCase) == 0)
                         {
                             OnExecuteScript(path);
                             result = true;
@@ -3094,7 +3094,7 @@ namespace Core2D.Editor
             double sx = Project.Options.SnapToGrid ? Snap(x, Project.Options.SnapX) : x;
             double sy = Project.Options.SnapToGrid ? Snap(y, Project.Options.SnapY) : y;
 
-            var g = Factory.CreateGroupShape(Constants.DefaulGroupName);
+            var g = Factory.CreateGroupShape(ProjectEditorConfiguration.DefaulGroupName);
 
             g.Data.Record = record;
 

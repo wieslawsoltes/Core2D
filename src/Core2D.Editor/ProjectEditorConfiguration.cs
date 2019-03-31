@@ -8,9 +8,9 @@ using Core2D.Style;
 namespace Core2D.Editor
 {
     /// <summary>
-    /// Editor constants.
+    /// Project editor configuration.
     /// </summary>
-    public static class Constants
+    public static class ProjectEditorConfiguration
     {
         /// <summary>
         /// Default <see cref="ILayerContainer"/> name.
