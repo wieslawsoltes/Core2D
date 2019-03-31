@@ -66,7 +66,7 @@ namespace Core2D.Editor.Tools
                         var style = editor.Project.CurrentStyleLibrary.Selected;
                         _line = factory.CreateLineShape(
                             sx, sy,
-                            editor.Project.Options.CloneStyle ? style.Clone() : style,
+                            editor.Project.Options.CloneStyle ? (IShapeStyle)style.Copy(null) : style,
                             editor.Project.Options.PointShape,
                             editor.Project.Options.DefaultIsStroked);
                         if (editor.Project.Options.TryToConnect)

@@ -64,8 +64,8 @@ namespace Core2D.Style
         /// <param name="source">The source style.</param>
         public ArrowStyle(IBaseStyle source) : this()
         {
-            Stroke = source.Stroke.Clone();
-            Fill = source.Fill.Clone();
+            Stroke = (IColor)source.Stroke.Copy(null);
+            Fill = (IColor)source.Fill.Copy(null);
             Thickness = source.Thickness;
             LineCap = source.LineCap;
             Dashes = source.Dashes ?? (default);
@@ -75,7 +75,21 @@ namespace Core2D.Style
         /// <inheritdoc/>
         public override object Copy(IDictionary<object, object> shared)
         {
-            throw new NotImplementedException();
+            return new ArrowStyle()
+            {
+                Name = this.Name,
+                Stroke = (IColor)this.Stroke.Copy(shared),
+                Fill = (IColor)this.Fill.Copy(shared),
+                Thickness = this.Thickness,
+                LineCap = this.LineCap,
+                Dashes = this.Dashes,
+                DashOffset = this.DashOffset,
+                ArrowType = this.ArrowType,
+                IsStroked = this.IsStroked,
+                IsFilled = this.IsFilled,
+                RadiusX = this.RadiusX,
+                RadiusY = this.RadiusY
+            };
         }
 
         /// <summary>

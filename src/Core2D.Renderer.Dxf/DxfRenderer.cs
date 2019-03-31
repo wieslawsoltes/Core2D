@@ -348,13 +348,13 @@ namespace Core2D.Renderer.Dxf
 
                 foreach (var segment in pf.Segments)
                 {
-                    if (segment is ArcSegment arcSegment)
+                    if (segment is IArcSegment arcSegment)
                     {
                         throw new NotSupportedException("Not supported segment type: " + segment.GetType());
                         // TODO: Convert WPF/SVG elliptical arc segment format to DXF ellipse arc.
                         //startPoint = arcSegment.Point;
                     }
-                    else if (segment is CubicBezierSegment cubicBezierSegment)
+                    else if (segment is ICubicBezierSegment cubicBezierSegment)
                     {
                         var dxfSpline = CreateCubicSpline(
                             startPoint.X + dx,
@@ -369,7 +369,7 @@ namespace Core2D.Renderer.Dxf
                         entities.Add((DXFE.Spline)dxfSpline.Clone());
                         startPoint = cubicBezierSegment.Point3;
                     }
-                    else if (segment is LineSegment lineSegment)
+                    else if (segment is ILineSegment lineSegment)
                     {
                         var dxfLine = CreateLine(
                             startPoint.X + dx,
@@ -380,7 +380,7 @@ namespace Core2D.Renderer.Dxf
                         entities.Add((DXFE.Line)dxfLine.Clone());
                         startPoint = lineSegment.Point;
                     }
-                    else if (segment is PolyCubicBezierSegment polyCubicBezierSegment)
+                    else if (segment is IPolyCubicBezierSegment polyCubicBezierSegment)
                     {
                         if (polyCubicBezierSegment.Points.Length >= 3)
                         {
@@ -418,7 +418,7 @@ namespace Core2D.Renderer.Dxf
 
                         startPoint = polyCubicBezierSegment.Points.Last();
                     }
-                    else if (segment is PolyLineSegment polyLineSegment)
+                    else if (segment is IPolyLineSegment polyLineSegment)
                     {
                         if (polyLineSegment.Points.Length >= 1)
                         {
@@ -447,7 +447,7 @@ namespace Core2D.Renderer.Dxf
 
                         startPoint = polyLineSegment.Points.Last();
                     }
-                    else if (segment is PolyQuadraticBezierSegment polyQuadraticSegment)
+                    else if (segment is IPolyQuadraticBezierSegment polyQuadraticSegment)
                     {
                         if (polyQuadraticSegment.Points.Length >= 2)
                         {
@@ -481,7 +481,7 @@ namespace Core2D.Renderer.Dxf
 
                         startPoint = polyQuadraticSegment.Points.Last();
                     }
-                    else if (segment is QuadraticBezierSegment quadraticBezierSegment)
+                    else if (segment is IQuadraticBezierSegment quadraticBezierSegment)
                     {
                         var dxfSpline = CreateQuadraticSpline(
                             startPoint.X + dx,

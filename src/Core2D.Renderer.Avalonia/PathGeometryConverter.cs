@@ -54,7 +54,7 @@ namespace Core2D.Renderer.Avalonia
                 ImmutableArray.Create<IPathFigure>(),
                 pg.FillRule == AM.FillRule.EvenOdd ? FillRule.EvenOdd : FillRule.Nonzero);
 
-            var context = new PathGeometryContext(factory, geometry);
+            var context = factory.CreateGeometryContext(geometry);
 
             foreach (var pf in pg.Figures)
             {
@@ -127,7 +127,7 @@ namespace Core2D.Renderer.Avalonia
 
                     foreach (var segment in xpf.Segments)
                     {
-                        if (segment is ArcSegment arcSegment)
+                        if (segment is IArcSegment arcSegment)
                         {
                             sgc.ArcTo(
                                 new A.Point(arcSegment.Point.X + dx, arcSegment.Point.Y + dy),
@@ -138,7 +138,7 @@ namespace Core2D.Renderer.Avalonia
 
                             previous = arcSegment.Point;
                         }
-                        else if (segment is CubicBezierSegment cubicBezierSegment)
+                        else if (segment is ICubicBezierSegment cubicBezierSegment)
                         {
                             sgc.CubicBezierTo(
                                 new A.Point(cubicBezierSegment.Point1.X + dx, cubicBezierSegment.Point1.Y + dy),
@@ -147,14 +147,14 @@ namespace Core2D.Renderer.Avalonia
 
                             previous = cubicBezierSegment.Point3;
                         }
-                        else if (segment is LineSegment lineSegment)
+                        else if (segment is ILineSegment lineSegment)
                         {
                             sgc.LineTo(
                                 new A.Point(lineSegment.Point.X + dx, lineSegment.Point.Y + dy));
 
                             previous = lineSegment.Point;
                         }
-                        else if (segment is PolyCubicBezierSegment polyCubicBezierSegment)
+                        else if (segment is IPolyCubicBezierSegment polyCubicBezierSegment)
                         {
                             if (polyCubicBezierSegment.Points.Length >= 3)
                             {
@@ -192,7 +192,7 @@ namespace Core2D.Renderer.Avalonia
                                 }
                             }
                         }
-                        else if (segment is PolyLineSegment polyLineSegment)
+                        else if (segment is IPolyLineSegment polyLineSegment)
                         {
                             if (polyLineSegment.Points.Length >= 1)
                             {
@@ -217,7 +217,7 @@ namespace Core2D.Renderer.Avalonia
                                 }
                             }
                         }
-                        else if (segment is PolyQuadraticBezierSegment polyQuadraticSegment)
+                        else if (segment is IPolyQuadraticBezierSegment polyQuadraticSegment)
                         {
                             if (polyQuadraticSegment.Points.Length >= 2)
                             {
@@ -249,7 +249,7 @@ namespace Core2D.Renderer.Avalonia
                                 }
                             }
                         }
-                        else if (segment is QuadraticBezierSegment quadraticBezierSegment)
+                        else if (segment is IQuadraticBezierSegment quadraticBezierSegment)
                         {
                             sgc.QuadraticBezierTo(
                                 new A.Point(

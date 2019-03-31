@@ -9,6 +9,7 @@
   <Import Project="..\..\build\Base.props" />
 
   <ItemGroup>
+    <ProjectReference Include="..\Core2D.Base\Core2D.Base.csproj" />
     <ProjectReference Include="..\Core2D.Model\Core2D.Model.csproj" />
   </ItemGroup>
 

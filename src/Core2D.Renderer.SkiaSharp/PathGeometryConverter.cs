@@ -41,7 +41,7 @@ namespace Core2D.Renderer.SkiaSharp
 
                 foreach (var segment in xpf.Segments)
                 {
-                    if (segment is ArcSegment arcSegment)
+                    if (segment is IArcSegment arcSegment)
                     {
                         path.ArcTo(
                             scale(arcSegment.Size.Width),
@@ -54,7 +54,7 @@ namespace Core2D.Renderer.SkiaSharp
 
                         previous = arcSegment.Point;
                     }
-                    else if (segment is CubicBezierSegment cubicBezierSegment)
+                    else if (segment is ICubicBezierSegment cubicBezierSegment)
                     {
                         path.CubicTo(
                             scale(cubicBezierSegment.Point1.X + dx),
@@ -66,7 +66,7 @@ namespace Core2D.Renderer.SkiaSharp
 
                         previous = cubicBezierSegment.Point3;
                     }
-                    else if (segment is LineSegment lineSegment)
+                    else if (segment is ILineSegment lineSegment)
                     {
                         path.LineTo(
                             scale(lineSegment.Point.X + dx),
@@ -74,7 +74,7 @@ namespace Core2D.Renderer.SkiaSharp
 
                         previous = lineSegment.Point;
                     }
-                    else if (segment is PolyCubicBezierSegment polyCubicBezierSegment)
+                    else if (segment is IPolyCubicBezierSegment polyCubicBezierSegment)
                     {
                         if (polyCubicBezierSegment.Points.Length >= 3)
                         {
@@ -106,7 +106,7 @@ namespace Core2D.Renderer.SkiaSharp
                             }
                         }
                     }
-                    else if (segment is PolyLineSegment polyLineSegment)
+                    else if (segment is IPolyLineSegment polyLineSegment)
                     {
                         if (polyLineSegment.Points.Length >= 1)
                         {
@@ -129,7 +129,7 @@ namespace Core2D.Renderer.SkiaSharp
                             }
                         }
                     }
-                    else if (segment is PolyQuadraticBezierSegment polyQuadraticSegment)
+                    else if (segment is IPolyQuadraticBezierSegment polyQuadraticSegment)
                     {
                         if (polyQuadraticSegment.Points.Length >= 2)
                         {
@@ -157,7 +157,7 @@ namespace Core2D.Renderer.SkiaSharp
                             }
                         }
                     }
-                    else if (segment is QuadraticBezierSegment quadraticBezierSegment)
+                    else if (segment is IQuadraticBezierSegment quadraticBezierSegment)
                     {
                         path.QuadTo(
                             scale(quadraticBezierSegment.Point1.X + dx),

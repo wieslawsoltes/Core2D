@@ -100,7 +100,7 @@ namespace Core2D.Renderer.WinForms
             if (style.Dashes != null)
             {
                 // TODO: Convert to correct dash values.
-                pen.DashPattern = ShapeStyle.ConvertDashesToFloatArray(style.Dashes);
+                pen.DashPattern = StyleHelper.ConvertDashesToFloatArray(style.Dashes);
             }
             pen.DashOffset = (float)style.DashOffset;
             return pen;

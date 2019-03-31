@@ -352,6 +352,18 @@ namespace Core2D
         }
 
         /// <inheritdoc/>
+        public IGeometryContext CreateGeometryContext()
+        {
+            return new PathGeometryContext(this, CreatePathGeometry());
+        }
+
+        /// <inheritdoc/>
+        public IGeometryContext CreateGeometryContext(IPathGeometry geometry)
+        {
+            return new PathGeometryContext(this, geometry);
+        }
+
+        /// <inheritdoc/>
         public IPathGeometry CreatePathGeometry(ImmutableArray<IPathFigure> figures, FillRule fillRule = FillRule.Nonzero)
         {
             return new PathGeometry()

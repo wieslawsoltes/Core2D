@@ -49,7 +49,13 @@ namespace Core2D.Style
         /// <inheritdoc/>
         public override object Copy(IDictionary<object, object> shared)
         {
-            throw new NotImplementedException();
+            return new ArgbColor()
+            {
+                A = this.A,
+                R = this.R,
+                G = this.G,
+                B = this.B
+            };
         }
 
         /// <summary>

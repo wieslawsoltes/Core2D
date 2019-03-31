@@ -174,7 +174,7 @@ namespace Core2D.Editor.Tools
                 ImmutableArray.Create<IPathFigure>(),
                 editor.Project.Options.DefaultFillRule);
 
-            GeometryContext = new PathGeometryContext(factory, Geometry);
+            GeometryContext = factory.CreateGeometryContext(Geometry);
 
             GeometryContext.BeginFigure(
                 start,
@@ -184,7 +184,7 @@ namespace Core2D.Editor.Tools
             var style = editor.Project.CurrentStyleLibrary.Selected;
             Path = factory.CreatePathShape(
                 "Path",
-                editor.Project.Options.CloneStyle ? style.Clone() : style,
+                editor.Project.Options.CloneStyle ? (IShapeStyle)style.Copy(null) : style,
                 Geometry,
                 editor.Project.Options.DefaultIsStroked,
                 editor.Project.Options.DefaultIsFilled);

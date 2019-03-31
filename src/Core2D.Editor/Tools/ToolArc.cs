@@ -71,7 +71,7 @@ namespace Core2D.Editor.Tools
                         _connectedPoint4 = false;
                         _arc = factory.CreateArcShape(
                             sx, sy,
-                            editor.Project.Options.CloneStyle ? style.Clone() : style,
+                            editor.Project.Options.CloneStyle ? (IShapeStyle)style.Copy(null) : style,
                             editor.Project.Options.PointShape,
                             editor.Project.Options.DefaultIsStroked,
                             editor.Project.Options.DefaultIsFilled);

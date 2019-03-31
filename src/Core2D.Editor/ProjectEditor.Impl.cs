@@ -2808,7 +2808,7 @@ namespace Core2D.Editor
         public void OnDropRecordAsGroup(IRecord record, double x, double y)
         {
             var selected = Project.CurrentStyleLibrary.Selected;
-            var style = Project.Options.CloneStyle ? selected.Clone() : selected;
+            var style = Project.Options.CloneStyle ? (IShapeStyle)selected.Copy(null) : selected;
             var point = Project?.Options?.PointShape;
             var layer = Project?.CurrentContainer?.CurrentLayer;
             double sx = Project.Options.SnapToGrid ? Snap(x, Project.Options.SnapX) : x;

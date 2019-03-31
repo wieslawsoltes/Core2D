@@ -34,7 +34,7 @@ namespace Core2D.Renderer.PdfSharp
 
                 foreach (var segment in pf.Segments)
                 {
-                    if (segment is ArcSegment arcSegment)
+                    if (segment is IArcSegment arcSegment)
                     {
 #if WPF
                         var point1 = new PDF.XPoint(
@@ -58,7 +58,7 @@ namespace Core2D.Renderer.PdfSharp
                         //startPoint = arcSegment.Point;
 #endif
                     }
-                    else if (segment is CubicBezierSegment cubicBezierSegment)
+                    else if (segment is ICubicBezierSegment cubicBezierSegment)
                     {
                         gp.AddBezier(
                             scale(startPoint.X + dx),
@@ -71,9 +71,9 @@ namespace Core2D.Renderer.PdfSharp
                             scale(cubicBezierSegment.Point3.Y + dy));
                         startPoint = cubicBezierSegment.Point3;
                     }
-                    else if (segment is LineSegment)
+                    else if (segment is ILineSegment)
                     {
-                        var lineSegment = segment as LineSegment;
+                        var lineSegment = segment as ILineSegment;
                         gp.AddLine(
                             scale(startPoint.X + dx),
                             scale(startPoint.Y + dy),
@@ -81,7 +81,7 @@ namespace Core2D.Renderer.PdfSharp
                             scale(lineSegment.Point.Y + dy));
                         startPoint = lineSegment.Point;
                     }
-                    else if (segment is PolyCubicBezierSegment polyCubicBezierSegment)
+                    else if (segment is IPolyCubicBezierSegment polyCubicBezierSegment)
                     {
                         if (polyCubicBezierSegment.Points.Length >= 3)
                         {
@@ -115,7 +115,7 @@ namespace Core2D.Renderer.PdfSharp
 
                         startPoint = polyCubicBezierSegment.Points.Last();
                     }
-                    else if (segment is PolyLineSegment polyLineSegment)
+                    else if (segment is IPolyLineSegment polyLineSegment)
                     {
                         if (polyLineSegment.Points.Length >= 1)
                         {
@@ -140,7 +140,7 @@ namespace Core2D.Renderer.PdfSharp
 
                         startPoint = polyLineSegment.Points.Last();
                     }
-                    else if (segment is PolyQuadraticBezierSegment polyQuadraticSegment)
+                    else if (segment is IPolyQuadraticBezierSegment polyQuadraticSegment)
                     {
                         if (polyQuadraticSegment.Points.Length >= 2)
                         {
@@ -196,7 +196,7 @@ namespace Core2D.Renderer.PdfSharp
 
                         startPoint = polyQuadraticSegment.Points.Last();
                     }
-                    else if (segment is QuadraticBezierSegment quadraticBezierSegment)
+                    else if (segment is IQuadraticBezierSegment quadraticBezierSegment)
                     {
                         var p1 = startPoint;
                         var p2 = quadraticBezierSegment.Point1;

@@ -130,7 +130,7 @@ namespace Core2D.Renderer.SkiaSharp
                 StrokeWidth = scale(style.Thickness * targetDpi / sourceDpi),
                 Color = ToSKColor(style.Stroke),
                 StrokeCap = ToStrokeCap(style),
-                PathEffect = style.Dashes != null ? SKPathEffect.CreateDash(BaseStyle.ConvertDashesToFloatArray(style.Dashes), (float)style.DashOffset) : null
+                PathEffect = style.Dashes != null ? SKPathEffect.CreateDash(StyleHelper.ConvertDashesToFloatArray(style.Dashes), (float)style.DashOffset) : null
             };
         }
 

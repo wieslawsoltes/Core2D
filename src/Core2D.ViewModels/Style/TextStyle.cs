@@ -62,7 +62,16 @@ namespace Core2D.Style
         /// <inheritdoc/>
         public override object Copy(IDictionary<object, object> shared)
         {
-            throw new NotImplementedException();
+            return new TextStyle()
+            {
+                Name = this.Name,
+                FontName = this.FontName,
+                FontFile = this.FontFile,
+                FontSize = this.FontSize,
+                FontStyle = (IFontStyle)this.FontStyle.Copy(shared),
+                TextHAlignment = this.TextHAlignment,
+                TextVAlignment = this.TextVAlignment
+            };
         }
 
         /// <summary>
