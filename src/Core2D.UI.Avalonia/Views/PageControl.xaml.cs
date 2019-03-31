@@ -145,6 +145,7 @@ namespace Core2D.UI.Avalonia.Views
                 }
 
                 _inputProcessor.Dispose();
+                _inputTarget = null;
                 _inputProcessor = null;
                 _inputSource = null;
 
