@@ -23,6 +23,8 @@ share data across multiple documents, edit documents using layers.
 It also supports exporting documents to many popular file formats like pdf, bitmaps and dxf. 
 You can automate drawing and processing by using C# scripting.
 
+[![Core2D](images/Core2D.png)](images/Core2D.png)
+
 ## Supported Platforms
 
 * `Windows 7 SP1 or higher` using `Core2D.UI.Wpf` or `Core2D.UI.Avalonia` project.
