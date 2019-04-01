@@ -4,7 +4,7 @@
 namespace Core2D.Editor
 {
     /// <summary>
-    /// Defines settings base class.
+    /// Defines settings contract.
     /// </summary>
     public abstract class SettingsBase : ObservableObject
     {
