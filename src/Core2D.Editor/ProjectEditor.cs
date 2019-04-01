@@ -34,14 +34,14 @@ namespace Core2D.Editor
         private bool _isProjectDirty;
         private ProjectObserver _observer;
         private bool _isToolIdle;
-        private EditorToolBase _currentTool;
-        private PathToolBase _currentPathTool;
+        private IEditorTool _currentTool;
+        private IPathTool _currentPathTool;
         private ImmutableArray<RecentFile> _recentProjects;
         private RecentFile _currentRecentProject;
         private IDock _layout;
         private AboutInfo _aboutInfo;
-        private readonly Lazy<ImmutableArray<EditorToolBase>> _tools;
-        private readonly Lazy<ImmutableArray<PathToolBase>> _pathTools;
+        private readonly Lazy<ImmutableArray<IEditorTool>> _tools;
+        private readonly Lazy<ImmutableArray<IPathTool>> _pathTools;
         private readonly Lazy<HitTest> _hitTest;
         private readonly Lazy<ILog> _log;
         private readonly Lazy<IDataFlow> _dataFlow;
@@ -110,7 +110,7 @@ namespace Core2D.Editor
         /// <summary>
         /// Gets or sets current editor tool.
         /// </summary>
-        public EditorToolBase CurrentTool
+        public IEditorTool CurrentTool
         {
             get => _currentTool;
             set => Update(ref _currentTool, value);
@@ -119,7 +119,7 @@ namespace Core2D.Editor
         /// <summary>
         /// Gets or sets current editor path tool.
         /// </summary>
-        public PathToolBase CurrentPathTool
+        public IPathTool CurrentPathTool
         {
             get => _currentPathTool;
             set => Update(ref _currentPathTool, value);
@@ -164,12 +164,12 @@ namespace Core2D.Editor
         /// <summary>
         /// Gets or sets editor tools.
         /// </summary>
-        public ImmutableArray<EditorToolBase> Tools => _tools.Value;
+        public ImmutableArray<IEditorTool> Tools => _tools.Value;
 
         /// <summary>
         /// Gets or sets editor path tools.
         /// </summary>
-        public ImmutableArray<PathToolBase> PathTools => _pathTools.Value;
+        public ImmutableArray<IPathTool> PathTools => _pathTools.Value;
 
         /// <summary>
         /// Gets or sets current editor hit test.
@@ -283,8 +283,8 @@ namespace Core2D.Editor
             _serviceProvider = serviceProvider;
             _recentProjects = ImmutableArray.Create<RecentFile>();
             _currentRecentProject = default;
-            _tools = _serviceProvider.GetServiceLazily<EditorToolBase[], ImmutableArray<EditorToolBase>>((tools) => tools.Where(tool => !tool.GetType().Name.StartsWith("PathTool")).ToImmutableArray());
-            _pathTools = _serviceProvider.GetServiceLazily<PathToolBase[], ImmutableArray<PathToolBase>>((tools) => tools.ToImmutableArray());
+            _tools = _serviceProvider.GetServiceLazily<IEditorTool[], ImmutableArray<IEditorTool>>((tools) => tools.Where(tool => !tool.GetType().Name.StartsWith("PathTool")).ToImmutableArray());
+            _pathTools = _serviceProvider.GetServiceLazily<IPathTool[], ImmutableArray<IPathTool>>((tools) => tools.ToImmutableArray());
             _hitTest = _serviceProvider.GetServiceLazily<HitTest>(hitTests => hitTests.Register(_serviceProvider.GetService<HitTestBase[]>()));
             _log = _serviceProvider.GetServiceLazily<ILog>();
             _dataFlow = _serviceProvider.GetServiceLazily<IDataFlow>();

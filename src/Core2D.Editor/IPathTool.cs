@@ -4,9 +4,9 @@
 namespace Core2D.Editor
 {
     /// <summary>
-    /// Defines settings contract.
+    /// Path tool contract.
     /// </summary>
-    public abstract class SettingsBase : ObservableObject
+    public interface IPathTool : ITool
     {
     }
 }

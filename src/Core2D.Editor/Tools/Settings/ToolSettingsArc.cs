@@ -8,7 +8,7 @@ namespace Core2D.Editor.Tools.Settings
     /// <summary>
     /// Arc tool settings.
     /// </summary>
-    public class ToolSettingsArc : SettingsBase
+    public class ToolSettingsArc : ObservableObject, ISettings
     {
         /// <inheritdoc/>
         public override object Copy(IDictionary<object, object> shared)

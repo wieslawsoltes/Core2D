@@ -8,7 +8,7 @@ namespace Core2D.Editor.Tools.Settings
     /// <summary>
     /// Path tool settings.
     /// </summary>
-    public class ToolSettingsPath : SettingsBase
+    public class ToolSettingsPath : ObservableObject, ISettings
     {
         /// <inheritdoc/>
         public override object Copy(IDictionary<object, object> shared)

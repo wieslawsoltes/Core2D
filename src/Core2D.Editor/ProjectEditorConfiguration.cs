@@ -12,7 +12,7 @@ namespace Core2D.Editor
     /// <summary>
     /// Project editor configuration.
     /// </summary>
-    public class ProjectEditorConfiguration : SettingsBase
+    public class ProjectEditorConfiguration : ObservableObject, ISettings
     {
         /// <inheritdoc/>
         public override object Copy(IDictionary<object, object> shared)

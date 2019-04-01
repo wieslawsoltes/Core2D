@@ -2,20 +2,22 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
 using System.Collections.Generic;
+using Core2D.Editor.Input;
 using Core2D.Editor.Tools.Settings;
+using Core2D.Shapes;
 
 namespace Core2D.Editor.Tools
 {
     /// <summary>
     /// None tool.
     /// </summary>
-    public class ToolNone : EditorToolBase
+    public class ToolNone : ObservableObject, IEditorTool
     {
         private readonly IServiceProvider _serviceProvider;
         private ToolSettingsNone _settings;
 
         /// <inheritdoc/>
-        public override string Title => "None";
+        public string Title => "None";
 
         /// <summary>
         /// Gets or sets the tool settings.
@@ -40,6 +42,46 @@ namespace Core2D.Editor.Tools
         public override object Copy(IDictionary<object, object> shared)
         {
             throw new NotImplementedException();
+        }
+
+        /// <inheritdoc/>
+        public void LeftDown(InputArgs args)
+        {
+        }
+
+        /// <inheritdoc/>
+        public void LeftUp(InputArgs args)
+        {
+        }
+
+        /// <inheritdoc/>
+        public void RightDown(InputArgs args)
+        {
+        }
+
+        /// <inheritdoc/>
+        public void RightUp(InputArgs args)
+        {
+        }
+
+        /// <inheritdoc/>
+        public void Move(InputArgs args)
+        {
+        }
+
+        /// <inheritdoc/>
+        public void Move(IBaseShape shape)
+        {
+        }
+
+        /// <inheritdoc/>
+        public void Finalize(IBaseShape shape)
+        {
+        }
+
+        /// <inheritdoc/>
+        public void Reset()
+        {
         }
     }
 }

@@ -21,8 +21,8 @@ namespace Core2D.UI.Wpf.Modules
             builder.RegisterType<Factory>().As<IFactory>().InstancePerLifetimeScope();
             builder.RegisterType<ContainerFactory>().As<IContainerFactory>().InstancePerLifetimeScope();
             builder.RegisterType<ShapeFactory>().As<IShapeFactory>().InstancePerLifetimeScope();
-            builder.RegisterAssemblyTypes(typeof(EditorToolBase).Assembly).As<EditorToolBase>().AsSelf().InstancePerLifetimeScope();
-            builder.RegisterAssemblyTypes(typeof(PathToolBase).Assembly).As<PathToolBase>().AsSelf().InstancePerLifetimeScope();
+            builder.RegisterAssemblyTypes(typeof(IEditorTool).Assembly).As<IEditorTool>().AsSelf().InstancePerLifetimeScope();
+            builder.RegisterAssemblyTypes(typeof(IPathTool).Assembly).As<IPathTool>().AsSelf().InstancePerLifetimeScope();
             builder.RegisterType<HitTest>().As<HitTest>().InstancePerLifetimeScope();
             builder.RegisterAssemblyTypes(typeof(HitTestBase).Assembly).As<HitTestBase>().AsSelf().InstancePerLifetimeScope();
             builder.RegisterType<DataFlow>().As<IDataFlow>().InstancePerLifetimeScope();

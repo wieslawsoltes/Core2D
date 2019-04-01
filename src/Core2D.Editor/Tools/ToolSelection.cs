@@ -16,7 +16,7 @@ namespace Core2D.Editor.Tools
     /// <summary>
     /// Selection tool.
     /// </summary>
-    public class ToolSelection : EditorToolBase
+    public class ToolSelection : ObservableObject, IEditorTool
     {
         public enum State { None, Selected }
         private readonly IServiceProvider _serviceProvider;
@@ -31,7 +31,7 @@ namespace Core2D.Editor.Tools
         private IEnumerable<IBaseShape> _shapesCache;
 
         /// <inheritdoc/>
-        public override string Title => "Selection";
+        public string Title => "Selection";
 
         /// <summary>
         /// Gets or sets the tool settings.
@@ -192,9 +192,8 @@ namespace Core2D.Editor.Tools
         }
 
         /// <inheritdoc/>
-        public override void LeftDown(InputArgs args)
+        public void LeftDown(InputArgs args)
         {
-            base.LeftDown(args);
             var factory = _serviceProvider.GetService<IFactory>();
             var editor = _serviceProvider.GetService<ProjectEditor>();
             (double x, double y) = args;
@@ -261,9 +260,8 @@ namespace Core2D.Editor.Tools
         }
 
         /// <inheritdoc/>
-        public override void LeftUp(InputArgs args)
+        public void LeftUp(InputArgs args)
         {
-            base.LeftUp(args);
             var editor = _serviceProvider.GetService<ProjectEditor>();
             switch (_currentState)
             {
@@ -330,9 +328,8 @@ namespace Core2D.Editor.Tools
         }
 
         /// <inheritdoc/>
-        public override void RightDown(InputArgs args)
+        public void RightDown(InputArgs args)
         {
-            base.RightDown(args);
             var editor = _serviceProvider.GetService<ProjectEditor>();
             switch (_currentState)
             {
@@ -351,9 +348,13 @@ namespace Core2D.Editor.Tools
         }
 
         /// <inheritdoc/>
-        public override void Move(InputArgs args)
+        public void RightUp(InputArgs args)
         {
-            base.Move(args);
+        }
+
+        /// <inheritdoc/>
+        public void Move(InputArgs args)
+        {
             var editor = _serviceProvider.GetService<ProjectEditor>();
             switch (_currentState)
             {
@@ -380,6 +381,21 @@ namespace Core2D.Editor.Tools
                     }
                     break;
             }
+        }
+
+        /// <inheritdoc/>
+        public void Move(IBaseShape shape)
+        {
+        }
+
+        /// <inheritdoc/>
+        public void Finalize(IBaseShape shape)
+        {
+        }
+
+        /// <inheritdoc/>
+        public void Reset()
+        {
         }
     }
 }

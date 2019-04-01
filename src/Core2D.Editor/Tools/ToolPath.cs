@@ -18,7 +18,7 @@ namespace Core2D.Editor.Tools
     /// <summary>
     /// Path tool.
     /// </summary>
-    public class ToolPath : EditorToolBase
+    public class ToolPath : ObservableObject, IEditorTool
     {
         private readonly IServiceProvider _serviceProvider;
         private ToolSettingsPath _settings;
@@ -51,10 +51,10 @@ namespace Core2D.Editor.Tools
         /// <summary>
         /// Gets or sets previous path tool.
         /// </summary>
-        internal PathToolBase PreviousPathTool { get; set; }
+        internal IPathTool PreviousPathTool { get; set; }
 
         /// <inheritdoc/>
-        public override string Title => "Path";
+        public string Title => "Path";
 
         /// <summary>
         /// Gets or sets the tool settings.
@@ -207,45 +207,51 @@ namespace Core2D.Editor.Tools
         }
 
         /// <inheritdoc/>
-        public override void LeftDown(InputArgs args)
+        public void LeftDown(InputArgs args)
         {
-            base.LeftDown(args);
             _serviceProvider.GetService<ProjectEditor>().CurrentPathTool?.LeftDown(args);
         }
 
         /// <inheritdoc/>
-        public override void RightDown(InputArgs args)
+        public void LeftUp(InputArgs args)
         {
-            base.RightDown(args);
+            _serviceProvider.GetService<ProjectEditor>().CurrentPathTool?.LeftUp(args);
+        }
+
+        /// <inheritdoc/>
+        public void RightDown(InputArgs args)
+        {
             _serviceProvider.GetService<ProjectEditor>().CurrentPathTool?.RightDown(args);
             Reset();
         }
 
         /// <inheritdoc/>
-        public override void Move(InputArgs args)
+        public void RightUp(InputArgs args)
         {
-            base.Move(args);
+            _serviceProvider.GetService<ProjectEditor>().CurrentPathTool?.RightUp(args);
+        }
+
+        /// <inheritdoc/>
+        public void Move(InputArgs args)
+        {
             _serviceProvider.GetService<ProjectEditor>().CurrentPathTool?.Move(args);
         }
 
         /// <inheritdoc/>
-        public override void Move(IBaseShape shape)
+        public void Move(IBaseShape shape)
         {
-            base.Move(shape);
             _serviceProvider.GetService<ProjectEditor>().CurrentPathTool?.Move(shape);
         }
 
         /// <inheritdoc/>
-        public override void Finalize(IBaseShape shape)
+        public void Finalize(IBaseShape shape)
         {
-            base.Finalize(shape);
             _serviceProvider.GetService<ProjectEditor>().CurrentPathTool?.Finalize(shape);
         }
 
         /// <inheritdoc/>
-        public override void Reset()
+        public void Reset()
         {
-            base.Reset();
             _serviceProvider.GetService<ProjectEditor>().CurrentPathTool?.Reset();
             DeInitializeWorkingPath();
         }

@@ -4,9 +4,9 @@
 namespace Core2D.Editor
 {
     /// <summary>
-    /// Editor tool base class.
+    /// Defines settings contract.
     /// </summary>
-    public abstract class EditorToolBase : Tool
+    public interface ISettings : IObservableObject
     {
     }
 }

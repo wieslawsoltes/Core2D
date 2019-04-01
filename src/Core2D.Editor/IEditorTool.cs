@@ -4,9 +4,9 @@
 namespace Core2D.Editor
 {
     /// <summary>
-    /// Path tool base class.
+    /// Editor tool contract.
     /// </summary>
-    public abstract class PathToolBase : Tool
+    public interface IEditorTool : ITool
     {
     }
 }

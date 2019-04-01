@@ -1,6 +1,5 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
-using System.Diagnostics;
 using Core2D.Editor.Input;
 using Core2D.Shapes;
 
@@ -9,81 +8,58 @@ namespace Core2D.Editor
     /// <summary>
     /// Defines tool contract.
     /// </summary>
-    public abstract class Tool : ObservableObject
+    public interface ITool : IObservableObject
     {
-        internal static bool s_enableDebug = false;
-
         /// <summary>
         /// Gets the tool title.
         /// </summary>
-        public abstract string Title { get; }
+        string Title { get; }
 
         /// <summary>
         /// Handle mouse left button down events.
         /// </summary>
         /// <param name="args">The input arguments.</param>
-        public virtual void LeftDown(InputArgs args)
-        {
-            Debug.WriteLineIf(s_enableDebug, $"[{Title}] LeftDown X={args.X} Y={args.Y}, Modifier {args.Modifier}");
-        }
+        void LeftDown(InputArgs args);
 
         /// <summary>
         /// Handle mouse left button up events.
         /// </summary>
         /// <param name="args">The input arguments.</param>
-        public virtual void LeftUp(InputArgs args)
-        {
-            Debug.WriteLineIf(s_enableDebug, $"[{Title}] LeftDown X={args.X} Y={args.Y}, Modifier {args.Modifier}");
-        }
+        void LeftUp(InputArgs args);
 
         /// <summary>
         /// Handle mouse right button down events.
         /// </summary>
         /// <param name="args">The input arguments.</param>
-        public virtual void RightDown(InputArgs args)
-        {
-            Debug.WriteLineIf(s_enableDebug, $"[{Title}] LeftDown X={args.X} Y={args.Y}, Modifier {args.Modifier}");
-        }
+        void RightDown(InputArgs args);
 
         /// <summary>
         /// Handle mouse right button up events.
         /// </summary>
         /// <param name="args">The input arguments.</param>
-        public virtual void RightUp(InputArgs args)
-        {
-            Debug.WriteLineIf(s_enableDebug, $"[{Title}] LeftDown X={args.X} Y={args.Y}, Modifier {args.Modifier}");
-        }
+        void RightUp(InputArgs args);
 
         /// <summary>
         /// Handle mouse move events.
         /// </summary>
         /// <param name="args">The input arguments.</param>
-        public virtual void Move(InputArgs args)
-        {
-            Debug.WriteLineIf(s_enableDebug, $"[{Title}] LeftDown X={args.X} Y={args.Y}, Modifier {args.Modifier}");
-        }
+        void Move(InputArgs args);
 
         /// <summary>
         /// Move edited shape.
         /// </summary>
         /// <param name="shape">The shape object.</param>
-        public virtual void Move(IBaseShape shape)
-        {
-        }
+        void Move(IBaseShape shape);
 
         /// <summary>
         /// Finalize edited shape.
         /// </summary>
         /// <param name="shape">The shape object.</param>
-        public virtual void Finalize(IBaseShape shape)
-        {
-        }
+        void Finalize(IBaseShape shape);
 
         /// <summary>
         /// Reset tool.
         /// </summary>
-        public virtual void Reset()
-        {
-        }
+        void Reset();
     }
 }

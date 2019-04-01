@@ -17,7 +17,7 @@ namespace Core2D.Editor.Tools.Path
     /// <summary>
     /// Arc path tool.
     /// </summary>
-    public class PathToolArc : PathToolBase
+    public class PathToolArc : ObservableObject, IPathTool
     {
         public enum State { Start, End }
         private readonly IServiceProvider _serviceProvider;
@@ -30,7 +30,7 @@ namespace Core2D.Editor.Tools.Path
         private const SweepDirection _defaultSweepDirection = SweepDirection.Clockwise;
 
         /// <inheritdoc/>
-        public override string Title => "Arc";
+        public string Title => "Arc";
 
         /// <summary>
         /// Gets or sets the path tool settings.
@@ -58,9 +58,8 @@ namespace Core2D.Editor.Tools.Path
         }
 
         /// <inheritdoc/>
-        public override void LeftDown(InputArgs args)
+        public void LeftDown(InputArgs args)
         {
-            base.LeftDown(args);
             var factory = _serviceProvider.GetService<IFactory>();
             var editor = _serviceProvider.GetService<ProjectEditor>();
             var pathTool = _serviceProvider.GetService<ToolPath>();
@@ -130,9 +129,13 @@ namespace Core2D.Editor.Tools.Path
         }
 
         /// <inheritdoc/>
-        public override void RightDown(InputArgs args)
+        public void LeftUp(InputArgs args)
         {
-            base.RightDown(args);
+        }
+
+        /// <inheritdoc/>
+        public void RightDown(InputArgs args)
+        {
             switch (_currentState)
             {
                 case State.Start:
@@ -144,9 +147,13 @@ namespace Core2D.Editor.Tools.Path
         }
 
         /// <inheritdoc/>
-        public override void Move(InputArgs args)
+        public void RightUp(InputArgs args)
         {
-            base.Move(args);
+        }
+
+        /// <inheritdoc/>
+        public void Move(InputArgs args)
+        {
             var editor = _serviceProvider.GetService<ProjectEditor>();
             var pathTool = _serviceProvider.GetService<ToolPath>();
             (double sx, double sy) = editor.TryToSnap(args);
@@ -198,10 +205,8 @@ namespace Core2D.Editor.Tools.Path
         }
 
         /// <inheritdoc/>
-        public override void Move(IBaseShape shape)
+        public void Move(IBaseShape shape)
         {
-            base.Move(shape);
-
             if (_selection != null)
             {
                 _selection.Move();
@@ -209,10 +214,13 @@ namespace Core2D.Editor.Tools.Path
         }
 
         /// <inheritdoc/>
-        public override void Reset()
+        public void Finalize(IBaseShape shape)
         {
-            base.Reset();
+        }
 
+        /// <inheritdoc/>
+        public void Reset()
+        {
             var editor = _serviceProvider.GetService<ProjectEditor>();
             var pathTool = _serviceProvider.GetService<ToolPath>();
 
