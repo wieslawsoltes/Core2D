@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <PackageReference Include="Dock.Avalonia" Version="0.0.4-build20190326-04" />
+    <PackageReference Include="Dock.Avalonia" Version="0.0.4-build20190401-01" />
   </ItemGroup>
 </Project>
