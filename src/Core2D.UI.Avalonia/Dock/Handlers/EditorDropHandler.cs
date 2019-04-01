@@ -69,8 +69,7 @@ namespace Core2D.UI.Avalonia.Dock.Handlers
         /// <inheritdoc/>
         public override bool Validate(object sender, DragEventArgs e, object sourceContext, object targetContext, object state)
         {
-            // FIXME:
-            if (sourceContext is ProjectEditor editor)
+            if (sourceContext is string format && format == DragDataFormats.Context && targetContext is ProjectEditor editor)
             {
                 return Validate(editor, sender, e, false);
             }
@@ -80,8 +79,7 @@ namespace Core2D.UI.Avalonia.Dock.Handlers
         /// <inheritdoc/>
         public override bool Execute(object sender, DragEventArgs e, object sourceContext, object targetContext, object state)
         {
-            // FIXME:
-            if (sourceContext is ProjectEditor editor)
+            if (sourceContext is string format && format == DragDataFormats.Context && targetContext is ProjectEditor editor)
             {
                 return Validate(editor, sender, e, true);
             }
