@@ -8,7 +8,7 @@ namespace Core2D.Editor.Tools.Settings
     /// <summary>
     /// Cubic bezier tool settings
     /// </summary>
-    public class ToolSettingsCubicBezier : ToolSettings
+    public class ToolSettingsCubicBezier : SettingsBase
     {
         /// <inheritdoc/>
         public override object Copy(IDictionary<object, object> shared)

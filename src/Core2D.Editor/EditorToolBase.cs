@@ -4,13 +4,9 @@
 namespace Core2D.Editor
 {
     /// <summary>
-    /// Script base class.
+    /// Editor tool base class.
     /// </summary>
-    public class ScriptBase
+    public abstract class EditorToolBase : Tool
     {
-        /// <summary>
-        /// Gets or sets project editor.
-        /// </summary>
-        public ProjectEditor Editor { get; set; }
     }
 }

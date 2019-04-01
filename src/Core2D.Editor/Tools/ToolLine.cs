@@ -14,7 +14,7 @@ namespace Core2D.Editor.Tools
     /// <summary>
     /// Line tool.
     /// </summary>
-    public class ToolLine : ToolBase
+    public class ToolLine : EditorToolBase
     {
         public enum State { Start, End }
         private readonly IServiceProvider _serviceProvider;

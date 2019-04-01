@@ -26,7 +26,7 @@ namespace Core2D.Editor
     /// <summary>
     /// Project editor.
     /// </summary>
-    public partial class ProjectEditor : ObservableObject
+    public class ProjectEditor : ObservableObject
     {
         private readonly IServiceProvider _serviceProvider;
         private IProjectContainer _project;
@@ -34,13 +34,13 @@ namespace Core2D.Editor
         private bool _isProjectDirty;
         private ProjectObserver _observer;
         private bool _isToolIdle;
-        private ToolBase _currentTool;
+        private EditorToolBase _currentTool;
         private PathToolBase _currentPathTool;
         private ImmutableArray<RecentFile> _recentProjects;
         private RecentFile _currentRecentProject;
         private IDock _layout;
         private AboutInfo _aboutInfo;
-        private readonly Lazy<ImmutableArray<ToolBase>> _tools;
+        private readonly Lazy<ImmutableArray<EditorToolBase>> _tools;
         private readonly Lazy<ImmutableArray<PathToolBase>> _pathTools;
         private readonly Lazy<HitTest> _hitTest;
         private readonly Lazy<ILog> _log;
@@ -110,7 +110,7 @@ namespace Core2D.Editor
         /// <summary>
         /// Gets or sets current editor tool.
         /// </summary>
-        public ToolBase CurrentTool
+        public EditorToolBase CurrentTool
         {
             get => _currentTool;
             set => Update(ref _currentTool, value);
@@ -164,7 +164,7 @@ namespace Core2D.Editor
         /// <summary>
         /// Gets or sets editor tools.
         /// </summary>
-        public ImmutableArray<ToolBase> Tools => _tools.Value;
+        public ImmutableArray<EditorToolBase> Tools => _tools.Value;
 
         /// <summary>
         /// Gets or sets editor path tools.
@@ -283,7 +283,7 @@ namespace Core2D.Editor
             _serviceProvider = serviceProvider;
             _recentProjects = ImmutableArray.Create<RecentFile>();
             _currentRecentProject = default;
-            _tools = _serviceProvider.GetServiceLazily<ToolBase[], ImmutableArray<ToolBase>>((tools) => tools.Where(tool => !tool.GetType().Name.StartsWith("PathTool")).ToImmutableArray());
+            _tools = _serviceProvider.GetServiceLazily<EditorToolBase[], ImmutableArray<EditorToolBase>>((tools) => tools.Where(tool => !tool.GetType().Name.StartsWith("PathTool")).ToImmutableArray());
             _pathTools = _serviceProvider.GetServiceLazily<PathToolBase[], ImmutableArray<PathToolBase>>((tools) => tools.ToImmutableArray());
             _hitTest = _serviceProvider.GetServiceLazily<HitTest>(hitTests => hitTests.Register(_serviceProvider.GetService<HitTestBase[]>()));
             _log = _serviceProvider.GetServiceLazily<ILog>();
@@ -2549,6 +2549,42 @@ namespace Core2D.Editor
             }
         }
 
+        /// <summary>
+        /// Defines methods to support the comparison of <see cref="IShapeStyle"/> objects for equality.
+        /// </summary>
+        public class ShapeStyleByNameComparer : IEqualityComparer<IShapeStyle>
+        {
+            /// <summary>
+            /// Determines whether the specified objects are equal.
+            /// </summary>
+            /// <param name="x">The first object of type <see cref="IShapeStyle"/> to compare.</param>
+            /// <param name="y">The second object of type <see cref="IShapeStyle"/> to compare.</param>
+            /// <returns>True if the specified objects are equal; otherwise, false.</returns>
+            public bool Equals(IShapeStyle x, IShapeStyle y)
+            {
+                if (object.ReferenceEquals(x, y))
+                    return true;
+
+                if (x is null || y is null)
+                    return false;
+
+                return x.Name == y.Name;
+            }
+
+            /// <summary>
+            /// Returns a hash code for the specified object.
+            /// </summary>
+            /// <param name="style">The <see cref="IShapeStyle"/> for which a hash code is to be returned.</param>
+            /// <returns>A hash code for the specified object.</returns>
+            public int GetHashCode(IShapeStyle style)
+            {
+                if (style is null)
+                    return 0;
+                int hashProductName = style.Name == null ? 0 : style.Name.GetHashCode();
+                return hashProductName;
+            }
+        }
+
         private IDictionary<string, IShapeStyle> GenerateStyleDictionaryByName()
         {
             return Project?.StyleLibraries
@@ -3006,7 +3042,7 @@ namespace Core2D.Editor
 
                     Project.AddShape(Project?.CurrentContainer?.CurrentLayer, clone);
 
-                    Select(Project?.CurrentContainer?.CurrentLayer, clone);
+                    // Select(Project?.CurrentContainer?.CurrentLayer, clone);
 
                     if (Project.Options.TryToConnect)
                     {

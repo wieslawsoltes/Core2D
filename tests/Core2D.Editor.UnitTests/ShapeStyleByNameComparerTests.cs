@@ -15,7 +15,7 @@ namespace Core2D.Editor.UnitTests
         [Trait("Core2D.Editor", "Style")]
         public void Implements_IEqualityComparer_Interface()
         {
-            var target = new ShapeStyleByNameComparer();
+            var target = new ProjectEditor.ShapeStyleByNameComparer();
             Assert.True(target is IEqualityComparer<IShapeStyle>);
         }
 
@@ -24,7 +24,7 @@ namespace Core2D.Editor.UnitTests
         public void Equals_Same_Object_Return_True()
         {
             var x = _factory.CreateShapeStyle();
-            Assert.Equal(x, x, new ShapeStyleByNameComparer());
+            Assert.Equal(x, x, new ProjectEditor.ShapeStyleByNameComparer());
         }
 
         [Fact]
@@ -32,7 +32,7 @@ namespace Core2D.Editor.UnitTests
         public void Equals_First_Object_Null_Return_False()
         {
             var x = _factory.CreateShapeStyle();
-            var c = new ShapeStyleByNameComparer();
+            var c = new ProjectEditor.ShapeStyleByNameComparer();
             Assert.False(c.Equals(null, x));
         }
 
@@ -41,7 +41,7 @@ namespace Core2D.Editor.UnitTests
         public void Equals_Second_Object_Null_Return_False()
         {
             var y = _factory.CreateShapeStyle();
-            var c = new ShapeStyleByNameComparer();
+            var c = new ProjectEditor.ShapeStyleByNameComparer();
             Assert.False(c.Equals(y, null));
         }
 
@@ -51,7 +51,7 @@ namespace Core2D.Editor.UnitTests
         {
             var x = _factory.CreateShapeStyle("Style1");
             var y = _factory.CreateShapeStyle("Style1");
-            Assert.Equal(x, y, new ShapeStyleByNameComparer());
+            Assert.Equal(x, y, new ProjectEditor.ShapeStyleByNameComparer());
         }
 
         [Fact]
@@ -60,7 +60,7 @@ namespace Core2D.Editor.UnitTests
         {
             var x = _factory.CreateShapeStyle("Style1");
             var y = _factory.CreateShapeStyle("Style2");
-            Assert.NotEqual(x, y, new ShapeStyleByNameComparer());
+            Assert.NotEqual(x, y, new ProjectEditor.ShapeStyleByNameComparer());
         }
     }
 }

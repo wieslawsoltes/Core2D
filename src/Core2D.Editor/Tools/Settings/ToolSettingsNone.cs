@@ -8,7 +8,7 @@ namespace Core2D.Editor.Tools.Settings
     /// <summary>
     /// None tool settings.
     /// </summary>
-    public class ToolSettingsNone : ToolSettings
+    public class ToolSettingsNone : SettingsBase
     {
         /// <inheritdoc/>
         public override object Copy(IDictionary<object, object> shared)

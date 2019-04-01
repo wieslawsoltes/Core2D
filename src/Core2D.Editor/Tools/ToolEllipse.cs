@@ -15,7 +15,7 @@ namespace Core2D.Editor.Tools
     /// <summary>
     /// Ellipse tool.
     /// </summary>
-    public class ToolEllipse : ToolBase
+    public class ToolEllipse : EditorToolBase
     {
         public enum State { TopLeft, BottomRight }
         public enum Mode { Rectangle, Circle }

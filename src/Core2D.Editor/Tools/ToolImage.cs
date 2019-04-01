@@ -14,7 +14,7 @@ namespace Core2D.Editor.Tools
     /// <summary>
     /// Image tool.
     /// </summary>
-    public class ToolImage : ToolBase
+    public class ToolImage : EditorToolBase
     {
         public enum State { TopLeft, BottomRight }
         private readonly IServiceProvider _serviceProvider;

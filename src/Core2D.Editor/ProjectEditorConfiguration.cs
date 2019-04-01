@@ -1,5 +1,7 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using System;
+using System.Collections.Generic;
 using Core2D.Containers;
 using Core2D.Data;
 using Core2D.Shapes;
@@ -10,8 +12,14 @@ namespace Core2D.Editor
     /// <summary>
     /// Project editor configuration.
     /// </summary>
-    public class ProjectEditorConfiguration
+    public class ProjectEditorConfiguration : SettingsBase
     {
+        /// <inheritdoc/>
+        public override object Copy(IDictionary<object, object> shared)
+        {
+            throw new NotImplementedException();
+        }
+
         /// <summary>
         /// Default <see cref="ILayerContainer"/> name.
         /// </summary>

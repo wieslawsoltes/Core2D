@@ -14,7 +14,7 @@ namespace Core2D.Editor.Tools
     /// <summary>
     /// Quadratic bezier tool.
     /// </summary>
-    public class ToolQuadraticBezier : ToolBase
+    public class ToolQuadraticBezier : EditorToolBase
     {
         public enum State { Point1, Point3, Point2 }
         private readonly IServiceProvider _serviceProvider;

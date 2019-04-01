@@ -8,7 +8,7 @@ namespace Core2D.Editor.Tools.Path.Settings
     /// <summary>
     /// Arc path tool settings.
     /// </summary>
-    public class PathToolSettingsArc : ToolSettings
+    public class PathToolSettingsArc : SettingsBase
     {
         /// <inheritdoc/>
         public override object Copy(IDictionary<object, object> shared)

@@ -8,7 +8,7 @@ namespace Core2D.Editor.Tools.Settings
     /// <summary>
     /// Rectangle tool settings.
     /// </summary>
-    public class ToolSettingsRectangle : ToolSettings
+    public class ToolSettingsRectangle : SettingsBase
     {
         /// <inheritdoc/>
         public override object Copy(IDictionary<object, object> shared)

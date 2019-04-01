@@ -9,7 +9,7 @@ namespace Core2D.Editor.Tools.Path.Settings
     /// <summary>
     /// Cubic bezier path tool settings
     /// </summary>
-    public class PathToolSettingsCubicBezier : ToolSettings
+    public class PathToolSettingsCubicBezier : SettingsBase
     {
         /// <inheritdoc/>
         public override object Copy(IDictionary<object, object> shared)

@@ -14,7 +14,7 @@ namespace Core2D.Editor.Tools
     /// <summary>
     /// Rectangle tool.
     /// </summary>
-    public class ToolRectangle : ToolBase
+    public class ToolRectangle : EditorToolBase
     {
         public enum State { TopLeft, BottomRight }
         private readonly IServiceProvider _serviceProvider;

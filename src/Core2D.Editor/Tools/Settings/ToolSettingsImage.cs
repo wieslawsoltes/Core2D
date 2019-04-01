@@ -8,7 +8,7 @@ namespace Core2D.Editor.Tools.Settings
     /// <summary>
     /// Image tool settings.
     /// </summary>
-    public class ToolSettingsImage : ToolSettings
+    public class ToolSettingsImage : SettingsBase
     {
         /// <inheritdoc/>
         public override object Copy(IDictionary<object, object> shared)

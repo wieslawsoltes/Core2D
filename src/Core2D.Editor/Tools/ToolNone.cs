@@ -9,7 +9,7 @@ namespace Core2D.Editor.Tools
     /// <summary>
     /// None tool.
     /// </summary>
-    public class ToolNone : ToolBase
+    public class ToolNone : EditorToolBase
     {
         private readonly IServiceProvider _serviceProvider;
         private ToolSettingsNone _settings;

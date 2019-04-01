@@ -14,7 +14,7 @@ namespace Core2D.Editor.Tools
     /// <summary>
     /// Text tool.
     /// </summary>
-    public class ToolText : ToolBase
+    public class ToolText : EditorToolBase
     {
         public enum State { TopLeft, BottomRight }
         private readonly IServiceProvider _serviceProvider;

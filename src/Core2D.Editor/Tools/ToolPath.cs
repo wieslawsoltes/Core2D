@@ -18,7 +18,7 @@ namespace Core2D.Editor.Tools
     /// <summary>
     /// Path tool.
     /// </summary>
-    public class ToolPath : ToolBase
+    public class ToolPath : EditorToolBase
     {
         private readonly IServiceProvider _serviceProvider;
         private ToolSettingsPath _settings;

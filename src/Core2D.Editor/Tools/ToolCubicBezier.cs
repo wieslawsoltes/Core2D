@@ -14,7 +14,7 @@ namespace Core2D.Editor.Tools
     /// <summary>
     /// Cubic bezier tool.
     /// </summary>
-    public class ToolCubicBezier : ToolBase
+    public class ToolCubicBezier : EditorToolBase
     {
         public enum State { Point1, Point4, Point2, Point3 }
         private readonly IServiceProvider _serviceProvider;

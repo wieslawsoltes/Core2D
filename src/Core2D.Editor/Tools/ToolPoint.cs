@@ -12,7 +12,7 @@ namespace Core2D.Editor.Tools
     /// <summary>
     /// Point tool.
     /// </summary>
-    public class ToolPoint : ToolBase
+    public class ToolPoint : EditorToolBase
     {
         public enum State { Point }
         private readonly IServiceProvider _serviceProvider;

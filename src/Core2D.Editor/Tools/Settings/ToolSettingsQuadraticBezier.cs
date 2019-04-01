@@ -8,7 +8,7 @@ namespace Core2D.Editor.Tools.Settings
     /// <summary>
     /// Quadratic bezier tool settings.
     /// </summary>
-    public class ToolSettingsQuadraticBezier : ToolSettings
+    public class ToolSettingsQuadraticBezier : SettingsBase
     {
         /// <inheritdoc/>
         public override object Copy(IDictionary<object, object> shared)

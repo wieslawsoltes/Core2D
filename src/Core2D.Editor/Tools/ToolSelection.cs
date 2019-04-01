@@ -16,7 +16,7 @@ namespace Core2D.Editor.Tools
     /// <summary>
     /// Selection tool.
     /// </summary>
-    public class ToolSelection : ToolBase
+    public class ToolSelection : EditorToolBase
     {
         public enum State { None, Selected }
         private readonly IServiceProvider _serviceProvider;

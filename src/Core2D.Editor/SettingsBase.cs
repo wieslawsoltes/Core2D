@@ -4,9 +4,9 @@
 namespace Core2D.Editor
 {
     /// <summary>
-    /// Defines settings contract.
+    /// Defines settings base class.
     /// </summary>
-    public abstract class ToolSettings : ObservableObject
+    public abstract class SettingsBase : ObservableObject
     {
     }
 }

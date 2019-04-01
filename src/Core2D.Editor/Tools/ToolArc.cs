@@ -16,7 +16,7 @@ namespace Core2D.Editor.Tools
     /// <summary>
     /// Arc tool.
     /// </summary>
-    public class ToolArc : ToolBase
+    public class ToolArc : EditorToolBase
     {
         public enum State { Point1, Point2, Point3, Point4 }
         private readonly IServiceProvider _serviceProvider;

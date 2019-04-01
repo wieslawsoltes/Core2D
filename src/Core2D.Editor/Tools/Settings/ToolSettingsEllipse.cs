@@ -8,7 +8,7 @@ namespace Core2D.Editor.Tools.Settings
     /// <summary>
     /// Ellipse tool settings.
     /// </summary>
-    public class ToolSettingsEllipse : ToolSettings
+    public class ToolSettingsEllipse : SettingsBase
     {
         /// <inheritdoc/>
         public override object Copy(IDictionary<object, object> shared)
