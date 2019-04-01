@@ -50,6 +50,10 @@ namespace Core2D.Editor.Factories
             return sgd;
         }
 
+        // TODO: Add WireStyleLibrary with `IsCurved=true`  (Auto, Horizontal, Vertical)
+
+        // TODO: Add ArrowStyleLibrary with arrow type: Rectangle, Ellipse, Arrow and (Start, End, Both)
+
         /// <summary>
         /// Creates a new instance of the <see cref="ILibrary{ShapeStyle}"/> class.
         /// </summary>
