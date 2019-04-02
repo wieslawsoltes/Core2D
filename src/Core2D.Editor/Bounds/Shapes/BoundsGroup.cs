@@ -8,11 +8,11 @@ using Spatial;
 
 namespace Core2D.Editor.Bounds.Shapes
 {
-    public class HitTestGroup : HitTestBase
+    public class BoundsGroup : IBounds
     {
-        public override Type TargetType => typeof(IGroupShape);
+        public Type TargetType => typeof(IGroupShape);
 
-        public override IPointShape TryToGetPoint(IBaseShape shape, Point2 target, double radius, IDictionary<Type, HitTestBase> registered)
+        public IPointShape TryToGetPoint(IBaseShape shape, Point2 target, double radius, IDictionary<Type, IBounds> registered)
         {
             if (!(shape is IGroupShape group))
                 throw new ArgumentNullException(nameof(shape));
@@ -30,7 +30,7 @@ namespace Core2D.Editor.Bounds.Shapes
             return null;
         }
 
-        public override bool Contains(IBaseShape shape, Point2 target, double radius, IDictionary<Type, HitTestBase> registered)
+        public bool Contains(IBaseShape shape, Point2 target, double radius, IDictionary<Type, IBounds> registered)
         {
             if (!(shape is IGroupShape group))
                 throw new ArgumentNullException(nameof(shape));
@@ -47,7 +47,7 @@ namespace Core2D.Editor.Bounds.Shapes
             return false;
         }
 
-        public override bool Overlaps(IBaseShape shape, Rect2 target, double radius, IDictionary<Type, HitTestBase> registered)
+        public bool Overlaps(IBaseShape shape, Rect2 target, double radius, IDictionary<Type, IBounds> registered)
         {
             if (!(shape is IGroupShape group))
                 throw new ArgumentNullException(nameof(shape));

@@ -7,21 +7,21 @@ using Spatial;
 
 namespace Core2D.Editor.Bounds
 {
-    public class HitTest
+    public class HitTest : IHitTest
     {
-        public IDictionary<Type, HitTestBase> Registered { get; set; }
+        public IDictionary<Type, IBounds> Registered { get; set; }
 
         public HitTest()
         {
-            Registered = new Dictionary<Type, HitTestBase>();
+            Registered = new Dictionary<Type, IBounds>();
         }
 
-        public void Register(HitTestBase hitTest)
+        public void Register(IBounds hitTest)
         {
             Registered.Add(hitTest.TargetType, hitTest);
         }
 
-        public void Register(IEnumerable<HitTestBase> hitTests)
+        public void Register(IEnumerable<IBounds> hitTests)
         {
             foreach (var hitTest in hitTests)
             {

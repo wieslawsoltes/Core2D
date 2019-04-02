@@ -7,11 +7,11 @@ using Spatial;
 
 namespace Core2D.Editor.Bounds.Shapes
 {
-    public class HitTestText : HitTestBase
+    public class BoundsText : IBounds
     {
-        public override Type TargetType => typeof(ITextShape);
+        public Type TargetType => typeof(ITextShape);
 
-        public override IPointShape TryToGetPoint(IBaseShape shape, Point2 target, double radius, IDictionary<Type, HitTestBase> registered)
+        public IPointShape TryToGetPoint(IBaseShape shape, Point2 target, double radius, IDictionary<Type, IBounds> registered)
         {
             if (!(shape is ITextShape text))
                 throw new ArgumentNullException(nameof(shape));
@@ -31,7 +31,7 @@ namespace Core2D.Editor.Bounds.Shapes
             return null;
         }
 
-        public override bool Contains(IBaseShape shape, Point2 target, double radius, IDictionary<Type, HitTestBase> registered)
+        public bool Contains(IBaseShape shape, Point2 target, double radius, IDictionary<Type, IBounds> registered)
         {
             if (!(shape is ITextShape text))
                 throw new ArgumentNullException(nameof(shape));
@@ -43,7 +43,7 @@ namespace Core2D.Editor.Bounds.Shapes
                 text.BottomRight.Y).Contains(target);
         }
 
-        public override bool Overlaps(IBaseShape shape, Rect2 target, double radius, IDictionary<Type, HitTestBase> registered)
+        public bool Overlaps(IBaseShape shape, Rect2 target, double radius, IDictionary<Type, IBounds> registered)
         {
             if (!(shape is ITextShape text))
                 throw new ArgumentNullException(nameof(shape));

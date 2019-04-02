@@ -24,8 +24,8 @@ namespace Core2D.UI.Avalonia.Modules
             builder.RegisterType<ShapeFactory>().As<IShapeFactory>().InstancePerLifetimeScope();
             builder.RegisterAssemblyTypes(typeof(IEditorTool).GetTypeInfo().Assembly).As<IEditorTool>().AsSelf().InstancePerLifetimeScope();
             builder.RegisterAssemblyTypes(typeof(IPathTool).GetTypeInfo().Assembly).As<IPathTool>().AsSelf().InstancePerLifetimeScope();
-            builder.RegisterType<HitTest>().As<HitTest>().InstancePerLifetimeScope();
-            builder.RegisterAssemblyTypes(typeof(HitTestBase).GetTypeInfo().Assembly).As<HitTestBase>().AsSelf().InstancePerLifetimeScope();
+            builder.RegisterType<HitTest>().As<IHitTest>().InstancePerLifetimeScope();
+            builder.RegisterAssemblyTypes(typeof(IBounds).GetTypeInfo().Assembly).As<IBounds>().AsSelf().InstancePerLifetimeScope();
             builder.RegisterType<DataFlow>().As<IDataFlow>().InstancePerLifetimeScope();
         }
     }

@@ -42,7 +42,7 @@ namespace Core2D.Editor
         private AboutInfo _aboutInfo;
         private readonly Lazy<ImmutableArray<IEditorTool>> _tools;
         private readonly Lazy<ImmutableArray<IPathTool>> _pathTools;
-        private readonly Lazy<HitTest> _hitTest;
+        private readonly Lazy<IHitTest> _hitTest;
         private readonly Lazy<ILog> _log;
         private readonly Lazy<IDataFlow> _dataFlow;
         private readonly Lazy<IShapeRenderer[]> _renderers;
@@ -174,7 +174,7 @@ namespace Core2D.Editor
         /// <summary>
         /// Gets or sets current editor hit test.
         /// </summary>
-        public HitTest HitTest => _hitTest.Value;
+        public IHitTest HitTest => _hitTest.Value;
 
         /// <summary>
         /// Gets current log.
@@ -285,7 +285,7 @@ namespace Core2D.Editor
             _currentRecentProject = default;
             _tools = _serviceProvider.GetServiceLazily<IEditorTool[], ImmutableArray<IEditorTool>>((tools) => tools.Where(tool => !tool.GetType().Name.StartsWith("PathTool")).ToImmutableArray());
             _pathTools = _serviceProvider.GetServiceLazily<IPathTool[], ImmutableArray<IPathTool>>((tools) => tools.ToImmutableArray());
-            _hitTest = _serviceProvider.GetServiceLazily<HitTest>(hitTests => hitTests.Register(_serviceProvider.GetService<HitTestBase[]>()));
+            _hitTest = _serviceProvider.GetServiceLazily<IHitTest>(hitTests => hitTests.Register(_serviceProvider.GetService<IBounds[]>()));
             _log = _serviceProvider.GetServiceLazily<ILog>();
             _dataFlow = _serviceProvider.GetServiceLazily<IDataFlow>();
             _renderers = new Lazy<IShapeRenderer[]>(() => new[] { _serviceProvider.GetService<IShapeRenderer>(), _serviceProvider.GetService<IShapeRenderer>() });

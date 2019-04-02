@@ -23,8 +23,8 @@ namespace Core2D.UI.Wpf.Modules
             builder.RegisterType<ShapeFactory>().As<IShapeFactory>().InstancePerLifetimeScope();
             builder.RegisterAssemblyTypes(typeof(IEditorTool).Assembly).As<IEditorTool>().AsSelf().InstancePerLifetimeScope();
             builder.RegisterAssemblyTypes(typeof(IPathTool).Assembly).As<IPathTool>().AsSelf().InstancePerLifetimeScope();
-            builder.RegisterType<HitTest>().As<HitTest>().InstancePerLifetimeScope();
-            builder.RegisterAssemblyTypes(typeof(HitTestBase).Assembly).As<HitTestBase>().AsSelf().InstancePerLifetimeScope();
+            builder.RegisterType<HitTest>().As<IHitTest>().InstancePerLifetimeScope();
+            builder.RegisterAssemblyTypes(typeof(IBounds).Assembly).As<IBounds>().AsSelf().InstancePerLifetimeScope();
             builder.RegisterType<DataFlow>().As<IDataFlow>().InstancePerLifetimeScope();
         }
     }
