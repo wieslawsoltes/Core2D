@@ -14,7 +14,7 @@ namespace Core2D.UI.Avalonia.Dock.Handlers
 
         // FIXME:
         /*
-        private bool ValidateTreeView(ProjectEditor editor, DragEventArgs e, bool bExecute, TreeView tree)
+        private bool ValidateTreeView(IProjectEditor editor, DragEventArgs e, bool bExecute, TreeView tree)
         {
             var sourceItem = e.Data.Get(DragDataFormats.Parent);
             var targetItem = (e.Source as IControl)?.Parent?.Parent;
@@ -176,7 +176,7 @@ namespace Core2D.UI.Avalonia.Dock.Handlers
             return false;
         }
 
-        private bool Validate(ProjectEditor editor, object sender, DragEventArgs e, bool bExecute)
+        private bool Validate(IProjectEditor editor, object sender, DragEventArgs e, bool bExecute)
         {
             var point = DropHelper.GetPosition(sender, e);
 
@@ -194,7 +194,7 @@ namespace Core2D.UI.Avalonia.Dock.Handlers
         public override bool Validate(object sender, DragEventArgs e, object sourceContext, object targetContext, object state)
         {
             // FIXME:
-            //if (context is ProjectEditor editor)
+            //if (context is IProjectEditor editor)
             //{
             //    return Validate(editor, sender, e, false);
             //}
@@ -205,7 +205,7 @@ namespace Core2D.UI.Avalonia.Dock.Handlers
         public override bool Execute(object sender, DragEventArgs e, object sourceContext, object targetContext, object state)
         {
             // FIXME:
-            //if (context is ProjectEditor editor)
+            //if (context is IProjectEditor editor)
             //{
             //    return Validate(editor, sender, e, true);
             //}

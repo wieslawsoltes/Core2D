@@ -56,7 +56,7 @@ namespace Core2D.UI.Wpf
 
             try
             {
-                var editor = serviceProvider.GetService<ProjectEditor>();
+                var editor = serviceProvider.GetService<IProjectEditor>();
 
                 var dockFactory = serviceProvider.GetService<IDockFactory>();
                 editor.Layout = editor.Layout ?? dockFactory.CreateLayout();

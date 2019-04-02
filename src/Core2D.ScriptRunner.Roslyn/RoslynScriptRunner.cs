@@ -32,7 +32,7 @@ namespace Core2D.ScriptRunner.Roslyn
 
             var globals = new EditorScript
             {
-                Editor = _serviceProvider.GetService<ProjectEditor>()
+                Editor = _serviceProvider.GetService<IProjectEditor>()
             };
 
             try
@@ -68,7 +68,7 @@ namespace Core2D.ScriptRunner.Roslyn
 
             var globals = new EditorScript
             {
-                Editor = _serviceProvider.GetService<ProjectEditor>()
+                Editor = _serviceProvider.GetService<IProjectEditor>()
             };
 
             try

@@ -112,7 +112,7 @@ namespace Core2D.UI.Avalonia
 
             try
             {
-                var editor = serviceProvider.GetService<ProjectEditor>();
+                var editor = serviceProvider.GetService<IProjectEditor>();
 
                 editor.LayoutPlatform.LoadLayout = () => editor.Platform.OnLoadLayout();
                 editor.LayoutPlatform.SaveLayout = () => editor.Platform.OnSaveLayout();
@@ -174,7 +174,7 @@ namespace Core2D.UI.Avalonia
 
             log?.Initialize(System.IO.Path.Combine(fileIO?.GetBaseDirectory(), "Core2D.log"));
 
-            var editor = serviceProvider.GetService<ProjectEditor>();
+            var editor = serviceProvider.GetService<IProjectEditor>();
 
             var dockFactory = serviceProvider.GetService<IDockFactory>();
             editor.Layout = editor.Layout ?? dockFactory.CreateLayout();

@@ -45,7 +45,7 @@ namespace Core2D.UI.Avalonia.Editor
                 var path = result.FirstOrDefault();
                 if (path != null)
                 {
-                    var editor = _serviceProvider.GetService<ProjectEditor>();
+                    var editor = _serviceProvider.GetService<IProjectEditor>();
                     editor.OnOpenProject(path);
                     editor.CanvasPlatform?.Invalidate?.Invoke(); 
                 }
@@ -63,7 +63,7 @@ namespace Core2D.UI.Avalonia.Editor
             {
                 if (_serviceProvider.GetService<IFileSystem>().Exists(path))
                 {
-                    _serviceProvider.GetService<ProjectEditor>().OnOpenProject(path);
+                    _serviceProvider.GetService<IProjectEditor>().OnOpenProject(path);
                 }
             }
         }
@@ -71,7 +71,7 @@ namespace Core2D.UI.Avalonia.Editor
         /// <inheritdoc/>
         public void OnSave()
         {
-            var editor = _serviceProvider.GetService<ProjectEditor>();
+            var editor = _serviceProvider.GetService<IProjectEditor>();
             if (!string.IsNullOrEmpty(editor.ProjectPath))
             {
                 editor.OnSaveProject(editor.ProjectPath);
@@ -85,7 +85,7 @@ namespace Core2D.UI.Avalonia.Editor
         /// <inheritdoc/>
         public async void OnSaveAs()
         {
-            var editor = _serviceProvider.GetService<ProjectEditor>();
+            var editor = _serviceProvider.GetService<IProjectEditor>();
             var dlg = new SaveFileDialog() { Title = "Save" };
             dlg.Filters.Add(new FileDialogFilter() { Name = "Project", Extensions = { "project" } });
             dlg.Filters.Add(new FileDialogFilter() { Name = "All", Extensions = { "*" } });
@@ -112,7 +112,7 @@ namespace Core2D.UI.Avalonia.Editor
                 {
                     if (path != null)
                     {
-                        _serviceProvider.GetService<ProjectEditor>().OnImportJson(path); 
+                        _serviceProvider.GetService<IProjectEditor>().OnImportJson(path); 
                     }
                 }
             }
@@ -129,7 +129,7 @@ namespace Core2D.UI.Avalonia.Editor
             {
                 if (_serviceProvider.GetService<IFileSystem>().Exists(path))
                 {
-                    _serviceProvider.GetService<ProjectEditor>().OnImportJson(path);
+                    _serviceProvider.GetService<IProjectEditor>().OnImportJson(path);
                 }
             }
         }
@@ -150,11 +150,11 @@ namespace Core2D.UI.Avalonia.Editor
                         string resultExtension = System.IO.Path.GetExtension(path);
                         if (string.Compare(resultExtension, ".json", StringComparison.OrdinalIgnoreCase) == 0)
                         {
-                            _serviceProvider.GetService<ProjectEditor>().OnImportJson(path);
+                            _serviceProvider.GetService<IProjectEditor>().OnImportJson(path);
                         }
                         else if (string.Compare(resultExtension, ".xaml", StringComparison.OrdinalIgnoreCase) == 0)
                         {
-                            _serviceProvider.GetService<ProjectEditor>().OnImportJson(path);
+                            _serviceProvider.GetService<IProjectEditor>().OnImportJson(path);
                         } 
                     }
                 }
@@ -175,11 +175,11 @@ namespace Core2D.UI.Avalonia.Editor
                     string resultExtension = System.IO.Path.GetExtension(path);
                     if (string.Compare(resultExtension, ".json", StringComparison.OrdinalIgnoreCase) == 0)
                     {
-                        _serviceProvider.GetService<ProjectEditor>().OnImportJson(path);
+                        _serviceProvider.GetService<IProjectEditor>().OnImportJson(path);
                     }
                     else if (string.Compare(resultExtension, ".xaml", StringComparison.OrdinalIgnoreCase) == 0)
                     {
-                        _serviceProvider.GetService<ProjectEditor>().OnImportJson(path);
+                        _serviceProvider.GetService<IProjectEditor>().OnImportJson(path);
                     }
                 }
             }
@@ -199,7 +199,7 @@ namespace Core2D.UI.Avalonia.Editor
                 {
                     if (path != null)
                     {
-                        _serviceProvider.GetService<ProjectEditor>().OnImportXaml(path); 
+                        _serviceProvider.GetService<IProjectEditor>().OnImportXaml(path); 
                     }
                 }
             }
@@ -216,7 +216,7 @@ namespace Core2D.UI.Avalonia.Editor
             {
                 if (_serviceProvider.GetService<IFileSystem>().Exists(path))
                 {
-                    _serviceProvider.GetService<ProjectEditor>().OnImportXaml(path);
+                    _serviceProvider.GetService<IProjectEditor>().OnImportXaml(path);
                 }
             }
         }
@@ -224,7 +224,7 @@ namespace Core2D.UI.Avalonia.Editor
         /// <inheritdoc/>
         public async void OnExportJson(object item)
         {
-            var editor = _serviceProvider.GetService<ProjectEditor>();
+            var editor = _serviceProvider.GetService<IProjectEditor>();
             var dlg = new SaveFileDialog() { Title = "Save" };
             dlg.Filters.Add(new FileDialogFilter() { Name = "Json", Extensions = { "json" } });
             dlg.Filters.Add(new FileDialogFilter() { Name = "All", Extensions = { "*" } });
@@ -240,7 +240,7 @@ namespace Core2D.UI.Avalonia.Editor
         /// <inheritdoc/>
         public async void OnExportObject(object item)
         {
-            var editor = _serviceProvider.GetService<ProjectEditor>();
+            var editor = _serviceProvider.GetService<IProjectEditor>();
             if (item != null)
             {
                 var dlg = new SaveFileDialog() { Title = "Save" };
@@ -267,7 +267,7 @@ namespace Core2D.UI.Avalonia.Editor
         /// <inheritdoc/>
         public async void OnExportXaml(object item)
         {
-            var editor = _serviceProvider.GetService<ProjectEditor>();
+            var editor = _serviceProvider.GetService<IProjectEditor>();
             var dlg = new SaveFileDialog() { Title = "Save" };
             dlg.Filters.Add(new FileDialogFilter() { Name = "Xaml", Extensions = { "xaml" } });
             dlg.Filters.Add(new FileDialogFilter() { Name = "All", Extensions = { "*" } });
@@ -283,11 +283,11 @@ namespace Core2D.UI.Avalonia.Editor
         /// <inheritdoc/>
         public async void OnExport(object item)
         {
-            var editor = _serviceProvider.GetService<ProjectEditor>();
+            var editor = _serviceProvider.GetService<IProjectEditor>();
 
             string name = string.Empty;
 
-            if (item == null || item is ProjectEditor)
+            if (item == null || item is IProjectEditor)
             {
                 if (editor.Project == null)
                 {
@@ -345,7 +345,7 @@ namespace Core2D.UI.Avalonia.Editor
                 {
                     if (result.All(r => r != null))
                     {
-                        _serviceProvider.GetService<ProjectEditor>().OnExecuteScript(result);
+                        _serviceProvider.GetService<IProjectEditor>().OnExecuteScript(result);
                     }
                 }
             }
@@ -361,7 +361,7 @@ namespace Core2D.UI.Avalonia.Editor
         public void OnCopyAsEmf(object item)
         {
 #if NET461 && _WINDOWS
-            var editor = _serviceProvider.GetService<ProjectEditor>();
+            var editor = _serviceProvider.GetService<IProjectEditor>();
             var page = editor.Project?.CurrentContainer;
             if (page != null)
             {
@@ -408,7 +408,7 @@ namespace Core2D.UI.Avalonia.Editor
                 var path = result.FirstOrDefault();
                 if (path != null)
                 {
-                    _serviceProvider.GetService<ProjectEditor>().OnImportData(project, path);
+                    _serviceProvider.GetService<IProjectEditor>().OnImportData(project, path);
                 }
             }
         }
@@ -426,7 +426,7 @@ namespace Core2D.UI.Avalonia.Editor
                 var result = await dlg.ShowAsync(_serviceProvider.GetService<MainWindow>());
                 if (result != null)
                 {
-                    _serviceProvider.GetService<ProjectEditor>().OnExportData(result, db);
+                    _serviceProvider.GetService<IProjectEditor>().OnExportData(result, db);
                 }
             }
         }
@@ -445,7 +445,7 @@ namespace Core2D.UI.Avalonia.Editor
                     var path = result.FirstOrDefault();
                     if (path != null)
                     {
-                        _serviceProvider.GetService<ProjectEditor>().OnUpdateData(path, db);
+                        _serviceProvider.GetService<IProjectEditor>().OnUpdateData(path, db);
                     }
                 }
             }
@@ -456,7 +456,7 @@ namespace Core2D.UI.Avalonia.Editor
         {
             new DocumentWindow()
             {
-                DataContext = _serviceProvider.GetService<ProjectEditor>()
+                DataContext = _serviceProvider.GetService<IProjectEditor>()
             }
             .Show();
         }
@@ -466,7 +466,7 @@ namespace Core2D.UI.Avalonia.Editor
         {
             new BrowserWindow()
             {
-                DataContext = _serviceProvider.GetService<ProjectEditor>()
+                DataContext = _serviceProvider.GetService<IProjectEditor>()
             }
             .Show();
         }
@@ -476,7 +476,7 @@ namespace Core2D.UI.Avalonia.Editor
         {
             new ScriptWindow()
             {
-                DataContext = _serviceProvider.GetService<ProjectEditor>()
+                DataContext = _serviceProvider.GetService<IProjectEditor>()
             }
             .Show();
         }
@@ -486,7 +486,7 @@ namespace Core2D.UI.Avalonia.Editor
         {
             new AboutWindow()
             {
-                DataContext = _serviceProvider.GetService<ProjectEditor>()
+                DataContext = _serviceProvider.GetService<IProjectEditor>()
             }
             .ShowDialog(_serviceProvider.GetService<MainWindow>());
         }
@@ -494,13 +494,13 @@ namespace Core2D.UI.Avalonia.Editor
         /// <inheritdoc/>
         public void OnZoomAutoFit()
         {
-            _serviceProvider.GetService<ProjectEditor>().CanvasPlatform?.AutoFitZoom?.Invoke();
+            _serviceProvider.GetService<IProjectEditor>().CanvasPlatform?.AutoFitZoom?.Invoke();
         }
 
         /// <inheritdoc/>
         public void OnZoomReset()
         {
-            _serviceProvider.GetService<ProjectEditor>().CanvasPlatform?.ResetZoom?.Invoke();
+            _serviceProvider.GetService<IProjectEditor>().CanvasPlatform?.ResetZoom?.Invoke();
         }
 
         /// <inheritdoc/>
@@ -516,7 +516,7 @@ namespace Core2D.UI.Avalonia.Editor
                 var path = result.FirstOrDefault();
                 if (path != null)
                 {
-                    var editor = _serviceProvider.GetService<ProjectEditor>();
+                    var editor = _serviceProvider.GetService<IProjectEditor>();
                     editor.OnLoadLayout(path);
 
                     var dockFactory = _serviceProvider.GetService<IDockFactory>();
@@ -536,7 +536,7 @@ namespace Core2D.UI.Avalonia.Editor
             var result = await dlg.ShowAsync(_serviceProvider.GetService<MainWindow>());
             if (result != null)
             {
-                var editor = _serviceProvider.GetService<ProjectEditor>();
+                var editor = _serviceProvider.GetService<IProjectEditor>();
                 editor.OnSaveLayout(result);
             }
         }
@@ -544,7 +544,7 @@ namespace Core2D.UI.Avalonia.Editor
         /// <inheritdoc/>
         public void OnResetLayout()
         {
-            var editor = _serviceProvider.GetService<ProjectEditor>();
+            var editor = _serviceProvider.GetService<IProjectEditor>();
             var dockFactory = _serviceProvider.GetService<IDockFactory>();
 
             var currentViewId = editor.Layout.CurrentView.Id;

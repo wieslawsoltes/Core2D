@@ -61,7 +61,7 @@ namespace Core2D.UI.Avalonia.Views
 
         private void InvalidateChild(double zoomX, double zoomY, double offsetX, double offsetY)
         {
-            if (DataContext is ProjectEditor projectEditor)
+            if (DataContext is IProjectEditor projectEditor)
             {
                 var state = projectEditor.Renderers[0]?.State;
                 if (state != null)
@@ -86,7 +86,7 @@ namespace Core2D.UI.Avalonia.Views
         /// </summary>
         public void AttachEditor()
         {
-            if (DataContext is ProjectEditor projectEditor)
+            if (DataContext is IProjectEditor projectEditor)
             {
                 if (_isLoaded)
                     return;
@@ -126,7 +126,7 @@ namespace Core2D.UI.Avalonia.Views
         /// </summary>
         public void DetachEditor()
         {
-            if (DataContext is ProjectEditor projectEditor)
+            if (DataContext is IProjectEditor projectEditor)
             {
                 if (!_isLoaded)
                     return;

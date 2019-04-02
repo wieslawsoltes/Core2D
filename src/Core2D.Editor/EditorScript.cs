@@ -11,6 +11,6 @@ namespace Core2D.Editor
         /// <summary>
         /// Gets or sets project editor.
         /// </summary>
-        public ProjectEditor Editor { get; set; }
+        public IProjectEditor Editor { get; set; }
     }
 }

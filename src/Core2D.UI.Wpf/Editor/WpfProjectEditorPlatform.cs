@@ -46,14 +46,14 @@ namespace Core2D.UI.Wpf.Editor
 
                 if (dlg.ShowDialog(_serviceProvider.GetService<MainWindow>()) == true)
                 {
-                    _serviceProvider.GetService<ProjectEditor>().OnOpenProject(dlg.FileName);
+                    _serviceProvider.GetService<IProjectEditor>().OnOpenProject(dlg.FileName);
                 }
             }
             else
             {
                 if (File.Exists(path))
                 {
-                    _serviceProvider.GetService<ProjectEditor>().OnOpenProject(path);
+                    _serviceProvider.GetService<IProjectEditor>().OnOpenProject(path);
                 }
             }
         }
@@ -61,7 +61,7 @@ namespace Core2D.UI.Wpf.Editor
         /// <inheritdoc/>
         public void OnSave()
         {
-            var editor = _serviceProvider.GetService<ProjectEditor>();
+            var editor = _serviceProvider.GetService<IProjectEditor>();
             if (!string.IsNullOrEmpty(editor.ProjectPath))
             {
                 editor.OnSaveProject(editor.ProjectPath);
@@ -75,7 +75,7 @@ namespace Core2D.UI.Wpf.Editor
         /// <inheritdoc/>
         public void OnSaveAs()
         {
-            var editor = _serviceProvider.GetService<ProjectEditor>();
+            var editor = _serviceProvider.GetService<IProjectEditor>();
             var dlg = new SaveFileDialog()
             {
                 Filter = "Project (*.project)|*.project|All (*.*)|*.*",
@@ -108,7 +108,7 @@ namespace Core2D.UI.Wpf.Editor
 
                     foreach (var result in results)
                     {
-                        _serviceProvider.GetService<ProjectEditor>().OnImportJson(result);
+                        _serviceProvider.GetService<IProjectEditor>().OnImportJson(result);
                     }
                 }
             }
@@ -116,7 +116,7 @@ namespace Core2D.UI.Wpf.Editor
             {
                 if (File.Exists(path))
                 {
-                    _serviceProvider.GetService<ProjectEditor>().OnImportJson(path);
+                    _serviceProvider.GetService<IProjectEditor>().OnImportJson(path);
                 }
             }
         }
@@ -143,10 +143,10 @@ namespace Core2D.UI.Wpf.Editor
                         switch (index)
                         {
                             case 1:
-                                _serviceProvider.GetService<ProjectEditor>().OnImportJson(result);
+                                _serviceProvider.GetService<IProjectEditor>().OnImportJson(result);
                                 break;
                             case 2:
-                                _serviceProvider.GetService<ProjectEditor>().OnImportXaml(result);
+                                _serviceProvider.GetService<IProjectEditor>().OnImportXaml(result);
                                 break;
                             default:
                                 break;
@@ -161,11 +161,11 @@ namespace Core2D.UI.Wpf.Editor
                     string resultExtension = System.IO.Path.GetExtension(path);
                     if (string.Compare(resultExtension, ".json", true) == 0)
                     {
-                        _serviceProvider.GetService<ProjectEditor>().OnImportJson(path);
+                        _serviceProvider.GetService<IProjectEditor>().OnImportJson(path);
                     }
                     else if (string.Compare(resultExtension, ".xaml", true) == 0)
                     {
-                        _serviceProvider.GetService<ProjectEditor>().OnImportJson(path);
+                        _serviceProvider.GetService<IProjectEditor>().OnImportJson(path);
                     }
                 }
             }
@@ -190,7 +190,7 @@ namespace Core2D.UI.Wpf.Editor
 
                     foreach (var result in results)
                     {
-                        _serviceProvider.GetService<ProjectEditor>().OnImportXaml(result);
+                        _serviceProvider.GetService<IProjectEditor>().OnImportXaml(result);
                     }
                 }
             }
@@ -198,7 +198,7 @@ namespace Core2D.UI.Wpf.Editor
             {
                 if (File.Exists(path))
                 {
-                    _serviceProvider.GetService<ProjectEditor>().OnImportXaml(path);
+                    _serviceProvider.GetService<IProjectEditor>().OnImportXaml(path);
                 }
             }
         }
@@ -206,7 +206,7 @@ namespace Core2D.UI.Wpf.Editor
         /// <inheritdoc/>
         public void OnExportJson(object item)
         {
-            var editor = _serviceProvider.GetService<ProjectEditor>();
+            var editor = _serviceProvider.GetService<IProjectEditor>();
             var dlg = new SaveFileDialog()
             {
                 Filter = "Xaml (*.xaml)|*.xaml|All (*.*)|*.*",
@@ -223,7 +223,7 @@ namespace Core2D.UI.Wpf.Editor
         /// <inheritdoc/>
         public void OnExportObject(object item)
         {
-            var editor = _serviceProvider.GetService<ProjectEditor>();
+            var editor = _serviceProvider.GetService<IProjectEditor>();
             if (item != null)
             {
                 var dlg = new SaveFileDialog()
@@ -253,7 +253,7 @@ namespace Core2D.UI.Wpf.Editor
         /// <inheritdoc/>
         public void OnExportXaml(object item)
         {
-            var editor = _serviceProvider.GetService<ProjectEditor>();
+            var editor = _serviceProvider.GetService<IProjectEditor>();
             var dlg = new SaveFileDialog()
             {
                 Filter = "Xaml (*.xaml)|*.xaml|All (*.*)|*.*",
@@ -270,11 +270,11 @@ namespace Core2D.UI.Wpf.Editor
         /// <inheritdoc/>
         public void OnExport(object item)
         {
-            var editor = _serviceProvider.GetService<ProjectEditor>();
+            var editor = _serviceProvider.GetService<IProjectEditor>();
 
             string name = string.Empty;
 
-            if (item == null || item is ProjectEditor)
+            if (item == null || item is IProjectEditor)
             {
                 if (editor.Project == null)
                 {
@@ -371,7 +371,7 @@ namespace Core2D.UI.Wpf.Editor
         public void OnExit()
         {
             var window = _serviceProvider.GetService<MainWindow>();
-            var editor = _serviceProvider.GetService<ProjectEditor>();
+            var editor = _serviceProvider.GetService<IProjectEditor>();
             if (editor.IsProjectDirty)
             {
                 var result = MessageBox.Show(
@@ -407,7 +407,7 @@ namespace Core2D.UI.Wpf.Editor
         /// <inheritdoc/>
         public void OnCopyAsEmf(object item)
         {
-            var editor = _serviceProvider.GetService<ProjectEditor>();
+            var editor = _serviceProvider.GetService<IProjectEditor>();
             var page = editor.Project?.CurrentContainer;
 
             var dataFlow = _serviceProvider.GetService<IDataFlow>();
@@ -459,7 +459,7 @@ namespace Core2D.UI.Wpf.Editor
 
             if (dlg.ShowDialog(_serviceProvider.GetService<MainWindow>()) == true)
             {
-                _serviceProvider.GetService<ProjectEditor>().OnImportData(project, dlg.FileName);
+                _serviceProvider.GetService<IProjectEditor>().OnImportData(project, dlg.FileName);
             }
         }
 
@@ -477,7 +477,7 @@ namespace Core2D.UI.Wpf.Editor
 
                 if (dlg.ShowDialog(_serviceProvider.GetService<MainWindow>()) == true)
                 {
-                    _serviceProvider.GetService<ProjectEditor>().OnExportData(dlg.FileName, db);
+                    _serviceProvider.GetService<IProjectEditor>().OnExportData(dlg.FileName, db);
                 }
             }
         }
@@ -496,7 +496,7 @@ namespace Core2D.UI.Wpf.Editor
 
                 if (dlg.ShowDialog(_serviceProvider.GetService<MainWindow>()) == true)
                 {
-                    _serviceProvider.GetService<ProjectEditor>().OnUpdateData(dlg.FileName, db);
+                    _serviceProvider.GetService<IProjectEditor>().OnUpdateData(dlg.FileName, db);
                 }
             }
         }
@@ -528,31 +528,31 @@ namespace Core2D.UI.Wpf.Editor
         /// <inheritdoc/>
         public void OnZoomAutoFit()
         {
-            _serviceProvider.GetService<ProjectEditor>().CanvasPlatform?.AutoFitZoom?.Invoke();
+            _serviceProvider.GetService<IProjectEditor>().CanvasPlatform?.AutoFitZoom?.Invoke();
         }
 
         /// <inheritdoc/>
         public void OnZoomReset()
         {
-            _serviceProvider.GetService<ProjectEditor>().CanvasPlatform?.ResetZoom?.Invoke();
+            _serviceProvider.GetService<IProjectEditor>().CanvasPlatform?.ResetZoom?.Invoke();
         }
 
         /// <inheritdoc/>
         public void OnLoadLayout()
         {
-            _serviceProvider.GetService<ProjectEditor>().LayoutPlatform?.LoadLayout?.Invoke();
+            _serviceProvider.GetService<IProjectEditor>().LayoutPlatform?.LoadLayout?.Invoke();
         }
 
         /// <inheritdoc/>
         public void OnSaveLayout()
         {
-            _serviceProvider.GetService<ProjectEditor>().LayoutPlatform?.SaveLayout?.Invoke();
+            _serviceProvider.GetService<IProjectEditor>().LayoutPlatform?.SaveLayout?.Invoke();
         }
 
         /// <inheritdoc/>
         public void OnResetLayout()
         {
-            _serviceProvider.GetService<ProjectEditor>().LayoutPlatform?.ResetLayout?.Invoke();
+            _serviceProvider.GetService<IProjectEditor>().LayoutPlatform?.ResetLayout?.Invoke();
         }
     }
 }

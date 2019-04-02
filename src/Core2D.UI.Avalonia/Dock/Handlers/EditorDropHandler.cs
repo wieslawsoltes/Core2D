@@ -18,7 +18,7 @@ namespace Core2D.UI.Avalonia.Dock.Handlers
     {
         public static IDropHandler Instance = new EditorDropHandler();
 
-        private bool Validate(ProjectEditor editor, object sender, DragEventArgs e, bool bExecute)
+        private bool Validate(IProjectEditor editor, object sender, DragEventArgs e, bool bExecute)
         {
             var point = DropHelper.GetPosition(sender, e);
 
@@ -69,7 +69,7 @@ namespace Core2D.UI.Avalonia.Dock.Handlers
         /// <inheritdoc/>
         public override bool Validate(object sender, DragEventArgs e, object sourceContext, object targetContext, object state)
         {
-            if (targetContext is ProjectEditor editor)
+            if (targetContext is IProjectEditor editor)
             {
                 return Validate(editor, sender, e, false);
             }
@@ -79,7 +79,7 @@ namespace Core2D.UI.Avalonia.Dock.Handlers
         /// <inheritdoc/>
         public override bool Execute(object sender, DragEventArgs e, object sourceContext, object targetContext, object state)
         {
-            if (targetContext is ProjectEditor editor)
+            if (targetContext is IProjectEditor editor)
             {
                 return Validate(editor, sender, e, true);
             }

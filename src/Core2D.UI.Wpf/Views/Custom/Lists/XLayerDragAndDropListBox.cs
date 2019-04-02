@@ -26,7 +26,7 @@ namespace Core2D.UI.Wpf.Views.Custom.Lists
         /// <param name="array">The updated immutable array.</param>
         protected override void UpdateDataContext(ImmutableArray<ILayerContainer> array)
         {
-            var editor = (ProjectEditor)Tag;
+            var editor = (IProjectEditor)Tag;
 
             var container = editor.Project.CurrentContainer;
 

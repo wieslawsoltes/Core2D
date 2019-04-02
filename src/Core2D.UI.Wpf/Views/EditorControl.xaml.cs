@@ -20,7 +20,7 @@ namespace Core2D.UI.Wpf.Views
     /// </summary>
     public partial class EditorControl : UserControl
     {
-        private ProjectEditor _projectEditor = null;
+        private IProjectEditor _projectEditor = null;
         private WpfInputSource _inputSource = null;
         private ProjectEditorInputTarget _inputTarget = null;
         private InputProcessor _inputProcessor = null;
@@ -221,7 +221,7 @@ namespace Core2D.UI.Wpf.Views
         /// </summary>
         public void AttachEditor()
         {
-            _projectEditor = DataContext as ProjectEditor;
+            _projectEditor = DataContext as IProjectEditor;
 
             if (_projectEditor != null)
             {

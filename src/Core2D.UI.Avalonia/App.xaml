@@ -587,7 +587,7 @@
     </Application.Resources>
     <Application.DataTemplates>
         <!-- Editor -->
-        <DataTemplate DataType="Editor:ProjectEditor">
+        <DataTemplate DataType="Editor:IProjectEditor">
             <Grid/>
         </DataTemplate>
         <!-- Style -->

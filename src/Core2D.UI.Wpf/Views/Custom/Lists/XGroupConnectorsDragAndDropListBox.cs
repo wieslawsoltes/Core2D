@@ -26,7 +26,7 @@ namespace Core2D.UI.Wpf.Views.Custom.Lists
         /// <param name="array">The updated immutable array.</param>
         protected override void UpdateDataContext(ImmutableArray<IPointShape> array)
         {
-            var editor = (ProjectEditor)Tag;
+            var editor = (IProjectEditor)Tag;
             var group = DataContext as IGroupShape;
             if (group == null)
                 return;

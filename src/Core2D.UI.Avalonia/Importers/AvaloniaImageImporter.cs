@@ -33,7 +33,7 @@ namespace Core2D.UI.Avalonia.Importers
             using (var stream = fileIO.Open(path))
             {
                 var bytes = fileIO.ReadBinary(stream);
-                var project = _serviceProvider.GetService<ProjectEditor>().Project;
+                var project = _serviceProvider.GetService<IProjectEditor>().Project;
                 if (project is IImageCache imageCache)
                 {
                     var key = imageCache.AddImageFromFile(path, bytes);

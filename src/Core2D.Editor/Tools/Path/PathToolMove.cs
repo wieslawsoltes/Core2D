@@ -51,7 +51,7 @@ namespace Core2D.Editor.Tools.Path
         public void LeftDown(InputArgs args)
         {
             var factory = _serviceProvider.GetService<IFactory>();
-            var editor = _serviceProvider.GetService<ProjectEditor>();
+            var editor = _serviceProvider.GetService<IProjectEditor>();
             (double sx, double sy) = editor.TryToSnap(args);
             switch (_currentState)
             {
@@ -90,7 +90,7 @@ namespace Core2D.Editor.Tools.Path
         /// <inheritdoc/>
         public void Move(InputArgs args)
         {
-            var editor = _serviceProvider.GetService<ProjectEditor>();
+            var editor = _serviceProvider.GetService<IProjectEditor>();
             (double sx, double sy) = editor.TryToSnap(args);
             switch (_currentState)
             {

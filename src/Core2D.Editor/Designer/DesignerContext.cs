@@ -21,9 +21,9 @@ namespace Core2D.Editor.Designer
     public class DesignerContext
     {
         /// <summary>
-        /// The design time <see cref="ProjectEditor"/>.
+        /// The design time <see cref="IProjectEditor"/>.
         /// </summary>
-        public static ProjectEditor Editor { get; set; }
+        public static IProjectEditor Editor { get; set; }
 
         /// <summary>
         /// The design time <see cref="IMatrixObject"/> template.
@@ -240,7 +240,7 @@ namespace Core2D.Editor.Designer
 
             // Editor
 
-            Editor = serviceProvider.GetService<ProjectEditor>();
+            Editor = serviceProvider.GetService<IProjectEditor>();
 
             // Recent Projects
 

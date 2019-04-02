@@ -61,7 +61,7 @@ namespace Core2D.Editor.Tools.Path
         public void LeftDown(InputArgs args)
         {
             var factory = _serviceProvider.GetService<IFactory>();
-            var editor = _serviceProvider.GetService<ProjectEditor>();
+            var editor = _serviceProvider.GetService<IProjectEditor>();
             var pathTool = _serviceProvider.GetService<ToolPath>();
             (double sx, double sy) = editor.TryToSnap(args);
             switch (_currentState)
@@ -154,7 +154,7 @@ namespace Core2D.Editor.Tools.Path
         /// <inheritdoc/>
         public void Move(InputArgs args)
         {
-            var editor = _serviceProvider.GetService<ProjectEditor>();
+            var editor = _serviceProvider.GetService<IProjectEditor>();
             var pathTool = _serviceProvider.GetService<ToolPath>();
             (double sx, double sy) = editor.TryToSnap(args);
             switch (_currentState)
@@ -192,7 +192,7 @@ namespace Core2D.Editor.Tools.Path
         /// </summary>
         public void ToStateEnd()
         {
-            var editor = _serviceProvider.GetService<ProjectEditor>();
+            var editor = _serviceProvider.GetService<IProjectEditor>();
             _selection?.Reset();
             _selection = new ToolLineSelection(
                 _serviceProvider,
@@ -221,7 +221,7 @@ namespace Core2D.Editor.Tools.Path
         /// <inheritdoc/>
         public void Reset()
         {
-            var editor = _serviceProvider.GetService<ProjectEditor>();
+            var editor = _serviceProvider.GetService<IProjectEditor>();
             var pathTool = _serviceProvider.GetService<ToolPath>();
 
             switch (_currentState)

@@ -62,16 +62,16 @@ namespace Core2D.UI.Wpf.Dock.Factories
         {
             ContextLocator = new Dictionary<string, Func<object>>
             {
-                [nameof(IRootDock)] = () => _serviceProvider.GetService<ProjectEditor>(),
-                [nameof(ILayoutDock)] = () => _serviceProvider.GetService<ProjectEditor>(),
-                [nameof(IDocumentDock)] = () => _serviceProvider.GetService<ProjectEditor>(),
-                [nameof(IToolDock)] = () => _serviceProvider.GetService<ProjectEditor>(),
-                [nameof(ISplitterDock)] = () => _serviceProvider.GetService<ProjectEditor>(),
-                [nameof(IDockWindow)] = () => _serviceProvider.GetService<ProjectEditor>(),
-                [nameof(IDocumentTab)] = () => _serviceProvider.GetService<ProjectEditor>(),
-                [nameof(IToolTab)] = () => _serviceProvider.GetService<ProjectEditor>(),
-                [nameof(EditorView)] = () => _serviceProvider.GetService<ProjectEditor>(),
-                [nameof(DashboardView)] = () => _serviceProvider.GetService<ProjectEditor>()
+                [nameof(IRootDock)] = () => _serviceProvider.GetService<IProjectEditor>(),
+                [nameof(ILayoutDock)] = () => _serviceProvider.GetService<IProjectEditor>(),
+                [nameof(IDocumentDock)] = () => _serviceProvider.GetService<IProjectEditor>(),
+                [nameof(IToolDock)] = () => _serviceProvider.GetService<IProjectEditor>(),
+                [nameof(ISplitterDock)] = () => _serviceProvider.GetService<IProjectEditor>(),
+                [nameof(IDockWindow)] = () => _serviceProvider.GetService<IProjectEditor>(),
+                [nameof(IDocumentTab)] = () => _serviceProvider.GetService<IProjectEditor>(),
+                [nameof(IToolTab)] = () => _serviceProvider.GetService<IProjectEditor>(),
+                [nameof(EditorView)] = () => _serviceProvider.GetService<IProjectEditor>(),
+                [nameof(DashboardView)] = () => _serviceProvider.GetService<IProjectEditor>()
             };
 
             HostLocator = new Dictionary<string, Func<IDockHost>>

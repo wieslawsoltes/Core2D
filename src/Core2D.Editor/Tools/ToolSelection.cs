@@ -95,7 +95,7 @@ namespace Core2D.Editor.Tools
         /// </summary>
         private void GenerateMoveSelectionCache()
         {
-            var editor = _serviceProvider.GetService<ProjectEditor>();
+            var editor = _serviceProvider.GetService<IProjectEditor>();
 
             if (editor.Renderers[0].State.SelectedShape != null)
             {
@@ -165,7 +165,7 @@ namespace Core2D.Editor.Tools
         /// <param name="args">The input arguments.</param>
         private void MoveSelectionCacheTo(InputArgs args)
         {
-            var editor = _serviceProvider.GetService<ProjectEditor>();
+            var editor = _serviceProvider.GetService<IProjectEditor>();
             (double sx, double sy) = editor.TryToSnap(args);
             double dx = sx - _startX;
             double dy = sy - _startY;
@@ -175,18 +175,18 @@ namespace Core2D.Editor.Tools
 
             if (_pointsCache != null)
             {
-                ProjectEditor.MoveShapesBy(_pointsCache, dx, dy);
+                editor.MoveShapesBy(_pointsCache, dx, dy);
             }
 
             if (_shapesCache != null)
             {
-                ProjectEditor.MoveShapesBy(_shapesCache, dx, dy);
+                editor.MoveShapesBy(_shapesCache, dx, dy);
             }
         }
 
         private bool IsSelectionAvailable()
         {
-            var editor = _serviceProvider.GetService<ProjectEditor>();
+            var editor = _serviceProvider.GetService<IProjectEditor>();
             return editor?.Renderers?[0]?.State?.SelectedShape != null
                 || editor?.Renderers?[0]?.State?.SelectedShapes != null;
         }
@@ -195,7 +195,7 @@ namespace Core2D.Editor.Tools
         public void LeftDown(InputArgs args)
         {
             var factory = _serviceProvider.GetService<IFactory>();
-            var editor = _serviceProvider.GetService<ProjectEditor>();
+            var editor = _serviceProvider.GetService<IProjectEditor>();
             (double x, double y) = args;
             (double sx, double sy) = editor.TryToSnap(args);
             switch (_currentState)
@@ -262,7 +262,7 @@ namespace Core2D.Editor.Tools
         /// <inheritdoc/>
         public void LeftUp(InputArgs args)
         {
-            var editor = _serviceProvider.GetService<ProjectEditor>();
+            var editor = _serviceProvider.GetService<IProjectEditor>();
             switch (_currentState)
             {
                 case State.None:
@@ -296,12 +296,12 @@ namespace Core2D.Editor.Tools
                                     {
                                         if (state.Points != null)
                                         {
-                                            ProjectEditor.MoveShapesBy(state.Points, state.DeltaX, state.DeltaY);
+                                            editor.MoveShapesBy(state.Points, state.DeltaX, state.DeltaY);
                                         }
 
                                         if (state.Shapes != null)
                                         {
-                                            ProjectEditor.MoveShapesBy(state.Shapes, state.DeltaX, state.DeltaY);
+                                            editor.MoveShapesBy(state.Shapes, state.DeltaX, state.DeltaY);
                                         }
                                     });
                             }
@@ -330,7 +330,7 @@ namespace Core2D.Editor.Tools
         /// <inheritdoc/>
         public void RightDown(InputArgs args)
         {
-            var editor = _serviceProvider.GetService<ProjectEditor>();
+            var editor = _serviceProvider.GetService<IProjectEditor>();
             switch (_currentState)
             {
                 case State.None:
@@ -355,7 +355,7 @@ namespace Core2D.Editor.Tools
         /// <inheritdoc/>
         public void Move(InputArgs args)
         {
-            var editor = _serviceProvider.GetService<ProjectEditor>();
+            var editor = _serviceProvider.GetService<IProjectEditor>();
             switch (_currentState)
             {
                 case State.None:

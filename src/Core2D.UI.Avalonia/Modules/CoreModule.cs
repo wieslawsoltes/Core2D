@@ -18,7 +18,7 @@ namespace Core2D.UI.Avalonia.Modules
         /// <inheritdoc/>
         protected override void Load(ContainerBuilder builder)
         {
-            builder.RegisterType<ProjectEditor>().As<ProjectEditor>().InstancePerLifetimeScope();
+            builder.RegisterType<ProjectEditor>().As<IProjectEditor>().InstancePerLifetimeScope();
             builder.RegisterType<Factory>().As<IFactory>().InstancePerLifetimeScope();
             builder.RegisterType<ContainerFactory>().As<IContainerFactory>().InstancePerLifetimeScope();
             builder.RegisterType<ShapeFactory>().As<IShapeFactory>().InstancePerLifetimeScope();

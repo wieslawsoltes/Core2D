@@ -17,7 +17,7 @@ namespace Core2D.Editor
     /// </summary>
     public class ProjectObserver : IDisposable
     {
-        private readonly ProjectEditor _editor;
+        private readonly IProjectEditor _editor;
         private readonly Action _invalidateContainer;
         private readonly Action _invalidateStyles;
         private readonly Action _invalidateLayers;
@@ -26,8 +26,8 @@ namespace Core2D.Editor
         /// <summary>
         /// Initializes a new instance of the <see cref="ProjectObserver"/> class.
         /// </summary>
-        /// <param name="editor">The current <see cref="ProjectEditor"/> object.</param>
-        public ProjectObserver(ProjectEditor editor)
+        /// <param name="editor">The current <see cref="IProjectEditor"/> object.</param>
+        public ProjectObserver(IProjectEditor editor)
         {
             if (editor?.Project != null)
             {

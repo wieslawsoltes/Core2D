@@ -55,7 +55,7 @@ namespace Core2D.Editor.Tools
         public void LeftDown(InputArgs args)
         {
             var factory = _serviceProvider.GetService<IFactory>();
-            var editor = _serviceProvider.GetService<ProjectEditor>();
+            var editor = _serviceProvider.GetService<IProjectEditor>();
             (double sx, double sy) = editor.TryToSnap(args);
             switch (_currentState)
             {
@@ -156,7 +156,7 @@ namespace Core2D.Editor.Tools
         /// <inheritdoc/>
         public void Move(InputArgs args)
         {
-            var editor = _serviceProvider.GetService<ProjectEditor>();
+            var editor = _serviceProvider.GetService<IProjectEditor>();
             (double sx, double sy) = editor.TryToSnap(args);
             switch (_currentState)
             {
@@ -208,7 +208,7 @@ namespace Core2D.Editor.Tools
         /// </summary>
         public void ToStatePoint3()
         {
-            var editor = _serviceProvider.GetService<ProjectEditor>();
+            var editor = _serviceProvider.GetService<IProjectEditor>();
             _selection = new ToolQuadraticBezierSelection(
                 _serviceProvider,
                 editor.Project.CurrentContainer.HelperLayer,
@@ -241,7 +241,7 @@ namespace Core2D.Editor.Tools
         /// <inheritdoc/>
         public void Reset()
         {
-            var editor = _serviceProvider.GetService<ProjectEditor>();
+            var editor = _serviceProvider.GetService<IProjectEditor>();
 
             switch (_currentState)
             {

@@ -11,7 +11,6 @@ using Core2D.Editor.Bounds;
 using Core2D.Editor.History;
 using Core2D.Editor.Input;
 using Core2D.Editor.Recent;
-using Core2D.Editor.Tools;
 using Core2D.Interfaces;
 using Core2D.Renderer;
 using Core2D.Shapes;
@@ -26,7 +25,7 @@ namespace Core2D.Editor
     /// <summary>
     /// Project editor.
     /// </summary>
-    public class ProjectEditor : ObservableObject
+    public class ProjectEditor : ObservableObject, IProjectEditor
     {
         private readonly IServiceProvider _serviceProvider;
         private IProjectContainer _project;
@@ -62,208 +61,144 @@ namespace Core2D.Editor
         private readonly Lazy<IEditorCanvasPlatform> _canvasPlatform;
         private readonly Lazy<IEditorLayoutPlatform> _layoutPlatform;
 
-        /// <summary>
-        /// Gets or sets current project.
-        /// </summary>
+        /// <inheritdoc/>
         public IProjectContainer Project
         {
             get => _project;
             set => Update(ref _project, value);
         }
 
-        /// <summary>
-        /// Gets or sets current project path.
-        /// </summary>
+        /// <inheritdoc/>
         public string ProjectPath
         {
             get => _projectPath;
             set => Update(ref _projectPath, value);
         }
 
-        /// <summary>
-        /// Gets or sets flag indicating that current project was modified.
-        /// </summary>
+        /// <inheritdoc/>
         public bool IsProjectDirty
         {
             get => _isProjectDirty;
             set => Update(ref _isProjectDirty, value);
         }
 
-        /// <summary>
-        /// Gets or sets current project collections and objects observer.
-        /// </summary>
+        /// <inheritdoc/>
         public ProjectObserver Observer
         {
             get => _observer;
             set => Update(ref _observer, value);
         }
 
-        /// <summary>
-        /// Gets or sets flag indicating that current tool is in idle mode.
-        /// </summary>
+        /// <inheritdoc/>
         public bool IsToolIdle
         {
             get => _isToolIdle;
             set => Update(ref _isToolIdle, value);
         }
 
-        /// <summary>
-        /// Gets or sets current editor tool.
-        /// </summary>
+        /// <inheritdoc/>
         public IEditorTool CurrentTool
         {
             get => _currentTool;
             set => Update(ref _currentTool, value);
         }
 
-        /// <summary>
-        /// Gets or sets current editor path tool.
-        /// </summary>
+        /// <inheritdoc/>
         public IPathTool CurrentPathTool
         {
             get => _currentPathTool;
             set => Update(ref _currentPathTool, value);
         }
 
-        /// <summary>
-        /// Gets or sets recent projects collection.
-        /// </summary>
+        /// <inheritdoc/>
         public ImmutableArray<RecentFile> RecentProjects
         {
             get => _recentProjects;
             set => Update(ref _recentProjects, value);
         }
 
-        /// <summary>
-        /// Gets or sets current recent project.
-        /// </summary>
+        /// <inheritdoc/>
         public RecentFile CurrentRecentProject
         {
             get => _currentRecentProject;
             set => Update(ref _currentRecentProject, value);
         }
 
-        /// <summary>
-        /// Gets or sets current layout configuration.
-        /// </summary>
+        /// <inheritdoc/>
         public IDock Layout
         {
             get => _layout;
             set => Update(ref _layout, value);
         }
 
-        /// <summary>
-        /// Gets or sets about info.
-        /// </summary>
+        /// <inheritdoc/>
         public AboutInfo AboutInfo
         {
             get => _aboutInfo;
             set => Update(ref _aboutInfo, value);
         }
 
-        /// <summary>
-        /// Gets or sets editor tools.
-        /// </summary>
+        /// <inheritdoc/>
         public ImmutableArray<IEditorTool> Tools => _tools.Value;
 
-        /// <summary>
-        /// Gets or sets editor path tools.
-        /// </summary>
+        /// <inheritdoc/>
         public ImmutableArray<IPathTool> PathTools => _pathTools.Value;
 
-        /// <summary>
-        /// Gets or sets current editor hit test.
-        /// </summary>
+        /// <inheritdoc/>
         public IHitTest HitTest => _hitTest.Value;
 
-        /// <summary>
-        /// Gets current log.
-        /// </summary>
+        /// <inheritdoc/>
         public ILog Log => _log.Value;
 
-        /// <summary>
-        /// Gets current data flow.
-        /// </summary>
+        /// <inheritdoc/>
         public IDataFlow DataFlow => _dataFlow.Value;
 
-        /// <summary>
-        /// Gets current renderer's.
-        /// </summary>
+        /// <inheritdoc/>
         public IShapeRenderer[] Renderers => _renderers.Value;
 
-        /// <summary>
-        /// Gets current file system.
-        /// </summary>
+        /// <inheritdoc/>
         public IFileSystem FileIO => _fileIO.Value;
 
-        /// <summary>
-        /// Gets factory.
-        /// </summary>
+        /// <inheritdoc/>
         public IFactory Factory => _factory.Value;
 
-        /// <summary>
-        /// Gets container factory.
-        /// </summary>
+        /// <inheritdoc/>
         public IContainerFactory ContainerFactory => _containerFactory.Value;
 
-        /// <summary>
-        /// Gets shape factory.
-        /// </summary>
+        /// <inheritdoc/>
         public IShapeFactory ShapeFactory => _shapeFactory.Value;
 
-        /// <summary>
-        /// Gets text clipboard.
-        /// </summary>
+        /// <inheritdoc/>
         public ITextClipboard TextClipboard => _textClipboard.Value;
 
-        /// <summary>
-        /// Gets Json serializer.
-        /// </summary>
+        /// <inheritdoc/>
         public IJsonSerializer JsonSerializer => _jsonSerializer.Value;
 
-        /// <summary>
-        /// Gets Xaml serializer.
-        /// </summary>
+        /// <inheritdoc/>
         public IXamlSerializer XamlSerializer => _xamlSerializer.Value;
 
-        /// <summary>
-        /// Gets available file writers.
-        /// </summary>
+        /// <inheritdoc/>
         public ImmutableArray<IFileWriter> FileWriters => _fileWriters.Value;
 
-        /// <summary>
-        /// Gets Csv file reader.
-        /// </summary>
+        /// <inheritdoc/>
         public ITextFieldReader<IDatabase> CsvReader => _csvReader.Value;
 
-        /// <summary>
-        /// Gets Csv file writer.
-        /// </summary>
+        /// <inheritdoc/>
         public ITextFieldWriter<IDatabase> CsvWriter => _csvWriter.Value;
 
-        /// <summary>
-        /// Gets image key importer.
-        /// </summary>
+        /// <inheritdoc/>
         public IImageImporter ImageImporter => _imageImporter.Value;
 
-        /// <summary>
-        /// Gets code script runner.
-        /// </summary>
+        /// <inheritdoc/>
         public IScriptRunner ScriptRunner => _scriptRunner.Value;
 
-        /// <summary>
-        /// Gets project editor platform.
-        /// </summary>
+        /// <inheritdoc/>
         public IProjectEditorPlatform Platform => _platform.Value;
 
-        /// <summary>
-        /// Gets editor canvas platform.
-        /// </summary>
+        /// <inheritdoc/>
         public IEditorCanvasPlatform CanvasPlatform => _canvasPlatform.Value;
 
-        /// <summary>
-        /// Gets editor layout platform.
-        /// </summary>
+        /// <inheritdoc/>
         public IEditorLayoutPlatform LayoutPlatform => _layoutPlatform.Value;
 
         private object ScriptState { get; set; } = default;
@@ -333,11 +268,7 @@ namespace Core2D.Editor
             return r >= snap / 2.0 ? value + snap - r : value - r;
         }
 
-        /// <summary>
-        /// Try to snap input arguments.
-        /// </summary>
-        /// <param name="args">The input arguments.</param>
-        /// <returns>The snapped value if enabled otherwise original position.</returns>
+        /// <inheritdoc/>
         public (double sx, double sy) TryToSnap(InputArgs args)
         {
             if (Project != null && Project.Options.SnapToGrid == true)
@@ -346,24 +277,20 @@ namespace Core2D.Editor
                 return (args.X, args.Y);
         }
 
-        /// <summary>
-        /// Get object item name.
-        /// </summary>
-        /// <param name="item">The object item.</param>
+        /// <inheritdoc/>
         public string GetName(object item)
         {
             if (item != null)
             {
                 if (item is IObservableObject observable)
+                {
                     return observable.Name;
+                }
             }
             return string.Empty;
         }
 
-        /// <summary>
-        /// Create new project, document or page.
-        /// </summary>
-        /// <param name="item">The parent item.</param>
+        /// <inheritdoc/>
         public void OnNew(object item)
         {
             if (item is IPageContainer page)
@@ -378,7 +305,7 @@ namespace Core2D.Editor
             {
                 OnNewDocument();
             }
-            else if (item is ProjectEditor)
+            else if (item is IProjectEditor)
             {
                 OnNewProject();
             }
@@ -402,10 +329,7 @@ namespace Core2D.Editor
             }
         }
 
-        /// <summary>
-        /// Create new page.
-        /// </summary>
-        /// <param name="selected">The selected page.</param>
+        /// <inheritdoc/>
         public void OnNewPage(IPageContainer selected)
         {
             var document = Project?.Documents.FirstOrDefault(d => d.Pages.Contains(selected));
@@ -420,10 +344,7 @@ namespace Core2D.Editor
             }
         }
 
-        /// <summary>
-        /// Create new page.
-        /// </summary>
-        /// <param name="selected">The selected document.</param>
+        /// <inheritdoc/>
         public void OnNewPage(IDocumentContainer selected)
         {
             var page =
@@ -434,9 +355,7 @@ namespace Core2D.Editor
             Project?.SetCurrentContainer(page);
         }
 
-        /// <summary>
-        /// Create new document.
-        /// </summary>
+        /// <inheritdoc/>
         public void OnNewDocument()
         {
             var document =
@@ -448,9 +367,7 @@ namespace Core2D.Editor
             Project?.SetCurrentContainer(document?.Pages.FirstOrDefault());
         }
 
-        /// <summary>
-        /// Create new project.
-        /// </summary>
+        /// <inheritdoc/>
         public void OnNewProject()
         {
             OnUnload();
@@ -459,10 +376,7 @@ namespace Core2D.Editor
             CanvasPlatform?.Invalidate?.Invoke();
         }
 
-        /// <summary>
-        /// Open project.
-        /// </summary>
-        /// <param name="path">The project file path.</param>
+        /// <inheritdoc/>
         public void OnOpenProject(string path)
         {
             try
@@ -485,11 +399,7 @@ namespace Core2D.Editor
             }
         }
 
-        /// <summary>
-        /// Open project.
-        /// </summary>
-        /// <param name="project">The project to open.</param>
-        /// <param name="path">The project file path.</param>
+        /// <inheritdoc/>
         public void OnOpenProject(IProjectContainer project, string path)
         {
             try
@@ -508,9 +418,7 @@ namespace Core2D.Editor
             }
         }
 
-        /// <summary>
-        /// Close project.
-        /// </summary>
+        /// <inheritdoc/>
         public void OnCloseProject()
         {
             OnNavigate("DashboardView");
@@ -518,10 +426,7 @@ namespace Core2D.Editor
             OnUnload();
         }
 
-        /// <summary>
-        /// Save project.
-        /// </summary>
-        /// <param name="path">The project file path.</param>
+        /// <inheritdoc/>
         public void OnSaveProject(string path)
         {
             try
@@ -545,11 +450,7 @@ namespace Core2D.Editor
             }
         }
 
-        /// <summary>
-        /// Import database.
-        /// </summary>
-        /// <param name="project">The target project.</param>
-        /// <param name="path">The database file path.</param>
+        /// <inheritdoc/>
         public void OnImportData(IProjectContainer project, string path)
         {
             try
@@ -570,20 +471,13 @@ namespace Core2D.Editor
             }
         }
 
-        /// <summary>
-        /// Import database.
-        /// </summary>
-        /// <param name="path">The database file path.</param>
+        /// <inheritdoc/>
         public void OnImportData(string path)
         {
             OnImportData(Project, path);
         }
 
-        /// <summary>
-        /// Export database.
-        /// </summary>
-        /// <param name="path">The database file path.</param>
-        /// <param name="database">The database object.</param>
+        /// <inheritdoc/>
         public void OnExportData(string path, IDatabase database)
         {
             try
@@ -596,11 +490,7 @@ namespace Core2D.Editor
             }
         }
 
-        /// <summary>
-        /// Update database.
-        /// </summary>
-        /// <param name="path">The database file path.</param>
-        /// <param name="database">The database object.</param>
+        /// <inheritdoc/>
         public void OnUpdateData(string path, IDatabase database)
         {
             try
@@ -617,11 +507,7 @@ namespace Core2D.Editor
             }
         }
 
-        /// <summary>
-        /// Import object.
-        /// </summary>
-        /// <param name="item">The object to import.</param>
-        /// <param name="restore">Try to restore objects by name.</param>
+        /// <inheritdoc/>
         public void OnImportObject(object item, bool restore)
         {
             if (item is IShapeStyle style)
@@ -777,10 +663,7 @@ namespace Core2D.Editor
             }
         }
 
-        /// <summary>
-        /// Import Xaml from a file.
-        /// </summary>
-        /// <param name="path">The xaml file path.</param>
+        /// <inheritdoc/>
         public void OnImportXaml(string path)
         {
             try
@@ -797,10 +680,7 @@ namespace Core2D.Editor
             }
         }
 
-        /// <summary>
-        /// Import Xaml string.
-        /// </summary>
-        /// <param name="xaml">The xaml string.</param>
+        /// <inheritdoc/>
         public void OnImportXamlString(string xaml)
         {
             var item = XamlSerializer?.Deserialize<object>(xaml);
@@ -810,11 +690,7 @@ namespace Core2D.Editor
             }
         }
 
-        /// <summary>
-        /// Export Xaml to a file.
-        /// </summary>
-        /// <param name="path">The xaml file path.</param>
-        /// <param name="item">The object item.</param>
+        /// <inheritdoc/>
         public void OnExportXaml(string path, object item)
         {
             try
@@ -831,10 +707,7 @@ namespace Core2D.Editor
             }
         }
 
-        /// <summary>
-        /// Import Json from a file.
-        /// </summary>
-        /// <param name="path">The json file path.</param>
+        /// <inheritdoc/>
         public void OnImportJson(string path)
         {
             try
@@ -851,10 +724,7 @@ namespace Core2D.Editor
             }
         }
 
-        /// <summary>
-        /// Import Json string.
-        /// </summary>
-        /// <param name="json">The json string.</param>
+        /// <inheritdoc/>
         private void OnImportJsonString(string json)
         {
             var item = JsonSerializer.Deserialize<object>(json);
@@ -864,11 +734,7 @@ namespace Core2D.Editor
             }
         }
 
-        /// <summary>
-        /// Export Json to a file.
-        /// </summary>
-        /// <param name="path">The json file path.</param>
-        /// <param name="item">The object item.</param>
+        /// <inheritdoc/>
         public void OnExportJson(string path, object item)
         {
             try
@@ -885,12 +751,7 @@ namespace Core2D.Editor
             }
         }
 
-        /// <summary>
-        /// Export item.
-        /// </summary>
-        /// <param name="path">The file path.</param>
-        /// <param name="item">The item to export.</param>
-        /// <param name="writer">The file writer.</param>
+        /// <inheritdoc/>
         public void OnExport(string path, object item, IFileWriter writer)
         {
             try
@@ -903,10 +764,7 @@ namespace Core2D.Editor
             }
         }
 
-        /// <summary>
-        /// Execute code script.
-        /// </summary>
-        /// <param name="csharp">The script code.</param>
+        /// <inheritdoc/>
         public void OnExecuteCode(string csharp)
         {
             try
@@ -922,10 +780,7 @@ namespace Core2D.Editor
             }
         }
 
-        /// <summary>
-        /// Execute code script in repl.
-        /// </summary>
-        /// <param name="path">The script code.</param>
+        /// <inheritdoc/>
         public void OnExecuteRepl(string csharp)
         {
             try
@@ -941,18 +796,13 @@ namespace Core2D.Editor
             }
         }
 
-        /// <summary>
-        /// Reset previous script repl.
-        /// </summary>
+        /// <inheritdoc/>
         public void OnResetRepl()
         {
             ScriptState = null;
         }
 
-        /// <summary>
-        /// Execute code script from file.
-        /// </summary>
-        /// <param name="path">The code file path.</param>
+        /// <inheritdoc/>
         public void OnExecuteScript(string path)
         {
             try
@@ -969,10 +819,7 @@ namespace Core2D.Editor
             }
         }
 
-        /// <summary>
-        /// Execute code scripts from files.
-        /// </summary>
-        /// <param name="paths">The code file paths.</param>
+        /// <inheritdoc/>
         public void OnExecuteScript(string[] paths)
         {
             foreach (var path in paths)
@@ -981,9 +828,7 @@ namespace Core2D.Editor
             }
         }
 
-        /// <summary>
-        /// Undo last action.
-        /// </summary>
+        /// <inheritdoc/>
         public void OnUndo()
         {
             try
@@ -1000,9 +845,7 @@ namespace Core2D.Editor
             }
         }
 
-        /// <summary>
-        /// Redo last action.
-        /// </summary>
+        /// <inheritdoc/>
         public void OnRedo()
         {
             try
@@ -1019,10 +862,7 @@ namespace Core2D.Editor
             }
         }
 
-        /// <summary>
-        /// Cut selected document, page or shapes.
-        /// </summary>
-        /// <param name="item">The item to cut.</param>
+        /// <inheritdoc/>
         public void OnCut(object item)
         {
             if (item is IPageContainer page)
@@ -1042,7 +882,7 @@ namespace Core2D.Editor
                 Project?.SetCurrentDocument(selected);
                 Project?.SetCurrentContainer(selected?.Pages.FirstOrDefault());
             }
-            else if (item is ProjectEditor || item == null)
+            else if (item is IProjectEditor || item == null)
             {
                 if (CanCopy())
                 {
@@ -1052,10 +892,7 @@ namespace Core2D.Editor
             }
         }
 
-        /// <summary>
-        /// Copy document, page or shapes to clipboard.
-        /// </summary>
-        /// <param name="item">The item to copy.</param>
+        /// <inheritdoc/>
         public void OnCopy(object item)
         {
             if (item is IPageContainer page)
@@ -1068,7 +905,7 @@ namespace Core2D.Editor
                 PageToCopy = default;
                 DocumentToCopy = document;
             }
-            else if (item is ProjectEditor || item == null)
+            else if (item is IProjectEditor || item == null)
             {
                 if (CanCopy())
                 {
@@ -1085,10 +922,7 @@ namespace Core2D.Editor
             }
         }
 
-        /// <summary>
-        /// Paste text from clipboard as document, page or shapes.
-        /// </summary>
-        /// <param name="item">The item to paste.</param>
+        /// <inheritdoc/>
         public async void OnPaste(object item)
         {
             if (Project != null && item is IPageContainer page)
@@ -1122,7 +956,7 @@ namespace Core2D.Editor
                     Project.SetCurrentContainer(clone?.Pages.FirstOrDefault());
                 }
             }
-            else if (item is ProjectEditor || item == null)
+            else if (item is IProjectEditor || item == null)
             {
                 if (await CanPaste())
                 {
@@ -1142,10 +976,7 @@ namespace Core2D.Editor
             }
         }
 
-        /// <summary>
-        /// Delete selected document, page, layer or shapes.
-        /// </summary>
-        /// <param name="item">The item to delete.</param>
+        /// <inheritdoc/>
         public void OnDelete(object item)
         {
             if (item is ILayerContainer layer)
@@ -1173,15 +1004,13 @@ namespace Core2D.Editor
                 Project?.SetCurrentDocument(selected);
                 Project?.SetCurrentContainer(selected?.Pages.FirstOrDefault());
             }
-            else if (item is ProjectEditor || item == null)
+            else if (item is IProjectEditor || item == null)
             {
                 OnDeleteSelected();
             }
         }
 
-        /// <summary>
-        /// Select all shapes.
-        /// </summary>
+        /// <inheritdoc/>
         public void OnSelectAll()
         {
             try
@@ -1197,9 +1026,7 @@ namespace Core2D.Editor
             }
         }
 
-        /// <summary>
-        /// De-select all shapes.
-        /// </summary>
+        /// <inheritdoc/>
         public void OnDeselectAll()
         {
             try
@@ -1212,9 +1039,7 @@ namespace Core2D.Editor
             }
         }
 
-        /// <summary>
-        /// Remove all shapes.
-        /// </summary>
+        /// <inheritdoc/>
         public void OnClearAll()
         {
             try
@@ -1239,18 +1064,14 @@ namespace Core2D.Editor
             }
         }
 
-        /// <summary>
-        /// Cancel current action.
-        /// </summary>
+        /// <inheritdoc/>
         public void OnCancel()
         {
             OnDeselectAll();
             OnResetTool();
         }
 
-        /// <summary>
-        /// Group selected shapes.
-        /// </summary>
+        /// <inheritdoc/>
         public void OnGroupSelected()
         {
             var group = Group(Renderers?[0]?.State?.SelectedShapes, ProjectEditorConfiguration.DefaulGroupName);
@@ -1260,9 +1081,7 @@ namespace Core2D.Editor
             }
         }
 
-        /// <summary>
-        /// Ungroup selected shapes.
-        /// </summary>
+        /// <inheritdoc/>
         public void OnUngroupSelected()
         {
             var result = Ungroup(Renderers?[0]?.State?.SelectedShape, Renderers?[0]?.State?.SelectedShapes);
@@ -1273,9 +1092,7 @@ namespace Core2D.Editor
             }
         }
 
-        /// <summary>
-        /// Bring selected shapes to the top of the stack.
-        /// </summary>
+        /// <inheritdoc/>
         public void OnBringToFrontSelected()
         {
             var source = Renderers?[0]?.State?.SelectedShape;
@@ -1294,9 +1111,7 @@ namespace Core2D.Editor
             }
         }
 
-        /// <summary>
-        /// Bring selected shapes one step closer to the front of the stack.
-        /// </summary>
+        /// <inheritdoc/>
         public void OnBringForwardSelected()
         {
             var source = Renderers?[0]?.State?.SelectedShape;
@@ -1315,9 +1130,7 @@ namespace Core2D.Editor
             }
         }
 
-        /// <summary>
-        /// Bring selected shapes one step down within the stack.
-        /// </summary>
+        /// <inheritdoc/>
         public void OnSendBackwardSelected()
         {
             var source = Renderers?[0]?.State?.SelectedShape;
@@ -1336,9 +1149,7 @@ namespace Core2D.Editor
             }
         }
 
-        /// <summary>
-        /// Bring selected shapes to the bottom of the stack.
-        /// </summary>
+        /// <inheritdoc/>
         public void OnSendToBackSelected()
         {
             var source = Renderers?[0]?.State?.SelectedShape;
@@ -1357,9 +1168,7 @@ namespace Core2D.Editor
             }
         }
 
-        /// <summary>
-        /// Move selected shapes up.
-        /// </summary>
+        /// <inheritdoc/>
         public void OnMoveUpSelected()
         {
             MoveBy(
@@ -1369,9 +1178,7 @@ namespace Core2D.Editor
                 Project.Options.SnapToGrid ? -Project.Options.SnapY : -1.0);
         }
 
-        /// <summary>
-        /// Move selected shapes down.
-        /// </summary>
+        /// <inheritdoc/>
         public void OnMoveDownSelected()
         {
             MoveBy(
@@ -1381,9 +1188,7 @@ namespace Core2D.Editor
                 Project.Options.SnapToGrid ? Project.Options.SnapY : 1.0);
         }
 
-        /// <summary>
-        /// Move selected shapes left.
-        /// </summary>
+        /// <inheritdoc/>
         public void OnMoveLeftSelected()
         {
             MoveBy(
@@ -1393,9 +1198,7 @@ namespace Core2D.Editor
                 0.0);
         }
 
-        /// <summary>
-        /// Move selected shapes right.
-        /// </summary>
+        /// <inheritdoc/>
         public void OnMoveRightSelected()
         {
             MoveBy(
@@ -1405,33 +1208,25 @@ namespace Core2D.Editor
                 0.0);
         }
 
-        /// <summary>
-        /// Set current tool to <see cref="ToolNone"/>.
-        /// </summary>
+        /// <inheritdoc/>
         public void OnToolNone()
         {
             CurrentTool = Tools.FirstOrDefault(t => t.Title == "None");
         }
 
-        /// <summary>
-        /// Set current tool to <see cref="ToolSelection"/>.
-        /// </summary>
+        /// <inheritdoc/>
         public void OnToolSelection()
         {
             CurrentTool = Tools.FirstOrDefault(t => t.Title == "Selection");
         }
 
-        /// <summary>
-        /// Set current tool to <see cref="ToolPoint"/>.
-        /// </summary>
+        /// <inheritdoc/>
         public void OnToolPoint()
         {
             CurrentTool = Tools.FirstOrDefault(t => t.Title == "Point");
         }
 
-        /// <summary>
-        /// Set current tool to <see cref="ToolLine"/> or current path tool to <see cref="PathToolLine"/>.
-        /// </summary>
+        /// <inheritdoc/>
         public void OnToolLine()
         {
             if (CurrentTool.Title == "Path" && CurrentPathTool.Title != "Line")
@@ -1445,9 +1240,7 @@ namespace Core2D.Editor
             }
         }
 
-        /// <summary>
-        /// Set current tool to <see cref="ToolArc"/> or current path tool to <see cref="PathToolArc"/>.
-        /// </summary>
+        /// <inheritdoc/>
         public void OnToolArc()
         {
             if (CurrentTool.Title == "Path" && CurrentPathTool.Title != "Arc")
@@ -1461,9 +1254,7 @@ namespace Core2D.Editor
             }
         }
 
-        /// <summary>
-        /// Set current tool to <see cref="ToolCubicBezier"/> or current path tool to <see cref="PathToolCubicBezier"/>.
-        /// </summary>
+        /// <inheritdoc/>
         public void OnToolCubicBezier()
         {
             if (CurrentTool.Title == "Path" && CurrentPathTool.Title != "CubicBezier")
@@ -1477,9 +1268,7 @@ namespace Core2D.Editor
             }
         }
 
-        /// <summary>
-        /// Set current tool to <see cref="ToolQuadraticBezier"/> or current path tool to <see cref="PathToolQuadraticBezier"/>.
-        /// </summary>
+        /// <inheritdoc/>
         public void OnToolQuadraticBezier()
         {
             if (CurrentTool.Title == "Path" && CurrentPathTool.Title != "QuadraticBezier")
@@ -1493,49 +1282,37 @@ namespace Core2D.Editor
             }
         }
 
-        /// <summary>
-        /// Set current tool to <see cref="ToolPath"/>.
-        /// </summary>
+        /// <inheritdoc/>
         public void OnToolPath()
         {
             CurrentTool = Tools.FirstOrDefault(t => t.Title == "Path");
         }
 
-        /// <summary>
-        /// Set current tool to <see cref="ToolRectangle"/>.
-        /// </summary>
+        /// <inheritdoc/>
         public void OnToolRectangle()
         {
             CurrentTool = Tools.FirstOrDefault(t => t.Title == "Rectangle");
         }
 
-        /// <summary>
-        /// Set current tool to <see cref="ToolEllipse"/>.
-        /// </summary>
+        /// <inheritdoc/>
         public void OnToolEllipse()
         {
             CurrentTool = Tools.FirstOrDefault(t => t.Title == "Ellipse");
         }
 
-        /// <summary>
-        /// Set current tool to <see cref="ToolText"/>.
-        /// </summary>
+        /// <inheritdoc/>
         public void OnToolText()
         {
             CurrentTool = Tools.FirstOrDefault(t => t.Title == "Text");
         }
 
-        /// <summary>
-        /// Set current tool to <see cref="ToolImage"/>.
-        /// </summary>
+        /// <inheritdoc/>
         public void OnToolImage()
         {
             CurrentTool = Tools.FirstOrDefault(t => t.Title == "Image");
         }
 
-        /// <summary>
-        /// Set current path tool to <see cref="PathToolMove"/>.
-        /// </summary>
+        /// <inheritdoc/>
         public void OnToolMove()
         {
             if (CurrentTool.Title == "Path" && CurrentPathTool.Title != "Move")
@@ -1545,17 +1322,13 @@ namespace Core2D.Editor
             }
         }
 
-        /// <summary>
-        /// Reset current tool.
-        /// </summary>
+        /// <inheritdoc/>
         public void OnResetTool()
         {
             CurrentTool?.Reset();
         }
 
-        /// <summary>
-        /// Toggle <see cref="Options.DefaultIsStroked"/> option.
-        /// </summary>
+        /// <inheritdoc/>
         public void OnToggleDefaultIsStroked()
         {
             if (Project?.Options != null)
@@ -1564,9 +1337,7 @@ namespace Core2D.Editor
             }
         }
 
-        /// <summary>
-        /// Toggle <see cref="Options.DefaultIsFilled"/> option.
-        /// </summary>
+        /// <inheritdoc/>
         public void OnToggleDefaultIsFilled()
         {
             if (Project?.Options != null)
@@ -1575,9 +1346,7 @@ namespace Core2D.Editor
             }
         }
 
-        /// <summary>
-        /// Toggle <see cref="Options.DefaultIsClosed"/> option.
-        /// </summary>
+        /// <inheritdoc/>
         public void OnToggleDefaultIsClosed()
         {
             if (Project?.Options != null)
@@ -1586,9 +1355,7 @@ namespace Core2D.Editor
             }
         }
 
-        /// <summary>
-        /// Toggle <see cref="Options.DefaultIsSmoothJoin"/> option.
-        /// </summary>
+        /// <inheritdoc/>
         public void OnToggleDefaultIsSmoothJoin()
         {
             if (Project?.Options != null)
@@ -1597,9 +1364,7 @@ namespace Core2D.Editor
             }
         }
 
-        /// <summary>
-        /// Toggle <see cref="Options.SnapToGrid"/> option.
-        /// </summary>
+        /// <inheritdoc/>
         public void OnToggleSnapToGrid()
         {
             if (Project?.Options != null)
@@ -1608,9 +1373,7 @@ namespace Core2D.Editor
             }
         }
 
-        /// <summary>
-        /// Toggle <see cref="Options.TryToConnect"/> option.
-        /// </summary>
+        /// <inheritdoc/>
         public void OnToggleTryToConnect()
         {
             if (Project?.Options != null)
@@ -1619,9 +1382,7 @@ namespace Core2D.Editor
             }
         }
 
-        /// <summary>
-        /// Toggle <see cref="Options.CloneStyle"/> option.
-        /// </summary>
+        /// <inheritdoc/>
         public void OnToggleCloneStyle()
         {
             if (Project?.Options != null)
@@ -1630,9 +1391,7 @@ namespace Core2D.Editor
             }
         }
 
-        /// <summary>
-        /// Add database.
-        /// </summary>
+        /// <inheritdoc/>
         public void OnAddDatabase()
         {
             var db = Factory.CreateDatabase(ProjectEditorConfiguration.DefaultDatabaseName);
@@ -1640,65 +1399,44 @@ namespace Core2D.Editor
             Project.SetCurrentDatabase(db);
         }
 
-        /// <summary>
-        /// Remove database.
-        /// </summary>
-        /// <param name="db">The database to remove.</param>
+        /// <inheritdoc/>
         public void OnRemoveDatabase(IDatabase db)
         {
             Project.RemoveDatabase(db);
             Project.SetCurrentDatabase(Project.Databases.FirstOrDefault());
         }
 
-        /// <summary>
-        /// Add column to database.
-        /// </summary>
-        /// <param name="db">The records database.</param>
+        /// <inheritdoc/>
         public void OnAddColumn(IDatabase db)
         {
             Project.AddColumn(db, Factory.CreateColumn(db, ProjectEditorConfiguration.DefaulColumnName));
         }
 
-        /// <summary>
-        /// Remove column from database.
-        /// </summary>
-        /// <param name="column">The column to remove.</param>
+        /// <inheritdoc/>
         public void OnRemoveColumn(IColumn column)
         {
             Project.RemoveColumn(column);
         }
 
-        /// <summary>
-        /// Add record to database.
-        /// </summary>
-        /// <param name="db">The records database.</param>
+        /// <inheritdoc/>
         public void OnAddRecord(IDatabase db)
         {
             Project.AddRecord(db, Factory.CreateRecord(db, ProjectEditorConfiguration.DefaulValue));
         }
 
-        /// <summary>
-        /// Remove record from database.
-        /// </summary>
-        /// <param name="record">The data record.</param>
+        /// <inheritdoc/>
         public void OnRemoveRecord(IRecord record)
         {
             Project.RemoveRecord(record);
         }
 
-        /// <summary>
-        /// Reset data context record.
-        /// </summary>
-        /// <param name="data">The data context.</param>
+        /// <inheritdoc/>
         public void OnResetRecord(IContext data)
         {
             Project.ResetRecord(data);
         }
 
-        /// <summary>
-        /// Set current record as selected shape(s) or current page data record.
-        /// </summary>
-        /// <param name="record">The data record.</param>
+        /// <inheritdoc/>
         public void OnApplyRecord(IRecord record)
         {
             if (record != null)
@@ -1730,27 +1468,19 @@ namespace Core2D.Editor
             }
         }
 
-        /// <summary>
-        /// Add property to data context.
-        /// </summary>
-        /// <param name="data">The data context.</param>
+        /// <inheritdoc/>
         public void OnAddProperty(IContext data)
         {
             Project.AddProperty(data, Factory.CreateProperty(data, ProjectEditorConfiguration.DefaulPropertyName, ProjectEditorConfiguration.DefaulValue));
         }
 
-        /// <summary>
-        /// Remove property from data context.
-        /// </summary>
-        /// <param name="property">The property to remove.</param>
+        /// <inheritdoc/>
         public void OnRemoveProperty(IProperty property)
         {
             Project.RemoveProperty(property);
         }
 
-        /// <summary>
-        /// Add group library.
-        /// </summary>
+        /// <inheritdoc/>
         public void OnAddGroupLibrary()
         {
             var gl = Factory.CreateLibrary<IGroupShape>(ProjectEditorConfiguration.DefaulGroupLibraryName);
@@ -1758,20 +1488,14 @@ namespace Core2D.Editor
             Project.SetCurrentGroupLibrary(gl);
         }
 
-        /// <summary>
-        /// Remove group library.
-        /// </summary>
-        /// <param name="library">The group library to remove.</param>
+        /// <inheritdoc/>
         public void OnRemoveGroupLibrary(ILibrary<IGroupShape> library)
         {
             Project.RemoveGroupLibrary(library);
             Project.SetCurrentGroupLibrary(Project?.GroupLibraries.FirstOrDefault());
         }
 
-        /// <summary>
-        /// Add group.
-        /// </summary>
-        /// <param name="library">The group library.</param>
+        /// <inheritdoc/>
         public void OnAddGroup(ILibrary<IGroupShape> library)
         {
             if (Project != null && library != null)
@@ -1787,10 +1511,7 @@ namespace Core2D.Editor
             }
         }
 
-        /// <summary>
-        /// Remove group.
-        /// </summary>
-        /// <param name="group">The group item.</param>
+        /// <inheritdoc/>
         public void OnRemoveGroup(IGroupShape group)
         {
             if (Project != null && group != null)
@@ -1800,10 +1521,7 @@ namespace Core2D.Editor
             }
         }
 
-        /// <summary>
-        /// Insert current group to container.
-        /// </summary>
-        /// <param name="group">The group instance.</param>
+        /// <inheritdoc/>
         public void OnInsertGroup(IGroupShape group)
         {
             if (Project?.CurrentContainer != null)
@@ -1812,19 +1530,13 @@ namespace Core2D.Editor
             }
         }
 
-        /// <summary>
-        /// Add layer to container.
-        /// </summary>
-        /// <param name="container">The container instance.</param>
+        /// <inheritdoc/>
         public void OnAddLayer(IPageContainer container)
         {
             Project.AddLayer(container, Factory.CreateLayerContainer(ProjectEditorConfiguration.DefaultLayerName, container));
         }
 
-        /// <summary>
-        /// Remove layer.
-        /// </summary>
-        /// <param name="layer">The layer to remove.</param>
+        /// <inheritdoc/>
         public void OnRemoveLayer(ILayerContainer layer)
         {
             Project.RemoveLayer(layer);
@@ -1834,9 +1546,7 @@ namespace Core2D.Editor
             }
         }
 
-        /// <summary>
-        /// Add style library.
-        /// </summary>
+        /// <inheritdoc/>
         public void OnAddStyleLibrary()
         {
             var sl = Factory.CreateLibrary<IShapeStyle>(ProjectEditorConfiguration.DefaulStyleLibraryName);
@@ -1844,39 +1554,27 @@ namespace Core2D.Editor
             Project.SetCurrentStyleLibrary(sl);
         }
 
-        /// <summary>
-        /// Remove style library.
-        /// </summary>
-        /// <param name="library">The style library to remove.</param>
+        /// <inheritdoc/>
         public void OnRemoveStyleLibrary(ILibrary<IShapeStyle> library)
         {
             Project.RemoveStyleLibrary(library);
             Project.SetCurrentStyleLibrary(Project?.StyleLibraries.FirstOrDefault());
         }
 
-        /// <summary>
-        /// Add style.
-        /// </summary>
-        /// <param name="library">The style library.</param>
+        /// <inheritdoc/>
         public void OnAddStyle(ILibrary<IShapeStyle> library)
         {
             Project.AddStyle(library, Factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName));
         }
 
-        /// <summary>
-        /// Remove style.
-        /// </summary>
-        /// <param name="style">The style to remove.</param>
+        /// <inheritdoc/>
         public void OnRemoveStyle(IShapeStyle style)
         {
             var library = Project.RemoveStyle(style);
             library?.SetSelected(library?.Items.FirstOrDefault());
         }
 
-        /// <summary>
-        /// Set current style as selected shape style.
-        /// </summary>
-        /// <param name="style">The shape style item.</param>
+        /// <inheritdoc/>
         public void OnApplyStyle(IShapeStyle style)
         {
             if (style != null)
@@ -1898,10 +1596,7 @@ namespace Core2D.Editor
             }
         }
 
-        /// <summary>
-        /// Set current data as selected shape data.
-        /// </summary>
-        /// <param name="data">The data item.</param>
+        /// <inheritdoc/>
         public void OnApplyData(IContext data)
         {
             if (data != null)
@@ -1923,10 +1618,7 @@ namespace Core2D.Editor
             }
         }
 
-        /// <summary>
-        /// Add shape.
-        /// </summary>
-        /// <param name="shape">The shape instance.</param>
+        /// <inheritdoc/>
         public void OnAddShape(IBaseShape shape)
         {
             var layer = Project?.CurrentContainer?.CurrentLayer;
@@ -1936,10 +1628,7 @@ namespace Core2D.Editor
             }
         }
 
-        /// <summary>
-        /// Remove shape.
-        /// </summary>
-        /// <param name="shape">The shape instance.</param>
+        /// <inheritdoc/>
         public void OnRemoveShape(IBaseShape shape)
         {
             var layer = Project?.CurrentContainer?.CurrentLayer;
@@ -1950,9 +1639,7 @@ namespace Core2D.Editor
             }
         }
 
-        /// <summary>
-        /// Add template.
-        /// </summary>
+        /// <inheritdoc/>
         public void OnAddTemplate()
         {
             if (Project != null)
@@ -1967,10 +1654,7 @@ namespace Core2D.Editor
             }
         }
 
-        /// <summary>
-        /// Remove template.
-        /// </summary>
-        /// <param name="template">The template object.</param>
+        /// <inheritdoc/>
         public void OnRemoveTemplate(IPageContainer template)
         {
             if (template != null)
@@ -1980,9 +1664,7 @@ namespace Core2D.Editor
             }
         }
 
-        /// <summary>
-        /// Edit template.
-        /// </summary>
+        /// <inheritdoc/>
         public void OnEditTemplate(IPageContainer template)
         {
             if (Project != null && template != null)
@@ -1992,10 +1674,7 @@ namespace Core2D.Editor
             }
         }
 
-        /// <summary>
-        /// Set page template.
-        /// </summary>
-        /// <param name="template">The template object.</param>
+        /// <inheritdoc/>
         public void OnApplyTemplate(IPageContainer template)
         {
             var page = Project?.CurrentContainer;
@@ -2006,10 +1685,7 @@ namespace Core2D.Editor
             }
         }
 
-        /// <summary>
-        /// Add image key.
-        /// </summary>
-        /// <param name="path">The image path.</param>
+        /// <inheritdoc/>
         public async Task<string> OnAddImageKey(string path)
         {
             if (Project != null)
@@ -2041,10 +1717,7 @@ namespace Core2D.Editor
             return null;
         }
 
-        /// <summary>
-        /// Remove image key.
-        /// </summary>
-        /// <param name="key">The image key.</param>
+        /// <inheritdoc/>
         public void OnRemoveImageKey(string key)
         {
             if (key != null)
@@ -2056,10 +1729,7 @@ namespace Core2D.Editor
             }
         }
 
-        /// <summary>
-        /// Notifies when selected project tree item changed.
-        /// </summary>
-        /// <param name="item">The selected item.</param>
+        /// <inheritdoc/>
         public void OnSelectedItemChanged(IObservableObject item)
         {
             if (Project != null)
@@ -2068,10 +1738,7 @@ namespace Core2D.Editor
             }
         }
 
-        /// <summary>
-        /// Add page.
-        /// </summary>
-        /// <param name="item">The parent item.</param>
+        /// <inheritdoc/>
         public void OnAddPage(object item)
         {
             if (Project?.CurrentDocument != null)
@@ -2085,10 +1752,7 @@ namespace Core2D.Editor
             }
         }
 
-        /// <summary>
-        /// Insert page before current page.
-        /// </summary>
-        /// <param name="item">The parent item.</param>
+        /// <inheritdoc/>
         public void OnInsertPageBefore(object item)
         {
             if (Project?.CurrentDocument != null)
@@ -2106,10 +1770,7 @@ namespace Core2D.Editor
             }
         }
 
-        /// <summary>
-        /// Insert page after current page.
-        /// </summary>
-        /// <param name="item">The parent item.</param>
+        /// <inheritdoc/>
         public void OnInsertPageAfter(object item)
         {
             if (Project?.CurrentDocument != null)
@@ -2127,10 +1788,7 @@ namespace Core2D.Editor
             }
         }
 
-        /// <summary>
-        /// Add document.
-        /// </summary>
-        /// <param name="item">The parent item.</param>
+        /// <inheritdoc/>
         public void OnAddDocument(object item)
         {
             if (Project != null)
@@ -2145,10 +1803,7 @@ namespace Core2D.Editor
             }
         }
 
-        /// <summary>
-        /// Insert document before current document.
-        /// </summary>
-        /// <param name="item">The parent item.</param>
+        /// <inheritdoc/>
         public void OnInsertDocumentBefore(object item)
         {
             if (Project != null)
@@ -2167,10 +1822,7 @@ namespace Core2D.Editor
             }
         }
 
-        /// <summary>
-        /// Insert document after current document.
-        /// </summary>
-        /// <param name="item">The parent item.</param>
+        /// <inheritdoc/>
         public void OnInsertDocumentAfter(object item)
         {
             if (Project != null)
@@ -2189,10 +1841,7 @@ namespace Core2D.Editor
             }
         }
 
-        /// <summary>
-        /// Set renderer's image cache.
-        /// </summary>
-        /// <param name="cache">The image cache instance.</param>
+        /// <inheritdoc/>
         private void SetRenderersImageCache(IImageCache cache)
         {
             if (Renderers != null)
@@ -2205,11 +1854,7 @@ namespace Core2D.Editor
             }
         }
 
-        /// <summary>
-        /// Load project.
-        /// </summary>
-        /// <param name="project">The project instance.</param>
-        /// <param name="path">The project path.</param>
+        /// <inheritdoc/>
         public void OnLoad(IProjectContainer project, string path = null)
         {
             if (project != null)
@@ -2227,9 +1872,7 @@ namespace Core2D.Editor
             }
         }
 
-        /// <summary>
-        /// Unload project.
-        /// </summary>
+        /// <inheritdoc/>
         public void OnUnload()
         {
             if (Observer != null)
@@ -2259,10 +1902,7 @@ namespace Core2D.Editor
             }
         }
 
-        /// <summary>
-        /// Invalidate renderer's cache.
-        /// </summary>
-        /// <param name="isZooming">The flag indicating whether is zooming.</param>
+        /// <inheritdoc/>
         public void OnInvalidateCache(bool isZooming)
         {
             try
@@ -2283,11 +1923,7 @@ namespace Core2D.Editor
             }
         }
 
-        /// <summary>
-        /// Add recent project file.
-        /// </summary>
-        /// <param name="path">The project path.</param>
-        /// <param name="name">The project name.</param>
+        /// <inheritdoc/>
         public void OnAddRecent(string path, string name)
         {
             if (_recentProjects != null)
@@ -2310,10 +1946,7 @@ namespace Core2D.Editor
             }
         }
 
-        /// <summary>
-        /// Load recent project files.
-        /// </summary>
-        /// <param name="path">The recent projects path.</param>
+        /// <inheritdoc/>
         public void OnLoadRecent(string path)
         {
             if (JsonSerializer != null)
@@ -2352,10 +1985,7 @@ namespace Core2D.Editor
             }
         }
 
-        /// <summary>
-        /// Save recent project files.
-        /// </summary>
-        /// <param name="path">The recent projects path.</param>
+        /// <inheritdoc/>
         public void OnSaveRecent(string path)
         {
             if (JsonSerializer != null)
@@ -2373,10 +2003,7 @@ namespace Core2D.Editor
             }
         }
 
-        /// <summary>
-        /// Load layout configuration.
-        /// </summary>
-        /// <param name="path">The layout configuration path.</param>
+        /// <inheritdoc/>
         public void OnLoadLayout(string path)
         {
             if (JsonSerializer != null)
@@ -2397,10 +2024,7 @@ namespace Core2D.Editor
             }
         }
 
-        /// <summary>
-        /// Save layout configuration.
-        /// </summary>
-        /// <param name="path">The layout configuration path.</param>
+        /// <inheritdoc/>
         public void OnSaveLayout(string path)
         {
             if (JsonSerializer != null)
@@ -2417,10 +2041,7 @@ namespace Core2D.Editor
             }
         }
 
-        /// <summary>
-        /// Navigate to view.
-        /// </summary>
-        /// <param name="view">The view to navigate to.</param>
+        /// <inheritdoc/>
         public void OnNavigate(object view)
         {
             if (Layout is IDock dock)
@@ -2429,38 +2050,26 @@ namespace Core2D.Editor
             }
         }
 
-        /// <summary>
-        /// Check if undo action is available.
-        /// </summary>
-        /// <returns>Returns true if undo action is available.</returns>
+        /// <inheritdoc/>
         public bool CanUndo()
         {
             return Project?.History?.CanUndo() ?? false;
         }
 
-        /// <summary>
-        /// Check if redo action is available.
-        /// </summary>
-        /// <returns>Returns true if redo action is available.</returns>
+        /// <inheritdoc/>
         public bool CanRedo()
         {
             return Project?.History?.CanRedo() ?? false;
         }
 
-        /// <summary>
-        /// Checks if can copy.
-        /// </summary>
-        /// <returns>Returns true if can copy.</returns>
+        /// <inheritdoc/>
         public bool CanCopy()
         {
             return Renderers?[0]?.State?.SelectedShape != null
                 || Renderers?[0]?.State?.SelectedShapes != null;
         }
 
-        /// <summary>
-        /// Checks if can paste.
-        /// </summary>
-        /// <returns>Returns true if can paste.</returns>
+        /// <inheritdoc/>
         public async Task<bool> CanPaste()
         {
             try
@@ -2474,10 +2083,7 @@ namespace Core2D.Editor
             return false;
         }
 
-        /// <summary>
-        /// Copy selected shapes to clipboard.
-        /// </summary>
-        /// <param name="shapes"></param>
+        /// <inheritdoc/>
         public void OnCopyShapes(IList<IBaseShape> shapes)
         {
             try
@@ -2494,10 +2100,7 @@ namespace Core2D.Editor
             }
         }
 
-        /// <summary>
-        /// Paste text from clipboard as shapes.
-        /// </summary>
-        /// <param name="text">The text string.</param>
+        /// <inheritdoc/>
         public void OnTryPaste(string text)
         {
             try
@@ -2550,41 +2153,9 @@ namespace Core2D.Editor
         }
 
         /// <summary>
-        /// Defines methods to support the comparison of <see cref="IShapeStyle"/> objects for equality.
+        /// Generated style dictionary with name as the key.
         /// </summary>
-        public class ShapeStyleByNameComparer : IEqualityComparer<IShapeStyle>
-        {
-            /// <summary>
-            /// Determines whether the specified objects are equal.
-            /// </summary>
-            /// <param name="x">The first object of type <see cref="IShapeStyle"/> to compare.</param>
-            /// <param name="y">The second object of type <see cref="IShapeStyle"/> to compare.</param>
-            /// <returns>True if the specified objects are equal; otherwise, false.</returns>
-            public bool Equals(IShapeStyle x, IShapeStyle y)
-            {
-                if (object.ReferenceEquals(x, y))
-                    return true;
-
-                if (x is null || y is null)
-                    return false;
-
-                return x.Name == y.Name;
-            }
-
-            /// <summary>
-            /// Returns a hash code for the specified object.
-            /// </summary>
-            /// <param name="style">The <see cref="IShapeStyle"/> for which a hash code is to be returned.</param>
-            /// <returns>A hash code for the specified object.</returns>
-            public int GetHashCode(IShapeStyle style)
-            {
-                if (style is null)
-                    return 0;
-                int hashProductName = style.Name == null ? 0 : style.Name.GetHashCode();
-                return hashProductName;
-            }
-        }
-
+        /// <returns>The style dictionary with name as the key.</returns>
         private IDictionary<string, IShapeStyle> GenerateStyleDictionaryByName()
         {
             return Project?.StyleLibraries
@@ -2648,6 +2219,10 @@ namespace Core2D.Editor
             }
         }
 
+        /// <summary>
+        /// Generates record dictionary with id as the key.
+        /// </summary>
+        /// <returns>The record dictionary with id as the key.</returns>
         private IDictionary<string, IRecord> GenerateRecordDictionaryById()
         {
             return Project?.Databases
@@ -2718,10 +2293,7 @@ namespace Core2D.Editor
             TryToRestoreRecords(shapes);
         }
 
-        /// <summary>
-        /// Paste shapes to current container.
-        /// </summary>
-        /// <param name="shapes">The shapes collection.</param>
+        /// <inheritdoc/>
         public void OnPasteShapes(IEnumerable<IBaseShape> shapes)
         {
             try
@@ -2741,10 +2313,7 @@ namespace Core2D.Editor
             }
         }
 
-        /// <summary>
-        /// Select shapes.
-        /// </summary>
-        /// <param name="shapes">The shapes collection.</param>
+        /// <inheritdoc/>
         public void OnSelect(IEnumerable<IBaseShape> shapes)
         {
             if (shapes?.Count() == 1)
@@ -2757,12 +2326,7 @@ namespace Core2D.Editor
             }
         }
 
-        /// <summary>
-        /// Clone the <see cref="BaseShape"/> object.
-        /// </summary>
-        /// <typeparam name="T">The shape type.</typeparam>
-        /// <param name="shape">The <see cref="IBaseShape"/> object.</param>
-        /// <returns>The cloned <see cref="IBaseShape"/> object.</returns>
+        /// <inheritdoc/>
         public T CloneShape<T>(T shape) where T : IBaseShape
         {
             try
@@ -2789,11 +2353,7 @@ namespace Core2D.Editor
             return default;
         }
 
-        /// <summary>
-        /// Clone the <see cref="LayerContainer"/> object.
-        /// </summary>
-        /// <param name="container">The <see cref="LayerContainer"/> object.</param>
-        /// <returns>The cloned <see cref="LayerContainer"/> object.</returns>
+        /// <inheritdoc/>
         public ILayerContainer Clone(ILayerContainer container)
         {
             try
@@ -2819,11 +2379,7 @@ namespace Core2D.Editor
             return default;
         }
 
-        /// <summary>
-        /// Clone the <see cref="PageContainer"/> object.
-        /// </summary>
-        /// <param name="container">The <see cref="PageContainer"/> object.</param>
-        /// <returns>The cloned <see cref="PageContainer"/> object.</returns>
+        /// <inheritdoc/>
         public IPageContainer Clone(IPageContainer container)
         {
             try
@@ -2851,11 +2407,7 @@ namespace Core2D.Editor
             return default;
         }
 
-        /// <summary>
-        /// Clone the <see cref="DocumentContainer"/> object.
-        /// </summary>
-        /// <param name="document">The <see cref="DocumentContainer"/> object.</param>
-        /// <returns>The cloned <see cref="DocumentContainer"/> object.</returns>
+        /// <inheritdoc/>
         public IDocumentContainer Clone(IDocumentContainer document)
         {
             try
@@ -2887,11 +2439,7 @@ namespace Core2D.Editor
             return default;
         }
 
-        /// <summary>
-        /// Process dropped files.
-        /// </summary>
-        /// <param name="files">The files array.</param>
-        /// <returns>Returns true if success.</returns>
+        /// <inheritdoc/>
         public bool OnDropFiles(string[] files)
         {
             try
@@ -2944,14 +2492,7 @@ namespace Core2D.Editor
             return false;
         }
 
-        /// <summary>
-        /// Drop <see cref="BaseShape"/> object in current container at specified location.
-        /// </summary>
-        /// <param name="shape">The <see cref="IBaseShape"/> object.</param>
-        /// <param name="x">The X coordinate in container.</param>
-        /// <param name="y">The Y coordinate in container.</param>
-        /// <param name="bExecute">The flag indicating whether to execute action.</param>
-        /// <returns>Returns true if success.</returns>
+        /// <inheritdoc/>
         public bool OnDropShape(IBaseShape shape, double x, double y, bool bExecute = true)
         {
             try
@@ -3020,13 +2561,7 @@ namespace Core2D.Editor
             return false;
         }
 
-        /// <summary>
-        /// Drop <see cref="BaseShape"/> object in current container at specified location.
-        /// </summary>
-        /// <typeparam name="T">The shape type.</typeparam>
-        /// <param name="shape">The <see cref="BaseShape"/> object.</param>
-        /// <param name="x">The X coordinate in container.</param>
-        /// <param name="y">The Y coordinate in container.</param>
+        /// <inheritdoc/>
         public void OnDropShapeAsClone<T>(T shape, double x, double y) where T : IBaseShape
         {
             double sx = Project.Options.SnapToGrid ? Snap(x, Project.Options.SnapX) : x;
@@ -3062,14 +2597,7 @@ namespace Core2D.Editor
             }
         }
 
-        /// <summary>
-        /// Drop <see cref="IRecord"/> object in current container at specified location.
-        /// </summary>
-        /// <param name="record">The <see cref="IRecord"/> object.</param>
-        /// <param name="x">The X coordinate in container.</param>
-        /// <param name="y">The Y coordinate in container.</param>
-        /// <param name="bExecute">The flag indicating whether to execute action.</param>
-        /// <returns>Returns true if success.</returns>
+        /// <inheritdoc/>
         public bool OnDropRecord(IRecord record, double x, double y, bool bExecute = true)
         {
             try
@@ -3115,12 +2643,7 @@ namespace Core2D.Editor
             return false;
         }
 
-        /// <summary>
-        /// Drop <see cref="IRecord"/> object in current container at specified location as group bound to this record.
-        /// </summary>
-        /// <param name="record">The <see cref="IRecord"/> object.</param>
-        /// <param name="x">The X coordinate in container.</param>
-        /// <param name="y">The Y coordinate in container.</param>
+        /// <inheritdoc/>
         public void OnDropRecordAsGroup(IRecord record, double x, double y)
         {
             var selected = Project.CurrentStyleLibrary.Selected;
@@ -3170,14 +2693,7 @@ namespace Core2D.Editor
             Project.AddShape(layer, g);
         }
 
-        /// <summary>
-        /// Drop <see cref="IShapeStyle"/> object in current container at specified location.
-        /// </summary>
-        /// <param name="style">The <see cref="IShapeStyle"/> object.</param>
-        /// <param name="x">The X coordinate in container.</param>
-        /// <param name="y">The Y coordinate in container.</param>
-        /// <param name="bExecute">The flag indicating whether to execute action.</param>
-        /// <returns>Returns true if success.</returns>
+        /// <inheritdoc/>
         public bool OnDropStyle(IShapeStyle style, double x, double y, bool bExecute = true)
         {
             try
@@ -3215,14 +2731,7 @@ namespace Core2D.Editor
             return false;
         }
 
-        /// <summary>
-        /// Drop <see cref="PageContainer"/> object in current container at specified location.
-        /// </summary>
-        /// <param name="template">The template object.</param>
-        /// <param name="x">The X coordinate in container.</param>
-        /// <param name="y">The Y coordinate in container.</param>
-        /// <param name="bExecute">The flag indicating whether to execute action.</param>
-        /// <returns>Returns true if success.</returns>
+        /// <inheritdoc/>
         public bool OnDropTemplate(IPageContainer template, double x, double y, bool bExecute = true)
         {
             try
@@ -3244,9 +2753,7 @@ namespace Core2D.Editor
             return false;
         }
 
-        /// <summary>
-        /// Remove selected shapes.
-        /// </summary>
+        /// <inheritdoc/>
         public void OnDeleteSelected()
         {
             if (Project?.CurrentContainer?.CurrentLayer == null || Renderers?[0]?.State == null)
@@ -3285,10 +2792,7 @@ namespace Core2D.Editor
             }
         }
 
-        /// <summary>
-        /// Select shape.
-        /// </summary>
-        /// <param name="shape">The shape to select.</param>
+        /// <inheritdoc/>
         public void Select(IBaseShape shape)
         {
             if (Renderers?[0]?.State != null)
@@ -3302,10 +2806,7 @@ namespace Core2D.Editor
             }
         }
 
-        /// <summary>
-        /// Select shapes.
-        /// </summary>
-        /// <param name="shapes">The shapes to select.</param>
+        /// <inheritdoc/>
         public void Select(ISet<IBaseShape> shapes)
         {
             if (Renderers?[0]?.State != null)
@@ -3319,9 +2820,7 @@ namespace Core2D.Editor
             }
         }
 
-        /// <summary>
-        /// De-select shape(s).
-        /// </summary>
+        /// <inheritdoc/>
         public void Deselect()
         {
             if (Renderers?[0].State?.SelectedShape != null)
@@ -3335,11 +2834,7 @@ namespace Core2D.Editor
             }
         }
 
-        /// <summary>
-        /// Select shape.
-        /// </summary>
-        /// <param name="layer">The owner layer.</param>
-        /// <param name="shape">The shape to select.</param>
+        /// <inheritdoc/>
         public void Select(ILayerContainer layer, IBaseShape shape)
         {
             Select(shape);
@@ -3359,11 +2854,7 @@ namespace Core2D.Editor
             }
         }
 
-        /// <summary>
-        /// Select shapes.
-        /// </summary>
-        /// <param name="layer">The owner layer.</param>
-        /// <param name="shapes">The shapes to select.</param>
+        /// <inheritdoc/>
         public void Select(ILayerContainer layer, ISet<IBaseShape> shapes)
         {
             Select(shapes);
@@ -3383,10 +2874,7 @@ namespace Core2D.Editor
             }
         }
 
-        /// <summary>
-        /// De-select shape(s).
-        /// </summary>
-        /// <param name="layer">The layer object.</param>
+        /// <inheritdoc/>
         public void Deselect(ILayerContainer layer)
         {
             Deselect();
@@ -3409,13 +2897,7 @@ namespace Core2D.Editor
             }
         }
 
-        /// <summary>
-        /// Try to select shape at specified coordinates.
-        /// </summary>
-        /// <param name="layer">The layer object.</param>
-        /// <param name="x">The X coordinate in layer.</param>
-        /// <param name="y">The Y coordinate in layer.</param>
-        /// <returns>True if selecting shape was successful.</returns>
+        /// <inheritdoc/>
         public bool TryToSelectShape(ILayerContainer layer, double x, double y)
         {
             if (layer != null)
@@ -3440,12 +2922,7 @@ namespace Core2D.Editor
             return false;
         }
 
-        /// <summary>
-        /// Try to select shapes inside rectangle.
-        /// </summary>
-        /// <param name="layer">The layer object.</param>
-        /// <param name="rectangle">The selection rectangle.</param>
-        /// <returns>True if selecting shapes was successful.</returns>
+        /// <inheritdoc/>
         public bool TryToSelectShapes(ILayerContainer layer, IRectangleShape rectangle)
         {
             if (layer != null)
@@ -3478,11 +2955,7 @@ namespace Core2D.Editor
             return false;
         }
 
-        /// <summary>
-        /// Hover shape.
-        /// </summary>
-        /// <param name="layer">The layer object.</param>
-        /// <param name="shape">The shape to hover.</param>
+        /// <inheritdoc/>
         public void Hover(ILayerContainer layer, IBaseShape shape)
         {
             if (layer != null)
@@ -3492,10 +2965,7 @@ namespace Core2D.Editor
             }
         }
 
-        /// <summary>
-        /// De-hover shape.
-        /// </summary>
-        /// <param name="layer">The layer object.</param>
+        /// <inheritdoc/>
         public void Dehover(ILayerContainer layer)
         {
             if (layer != null && HoveredShape != null)
@@ -3505,12 +2975,7 @@ namespace Core2D.Editor
             }
         }
 
-        /// <summary>
-        /// Try to hover shape at specified coordinates.
-        /// </summary>
-        /// <param name="x">The X coordinate in container.</param>
-        /// <param name="y">The Y coordinate in container.</param>
-        /// <returns>True if hovering shape was successful.</returns>
+        /// <inheritdoc/>
         public bool TryToHoverShape(double x, double y)
         {
             if (Project?.CurrentContainer?.CurrentLayer == null)
@@ -3546,12 +3011,7 @@ namespace Core2D.Editor
             return false;
         }
 
-        /// <summary>
-        /// Try to get connection point at specified location.
-        /// </summary>
-        /// <param name="x">The X coordinate of point.</param>
-        /// <param name="y">The Y coordinate of point.</param>
-        /// <returns>The connected point if success.</returns>
+        /// <inheritdoc/>
         public IPointShape TryToGetConnectionPoint(double x, double y)
         {
             if (Project.Options.TryToConnect)
@@ -3586,14 +3046,7 @@ namespace Core2D.Editor
             }
         }
 
-        /// <summary>
-        /// Try to split line at specified coordinates.
-        /// </summary>
-        /// <param name="x">The X coordinate in container.</param>
-        /// <param name="y">The Y coordinate in container.</param>
-        /// <param name="point">The point used for split line start or end.</param>
-        /// <param name="select">The flag indicating whether to select split line.</param>
-        /// <returns>True if line split was successful.</returns>
+        /// <inheritdoc/>
         public bool TryToSplitLine(double x, double y, IPointShape point, bool select = false)
         {
             if (Project?.CurrentContainer == null || Project?.Options == null)
@@ -3651,13 +3104,7 @@ namespace Core2D.Editor
             return false;
         }
 
-        /// <summary>
-        /// Try to split lines using group connectors.
-        /// </summary>
-        /// <param name="line">The line to split.</param>
-        /// <param name="p0">The first connector point.</param>
-        /// <param name="p1">The second connector point.</param>
-        /// <returns>True if line split was successful.</returns>
+        /// <inheritdoc/>
         public bool TryToSplitLine(ILineShape line, IPointShape p0, IPointShape p1)
         {
             if (Project?.Options == null)
@@ -3700,13 +3147,7 @@ namespace Core2D.Editor
             return true;
         }
 
-        /// <summary>
-        /// Try to connect lines to connectors.
-        /// </summary>
-        /// <param name="lines">The lines to connect.</param>
-        /// <param name="connectors">The connectors array.</param>
-        /// <param name="threshold">The connection threshold.</param>
-        /// <returns>True if connection was successful.</returns>
+        /// <inheritdoc/>
         public bool TryToConnectLines(IEnumerable<ILineShape> lines, ImmutableArray<IPointShape> connectors, double threshold)
         {
             if (connectors.Length > 0)
@@ -3842,11 +3283,7 @@ namespace Core2D.Editor
             }
         }
 
-        /// <summary>
-        /// Group shapes.
-        /// </summary>
-        /// <param name="shapes">The selected shapes.</param>
-        /// <param name="name">The group name.</param>
+        /// <inheritdoc/>
         public IGroupShape Group(ISet<IBaseShape> shapes, string name)
         {
             var layer = Project?.CurrentContainer?.CurrentLayer;
@@ -3858,11 +3295,7 @@ namespace Core2D.Editor
             return null;
         }
 
-        /// <summary>
-        /// Ungroup shapes.
-        /// </summary>
-        /// <param name="shape">The selected shape.</param>
-        /// <param name="shapes">The selected shapes.</param>
+        /// <inheritdoc/>
         public bool Ungroup(IBaseShape shape, ISet<IBaseShape> shapes)
         {
             var layer = Project?.CurrentContainer?.CurrentLayer;
@@ -3884,12 +3317,7 @@ namespace Core2D.Editor
             return false;
         }
 
-        /// <summary>
-        /// Swap shape from source index to target index position in an array. 
-        /// </summary>
-        /// <param name="shape">The source shape.</param>
-        /// <param name="sourceIndex">The source shape index.</param>
-        /// <param name="targetIndex">The target shape index.</param>
+        /// <inheritdoc/>
         private void Swap(IBaseShape shape, int sourceIndex, int targetIndex)
         {
             var layer = Project?.CurrentContainer?.CurrentLayer;
@@ -3909,10 +3337,7 @@ namespace Core2D.Editor
             }
         }
 
-        /// <summary>
-        /// Bring a shape to the top of the stack.
-        /// </summary>
-        /// <param name="source">The source shape.</param>
+        /// <inheritdoc/>
         public void BringToFront(IBaseShape source)
         {
             var layer = Project?.CurrentContainer?.CurrentLayer;
@@ -3928,10 +3353,7 @@ namespace Core2D.Editor
             }
         }
 
-        /// <summary>
-        /// Move a shape one step closer to the front of the stack.
-        /// </summary>
-        /// <param name="source">The source shape.</param>
+        /// <inheritdoc/>
         public void BringForward(IBaseShape source)
         {
             var layer = Project?.CurrentContainer?.CurrentLayer;
@@ -3947,10 +3369,7 @@ namespace Core2D.Editor
             }
         }
 
-        /// <summary>
-        /// Move a shape one step down within the stack.
-        /// </summary>
-        /// <param name="source">The source shape.</param>
+        /// <inheritdoc/>
         public void SendBackward(IBaseShape source)
         {
             var layer = Project?.CurrentContainer?.CurrentLayer;
@@ -3966,10 +3385,7 @@ namespace Core2D.Editor
             }
         }
 
-        /// <summary>
-        /// Move a shape to the bottom of the stack.
-        /// </summary>
-        /// <param name="source">The source shape.</param>
+        /// <inheritdoc/>
         public void SendToBack(IBaseShape source)
         {
             var layer = Project?.CurrentContainer?.CurrentLayer;
@@ -3985,13 +3401,8 @@ namespace Core2D.Editor
             }
         }
 
-        /// <summary>
-        /// Move shapes by specified offset.
-        /// </summary>
-        /// <param name="shapes">The shapes collection.</param>
-        /// <param name="dx">The X coordinate offset.</param>
-        /// <param name="dy">The Y coordinate offset.</param>
-        public static void MoveShapesBy(IEnumerable<IBaseShape> shapes, double dx, double dy)
+        /// <inheritdoc/>
+        public void MoveShapesBy(IEnumerable<IBaseShape> shapes, double dx, double dy)
         {
             foreach (var shape in shapes)
             {
@@ -4011,13 +3422,7 @@ namespace Core2D.Editor
             Project?.History?.Snapshot(previous, next, (s) => MoveShapesBy(s.Shapes, s.DeltaX, s.DeltaY));
         }
 
-        /// <summary>
-        /// Move shape(s) by specified offset.
-        /// </summary>
-        /// <param name="shape">The selected shape.</param>
-        /// <param name="shapes">The selected shapes.</param>
-        /// <param name="dx">The X coordinate offset.</param>
-        /// <param name="dy">The Y coordinate offset.</param>
+        /// <inheritdoc/>
         public void MoveBy(IBaseShape shape, ISet<IBaseShape> shapes, double dx, double dy)
         {
             if (shape != null)
@@ -4065,13 +3470,7 @@ namespace Core2D.Editor
             }
         }
 
-        /// <summary>
-        /// Move items in the library.
-        /// </summary>
-        /// <typeparam name="T">The type of the library.</typeparam>
-        /// <param name="library">The items library.</param>
-        /// <param name="sourceIndex">The source item index.</param>
-        /// <param name="targetIndex">The target item index.</param>
+        /// <inheritdoc/>
         public void MoveItem<T>(ILibrary<T> library, int sourceIndex, int targetIndex)
         {
             if (sourceIndex < targetIndex)
@@ -4104,13 +3503,7 @@ namespace Core2D.Editor
             }
         }
 
-        /// <summary>
-        /// Swap items in the library.
-        /// </summary>
-        /// <typeparam name="T">The type of the library.</typeparam>
-        /// <param name="library">The items library.</param>
-        /// <param name="sourceIndex">The source item index.</param>
-        /// <param name="targetIndex">The target item index.</param>
+        /// <inheritdoc/>
         public void SwapItem<T>(ILibrary<T> library, int sourceIndex, int targetIndex)
         {
             var item1 = library.Items[sourceIndex];
