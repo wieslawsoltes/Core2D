@@ -18,6 +18,11 @@
   <Import Project="..\..\build\WPF.props" />
 
   <ItemGroup>
+    <None Remove="Layouts\Core2D.UI.Wpf.layout" />
+    <EmbeddedResource Include="Layouts\Core2D.UI.Wpf.layout" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Core2D.Base\Core2D.Base.csproj" />
     <ProjectReference Include="..\Core2D.Editor\Core2D.Editor.csproj" />
     <ProjectReference Include="..\Core2D.Model.Extensions\Core2D.Model.Extensions.csproj" />
