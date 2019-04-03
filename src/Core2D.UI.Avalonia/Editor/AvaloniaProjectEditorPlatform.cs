@@ -348,7 +348,7 @@ namespace Core2D.UI.Avalonia.Editor
             }
             catch (Exception ex)
             {
-                _serviceProvider.GetService<ILog>()?.LogException(ex)
+                _serviceProvider.GetService<ILog>()?.LogException(ex);
             }
         }
 
