@@ -1,7 +1,12 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
+using System.Drawing;
+using System.Drawing.Drawing2D;
+using System.Drawing.Imaging;
+using System.Drawing.Text;
 using System.Linq;
+using System.Threading.Tasks;
 using Avalonia.Controls;
 using Core2D.UI.Avalonia.Windows;
 using Core2D.Containers;
@@ -11,7 +16,6 @@ using Core2D.FileWriter.Emf;
 using Core2D.Interfaces;
 using Core2D.Renderer;
 using Dock.Model;
-using System.Threading.Tasks;
 
 namespace Core2D.UI.Avalonia.Editor
 {
@@ -29,6 +33,16 @@ namespace Core2D.UI.Avalonia.Editor
         public AvaloniaProjectEditorPlatform(IServiceProvider serviceProvider)
         {
             _serviceProvider = serviceProvider;
+        }
+
+        private void LogError(Exception ex)
+        {
+            var log = _serviceProvider.GetService<ILog>();
+            log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
+            if (ex.InnerException != null)
+            {
+                LogError(ex.InnerException);
+            }
         }
 
         /// <inheritdoc/>
@@ -338,40 +352,14 @@ namespace Core2D.UI.Avalonia.Editor
         /// <inheritdoc/>
         public void OnCopyAsEmf(object item)
         {
-#if NET461 && _WINDOWS
-            var editor = _serviceProvider.GetService<IProjectEditor>();
-            var page = editor.Project?.CurrentContainer;
-            if (page != null)
+            try
             {
-                if (editor.Renderers[0]?.State?.SelectedShape != null)
-                {
-                    var shapes = Enumerable.Repeat(editor.Renderers[0].State.SelectedShape, 1).ToList();
-                    var writer = new EmfWriter(_serviceProvider);
-                    writer.SetClipboard(
-                        shapes,
-                        page.Template.Width,
-                        page.Template.Height,
-                        editor.Project as IImageCache);
-                }
-                else if (editor.Renderers?[0]?.State?.SelectedShapes != null)
-                {
-                    var shapes = editor.Renderers[0].State.SelectedShapes.ToList();
-                    var writer = new EmfWriter(_serviceProvider);
-                    writer.SetClipboard(
-                        shapes,
-                        page.Template.Width,
-                        page.Template.Height,
-                        editor.Project as IImageCache);
-                }
-                else
-                {
-                    var writer = new EmfWriter(_serviceProvider);
-                    writer.SetClipboard(page, editor.Project as IImageCache);
-                }
+                throw new NotImplementedException();
             }
-#else
-            throw new NotImplementedException("Not implemented for this platform.");
-#endif
+            catch (Exception ex)
+            {
+                LogError(ex);
+            }
         }
 
         /// <inheritdoc/>

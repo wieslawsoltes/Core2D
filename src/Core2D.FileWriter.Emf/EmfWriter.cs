@@ -16,10 +16,6 @@ using Core2D.Renderer;
 using Core2D.Renderer.WinForms;
 using Core2D.Shapes;
 
-//#if _WINDOWS
-//using WPF = System.Windows;
-//#endif
-
 namespace Core2D.FileWriter.Emf
 {
     /// <summary>
@@ -82,12 +78,9 @@ namespace Core2D.FileWriter.Emf
 
                     g.PageUnit = GraphicsUnit.Display;
 
-                    if (shapes != null)
+                    foreach (var shape in shapes)
                     {
-                        foreach (var shape in shapes)
-                        {
-                            shape.Draw(g, r, 0, 0);
-                        }
+                        shape.Draw(g, r, 0, 0);
                     }
 
                     r.ClearCache(isZooming: false);
@@ -168,80 +161,21 @@ namespace Core2D.FileWriter.Emf
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="shapes"></param>
-        /// <param name="width"></param>
-        /// <param name="height"></param>
-        /// <param name="ic"></param>
-        public void SetClipboard(IEnumerable<IBaseShape> shapes, double width, double height, IImageCache ic)
-        {
-            // TODO: Use Avalonia/WPF clipboard.
-            //try
-            //{
-            //    using (var bitmap = new Bitmap((int)width, (int)height))
-            //    {
-            //        using (var ms = MakeMetafileStream(bitmap, shapes, ic))
-            //        {
-            //            var data = new WPF.DataObject();
-            //            data.SetData(WPF.DataFormats.EnhancedMetafile, ms);
-            //            WPF.Clipboard.SetDataObject(data, true);
-            //        }
-            //    }
-            //}
-            //catch (Exception ex)
-            //{
-            //    Debug.WriteLine(ex.Message);
-            //    Debug.WriteLine(ex.StackTrace);
-            //}
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="container"></param>
-        /// <param name="ic"></param>
-        public void SetClipboard(IPageContainer container, IImageCache ic)
-        {
-            // TODO: Use Avalonia/WPF clipboard.
-            //try
-            //{
-            //    if (container == null || container.Template == null)
-            //        return;
-            //
-            //    using (var bitmap = new Bitmap((int)container.Template.Width, (int)container.Template.Height))
-            //    {
-            //        using (var ms = MakeMetafileStream(bitmap, container, ic))
-            //        {
-            //            var data = new WPF.DataObject();
-            //            data.SetData(WPF.DataFormats.EnhancedMetafile, ms);
-            //            WPF.Clipboard.SetDataObject(data, true);
-            //        }
-            //    }
-            //}
-            //catch (Exception ex)
-            //{
-            //    Debug.WriteLine(ex.Message);
-            //    Debug.WriteLine(ex.StackTrace);
-            //}
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
         /// <param name="path"></param>
         /// <param name="container"></param>
         /// <param name="ic"></param>
         public void Save(string path, IPageContainer container, IImageCache ic)
         {
-            if (container == null || container.Template == null)
-                return;
-
-            using (var bitmap = new Bitmap((int)container.Template.Width, (int)container.Template.Height))
+            if (container != null && container.Template != null)
             {
-                using (var ms = MakeMetafileStream(bitmap, container, ic))
+                using (var bitmap = new Bitmap((int)container.Template.Width, (int)container.Template.Height))
                 {
-                    using (var fs = File.Create(path))
+                    using (var ms = MakeMetafileStream(bitmap, container, ic))
                     {
-                        ms.WriteTo(fs);
+                        using (var fs = File.Create(path))
+                        {
+                            ms.WriteTo(fs);
+                        }
                     }
                 }
             }

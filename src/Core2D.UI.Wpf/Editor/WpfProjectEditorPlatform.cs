@@ -1,10 +1,13 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
+using System.Drawing;
+using System.Drawing.Drawing2D;
+using System.Drawing.Imaging;
+using System.Drawing.Text;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Windows;
 using Core2D.Containers;
 using Core2D.Data;
 using Core2D.Editor;
@@ -30,6 +33,16 @@ namespace Core2D.UI.Wpf.Editor
         public WpfProjectEditorPlatform(IServiceProvider serviceProvider)
         {
             _serviceProvider = serviceProvider;
+        }
+
+        private void LogError(Exception ex)
+        {
+            var log = _serviceProvider.GetService<ILog>();
+            log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
+            if (ex.InnerException != null)
+            {
+                LogError(ex.InnerException);
+            }
         }
 
         /// <inheritdoc/>
@@ -404,46 +417,73 @@ namespace Core2D.UI.Wpf.Editor
             }
         }
 
+        private void SetClipboard(MemoryStream ms)
+        {
+            var data = new DataObject();
+            data.SetData(DataFormats.EnhancedMetafile, ms);
+            Clipboard.SetDataObject(data, true);
+        }
+
+        private void SetClipboard(IEnumerable<IBaseShape> shapes, double width, double height, IImageCache ic)
+        {
+            using (var bitmap = new Bitmap((int)width, (int)height))
+            {
+                var writer = new EmfWriter(_serviceProvider);
+                using (var ms = writer.MakeMetafileStream(bitmap, shapes, ic))
+                {
+                    SetClipboard(ms);
+                }
+            }
+        }
+
+        private void SetClipboard(IPageContainer container, IImageCache ic)
+        {
+            var writer = new EmfWriter(_serviceProvider);
+            using (var bitmap = new Bitmap((int)container.Template.Width, (int)container.Template.Height))
+            {
+                using (var ms = writer.MakeMetafileStream(bitmap, container, ic))
+                {
+                    SetClipboard(ms);
+                }
+            }
+        }
+
         /// <inheritdoc/>
         public void OnCopyAsEmf(object item)
         {
-            var editor = _serviceProvider.GetService<IProjectEditor>();
-            var page = editor.Project?.CurrentContainer;
-
-            var dataFlow = _serviceProvider.GetService<IDataFlow>();
-            var db = (object)page.Data.Properties;
-            var record = (object)page.Data.Record;
-
-            dataFlow.Bind(page.Template, db, record);
-            dataFlow.Bind(page, db, record);
-
-            if (page != null && editor.Project is IImageCache imageChache)
+            try
             {
-                if (editor.Renderers[0]?.State?.SelectedShape != null)
+                var editor = _serviceProvider.GetService<IProjectEditor>();
+                var page = editor.Project?.CurrentContainer;
+    
+                var dataFlow = _serviceProvider.GetService<IDataFlow>();
+                var db = (object)page.Data.Properties;
+                var record = (object)page.Data.Record;
+
+                dataFlow.Bind(page.Template, db, record);
+                dataFlow.Bind(page, db, record);
+
+                if (page != null && page.Template != null && editor.Project is IImageCache imageChache)
                 {
-                    var shapes = Enumerable.Repeat(editor.Renderers[0].State.SelectedShape, 1).ToList();
-                    var writer = new EmfWriter(_serviceProvider);
-                    writer.SetClipboard(
-                        shapes,
-                        page.Template.Width,
-                        page.Template.Height,
-                        imageChache);
+                    if (editor.Renderers[0]?.State?.SelectedShape != null)
+                    {
+                        var shapes = Enumerable.Repeat(editor.Renderers[0].State.SelectedShape, 1).ToList();
+                        SetClipboard(shapes, page.Template.Width, page.Template.Height, imageChache);
+                    }
+                    else if (editor.Renderers?[0]?.State?.SelectedShapes != null)
+                    {
+                        var shapes = editor.Renderers[0].State.SelectedShapes.ToList();
+                        SetClipboard(shapes, page.Template.Width, page.Template.Height, imageChache);
+                    }
+                    else
+                    {
+                        SetClipboard(page, imageChache);
+                    }
                 }
-                else if (editor.Renderers?[0]?.State?.SelectedShapes != null)
-                {
-                    var shapes = editor.Renderers[0].State.SelectedShapes.ToList();
-                    var writer = new EmfWriter(_serviceProvider);
-                    writer.SetClipboard(
-                        shapes,
-                        page.Template.Width,
-                        page.Template.Height,
-                        imageChache);
-                }
-                else
-                {
-                    var writer = new EmfWriter(_serviceProvider);
-                    writer.SetClipboard(page, imageChache);
-                }
+            }
+            catch (Exception ex)
+            {
+                LogError(ex);
             }
         }
 
@@ -504,25 +544,53 @@ namespace Core2D.UI.Wpf.Editor
         /// <inheritdoc/>
         public void OnDocumentViewer()
         {
-            throw new NotImplementedException();
+            try
+            {
+                throw new NotImplementedException();
+            }
+            catch (Exception ex)
+            {
+                LogError(ex);
+            }
         }
 
         /// <inheritdoc/>
         public void OnObjectBrowser()
         {
-            throw new NotImplementedException();
+            try
+            {
+                throw new NotImplementedException();
+            }
+            catch (Exception ex)
+            {
+                LogError(ex);
+            }
         }
 
         /// <inheritdoc/>
         public void OnScriptEditor()
         {
-            throw new NotImplementedException();
+            try
+            {
+                throw new NotImplementedException();
+            }
+            catch (Exception ex)
+            {
+                LogError(ex);
+            }
         }
 
         /// <inheritdoc/>
         public void OnAboutDialog()
         {
-            throw new NotImplementedException();
+            try
+            {
+                throw new NotImplementedException();
+            }
+            catch (Exception ex)
+            {
+                LogError(ex);
+            }
         }
 
         /// <inheritdoc/>
