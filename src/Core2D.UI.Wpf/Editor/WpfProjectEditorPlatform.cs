@@ -10,6 +10,7 @@ using System.Drawing.Text;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Windows;
 using Core2D.Containers;
 using Core2D.Data;
 using Core2D.Editor;
