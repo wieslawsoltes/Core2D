@@ -14,6 +14,7 @@
     <RdXmlFile Include="..\..\build\native\app.rd.xml" />
     <RdXmlFile Include="..\..\build\native\avalonia.rd.xml" />
     <RdXmlFile Include="..\..\build\native\avalonia.behaviors.xml" />
+    <RdXmlFile Include="..\..\build\native\avalonia.reactiveui.xml" />
     <RdXmlFile Include="..\..\build\native\avalonia.linux.rd.xml" Condition="'$(RuntimeIdentifier)' == 'linux-x64'" />
     <RdXmlFile Include="..\..\build\native\avalonia.osx.rd.xml" Condition="'$(RuntimeIdentifier)' == 'osx-x64'" />
     <RdXmlFile Include="..\..\build\native\avalonia.win.rd.xml" Condition="'$(RuntimeIdentifier)' == 'win-x64'" />
@@ -41,10 +42,12 @@
   <Import Project="..\..\build\Rx.props" />
   <Import Project="..\..\build\Avalonia.props" />
   <Import Project="..\..\build\Avalonia.Desktop.props" />
+  <Import Project="..\..\build\Avalonia.ReactiveUI.props" />
   <Import Project="..\..\build\SkiaSharp.props" />
   <Import Project="..\..\build\SharpDX.props" />
   <Import Project="..\..\build\Dock.Model.props" />
   <Import Project="..\..\build\Dock.Avalonia.props" />
+  <Import Project="..\..\build\ReactiveUI.props" />
   <Import Project="..\..\build\System.Drawing.Common.props" />
   <!--<Import Project="..\..\build\Linker.props" Condition="'$(CoreRT)' == 'False'" />-->
 

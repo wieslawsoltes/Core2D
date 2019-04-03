@@ -3,7 +3,7 @@
 <UserControl x:Class="Core2D.UI.Avalonia.Views.DashboardMenuControl"
              xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
              xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
@@ -13,10 +13,14 @@
              xmlns:Editor="clr-namespace:Core2D.Editor;assembly=Core2D.Editor"
              xmlns:Recent="clr-namespace:Core2D.Editor.Recent;assembly=Core2D.Editor"
              xmlns:ContainersCore="clr-namespace:Core2D.Containers;assembly=Core2D.Model"
+             xmlns:Themes="clr-namespace:Core2D.UI.Avalonia;assembly=Core2D.UI.Avalonia"
              xmlns:Designer="clr-namespace:Core2D.Editor.Designer;assembly=Core2D.Editor"
              mc:Ignorable="d"
              d:DataContext="{x:Static Designer:DesignerContext.Editor}"
              d:DesignWidth="800" d:DesignHeight="20">
+    <UserControl.Resources>
+        <converters:ObjectEqualityMultiConverter x:Key="ObjectEqualityMultiConverter"/>
+    </UserControl.Resources>
     <Menu Classes="default">
         <Menu.ItemsPanel>
             <ItemsPanelTemplate>
@@ -69,6 +73,28 @@
                     </Style>
                 </MenuItem.Styles>
             </MenuItem>
+            <Separator/>
+            <MenuItem Header="_Theme" DataContext="{x:Static Themes:ThemeManager.Instance}" Items="{Binding Themes}">
+                <MenuItem.Styles>
+                    <Style Selector="MenuItem">
+                        <Setter Property="Header" Value="{Binding Name}"/>
+                        <Setter Property="Command" Value="{Binding Manager.ApplyTheme}"/>
+                        <Setter Property="CommandParameter" Value="{Binding}"/>
+                        <Setter Property="Icon">
+                            <Template>
+                                <CheckBox Classes="menu">
+                                    <CheckBox.IsChecked>
+                                        <MultiBinding Mode="OneWay" Converter="{StaticResource ObjectEqualityMultiConverter}">
+                                            <Binding Path="DataContext" RelativeSource="{RelativeSource Self}"/>
+                                            <Binding Path="Manager.SelectedTheme"/>
+                                        </MultiBinding>
+                                    </CheckBox.IsChecked>
+                                </CheckBox>
+                            </Template>
+                        </Setter>
+                    </Style>
+                </MenuItem.Styles>
+            </MenuItem>
         </MenuItem>
         <MenuItem Header="_Window">
             <MenuItem Header="_Load Layout..." Command="{Binding LayoutPlatform.LoadLayout}"/>
@@ -76,7 +102,7 @@
             <MenuItem Header="_Save Layout..." Command="{Binding LayoutPlatform.SaveLayout}"/>
             <Separator/>
             <MenuItem Header="_Reset Layout" Command="{Binding LayoutPlatform.ResetLayout}"/>
-        </MenuItem>
+        </MenuItem> 
         <MenuItem Header="_Debug">
             <MenuItem Header="Draw_DirtyRects" Click="DebugDrawDirtyRects_Click">
                 <MenuItem.Icon>

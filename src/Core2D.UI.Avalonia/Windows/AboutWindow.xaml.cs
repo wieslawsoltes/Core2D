@@ -27,6 +27,7 @@ namespace Core2D.UI.Avalonia.Windows
         private void InitializeComponent()
         {
             AvaloniaXamlLoader.Load(this);
+            ThemeManager.Instance.EnableThemes(this);
         }
     }
 }

@@ -1,0 +1,7 @@
+<Directives>
+    <Application>
+
+        <Assembly Name="Avalonia.ReactiveUI" Dynamic="Required All" />
+
+    </Application>
+</Directives>
