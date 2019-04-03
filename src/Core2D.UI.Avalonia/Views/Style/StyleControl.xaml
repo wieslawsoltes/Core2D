@@ -19,7 +19,7 @@
             <TextBox Text="{Binding Thickness, Mode=TwoWay}" Classes="left" Grid.Row="1" Grid.Column="1"/>
             <Slider Classes="slider" Value="{Binding Thickness, Mode=TwoWay}" Minimum="0" Maximum="30" Grid.Row="1" Grid.Column="2"/>
             <TextBlock Text="Line Cap" Classes="left" Grid.Row="2" Grid.Column="0"/>
-            <DropDown Items="{x:Static Editor:Enums.LineCapValues}" SelectedItem="{Binding LineCap, Mode=TwoWay}" Classes="default" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2"/>
+            <ComboBox Items="{x:Static Editor:Enums.LineCapValues}" SelectedItem="{Binding LineCap, Mode=TwoWay}" Classes="default" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2"/>
             <TextBlock Text="Dashes" Classes="left" Grid.Row="3" Grid.Column="0"/>
             <TextBox Text="{Binding Dashes, Mode=TwoWay}" Classes="left" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2"/>
             <TextBlock Text="Dash Offset" Classes="left" Grid.Row="4" Grid.Column="0"/>

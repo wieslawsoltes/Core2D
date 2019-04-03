@@ -15,25 +15,25 @@
     <TabControl Classes="default">
         <TabItem Header="Main" Classes="property">
             <Grid RowDefinitions="Auto,*">
-                <DropDown Items="{Binding Tools}" SelectedItem="{Binding CurrentTool, Mode=TwoWay}" Grid.Row="0" Classes="default">
-                    <DropDown.DataTemplates>
+                <ComboBox Items="{Binding Tools}" SelectedItem="{Binding CurrentTool, Mode=TwoWay}" Grid.Row="0" Classes="default">
+                    <ComboBox.DataTemplates>
                         <DataTemplate>
                             <TextBlock Text="{Binding Title}"/>
                         </DataTemplate>
-                    </DropDown.DataTemplates>
-                </DropDown>
+                    </ComboBox.DataTemplates>
+                </ComboBox>
                 <ContentControl Content="{Binding CurrentTool.Settings}" Grid.Row="1"/>
             </Grid>
         </TabItem>
         <TabItem Header="Path" Classes="property">
             <Grid RowDefinitions="Auto,*">
-                <DropDown Items="{Binding PathTools}" SelectedItem="{Binding CurrentPathTool, Mode=TwoWay}" Grid.Row="0" Classes="default">
-                    <DropDown.DataTemplates>
+                <ComboBox Items="{Binding PathTools}" SelectedItem="{Binding CurrentPathTool, Mode=TwoWay}" Grid.Row="0" Classes="default">
+                    <ComboBox.DataTemplates>
                         <DataTemplate>
                             <TextBlock Text="{Binding Title}"/>
                         </DataTemplate>
-                    </DropDown.DataTemplates>
-                </DropDown>
+                    </ComboBox.DataTemplates>
+                </ComboBox>
                 <ContentControl Content="{Binding CurrentPathTool.Settings}" Grid.Row="1"/>
             </Grid>
         </TabItem>

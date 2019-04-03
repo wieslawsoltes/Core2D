@@ -7,13 +7,13 @@
              xmlns:ViewsIntersectionsLineSettings="clr-namespace:Core2D.UI.Avalonia.Views.Intersections;assembly=Core2D.UI.Avalonia"
              xmlns:EditorIntersectionsLine="clr-namespace:Core2D.Editor.Intersections.Line;assembly=Core2D.UI.Avalonia">
     <Grid RowDefinitions="Auto,*">
-        <DropDown Classes="default" Grid.Row="0" x:Name="Intersections" Items="{Binding CurrentTool.Intersections}" SelectedIndex="0">
-            <DropDown.DataTemplates>
+        <ComboBox Classes="default" Grid.Row="0" x:Name="Intersections" Items="{Binding CurrentTool.Intersections}" SelectedIndex="0">
+            <ComboBox.DataTemplates>
                 <DataTemplate>
                     <TextBlock Classes="default" Text="{Binding Title}"/>
                 </DataTemplate>
-            </DropDown.DataTemplates>
-        </DropDown>
+            </ComboBox.DataTemplates>
+        </ComboBox>
         <ContentControl Grid.Row="1" Content="{Binding ElementName=Intersections, Path=SelectedItem.Settings}">
             <ContentControl.DataTemplates>
                 <DataTemplate DataType="{x:Type EditorIntersectionsLine:LineLineSettings}">

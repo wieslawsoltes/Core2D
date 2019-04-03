@@ -17,7 +17,7 @@
             <ScrollViewer>
                 <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto" ColumnDefinitions="Auto,50,*">
                     <TextBlock Text="Arrow Type" Classes="left" Grid.Row="0" Grid.Column="0"/>
-                    <DropDown Items="{x:Static Editor:Enums.ArrowTypeValues}" SelectedItem="{Binding ArrowType, Mode=TwoWay}" Classes="default" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2"/>
+                    <ComboBox Items="{x:Static Editor:Enums.ArrowTypeValues}" SelectedItem="{Binding ArrowType, Mode=TwoWay}" Classes="default" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2"/>
                     <TextBlock Text="IsStroked" Classes="left" Grid.Row="1" Grid.Column="0"/>
                     <CheckBox IsChecked="{Binding IsStroked, Mode=TwoWay}" Classes="left" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2"/>
                     <TextBlock Text="IsFilled" Classes="left" Grid.Row="2" Grid.Column="0"/>

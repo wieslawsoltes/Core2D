@@ -169,43 +169,43 @@
             <Setter Property="TextBlock.FontSize" Value="{DynamicResource FontSizeNormal}" />
             <Setter Property="TextBlock.FontWeight" Value="Normal" />
         </Style>
-        <!-- DropDown.default -->
-        <Style Selector="DropDown.default">
+        <!-- ComboBox.default -->
+        <Style Selector="ComboBox.default">
             <Setter Property="Padding" Value="4,0,4,0"/>
             <Setter Property="Margin" Value="0,1,0,1"/>
             <Setter Property="FontSize" Value="{DynamicResource FontSizeNormal}"/>
             <Setter Property="BorderThickness" Value="1"/>
         </Style>
-        <Style Selector="DropDown.default:pointerover /template/ Border#border">
+        <Style Selector="ComboBox.default:pointerover /template/ Border#border">
             <Setter Property="BorderThickness" Value="1"/>
         </Style>
-        <Style Selector="DropDown.default:focus /template/ Border#border">
+        <Style Selector="ComboBox.default:focus /template/ Border#border">
             <Setter Property="BorderThickness" Value="1"/>
         </Style>
-        <!-- DropDown.tool -->
-        <Style Selector="DropDown.tool">
+        <!-- ComboBox.tool -->
+        <Style Selector="ComboBox.tool">
             <Setter Property="Padding" Value="4,0,4,0"/>
             <Setter Property="Margin" Value="2"/>
             <Setter Property="FontSize" Value="{DynamicResource FontSizeNormal}"/>
             <Setter Property="BorderThickness" Value="1"/>
         </Style>
-        <Style Selector="DropDown.tool:pointerover /template/ Border#border">
+        <Style Selector="ComboBox.tool:pointerover /template/ Border#border">
             <Setter Property="BorderThickness" Value="1"/>
         </Style>
-        <Style Selector="DropDown.tool:focus /template/ Border#border">
+        <Style Selector="ComboBox.tool:focus /template/ Border#border">
             <Setter Property="BorderThickness" Value="1"/>
         </Style>
-        <!-- DropDown.autofit -->
-        <Style Selector="DropDown.autofit">
+        <!-- ComboBox.autofit -->
+        <Style Selector="ComboBox.autofit">
             <Setter Property="Padding" Value="4,0,4,0"/>
             <Setter Property="Margin" Value="2"/>
             <Setter Property="FontSize" Value="{DynamicResource FontSizeNormal}"/>
             <Setter Property="BorderThickness" Value="1"/>
         </Style>
-        <Style Selector="DropDown.autofit:pointerover /template/ Border#border">
+        <Style Selector="ComboBox.autofit:pointerover /template/ Border#border">
             <Setter Property="BorderThickness" Value="1"/>
         </Style>
-        <Style Selector="DropDown.autofit:focus /template/ Border#border">
+        <Style Selector="ComboBox.autofit:focus /template/ Border#border">
             <Setter Property="BorderThickness" Value="1"/>
         </Style>
         <!-- Grid -->

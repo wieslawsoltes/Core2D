@@ -16,12 +16,12 @@
         <TextBlock Classes="default" Grid.Column="0" Grid.Row="4" Text="IsClosed"/>
         <CheckBox Classes="default" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="4" IsChecked="{Binding IsClosed}"/>
         <TextBlock Classes="default" Grid.Column="0" Grid.Row="5" Text="Tools"/>
-        <DropDown Classes="default" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="5" Items="{Binding Tools}" SelectedItem="{Binding CurrentTool, Mode=OneWay}">
-            <DropDown.DataTemplates>
+        <ComboBox Classes="default" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="5" Items="{Binding Tools}" SelectedItem="{Binding CurrentTool, Mode=OneWay}">
+            <ComboBox.DataTemplates>
                 <DataTemplate>
                     <TextBlock Classes="default" Text="{Binding Title}"/>
                 </DataTemplate>
-            </DropDown.DataTemplates>
-        </DropDown>
+            </ComboBox.DataTemplates>
+        </ComboBox>
     </Grid>
 </UserControl>

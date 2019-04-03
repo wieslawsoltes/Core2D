@@ -27,13 +27,13 @@
                 <MenuItem Header="&#727;" Command="{Binding $parent[Window].DataContext.OnRemoveStyleLibrary}" CommandParameter="{Binding}" IsVisible="{Binding !!$self.DataContext}"/>
             </Menu>
         </Grid>
-        <DropDown Items="{Binding $parent[Window].DataContext.Project.StyleLibraries}" SelectedItem="{Binding $parent[Window].DataContext.Project.CurrentStyleLibrary, Mode=TwoWay}" Grid.Row="1" Classes="default" IsVisible="{Binding !!$self.DataContext}">
-            <DropDown.DataTemplates>
+        <ComboBox Items="{Binding $parent[Window].DataContext.Project.StyleLibraries}" SelectedItem="{Binding $parent[Window].DataContext.Project.CurrentStyleLibrary, Mode=TwoWay}" Grid.Row="1" Classes="default" IsVisible="{Binding !!$self.DataContext}">
+            <ComboBox.DataTemplates>
                 <DataTemplate>
                     <TextBlock Text="{Binding Name}" Classes="default"/>
                 </DataTemplate>
-            </DropDown.DataTemplates>
-        </DropDown>
+            </ComboBox.DataTemplates>
+        </ComboBox>
         <Menu Grid.Row="2" HorizontalAlignment="Right" IsVisible="{Binding !!$self.DataContext}">
             <MenuItem Header="apply" Command="{Binding $parent[Window].DataContext.OnApplyStyle}" CommandParameter="{Binding Selected}" IsVisible="{Binding !!Selected}"/>
             <MenuItem Header="+" Command="{Binding $parent[Window].DataContext.OnAddStyle}" CommandParameter="{Binding}"/>

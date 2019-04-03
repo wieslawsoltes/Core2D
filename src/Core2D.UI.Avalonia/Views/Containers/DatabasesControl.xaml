@@ -17,13 +17,13 @@
             <MenuItem Header="+" Command="{Binding $parent[Window].DataContext.OnAddDatabase}"/>
             <MenuItem Header="&#727;" Command="{Binding $parent[Window].DataContext.OnRemoveDatabase}" CommandParameter="{Binding CurrentDatabase}" IsVisible="{Binding !!CurrentDatabase}"/>
         </Menu>
-        <DropDown Items="{Binding Databases}" SelectedItem="{Binding CurrentDatabase, Mode=TwoWay}" Grid.Row="1" Classes="default" IsVisible="{Binding !!CurrentDatabase}">
-            <DropDown.DataTemplates>
+        <ComboBox Items="{Binding Databases}" SelectedItem="{Binding CurrentDatabase, Mode=TwoWay}" Grid.Row="1" Classes="default" IsVisible="{Binding !!CurrentDatabase}">
+            <ComboBox.DataTemplates>
                 <DataTemplate DataType="DataCore:IDatabase">
                     <TextBlock Text="{Binding Name}" Classes="default"/>
                 </DataTemplate>
-            </DropDown.DataTemplates>
-        </DropDown>
+            </ComboBox.DataTemplates>
+        </ComboBox>
         <ContentControl Content="{Binding CurrentDatabase}" Grid.Row="2"/>
     </Grid>
 </UserControl>

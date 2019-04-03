@@ -20,7 +20,7 @@
             <ScrollViewer>
                 <Grid RowDefinitions="Auto" ColumnDefinitions="Auto,*">
                     <TextBlock Text="FillRule" Classes="left" Grid.Row="0" Grid.Column="0"/>
-                    <DropDown Items="{x:Static Editor:Enums.XFillRuleValues}" SelectedItem="{Binding FillRule, Mode=TwoWay}" Classes="default" Grid.Row="0" Grid.Column="1"/>
+                    <ComboBox Items="{x:Static Editor:Enums.XFillRuleValues}" SelectedItem="{Binding FillRule, Mode=TwoWay}" Classes="default" Grid.Row="0" Grid.Column="1"/>
                 </Grid>
             </ScrollViewer>
         </TabItem>

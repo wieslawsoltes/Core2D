@@ -28,16 +28,16 @@
             <Setter Property="FontSize" Value="{DynamicResource FontSizeNormal}"/>
             <Setter Property="BorderThickness" Value="1"/>
         </Style>
-        <Style Selector="DropDown.default">
+        <Style Selector="ComboBox.default">
             <Setter Property="Padding" Value="4,0,4,0"/>
             <Setter Property="Margin" Value="2"/>
             <Setter Property="FontSize" Value="{DynamicResource FontSizeNormal}"/>
             <Setter Property="BorderThickness" Value="1"/>
         </Style>
-        <Style Selector="DropDown.default:pointerover /template/ Border#border">
+        <Style Selector="ComboBox.default:pointerover /template/ Border#border">
             <Setter Property="BorderThickness" Value="1"/>
         </Style>
-        <Style Selector="DropDown.default:focus /template/ Border#border">
+        <Style Selector="ComboBox.default:focus /template/ Border#border">
             <Setter Property="BorderThickness" Value="1"/>
         </Style>
         <Style Selector="GridSplitter:vertical">

@@ -25,9 +25,9 @@
             <TextBlock Text="FontStyle" Classes="left" Grid.Row="4" Grid.Column="0"/>
             <ContentControl Content="{Binding FontStyle}" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2"/>
             <TextBlock Text="HAlignment" Classes="left" Grid.Row="5" Grid.Column="0"/>
-            <DropDown Items="{x:Static Editor:Enums.TextHAlignmentValues}" SelectedItem="{Binding TextHAlignment, Mode=TwoWay}" Classes="default" Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="2"/>
+            <ComboBox Items="{x:Static Editor:Enums.TextHAlignmentValues}" SelectedItem="{Binding TextHAlignment, Mode=TwoWay}" Classes="default" Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="2"/>
             <TextBlock Text="VAlignment" Classes="left" Grid.Row="6" Grid.Column="0"/>
-            <DropDown Items="{x:Static Editor:Enums.TextVAlignmentValues}" SelectedItem="{Binding TextVAlignment, Mode=TwoWay}" Classes="default" Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="2"/>
+            <ComboBox Items="{x:Static Editor:Enums.TextVAlignmentValues}" SelectedItem="{Binding TextVAlignment, Mode=TwoWay}" Classes="default" Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="2"/>
         </Grid>
     </ScrollViewer>
 </UserControl>

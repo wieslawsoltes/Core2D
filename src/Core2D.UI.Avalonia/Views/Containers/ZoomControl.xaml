@@ -34,9 +34,9 @@
             <ScrollViewer>
                 <Grid RowDefinitions="Auto,Auto,Auto,Auto" ColumnDefinitions="Auto,*">
                     <TextBlock Text="PanButton:" Classes="left" Grid.Row="0" Grid.Column="0"/>
-                    <DropDown Items="{x:Static paz:ZoomBorder.ButtonNames}" SelectedItem="{Binding PanButton, Mode=TwoWay}" Classes="default" Grid.Row="0" Grid.Column="1"/>
+                    <ComboBox Items="{x:Static paz:ZoomBorder.ButtonNames}" SelectedItem="{Binding PanButton, Mode=TwoWay}" Classes="default" Grid.Row="0" Grid.Column="1"/>
                     <TextBlock Text="Stretch:" Classes="left" Grid.Row="1" Grid.Column="0"/>
-                    <DropDown Items="{x:Static paz:ZoomBorder.StretchModes}" SelectedItem="{Binding Stretch, Mode=TwoWay}" Classes="default" Grid.Row="1" Grid.Column="1"/>
+                    <ComboBox Items="{x:Static paz:ZoomBorder.StretchModes}" SelectedItem="{Binding Stretch, Mode=TwoWay}" Classes="default" Grid.Row="1" Grid.Column="1"/>
                     <TextBlock Text="ZoomSpeed:" Classes="left" Grid.Row="2" Grid.Column="0"/>
                     <TextBox Text="{Binding ZoomSpeed, Mode=TwoWay}" Classes="left" Grid.Row="2" Grid.Column="1"/>
                     <TextBlock Text="EnableInput:" Classes="left" Grid.Row="3" Grid.Column="0"/>

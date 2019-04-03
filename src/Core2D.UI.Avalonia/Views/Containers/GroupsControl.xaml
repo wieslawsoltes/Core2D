@@ -28,13 +28,13 @@
                 <MenuItem Header="&#727;" Command="{Binding $parent[Window].DataContext.OnRemoveGroupLibrary}" CommandParameter="{Binding}" IsVisible="{Binding !!$self.DataContext}"/>
             </Menu>
         </Grid>
-        <DropDown Items="{Binding $parent[Window].DataContext.Project.GroupLibraries}" SelectedItem="{Binding $parent[Window].DataContext.Project.CurrentGroupLibrary, Mode=TwoWay}" Classes="default" Grid.Row="1" IsVisible="{Binding !!$self.DataContext}">
-            <DropDown.DataTemplates>
+        <ComboBox Items="{Binding $parent[Window].DataContext.Project.GroupLibraries}" SelectedItem="{Binding $parent[Window].DataContext.Project.CurrentGroupLibrary, Mode=TwoWay}" Classes="default" Grid.Row="1" IsVisible="{Binding !!$self.DataContext}">
+            <ComboBox.DataTemplates>
                 <DataTemplate>
                     <TextBlock Text="{Binding Name}" Classes="default"/>
                 </DataTemplate>
-            </DropDown.DataTemplates>
-        </DropDown>
+            </ComboBox.DataTemplates>
+        </ComboBox>
         <Menu Grid.Row="2" HorizontalAlignment="Right" IsVisible="{Binding !!$self.DataContext}">
             <MenuItem Header="insert" Command="{Binding $parent[Window].DataContext.OnInsertGroup}" CommandParameter="{Binding Selected}" IsVisible="{Binding !!Selected}"/>
             <MenuItem Header="+" Command="{Binding $parent[Window].DataContext.OnAddGroup}" CommandParameter="{Binding}" IsVisible="{Binding $parent[Window].DataContext.Project.CurrentContainer.CurrentShape, Converter={StaticResource IsGroupConverter}}"/>

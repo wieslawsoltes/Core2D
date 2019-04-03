@@ -23,7 +23,7 @@
                     <TextBox Text="{Binding Curvature, Mode=TwoWay}" Classes="left" Grid.Row="2" Grid.Column="1"/>
                     <Slider Classes="slider" Value="{Binding Curvature, Mode=TwoWay}" Minimum="0" Maximum="100" Grid.Row="2" Grid.Column="2"/>
                     <TextBlock Text="CurveOrientation" Classes="left" Grid.Row="3" Grid.Column="0"/>
-                    <DropDown Items="{x:Static Editor:Enums.CurveOrientationValues}" SelectedItem="{Binding CurveOrientation, Mode=TwoWay}" Classes="default" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2"/>
+                    <ComboBox Items="{x:Static Editor:Enums.CurveOrientationValues}" SelectedItem="{Binding CurveOrientation, Mode=TwoWay}" Classes="default" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2"/>
                 </Grid>
             </ScrollViewer>
         </TabItem>

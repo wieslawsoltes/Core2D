@@ -24,7 +24,7 @@
                     <TextBlock Text="IsLargeArc" Classes="left" Grid.Row="3" Grid.Column="0"/>
                     <CheckBox IsChecked="{Binding IsLargeArc, Mode=TwoWay}" Classes="left" Grid.Row="3" Grid.Column="1"/>
                     <TextBlock Text="SweepDirection" Classes="left" Grid.Row="4" Grid.Column="0"/>
-                    <DropDown Items="{x:Static Editor:Enums.XSweepDirectionValues}" SelectedItem="{Binding SweepDirection, Mode=TwoWay}" Classes="default" Grid.Row="4" Grid.Column="1"/>
+                    <ComboBox Items="{x:Static Editor:Enums.XSweepDirectionValues}" SelectedItem="{Binding SweepDirection, Mode=TwoWay}" Classes="default" Grid.Row="4" Grid.Column="1"/>
                 </Grid>
             </ScrollViewer>
         </TabItem>
