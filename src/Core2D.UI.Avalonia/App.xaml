@@ -379,6 +379,7 @@
             <Setter Property="VerticalAlignment" Value="Center"/>
         </Style>
         <Style Selector="TextBlock.tree">
+            <Setter Property="Background" Value="Transparent"/>
             <Setter Property="Margin" Value="1"/>
             <Setter Property="FontSize" Value="{DynamicResource FontSizeNormal}"/>
         </Style>
