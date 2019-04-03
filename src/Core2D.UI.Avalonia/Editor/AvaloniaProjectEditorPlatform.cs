@@ -7,9 +7,7 @@ using Core2D.UI.Avalonia.Windows;
 using Core2D.Containers;
 using Core2D.Data;
 using Core2D.Editor;
-#if NET461
 using Core2D.FileWriter.Emf;
-#endif
 using Core2D.Interfaces;
 using Core2D.Renderer;
 using Dock.Model;
