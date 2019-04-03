@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LayoutRoot xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<LayoutRoot>
   <RootPanel Orientation="Horizontal">
     <LayoutAnchorablePaneGroup Orientation="Vertical" DockWidth="210">
       <LayoutAnchorablePane DockWidth="210">
@@ -16,7 +16,7 @@
     </LayoutAnchorablePaneGroup>
     <LayoutDocumentPaneGroup Orientation="Horizontal">
       <LayoutDocumentPane ShowHeader="False">
-        <LayoutDocument Title="Canvas" IsSelected="True" IsLastFocusedDocument="True" ContentId="canvas" CanClose="False" LastActivationTimeStamp="05/02/2016 23:35:01" />
+        <LayoutDocument Title="Canvas" IsSelected="True" IsLastFocusedDocument="True" ContentId="canvas" CanClose="False" LastActivationTimeStamp="04/03/2019 16:42:31" />
       </LayoutDocumentPane>
     </LayoutDocumentPaneGroup>
     <LayoutAnchorablePaneGroup Orientation="Vertical" DockWidth="250">
