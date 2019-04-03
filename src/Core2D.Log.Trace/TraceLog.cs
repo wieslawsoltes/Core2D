@@ -31,15 +31,12 @@ namespace Core2D.Log.Trace
         }
 
         /// <inheritdoc/>
-        string ILog.LastMessage
-        {
-            get { return _lastMessage; }
-        }
+        public string LastMessage => _lastMessage;
 
         private void SetLastMessage(string message) => _lastMessage = message;
 
         /// <inheritdoc/>
-        void ILog.Initialize(string path)
+        public void Initialize(string path)
         {
             try
             {
@@ -57,7 +54,8 @@ namespace Core2D.Log.Trace
             }
         }
 
-        private void Close()
+        /// <inheritdoc/>
+        public void Close()
         {
             try
             {
@@ -83,13 +81,7 @@ namespace Core2D.Log.Trace
         }
 
         /// <inheritdoc/>
-        void ILog.Close()
-        {
-            Close();
-        }
-
-        /// <inheritdoc/>
-        void ILog.LogInformation(string message)
+        public void LogInformation(string message)
         {
             SD.Trace.TraceInformation(message);
             Console.WriteLine(message);
@@ -97,7 +89,7 @@ namespace Core2D.Log.Trace
         }
 
         /// <inheritdoc/>
-        void ILog.LogInformation(string format, params object[] args)
+        public void LogInformation(string format, params object[] args)
         {
             SD.Trace.TraceInformation(format, args);
             Console.WriteLine(format, args);
@@ -105,7 +97,7 @@ namespace Core2D.Log.Trace
         }
 
         /// <inheritdoc/>
-        void ILog.LogWarning(string message)
+        public void LogWarning(string message)
         {
             SD.Trace.TraceWarning(message);
             Console.WriteLine(message);
@@ -113,7 +105,7 @@ namespace Core2D.Log.Trace
         }
 
         /// <inheritdoc/>
-        void ILog.LogWarning(string format, params object[] args)
+        public void LogWarning(string format, params object[] args)
         {
             SD.Trace.TraceWarning(format, args);
             Console.WriteLine(format, args);
@@ -121,7 +113,7 @@ namespace Core2D.Log.Trace
         }
 
         /// <inheritdoc/>
-        void ILog.LogError(string message)
+        public void LogError(string message)
         {
             SD.Trace.TraceError(message);
             Console.WriteLine(message);
@@ -129,7 +121,7 @@ namespace Core2D.Log.Trace
         }
 
         /// <inheritdoc/>
-        void ILog.LogError(string format, params object[] args)
+        public void LogError(string format, params object[] args)
         {
             SD.Trace.TraceError(format, args);
             Console.WriteLine(format, args);
@@ -137,7 +129,7 @@ namespace Core2D.Log.Trace
         }
 
         /// <inheritdoc/>
-        void ILog.LogException(Exception ex)
+        public void LogException(Exception ex)
         {
             LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
             if (ex.InnerException != null)
@@ -151,7 +143,7 @@ namespace Core2D.Log.Trace
         /// </summary>
         public void Dispose()
         {
-            (this as ILog).Close();
+            Close();
         }
     }
 }
