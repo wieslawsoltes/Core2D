@@ -62,7 +62,7 @@ namespace Core2D.UI.Avalonia.Importers
             }
             catch (Exception ex)
             {
-                _serviceProvider.GetService<ILog>()?.LogException(ex)
+                _serviceProvider.GetService<ILog>()?.LogException(ex);
             }
 
             return default;
