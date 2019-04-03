@@ -279,8 +279,8 @@ namespace Core2D.UI.Wpf.Views
         /// <summary>
         /// Load docking manager layout from resource.
         /// </summary>
-        /// <param name="path">The layout resource path.</param>
-        private void LoadLayoutFromResource(string path)
+        /// <param name="name">The layout resource name.</param>
+        private void LoadLayoutFromResource(string name)
         {
             var serializer = new XmlLayoutSerializer(dockingManager);
 
@@ -294,7 +294,8 @@ namespace Core2D.UI.Wpf.Views
                 };
 
             var assembly = GetType().Assembly;
-            using (var stream = assembly.GetManifestResourceStream(path))
+
+            using (var stream = assembly.GetManifestResourceStream(name))
             {
                 using (var reader = new System.IO.StreamReader(stream))
                 {
