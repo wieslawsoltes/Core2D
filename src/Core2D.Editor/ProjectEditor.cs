@@ -247,15 +247,6 @@ namespace Core2D.Editor
             throw new NotImplementedException();
         }
 
-        private void LogError(Exception ex)
-        {
-            Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
-            if (ex.InnerException != null)
-            {
-                LogError(ex.InnerException);
-            }
-        }
-
         /// <summary>
         /// Snap value by specified snap amount.
         /// </summary>
@@ -395,7 +386,7 @@ namespace Core2D.Editor
             }
             catch (Exception ex)
             {
-                LogError(ex);
+                Log?.LogException(ex);
             }
         }
 
@@ -414,7 +405,7 @@ namespace Core2D.Editor
             }
             catch (Exception ex)
             {
-                LogError(ex);
+                Log?.LogException(ex);
             }
         }
 
@@ -446,7 +437,7 @@ namespace Core2D.Editor
             }
             catch (Exception ex)
             {
-                LogError(ex);
+                Log?.LogException(ex);
             }
         }
 
@@ -467,7 +458,7 @@ namespace Core2D.Editor
             }
             catch (Exception ex)
             {
-                LogError(ex);
+                Log?.LogException(ex);
             }
         }
 
@@ -486,7 +477,7 @@ namespace Core2D.Editor
             }
             catch (Exception ex)
             {
-                LogError(ex);
+                Log?.LogException(ex);
             }
         }
 
@@ -503,7 +494,7 @@ namespace Core2D.Editor
             }
             catch (Exception ex)
             {
-                LogError(ex);
+                Log?.LogException(ex);
             }
         }
 
@@ -676,7 +667,7 @@ namespace Core2D.Editor
             }
             catch (Exception ex)
             {
-                LogError(ex);
+                Log?.LogException(ex);
             }
         }
 
@@ -703,7 +694,7 @@ namespace Core2D.Editor
             }
             catch (Exception ex)
             {
-                LogError(ex);
+                Log?.LogException(ex);
             }
         }
 
@@ -720,7 +711,7 @@ namespace Core2D.Editor
             }
             catch (Exception ex)
             {
-                LogError(ex);
+                Log?.LogException(ex);
             }
         }
 
@@ -747,7 +738,7 @@ namespace Core2D.Editor
             }
             catch (Exception ex)
             {
-                LogError(ex);
+                Log?.LogException(ex);
             }
         }
 
@@ -760,7 +751,7 @@ namespace Core2D.Editor
             }
             catch (Exception ex)
             {
-                LogError(ex);
+                Log?.LogException(ex);
             }
         }
 
@@ -776,7 +767,7 @@ namespace Core2D.Editor
             }
             catch (Exception ex)
             {
-                LogError(ex);
+                Log?.LogException(ex);
             }
         }
 
@@ -792,7 +783,7 @@ namespace Core2D.Editor
             }
             catch (Exception ex)
             {
-                LogError(ex);
+                Log?.LogException(ex);
             }
         }
 
@@ -815,7 +806,7 @@ namespace Core2D.Editor
             }
             catch (Exception ex)
             {
-                LogError(ex);
+                Log?.LogException(ex);
             }
         }
 
@@ -841,7 +832,7 @@ namespace Core2D.Editor
             }
             catch (Exception ex)
             {
-                LogError(ex);
+                Log?.LogException(ex);
             }
         }
 
@@ -858,7 +849,7 @@ namespace Core2D.Editor
             }
             catch (Exception ex)
             {
-                LogError(ex);
+                Log?.LogException(ex);
             }
         }
 
@@ -1022,7 +1013,7 @@ namespace Core2D.Editor
             }
             catch (Exception ex)
             {
-                LogError(ex);
+                Log?.LogException(ex);
             }
         }
 
@@ -1035,7 +1026,7 @@ namespace Core2D.Editor
             }
             catch (Exception ex)
             {
-                LogError(ex);
+                Log?.LogException(ex);
             }
         }
 
@@ -1060,7 +1051,7 @@ namespace Core2D.Editor
             }
             catch (Exception ex)
             {
-                LogError(ex);
+                Log?.LogException(ex);
             }
         }
 
@@ -1919,7 +1910,7 @@ namespace Core2D.Editor
             }
             catch (Exception ex)
             {
-                LogError(ex);
+                Log?.LogException(ex);
             }
         }
 
@@ -1980,7 +1971,7 @@ namespace Core2D.Editor
                 }
                 catch (Exception ex)
                 {
-                    LogError(ex);
+                    Log?.LogException(ex);
                 }
             }
         }
@@ -1998,7 +1989,7 @@ namespace Core2D.Editor
                 }
                 catch (Exception ex)
                 {
-                    LogError(ex);
+                    Log?.LogException(ex);
                 }
             }
         }
@@ -2019,7 +2010,7 @@ namespace Core2D.Editor
                 }
                 catch (Exception ex)
                 {
-                    LogError(ex);
+                    Log?.LogException(ex);
                 }
             }
         }
@@ -2036,7 +2027,7 @@ namespace Core2D.Editor
                 }
                 catch (Exception ex)
                 {
-                    LogError(ex);
+                    Log?.LogException(ex);
                 }
             }
         }
@@ -2078,7 +2069,7 @@ namespace Core2D.Editor
             }
             catch (Exception ex)
             {
-                LogError(ex);
+                Log?.LogException(ex);
             }
             return false;
         }
@@ -2096,7 +2087,7 @@ namespace Core2D.Editor
             }
             catch (Exception ex)
             {
-                LogError(ex);
+                Log?.LogException(ex);
             }
         }
 
@@ -2140,7 +2131,7 @@ namespace Core2D.Editor
             }
             catch (Exception ex)
             {
-                LogError(ex);
+                Log?.LogException(ex);
             }
         }
 
@@ -2215,7 +2206,7 @@ namespace Core2D.Editor
             }
             catch (Exception ex)
             {
-                LogError(ex);
+                Log?.LogException(ex);
             }
         }
 
@@ -2278,7 +2269,7 @@ namespace Core2D.Editor
             }
             catch (Exception ex)
             {
-                LogError(ex);
+                Log?.LogException(ex);
             }
         }
 
@@ -2309,7 +2300,7 @@ namespace Core2D.Editor
             }
             catch (Exception ex)
             {
-                LogError(ex);
+                Log?.LogException(ex);
             }
         }
 
@@ -2347,7 +2338,7 @@ namespace Core2D.Editor
             }
             catch (Exception ex)
             {
-                LogError(ex);
+                Log?.LogException(ex);
             }
 
             return default;
@@ -2373,7 +2364,7 @@ namespace Core2D.Editor
             }
             catch (Exception ex)
             {
-                LogError(ex);
+                Log?.LogException(ex);
             }
 
             return default;
@@ -2401,7 +2392,7 @@ namespace Core2D.Editor
             }
             catch (Exception ex)
             {
-                LogError(ex);
+                Log?.LogException(ex);
             }
 
             return default;
@@ -2433,7 +2424,7 @@ namespace Core2D.Editor
             }
             catch (Exception ex)
             {
-                LogError(ex);
+                Log?.LogException(ex);
             }
 
             return default;
@@ -2486,7 +2477,7 @@ namespace Core2D.Editor
             }
             catch (Exception ex)
             {
-                LogError(ex);
+                Log?.LogException(ex);
             }
 
             return false;
@@ -2556,7 +2547,7 @@ namespace Core2D.Editor
             }
             catch (Exception ex)
             {
-                LogError(ex);
+                Log?.LogException(ex);
             }
             return false;
         }
@@ -2593,7 +2584,7 @@ namespace Core2D.Editor
             }
             catch (Exception ex)
             {
-                LogError(ex);
+                Log?.LogException(ex);
             }
         }
 
@@ -2638,7 +2629,7 @@ namespace Core2D.Editor
             }
             catch (Exception ex)
             {
-                LogError(ex);
+                Log?.LogException(ex);
             }
             return false;
         }
@@ -2726,7 +2717,7 @@ namespace Core2D.Editor
             }
             catch (Exception ex)
             {
-                LogError(ex);
+                Log?.LogException(ex);
             }
             return false;
         }
@@ -2748,7 +2739,7 @@ namespace Core2D.Editor
             }
             catch (Exception ex)
             {
-                LogError(ex);
+                Log?.LogException(ex);
             }
             return false;
         }

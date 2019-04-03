@@ -63,5 +63,11 @@ namespace Core2D.Interfaces
         /// <param name="format">The string format.</param>
         /// <param name="args">The message arguments.</param>
         void LogError(string format, params object[] args);
+
+        /// <summary>
+        /// Log exception.
+        /// </summary>
+        /// <param name="ex">The exception to log.</param>
+        void LogException(Exception ex);
     }
 }

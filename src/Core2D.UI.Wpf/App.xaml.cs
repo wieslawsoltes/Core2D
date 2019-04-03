@@ -100,11 +100,7 @@ namespace Core2D.UI.Wpf
             }
             catch (Exception ex)
             {
-                log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
-                if (ex.InnerException != null)
-                {
-                    log?.LogError($"{ex.InnerException.Message}{Environment.NewLine}{ex.InnerException.StackTrace}");
-                }
+                log?.LogException(ex);
             }
         }
     }

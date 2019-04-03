@@ -35,16 +35,6 @@ namespace Core2D.UI.Avalonia.Editor
             _serviceProvider = serviceProvider;
         }
 
-        private void LogError(Exception ex)
-        {
-            var log = _serviceProvider.GetService<ILog>();
-            log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
-            if (ex.InnerException != null)
-            {
-                LogError(ex.InnerException);
-            }
-        }
-
         /// <inheritdoc/>
         public async void OnOpen(string path)
         {
@@ -358,7 +348,7 @@ namespace Core2D.UI.Avalonia.Editor
             }
             catch (Exception ex)
             {
-                LogError(ex);
+                _serviceProvider.GetService<ILog>()?.LogException(ex)
             }
         }
 

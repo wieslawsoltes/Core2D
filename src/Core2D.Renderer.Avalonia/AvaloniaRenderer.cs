@@ -800,8 +800,7 @@ namespace Core2D.Renderer.Avalonia
                 }
                 catch (Exception ex)
                 {
-                    Debug.WriteLine(ex.Message);
-                    Debug.WriteLine(ex.StackTrace);
+                    _serviceProvider.GetService<ILog>()?.LogException(ex);
                 }
             }
             else
@@ -830,8 +829,7 @@ namespace Core2D.Renderer.Avalonia
                 }
                 catch (Exception ex)
                 {
-                    Debug.WriteLine(ex.Message);
-                    Debug.WriteLine(ex.StackTrace);
+                    _serviceProvider.GetService<ILog>()?.LogException(ex);
                 }
             }
         }

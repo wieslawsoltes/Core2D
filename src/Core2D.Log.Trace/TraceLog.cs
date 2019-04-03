@@ -1,7 +1,7 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
-using Core2D.Interfaces;
 using System;
+using Core2D.Interfaces;
 using SD = System.Diagnostics;
 
 namespace Core2D.Log.Trace
@@ -134,6 +134,16 @@ namespace Core2D.Log.Trace
             SD.Trace.TraceError(format, args);
             Console.WriteLine(format, args);
             SetLastMessage(ErrorPrefix + string.Format(format, args));
+        }
+
+        /// <inheritdoc/>
+        void ILog.LogException(Exception ex)
+        {
+            LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
+            if (ex.InnerException != null)
+            {
+                LogException(ex.InnerException);
+            }
         }
 
         /// <summary>

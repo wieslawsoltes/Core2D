@@ -903,8 +903,7 @@ namespace Core2D.Renderer.Wpf
                 }
                 catch (Exception ex)
                 {
-                    Debug.WriteLine(ex.Message);
-                    Debug.WriteLine(ex.StackTrace);
+                    _serviceProvider.GetService<ILog>()?.LogException(ex);
                 }
             }
             else
@@ -931,8 +930,7 @@ namespace Core2D.Renderer.Wpf
                 }
                 catch (Exception ex)
                 {
-                    Debug.WriteLine(ex.Message);
-                    Debug.WriteLine(ex.StackTrace);
+                    _serviceProvider.GetService<ILog>()?.LogException(ex);
                 }
             }
         }

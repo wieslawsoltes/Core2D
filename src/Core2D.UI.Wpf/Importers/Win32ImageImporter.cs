@@ -62,7 +62,7 @@ namespace Core2D.UI.Wpf.Importers
             }
             catch (Exception ex)
             {
-                _serviceProvider.GetService<ILog>().LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
+                _serviceProvider.GetService<ILog>()?.LogException(ex);
             }
 
             return default;

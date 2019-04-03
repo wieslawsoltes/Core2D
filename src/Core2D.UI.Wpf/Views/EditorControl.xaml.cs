@@ -122,7 +122,7 @@ namespace Core2D.UI.Wpf.Views
                 }
                 catch (Exception ex)
                 {
-                    _projectEditor?.Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
+                    _projectEditor?.Log?.LogException(ex);
                 }
             }
 
@@ -140,7 +140,7 @@ namespace Core2D.UI.Wpf.Views
                 }
                 catch (Exception ex)
                 {
-                    _projectEditor?.Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
+                    _projectEditor?.Log?.LogException(ex);
                 }
             }
 
@@ -158,7 +158,7 @@ namespace Core2D.UI.Wpf.Views
                 }
                 catch (Exception ex)
                 {
-                    _projectEditor?.Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
+                    _projectEditor?.Log?.LogException(ex);
                 }
             }
 
@@ -176,7 +176,7 @@ namespace Core2D.UI.Wpf.Views
                 }
                 catch (Exception ex)
                 {
-                    _projectEditor?.Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
+                    _projectEditor?.Log?.LogException(ex);
                 }
             }
 
@@ -194,7 +194,7 @@ namespace Core2D.UI.Wpf.Views
                 }
                 catch (Exception ex)
                 {
-                    _projectEditor?.Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
+                    _projectEditor?.Log?.LogException(ex);
                 }
             }
 
@@ -211,7 +211,7 @@ namespace Core2D.UI.Wpf.Views
                 }
                 catch (Exception ex)
                 {
-                    _projectEditor?.Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
+                    _projectEditor?.Log?.LogException(ex);
                 }
             }
         }
@@ -353,7 +353,7 @@ namespace Core2D.UI.Wpf.Views
             }
             catch (Exception ex)
             {
-                _projectEditor?.Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
+                _projectEditor?.Log?.LogException(ex);
             }
         }
 
@@ -368,7 +368,7 @@ namespace Core2D.UI.Wpf.Views
             }
             catch (Exception ex)
             {
-                _projectEditor?.Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
+                _projectEditor?.Log?.LogException(ex);
             }
         }
 
@@ -392,7 +392,7 @@ namespace Core2D.UI.Wpf.Views
                 }
                 catch (Exception ex)
                 {
-                    _projectEditor?.Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
+                    _projectEditor?.Log?.LogException(ex);
                 }
             }
         }
@@ -417,7 +417,7 @@ namespace Core2D.UI.Wpf.Views
                 }
                 catch (Exception ex)
                 {
-                    _projectEditor?.Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
+                    _projectEditor?.Log?.LogException(ex);
                 }
             }
         }
@@ -433,7 +433,7 @@ namespace Core2D.UI.Wpf.Views
             }
             catch (Exception ex)
             {
-                _projectEditor?.Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
+                _projectEditor?.Log?.LogException(ex);
             }
         }
     }
