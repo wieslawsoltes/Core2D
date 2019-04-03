@@ -477,7 +477,7 @@ namespace Core2D.UI.Wpf.Editor
             }
             catch (Exception ex)
             {
-                _serviceProvider.GetService<ILog>()?.LogException(ex)
+                _serviceProvider.GetService<ILog>()?.LogException(ex);
             }
         }
 
@@ -544,7 +544,7 @@ namespace Core2D.UI.Wpf.Editor
             }
             catch (Exception ex)
             {
-                _serviceProvider.GetService<ILog>()?.LogException(ex)
+                _serviceProvider.GetService<ILog>()?.LogException(ex);
             }
         }
 
@@ -557,7 +557,7 @@ namespace Core2D.UI.Wpf.Editor
             }
             catch (Exception ex)
             {
-                _serviceProvider.GetService<ILog>()?.LogException(ex)
+                _serviceProvider.GetService<ILog>()?.LogException(ex);
             }
         }
 
@@ -570,7 +570,7 @@ namespace Core2D.UI.Wpf.Editor
             }
             catch (Exception ex)
             {
-                _serviceProvider.GetService<ILog>()?.LogException(ex)
+                _serviceProvider.GetService<ILog>()?.LogException(ex);
             }
         }
 
@@ -583,7 +583,7 @@ namespace Core2D.UI.Wpf.Editor
             }
             catch (Exception ex)
             {
-                _serviceProvider.GetService<ILog>()?.LogException(ex)
+                _serviceProvider.GetService<ILog>()?.LogException(ex);
             }
         }
 
