@@ -3,6 +3,7 @@
 using Autofac;
 using Core2D.Data;
 using Core2D.FileSystem.DotNet;
+using Core2D.FileWriter.Emf;
 //using Core2D.FileWriter.SkiaSharpBmp;
 //using Core2D.FileWriter.SkiaSharpGif;
 //using Core2D.FileWriter.SkiaSharpIco;
@@ -28,7 +29,6 @@ using Core2D.UI.Avalonia.Utilities;
 
 #if NET461
 using Core2D.FileWriter.Dxf;
-using Core2D.FileWriter.Emf;
 using Core2D.FileWriter.PdfSharp;
 #endif
 
@@ -51,6 +51,7 @@ namespace Core2D.UI.Avalonia.Modules
 #endif
             builder.RegisterType<NewtonsoftJsonSerializer>().As<IJsonSerializer>().InstancePerLifetimeScope();
             builder.RegisterType<PortableXamlSerializer>().As<IXamlSerializer>().InstancePerLifetimeScope();
+            builder.RegisterType<EmfWriter>().As<IFileWriter>().InstancePerLifetimeScope();
             //builder.RegisterType<BmpSkiaSharpWriter>().As<IFileWriter>().InstancePerLifetimeScope();
             //builder.RegisterType<GifSkiaSharpWriter>().As<IFileWriter>().InstancePerLifetimeScope();
             //builder.RegisterType<IcoSkiaSharpWriter>().As<IFileWriter>().InstancePerLifetimeScope();
@@ -63,7 +64,6 @@ namespace Core2D.UI.Avalonia.Modules
             builder.RegisterType<WebpSkiaSharpWriter>().As<IFileWriter>().InstancePerLifetimeScope();
 #if NET461
             builder.RegisterType<DxfWriter>().As<IFileWriter>().InstancePerLifetimeScope();
-            builder.RegisterType<EmfWriter>().As<IFileWriter>().InstancePerLifetimeScope();
             builder.RegisterType<PdfSharpWriter>().As<IFileWriter>().InstancePerLifetimeScope();
 #endif
             builder.RegisterType<CsvHelperReader>().As<ITextFieldReader<IDatabase>>().InstancePerLifetimeScope();

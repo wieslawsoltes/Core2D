@@ -1,4 +1,4 @@
-﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
+// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
 using System.Collections.Generic;
@@ -16,9 +16,9 @@ using Core2D.Renderer;
 using Core2D.Renderer.WinForms;
 using Core2D.Shapes;
 
-#if _WINDOWS
-using WPF = System.Windows;
-#endif
+//#if _WINDOWS
+//using WPF = System.Windows;
+//#endif
 
 namespace Core2D.FileWriter.Emf
 {
@@ -44,7 +44,6 @@ namespace Core2D.FileWriter.Emf
         /// <inheritdoc/>
         string IFileWriter.Extension { get; } = "emf";
 
-#if _WINDOWS
         /// <summary>
         /// 
         /// </summary>
@@ -175,23 +174,24 @@ namespace Core2D.FileWriter.Emf
         /// <param name="ic"></param>
         public void SetClipboard(IEnumerable<IBaseShape> shapes, double width, double height, IImageCache ic)
         {
-            try
-            {
-                using (var bitmap = new Bitmap((int)width, (int)height))
-                {
-                    using (var ms = MakeMetafileStream(bitmap, shapes, ic))
-                    {
-                        var data = new WPF.DataObject();
-                        data.SetData(WPF.DataFormats.EnhancedMetafile, ms);
-                        WPF.Clipboard.SetDataObject(data, true);
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(ex.Message);
-                Debug.WriteLine(ex.StackTrace);
-            }
+            // TODO: Use Avalonia/WPF clipboard.
+            //try
+            //{
+            //    using (var bitmap = new Bitmap((int)width, (int)height))
+            //    {
+            //        using (var ms = MakeMetafileStream(bitmap, shapes, ic))
+            //        {
+            //            var data = new WPF.DataObject();
+            //            data.SetData(WPF.DataFormats.EnhancedMetafile, ms);
+            //            WPF.Clipboard.SetDataObject(data, true);
+            //        }
+            //    }
+            //}
+            //catch (Exception ex)
+            //{
+            //    Debug.WriteLine(ex.Message);
+            //    Debug.WriteLine(ex.StackTrace);
+            //}
         }
 
         /// <summary>
@@ -201,26 +201,27 @@ namespace Core2D.FileWriter.Emf
         /// <param name="ic"></param>
         public void SetClipboard(IPageContainer container, IImageCache ic)
         {
-            try
-            {
-                if (container == null || container.Template == null)
-                    return;
-
-                using (var bitmap = new Bitmap((int)container.Template.Width, (int)container.Template.Height))
-                {
-                    using (var ms = MakeMetafileStream(bitmap, container, ic))
-                    {
-                        var data = new WPF.DataObject();
-                        data.SetData(WPF.DataFormats.EnhancedMetafile, ms);
-                        WPF.Clipboard.SetDataObject(data, true);
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(ex.Message);
-                Debug.WriteLine(ex.StackTrace);
-            }
+            // TODO: Use Avalonia/WPF clipboard.
+            //try
+            //{
+            //    if (container == null || container.Template == null)
+            //        return;
+            //
+            //    using (var bitmap = new Bitmap((int)container.Template.Width, (int)container.Template.Height))
+            //    {
+            //        using (var ms = MakeMetafileStream(bitmap, container, ic))
+            //        {
+            //            var data = new WPF.DataObject();
+            //            data.SetData(WPF.DataFormats.EnhancedMetafile, ms);
+            //            WPF.Clipboard.SetDataObject(data, true);
+            //        }
+            //    }
+            //}
+            //catch (Exception ex)
+            //{
+            //    Debug.WriteLine(ex.Message);
+            //    Debug.WriteLine(ex.StackTrace);
+            //}
         }
 
         /// <summary>
@@ -245,7 +246,7 @@ namespace Core2D.FileWriter.Emf
                 }
             }
         }
-#endif
+
         /// <inheritdoc/>
         void IFileWriter.Save(string path, object item, object options)
         {
@@ -258,7 +259,6 @@ namespace Core2D.FileWriter.Emf
 
             if (item is IPageContainer page)
             {
-#if _WINDOWS
                 var dataFlow = _serviceProvider.GetService<IDataFlow>();
                 var db = (object)page.Data.Properties;
                 var record = (object)page.Data.Record;
@@ -267,9 +267,6 @@ namespace Core2D.FileWriter.Emf
                 dataFlow.Bind(page, db, record);
 
                 Save(path, page, ic);
-#else
-                throw new NotImplementedException("Not implemented for this platform.");
-#endif
             }
             else if (item is IDocumentContainer document)
             {
