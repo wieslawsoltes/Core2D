@@ -1,6 +1,8 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
+using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
@@ -14,6 +16,7 @@ using Core2D.Editor;
 using Core2D.FileWriter.Emf;
 using Core2D.Interfaces;
 using Core2D.Renderer;
+using Core2D.Shapes;
 using Core2D.UI.Wpf.Windows;
 using Microsoft.Win32;
 
