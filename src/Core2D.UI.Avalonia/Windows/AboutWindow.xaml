@@ -15,6 +15,7 @@
                  UseLayoutRounding="True" RenderOptions.BitmapInterpolationMode="HighQuality"
                  WindowState="Normal" WindowStartupLocation="CenterScreen"
                  BorderThickness="1" BorderBrush="{DynamicResource ThemeBorderLightBrush}"
+                 Foreground="{DynamicResource ThemeForegroundBrush}"
                  Title="About Core2D"
                  xmlns:Designer="clr-namespace:Core2D.Editor.Designer;assembly=Core2D.Editor"
                  mc:Ignorable="d"
