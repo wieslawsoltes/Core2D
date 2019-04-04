@@ -2,7 +2,6 @@
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <PackageReference Include="Avalonia" Version="0.8.0" />
-    <PackageReference Include="Avalonia.Controls.DataGrid" Version="0.8.0" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Serilog" Version="2.5.0" />
@@ -11,12 +10,5 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.CSharp" Version="4.5.0" />
-  </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="Avalonia.Xaml.Interactions" Version="0.8.0" />
-    <PackageReference Include="Avalonia.Xaml.Interactions.Custom" Version="0.8.0" />
-  </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="Avalonia.Controls.PanAndZoom" Version="2.0.0" />
   </ItemGroup>
 </Project>
