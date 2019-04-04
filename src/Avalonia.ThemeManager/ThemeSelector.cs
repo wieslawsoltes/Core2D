@@ -11,7 +11,7 @@ using Avalonia.Markup.Xaml.Styling;
 using Avalonia.Styling;
 using ReactiveUI;
 
-namespace ThemeManager
+namespace Avalonia.ThemeManager
 {
     public class ThemeSelector : ReactiveObject
     {
@@ -50,14 +50,14 @@ namespace ThemeManager
         {
             _themes = new ObservableCollection<Theme>();
 
-            foreach (string path in System.IO.Directory.EnumerateFiles(_path, "*.xaml"))
+            try
             {
-                try
+                foreach (string path in System.IO.Directory.EnumerateFiles(_path, "*.xaml"))
                 {
-                    _themes.Add(LoadTheme(path));
+                        _themes.Add(LoadTheme(path));
                 }
-                catch (Exception) { }
             }
+            catch (Exception) { }
 
             if (_themes.Count == 0)
             {

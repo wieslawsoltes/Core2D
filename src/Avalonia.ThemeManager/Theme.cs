@@ -11,7 +11,7 @@ using Avalonia.Markup.Xaml.Styling;
 using Avalonia.Styling;
 using ReactiveUI;
 
-namespace ThemeManager
+namespace Avalonia.ThemeManager
 {
     public class Theme : ReactiveObject
     {
