@@ -9,5 +9,7 @@
   <Import Project="..\..\build\Base.props" />
   <Import Project="..\..\build\Rx.props" />
   <Import Project="..\..\build\Avalonia.props" />
+  <Import Project="..\..\build\Avalonia.ReactiveUI.props" />
+  <Import Project="..\..\build\ReactiveUI.props" />
 
 </Project>
