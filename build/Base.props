@@ -6,15 +6,13 @@
     <Authors>Wiesław Šoltés</Authors>
     <Company>Wiesław Šoltés</Company>
     <Description>A multi-platform data driven 2D diagram editor.</Description>
-    <Copyright>Copyright © Wiesław Šoltés 2018</Copyright>
+    <Copyright>Copyright © Wiesław Šoltés 2019</Copyright>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/wieslawsoltes/Core2D</PackageProjectUrl>
     <PackageTags>2d;editor;data;diagram;graphics;geometry;data;shapes;wysiwyg-editor</PackageTags>
   </PropertyGroup>
   <PropertyGroup>
-    <!--<LangVersion>8.0</LangVersion>-->
     <LangVersion>latest</LangVersion>
-    <!--<NullableReferenceTypes>False</NullableReferenceTypes>-->
   </PropertyGroup>
   <PropertyGroup>
     <OutputPath>bin\$(Platform)\$(Configuration)\</OutputPath>
