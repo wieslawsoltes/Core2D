@@ -82,7 +82,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{FB0B299E-7
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{BC6BAFE6-1735-4549-A7CC-819274780B38}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Avalonia.ThemeManager", "src\Avalonia.ThemeManager\Avalonia.ThemeManager", "{78F7CF00-EB26-44D3-92DE-4CF89BF95CEB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Avalonia.ThemeManager", "src\Avalonia.ThemeManager\Avalonia.ThemeManager.csproj", "{78F7CF00-EB26-44D3-92DE-4CF89BF95CEB}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D.Model", "src\Core2D.Model\Core2D.Model.csproj", "{F822EC0C-2501-487D-87A8-B8D28A761385}"
 EndProject
