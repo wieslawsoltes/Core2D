@@ -3,6 +3,7 @@
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
+using Avalonia.ThemeManager;
 using Dock.Avalonia.Controls;
 
 namespace Core2D.UI.Avalonia.Windows
@@ -27,7 +28,7 @@ namespace Core2D.UI.Avalonia.Windows
         private void InitializeComponent()
         {
             AvaloniaXamlLoader.Load(this);
-            ThemeManager.Instance.EnableThemes(this);
+            ThemeSelector.Instance.EnableThemes(this);
         }
     }
 }

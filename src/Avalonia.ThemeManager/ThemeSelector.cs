@@ -11,36 +11,11 @@ using Avalonia.Markup.Xaml.Styling;
 using Avalonia.Styling;
 using ReactiveUI;
 
-namespace Core2D.UI.Avalonia
+namespace ThemeManager
 {
-    public class Theme : ReactiveObject
+    public class ThemeSelector : ReactiveObject
     {
-        private string _name;
-        private IStyle _style;
-        private ThemeManager _manager;
-
-        public string Name
-        {
-            get => _name;
-            set => this.RaiseAndSetIfChanged(ref _name, value);
-        }
-
-        public IStyle Style
-        {
-            get => _style;
-            set => this.RaiseAndSetIfChanged(ref _style, value);
-        }
-
-        public ThemeManager Manager
-        {
-            get => _manager;
-            set => this.RaiseAndSetIfChanged(ref _manager, value);
-        }
-    }
-
-    public class ThemeManager : ReactiveObject
-    {
-        public static ThemeManager Instance = new ThemeManager();
+        public static ThemeSelector Instance = new ThemeSelector();
 
         private ObservableCollection<Window> _windows;
         private Theme _selectedTheme;
@@ -64,7 +39,7 @@ namespace Core2D.UI.Avalonia
             set => this.RaiseAndSetIfChanged(ref _windows, value);
         }
 
-        public ThemeManager()
+        public ThemeSelector()
         {
             _themes = new ObservableCollection<Theme>();
 
@@ -78,7 +53,7 @@ namespace Core2D.UI.Avalonia
                     {
                         Name = name,
                         Style = style,
-                        Manager = this
+                        Selector = this
                     };
                     _themes.Add(theme);
                 }
@@ -87,8 +62,20 @@ namespace Core2D.UI.Avalonia
 
             if (_themes.Count == 0)
             {
-                _themes.Add(new Theme() { Name = "Light", Style = AvaloniaXamlLoader.Parse<StyleInclude>(@"<StyleInclude xmlns='https://github.com/avaloniaui' Source='avares://Avalonia.Themes.Default/Accents/BaseLight.xaml'/>"), Manager = this });
-                _themes.Add(new Theme() { Name = "Dark", Style = AvaloniaXamlLoader.Parse<StyleInclude>(@"<StyleInclude xmlns='https://github.com/avaloniaui' Source='avares://Avalonia.Themes.Default/Accents/BaseDark.xaml'/>"), Manager = this });
+                _themes.Add(
+                    new Theme()
+                    {
+                        Name = "Light",
+                        Style = AvaloniaXamlLoader.Parse<StyleInclude>(@"<StyleInclude xmlns='https://github.com/avaloniaui' Source='avares://Avalonia.Themes.Default/Accents/BaseLight.xaml'/>"),
+                        Selector = this
+                    });
+                _themes.Add(
+                    new Theme()
+                    {
+                        Name = "Dark",
+                        Style = AvaloniaXamlLoader.Parse<StyleInclude>(@"<StyleInclude xmlns='https://github.com/avaloniaui' Source='avares://Avalonia.Themes.Default/Accents/BaseDark.xaml'/>"),
+                        Selector = this
+                    });
             }
 
             _selectedTheme = _themes.FirstOrDefault();
