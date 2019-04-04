@@ -2,7 +2,7 @@
     <Application>
 
         <Assembly Name="Dock.Model" Dynamic="Required All" />
-        <Assembly Name="Dock.Model.INPC" Dynamic="Required All" />
+        <Assembly Name="Dock.Model.ReactiveUI" Dynamic="Required All" />
         <Assembly Name="Dock.Avalonia" Dynamic="Required All" />
 
     </Application>
