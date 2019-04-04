@@ -14,7 +14,6 @@ using Spatial.Arc;
 using A = Avalonia;
 using AM = Avalonia.Media;
 using AMI = Avalonia.Media.Imaging;
-using APAZ = Avalonia.Controls.PanAndZoom;
 using AME = Avalonia.MatrixExtensions;
 
 namespace Core2D.Renderer.Avalonia

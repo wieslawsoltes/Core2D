@@ -47,6 +47,7 @@
   <Import Project="..\..\build\Avalonia.Behaviors.props" />
   <Import Project="..\..\build\Avalonia.DataGrid.props" />
   <Import Project="..\..\build\Avalonia.PanAndZoom.props" />
+  <Import Project="..\..\build\Avalonia.ThemeManager.props" />
   <Import Project="..\..\build\SkiaSharp.props" />
   <Import Project="..\..\build\SharpDX.props" />
   <Import Project="..\..\build\Dock.Model.props" />
@@ -54,9 +55,6 @@
   <Import Project="..\..\build\ReactiveUI.props" />
   <Import Project="..\..\build\System.Drawing.Common.props" />
   <!--<Import Project="..\..\build\Linker.props" Condition="'$(CoreRT)' == 'False'" />-->
-
-
-
 
   <ItemGroup>
     <Compile Include="**\*.cs" Exclude="obj\**" />
@@ -86,7 +84,6 @@
     <ProjectReference Include="..\Core2D.ServiceProvider.Autofac\Core2D.ServiceProvider.Autofac.csproj" />
     <ProjectReference Include="..\Core2D.TextFieldReader.CsvHelper\Core2D.TextFieldReader.CsvHelper.csproj" />
     <ProjectReference Include="..\Core2D.TextFieldWriter.CsvHelper\Core2D.TextFieldWriter.CsvHelper.csproj" />
-    <ProjectReference Include="..\Avalonia.ThemeManager\Avalonia.ThemeManager.csproj" />
   </ItemGroup>
 
   <ItemGroup Condition="$(TargetFramework.StartsWith('net4'))">

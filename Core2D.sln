@@ -20,7 +20,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "props", "props", "{3C45CABF
 		build\Avalonia.ReactiveUI.props = build\Avalonia.ReactiveUI.props
 		build\Avalonia.Behaviors.props = build\Avalonia.Behaviors.props
 		build\Avalonia.DataGrid.props = build\Avalonia.DataGrid.props
+		build\Avalonia.MatrixExtensions.props = build\Avalonia.MatrixExtensions.props
 		build\Avalonia.PanAndZoom.props = build\Avalonia.PanAndZoom.props
+		build\Avalonia.ThemeManager.props = build\Avalonia.ThemeManager.props
 		build\Base.props = build\Base.props
 		build\CsvHelper.props = build\CsvHelper.props
 		build\Dock.Avalonia.props = build\Dock.Avalonia.props
@@ -84,8 +86,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{FB0B299E-7
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{BC6BAFE6-1735-4549-A7CC-819274780B38}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Avalonia.ThemeManager", "src\Avalonia.ThemeManager\Avalonia.ThemeManager.csproj", "{78F7CF00-EB26-44D3-92DE-4CF89BF95CEB}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D.Model", "src\Core2D.Model\Core2D.Model.csproj", "{F822EC0C-2501-487D-87A8-B8D28A761385}"
 EndProject
@@ -179,10 +179,6 @@ Global
 		Release|AnyCPU = Release|AnyCPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{78F7CF00-EB26-44D3-92DE-4CF89BF95CEB}.Debug|AnyCPU.ActiveCfg = Debug|Any CPU
-		{78F7CF00-EB26-44D3-92DE-4CF89BF95CEB}.Debug|AnyCPU.Build.0 = Debug|Any CPU
-		{78F7CF00-EB26-44D3-92DE-4CF89BF95CEB}.Release|AnyCPU.ActiveCfg = Release|Any CPU
-		{78F7CF00-EB26-44D3-92DE-4CF89BF95CEB}.Release|AnyCPU.Build.0 = Release|Any CPU	
 		{F822EC0C-2501-487D-87A8-B8D28A761385}.Debug|AnyCPU.ActiveCfg = Debug|Any CPU
 		{F822EC0C-2501-487D-87A8-B8D28A761385}.Debug|AnyCPU.Build.0 = Debug|Any CPU
 		{F822EC0C-2501-487D-87A8-B8D28A761385}.Release|AnyCPU.ActiveCfg = Release|Any CPU
@@ -314,7 +310,6 @@ Global
 		{DDE59F10-F84A-4919-B221-38414B958103} = {C7162582-C1FD-45FB-99FD-6770D67B5A21}
 		{0DD5491E-0BDA-4366-A353-549820A65E12} = {C7162582-C1FD-45FB-99FD-6770D67B5A21}
 		{0AE9F90A-3798-42B0-A58D-AA9A9E08BED2} = {C7162582-C1FD-45FB-99FD-6770D67B5A21}
-		{78F7CF00-EB26-44D3-92DE-4CF89BF95CEB} = {BC6BAFE6-1735-4549-A7CC-819274780B38}
 		{F822EC0C-2501-487D-87A8-B8D28A761385} = {BC6BAFE6-1735-4549-A7CC-819274780B38}
 		{0C7EA04E-94D8-49B7-B387-C031B2422F3B} = {A2A18C4F-8515-4FC9-A058-DC70DF7E288A}
 		{528F510F-1FA0-4AB5-93FA-EF10ABFE2C37} = {BC6BAFE6-1735-4549-A7CC-819274780B38}
