@@ -57,6 +57,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "native", "native", "{0DD549
 		build\native\avalonia.panandzoom.xml = build\native\avalonia.panandzoom.xml
 		build\native\avalonia.rd.xml = build\native\avalonia.rd.xml
 		build\native\avalonia.reactiveui.xml = build\native\avalonia.reactiveui.xml
+		build\native\avalonia.thememanager.xml = build\native\avalonia.thememanager.xml
 		build\native\avalonia.win.rd.xml = build\native\avalonia.win.rd.xml
 		build\native\csvhelper.rd.xml = build\native\csvhelper.rd.xml
 		build\native\dock.rd.xml = build\native\dock.rd.xml
