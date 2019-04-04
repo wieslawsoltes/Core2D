@@ -17,7 +17,7 @@ The `ThemeSelector` uses `Styles[0]` property of `Windows` to insert selected th
 
 `Program.cs`
 
-```
+```C#
 using System;
 using Avalonia;
 using Avalonia.ThemeManager;
