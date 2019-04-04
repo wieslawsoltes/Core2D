@@ -15,18 +15,11 @@ namespace Avalonia.ThemeManager
 {
     public class ThemeSelector : ReactiveObject
     {
-        public static ThemeSelector Instance = new ThemeSelector() { Path = "Themes" };
+        public static ThemeSelector Instance;
 
-        private string _path;
-        private ObservableCollection<Window> _windows;
         private Theme _selectedTheme;
         private ObservableCollection<Theme> _themes;
-
-        public string Path
-        {
-            get => _path;
-            set => this.RaiseAndSetIfChanged(ref _path, value);
-        }
+        private ObservableCollection<Window> _windows;
 
         public Theme SelectedTheme
         {
@@ -46,18 +39,20 @@ namespace Avalonia.ThemeManager
             set => this.RaiseAndSetIfChanged(ref _windows, value);
         }
 
-        public ThemeSelector()
+        public ThemeSelector(string path)
         {
             _themes = new ObservableCollection<Theme>();
 
             try
             {
-                foreach (string path in System.IO.Directory.EnumerateFiles(_path, "*.xaml"))
+                foreach (string file in System.IO.Directory.EnumerateFiles(path, "*.xaml"))
                 {
-                        _themes.Add(LoadTheme(path));
+                    _themes.Add(LoadTheme(file));
                 }
             }
-            catch (Exception) { }
+            catch (Exception)
+            {
+            }
 
             if (_themes.Count == 0)
             {
@@ -72,10 +67,10 @@ namespace Avalonia.ThemeManager
             _windows = new ObservableCollection<Window>();
         }
 
-        public Theme LoadTheme(string path)
+        public Theme LoadTheme(string file)
         {
-            var name = System.IO.Path.GetFileNameWithoutExtension(path);
-            var xaml = System.IO.File.ReadAllText(path);
+            var name = System.IO.Path.GetFileNameWithoutExtension(file);
+            var xaml = System.IO.File.ReadAllText(file);
             var style = AvaloniaXamlLoader.Parse<IStyle>(xaml);
             return new Theme() { Name = name, Style = style, Selector = this };
         }
@@ -104,7 +99,43 @@ namespace Avalonia.ThemeManager
 
         public void ApplyTheme(Theme theme)
         {
-            SelectedTheme = theme;
+            if (theme != null)
+            {
+                SelectedTheme = theme;
+            }
+        }
+
+        public void LoadSelectedTheme(string file)
+        {
+            try
+            {
+                if (System.IO.File.Exists(file) == true)
+                {
+                    var name = System.IO.File.ReadAllText(file);
+                    if (name != null)
+                    {
+                        var theme = _themes.FirstOrDefault(x => x.Name == name);
+                        if (theme != null)
+                        {
+                            SelectedTheme = theme;
+                        }
+                    }
+                }
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        public void SaveSelectedTheme(string file)
+        {
+            try
+            {
+                System.IO.File.WriteAllText(file, _selectedTheme?.Name);
+            }
+            catch (Exception)
+            {
+            }
         }
     }
 }

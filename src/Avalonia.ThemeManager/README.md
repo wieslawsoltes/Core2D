@@ -6,8 +6,44 @@ Theme manager for [Avalonia](https://github.com/AvaloniaUI/Avalonia) application
 
 ## Usage
 
-Theme manager searches `Themes` directory for `*.xaml` theme files otherwise built-in `Light` and `Dark` theme are used.
+Theme manager searches user provided themes directory for `*.xaml` theme files otherwise built-in `Light` and `Dark` theme are used.
 
+The theme manager static `Instance` property neeeds to be initalized before using `ThemeSelector` class.
+
+`Program.cs`
+```
+using System;
+using Avalonia;
+using Avalonia.ThemeManager;
+
+namespace AvaloniaApp
+{
+    static class Program
+    {
+        [STAThread]
+        static void Main(string[] args)
+        {
+            BuildAvaloniaApp().Start(AppMain, args);
+        }
+
+        static void AppMain(Application app, string[] args)
+        {
+            ThemeSelector.Instance = new ThemeSelector("Themes");
+            ThemeSelector.Instance.LoadSelectedTheme("AvaloniaApp.theme");
+
+            app.Run(new MainWindow());
+
+            ThemeSelector.Instance.SaveSelectedTheme("AvaloniaApp.theme");
+        }
+
+        public static AppBuilder BuildAvaloniaApp()
+            => AppBuilder.Configure<App>()
+                         .UsePlatformDetect();
+    }
+}
+```
+
+`MainWindow.xaml`
 ```XAML
 <Window x:Class="AvaloniaApp.MainWindow"
         xmlns="https://github.com/avaloniaui"
@@ -45,6 +81,7 @@ Theme manager searches `Themes` directory for `*.xaml` theme files otherwise bui
 </Window>
 ```
 
+MainWindow.xaml.xs
 ```C#
 using Avalonia;
 using Avalonia.Controls;
