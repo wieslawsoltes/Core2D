@@ -15,11 +15,18 @@ namespace ThemeManager
 {
     public class ThemeSelector : ReactiveObject
     {
-        public static ThemeSelector Instance = new ThemeSelector();
+        public static ThemeSelector Instance = new ThemeSelector() { Path = "Themes" };
 
+        private string _path;
         private ObservableCollection<Window> _windows;
         private Theme _selectedTheme;
         private ObservableCollection<Theme> _themes;
+
+        public string Path
+        {
+            get => _path;
+            set => this.RaiseAndSetIfChanged(ref _path, value);
+        }
 
         public Theme SelectedTheme
         {
@@ -43,44 +50,34 @@ namespace ThemeManager
         {
             _themes = new ObservableCollection<Theme>();
 
-            foreach (string file in System.IO.Directory.EnumerateFiles("Themes", "*.xaml"))
+            foreach (string path in System.IO.Directory.EnumerateFiles(_path, "*.xaml"))
             {
                 try
                 {
-                    var name = System.IO.Path.GetFileNameWithoutExtension(file);
-                    var style = AvaloniaXamlLoader.Parse<IStyle>(System.IO.File.ReadAllText(file));
-                    var theme = new Theme()
-                    {
-                        Name = name,
-                        Style = style,
-                        Selector = this
-                    };
-                    _themes.Add(theme);
+                    _themes.Add(LoadTheme(path));
                 }
                 catch (Exception) { }
             }
 
             if (_themes.Count == 0)
             {
-                _themes.Add(
-                    new Theme()
-                    {
-                        Name = "Light",
-                        Style = AvaloniaXamlLoader.Parse<StyleInclude>(@"<StyleInclude xmlns='https://github.com/avaloniaui' Source='avares://Avalonia.Themes.Default/Accents/BaseLight.xaml'/>"),
-                        Selector = this
-                    });
-                _themes.Add(
-                    new Theme()
-                    {
-                        Name = "Dark",
-                        Style = AvaloniaXamlLoader.Parse<StyleInclude>(@"<StyleInclude xmlns='https://github.com/avaloniaui' Source='avares://Avalonia.Themes.Default/Accents/BaseDark.xaml'/>"),
-                        Selector = this
-                    });
+                var light = AvaloniaXamlLoader.Parse<StyleInclude>(@"<StyleInclude xmlns='https://github.com/avaloniaui' Source='avares://Avalonia.Themes.Default/Accents/BaseLight.xaml'/>");
+                var dark = AvaloniaXamlLoader.Parse<StyleInclude>(@"<StyleInclude xmlns='https://github.com/avaloniaui' Source='avares://Avalonia.Themes.Default/Accents/BaseDark.xaml'/>");
+                _themes.Add(new Theme() { Name = "Light", Style = light, Selector = this });
+                _themes.Add(new Theme() { Name = "Dark", Style = dark, Selector = this });
             }
 
             _selectedTheme = _themes.FirstOrDefault();
 
             _windows = new ObservableCollection<Window>();
+        }
+
+        public Theme LoadTheme(string path)
+        {
+            var name = System.IO.Path.GetFileNameWithoutExtension(path);
+            var xaml = System.IO.File.ReadAllText(path);
+            var style = AvaloniaXamlLoader.Parse<IStyle>(xaml);
+            return new Theme() { Name = name, Style = style, Selector = this };
         }
 
         public void EnableThemes(Window window)
@@ -91,18 +88,15 @@ namespace ThemeManager
 
             window.Opened += (sender, e) =>
             {
-                Debug.WriteLine("Window opened.");
                 _windows.Add(window);
                 disposable = this.WhenAnyValue(x => x.SelectedTheme).Where(x => x != null).Subscribe(x =>
                 {
-                    Debug.WriteLine($"Theme changed: {x.Name}");
                     window.Styles[0] = x.Style;
                 });
             };
 
             window.Closing += (sender, e) =>
             {
-                Debug.WriteLine("Window closed.");
                 disposable?.Dispose();
                 _windows.Remove(window);
             };
@@ -110,16 +104,7 @@ namespace ThemeManager
 
         public void ApplyTheme(Theme theme)
         {
-            Debug.WriteLine($"Apply theme: {theme?.Name}");
             SelectedTheme = theme;
-
-            if (theme != null)
-            {
-                foreach (var window in _windows)
-                {
-                    window.Styles[0] = theme.Style;
-                }
-            }
         }
     }
 }
