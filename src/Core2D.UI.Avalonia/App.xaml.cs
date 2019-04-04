@@ -8,6 +8,7 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 using Avalonia.Platform;
+using Avalonia.ThemeManager;
 using Core2D.UI.Avalonia.Converters;
 using Core2D.UI.Avalonia.Modules;
 using Core2D.UI.Avalonia.Views;
@@ -105,6 +106,9 @@ namespace Core2D.UI.Avalonia
         {
             InitializeConverters(serviceProvider);
 
+            ThemeSelector.Instance = new ThemeSelector("Themes");
+            ThemeSelector.Instance.LoadSelectedTheme("Core2D.theme");
+
             var log = serviceProvider.GetService<ILog>();
             var fileIO = serviceProvider.GetService<IFileSystem>();
 
@@ -145,6 +149,7 @@ namespace Core2D.UI.Avalonia
                     editor.Layout.Close();
                     editor.OnSaveLayout(layoutPath);
                     editor.OnSaveRecent(recentPath);
+                    ThemeSelector.Instance.SaveSelectedTheme("Core2D.theme");
                 };
                 window.DataContext = editor;
                 window.Show();
