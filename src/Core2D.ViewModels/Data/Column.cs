@@ -30,7 +30,12 @@ namespace Core2D.Data
         /// <inheritdoc/>
         public override object Copy(IDictionary<object, object> shared)
         {
-            throw new NotImplementedException();
+            return new Column()
+            {
+                Name = this.Name,
+                Width = this.Width,
+                IsVisible = this.IsVisible
+            };
         }
 
         /// <summary>

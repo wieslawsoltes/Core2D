@@ -49,7 +49,18 @@ namespace Core2D.Data
         /// <inheritdoc/>
         public override object Copy(IDictionary<object, object> shared)
         {
-            throw new NotImplementedException();
+            var columns = this._columns.Copy(shared).ToImmutable();
+            var records = this._records.Copy(shared).ToImmutable();
+            var currentRecordIndex = _records.IndexOf(_currentRecord);
+
+            return new Database()
+            {
+                Name = this.Name,
+                IdColumnName = this.IdColumnName,
+                Columns = columns,
+                Records = records,
+                CurrentRecord = records[currentRecordIndex]
+            };
         }
 
         /// <summary>

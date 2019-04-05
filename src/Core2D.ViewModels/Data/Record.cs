@@ -34,7 +34,13 @@ namespace Core2D.Data
         /// <inheritdoc/>
         public override object Copy(IDictionary<object, object> shared)
         {
-            throw new NotImplementedException();
+            var values = this._values.Copy(shared).ToImmutable();
+
+            return new Record()
+            {
+                Name = this.Name,
+                Values = values
+            };
         }
 
         /// <summary>

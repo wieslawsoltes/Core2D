@@ -24,7 +24,11 @@ namespace Core2D.Data
         /// <inheritdoc/>
         public override object Copy(IDictionary<object, object> shared)
         {
-            throw new NotImplementedException();
+            return new Property()
+            {
+                Name = this.Name,
+                Value = this.Value
+            };
         }
 
         /// <inheritdoc/>
