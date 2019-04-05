@@ -16,6 +16,11 @@
   <Import Project="..\..\build\Rx.props" />
   <Import Project="..\..\build\Avalonia.props" />
   <Import Project="..\..\build\Avalonia.Desktop.props" />
+  <Import Project="..\..\build\Avalonia.ReactiveUI.props" />
+  <Import Project="..\..\build\Avalonia.Behaviors.props" />
+  <Import Project="..\..\build\Avalonia.DataGrid.props" />
+  <Import Project="..\..\build\Avalonia.PanAndZoom.props" />
+  <Import Project="..\..\build\Avalonia.ThemeManager.props" />
   <Import Project="..\..\build\SkiaSharp.props" />
   <Import Project="..\..\build\SharpDX.props" />
   <Import Project="..\..\build\Math.Spatial.props" />
