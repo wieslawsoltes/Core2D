@@ -54,7 +54,7 @@ namespace Core2D.Style
                 Thickness = this.Thickness,
                 LineCap = this.LineCap,
                 Dashes = this.Dashes,
-                DashOffset = 0.0,
+                DashOffset = this.DashOffset,
                 LineStyle = (ILineStyle)this.LineStyle.Copy(shared),
                 TextStyle = (ITextStyle)this.TextStyle.Copy(shared),
                 StartArrowStyle = (IArrowStyle)this.StartArrowStyle.Copy(shared),
