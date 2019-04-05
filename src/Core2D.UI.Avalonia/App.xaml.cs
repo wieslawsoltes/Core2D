@@ -27,7 +27,7 @@ namespace Core2D.UI.Avalonia
         /// <summary>
         /// Gets the theme selector instance.
         /// </summary>
-        public static ThemeSelector Selector;
+        public static IThemeSelector Selector;
 
         /// <summary>
         /// Initializes static data.
@@ -111,7 +111,7 @@ namespace Core2D.UI.Avalonia
         {
             InitializeConverters(serviceProvider);
 
-            Selector = new ThemeSelector("Themes");
+            Selector = ThemeSelector.Create("Themes");
             Selector.LoadSelectedTheme("Core2D.theme");
 
             var log = serviceProvider.GetService<ILog>();
