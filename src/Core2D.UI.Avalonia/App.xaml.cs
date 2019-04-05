@@ -25,6 +25,11 @@ namespace Core2D.UI.Avalonia
     public partial class App : Application
     {
         /// <summary>
+        /// Gets the theme selector instance.
+        /// </summary>
+        public static ThemeSelector Selector;
+
+        /// <summary>
         /// Initializes static data.
         /// </summary>
         static App()
@@ -106,8 +111,8 @@ namespace Core2D.UI.Avalonia
         {
             InitializeConverters(serviceProvider);
 
-            ThemeSelector.Instance = new ThemeSelector("Themes");
-            ThemeSelector.Instance.LoadSelectedTheme("Core2D.theme");
+            Selector = new ThemeSelector("Themes");
+            Selector.LoadSelectedTheme("Core2D.theme");
 
             var log = serviceProvider.GetService<ILog>();
             var fileIO = serviceProvider.GetService<IFileSystem>();
@@ -149,7 +154,7 @@ namespace Core2D.UI.Avalonia
                     editor.Layout.Close();
                     editor.OnSaveLayout(layoutPath);
                     editor.OnSaveRecent(recentPath);
-                    ThemeSelector.Instance.SaveSelectedTheme("Core2D.theme");
+                    Selector.SaveSelectedTheme("Core2D.theme");
                 };
                 window.DataContext = editor;
                 window.Show();

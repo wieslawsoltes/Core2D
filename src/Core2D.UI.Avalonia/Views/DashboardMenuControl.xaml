@@ -13,7 +13,7 @@
              xmlns:Editor="clr-namespace:Core2D.Editor;assembly=Core2D.Editor"
              xmlns:Recent="clr-namespace:Core2D.Editor.Recent;assembly=Core2D.Editor"
              xmlns:ContainersCore="clr-namespace:Core2D.Containers;assembly=Core2D.Model"
-             xmlns:Themes="clr-namespace:Avalonia.ThemeManager;assembly=Avalonia.ThemeManager"
+             xmlns:Themes="clr-namespace:Core2D.UI.Avalonia;assembly=Core2D.UI.Avalonia"
              xmlns:Designer="clr-namespace:Core2D.Editor.Designer;assembly=Core2D.Editor"
              mc:Ignorable="d"
              d:DataContext="{x:Static Designer:DesignerContext.Editor}"
@@ -74,7 +74,7 @@
                 </MenuItem.Styles>
             </MenuItem>
             <Separator/>
-            <MenuItem Header="_Theme" DataContext="{x:Static Themes:ThemeSelector.Instance}" Items="{Binding Themes}">
+            <MenuItem Header="_Theme" DataContext="{x:Static Themes:App.Selector}" Items="{Binding Themes}">
                 <MenuItem.Styles>
                     <Style Selector="MenuItem">
                         <Setter Property="Header" Value="{Binding Name}"/>
