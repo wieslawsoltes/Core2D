@@ -7,25 +7,6 @@ using Core2D.Attributes;
 namespace Core2D.Renderer
 {
     /// <summary>
-    /// Shape state extensions.
-    /// </summary>
-    public static class ShapeStateExtensions
-    {
-        /// <summary>
-        /// Clones shape state.
-        /// </summary>
-        /// <param name="shapeState">The shape state to clone.</param>
-        /// <returns>The new instance of the <see cref="ShapeState"/> class.</returns>
-        public static IShapeState Clone(this IShapeState shapeState)
-        {
-            return new ShapeState()
-            {
-                Flags = shapeState.Flags
-            };
-        }
-    }
-
-    /// <summary>
     /// Shape state.
     /// </summary>
     public class ShapeState : ObservableObject, IShapeState
@@ -123,7 +104,10 @@ namespace Core2D.Renderer
         /// <inheritdoc/>
         public override object Copy(IDictionary<object, object> shared)
         {
-            throw new NotImplementedException();
+            return new ShapeState()
+            {
+                Flags = this._flags
+            };
         }
 
         /// <summary>
