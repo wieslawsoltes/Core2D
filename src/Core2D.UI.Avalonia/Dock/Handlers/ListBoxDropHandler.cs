@@ -36,31 +36,34 @@ namespace Core2D.UI.Avalonia.Dock.Handlers
                     int sourceIndex = library.Items.IndexOf(sourceStyle);
                     int targetIndex = library.Items.IndexOf(targetStyle);
 
-                    if (e.DragEffects == DragDropEffects.Copy)
+                    if (sourceIndex >= 0 && targetIndex >= 0)
                     {
-                        if (bExecute)
+                        if (e.DragEffects == DragDropEffects.Copy)
                         {
-                            var clone = (IShapeStyle)sourceStyle.Copy(null);
-                            clone.Name += "-copy";
-                            editor.InsertItem(library, clone, targetIndex + 1);
+                            if (bExecute)
+                            {
+                                var clone = (IShapeStyle)sourceStyle.Copy(null);
+                                clone.Name += "-copy";
+                                editor.InsertItem(library, clone, targetIndex + 1);
+                            }
+                            return true;
                         }
-                        return true;
-                    }
-                    else if (e.DragEffects == DragDropEffects.Move)
-                    {
-                        if (bExecute)
+                        else if (e.DragEffects == DragDropEffects.Move)
                         {
-                            editor.MoveItem(library, sourceIndex, targetIndex);
+                            if (bExecute)
+                            {
+                                editor.MoveItem(library, sourceIndex, targetIndex);
+                            }
+                            return true;
                         }
-                        return true;
-                    }
-                    else if (e.DragEffects == DragDropEffects.Link)
-                    {
-                        if (bExecute)
+                        else if (e.DragEffects == DragDropEffects.Link)
                         {
-                            editor.SwapItem(library, sourceIndex, targetIndex);
+                            if (bExecute)
+                            {
+                                editor.SwapItem(library, sourceIndex, targetIndex);
+                            }
+                            return true;
                         }
-                        return true;
                     }
                 }
             }
