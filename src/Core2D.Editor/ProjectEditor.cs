@@ -3508,5 +3508,17 @@ namespace Core2D.Editor
             Project?.History?.Snapshot(previous, next, (p) => library.Items = p);
             library.Items = next;
         }
+
+        /// <inheritdoc/>
+        public void InsertItem<T>(ILibrary<T> library, T item, int index)
+        {
+            var builder = library.Items.ToBuilder();
+            builder.Insert(index, item);
+
+            var previous = library.Items;
+            var next = builder.ToImmutable();
+            Project?.History?.Snapshot(previous, next, (p) => library.Items = p);
+            library.Items = next;
+        }
     }
 }

@@ -1165,5 +1165,14 @@ namespace Core2D.Editor
         /// <param name="sourceIndex">The source item index.</param>
         /// <param name="targetIndex">The target item index.</param>
         void SwapItem<T>(ILibrary<T> library, int sourceIndex, int targetIndex);
+
+        /// <summary>
+        /// Insert item into the library.
+        /// </summary>
+        /// <typeparam name="T">The type of the library.</typeparam>
+        /// <param name="library">The items library.</param>
+        /// <param name="T">The item to insert.</param>
+        /// <param name="index">The insert index.</param>
+        void InsertItem<T>(ILibrary<T> library, T item, int index);
     }
 }
