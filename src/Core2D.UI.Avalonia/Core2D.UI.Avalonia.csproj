@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFrameworks>netcoreapp3.0</TargetFrameworks>
@@ -72,10 +72,12 @@
     <ProjectReference Include="..\Core2D.Model.Extensions\Core2D.Model.Extensions.csproj" />
     <ProjectReference Include="..\Core2D.Model\Core2D.Model.csproj" />
     <ProjectReference Include="..\Core2D.FileSystem.DotNet\Core2D.FileSystem.DotNet.csproj" />
+    <ProjectReference Include="..\Core2D.FileWriter.Dxf\Core2D.FileWriter.Dxf.csproj" />
     <ProjectReference Include="..\Core2D.FileWriter.Emf\Core2D.FileWriter.Emf.csproj" />
     <ProjectReference Include="..\Core2D.FileWriter.SkiaSharp\Core2D.FileWriter.SkiaSharp.csproj" />
     <ProjectReference Include="..\Core2D.Log.Trace\Core2D.Log.Trace.csproj" />
     <ProjectReference Include="..\Core2D.Renderer.Avalonia\Core2D.Renderer.Avalonia.csproj" />
+    <ProjectReference Include="..\Core2D.Renderer.Dxf\Core2D.Renderer.Dxf.csproj" />
     <ProjectReference Include="..\Core2D.Renderer.SkiaSharp\Core2D.Renderer.SkiaSharp.csproj" />
     <ProjectReference Include="..\Core2D.Renderer.WinForms\Core2D.Renderer.WinForms.csproj" />
     <ProjectReference Include="..\Core2D.ScriptRunner.Roslyn\Core2D.ScriptRunner.Roslyn.csproj" Condition="'$(CoreRT)' == 'False'" />
@@ -87,9 +89,7 @@
   </ItemGroup>
 
   <ItemGroup Condition="$(TargetFramework.StartsWith('net4'))">
-    <ProjectReference Include="..\Core2D.FileWriter.Dxf\Core2D.FileWriter.Dxf.csproj" />
     <ProjectReference Include="..\Core2D.FileWriter.PdfSharp\Core2D.FileWriter.PdfSharp.csproj" />
-    <ProjectReference Include="..\Core2D.Renderer.Dxf\Core2D.Renderer.Dxf.csproj" />
     <ProjectReference Include="..\Core2D.Renderer.PdfSharp\Core2D.Renderer.PdfSharp.csproj" />
   </ItemGroup>
 

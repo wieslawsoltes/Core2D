@@ -933,7 +933,7 @@ namespace Core2D.Renderer.Dxf
                 ts);
             dxfMText.AttachmentPoint = attachmentPoint;
 
-            var options = new DXFE.MTextFormattingOptions(dxfMText.Style);
+            var options = new DXFE.MTextFormattingOptions();
             var fs = text.Style.TextStyle.FontStyle;
             if (fs != null)
             {
@@ -943,7 +943,6 @@ namespace Core2D.Renderer.Dxf
                 options.StrikeThrough = fs.Flags.HasFlag(FontStyleFlags.Strikeout);
             }
 
-            options.Aligment = DXFE.MTextFormattingOptions.TextAligment.Default;
             options.Color = null;
             dxfMText.Write(tbind, options);
 
