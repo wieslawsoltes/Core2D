@@ -1,4 +1,4 @@
-﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
+// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
 using Microsoft.CodeAnalysis.Scripting;
@@ -39,9 +39,11 @@ namespace Core2D.ScriptRunner.Roslyn
             {
                 state = CSharpScript.RunAsync(code, options, globals).Result;
             }
-            catch (CompilationErrorException e)
+            catch (CompilationErrorException ex)
             {
-                Console.WriteLine(string.Join(Environment.NewLine, e.Diagnostics));
+                var log = _serviceProvider.GetService<ILog>();
+                log?.LogException(ex);
+                log?.LogError($"{Environment.NewLine}{ex.Diagnostics}");
             }
         }
 
@@ -56,9 +58,11 @@ namespace Core2D.ScriptRunner.Roslyn
                 {
                     next = previous.ContinueWithAsync(code).Result;
                 }
-                catch (CompilationErrorException e)
+                catch (CompilationErrorException ex)
                 {
-                    Console.WriteLine(string.Join(Environment.NewLine, e.Diagnostics));
+                    var log = _serviceProvider.GetService<ILog>();
+                    log?.LogException(ex);
+                    log?.LogError($"{Environment.NewLine}{ex.Diagnostics}");
                 }
                 return next;
             }
@@ -75,9 +79,11 @@ namespace Core2D.ScriptRunner.Roslyn
             {
                 next = CSharpScript.RunAsync(code, options, globals).Result;
             }
-            catch (CompilationErrorException e)
+            catch (CompilationErrorException ex)
             {
-                Console.WriteLine(string.Join(Environment.NewLine, e.Diagnostics));
+                var log = _serviceProvider.GetService<ILog>();
+                log?.LogException(ex);
+                log?.LogError($"{Environment.NewLine}{ex.Diagnostics}");
             }
 
             return next;
