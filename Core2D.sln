@@ -66,6 +66,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "native", "native", "{0DD549
 		build\native\avalonia.win.rd.xml = build\native\avalonia.win.rd.xml
 		build\native\csvhelper.rd.xml = build\native\csvhelper.rd.xml
 		build\native\dock.rd.xml = build\native\dock.rd.xml
+		build\native\netdxf.rd.xml = build\native\netdxf.rd.xml
 		build\native\netcore.rd.xml = build\native\netcore.rd.xml
 		build\native\newtonsoft.json.rd.xml = build\native\newtonsoft.json.rd.xml
 		build\native\portable.xaml.rd.xml = build\native\portable.xaml.rd.xml
@@ -164,8 +165,6 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D.ViewModels", "src\Core2D.ViewModels\Core2D.ViewModels.csproj", "{FE97309E-2A00-4D89-A66A-B6A84DA7AC8D}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D.ViewModels.UnitTests", "tests\Core2D.ViewModels.UnitTests\Core2D.ViewModels.UnitTests.csproj", "{C4D7FE79-2300-4FF1-98A2-383E07969D43}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D.UI.Avalonia.Experimental", "src\Core2D.UI.Avalonia.Experimental\Core2D.UI.Avalonia.Experimental.csproj", "{EDF5CAB8-91D5-487E-A3B2-842940673049}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "_build", "build\build\_build.csproj", "{99A39D19-3018-4394-9224-9396B8474BF6}"
 EndProject
@@ -287,8 +286,6 @@ Global
 		{C4D7FE79-2300-4FF1-98A2-383E07969D43}.Debug|AnyCPU.Build.0 = Debug|Any CPU
 		{C4D7FE79-2300-4FF1-98A2-383E07969D43}.Release|AnyCPU.ActiveCfg = Release|Any CPU
 		{C4D7FE79-2300-4FF1-98A2-383E07969D43}.Release|AnyCPU.Build.0 = Release|Any CPU
-		{EDF5CAB8-91D5-487E-A3B2-842940673049}.Debug|AnyCPU.ActiveCfg = Debug|Any CPU
-		{EDF5CAB8-91D5-487E-A3B2-842940673049}.Release|AnyCPU.ActiveCfg = Release|Any CPU
 		{99A39D19-3018-4394-9224-9396B8474BF6}.Debug|AnyCPU.ActiveCfg = Debug|Any CPU
 		{99A39D19-3018-4394-9224-9396B8474BF6}.Debug|AnyCPU.Build.0 = Debug|Any CPU
 		{99A39D19-3018-4394-9224-9396B8474BF6}.Release|AnyCPU.ActiveCfg = Release|Any CPU
@@ -348,7 +345,6 @@ Global
 		{AB985E04-A0BA-4AC6-A00F-E276B780E085} = {8756F874-0C1B-4AB8-83E0-0BEDA782D212}
 		{FE97309E-2A00-4D89-A66A-B6A84DA7AC8D} = {BC6BAFE6-1735-4549-A7CC-819274780B38}
 		{C4D7FE79-2300-4FF1-98A2-383E07969D43} = {8756F874-0C1B-4AB8-83E0-0BEDA782D212}
-		{EDF5CAB8-91D5-487E-A3B2-842940673049} = {A2A18C4F-8515-4FC9-A058-DC70DF7E288A}
 		{99A39D19-3018-4394-9224-9396B8474BF6} = {C7162582-C1FD-45FB-99FD-6770D67B5A21}
 		{5A50B509-FC5B-495B-B6D2-ACC01C3E5A25} = {BC6BAFE6-1735-4549-A7CC-819274780B38}
 		{0F76129D-FCCC-4C6D-9FB0-2FC1C27B4C05} = {BC6BAFE6-1735-4549-A7CC-819274780B38}

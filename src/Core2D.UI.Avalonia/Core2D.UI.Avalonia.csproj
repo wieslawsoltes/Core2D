@@ -23,6 +23,7 @@
     <RdXmlFile Include="..\..\build\native\autofac.rd.xml" />
     <RdXmlFile Include="..\..\build\native\dock.rd.xml" />
     <RdXmlFile Include="..\..\build\native\csvhelper.rd.xml" />
+    <RdXmlFile Include="..\..\build\native\netdxf.rd.xml" />
     <RdXmlFile Include="..\..\build\native\newtonsoft.json.rd.xml" />
     <RdXmlFile Include="..\..\build\native\portable.xaml.rd.xml" />
     <!--<RdXmlFile Include="..\..\build\native\roslyn.rd.xml"/>-->
