@@ -1,7 +1,7 @@
 using System.IO;
 
 var project = Editor.Project;
-var output = "D:\\DOKUMENTY\\WEB\\EXPORT\\";
+var output = "D:\\";
 
 foreach (var document in project.Documents)
 {
