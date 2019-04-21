@@ -6,18 +6,14 @@
   <ItemGroup Condition="'$(CoreRT)' == 'True' And '$(RuntimeIdentifier)' == 'win-x64'">
     <PackageReference Include="Avalonia.Win32" Version="0.8.0" />
     <PackageReference Include="Avalonia.Skia" Version="0.8.0" />
-    <PackageReference Include="SkiaSharp" Version="1.68.0" />
   </ItemGroup>
   <ItemGroup Condition="'$(CoreRT)' == 'True' And '$(RuntimeIdentifier)' == 'linux-x64'">
     <PackageReference Include="Avalonia.X11" Version="0.8.0" />
     <PackageReference Include="Avalonia.Skia" Version="0.8.0" />
-    <PackageReference Include="SkiaSharp" Version="1.68.0" />
-    <PackageReference Include="SkiaSharp.NativeAssets.Linux" Version="1.68.0" />
   </ItemGroup>
   <ItemGroup Condition="'$(CoreRT)' == 'True' And '$(RuntimeIdentifier)' == 'osx-x64'">
     <PackageReference Include="Avalonia.Native" Version="0.8.0" />
     <PackageReference Include="Avalonia.Skia" Version="0.8.0" />
-    <PackageReference Include="SkiaSharp" Version="1.68.0" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Serilog.Sinks.Trace" Version="2.1.0" />
