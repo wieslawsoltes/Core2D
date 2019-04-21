@@ -2,12 +2,6 @@
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Condition="'$(CoreRT)' == 'False'">
     <PackageReference Include="Avalonia.Desktop" Version="0.8.0" />
-    <PackageReference Include="SharpDX" Version="4.0.1" />
-    <PackageReference Include="SharpDX.Direct2D1" Version="4.0.1" />
-    <PackageReference Include="SharpDX.Direct3D11" Version="4.0.1" />
-    <PackageReference Include="SharpDX.DXGI" Version="4.0.1" />
-    <PackageReference Include="SkiaSharp" Version="1.68.0" />
-    <PackageReference Include="SkiaSharp.NativeAssets.Linux" Version="1.68.0" />
   </ItemGroup>
   <ItemGroup Condition="'$(CoreRT)' == 'True' And '$(RuntimeIdentifier)' == 'win-x64'">
     <PackageReference Include="Avalonia.Win32" Version="0.8.0" />
