@@ -15,13 +15,13 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "props", "props", "{3C45CABF-3E2E-455B-AACF-1FB63D331F9C}"
 	ProjectSection(SolutionItems) = preProject
 		build\Autofac.props = build\Autofac.props
-		build\Avalonia.Desktop.props = build\Avalonia.Desktop.props
-		build\Avalonia.props = build\Avalonia.props
-		build\Avalonia.ReactiveUI.props = build\Avalonia.ReactiveUI.props
 		build\Avalonia.Behaviors.props = build\Avalonia.Behaviors.props
 		build\Avalonia.DataGrid.props = build\Avalonia.DataGrid.props
+		build\Avalonia.Desktop.props = build\Avalonia.Desktop.props
 		build\Avalonia.MatrixExtensions.props = build\Avalonia.MatrixExtensions.props
 		build\Avalonia.PanAndZoom.props = build\Avalonia.PanAndZoom.props
+		build\Avalonia.props = build\Avalonia.props
+		build\Avalonia.ReactiveUI.props = build\Avalonia.ReactiveUI.props
 		build\Avalonia.ThemeManager.props = build\Avalonia.ThemeManager.props
 		build\Base.props = build\Base.props
 		build\CsvHelper.props = build\CsvHelper.props
@@ -66,8 +66,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "native", "native", "{0DD549
 		build\native\avalonia.win.rd.xml = build\native\avalonia.win.rd.xml
 		build\native\csvhelper.rd.xml = build\native\csvhelper.rd.xml
 		build\native\dock.rd.xml = build\native\dock.rd.xml
-		build\native\netdxf.rd.xml = build\native\netdxf.rd.xml
 		build\native\netcore.rd.xml = build\native\netcore.rd.xml
+		build\native\netdxf.rd.xml = build\native\netdxf.rd.xml
 		build\native\newtonsoft.json.rd.xml = build\native\newtonsoft.json.rd.xml
 		build\native\portable.xaml.rd.xml = build\native\portable.xaml.rd.xml
 		build\native\roslyn.rd.xml = build\native\roslyn.rd.xml
@@ -106,7 +106,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D.FileWriter.SkiaSharp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D.Log.Trace", "src\Core2D.Log.Trace\Core2D.Log.Trace.csproj", "{68A36926-DF55-4F05-9F89-B9AB1463227E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D.Renderer.Avalonia", "src\Core2D.Renderer.Avalonia\Core2D.Renderer.Avalonia.csproj", "{E05F3F7E-2176-43DC-90BB-F5C66CFDB12F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D.Renderer2.Avalonia", "src\Core2D.Renderer.Avalonia\Core2D.Renderer2.Avalonia.csproj", "{E05F3F7E-2176-43DC-90BB-F5C66CFDB12F}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D.Renderer.Dxf", "src\Core2D.Renderer.Dxf\Core2D.Renderer.Dxf.csproj", "{ACC2C898-B49B-4ED9-B18C-389F50801B39}"
 EndProject
