@@ -7,6 +7,7 @@ using Avalonia;
 using Avalonia.X11;
 #endif
 using Avalonia.Logging.Serilog;
+using Avalonia.ReactiveUI;
 using Core2D.UI.Avalonia.Modules;
 using Core2D.Interfaces;
 
@@ -17,16 +18,6 @@ namespace Core2D.UI.Avalonia
     /// </summary>
     internal class Program
     {
-        private static void Print(Exception ex)
-        {
-            Console.WriteLine(ex.Message);
-            Console.WriteLine(ex.StackTrace);
-            if (ex.InnerException != null)
-            {
-                Print(ex.InnerException);
-            }
-        }
-
         /// <summary>
         /// Program entry point.
         /// </summary>
@@ -78,57 +69,50 @@ namespace Core2D.UI.Avalonia
                 }
             }
 #endif
-            try
+            var builder = new ContainerBuilder();
+            builder.RegisterModule<LocatorModule>();
+            builder.RegisterModule<CoreModule>();
+            builder.RegisterModule<DependenciesModule>();
+            builder.RegisterModule<AppModule>();
+            builder.RegisterModule<ViewModule>();
+            using (var container = builder.Build())
             {
-                var builder = new ContainerBuilder();
-                builder.RegisterModule<LocatorModule>();
-                builder.RegisterModule<CoreModule>();
-                builder.RegisterModule<DependenciesModule>();
-                builder.RegisterModule<AppModule>();
-                builder.RegisterModule<ViewModule>();
-                using (var container = builder.Build())
+                using (var log = container.Resolve<ILog>())
                 {
-                    using (var log = container.Resolve<ILog>())
-                    {
-                        var appBuilder = BuildAvaloniaApp();
+                    var appBuilder = BuildAvaloniaApp();
 #if !_CORERT
-                        if (useDirect2D1 == true)
-                        {
-                            appBuilder.UseDirect2D1();
-                        }
-                        if (useSkia == true)
-                        {
-                            appBuilder.UseSkia();
-                        }
-                        if (useWin32 == true)
-                        {
-                            appBuilder.UseWin32()
-                                      .With(new Win32PlatformOptions { AllowEglInitialization = useEGL, UseDeferredRendering = deferredRendering });
-                        }
-                        if (useX11 == true)
-                        {
-                            appBuilder.UseX11()
-                                      .With(new X11PlatformOptions { UseGpu = useGpu, UseEGL = useEGL });
-                        }
-                        if (useNative == true)
-                        {
-                            appBuilder.UseAvaloniaNative()
-                                      .With(new AvaloniaNativePlatformOptions { UseGpu = useGpu, UseDeferredRendering = deferredRendering });
-                        }
-#endif
-                        appBuilder.SetupWithoutStarting();
-                        var app = appBuilder.Instance as App;
-                        var aboutInfo = app.CreateAboutInfo(
-                            appBuilder.RuntimePlatform.GetRuntimeInfo(),
-                            appBuilder.WindowingSubsystemName,
-                            appBuilder.RenderingSubsystemName);
-                        app.Start(container.Resolve<IServiceProvider>(), aboutInfo);
+                    if (useDirect2D1 == true)
+                    {
+                        appBuilder.UseDirect2D1();
                     }
+                    if (useSkia == true)
+                    {
+                        appBuilder.UseSkia();
+                    }
+                    if (useWin32 == true)
+                    {
+                        appBuilder.UseWin32()
+                                  .With(new Win32PlatformOptions { AllowEglInitialization = useEGL, UseDeferredRendering = deferredRendering });
+                    }
+                    if (useX11 == true)
+                    {
+                        appBuilder.UseX11()
+                                  .With(new X11PlatformOptions { UseGpu = useGpu, UseEGL = useEGL });
+                    }
+                    if (useNative == true)
+                    {
+                        appBuilder.UseAvaloniaNative()
+                                  .With(new AvaloniaNativePlatformOptions { UseGpu = useGpu, UseDeferredRendering = deferredRendering });
+                    }
+#endif
+                    appBuilder.SetupWithoutStarting();
+                    var app = appBuilder.Instance as App;
+                    var aboutInfo = app.CreateAboutInfo(
+                        appBuilder.RuntimePlatform.GetRuntimeInfo(),
+                        appBuilder.WindowingSubsystemName,
+                        appBuilder.RenderingSubsystemName);
+                    app.Start(container.Resolve<IServiceProvider>(), aboutInfo);
                 }
-            }
-            catch (Exception ex)
-            {
-                Print(ex);
             }
         }
 

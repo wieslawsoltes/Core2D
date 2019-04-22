@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFrameworks>netcoreapp3.0</TargetFrameworks>
-    <OutputType>WinExe</OutputType>
+    <OutputType>Exe</OutputType>
     <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
     <EnableDefaultCompileItems>False</EnableDefaultCompileItems>
     <TieredCompilation>True</TieredCompilation>
@@ -77,7 +77,6 @@
     <ProjectReference Include="..\Core2D.FileWriter.Emf\Core2D.FileWriter.Emf.csproj" />
     <ProjectReference Include="..\Core2D.FileWriter.SkiaSharp\Core2D.FileWriter.SkiaSharp.csproj" />
     <ProjectReference Include="..\Core2D.Log.Trace\Core2D.Log.Trace.csproj" />
-    <ProjectReference Include="..\Core2D.Renderer.Avalonia\Core2D.Renderer2.Avalonia.csproj" />
     <ProjectReference Include="..\Core2D.Renderer.Dxf\Core2D.Renderer.Dxf.csproj" />
     <ProjectReference Include="..\Core2D.Renderer.SkiaSharp\Core2D.Renderer.SkiaSharp.csproj" />
     <ProjectReference Include="..\Core2D.Renderer.WinForms\Core2D.Renderer.WinForms.csproj" />

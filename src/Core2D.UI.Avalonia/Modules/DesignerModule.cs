@@ -3,7 +3,7 @@
 using Autofac;
 using Core2D.Interfaces;
 using Core2D.Renderer;
-using Core2D.Renderer.Avalonia;
+using Core2D.UI.Avalonia.Renderer;
 using Core2D.UI.Avalonia.Utilities;
 
 namespace Core2D.UI.Avalonia.Modules

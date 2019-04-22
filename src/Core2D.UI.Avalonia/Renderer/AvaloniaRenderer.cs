@@ -15,8 +15,9 @@ using A = Avalonia;
 using AM = Avalonia.Media;
 using AMI = Avalonia.Media.Imaging;
 using AME = Avalonia.MatrixExtensions;
+using Core2D.Renderer;
 
-namespace Core2D.Renderer.Avalonia
+namespace Core2D.UI.Avalonia.Renderer
 {
     /// <summary>
     /// Native Avalonia shape renderer.
