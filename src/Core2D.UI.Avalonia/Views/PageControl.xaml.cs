@@ -20,10 +20,6 @@ namespace Core2D.UI.Avalonia.Views
         private ProjectEditorInputTarget _inputTarget = null;
         private InputProcessor _inputProcessor = null;
         private bool _isLoaded = false;
-        private ContainerControl _containerControlData = null;
-        private ContainerControl _containerControlTemplate = null;
-        private ContainerControl _containerControlEditor = null;
-        private ZoomBorder _zoomBorder = null;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="PageControl"/> class.
@@ -31,11 +27,6 @@ namespace Core2D.UI.Avalonia.Views
         public PageControl()
         {
             InitializeComponent();
-
-            _containerControlData = this.Find<ContainerControl>("containerControlData");
-            _containerControlTemplate = this.Find<ContainerControl>("containerControlTemplate");
-            _containerControlEditor = this.Find<ContainerControl>("containerControlEditor");
-            _zoomBorder = this.Find<ZoomBorder>("zoomBorder");
         }
 
         /// <summary>
@@ -91,6 +82,11 @@ namespace Core2D.UI.Avalonia.Views
                 if (_isLoaded)
                     return;
 
+                var _containerControlData = this.Find<ContainerControl>("containerControlData");
+                var _containerControlTemplate = this.Find<ContainerControl>("containerControlTemplate");
+                var _containerControlEditor = this.Find<ContainerControl>("containerControlEditor");
+                var _zoomBorder = this.Find<ZoomBorder>("zoomBorder");
+
                 if (projectEditor.CanvasPlatform is IEditorCanvasPlatform canvasPlatform)
                 {
                     canvasPlatform.Invalidate = () =>
@@ -138,6 +134,8 @@ namespace Core2D.UI.Avalonia.Views
                     canvasPlatform.AutoFitZoom = null;
                     canvasPlatform.Zoom = null;
                 }
+
+                var _zoomBorder = this.Find<ZoomBorder>("zoomBorder");
 
                 if (_zoomBorder != null)
                 {
