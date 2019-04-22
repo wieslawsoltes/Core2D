@@ -74,7 +74,7 @@
                 </MenuItem.Styles>
             </MenuItem>
             <Separator/>
-            <MenuItem Header="_Theme" DataContext="{x:Static app:App.Selector}" Items="{Binding Themes}">
+            <!--<MenuItem Header="_Theme" DataContext="{x:Static app:App.Selector}" Items="{Binding Themes}">
                 <MenuItem.Styles>
                     <Style Selector="MenuItem">
                         <Setter Property="Header" Value="{Binding Name}"/>
@@ -94,7 +94,7 @@
                         </Setter>
                     </Style>
                 </MenuItem.Styles>
-            </MenuItem>
+            </MenuItem>-->
         </MenuItem>
         <MenuItem Header="_Window">
             <MenuItem Header="_Load Layout..." Command="{Binding LayoutPlatform.LoadLayout}"/>

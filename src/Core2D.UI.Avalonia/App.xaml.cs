@@ -111,8 +111,8 @@ namespace Core2D.UI.Avalonia
         {
             InitializeConverters(serviceProvider);
 
-            Selector = ThemeSelector.Create("Themes");
-            Selector.LoadSelectedTheme("Core2D.theme");
+            //Selector = ThemeSelector.Create("Themes");
+            //Selector.LoadSelectedTheme("Core2D.theme");
 
             var log = serviceProvider.GetService<ILog>();
             var fileIO = serviceProvider.GetService<IFileSystem>();
@@ -154,7 +154,7 @@ namespace Core2D.UI.Avalonia
                     editor.Layout.Close();
                     editor.OnSaveLayout(layoutPath);
                     editor.OnSaveRecent(recentPath);
-                    Selector.SaveSelectedTheme("Core2D.theme");
+                    //Selector.SaveSelectedTheme("Core2D.theme");
                 };
                 window.DataContext = editor;
                 window.Show();
