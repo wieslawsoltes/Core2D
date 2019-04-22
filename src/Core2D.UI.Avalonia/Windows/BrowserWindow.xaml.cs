@@ -19,7 +19,7 @@ namespace Core2D.UI.Avalonia.Windows
         {
             InitializeComponent();
             this.AttachDevTools();
-            App.Selector.EnableThemes(this);
+            //App.Selector.EnableThemes(this);
         }
 
         /// <summary>

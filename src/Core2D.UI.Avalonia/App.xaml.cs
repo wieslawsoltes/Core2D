@@ -27,7 +27,7 @@ namespace Core2D.UI.Avalonia
         /// <summary>
         /// Gets the theme selector instance.
         /// </summary>
-        public static IThemeSelector Selector;
+        //public static IThemeSelector Selector;
 
         /// <summary>
         /// Initializes static data.
