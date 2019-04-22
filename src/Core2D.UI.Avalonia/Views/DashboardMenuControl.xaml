@@ -103,7 +103,7 @@
             <Separator/>
             <MenuItem Header="_Reset Layout" Command="{Binding LayoutPlatform.ResetLayout}"/>
         </MenuItem> 
-        <MenuItem Header="_Debug">
+        <!--<MenuItem Header="_Debug">
             <MenuItem Header="Draw_DirtyRects" Click="DebugDrawDirtyRects_Click">
                 <MenuItem.Icon>
                     <CheckBox Classes="menu" IsChecked="{Binding $parent[views:DashboardMenuControl].DrawDirtyRects}"/>
@@ -115,7 +115,7 @@
                     <CheckBox Classes="menu" IsChecked="{Binding $parent[views:DashboardMenuControl].DrawFps}"/>
                 </MenuItem.Icon>
             </MenuItem>
-        </MenuItem>
+        </MenuItem>-->
         <MenuItem Header="_Help">
             <MenuItem Header="_About Core2D" Command="{Binding Platform.OnAboutDialog}"/>
         </MenuItem>
