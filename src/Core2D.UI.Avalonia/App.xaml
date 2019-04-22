@@ -37,11 +37,11 @@
         <!-- DataGrid -->
         <StyleInclude Source="resm:Avalonia.Controls.DataGrid.Themes.Default.xaml?assembly=Avalonia.Controls.DataGrid"/>
         <!-- Dock -->
-        <StyleInclude Source="avares://Dock.Avalonia/Controls/DockPanelSplitter.xaml"/>
+        <!--<StyleInclude Source="avares://Dock.Avalonia/Controls/DockPanelSplitter.xaml"/>
         <StyleInclude Source="avares://Dock.Avalonia/Controls/ProportionalStackPanelSplitter.xaml"/>
         <StyleInclude Source="avares://Dock.Avalonia/Controls/DockTarget.xaml"/>
         <StyleInclude Source="avares://Dock.Avalonia/Controls/DockToolChrome.xaml"/>
-        <StyleInclude Source="avares://Dock.Avalonia/Controls/MetroWindow.xaml"/>
+        <StyleInclude Source="avares://Dock.Avalonia/Controls/MetroWindow.xaml"/>-->
         <!-- Border -->
         <Style Selector="Border.panel">
             <Setter Property="Margin" Value="2"/>
