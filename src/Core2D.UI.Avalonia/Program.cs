@@ -7,6 +7,7 @@ using Avalonia;
 using Avalonia.X11;
 #endif
 using Avalonia.Logging.Serilog;
+using Avalonia.ReactiveUI;
 using Core2D.UI.Avalonia.Modules;
 using Core2D.Interfaces;
 

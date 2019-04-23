@@ -20,10 +20,6 @@ namespace Core2D.UI.Avalonia.Views
         private ProjectEditorInputTarget _inputTarget = null;
         private InputProcessor _inputProcessor = null;
         private bool _isLoaded = false;
-        private ContainerControl _containerControlData = null;
-        private ContainerControl _containerControlTemplate = null;
-        private ContainerControl _containerControlEditor = null;
-        private ZoomBorder _zoomBorder = null;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="PageControl"/> class.
@@ -31,11 +27,6 @@ namespace Core2D.UI.Avalonia.Views
         public PageControl()
         {
             InitializeComponent();
-
-            _containerControlData = this.Find<ContainerControl>("containerControlData");
-            _containerControlTemplate = this.Find<ContainerControl>("containerControlTemplate");
-            _containerControlEditor = this.Find<ContainerControl>("containerControlEditor");
-            _zoomBorder = this.Find<ZoomBorder>("zoomBorder");
         }
 
         /// <summary>
@@ -91,27 +82,32 @@ namespace Core2D.UI.Avalonia.Views
                 if (_isLoaded)
                     return;
 
+                var containerControlData = this.Find<ContainerControl>("containerControlData");
+                var containerControlTemplate = this.Find<ContainerControl>("containerControlTemplate");
+                var containerControlEditor = this.Find<ContainerControl>("containerControlEditor");
+                var zoomBorder = this.Find<ZoomBorder>("zoomBorder");
+
                 if (projectEditor.CanvasPlatform is IEditorCanvasPlatform canvasPlatform)
                 {
                     canvasPlatform.Invalidate = () =>
                     {
-                        _containerControlData?.InvalidateVisual();
-                        _containerControlTemplate?.InvalidateVisual();
-                        _containerControlEditor?.InvalidateVisual();
+                        containerControlData?.InvalidateVisual();
+                        containerControlTemplate?.InvalidateVisual();
+                        containerControlEditor?.InvalidateVisual();
                     };
-                    canvasPlatform.ResetZoom = () => _zoomBorder?.Reset();
-                    canvasPlatform.AutoFitZoom = () => _zoomBorder?.AutoFit();
-                    canvasPlatform.Zoom = _zoomBorder;
+                    canvasPlatform.ResetZoom = () => zoomBorder?.Reset();
+                    canvasPlatform.AutoFitZoom = () => zoomBorder?.AutoFit();
+                    canvasPlatform.Zoom = zoomBorder;
                 }
 
-                if (_zoomBorder != null)
+                if (zoomBorder != null)
                 {
-                    _zoomBorder.InvalidatedChild = InvalidateChild;
+                    zoomBorder.InvalidatedChild = InvalidateChild;
                 }
 
                 _inputSource = new AvaloniaInputSource(
-                        _zoomBorder,
-                        _containerControlEditor,
+                        zoomBorder,
+                        containerControlEditor,
                         p => p);
                 _inputTarget = new ProjectEditorInputTarget(projectEditor);
                 _inputProcessor = new InputProcessor();
@@ -138,6 +134,8 @@ namespace Core2D.UI.Avalonia.Views
                     canvasPlatform.AutoFitZoom = null;
                     canvasPlatform.Zoom = null;
                 }
+
+                var _zoomBorder = this.Find<ZoomBorder>("zoomBorder");
 
                 if (_zoomBorder != null)
                 {

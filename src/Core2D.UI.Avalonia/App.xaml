@@ -35,7 +35,7 @@
         <StyleInclude Source="avares://Avalonia.Themes.Default/DefaultTheme.xaml"/>
         <StyleInclude Source="avares://Avalonia.Themes.Default/Accents/BaseLight.xaml"/>
         <!-- DataGrid -->
-        <StyleInclude Source="resm:Avalonia.Controls.DataGrid.Themes.Default.xaml?assembly=Avalonia.Controls.DataGrid"/>
+        <StyleInclude Source="avares://Avalonia.Controls.DataGrid/Themes/Default.xaml"/>
         <!-- Dock -->
         <StyleInclude Source="avares://Dock.Avalonia/Controls/DockPanelSplitter.xaml"/>
         <StyleInclude Source="avares://Dock.Avalonia/Controls/ProportionalStackPanelSplitter.xaml"/>
@@ -829,13 +829,13 @@
             <containers:ImagesControl DataContext="{Binding Context.Project}"/>
         </DataTemplate>
         <DataTemplate DataType="Tools:GroupsTool">
-            <containers:GroupsControl DataContext="{Binding Context.Project.CurrentGroupLibrary}"/>
+            <containers:GroupsControl DataContext="{Binding Context.Project}"/>
         </DataTemplate>
         <DataTemplate DataType="Tools:DatabasesTool">
             <containers:DatabasesControl DataContext="{Binding Context.Project}"/>
         </DataTemplate>
         <DataTemplate DataType="Tools:StylesTool">
-            <containers:StylesControl DataContext="{Binding Context.Project.CurrentStyleLibrary}"/>
+            <containers:StylesControl DataContext="{Binding Context.Project}"/>
         </DataTemplate>
         <DataTemplate DataType="Tools:TemplatesTool">
             <containers:TemplatesControl DataContext="{Binding Context.Project}"/>
