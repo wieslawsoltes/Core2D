@@ -18,6 +18,7 @@ using Core2D.FileWriter.SkiaSharpWebp;
 using Core2D.Interfaces;
 using Core2D.Log.Trace;
 using Core2D.Renderer;
+using Core2D.Renderer.Avalonia;
 #if !_CORERT
 using Core2D.ScriptRunner.Roslyn;
 #endif
@@ -25,7 +26,6 @@ using Core2D.Serializer.Newtonsoft;
 using Core2D.Serializer.Xaml;
 using Core2D.TextFieldReader.CsvHelper;
 using Core2D.TextFieldWriter.CsvHelper;
-using Core2D.UI.Avalonia.Renderer;
 using Core2D.UI.Avalonia.Utilities;
 
 #if NET461

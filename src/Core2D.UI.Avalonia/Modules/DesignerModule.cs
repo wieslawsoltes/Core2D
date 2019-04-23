@@ -1,9 +1,9 @@
-﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
+// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using Autofac;
 using Core2D.Interfaces;
 using Core2D.Renderer;
-using Core2D.UI.Avalonia.Renderer;
+using Core2D.Renderer.Avalonia;
 using Core2D.UI.Avalonia.Utilities;
 
 namespace Core2D.UI.Avalonia.Modules
