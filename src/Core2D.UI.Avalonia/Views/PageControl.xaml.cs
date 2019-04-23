@@ -82,32 +82,32 @@ namespace Core2D.UI.Avalonia.Views
                 if (_isLoaded)
                     return;
 
-                var _containerControlData = this.Find<ContainerControl>("containerControlData");
-                var _containerControlTemplate = this.Find<ContainerControl>("containerControlTemplate");
-                var _containerControlEditor = this.Find<ContainerControl>("containerControlEditor");
-                var _zoomBorder = this.Find<ZoomBorder>("zoomBorder");
+                var containerControlData = this.Find<ContainerControl>("containerControlData");
+                var containerControlTemplate = this.Find<ContainerControl>("containerControlTemplate");
+                var containerControlEditor = this.Find<ContainerControl>("containerControlEditor");
+                var zoomBorder = this.Find<ZoomBorder>("zoomBorder");
 
                 if (projectEditor.CanvasPlatform is IEditorCanvasPlatform canvasPlatform)
                 {
                     canvasPlatform.Invalidate = () =>
                     {
-                        _containerControlData?.InvalidateVisual();
-                        _containerControlTemplate?.InvalidateVisual();
-                        _containerControlEditor?.InvalidateVisual();
+                        containerControlData?.InvalidateVisual();
+                        containerControlTemplate?.InvalidateVisual();
+                        containerControlEditor?.InvalidateVisual();
                     };
-                    canvasPlatform.ResetZoom = () => _zoomBorder?.Reset();
-                    canvasPlatform.AutoFitZoom = () => _zoomBorder?.AutoFit();
-                    canvasPlatform.Zoom = _zoomBorder;
+                    canvasPlatform.ResetZoom = () => zoomBorder?.Reset();
+                    canvasPlatform.AutoFitZoom = () => zoomBorder?.AutoFit();
+                    canvasPlatform.Zoom = zoomBorder;
                 }
 
-                if (_zoomBorder != null)
+                if (zoomBorder != null)
                 {
-                    _zoomBorder.InvalidatedChild = InvalidateChild;
+                    zoomBorder.InvalidatedChild = InvalidateChild;
                 }
 
                 _inputSource = new AvaloniaInputSource(
-                        _zoomBorder,
-                        _containerControlEditor,
+                        zoomBorder,
+                        containerControlEditor,
                         p => p);
                 _inputTarget = new ProjectEditorInputTarget(projectEditor);
                 _inputProcessor = new InputProcessor();
