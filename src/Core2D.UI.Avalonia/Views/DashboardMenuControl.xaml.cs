@@ -59,13 +59,13 @@ namespace Core2D.UI.Avalonia.Views
             base.OnDetachedFromVisualTree(e);
         }
 
-        private void DebugDrawDirtyRects_Click(object sender, RoutedEventArgs e)
+        public void DebugDrawDirtyRects_Click(object sender, RoutedEventArgs e)
         {
             VisualRoot.Renderer.DrawDirtyRects = !VisualRoot.Renderer.DrawDirtyRects;
             DrawDirtyRects = VisualRoot.Renderer.DrawDirtyRects;
         }
 
-        private void DebugDrawFps_Click(object sender, RoutedEventArgs e)
+        public void DebugDrawFps_Click(object sender, RoutedEventArgs e)
         {
             VisualRoot.Renderer.DrawFps = !VisualRoot.Renderer.DrawFps;
             DrawFps = VisualRoot.Renderer.DrawFps;
