@@ -14,7 +14,7 @@
              xmlns:ShapesCore="clr-namespace:Core2D.Shapes;assembly=Core2D.Model" 
              xmlns:Designer="clr-namespace:Core2D.Editor.Designer;assembly=Core2D.Editor"
              mc:Ignorable="d"
-             d:DataContext="{x:Static Designer:DesignerContext.CurrentStyleLibrary}"
+             d:DataContext="{x:Static Designer:DesignerContext.CurrentGroupLibrary}"
              d:DesignWidth="250" d:DesignHeight="400">
     <UserControl.Resources>
         <converters:IsGroupConverter x:Key="IsGroupConverter"/>
