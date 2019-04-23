@@ -829,13 +829,13 @@
             <containers:ImagesControl DataContext="{Binding Context.Project}"/>
         </DataTemplate>
         <DataTemplate DataType="Tools:GroupsTool">
-            <containers:GroupsControl DataContext="{Binding Context.Project.CurrentGroupLibrary}"/>
+            <containers:GroupsControl DataContext="{Binding Context}"/>
         </DataTemplate>
         <DataTemplate DataType="Tools:DatabasesTool">
             <containers:DatabasesControl DataContext="{Binding Context.Project}"/>
         </DataTemplate>
         <DataTemplate DataType="Tools:StylesTool">
-            <containers:StylesControl DataContext="{Binding Context.Project.CurrentStyleLibrary}"/>
+            <containers:StylesControl DataContext="{Binding Context}"/>
         </DataTemplate>
         <DataTemplate DataType="Tools:TemplatesTool">
             <containers:TemplatesControl DataContext="{Binding Context.Project}"/>
