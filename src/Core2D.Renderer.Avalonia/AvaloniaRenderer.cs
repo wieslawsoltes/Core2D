@@ -156,8 +156,7 @@ namespace Core2D.Renderer.Avalonia
             var pen = new AM.Pen(
                 ToBrush(style.Stroke),
                 scale(style.Thickness / State.ZoomX),
-                dashStyle, lineCap,
-                lineCap, lineCap);
+                dashStyle, lineCap);
 
             return pen;
         }
