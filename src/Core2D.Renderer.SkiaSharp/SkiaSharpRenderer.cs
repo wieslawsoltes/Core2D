@@ -634,6 +634,7 @@ namespace Core2D.Renderer.SkiaSharp
             using (var pen = ToSKPaintBrush(text.Style.Stroke))
             using (var tf = SKTypeface.FromFamilyName(text.Style.TextStyle.FontName, weight, SKFontStyleWidth.Normal, style))
             {
+                pen.Typeface = tf;
                 pen.TextEncoding = SKTextEncoding.Utf16;
                 pen.TextSize = _scaleToPage(text.Style.TextStyle.FontSize * _targetDpi / _sourceDpi);
 
