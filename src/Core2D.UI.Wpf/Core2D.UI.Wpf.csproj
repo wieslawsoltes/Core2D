@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
 
   <PropertyGroup>
-    <TargetFrameworks>netcoreapp3.0;net461</TargetFrameworks>
+    <TargetFrameworks>netcoreapp3.0</TargetFrameworks>
     <OutputType>WinExe</OutputType>
     <UseWPF>True</UseWPF>
     <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
@@ -11,7 +11,6 @@
   </PropertyGroup>
 
   <Import Project="..\..\build\Base.props" />
-  <Import Project="..\..\build\ReferenceAssemblies.props" />
   <Import Project="..\..\build\Autofac.props" />
   <Import Project="..\..\build\Rx.props" />
   <Import Project="..\..\build\Dock.Model.props" />
