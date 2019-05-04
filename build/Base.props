@@ -35,10 +35,9 @@
     <CoreRT>True</CoreRT>
     <DefineConstants>$(DefineConstants);_CORERT;_CORERT_OSX_X64</DefineConstants>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(TargetFramework)' == 'net461' and '$(OS)' == 'Unix'">
-    <FrameworkPathOverride>/usr/lib/mono/4.6.1-api</FrameworkPathOverride>
-    <FrameworkPathOverride Condition="$([MSBuild]::IsOsPlatform('OSX'))">/Library/Frameworks/Mono.framework/Versions/Current/lib/mono/4.6.1-api</FrameworkPathOverride>
-  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.0-preview.1" />
+  </ItemGroup>
   <ItemGroup>
     <PackageReference Include="System.Collections.Immutable" Version="1.5.0" />
     <PackageReference Include="System.IO.Compression" Version="4.3.0" />
