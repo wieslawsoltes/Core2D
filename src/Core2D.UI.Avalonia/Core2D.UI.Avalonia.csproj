@@ -60,9 +60,6 @@
 
   <ItemGroup>
     <Compile Include="**\*.cs" Exclude="obj\**" />
-  </ItemGroup>
-
-  <ItemGroup>
     <AvaloniaResource Include="Assets\*" Exclude="bin\**;obj\**;**\*.xproj;packages\**;@(EmbeddedResource)" />
   </ItemGroup>
 
@@ -76,10 +73,12 @@
     <ProjectReference Include="..\Core2D.FileSystem.DotNet\Core2D.FileSystem.DotNet.csproj" />
     <ProjectReference Include="..\Core2D.FileWriter.Dxf\Core2D.FileWriter.Dxf.csproj" />
     <ProjectReference Include="..\Core2D.FileWriter.Emf\Core2D.FileWriter.Emf.csproj" />
+    <ProjectReference Include="..\Core2D.FileWriter.PdfSharp\Core2D.FileWriter.PdfSharp.csproj" Condition="$(TargetFramework.StartsWith('net4'))" />
     <ProjectReference Include="..\Core2D.FileWriter.SkiaSharp\Core2D.FileWriter.SkiaSharp.csproj" />
     <ProjectReference Include="..\Core2D.Log.Trace\Core2D.Log.Trace.csproj" />
     <ProjectReference Include="..\Core2D.Renderer.Avalonia\Core2D.Renderer.Avalonia.csproj" />
     <ProjectReference Include="..\Core2D.Renderer.Dxf\Core2D.Renderer.Dxf.csproj" />
+    <ProjectReference Include="..\Core2D.Renderer.PdfSharp\Core2D.Renderer.PdfSharp.csproj" Condition="$(TargetFramework.StartsWith('net4'))" />
     <ProjectReference Include="..\Core2D.Renderer.SkiaSharp\Core2D.Renderer.SkiaSharp.csproj" />
     <ProjectReference Include="..\Core2D.Renderer.WinForms\Core2D.Renderer.WinForms.csproj" />
     <ProjectReference Include="..\Core2D.ScriptRunner.Roslyn\Core2D.ScriptRunner.Roslyn.csproj" Condition="'$(CoreRT)' == 'False'" />
@@ -88,11 +87,6 @@
     <ProjectReference Include="..\Core2D.ServiceProvider.Autofac\Core2D.ServiceProvider.Autofac.csproj" />
     <ProjectReference Include="..\Core2D.TextFieldReader.CsvHelper\Core2D.TextFieldReader.CsvHelper.csproj" />
     <ProjectReference Include="..\Core2D.TextFieldWriter.CsvHelper\Core2D.TextFieldWriter.CsvHelper.csproj" />
-  </ItemGroup>
-
-  <ItemGroup Condition="$(TargetFramework.StartsWith('net4'))">
-    <ProjectReference Include="..\Core2D.FileWriter.PdfSharp\Core2D.FileWriter.PdfSharp.csproj" />
-    <ProjectReference Include="..\Core2D.Renderer.PdfSharp\Core2D.Renderer.PdfSharp.csproj" />
   </ItemGroup>
 
 </Project>
