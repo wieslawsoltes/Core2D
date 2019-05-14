@@ -5,8 +5,13 @@
     <OutputType>WinExe</OutputType>
     <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
     <EnableDefaultCompileItems>False</EnableDefaultCompileItems>
-    <TieredCompilation>True</TieredCompilation>
     <IsPackable>False</IsPackable>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(CoreRT)' != 'True'">
+    <PublishTrimmed>False</PublishTrimmed>
+    <PublishSingleFile>False</PublishSingleFile>
+    <PublishReadyToRun>False</PublishReadyToRun>
   </PropertyGroup>
 
   <ItemGroup Condition="'$(CoreRT)' == 'True'">
@@ -36,12 +41,6 @@
     <RootAllApplicationAssemblies>False</RootAllApplicationAssemblies>
     <IlcGenerateCompleteTypeMetadata>False</IlcGenerateCompleteTypeMetadata>
     <IlcGenerateStackTraceData>False</IlcGenerateStackTraceData>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(CoreRT)' != 'True'">
-    <PublishTrimmed>False</PublishTrimmed>
-    <PublishSingleFile>False</PublishSingleFile>
-    <PublishReadyToRun>True</PublishReadyToRun>
   </PropertyGroup>
 
   <Import Project="..\..\build\Base.props" />
