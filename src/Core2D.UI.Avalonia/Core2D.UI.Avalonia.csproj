@@ -38,6 +38,12 @@
     <IlcGenerateStackTraceData>False</IlcGenerateStackTraceData>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(CoreRT)' != 'True'">
+    <PublishTrimmed>False</PublishTrimmed>
+    <PublishSingleFile>False</PublishSingleFile>
+    <PublishReadyToRun>True</PublishReadyToRun>
+  </PropertyGroup>
+
   <Import Project="..\..\build\Base.props" />
   <Import Project="..\..\build\ReferenceAssemblies.props" />
   <Import Project="..\..\build\ILCompiler.props" Condition="'$(CoreRT)' == 'True'" />
