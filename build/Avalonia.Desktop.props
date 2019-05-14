@@ -1,21 +1,21 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Condition="'$(CoreRT)' == 'False'">
-    <PackageReference Include="Avalonia.Desktop" Version="0.8.1-cibuild0002259-beta" />
+    <PackageReference Include="Avalonia.Desktop" Version="0.8.1-cibuild0002330-beta" />
     <PackageReference Include="Avalonia.Angle.Windows.Natives" Version="2.1.0.2019013001" />
   </ItemGroup>
   <ItemGroup Condition="'$(CoreRT)' == 'True' And '$(RuntimeIdentifier)' == 'win-x64'">
-    <PackageReference Include="Avalonia.Win32" Version="0.8.1-cibuild0002259-beta" />
-    <PackageReference Include="Avalonia.Skia" Version="0.8.1-cibuild0002259-beta" />
+    <PackageReference Include="Avalonia.Win32" Version="0.8.1-cibuild0002330-beta" />
+    <PackageReference Include="Avalonia.Skia" Version="0.8.1-cibuild0002330-beta" />
     <PackageReference Include="Avalonia.Angle.Windows.Natives" Version="2.1.0.2019013001" />
   </ItemGroup>
   <ItemGroup Condition="'$(CoreRT)' == 'True' And '$(RuntimeIdentifier)' == 'linux-x64'">
-    <PackageReference Include="Avalonia.X11" Version="0.8.1-cibuild0002259-beta" />
-    <PackageReference Include="Avalonia.Skia" Version="0.8.1-cibuild0002259-beta" />
+    <PackageReference Include="Avalonia.X11" Version="0.8.1-cibuild0002330-beta" />
+    <PackageReference Include="Avalonia.Skia" Version="0.8.1-cibuild0002330-beta" />
   </ItemGroup>
   <ItemGroup Condition="'$(CoreRT)' == 'True' And '$(RuntimeIdentifier)' == 'osx-x64'">
-    <PackageReference Include="Avalonia.Native" Version="0.8.1-cibuild0002259-beta" />
-    <PackageReference Include="Avalonia.Skia" Version="0.8.1-cibuild0002259-beta" />
+    <PackageReference Include="Avalonia.Native" Version="0.8.1-cibuild0002330-beta" />
+    <PackageReference Include="Avalonia.Skia" Version="0.8.1-cibuild0002330-beta" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Serilog.Sinks.Trace" Version="2.1.0" />
