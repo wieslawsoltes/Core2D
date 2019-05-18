@@ -149,7 +149,6 @@ namespace Core2D.UI.Avalonia
                          .UseAvaloniaNative().UseSkia()
 #endif
                          .UseReactiveUI()
-                         .UseDataGrid()
                          .LogToDebug();
     }
 }
