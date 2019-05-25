@@ -6,6 +6,10 @@
     <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
   </PropertyGroup>
 
+  <PropertyGroup>
+    <PackageId>Core2D.FileWriter.SkiaSharp</PackageId>
+  </PropertyGroup>
+
   <Import Project="..\..\build\Base.props" />
   <Import Project="..\..\build\ReferenceAssemblies.props" />
   <Import Project="..\..\build\SkiaSharp.props" />

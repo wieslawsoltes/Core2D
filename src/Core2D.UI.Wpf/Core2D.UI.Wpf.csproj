@@ -11,6 +11,10 @@
   </PropertyGroup>
 
   <PropertyGroup>
+    <PackageId>Core2D.UI.Wpf</PackageId>
+  </PropertyGroup>
+
+  <PropertyGroup>
     <PublishTrimmed>False</PublishTrimmed>
     <PublishSingleFile>False</PublishSingleFile>
     <PublishReadyToRun>True</PublishReadyToRun>

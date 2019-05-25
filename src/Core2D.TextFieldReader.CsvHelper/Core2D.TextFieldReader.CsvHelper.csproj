@@ -6,6 +6,10 @@
     <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
   </PropertyGroup>
 
+  <PropertyGroup>
+    <PackageId>Core2D.TextFieldReader.CsvHelper</PackageId>
+  </PropertyGroup>
+
   <Import Project="..\..\build\Base.props" />
   <Import Project="..\..\build\ReferenceAssemblies.props" />
   <Import Project="..\..\build\CsvHelper.props" />

@@ -8,6 +8,10 @@
     <IsPackable>False</IsPackable>
   </PropertyGroup>
 
+  <PropertyGroup>
+    <PackageId>Core2D.UI.Avalonia</PackageId>
+  </PropertyGroup>
+
   <PropertyGroup Condition="'$(CoreRT)' != 'True'">
     <PublishTrimmed>False</PublishTrimmed>
     <PublishSingleFile>False</PublishSingleFile>
