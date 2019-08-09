@@ -10,7 +10,7 @@ namespace Core2D.UI.Avalonia.Windows
     /// <summary>
     /// Interaction logic for <see cref="ScriptWindow"/> xaml.
     /// </summary>
-    public class ScriptWindow : HostWindowBase
+    public class ScriptWindow : MetroWindow
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ScriptWindow"/> class.

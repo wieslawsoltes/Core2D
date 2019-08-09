@@ -44,5 +44,5 @@
         <KeyBinding Command="{Binding Platform.OnDocumentViewer}" Gesture="Ctrl+D"/>
         <KeyBinding Command="{Binding Platform.OnScriptEditor}" Gesture="Ctrl+R"/>
     </UserControl.KeyBindings>
-    <idc:DockControl DataContext="{Binding Layout}"/>
+    <idc:DockControl Layout="{Binding Layout}"/>
 </UserControl>

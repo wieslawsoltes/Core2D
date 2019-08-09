@@ -11,7 +11,7 @@ namespace Core2D.UI.Avalonia.Windows
     /// <summary>
     /// Interaction logic for <see cref="AboutWindow"/> xaml.
     /// </summary>
-    public class AboutWindow : HostWindowBase
+    public class AboutWindow : MetroWindow
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="AboutWindow"/> class.

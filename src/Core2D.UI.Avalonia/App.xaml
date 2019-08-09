@@ -37,11 +37,7 @@
         <!-- DataGrid -->
         <StyleInclude Source="avares://Avalonia.Controls.DataGrid/Themes/Default.xaml"/>
         <!-- Dock -->
-        <StyleInclude Source="avares://Dock.Avalonia/Controls/DockPanelSplitter.xaml"/>
-        <StyleInclude Source="avares://Dock.Avalonia/Controls/ProportionalStackPanelSplitter.xaml"/>
-        <StyleInclude Source="avares://Dock.Avalonia/Controls/DockTarget.xaml"/>
-        <StyleInclude Source="avares://Dock.Avalonia/Controls/DockToolChrome.xaml"/>
-        <StyleInclude Source="avares://Dock.Avalonia/Controls/MetroWindow.xaml"/>
+        <StyleInclude Source="avares://Dock.Avalonia.Themes.Default/DefaultTheme.xaml"/>
         <!-- Border -->
         <Style Selector="Border.panel">
             <Setter Property="Margin" Value="2"/>

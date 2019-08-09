@@ -10,7 +10,7 @@ namespace Core2D.UI.Avalonia.Windows
     /// <summary>
     /// Interaction logic for <see cref="DocumentWindow"/> xaml.
     /// </summary>
-    public class DocumentWindow : HostWindowBase
+    public class DocumentWindow : MetroWindow
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="DocumentWindow"/> class.

@@ -10,7 +10,7 @@ namespace Core2D.UI.Avalonia.Windows
     /// <summary>
     /// Interaction logic for <see cref="BrowserWindow"/> xaml.
     /// </summary>
-    public class BrowserWindow : HostWindowBase
+    public class BrowserWindow : MetroWindow
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="BrowserWindow"/> class.
