@@ -7,7 +7,7 @@ namespace Core2D.UI.Avalonia.Dock.Tools
     /// <summary>
     /// Document view.
     /// </summary>
-    public class DocumentTool : ToolTab
+    public class DocumentTool : Tool
     {
     }
 }

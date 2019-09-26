@@ -15,8 +15,8 @@ using Core2D.Interfaces;
 using Core2D.Renderer;
 using Core2D.Shapes;
 using Core2D.Style;
-using Dock.Model;
-using Dock.Model.Controls;
+using DM=Dock.Model;
+using DMC=Dock.Model.Controls;
 using Spatial;
 using static System.Math;
 
@@ -37,7 +37,7 @@ namespace Core2D.Editor
         private IPathTool _currentPathTool;
         private ImmutableArray<RecentFile> _recentProjects;
         private RecentFile _currentRecentProject;
-        private IDock _layout;
+        private DM.IDock _layout;
         private AboutInfo _aboutInfo;
         private readonly Lazy<ImmutableArray<IEditorTool>> _tools;
         private readonly Lazy<ImmutableArray<IPathTool>> _pathTools;
@@ -125,7 +125,7 @@ namespace Core2D.Editor
         }
 
         /// <inheritdoc/>
-        public IDock Layout
+        public DM.IDock Layout
         {
             get => _layout;
             set => Update(ref _layout, value);
@@ -2002,7 +2002,7 @@ namespace Core2D.Editor
                 try
                 {
                     var json = FileIO.ReadUtf8Text(path);
-                    var layout = JsonSerializer.Deserialize<RootDock>(json);
+                    var layout = JsonSerializer.Deserialize<DMC.RootDock>(json);
                     if (layout != null)
                     {
                         Layout = layout;
@@ -2035,7 +2035,7 @@ namespace Core2D.Editor
         /// <inheritdoc/>
         public void OnNavigate(object view)
         {
-            if (Layout is IDock dock)
+            if (Layout is DM.IDock dock)
             {
                 dock.Navigate(view);
             }

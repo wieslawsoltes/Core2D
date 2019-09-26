@@ -7,7 +7,7 @@ namespace Core2D.UI.Avalonia.Dock.Tools
     /// <summary>
     /// Container view.
     /// </summary>
-    public class ContainerTool : ToolTab
+    public class ContainerTool : Tool
     {
     }
 }

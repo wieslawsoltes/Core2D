@@ -7,7 +7,7 @@ namespace Core2D.UI.Avalonia.Dock.Tools
     /// <summary>
     /// Browser view.
     /// </summary>
-    public class BrowserTool : ToolTab
+    public class BrowserTool : Tool
     {
     }
 }

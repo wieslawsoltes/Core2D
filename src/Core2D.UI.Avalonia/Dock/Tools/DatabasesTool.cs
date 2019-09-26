@@ -7,7 +7,7 @@ namespace Core2D.UI.Avalonia.Dock.Tools
     /// <summary>
     /// Databases view.
     /// </summary>
-    public class DatabasesTool : ToolTab
+    public class DatabasesTool : Tool
     {
     }
 }

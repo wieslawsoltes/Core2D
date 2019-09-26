@@ -7,7 +7,7 @@ namespace Core2D.UI.Avalonia.Dock.Documents
     /// <summary>
     /// Page document.
     /// </summary>
-    public class PageDocument : DocumentTab
+    public class PageDocument : Document
     {
     }
 }

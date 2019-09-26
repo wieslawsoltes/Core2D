@@ -7,7 +7,7 @@ namespace Core2D.UI.Avalonia.Dock.Tools
     /// <summary>
     /// Styles view.
     /// </summary>
-    public class StylesTool : ToolTab
+    public class StylesTool : Tool
     {
     }
 }

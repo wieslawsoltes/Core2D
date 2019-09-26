@@ -7,7 +7,7 @@ namespace Core2D.UI.Avalonia.Dock.Tools
     /// <summary>
     /// Shape view.
     /// </summary>
-    public class ShapeTool : ToolTab
+    public class ShapeTool : Tool
     {
     }
 }

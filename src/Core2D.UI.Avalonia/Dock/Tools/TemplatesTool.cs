@@ -7,7 +7,7 @@ namespace Core2D.UI.Avalonia.Dock.Tools
     /// <summary>
     /// Templates view.
     /// </summary>
-    public class TemplatesTool : ToolTab
+    public class TemplatesTool : Tool
     {
     }
 }

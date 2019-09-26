@@ -6,6 +6,7 @@
     <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
     <EnableDefaultCompileItems>False</EnableDefaultCompileItems>
     <IsPackable>False</IsPackable>
+    <Nullable>disable</Nullable>
   </PropertyGroup>
 
   <PropertyGroup>

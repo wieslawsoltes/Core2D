@@ -7,7 +7,7 @@ namespace Core2D.UI.Avalonia.Dock.Tools
     /// <summary>
     /// Zoom view.
     /// </summary>
-    public class ZoomTool : ToolTab
+    public class ZoomTool : Tool
     {
     }
 }

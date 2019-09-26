@@ -7,7 +7,7 @@ namespace Core2D.UI.Avalonia.Dock.Tools
     /// <summary>
     /// Images view.
     /// </summary>
-    public class ImagesTool : ToolTab
+    public class ImagesTool : Tool
     {
     }
 }

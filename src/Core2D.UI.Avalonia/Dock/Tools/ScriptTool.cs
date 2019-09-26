@@ -7,7 +7,7 @@ namespace Core2D.UI.Avalonia.Dock.Tools
     /// <summary>
     /// Script view.
     /// </summary>
-    public class ScriptTool : ToolTab
+    public class ScriptTool : Tool
     {
     }
 }

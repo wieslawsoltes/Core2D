@@ -7,7 +7,7 @@ namespace Core2D.UI.Avalonia.Dock.Tools
     /// <summary>
     /// Data view.
     /// </summary>
-    public class DataTool : ToolTab
+    public class DataTool : Tool
     {
     }
 }

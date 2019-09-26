@@ -7,7 +7,7 @@ namespace Core2D.UI.Avalonia.Dock.Tools
     /// <summary>
     /// Groups view.
     /// </summary>
-    public class GroupsTool : ToolTab
+    public class GroupsTool : Tool
     {
     }
 }

@@ -4,6 +4,7 @@
     <TargetFrameworks>net461</TargetFrameworks>
     <OutputType>Library</OutputType>
     <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
+    <Nullable>disable</Nullable>
   </PropertyGroup>
 
   <PropertyGroup>
