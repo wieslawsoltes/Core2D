@@ -79,6 +79,10 @@ namespace Core2D.UI.Wpf.Dock.Factories
                 [nameof(DM.IDockWindow)] = () => _serviceProvider.GetService<DM.IHostWindow>()
             };
 
+            this.DockableLocator = new Dictionary<string, Func<DM.IDockable>>
+            {
+            };
+
             base.InitLayout(layout);
         }
     }
