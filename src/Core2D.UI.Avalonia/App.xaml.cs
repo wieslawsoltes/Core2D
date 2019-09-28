@@ -2,20 +2,20 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
 using System.Linq;
-using System.Reflection;
 using Autofac;
 using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
-using Avalonia.Platform;
 using Avalonia.ThemeManager;
-using Core2D.UI.Avalonia.Converters;
-using Core2D.UI.Avalonia.Modules;
-using Core2D.UI.Avalonia.Views;
 using Core2D.Editor;
 using Core2D.Editor.Designer;
 using Core2D.Interfaces;
-using DM=Dock.Model;
+using Core2D.UI.Avalonia.Converters;
+using Core2D.UI.Avalonia.Modules;
+using Core2D.UI.Avalonia.Views;
+using Core2D.UI.Avalonia.Windows;
+using DM = Dock.Model;
 
 namespace Core2D.UI.Avalonia
 {
@@ -74,53 +74,31 @@ namespace Core2D.UI.Avalonia
             AvaloniaXamlLoader.Load(this);
         }
 
-        /// <summary>
-        /// Initialize application about information.
-        /// </summary>
-        /// <param name="runtimeInfo">The runtime info.</param>
-        /// <param name="windowingSubsystem">The windowing subsystem.</param>
-        /// <param name="renderingSubsystem">The rendering subsystem.</param>
-        /// <returns>The about information.</returns>
-        public AboutInfo CreateAboutInfo(RuntimePlatformInfo runtimeInfo, string windowingSubsystem, string renderingSubsystem)
+        /// <inheritdoc/>
+        public override void OnFrameworkInitializationCompleted()
         {
-            return new AboutInfo()
+            if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktopLifetime)
             {
-                Title = "Core2D",
-                Version = $"{GetType().GetTypeInfo().Assembly.GetName().Version}",
-                Description = "A multi-platform data driven 2D diagram editor.",
-                Copyright = "Copyright (c) Wiesław Šoltés. All rights reserved.",
-                License = "Licensed under the MIT license. See LICENSE file in the project root for full license information.",
-                OperatingSystem = $"{runtimeInfo.OperatingSystem}",
-                IsDesktop = runtimeInfo.IsDesktop,
-                IsMobile = runtimeInfo.IsMobile,
-                IsCoreClr = runtimeInfo.IsCoreClr,
-                IsMono = runtimeInfo.IsMono,
-                IsDotNetFramework = runtimeInfo.IsDotNetFramework,
-                IsUnix = runtimeInfo.IsUnix,
-                WindowingSubsystemName = windowingSubsystem,
-                RenderingSubsystemName = renderingSubsystem
-            };
-        }
+                var builder = new ContainerBuilder();
+                builder.RegisterModule<LocatorModule>();
+                builder.RegisterModule<CoreModule>();
+                builder.RegisterModule<DependenciesModule>();
+                builder.RegisterModule<AppModule>();
+                builder.RegisterModule<ViewModule>();
 
-        /// <summary>
-        /// Initialize application context and displays main window.
-        /// </summary>
-        /// <param name="serviceProvider">The service provider.</param>
-        /// <param name="aboutInfo">The about information.</param>
-        public void Start(IServiceProvider serviceProvider, AboutInfo aboutInfo)
-        {
-            InitializeConverters(serviceProvider);
+                var container = builder.Build();
+                var serviceProvider = container.Resolve<IServiceProvider>();
 
-            Selector = ThemeSelector.Create("Themes");
-            Selector.LoadSelectedTheme("Core2D.theme");
+                InitializeConverters(serviceProvider);
 
-            var log = serviceProvider.GetService<ILog>();
-            var fileIO = serviceProvider.GetService<IFileSystem>();
+                Selector = ThemeSelector.Create("Themes");
+                Selector.LoadSelectedTheme("Core2D.theme");
 
-            log?.Initialize(System.IO.Path.Combine(fileIO?.GetBaseDirectory(), "Core2D.log"));
+                var log = serviceProvider.GetService<ILog>();
+                var fileIO = serviceProvider.GetService<IFileSystem>();
 
-            try
-            {
+                log?.Initialize(System.IO.Path.Combine(fileIO?.GetBaseDirectory(), "Core2D.log"));
+
                 var editor = serviceProvider.GetService<IProjectEditor>();
 
                 editor.LayoutPlatform.LoadLayout = () => editor.Platform.OnLoadLayout();
@@ -146,54 +124,64 @@ namespace Core2D.UI.Avalonia
                 editor.CurrentTool = editor.Tools.FirstOrDefault(t => t.Title == "Selection");
                 editor.CurrentPathTool = editor.PathTools.FirstOrDefault(t => t.Title == "Line");
                 editor.IsToolIdle = true;
-                editor.AboutInfo = aboutInfo;
 
-                var window = serviceProvider.GetService<Windows.MainWindow>();
-                window.Closing += (sender, e) =>
+                var mainWindow = serviceProvider.GetService<Windows.MainWindow>();
+
+                mainWindow.DataContext = editor;
+
+                mainWindow.Closing += (sender, e) =>
                 {
                     editor.Layout.Close();
                     editor.OnSaveLayout(layoutPath);
                     editor.OnSaveRecent(recentPath);
                     Selector.SaveSelectedTheme("Core2D.theme");
                 };
-                window.DataContext = editor;
-                window.Show();
-                Run(window);
+
+                desktopLifetime.MainWindow = mainWindow;
+
+                desktopLifetime.Exit += (sennder, e) =>
+                {
+                    log.Dispose();
+                    container.Dispose();
+                };
             }
-            catch (Exception ex)
+            else if (ApplicationLifetime is ISingleViewApplicationLifetime singleViewLifetime)
             {
-                log?.LogException(ex);
+                var builder = new ContainerBuilder();
+                builder.RegisterModule<LocatorModule>();
+                builder.RegisterModule<CoreModule>();
+                builder.RegisterModule<DependenciesModule>();
+                builder.RegisterModule<AppModule>();
+                builder.RegisterModule<ViewModule>();
+
+                var container = builder.Build(); // TODO: Dispose()
+                var serviceProvider = container.Resolve<IServiceProvider>();
+
+                InitializeConverters(serviceProvider);
+
+                var log = serviceProvider.GetService<ILog>(); // TODO: Dispose()
+                var fileIO = serviceProvider.GetService<IFileSystem>();
+
+                log?.Initialize(System.IO.Path.Combine(fileIO?.GetBaseDirectory(), "Core2D.log"));
+
+                var editor = serviceProvider.GetService<IProjectEditor>();
+
+                var dockFactory = serviceProvider.GetService<DM.IFactory>();
+                editor.Layout = editor.Layout ?? dockFactory.CreateLayout();
+                dockFactory.InitLayout(editor.Layout);
+
+                editor.CurrentTool = editor.Tools.FirstOrDefault(t => t.Title == "Selection");
+                editor.CurrentPathTool = editor.PathTools.FirstOrDefault(t => t.Title == "Line");
+                editor.IsToolIdle = true;
+
+                var mainView = new MainControl()
+                {
+                    DataContext = editor
+                };
+
+                singleViewLifetime.MainView = mainView;
             }
-        }
-
-        /// <summary>
-        /// Initialize application context and returns main view.
-        /// </summary>
-        /// <param name="serviceProvider">The service provider.</param>
-        /// <returns>The main view.</returns>
-        public UserControl CreateView(IServiceProvider serviceProvider)
-        {
-            InitializeConverters(serviceProvider);
-
-            var log = serviceProvider.GetService<ILog>();
-            var fileIO = serviceProvider.GetService<IFileSystem>();
-
-            log?.Initialize(System.IO.Path.Combine(fileIO?.GetBaseDirectory(), "Core2D.log"));
-
-            var editor = serviceProvider.GetService<IProjectEditor>();
-
-            var dockFactory = serviceProvider.GetService<DM.IFactory>();
-            editor.Layout = editor.Layout ?? dockFactory.CreateLayout();
-            dockFactory.InitLayout(editor.Layout);
-
-            editor.CurrentTool = editor.Tools.FirstOrDefault(t => t.Title == "Selection");
-            editor.CurrentPathTool = editor.PathTools.FirstOrDefault(t => t.Title == "Line");
-            editor.IsToolIdle = true;
-
-            return new MainControl()
-            {
-                DataContext = editor
-            };
+            base.OnFrameworkInitializationCompleted();
         }
     }
 }
