@@ -15,7 +15,7 @@ using Core2D.Editor;
 using Core2D.FileWriter.Emf;
 using Core2D.Interfaces;
 using Core2D.Renderer;
-using Dock.Model;
+using DM=Dock.Model;
 
 namespace Core2D.UI.Avalonia.Editor
 {
@@ -475,7 +475,7 @@ namespace Core2D.UI.Avalonia.Editor
                     var editor = _serviceProvider.GetService<IProjectEditor>();
                     editor.OnLoadLayout(path);
 
-                    var dockFactory = _serviceProvider.GetService<IDockFactory>();
+                    var dockFactory = _serviceProvider.GetService<DM.IFactory>();
                     dockFactory.InitLayout(editor.Layout);
                 }
             }
@@ -501,13 +501,13 @@ namespace Core2D.UI.Avalonia.Editor
         public void OnResetLayout()
         {
             var editor = _serviceProvider.GetService<IProjectEditor>();
-            var dockFactory = _serviceProvider.GetService<IDockFactory>();
+            var dockFactory = _serviceProvider.GetService<DM.IFactory>();
 
-            var currentViewId = editor.Layout.CurrentView.Id;
+            var currentViewId = editor.Layout.ActiveDockable.Id;
             editor.Layout = dockFactory.CreateLayout();
             dockFactory.InitLayout(editor.Layout);
 
-            var view = dockFactory.FindView(editor.Layout, (v) => v.Id == currentViewId);
+            var view = dockFactory.FindDockable(editor.Layout, (v) => v.Id == currentViewId);
             if (view != null)
             {
                 editor.Layout.Navigate(view);
