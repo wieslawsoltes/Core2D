@@ -11,6 +11,7 @@ using Dock.Avalonia;
 
 namespace Core2D.UI.Avalonia.Dock.Handlers
 {
+    /*
     /// <summary>
     /// Project editor drop handler.
     /// </summary>
@@ -86,4 +87,5 @@ namespace Core2D.UI.Avalonia.Dock.Handlers
             return false;
         }
     }
+    */
 }
