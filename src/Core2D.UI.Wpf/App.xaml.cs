@@ -8,7 +8,7 @@ using Core2D.Editor;
 using Core2D.Interfaces;
 using Core2D.UI.Wpf.Editor;
 using Core2D.UI.Wpf.Modules;
-using Dock.Model;
+using DM=Dock.Model;
 
 namespace Core2D.UI.Wpf
 {
@@ -58,7 +58,7 @@ namespace Core2D.UI.Wpf
             {
                 var editor = serviceProvider.GetService<IProjectEditor>();
 
-                var dockFactory = serviceProvider.GetService<IDockFactory>();
+                var dockFactory = serviceProvider.GetService<DM.IFactory>();
                 editor.Layout = editor.Layout ?? dockFactory.CreateLayout();
                 dockFactory.InitLayout(editor.Layout);
 
