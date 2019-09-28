@@ -5,6 +5,7 @@ using Dock.Avalonia;
 
 namespace Core2D.UI.Avalonia.Dock.Handlers
 {
+    /*
     /// <summary>
     /// Tree view drop handler.
     /// </summary>
@@ -13,7 +14,6 @@ namespace Core2D.UI.Avalonia.Dock.Handlers
         public static IDropHandler Instance = new TreeViewDropHandler();
 
         // FIXME:
-        /*
         private bool ValidateTreeView(IProjectEditor editor, DragEventArgs e, bool bExecute, TreeView tree)
         {
             var sourceItem = e.Data.Get(DragDataFormats.Parent);
@@ -188,7 +188,6 @@ namespace Core2D.UI.Avalonia.Dock.Handlers
 
             return false;
         }
-        */
 
         /// <inheritdoc/>
         public override bool Validate(object sender, DragEventArgs e, object sourceContext, object targetContext, object state)
@@ -212,4 +211,5 @@ namespace Core2D.UI.Avalonia.Dock.Handlers
             return false;
         }
     }
+    */
 }
