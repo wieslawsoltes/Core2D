@@ -2,20 +2,19 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using Core2D.UI.Avalonia.Dock.Views;
 using Core2D.UI.Avalonia.Dock.Documents;
 using Core2D.UI.Avalonia.Dock.Tools;
 using Core2D.Editor;
-using Dock.Model;
-using Dock.Model.Controls;
+using DM = Dock.Model;
+using DMC = Dock.Model.Controls;
 
 namespace Core2D.UI.Avalonia.Dock.Factories
 {
     /// <summary>
     /// Editor dock factory.
     /// </summary>
-    public class EditorDockFactory : DockFactory
+    public class EditorDockFactory : DM.Factory
     {
         private readonly IServiceProvider _serviceProvider;
 
@@ -29,7 +28,7 @@ namespace Core2D.UI.Avalonia.Dock.Factories
         }
 
         /// <inheritdoc/>
-        public override IDock CreateLayout()
+        public override DM.IDock CreateLayout()
         {
             // Documents
 
@@ -145,134 +144,134 @@ namespace Core2D.UI.Avalonia.Dock.Factories
 
             // Panes
 
-            var leftPane = new LayoutDock
+            var leftPane = new DMC.ProportionalDock
             {
-                Id = nameof(ILayoutDock),
+                Id = nameof(DMC.IProportionalDock),
                 Title = "EditorLeft",
-                Orientation = Orientation.Vertical,
+                Orientation = DM.Orientation.Vertical,
                 Proportion = 0.17,
-                CurrentView = null,
-                Views = new ObservableCollection<IView>
-                {
-                    new ToolDock
+                ActiveDockable = null,
+                VisibleDockables = CreateList<DM.IDockable>
+                (
+                    new DMC.ToolDock
                     {
-                        Id = nameof(IToolDock),
+                        Id = nameof(DMC.IToolDock),
                         Title = "EditorLeftTop",
                         Proportion = double.NaN,
-                        CurrentView = projectTool,
-                        Views = new ObservableCollection<IView>
-                        {
+                        ActiveDockable = projectTool,
+                        VisibleDockables = CreateList<DM.IDockable>
+                        (
                             projectTool,
                             optionsTool,
                             imagesTool
-                        }
+                        )
                     },
-                    new SplitterDock()
+                    new DMC.SplitterDock()
                     {
-                        Id = nameof(ISplitterDock),
+                        Id = nameof(DMC.ISplitterDock),
                         Title = "LeftTopSplitter"
                     },
-                    new ToolDock
+                    new DMC.ToolDock
                     {
-                        Id = nameof(IToolDock),
+                        Id = nameof(DMC.IToolDock),
                         Title = "EditorLeftBottom",
                         Proportion = double.NaN,
-                        CurrentView = groupsTool,
-                        Views = new ObservableCollection<IView>
-                        {
+                        ActiveDockable = groupsTool,
+                        VisibleDockables = CreateList<DM.IDockable>
+                        (
                             groupsTool,
                             databasesTool
-                        }
+                        )
                     }
-                }
+                )
             };
 
-            var rightPane = new LayoutDock
+            var rightPane = new DMC.ProportionalDock
             {
-                Id = nameof(ILayoutDock),
+                Id = nameof(DMC.IProportionalDock),
                 Title = "EditorRight",
-                Orientation = Orientation.Vertical,
+                Orientation = DM.Orientation.Vertical,
                 Proportion = 0.17,
-                CurrentView = null,
-                Views = new ObservableCollection<IView>
-                {
-                    new ToolDock
+                ActiveDockable = null,
+                VisibleDockables = CreateList<DM.IDockable>
+                (
+                    new DMC.ToolDock
                     {
-                        Id = nameof(IToolDock),
+                        Id = nameof(DMC.IToolDock),
                         Title = "EditorRightTop",
                         Proportion = double.NaN,
-                        CurrentView = stylesTool,
-                        Views = new ObservableCollection<IView>
-                        {
+                        ActiveDockable = stylesTool,
+                        VisibleDockables = CreateList<DM.IDockable>
+                        (
                             stylesTool,
                             templatesTool,
                             containerTool,
                             zoomTool
-                        }
+                        )
                     },
-                    new SplitterDock()
+                    new DMC.SplitterDock()
                     {
-                        Id = nameof(ISplitterDock),
+                        Id = nameof(DMC.ISplitterDock),
                         Title = "RightTopSplitter"
                     },
-                    new ToolDock
+                    new DMC.ToolDock
                     {
-                        Id = nameof(IToolDock),
+                        Id = nameof(DMC.IToolDock),
                         Title = "EditorRightBottom",
                         Proportion = double.NaN,
-                        CurrentView = shapeTool,
-                        Views = new ObservableCollection<IView>
-                        {
+                        ActiveDockable = shapeTool,
+                        VisibleDockables = CreateList<DM.IDockable>
+                        (
                             shapeTool,
                             toolsTool,
                             dataTool,
                             styleTool,
                             templateTool
-                        }
+                        )
                     }
-                }
+                )
             };
 
-            var documentsPane = new DocumentDock
+            var documentsPane = new DMC.DocumentDock
             {
-                Id = nameof(IDocumentDock),
+                Id = nameof(DMC.IDocumentDock),
                 Title = "DocumentsPane",
                 Proportion = double.NaN,
-                CurrentView = pageDocument,
-                Views = new ObservableCollection<IView>
-                {
+                ActiveDockable = pageDocument,
+                VisibleDockables = CreateList<DM.IDockable>
+                (
                     pageDocument,
                     documentTool,
                     scriptTool,
                     browserTool
-                }
+                )
             };
 
             // Editor
 
-            var editorLayout = new LayoutDock
+            var editorLayout = new DMC.ProportionalDock
             {
-                Id = nameof(ILayoutDock),
+                Id = nameof(DMC.IProportionalDock),
                 Title = "EditorLayout",
-                Orientation = Orientation.Horizontal,
+                Orientation = DM.Orientation.Horizontal,
                 Proportion = double.NaN,
-                CurrentView = null,
-                Views = new ObservableCollection<IView>
-                {
+                ActiveDockable = null,
+                VisibleDockables = CreateList<DM.IDockable>
+                (
                     leftPane,
-                    new SplitterDock()
+                    new DMC.SplitterDock()
                     {
-                        Id = nameof(ISplitterDock),
+                        Id = nameof(DMC.ISplitterDock),
                         Title = "LeftSplitter"
                     },
                     documentsPane,
-                    new SplitterDock()
+                    new DMC.SplitterDock()
                     {
-                        Id = nameof(ISplitterDock),
+                        Id = nameof(DMC.ISplitterDock),
                         Title = "RightSplitter"
                     },
                     rightPane
-                }
+                )
             };
 
             // Views
@@ -281,11 +280,11 @@ namespace Core2D.UI.Avalonia.Dock.Factories
             {
                 Id = nameof(EditorView),
                 Title = "Editor",
-                CurrentView = editorLayout,
-                Views = new ObservableCollection<IView>
-                {
+                ActiveDockable = editorLayout,
+                VisibleDockables = CreateList<DM.IDockable>
+                (
                    editorLayout
-                }
+                )
             };
 
             var aboutView = new AboutView
@@ -320,40 +319,41 @@ namespace Core2D.UI.Avalonia.Dock.Factories
 
             // Root
 
-            var layout = new RootDock
+            var layout = new DMC.RootDock
             {
-                Id = nameof(IRootDock),
+                Id = nameof(DMC.IRootDock),
                 Title = "Root",
-                CurrentView = dashboardView,
-                DefaultView = dashboardView,
-                Views = new ObservableCollection<IView>
-                {
+                ActiveDockable = dashboardView,
+                DefaultDockable = dashboardView,
+                VisibleDockables = CreateList<DM.IDockable>
+                (
                     dashboardView,
                     editorView,
                     aboutView,
                     browserView,
                     scriptView,
                     documentView
-                }
+                )
             };
 
             return layout;
         }
 
         /// <inheritdoc/>
-        public override void InitLayout(IView layout)
+        public override void InitLayout(DM.IDockable layout)
         {
             ContextLocator = new Dictionary<string, Func<object>>
             {
                 // Defaults
-                [nameof(IRootDock)] = () => _serviceProvider.GetService<IProjectEditor>(),
-                [nameof(ILayoutDock)] = () => _serviceProvider.GetService<IProjectEditor>(),
-                [nameof(IDocumentDock)] = () => _serviceProvider.GetService<IProjectEditor>(),
-                [nameof(IToolDock)] = () => _serviceProvider.GetService<IProjectEditor>(),
-                [nameof(ISplitterDock)] = () => _serviceProvider.GetService<IProjectEditor>(),
-                [nameof(IDockWindow)] = () => _serviceProvider.GetService<IProjectEditor>(),
-                [nameof(IDocumentTab)] = () => _serviceProvider.GetService<IProjectEditor>(),
-                [nameof(IToolTab)] = () => _serviceProvider.GetService<IProjectEditor>(),
+                [nameof(DMC.IRootDock)] = () => _serviceProvider.GetService<IProjectEditor>(),
+                [nameof(DMC.IPinDock)] = () => _serviceProvider.GetService<IProjectEditor>(),
+                [nameof(DMC.IProportionalDock)] = () => _serviceProvider.GetService<IProjectEditor>(),
+                [nameof(DMC.IDocumentDock)] = () => _serviceProvider.GetService<IProjectEditor>(),
+                [nameof(DMC.IToolDock)] = () => _serviceProvider.GetService<IProjectEditor>(),
+                [nameof(DMC.ISplitterDock)] = () => _serviceProvider.GetService<IProjectEditor>(),
+                [nameof(DM.IDockWindow)] = () => _serviceProvider.GetService<IProjectEditor>(),
+                [nameof(DMC.IDocument)] = () => _serviceProvider.GetService<IProjectEditor>(),
+                [nameof(DMC.ITool)] = () => _serviceProvider.GetService<IProjectEditor>(),
                 // Documents
                 [nameof(PageDocument)] = () => _serviceProvider.GetService<IProjectEditor>(),
                 // Tools
@@ -383,9 +383,9 @@ namespace Core2D.UI.Avalonia.Dock.Factories
                 [nameof(DashboardView)] = () => _serviceProvider.GetService<IProjectEditor>()
             };
 
-            HostLocator = new Dictionary<string, Func<IDockHost>>
+            this.HostWindowLocator = new Dictionary<string, Func<DM.IHostWindow>>
             {
-                [nameof(IDockWindow)] = () => _serviceProvider.GetService<IDockHost>()
+                [nameof(DM.IDockWindow)] = () => _serviceProvider.GetService<DM.IHostWindow>()
             };
 
             base.InitLayout(layout);

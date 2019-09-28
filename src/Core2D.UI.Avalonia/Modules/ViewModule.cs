@@ -6,8 +6,8 @@ using Avalonia.Data;
 using Autofac;
 using Core2D.UI.Avalonia.Dock.Factories;
 using Core2D.UI.Avalonia.Windows;
-using Dock.Avalonia.Controls;
-using Dock.Model;
+using DM=Dock.Model;
+using DAC=Dock.Avalonia.Controls;
 
 namespace Core2D.UI.Avalonia.Modules
 {
@@ -19,20 +19,9 @@ namespace Core2D.UI.Avalonia.Modules
         /// <inheritdoc/>
         protected override void Load(ContainerBuilder builder)
         {
-            builder.RegisterAssemblyTypes(typeof(App).GetTypeInfo().Assembly).As<IDock>().InstancePerLifetimeScope();
-            builder.RegisterType<EditorDockFactory>().As<IDockFactory>().InstancePerDependency();
-            builder.Register(c =>
-            {
-                var hostWindow = new HostWindow()
-                {
-                    [!HostWindow.TitleProperty] = new Binding("CurrentView.Title")
-                };
-                hostWindow.Content = new DockControl()
-                {
-                    [!DockControl.LayoutProperty] = hostWindow[!HostWindow.DataContextProperty]
-                };
-                return hostWindow;
-            }).As<IDockHost>().InstancePerDependency();
+            builder.RegisterAssemblyTypes(typeof(App).GetTypeInfo().Assembly).As<DM.IDock>().InstancePerLifetimeScope();
+            builder.RegisterType<EditorDockFactory>().As<DM.IFactory>().InstancePerDependency();
+            builder.Register(c => new DAC.HostWindow()).As<DM.IHostWindow>().InstancePerDependency();
             builder.RegisterType<MainWindow>().As<MainWindow>().InstancePerLifetimeScope();
         }
     }
