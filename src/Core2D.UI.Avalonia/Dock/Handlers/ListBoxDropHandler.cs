@@ -10,6 +10,7 @@ using Dock.Avalonia;
 
 namespace Core2D.UI.Avalonia.Dock.Handlers
 {
+    /*
     /// <summary>
     /// List box drop handler.
     /// </summary>
@@ -83,4 +84,5 @@ namespace Core2D.UI.Avalonia.Dock.Handlers
             return Validate(sender, e, sourceContext, targetContext, state, true);
         }
     }
+    */
 }
