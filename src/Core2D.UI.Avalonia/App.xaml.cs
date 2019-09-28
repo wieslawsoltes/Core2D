@@ -15,7 +15,7 @@ using Core2D.UI.Avalonia.Views;
 using Core2D.Editor;
 using Core2D.Editor.Designer;
 using Core2D.Interfaces;
-using Dock.Model;
+using DM=Dock.Model;
 
 namespace Core2D.UI.Avalonia
 {
@@ -133,7 +133,7 @@ namespace Core2D.UI.Avalonia
                     editor.OnLoadLayout(layoutPath);
                 }
 
-                var dockFactory = serviceProvider.GetService<IDockFactory>();
+                var dockFactory = serviceProvider.GetService<DM.IFactory>();
                 editor.Layout = editor.Layout ?? dockFactory.CreateLayout();
                 dockFactory.InitLayout(editor.Layout);
 
@@ -182,7 +182,7 @@ namespace Core2D.UI.Avalonia
 
             var editor = serviceProvider.GetService<IProjectEditor>();
 
-            var dockFactory = serviceProvider.GetService<IDockFactory>();
+            var dockFactory = serviceProvider.GetService<DM.IFactory>();
             editor.Layout = editor.Layout ?? dockFactory.CreateLayout();
             dockFactory.InitLayout(editor.Layout);
 
