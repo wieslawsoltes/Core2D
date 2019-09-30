@@ -61,12 +61,11 @@
   <Import Project="..\..\build\Avalonia.PanAndZoom.props" />
   <Import Project="..\..\build\Avalonia.ThemeManager.props" />
   <Import Project="..\..\build\SkiaSharp.props" />
-  <Import Project="..\..\build\SharpDX.props" Condition="'$(CoreRT)' == 'False'" />
+  <Import Project="..\..\build\SharpDX.props" />
   <Import Project="..\..\build\Dock.Model.props" />
   <Import Project="..\..\build\Dock.Avalonia.props" />
   <Import Project="..\..\build\ReactiveUI.props" />
   <Import Project="..\..\build\System.Drawing.Common.props" />
-  <!--<Import Project="..\..\build\Linker.props" Condition="'$(CoreRT)' == 'False'" />-->
 
   <ItemGroup>
     <Compile Include="**\*.cs" Exclude="obj\**" />
