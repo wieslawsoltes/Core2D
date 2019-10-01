@@ -580,7 +580,7 @@
         <converters:TreeViewSelectedItemToObjectConverter x:Key="TreeViewSelectedItemToObjectConverter"/>
     </Application.Resources>
     <Application.DataTemplates>
-        <local:ViewLocator/>
+        <!--<local:ViewLocator/>-->
         <!-- Editor -->
         <DataTemplate DataType="Editor:IProjectEditor">
             <Grid/>
