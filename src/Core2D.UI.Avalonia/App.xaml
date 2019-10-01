@@ -5,6 +5,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:Core2D.UI.Avalonia"
              xmlns:converters="clr-namespace:Core2D.UI.Avalonia.Converters;assembly=Core2D.UI.Avalonia"
              xmlns:DataCore="clr-namespace:Core2D.Data;assembly=Core2D.Model"
              xmlns:Dock="clr-namespace:Dock.Model;assembly=Dock.Model"
@@ -579,6 +580,7 @@
         <converters:TreeViewSelectedItemToObjectConverter x:Key="TreeViewSelectedItemToObjectConverter"/>
     </Application.Resources>
     <Application.DataTemplates>
+        <local:ViewLocator/>
         <!-- Editor -->
         <DataTemplate DataType="Editor:IProjectEditor">
             <Grid/>
