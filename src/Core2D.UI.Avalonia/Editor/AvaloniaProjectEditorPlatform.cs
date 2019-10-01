@@ -503,14 +503,14 @@ namespace Core2D.UI.Avalonia.Editor
             var editor = _serviceProvider.GetService<IProjectEditor>();
             var dockFactory = _serviceProvider.GetService<DM.IFactory>();
 
-            var currentViewId = editor.Layout.ActiveDockable.Id;
+            var activeDockableId = editor.Layout.ActiveDockable.Id;
             editor.Layout = dockFactory.CreateLayout();
             dockFactory.InitLayout(editor.Layout);
 
-            var view = dockFactory.FindDockable(editor.Layout, (v) => v.Id == currentViewId);
-            if (view != null)
+            var dockable = dockFactory.FindDockable(editor.Layout, (v) => v.Id == activeDockableId);
+            if (dockable != null)
             {
-                editor.Layout.Navigate(view);
+                editor.Layout.Navigate(dockable);
             }
         }
     }

@@ -11,6 +11,6 @@
              d:DataContext="{x:Static Designer:DesignerContext.Editor}"
              d:DesignWidth="1200" d:DesignHeight="540">
     <Grid ColumnDefinitions="*" RowDefinitions="*">
-        <ContentControl Content="{Binding CurrentView}" Grid.Column="0" Grid.Row="0"/>
+        <ContentControl Content="{Binding ActiveDockable}" Grid.Column="0" Grid.Row="0"/>
     </Grid>
 </UserControl>
