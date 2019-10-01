@@ -236,6 +236,7 @@ namespace Core2D.UI.Avalonia.Dock.Factories
             {
                 Id = nameof(DMC.IDocumentDock),
                 Title = "DocumentsPane",
+                IsCollapsable = false,
                 Proportion = double.NaN,
                 ActiveDockable = pageDocument,
                 VisibleDockables = CreateList<DM.IDockable>
@@ -319,10 +320,11 @@ namespace Core2D.UI.Avalonia.Dock.Factories
 
             // Root
 
-            var layout = new DMC.RootDock
+            var root = new DMC.RootDock
             {
                 Id = nameof(DMC.IRootDock),
                 Title = "Root",
+                IsCollapsable = false,
                 ActiveDockable = dashboardView,
                 DefaultDockable = dashboardView,
                 VisibleDockables = CreateList<DM.IDockable>
@@ -336,7 +338,16 @@ namespace Core2D.UI.Avalonia.Dock.Factories
                 )
             };
 
-            return layout;
+            root.Top = CreatePinDock();
+            root.Top.Alignment = DM.Alignment.Top;
+            root.Bottom = CreatePinDock();
+            root.Bottom.Alignment = DM.Alignment.Bottom;
+            root.Left = CreatePinDock();
+            root.Left.Alignment = DM.Alignment.Left;
+            root.Right = CreatePinDock();
+            root.Right.Alignment = DM.Alignment.Right;
+
+            return root;
         }
 
         /// <inheritdoc/>
