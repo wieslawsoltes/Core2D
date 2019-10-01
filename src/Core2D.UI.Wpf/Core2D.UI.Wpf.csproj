@@ -23,7 +23,6 @@
 
   <Import Project="..\..\build\Base.props" />
   <Import Project="..\..\build\Autofac.props" />
-  <Import Project="..\..\build\Rx.props" />
   <Import Project="..\..\build\Dock.Model.props" />
   <Import Project="..\..\build\SkiaSharp.props" />
   <Import Project="..\..\build\WPF.props" />

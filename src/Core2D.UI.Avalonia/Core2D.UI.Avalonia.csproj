@@ -52,7 +52,6 @@
   <Import Project="..\..\build\ReferenceAssemblies.props" />
   <Import Project="..\..\build\ILCompiler.props" Condition="'$(CoreRT)' == 'True'" />
   <Import Project="..\..\build\Autofac.props" />
-  <Import Project="..\..\build\Rx.props" />
   <Import Project="..\..\build\Avalonia.props" />
   <Import Project="..\..\build\Avalonia.Desktop.props" />
   <Import Project="..\..\build\Avalonia.ReactiveUI.props" />
@@ -61,7 +60,6 @@
   <Import Project="..\..\build\Avalonia.PanAndZoom.props" />
   <Import Project="..\..\build\Avalonia.ThemeManager.props" />
   <Import Project="..\..\build\SkiaSharp.props" />
-  <Import Project="..\..\build\SharpDX.props" />
   <Import Project="..\..\build\Dock.Model.props" />
   <Import Project="..\..\build\Dock.Avalonia.props" />
   <Import Project="..\..\build\ReactiveUI.props" />

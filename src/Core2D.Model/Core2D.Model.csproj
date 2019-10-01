@@ -14,7 +14,7 @@
 
   <Import Project="..\..\build\Base.props" />
   <Import Project="..\..\build\ReferenceAssemblies.props" />
-  <Import Project="..\..\build\Rx.props" />
+
   <ItemGroup>
     <ProjectReference Include="..\Core2D.Base\Core2D.Base.csproj" />
   </ItemGroup>
