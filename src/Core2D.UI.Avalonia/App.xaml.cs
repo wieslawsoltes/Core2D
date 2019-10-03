@@ -14,7 +14,6 @@ using Core2D.Interfaces;
 using Core2D.UI.Avalonia.Converters;
 using Core2D.UI.Avalonia.Modules;
 using Core2D.UI.Avalonia.Views;
-using Core2D.UI.Avalonia.Windows;
 using DM=Dock.Model;
 
 namespace Core2D.UI.Avalonia
