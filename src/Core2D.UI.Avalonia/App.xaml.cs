@@ -154,6 +154,11 @@ namespace Core2D.UI.Avalonia
                 editor.CurrentPathTool = editor.PathTools.FirstOrDefault(t => t.Title == "Line");
                 editor.IsToolIdle = true;
 
+                var runtimeInfo = AvaloniaLocator.Current.GetService<IRuntimePlatform>().GetRuntimeInfo();
+                var windowingSubsystemName = AvaloniaLocator.Current.GetService<IWindowingPlatform>().GetType().Name;
+                var renderingSubsystemName = AvaloniaLocator.Current.GetService<IPlatformRenderInterface>().GetType().Name;
+                var aboutInfo = CreateAboutInfo(runtimeInfo, windowingSubsystemName, renderingSubsystemName);
+                editor.AboutInfo = aboutInfo;
                 var mainWindow = serviceProvider.GetService<Windows.MainWindow>();
 
                 mainWindow.DataContext = editor;
