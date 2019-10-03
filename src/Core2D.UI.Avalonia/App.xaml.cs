@@ -2,11 +2,13 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
 using System.Linq;
+using System.Reflection;
 using Autofac;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
+using Avalonia.Platform;
 using Avalonia.ThemeManager;
 using Core2D.Editor;
 using Core2D.Editor.Designer;
@@ -65,6 +67,34 @@ namespace Core2D.UI.Avalonia
         {
             ObjectToXamlStringConverter.XamlSerializer = serviceProvider.GetServiceLazily<IXamlSerializer>();
             ObjectToJsonStringConverter.JsonSerializer = serviceProvider.GetServiceLazily<IJsonSerializer>();
+        }
+
+        /// <summary>
+        /// Initialize application about information.
+        /// </summary>
+        /// <param name="runtimeInfo">The runtime info.</param>
+        /// <param name="windowingSubsystem">The windowing subsystem.</param>
+        /// <param name="renderingSubsystem">The rendering subsystem.</param>
+        /// <returns>The about information.</returns>
+        public AboutInfo CreateAboutInfo(RuntimePlatformInfo runtimeInfo, string windowingSubsystem, string renderingSubsystem)
+        {
+            return new AboutInfo()
+            {
+                Title = "Core2D",
+                Version = $"{GetType().GetTypeInfo().Assembly.GetName().Version}",
+                Description = "A multi-platform data driven 2D diagram editor.",
+                Copyright = "Copyright (c) Wiesław Šoltés. All rights reserved.",
+                License = "Licensed under the MIT license. See LICENSE file in the project root for full license information.",
+                OperatingSystem = $"{runtimeInfo.OperatingSystem}",
+                IsDesktop = runtimeInfo.IsDesktop,
+                IsMobile = runtimeInfo.IsMobile,
+                IsCoreClr = runtimeInfo.IsCoreClr,
+                IsMono = runtimeInfo.IsMono,
+                IsDotNetFramework = runtimeInfo.IsDotNetFramework,
+                IsUnix = runtimeInfo.IsUnix,
+                WindowingSubsystemName = windowingSubsystem,
+                RenderingSubsystemName = renderingSubsystem
+            };
         }
 
         /// <inheritdoc/>
