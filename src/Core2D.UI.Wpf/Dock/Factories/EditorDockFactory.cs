@@ -4,8 +4,8 @@ using System;
 using System.Collections.Generic;
 using Core2D.Editor;
 using Core2D.UI.Wpf.Dock.Views;
-using DM = Dock.Model;
-using DMC = Dock.Model.Controls;
+using DM=Dock.Model;
+using DMC=Dock.Model.Controls;
 
 namespace Core2D.UI.Wpf.Dock.Factories
 {

@@ -6,8 +6,8 @@ using Core2D.UI.Avalonia.Dock.Views;
 using Core2D.UI.Avalonia.Dock.Documents;
 using Core2D.UI.Avalonia.Dock.Tools;
 using Core2D.Editor;
-using DM = Dock.Model;
-using DMC = Dock.Model.Controls;
+using DM=Dock.Model;
+using DMC=Dock.Model.Controls;
 
 namespace Core2D.UI.Avalonia.Dock.Factories
 {

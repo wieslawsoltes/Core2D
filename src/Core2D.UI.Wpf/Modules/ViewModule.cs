@@ -5,7 +5,7 @@ using System.Reflection;
 using Autofac;
 using Core2D.UI.Wpf.Dock.Factories;
 using Core2D.UI.Wpf.Windows;
-using DM = Dock.Model;
+using DM=Dock.Model;
 
 namespace Core2D.UI.Wpf.Modules
 {
