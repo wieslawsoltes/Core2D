@@ -159,6 +159,7 @@ namespace Core2D.UI.Avalonia
                 var renderingSubsystemName = AvaloniaLocator.Current.GetService<IPlatformRenderInterface>().GetType().Name;
                 var aboutInfo = CreateAboutInfo(runtimeInfo, windowingSubsystemName, renderingSubsystemName);
                 editor.AboutInfo = aboutInfo;
+
                 var mainWindow = serviceProvider.GetService<Windows.MainWindow>();
 
                 mainWindow.DataContext = editor;
