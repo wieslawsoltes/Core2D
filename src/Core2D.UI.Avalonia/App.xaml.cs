@@ -155,8 +155,10 @@ namespace Core2D.UI.Avalonia
                 editor.IsToolIdle = true;
 
                 var runtimeInfo = AvaloniaLocator.Current.GetService<IRuntimePlatform>().GetRuntimeInfo();
-                var windowingSubsystemName = AvaloniaLocator.Current.GetService<IWindowingPlatform>().GetType().Name;
-                var renderingSubsystemName = AvaloniaLocator.Current.GetService<IPlatformRenderInterface>().GetType().Name;
+                var windowingPlatform = AvaloniaLocator.Current.GetService<IWindowingPlatform>();
+                var platformRenderInterface = AvaloniaLocator.Current.GetService<IPlatformRenderInterface>();
+                var windowingSubsystemName = windowingPlatform.GetType().Name;
+                var renderingSubsystemName = platformRenderInterface.GetType().Name;
                 var aboutInfo = CreateAboutInfo(runtimeInfo, windowingSubsystemName, renderingSubsystemName);
                 editor.AboutInfo = aboutInfo;
 
