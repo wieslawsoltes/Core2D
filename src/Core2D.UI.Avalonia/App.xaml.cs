@@ -69,6 +69,12 @@ namespace Core2D.UI.Avalonia
             ObjectToJsonStringConverter.JsonSerializer = serviceProvider.GetServiceLazily<IJsonSerializer>();
         }
 
+        /// <inheritdoc/>
+        public override void Initialize()
+        {
+            AvaloniaXamlLoader.Load(this);
+        }
+
         /// <summary>
         /// Initialize application about information.
         /// </summary>
@@ -95,12 +101,6 @@ namespace Core2D.UI.Avalonia
                 WindowingSubsystemName = windowingSubsystem,
                 RenderingSubsystemName = renderingSubsystem
             };
-        }
-
-        /// <inheritdoc/>
-        public override void Initialize()
-        {
-            AvaloniaXamlLoader.Load(this);
         }
 
         /// <inheritdoc/>
