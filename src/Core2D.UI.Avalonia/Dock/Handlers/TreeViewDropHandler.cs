@@ -189,7 +189,6 @@ namespace Core2D.UI.Avalonia.Dock.Handlers
             return false;
         }
         */
-
         /// <inheritdoc/>
         public override bool Validate(object sender, DragEventArgs e, object sourceContext, object targetContext, object state)
         {

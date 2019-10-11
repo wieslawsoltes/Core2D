@@ -44,7 +44,7 @@
         <KeyBinding Command="{x:Static editor:ProjectEditorCommands.GroupCommand}" Gesture="Ctrl+G"/>
         <KeyBinding Command="{x:Static editor:ProjectEditorCommands.UngroupCommand}" Gesture="Ctrl+U"/>
     </Window.InputBindings>
-    <ContentControl Content="{Binding Layout.CurrentView, Mode=TwoWay}">
+    <ContentControl Content="{Binding Layout.ActiveDockable, Mode=TwoWay}">
         <ContentControl.Resources>
             <DataTemplate DataType="{x:Type Views:DashboardView}">
                 <Grid FocusVisualStyle="{x:Null}" DataContext="{Binding Context}">

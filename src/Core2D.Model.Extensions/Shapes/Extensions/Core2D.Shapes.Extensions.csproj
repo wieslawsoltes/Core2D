@@ -5,10 +5,11 @@
     <OutputType>Library</OutputType>
     <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
     <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\$(AssemblyName).xml</DocumentationFile>
+    <Nullable>disable</Nullable>
   </PropertyGroup>
 
   <Import Project="..\..\build\Base.props" />
-  <Import Project="..\..\build\Rx.props" />
+
   <ItemGroup>
     <ProjectReference Include="..\Core2D.Model\Core2D.Model.csproj" />
   </ItemGroup>

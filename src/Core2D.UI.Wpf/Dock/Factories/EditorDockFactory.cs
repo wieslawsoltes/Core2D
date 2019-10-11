@@ -2,18 +2,17 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using Core2D.Editor;
 using Core2D.UI.Wpf.Dock.Views;
-using Dock.Model;
-using Dock.Model.Controls;
+using DM=Dock.Model;
+using DMC=Dock.Model.Controls;
 
 namespace Core2D.UI.Wpf.Dock.Factories
 {
     /// <summary>
     /// Editor dock factory.
     /// </summary>
-    public class EditorDockFactory : DockFactory
+    public class EditorDockFactory : DM.Factory
     {
         private readonly IServiceProvider _serviceProvider;
 
@@ -27,7 +26,7 @@ namespace Core2D.UI.Wpf.Dock.Factories
         }
 
         /// <inheritdoc/>
-        public override IDock CreateLayout()
+        public override DM.IDock CreateLayout()
         {
             var editorView = new EditorView
             {
@@ -41,42 +40,47 @@ namespace Core2D.UI.Wpf.Dock.Factories
                 Title = "Dashboard"
             };
 
-            var layout = new RootDock
+            var layout = new DMC.RootDock
             {
-                Id = nameof(IRootDock),
+                Id = nameof(DMC.IRootDock),
                 Title = "Root",
-                CurrentView = dashboardView,
-                DefaultView = dashboardView,
-                Views = new ObservableCollection<IView>
-                {
+                ActiveDockable = dashboardView,
+                DefaultDockable = dashboardView,
+                VisibleDockables = CreateList<DM.IDockable>
+                (
                     dashboardView,
                     editorView
-                }
+                )
             };
 
             return layout;
         }
 
         /// <inheritdoc/>
-        public override void InitLayout(IView layout)
+        public override void InitLayout(DM.IDockable layout)
         {
             ContextLocator = new Dictionary<string, Func<object>>
             {
-                [nameof(IRootDock)] = () => _serviceProvider.GetService<IProjectEditor>(),
-                [nameof(ILayoutDock)] = () => _serviceProvider.GetService<IProjectEditor>(),
-                [nameof(IDocumentDock)] = () => _serviceProvider.GetService<IProjectEditor>(),
-                [nameof(IToolDock)] = () => _serviceProvider.GetService<IProjectEditor>(),
-                [nameof(ISplitterDock)] = () => _serviceProvider.GetService<IProjectEditor>(),
-                [nameof(IDockWindow)] = () => _serviceProvider.GetService<IProjectEditor>(),
-                [nameof(IDocumentTab)] = () => _serviceProvider.GetService<IProjectEditor>(),
-                [nameof(IToolTab)] = () => _serviceProvider.GetService<IProjectEditor>(),
+                [nameof(DMC.IRootDock)] = () => _serviceProvider.GetService<IProjectEditor>(),
+                [nameof(DMC.IPinDock)] = () => _serviceProvider.GetService<IProjectEditor>(),
+                [nameof(DMC.IProportionalDock)] = () => _serviceProvider.GetService<IProjectEditor>(),
+                [nameof(DMC.IDocumentDock)] = () => _serviceProvider.GetService<IProjectEditor>(),
+                [nameof(DMC.IToolDock)] = () => _serviceProvider.GetService<IProjectEditor>(),
+                [nameof(DMC.ISplitterDock)] = () => _serviceProvider.GetService<IProjectEditor>(),
+                [nameof(DM.IDockWindow)] = () => _serviceProvider.GetService<IProjectEditor>(),
+                [nameof(DMC.IDocument)] = () => _serviceProvider.GetService<IProjectEditor>(),
+                [nameof(DMC.ITool)] = () => _serviceProvider.GetService<IProjectEditor>(),
                 [nameof(EditorView)] = () => _serviceProvider.GetService<IProjectEditor>(),
                 [nameof(DashboardView)] = () => _serviceProvider.GetService<IProjectEditor>()
             };
 
-            HostLocator = new Dictionary<string, Func<IDockHost>>
+            this.HostWindowLocator = new Dictionary<string, Func<DM.IHostWindow>>
             {
-                [nameof(IDockWindow)] = () => _serviceProvider.GetService<IDockHost>()
+                [nameof(DM.IDockWindow)] = () => _serviceProvider.GetService<DM.IHostWindow>()
+            };
+
+            this.DockableLocator = new Dictionary<string, Func<DM.IDockable>>
+            {
             };
 
             base.InitLayout(layout);

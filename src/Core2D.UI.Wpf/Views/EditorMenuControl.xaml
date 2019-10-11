@@ -93,7 +93,7 @@
             <Separator/>
             <MenuItem Header="_AutoFit Zoom" Command="{x:Static editor:ProjectEditorCommands.ZoomAutoFitCommand}" InputGestureText="X"/>
             <Separator/>
-            <MenuItem Header="_Views" Tag="{Binding Layout}" ItemsSource="{Binding Layout.Views}">
+            <MenuItem Header="_Views" Tag="{Binding Layout}" ItemsSource="{Binding Layout.VisibleDockables}">
                 <MenuItem.ItemContainerStyle>
                     <Style TargetType="MenuItem">
                         <Setter Property="Header" Value="{Binding Title}"/>
@@ -105,7 +105,7 @@
                             <DataTrigger Value="True">
                                 <DataTrigger.Binding>
                                     <MultiBinding Converter="{StaticResource ObjectEqualityConverter}">
-                                        <Binding Path="Tag.CurrentView" RelativeSource="{RelativeSource FindAncestor, AncestorType={x:Type MenuItem}}"/>
+                                        <Binding Path="Tag.ActiveDockable" RelativeSource="{RelativeSource FindAncestor, AncestorType={x:Type MenuItem}}"/>
                                         <Binding Path="DataContext" RelativeSource="{RelativeSource Self}"/>
                                     </MultiBinding>
                                 </DataTrigger.Binding>

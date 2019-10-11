@@ -5,6 +5,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:Core2D.UI.Avalonia"
              xmlns:converters="clr-namespace:Core2D.UI.Avalonia.Converters;assembly=Core2D.UI.Avalonia"
              xmlns:DataCore="clr-namespace:Core2D.Data;assembly=Core2D.Model"
              xmlns:Dock="clr-namespace:Dock.Model;assembly=Dock.Model"
@@ -38,6 +39,7 @@
         <StyleInclude Source="avares://Avalonia.Controls.DataGrid/Themes/Default.xaml"/>
         <!-- Dock -->
         <StyleInclude Source="avares://Dock.Avalonia.Themes.Default/DefaultTheme.xaml"/>
+        <StyleInclude Source="avares://Dock.Avalonia.Themes.Metro/DefaultTheme.xaml"/>
         <!-- Border -->
         <Style Selector="Border.panel">
             <Setter Property="Margin" Value="2"/>
@@ -533,11 +535,6 @@
         </Style>
     </Application.Styles>
     <Application.Resources>
-        <!-- Dock -->
-        <SolidColorBrush x:Key="ApplicationAccentBrushLow">#007ACC</SolidColorBrush>
-        <SolidColorBrush x:Key="ApplicationAccentBrushMed">#1C97EA</SolidColorBrush>
-        <SolidColorBrush x:Key="ApplicationAccentBrushHigh">#52B0EF</SolidColorBrush>
-        <SolidColorBrush x:Key="ApplicationAccentForegroundBrush">#F0F0F0</SolidColorBrush>
         <!-- Brushes -->
         <SolidColorBrush x:Key="TransparentBrush">#00FFFFFF</SolidColorBrush>
         <VisualBrush x:Key="ColorCheckerBoard" TileMode="Tile" Stretch="None" AlignmentX="Left" AlignmentY="Top" SourceRect="0,0,20,20" DestinationRect="0,0,20,20">
@@ -583,6 +580,7 @@
         <converters:TreeViewSelectedItemToObjectConverter x:Key="TreeViewSelectedItemToObjectConverter"/>
     </Application.Resources>
     <Application.DataTemplates>
+        <!--<local:ViewLocator/>-->
         <!-- Editor -->
         <DataTemplate DataType="Editor:IProjectEditor">
             <Grid/>

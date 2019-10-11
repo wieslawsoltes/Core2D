@@ -13,7 +13,7 @@ using Core2D.Interfaces;
 using Core2D.Renderer;
 using Core2D.Shapes;
 using Core2D.Style;
-using Dock.Model;
+using DM=Dock.Model;
 
 namespace Core2D.Editor
 {
@@ -69,7 +69,7 @@ namespace Core2D.Editor
         /// <summary>
         /// Gets or sets current layout configuration.
         /// </summary>
-        IDock Layout { get; set; }
+        DM.IDock Layout { get; set; }
 
         /// <summary>
         /// Gets or sets about info.

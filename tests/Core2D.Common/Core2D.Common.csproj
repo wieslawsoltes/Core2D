@@ -7,7 +7,6 @@
   </PropertyGroup>
 
   <Import Project="..\..\build\Base.props" />
-  <Import Project="..\..\build\Rx.props" />
   
   <ItemGroup>
     <ProjectReference Include="..\..\src\Core2D.Base\Core2D.Base.csproj" />

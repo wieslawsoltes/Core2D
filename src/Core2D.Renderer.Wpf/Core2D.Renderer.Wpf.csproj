@@ -5,6 +5,7 @@
     <OutputType>Library</OutputType>
     <UseWPF>True</UseWPF>
     <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
+    <Nullable>disable</Nullable>
   </PropertyGroup>
 
   <PropertyGroup>
