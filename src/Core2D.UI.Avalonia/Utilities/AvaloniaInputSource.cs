@@ -71,7 +71,7 @@ namespace Core2D.UI.Avalonia.Utilities
             return Observable.FromEventPattern<EventHandler<PointerReleasedEventArgs>, PointerReleasedEventArgs>(
                 handler => target.PointerReleased += handler,
                 handler => target.PointerReleased -= handler)
-                .Where(e => e.EventArgs.MouseButton == button).Select(
+                .Where(e => e.EventArgs.InitialPressMouseButton == button).Select(
                 e =>
                 {
                     var point = translate(e.EventArgs.GetPosition(relative));
