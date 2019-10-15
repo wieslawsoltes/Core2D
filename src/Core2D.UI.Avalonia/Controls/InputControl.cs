@@ -149,7 +149,7 @@ namespace Core2D.UI.Avalonia.Controls
 
         private void HandlePointerReleased(PointerReleasedEventArgs e)
         {
-            if (e.MouseButton == MouseButton.Left)
+            if (e.InitialPressMouseButton == MouseButton.Left)
             {
                 if (InputTarget != null)
                 {
@@ -161,7 +161,7 @@ namespace Core2D.UI.Avalonia.Controls
                     }
                 }
             }
-            else if (e.MouseButton == MouseButton.Right)
+            else if (e.InitialPressMouseButton == MouseButton.Right)
             {
                 if (InputTarget != null)
                 {
