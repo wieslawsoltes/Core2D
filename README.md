@@ -39,6 +39,23 @@ The core libraries are portable and should work on all platforms where C# is sup
 * [GitHub source code repository.](https://github.com/wieslawsoltes/Core2D)
 * [Wiki.](https://github.com/wieslawsoltes/Core2D/wiki)
 
+## NuGet
+
+Core2D base libraries are delivered as a NuGet package.
+
+You can find the packages here [NuGet](https://www.nuget.org/packages/Core2D.Base/) and install the package like this:
+
+`Install-Package Core2D.Base`
+
+or by using nightly build feed:
+* Add `https://www.myget.org/F/core2d-nightly/api/v2` to your package sources
+* Alternative nightly build feed `https://pkgs.dev.azure.com/wieslawsoltes/GitHub/_packaging/CI/nuget/v3/index.json`
+* Update your package using `Core2D` feed
+
+and install the package like this:
+
+`Install-Package Core2D.Base -Pre`
+
 ## License
 
 Core2D is licensed under the [MIT license](LICENSE.TXT).
