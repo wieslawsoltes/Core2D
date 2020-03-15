@@ -30,7 +30,7 @@ namespace Core2D.TextFieldReader.CsvHelper
         {
             using (var reader = new System.IO.StreamReader(stream))
             {
-                var configuration = new CSV.Configuration.Configuration
+                var configuration = new CSV.Configuration.CsvConfiguration(CultureInfo.CurrentCulture)
                 {
                     Delimiter = CultureInfo.CurrentCulture.TextInfo.ListSeparator,
                     CultureInfo = CultureInfo.CurrentCulture,
