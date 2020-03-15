@@ -34,7 +34,7 @@ namespace Core2D.TextFieldWriter.CsvHelper
         {
             using (var writer = new System.IO.StringWriter())
             {
-                var configuration = new CSV.Configuration.Configuration
+                var configuration = new CSV.Configuration.CsvConfiguration(CultureInfo.CurrentCulture)
                 {
                     Delimiter = CultureInfo.CurrentCulture.TextInfo.ListSeparator,
                     CultureInfo = CultureInfo.CurrentCulture
