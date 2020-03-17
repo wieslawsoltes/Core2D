@@ -70,24 +70,6 @@ namespace Core2D.UI.Avalonia.Controls
             PointerMoved += (sender, e) => HandlePointerMoved(e);
         }
 
-        private void Capture()
-        {
-            var mouseDevice = (this.GetVisualRoot() as IInputRoot)?.MouseDevice;
-            if (mouseDevice.Captured == null)
-            {
-                mouseDevice.Capture(this);
-            }
-        }
-
-        private void Release()
-        {
-            var mouseDevice = (this.GetVisualRoot() as IInputRoot)?.MouseDevice;
-            if (mouseDevice.Captured != null)
-            {
-                mouseDevice.Capture(null);
-            }
-        }
-
         private ModifierFlags GetModifier(KeyModifiers inputModifiers)
         {
             var modifier = ModifierFlags.None;
@@ -121,7 +103,8 @@ namespace Core2D.UI.Avalonia.Controls
 
         private void HandlePointerPressed(PointerPressedEventArgs e)
         {
-            if (e.MouseButton == MouseButton.Left)
+            var properties = e.GetCurrentPoint(RelativeTo).Properties;
+            if (properties.IsLeftButtonPressed)
             {
                 if (InputTarget != null)
                 {
@@ -133,7 +116,7 @@ namespace Core2D.UI.Avalonia.Controls
                     }
                 }
             }
-            else if (e.MouseButton == MouseButton.Right)
+            else if (properties.IsRightButtonPressed)
             {
                 if (InputTarget != null)
                 {

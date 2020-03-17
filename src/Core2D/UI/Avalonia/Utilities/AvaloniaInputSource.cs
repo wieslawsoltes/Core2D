@@ -53,12 +53,24 @@ namespace Core2D.UI.Avalonia.Utilities
             Move = GetPointerMovedObservable(source, relative, translate);
         }
 
+        private static bool IsMouseButton(Control target, PointerPressedEventArgs e, MouseButton button)
+        {
+            var properties = e.GetCurrentPoint(target).Properties;
+            if ((properties.IsLeftButtonPressed && button == MouseButton.Left)
+                || (properties.IsRightButtonPressed && button == MouseButton.Right)
+                || (properties.IsMiddleButtonPressed && button == MouseButton.Middle))
+            {
+                return true;
+            }
+            return false;
+        }
+
         private static IObservable<InputArgs> GetPointerPressedObservable(Control target, Control relative, Func<Point, Point> translate, MouseButton button)
         {
             return Observable.FromEventPattern<EventHandler<PointerPressedEventArgs>, PointerPressedEventArgs>(
                 handler => target.PointerPressed += handler,
                 handler => target.PointerPressed -= handler)
-                .Where(e => e.EventArgs.MouseButton == button).Select(
+                .Where(e => IsMouseButton(target, e.EventArgs, button)).Select(
                 e =>
                 {
                     var point = translate(e.EventArgs.GetPosition(relative));
