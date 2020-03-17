@@ -29,16 +29,6 @@
         <KeyBinding Command="{Binding Platform.OnImportJson}" Gesture="Ctrl+Shift+J"/>
         <KeyBinding Command="{Binding Platform.OnExport}" Gesture="Ctrl+E"/>
         <KeyBinding Command="{Binding Platform.OnExit}" Gesture="Alt+F4"/>
-        <!-- Edit -->
-        <KeyBinding Command="{Binding OnUndo}" Gesture="Ctrl+Z"/>
-        <KeyBinding Command="{Binding OnRedo}" Gesture="Ctrl+Y"/>
-        <KeyBinding Command="{Binding Platform.OnCopyAsEmf}" Gesture="Ctrl+Shift+C"/>
-        <KeyBinding Command="{Binding OnCut}" Gesture="Ctrl+X"/>
-        <KeyBinding Command="{Binding OnCopy}" Gesture="Ctrl+C"/>
-        <KeyBinding Command="{Binding OnPaste}" Gesture="Ctrl+V"/>
-        <KeyBinding Command="{Binding OnSelectAll}" Gesture="Ctrl+A"/>
-        <KeyBinding Command="{Binding OnGroupSelected}" Gesture="Ctrl+G"/>
-        <KeyBinding Command="{Binding OnUngroupSelected}" Gesture="Ctrl+U"/>
         <!-- View -->
         <KeyBinding Command="{Binding Platform.OnObjectBrowser}" Gesture="Ctrl+J"/>
         <KeyBinding Command="{Binding Platform.OnDocumentViewer}" Gesture="Ctrl+D"/>
