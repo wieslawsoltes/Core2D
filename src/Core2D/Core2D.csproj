@@ -49,6 +49,10 @@
     <RootAllApplicationAssemblies>False</RootAllApplicationAssemblies>
     <IlcGenerateCompleteTypeMetadata>False</IlcGenerateCompleteTypeMetadata>
     <IlcGenerateStackTraceData>False</IlcGenerateStackTraceData>
+    <IlcDisableReflection>True</IlcDisableReflection>
+    <IlcOptimizationPreference>Speed</IlcOptimizationPreference>
+    <IlcFoldIdenticalMethodBodies>True</IlcFoldIdenticalMethodBodies>
+    <IlcDisableUnhandledExceptionExperience>True</IlcDisableUnhandledExceptionExperience>
   </PropertyGroup>
 
   <Import Project="..\..\build\Base.props" />
