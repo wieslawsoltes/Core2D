@@ -4,8 +4,9 @@ using System;
 using Avalonia;
 using Avalonia.Logging.Serilog;
 using Avalonia.ReactiveUI;
+using Core2D.UI.Avalonia;
 
-namespace Core2D.UI.Avalonia
+namespace Core2D
 {
     /// <summary>
     /// Encapsulates an Core2D avalonia program.
