@@ -4,11 +4,11 @@
     <TargetFrameworks>netcoreapp3.1</TargetFrameworks>
     <OutputType>Library</OutputType>
     <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
+    <LangVersion>8.0</LangVersion>
     <IsPackable>False</IsPackable>
     <Nullable>disable</Nullable>
   </PropertyGroup>
 
-  <Import Project="..\..\build\Base.props" />
   <Import Project="..\..\build\XUnit.props" />
 
   <ItemGroup>
