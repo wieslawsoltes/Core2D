@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk" ToolsVersion="15.0">
 
   <PropertyGroup>
-    <TargetFrameworks>netcoreapp3.0</TargetFrameworks>
+    <TargetFrameworks>netcoreapp3.1</TargetFrameworks>
     <OutputType>Library</OutputType>
     <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
   </PropertyGroup>
@@ -10,11 +10,8 @@
   <Import Project="..\..\build\XUnit.props" />
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Core2D.Base\Core2D.Base.csproj" />
-    <ProjectReference Include="..\..\src\Core2D.Editor\Core2D.Editor.csproj" />
-    <ProjectReference Include="..\..\src\Core2D.Model.Extensions\Core2D.Model.Extensions.csproj" />
-    <ProjectReference Include="..\..\src\Core2D.Model\Core2D.Model.csproj" />
     <ProjectReference Include="..\Core2D.Common\Core2D.Common.csproj" />
+    <ProjectReference Include="..\..\src\Core2D\Core2D.csproj" />
   </ItemGroup>
 
 </Project>
