@@ -5,16 +5,37 @@
     <OutputType>WinExe</OutputType>
     <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
     <EnableDefaultCompileItems>False</EnableDefaultCompileItems>
+    <LangVersion>8.0</LangVersion>
     <IsPackable>False</IsPackable>
     <Nullable>disable</Nullable>
   </PropertyGroup>
 
   <PropertyGroup>
-    <PackageId>Core2D</PackageId>
+    <VersionPrefix>0.9.4.1</VersionPrefix>
+    <VersionSuffix></VersionSuffix>
+    <Authors>Wiesław Šoltés</Authors>
+    <Company>Wiesław Šoltés</Company>
+    <Description>A multi-platform data driven 2D diagram editor.</Description>
+    <Copyright>Copyright © Wiesław Šoltés 2020</Copyright>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(CoreRT)' == 'True'">
-    <DefineConstants>$(DefineConstants);_CORERT</DefineConstants>
+  <PropertyGroup>
+    <CoreRT>False</CoreRT>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(RuntimeIdentifier)' == 'win-x64'">
+    <CoreRT>True</CoreRT>
+    <DefineConstants>$(DefineConstants);_CORERT;_CORERT_WIN_X64</DefineConstants>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(RuntimeIdentifier)' == 'linux-x64'">
+    <CoreRT>True</CoreRT>
+    <DefineConstants>$(DefineConstants);_CORERT;_CORERT_LINUX_X64</DefineConstants>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(RuntimeIdentifier)' == 'osx-x64'">
+    <CoreRT>True</CoreRT>
+    <DefineConstants>$(DefineConstants);_CORERT;_CORERT_OSX_X64</DefineConstants>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(CoreRT)' != 'True'">
@@ -55,7 +76,6 @@
     <IlcDisableUnhandledExceptionExperience>True</IlcDisableUnhandledExceptionExperience>
   </PropertyGroup>
 
-  <Import Project="..\..\build\Base.props" />
   <Import Project="..\..\build\ReferenceAssemblies.props" />
   <Import Project="..\..\build\ILCompiler.props" Condition="'$(CoreRT)' == 'True'" />
   <Import Project="..\..\build\Autofac.props" />
@@ -80,6 +100,12 @@
   <Import Project="..\..\build\SkiaSharp.props" />
   <Import Project="..\..\build\System.Diagnostics.props" />
   <Import Project="..\..\build\System.Drawing.Common.props" />
+
+  <ItemGroup>
+    <PackageReference Include="System.Collections.Immutable" Version="1.7.0" />
+    <PackageReference Include="System.IO.Compression" Version="4.3.0" />
+    <PackageReference Include="SourceLink.Create.CommandLine" Version="2.8.3" PrivateAssets="All" />
+  </ItemGroup>
 
   <ItemGroup Condition="$(TargetFramework.StartsWith('net4'))">
     <Reference Include="System" />
