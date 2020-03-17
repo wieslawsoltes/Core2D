@@ -14,9 +14,9 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(CoreRT)' != 'True'">
-    <PublishTrimmed>True</PublishTrimmed>
+    <PublishTrimmed>False</PublishTrimmed>
     <PublishSingleFile>False</PublishSingleFile>
-    <PublishReadyToRun>True</PublishReadyToRun>
+    <PublishReadyToRun>False</PublishReadyToRun>
   </PropertyGroup>
 
   <ItemGroup Condition="'$(CoreRT)' == 'True'">
