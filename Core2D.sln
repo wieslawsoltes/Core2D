@@ -12,8 +12,64 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D.UnitTests", "tests\Core2D.UnitTests\Core2D.UnitTests.csproj", "{B1C82AE2-3DAC-4EE2-9C9F-8BA39EF9573D}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{840A1FC4-57A8-4F50-A6BD-367A014B45B6}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+		.nuke = .nuke
+		build.ps1 = build.ps1
+		build.sh = build.sh
+		global.json = global.json
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "_build", "build\build\_build.csproj", "{2CC44420-ACDE-4900-B42A-4EAE4D98CE1D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "git", "git", "{4CCF5533-2ED5-4B7B-9C15-3F74D97EFC01}"
+	ProjectSection(SolutionItems) = preProject
+		.gitattributes = .gitattributes
+		.gitignore = .gitignore
+		.gitmodules = .gitmodules
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "nuget", "nuget", "{FFD5A92F-624B-48BB-AD9F-E1C7D40A411B}"
+	ProjectSection(SolutionItems) = preProject
+		NuGet.Config = NuGet.Config
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "props", "props", "{6E3D83D8-B5CD-4F52-A18D-926A9413AFD1}"
+	ProjectSection(SolutionItems) = preProject
+		build\Autofac.props = build\Autofac.props
+		build\Avalonia.Behaviors.props = build\Avalonia.Behaviors.props
+		build\Avalonia.DataGrid.props = build\Avalonia.DataGrid.props
+		build\Avalonia.Desktop.props = build\Avalonia.Desktop.props
+		build\Avalonia.MatrixExtensions.props = build\Avalonia.MatrixExtensions.props
+		build\Avalonia.PanAndZoom.props = build\Avalonia.PanAndZoom.props
+		build\Avalonia.props = build\Avalonia.props
+		build\Avalonia.ReactiveUI.props = build\Avalonia.ReactiveUI.props
+		build\Avalonia.ThemeManager.props = build\Avalonia.ThemeManager.props
+		build\Base.props = build\Base.props
+		build\CsvHelper.props = build\CsvHelper.props
+		build\Dock.Avalonia.props = build\Dock.Avalonia.props
+		build\Dock.Model.props = build\Dock.Model.props
+		build\EmbedXaml.props = build\EmbedXaml.props
+		build\ILCompiler.props = build\ILCompiler.props
+		build\Math.Spatial.props = build\Math.Spatial.props
+		build\netDXF.props = build\netDXF.props
+		build\Newtonsoft.Json.props = build\Newtonsoft.Json.props
+		build\PDFsharp.props = build\PDFsharp.props
+		build\Portable.Xaml.props = build\Portable.Xaml.props
+		build\ReactiveUI.props = build\ReactiveUI.props
+		build\ReferenceAssemblies.props = build\ReferenceAssemblies.props
+		build\Roslyn.props = build\Roslyn.props
+		build\SkiaSharp.props = build\SkiaSharp.props
+		build\System.Diagnostics.props = build\System.Diagnostics.props
+		build\System.Drawing.Common.props = build\System.Drawing.Common.props
+		build\XUnit.props = build\XUnit.props
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{4E69634B-A32B-49BD-B7E4-6D7932A6CBAF}"
+	ProjectSection(SolutionItems) = preProject
+		LICENSE.TXT = LICENSE.TXT
+		README.md = README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -69,6 +125,9 @@ Global
 		{1E857034-DF93-4CEB-841D-F8415C4AB522} = {8BBBC118-1DE7-4698-B441-0BA7457057E8}
 		{B1C82AE2-3DAC-4EE2-9C9F-8BA39EF9573D} = {AEA98A68-ECD3-4E01-A7EF-2BA6BB694057}
 		{2CC44420-ACDE-4900-B42A-4EAE4D98CE1D} = {840A1FC4-57A8-4F50-A6BD-367A014B45B6}
+		{4CCF5533-2ED5-4B7B-9C15-3F74D97EFC01} = {840A1FC4-57A8-4F50-A6BD-367A014B45B6}
+		{FFD5A92F-624B-48BB-AD9F-E1C7D40A411B} = {840A1FC4-57A8-4F50-A6BD-367A014B45B6}
+		{6E3D83D8-B5CD-4F52-A18D-926A9413AFD1} = {840A1FC4-57A8-4F50-A6BD-367A014B45B6}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2CC6B469-D031-4BC3-9A10-BD9600D7BF73}
