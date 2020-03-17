@@ -71,6 +71,29 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{4E69634B-A
 		README.md = README.md
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "native", "native", "{C835C4E7-8D9C-430E-8442-34911A8D84E2}"
+	ProjectSection(SolutionItems) = preProject
+		build\native\app.rd.xml = build\native\app.rd.xml
+		build\native\autofac.rd.xml = build\native\autofac.rd.xml
+		build\native\avalonia.behaviors.rd.xml = build\native\avalonia.behaviors.rd.xml
+		build\native\avalonia.desktop.rd.xml = build\native\avalonia.desktop.rd.xml
+		build\native\avalonia.linux.rd.xml = build\native\avalonia.linux.rd.xml
+		build\native\avalonia.osx.rd.xml = build\native\avalonia.osx.rd.xml
+		build\native\avalonia.panandzoom.rd.xml = build\native\avalonia.panandzoom.rd.xml
+		build\native\avalonia.rd.xml = build\native\avalonia.rd.xml
+		build\native\avalonia.reactiveui.rd.xml = build\native\avalonia.reactiveui.rd.xml
+		build\native\avalonia.thememanager.rd.xml = build\native\avalonia.thememanager.rd.xml
+		build\native\avalonia.win.rd.xml = build\native\avalonia.win.rd.xml
+		build\native\csvhelper.rd.xml = build\native\csvhelper.rd.xml
+		build\native\dock.rd.xml = build\native\dock.rd.xml
+		build\native\netcore.rd.xml = build\native\netcore.rd.xml
+		build\native\netdxf.rd.xml = build\native\netdxf.rd.xml
+		build\native\newtonsoft.json.rd.xml = build\native\newtonsoft.json.rd.xml
+		build\native\portable.xaml.rd.xml = build\native\portable.xaml.rd.xml
+		build\native\roslyn.rd.xml = build\native\roslyn.rd.xml
+		build\native\rx.rd.xml = build\native\rx.rd.xml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -128,6 +151,7 @@ Global
 		{4CCF5533-2ED5-4B7B-9C15-3F74D97EFC01} = {840A1FC4-57A8-4F50-A6BD-367A014B45B6}
 		{FFD5A92F-624B-48BB-AD9F-E1C7D40A411B} = {840A1FC4-57A8-4F50-A6BD-367A014B45B6}
 		{6E3D83D8-B5CD-4F52-A18D-926A9413AFD1} = {840A1FC4-57A8-4F50-A6BD-367A014B45B6}
+		{C835C4E7-8D9C-430E-8442-34911A8D84E2} = {840A1FC4-57A8-4F50-A6BD-367A014B45B6}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2CC6B469-D031-4BC3-9A10-BD9600D7BF73}
