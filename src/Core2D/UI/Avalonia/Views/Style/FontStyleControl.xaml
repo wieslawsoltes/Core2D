@@ -1,0 +1,22 @@
+﻿<!-- Copyright (c) Wiesław Šoltés. All rights reserved. -->
+<!-- Licensed under the MIT license. See LICENSE file in the project root for full license information. -->
+<UserControl x:Class="Core2D.UI.Avalonia.Views.Style.FontStyleControl"
+             xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:converters="clr-namespace:Core2D.UI.Avalonia.Converters;assembly=Core2D"
+             xmlns:Designer="clr-namespace:Core2D.Editor.Designer;assembly=Core2D"
+             mc:Ignorable="d"
+             d:DataContext="{x:Static Designer:DesignerContext.FontStyle}"
+             d:DesignWidth="250" d:DesignHeight="400">
+    <ScrollViewer>
+        <StackPanel>
+            <CheckBox Content="Regular" IsChecked="{Binding Regular, Mode=TwoWay}" Classes="default"/>
+            <CheckBox Content="Bold" IsChecked="{Binding Bold, Mode=TwoWay}" Classes="default"/>
+            <CheckBox Content="Italic" IsChecked="{Binding Italic, Mode=TwoWay}" Classes="default"/>
+            <CheckBox Content="Underline" IsChecked="{Binding Underline, Mode=TwoWay}" Classes="default"/>
+            <CheckBox Content="Strikeout" IsChecked="{Binding Strikeout, Mode=TwoWay}" Classes="default"/>
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

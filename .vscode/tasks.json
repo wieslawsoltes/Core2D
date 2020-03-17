@@ -7,7 +7,7 @@
             "type": "process",
             "args": [
                 "build",
-                "${workspaceFolder}/src/Core2D.UI.Avalonia/Core2D.UI.Avalonia.csproj"
+                "${workspaceFolder}/src/Core2D/Core2D.csproj"
             ],
             "problemMatcher": "$msCompile"
         }

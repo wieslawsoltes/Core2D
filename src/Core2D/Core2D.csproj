@@ -1,0 +1,94 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>netcoreapp3.1;net461</TargetFrameworks>
+    <OutputType>WinExe</OutputType>
+    <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
+    <EnableDefaultCompileItems>False</EnableDefaultCompileItems>
+    <IsPackable>False</IsPackable>
+    <Nullable>disable</Nullable>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <PackageId>Core2D</PackageId>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(CoreRT)' != 'True'">
+    <PublishTrimmed>False</PublishTrimmed>
+    <PublishSingleFile>False</PublishSingleFile>
+    <PublishReadyToRun>False</PublishReadyToRun>
+  </PropertyGroup>
+
+  <ItemGroup Condition="'$(CoreRT)' == 'True'">
+    <RdXmlFile Include="..\..\build\native\netcore.rd.xml" />
+    <RdXmlFile Include="..\..\build\native\app.rd.xml" />
+    <RdXmlFile Include="..\..\build\native\avalonia.rd.xml" />
+    <RdXmlFile Include="..\..\build\native\avalonia.linux.rd.xml" Condition="'$(RuntimeIdentifier)' == 'linux-x64'" />
+    <RdXmlFile Include="..\..\build\native\avalonia.osx.rd.xml" Condition="'$(RuntimeIdentifier)' == 'osx-x64'" />
+    <RdXmlFile Include="..\..\build\native\avalonia.win.rd.xml" Condition="'$(RuntimeIdentifier)' == 'win-x64'" />
+    <RdXmlFile Include="..\..\build\native\avalonia.reactiveui.rd.xml" />
+    <RdXmlFile Include="..\..\build\native\avalonia.behaviors.rd.xml" />
+    <RdXmlFile Include="..\..\build\native\avalonia.panandzoom.rd.xml" />
+    <RdXmlFile Include="..\..\build\native\avalonia.thememanager.rd.xml" />
+    <RdXmlFile Include="..\..\build\native\autofac.rd.xml" />
+    <RdXmlFile Include="..\..\build\native\dock.rd.xml" />
+    <RdXmlFile Include="..\..\build\native\csvhelper.rd.xml" />
+    <RdXmlFile Include="..\..\build\native\netdxf.rd.xml" />
+    <RdXmlFile Include="..\..\build\native\newtonsoft.json.rd.xml" />
+    <RdXmlFile Include="..\..\build\native\portable.xaml.rd.xml" />
+    <!--<RdXmlFile Include="..\..\build\native\roslyn.rd.xml"/>-->
+    <RdXmlFile Include="..\..\build\native\rx.rd.xml" />
+    <IlcArg Include="--stacktracedata" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <RootAllApplicationAssemblies>False</RootAllApplicationAssemblies>
+    <IlcGenerateCompleteTypeMetadata>False</IlcGenerateCompleteTypeMetadata>
+    <IlcGenerateStackTraceData>False</IlcGenerateStackTraceData>
+  </PropertyGroup>
+
+  <Import Project="..\..\build\Base.props" />
+  <Import Project="..\..\build\ReferenceAssemblies.props" />
+  <Import Project="..\..\build\ILCompiler.props" Condition="'$(CoreRT)' == 'True'" />
+  <Import Project="..\..\build\Autofac.props" />
+  <Import Project="..\..\build\Avalonia.Behaviors.props" />
+  <Import Project="..\..\build\Avalonia.DataGrid.props" />
+  <Import Project="..\..\build\Avalonia.Desktop.props" />
+  <Import Project="..\..\build\Avalonia.MatrixExtensions.props" />
+  <Import Project="..\..\build\Avalonia.PanAndZoom.props" />
+  <Import Project="..\..\build\Avalonia.ReactiveUI.props" />
+  <Import Project="..\..\build\Avalonia.ThemeManager.props" />
+  <Import Project="..\..\build\Avalonia.props" />
+  <Import Project="..\..\build\CsvHelper.props" />
+  <Import Project="..\..\build\Dock.Avalonia.props" />
+  <Import Project="..\..\build\Dock.Model.props" />
+  <Import Project="..\..\build\Math.Spatial.props" />
+  <Import Project="..\..\build\netDXF.props" />
+  <Import Project="..\..\build\Newtonsoft.Json.props" />
+  <Import Project="..\..\build\PDFsharp.props" />
+  <Import Project="..\..\build\Portable.Xaml.props" />
+  <Import Project="..\..\build\ReactiveUI.props" />
+  <Import Project="..\..\build\Roslyn.props" Condition="'$(CoreRT)' != 'True'" />
+  <Import Project="..\..\build\SkiaSharp.props" />
+  <Import Project="..\..\build\System.Diagnostics.props" />
+  <Import Project="..\..\build\System.Drawing.Common.props" />
+
+  <ItemGroup Condition="$(TargetFramework.StartsWith('net4'))">
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="**\*.cs" Exclude="obj\**" />
+    <AvaloniaResource Include="Assets\*" Exclude="bin\**;obj\**;**\*.xproj;packages\**;@(EmbeddedResource)" />
+  </ItemGroup>
+
+  <Import Project="..\..\build\EmbedXaml.props" />
+
+</Project>

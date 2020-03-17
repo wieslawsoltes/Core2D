@@ -1,0 +1,48 @@
+﻿<!-- Copyright (c) Wiesław Šoltés. All rights reserved. -->
+<!-- Licensed under the MIT license. See LICENSE file in the project root for full license information. -->
+<UserControl x:Class="Core2D.UI.Avalonia.Views.MainControl"
+             xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
+             xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
+             xmlns:id="clr-namespace:Dock.Avalonia;assembly=Core2D"
+             xmlns:idc="clr-namespace:Dock.Avalonia.Controls;assembly=Dock.Avalonia"
+             xmlns:handlers="clr-namespace:Core2D.UI.Avalonia.Dock.Handlers;assembly=Core2D"
+             xmlns:converters="clr-namespace:Core2D.UI.Avalonia.Converters;assembly=Core2D"
+             xmlns:Views="clr-namespace:Core2D.UI.Avalonia.Dock.Views;assembly=Core2D"
+             xmlns:Dock="clr-namespace:Dock.Model;assembly=Dock.Model"
+             UseLayoutRounding="True"
+             xmlns:Designer="clr-namespace:Core2D.Editor.Designer;assembly=Core2D"
+             mc:Ignorable="d"
+             d:DataContext="{x:Static Designer:DesignerContext.Editor}"
+             d:DesignWidth="1200" d:DesignHeight="580">
+    <UserControl.KeyBindings>
+        <!-- File -->
+        <KeyBinding Command="{Binding OnNew}" CommandParameter="{Binding}" Gesture="Ctrl+N"/>
+        <KeyBinding Command="{Binding Platform.OnOpen}" Gesture="Ctrl+O"/>
+        <KeyBinding Command="{Binding OnCloseProject}" Gesture="Ctrl+F4"/>
+        <KeyBinding Command="{Binding Platform.OnSave}" Gesture="Ctrl+S"/>
+        <KeyBinding Command="{Binding Platform.OnSaveAs}" Gesture="Ctrl+Shift+S"/>
+        <KeyBinding Command="{Binding Platform.OnImportXaml}" Gesture="Ctrl+Shift+X"/>
+        <KeyBinding Command="{Binding Platform.OnImportJson}" Gesture="Ctrl+Shift+J"/>
+        <KeyBinding Command="{Binding Platform.OnExport}" Gesture="Ctrl+E"/>
+        <KeyBinding Command="{Binding Platform.OnExit}" Gesture="Alt+F4"/>
+        <!-- Edit -->
+        <KeyBinding Command="{Binding OnUndo}" Gesture="Ctrl+Z"/>
+        <KeyBinding Command="{Binding OnRedo}" Gesture="Ctrl+Y"/>
+        <KeyBinding Command="{Binding Platform.OnCopyAsEmf}" Gesture="Ctrl+Shift+C"/>
+        <KeyBinding Command="{Binding OnCut}" Gesture="Ctrl+X"/>
+        <KeyBinding Command="{Binding OnCopy}" Gesture="Ctrl+C"/>
+        <KeyBinding Command="{Binding OnPaste}" Gesture="Ctrl+V"/>
+        <KeyBinding Command="{Binding OnSelectAll}" Gesture="Ctrl+A"/>
+        <KeyBinding Command="{Binding OnGroupSelected}" Gesture="Ctrl+G"/>
+        <KeyBinding Command="{Binding OnUngroupSelected}" Gesture="Ctrl+U"/>
+        <!-- View -->
+        <KeyBinding Command="{Binding Platform.OnObjectBrowser}" Gesture="Ctrl+J"/>
+        <KeyBinding Command="{Binding Platform.OnDocumentViewer}" Gesture="Ctrl+D"/>
+        <KeyBinding Command="{Binding Platform.OnScriptEditor}" Gesture="Ctrl+R"/>
+    </UserControl.KeyBindings>
+    <idc:DockControl Layout="{Binding Layout}"/>
+</UserControl>
