@@ -13,7 +13,7 @@
                  xmlns:views="clr-namespace:Core2D.UI.Avalonia.Views;assembly=Core2D"
                  Width="1324" Height="715"
                  UseLayoutRounding="True" RenderOptions.BitmapInterpolationMode="HighQuality"
-                 WindowState="Normal" WindowStartupLocation="CenterScreen"
+                 WindowState="Maximized" WindowStartupLocation="CenterScreen"
                  BorderThickness="1" BorderBrush="{DynamicResource ThemeBorderLightBrush}"
                  Foreground="{DynamicResource ThemeForegroundBrush}"
                  id:DragBehavior.IsEnabled="True" id:DropBehavior.IsEnabled="True"
