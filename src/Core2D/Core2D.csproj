@@ -13,6 +13,10 @@
     <PackageId>Core2D</PackageId>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(CoreRT)' == 'True'">
+    <DefineConstants>$(DefineConstants);_CORERT</DefineConstants>
+  </PropertyGroup>
+
   <PropertyGroup Condition="'$(CoreRT)' != 'True'">
     <PublishTrimmed>False</PublishTrimmed>
     <PublishSingleFile>False</PublishSingleFile>
