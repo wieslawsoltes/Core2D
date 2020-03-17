@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <PackageReference Include="Dock.Avalonia" Version="0.9.4" />
-    <PackageReference Include="Dock.Avalonia.Themes.Default" Version="0.9.4" />
-    <PackageReference Include="Dock.Avalonia.Themes.Metro" Version="0.9.4" />
+    <PackageReference Include="Dock.Avalonia" Version="0.9.4.1" />
+    <PackageReference Include="Dock.Avalonia.Themes.Default" Version="0.9.4.1" />
+    <PackageReference Include="Dock.Avalonia.Themes.Metro" Version="0.9.4.1" />
   </ItemGroup>
 </Project>
