@@ -88,21 +88,21 @@ namespace Core2D.UI.Avalonia.Controls
             }
         }
 
-        private ModifierFlags GetModifier(InputModifiers inputModifiers)
+        private ModifierFlags GetModifier(KeyModifiers inputModifiers)
         {
             var modifier = ModifierFlags.None;
 
-            if (inputModifiers.HasFlag(InputModifiers.Alt))
+            if (inputModifiers.HasFlag(KeyModifiers.Alt))
             {
                 modifier |= ModifierFlags.Alt;
             }
 
-            if (inputModifiers.HasFlag(InputModifiers.Control))
+            if (inputModifiers.HasFlag(KeyModifiers.Control))
             {
                 modifier |= ModifierFlags.Control;
             }
 
-            if (inputModifiers.HasFlag(InputModifiers.Shift))
+            if (inputModifiers.HasFlag(KeyModifiers.Shift))
             {
                 modifier |= ModifierFlags.Shift;
             }
@@ -126,7 +126,7 @@ namespace Core2D.UI.Avalonia.Controls
                 if (InputTarget != null)
                 {
                     var point = AdjustGetPosition(e.GetPosition(RelativeTo));
-                    var args = new InputArgs(point.X, point.Y, GetModifier(e.InputModifiers));
+                    var args = new InputArgs(point.X, point.Y, GetModifier(e.KeyModifiers));
                     if (InputTarget.IsLeftDownAvailable())
                     {
                         InputTarget.LeftDown(args);
@@ -138,7 +138,7 @@ namespace Core2D.UI.Avalonia.Controls
                 if (InputTarget != null)
                 {
                     var point = AdjustGetPosition(e.GetPosition(RelativeTo));
-                    var args = new InputArgs(point.X, point.Y, GetModifier(e.InputModifiers));
+                    var args = new InputArgs(point.X, point.Y, GetModifier(e.KeyModifiers));
                     if (InputTarget.IsRightDownAvailable())
                     {
                         InputTarget.RightDown(args);
@@ -154,7 +154,7 @@ namespace Core2D.UI.Avalonia.Controls
                 if (InputTarget != null)
                 {
                     var point = AdjustGetPosition(e.GetPosition(RelativeTo));
-                    var args = new InputArgs(point.X, point.Y, GetModifier(e.InputModifiers));
+                    var args = new InputArgs(point.X, point.Y, GetModifier(e.KeyModifiers));
                     if (InputTarget.IsLeftUpAvailable())
                     {
                         InputTarget.LeftUp(args);
@@ -166,7 +166,7 @@ namespace Core2D.UI.Avalonia.Controls
                 if (InputTarget != null)
                 {
                     var point = AdjustGetPosition(e.GetPosition(RelativeTo));
-                    var args = new InputArgs(point.X, point.Y, GetModifier(e.InputModifiers));
+                    var args = new InputArgs(point.X, point.Y, GetModifier(e.KeyModifiers));
                     if (InputTarget.IsRightUpAvailable())
                     {
                         InputTarget.RightUp(args);
@@ -180,7 +180,7 @@ namespace Core2D.UI.Avalonia.Controls
             if (InputTarget != null)
             {
                 var point = AdjustGetPosition(e.GetPosition(RelativeTo));
-                var args = new InputArgs(point.X, point.Y, GetModifier(e.InputModifiers));
+                var args = new InputArgs(point.X, point.Y, GetModifier(e.KeyModifiers));
                 if (InputTarget.IsMoveAvailable())
                 {
                     InputTarget.Move(args);

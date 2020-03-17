@@ -16,21 +16,21 @@ namespace Core2D.UI.Avalonia.Utilities
     /// </summary>
     public class AvaloniaInputSource : InputSource
     {
-        private static ModifierFlags ToModifierFlags(InputModifiers inputModifiers)
+        private static ModifierFlags ToModifierFlags(KeyModifiers inputModifiers)
         {
             var modifier = ModifierFlags.None;
 
-            if (inputModifiers.HasFlag(InputModifiers.Alt))
+            if (inputModifiers.HasFlag(KeyModifiers.Alt))
             {
                 modifier |= ModifierFlags.Alt;
             }
 
-            if (inputModifiers.HasFlag(InputModifiers.Control))
+            if (inputModifiers.HasFlag(KeyModifiers.Control))
             {
                 modifier |= ModifierFlags.Control;
             }
 
-            if (inputModifiers.HasFlag(InputModifiers.Shift))
+            if (inputModifiers.HasFlag(KeyModifiers.Shift))
             {
                 modifier |= ModifierFlags.Shift;
             }
@@ -62,7 +62,7 @@ namespace Core2D.UI.Avalonia.Utilities
                 e =>
                 {
                     var point = translate(e.EventArgs.GetPosition(relative));
-                    return new InputArgs(point.X, point.Y, ToModifierFlags(e.EventArgs.InputModifiers));
+                    return new InputArgs(point.X, point.Y, ToModifierFlags(e.EventArgs.KeyModifiers));
                 });
         }
 
@@ -75,7 +75,7 @@ namespace Core2D.UI.Avalonia.Utilities
                 e =>
                 {
                     var point = translate(e.EventArgs.GetPosition(relative));
-                    return new InputArgs(point.X, point.Y, ToModifierFlags(e.EventArgs.InputModifiers));
+                    return new InputArgs(point.X, point.Y, ToModifierFlags(e.EventArgs.KeyModifiers));
                 });
         }
 
@@ -88,7 +88,7 @@ namespace Core2D.UI.Avalonia.Utilities
                 e =>
                 {
                     var point = translate(e.EventArgs.GetPosition(relative));
-                    return new InputArgs(point.X, point.Y, ToModifierFlags(e.EventArgs.InputModifiers));
+                    return new InputArgs(point.X, point.Y, ToModifierFlags(e.EventArgs.KeyModifiers));
                 });
         }
     }
