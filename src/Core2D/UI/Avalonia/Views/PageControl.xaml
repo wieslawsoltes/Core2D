@@ -37,6 +37,16 @@
         <KeyBinding Command="{Binding OnMoveDownSelected}" Gesture="Down"/>
         <KeyBinding Command="{Binding OnMoveLeftSelected}" Gesture="Left"/>
         <KeyBinding Command="{Binding OnMoveRightSelected}" Gesture="Right"/>
+        <!-- Edit -->
+        <KeyBinding Command="{Binding OnUndo}" Gesture="Ctrl+Z"/>
+        <KeyBinding Command="{Binding OnRedo}" Gesture="Ctrl+Y"/>
+        <KeyBinding Command="{Binding Platform.OnCopyAsEmf}" Gesture="Ctrl+Shift+C"/>
+        <KeyBinding Command="{Binding OnCut}" Gesture="Ctrl+X"/>
+        <KeyBinding Command="{Binding OnCopy}" Gesture="Ctrl+C"/>
+        <KeyBinding Command="{Binding OnPaste}" Gesture="Ctrl+V"/>
+        <KeyBinding Command="{Binding OnSelectAll}" Gesture="Ctrl+A"/>
+        <KeyBinding Command="{Binding OnGroupSelected}" Gesture="Ctrl+G"/>
+        <KeyBinding Command="{Binding OnUngroupSelected}" Gesture="Ctrl+U"/>
         <!-- View -->
         <KeyBinding Command="{Binding Platform.OnZoomReset}" Gesture="Z"/>
         <KeyBinding Command="{Binding Platform.OnZoomAutoFit}" Gesture="X"/>
@@ -65,7 +75,7 @@
     </UserControl.KeyBindings>
     <i:Interaction.Behaviors>
         <iac:FocusOnAttachedToVisualTreeBehavior/>
-        <iac:FocusOnPointerMovedBehavior/>
+        <!--<iac:FocusOnPointerMovedBehavior/>-->
         <!--<id:DropBehavior Context="{Binding Layout}" Handler="{StaticResource DockDropHandler}"/>-->
         <id:DropBehavior Context="{Binding}" Handler="{StaticResource EditorDropHandler}"/>
     </i:Interaction.Behaviors>
