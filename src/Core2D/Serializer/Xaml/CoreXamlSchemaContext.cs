@@ -1,9 +1,9 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
-using Portable.Xaml;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
+using Portable.Xaml;
 
 namespace Core2D.Serializer.Xaml
 {
