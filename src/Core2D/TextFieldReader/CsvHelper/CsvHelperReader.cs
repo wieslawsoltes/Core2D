@@ -1,11 +1,11 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
-using Core2D.Data;
-using Core2D.Interfaces;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using Core2D.Data;
+using Core2D.Interfaces;
 using CSV = CsvHelper;
 
 namespace Core2D.TextFieldReader.CsvHelper
@@ -43,7 +43,9 @@ namespace Core2D.TextFieldReader.CsvHelper
                     {
                         var fields = parser.Read();
                         if (fields == null)
+                        {
                             break;
+                        }
 
                         yield return fields;
                     }
