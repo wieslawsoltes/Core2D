@@ -1,15 +1,13 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
-using System.Collections.Immutable;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using Core2D.Containers;
-using Core2D.Data;
 using Core2D.Interfaces;
-using Core2D.Style;
 using Core2D.Shapes;
+using Core2D.Style;
 using Spatial;
 using Spatial.Arc;
 
@@ -530,7 +528,9 @@ namespace Core2D.Renderer.WinForms
                 Point2.FromXY(arc.Point3.X, arc.Point3.Y),
                 Point2.FromXY(arc.Point4.X, arc.Point4.Y));
             if (a.Width <= 0.0 || a.Height <= 0.0)
+            {
                 return;
+            }
 
             var _gfx = dc as Graphics;
 
@@ -798,7 +798,9 @@ namespace Core2D.Renderer.WinForms
             else
             {
                 if (State.ImageCache == null || string.IsNullOrEmpty(image.Key))
+                {
                     return;
+                }
 
                 var bytes = State.ImageCache.GetImage(image.Key);
                 if (bytes != null)
