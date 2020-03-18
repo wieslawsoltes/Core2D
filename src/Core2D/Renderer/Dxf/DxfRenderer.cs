@@ -2,10 +2,8 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
 using System.Collections.Generic;
-using System.Collections.Immutable;
 using System.Linq;
 using Core2D.Containers;
-using Core2D.Data;
 using Core2D.Interfaces;
 using Core2D.Path;
 using Core2D.Path.Segments;
@@ -245,9 +243,11 @@ namespace Core2D.Renderer.Dxf
                             })
                 };
 
-            var hatch = new DXFE.Hatch(DXFE.HatchPattern.Solid, bounds, false);
-            hatch.Layer = layer;
-            hatch.Color = fill;
+            var hatch = new DXFE.Hatch(DXFE.HatchPattern.Solid, bounds, false)
+            {
+                Layer = layer,
+                Color = fill
+            };
             hatch.Transparency.Value = fillTransparency;
 
             dxf.AddEntity(hatch);
@@ -306,9 +306,11 @@ namespace Core2D.Renderer.Dxf
                             })
                 };
 
-            var hatch = new DXFE.Hatch(DXFE.HatchPattern.Solid, bounds, false);
-            hatch.Layer = layer;
-            hatch.Color = fill;
+            var hatch = new DXFE.Hatch(DXFE.HatchPattern.Solid, bounds, false)
+            {
+                Layer = layer,
+                Color = fill
+            };
             hatch.Transparency.Value = fillTransparency;
 
             dxf.AddEntity(hatch);
@@ -593,7 +595,9 @@ namespace Core2D.Renderer.Dxf
         public void Draw(object dc, ILineShape line, double dx, double dy)
         {
             if (!line.IsStroked)
+            {
                 return;
+            }
 
             var dxf = dc as DXF.DxfDocument;
 
@@ -617,7 +621,9 @@ namespace Core2D.Renderer.Dxf
         public void Draw(object dc, IRectangleShape rectangle, double dx, double dy)
         {
             if (!rectangle.IsStroked && !rectangle.IsFilled && !rectangle.IsGrid)
+            {
                 return;
+            }
 
             var dxf = dc as DXF.DxfDocument;
             var style = rectangle.Style;
@@ -646,7 +652,9 @@ namespace Core2D.Renderer.Dxf
         public void Draw(object dc, IEllipseShape ellipse, double dx, double dy)
         {
             if (!ellipse.IsStroked && !ellipse.IsFilled)
+            {
                 return;
+            }
 
             var dxf = dc as DXF.DxfDocument;
             var style = ellipse.Style;
@@ -684,9 +692,11 @@ namespace Core2D.Renderer.Dxf
                             })
                     };
 
-                var hatch = new DXFE.Hatch(DXFE.HatchPattern.Solid, bounds, false);
-                hatch.Layer = _currentLayer;
-                hatch.Color = fill;
+                var hatch = new DXFE.Hatch(DXFE.HatchPattern.Solid, bounds, false)
+                {
+                    Layer = _currentLayer,
+                    Color = fill
+                };
                 hatch.Transparency.Value = fillTransparency;
 
                 dxf.AddEntity(hatch);
@@ -711,7 +721,9 @@ namespace Core2D.Renderer.Dxf
         public void Draw(object dc, ICubicBezierShape cubicBezier, double dx, double dy)
         {
             if (!cubicBezier.IsStroked && !cubicBezier.IsFilled)
+            {
                 return;
+            }
 
             var dxf = dc as DXF.DxfDocument;
             var style = cubicBezier.Style;
@@ -741,9 +753,11 @@ namespace Core2D.Renderer.Dxf
                             })
                     };
 
-                var hatch = new DXFE.Hatch(DXFE.HatchPattern.Solid, bounds, false);
-                hatch.Layer = _currentLayer;
-                hatch.Color = fill;
+                var hatch = new DXFE.Hatch(DXFE.HatchPattern.Solid, bounds, false)
+                {
+                    Layer = _currentLayer,
+                    Color = fill
+                };
                 hatch.Transparency.Value = fillTransparency;
 
                 dxf.AddEntity(hatch);
@@ -768,7 +782,9 @@ namespace Core2D.Renderer.Dxf
         public void Draw(object dc, IQuadraticBezierShape quadraticBezier, double dx, double dy)
         {
             if (!quadraticBezier.IsStroked && !quadraticBezier.IsFilled)
+            {
                 return;
+            }
 
             var dxf = dc as DXF.DxfDocument;
             var style = quadraticBezier.Style;
@@ -796,9 +812,11 @@ namespace Core2D.Renderer.Dxf
                             })
                     };
 
-                var hatch = new DXFE.Hatch(DXFE.HatchPattern.Solid, bounds, false);
-                hatch.Layer = _currentLayer;
-                hatch.Color = fill;
+                var hatch = new DXFE.Hatch(DXFE.HatchPattern.Solid, bounds, false)
+                {
+                    Layer = _currentLayer,
+                    Color = fill
+                };
                 hatch.Transparency.Value = fillTransparency;
 
                 dxf.AddEntity(hatch);
@@ -930,8 +948,10 @@ namespace Core2D.Renderer.Dxf
                 new DXF.Vector3(ToDxfX(x), ToDxfY(y), 0),
                 text.Style.TextStyle.FontSize * _targetDpi / _sourceDpi,
                 rect.Width,
-                ts);
-            dxfMText.AttachmentPoint = attachmentPoint;
+                ts)
+            {
+                AttachmentPoint = attachmentPoint
+            };
 
             var options = new DXFE.MTextFormattingOptions();
             var fs = text.Style.TextStyle.FontStyle;
@@ -981,7 +1001,9 @@ namespace Core2D.Renderer.Dxf
                 else
                 {
                     if (State.ImageCache == null || string.IsNullOrEmpty(image.Key))
+                    {
                         return;
+                    }
 
                     var path = System.IO.Path.Combine(_outputPath, System.IO.Path.GetFileName(image.Key));
                     System.IO.File.WriteAllBytes(path, bytes);
@@ -1003,23 +1025,29 @@ namespace Core2D.Renderer.Dxf
         public void Draw(object dc, IPathShape path, double dx, double dy)
         {
             if (!path.IsStroked && !path.IsFilled)
+            {
                 return;
+            }
 
             var dxf = dc as DXF.DxfDocument;
             var style = path.Style;
 
             CreateHatchBoundsAndEntitiess(path.Geometry, dx, dy, out var bounds, out var entities);
             if (entities == null || bounds == null)
+            {
                 return;
+            }
 
             if (path.IsFilled)
             {
                 var fill = ToColor(style.Fill);
                 var fillTransparency = ToTransparency(style.Fill);
 
-                var hatch = new DXFE.Hatch(DXFE.HatchPattern.Solid, bounds, false);
-                hatch.Layer = _currentLayer;
-                hatch.Color = fill;
+                var hatch = new DXFE.Hatch(DXFE.HatchPattern.Solid, bounds, false)
+                {
+                    Layer = _currentLayer,
+                    Color = fill
+                };
                 hatch.Transparency.Value = fillTransparency;
 
                 dxf.AddEntity(hatch);
