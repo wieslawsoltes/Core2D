@@ -27,7 +27,7 @@ namespace Core2D.UI.Avalonia.Converters
             {
                 return values[0]?.Equals(values[1]);
             }
-            return AvaloniaProperty.UnsetValue; 
+            return AvaloniaProperty.UnsetValue;
         }
     }
 }
