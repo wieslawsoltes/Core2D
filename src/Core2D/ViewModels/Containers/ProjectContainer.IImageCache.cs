@@ -25,7 +25,9 @@ namespace Core2D.Containers
             var key = "Images\\" + name;
 
             if (_images.Keys.Contains(key))
+            {
                 return key;
+            }
 
             _images.Add(key, bytes);
             Notify(nameof(Keys));
@@ -36,7 +38,9 @@ namespace Core2D.Containers
         public void AddImage(string key, byte[] bytes)
         {
             if (_images.Keys.Contains(key))
+            {
                 return;
+            }
 
             _images.Add(key, bytes);
             Notify(nameof(Keys));
@@ -46,9 +50,13 @@ namespace Core2D.Containers
         public byte[] GetImage(string key)
         {
             if (_images.TryGetValue(key, out byte[] bytes))
+            {
                 return bytes;
+            }
             else
+            {
                 return null;
+            }
         }
 
         /// <inheritdoc/>
