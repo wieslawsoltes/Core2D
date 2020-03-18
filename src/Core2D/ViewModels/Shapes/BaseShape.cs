@@ -107,7 +107,10 @@ namespace Core2D.Shapes
         public virtual object GetProperty(string name)
         {
             if (_properties.ContainsKey(name))
+            {
                 return _properties[name];
+            }
+
             return null;
         }
 
