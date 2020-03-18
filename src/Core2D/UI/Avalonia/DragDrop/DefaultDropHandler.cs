@@ -66,7 +66,7 @@ namespace Dock.Avalonia
         {
             return false;
         }
-        
+
         /// <inheritdoc/>
         public virtual bool Execute(object sender, DragEventArgs e, object sourceContext, object targetContext, object state)
         {
