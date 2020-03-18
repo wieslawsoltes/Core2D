@@ -2,10 +2,10 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 #if !_CORERT
 using System;
-using Microsoft.CodeAnalysis.Scripting;
-using Microsoft.CodeAnalysis.CSharp.Scripting;
 using Core2D.Editor;
 using Core2D.Interfaces;
+using Microsoft.CodeAnalysis.CSharp.Scripting;
+using Microsoft.CodeAnalysis.Scripting;
 
 namespace Core2D.ScriptRunner.Roslyn
 {
