@@ -19,10 +19,14 @@ namespace Core2D.Editor
         public bool Equals(IShapeStyle x, IShapeStyle y)
         {
             if (object.ReferenceEquals(x, y))
+            {
                 return true;
+            }
 
             if (x is null || y is null)
+            {
                 return false;
+            }
 
             return x.Name == y.Name;
         }
@@ -35,7 +39,10 @@ namespace Core2D.Editor
         public int GetHashCode(IShapeStyle style)
         {
             if (style is null)
+            {
                 return 0;
+            }
+
             int hashProductName = style.Name == null ? 0 : style.Name.GetHashCode();
             return hashProductName;
         }
