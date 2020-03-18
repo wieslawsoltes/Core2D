@@ -13,7 +13,7 @@ using Core2D.Interfaces;
 using Core2D.Renderer;
 using Core2D.Shapes;
 using Core2D.Style;
-using DM=Dock.Model;
+using DM = Dock.Model;
 
 namespace Core2D.Editor
 {
