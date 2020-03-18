@@ -4,11 +4,11 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 using Avalonia.Media;
-using Core2D.UI.Avalonia.Renderer;
 using Core2D.Containers;
+using Core2D.Data;
 using Core2D.Renderer;
 using Core2D.Renderer.Presenters;
-using Core2D.Data;
+using Core2D.UI.Avalonia.Renderer;
 
 namespace Core2D.UI.Avalonia.Views
 {
