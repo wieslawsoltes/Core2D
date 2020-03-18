@@ -1,6 +1,4 @@
-﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
-// Licensed under the MIT license. See LICENSE file in the project root for full license information.
-using Autofac;
+﻿using Autofac;
 using Core2D.Editor;
 using Core2D.Interfaces;
 using Core2D.UI.Avalonia.Editor;

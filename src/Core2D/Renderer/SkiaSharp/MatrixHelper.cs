@@ -1,6 +1,4 @@
-﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
-// Licensed under the MIT license. See LICENSE file in the project root for full license information.
-using SkiaSharp;
+﻿using SkiaSharp;
 using static System.Math;
 
 namespace Core2D.Renderer.SkiaSharp

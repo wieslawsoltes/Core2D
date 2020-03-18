@@ -1,6 +1,4 @@
-﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
-// Licensed under the MIT license. See LICENSE file in the project root for full license information.
-using System.Collections.Immutable;
+﻿using System.Collections.Immutable;
 using Core2D.Data;
 using Core2D.History;
 using Core2D.Shapes;
