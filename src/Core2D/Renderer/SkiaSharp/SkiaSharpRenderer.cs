@@ -2,9 +2,7 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
 using System.Collections.Generic;
-using System.Collections.Immutable;
 using Core2D.Containers;
-using Core2D.Data;
 using Core2D.Interfaces;
 using Core2D.Shapes;
 using Core2D.Style;
@@ -674,7 +672,9 @@ namespace Core2D.Renderer.SkiaSharp
             else
             {
                 if (State.ImageCache == null || string.IsNullOrEmpty(image.Key))
+                {
                     return;
+                }
 
                 var bytes = State.ImageCache.GetImage(image.Key);
                 if (bytes != null)
