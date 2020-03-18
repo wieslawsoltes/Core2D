@@ -19,7 +19,10 @@ namespace Core2D.Editor.History
         {
             var undo = UndoRedo.Create(() => update(previous), () => update(next));
             if (_redos.Count > 0)
+            {
                 _redos.Clear();
+            }
+
             _undos.Push(undo);
         }
 
@@ -39,7 +42,9 @@ namespace Core2D.Editor.History
         bool IHistory.Undo()
         {
             if (_undos.Count <= 0)
+            {
                 return false;
+            }
 
             var undo = _undos.Pop();
             if (undo.Undo != null)
@@ -59,7 +64,9 @@ namespace Core2D.Editor.History
         bool IHistory.Redo()
         {
             if (_redos.Count <= 0)
+            {
                 return false;
+            }
 
             var redo = _redos.Pop();
             if (redo.Redo != null)
