@@ -180,7 +180,8 @@ namespace Core2D.UI.Avalonia.Dock.Factories
                         VisibleDockables = CreateList<DM.IDockable>
                         (
                             groupsTool,
-                            databasesTool
+                            databasesTool,
+                            toolsTool
                         )
                     }
                 )
@@ -223,7 +224,6 @@ namespace Core2D.UI.Avalonia.Dock.Factories
                         VisibleDockables = CreateList<DM.IDockable>
                         (
                             shapeTool,
-                            toolsTool,
                             dataTool,
                             styleTool,
                             templateTool
