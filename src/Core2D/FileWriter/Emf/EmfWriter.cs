@@ -2,8 +2,6 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
 using System.Collections.Generic;
-using System.Collections.Immutable;
-using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
@@ -185,11 +183,15 @@ namespace Core2D.FileWriter.Emf
         void IFileWriter.Save(string path, object item, object options)
         {
             if (string.IsNullOrEmpty(path) || item == null)
+            {
                 return;
+            }
 
             var ic = options as IImageCache;
             if (options == null)
+            {
                 return;
+            }
 
             if (item is IPageContainer page)
             {
