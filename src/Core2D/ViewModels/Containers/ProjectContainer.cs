@@ -143,7 +143,9 @@ namespace Core2D.Containers
         public static IEnumerable<IBaseShape> GetAllShapes(IEnumerable<IBaseShape> shapes)
         {
             if (shapes == null)
+            {
                 yield break;
+            }
 
             foreach (var shape in shapes)
             {
