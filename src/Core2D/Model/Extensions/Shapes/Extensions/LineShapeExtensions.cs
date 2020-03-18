@@ -24,7 +24,9 @@ namespace Core2D.Shapes
             var ls = line.Style.LineStyle;
 
             if (ls.FixedLength.Flags == LineFixedLengthFlags.Disabled)
+            {
                 return;
+            }
 
             if (ls.FixedLength.Flags.HasFlag(LineFixedLengthFlags.All))
             {
@@ -112,17 +114,25 @@ namespace Core2D.Shapes
             if (shortenStart && !shortenEnd)
             {
                 if (x2 > x1)
+                {
                     x1 = x2 - ls.FixedLength.Length;
+                }
                 else
+                {
                     x1 = x2 + ls.FixedLength.Length;
+                }
             }
 
             if (!shortenStart && shortenEnd)
             {
                 if (x2 > x1)
+                {
                     x2 = x1 + ls.FixedLength.Length;
+                }
                 else
+                {
                     x2 = x1 - ls.FixedLength.Length;
+                }
             }
         }
 
@@ -147,17 +157,25 @@ namespace Core2D.Shapes
             if (shortenStart && !shortenEnd)
             {
                 if (y2 > y1)
+                {
                     y1 = y2 - ls.FixedLength.Length;
+                }
                 else
+                {
                     y1 = y2 + ls.FixedLength.Length;
+                }
             }
 
             if (!shortenStart && shortenEnd)
             {
                 if (y2 > y1)
+                {
                     y2 = y1 + ls.FixedLength.Length;
+                }
                 else
+                {
                     y2 = y1 - ls.FixedLength.Length;
+                }
             }
         }
 
