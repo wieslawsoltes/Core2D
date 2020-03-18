@@ -15,7 +15,9 @@ namespace Core2D.Editor.Bounds.Shapes
         public IPointShape TryToGetPoint(IBaseShape shape, Point2 target, double radius, IDictionary<Type, IBounds> registered)
         {
             if (!(shape is IPathShape path))
+            {
                 throw new ArgumentNullException(nameof(shape));
+            }
 
             var pointHitTest = registered[typeof(IPointShape)];
 
@@ -33,22 +35,32 @@ namespace Core2D.Editor.Bounds.Shapes
         public bool Contains(IBaseShape shape, Point2 target, double radius, IDictionary<Type, IBounds> registered)
         {
             if (!(shape is IPathShape path))
+            {
                 throw new ArgumentNullException(nameof(shape));
+            }
 
             var points = path.GetPoints();
             if (points.Count() > 0)
+            {
                 return HitTestHelper.Contains(points, target);
+            }
+
             return false;
         }
 
         public bool Overlaps(IBaseShape shape, Rect2 target, double radius, IDictionary<Type, IBounds> registered)
         {
             if (!(shape is IPathShape path))
+            {
                 throw new ArgumentNullException(nameof(shape));
+            }
 
             var points = path.GetPoints();
             if (points.Count() > 0)
+            {
                 return HitTestHelper.Overlap(points, target);
+            }
+
             return false;
         }
     }
