@@ -14,7 +14,9 @@ namespace Core2D.Editor.Bounds.Shapes
         public IPointShape TryToGetPoint(IBaseShape shape, Point2 target, double radius, IDictionary<Type, IBounds> registered)
         {
             if (!(shape is IPointShape point))
+            {
                 throw new ArgumentNullException(nameof(shape));
+            }
 
             if (Point2.FromXY(point.X, point.Y).ExpandToRect(radius).Contains(target.X, target.Y))
             {
@@ -27,7 +29,9 @@ namespace Core2D.Editor.Bounds.Shapes
         public bool Contains(IBaseShape shape, Point2 target, double radius, IDictionary<Type, IBounds> registered)
         {
             if (!(shape is IPointShape point))
+            {
                 throw new ArgumentNullException(nameof(shape));
+            }
 
             return Point2.FromXY(point.X, point.Y).ExpandToRect(radius).Contains(target.X, target.Y);
         }
@@ -35,7 +39,9 @@ namespace Core2D.Editor.Bounds.Shapes
         public bool Overlaps(IBaseShape shape, Rect2 target, double radius, IDictionary<Type, IBounds> registered)
         {
             if (!(shape is IPointShape point))
+            {
                 throw new ArgumentNullException(nameof(shape));
+            }
 
             return Point2.FromXY(point.X, point.Y).ExpandToRect(radius).IntersectsWith(target);
         }
