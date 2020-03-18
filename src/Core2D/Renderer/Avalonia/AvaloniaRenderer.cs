@@ -2,10 +2,7 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
 using System.Collections.Generic;
-using System.Collections.Immutable;
-using System.Diagnostics;
 using Core2D.Containers;
-using Core2D.Data;
 using Core2D.Interfaces;
 using Core2D.Shapes;
 using Core2D.Style;
@@ -13,8 +10,8 @@ using Spatial;
 using Spatial.Arc;
 using A = Avalonia;
 using AM = Avalonia.Media;
-using AMI = Avalonia.Media.Imaging;
 using AME = Avalonia.MatrixExtensions;
+using AMI = Avalonia.Media.Imaging;
 
 namespace Core2D.Renderer.Avalonia
 {
@@ -295,7 +292,9 @@ namespace Core2D.Renderer.Avalonia
         private static void DrawRectangleInternal(AM.DrawingContext dc, AM.IBrush brush, AM.Pen pen, bool isStroked, bool isFilled, ref Rect2 rect)
         {
             if (!isStroked && !isFilled)
+            {
                 return;
+            }
 
             var r = new A.Rect(rect.X, rect.Y, rect.Width, rect.Height);
 
@@ -313,7 +312,9 @@ namespace Core2D.Renderer.Avalonia
         private static void DrawEllipseInternal(AM.DrawingContext dc, AM.IBrush brush, AM.Pen pen, bool isStroked, bool isFilled, ref Rect2 rect)
         {
             if (!isFilled && !isStroked)
+            {
                 return;
+            }
 
             var r = new A.Rect(rect.X, rect.Y, rect.Width, rect.Height);
             var g = new AM.EllipseGeometry(r);
@@ -530,7 +531,9 @@ namespace Core2D.Renderer.Avalonia
 
             var style = line.Style;
             if (style == null)
+            {
                 return;
+            }
 
             GetCached(style, out var fill, out var stroke);
 
@@ -560,7 +563,9 @@ namespace Core2D.Renderer.Avalonia
 
             var style = rectangle.Style;
             if (style == null)
+            {
                 return;
+            }
 
             GetCached(style, out var fill, out var stroke);
 
@@ -593,7 +598,9 @@ namespace Core2D.Renderer.Avalonia
 
             var style = ellipse.Style;
             if (style == null)
+            {
                 return;
+            }
 
             GetCached(style, out var fill, out var stroke);
 
@@ -612,13 +619,17 @@ namespace Core2D.Renderer.Avalonia
         public void Draw(object dc, IArcShape arc, double dx, double dy)
         {
             if (!arc.IsFilled && !arc.IsStroked)
+            {
                 return;
+            }
 
             var _dc = dc as AM.DrawingContext;
 
             var style = arc.Style;
             if (style == null)
+            {
                 return;
+            }
 
             GetCached(style, out var fill, out var stroke);
 
@@ -634,13 +645,17 @@ namespace Core2D.Renderer.Avalonia
         public void Draw(object dc, ICubicBezierShape cubicBezier, double dx, double dy)
         {
             if (!cubicBezier.IsFilled && !cubicBezier.IsStroked)
+            {
                 return;
+            }
 
             var _dc = dc as AM.DrawingContext;
 
             var style = cubicBezier.Style;
             if (style == null)
+            {
                 return;
+            }
 
             GetCached(style, out var fill, out var stroke);
 
@@ -656,13 +671,17 @@ namespace Core2D.Renderer.Avalonia
         public void Draw(object dc, IQuadraticBezierShape quadraticBezier, double dx, double dy)
         {
             if (!quadraticBezier.IsFilled && !quadraticBezier.IsStroked)
+            {
                 return;
+            }
 
             var _dc = dc as AM.DrawingContext;
 
             var style = quadraticBezier.Style;
             if (style == null)
+            {
                 return;
+            }
 
             GetCached(style, out var fill, out var stroke);
 
@@ -681,7 +700,9 @@ namespace Core2D.Renderer.Avalonia
 
             var style = text.Style;
             if (style == null)
+            {
                 return;
+            }
 
             if (!(text.GetProperty(nameof(ITextShape.Text)) is string tbind))
             {
@@ -766,7 +787,9 @@ namespace Core2D.Renderer.Avalonia
         public void Draw(object dc, IImageShape image, double dx, double dy)
         {
             if (image.Key == null)
+            {
                 return;
+            }
 
             var _dc = dc as AM.DrawingContext;
             var style = image.Style;
@@ -804,7 +827,9 @@ namespace Core2D.Renderer.Avalonia
             else
             {
                 if (State.ImageCache == null || string.IsNullOrEmpty(image.Key))
+                {
                     return;
+                }
 
                 try
                 {
@@ -836,16 +861,22 @@ namespace Core2D.Renderer.Avalonia
         public void Draw(object dc, IPathShape path, double dx, double dy)
         {
             if (path.Geometry == null)
+            {
                 return;
+            }
 
             if (!path.IsFilled && !path.IsStroked)
+            {
                 return;
+            }
 
             var _dc = dc as AM.DrawingContext;
 
             var style = path.Style;
             if (style == null)
+            {
                 return;
+            }
 
             GetCached(style, out var fill, out var stroke);
 
