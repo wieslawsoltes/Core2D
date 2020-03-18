@@ -62,11 +62,15 @@ namespace Core2D.Editor.Tools
                 case State.TopLeft:
                     {
                         if (editor.ImageImporter == null)
+                        {
                             return;
+                        }
 
                         var key = await editor.ImageImporter.GetImageKeyAsync();
                         if (key == null || string.IsNullOrEmpty(key))
+                        {
                             return;
+                        }
 
                         var style = editor.Project.CurrentStyleLibrary.Selected;
                         _image = factory.CreateImageShape(
