@@ -36,11 +36,15 @@ namespace Core2D.FileWriter.SkiaSharpPng
         void IFileWriter.Save(string path, object item, object options)
         {
             if (string.IsNullOrEmpty(path) || item == null)
+            {
                 return;
+            }
 
             var ic = options as IImageCache;
             if (options == null)
+            {
                 return;
+            }
 
             var renderer = new SkiaSharpRenderer(_serviceProvider, true, 96.0);
             renderer.State.DrawShapeState.Flags = ShapeStateFlags.Printable;
