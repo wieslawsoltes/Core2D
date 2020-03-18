@@ -2,7 +2,6 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using Avalonia;
 using Avalonia.Markup.Xaml;
-using Avalonia.ThemeManager;
 using Dock.Avalonia.Controls;
 
 namespace Core2D.UI.Avalonia.Windows
