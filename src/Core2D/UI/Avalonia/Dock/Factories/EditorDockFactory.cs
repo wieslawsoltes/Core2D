@@ -2,12 +2,12 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
 using System.Collections.Generic;
-using Core2D.UI.Avalonia.Dock.Views;
+using Core2D.Editor;
 using Core2D.UI.Avalonia.Dock.Documents;
 using Core2D.UI.Avalonia.Dock.Tools;
-using Core2D.Editor;
-using DM=Dock.Model;
-using DMC=Dock.Model.Controls;
+using Core2D.UI.Avalonia.Dock.Views;
+using DM = Dock.Model;
+using DMC = Dock.Model.Controls;
 
 namespace Core2D.UI.Avalonia.Dock.Factories
 {
