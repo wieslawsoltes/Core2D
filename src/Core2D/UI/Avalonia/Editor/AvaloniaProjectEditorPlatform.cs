@@ -1,21 +1,14 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
-using System.Drawing;
-using System.Drawing.Drawing2D;
-using System.Drawing.Imaging;
-using System.Drawing.Text;
 using System.Linq;
-using System.Threading.Tasks;
 using Avalonia.Controls;
-using Core2D.UI.Avalonia.Windows;
 using Core2D.Containers;
 using Core2D.Data;
 using Core2D.Editor;
-using Core2D.FileWriter.Emf;
 using Core2D.Interfaces;
-using Core2D.Renderer;
-using DM=Dock.Model;
+using Core2D.UI.Avalonia.Windows;
+using DM = Dock.Model;
 
 namespace Core2D.UI.Avalonia.Editor
 {
