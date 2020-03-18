@@ -36,7 +36,7 @@ namespace Dock.Avalonia
         /// </summary>
         public object Context
         {
-            get => (object)GetValue(ContextProperty);
+            get => GetValue(ContextProperty);
             set => SetValue(ContextProperty, value);
         }
 
