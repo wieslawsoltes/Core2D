@@ -35,11 +35,15 @@ namespace Core2D.FileWriter.PdfSharp
         void IFileWriter.Save(string path, object item, object options)
         {
             if (string.IsNullOrEmpty(path) || item == null)
+            {
                 return;
+            }
 
             var ic = options as IImageCache;
             if (options == null)
+            {
                 return;
+            }
 
             IProjectExporter exporter = new PdfSharpRenderer(_serviceProvider);
 
