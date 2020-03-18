@@ -16,7 +16,7 @@ using Core2D.Interfaces;
 using Core2D.UI.Avalonia.Converters;
 using Core2D.UI.Avalonia.Modules;
 using Core2D.UI.Avalonia.Views;
-using DM=Dock.Model;
+using DM = Dock.Model;
 
 namespace Core2D.UI.Avalonia
 {
