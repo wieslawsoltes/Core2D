@@ -294,7 +294,9 @@ namespace Core2D.Editor
         private void Add(IDatabase database)
         {
             if (database == null)
+            {
                 return;
+            }
 
             database.PropertyChanged += ObserveDatabase;
 
@@ -312,7 +314,9 @@ namespace Core2D.Editor
         private void Remove(IDatabase database)
         {
             if (database == null)
+            {
                 return;
+            }
 
             database.PropertyChanged -= ObserveDatabase;
 
@@ -330,7 +334,9 @@ namespace Core2D.Editor
         private void Add(IColumn column)
         {
             if (column == null)
+            {
                 return;
+            }
 
             column.PropertyChanged += ObserveColumn;
         }
@@ -338,7 +344,9 @@ namespace Core2D.Editor
         private void Remove(IColumn column)
         {
             if (column == null)
+            {
                 return;
+            }
 
             column.PropertyChanged -= ObserveColumn;
         }
@@ -346,7 +354,9 @@ namespace Core2D.Editor
         private void Add(IRecord record)
         {
             if (record == null)
+            {
                 return;
+            }
 
             record.PropertyChanged += ObserveRecord;
 
@@ -359,7 +369,9 @@ namespace Core2D.Editor
         private void Remove(IRecord record)
         {
             if (record == null)
+            {
                 return;
+            }
 
             record.PropertyChanged -= ObserveRecord;
 
@@ -372,7 +384,9 @@ namespace Core2D.Editor
         private void Add(IValue value)
         {
             if (value == null)
+            {
                 return;
+            }
 
             value.PropertyChanged += ObserveValue;
         }
@@ -380,7 +394,9 @@ namespace Core2D.Editor
         private void Remove(IValue value)
         {
             if (value == null)
+            {
                 return;
+            }
 
             value.PropertyChanged -= ObserveValue;
         }
@@ -388,7 +404,9 @@ namespace Core2D.Editor
         private void Add(IOptions options)
         {
             if (options == null)
+            {
                 return;
+            }
 
             if (options.PointShape != null)
             {
@@ -414,7 +432,9 @@ namespace Core2D.Editor
         private void Remove(IOptions options)
         {
             if (options == null)
+            {
                 return;
+            }
 
             if (options.PointShape != null)
             {
@@ -440,7 +460,9 @@ namespace Core2D.Editor
         private void Add(IProjectContainer project)
         {
             if (project == null)
+            {
                 return;
+            }
 
             project.PropertyChanged += ObserveProject;
 
@@ -482,7 +504,9 @@ namespace Core2D.Editor
         private void Remove(IProjectContainer project)
         {
             if (project == null)
+            {
                 return;
+            }
 
             project.PropertyChanged -= ObserveProject;
 
@@ -524,7 +548,9 @@ namespace Core2D.Editor
         private void Add(IDocumentContainer document)
         {
             if (document == null)
+            {
                 return;
+            }
 
             document.PropertyChanged += ObserveDocument;
 
@@ -540,7 +566,9 @@ namespace Core2D.Editor
         private void Remove(IDocumentContainer document)
         {
             if (document == null)
+            {
                 return;
+            }
 
             document.PropertyChanged -= ObserveDocument;
 
@@ -556,7 +584,9 @@ namespace Core2D.Editor
         private void Add(IPageContainer container)
         {
             if (container == null)
+            {
                 return;
+            }
 
             container.PropertyChanged += ObservePage;
 
@@ -589,7 +619,9 @@ namespace Core2D.Editor
         private void Remove(IPageContainer container)
         {
             if (container == null)
+            {
                 return;
+            }
 
             container.PropertyChanged -= ObservePage;
 
@@ -622,7 +654,9 @@ namespace Core2D.Editor
         private void Add(ILayerContainer layer)
         {
             if (layer == null)
+            {
                 return;
+            }
 
             layer.PropertyChanged += ObserveLayer;
 
@@ -637,7 +671,9 @@ namespace Core2D.Editor
         private void Remove(ILayerContainer layer)
         {
             if (layer == null)
+            {
                 return;
+            }
 
             layer.PropertyChanged -= ObserveLayer;
 
@@ -652,7 +688,9 @@ namespace Core2D.Editor
         private void Add(IBaseShape shape)
         {
             if (shape == null)
+            {
                 return;
+            }
 
             shape.PropertyChanged += ObserveShape;
 
@@ -823,7 +861,9 @@ namespace Core2D.Editor
         private void Remove(IBaseShape shape)
         {
             if (shape == null)
+            {
                 return;
+            }
 
             shape.PropertyChanged -= ObserveShape;
 
@@ -994,7 +1034,9 @@ namespace Core2D.Editor
         private void Add(IPathGeometry geometry)
         {
             if (geometry == null)
+            {
                 return;
+            }
 
             geometry.PropertyChanged += ObserveShape;
 
@@ -1007,7 +1049,9 @@ namespace Core2D.Editor
         private void Remove(IPathGeometry geometry)
         {
             if (geometry == null)
+            {
                 return;
+            }
 
             geometry.PropertyChanged -= ObserveShape;
 
@@ -1020,7 +1064,9 @@ namespace Core2D.Editor
         private void Add(IPathFigure figure)
         {
             if (figure == null)
+            {
                 return;
+            }
 
             figure.PropertyChanged += ObserveShape;
 
@@ -1038,7 +1084,9 @@ namespace Core2D.Editor
         private void Remove(IPathFigure figure)
         {
             if (figure == null)
+            {
                 return;
+            }
 
             figure.PropertyChanged -= ObserveShape;
 
@@ -1056,7 +1104,9 @@ namespace Core2D.Editor
         private void Add(IPathSegment segment)
         {
             if (segment == null)
+            {
                 return;
+            }
 
             segment.PropertyChanged += ObserveShape;
 
@@ -1111,7 +1161,9 @@ namespace Core2D.Editor
         private void Remove(IPathSegment segment)
         {
             if (segment == null)
+            {
                 return;
+            }
 
             segment.PropertyChanged -= ObserveShape;
 
@@ -1166,7 +1218,9 @@ namespace Core2D.Editor
         private void Add(IContext data)
         {
             if (data == null)
+            {
                 return;
+            }
 
             if (data.Properties != null)
             {
@@ -1179,7 +1233,9 @@ namespace Core2D.Editor
         private void Remove(IContext data)
         {
             if (data == null)
+            {
                 return;
+            }
 
             if (data.Properties != null)
             {
@@ -1192,7 +1248,9 @@ namespace Core2D.Editor
         private void Add(ILibrary<IShapeStyle> sg)
         {
             if (sg == null)
+            {
                 return;
+            }
 
             if (sg.Items != null)
             {
@@ -1205,7 +1263,9 @@ namespace Core2D.Editor
         private void Remove(ILibrary<IShapeStyle> sg)
         {
             if (sg == null)
+            {
                 return;
+            }
 
             if (sg.Items != null)
             {
@@ -1218,7 +1278,9 @@ namespace Core2D.Editor
         private void Add(ILibrary<IGroupShape> gl)
         {
             if (gl == null)
+            {
                 return;
+            }
 
             if (gl.Items != null)
             {
@@ -1231,7 +1293,9 @@ namespace Core2D.Editor
         private void Remove(ILibrary<IGroupShape> gl)
         {
             if (gl == null)
+            {
                 return;
+            }
 
             if (gl.Items != null)
             {
@@ -1244,7 +1308,9 @@ namespace Core2D.Editor
         private void Add(IShapeStyle style)
         {
             if (style == null)
+            {
                 return;
+            }
 
             style.PropertyChanged += ObserveStyle;
 
@@ -1312,7 +1378,9 @@ namespace Core2D.Editor
         private void Remove(IShapeStyle style)
         {
             if (style == null)
+            {
                 return;
+            }
 
             style.PropertyChanged -= ObserveStyle;
 
@@ -1380,7 +1448,9 @@ namespace Core2D.Editor
         private void Add(IProperty property)
         {
             if (property == null)
+            {
                 return;
+            }
 
             property.PropertyChanged += ObserveProperty;
         }
@@ -1388,7 +1458,9 @@ namespace Core2D.Editor
         private void Remove(IProperty property)
         {
             if (property == null)
+            {
                 return;
+            }
 
             property.PropertyChanged -= ObserveProperty;
         }
@@ -1396,7 +1468,9 @@ namespace Core2D.Editor
         private void Add(IEnumerable<IDatabase> databases)
         {
             if (databases == null)
+            {
                 return;
+            }
 
             foreach (var database in databases)
             {
@@ -1407,7 +1481,9 @@ namespace Core2D.Editor
         private void Remove(IEnumerable<IDatabase> databases)
         {
             if (databases == null)
+            {
                 return;
+            }
 
             foreach (var database in databases)
             {
@@ -1418,7 +1494,9 @@ namespace Core2D.Editor
         private void Add(IEnumerable<IColumn> columns)
         {
             if (columns == null)
+            {
                 return;
+            }
 
             foreach (var column in columns)
             {
@@ -1429,7 +1507,9 @@ namespace Core2D.Editor
         private void Remove(IEnumerable<IColumn> columns)
         {
             if (columns == null)
+            {
                 return;
+            }
 
             foreach (var column in columns)
             {
@@ -1440,7 +1520,9 @@ namespace Core2D.Editor
         private void Add(IEnumerable<IRecord> records)
         {
             if (records == null)
+            {
                 return;
+            }
 
             foreach (var record in records)
             {
@@ -1451,7 +1533,9 @@ namespace Core2D.Editor
         private void Remove(IEnumerable<IRecord> records)
         {
             if (records == null)
+            {
                 return;
+            }
 
             foreach (var record in records)
             {
@@ -1462,7 +1546,9 @@ namespace Core2D.Editor
         private void Add(IEnumerable<IValue> values)
         {
             if (values == null)
+            {
                 return;
+            }
 
             foreach (var value in values)
             {
@@ -1473,7 +1559,9 @@ namespace Core2D.Editor
         private void Remove(IEnumerable<IValue> values)
         {
             if (values == null)
+            {
                 return;
+            }
 
             foreach (var value in values)
             {
@@ -1484,7 +1572,9 @@ namespace Core2D.Editor
         private void Add(IEnumerable<IDocumentContainer> documents)
         {
             if (documents == null)
+            {
                 return;
+            }
 
             foreach (var document in documents)
             {
@@ -1495,7 +1585,9 @@ namespace Core2D.Editor
         private void Remove(IEnumerable<IDocumentContainer> documents)
         {
             if (documents == null)
+            {
                 return;
+            }
 
             foreach (var document in documents)
             {
@@ -1506,7 +1598,9 @@ namespace Core2D.Editor
         private void Add(IEnumerable<IPageContainer> containers)
         {
             if (containers == null)
+            {
                 return;
+            }
 
             foreach (var page in containers)
             {
@@ -1517,7 +1611,9 @@ namespace Core2D.Editor
         private void Remove(IEnumerable<IPageContainer> containers)
         {
             if (containers == null)
+            {
                 return;
+            }
 
             foreach (var page in containers)
             {
@@ -1528,7 +1624,9 @@ namespace Core2D.Editor
         private void Add(IEnumerable<ILayerContainer> layers)
         {
             if (layers == null)
+            {
                 return;
+            }
 
             foreach (var layer in layers)
             {
@@ -1539,7 +1637,9 @@ namespace Core2D.Editor
         private void Remove(IEnumerable<ILayerContainer> layers)
         {
             if (layers == null)
+            {
                 return;
+            }
 
             foreach (var layer in layers)
             {
@@ -1550,7 +1650,9 @@ namespace Core2D.Editor
         private void Add(IEnumerable<IBaseShape> shapes)
         {
             if (shapes == null)
+            {
                 return;
+            }
 
             foreach (var shape in shapes)
             {
@@ -1561,7 +1663,9 @@ namespace Core2D.Editor
         private void Remove(IEnumerable<IBaseShape> shapes)
         {
             if (shapes == null)
+            {
                 return;
+            }
 
             foreach (var shape in shapes)
             {
@@ -1572,7 +1676,9 @@ namespace Core2D.Editor
         private void Add(IEnumerable<IPathFigure> figures)
         {
             if (figures == null)
+            {
                 return;
+            }
 
             foreach (var figure in figures)
             {
@@ -1583,7 +1689,9 @@ namespace Core2D.Editor
         private void Remove(IEnumerable<IPathFigure> figures)
         {
             if (figures == null)
+            {
                 return;
+            }
 
             foreach (var figure in figures)
             {
@@ -1594,7 +1702,9 @@ namespace Core2D.Editor
         private void Add(IEnumerable<IPathSegment> segments)
         {
             if (segments == null)
+            {
                 return;
+            }
 
             foreach (var segment in segments)
             {
@@ -1605,7 +1715,9 @@ namespace Core2D.Editor
         private void Remove(IEnumerable<IPathSegment> segments)
         {
             if (segments == null)
+            {
                 return;
+            }
 
             foreach (var segment in segments)
             {
@@ -1616,7 +1728,9 @@ namespace Core2D.Editor
         private void Add(IEnumerable<IShapeStyle> styles)
         {
             if (styles == null)
+            {
                 return;
+            }
 
             foreach (var style in styles)
             {
@@ -1627,7 +1741,9 @@ namespace Core2D.Editor
         private void Remove(IEnumerable<IShapeStyle> styles)
         {
             if (styles == null)
+            {
                 return;
+            }
 
             foreach (var style in styles)
             {
@@ -1638,7 +1754,9 @@ namespace Core2D.Editor
         private void Add(IEnumerable<ILibrary<IShapeStyle>> sgs)
         {
             if (sgs == null)
+            {
                 return;
+            }
 
             foreach (var sg in sgs)
             {
@@ -1649,7 +1767,9 @@ namespace Core2D.Editor
         private void Remove(IEnumerable<ILibrary<IShapeStyle>> sgs)
         {
             if (sgs == null)
+            {
                 return;
+            }
 
             foreach (var sg in sgs)
             {
@@ -1660,7 +1780,9 @@ namespace Core2D.Editor
         private void Add(IEnumerable<ILibrary<IGroupShape>> gl)
         {
             if (gl == null)
+            {
                 return;
+            }
 
             foreach (var g in gl)
             {
@@ -1671,7 +1793,9 @@ namespace Core2D.Editor
         private void Remove(IEnumerable<ILibrary<IGroupShape>> gl)
         {
             if (gl == null)
+            {
                 return;
+            }
 
             foreach (var g in gl)
             {
@@ -1682,7 +1806,9 @@ namespace Core2D.Editor
         private void Add(IEnumerable<IProperty> properties)
         {
             if (properties == null)
+            {
                 return;
+            }
 
             foreach (var property in properties)
             {
@@ -1693,7 +1819,9 @@ namespace Core2D.Editor
         private void Remove(IEnumerable<IProperty> properties)
         {
             if (properties == null)
+            {
                 return;
+            }
 
             foreach (var property in properties)
             {
