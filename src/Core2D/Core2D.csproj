@@ -44,6 +44,18 @@
     <PublishReadyToRun>False</PublishReadyToRun>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Include="**\*.cs" Exclude="obj\**" />
+    <Compile Update="**\*.xaml.cs">
+      <DependentUpon>%(Filename)</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <AvaloniaResource Include="**\*.xaml">
+      <SubType>Designer</SubType>
+    </AvaloniaResource>
+    <AvaloniaResource Include="Assets\*" Exclude="bin\**;obj\**;**\*.xproj;packages\**;@(EmbeddedResource)" />
+  </ItemGroup>
+
   <ItemGroup Condition="'$(CoreRT)' == 'True'">
     <RdXmlFile Include="..\..\build\native\netcore.rd.xml" />
     <RdXmlFile Include="..\..\build\native\app.rd.xml" />
@@ -76,53 +88,45 @@
     <IlcDisableUnhandledExceptionExperience>True</IlcDisableUnhandledExceptionExperience>
   </PropertyGroup>
 
-  <Import Project="..\..\build\ReferenceAssemblies.props" />
-  <Import Project="..\..\build\ILCompiler.props" Condition="'$(CoreRT)' == 'True'" />
-  <Import Project="..\..\build\Autofac.props" />
-  <Import Project="..\..\build\Avalonia.Behaviors.props" />
-  <Import Project="..\..\build\Avalonia.DataGrid.props" />
-  <Import Project="..\..\build\Avalonia.Desktop.props" />
-  <Import Project="..\..\build\Avalonia.MatrixExtensions.props" />
-  <Import Project="..\..\build\Avalonia.PanAndZoom.props" />
-  <Import Project="..\..\build\Avalonia.ReactiveUI.props" />
-  <Import Project="..\..\build\Avalonia.ThemeManager.props" />
-  <Import Project="..\..\build\Avalonia.props" />
-  <Import Project="..\..\build\CsvHelper.props" />
-  <Import Project="..\..\build\Dock.Avalonia.props" />
-  <Import Project="..\..\build\Dock.Model.props" />
-  <Import Project="..\..\build\Math.Spatial.props" />
-  <Import Project="..\..\build\netDXF.props" />
-  <Import Project="..\..\build\Newtonsoft.Json.props" />
-  <Import Project="..\..\build\PDFsharp.props" />
-  <Import Project="..\..\build\Portable.Xaml.props" />
-  <Import Project="..\..\build\ReactiveUI.props" />
-  <Import Project="..\..\build\Roslyn.props" Condition="'$(CoreRT)' != 'True'" />
-  <Import Project="..\..\build\SkiaSharp.props" />
-  <Import Project="..\..\build\System.Diagnostics.props" />
-  <Import Project="..\..\build\System.Drawing.Common.props" />
-
   <ItemGroup>
+    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.0" PrivateAssets="All" />
+    <PackageReference Include="SourceLink.Create.CommandLine" Version="2.8.3" PrivateAssets="All" />
     <PackageReference Include="System.Collections.Immutable" Version="1.7.0" />
     <PackageReference Include="System.IO.Compression" Version="4.3.0" />
-    <PackageReference Include="SourceLink.Create.CommandLine" Version="2.8.3" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.DotNet.ILCompiler" Version="1.0.0-alpha-*" Condition="'$(CoreRT)' == 'True'" />
+    <PackageReference Include="Autofac" Version="5.1.2" />
+    <PackageReference Include="Avalonia" Version="0.9.4" />
+    <PackageReference Include="Avalonia.Xaml.Interactions" Version="0.9.4" />
+    <PackageReference Include="Avalonia.Xaml.Interactions.Custom" Version="0.9.4" />
+    <PackageReference Include="Avalonia.Controls.DataGrid" Version="0.9.4" />
+    <PackageReference Include="Avalonia.Desktop" Version="0.9.4" />
+    <PackageReference Include="Avalonia.Angle.Windows.Natives" Version="2.1.0.2019013001" />
+    <PackageReference Include="SkiaSharp.NativeAssets.Linux" Version="1.68.0" />
+    <PackageReference Include="Avalonia.MatrixExtensions" Version="2.3.2" />
+    <PackageReference Include="Avalonia.Controls.PanAndZoom" Version="2.3.2" />
+    <PackageReference Include="Avalonia.ReactiveUI" Version="0.9.4" />
+    <PackageReference Include="Avalonia.ThemeManager" Version="0.9.4" />
+    <PackageReference Include="CsvHelper" Version="15.0.1" />
+    <PackageReference Include="Dock.Avalonia" Version="0.9.4.1" />
+    <PackageReference Include="Dock.Avalonia.Themes.Default" Version="0.9.4.1" />
+    <PackageReference Include="Dock.Avalonia.Themes.Metro" Version="0.9.4.1" />
+    <PackageReference Include="Dock.Model" Version="0.9.4.1" />
+    <PackageReference Include="Dock.Model.ReactiveUI" Version="0.9.4.1" />
+    <PackageReference Include="Math.Spatial" Version="1.1.0" />
+    <PackageReference Include="netDXF.netstandard" Version="2.3.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <PackageReference Include="PDFsharp" Version="1.50.5147" />
+    <PackageReference Include="Portable.Xaml" Version="0.24.0" />
+    <PackageReference Include="reactiveui" Version="10.3.6" />
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Scripting" Version="3.5.0" Condition="'$(CoreRT)' != 'True'" />
+    <PackageReference Include="SkiaSharp" Version="1.68.0" />
+    <PackageReference Include="System.Diagnostics.TextWriterTraceListener" Version="4.3.0" Condition="!$(TargetFramework.StartsWith('net4'))" />
+    <PackageReference Include="System.Diagnostics.TraceSource" Version="4.3.0" Condition="!$(TargetFramework.StartsWith('net4'))" />
+    <PackageReference Include="System.Drawing.Common" Version="4.7.0"/>
   </ItemGroup>
 
   <ItemGroup Condition="$(TargetFramework.StartsWith('net4'))">
-    <Reference Include="System" />
-    <Reference Include="System.ComponentModel.Composition" />
-    <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
   </ItemGroup>
-
-  <ItemGroup>
-    <Compile Include="**\*.cs" Exclude="obj\**" />
-    <AvaloniaResource Include="Assets\*" Exclude="bin\**;obj\**;**\*.xproj;packages\**;@(EmbeddedResource)" />
-  </ItemGroup>
-
-  <Import Project="..\..\build\EmbedXaml.props" />
 
 </Project>
