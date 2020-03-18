@@ -15,10 +15,10 @@ using Core2D.Interfaces;
 using Core2D.Renderer;
 using Core2D.Shapes;
 using Core2D.Style;
-using DM=Dock.Model;
-using DMC=Dock.Model.Controls;
 using Spatial;
 using static System.Math;
+using DM = Dock.Model;
+using DMC = Dock.Model.Controls;
 
 namespace Core2D.Editor
 {
@@ -263,9 +263,13 @@ namespace Core2D.Editor
         public (double sx, double sy) TryToSnap(InputArgs args)
         {
             if (Project != null && Project.Options.SnapToGrid == true)
+            {
                 return (Snap(args.X, Project.Options.SnapX), Snap(args.Y, Project.Options.SnapY));
+            }
             else
+            {
                 return (args.X, args.Y);
+            }
         }
 
         /// <inheritdoc/>
@@ -1685,7 +1689,9 @@ namespace Core2D.Editor
                 {
                     var key = await (ImageImporter.GetImageKeyAsync() ?? Task.FromResult(string.Empty));
                     if (key == null || string.IsNullOrEmpty(key))
+                    {
                         return null;
+                    }
 
                     return key;
                 }
@@ -2165,7 +2171,9 @@ namespace Core2D.Editor
             try
             {
                 if (Project?.StyleLibraries == null)
+                {
                     return;
+                }
 
                 var styles = GenerateStyleDictionaryByName();
 
@@ -2176,7 +2184,9 @@ namespace Core2D.Editor
                 foreach (var shape in ProjectContainer.GetAllShapes(shapes))
                 {
                     if (shape?.Style == null)
+                    {
                         continue;
+                    }
 
                     if (!string.IsNullOrWhiteSpace(shape.Style.Name))
                     {
@@ -2231,7 +2241,9 @@ namespace Core2D.Editor
             try
             {
                 if (Project?.Databases == null)
+                {
                     return;
+                }
 
                 var records = GenerateRecordDictionaryById();
 
@@ -2239,9 +2251,11 @@ namespace Core2D.Editor
                 foreach (var shape in ProjectContainer.GetAllShapes(shapes))
                 {
                     if (shape?.Data?.Record == null)
+                    {
                         continue;
+                    }
 
-                    if (records.TryGetValue((string)shape.Data.Record.Id, out var record))
+                    if (records.TryGetValue(shape.Data.Record.Id, out var record))
                     {
                         // Use existing record.
                         shape.Data.Record = record;
@@ -2253,14 +2267,14 @@ namespace Core2D.Editor
                         {
                             var db = Factory.CreateDatabase(
                                 ProjectEditorConfiguration.ImportedDatabaseName,
-                                (ImmutableArray<IColumn>)owner.Columns);
+                                owner.Columns);
                             Project.AddDatabase(db);
                             Project.SetCurrentDatabase(db);
                         }
 
                         // Add missing data record.
                         shape.Data.Record.Owner = Project.CurrentDatabase;
-                        Project?.AddRecord(Project?.CurrentDatabase, (IRecord)shape.Data.Record);
+                        Project?.AddRecord(Project?.CurrentDatabase, shape.Data.Record);
 
                         // Recreate records dictionary.
                         records = GenerateRecordDictionaryById();
@@ -2441,7 +2455,9 @@ namespace Core2D.Editor
                     foreach (var path in files)
                     {
                         if (string.IsNullOrEmpty(path))
+                        {
                             continue;
+                        }
 
                         string ext = System.IO.Path.GetExtension(path);
 
@@ -2748,7 +2764,9 @@ namespace Core2D.Editor
         public void OnDeleteSelected()
         {
             if (Project?.CurrentContainer?.CurrentLayer == null || Renderers?[0]?.State == null)
+            {
                 return;
+            }
 
             if (Renderers[0].State.SelectedShape != null)
             {
@@ -2970,7 +2988,9 @@ namespace Core2D.Editor
         public bool TryToHoverShape(double x, double y)
         {
             if (Project?.CurrentContainer?.CurrentLayer == null)
+            {
                 return false;
+            }
 
             if (Renderers?[0]?.State?.SelectedShapes == null
                 && !(Renderers?[0]?.State?.SelectedShape != null && HoveredShape != Renderers?[0]?.State?.SelectedShape))
@@ -3041,7 +3061,9 @@ namespace Core2D.Editor
         public bool TryToSplitLine(double x, double y, IPointShape point, bool select = false)
         {
             if (Project?.CurrentContainer == null || Project?.Options == null)
+            {
                 return false;
+            }
 
             var result = HitTest.TryToGetShape(
                 Project.CurrentContainer.CurrentLayer.Shapes,
@@ -3099,15 +3121,21 @@ namespace Core2D.Editor
         public bool TryToSplitLine(ILineShape line, IPointShape p0, IPointShape p1)
         {
             if (Project?.Options == null)
+            {
                 return false;
+            }
 
             // Points must be aligned horizontally or vertically.
             if (p0.X != p1.X && p0.Y != p1.Y)
+            {
                 return false;
+            }
 
             // Line must be horizontal or vertical.
             if (line.Start.X != line.End.X && line.Start.Y != line.End.Y)
+            {
                 return false;
+            }
 
             ILineShape split;
             if (line.Start.X > line.End.X || line.Start.Y > line.End.Y)
