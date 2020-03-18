@@ -4,10 +4,10 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 using Avalonia.Controls;
-using Core2D.UI.Avalonia.Windows;
 using Core2D.Editor;
 using Core2D.Interfaces;
 using Core2D.Renderer;
+using Core2D.UI.Avalonia.Windows;
 
 namespace Core2D.UI.Avalonia.Importers
 {
