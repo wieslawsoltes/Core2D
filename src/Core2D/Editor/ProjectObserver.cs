@@ -174,8 +174,8 @@ namespace Core2D.Editor
             if (e.PropertyName == nameof(IContext.Properties))
             {
                 var container = sender as IPageContainer;
-                Remove((IEnumerable<IProperty>)container.Data.Properties);
-                Add((IEnumerable<IProperty>)container.Data.Properties);
+                Remove(container.Data.Properties);
+                Add(container.Data.Properties);
             }
 
             if (e.PropertyName == nameof(IPageContainer.Layers))
