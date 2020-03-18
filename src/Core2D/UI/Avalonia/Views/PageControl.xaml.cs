@@ -1,6 +1,5 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
-using System;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.PanAndZoom;
@@ -80,7 +79,9 @@ namespace Core2D.UI.Avalonia.Views
             if (DataContext is IProjectEditor projectEditor)
             {
                 if (_isLoaded)
+                {
                     return;
+                }
 
                 var containerControlData = this.Find<ContainerControl>("containerControlData");
                 var containerControlTemplate = this.Find<ContainerControl>("containerControlTemplate");
@@ -125,7 +126,9 @@ namespace Core2D.UI.Avalonia.Views
             if (DataContext is IProjectEditor projectEditor)
             {
                 if (!_isLoaded)
+                {
                     return;
+                }
 
                 if (projectEditor.CanvasPlatform is IEditorCanvasPlatform canvasPlatform)
                 {
