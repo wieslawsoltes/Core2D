@@ -20,15 +20,15 @@ namespace Core2D.Renderer.Avalonia
     {
         private readonly IServiceProvider _serviceProvider;
         private IShapeRendererState _state;
-        private ICache<IShapeStyle, (AM.IBrush, AM.Pen)> _styleCache;
-        private ICache<IArrowStyle, (AM.IBrush, AM.Pen)> _arrowStyleCache;
+        private readonly ICache<IShapeStyle, (AM.IBrush, AM.Pen)> _styleCache;
+        private readonly ICache<IArrowStyle, (AM.IBrush, AM.Pen)> _arrowStyleCache;
         // TODO: Add LineShape cache.
         // TODO: Add EllipseShape cache.
         // TODO: Add ArcShape cache.
         // TODO: Add CubicBezierShape cache.
         // TODO: Add QuadraticBezierShape cache.
-        private ICache<ITextShape, (string, AM.FormattedText, IShapeStyle)> _textCache;
-        private ICache<string, AMI.Bitmap> _biCache;
+        private readonly ICache<ITextShape, (string, AM.FormattedText, IShapeStyle)> _textCache;
+        private readonly ICache<string, AMI.Bitmap> _biCache;
         // TODO: Add PathShape cache.
         private readonly Func<double, float> _scaleToPage;
         private readonly double _textScaleFactor;
@@ -68,60 +68,32 @@ namespace Core2D.Renderer.Avalonia
 
         private A.Point GetTextOrigin(IShapeStyle style, ref Rect2 rect, ref A.Size size)
         {
-            double ox, oy;
-
-            switch (style.TextStyle.TextHAlignment)
+            var ox = style.TextStyle.TextHAlignment switch
             {
-                case TextHAlignment.Left:
-                    ox = rect.X;
-                    break;
-                case TextHAlignment.Right:
-                    ox = rect.Right - size.Width;
-                    break;
-                case TextHAlignment.Center:
-                default:
-                    ox = (rect.Left + rect.Width / 2.0) - (size.Width / 2.0);
-                    break;
-            }
-
-            switch (style.TextStyle.TextVAlignment)
+                TextHAlignment.Left => rect.X,
+                TextHAlignment.Right => rect.Right - size.Width,
+                _ => (rect.Left + rect.Width / 2.0) - (size.Width / 2.0),
+            };
+            var oy = style.TextStyle.TextVAlignment switch
             {
-                case TextVAlignment.Top:
-                    oy = rect.Y;
-                    break;
-                case TextVAlignment.Bottom:
-                    oy = rect.Bottom - size.Height;
-                    break;
-                case TextVAlignment.Center:
-                default:
-                    oy = (rect.Bottom - rect.Height / 2f) - (size.Height / 2f);
-                    break;
-            }
-
+                TextVAlignment.Top => rect.Y,
+                TextVAlignment.Bottom => rect.Bottom - size.Height,
+                _ => (rect.Bottom - rect.Height / 2f) - (size.Height / 2f),
+            };
             return new A.Point(ox, oy);
         }
 
-        private static AM.Color ToColor(IColor color)
+        private static AM.Color ToColor(IColor color) => color switch
         {
-            switch (color)
-            {
-                case IArgbColor argbColor:
-                    return AM.Color.FromArgb(argbColor.A, argbColor.R, argbColor.G, argbColor.B);
-                default:
-                    throw new NotSupportedException($"The {color.GetType()} color type is not supported.");
-            }
-        }
+            IArgbColor argbColor => AM.Color.FromArgb(argbColor.A, argbColor.R, argbColor.G, argbColor.B),
+            _ => throw new NotSupportedException($"The {color.GetType()} color type is not supported."),
+        };
 
-        private AM.IBrush ToBrush(IColor color)
+        private AM.IBrush ToBrush(IColor color) => color switch
         {
-            switch (color)
-            {
-                case IArgbColor argbColor:
-                    return new AM.SolidColorBrush(ToColor(argbColor));
-                default:
-                    throw new NotSupportedException($"The {color.GetType()} color type is not supported.");
-            }
-        }
+            IArgbColor argbColor => new AM.SolidColorBrush(ToColor(argbColor)),
+            _ => throw new NotSupportedException($"The {color.GetType()} color type is not supported."),
+        };
 
         private AM.Pen ToPen(IBaseStyle style, Func<double, float> scale)
         {
@@ -228,13 +200,13 @@ namespace Core2D.Renderer.Avalonia
 
         private static A.Point DrawLineArrowInternal(AM.DrawingContext dc, AM.Pen pen, AM.IBrush brush, float x, float y, double angle, IArrowStyle style)
         {
-            A.Point pt = default;
             var rt = AME.MatrixHelper.Rotation(angle, new A.Vector(x, y));
             double rx = style.RadiusX;
             double ry = style.RadiusY;
             double sx = 2.0 * rx;
             double sy = 2.0 * ry;
 
+            A.Point pt;
             switch (style.ArrowType)
             {
                 default:
@@ -247,20 +219,16 @@ namespace Core2D.Renderer.Avalonia
                     {
                         pt = AME.MatrixHelper.TransformPoint(rt, new A.Point(x - (float)sx, y));
                         var rect = new Rect2(x - sx, y - ry, sx, sy);
-                        using (var d = dc.PushPreTransform(rt))
-                        {
-                            DrawRectangleInternal(dc, brush, pen, style.IsStroked, style.IsFilled, ref rect);
-                        }
+                        using var d = dc.PushPreTransform(rt);
+                        DrawRectangleInternal(dc, brush, pen, style.IsStroked, style.IsFilled, ref rect);
                     }
                     break;
                 case ArrowType.Ellipse:
                     {
                         pt = AME.MatrixHelper.TransformPoint(rt, new A.Point(x - (float)sx, y));
-                        using (var d = dc.PushPreTransform(rt))
-                        {
-                            var rect = new Rect2(x - sx, y - ry, sx, sy);
-                            DrawEllipseInternal(dc, brush, pen, style.IsStroked, style.IsFilled, ref rect);
-                        }
+                        using var d = dc.PushPreTransform(rt);
+                        var rect = new Rect2(x - sx, y - ry, sx, sy);
+                        DrawEllipseInternal(dc, brush, pen, style.IsStroked, style.IsFilled, ref rect);
                     }
                     break;
                 case ArrowType.Arrow:
@@ -533,7 +501,7 @@ namespace Core2D.Renderer.Avalonia
                 return;
             }
 
-            GetCached(style, out var fill, out var stroke);
+            GetCached(style, out _, out var stroke);
 
             DrawLineArrowsInternal(_dc, line, style, dx, dy, out var pt1, out var pt2);
 
@@ -712,7 +680,7 @@ namespace Core2D.Renderer.Avalonia
                 return;
             }
 
-            GetCached(style, out var fill, out var stroke);
+            GetCached(style, out _, out var stroke);
 
             var rect = CreateRect(text.TopLeft, text.BottomRight, dx, dy);
 
@@ -759,16 +727,16 @@ namespace Core2D.Renderer.Avalonia
                 {
                     var tf = new AM.Typeface(
                         style.TextStyle.FontName,
-                        style.TextStyle.FontSize * _textScaleFactor,
-                        fontStyle,
-                        fontWeight);
+                        fontWeight,
+                        fontStyle);
 
                     ft = new AM.FormattedText()
                     {
                         Typeface = tf,
                         Text = tbind,
                         TextAlignment = AM.TextAlignment.Left,
-                        Wrapping = AM.TextWrapping.NoWrap
+                        TextWrapping = AM.TextWrapping.NoWrap,
+                        FontSize = style.TextStyle.FontSize * _textScaleFactor
                     };
 
                     var size = ft.Bounds.Size;
@@ -813,7 +781,6 @@ namespace Core2D.Renderer.Avalonia
                 {
                     _dc.DrawImage(
                         imageCached,
-                        1.0,
                         new A.Rect(0, 0, imageCached.PixelSize.Width, imageCached.PixelSize.Height),
                         new A.Rect(rect.X, rect.Y, rect.Width, rect.Height));
                 }
@@ -834,18 +801,15 @@ namespace Core2D.Renderer.Avalonia
                     var bytes = State.ImageCache.GetImage(image.Key);
                     if (bytes != null)
                     {
-                        using (var ms = new System.IO.MemoryStream(bytes))
-                        {
-                            var bi = new AMI.Bitmap(ms);
+                        using var ms = new System.IO.MemoryStream(bytes);
+                        var bi = new AMI.Bitmap(ms);
 
-                            _biCache.Set(image.Key, bi);
+                        _biCache.Set(image.Key, bi);
 
-                            _dc.DrawImage(
-                                bi,
-                                1.0,
-                                new A.Rect(0, 0, bi.PixelSize.Width, bi.PixelSize.Height),
-                                new A.Rect(rect.X, rect.Y, rect.Width, rect.Height));
-                        }
+                        _dc.DrawImage(
+                            bi,
+                            new A.Rect(0, 0, bi.PixelSize.Width, bi.PixelSize.Height),
+                            new A.Rect(rect.X, rect.Y, rect.Width, rect.Height));
                     }
                 }
                 catch (Exception ex)
