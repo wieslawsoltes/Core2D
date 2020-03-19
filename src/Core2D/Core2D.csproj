@@ -11,7 +11,7 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <VersionPrefix>0.9.4.1</VersionPrefix>
+    <VersionPrefix>0.9.999</VersionPrefix>
     <VersionSuffix></VersionSuffix>
     <Authors>Wiesław Šoltés</Authors>
     <Company>Wiesław Šoltés</Company>
@@ -97,22 +97,22 @@
     <PackageReference Include="System.Diagnostics.TraceSource" Version="4.3.0" Condition="!$(TargetFramework.StartsWith('net4'))" />
     <PackageReference Include="System.Drawing.Common" Version="4.7.0" />
     <PackageReference Include="System.IO.Compression" Version="4.3.0" />
-    <PackageReference Include="Avalonia" Version="0.9.999-cibuild0006345-beta" />
-    <PackageReference Include="Avalonia.Xaml.Interactions" Version="0.9.4" />
-    <PackageReference Include="Avalonia.Xaml.Interactions.Custom" Version="0.9.4" />
-    <PackageReference Include="Avalonia.Controls.DataGrid" Version="0.9.999-cibuild0006345-beta" />
-    <PackageReference Include="Avalonia.Desktop" Version="0.9.999-cibuild0006345-beta" />
-    <PackageReference Include="Avalonia.Diagnostics" Version="0.9.999-cibuild0006345-beta" />
+    <PackageReference Include="Avalonia" Version="0.9.999-cibuild*" />
+    <PackageReference Include="Avalonia.Controls.DataGrid" Version="0.9.999-cibuild*" />
+    <PackageReference Include="Avalonia.Desktop" Version="0.9.999-cibuild*" />
+    <PackageReference Include="Avalonia.Diagnostics" Version="0.9.999-cibuild*" />
     <PackageReference Include="Avalonia.Angle.Windows.Natives" Version="2.1.0.2019013001" />
-    <PackageReference Include="Avalonia.MatrixExtensions" Version="2.3.2" />
-    <PackageReference Include="Avalonia.Controls.PanAndZoom" Version="2.3.2" />
-    <PackageReference Include="Avalonia.ReactiveUI" Version="0.9.999-cibuild0006345-beta" />
-    <PackageReference Include="Avalonia.ThemeManager" Version="0.9.4" />
-    <PackageReference Include="Dock.Avalonia" Version="0.9.4.1" />
-    <PackageReference Include="Dock.Avalonia.Themes.Default" Version="0.9.4.1" />
-    <PackageReference Include="Dock.Avalonia.Themes.Metro" Version="0.9.4.1" />
-    <PackageReference Include="Dock.Model" Version="0.9.4.1" />
-    <PackageReference Include="Dock.Model.ReactiveUI" Version="0.9.4.1" />
+    <PackageReference Include="Avalonia.ReactiveUI" Version="0.9.999-cibuild*" />
+    <PackageReference Include="Dock.Avalonia" Version="0.9.999-build*" />
+    <PackageReference Include="Dock.Avalonia.Themes.Default" Version="0.9.999-build*" />
+    <PackageReference Include="Dock.Avalonia.Themes.Metro" Version="0.9.999-build*" />
+    <PackageReference Include="Dock.Model" Version="0.9.999-build*" />
+    <PackageReference Include="Dock.Model.ReactiveUI" Version="0.9.999-build*" />
+    <PackageReference Include="Avalonia.Xaml.Interactions" Version="0.9.999-build*" />
+    <PackageReference Include="Avalonia.Xaml.Interactions.Custom" Version="0.9.999-build*" />
+    <PackageReference Include="Avalonia.ThemeManager" Version="0.9.999-build*" />
+    <PackageReference Include="Avalonia.MatrixExtensions" Version="2.3.999-build*" />
+    <PackageReference Include="Avalonia.Controls.PanAndZoom" Version="2.3.999-build*" />
     <PackageReference Include="Autofac" Version="5.1.2" />
     <PackageReference Include="CsvHelper" Version="15.0.1" />
     <PackageReference Include="Math.Spatial" Version="1.1.0" />
