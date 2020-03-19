@@ -53,25 +53,25 @@ namespace Core2D.UI.Avalonia.Views
         /// <summary>
         /// Gets or sets container property.
         /// </summary>
-        public static readonly AvaloniaProperty<IPageContainer> ContainerProperty =
+        public static readonly StyledProperty<IPageContainer> ContainerProperty =
             AvaloniaProperty.Register<ContainerControl, IPageContainer>(nameof(Container), null);
 
         /// <summary>
         /// Gets or sets renderer property.
         /// </summary>
-        public static readonly AvaloniaProperty<IShapeRenderer> RendererProperty =
+        public static readonly StyledProperty<IShapeRenderer> RendererProperty =
             AvaloniaProperty.Register<ContainerControl, IShapeRenderer>(nameof(Renderer), null);
 
         /// <summary>
         /// Gets or sets data flow property.
         /// </summary>
-        public static readonly AvaloniaProperty<IDataFlow> DataFlowProperty =
+        public static readonly StyledProperty<IDataFlow> DataFlowProperty =
             AvaloniaProperty.Register<ContainerControl, IDataFlow>(nameof(DataFlow), null);
 
         /// <summary>
         /// Gets or sets data flow property.
         /// </summary>
-        public static readonly AvaloniaProperty<PresenterType> PresenterTypeProperty =
+        public static readonly StyledProperty<PresenterType> PresenterTypeProperty =
             AvaloniaProperty.Register<ContainerControl, PresenterType>(nameof(PresenterType), PresenterType.None);
 
         /// <summary>
@@ -79,7 +79,7 @@ namespace Core2D.UI.Avalonia.Views
         /// </summary>
         public IPageContainer Container
         {
-            get => (IPageContainer)GetValue(ContainerProperty);
+            get => GetValue(ContainerProperty);
             set => SetValue(ContainerProperty, value);
         }
 
@@ -88,7 +88,7 @@ namespace Core2D.UI.Avalonia.Views
         /// </summary>
         public IShapeRenderer Renderer
         {
-            get => (IShapeRenderer)GetValue(RendererProperty);
+            get => GetValue(RendererProperty);
             set => SetValue(RendererProperty, value);
         }
 
@@ -97,7 +97,7 @@ namespace Core2D.UI.Avalonia.Views
         /// </summary>
         public IDataFlow DataFlow
         {
-            get => (IDataFlow)GetValue(DataFlowProperty);
+            get => GetValue(DataFlowProperty);
             set => SetValue(DataFlowProperty, value);
         }
 
@@ -106,7 +106,7 @@ namespace Core2D.UI.Avalonia.Views
         /// </summary>
         public PresenterType PresenterType
         {
-            get => (PresenterType)GetValue(PresenterTypeProperty);
+            get => GetValue(PresenterTypeProperty);
             set => SetValue(PresenterTypeProperty, value);
         }
 
