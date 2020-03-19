@@ -1,5 +1,3 @@
-// Random Lines
-
 #r "System.Security.Cryptography.Csp"
 using System;
 using System.Security.Cryptography;
@@ -15,7 +13,6 @@ void RandomLines()
 {
     double width = Editor.Project.CurrentContainer.Width;
     double height = Editor.Project.CurrentContainer.Height;
-
     using (var rng = new RNGCryptoServiceProvider())
     {
         byte[] data = new byte[32];
@@ -27,7 +24,6 @@ void RandomLines()
             double x1 = ToDouble(data, 16, width);
             double y1 = ToDouble(data, 24, height);
             Editor.ShapeFactory.Line(x0, y0, x1, y1, true);
-            //Console.WriteLine($"[{x0};{y0}] [{x1};{y1}]");
         }
     }
 }

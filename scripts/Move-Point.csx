@@ -1,7 +1,4 @@
-// Move Point
-
 #r "Core2D"
-
 using Core2D.Editor;
 using Core2D.Editor.Input;
 

@@ -1,6 +1,5 @@
 #r "System.Linq"
 #r "Core2D"
-
 using System;
 using System.IO;
 using System.Linq;
