@@ -46,9 +46,9 @@ namespace Core2D.UI.Avalonia.Views
     /// </summary>
     public class ContainerControl : UserControl
     {
-        private static IContainerPresenter s_editorPresenter = new EditorPresenter();
-        private static IContainerPresenter s_templatePresenter = new TemplatePresenter();
-        private static IContainerPresenter s_exportPresenter = new ExportPresenter();
+        private static readonly IContainerPresenter s_editorPresenter = new EditorPresenter();
+        private static readonly IContainerPresenter s_templatePresenter = new TemplatePresenter();
+        private static readonly IContainerPresenter s_exportPresenter = new ExportPresenter();
 
         /// <summary>
         /// Gets or sets container property.
@@ -79,7 +79,7 @@ namespace Core2D.UI.Avalonia.Views
         /// </summary>
         public IPageContainer Container
         {
-            get => GetValue(ContainerProperty);
+            get => (IPageContainer)GetValue(ContainerProperty);
             set => SetValue(ContainerProperty, value);
         }
 
@@ -88,7 +88,7 @@ namespace Core2D.UI.Avalonia.Views
         /// </summary>
         public IShapeRenderer Renderer
         {
-            get => GetValue(RendererProperty);
+            get => (IShapeRenderer)GetValue(RendererProperty);
             set => SetValue(RendererProperty, value);
         }
 
@@ -97,7 +97,7 @@ namespace Core2D.UI.Avalonia.Views
         /// </summary>
         public IDataFlow DataFlow
         {
-            get => GetValue(DataFlowProperty);
+            get => (IDataFlow)GetValue(DataFlowProperty);
             set => SetValue(DataFlowProperty, value);
         }
 
@@ -106,7 +106,7 @@ namespace Core2D.UI.Avalonia.Views
         /// </summary>
         public PresenterType PresenterType
         {
-            get => GetValue(PresenterTypeProperty);
+            get => (PresenterType)GetValue(PresenterTypeProperty);
             set => SetValue(PresenterTypeProperty, value);
         }
 
