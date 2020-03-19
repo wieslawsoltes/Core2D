@@ -90,39 +90,40 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.0" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.DotNet.ILCompiler" Version="1.0.0-alpha-*" Condition="'$(CoreRT)' == 'True'" />
     <PackageReference Include="SourceLink.Create.CommandLine" Version="2.8.3" PrivateAssets="All" />
     <PackageReference Include="System.Collections.Immutable" Version="1.7.0" />
+    <PackageReference Include="System.Diagnostics.TextWriterTraceListener" Version="4.3.0" Condition="!$(TargetFramework.StartsWith('net4'))" />
+    <PackageReference Include="System.Diagnostics.TraceSource" Version="4.3.0" Condition="!$(TargetFramework.StartsWith('net4'))" />
+    <PackageReference Include="System.Drawing.Common" Version="4.7.0" />
     <PackageReference Include="System.IO.Compression" Version="4.3.0" />
-    <PackageReference Include="Microsoft.DotNet.ILCompiler" Version="1.0.0-alpha-*" Condition="'$(CoreRT)' == 'True'" />
-    <PackageReference Include="Autofac" Version="5.1.2" />
-    <PackageReference Include="Avalonia" Version="0.9.4" />
+    <PackageReference Include="Avalonia" Version="0.9.999-cibuild0006345-beta" />
     <PackageReference Include="Avalonia.Xaml.Interactions" Version="0.9.4" />
     <PackageReference Include="Avalonia.Xaml.Interactions.Custom" Version="0.9.4" />
-    <PackageReference Include="Avalonia.Controls.DataGrid" Version="0.9.4" />
-    <PackageReference Include="Avalonia.Desktop" Version="0.9.4" />
+    <PackageReference Include="Avalonia.Controls.DataGrid" Version="0.9.999-cibuild0006345-beta" />
+    <PackageReference Include="Avalonia.Desktop" Version="0.9.999-cibuild0006345-beta" />
+    <PackageReference Include="Avalonia.Diagnostics" Version="0.9.999-cibuild0006345-beta" />
     <PackageReference Include="Avalonia.Angle.Windows.Natives" Version="2.1.0.2019013001" />
-    <PackageReference Include="SkiaSharp.NativeAssets.Linux" Version="1.68.0" />
     <PackageReference Include="Avalonia.MatrixExtensions" Version="2.3.2" />
     <PackageReference Include="Avalonia.Controls.PanAndZoom" Version="2.3.2" />
-    <PackageReference Include="Avalonia.ReactiveUI" Version="0.9.4" />
+    <PackageReference Include="Avalonia.ReactiveUI" Version="0.9.999-cibuild0006345-beta" />
     <PackageReference Include="Avalonia.ThemeManager" Version="0.9.4" />
-    <PackageReference Include="CsvHelper" Version="15.0.1" />
     <PackageReference Include="Dock.Avalonia" Version="0.9.4.1" />
     <PackageReference Include="Dock.Avalonia.Themes.Default" Version="0.9.4.1" />
     <PackageReference Include="Dock.Avalonia.Themes.Metro" Version="0.9.4.1" />
     <PackageReference Include="Dock.Model" Version="0.9.4.1" />
     <PackageReference Include="Dock.Model.ReactiveUI" Version="0.9.4.1" />
+    <PackageReference Include="Autofac" Version="5.1.2" />
+    <PackageReference Include="CsvHelper" Version="15.0.1" />
     <PackageReference Include="Math.Spatial" Version="1.1.0" />
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Scripting" Version="3.5.0" Condition="'$(CoreRT)' != 'True'" />
     <PackageReference Include="netDXF.netstandard" Version="2.3.0" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
     <PackageReference Include="PDFsharp" Version="1.50.5147" />
     <PackageReference Include="Portable.Xaml" Version="0.24.0" />
     <PackageReference Include="reactiveui" Version="10.3.6" />
-    <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Scripting" Version="3.5.0" Condition="'$(CoreRT)' != 'True'" />
-    <PackageReference Include="SkiaSharp" Version="1.68.0" />
-    <PackageReference Include="System.Diagnostics.TextWriterTraceListener" Version="4.3.0" Condition="!$(TargetFramework.StartsWith('net4'))" />
-    <PackageReference Include="System.Diagnostics.TraceSource" Version="4.3.0" Condition="!$(TargetFramework.StartsWith('net4'))" />
-    <PackageReference Include="System.Drawing.Common" Version="4.7.0"/>
+    <PackageReference Include="SkiaSharp" Version="1.68.1" />
+    <PackageReference Include="SkiaSharp.NativeAssets.Linux" Version="1.68.1" />
   </ItemGroup>
 
   <ItemGroup Condition="$(TargetFramework.StartsWith('net4'))">
