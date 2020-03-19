@@ -1,0 +1,1 @@
+Editor.OnOpenProject("Project.project");
