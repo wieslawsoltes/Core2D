@@ -1,4 +1,5 @@
 using System.IO;
+using static System.Console;
 
 var project = Editor.Project;
 var output = "D:\\";
@@ -13,8 +14,16 @@ foreach (var document in project.Documents)
     {
         foreach (var writer in Editor.FileWriters)
         {
-            var path = Path.Combine(dir, page.Name + "." + writer.Extension);
-            writer.Save(path, page, Editor.Project);
+            try
+            {
+                var path = Path.Combine(dir, page.Name + "." + writer.Extension);
+                writer.Save(path, page, Editor.Project);
+            }
+            catch (Exception ex)
+            {
+                WriteLine(ex.Message);
+                WriteLine(ex.StackTrace);
+            }
         }
     }
 }
