@@ -294,7 +294,7 @@ namespace Core2D.Editor
             {
                 OnNewPage(document);
             }
-            else if (item is IProjectContainer project)
+            else if (item is IProjectContainer)
             {
                 OnNewDocument();
             }
