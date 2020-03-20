@@ -12,7 +12,8 @@ namespace Core2D.UI.Avalonia.Behaviors
 {
     public class EditorState
     {
-        private Control _control;
+        private Control _control = null;
+        private object _context = null;
         private AvaloniaInputSource _inputSource = null;
         private ProjectEditorInputTarget _inputTarget = null;
         private InputProcessor _inputProcessor = null;
@@ -20,6 +21,7 @@ namespace Core2D.UI.Avalonia.Behaviors
         public EditorState(Control control)
         {
             _control = control;
+            _control.GetObservable(Control.DataContextProperty).Subscribe(Changed);
         }
 
         public void InvalidateChild(double zoomX, double zoomY, double offsetX, double offsetY)
@@ -40,6 +42,12 @@ namespace Core2D.UI.Avalonia.Behaviors
                     }
                 }
             }
+        }
+
+        public void Changed(object context)
+        {
+            Detach();
+            Attach();
         }
 
         public void Attach()
@@ -96,9 +104,9 @@ namespace Core2D.UI.Avalonia.Behaviors
                     zoomBorder.InvalidatedChild = null;
                 }
 
-                _inputProcessor.Dispose();
-                _inputTarget = null;
+                _inputProcessor?.Dispose();
                 _inputProcessor = null;
+                _inputTarget = null;
                 _inputSource = null;
             }
             Console.WriteLine($"EditorState.Detach(): {_control.DataContext}");
@@ -119,7 +127,6 @@ namespace Core2D.UI.Avalonia.Behaviors
             if (AssociatedObject != null)
             {
                 _state = new EditorState(AssociatedObject);
-                _state.Attach();
             }
         }
 
