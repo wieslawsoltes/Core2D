@@ -26,9 +26,9 @@
             </ItemsPanelTemplate>
         </Menu.ItemsPanel>
         <MenuItem Header="_File">
-            <MenuItem Header="_New" Command="{Binding OnNew}" CommandParameter="{Binding}"/>
+            <MenuItem Header="_New" Command="{Binding OnNew}" CommandParameter="{Binding}" InputGesture="Ctrl+N"/>
             <Separator/>
-            <MenuItem Header="_Open..." Command="{Binding Platform.OnOpen}"/>
+            <MenuItem Header="_Open..." Command="{Binding Platform.OnOpen}" InputGesture="Ctrl+O"/>
             <Separator/>
             <MenuItem Header="Execu_te Script..." Command="{Binding Platform.OnExecuteScript}"/>
             <Separator/>
@@ -42,10 +42,10 @@
                 </MenuItem.Styles>
             </MenuItem>
             <Separator/>
-            <MenuItem Header="E_xit" Command="{Binding Platform.OnExit}"/>
+            <MenuItem Header="E_xit" Command="{Binding Platform.OnExit}" InputGesture="Alt+F4"/>
         </MenuItem>
         <MenuItem Header="_View">
-            <MenuItem Header="_Script Editor..." Command="{Binding Platform.OnScriptEditor}"/>
+            <MenuItem Header="_Script Editor..." Command="{Binding Platform.OnScriptEditor}" InputGesture="Ctrl+R"/>
             <Separator/>
             <MenuItem Header="_Views" Items="{Binding Layout.VisibleDockables}">
                 <MenuItem.Styles>
