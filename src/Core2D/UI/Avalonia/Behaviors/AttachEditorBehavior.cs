@@ -13,7 +13,6 @@ namespace Core2D.UI.Avalonia.Behaviors
     public class EditorState
     {
         private Control _control = null;
-        private object _context = null;
         private AvaloniaInputSource _inputSource = null;
         private ProjectEditorInputTarget _inputTarget = null;
         private InputProcessor _inputProcessor = null;
@@ -116,7 +115,7 @@ namespace Core2D.UI.Avalonia.Behaviors
     /// </summary>
     public class AttachEditorBehavior : Behavior<Control>
     {
-        private EditorState? _state = null;
+        private EditorState _state = null;
 
         /// <inheritdoc/>
         protected override void OnAttached()
