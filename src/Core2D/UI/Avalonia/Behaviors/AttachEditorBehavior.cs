@@ -82,7 +82,6 @@ namespace Core2D.UI.Avalonia.Behaviors
                 _inputProcessor = new InputProcessor();
                 _inputProcessor.Connect(_inputSource, _inputTarget);
             }
-            Console.WriteLine($"EditorState.Attach(): {_control.DataContext}");
         }
 
         public void Detach()
@@ -109,7 +108,6 @@ namespace Core2D.UI.Avalonia.Behaviors
                 _inputTarget = null;
                 _inputSource = null;
             }
-            Console.WriteLine($"EditorState.Detach(): {_control.DataContext}");
         }
     }
 
