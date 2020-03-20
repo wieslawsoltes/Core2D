@@ -75,6 +75,7 @@
         <!--<iac:FocusOnPointerMovedBehavior/>-->
         <!--<id:DropBehavior Context="{Binding Layout}" Handler="{StaticResource DockDropHandler}"/>-->
         <id:DropBehavior Context="{Binding}" Handler="{StaticResource EditorDropHandler}"/>
+        <views:AttachEditorBehavior/>
     </i:Interaction.Behaviors>
     <Border Classes="container">
         <i:Interaction.Behaviors>
