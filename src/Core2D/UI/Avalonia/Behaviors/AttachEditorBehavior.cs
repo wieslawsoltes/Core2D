@@ -9,38 +9,21 @@ using Core2D.UI.Avalonia.Utilities;
 
 namespace Core2D.UI.Avalonia.Behaviors
 {
-    /// <summary>
-    /// Attaches <see cref="IProjectEditor"/> to a <see cref="Control"/>.
-    /// </summary>
-    public sealed class AttachEditorBehavior : Behavior<Control>
+    public class EditorState
     {
+        private Control _control;
         private AvaloniaInputSource _inputSource = null;
         private ProjectEditorInputTarget _inputTarget = null;
         private InputProcessor _inputProcessor = null;
 
-        /// <inheritdoc/>
-        protected override void OnAttached()
+        public EditorState(Control control)
         {
-            base.OnAttached();
-            if (AssociatedObject != null)
-            {
-                AttachEditor(AssociatedObject);
-            }
+            _control = control;
         }
 
-        /// <inheritdoc/>
-        protected override void OnDetaching()
+        public void InvalidateChild(double zoomX, double zoomY, double offsetX, double offsetY)
         {
-            base.OnDetaching();
-            if (AssociatedObject != null)
-            {
-                DetachEditor(AssociatedObject);
-            }
-        }
-
-        private void InvalidateChild(double zoomX, double zoomY, double offsetX, double offsetY)
-        {
-            if (AssociatedObject.DataContext is IProjectEditor projectEditor)
+            if (_control.DataContext is IProjectEditor projectEditor)
             {
                 var state = projectEditor.Renderers[0]?.State;
                 if (state != null)
@@ -58,14 +41,14 @@ namespace Core2D.UI.Avalonia.Behaviors
             }
         }
 
-        private void AttachEditor(Control control)
+        public void Attach()
         {
-            if (control.DataContext is IProjectEditor projectEditor)
+            if (_control.DataContext is IProjectEditor projectEditor)
             {
-                var containerControlData = control.Find<Control>("containerControlData");
-                var containerControlTemplate = control.Find<Control>("containerControlTemplate");
-                var containerControlEditor = control.Find<Control>("containerControlEditor");
-                var zoomBorder = control.Find<ZoomBorder>("zoomBorder");
+                var containerControlData = _control.Find<Control>("containerControlData");
+                var containerControlTemplate = _control.Find<Control>("containerControlTemplate");
+                var containerControlEditor = _control.Find<Control>("containerControlEditor");
+                var zoomBorder = _control.Find<ZoomBorder>("zoomBorder");
 
                 if (projectEditor.CanvasPlatform is IEditorCanvasPlatform canvasPlatform)
                 {
@@ -92,11 +75,11 @@ namespace Core2D.UI.Avalonia.Behaviors
             }
         }
 
-        private void DetachEditor(Control control)
+        public void Detach()
         {
-            if (control.DataContext is IProjectEditor projectEditor)
+            if (_control.DataContext is IProjectEditor projectEditor)
             {
-                var zoomBorder = control.Find<ZoomBorder>("zoomBorder");
+                var zoomBorder = _control.Find<ZoomBorder>("zoomBorder");
 
                 if (projectEditor.CanvasPlatform is IEditorCanvasPlatform canvasPlatform)
                 {
@@ -115,6 +98,35 @@ namespace Core2D.UI.Avalonia.Behaviors
                 _inputTarget = null;
                 _inputProcessor = null;
                 _inputSource = null;
+            }
+        }
+    }
+
+    /// <summary>
+    /// Attaches <see cref="IProjectEditor"/> to a <see cref="Control"/>.
+    /// </summary>
+    public class AttachEditorBehavior : Behavior<Control>
+    {
+        private EditorState? _state = null;
+
+        /// <inheritdoc/>
+        protected override void OnAttached()
+        {
+            base.OnAttached();
+            if (AssociatedObject != null)
+            {
+                _state = new EditorState(AssociatedObject);
+                _state.Attach();
+            }
+        }
+
+        /// <inheritdoc/>
+        protected override void OnDetaching()
+        {
+            base.OnDetaching();
+            if (AssociatedObject != null)
+            {
+                _state?.Detach();
             }
         }
     }
