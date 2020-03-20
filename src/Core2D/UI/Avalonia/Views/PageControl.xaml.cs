@@ -24,6 +24,8 @@ namespace Core2D.UI.Avalonia.Views
         public PageControl()
         {
             InitializeComponent();
+            AttachedToVisualTree += PageControl_Loaded;
+            DetachedFromVisualTree += PageControl_Unloaded;
         }
 
         /// <summary>
@@ -34,16 +36,29 @@ namespace Core2D.UI.Avalonia.Views
             AvaloniaXamlLoader.Load(this);
         }
 
-        protected override void OnAttachedToVisualTree(VisualTreeAttachmentEventArgs e)
+        // TODO:
+        //protected override void OnAttachedToVisualTree(VisualTreeAttachmentEventArgs e)
+        //{
+        //    base.OnAttachedToVisualTree(e);
+        //    DetachEditor();
+        //    AttachEditor();
+        //}
+
+        // TODO:
+        //protected override void OnDetachedFromVisualTree(VisualTreeAttachmentEventArgs e)
+        //{
+        //    base.OnDetachedFromVisualTree(e);
+        //    DetachEditor();
+        //}
+
+        private void PageControl_Loaded(object sender, VisualTreeAttachmentEventArgs e)
         {
-            base.OnAttachedToVisualTree(e);
             DetachEditor();
             AttachEditor();
         }
 
-        protected override void OnDetachedFromVisualTree(VisualTreeAttachmentEventArgs e)
+        private void PageControl_Unloaded(object sender, VisualTreeAttachmentEventArgs e)
         {
-            base.OnDetachedFromVisualTree(e);
             DetachEditor();
         }
 
