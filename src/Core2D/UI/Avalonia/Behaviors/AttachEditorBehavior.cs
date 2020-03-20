@@ -1,4 +1,5 @@
-﻿using Avalonia;
+﻿using System;
+using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.PanAndZoom;
 using Avalonia.Markup.Xaml;
@@ -73,6 +74,7 @@ namespace Core2D.UI.Avalonia.Behaviors
                 _inputProcessor = new InputProcessor();
                 _inputProcessor.Connect(_inputSource, _inputTarget);
             }
+            Console.WriteLine($"EditorState.Attach(): {_control.DataContext}");
         }
 
         public void Detach()
@@ -99,6 +101,7 @@ namespace Core2D.UI.Avalonia.Behaviors
                 _inputProcessor = null;
                 _inputSource = null;
             }
+            Console.WriteLine($"EditorState.Detach(): {_control.DataContext}");
         }
     }
 
