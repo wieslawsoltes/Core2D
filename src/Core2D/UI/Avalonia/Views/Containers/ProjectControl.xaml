@@ -54,7 +54,7 @@
                 <TreeDataTemplate DataType="ContainersCore:IDocumentContainer" ItemsSource="{Binding Pages}">
                     <Grid Classes="drag">
                         <i:Interaction.Behaviors>
-                            <id:DragBehavior Context="{Binding}"/>
+                            <!--<id:DragBehavior Context="{Binding}"/>-->
                         </i:Interaction.Behaviors>
                         <TextBlock Text="{Binding Name}" Classes="tree">
                             <TextBlock.ContextMenu>
@@ -80,7 +80,7 @@
                     <Grid x:Name="root" Classes="drag">
                         <i:Interaction.Behaviors>
                             <iac:BindTagToVisualRootDataContextBehavior/>
-                            <id:DragBehavior Context="{Binding}"/>
+                            <!--<id:DragBehavior Context="{Binding}"/>-->
                         </i:Interaction.Behaviors>
                         <TextBlock Text="{Binding Name}" Classes="tree">
                             <TextBlock.ContextMenu>
@@ -128,7 +128,7 @@
                 <DataTemplate DataType="ContainersCore:ILayerContainer">
                     <StackPanel Orientation="Horizontal" Classes="drag">
                         <i:Interaction.Behaviors>
-                            <id:DragBehavior Context="{Binding}"/>
+                            <!--<id:DragBehavior Context="{Binding}"/>-->
                         </i:Interaction.Behaviors>
                         <StackPanel.ContextMenu>
                             <ContextMenu Classes="default">
