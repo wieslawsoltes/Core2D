@@ -42,9 +42,9 @@ namespace Core2D.UI.Avalonia.Views
     }
 
     /// <summary>
-    /// Interaction logic for <see cref="ContainerControl"/> xaml.
+    /// Interaction logic for <see cref="PresenterControl"/> xaml.
     /// </summary>
-    public class ContainerControl : UserControl
+    public class PresenterControl : UserControl
     {
         private static readonly IContainerPresenter s_editorPresenter = new EditorPresenter();
         private static readonly IContainerPresenter s_templatePresenter = new TemplatePresenter();
@@ -54,25 +54,25 @@ namespace Core2D.UI.Avalonia.Views
         /// Gets or sets container property.
         /// </summary>
         public static readonly StyledProperty<IPageContainer> ContainerProperty =
-            AvaloniaProperty.Register<ContainerControl, IPageContainer>(nameof(Container), null);
+            AvaloniaProperty.Register<PresenterControl, IPageContainer>(nameof(Container), null);
 
         /// <summary>
         /// Gets or sets renderer property.
         /// </summary>
         public static readonly StyledProperty<IShapeRenderer> RendererProperty =
-            AvaloniaProperty.Register<ContainerControl, IShapeRenderer>(nameof(Renderer), null);
+            AvaloniaProperty.Register<PresenterControl, IShapeRenderer>(nameof(Renderer), null);
 
         /// <summary>
         /// Gets or sets data flow property.
         /// </summary>
         public static readonly StyledProperty<IDataFlow> DataFlowProperty =
-            AvaloniaProperty.Register<ContainerControl, IDataFlow>(nameof(DataFlow), null);
+            AvaloniaProperty.Register<PresenterControl, IDataFlow>(nameof(DataFlow), null);
 
         /// <summary>
         /// Gets or sets data flow property.
         /// </summary>
         public static readonly StyledProperty<PresenterType> PresenterTypeProperty =
-            AvaloniaProperty.Register<ContainerControl, PresenterType>(nameof(PresenterType), PresenterType.None);
+            AvaloniaProperty.Register<PresenterControl, PresenterType>(nameof(PresenterType), PresenterType.None);
 
         /// <summary>
         /// Gets or sets container property.
@@ -111,9 +111,9 @@ namespace Core2D.UI.Avalonia.Views
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ContainerControl"/> class.
+        /// Initializes a new instance of the <see cref="PresenterControl"/> class.
         /// </summary>
-        public ContainerControl()
+        public PresenterControl()
         {
             InitializeComponent();
         }
@@ -127,7 +127,7 @@ namespace Core2D.UI.Avalonia.Views
         }
 
         /// <summary>
-        /// Renders container control contents.
+        /// Renders presenter control contents.
         /// </summary>
         /// <param name="context">The drawing context.</param>
         public override void Render(DrawingContext context)
