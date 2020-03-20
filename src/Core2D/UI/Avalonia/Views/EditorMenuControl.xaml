@@ -101,7 +101,7 @@
             <Separator/>
             <MenuItem Header="_Reset Zoom" Command="{Binding Platform.OnZoomReset}" InputGesture="Z"/>
             <Separator/>
-            <MenuItem Header="_AutoFit Zoom" Command="{Binding Platform.OnZoomAutoFit}" InputGesture=X"/>
+            <MenuItem Header="_AutoFit Zoom" Command="{Binding Platform.OnZoomAutoFit}" InputGesture="X"/>
             <Separator/>
             <MenuItem Header="_Views" Items="{Binding Layout.VisibleDockables}">
                 <MenuItem.Styles>
