@@ -9,6 +9,7 @@
              xmlns:id="clr-namespace:Dock.Avalonia;assembly=Core2D"
              xmlns:handlers="clr-namespace:Core2D.UI.Avalonia.Dock.Handlers;assembly=Core2D"
              xmlns:converters="clr-namespace:Core2D.UI.Avalonia.Converters;assembly=Core2D"
+             xmlns:behaviors="clr-namespace:Core2D.UI.Avalonia.Behaviors;assembly=Core2D"
              xmlns:paz="clr-namespace:Avalonia.Controls.PanAndZoom;assembly=Avalonia.Controls.PanAndZoom"
              xmlns:views="clr-namespace:Core2D.UI.Avalonia.Views;assembly=Core2D"
              xmlns:Designer="clr-namespace:Core2D.Editor.Designer;assembly=Core2D"
@@ -75,7 +76,7 @@
         <!--<iac:FocusOnPointerMovedBehavior/>-->
         <!--<id:DropBehavior Context="{Binding Layout}" Handler="{StaticResource DockDropHandler}"/>-->
         <id:DropBehavior Context="{Binding}" Handler="{StaticResource EditorDropHandler}"/>
-        <views:AttachEditorBehavior/>
+        <behaviors:AttachEditorBehavior/>
     </i:Interaction.Behaviors>
     <Border Classes="container">
         <i:Interaction.Behaviors>
