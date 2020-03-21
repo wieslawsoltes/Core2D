@@ -1011,7 +1011,7 @@ namespace Core2D.Editor
                 Deselect(Project?.CurrentContainer?.CurrentLayer);
                 Select(
                     Project?.CurrentContainer?.CurrentLayer,
-                    ImmutableHashSet.CreateRange<IBaseShape>(Project?.CurrentContainer?.CurrentLayer?.Shapes));
+                    new HashSet<IBaseShape>(Project?.CurrentContainer?.CurrentLayer?.Shapes));
             }
             catch (Exception ex)
             {
@@ -1886,7 +1886,7 @@ namespace Core2D.Editor
             {
                 if (Project is IImageCache imageCache)
                 {
-                    imageCache.PurgeUnusedImages(Enumerable.Empty<string>().ToImmutableHashSet());
+                    imageCache.PurgeUnusedImages(new HashSet<string>());
                 }
                 Deselect();
                 SetRenderersImageCache(null);
@@ -2325,7 +2325,7 @@ namespace Core2D.Editor
             }
             else
             {
-                Select(Project?.CurrentContainer?.CurrentLayer, ImmutableHashSet.CreateRange<IBaseShape>(shapes));
+                Select(Project?.CurrentContainer?.CurrentLayer, new HashSet<IBaseShape>(shapes));
             }
         }
 
