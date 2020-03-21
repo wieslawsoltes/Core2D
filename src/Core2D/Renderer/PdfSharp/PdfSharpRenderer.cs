@@ -49,13 +49,11 @@ namespace Core2D.Renderer.PdfSharp
 
         private static XColor ToXColor(IColor color)
         {
-            switch (color)
+            return color switch
             {
-                case IArgbColor argbColor:
-                    return XColor.FromArgb(argbColor.A, argbColor.R, argbColor.G, argbColor.B);
-                default:
-                    throw new NotSupportedException($"The {color.GetType()} color type is not supported.");
-            }
+                IArgbColor argbColor => XColor.FromArgb(argbColor.A, argbColor.R, argbColor.G, argbColor.B),
+                _ => throw new NotSupportedException($"The {color.GetType()} color type is not supported."),
+            };
         }
 
         private static XPen ToXPen(IBaseStyle style, Func<double, double> scale, double sourceDpi, double targetDpi)
@@ -84,13 +82,11 @@ namespace Core2D.Renderer.PdfSharp
 
         private static XBrush ToXBrush(IColor color)
         {
-            switch (color)
+            return color switch
             {
-                case IArgbColor argbColor:
-                    return new XSolidBrush(ToXColor(argbColor));
-                default:
-                    throw new NotSupportedException($"The {color.GetType()} color type is not supported.");
-            }
+                IArgbColor argbColor => new XSolidBrush(ToXColor(argbColor)),
+                _ => throw new NotSupportedException($"The {color.GetType()} color type is not supported."),
+            };
         }
 
         private static void DrawLineInternal(XGraphics gfx, XPen pen, bool isStroked, ref XPoint p0, ref XPoint p1)
