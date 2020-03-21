@@ -392,12 +392,12 @@ namespace Core2D.UI.Avalonia.Dock.Factories
                 [nameof(DashboardView)] = () => _serviceProvider.GetService<IProjectEditor>()
             };
 
-            this.HostWindowLocator = new Dictionary<string, Func<DM.IHostWindow>>
+            HostWindowLocator = new Dictionary<string, Func<DM.IHostWindow>>
             {
                 [nameof(DM.IDockWindow)] = () => _serviceProvider.GetService<DM.IHostWindow>()
             };
 
-            this.DockableLocator = new Dictionary<string, Func<DM.IDockable>>
+            DockableLocator = new Dictionary<string, Func<DM.IDockable>>
             {
             };
 
