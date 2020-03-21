@@ -45,12 +45,10 @@ namespace Core2D.FileWriter.SkiaSharpSvg
 
         private void Save(string path, IPageContainer container)
         {
-            using (var stream = new SKFileWStream(path))
-            using (var writer = new SKXmlStreamWriter(stream))
-            using (var canvas = SKSvgCanvas.Create(SKRect.Create(0, 0, (int)container.Width, (int)container.Height), writer))
-            {
-                _presenter.Render(canvas, _renderer, container, 0, 0);
-            }
+            using var stream = new SKFileWStream(path);
+            using var writer = new SKXmlStreamWriter(stream);
+            using var canvas = SKSvgCanvas.Create(SKRect.Create(0, 0, (int)container.Width, (int)container.Height), writer);
+            _presenter.Render(canvas, _renderer, container, 0, 0);
         }
     }
 }

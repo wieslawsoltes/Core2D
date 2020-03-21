@@ -47,19 +47,15 @@ namespace Core2D.FileWriter.SkiaSharpBmp
         private void Save(string path, IPageContainer container)
         {
             var info = new SKImageInfo((int)container.Width, (int)container.Height);
-            using (var bitmap = new SKBitmap(info))
+            using var bitmap = new SKBitmap(info);
+            using (var canvas = new SKCanvas(bitmap))
             {
-                using (var canvas = new SKCanvas(bitmap))
-                {
-                    _presenter.Render(canvas, _renderer, container, 0, 0);
-                }
-                using (var image = SKImage.FromBitmap(bitmap))
-                using (var data = image.Encode(SKEncodedImageFormat.Bmp, 100))
-                using (var stream = File.OpenWrite(path))
-                {
-                    data.SaveTo(stream);
-                }
+                _presenter.Render(canvas, _renderer, container, 0, 0);
             }
+            using var image = SKImage.FromBitmap(bitmap);
+            using var data = image.Encode(SKEncodedImageFormat.Bmp, 100);
+            using var stream = File.OpenWrite(path);
+            data.SaveTo(stream);
         }
     }
 }

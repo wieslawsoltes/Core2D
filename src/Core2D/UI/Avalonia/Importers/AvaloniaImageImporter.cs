@@ -28,17 +28,15 @@ namespace Core2D.UI.Avalonia.Importers
         private string GetImageKey(string path)
         {
             var fileIO = _serviceProvider.GetService<IFileSystem>();
-            using (var stream = fileIO.Open(path))
+            using var stream = fileIO.Open(path);
+            var bytes = fileIO.ReadBinary(stream);
+            var project = _serviceProvider.GetService<IProjectEditor>().Project;
+            if (project is IImageCache imageCache)
             {
-                var bytes = fileIO.ReadBinary(stream);
-                var project = _serviceProvider.GetService<IProjectEditor>().Project;
-                if (project is IImageCache imageCache)
-                {
-                    var key = imageCache.AddImageFromFile(path, bytes);
-                    return key;
-                }
-                return default;
+                var key = imageCache.AddImageFromFile(path, bytes);
+                return key;
             }
+            return default;
         }
 
         /// <inheritdoc/>

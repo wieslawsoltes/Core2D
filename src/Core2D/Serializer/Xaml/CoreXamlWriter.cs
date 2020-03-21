@@ -12,34 +12,26 @@ namespace Core2D.Serializer.Xaml
 
         private static void Save(XamlXmlWriter writer, object instance)
         {
-            using (var reader = new XamlObjectReader(instance, s_context, s_settings))
-            {
-                XamlServices.Transform(reader, writer);
-            }
+            using var reader = new XamlObjectReader(instance, s_context, s_settings);
+            XamlServices.Transform(reader, writer);
         }
 
         public static void Save(Stream stream, object instance)
         {
-            using (var writer = new XamlXmlWriter(stream, s_context))
-            {
-                Save(writer, instance);
-            }
+            using var writer = new XamlXmlWriter(stream, s_context);
+            Save(writer, instance);
         }
 
         public static void Save(TextWriter textWriter, object instance)
         {
-            using (var writer = new XamlXmlWriter(textWriter, s_context))
-            {
-                Save(writer, instance);
-            }
+            using var writer = new XamlXmlWriter(textWriter, s_context);
+            Save(writer, instance);
         }
 
         public static void Save(XmlWriter xmlWriter, object instance)
         {
-            using (var writer = new XamlXmlWriter(xmlWriter, s_context))
-            {
-                Save(writer, instance);
-            }
+            using var writer = new XamlXmlWriter(xmlWriter, s_context);
+            Save(writer, instance);
         }
     }
 }

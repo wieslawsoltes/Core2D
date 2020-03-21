@@ -30,14 +30,10 @@ namespace Core2D.Serializer.Xaml
         /// <returns>The new instance of object of type <see cref="string"/>.</returns>
         public static string Serialize<T>(T value)
         {
-            using (var textWriter = new StringWriter())
-            {
-                using (var xmlWriter = XmlWriter.Create(textWriter, s_settings))
-                {
-                    CoreXamlWriter.Save(xmlWriter, value);
-                    return textWriter.ToString();
-                }
-            }
+            using var textWriter = new StringWriter();
+            using var xmlWriter = XmlWriter.Create(textWriter, s_settings);
+            CoreXamlWriter.Save(xmlWriter, value);
+            return textWriter.ToString();
         }
 
         /// <summary>
@@ -48,10 +44,8 @@ namespace Core2D.Serializer.Xaml
         /// <returns>The new instance of object of type <typeparamref name="T"/>.</returns>
         public static T Deserialize<T>(string xaml)
         {
-            using (var textReader = new StringReader(xaml))
-            {
-                return (T)CoreXamlReader.Load(textReader);
-            }
+            using var textReader = new StringReader(xaml);
+            return (T)CoreXamlReader.Load(textReader);
         }
     }
 }

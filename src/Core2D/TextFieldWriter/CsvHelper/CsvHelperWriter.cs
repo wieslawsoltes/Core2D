@@ -30,38 +30,36 @@ namespace Core2D.TextFieldWriter.CsvHelper
         /// <param name="database">The source records database.</param>
         void ITextFieldWriter<IDatabase>.Write(string path, IFileSystem fs, IDatabase database)
         {
-            using (var writer = new System.IO.StringWriter())
+            using var writer = new System.IO.StringWriter();
+            var configuration = new CSV.Configuration.CsvConfiguration(CultureInfo.CurrentCulture)
             {
-                var configuration = new CSV.Configuration.CsvConfiguration(CultureInfo.CurrentCulture)
-                {
-                    Delimiter = CultureInfo.CurrentCulture.TextInfo.ListSeparator,
-                    CultureInfo = CultureInfo.CurrentCulture
-                };
+                Delimiter = CultureInfo.CurrentCulture.TextInfo.ListSeparator,
+                CultureInfo = CultureInfo.CurrentCulture
+            };
 
-                using (var csv = new CSV.CsvWriter(writer, configuration))
+            using (var csv = new CSV.CsvWriter(writer, configuration))
+            {
+                // columns
+                csv.WriteField(database.IdColumnName);
+                foreach (var column in database.Columns)
                 {
-                    // columns
-                    csv.WriteField(database.IdColumnName);
-                    foreach (var column in database.Columns)
+                    csv.WriteField(column.Name);
+                }
+                csv.NextRecord();
+
+                // records
+                foreach (var record in database.Records)
+                {
+                    csv.WriteField(record.Id.ToString());
+                    foreach (var value in record.Values)
                     {
-                        csv.WriteField(column.Name);
+                        csv.WriteField(value.Content);
                     }
                     csv.NextRecord();
-
-                    // records
-                    foreach (var record in database.Records)
-                    {
-                        csv.WriteField(record.Id.ToString());
-                        foreach (var value in record.Values)
-                        {
-                            csv.WriteField(value.Content);
-                        }
-                        csv.NextRecord();
-                    }
                 }
-
-                fs.WriteUtf8Text(path, writer.ToString());
             }
+
+            fs.WriteUtf8Text(path, writer.ToString());
         }
     }
 }

@@ -26,28 +26,24 @@ namespace Core2D.TextFieldReader.CsvHelper
 
         private static IEnumerable<string[]> ReadInternal(System.IO.Stream stream)
         {
-            using (var reader = new System.IO.StreamReader(stream))
+            using var reader = new System.IO.StreamReader(stream);
+            var configuration = new CSV.Configuration.CsvConfiguration(CultureInfo.CurrentCulture)
             {
-                var configuration = new CSV.Configuration.CsvConfiguration(CultureInfo.CurrentCulture)
+                Delimiter = CultureInfo.CurrentCulture.TextInfo.ListSeparator,
+                CultureInfo = CultureInfo.CurrentCulture,
+                AllowComments = true,
+                Comment = '#'
+            };
+            using var parser = new CSV.CsvParser(reader, configuration);
+            while (true)
+            {
+                var fields = parser.Read();
+                if (fields == null)
                 {
-                    Delimiter = CultureInfo.CurrentCulture.TextInfo.ListSeparator,
-                    CultureInfo = CultureInfo.CurrentCulture,
-                    AllowComments = true,
-                    Comment = '#'
-                };
-                using (var parser = new CSV.CsvParser(reader, configuration))
-                {
-                    while (true)
-                    {
-                        var fields = parser.Read();
-                        if (fields == null)
-                        {
-                            break;
-                        }
-
-                        yield return fields;
-                    }
+                    break;
                 }
+
+                yield return fields;
             }
         }
 
@@ -59,12 +55,10 @@ namespace Core2D.TextFieldReader.CsvHelper
         /// <returns>The new instance of the <see cref="IDatabase"/> class</returns>
         IDatabase ITextFieldReader<IDatabase>.Read(string path, IFileSystem fs)
         {
-            using (var stream = fs.Open(path))
-            {
-                var fields = ReadInternal(stream).ToList();
-                var name = System.IO.Path.GetFileNameWithoutExtension(path);
-                return _serviceProvider.GetService<IFactory>().FromFields(name, fields);
-            }
+            using var stream = fs.Open(path);
+            var fields = ReadInternal(stream).ToList();
+            var name = System.IO.Path.GetFileNameWithoutExtension(path);
+            return _serviceProvider.GetService<IFactory>().FromFields(name, fields);
         }
     }
 }

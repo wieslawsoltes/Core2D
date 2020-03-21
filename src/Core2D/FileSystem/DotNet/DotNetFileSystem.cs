@@ -48,60 +48,48 @@ namespace Core2D.FileSystem.DotNet
         byte[] IFileSystem.ReadBinary(System.IO.Stream stream)
         {
             byte[] buffer = new byte[16 * 1024];
-            using (System.IO.MemoryStream ms = new System.IO.MemoryStream())
+            using var ms = new System.IO.MemoryStream();
+            int read;
+            while ((read = stream.Read(buffer, 0, buffer.Length)) > 0)
             {
-                int read;
-                while ((read = stream.Read(buffer, 0, buffer.Length)) > 0)
-                {
-                    ms.Write(buffer, 0, read);
-                }
-                return ms.ToArray();
+                ms.Write(buffer, 0, read);
             }
+            return ms.ToArray();
         }
 
         /// <inheritdoc/>
         void IFileSystem.WriteBinary(System.IO.Stream stream, byte[] bytes)
         {
-            using (var bw = new System.IO.BinaryWriter(stream))
-            {
-                bw.Write(bytes);
-            }
+            using var bw = new System.IO.BinaryWriter(stream);
+            bw.Write(bytes);
         }
 
         /// <inheritdoc/>
         string IFileSystem.ReadUtf8Text(System.IO.Stream stream)
         {
-            using (var sr = new System.IO.StreamReader(stream, Encoding.UTF8))
-            {
-                return sr.ReadToEnd();
-            }
+            using var sr = new System.IO.StreamReader(stream, Encoding.UTF8);
+            return sr.ReadToEnd();
         }
 
         /// <inheritdoc/>
         void IFileSystem.WriteUtf8Text(System.IO.Stream stream, string text)
         {
-            using (var sw = new System.IO.StreamWriter(stream, Encoding.UTF8))
-            {
-                sw.Write(text);
-            }
+            using var sw = new System.IO.StreamWriter(stream, Encoding.UTF8);
+            sw.Write(text);
         }
 
         /// <inheritdoc/>
         string IFileSystem.ReadUtf8Text(string path)
         {
-            using (var fs = System.IO.File.OpenRead(path))
-            {
-                return (this as IFileSystem).ReadUtf8Text(fs);
-            }
+            using var fs = System.IO.File.OpenRead(path);
+            return (this as IFileSystem).ReadUtf8Text(fs);
         }
 
         /// <inheritdoc/>
         void IFileSystem.WriteUtf8Text(string path, string text)
         {
-            using (var fs = System.IO.File.Create(path))
-            {
-                (this as IFileSystem).WriteUtf8Text(fs, text);
-            }
+            using var fs = System.IO.File.Create(path);
+            (this as IFileSystem).WriteUtf8Text(fs, text);
         }
     }
 }

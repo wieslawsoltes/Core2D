@@ -164,16 +164,10 @@ namespace Core2D.FileWriter.Emf
         {
             if (container != null && container.Template != null)
             {
-                using (var bitmap = new Bitmap((int)container.Template.Width, (int)container.Template.Height))
-                {
-                    using (var ms = MakeMetafileStream(bitmap, container, ic))
-                    {
-                        using (var fs = File.Create(path))
-                        {
-                            ms.WriteTo(fs);
-                        }
-                    }
-                }
+                using var bitmap = new Bitmap((int)container.Template.Width, (int)container.Template.Height);
+                using var ms = MakeMetafileStream(bitmap, container, ic);
+                using var fs = File.Create(path);
+                ms.WriteTo(fs);
             }
         }
 

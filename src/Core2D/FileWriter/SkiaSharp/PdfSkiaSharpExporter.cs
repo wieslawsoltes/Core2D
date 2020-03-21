@@ -30,61 +30,47 @@ namespace Core2D.FileWriter.SkiaSharpPdf
         /// <inheritdoc/>
         void IProjectExporter.Save(string path, IPageContainer container)
         {
-            using (var stream = new SKFileWStream(path))
-            {
-                using (var pdf = SKDocument.CreatePdf(stream, _targetDpi))
-                {
-                    Add(pdf, container);
-                    pdf.Close();
-                }
-            }
+            using var stream = new SKFileWStream(path);
+            using var pdf = SKDocument.CreatePdf(stream, _targetDpi);
+            Add(pdf, container);
+            pdf.Close();
         }
 
         /// <inheritdoc/>
         void IProjectExporter.Save(string path, IDocumentContainer document)
         {
-            using (var stream = new SKFileWStream(path))
+            using var stream = new SKFileWStream(path);
+            using var pdf = SKDocument.CreatePdf(stream, _targetDpi);
+            foreach (var container in document.Pages)
             {
-                using (var pdf = SKDocument.CreatePdf(stream, _targetDpi))
-                {
-                    foreach (var container in document.Pages)
-                    {
-                        Add(pdf, container);
-                    }
-
-                    pdf.Close();
-                    _renderer.ClearCache(isZooming: false);
-                }
+                Add(pdf, container);
             }
+
+            pdf.Close();
+            _renderer.ClearCache(isZooming: false);
         }
 
         /// <inheritdoc/>
         void IProjectExporter.Save(string path, IProjectContainer project)
         {
-            using (var stream = new SKFileWStream(path))
+            using var stream = new SKFileWStream(path);
+            using var pdf = SKDocument.CreatePdf(stream, _targetDpi);
+            foreach (var document in project.Documents)
             {
-                using (var pdf = SKDocument.CreatePdf(stream, _targetDpi))
+                foreach (var container in document.Pages)
                 {
-                    foreach (var document in project.Documents)
-                    {
-                        foreach (var container in document.Pages)
-                        {
-                            Add(pdf, container);
-                        }
-                    }
-
-                    pdf.Close();
-                    _renderer.ClearCache(isZooming: false);
+                    Add(pdf, container);
                 }
             }
+
+            pdf.Close();
+            _renderer.ClearCache(isZooming: false);
         }
 
         private void Add(SKDocument pdf, IPageContainer container)
         {
-            using (var canvas = pdf.BeginPage((float)container.Template.Width, (float)container.Template.Height))
-            {
-                _presenter.Render(canvas, _renderer, container, 0, 0);
-            }
+            using var canvas = pdf.BeginPage((float)container.Template.Width, (float)container.Template.Height);
+            _presenter.Render(canvas, _renderer, container, 0, 0);
         }
     }
 }

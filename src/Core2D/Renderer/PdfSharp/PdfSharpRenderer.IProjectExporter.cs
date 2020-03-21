@@ -16,17 +16,50 @@ namespace Core2D.Renderer.PdfSharp
         /// <inheritdoc/>
         void IProjectExporter.Save(string path, IPageContainer container)
         {
-            using (var pdf = new PdfDocument())
-            {
-                Add(pdf, container);
-                pdf.Save(path);
-            }
+            using var pdf = new PdfDocument();
+            Add(pdf, container);
+            pdf.Save(path);
         }
 
         /// <inheritdoc/>
         void IProjectExporter.Save(string path, IDocumentContainer document)
         {
-            using (var pdf = new PdfDocument())
+            using var pdf = new PdfDocument();
+            var documentOutline = default(PdfOutline);
+
+            foreach (var container in document.Pages)
+            {
+                var page = Add(pdf, container);
+
+                if (documentOutline == null)
+                {
+                    documentOutline = pdf.Outlines.Add(
+                        document.Name,
+                        page,
+                        true,
+                        PdfOutlineStyle.Regular,
+                        XColors.Black);
+                }
+
+                documentOutline.Outlines.Add(
+                    container.Name,
+                    page,
+                    true,
+                    PdfOutlineStyle.Regular,
+                    XColors.Black);
+            }
+
+            pdf.Save(path);
+            ClearCache(isZooming: false);
+        }
+
+        /// <inheritdoc/>
+        void IProjectExporter.Save(string path, IProjectContainer project)
+        {
+            using var pdf = new PdfDocument();
+            var projectOutline = default(PdfOutline);
+
+            foreach (var document in project.Documents)
             {
                 var documentOutline = default(PdfOutline);
 
@@ -34,9 +67,19 @@ namespace Core2D.Renderer.PdfSharp
                 {
                     var page = Add(pdf, container);
 
+                    if (projectOutline == null)
+                    {
+                        projectOutline = pdf.Outlines.Add(
+                            project.Name,
+                            page,
+                            true,
+                            PdfOutlineStyle.Regular,
+                            XColors.Black);
+                    }
+
                     if (documentOutline == null)
                     {
-                        documentOutline = pdf.Outlines.Add(
+                        documentOutline = projectOutline.Outlines.Add(
                             document.Name,
                             page,
                             true,
@@ -51,59 +94,10 @@ namespace Core2D.Renderer.PdfSharp
                         PdfOutlineStyle.Regular,
                         XColors.Black);
                 }
-
-                pdf.Save(path);
-                ClearCache(isZooming: false);
             }
-        }
 
-        /// <inheritdoc/>
-        void IProjectExporter.Save(string path, IProjectContainer project)
-        {
-            using (var pdf = new PdfDocument())
-            {
-                var projectOutline = default(PdfOutline);
-
-                foreach (var document in project.Documents)
-                {
-                    var documentOutline = default(PdfOutline);
-
-                    foreach (var container in document.Pages)
-                    {
-                        var page = Add(pdf, container);
-
-                        if (projectOutline == null)
-                        {
-                            projectOutline = pdf.Outlines.Add(
-                                project.Name,
-                                page,
-                                true,
-                                PdfOutlineStyle.Regular,
-                                XColors.Black);
-                        }
-
-                        if (documentOutline == null)
-                        {
-                            documentOutline = projectOutline.Outlines.Add(
-                                document.Name,
-                                page,
-                                true,
-                                PdfOutlineStyle.Regular,
-                                XColors.Black);
-                        }
-
-                        documentOutline.Outlines.Add(
-                            container.Name,
-                            page,
-                            true,
-                            PdfOutlineStyle.Regular,
-                            XColors.Black);
-                    }
-                }
-
-                pdf.Save(path);
-                ClearCache(isZooming: false);
-            }
+            pdf.Save(path);
+            ClearCache(isZooming: false);
         }
 
         private PdfPage Add(PdfDocument pdf, IPageContainer container)
