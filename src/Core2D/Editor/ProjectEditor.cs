@@ -2956,7 +2956,7 @@ namespace Core2D.Editor
                         }
                         else
                         {
-                            Select(layer, result.ToImmutableHashSet());
+                            Select(layer, result);
                         }
                         return true;
                     }
