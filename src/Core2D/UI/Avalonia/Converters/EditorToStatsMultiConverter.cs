@@ -63,7 +63,7 @@ namespace Core2D.UI.Avalonia.Converters
                     nSelectedShapes = 1;
                 }
 
-                if (values[5] is ImmutableHashSet<BaseShape> selectedShapes)
+                if (values[5] is HashSet<IBaseShape> selectedShapes)
                 {
                     nSelectedShapes = selectedShapes.Count;
                 }
