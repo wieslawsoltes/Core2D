@@ -68,7 +68,7 @@ namespace Core2D.Editor.Bounds
             return null;
         }
 
-        public HashSet<IBaseShape> TryToGetShapes(IEnumerable<IBaseShape> shapes, Rect2 target, double radius)
+        public ISet<IBaseShape> TryToGetShapes(IEnumerable<IBaseShape> shapes, Rect2 target, double radius)
         {
             var selected = new HashSet<IBaseShape>();
             foreach (var shape in shapes)
