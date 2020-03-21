@@ -2944,7 +2944,7 @@ namespace Core2D.Editor
                     rectangle.TopLeft.Y,
                     rectangle.BottomRight.X,
                     rectangle.BottomRight.Y);
-                var shapes = layer.Shapes.Reverse();
+                var shapes = layer.Shapes;
                 var result = HitTest.TryToGetShapes(shapes, rect, Project.Options.HitThreshold);
                 if (result != null)
                 {
