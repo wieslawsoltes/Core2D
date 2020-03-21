@@ -3372,8 +3372,8 @@ namespace Core2D.Editor
             {
                 var items = layer.Shapes;
                 int sourceIndex = items.IndexOf(source);
-                int targetIndex = 0;
-                if (sourceIndex != targetIndex)
+                int targetIndex = items.Length - 1;
+                if (targetIndex >= 0 && sourceIndex != targetIndex)
                 {
                     Swap(source, sourceIndex, targetIndex);
                 }
@@ -3382,22 +3382,6 @@ namespace Core2D.Editor
 
         /// <inheritdoc/>
         public void BringForward(IBaseShape source)
-        {
-            var layer = Project?.CurrentContainer?.CurrentLayer;
-            if (layer != null)
-            {
-                var items = layer.Shapes;
-                int sourceIndex = items.IndexOf(source);
-                int targetIndex = sourceIndex - 1;
-                if (targetIndex >= 0)
-                {
-                    Swap(source, sourceIndex, targetIndex);
-                }
-            }
-        }
-
-        /// <inheritdoc/>
-        public void SendBackward(IBaseShape source)
         {
             var layer = Project?.CurrentContainer?.CurrentLayer;
             if (layer != null)
@@ -3413,6 +3397,22 @@ namespace Core2D.Editor
         }
 
         /// <inheritdoc/>
+        public void SendBackward(IBaseShape source)
+        {
+            var layer = Project?.CurrentContainer?.CurrentLayer;
+            if (layer != null)
+            {
+                var items = layer.Shapes;
+                int sourceIndex = items.IndexOf(source);
+                int targetIndex = sourceIndex - 1;
+                if (targetIndex >= 0)
+                {
+                    Swap(source, sourceIndex, targetIndex);
+                }
+            }
+        }
+
+        /// <inheritdoc/>
         public void SendToBack(IBaseShape source)
         {
             var layer = Project?.CurrentContainer?.CurrentLayer;
@@ -3420,8 +3420,8 @@ namespace Core2D.Editor
             {
                 var items = layer.Shapes;
                 int sourceIndex = items.IndexOf(source);
-                int targetIndex = items.Length - 1;
-                if (targetIndex >= 0 && sourceIndex != targetIndex)
+                int targetIndex = 0;
+                if (sourceIndex != targetIndex)
                 {
                     Swap(source, sourceIndex, targetIndex);
                 }
