@@ -52,24 +52,20 @@ namespace Core2D.Renderer.WinForms
 
         private static Color ToColor(IColor color)
         {
-            switch (color)
+            return color switch
             {
-                case IArgbColor argbColor:
-                    return Color.FromArgb(argbColor.A, argbColor.R, argbColor.G, argbColor.B);
-                default:
-                    throw new NotSupportedException($"The {color.GetType()} color type is not supported.");
-            }
+                IArgbColor argbColor => Color.FromArgb(argbColor.A, argbColor.R, argbColor.G, argbColor.B),
+                _ => throw new NotSupportedException($"The {color.GetType()} color type is not supported."),
+            };
         }
 
         private Brush ToBrush(IColor color)
         {
-            switch (color)
+            return color switch
             {
-                case IArgbColor argbColor:
-                    return new SolidBrush(ToColor(argbColor));
-                default:
-                    throw new NotSupportedException($"The {color.GetType()} color type is not supported.");
-            }
+                IArgbColor argbColor => new SolidBrush(ToColor(argbColor)),
+                _ => throw new NotSupportedException($"The {color.GetType()} color type is not supported."),
+            };
         }
 
         private Pen ToPen(IBaseStyle style, Func<double, float> scale)
