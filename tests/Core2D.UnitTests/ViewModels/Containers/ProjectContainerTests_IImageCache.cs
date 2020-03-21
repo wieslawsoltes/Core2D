@@ -1,4 +1,5 @@
-﻿using System.Collections.Immutable;
+﻿using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using Core2D.Interfaces;
 using Core2D.Renderer;
@@ -197,7 +198,7 @@ namespace Core2D.UnitTests
             target.AddImage(key2, new byte[] { });
             target.AddImage(key3, new byte[] { });
 
-            var used = Enumerable.Empty<string>().ToImmutableHashSet();
+            var used = new HashSet<string>();
 
             target.PurgeUnusedImages(used);
 
@@ -226,7 +227,7 @@ namespace Core2D.UnitTests
             target.AddImage(key2, new byte[] { });
             target.AddImage(key3, new byte[] { });
 
-            var used = ImmutableHashSet.Create(key2);
+            var used = new HashSet<string>() { key2 };
 
             target.PurgeUnusedImages(used);
 
