@@ -66,13 +66,11 @@ namespace Core2D.Renderer.Dxf
 
         private static DXF.AciColor ToColor(IColor color)
         {
-            switch (color)
+            return color switch
             {
-                case IArgbColor argbColor:
-                    return new DXF.AciColor(argbColor.R, argbColor.G, argbColor.B);
-                default:
-                    throw new NotSupportedException($"The {color.GetType()} color type is not supported.");
-            }
+                IArgbColor argbColor => new DXF.AciColor(argbColor.R, argbColor.G, argbColor.B),
+                _ => throw new NotSupportedException($"The {color.GetType()} color type is not supported."),
+            };
         }
 
         private static short ToTransparency(IColor color)
@@ -855,92 +853,45 @@ namespace Core2D.Renderer.Dxf
             var strokeTansparency = ToTransparency(style.Stroke);
 
             var attachmentPoint = default(DXFE.MTextAttachmentPoint);
-            double x, y;
             var rect = Spatial.Rect2.FromPoints(
                 text.TopLeft.X,
                 text.TopLeft.Y,
                 text.BottomRight.X,
                 text.BottomRight.Y,
                 dx, dy);
-
-            switch (text.Style.TextStyle.TextHAlignment)
+            var x = text.Style.TextStyle.TextHAlignment switch
             {
-                default:
-                case TextHAlignment.Left:
-                    x = rect.X;
-                    break;
-                case TextHAlignment.Center:
-                    x = rect.X + rect.Width / 2.0;
-                    break;
-                case TextHAlignment.Right:
-                    x = rect.X + rect.Width;
-                    break;
-            }
-
-            switch (text.Style.TextStyle.TextVAlignment)
+                TextHAlignment.Center => rect.X + rect.Width / 2.0,
+                TextHAlignment.Right => rect.X + rect.Width,
+                _ => rect.X,
+            };
+            var y = text.Style.TextStyle.TextVAlignment switch
             {
-                default:
-                case TextVAlignment.Top:
-                    y = rect.Y;
-                    break;
-                case TextVAlignment.Center:
-                    y = rect.Y + rect.Height / 2.0;
-                    break;
-                case TextVAlignment.Bottom:
-                    y = rect.Y + rect.Height;
-                    break;
-            }
-
-            switch (text.Style.TextStyle.TextVAlignment)
+                TextVAlignment.Center => rect.Y + rect.Height / 2.0,
+                TextVAlignment.Bottom => rect.Y + rect.Height,
+                _ => rect.Y,
+            };
+            attachmentPoint = text.Style.TextStyle.TextVAlignment switch
             {
-                default:
-                case TextVAlignment.Top:
-                    switch (text.Style.TextStyle.TextHAlignment)
-                    {
-                        default:
-                        case TextHAlignment.Left:
-                            attachmentPoint = DXFE.MTextAttachmentPoint.TopLeft;
-                            break;
-                        case TextHAlignment.Center:
-                            attachmentPoint = DXFE.MTextAttachmentPoint.TopCenter;
-                            break;
-                        case TextHAlignment.Right:
-                            attachmentPoint = DXFE.MTextAttachmentPoint.TopRight;
-                            break;
-                    }
-                    break;
-                case TextVAlignment.Center:
-                    switch (text.Style.TextStyle.TextHAlignment)
-                    {
-                        default:
-                        case TextHAlignment.Left:
-                            attachmentPoint = DXFE.MTextAttachmentPoint.MiddleLeft;
-                            break;
-                        case TextHAlignment.Center:
-                            attachmentPoint = DXFE.MTextAttachmentPoint.MiddleCenter;
-                            break;
-                        case TextHAlignment.Right:
-                            attachmentPoint = DXFE.MTextAttachmentPoint.MiddleRight;
-                            break;
-                    }
-                    break;
-                case TextVAlignment.Bottom:
-                    switch (text.Style.TextStyle.TextHAlignment)
-                    {
-                        default:
-                        case TextHAlignment.Left:
-                            attachmentPoint = DXFE.MTextAttachmentPoint.BottomLeft;
-                            break;
-                        case TextHAlignment.Center:
-                            attachmentPoint = DXFE.MTextAttachmentPoint.BottomCenter;
-                            break;
-                        case TextHAlignment.Right:
-                            attachmentPoint = DXFE.MTextAttachmentPoint.BottomRight;
-                            break;
-                    }
-                    break;
-            }
-
+                TextVAlignment.Center => text.Style.TextStyle.TextHAlignment switch
+                {
+                    TextHAlignment.Center => DXFE.MTextAttachmentPoint.MiddleCenter,
+                    TextHAlignment.Right => DXFE.MTextAttachmentPoint.MiddleRight,
+                    _ => DXFE.MTextAttachmentPoint.MiddleLeft,
+                },
+                TextVAlignment.Bottom => text.Style.TextStyle.TextHAlignment switch
+                {
+                    TextHAlignment.Center => DXFE.MTextAttachmentPoint.BottomCenter,
+                    TextHAlignment.Right => DXFE.MTextAttachmentPoint.BottomRight,
+                    _ => DXFE.MTextAttachmentPoint.BottomLeft,
+                },
+                _ => text.Style.TextStyle.TextHAlignment switch
+                {
+                    TextHAlignment.Center => DXFE.MTextAttachmentPoint.TopCenter,
+                    TextHAlignment.Right => DXFE.MTextAttachmentPoint.TopRight,
+                    _ => DXFE.MTextAttachmentPoint.TopLeft,
+                },
+            };
             var ts = new netDxf.Tables.TextStyle(style.TextStyle.FontName, style.TextStyle.FontFile);
             var dxfMText = new DXFE.MText(
                 new DXF.Vector3(ToDxfX(x), ToDxfY(y), 0),
