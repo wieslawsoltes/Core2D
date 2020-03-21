@@ -75,6 +75,7 @@ namespace Core2D.Renderer.PdfSharp
             {
                 // TODO: Convert to correct dash values.
                 pen.DashPattern = StyleHelper.ConvertDashesToDoubleArray(style.Dashes);
+                pen.DashStyle = XDashStyle.Custom;
             }
             pen.DashOffset = style.DashOffset;
             return pen;
