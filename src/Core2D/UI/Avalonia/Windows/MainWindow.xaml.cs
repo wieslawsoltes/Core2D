@@ -16,6 +16,8 @@ namespace Core2D.UI.Avalonia.Windows
         {
             InitializeComponent();
             this.AttachDevTools();
+            //VisualRoot.Renderer.DrawDirtyRects = true;
+            //VisualRoot.Renderer.DrawFps = true;
             App.Selector.EnableThemes(this);
         }
 
