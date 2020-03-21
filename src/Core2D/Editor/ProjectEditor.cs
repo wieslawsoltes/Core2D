@@ -2536,7 +2536,8 @@ namespace Core2D.Editor
                     var layer = Project?.CurrentContainer?.CurrentLayer;
                     if (layer != null)
                     {
-                        var point = HitTest.TryToGetPoint(layer.Shapes, new Point2(x, y), Project.Options.HitThreshold);
+                        var shapes = layer.Shapes.Reverse();
+                        var point = HitTest.TryToGetPoint(shapes, new Point2(x, y), Project.Options.HitThreshold);
                         if (point != null)
                         {
                             if (bExecute == true)
@@ -2621,7 +2622,8 @@ namespace Core2D.Editor
                     var layer = Project?.CurrentContainer?.CurrentLayer;
                     if (layer != null)
                     {
-                        var result = HitTest.TryToGetShape(layer.Shapes, new Point2(x, y), Project.Options.HitThreshold);
+                        var shapes = layer.Shapes.Reverse();
+                        var result = HitTest.TryToGetShape(shapes, new Point2(x, y), Project.Options.HitThreshold);
                         if (result != null)
                         {
                             if (bExecute)
@@ -2717,7 +2719,8 @@ namespace Core2D.Editor
                     var layer = Project.CurrentContainer?.CurrentLayer;
                     if (layer != null)
                     {
-                        var result = HitTest.TryToGetShape(layer.Shapes, new Point2(x, y), Project.Options.HitThreshold);
+                        var shapes = layer.Shapes.Reverse();
+                        var result = HitTest.TryToGetShape(shapes, new Point2(x, y), Project.Options.HitThreshold);
                         if (result != null)
                         {
                             if (bExecute == true)
@@ -2909,14 +2912,16 @@ namespace Core2D.Editor
         {
             if (layer != null)
             {
-                var point = HitTest.TryToGetPoint(layer.Shapes, new Point2(x, y), Project.Options.HitThreshold);
+                var shapes = layer.Shapes.Reverse();
+
+                var point = HitTest.TryToGetPoint(shapes, new Point2(x, y), Project.Options.HitThreshold);
                 if (point != null)
                 {
                     Select(layer, point);
                     return true;
                 }
 
-                var shape = HitTest.TryToGetShape(layer.Shapes, new Point2(x, y), Project.Options.HitThreshold);
+                var shape = HitTest.TryToGetShape(shapes, new Point2(x, y), Project.Options.HitThreshold);
                 if (shape != null)
                 {
                     Select(layer, shape);
@@ -2939,7 +2944,8 @@ namespace Core2D.Editor
                     rectangle.TopLeft.Y,
                     rectangle.BottomRight.X,
                     rectangle.BottomRight.Y);
-                var result = HitTest.TryToGetShapes(layer.Shapes, rect, Project.Options.HitThreshold);
+                var shapes = layer.Shapes.Reverse();
+                var result = HitTest.TryToGetShapes(shapes, rect, Project.Options.HitThreshold);
                 if (result != null)
                 {
                     if (result.Count > 0)
@@ -2993,7 +2999,9 @@ namespace Core2D.Editor
             if (Renderers?[0]?.State?.SelectedShapes == null
                 && !(Renderers?[0]?.State?.SelectedShape != null && HoveredShape != Renderers?[0]?.State?.SelectedShape))
             {
-                var point = HitTest.TryToGetPoint(Project.CurrentContainer?.CurrentLayer?.Shapes, new Point2(x, y), Project.Options.HitThreshold);
+                var shapes = Project.CurrentContainer?.CurrentLayer?.Shapes.Reverse();
+
+                var point = HitTest.TryToGetPoint(shapes, new Point2(x, y), Project.Options.HitThreshold);
                 if (point != null)
                 {
                     Hover(Project.CurrentContainer?.CurrentLayer, point);
@@ -3001,7 +3009,7 @@ namespace Core2D.Editor
                 }
                 else
                 {
-                    var shape = HitTest.TryToGetShape(Project.CurrentContainer?.CurrentLayer?.Shapes, new Point2(x, y), Project.Options.HitThreshold);
+                    var shape = HitTest.TryToGetShape(shapes, new Point2(x, y), Project.Options.HitThreshold);
                     if (shape != null)
                     {
                         Hover(Project.CurrentContainer?.CurrentLayer, shape);
@@ -3025,8 +3033,9 @@ namespace Core2D.Editor
         {
             if (Project.Options.TryToConnect)
             {
+                var shapes = Project.CurrentContainer.CurrentLayer.Shapes.Reverse();
                 return HitTest.TryToGetPoint(
-                    Project.CurrentContainer.CurrentLayer.Shapes,
+                    shapes,
                     new Point2(x, y),
                     Project.Options.HitThreshold);
             }
@@ -3063,8 +3072,9 @@ namespace Core2D.Editor
                 return false;
             }
 
+            var shapes = Project.CurrentContainer.CurrentLayer.Shapes.Reverse();
             var result = HitTest.TryToGetShape(
-                Project.CurrentContainer.CurrentLayer.Shapes,
+                shapes,
                 new Point2(x, y),
                 Project.Options.HitThreshold);
 
