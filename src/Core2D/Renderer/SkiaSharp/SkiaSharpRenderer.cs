@@ -59,62 +59,38 @@ namespace Core2D.Renderer.SkiaSharp
             double rheight = Math.Abs(rect.Bottom - rect.Top);
             double swidth = Math.Abs(size.Right - size.Left);
             double sheight = Math.Abs(size.Bottom - size.Top);
-            double ox, oy;
-
-            switch (style.TextStyle.TextHAlignment)
+            var ox = style.TextStyle.TextHAlignment switch
             {
-                case TextHAlignment.Left:
-                    ox = rect.Left;
-                    break;
-                case TextHAlignment.Right:
-                    ox = rect.Right - swidth;
-                    break;
-                case TextHAlignment.Center:
-                default:
-                    ox = (rect.Left + rwidth / 2f) - (swidth / 2f);
-                    break;
-            }
-
-            switch (style.TextStyle.TextVAlignment)
+                TextHAlignment.Left => rect.Left,
+                TextHAlignment.Right => rect.Right - swidth,
+                _ => (rect.Left + rwidth / 2f) - (swidth / 2f),
+            };
+            var oy = style.TextStyle.TextVAlignment switch
             {
-                case TextVAlignment.Top:
-                    oy = rect.Top;
-                    break;
-                case TextVAlignment.Bottom:
-                    oy = rect.Bottom - sheight;
-                    break;
-                case TextVAlignment.Center:
-                default:
-                    oy = (rect.Bottom - rheight / 2f) - (sheight / 2f);
-                    break;
-            }
-
+                TextVAlignment.Top => rect.Top,
+                TextVAlignment.Bottom => rect.Bottom - sheight,
+                _ => (rect.Bottom - rheight / 2f) - (sheight / 2f),
+            };
             return new SKPoint((float)ox, (float)oy);
         }
 
         private SKColor ToSKColor(IColor color)
         {
-            switch (color)
+            return color switch
             {
-                case IArgbColor argbColor:
-                    return new SKColor(argbColor.R, argbColor.G, argbColor.B, argbColor.A);
-                default:
-                    throw new NotSupportedException($"The {color.GetType()} color type is not supported.");
-            }
+                IArgbColor argbColor => new SKColor(argbColor.R, argbColor.G, argbColor.B, argbColor.A),
+                _ => throw new NotSupportedException($"The {color.GetType()} color type is not supported."),
+            };
         }
 
         private static SKStrokeCap ToStrokeCap(IBaseStyle style)
         {
-            switch (style.LineCap)
+            return style.LineCap switch
             {
-                default:
-                case LineCap.Flat:
-                    return SKStrokeCap.Butt;
-                case LineCap.Square:
-                    return SKStrokeCap.Square;
-                case LineCap.Round:
-                    return SKStrokeCap.Round;
-            }
+                LineCap.Square => SKStrokeCap.Square,
+                LineCap.Round => SKStrokeCap.Round,
+                _ => SKStrokeCap.Butt,
+            };
         }
 
         private SKPaint ToSKPaintPen(IBaseStyle style, Func<double, float> scale, double sourceDpi, double targetDpi)
@@ -351,10 +327,10 @@ namespace Core2D.Renderer.SkiaSharp
         {
             using var brush = ToSKPaintBrush(color);
             SKRect srect = SKRect.Create(
-_scaleToPage(rect.X),
-_scaleToPage(rect.Y),
-_scaleToPage(rect.Width),
-_scaleToPage(rect.Height));
+                _scaleToPage(rect.X),
+                _scaleToPage(rect.Y),
+                _scaleToPage(rect.Width),
+                _scaleToPage(rect.Height));
             canvas.DrawRect(srect, brush);
         }
 
@@ -511,10 +487,10 @@ _scaleToPage(rect.Height));
             using var pen = ToSKPaintPen(arc.Style, _scaleToPage, _sourceDpi, _targetDpi);
             using var path = new SKPath();
             var a = new GdiArc(
-Point2.FromXY(arc.Point1.X, arc.Point1.Y),
-Point2.FromXY(arc.Point2.X, arc.Point2.Y),
-Point2.FromXY(arc.Point3.X, arc.Point3.Y),
-Point2.FromXY(arc.Point4.X, arc.Point4.Y));
+                Point2.FromXY(arc.Point1.X, arc.Point1.Y),
+                Point2.FromXY(arc.Point2.X, arc.Point2.Y),
+                Point2.FromXY(arc.Point3.X, arc.Point3.Y),
+                Point2.FromXY(arc.Point4.X, arc.Point4.Y));
             var rect = new SKRect(
                 _scaleToPage(a.X + dx),
                 _scaleToPage(a.Y + dy),
@@ -533,8 +509,8 @@ Point2.FromXY(arc.Point4.X, arc.Point4.Y));
             using var pen = ToSKPaintPen(cubicBezier.Style, _scaleToPage, _sourceDpi, _targetDpi);
             using var path = new SKPath();
             path.MoveTo(
-_scaleToPage(cubicBezier.Point1.X + dx),
-_scaleToPage(cubicBezier.Point1.Y + dy));
+                _scaleToPage(cubicBezier.Point1.X + dx),
+                _scaleToPage(cubicBezier.Point1.Y + dy));
             path.CubicTo(
                 _scaleToPage(cubicBezier.Point2.X + dx),
                 _scaleToPage(cubicBezier.Point2.Y + dy),
@@ -554,8 +530,8 @@ _scaleToPage(cubicBezier.Point1.Y + dy));
             using var pen = ToSKPaintPen(quadraticBezier.Style, _scaleToPage, _sourceDpi, _targetDpi);
             using var path = new SKPath();
             path.MoveTo(
-_scaleToPage(quadraticBezier.Point1.X + dx),
-_scaleToPage(quadraticBezier.Point1.Y + dy));
+                _scaleToPage(quadraticBezier.Point1.X + dx),
+                _scaleToPage(quadraticBezier.Point1.Y + dy));
             path.QuadTo(
                 _scaleToPage(quadraticBezier.Point2.X + dx),
                 _scaleToPage(quadraticBezier.Point2.Y + dy),
