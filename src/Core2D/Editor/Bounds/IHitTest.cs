@@ -15,6 +15,6 @@ namespace Core2D.Editor.Bounds
         bool Contains(IBaseShape shape, Point2 target, double radius);
         bool Overlaps(IBaseShape shape, Rect2 target, double radius);
         IBaseShape TryToGetShape(IEnumerable<IBaseShape> shapes, Point2 target, double radius);
-        HashSet<IBaseShape> TryToGetShapes(IEnumerable<IBaseShape> shapes, Rect2 target, double radius);
+        ISet<IBaseShape> TryToGetShapes(IEnumerable<IBaseShape> shapes, Rect2 target, double radius);
     }
 }
