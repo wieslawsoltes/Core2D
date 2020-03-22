@@ -2914,34 +2914,6 @@ namespace Core2D.Editor
         }
 
         /// <inheritdoc/>
-        public void Select(IBaseShape shape)
-        {
-            if (Renderers?[0]?.State != null)
-            {
-                Renderers[0].State.SelectedShape = shape;
-
-                if (Renderers[0].State.SelectedShapes != null)
-                {
-                    Renderers[0].State.SelectedShapes = default;
-                }
-            }
-        }
-
-        /// <inheritdoc/>
-        public void Select(ISet<IBaseShape> shapes)
-        {
-            if (Renderers?[0]?.State != null)
-            {
-                if (Renderers[0].State.SelectedShape != null)
-                {
-                    Renderers[0].State.SelectedShape = default;
-                }
-
-                Renderers[0].State.SelectedShapes = shapes;
-            }
-        }
-
-        /// <inheritdoc/>
         public void Deselect()
         {
             if (Renderers?[0].State?.SelectedShape != null)
@@ -2958,7 +2930,14 @@ namespace Core2D.Editor
         /// <inheritdoc/>
         public void Select(ILayerContainer layer, IBaseShape shape)
         {
-            Select(shape);
+            if (Renderers?[0]?.State != null)
+            {
+                if (Renderers[0].State.SelectedShapes != null)
+                {
+                    Renderers[0].State.SelectedShapes = default;
+                }
+                Renderers[0].State.SelectedShape = shape;
+            }
 
             if (layer.Owner is IPageContainer owner)
             {
@@ -2978,7 +2957,14 @@ namespace Core2D.Editor
         /// <inheritdoc/>
         public void Select(ILayerContainer layer, ISet<IBaseShape> shapes)
         {
-            Select(shapes);
+            if (Renderers?[0]?.State != null)
+            {
+                if (Renderers[0].State.SelectedShape != null)
+                {
+                    Renderers[0].State.SelectedShape = default;
+                }
+                Renderers[0].State.SelectedShapes = shapes;
+            }
 
             if (layer.Owner is IPageContainer owner && owner.CurrentShape != null)
             {
