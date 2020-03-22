@@ -340,7 +340,7 @@ namespace Core2D.Editor.Tools
                             editor.Project.CurrentContainer.WorkingLayer.Invalidate();
                         }
 
-                        if (IsSelectionAvailable())
+                        if (IsSelectionAvailable() && !isControl)
                         {
                             (double sx, double sy) = editor.TryToSnap(args);
                             if (_historyX != sx || _historyY != sy)
