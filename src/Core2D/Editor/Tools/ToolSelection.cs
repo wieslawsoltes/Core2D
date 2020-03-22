@@ -200,13 +200,73 @@ namespace Core2D.Editor.Tools
             {
                 case State.None:
                     {
+                        bool isControl = args.Modifier.HasFlag(ModifierFlags.Control);
+
                         editor.Dehover(editor.Project.CurrentContainer.CurrentLayer);
+
+                        if (isControl == true)
+                        {
+                            var shapes = editor.Project.CurrentContainer.CurrentLayer.Shapes.Reverse();
+                            var result = editor.HitTest.TryToGetShape(shapes, new Point2(x, y), editor.Project.Options.HitThreshold);
+                            if (result != null)
+                            {
+                                if (editor.Renderers[0].State.SelectedShape == null && editor.Renderers[0].State.SelectedShapes == null)
+                                {
+                                    editor.Renderers[0].State.SelectedShape = result;
+                                    editor.Project.CurrentContainer.CurrentLayer.Invalidate();
+                                    break;
+                                }
+                                else if (editor.Renderers[0].State.SelectedShape != null && editor.Renderers[0].State.SelectedShapes == null)
+                                {
+                                    if (editor.Renderers[0].State.SelectedShape == result)
+                                    {
+                                        editor.Renderers[0].State.SelectedShape = null;
+                                        editor.Project.CurrentContainer.CurrentLayer.Invalidate();
+                                        break;
+                                    }
+                                    else
+                                    {
+                                        var selected = editor.Renderers[0].State.SelectedShape;
+                                        editor.Renderers[0].State.SelectedShape = null;
+                                        editor.Renderers[0].State.SelectedShapes = new HashSet<IBaseShape>() { selected, result };
+                                        editor.Project.CurrentContainer.CurrentLayer.Invalidate();
+                                        break;
+                                    }
+                                }
+                                else if (editor.Renderers[0].State.SelectedShape == null && editor.Renderers[0].State.SelectedShapes != null)
+                                {
+                                    if (editor.Renderers[0].State.SelectedShapes.Contains(result))
+                                    {
+                                        editor.Renderers[0].State.SelectedShapes.Remove(result);
+                                        if (editor.Renderers[0].State.SelectedShapes.Count == 0)
+                                        {
+                                            editor.Renderers[0].State.SelectedShape = null;
+                                            editor.Renderers[0].State.SelectedShapes = null;
+                                        }
+                                        else if (editor.Renderers[0].State.SelectedShapes.Count == 1)
+                                        {
+                                            var selected = editor.Renderers[0].State.SelectedShapes.FirstOrDefault();
+                                            editor.Renderers[0].State.SelectedShape = selected;
+                                            editor.Renderers[0].State.SelectedShapes = null;
+                                        }
+                                        editor.Project.CurrentContainer.CurrentLayer.Invalidate();
+                                        break;
+                                    }
+                                    else
+                                    {
+                                        editor.Renderers[0].State.SelectedShapes.Add(result);
+                                        editor.Project.CurrentContainer.CurrentLayer.Invalidate();
+                                        break;
+                                    }
+                                }
+                            }
+                        }
 
                         if (editor.Renderers[0].State.SelectedShape == null && editor.Renderers[0].State.SelectedShapes != null)
                         {
                             var shapes = editor.Project.CurrentContainer.CurrentLayer.Shapes.Reverse();
                             var result = editor.HitTest.TryToGetShape(shapes, new Point2(x, y), editor.Project.Options.HitThreshold);
-                            if (result != null)
+                            if (result != null && editor.Renderers[0].State.SelectedShapes.Contains(result))
                             {
                                 _startX = sx;
                                 _startY = sy;
@@ -219,7 +279,9 @@ namespace Core2D.Editor.Tools
                             }
                         }
 
-                        if (editor.TryToSelectShape(editor.Project.CurrentContainer.CurrentLayer, x, y))
+                        var deselect = !isControl;
+
+                        if (editor.TryToSelectShape(editor.Project.CurrentContainer.CurrentLayer, x, y, deselect))
                         {
                             _startX = sx;
                             _startY = sy;
@@ -268,6 +330,18 @@ namespace Core2D.Editor.Tools
                     break;
                 case State.Selected:
                     {
+                        bool isControl = args.Modifier.HasFlag(ModifierFlags.Control);
+
+                        // TODO: Handle `isControl` mode.
+
+                        if (_rectangle != null)
+                        {
+                            _rectangle.BottomRight.X = args.X;
+                            _rectangle.BottomRight.Y = args.Y;
+                            editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_rectangle);
+                            editor.Project.CurrentContainer.WorkingLayer.Invalidate();
+                        }
+
                         if (IsSelectionAvailable())
                         {
                             (double sx, double sy) = editor.TryToSnap(args);
@@ -311,14 +385,12 @@ namespace Core2D.Editor.Tools
                             break;
                         }
 
+                        var deselect = !isControl;
+
                         if (_rectangle != null)
                         {
-                            _rectangle.BottomRight.X = args.X;
-                            _rectangle.BottomRight.Y = args.Y;
-                            editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_rectangle);
-                            editor.Project.CurrentContainer.WorkingLayer.Invalidate();
                             _currentState = State.None;
-                            editor.TryToSelectShapes(editor.Project.CurrentContainer.CurrentLayer, _rectangle);
+                            editor.TryToSelectShapes(editor.Project.CurrentContainer.CurrentLayer, _rectangle, deselect);
                             editor.IsToolIdle = true;
                         }
                     }
@@ -359,12 +431,19 @@ namespace Core2D.Editor.Tools
             {
                 case State.None:
                     {
-                        editor.TryToHoverShape(args.X, args.Y);
+                        bool isControl = args.Modifier.HasFlag(ModifierFlags.Control);
+
+                        if (!isControl)
+                        {
+                            editor.TryToHoverShape(args.X, args.Y);
+                        }
                     }
                     break;
                 case State.Selected:
                     {
-                        if (IsSelectionAvailable())
+                        bool isControl = args.Modifier.HasFlag(ModifierFlags.Control);
+
+                        if (IsSelectionAvailable() && !isControl)
                         {
                             MoveSelectionCacheTo(args);
                             editor.Project.CurrentContainer.CurrentLayer.Invalidate();
