@@ -27,6 +27,8 @@
         <KeyBinding Command="{Binding OnMoveDownSelected}" Gesture="Down"/>
         <KeyBinding Command="{Binding OnMoveLeftSelected}" Gesture="Left"/>
         <KeyBinding Command="{Binding OnMoveRightSelected}" Gesture="Right"/>
+        <KeyBinding Command="{Binding OnStackHorizontallySelected}" Gesture="Shift+H"/>
+        <KeyBinding Command="{Binding OnStackVerticallySelected}" Gesture="Shift+V"/>
         <KeyBinding Command="{Binding OnDistributeHorizontallySelected}" Gesture="Ctrl+Shift+H"/>
         <KeyBinding Command="{Binding OnDistributeVerticallySelected}" Gesture="Ctrl+Shift+V"/>
         <KeyBinding Command="{Binding OnAlignLeftSelected}" Gesture="Ctrl+Shift+Left"/>
