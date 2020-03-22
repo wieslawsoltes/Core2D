@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel;
 
-namespace Core2D.Common
+namespace Core2D.Common.UnitTests
 {
     public class PropertyChangedObserver
     {

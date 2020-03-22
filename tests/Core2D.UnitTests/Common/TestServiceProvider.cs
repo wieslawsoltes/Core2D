@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Core2D.Common
+namespace Core2D.Common.UnitTests
 {
     public class TestServiceProvider : IServiceProvider
     {
