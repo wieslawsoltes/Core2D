@@ -8,6 +8,7 @@
     <LangVersion>8.0</LangVersion>
     <IsPackable>False</IsPackable>
     <Nullable>disable</Nullable>
+    <NoWarn>$(NoWarn);NU1701</NoWarn>
   </PropertyGroup>
 
   <PropertyGroup>
