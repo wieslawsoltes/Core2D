@@ -72,24 +72,6 @@
             <Separator/>
             <MenuItem Header="Cl_ear All" Command="{Binding OnClearAll}"/>
             <Separator/>
-            <MenuItem Header="_Group" Command="{Binding OnGroupSelected}" InputGesture="Ctrl+G"/>
-            <MenuItem Header="U_ngroup" Command="{Binding OnUngroupSelected}" InputGesture="Ctrl+U"/>
-            <Separator/>
-            <MenuItem Header="_Move">
-                <MenuItem Header="_Up" Command="{Binding OnMoveUpSelected}" InputGesture="Up"/>
-                <MenuItem Header="_Down" Command="{Binding OnMoveDownSelected}" InputGesture="Down"/>
-                <MenuItem Header="_Left" Command="{Binding OnMoveLeftSelected}" InputGesture="Left"/>
-                <MenuItem Header="_Right" Command="{Binding OnMoveRightSelected}" InputGesture="Right"/>
-            </MenuItem>
-            <Separator/>
-            <MenuItem Header="_Order">
-                <MenuItem Header="Send to _Back" Command="{Binding OnSendToBackSelected}" InputGesture="Shift+Subtract"/>
-                <MenuItem Header="Send Ba_ckward" Command="{Binding OnSendBackwardSelected}" InputGesture="Subtract"/>
-                <Separator/>
-                <MenuItem Header="Bring Fo_rward" Command="{Binding OnBringForwardSelected}" InputGesture="Add"/>
-                <MenuItem Header="Bring to _Front" Command="{Binding OnBringToFrontSelected}" InputGesture="Shift+Add"/>
-            </MenuItem>
-            <Separator/>
             <MenuItem Header="Cance_l" Command="{Binding OnCancel}" InputGesture="Escape"/>
         </MenuItem>
         <MenuItem Header="_View">
@@ -148,6 +130,41 @@
                         </Setter>-->
                     </Style>
                 </MenuItem.Styles>
+            </MenuItem>
+        </MenuItem>
+        <MenuItem Header="_Shape">
+            <MenuItem Header="_Group" Command="{Binding OnGroupSelected}" InputGesture="Ctrl+G"/>
+            <MenuItem Header="U_ngroup" Command="{Binding OnUngroupSelected}" InputGesture="Ctrl+U"/>
+            <Separator/>
+            <MenuItem Header="_Move">
+                <MenuItem Header="_Up" Command="{Binding OnMoveUpSelected}" InputGesture="Up"/>
+                <MenuItem Header="_Down" Command="{Binding OnMoveDownSelected}" InputGesture="Down"/>
+                <MenuItem Header="_Left" Command="{Binding OnMoveLeftSelected}" InputGesture="Left"/>
+                <MenuItem Header="_Right" Command="{Binding OnMoveRightSelected}" InputGesture="Right"/>
+            </MenuItem>
+            <MenuItem Header="Stac_k">
+                <MenuItem Header="_Horizontally" Command="{Binding OnStackHorizontallySelected}"/>
+                <MenuItem Header="_Vertically" Command="{Binding OnStackVerticallySelected}"/>
+            </MenuItem>
+            <MenuItem Header="Dis_tribute">
+                <MenuItem Header="_Horizontally" Command="{Binding OnDistributeHorizontallySelected}" InputGesture="Ctrl+Shift+H"/>
+                <MenuItem Header="_Vertically" Command="{Binding OnDistributeVerticallySelected}" InputGesture="Ctrl+Shift+V"/>
+            </MenuItem>
+            <MenuItem Header="Alig_n">
+                <MenuItem Header="_Left" Command="{Binding OnAlignLeftSelected}" InputGesture="Ctrl+Shift+Left"/>
+                <MenuItem Header="_Centered" Command="{Binding OnAlignCenteredSelected}" InputGesture="Ctrl+Shift+Subtract"/>
+                <MenuItem Header="_Right" Command="{Binding OnAlignRightSelected}" InputGesture="Ctrl+Shift+Right"/>
+                <Separator/>
+                <MenuItem Header="_Top" Command="{Binding OnAlignTopSelected}" InputGesture="Ctrl+Shift+Up"/>
+                <MenuItem Header="C_enter" Command="{Binding OnAlignCenterSelected}" InputGesture="Ctrl+Shift+OemPipe"/>
+                <MenuItem Header="_Bottom" Command="{Binding OnAlignBottomSelected}" InputGesture="Ctrl+Shift+Down"/>
+            </MenuItem>
+            <MenuItem Header="_Arange">
+                <MenuItem Header="_Bring to Front" Command="{Binding OnBringToFrontSelected}" InputGesture="Ctrl+Shift+OemCloseBrackets"/>
+                <MenuItem Header="Bring _Forward" Command="{Binding OnBringForwardSelected}" InputGesture="Ctrl+OemCloseBrackets"/>
+                <MenuItem Header="Send Back_ward" Command="{Binding OnSendBackwardSelected}" InputGesture="Ctrl+OemOpenBrackets"/>
+                <MenuItem Header="_Send to Back" Command="{Binding OnSendToBackSelected}" InputGesture="Ctrl+Shift+OemOpenBrackets"/>
+                <Separator/>
             </MenuItem>
         </MenuItem>
         <MenuItem Header="_Tool">
