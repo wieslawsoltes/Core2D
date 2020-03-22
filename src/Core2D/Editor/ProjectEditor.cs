@@ -3035,7 +3035,7 @@ namespace Core2D.Editor
         }
 
         /// <inheritdoc/>
-        public bool TryToSelectShapes(ILayerContainer layer, IRectangleShape rectangle, bool deselect = true)
+        public bool TryToSelectShapes(ILayerContainer layer, IRectangleShape rectangle, bool deselect = true, bool includeSelected = false)
         {
             if (layer != null)
             {
@@ -3050,15 +3050,63 @@ namespace Core2D.Editor
                 {
                     if (result.Count > 0)
                     {
-                        if (result.Count == 1)
+                        if (includeSelected)
                         {
-                            Select(layer, result.FirstOrDefault());
+                            if (Renderers?[0]?.State != null)
+                            {
+                                if (Renderers[0].State.SelectedShape != null)
+                                {
+                                    if (result.Contains(Renderers[0].State.SelectedShape))
+                                    {
+                                        result.Remove(Renderers[0].State.SelectedShape);
+                                    }
+                                    else
+                                    {
+                                        result.Add(Renderers[0].State.SelectedShape);
+                                    }
+                                }
+
+                                if (Renderers[0].State.SelectedShapes != null)
+                                {
+                                    foreach (var shape in Renderers[0].State.SelectedShapes)
+                                    {
+                                        if (result.Contains(shape))
+                                        {
+                                            result.Remove(shape);
+                                        }
+                                        else
+                                        {
+                                            result.Add(shape);
+                                        }
+                                    }
+                                }
+                            }
+
+                            if (result.Count > 0)
+                            {
+                                if (result.Count == 1)
+                                {
+                                    Select(layer, result.FirstOrDefault());
+                                }
+                                else
+                                {
+                                    Select(layer, result);
+                                }
+                                return true;
+                            }
                         }
                         else
                         {
-                            Select(layer, result);
+                            if (result.Count == 1)
+                            {
+                                Select(layer, result.FirstOrDefault());
+                            }
+                            else
+                            {
+                                Select(layer, result);
+                            }
+                            return true;
                         }
-                        return true;
                     }
                 }
 
