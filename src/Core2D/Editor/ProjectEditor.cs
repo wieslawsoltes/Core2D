@@ -3005,7 +3005,7 @@ namespace Core2D.Editor
         }
 
         /// <inheritdoc/>
-        public bool TryToSelectShape(ILayerContainer layer, double x, double y)
+        public bool TryToSelectShape(ILayerContainer layer, double x, double y, bool deselect = true)
         {
             if (layer != null)
             {
@@ -3025,14 +3025,17 @@ namespace Core2D.Editor
                     return true;
                 }
 
-                Deselect(layer);
+                if (deselect)
+                {
+                    Deselect(layer);
+                }
             }
 
             return false;
         }
 
         /// <inheritdoc/>
-        public bool TryToSelectShapes(ILayerContainer layer, IRectangleShape rectangle)
+        public bool TryToSelectShapes(ILayerContainer layer, IRectangleShape rectangle, bool deselect = true)
         {
             if (layer != null)
             {
@@ -3059,7 +3062,10 @@ namespace Core2D.Editor
                     }
                 }
 
-                Deselect(layer);
+                if (deselect)
+                {
+                    Deselect(layer);
+                }
             }
 
             return false;
