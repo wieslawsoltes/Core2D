@@ -1071,8 +1071,9 @@ namespace Core2D.Editor
         /// <param name="layer">The layer object.</param>
         /// <param name="rectangle">The selection rectangle.</param>
         /// <param name="deselect">The flag indicating whether to deselect shapes.</param>
+        /// <param name="includeSelected">The flag indicating whether to include selected shapes.</param>
         /// <returns>True if selecting shapes was successful.</returns>
-        bool TryToSelectShapes(ILayerContainer layer, IRectangleShape rectangle, bool deselect = true);
+        bool TryToSelectShapes(ILayerContainer layer, IRectangleShape rectangle, bool deselect = true, bool includeSelected = false);
 
         /// <summary>
         /// Hover shape.
