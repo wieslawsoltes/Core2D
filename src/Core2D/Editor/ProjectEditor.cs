@@ -8,6 +8,7 @@ using Core2D.Data;
 using Core2D.Editor.Bounds;
 using Core2D.Editor.History;
 using Core2D.Editor.Input;
+using Core2D.Editor.Layout;
 using Core2D.Editor.Recent;
 using Core2D.Interfaces;
 using Core2D.Renderer;
@@ -1128,61 +1129,111 @@ namespace Core2D.Editor
         /// <inheritdoc/>
         public void OnStackHorizontallySelected()
         {
-            // TODO:
+            var shapes = Renderers?[0]?.State?.SelectedShapes;
+            if (shapes != null)
+            {
+                var items = shapes.Where(s => !s.State.Flags.HasFlag(ShapeStateFlags.Locked));
+                BoxLayout.Stack(items, StackMode.Horizontal, Project?.History);
+            }
         }
 
         /// <inheritdoc/>
         public void OnStackVerticallySelected()
         {
-            // TODO:
+            var shapes = Renderers?[0]?.State?.SelectedShapes;
+            if (shapes != null)
+            {
+                var items = shapes.Where(s => !s.State.Flags.HasFlag(ShapeStateFlags.Locked));
+                BoxLayout.Stack(items, StackMode.Vertical, Project?.History);
+            }
         }
 
         /// <inheritdoc/>
         public void OnDistributeHorizontallySelected()
         {
-            // TODO:
+            var shapes = Renderers?[0]?.State?.SelectedShapes;
+            if (shapes != null)
+            {
+                var items = shapes.Where(s => !s.State.Flags.HasFlag(ShapeStateFlags.Locked));
+                BoxLayout.Distribute(items, DistributeMode.Horizontal, Project?.History);
+            }
         }
 
         /// <inheritdoc/>
         public void OnDistributeVerticallySelected()
         {
-            // TODO:
+            var shapes = Renderers?[0]?.State?.SelectedShapes;
+            if (shapes != null)
+            {
+                var items = shapes.Where(s => !s.State.Flags.HasFlag(ShapeStateFlags.Locked));
+                BoxLayout.Distribute(items, DistributeMode.Vertical, Project?.History);
+            }
         }
 
         /// <inheritdoc/>
         public void OnAlignLeftSelected()
         {
-            // TODO:
+            var shapes = Renderers?[0]?.State?.SelectedShapes;
+            if (shapes != null)
+            {
+                var items = shapes.Where(s => !s.State.Flags.HasFlag(ShapeStateFlags.Locked));
+                BoxLayout.Align(items, AlignMode.Left, Project?.History);
+            }
         }
 
         /// <inheritdoc/>
         public void OnAlignCenteredSelected()
         {
-            // TODO:
+            var shapes = Renderers?[0]?.State?.SelectedShapes;
+            if (shapes != null)
+            {
+                var items = shapes.Where(s => !s.State.Flags.HasFlag(ShapeStateFlags.Locked));
+                BoxLayout.Align(items, AlignMode.Centered, Project?.History);
+            }
         }
 
         /// <inheritdoc/>
         public void OnAlignRightSelected()
         {
-            // TODO:
+            var shapes = Renderers?[0]?.State?.SelectedShapes;
+            if (shapes != null)
+            {
+                var items = shapes.Where(s => !s.State.Flags.HasFlag(ShapeStateFlags.Locked));
+                BoxLayout.Align(items, AlignMode.Right, Project?.History);
+            }
         }
 
         /// <inheritdoc/>
         public void OnAlignTopSelected()
         {
-            // TODO:
+            var shapes = Renderers?[0]?.State?.SelectedShapes;
+            if (shapes != null)
+            {
+                var items = shapes.Where(s => !s.State.Flags.HasFlag(ShapeStateFlags.Locked));
+                BoxLayout.Align(items, AlignMode.Top, Project?.History);
+            }
         }
 
         /// <inheritdoc/>
         public void OnAlignCenterSelected()
         {
-            // TODO:
+            var shapes = Renderers?[0]?.State?.SelectedShapes;
+            if (shapes != null)
+            {
+                var items = shapes.Where(s => !s.State.Flags.HasFlag(ShapeStateFlags.Locked));
+                BoxLayout.Align(items, AlignMode.Center, Project?.History);
+            }
         }
 
         /// <inheritdoc/>
         public void OnAlignBottomSelected()
         {
-            // TODO:
+            var shapes = Renderers?[0]?.State?.SelectedShapes;
+            if (shapes != null)
+            {
+                var items = shapes.Where(s => !s.State.Flags.HasFlag(ShapeStateFlags.Locked));
+                BoxLayout.Align(items, AlignMode.Bottom, Project?.History);
+            }
         }
 
         /// <inheritdoc/>
