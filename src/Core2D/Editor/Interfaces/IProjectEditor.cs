@@ -1031,18 +1031,6 @@ namespace Core2D.Editor
         void OnDeleteSelected();
 
         /// <summary>
-        /// Select shape.
-        /// </summary>
-        /// <param name="shape">The shape to select.</param>
-        void Select(IBaseShape shape);
-
-        /// <summary>
-        /// Select shapes.
-        /// </summary>
-        /// <param name="shapes">The shapes to select.</param>
-        void Select(ISet<IBaseShape> shapes);
-
-        /// <summary>
         /// De-select shape(s).
         /// </summary>
         void Deselect();
