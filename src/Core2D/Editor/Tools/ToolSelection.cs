@@ -332,8 +332,6 @@ namespace Core2D.Editor.Tools
                     {
                         bool isControl = args.Modifier.HasFlag(ModifierFlags.Control);
 
-                        // TODO: Handle `isControl` mode.
-
                         if (_rectangle != null)
                         {
                             _rectangle.BottomRight.X = args.X;
@@ -390,6 +388,7 @@ namespace Core2D.Editor.Tools
                         if (_rectangle != null)
                         {
                             _currentState = State.None;
+                            // TODO: Handle `isControl` mode.
                             editor.TryToSelectShapes(editor.Project.CurrentContainer.CurrentLayer, _rectangle, deselect);
                             editor.IsToolIdle = true;
                         }
