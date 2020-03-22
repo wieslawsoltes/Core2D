@@ -143,8 +143,8 @@
                 <MenuItem Header="_Right" Command="{Binding OnMoveRightSelected}" InputGesture="Right"/>
             </MenuItem>
             <MenuItem Header="Stac_k">
-                <MenuItem Header="_Horizontally" Command="{Binding OnStackHorizontallySelected}"/>
-                <MenuItem Header="_Vertically" Command="{Binding OnStackVerticallySelected}"/>
+                <MenuItem Header="_Horizontally" Command="{Binding OnStackHorizontallySelected}" InputGesture="Shift+H"/>
+                <MenuItem Header="_Vertically" Command="{Binding OnStackVerticallySelected}" InputGesture="Shift+V"/>
             </MenuItem>
             <MenuItem Header="Dis_tribute">
                 <MenuItem Header="_Horizontally" Command="{Binding OnDistributeHorizontallySelected}" InputGesture="Ctrl+Shift+H"/>
