@@ -1061,16 +1061,18 @@ namespace Core2D.Editor
         /// <param name="layer">The layer object.</param>
         /// <param name="x">The X coordinate in layer.</param>
         /// <param name="y">The Y coordinate in layer.</param>
+        /// <param name="deselect">The flag indicating whether to deselect shapes.</param>
         /// <returns>True if selecting shape was successful.</returns>
-        bool TryToSelectShape(ILayerContainer layer, double x, double y);
+        bool TryToSelectShape(ILayerContainer layer, double x, double y, bool deselect = true);
 
         /// <summary>
         /// Try to select shapes inside rectangle.
         /// </summary>
         /// <param name="layer">The layer object.</param>
         /// <param name="rectangle">The selection rectangle.</param>
+        /// <param name="deselect">The flag indicating whether to deselect shapes.</param>
         /// <returns>True if selecting shapes was successful.</returns>
-        bool TryToSelectShapes(ILayerContainer layer, IRectangleShape rectangle);
+        bool TryToSelectShapes(ILayerContainer layer, IRectangleShape rectangle, bool deselect = true);
 
         /// <summary>
         /// Hover shape.
