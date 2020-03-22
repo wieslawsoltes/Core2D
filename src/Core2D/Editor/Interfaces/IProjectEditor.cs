@@ -412,26 +412,6 @@ namespace Core2D.Editor
         void OnUngroupSelected();
 
         /// <summary>
-        /// Bring selected shapes to the top of the stack.
-        /// </summary>
-        void OnBringToFrontSelected();
-
-        /// <summary>
-        /// Bring selected shapes one step closer to the front of the stack.
-        /// </summary>
-        void OnBringForwardSelected();
-
-        /// <summary>
-        /// Bring selected shapes one step down within the stack.
-        /// </summary>
-        void OnSendBackwardSelected();
-
-        /// <summary>
-        /// Bring selected shapes to the bottom of the stack.
-        /// </summary>
-        void OnSendToBackSelected();
-
-        /// <summary>
         /// Move selected shapes up.
         /// </summary>
         void OnMoveUpSelected();
@@ -450,6 +430,76 @@ namespace Core2D.Editor
         /// Move selected shapes right.
         /// </summary>
         void OnMoveRightSelected();
+
+        /// <summary>
+        /// Stack horizontally selected shapes.
+        /// </summary>
+        void OnStackHorizontallySelected();
+
+        /// <summary>
+        /// Stack vertically selected shapes.
+        /// </summary>
+        void OnStackVerticallySelected();
+
+        /// <summary>
+        /// Distribute horizontally selected shapes.
+        /// </summary>
+        void OnDistributeHorizontallySelected();
+
+        /// <summary>
+        /// Distribute vertically selected shapes.
+        /// </summary>
+        void OnDistributeVerticallySelected();
+
+        /// <summary>
+        /// Align left selected shapes.
+        /// </summary>
+        void OnAlignLeftSelected();
+
+        /// <summary>
+        /// Align centered selected shapes.
+        /// </summary>
+        void OnAlignCenteredSelected();
+
+        /// <summary>
+        /// Align left selected shapes.
+        /// </summary>
+        void OnAlignRightSelected();
+
+        /// <summary>
+        /// Align top selected shapes.
+        /// </summary>
+        void OnAlignTopSelected();
+
+        /// <summary>
+        /// Align center selected shapes.
+        /// </summary>
+        void OnAlignCenterSelected();
+
+        /// <summary>
+        /// Align bottom selected shapes.
+        /// </summary>
+        void OnAlignBottomSelected();
+
+        /// <summary>
+        /// Bring selected shapes to the top of the stack.
+        /// </summary>
+        void OnBringToFrontSelected();
+
+        /// <summary>
+        /// Bring selected shapes one step closer to the front of the stack.
+        /// </summary>
+        void OnBringForwardSelected();
+
+        /// <summary>
+        /// Bring selected shapes one step down within the stack.
+        /// </summary>
+        void OnSendBackwardSelected();
+
+        /// <summary>
+        /// Bring selected shapes to the bottom of the stack.
+        /// </summary>
+        void OnSendToBackSelected();
 
         /// <summary>
         /// Set current tool to <see cref="ToolNone"/>.
