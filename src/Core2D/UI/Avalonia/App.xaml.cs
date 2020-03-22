@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Reflection;
+using System.Text;
 using Autofac;
 using Avalonia;
 using Avalonia.Controls;
@@ -104,6 +105,8 @@ namespace Core2D.UI.Avalonia
         /// <inheritdoc/>
         public override void OnFrameworkInitializationCompleted()
         {
+            Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
+
             if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktopLifetime)
             {
                 var builder = new ContainerBuilder();
