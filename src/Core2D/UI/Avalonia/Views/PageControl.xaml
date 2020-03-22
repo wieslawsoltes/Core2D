@@ -23,18 +23,23 @@
         <!-- Edit -->
         <KeyBinding Command="{Binding OnDelete}" CommandParameter="{Binding}" Gesture="Delete"/>
         <KeyBinding Command="{Binding OnCancel}" Gesture="Escape"/>
-        <KeyBinding Command="{Binding OnSendToBackSelected}" Gesture="Shift+OemMinus"/>
-        <KeyBinding Command="{Binding OnSendBackwardSelected}" Gesture="OemMinus"/>
-        <KeyBinding Command="{Binding OnBringForwardSelected}" Gesture="OemPlus"/>
-        <KeyBinding Command="{Binding OnBringToFrontSelected}" Gesture="Shift+OemPlus"/>
-        <KeyBinding Command="{Binding OnSendToBackSelected}" Gesture="Shift+Subtract"/>
-        <KeyBinding Command="{Binding OnSendBackwardSelected}" Gesture="Subtract"/>
-        <KeyBinding Command="{Binding OnBringForwardSelected}" Gesture="Add"/>
-        <KeyBinding Command="{Binding OnBringToFrontSelected}" Gesture="Shift+Add"/>
         <KeyBinding Command="{Binding OnMoveUpSelected}" Gesture="Up"/>
         <KeyBinding Command="{Binding OnMoveDownSelected}" Gesture="Down"/>
         <KeyBinding Command="{Binding OnMoveLeftSelected}" Gesture="Left"/>
         <KeyBinding Command="{Binding OnMoveRightSelected}" Gesture="Right"/>
+        <KeyBinding Command="{Binding OnDistributeHorizontallySelected}" Gesture="Ctrl+Shift+H"/>
+        <KeyBinding Command="{Binding OnDistributeVerticallySelected}" Gesture="Ctrl+Shift+V"/>
+        <KeyBinding Command="{Binding OnAlignLeftSelected}" Gesture="Ctrl+Shift+Left"/>
+        <KeyBinding Command="{Binding OnAlignCenteredSelected}" Gesture="Ctrl+Shift+OemMinus"/>
+        <KeyBinding Command="{Binding OnAlignCenteredSelected}" Gesture="Ctrl+Shift+Subtract"/>
+        <KeyBinding Command="{Binding OnAlignRightSelected}" Gesture="Ctrl+Shift+Right"/>
+        <KeyBinding Command="{Binding OnAlignTopSelected}" Gesture="Ctrl+Shift+Up"/>
+        <KeyBinding Command="{Binding OnAlignCenterSelected}" Gesture="Ctrl+Shift+OemPipe"/>
+        <KeyBinding Command="{Binding OnAlignBottomSelected}" Gesture="Ctrl+Shift+Down"/>
+        <KeyBinding Command="{Binding OnBringToFrontSelected}" Gesture="Ctrl+Shift+OemCloseBrackets"/>
+        <KeyBinding Command="{Binding OnBringForwardSelected}" Gesture="Ctrl+OemCloseBrackets"/>
+        <KeyBinding Command="{Binding OnSendBackwardSelected}" Gesture="Ctrl+OemOpenBrackets"/>
+        <KeyBinding Command="{Binding OnSendToBackSelected}" Gesture="Ctrl+Shift+OemOpenBrackets"/>
         <!-- Edit -->
         <KeyBinding Command="{Binding OnUndo}" Gesture="Ctrl+Z"/>
         <KeyBinding Command="{Binding OnRedo}" Gesture="Ctrl+Y"/>
