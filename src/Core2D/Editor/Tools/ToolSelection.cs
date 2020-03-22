@@ -384,12 +384,12 @@ namespace Core2D.Editor.Tools
                         }
 
                         var deselect = !isControl;
+                        var includeSelected = isControl;
 
                         if (_rectangle != null)
                         {
                             _currentState = State.None;
-                            // TODO: Handle `isControl` mode.
-                            editor.TryToSelectShapes(editor.Project.CurrentContainer.CurrentLayer, _rectangle, deselect);
+                            editor.TryToSelectShapes(editor.Project.CurrentContainer.CurrentLayer, _rectangle, deselect, includeSelected);
                             editor.IsToolIdle = true;
                         }
                     }
