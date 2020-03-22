@@ -1086,6 +1086,106 @@ namespace Core2D.Editor
         }
 
         /// <inheritdoc/>
+        public void OnMoveUpSelected()
+        {
+            MoveBy(
+                Renderers?[0]?.State?.SelectedShape,
+                Renderers?[0]?.State?.SelectedShapes,
+                0.0,
+                Project.Options.SnapToGrid ? -Project.Options.SnapY : -1.0);
+        }
+
+        /// <inheritdoc/>
+        public void OnMoveDownSelected()
+        {
+            MoveBy(
+                Renderers?[0]?.State?.SelectedShape,
+                Renderers?[0]?.State?.SelectedShapes,
+                0.0,
+                Project.Options.SnapToGrid ? Project.Options.SnapY : 1.0);
+        }
+
+        /// <inheritdoc/>
+        public void OnMoveLeftSelected()
+        {
+            MoveBy(
+                Renderers?[0]?.State?.SelectedShape,
+                Renderers?[0]?.State?.SelectedShapes,
+                Project.Options.SnapToGrid ? -Project.Options.SnapX : -1.0,
+                0.0);
+        }
+
+        /// <inheritdoc/>
+        public void OnMoveRightSelected()
+        {
+            MoveBy(
+                Renderers?[0]?.State?.SelectedShape,
+                Renderers?[0]?.State?.SelectedShapes,
+                Project.Options.SnapToGrid ? Project.Options.SnapX : 1.0,
+                0.0);
+        }
+
+        /// <inheritdoc/>
+        public void OnStackHorizontallySelected()
+        {
+            // TODO:
+        }
+
+        /// <inheritdoc/>
+        public void OnStackVerticallySelected()
+        {
+            // TODO:
+        }
+
+        /// <inheritdoc/>
+        public void OnDistributeHorizontallySelected()
+        {
+            // TODO:
+        }
+
+        /// <inheritdoc/>
+        public void OnDistributeVerticallySelected()
+        {
+            // TODO:
+        }
+
+        /// <inheritdoc/>
+        public void OnAlignLeftSelected()
+        {
+            // TODO:
+        }
+
+        /// <inheritdoc/>
+        public void OnAlignCenteredSelected()
+        {
+            // TODO:
+        }
+
+        /// <inheritdoc/>
+        public void OnAlignRightSelected()
+        {
+            // TODO:
+        }
+
+        /// <inheritdoc/>
+        public void OnAlignTopSelected()
+        {
+            // TODO:
+        }
+
+        /// <inheritdoc/>
+        public void OnAlignCenterSelected()
+        {
+            // TODO:
+        }
+
+        /// <inheritdoc/>
+        public void OnAlignBottomSelected()
+        {
+            // TODO:
+        }
+
+        /// <inheritdoc/>
         public void OnBringToFrontSelected()
         {
             var source = Renderers?[0]?.State?.SelectedShape;
@@ -1159,46 +1259,6 @@ namespace Core2D.Editor
                     SendToBack(s);
                 }
             }
-        }
-
-        /// <inheritdoc/>
-        public void OnMoveUpSelected()
-        {
-            MoveBy(
-                Renderers?[0]?.State?.SelectedShape,
-                Renderers?[0]?.State?.SelectedShapes,
-                0.0,
-                Project.Options.SnapToGrid ? -Project.Options.SnapY : -1.0);
-        }
-
-        /// <inheritdoc/>
-        public void OnMoveDownSelected()
-        {
-            MoveBy(
-                Renderers?[0]?.State?.SelectedShape,
-                Renderers?[0]?.State?.SelectedShapes,
-                0.0,
-                Project.Options.SnapToGrid ? Project.Options.SnapY : 1.0);
-        }
-
-        /// <inheritdoc/>
-        public void OnMoveLeftSelected()
-        {
-            MoveBy(
-                Renderers?[0]?.State?.SelectedShape,
-                Renderers?[0]?.State?.SelectedShapes,
-                Project.Options.SnapToGrid ? -Project.Options.SnapX : -1.0,
-                0.0);
-        }
-
-        /// <inheritdoc/>
-        public void OnMoveRightSelected()
-        {
-            MoveBy(
-                Renderers?[0]?.State?.SelectedShape,
-                Renderers?[0]?.State?.SelectedShapes,
-                Project.Options.SnapToGrid ? Project.Options.SnapX : 1.0,
-                0.0);
         }
 
         /// <inheritdoc/>
