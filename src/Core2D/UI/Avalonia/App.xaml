@@ -218,22 +218,24 @@
             <Setter Property="Width" Value="6"/>
             <Setter Property="Template">
                 <ControlTemplate>
-                    <Border Background="Transparent"/>
+                    <Border Background="{TemplateBinding Background}"/>
                 </ControlTemplate>
             </Setter>
         </Style>
         <Style Selector="GridSplitter.vertical">
+            <Setter Property="Background" Value="Transparent"/>
         </Style>
         <!-- GridSplitter.horizontal -->
         <Style Selector="GridSplitter:horizontal">
             <Setter Property="Height" Value="6"/>
             <Setter Property="Template">
                 <ControlTemplate>
-                    <Border Background="Transparent"/>
+                    <Border Background="{TemplateBinding Background}"/>
                 </ControlTemplate>
             </Setter>
         </Style>
         <Style Selector="GridSplitter.horizontal">
+            <Setter Property="Background" Value="Transparent"/>
         </Style>
         <!-- ListBox.default -->
         <Style Selector="ListBox.default">
