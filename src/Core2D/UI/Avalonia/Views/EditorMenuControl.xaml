@@ -192,14 +192,15 @@
                 <MenuItem Header="Das_hDotDot" Command="{Binding StyleEditor.OnStyleSetDashes}" CommandParameter="2 2 0 2 0 2"/>
             </MenuItem>
             <MenuItem Header="_Stroke">
-                <MenuItem Header="Blac_k" Command="{Binding StyleEditor.OnStyleSetStroke}" CommandParameter="Black"/>
-                <MenuItem Header="_Red" Command="{Binding StyleEditor.OnStyleSetStroke}" CommandParameter="Red"/>
-                <MenuItem Header="_Green" Command="{Binding StyleEditor.OnStyleSetStroke}" CommandParameter="Green"/>
-                <MenuItem Header="_Blue" Command="{Binding StyleEditor.OnStyleSetStroke}" CommandParameter="Blue"/>
-                <MenuItem Header="_Cyan" Command="{Binding StyleEditor.OnStyleSetStroke}" CommandParameter="Cyan"/>
-                <MenuItem Header="_Magenta" Command="{Binding StyleEditor.OnStyleSetStroke}" CommandParameter="Magenta"/>
-                <MenuItem Header="_Yellow" Command="{Binding StyleEditor.OnStyleSetStroke}" CommandParameter="Yellow"/>
-                <Separator/>
+                <MenuItem Header="_Color">
+                    <MenuItem Header="Blac_k" Command="{Binding StyleEditor.OnStyleSetStroke}" CommandParameter="Black"/>
+                    <MenuItem Header="_Red" Command="{Binding StyleEditor.OnStyleSetStroke}" CommandParameter="Red"/>
+                    <MenuItem Header="_Green" Command="{Binding StyleEditor.OnStyleSetStroke}" CommandParameter="Green"/>
+                    <MenuItem Header="_Blue" Command="{Binding StyleEditor.OnStyleSetStroke}" CommandParameter="Blue"/>
+                    <MenuItem Header="_Cyan" Command="{Binding StyleEditor.OnStyleSetStroke}" CommandParameter="Cyan"/>
+                    <MenuItem Header="_Magenta" Command="{Binding StyleEditor.OnStyleSetStroke}" CommandParameter="Magenta"/>
+                    <MenuItem Header="_Yellow" Command="{Binding StyleEditor.OnStyleSetStroke}" CommandParameter="Yellow"/>                    
+                </MenuItem>
                 <MenuItem Header="Trans_parency">
                     <MenuItem Header="0%" Command="{Binding StyleEditor.OnStyleSetStrokeTransparency}" CommandParameter="0"/>
                     <MenuItem Header="10%" Command="{Binding StyleEditor.OnStyleSetStrokeTransparency}" CommandParameter="25"/>
@@ -215,13 +216,15 @@
                 </MenuItem>
             </MenuItem>
             <MenuItem Header="_Fill">
-                <MenuItem Header="Blac_k" Command="{Binding StyleEditor.OnStyleSetFill}" CommandParameter="Black"/>
-                <MenuItem Header="_Red" Command="{Binding StyleEditor.OnStyleSetFill}" CommandParameter="Red"/>
-                <MenuItem Header="_Green" Command="{Binding StyleEditor.OnStyleSetFill}" CommandParameter="Green"/>
-                <MenuItem Header="_Blue" Command="{Binding StyleEditor.OnStyleSetFill}" CommandParameter="Blue"/>
-                <MenuItem Header="_Cyan" Command="{Binding StyleEditor.OnStyleSetFill}" CommandParameter="Cyan"/>
-                <MenuItem Header="_Magenta" Command="{Binding StyleEditor.OnStyleSetFill}" CommandParameter="Magenta"/>
-                <MenuItem Header="_Yellow" Command="{Binding StyleEditor.OnStyleSetFill}" CommandParameter="Yellow"/>
+                <MenuItem Header="_Color">
+                    <MenuItem Header="Blac_k" Command="{Binding StyleEditor.OnStyleSetFill}" CommandParameter="Black"/>
+                    <MenuItem Header="_Red" Command="{Binding StyleEditor.OnStyleSetFill}" CommandParameter="Red"/>
+                    <MenuItem Header="_Green" Command="{Binding StyleEditor.OnStyleSetFill}" CommandParameter="Green"/>
+                    <MenuItem Header="_Blue" Command="{Binding StyleEditor.OnStyleSetFill}" CommandParameter="Blue"/>
+                    <MenuItem Header="_Cyan" Command="{Binding StyleEditor.OnStyleSetFill}" CommandParameter="Cyan"/>
+                    <MenuItem Header="_Magenta" Command="{Binding StyleEditor.OnStyleSetFill}" CommandParameter="Magenta"/>
+                    <MenuItem Header="_Yellow" Command="{Binding StyleEditor.OnStyleSetFill}" CommandParameter="Yellow"/>
+                </MenuItem>
                 <MenuItem Header="Trans_parency">
                     <MenuItem Header="0%" Command="{Binding StyleEditor.OnStyleSetFillTransparency}" CommandParameter="0"/>
                     <MenuItem Header="10%" Command="{Binding StyleEditor.OnStyleSetFillTransparency}" CommandParameter="25"/>
@@ -299,7 +302,6 @@
                     <MenuItem Header="90" Command="{Binding StyleEditor.OnStyleSetLineCurvature}" CommandParameter="90"/>
                     <MenuItem Header="100" Command="{Binding StyleEditor.OnStyleSetLineCurvature}" CommandParameter="100"/>
                 </MenuItem>
-                <Separator/>
                 <MenuItem Header="Curve _Orientation">
                     <MenuItem Header="Auto" Command="{Binding StyleEditor.OnStyleSetLineCurveOrientation}" CommandParameter="Auto"/>
                     <MenuItem Header="Horizontal" Command="{Binding StyleEditor.OnStyleSetLineCurveOrientation}" CommandParameter="Horizontal"/>
@@ -406,14 +408,15 @@
                             <MenuItem Header="Das_hDotDot" Command="{Binding StyleEditor.OnStyleSetStartArrowDashes}" CommandParameter="2 2 0 2 0 2"/>
                         </MenuItem>
                         <MenuItem Header="_Stroke">
-                            <MenuItem Header="Blac_k" Command="{Binding StyleEditor.OnStyleSetStartArrowStroke}" CommandParameter="Black"/>
-                            <MenuItem Header="_Red" Command="{Binding StyleEditor.OnStyleSetStartArrowStroke}" CommandParameter="Red"/>
-                            <MenuItem Header="_Green" Command="{Binding StyleEditor.OnStyleSetStartArrowStroke}" CommandParameter="Green"/>
-                            <MenuItem Header="_Blue" Command="{Binding StyleEditor.OnStyleSetStartArrowStroke}" CommandParameter="Blue"/>
-                            <MenuItem Header="_Cyan" Command="{Binding StyleEditor.OnStyleSetStartArrowStroke}" CommandParameter="Cyan"/>
-                            <MenuItem Header="_Magenta" Command="{Binding StyleEditor.OnStyleSetStartArrowStroke}" CommandParameter="Magenta"/>
-                            <MenuItem Header="_Yellow" Command="{Binding StyleEditor.OnStyleSetStartArrowStroke}" CommandParameter="Yellow"/>
-                            <Separator/>
+                            <MenuItem Header="_Color">
+                                <MenuItem Header="Blac_k" Command="{Binding StyleEditor.OnStyleSetStartArrowStroke}" CommandParameter="Black"/>
+                                <MenuItem Header="_Red" Command="{Binding StyleEditor.OnStyleSetStartArrowStroke}" CommandParameter="Red"/>
+                                <MenuItem Header="_Green" Command="{Binding StyleEditor.OnStyleSetStartArrowStroke}" CommandParameter="Green"/>
+                                <MenuItem Header="_Blue" Command="{Binding StyleEditor.OnStyleSetStartArrowStroke}" CommandParameter="Blue"/>
+                                <MenuItem Header="_Cyan" Command="{Binding StyleEditor.OnStyleSetStartArrowStroke}" CommandParameter="Cyan"/>
+                                <MenuItem Header="_Magenta" Command="{Binding StyleEditor.OnStyleSetStartArrowStroke}" CommandParameter="Magenta"/>
+                                <MenuItem Header="_Yellow" Command="{Binding StyleEditor.OnStyleSetStartArrowStroke}" CommandParameter="Yellow"/>
+                            </MenuItem>
                             <MenuItem Header="Trans_parency">
                                 <MenuItem Header="0%" Command="{Binding StyleEditor.OnStyleSetStartArrowStrokeTransparency}" CommandParameter="0"/>
                                 <MenuItem Header="10%" Command="{Binding StyleEditor.OnStyleSetStartArrowStrokeTransparency}" CommandParameter="25"/>
@@ -429,13 +432,15 @@
                             </MenuItem>
                         </MenuItem>
                         <MenuItem Header="_Fill">
-                            <MenuItem Header="Blac_k" Command="{Binding StyleEditor.OnStyleSetStartArrowFill}" CommandParameter="Black"/>
-                            <MenuItem Header="_Red" Command="{Binding StyleEditor.OnStyleSetStartArrowFill}" CommandParameter="Red"/>
-                            <MenuItem Header="_Green" Command="{Binding StyleEditor.OnStyleSetStartArrowFill}" CommandParameter="Green"/>
-                            <MenuItem Header="_Blue" Command="{Binding StyleEditor.OnStyleSetStartArrowFill}" CommandParameter="Blue"/>
-                            <MenuItem Header="_Cyan" Command="{Binding StyleEditor.OnStyleSetStartArrowFill}" CommandParameter="Cyan"/>
-                            <MenuItem Header="_Magenta" Command="{Binding StyleEditor.OnStyleSetStartArrowFill}" CommandParameter="Magenta"/>
-                            <MenuItem Header="_Yellow" Command="{Binding StyleEditor.OnStyleSetStartArrowFill}" CommandParameter="Yellow"/>
+                            <MenuItem Header="_Color">
+                                <MenuItem Header="Blac_k" Command="{Binding StyleEditor.OnStyleSetStartArrowFill}" CommandParameter="Black"/>
+                                <MenuItem Header="_Red" Command="{Binding StyleEditor.OnStyleSetStartArrowFill}" CommandParameter="Red"/>
+                                <MenuItem Header="_Green" Command="{Binding StyleEditor.OnStyleSetStartArrowFill}" CommandParameter="Green"/>
+                                <MenuItem Header="_Blue" Command="{Binding StyleEditor.OnStyleSetStartArrowFill}" CommandParameter="Blue"/>
+                                <MenuItem Header="_Cyan" Command="{Binding StyleEditor.OnStyleSetStartArrowFill}" CommandParameter="Cyan"/>
+                                <MenuItem Header="_Magenta" Command="{Binding StyleEditor.OnStyleSetStartArrowFill}" CommandParameter="Magenta"/>
+                                <MenuItem Header="_Yellow" Command="{Binding StyleEditor.OnStyleSetStartArrowFill}" CommandParameter="Yellow"/>
+                            </MenuItem>
                             <MenuItem Header="Trans_parency">
                                 <MenuItem Header="0%" Command="{Binding StyleEditor.OnStyleSetStartArrowFillTransparency}" CommandParameter="0"/>
                                 <MenuItem Header="10%" Command="{Binding StyleEditor.OnStyleSetStartArrowFillTransparency}" CommandParameter="25"/>
@@ -512,14 +517,15 @@
                             <MenuItem Header="Das_hDotDot" Command="{Binding StyleEditor.OnStyleSetEndArrowDashes}" CommandParameter="2 2 0 2 0 2"/>
                         </MenuItem>
                         <MenuItem Header="_Stroke">
-                            <MenuItem Header="Blac_k" Command="{Binding StyleEditor.OnStyleSetEndArrowStroke}" CommandParameter="Black"/>
-                            <MenuItem Header="_Red" Command="{Binding StyleEditor.OnStyleSetEndArrowStroke}" CommandParameter="Red"/>
-                            <MenuItem Header="_Green" Command="{Binding StyleEditor.OnStyleSetEndArrowStroke}" CommandParameter="Green"/>
-                            <MenuItem Header="_Blue" Command="{Binding StyleEditor.OnStyleSetEndArrowStroke}" CommandParameter="Blue"/>
-                            <MenuItem Header="_Cyan" Command="{Binding StyleEditor.OnStyleSetEndArrowStroke}" CommandParameter="Cyan"/>
-                            <MenuItem Header="_Magenta" Command="{Binding StyleEditor.OnStyleSetEndArrowStroke}" CommandParameter="Magenta"/>
-                            <MenuItem Header="_Yellow" Command="{Binding StyleEditor.OnStyleSetEndArrowStroke}" CommandParameter="Yellow"/>
-                            <Separator/>
+                            <MenuItem Header="_Color">
+                                <MenuItem Header="Blac_k" Command="{Binding StyleEditor.OnStyleSetEndArrowStroke}" CommandParameter="Black"/>
+                                <MenuItem Header="_Red" Command="{Binding StyleEditor.OnStyleSetEndArrowStroke}" CommandParameter="Red"/>
+                                <MenuItem Header="_Green" Command="{Binding StyleEditor.OnStyleSetEndArrowStroke}" CommandParameter="Green"/>
+                                <MenuItem Header="_Blue" Command="{Binding StyleEditor.OnStyleSetEndArrowStroke}" CommandParameter="Blue"/>
+                                <MenuItem Header="_Cyan" Command="{Binding StyleEditor.OnStyleSetEndArrowStroke}" CommandParameter="Cyan"/>
+                                <MenuItem Header="_Magenta" Command="{Binding StyleEditor.OnStyleSetEndArrowStroke}" CommandParameter="Magenta"/>
+                                <MenuItem Header="_Yellow" Command="{Binding StyleEditor.OnStyleSetEndArrowStroke}" CommandParameter="Yellow"/>
+                            </MenuItem>
                             <MenuItem Header="Trans_parency">
                                 <MenuItem Header="0%" Command="{Binding StyleEditor.OnStyleSetEndArrowStrokeTransparency}" CommandParameter="0"/>
                                 <MenuItem Header="10%" Command="{Binding StyleEditor.OnStyleSetEndArrowStrokeTransparency}" CommandParameter="25"/>
@@ -535,13 +541,15 @@
                             </MenuItem>
                         </MenuItem>
                         <MenuItem Header="_Fill">
-                            <MenuItem Header="Blac_k" Command="{Binding StyleEditor.OnStyleSetEndArrowFill}" CommandParameter="Black"/>
-                            <MenuItem Header="_Red" Command="{Binding StyleEditor.OnStyleSetEndArrowFill}" CommandParameter="Red"/>
-                            <MenuItem Header="_Green" Command="{Binding StyleEditor.OnStyleSetEndArrowFill}" CommandParameter="Green"/>
-                            <MenuItem Header="_Blue" Command="{Binding StyleEditor.OnStyleSetEndArrowFill}" CommandParameter="Blue"/>
-                            <MenuItem Header="_Cyan" Command="{Binding StyleEditor.OnStyleSetEndArrowFill}" CommandParameter="Cyan"/>
-                            <MenuItem Header="_Magenta" Command="{Binding StyleEditor.OnStyleSetEndArrowFill}" CommandParameter="Magenta"/>
-                            <MenuItem Header="_Yellow" Command="{Binding StyleEditor.OnStyleSetEndArrowFill}" CommandParameter="Yellow"/>
+                            <MenuItem Header="_Color">
+                                <MenuItem Header="Blac_k" Command="{Binding StyleEditor.OnStyleSetEndArrowFill}" CommandParameter="Black"/>
+                                <MenuItem Header="_Red" Command="{Binding StyleEditor.OnStyleSetEndArrowFill}" CommandParameter="Red"/>
+                                <MenuItem Header="_Green" Command="{Binding StyleEditor.OnStyleSetEndArrowFill}" CommandParameter="Green"/>
+                                <MenuItem Header="_Blue" Command="{Binding StyleEditor.OnStyleSetEndArrowFill}" CommandParameter="Blue"/>
+                                <MenuItem Header="_Cyan" Command="{Binding StyleEditor.OnStyleSetEndArrowFill}" CommandParameter="Cyan"/>
+                                <MenuItem Header="_Magenta" Command="{Binding StyleEditor.OnStyleSetEndArrowFill}" CommandParameter="Magenta"/>
+                                <MenuItem Header="_Yellow" Command="{Binding StyleEditor.OnStyleSetEndArrowFill}" CommandParameter="Yellow"/>
+                            </MenuItem>
                             <MenuItem Header="Trans_parency">
                                 <MenuItem Header="0%" Command="{Binding StyleEditor.OnStyleSetEndArrowFillTransparency}" CommandParameter="0"/>
                                 <MenuItem Header="10%" Command="{Binding StyleEditor.OnStyleSetEndArrowFillTransparency}" CommandParameter="25"/>
