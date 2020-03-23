@@ -10,6 +10,7 @@ namespace Core2D.Editor
     /// </summary>
     public class StyleEditor : ObservableObject, IStyleEditor
     {
+        private const NumberStyles _numberStyles = NumberStyles.AllowDecimalPoint | NumberStyles.AllowThousands;
         private readonly IServiceProvider _serviceProvider;
 
         /// <summary>
@@ -30,7 +31,7 @@ namespace Core2D.Editor
         /// <inheritdoc/>
         public void OnStyleSetThickness(string thickness)
         {
-            if (!double.TryParse(thickness, NumberStyles.AllowDecimalPoint | NumberStyles.AllowThousands, CultureInfo.InvariantCulture, out var value))
+            if (!double.TryParse(thickness, _numberStyles, CultureInfo.InvariantCulture, out var value))
             {
                 return;
             }
@@ -162,7 +163,7 @@ namespace Core2D.Editor
         /// <inheritdoc/>
         public void OnStyleSetStrokeTransparency(string alpha)
         {
-            if (!byte.TryParse(alpha, NumberStyles.AllowDecimalPoint | NumberStyles.AllowThousands, CultureInfo.InvariantCulture, out var value))
+            if (!byte.TryParse(alpha, _numberStyles, CultureInfo.InvariantCulture, out var value))
             {
                 return;
             }
@@ -233,7 +234,7 @@ namespace Core2D.Editor
         /// <inheritdoc/>
         public void OnStyleSetFillTransparency(string alpha)
         {
-            if (!byte.TryParse(alpha, NumberStyles.AllowDecimalPoint | NumberStyles.AllowThousands, CultureInfo.InvariantCulture, out var value))
+            if (!byte.TryParse(alpha, _numberStyles, CultureInfo.InvariantCulture, out var value))
             {
                 return;
             }
