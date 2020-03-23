@@ -7,6 +7,16 @@ namespace Core2D.Editor
     public interface IStyleEditor : IObservableObject
     {
         /// <summary>
+        /// Copy style.
+        /// </summary>
+        void OnCopyStyle();
+
+        /// <summary>
+        /// Paste style.
+        /// </summary>
+        void OnPasteStyle();
+
+        /// <summary>
         /// Set style thickness.
         /// </summary>
         /// <param name="thickness">The style thickness.</param>
