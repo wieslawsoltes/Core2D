@@ -346,7 +346,7 @@ namespace Core2D.Editor
                 var style = shape.Style;
                 if (style != null && style.TextStyle != null && style.TextStyle.FontStyle != null)
                 {
-                    style.TextStyle.FontStyle.Flags = value;
+                    style.TextStyle.FontStyle.Flags ^= value;
                 }
             }
 
@@ -357,7 +357,7 @@ namespace Core2D.Editor
                     var style = shape.Style;
                     if (style != null && style.TextStyle != null && style.TextStyle.FontStyle != null)
                     {
-                        style.TextStyle.FontStyle.Flags = value;
+                        style.TextStyle.FontStyle.Flags ^= value;
                     }
                 }
             }
