@@ -192,6 +192,8 @@ namespace Core2D.Editor
                     }
                 }
             }
+
+            editor.Project?.CurrentContainer?.Invalidate();
         }
 
         /// <inheritdoc/>
@@ -263,6 +265,8 @@ namespace Core2D.Editor
                     }
                 }
             }
+
+            editor.Project?.CurrentContainer?.Invalidate();
         }
 
         /// <inheritdoc/>
@@ -969,6 +973,8 @@ namespace Core2D.Editor
                     }
                 }
             }
+
+            editor.Project?.CurrentContainer?.Invalidate();
         }
 
         /// <inheritdoc/>
@@ -1040,6 +1046,8 @@ namespace Core2D.Editor
                     }
                 }
             }
+
+            editor.Project?.CurrentContainer?.Invalidate();
         }
 
         /// <inheritdoc/>
@@ -1360,6 +1368,8 @@ namespace Core2D.Editor
                     }
                 }
             }
+
+            editor.Project?.CurrentContainer?.Invalidate();
         }
 
         /// <inheritdoc/>
@@ -1431,6 +1441,8 @@ namespace Core2D.Editor
                     }
                 }
             }
+
+            editor.Project?.CurrentContainer?.Invalidate();
         }
     }
 }
