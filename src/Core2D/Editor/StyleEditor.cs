@@ -1332,7 +1332,34 @@ namespace Core2D.Editor
         /// <inheritdoc/>
         public void OnStyleSetEndArrowStrokeTransparency(string alpha)
         {
-            // TODO:
+            if (!byte.TryParse(alpha, _numberStyles, CultureInfo.InvariantCulture, out var value))
+            {
+                return;
+            }
+
+            var editor = _serviceProvider.GetService<IProjectEditor>();
+
+            if (editor.Renderers[0]?.State?.SelectedShape != null)
+            {
+                var shape = editor.Renderers[0]?.State?.SelectedShape;
+                var style = shape.Style;
+                if (style != null && style.EndArrowStyle != null && style.EndArrowStyle.Stroke is IArgbColor argbColor)
+                {
+                    argbColor.A = value;
+                }
+            }
+
+            if (editor.Renderers?[0]?.State?.SelectedShapes?.Count > 0)
+            {
+                foreach (var shape in editor.Renderers[0].State.SelectedShapes)
+                {
+                    var style = shape.Style;
+                    if (style != null && style.EndArrowStyle != null && style.EndArrowStyle.Stroke is IArgbColor argbColor)
+                    {
+                        argbColor.A = value;
+                    }
+                }
+            }
         }
 
         /// <inheritdoc/>
