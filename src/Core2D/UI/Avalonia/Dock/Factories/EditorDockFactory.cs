@@ -74,6 +74,12 @@ namespace Core2D.UI.Avalonia.Dock.Factories
                 Title = "Script"
             };
 
+            var exportTool = new ExportTool
+            {
+                Id = nameof(ExportTool),
+                Title = "Export"
+            };
+
             var browserTool = new BrowserTool
             {
                 Id = nameof(BrowserTool),
@@ -242,6 +248,7 @@ namespace Core2D.UI.Avalonia.Dock.Factories
                     pageDocument,
                     documentTool,
                     scriptTool,
+                    exportTool,
                     browserTool
                 )
             };
@@ -304,6 +311,12 @@ namespace Core2D.UI.Avalonia.Dock.Factories
                 Title = "Script"
             };
 
+            var exportView = new ExportView
+            {
+                Id = nameof(ExportView),
+                Title = "Export"
+            };
+
             var documentView = new DocumentView
             {
                 Id = nameof(DocumentView),
@@ -332,6 +345,7 @@ namespace Core2D.UI.Avalonia.Dock.Factories
                     aboutView,
                     browserView,
                     scriptView,
+                    exportView,
                     documentView
                 )
             };
@@ -367,6 +381,7 @@ namespace Core2D.UI.Avalonia.Dock.Factories
                 [nameof(PageDocument)] = () => _serviceProvider.GetService<IProjectEditor>(),
                 // Tools
                 [nameof(ScriptTool)] = () => _serviceProvider.GetService<IProjectEditor>(),
+                [nameof(ExportTool)] = () => _serviceProvider.GetService<IProjectEditor>(),
                 [nameof(BrowserTool)] = () => _serviceProvider.GetService<IProjectEditor>(),
                 [nameof(DocumentTool)] = () => _serviceProvider.GetService<IProjectEditor>(),
                 [nameof(ProjectTool)] = () => _serviceProvider.GetService<IProjectEditor>(),
@@ -387,6 +402,7 @@ namespace Core2D.UI.Avalonia.Dock.Factories
                 [nameof(EditorView)] = () => _serviceProvider.GetService<IProjectEditor>(),
                 [nameof(AboutView)] = () => _serviceProvider.GetService<IProjectEditor>(),
                 [nameof(ScriptView)] = () => _serviceProvider.GetService<IProjectEditor>(),
+                [nameof(ExportView)] = () => _serviceProvider.GetService<IProjectEditor>(),
                 [nameof(BrowserView)] = () => _serviceProvider.GetService<IProjectEditor>(),
                 [nameof(DocumentView)] = () => _serviceProvider.GetService<IProjectEditor>(),
                 [nameof(DashboardView)] = () => _serviceProvider.GetService<IProjectEditor>()
