@@ -25,13 +25,13 @@ namespace Core2D.FileWriter.SkiaSharpPdf
         }
 
         /// <inheritdoc/>
-        string IFileWriter.Name { get; } = "Pdf (SkiaSharp)";
+        public string Name { get; } = "Pdf (SkiaSharp)";
 
         /// <inheritdoc/>
-        string IFileWriter.Extension { get; } = "pdf";
+        public string Extension { get; } = "pdf";
 
         /// <inheritdoc/>
-        void IFileWriter.Save(string path, object item, object options)
+        public void Save(string path, object item, object options)
         {
             if (string.IsNullOrEmpty(path) || item == null)
             {
