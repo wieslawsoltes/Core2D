@@ -25,13 +25,13 @@ namespace Core2D.FileWriter.SkiaSharpWebp
         }
 
         /// <inheritdoc/>
-        string IFileWriter.Name { get; } = "Webp (SkiaSharp)";
+        public string Name { get; } = "Webp (SkiaSharp)";
 
         /// <inheritdoc/>
-        string IFileWriter.Extension { get; } = "webp";
+        public string Extension { get; } = "webp";
 
         /// <inheritdoc/>
-        void IFileWriter.Save(string path, object item, object options)
+        public void Save(string path, object item, object options)
         {
             if (string.IsNullOrEmpty(path) || item == null)
             {
