@@ -59,6 +59,7 @@ namespace Core2D.Editor
         private readonly Lazy<IProjectEditorPlatform> _platform;
         private readonly Lazy<IEditorCanvasPlatform> _canvasPlatform;
         private readonly Lazy<IEditorLayoutPlatform> _layoutPlatform;
+        private readonly Lazy<IStyleEditor> _styleEditor;
 
         /// <inheritdoc/>
         public IProjectContainer Project
@@ -200,6 +201,9 @@ namespace Core2D.Editor
         /// <inheritdoc/>
         public IEditorLayoutPlatform LayoutPlatform => _layoutPlatform.Value;
 
+        /// <inheritdoc/>
+        public IStyleEditor StyleEditor => _styleEditor.Value;
+
         private object ScriptState { get; set; } = default;
 
         private IPageContainer PageToCopy { get; set; } = default;
@@ -238,6 +242,7 @@ namespace Core2D.Editor
             _platform = _serviceProvider.GetServiceLazily<IProjectEditorPlatform>();
             _canvasPlatform = _serviceProvider.GetServiceLazily<IEditorCanvasPlatform>();
             _layoutPlatform = _serviceProvider.GetServiceLazily<IEditorLayoutPlatform>();
+            _styleEditor = _serviceProvider.GetServiceLazily<IStyleEditor>();
         }
 
         /// <inheritdoc/>

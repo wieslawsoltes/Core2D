@@ -16,55 +16,6 @@ using DM = Dock.Model;
 namespace Core2D.Editor
 {
     /// <summary>
-    /// Style editor contract.
-    /// </summary>
-    public interface IStyleEditor : IObservableObject
-    {
-        void OnStyleSetThickness(string thickness);
-        void OnStyleSetLineCap(string lineCap);
-        void OnStyleSetDashes(string dashes);
-        void OnStyleSetStroke(string color);
-        void OnStyleSetStrokeTransparency(string alpha);
-        void OnStyleSetFill(string color);
-        void OnStyleSetFillTransparency(string alpha);
-        void OnStyleSetFontName(string fontName);
-        void OnStyleSetFontSize(string fontSize);
-        void OnStyleSetFontStyle(string fontStyle);
-        void OnStyleSetTextHAlignment(string hAlignment);
-        void OnStyleSetTextVAlignment(string vAlignment);
-        void OnStyleToggleLineIsCurved();
-        void OnStyleSetLineCurvature(string curvature);
-        void OnStyleSetLineCurveOrientation(string curveOrientation);
-        void OnStyleSetLineFixedLength(string length);
-        void OnStyleToggleLineFixedLengthFlags(string flags);
-        void OnStyleToggleLineFixedLengthStartTrigger(string trigger);
-        void OnStyleToggleLineFixedLengthEndTrigger(string trigger);
-        void OnStyleSetStartArrowType(string type);
-        void OnStyleToggleStartArrowIsStroked();
-        void OnStyleSetStartArrowRadiusX(string radius);
-        void OnStyleSetStartArrowRadiusY(string radius);
-        void OnStyleSetStartArrowThickness(string thickness);
-        void OnStyleSetStartArrowLineCap(string lineCap);
-        void OnStyleSetStartArrowDashes(string dashes);
-        void OnStyleSetStartArrowStroke(string color);
-        void OnStyleSetStartArrowStrokeTransparency(string alpha);
-        void OnStyleSetStartArrowFill(string color);
-        void OnStyleSetStartArrowFillTransparency(string alpha);
-        void OnStyleSetEndArrowType(string type);
-        void OnStyleToggleEndArrowIsStroked();
-        void OnStyleToggleEndArrowIsFilled();
-        void OnStyleSetEndArrowRadiusX(string radius);
-        void OnStyleSetEndArrowRadiusY(string radius);
-        void OnStyleSetEndArrowThickness(string thickness);
-        void OnStyleSetEndArrowLineCap(string lineCap);
-        void OnStyleSetEndArrowDashes(string dashes);
-        void OnStyleSetEndArrowStroke(string color);
-        void OnStyleSetEndArrowStrokeTransparency(string alpha);
-        void OnStyleSetEndArrowFill(string color);
-        void OnStyleSetEndArrowFillTransparency(string alpha);
-    }
-
-    /// <summary>
     /// Project editor contract.
     /// </summary>
     public interface IProjectEditor : IObservableObject
@@ -227,6 +178,11 @@ namespace Core2D.Editor
         /// Gets editor layout platform.
         /// </summary>
         IEditorLayoutPlatform LayoutPlatform { get; }
+
+        /// <summary>
+        /// Gets style editor.
+        /// </summary>
+        IStyleEditor StyleEditor { get; }
 
         /// <summary>
         /// Try to snap input arguments.
