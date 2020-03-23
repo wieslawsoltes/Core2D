@@ -24,13 +24,13 @@ namespace Core2D.FileWriter.PdfSharp
         }
 
         /// <inheritdoc/>
-        string IFileWriter.Name { get; } = "Pdf (PdfSharp)";
+        public string Name { get; } = "Pdf (PdfSharp)";
 
         /// <inheritdoc/>
-        string IFileWriter.Extension { get; } = "pdf";
+        public string Extension { get; } = "pdf";
 
         /// <inheritdoc/>
-        void IFileWriter.Save(string path, object item, object options)
+        public void Save(string path, object item, object options)
         {
             if (string.IsNullOrEmpty(path) || item == null)
             {
