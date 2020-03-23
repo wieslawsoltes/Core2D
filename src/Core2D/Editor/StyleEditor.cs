@@ -572,7 +572,7 @@ namespace Core2D.Editor
                 var style = shape.Style;
                 if (style != null && style.LineStyle != null && style.LineStyle.FixedLength != null)
                 {
-                    style.LineStyle.FixedLength.Flags = value;
+                    style.LineStyle.FixedLength.Flags ^= value;
                 }
             }
 
@@ -583,7 +583,7 @@ namespace Core2D.Editor
                     var style = shape.Style;
                     if (style != null && style.LineStyle != null && style.LineStyle.FixedLength != null)
                     {
-                        style.LineStyle.FixedLength.Flags = value;
+                        style.LineStyle.FixedLength.Flags ^= value;
                     }
                 }
             }
@@ -605,7 +605,7 @@ namespace Core2D.Editor
                 var style = shape.Style;
                 if (style != null && style.LineStyle != null && style.LineStyle.FixedLength != null && style.LineStyle.FixedLength.StartTrigger != null)
                 {
-                    style.LineStyle.FixedLength.StartTrigger.Flags = value;
+                    style.LineStyle.FixedLength.StartTrigger.Flags ^= value;
                 }
             }
 
@@ -616,7 +616,7 @@ namespace Core2D.Editor
                     var style = shape.Style;
                     if (style != null && style.LineStyle != null && style.LineStyle.FixedLength != null && style.LineStyle.FixedLength.StartTrigger != null)
                     {
-                        style.LineStyle.FixedLength.StartTrigger.Flags = value;
+                        style.LineStyle.FixedLength.StartTrigger.Flags ^= value;
                     }
                 }
             }
@@ -638,7 +638,7 @@ namespace Core2D.Editor
                 var style = shape.Style;
                 if (style != null && style.LineStyle != null && style.LineStyle.FixedLength != null && style.LineStyle.FixedLength.EndTrigger != null)
                 {
-                    style.LineStyle.FixedLength.EndTrigger.Flags = value;
+                    style.LineStyle.FixedLength.EndTrigger.Flags ^= value;
                 }
             }
 
@@ -649,7 +649,7 @@ namespace Core2D.Editor
                     var style = shape.Style;
                     if (style != null && style.LineStyle != null && style.LineStyle.FixedLength != null && style.LineStyle.FixedLength.EndTrigger != null)
                     {
-                        style.LineStyle.FixedLength.EndTrigger.Flags = value;
+                        style.LineStyle.FixedLength.EndTrigger.Flags ^= value;
                     }
                 }
             }
