@@ -14,7 +14,7 @@ namespace Core2D.Renderer.PdfSharp
     public partial class PdfSharpRenderer : IProjectExporter
     {
         /// <inheritdoc/>
-        void IProjectExporter.Save(string path, IPageContainer container)
+        public void Save(string path, IPageContainer container)
         {
             using var pdf = new PdfDocument();
             Add(pdf, container);
@@ -22,7 +22,7 @@ namespace Core2D.Renderer.PdfSharp
         }
 
         /// <inheritdoc/>
-        void IProjectExporter.Save(string path, IDocumentContainer document)
+        public void Save(string path, IDocumentContainer document)
         {
             using var pdf = new PdfDocument();
             var documentOutline = default(PdfOutline);
@@ -54,7 +54,7 @@ namespace Core2D.Renderer.PdfSharp
         }
 
         /// <inheritdoc/>
-        void IProjectExporter.Save(string path, IProjectContainer project)
+        public void Save(string path, IProjectContainer project)
         {
             using var pdf = new PdfDocument();
             var projectOutline = default(PdfOutline);
