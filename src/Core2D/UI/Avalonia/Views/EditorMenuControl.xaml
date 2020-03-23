@@ -60,12 +60,15 @@
             <MenuItem Header="_Undo" Command="{Binding OnUndo}" InputGesture="Ctrl+Z"/>
             <MenuItem Header="_Redo" Command="{Binding OnRedo}" InputGesture="Ctrl+Y"/>
             <Separator/>
-            <MenuItem Header="Copy As _Metafile" Command="{Binding Platform.OnCopyAsEmf}" InputGesture="Ctrl+Shift+C"/>
-            <Separator/>
             <MenuItem Header="Cu_t" Command="{Binding OnCut}" InputGesture="Ctrl+X"/>
             <MenuItem Header="_Copy" Command="{Binding OnCopy}" InputGesture="Ctrl+C"/>
             <MenuItem Header="_Paste" Command="{Binding OnPaste}" InputGesture="Ctrl+V"/>
             <MenuItem Header="_Delete" Command="{Binding OnDelete}" InputGesture="Delete"/>
+            <Separator/>
+            <MenuItem Header="Copy As _Metafile" Command="{Binding Platform.OnCopyAsEmf}"/>
+            <Separator/>
+            <MenuItem Header="C_opy Style" Command="{Binding StyleEditor.OnCopyStyle}" InputGesture="Ctrl+Shift+C"/>
+            <MenuItem Header="Paste St_yle" Command="{Binding StyleEditor.OnPasteStyle}" InputGesture="Ctrl+Shift+V"/>
             <Separator/>
             <MenuItem Header="Select _All" Command="{Binding OnSelectAll}" InputGesture="Ctrl+A"/>
             <MenuItem Header="De_select All" Command="{Binding OnDeselectAll}" InputGesture="Ctrl+Shift+A"/>
@@ -144,11 +147,11 @@
             </MenuItem>
             <MenuItem Header="Stac_k">
                 <MenuItem Header="_Horizontally" Command="{Binding OnStackHorizontallySelected}" InputGesture="Shift+H"/>
-                <MenuItem Header="_Vertically" Command="{Binding OnStackVerticallySelected}" InputGesture="Shift+V"/>
+                <MenuItem Header="_Vertically" Command="{Binding OnStackVerticallySelected}" InputGesture="Shift+Y"/>
             </MenuItem>
             <MenuItem Header="Dis_tribute">
                 <MenuItem Header="_Horizontally" Command="{Binding OnDistributeHorizontallySelected}" InputGesture="Ctrl+Shift+H"/>
-                <MenuItem Header="_Vertically" Command="{Binding OnDistributeVerticallySelected}" InputGesture="Ctrl+Shift+V"/>
+                <MenuItem Header="_Vertically" Command="{Binding OnDistributeVerticallySelected}" InputGesture="Ctrl+Shift+Y"/>
             </MenuItem>
             <MenuItem Header="Alig_n">
                 <MenuItem Header="_Left" Command="{Binding OnAlignLeftSelected}" InputGesture="Ctrl+Shift+Left"/>
