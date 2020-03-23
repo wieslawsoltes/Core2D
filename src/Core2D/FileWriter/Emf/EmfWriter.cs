@@ -31,10 +31,10 @@ namespace Core2D.FileWriter.Emf
         }
 
         /// <inheritdoc/>
-        string IFileWriter.Name { get; } = "Emf (WinForms)";
+        public string Name { get; } = "Emf (WinForms)";
 
         /// <inheritdoc/>
-        string IFileWriter.Extension { get; } = "emf";
+        public string Extension { get; } = "emf";
 
         /// <summary>
         /// 
@@ -172,7 +172,7 @@ namespace Core2D.FileWriter.Emf
         }
 
         /// <inheritdoc/>
-        void IFileWriter.Save(string path, object item, object options)
+        public void Save(string path, object item, object options)
         {
             if (string.IsNullOrEmpty(path) || item == null)
             {
