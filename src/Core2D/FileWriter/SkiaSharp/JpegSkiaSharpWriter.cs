@@ -25,13 +25,13 @@ namespace Core2D.FileWriter.SkiaSharpJpeg
         }
 
         /// <inheritdoc/>
-        string IFileWriter.Name { get; } = "Jpeg (SkiaSharp)";
+        public string Name { get; } = "Jpeg (SkiaSharp)";
 
         /// <inheritdoc/>
-        string IFileWriter.Extension { get; } = "jpg";
+        public string Extension { get; } = "jpg";
 
         /// <inheritdoc/>
-        void IFileWriter.Save(string path, object item, object options)
+        public void Save(string path, object item, object options)
         {
             if (string.IsNullOrEmpty(path) || item == null)
             {
