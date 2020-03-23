@@ -602,11 +602,6 @@ namespace Core2D.Editor
         void OnToggleTryToConnect();
 
         /// <summary>
-        /// Toggle <see cref="Options.CloneStyle"/> option.
-        /// </summary>
-        void OnToggleCloneStyle();
-
-        /// <summary>
         /// Add database.
         /// </summary>
         void OnAddDatabase();

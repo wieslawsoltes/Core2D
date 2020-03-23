@@ -331,12 +331,6 @@
                     <CheckBox IsChecked="{Binding Project.Options.TryToConnect}" Classes="menu"/>
                 </MenuItem.Icon>
             </MenuItem>
-            <Separator/>
-            <MenuItem Header="Clone St_yle" Command="{Binding OnToggleCloneStyle}" InputGesture="Y">
-                <MenuItem.Icon>
-                    <CheckBox IsChecked="{Binding Project.Options.CloneStyle}" Classes="menu"/>
-                </MenuItem.Icon>
-            </MenuItem>
         </MenuItem>
         <MenuItem Header="_Window">
             <MenuItem Header="_Load Layout..." Command="{Binding LayoutPlatform.LoadLayout}"/>

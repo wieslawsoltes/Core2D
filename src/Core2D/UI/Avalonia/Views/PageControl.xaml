@@ -76,7 +76,6 @@
         <KeyBinding Command="{Binding OnToggleDefaultIsSmoothJoin}" Gesture="J"/>
         <KeyBinding Command="{Binding OnToggleSnapToGrid}" Gesture="G"/>
         <KeyBinding Command="{Binding OnToggleTryToConnect}" Gesture="C"/>
-        <KeyBinding Command="{Binding OnToggleCloneStyle}" Gesture="Y"/>
     </UserControl.KeyBindings>
     <i:Interaction.Behaviors>
         <iac:FocusOnAttachedToVisualTreeBehavior/>
