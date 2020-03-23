@@ -955,7 +955,7 @@ namespace Core2D
 
         private IBaseShape FilledEllipsePointShape(IShapeStyle pss)
         {
-            var ellipse = CreateEllipseShape(-3, -3, 3, 3, pss, null, true, true);
+            var ellipse = CreateEllipseShape(-4, -4, 4, 4, pss, null, true, true);
             ellipse.Name = "FilledEllipsePoint";
             return ellipse;
         }
@@ -969,7 +969,7 @@ namespace Core2D
 
         private IBaseShape FilledRectanglePointShape(IShapeStyle pss)
         {
-            var rectangle = CreateRectangleShape(-3, -3, 3, 3, pss, null, true, true);
+            var rectangle = CreateRectangleShape(-4, -4, 4, 4, pss, null, true, true);
             rectangle.Name = "FilledRectanglePoint";
             return rectangle;
         }
@@ -1020,10 +1020,10 @@ namespace Core2D
                 CreateShapeStyle(
                     "Point",
                     0xFF, 0x00, 0x00, 0x00,
-                    0xFF, 0x00, 0x00, 0x00,
-                    1.0);
+                    0x80, 0xFF, 0xFF, 0xFF,
+                    2.0);
 
-            options.PointShape = RectanglePointShape(options.PointStyle);
+            options.PointShape = FilledRectanglePointShape(options.PointStyle);
 
             return options;
         }
