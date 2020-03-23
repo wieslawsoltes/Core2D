@@ -25,6 +25,12 @@ namespace Core2D.Editor
         void OnStyleSetDashes(string dashes);
 
         /// <summary>
+        /// Set style dash offset.
+        /// </summary>
+        /// <param name="dashOffset">The style dash offset.</param>
+        void OnStyleSetDashOffset(string dashOffset);
+
+        /// <summary>
         /// Set style stroke color.
         /// </summary>
         /// <param name="color">The style stroke color.</param>
@@ -166,6 +172,12 @@ namespace Core2D.Editor
         void OnStyleSetStartArrowDashes(string dashes);
 
         /// <summary>
+        /// Set style start arrow dash offset.
+        /// </summary>
+        /// <param name="dashOffset">The style start arrow dash offset.</param>
+        void OnStyleSetStartArrowDashOffset(string dashOffset);
+
+        /// <summary>
         /// Set style start arrow stroke color.
         /// </summary>
         /// <param name="color">The style start arrow stroke color.</param>
@@ -235,6 +247,12 @@ namespace Core2D.Editor
         /// <param name="dashes">The style end arrow dashes.</param>
         void OnStyleSetEndArrowDashes(string dashes);
 
+        /// <summary>
+        /// Set style end arrow dash offset.
+        /// </summary>
+        /// <param name="dashOffset">The style end arrow dash offset.</param>
+        void OnStyleSetEndArrowDashOffset(string dashOffset);
+        
         /// <summary>
         /// Set style end arrow stroke color.
         /// </summary>
