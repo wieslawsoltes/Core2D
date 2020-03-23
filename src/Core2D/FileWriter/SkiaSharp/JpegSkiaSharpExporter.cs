@@ -27,24 +27,7 @@ namespace Core2D.FileWriter.SkiaSharpJpeg
         }
 
         /// <inheritdoc/>
-        void IProjectExporter.Save(string path, IPageContainer container)
-        {
-            Save(path, container);
-        }
-
-        /// <inheritdoc/>
-        void IProjectExporter.Save(string path, IDocumentContainer document)
-        {
-            throw new NotSupportedException("Saving documents as jpeg drawing is not supported.");
-        }
-
-        /// <inheritdoc/>
-        void IProjectExporter.Save(string path, IProjectContainer project)
-        {
-            throw new NotSupportedException("Saving projects as jpeg drawing is not supported.");
-        }
-
-        private void Save(string path, IPageContainer container)
+        public void Save(string path, IPageContainer container)
         {
             var info = new SKImageInfo((int)container.Width, (int)container.Height);
             using var bitmap = new SKBitmap(info);
@@ -56,6 +39,18 @@ namespace Core2D.FileWriter.SkiaSharpJpeg
             using var data = image.Encode(SKEncodedImageFormat.Jpeg, 100);
             using var stream = File.OpenWrite(path);
             data.SaveTo(stream);
+        }
+
+        /// <inheritdoc/>
+        public void Save(string path, IDocumentContainer document)
+        {
+            throw new NotSupportedException("Saving documents as jpeg drawing is not supported.");
+        }
+
+        /// <inheritdoc/>
+        public void Save(string path, IProjectContainer project)
+        {
+            throw new NotSupportedException("Saving projects as jpeg drawing is not supported.");
         }
     }
 }
