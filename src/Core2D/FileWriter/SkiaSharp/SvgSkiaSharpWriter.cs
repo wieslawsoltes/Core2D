@@ -25,13 +25,13 @@ namespace Core2D.FileWriter.SkiaSharpSvg
         }
 
         /// <inheritdoc/>
-        string IFileWriter.Name { get; } = "Svg (SkiaSharp)";
+        public string Name { get; } = "Svg (SkiaSharp)";
 
         /// <inheritdoc/>
-        string IFileWriter.Extension { get; } = "svg";
+        public string Extension { get; } = "svg";
 
         /// <inheritdoc/>
-        void IFileWriter.Save(string path, object item, object options)
+        public void Save(string path, object item, object options)
         {
             if (string.IsNullOrEmpty(path) || item == null)
             {
