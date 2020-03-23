@@ -307,68 +307,6 @@
                 </MenuItem>
             </MenuItem>
             <MenuItem Header="_Line">
-                <MenuItem Header="_Curvature">
-                    <MenuItem Header="Toggle IsC_urved" Command="{Binding StyleEditor.OnStyleToggleLineIsCurved}"/>
-                    <MenuItem Header="_Curvature">
-                        <MenuItem Header="0" Command="{Binding StyleEditor.OnStyleSetLineCurvature}" CommandParameter="0"/>
-                        <MenuItem Header="10" Command="{Binding StyleEditor.OnStyleSetLineCurvature}" CommandParameter="10"/>
-                        <MenuItem Header="20" Command="{Binding StyleEditor.OnStyleSetLineCurvature}" CommandParameter="20"/>
-                        <MenuItem Header="30" Command="{Binding StyleEditor.OnStyleSetLineCurvature}" CommandParameter="30"/>
-                        <MenuItem Header="40" Command="{Binding StyleEditor.OnStyleSetLineCurvature}" CommandParameter="40"/>
-                        <MenuItem Header="50" Command="{Binding StyleEditor.OnStyleSetLineCurvature}" CommandParameter="50"/>
-                        <MenuItem Header="60" Command="{Binding StyleEditor.OnStyleSetLineCurvature}" CommandParameter="60"/>
-                        <MenuItem Header="70" Command="{Binding StyleEditor.OnStyleSetLineCurvature}" CommandParameter="70"/>
-                        <MenuItem Header="80" Command="{Binding StyleEditor.OnStyleSetLineCurvature}" CommandParameter="80"/>
-                        <MenuItem Header="90" Command="{Binding StyleEditor.OnStyleSetLineCurvature}" CommandParameter="90"/>
-                        <MenuItem Header="100" Command="{Binding StyleEditor.OnStyleSetLineCurvature}" CommandParameter="100"/>
-                    </MenuItem>
-                    <MenuItem Header="Curve _Orientation">
-                        <MenuItem Header="Auto" Command="{Binding StyleEditor.OnStyleSetLineCurveOrientation}" CommandParameter="Auto"/>
-                        <MenuItem Header="Horizontal" Command="{Binding StyleEditor.OnStyleSetLineCurveOrientation}" CommandParameter="Horizontal"/>
-                        <MenuItem Header="Vertical" Command="{Binding StyleEditor.OnStyleSetLineCurveOrientation}" CommandParameter="Vertical"/>
-                    </MenuItem>
-                </MenuItem>
-                <MenuItem Header="Fixed _Length">
-                    <MenuItem Header="_Length">
-                        <MenuItem Header="0" Command="{Binding StyleEditor.OnStyleSetLineFixedLength}" CommandParameter="0"/>
-                        <MenuItem Header="5" Command="{Binding StyleEditor.OnStyleSetLineFixedLength}" CommandParameter="5"/>
-                        <MenuItem Header="10" Command="{Binding StyleEditor.OnStyleSetLineFixedLength}" CommandParameter="10"/>
-                        <MenuItem Header="15" Command="{Binding StyleEditor.OnStyleSetLineFixedLength}" CommandParameter="15"/>
-                        <MenuItem Header="20" Command="{Binding StyleEditor.OnStyleSetLineFixedLength}" CommandParameter="20"/>
-                        <MenuItem Header="25" Command="{Binding StyleEditor.OnStyleSetLineFixedLength}" CommandParameter="25"/>
-                        <MenuItem Header="30" Command="{Binding StyleEditor.OnStyleSetLineFixedLength}" CommandParameter="30"/>
-                    </MenuItem>
-                    <MenuItem Header="_Flags">
-                        <MenuItem Header="Toggle _Disabled" Command="{Binding StyleEditor.OnStyleToggleLineFixedLengthFlags}" CommandParameter="Disabled"/>
-                        <MenuItem Header="Toggle _Start" Command="{Binding StyleEditor.OnStyleToggleLineFixedLengthFlags}" CommandParameter="Start"/>
-                        <MenuItem Header="Toggle _End" Command="{Binding StyleEditor.OnStyleToggleLineFixedLengthFlags}" CommandParameter="End"/>
-                        <MenuItem Header="Toggle _Vertical" Command="{Binding StyleEditor.OnStyleToggleLineFixedLengthFlags}" CommandParameter="Vertical"/>
-                        <MenuItem Header="Toggle _Horizontal" Command="{Binding StyleEditor.OnStyleToggleLineFixedLengthFlags}" CommandParameter="Horizontal"/>
-                        <MenuItem Header="Toggle _All" Command="{Binding StyleEditor.OnStyleToggleLineFixedLengthFlags}" CommandParameter="All"/>
-                    </MenuItem>
-                    <MenuItem Header="_Start Trigger">
-                        <MenuItem Header="Toggle _Default" Command="{Binding StyleEditor.OnStyleToggleLineFixedLengthStartTrigger}" CommandParameter="Default"/>
-                        <MenuItem Header="Toggle _Visible" Command="{Binding StyleEditor.OnStyleToggleLineFixedLengthStartTrigger}" CommandParameter="Visible"/>
-                        <MenuItem Header="Toggle _Printable" Command="{Binding StyleEditor.OnStyleToggleLineFixedLengthStartTrigger}" CommandParameter="Printable"/>
-                        <MenuItem Header="Toggle _Locked" Command="{Binding StyleEditor.OnStyleToggleLineFixedLengthStartTrigger}" CommandParameter="Locked"/>
-                        <MenuItem Header="Toggle _Connector" Command="{Binding StyleEditor.OnStyleToggleLineFixedLengthStartTrigger}" CommandParameter="Connector"/>
-                        <MenuItem Header="Toggle _None" Command="{Binding StyleEditor.OnStyleToggleLineFixedLengthStartTrigger}" CommandParameter="None"/>
-                        <MenuItem Header="Toggle _Standalone" Command="{Binding StyleEditor.OnStyleToggleLineFixedLengthStartTrigger}" CommandParameter="Standalone"/>
-                        <MenuItem Header="Toggle _Input" Command="{Binding StyleEditor.OnStyleToggleLineFixedLengthStartTrigger}" CommandParameter="Input"/>
-                        <MenuItem Header="Toggle _Output" Command="{Binding StyleEditor.OnStyleToggleLineFixedLengthStartTrigger}" CommandParameter="Output"/>
-                    </MenuItem>
-                    <MenuItem Header="_End Trigger">
-                        <MenuItem Header="Toggle _Default" Command="{Binding StyleEditor.OnStyleToggleLineFixedLengthEndTrigger}" CommandParameter="Default"/>
-                        <MenuItem Header="Toggle _Visible" Command="{Binding StyleEditor.OnStyleToggleLineFixedLengthEndTrigger}" CommandParameter="Visible"/>
-                        <MenuItem Header="Toggle _Printable" Command="{Binding StyleEditor.OnStyleToggleLineFixedLengthEndTrigger}" CommandParameter="Printable"/>
-                        <MenuItem Header="Toggle _Locked" Command="{Binding StyleEditor.OnStyleToggleLineFixedLengthEndTrigger}" CommandParameter="Locked"/>
-                        <MenuItem Header="Toggle _Connector" Command="{Binding StyleEditor.OnStyleToggleLineFixedLengthEndTrigger}" CommandParameter="Connector"/>
-                        <MenuItem Header="Toggle _None" Command="{Binding StyleEditor.OnStyleToggleLineFixedLengthEndTrigger}" CommandParameter="None"/>
-                        <MenuItem Header="Toggle _Standalone" Command="{Binding StyleEditor.OnStyleToggleLineFixedLengthEndTrigger}" CommandParameter="Standalone"/>
-                        <MenuItem Header="Toggle _Input" Command="{Binding StyleEditor.OnStyleToggleLineFixedLengthEndTrigger}" CommandParameter="Input"/>
-                        <MenuItem Header="Toggle _Output" Command="{Binding StyleEditor.OnStyleToggleLineFixedLengthEndTrigger}" CommandParameter="Output"/>
-                    </MenuItem>
-                </MenuItem>
                 <MenuItem Header="_Start Arrow">
                     <MenuItem Header="_Type">
                         <MenuItem Header="_None" Command="{Binding StyleEditor.OnStyleSetStartArrowType}" CommandParameter="None"/>
@@ -611,6 +549,68 @@
                                 <MenuItem Header="100%" Command="{Binding StyleEditor.OnStyleSetEndArrowFillTransparency}" CommandParameter="255"/>
                             </MenuItem>
                         </MenuItem>
+                    </MenuItem>
+                </MenuItem>
+                <MenuItem Header="_Curvature">
+                    <MenuItem Header="Toggle IsC_urved" Command="{Binding StyleEditor.OnStyleToggleLineIsCurved}"/>
+                    <MenuItem Header="_Curvature">
+                        <MenuItem Header="0" Command="{Binding StyleEditor.OnStyleSetLineCurvature}" CommandParameter="0"/>
+                        <MenuItem Header="10" Command="{Binding StyleEditor.OnStyleSetLineCurvature}" CommandParameter="10"/>
+                        <MenuItem Header="20" Command="{Binding StyleEditor.OnStyleSetLineCurvature}" CommandParameter="20"/>
+                        <MenuItem Header="30" Command="{Binding StyleEditor.OnStyleSetLineCurvature}" CommandParameter="30"/>
+                        <MenuItem Header="40" Command="{Binding StyleEditor.OnStyleSetLineCurvature}" CommandParameter="40"/>
+                        <MenuItem Header="50" Command="{Binding StyleEditor.OnStyleSetLineCurvature}" CommandParameter="50"/>
+                        <MenuItem Header="60" Command="{Binding StyleEditor.OnStyleSetLineCurvature}" CommandParameter="60"/>
+                        <MenuItem Header="70" Command="{Binding StyleEditor.OnStyleSetLineCurvature}" CommandParameter="70"/>
+                        <MenuItem Header="80" Command="{Binding StyleEditor.OnStyleSetLineCurvature}" CommandParameter="80"/>
+                        <MenuItem Header="90" Command="{Binding StyleEditor.OnStyleSetLineCurvature}" CommandParameter="90"/>
+                        <MenuItem Header="100" Command="{Binding StyleEditor.OnStyleSetLineCurvature}" CommandParameter="100"/>
+                    </MenuItem>
+                    <MenuItem Header="Curve _Orientation">
+                        <MenuItem Header="Auto" Command="{Binding StyleEditor.OnStyleSetLineCurveOrientation}" CommandParameter="Auto"/>
+                        <MenuItem Header="Horizontal" Command="{Binding StyleEditor.OnStyleSetLineCurveOrientation}" CommandParameter="Horizontal"/>
+                        <MenuItem Header="Vertical" Command="{Binding StyleEditor.OnStyleSetLineCurveOrientation}" CommandParameter="Vertical"/>
+                    </MenuItem>
+                </MenuItem>
+                <MenuItem Header="Fixed _Length">
+                    <MenuItem Header="_Length">
+                        <MenuItem Header="0" Command="{Binding StyleEditor.OnStyleSetLineFixedLength}" CommandParameter="0"/>
+                        <MenuItem Header="5" Command="{Binding StyleEditor.OnStyleSetLineFixedLength}" CommandParameter="5"/>
+                        <MenuItem Header="10" Command="{Binding StyleEditor.OnStyleSetLineFixedLength}" CommandParameter="10"/>
+                        <MenuItem Header="15" Command="{Binding StyleEditor.OnStyleSetLineFixedLength}" CommandParameter="15"/>
+                        <MenuItem Header="20" Command="{Binding StyleEditor.OnStyleSetLineFixedLength}" CommandParameter="20"/>
+                        <MenuItem Header="25" Command="{Binding StyleEditor.OnStyleSetLineFixedLength}" CommandParameter="25"/>
+                        <MenuItem Header="30" Command="{Binding StyleEditor.OnStyleSetLineFixedLength}" CommandParameter="30"/>
+                    </MenuItem>
+                    <MenuItem Header="_Flags">
+                        <MenuItem Header="Toggle _Disabled" Command="{Binding StyleEditor.OnStyleToggleLineFixedLengthFlags}" CommandParameter="Disabled"/>
+                        <MenuItem Header="Toggle _Start" Command="{Binding StyleEditor.OnStyleToggleLineFixedLengthFlags}" CommandParameter="Start"/>
+                        <MenuItem Header="Toggle _End" Command="{Binding StyleEditor.OnStyleToggleLineFixedLengthFlags}" CommandParameter="End"/>
+                        <MenuItem Header="Toggle _Vertical" Command="{Binding StyleEditor.OnStyleToggleLineFixedLengthFlags}" CommandParameter="Vertical"/>
+                        <MenuItem Header="Toggle _Horizontal" Command="{Binding StyleEditor.OnStyleToggleLineFixedLengthFlags}" CommandParameter="Horizontal"/>
+                        <MenuItem Header="Toggle _All" Command="{Binding StyleEditor.OnStyleToggleLineFixedLengthFlags}" CommandParameter="All"/>
+                    </MenuItem>
+                    <MenuItem Header="_Start Trigger">
+                        <MenuItem Header="Toggle _Default" Command="{Binding StyleEditor.OnStyleToggleLineFixedLengthStartTrigger}" CommandParameter="Default"/>
+                        <MenuItem Header="Toggle _Visible" Command="{Binding StyleEditor.OnStyleToggleLineFixedLengthStartTrigger}" CommandParameter="Visible"/>
+                        <MenuItem Header="Toggle _Printable" Command="{Binding StyleEditor.OnStyleToggleLineFixedLengthStartTrigger}" CommandParameter="Printable"/>
+                        <MenuItem Header="Toggle _Locked" Command="{Binding StyleEditor.OnStyleToggleLineFixedLengthStartTrigger}" CommandParameter="Locked"/>
+                        <MenuItem Header="Toggle _Connector" Command="{Binding StyleEditor.OnStyleToggleLineFixedLengthStartTrigger}" CommandParameter="Connector"/>
+                        <MenuItem Header="Toggle _None" Command="{Binding StyleEditor.OnStyleToggleLineFixedLengthStartTrigger}" CommandParameter="None"/>
+                        <MenuItem Header="Toggle _Standalone" Command="{Binding StyleEditor.OnStyleToggleLineFixedLengthStartTrigger}" CommandParameter="Standalone"/>
+                        <MenuItem Header="Toggle _Input" Command="{Binding StyleEditor.OnStyleToggleLineFixedLengthStartTrigger}" CommandParameter="Input"/>
+                        <MenuItem Header="Toggle _Output" Command="{Binding StyleEditor.OnStyleToggleLineFixedLengthStartTrigger}" CommandParameter="Output"/>
+                    </MenuItem>
+                    <MenuItem Header="_End Trigger">
+                        <MenuItem Header="Toggle _Default" Command="{Binding StyleEditor.OnStyleToggleLineFixedLengthEndTrigger}" CommandParameter="Default"/>
+                        <MenuItem Header="Toggle _Visible" Command="{Binding StyleEditor.OnStyleToggleLineFixedLengthEndTrigger}" CommandParameter="Visible"/>
+                        <MenuItem Header="Toggle _Printable" Command="{Binding StyleEditor.OnStyleToggleLineFixedLengthEndTrigger}" CommandParameter="Printable"/>
+                        <MenuItem Header="Toggle _Locked" Command="{Binding StyleEditor.OnStyleToggleLineFixedLengthEndTrigger}" CommandParameter="Locked"/>
+                        <MenuItem Header="Toggle _Connector" Command="{Binding StyleEditor.OnStyleToggleLineFixedLengthEndTrigger}" CommandParameter="Connector"/>
+                        <MenuItem Header="Toggle _None" Command="{Binding StyleEditor.OnStyleToggleLineFixedLengthEndTrigger}" CommandParameter="None"/>
+                        <MenuItem Header="Toggle _Standalone" Command="{Binding StyleEditor.OnStyleToggleLineFixedLengthEndTrigger}" CommandParameter="Standalone"/>
+                        <MenuItem Header="Toggle _Input" Command="{Binding StyleEditor.OnStyleToggleLineFixedLengthEndTrigger}" CommandParameter="Input"/>
+                        <MenuItem Header="Toggle _Output" Command="{Binding StyleEditor.OnStyleToggleLineFixedLengthEndTrigger}" CommandParameter="Output"/>
                     </MenuItem>
                 </MenuItem>
             </MenuItem>
