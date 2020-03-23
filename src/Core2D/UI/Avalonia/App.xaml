@@ -68,6 +68,13 @@
             <Setter Property="BorderBrush" Value="{DynamicResource ThemeBorderLightBrush}"/>
             <Setter Property="BorderThickness" Value="1"/>
         </Style>
+        <!-- Border.writers -->
+        <Style Selector="Border.writers">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource ThemeBorderLightBrush}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+        </Style>
         <!-- Border.document -->
         <Style Selector="Border.document">
             <Setter Property="Padding" Value="4"/>
@@ -242,6 +249,12 @@
             <Setter Property="Margin" Value="0"/>
             <Setter Property="Padding" Value="0"/>
             <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="AutoScrollToSelectedItem" Value="True"/>
+        </Style>
+        <!-- ListBox.writers -->
+        <Style Selector="ListBox.writers">
+            <Setter Property="Padding" Value="4"/>
+            <Setter Property="BorderThickness" Value="1"/>
             <Setter Property="AutoScrollToSelectedItem" Value="True"/>
         </Style>
         <!-- ListBox.recents -->
@@ -785,6 +798,11 @@
                 <views:ScriptControl Grid.Row="0" DataContext="{Binding Context}"/>
             </Grid>
         </DataTemplate>
+        <DataTemplate DataType="Views:ExportView">
+            <Grid RowDefinitions="*">
+                <views:ExportControl Grid.Row="0" DataContext="{Binding Context}"/>
+            </Grid>
+        </DataTemplate>
         <DataTemplate DataType="Views:BrowserView">
             <Grid RowDefinitions="Auto,*">
                 <views:BrowserMenuControl Grid.Row="0" DataContext="{Binding Context}"/>
@@ -810,6 +828,9 @@
         <!-- Tools -->
         <DataTemplate DataType="Tools:ScriptTool">
             <views:ScriptControl DataContext="{Binding Context}"/>
+        </DataTemplate>
+        <DataTemplate DataType="Tools:ExportTool">
+            <views:ExportControl DataContext="{Binding Context}"/>
         </DataTemplate>
         <DataTemplate DataType="Tools:BrowserTool">
             <views:BrowserControl DataContext="{Binding Context}"/>
