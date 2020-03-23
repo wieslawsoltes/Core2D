@@ -1664,7 +1664,23 @@ namespace Core2D.Editor
         /// <inheritdoc/>
         public void OnAddStyle(ILibrary<IShapeStyle> library)
         {
-            Project.AddStyle(library, Factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName));
+            IShapeStyle style = null;
+
+            if (Renderers[0]?.State?.SelectedShape != null)
+            {
+                var shape = Renderers[0]?.State?.SelectedShape;
+                if (shape.Style != null)
+                {
+                    style = (IShapeStyle)shape.Style.Copy(null);
+                }
+            }
+
+            if (style == null)
+            {
+                style = Factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
+            }
+
+            Project.AddStyle(library, style);
         }
 
         /// <inheritdoc/>
