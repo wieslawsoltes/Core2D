@@ -13,6 +13,7 @@ namespace Core2D.Editor
     {
         private const NumberStyles _numberStyles = NumberStyles.AllowDecimalPoint | NumberStyles.AllowThousands;
         private readonly IServiceProvider _serviceProvider;
+        private IShapeStyle _copy;
 
         /// <summary>
         /// Initialize new instance of <see cref="StyleEditor"/> class.
@@ -27,6 +28,42 @@ namespace Core2D.Editor
         public override object Copy(IDictionary<object, object> shared)
         {
             throw new NotImplementedException();
+        }
+
+        /// <inheritdoc/>
+        public void OnCopyStyle()
+        {
+            var editor = _serviceProvider.GetService<IProjectEditor>();
+            if (editor.Renderers[0]?.State?.SelectedShape != null)
+            {
+                var style = editor.Renderers[0]?.State?.SelectedShape.Style;
+                _copy = (IShapeStyle)style.Copy(null);
+            }
+        }
+
+        /// <inheritdoc/>
+        public void OnPasteStyle()
+        {
+            var editor = _serviceProvider.GetService<IProjectEditor>();
+            if (editor.Renderers[0]?.State?.SelectedShape != null && _copy != null)
+            {
+                var shape = editor.Renderers[0]?.State?.SelectedShape;
+                var previous = shape.Style;
+                var next = (IShapeStyle)_copy.Copy(null);
+                editor.Project?.History?.Snapshot(previous, next, (p) => shape.Style = p);
+                shape.Style = next;
+            }
+
+            if (editor.Renderers?[0]?.State?.SelectedShapes?.Count > 0)
+            {
+                foreach (var shape in editor.Renderers[0].State.SelectedShapes)
+                {
+                    var previous = shape.Style;
+                    var next = (IShapeStyle)_copy.Copy(null);
+                    editor.Project?.History?.Snapshot(previous, next, (p) => shape.Style = p);
+                    shape.Style = next;
+                }
+            }
         }
 
         /// <inheritdoc/>
