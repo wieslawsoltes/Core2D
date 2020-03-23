@@ -273,11 +273,11 @@
                     <MenuItem Header="96" Command="{Binding StyleEditor.OnStyleSetFontSize}" CommandParameter="96"/>
                 </MenuItem>
                 <MenuItem Header="Font S_tyle">
-                    <MenuItem Header="_Regular" Command="{Binding StyleEditor.OnStyleSetFontStyle}" CommandParameter="Regular"/>
-                    <MenuItem Header="_Bold" Command="{Binding StyleEditor.OnStyleSetFontStyle}" CommandParameter="Bold"/>
-                    <MenuItem Header="_Italic" Command="{Binding StyleEditor.OnStyleSetFontStyle}" CommandParameter="Italic"/>
-                    <MenuItem Header="_Underline" Command="{Binding StyleEditor.OnStyleSetFontStyle}" CommandParameter="Underline"/>
-                    <MenuItem Header="_Strikeout" Command="{Binding StyleEditor.OnStyleSetFontStyle}" CommandParameter="Strikeout"/>
+                    <MenuItem Header="Toggle _Regular" Command="{Binding StyleEditor.OnStyleSetFontStyle}" CommandParameter="Regular"/>
+                    <MenuItem Header="Toggle _Bold" Command="{Binding StyleEditor.OnStyleSetFontStyle}" CommandParameter="Bold"/>
+                    <MenuItem Header="Toggle _Italic" Command="{Binding StyleEditor.OnStyleSetFontStyle}" CommandParameter="Italic"/>
+                    <MenuItem Header="Toggle _Underline" Command="{Binding StyleEditor.OnStyleSetFontStyle}" CommandParameter="Underline"/>
+                    <MenuItem Header="Toggle _Strikeout" Command="{Binding StyleEditor.OnStyleSetFontStyle}" CommandParameter="Strikeout"/>
                 </MenuItem>
                 <MenuItem Header="_Horizontal Alignment">
                     <MenuItem Header="Left" Command="{Binding StyleEditor.OnStyleSetTextHAlignment}" CommandParameter="Left"/>
