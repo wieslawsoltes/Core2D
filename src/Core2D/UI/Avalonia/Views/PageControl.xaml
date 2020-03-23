@@ -28,9 +28,9 @@
         <KeyBinding Command="{Binding OnMoveLeftSelected}" Gesture="Left"/>
         <KeyBinding Command="{Binding OnMoveRightSelected}" Gesture="Right"/>
         <KeyBinding Command="{Binding OnStackHorizontallySelected}" Gesture="Shift+H"/>
-        <KeyBinding Command="{Binding OnStackVerticallySelected}" Gesture="Shift+V"/>
+        <KeyBinding Command="{Binding OnStackVerticallySelected}" Gesture="Shift+Y"/>
         <KeyBinding Command="{Binding OnDistributeHorizontallySelected}" Gesture="Ctrl+Shift+H"/>
-        <KeyBinding Command="{Binding OnDistributeVerticallySelected}" Gesture="Ctrl+Shift+V"/>
+        <KeyBinding Command="{Binding OnDistributeVerticallySelected}" Gesture="Ctrl+Shift+Y"/>
         <KeyBinding Command="{Binding OnAlignLeftSelected}" Gesture="Ctrl+Shift+Left"/>
         <KeyBinding Command="{Binding OnAlignCenteredSelected}" Gesture="Ctrl+Shift+OemMinus"/>
         <KeyBinding Command="{Binding OnAlignCenteredSelected}" Gesture="Ctrl+Shift+Subtract"/>
@@ -45,10 +45,11 @@
         <!-- Edit -->
         <KeyBinding Command="{Binding OnUndo}" Gesture="Ctrl+Z"/>
         <KeyBinding Command="{Binding OnRedo}" Gesture="Ctrl+Y"/>
-        <KeyBinding Command="{Binding Platform.OnCopyAsEmf}" Gesture="Ctrl+Shift+C"/>
         <KeyBinding Command="{Binding OnCut}" Gesture="Ctrl+X"/>
         <KeyBinding Command="{Binding OnCopy}" Gesture="Ctrl+C"/>
         <KeyBinding Command="{Binding OnPaste}" Gesture="Ctrl+V"/>
+        <KeyBinding Command="{Binding StyleEditor.OnCopyStyle}" Gesture="Ctrl+Shift+C"/>
+        <KeyBinding Command="{Binding StyleEditor.OnPasteStyle}" Gesture="Ctrl+Shift+V"/>
         <KeyBinding Command="{Binding OnSelectAll}" Gesture="Ctrl+A"/>
         <KeyBinding Command="{Binding OnGroupSelected}" Gesture="Ctrl+G"/>
         <KeyBinding Command="{Binding OnUngroupSelected}" Gesture="Ctrl+U"/>
@@ -76,7 +77,6 @@
         <KeyBinding Command="{Binding OnToggleDefaultIsSmoothJoin}" Gesture="J"/>
         <KeyBinding Command="{Binding OnToggleSnapToGrid}" Gesture="G"/>
         <KeyBinding Command="{Binding OnToggleTryToConnect}" Gesture="C"/>
-        <KeyBinding Command="{Binding OnToggleCloneStyle}" Gesture="Y"/>
     </UserControl.KeyBindings>
     <i:Interaction.Behaviors>
         <iac:FocusOnAttachedToVisualTreeBehavior/>

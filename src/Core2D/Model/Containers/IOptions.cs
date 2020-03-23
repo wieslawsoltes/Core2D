@@ -83,10 +83,5 @@ namespace Core2D.Containers
         /// Gets or sets editor helper shapes style.
         /// </summary>
         IShapeStyle HelperStyle { get; set; }
-
-        /// <summary>
-        /// Gets or sets value indicating whether style is cloned during creation.
-        /// </summary>
-        bool CloneStyle { get; set; }
     }
 }

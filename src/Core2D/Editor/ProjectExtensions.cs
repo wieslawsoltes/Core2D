@@ -775,7 +775,7 @@ namespace Core2D.Editor
                     foreach (var child in shapes)
                     {
                         var previous = child.Style;
-                        var next = style;
+                        var next = (IShapeStyle)style.Copy(null);
                         project?.History?.Snapshot(previous, next, (p) => child.Style = p);
                         child.Style = next;
                     }
@@ -783,7 +783,7 @@ namespace Core2D.Editor
                 else
                 {
                     var previous = shape.Style;
-                    var next = style;
+                    var next = (IShapeStyle)style.Copy(null);
                     project?.History?.Snapshot(previous, next, (p) => shape.Style = p);
                     shape.Style = next;
                 }

@@ -50,7 +50,7 @@ namespace Core2D.Editor.Factories
             var line = factory.CreateLineShape(
                 x1, y1,
                 x2, y2,
-                project.Options.CloneStyle ? (IShapeStyle)style.Copy(null) : style,
+                (IShapeStyle)style.Copy(null),
                 project.Options.PointShape,
                 isStroked);
             project.AddShape(project.CurrentContainer.CurrentLayer, line);
@@ -67,7 +67,7 @@ namespace Core2D.Editor.Factories
             var line = factory.CreateLineShape(
                 start,
                 end,
-                project.Options.CloneStyle ? (IShapeStyle)style.Copy(null) : style,
+                (IShapeStyle)style.Copy(null),
                 project.Options.PointShape,
                 isStroked);
             project.AddShape(project.CurrentContainer.CurrentLayer, line);
@@ -86,7 +86,7 @@ namespace Core2D.Editor.Factories
                 x2, y2,
                 x3, y3,
                 x4, y4,
-                project.Options.CloneStyle ? (IShapeStyle)style.Copy(null) : style,
+                (IShapeStyle)style.Copy(null),
                 project.Options.PointShape,
                 isStroked,
                 isFilled);
@@ -106,7 +106,7 @@ namespace Core2D.Editor.Factories
                 point2,
                 point3,
                 point4,
-                project.Options.CloneStyle ? (IShapeStyle)style.Copy(null) : style,
+                (IShapeStyle)style.Copy(null),
                 project.Options.PointShape,
                 isStroked,
                 isFilled);
@@ -126,7 +126,7 @@ namespace Core2D.Editor.Factories
                 x2, y2,
                 x3, y3,
                 x4, y4,
-                project.Options.CloneStyle ? (IShapeStyle)style.Copy(null) : style,
+                (IShapeStyle)style.Copy(null),
                 project.Options.PointShape,
                 isStroked,
                 isFilled);
@@ -146,7 +146,7 @@ namespace Core2D.Editor.Factories
                 point2,
                 point3,
                 point4,
-                project.Options.CloneStyle ? (IShapeStyle)style.Copy(null) : style,
+                (IShapeStyle)style.Copy(null),
                 project.Options.PointShape,
                 isStroked,
                 isFilled);
@@ -165,7 +165,7 @@ namespace Core2D.Editor.Factories
                 x1, y1,
                 x2, y2,
                 x3, y3,
-                project.Options.CloneStyle ? (IShapeStyle)style.Copy(null) : style,
+                (IShapeStyle)style.Copy(null),
                 project.Options.PointShape,
                 isStroked,
                 isFilled);
@@ -184,7 +184,7 @@ namespace Core2D.Editor.Factories
                 point1,
                 point2,
                 point3,
-                project.Options.CloneStyle ? (IShapeStyle)style.Copy(null) : style,
+                (IShapeStyle)style.Copy(null),
                 project.Options.PointShape,
                 isStroked,
                 isFilled);
@@ -208,7 +208,7 @@ namespace Core2D.Editor.Factories
             var style = project.CurrentStyleLibrary.Selected;
             var path = factory.CreatePathShape(
                 "",
-                project.Options.CloneStyle ? (IShapeStyle)style.Copy(null) : style,
+                (IShapeStyle)style.Copy(null),
                 geometry,
                 isStroked,
                 isFilled);
@@ -226,7 +226,7 @@ namespace Core2D.Editor.Factories
             var rectangle = factory.CreateRectangleShape(
                 x1, y1,
                 x2, y2,
-                project.Options.CloneStyle ? (IShapeStyle)style.Copy(null) : style,
+                (IShapeStyle)style.Copy(null),
                 project.Options.PointShape,
                 isStroked,
                 isFilled,
@@ -245,7 +245,7 @@ namespace Core2D.Editor.Factories
             var rectangle = factory.CreateRectangleShape(
                 topLeft,
                 bottomRight,
-                project.Options.CloneStyle ? (IShapeStyle)style.Copy(null) : style,
+                (IShapeStyle)style.Copy(null),
                 project.Options.PointShape,
                 isStroked,
                 isFilled,
@@ -264,7 +264,7 @@ namespace Core2D.Editor.Factories
             var ellipse = factory.CreateEllipseShape(
                 x1, y1,
                 x2, y2,
-                project.Options.CloneStyle ? (IShapeStyle)style.Copy(null) : style,
+                (IShapeStyle)style.Copy(null),
                 project.Options.PointShape,
                 isStroked,
                 isFilled,
@@ -283,7 +283,7 @@ namespace Core2D.Editor.Factories
             var ellipse = factory.CreateEllipseShape(
                 topLeft,
                 bottomRight,
-                project.Options.CloneStyle ? (IShapeStyle)style.Copy(null) : style,
+                (IShapeStyle)style.Copy(null),
                 project.Options.PointShape,
                 isStroked,
                 isFilled,
@@ -302,7 +302,7 @@ namespace Core2D.Editor.Factories
             var txt = factory.CreateTextShape(
                 x1, y1,
                 x2, y2,
-                project.Options.CloneStyle ? (IShapeStyle)style.Copy(null) : style,
+                (IShapeStyle)style.Copy(null),
                 project.Options.PointShape,
                 text,
                 isStroked);
@@ -320,7 +320,7 @@ namespace Core2D.Editor.Factories
             var txt = factory.CreateTextShape(
                 topLeft,
                 bottomRight,
-                project.Options.CloneStyle ? (IShapeStyle)style.Copy(null) : style,
+                (IShapeStyle)style.Copy(null),
                 project.Options.PointShape,
                 text,
                 isStroked);
@@ -338,7 +338,7 @@ namespace Core2D.Editor.Factories
             var image = factory.CreateImageShape(
                 x1, y1,
                 x2, y2,
-                project.Options.CloneStyle ? (IShapeStyle)style.Copy(null) : style,
+                (IShapeStyle)style.Copy(null),
                 project.Options.PointShape,
                 path,
                 isStroked,
@@ -367,7 +367,7 @@ namespace Core2D.Editor.Factories
                 var image = factory.CreateImageShape(
                     topLeft,
                     bottomRight,
-                    project.Options.CloneStyle ? (IShapeStyle)style.Copy(null) : style,
+                    (IShapeStyle)style.Copy(null),
                     project.Options.PointShape,
                     key,
                     isStroked,

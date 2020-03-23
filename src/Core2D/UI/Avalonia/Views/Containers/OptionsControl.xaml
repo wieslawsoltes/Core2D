@@ -12,7 +12,7 @@
     <TabControl Classes="default">
         <TabItem Header="General" Classes="property">
             <ScrollViewer>
-                <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto" ColumnDefinitions="Auto,50,*">
+                <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto" ColumnDefinitions="Auto,50,*">
                     <TextBlock Text="SnapToGrid" Classes="left" Grid.Row="0" Grid.Column="0"/>
                     <CheckBox IsChecked="{Binding SnapToGrid, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2"/>
                     <TextBlock Text="SnapX" Classes="left" Grid.Row="1" Grid.Column="0"/>
@@ -28,8 +28,6 @@
                     <ComboBox Items="{x:Static Editor:Enums.MoveModeValues}" SelectedItem="{Binding MoveMode, Mode=TwoWay}" Classes="default" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2"/>
                     <TextBlock Text="TryToConnect" Classes="left" Grid.Row="5" Grid.Column="0"/>
                     <CheckBox IsChecked="{Binding TryToConnect, Mode=TwoWay}" Classes="left" Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="2"/>
-                    <TextBlock Text="CloneStyle" Classes="left" Grid.Row="6" Grid.Column="0"/>
-                    <CheckBox IsChecked="{Binding CloneStyle, Mode=TwoWay}" Classes="left" Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="2"/>
                 </Grid>
             </ScrollViewer>
         </TabItem>

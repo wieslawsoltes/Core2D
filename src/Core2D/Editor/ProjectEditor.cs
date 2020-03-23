@@ -59,6 +59,7 @@ namespace Core2D.Editor
         private readonly Lazy<IProjectEditorPlatform> _platform;
         private readonly Lazy<IEditorCanvasPlatform> _canvasPlatform;
         private readonly Lazy<IEditorLayoutPlatform> _layoutPlatform;
+        private readonly Lazy<IStyleEditor> _styleEditor;
 
         /// <inheritdoc/>
         public IProjectContainer Project
@@ -200,6 +201,9 @@ namespace Core2D.Editor
         /// <inheritdoc/>
         public IEditorLayoutPlatform LayoutPlatform => _layoutPlatform.Value;
 
+        /// <inheritdoc/>
+        public IStyleEditor StyleEditor => _styleEditor.Value;
+
         private object ScriptState { get; set; } = default;
 
         private IPageContainer PageToCopy { get; set; } = default;
@@ -238,6 +242,7 @@ namespace Core2D.Editor
             _platform = _serviceProvider.GetServiceLazily<IProjectEditorPlatform>();
             _canvasPlatform = _serviceProvider.GetServiceLazily<IEditorCanvasPlatform>();
             _layoutPlatform = _serviceProvider.GetServiceLazily<IEditorLayoutPlatform>();
+            _styleEditor = _serviceProvider.GetServiceLazily<IStyleEditor>();
         }
 
         /// <inheritdoc/>
@@ -519,7 +524,7 @@ namespace Core2D.Editor
                     if (restore)
                     {
                         var shapes = Enumerable.Repeat(group, 1);
-                        TryToRestoreStyles(shapes);
+                        ResetPointShapeToDefault(shapes);
                         TryToRestoreRecords(shapes);
                     }
                     Project.AddGroup(Project?.CurrentGroupLibrary, group);
@@ -533,7 +538,7 @@ namespace Core2D.Editor
             {
                 if (restore)
                 {
-                    TryToRestoreStyles(groups);
+                    ResetPointShapeToDefault(groups);
                     TryToRestoreRecords(groups);
                 }
                 Project.AddItems(Project?.CurrentGroupLibrary, groups);
@@ -548,14 +553,14 @@ namespace Core2D.Editor
             }
             else if (item is ILibrary<IGroupShape> gl)
             {
-                TryToRestoreStyles(gl.Items);
+                ResetPointShapeToDefault(gl.Items);
                 TryToRestoreRecords(gl.Items);
                 Project.AddGroupLibrary(gl);
             }
             else if (item is IList<ILibrary<IGroupShape>> gll)
             {
                 var shapes = gll.SelectMany(x => x.Items);
-                TryToRestoreStyles(shapes);
+                ResetPointShapeToDefault(shapes);
                 TryToRestoreRecords(shapes);
                 Project.AddGroupLibraries(gll);
             }
@@ -583,7 +588,7 @@ namespace Core2D.Editor
             {
                 if (restore)
                 {
-                    TryToRestoreStyles(layer.Shapes);
+                    ResetPointShapeToDefault(layer.Shapes);
                     TryToRestoreRecords(layer.Shapes);
                 }
                 Project?.AddLayer(Project?.CurrentContainer, layer);
@@ -596,7 +601,7 @@ namespace Core2D.Editor
                     if (restore)
                     {
                         var shapes = page.Layers.SelectMany(x => x.Shapes);
-                        TryToRestoreStyles(shapes);
+                        ResetPointShapeToDefault(shapes);
                         TryToRestoreRecords(shapes);
                     }
                     Project?.AddTemplate(page);
@@ -609,7 +614,7 @@ namespace Core2D.Editor
                         var shapes = Enumerable.Concat(
                             page.Layers.SelectMany(x => x.Shapes),
                             page.Template?.Layers.SelectMany(x => x.Shapes));
-                        TryToRestoreStyles(shapes);
+                        ResetPointShapeToDefault(shapes);
                         TryToRestoreRecords(shapes);
                     }
                     Project?.AddPage(Project?.CurrentDocument, page);
@@ -620,7 +625,7 @@ namespace Core2D.Editor
                 if (restore)
                 {
                     var shapes = templates.SelectMany(x => x.Layers).SelectMany(x => x.Shapes);
-                    TryToRestoreStyles(shapes);
+                    ResetPointShapeToDefault(shapes);
                     TryToRestoreRecords(shapes);
                 }
 
@@ -634,7 +639,7 @@ namespace Core2D.Editor
                     var shapes = Enumerable.Concat(
                         document.Pages.SelectMany(x => x.Layers).SelectMany(x => x.Shapes),
                         document.Pages.SelectMany(x => x.Template.Layers).SelectMany(x => x.Shapes));
-                    TryToRestoreStyles(shapes);
+                    ResetPointShapeToDefault(shapes);
                     TryToRestoreRecords(shapes);
                 }
                 Project?.AddDocument(document);
@@ -1487,15 +1492,6 @@ namespace Core2D.Editor
         }
 
         /// <inheritdoc/>
-        public void OnToggleCloneStyle()
-        {
-            if (Project?.Options != null)
-            {
-                Project.Options.CloneStyle = !Project.Options.CloneStyle;
-            }
-        }
-
-        /// <inheritdoc/>
         public void OnAddDatabase()
         {
             var db = Factory.CreateDatabase(ProjectEditorConfiguration.DefaultDatabaseName);
@@ -2250,77 +2246,17 @@ namespace Core2D.Editor
             }
         }
 
-        private void ResetPointShapeToDefault(IEnumerable<IBaseShape> shapes)
-        {
-            foreach (var point in shapes?.SelectMany(s => s?.GetPoints()))
-            {
-                point.Shape = Project?.Options?.PointShape;
-            }
-        }
-
         /// <summary>
-        /// Generated style dictionary with name as the key.
-        /// </summary>
-        /// <returns>The style dictionary with name as the key.</returns>
-        private IDictionary<string, IShapeStyle> GenerateStyleDictionaryByName()
-        {
-            return Project?.StyleLibraries
-                .Where(sl => sl?.Items != null && sl?.Items.Length > 0)
-                .SelectMany(sl => sl.Items)
-                .Distinct(new ShapeStyleByNameComparer())
-                .ToDictionary(s => s.Name);
-        }
-
-        /// <summary>
-        /// Try to restore shape styles.
+        /// Try to restore point shape.
         /// </summary>
         /// <param name="shapes">The shapes collection.</param>
-        private void TryToRestoreStyles(IEnumerable<IBaseShape> shapes)
+        private void ResetPointShapeToDefault(IEnumerable<IBaseShape> shapes)
         {
             try
             {
-                if (Project?.StyleLibraries == null)
+                foreach (var point in shapes?.SelectMany(s => s?.GetPoints()))
                 {
-                    return;
-                }
-
-                var styles = GenerateStyleDictionaryByName();
-
-                // Reset point shape to defaults.
-                ResetPointShapeToDefault(shapes);
-
-                // Try to restore shape styles.
-                foreach (var shape in ProjectContainer.GetAllShapes(shapes))
-                {
-                    if (shape?.Style == null)
-                    {
-                        continue;
-                    }
-
-                    if (!string.IsNullOrWhiteSpace(shape.Style.Name))
-                    {
-                        if (styles.TryGetValue(shape.Style.Name, out var style))
-                        {
-                            // Use existing style.
-                            shape.Style = style;
-                        }
-                        else
-                        {
-                            // Create Imported style library.
-                            if (Project?.CurrentStyleLibrary == null)
-                            {
-                                var sl = Factory.CreateLibrary<IShapeStyle>(ProjectEditorConfiguration.ImportedStyleLibraryName);
-                                Project.AddStyleLibrary(sl);
-                                Project.SetCurrentStyleLibrary(sl);
-                            }
-
-                            // Add missing style.
-                            Project?.AddStyle(Project?.CurrentStyleLibrary, shape.Style);
-
-                            // Recreate styles dictionary.
-                            styles = GenerateStyleDictionaryByName();
-                        }
-                    }
+                    point.Shape = Project?.Options?.PointShape;
                 }
             }
             catch (Exception ex)
@@ -2403,7 +2339,7 @@ namespace Core2D.Editor
         private void RestoreShape(IBaseShape shape)
         {
             var shapes = Enumerable.Repeat(shape, 1).ToList();
-            TryToRestoreStyles(shapes);
+            ResetPointShapeToDefault(shapes);
             TryToRestoreRecords(shapes);
         }
 
@@ -2414,7 +2350,7 @@ namespace Core2D.Editor
             {
                 Deselect(Project?.CurrentContainer?.CurrentLayer);
 
-                TryToRestoreStyles(shapes);
+                ResetPointShapeToDefault(shapes);
                 TryToRestoreRecords(shapes);
 
                 Project.AddShapes(Project?.CurrentContainer?.CurrentLayer, shapes);
@@ -2479,7 +2415,7 @@ namespace Core2D.Editor
                     if (clone != null)
                     {
                         var shapes = clone.Shapes;
-                        TryToRestoreStyles(shapes);
+                        ResetPointShapeToDefault(shapes);
                         TryToRestoreRecords(shapes);
                         return clone;
                     }
@@ -2506,7 +2442,7 @@ namespace Core2D.Editor
                     if (clone != null)
                     {
                         var shapes = clone.Layers.SelectMany(l => l.Shapes);
-                        TryToRestoreStyles(shapes);
+                        ResetPointShapeToDefault(shapes);
                         TryToRestoreRecords(shapes);
                         clone.Template = template;
                         return clone;
@@ -2537,7 +2473,7 @@ namespace Core2D.Editor
                         {
                             var container = clone.Pages[i];
                             var shapes = container.Layers.SelectMany(l => l.Shapes);
-                            TryToRestoreStyles(shapes);
+                            ResetPointShapeToDefault(shapes);
                             TryToRestoreRecords(shapes);
                             container.Template = templates[i];
                         }
@@ -2765,7 +2701,7 @@ namespace Core2D.Editor
         public void OnDropRecordAsGroup(IRecord record, double x, double y)
         {
             var selected = Project.CurrentStyleLibrary.Selected;
-            var style = Project.Options.CloneStyle ? (IShapeStyle)selected.Copy(null) : selected;
+            var style = (IShapeStyle)selected.Copy(null);
             var point = Project?.Options?.PointShape;
             var layer = Project?.CurrentContainer?.CurrentLayer;
             double sx = Project.Options.SnapToGrid ? Snap(x, Project.Options.SnapX) : x;

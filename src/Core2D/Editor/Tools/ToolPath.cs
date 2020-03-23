@@ -176,7 +176,7 @@ namespace Core2D.Editor.Tools
             var style = editor.Project.CurrentStyleLibrary.Selected;
             Path = factory.CreatePathShape(
                 "Path",
-                editor.Project.Options.CloneStyle ? (IShapeStyle)style.Copy(null) : style,
+                (IShapeStyle)style.Copy(null),
                 Geometry,
                 editor.Project.Options.DefaultIsStroked,
                 editor.Project.Options.DefaultIsFilled);

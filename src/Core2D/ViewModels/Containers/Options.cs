@@ -26,7 +26,6 @@ namespace Core2D.Containers
         private IShapeStyle _pointStyle;
         private IShapeStyle _selectionStyle;
         private IShapeStyle _helperStyle;
-        private bool _cloneStyle = false;
 
         /// <summary>
         /// Gets or sets how grid snapping is handled. 
@@ -163,15 +162,6 @@ namespace Core2D.Containers
             set => Update(ref _helperStyle, value);
         }
 
-        /// <summary>
-        /// Gets or sets value indicating whether style is cloned during creation.
-        /// </summary>
-        public bool CloneStyle
-        {
-            get => _cloneStyle;
-            set => Update(ref _cloneStyle, value);
-        }
-
         /// <inheritdoc/>
         public override object Copy(IDictionary<object, object> shared)
         {
@@ -267,11 +257,5 @@ namespace Core2D.Containers
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
         public virtual bool ShouldSerializeHelperStyle() => _helperStyle != null;
-
-        /// <summary>
-        /// Check whether the <see cref="CloneStyle"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeCloneStyle() => _cloneStyle != default;
     }
 }

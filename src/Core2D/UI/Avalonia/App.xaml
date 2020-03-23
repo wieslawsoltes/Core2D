@@ -386,6 +386,10 @@
             <Setter Property="FontSize" Value="{DynamicResource FontSizeLarge}"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
         </Style>
+        <!-- TextBox -->
+        <Style Selector="TextBox">
+            <Setter Property="CaretBrush" Value="{DynamicResource ThemeForegroundBrush}"/>
+        </Style>
         <!-- TextBox.default -->
         <Style Selector="TextBox.default">
             <Setter Property="Padding" Value="2"/>

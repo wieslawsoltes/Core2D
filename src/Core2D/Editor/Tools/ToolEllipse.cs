@@ -82,7 +82,7 @@ namespace Core2D.Editor.Tools
                         var style = editor.Project.CurrentStyleLibrary.Selected;
                         _ellipse = factory.CreateEllipseShape(
                             sx, sy,
-                            editor.Project.Options.CloneStyle ? (IShapeStyle)style.Copy(null) : style,
+                            (IShapeStyle)style.Copy(null),
                             editor.Project.Options.PointShape,
                             editor.Project.Options.DefaultIsStroked,
                             editor.Project.Options.DefaultIsFilled);

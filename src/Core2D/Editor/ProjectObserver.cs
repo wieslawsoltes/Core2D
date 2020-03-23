@@ -692,6 +692,11 @@ namespace Core2D.Editor
 
             shape.PropertyChanged += ObserveShape;
 
+            if (shape.Style != null)
+            {
+                Add(shape.Style);
+            }
+
             if (shape.Data != null)
             {
                 Add(shape.Data);
@@ -864,6 +869,11 @@ namespace Core2D.Editor
             }
 
             shape.PropertyChanged -= ObserveShape;
+
+            if (shape.Style != null)
+            {
+                Remove(shape.Style);
+            }
 
             if (shape.Data != null)
             {

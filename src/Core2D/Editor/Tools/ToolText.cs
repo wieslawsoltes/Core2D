@@ -62,7 +62,7 @@ namespace Core2D.Editor.Tools
                         var style = editor.Project.CurrentStyleLibrary.Selected;
                         _text = factory.CreateTextShape(
                             sx, sy,
-                            editor.Project.Options.CloneStyle ? (IShapeStyle)style.Copy(null) : style,
+                            (IShapeStyle)style.Copy(null),
                             editor.Project.Options.PointShape,
                             "Text",
                             editor.Project.Options.DefaultIsStroked);

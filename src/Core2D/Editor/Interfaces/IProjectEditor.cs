@@ -180,6 +180,11 @@ namespace Core2D.Editor
         IEditorLayoutPlatform LayoutPlatform { get; }
 
         /// <summary>
+        /// Gets style editor.
+        /// </summary>
+        IStyleEditor StyleEditor { get; }
+
+        /// <summary>
         /// Try to snap input arguments.
         /// </summary>
         /// <param name="args">The input arguments.</param>
@@ -600,11 +605,6 @@ namespace Core2D.Editor
         /// Toggle <see cref="Options.TryToConnect"/> option.
         /// </summary>
         void OnToggleTryToConnect();
-
-        /// <summary>
-        /// Toggle <see cref="Options.CloneStyle"/> option.
-        /// </summary>
-        void OnToggleCloneStyle();
 
         /// <summary>
         /// Add database.

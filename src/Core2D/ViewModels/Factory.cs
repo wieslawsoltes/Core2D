@@ -999,8 +999,7 @@ namespace Core2D
                 DefaultIsClosed = true,
                 DefaultIsSmoothJoin = true,
                 DefaultFillRule = FillRule.EvenOdd,
-                TryToConnect = false,
-                CloneStyle = false
+                TryToConnect = false
             };
 
             options.SelectionStyle =
