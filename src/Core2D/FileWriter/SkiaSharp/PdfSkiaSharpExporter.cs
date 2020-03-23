@@ -28,7 +28,7 @@ namespace Core2D.FileWriter.SkiaSharpPdf
         }
 
         /// <inheritdoc/>
-        void IProjectExporter.Save(string path, IPageContainer container)
+        public void Save(string path, IPageContainer container)
         {
             using var stream = new SKFileWStream(path);
             using var pdf = SKDocument.CreatePdf(stream, _targetDpi);
@@ -37,7 +37,7 @@ namespace Core2D.FileWriter.SkiaSharpPdf
         }
 
         /// <inheritdoc/>
-        void IProjectExporter.Save(string path, IDocumentContainer document)
+        public void Save(string path, IDocumentContainer document)
         {
             using var stream = new SKFileWStream(path);
             using var pdf = SKDocument.CreatePdf(stream, _targetDpi);
@@ -51,7 +51,7 @@ namespace Core2D.FileWriter.SkiaSharpPdf
         }
 
         /// <inheritdoc/>
-        void IProjectExporter.Save(string path, IProjectContainer project)
+        public void Save(string path, IProjectContainer project)
         {
             using var stream = new SKFileWStream(path);
             using var pdf = SKDocument.CreatePdf(stream, _targetDpi);
