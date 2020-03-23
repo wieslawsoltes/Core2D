@@ -185,11 +185,11 @@
                 <MenuItem Header="Round" Command="{Binding StyleEditor.OnStyleSetLineCap}" CommandParameter="Round"/>
             </MenuItem>
             <MenuItem Header="_Dashes">
-                <MenuItem Header="_Solid" Command="{Binding StyleEditor.OnStyleSetDashes}" CommandParameter="Solid"/>
-                <MenuItem Header="_Dash" Command="{Binding StyleEditor.OnStyleSetDashes}" CommandParameter="Dash"/>
-                <MenuItem Header="D_ot" Command="{Binding StyleEditor.OnStyleSetDashes}" CommandParameter="Dot"/>
-                <MenuItem Header="DashDo_t" Command="{Binding StyleEditor.OnStyleSetDashes}" CommandParameter="DashDot"/>
-                <MenuItem Header="Das_hDotDot" Command="{Binding StyleEditor.OnStyleSetDashes}" CommandParameter="DashDotDot"/>
+                <MenuItem Header="_Solid" Command="{Binding StyleEditor.OnStyleSetDashes}" CommandParameter=""/>
+                <MenuItem Header="_Dash" Command="{Binding StyleEditor.OnStyleSetDashes}" CommandParameter="2 2"/>
+                <MenuItem Header="D_ot" Command="{Binding StyleEditor.OnStyleSetDashes}" CommandParameter="0 2"/>
+                <MenuItem Header="DashDo_t" Command="{Binding StyleEditor.OnStyleSetDashes}" CommandParameter="2 2 0 2"/>
+                <MenuItem Header="Das_hDotDot" Command="{Binding StyleEditor.OnStyleSetDashes}" CommandParameter="2 2 0 2 0 2"/>
             </MenuItem>
             <MenuItem Header="_Stroke">
                 <MenuItem Header="Blac_k" Command="{Binding StyleEditor.OnStyleSetStroke}" CommandParameter="Black"/>
@@ -202,16 +202,16 @@
                 <Separator/>
                 <MenuItem Header="Trans_parency">
                     <MenuItem Header="0%" Command="{Binding StyleEditor.OnStyleSetStrokeTransparency}" CommandParameter="0"/>
-                    <MenuItem Header="10%" Command="{Binding StyleEditor.OnStyleSetStrokeTransparency}" CommandParameter="10"/>
-                    <MenuItem Header="20%" Command="{Binding StyleEditor.OnStyleSetStrokeTransparency}" CommandParameter="20"/>
-                    <MenuItem Header="30%" Command="{Binding StyleEditor.OnStyleSetStrokeTransparency}" CommandParameter="30"/>
-                    <MenuItem Header="40%" Command="{Binding StyleEditor.OnStyleSetStrokeTransparency}" CommandParameter="40"/>
-                    <MenuItem Header="50%" Command="{Binding StyleEditor.OnStyleSetStrokeTransparency}" CommandParameter="50"/>
-                    <MenuItem Header="60%" Command="{Binding StyleEditor.OnStyleSetStrokeTransparency}" CommandParameter="60"/>
-                    <MenuItem Header="70%" Command="{Binding StyleEditor.OnStyleSetStrokeTransparency}" CommandParameter="70"/>
-                    <MenuItem Header="80%" Command="{Binding StyleEditor.OnStyleSetStrokeTransparency}" CommandParameter="80"/>
-                    <MenuItem Header="90%" Command="{Binding StyleEditor.OnStyleSetStrokeTransparency}" CommandParameter="90"/>
-                    <MenuItem Header="100%" Command="{Binding StyleEditor.OnStyleSetStrokeTransparency}" CommandParameter="100"/>
+                    <MenuItem Header="10%" Command="{Binding StyleEditor.OnStyleSetStrokeTransparency}" CommandParameter="25"/>
+                    <MenuItem Header="20%" Command="{Binding StyleEditor.OnStyleSetStrokeTransparency}" CommandParameter="51"/>
+                    <MenuItem Header="30%" Command="{Binding StyleEditor.OnStyleSetStrokeTransparency}" CommandParameter="76"/>
+                    <MenuItem Header="40%" Command="{Binding StyleEditor.OnStyleSetStrokeTransparency}" CommandParameter="102"/>
+                    <MenuItem Header="50%" Command="{Binding StyleEditor.OnStyleSetStrokeTransparency}" CommandParameter="127"/>
+                    <MenuItem Header="60%" Command="{Binding StyleEditor.OnStyleSetStrokeTransparency}" CommandParameter="153"/>
+                    <MenuItem Header="70%" Command="{Binding StyleEditor.OnStyleSetStrokeTransparency}" CommandParameter="178"/>
+                    <MenuItem Header="80%" Command="{Binding StyleEditor.OnStyleSetStrokeTransparency}" CommandParameter="204"/>
+                    <MenuItem Header="90%" Command="{Binding StyleEditor.OnStyleSetStrokeTransparency}" CommandParameter="229"/>
+                    <MenuItem Header="100%" Command="{Binding StyleEditor.OnStyleSetStrokeTransparency}" CommandParameter="255"/>
                 </MenuItem>
             </MenuItem>
             <MenuItem Header="_Fill">
@@ -224,16 +224,16 @@
                 <MenuItem Header="_Yellow" Command="{Binding StyleEditor.OnStyleSetFill}" CommandParameter="Yellow"/>
                 <MenuItem Header="Trans_parency">
                     <MenuItem Header="0%" Command="{Binding StyleEditor.OnStyleSetFillTransparency}" CommandParameter="0"/>
-                    <MenuItem Header="10%" Command="{Binding StyleEditor.OnStyleSetFillTransparency}" CommandParameter="10"/>
-                    <MenuItem Header="20%" Command="{Binding StyleEditor.OnStyleSetFillTransparency}" CommandParameter="20"/>
-                    <MenuItem Header="30%" Command="{Binding StyleEditor.OnStyleSetFillTransparency}" CommandParameter="30"/>
-                    <MenuItem Header="40%" Command="{Binding StyleEditor.OnStyleSetFillTransparency}" CommandParameter="40"/>
-                    <MenuItem Header="50%" Command="{Binding StyleEditor.OnStyleSetFillTransparency}" CommandParameter="50"/>
-                    <MenuItem Header="60%" Command="{Binding StyleEditor.OnStyleSetFillTransparency}" CommandParameter="60"/>
-                    <MenuItem Header="70%" Command="{Binding StyleEditor.OnStyleSetFillTransparency}" CommandParameter="70"/>
-                    <MenuItem Header="80%" Command="{Binding StyleEditor.OnStyleSetFillTransparency}" CommandParameter="80"/>
-                    <MenuItem Header="90%" Command="{Binding StyleEditor.OnStyleSetFillTransparency}" CommandParameter="90"/>
-                    <MenuItem Header="100%" Command="{Binding StyleEditor.OnStyleSetFillTransparency}" CommandParameter="100"/>
+                    <MenuItem Header="10%" Command="{Binding StyleEditor.OnStyleSetFillTransparency}" CommandParameter="25"/>
+                    <MenuItem Header="20%" Command="{Binding StyleEditor.OnStyleSetFillTransparency}" CommandParameter="51"/>
+                    <MenuItem Header="30%" Command="{Binding StyleEditor.OnStyleSetFillTransparency}" CommandParameter="76"/>
+                    <MenuItem Header="40%" Command="{Binding StyleEditor.OnStyleSetFillTransparency}" CommandParameter="102"/>
+                    <MenuItem Header="50%" Command="{Binding StyleEditor.OnStyleSetFillTransparency}" CommandParameter="127"/>
+                    <MenuItem Header="60%" Command="{Binding StyleEditor.OnStyleSetFillTransparency}" CommandParameter="153"/>
+                    <MenuItem Header="70%" Command="{Binding StyleEditor.OnStyleSetFillTransparency}" CommandParameter="178"/>
+                    <MenuItem Header="80%" Command="{Binding StyleEditor.OnStyleSetFillTransparency}" CommandParameter="204"/>
+                    <MenuItem Header="90%" Command="{Binding StyleEditor.OnStyleSetFillTransparency}" CommandParameter="229"/>
+                    <MenuItem Header="100%" Command="{Binding StyleEditor.OnStyleSetFillTransparency}" CommandParameter="255"/>
                 </MenuItem>
             </MenuItem>
             <MenuItem Header="_Text">
@@ -241,30 +241,30 @@
                     <MenuItem Header="_Calibri" Command="{Binding StyleEditor.OnStyleSetFontName}" CommandParameter="Calibri"/>
                 </MenuItem>
                 <MenuItem Header="Font _Size">
-                    <MenuItem Header="8" Command="{Binding StyleEditor.OnStyleSetFontSize}" CommandParameter="xxx"/>
-                    <MenuItem Header="9" Command="{Binding StyleEditor.OnStyleSetFontSize}" CommandParameter="xxx"/>
-                    <MenuItem Header="10" Command="{Binding StyleEditor.OnStyleSetFontSize}" CommandParameter="xxx"/>
-                    <MenuItem Header="10.5" Command="{Binding StyleEditor.OnStyleSetFontSize}" CommandParameter="xxx"/>
-                    <MenuItem Header="11" Command="{Binding StyleEditor.OnStyleSetFontSize}" CommandParameter="xxx"/>
-                    <MenuItem Header="12" Command="{Binding StyleEditor.OnStyleSetFontSize}" CommandParameter="xxx"/>
-                    <MenuItem Header="14" Command="{Binding StyleEditor.OnStyleSetFontSize}" CommandParameter="xxx"/>
-                    <MenuItem Header="16" Command="{Binding StyleEditor.OnStyleSetFontSize}" CommandParameter="xxx"/>
-                    <MenuItem Header="18" Command="{Binding StyleEditor.OnStyleSetFontSize}" CommandParameter="xxx"/>
-                    <MenuItem Header="20" Command="{Binding StyleEditor.OnStyleSetFontSize}" CommandParameter="xxx"/>
-                    <MenuItem Header="24" Command="{Binding StyleEditor.OnStyleSetFontSize}" CommandParameter="xxx"/>
-                    <MenuItem Header="28" Command="{Binding StyleEditor.OnStyleSetFontSize}" CommandParameter="xxx"/>
-                    <MenuItem Header="32" Command="{Binding StyleEditor.OnStyleSetFontSize}" CommandParameter="xxx"/>
-                    <MenuItem Header="36" Command="{Binding StyleEditor.OnStyleSetFontSize}" CommandParameter="xxx"/>
-                    <MenuItem Header="40" Command="{Binding StyleEditor.OnStyleSetFontSize}" CommandParameter="xxx"/>
-                    <MenuItem Header="44" Command="{Binding StyleEditor.OnStyleSetFontSize}" CommandParameter="xxx"/>
-                    <MenuItem Header="48" Command="{Binding StyleEditor.OnStyleSetFontSize}" CommandParameter="xxx"/>
-                    <MenuItem Header="54" Command="{Binding StyleEditor.OnStyleSetFontSize}" CommandParameter="xxx"/>
-                    <MenuItem Header="60" Command="{Binding StyleEditor.OnStyleSetFontSize}" CommandParameter="xxx"/>
-                    <MenuItem Header="66" Command="{Binding StyleEditor.OnStyleSetFontSize}" CommandParameter="xxx"/>
-                    <MenuItem Header="72" Command="{Binding StyleEditor.OnStyleSetFontSize}" CommandParameter="xxx"/>
-                    <MenuItem Header="80" Command="{Binding StyleEditor.OnStyleSetFontSize}" CommandParameter="xxx"/>
-                    <MenuItem Header="88" Command="{Binding StyleEditor.OnStyleSetFontSize}" CommandParameter="xxx"/>
-                    <MenuItem Header="96" Command="{Binding StyleEditor.OnStyleSetFontSize}" CommandParameter="xxx"/>
+                    <MenuItem Header="8" Command="{Binding StyleEditor.OnStyleSetFontSize}" CommandParameter="8"/>
+                    <MenuItem Header="9" Command="{Binding StyleEditor.OnStyleSetFontSize}" CommandParameter="9"/>
+                    <MenuItem Header="10" Command="{Binding StyleEditor.OnStyleSetFontSize}" CommandParameter="10"/>
+                    <MenuItem Header="10.5" Command="{Binding StyleEditor.OnStyleSetFontSize}" CommandParameter="10.5"/>
+                    <MenuItem Header="11" Command="{Binding StyleEditor.OnStyleSetFontSize}" CommandParameter="11"/>
+                    <MenuItem Header="12" Command="{Binding StyleEditor.OnStyleSetFontSize}" CommandParameter="12"/>
+                    <MenuItem Header="14" Command="{Binding StyleEditor.OnStyleSetFontSize}" CommandParameter="14"/>
+                    <MenuItem Header="16" Command="{Binding StyleEditor.OnStyleSetFontSize}" CommandParameter="16"/>
+                    <MenuItem Header="18" Command="{Binding StyleEditor.OnStyleSetFontSize}" CommandParameter="18"/>
+                    <MenuItem Header="20" Command="{Binding StyleEditor.OnStyleSetFontSize}" CommandParameter="20"/>
+                    <MenuItem Header="24" Command="{Binding StyleEditor.OnStyleSetFontSize}" CommandParameter="24"/>
+                    <MenuItem Header="28" Command="{Binding StyleEditor.OnStyleSetFontSize}" CommandParameter="28"/>
+                    <MenuItem Header="32" Command="{Binding StyleEditor.OnStyleSetFontSize}" CommandParameter="32"/>
+                    <MenuItem Header="36" Command="{Binding StyleEditor.OnStyleSetFontSize}" CommandParameter="36"/>
+                    <MenuItem Header="40" Command="{Binding StyleEditor.OnStyleSetFontSize}" CommandParameter="40"/>
+                    <MenuItem Header="44" Command="{Binding StyleEditor.OnStyleSetFontSize}" CommandParameter="44"/>
+                    <MenuItem Header="48" Command="{Binding StyleEditor.OnStyleSetFontSize}" CommandParameter="48"/>
+                    <MenuItem Header="54" Command="{Binding StyleEditor.OnStyleSetFontSize}" CommandParameter="54"/>
+                    <MenuItem Header="60" Command="{Binding StyleEditor.OnStyleSetFontSize}" CommandParameter="60"/>
+                    <MenuItem Header="66" Command="{Binding StyleEditor.OnStyleSetFontSize}" CommandParameter="66"/>
+                    <MenuItem Header="72" Command="{Binding StyleEditor.OnStyleSetFontSize}" CommandParameter="72"/>
+                    <MenuItem Header="80" Command="{Binding StyleEditor.OnStyleSetFontSize}" CommandParameter="80"/>
+                    <MenuItem Header="88" Command="{Binding StyleEditor.OnStyleSetFontSize}" CommandParameter="88"/>
+                    <MenuItem Header="96" Command="{Binding StyleEditor.OnStyleSetFontSize}" CommandParameter="96"/>
                 </MenuItem>
                 <MenuItem Header="Font S_tyle">
                     <MenuItem Header="_Regular" Command="{Binding StyleEditor.OnStyleSetFontStyle}" CommandParameter="Regular"/>
@@ -399,11 +399,11 @@
                             <MenuItem Header="Round" Command="{Binding StyleEditor.OnStyleSetStartArrowLineCap}" CommandParameter="Round"/>
                         </MenuItem>
                         <MenuItem Header="_Dashes">
-                            <MenuItem Header="_Solid" Command="{Binding StyleEditor.OnStyleSetStartArrowDashes}" CommandParameter="Solid"/>
-                            <MenuItem Header="_Dash" Command="{Binding StyleEditor.OnStyleSetStartArrowDashes}" CommandParameter="Dash"/>
-                            <MenuItem Header="D_ot" Command="{Binding StyleEditor.OnStyleSetStartArrowDashes}" CommandParameter="Dot"/>
-                            <MenuItem Header="DashDo_t" Command="{Binding StyleEditor.OnStyleSetStartArrowDashes}" CommandParameter="DashDot"/>
-                            <MenuItem Header="Das_hDotDot" Command="{Binding StyleEditor.OnStyleSetStartArrowDashes}" CommandParameter="DashDotDot"/>
+                            <MenuItem Header="_Solid" Command="{Binding StyleEditor.OnStyleSetStartArrowDashes}" CommandParameter=""/>
+                            <MenuItem Header="_Dash" Command="{Binding StyleEditor.OnStyleSetStartArrowDashes}" CommandParameter="2 2"/>
+                            <MenuItem Header="D_ot" Command="{Binding StyleEditor.OnStyleSetStartArrowDashes}" CommandParameter="0 2"/>
+                            <MenuItem Header="DashDo_t" Command="{Binding StyleEditor.OnStyleSetStartArrowDashes}" CommandParameter="2 2 0 2"/>
+                            <MenuItem Header="Das_hDotDot" Command="{Binding StyleEditor.OnStyleSetStartArrowDashes}" CommandParameter="2 2 0 2 0 2"/>
                         </MenuItem>
                         <MenuItem Header="_Stroke">
                             <MenuItem Header="Blac_k" Command="{Binding StyleEditor.OnStyleSetStartArrowStroke}" CommandParameter="Black"/>
@@ -416,16 +416,16 @@
                             <Separator/>
                             <MenuItem Header="Trans_parency">
                                 <MenuItem Header="0%" Command="{Binding StyleEditor.OnStyleSetStartArrowStrokeTransparency}" CommandParameter="0"/>
-                                <MenuItem Header="10%" Command="{Binding StyleEditor.OnStyleSetStartArrowStrokeTransparency}" CommandParameter="10"/>
-                                <MenuItem Header="20%" Command="{Binding StyleEditor.OnStyleSetStartArrowStrokeTransparency}" CommandParameter="20"/>
-                                <MenuItem Header="30%" Command="{Binding StyleEditor.OnStyleSetStartArrowStrokeTransparency}" CommandParameter="30"/>
-                                <MenuItem Header="40%" Command="{Binding StyleEditor.OnStyleSetStartArrowStrokeTransparency}" CommandParameter="40"/>
-                                <MenuItem Header="50%" Command="{Binding StyleEditor.OnStyleSetStartArrowStrokeTransparency}" CommandParameter="50"/>
-                                <MenuItem Header="60%" Command="{Binding StyleEditor.OnStyleSetStartArrowStrokeTransparency}" CommandParameter="60"/>
-                                <MenuItem Header="70%" Command="{Binding StyleEditor.OnStyleSetStartArrowStrokeTransparency}" CommandParameter="70"/>
-                                <MenuItem Header="80%" Command="{Binding StyleEditor.OnStyleSetStartArrowStrokeTransparency}" CommandParameter="80"/>
-                                <MenuItem Header="90%" Command="{Binding StyleEditor.OnStyleSetStartArrowStrokeTransparency}" CommandParameter="90"/>
-                                <MenuItem Header="100%" Command="{Binding StyleEditor.OnStyleSetStartArrowStrokeTransparency}" CommandParameter="100"/>
+                                <MenuItem Header="10%" Command="{Binding StyleEditor.OnStyleSetStartArrowStrokeTransparency}" CommandParameter="25"/>
+                                <MenuItem Header="20%" Command="{Binding StyleEditor.OnStyleSetStartArrowStrokeTransparency}" CommandParameter="51"/>
+                                <MenuItem Header="30%" Command="{Binding StyleEditor.OnStyleSetStartArrowStrokeTransparency}" CommandParameter="76"/>
+                                <MenuItem Header="40%" Command="{Binding StyleEditor.OnStyleSetStartArrowStrokeTransparency}" CommandParameter="102"/>
+                                <MenuItem Header="50%" Command="{Binding StyleEditor.OnStyleSetStartArrowStrokeTransparency}" CommandParameter="127"/>
+                                <MenuItem Header="60%" Command="{Binding StyleEditor.OnStyleSetStartArrowStrokeTransparency}" CommandParameter="153"/>
+                                <MenuItem Header="70%" Command="{Binding StyleEditor.OnStyleSetStartArrowStrokeTransparency}" CommandParameter="178"/>
+                                <MenuItem Header="80%" Command="{Binding StyleEditor.OnStyleSetStartArrowStrokeTransparency}" CommandParameter="204"/>
+                                <MenuItem Header="90%" Command="{Binding StyleEditor.OnStyleSetStartArrowStrokeTransparency}" CommandParameter="229"/>
+                                <MenuItem Header="100%" Command="{Binding StyleEditor.OnStyleSetStartArrowStrokeTransparency}" CommandParameter="255"/>
                             </MenuItem>
                         </MenuItem>
                         <MenuItem Header="_Fill">
@@ -438,16 +438,16 @@
                             <MenuItem Header="_Yellow" Command="{Binding StyleEditor.OnStyleSetStartArrowFill}" CommandParameter="Yellow"/>
                             <MenuItem Header="Trans_parency">
                                 <MenuItem Header="0%" Command="{Binding StyleEditor.OnStyleSetStartArrowFillTransparency}" CommandParameter="0"/>
-                                <MenuItem Header="10%" Command="{Binding StyleEditor.OnStyleSetStartArrowFillTransparency}" CommandParameter="10"/>
-                                <MenuItem Header="20%" Command="{Binding StyleEditor.OnStyleSetStartArrowFillTransparency}" CommandParameter="20"/>
-                                <MenuItem Header="30%" Command="{Binding StyleEditor.OnStyleSetStartArrowFillTransparency}" CommandParameter="30"/>
-                                <MenuItem Header="40%" Command="{Binding StyleEditor.OnStyleSetStartArrowFillTransparency}" CommandParameter="40"/>
-                                <MenuItem Header="50%" Command="{Binding StyleEditor.OnStyleSetStartArrowFillTransparency}" CommandParameter="50"/>
-                                <MenuItem Header="60%" Command="{Binding StyleEditor.OnStyleSetStartArrowFillTransparency}" CommandParameter="60"/>
-                                <MenuItem Header="70%" Command="{Binding StyleEditor.OnStyleSetStartArrowFillTransparency}" CommandParameter="70"/>
-                                <MenuItem Header="80%" Command="{Binding StyleEditor.OnStyleSetStartArrowFillTransparency}" CommandParameter="80"/>
-                                <MenuItem Header="90%" Command="{Binding StyleEditor.OnStyleSetStartArrowFillTransparency}" CommandParameter="90"/>
-                                <MenuItem Header="100%" Command="{Binding StyleEditor.OnStyleSetStartArrowFillTransparency}" CommandParameter="100"/>
+                                <MenuItem Header="10%" Command="{Binding StyleEditor.OnStyleSetStartArrowFillTransparency}" CommandParameter="25"/>
+                                <MenuItem Header="20%" Command="{Binding StyleEditor.OnStyleSetStartArrowFillTransparency}" CommandParameter="51"/>
+                                <MenuItem Header="30%" Command="{Binding StyleEditor.OnStyleSetStartArrowFillTransparency}" CommandParameter="76"/>
+                                <MenuItem Header="40%" Command="{Binding StyleEditor.OnStyleSetStartArrowFillTransparency}" CommandParameter="102"/>
+                                <MenuItem Header="50%" Command="{Binding StyleEditor.OnStyleSetStartArrowFillTransparency}" CommandParameter="127"/>
+                                <MenuItem Header="60%" Command="{Binding StyleEditor.OnStyleSetStartArrowFillTransparency}" CommandParameter="153"/>
+                                <MenuItem Header="70%" Command="{Binding StyleEditor.OnStyleSetStartArrowFillTransparency}" CommandParameter="178"/>
+                                <MenuItem Header="80%" Command="{Binding StyleEditor.OnStyleSetStartArrowFillTransparency}" CommandParameter="204"/>
+                                <MenuItem Header="90%" Command="{Binding StyleEditor.OnStyleSetStartArrowFillTransparency}" CommandParameter="229"/>
+                                <MenuItem Header="100%" Command="{Binding StyleEditor.OnStyleSetStartArrowFillTransparency}" CommandParameter="255"/>
                             </MenuItem>
                         </MenuItem>
                     </MenuItem>
@@ -505,11 +505,11 @@
                             <MenuItem Header="Round" Command="{Binding StyleEditor.OnStyleSetEndArrowLineCap}" CommandParameter="Round"/>
                         </MenuItem>
                         <MenuItem Header="_Dashes">
-                            <MenuItem Header="_Solid" Command="{Binding StyleEditor.OnStyleSetEndArrowDashes}" CommandParameter="Solid"/>
-                            <MenuItem Header="_Dash" Command="{Binding StyleEditor.OnStyleSetEndArrowDashes}" CommandParameter="Dash"/>
-                            <MenuItem Header="D_ot" Command="{Binding StyleEditor.OnStyleSetEndArrowDashes}" CommandParameter="Dot"/>
-                            <MenuItem Header="DashDo_t" Command="{Binding StyleEditor.OnStyleSetEndArrowDashes}" CommandParameter="DashDot"/>
-                            <MenuItem Header="Das_hDotDot" Command="{Binding StyleEditor.OnStyleSetEndArrowDashes}" CommandParameter="DashDotDot"/>
+                            <MenuItem Header="_Solid" Command="{Binding StyleEditor.OnStyleSetEndArrowDashes}" CommandParameter=""/>
+                            <MenuItem Header="_Dash" Command="{Binding StyleEditor.OnStyleSetEndArrowDashes}" CommandParameter="2 2"/>
+                            <MenuItem Header="D_ot" Command="{Binding StyleEditor.OnStyleSetEndArrowDashes}" CommandParameter="0 2"/>
+                            <MenuItem Header="DashDo_t" Command="{Binding StyleEditor.OnStyleSetEndArrowDashes}" CommandParameter="2 2 0 2"/>
+                            <MenuItem Header="Das_hDotDot" Command="{Binding StyleEditor.OnStyleSetEndArrowDashes}" CommandParameter="2 2 0 2 0 2"/>
                         </MenuItem>
                         <MenuItem Header="_Stroke">
                             <MenuItem Header="Blac_k" Command="{Binding StyleEditor.OnStyleSetEndArrowStroke}" CommandParameter="Black"/>
@@ -522,16 +522,16 @@
                             <Separator/>
                             <MenuItem Header="Trans_parency">
                                 <MenuItem Header="0%" Command="{Binding StyleEditor.OnStyleSetEndArrowStrokeTransparency}" CommandParameter="0"/>
-                                <MenuItem Header="10%" Command="{Binding StyleEditor.OnStyleSetEndArrowStrokeTransparency}" CommandParameter="10"/>
-                                <MenuItem Header="20%" Command="{Binding StyleEditor.OnStyleSetEndArrowStrokeTransparency}" CommandParameter="20"/>
-                                <MenuItem Header="30%" Command="{Binding StyleEditor.OnStyleSetEndArrowStrokeTransparency}" CommandParameter="30"/>
-                                <MenuItem Header="40%" Command="{Binding StyleEditor.OnStyleSetEndArrowStrokeTransparency}" CommandParameter="40"/>
-                                <MenuItem Header="50%" Command="{Binding StyleEditor.OnStyleSetEndArrowStrokeTransparency}" CommandParameter="50"/>
-                                <MenuItem Header="60%" Command="{Binding StyleEditor.OnStyleSetEndArrowStrokeTransparency}" CommandParameter="60"/>
-                                <MenuItem Header="70%" Command="{Binding StyleEditor.OnStyleSetEndArrowStrokeTransparency}" CommandParameter="70"/>
-                                <MenuItem Header="80%" Command="{Binding StyleEditor.OnStyleSetEndArrowStrokeTransparency}" CommandParameter="80"/>
-                                <MenuItem Header="90%" Command="{Binding StyleEditor.OnStyleSetEndArrowStrokeTransparency}" CommandParameter="90"/>
-                                <MenuItem Header="100%" Command="{Binding StyleEditor.OnStyleSetEndArrowStrokeTransparency}" CommandParameter="100"/>
+                                <MenuItem Header="10%" Command="{Binding StyleEditor.OnStyleSetEndArrowStrokeTransparency}" CommandParameter="25"/>
+                                <MenuItem Header="20%" Command="{Binding StyleEditor.OnStyleSetEndArrowStrokeTransparency}" CommandParameter="51"/>
+                                <MenuItem Header="30%" Command="{Binding StyleEditor.OnStyleSetEndArrowStrokeTransparency}" CommandParameter="76"/>
+                                <MenuItem Header="40%" Command="{Binding StyleEditor.OnStyleSetEndArrowStrokeTransparency}" CommandParameter="102"/>
+                                <MenuItem Header="50%" Command="{Binding StyleEditor.OnStyleSetEndArrowStrokeTransparency}" CommandParameter="127"/>
+                                <MenuItem Header="60%" Command="{Binding StyleEditor.OnStyleSetEndArrowStrokeTransparency}" CommandParameter="153"/>
+                                <MenuItem Header="70%" Command="{Binding StyleEditor.OnStyleSetEndArrowStrokeTransparency}" CommandParameter="178"/>
+                                <MenuItem Header="80%" Command="{Binding StyleEditor.OnStyleSetEndArrowStrokeTransparency}" CommandParameter="204"/>
+                                <MenuItem Header="90%" Command="{Binding StyleEditor.OnStyleSetEndArrowStrokeTransparency}" CommandParameter="229"/>
+                                <MenuItem Header="100%" Command="{Binding StyleEditor.OnStyleSetEndArrowStrokeTransparency}" CommandParameter="255"/>
                             </MenuItem>
                         </MenuItem>
                         <MenuItem Header="_Fill">
@@ -544,16 +544,16 @@
                             <MenuItem Header="_Yellow" Command="{Binding StyleEditor.OnStyleSetEndArrowFill}" CommandParameter="Yellow"/>
                             <MenuItem Header="Trans_parency">
                                 <MenuItem Header="0%" Command="{Binding StyleEditor.OnStyleSetEndArrowFillTransparency}" CommandParameter="0"/>
-                                <MenuItem Header="10%" Command="{Binding StyleEditor.OnStyleSetEndArrowFillTransparency}" CommandParameter="10"/>
-                                <MenuItem Header="20%" Command="{Binding StyleEditor.OnStyleSetEndArrowFillTransparency}" CommandParameter="20"/>
-                                <MenuItem Header="30%" Command="{Binding StyleEditor.OnStyleSetEndArrowFillTransparency}" CommandParameter="30"/>
-                                <MenuItem Header="40%" Command="{Binding StyleEditor.OnStyleSetEndArrowFillTransparency}" CommandParameter="40"/>
-                                <MenuItem Header="50%" Command="{Binding StyleEditor.OnStyleSetEndArrowFillTransparency}" CommandParameter="50"/>
-                                <MenuItem Header="60%" Command="{Binding StyleEditor.OnStyleSetEndArrowFillTransparency}" CommandParameter="60"/>
-                                <MenuItem Header="70%" Command="{Binding StyleEditor.OnStyleSetEndArrowFillTransparency}" CommandParameter="70"/>
-                                <MenuItem Header="80%" Command="{Binding StyleEditor.OnStyleSetEndArrowFillTransparency}" CommandParameter="80"/>
-                                <MenuItem Header="90%" Command="{Binding StyleEditor.OnStyleSetEndArrowFillTransparency}" CommandParameter="90"/>
-                                <MenuItem Header="100%" Command="{Binding StyleEditor.OnStyleSetEndArrowFillTransparency}" CommandParameter="100"/>
+                                <MenuItem Header="10%" Command="{Binding StyleEditor.OnStyleSetEndArrowFillTransparency}" CommandParameter="25"/>
+                                <MenuItem Header="20%" Command="{Binding StyleEditor.OnStyleSetEndArrowFillTransparency}" CommandParameter="51"/>
+                                <MenuItem Header="30%" Command="{Binding StyleEditor.OnStyleSetEndArrowFillTransparency}" CommandParameter="76"/>
+                                <MenuItem Header="40%" Command="{Binding StyleEditor.OnStyleSetEndArrowFillTransparency}" CommandParameter="102"/>
+                                <MenuItem Header="50%" Command="{Binding StyleEditor.OnStyleSetEndArrowFillTransparency}" CommandParameter="127"/>
+                                <MenuItem Header="60%" Command="{Binding StyleEditor.OnStyleSetEndArrowFillTransparency}" CommandParameter="153"/>
+                                <MenuItem Header="70%" Command="{Binding StyleEditor.OnStyleSetEndArrowFillTransparency}" CommandParameter="178"/>
+                                <MenuItem Header="80%" Command="{Binding StyleEditor.OnStyleSetEndArrowFillTransparency}" CommandParameter="204"/>
+                                <MenuItem Header="90%" Command="{Binding StyleEditor.OnStyleSetEndArrowFillTransparency}" CommandParameter="229"/>
+                                <MenuItem Header="100%" Command="{Binding StyleEditor.OnStyleSetEndArrowFillTransparency}" CommandParameter="255"/>
                             </MenuItem>
                         </MenuItem>
                     </MenuItem>

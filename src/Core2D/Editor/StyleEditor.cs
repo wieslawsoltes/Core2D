@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Globalization;
 using System.Linq;
 using Core2D.Interfaces;
 using Core2D.Renderer;
@@ -34,18 +35,32 @@ namespace Core2D.Editor
         /// <inheritdoc/>
         public void OnStyleSetThickness(string thickness)
         {
+            if (!double.TryParse(thickness, NumberStyles.AllowDecimalPoint | NumberStyles.AllowThousands, CultureInfo.InvariantCulture, out var value))
+            {
+                return;
+            }
+
             var editor = _serviceProvider.GetService<IProjectEditor>();
 
             if (editor.Renderers[0]?.State?.SelectedShape != null)
             {
-                // TODO:
+                var shape = editor.Renderers[0]?.State?.SelectedShape;
+                var style = shape.Style;
+                if (style != null)
+                {
+                    style.Thickness = value;
+                }
             }
 
             if (editor.Renderers?[0]?.State?.SelectedShapes?.Count > 0)
             {
                 foreach (var shape in editor.Renderers[0].State.SelectedShapes)
                 {
-                    // TODO:
+                    var style = shape.Style;
+                    if (style != null)
+                    {
+                        style.Thickness = value;
+                    }
                 }
             }
         }
@@ -53,37 +68,206 @@ namespace Core2D.Editor
         /// <inheritdoc/>
         public void OnStyleSetLineCap(string lineCap)
         {
-            // TODO:
+            if (!Enum.TryParse<LineCap>(lineCap, true, out var value))
+            {
+                return;
+            }
+
+            var editor = _serviceProvider.GetService<IProjectEditor>();
+
+            if (editor.Renderers[0]?.State?.SelectedShape != null)
+            {
+                var shape = editor.Renderers[0]?.State?.SelectedShape;
+                var style = shape.Style;
+                if (style != null)
+                {
+                    style.LineCap = value;
+                }
+            }
+
+            if (editor.Renderers?[0]?.State?.SelectedShapes?.Count > 0)
+            {
+                foreach (var shape in editor.Renderers[0].State.SelectedShapes)
+                {
+                    var style = shape.Style;
+                    if (style != null)
+                    {
+                        style.LineCap = value;
+                    }
+                }
+            }
         }
 
         /// <inheritdoc/>
         public void OnStyleSetDashes(string dashes)
         {
-            // TODO:
+            var editor = _serviceProvider.GetService<IProjectEditor>();
+
+            if (editor.Renderers[0]?.State?.SelectedShape != null)
+            {
+                var shape = editor.Renderers[0]?.State?.SelectedShape;
+                var style = shape.Style;
+                if (style != null)
+                {
+                    style.Dashes = dashes;
+                }
+            }
+
+            if (editor.Renderers?[0]?.State?.SelectedShapes?.Count > 0)
+            {
+                foreach (var shape in editor.Renderers[0].State.SelectedShapes)
+                {
+                    var style = shape.Style;
+                    if (style != null)
+                    {
+                        style.Dashes = dashes;
+                    }
+                }
+            }
         }
 
         /// <inheritdoc/>
         public void OnStyleSetStroke(string color)
         {
-            // TODO:
+            IColor value = null;
+
+            try
+            {
+                value = ArgbColor.Parse(color);
+            }
+            catch
+            {
+                return;
+            }
+
+            var editor = _serviceProvider.GetService<IProjectEditor>();
+
+            if (editor.Renderers[0]?.State?.SelectedShape != null)
+            {
+                var shape = editor.Renderers[0]?.State?.SelectedShape;
+                var style = shape.Style;
+                if (style != null)
+                {
+                    style.Stroke = value;
+                }
+            }
+
+            if (editor.Renderers?[0]?.State?.SelectedShapes?.Count > 0)
+            {
+                foreach (var shape in editor.Renderers[0].State.SelectedShapes)
+                {
+                    var style = shape.Style;
+                    if (style != null)
+                    {
+                        style.Stroke = value;
+                    }
+                }
+            }
         }
 
         /// <inheritdoc/>
         public void OnStyleSetStrokeTransparency(string alpha)
         {
-            // TODO:
+            if (!byte.TryParse(alpha, NumberStyles.AllowDecimalPoint | NumberStyles.AllowThousands, CultureInfo.InvariantCulture, out var value))
+            {
+                return;
+            }
+
+            var editor = _serviceProvider.GetService<IProjectEditor>();
+
+            if (editor.Renderers[0]?.State?.SelectedShape != null)
+            {
+                var shape = editor.Renderers[0]?.State?.SelectedShape;
+                var style = shape.Style;
+                if (style != null && style.Stroke is IArgbColor argbColor)
+                {
+                    argbColor.A = value;
+                }
+            }
+
+            if (editor.Renderers?[0]?.State?.SelectedShapes?.Count > 0)
+            {
+                foreach (var shape in editor.Renderers[0].State.SelectedShapes)
+                {
+                    var style = shape.Style;
+                    if (style != null && style.Stroke is IArgbColor argbColor)
+                    {
+                        argbColor.A = value;
+                    }
+                }
+            }
         }
 
         /// <inheritdoc/>
         public void OnStyleSetFill(string color)
         {
-            // TODO:
+            IColor value = null;
+
+            try
+            {
+                value = ArgbColor.Parse(color);
+            }
+            catch
+            {
+                return;
+            }
+
+            var editor = _serviceProvider.GetService<IProjectEditor>();
+
+            if (editor.Renderers[0]?.State?.SelectedShape != null)
+            {
+                var shape = editor.Renderers[0]?.State?.SelectedShape;
+                var style = shape.Style;
+                if (style != null)
+                {
+                    style.Fill = value;
+                }
+            }
+
+            if (editor.Renderers?[0]?.State?.SelectedShapes?.Count > 0)
+            {
+                foreach (var shape in editor.Renderers[0].State.SelectedShapes)
+                {
+                    var style = shape.Style;
+                    if (style != null)
+                    {
+                        style.Fill = value;
+                    }
+                }
+            }
         }
 
         /// <inheritdoc/>
         public void OnStyleSetFillTransparency(string alpha)
         {
-            // TODO:
+            if (!byte.TryParse(alpha, NumberStyles.AllowDecimalPoint | NumberStyles.AllowThousands, CultureInfo.InvariantCulture, out var value))
+            {
+                return;
+            }
+
+            var editor = _serviceProvider.GetService<IProjectEditor>();
+
+            if (editor.Renderers[0]?.State?.SelectedShape != null)
+            {
+                var shape = editor.Renderers[0]?.State?.SelectedShape;
+                var style = shape.Style;
+                if (style != null && style.Fill is IArgbColor argbColor)
+                {
+                    argbColor.A = value;
+                }
+            }
+
+            if (editor.Renderers?[0]?.State?.SelectedShapes?.Count > 0)
+            {
+                foreach (var shape in editor.Renderers[0].State.SelectedShapes)
+                {
+                    var style = shape.Style;
+                    if (style != null && style.Fill is IArgbColor argbColor)
+                    {
+                        argbColor.A = value;
+                    }
+                }
+            }
         }
 
         /// <inheritdoc/>
