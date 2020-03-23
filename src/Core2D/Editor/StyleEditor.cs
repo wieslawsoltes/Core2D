@@ -809,7 +809,34 @@ namespace Core2D.Editor
         /// <inheritdoc/>
         public void OnStyleSetStartArrowThickness(string thickness)
         {
-            // TODO:
+            if (!double.TryParse(thickness, _numberStyles, CultureInfo.InvariantCulture, out var value))
+            {
+                return;
+            }
+
+            var editor = _serviceProvider.GetService<IProjectEditor>();
+
+            if (editor.Renderers[0]?.State?.SelectedShape != null)
+            {
+                var shape = editor.Renderers[0]?.State?.SelectedShape;
+                var style = shape.Style;
+                if (style != null && style.StartArrowStyle != null)
+                {
+                    style.StartArrowStyle.Thickness = value;
+                }
+            }
+
+            if (editor.Renderers?[0]?.State?.SelectedShapes?.Count > 0)
+            {
+                foreach (var shape in editor.Renderers[0].State.SelectedShapes)
+                {
+                    var style = shape.Style;
+                    if (style != null && style.StartArrowStyle != null)
+                    {
+                        style.StartArrowStyle.Thickness = value;
+                    }
+                }
+            }
         }
 
         /// <inheritdoc/>
