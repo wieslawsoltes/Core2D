@@ -489,7 +489,34 @@ namespace Core2D.Editor
         /// <inheritdoc/>
         public void OnStyleSetLineCurveOrientation(string curveOrientation)
         {
-            // TODO:
+            if (!Enum.TryParse<CurveOrientation>(curveOrientation, true, out var value))
+            {
+                return;
+            }
+
+            var editor = _serviceProvider.GetService<IProjectEditor>();
+
+            if (editor.Renderers[0]?.State?.SelectedShape != null)
+            {
+                var shape = editor.Renderers[0]?.State?.SelectedShape;
+                var style = shape.Style;
+                if (style != null && style.LineStyle != null)
+                {
+                    style.LineStyle.CurveOrientation = value;
+                }
+            }
+
+            if (editor.Renderers?[0]?.State?.SelectedShapes?.Count > 0)
+            {
+                foreach (var shape in editor.Renderers[0].State.SelectedShapes)
+                {
+                    var style = shape.Style;
+                    if (style != null && style.LineStyle != null)
+                    {
+                        style.LineStyle.CurveOrientation = value;
+                    }
+                }
+            }
         }
 
         /// <inheritdoc/>
