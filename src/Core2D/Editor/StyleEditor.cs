@@ -177,7 +177,7 @@ namespace Core2D.Editor
                 var style = shape.Style;
                 if (style != null)
                 {
-                    style.Stroke = value;
+                    style.Stroke = (IColor)value.Copy(null);
                 }
             }
 
@@ -188,7 +188,7 @@ namespace Core2D.Editor
                     var style = shape.Style;
                     if (style != null)
                     {
-                        style.Stroke = value;
+                        style.Stroke = (IColor)value.Copy(null);
                     }
                 }
             }
@@ -250,7 +250,7 @@ namespace Core2D.Editor
                 var style = shape.Style;
                 if (style != null)
                 {
-                    style.Fill = value;
+                    style.Fill = (IColor)value.Copy(null);
                 }
             }
 
@@ -261,7 +261,7 @@ namespace Core2D.Editor
                     var style = shape.Style;
                     if (style != null)
                     {
-                        style.Fill = value;
+                        style.Fill = (IColor)value.Copy(null);
                     }
                 }
             }
@@ -991,7 +991,7 @@ namespace Core2D.Editor
                 var style = shape.Style;
                 if (style != null && style.StartArrowStyle != null)
                 {
-                    style.StartArrowStyle.Stroke = value;
+                    style.StartArrowStyle.Stroke = (IColor)value.Copy(null);
                 }
             }
 
@@ -1002,7 +1002,7 @@ namespace Core2D.Editor
                     var style = shape.Style;
                     if (style != null && style.StartArrowStyle != null)
                     {
-                        style.StartArrowStyle.Stroke = value;
+                        style.StartArrowStyle.Stroke = (IColor)value.Copy(null);
                     }
                 }
             }
@@ -1064,7 +1064,7 @@ namespace Core2D.Editor
                 var style = shape.Style;
                 if (style != null && style.StartArrowStyle != null)
                 {
-                    style.StartArrowStyle.Fill = value;
+                    style.StartArrowStyle.Fill = (IColor)value.Copy(null);
                 }
             }
 
@@ -1075,7 +1075,7 @@ namespace Core2D.Editor
                     var style = shape.Style;
                     if (style != null && style.StartArrowStyle != null)
                     {
-                        style.StartArrowStyle.Fill = value;
+                        style.StartArrowStyle.Fill = (IColor)value.Copy(null);
                     }
                 }
             }
@@ -1419,7 +1419,7 @@ namespace Core2D.Editor
                 var style = shape.Style;
                 if (style != null && style.EndArrowStyle != null)
                 {
-                    style.EndArrowStyle.Stroke = value;
+                    style.EndArrowStyle.Stroke = (IColor)value.Copy(null);
                 }
             }
 
@@ -1430,7 +1430,7 @@ namespace Core2D.Editor
                     var style = shape.Style;
                     if (style != null && style.EndArrowStyle != null)
                     {
-                        style.EndArrowStyle.Stroke = value;
+                        style.EndArrowStyle.Stroke = (IColor)value.Copy(null);
                     }
                 }
             }
@@ -1492,7 +1492,7 @@ namespace Core2D.Editor
                 var style = shape.Style;
                 if (style != null && style.EndArrowStyle != null)
                 {
-                    style.EndArrowStyle.Fill = value;
+                    style.EndArrowStyle.Fill = (IColor)value.Copy(null);
                 }
             }
 
@@ -1503,7 +1503,7 @@ namespace Core2D.Editor
                     var style = shape.Style;
                     if (style != null && style.EndArrowStyle != null)
                     {
-                        style.EndArrowStyle.Fill = value;
+                        style.EndArrowStyle.Fill = (IColor)value.Copy(null);
                     }
                 }
             }
