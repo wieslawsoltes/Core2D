@@ -23,13 +23,13 @@ namespace Core2D.FileWriter.Dxf
         }
 
         /// <inheritdoc/>
-        string IFileWriter.Name { get; } = "Dxf (netDxf)";
+        public string Name { get; } = "Dxf (netDxf)";
 
         /// <inheritdoc/>
-        string IFileWriter.Extension { get; } = "dxf";
+        public string Extension { get; } = "dxf";
 
         /// <inheritdoc/>
-        void IFileWriter.Save(string path, object item, object options)
+        public void Save(string path, object item, object options)
         {
             if (string.IsNullOrEmpty(path) || item == null)
             {
