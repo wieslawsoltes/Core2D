@@ -25,13 +25,13 @@ namespace Core2D.FileWriter.SkiaSharpPng
         }
 
         /// <inheritdoc/>
-        string IFileWriter.Name { get; } = "Png (SkiaSharp)";
+        public string Name { get; } = "Png (SkiaSharp)";
 
         /// <inheritdoc/>
-        string IFileWriter.Extension { get; } = "png";
+        public string Extension { get; } = "png";
 
         /// <inheritdoc/>
-        void IFileWriter.Save(string path, object item, object options)
+        public void Save(string path, object item, object options)
         {
             if (string.IsNullOrEmpty(path) || item == null)
             {
