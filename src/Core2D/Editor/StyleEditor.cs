@@ -124,8 +124,7 @@ namespace Core2D.Editor
         /// <inheritdoc/>
         public void OnStyleSetStroke(string color)
         {
-            IColor value = null;
-
+            IColor value;
             try
             {
                 value = ArgbColor.Parse(color);
@@ -196,8 +195,7 @@ namespace Core2D.Editor
         /// <inheritdoc/>
         public void OnStyleSetFill(string color)
         {
-            IColor value = null;
-
+            IColor value;
             try
             {
                 value = ArgbColor.Parse(color);
