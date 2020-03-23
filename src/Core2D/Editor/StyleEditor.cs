@@ -588,7 +588,34 @@ namespace Core2D.Editor
         /// <inheritdoc/>
         public void OnStyleToggleLineFixedLengthStartTrigger(string trigger)
         {
-            // TODO:
+            if (!Enum.TryParse<ShapeStateFlags>(trigger, true, out var value))
+            {
+                return;
+            }
+
+            var editor = _serviceProvider.GetService<IProjectEditor>();
+
+            if (editor.Renderers[0]?.State?.SelectedShape != null)
+            {
+                var shape = editor.Renderers[0]?.State?.SelectedShape;
+                var style = shape.Style;
+                if (style != null && style.LineStyle != null && style.LineStyle.FixedLength != null && style.LineStyle.FixedLength.StartTrigger != null)
+                {
+                    style.LineStyle.FixedLength.StartTrigger.Flags = value;
+                }
+            }
+
+            if (editor.Renderers?[0]?.State?.SelectedShapes?.Count > 0)
+            {
+                foreach (var shape in editor.Renderers[0].State.SelectedShapes)
+                {
+                    var style = shape.Style;
+                    if (style != null && style.LineStyle != null && style.LineStyle.FixedLength != null && style.LineStyle.FixedLength.StartTrigger != null)
+                    {
+                        style.LineStyle.FixedLength.StartTrigger.Flags = value;
+                    }
+                }
+            }
         }
 
         /// <inheritdoc/>
