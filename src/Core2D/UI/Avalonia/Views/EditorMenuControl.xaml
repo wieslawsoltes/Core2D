@@ -214,6 +214,19 @@
                     <MenuItem Header="DashDo_t" Command="{Binding StyleEditor.OnStyleSetDashes}" CommandParameter="2 2 0 2"/>
                     <MenuItem Header="Das_hDotDot" Command="{Binding StyleEditor.OnStyleSetDashes}" CommandParameter="2 2 0 2 0 2"/>
                 </MenuItem>
+                <MenuItem Header="Dash _Offset">
+                    <MenuItem Header="-5" Command="{Binding StyleEditor.OnStyleSetDashOffset}" CommandParameter="0"/>
+                    <MenuItem Header="-4" Command="{Binding StyleEditor.OnStyleSetDashOffset}" CommandParameter="0"/>
+                    <MenuItem Header="-3" Command="{Binding StyleEditor.OnStyleSetDashOffset}" CommandParameter="0"/>
+                    <MenuItem Header="-3" Command="{Binding StyleEditor.OnStyleSetDashOffset}" CommandParameter="0"/>
+                    <MenuItem Header="-1" Command="{Binding StyleEditor.OnStyleSetDashOffset}" CommandParameter="0"/>
+                    <MenuItem Header="0" Command="{Binding StyleEditor.OnStyleSetDashOffset}" CommandParameter="0"/>
+                    <MenuItem Header="1" Command="{Binding StyleEditor.OnStyleSetDashOffset}" CommandParameter="0"/>
+                    <MenuItem Header="2" Command="{Binding StyleEditor.OnStyleSetDashOffset}" CommandParameter="0"/>
+                    <MenuItem Header="3" Command="{Binding StyleEditor.OnStyleSetDashOffset}" CommandParameter="0"/>
+                    <MenuItem Header="4" Command="{Binding StyleEditor.OnStyleSetDashOffset}" CommandParameter="0"/>
+                    <MenuItem Header="5" Command="{Binding StyleEditor.OnStyleSetDashOffset}" CommandParameter="0"/>
+                </MenuItem>
             </MenuItem>
             <MenuItem Header="_Fill">
                 <MenuItem Header="_Color">
