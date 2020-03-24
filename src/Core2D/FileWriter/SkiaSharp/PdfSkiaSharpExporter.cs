@@ -1,4 +1,5 @@
-﻿using Core2D.Containers;
+﻿using System.IO;
+using Core2D.Containers;
 using Core2D.Interfaces;
 using Core2D.Renderer;
 using SkiaSharp;
@@ -27,33 +28,35 @@ namespace Core2D.FileWriter.SkiaSharpPdf
             _targetDpi = targetDpi;
         }
 
-        /// <inheritdoc/>
-        public void Save(string path, IPageContainer container)
+        private void Add(SKDocument pdf, IPageContainer container)
         {
-            using var stream = new SKFileWStream(path);
+            using var canvas = pdf.BeginPage((float)container.Template.Width, (float)container.Template.Height);
+            _presenter.Render(canvas, _renderer, container, 0, 0);
+        }
+
+        /// <inheritdoc/>
+        public void Save(Stream stream, IPageContainer container)
+        {
             using var pdf = SKDocument.CreatePdf(stream, _targetDpi);
             Add(pdf, container);
             pdf.Close();
         }
 
         /// <inheritdoc/>
-        public void Save(string path, IDocumentContainer document)
+        public void Save(Stream stream, IDocumentContainer document)
         {
-            using var stream = new SKFileWStream(path);
             using var pdf = SKDocument.CreatePdf(stream, _targetDpi);
             foreach (var container in document.Pages)
             {
                 Add(pdf, container);
             }
-
             pdf.Close();
             _renderer.ClearCache(isZooming: false);
         }
 
         /// <inheritdoc/>
-        public void Save(string path, IProjectContainer project)
+        public void Save(Stream stream, IProjectContainer project)
         {
-            using var stream = new SKFileWStream(path);
             using var pdf = SKDocument.CreatePdf(stream, _targetDpi);
             foreach (var document in project.Documents)
             {
@@ -62,15 +65,8 @@ namespace Core2D.FileWriter.SkiaSharpPdf
                     Add(pdf, container);
                 }
             }
-
             pdf.Close();
             _renderer.ClearCache(isZooming: false);
-        }
-
-        private void Add(SKDocument pdf, IPageContainer container)
-        {
-            using var canvas = pdf.BeginPage((float)container.Template.Width, (float)container.Template.Height);
-            _presenter.Render(canvas, _renderer, container, 0, 0);
         }
     }
 }

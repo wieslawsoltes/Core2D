@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using Core2D.Containers;
 using Core2D.Data;
 using Core2D.Interfaces;
@@ -14,38 +15,62 @@ namespace Core2D.Renderer.Dxf
     public partial class DxfRenderer : IProjectExporter
     {
         /// <inheritdoc/>
-        public void Save(string path, IPageContainer container)
+        public void Save(Stream stream, IPageContainer container)
         {
-            _outputPath = System.IO.Path.GetDirectoryName(path);
+            if (stream is FileStream fileStream)
+            {
+                _outputPath = System.IO.Path.GetDirectoryName(fileStream.Name);
+            }
+            else
+            {
+                _outputPath = string.Empty;
+            }
+
             var dxf = new DXF.DxfDocument(DXFH.DxfVersion.AutoCad2010);
 
             Add(dxf, container);
 
-            dxf.Save(path);
+            dxf.Save(stream);
             ClearCache(isZooming: false);
         }
 
         /// <inheritdoc/>
-        public void Save(string path, IDocumentContainer document)
+        public void Save(Stream stream, IDocumentContainer document)
         {
-            _outputPath = System.IO.Path.GetDirectoryName(path);
+            if (stream is FileStream fileStream)
+            {
+                _outputPath = System.IO.Path.GetDirectoryName(fileStream.Name);
+            }
+            else
+            {
+                _outputPath = string.Empty;
+            }
+
             var dxf = new DXF.DxfDocument(DXFH.DxfVersion.AutoCad2010);
 
             Add(dxf, document);
 
-            dxf.Save(path);
+            dxf.Save(stream);
             ClearCache(isZooming: false);
         }
 
         /// <inheritdoc/>
-        public void Save(string path, IProjectContainer project)
+        public void Save(Stream stream, IProjectContainer project)
         {
-            _outputPath = System.IO.Path.GetDirectoryName(path);
+            if (stream is FileStream fileStream)
+            {
+                _outputPath = System.IO.Path.GetDirectoryName(fileStream.Name);
+            }
+            else
+            {
+                _outputPath = string.Empty;
+            }
+
             var dxf = new DXF.DxfDocument(DXFH.DxfVersion.AutoCad2010);
 
             Add(dxf, project);
 
-            dxf.Save(path);
+            dxf.Save(stream);
             ClearCache(isZooming: false);
         }
 

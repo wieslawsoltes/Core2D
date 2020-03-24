@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using Core2D.Containers;
 using Core2D.Data;
 using Core2D.Interfaces;
@@ -31,9 +32,9 @@ namespace Core2D.FileWriter.SkiaSharpPdf
         public string Extension { get; } = "pdf";
 
         /// <inheritdoc/>
-        public void Save(string path, object item, object options)
+        public void Save(Stream stream, object item, object options)
         {
-            if (string.IsNullOrEmpty(path) || item == null)
+            if (item == null)
             {
                 return;
             }
@@ -61,7 +62,7 @@ namespace Core2D.FileWriter.SkiaSharpPdf
                 dataFlow.Bind(page.Template, db, record);
                 dataFlow.Bind(page, db, record);
 
-                exporter.Save(path, page);
+                exporter.Save(stream, page);
             }
             else if (item is IDocumentContainer document)
             {
@@ -69,7 +70,7 @@ namespace Core2D.FileWriter.SkiaSharpPdf
 
                 dataFlow.Bind(document);
 
-                exporter.Save(path, document);
+                exporter.Save(stream, document);
             }
             else if (item is IProjectContainer project)
             {
@@ -77,7 +78,7 @@ namespace Core2D.FileWriter.SkiaSharpPdf
 
                 dataFlow.Bind(project);
 
-                exporter.Save(path, project);
+                exporter.Save(stream, project);
             }
         }
     }

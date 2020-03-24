@@ -1,4 +1,5 @@
-﻿using Core2D.Containers;
+﻿using System.IO;
+using Core2D.Containers;
 
 namespace Core2D.Interfaces
 {
@@ -8,24 +9,24 @@ namespace Core2D.Interfaces
     public interface IProjectExporter
     {
         /// <summary>
-        /// Save <see cref="IPageContainer"/> to a file.
+        /// Save <see cref="IPageContainer"/> to a stream.
         /// </summary>
-        /// <param name="path">The file path.</param>
+        /// <param name="stream">The file stream.</param>
         /// <param name="container">The container instance.</param>
-        void Save(string path, IPageContainer container);
+        void Save(Stream stream, IPageContainer container);
 
         /// <summary>
-        /// Save <see cref="IDocumentContainer"/> to a file.
+        /// Save <see cref="IDocumentContainer"/> to a stream.
         /// </summary>
-        /// <param name="path">The file path.</param>
+        /// <param name="stream">The file stream.</param>
         /// <param name="document">The document instance.</param>
-        void Save(string path, IDocumentContainer document);
+        void Save(Stream stream, IDocumentContainer document);
 
         /// <summary>
-        /// Save <see cref="IProjectContainer"/> to a file.
+        /// Save <see cref="IProjectContainer"/> to a stream.
         /// </summary>
-        /// <param name="path">The file path.</param>
+        /// <param name="stream">The file stream.</param>
         /// <param name="project">The project instance.</param>
-        void Save(string path, IProjectContainer project);
+        void Save(Stream stream, IProjectContainer project);
     }
 }

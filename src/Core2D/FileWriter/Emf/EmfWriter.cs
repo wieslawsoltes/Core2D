@@ -157,24 +157,23 @@ namespace Core2D.FileWriter.Emf
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="path"></param>
+        /// <param name="stream"></param>
         /// <param name="container"></param>
         /// <param name="ic"></param>
-        public void Save(string path, IPageContainer container, IImageCache ic)
+        public void Save(Stream stream, IPageContainer container, IImageCache ic)
         {
             if (container != null && container.Template != null)
             {
                 using var bitmap = new Bitmap((int)container.Template.Width, (int)container.Template.Height);
                 using var ms = MakeMetafileStream(bitmap, container, ic);
-                using var fs = File.Create(path);
-                ms.WriteTo(fs);
+                ms.WriteTo(stream);
             }
         }
 
         /// <inheritdoc/>
-        public void Save(string path, object item, object options)
+        public void Save(Stream stream, object item, object options)
         {
-            if (string.IsNullOrEmpty(path) || item == null)
+            if (item == null)
             {
                 return;
             }
@@ -194,7 +193,7 @@ namespace Core2D.FileWriter.Emf
                 dataFlow.Bind(page.Template, db, record);
                 dataFlow.Bind(page, db, record);
 
-                Save(path, page, ic);
+                Save(stream, page, ic);
             }
             else if (item is IDocumentContainer document)
             {

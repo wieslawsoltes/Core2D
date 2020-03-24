@@ -949,7 +949,7 @@ namespace Core2D.Renderer.Dxf
                 }
                 else
                 {
-                    if (State.ImageCache == null || string.IsNullOrEmpty(image.Key))
+                    if (State.ImageCache == null || string.IsNullOrEmpty(image.Key) || string.IsNullOrEmpty(_outputPath))
                     {
                         return;
                     }

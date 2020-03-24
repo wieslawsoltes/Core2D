@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using Core2D.Containers;
 using Core2D.Interfaces;
 using Core2D.Renderer;
@@ -26,22 +27,22 @@ namespace Core2D.FileWriter.SkiaSharpSvg
         }
 
         /// <inheritdoc/>
-        public void Save(string path, IPageContainer container)
+        public void Save(Stream stream, IPageContainer container)
         {
-            using var stream = new SKFileWStream(path);
-            using var writer = new SKXmlStreamWriter(stream);
+            using var wstream = new SKManagedWStream(stream);
+            using var writer = new SKXmlStreamWriter(wstream);
             using var canvas = SKSvgCanvas.Create(SKRect.Create(0, 0, (int)container.Width, (int)container.Height), writer);
             _presenter.Render(canvas, _renderer, container, 0, 0);
         }
 
         /// <inheritdoc/>
-        public void Save(string path, IDocumentContainer document)
+        public void Save(Stream stream, IDocumentContainer document)
         {
             throw new NotSupportedException("Saving documents as svg drawing is not supported.");
         }
 
         /// <inheritdoc/>
-        public void Save(string path, IProjectContainer project)
+        public void Save(Stream stream, IProjectContainer project)
         {
             throw new NotSupportedException("Saving projects as svg drawing is not supported.");
         }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using Core2D.Containers;
 using Core2D.Data;
 using Core2D.Interfaces;
@@ -31,9 +32,9 @@ namespace Core2D.FileWriter.SkiaSharpPng
         public string Extension { get; } = "png";
 
         /// <inheritdoc/>
-        public void Save(string path, object item, object options)
+        public void Save(Stream stream, object item, object options)
         {
-            if (string.IsNullOrEmpty(path) || item == null)
+            if (item == null)
             {
                 return;
             }
@@ -61,7 +62,7 @@ namespace Core2D.FileWriter.SkiaSharpPng
                 dataFlow.Bind(page.Template, db, record);
                 dataFlow.Bind(page, db, record);
 
-                exporter.Save(path, page);
+                exporter.Save(stream, page);
             }
             else if (item is IDocumentContainer document)
             {

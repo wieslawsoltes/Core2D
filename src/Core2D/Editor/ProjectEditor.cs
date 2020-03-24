@@ -755,7 +755,8 @@ namespace Core2D.Editor
         {
             try
             {
-                writer?.Save(path, item, Project);
+                using var stream = FileIO.Create(path);
+                writer?.Save(stream, item, Project);
             }
             catch (Exception ex)
             {

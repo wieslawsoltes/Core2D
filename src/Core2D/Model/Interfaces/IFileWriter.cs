@@ -1,4 +1,5 @@
-﻿
+﻿using System.IO;
+
 namespace Core2D.Interfaces
 {
     /// <summary>
@@ -17,11 +18,11 @@ namespace Core2D.Interfaces
         string Extension { get; }
 
         /// <summary>
-        /// Save object item to a file.
+        /// Save object item to a stream.
         /// </summary>
-        /// <param name="path">The file path.</param>
+        /// <param name="stream">The file stream.</param>
         /// <param name="item">The object item.</param>
         /// <param name="options">The options object.</param>
-        void Save(string path, object item, object options);
+        void Save(Stream stream, object item, object options);
     }
 }

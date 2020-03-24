@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using Core2D.Containers;
 using Core2D.Interfaces;
 using Core2D.Renderer;
@@ -29,9 +30,9 @@ namespace Core2D.FileWriter.Dxf
         public string Extension { get; } = "dxf";
 
         /// <inheritdoc/>
-        public void Save(string path, object item, object options)
+        public void Save(Stream stream, object item, object options)
         {
-            if (string.IsNullOrEmpty(path) || item == null)
+            if (item == null)
             {
                 return;
             }
@@ -50,15 +51,15 @@ namespace Core2D.FileWriter.Dxf
 
             if (item is IPageContainer page)
             {
-                exporter.Save(path, page);
+                exporter.Save(stream, page);
             }
             else if (item is IDocumentContainer document)
             {
-                exporter.Save(path, document);
+                exporter.Save(stream, document);
             }
             else if (item is IProjectContainer project)
             {
-                exporter.Save(path, project);
+                exporter.Save(stream, project);
             }
         }
     }

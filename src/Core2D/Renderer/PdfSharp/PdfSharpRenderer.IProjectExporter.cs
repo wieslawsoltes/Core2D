@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using Core2D.Containers;
 using Core2D.Data;
 using Core2D.Interfaces;
@@ -14,15 +15,15 @@ namespace Core2D.Renderer.PdfSharp
     public partial class PdfSharpRenderer : IProjectExporter
     {
         /// <inheritdoc/>
-        public void Save(string path, IPageContainer container)
+        public void Save(Stream stream, IPageContainer container)
         {
             using var pdf = new PdfDocument();
             Add(pdf, container);
-            pdf.Save(path);
+            pdf.Save(stream);
         }
 
         /// <inheritdoc/>
-        public void Save(string path, IDocumentContainer document)
+        public void Save(Stream stream, IDocumentContainer document)
         {
             using var pdf = new PdfDocument();
             var documentOutline = default(PdfOutline);
@@ -49,12 +50,12 @@ namespace Core2D.Renderer.PdfSharp
                     XColors.Black);
             }
 
-            pdf.Save(path);
+            pdf.Save(stream);
             ClearCache(isZooming: false);
         }
 
         /// <inheritdoc/>
-        public void Save(string path, IProjectContainer project)
+        public void Save(Stream stream, IProjectContainer project)
         {
             using var pdf = new PdfDocument();
             var projectOutline = default(PdfOutline);
@@ -96,7 +97,7 @@ namespace Core2D.Renderer.PdfSharp
                 }
             }
 
-            pdf.Save(path);
+            pdf.Save(stream);
             ClearCache(isZooming: false);
         }
 
