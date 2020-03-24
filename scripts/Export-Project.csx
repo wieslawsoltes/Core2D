@@ -17,7 +17,8 @@ foreach (var document in project.Documents)
             try
             {
                 var path = Path.Combine(dir, page.Name + "." + writer.Extension);
-                writer.Save(path, page, Editor.Project);
+                using var stream = Editor.FileIO.Create(path);
+                writer.Save(stream, page, Editor.Project);
             }
             catch (Exception ex)
             {

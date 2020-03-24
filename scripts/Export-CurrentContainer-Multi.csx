@@ -13,13 +13,17 @@ var dir = "D:\\";
 var page = Editor.Project.CurrentContainer;
 
 var dxf = Editor.FileWriters.FirstOrDefault(x => x.GetType() == typeof(DxfWriter));
-dxf.Save(Path.Combine(dir, page.Name + "." + dxf.Extension), page, Editor.Project);
+using var dxfStream = Editor.FileIO.Create(Path.Combine(dir, page.Name + "." + dxf.Extension));
+dxf.SavedxfStream(, page, Editor.Project);
 
 var pdf = Editor.FileWriters.FirstOrDefault(x => x.GetType() == typeof(PdfSharpWriter));
-pdf.Save(Path.Combine(dir, page.Name + "." + pdf.Extension), page, Editor.Project);
+using var pdfStream = Editor.FileIO.Create(Path.Combine(dir, page.Name + "." + pdf.Extension));
+pdf.Save(pdfStream, page, Editor.Project);
 
 var png = Editor.FileWriters.FirstOrDefault(x => x.GetType() == typeof(PngSkiaSharpWriter));
-png.Save(Path.Combine(dir, page.Name + "." + png.Extension), page, Editor.Project);
+using var pngStream = Editor.FileIO.Create(Path.Combine(dir, page.Name + "." + png.Extension));
+png.Save(pngStream, page, Editor.Project);
 
 var svg = Editor.FileWriters.FirstOrDefault(x => x.GetType() == typeof(SvgSkiaSharpWriter));
-svg.Save(Path.Combine(dir, page.Name + "." + svg.Extension), page, Editor.Project);
+using var svgStream = Editor.FileIO.Create(Path.Combine(dir, page.Name + "." + svg.Extension));
+svg.Save(svgStream, page, Editor.Project);

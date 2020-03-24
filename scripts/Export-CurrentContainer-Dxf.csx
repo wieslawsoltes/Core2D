@@ -9,4 +9,5 @@ var dir = "D:\\";
 var page = Editor.Project.CurrentContainer;
 var writer = Editor.FileWriters.FirstOrDefault(x => x.GetType() == typeof(DxfWriter));
 var path = Path.Combine(dir, page.Name + "." + writer.Extension);
-writer.Save(path, page, Editor.Project);
+using var stream = Editor.FileIO.Create(path);
+writer.Save(stream, page, Editor.Project);
