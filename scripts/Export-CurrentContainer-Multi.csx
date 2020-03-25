@@ -14,7 +14,7 @@ var page = Editor.Project.CurrentContainer;
 
 var dxf = Editor.FileWriters.FirstOrDefault(x => x.GetType() == typeof(DxfWriter));
 using var dxfStream = Editor.FileIO.Create(Path.Combine(dir, page.Name + "." + dxf.Extension));
-dxf.SavedxfStream(, page, Editor.Project);
+dxf.Save(dxfStream, page, Editor.Project);
 
 var pdf = Editor.FileWriters.FirstOrDefault(x => x.GetType() == typeof(PdfSharpWriter));
 using var pdfStream = Editor.FileIO.Create(Path.Combine(dir, page.Name + "." + pdf.Extension));
