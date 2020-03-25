@@ -29,7 +29,7 @@ namespace Core2D.FileWriter.SkiaSharpWebp
         /// <inheritdoc/>
         public void Save(Stream stream, IPageContainer container)
         {
-            var info = new SKImageInfo((int)container.Width, (int)container.Height);
+            var info = new SKImageInfo((int)container.Width, (int)container.Height, SKImageInfo.PlatformColorType, SKAlphaType.Unpremul);
             using var bitmap = new SKBitmap(info);
             using (var canvas = new SKCanvas(bitmap))
             {
