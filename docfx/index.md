@@ -17,4 +17,4 @@ You can automate drawing and processing by using C# scripting.
 
 ## License
 
-Core2D is licensed under the [MIT license](https://github.com/wieslawsoltes/Core2D/LICENSE.TXT).
+Core2D is licensed under the [MIT license](https://github.com/wieslawsoltes/Core2D/blob/master/LICENSE.TXT).
