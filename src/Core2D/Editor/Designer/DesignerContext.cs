@@ -144,7 +144,7 @@ namespace Core2D.Editor.Designer
         public static IGroupShape Group { get; set; }
 
         /// <summary>
-        /// The design time <see cref=IImageShape"/>.
+        /// The design time <see cref="IImageShape"/>.
         /// </summary>
         public static IImageShape Image { get; set; }
 

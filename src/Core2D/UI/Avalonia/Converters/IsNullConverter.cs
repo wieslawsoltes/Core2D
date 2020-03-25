@@ -6,7 +6,7 @@ using Avalonia.Data.Converters;
 namespace Core2D.UI.Avalonia.Converters
 {
     /// <summary>
-    /// Converts a binding value object from <see cref="object"/> to <see cref="bool"/> True if value is equal to null or <see cref="AvaloniaProperty.UnsetValue"/> otherwise return False.
+    /// Converts a binding value object from <see cref="object"/> to <see cref="bool"/> True if value is equal to null or AvaloniaProperty.UnsetValue otherwise return False.
     /// </summary>
     public class IsNullConverter : IValueConverter
     {

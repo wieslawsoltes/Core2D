@@ -7,7 +7,9 @@ using Microsoft.CodeAnalysis.Scripting;
 
 namespace Core2D.ScriptRunner.Roslyn
 {
-    /// <inheritdoc/>
+    /// <summary>
+    /// Roslyn C# script runner.
+    /// </summary>
     public class RoslynScriptRunner : IScriptRunner
     {
         private readonly IServiceProvider _serviceProvider;

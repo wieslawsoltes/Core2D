@@ -84,7 +84,10 @@ namespace Core2D.Editor
         /// <returns>The <see cref="Modifier"/>.</returns>
         public static Modifier Parse(string s) => Create((ModifierFlags)Enum.Parse(typeof(ModifierFlags), s, true));
 
-        /// <inheritdoc/>
+        /// <summary>
+        /// Returns a string that represents the current object.
+        /// </summary>
+        /// <returns>A string that represents the current object.</returns>
         public override string ToString() => _flags.ToString();
 
         /// <summary>

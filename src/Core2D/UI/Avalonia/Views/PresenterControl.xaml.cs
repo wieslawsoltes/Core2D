@@ -27,7 +27,7 @@ namespace Core2D.UI.Avalonia.Views
 
         /// <summary>
         /// Template mode.
-        /// </summarypresenter
+        /// </summary>
         Template = 2,
 
         /// <summary>

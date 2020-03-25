@@ -5,7 +5,7 @@ using Avalonia.Data.Converters;
 namespace Core2D.UI.Avalonia.Converters
 {
     /// <summary>
-    /// Pass-through a binding value <see cref="object"/> as <see cref="object"/> to avoid <see cref="AvaloniaProperty.UnsetValue"/>.
+    /// Pass-through a binding value <see cref="object"/> as <see cref="object"/> to avoid AvaloniaProperty.UnsetValue.
     /// </summary>
     public class ObjectToObjectConverter : IValueConverter
     {

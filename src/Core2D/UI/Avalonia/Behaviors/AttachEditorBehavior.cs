@@ -5,7 +5,7 @@ using Core2D.Editor;
 namespace Core2D.UI.Avalonia.Behaviors
 {
     /// <summary>
-    /// Attaches <see cref="IProjectEditor"/> to a <see cref="Control"/>.
+    /// Attaches <see cref="IProjectEditor"/> to a control.
     /// </summary>
     public class AttachEditorBehavior : Behavior<Control>
     {

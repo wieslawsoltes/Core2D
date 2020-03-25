@@ -97,7 +97,10 @@ namespace Core2D.Renderer
         /// </summary>
         public static readonly IMatrixObject Identity = new MatrixObject(1.0, 0.0, 0.0, 1.0, 0.0, 0.0);
 
-        /// <inheritdoc/>
+        /// <summary>
+        /// Returns a string that represents the current object.
+        /// </summary>
+        /// <returns>A string that represents the current object.</returns>
         public override string ToString()
         {
             return string.Format("{0},{1},{2},{3},{4},{5}", _m11, _m12, _m21, _m22, _offsetX, _offsetY);
