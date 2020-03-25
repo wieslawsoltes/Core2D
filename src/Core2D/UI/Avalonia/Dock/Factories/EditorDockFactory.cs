@@ -104,6 +104,12 @@ namespace Core2D.UI.Avalonia.Dock.Factories
                 Title = "Templates"
             };
 
+            var scriptsTool = new ScriptsTool
+            {
+                Id = nameof(ScriptsTool),
+                Title = "Scripts"
+            };
+
             var containerTool = new ContainerTool
             {
                 Id = nameof(ContainerTool),
@@ -167,7 +173,8 @@ namespace Core2D.UI.Avalonia.Dock.Factories
                         (
                             projectTool,
                             optionsTool,
-                            imagesTool
+                            imagesTool,
+                            scriptsTool
                         )
                     },
                     new DMC.SplitterDock()
@@ -391,6 +398,7 @@ namespace Core2D.UI.Avalonia.Dock.Factories
                 [nameof(DatabasesTool)] = () => _serviceProvider.GetService<IProjectEditor>(),
                 [nameof(StylesTool)] = () => _serviceProvider.GetService<IProjectEditor>(),
                 [nameof(TemplatesTool)] = () => _serviceProvider.GetService<IProjectEditor>(),
+                [nameof(ScriptsTool)] = () => _serviceProvider.GetService<IProjectEditor>(),
                 [nameof(ContainerTool)] = () => _serviceProvider.GetService<IProjectEditor>(),
                 [nameof(ZoomTool)] = () => _serviceProvider.GetService<IProjectEditor>(),
                 [nameof(ToolsTool)] = () => _serviceProvider.GetService<IProjectEditor>(),

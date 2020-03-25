@@ -10,6 +10,7 @@ using Core2D.Interfaces;
 using Core2D.Path;
 using Core2D.Path.Segments;
 using Core2D.Renderer;
+using Core2D.Scripting;
 using Core2D.Shapes;
 using Core2D.Style;
 
@@ -1029,6 +1030,16 @@ namespace Core2D
         }
 
         /// <inheritdoc/>
+        public IScript CreateScript(string name = "Script", string code = "")
+        {
+            return new Script()
+            {
+                Name = name,
+                Code = code
+            };
+        }
+
+        /// <inheritdoc/>
         public ILayerContainer CreateLayerContainer(string name = "Layer", IPageContainer owner = null, bool isVisible = true)
         {
             return new LayerContainer()
@@ -1111,6 +1122,7 @@ namespace Core2D
                 GroupLibraries = ImmutableArray.Create<ILibrary<IGroupShape>>(),
                 Databases = ImmutableArray.Create<IDatabase>(),
                 Templates = ImmutableArray.Create<IPageContainer>(),
+                Scripts = ImmutableArray.Create<IScript>(),
                 Documents = ImmutableArray.Create<IDocumentContainer>()
             };
         }

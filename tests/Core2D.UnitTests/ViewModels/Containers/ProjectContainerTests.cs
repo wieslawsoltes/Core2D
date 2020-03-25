@@ -59,6 +59,14 @@ namespace Core2D.UnitTests
 
         [Fact]
         [Trait("Core2D.Containers", "Project")]
+        public void Scripts_Not_Null()
+        {
+            var target = _factory.CreateProjectContainer();
+            Assert.False(target.Scripts.IsDefault);
+        }
+
+        [Fact]
+        [Trait("Core2D.Containers", "Project")]
         public void Documents_Not_Null()
         {
             var target = _factory.CreateProjectContainer();
@@ -109,6 +117,20 @@ namespace Core2D.UnitTests
             target.SetCurrentTemplate(template);
 
             Assert.Equal(template, target.CurrentTemplate);
+        }
+
+        [Fact]
+        [Trait("Core2D.Containers", "Project")]
+        public void SetCurrentScript_Sets_CurrentScript()
+        {
+            var target = _factory.CreateProjectContainer();
+
+            var script = _factory.CreateScript();
+            target.Scripts = target.Scripts.Add(script);
+
+            target.SetCurrentScript(script);
+
+            Assert.Equal(script, target.CurrentScript);
         }
 
         [Fact]

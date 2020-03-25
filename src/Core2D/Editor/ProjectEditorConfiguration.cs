@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Core2D.Containers;
 using Core2D.Data;
+using Core2D.Scripting;
 using Core2D.Shapes;
 using Core2D.Style;
 
@@ -37,6 +38,11 @@ namespace Core2D.Editor
         /// Default <see cref="IDocumentContainer"/> name.
         /// </summary>
         public const string DefaultDocumentName = "Document";
+
+        /// <summary>
+        /// Default <see cref="IScript"/> script name.
+        /// </summary>
+        public const string DefaultScriptName = "Script";
 
         /// <summary>
         /// Default <see cref="IDatabase"/> name.

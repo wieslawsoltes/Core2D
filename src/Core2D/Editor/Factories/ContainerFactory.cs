@@ -206,6 +206,13 @@ namespace Core2D.Editor.Factories
 
             project.SetCurrentTemplate(project.Templates.FirstOrDefault(t => t.Name == "Grid"));
 
+            // Scripts
+            var scriptBuilder = project.Scripts.ToBuilder();
+            scriptBuilder.Add(factory.CreateScript());
+            project.Scripts = scriptBuilder.ToImmutable();
+
+            project.SetCurrentScript(project.Scripts.FirstOrDefault());
+
             // Documents and Pages
             var document = containerFactory.GetDocument(project, "Document");
             var page = containerFactory.GetPage(project, "Page");

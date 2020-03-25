@@ -1,6 +1,7 @@
 ﻿using System.Collections.Immutable;
 using Core2D.Data;
 using Core2D.History;
+using Core2D.Scripting;
 using Core2D.Shapes;
 using Core2D.Style;
 
@@ -42,6 +43,11 @@ namespace Core2D.Containers
         ImmutableArray<IPageContainer> Templates { get; set; }
 
         /// <summary>
+        /// Gets or sets project scripts.
+        /// </summary>
+        ImmutableArray<IScript> Scripts { get; set; }
+
+        /// <summary>
         /// Gets or sets project documents.
         /// </summary>
         ImmutableArray<IDocumentContainer> Documents { get; set; }
@@ -65,6 +71,11 @@ namespace Core2D.Containers
         /// Gets or sets project current template.
         /// </summary>
         IPageContainer CurrentTemplate { get; set; }
+
+        /// <summary>
+        /// Gets or sets project current script.
+        /// </summary>
+        IScript CurrentScript { get; set; }
 
         /// <summary>
         /// Gets or sets project current document.
@@ -98,6 +109,12 @@ namespace Core2D.Containers
         /// </summary>
         /// <param name="template">The template instance.</param>
         void SetCurrentTemplate(IPageContainer template);
+
+        /// <summary>
+        /// Set current script.
+        /// </summary>
+        /// <param name="script">The script instance.</param>
+        void SetCurrentScript(IScript script);
 
         /// <summary>
         /// Set current database.

@@ -5,6 +5,7 @@ using System.Linq;
 using Core2D.Attributes;
 using Core2D.Data;
 using Core2D.History;
+using Core2D.Scripting;
 using Core2D.Shapes;
 using Core2D.Style;
 
@@ -21,11 +22,13 @@ namespace Core2D.Containers
         private ImmutableArray<ILibrary<IGroupShape>> _groupLibraries;
         private ImmutableArray<IDatabase> _databases;
         private ImmutableArray<IPageContainer> _templates;
+        private ImmutableArray<IScript> _scripts;
         private ImmutableArray<IDocumentContainer> _documents;
         private ILibrary<IShapeStyle> _currentStyleLibrary;
         private ILibrary<IGroupShape> _currentGroupLibrary;
         private IDatabase _currentDatabase;
         private IPageContainer _currentTemplate;
+        private IScript _currentScript;
         private IDocumentContainer _currentDocument;
         private IPageContainer _currentContainer;
         private IObservableObject _selected;
@@ -73,6 +76,13 @@ namespace Core2D.Containers
         }
 
         /// <inheritdoc/>
+        public ImmutableArray<IScript> Scripts
+        {
+            get => _scripts;
+            set => Update(ref _scripts, value);
+        }
+
+        /// <inheritdoc/>
         [Content]
         public ImmutableArray<IDocumentContainer> Documents
         {
@@ -106,6 +116,13 @@ namespace Core2D.Containers
         {
             get => _currentTemplate;
             set => Update(ref _currentTemplate, value);
+        }
+
+        /// <inheritdoc/>
+        public IScript CurrentScript
+        {
+            get => _currentScript;
+            set => Update(ref _currentScript, value);
         }
 
         /// <inheritdoc/>
@@ -208,6 +225,9 @@ namespace Core2D.Containers
         public void SetCurrentTemplate(IPageContainer template) => CurrentTemplate = template;
 
         /// <inheritdoc/>
+        public void SetCurrentScript(IScript script) => CurrentScript = script;
+
+        /// <inheritdoc/>
         public void SetCurrentDatabase(IDatabase db) => CurrentDatabase = db;
 
         /// <inheritdoc/>
@@ -306,6 +326,12 @@ namespace Core2D.Containers
         public virtual bool ShouldSerializeTemplates() => true;
 
         /// <summary>
+        /// Check whether the <see cref="Scripts"/> property has changed from its default value.
+        /// </summary>
+        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
+        public virtual bool ShouldSerializeScripts() => true;
+
+        /// <summary>
         /// Check whether the <see cref="Documents"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
@@ -334,6 +360,12 @@ namespace Core2D.Containers
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
         public virtual bool ShouldSerializeCurrentTemplate() => _currentTemplate != null;
+
+        /// <summary>
+        /// Check whether the <see cref="CurrentScript"/> property has changed from its default value.
+        /// </summary>
+        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
+        public virtual bool ShouldSerializeCurrentScript() => _currentScript != null;
 
         /// <summary>
         /// Check whether the <see cref="CurrentDocument"/> property has changed from its default value.

@@ -3,6 +3,7 @@ using System.Collections.Immutable;
 using System.Linq;
 using Core2D.Containers;
 using Core2D.Data;
+using Core2D.Scripting;
 using Core2D.Shapes;
 using Core2D.Style;
 
@@ -226,6 +227,57 @@ namespace Core2D.Editor
                 var next = template;
                 project?.History?.Snapshot(previous, next, (p) => page.Template = p);
                 page.Template = next;
+            }
+        }
+
+        /// <summary>
+        /// Add script.
+        /// </summary>
+        /// <param name="project">The project instance.</param>
+        /// <param name="script">The script instance.</param>
+        public static void AddScript(this IProjectContainer project, IScript script)
+        {
+            if (project?.Scripts != null && script != null)
+            {
+                var previous = project.Scripts;
+                var next = project.Scripts.Add(script);
+                project?.History?.Snapshot(previous, next, (p) => project.Scripts = p);
+                project.Scripts = next;
+            }
+        }
+
+        /// <summary>
+        /// Add scripts.
+        /// </summary>
+        /// <param name="project">The project instance.</param>
+        /// <param name="templates">The scripts collection.</param>
+        public static void AddScripts(this IProjectContainer project, IEnumerable<IScript> scripts)
+        {
+            if (project?.Scripts != null && scripts != null)
+            {
+                var builder = project.Scripts.ToBuilder();
+                builder.AddRange(scripts);
+
+                var previous = project.Scripts;
+                var next = builder.ToImmutable();
+                project?.History?.Snapshot(previous, next, (p) => project.Scripts = p);
+                project.Scripts = next;
+            }
+        }
+
+        /// <summary>
+        /// Remove script.
+        /// </summary>
+        /// <param name="project">The project instance.</param>
+        /// <param name="template">The script instance</param>
+        public static void RemoveScript(this IProjectContainer project, IScript script)
+        {
+            if (project?.Scripts != null && script != null)
+            {
+                var previous = project.Scripts;
+                var next = project.Scripts.Remove(script);
+                project?.History?.Snapshot(previous, next, (p) => project.Scripts = p);
+                project.Scripts = next;
             }
         }
 

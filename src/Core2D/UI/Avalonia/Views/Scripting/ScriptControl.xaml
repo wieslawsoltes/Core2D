@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="Core2D.UI.Avalonia.Views.ScriptControl"
+﻿<UserControl x:Class="Core2D.UI.Avalonia.Views.Scripting.ScriptControl"
              xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -7,14 +7,14 @@
              xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
              xmlns:Designer="clr-namespace:Core2D.Editor.Designer;assembly=Core2D"
              mc:Ignorable="d"
-             d:DataContext="{x:Static Designer:DesignerContext.Editor}"
+             d:DataContext="{x:Static Designer:DesignerContext.Script}"
              d:DesignWidth="1000" d:DesignHeight="600">
     <UserControl.KeyBindings>
-        <KeyBinding Command="{Binding OnExecuteRepl}" CommandParameter="{Binding #textCode.Text}" Gesture="Ctrl+Enter"/>
+        <KeyBinding Command="{Binding $parent[Window].DataContext.OnExecuteRepl}" CommandParameter="{Binding #textCode.Text}" Gesture="Ctrl+Enter"/>
     </UserControl.KeyBindings>
     <Grid RowDefinitions="*,Auto" ColumnDefinitions="50*,50*">
-        <TextBox x:Name="textCode" Text="" Classes="code" Margin="3" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"/>
-        <Button Content="Reset" Command="{Binding OnResetRepl}" Classes="code" Margin="3" Grid.Row="1" Grid.Column="0"/>
-        <Button Content="Run" Command="{Binding OnExecuteRepl}" CommandParameter="{Binding #textCode.Text}" Classes="code" Margin="3" Grid.Row="1" Grid.Column="1"/>
+        <TextBox x:Name="textCode" Text="{Binding Code}" Classes="code" Margin="3" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"/>
+        <Button Content="Reset" Command="{Binding $parent[Window].DataContext.OnResetRepl}" Classes="code" Margin="3" Grid.Row="1" Grid.Column="0"/>
+        <Button Content="Run" Command="{Binding $parent[Window].DataContext.OnExecuteRepl}" CommandParameter="{Binding #textCode.Text}" Classes="code" Margin="3" Grid.Row="1" Grid.Column="1"/>
     </Grid>
 </UserControl>

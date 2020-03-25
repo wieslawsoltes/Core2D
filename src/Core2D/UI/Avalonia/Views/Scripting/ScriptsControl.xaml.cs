@@ -1,17 +1,17 @@
 ﻿using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 
-namespace Core2D.UI.Avalonia.Views
+namespace Core2D.UI.Avalonia.Views.Scripting
 {
     /// <summary>
-    /// Interaction logic for <see cref="ScriptControl"/> xaml.
+    /// Interaction logic for <see cref="ScriptsControl"/> xaml.
     /// </summary>
-    public class ScriptControl : UserControl
+    public class ScriptsControl : UserControl
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="ScriptControl"/> class.
+        /// Initializes a new instance of the <see cref="ScriptsControl"/> class.
         /// </summary>
-        public ScriptControl()
+        public ScriptsControl()
         {
             InitializeComponent();
         }

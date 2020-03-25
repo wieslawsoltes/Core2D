@@ -23,7 +23,7 @@
                 <!--<id:DropBehavior Context="{Binding $parent[Window].DataContext}" Handler="{StaticResource ListBoxDropHandler}"/>-->
             </i:Interaction.Behaviors>
             <ListBox.KeyBindings>
-                <KeyBinding Command="{Binding $parent[Window].DataContext.OnApplyTemplate}" Gesture="Ctrl+N"/>
+                <KeyBinding Command="{Binding $parent[Window].DataContext.OnAddTemplate}" Gesture="Ctrl+N"/>
                 <KeyBinding Command="{Binding $parent[Window].DataContext.OnEditTemplate}" CommandParameter="{Binding #templates.SelectedItem}" Gesture="Ctrl+T"/>
                 <KeyBinding Command="{Binding $parent[Window].DataContext.OnRemoveTemplate}" CommandParameter="{Binding #templates.SelectedItem}" Gesture="Delete"/>
                 <KeyBinding Command="{Binding $parent[Window].DataContext.Platform.OnExportObject}" CommandParameter="{Binding #templates.SelectedItem}" Gesture="Ctrl+E"/>

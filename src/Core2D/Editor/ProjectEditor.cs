@@ -12,6 +12,7 @@ using Core2D.Editor.Layout;
 using Core2D.Editor.Recent;
 using Core2D.Interfaces;
 using Core2D.Renderer;
+using Core2D.Scripting;
 using Core2D.Shapes;
 using Core2D.Style;
 using Spatial;
@@ -632,6 +633,15 @@ namespace Core2D.Editor
                 // Import as templates.
                 Project.AddTemplates(templates);
             }
+            else if (item is IList<IScript> scripts)
+            {
+                // Import as scripts.
+                Project.AddScripts(scripts);
+            }
+            else if (item is IScript script)
+            {
+                Project?.AddScript(script);
+            }
             else if (item is IDocumentContainer document)
             {
                 if (restore)
@@ -803,7 +813,7 @@ namespace Core2D.Editor
         }
 
         /// <inheritdoc/>
-        public void OnExecuteScript(string path)
+        public void OnExecuteScriptFile(string path)
         {
             try
             {
@@ -820,11 +830,28 @@ namespace Core2D.Editor
         }
 
         /// <inheritdoc/>
-        public void OnExecuteScript(string[] paths)
+        public void OnExecuteScriptFile(string[] paths)
         {
             foreach (var path in paths)
             {
-                OnExecuteScript(path);
+                OnExecuteScriptFile(path);
+            }
+        }
+
+        /// <inheritdoc/>
+        public void OnExecuteScript(IScript script)
+        {
+            try
+            {
+                var csharp = script?.Code;
+                if (!string.IsNullOrWhiteSpace(csharp))
+                {
+                    OnExecuteRepl(csharp);
+                }
+            }
+            catch (Exception ex)
+            {
+                Log?.LogException(ex);
             }
         }
 
@@ -1792,6 +1819,26 @@ namespace Core2D.Editor
         }
 
         /// <inheritdoc/>
+        public void OnAddScript()
+        {
+            if (Project != null)
+            {
+                var script = Factory.CreateScript(ProjectEditorConfiguration.DefaultScriptName);
+                Project.AddScript(script);
+            }
+        }
+
+        /// <inheritdoc/>
+        public void OnRemoveScript(IScript script)
+        {
+            if (script != null)
+            {
+                Project?.RemoveScript(script);
+                Project?.SetCurrentScript(Project?.Scripts.FirstOrDefault());
+            }
+        }
+
+        /// <inheritdoc/>
         public void OnApplyTemplate(IPageContainer template)
         {
             var page = Project?.CurrentContainer;
@@ -2545,7 +2592,7 @@ namespace Core2D.Editor
                         }
                         else if (string.Compare(ext, ProjectEditorConfiguration.ScriptExtension, StringComparison.OrdinalIgnoreCase) == 0)
                         {
-                            OnExecuteScript(path);
+                            OnExecuteScriptFile(path);
                             result = true;
                         }
                     }

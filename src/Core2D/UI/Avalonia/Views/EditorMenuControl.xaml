@@ -37,7 +37,7 @@
             <MenuItem Header="_Save" Command="{Binding Platform.OnSave}" InputGesture="Ctrl+S"/>
             <MenuItem Header="Save _As..." Command="{Binding Platform.OnSaveAs}" InputGesture="Ctrl+Shift+S"/>
             <Separator/>
-            <MenuItem Header="Execu_te Script..." Command="{Binding Platform.OnExecuteScript}"/>
+            <MenuItem Header="Execu_te Script..." Command="{Binding Platform.OnExecuteScriptFile}"/>
             <Separator/>
             <MenuItem Header="Import Xa_ml..." Command="{Binding Platform.OnImportXaml}" InputGesture="Ctrl+Shift+X"/>
             <MenuItem Header="Import _Json..." Command="{Binding Platform.OnImportJson}" InputGesture="Ctrl+Shift+J"/>

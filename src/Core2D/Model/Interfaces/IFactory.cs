@@ -7,6 +7,7 @@ using Core2D.Data;
 using Core2D.Path;
 using Core2D.Path.Segments;
 using Core2D.Renderer;
+using Core2D.Scripting;
 using Core2D.Shapes;
 using Core2D.Style;
 
@@ -806,6 +807,14 @@ namespace Core2D.Interfaces
         /// </summary>
         /// <returns>The new instance of the <see cref="IOptions"/> class.</returns>
         IOptions CreateOptions();
+
+        /// <summary>
+        /// Creates a new <see cref="IScript"/> script instance.
+        /// <param name="name">The script name.</param>
+        /// <param name="owner">The script code.</param>
+        /// </summary>
+        /// <returns>The new instance of the <see cref="IScript"/>.</returns>
+        IScript CreateScript(string name = "Script", string code = "");
 
         /// <summary>
         /// Creates a new <see cref="ILayerContainer"/> instance.

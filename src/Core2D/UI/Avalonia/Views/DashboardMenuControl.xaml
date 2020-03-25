@@ -30,7 +30,7 @@
             <Separator/>
             <MenuItem Header="_Open..." Command="{Binding Platform.OnOpen}" InputGesture="Ctrl+O"/>
             <Separator/>
-            <MenuItem Header="Execu_te Script..." Command="{Binding Platform.OnExecuteScript}"/>
+            <MenuItem Header="Execu_te Script..." Command="{Binding Platform.OnExecuteScriptFile}"/>
             <Separator/>
             <MenuItem Header="_Recent" Items="{Binding RecentProjects}">
                 <MenuItem.Styles>

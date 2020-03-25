@@ -5,6 +5,7 @@ using Core2D.Containers;
 using Core2D.Data;
 using Core2D.Path;
 using Core2D.Path.Segments;
+using Core2D.Scripting;
 using Core2D.Shapes;
 using Core2D.Style;
 
@@ -143,6 +144,13 @@ namespace Core2D.Editor
                 Add(project.Templates);
             }
 
+            if (e.PropertyName == nameof(IProjectContainer.Scripts))
+            {
+                var project = sender as IProjectContainer;
+                Remove(project.Scripts);
+                Add(project.Scripts);
+            }
+
             if (e.PropertyName == nameof(IProjectContainer.Documents))
             {
                 var project = sender as IProjectContainer;
@@ -196,6 +204,11 @@ namespace Core2D.Editor
                 page.Template.Notify(nameof(IPageContainer.Background));
             }
             _invalidateLayers();
+            MarkAsDirty();
+        }
+
+        private void ObserveScript(object sender, PropertyChangedEventArgs e)
+        {
             MarkAsDirty();
         }
 
@@ -490,6 +503,14 @@ namespace Core2D.Editor
                 }
             }
 
+            if (project.Scripts != null)
+            {
+                foreach (var script in project.Scripts)
+                {
+                    Add(script);
+                }
+            }
+
             if (project.StyleLibraries != null)
             {
                 foreach (var sg in project.StyleLibraries)
@@ -531,6 +552,14 @@ namespace Core2D.Editor
                 foreach (var template in project.Templates)
                 {
                     Remove(template);
+                }
+            }
+
+            if (project.Scripts != null)
+            {
+                foreach (var script in project.Scripts)
+                {
+                    Remove(script);
                 }
             }
 
@@ -1574,6 +1603,52 @@ namespace Core2D.Editor
             foreach (var value in values)
             {
                 Remove(value);
+            }
+        }
+
+        private void Add(IScript script)
+        {
+            if (script == null)
+            {
+                return;
+            }
+
+            script.PropertyChanged += ObserveScript;
+        }
+
+        private void Remove(IScript script)
+        {
+            if (script == null)
+            {
+                return;
+            }
+
+            script.PropertyChanged -= ObserveScript;
+        }
+
+        private void Add(IEnumerable<IScript> scripts)
+        {
+            if (scripts == null)
+            {
+                return;
+            }
+
+            foreach (var script in scripts)
+            {
+                Add(script);
+            }
+        }
+
+        private void Remove(IEnumerable<IScript> scripts)
+        {
+            if (scripts == null)
+            {
+                return;
+            }
+
+            foreach (var script in scripts)
+            {
+                Remove(script);
             }
         }
 

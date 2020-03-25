@@ -305,7 +305,7 @@ namespace Core2D.UI.Avalonia.Editor
         }
 
         /// <inheritdoc/>
-        public async void OnExecuteScript(string path)
+        public async void OnExecuteScriptFile(string path)
         {
             if (path == null)
             {
@@ -318,7 +318,7 @@ namespace Core2D.UI.Avalonia.Editor
                 {
                     if (result.All(r => r != null))
                     {
-                        _serviceProvider.GetService<IProjectEditor>().OnExecuteScript(result);
+                        _serviceProvider.GetService<IProjectEditor>().OnExecuteScriptFile(result);
                     }
                 }
             }

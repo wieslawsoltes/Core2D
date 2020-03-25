@@ -14,6 +14,7 @@
              xmlns:Dock="clr-namespace:Dock.Model;assembly=Dock.Model"
              xmlns:Editor="clr-namespace:Core2D.Editor;assembly=Core2D"
              xmlns:ContainersCore="clr-namespace:Core2D.Containers;assembly=Core2D"
+             xmlns:ScriptingCore="clr-namespace:Core2D.Scripting;assembly=Core2D"
              xmlns:ShapesCore="clr-namespace:Core2D.Shapes;assembly=Core2D"
              xmlns:StyleCore="clr-namespace:Core2D.Style;assembly=Core2D"
              xmlns:Designer="clr-namespace:Core2D.Editor.Designer;assembly=Core2D"
@@ -218,6 +219,33 @@
                         </DataTemplate>
                     </TreeViewItem.DataTemplates>
                 </TreeViewItem>
+                <!-- Scripts -->
+                <TreeViewItem Header="Scripts" DataContext="{Binding Scripts}" Items="{Binding}">
+                    <TreeViewItem.ContextMenu>
+                        <ContextMenu Classes="default">
+                            <MenuItem Header="E_xport" Command="{Binding $parent[UserControl].DataContext.Platform.OnExportObject}" CommandParameter="{Binding}"/>
+                        </ContextMenu>
+                    </TreeViewItem.ContextMenu>
+                    <TreeViewItem.Styles>
+                        <Style Selector="TreeViewItem">
+                            <Setter Property="IsExpanded" Value="False"/>
+                        </Style>
+                    </TreeViewItem.Styles>
+                    <TreeViewItem.DataTemplates>
+                        <DataTemplate DataType="Base:IObservableObject">
+                            <TextBlock Text="{Binding Mode=OneWay, Converter={StaticResource ObjectToTypeStringConverter}}" Classes="tree drag">
+                                <i:Interaction.Behaviors>
+                                    <id:DragBehavior Context="{Binding}"/>
+                                </i:Interaction.Behaviors>
+                                <TextBlock.ContextMenu>
+                                    <ContextMenu Classes="default">
+                                        <MenuItem Header="E_xport" Command="{Binding $parent[UserControl].DataContext.Platform.OnExportObject}" CommandParameter="{Binding}"/>
+                                    </ContextMenu>
+                                </TextBlock.ContextMenu>
+                            </TextBlock>
+                        </DataTemplate>
+                    </TreeViewItem.DataTemplates>
+                </TreeViewItem>
                 <!-- Documents -->
                 <TreeViewItem Header="Documents" DataContext="{Binding Documents}" Items="{Binding}">
                     <TreeViewItem.ContextMenu>
@@ -332,6 +360,13 @@
                     </TreeViewItem.ContextMenu>
                 </TreeViewItem>
                 <TreeViewItem Header="Template" DataContext="{Binding Project.CurrentTemplate}">
+                    <TreeViewItem.ContextMenu>
+                        <ContextMenu Classes="default">
+                            <MenuItem Header="E_xport" Command="{Binding $parent[UserControl].DataContext.Platform.OnExportObject}" CommandParameter="{Binding}"/>
+                        </ContextMenu>
+                    </TreeViewItem.ContextMenu>
+                </TreeViewItem>
+                <TreeViewItem Header="Script" DataContext="{Binding Project.CurrentScript}">
                     <TreeViewItem.ContextMenu>
                         <ContextMenu Classes="default">
                             <MenuItem Header="E_xport" Command="{Binding $parent[UserControl].DataContext.Platform.OnExportObject}" CommandParameter="{Binding}"/>

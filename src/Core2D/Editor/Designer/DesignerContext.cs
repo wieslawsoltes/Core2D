@@ -8,6 +8,7 @@ using Core2D.Interfaces;
 using Core2D.Path;
 using Core2D.Path.Segments;
 using Core2D.Renderer;
+using Core2D.Scripting;
 using Core2D.Shapes;
 using Core2D.Style;
 
@@ -52,6 +53,11 @@ namespace Core2D.Editor.Designer
         /// The design time <see cref="IOptions"/>.
         /// </summary>
         public static IOptions Options { get; set; }
+
+        /// <summary>
+        /// The design time <see cref="IScript"/>.
+        /// </summary>
+        public static IScript Script { get; set; }
 
         /// <summary>
         /// The design time <see cref="IProjectContainer"/>.
@@ -292,6 +298,10 @@ namespace Core2D.Editor.Designer
 
             CurrentStyleLibrary = Project.CurrentStyleLibrary;
             CurrentGroupLibrary = Project.CurrentGroupLibrary;
+
+            // Scripting
+
+            Script = factory.CreateScript();
 
             // State
 

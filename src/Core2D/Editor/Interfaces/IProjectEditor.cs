@@ -10,6 +10,7 @@ using Core2D.Editor.Tools;
 using Core2D.Editor.Tools.Path;
 using Core2D.Interfaces;
 using Core2D.Renderer;
+using Core2D.Scripting;
 using Core2D.Shapes;
 using Core2D.Style;
 using DM = Dock.Model;
@@ -345,13 +346,19 @@ namespace Core2D.Editor
         /// Execute code script from file.
         /// </summary>
         /// <param name="path">The code file path.</param>
-        void OnExecuteScript(string path);
+        void OnExecuteScriptFile(string path);
 
         /// <summary>
         /// Execute code scripts from files.
         /// </summary>
         /// <param name="paths">The code file paths.</param>
-        void OnExecuteScript(string[] paths);
+        void OnExecuteScriptFile(string[] paths);
+
+        /// <summary>
+        /// Execute code script.
+        /// </summary>
+        /// <param name="script">The script object.</param>
+        void OnExecuteScript(IScript script);
 
         /// <summary>
         /// Undo last action.
@@ -775,6 +782,17 @@ namespace Core2D.Editor
         /// </summary>
         /// <param name="template">The template object.</param>
         void OnApplyTemplate(IPageContainer template);
+
+        /// <summary>
+        /// Add script.
+        /// </summary>
+        void OnAddScript();
+
+        /// <summary>
+        /// Remove script.
+        /// </summary>
+        /// <param name="script">The script object.</param>
+        void OnRemoveScript(IScript script);
 
         /// <summary>
         /// Add image key.

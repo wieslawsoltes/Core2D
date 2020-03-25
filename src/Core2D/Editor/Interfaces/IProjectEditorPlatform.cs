@@ -70,7 +70,7 @@ namespace Core2D.Editor
         /// Execute script.
         /// </summary>
         /// <param name="path">The script file path.</param>
-        void OnExecuteScript(string path);
+        void OnExecuteScriptFile(string path);
 
         /// <summary>
         /// Close application view.

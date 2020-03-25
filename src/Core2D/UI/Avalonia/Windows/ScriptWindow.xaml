@@ -8,7 +8,7 @@
         xmlns:id="clr-namespace:Dock.Avalonia;assembly=Core2D"
         xmlns:idc="clr-namespace:Dock.Avalonia.Controls;assembly=Dock.Avalonia"
         xmlns:converters="clr-namespace:Core2D.UI.Avalonia.Converters;assembly=Core2D"
-        xmlns:views="clr-namespace:Core2D.UI.Avalonia.Views;assembly=Core2D"
+        xmlns:scripting="clr-namespace:Core2D.UI.Avalonia.Views.Scripting;assembly=Core2D"
         Width="700" Height="340"
         UseLayoutRounding="True" RenderOptions.BitmapInterpolationMode="HighQuality"
         WindowState="Normal" WindowStartupLocation="CenterScreen"
@@ -20,5 +20,5 @@
         mc:Ignorable="d"
         d:DataContext="{x:Static Designer:DesignerContext.Editor}"
         d:DesignWidth="1000" d:DesignHeight="600">
-    <views:ScriptControl/>
+    <scripting:ScriptControl DataContext="{Binding Project.CurrentScript}"/>
 </Window>
