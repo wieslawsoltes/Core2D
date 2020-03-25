@@ -1,0 +1,35 @@
+{
+  "metadata": [
+    {
+      "src": [
+        {
+          "files": [
+            "/src/Core2D/Core2D.csproj"
+          ],
+          "exclude": [ "**/bin/**", "**/obj/**" ], 
+          "cwd": ".."
+        }
+      ],
+      "dest": "api"
+    },
+  ],
+  "build": {
+    "content":
+      [
+        {
+          "files": ["**/*.yml", "index.md", "tutorial/*.md"],
+        }
+      ],
+    "resource": [
+        {
+          "files": ["images/**"]
+        }
+    ],
+    "overwrite": "apidoc/*.md",
+    "globalMetadata": {
+      "_appTitle": "Core2D Website"
+    },
+    "dest": ".",
+    "template": [ "default", "template"]
+  }
+}
