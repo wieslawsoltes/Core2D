@@ -1,0 +1,962 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Class ShapeState
+   | Core2D Website </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Class ShapeState
+   | Core2D Website ">
+    <meta name="generator" content="docfx 2.51.0.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="Core2D.Renderer.ShapeState">
+  
+  
+  <h1 id="Core2D_Renderer_ShapeState" data-uid="Core2D.Renderer.ShapeState" class="text-break">Class ShapeState
+  </h1>
+  <div class="markdown level0 summary"><p>Shape state.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><span class="xref">System.Object</span></div>
+    <div class="level1"><a class="xref" href="Core2D.ObservableObject.html">ObservableObject</a></div>
+    <div class="level2"><span class="xref">ShapeState</span></div>
+  </div>
+  <div classs="implements">
+    <h5>Implements</h5>
+    <div><a class="xref" href="Core2D.Renderer.IShapeState.html">IShapeState</a></div>
+    <div><a class="xref" href="Core2D.IObservableObject.html">IObservableObject</a></div>
+    <div><span class="xref">System.ComponentModel.INotifyPropertyChanged</span></div>
+    <div><a class="xref" href="Core2D.ICopyable.html">ICopyable</a></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="Core2D.ObservableObject.html#Core2D_ObservableObject_Owner">ObservableObject.Owner</a>
+    </div>
+    <div>
+      <a class="xref" href="Core2D.ObservableObject.html#Core2D_ObservableObject_Id">ObservableObject.Id</a>
+    </div>
+    <div>
+      <a class="xref" href="Core2D.ObservableObject.html#Core2D_ObservableObject_Name">ObservableObject.Name</a>
+    </div>
+    <div>
+      <a class="xref" href="Core2D.ObservableObject.html#Core2D_ObservableObject_MarkAsDirty_System_Boolean_">ObservableObject.MarkAsDirty(Boolean)</a>
+    </div>
+    <div>
+      <a class="xref" href="Core2D.ObservableObject.html#Core2D_ObservableObject_PropertyChanged">ObservableObject.PropertyChanged</a>
+    </div>
+    <div>
+      <a class="xref" href="Core2D.ObservableObject.html#Core2D_ObservableObject_Notify_System_String_">ObservableObject.Notify(String)</a>
+    </div>
+    <div>
+      <a class="xref" href="Core2D.ObservableObject.html#Core2D_ObservableObject_Update__1___0____0_System_String_">ObservableObject.Update&lt;T&gt;(T, T, String)</a>
+    </div>
+    <div>
+      <a class="xref" href="Core2D.ObservableObject.html#Core2D_ObservableObject_ShouldSerializeOwner">ObservableObject.ShouldSerializeOwner()</a>
+    </div>
+    <div>
+      <a class="xref" href="Core2D.ObservableObject.html#Core2D_ObservableObject_ShouldSerializeId">ObservableObject.ShouldSerializeId()</a>
+    </div>
+    <div>
+      <a class="xref" href="Core2D.ObservableObject.html#Core2D_ObservableObject_ShouldSerializeName">ObservableObject.ShouldSerializeName()</a>
+    </div>
+    <div>
+      <a class="xref" href="Core2D.ObservableObject.html#Core2D_ObservableObject_ShouldSerializeIsDirty">ObservableObject.ShouldSerializeIsDirty()</a>
+    </div>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetHashCode()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetType()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.MemberwiseClone()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Core2D.Renderer.html">Core2D.Renderer</a></h6>
+  <h6><strong>Assembly</strong>: Core2D.dll</h6>
+  <h5 id="Core2D_Renderer_ShapeState_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class ShapeState : ObservableObject, IShapeState, IObservableObject, INotifyPropertyChanged, ICopyable</code></pre>
+  </div>
+  <h3 id="properties">Properties
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Renderer_ShapeState_Connector.md&amp;value=---%0Auid%3A%20Core2D.Renderer.ShapeState.Connector%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/ViewModels/Renderer/ShapeState.cs/#L68">View Source</a>
+  </span>
+  <a id="Core2D_Renderer_ShapeState_Connector_" data-uid="Core2D.Renderer.ShapeState.Connector*"></a>
+  <h4 id="Core2D_Renderer_ShapeState_Connector" data-uid="Core2D.Renderer.ShapeState.Connector">Connector</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool Connector { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Renderer_ShapeState_Default.md&amp;value=---%0Auid%3A%20Core2D.Renderer.ShapeState.Default%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/ViewModels/Renderer/ShapeState.cs/#L40">View Source</a>
+  </span>
+  <a id="Core2D_Renderer_ShapeState_Default_" data-uid="Core2D.Renderer.ShapeState.Default*"></a>
+  <h4 id="Core2D_Renderer_ShapeState_Default" data-uid="Core2D.Renderer.ShapeState.Default">Default</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool Default { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Renderer_ShapeState_Flags.md&amp;value=---%0Auid%3A%20Core2D.Renderer.ShapeState.Flags%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/ViewModels/Renderer/ShapeState.cs/#L15">View Source</a>
+  </span>
+  <a id="Core2D_Renderer_ShapeState_Flags_" data-uid="Core2D.Renderer.ShapeState.Flags*"></a>
+  <h4 id="Core2D_Renderer_ShapeState_Flags" data-uid="Core2D.Renderer.ShapeState.Flags">Flags</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ShapeStateFlags Flags { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Core2D.Renderer.ShapeStateFlags.html">ShapeStateFlags</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Renderer_ShapeState_Input.md&amp;value=---%0Auid%3A%20Core2D.Renderer.ShapeState.Input%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/ViewModels/Renderer/ShapeState.cs/#L89">View Source</a>
+  </span>
+  <a id="Core2D_Renderer_ShapeState_Input_" data-uid="Core2D.Renderer.ShapeState.Input*"></a>
+  <h4 id="Core2D_Renderer_ShapeState_Input" data-uid="Core2D.Renderer.ShapeState.Input">Input</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool Input { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Renderer_ShapeState_Locked.md&amp;value=---%0Auid%3A%20Core2D.Renderer.ShapeState.Locked%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/ViewModels/Renderer/ShapeState.cs/#L61">View Source</a>
+  </span>
+  <a id="Core2D_Renderer_ShapeState_Locked_" data-uid="Core2D.Renderer.ShapeState.Locked*"></a>
+  <h4 id="Core2D_Renderer_ShapeState_Locked" data-uid="Core2D.Renderer.ShapeState.Locked">Locked</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool Locked { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Renderer_ShapeState_None.md&amp;value=---%0Auid%3A%20Core2D.Renderer.ShapeState.None%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/ViewModels/Renderer/ShapeState.cs/#L75">View Source</a>
+  </span>
+  <a id="Core2D_Renderer_ShapeState_None_" data-uid="Core2D.Renderer.ShapeState.None*"></a>
+  <h4 id="Core2D_Renderer_ShapeState_None" data-uid="Core2D.Renderer.ShapeState.None">None</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool None { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Renderer_ShapeState_Output.md&amp;value=---%0Auid%3A%20Core2D.Renderer.ShapeState.Output%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/ViewModels/Renderer/ShapeState.cs/#L96">View Source</a>
+  </span>
+  <a id="Core2D_Renderer_ShapeState_Output_" data-uid="Core2D.Renderer.ShapeState.Output*"></a>
+  <h4 id="Core2D_Renderer_ShapeState_Output" data-uid="Core2D.Renderer.ShapeState.Output">Output</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool Output { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Renderer_ShapeState_Printable.md&amp;value=---%0Auid%3A%20Core2D.Renderer.ShapeState.Printable%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/ViewModels/Renderer/ShapeState.cs/#L54">View Source</a>
+  </span>
+  <a id="Core2D_Renderer_ShapeState_Printable_" data-uid="Core2D.Renderer.ShapeState.Printable*"></a>
+  <h4 id="Core2D_Renderer_ShapeState_Printable" data-uid="Core2D.Renderer.ShapeState.Printable">Printable</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool Printable { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Renderer_ShapeState_Standalone.md&amp;value=---%0Auid%3A%20Core2D.Renderer.ShapeState.Standalone%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/ViewModels/Renderer/ShapeState.cs/#L82">View Source</a>
+  </span>
+  <a id="Core2D_Renderer_ShapeState_Standalone_" data-uid="Core2D.Renderer.ShapeState.Standalone*"></a>
+  <h4 id="Core2D_Renderer_ShapeState_Standalone" data-uid="Core2D.Renderer.ShapeState.Standalone">Standalone</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool Standalone { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Renderer_ShapeState_Visible.md&amp;value=---%0Auid%3A%20Core2D.Renderer.ShapeState.Visible%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/ViewModels/Renderer/ShapeState.cs/#L47">View Source</a>
+  </span>
+  <a id="Core2D_Renderer_ShapeState_Visible_" data-uid="Core2D.Renderer.ShapeState.Visible*"></a>
+  <h4 id="Core2D_Renderer_ShapeState_Visible" data-uid="Core2D.Renderer.ShapeState.Visible">Visible</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool Visible { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Renderer_ShapeState_Copy_System_Collections_Generic_IDictionary_System_Object_System_Object__.md&amp;value=---%0Auid%3A%20Core2D.Renderer.ShapeState.Copy(System.Collections.Generic.IDictionary%7BSystem.Object%2CSystem.Object%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/ViewModels/Renderer/ShapeState.cs/#L103">View Source</a>
+  </span>
+  <a id="Core2D_Renderer_ShapeState_Copy_" data-uid="Core2D.Renderer.ShapeState.Copy*"></a>
+  <h4 id="Core2D_Renderer_ShapeState_Copy_System_Collections_Generic_IDictionary_System_Object_System_Object__" data-uid="Core2D.Renderer.ShapeState.Copy(System.Collections.Generic.IDictionary{System.Object,System.Object})">Copy(IDictionary&lt;Object, Object&gt;)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override object Copy(IDictionary&lt;object, object&gt; shared)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.IDictionary</span>&lt;<span class="xref">System.Object</span>, <span class="xref">System.Object</span>&gt;</td>
+        <td><span class="parametername">shared</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="Core2D.ObservableObject.html#Core2D_ObservableObject_Copy_System_Collections_Generic_IDictionary_System_Object_System_Object__">ObservableObject.Copy(IDictionary&lt;Object, Object&gt;)</a></div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Renderer_ShapeState_Parse_System_String_.md&amp;value=---%0Auid%3A%20Core2D.Renderer.ShapeState.Parse(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/ViewModels/Renderer/ShapeState.cs/#L116">View Source</a>
+  </span>
+  <a id="Core2D_Renderer_ShapeState_Parse_" data-uid="Core2D.Renderer.ShapeState.Parse*"></a>
+  <h4 id="Core2D_Renderer_ShapeState_Parse_System_String_" data-uid="Core2D.Renderer.ShapeState.Parse(System.String)">Parse(String)</h4>
+  <div class="markdown level1 summary"><p>Parses a shape state string.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static IShapeState Parse(string s)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">s</span></td>
+        <td><p>The shape state string.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Core2D.Renderer.IShapeState.html">IShapeState</a></td>
+        <td><p>The <a class="xref" href="Core2D.Renderer.ShapeState.html">ShapeState</a>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Renderer_ShapeState_ShouldSerializeConnector.md&amp;value=---%0Auid%3A%20Core2D.Renderer.ShapeState.ShouldSerializeConnector%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/ViewModels/Renderer/ShapeState.cs/#L168">View Source</a>
+  </span>
+  <a id="Core2D_Renderer_ShapeState_ShouldSerializeConnector_" data-uid="Core2D.Renderer.ShapeState.ShouldSerializeConnector*"></a>
+  <h4 id="Core2D_Renderer_ShapeState_ShouldSerializeConnector" data-uid="Core2D.Renderer.ShapeState.ShouldSerializeConnector">ShouldSerializeConnector()</h4>
+  <div class="markdown level1 summary"><p>The <a class="xref" href="Core2D.Renderer.ShapeState.html#Core2D_Renderer_ShapeState_Connector">Connector</a> property is not serialized.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual bool ShouldSerializeConnector()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><p>Returns always false.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Renderer_ShapeState_ShouldSerializeDefault.md&amp;value=---%0Auid%3A%20Core2D.Renderer.ShapeState.ShouldSerializeDefault%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/ViewModels/Renderer/ShapeState.cs/#L144">View Source</a>
+  </span>
+  <a id="Core2D_Renderer_ShapeState_ShouldSerializeDefault_" data-uid="Core2D.Renderer.ShapeState.ShouldSerializeDefault*"></a>
+  <h4 id="Core2D_Renderer_ShapeState_ShouldSerializeDefault" data-uid="Core2D.Renderer.ShapeState.ShouldSerializeDefault">ShouldSerializeDefault()</h4>
+  <div class="markdown level1 summary"><p>The <a class="xref" href="Core2D.Renderer.ShapeState.html#Core2D_Renderer_ShapeState_Default">Default</a> property is not serialized.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual bool ShouldSerializeDefault()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><p>Returns always false.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Renderer_ShapeState_ShouldSerializeFlags.md&amp;value=---%0Auid%3A%20Core2D.Renderer.ShapeState.ShouldSerializeFlags%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/ViewModels/Renderer/ShapeState.cs/#L138">View Source</a>
+  </span>
+  <a id="Core2D_Renderer_ShapeState_ShouldSerializeFlags_" data-uid="Core2D.Renderer.ShapeState.ShouldSerializeFlags*"></a>
+  <h4 id="Core2D_Renderer_ShapeState_ShouldSerializeFlags" data-uid="Core2D.Renderer.ShapeState.ShouldSerializeFlags">ShouldSerializeFlags()</h4>
+  <div class="markdown level1 summary"><p>Check whether the <a class="xref" href="Core2D.Renderer.ShapeState.html#Core2D_Renderer_ShapeState_Flags">Flags</a> property has changed from its default value.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual bool ShouldSerializeFlags()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><p>Returns true if the property has changed; otherwise, returns false.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Renderer_ShapeState_ShouldSerializeInput.md&amp;value=---%0Auid%3A%20Core2D.Renderer.ShapeState.ShouldSerializeInput%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/ViewModels/Renderer/ShapeState.cs/#L186">View Source</a>
+  </span>
+  <a id="Core2D_Renderer_ShapeState_ShouldSerializeInput_" data-uid="Core2D.Renderer.ShapeState.ShouldSerializeInput*"></a>
+  <h4 id="Core2D_Renderer_ShapeState_ShouldSerializeInput" data-uid="Core2D.Renderer.ShapeState.ShouldSerializeInput">ShouldSerializeInput()</h4>
+  <div class="markdown level1 summary"><p>The <a class="xref" href="Core2D.Renderer.ShapeState.html#Core2D_Renderer_ShapeState_Input">Input</a> property is not serialized.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual bool ShouldSerializeInput()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><p>Returns always false.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Renderer_ShapeState_ShouldSerializeLocked.md&amp;value=---%0Auid%3A%20Core2D.Renderer.ShapeState.ShouldSerializeLocked%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/ViewModels/Renderer/ShapeState.cs/#L162">View Source</a>
+  </span>
+  <a id="Core2D_Renderer_ShapeState_ShouldSerializeLocked_" data-uid="Core2D.Renderer.ShapeState.ShouldSerializeLocked*"></a>
+  <h4 id="Core2D_Renderer_ShapeState_ShouldSerializeLocked" data-uid="Core2D.Renderer.ShapeState.ShouldSerializeLocked">ShouldSerializeLocked()</h4>
+  <div class="markdown level1 summary"><p>The <a class="xref" href="Core2D.Renderer.ShapeState.html#Core2D_Renderer_ShapeState_Locked">Locked</a> property is not serialized.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual bool ShouldSerializeLocked()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><p>Returns always false.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Renderer_ShapeState_ShouldSerializeNone.md&amp;value=---%0Auid%3A%20Core2D.Renderer.ShapeState.ShouldSerializeNone%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/ViewModels/Renderer/ShapeState.cs/#L174">View Source</a>
+  </span>
+  <a id="Core2D_Renderer_ShapeState_ShouldSerializeNone_" data-uid="Core2D.Renderer.ShapeState.ShouldSerializeNone*"></a>
+  <h4 id="Core2D_Renderer_ShapeState_ShouldSerializeNone" data-uid="Core2D.Renderer.ShapeState.ShouldSerializeNone">ShouldSerializeNone()</h4>
+  <div class="markdown level1 summary"><p>The <a class="xref" href="Core2D.Renderer.ShapeState.html#Core2D_Renderer_ShapeState_None">None</a> property is not serialized.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual bool ShouldSerializeNone()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><p>Returns always false.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Renderer_ShapeState_ShouldSerializeOutput.md&amp;value=---%0Auid%3A%20Core2D.Renderer.ShapeState.ShouldSerializeOutput%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/ViewModels/Renderer/ShapeState.cs/#L192">View Source</a>
+  </span>
+  <a id="Core2D_Renderer_ShapeState_ShouldSerializeOutput_" data-uid="Core2D.Renderer.ShapeState.ShouldSerializeOutput*"></a>
+  <h4 id="Core2D_Renderer_ShapeState_ShouldSerializeOutput" data-uid="Core2D.Renderer.ShapeState.ShouldSerializeOutput">ShouldSerializeOutput()</h4>
+  <div class="markdown level1 summary"><p>The <a class="xref" href="Core2D.Renderer.ShapeState.html#Core2D_Renderer_ShapeState_Output">Output</a> property is not serialized.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual bool ShouldSerializeOutput()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><p>Returns always false.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Renderer_ShapeState_ShouldSerializePrintable.md&amp;value=---%0Auid%3A%20Core2D.Renderer.ShapeState.ShouldSerializePrintable%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/ViewModels/Renderer/ShapeState.cs/#L156">View Source</a>
+  </span>
+  <a id="Core2D_Renderer_ShapeState_ShouldSerializePrintable_" data-uid="Core2D.Renderer.ShapeState.ShouldSerializePrintable*"></a>
+  <h4 id="Core2D_Renderer_ShapeState_ShouldSerializePrintable" data-uid="Core2D.Renderer.ShapeState.ShouldSerializePrintable">ShouldSerializePrintable()</h4>
+  <div class="markdown level1 summary"><p>The <a class="xref" href="Core2D.Renderer.ShapeState.html#Core2D_Renderer_ShapeState_Printable">Printable</a> property is not serialized.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual bool ShouldSerializePrintable()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><p>Returns always false.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Renderer_ShapeState_ShouldSerializeStandalone.md&amp;value=---%0Auid%3A%20Core2D.Renderer.ShapeState.ShouldSerializeStandalone%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/ViewModels/Renderer/ShapeState.cs/#L180">View Source</a>
+  </span>
+  <a id="Core2D_Renderer_ShapeState_ShouldSerializeStandalone_" data-uid="Core2D.Renderer.ShapeState.ShouldSerializeStandalone*"></a>
+  <h4 id="Core2D_Renderer_ShapeState_ShouldSerializeStandalone" data-uid="Core2D.Renderer.ShapeState.ShouldSerializeStandalone">ShouldSerializeStandalone()</h4>
+  <div class="markdown level1 summary"><p>The <a class="xref" href="Core2D.Renderer.ShapeState.html#Core2D_Renderer_ShapeState_Standalone">Standalone</a> property is not serialized.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual bool ShouldSerializeStandalone()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><p>Returns always false.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Renderer_ShapeState_ShouldSerializeVisible.md&amp;value=---%0Auid%3A%20Core2D.Renderer.ShapeState.ShouldSerializeVisible%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/ViewModels/Renderer/ShapeState.cs/#L150">View Source</a>
+  </span>
+  <a id="Core2D_Renderer_ShapeState_ShouldSerializeVisible_" data-uid="Core2D.Renderer.ShapeState.ShouldSerializeVisible*"></a>
+  <h4 id="Core2D_Renderer_ShapeState_ShouldSerializeVisible" data-uid="Core2D.Renderer.ShapeState.ShouldSerializeVisible">ShouldSerializeVisible()</h4>
+  <div class="markdown level1 summary"><p>The <a class="xref" href="Core2D.Renderer.ShapeState.html#Core2D_Renderer_ShapeState_Visible">Visible</a> property is not serialized.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual bool ShouldSerializeVisible()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><p>Returns always false.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Renderer_ShapeState_ToString.md&amp;value=---%0Auid%3A%20Core2D.Renderer.ShapeState.ToString%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/ViewModels/Renderer/ShapeState.cs/#L129">View Source</a>
+  </span>
+  <a id="Core2D_Renderer_ShapeState_ToString_" data-uid="Core2D.Renderer.ShapeState.ToString*"></a>
+  <h4 id="Core2D_Renderer_ShapeState_ToString" data-uid="Core2D.Renderer.ShapeState.ToString">ToString()</h4>
+  <div class="markdown level1 summary"><p>Returns a string that represents the current object.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override string ToString()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><p>A string that represents the current object.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><span class="xref">System.Object.ToString()</span></div>
+  <h3 id="implements">Implements</h3>
+  <div>
+      <a class="xref" href="Core2D.Renderer.IShapeState.html">IShapeState</a>
+  </div>
+  <div>
+      <a class="xref" href="Core2D.IObservableObject.html">IObservableObject</a>
+  </div>
+  <div>
+      <span class="xref">System.ComponentModel.INotifyPropertyChanged</span>
+  </div>
+  <div>
+      <a class="xref" href="Core2D.ICopyable.html">ICopyable</a>
+  </div>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Renderer_ShapeState.md&amp;value=---%0Auid%3A%20Core2D.Renderer.ShapeState%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/ViewModels/Renderer/ShapeState.cs/#L10" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            <span>Copyright © (c) Wiesław Šoltés<br>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

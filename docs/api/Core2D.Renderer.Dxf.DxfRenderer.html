@@ -1,0 +1,1280 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Class DxfRenderer
+   | Core2D Website </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Class DxfRenderer
+   | Core2D Website ">
+    <meta name="generator" content="docfx 2.51.0.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="Core2D.Renderer.Dxf.DxfRenderer">
+  
+  
+  <h1 id="Core2D_Renderer_Dxf_DxfRenderer" data-uid="Core2D.Renderer.Dxf.DxfRenderer" class="text-break">Class DxfRenderer
+  </h1>
+  <div class="markdown level0 summary"><p>Native netDxf shape renderer.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><span class="xref">System.Object</span></div>
+    <div class="level1"><a class="xref" href="Core2D.ObservableObject.html">ObservableObject</a></div>
+    <div class="level2"><span class="xref">DxfRenderer</span></div>
+  </div>
+  <div classs="implements">
+    <h5>Implements</h5>
+    <div><a class="xref" href="Core2D.IObservableObject.html">IObservableObject</a></div>
+    <div><span class="xref">System.ComponentModel.INotifyPropertyChanged</span></div>
+    <div><a class="xref" href="Core2D.ICopyable.html">ICopyable</a></div>
+    <div><a class="xref" href="Core2D.Renderer.IShapeRenderer.html">IShapeRenderer</a></div>
+    <div><a class="xref" href="Core2D.Interfaces.IProjectExporter.html">IProjectExporter</a></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="Core2D.ObservableObject.html#Core2D_ObservableObject_Owner">ObservableObject.Owner</a>
+    </div>
+    <div>
+      <a class="xref" href="Core2D.ObservableObject.html#Core2D_ObservableObject_Id">ObservableObject.Id</a>
+    </div>
+    <div>
+      <a class="xref" href="Core2D.ObservableObject.html#Core2D_ObservableObject_Name">ObservableObject.Name</a>
+    </div>
+    <div>
+      <a class="xref" href="Core2D.ObservableObject.html#Core2D_ObservableObject_MarkAsDirty_System_Boolean_">ObservableObject.MarkAsDirty(Boolean)</a>
+    </div>
+    <div>
+      <a class="xref" href="Core2D.ObservableObject.html#Core2D_ObservableObject_PropertyChanged">ObservableObject.PropertyChanged</a>
+    </div>
+    <div>
+      <a class="xref" href="Core2D.ObservableObject.html#Core2D_ObservableObject_Notify_System_String_">ObservableObject.Notify(String)</a>
+    </div>
+    <div>
+      <a class="xref" href="Core2D.ObservableObject.html#Core2D_ObservableObject_Update__1___0____0_System_String_">ObservableObject.Update&lt;T&gt;(T, T, String)</a>
+    </div>
+    <div>
+      <a class="xref" href="Core2D.ObservableObject.html#Core2D_ObservableObject_ShouldSerializeOwner">ObservableObject.ShouldSerializeOwner()</a>
+    </div>
+    <div>
+      <a class="xref" href="Core2D.ObservableObject.html#Core2D_ObservableObject_ShouldSerializeId">ObservableObject.ShouldSerializeId()</a>
+    </div>
+    <div>
+      <a class="xref" href="Core2D.ObservableObject.html#Core2D_ObservableObject_ShouldSerializeName">ObservableObject.ShouldSerializeName()</a>
+    </div>
+    <div>
+      <a class="xref" href="Core2D.ObservableObject.html#Core2D_ObservableObject_ShouldSerializeIsDirty">ObservableObject.ShouldSerializeIsDirty()</a>
+    </div>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetHashCode()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetType()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.MemberwiseClone()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ToString()</span>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Core2D.Renderer.Dxf.html">Core2D.Renderer.Dxf</a></h6>
+  <h6><strong>Assembly</strong>: Core2D.dll</h6>
+  <h5 id="Core2D_Renderer_Dxf_DxfRenderer_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class DxfRenderer : ObservableObject, IObservableObject, INotifyPropertyChanged, ICopyable, IShapeRenderer, IProjectExporter</code></pre>
+  </div>
+  <h3 id="constructors">Constructors
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Renderer_Dxf_DxfRenderer__ctor_System_IServiceProvider_.md&amp;value=---%0Auid%3A%20Core2D.Renderer.Dxf.DxfRenderer.%23ctor(System.IServiceProvider)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Renderer/Dxf/DxfRenderer.cs/#L43">View Source</a>
+  </span>
+  <a id="Core2D_Renderer_Dxf_DxfRenderer__ctor_" data-uid="Core2D.Renderer.Dxf.DxfRenderer.#ctor*"></a>
+  <h4 id="Core2D_Renderer_Dxf_DxfRenderer__ctor_System_IServiceProvider_" data-uid="Core2D.Renderer.Dxf.DxfRenderer.#ctor(System.IServiceProvider)">DxfRenderer(IServiceProvider)</h4>
+  <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="Core2D.Renderer.Dxf.DxfRenderer.html">DxfRenderer</a> class.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DxfRenderer(IServiceProvider serviceProvider)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.IServiceProvider</span></td>
+        <td><span class="parametername">serviceProvider</span></td>
+        <td><p>The service provider.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="properties">Properties
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Renderer_Dxf_DxfRenderer_State.md&amp;value=---%0Auid%3A%20Core2D.Renderer.Dxf.DxfRenderer.State%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Renderer/Dxf/DxfRenderer.cs/#L33">View Source</a>
+  </span>
+  <a id="Core2D_Renderer_Dxf_DxfRenderer_State_" data-uid="Core2D.Renderer.Dxf.DxfRenderer.State*"></a>
+  <h4 id="Core2D_Renderer_Dxf_DxfRenderer_State" data-uid="Core2D.Renderer.Dxf.DxfRenderer.State">State</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IShapeRendererState State { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Core2D.Renderer.IShapeRendererState.html">IShapeRendererState</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Renderer_Dxf_DxfRenderer_ClearCache_System_Boolean_.md&amp;value=---%0Auid%3A%20Core2D.Renderer.Dxf.DxfRenderer.ClearCache(System.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Renderer/Dxf/DxfRenderer.cs/#L527">View Source</a>
+  </span>
+  <a id="Core2D_Renderer_Dxf_DxfRenderer_ClearCache_" data-uid="Core2D.Renderer.Dxf.DxfRenderer.ClearCache*"></a>
+  <h4 id="Core2D_Renderer_Dxf_DxfRenderer_ClearCache_System_Boolean_" data-uid="Core2D.Renderer.Dxf.DxfRenderer.ClearCache(System.Boolean)">ClearCache(Boolean)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void ClearCache(bool isZooming)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><span class="parametername">isZooming</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Renderer_Dxf_DxfRenderer_Copy_System_Collections_Generic_IDictionary_System_Object_System_Object__.md&amp;value=---%0Auid%3A%20Core2D.Renderer.Dxf.DxfRenderer.Copy(System.Collections.Generic.IDictionary%7BSystem.Object%2CSystem.Object%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Renderer/Dxf/DxfRenderer.cs/#L52">View Source</a>
+  </span>
+  <a id="Core2D_Renderer_Dxf_DxfRenderer_Copy_" data-uid="Core2D.Renderer.Dxf.DxfRenderer.Copy*"></a>
+  <h4 id="Core2D_Renderer_Dxf_DxfRenderer_Copy_System_Collections_Generic_IDictionary_System_Object_System_Object__" data-uid="Core2D.Renderer.Dxf.DxfRenderer.Copy(System.Collections.Generic.IDictionary{System.Object,System.Object})">Copy(IDictionary&lt;Object, Object&gt;)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override object Copy(IDictionary&lt;object, object&gt; shared)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.IDictionary</span>&lt;<span class="xref">System.Object</span>, <span class="xref">System.Object</span>&gt;</td>
+        <td><span class="parametername">shared</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="Core2D.ObservableObject.html#Core2D_ObservableObject_Copy_System_Collections_Generic_IDictionary_System_Object_System_Object__">ObservableObject.Copy(IDictionary&lt;Object, Object&gt;)</a></div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Renderer_Dxf_DxfRenderer_Draw_System_Object_Core2D_Containers_ILayerContainer_System_Double_System_Double_.md&amp;value=---%0Auid%3A%20Core2D.Renderer.Dxf.DxfRenderer.Draw(System.Object%2CCore2D.Containers.ILayerContainer%2CSystem.Double%2CSystem.Double)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Renderer/Dxf/DxfRenderer.cs/#L577">View Source</a>
+  </span>
+  <a id="Core2D_Renderer_Dxf_DxfRenderer_Draw_" data-uid="Core2D.Renderer.Dxf.DxfRenderer.Draw*"></a>
+  <h4 id="Core2D_Renderer_Dxf_DxfRenderer_Draw_System_Object_Core2D_Containers_ILayerContainer_System_Double_System_Double_" data-uid="Core2D.Renderer.Dxf.DxfRenderer.Draw(System.Object,Core2D.Containers.ILayerContainer,System.Double,System.Double)">Draw(Object, ILayerContainer, Double, Double)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Draw(object dc, ILayerContainer layer, double dx, double dy)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td><span class="parametername">dc</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Core2D.Containers.ILayerContainer.html">ILayerContainer</a></td>
+        <td><span class="parametername">layer</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Double</span></td>
+        <td><span class="parametername">dx</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Double</span></td>
+        <td><span class="parametername">dy</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Renderer_Dxf_DxfRenderer_Draw_System_Object_Core2D_Containers_IPageContainer_System_Double_System_Double_.md&amp;value=---%0Auid%3A%20Core2D.Renderer.Dxf.DxfRenderer.Draw(System.Object%2CCore2D.Containers.IPageContainer%2CSystem.Double%2CSystem.Double)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Renderer/Dxf/DxfRenderer.cs/#L557">View Source</a>
+  </span>
+  <a id="Core2D_Renderer_Dxf_DxfRenderer_Draw_" data-uid="Core2D.Renderer.Dxf.DxfRenderer.Draw*"></a>
+  <h4 id="Core2D_Renderer_Dxf_DxfRenderer_Draw_System_Object_Core2D_Containers_IPageContainer_System_Double_System_Double_" data-uid="Core2D.Renderer.Dxf.DxfRenderer.Draw(System.Object,Core2D.Containers.IPageContainer,System.Double,System.Double)">Draw(Object, IPageContainer, Double, Double)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Draw(object dc, IPageContainer container, double dx, double dy)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td><span class="parametername">dc</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Core2D.Containers.IPageContainer.html">IPageContainer</a></td>
+        <td><span class="parametername">container</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Double</span></td>
+        <td><span class="parametername">dx</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Double</span></td>
+        <td><span class="parametername">dy</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Renderer_Dxf_DxfRenderer_Draw_System_Object_Core2D_Shapes_IArcShape_System_Double_System_Double_.md&amp;value=---%0Auid%3A%20Core2D.Renderer.Dxf.DxfRenderer.Draw(System.Object%2CCore2D.Shapes.IArcShape%2CSystem.Double%2CSystem.Double)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Renderer/Dxf/DxfRenderer.cs/#L668">View Source</a>
+  </span>
+  <a id="Core2D_Renderer_Dxf_DxfRenderer_Draw_" data-uid="Core2D.Renderer.Dxf.DxfRenderer.Draw*"></a>
+  <h4 id="Core2D_Renderer_Dxf_DxfRenderer_Draw_System_Object_Core2D_Shapes_IArcShape_System_Double_System_Double_" data-uid="Core2D.Renderer.Dxf.DxfRenderer.Draw(System.Object,Core2D.Shapes.IArcShape,System.Double,System.Double)">Draw(Object, IArcShape, Double, Double)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Draw(object dc, IArcShape arc, double dx, double dy)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td><span class="parametername">dc</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Core2D.Shapes.IArcShape.html">IArcShape</a></td>
+        <td><span class="parametername">arc</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Double</span></td>
+        <td><span class="parametername">dx</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Double</span></td>
+        <td><span class="parametername">dy</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Renderer_Dxf_DxfRenderer_Draw_System_Object_Core2D_Shapes_ICubicBezierShape_System_Double_System_Double_.md&amp;value=---%0Auid%3A%20Core2D.Renderer.Dxf.DxfRenderer.Draw(System.Object%2CCore2D.Shapes.ICubicBezierShape%2CSystem.Double%2CSystem.Double)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Renderer/Dxf/DxfRenderer.cs/#L717">View Source</a>
+  </span>
+  <a id="Core2D_Renderer_Dxf_DxfRenderer_Draw_" data-uid="Core2D.Renderer.Dxf.DxfRenderer.Draw*"></a>
+  <h4 id="Core2D_Renderer_Dxf_DxfRenderer_Draw_System_Object_Core2D_Shapes_ICubicBezierShape_System_Double_System_Double_" data-uid="Core2D.Renderer.Dxf.DxfRenderer.Draw(System.Object,Core2D.Shapes.ICubicBezierShape,System.Double,System.Double)">Draw(Object, ICubicBezierShape, Double, Double)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Draw(object dc, ICubicBezierShape cubicBezier, double dx, double dy)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td><span class="parametername">dc</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Core2D.Shapes.ICubicBezierShape.html">ICubicBezierShape</a></td>
+        <td><span class="parametername">cubicBezier</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Double</span></td>
+        <td><span class="parametername">dx</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Double</span></td>
+        <td><span class="parametername">dy</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Renderer_Dxf_DxfRenderer_Draw_System_Object_Core2D_Shapes_IEllipseShape_System_Double_System_Double_.md&amp;value=---%0Auid%3A%20Core2D.Renderer.Dxf.DxfRenderer.Draw(System.Object%2CCore2D.Shapes.IEllipseShape%2CSystem.Double%2CSystem.Double)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Renderer/Dxf/DxfRenderer.cs/#L648">View Source</a>
+  </span>
+  <a id="Core2D_Renderer_Dxf_DxfRenderer_Draw_" data-uid="Core2D.Renderer.Dxf.DxfRenderer.Draw*"></a>
+  <h4 id="Core2D_Renderer_Dxf_DxfRenderer_Draw_System_Object_Core2D_Shapes_IEllipseShape_System_Double_System_Double_" data-uid="Core2D.Renderer.Dxf.DxfRenderer.Draw(System.Object,Core2D.Shapes.IEllipseShape,System.Double,System.Double)">Draw(Object, IEllipseShape, Double, Double)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Draw(object dc, IEllipseShape ellipse, double dx, double dy)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td><span class="parametername">dc</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Core2D.Shapes.IEllipseShape.html">IEllipseShape</a></td>
+        <td><span class="parametername">ellipse</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Double</span></td>
+        <td><span class="parametername">dx</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Double</span></td>
+        <td><span class="parametername">dy</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Renderer_Dxf_DxfRenderer_Draw_System_Object_Core2D_Shapes_IImageShape_System_Double_System_Double_.md&amp;value=---%0Auid%3A%20Core2D.Renderer.Dxf.DxfRenderer.Draw(System.Object%2CCore2D.Shapes.IImageShape%2CSystem.Double%2CSystem.Double)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Renderer/Dxf/DxfRenderer.cs/#L926">View Source</a>
+  </span>
+  <a id="Core2D_Renderer_Dxf_DxfRenderer_Draw_" data-uid="Core2D.Renderer.Dxf.DxfRenderer.Draw*"></a>
+  <h4 id="Core2D_Renderer_Dxf_DxfRenderer_Draw_System_Object_Core2D_Shapes_IImageShape_System_Double_System_Double_" data-uid="Core2D.Renderer.Dxf.DxfRenderer.Draw(System.Object,Core2D.Shapes.IImageShape,System.Double,System.Double)">Draw(Object, IImageShape, Double, Double)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Draw(object dc, IImageShape image, double dx, double dy)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td><span class="parametername">dc</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Core2D.Shapes.IImageShape.html">IImageShape</a></td>
+        <td><span class="parametername">image</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Double</span></td>
+        <td><span class="parametername">dx</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Double</span></td>
+        <td><span class="parametername">dy</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Renderer_Dxf_DxfRenderer_Draw_System_Object_Core2D_Shapes_ILineShape_System_Double_System_Double_.md&amp;value=---%0Auid%3A%20Core2D.Renderer.Dxf.DxfRenderer.Draw(System.Object%2CCore2D.Shapes.ILineShape%2CSystem.Double%2CSystem.Double)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Renderer/Dxf/DxfRenderer.cs/#L591">View Source</a>
+  </span>
+  <a id="Core2D_Renderer_Dxf_DxfRenderer_Draw_" data-uid="Core2D.Renderer.Dxf.DxfRenderer.Draw*"></a>
+  <h4 id="Core2D_Renderer_Dxf_DxfRenderer_Draw_System_Object_Core2D_Shapes_ILineShape_System_Double_System_Double_" data-uid="Core2D.Renderer.Dxf.DxfRenderer.Draw(System.Object,Core2D.Shapes.ILineShape,System.Double,System.Double)">Draw(Object, ILineShape, Double, Double)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Draw(object dc, ILineShape line, double dx, double dy)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td><span class="parametername">dc</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Core2D.Shapes.ILineShape.html">ILineShape</a></td>
+        <td><span class="parametername">line</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Double</span></td>
+        <td><span class="parametername">dx</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Double</span></td>
+        <td><span class="parametername">dy</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Renderer_Dxf_DxfRenderer_Draw_System_Object_Core2D_Shapes_IPathShape_System_Double_System_Double_.md&amp;value=---%0Auid%3A%20Core2D.Renderer.Dxf.DxfRenderer.Draw(System.Object%2CCore2D.Shapes.IPathShape%2CSystem.Double%2CSystem.Double)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Renderer/Dxf/DxfRenderer.cs/#L974">View Source</a>
+  </span>
+  <a id="Core2D_Renderer_Dxf_DxfRenderer_Draw_" data-uid="Core2D.Renderer.Dxf.DxfRenderer.Draw*"></a>
+  <h4 id="Core2D_Renderer_Dxf_DxfRenderer_Draw_System_Object_Core2D_Shapes_IPathShape_System_Double_System_Double_" data-uid="Core2D.Renderer.Dxf.DxfRenderer.Draw(System.Object,Core2D.Shapes.IPathShape,System.Double,System.Double)">Draw(Object, IPathShape, Double, Double)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Draw(object dc, IPathShape path, double dx, double dy)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td><span class="parametername">dc</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Core2D.Shapes.IPathShape.html">IPathShape</a></td>
+        <td><span class="parametername">path</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Double</span></td>
+        <td><span class="parametername">dx</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Double</span></td>
+        <td><span class="parametername">dy</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Renderer_Dxf_DxfRenderer_Draw_System_Object_Core2D_Shapes_IQuadraticBezierShape_System_Double_System_Double_.md&amp;value=---%0Auid%3A%20Core2D.Renderer.Dxf.DxfRenderer.Draw(System.Object%2CCore2D.Shapes.IQuadraticBezierShape%2CSystem.Double%2CSystem.Double)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Renderer/Dxf/DxfRenderer.cs/#L778">View Source</a>
+  </span>
+  <a id="Core2D_Renderer_Dxf_DxfRenderer_Draw_" data-uid="Core2D.Renderer.Dxf.DxfRenderer.Draw*"></a>
+  <h4 id="Core2D_Renderer_Dxf_DxfRenderer_Draw_System_Object_Core2D_Shapes_IQuadraticBezierShape_System_Double_System_Double_" data-uid="Core2D.Renderer.Dxf.DxfRenderer.Draw(System.Object,Core2D.Shapes.IQuadraticBezierShape,System.Double,System.Double)">Draw(Object, IQuadraticBezierShape, Double, Double)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Draw(object dc, IQuadraticBezierShape quadraticBezier, double dx, double dy)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td><span class="parametername">dc</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Core2D.Shapes.IQuadraticBezierShape.html">IQuadraticBezierShape</a></td>
+        <td><span class="parametername">quadraticBezier</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Double</span></td>
+        <td><span class="parametername">dx</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Double</span></td>
+        <td><span class="parametername">dy</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Renderer_Dxf_DxfRenderer_Draw_System_Object_Core2D_Shapes_IRectangleShape_System_Double_System_Double_.md&amp;value=---%0Auid%3A%20Core2D.Renderer.Dxf.DxfRenderer.Draw(System.Object%2CCore2D.Shapes.IRectangleShape%2CSystem.Double%2CSystem.Double)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Renderer/Dxf/DxfRenderer.cs/#L617">View Source</a>
+  </span>
+  <a id="Core2D_Renderer_Dxf_DxfRenderer_Draw_" data-uid="Core2D.Renderer.Dxf.DxfRenderer.Draw*"></a>
+  <h4 id="Core2D_Renderer_Dxf_DxfRenderer_Draw_System_Object_Core2D_Shapes_IRectangleShape_System_Double_System_Double_" data-uid="Core2D.Renderer.Dxf.DxfRenderer.Draw(System.Object,Core2D.Shapes.IRectangleShape,System.Double,System.Double)">Draw(Object, IRectangleShape, Double, Double)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Draw(object dc, IRectangleShape rectangle, double dx, double dy)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td><span class="parametername">dc</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Core2D.Shapes.IRectangleShape.html">IRectangleShape</a></td>
+        <td><span class="parametername">rectangle</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Double</span></td>
+        <td><span class="parametername">dx</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Double</span></td>
+        <td><span class="parametername">dy</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Renderer_Dxf_DxfRenderer_Draw_System_Object_Core2D_Shapes_ITextShape_System_Double_System_Double_.md&amp;value=---%0Auid%3A%20Core2D.Renderer.Dxf.DxfRenderer.Draw(System.Object%2CCore2D.Shapes.ITextShape%2CSystem.Double%2CSystem.Double)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Renderer/Dxf/DxfRenderer.cs/#L837">View Source</a>
+  </span>
+  <a id="Core2D_Renderer_Dxf_DxfRenderer_Draw_" data-uid="Core2D.Renderer.Dxf.DxfRenderer.Draw*"></a>
+  <h4 id="Core2D_Renderer_Dxf_DxfRenderer_Draw_System_Object_Core2D_Shapes_ITextShape_System_Double_System_Double_" data-uid="Core2D.Renderer.Dxf.DxfRenderer.Draw(System.Object,Core2D.Shapes.ITextShape,System.Double,System.Double)">Draw(Object, ITextShape, Double, Double)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Draw(object dc, ITextShape text, double dx, double dy)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td><span class="parametername">dc</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Core2D.Shapes.ITextShape.html">ITextShape</a></td>
+        <td><span class="parametername">text</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Double</span></td>
+        <td><span class="parametername">dx</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Double</span></td>
+        <td><span class="parametername">dy</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Renderer_Dxf_DxfRenderer_Fill_System_Object_System_Double_System_Double_System_Double_System_Double_Core2D_Style_IColor_.md&amp;value=---%0Auid%3A%20Core2D.Renderer.Dxf.DxfRenderer.Fill(System.Object%2CSystem.Double%2CSystem.Double%2CSystem.Double%2CSystem.Double%2CCore2D.Style.IColor)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Renderer/Dxf/DxfRenderer.cs/#L536">View Source</a>
+  </span>
+  <a id="Core2D_Renderer_Dxf_DxfRenderer_Fill_" data-uid="Core2D.Renderer.Dxf.DxfRenderer.Fill*"></a>
+  <h4 id="Core2D_Renderer_Dxf_DxfRenderer_Fill_System_Object_System_Double_System_Double_System_Double_System_Double_Core2D_Style_IColor_" data-uid="Core2D.Renderer.Dxf.DxfRenderer.Fill(System.Object,System.Double,System.Double,System.Double,System.Double,Core2D.Style.IColor)">Fill(Object, Double, Double, Double, Double, IColor)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Fill(object dc, double x, double y, double width, double height, IColor color)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td><span class="parametername">dc</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Double</span></td>
+        <td><span class="parametername">x</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Double</span></td>
+        <td><span class="parametername">y</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Double</span></td>
+        <td><span class="parametername">width</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Double</span></td>
+        <td><span class="parametername">height</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Core2D.Style.IColor.html">IColor</a></td>
+        <td><span class="parametername">color</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Renderer_Dxf_DxfRenderer_InvalidateCache_Core2D_Renderer_IMatrixObject_.md&amp;value=---%0Auid%3A%20Core2D.Renderer.Dxf.DxfRenderer.InvalidateCache(Core2D.Renderer.IMatrixObject)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Renderer/Dxf/DxfRenderer.cs/#L515">View Source</a>
+  </span>
+  <a id="Core2D_Renderer_Dxf_DxfRenderer_InvalidateCache_" data-uid="Core2D.Renderer.Dxf.DxfRenderer.InvalidateCache*"></a>
+  <h4 id="Core2D_Renderer_Dxf_DxfRenderer_InvalidateCache_Core2D_Renderer_IMatrixObject_" data-uid="Core2D.Renderer.Dxf.DxfRenderer.InvalidateCache(Core2D.Renderer.IMatrixObject)">InvalidateCache(IMatrixObject)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void InvalidateCache(IMatrixObject matrix)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Core2D.Renderer.IMatrixObject.html">IMatrixObject</a></td>
+        <td><span class="parametername">matrix</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Renderer_Dxf_DxfRenderer_InvalidateCache_Core2D_Shapes_IBaseShape_Core2D_Style_IShapeStyle_System_Double_System_Double_.md&amp;value=---%0Auid%3A%20Core2D.Renderer.Dxf.DxfRenderer.InvalidateCache(Core2D.Shapes.IBaseShape%2CCore2D.Style.IShapeStyle%2CSystem.Double%2CSystem.Double)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Renderer/Dxf/DxfRenderer.cs/#L521">View Source</a>
+  </span>
+  <a id="Core2D_Renderer_Dxf_DxfRenderer_InvalidateCache_" data-uid="Core2D.Renderer.Dxf.DxfRenderer.InvalidateCache*"></a>
+  <h4 id="Core2D_Renderer_Dxf_DxfRenderer_InvalidateCache_Core2D_Shapes_IBaseShape_Core2D_Style_IShapeStyle_System_Double_System_Double_" data-uid="Core2D.Renderer.Dxf.DxfRenderer.InvalidateCache(Core2D.Shapes.IBaseShape,Core2D.Style.IShapeStyle,System.Double,System.Double)">InvalidateCache(IBaseShape, IShapeStyle, Double, Double)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void InvalidateCache(IBaseShape shape, IShapeStyle style, double dx, double dy)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Core2D.Shapes.IBaseShape.html">IBaseShape</a></td>
+        <td><span class="parametername">shape</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Core2D.Style.IShapeStyle.html">IShapeStyle</a></td>
+        <td><span class="parametername">style</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Double</span></td>
+        <td><span class="parametername">dx</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Double</span></td>
+        <td><span class="parametername">dy</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Renderer_Dxf_DxfRenderer_InvalidateCache_Core2D_Style_IShapeStyle_.md&amp;value=---%0Auid%3A%20Core2D.Renderer.Dxf.DxfRenderer.InvalidateCache(Core2D.Style.IShapeStyle)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Renderer/Dxf/DxfRenderer.cs/#L509">View Source</a>
+  </span>
+  <a id="Core2D_Renderer_Dxf_DxfRenderer_InvalidateCache_" data-uid="Core2D.Renderer.Dxf.DxfRenderer.InvalidateCache*"></a>
+  <h4 id="Core2D_Renderer_Dxf_DxfRenderer_InvalidateCache_Core2D_Style_IShapeStyle_" data-uid="Core2D.Renderer.Dxf.DxfRenderer.InvalidateCache(Core2D.Style.IShapeStyle)">InvalidateCache(IShapeStyle)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void InvalidateCache(IShapeStyle style)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Core2D.Style.IShapeStyle.html">IShapeStyle</a></td>
+        <td><span class="parametername">style</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Renderer_Dxf_DxfRenderer_PopMatrix_System_Object_System_Object_.md&amp;value=---%0Auid%3A%20Core2D.Renderer.Dxf.DxfRenderer.PopMatrix(System.Object%2CSystem.Object)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Renderer/Dxf/DxfRenderer.cs/#L551">View Source</a>
+  </span>
+  <a id="Core2D_Renderer_Dxf_DxfRenderer_PopMatrix_" data-uid="Core2D.Renderer.Dxf.DxfRenderer.PopMatrix*"></a>
+  <h4 id="Core2D_Renderer_Dxf_DxfRenderer_PopMatrix_System_Object_System_Object_" data-uid="Core2D.Renderer.Dxf.DxfRenderer.PopMatrix(System.Object,System.Object)">PopMatrix(Object, Object)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void PopMatrix(object dc, object state)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td><span class="parametername">dc</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td><span class="parametername">state</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Renderer_Dxf_DxfRenderer_PushMatrix_System_Object_Core2D_Renderer_IMatrixObject_.md&amp;value=---%0Auid%3A%20Core2D.Renderer.Dxf.DxfRenderer.PushMatrix(System.Object%2CCore2D.Renderer.IMatrixObject)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Renderer/Dxf/DxfRenderer.cs/#L544">View Source</a>
+  </span>
+  <a id="Core2D_Renderer_Dxf_DxfRenderer_PushMatrix_" data-uid="Core2D.Renderer.Dxf.DxfRenderer.PushMatrix*"></a>
+  <h4 id="Core2D_Renderer_Dxf_DxfRenderer_PushMatrix_System_Object_Core2D_Renderer_IMatrixObject_" data-uid="Core2D.Renderer.Dxf.DxfRenderer.PushMatrix(System.Object,Core2D.Renderer.IMatrixObject)">PushMatrix(Object, IMatrixObject)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public object PushMatrix(object dc, IMatrixObject matrix)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td><span class="parametername">dc</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Core2D.Renderer.IMatrixObject.html">IMatrixObject</a></td>
+        <td><span class="parametername">matrix</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Renderer_Dxf_DxfRenderer_Save_System_IO_Stream_Core2D_Containers_IDocumentContainer_.md&amp;value=---%0Auid%3A%20Core2D.Renderer.Dxf.DxfRenderer.Save(System.IO.Stream%2CCore2D.Containers.IDocumentContainer)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Renderer/Dxf/DxfRenderer.IProjectExporter.cs/#L38">View Source</a>
+  </span>
+  <a id="Core2D_Renderer_Dxf_DxfRenderer_Save_" data-uid="Core2D.Renderer.Dxf.DxfRenderer.Save*"></a>
+  <h4 id="Core2D_Renderer_Dxf_DxfRenderer_Save_System_IO_Stream_Core2D_Containers_IDocumentContainer_" data-uid="Core2D.Renderer.Dxf.DxfRenderer.Save(System.IO.Stream,Core2D.Containers.IDocumentContainer)">Save(Stream, IDocumentContainer)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Save(Stream stream, IDocumentContainer document)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.IO.Stream</span></td>
+        <td><span class="parametername">stream</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Core2D.Containers.IDocumentContainer.html">IDocumentContainer</a></td>
+        <td><span class="parametername">document</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Renderer_Dxf_DxfRenderer_Save_System_IO_Stream_Core2D_Containers_IPageContainer_.md&amp;value=---%0Auid%3A%20Core2D.Renderer.Dxf.DxfRenderer.Save(System.IO.Stream%2CCore2D.Containers.IPageContainer)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Renderer/Dxf/DxfRenderer.IProjectExporter.cs/#L18">View Source</a>
+  </span>
+  <a id="Core2D_Renderer_Dxf_DxfRenderer_Save_" data-uid="Core2D.Renderer.Dxf.DxfRenderer.Save*"></a>
+  <h4 id="Core2D_Renderer_Dxf_DxfRenderer_Save_System_IO_Stream_Core2D_Containers_IPageContainer_" data-uid="Core2D.Renderer.Dxf.DxfRenderer.Save(System.IO.Stream,Core2D.Containers.IPageContainer)">Save(Stream, IPageContainer)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Save(Stream stream, IPageContainer container)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.IO.Stream</span></td>
+        <td><span class="parametername">stream</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Core2D.Containers.IPageContainer.html">IPageContainer</a></td>
+        <td><span class="parametername">container</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Renderer_Dxf_DxfRenderer_Save_System_IO_Stream_Core2D_Containers_IProjectContainer_.md&amp;value=---%0Auid%3A%20Core2D.Renderer.Dxf.DxfRenderer.Save(System.IO.Stream%2CCore2D.Containers.IProjectContainer)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Renderer/Dxf/DxfRenderer.IProjectExporter.cs/#L58">View Source</a>
+  </span>
+  <a id="Core2D_Renderer_Dxf_DxfRenderer_Save_" data-uid="Core2D.Renderer.Dxf.DxfRenderer.Save*"></a>
+  <h4 id="Core2D_Renderer_Dxf_DxfRenderer_Save_System_IO_Stream_Core2D_Containers_IProjectContainer_" data-uid="Core2D.Renderer.Dxf.DxfRenderer.Save(System.IO.Stream,Core2D.Containers.IProjectContainer)">Save(Stream, IProjectContainer)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Save(Stream stream, IProjectContainer project)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.IO.Stream</span></td>
+        <td><span class="parametername">stream</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Core2D.Containers.IProjectContainer.html">IProjectContainer</a></td>
+        <td><span class="parametername">project</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Renderer_Dxf_DxfRenderer_ShouldSerializeState.md&amp;value=---%0Auid%3A%20Core2D.Renderer.Dxf.DxfRenderer.ShouldSerializeState%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Renderer/Dxf/DxfRenderer.cs/#L1028">View Source</a>
+  </span>
+  <a id="Core2D_Renderer_Dxf_DxfRenderer_ShouldSerializeState_" data-uid="Core2D.Renderer.Dxf.DxfRenderer.ShouldSerializeState*"></a>
+  <h4 id="Core2D_Renderer_Dxf_DxfRenderer_ShouldSerializeState" data-uid="Core2D.Renderer.Dxf.DxfRenderer.ShouldSerializeState">ShouldSerializeState()</h4>
+  <div class="markdown level1 summary"><p>Check whether the <a class="xref" href="Core2D.Renderer.Dxf.DxfRenderer.html#Core2D_Renderer_Dxf_DxfRenderer_State">State</a> property has changed from its default value.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool ShouldSerializeState()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><p>Returns true if the property has changed; otherwise, returns false.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="implements">Implements</h3>
+  <div>
+      <a class="xref" href="Core2D.IObservableObject.html">IObservableObject</a>
+  </div>
+  <div>
+      <span class="xref">System.ComponentModel.INotifyPropertyChanged</span>
+  </div>
+  <div>
+      <a class="xref" href="Core2D.ICopyable.html">ICopyable</a>
+  </div>
+  <div>
+      <a class="xref" href="Core2D.Renderer.IShapeRenderer.html">IShapeRenderer</a>
+  </div>
+  <div>
+      <a class="xref" href="Core2D.Interfaces.IProjectExporter.html">IProjectExporter</a>
+  </div>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Renderer_Dxf_DxfRenderer.md&amp;value=---%0Auid%3A%20Core2D.Renderer.Dxf.DxfRenderer%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Renderer/Dxf/DxfRenderer.IProjectExporter.cs/#L15" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            <span>Copyright © (c) Wiesław Šoltés<br>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

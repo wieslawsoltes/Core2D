@@ -1,0 +1,6524 @@
+{
+  "homepages": [],
+  "source_base_path": "/home/ubuntu/projects/Core2D/docfx",
+  "xrefmap": "xrefmap.yml",
+  "files": [
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Attributes.ContentAttribute.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Attributes.ContentAttribute.html",
+          "hash": "WqrAGJEVjw20XmVbF86tpw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Attributes.NameAttribute.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Attributes.NameAttribute.html",
+          "hash": "qgNN9ZVrZWt8ALV9/Bx9Rw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Attributes.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Attributes.html",
+          "hash": "zuI9RKX3maN3viWXtHkSnQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Containers.DocumentContainer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Containers.DocumentContainer.html",
+          "hash": "uY0MURklilyYqOc3SzGeIw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Containers.IBaseContainer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Containers.IBaseContainer.html",
+          "hash": "jZ6WQOm5EfaAATtIOMp6cg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Containers.IDocumentContainer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Containers.IDocumentContainer.html",
+          "hash": "bIX+BR57yZyI6VfKSCDsxA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Containers.ILayerContainer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Containers.ILayerContainer.html",
+          "hash": "kYNEdTVh+OQKB+JBbKdj4A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Containers.ILibrary-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Containers.ILibrary-1.html",
+          "hash": "jNIJqA5mtYfCLjuEuHdJkw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Containers.ILibrary.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Containers.ILibrary.html",
+          "hash": "PYmxJfi330z1X3Pz6qWnHQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Containers.IOptions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Containers.IOptions.html",
+          "hash": "ErRvoYSIOAFASk5peNyNOw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Containers.IPageContainer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Containers.IPageContainer.html",
+          "hash": "gZfoZX3DZ6F8aomMjQcS3w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Containers.IProjectContainer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Containers.IProjectContainer.html",
+          "hash": "IWI9PCUkMuLaVPa+MnuYsg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Containers.InvalidateLayerEventArgs.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Containers.InvalidateLayerEventArgs.html",
+          "hash": "qtlm6Ue+77NNYMZVdXVY/A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Containers.InvalidateLayerEventHandler.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Containers.InvalidateLayerEventHandler.html",
+          "hash": "j6AHj3+dEPSLLd6cv8f2VQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Containers.LayerContainer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Containers.LayerContainer.html",
+          "hash": "RwYlG4558OUN665Yko8PIA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Containers.Library-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Containers.Library-1.html",
+          "hash": "rFau5Q9MSp4dpr5Y6vlkqQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Containers.MoveMode.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Containers.MoveMode.html",
+          "hash": "NBA07mn5bPFutwFNCS2UXw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Containers.Options.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Containers.Options.html",
+          "hash": "KHoi2BeXmDvUETsxS8hIzQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Containers.PageContainer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Containers.PageContainer.html",
+          "hash": "ndkSGYcAhxjHWFR9ifs8ig=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Containers.ProjectContainer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Containers.ProjectContainer.html",
+          "hash": "wgvYg0VwiGMl1fzxaCb5Tg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Containers.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Containers.html",
+          "hash": "46ucDwzo6YCubFkEuZ65/Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Data.Column.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Data.Column.html",
+          "hash": "XgdM32MJHT/WNGMCXf/Dxg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Data.Context.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Data.Context.html",
+          "hash": "MUirlLS99KY/XWUs+qgDmA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Data.DataFlow.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Data.DataFlow.html",
+          "hash": "vZ+WVthctx5s53GFuClwVw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Data.Database.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Data.Database.html",
+          "hash": "ucCQkAgacXlE5Ah8IpxWyA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Data.DatabaseExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Data.DatabaseExtensions.html",
+          "hash": "C9aICwMM+vvanrig4KiZRg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Data.IBindable.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Data.IBindable.html",
+          "hash": "vm2skn+2QH7LU7gh/0WTpw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Data.IColumn.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Data.IColumn.html",
+          "hash": "/zVoBT58BpYB0fQ2FVLg8w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Data.IContext.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Data.IContext.html",
+          "hash": "DF/vTNFaU12ZFYxZkQ46/Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Data.IDataFlow.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Data.IDataFlow.html",
+          "hash": "EJGxcYEDL1rboBaYU2YaNA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Data.IDatabase.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Data.IDatabase.html",
+          "hash": "Hlfdx0KT2tIwKiBZRgnFCw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Data.IProperty.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Data.IProperty.html",
+          "hash": "EB2k6VJvt+9HG1aoEEr6RQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Data.IRecord.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Data.IRecord.html",
+          "hash": "H+iVj+SesJR8e0LLHqsJVA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Data.IValue.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Data.IValue.html",
+          "hash": "YVaq0WoaSu9JV0b6mBVtGQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Data.ImmutableArrayExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Data.ImmutableArrayExtensions.html",
+          "hash": "JZoTWrevK/aTxCeKCjRcdw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Data.Property.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Data.Property.html",
+          "hash": "UcqZfWbEGOEQccgHT6iFlA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Data.Record.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Data.Record.html",
+          "hash": "1fYG5TKME/wfjie5DCUO8g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Data.Value.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Data.Value.html",
+          "hash": "UVc9aRgYqzt9HNKXU6aP5w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Data.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Data.html",
+          "hash": "6v8zvxzx8QTKtP6ygBt1Gw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Editor.AboutInfo.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Editor.AboutInfo.html",
+          "hash": "fAapGdFwWBuz901xipVw9A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Editor.Bounds.HitTest.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Editor.Bounds.HitTest.html",
+          "hash": "oAwxNDhrAfHURNRS7rqCnA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Editor.Bounds.HitTestHelper.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Editor.Bounds.HitTestHelper.html",
+          "hash": "ymHRHHkrf+bNs+2mF0LV0A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Editor.Bounds.IBounds.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Editor.Bounds.IBounds.html",
+          "hash": "/qnQA+kgysBEXsNur07Odg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Editor.Bounds.IHitTest.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Editor.Bounds.IHitTest.html",
+          "hash": "JJmuxoDUrtlZodAgWn4nXQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Editor.Bounds.Shapes.BoundsArc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Editor.Bounds.Shapes.BoundsArc.html",
+          "hash": "lspwKHgMdewBaRBki+yZzg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Editor.Bounds.Shapes.BoundsCubicBezier.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Editor.Bounds.Shapes.BoundsCubicBezier.html",
+          "hash": "MgdgnCDcQl5xFkFTsFoL4Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Editor.Bounds.Shapes.BoundsEllipse.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Editor.Bounds.Shapes.BoundsEllipse.html",
+          "hash": "DNSVAF+6jefpj9fr/T8MPg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Editor.Bounds.Shapes.BoundsGroup.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Editor.Bounds.Shapes.BoundsGroup.html",
+          "hash": "SrgCzU3DXe/V2ntZdxFgOg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Editor.Bounds.Shapes.BoundsImage.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Editor.Bounds.Shapes.BoundsImage.html",
+          "hash": "FQCFoC7xNpKgAQvD50uo/A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Editor.Bounds.Shapes.BoundsLine.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Editor.Bounds.Shapes.BoundsLine.html",
+          "hash": "4OPRAL/9P1+OUWS8WznG1A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Editor.Bounds.Shapes.BoundsPath.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Editor.Bounds.Shapes.BoundsPath.html",
+          "hash": "XncwagfLEbkkwwVi2BtseA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Editor.Bounds.Shapes.BoundsPoint.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Editor.Bounds.Shapes.BoundsPoint.html",
+          "hash": "Uei3Qdvf0MIi+/k1tmpV8A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Editor.Bounds.Shapes.BoundsQuadraticBezier.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Editor.Bounds.Shapes.BoundsQuadraticBezier.html",
+          "hash": "6xpXhgOWP1DhbMxCdGBt+w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Editor.Bounds.Shapes.BoundsRectangle.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Editor.Bounds.Shapes.BoundsRectangle.html",
+          "hash": "0mDwgVwJ5O63+7ZoMJ7rCQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Editor.Bounds.Shapes.BoundsText.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Editor.Bounds.Shapes.BoundsText.html",
+          "hash": "gLlD0OeX4+YN9ZrcxYDd3A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Editor.Bounds.Shapes.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Editor.Bounds.Shapes.html",
+          "hash": "oo1pGNRn7r5eujEizK1S+g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Editor.Bounds.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Editor.Bounds.html",
+          "hash": "U3sPXz4km+i5TVRalxG9wA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Editor.Designer.DesignerContext.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Editor.Designer.DesignerContext.html",
+          "hash": "cHMARJXXlCS60GY5IUNvLQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Editor.Designer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Editor.Designer.html",
+          "hash": "VqnjhqbADo7/1ulnZ2XBiw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Editor.EditorScript.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Editor.EditorScript.html",
+          "hash": "6k6mE21ggjdOPr707DF2Ug=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Editor.Enums.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Editor.Enums.html",
+          "hash": "bu+I4vuo8RXUqxyPYd8R4Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Editor.Factories.ContainerFactory.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Editor.Factories.ContainerFactory.html",
+          "hash": "sDu980ogvxGnZxmCyWdjHg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Editor.Factories.ShapeFactory.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Editor.Factories.ShapeFactory.html",
+          "hash": "1Q/h3CKtDDTaYfjAyUs5ig=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Editor.Factories.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Editor.Factories.html",
+          "hash": "BqZph3MRqwnOq6QFeb5kUA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Editor.IEditorCanvasPlatform.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Editor.IEditorCanvasPlatform.html",
+          "hash": "AeKJqxojLzI9k6h97GLbrQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Editor.IEditorLayoutPlatform.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Editor.IEditorLayoutPlatform.html",
+          "hash": "Y5m/3uLzb8GUerGfif8o3A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Editor.IEditorTool.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Editor.IEditorTool.html",
+          "hash": "aiXvhBXk4knW33TvoszrTw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Editor.IPathTool.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Editor.IPathTool.html",
+          "hash": "YeEBzC2w+slEv5uo7XwFjw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Editor.IProjectEditor.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Editor.IProjectEditor.html",
+          "hash": "DfSJUSfvqexBK4uhbpLv9w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Editor.IProjectEditorPlatform.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Editor.IProjectEditorPlatform.html",
+          "hash": "qBsHtdpgh6pnm3pbJHdriQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Editor.ISettings.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Editor.ISettings.html",
+          "hash": "62NVi/AgULKvx4sa0DuiAQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Editor.IStyleEditor.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Editor.IStyleEditor.html",
+          "hash": "vwsT6SLEL63tgulMBaOfUw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Editor.ITool.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Editor.ITool.html",
+          "hash": "GSEoXNzhVla7amivLUcd+w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Editor.Input.IInputSource.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Editor.Input.IInputSource.html",
+          "hash": "SYTyh3Tl0PhiQl8yfVT5hg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Editor.Input.IInputTarget.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Editor.Input.IInputTarget.html",
+          "hash": "Xxn8iqEr8ayiC6BFIhNGZg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Editor.Input.InputArgs.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Editor.Input.InputArgs.html",
+          "hash": "eSMcBVDXIYyqatt406G0VA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Editor.Input.InputProcessor.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Editor.Input.InputProcessor.html",
+          "hash": "lc3IOKxYVP0urPWM154kyg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Editor.Input.InputSource.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Editor.Input.InputSource.html",
+          "hash": "OACFduR4YVPyZDbGQV9ANg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Editor.Input.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Editor.Input.html",
+          "hash": "mzsL/iEYFVhgggRSmsYf6w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Editor.Layout.AlignMode.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Editor.Layout.AlignMode.html",
+          "hash": "FYb8H+aEpoktuuAozODAuA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Editor.Layout.BoxLayout.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Editor.Layout.BoxLayout.html",
+          "hash": "Nac/8hkv4BI/h0NTQdiz7Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Editor.Layout.DistributeMode.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Editor.Layout.DistributeMode.html",
+          "hash": "wR4hPXxuuhoGk2TWBKwDGg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Editor.Layout.GroupBox.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Editor.Layout.GroupBox.html",
+          "hash": "lHFM6FOlqZn7UPZEFNd0kQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Editor.Layout.ShapeBox.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Editor.Layout.ShapeBox.html",
+          "hash": "5nOXLBU501qTmPZU/+02Uw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Editor.Layout.StackMode.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Editor.Layout.StackMode.html",
+          "hash": "hktmY3bTEyLkJcuKiNeI5g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Editor.Layout.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Editor.Layout.html",
+          "hash": "xLjwmJYlkjX7mtwP3fTgbw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Editor.Modifier.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Editor.Modifier.html",
+          "hash": "HTbo6dJKyWnXQfsfk7CEFw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Editor.ModifierFlags.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Editor.ModifierFlags.html",
+          "hash": "K2vT+gBj6uLjBhwbsTQADw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Editor.ProjectEditor.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Editor.ProjectEditor.html",
+          "hash": "ZBP8jQk1OiA96lPJZ6BOyQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Editor.ProjectEditorConfiguration.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Editor.ProjectEditorConfiguration.html",
+          "hash": "6pRTCYzcMblrFuncGrF0iQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Editor.ProjectEditorInputTarget.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Editor.ProjectEditorInputTarget.html",
+          "hash": "nelDtKZbQBcQPkVxWvNreg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Editor.ProjectExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Editor.ProjectExtensions.html",
+          "hash": "FMnP3l0R6ygHCt3kG/Tq/g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Editor.ProjectObserver.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Editor.ProjectObserver.html",
+          "hash": "nETc4NzxWJ29SBLdN2zJPw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Editor.Recent.RecentFile.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Editor.Recent.RecentFile.html",
+          "hash": "Y/UabAm0IhSE0KLTHKndUQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Editor.Recent.Recents.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Editor.Recent.Recents.html",
+          "hash": "C7Ooh+smhAZ8+6eZQPYjag=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Editor.Recent.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Editor.Recent.html",
+          "hash": "0iZm3vtigGSutcPV7hrM3w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Editor.StyleEditor.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Editor.StyleEditor.html",
+          "hash": "BsncJg/y7hrjZTjobrVVUw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Editor.Tools.Path.PathToolArc.State.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Editor.Tools.Path.PathToolArc.State.html",
+          "hash": "ah7vSDFsf7I0mWfWhnsrEA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Editor.Tools.Path.PathToolArc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Editor.Tools.Path.PathToolArc.html",
+          "hash": "vCO5hKPWtvUa/D6gN8Rdxw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Editor.Tools.Path.PathToolCubicBezier.State.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Editor.Tools.Path.PathToolCubicBezier.State.html",
+          "hash": "v7Ifmw2eh5YMwvt3LfxX7A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Editor.Tools.Path.PathToolCubicBezier.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Editor.Tools.Path.PathToolCubicBezier.html",
+          "hash": "IRF5Wf2jTP7RLrU1UqqMiA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Editor.Tools.Path.PathToolLine.State.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Editor.Tools.Path.PathToolLine.State.html",
+          "hash": "j9xXOPLcVbna71rNTt+Qsg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Editor.Tools.Path.PathToolLine.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Editor.Tools.Path.PathToolLine.html",
+          "hash": "Gcxhz6R6WpwogWQCiSLfCg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Editor.Tools.Path.PathToolMove.State.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Editor.Tools.Path.PathToolMove.State.html",
+          "hash": "HVDxDhGQgEKldvYqST3vow=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Editor.Tools.Path.PathToolMove.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Editor.Tools.Path.PathToolMove.html",
+          "hash": "fNHD4AxRh2yCa10MBGfePA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Editor.Tools.Path.PathToolQuadraticBezier.State.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Editor.Tools.Path.PathToolQuadraticBezier.State.html",
+          "hash": "3C9bW2+7l1lePfBPLcUDsQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Editor.Tools.Path.PathToolQuadraticBezier.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Editor.Tools.Path.PathToolQuadraticBezier.html",
+          "hash": "lNPSYP1uQ5E4e+1CxNHWDg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Editor.Tools.Path.Settings.PathToolSettingsArc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Editor.Tools.Path.Settings.PathToolSettingsArc.html",
+          "hash": "m+1IoRE6H6Q3ZGqxZ+rGdQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Editor.Tools.Path.Settings.PathToolSettingsCubicBezier.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Editor.Tools.Path.Settings.PathToolSettingsCubicBezier.html",
+          "hash": "Pv+rBte03HcQwC1V6N7MPA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Editor.Tools.Path.Settings.PathToolSettingsLine.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Editor.Tools.Path.Settings.PathToolSettingsLine.html",
+          "hash": "ogye0eVQSJXYJtlLPlxPwQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Editor.Tools.Path.Settings.PathToolSettingsMove.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Editor.Tools.Path.Settings.PathToolSettingsMove.html",
+          "hash": "qGvAYR8Q1D8Cpt3LvGGjUQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Editor.Tools.Path.Settings.PathToolSettingsQuadraticBezier.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Editor.Tools.Path.Settings.PathToolSettingsQuadraticBezier.html",
+          "hash": "THfPrXCYlqqrEVrr4rHCaA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Editor.Tools.Path.Settings.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Editor.Tools.Path.Settings.html",
+          "hash": "Vy29h0/Kz6sECK4+NwcbHA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Editor.Tools.Path.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Editor.Tools.Path.html",
+          "hash": "j9CB4rZ+02bR4CEq7CLbxw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Editor.Tools.Selection.ToolArcSelection.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Editor.Tools.Selection.ToolArcSelection.html",
+          "hash": "ePjPLUExF3t9FAqqKgYQhQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Editor.Tools.Selection.ToolCubicBezierSelection.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Editor.Tools.Selection.ToolCubicBezierSelection.html",
+          "hash": "Lk9T4Pj1M7mUqw4tm2P0eA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Editor.Tools.Selection.ToolEllipseSelection.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Editor.Tools.Selection.ToolEllipseSelection.html",
+          "hash": "ECDXTZ8dwstnmz/gineuag=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Editor.Tools.Selection.ToolImageSelection.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Editor.Tools.Selection.ToolImageSelection.html",
+          "hash": "55ONuiyUUccR+uEWYpn+YA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Editor.Tools.Selection.ToolLineSelection.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Editor.Tools.Selection.ToolLineSelection.html",
+          "hash": "8Abp4UH1Pz7tQTjBYz7ABg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Editor.Tools.Selection.ToolPathSelection.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Editor.Tools.Selection.ToolPathSelection.html",
+          "hash": "aaBIxS7gK/k0/9J+hpczCg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Editor.Tools.Selection.ToolPointSelection.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Editor.Tools.Selection.ToolPointSelection.html",
+          "hash": "MJ6umcxhrQCRbbqYfrgNEg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Editor.Tools.Selection.ToolQuadraticBezierSelection.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Editor.Tools.Selection.ToolQuadraticBezierSelection.html",
+          "hash": "GBzpeBmgNqNZKXJK7af7HA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Editor.Tools.Selection.ToolRectangleSelection.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Editor.Tools.Selection.ToolRectangleSelection.html",
+          "hash": "EyHt//3+wBB32kXCaog2pQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Editor.Tools.Selection.ToolTextSelection.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Editor.Tools.Selection.ToolTextSelection.html",
+          "hash": "EssAyioRGCFfkUP7slqcgw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Editor.Tools.Selection.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Editor.Tools.Selection.html",
+          "hash": "HpQ48FentEahauU+UE50LA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Editor.Tools.Settings.ToolSettingsArc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Editor.Tools.Settings.ToolSettingsArc.html",
+          "hash": "MFIi+83Y9G6NfLX4A6x0iw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Editor.Tools.Settings.ToolSettingsCubicBezier.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Editor.Tools.Settings.ToolSettingsCubicBezier.html",
+          "hash": "9F8HaH3X61yHFxrrFFIY5w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Editor.Tools.Settings.ToolSettingsEllipse.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Editor.Tools.Settings.ToolSettingsEllipse.html",
+          "hash": "sbfE8hVahhNC3GA7ntysqA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Editor.Tools.Settings.ToolSettingsImage.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Editor.Tools.Settings.ToolSettingsImage.html",
+          "hash": "jbYxft8keTG5KcfCG6iTYg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Editor.Tools.Settings.ToolSettingsLine.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Editor.Tools.Settings.ToolSettingsLine.html",
+          "hash": "Y+r+M9Yn7AQY5SHYxeQpFA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Editor.Tools.Settings.ToolSettingsNone.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Editor.Tools.Settings.ToolSettingsNone.html",
+          "hash": "jQO8siHpya8HthPXhPPIcA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Editor.Tools.Settings.ToolSettingsPath.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Editor.Tools.Settings.ToolSettingsPath.html",
+          "hash": "BWr74AA5rdY4UGi7+byojg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Editor.Tools.Settings.ToolSettingsPoint.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Editor.Tools.Settings.ToolSettingsPoint.html",
+          "hash": "vp9eNrpjjYCR+BeGZ/nrHQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Editor.Tools.Settings.ToolSettingsQuadraticBezier.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Editor.Tools.Settings.ToolSettingsQuadraticBezier.html",
+          "hash": "5Z02jgyXoJpU49TYWKrmJA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Editor.Tools.Settings.ToolSettingsRectangle.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Editor.Tools.Settings.ToolSettingsRectangle.html",
+          "hash": "2r/HNgMiToZ3x2TfO7Q7ZA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Editor.Tools.Settings.ToolSettingsSelection.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Editor.Tools.Settings.ToolSettingsSelection.html",
+          "hash": "3fRNh4S4s2fwgZUhHMOGCA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Editor.Tools.Settings.ToolSettingsText.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Editor.Tools.Settings.ToolSettingsText.html",
+          "hash": "XIjtgWCFIbtfka8YPBh6mw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Editor.Tools.Settings.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Editor.Tools.Settings.html",
+          "hash": "DEl8LECPWXcHIrBTAGNzpg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Editor.Tools.ToolArc.State.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Editor.Tools.ToolArc.State.html",
+          "hash": "0XqF380Dxsw+qnQT8HUbCw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Editor.Tools.ToolArc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Editor.Tools.ToolArc.html",
+          "hash": "7p8PSuD4a5G7Ly6MUAKFCg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Editor.Tools.ToolCubicBezier.State.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Editor.Tools.ToolCubicBezier.State.html",
+          "hash": "PoLV7vvGTQJL9AQap/I3GQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Editor.Tools.ToolCubicBezier.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Editor.Tools.ToolCubicBezier.html",
+          "hash": "xs3HB7vSrlr6P2QEE0Spmg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Editor.Tools.ToolEllipse.Mode.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Editor.Tools.ToolEllipse.Mode.html",
+          "hash": "mFystqThN//d2F3Si5fVuw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Editor.Tools.ToolEllipse.State.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Editor.Tools.ToolEllipse.State.html",
+          "hash": "nWe4dR/k1wowePbfEb1Afw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Editor.Tools.ToolEllipse.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Editor.Tools.ToolEllipse.html",
+          "hash": "h6TOBgiRARQExFNemTy/1w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Editor.Tools.ToolImage.State.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Editor.Tools.ToolImage.State.html",
+          "hash": "oS/kkyU8nbGcM6rajWNvCg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Editor.Tools.ToolImage.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Editor.Tools.ToolImage.html",
+          "hash": "I8omggmt0sHMX2pyXJ/mew=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Editor.Tools.ToolLine.State.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Editor.Tools.ToolLine.State.html",
+          "hash": "w8RWzpFaK9H8AD98OEkPcQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Editor.Tools.ToolLine.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Editor.Tools.ToolLine.html",
+          "hash": "y0e6AebQvWfyj/GekfS/ag=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Editor.Tools.ToolNone.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Editor.Tools.ToolNone.html",
+          "hash": "LZYysAh3ax+dN82DVl6HGg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Editor.Tools.ToolPath.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Editor.Tools.ToolPath.html",
+          "hash": "osQSxbhLdY1gW8h0PJ8NkA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Editor.Tools.ToolPoint.State.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Editor.Tools.ToolPoint.State.html",
+          "hash": "yFSmjIte//V8tsz07Btc3g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Editor.Tools.ToolPoint.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Editor.Tools.ToolPoint.html",
+          "hash": "67duJQZbUf1yOY9J5NVDQA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Editor.Tools.ToolQuadraticBezier.State.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Editor.Tools.ToolQuadraticBezier.State.html",
+          "hash": "FbpFtZ580V2djZDmxQ99cw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Editor.Tools.ToolQuadraticBezier.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Editor.Tools.ToolQuadraticBezier.html",
+          "hash": "3E0tdIB2obmWllVUj4II2g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Editor.Tools.ToolRectangle.State.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Editor.Tools.ToolRectangle.State.html",
+          "hash": "4WNYBeadm1vMYVMpfQOsQQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Editor.Tools.ToolRectangle.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Editor.Tools.ToolRectangle.html",
+          "hash": "lA0bCnTJo+LNwJecYTURyg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Editor.Tools.ToolSelection.State.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Editor.Tools.ToolSelection.State.html",
+          "hash": "OGdZYFDHEHwqPGlXp0PSDQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Editor.Tools.ToolSelection.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Editor.Tools.ToolSelection.html",
+          "hash": "RGlq98R2fLDbpNki1RIBhg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Editor.Tools.ToolText.State.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Editor.Tools.ToolText.State.html",
+          "hash": "TmZHasRm7EWV7wVNYU49MA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Editor.Tools.ToolText.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Editor.Tools.ToolText.html",
+          "hash": "/HKX873uksy+9ysMPC9TfA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Editor.Tools.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Editor.Tools.html",
+          "hash": "OMOd7J4WbVtuAR5/GOawXw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Editor.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Editor.html",
+          "hash": "Q2KeIrlyd901bDSLu+x5jw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Factory.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Factory.html",
+          "hash": "eF04truaqVdFw49XFrUE3A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.FileSystem.DotNet.DotNetFileSystem.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.FileSystem.DotNet.DotNetFileSystem.html",
+          "hash": "VEOikfDXP3gU01Bn9/GmFA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.FileSystem.DotNet.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.FileSystem.DotNet.html",
+          "hash": "iKLGzKlQtPJe8mMSJda9Ng=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.FileWriter.Dxf.DxfWriter.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.FileWriter.Dxf.DxfWriter.html",
+          "hash": "Qc6ERjrjffunfruJCakBWw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.FileWriter.Dxf.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.FileWriter.Dxf.html",
+          "hash": "vjziZJulA9FdGT+zSzDxyQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.FileWriter.Emf.EmfWriter.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.FileWriter.Emf.EmfWriter.html",
+          "hash": "gtHNN722bBXM8/56EPiXJA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.FileWriter.Emf.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.FileWriter.Emf.html",
+          "hash": "a+aOTPMfpFJGQ/HnGWJfXA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.FileWriter.PdfSharp.PdfSharpWriter.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.FileWriter.PdfSharp.PdfSharpWriter.html",
+          "hash": "tpJ/xo/XzOx2rrWS0lbYhA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.FileWriter.PdfSharp.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.FileWriter.PdfSharp.html",
+          "hash": "sRtLPCc0H8v0Wy/ewoTeug=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.FileWriter.SkiaSharpJpeg.JpegSkiaSharpExporter.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.FileWriter.SkiaSharpJpeg.JpegSkiaSharpExporter.html",
+          "hash": "GCjDqB0yeNqMrJewPi+SUg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.FileWriter.SkiaSharpJpeg.JpegSkiaSharpWriter.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.FileWriter.SkiaSharpJpeg.JpegSkiaSharpWriter.html",
+          "hash": "okXZzPhkqqYCJUA1vjJ3Og=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.FileWriter.SkiaSharpJpeg.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.FileWriter.SkiaSharpJpeg.html",
+          "hash": "k+mMOWIsb+Oc3cS12Bwk1w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.FileWriter.SkiaSharpPdf.PdfSkiaSharpExporter.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.FileWriter.SkiaSharpPdf.PdfSkiaSharpExporter.html",
+          "hash": "2X1p9GWwV+iY/9Z1Au4Z9Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.FileWriter.SkiaSharpPdf.PdfSkiaSharpWriter.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.FileWriter.SkiaSharpPdf.PdfSkiaSharpWriter.html",
+          "hash": "xcWME8Zo5ZbEp6c+kyf85g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.FileWriter.SkiaSharpPdf.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.FileWriter.SkiaSharpPdf.html",
+          "hash": "HEfWYBXc1KZiCwuxb4aIIQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.FileWriter.SkiaSharpPng.PngSkiaSharpExporter.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.FileWriter.SkiaSharpPng.PngSkiaSharpExporter.html",
+          "hash": "Up/zgb61emhsLAmYSSEf0Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.FileWriter.SkiaSharpPng.PngSkiaSharpWriter.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.FileWriter.SkiaSharpPng.PngSkiaSharpWriter.html",
+          "hash": "FyN4NOs7SalmMVfuET3O3Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.FileWriter.SkiaSharpPng.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.FileWriter.SkiaSharpPng.html",
+          "hash": "wIXoAfQVCD4PptauPHONXw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.FileWriter.SkiaSharpSvg.SvgSkiaSharpExporter.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.FileWriter.SkiaSharpSvg.SvgSkiaSharpExporter.html",
+          "hash": "eFKTTEPVa2SY9pboCvMx7w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.FileWriter.SkiaSharpSvg.SvgSkiaSharpWriter.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.FileWriter.SkiaSharpSvg.SvgSkiaSharpWriter.html",
+          "hash": "N/1EmTwg+3H9lGA1mqf8yQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.FileWriter.SkiaSharpSvg.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.FileWriter.SkiaSharpSvg.html",
+          "hash": "e5bHwoIZz3MgEchaAcBLRA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.FileWriter.SkiaSharpWebp.WebpSkiaSharpExporter.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.FileWriter.SkiaSharpWebp.WebpSkiaSharpExporter.html",
+          "hash": "s77NxoMLTxQjv01gW/A0mA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.FileWriter.SkiaSharpWebp.WebpSkiaSharpWriter.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.FileWriter.SkiaSharpWebp.WebpSkiaSharpWriter.html",
+          "hash": "KgO1by7cEm7S92VCXqI0Rw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.FileWriter.SkiaSharpWebp.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.FileWriter.SkiaSharpWebp.html",
+          "hash": "VWwFVniG5by7y9H1164QNA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.History.IHistory.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.History.IHistory.html",
+          "hash": "934eM/l7vR4IOxijdbCkiw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.History.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.History.html",
+          "hash": "zHHDHaS6vO73x0mxF72ivA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.IConnectable.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.IConnectable.html",
+          "hash": "c3NXsZJ6gsq4/Kgypqfl+A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.ICopyable.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.ICopyable.html",
+          "hash": "zQ1Guy2h0HKq3pm77C6wGg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.IDrawable.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.IDrawable.html",
+          "hash": "77buknCfHx0cWxaOED0/FQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.IObservableObject.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.IObservableObject.html",
+          "hash": "eUwCcw0vOePwSsqb7pJCPA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.ISelectable.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.ISelectable.html",
+          "hash": "1FmioU6fAZC1DGYqjgmX9w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.ISelection.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.ISelection.html",
+          "hash": "qcGtaCjTCYPinIeps52H9A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Interfaces.IContainerFactory.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Interfaces.IContainerFactory.html",
+          "hash": "1BEzQ386P2UYAxLmlbBTGQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Interfaces.IFactory.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Interfaces.IFactory.html",
+          "hash": "8IGIvxPfxkx6sSXqdWTBaQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Interfaces.IFileSystem.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Interfaces.IFileSystem.html",
+          "hash": "6bLqau1yqinkXLMTlxPq6g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Interfaces.IFileWriter.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Interfaces.IFileWriter.html",
+          "hash": "B4PXdr7DISE4fPU9jigorA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Interfaces.IImageImporter.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Interfaces.IImageImporter.html",
+          "hash": "7bYLPSSzxuORZORh+4DFYw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Interfaces.IJsonSerializer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Interfaces.IJsonSerializer.html",
+          "hash": "P/TUB7yfD/8xSVlmIQmyug=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Interfaces.ILog.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Interfaces.ILog.html",
+          "hash": "k5+fB15SFIJ7WvJs8Ijdeg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Interfaces.IProjectExporter.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Interfaces.IProjectExporter.html",
+          "hash": "bNU1njmV/1ahOr+XyhKilw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Interfaces.IScriptRunner.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Interfaces.IScriptRunner.html",
+          "hash": "sU9o3egObWDCtOf5Ag94PA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Interfaces.IShapeFactory.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Interfaces.IShapeFactory.html",
+          "hash": "hKt30y0g0Iv2WOGHcd1YEQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Interfaces.ITextClipboard.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Interfaces.ITextClipboard.html",
+          "hash": "Sa3p/bNAN8zmjlexsnk+ug=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Interfaces.ITextFieldReader-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Interfaces.ITextFieldReader-1.html",
+          "hash": "gyYHBErMxvrz3hyl5ptP9Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Interfaces.ITextFieldWriter-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Interfaces.ITextFieldWriter-1.html",
+          "hash": "vtsFLKrSppgZ+U4uyQBN+w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Interfaces.IXamlSerializer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Interfaces.IXamlSerializer.html",
+          "hash": "dp2rsWXftt8/MRQT8g0FXw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Interfaces.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Interfaces.html",
+          "hash": "JNQQDZlsTX5nopxNpBeY4w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Log.Trace.TraceLog.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Log.Trace.TraceLog.html",
+          "hash": "sLOAFvBw5a0Snih3zoIQjg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Log.Trace.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Log.Trace.html",
+          "hash": "+BtBbt1rlIM4tG4G5Q4lBQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.ObservableObject.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.ObservableObject.html",
+          "hash": "NOqifPCL1cNLrT0t235/0A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Path.FillRule.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Path.FillRule.html",
+          "hash": "z6pXd2JWdSmSFVsENhsfnw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Path.IGeometryContext.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Path.IGeometryContext.html",
+          "hash": "khzYcrYcccmUoYQQx5/tew=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Path.IPathFigure.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Path.IPathFigure.html",
+          "hash": "IuKO727L2iDJTMD5ZFY3Hw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Path.IPathGeometry.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Path.IPathGeometry.html",
+          "hash": "6yFwRMlMvLG6RuJpzfdojA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Path.IPathPolySegment.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Path.IPathPolySegment.html",
+          "hash": "sKpwCzYxf2WzTqEDDAq/Fg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Path.IPathSegment.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Path.IPathSegment.html",
+          "hash": "HyfFH9ZjzTLdhkb3zcNarA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Path.IPathSize.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Path.IPathSize.html",
+          "hash": "tLWJnLr6uy/vmQB3rGP13g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Path.PathFigure.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Path.PathFigure.html",
+          "hash": "rCLSJEPJFX1mrYkIDKu6EA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Path.PathGeometry.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Path.PathGeometry.html",
+          "hash": "EPl5Dbtsu8i/gOzaa4RhIw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Path.PathGeometryContext.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Path.PathGeometryContext.html",
+          "hash": "41QAMl0Nn64jG6LRr1rAKw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Path.PathPolySegment.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Path.PathPolySegment.html",
+          "hash": "IWu0e4Kfx0FO1DJqcsr+Lg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Path.PathSegment.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Path.PathSegment.html",
+          "hash": "KMuIbI+vFOba2TKySIYz3w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Path.PathSize.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Path.PathSize.html",
+          "hash": "NtfHOprk48yAAyXW+zzQUg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Path.Segments.ArcSegment.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Path.Segments.ArcSegment.html",
+          "hash": "b4ywkJfTtp5EtHYienaDAg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Path.Segments.CubicBezierSegment.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Path.Segments.CubicBezierSegment.html",
+          "hash": "WUr9H7azNQL69NK8vIaVyQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Path.Segments.IArcSegment.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Path.Segments.IArcSegment.html",
+          "hash": "XHXE0UMsRGOgAjjOrBt5JQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Path.Segments.ICubicBezierSegment.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Path.Segments.ICubicBezierSegment.html",
+          "hash": "YQT1Y18PzUl5ZP31iD4fwg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Path.Segments.ILineSegment.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Path.Segments.ILineSegment.html",
+          "hash": "QZTzYoJ+lniCyVj/h+OABQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Path.Segments.IPolyCubicBezierSegment.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Path.Segments.IPolyCubicBezierSegment.html",
+          "hash": "TmdJaUpspZ2XY2Mpyxn4oQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Path.Segments.IPolyLineSegment.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Path.Segments.IPolyLineSegment.html",
+          "hash": "sIZ0vYstUIHUg8FZVqoQgA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Path.Segments.IPolyQuadraticBezierSegment.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Path.Segments.IPolyQuadraticBezierSegment.html",
+          "hash": "grsYwEsW+fM5v1B/ouI7eQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Path.Segments.IQuadraticBezierSegment.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Path.Segments.IQuadraticBezierSegment.html",
+          "hash": "vWIw8LEmQWKoXzD4sbAJEQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Path.Segments.LineSegment.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Path.Segments.LineSegment.html",
+          "hash": "AtFgDORqtSK8eZaNIVGUrA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Path.Segments.PolyCubicBezierSegment.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Path.Segments.PolyCubicBezierSegment.html",
+          "hash": "363CIe/aJg7qceWHArCwjQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Path.Segments.PolyLineSegment.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Path.Segments.PolyLineSegment.html",
+          "hash": "Kf1r/WBOHIQ9d/y8dNp3cw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Path.Segments.PolyQuadraticBezierSegment.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Path.Segments.PolyQuadraticBezierSegment.html",
+          "hash": "r8t+ui4wJ/quwkxvELx6Nw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Path.Segments.QuadraticBezierSegment.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Path.Segments.QuadraticBezierSegment.html",
+          "hash": "ggJSaz+uXig1akMBStMxJQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Path.Segments.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Path.Segments.html",
+          "hash": "wGcj/cS4DK3NS5sUBHz7uQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Path.SweepDirection.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Path.SweepDirection.html",
+          "hash": "ffkyjl3BssOe0Da70tGEwQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Path.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Path.html",
+          "hash": "Z29LEafipqcyqkE+jlJmzw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Renderer.Avalonia.AvaloniaRenderer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Renderer.Avalonia.AvaloniaRenderer.html",
+          "hash": "G/9Yb8k3O0SGJO8jgwROmg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Renderer.Avalonia.PathGeometryConverter.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Renderer.Avalonia.PathGeometryConverter.html",
+          "hash": "8ZS7iiNm0oFTPdQ9cZEUZg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Renderer.Avalonia.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Renderer.Avalonia.html",
+          "hash": "S97ljCjh3Rt10eUE7YiLpw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Renderer.Cache-2.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Renderer.Cache-2.html",
+          "hash": "HF9imT/N+C9tEm5ddPmu0g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Renderer.Dxf.DxfRenderer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Renderer.Dxf.DxfRenderer.html",
+          "hash": "qgIvfAnIVyp+vXSfWSe95A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Renderer.Dxf.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Renderer.Dxf.html",
+          "hash": "77zqmUvz0r5lIeQx3Uj5bw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Renderer.ICache-2.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Renderer.ICache-2.html",
+          "hash": "iUVWxQ00NVyoYBISOTbg8g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Renderer.IContainerPresenter.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Renderer.IContainerPresenter.html",
+          "hash": "s0lmBCDVNlcAzNpvitsAWQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Renderer.IImageCache.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Renderer.IImageCache.html",
+          "hash": "DTOYoDJMC0EjwoXNZC5bLw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Renderer.IImageKey.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Renderer.IImageKey.html",
+          "hash": "v9/3cM6jojisRqYyGWPlzw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Renderer.IMatrixObject.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Renderer.IMatrixObject.html",
+          "hash": "EfrJWA1a7YuWV3UuQmWFNw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Renderer.IShapeRenderer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Renderer.IShapeRenderer.html",
+          "hash": "Xx+7SU5Leb6JMBY9XGDcuA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Renderer.IShapeRendererState.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Renderer.IShapeRendererState.html",
+          "hash": "0J/ATERpd4NGdQUz3hgNsQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Renderer.IShapeState.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Renderer.IShapeState.html",
+          "hash": "7nxMCYS1PTAA8fWIKAwRxg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Renderer.ImageKey.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Renderer.ImageKey.html",
+          "hash": "8p68V+p2BtroHH1vcQyvcw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Renderer.MatrixObject.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Renderer.MatrixObject.html",
+          "hash": "SjwOSyvUmYKOlyAykIp4iw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Renderer.PdfSharp.PathGeometryConverter.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Renderer.PdfSharp.PathGeometryConverter.html",
+          "hash": "mf3hZv9XLTCi27Nx1koU0w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Renderer.PdfSharp.PdfSharpRenderer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Renderer.PdfSharp.PdfSharpRenderer.html",
+          "hash": "yR8+XgI4skPmD5NnHqY8wg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Renderer.PdfSharp.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Renderer.PdfSharp.html",
+          "hash": "FLiz8PFXUzUpt4hNmOH6uA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Renderer.PointAlignment.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Renderer.PointAlignment.html",
+          "hash": "hcx2azYGLEWkCyalL7v+ZQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Renderer.Presenters.EditorPresenter.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Renderer.Presenters.EditorPresenter.html",
+          "hash": "1otLXfsr3Ls2QlTn0IRoNQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Renderer.Presenters.ExportPresenter.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Renderer.Presenters.ExportPresenter.html",
+          "hash": "Vrh8HClh/gXfwmM0Awh3qg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Renderer.Presenters.TemplatePresenter.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Renderer.Presenters.TemplatePresenter.html",
+          "hash": "bGMBkTq/jNDHCI+zDR28Sg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Renderer.Presenters.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Renderer.Presenters.html",
+          "hash": "gzSYPUEIddWC3KsOa/JzSQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Renderer.ShapeRendererState.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Renderer.ShapeRendererState.html",
+          "hash": "SVT8VguQBAOBUiNqk7uCBQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Renderer.ShapeState.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Renderer.ShapeState.html",
+          "hash": "r4AQ0o9t0F0Ao1HaUEO1Fg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Renderer.ShapeStateFlags.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Renderer.ShapeStateFlags.html",
+          "hash": "lBt5b73Vx9ojaI5tCjY9iw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Renderer.SkiaSharp.MatrixHelper.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Renderer.SkiaSharp.MatrixHelper.html",
+          "hash": "jgVXePs//aoOjq5M/vW4+Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Renderer.SkiaSharp.PathGeometryConverter.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Renderer.SkiaSharp.PathGeometryConverter.html",
+          "hash": "kdOh7ny/A7nM5ufguVBegg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Renderer.SkiaSharp.SkiaSharpRenderer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Renderer.SkiaSharp.SkiaSharpRenderer.html",
+          "hash": "DwOsjTAE6oEpFBaH/RubxA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Renderer.SkiaSharp.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Renderer.SkiaSharp.html",
+          "hash": "4UKAK/TWxyT/f9vs2u8+Pw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Renderer.WinForms.PathGeometryConverter.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Renderer.WinForms.PathGeometryConverter.html",
+          "hash": "WR+h/4AqGfjBuwkTl/kgQA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Renderer.WinForms.WinFormsRenderer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Renderer.WinForms.WinFormsRenderer.html",
+          "hash": "LVsC/9/vEQRF04I5eYU0gA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Renderer.WinForms.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Renderer.WinForms.html",
+          "hash": "j515BtoXtkdmN+82ZJTR/g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Renderer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Renderer.html",
+          "hash": "WlhPFnbCLPZCrZFUQjuWbQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.ScriptRunner.Roslyn.RoslynScriptRunner.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.ScriptRunner.Roslyn.RoslynScriptRunner.html",
+          "hash": "2NDVXuQOWS3fMHzdOOcakw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.ScriptRunner.Roslyn.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.ScriptRunner.Roslyn.html",
+          "hash": "ruvupNJWyTOuoXLODNTF3g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Serializer.Newtonsoft.NewtonsoftJsonSerializer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Serializer.Newtonsoft.NewtonsoftJsonSerializer.html",
+          "hash": "7ws4nh89BkU4+PSJ2QQBXg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Serializer.Newtonsoft.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Serializer.Newtonsoft.html",
+          "hash": "bhUxMr+IKv1oFXyJ81CKsw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Serializer.Xaml.PortableXamlSerializer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Serializer.Xaml.PortableXamlSerializer.html",
+          "hash": "ZLky9kKGNjW+fRdhxjv51w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Serializer.Xaml.XamlConstants.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Serializer.Xaml.XamlConstants.html",
+          "hash": "igU1uobQQtAsFRFI5LtVzw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Serializer.Xaml.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Serializer.Xaml.html",
+          "hash": "Arxsj48q1oyumTSrgSnZrQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.ServiceProvider.Autofac.AutofacServiceProvider.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.ServiceProvider.Autofac.AutofacServiceProvider.html",
+          "hash": "LbvlfgtcE/33Ypo+aQuSdA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.ServiceProvider.Autofac.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.ServiceProvider.Autofac.html",
+          "hash": "0o/0utcD9wvLYUsVX6ewaw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.ServiceProviderExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.ServiceProviderExtensions.html",
+          "hash": "friGVs+n5WDB00uLJMjybA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Shapes.ArcShape.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Shapes.ArcShape.html",
+          "hash": "9/UNbnUXlz+2bJaOzWoY2A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Shapes.BaseShape.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Shapes.BaseShape.html",
+          "hash": "sRC0HKNwKdEY9EnI/cuMKQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Shapes.ConnectableShape.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Shapes.ConnectableShape.html",
+          "hash": "Pjpo5mZxSoxFU/TCCPWCAg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Shapes.ConnectableShapeExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Shapes.ConnectableShapeExtensions.html",
+          "hash": "CwkACpVKD5qZag0NF9BmDQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Shapes.CubicBezierShape.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Shapes.CubicBezierShape.html",
+          "hash": "QwH63Ggaex3N+EUYPNXeeQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Shapes.EllipseShape.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Shapes.EllipseShape.html",
+          "hash": "N6rMQ2V53+CybX9BUCZVAA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Shapes.GroupShape.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Shapes.GroupShape.html",
+          "hash": "dFsd1O/e9yVwGxjCcDyDsg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Shapes.GroupShapeExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Shapes.GroupShapeExtensions.html",
+          "hash": "iMFRhdRu4KaUSmBjGQtmPw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Shapes.IArcShape.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Shapes.IArcShape.html",
+          "hash": "7RRfvmkXl4CPnfrspnTiVA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Shapes.IBaseShape.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Shapes.IBaseShape.html",
+          "hash": "s4DPyb++NVtzSctKwqmQig=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Shapes.IConnectableShape.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Shapes.IConnectableShape.html",
+          "hash": "JeufW5tRTLK8D6RuTUaGGQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Shapes.ICubicBezierShape.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Shapes.ICubicBezierShape.html",
+          "hash": "fbRBve2vQI1utV6mRX9IZQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Shapes.IEllipseShape.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Shapes.IEllipseShape.html",
+          "hash": "MEGyhaFoQvuddYX0qnX+Ig=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Shapes.IGroupShape.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Shapes.IGroupShape.html",
+          "hash": "+u+kM1XeDbooXHNHKnridA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Shapes.IImageShape.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Shapes.IImageShape.html",
+          "hash": "LDLYrsG6Jo++9X5hPW9Zxw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Shapes.ILineShape.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Shapes.ILineShape.html",
+          "hash": "P7UhMRIhEfK//xp4mz7LPw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Shapes.IPathShape.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Shapes.IPathShape.html",
+          "hash": "fJnY/1LwJmFknytqYnDOIQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Shapes.IPointShape.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Shapes.IPointShape.html",
+          "hash": "TWJY9kUBzyd1ByfPa7wskg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Shapes.IQuadraticBezierShape.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Shapes.IQuadraticBezierShape.html",
+          "hash": "/pMXG44DaCz82nuxNpiNIg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Shapes.IRectangleShape.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Shapes.IRectangleShape.html",
+          "hash": "Yau94HCTpgvg+0gAustfDQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Shapes.ITextShape.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Shapes.ITextShape.html",
+          "hash": "9PVlilpqIpcdi15ZdE1S9w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Shapes.ImageShape.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Shapes.ImageShape.html",
+          "hash": "pwERojjxlzNKvmzF4AVLHQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Shapes.LineShape.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Shapes.LineShape.html",
+          "hash": "QU/3mtJIrJmOTjzB/1wTog=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Shapes.LineShapeExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Shapes.LineShapeExtensions.html",
+          "hash": "6lKxZlwp3E5yhUj3/9E3bw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Shapes.PathShape.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Shapes.PathShape.html",
+          "hash": "IKINFvMUSxWcciGg73CrUQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Shapes.PointShape.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Shapes.PointShape.html",
+          "hash": "AXB213jJZH+zUxZiRjrFoA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Shapes.PointShapeExtentions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Shapes.PointShapeExtentions.html",
+          "hash": "KBH3EOyHDEHDNX+6aebkEQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Shapes.QuadraticBezierShape.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Shapes.QuadraticBezierShape.html",
+          "hash": "CN8HsJ00I95ijiYxdMjT+g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Shapes.RectangleShape.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Shapes.RectangleShape.html",
+          "hash": "JXJ2jMuE+i/8z/qQa88kCw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Shapes.TextShape.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Shapes.TextShape.html",
+          "hash": "R/HR67rGHl7JTQHSsBOiRg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Shapes.TextShapeExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Shapes.TextShapeExtensions.html",
+          "hash": "xc81bZgDRh/PpaWKUdu6JQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Shapes.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Shapes.html",
+          "hash": "8gtXzk9i9kLP4d4A8YZNRA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Style.ArgbColor.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Style.ArgbColor.html",
+          "hash": "MRLrYFtE8Q5jeOIzfFY9SQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Style.ArrowStyle.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Style.ArrowStyle.html",
+          "hash": "Og1E14wxS6X/dI+dnkFArg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Style.ArrowType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Style.ArrowType.html",
+          "hash": "BLe18r1pIj768ksICafMHA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Style.BaseStyle.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Style.BaseStyle.html",
+          "hash": "Pz4FZey885aoWWq7+HiSlw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Style.Colors.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Style.Colors.html",
+          "hash": "dCXL1Kt6a3/TdPiAqcOPmA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Style.CurveOrientation.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Style.CurveOrientation.html",
+          "hash": "QqwitwH3m5GO7F76V1TdKw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Style.FontStyle.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Style.FontStyle.html",
+          "hash": "DCCTyb75JCnHdpfrCT10Vw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Style.FontStyleFlags.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Style.FontStyleFlags.html",
+          "hash": "Yad6gjoNJ21O/AOYfZGNCA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Style.IArgbColor.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Style.IArgbColor.html",
+          "hash": "h8Wo5E3E4FLA9P3Fu1OFgQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Style.IArrowStyle.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Style.IArrowStyle.html",
+          "hash": "f8m0IY6lBb61ziKOsh9uCQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Style.IBaseStyle.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Style.IBaseStyle.html",
+          "hash": "NfasDY4HodsEjn0x1yn85g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Style.IColor.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Style.IColor.html",
+          "hash": "iDxk1l8GPMhdU8ws0kOHTg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Style.IFontStyle.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Style.IFontStyle.html",
+          "hash": "AUTyYQugKUB7c5N1AykmnQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Style.ILineFixedLength.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Style.ILineFixedLength.html",
+          "hash": "Qufx8Mob556XJFKXvtYqRw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Style.ILineStyle.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Style.ILineStyle.html",
+          "hash": "Dlm7ydM/ZuJgn5kWGY/IbQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Style.IShapeStyle.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Style.IShapeStyle.html",
+          "hash": "HF95NFMhRHs2Wp6fCjLCZw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Style.ITextStyle.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Style.ITextStyle.html",
+          "hash": "Oy1LytVJk7MZ55RYrTKE5g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Style.LineCap.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Style.LineCap.html",
+          "hash": "yFjvYsKdndYzxUmRWzLANg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Style.LineFixedLength.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Style.LineFixedLength.html",
+          "hash": "GL0BDoz/Yyt+yBbHx9v1mw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Style.LineFixedLengthFlags.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Style.LineFixedLengthFlags.html",
+          "hash": "2aj68js/wQB1pDqRmy3K/A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Style.LineStyle.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Style.LineStyle.html",
+          "hash": "NWEEwjgW/up33o6zk+SOyg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Style.ShapeStyle.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Style.ShapeStyle.html",
+          "hash": "5Z30s3tmxh1ujHZLEQgmGA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Style.StyleHelper.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Style.StyleHelper.html",
+          "hash": "gQFORFaJMDVExGACgVSkBQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Style.TextHAlignment.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Style.TextHAlignment.html",
+          "hash": "L3vQUBrKnz0UTVPj39DrIg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Style.TextStyle.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Style.TextStyle.html",
+          "hash": "bhU1s9+WMKsN+2EBzt2bmQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Style.TextVAlignment.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Style.TextVAlignment.html",
+          "hash": "vlcv0uX392P/8+SUZ9XM+w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Style.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Style.html",
+          "hash": "eD0GUudjHNxCK5MCd+kRAQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.TextFieldReader.CsvHelper.CsvHelperReader.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.TextFieldReader.CsvHelper.CsvHelperReader.html",
+          "hash": "gKRAvb1NQi/rrTNGZvI2ew=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.TextFieldReader.CsvHelper.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.TextFieldReader.CsvHelper.html",
+          "hash": "u+4bC6TYBHlNFDDjK2hLMg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.TextFieldWriter.CsvHelper.CsvHelperWriter.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.TextFieldWriter.CsvHelper.CsvHelperWriter.html",
+          "hash": "1XQzL9j+EylUcQw65Zkfrg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.TextFieldWriter.CsvHelper.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.TextFieldWriter.CsvHelper.html",
+          "hash": "qV839MPemj69yM2oxX23Zw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.App.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.App.html",
+          "hash": "obD3VIh81tZWZ5uBI9Eyng=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Behaviors.AttachEditorBehavior.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Behaviors.AttachEditorBehavior.html",
+          "hash": "kvV1XxEh1Rhr+kHbvK8KNw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Behaviors.ProjectEditorInput.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Behaviors.ProjectEditorInput.html",
+          "hash": "9zCio4JRrVxArCZglo6wSw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Behaviors.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Behaviors.html",
+          "hash": "iZo+irQ+XfPu6vYIjT4t1A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Converters.ArgbColorToBrushMultiConverter.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Converters.ArgbColorToBrushMultiConverter.html",
+          "hash": "UTYOg9UX1jbIFCwmp2vOHw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Converters.EditorToStatsMultiConverter.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Converters.EditorToStatsMultiConverter.html",
+          "hash": "XxLtSvY7RJ6F8RGfy4R2Tw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Converters.EditorToTitleMultiConverter.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Converters.EditorToTitleMultiConverter.html",
+          "hash": "oH/LmhXRJBA67p8q5aOcPw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Converters.IsGroupConverter.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Converters.IsGroupConverter.html",
+          "hash": "4MDvPymvg+ICn5AcstR+ow=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Converters.IsNullConverter.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Converters.IsNullConverter.html",
+          "hash": "9xsFJc1Phb7tQLShZgwCBw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Converters.ObjectEqualityMultiConverter.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Converters.ObjectEqualityMultiConverter.html",
+          "hash": "IGC6Hoq8SfPK9E3ehegd+A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Converters.ObjectEqualsConverter.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Converters.ObjectEqualsConverter.html",
+          "hash": "sKg6AYShQoF7VkjeeLbpag=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Converters.ObjectToJsonStringConverter.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Converters.ObjectToJsonStringConverter.html",
+          "hash": "rjFc2dyyhWKBppzbXSjmXQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Converters.ObjectToObjectConverter.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Converters.ObjectToObjectConverter.html",
+          "hash": "bSPlVn+R5nZULeqPw+BoKA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Converters.ObjectToTypeStringConverter.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Converters.ObjectToTypeStringConverter.html",
+          "hash": "yliufCpYHCiyByqRCPyVRA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Converters.ObjectToXamlStringConverter.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Converters.ObjectToXamlStringConverter.html",
+          "hash": "h5CIVT8eZkKhFpUgClElYg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Converters.TreeViewSelectedItemToObjectConverter.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Converters.TreeViewSelectedItemToObjectConverter.html",
+          "hash": "hory13XGK/ClRkdQvim2nQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Converters.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Converters.html",
+          "hash": "+Nf/dk6OCuhpPwDuW7aqjQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Dock.Documents.PageDocument.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Dock.Documents.PageDocument.html",
+          "hash": "4359yhkP+QetIkXtVjQung=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Dock.Documents.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Dock.Documents.html",
+          "hash": "2Edb4A1QuM55OUsu8KAQbQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Dock.Factories.EditorDockFactory.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Dock.Factories.EditorDockFactory.html",
+          "hash": "zFB1KwynGG7sK0VD5rctgA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Dock.Factories.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Dock.Factories.html",
+          "hash": "AdvqNEbp7zNfGp2ISofy/Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Dock.Handlers.EditorDropHandler.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Dock.Handlers.EditorDropHandler.html",
+          "hash": "tKjLu9iM7faDGhFlJ7s3BA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Dock.Handlers.ListBoxDropHandler.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Dock.Handlers.ListBoxDropHandler.html",
+          "hash": "Phdnk7inXGqcD8ez101RvA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Dock.Handlers.TreeViewDropHandler.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Dock.Handlers.TreeViewDropHandler.html",
+          "hash": "MBHSy41s8e7thBzjgQOFmQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Dock.Handlers.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Dock.Handlers.html",
+          "hash": "7FyNtMzUFtihnrkdgeQ4NA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Dock.Tools.BrowserTool.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Dock.Tools.BrowserTool.html",
+          "hash": "Ujv23EY7+jEp3Im/yCymuQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Dock.Tools.ContainerTool.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Dock.Tools.ContainerTool.html",
+          "hash": "uSrd4nsp7AP+jW5pMfgwIg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Dock.Tools.DataTool.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Dock.Tools.DataTool.html",
+          "hash": "lZ8m99LsYFB4hQy3ABURgA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Dock.Tools.DatabasesTool.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Dock.Tools.DatabasesTool.html",
+          "hash": "JfwHmE7d973ei+MkkfJJhg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Dock.Tools.DocumentTool.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Dock.Tools.DocumentTool.html",
+          "hash": "qdgQFRZfcXADsRSzN2InYw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Dock.Tools.ExportTool.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Dock.Tools.ExportTool.html",
+          "hash": "6oygQ9Ce03cF4zmMd9A6eQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Dock.Tools.GroupsTool.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Dock.Tools.GroupsTool.html",
+          "hash": "Cap3uGg21JM255rR7FIcnw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Dock.Tools.ImagesTool.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Dock.Tools.ImagesTool.html",
+          "hash": "2B5FKSwlM9VCEbVJptoMSA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Dock.Tools.OptionsTool.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Dock.Tools.OptionsTool.html",
+          "hash": "rpoQ6ICwKbQKRclLeJvbjQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Dock.Tools.ProjectTool.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Dock.Tools.ProjectTool.html",
+          "hash": "IKdRN0bbwytFYLsFIJ2C/A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Dock.Tools.ScriptTool.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Dock.Tools.ScriptTool.html",
+          "hash": "LUc77DOZ59cbApwysjmJFg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Dock.Tools.ShapeTool.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Dock.Tools.ShapeTool.html",
+          "hash": "5PqZ0zo0smOj2tzIlLzT6w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Dock.Tools.StyleTool.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Dock.Tools.StyleTool.html",
+          "hash": "JyH1Auenmd9akeFZBPJ6kA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Dock.Tools.StylesTool.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Dock.Tools.StylesTool.html",
+          "hash": "eSpNnUYLkmfK+w42GBDiBg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Dock.Tools.TemplateTool.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Dock.Tools.TemplateTool.html",
+          "hash": "k//SJNpCoeKdo0vM1nFPbQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Dock.Tools.TemplatesTool.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Dock.Tools.TemplatesTool.html",
+          "hash": "g+5iED6wZuT9YNQhR31img=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Dock.Tools.ToolsTool.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Dock.Tools.ToolsTool.html",
+          "hash": "azLx3VOJdL/yp4o6hX+y1Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Dock.Tools.ZoomTool.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Dock.Tools.ZoomTool.html",
+          "hash": "uJorSOo7lHQa+KaZcYYayw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Dock.Tools.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Dock.Tools.html",
+          "hash": "WACUiChWdJoJfWfoTSc7nA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Dock.Views.AboutView.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Dock.Views.AboutView.html",
+          "hash": "yD5Q03mrS2thNBsueWejUA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Dock.Views.BrowserView.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Dock.Views.BrowserView.html",
+          "hash": "+qw3MvxlE1/eRaUIYN0nIg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Dock.Views.DashboardView.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Dock.Views.DashboardView.html",
+          "hash": "z4Gt53wAXb+wRNi5NU0Mmg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Dock.Views.DocumentView.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Dock.Views.DocumentView.html",
+          "hash": "RsFm4g5bxzU5aH/XynYKqA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Dock.Views.EditorView.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Dock.Views.EditorView.html",
+          "hash": "NJH+nVcECQzpmbZxstkLfg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Dock.Views.ExportView.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Dock.Views.ExportView.html",
+          "hash": "UOZ0n1V2oBrlNGgImbEuaQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Dock.Views.ScriptView.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Dock.Views.ScriptView.html",
+          "hash": "x6q3EAskOlrxVr5hLUL+LQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Dock.Views.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Dock.Views.html",
+          "hash": "SUuzKREuHRC22PatXHAjig=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Dock.Windows.ThemedHostWindow.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Dock.Windows.ThemedHostWindow.html",
+          "hash": "2WI2EuWuQ/BWtu/RcFW5XQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Dock.Windows.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Dock.Windows.html",
+          "hash": "lpQOLDorZNhCEPlncRoqMg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Editor.AvaloniaEditorCanvasPlatform.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Editor.AvaloniaEditorCanvasPlatform.html",
+          "hash": "Qf/K07XXA/CINbWZPWkvCw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Editor.AvaloniaEditorLayoutPlatform.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Editor.AvaloniaEditorLayoutPlatform.html",
+          "hash": "CmtZQVSYd/2363PDzzh5Zg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Editor.AvaloniaProjectEditorPlatform.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Editor.AvaloniaProjectEditorPlatform.html",
+          "hash": "d2LELWOmCsXrux4R38H7kg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Editor.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Editor.html",
+          "hash": "Uk42TDMGWaOM9vyt22upFw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Importers.AvaloniaImageImporter.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Importers.AvaloniaImageImporter.html",
+          "hash": "WHAgLPZTgIGpiitX46xrmA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Importers.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Importers.html",
+          "hash": "POs6U/CTQkkDSQUo4yxNaA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Modules.AppModule.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Modules.AppModule.html",
+          "hash": "8bbr9ML81zECdNygQzNvTw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Modules.CoreModule.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Modules.CoreModule.html",
+          "hash": "D0iB9hywj/iviexBGqn0yw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Modules.DependenciesModule.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Modules.DependenciesModule.html",
+          "hash": "n5ypkcyn9FCPQghrWYxgYA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Modules.DesignerModule.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Modules.DesignerModule.html",
+          "hash": "BUX1K+GC4T91hwwBAqCwyQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Modules.LocatorModule.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Modules.LocatorModule.html",
+          "hash": "NzMpIX9EJrVMRR104vcR1w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Modules.ViewModule.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Modules.ViewModule.html",
+          "hash": "thlcXwcnmdBFC2sQeRb2Ag=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Modules.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Modules.html",
+          "hash": "8g9qHZGU1GigqXfIPwD04w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Renderer.RendererOptions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Renderer.RendererOptions.html",
+          "hash": "tnWf0pz3Fe/ie1CL7rzC2g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Renderer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Renderer.html",
+          "hash": "3mFjEmOa6drLDxKT80lI5g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Utilities.AvaloniaInputSource.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Utilities.AvaloniaInputSource.html",
+          "hash": "yX/ap4q4lhftJFdTFN9mLw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Utilities.AvaloniaTextClipboard.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Utilities.AvaloniaTextClipboard.html",
+          "hash": "8SiISk1KTvLAnDnHK3zvbg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Utilities.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Utilities.html",
+          "hash": "W0YPwogaELpDzAnyyGagkw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.ViewLocator.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.ViewLocator.html",
+          "hash": "z7GyJNV/pCJ8DtXnvYuGXw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Views.AboutControl.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Views.AboutControl.html",
+          "hash": "Wnya4W7yKY/5lZo1SCMYbg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Views.AboutMenuControl.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Views.AboutMenuControl.html",
+          "hash": "N3dw2WoGweuLlkIiVFR/lw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Views.BrowserControl.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Views.BrowserControl.html",
+          "hash": "mvgDeEVAeTnVHkFnm2SeiQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Views.BrowserMenuControl.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Views.BrowserMenuControl.html",
+          "hash": "VrQBT81stfj+//DKsODqXw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Views.Containers.ContainerControl.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Views.Containers.ContainerControl.html",
+          "hash": "QDjfu92bI1SZmt5tC3/46Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Views.Containers.DatabasesControl.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Views.Containers.DatabasesControl.html",
+          "hash": "aHrWE3nyx94R6XzOF6s9qA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Views.Containers.DocumentControl.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Views.Containers.DocumentControl.html",
+          "hash": "wIojm4lgIYUo/Mc3I/yTAQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Views.Containers.GroupsControl.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Views.Containers.GroupsControl.html",
+          "hash": "qXx7Ts7v1M3Vaie+RIUHZg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Views.Containers.ImagesControl.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Views.Containers.ImagesControl.html",
+          "hash": "ob0e/aZagBWJvvUK3nTMEw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Views.Containers.LayerControl.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Views.Containers.LayerControl.html",
+          "hash": "3O1tEercA06qv0AzS7aFcg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Views.Containers.LayersControl.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Views.Containers.LayersControl.html",
+          "hash": "MJhQJappekD/ICQI60kl9g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Views.Containers.LibraryControl.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Views.Containers.LibraryControl.html",
+          "hash": "f1j7yEmfLMQDT2jDliXvYw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Views.Containers.OptionsControl.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Views.Containers.OptionsControl.html",
+          "hash": "EbyAG/0BRWcc2HC3evtLmg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Views.Containers.ProjectControl.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Views.Containers.ProjectControl.html",
+          "hash": "jT4rri5Xn/qGUnX0eDp87w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Views.Containers.ShapesControl.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Views.Containers.ShapesControl.html",
+          "hash": "woV2MRjb8+l8A7NdQS1mIA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Views.Containers.StylesControl.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Views.Containers.StylesControl.html",
+          "hash": "5PW0hZczkYw6oBDURj0ZGQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Views.Containers.TemplatesControl.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Views.Containers.TemplatesControl.html",
+          "hash": "w2nuzc/qHgd36HcElj618A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Views.Containers.ZoomControl.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Views.Containers.ZoomControl.html",
+          "hash": "0yLgK/GKXdQAHj5ikjkLVA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Views.Containers.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Views.Containers.html",
+          "hash": "NxPPml/C33T48kTUfEd5GQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Views.DashboardControl.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Views.DashboardControl.html",
+          "hash": "n587Sj8bGMVCRoXDXTrQ1w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Views.DashboardMenuControl.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Views.DashboardMenuControl.html",
+          "hash": "CkqVlrjirzOjSNr+K8uMHg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Views.Data.ColumnsControl.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Views.Data.ColumnsControl.html",
+          "hash": "2QdhnO8/JIK7Okl7zGk+wQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Views.Data.DataControl.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Views.Data.DataControl.html",
+          "hash": "nl36DDeHIilYB11hQquwxQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Views.Data.DatabaseControl.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Views.Data.DatabaseControl.html",
+          "hash": "6JMKZA/s1yEqwhdeT+eSRw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Views.Data.PropertiesControl.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Views.Data.PropertiesControl.html",
+          "hash": "tw/kVzsU50CAEJ9ZpUFRqg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Views.Data.RecordControl.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Views.Data.RecordControl.html",
+          "hash": "OLWLTTYlRxZH92+/NvXfww=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Views.Data.RecordsControl.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Views.Data.RecordsControl.html",
+          "hash": "2+7StpdZcOUbEUO48Fr4SQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Views.Data.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Views.Data.html",
+          "hash": "717F1YyzrcsEkCdQN28GJg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Views.DocumentControl.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Views.DocumentControl.html",
+          "hash": "oDQM9H5tHkp5Lxuc+YfFWg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Views.DocumentMenuControl.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Views.DocumentMenuControl.html",
+          "hash": "U1fFi9vtw4KnptAtnF6jJg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Views.EditorControl.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Views.EditorControl.html",
+          "hash": "i5jBNX84MiZOGL13dVlSYQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Views.EditorMenuControl.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Views.EditorMenuControl.html",
+          "hash": "m8qe4Hf9qmtm/9C8e7U86Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Views.ExportControl.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Views.ExportControl.html",
+          "hash": "Kv0AZIs+F7VlyWnRybYjaQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Views.MainControl.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Views.MainControl.html",
+          "hash": "Ta+suhUAipnQXH8yB7CrQA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Views.PageControl.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Views.PageControl.html",
+          "hash": "1dY/zqKXTvaVHHEyewaHFg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Views.Path.ArcSegmentControl.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Views.Path.ArcSegmentControl.html",
+          "hash": "0lh9NdeXMG/u224JTTOV/A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Views.Path.CubicBezierSegmentControl.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Views.Path.CubicBezierSegmentControl.html",
+          "hash": "4VG98X9nXR8uQBHnOS7Elg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Views.Path.LineSegmentControl.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Views.Path.LineSegmentControl.html",
+          "hash": "P7Tek1JXoqvBKwrCEYc1XA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Views.Path.PathFigureControl.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Views.Path.PathFigureControl.html",
+          "hash": "6vf9YRffFnnivhi8Ekk+wg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Views.Path.PathGeometryControl.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Views.Path.PathGeometryControl.html",
+          "hash": "ut1T1mKOvi/Ny4hxN/8gkQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Views.Path.PathSizeControl.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Views.Path.PathSizeControl.html",
+          "hash": "yK46mWx6DDEYT6hQBYzBRA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Views.Path.PolyCubicBezierSegmentControl.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Views.Path.PolyCubicBezierSegmentControl.html",
+          "hash": "GfNZwPSjviJGLiqL6Sfkmw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Views.Path.PolyLineSegmentControl.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Views.Path.PolyLineSegmentControl.html",
+          "hash": "R5oAspuuEBqeaU/uXM8Cjg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Views.Path.PolyQuadraticBezierSegmentControl.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Views.Path.PolyQuadraticBezierSegmentControl.html",
+          "hash": "Ej6yUNNqH0SM6BbM8bR15w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Views.Path.QuadraticBezierSegmentControl.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Views.Path.QuadraticBezierSegmentControl.html",
+          "hash": "PHqlu8ByZXCAAUnsP/4LQQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Views.Path.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Views.Path.html",
+          "hash": "nzoWkXILbdS8bb/10XImjw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Views.PresenterControl.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Views.PresenterControl.html",
+          "hash": "PW2NskYLNYADsdH2OCaTXQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Views.PresenterType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Views.PresenterType.html",
+          "hash": "gW1wWu2D8AvjldUQRNQDWg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Views.Renderer.MatrixControl.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Views.Renderer.MatrixControl.html",
+          "hash": "ENX9QTtoeXSQlHf6IQqABg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Views.Renderer.ShapeStateControl.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Views.Renderer.ShapeStateControl.html",
+          "hash": "AEYFm6LdPlUBnuNMOM+P8A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Views.Renderer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Views.Renderer.html",
+          "hash": "S7b3HOlEn2LCeijloE+hZA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Views.ScriptControl.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Views.ScriptControl.html",
+          "hash": "GXykGtepHZUZBtSyv376pA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Views.Settings.Tools.ArcSettingsControl.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Views.Settings.Tools.ArcSettingsControl.html",
+          "hash": "AyBm1m7T1fUabIyut7duqw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Views.Settings.Tools.CubicBezierSettingsControl.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Views.Settings.Tools.CubicBezierSettingsControl.html",
+          "hash": "NswqDy1gA2v95suUlyC95w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Views.Settings.Tools.EllipseSettingsControl.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Views.Settings.Tools.EllipseSettingsControl.html",
+          "hash": "LZ7AZELdbRybmaJeB3R8Qw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Views.Settings.Tools.ImageSettingsControl.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Views.Settings.Tools.ImageSettingsControl.html",
+          "hash": "H8pGJgpo9qnngZYlam7r8g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Views.Settings.Tools.LineSettingsControl.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Views.Settings.Tools.LineSettingsControl.html",
+          "hash": "WVIV5de79r94Q9hqeWRong=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Views.Settings.Tools.NoneSettingsControl.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Views.Settings.Tools.NoneSettingsControl.html",
+          "hash": "KaQj/0AjZFBZLxxVYVLrlQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Views.Settings.Tools.Path.ArcSettingsControl.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Views.Settings.Tools.Path.ArcSettingsControl.html",
+          "hash": "9IChn4sQ3EHf7KDD2ZVoXA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Views.Settings.Tools.Path.CubicBezierSettingsControl.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Views.Settings.Tools.Path.CubicBezierSettingsControl.html",
+          "hash": "n8wjM4JqRjbbSBGlQ3HYdQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Views.Settings.Tools.Path.LineSettingsControl.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Views.Settings.Tools.Path.LineSettingsControl.html",
+          "hash": "t7Q1NRiTk3wNvQdNGXU1hQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Views.Settings.Tools.Path.MoveSettingsControl.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Views.Settings.Tools.Path.MoveSettingsControl.html",
+          "hash": "NbMkg4xcf2AA/3s/Q+Iy3Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Views.Settings.Tools.Path.QuadraticBezierSettingsControl.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Views.Settings.Tools.Path.QuadraticBezierSettingsControl.html",
+          "hash": "bNIS09bLsGu3ymGYtbw2Wg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Views.Settings.Tools.Path.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Views.Settings.Tools.Path.html",
+          "hash": "d4ondOGffKKAETfai98eGw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Views.Settings.Tools.PathSettingsControl.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Views.Settings.Tools.PathSettingsControl.html",
+          "hash": "xET9z1p/USecbWOUEZRioA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Views.Settings.Tools.PointSettingsControl.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Views.Settings.Tools.PointSettingsControl.html",
+          "hash": "upORv/MhsObBUVxDqYKnSA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Views.Settings.Tools.QuadraticBezierSettingsControl.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Views.Settings.Tools.QuadraticBezierSettingsControl.html",
+          "hash": "9S92EwtQDnpkZ8RJzN00RQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Views.Settings.Tools.RectangleSettingsControl.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Views.Settings.Tools.RectangleSettingsControl.html",
+          "hash": "KO+FcsDjSlFnjkTdQemAkg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Views.Settings.Tools.SelectionSettingsControl.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Views.Settings.Tools.SelectionSettingsControl.html",
+          "hash": "wWDcas2q0IZkjTQ2gooTgA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Views.Settings.Tools.TextSettingsControl.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Views.Settings.Tools.TextSettingsControl.html",
+          "hash": "ANr6GIu86KQQe0jPGimavw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Views.Settings.Tools.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Views.Settings.Tools.html",
+          "hash": "75zY4j3fJ914wlBa257A5Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Views.Settings.ToolsControl.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Views.Settings.ToolsControl.html",
+          "hash": "SV+4ePhAVab/GQcp/Mwf2w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Views.Settings.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Views.Settings.html",
+          "hash": "aZtLwIi0fS6qPG6hAGGzuQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Views.Shapes.ArcControl.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Views.Shapes.ArcControl.html",
+          "hash": "ZPNGkx0ZU3Qc/Mve4248Qw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Views.Shapes.CubicBezierControl.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Views.Shapes.CubicBezierControl.html",
+          "hash": "gS/1Ffs2Tflwu251662ulw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Views.Shapes.EllipseControl.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Views.Shapes.EllipseControl.html",
+          "hash": "SlFZw+HjYXXoGNRWwbKd8A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Views.Shapes.GroupControl.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Views.Shapes.GroupControl.html",
+          "hash": "JfJkJG3UitZOdLipe3KeJw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Views.Shapes.ImageControl.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Views.Shapes.ImageControl.html",
+          "hash": "9YVxotHPoemcKMAHEsjUsA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Views.Shapes.LineControl.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Views.Shapes.LineControl.html",
+          "hash": "9Cf+1kUJ8VcsSGYyhDFb9Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Views.Shapes.PathControl.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Views.Shapes.PathControl.html",
+          "hash": "m2wZWr5VAYUQ5nF8fsIlwg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Views.Shapes.PointControl.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Views.Shapes.PointControl.html",
+          "hash": "te+SxBMM/3HgiK1j57YoRw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Views.Shapes.QuadraticBezierControl.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Views.Shapes.QuadraticBezierControl.html",
+          "hash": "PvG/xfpHyu1v8yRwy4VWaw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Views.Shapes.RectangleControl.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Views.Shapes.RectangleControl.html",
+          "hash": "GvCUmpFDhcmLyIh5D9SotQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Views.Shapes.TextControl.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Views.Shapes.TextControl.html",
+          "hash": "B5tWIZmSNi8VWR2WxmGgsw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Views.Shapes.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Views.Shapes.html",
+          "hash": "sM3Gq63IGtZN36AghUk5wQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Views.StatusControl.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Views.StatusControl.html",
+          "hash": "vtOROmo+eG304WoixtchKg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Views.Style.ArgbColorControl.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Views.Style.ArgbColorControl.html",
+          "hash": "srArDbeOqqOauRnsM02upQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Views.Style.ArrowStyleControl.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Views.Style.ArrowStyleControl.html",
+          "hash": "RW+oYGSMv0RUGrzMsEk2UA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Views.Style.FontStyleControl.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Views.Style.FontStyleControl.html",
+          "hash": "rOFAZKD5x1oJXTQnaCtWJA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Views.Style.LineFixedLengthControl.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Views.Style.LineFixedLengthControl.html",
+          "hash": "PpiMwykeLO92wdrkZ6Dozw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Views.Style.LineStyleControl.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Views.Style.LineStyleControl.html",
+          "hash": "sn23A1Wve0ZD4B1XB49KrA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Views.Style.ShapeStyleControl.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Views.Style.ShapeStyleControl.html",
+          "hash": "CHhImux8vXRVVHJgBuGZdw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Views.Style.StyleControl.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Views.Style.StyleControl.html",
+          "hash": "E16rXqX1LO4zeoZWAM6/yA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Views.Style.TextStyleControl.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Views.Style.TextStyleControl.html",
+          "hash": "7nnORBiou6+EbkvMbXUA8w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Views.Style.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Views.Style.html",
+          "hash": "7d2PNOZxeWCmnrVH44Nkbw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Views.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Views.html",
+          "hash": "cROqN+ayDGmYwDZz/xGAYQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Windows.AboutWindow.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Windows.AboutWindow.html",
+          "hash": "5/YBSUERF5ZW+4Cozj1oRw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Windows.BrowserWindow.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Windows.BrowserWindow.html",
+          "hash": "G7sqjFmrSDD7GwjVz22E2w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Windows.DocumentWindow.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Windows.DocumentWindow.html",
+          "hash": "pdfS4cPUym0pHrihdEqJSA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Windows.MainWindow.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Windows.MainWindow.html",
+          "hash": "uNwOrnemUAQKX+wjllZUyw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Windows.ScriptWindow.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Windows.ScriptWindow.html",
+          "hash": "tdYvksUV1f93nw9MdVLodg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Windows.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Windows.html",
+          "hash": "7T0jbMWTlcF/CK6RdU/lmQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.html",
+          "hash": "DVBtc8ejsb71x8SwQfVpmQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.html",
+          "hash": "RnsUjQohdwtodZcKJjDQ2w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dock.Avalonia.DefaultDropHandler.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dock.Avalonia.DefaultDropHandler.html",
+          "hash": "A+ansJTTXGnkRR7Wwm9t/Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dock.Avalonia.DragBehavior.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dock.Avalonia.DragBehavior.html",
+          "hash": "lp8a6TLqr+0cRApLPyAIJw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dock.Avalonia.DragDataFormats.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dock.Avalonia.DragDataFormats.html",
+          "hash": "opBtfhSK+CGZyTencFXSqg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dock.Avalonia.DropBehavior.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dock.Avalonia.DropBehavior.html",
+          "hash": "wpl4z63KVUAxA+NW4q0rEw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dock.Avalonia.DropHelper.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dock.Avalonia.DropHelper.html",
+          "hash": "je0m/4mNMdOgWfAJ+raXaQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dock.Avalonia.IDragHandler.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dock.Avalonia.IDragHandler.html",
+          "hash": "p3YcVZlHjuw4lLg4funaqQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dock.Avalonia.IDropHandler.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dock.Avalonia.IDropHandler.html",
+          "hash": "lVseRmtn0+yN12xtr6u2dw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dock.Avalonia.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dock.Avalonia.html",
+          "hash": "8eHCBELh0SoVqkjySRjMWw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "api/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/toc.html",
+          "hash": "YHItKwU16wdcmqkOBBED8w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "index.md",
+      "output": {
+        ".html": {
+          "relative_path": "index.html",
+          "hash": "3m2D3lH1TfGDwNVWgLtR3g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "toc.html",
+          "hash": "AhgdhNJMbk6JhmL7XsWyzg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    }
+  ],
+  "incremental_info": [
+    {
+      "status": {
+        "can_incremental": false,
+        "details": "Cannot build incrementally because last build info is missing.",
+        "incrementalPhase": "build",
+        "total_file_count": 0,
+        "skipped_file_count": 0,
+        "full_build_reason_code": "NoAvailableBuildCache"
+      },
+      "processors": {
+        "ConceptualDocumentProcessor": {
+          "can_incremental": false,
+          "incrementalPhase": "build",
+          "total_file_count": 1,
+          "skipped_file_count": 0
+        },
+        "ManagedReferenceDocumentProcessor": {
+          "can_incremental": false,
+          "incrementalPhase": "build",
+          "total_file_count": 536,
+          "skipped_file_count": 0
+        },
+        "TocDocumentProcessor": {
+          "can_incremental": false,
+          "details": "Processor TocDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
+          "incrementalPhase": "build",
+          "total_file_count": 0,
+          "skipped_file_count": 0
+        }
+      }
+    },
+    {
+      "status": {
+        "can_incremental": false,
+        "details": "Cannot support incremental post processing, the reason is: last post processor info is null.",
+        "incrementalPhase": "postProcessing",
+        "total_file_count": 0,
+        "skipped_file_count": 0
+      },
+      "processors": {}
+    }
+  ],
+  "version_info": {},
+  "groups": [
+    {
+      "xrefmap": "xrefmap.yml"
+    }
+  ]
+}

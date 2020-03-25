@@ -1,0 +1,633 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Class ToolQuadraticBezier
+   | Core2D Website </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Class ToolQuadraticBezier
+   | Core2D Website ">
+    <meta name="generator" content="docfx 2.51.0.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="Core2D.Editor.Tools.ToolQuadraticBezier">
+  
+  
+  <h1 id="Core2D_Editor_Tools_ToolQuadraticBezier" data-uid="Core2D.Editor.Tools.ToolQuadraticBezier" class="text-break">Class ToolQuadraticBezier
+  </h1>
+  <div class="markdown level0 summary"><p>Quadratic bezier tool.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><span class="xref">System.Object</span></div>
+    <div class="level1"><a class="xref" href="Core2D.ObservableObject.html">ObservableObject</a></div>
+    <div class="level2"><span class="xref">ToolQuadraticBezier</span></div>
+  </div>
+  <div classs="implements">
+    <h5>Implements</h5>
+    <div><a class="xref" href="Core2D.Editor.IEditorTool.html">IEditorTool</a></div>
+    <div><a class="xref" href="Core2D.Editor.ITool.html">ITool</a></div>
+    <div><a class="xref" href="Core2D.IObservableObject.html">IObservableObject</a></div>
+    <div><span class="xref">System.ComponentModel.INotifyPropertyChanged</span></div>
+    <div><a class="xref" href="Core2D.ICopyable.html">ICopyable</a></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="Core2D.ObservableObject.html#Core2D_ObservableObject_Owner">ObservableObject.Owner</a>
+    </div>
+    <div>
+      <a class="xref" href="Core2D.ObservableObject.html#Core2D_ObservableObject_Id">ObservableObject.Id</a>
+    </div>
+    <div>
+      <a class="xref" href="Core2D.ObservableObject.html#Core2D_ObservableObject_Name">ObservableObject.Name</a>
+    </div>
+    <div>
+      <a class="xref" href="Core2D.ObservableObject.html#Core2D_ObservableObject_MarkAsDirty_System_Boolean_">ObservableObject.MarkAsDirty(Boolean)</a>
+    </div>
+    <div>
+      <a class="xref" href="Core2D.ObservableObject.html#Core2D_ObservableObject_PropertyChanged">ObservableObject.PropertyChanged</a>
+    </div>
+    <div>
+      <a class="xref" href="Core2D.ObservableObject.html#Core2D_ObservableObject_Notify_System_String_">ObservableObject.Notify(String)</a>
+    </div>
+    <div>
+      <a class="xref" href="Core2D.ObservableObject.html#Core2D_ObservableObject_Update__1___0____0_System_String_">ObservableObject.Update&lt;T&gt;(T, T, String)</a>
+    </div>
+    <div>
+      <a class="xref" href="Core2D.ObservableObject.html#Core2D_ObservableObject_ShouldSerializeOwner">ObservableObject.ShouldSerializeOwner()</a>
+    </div>
+    <div>
+      <a class="xref" href="Core2D.ObservableObject.html#Core2D_ObservableObject_ShouldSerializeId">ObservableObject.ShouldSerializeId()</a>
+    </div>
+    <div>
+      <a class="xref" href="Core2D.ObservableObject.html#Core2D_ObservableObject_ShouldSerializeName">ObservableObject.ShouldSerializeName()</a>
+    </div>
+    <div>
+      <a class="xref" href="Core2D.ObservableObject.html#Core2D_ObservableObject_ShouldSerializeIsDirty">ObservableObject.ShouldSerializeIsDirty()</a>
+    </div>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetHashCode()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetType()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.MemberwiseClone()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ToString()</span>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Core2D.Editor.Tools.html">Core2D.Editor.Tools</a></h6>
+  <h6><strong>Assembly</strong>: Core2D.dll</h6>
+  <h5 id="Core2D_Editor_Tools_ToolQuadraticBezier_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class ToolQuadraticBezier : ObservableObject, IEditorTool, ITool, IObservableObject, INotifyPropertyChanged, ICopyable</code></pre>
+  </div>
+  <h3 id="constructors">Constructors
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Editor_Tools_ToolQuadraticBezier__ctor_System_IServiceProvider_.md&amp;value=---%0Auid%3A%20Core2D.Editor.Tools.ToolQuadraticBezier.%23ctor(System.IServiceProvider)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Editor/Tools/ToolQuadraticBezier.cs/#L40">View Source</a>
+  </span>
+  <a id="Core2D_Editor_Tools_ToolQuadraticBezier__ctor_" data-uid="Core2D.Editor.Tools.ToolQuadraticBezier.#ctor*"></a>
+  <h4 id="Core2D_Editor_Tools_ToolQuadraticBezier__ctor_System_IServiceProvider_" data-uid="Core2D.Editor.Tools.ToolQuadraticBezier.#ctor(System.IServiceProvider)">ToolQuadraticBezier(IServiceProvider)</h4>
+  <div class="markdown level1 summary"><p>Initialize new instance of <a class="xref" href="Core2D.Editor.Tools.ToolQuadraticBezier.html">ToolQuadraticBezier</a> class.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ToolQuadraticBezier(IServiceProvider serviceProvider)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.IServiceProvider</span></td>
+        <td><span class="parametername">serviceProvider</span></td>
+        <td><p>The service provider.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="properties">Properties
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Editor_Tools_ToolQuadraticBezier_Settings.md&amp;value=---%0Auid%3A%20Core2D.Editor.Tools.ToolQuadraticBezier.Settings%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Editor/Tools/ToolQuadraticBezier.cs/#L30">View Source</a>
+  </span>
+  <a id="Core2D_Editor_Tools_ToolQuadraticBezier_Settings_" data-uid="Core2D.Editor.Tools.ToolQuadraticBezier.Settings*"></a>
+  <h4 id="Core2D_Editor_Tools_ToolQuadraticBezier_Settings" data-uid="Core2D.Editor.Tools.ToolQuadraticBezier.Settings">Settings</h4>
+  <div class="markdown level1 summary"><p>Gets or sets the tool settings.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ToolSettingsQuadraticBezier Settings { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Core2D.Editor.Tools.Settings.ToolSettingsQuadraticBezier.html">ToolSettingsQuadraticBezier</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Editor_Tools_ToolQuadraticBezier_Title.md&amp;value=---%0Auid%3A%20Core2D.Editor.Tools.ToolQuadraticBezier.Title%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Editor/Tools/ToolQuadraticBezier.cs/#L25">View Source</a>
+  </span>
+  <a id="Core2D_Editor_Tools_ToolQuadraticBezier_Title_" data-uid="Core2D.Editor.Tools.ToolQuadraticBezier.Title*"></a>
+  <h4 id="Core2D_Editor_Tools_ToolQuadraticBezier_Title" data-uid="Core2D.Editor.Tools.ToolQuadraticBezier.Title">Title</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string Title { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Editor_Tools_ToolQuadraticBezier_Copy_System_Collections_Generic_IDictionary_System_Object_System_Object__.md&amp;value=---%0Auid%3A%20Core2D.Editor.Tools.ToolQuadraticBezier.Copy(System.Collections.Generic.IDictionary%7BSystem.Object%2CSystem.Object%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Editor/Tools/ToolQuadraticBezier.cs/#L47">View Source</a>
+  </span>
+  <a id="Core2D_Editor_Tools_ToolQuadraticBezier_Copy_" data-uid="Core2D.Editor.Tools.ToolQuadraticBezier.Copy*"></a>
+  <h4 id="Core2D_Editor_Tools_ToolQuadraticBezier_Copy_System_Collections_Generic_IDictionary_System_Object_System_Object__" data-uid="Core2D.Editor.Tools.ToolQuadraticBezier.Copy(System.Collections.Generic.IDictionary{System.Object,System.Object})">Copy(IDictionary&lt;Object, Object&gt;)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override object Copy(IDictionary&lt;object, object&gt; shared)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.IDictionary</span>&lt;<span class="xref">System.Object</span>, <span class="xref">System.Object</span>&gt;</td>
+        <td><span class="parametername">shared</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="Core2D.ObservableObject.html#Core2D_ObservableObject_Copy_System_Collections_Generic_IDictionary_System_Object_System_Object__">ObservableObject.Copy(IDictionary&lt;Object, Object&gt;)</a></div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Editor_Tools_ToolQuadraticBezier_Finalize_Core2D_Shapes_IBaseShape_.md&amp;value=---%0Auid%3A%20Core2D.Editor.Tools.ToolQuadraticBezier.Finalize(Core2D.Shapes.IBaseShape)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Editor/Tools/ToolQuadraticBezier.cs/#L235">View Source</a>
+  </span>
+  <a id="Core2D_Editor_Tools_ToolQuadraticBezier_Finalize_" data-uid="Core2D.Editor.Tools.ToolQuadraticBezier.Finalize*"></a>
+  <h4 id="Core2D_Editor_Tools_ToolQuadraticBezier_Finalize_Core2D_Shapes_IBaseShape_" data-uid="Core2D.Editor.Tools.ToolQuadraticBezier.Finalize(Core2D.Shapes.IBaseShape)">Finalize(IBaseShape)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Finalize(IBaseShape shape)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Core2D.Shapes.IBaseShape.html">IBaseShape</a></td>
+        <td><span class="parametername">shape</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Editor_Tools_ToolQuadraticBezier_LeftDown_Core2D_Editor_Input_InputArgs_.md&amp;value=---%0Auid%3A%20Core2D.Editor.Tools.ToolQuadraticBezier.LeftDown(Core2D.Editor.Input.InputArgs)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Editor/Tools/ToolQuadraticBezier.cs/#L53">View Source</a>
+  </span>
+  <a id="Core2D_Editor_Tools_ToolQuadraticBezier_LeftDown_" data-uid="Core2D.Editor.Tools.ToolQuadraticBezier.LeftDown*"></a>
+  <h4 id="Core2D_Editor_Tools_ToolQuadraticBezier_LeftDown_Core2D_Editor_Input_InputArgs_" data-uid="Core2D.Editor.Tools.ToolQuadraticBezier.LeftDown(Core2D.Editor.Input.InputArgs)">LeftDown(InputArgs)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void LeftDown(InputArgs args)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Core2D.Editor.Input.InputArgs.html">InputArgs</a></td>
+        <td><span class="parametername">args</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Editor_Tools_ToolQuadraticBezier_LeftUp_Core2D_Editor_Input_InputArgs_.md&amp;value=---%0Auid%3A%20Core2D.Editor.Tools.ToolQuadraticBezier.LeftUp(Core2D.Editor.Input.InputArgs)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Editor/Tools/ToolQuadraticBezier.cs/#L131">View Source</a>
+  </span>
+  <a id="Core2D_Editor_Tools_ToolQuadraticBezier_LeftUp_" data-uid="Core2D.Editor.Tools.ToolQuadraticBezier.LeftUp*"></a>
+  <h4 id="Core2D_Editor_Tools_ToolQuadraticBezier_LeftUp_Core2D_Editor_Input_InputArgs_" data-uid="Core2D.Editor.Tools.ToolQuadraticBezier.LeftUp(Core2D.Editor.Input.InputArgs)">LeftUp(InputArgs)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void LeftUp(InputArgs args)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Core2D.Editor.Input.InputArgs.html">InputArgs</a></td>
+        <td><span class="parametername">args</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Editor_Tools_ToolQuadraticBezier_Move_Core2D_Editor_Input_InputArgs_.md&amp;value=---%0Auid%3A%20Core2D.Editor.Tools.ToolQuadraticBezier.Move(Core2D.Editor.Input.InputArgs)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Editor/Tools/ToolQuadraticBezier.cs/#L155">View Source</a>
+  </span>
+  <a id="Core2D_Editor_Tools_ToolQuadraticBezier_Move_" data-uid="Core2D.Editor.Tools.ToolQuadraticBezier.Move*"></a>
+  <h4 id="Core2D_Editor_Tools_ToolQuadraticBezier_Move_Core2D_Editor_Input_InputArgs_" data-uid="Core2D.Editor.Tools.ToolQuadraticBezier.Move(Core2D.Editor.Input.InputArgs)">Move(InputArgs)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Move(InputArgs args)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Core2D.Editor.Input.InputArgs.html">InputArgs</a></td>
+        <td><span class="parametername">args</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Editor_Tools_ToolQuadraticBezier_Move_Core2D_Shapes_IBaseShape_.md&amp;value=---%0Auid%3A%20Core2D.Editor.Tools.ToolQuadraticBezier.Move(Core2D.Shapes.IBaseShape)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Editor/Tools/ToolQuadraticBezier.cs/#L229">View Source</a>
+  </span>
+  <a id="Core2D_Editor_Tools_ToolQuadraticBezier_Move_" data-uid="Core2D.Editor.Tools.ToolQuadraticBezier.Move*"></a>
+  <h4 id="Core2D_Editor_Tools_ToolQuadraticBezier_Move_Core2D_Shapes_IBaseShape_" data-uid="Core2D.Editor.Tools.ToolQuadraticBezier.Move(Core2D.Shapes.IBaseShape)">Move(IBaseShape)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Move(IBaseShape shape)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Core2D.Shapes.IBaseShape.html">IBaseShape</a></td>
+        <td><span class="parametername">shape</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Editor_Tools_ToolQuadraticBezier_Reset.md&amp;value=---%0Auid%3A%20Core2D.Editor.Tools.ToolQuadraticBezier.Reset%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Editor/Tools/ToolQuadraticBezier.cs/#L240">View Source</a>
+  </span>
+  <a id="Core2D_Editor_Tools_ToolQuadraticBezier_Reset_" data-uid="Core2D.Editor.Tools.ToolQuadraticBezier.Reset*"></a>
+  <h4 id="Core2D_Editor_Tools_ToolQuadraticBezier_Reset" data-uid="Core2D.Editor.Tools.ToolQuadraticBezier.Reset">Reset()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Reset()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Editor_Tools_ToolQuadraticBezier_RightDown_Core2D_Editor_Input_InputArgs_.md&amp;value=---%0Auid%3A%20Core2D.Editor.Tools.ToolQuadraticBezier.RightDown(Core2D.Editor.Input.InputArgs)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Editor/Tools/ToolQuadraticBezier.cs/#L136">View Source</a>
+  </span>
+  <a id="Core2D_Editor_Tools_ToolQuadraticBezier_RightDown_" data-uid="Core2D.Editor.Tools.ToolQuadraticBezier.RightDown*"></a>
+  <h4 id="Core2D_Editor_Tools_ToolQuadraticBezier_RightDown_Core2D_Editor_Input_InputArgs_" data-uid="Core2D.Editor.Tools.ToolQuadraticBezier.RightDown(Core2D.Editor.Input.InputArgs)">RightDown(InputArgs)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void RightDown(InputArgs args)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Core2D.Editor.Input.InputArgs.html">InputArgs</a></td>
+        <td><span class="parametername">args</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Editor_Tools_ToolQuadraticBezier_RightUp_Core2D_Editor_Input_InputArgs_.md&amp;value=---%0Auid%3A%20Core2D.Editor.Tools.ToolQuadraticBezier.RightUp(Core2D.Editor.Input.InputArgs)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Editor/Tools/ToolQuadraticBezier.cs/#L150">View Source</a>
+  </span>
+  <a id="Core2D_Editor_Tools_ToolQuadraticBezier_RightUp_" data-uid="Core2D.Editor.Tools.ToolQuadraticBezier.RightUp*"></a>
+  <h4 id="Core2D_Editor_Tools_ToolQuadraticBezier_RightUp_Core2D_Editor_Input_InputArgs_" data-uid="Core2D.Editor.Tools.ToolQuadraticBezier.RightUp(Core2D.Editor.Input.InputArgs)">RightUp(InputArgs)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void RightUp(InputArgs args)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Core2D.Editor.Input.InputArgs.html">InputArgs</a></td>
+        <td><span class="parametername">args</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Editor_Tools_ToolQuadraticBezier_ToStatePoint2.md&amp;value=---%0Auid%3A%20Core2D.Editor.Tools.ToolQuadraticBezier.ToStatePoint2%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Editor/Tools/ToolQuadraticBezier.cs/#L223">View Source</a>
+  </span>
+  <a id="Core2D_Editor_Tools_ToolQuadraticBezier_ToStatePoint2_" data-uid="Core2D.Editor.Tools.ToolQuadraticBezier.ToStatePoint2*"></a>
+  <h4 id="Core2D_Editor_Tools_ToolQuadraticBezier_ToStatePoint2" data-uid="Core2D.Editor.Tools.ToolQuadraticBezier.ToStatePoint2">ToStatePoint2()</h4>
+  <div class="markdown level1 summary"><p>Transfer tool state to <a class="xref" href="Core2D.Editor.Tools.ToolQuadraticBezier.State.html#Core2D_Editor_Tools_ToolQuadraticBezier_State_Point2">Point2</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void ToStatePoint2()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Editor_Tools_ToolQuadraticBezier_ToStatePoint3.md&amp;value=---%0Auid%3A%20Core2D.Editor.Tools.ToolQuadraticBezier.ToStatePoint3%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Editor/Tools/ToolQuadraticBezier.cs/#L207">View Source</a>
+  </span>
+  <a id="Core2D_Editor_Tools_ToolQuadraticBezier_ToStatePoint3_" data-uid="Core2D.Editor.Tools.ToolQuadraticBezier.ToStatePoint3*"></a>
+  <h4 id="Core2D_Editor_Tools_ToolQuadraticBezier_ToStatePoint3" data-uid="Core2D.Editor.Tools.ToolQuadraticBezier.ToStatePoint3">ToStatePoint3()</h4>
+  <div class="markdown level1 summary"><p>Transfer tool state to <a class="xref" href="Core2D.Editor.Tools.ToolQuadraticBezier.State.html#Core2D_Editor_Tools_ToolQuadraticBezier_State_Point3">Point3</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void ToStatePoint3()</code></pre>
+  </div>
+  <h3 id="implements">Implements</h3>
+  <div>
+      <a class="xref" href="Core2D.Editor.IEditorTool.html">IEditorTool</a>
+  </div>
+  <div>
+      <a class="xref" href="Core2D.Editor.ITool.html">ITool</a>
+  </div>
+  <div>
+      <a class="xref" href="Core2D.IObservableObject.html">IObservableObject</a>
+  </div>
+  <div>
+      <span class="xref">System.ComponentModel.INotifyPropertyChanged</span>
+  </div>
+  <div>
+      <a class="xref" href="Core2D.ICopyable.html">ICopyable</a>
+  </div>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Editor_Tools_ToolQuadraticBezier.md&amp;value=---%0Auid%3A%20Core2D.Editor.Tools.ToolQuadraticBezier%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Editor/Tools/ToolQuadraticBezier.cs/#L15" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            <span>Copyright © (c) Wiesław Šoltés<br>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

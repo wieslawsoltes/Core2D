@@ -1,0 +1,680 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Class ObservableObject
+   | Core2D Website </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Class ObservableObject
+   | Core2D Website ">
+    <meta name="generator" content="docfx 2.51.0.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="Core2D.ObservableObject">
+  
+  
+  <h1 id="Core2D_ObservableObject" data-uid="Core2D.ObservableObject" class="text-break">Class ObservableObject
+  </h1>
+  <div class="markdown level0 summary"><p>Observable object.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><span class="xref">System.Object</span></div>
+    <div class="level1"><span class="xref">ObservableObject</span></div>
+      <div class="level2"><a class="xref" href="Core2D.Containers.DocumentContainer.html">DocumentContainer</a></div>
+      <div class="level2"><a class="xref" href="Core2D.Containers.LayerContainer.html">LayerContainer</a></div>
+      <div class="level2"><a class="xref" href="Core2D.Containers.Library-1.html">Library&lt;T&gt;</a></div>
+      <div class="level2"><a class="xref" href="Core2D.Containers.Options.html">Options</a></div>
+      <div class="level2"><a class="xref" href="Core2D.Containers.PageContainer.html">PageContainer</a></div>
+      <div class="level2"><a class="xref" href="Core2D.Containers.ProjectContainer.html">ProjectContainer</a></div>
+      <div class="level2"><a class="xref" href="Core2D.Data.Column.html">Column</a></div>
+      <div class="level2"><a class="xref" href="Core2D.Data.Context.html">Context</a></div>
+      <div class="level2"><a class="xref" href="Core2D.Data.Database.html">Database</a></div>
+      <div class="level2"><a class="xref" href="Core2D.Data.Property.html">Property</a></div>
+      <div class="level2"><a class="xref" href="Core2D.Data.Record.html">Record</a></div>
+      <div class="level2"><a class="xref" href="Core2D.Data.Value.html">Value</a></div>
+      <div class="level2"><a class="xref" href="Core2D.Editor.Modifier.html">Modifier</a></div>
+      <div class="level2"><a class="xref" href="Core2D.Editor.ProjectEditor.html">ProjectEditor</a></div>
+      <div class="level2"><a class="xref" href="Core2D.Editor.ProjectEditorConfiguration.html">ProjectEditorConfiguration</a></div>
+      <div class="level2"><a class="xref" href="Core2D.Editor.Recent.RecentFile.html">RecentFile</a></div>
+      <div class="level2"><a class="xref" href="Core2D.Editor.Recent.Recents.html">Recents</a></div>
+      <div class="level2"><a class="xref" href="Core2D.Editor.StyleEditor.html">StyleEditor</a></div>
+      <div class="level2"><a class="xref" href="Core2D.Editor.Tools.Path.PathToolArc.html">PathToolArc</a></div>
+      <div class="level2"><a class="xref" href="Core2D.Editor.Tools.Path.PathToolCubicBezier.html">PathToolCubicBezier</a></div>
+      <div class="level2"><a class="xref" href="Core2D.Editor.Tools.Path.PathToolLine.html">PathToolLine</a></div>
+      <div class="level2"><a class="xref" href="Core2D.Editor.Tools.Path.PathToolMove.html">PathToolMove</a></div>
+      <div class="level2"><a class="xref" href="Core2D.Editor.Tools.Path.PathToolQuadraticBezier.html">PathToolQuadraticBezier</a></div>
+      <div class="level2"><a class="xref" href="Core2D.Editor.Tools.Path.Settings.PathToolSettingsArc.html">PathToolSettingsArc</a></div>
+      <div class="level2"><a class="xref" href="Core2D.Editor.Tools.Path.Settings.PathToolSettingsCubicBezier.html">PathToolSettingsCubicBezier</a></div>
+      <div class="level2"><a class="xref" href="Core2D.Editor.Tools.Path.Settings.PathToolSettingsLine.html">PathToolSettingsLine</a></div>
+      <div class="level2"><a class="xref" href="Core2D.Editor.Tools.Path.Settings.PathToolSettingsMove.html">PathToolSettingsMove</a></div>
+      <div class="level2"><a class="xref" href="Core2D.Editor.Tools.Path.Settings.PathToolSettingsQuadraticBezier.html">PathToolSettingsQuadraticBezier</a></div>
+      <div class="level2"><a class="xref" href="Core2D.Editor.Tools.Settings.ToolSettingsArc.html">ToolSettingsArc</a></div>
+      <div class="level2"><a class="xref" href="Core2D.Editor.Tools.Settings.ToolSettingsCubicBezier.html">ToolSettingsCubicBezier</a></div>
+      <div class="level2"><a class="xref" href="Core2D.Editor.Tools.Settings.ToolSettingsEllipse.html">ToolSettingsEllipse</a></div>
+      <div class="level2"><a class="xref" href="Core2D.Editor.Tools.Settings.ToolSettingsImage.html">ToolSettingsImage</a></div>
+      <div class="level2"><a class="xref" href="Core2D.Editor.Tools.Settings.ToolSettingsLine.html">ToolSettingsLine</a></div>
+      <div class="level2"><a class="xref" href="Core2D.Editor.Tools.Settings.ToolSettingsNone.html">ToolSettingsNone</a></div>
+      <div class="level2"><a class="xref" href="Core2D.Editor.Tools.Settings.ToolSettingsPath.html">ToolSettingsPath</a></div>
+      <div class="level2"><a class="xref" href="Core2D.Editor.Tools.Settings.ToolSettingsPoint.html">ToolSettingsPoint</a></div>
+      <div class="level2"><a class="xref" href="Core2D.Editor.Tools.Settings.ToolSettingsQuadraticBezier.html">ToolSettingsQuadraticBezier</a></div>
+      <div class="level2"><a class="xref" href="Core2D.Editor.Tools.Settings.ToolSettingsRectangle.html">ToolSettingsRectangle</a></div>
+      <div class="level2"><a class="xref" href="Core2D.Editor.Tools.Settings.ToolSettingsSelection.html">ToolSettingsSelection</a></div>
+      <div class="level2"><a class="xref" href="Core2D.Editor.Tools.Settings.ToolSettingsText.html">ToolSettingsText</a></div>
+      <div class="level2"><a class="xref" href="Core2D.Editor.Tools.ToolArc.html">ToolArc</a></div>
+      <div class="level2"><a class="xref" href="Core2D.Editor.Tools.ToolCubicBezier.html">ToolCubicBezier</a></div>
+      <div class="level2"><a class="xref" href="Core2D.Editor.Tools.ToolEllipse.html">ToolEllipse</a></div>
+      <div class="level2"><a class="xref" href="Core2D.Editor.Tools.ToolImage.html">ToolImage</a></div>
+      <div class="level2"><a class="xref" href="Core2D.Editor.Tools.ToolLine.html">ToolLine</a></div>
+      <div class="level2"><a class="xref" href="Core2D.Editor.Tools.ToolNone.html">ToolNone</a></div>
+      <div class="level2"><a class="xref" href="Core2D.Editor.Tools.ToolPath.html">ToolPath</a></div>
+      <div class="level2"><a class="xref" href="Core2D.Editor.Tools.ToolPoint.html">ToolPoint</a></div>
+      <div class="level2"><a class="xref" href="Core2D.Editor.Tools.ToolQuadraticBezier.html">ToolQuadraticBezier</a></div>
+      <div class="level2"><a class="xref" href="Core2D.Editor.Tools.ToolRectangle.html">ToolRectangle</a></div>
+      <div class="level2"><a class="xref" href="Core2D.Editor.Tools.ToolSelection.html">ToolSelection</a></div>
+      <div class="level2"><a class="xref" href="Core2D.Editor.Tools.ToolText.html">ToolText</a></div>
+      <div class="level2"><a class="xref" href="Core2D.Path.PathFigure.html">PathFigure</a></div>
+      <div class="level2"><a class="xref" href="Core2D.Path.PathGeometry.html">PathGeometry</a></div>
+      <div class="level2"><a class="xref" href="Core2D.Path.PathSegment.html">PathSegment</a></div>
+      <div class="level2"><a class="xref" href="Core2D.Path.PathSize.html">PathSize</a></div>
+      <div class="level2"><a class="xref" href="Core2D.Renderer.Avalonia.AvaloniaRenderer.html">AvaloniaRenderer</a></div>
+      <div class="level2"><a class="xref" href="Core2D.Renderer.Dxf.DxfRenderer.html">DxfRenderer</a></div>
+      <div class="level2"><a class="xref" href="Core2D.Renderer.MatrixObject.html">MatrixObject</a></div>
+      <div class="level2"><a class="xref" href="Core2D.Renderer.PdfSharp.PdfSharpRenderer.html">PdfSharpRenderer</a></div>
+      <div class="level2"><a class="xref" href="Core2D.Renderer.ShapeRendererState.html">ShapeRendererState</a></div>
+      <div class="level2"><a class="xref" href="Core2D.Renderer.ShapeState.html">ShapeState</a></div>
+      <div class="level2"><a class="xref" href="Core2D.Renderer.SkiaSharp.SkiaSharpRenderer.html">SkiaSharpRenderer</a></div>
+      <div class="level2"><a class="xref" href="Core2D.Renderer.WinForms.WinFormsRenderer.html">WinFormsRenderer</a></div>
+      <div class="level2"><a class="xref" href="Core2D.Shapes.BaseShape.html">BaseShape</a></div>
+      <div class="level2"><a class="xref" href="Core2D.Style.ArgbColor.html">ArgbColor</a></div>
+      <div class="level2"><a class="xref" href="Core2D.Style.BaseStyle.html">BaseStyle</a></div>
+      <div class="level2"><a class="xref" href="Core2D.Style.FontStyle.html">FontStyle</a></div>
+      <div class="level2"><a class="xref" href="Core2D.Style.LineFixedLength.html">LineFixedLength</a></div>
+      <div class="level2"><a class="xref" href="Core2D.Style.LineStyle.html">LineStyle</a></div>
+      <div class="level2"><a class="xref" href="Core2D.Style.TextStyle.html">TextStyle</a></div>
+      <div class="level2"><a class="xref" href="Core2D.UI.Avalonia.Editor.AvaloniaEditorCanvasPlatform.html">AvaloniaEditorCanvasPlatform</a></div>
+      <div class="level2"><a class="xref" href="Core2D.UI.Avalonia.Editor.AvaloniaEditorLayoutPlatform.html">AvaloniaEditorLayoutPlatform</a></div>
+  </div>
+  <div classs="implements">
+    <h5>Implements</h5>
+    <div><a class="xref" href="Core2D.IObservableObject.html">IObservableObject</a></div>
+    <div><span class="xref">System.ComponentModel.INotifyPropertyChanged</span></div>
+    <div><a class="xref" href="Core2D.ICopyable.html">ICopyable</a></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetHashCode()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetType()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.MemberwiseClone()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ToString()</span>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Core2D.html">Core2D</a></h6>
+  <h6><strong>Assembly</strong>: Core2D.dll</h6>
+  <h5 id="Core2D_ObservableObject_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public abstract class ObservableObject : IObservableObject, INotifyPropertyChanged, ICopyable</code></pre>
+  </div>
+  <h3 id="properties">Properties
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_ObservableObject_Id.md&amp;value=---%0Auid%3A%20Core2D.ObservableObject.Id%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Base/ObservableObject.cs/#L26">View Source</a>
+  </span>
+  <a id="Core2D_ObservableObject_Id_" data-uid="Core2D.ObservableObject.Id*"></a>
+  <h4 id="Core2D_ObservableObject_Id" data-uid="Core2D.ObservableObject.Id">Id</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual string Id { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_ObservableObject_Name.md&amp;value=---%0Auid%3A%20Core2D.ObservableObject.Name%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Base/ObservableObject.cs/#L34">View Source</a>
+  </span>
+  <a id="Core2D_ObservableObject_Name_" data-uid="Core2D.ObservableObject.Name*"></a>
+  <h4 id="Core2D_ObservableObject_Name" data-uid="Core2D.ObservableObject.Name">Name</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual string Name { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_ObservableObject_Owner.md&amp;value=---%0Auid%3A%20Core2D.ObservableObject.Owner%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Base/ObservableObject.cs/#L19">View Source</a>
+  </span>
+  <a id="Core2D_ObservableObject_Owner_" data-uid="Core2D.ObservableObject.Owner*"></a>
+  <h4 id="Core2D_ObservableObject_Owner" data-uid="Core2D.ObservableObject.Owner">Owner</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual IObservableObject Owner { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Core2D.IObservableObject.html">IObservableObject</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_ObservableObject_Copy_System_Collections_Generic_IDictionary_System_Object_System_Object__.md&amp;value=---%0Auid%3A%20Core2D.ObservableObject.Copy(System.Collections.Generic.IDictionary%7BSystem.Object%2CSystem.Object%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Base/ObservableObject.cs/#L54">View Source</a>
+  </span>
+  <a id="Core2D_ObservableObject_Copy_" data-uid="Core2D.ObservableObject.Copy*"></a>
+  <h4 id="Core2D_ObservableObject_Copy_System_Collections_Generic_IDictionary_System_Object_System_Object__" data-uid="Core2D.ObservableObject.Copy(System.Collections.Generic.IDictionary{System.Object,System.Object})">Copy(IDictionary&lt;Object, Object&gt;)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public abstract object Copy(IDictionary&lt;object, object&gt; shared)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.IDictionary</span>&lt;<span class="xref">System.Object</span>, <span class="xref">System.Object</span>&gt;</td>
+        <td><span class="parametername">shared</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_ObservableObject_MarkAsDirty_System_Boolean_.md&amp;value=---%0Auid%3A%20Core2D.ObservableObject.MarkAsDirty(System.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Base/ObservableObject.cs/#L46">View Source</a>
+  </span>
+  <a id="Core2D_ObservableObject_MarkAsDirty_" data-uid="Core2D.ObservableObject.MarkAsDirty*"></a>
+  <h4 id="Core2D_ObservableObject_MarkAsDirty_System_Boolean_" data-uid="Core2D.ObservableObject.MarkAsDirty(System.Boolean)">MarkAsDirty(Boolean)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void MarkAsDirty(bool value)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><span class="parametername">value</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_ObservableObject_Notify_System_String_.md&amp;value=---%0Auid%3A%20Core2D.ObservableObject.Notify(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Base/ObservableObject.cs/#L57">View Source</a>
+  </span>
+  <a id="Core2D_ObservableObject_Notify_" data-uid="Core2D.ObservableObject.Notify*"></a>
+  <h4 id="Core2D_ObservableObject_Notify_System_String_" data-uid="Core2D.ObservableObject.Notify(System.String)">Notify(String)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Notify(string propertyName = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">propertyName</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_ObservableObject_ShouldSerializeId.md&amp;value=---%0Auid%3A%20Core2D.ObservableObject.ShouldSerializeId%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Base/ObservableObject.cs/#L85">View Source</a>
+  </span>
+  <a id="Core2D_ObservableObject_ShouldSerializeId_" data-uid="Core2D.ObservableObject.ShouldSerializeId*"></a>
+  <h4 id="Core2D_ObservableObject_ShouldSerializeId" data-uid="Core2D.ObservableObject.ShouldSerializeId">ShouldSerializeId()</h4>
+  <div class="markdown level1 summary"><p>Check whether the <a class="xref" href="Core2D.ObservableObject.html#Core2D_ObservableObject_Id">Id</a> property has changed from its default value.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual bool ShouldSerializeId()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><p>Returns true if the property has changed; otherwise, returns false.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_ObservableObject_ShouldSerializeIsDirty.md&amp;value=---%0Auid%3A%20Core2D.ObservableObject.ShouldSerializeIsDirty%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Base/ObservableObject.cs/#L97">View Source</a>
+  </span>
+  <a id="Core2D_ObservableObject_ShouldSerializeIsDirty_" data-uid="Core2D.ObservableObject.ShouldSerializeIsDirty*"></a>
+  <h4 id="Core2D_ObservableObject_ShouldSerializeIsDirty" data-uid="Core2D.ObservableObject.ShouldSerializeIsDirty">ShouldSerializeIsDirty()</h4>
+  <div class="markdown level1 summary"><p>The <span class="xref">Core2D.ObservableObject.IsDirty</span> property is not serialized.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual bool ShouldSerializeIsDirty()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><p>Returns always false.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_ObservableObject_ShouldSerializeName.md&amp;value=---%0Auid%3A%20Core2D.ObservableObject.ShouldSerializeName%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Base/ObservableObject.cs/#L91">View Source</a>
+  </span>
+  <a id="Core2D_ObservableObject_ShouldSerializeName_" data-uid="Core2D.ObservableObject.ShouldSerializeName*"></a>
+  <h4 id="Core2D_ObservableObject_ShouldSerializeName" data-uid="Core2D.ObservableObject.ShouldSerializeName">ShouldSerializeName()</h4>
+  <div class="markdown level1 summary"><p>Check whether the <a class="xref" href="Core2D.ObservableObject.html#Core2D_ObservableObject_Name">Name</a> property has changed from its default value.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual bool ShouldSerializeName()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><p>Returns true if the property has changed; otherwise, returns false.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_ObservableObject_ShouldSerializeOwner.md&amp;value=---%0Auid%3A%20Core2D.ObservableObject.ShouldSerializeOwner%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Base/ObservableObject.cs/#L79">View Source</a>
+  </span>
+  <a id="Core2D_ObservableObject_ShouldSerializeOwner_" data-uid="Core2D.ObservableObject.ShouldSerializeOwner*"></a>
+  <h4 id="Core2D_ObservableObject_ShouldSerializeOwner" data-uid="Core2D.ObservableObject.ShouldSerializeOwner">ShouldSerializeOwner()</h4>
+  <div class="markdown level1 summary"><p>Check whether the <a class="xref" href="Core2D.ObservableObject.html#Core2D_ObservableObject_Owner">Owner</a> property has changed from its default value.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual bool ShouldSerializeOwner()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><p>Returns true if the property has changed; otherwise, returns false.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_ObservableObject_Update__1___0____0_System_String_.md&amp;value=---%0Auid%3A%20Core2D.ObservableObject.Update%60%601(%60%600%40%2C%60%600%2CSystem.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Base/ObservableObject.cs/#L63">View Source</a>
+  </span>
+  <a id="Core2D_ObservableObject_Update_" data-uid="Core2D.ObservableObject.Update*"></a>
+  <h4 id="Core2D_ObservableObject_Update__1___0____0_System_String_" data-uid="Core2D.ObservableObject.Update``1(``0@,``0,System.String)">Update&lt;T&gt;(ref T, T, String)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool Update&lt;T&gt;(ref T field, T value, string propertyName = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">T</span></td>
+        <td><span class="parametername">field</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">T</span></td>
+        <td><span class="parametername">value</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">propertyName</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="events">Events
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_ObservableObject_PropertyChanged.md&amp;value=---%0Auid%3A%20Core2D.ObservableObject.PropertyChanged%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Base/ObservableObject.cs/#L51">View Source</a>
+  </span>
+  <h4 id="Core2D_ObservableObject_PropertyChanged" data-uid="Core2D.ObservableObject.PropertyChanged">PropertyChanged</h4>
+  <div class="markdown level1 summary"><p>Occurs when a property value changes.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public event PropertyChangedEventHandler PropertyChanged</code></pre>
+  </div>
+  <h5 class="eventType">Event Type</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ComponentModel.PropertyChangedEventHandler</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="implements">Implements</h3>
+  <div>
+      <a class="xref" href="Core2D.IObservableObject.html">IObservableObject</a>
+  </div>
+  <div>
+      <span class="xref">System.ComponentModel.INotifyPropertyChanged</span>
+  </div>
+  <div>
+      <a class="xref" href="Core2D.ICopyable.html">ICopyable</a>
+  </div>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_ObservableObject.md&amp;value=---%0Auid%3A%20Core2D.ObservableObject%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Base/ObservableObject.cs/#L12" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            <span>Copyright © (c) Wiesław Šoltés<br>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

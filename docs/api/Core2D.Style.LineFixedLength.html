@@ -1,0 +1,962 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Class LineFixedLength
+   | Core2D Website </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Class LineFixedLength
+   | Core2D Website ">
+    <meta name="generator" content="docfx 2.51.0.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="Core2D.Style.LineFixedLength">
+  
+  
+  <h1 id="Core2D_Style_LineFixedLength" data-uid="Core2D.Style.LineFixedLength" class="text-break">Class LineFixedLength
+  </h1>
+  <div class="markdown level0 summary"><p>Line fixed length.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><span class="xref">System.Object</span></div>
+    <div class="level1"><a class="xref" href="Core2D.ObservableObject.html">ObservableObject</a></div>
+    <div class="level2"><span class="xref">LineFixedLength</span></div>
+  </div>
+  <div classs="implements">
+    <h5>Implements</h5>
+    <div><a class="xref" href="Core2D.Style.ILineFixedLength.html">ILineFixedLength</a></div>
+    <div><a class="xref" href="Core2D.IObservableObject.html">IObservableObject</a></div>
+    <div><span class="xref">System.ComponentModel.INotifyPropertyChanged</span></div>
+    <div><a class="xref" href="Core2D.ICopyable.html">ICopyable</a></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="Core2D.ObservableObject.html#Core2D_ObservableObject_Owner">ObservableObject.Owner</a>
+    </div>
+    <div>
+      <a class="xref" href="Core2D.ObservableObject.html#Core2D_ObservableObject_Id">ObservableObject.Id</a>
+    </div>
+    <div>
+      <a class="xref" href="Core2D.ObservableObject.html#Core2D_ObservableObject_Name">ObservableObject.Name</a>
+    </div>
+    <div>
+      <a class="xref" href="Core2D.ObservableObject.html#Core2D_ObservableObject_MarkAsDirty_System_Boolean_">ObservableObject.MarkAsDirty(Boolean)</a>
+    </div>
+    <div>
+      <a class="xref" href="Core2D.ObservableObject.html#Core2D_ObservableObject_PropertyChanged">ObservableObject.PropertyChanged</a>
+    </div>
+    <div>
+      <a class="xref" href="Core2D.ObservableObject.html#Core2D_ObservableObject_Notify_System_String_">ObservableObject.Notify(String)</a>
+    </div>
+    <div>
+      <a class="xref" href="Core2D.ObservableObject.html#Core2D_ObservableObject_Update__1___0____0_System_String_">ObservableObject.Update&lt;T&gt;(T, T, String)</a>
+    </div>
+    <div>
+      <a class="xref" href="Core2D.ObservableObject.html#Core2D_ObservableObject_ShouldSerializeOwner">ObservableObject.ShouldSerializeOwner()</a>
+    </div>
+    <div>
+      <a class="xref" href="Core2D.ObservableObject.html#Core2D_ObservableObject_ShouldSerializeId">ObservableObject.ShouldSerializeId()</a>
+    </div>
+    <div>
+      <a class="xref" href="Core2D.ObservableObject.html#Core2D_ObservableObject_ShouldSerializeName">ObservableObject.ShouldSerializeName()</a>
+    </div>
+    <div>
+      <a class="xref" href="Core2D.ObservableObject.html#Core2D_ObservableObject_ShouldSerializeIsDirty">ObservableObject.ShouldSerializeIsDirty()</a>
+    </div>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetHashCode()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetType()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.MemberwiseClone()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Core2D.Style.html">Core2D.Style</a></h6>
+  <h6><strong>Assembly</strong>: Core2D.dll</h6>
+  <h5 id="Core2D_Style_LineFixedLength_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class LineFixedLength : ObservableObject, ILineFixedLength, IObservableObject, INotifyPropertyChanged, ICopyable</code></pre>
+  </div>
+  <h3 id="properties">Properties
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Style_LineFixedLength_All.md&amp;value=---%0Auid%3A%20Core2D.Style.LineFixedLength.All%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/ViewModels/Style/LineFixedLength.cs/#L76">View Source</a>
+  </span>
+  <a id="Core2D_Style_LineFixedLength_All_" data-uid="Core2D.Style.LineFixedLength.All*"></a>
+  <h4 id="Core2D_Style_LineFixedLength_All" data-uid="Core2D.Style.LineFixedLength.All">All</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool All { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Style_LineFixedLength_Disabled.md&amp;value=---%0Auid%3A%20Core2D.Style.LineFixedLength.Disabled%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/ViewModels/Style/LineFixedLength.cs/#L41">View Source</a>
+  </span>
+  <a id="Core2D_Style_LineFixedLength_Disabled_" data-uid="Core2D.Style.LineFixedLength.Disabled*"></a>
+  <h4 id="Core2D_Style_LineFixedLength_Disabled" data-uid="Core2D.Style.LineFixedLength.Disabled">Disabled</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool Disabled { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Style_LineFixedLength_End.md&amp;value=---%0Auid%3A%20Core2D.Style.LineFixedLength.End%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/ViewModels/Style/LineFixedLength.cs/#L55">View Source</a>
+  </span>
+  <a id="Core2D_Style_LineFixedLength_End_" data-uid="Core2D.Style.LineFixedLength.End*"></a>
+  <h4 id="Core2D_Style_LineFixedLength_End" data-uid="Core2D.Style.LineFixedLength.End">End</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool End { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Style_LineFixedLength_EndTrigger.md&amp;value=---%0Auid%3A%20Core2D.Style.LineFixedLength.EndTrigger%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/ViewModels/Style/LineFixedLength.cs/#L90">View Source</a>
+  </span>
+  <a id="Core2D_Style_LineFixedLength_EndTrigger_" data-uid="Core2D.Style.LineFixedLength.EndTrigger*"></a>
+  <h4 id="Core2D_Style_LineFixedLength_EndTrigger" data-uid="Core2D.Style.LineFixedLength.EndTrigger">EndTrigger</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IShapeState EndTrigger { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Core2D.Renderer.IShapeState.html">IShapeState</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Style_LineFixedLength_Flags.md&amp;value=---%0Auid%3A%20Core2D.Style.LineFixedLength.Flags%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/ViewModels/Style/LineFixedLength.cs/#L19">View Source</a>
+  </span>
+  <a id="Core2D_Style_LineFixedLength_Flags_" data-uid="Core2D.Style.LineFixedLength.Flags*"></a>
+  <h4 id="Core2D_Style_LineFixedLength_Flags" data-uid="Core2D.Style.LineFixedLength.Flags">Flags</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public LineFixedLengthFlags Flags { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Core2D.Style.LineFixedLengthFlags.html">LineFixedLengthFlags</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Style_LineFixedLength_Horizontal.md&amp;value=---%0Auid%3A%20Core2D.Style.LineFixedLength.Horizontal%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/ViewModels/Style/LineFixedLength.cs/#L69">View Source</a>
+  </span>
+  <a id="Core2D_Style_LineFixedLength_Horizontal_" data-uid="Core2D.Style.LineFixedLength.Horizontal*"></a>
+  <h4 id="Core2D_Style_LineFixedLength_Horizontal" data-uid="Core2D.Style.LineFixedLength.Horizontal">Horizontal</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool Horizontal { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Style_LineFixedLength_Length.md&amp;value=---%0Auid%3A%20Core2D.Style.LineFixedLength.Length%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/ViewModels/Style/LineFixedLength.cs/#L97">View Source</a>
+  </span>
+  <a id="Core2D_Style_LineFixedLength_Length_" data-uid="Core2D.Style.LineFixedLength.Length*"></a>
+  <h4 id="Core2D_Style_LineFixedLength_Length" data-uid="Core2D.Style.LineFixedLength.Length">Length</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public double Length { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Double</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Style_LineFixedLength_Start.md&amp;value=---%0Auid%3A%20Core2D.Style.LineFixedLength.Start%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/ViewModels/Style/LineFixedLength.cs/#L48">View Source</a>
+  </span>
+  <a id="Core2D_Style_LineFixedLength_Start_" data-uid="Core2D.Style.LineFixedLength.Start*"></a>
+  <h4 id="Core2D_Style_LineFixedLength_Start" data-uid="Core2D.Style.LineFixedLength.Start">Start</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool Start { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Style_LineFixedLength_StartTrigger.md&amp;value=---%0Auid%3A%20Core2D.Style.LineFixedLength.StartTrigger%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/ViewModels/Style/LineFixedLength.cs/#L83">View Source</a>
+  </span>
+  <a id="Core2D_Style_LineFixedLength_StartTrigger_" data-uid="Core2D.Style.LineFixedLength.StartTrigger*"></a>
+  <h4 id="Core2D_Style_LineFixedLength_StartTrigger" data-uid="Core2D.Style.LineFixedLength.StartTrigger">StartTrigger</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IShapeState StartTrigger { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Core2D.Renderer.IShapeState.html">IShapeState</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Style_LineFixedLength_Vertical.md&amp;value=---%0Auid%3A%20Core2D.Style.LineFixedLength.Vertical%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/ViewModels/Style/LineFixedLength.cs/#L62">View Source</a>
+  </span>
+  <a id="Core2D_Style_LineFixedLength_Vertical_" data-uid="Core2D.Style.LineFixedLength.Vertical*"></a>
+  <h4 id="Core2D_Style_LineFixedLength_Vertical" data-uid="Core2D.Style.LineFixedLength.Vertical">Vertical</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool Vertical { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Style_LineFixedLength_Copy_System_Collections_Generic_IDictionary_System_Object_System_Object__.md&amp;value=---%0Auid%3A%20Core2D.Style.LineFixedLength.Copy(System.Collections.Generic.IDictionary%7BSystem.Object%2CSystem.Object%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/ViewModels/Style/LineFixedLength.cs/#L104">View Source</a>
+  </span>
+  <a id="Core2D_Style_LineFixedLength_Copy_" data-uid="Core2D.Style.LineFixedLength.Copy*"></a>
+  <h4 id="Core2D_Style_LineFixedLength_Copy_System_Collections_Generic_IDictionary_System_Object_System_Object__" data-uid="Core2D.Style.LineFixedLength.Copy(System.Collections.Generic.IDictionary{System.Object,System.Object})">Copy(IDictionary&lt;Object, Object&gt;)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override object Copy(IDictionary&lt;object, object&gt; shared)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.IDictionary</span>&lt;<span class="xref">System.Object</span>, <span class="xref">System.Object</span>&gt;</td>
+        <td><span class="parametername">shared</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="Core2D.ObservableObject.html#Core2D_ObservableObject_Copy_System_Collections_Generic_IDictionary_System_Object_System_Object__">ObservableObject.Copy(IDictionary&lt;Object, Object&gt;)</a></div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Style_LineFixedLength_Parse_System_String_.md&amp;value=---%0Auid%3A%20Core2D.Style.LineFixedLength.Parse(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/ViewModels/Style/LineFixedLength.cs/#L119">View Source</a>
+  </span>
+  <a id="Core2D_Style_LineFixedLength_Parse_" data-uid="Core2D.Style.LineFixedLength.Parse*"></a>
+  <h4 id="Core2D_Style_LineFixedLength_Parse_System_String_" data-uid="Core2D.Style.LineFixedLength.Parse(System.String)">Parse(String)</h4>
+  <div class="markdown level1 summary"><p>Parses a line fixed length string.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static ILineFixedLength Parse(string s)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">s</span></td>
+        <td><p>The line fixed length string.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Core2D.Style.ILineFixedLength.html">ILineFixedLength</a></td>
+        <td><p>The <a class="xref" href="Core2D.Style.LineFixedLength.html">LineFixedLength</a>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Style_LineFixedLength_ShouldSerializeAll.md&amp;value=---%0Auid%3A%20Core2D.Style.LineFixedLength.ShouldSerializeAll%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/ViewModels/Style/LineFixedLength.cs/#L180">View Source</a>
+  </span>
+  <a id="Core2D_Style_LineFixedLength_ShouldSerializeAll_" data-uid="Core2D.Style.LineFixedLength.ShouldSerializeAll*"></a>
+  <h4 id="Core2D_Style_LineFixedLength_ShouldSerializeAll" data-uid="Core2D.Style.LineFixedLength.ShouldSerializeAll">ShouldSerializeAll()</h4>
+  <div class="markdown level1 summary"><p>The <a class="xref" href="Core2D.Style.LineFixedLength.html#Core2D_Style_LineFixedLength_All">All</a> property is not serialized.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual bool ShouldSerializeAll()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><p>Returns always false.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Style_LineFixedLength_ShouldSerializeDisabled.md&amp;value=---%0Auid%3A%20Core2D.Style.LineFixedLength.ShouldSerializeDisabled%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/ViewModels/Style/LineFixedLength.cs/#L150">View Source</a>
+  </span>
+  <a id="Core2D_Style_LineFixedLength_ShouldSerializeDisabled_" data-uid="Core2D.Style.LineFixedLength.ShouldSerializeDisabled*"></a>
+  <h4 id="Core2D_Style_LineFixedLength_ShouldSerializeDisabled" data-uid="Core2D.Style.LineFixedLength.ShouldSerializeDisabled">ShouldSerializeDisabled()</h4>
+  <div class="markdown level1 summary"><p>The <a class="xref" href="Core2D.Style.LineFixedLength.html#Core2D_Style_LineFixedLength_Disabled">Disabled</a> property is not serialized.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual bool ShouldSerializeDisabled()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><p>Returns always false.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Style_LineFixedLength_ShouldSerializeEnd.md&amp;value=---%0Auid%3A%20Core2D.Style.LineFixedLength.ShouldSerializeEnd%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/ViewModels/Style/LineFixedLength.cs/#L162">View Source</a>
+  </span>
+  <a id="Core2D_Style_LineFixedLength_ShouldSerializeEnd_" data-uid="Core2D.Style.LineFixedLength.ShouldSerializeEnd*"></a>
+  <h4 id="Core2D_Style_LineFixedLength_ShouldSerializeEnd" data-uid="Core2D.Style.LineFixedLength.ShouldSerializeEnd">ShouldSerializeEnd()</h4>
+  <div class="markdown level1 summary"><p>The <a class="xref" href="Core2D.Style.LineFixedLength.html#Core2D_Style_LineFixedLength_End">End</a> property is not serialized.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual bool ShouldSerializeEnd()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><p>Returns always false.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Style_LineFixedLength_ShouldSerializeEndTrigger.md&amp;value=---%0Auid%3A%20Core2D.Style.LineFixedLength.ShouldSerializeEndTrigger%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/ViewModels/Style/LineFixedLength.cs/#L192">View Source</a>
+  </span>
+  <a id="Core2D_Style_LineFixedLength_ShouldSerializeEndTrigger_" data-uid="Core2D.Style.LineFixedLength.ShouldSerializeEndTrigger*"></a>
+  <h4 id="Core2D_Style_LineFixedLength_ShouldSerializeEndTrigger" data-uid="Core2D.Style.LineFixedLength.ShouldSerializeEndTrigger">ShouldSerializeEndTrigger()</h4>
+  <div class="markdown level1 summary"><p>Check whether the <a class="xref" href="Core2D.Style.LineFixedLength.html#Core2D_Style_LineFixedLength_EndTrigger">EndTrigger</a> property has changed from its default value.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual bool ShouldSerializeEndTrigger()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><p>Returns true if the property has changed; otherwise, returns false.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Style_LineFixedLength_ShouldSerializeFlags.md&amp;value=---%0Auid%3A%20Core2D.Style.LineFixedLength.ShouldSerializeFlags%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/ViewModels/Style/LineFixedLength.cs/#L144">View Source</a>
+  </span>
+  <a id="Core2D_Style_LineFixedLength_ShouldSerializeFlags_" data-uid="Core2D.Style.LineFixedLength.ShouldSerializeFlags*"></a>
+  <h4 id="Core2D_Style_LineFixedLength_ShouldSerializeFlags" data-uid="Core2D.Style.LineFixedLength.ShouldSerializeFlags">ShouldSerializeFlags()</h4>
+  <div class="markdown level1 summary"><p>Check whether the <a class="xref" href="Core2D.Style.LineFixedLength.html#Core2D_Style_LineFixedLength_Flags">Flags</a> property has changed from its default value.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual bool ShouldSerializeFlags()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><p>Returns true if the property has changed; otherwise, returns false.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Style_LineFixedLength_ShouldSerializeHorizontal.md&amp;value=---%0Auid%3A%20Core2D.Style.LineFixedLength.ShouldSerializeHorizontal%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/ViewModels/Style/LineFixedLength.cs/#L174">View Source</a>
+  </span>
+  <a id="Core2D_Style_LineFixedLength_ShouldSerializeHorizontal_" data-uid="Core2D.Style.LineFixedLength.ShouldSerializeHorizontal*"></a>
+  <h4 id="Core2D_Style_LineFixedLength_ShouldSerializeHorizontal" data-uid="Core2D.Style.LineFixedLength.ShouldSerializeHorizontal">ShouldSerializeHorizontal()</h4>
+  <div class="markdown level1 summary"><p>The <a class="xref" href="Core2D.Style.LineFixedLength.html#Core2D_Style_LineFixedLength_Horizontal">Horizontal</a> property is not serialized.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual bool ShouldSerializeHorizontal()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><p>Returns always false.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Style_LineFixedLength_ShouldSerializeLength.md&amp;value=---%0Auid%3A%20Core2D.Style.LineFixedLength.ShouldSerializeLength%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/ViewModels/Style/LineFixedLength.cs/#L198">View Source</a>
+  </span>
+  <a id="Core2D_Style_LineFixedLength_ShouldSerializeLength_" data-uid="Core2D.Style.LineFixedLength.ShouldSerializeLength*"></a>
+  <h4 id="Core2D_Style_LineFixedLength_ShouldSerializeLength" data-uid="Core2D.Style.LineFixedLength.ShouldSerializeLength">ShouldSerializeLength()</h4>
+  <div class="markdown level1 summary"><p>Check whether the <a class="xref" href="Core2D.Style.LineFixedLength.html#Core2D_Style_LineFixedLength_Length">Length</a> property has changed from its default value.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual bool ShouldSerializeLength()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><p>Returns true if the property has changed; otherwise, returns false.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Style_LineFixedLength_ShouldSerializeStart.md&amp;value=---%0Auid%3A%20Core2D.Style.LineFixedLength.ShouldSerializeStart%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/ViewModels/Style/LineFixedLength.cs/#L156">View Source</a>
+  </span>
+  <a id="Core2D_Style_LineFixedLength_ShouldSerializeStart_" data-uid="Core2D.Style.LineFixedLength.ShouldSerializeStart*"></a>
+  <h4 id="Core2D_Style_LineFixedLength_ShouldSerializeStart" data-uid="Core2D.Style.LineFixedLength.ShouldSerializeStart">ShouldSerializeStart()</h4>
+  <div class="markdown level1 summary"><p>The <a class="xref" href="Core2D.Style.LineFixedLength.html#Core2D_Style_LineFixedLength_Start">Start</a> property is not serialized.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual bool ShouldSerializeStart()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><p>Returns always false.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Style_LineFixedLength_ShouldSerializeStartTrigger.md&amp;value=---%0Auid%3A%20Core2D.Style.LineFixedLength.ShouldSerializeStartTrigger%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/ViewModels/Style/LineFixedLength.cs/#L186">View Source</a>
+  </span>
+  <a id="Core2D_Style_LineFixedLength_ShouldSerializeStartTrigger_" data-uid="Core2D.Style.LineFixedLength.ShouldSerializeStartTrigger*"></a>
+  <h4 id="Core2D_Style_LineFixedLength_ShouldSerializeStartTrigger" data-uid="Core2D.Style.LineFixedLength.ShouldSerializeStartTrigger">ShouldSerializeStartTrigger()</h4>
+  <div class="markdown level1 summary"><p>Check whether the <a class="xref" href="Core2D.Style.LineFixedLength.html#Core2D_Style_LineFixedLength_StartTrigger">StartTrigger</a> property has changed from its default value.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual bool ShouldSerializeStartTrigger()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><p>Returns true if the property has changed; otherwise, returns false.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Style_LineFixedLength_ShouldSerializeVertical.md&amp;value=---%0Auid%3A%20Core2D.Style.LineFixedLength.ShouldSerializeVertical%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/ViewModels/Style/LineFixedLength.cs/#L168">View Source</a>
+  </span>
+  <a id="Core2D_Style_LineFixedLength_ShouldSerializeVertical_" data-uid="Core2D.Style.LineFixedLength.ShouldSerializeVertical*"></a>
+  <h4 id="Core2D_Style_LineFixedLength_ShouldSerializeVertical" data-uid="Core2D.Style.LineFixedLength.ShouldSerializeVertical">ShouldSerializeVertical()</h4>
+  <div class="markdown level1 summary"><p>The <a class="xref" href="Core2D.Style.LineFixedLength.html#Core2D_Style_LineFixedLength_Vertical">Vertical</a> property is not serialized.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual bool ShouldSerializeVertical()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><p>Returns always false.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Style_LineFixedLength_ToString.md&amp;value=---%0Auid%3A%20Core2D.Style.LineFixedLength.ToString%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/ViewModels/Style/LineFixedLength.cs/#L135">View Source</a>
+  </span>
+  <a id="Core2D_Style_LineFixedLength_ToString_" data-uid="Core2D.Style.LineFixedLength.ToString*"></a>
+  <h4 id="Core2D_Style_LineFixedLength_ToString" data-uid="Core2D.Style.LineFixedLength.ToString">ToString()</h4>
+  <div class="markdown level1 summary"><p>Returns a string that represents the current object.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override string ToString()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><p>A string that represents the current object.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><span class="xref">System.Object.ToString()</span></div>
+  <h3 id="implements">Implements</h3>
+  <div>
+      <a class="xref" href="Core2D.Style.ILineFixedLength.html">ILineFixedLength</a>
+  </div>
+  <div>
+      <a class="xref" href="Core2D.IObservableObject.html">IObservableObject</a>
+  </div>
+  <div>
+      <span class="xref">System.ComponentModel.INotifyPropertyChanged</span>
+  </div>
+  <div>
+      <a class="xref" href="Core2D.ICopyable.html">ICopyable</a>
+  </div>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Style_LineFixedLength.md&amp;value=---%0Auid%3A%20Core2D.Style.LineFixedLength%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/ViewModels/Style/LineFixedLength.cs/#L11" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            <span>Copyright © (c) Wiesław Šoltés<br>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

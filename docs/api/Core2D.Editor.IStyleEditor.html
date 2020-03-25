@@ -1,0 +1,1660 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Interface IStyleEditor
+   | Core2D Website </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Interface IStyleEditor
+   | Core2D Website ">
+    <meta name="generator" content="docfx 2.51.0.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="Core2D.Editor.IStyleEditor">
+  
+  
+  <h1 id="Core2D_Editor_IStyleEditor" data-uid="Core2D.Editor.IStyleEditor" class="text-break">Interface IStyleEditor
+  </h1>
+  <div class="markdown level0 summary"><p>Style editor contract.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="Core2D.IObservableObject.html#Core2D_IObservableObject_Owner">IObservableObject.Owner</a>
+    </div>
+    <div>
+      <a class="xref" href="Core2D.IObservableObject.html#Core2D_IObservableObject_Id">IObservableObject.Id</a>
+    </div>
+    <div>
+      <a class="xref" href="Core2D.IObservableObject.html#Core2D_IObservableObject_Name">IObservableObject.Name</a>
+    </div>
+    <div>
+      <a class="xref" href="Core2D.IObservableObject.html#Core2D_IObservableObject_MarkAsDirty_System_Boolean_">IObservableObject.MarkAsDirty(Boolean)</a>
+    </div>
+    <div>
+      <a class="xref" href="Core2D.IObservableObject.html#Core2D_IObservableObject_Notify_System_String_">IObservableObject.Notify(String)</a>
+    </div>
+    <div>
+      <a class="xref" href="Core2D.IObservableObject.html#Core2D_IObservableObject_Update__1___0____0_System_String_">IObservableObject.Update&lt;T&gt;(T, T, String)</a>
+    </div>
+    <div>
+      <span class="xref">System.ComponentModel.INotifyPropertyChanged.PropertyChanged</span>
+    </div>
+    <div>
+      <a class="xref" href="Core2D.ICopyable.html#Core2D_ICopyable_Copy_System_Collections_Generic_IDictionary_System_Object_System_Object__">ICopyable.Copy(IDictionary&lt;Object, Object&gt;)</a>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Core2D.Editor.html">Core2D.Editor</a></h6>
+  <h6><strong>Assembly</strong>: Core2D.dll</h6>
+  <h5 id="Core2D_Editor_IStyleEditor_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public interface IStyleEditor : IObservableObject, INotifyPropertyChanged, ICopyable</code></pre>
+  </div>
+  <h3 id="methods">Methods
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Editor_IStyleEditor_OnCopyStyle.md&amp;value=---%0Auid%3A%20Core2D.Editor.IStyleEditor.OnCopyStyle%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Editor/Interfaces/IStyleEditor.cs/#L12">View Source</a>
+  </span>
+  <a id="Core2D_Editor_IStyleEditor_OnCopyStyle_" data-uid="Core2D.Editor.IStyleEditor.OnCopyStyle*"></a>
+  <h4 id="Core2D_Editor_IStyleEditor_OnCopyStyle" data-uid="Core2D.Editor.IStyleEditor.OnCopyStyle">OnCopyStyle()</h4>
+  <div class="markdown level1 summary"><p>Copy style.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void OnCopyStyle()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Editor_IStyleEditor_OnPasteStyle.md&amp;value=---%0Auid%3A%20Core2D.Editor.IStyleEditor.OnPasteStyle%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Editor/Interfaces/IStyleEditor.cs/#L17">View Source</a>
+  </span>
+  <a id="Core2D_Editor_IStyleEditor_OnPasteStyle_" data-uid="Core2D.Editor.IStyleEditor.OnPasteStyle*"></a>
+  <h4 id="Core2D_Editor_IStyleEditor_OnPasteStyle" data-uid="Core2D.Editor.IStyleEditor.OnPasteStyle">OnPasteStyle()</h4>
+  <div class="markdown level1 summary"><p>Paste style.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void OnPasteStyle()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Editor_IStyleEditor_OnStyleSetDashes_System_String_.md&amp;value=---%0Auid%3A%20Core2D.Editor.IStyleEditor.OnStyleSetDashes(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Editor/Interfaces/IStyleEditor.cs/#L35">View Source</a>
+  </span>
+  <a id="Core2D_Editor_IStyleEditor_OnStyleSetDashes_" data-uid="Core2D.Editor.IStyleEditor.OnStyleSetDashes*"></a>
+  <h4 id="Core2D_Editor_IStyleEditor_OnStyleSetDashes_System_String_" data-uid="Core2D.Editor.IStyleEditor.OnStyleSetDashes(System.String)">OnStyleSetDashes(String)</h4>
+  <div class="markdown level1 summary"><p>Set style dashes.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void OnStyleSetDashes(string dashes)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">dashes</span></td>
+        <td><p>The style dashes.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Editor_IStyleEditor_OnStyleSetDashOffset_System_String_.md&amp;value=---%0Auid%3A%20Core2D.Editor.IStyleEditor.OnStyleSetDashOffset(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Editor/Interfaces/IStyleEditor.cs/#L41">View Source</a>
+  </span>
+  <a id="Core2D_Editor_IStyleEditor_OnStyleSetDashOffset_" data-uid="Core2D.Editor.IStyleEditor.OnStyleSetDashOffset*"></a>
+  <h4 id="Core2D_Editor_IStyleEditor_OnStyleSetDashOffset_System_String_" data-uid="Core2D.Editor.IStyleEditor.OnStyleSetDashOffset(System.String)">OnStyleSetDashOffset(String)</h4>
+  <div class="markdown level1 summary"><p>Set style dash offset.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void OnStyleSetDashOffset(string dashOffset)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">dashOffset</span></td>
+        <td><p>The style dash offset.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Editor_IStyleEditor_OnStyleSetEndArrowDashes_System_String_.md&amp;value=---%0Auid%3A%20Core2D.Editor.IStyleEditor.OnStyleSetEndArrowDashes(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Editor/Interfaces/IStyleEditor.cs/#L258">View Source</a>
+  </span>
+  <a id="Core2D_Editor_IStyleEditor_OnStyleSetEndArrowDashes_" data-uid="Core2D.Editor.IStyleEditor.OnStyleSetEndArrowDashes*"></a>
+  <h4 id="Core2D_Editor_IStyleEditor_OnStyleSetEndArrowDashes_System_String_" data-uid="Core2D.Editor.IStyleEditor.OnStyleSetEndArrowDashes(System.String)">OnStyleSetEndArrowDashes(String)</h4>
+  <div class="markdown level1 summary"><p>Set style end arrow dashes.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void OnStyleSetEndArrowDashes(string dashes)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">dashes</span></td>
+        <td><p>The style end arrow dashes.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Editor_IStyleEditor_OnStyleSetEndArrowDashOffset_System_String_.md&amp;value=---%0Auid%3A%20Core2D.Editor.IStyleEditor.OnStyleSetEndArrowDashOffset(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Editor/Interfaces/IStyleEditor.cs/#L264">View Source</a>
+  </span>
+  <a id="Core2D_Editor_IStyleEditor_OnStyleSetEndArrowDashOffset_" data-uid="Core2D.Editor.IStyleEditor.OnStyleSetEndArrowDashOffset*"></a>
+  <h4 id="Core2D_Editor_IStyleEditor_OnStyleSetEndArrowDashOffset_System_String_" data-uid="Core2D.Editor.IStyleEditor.OnStyleSetEndArrowDashOffset(System.String)">OnStyleSetEndArrowDashOffset(String)</h4>
+  <div class="markdown level1 summary"><p>Set style end arrow dash offset.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void OnStyleSetEndArrowDashOffset(string dashOffset)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">dashOffset</span></td>
+        <td><p>The style end arrow dash offset.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Editor_IStyleEditor_OnStyleSetEndArrowFill_System_String_.md&amp;value=---%0Auid%3A%20Core2D.Editor.IStyleEditor.OnStyleSetEndArrowFill(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Editor/Interfaces/IStyleEditor.cs/#L282">View Source</a>
+  </span>
+  <a id="Core2D_Editor_IStyleEditor_OnStyleSetEndArrowFill_" data-uid="Core2D.Editor.IStyleEditor.OnStyleSetEndArrowFill*"></a>
+  <h4 id="Core2D_Editor_IStyleEditor_OnStyleSetEndArrowFill_System_String_" data-uid="Core2D.Editor.IStyleEditor.OnStyleSetEndArrowFill(System.String)">OnStyleSetEndArrowFill(String)</h4>
+  <div class="markdown level1 summary"><p>Set style end arrow fill color.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void OnStyleSetEndArrowFill(string color)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">color</span></td>
+        <td><p>The style end arrow fill color.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Editor_IStyleEditor_OnStyleSetEndArrowFillTransparency_System_String_.md&amp;value=---%0Auid%3A%20Core2D.Editor.IStyleEditor.OnStyleSetEndArrowFillTransparency(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Editor/Interfaces/IStyleEditor.cs/#L288">View Source</a>
+  </span>
+  <a id="Core2D_Editor_IStyleEditor_OnStyleSetEndArrowFillTransparency_" data-uid="Core2D.Editor.IStyleEditor.OnStyleSetEndArrowFillTransparency*"></a>
+  <h4 id="Core2D_Editor_IStyleEditor_OnStyleSetEndArrowFillTransparency_System_String_" data-uid="Core2D.Editor.IStyleEditor.OnStyleSetEndArrowFillTransparency(System.String)">OnStyleSetEndArrowFillTransparency(String)</h4>
+  <div class="markdown level1 summary"><p>Set style end arrow fill alpha.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void OnStyleSetEndArrowFillTransparency(string alpha)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">alpha</span></td>
+        <td><p>The style end arrow fill alpha.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Editor_IStyleEditor_OnStyleSetEndArrowLineCap_System_String_.md&amp;value=---%0Auid%3A%20Core2D.Editor.IStyleEditor.OnStyleSetEndArrowLineCap(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Editor/Interfaces/IStyleEditor.cs/#L252">View Source</a>
+  </span>
+  <a id="Core2D_Editor_IStyleEditor_OnStyleSetEndArrowLineCap_" data-uid="Core2D.Editor.IStyleEditor.OnStyleSetEndArrowLineCap*"></a>
+  <h4 id="Core2D_Editor_IStyleEditor_OnStyleSetEndArrowLineCap_System_String_" data-uid="Core2D.Editor.IStyleEditor.OnStyleSetEndArrowLineCap(System.String)">OnStyleSetEndArrowLineCap(String)</h4>
+  <div class="markdown level1 summary"><p>Set style end arrow line cap.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void OnStyleSetEndArrowLineCap(string lineCap)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">lineCap</span></td>
+        <td><p>The style end arrow line cap.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Editor_IStyleEditor_OnStyleSetEndArrowRadiusX_System_String_.md&amp;value=---%0Auid%3A%20Core2D.Editor.IStyleEditor.OnStyleSetEndArrowRadiusX(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Editor/Interfaces/IStyleEditor.cs/#L234">View Source</a>
+  </span>
+  <a id="Core2D_Editor_IStyleEditor_OnStyleSetEndArrowRadiusX_" data-uid="Core2D.Editor.IStyleEditor.OnStyleSetEndArrowRadiusX*"></a>
+  <h4 id="Core2D_Editor_IStyleEditor_OnStyleSetEndArrowRadiusX_System_String_" data-uid="Core2D.Editor.IStyleEditor.OnStyleSetEndArrowRadiusX(System.String)">OnStyleSetEndArrowRadiusX(String)</h4>
+  <div class="markdown level1 summary"><p>Set style end arrow X-axis radius.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void OnStyleSetEndArrowRadiusX(string radius)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">radius</span></td>
+        <td><p>The style end arrow X-axis radius.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Editor_IStyleEditor_OnStyleSetEndArrowRadiusY_System_String_.md&amp;value=---%0Auid%3A%20Core2D.Editor.IStyleEditor.OnStyleSetEndArrowRadiusY(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Editor/Interfaces/IStyleEditor.cs/#L240">View Source</a>
+  </span>
+  <a id="Core2D_Editor_IStyleEditor_OnStyleSetEndArrowRadiusY_" data-uid="Core2D.Editor.IStyleEditor.OnStyleSetEndArrowRadiusY*"></a>
+  <h4 id="Core2D_Editor_IStyleEditor_OnStyleSetEndArrowRadiusY_System_String_" data-uid="Core2D.Editor.IStyleEditor.OnStyleSetEndArrowRadiusY(System.String)">OnStyleSetEndArrowRadiusY(String)</h4>
+  <div class="markdown level1 summary"><p>Set style end arrow Y-axis radius.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void OnStyleSetEndArrowRadiusY(string radius)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">radius</span></td>
+        <td><p>The style end arrow Y-axis radius.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Editor_IStyleEditor_OnStyleSetEndArrowStroke_System_String_.md&amp;value=---%0Auid%3A%20Core2D.Editor.IStyleEditor.OnStyleSetEndArrowStroke(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Editor/Interfaces/IStyleEditor.cs/#L270">View Source</a>
+  </span>
+  <a id="Core2D_Editor_IStyleEditor_OnStyleSetEndArrowStroke_" data-uid="Core2D.Editor.IStyleEditor.OnStyleSetEndArrowStroke*"></a>
+  <h4 id="Core2D_Editor_IStyleEditor_OnStyleSetEndArrowStroke_System_String_" data-uid="Core2D.Editor.IStyleEditor.OnStyleSetEndArrowStroke(System.String)">OnStyleSetEndArrowStroke(String)</h4>
+  <div class="markdown level1 summary"><p>Set style end arrow stroke color.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void OnStyleSetEndArrowStroke(string color)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">color</span></td>
+        <td><p>The style end arrow stroke color.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Editor_IStyleEditor_OnStyleSetEndArrowStrokeTransparency_System_String_.md&amp;value=---%0Auid%3A%20Core2D.Editor.IStyleEditor.OnStyleSetEndArrowStrokeTransparency(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Editor/Interfaces/IStyleEditor.cs/#L276">View Source</a>
+  </span>
+  <a id="Core2D_Editor_IStyleEditor_OnStyleSetEndArrowStrokeTransparency_" data-uid="Core2D.Editor.IStyleEditor.OnStyleSetEndArrowStrokeTransparency*"></a>
+  <h4 id="Core2D_Editor_IStyleEditor_OnStyleSetEndArrowStrokeTransparency_System_String_" data-uid="Core2D.Editor.IStyleEditor.OnStyleSetEndArrowStrokeTransparency(System.String)">OnStyleSetEndArrowStrokeTransparency(String)</h4>
+  <div class="markdown level1 summary"><p>Set style end arrow stroke alpha.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void OnStyleSetEndArrowStrokeTransparency(string alpha)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">alpha</span></td>
+        <td><p>The style end arrow stroke alpha.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Editor_IStyleEditor_OnStyleSetEndArrowThickness_System_String_.md&amp;value=---%0Auid%3A%20Core2D.Editor.IStyleEditor.OnStyleSetEndArrowThickness(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Editor/Interfaces/IStyleEditor.cs/#L246">View Source</a>
+  </span>
+  <a id="Core2D_Editor_IStyleEditor_OnStyleSetEndArrowThickness_" data-uid="Core2D.Editor.IStyleEditor.OnStyleSetEndArrowThickness*"></a>
+  <h4 id="Core2D_Editor_IStyleEditor_OnStyleSetEndArrowThickness_System_String_" data-uid="Core2D.Editor.IStyleEditor.OnStyleSetEndArrowThickness(System.String)">OnStyleSetEndArrowThickness(String)</h4>
+  <div class="markdown level1 summary"><p>Set style end arrow thickness.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void OnStyleSetEndArrowThickness(string thickness)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">thickness</span></td>
+        <td><p>The style end arrow thickness.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Editor_IStyleEditor_OnStyleSetEndArrowType_System_String_.md&amp;value=---%0Auid%3A%20Core2D.Editor.IStyleEditor.OnStyleSetEndArrowType(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Editor/Interfaces/IStyleEditor.cs/#L218">View Source</a>
+  </span>
+  <a id="Core2D_Editor_IStyleEditor_OnStyleSetEndArrowType_" data-uid="Core2D.Editor.IStyleEditor.OnStyleSetEndArrowType*"></a>
+  <h4 id="Core2D_Editor_IStyleEditor_OnStyleSetEndArrowType_System_String_" data-uid="Core2D.Editor.IStyleEditor.OnStyleSetEndArrowType(System.String)">OnStyleSetEndArrowType(String)</h4>
+  <div class="markdown level1 summary"><p>Set style end arrow type.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void OnStyleSetEndArrowType(string type)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">type</span></td>
+        <td><p>The style end arrow type.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Editor_IStyleEditor_OnStyleSetFill_System_String_.md&amp;value=---%0Auid%3A%20Core2D.Editor.IStyleEditor.OnStyleSetFill(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Editor/Interfaces/IStyleEditor.cs/#L59">View Source</a>
+  </span>
+  <a id="Core2D_Editor_IStyleEditor_OnStyleSetFill_" data-uid="Core2D.Editor.IStyleEditor.OnStyleSetFill*"></a>
+  <h4 id="Core2D_Editor_IStyleEditor_OnStyleSetFill_System_String_" data-uid="Core2D.Editor.IStyleEditor.OnStyleSetFill(System.String)">OnStyleSetFill(String)</h4>
+  <div class="markdown level1 summary"><p>Set style fill color.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void OnStyleSetFill(string color)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">color</span></td>
+        <td><p>The style fill color.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Editor_IStyleEditor_OnStyleSetFillTransparency_System_String_.md&amp;value=---%0Auid%3A%20Core2D.Editor.IStyleEditor.OnStyleSetFillTransparency(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Editor/Interfaces/IStyleEditor.cs/#L65">View Source</a>
+  </span>
+  <a id="Core2D_Editor_IStyleEditor_OnStyleSetFillTransparency_" data-uid="Core2D.Editor.IStyleEditor.OnStyleSetFillTransparency*"></a>
+  <h4 id="Core2D_Editor_IStyleEditor_OnStyleSetFillTransparency_System_String_" data-uid="Core2D.Editor.IStyleEditor.OnStyleSetFillTransparency(System.String)">OnStyleSetFillTransparency(String)</h4>
+  <div class="markdown level1 summary"><p>Set style fill alpha.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void OnStyleSetFillTransparency(string alpha)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">alpha</span></td>
+        <td><p>The style fill alpha.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Editor_IStyleEditor_OnStyleSetFontName_System_String_.md&amp;value=---%0Auid%3A%20Core2D.Editor.IStyleEditor.OnStyleSetFontName(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Editor/Interfaces/IStyleEditor.cs/#L71">View Source</a>
+  </span>
+  <a id="Core2D_Editor_IStyleEditor_OnStyleSetFontName_" data-uid="Core2D.Editor.IStyleEditor.OnStyleSetFontName*"></a>
+  <h4 id="Core2D_Editor_IStyleEditor_OnStyleSetFontName_System_String_" data-uid="Core2D.Editor.IStyleEditor.OnStyleSetFontName(System.String)">OnStyleSetFontName(String)</h4>
+  <div class="markdown level1 summary"><p>Set style font name.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void OnStyleSetFontName(string fontName)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">fontName</span></td>
+        <td><p>The style font name.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Editor_IStyleEditor_OnStyleSetFontSize_System_String_.md&amp;value=---%0Auid%3A%20Core2D.Editor.IStyleEditor.OnStyleSetFontSize(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Editor/Interfaces/IStyleEditor.cs/#L77">View Source</a>
+  </span>
+  <a id="Core2D_Editor_IStyleEditor_OnStyleSetFontSize_" data-uid="Core2D.Editor.IStyleEditor.OnStyleSetFontSize*"></a>
+  <h4 id="Core2D_Editor_IStyleEditor_OnStyleSetFontSize_System_String_" data-uid="Core2D.Editor.IStyleEditor.OnStyleSetFontSize(System.String)">OnStyleSetFontSize(String)</h4>
+  <div class="markdown level1 summary"><p>Set style font size.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void OnStyleSetFontSize(string fontSize)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">fontSize</span></td>
+        <td><p>The style font size.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Editor_IStyleEditor_OnStyleSetFontStyle_System_String_.md&amp;value=---%0Auid%3A%20Core2D.Editor.IStyleEditor.OnStyleSetFontStyle(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Editor/Interfaces/IStyleEditor.cs/#L83">View Source</a>
+  </span>
+  <a id="Core2D_Editor_IStyleEditor_OnStyleSetFontStyle_" data-uid="Core2D.Editor.IStyleEditor.OnStyleSetFontStyle*"></a>
+  <h4 id="Core2D_Editor_IStyleEditor_OnStyleSetFontStyle_System_String_" data-uid="Core2D.Editor.IStyleEditor.OnStyleSetFontStyle(System.String)">OnStyleSetFontStyle(String)</h4>
+  <div class="markdown level1 summary"><p>Set style font style.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void OnStyleSetFontStyle(string fontStyle)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">fontStyle</span></td>
+        <td><p>The style font style.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Editor_IStyleEditor_OnStyleSetLineCap_System_String_.md&amp;value=---%0Auid%3A%20Core2D.Editor.IStyleEditor.OnStyleSetLineCap(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Editor/Interfaces/IStyleEditor.cs/#L29">View Source</a>
+  </span>
+  <a id="Core2D_Editor_IStyleEditor_OnStyleSetLineCap_" data-uid="Core2D.Editor.IStyleEditor.OnStyleSetLineCap*"></a>
+  <h4 id="Core2D_Editor_IStyleEditor_OnStyleSetLineCap_System_String_" data-uid="Core2D.Editor.IStyleEditor.OnStyleSetLineCap(System.String)">OnStyleSetLineCap(String)</h4>
+  <div class="markdown level1 summary"><p>Set style line cap.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void OnStyleSetLineCap(string lineCap)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">lineCap</span></td>
+        <td><p>The style line cap.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Editor_IStyleEditor_OnStyleSetLineCurvature_System_String_.md&amp;value=---%0Auid%3A%20Core2D.Editor.IStyleEditor.OnStyleSetLineCurvature(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Editor/Interfaces/IStyleEditor.cs/#L106">View Source</a>
+  </span>
+  <a id="Core2D_Editor_IStyleEditor_OnStyleSetLineCurvature_" data-uid="Core2D.Editor.IStyleEditor.OnStyleSetLineCurvature*"></a>
+  <h4 id="Core2D_Editor_IStyleEditor_OnStyleSetLineCurvature_System_String_" data-uid="Core2D.Editor.IStyleEditor.OnStyleSetLineCurvature(System.String)">OnStyleSetLineCurvature(String)</h4>
+  <div class="markdown level1 summary"><p>Set style line curvature.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void OnStyleSetLineCurvature(string curvature)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">curvature</span></td>
+        <td><p>The style line curvature.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Editor_IStyleEditor_OnStyleSetLineCurveOrientation_System_String_.md&amp;value=---%0Auid%3A%20Core2D.Editor.IStyleEditor.OnStyleSetLineCurveOrientation(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Editor/Interfaces/IStyleEditor.cs/#L112">View Source</a>
+  </span>
+  <a id="Core2D_Editor_IStyleEditor_OnStyleSetLineCurveOrientation_" data-uid="Core2D.Editor.IStyleEditor.OnStyleSetLineCurveOrientation*"></a>
+  <h4 id="Core2D_Editor_IStyleEditor_OnStyleSetLineCurveOrientation_System_String_" data-uid="Core2D.Editor.IStyleEditor.OnStyleSetLineCurveOrientation(System.String)">OnStyleSetLineCurveOrientation(String)</h4>
+  <div class="markdown level1 summary"><p>Set style line curve orientation.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void OnStyleSetLineCurveOrientation(string curveOrientation)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">curveOrientation</span></td>
+        <td><p>The style line curve orientation.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Editor_IStyleEditor_OnStyleSetLineFixedLength_System_String_.md&amp;value=---%0Auid%3A%20Core2D.Editor.IStyleEditor.OnStyleSetLineFixedLength(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Editor/Interfaces/IStyleEditor.cs/#L118">View Source</a>
+  </span>
+  <a id="Core2D_Editor_IStyleEditor_OnStyleSetLineFixedLength_" data-uid="Core2D.Editor.IStyleEditor.OnStyleSetLineFixedLength*"></a>
+  <h4 id="Core2D_Editor_IStyleEditor_OnStyleSetLineFixedLength_System_String_" data-uid="Core2D.Editor.IStyleEditor.OnStyleSetLineFixedLength(System.String)">OnStyleSetLineFixedLength(String)</h4>
+  <div class="markdown level1 summary"><p>Set style line fixed length.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void OnStyleSetLineFixedLength(string length)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">length</span></td>
+        <td><p>The style line fixed length.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Editor_IStyleEditor_OnStyleSetStartArrowDashes_System_String_.md&amp;value=---%0Auid%3A%20Core2D.Editor.IStyleEditor.OnStyleSetStartArrowDashes(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Editor/Interfaces/IStyleEditor.cs/#L182">View Source</a>
+  </span>
+  <a id="Core2D_Editor_IStyleEditor_OnStyleSetStartArrowDashes_" data-uid="Core2D.Editor.IStyleEditor.OnStyleSetStartArrowDashes*"></a>
+  <h4 id="Core2D_Editor_IStyleEditor_OnStyleSetStartArrowDashes_System_String_" data-uid="Core2D.Editor.IStyleEditor.OnStyleSetStartArrowDashes(System.String)">OnStyleSetStartArrowDashes(String)</h4>
+  <div class="markdown level1 summary"><p>Set style start arrow dashes.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void OnStyleSetStartArrowDashes(string dashes)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">dashes</span></td>
+        <td><p>The style start arrow dashes.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Editor_IStyleEditor_OnStyleSetStartArrowDashOffset_System_String_.md&amp;value=---%0Auid%3A%20Core2D.Editor.IStyleEditor.OnStyleSetStartArrowDashOffset(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Editor/Interfaces/IStyleEditor.cs/#L188">View Source</a>
+  </span>
+  <a id="Core2D_Editor_IStyleEditor_OnStyleSetStartArrowDashOffset_" data-uid="Core2D.Editor.IStyleEditor.OnStyleSetStartArrowDashOffset*"></a>
+  <h4 id="Core2D_Editor_IStyleEditor_OnStyleSetStartArrowDashOffset_System_String_" data-uid="Core2D.Editor.IStyleEditor.OnStyleSetStartArrowDashOffset(System.String)">OnStyleSetStartArrowDashOffset(String)</h4>
+  <div class="markdown level1 summary"><p>Set style start arrow dash offset.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void OnStyleSetStartArrowDashOffset(string dashOffset)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">dashOffset</span></td>
+        <td><p>The style start arrow dash offset.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Editor_IStyleEditor_OnStyleSetStartArrowFill_System_String_.md&amp;value=---%0Auid%3A%20Core2D.Editor.IStyleEditor.OnStyleSetStartArrowFill(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Editor/Interfaces/IStyleEditor.cs/#L206">View Source</a>
+  </span>
+  <a id="Core2D_Editor_IStyleEditor_OnStyleSetStartArrowFill_" data-uid="Core2D.Editor.IStyleEditor.OnStyleSetStartArrowFill*"></a>
+  <h4 id="Core2D_Editor_IStyleEditor_OnStyleSetStartArrowFill_System_String_" data-uid="Core2D.Editor.IStyleEditor.OnStyleSetStartArrowFill(System.String)">OnStyleSetStartArrowFill(String)</h4>
+  <div class="markdown level1 summary"><p>Set style start arrow fill color.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void OnStyleSetStartArrowFill(string color)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">color</span></td>
+        <td><p>The style start arrow fill color.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Editor_IStyleEditor_OnStyleSetStartArrowFillTransparency_System_String_.md&amp;value=---%0Auid%3A%20Core2D.Editor.IStyleEditor.OnStyleSetStartArrowFillTransparency(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Editor/Interfaces/IStyleEditor.cs/#L212">View Source</a>
+  </span>
+  <a id="Core2D_Editor_IStyleEditor_OnStyleSetStartArrowFillTransparency_" data-uid="Core2D.Editor.IStyleEditor.OnStyleSetStartArrowFillTransparency*"></a>
+  <h4 id="Core2D_Editor_IStyleEditor_OnStyleSetStartArrowFillTransparency_System_String_" data-uid="Core2D.Editor.IStyleEditor.OnStyleSetStartArrowFillTransparency(System.String)">OnStyleSetStartArrowFillTransparency(String)</h4>
+  <div class="markdown level1 summary"><p>Set style start arrow fill alpha.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void OnStyleSetStartArrowFillTransparency(string alpha)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">alpha</span></td>
+        <td><p>The style start arrow fill alpha.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Editor_IStyleEditor_OnStyleSetStartArrowLineCap_System_String_.md&amp;value=---%0Auid%3A%20Core2D.Editor.IStyleEditor.OnStyleSetStartArrowLineCap(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Editor/Interfaces/IStyleEditor.cs/#L176">View Source</a>
+  </span>
+  <a id="Core2D_Editor_IStyleEditor_OnStyleSetStartArrowLineCap_" data-uid="Core2D.Editor.IStyleEditor.OnStyleSetStartArrowLineCap*"></a>
+  <h4 id="Core2D_Editor_IStyleEditor_OnStyleSetStartArrowLineCap_System_String_" data-uid="Core2D.Editor.IStyleEditor.OnStyleSetStartArrowLineCap(System.String)">OnStyleSetStartArrowLineCap(String)</h4>
+  <div class="markdown level1 summary"><p>Set style start arrow line cap.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void OnStyleSetStartArrowLineCap(string lineCap)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">lineCap</span></td>
+        <td><p>The style start arrow line cap.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Editor_IStyleEditor_OnStyleSetStartArrowRadiusX_System_String_.md&amp;value=---%0Auid%3A%20Core2D.Editor.IStyleEditor.OnStyleSetStartArrowRadiusX(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Editor/Interfaces/IStyleEditor.cs/#L158">View Source</a>
+  </span>
+  <a id="Core2D_Editor_IStyleEditor_OnStyleSetStartArrowRadiusX_" data-uid="Core2D.Editor.IStyleEditor.OnStyleSetStartArrowRadiusX*"></a>
+  <h4 id="Core2D_Editor_IStyleEditor_OnStyleSetStartArrowRadiusX_System_String_" data-uid="Core2D.Editor.IStyleEditor.OnStyleSetStartArrowRadiusX(System.String)">OnStyleSetStartArrowRadiusX(String)</h4>
+  <div class="markdown level1 summary"><p>Set style start arrow X-axis radius.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void OnStyleSetStartArrowRadiusX(string radius)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">radius</span></td>
+        <td><p>The style start arrow X-axis radius.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Editor_IStyleEditor_OnStyleSetStartArrowRadiusY_System_String_.md&amp;value=---%0Auid%3A%20Core2D.Editor.IStyleEditor.OnStyleSetStartArrowRadiusY(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Editor/Interfaces/IStyleEditor.cs/#L164">View Source</a>
+  </span>
+  <a id="Core2D_Editor_IStyleEditor_OnStyleSetStartArrowRadiusY_" data-uid="Core2D.Editor.IStyleEditor.OnStyleSetStartArrowRadiusY*"></a>
+  <h4 id="Core2D_Editor_IStyleEditor_OnStyleSetStartArrowRadiusY_System_String_" data-uid="Core2D.Editor.IStyleEditor.OnStyleSetStartArrowRadiusY(System.String)">OnStyleSetStartArrowRadiusY(String)</h4>
+  <div class="markdown level1 summary"><p>Set style start arrow Y-axis radius.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void OnStyleSetStartArrowRadiusY(string radius)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">radius</span></td>
+        <td><p>The style start arrow Y-axis radius.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Editor_IStyleEditor_OnStyleSetStartArrowStroke_System_String_.md&amp;value=---%0Auid%3A%20Core2D.Editor.IStyleEditor.OnStyleSetStartArrowStroke(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Editor/Interfaces/IStyleEditor.cs/#L194">View Source</a>
+  </span>
+  <a id="Core2D_Editor_IStyleEditor_OnStyleSetStartArrowStroke_" data-uid="Core2D.Editor.IStyleEditor.OnStyleSetStartArrowStroke*"></a>
+  <h4 id="Core2D_Editor_IStyleEditor_OnStyleSetStartArrowStroke_System_String_" data-uid="Core2D.Editor.IStyleEditor.OnStyleSetStartArrowStroke(System.String)">OnStyleSetStartArrowStroke(String)</h4>
+  <div class="markdown level1 summary"><p>Set style start arrow stroke color.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void OnStyleSetStartArrowStroke(string color)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">color</span></td>
+        <td><p>The style start arrow stroke color.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Editor_IStyleEditor_OnStyleSetStartArrowStrokeTransparency_System_String_.md&amp;value=---%0Auid%3A%20Core2D.Editor.IStyleEditor.OnStyleSetStartArrowStrokeTransparency(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Editor/Interfaces/IStyleEditor.cs/#L200">View Source</a>
+  </span>
+  <a id="Core2D_Editor_IStyleEditor_OnStyleSetStartArrowStrokeTransparency_" data-uid="Core2D.Editor.IStyleEditor.OnStyleSetStartArrowStrokeTransparency*"></a>
+  <h4 id="Core2D_Editor_IStyleEditor_OnStyleSetStartArrowStrokeTransparency_System_String_" data-uid="Core2D.Editor.IStyleEditor.OnStyleSetStartArrowStrokeTransparency(System.String)">OnStyleSetStartArrowStrokeTransparency(String)</h4>
+  <div class="markdown level1 summary"><p>Set style start arrow stroke alpha.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void OnStyleSetStartArrowStrokeTransparency(string alpha)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">alpha</span></td>
+        <td><p>The style start arrow stroke alpha.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Editor_IStyleEditor_OnStyleSetStartArrowThickness_System_String_.md&amp;value=---%0Auid%3A%20Core2D.Editor.IStyleEditor.OnStyleSetStartArrowThickness(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Editor/Interfaces/IStyleEditor.cs/#L170">View Source</a>
+  </span>
+  <a id="Core2D_Editor_IStyleEditor_OnStyleSetStartArrowThickness_" data-uid="Core2D.Editor.IStyleEditor.OnStyleSetStartArrowThickness*"></a>
+  <h4 id="Core2D_Editor_IStyleEditor_OnStyleSetStartArrowThickness_System_String_" data-uid="Core2D.Editor.IStyleEditor.OnStyleSetStartArrowThickness(System.String)">OnStyleSetStartArrowThickness(String)</h4>
+  <div class="markdown level1 summary"><p>Set style start arrow thickness.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void OnStyleSetStartArrowThickness(string thickness)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">thickness</span></td>
+        <td><p>The style start arrow thickness.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Editor_IStyleEditor_OnStyleSetStartArrowType_System_String_.md&amp;value=---%0Auid%3A%20Core2D.Editor.IStyleEditor.OnStyleSetStartArrowType(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Editor/Interfaces/IStyleEditor.cs/#L142">View Source</a>
+  </span>
+  <a id="Core2D_Editor_IStyleEditor_OnStyleSetStartArrowType_" data-uid="Core2D.Editor.IStyleEditor.OnStyleSetStartArrowType*"></a>
+  <h4 id="Core2D_Editor_IStyleEditor_OnStyleSetStartArrowType_System_String_" data-uid="Core2D.Editor.IStyleEditor.OnStyleSetStartArrowType(System.String)">OnStyleSetStartArrowType(String)</h4>
+  <div class="markdown level1 summary"><p>Set style start arrow type.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void OnStyleSetStartArrowType(string type)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">type</span></td>
+        <td><p>The style start arrow type.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Editor_IStyleEditor_OnStyleSetStroke_System_String_.md&amp;value=---%0Auid%3A%20Core2D.Editor.IStyleEditor.OnStyleSetStroke(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Editor/Interfaces/IStyleEditor.cs/#L47">View Source</a>
+  </span>
+  <a id="Core2D_Editor_IStyleEditor_OnStyleSetStroke_" data-uid="Core2D.Editor.IStyleEditor.OnStyleSetStroke*"></a>
+  <h4 id="Core2D_Editor_IStyleEditor_OnStyleSetStroke_System_String_" data-uid="Core2D.Editor.IStyleEditor.OnStyleSetStroke(System.String)">OnStyleSetStroke(String)</h4>
+  <div class="markdown level1 summary"><p>Set style stroke color.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void OnStyleSetStroke(string color)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">color</span></td>
+        <td><p>The style stroke color.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Editor_IStyleEditor_OnStyleSetStrokeTransparency_System_String_.md&amp;value=---%0Auid%3A%20Core2D.Editor.IStyleEditor.OnStyleSetStrokeTransparency(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Editor/Interfaces/IStyleEditor.cs/#L53">View Source</a>
+  </span>
+  <a id="Core2D_Editor_IStyleEditor_OnStyleSetStrokeTransparency_" data-uid="Core2D.Editor.IStyleEditor.OnStyleSetStrokeTransparency*"></a>
+  <h4 id="Core2D_Editor_IStyleEditor_OnStyleSetStrokeTransparency_System_String_" data-uid="Core2D.Editor.IStyleEditor.OnStyleSetStrokeTransparency(System.String)">OnStyleSetStrokeTransparency(String)</h4>
+  <div class="markdown level1 summary"><p>Set style stroke alpha.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void OnStyleSetStrokeTransparency(string alpha)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">alpha</span></td>
+        <td><p>The style stroke alpha.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Editor_IStyleEditor_OnStyleSetTextHAlignment_System_String_.md&amp;value=---%0Auid%3A%20Core2D.Editor.IStyleEditor.OnStyleSetTextHAlignment(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Editor/Interfaces/IStyleEditor.cs/#L89">View Source</a>
+  </span>
+  <a id="Core2D_Editor_IStyleEditor_OnStyleSetTextHAlignment_" data-uid="Core2D.Editor.IStyleEditor.OnStyleSetTextHAlignment*"></a>
+  <h4 id="Core2D_Editor_IStyleEditor_OnStyleSetTextHAlignment_System_String_" data-uid="Core2D.Editor.IStyleEditor.OnStyleSetTextHAlignment(System.String)">OnStyleSetTextHAlignment(String)</h4>
+  <div class="markdown level1 summary"><p>Set style text horizontal alignment.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void OnStyleSetTextHAlignment(string alignment)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">alignment</span></td>
+        <td><p>The style text horizontal alignment.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Editor_IStyleEditor_OnStyleSetTextVAlignment_System_String_.md&amp;value=---%0Auid%3A%20Core2D.Editor.IStyleEditor.OnStyleSetTextVAlignment(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Editor/Interfaces/IStyleEditor.cs/#L95">View Source</a>
+  </span>
+  <a id="Core2D_Editor_IStyleEditor_OnStyleSetTextVAlignment_" data-uid="Core2D.Editor.IStyleEditor.OnStyleSetTextVAlignment*"></a>
+  <h4 id="Core2D_Editor_IStyleEditor_OnStyleSetTextVAlignment_System_String_" data-uid="Core2D.Editor.IStyleEditor.OnStyleSetTextVAlignment(System.String)">OnStyleSetTextVAlignment(String)</h4>
+  <div class="markdown level1 summary"><p>Set style text vertical alignment.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void OnStyleSetTextVAlignment(string alignment)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">alignment</span></td>
+        <td><p>The style text vertical alignment.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Editor_IStyleEditor_OnStyleSetThickness_System_String_.md&amp;value=---%0Auid%3A%20Core2D.Editor.IStyleEditor.OnStyleSetThickness(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Editor/Interfaces/IStyleEditor.cs/#L23">View Source</a>
+  </span>
+  <a id="Core2D_Editor_IStyleEditor_OnStyleSetThickness_" data-uid="Core2D.Editor.IStyleEditor.OnStyleSetThickness*"></a>
+  <h4 id="Core2D_Editor_IStyleEditor_OnStyleSetThickness_System_String_" data-uid="Core2D.Editor.IStyleEditor.OnStyleSetThickness(System.String)">OnStyleSetThickness(String)</h4>
+  <div class="markdown level1 summary"><p>Set style thickness.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void OnStyleSetThickness(string thickness)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">thickness</span></td>
+        <td><p>The style thickness.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Editor_IStyleEditor_OnStyleToggleEndArrowIsFilled.md&amp;value=---%0Auid%3A%20Core2D.Editor.IStyleEditor.OnStyleToggleEndArrowIsFilled%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Editor/Interfaces/IStyleEditor.cs/#L228">View Source</a>
+  </span>
+  <a id="Core2D_Editor_IStyleEditor_OnStyleToggleEndArrowIsFilled_" data-uid="Core2D.Editor.IStyleEditor.OnStyleToggleEndArrowIsFilled*"></a>
+  <h4 id="Core2D_Editor_IStyleEditor_OnStyleToggleEndArrowIsFilled" data-uid="Core2D.Editor.IStyleEditor.OnStyleToggleEndArrowIsFilled">OnStyleToggleEndArrowIsFilled()</h4>
+  <div class="markdown level1 summary"><p>Toggle end arrow IsFilled property.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void OnStyleToggleEndArrowIsFilled()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Editor_IStyleEditor_OnStyleToggleEndArrowIsStroked.md&amp;value=---%0Auid%3A%20Core2D.Editor.IStyleEditor.OnStyleToggleEndArrowIsStroked%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Editor/Interfaces/IStyleEditor.cs/#L223">View Source</a>
+  </span>
+  <a id="Core2D_Editor_IStyleEditor_OnStyleToggleEndArrowIsStroked_" data-uid="Core2D.Editor.IStyleEditor.OnStyleToggleEndArrowIsStroked*"></a>
+  <h4 id="Core2D_Editor_IStyleEditor_OnStyleToggleEndArrowIsStroked" data-uid="Core2D.Editor.IStyleEditor.OnStyleToggleEndArrowIsStroked">OnStyleToggleEndArrowIsStroked()</h4>
+  <div class="markdown level1 summary"><p>Toggle end arrow IsStroked property.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void OnStyleToggleEndArrowIsStroked()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Editor_IStyleEditor_OnStyleToggleLineFixedLengthEndTrigger_System_String_.md&amp;value=---%0Auid%3A%20Core2D.Editor.IStyleEditor.OnStyleToggleLineFixedLengthEndTrigger(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Editor/Interfaces/IStyleEditor.cs/#L136">View Source</a>
+  </span>
+  <a id="Core2D_Editor_IStyleEditor_OnStyleToggleLineFixedLengthEndTrigger_" data-uid="Core2D.Editor.IStyleEditor.OnStyleToggleLineFixedLengthEndTrigger*"></a>
+  <h4 id="Core2D_Editor_IStyleEditor_OnStyleToggleLineFixedLengthEndTrigger_System_String_" data-uid="Core2D.Editor.IStyleEditor.OnStyleToggleLineFixedLengthEndTrigger(System.String)">OnStyleToggleLineFixedLengthEndTrigger(String)</h4>
+  <div class="markdown level1 summary"><p>Set style line fixed length end trigger.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void OnStyleToggleLineFixedLengthEndTrigger(string trigger)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">trigger</span></td>
+        <td><p>The style line fixed length end trigger.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Editor_IStyleEditor_OnStyleToggleLineFixedLengthFlags_System_String_.md&amp;value=---%0Auid%3A%20Core2D.Editor.IStyleEditor.OnStyleToggleLineFixedLengthFlags(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Editor/Interfaces/IStyleEditor.cs/#L124">View Source</a>
+  </span>
+  <a id="Core2D_Editor_IStyleEditor_OnStyleToggleLineFixedLengthFlags_" data-uid="Core2D.Editor.IStyleEditor.OnStyleToggleLineFixedLengthFlags*"></a>
+  <h4 id="Core2D_Editor_IStyleEditor_OnStyleToggleLineFixedLengthFlags_System_String_" data-uid="Core2D.Editor.IStyleEditor.OnStyleToggleLineFixedLengthFlags(System.String)">OnStyleToggleLineFixedLengthFlags(String)</h4>
+  <div class="markdown level1 summary"><p>Set style line fixed length flags.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void OnStyleToggleLineFixedLengthFlags(string flags)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">flags</span></td>
+        <td><p>The style line fixed length flags.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Editor_IStyleEditor_OnStyleToggleLineFixedLengthStartTrigger_System_String_.md&amp;value=---%0Auid%3A%20Core2D.Editor.IStyleEditor.OnStyleToggleLineFixedLengthStartTrigger(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Editor/Interfaces/IStyleEditor.cs/#L130">View Source</a>
+  </span>
+  <a id="Core2D_Editor_IStyleEditor_OnStyleToggleLineFixedLengthStartTrigger_" data-uid="Core2D.Editor.IStyleEditor.OnStyleToggleLineFixedLengthStartTrigger*"></a>
+  <h4 id="Core2D_Editor_IStyleEditor_OnStyleToggleLineFixedLengthStartTrigger_System_String_" data-uid="Core2D.Editor.IStyleEditor.OnStyleToggleLineFixedLengthStartTrigger(System.String)">OnStyleToggleLineFixedLengthStartTrigger(String)</h4>
+  <div class="markdown level1 summary"><p>Set style line fixed length start trigger.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void OnStyleToggleLineFixedLengthStartTrigger(string trigger)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">trigger</span></td>
+        <td><p>The style line fixed length start trigger.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Editor_IStyleEditor_OnStyleToggleLineIsCurved.md&amp;value=---%0Auid%3A%20Core2D.Editor.IStyleEditor.OnStyleToggleLineIsCurved%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Editor/Interfaces/IStyleEditor.cs/#L100">View Source</a>
+  </span>
+  <a id="Core2D_Editor_IStyleEditor_OnStyleToggleLineIsCurved_" data-uid="Core2D.Editor.IStyleEditor.OnStyleToggleLineIsCurved*"></a>
+  <h4 id="Core2D_Editor_IStyleEditor_OnStyleToggleLineIsCurved" data-uid="Core2D.Editor.IStyleEditor.OnStyleToggleLineIsCurved">OnStyleToggleLineIsCurved()</h4>
+  <div class="markdown level1 summary"><p>Toggle line IsCurved property.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void OnStyleToggleLineIsCurved()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Editor_IStyleEditor_OnStyleToggleStartArrowIsFilled.md&amp;value=---%0Auid%3A%20Core2D.Editor.IStyleEditor.OnStyleToggleStartArrowIsFilled%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Editor/Interfaces/IStyleEditor.cs/#L152">View Source</a>
+  </span>
+  <a id="Core2D_Editor_IStyleEditor_OnStyleToggleStartArrowIsFilled_" data-uid="Core2D.Editor.IStyleEditor.OnStyleToggleStartArrowIsFilled*"></a>
+  <h4 id="Core2D_Editor_IStyleEditor_OnStyleToggleStartArrowIsFilled" data-uid="Core2D.Editor.IStyleEditor.OnStyleToggleStartArrowIsFilled">OnStyleToggleStartArrowIsFilled()</h4>
+  <div class="markdown level1 summary"><p>Toggle start arrow IsFilled property.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void OnStyleToggleStartArrowIsFilled()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Editor_IStyleEditor_OnStyleToggleStartArrowIsStroked.md&amp;value=---%0Auid%3A%20Core2D.Editor.IStyleEditor.OnStyleToggleStartArrowIsStroked%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Editor/Interfaces/IStyleEditor.cs/#L147">View Source</a>
+  </span>
+  <a id="Core2D_Editor_IStyleEditor_OnStyleToggleStartArrowIsStroked_" data-uid="Core2D.Editor.IStyleEditor.OnStyleToggleStartArrowIsStroked*"></a>
+  <h4 id="Core2D_Editor_IStyleEditor_OnStyleToggleStartArrowIsStroked" data-uid="Core2D.Editor.IStyleEditor.OnStyleToggleStartArrowIsStroked">OnStyleToggleStartArrowIsStroked()</h4>
+  <div class="markdown level1 summary"><p>Toggle start arrow IsStroked property.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void OnStyleToggleStartArrowIsStroked()</code></pre>
+  </div>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Editor_IStyleEditor.md&amp;value=---%0Auid%3A%20Core2D.Editor.IStyleEditor%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Editor/Interfaces/IStyleEditor.cs/#L7" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            <span>Copyright © (c) Wiesław Šoltés<br>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

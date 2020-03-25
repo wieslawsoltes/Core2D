@@ -1,0 +1,1099 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Class BaseShape
+   | Core2D Website </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Class BaseShape
+   | Core2D Website ">
+    <meta name="generator" content="docfx 2.51.0.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="Core2D.Shapes.BaseShape">
+  
+  
+  <h1 id="Core2D_Shapes_BaseShape" data-uid="Core2D.Shapes.BaseShape" class="text-break">Class BaseShape
+  </h1>
+  <div class="markdown level0 summary"><p>Base class for shapes.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><span class="xref">System.Object</span></div>
+    <div class="level1"><a class="xref" href="Core2D.ObservableObject.html">ObservableObject</a></div>
+    <div class="level2"><span class="xref">BaseShape</span></div>
+      <div class="level3"><a class="xref" href="Core2D.Shapes.ArcShape.html">ArcShape</a></div>
+      <div class="level3"><a class="xref" href="Core2D.Shapes.ConnectableShape.html">ConnectableShape</a></div>
+      <div class="level3"><a class="xref" href="Core2D.Shapes.CubicBezierShape.html">CubicBezierShape</a></div>
+      <div class="level3"><a class="xref" href="Core2D.Shapes.LineShape.html">LineShape</a></div>
+      <div class="level3"><a class="xref" href="Core2D.Shapes.PathShape.html">PathShape</a></div>
+      <div class="level3"><a class="xref" href="Core2D.Shapes.PointShape.html">PointShape</a></div>
+      <div class="level3"><a class="xref" href="Core2D.Shapes.QuadraticBezierShape.html">QuadraticBezierShape</a></div>
+      <div class="level3"><a class="xref" href="Core2D.Shapes.TextShape.html">TextShape</a></div>
+  </div>
+  <div classs="implements">
+    <h5>Implements</h5>
+    <div><a class="xref" href="Core2D.Shapes.IBaseShape.html">IBaseShape</a></div>
+    <div><a class="xref" href="Core2D.IObservableObject.html">IObservableObject</a></div>
+    <div><span class="xref">System.ComponentModel.INotifyPropertyChanged</span></div>
+    <div><a class="xref" href="Core2D.ICopyable.html">ICopyable</a></div>
+    <div><a class="xref" href="Core2D.Data.IBindable.html">IBindable</a></div>
+    <div><a class="xref" href="Core2D.IDrawable.html">IDrawable</a></div>
+    <div><a class="xref" href="Core2D.ISelectable.html">ISelectable</a></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="Core2D.ObservableObject.html#Core2D_ObservableObject_Owner">ObservableObject.Owner</a>
+    </div>
+    <div>
+      <a class="xref" href="Core2D.ObservableObject.html#Core2D_ObservableObject_Id">ObservableObject.Id</a>
+    </div>
+    <div>
+      <a class="xref" href="Core2D.ObservableObject.html#Core2D_ObservableObject_Name">ObservableObject.Name</a>
+    </div>
+    <div>
+      <a class="xref" href="Core2D.ObservableObject.html#Core2D_ObservableObject_MarkAsDirty_System_Boolean_">ObservableObject.MarkAsDirty(Boolean)</a>
+    </div>
+    <div>
+      <a class="xref" href="Core2D.ObservableObject.html#Core2D_ObservableObject_PropertyChanged">ObservableObject.PropertyChanged</a>
+    </div>
+    <div>
+      <a class="xref" href="Core2D.ObservableObject.html#Core2D_ObservableObject_Copy_System_Collections_Generic_IDictionary_System_Object_System_Object__">ObservableObject.Copy(IDictionary&lt;Object, Object&gt;)</a>
+    </div>
+    <div>
+      <a class="xref" href="Core2D.ObservableObject.html#Core2D_ObservableObject_Notify_System_String_">ObservableObject.Notify(String)</a>
+    </div>
+    <div>
+      <a class="xref" href="Core2D.ObservableObject.html#Core2D_ObservableObject_Update__1___0____0_System_String_">ObservableObject.Update&lt;T&gt;(T, T, String)</a>
+    </div>
+    <div>
+      <a class="xref" href="Core2D.ObservableObject.html#Core2D_ObservableObject_ShouldSerializeOwner">ObservableObject.ShouldSerializeOwner()</a>
+    </div>
+    <div>
+      <a class="xref" href="Core2D.ObservableObject.html#Core2D_ObservableObject_ShouldSerializeId">ObservableObject.ShouldSerializeId()</a>
+    </div>
+    <div>
+      <a class="xref" href="Core2D.ObservableObject.html#Core2D_ObservableObject_ShouldSerializeName">ObservableObject.ShouldSerializeName()</a>
+    </div>
+    <div>
+      <a class="xref" href="Core2D.ObservableObject.html#Core2D_ObservableObject_ShouldSerializeIsDirty">ObservableObject.ShouldSerializeIsDirty()</a>
+    </div>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetHashCode()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetType()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.MemberwiseClone()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ToString()</span>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Core2D.Shapes.html">Core2D.Shapes</a></h6>
+  <h6><strong>Assembly</strong>: Core2D.dll</h6>
+  <h5 id="Core2D_Shapes_BaseShape_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public abstract class BaseShape : ObservableObject, IBaseShape, IObservableObject, INotifyPropertyChanged, ICopyable, IBindable, IDrawable, ISelectable</code></pre>
+  </div>
+  <h3 id="properties">Properties
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Shapes_BaseShape_Data.md&amp;value=---%0Auid%3A%20Core2D.Shapes.BaseShape.Data%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/ViewModels/Shapes/BaseShape.cs/#L61">View Source</a>
+  </span>
+  <a id="Core2D_Shapes_BaseShape_Data_" data-uid="Core2D.Shapes.BaseShape.Data*"></a>
+  <h4 id="Core2D_Shapes_BaseShape_Data" data-uid="Core2D.Shapes.BaseShape.Data">Data</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual IContext Data { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Core2D.Data.IContext.html">IContext</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Shapes_BaseShape_IsFilled.md&amp;value=---%0Auid%3A%20Core2D.Shapes.BaseShape.IsFilled%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/ViewModels/Shapes/BaseShape.cs/#L54">View Source</a>
+  </span>
+  <a id="Core2D_Shapes_BaseShape_IsFilled_" data-uid="Core2D.Shapes.BaseShape.IsFilled*"></a>
+  <h4 id="Core2D_Shapes_BaseShape_IsFilled" data-uid="Core2D.Shapes.BaseShape.IsFilled">IsFilled</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual bool IsFilled { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Shapes_BaseShape_IsStroked.md&amp;value=---%0Auid%3A%20Core2D.Shapes.BaseShape.IsStroked%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/ViewModels/Shapes/BaseShape.cs/#L47">View Source</a>
+  </span>
+  <a id="Core2D_Shapes_BaseShape_IsStroked_" data-uid="Core2D.Shapes.BaseShape.IsStroked*"></a>
+  <h4 id="Core2D_Shapes_BaseShape_IsStroked" data-uid="Core2D.Shapes.BaseShape.IsStroked">IsStroked</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual bool IsStroked { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Shapes_BaseShape_State.md&amp;value=---%0Auid%3A%20Core2D.Shapes.BaseShape.State%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/ViewModels/Shapes/BaseShape.cs/#L26">View Source</a>
+  </span>
+  <a id="Core2D_Shapes_BaseShape_State_" data-uid="Core2D.Shapes.BaseShape.State*"></a>
+  <h4 id="Core2D_Shapes_BaseShape_State" data-uid="Core2D.Shapes.BaseShape.State">State</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual IShapeState State { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Core2D.Renderer.IShapeState.html">IShapeState</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Shapes_BaseShape_Style.md&amp;value=---%0Auid%3A%20Core2D.Shapes.BaseShape.Style%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/ViewModels/Shapes/BaseShape.cs/#L33">View Source</a>
+  </span>
+  <a id="Core2D_Shapes_BaseShape_Style_" data-uid="Core2D.Shapes.BaseShape.Style*"></a>
+  <h4 id="Core2D_Shapes_BaseShape_Style" data-uid="Core2D.Shapes.BaseShape.Style">Style</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual IShapeStyle Style { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Core2D.Style.IShapeStyle.html">IShapeStyle</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Shapes_BaseShape_TargetType.md&amp;value=---%0Auid%3A%20Core2D.Shapes.BaseShape.TargetType%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/ViewModels/Shapes/BaseShape.cs/#L23">View Source</a>
+  </span>
+  <a id="Core2D_Shapes_BaseShape_TargetType_" data-uid="Core2D.Shapes.BaseShape.TargetType*"></a>
+  <h4 id="Core2D_Shapes_BaseShape_TargetType" data-uid="Core2D.Shapes.BaseShape.TargetType">TargetType</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public abstract Type TargetType { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Type</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Shapes_BaseShape_Transform.md&amp;value=---%0Auid%3A%20Core2D.Shapes.BaseShape.Transform%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/ViewModels/Shapes/BaseShape.cs/#L40">View Source</a>
+  </span>
+  <a id="Core2D_Shapes_BaseShape_Transform_" data-uid="Core2D.Shapes.BaseShape.Transform*"></a>
+  <h4 id="Core2D_Shapes_BaseShape_Transform" data-uid="Core2D.Shapes.BaseShape.Transform">Transform</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IMatrixObject Transform { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Core2D.Renderer.IMatrixObject.html">IMatrixObject</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Shapes_BaseShape_BeginTransform_System_Object_Core2D_Renderer_IShapeRenderer_.md&amp;value=---%0Auid%3A%20Core2D.Shapes.BaseShape.BeginTransform(System.Object%2CCore2D.Renderer.IShapeRenderer)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/ViewModels/Shapes/BaseShape.cs/#L68">View Source</a>
+  </span>
+  <a id="Core2D_Shapes_BaseShape_BeginTransform_" data-uid="Core2D.Shapes.BaseShape.BeginTransform*"></a>
+  <h4 id="Core2D_Shapes_BaseShape_BeginTransform_System_Object_Core2D_Renderer_IShapeRenderer_" data-uid="Core2D.Shapes.BaseShape.BeginTransform(System.Object,Core2D.Renderer.IShapeRenderer)">BeginTransform(Object, IShapeRenderer)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual object BeginTransform(object dc, IShapeRenderer renderer)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td><span class="parametername">dc</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Core2D.Renderer.IShapeRenderer.html">IShapeRenderer</a></td>
+        <td><span class="parametername">renderer</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Shapes_BaseShape_Bind_Core2D_Data_IDataFlow_System_Object_System_Object_.md&amp;value=---%0Auid%3A%20Core2D.Shapes.BaseShape.Bind(Core2D.Data.IDataFlow%2CSystem.Object%2CSystem.Object)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/ViewModels/Shapes/BaseShape.cs/#L96">View Source</a>
+  </span>
+  <a id="Core2D_Shapes_BaseShape_Bind_" data-uid="Core2D.Shapes.BaseShape.Bind*"></a>
+  <h4 id="Core2D_Shapes_BaseShape_Bind_Core2D_Data_IDataFlow_System_Object_System_Object_" data-uid="Core2D.Shapes.BaseShape.Bind(Core2D.Data.IDataFlow,System.Object,System.Object)">Bind(IDataFlow, Object, Object)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public abstract void Bind(IDataFlow dataFlow, object db, object r)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Core2D.Data.IDataFlow.html">IDataFlow</a></td>
+        <td><span class="parametername">dataFlow</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td><span class="parametername">db</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td><span class="parametername">r</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Shapes_BaseShape_Deselect_Core2D_ISelection_.md&amp;value=---%0Auid%3A%20Core2D.Shapes.BaseShape.Deselect(Core2D.ISelection)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/ViewModels/Shapes/BaseShape.cs/#L128">View Source</a>
+  </span>
+  <a id="Core2D_Shapes_BaseShape_Deselect_" data-uid="Core2D.Shapes.BaseShape.Deselect*"></a>
+  <h4 id="Core2D_Shapes_BaseShape_Deselect_Core2D_ISelection_" data-uid="Core2D.Shapes.BaseShape.Deselect(Core2D.ISelection)">Deselect(ISelection)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual void Deselect(ISelection selection)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Core2D.ISelection.html">ISelection</a></td>
+        <td><span class="parametername">selection</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Shapes_BaseShape_Draw_System_Object_Core2D_Renderer_IShapeRenderer_System_Double_System_Double_.md&amp;value=---%0Auid%3A%20Core2D.Shapes.BaseShape.Draw(System.Object%2CCore2D.Renderer.IShapeRenderer%2CSystem.Double%2CSystem.Double)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/ViewModels/Shapes/BaseShape.cs/#L87">View Source</a>
+  </span>
+  <a id="Core2D_Shapes_BaseShape_Draw_" data-uid="Core2D.Shapes.BaseShape.Draw*"></a>
+  <h4 id="Core2D_Shapes_BaseShape_Draw_System_Object_Core2D_Renderer_IShapeRenderer_System_Double_System_Double_" data-uid="Core2D.Shapes.BaseShape.Draw(System.Object,Core2D.Renderer.IShapeRenderer,System.Double,System.Double)">Draw(Object, IShapeRenderer, Double, Double)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public abstract void Draw(object dc, IShapeRenderer renderer, double dx, double dy)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td><span class="parametername">dc</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Core2D.Renderer.IShapeRenderer.html">IShapeRenderer</a></td>
+        <td><span class="parametername">renderer</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Double</span></td>
+        <td><span class="parametername">dx</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Double</span></td>
+        <td><span class="parametername">dy</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Shapes_BaseShape_EndTransform_System_Object_Core2D_Renderer_IShapeRenderer_System_Object_.md&amp;value=---%0Auid%3A%20Core2D.Shapes.BaseShape.EndTransform(System.Object%2CCore2D.Renderer.IShapeRenderer%2CSystem.Object)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/ViewModels/Shapes/BaseShape.cs/#L78">View Source</a>
+  </span>
+  <a id="Core2D_Shapes_BaseShape_EndTransform_" data-uid="Core2D.Shapes.BaseShape.EndTransform*"></a>
+  <h4 id="Core2D_Shapes_BaseShape_EndTransform_System_Object_Core2D_Renderer_IShapeRenderer_System_Object_" data-uid="Core2D.Shapes.BaseShape.EndTransform(System.Object,Core2D.Renderer.IShapeRenderer,System.Object)">EndTransform(Object, IShapeRenderer, Object)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual void EndTransform(object dc, IShapeRenderer renderer, object state)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td><span class="parametername">dc</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Core2D.Renderer.IShapeRenderer.html">IShapeRenderer</a></td>
+        <td><span class="parametername">renderer</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td><span class="parametername">state</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Shapes_BaseShape_GetPoints.md&amp;value=---%0Auid%3A%20Core2D.Shapes.BaseShape.GetPoints%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/ViewModels/Shapes/BaseShape.cs/#L140">View Source</a>
+  </span>
+  <a id="Core2D_Shapes_BaseShape_GetPoints_" data-uid="Core2D.Shapes.BaseShape.GetPoints*"></a>
+  <h4 id="Core2D_Shapes_BaseShape_GetPoints" data-uid="Core2D.Shapes.BaseShape.GetPoints">GetPoints()</h4>
+  <div class="markdown level1 summary"><p>Get all points in the shape.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public abstract IEnumerable&lt;IPointShape&gt; GetPoints()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<a class="xref" href="Core2D.Shapes.IPointShape.html">IPointShape</a>&gt;</td>
+        <td><p>All points in the shape.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Shapes_BaseShape_GetProperty_System_String_.md&amp;value=---%0Auid%3A%20Core2D.Shapes.BaseShape.GetProperty(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/ViewModels/Shapes/BaseShape.cs/#L105">View Source</a>
+  </span>
+  <a id="Core2D_Shapes_BaseShape_GetProperty_" data-uid="Core2D.Shapes.BaseShape.GetProperty*"></a>
+  <h4 id="Core2D_Shapes_BaseShape_GetProperty_System_String_" data-uid="Core2D.Shapes.BaseShape.GetProperty(System.String)">GetProperty(String)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual object GetProperty(string name)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">name</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Shapes_BaseShape_Invalidate_Core2D_Renderer_IShapeRenderer_System_Double_System_Double_.md&amp;value=---%0Auid%3A%20Core2D.Shapes.BaseShape.Invalidate(Core2D.Renderer.IShapeRenderer%2CSystem.Double%2CSystem.Double)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/ViewModels/Shapes/BaseShape.cs/#L90">View Source</a>
+  </span>
+  <a id="Core2D_Shapes_BaseShape_Invalidate_" data-uid="Core2D.Shapes.BaseShape.Invalidate*"></a>
+  <h4 id="Core2D_Shapes_BaseShape_Invalidate_Core2D_Renderer_IShapeRenderer_System_Double_System_Double_" data-uid="Core2D.Shapes.BaseShape.Invalidate(Core2D.Renderer.IShapeRenderer,System.Double,System.Double)">Invalidate(IShapeRenderer, Double, Double)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual bool Invalidate(IShapeRenderer renderer, double dx, double dy)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Core2D.Renderer.IShapeRenderer.html">IShapeRenderer</a></td>
+        <td><span class="parametername">renderer</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Double</span></td>
+        <td><span class="parametername">dx</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Double</span></td>
+        <td><span class="parametername">dy</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Shapes_BaseShape_Move_Core2D_ISelection_System_Double_System_Double_.md&amp;value=---%0Auid%3A%20Core2D.Shapes.BaseShape.Move(Core2D.ISelection%2CSystem.Double%2CSystem.Double)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/ViewModels/Shapes/BaseShape.cs/#L116">View Source</a>
+  </span>
+  <a id="Core2D_Shapes_BaseShape_Move_" data-uid="Core2D.Shapes.BaseShape.Move*"></a>
+  <h4 id="Core2D_Shapes_BaseShape_Move_Core2D_ISelection_System_Double_System_Double_" data-uid="Core2D.Shapes.BaseShape.Move(Core2D.ISelection,System.Double,System.Double)">Move(ISelection, Double, Double)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public abstract void Move(ISelection selection, double dx, double dy)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Core2D.ISelection.html">ISelection</a></td>
+        <td><span class="parametername">selection</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Double</span></td>
+        <td><span class="parametername">dx</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Double</span></td>
+        <td><span class="parametername">dy</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Shapes_BaseShape_Select_Core2D_ISelection_.md&amp;value=---%0Auid%3A%20Core2D.Shapes.BaseShape.Select(Core2D.ISelection)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/ViewModels/Shapes/BaseShape.cs/#L119">View Source</a>
+  </span>
+  <a id="Core2D_Shapes_BaseShape_Select_" data-uid="Core2D.Shapes.BaseShape.Select*"></a>
+  <h4 id="Core2D_Shapes_BaseShape_Select_Core2D_ISelection_" data-uid="Core2D.Shapes.BaseShape.Select(Core2D.ISelection)">Select(ISelection)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual void Select(ISelection selection)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Core2D.ISelection.html">ISelection</a></td>
+        <td><span class="parametername">selection</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Shapes_BaseShape_SetProperty_System_String_System_Object_.md&amp;value=---%0Auid%3A%20Core2D.Shapes.BaseShape.SetProperty(System.String%2CSystem.Object)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/ViewModels/Shapes/BaseShape.cs/#L99">View Source</a>
+  </span>
+  <a id="Core2D_Shapes_BaseShape_SetProperty_" data-uid="Core2D.Shapes.BaseShape.SetProperty*"></a>
+  <h4 id="Core2D_Shapes_BaseShape_SetProperty_System_String_System_Object_" data-uid="Core2D.Shapes.BaseShape.SetProperty(System.String,System.Object)">SetProperty(String, Object)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual void SetProperty(string name, object value)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">name</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td><span class="parametername">value</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Shapes_BaseShape_ShouldSerializeData.md&amp;value=---%0Auid%3A%20Core2D.Shapes.BaseShape.ShouldSerializeData%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/ViewModels/Shapes/BaseShape.cs/#L176">View Source</a>
+  </span>
+  <a id="Core2D_Shapes_BaseShape_ShouldSerializeData_" data-uid="Core2D.Shapes.BaseShape.ShouldSerializeData*"></a>
+  <h4 id="Core2D_Shapes_BaseShape_ShouldSerializeData" data-uid="Core2D.Shapes.BaseShape.ShouldSerializeData">ShouldSerializeData()</h4>
+  <div class="markdown level1 summary"><p>Check whether the <a class="xref" href="Core2D.Shapes.BaseShape.html#Core2D_Shapes_BaseShape_Data">Data</a> property has changed from its default value.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual bool ShouldSerializeData()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><p>Returns true if the property has changed; otherwise, returns false.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Shapes_BaseShape_ShouldSerializeIsFilled.md&amp;value=---%0Auid%3A%20Core2D.Shapes.BaseShape.ShouldSerializeIsFilled%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/ViewModels/Shapes/BaseShape.cs/#L170">View Source</a>
+  </span>
+  <a id="Core2D_Shapes_BaseShape_ShouldSerializeIsFilled_" data-uid="Core2D.Shapes.BaseShape.ShouldSerializeIsFilled*"></a>
+  <h4 id="Core2D_Shapes_BaseShape_ShouldSerializeIsFilled" data-uid="Core2D.Shapes.BaseShape.ShouldSerializeIsFilled">ShouldSerializeIsFilled()</h4>
+  <div class="markdown level1 summary"><p>Check whether the <a class="xref" href="Core2D.Shapes.BaseShape.html#Core2D_Shapes_BaseShape_IsFilled">IsFilled</a> property has changed from its default value.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual bool ShouldSerializeIsFilled()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><p>Returns true if the property has changed; otherwise, returns false.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Shapes_BaseShape_ShouldSerializeIsStroked.md&amp;value=---%0Auid%3A%20Core2D.Shapes.BaseShape.ShouldSerializeIsStroked%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/ViewModels/Shapes/BaseShape.cs/#L164">View Source</a>
+  </span>
+  <a id="Core2D_Shapes_BaseShape_ShouldSerializeIsStroked_" data-uid="Core2D.Shapes.BaseShape.ShouldSerializeIsStroked*"></a>
+  <h4 id="Core2D_Shapes_BaseShape_ShouldSerializeIsStroked" data-uid="Core2D.Shapes.BaseShape.ShouldSerializeIsStroked">ShouldSerializeIsStroked()</h4>
+  <div class="markdown level1 summary"><p>Check whether the <a class="xref" href="Core2D.Shapes.BaseShape.html#Core2D_Shapes_BaseShape_IsStroked">IsStroked</a> property has changed from its default value.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual bool ShouldSerializeIsStroked()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><p>Returns true if the property has changed; otherwise, returns false.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Shapes_BaseShape_ShouldSerializeState.md&amp;value=---%0Auid%3A%20Core2D.Shapes.BaseShape.ShouldSerializeState%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/ViewModels/Shapes/BaseShape.cs/#L146">View Source</a>
+  </span>
+  <a id="Core2D_Shapes_BaseShape_ShouldSerializeState_" data-uid="Core2D.Shapes.BaseShape.ShouldSerializeState*"></a>
+  <h4 id="Core2D_Shapes_BaseShape_ShouldSerializeState" data-uid="Core2D.Shapes.BaseShape.ShouldSerializeState">ShouldSerializeState()</h4>
+  <div class="markdown level1 summary"><p>Check whether the <a class="xref" href="Core2D.Shapes.BaseShape.html#Core2D_Shapes_BaseShape_State">State</a> property has changed from its default value.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual bool ShouldSerializeState()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><p>Returns true if the property has changed; otherwise, returns false.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Shapes_BaseShape_ShouldSerializeStyle.md&amp;value=---%0Auid%3A%20Core2D.Shapes.BaseShape.ShouldSerializeStyle%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/ViewModels/Shapes/BaseShape.cs/#L152">View Source</a>
+  </span>
+  <a id="Core2D_Shapes_BaseShape_ShouldSerializeStyle_" data-uid="Core2D.Shapes.BaseShape.ShouldSerializeStyle*"></a>
+  <h4 id="Core2D_Shapes_BaseShape_ShouldSerializeStyle" data-uid="Core2D.Shapes.BaseShape.ShouldSerializeStyle">ShouldSerializeStyle()</h4>
+  <div class="markdown level1 summary"><p>Check whether the <a class="xref" href="Core2D.Shapes.BaseShape.html#Core2D_Shapes_BaseShape_Style">Style</a> property has changed from its default value.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual bool ShouldSerializeStyle()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><p>Returns true if the property has changed; otherwise, returns false.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Shapes_BaseShape_ShouldSerializeTransform.md&amp;value=---%0Auid%3A%20Core2D.Shapes.BaseShape.ShouldSerializeTransform%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/ViewModels/Shapes/BaseShape.cs/#L158">View Source</a>
+  </span>
+  <a id="Core2D_Shapes_BaseShape_ShouldSerializeTransform_" data-uid="Core2D.Shapes.BaseShape.ShouldSerializeTransform*"></a>
+  <h4 id="Core2D_Shapes_BaseShape_ShouldSerializeTransform" data-uid="Core2D.Shapes.BaseShape.ShouldSerializeTransform">ShouldSerializeTransform()</h4>
+  <div class="markdown level1 summary"><p>Check whether the <a class="xref" href="Core2D.Shapes.BaseShape.html#Core2D_Shapes_BaseShape_Transform">Transform</a> property has changed from its default value.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual bool ShouldSerializeTransform()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><p>Returns true if the property has changed; otherwise, returns false.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="implements">Implements</h3>
+  <div>
+      <a class="xref" href="Core2D.Shapes.IBaseShape.html">IBaseShape</a>
+  </div>
+  <div>
+      <a class="xref" href="Core2D.IObservableObject.html">IObservableObject</a>
+  </div>
+  <div>
+      <span class="xref">System.ComponentModel.INotifyPropertyChanged</span>
+  </div>
+  <div>
+      <a class="xref" href="Core2D.ICopyable.html">ICopyable</a>
+  </div>
+  <div>
+      <a class="xref" href="Core2D.Data.IBindable.html">IBindable</a>
+  </div>
+  <div>
+      <a class="xref" href="Core2D.IDrawable.html">IDrawable</a>
+  </div>
+  <div>
+      <a class="xref" href="Core2D.ISelectable.html">ISelectable</a>
+  </div>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Shapes_BaseShape.md&amp;value=---%0Auid%3A%20Core2D.Shapes.BaseShape%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/ViewModels/Shapes/BaseShape.cs/#L12" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            <span>Copyright © (c) Wiesław Šoltés<br>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

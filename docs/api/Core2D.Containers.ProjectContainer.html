@@ -1,0 +1,1915 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Class ProjectContainer
+   | Core2D Website </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Class ProjectContainer
+   | Core2D Website ">
+    <meta name="generator" content="docfx 2.51.0.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="Core2D.Containers.ProjectContainer">
+  
+  
+  <h1 id="Core2D_Containers_ProjectContainer" data-uid="Core2D.Containers.ProjectContainer" class="text-break">Class ProjectContainer
+  </h1>
+  <div class="markdown level0 summary"><p>Project container.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><span class="xref">System.Object</span></div>
+    <div class="level1"><a class="xref" href="Core2D.ObservableObject.html">ObservableObject</a></div>
+    <div class="level2"><span class="xref">ProjectContainer</span></div>
+  </div>
+  <div classs="implements">
+    <h5>Implements</h5>
+    <div><a class="xref" href="Core2D.Containers.IProjectContainer.html">IProjectContainer</a></div>
+    <div><a class="xref" href="Core2D.Containers.IBaseContainer.html">IBaseContainer</a></div>
+    <div><a class="xref" href="Core2D.Renderer.IImageCache.html">IImageCache</a></div>
+    <div><a class="xref" href="Core2D.IObservableObject.html">IObservableObject</a></div>
+    <div><span class="xref">System.ComponentModel.INotifyPropertyChanged</span></div>
+    <div><a class="xref" href="Core2D.ICopyable.html">ICopyable</a></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="Core2D.ObservableObject.html#Core2D_ObservableObject_Owner">ObservableObject.Owner</a>
+    </div>
+    <div>
+      <a class="xref" href="Core2D.ObservableObject.html#Core2D_ObservableObject_Id">ObservableObject.Id</a>
+    </div>
+    <div>
+      <a class="xref" href="Core2D.ObservableObject.html#Core2D_ObservableObject_Name">ObservableObject.Name</a>
+    </div>
+    <div>
+      <a class="xref" href="Core2D.ObservableObject.html#Core2D_ObservableObject_MarkAsDirty_System_Boolean_">ObservableObject.MarkAsDirty(Boolean)</a>
+    </div>
+    <div>
+      <a class="xref" href="Core2D.ObservableObject.html#Core2D_ObservableObject_PropertyChanged">ObservableObject.PropertyChanged</a>
+    </div>
+    <div>
+      <a class="xref" href="Core2D.ObservableObject.html#Core2D_ObservableObject_Notify_System_String_">ObservableObject.Notify(String)</a>
+    </div>
+    <div>
+      <a class="xref" href="Core2D.ObservableObject.html#Core2D_ObservableObject_Update__1___0____0_System_String_">ObservableObject.Update&lt;T&gt;(T, T, String)</a>
+    </div>
+    <div>
+      <a class="xref" href="Core2D.ObservableObject.html#Core2D_ObservableObject_ShouldSerializeOwner">ObservableObject.ShouldSerializeOwner()</a>
+    </div>
+    <div>
+      <a class="xref" href="Core2D.ObservableObject.html#Core2D_ObservableObject_ShouldSerializeId">ObservableObject.ShouldSerializeId()</a>
+    </div>
+    <div>
+      <a class="xref" href="Core2D.ObservableObject.html#Core2D_ObservableObject_ShouldSerializeName">ObservableObject.ShouldSerializeName()</a>
+    </div>
+    <div>
+      <a class="xref" href="Core2D.ObservableObject.html#Core2D_ObservableObject_ShouldSerializeIsDirty">ObservableObject.ShouldSerializeIsDirty()</a>
+    </div>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetHashCode()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetType()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.MemberwiseClone()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ToString()</span>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Core2D.Containers.html">Core2D.Containers</a></h6>
+  <h6><strong>Assembly</strong>: Core2D.dll</h6>
+  <h5 id="Core2D_Containers_ProjectContainer_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class ProjectContainer : ObservableObject, IProjectContainer, IBaseContainer, IImageCache, IObservableObject, INotifyPropertyChanged, ICopyable</code></pre>
+  </div>
+  <h3 id="properties">Properties
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Containers_ProjectContainer_CurrentContainer.md&amp;value=---%0Auid%3A%20Core2D.Containers.ProjectContainer.CurrentContainer%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/ViewModels/Containers/ProjectContainer.cs/#L119">View Source</a>
+  </span>
+  <a id="Core2D_Containers_ProjectContainer_CurrentContainer_" data-uid="Core2D.Containers.ProjectContainer.CurrentContainer*"></a>
+  <h4 id="Core2D_Containers_ProjectContainer_CurrentContainer" data-uid="Core2D.Containers.ProjectContainer.CurrentContainer">CurrentContainer</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IPageContainer CurrentContainer { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Core2D.Containers.IPageContainer.html">IPageContainer</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Containers_ProjectContainer_CurrentDatabase.md&amp;value=---%0Auid%3A%20Core2D.Containers.ProjectContainer.CurrentDatabase%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/ViewModels/Containers/ProjectContainer.cs/#L98">View Source</a>
+  </span>
+  <a id="Core2D_Containers_ProjectContainer_CurrentDatabase_" data-uid="Core2D.Containers.ProjectContainer.CurrentDatabase*"></a>
+  <h4 id="Core2D_Containers_ProjectContainer_CurrentDatabase" data-uid="Core2D.Containers.ProjectContainer.CurrentDatabase">CurrentDatabase</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IDatabase CurrentDatabase { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Core2D.Data.IDatabase.html">IDatabase</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Containers_ProjectContainer_CurrentDocument.md&amp;value=---%0Auid%3A%20Core2D.Containers.ProjectContainer.CurrentDocument%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/ViewModels/Containers/ProjectContainer.cs/#L112">View Source</a>
+  </span>
+  <a id="Core2D_Containers_ProjectContainer_CurrentDocument_" data-uid="Core2D.Containers.ProjectContainer.CurrentDocument*"></a>
+  <h4 id="Core2D_Containers_ProjectContainer_CurrentDocument" data-uid="Core2D.Containers.ProjectContainer.CurrentDocument">CurrentDocument</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IDocumentContainer CurrentDocument { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Core2D.Containers.IDocumentContainer.html">IDocumentContainer</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Containers_ProjectContainer_CurrentGroupLibrary.md&amp;value=---%0Auid%3A%20Core2D.Containers.ProjectContainer.CurrentGroupLibrary%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/ViewModels/Containers/ProjectContainer.cs/#L91">View Source</a>
+  </span>
+  <a id="Core2D_Containers_ProjectContainer_CurrentGroupLibrary_" data-uid="Core2D.Containers.ProjectContainer.CurrentGroupLibrary*"></a>
+  <h4 id="Core2D_Containers_ProjectContainer_CurrentGroupLibrary" data-uid="Core2D.Containers.ProjectContainer.CurrentGroupLibrary">CurrentGroupLibrary</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ILibrary&lt;IGroupShape&gt; CurrentGroupLibrary { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Core2D.Containers.ILibrary-1.html">ILibrary</a>&lt;<a class="xref" href="Core2D.Shapes.IGroupShape.html">IGroupShape</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Containers_ProjectContainer_CurrentStyleLibrary.md&amp;value=---%0Auid%3A%20Core2D.Containers.ProjectContainer.CurrentStyleLibrary%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/ViewModels/Containers/ProjectContainer.cs/#L84">View Source</a>
+  </span>
+  <a id="Core2D_Containers_ProjectContainer_CurrentStyleLibrary_" data-uid="Core2D.Containers.ProjectContainer.CurrentStyleLibrary*"></a>
+  <h4 id="Core2D_Containers_ProjectContainer_CurrentStyleLibrary" data-uid="Core2D.Containers.ProjectContainer.CurrentStyleLibrary">CurrentStyleLibrary</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ILibrary&lt;IShapeStyle&gt; CurrentStyleLibrary { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Core2D.Containers.ILibrary-1.html">ILibrary</a>&lt;<a class="xref" href="Core2D.Style.IShapeStyle.html">IShapeStyle</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Containers_ProjectContainer_CurrentTemplate.md&amp;value=---%0Auid%3A%20Core2D.Containers.ProjectContainer.CurrentTemplate%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/ViewModels/Containers/ProjectContainer.cs/#L105">View Source</a>
+  </span>
+  <a id="Core2D_Containers_ProjectContainer_CurrentTemplate_" data-uid="Core2D.Containers.ProjectContainer.CurrentTemplate*"></a>
+  <h4 id="Core2D_Containers_ProjectContainer_CurrentTemplate" data-uid="Core2D.Containers.ProjectContainer.CurrentTemplate">CurrentTemplate</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IPageContainer CurrentTemplate { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Core2D.Containers.IPageContainer.html">IPageContainer</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Containers_ProjectContainer_Databases.md&amp;value=---%0Auid%3A%20Core2D.Containers.ProjectContainer.Databases%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/ViewModels/Containers/ProjectContainer.cs/#L62">View Source</a>
+  </span>
+  <a id="Core2D_Containers_ProjectContainer_Databases_" data-uid="Core2D.Containers.ProjectContainer.Databases*"></a>
+  <h4 id="Core2D_Containers_ProjectContainer_Databases" data-uid="Core2D.Containers.ProjectContainer.Databases">Databases</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ImmutableArray&lt;IDatabase&gt; Databases { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.Immutable.ImmutableArray</span>&lt;<a class="xref" href="Core2D.Data.IDatabase.html">IDatabase</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Containers_ProjectContainer_Documents.md&amp;value=---%0Auid%3A%20Core2D.Containers.ProjectContainer.Documents%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/ViewModels/Containers/ProjectContainer.cs/#L76">View Source</a>
+  </span>
+  <a id="Core2D_Containers_ProjectContainer_Documents_" data-uid="Core2D.Containers.ProjectContainer.Documents*"></a>
+  <h4 id="Core2D_Containers_ProjectContainer_Documents" data-uid="Core2D.Containers.ProjectContainer.Documents">Documents</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ImmutableArray&lt;IDocumentContainer&gt; Documents { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.Immutable.ImmutableArray</span>&lt;<a class="xref" href="Core2D.Containers.IDocumentContainer.html">IDocumentContainer</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Containers_ProjectContainer_GroupLibraries.md&amp;value=---%0Auid%3A%20Core2D.Containers.ProjectContainer.GroupLibraries%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/ViewModels/Containers/ProjectContainer.cs/#L55">View Source</a>
+  </span>
+  <a id="Core2D_Containers_ProjectContainer_GroupLibraries_" data-uid="Core2D.Containers.ProjectContainer.GroupLibraries*"></a>
+  <h4 id="Core2D_Containers_ProjectContainer_GroupLibraries" data-uid="Core2D.Containers.ProjectContainer.GroupLibraries">GroupLibraries</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ImmutableArray&lt;ILibrary&lt;IGroupShape&gt;&gt; GroupLibraries { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.Immutable.ImmutableArray</span>&lt;<a class="xref" href="Core2D.Containers.ILibrary-1.html">ILibrary</a>&lt;<a class="xref" href="Core2D.Shapes.IGroupShape.html">IGroupShape</a>&gt;&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Containers_ProjectContainer_History.md&amp;value=---%0Auid%3A%20Core2D.Containers.ProjectContainer.History%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/ViewModels/Containers/ProjectContainer.cs/#L41">View Source</a>
+  </span>
+  <a id="Core2D_Containers_ProjectContainer_History_" data-uid="Core2D.Containers.ProjectContainer.History*"></a>
+  <h4 id="Core2D_Containers_ProjectContainer_History" data-uid="Core2D.Containers.ProjectContainer.History">History</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IHistory History { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Core2D.History.IHistory.html">IHistory</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Containers_ProjectContainer_Keys.md&amp;value=---%0Auid%3A%20Core2D.Containers.ProjectContainer.Keys%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/ViewModels/Containers/ProjectContainer.IImageCache.cs/#L17">View Source</a>
+  </span>
+  <a id="Core2D_Containers_ProjectContainer_Keys_" data-uid="Core2D.Containers.ProjectContainer.Keys*"></a>
+  <h4 id="Core2D_Containers_ProjectContainer_Keys" data-uid="Core2D.Containers.ProjectContainer.Keys">Keys</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IEnumerable&lt;IImageKey&gt; Keys { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<a class="xref" href="Core2D.Renderer.IImageKey.html">IImageKey</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Containers_ProjectContainer_Options.md&amp;value=---%0Auid%3A%20Core2D.Containers.ProjectContainer.Options%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/ViewModels/Containers/ProjectContainer.cs/#L34">View Source</a>
+  </span>
+  <a id="Core2D_Containers_ProjectContainer_Options_" data-uid="Core2D.Containers.ProjectContainer.Options*"></a>
+  <h4 id="Core2D_Containers_ProjectContainer_Options" data-uid="Core2D.Containers.ProjectContainer.Options">Options</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IOptions Options { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Core2D.Containers.IOptions.html">IOptions</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Containers_ProjectContainer_Selected.md&amp;value=---%0Auid%3A%20Core2D.Containers.ProjectContainer.Selected%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/ViewModels/Containers/ProjectContainer.cs/#L126">View Source</a>
+  </span>
+  <a id="Core2D_Containers_ProjectContainer_Selected_" data-uid="Core2D.Containers.ProjectContainer.Selected*"></a>
+  <h4 id="Core2D_Containers_ProjectContainer_Selected" data-uid="Core2D.Containers.ProjectContainer.Selected">Selected</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IObservableObject Selected { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Core2D.IObservableObject.html">IObservableObject</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Containers_ProjectContainer_StyleLibraries.md&amp;value=---%0Auid%3A%20Core2D.Containers.ProjectContainer.StyleLibraries%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/ViewModels/Containers/ProjectContainer.cs/#L48">View Source</a>
+  </span>
+  <a id="Core2D_Containers_ProjectContainer_StyleLibraries_" data-uid="Core2D.Containers.ProjectContainer.StyleLibraries*"></a>
+  <h4 id="Core2D_Containers_ProjectContainer_StyleLibraries" data-uid="Core2D.Containers.ProjectContainer.StyleLibraries">StyleLibraries</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ImmutableArray&lt;ILibrary&lt;IShapeStyle&gt;&gt; StyleLibraries { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.Immutable.ImmutableArray</span>&lt;<a class="xref" href="Core2D.Containers.ILibrary-1.html">ILibrary</a>&lt;<a class="xref" href="Core2D.Style.IShapeStyle.html">IShapeStyle</a>&gt;&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Containers_ProjectContainer_Templates.md&amp;value=---%0Auid%3A%20Core2D.Containers.ProjectContainer.Templates%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/ViewModels/Containers/ProjectContainer.cs/#L69">View Source</a>
+  </span>
+  <a id="Core2D_Containers_ProjectContainer_Templates_" data-uid="Core2D.Containers.ProjectContainer.Templates*"></a>
+  <h4 id="Core2D_Containers_ProjectContainer_Templates" data-uid="Core2D.Containers.ProjectContainer.Templates">Templates</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ImmutableArray&lt;IPageContainer&gt; Templates { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.Immutable.ImmutableArray</span>&lt;<a class="xref" href="Core2D.Containers.IPageContainer.html">IPageContainer</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Containers_ProjectContainer_AddImage_System_String_System_Byte___.md&amp;value=---%0Auid%3A%20Core2D.Containers.ProjectContainer.AddImage(System.String%2CSystem.Byte%5B%5D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/ViewModels/Containers/ProjectContainer.IImageCache.cs/#L36">View Source</a>
+  </span>
+  <a id="Core2D_Containers_ProjectContainer_AddImage_" data-uid="Core2D.Containers.ProjectContainer.AddImage*"></a>
+  <h4 id="Core2D_Containers_ProjectContainer_AddImage_System_String_System_Byte___" data-uid="Core2D.Containers.ProjectContainer.AddImage(System.String,System.Byte[])">AddImage(String, Byte[])</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void AddImage(string key, byte[] bytes)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">key</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Byte</span>[]</td>
+        <td><span class="parametername">bytes</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Containers_ProjectContainer_AddImageFromFile_System_String_System_Byte___.md&amp;value=---%0Auid%3A%20Core2D.Containers.ProjectContainer.AddImageFromFile(System.String%2CSystem.Byte%5B%5D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/ViewModels/Containers/ProjectContainer.IImageCache.cs/#L20">View Source</a>
+  </span>
+  <a id="Core2D_Containers_ProjectContainer_AddImageFromFile_" data-uid="Core2D.Containers.ProjectContainer.AddImageFromFile*"></a>
+  <h4 id="Core2D_Containers_ProjectContainer_AddImageFromFile_System_String_System_Byte___" data-uid="Core2D.Containers.ProjectContainer.AddImageFromFile(System.String,System.Byte[])">AddImageFromFile(String, Byte[])</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string AddImageFromFile(string path, byte[] bytes)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">path</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Byte</span>[]</td>
+        <td><span class="parametername">bytes</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Containers_ProjectContainer_Copy_System_Collections_Generic_IDictionary_System_Object_System_Object__.md&amp;value=---%0Auid%3A%20Core2D.Containers.ProjectContainer.Copy(System.Collections.Generic.IDictionary%7BSystem.Object%2CSystem.Object%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/ViewModels/Containers/ProjectContainer.cs/#L267">View Source</a>
+  </span>
+  <a id="Core2D_Containers_ProjectContainer_Copy_" data-uid="Core2D.Containers.ProjectContainer.Copy*"></a>
+  <h4 id="Core2D_Containers_ProjectContainer_Copy_System_Collections_Generic_IDictionary_System_Object_System_Object__" data-uid="Core2D.Containers.ProjectContainer.Copy(System.Collections.Generic.IDictionary{System.Object,System.Object})">Copy(IDictionary&lt;Object, Object&gt;)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override object Copy(IDictionary&lt;object, object&gt; shared)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.IDictionary</span>&lt;<span class="xref">System.Object</span>, <span class="xref">System.Object</span>&gt;</td>
+        <td><span class="parametername">shared</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="Core2D.ObservableObject.html#Core2D_ObservableObject_Copy_System_Collections_Generic_IDictionary_System_Object_System_Object__">ObservableObject.Copy(IDictionary&lt;Object, Object&gt;)</a></div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Containers_ProjectContainer_GetAllShapes_System_Collections_Generic_IEnumerable_Core2D_Shapes_IBaseShape__.md&amp;value=---%0Auid%3A%20Core2D.Containers.ProjectContainer.GetAllShapes(System.Collections.Generic.IEnumerable%7BCore2D.Shapes.IBaseShape%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/ViewModels/Containers/ProjectContainer.cs/#L141">View Source</a>
+  </span>
+  <a id="Core2D_Containers_ProjectContainer_GetAllShapes_" data-uid="Core2D.Containers.ProjectContainer.GetAllShapes*"></a>
+  <h4 id="Core2D_Containers_ProjectContainer_GetAllShapes_System_Collections_Generic_IEnumerable_Core2D_Shapes_IBaseShape__" data-uid="Core2D.Containers.ProjectContainer.GetAllShapes(System.Collections.Generic.IEnumerable{Core2D.Shapes.IBaseShape})">GetAllShapes(IEnumerable&lt;IBaseShape&gt;)</h4>
+  <div class="markdown level1 summary"><p>Get all shapes including grouped shapes.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static IEnumerable&lt;IBaseShape&gt; GetAllShapes(IEnumerable&lt;IBaseShape&gt; shapes)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<a class="xref" href="Core2D.Shapes.IBaseShape.html">IBaseShape</a>&gt;</td>
+        <td><span class="parametername">shapes</span></td>
+        <td><p>The shapes collection.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<a class="xref" href="Core2D.Shapes.IBaseShape.html">IBaseShape</a>&gt;</td>
+        <td><p>All shapes including grouped shapes.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Containers_ProjectContainer_GetAllShapes__1_Core2D_Containers_IProjectContainer_.md&amp;value=---%0Auid%3A%20Core2D.Containers.ProjectContainer.GetAllShapes%60%601(Core2D.Containers.IProjectContainer)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/ViewModels/Containers/ProjectContainer.cs/#L183">View Source</a>
+  </span>
+  <a id="Core2D_Containers_ProjectContainer_GetAllShapes_" data-uid="Core2D.Containers.ProjectContainer.GetAllShapes*"></a>
+  <h4 id="Core2D_Containers_ProjectContainer_GetAllShapes__1_Core2D_Containers_IProjectContainer_" data-uid="Core2D.Containers.ProjectContainer.GetAllShapes``1(Core2D.Containers.IProjectContainer)">GetAllShapes&lt;T&gt;(IProjectContainer)</h4>
+  <div class="markdown level1 summary"><p>Get all shapes including grouped shapes of specified type.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static IEnumerable&lt;T&gt; GetAllShapes&lt;T&gt;(IProjectContainer project)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Core2D.Containers.IProjectContainer.html">IProjectContainer</a></td>
+        <td><span class="parametername">project</span></td>
+        <td><p>The project object.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;T&gt;</td>
+        <td><p>All shapes including grouped shapes of specified type.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T</span></td>
+        <td><p>The type of shapes to include.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Containers_ProjectContainer_GetAllShapes__1_System_Collections_Generic_IEnumerable_Core2D_Shapes_IBaseShape__.md&amp;value=---%0Auid%3A%20Core2D.Containers.ProjectContainer.GetAllShapes%60%601(System.Collections.Generic.IEnumerable%7BCore2D.Shapes.IBaseShape%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/ViewModels/Containers/ProjectContainer.cs/#L172">View Source</a>
+  </span>
+  <a id="Core2D_Containers_ProjectContainer_GetAllShapes_" data-uid="Core2D.Containers.ProjectContainer.GetAllShapes*"></a>
+  <h4 id="Core2D_Containers_ProjectContainer_GetAllShapes__1_System_Collections_Generic_IEnumerable_Core2D_Shapes_IBaseShape__" data-uid="Core2D.Containers.ProjectContainer.GetAllShapes``1(System.Collections.Generic.IEnumerable{Core2D.Shapes.IBaseShape})">GetAllShapes&lt;T&gt;(IEnumerable&lt;IBaseShape&gt;)</h4>
+  <div class="markdown level1 summary"><p>Get all shapes including grouped shapes of specified type.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static IEnumerable&lt;T&gt; GetAllShapes&lt;T&gt;(IEnumerable&lt;IBaseShape&gt; shapes)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<a class="xref" href="Core2D.Shapes.IBaseShape.html">IBaseShape</a>&gt;</td>
+        <td><span class="parametername">shapes</span></td>
+        <td><p>The shapes collection.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;T&gt;</td>
+        <td><p>All shapes including grouped shapes of specified type.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T</span></td>
+        <td><p>The type of shape to include.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Containers_ProjectContainer_GetImage_System_String_.md&amp;value=---%0Auid%3A%20Core2D.Containers.ProjectContainer.GetImage(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/ViewModels/Containers/ProjectContainer.IImageCache.cs/#L48">View Source</a>
+  </span>
+  <a id="Core2D_Containers_ProjectContainer_GetImage_" data-uid="Core2D.Containers.ProjectContainer.GetImage*"></a>
+  <h4 id="Core2D_Containers_ProjectContainer_GetImage_System_String_" data-uid="Core2D.Containers.ProjectContainer.GetImage(System.String)">GetImage(String)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public byte[] GetImage(string key)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">key</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Byte</span>[]</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Containers_ProjectContainer_PurgeUnusedImages_System_Collections_Generic_ICollection_System_String__.md&amp;value=---%0Auid%3A%20Core2D.Containers.ProjectContainer.PurgeUnusedImages(System.Collections.Generic.ICollection%7BSystem.String%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/ViewModels/Containers/ProjectContainer.IImageCache.cs/#L68">View Source</a>
+  </span>
+  <a id="Core2D_Containers_ProjectContainer_PurgeUnusedImages_" data-uid="Core2D.Containers.ProjectContainer.PurgeUnusedImages*"></a>
+  <h4 id="Core2D_Containers_ProjectContainer_PurgeUnusedImages_System_Collections_Generic_ICollection_System_String__" data-uid="Core2D.Containers.ProjectContainer.PurgeUnusedImages(System.Collections.Generic.ICollection{System.String})">PurgeUnusedImages(ICollection&lt;String&gt;)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void PurgeUnusedImages(ICollection&lt;string&gt; used)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.ICollection</span>&lt;<span class="xref">System.String</span>&gt;</td>
+        <td><span class="parametername">used</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Containers_ProjectContainer_RemoveImage_System_String_.md&amp;value=---%0Auid%3A%20Core2D.Containers.ProjectContainer.RemoveImage(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/ViewModels/Containers/ProjectContainer.IImageCache.cs/#L61">View Source</a>
+  </span>
+  <a id="Core2D_Containers_ProjectContainer_RemoveImage_" data-uid="Core2D.Containers.ProjectContainer.RemoveImage*"></a>
+  <h4 id="Core2D_Containers_ProjectContainer_RemoveImage_System_String_" data-uid="Core2D.Containers.ProjectContainer.RemoveImage(System.String)">RemoveImage(String)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void RemoveImage(string key)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">key</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Containers_ProjectContainer_SetCurrentContainer_Core2D_Containers_IPageContainer_.md&amp;value=---%0Auid%3A%20Core2D.Containers.ProjectContainer.SetCurrentContainer(Core2D.Containers.IPageContainer)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/ViewModels/Containers/ProjectContainer.cs/#L201">View Source</a>
+  </span>
+  <a id="Core2D_Containers_ProjectContainer_SetCurrentContainer_" data-uid="Core2D.Containers.ProjectContainer.SetCurrentContainer*"></a>
+  <h4 id="Core2D_Containers_ProjectContainer_SetCurrentContainer_Core2D_Containers_IPageContainer_" data-uid="Core2D.Containers.ProjectContainer.SetCurrentContainer(Core2D.Containers.IPageContainer)">SetCurrentContainer(IPageContainer)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void SetCurrentContainer(IPageContainer container)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Core2D.Containers.IPageContainer.html">IPageContainer</a></td>
+        <td><span class="parametername">container</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Containers_ProjectContainer_SetCurrentDatabase_Core2D_Data_IDatabase_.md&amp;value=---%0Auid%3A%20Core2D.Containers.ProjectContainer.SetCurrentDatabase(Core2D.Data.IDatabase)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/ViewModels/Containers/ProjectContainer.cs/#L211">View Source</a>
+  </span>
+  <a id="Core2D_Containers_ProjectContainer_SetCurrentDatabase_" data-uid="Core2D.Containers.ProjectContainer.SetCurrentDatabase*"></a>
+  <h4 id="Core2D_Containers_ProjectContainer_SetCurrentDatabase_Core2D_Data_IDatabase_" data-uid="Core2D.Containers.ProjectContainer.SetCurrentDatabase(Core2D.Data.IDatabase)">SetCurrentDatabase(IDatabase)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void SetCurrentDatabase(IDatabase db)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Core2D.Data.IDatabase.html">IDatabase</a></td>
+        <td><span class="parametername">db</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Containers_ProjectContainer_SetCurrentDocument_Core2D_Containers_IDocumentContainer_.md&amp;value=---%0Auid%3A%20Core2D.Containers.ProjectContainer.SetCurrentDocument(Core2D.Containers.IDocumentContainer)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/ViewModels/Containers/ProjectContainer.cs/#L194">View Source</a>
+  </span>
+  <a id="Core2D_Containers_ProjectContainer_SetCurrentDocument_" data-uid="Core2D.Containers.ProjectContainer.SetCurrentDocument*"></a>
+  <h4 id="Core2D_Containers_ProjectContainer_SetCurrentDocument_Core2D_Containers_IDocumentContainer_" data-uid="Core2D.Containers.ProjectContainer.SetCurrentDocument(Core2D.Containers.IDocumentContainer)">SetCurrentDocument(IDocumentContainer)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void SetCurrentDocument(IDocumentContainer document)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Core2D.Containers.IDocumentContainer.html">IDocumentContainer</a></td>
+        <td><span class="parametername">document</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Containers_ProjectContainer_SetCurrentGroupLibrary_Core2D_Containers_ILibrary_Core2D_Shapes_IGroupShape__.md&amp;value=---%0Auid%3A%20Core2D.Containers.ProjectContainer.SetCurrentGroupLibrary(Core2D.Containers.ILibrary%7BCore2D.Shapes.IGroupShape%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/ViewModels/Containers/ProjectContainer.cs/#L214">View Source</a>
+  </span>
+  <a id="Core2D_Containers_ProjectContainer_SetCurrentGroupLibrary_" data-uid="Core2D.Containers.ProjectContainer.SetCurrentGroupLibrary*"></a>
+  <h4 id="Core2D_Containers_ProjectContainer_SetCurrentGroupLibrary_Core2D_Containers_ILibrary_Core2D_Shapes_IGroupShape__" data-uid="Core2D.Containers.ProjectContainer.SetCurrentGroupLibrary(Core2D.Containers.ILibrary{Core2D.Shapes.IGroupShape})">SetCurrentGroupLibrary(ILibrary&lt;IGroupShape&gt;)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void SetCurrentGroupLibrary(ILibrary&lt;IGroupShape&gt; library)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Core2D.Containers.ILibrary-1.html">ILibrary</a>&lt;<a class="xref" href="Core2D.Shapes.IGroupShape.html">IGroupShape</a>&gt;</td>
+        <td><span class="parametername">library</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Containers_ProjectContainer_SetCurrentStyleLibrary_Core2D_Containers_ILibrary_Core2D_Style_IShapeStyle__.md&amp;value=---%0Auid%3A%20Core2D.Containers.ProjectContainer.SetCurrentStyleLibrary(Core2D.Containers.ILibrary%7BCore2D.Style.IShapeStyle%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/ViewModels/Containers/ProjectContainer.cs/#L217">View Source</a>
+  </span>
+  <a id="Core2D_Containers_ProjectContainer_SetCurrentStyleLibrary_" data-uid="Core2D.Containers.ProjectContainer.SetCurrentStyleLibrary*"></a>
+  <h4 id="Core2D_Containers_ProjectContainer_SetCurrentStyleLibrary_Core2D_Containers_ILibrary_Core2D_Style_IShapeStyle__" data-uid="Core2D.Containers.ProjectContainer.SetCurrentStyleLibrary(Core2D.Containers.ILibrary{Core2D.Style.IShapeStyle})">SetCurrentStyleLibrary(ILibrary&lt;IShapeStyle&gt;)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void SetCurrentStyleLibrary(ILibrary&lt;IShapeStyle&gt; library)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Core2D.Containers.ILibrary-1.html">ILibrary</a>&lt;<a class="xref" href="Core2D.Style.IShapeStyle.html">IShapeStyle</a>&gt;</td>
+        <td><span class="parametername">library</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Containers_ProjectContainer_SetCurrentTemplate_Core2D_Containers_IPageContainer_.md&amp;value=---%0Auid%3A%20Core2D.Containers.ProjectContainer.SetCurrentTemplate(Core2D.Containers.IPageContainer)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/ViewModels/Containers/ProjectContainer.cs/#L208">View Source</a>
+  </span>
+  <a id="Core2D_Containers_ProjectContainer_SetCurrentTemplate_" data-uid="Core2D.Containers.ProjectContainer.SetCurrentTemplate*"></a>
+  <h4 id="Core2D_Containers_ProjectContainer_SetCurrentTemplate_Core2D_Containers_IPageContainer_" data-uid="Core2D.Containers.ProjectContainer.SetCurrentTemplate(Core2D.Containers.IPageContainer)">SetCurrentTemplate(IPageContainer)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void SetCurrentTemplate(IPageContainer template)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Core2D.Containers.IPageContainer.html">IPageContainer</a></td>
+        <td><span class="parametername">template</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Containers_ProjectContainer_SetSelected_Core2D_IObservableObject_.md&amp;value=---%0Auid%3A%20Core2D.Containers.ProjectContainer.SetSelected(Core2D.IObservableObject)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/ViewModels/Containers/ProjectContainer.cs/#L220">View Source</a>
+  </span>
+  <a id="Core2D_Containers_ProjectContainer_SetSelected_" data-uid="Core2D.Containers.ProjectContainer.SetSelected*"></a>
+  <h4 id="Core2D_Containers_ProjectContainer_SetSelected_Core2D_IObservableObject_" data-uid="Core2D.Containers.ProjectContainer.SetSelected(Core2D.IObservableObject)">SetSelected(IObservableObject)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void SetSelected(IObservableObject value)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Core2D.IObservableObject.html">IObservableObject</a></td>
+        <td><span class="parametername">value</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Containers_ProjectContainer_ShouldSerializeCurrentContainer.md&amp;value=---%0Auid%3A%20Core2D.Containers.ProjectContainer.ShouldSerializeCurrentContainer%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/ViewModels/Containers/ProjectContainer.cs/#L348">View Source</a>
+  </span>
+  <a id="Core2D_Containers_ProjectContainer_ShouldSerializeCurrentContainer_" data-uid="Core2D.Containers.ProjectContainer.ShouldSerializeCurrentContainer*"></a>
+  <h4 id="Core2D_Containers_ProjectContainer_ShouldSerializeCurrentContainer" data-uid="Core2D.Containers.ProjectContainer.ShouldSerializeCurrentContainer">ShouldSerializeCurrentContainer()</h4>
+  <div class="markdown level1 summary"><p>Check whether the <a class="xref" href="Core2D.Containers.ProjectContainer.html#Core2D_Containers_ProjectContainer_CurrentContainer">CurrentContainer</a> property has changed from its default value.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual bool ShouldSerializeCurrentContainer()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><p>Returns true if the property has changed; otherwise, returns false.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Containers_ProjectContainer_ShouldSerializeCurrentDatabase.md&amp;value=---%0Auid%3A%20Core2D.Containers.ProjectContainer.ShouldSerializeCurrentDatabase%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/ViewModels/Containers/ProjectContainer.cs/#L330">View Source</a>
+  </span>
+  <a id="Core2D_Containers_ProjectContainer_ShouldSerializeCurrentDatabase_" data-uid="Core2D.Containers.ProjectContainer.ShouldSerializeCurrentDatabase*"></a>
+  <h4 id="Core2D_Containers_ProjectContainer_ShouldSerializeCurrentDatabase" data-uid="Core2D.Containers.ProjectContainer.ShouldSerializeCurrentDatabase">ShouldSerializeCurrentDatabase()</h4>
+  <div class="markdown level1 summary"><p>Check whether the <a class="xref" href="Core2D.Containers.ProjectContainer.html#Core2D_Containers_ProjectContainer_CurrentDatabase">CurrentDatabase</a> property has changed from its default value.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual bool ShouldSerializeCurrentDatabase()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><p>Returns true if the property has changed; otherwise, returns false.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Containers_ProjectContainer_ShouldSerializeCurrentDocument.md&amp;value=---%0Auid%3A%20Core2D.Containers.ProjectContainer.ShouldSerializeCurrentDocument%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/ViewModels/Containers/ProjectContainer.cs/#L342">View Source</a>
+  </span>
+  <a id="Core2D_Containers_ProjectContainer_ShouldSerializeCurrentDocument_" data-uid="Core2D.Containers.ProjectContainer.ShouldSerializeCurrentDocument*"></a>
+  <h4 id="Core2D_Containers_ProjectContainer_ShouldSerializeCurrentDocument" data-uid="Core2D.Containers.ProjectContainer.ShouldSerializeCurrentDocument">ShouldSerializeCurrentDocument()</h4>
+  <div class="markdown level1 summary"><p>Check whether the <a class="xref" href="Core2D.Containers.ProjectContainer.html#Core2D_Containers_ProjectContainer_CurrentDocument">CurrentDocument</a> property has changed from its default value.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual bool ShouldSerializeCurrentDocument()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><p>Returns true if the property has changed; otherwise, returns false.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Containers_ProjectContainer_ShouldSerializeCurrentGroupLibrary.md&amp;value=---%0Auid%3A%20Core2D.Containers.ProjectContainer.ShouldSerializeCurrentGroupLibrary%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/ViewModels/Containers/ProjectContainer.cs/#L324">View Source</a>
+  </span>
+  <a id="Core2D_Containers_ProjectContainer_ShouldSerializeCurrentGroupLibrary_" data-uid="Core2D.Containers.ProjectContainer.ShouldSerializeCurrentGroupLibrary*"></a>
+  <h4 id="Core2D_Containers_ProjectContainer_ShouldSerializeCurrentGroupLibrary" data-uid="Core2D.Containers.ProjectContainer.ShouldSerializeCurrentGroupLibrary">ShouldSerializeCurrentGroupLibrary()</h4>
+  <div class="markdown level1 summary"><p>Check whether the <a class="xref" href="Core2D.Containers.ProjectContainer.html#Core2D_Containers_ProjectContainer_CurrentGroupLibrary">CurrentGroupLibrary</a> property has changed from its default value.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual bool ShouldSerializeCurrentGroupLibrary()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><p>Returns true if the property has changed; otherwise, returns false.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Containers_ProjectContainer_ShouldSerializeCurrentStyleLibrary.md&amp;value=---%0Auid%3A%20Core2D.Containers.ProjectContainer.ShouldSerializeCurrentStyleLibrary%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/ViewModels/Containers/ProjectContainer.cs/#L318">View Source</a>
+  </span>
+  <a id="Core2D_Containers_ProjectContainer_ShouldSerializeCurrentStyleLibrary_" data-uid="Core2D.Containers.ProjectContainer.ShouldSerializeCurrentStyleLibrary*"></a>
+  <h4 id="Core2D_Containers_ProjectContainer_ShouldSerializeCurrentStyleLibrary" data-uid="Core2D.Containers.ProjectContainer.ShouldSerializeCurrentStyleLibrary">ShouldSerializeCurrentStyleLibrary()</h4>
+  <div class="markdown level1 summary"><p>Check whether the <a class="xref" href="Core2D.Containers.ProjectContainer.html#Core2D_Containers_ProjectContainer_CurrentStyleLibrary">CurrentStyleLibrary</a> property has changed from its default value.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual bool ShouldSerializeCurrentStyleLibrary()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><p>Returns true if the property has changed; otherwise, returns false.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Containers_ProjectContainer_ShouldSerializeCurrentTemplate.md&amp;value=---%0Auid%3A%20Core2D.Containers.ProjectContainer.ShouldSerializeCurrentTemplate%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/ViewModels/Containers/ProjectContainer.cs/#L336">View Source</a>
+  </span>
+  <a id="Core2D_Containers_ProjectContainer_ShouldSerializeCurrentTemplate_" data-uid="Core2D.Containers.ProjectContainer.ShouldSerializeCurrentTemplate*"></a>
+  <h4 id="Core2D_Containers_ProjectContainer_ShouldSerializeCurrentTemplate" data-uid="Core2D.Containers.ProjectContainer.ShouldSerializeCurrentTemplate">ShouldSerializeCurrentTemplate()</h4>
+  <div class="markdown level1 summary"><p>Check whether the <a class="xref" href="Core2D.Containers.ProjectContainer.html#Core2D_Containers_ProjectContainer_CurrentTemplate">CurrentTemplate</a> property has changed from its default value.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual bool ShouldSerializeCurrentTemplate()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><p>Returns true if the property has changed; otherwise, returns false.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Containers_ProjectContainer_ShouldSerializeDatabases.md&amp;value=---%0Auid%3A%20Core2D.Containers.ProjectContainer.ShouldSerializeDatabases%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/ViewModels/Containers/ProjectContainer.cs/#L300">View Source</a>
+  </span>
+  <a id="Core2D_Containers_ProjectContainer_ShouldSerializeDatabases_" data-uid="Core2D.Containers.ProjectContainer.ShouldSerializeDatabases*"></a>
+  <h4 id="Core2D_Containers_ProjectContainer_ShouldSerializeDatabases" data-uid="Core2D.Containers.ProjectContainer.ShouldSerializeDatabases">ShouldSerializeDatabases()</h4>
+  <div class="markdown level1 summary"><p>Check whether the <a class="xref" href="Core2D.Containers.ProjectContainer.html#Core2D_Containers_ProjectContainer_Databases">Databases</a> property has changed from its default value.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual bool ShouldSerializeDatabases()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><p>Returns true if the property has changed; otherwise, returns false.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Containers_ProjectContainer_ShouldSerializeDocuments.md&amp;value=---%0Auid%3A%20Core2D.Containers.ProjectContainer.ShouldSerializeDocuments%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/ViewModels/Containers/ProjectContainer.cs/#L312">View Source</a>
+  </span>
+  <a id="Core2D_Containers_ProjectContainer_ShouldSerializeDocuments_" data-uid="Core2D.Containers.ProjectContainer.ShouldSerializeDocuments*"></a>
+  <h4 id="Core2D_Containers_ProjectContainer_ShouldSerializeDocuments" data-uid="Core2D.Containers.ProjectContainer.ShouldSerializeDocuments">ShouldSerializeDocuments()</h4>
+  <div class="markdown level1 summary"><p>Check whether the <a class="xref" href="Core2D.Containers.ProjectContainer.html#Core2D_Containers_ProjectContainer_Documents">Documents</a> property has changed from its default value.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual bool ShouldSerializeDocuments()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><p>Returns true if the property has changed; otherwise, returns false.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Containers_ProjectContainer_ShouldSerializeGroupLibraries.md&amp;value=---%0Auid%3A%20Core2D.Containers.ProjectContainer.ShouldSerializeGroupLibraries%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/ViewModels/Containers/ProjectContainer.cs/#L294">View Source</a>
+  </span>
+  <a id="Core2D_Containers_ProjectContainer_ShouldSerializeGroupLibraries_" data-uid="Core2D.Containers.ProjectContainer.ShouldSerializeGroupLibraries*"></a>
+  <h4 id="Core2D_Containers_ProjectContainer_ShouldSerializeGroupLibraries" data-uid="Core2D.Containers.ProjectContainer.ShouldSerializeGroupLibraries">ShouldSerializeGroupLibraries()</h4>
+  <div class="markdown level1 summary"><p>Check whether the <a class="xref" href="Core2D.Containers.ProjectContainer.html#Core2D_Containers_ProjectContainer_GroupLibraries">GroupLibraries</a> property has changed from its default value.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual bool ShouldSerializeGroupLibraries()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><p>Returns true if the property has changed; otherwise, returns false.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Containers_ProjectContainer_ShouldSerializeHistory.md&amp;value=---%0Auid%3A%20Core2D.Containers.ProjectContainer.ShouldSerializeHistory%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/ViewModels/Containers/ProjectContainer.cs/#L282">View Source</a>
+  </span>
+  <a id="Core2D_Containers_ProjectContainer_ShouldSerializeHistory_" data-uid="Core2D.Containers.ProjectContainer.ShouldSerializeHistory*"></a>
+  <h4 id="Core2D_Containers_ProjectContainer_ShouldSerializeHistory" data-uid="Core2D.Containers.ProjectContainer.ShouldSerializeHistory">ShouldSerializeHistory()</h4>
+  <div class="markdown level1 summary"><p>Check whether the <a class="xref" href="Core2D.Containers.ProjectContainer.html#Core2D_Containers_ProjectContainer_History">History</a> property has changed from its default value.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual bool ShouldSerializeHistory()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><p>Returns true if the property has changed; otherwise, returns false.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Containers_ProjectContainer_ShouldSerializeOptions.md&amp;value=---%0Auid%3A%20Core2D.Containers.ProjectContainer.ShouldSerializeOptions%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/ViewModels/Containers/ProjectContainer.cs/#L276">View Source</a>
+  </span>
+  <a id="Core2D_Containers_ProjectContainer_ShouldSerializeOptions_" data-uid="Core2D.Containers.ProjectContainer.ShouldSerializeOptions*"></a>
+  <h4 id="Core2D_Containers_ProjectContainer_ShouldSerializeOptions" data-uid="Core2D.Containers.ProjectContainer.ShouldSerializeOptions">ShouldSerializeOptions()</h4>
+  <div class="markdown level1 summary"><p>Check whether the <a class="xref" href="Core2D.Containers.ProjectContainer.html#Core2D_Containers_ProjectContainer_Options">Options</a> property has changed from its default value.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual bool ShouldSerializeOptions()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><p>Returns true if the property has changed; otherwise, returns false.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Containers_ProjectContainer_ShouldSerializeSelected.md&amp;value=---%0Auid%3A%20Core2D.Containers.ProjectContainer.ShouldSerializeSelected%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/ViewModels/Containers/ProjectContainer.cs/#L354">View Source</a>
+  </span>
+  <a id="Core2D_Containers_ProjectContainer_ShouldSerializeSelected_" data-uid="Core2D.Containers.ProjectContainer.ShouldSerializeSelected*"></a>
+  <h4 id="Core2D_Containers_ProjectContainer_ShouldSerializeSelected" data-uid="Core2D.Containers.ProjectContainer.ShouldSerializeSelected">ShouldSerializeSelected()</h4>
+  <div class="markdown level1 summary"><p>Check whether the <a class="xref" href="Core2D.Containers.ProjectContainer.html#Core2D_Containers_ProjectContainer_Selected">Selected</a> property has changed from its default value.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual bool ShouldSerializeSelected()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><p>Returns true if the property has changed; otherwise, returns false.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Containers_ProjectContainer_ShouldSerializeStyleLibraries.md&amp;value=---%0Auid%3A%20Core2D.Containers.ProjectContainer.ShouldSerializeStyleLibraries%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/ViewModels/Containers/ProjectContainer.cs/#L288">View Source</a>
+  </span>
+  <a id="Core2D_Containers_ProjectContainer_ShouldSerializeStyleLibraries_" data-uid="Core2D.Containers.ProjectContainer.ShouldSerializeStyleLibraries*"></a>
+  <h4 id="Core2D_Containers_ProjectContainer_ShouldSerializeStyleLibraries" data-uid="Core2D.Containers.ProjectContainer.ShouldSerializeStyleLibraries">ShouldSerializeStyleLibraries()</h4>
+  <div class="markdown level1 summary"><p>Check whether the <a class="xref" href="Core2D.Containers.ProjectContainer.html#Core2D_Containers_ProjectContainer_StyleLibraries">StyleLibraries</a> property has changed from its default value.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual bool ShouldSerializeStyleLibraries()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><p>Returns true if the property has changed; otherwise, returns false.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Containers_ProjectContainer_ShouldSerializeTemplates.md&amp;value=---%0Auid%3A%20Core2D.Containers.ProjectContainer.ShouldSerializeTemplates%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/ViewModels/Containers/ProjectContainer.cs/#L306">View Source</a>
+  </span>
+  <a id="Core2D_Containers_ProjectContainer_ShouldSerializeTemplates_" data-uid="Core2D.Containers.ProjectContainer.ShouldSerializeTemplates*"></a>
+  <h4 id="Core2D_Containers_ProjectContainer_ShouldSerializeTemplates" data-uid="Core2D.Containers.ProjectContainer.ShouldSerializeTemplates">ShouldSerializeTemplates()</h4>
+  <div class="markdown level1 summary"><p>Check whether the <a class="xref" href="Core2D.Containers.ProjectContainer.html#Core2D_Containers_ProjectContainer_Templates">Templates</a> property has changed from its default value.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual bool ShouldSerializeTemplates()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><p>Returns true if the property has changed; otherwise, returns false.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="implements">Implements</h3>
+  <div>
+      <a class="xref" href="Core2D.Containers.IProjectContainer.html">IProjectContainer</a>
+  </div>
+  <div>
+      <a class="xref" href="Core2D.Containers.IBaseContainer.html">IBaseContainer</a>
+  </div>
+  <div>
+      <a class="xref" href="Core2D.Renderer.IImageCache.html">IImageCache</a>
+  </div>
+  <div>
+      <a class="xref" href="Core2D.IObservableObject.html">IObservableObject</a>
+  </div>
+  <div>
+      <span class="xref">System.ComponentModel.INotifyPropertyChanged</span>
+  </div>
+  <div>
+      <a class="xref" href="Core2D.ICopyable.html">ICopyable</a>
+  </div>
+  <h3 id="extensionmethods">Extension Methods</h3>
+  <div>
+      <a class="xref" href="Core2D.Editor.ProjectExtensions.html#Core2D_Editor_ProjectExtensions_AddDocument_Core2D_Containers_IProjectContainer_Core2D_Containers_IDocumentContainer_">ProjectExtensions.AddDocument(IProjectContainer, IDocumentContainer)</a>
+  </div>
+  <div>
+      <a class="xref" href="Core2D.Editor.ProjectExtensions.html#Core2D_Editor_ProjectExtensions_AddDocumentAt_Core2D_Containers_IProjectContainer_Core2D_Containers_IDocumentContainer_System_Int32_">ProjectExtensions.AddDocumentAt(IProjectContainer, IDocumentContainer, Int32)</a>
+  </div>
+  <div>
+      <a class="xref" href="Core2D.Editor.ProjectExtensions.html#Core2D_Editor_ProjectExtensions_RemoveDocument_Core2D_Containers_IProjectContainer_Core2D_Containers_IDocumentContainer_">ProjectExtensions.RemoveDocument(IProjectContainer, IDocumentContainer)</a>
+  </div>
+  <div>
+      <a class="xref" href="Core2D.Editor.ProjectExtensions.html#Core2D_Editor_ProjectExtensions_ReplaceDocument_Core2D_Containers_IProjectContainer_Core2D_Containers_IDocumentContainer_System_Int32_">ProjectExtensions.ReplaceDocument(IProjectContainer, IDocumentContainer, Int32)</a>
+  </div>
+  <div>
+      <a class="xref" href="Core2D.Editor.ProjectExtensions.html#Core2D_Editor_ProjectExtensions_AddPage_Core2D_Containers_IProjectContainer_Core2D_Containers_IDocumentContainer_Core2D_Containers_IPageContainer_">ProjectExtensions.AddPage(IProjectContainer, IDocumentContainer, IPageContainer)</a>
+  </div>
+  <div>
+      <a class="xref" href="Core2D.Editor.ProjectExtensions.html#Core2D_Editor_ProjectExtensions_AddPageAt_Core2D_Containers_IProjectContainer_Core2D_Containers_IDocumentContainer_Core2D_Containers_IPageContainer_System_Int32_">ProjectExtensions.AddPageAt(IProjectContainer, IDocumentContainer, IPageContainer, Int32)</a>
+  </div>
+  <div>
+      <a class="xref" href="Core2D.Editor.ProjectExtensions.html#Core2D_Editor_ProjectExtensions_RemovePage_Core2D_Containers_IProjectContainer_Core2D_Containers_IPageContainer_">ProjectExtensions.RemovePage(IProjectContainer, IPageContainer)</a>
+  </div>
+  <div>
+      <a class="xref" href="Core2D.Editor.ProjectExtensions.html#Core2D_Editor_ProjectExtensions_ReplacePage_Core2D_Containers_IProjectContainer_Core2D_Containers_IDocumentContainer_Core2D_Containers_IPageContainer_System_Int32_">ProjectExtensions.ReplacePage(IProjectContainer, IDocumentContainer, IPageContainer, Int32)</a>
+  </div>
+  <div>
+      <a class="xref" href="Core2D.Editor.ProjectExtensions.html#Core2D_Editor_ProjectExtensions_AddTemplate_Core2D_Containers_IProjectContainer_Core2D_Containers_IPageContainer_">ProjectExtensions.AddTemplate(IProjectContainer, IPageContainer)</a>
+  </div>
+  <div>
+      <a class="xref" href="Core2D.Editor.ProjectExtensions.html#Core2D_Editor_ProjectExtensions_AddTemplates_Core2D_Containers_IProjectContainer_System_Collections_Generic_IEnumerable_Core2D_Containers_IPageContainer__">ProjectExtensions.AddTemplates(IProjectContainer, IEnumerable&lt;IPageContainer&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="Core2D.Editor.ProjectExtensions.html#Core2D_Editor_ProjectExtensions_RemoveTemplate_Core2D_Containers_IProjectContainer_Core2D_Containers_IPageContainer_">ProjectExtensions.RemoveTemplate(IProjectContainer, IPageContainer)</a>
+  </div>
+  <div>
+      <a class="xref" href="Core2D.Editor.ProjectExtensions.html#Core2D_Editor_ProjectExtensions_ApplyTemplate_Core2D_Containers_IProjectContainer_Core2D_Containers_IPageContainer_Core2D_Containers_IPageContainer_">ProjectExtensions.ApplyTemplate(IProjectContainer, IPageContainer, IPageContainer)</a>
+  </div>
+  <div>
+      <a class="xref" href="Core2D.Editor.ProjectExtensions.html#Core2D_Editor_ProjectExtensions_AddLayer_Core2D_Containers_IProjectContainer_Core2D_Containers_IPageContainer_Core2D_Containers_ILayerContainer_">ProjectExtensions.AddLayer(IProjectContainer, IPageContainer, ILayerContainer)</a>
+  </div>
+  <div>
+      <a class="xref" href="Core2D.Editor.ProjectExtensions.html#Core2D_Editor_ProjectExtensions_RemoveLayer_Core2D_Containers_IProjectContainer_Core2D_Containers_ILayerContainer_">ProjectExtensions.RemoveLayer(IProjectContainer, ILayerContainer)</a>
+  </div>
+  <div>
+      <a class="xref" href="Core2D.Editor.ProjectExtensions.html#Core2D_Editor_ProjectExtensions_ClearLayer_Core2D_Containers_IProjectContainer_Core2D_Containers_ILayerContainer_">ProjectExtensions.ClearLayer(IProjectContainer, ILayerContainer)</a>
+  </div>
+  <div>
+      <a class="xref" href="Core2D.Editor.ProjectExtensions.html#Core2D_Editor_ProjectExtensions_AddShape_Core2D_Containers_IProjectContainer_Core2D_Containers_ILayerContainer_Core2D_Shapes_IBaseShape_">ProjectExtensions.AddShape(IProjectContainer, ILayerContainer, IBaseShape)</a>
+  </div>
+  <div>
+      <a class="xref" href="Core2D.Editor.ProjectExtensions.html#Core2D_Editor_ProjectExtensions_AddShapeAt_Core2D_Containers_IProjectContainer_Core2D_Containers_ILayerContainer_Core2D_Shapes_IBaseShape_System_Int32_">ProjectExtensions.AddShapeAt(IProjectContainer, ILayerContainer, IBaseShape, Int32)</a>
+  </div>
+  <div>
+      <a class="xref" href="Core2D.Editor.ProjectExtensions.html#Core2D_Editor_ProjectExtensions_AddShapes_Core2D_Containers_IProjectContainer_Core2D_Containers_ILayerContainer_System_Collections_Generic_IEnumerable_Core2D_Shapes_IBaseShape__">ProjectExtensions.AddShapes(IProjectContainer, ILayerContainer, IEnumerable&lt;IBaseShape&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="Core2D.Editor.ProjectExtensions.html#Core2D_Editor_ProjectExtensions_RemoveShape_Core2D_Containers_IProjectContainer_Core2D_Containers_ILayerContainer_Core2D_Shapes_IBaseShape_">ProjectExtensions.RemoveShape(IProjectContainer, ILayerContainer, IBaseShape)</a>
+  </div>
+  <div>
+      <a class="xref" href="Core2D.Editor.ProjectExtensions.html#Core2D_Editor_ProjectExtensions_RemoveShape_Core2D_Containers_IProjectContainer_Core2D_Shapes_IBaseShape_">ProjectExtensions.RemoveShape(IProjectContainer, IBaseShape)</a>
+  </div>
+  <div>
+      <a class="xref" href="Core2D.Editor.ProjectExtensions.html#Core2D_Editor_ProjectExtensions_ReplaceShape_Core2D_Containers_IProjectContainer_Core2D_Containers_ILayerContainer_Core2D_Shapes_IBaseShape_System_Int32_">ProjectExtensions.ReplaceShape(IProjectContainer, ILayerContainer, IBaseShape, Int32)</a>
+  </div>
+  <div>
+      <a class="xref" href="Core2D.Editor.ProjectExtensions.html#Core2D_Editor_ProjectExtensions_SwapShape_Core2D_Containers_IProjectContainer_Core2D_Containers_ILayerContainer_Core2D_Shapes_IBaseShape_System_Int32_System_Int32_">ProjectExtensions.SwapShape(IProjectContainer, ILayerContainer, IBaseShape, Int32, Int32)</a>
+  </div>
+  <div>
+      <a class="xref" href="Core2D.Editor.ProjectExtensions.html#Core2D_Editor_ProjectExtensions_AddProperty_Core2D_Containers_IProjectContainer_Core2D_Data_IContext_Core2D_Data_IProperty_">ProjectExtensions.AddProperty(IProjectContainer, IContext, IProperty)</a>
+  </div>
+  <div>
+      <a class="xref" href="Core2D.Editor.ProjectExtensions.html#Core2D_Editor_ProjectExtensions_RemoveProperty_Core2D_Containers_IProjectContainer_Core2D_Data_IProperty_">ProjectExtensions.RemoveProperty(IProjectContainer, IProperty)</a>
+  </div>
+  <div>
+      <a class="xref" href="Core2D.Editor.ProjectExtensions.html#Core2D_Editor_ProjectExtensions_AddDatabase_Core2D_Containers_IProjectContainer_Core2D_Data_IDatabase_">ProjectExtensions.AddDatabase(IProjectContainer, IDatabase)</a>
+  </div>
+  <div>
+      <a class="xref" href="Core2D.Editor.ProjectExtensions.html#Core2D_Editor_ProjectExtensions_RemoveDatabase_Core2D_Containers_IProjectContainer_Core2D_Data_IDatabase_">ProjectExtensions.RemoveDatabase(IProjectContainer, IDatabase)</a>
+  </div>
+  <div>
+      <a class="xref" href="Core2D.Editor.ProjectExtensions.html#Core2D_Editor_ProjectExtensions_UpdateDatabase_Core2D_Containers_IProjectContainer_Core2D_Data_IDatabase_Core2D_Data_IDatabase_">ProjectExtensions.UpdateDatabase(IProjectContainer, IDatabase, IDatabase)</a>
+  </div>
+  <div>
+      <a class="xref" href="Core2D.Editor.ProjectExtensions.html#Core2D_Editor_ProjectExtensions_AddColumn_Core2D_Containers_IProjectContainer_Core2D_Data_IDatabase_Core2D_Data_IColumn_">ProjectExtensions.AddColumn(IProjectContainer, IDatabase, IColumn)</a>
+  </div>
+  <div>
+      <a class="xref" href="Core2D.Editor.ProjectExtensions.html#Core2D_Editor_ProjectExtensions_RemoveColumn_Core2D_Containers_IProjectContainer_Core2D_Data_IColumn_">ProjectExtensions.RemoveColumn(IProjectContainer, IColumn)</a>
+  </div>
+  <div>
+      <a class="xref" href="Core2D.Editor.ProjectExtensions.html#Core2D_Editor_ProjectExtensions_AddRecord_Core2D_Containers_IProjectContainer_Core2D_Data_IDatabase_Core2D_Data_IRecord_">ProjectExtensions.AddRecord(IProjectContainer, IDatabase, IRecord)</a>
+  </div>
+  <div>
+      <a class="xref" href="Core2D.Editor.ProjectExtensions.html#Core2D_Editor_ProjectExtensions_RemoveRecord_Core2D_Containers_IProjectContainer_Core2D_Data_IRecord_">ProjectExtensions.RemoveRecord(IProjectContainer, IRecord)</a>
+  </div>
+  <div>
+      <a class="xref" href="Core2D.Editor.ProjectExtensions.html#Core2D_Editor_ProjectExtensions_ResetRecord_Core2D_Containers_IProjectContainer_Core2D_Data_IContext_">ProjectExtensions.ResetRecord(IProjectContainer, IContext)</a>
+  </div>
+  <div>
+      <a class="xref" href="Core2D.Editor.ProjectExtensions.html#Core2D_Editor_ProjectExtensions_ApplyRecord_Core2D_Containers_IProjectContainer_Core2D_Data_IContext_Core2D_Data_IRecord_">ProjectExtensions.ApplyRecord(IProjectContainer, IContext, IRecord)</a>
+  </div>
+  <div>
+      <a class="xref" href="Core2D.Editor.ProjectExtensions.html#Core2D_Editor_ProjectExtensions_ApplyData_Core2D_Containers_IProjectContainer_Core2D_Shapes_IBaseShape_Core2D_Data_IContext_">ProjectExtensions.ApplyData(IProjectContainer, IBaseShape, IContext)</a>
+  </div>
+  <div>
+      <a class="xref" href="Core2D.Editor.ProjectExtensions.html#Core2D_Editor_ProjectExtensions_AddGroupLibrary_Core2D_Containers_IProjectContainer_Core2D_Containers_ILibrary_Core2D_Shapes_IGroupShape__">ProjectExtensions.AddGroupLibrary(IProjectContainer, ILibrary&lt;IGroupShape&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="Core2D.Editor.ProjectExtensions.html#Core2D_Editor_ProjectExtensions_AddGroupLibraries_Core2D_Containers_IProjectContainer_System_Collections_Generic_IEnumerable_Core2D_Containers_ILibrary_Core2D_Shapes_IGroupShape___">ProjectExtensions.AddGroupLibraries(IProjectContainer, IEnumerable&lt;ILibrary&lt;IGroupShape&gt;&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="Core2D.Editor.ProjectExtensions.html#Core2D_Editor_ProjectExtensions_RemoveGroupLibrary_Core2D_Containers_IProjectContainer_Core2D_Containers_ILibrary_Core2D_Shapes_IGroupShape__">ProjectExtensions.RemoveGroupLibrary(IProjectContainer, ILibrary&lt;IGroupShape&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="Core2D.Editor.ProjectExtensions.html#Core2D_Editor_ProjectExtensions_AddStyleLibrary_Core2D_Containers_IProjectContainer_Core2D_Containers_ILibrary_Core2D_Style_IShapeStyle__">ProjectExtensions.AddStyleLibrary(IProjectContainer, ILibrary&lt;IShapeStyle&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="Core2D.Editor.ProjectExtensions.html#Core2D_Editor_ProjectExtensions_AddStyleLibraries_Core2D_Containers_IProjectContainer_System_Collections_Generic_IEnumerable_Core2D_Containers_ILibrary_Core2D_Style_IShapeStyle___">ProjectExtensions.AddStyleLibraries(IProjectContainer, IEnumerable&lt;ILibrary&lt;IShapeStyle&gt;&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="Core2D.Editor.ProjectExtensions.html#Core2D_Editor_ProjectExtensions_RemoveStyleLibrary_Core2D_Containers_IProjectContainer_Core2D_Containers_ILibrary_Core2D_Style_IShapeStyle__">ProjectExtensions.RemoveStyleLibrary(IProjectContainer, ILibrary&lt;IShapeStyle&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="Core2D.Editor.ProjectExtensions.html#Core2D_Editor_ProjectExtensions_AddStyle_Core2D_Containers_IProjectContainer_Core2D_Containers_ILibrary_Core2D_Style_IShapeStyle__Core2D_Style_IShapeStyle_">ProjectExtensions.AddStyle(IProjectContainer, ILibrary&lt;IShapeStyle&gt;, IShapeStyle)</a>
+  </div>
+  <div>
+      <a class="xref" href="Core2D.Editor.ProjectExtensions.html#Core2D_Editor_ProjectExtensions_RemoveStyle_Core2D_Containers_IProjectContainer_Core2D_Style_IShapeStyle_">ProjectExtensions.RemoveStyle(IProjectContainer, IShapeStyle)</a>
+  </div>
+  <div>
+      <a class="xref" href="Core2D.Editor.ProjectExtensions.html#Core2D_Editor_ProjectExtensions_ApplyStyle_Core2D_Containers_IProjectContainer_Core2D_Shapes_IBaseShape_Core2D_Style_IShapeStyle_">ProjectExtensions.ApplyStyle(IProjectContainer, IBaseShape, IShapeStyle)</a>
+  </div>
+  <div>
+      <a class="xref" href="Core2D.Editor.ProjectExtensions.html#Core2D_Editor_ProjectExtensions_AddGroup_Core2D_Containers_IProjectContainer_Core2D_Containers_ILibrary_Core2D_Shapes_IGroupShape__Core2D_Shapes_IGroupShape_">ProjectExtensions.AddGroup(IProjectContainer, ILibrary&lt;IGroupShape&gt;, IGroupShape)</a>
+  </div>
+  <div>
+      <a class="xref" href="Core2D.Editor.ProjectExtensions.html#Core2D_Editor_ProjectExtensions_RemoveGroup_Core2D_Containers_IProjectContainer_Core2D_Shapes_IGroupShape_">ProjectExtensions.RemoveGroup(IProjectContainer, IGroupShape)</a>
+  </div>
+  <div>
+      <a class="xref" href="Core2D.Editor.ProjectExtensions.html#Core2D_Editor_ProjectExtensions_AddItem__1_Core2D_Containers_IProjectContainer_Core2D_Containers_ILibrary___0____0_">ProjectExtensions.AddItem&lt;T&gt;(IProjectContainer, ILibrary&lt;T&gt;, T)</a>
+  </div>
+  <div>
+      <a class="xref" href="Core2D.Editor.ProjectExtensions.html#Core2D_Editor_ProjectExtensions_AddItems__1_Core2D_Containers_IProjectContainer_Core2D_Containers_ILibrary___0__System_Collections_Generic_IEnumerable___0__">ProjectExtensions.AddItems&lt;T&gt;(IProjectContainer, ILibrary&lt;T&gt;, IEnumerable&lt;T&gt;)</a>
+  </div>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Containers_ProjectContainer.md&amp;value=---%0Auid%3A%20Core2D.Containers.ProjectContainer%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/ViewModels/Containers/ProjectContainer.IImageCache.cs/#L10" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            <span>Copyright © (c) Wiesław Šoltés<br>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>
