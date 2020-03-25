@@ -1,5 +1,6 @@
+# DocFX
 
-# Mono
+### Mono
 
 https://www.mono-project.com/download/stable/#download-lin-ubuntu
 
@@ -14,7 +15,7 @@ sudo apt update
 sudo apt install mono-devel
 ```
 
-# DocFX
+### DocFX
 
 https://github.com/dotnet/docfx
 
@@ -24,14 +25,14 @@ unzip -q docfx.zip -d docfx
 rm docfx.zip
 ```
 
-# Docs
+### Docs
 
 ```
 mono ./docfx/docfx.exe metadata
 mono ./docfx/docfx.exe build -o ../docs
 ```
 
-# Serve
+### Serve
 
 ```
 mono ./docfx/docfx.exe serve _site
