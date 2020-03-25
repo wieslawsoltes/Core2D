@@ -59,24 +59,24 @@
   </ItemGroup>
 
   <ItemGroup Condition="'$(CoreRT)' == 'True'">
-    <RdXmlFile Include="..\..\build\native\netcore.rd.xml" />
-    <RdXmlFile Include="..\..\build\native\app.rd.xml" />
-    <RdXmlFile Include="..\..\build\native\avalonia.rd.xml" />
-    <RdXmlFile Include="..\..\build\native\avalonia.linux.rd.xml" Condition="'$(RuntimeIdentifier)' == 'linux-x64'" />
-    <RdXmlFile Include="..\..\build\native\avalonia.osx.rd.xml" Condition="'$(RuntimeIdentifier)' == 'osx-x64'" />
-    <RdXmlFile Include="..\..\build\native\avalonia.win.rd.xml" Condition="'$(RuntimeIdentifier)' == 'win-x64'" />
-    <RdXmlFile Include="..\..\build\native\avalonia.reactiveui.rd.xml" />
-    <RdXmlFile Include="..\..\build\native\avalonia.behaviors.rd.xml" />
-    <RdXmlFile Include="..\..\build\native\avalonia.panandzoom.rd.xml" />
-    <RdXmlFile Include="..\..\build\native\avalonia.thememanager.rd.xml" />
-    <RdXmlFile Include="..\..\build\native\autofac.rd.xml" />
-    <RdXmlFile Include="..\..\build\native\dock.rd.xml" />
-    <RdXmlFile Include="..\..\build\native\csvhelper.rd.xml" />
-    <RdXmlFile Include="..\..\build\native\netdxf.rd.xml" />
-    <RdXmlFile Include="..\..\build\native\newtonsoft.json.rd.xml" />
-    <RdXmlFile Include="..\..\build\native\portable.xaml.rd.xml" />
-    <!--<RdXmlFile Include="..\..\build\native\roslyn.rd.xml"/>-->
-    <RdXmlFile Include="..\..\build\native\rx.rd.xml" />
+    <RdXmlFile Include="Native\netcore.rd.xml" />
+    <RdXmlFile Include="Native\app.rd.xml" />
+    <RdXmlFile Include="Native\avalonia.rd.xml" />
+    <RdXmlFile Include="Native\avalonia.linux.rd.xml" Condition="'$(RuntimeIdentifier)' == 'linux-x64'" />
+    <RdXmlFile Include="Native\avalonia.osx.rd.xml" Condition="'$(RuntimeIdentifier)' == 'osx-x64'" />
+    <RdXmlFile Include="Native\avalonia.win.rd.xml" Condition="'$(RuntimeIdentifier)' == 'win-x64'" />
+    <RdXmlFile Include="Native\avalonia.reactiveui.rd.xml" />
+    <RdXmlFile Include="Native\avalonia.behaviors.rd.xml" />
+    <RdXmlFile Include="Native\avalonia.panandzoom.rd.xml" />
+    <RdXmlFile Include="Native\avalonia.thememanager.rd.xml" />
+    <RdXmlFile Include="Native\autofac.rd.xml" />
+    <RdXmlFile Include="Native\dock.rd.xml" />
+    <RdXmlFile Include="Native\csvhelper.rd.xml" />
+    <RdXmlFile Include="Native\netdxf.rd.xml" />
+    <RdXmlFile Include="Native\newtonsoft.json.rd.xml" />
+    <RdXmlFile Include="Native\portable.xaml.rd.xml" />
+    <!--<RdXmlFile Include="Native\roslyn.rd.xml"/>-->
+    <RdXmlFile Include="Native\rx.rd.xml" />
     <IlcArg Include="--stacktracedata" />
   </ItemGroup>
 
