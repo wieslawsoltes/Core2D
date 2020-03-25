@@ -17,7 +17,7 @@
     "content":
       [
         {
-          "files": ["**/*.yml", "index.md", "tutorial/*.md"],
+          "files": ["**/*.yml", "index.md", "tutorial/*.md"]
         }
       ],
     "resource": [
