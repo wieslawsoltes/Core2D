@@ -40,6 +40,21 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{4E69634B-A
 		README.md = README.md
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docfx", "docfx", "{A23317B4-0904-45C4-9C3F-2CC962DB54FE}"
+	ProjectSection(SolutionItems) = preProject
+		docfx\docfx.json = docfx\docfx.json
+		docfx\index.md = docfx\index.md
+		docfx\README.md = docfx\README.md
+		docfx\toc.yml = docfx\toc.yml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "template", "template", "{BC4DDD60-335A-438C-9110-920D2649AE2B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "partials", "partials", "{B11B8BD0-359E-4F34-A241-C8ADA02C0335}"
+	ProjectSection(SolutionItems) = preProject
+		docfx\template\partials\footer.tmpl.partial = docfx\template\partials\footer.tmpl.partial
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -96,6 +111,9 @@ Global
 		{2CC44420-ACDE-4900-B42A-4EAE4D98CE1D} = {840A1FC4-57A8-4F50-A6BD-367A014B45B6}
 		{4CCF5533-2ED5-4B7B-9C15-3F74D97EFC01} = {840A1FC4-57A8-4F50-A6BD-367A014B45B6}
 		{FFD5A92F-624B-48BB-AD9F-E1C7D40A411B} = {840A1FC4-57A8-4F50-A6BD-367A014B45B6}
+		{A23317B4-0904-45C4-9C3F-2CC962DB54FE} = {4E69634B-A32B-49BD-B7E4-6D7932A6CBAF}
+		{BC4DDD60-335A-438C-9110-920D2649AE2B} = {A23317B4-0904-45C4-9C3F-2CC962DB54FE}
+		{B11B8BD0-359E-4F34-A241-C8ADA02C0335} = {BC4DDD60-335A-438C-9110-920D2649AE2B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2CC6B469-D031-4BC3-9A10-BD9600D7BF73}
