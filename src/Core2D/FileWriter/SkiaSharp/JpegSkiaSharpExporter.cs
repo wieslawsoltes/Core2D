@@ -33,6 +33,7 @@ namespace Core2D.FileWriter.SkiaSharpJpeg
             using var bitmap = new SKBitmap(info);
             using (var canvas = new SKCanvas(bitmap))
             {
+                canvas.Clear();
                 _presenter.Render(canvas, _renderer, container, 0, 0);
             }
             using var image = SKImage.FromBitmap(bitmap);
