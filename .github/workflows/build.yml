@@ -28,7 +28,7 @@ jobs:
       run: dotnet test -c Release
 
   publish-windows:
-    name: Publish Windows
+    name: Publish windows-latest
     runs-on: windows-latest
     steps:
     - uses: actions/checkout@v1
@@ -45,7 +45,7 @@ jobs:
         path: ./artifacts/Core2D-netcoreapp3.1-win7-x64
 
   publish-ubuntu:
-    name: Publish Ubuntu
+    name: Publish ubuntu-latest
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
@@ -62,7 +62,7 @@ jobs:
         path: ./artifacts/Core2D-netcoreapp3.1-ubuntu.14.04-x64
 
   publish-macos:
-    name: Publish macOS
+    name: Publish macos-latest
     runs-on: macos-latest
     steps:
     - uses: actions/checkout@v1
