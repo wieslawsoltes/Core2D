@@ -1,13 +1,13 @@
 ﻿using Avalonia;
+using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
-using Dock.Avalonia.Controls;
 
 namespace Core2D.UI.Avalonia.Windows
 {
     /// <summary>
     /// Interaction logic for <see cref="ScriptWindow"/> xaml.
     /// </summary>
-    public class ScriptWindow : MetroWindow
+    public class ScriptWindow : Window
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ScriptWindow"/> class.

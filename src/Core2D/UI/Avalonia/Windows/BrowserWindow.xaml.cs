@@ -1,13 +1,13 @@
 ﻿using Avalonia;
+using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
-using Dock.Avalonia.Controls;
 
 namespace Core2D.UI.Avalonia.Windows
 {
     /// <summary>
     /// Interaction logic for <see cref="BrowserWindow"/> xaml.
     /// </summary>
-    public class BrowserWindow : MetroWindow
+    public class BrowserWindow : Window
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="BrowserWindow"/> class.

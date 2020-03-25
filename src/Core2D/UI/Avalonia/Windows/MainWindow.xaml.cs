@@ -1,13 +1,13 @@
 ﻿using Avalonia;
+using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
-using Dock.Avalonia.Controls;
 
 namespace Core2D.UI.Avalonia.Windows
 {
     /// <summary>
     /// Interaction logic for <see cref="MainWindow"/> xaml.
     /// </summary>
-    public class MainWindow : MetroWindow
+    public class MainWindow : Window
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="MainWindow"/> class.
