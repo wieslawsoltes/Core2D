@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using Core2D.Containers;
+using Core2D.History;
 using Core2D.Renderer;
 using Core2D.Shapes;
 using Core2D.Style;
