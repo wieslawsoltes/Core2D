@@ -131,8 +131,8 @@ namespace Core2D.Editor.Factories
             var layer = template.Layers.FirstOrDefault();
             var builder = layer.Shapes.ToBuilder();
             var grid = factory.CreateRectangleShape(
-                0, 0,
-                template.Width, template.Height,
+                30.0, 30.0,
+                template.Width - 30.0, template.Height - 30.0,
                 style,
                 project.Options.PointShape);
             grid.IsStroked = true;
