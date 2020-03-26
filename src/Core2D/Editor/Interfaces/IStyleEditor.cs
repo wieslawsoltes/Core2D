@@ -17,6 +17,66 @@ namespace Core2D.Editor
         void OnPasteStyle();
 
         /// <summary>
+        /// Copy stroke.
+        /// </summary>
+        void OnCopyStroke();
+
+        /// <summary>
+        /// Paste stroke
+        /// </summary>
+        void OnPasteStroke();
+
+        /// <summary>
+        /// Copy fill.
+        /// </summary>
+        void OnCopyFill();
+
+        /// <summary>
+        /// Paste fill
+        /// </summary>
+        void OnPasteFill();
+
+        /// <summary>
+        /// Copy line style.
+        /// </summary>
+        void OnCopyLineStyle();
+
+        /// <summary>
+        /// Paste line style
+        /// </summary>
+        void OnPasteLineStyle();
+
+        /// <summary>
+        /// Copy start arrow style.
+        /// </summary>
+        void OnCopyStartArrowStyle();
+
+        /// <summary>
+        /// Paste start arrow style
+        /// </summary>
+        void OnPasteStartArrowStyle();
+
+        /// <summary>
+        /// Copy end arrow style.
+        /// </summary>
+        void OnCopyEndArrowStyle();
+
+        /// <summary>
+        /// PasteEndArrowStyle
+        /// </summary>
+        void OnPasteEndArrowStyle();
+
+        /// <summary>
+        /// Copy text style.
+        /// </summary>
+        void OnCopyTextStyle();
+
+        /// <summary>
+        /// Paste text style.
+        /// </summary>
+        void OnPasteTextStyle();
+
+        /// <summary>
         /// Set style thickness.
         /// </summary>
         /// <param name="thickness">The style thickness.</param>
