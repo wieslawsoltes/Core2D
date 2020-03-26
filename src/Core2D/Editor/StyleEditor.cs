@@ -9,423 +9,6 @@ using Core2D.Style;
 
 namespace Core2D.Editor
 {
-    internal static class ShapeExtensions
-    {
-        public static void SetThickness(this IBaseShape shape, double value)
-        {
-            var style = shape.Style;
-            if (style != null)
-            {
-                style.Thickness = value;
-            }
-        }
-
-        public static void SetLineCap(this IBaseShape shape, LineCap value)
-        {
-            var style = shape.Style;
-            if (style != null)
-            {
-                style.LineCap = value;
-            }
-        }
-
-        public static void SetDashes(this IBaseShape shape, string dashes)
-        {
-            var style = shape.Style;
-            if (style != null)
-            {
-                style.Dashes = dashes;
-            }
-        }
-
-        public static void SetDashOffset(this IBaseShape shape, double value)
-        {
-            var style = shape.Style;
-            if (style != null)
-            {
-                style.DashOffset = value;
-            }
-        }
-
-        public static void SetStroke(this IBaseShape shape, IColor value)
-        {
-            var style = shape.Style;
-            if (style != null)
-            {
-                style.Stroke = (IColor)value.Copy(null);
-            }
-        }
-
-        public static void SetStrokeTransparency(this IBaseShape shape, byte value)
-        {
-            var style = shape.Style;
-            if (style != null && style.Stroke is IArgbColor argbColor)
-            {
-                argbColor.A = value;
-            }
-        }
-
-        public static void SetFill(this IBaseShape shape, IColor value)
-        {
-            var style = shape.Style;
-            if (style != null)
-            {
-                style.Fill = (IColor)value.Copy(null);
-            }
-        }
-
-        public static void SetFillTransparency(this IBaseShape shape, byte value)
-        {
-            var style = shape.Style;
-            if (style != null && style.Fill is IArgbColor argbColor)
-            {
-                argbColor.A = value;
-            }
-        }
-
-        public static void SetFontName(this IBaseShape shape, string fontName)
-        {
-            var style = shape.Style;
-            if (style != null && style.TextStyle != null)
-            {
-                style.TextStyle.FontName = fontName;
-            }
-        }
-
-        public static void SetFontStyle(this IBaseShape shape, FontStyleFlags value)
-        {
-            var style = shape.Style;
-            if (style != null && style.TextStyle != null && style.TextStyle.FontStyle != null)
-            {
-                style.TextStyle.FontStyle.Flags ^= value;
-            }
-        }
-
-        public static void SetFontSize(this IBaseShape shape, double value)
-        {
-            var style = shape.Style;
-            if (style != null && style.TextStyle != null)
-            {
-                style.TextStyle.FontSize = value;
-            }
-        }
-
-        public static void SetTextHAlignment(this IBaseShape shape, TextHAlignment value)
-        {
-            var style = shape.Style;
-            if (style != null && style.TextStyle != null)
-            {
-                style.TextStyle.TextHAlignment = value;
-            }
-        }
-
-        public static void SetTextVAlignment(this IBaseShape shape, TextVAlignment value)
-        {
-            var style = shape.Style;
-            if (style != null && style.TextStyle != null)
-            {
-                style.TextStyle.TextVAlignment = value;
-            }
-        }
-
-        public static void ToggleLineIsCurved(this IBaseShape shape)
-        {
-            var style = shape.Style;
-            if (style != null && style.LineStyle != null)
-            {
-                style.LineStyle.IsCurved = !style.LineStyle.IsCurved;
-            }
-        }
-
-        public static void SetLineCurvature(this IBaseShape shape, double value)
-        {
-            var style = shape.Style;
-            if (style != null && style.LineStyle != null)
-            {
-                style.LineStyle.Curvature = value;
-            }
-        }
-
-        public static void SetLineCurveOrientation(this IBaseShape shape, CurveOrientation value)
-        {
-            var style = shape.Style;
-            if (style != null && style.LineStyle != null)
-            {
-                style.LineStyle.CurveOrientation = value;
-            }
-        }
-
-        public static void SetLineFixedLength(this IBaseShape shape, double value)
-        {
-            var style = shape.Style;
-            if (style != null && style.LineStyle != null && style.LineStyle.FixedLength != null)
-            {
-                style.LineStyle.FixedLength.Length = value;
-            }
-        }
-
-        public static void ToggleLineFixedLengthFlags(this IBaseShape shape, LineFixedLengthFlags value)
-        {
-            var style = shape.Style;
-            if (style != null && style.LineStyle != null && style.LineStyle.FixedLength != null)
-            {
-                style.LineStyle.FixedLength.Flags ^= value;
-            }
-        }
-
-        public static void ToggleLineFixedLengthStartTrigger(this IBaseShape shape, ShapeStateFlags value)
-        {
-            var style = shape.Style;
-            if (style != null && style.LineStyle != null && style.LineStyle.FixedLength != null && style.LineStyle.FixedLength.StartTrigger != null)
-            {
-                style.LineStyle.FixedLength.StartTrigger.Flags ^= value;
-            }
-        }
-
-        public static void ToggleLineFixedLengthEndTrigger(this IBaseShape shape, ShapeStateFlags value)
-        {
-            var style = shape.Style;
-            if (style != null && style.LineStyle != null && style.LineStyle.FixedLength != null && style.LineStyle.FixedLength.EndTrigger != null)
-            {
-                style.LineStyle.FixedLength.EndTrigger.Flags ^= value;
-            }
-        }
-
-        public static void SetStartArrowType(this IBaseShape shape, ArrowType value)
-        {
-            var style = shape.Style;
-            if (style != null && style.StartArrowStyle != null)
-            {
-                style.StartArrowStyle.ArrowType = value;
-            }
-        }
-
-        public static void ToggleStartArrowIsStroked(this IBaseShape shape)
-        {
-            var style = shape.Style;
-            if (style != null && style.StartArrowStyle != null)
-            {
-                style.StartArrowStyle.IsStroked = !style.StartArrowStyle.IsStroked;
-            }
-        }
-
-        public static void ToggleStartArrowIsFilled(this IBaseShape shape)
-        {
-            var style = shape.Style;
-            if (style != null && style.StartArrowStyle != null)
-            {
-                style.StartArrowStyle.IsFilled = !style.StartArrowStyle.IsFilled;
-            }
-        }
-
-        public static void SetStartArrowRadiusX(this IBaseShape shape, double value)
-        {
-            var style = shape.Style;
-            if (style != null && style.StartArrowStyle != null)
-            {
-                style.StartArrowStyle.RadiusX = value;
-            }
-        }
-
-        public static void SetStartArrowRadiusY(this IBaseShape shape, double value)
-        {
-            var style = shape.Style;
-            if (style != null && style.StartArrowStyle != null)
-            {
-                style.StartArrowStyle.RadiusY = value;
-            }
-        }
-
-        public static void SetStartArrowThickness(this IBaseShape shape, double value)
-        {
-            var style = shape.Style;
-            if (style != null && style.StartArrowStyle != null)
-            {
-                style.StartArrowStyle.Thickness = value;
-            }
-        }
-
-        public static void SetStartArrowLineCap(this IBaseShape shape, LineCap value)
-        {
-            var style = shape.Style;
-            if (style != null && style.StartArrowStyle != null)
-            {
-                style.StartArrowStyle.LineCap = value;
-            }
-        }
-
-        public static void SetStartArrowDashes(this IBaseShape shape, string dashes)
-        {
-            var style = shape.Style;
-            if (style != null && style.StartArrowStyle != null)
-            {
-                style.StartArrowStyle.Dashes = dashes;
-            }
-        }
-
-        public static void SetStartArrowDashOffset(this IBaseShape shape, double value)
-        {
-            var style = shape.Style;
-            if (style != null && style.StartArrowStyle != null)
-            {
-                style.StartArrowStyle.DashOffset = value;
-            }
-        }
-
-        public static void SetStartArrowStroke(this IBaseShape shape, IColor value)
-        {
-            var style = shape.Style;
-            if (style != null && style.StartArrowStyle != null)
-            {
-                style.StartArrowStyle.Stroke = (IColor)value.Copy(null);
-            }
-        }
-
-        public static void SetStartArrowStrokeTransparency(this IBaseShape shape, byte value)
-        {
-            var style = shape.Style;
-            if (style != null && style.StartArrowStyle != null && style.StartArrowStyle.Stroke is IArgbColor argbColor)
-            {
-                argbColor.A = value;
-            }
-        }
-
-        public static void SetStartArrowFill(this IBaseShape shape, IColor value)
-        {
-            var style = shape.Style;
-            if (style != null && style.StartArrowStyle != null)
-            {
-                style.StartArrowStyle.Fill = (IColor)value.Copy(null);
-            }
-        }
-
-        public static void SetStartArrowFillTransparency(this IBaseShape shape, byte value)
-        {
-            var style = shape.Style;
-            if (style != null && style.StartArrowStyle != null && style.StartArrowStyle.Fill is IArgbColor argbColor)
-            {
-                argbColor.A = value;
-            }
-        }
-
-        public static void SetEndArrowType(this IBaseShape shape, ArrowType value)
-        {
-            var style = shape.Style;
-            if (style != null && style.EndArrowStyle != null)
-            {
-                style.EndArrowStyle.ArrowType = value;
-            }
-        }
-
-        public static void ToggleEndArrowIsStroked(this IBaseShape shape)
-        {
-            var style = shape.Style;
-            if (style != null && style.EndArrowStyle != null)
-            {
-                style.EndArrowStyle.IsStroked = !style.EndArrowStyle.IsStroked;
-            }
-        }
-
-        public static void ToggleEndArrowIsFilled(this IBaseShape shape)
-        {
-            var style = shape.Style;
-            if (style != null && style.EndArrowStyle != null)
-            {
-                style.EndArrowStyle.IsFilled = !style.EndArrowStyle.IsFilled;
-            }
-        }
-
-        public static void SetEndArrowRadiusX(this IBaseShape shape, double value)
-        {
-            var style = shape.Style;
-            if (style != null && style.EndArrowStyle != null)
-            {
-                style.EndArrowStyle.RadiusX = value;
-            }
-        }
-
-        public static void SetEndArrowRadiusY(this IBaseShape shape, double value)
-        {
-            var style = shape.Style;
-            if (style != null && style.EndArrowStyle != null)
-            {
-                style.EndArrowStyle.RadiusY = value;
-            }
-        }
-
-        public static void SetEndArrowThickness(this IBaseShape shape, double value)
-        {
-            var style = shape.Style;
-            if (style != null && style.EndArrowStyle != null)
-            {
-                style.EndArrowStyle.Thickness = value;
-            }
-        }
-
-        public static void SetEndArrowLineCap(this IBaseShape shape, LineCap value)
-        {
-            var style = shape.Style;
-            if (style != null && style.EndArrowStyle != null)
-            {
-                style.EndArrowStyle.LineCap = value;
-            }
-        }
-
-        public static void SetEndArrowDashes(this IBaseShape shape, string dashes)
-        {
-            var style = shape.Style;
-            if (style != null && style.EndArrowStyle != null)
-            {
-                style.EndArrowStyle.Dashes = dashes;
-            }
-        }
-
-        public static void SetEndArrowDashOffset(this IBaseShape shape, double value)
-        {
-            var style = shape.Style;
-            if (style != null && style.EndArrowStyle != null)
-            {
-                style.EndArrowStyle.DashOffset = value;
-            }
-        }
-
-        public static void SetEndArrowStroke(this IBaseShape shape, IColor value)
-        {
-            var style = shape.Style;
-            if (style != null && style.EndArrowStyle != null)
-            {
-                style.EndArrowStyle.Stroke = (IColor)value.Copy(null);
-            }
-        }
-
-        public static void SetEndArrowStrokeTransparency(this IBaseShape shape, byte value)
-        {
-            var style = shape.Style;
-            if (style != null && style.EndArrowStyle != null && style.EndArrowStyle.Stroke is IArgbColor argbColor)
-            {
-                argbColor.A = value;
-            }
-        }
-
-        public static void SetEndArrowFill(this IBaseShape shape, IColor value)
-        {
-            var style = shape.Style;
-            if (style != null && style.EndArrowStyle != null)
-            {
-                style.EndArrowStyle.Fill = (IColor)value.Copy(null);
-            }
-        }
-
-        public static void SetEndArrowFillTransparency(this IBaseShape shape, byte value)
-        {
-            var style = shape.Style;
-            if (style != null && style.EndArrowStyle != null && style.EndArrowStyle.Fill is IArgbColor argbColor)
-            {
-                argbColor.A = value;
-            }
-        }
-    }
-
     /// <summary>
     /// Style editor.
     /// </summary>
@@ -433,7 +16,13 @@ namespace Core2D.Editor
     {
         private const NumberStyles _numberStyles = NumberStyles.AllowDecimalPoint | NumberStyles.AllowThousands;
         private readonly IServiceProvider _serviceProvider;
-        private IShapeStyle _copy;
+        private IShapeStyle _shapeStyleCopy;
+        private IColor _strokeCopy;
+        private IColor _fillCopy;
+        private ITextStyle _textStyleCopy;
+        private IArrowStyle _endArrowStyleCopy;
+        private IArrowStyle _startArrowStyleCopy;
+        private ILineStyle _lineStyleCopy;
 
         /// <summary>
         /// Initialize new instance of <see cref="StyleEditor"/> class.
@@ -454,34 +43,904 @@ namespace Core2D.Editor
         public void OnCopyStyle()
         {
             var editor = _serviceProvider.GetService<IProjectEditor>();
+
             if (editor.Renderers[0]?.State?.SelectedShape != null)
             {
-                var style = editor.Renderers[0]?.State?.SelectedShape.Style;
-                _copy = (IShapeStyle)style.Copy(null);
+                var style = editor.Renderers[0]?.State?.SelectedShape?.Style;
+                _shapeStyleCopy = (IShapeStyle)style?.Copy(null);
             }
         }
 
         /// <inheritdoc/>
         public void OnPasteStyle()
         {
-            var editor = _serviceProvider.GetService<IProjectEditor>();
-            if (editor.Renderers[0]?.State?.SelectedShape != null && _copy != null)
+            if (_shapeStyleCopy == null)
             {
-                var shape = editor.Renderers[0]?.State?.SelectedShape;
+                return;
+            }
+
+            var editor = _serviceProvider.GetService<IProjectEditor>();
+
+            foreach (var shape in GetShapes(editor))
+            {
                 var previous = shape.Style;
-                var next = (IShapeStyle)_copy.Copy(null);
+                var next = (IShapeStyle)_shapeStyleCopy?.Copy(null);
                 editor.Project?.History?.Snapshot(previous, next, (p) => shape.Style = p);
                 shape.Style = next;
+            }
+        }
+
+        /// <inheritdoc/>
+        public void OnCopyStroke()
+        {
+            var editor = _serviceProvider.GetService<IProjectEditor>();
+
+            if (editor.Renderers[0]?.State?.SelectedShape != null)
+            {
+                var stroke = editor.Renderers[0]?.State?.SelectedShape?.Style?.Stroke;
+                _strokeCopy = (IColor)stroke?.Copy(null);
+            }
+        }
+
+        /// <inheritdoc/>
+        public void OnPasteStroke()
+        {
+            if (_strokeCopy == null)
+            {
+                return;
+            }
+
+            var editor = _serviceProvider.GetService<IProjectEditor>();
+
+            foreach (var shape in GetShapes(editor))
+            {
+                var style = shape.Style;
+
+                var previous = style.Stroke;
+                var next = (IColor)_strokeCopy?.Copy(null);
+                editor.Project?.History?.Snapshot(previous, next, (p) => style.Stroke = p);
+                style.Stroke = next;
+            }
+        }
+
+        /// <inheritdoc/>
+        public void OnCopyFill()
+        {
+            var editor = _serviceProvider.GetService<IProjectEditor>();
+
+            if (editor.Renderers[0]?.State?.SelectedShape != null)
+            {
+                var fill = editor.Renderers[0]?.State?.SelectedShape?.Style?.Fill;
+                _fillCopy = (IColor)fill?.Copy(null);
+            }
+        }
+
+        /// <inheritdoc/>
+        public void OnPasteFill()
+        {
+            if (_fillCopy == null)
+            {
+                return;
+            }
+
+            var editor = _serviceProvider.GetService<IProjectEditor>();
+
+            foreach (var shape in GetShapes(editor))
+            {
+                var style = shape.Style;
+
+                var previous = style.Fill;
+                var next = (IColor)_fillCopy?.Copy(null);
+                editor.Project?.History?.Snapshot(previous, next, (p) => style.Fill = p);
+                style.Fill = next;
+            }
+        }
+
+        /// <inheritdoc/>
+        public void OnCopyLineStyle()
+        {
+            var editor = _serviceProvider.GetService<IProjectEditor>();
+
+            if (editor.Renderers[0]?.State?.SelectedShape != null)
+            {
+                var lineStyle = editor.Renderers[0]?.State?.SelectedShape?.Style?.LineStyle;
+                _lineStyleCopy = (ILineStyle)lineStyle?.Copy(null);
+            }
+        }
+
+        /// <inheritdoc/>
+        public void OnPasteLineStyle()
+        {
+            if (_lineStyleCopy == null)
+            {
+                return;
+            }
+
+            var editor = _serviceProvider.GetService<IProjectEditor>();
+
+            foreach (var shape in GetShapes(editor))
+            {
+                var style = shape.Style;
+
+                var previous = style.LineStyle;
+                var next = (ILineStyle)_lineStyleCopy?.Copy(null);
+                editor.Project?.History?.Snapshot(previous, next, (p) => style.LineStyle = p);
+                style.LineStyle = next;
+            }
+        }
+
+        /// <inheritdoc/>
+        public void OnCopyStartArrowStyle()
+        {
+            var editor = _serviceProvider.GetService<IProjectEditor>();
+
+            if (editor.Renderers[0]?.State?.SelectedShape != null)
+            {
+                var startArrowStyle = editor.Renderers[0]?.State?.SelectedShape?.Style?.StartArrowStyle;
+                _startArrowStyleCopy = (IArrowStyle)startArrowStyle?.Copy(null);
+            }
+        }
+
+        /// <inheritdoc/>
+        public void OnPasteStartArrowStyle()
+        {
+            if (_startArrowStyleCopy == null)
+            {
+                return;
+            }
+
+            var editor = _serviceProvider.GetService<IProjectEditor>();
+
+            foreach (var shape in GetShapes(editor))
+            {
+                var style = shape.Style;
+
+                var previous = style.StartArrowStyle;
+                var next = (IArrowStyle)_startArrowStyleCopy?.Copy(null);
+                editor.Project?.History?.Snapshot(previous, next, (p) => style.StartArrowStyle = p);
+                style.StartArrowStyle = next;
+            }
+        }
+
+        /// <inheritdoc/>
+        public void OnCopyEndArrowStyle()
+        {
+            var editor = _serviceProvider.GetService<IProjectEditor>();
+
+            if (editor.Renderers[0]?.State?.SelectedShape != null)
+            {
+                var endArrowStyle = editor.Renderers[0]?.State?.SelectedShape?.Style?.EndArrowStyle;
+                _endArrowStyleCopy = (IArrowStyle)endArrowStyle?.Copy(null);
+            }
+        }
+
+        /// <inheritdoc/>
+        public void OnPasteEndArrowStyle()
+        {
+            if (_endArrowStyleCopy == null)
+            {
+                return;
+            }
+
+            var editor = _serviceProvider.GetService<IProjectEditor>();
+
+            foreach (var shape in GetShapes(editor))
+            {
+                var style = shape.Style;
+
+                var previous = style.EndArrowStyle;
+                var next = (IArrowStyle)_endArrowStyleCopy?.Copy(null);
+                editor.Project?.History?.Snapshot(previous, next, (p) => style.EndArrowStyle = p);
+                style.EndArrowStyle = next;
+            }
+        }
+
+        /// <inheritdoc/>
+        public void OnCopyTextStyle()
+        {
+            var editor = _serviceProvider.GetService<IProjectEditor>();
+
+            if (editor.Renderers[0]?.State?.SelectedShape != null)
+            {
+                var textStyle = editor.Renderers[0]?.State?.SelectedShape?.Style?.TextStyle;
+                _textStyleCopy = (ITextStyle)textStyle?.Copy(null);
+            }
+        }
+
+        /// <inheritdoc/>
+        public void OnPasteTextStyle()
+        {
+            if (_textStyleCopy == null)
+            {
+                return;
+            }
+
+            var editor = _serviceProvider.GetService<IProjectEditor>();
+
+            foreach (var shape in GetShapes(editor))
+            {
+                var style = shape.Style;
+
+                var previous = style.TextStyle;
+                var next = (ITextStyle)_textStyleCopy?.Copy(null);
+                editor.Project?.History?.Snapshot(previous, next, (p) => style.TextStyle = p);
+                style.TextStyle = next;
+            }
+        }
+
+        private void SetThickness(IBaseShape shape, double value, IHistory history)
+        {
+            var style = shape.Style;
+            if (style != null)
+            {
+                var previous = style.Thickness;
+                var next = value;
+                history?.Snapshot(previous, next, (p) => style.Thickness = p);
+                style.Thickness = next;
+            }
+        }
+
+        private void SetLineCap(IBaseShape shape, LineCap value, IHistory history)
+        {
+            var style = shape.Style;
+            if (style != null)
+            {
+                var previous = style.LineCap;
+                var next = value;
+                history?.Snapshot(previous, next, (p) => style.LineCap = p);
+                style.LineCap = next;
+            }
+        }
+
+        private void SetDashes(IBaseShape shape, string value, IHistory history)
+        {
+            var style = shape.Style;
+            if (style != null)
+            {
+                var previous = style.Dashes;
+                var next = value;
+                history?.Snapshot(previous, next, (p) => style.Dashes = p);
+                style.Dashes = next;
+            }
+        }
+
+        private void SetDashOffset(IBaseShape shape, double value, IHistory history)
+        {
+            var style = shape.Style;
+            if (style != null)
+            {
+                var previous = style.DashOffset;
+                var next = value;
+                history?.Snapshot(previous, next, (p) => style.DashOffset = p);
+                style.DashOffset = next;
+            }
+        }
+
+        private void SetStroke(IBaseShape shape, IColor value, IHistory history)
+        {
+            var style = shape.Style;
+            if (style != null)
+            {
+                var previous = style.Stroke;
+                var next = (IColor)value.Copy(null);
+                history?.Snapshot(previous, next, (p) => style.Stroke = p);
+                style.Stroke = next;
+            }
+        }
+
+        private void SetStrokeTransparency(IBaseShape shape, byte value, IHistory history)
+        {
+            var style = shape.Style;
+            if (style != null)
+            {
+                if (style.Stroke is IArgbColor argbColor)
+                {
+                    var previous = argbColor.A;
+                    var next = value;
+                    history?.Snapshot(previous, next, (p) => argbColor.A = p);
+                    argbColor.A = next;
+                }
+            }
+        }
+
+        private void SetFill(IBaseShape shape, IColor value, IHistory history)
+        {
+            var style = shape.Style;
+            if (style != null)
+            {
+                var previous = style.Fill;
+                var next = (IColor)value.Copy(null);
+                history?.Snapshot(previous, next, (p) => style.Fill = p);
+                style.Fill = next;
+            }
+        }
+
+        private void SetFillTransparency(IBaseShape shape, byte value, IHistory history)
+        {
+            var style = shape.Style;
+            if (style != null)
+            {
+                if (style.Fill is IArgbColor argbColor)
+                {
+                    var previous = argbColor.A;
+                    var next = value;
+                    history?.Snapshot(previous, next, (p) => argbColor.A = p);
+                    argbColor.A = next;
+                }
+            }
+        }
+
+        private void SetFontName(IBaseShape shape, string value, IHistory history)
+        {
+            var style = shape.Style;
+            if (style != null && style.TextStyle != null)
+            {
+                var textStyle = style.TextStyle;
+
+                var previous = textStyle.FontName;
+                var next = value;
+                history?.Snapshot(previous, next, (p) => textStyle.FontName = p);
+                textStyle.FontName = next;
+            }
+        }
+
+        private void SetFontStyle(IBaseShape shape, FontStyleFlags value, IHistory history)
+        {
+            var style = shape.Style;
+            if (style != null && style.TextStyle != null && style.TextStyle.FontStyle != null)
+            {
+                var fontStyle = style.TextStyle.FontStyle;
+
+                var previous = fontStyle.Flags;
+                var next = fontStyle.Flags ^ value;
+                history?.Snapshot(previous, next, (p) => fontStyle.Flags = p);
+                fontStyle.Flags = next;
+            }
+        }
+
+        private void SetFontSize(IBaseShape shape, double value, IHistory history)
+        {
+            var style = shape.Style;
+            if (style != null && style.TextStyle != null)
+            {
+                var textStyle = style.TextStyle;
+
+                var previous = textStyle.FontSize;
+                var next = value;
+                history?.Snapshot(previous, next, (p) => textStyle.FontSize = p);
+                textStyle.FontSize = next;
+            }
+        }
+
+        private void SetTextHAlignment(IBaseShape shape, TextHAlignment value, IHistory history)
+        {
+            var style = shape.Style;
+            if (style != null && style.TextStyle != null)
+            {
+                var textStyle = style.TextStyle;
+
+                var previous = textStyle.TextHAlignment;
+                var next = value;
+                history?.Snapshot(previous, next, (p) => textStyle.TextHAlignment = p);
+                textStyle.TextHAlignment = next;
+            }
+        }
+
+        private void SetTextVAlignment(IBaseShape shape, TextVAlignment value, IHistory history)
+        {
+            var style = shape.Style;
+            if (style != null && style.TextStyle != null)
+            {
+                var textStyle = style.TextStyle;
+
+                var previous = textStyle.TextVAlignment;
+                var next = value;
+                history?.Snapshot(previous, next, (p) => textStyle.TextVAlignment = p);
+                textStyle.TextVAlignment = next;
+            }
+        }
+
+        private void ToggleLineIsCurved(IBaseShape shape, IHistory history)
+        {
+            var style = shape.Style;
+            if (style != null && style.LineStyle != null)
+            {
+                var lineStyle = style.LineStyle;
+
+                var previous = lineStyle.IsCurved;
+                var next = !lineStyle.IsCurved;
+                history?.Snapshot(previous, next, (p) => lineStyle.IsCurved = p);
+                lineStyle.IsCurved = next;
+            }
+        }
+
+        private void SetLineCurvature(IBaseShape shape, double value, IHistory history)
+        {
+            var style = shape.Style;
+            if (style != null && style.LineStyle != null)
+            {
+                var lineStyle = style.LineStyle;
+
+                var previous = lineStyle.Curvature;
+                var next = value;
+                history?.Snapshot(previous, next, (p) => lineStyle.Curvature = p);
+                lineStyle.Curvature = next;
+            }
+        }
+
+        private void SetLineCurveOrientation(IBaseShape shape, CurveOrientation value, IHistory history)
+        {
+            var style = shape.Style;
+            if (style != null && style.LineStyle != null)
+            {
+                var lineStyle = style.LineStyle;
+
+                var previous = lineStyle.CurveOrientation;
+                var next = value;
+                history?.Snapshot(previous, next, (p) => lineStyle.CurveOrientation = p);
+                lineStyle.CurveOrientation = next;
+            }
+        }
+
+        private void SetLineFixedLength(IBaseShape shape, double value, IHistory history)
+        {
+            var style = shape.Style;
+            if (style != null && style.LineStyle != null && style.LineStyle.FixedLength != null)
+            {
+                var fixedLength = style.LineStyle.FixedLength;
+
+                var previous = fixedLength.Length;
+                var next = value;
+                history?.Snapshot(previous, next, (p) => fixedLength.Length = p);
+                fixedLength.Length = next;
+            }
+        }
+
+        private void ToggleLineFixedLengthFlags(IBaseShape shape, LineFixedLengthFlags value, IHistory history)
+        {
+            var style = shape.Style;
+            if (style != null && style.LineStyle != null && style.LineStyle.FixedLength != null)
+            {
+                var fixedLength = style.LineStyle.FixedLength;
+
+                var previous = fixedLength.Flags;
+                var next = fixedLength.Flags ^ value;
+                history?.Snapshot(previous, next, (p) => fixedLength.Flags = p);
+                fixedLength.Flags = next;
+            }
+        }
+
+        private void ToggleLineFixedLengthStartTrigger(IBaseShape shape, ShapeStateFlags value, IHistory history)
+        {
+            var style = shape.Style;
+            if (style != null && style.LineStyle != null && style.LineStyle.FixedLength != null && style.LineStyle.FixedLength.StartTrigger != null)
+            {
+                var startTrigger = style.LineStyle.FixedLength.StartTrigger;
+
+                var previous = startTrigger.Flags;
+                var next = startTrigger.Flags ^ value;
+                history?.Snapshot(previous, next, (p) => startTrigger.Flags = p);
+                startTrigger.Flags = next;
+            }
+        }
+
+        private void ToggleLineFixedLengthEndTrigger(IBaseShape shape, ShapeStateFlags value, IHistory history)
+        {
+            var style = shape.Style;
+            if (style != null && style.LineStyle != null && style.LineStyle.FixedLength != null && style.LineStyle.FixedLength.EndTrigger != null)
+            {
+                var endTrigger = style.LineStyle.FixedLength.EndTrigger;
+
+                var previous = endTrigger.Flags;
+                var next = endTrigger.Flags ^ value;
+                history?.Snapshot(previous, next, (p) => endTrigger.Flags = p);
+                endTrigger.Flags = next;
+            }
+        }
+
+        private void SetStartArrowType(IBaseShape shape, ArrowType value, IHistory history)
+        {
+            var style = shape.Style;
+            if (style != null && style.StartArrowStyle != null)
+            {
+                var startArrowStyle = style.StartArrowStyle;
+
+                var previous = startArrowStyle.ArrowType;
+                var next = value;
+                history?.Snapshot(previous, next, (p) => startArrowStyle.ArrowType = p);
+                startArrowStyle.ArrowType = next;
+            }
+        }
+
+        private void ToggleStartArrowIsStroked(IBaseShape shape, IHistory history)
+        {
+            var style = shape.Style;
+            if (style != null && style.StartArrowStyle != null)
+            {
+                var startArrowStyle = style.StartArrowStyle;
+
+                var previous = startArrowStyle.IsStroked;
+                var next = !startArrowStyle.IsStroked;
+                history?.Snapshot(previous, next, (p) => startArrowStyle.IsStroked = p);
+                startArrowStyle.IsStroked = next;
+            }
+        }
+
+        private void ToggleStartArrowIsFilled(IBaseShape shape, IHistory history)
+        {
+            var style = shape.Style;
+            if (style != null && style.StartArrowStyle != null)
+            {
+                var startArrowStyle = style.StartArrowStyle;
+
+                var previous = startArrowStyle.IsFilled;
+                var next = !startArrowStyle.IsFilled;
+                history?.Snapshot(previous, next, (p) => startArrowStyle.IsFilled = p);
+                startArrowStyle.IsFilled = next;
+            }
+        }
+
+        private void SetStartArrowRadiusX(IBaseShape shape, double value, IHistory history)
+        {
+            var style = shape.Style;
+            if (style != null && style.StartArrowStyle != null)
+            {
+                var startArrowStyle = style.StartArrowStyle;
+
+                var previous = startArrowStyle.RadiusX;
+                var next = value;
+                history?.Snapshot(previous, next, (p) => startArrowStyle.RadiusX = p);
+                startArrowStyle.RadiusX = next;
+            }
+        }
+
+        private void SetStartArrowRadiusY(IBaseShape shape, double value, IHistory history)
+        {
+            var style = shape.Style;
+            if (style != null && style.StartArrowStyle != null)
+            {
+                var startArrowStyle = style.StartArrowStyle;
+
+                var previous = startArrowStyle.RadiusY;
+                var next = value;
+                history?.Snapshot(previous, next, (p) => startArrowStyle.RadiusY = p);
+                startArrowStyle.RadiusY = next;
+            }
+        }
+
+        private void SetStartArrowThickness(IBaseShape shape, double value, IHistory history)
+        {
+            var style = shape.Style;
+            if (style != null && style.StartArrowStyle != null)
+            {
+                var startArrowStyle = style.StartArrowStyle;
+
+                var previous = startArrowStyle.Thickness;
+                var next = value;
+                history?.Snapshot(previous, next, (p) => startArrowStyle.Thickness = p);
+                startArrowStyle.Thickness = next;
+            }
+        }
+
+        private void SetStartArrowLineCap(IBaseShape shape, LineCap value, IHistory history)
+        {
+            var style = shape.Style;
+            if (style != null && style.StartArrowStyle != null)
+            {
+                var startArrowStyle = style.StartArrowStyle;
+
+                var previous = startArrowStyle.LineCap;
+                var next = value;
+                history?.Snapshot(previous, next, (p) => startArrowStyle.LineCap = p);
+                startArrowStyle.LineCap = next;
+            }
+        }
+
+        private void SetStartArrowDashes(IBaseShape shape, string value, IHistory history)
+        {
+            var style = shape.Style;
+            if (style != null && style.StartArrowStyle != null)
+            {
+                var startArrowStyle = style.StartArrowStyle;
+
+                var previous = startArrowStyle.Dashes;
+                var next = value;
+                history?.Snapshot(previous, next, (p) => startArrowStyle.Dashes = p);
+                startArrowStyle.Dashes = next;
+            }
+        }
+
+        private void SetStartArrowDashOffset(IBaseShape shape, double value, IHistory history)
+        {
+            var style = shape.Style;
+            if (style != null && style.StartArrowStyle != null)
+            {
+                var startArrowStyle = style.StartArrowStyle;
+
+                var previous = startArrowStyle.DashOffset;
+                var next = value;
+                history?.Snapshot(previous, next, (p) => startArrowStyle.DashOffset = p);
+                startArrowStyle.DashOffset = next;
+            }
+        }
+
+        private void SetStartArrowStroke(IBaseShape shape, IColor value, IHistory history)
+        {
+            var style = shape.Style;
+            if (style != null && style.StartArrowStyle != null)
+            {
+                var startArrowStyle = style.StartArrowStyle;
+
+                var previous = startArrowStyle.Stroke;
+                var next = (IColor)value.Copy(null);
+                history?.Snapshot(previous, next, (p) => startArrowStyle.Stroke = p);
+                startArrowStyle.Stroke = next;
+            }
+        }
+
+        private void SetStartArrowStrokeTransparency(IBaseShape shape, byte value, IHistory history)
+        {
+            var style = shape.Style;
+            if (style != null && style.StartArrowStyle != null)
+            {
+                if (style.StartArrowStyle.Stroke is IArgbColor argbColor)
+                {
+                    var previous = argbColor.A;
+                    var next = value;
+                    history?.Snapshot(previous, next, (p) => argbColor.A = p);
+                    argbColor.A = next;
+                }
+            }
+        }
+
+        private void SetStartArrowFill(IBaseShape shape, IColor value, IHistory history)
+        {
+            var style = shape.Style;
+            if (style != null && style.StartArrowStyle != null)
+            {
+                var startArrowStyle = style.StartArrowStyle;
+
+                var previous = startArrowStyle.Fill;
+                var next = (IColor)value.Copy(null);
+                history?.Snapshot(previous, next, (p) => startArrowStyle.Fill = p);
+                startArrowStyle.Fill = next;
+            }
+        }
+
+        private void SetStartArrowFillTransparency(IBaseShape shape, byte value, IHistory history)
+        {
+            var style = shape.Style;
+            if (style != null && style.StartArrowStyle != null)
+            {
+                if (style.StartArrowStyle.Fill is IArgbColor argbColor)
+                {
+                    var previous = argbColor.A;
+                    var next = value;
+                    history?.Snapshot(previous, next, (p) => argbColor.A = p);
+                    argbColor.A = next;
+                }
+            }
+        }
+
+        private void SetEndArrowType(IBaseShape shape, ArrowType value, IHistory history)
+        {
+            var style = shape.Style;
+            if (style != null && style.EndArrowStyle != null)
+            {
+                var endArrowStyle = style.EndArrowStyle;
+
+                var previous = endArrowStyle.ArrowType;
+                var next = value;
+                history?.Snapshot(previous, next, (p) => endArrowStyle.ArrowType = p);
+                endArrowStyle.ArrowType = next;
+            }
+        }
+
+        private void ToggleEndArrowIsStroked(IBaseShape shape, IHistory history)
+        {
+            var style = shape.Style;
+            if (style != null && style.EndArrowStyle != null)
+            {
+                var endArrowStyle = style.EndArrowStyle;
+
+                var previous = endArrowStyle.IsStroked;
+                var next = !endArrowStyle.IsStroked;
+                history?.Snapshot(previous, next, (p) => endArrowStyle.IsStroked = p);
+                endArrowStyle.IsStroked = next;
+            }
+        }
+
+        private void ToggleEndArrowIsFilled(IBaseShape shape, IHistory history)
+        {
+            var style = shape.Style;
+            if (style != null && style.EndArrowStyle != null)
+            {
+                var endArrowStyle = style.EndArrowStyle;
+
+                var previous = endArrowStyle.IsFilled;
+                var next = !endArrowStyle.IsFilled;
+                history?.Snapshot(previous, next, (p) => endArrowStyle.IsFilled = p);
+                endArrowStyle.IsFilled = next;
+            }
+        }
+
+        private void SetEndArrowRadiusX(IBaseShape shape, double value, IHistory history)
+        {
+            var style = shape.Style;
+            if (style != null && style.EndArrowStyle != null)
+            {
+                var endArrowStyle = style.EndArrowStyle;
+
+                var previous = endArrowStyle.RadiusX;
+                var next = value;
+                history?.Snapshot(previous, next, (p) => endArrowStyle.RadiusX = p);
+                endArrowStyle.RadiusX = next;
+            }
+        }
+
+        private void SetEndArrowRadiusY(IBaseShape shape, double value, IHistory history)
+        {
+            var style = shape.Style;
+            if (style != null && style.EndArrowStyle != null)
+            {
+                var endArrowStyle = style.EndArrowStyle;
+
+                var previous = endArrowStyle.RadiusY;
+                var next = value;
+                history?.Snapshot(previous, next, (p) => endArrowStyle.RadiusY = p);
+                endArrowStyle.RadiusY = next;
+            }
+        }
+
+        private void SetEndArrowThickness(IBaseShape shape, double value, IHistory history)
+        {
+            var style = shape.Style;
+            if (style != null && style.EndArrowStyle != null)
+            {
+                var endArrowStyle = style.EndArrowStyle;
+
+                var previous = endArrowStyle.Thickness;
+                var next = value;
+                history?.Snapshot(previous, next, (p) => endArrowStyle.Thickness = p);
+                endArrowStyle.Thickness = next;
+            }
+        }
+
+        private void SetEndArrowLineCap(IBaseShape shape, LineCap value, IHistory history)
+        {
+            var style = shape.Style;
+            if (style != null && style.EndArrowStyle != null)
+            {
+                var endArrowStyle = style.EndArrowStyle;
+
+                var previous = endArrowStyle.LineCap;
+                var next = value;
+                history?.Snapshot(previous, next, (p) => endArrowStyle.LineCap = p);
+                endArrowStyle.LineCap = next;
+            }
+        }
+
+        private void SetEndArrowDashes(IBaseShape shape, string value, IHistory history)
+        {
+            var style = shape.Style;
+            if (style != null && style.EndArrowStyle != null)
+            {
+                var endArrowStyle = style.EndArrowStyle;
+
+                var previous = endArrowStyle.Dashes;
+                var next = value;
+                history?.Snapshot(previous, next, (p) => endArrowStyle.Dashes = p);
+                endArrowStyle.Dashes = next;
+            }
+        }
+
+        private void SetEndArrowDashOffset(IBaseShape shape, double value, IHistory history)
+        {
+            var style = shape.Style;
+            if (style != null && style.EndArrowStyle != null)
+            {
+                var endArrowStyle = style.EndArrowStyle;
+
+                var previous = endArrowStyle.DashOffset;
+                var next = value;
+                history?.Snapshot(previous, next, (p) => endArrowStyle.DashOffset = p);
+                endArrowStyle.DashOffset = next;
+            }
+        }
+
+        private void SetEndArrowStroke(IBaseShape shape, IColor value, IHistory history)
+        {
+            var style = shape.Style;
+            if (style != null && style.EndArrowStyle != null)
+            {
+                var endArrowStyle = style.EndArrowStyle;
+
+                var previous = endArrowStyle.Stroke;
+                var next = (IColor)value.Copy(null);
+                history?.Snapshot(previous, next, (p) => endArrowStyle.Stroke = p);
+                endArrowStyle.Stroke = next;
+            }
+        }
+
+        private void SetEndArrowStrokeTransparency(IBaseShape shape, byte value, IHistory history)
+        {
+            var style = shape.Style;
+            if (style != null && style.EndArrowStyle != null)
+            {
+                if (style.EndArrowStyle.Stroke is IArgbColor argbColor)
+                {
+                    var previous = argbColor.A;
+                    var next = value;
+                    history?.Snapshot(previous, next, (p) => argbColor.A = p);
+                    argbColor.A = next;
+                }
+            }
+        }
+
+        private void SetEndArrowFill(IBaseShape shape, IColor value, IHistory history)
+        {
+            var style = shape.Style;
+            if (style != null && style.EndArrowStyle != null)
+            {
+                var endArrowStyle = style.EndArrowStyle;
+
+                var previous = endArrowStyle.Fill;
+                var next = (IColor)value.Copy(null);
+                history?.Snapshot(previous, next, (p) => endArrowStyle.Fill = p);
+                endArrowStyle.Fill = next;
+            }
+        }
+
+        private void SetEndArrowFillTransparency(IBaseShape shape, byte value, IHistory history)
+        {
+            var style = shape.Style;
+            if (style != null && style.EndArrowStyle != null)
+            {
+                if (style.EndArrowStyle.Fill is IArgbColor argbColor)
+                {
+                    var previous = argbColor.A;
+                    var next = value;
+                    history?.Snapshot(previous, next, (p) => argbColor.A = p);
+                    argbColor.A = next;
+                }
+            }
+        }
+
+        private IEnumerable<IBaseShape> GetShapes(IProjectEditor editor)
+        {
+            if (editor.Renderers[0]?.State?.SelectedShape != null)
+            {
+                var shape = editor.Renderers[0]?.State?.SelectedShape;
+                if (shape is IGroupShape group)
+                {
+                    var groupShapes = ProjectContainer.GetAllShapes(group.Shapes);
+                    foreach (var child in groupShapes)
+                    {
+                        yield return child;
+                    }
+                }
+                else
+                {
+                    yield return shape;
+                }
             }
 
             if (editor.Renderers?[0]?.State?.SelectedShapes?.Count > 0)
             {
                 foreach (var shape in editor.Renderers[0].State.SelectedShapes)
                 {
-                    var previous = shape.Style;
-                    var next = (IShapeStyle)_copy.Copy(null);
-                    editor.Project?.History?.Snapshot(previous, next, (p) => shape.Style = p);
-                    shape.Style = next;
+                    if (shape is IGroupShape group)
+                    {
+                        var groupShapes = ProjectContainer.GetAllShapes(group.Shapes);
+                        foreach (var child in groupShapes)
+                        {
+                            yield return child;
+                        }
+                    }
+                    else
+                    {
+                        yield return shape;
+                    }
                 }
             }
         }
@@ -495,20 +954,14 @@ namespace Core2D.Editor
             }
 
             var editor = _serviceProvider.GetService<IProjectEditor>();
+            var history = editor.Project?.History;
 
-            if (editor.Renderers[0]?.State?.SelectedShape != null)
+            foreach (var shape in GetShapes(editor))
             {
-                var shape = editor.Renderers[0]?.State?.SelectedShape;
-                shape.SetThickness(value);
+                SetThickness(shape, value, history);
             }
 
-            if (editor.Renderers?[0]?.State?.SelectedShapes?.Count > 0)
-            {
-                foreach (var shape in editor.Renderers[0].State.SelectedShapes)
-                {
-                    shape.SetThickness(value);
-                }
-            }
+            editor.Project?.CurrentContainer?.Invalidate();
         }
 
         /// <inheritdoc/>
@@ -520,40 +973,28 @@ namespace Core2D.Editor
             }
 
             var editor = _serviceProvider.GetService<IProjectEditor>();
+            var history = editor.Project?.History;
 
-            if (editor.Renderers[0]?.State?.SelectedShape != null)
+            foreach (var shape in GetShapes(editor))
             {
-                var shape = editor.Renderers[0]?.State?.SelectedShape;
-                shape.SetLineCap(value);
+                SetLineCap(shape, value, history);
             }
 
-            if (editor.Renderers?[0]?.State?.SelectedShapes?.Count > 0)
-            {
-                foreach (var shape in editor.Renderers[0].State.SelectedShapes)
-                {
-                    shape.SetLineCap(value);
-                }
-            }
+            editor.Project?.CurrentContainer?.Invalidate();
         }
 
         /// <inheritdoc/>
         public void OnStyleSetDashes(string dashes)
         {
             var editor = _serviceProvider.GetService<IProjectEditor>();
+            var history = editor.Project?.History;
 
-            if (editor.Renderers[0]?.State?.SelectedShape != null)
+            foreach (var shape in GetShapes(editor))
             {
-                var shape = editor.Renderers[0]?.State?.SelectedShape;
-                shape.SetDashes(dashes);
+                SetDashes(shape, dashes, history);
             }
 
-            if (editor.Renderers?[0]?.State?.SelectedShapes?.Count > 0)
-            {
-                foreach (var shape in editor.Renderers[0].State.SelectedShapes)
-                {
-                    shape.SetDashes(dashes);
-                }
-            }
+            editor.Project?.CurrentContainer?.Invalidate();
         }
 
         /// <inheritdoc/>
@@ -565,20 +1006,14 @@ namespace Core2D.Editor
             }
 
             var editor = _serviceProvider.GetService<IProjectEditor>();
+            var history = editor.Project?.History;
 
-            if (editor.Renderers[0]?.State?.SelectedShape != null)
+            foreach (var shape in GetShapes(editor))
             {
-                var shape = editor.Renderers[0]?.State?.SelectedShape;
-                shape.SetDashOffset(value);
+                SetDashOffset(shape, value, history);
             }
 
-            if (editor.Renderers?[0]?.State?.SelectedShapes?.Count > 0)
-            {
-                foreach (var shape in editor.Renderers[0].State.SelectedShapes)
-                {
-                    shape.SetDashOffset(value);
-                }
-            }
+            editor.Project?.CurrentContainer?.Invalidate();
         }
 
         /// <inheritdoc/>
@@ -595,20 +1030,14 @@ namespace Core2D.Editor
             }
 
             var editor = _serviceProvider.GetService<IProjectEditor>();
+            var history = editor.Project?.History;
 
-            if (editor.Renderers[0]?.State?.SelectedShape != null)
+            foreach (var shape in GetShapes(editor))
             {
-                var shape = editor.Renderers[0]?.State?.SelectedShape;
-                shape.SetStroke(value);
+                SetStroke(shape, value, history);
             }
 
-            if (editor.Renderers?[0]?.State?.SelectedShapes?.Count > 0)
-            {
-                foreach (var shape in editor.Renderers[0].State.SelectedShapes)
-                {
-                    shape.SetStroke(value);
-                }
-            }
+            editor.Project?.CurrentContainer?.Invalidate();
         }
 
         /// <inheritdoc/>
@@ -620,19 +1049,11 @@ namespace Core2D.Editor
             }
 
             var editor = _serviceProvider.GetService<IProjectEditor>();
+            var history = editor.Project?.History;
 
-            if (editor.Renderers[0]?.State?.SelectedShape != null)
+            foreach (var shape in GetShapes(editor))
             {
-                var shape = editor.Renderers[0]?.State?.SelectedShape;
-                shape.SetStrokeTransparency(value);
-            }
-
-            if (editor.Renderers?[0]?.State?.SelectedShapes?.Count > 0)
-            {
-                foreach (var shape in editor.Renderers[0].State.SelectedShapes)
-                {
-                    shape.SetStrokeTransparency(value);
-                }
+                SetStrokeTransparency(shape, value, history);
             }
 
             editor.Project?.CurrentContainer?.Invalidate();
@@ -652,19 +1073,11 @@ namespace Core2D.Editor
             }
 
             var editor = _serviceProvider.GetService<IProjectEditor>();
+            var history = editor.Project?.History;
 
-            if (editor.Renderers[0]?.State?.SelectedShape != null)
+            foreach (var shape in GetShapes(editor))
             {
-                var shape = editor.Renderers[0]?.State?.SelectedShape;
-                shape.SetFill(value);
-            }
-
-            if (editor.Renderers?[0]?.State?.SelectedShapes?.Count > 0)
-            {
-                foreach (var shape in editor.Renderers[0].State.SelectedShapes)
-                {
-                    shape.SetFill(value);
-                }
+                SetFill(shape, value, history);
             }
         }
 
@@ -677,19 +1090,11 @@ namespace Core2D.Editor
             }
 
             var editor = _serviceProvider.GetService<IProjectEditor>();
+            var history = editor.Project?.History;
 
-            if (editor.Renderers[0]?.State?.SelectedShape != null)
+            foreach (var shape in GetShapes(editor))
             {
-                var shape = editor.Renderers[0]?.State?.SelectedShape;
-                shape.SetFillTransparency(value);
-            }
-
-            if (editor.Renderers?[0]?.State?.SelectedShapes?.Count > 0)
-            {
-                foreach (var shape in editor.Renderers[0].State.SelectedShapes)
-                {
-                    shape.SetFillTransparency(value);
-                }
+                SetFillTransparency(shape, value, history);
             }
 
             editor.Project?.CurrentContainer?.Invalidate();
@@ -699,19 +1104,11 @@ namespace Core2D.Editor
         public void OnStyleSetFontName(string fontName)
         {
             var editor = _serviceProvider.GetService<IProjectEditor>();
+            var history = editor.Project?.History;
 
-            if (editor.Renderers[0]?.State?.SelectedShape != null)
+            foreach (var shape in GetShapes(editor))
             {
-                var shape = editor.Renderers[0]?.State?.SelectedShape;
-                shape.SetFontName(fontName);
-            }
-
-            if (editor.Renderers?[0]?.State?.SelectedShapes?.Count > 0)
-            {
-                foreach (var shape in editor.Renderers[0].State.SelectedShapes)
-                {
-                    shape.SetFontName(fontName);
-                }
+                SetFontName(shape, fontName, history);
             }
         }
 
@@ -724,19 +1121,11 @@ namespace Core2D.Editor
             }
 
             var editor = _serviceProvider.GetService<IProjectEditor>();
+            var history = editor.Project?.History;
 
-            if (editor.Renderers[0]?.State?.SelectedShape != null)
+            foreach (var shape in GetShapes(editor))
             {
-                var shape = editor.Renderers[0]?.State?.SelectedShape;
-                shape.SetFontSize(value);
-            }
-
-            if (editor.Renderers?[0]?.State?.SelectedShapes?.Count > 0)
-            {
-                foreach (var shape in editor.Renderers[0].State.SelectedShapes)
-                {
-                    shape.SetFontSize(value);
-                }
+                SetFontSize(shape, value, history);
             }
         }
 
@@ -749,19 +1138,11 @@ namespace Core2D.Editor
             }
 
             var editor = _serviceProvider.GetService<IProjectEditor>();
+            var history = editor.Project?.History;
 
-            if (editor.Renderers[0]?.State?.SelectedShape != null)
+            foreach (var shape in GetShapes(editor))
             {
-                var shape = editor.Renderers[0]?.State?.SelectedShape;
-                shape.SetFontStyle(value);
-            }
-
-            if (editor.Renderers?[0]?.State?.SelectedShapes?.Count > 0)
-            {
-                foreach (var shape in editor.Renderers[0].State.SelectedShapes)
-                {
-                    shape.SetFontStyle(value);
-                }
+                SetFontStyle(shape, value, history);
             }
         }
 
@@ -774,19 +1155,11 @@ namespace Core2D.Editor
             }
 
             var editor = _serviceProvider.GetService<IProjectEditor>();
+            var history = editor.Project?.History;
 
-            if (editor.Renderers[0]?.State?.SelectedShape != null)
+            foreach (var shape in GetShapes(editor))
             {
-                var shape = editor.Renderers[0]?.State?.SelectedShape;
-                shape.SetTextHAlignment(value);
-            }
-
-            if (editor.Renderers?[0]?.State?.SelectedShapes?.Count > 0)
-            {
-                foreach (var shape in editor.Renderers[0].State.SelectedShapes)
-                {
-                    shape.SetTextHAlignment(value);
-                }
+                SetTextHAlignment(shape, value, history);
             }
         }
 
@@ -799,19 +1172,11 @@ namespace Core2D.Editor
             }
 
             var editor = _serviceProvider.GetService<IProjectEditor>();
+            var history = editor.Project?.History;
 
-            if (editor.Renderers[0]?.State?.SelectedShape != null)
+            foreach (var shape in GetShapes(editor))
             {
-                var shape = editor.Renderers[0]?.State?.SelectedShape;
-                shape.SetTextVAlignment(value);
-            }
-
-            if (editor.Renderers?[0]?.State?.SelectedShapes?.Count > 0)
-            {
-                foreach (var shape in editor.Renderers[0].State.SelectedShapes)
-                {
-                    shape.SetTextVAlignment(value);
-                }
+                SetTextVAlignment(shape, value, history);
             }
         }
 
@@ -819,19 +1184,11 @@ namespace Core2D.Editor
         public void OnStyleToggleLineIsCurved()
         {
             var editor = _serviceProvider.GetService<IProjectEditor>();
+            var history = editor.Project?.History;
 
-            if (editor.Renderers[0]?.State?.SelectedShape != null)
+            foreach (var shape in GetShapes(editor))
             {
-                var shape = editor.Renderers[0]?.State?.SelectedShape;
-                shape.ToggleLineIsCurved();
-            }
-
-            if (editor.Renderers?[0]?.State?.SelectedShapes?.Count > 0)
-            {
-                foreach (var shape in editor.Renderers[0].State.SelectedShapes)
-                {
-                    shape.ToggleLineIsCurved();
-                }
+                ToggleLineIsCurved(shape, history);
             }
         }
 
@@ -844,19 +1201,11 @@ namespace Core2D.Editor
             }
 
             var editor = _serviceProvider.GetService<IProjectEditor>();
+            var history = editor.Project?.History;
 
-            if (editor.Renderers[0]?.State?.SelectedShape != null)
+            foreach (var shape in GetShapes(editor))
             {
-                var shape = editor.Renderers[0]?.State?.SelectedShape;
-                shape.SetLineCurvature(value);
-            }
-
-            if (editor.Renderers?[0]?.State?.SelectedShapes?.Count > 0)
-            {
-                foreach (var shape in editor.Renderers[0].State.SelectedShapes)
-                {
-                    shape.SetLineCurvature(value);
-                }
+                SetLineCurvature(shape, value, history);
             }
         }
 
@@ -869,19 +1218,11 @@ namespace Core2D.Editor
             }
 
             var editor = _serviceProvider.GetService<IProjectEditor>();
+            var history = editor.Project?.History;
 
-            if (editor.Renderers[0]?.State?.SelectedShape != null)
+            foreach (var shape in GetShapes(editor))
             {
-                var shape = editor.Renderers[0]?.State?.SelectedShape;
-                shape.SetLineCurveOrientation(value);
-            }
-
-            if (editor.Renderers?[0]?.State?.SelectedShapes?.Count > 0)
-            {
-                foreach (var shape in editor.Renderers[0].State.SelectedShapes)
-                {
-                    shape.SetLineCurveOrientation(value);
-                }
+                SetLineCurveOrientation(shape, value, history);
             }
         }
 
@@ -894,19 +1235,11 @@ namespace Core2D.Editor
             }
 
             var editor = _serviceProvider.GetService<IProjectEditor>();
+            var history = editor.Project?.History;
 
-            if (editor.Renderers[0]?.State?.SelectedShape != null)
+            foreach (var shape in GetShapes(editor))
             {
-                var shape = editor.Renderers[0]?.State?.SelectedShape;
-                shape.SetLineFixedLength(value);
-            }
-
-            if (editor.Renderers?[0]?.State?.SelectedShapes?.Count > 0)
-            {
-                foreach (var shape in editor.Renderers[0].State.SelectedShapes)
-                {
-                    shape.SetLineFixedLength(value);
-                }
+                SetLineFixedLength(shape, value, history);
             }
         }
 
@@ -919,19 +1252,11 @@ namespace Core2D.Editor
             }
 
             var editor = _serviceProvider.GetService<IProjectEditor>();
+            var history = editor.Project?.History;
 
-            if (editor.Renderers[0]?.State?.SelectedShape != null)
+            foreach (var shape in GetShapes(editor))
             {
-                var shape = editor.Renderers[0]?.State?.SelectedShape;
-                shape.ToggleLineFixedLengthFlags(value);
-            }
-
-            if (editor.Renderers?[0]?.State?.SelectedShapes?.Count > 0)
-            {
-                foreach (var shape in editor.Renderers[0].State.SelectedShapes)
-                {
-                    shape.ToggleLineFixedLengthFlags(value);
-                }
+                ToggleLineFixedLengthFlags(shape, value, history);
             }
         }
 
@@ -944,19 +1269,11 @@ namespace Core2D.Editor
             }
 
             var editor = _serviceProvider.GetService<IProjectEditor>();
+            var history = editor.Project?.History;
 
-            if (editor.Renderers[0]?.State?.SelectedShape != null)
+            foreach (var shape in GetShapes(editor))
             {
-                var shape = editor.Renderers[0]?.State?.SelectedShape;
-                shape.ToggleLineFixedLengthStartTrigger(value);
-            }
-
-            if (editor.Renderers?[0]?.State?.SelectedShapes?.Count > 0)
-            {
-                foreach (var shape in editor.Renderers[0].State.SelectedShapes)
-                {
-                    shape.ToggleLineFixedLengthStartTrigger(value);
-                }
+                ToggleLineFixedLengthStartTrigger(shape, value, history);
             }
         }
 
@@ -969,19 +1286,11 @@ namespace Core2D.Editor
             }
 
             var editor = _serviceProvider.GetService<IProjectEditor>();
+            var history = editor.Project?.History;
 
-            if (editor.Renderers[0]?.State?.SelectedShape != null)
+            foreach (var shape in GetShapes(editor))
             {
-                var shape = editor.Renderers[0]?.State?.SelectedShape;
-                shape.ToggleLineFixedLengthEndTrigger(value);
-            }
-
-            if (editor.Renderers?[0]?.State?.SelectedShapes?.Count > 0)
-            {
-                foreach (var shape in editor.Renderers[0].State.SelectedShapes)
-                {
-                    shape.ToggleLineFixedLengthEndTrigger(value);
-                }
+                ToggleLineFixedLengthEndTrigger(shape, value, history);
             }
         }
 
@@ -994,19 +1303,11 @@ namespace Core2D.Editor
             }
 
             var editor = _serviceProvider.GetService<IProjectEditor>();
+            var history = editor.Project?.History;
 
-            if (editor.Renderers[0]?.State?.SelectedShape != null)
+            foreach (var shape in GetShapes(editor))
             {
-                var shape = editor.Renderers[0]?.State?.SelectedShape;
-                shape.SetStartArrowType(value);
-            }
-
-            if (editor.Renderers?[0]?.State?.SelectedShapes?.Count > 0)
-            {
-                foreach (var shape in editor.Renderers[0].State.SelectedShapes)
-                {
-                    shape.SetStartArrowType(value);
-                }
+                SetStartArrowType(shape, value, history);
             }
         }
 
@@ -1014,19 +1315,11 @@ namespace Core2D.Editor
         public void OnStyleToggleStartArrowIsStroked()
         {
             var editor = _serviceProvider.GetService<IProjectEditor>();
+            var history = editor.Project?.History;
 
-            if (editor.Renderers[0]?.State?.SelectedShape != null)
+            foreach (var shape in GetShapes(editor))
             {
-                var shape = editor.Renderers[0]?.State?.SelectedShape;
-                shape.ToggleStartArrowIsStroked();
-            }
-
-            if (editor.Renderers?[0]?.State?.SelectedShapes?.Count > 0)
-            {
-                foreach (var shape in editor.Renderers[0].State.SelectedShapes)
-                {
-                    shape.ToggleStartArrowIsStroked();
-                }
+                ToggleStartArrowIsStroked(shape, history);
             }
         }
 
@@ -1034,19 +1327,11 @@ namespace Core2D.Editor
         public void OnStyleToggleStartArrowIsFilled()
         {
             var editor = _serviceProvider.GetService<IProjectEditor>();
+            var history = editor.Project?.History;
 
-            if (editor.Renderers[0]?.State?.SelectedShape != null)
+            foreach (var shape in GetShapes(editor))
             {
-                var shape = editor.Renderers[0]?.State?.SelectedShape;
-                shape.ToggleStartArrowIsFilled();
-            }
-
-            if (editor.Renderers?[0]?.State?.SelectedShapes?.Count > 0)
-            {
-                foreach (var shape in editor.Renderers[0].State.SelectedShapes)
-                {
-                    shape.ToggleStartArrowIsFilled();
-                }
+                ToggleStartArrowIsFilled(shape, history);
             }
         }
 
@@ -1059,19 +1344,11 @@ namespace Core2D.Editor
             }
 
             var editor = _serviceProvider.GetService<IProjectEditor>();
+            var history = editor.Project?.History;
 
-            if (editor.Renderers[0]?.State?.SelectedShape != null)
+            foreach (var shape in GetShapes(editor))
             {
-                var shape = editor.Renderers[0]?.State?.SelectedShape;
-                shape.SetStartArrowRadiusX(value);
-            }
-
-            if (editor.Renderers?[0]?.State?.SelectedShapes?.Count > 0)
-            {
-                foreach (var shape in editor.Renderers[0].State.SelectedShapes)
-                {
-                    shape.SetStartArrowRadiusX(value);
-                }
+                SetStartArrowRadiusX(shape, value, history);
             }
         }
 
@@ -1084,19 +1361,11 @@ namespace Core2D.Editor
             }
 
             var editor = _serviceProvider.GetService<IProjectEditor>();
+            var history = editor.Project?.History;
 
-            if (editor.Renderers[0]?.State?.SelectedShape != null)
+            foreach (var shape in GetShapes(editor))
             {
-                var shape = editor.Renderers[0]?.State?.SelectedShape;
-                shape.SetStartArrowRadiusY(value);
-            }
-
-            if (editor.Renderers?[0]?.State?.SelectedShapes?.Count > 0)
-            {
-                foreach (var shape in editor.Renderers[0].State.SelectedShapes)
-                {
-                    shape.SetStartArrowRadiusY(value);
-                }
+                SetStartArrowRadiusY(shape, value, history);
             }
         }
 
@@ -1109,19 +1378,11 @@ namespace Core2D.Editor
             }
 
             var editor = _serviceProvider.GetService<IProjectEditor>();
+            var history = editor.Project?.History;
 
-            if (editor.Renderers[0]?.State?.SelectedShape != null)
+            foreach (var shape in GetShapes(editor))
             {
-                var shape = editor.Renderers[0]?.State?.SelectedShape;
-                shape.SetStartArrowThickness(value);
-            }
-
-            if (editor.Renderers?[0]?.State?.SelectedShapes?.Count > 0)
-            {
-                foreach (var shape in editor.Renderers[0].State.SelectedShapes)
-                {
-                    shape.SetStartArrowThickness(value);
-                }
+                SetStartArrowThickness(shape, value, history);
             }
         }
 
@@ -1134,19 +1395,11 @@ namespace Core2D.Editor
             }
 
             var editor = _serviceProvider.GetService<IProjectEditor>();
+            var history = editor.Project?.History;
 
-            if (editor.Renderers[0]?.State?.SelectedShape != null)
+            foreach (var shape in GetShapes(editor))
             {
-                var shape = editor.Renderers[0]?.State?.SelectedShape;
-                shape.SetStartArrowLineCap(value);
-            }
-
-            if (editor.Renderers?[0]?.State?.SelectedShapes?.Count > 0)
-            {
-                foreach (var shape in editor.Renderers[0].State.SelectedShapes)
-                {
-                    shape.SetStartArrowLineCap(value);
-                }
+                SetStartArrowLineCap(shape, value, history);
             }
         }
 
@@ -1154,19 +1407,11 @@ namespace Core2D.Editor
         public void OnStyleSetStartArrowDashes(string dashes)
         {
             var editor = _serviceProvider.GetService<IProjectEditor>();
+            var history = editor.Project?.History;
 
-            if (editor.Renderers[0]?.State?.SelectedShape != null)
+            foreach (var shape in GetShapes(editor))
             {
-                var shape = editor.Renderers[0]?.State?.SelectedShape;
-                shape.SetStartArrowDashes(dashes);
-            }
-
-            if (editor.Renderers?[0]?.State?.SelectedShapes?.Count > 0)
-            {
-                foreach (var shape in editor.Renderers[0].State.SelectedShapes)
-                {
-                    shape.SetStartArrowDashes(dashes);
-                }
+                SetStartArrowDashes(shape, dashes, history);
             }
         }
 
@@ -1179,19 +1424,11 @@ namespace Core2D.Editor
             }
 
             var editor = _serviceProvider.GetService<IProjectEditor>();
+            var history = editor.Project?.History;
 
-            if (editor.Renderers[0]?.State?.SelectedShape != null)
+            foreach (var shape in GetShapes(editor))
             {
-                var shape = editor.Renderers[0]?.State?.SelectedShape;
-                shape.SetStartArrowDashOffset(value);
-            }
-
-            if (editor.Renderers?[0]?.State?.SelectedShapes?.Count > 0)
-            {
-                foreach (var shape in editor.Renderers[0].State.SelectedShapes)
-                {
-                    shape.SetStartArrowDashOffset(value);
-                }
+                SetStartArrowDashOffset(shape, value, history);
             }
         }
 
@@ -1209,19 +1446,11 @@ namespace Core2D.Editor
             }
 
             var editor = _serviceProvider.GetService<IProjectEditor>();
+            var history = editor.Project?.History;
 
-            if (editor.Renderers[0]?.State?.SelectedShape != null)
+            foreach (var shape in GetShapes(editor))
             {
-                var shape = editor.Renderers[0]?.State?.SelectedShape;
-                shape.SetStartArrowStroke(value);
-            }
-
-            if (editor.Renderers?[0]?.State?.SelectedShapes?.Count > 0)
-            {
-                foreach (var shape in editor.Renderers[0].State.SelectedShapes)
-                {
-                    shape.SetStartArrowStroke(value);
-                }
+                SetStartArrowStroke(shape, value, history);
             }
         }
 
@@ -1234,19 +1463,11 @@ namespace Core2D.Editor
             }
 
             var editor = _serviceProvider.GetService<IProjectEditor>();
+            var history = editor.Project?.History;
 
-            if (editor.Renderers[0]?.State?.SelectedShape != null)
+            foreach (var shape in GetShapes(editor))
             {
-                var shape = editor.Renderers[0]?.State?.SelectedShape;
-                shape.SetStartArrowStrokeTransparency(value);
-            }
-
-            if (editor.Renderers?[0]?.State?.SelectedShapes?.Count > 0)
-            {
-                foreach (var shape in editor.Renderers[0].State.SelectedShapes)
-                {
-                    shape.SetStartArrowStrokeTransparency(value);
-                }
+                SetStartArrowStrokeTransparency(shape, value, history);
             }
 
             editor.Project?.CurrentContainer?.Invalidate();
@@ -1266,20 +1487,14 @@ namespace Core2D.Editor
             }
 
             var editor = _serviceProvider.GetService<IProjectEditor>();
+            var history = editor.Project?.History;
 
-            if (editor.Renderers[0]?.State?.SelectedShape != null)
+            foreach (var shape in GetShapes(editor))
             {
-                var shape = editor.Renderers[0]?.State?.SelectedShape;
-                shape.SetStartArrowFill(value);
+                SetStartArrowFill(shape, value, history);
             }
 
-            if (editor.Renderers?[0]?.State?.SelectedShapes?.Count > 0)
-            {
-                foreach (var shape in editor.Renderers[0].State.SelectedShapes)
-                {
-                    shape.SetStartArrowFill(value);
-                }
-            }
+            editor.Project?.CurrentContainer?.Invalidate();
         }
 
         /// <inheritdoc/>
@@ -1291,19 +1506,11 @@ namespace Core2D.Editor
             }
 
             var editor = _serviceProvider.GetService<IProjectEditor>();
+            var history = editor.Project?.History;
 
-            if (editor.Renderers[0]?.State?.SelectedShape != null)
+            foreach (var shape in GetShapes(editor))
             {
-                var shape = editor.Renderers[0]?.State?.SelectedShape;
-                shape.SetStartArrowFillTransparency(value);
-            }
-
-            if (editor.Renderers?[0]?.State?.SelectedShapes?.Count > 0)
-            {
-                foreach (var shape in editor.Renderers[0].State.SelectedShapes)
-                {
-                    shape.SetStartArrowFillTransparency(value);
-                }
+                SetStartArrowFillTransparency(shape, value, history);
             }
 
             editor.Project?.CurrentContainer?.Invalidate();
@@ -1318,60 +1525,42 @@ namespace Core2D.Editor
             }
 
             var editor = _serviceProvider.GetService<IProjectEditor>();
+            var history = editor.Project?.History;
 
-            if (editor.Renderers[0]?.State?.SelectedShape != null)
+            foreach (var shape in GetShapes(editor))
             {
-                var shape = editor.Renderers[0]?.State?.SelectedShape;
-                shape.SetEndArrowType(value);
+                SetEndArrowType(shape, value, history);
             }
 
-            if (editor.Renderers?[0]?.State?.SelectedShapes?.Count > 0)
-            {
-                foreach (var shape in editor.Renderers[0].State.SelectedShapes)
-                {
-                    shape.SetEndArrowType(value);
-                }
-            }
+            editor.Project?.CurrentContainer?.Invalidate();
         }
 
         /// <inheritdoc/>
         public void OnStyleToggleEndArrowIsStroked()
         {
             var editor = _serviceProvider.GetService<IProjectEditor>();
+            var history = editor.Project?.History;
 
-            if (editor.Renderers[0]?.State?.SelectedShape != null)
+            foreach (var shape in GetShapes(editor))
             {
-                var shape = editor.Renderers[0]?.State?.SelectedShape;
-                shape.ToggleEndArrowIsStroked();
+                ToggleEndArrowIsStroked(shape, history);
             }
 
-            if (editor.Renderers?[0]?.State?.SelectedShapes?.Count > 0)
-            {
-                foreach (var shape in editor.Renderers[0].State.SelectedShapes)
-                {
-                    shape.ToggleEndArrowIsStroked();
-                }
-            }
+            editor.Project?.CurrentContainer?.Invalidate();
         }
 
         /// <inheritdoc/>
         public void OnStyleToggleEndArrowIsFilled()
         {
             var editor = _serviceProvider.GetService<IProjectEditor>();
+            var history = editor.Project?.History;
 
-            if (editor.Renderers[0]?.State?.SelectedShape != null)
+            foreach (var shape in GetShapes(editor))
             {
-                var shape = editor.Renderers[0]?.State?.SelectedShape;
-                shape.ToggleEndArrowIsFilled();
+                ToggleEndArrowIsFilled(shape, history);
             }
 
-            if (editor.Renderers?[0]?.State?.SelectedShapes?.Count > 0)
-            {
-                foreach (var shape in editor.Renderers[0].State.SelectedShapes)
-                {
-                    shape.ToggleEndArrowIsFilled();
-                }
-            }
+            editor.Project?.CurrentContainer?.Invalidate();
         }
 
         /// <inheritdoc/>
@@ -1383,20 +1572,14 @@ namespace Core2D.Editor
             }
 
             var editor = _serviceProvider.GetService<IProjectEditor>();
+            var history = editor.Project?.History;
 
-            if (editor.Renderers[0]?.State?.SelectedShape != null)
+            foreach (var shape in GetShapes(editor))
             {
-                var shape = editor.Renderers[0]?.State?.SelectedShape;
-                shape.SetEndArrowRadiusX(value);
+                SetEndArrowRadiusX(shape, value, history);
             }
 
-            if (editor.Renderers?[0]?.State?.SelectedShapes?.Count > 0)
-            {
-                foreach (var shape in editor.Renderers[0].State.SelectedShapes)
-                {
-                    shape.SetEndArrowRadiusX(value);
-                }
-            }
+            editor.Project?.CurrentContainer?.Invalidate();
         }
 
         /// <inheritdoc/>
@@ -1408,20 +1591,14 @@ namespace Core2D.Editor
             }
 
             var editor = _serviceProvider.GetService<IProjectEditor>();
+            var history = editor.Project?.History;
 
-            if (editor.Renderers[0]?.State?.SelectedShape != null)
+            foreach (var shape in GetShapes(editor))
             {
-                var shape = editor.Renderers[0]?.State?.SelectedShape;
-                shape.SetEndArrowRadiusY(value);
+                SetEndArrowRadiusY(shape, value, history);
             }
 
-            if (editor.Renderers?[0]?.State?.SelectedShapes?.Count > 0)
-            {
-                foreach (var shape in editor.Renderers[0].State.SelectedShapes)
-                {
-                    shape.SetEndArrowRadiusY(value);
-                }
-            }
+            editor.Project?.CurrentContainer?.Invalidate();
         }
 
         /// <inheritdoc/>
@@ -1433,20 +1610,14 @@ namespace Core2D.Editor
             }
 
             var editor = _serviceProvider.GetService<IProjectEditor>();
+            var history = editor.Project?.History;
 
-            if (editor.Renderers[0]?.State?.SelectedShape != null)
+            foreach (var shape in GetShapes(editor))
             {
-                var shape = editor.Renderers[0]?.State?.SelectedShape;
-                shape.SetEndArrowThickness(value);
+                SetEndArrowThickness(shape, value, history);
             }
 
-            if (editor.Renderers?[0]?.State?.SelectedShapes?.Count > 0)
-            {
-                foreach (var shape in editor.Renderers[0].State.SelectedShapes)
-                {
-                    shape.SetEndArrowThickness(value);
-                }
-            }
+            editor.Project?.CurrentContainer?.Invalidate();
         }
 
         /// <inheritdoc/>
@@ -1458,39 +1629,25 @@ namespace Core2D.Editor
             }
 
             var editor = _serviceProvider.GetService<IProjectEditor>();
+            var history = editor.Project?.History;
 
-            if (editor.Renderers[0]?.State?.SelectedShape != null)
+            foreach (var shape in GetShapes(editor))
             {
-                var shape = editor.Renderers[0]?.State?.SelectedShape;
-                shape.SetEndArrowLineCap(value);
+                SetEndArrowLineCap(shape, value, history);
             }
 
-            if (editor.Renderers?[0]?.State?.SelectedShapes?.Count > 0)
-            {
-                foreach (var shape in editor.Renderers[0].State.SelectedShapes)
-                {
-                    shape.SetEndArrowLineCap(value);
-                }
-            }
+            editor.Project?.CurrentContainer?.Invalidate();
         }
 
         /// <inheritdoc/>
         public void OnStyleSetEndArrowDashes(string dashes)
         {
             var editor = _serviceProvider.GetService<IProjectEditor>();
+            var history = editor.Project?.History;
 
-            if (editor.Renderers[0]?.State?.SelectedShape != null)
+            foreach (var shape in GetShapes(editor))
             {
-                var shape = editor.Renderers[0]?.State?.SelectedShape;
-                shape.SetEndArrowDashes(dashes);
-            }
-
-            if (editor.Renderers?[0]?.State?.SelectedShapes?.Count > 0)
-            {
-                foreach (var shape in editor.Renderers[0].State.SelectedShapes)
-                {
-                    shape.SetEndArrowDashes(dashes);
-                }
+                SetEndArrowDashes(shape, dashes, history);
             }
         }
 
@@ -1503,20 +1660,14 @@ namespace Core2D.Editor
             }
 
             var editor = _serviceProvider.GetService<IProjectEditor>();
+            var history = editor.Project?.History;
 
-            if (editor.Renderers[0]?.State?.SelectedShape != null)
+            foreach (var shape in GetShapes(editor))
             {
-                var shape = editor.Renderers[0]?.State?.SelectedShape;
-                shape.SetEndArrowDashOffset(value);
+                SetEndArrowDashOffset(shape, value, history);
             }
 
-            if (editor.Renderers?[0]?.State?.SelectedShapes?.Count > 0)
-            {
-                foreach (var shape in editor.Renderers[0].State.SelectedShapes)
-                {
-                    shape.SetEndArrowDashOffset(value);
-                }
-            }
+            editor.Project?.CurrentContainer?.Invalidate();
         }
 
         /// <inheritdoc/>
@@ -1533,20 +1684,14 @@ namespace Core2D.Editor
             }
 
             var editor = _serviceProvider.GetService<IProjectEditor>();
+            var history = editor.Project?.History;
 
-            if (editor.Renderers[0]?.State?.SelectedShape != null)
+            foreach (var shape in GetShapes(editor))
             {
-                var shape = editor.Renderers[0]?.State?.SelectedShape;
-                shape.SetEndArrowStroke(value);
+                SetEndArrowStroke(shape, value, history);
             }
 
-            if (editor.Renderers?[0]?.State?.SelectedShapes?.Count > 0)
-            {
-                foreach (var shape in editor.Renderers[0].State.SelectedShapes)
-                {
-                    shape.SetEndArrowStroke(value);
-                }
-            }
+            editor.Project?.CurrentContainer?.Invalidate();
         }
 
         /// <inheritdoc/>
@@ -1558,19 +1703,11 @@ namespace Core2D.Editor
             }
 
             var editor = _serviceProvider.GetService<IProjectEditor>();
+            var history = editor.Project?.History;
 
-            if (editor.Renderers[0]?.State?.SelectedShape != null)
+            foreach (var shape in GetShapes(editor))
             {
-                var shape = editor.Renderers[0]?.State?.SelectedShape;
-                shape.SetEndArrowStrokeTransparency(value);
-            }
-
-            if (editor.Renderers?[0]?.State?.SelectedShapes?.Count > 0)
-            {
-                foreach (var shape in editor.Renderers[0].State.SelectedShapes)
-                {
-                    shape.SetEndArrowStrokeTransparency(value);
-                }
+                SetEndArrowStrokeTransparency(shape, value, history);
             }
 
             editor.Project?.CurrentContainer?.Invalidate();
@@ -1590,19 +1727,11 @@ namespace Core2D.Editor
             }
 
             var editor = _serviceProvider.GetService<IProjectEditor>();
+            var history = editor.Project?.History;
 
-            if (editor.Renderers[0]?.State?.SelectedShape != null)
+            foreach (var shape in GetShapes(editor))
             {
-                var shape = editor.Renderers[0]?.State?.SelectedShape;
-                shape.SetEndArrowFill(value);
-            }
-
-            if (editor.Renderers?[0]?.State?.SelectedShapes?.Count > 0)
-            {
-                foreach (var shape in editor.Renderers[0].State.SelectedShapes)
-                {
-                    shape.SetEndArrowFill(value);
-                }
+                SetEndArrowFill(shape, value, history);
             }
         }
 
@@ -1615,23 +1744,11 @@ namespace Core2D.Editor
             }
 
             var editor = _serviceProvider.GetService<IProjectEditor>();
+            var history = editor.Project?.History;
 
-            if (editor.Renderers[0]?.State?.SelectedShape != null)
+            foreach (var shape in GetShapes(editor))
             {
-                var shape = editor.Renderers[0]?.State?.SelectedShape;
-                shape.SetEndArrowFillTransparency(value);
-            }
-
-            if (editor.Renderers?[0]?.State?.SelectedShapes?.Count > 0)
-            {
-                foreach (var shape in editor.Renderers[0].State.SelectedShapes)
-                {
-                    var style = shape.Style;
-                    if (style != null && style.EndArrowStyle != null && style.EndArrowStyle.Fill is IArgbColor argbColor)
-                    {
-                        argbColor.A = value;
-                    }
-                }
+                SetEndArrowFillTransparency(shape, value, history);
             }
 
             editor.Project?.CurrentContainer?.Invalidate();
