@@ -67,9 +67,6 @@
             <Separator/>
             <MenuItem Header="Copy As _Metafile" Command="{Binding Platform.OnCopyAsEmf}"/>
             <Separator/>
-            <MenuItem Header="C_opy Style" Command="{Binding StyleEditor.OnCopyStyle}" InputGesture="Ctrl+Shift+C"/>
-            <MenuItem Header="Paste St_yle" Command="{Binding StyleEditor.OnPasteStyle}" InputGesture="Ctrl+Shift+V"/>
-            <Separator/>
             <MenuItem Header="Select _All" Command="{Binding OnSelectAll}" InputGesture="Ctrl+A"/>
             <MenuItem Header="De_select All" Command="{Binding OnDeselectAll}" InputGesture="Ctrl+Shift+A"/>
             <Separator/>
@@ -171,6 +168,33 @@
             </MenuItem>
         </MenuItem>
         <MenuItem Header="St_yle">
+            <MenuItem Header="_Copy">
+                <MenuItem Header="_Style" Command="{Binding StyleEditor.OnCopyStyle}" InputGesture="Ctrl+Shift+C"/>
+                <Separator/>
+                <MenuItem Header="S_troke" Command="{Binding StyleEditor.OnCopyStroke}"/>
+                <MenuItem Header="_Fill" Command="{Binding StyleEditor.OnCopyFill}"/>
+                <Separator/>
+                <MenuItem Header="_Text Style" Command="{Binding StyleEditor.OnCopyTextStyle}"/>
+                <Separator/>
+                <MenuItem Header="St_art Arrow Style" Command="{Binding StyleEditor.OnCopyStartArrowStyle}"/>
+                <MenuItem Header="_End Arrow Style" Command="{Binding StyleEditor.OnCopyEndArrowStyle}"/>
+                <Separator/>
+                <MenuItem Header="_Line Style" Command="{Binding StyleEditor.OnCopyLineStyle}"/>
+            </MenuItem>
+            <MenuItem Header="_Paste">
+                <MenuItem Header="_Style" Command="{Binding StyleEditor.OnPasteStyle}" InputGesture="Ctrl+Shift+V"/>
+                <Separator/>
+                <MenuItem Header="S_troke" Command="{Binding StyleEditor.OnPasteStroke}"/>
+                <MenuItem Header="_Fill" Command="{Binding StyleEditor.OnPasteFill}"/>
+                <Separator/>
+                <MenuItem Header="_Text Style" Command="{Binding StyleEditor.OnPasteTextStyle}"/>
+                <Separator/>
+                <MenuItem Header="St_art Arrow Style" Command="{Binding StyleEditor.OnPasteStartArrowStyle}"/>
+                <MenuItem Header="_End Arrow Style" Command="{Binding StyleEditor.OnPasteEndArrowStyle}"/>
+                <Separator/>
+                <MenuItem Header="_Line Style" Command="{Binding StyleEditor.OnPasteLineStyle}"/>
+            </MenuItem>
+            <Separator/>
             <MenuItem Header="_Stroke">
                 <MenuItem Header="_Color">
                     <MenuItem Header="Blac_k" Command="{Binding StyleEditor.OnStyleSetStroke}" CommandParameter="Black"/>
