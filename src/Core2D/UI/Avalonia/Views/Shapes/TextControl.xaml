@@ -15,7 +15,7 @@
                     <TextBlock Text="Name" Classes="left" Grid.Row="0" Grid.Column="0"/>
                     <TextBox Text="{Binding Name, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
                     <TextBlock Text="Text" Classes="left" Grid.Row="1" Grid.Column="0"/>
-                    <TextBox Text="{Binding Text, Mode=TwoWay}" Classes="left" Grid.Row="1" Grid.Column="1"/>
+                    <TextBox Text="{Binding Text, Mode=TwoWay}" AcceptsReturn="True" Classes="left" Grid.Row="1" Grid.Column="1"/>
                 </Grid>
             </ScrollViewer>
         </TabItem>
