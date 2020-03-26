@@ -422,7 +422,6 @@ namespace Core2D.Editor
                 argbColor.A = value;
             }
         }
-
     }
 
     /// <summary>
