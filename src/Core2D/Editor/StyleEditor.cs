@@ -2,10 +2,429 @@
 using System.Collections.Generic;
 using System.Globalization;
 using Core2D.Renderer;
+using Core2D.Shapes;
 using Core2D.Style;
 
 namespace Core2D.Editor
 {
+    internal static class ShapeExtensions
+    {
+        public static void SetThickness(this IBaseShape shape, double value)
+        {
+            var style = shape.Style;
+            if (style != null)
+            {
+                style.Thickness = value;
+            }
+        }
+
+        public static void SetLineCap(this IBaseShape shape, LineCap value)
+        {
+            var style = shape.Style;
+            if (style != null)
+            {
+                style.LineCap = value;
+            }
+        }
+
+        public static void SetDashes(this IBaseShape shape, string dashes)
+        {
+            var style = shape.Style;
+            if (style != null)
+            {
+                style.Dashes = dashes;
+            }
+        }
+
+        public static void SetDashOffset(this IBaseShape shape, double value)
+        {
+            var style = shape.Style;
+            if (style != null)
+            {
+                style.DashOffset = value;
+            }
+        }
+
+        public static void SetStroke(this IBaseShape shape, IColor value)
+        {
+            var style = shape.Style;
+            if (style != null)
+            {
+                style.Stroke = (IColor)value.Copy(null);
+            }
+        }
+
+        public static void SetStrokeTransparency(this IBaseShape shape, byte value)
+        {
+            var style = shape.Style;
+            if (style != null && style.Stroke is IArgbColor argbColor)
+            {
+                argbColor.A = value;
+            }
+        }
+
+        public static void SetFill(this IBaseShape shape, IColor value)
+        {
+            var style = shape.Style;
+            if (style != null)
+            {
+                style.Fill = (IColor)value.Copy(null);
+            }
+        }
+
+        public static void SetFillTransparency(this IBaseShape shape, byte value)
+        {
+            var style = shape.Style;
+            if (style != null && style.Fill is IArgbColor argbColor)
+            {
+                argbColor.A = value;
+            }
+        }
+
+        public static void SetFontName(this IBaseShape shape, string fontName)
+        {
+            var style = shape.Style;
+            if (style != null && style.TextStyle != null)
+            {
+                style.TextStyle.FontName = fontName;
+            }
+        }
+
+        public static void SetFontStyle(this IBaseShape shape, FontStyleFlags value)
+        {
+            var style = shape.Style;
+            if (style != null && style.TextStyle != null && style.TextStyle.FontStyle != null)
+            {
+                style.TextStyle.FontStyle.Flags ^= value;
+            }
+        }
+
+        public static void SetFontSize(this IBaseShape shape, double value)
+        {
+            var style = shape.Style;
+            if (style != null && style.TextStyle != null)
+            {
+                style.TextStyle.FontSize = value;
+            }
+        }
+
+        public static void SetTextHAlignment(this IBaseShape shape, TextHAlignment value)
+        {
+            var style = shape.Style;
+            if (style != null && style.TextStyle != null)
+            {
+                style.TextStyle.TextHAlignment = value;
+            }
+        }
+
+        public static void SetTextVAlignment(this IBaseShape shape, TextVAlignment value)
+        {
+            var style = shape.Style;
+            if (style != null && style.TextStyle != null)
+            {
+                style.TextStyle.TextVAlignment = value;
+            }
+        }
+
+        public static void ToggleLineIsCurved(this IBaseShape shape)
+        {
+            var style = shape.Style;
+            if (style != null && style.LineStyle != null)
+            {
+                style.LineStyle.IsCurved = !style.LineStyle.IsCurved;
+            }
+        }
+
+        public static void SetLineCurvature(this IBaseShape shape, double value)
+        {
+            var style = shape.Style;
+            if (style != null && style.LineStyle != null)
+            {
+                style.LineStyle.Curvature = value;
+            }
+        }
+
+        public static void SetLineCurveOrientation(this IBaseShape shape, CurveOrientation value)
+        {
+            var style = shape.Style;
+            if (style != null && style.LineStyle != null)
+            {
+                style.LineStyle.CurveOrientation = value;
+            }
+        }
+
+        public static void SetLineFixedLength(this IBaseShape shape, double value)
+        {
+            var style = shape.Style;
+            if (style != null && style.LineStyle != null && style.LineStyle.FixedLength != null)
+            {
+                style.LineStyle.FixedLength.Length = value;
+            }
+        }
+
+        public static void ToggleLineFixedLengthFlags(this IBaseShape shape, LineFixedLengthFlags value)
+        {
+            var style = shape.Style;
+            if (style != null && style.LineStyle != null && style.LineStyle.FixedLength != null)
+            {
+                style.LineStyle.FixedLength.Flags ^= value;
+            }
+        }
+
+        public static void ToggleLineFixedLengthStartTrigger(this IBaseShape shape, ShapeStateFlags value)
+        {
+            var style = shape.Style;
+            if (style != null && style.LineStyle != null && style.LineStyle.FixedLength != null && style.LineStyle.FixedLength.StartTrigger != null)
+            {
+                style.LineStyle.FixedLength.StartTrigger.Flags ^= value;
+            }
+        }
+
+        public static void ToggleLineFixedLengthEndTrigger(this IBaseShape shape, ShapeStateFlags value)
+        {
+            var style = shape.Style;
+            if (style != null && style.LineStyle != null && style.LineStyle.FixedLength != null && style.LineStyle.FixedLength.EndTrigger != null)
+            {
+                style.LineStyle.FixedLength.EndTrigger.Flags ^= value;
+            }
+        }
+
+        public static void SetStartArrowType(this IBaseShape shape, ArrowType value)
+        {
+            var style = shape.Style;
+            if (style != null && style.StartArrowStyle != null)
+            {
+                style.StartArrowStyle.ArrowType = value;
+            }
+        }
+
+        public static void ToggleStartArrowIsStroked(this IBaseShape shape)
+        {
+            var style = shape.Style;
+            if (style != null && style.StartArrowStyle != null)
+            {
+                style.StartArrowStyle.IsStroked = !style.StartArrowStyle.IsStroked;
+            }
+        }
+
+        public static void ToggleStartArrowIsFilled(this IBaseShape shape)
+        {
+            var style = shape.Style;
+            if (style != null && style.StartArrowStyle != null)
+            {
+                style.StartArrowStyle.IsFilled = !style.StartArrowStyle.IsFilled;
+            }
+        }
+
+        public static void SetStartArrowRadiusX(this IBaseShape shape, double value)
+        {
+            var style = shape.Style;
+            if (style != null && style.StartArrowStyle != null)
+            {
+                style.StartArrowStyle.RadiusX = value;
+            }
+        }
+
+        public static void SetStartArrowRadiusY(this IBaseShape shape, double value)
+        {
+            var style = shape.Style;
+            if (style != null && style.StartArrowStyle != null)
+            {
+                style.StartArrowStyle.RadiusY = value;
+            }
+        }
+
+        public static void SetStartArrowThickness(this IBaseShape shape, double value)
+        {
+            var style = shape.Style;
+            if (style != null && style.StartArrowStyle != null)
+            {
+                style.StartArrowStyle.Thickness = value;
+            }
+        }
+
+        public static void SetStartArrowLineCap(this IBaseShape shape, LineCap value)
+        {
+            var style = shape.Style;
+            if (style != null && style.StartArrowStyle != null)
+            {
+                style.StartArrowStyle.LineCap = value;
+            }
+        }
+
+        public static void SetStartArrowDashes(this IBaseShape shape, string dashes)
+        {
+            var style = shape.Style;
+            if (style != null && style.StartArrowStyle != null)
+            {
+                style.StartArrowStyle.Dashes = dashes;
+            }
+        }
+
+        public static void SetStartArrowDashOffset(this IBaseShape shape, double value)
+        {
+            var style = shape.Style;
+            if (style != null && style.StartArrowStyle != null)
+            {
+                style.StartArrowStyle.DashOffset = value;
+            }
+        }
+
+        public static void SetStartArrowStroke(this IBaseShape shape, IColor value)
+        {
+            var style = shape.Style;
+            if (style != null && style.StartArrowStyle != null)
+            {
+                style.StartArrowStyle.Stroke = (IColor)value.Copy(null);
+            }
+        }
+
+        public static void SetStartArrowStrokeTransparency(this IBaseShape shape, byte value)
+        {
+            var style = shape.Style;
+            if (style != null && style.StartArrowStyle != null && style.StartArrowStyle.Stroke is IArgbColor argbColor)
+            {
+                argbColor.A = value;
+            }
+        }
+
+        public static void SetStartArrowFill(this IBaseShape shape, IColor value)
+        {
+            var style = shape.Style;
+            if (style != null && style.StartArrowStyle != null)
+            {
+                style.StartArrowStyle.Fill = (IColor)value.Copy(null);
+            }
+        }
+
+        public static void SetStartArrowFillTransparency(this IBaseShape shape, byte value)
+        {
+            var style = shape.Style;
+            if (style != null && style.StartArrowStyle != null && style.StartArrowStyle.Fill is IArgbColor argbColor)
+            {
+                argbColor.A = value;
+            }
+        }
+
+        public static void SetEndArrowType(this IBaseShape shape, ArrowType value)
+        {
+            var style = shape.Style;
+            if (style != null && style.EndArrowStyle != null)
+            {
+                style.EndArrowStyle.ArrowType = value;
+            }
+        }
+
+        public static void ToggleEndArrowIsStroked(this IBaseShape shape)
+        {
+            var style = shape.Style;
+            if (style != null && style.EndArrowStyle != null)
+            {
+                style.EndArrowStyle.IsStroked = !style.EndArrowStyle.IsStroked;
+            }
+        }
+
+        public static void ToggleEndArrowIsFilled(this IBaseShape shape)
+        {
+            var style = shape.Style;
+            if (style != null && style.EndArrowStyle != null)
+            {
+                style.EndArrowStyle.IsFilled = !style.EndArrowStyle.IsFilled;
+            }
+        }
+
+        public static void SetEndArrowRadiusX(this IBaseShape shape, double value)
+        {
+            var style = shape.Style;
+            if (style != null && style.EndArrowStyle != null)
+            {
+                style.EndArrowStyle.RadiusX = value;
+            }
+        }
+
+        public static void SetEndArrowRadiusY(this IBaseShape shape, double value)
+        {
+            var style = shape.Style;
+            if (style != null && style.EndArrowStyle != null)
+            {
+                style.EndArrowStyle.RadiusY = value;
+            }
+        }
+
+        public static void SetEndArrowThickness(this IBaseShape shape, double value)
+        {
+            var style = shape.Style;
+            if (style != null && style.EndArrowStyle != null)
+            {
+                style.EndArrowStyle.Thickness = value;
+            }
+        }
+
+        public static void SetEndArrowLineCap(this IBaseShape shape, LineCap value)
+        {
+            var style = shape.Style;
+            if (style != null && style.EndArrowStyle != null)
+            {
+                style.EndArrowStyle.LineCap = value;
+            }
+        }
+
+        public static void SetEndArrowDashes(this IBaseShape shape, string dashes)
+        {
+            var style = shape.Style;
+            if (style != null && style.EndArrowStyle != null)
+            {
+                style.EndArrowStyle.Dashes = dashes;
+            }
+        }
+
+        public static void SetEndArrowDashOffset(this IBaseShape shape, double value)
+        {
+            var style = shape.Style;
+            if (style != null && style.EndArrowStyle != null)
+            {
+                style.EndArrowStyle.DashOffset = value;
+            }
+        }
+
+        public static void SetEndArrowStroke(this IBaseShape shape, IColor value)
+        {
+            var style = shape.Style;
+            if (style != null && style.EndArrowStyle != null)
+            {
+                style.EndArrowStyle.Stroke = (IColor)value.Copy(null);
+            }
+        }
+
+        public static void SetEndArrowStrokeTransparency(this IBaseShape shape, byte value)
+        {
+            var style = shape.Style;
+            if (style != null && style.EndArrowStyle != null && style.EndArrowStyle.Stroke is IArgbColor argbColor)
+            {
+                argbColor.A = value;
+            }
+        }
+
+        public static void SetEndArrowFill(this IBaseShape shape, IColor value)
+        {
+            var style = shape.Style;
+            if (style != null && style.EndArrowStyle != null)
+            {
+                style.EndArrowStyle.Fill = (IColor)value.Copy(null);
+            }
+        }
+
+        public static void SetEndArrowFillTransparency(this IBaseShape shape, byte value)
+        {
+            var style = shape.Style;
+            if (style != null && style.EndArrowStyle != null && style.EndArrowStyle.Fill is IArgbColor argbColor)
+            {
+                argbColor.A = value;
+            }
+        }
+
+    }
+
     /// <summary>
     /// Style editor.
     /// </summary>
@@ -79,22 +498,14 @@ namespace Core2D.Editor
             if (editor.Renderers[0]?.State?.SelectedShape != null)
             {
                 var shape = editor.Renderers[0]?.State?.SelectedShape;
-                var style = shape.Style;
-                if (style != null)
-                {
-                    style.Thickness = value;
-                }
+                shape.SetThickness(value);
             }
 
             if (editor.Renderers?[0]?.State?.SelectedShapes?.Count > 0)
             {
                 foreach (var shape in editor.Renderers[0].State.SelectedShapes)
                 {
-                    var style = shape.Style;
-                    if (style != null)
-                    {
-                        style.Thickness = value;
-                    }
+                    shape.SetThickness(value);
                 }
             }
         }
@@ -112,22 +523,14 @@ namespace Core2D.Editor
             if (editor.Renderers[0]?.State?.SelectedShape != null)
             {
                 var shape = editor.Renderers[0]?.State?.SelectedShape;
-                var style = shape.Style;
-                if (style != null)
-                {
-                    style.LineCap = value;
-                }
+                shape.SetLineCap(value);
             }
 
             if (editor.Renderers?[0]?.State?.SelectedShapes?.Count > 0)
             {
                 foreach (var shape in editor.Renderers[0].State.SelectedShapes)
                 {
-                    var style = shape.Style;
-                    if (style != null)
-                    {
-                        style.LineCap = value;
-                    }
+                    shape.SetLineCap(value);
                 }
             }
         }
@@ -140,22 +543,14 @@ namespace Core2D.Editor
             if (editor.Renderers[0]?.State?.SelectedShape != null)
             {
                 var shape = editor.Renderers[0]?.State?.SelectedShape;
-                var style = shape.Style;
-                if (style != null)
-                {
-                    style.Dashes = dashes;
-                }
+                shape.SetDashes(dashes);
             }
 
             if (editor.Renderers?[0]?.State?.SelectedShapes?.Count > 0)
             {
                 foreach (var shape in editor.Renderers[0].State.SelectedShapes)
                 {
-                    var style = shape.Style;
-                    if (style != null)
-                    {
-                        style.Dashes = dashes;
-                    }
+                    shape.SetDashes(dashes);
                 }
             }
         }
@@ -173,22 +568,14 @@ namespace Core2D.Editor
             if (editor.Renderers[0]?.State?.SelectedShape != null)
             {
                 var shape = editor.Renderers[0]?.State?.SelectedShape;
-                var style = shape.Style;
-                if (style != null)
-                {
-                    style.DashOffset = value;
-                }
+                shape.SetDashOffset(value);
             }
 
             if (editor.Renderers?[0]?.State?.SelectedShapes?.Count > 0)
             {
                 foreach (var shape in editor.Renderers[0].State.SelectedShapes)
                 {
-                    var style = shape.Style;
-                    if (style != null)
-                    {
-                        style.DashOffset = value;
-                    }
+                    shape.SetDashOffset(value);
                 }
             }
         }
@@ -211,22 +598,14 @@ namespace Core2D.Editor
             if (editor.Renderers[0]?.State?.SelectedShape != null)
             {
                 var shape = editor.Renderers[0]?.State?.SelectedShape;
-                var style = shape.Style;
-                if (style != null)
-                {
-                    style.Stroke = (IColor)value.Copy(null);
-                }
+                shape.SetStroke(value);
             }
 
             if (editor.Renderers?[0]?.State?.SelectedShapes?.Count > 0)
             {
                 foreach (var shape in editor.Renderers[0].State.SelectedShapes)
                 {
-                    var style = shape.Style;
-                    if (style != null)
-                    {
-                        style.Stroke = (IColor)value.Copy(null);
-                    }
+                    shape.SetStroke(value);
                 }
             }
         }
@@ -244,22 +623,14 @@ namespace Core2D.Editor
             if (editor.Renderers[0]?.State?.SelectedShape != null)
             {
                 var shape = editor.Renderers[0]?.State?.SelectedShape;
-                var style = shape.Style;
-                if (style != null && style.Stroke is IArgbColor argbColor)
-                {
-                    argbColor.A = value;
-                }
+                shape.SetStrokeTransparency(value);
             }
 
             if (editor.Renderers?[0]?.State?.SelectedShapes?.Count > 0)
             {
                 foreach (var shape in editor.Renderers[0].State.SelectedShapes)
                 {
-                    var style = shape.Style;
-                    if (style != null && style.Stroke is IArgbColor argbColor)
-                    {
-                        argbColor.A = value;
-                    }
+                    shape.SetStrokeTransparency(value);
                 }
             }
 
@@ -284,22 +655,14 @@ namespace Core2D.Editor
             if (editor.Renderers[0]?.State?.SelectedShape != null)
             {
                 var shape = editor.Renderers[0]?.State?.SelectedShape;
-                var style = shape.Style;
-                if (style != null)
-                {
-                    style.Fill = (IColor)value.Copy(null);
-                }
+                shape.SetFill(value);
             }
 
             if (editor.Renderers?[0]?.State?.SelectedShapes?.Count > 0)
             {
                 foreach (var shape in editor.Renderers[0].State.SelectedShapes)
                 {
-                    var style = shape.Style;
-                    if (style != null)
-                    {
-                        style.Fill = (IColor)value.Copy(null);
-                    }
+                    shape.SetFill(value);
                 }
             }
         }
@@ -317,22 +680,14 @@ namespace Core2D.Editor
             if (editor.Renderers[0]?.State?.SelectedShape != null)
             {
                 var shape = editor.Renderers[0]?.State?.SelectedShape;
-                var style = shape.Style;
-                if (style != null && style.Fill is IArgbColor argbColor)
-                {
-                    argbColor.A = value;
-                }
+                shape.SetFillTransparency(value);
             }
 
             if (editor.Renderers?[0]?.State?.SelectedShapes?.Count > 0)
             {
                 foreach (var shape in editor.Renderers[0].State.SelectedShapes)
                 {
-                    var style = shape.Style;
-                    if (style != null && style.Fill is IArgbColor argbColor)
-                    {
-                        argbColor.A = value;
-                    }
+                    shape.SetFillTransparency(value);
                 }
             }
 
@@ -347,22 +702,14 @@ namespace Core2D.Editor
             if (editor.Renderers[0]?.State?.SelectedShape != null)
             {
                 var shape = editor.Renderers[0]?.State?.SelectedShape;
-                var style = shape.Style;
-                if (style != null && style.TextStyle != null)
-                {
-                    style.TextStyle.FontName = fontName;
-                }
+                shape.SetFontName(fontName);
             }
 
             if (editor.Renderers?[0]?.State?.SelectedShapes?.Count > 0)
             {
                 foreach (var shape in editor.Renderers[0].State.SelectedShapes)
                 {
-                    var style = shape.Style;
-                    if (style != null && style.TextStyle != null)
-                    {
-                        style.TextStyle.FontName = fontName;
-                    }
+                    shape.SetFontName(fontName);
                 }
             }
         }
@@ -380,22 +727,14 @@ namespace Core2D.Editor
             if (editor.Renderers[0]?.State?.SelectedShape != null)
             {
                 var shape = editor.Renderers[0]?.State?.SelectedShape;
-                var style = shape.Style;
-                if (style != null && style.TextStyle != null)
-                {
-                    style.TextStyle.FontSize = value;
-                }
+                shape.SetFontSize(value);
             }
 
             if (editor.Renderers?[0]?.State?.SelectedShapes?.Count > 0)
             {
                 foreach (var shape in editor.Renderers[0].State.SelectedShapes)
                 {
-                    var style = shape.Style;
-                    if (style != null && style.TextStyle != null)
-                    {
-                        style.TextStyle.FontSize = value;
-                    }
+                    shape.SetFontSize(value);
                 }
             }
         }
@@ -413,22 +752,14 @@ namespace Core2D.Editor
             if (editor.Renderers[0]?.State?.SelectedShape != null)
             {
                 var shape = editor.Renderers[0]?.State?.SelectedShape;
-                var style = shape.Style;
-                if (style != null && style.TextStyle != null && style.TextStyle.FontStyle != null)
-                {
-                    style.TextStyle.FontStyle.Flags ^= value;
-                }
+                shape.SetFontStyle(value);
             }
 
             if (editor.Renderers?[0]?.State?.SelectedShapes?.Count > 0)
             {
                 foreach (var shape in editor.Renderers[0].State.SelectedShapes)
                 {
-                    var style = shape.Style;
-                    if (style != null && style.TextStyle != null && style.TextStyle.FontStyle != null)
-                    {
-                        style.TextStyle.FontStyle.Flags ^= value;
-                    }
+                    shape.SetFontStyle(value);
                 }
             }
         }
@@ -446,22 +777,14 @@ namespace Core2D.Editor
             if (editor.Renderers[0]?.State?.SelectedShape != null)
             {
                 var shape = editor.Renderers[0]?.State?.SelectedShape;
-                var style = shape.Style;
-                if (style != null && style.TextStyle != null)
-                {
-                    style.TextStyle.TextHAlignment = value;
-                }
+                shape.SetTextHAlignment(value);
             }
 
             if (editor.Renderers?[0]?.State?.SelectedShapes?.Count > 0)
             {
                 foreach (var shape in editor.Renderers[0].State.SelectedShapes)
                 {
-                    var style = shape.Style;
-                    if (style != null && style.TextStyle != null)
-                    {
-                        style.TextStyle.TextHAlignment = value;
-                    }
+                    shape.SetTextHAlignment(value);
                 }
             }
         }
@@ -479,22 +802,14 @@ namespace Core2D.Editor
             if (editor.Renderers[0]?.State?.SelectedShape != null)
             {
                 var shape = editor.Renderers[0]?.State?.SelectedShape;
-                var style = shape.Style;
-                if (style != null && style.TextStyle != null)
-                {
-                    style.TextStyle.TextVAlignment = value;
-                }
+                shape.SetTextVAlignment(value);
             }
 
             if (editor.Renderers?[0]?.State?.SelectedShapes?.Count > 0)
             {
                 foreach (var shape in editor.Renderers[0].State.SelectedShapes)
                 {
-                    var style = shape.Style;
-                    if (style != null && style.TextStyle != null)
-                    {
-                        style.TextStyle.TextVAlignment = value;
-                    }
+                    shape.SetTextVAlignment(value);
                 }
             }
         }
@@ -507,22 +822,14 @@ namespace Core2D.Editor
             if (editor.Renderers[0]?.State?.SelectedShape != null)
             {
                 var shape = editor.Renderers[0]?.State?.SelectedShape;
-                var style = shape.Style;
-                if (style != null && style.LineStyle != null)
-                {
-                    style.LineStyle.IsCurved = !style.LineStyle.IsCurved;
-                }
+                shape.ToggleLineIsCurved();
             }
 
             if (editor.Renderers?[0]?.State?.SelectedShapes?.Count > 0)
             {
                 foreach (var shape in editor.Renderers[0].State.SelectedShapes)
                 {
-                    var style = shape.Style;
-                    if (style != null && style.LineStyle != null)
-                    {
-                        style.LineStyle.IsCurved = !style.LineStyle.IsCurved;
-                    }
+                    shape.ToggleLineIsCurved();
                 }
             }
         }
@@ -540,22 +847,14 @@ namespace Core2D.Editor
             if (editor.Renderers[0]?.State?.SelectedShape != null)
             {
                 var shape = editor.Renderers[0]?.State?.SelectedShape;
-                var style = shape.Style;
-                if (style != null && style.LineStyle != null)
-                {
-                    style.LineStyle.Curvature = value;
-                }
+                shape.SetLineCurvature(value);
             }
 
             if (editor.Renderers?[0]?.State?.SelectedShapes?.Count > 0)
             {
                 foreach (var shape in editor.Renderers[0].State.SelectedShapes)
                 {
-                    var style = shape.Style;
-                    if (style != null && style.LineStyle != null)
-                    {
-                        style.LineStyle.Curvature = value;
-                    }
+                    shape.SetLineCurvature(value);
                 }
             }
         }
@@ -573,22 +872,14 @@ namespace Core2D.Editor
             if (editor.Renderers[0]?.State?.SelectedShape != null)
             {
                 var shape = editor.Renderers[0]?.State?.SelectedShape;
-                var style = shape.Style;
-                if (style != null && style.LineStyle != null)
-                {
-                    style.LineStyle.CurveOrientation = value;
-                }
+                shape.SetLineCurveOrientation(value);
             }
 
             if (editor.Renderers?[0]?.State?.SelectedShapes?.Count > 0)
             {
                 foreach (var shape in editor.Renderers[0].State.SelectedShapes)
                 {
-                    var style = shape.Style;
-                    if (style != null && style.LineStyle != null)
-                    {
-                        style.LineStyle.CurveOrientation = value;
-                    }
+                    shape.SetLineCurveOrientation(value);
                 }
             }
         }
@@ -606,22 +897,14 @@ namespace Core2D.Editor
             if (editor.Renderers[0]?.State?.SelectedShape != null)
             {
                 var shape = editor.Renderers[0]?.State?.SelectedShape;
-                var style = shape.Style;
-                if (style != null && style.LineStyle != null && style.LineStyle.FixedLength != null)
-                {
-                    style.LineStyle.FixedLength.Length = value;
-                }
+                shape.SetLineFixedLength(value);
             }
 
             if (editor.Renderers?[0]?.State?.SelectedShapes?.Count > 0)
             {
                 foreach (var shape in editor.Renderers[0].State.SelectedShapes)
                 {
-                    var style = shape.Style;
-                    if (style != null && style.LineStyle != null && style.LineStyle.FixedLength != null)
-                    {
-                        style.LineStyle.FixedLength.Length = value;
-                    }
+                    shape.SetLineFixedLength(value);
                 }
             }
         }
@@ -639,22 +922,14 @@ namespace Core2D.Editor
             if (editor.Renderers[0]?.State?.SelectedShape != null)
             {
                 var shape = editor.Renderers[0]?.State?.SelectedShape;
-                var style = shape.Style;
-                if (style != null && style.LineStyle != null && style.LineStyle.FixedLength != null)
-                {
-                    style.LineStyle.FixedLength.Flags ^= value;
-                }
+                shape.ToggleLineFixedLengthFlags(value);
             }
 
             if (editor.Renderers?[0]?.State?.SelectedShapes?.Count > 0)
             {
                 foreach (var shape in editor.Renderers[0].State.SelectedShapes)
                 {
-                    var style = shape.Style;
-                    if (style != null && style.LineStyle != null && style.LineStyle.FixedLength != null)
-                    {
-                        style.LineStyle.FixedLength.Flags ^= value;
-                    }
+                    shape.ToggleLineFixedLengthFlags(value);
                 }
             }
         }
@@ -672,22 +947,14 @@ namespace Core2D.Editor
             if (editor.Renderers[0]?.State?.SelectedShape != null)
             {
                 var shape = editor.Renderers[0]?.State?.SelectedShape;
-                var style = shape.Style;
-                if (style != null && style.LineStyle != null && style.LineStyle.FixedLength != null && style.LineStyle.FixedLength.StartTrigger != null)
-                {
-                    style.LineStyle.FixedLength.StartTrigger.Flags ^= value;
-                }
+                shape.ToggleLineFixedLengthStartTrigger(value);
             }
 
             if (editor.Renderers?[0]?.State?.SelectedShapes?.Count > 0)
             {
                 foreach (var shape in editor.Renderers[0].State.SelectedShapes)
                 {
-                    var style = shape.Style;
-                    if (style != null && style.LineStyle != null && style.LineStyle.FixedLength != null && style.LineStyle.FixedLength.StartTrigger != null)
-                    {
-                        style.LineStyle.FixedLength.StartTrigger.Flags ^= value;
-                    }
+                    shape.ToggleLineFixedLengthStartTrigger(value);
                 }
             }
         }
@@ -705,22 +972,14 @@ namespace Core2D.Editor
             if (editor.Renderers[0]?.State?.SelectedShape != null)
             {
                 var shape = editor.Renderers[0]?.State?.SelectedShape;
-                var style = shape.Style;
-                if (style != null && style.LineStyle != null && style.LineStyle.FixedLength != null && style.LineStyle.FixedLength.EndTrigger != null)
-                {
-                    style.LineStyle.FixedLength.EndTrigger.Flags ^= value;
-                }
+                shape.ToggleLineFixedLengthEndTrigger(value);
             }
 
             if (editor.Renderers?[0]?.State?.SelectedShapes?.Count > 0)
             {
                 foreach (var shape in editor.Renderers[0].State.SelectedShapes)
                 {
-                    var style = shape.Style;
-                    if (style != null && style.LineStyle != null && style.LineStyle.FixedLength != null && style.LineStyle.FixedLength.EndTrigger != null)
-                    {
-                        style.LineStyle.FixedLength.EndTrigger.Flags ^= value;
-                    }
+                    shape.ToggleLineFixedLengthEndTrigger(value);
                 }
             }
         }
@@ -738,22 +997,14 @@ namespace Core2D.Editor
             if (editor.Renderers[0]?.State?.SelectedShape != null)
             {
                 var shape = editor.Renderers[0]?.State?.SelectedShape;
-                var style = shape.Style;
-                if (style != null && style.StartArrowStyle != null)
-                {
-                    style.StartArrowStyle.ArrowType = value;
-                }
+                shape.SetStartArrowType(value);
             }
 
             if (editor.Renderers?[0]?.State?.SelectedShapes?.Count > 0)
             {
                 foreach (var shape in editor.Renderers[0].State.SelectedShapes)
                 {
-                    var style = shape.Style;
-                    if (style != null && style.StartArrowStyle != null)
-                    {
-                        style.StartArrowStyle.ArrowType = value;
-                    }
+                    shape.SetStartArrowType(value);
                 }
             }
         }
@@ -766,22 +1017,14 @@ namespace Core2D.Editor
             if (editor.Renderers[0]?.State?.SelectedShape != null)
             {
                 var shape = editor.Renderers[0]?.State?.SelectedShape;
-                var style = shape.Style;
-                if (style != null && style.StartArrowStyle != null)
-                {
-                    style.StartArrowStyle.IsStroked = !style.StartArrowStyle.IsStroked;
-                }
+                shape.ToggleStartArrowIsStroked();
             }
 
             if (editor.Renderers?[0]?.State?.SelectedShapes?.Count > 0)
             {
                 foreach (var shape in editor.Renderers[0].State.SelectedShapes)
                 {
-                    var style = shape.Style;
-                    if (style != null && style.StartArrowStyle != null)
-                    {
-                        style.StartArrowStyle.IsStroked = !style.StartArrowStyle.IsStroked;
-                    }
+                    shape.ToggleStartArrowIsStroked();
                 }
             }
         }
@@ -794,22 +1037,14 @@ namespace Core2D.Editor
             if (editor.Renderers[0]?.State?.SelectedShape != null)
             {
                 var shape = editor.Renderers[0]?.State?.SelectedShape;
-                var style = shape.Style;
-                if (style != null && style.StartArrowStyle != null)
-                {
-                    style.StartArrowStyle.IsFilled = !style.StartArrowStyle.IsFilled;
-                }
+                shape.ToggleStartArrowIsFilled();
             }
 
             if (editor.Renderers?[0]?.State?.SelectedShapes?.Count > 0)
             {
                 foreach (var shape in editor.Renderers[0].State.SelectedShapes)
                 {
-                    var style = shape.Style;
-                    if (style != null && style.StartArrowStyle != null)
-                    {
-                        style.StartArrowStyle.IsFilled = !style.StartArrowStyle.IsFilled;
-                    }
+                    shape.ToggleStartArrowIsFilled();
                 }
             }
         }
@@ -827,22 +1062,14 @@ namespace Core2D.Editor
             if (editor.Renderers[0]?.State?.SelectedShape != null)
             {
                 var shape = editor.Renderers[0]?.State?.SelectedShape;
-                var style = shape.Style;
-                if (style != null && style.StartArrowStyle != null)
-                {
-                    style.StartArrowStyle.RadiusX = value;
-                }
+                shape.SetStartArrowRadiusX(value);
             }
 
             if (editor.Renderers?[0]?.State?.SelectedShapes?.Count > 0)
             {
                 foreach (var shape in editor.Renderers[0].State.SelectedShapes)
                 {
-                    var style = shape.Style;
-                    if (style != null && style.StartArrowStyle != null)
-                    {
-                        style.StartArrowStyle.RadiusX = value;
-                    }
+                    shape.SetStartArrowRadiusX(value);
                 }
             }
         }
@@ -860,22 +1087,14 @@ namespace Core2D.Editor
             if (editor.Renderers[0]?.State?.SelectedShape != null)
             {
                 var shape = editor.Renderers[0]?.State?.SelectedShape;
-                var style = shape.Style;
-                if (style != null && style.StartArrowStyle != null)
-                {
-                    style.StartArrowStyle.RadiusY = value;
-                }
+                shape.SetStartArrowRadiusY(value);
             }
 
             if (editor.Renderers?[0]?.State?.SelectedShapes?.Count > 0)
             {
                 foreach (var shape in editor.Renderers[0].State.SelectedShapes)
                 {
-                    var style = shape.Style;
-                    if (style != null && style.StartArrowStyle != null)
-                    {
-                        style.StartArrowStyle.RadiusY = value;
-                    }
+                    shape.SetStartArrowRadiusY(value);
                 }
             }
         }
@@ -893,22 +1112,14 @@ namespace Core2D.Editor
             if (editor.Renderers[0]?.State?.SelectedShape != null)
             {
                 var shape = editor.Renderers[0]?.State?.SelectedShape;
-                var style = shape.Style;
-                if (style != null && style.StartArrowStyle != null)
-                {
-                    style.StartArrowStyle.Thickness = value;
-                }
+                shape.SetStartArrowThickness(value);
             }
 
             if (editor.Renderers?[0]?.State?.SelectedShapes?.Count > 0)
             {
                 foreach (var shape in editor.Renderers[0].State.SelectedShapes)
                 {
-                    var style = shape.Style;
-                    if (style != null && style.StartArrowStyle != null)
-                    {
-                        style.StartArrowStyle.Thickness = value;
-                    }
+                    shape.SetStartArrowThickness(value);
                 }
             }
         }
@@ -926,22 +1137,14 @@ namespace Core2D.Editor
             if (editor.Renderers[0]?.State?.SelectedShape != null)
             {
                 var shape = editor.Renderers[0]?.State?.SelectedShape;
-                var style = shape.Style;
-                if (style != null && style.StartArrowStyle != null)
-                {
-                    style.StartArrowStyle.LineCap = value;
-                }
+                shape.SetStartArrowLineCap(value);
             }
 
             if (editor.Renderers?[0]?.State?.SelectedShapes?.Count > 0)
             {
                 foreach (var shape in editor.Renderers[0].State.SelectedShapes)
                 {
-                    var style = shape.Style;
-                    if (style != null && style.StartArrowStyle != null)
-                    {
-                        style.StartArrowStyle.LineCap = value;
-                    }
+                    shape.SetStartArrowLineCap(value);
                 }
             }
         }
@@ -954,22 +1157,14 @@ namespace Core2D.Editor
             if (editor.Renderers[0]?.State?.SelectedShape != null)
             {
                 var shape = editor.Renderers[0]?.State?.SelectedShape;
-                var style = shape.Style;
-                if (style != null && style.StartArrowStyle != null)
-                {
-                    style.StartArrowStyle.Dashes = dashes;
-                }
+                shape.SetStartArrowDashes(dashes);
             }
 
             if (editor.Renderers?[0]?.State?.SelectedShapes?.Count > 0)
             {
                 foreach (var shape in editor.Renderers[0].State.SelectedShapes)
                 {
-                    var style = shape.Style;
-                    if (style != null && style.StartArrowStyle != null)
-                    {
-                        style.StartArrowStyle.Dashes = dashes;
-                    }
+                    shape.SetStartArrowDashes(dashes);
                 }
             }
         }
@@ -987,22 +1182,14 @@ namespace Core2D.Editor
             if (editor.Renderers[0]?.State?.SelectedShape != null)
             {
                 var shape = editor.Renderers[0]?.State?.SelectedShape;
-                var style = shape.Style;
-                if (style != null && style.StartArrowStyle != null)
-                {
-                    style.StartArrowStyle.DashOffset = value;
-                }
+                shape.SetStartArrowDashOffset(value);
             }
 
             if (editor.Renderers?[0]?.State?.SelectedShapes?.Count > 0)
             {
                 foreach (var shape in editor.Renderers[0].State.SelectedShapes)
                 {
-                    var style = shape.Style;
-                    if (style != null && style.StartArrowStyle != null)
-                    {
-                        style.StartArrowStyle.DashOffset = value;
-                    }
+                    shape.SetStartArrowDashOffset(value);
                 }
             }
         }
@@ -1025,22 +1212,14 @@ namespace Core2D.Editor
             if (editor.Renderers[0]?.State?.SelectedShape != null)
             {
                 var shape = editor.Renderers[0]?.State?.SelectedShape;
-                var style = shape.Style;
-                if (style != null && style.StartArrowStyle != null)
-                {
-                    style.StartArrowStyle.Stroke = (IColor)value.Copy(null);
-                }
+                shape.SetStartArrowStroke(value);
             }
 
             if (editor.Renderers?[0]?.State?.SelectedShapes?.Count > 0)
             {
                 foreach (var shape in editor.Renderers[0].State.SelectedShapes)
                 {
-                    var style = shape.Style;
-                    if (style != null && style.StartArrowStyle != null)
-                    {
-                        style.StartArrowStyle.Stroke = (IColor)value.Copy(null);
-                    }
+                    shape.SetStartArrowStroke(value);
                 }
             }
         }
@@ -1058,22 +1237,14 @@ namespace Core2D.Editor
             if (editor.Renderers[0]?.State?.SelectedShape != null)
             {
                 var shape = editor.Renderers[0]?.State?.SelectedShape;
-                var style = shape.Style;
-                if (style != null && style.StartArrowStyle != null && style.StartArrowStyle.Stroke is IArgbColor argbColor)
-                {
-                    argbColor.A = value;
-                }
+                shape.SetStartArrowStrokeTransparency(value);
             }
 
             if (editor.Renderers?[0]?.State?.SelectedShapes?.Count > 0)
             {
                 foreach (var shape in editor.Renderers[0].State.SelectedShapes)
                 {
-                    var style = shape.Style;
-                    if (style != null && style.StartArrowStyle != null && style.StartArrowStyle.Stroke is IArgbColor argbColor)
-                    {
-                        argbColor.A = value;
-                    }
+                    shape.SetStartArrowStrokeTransparency(value);
                 }
             }
 
@@ -1098,22 +1269,14 @@ namespace Core2D.Editor
             if (editor.Renderers[0]?.State?.SelectedShape != null)
             {
                 var shape = editor.Renderers[0]?.State?.SelectedShape;
-                var style = shape.Style;
-                if (style != null && style.StartArrowStyle != null)
-                {
-                    style.StartArrowStyle.Fill = (IColor)value.Copy(null);
-                }
+                shape.SetStartArrowFill(value);
             }
 
             if (editor.Renderers?[0]?.State?.SelectedShapes?.Count > 0)
             {
                 foreach (var shape in editor.Renderers[0].State.SelectedShapes)
                 {
-                    var style = shape.Style;
-                    if (style != null && style.StartArrowStyle != null)
-                    {
-                        style.StartArrowStyle.Fill = (IColor)value.Copy(null);
-                    }
+                    shape.SetStartArrowFill(value);
                 }
             }
         }
@@ -1131,22 +1294,14 @@ namespace Core2D.Editor
             if (editor.Renderers[0]?.State?.SelectedShape != null)
             {
                 var shape = editor.Renderers[0]?.State?.SelectedShape;
-                var style = shape.Style;
-                if (style != null && style.StartArrowStyle != null && style.StartArrowStyle.Fill is IArgbColor argbColor)
-                {
-                    argbColor.A = value;
-                }
+                shape.SetStartArrowFillTransparency(value);
             }
 
             if (editor.Renderers?[0]?.State?.SelectedShapes?.Count > 0)
             {
                 foreach (var shape in editor.Renderers[0].State.SelectedShapes)
                 {
-                    var style = shape.Style;
-                    if (style != null && style.StartArrowStyle != null && style.StartArrowStyle.Fill is IArgbColor argbColor)
-                    {
-                        argbColor.A = value;
-                    }
+                    shape.SetStartArrowFillTransparency(value);
                 }
             }
 
@@ -1166,22 +1321,14 @@ namespace Core2D.Editor
             if (editor.Renderers[0]?.State?.SelectedShape != null)
             {
                 var shape = editor.Renderers[0]?.State?.SelectedShape;
-                var style = shape.Style;
-                if (style != null && style.EndArrowStyle != null)
-                {
-                    style.EndArrowStyle.ArrowType = value;
-                }
+                shape.SetEndArrowType(value);
             }
 
             if (editor.Renderers?[0]?.State?.SelectedShapes?.Count > 0)
             {
                 foreach (var shape in editor.Renderers[0].State.SelectedShapes)
                 {
-                    var style = shape.Style;
-                    if (style != null && style.EndArrowStyle != null)
-                    {
-                        style.EndArrowStyle.ArrowType = value;
-                    }
+                    shape.SetEndArrowType(value);
                 }
             }
         }
@@ -1194,22 +1341,14 @@ namespace Core2D.Editor
             if (editor.Renderers[0]?.State?.SelectedShape != null)
             {
                 var shape = editor.Renderers[0]?.State?.SelectedShape;
-                var style = shape.Style;
-                if (style != null && style.EndArrowStyle != null)
-                {
-                    style.EndArrowStyle.IsStroked = !style.EndArrowStyle.IsStroked;
-                }
+                shape.ToggleEndArrowIsStroked();
             }
 
             if (editor.Renderers?[0]?.State?.SelectedShapes?.Count > 0)
             {
                 foreach (var shape in editor.Renderers[0].State.SelectedShapes)
                 {
-                    var style = shape.Style;
-                    if (style != null && style.EndArrowStyle != null)
-                    {
-                        style.EndArrowStyle.IsStroked = !style.EndArrowStyle.IsStroked;
-                    }
+                    shape.ToggleEndArrowIsStroked();
                 }
             }
         }
@@ -1222,22 +1361,14 @@ namespace Core2D.Editor
             if (editor.Renderers[0]?.State?.SelectedShape != null)
             {
                 var shape = editor.Renderers[0]?.State?.SelectedShape;
-                var style = shape.Style;
-                if (style != null && style.EndArrowStyle != null)
-                {
-                    style.EndArrowStyle.IsFilled = !style.EndArrowStyle.IsFilled;
-                }
+                shape.ToggleEndArrowIsFilled();
             }
 
             if (editor.Renderers?[0]?.State?.SelectedShapes?.Count > 0)
             {
                 foreach (var shape in editor.Renderers[0].State.SelectedShapes)
                 {
-                    var style = shape.Style;
-                    if (style != null && style.EndArrowStyle != null)
-                    {
-                        style.EndArrowStyle.IsFilled = !style.EndArrowStyle.IsFilled;
-                    }
+                    shape.ToggleEndArrowIsFilled();
                 }
             }
         }
@@ -1255,22 +1386,14 @@ namespace Core2D.Editor
             if (editor.Renderers[0]?.State?.SelectedShape != null)
             {
                 var shape = editor.Renderers[0]?.State?.SelectedShape;
-                var style = shape.Style;
-                if (style != null && style.EndArrowStyle != null)
-                {
-                    style.EndArrowStyle.RadiusX = value;
-                }
+                shape.SetEndArrowRadiusX(value);
             }
 
             if (editor.Renderers?[0]?.State?.SelectedShapes?.Count > 0)
             {
                 foreach (var shape in editor.Renderers[0].State.SelectedShapes)
                 {
-                    var style = shape.Style;
-                    if (style != null && style.EndArrowStyle != null)
-                    {
-                        style.EndArrowStyle.RadiusX = value;
-                    }
+                    shape.SetEndArrowRadiusX(value);
                 }
             }
         }
@@ -1288,22 +1411,14 @@ namespace Core2D.Editor
             if (editor.Renderers[0]?.State?.SelectedShape != null)
             {
                 var shape = editor.Renderers[0]?.State?.SelectedShape;
-                var style = shape.Style;
-                if (style != null && style.EndArrowStyle != null)
-                {
-                    style.EndArrowStyle.RadiusY = value;
-                }
+                shape.SetEndArrowRadiusY(value);
             }
 
             if (editor.Renderers?[0]?.State?.SelectedShapes?.Count > 0)
             {
                 foreach (var shape in editor.Renderers[0].State.SelectedShapes)
                 {
-                    var style = shape.Style;
-                    if (style != null && style.EndArrowStyle != null)
-                    {
-                        style.EndArrowStyle.RadiusY = value;
-                    }
+                    shape.SetEndArrowRadiusY(value);
                 }
             }
         }
@@ -1321,22 +1436,14 @@ namespace Core2D.Editor
             if (editor.Renderers[0]?.State?.SelectedShape != null)
             {
                 var shape = editor.Renderers[0]?.State?.SelectedShape;
-                var style = shape.Style;
-                if (style != null && style.EndArrowStyle != null)
-                {
-                    style.EndArrowStyle.Thickness = value;
-                }
+                shape.SetEndArrowThickness(value);
             }
 
             if (editor.Renderers?[0]?.State?.SelectedShapes?.Count > 0)
             {
                 foreach (var shape in editor.Renderers[0].State.SelectedShapes)
                 {
-                    var style = shape.Style;
-                    if (style != null && style.EndArrowStyle != null)
-                    {
-                        style.EndArrowStyle.Thickness = value;
-                    }
+                    shape.SetEndArrowThickness(value);
                 }
             }
         }
@@ -1354,22 +1461,14 @@ namespace Core2D.Editor
             if (editor.Renderers[0]?.State?.SelectedShape != null)
             {
                 var shape = editor.Renderers[0]?.State?.SelectedShape;
-                var style = shape.Style;
-                if (style != null && style.EndArrowStyle != null)
-                {
-                    style.EndArrowStyle.LineCap = value;
-                }
+                shape.SetEndArrowLineCap(value);
             }
 
             if (editor.Renderers?[0]?.State?.SelectedShapes?.Count > 0)
             {
                 foreach (var shape in editor.Renderers[0].State.SelectedShapes)
                 {
-                    var style = shape.Style;
-                    if (style != null && style.EndArrowStyle != null)
-                    {
-                        style.EndArrowStyle.LineCap = value;
-                    }
+                    shape.SetEndArrowLineCap(value);
                 }
             }
         }
@@ -1382,22 +1481,14 @@ namespace Core2D.Editor
             if (editor.Renderers[0]?.State?.SelectedShape != null)
             {
                 var shape = editor.Renderers[0]?.State?.SelectedShape;
-                var style = shape.Style;
-                if (style != null && style.EndArrowStyle != null)
-                {
-                    style.EndArrowStyle.Dashes = dashes;
-                }
+                shape.SetEndArrowDashes(dashes);
             }
 
             if (editor.Renderers?[0]?.State?.SelectedShapes?.Count > 0)
             {
                 foreach (var shape in editor.Renderers[0].State.SelectedShapes)
                 {
-                    var style = shape.Style;
-                    if (style != null && style.EndArrowStyle != null)
-                    {
-                        style.EndArrowStyle.Dashes = dashes;
-                    }
+                    shape.SetEndArrowDashes(dashes);
                 }
             }
         }
@@ -1415,22 +1506,14 @@ namespace Core2D.Editor
             if (editor.Renderers[0]?.State?.SelectedShape != null)
             {
                 var shape = editor.Renderers[0]?.State?.SelectedShape;
-                var style = shape.Style;
-                if (style != null && style.EndArrowStyle != null)
-                {
-                    style.EndArrowStyle.DashOffset = value;
-                }
+                shape.SetEndArrowDashOffset(value);
             }
 
             if (editor.Renderers?[0]?.State?.SelectedShapes?.Count > 0)
             {
                 foreach (var shape in editor.Renderers[0].State.SelectedShapes)
                 {
-                    var style = shape.Style;
-                    if (style != null && style.EndArrowStyle != null)
-                    {
-                        style.EndArrowStyle.DashOffset = value;
-                    }
+                    shape.SetEndArrowDashOffset(value);
                 }
             }
         }
@@ -1453,22 +1536,14 @@ namespace Core2D.Editor
             if (editor.Renderers[0]?.State?.SelectedShape != null)
             {
                 var shape = editor.Renderers[0]?.State?.SelectedShape;
-                var style = shape.Style;
-                if (style != null && style.EndArrowStyle != null)
-                {
-                    style.EndArrowStyle.Stroke = (IColor)value.Copy(null);
-                }
+                shape.SetEndArrowStroke(value);
             }
 
             if (editor.Renderers?[0]?.State?.SelectedShapes?.Count > 0)
             {
                 foreach (var shape in editor.Renderers[0].State.SelectedShapes)
                 {
-                    var style = shape.Style;
-                    if (style != null && style.EndArrowStyle != null)
-                    {
-                        style.EndArrowStyle.Stroke = (IColor)value.Copy(null);
-                    }
+                    shape.SetEndArrowStroke(value);
                 }
             }
         }
@@ -1486,22 +1561,14 @@ namespace Core2D.Editor
             if (editor.Renderers[0]?.State?.SelectedShape != null)
             {
                 var shape = editor.Renderers[0]?.State?.SelectedShape;
-                var style = shape.Style;
-                if (style != null && style.EndArrowStyle != null && style.EndArrowStyle.Stroke is IArgbColor argbColor)
-                {
-                    argbColor.A = value;
-                }
+                shape.SetEndArrowStrokeTransparency(value);
             }
 
             if (editor.Renderers?[0]?.State?.SelectedShapes?.Count > 0)
             {
                 foreach (var shape in editor.Renderers[0].State.SelectedShapes)
                 {
-                    var style = shape.Style;
-                    if (style != null && style.EndArrowStyle != null && style.EndArrowStyle.Stroke is IArgbColor argbColor)
-                    {
-                        argbColor.A = value;
-                    }
+                    shape.SetEndArrowStrokeTransparency(value);
                 }
             }
 
@@ -1526,22 +1593,14 @@ namespace Core2D.Editor
             if (editor.Renderers[0]?.State?.SelectedShape != null)
             {
                 var shape = editor.Renderers[0]?.State?.SelectedShape;
-                var style = shape.Style;
-                if (style != null && style.EndArrowStyle != null)
-                {
-                    style.EndArrowStyle.Fill = (IColor)value.Copy(null);
-                }
+                shape.SetEndArrowFill(value);
             }
 
             if (editor.Renderers?[0]?.State?.SelectedShapes?.Count > 0)
             {
                 foreach (var shape in editor.Renderers[0].State.SelectedShapes)
                 {
-                    var style = shape.Style;
-                    if (style != null && style.EndArrowStyle != null)
-                    {
-                        style.EndArrowStyle.Fill = (IColor)value.Copy(null);
-                    }
+                    shape.SetEndArrowFill(value);
                 }
             }
         }
@@ -1559,11 +1618,7 @@ namespace Core2D.Editor
             if (editor.Renderers[0]?.State?.SelectedShape != null)
             {
                 var shape = editor.Renderers[0]?.State?.SelectedShape;
-                var style = shape.Style;
-                if (style != null && style.EndArrowStyle != null && style.EndArrowStyle.Fill is IArgbColor argbColor)
-                {
-                    argbColor.A = value;
-                }
+                shape.SetEndArrowFillTransparency(value);
             }
 
             if (editor.Renderers?[0]?.State?.SelectedShapes?.Count > 0)
