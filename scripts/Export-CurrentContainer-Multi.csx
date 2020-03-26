@@ -8,6 +8,7 @@ using Core2D.FileWriter.Dxf;
 using Core2D.FileWriter.PdfSharp;
 using Core2D.FileWriter.SkiaSharpPng;
 using Core2D.FileWriter.SkiaSharpSvg;
+using Core2D.FileWriter.Emf;
 
 var dir = "D:\\";
 var page = Editor.Project.CurrentContainer;
@@ -34,4 +35,10 @@ var svg = Editor.FileWriters.FirstOrDefault(x => x.GetType() == typeof(SvgSkiaSh
 using (var svgStream = Editor.FileIO.Create(Path.Combine(dir, page.Name + "." + svg.Extension)))
 {
     svg.Save(svgStream, page, Editor.Project);
+}
+
+var emf = Editor.FileWriters.FirstOrDefault(x => x.GetType() == typeof(EmfWriter));
+using (var emfStream = Editor.FileIO.Create(Path.Combine(dir, page.Name + "." + emf.Extension)))
+{
+    emf.Save(emfStream, page, Editor.Project);
 }
