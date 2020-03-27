@@ -39466,31 +39466,6 @@ references:
   isSpec: "True"
   fullName: Core2D.UI.Avalonia.Views.MainControl.MainControl
   nameWithType: MainControl.MainControl
-- uid: Core2D.UI.Avalonia.Views.Menus
-  name: Core2D.UI.Avalonia.Views.Menus
-  href: api/Core2D.UI.Avalonia.Views.Menus.html
-  commentId: N:Core2D.UI.Avalonia.Views.Menus
-  fullName: Core2D.UI.Avalonia.Views.Menus
-  nameWithType: Core2D.UI.Avalonia.Views.Menus
-- uid: Core2D.UI.Avalonia.Views.Menus.FormatMenuItem
-  name: FormatMenuItem
-  href: api/Core2D.UI.Avalonia.Views.Menus.FormatMenuItem.html
-  commentId: T:Core2D.UI.Avalonia.Views.Menus.FormatMenuItem
-  fullName: Core2D.UI.Avalonia.Views.Menus.FormatMenuItem
-  nameWithType: FormatMenuItem
-- uid: Core2D.UI.Avalonia.Views.Menus.FormatMenuItem.#ctor
-  name: FormatMenuItem()
-  href: api/Core2D.UI.Avalonia.Views.Menus.FormatMenuItem.html#Core2D_UI_Avalonia_Views_Menus_FormatMenuItem__ctor
-  commentId: M:Core2D.UI.Avalonia.Views.Menus.FormatMenuItem.#ctor
-  fullName: Core2D.UI.Avalonia.Views.Menus.FormatMenuItem.FormatMenuItem()
-  nameWithType: FormatMenuItem.FormatMenuItem()
-- uid: Core2D.UI.Avalonia.Views.Menus.FormatMenuItem.#ctor*
-  name: FormatMenuItem
-  href: api/Core2D.UI.Avalonia.Views.Menus.FormatMenuItem.html#Core2D_UI_Avalonia_Views_Menus_FormatMenuItem__ctor_
-  commentId: Overload:Core2D.UI.Avalonia.Views.Menus.FormatMenuItem.#ctor
-  isSpec: "True"
-  fullName: Core2D.UI.Avalonia.Views.Menus.FormatMenuItem.FormatMenuItem
-  nameWithType: FormatMenuItem.FormatMenuItem
 - uid: Core2D.UI.Avalonia.Views.PageControl
   name: PageControl
   href: api/Core2D.UI.Avalonia.Views.PageControl.html

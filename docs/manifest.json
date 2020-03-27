@@ -5549,30 +5549,6 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Core2D.UI.Avalonia.Views.Menus.FormatMenuItem.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Core2D.UI.Avalonia.Views.Menus.FormatMenuItem.html",
-          "hash": "rCQv74stTq+uYyFjJp21Lg=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/Core2D.UI.Avalonia.Views.Menus.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Core2D.UI.Avalonia.Views.Menus.html",
-          "hash": "9/SPsezbwML8y9TH68pX1g=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
       "source_relative_path": "api/Core2D.UI.Avalonia.Views.PageControl.yml",
       "output": {
         ".html": {
@@ -6537,7 +6513,7 @@
       "output": {
         ".html": {
           "relative_path": "api/toc.html",
-          "hash": "MJ5lQVdbSFCYGqi0X9zs0w=="
+          "hash": "zLjFbNwM3rKjm0AinEs80w=="
         }
       },
       "is_incremental": false,
@@ -6608,8 +6584,8 @@
         "ManagedReferenceDocumentProcessor": {
           "can_incremental": true,
           "incrementalPhase": "build",
-          "total_file_count": 544,
-          "skipped_file_count": 541
+          "total_file_count": 542,
+          "skipped_file_count": 542
         },
         "ResourceDocumentProcessor": {
           "can_incremental": false,
