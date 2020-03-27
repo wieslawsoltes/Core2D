@@ -22,101 +22,106 @@ namespace Core2D.Editor
         /// <summary>
         /// Default <see cref="ILayerContainer"/> name.
         /// </summary>
-        public const string DefaultLayerName = "Layer";
+        public static string DefaultLayerName = "Layer";
 
         /// <summary>
         /// Default <see cref="IPageContainer"/> template name.
         /// </summary>
-        public const string DefaultTemplateName = "Template";
+        public static string DefaultTemplateName = "Template";
 
         /// <summary>
         /// Default <see cref="IPageContainer"/> page name.
         /// </summary>
-        public const string DefaultPageName = "Page";
+        public static string DefaultPageName = "Page";
 
         /// <summary>
         /// Default <see cref="IDocumentContainer"/> name.
         /// </summary>
-        public const string DefaultDocumentName = "Document";
+        public static string DefaultDocumentName = "Document";
 
         /// <summary>
         /// Default <see cref="IScript"/> script name.
         /// </summary>
-        public const string DefaultScriptName = "Script";
+        public static string DefaultScriptName = "Script";
 
         /// <summary>
         /// Default <see cref="IDatabase"/> name.
         /// </summary>
-        public const string DefaultDatabaseName = "Db";
+        public static string DefaultDatabaseName = "Db";
 
         /// <summary>
         /// Default <see cref="IColumn"/> name.
         /// </summary>
-        public const string DefaulColumnName = "Column";
+        public static string DefaulColumnName = "Column";
 
         /// <summary>
         /// Default <see cref="IProperty"/> name.
         /// </summary>
-        public const string DefaulPropertyName = "Property";
+        public static string DefaulPropertyName = "Property";
 
         /// <summary>
         /// Default property value.
         /// </summary>
-        public const string DefaulValue = "<empty>";
+        public static string DefaulValue = "<empty>";
 
         /// <summary>
         /// Default <see cref="ILibrary{IGroupShape}"/> name.
         /// </summary>
-        public const string DefaulGroupLibraryName = "Groups";
+        public static string DefaulGroupLibraryName = "Groups";
 
         /// <summary>
         /// Default <see cref="IGroupShape"/> name.
         /// </summary>
-        public const string DefaulGroupName = "Group";
+        public static string DefaulGroupName = "Group";
 
         /// <summary>
         /// Default <see cref="ILibrary{ShapeStyle}"/> name.
         /// </summary>
-        public const string DefaulStyleLibraryName = "Styles";
+        public static string DefaulStyleLibraryName = "Styles";
 
         /// <summary>
         /// Default <see cref="IShapeStyle"/> name.
         /// </summary>
-        public const string DefaulStyleName = "Style";
+        public static string DefaulStyleName = "Style";
 
         /// <summary>
         /// Default imported <see cref="ILibrary{ShapeStyle}"/> name.
         /// </summary>
-        public const string ImportedStyleLibraryName = "Imported";
+        public static string ImportedStyleLibraryName = "Imported";
 
         /// <summary>
         /// Default imported <see cref="IDatabase"/> name.
         /// </summary>
-        public const string ImportedDatabaseName = "Imported";
+        public static string ImportedDatabaseName = "Imported";
 
         /// <summary>
         /// Project file extension.
         /// </summary>
-        public const string ProjectExtension = ".project";
+        public static string ProjectExtension = ".project";
 
         /// <summary>
         /// CSV file extension.
         /// </summary>
-        public const string CsvExtension = ".csv";
+        public static string CsvExtension = ".csv";
 
         /// <summary>
         /// Xaml file extension.
         /// </summary>
-        public const string XamlExtension = ".xaml";
+        public static string XamlExtension = ".xaml";
 
         /// <summary>
         /// Json file extension.
         /// </summary>
-        public const string JsonExtension = ".json";
+        public static string JsonExtension = ".json";
 
         /// <summary>
         /// Script file extension.
         /// </summary>
-        public const string ScriptExtension = ".csx";
+        public static string ScriptExtension = ".csx";
+
+        /// <summary>
+        /// Image file extension.
+        /// </summary>
+        public static string[] ImageExtensions = new string[] { ".jpg", ".jpeg", ".png", "webp" };
     }
 }

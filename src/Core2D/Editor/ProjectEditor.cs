@@ -2595,6 +2595,11 @@ namespace Core2D.Editor
                             OnExecuteScriptFile(path);
                             result = true;
                         }
+                        else if (ProjectEditorConfiguration.ImageExtensions.Any(x => string.Compare(ext, x, StringComparison.OrdinalIgnoreCase) == 0))
+                        {
+                            // TODO:
+                            result = true;
+                        }
                     }
 
                     return result;
