@@ -179,8 +179,8 @@
         <MenuItem Header="_Document">
             <MenuItem Header="_Add Document" Command="{Binding OnAddDocument}" CommandParameter="{Binding Mode=OneWay}"/>
             <Separator/>
-            <MenuItem Header="Insert Document Bef_ore" Command="{Binding OnInsertDocumentBefore}" CommandParameter="{Binding Mode=OneWay}"/>
-            <MenuItem Header="Insert Document Aft_er" Command="{Binding OnInsertDocumentAfter}" CommandParameter="{Binding Mode=OneWay}"/>
+            <MenuItem Header="Insert Document Bef_ore" Command="{Binding OnInsertDocumentBefore}" CommandParameter="{Binding Project.CurrentDocument}"/>
+            <MenuItem Header="Insert Document Aft_er" Command="{Binding OnInsertDocumentAfter}" CommandParameter="{Binding Project.CurrentDocument}"/>
             <Separator/>
             <MenuItem Header="Cu_t Document" Command="{Binding OnCut}" CommandParameter="{Binding Project.CurrentDocument}"/>
             <MenuItem Header="_Copy Document" Command="{Binding OnCopy}" CommandParameter="{Binding Project.CurrentDocument}"/>
@@ -193,8 +193,8 @@
         <MenuItem Header="P_age">
             <MenuItem Header="_Add Page" Command="{Binding OnAddPage}" CommandParameter="{Binding Mode=OneWay}"/>
             <Separator/>
-            <MenuItem Header="Insert Page Bef_ore" Command="{Binding OnInsertPageBefore}" CommandParameter="{Binding Mode=OneWay}"/>
-            <MenuItem Header="Insert Page Aft_er" Command="{Binding OnInsertPageAfter}" CommandParameter="{Binding Mode=OneWay}"/>
+            <MenuItem Header="Insert Page Bef_ore" Command="{Binding OnInsertPageBefore}" CommandParameter="{Binding Project.CurrentContainer}"/>
+            <MenuItem Header="Insert Page Aft_er" Command="{Binding OnInsertPageAfter}" CommandParameter="{Binding Project.CurrentContainer}"/>
             <Separator/>
             <MenuItem Header="Cu_t Page" Command="{Binding OnCut}" CommandParameter="{Binding Project.CurrentContainer}"/>
             <MenuItem Header="_Copy Page" Command="{Binding OnCopy}" CommandParameter="{Binding Project.CurrentContainer}"/>
@@ -230,14 +230,15 @@
             </MenuItem>
         </MenuItem>
         <MenuItem Header="_Layer">
-            <MenuItem Header="_Add Layer" Command="{Binding OnAddLayer}" CommandParameter="{Binding Owner, Mode=OneWay}"/>
+            <MenuItem Header="_Add Layer" Command="{Binding OnAddLayer}" CommandParameter="{Binding Project.CurrentContainer}"/>
             <Separator/>
             <MenuItem Header="_Delete Layer" Command="{Binding OnRemoveLayer}" CommandParameter="{Binding Mode=OneWay}"/>
         </MenuItem>
         <MenuItem Header="_Shape">
-            <MenuItem Header="_Group" Command="{Binding OnGroupSelected}" InputGesture="Ctrl+G"/>
-            <MenuItem Header="U_ngroup" Command="{Binding OnUngroupSelected}" InputGesture="Ctrl+U"/>
-            <Separator/>
+            <MenuItem Header="_Group">
+                <MenuItem Header="_Group" Command="{Binding OnGroupSelected}" InputGesture="Ctrl+G"/>
+                <MenuItem Header="U_ngroup" Command="{Binding OnUngroupSelected}" InputGesture="Ctrl+U"/>
+            </MenuItem>
             <MenuItem Header="_Move">
                 <MenuItem Header="_Up" Command="{Binding OnMoveUpSelected}" InputGesture="Up"/>
                 <MenuItem Header="_Down" Command="{Binding OnMoveDownSelected}" InputGesture="Down"/>

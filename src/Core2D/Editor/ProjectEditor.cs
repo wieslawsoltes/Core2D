@@ -1661,16 +1661,22 @@ namespace Core2D.Editor
         /// <inheritdoc/>
         public void OnAddLayer(IPageContainer container)
         {
-            Project.AddLayer(container, Factory.CreateLayerContainer(ProjectEditorConfiguration.DefaultLayerName, container));
+            if (container != null)
+            {
+                Project.AddLayer(container, Factory.CreateLayerContainer(ProjectEditorConfiguration.DefaultLayerName, container));
+            }
         }
 
         /// <inheritdoc/>
         public void OnRemoveLayer(ILayerContainer layer)
         {
-            Project.RemoveLayer(layer);
-            if (layer.Owner is IPageContainer owner)
+            if (layer != null)
             {
-                owner.SetCurrentLayer(owner.Layers.FirstOrDefault());
+                Project.RemoveLayer(layer);
+                if (layer.Owner is IPageContainer owner)
+                {
+                    owner.SetCurrentLayer(owner.Layers.FirstOrDefault());
+                }
             }
         }
 
