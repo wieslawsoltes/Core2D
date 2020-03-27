@@ -2567,7 +2567,7 @@ namespace Core2D.Editor
         }
 
         /// <inheritdoc/>
-        public bool OnDropFiles(string[] files)
+        public bool OnDropFiles(string[] files, double x, double y)
         {
             try
             {
@@ -2610,7 +2610,11 @@ namespace Core2D.Editor
                         }
                         else if (ProjectEditorConfiguration.ImageExtensions.Any(x => string.Compare(ext, x, StringComparison.OrdinalIgnoreCase) == 0))
                         {
-                            // TODO:
+                            var key = OnGetImageKey(path);
+                            if (key != null && !string.IsNullOrEmpty(key))
+                            {
+                                OnDropImageKey(key, x, y);
+                            }
                             result = true;
                         }
                     }
@@ -2624,6 +2628,23 @@ namespace Core2D.Editor
             }
 
             return false;
+        }
+
+        /// <inheritdoc/>
+        public void OnDropImageKey(string key, double x, double y)
+        {
+            var selected = Project.CurrentStyleLibrary.Selected;
+            var style = (IShapeStyle)selected.Copy(null);
+            var point = Project?.Options?.PointShape;
+            var layer = Project?.CurrentContainer?.CurrentLayer;
+            double sx = Project.Options.SnapToGrid ? Snap(x, Project.Options.SnapX) : x;
+            double sy = Project.Options.SnapToGrid ? Snap(y, Project.Options.SnapY) : y;
+
+            var image = Factory.CreateImageShape(sx, sy, style, point, key);
+            image.BottomRight.X = sx + 320;
+            image.BottomRight.Y = sy + 180;
+
+            Project.AddShape(layer, image);
         }
 
         /// <inheritdoc/>

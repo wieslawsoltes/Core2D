@@ -990,8 +990,18 @@ namespace Core2D.Editor
         /// Process dropped files.
         /// </summary>
         /// <param name="files">The files array.</param>
+        /// <param name="x">The X coordinate in container.</param>
+        /// <param name="y">The Y coordinate in container.</param>
         /// <returns>Returns true if success.</returns>
-        bool OnDropFiles(string[] files);
+        bool OnDropFiles(string[] files, double x, double y);
+
+        /// <summary>
+        /// Drop image key in current container at specified location.
+        /// </summary>
+        /// <param name="key">The image key.</param>
+        /// <param name="x">The X coordinate in container.</param>
+        /// <param name="y">The Y coordinate in container.</param>
+        void OnDropImageKey(string key, double x, double y);
 
         /// <summary>
         /// Drop <see cref="BaseShape"/> object in current container at specified location.

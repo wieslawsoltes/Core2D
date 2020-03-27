@@ -56,7 +56,7 @@ namespace Core2D.UI.Avalonia.Dock.Handlers
                 var files = e.Data.GetFileNames().ToArray();
                 if (bExecute)
                 {
-                    editor?.OnDropFiles(files);
+                    editor?.OnDropFiles(files, point.X, point.Y);
                 }
                 return true;
             }
