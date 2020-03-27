@@ -132,6 +132,92 @@
                 </MenuItem.Styles>
             </MenuItem>
         </MenuItem>
+        <MenuItem Header="_Project">
+            <MenuItem Header="O_ptions">
+                <MenuItem Header="Default is Stro_ked" Command="{Binding OnToggleDefaultIsStroked}" InputGesture="K">
+                    <MenuItem.Icon>
+                        <CheckBox IsChecked="{Binding Project.Options.DefaultIsStroked}" Classes="menu"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="Default is _Filled" Command="{Binding OnToggleDefaultIsFilled}" InputGesture="F">
+                    <MenuItem.Icon>
+                        <CheckBox IsChecked="{Binding Project.Options.DefaultIsFilled}" Classes="menu"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <Separator/>
+                <MenuItem Header="Default is Close_d" Command="{Binding OnToggleDefaultIsClosed}" InputGesture="D">
+                    <MenuItem.Icon>
+                        <CheckBox IsChecked="{Binding Project.Options.DefaultIsClosed}" Classes="menu"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="Default is Smooth _Join" Command="{Binding OnToggleDefaultIsSmoothJoin}" InputGesture="J">
+                    <MenuItem.Icon>
+                        <CheckBox IsChecked="{Binding Project.Options.DefaultIsSmoothJoin}" Classes="menu"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <Separator/>
+                <MenuItem Header="Snap to _Grid" Command="{Binding OnToggleSnapToGrid}" InputGesture="G">
+                    <MenuItem.Icon>
+                        <CheckBox IsChecked="{Binding Project.Options.SnapToGrid}" Classes="menu"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <Separator/>
+                <MenuItem Header="Try To _Connect" Command="{Binding OnToggleTryToConnect}" InputGesture="C">
+                    <MenuItem.Icon>
+                        <CheckBox IsChecked="{Binding Project.Options.TryToConnect}" Classes="menu"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+            </MenuItem>
+            <MenuItem Header="_Data">
+                <MenuItem Header="_Import..." Command="{Binding Platform.OnImportData}" CommandParameter="{Binding Project}"/>
+                <Separator/>
+                <MenuItem Header="_Export..." Command="{Binding Platform.OnExportData}" CommandParameter="{Binding Project.CurrentDatabase}"/>
+                <Separator/>
+                <MenuItem Header="_Update..." Command="{Binding Platform.OnUpdateData}" CommandParameter="{Binding Project.CurrentDatabase}"/>
+            </MenuItem>
+        </MenuItem>
+        <MenuItem Header="_Document">
+            <MenuItem Header="_Add Document" Command="{Binding OnAddDocument}" CommandParameter="{Binding Mode=OneWay}"/>
+            <Separator/>
+            <MenuItem Header="Insert Document Bef_ore" Command="{Binding OnInsertDocumentBefore}" CommandParameter="{Binding Mode=OneWay}"/>
+            <MenuItem Header="Insert Document Aft_er" Command="{Binding OnInsertDocumentAfter}" CommandParameter="{Binding Mode=OneWay}"/>
+        </MenuItem>
+        <MenuItem Header="P_age">
+            <MenuItem Header="_Add Page" Command="{Binding OnAddPage}" CommandParameter="{Binding Mode=OneWay}"/>
+            <Separator/>
+            <MenuItem Header="Insert Page Bef_ore" Command="{Binding OnInsertPageBefore}" CommandParameter="{Binding Mode=OneWay}"/>
+            <MenuItem Header="Insert Page Aft_er" Command="{Binding OnInsertPageAfter}" CommandParameter="{Binding Mode=OneWay}"/>
+            <Separator/>
+            <MenuItem Header="Te_mplate" Items="{Binding Project.Templates}">
+                <MenuItem.Styles>
+                    <Style Selector="MenuItem">
+                        <Setter Property="Header" Value="{Binding Name}"/>
+                        <Setter Property="Command" Value="{Binding $parent[UserControl].DataContext.OnApplyTemplate}"/>
+                        <Setter Property="CommandParameter" Value="{Binding}"/>
+                        <Setter Property="Icon">
+                            <Template>
+                                <CheckBox x:Name="icon" Classes="menu">
+                                    <i:Interaction.Behaviors>
+                                        <iac:BindTagToVisualRootDataContextBehavior/>
+                                    </i:Interaction.Behaviors>
+                                    <CheckBox.IsChecked>
+                                        <MultiBinding Mode="OneWay" Converter="{StaticResource ObjectEqualityMultiConverter}">
+                                            <Binding ElementName="icon" Path="DataContext"/>
+                                            <Binding ElementName="icon" Path="Tag.Project.CurrentContainer.Template"/>
+                                        </MultiBinding>
+                                    </CheckBox.IsChecked>
+                                </CheckBox>
+                            </Template>
+                        </Setter>
+                    </Style>
+                </MenuItem.Styles>
+            </MenuItem>
+        </MenuItem>
+        <MenuItem Header="_Layer">
+            <MenuItem Header="_Add Layer" Command="{Binding OnAddLayer}" CommandParameter="{Binding Owner, Mode=OneWay}"/>
+            <Separator/>
+            <MenuItem Header="_Delete Layer" Command="{Binding OnRemoveLayer}" CommandParameter="{Binding Mode=OneWay}"/>
+        </MenuItem>
         <MenuItem Header="_Shape">
             <MenuItem Header="_Group" Command="{Binding OnGroupSelected}" InputGesture="Ctrl+G"/>
             <MenuItem Header="U_ngroup" Command="{Binding OnUngroupSelected}" InputGesture="Ctrl+U"/>
@@ -167,7 +253,7 @@
                 <Separator/>
             </MenuItem>
         </MenuItem>
-        <MenuItem Header="St_yle">
+        <MenuItem Header="F_ormat">
             <MenuItem Header="_Copy Style" Command="{Binding StyleEditor.OnCopyStyle}" InputGesture="Ctrl+Shift+C"/>
             <MenuItem Header="Copy Stroke" Command="{Binding StyleEditor.OnCopyStroke}"/>
             <MenuItem Header="Copy Fill" Command="{Binding StyleEditor.OnCopyFill}"/>
@@ -746,72 +832,6 @@
             </MenuItem>
             <Separator/>
             <MenuItem Header="Reset" Command="{Binding OnResetTool}"/>
-        </MenuItem>
-        <MenuItem Header="_Data">
-            <MenuItem Header="_Import..." Command="{Binding Platform.OnImportData}" CommandParameter="{Binding Project}"/>
-            <Separator/>
-            <MenuItem Header="_Export..." Command="{Binding Platform.OnExportData}" CommandParameter="{Binding Project.CurrentDatabase}"/>
-            <Separator/>
-            <MenuItem Header="_Update..." Command="{Binding Platform.OnUpdateData}" CommandParameter="{Binding Project.CurrentDatabase}"/>
-        </MenuItem>
-        <MenuItem Header="Te_mplate" Items="{Binding Project.Templates}">
-            <MenuItem.Styles>
-                <Style Selector="MenuItem">
-                    <Setter Property="Header" Value="{Binding Name}"/>
-                    <Setter Property="Command" Value="{Binding $parent[UserControl].DataContext.OnApplyTemplate}"/>
-                    <Setter Property="CommandParameter" Value="{Binding}"/>
-                    <Setter Property="Icon">
-                        <Template>
-                            <CheckBox x:Name="icon" Classes="menu">
-                                <i:Interaction.Behaviors>
-                                    <iac:BindTagToVisualRootDataContextBehavior/>
-                                </i:Interaction.Behaviors>
-                                <CheckBox.IsChecked>
-                                    <MultiBinding Mode="OneWay" Converter="{StaticResource ObjectEqualityMultiConverter}">
-                                        <Binding ElementName="icon" Path="DataContext"/>
-                                        <Binding ElementName="icon" Path="Tag.Project.CurrentContainer.Template"/>
-                                    </MultiBinding>
-                                </CheckBox.IsChecked>
-                            </CheckBox>
-                        </Template>
-                    </Setter>
-                </Style>
-            </MenuItem.Styles>
-        </MenuItem>
-        <MenuItem Header="_Options">
-            <MenuItem Header="Default is Stro_ked" Command="{Binding OnToggleDefaultIsStroked}" InputGesture="K">
-                <MenuItem.Icon>
-                    <CheckBox IsChecked="{Binding Project.Options.DefaultIsStroked}" Classes="menu"/>
-                </MenuItem.Icon>
-            </MenuItem>
-            <MenuItem Header="Default is _Filled" Command="{Binding OnToggleDefaultIsFilled}" InputGesture="F">
-                <MenuItem.Icon>
-                    <CheckBox IsChecked="{Binding Project.Options.DefaultIsFilled}" Classes="menu"/>
-                </MenuItem.Icon>
-            </MenuItem>
-            <Separator/>
-            <MenuItem Header="Default is Close_d" Command="{Binding OnToggleDefaultIsClosed}" InputGesture="D">
-                <MenuItem.Icon>
-                    <CheckBox IsChecked="{Binding Project.Options.DefaultIsClosed}" Classes="menu"/>
-                </MenuItem.Icon>
-            </MenuItem>
-            <MenuItem Header="Default is Smooth _Join" Command="{Binding OnToggleDefaultIsSmoothJoin}" InputGesture="J">
-                <MenuItem.Icon>
-                    <CheckBox IsChecked="{Binding Project.Options.DefaultIsSmoothJoin}" Classes="menu"/>
-                </MenuItem.Icon>
-            </MenuItem>
-            <Separator/>
-            <MenuItem Header="Snap to _Grid" Command="{Binding OnToggleSnapToGrid}" InputGesture="G">
-                <MenuItem.Icon>
-                    <CheckBox IsChecked="{Binding Project.Options.SnapToGrid}" Classes="menu"/>
-                </MenuItem.Icon>
-            </MenuItem>
-            <Separator/>
-            <MenuItem Header="Try To _Connect" Command="{Binding OnToggleTryToConnect}" InputGesture="C">
-                <MenuItem.Icon>
-                    <CheckBox IsChecked="{Binding Project.Options.TryToConnect}" Classes="menu"/>
-                </MenuItem.Icon>
-            </MenuItem>
         </MenuItem>
         <MenuItem Header="_Window">
             <MenuItem Header="_Load Layout..." Command="{Binding LayoutPlatform.LoadLayout}"/>
