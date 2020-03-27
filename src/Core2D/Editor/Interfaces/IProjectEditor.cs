@@ -795,6 +795,12 @@ namespace Core2D.Editor
         void OnRemoveScript(IScript script);
 
         /// <summary>
+        /// Get image key.
+        /// </summary>
+        /// <param name="path">The image path.</param>
+        string OnGetImageKey(string path);
+
+        /// <summary>
         /// Add image key.
         /// </summary>
         /// <param name="path">The image path.</param>

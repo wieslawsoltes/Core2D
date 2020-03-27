@@ -7833,6 +7833,19 @@ references:
   isSpec: "True"
   fullName: Core2D.Editor.IProjectEditor.OnExportXaml
   nameWithType: IProjectEditor.OnExportXaml
+- uid: Core2D.Editor.IProjectEditor.OnGetImageKey(System.String)
+  name: OnGetImageKey(String)
+  href: api/Core2D.Editor.IProjectEditor.html#Core2D_Editor_IProjectEditor_OnGetImageKey_System_String_
+  commentId: M:Core2D.Editor.IProjectEditor.OnGetImageKey(System.String)
+  fullName: Core2D.Editor.IProjectEditor.OnGetImageKey(System.String)
+  nameWithType: IProjectEditor.OnGetImageKey(String)
+- uid: Core2D.Editor.IProjectEditor.OnGetImageKey*
+  name: OnGetImageKey
+  href: api/Core2D.Editor.IProjectEditor.html#Core2D_Editor_IProjectEditor_OnGetImageKey_
+  commentId: Overload:Core2D.Editor.IProjectEditor.OnGetImageKey
+  isSpec: "True"
+  fullName: Core2D.Editor.IProjectEditor.OnGetImageKey
+  nameWithType: IProjectEditor.OnGetImageKey
 - uid: Core2D.Editor.IProjectEditor.OnGroupSelected
   name: OnGroupSelected()
   href: api/Core2D.Editor.IProjectEditor.html#Core2D_Editor_IProjectEditor_OnGroupSelected
@@ -12338,6 +12351,19 @@ references:
   isSpec: "True"
   fullName: Core2D.Editor.ProjectEditor.OnExportXaml
   nameWithType: ProjectEditor.OnExportXaml
+- uid: Core2D.Editor.ProjectEditor.OnGetImageKey(System.String)
+  name: OnGetImageKey(String)
+  href: api/Core2D.Editor.ProjectEditor.html#Core2D_Editor_ProjectEditor_OnGetImageKey_System_String_
+  commentId: M:Core2D.Editor.ProjectEditor.OnGetImageKey(System.String)
+  fullName: Core2D.Editor.ProjectEditor.OnGetImageKey(System.String)
+  nameWithType: ProjectEditor.OnGetImageKey(String)
+- uid: Core2D.Editor.ProjectEditor.OnGetImageKey*
+  name: OnGetImageKey
+  href: api/Core2D.Editor.ProjectEditor.html#Core2D_Editor_ProjectEditor_OnGetImageKey_
+  commentId: Overload:Core2D.Editor.ProjectEditor.OnGetImageKey
+  isSpec: "True"
+  fullName: Core2D.Editor.ProjectEditor.OnGetImageKey
+  nameWithType: ProjectEditor.OnGetImageKey
 - uid: Core2D.Editor.ProjectEditor.OnGroupSelected
   name: OnGroupSelected()
   href: api/Core2D.Editor.ProjectEditor.html#Core2D_Editor_ProjectEditor_OnGroupSelected
@@ -13837,6 +13863,12 @@ references:
   commentId: F:Core2D.Editor.ProjectEditorConfiguration.DefaulValue
   fullName: Core2D.Editor.ProjectEditorConfiguration.DefaulValue
   nameWithType: ProjectEditorConfiguration.DefaulValue
+- uid: Core2D.Editor.ProjectEditorConfiguration.ImageExtensions
+  name: ImageExtensions
+  href: api/Core2D.Editor.ProjectEditorConfiguration.html#Core2D_Editor_ProjectEditorConfiguration_ImageExtensions
+  commentId: F:Core2D.Editor.ProjectEditorConfiguration.ImageExtensions
+  fullName: Core2D.Editor.ProjectEditorConfiguration.ImageExtensions
+  nameWithType: ProjectEditorConfiguration.ImageExtensions
 - uid: Core2D.Editor.ProjectEditorConfiguration.ImportedDatabaseName
   name: ImportedDatabaseName
   href: api/Core2D.Editor.ProjectEditorConfiguration.html#Core2D_Editor_ProjectEditorConfiguration_ImportedDatabaseName

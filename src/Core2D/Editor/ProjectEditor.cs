@@ -1850,6 +1850,19 @@ namespace Core2D.Editor
         }
 
         /// <inheritdoc/>
+        public string OnGetImageKey(string path)
+        {
+            using var stream = FileIO.Open(path);
+            var bytes = FileIO.ReadBinary(stream);
+            if (Project is IImageCache imageCache)
+            {
+                var key = imageCache.AddImageFromFile(path, bytes);
+                return key;
+            }
+            return default;
+        }
+
+        /// <inheritdoc/>
         public async Task<string> OnAddImageKey(string path)
         {
             if (Project != null)

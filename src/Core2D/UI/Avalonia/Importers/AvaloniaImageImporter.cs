@@ -25,20 +25,6 @@ namespace Core2D.UI.Avalonia.Importers
             _serviceProvider = serviceProvider;
         }
 
-        private string GetImageKey(string path)
-        {
-            var fileIO = _serviceProvider.GetService<IFileSystem>();
-            using var stream = fileIO.Open(path);
-            var bytes = fileIO.ReadBinary(stream);
-            var project = _serviceProvider.GetService<IProjectEditor>().Project;
-            if (project is IImageCache imageCache)
-            {
-                var key = imageCache.AddImageFromFile(path, bytes);
-                return key;
-            }
-            return default;
-        }
-
         /// <inheritdoc/>
         public async Task<string> GetImageKeyAsync()
         {
@@ -52,7 +38,7 @@ namespace Core2D.UI.Avalonia.Importers
                     var path = result.FirstOrDefault();
                     if (path != null)
                     {
-                        return GetImageKey(path);
+                        return _serviceProvider.GetService<IProjectEditor>().OnGetImageKey(path);
                     }
                 }
             }
