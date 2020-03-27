@@ -11,21 +11,24 @@
             d:DataContext="{x:Static Designer:DesignerContext.Editor}"
             d:DesignWidth="800" d:DesignHeight="20"
             Header="F_ormat">
-    <MenuItem Header="_Copy Style" Command="{Binding StyleEditor.OnCopyStyle}" InputGesture="Ctrl+Shift+C"/>
-    <MenuItem Header="Copy Stroke" Command="{Binding StyleEditor.OnCopyStroke}"/>
-    <MenuItem Header="Copy Fill" Command="{Binding StyleEditor.OnCopyFill}"/>
-    <MenuItem Header="Copy Text Style" Command="{Binding StyleEditor.OnCopyTextStyle}"/>
-    <MenuItem Header="Copy Start Arrow Style" Command="{Binding StyleEditor.OnCopyStartArrowStyle}"/>
-    <MenuItem Header="Copy End Arrow Style" Command="{Binding StyleEditor.OnCopyEndArrowStyle}"/>
-    <MenuItem Header="Copy Line Style" Command="{Binding StyleEditor.OnCopyLineStyle}"/>
-    <Separator/>
-    <MenuItem Header="_Paste Style" Command="{Binding StyleEditor.OnPasteStyle}" InputGesture="Ctrl+Shift+V"/>
-    <MenuItem Header="Paste Stroke" Command="{Binding StyleEditor.OnPasteStroke}"/>
-    <MenuItem Header="Paste Fill" Command="{Binding StyleEditor.OnPasteFill}"/>
-    <MenuItem Header="Paste Text Style" Command="{Binding StyleEditor.OnPasteTextStyle}"/>
-    <MenuItem Header="Paste Start Arrow Style" Command="{Binding StyleEditor.OnPasteStartArrowStyle}"/>
-    <MenuItem Header="Paste End Arrow Style" Command="{Binding StyleEditor.OnPasteEndArrowStyle}"/>
-    <MenuItem Header="Paste Line Style" Command="{Binding StyleEditor.OnPasteLineStyle}"/>
+    <MenuItem Header="_Copy">
+        <MenuItem Header="_Style" Command="{Binding StyleEditor.OnCopyStyle}" InputGesture="Ctrl+Shift+C"/>
+        <MenuItem Header="St_roke" Command="{Binding StyleEditor.OnCopyStroke}"/>
+        <MenuItem Header="_Fill" Command="{Binding StyleEditor.OnCopyFill}"/>
+        <MenuItem Header="_Text Style" Command="{Binding StyleEditor.OnCopyTextStyle}"/>
+        <MenuItem Header="St_art Arrow Style" Command="{Binding StyleEditor.OnCopyStartArrowStyle}"/>
+        <MenuItem Header="_End Arrow Style" Command="{Binding StyleEditor.OnCopyEndArrowStyle}"/>
+        <MenuItem Header="_Line Style" Command="{Binding StyleEditor.OnCopyLineStyle}"/>
+    </MenuItem>
+    <MenuItem Header="_Paste">
+        <MenuItem Header="_Style" Command="{Binding StyleEditor.OnPasteStyle}" InputGesture="Ctrl+Shift+V"/>
+        <MenuItem Header="St_roke" Command="{Binding StyleEditor.OnPasteStroke}"/>
+        <MenuItem Header="_Fill" Command="{Binding StyleEditor.OnPasteFill}"/>
+        <MenuItem Header="_Text Style" Command="{Binding StyleEditor.OnPasteTextStyle}"/>
+        <MenuItem Header="St_art Arrow Style" Command="{Binding StyleEditor.OnPasteStartArrowStyle}"/>
+        <MenuItem Header="_End Arrow Style" Command="{Binding StyleEditor.OnPasteEndArrowStyle}"/>
+        <MenuItem Header="_Line Style" Command="{Binding StyleEditor.OnPasteLineStyle}"/>
+    </MenuItem>
     <Separator/>
     <MenuItem Header="_Stroke">
         <MenuItem Header="_Thickness">
