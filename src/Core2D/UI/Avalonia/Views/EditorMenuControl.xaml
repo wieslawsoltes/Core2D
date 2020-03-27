@@ -232,7 +232,7 @@
         <MenuItem Header="_Layer">
             <MenuItem Header="_Add Layer" Command="{Binding OnAddLayer}" CommandParameter="{Binding Project.CurrentContainer}"/>
             <Separator/>
-            <MenuItem Header="_Delete Layer" Command="{Binding OnRemoveLayer}" CommandParameter="{Binding Mode=OneWay}"/>
+            <MenuItem Header="_Delete Layer" Command="{Binding OnRemoveLayer}" CommandParameter="{Binding Project.CurrentContainer.CurrentLayer}"/>
         </MenuItem>
         <MenuItem Header="_Shape">
             <MenuItem Header="_Group">
