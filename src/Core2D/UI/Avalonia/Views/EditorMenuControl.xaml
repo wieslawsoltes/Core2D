@@ -116,7 +116,7 @@
                         <Setter Property="Header" Value="{Binding Name}"/>
                         <Setter Property="Command" Value="{Binding ApplyTheme}"/>
                         <Setter Property="CommandParameter" Value="{Binding}"/>
-                        <!--<Setter Property="Icon">
+                        <Setter Property="Icon">
                             <Template>
                                 <CheckBox Classes="menu">
                                     <CheckBox.IsChecked>
@@ -127,7 +127,7 @@
                                     </CheckBox.IsChecked>
                                 </CheckBox>
                             </Template>
-                        </Setter>-->
+                        </Setter>
                     </Style>
                 </MenuItem.Styles>
             </MenuItem>
