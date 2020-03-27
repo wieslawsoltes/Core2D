@@ -897,7 +897,16 @@
             <data:PropertiesControl DataContext="{Binding Context.Renderers[0].State.SelectedShape.Data}" IsVisible="{Binding !!$self.DataContext}"/>
         </DataTemplate>
         <DataTemplate DataType="Tools:StyleTool">
-            <style:ShapeStyleControl DataContext="{Binding Context.Project.CurrentStyleLibrary.Selected}"/>
+            <Grid DataContext="{Binding Context}">
+                <ContentControl>
+                    <ContentControl.Content>
+                        <MultiBinding Converter="{StaticResource PriorityMultiValueConverter}">
+                            <Binding Path="Renderers[0].State.SelectedShape.Style" FallbackValue="{x:Null}" />
+                            <Binding Path="Project.CurrentStyleLibrary.Selected" FallbackValue="{x:Null}" />
+                        </MultiBinding>
+                    </ContentControl.Content>
+                </ContentControl>
+            </Grid>
         </DataTemplate>
         <DataTemplate DataType="Tools:TemplateTool">
             <ContentControl Content="{Binding Context.Project.CurrentTemplate}"/>
