@@ -134,10 +134,16 @@ namespace Core2D.UI.Avalonia.Dock.Factories
                 Title = "Tools"
             };
 
-            var dataTool = new DataTool
+            var recordTool = new RecordTool
             {
-                Id = nameof(DataTool),
-                Title = "Data"
+                Id = nameof(RecordTool),
+                Title = "Record"
+            };
+
+            var propertiesTool = new PropertiesTool
+            {
+                Id = nameof(PropertiesTool),
+                Title = "Properties"
             };
 
             var styleTool = new StyleTool
@@ -203,7 +209,7 @@ namespace Core2D.UI.Avalonia.Dock.Factories
                 Id = nameof(DMC.IProportionalDock),
                 Title = "EditorRight",
                 Orientation = DM.Orientation.Vertical,
-                Proportion = 0.17,
+                Proportion = 0.20,
                 ActiveDockable = null,
                 VisibleDockables = CreateList<DM.IDockable>
                 (
@@ -216,9 +222,9 @@ namespace Core2D.UI.Avalonia.Dock.Factories
                         VisibleDockables = CreateList<DM.IDockable>
                         (
                             stylesTool,
-                            templatesTool,
                             containerTool,
-                            zoomTool
+                            templatesTool,
+                            templateTool
                         )
                     },
                     new DMC.SplitterDock()
@@ -235,9 +241,10 @@ namespace Core2D.UI.Avalonia.Dock.Factories
                         VisibleDockables = CreateList<DM.IDockable>
                         (
                             shapeTool,
-                            dataTool,
+                            propertiesTool,
+                            recordTool,
                             styleTool,
-                            templateTool
+                            zoomTool
                         )
                     }
                 )
@@ -404,6 +411,8 @@ namespace Core2D.UI.Avalonia.Dock.Factories
                 [nameof(ToolsTool)] = () => _serviceProvider.GetService<IProjectEditor>(),
                 [nameof(ShapeTool)] = () => _serviceProvider.GetService<IProjectEditor>(),
                 [nameof(DataTool)] = () => _serviceProvider.GetService<IProjectEditor>(),
+                [nameof(RecordTool)] = () => _serviceProvider.GetService<IProjectEditor>(),
+                [nameof(PropertiesTool)] = () => _serviceProvider.GetService<IProjectEditor>(),
                 [nameof(StyleTool)] = () => _serviceProvider.GetService<IProjectEditor>(),
                 [nameof(TemplateTool)] = () => _serviceProvider.GetService<IProjectEditor>(),
                 // Views
