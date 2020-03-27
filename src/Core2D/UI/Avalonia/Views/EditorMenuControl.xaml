@@ -181,12 +181,28 @@
             <Separator/>
             <MenuItem Header="Insert Document Bef_ore" Command="{Binding OnInsertDocumentBefore}" CommandParameter="{Binding Mode=OneWay}"/>
             <MenuItem Header="Insert Document Aft_er" Command="{Binding OnInsertDocumentAfter}" CommandParameter="{Binding Mode=OneWay}"/>
+            <Separator/>
+            <MenuItem Header="Cu_t Document" Command="{Binding OnCut}" CommandParameter="{Binding Project.CurrentDocument}"/>
+            <MenuItem Header="_Copy Document" Command="{Binding OnCopy}" CommandParameter="{Binding Project.CurrentDocument}"/>
+            <MenuItem Header="_Paste Document" Command="{Binding OnPaste}" CommandParameter="{Binding Project.CurrentDocument}"/>
+            <Separator/>
+            <MenuItem Header="_Delete Document" Command="{Binding OnDelete}" CommandParameter="{Binding Project.CurrentDocument}"/>
+            <Separator/>
+            <MenuItem Header="E_xport Document" Command="{Binding Platform.OnExport}" CommandParameter="{Binding Project.CurrentDocument}"/>
         </MenuItem>
         <MenuItem Header="P_age">
             <MenuItem Header="_Add Page" Command="{Binding OnAddPage}" CommandParameter="{Binding Mode=OneWay}"/>
             <Separator/>
             <MenuItem Header="Insert Page Bef_ore" Command="{Binding OnInsertPageBefore}" CommandParameter="{Binding Mode=OneWay}"/>
             <MenuItem Header="Insert Page Aft_er" Command="{Binding OnInsertPageAfter}" CommandParameter="{Binding Mode=OneWay}"/>
+            <Separator/>
+            <MenuItem Header="Cu_t Page" Command="{Binding OnCut}" CommandParameter="{Binding Project.CurrentContainer}"/>
+            <MenuItem Header="_Copy Page" Command="{Binding OnCopy}" CommandParameter="{Binding Project.CurrentContainer}"/>
+            <MenuItem Header="_Paste Page" Command="{Binding OnPaste}" CommandParameter="{Binding Project.CurrentContainer}"/>
+            <Separator/>
+            <MenuItem Header="_Delete Page" Command="{Binding OnDelete}" CommandParameter="{Binding Project.CurrentContainer}"/>
+            <Separator/>
+            <MenuItem Header="E_xport Page" Command="{Binding Platform.OnExport}" CommandParameter="{Binding Project.CurrentContainer}"/>
             <Separator/>
             <MenuItem Header="Te_mplate" Items="{Binding Project.Templates}">
                 <MenuItem.Styles>
