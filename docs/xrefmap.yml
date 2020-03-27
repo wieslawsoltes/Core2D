@@ -706,6 +706,19 @@ references:
   isSpec: "True"
   fullName: Core2D.Containers.IProjectContainer.CurrentGroupLibrary
   nameWithType: IProjectContainer.CurrentGroupLibrary
+- uid: Core2D.Containers.IProjectContainer.CurrentScript
+  name: CurrentScript
+  href: api/Core2D.Containers.IProjectContainer.html#Core2D_Containers_IProjectContainer_CurrentScript
+  commentId: P:Core2D.Containers.IProjectContainer.CurrentScript
+  fullName: Core2D.Containers.IProjectContainer.CurrentScript
+  nameWithType: IProjectContainer.CurrentScript
+- uid: Core2D.Containers.IProjectContainer.CurrentScript*
+  name: CurrentScript
+  href: api/Core2D.Containers.IProjectContainer.html#Core2D_Containers_IProjectContainer_CurrentScript_
+  commentId: Overload:Core2D.Containers.IProjectContainer.CurrentScript
+  isSpec: "True"
+  fullName: Core2D.Containers.IProjectContainer.CurrentScript
+  nameWithType: IProjectContainer.CurrentScript
 - uid: Core2D.Containers.IProjectContainer.CurrentStyleLibrary
   name: CurrentStyleLibrary
   href: api/Core2D.Containers.IProjectContainer.html#Core2D_Containers_IProjectContainer_CurrentStyleLibrary
@@ -797,6 +810,19 @@ references:
   isSpec: "True"
   fullName: Core2D.Containers.IProjectContainer.Options
   nameWithType: IProjectContainer.Options
+- uid: Core2D.Containers.IProjectContainer.Scripts
+  name: Scripts
+  href: api/Core2D.Containers.IProjectContainer.html#Core2D_Containers_IProjectContainer_Scripts
+  commentId: P:Core2D.Containers.IProjectContainer.Scripts
+  fullName: Core2D.Containers.IProjectContainer.Scripts
+  nameWithType: IProjectContainer.Scripts
+- uid: Core2D.Containers.IProjectContainer.Scripts*
+  name: Scripts
+  href: api/Core2D.Containers.IProjectContainer.html#Core2D_Containers_IProjectContainer_Scripts_
+  commentId: Overload:Core2D.Containers.IProjectContainer.Scripts
+  isSpec: "True"
+  fullName: Core2D.Containers.IProjectContainer.Scripts
+  nameWithType: IProjectContainer.Scripts
 - uid: Core2D.Containers.IProjectContainer.Selected
   name: Selected
   href: api/Core2D.Containers.IProjectContainer.html#Core2D_Containers_IProjectContainer_Selected
@@ -865,6 +891,19 @@ references:
   isSpec: "True"
   fullName: Core2D.Containers.IProjectContainer.SetCurrentGroupLibrary
   nameWithType: IProjectContainer.SetCurrentGroupLibrary
+- uid: Core2D.Containers.IProjectContainer.SetCurrentScript(Core2D.Scripting.IScript)
+  name: SetCurrentScript(IScript)
+  href: api/Core2D.Containers.IProjectContainer.html#Core2D_Containers_IProjectContainer_SetCurrentScript_Core2D_Scripting_IScript_
+  commentId: M:Core2D.Containers.IProjectContainer.SetCurrentScript(Core2D.Scripting.IScript)
+  fullName: Core2D.Containers.IProjectContainer.SetCurrentScript(Core2D.Scripting.IScript)
+  nameWithType: IProjectContainer.SetCurrentScript(IScript)
+- uid: Core2D.Containers.IProjectContainer.SetCurrentScript*
+  name: SetCurrentScript
+  href: api/Core2D.Containers.IProjectContainer.html#Core2D_Containers_IProjectContainer_SetCurrentScript_
+  commentId: Overload:Core2D.Containers.IProjectContainer.SetCurrentScript
+  isSpec: "True"
+  fullName: Core2D.Containers.IProjectContainer.SetCurrentScript
+  nameWithType: IProjectContainer.SetCurrentScript
 - uid: Core2D.Containers.IProjectContainer.SetCurrentStyleLibrary(Core2D.Containers.ILibrary{Core2D.Style.IShapeStyle})
   name: SetCurrentStyleLibrary(ILibrary<IShapeStyle>)
   href: api/Core2D.Containers.IProjectContainer.html#Core2D_Containers_IProjectContainer_SetCurrentStyleLibrary_Core2D_Containers_ILibrary_Core2D_Style_IShapeStyle__
@@ -2008,6 +2047,19 @@ references:
   isSpec: "True"
   fullName: Core2D.Containers.ProjectContainer.CurrentGroupLibrary
   nameWithType: ProjectContainer.CurrentGroupLibrary
+- uid: Core2D.Containers.ProjectContainer.CurrentScript
+  name: CurrentScript
+  href: api/Core2D.Containers.ProjectContainer.html#Core2D_Containers_ProjectContainer_CurrentScript
+  commentId: P:Core2D.Containers.ProjectContainer.CurrentScript
+  fullName: Core2D.Containers.ProjectContainer.CurrentScript
+  nameWithType: ProjectContainer.CurrentScript
+- uid: Core2D.Containers.ProjectContainer.CurrentScript*
+  name: CurrentScript
+  href: api/Core2D.Containers.ProjectContainer.html#Core2D_Containers_ProjectContainer_CurrentScript_
+  commentId: Overload:Core2D.Containers.ProjectContainer.CurrentScript
+  isSpec: "True"
+  fullName: Core2D.Containers.ProjectContainer.CurrentScript
+  nameWithType: ProjectContainer.CurrentScript
 - uid: Core2D.Containers.ProjectContainer.CurrentStyleLibrary
   name: CurrentStyleLibrary
   href: api/Core2D.Containers.ProjectContainer.html#Core2D_Containers_ProjectContainer_CurrentStyleLibrary
@@ -2188,6 +2240,19 @@ references:
   isSpec: "True"
   fullName: Core2D.Containers.ProjectContainer.RemoveImage
   nameWithType: ProjectContainer.RemoveImage
+- uid: Core2D.Containers.ProjectContainer.Scripts
+  name: Scripts
+  href: api/Core2D.Containers.ProjectContainer.html#Core2D_Containers_ProjectContainer_Scripts
+  commentId: P:Core2D.Containers.ProjectContainer.Scripts
+  fullName: Core2D.Containers.ProjectContainer.Scripts
+  nameWithType: ProjectContainer.Scripts
+- uid: Core2D.Containers.ProjectContainer.Scripts*
+  name: Scripts
+  href: api/Core2D.Containers.ProjectContainer.html#Core2D_Containers_ProjectContainer_Scripts_
+  commentId: Overload:Core2D.Containers.ProjectContainer.Scripts
+  isSpec: "True"
+  fullName: Core2D.Containers.ProjectContainer.Scripts
+  nameWithType: ProjectContainer.Scripts
 - uid: Core2D.Containers.ProjectContainer.Selected
   name: Selected
   href: api/Core2D.Containers.ProjectContainer.html#Core2D_Containers_ProjectContainer_Selected
@@ -2256,6 +2321,19 @@ references:
   isSpec: "True"
   fullName: Core2D.Containers.ProjectContainer.SetCurrentGroupLibrary
   nameWithType: ProjectContainer.SetCurrentGroupLibrary
+- uid: Core2D.Containers.ProjectContainer.SetCurrentScript(Core2D.Scripting.IScript)
+  name: SetCurrentScript(IScript)
+  href: api/Core2D.Containers.ProjectContainer.html#Core2D_Containers_ProjectContainer_SetCurrentScript_Core2D_Scripting_IScript_
+  commentId: M:Core2D.Containers.ProjectContainer.SetCurrentScript(Core2D.Scripting.IScript)
+  fullName: Core2D.Containers.ProjectContainer.SetCurrentScript(Core2D.Scripting.IScript)
+  nameWithType: ProjectContainer.SetCurrentScript(IScript)
+- uid: Core2D.Containers.ProjectContainer.SetCurrentScript*
+  name: SetCurrentScript
+  href: api/Core2D.Containers.ProjectContainer.html#Core2D_Containers_ProjectContainer_SetCurrentScript_
+  commentId: Overload:Core2D.Containers.ProjectContainer.SetCurrentScript
+  isSpec: "True"
+  fullName: Core2D.Containers.ProjectContainer.SetCurrentScript
+  nameWithType: ProjectContainer.SetCurrentScript
 - uid: Core2D.Containers.ProjectContainer.SetCurrentStyleLibrary(Core2D.Containers.ILibrary{Core2D.Style.IShapeStyle})
   name: SetCurrentStyleLibrary(ILibrary<IShapeStyle>)
   href: api/Core2D.Containers.ProjectContainer.html#Core2D_Containers_ProjectContainer_SetCurrentStyleLibrary_Core2D_Containers_ILibrary_Core2D_Style_IShapeStyle__
@@ -2350,6 +2428,19 @@ references:
   isSpec: "True"
   fullName: Core2D.Containers.ProjectContainer.ShouldSerializeCurrentGroupLibrary
   nameWithType: ProjectContainer.ShouldSerializeCurrentGroupLibrary
+- uid: Core2D.Containers.ProjectContainer.ShouldSerializeCurrentScript
+  name: ShouldSerializeCurrentScript()
+  href: api/Core2D.Containers.ProjectContainer.html#Core2D_Containers_ProjectContainer_ShouldSerializeCurrentScript
+  commentId: M:Core2D.Containers.ProjectContainer.ShouldSerializeCurrentScript
+  fullName: Core2D.Containers.ProjectContainer.ShouldSerializeCurrentScript()
+  nameWithType: ProjectContainer.ShouldSerializeCurrentScript()
+- uid: Core2D.Containers.ProjectContainer.ShouldSerializeCurrentScript*
+  name: ShouldSerializeCurrentScript
+  href: api/Core2D.Containers.ProjectContainer.html#Core2D_Containers_ProjectContainer_ShouldSerializeCurrentScript_
+  commentId: Overload:Core2D.Containers.ProjectContainer.ShouldSerializeCurrentScript
+  isSpec: "True"
+  fullName: Core2D.Containers.ProjectContainer.ShouldSerializeCurrentScript
+  nameWithType: ProjectContainer.ShouldSerializeCurrentScript
 - uid: Core2D.Containers.ProjectContainer.ShouldSerializeCurrentStyleLibrary
   name: ShouldSerializeCurrentStyleLibrary()
   href: api/Core2D.Containers.ProjectContainer.html#Core2D_Containers_ProjectContainer_ShouldSerializeCurrentStyleLibrary
@@ -2441,6 +2532,19 @@ references:
   isSpec: "True"
   fullName: Core2D.Containers.ProjectContainer.ShouldSerializeOptions
   nameWithType: ProjectContainer.ShouldSerializeOptions
+- uid: Core2D.Containers.ProjectContainer.ShouldSerializeScripts
+  name: ShouldSerializeScripts()
+  href: api/Core2D.Containers.ProjectContainer.html#Core2D_Containers_ProjectContainer_ShouldSerializeScripts
+  commentId: M:Core2D.Containers.ProjectContainer.ShouldSerializeScripts
+  fullName: Core2D.Containers.ProjectContainer.ShouldSerializeScripts()
+  nameWithType: ProjectContainer.ShouldSerializeScripts()
+- uid: Core2D.Containers.ProjectContainer.ShouldSerializeScripts*
+  name: ShouldSerializeScripts
+  href: api/Core2D.Containers.ProjectContainer.html#Core2D_Containers_ProjectContainer_ShouldSerializeScripts_
+  commentId: Overload:Core2D.Containers.ProjectContainer.ShouldSerializeScripts
+  isSpec: "True"
+  fullName: Core2D.Containers.ProjectContainer.ShouldSerializeScripts
+  nameWithType: ProjectContainer.ShouldSerializeScripts
 - uid: Core2D.Containers.ProjectContainer.ShouldSerializeSelected
   name: ShouldSerializeSelected()
   href: api/Core2D.Containers.ProjectContainer.html#Core2D_Containers_ProjectContainer_ShouldSerializeSelected
@@ -5292,6 +5396,19 @@ references:
   isSpec: "True"
   fullName: Core2D.Editor.Designer.DesignerContext.Rectangle
   nameWithType: DesignerContext.Rectangle
+- uid: Core2D.Editor.Designer.DesignerContext.Script
+  name: Script
+  href: api/Core2D.Editor.Designer.DesignerContext.html#Core2D_Editor_Designer_DesignerContext_Script
+  commentId: P:Core2D.Editor.Designer.DesignerContext.Script
+  fullName: Core2D.Editor.Designer.DesignerContext.Script
+  nameWithType: DesignerContext.Script
+- uid: Core2D.Editor.Designer.DesignerContext.Script*
+  name: Script
+  href: api/Core2D.Editor.Designer.DesignerContext.html#Core2D_Editor_Designer_DesignerContext_Script_
+  commentId: Overload:Core2D.Editor.Designer.DesignerContext.Script
+  isSpec: "True"
+  fullName: Core2D.Editor.Designer.DesignerContext.Script
+  nameWithType: DesignerContext.Script
 - uid: Core2D.Editor.Designer.DesignerContext.State
   name: State
   href: api/Core2D.Editor.Designer.DesignerContext.html#Core2D_Editor_Designer_DesignerContext_State
@@ -7123,6 +7240,19 @@ references:
   isSpec: "True"
   fullName: Core2D.Editor.IProjectEditor.OnAddRecord
   nameWithType: IProjectEditor.OnAddRecord
+- uid: Core2D.Editor.IProjectEditor.OnAddScript
+  name: OnAddScript()
+  href: api/Core2D.Editor.IProjectEditor.html#Core2D_Editor_IProjectEditor_OnAddScript
+  commentId: M:Core2D.Editor.IProjectEditor.OnAddScript
+  fullName: Core2D.Editor.IProjectEditor.OnAddScript()
+  nameWithType: IProjectEditor.OnAddScript()
+- uid: Core2D.Editor.IProjectEditor.OnAddScript*
+  name: OnAddScript
+  href: api/Core2D.Editor.IProjectEditor.html#Core2D_Editor_IProjectEditor_OnAddScript_
+  commentId: Overload:Core2D.Editor.IProjectEditor.OnAddScript
+  isSpec: "True"
+  fullName: Core2D.Editor.IProjectEditor.OnAddScript
+  nameWithType: IProjectEditor.OnAddScript
 - uid: Core2D.Editor.IProjectEditor.OnAddShape(Core2D.Shapes.IBaseShape)
   name: OnAddShape(IBaseShape)
   href: api/Core2D.Editor.IProjectEditor.html#Core2D_Editor_IProjectEditor_OnAddShape_Core2D_Shapes_IBaseShape_
@@ -7616,21 +7746,12 @@ references:
   isSpec: "True"
   fullName: Core2D.Editor.IProjectEditor.OnExecuteRepl
   nameWithType: IProjectEditor.OnExecuteRepl
-- uid: Core2D.Editor.IProjectEditor.OnExecuteScript(System.String)
-  name: OnExecuteScript(String)
-  href: api/Core2D.Editor.IProjectEditor.html#Core2D_Editor_IProjectEditor_OnExecuteScript_System_String_
-  commentId: M:Core2D.Editor.IProjectEditor.OnExecuteScript(System.String)
-  fullName: Core2D.Editor.IProjectEditor.OnExecuteScript(System.String)
-  nameWithType: IProjectEditor.OnExecuteScript(String)
-- uid: Core2D.Editor.IProjectEditor.OnExecuteScript(System.String[])
-  name: OnExecuteScript(String[])
-  href: api/Core2D.Editor.IProjectEditor.html#Core2D_Editor_IProjectEditor_OnExecuteScript_System_String___
-  commentId: M:Core2D.Editor.IProjectEditor.OnExecuteScript(System.String[])
-  name.vb: OnExecuteScript(String())
-  fullName: Core2D.Editor.IProjectEditor.OnExecuteScript(System.String[])
-  fullName.vb: Core2D.Editor.IProjectEditor.OnExecuteScript(System.String())
-  nameWithType: IProjectEditor.OnExecuteScript(String[])
-  nameWithType.vb: IProjectEditor.OnExecuteScript(String())
+- uid: Core2D.Editor.IProjectEditor.OnExecuteScript(Core2D.Scripting.IScript)
+  name: OnExecuteScript(IScript)
+  href: api/Core2D.Editor.IProjectEditor.html#Core2D_Editor_IProjectEditor_OnExecuteScript_Core2D_Scripting_IScript_
+  commentId: M:Core2D.Editor.IProjectEditor.OnExecuteScript(Core2D.Scripting.IScript)
+  fullName: Core2D.Editor.IProjectEditor.OnExecuteScript(Core2D.Scripting.IScript)
+  nameWithType: IProjectEditor.OnExecuteScript(IScript)
 - uid: Core2D.Editor.IProjectEditor.OnExecuteScript*
   name: OnExecuteScript
   href: api/Core2D.Editor.IProjectEditor.html#Core2D_Editor_IProjectEditor_OnExecuteScript_
@@ -7638,6 +7759,28 @@ references:
   isSpec: "True"
   fullName: Core2D.Editor.IProjectEditor.OnExecuteScript
   nameWithType: IProjectEditor.OnExecuteScript
+- uid: Core2D.Editor.IProjectEditor.OnExecuteScriptFile(System.String)
+  name: OnExecuteScriptFile(String)
+  href: api/Core2D.Editor.IProjectEditor.html#Core2D_Editor_IProjectEditor_OnExecuteScriptFile_System_String_
+  commentId: M:Core2D.Editor.IProjectEditor.OnExecuteScriptFile(System.String)
+  fullName: Core2D.Editor.IProjectEditor.OnExecuteScriptFile(System.String)
+  nameWithType: IProjectEditor.OnExecuteScriptFile(String)
+- uid: Core2D.Editor.IProjectEditor.OnExecuteScriptFile(System.String[])
+  name: OnExecuteScriptFile(String[])
+  href: api/Core2D.Editor.IProjectEditor.html#Core2D_Editor_IProjectEditor_OnExecuteScriptFile_System_String___
+  commentId: M:Core2D.Editor.IProjectEditor.OnExecuteScriptFile(System.String[])
+  name.vb: OnExecuteScriptFile(String())
+  fullName: Core2D.Editor.IProjectEditor.OnExecuteScriptFile(System.String[])
+  fullName.vb: Core2D.Editor.IProjectEditor.OnExecuteScriptFile(System.String())
+  nameWithType: IProjectEditor.OnExecuteScriptFile(String[])
+  nameWithType.vb: IProjectEditor.OnExecuteScriptFile(String())
+- uid: Core2D.Editor.IProjectEditor.OnExecuteScriptFile*
+  name: OnExecuteScriptFile
+  href: api/Core2D.Editor.IProjectEditor.html#Core2D_Editor_IProjectEditor_OnExecuteScriptFile_
+  commentId: Overload:Core2D.Editor.IProjectEditor.OnExecuteScriptFile
+  isSpec: "True"
+  fullName: Core2D.Editor.IProjectEditor.OnExecuteScriptFile
+  nameWithType: IProjectEditor.OnExecuteScriptFile
 - uid: Core2D.Editor.IProjectEditor.OnExport(System.String,System.Object,Core2D.Interfaces.IFileWriter)
   name: OnExport(String, Object, IFileWriter)
   href: api/Core2D.Editor.IProjectEditor.html#Core2D_Editor_IProjectEditor_OnExport_System_String_System_Object_Core2D_Interfaces_IFileWriter_
@@ -8182,6 +8325,19 @@ references:
   isSpec: "True"
   fullName: Core2D.Editor.IProjectEditor.OnRemoveRecord
   nameWithType: IProjectEditor.OnRemoveRecord
+- uid: Core2D.Editor.IProjectEditor.OnRemoveScript(Core2D.Scripting.IScript)
+  name: OnRemoveScript(IScript)
+  href: api/Core2D.Editor.IProjectEditor.html#Core2D_Editor_IProjectEditor_OnRemoveScript_Core2D_Scripting_IScript_
+  commentId: M:Core2D.Editor.IProjectEditor.OnRemoveScript(Core2D.Scripting.IScript)
+  fullName: Core2D.Editor.IProjectEditor.OnRemoveScript(Core2D.Scripting.IScript)
+  nameWithType: IProjectEditor.OnRemoveScript(IScript)
+- uid: Core2D.Editor.IProjectEditor.OnRemoveScript*
+  name: OnRemoveScript
+  href: api/Core2D.Editor.IProjectEditor.html#Core2D_Editor_IProjectEditor_OnRemoveScript_
+  commentId: Overload:Core2D.Editor.IProjectEditor.OnRemoveScript
+  isSpec: "True"
+  fullName: Core2D.Editor.IProjectEditor.OnRemoveScript
+  nameWithType: IProjectEditor.OnRemoveScript
 - uid: Core2D.Editor.IProjectEditor.OnRemoveShape(Core2D.Shapes.IBaseShape)
   name: OnRemoveShape(IBaseShape)
   href: api/Core2D.Editor.IProjectEditor.html#Core2D_Editor_IProjectEditor_OnRemoveShape_Core2D_Shapes_IBaseShape_
@@ -9102,19 +9258,19 @@ references:
   isSpec: "True"
   fullName: Core2D.Editor.IProjectEditorPlatform.OnDocumentViewer
   nameWithType: IProjectEditorPlatform.OnDocumentViewer
-- uid: Core2D.Editor.IProjectEditorPlatform.OnExecuteScript(System.String)
-  name: OnExecuteScript(String)
-  href: api/Core2D.Editor.IProjectEditorPlatform.html#Core2D_Editor_IProjectEditorPlatform_OnExecuteScript_System_String_
-  commentId: M:Core2D.Editor.IProjectEditorPlatform.OnExecuteScript(System.String)
-  fullName: Core2D.Editor.IProjectEditorPlatform.OnExecuteScript(System.String)
-  nameWithType: IProjectEditorPlatform.OnExecuteScript(String)
-- uid: Core2D.Editor.IProjectEditorPlatform.OnExecuteScript*
-  name: OnExecuteScript
-  href: api/Core2D.Editor.IProjectEditorPlatform.html#Core2D_Editor_IProjectEditorPlatform_OnExecuteScript_
-  commentId: Overload:Core2D.Editor.IProjectEditorPlatform.OnExecuteScript
+- uid: Core2D.Editor.IProjectEditorPlatform.OnExecuteScriptFile(System.String)
+  name: OnExecuteScriptFile(String)
+  href: api/Core2D.Editor.IProjectEditorPlatform.html#Core2D_Editor_IProjectEditorPlatform_OnExecuteScriptFile_System_String_
+  commentId: M:Core2D.Editor.IProjectEditorPlatform.OnExecuteScriptFile(System.String)
+  fullName: Core2D.Editor.IProjectEditorPlatform.OnExecuteScriptFile(System.String)
+  nameWithType: IProjectEditorPlatform.OnExecuteScriptFile(String)
+- uid: Core2D.Editor.IProjectEditorPlatform.OnExecuteScriptFile*
+  name: OnExecuteScriptFile
+  href: api/Core2D.Editor.IProjectEditorPlatform.html#Core2D_Editor_IProjectEditorPlatform_OnExecuteScriptFile_
+  commentId: Overload:Core2D.Editor.IProjectEditorPlatform.OnExecuteScriptFile
   isSpec: "True"
-  fullName: Core2D.Editor.IProjectEditorPlatform.OnExecuteScript
-  nameWithType: IProjectEditorPlatform.OnExecuteScript
+  fullName: Core2D.Editor.IProjectEditorPlatform.OnExecuteScriptFile
+  nameWithType: IProjectEditorPlatform.OnExecuteScriptFile
 - uid: Core2D.Editor.IProjectEditorPlatform.OnExit
   name: OnExit()
   href: api/Core2D.Editor.IProjectEditorPlatform.html#Core2D_Editor_IProjectEditorPlatform_OnExit
@@ -9400,6 +9556,71 @@ references:
   commentId: T:Core2D.Editor.IStyleEditor
   fullName: Core2D.Editor.IStyleEditor
   nameWithType: IStyleEditor
+- uid: Core2D.Editor.IStyleEditor.OnCopyEndArrowStyle
+  name: OnCopyEndArrowStyle()
+  href: api/Core2D.Editor.IStyleEditor.html#Core2D_Editor_IStyleEditor_OnCopyEndArrowStyle
+  commentId: M:Core2D.Editor.IStyleEditor.OnCopyEndArrowStyle
+  fullName: Core2D.Editor.IStyleEditor.OnCopyEndArrowStyle()
+  nameWithType: IStyleEditor.OnCopyEndArrowStyle()
+- uid: Core2D.Editor.IStyleEditor.OnCopyEndArrowStyle*
+  name: OnCopyEndArrowStyle
+  href: api/Core2D.Editor.IStyleEditor.html#Core2D_Editor_IStyleEditor_OnCopyEndArrowStyle_
+  commentId: Overload:Core2D.Editor.IStyleEditor.OnCopyEndArrowStyle
+  isSpec: "True"
+  fullName: Core2D.Editor.IStyleEditor.OnCopyEndArrowStyle
+  nameWithType: IStyleEditor.OnCopyEndArrowStyle
+- uid: Core2D.Editor.IStyleEditor.OnCopyFill
+  name: OnCopyFill()
+  href: api/Core2D.Editor.IStyleEditor.html#Core2D_Editor_IStyleEditor_OnCopyFill
+  commentId: M:Core2D.Editor.IStyleEditor.OnCopyFill
+  fullName: Core2D.Editor.IStyleEditor.OnCopyFill()
+  nameWithType: IStyleEditor.OnCopyFill()
+- uid: Core2D.Editor.IStyleEditor.OnCopyFill*
+  name: OnCopyFill
+  href: api/Core2D.Editor.IStyleEditor.html#Core2D_Editor_IStyleEditor_OnCopyFill_
+  commentId: Overload:Core2D.Editor.IStyleEditor.OnCopyFill
+  isSpec: "True"
+  fullName: Core2D.Editor.IStyleEditor.OnCopyFill
+  nameWithType: IStyleEditor.OnCopyFill
+- uid: Core2D.Editor.IStyleEditor.OnCopyLineStyle
+  name: OnCopyLineStyle()
+  href: api/Core2D.Editor.IStyleEditor.html#Core2D_Editor_IStyleEditor_OnCopyLineStyle
+  commentId: M:Core2D.Editor.IStyleEditor.OnCopyLineStyle
+  fullName: Core2D.Editor.IStyleEditor.OnCopyLineStyle()
+  nameWithType: IStyleEditor.OnCopyLineStyle()
+- uid: Core2D.Editor.IStyleEditor.OnCopyLineStyle*
+  name: OnCopyLineStyle
+  href: api/Core2D.Editor.IStyleEditor.html#Core2D_Editor_IStyleEditor_OnCopyLineStyle_
+  commentId: Overload:Core2D.Editor.IStyleEditor.OnCopyLineStyle
+  isSpec: "True"
+  fullName: Core2D.Editor.IStyleEditor.OnCopyLineStyle
+  nameWithType: IStyleEditor.OnCopyLineStyle
+- uid: Core2D.Editor.IStyleEditor.OnCopyStartArrowStyle
+  name: OnCopyStartArrowStyle()
+  href: api/Core2D.Editor.IStyleEditor.html#Core2D_Editor_IStyleEditor_OnCopyStartArrowStyle
+  commentId: M:Core2D.Editor.IStyleEditor.OnCopyStartArrowStyle
+  fullName: Core2D.Editor.IStyleEditor.OnCopyStartArrowStyle()
+  nameWithType: IStyleEditor.OnCopyStartArrowStyle()
+- uid: Core2D.Editor.IStyleEditor.OnCopyStartArrowStyle*
+  name: OnCopyStartArrowStyle
+  href: api/Core2D.Editor.IStyleEditor.html#Core2D_Editor_IStyleEditor_OnCopyStartArrowStyle_
+  commentId: Overload:Core2D.Editor.IStyleEditor.OnCopyStartArrowStyle
+  isSpec: "True"
+  fullName: Core2D.Editor.IStyleEditor.OnCopyStartArrowStyle
+  nameWithType: IStyleEditor.OnCopyStartArrowStyle
+- uid: Core2D.Editor.IStyleEditor.OnCopyStroke
+  name: OnCopyStroke()
+  href: api/Core2D.Editor.IStyleEditor.html#Core2D_Editor_IStyleEditor_OnCopyStroke
+  commentId: M:Core2D.Editor.IStyleEditor.OnCopyStroke
+  fullName: Core2D.Editor.IStyleEditor.OnCopyStroke()
+  nameWithType: IStyleEditor.OnCopyStroke()
+- uid: Core2D.Editor.IStyleEditor.OnCopyStroke*
+  name: OnCopyStroke
+  href: api/Core2D.Editor.IStyleEditor.html#Core2D_Editor_IStyleEditor_OnCopyStroke_
+  commentId: Overload:Core2D.Editor.IStyleEditor.OnCopyStroke
+  isSpec: "True"
+  fullName: Core2D.Editor.IStyleEditor.OnCopyStroke
+  nameWithType: IStyleEditor.OnCopyStroke
 - uid: Core2D.Editor.IStyleEditor.OnCopyStyle
   name: OnCopyStyle()
   href: api/Core2D.Editor.IStyleEditor.html#Core2D_Editor_IStyleEditor_OnCopyStyle
@@ -9413,6 +9634,84 @@ references:
   isSpec: "True"
   fullName: Core2D.Editor.IStyleEditor.OnCopyStyle
   nameWithType: IStyleEditor.OnCopyStyle
+- uid: Core2D.Editor.IStyleEditor.OnCopyTextStyle
+  name: OnCopyTextStyle()
+  href: api/Core2D.Editor.IStyleEditor.html#Core2D_Editor_IStyleEditor_OnCopyTextStyle
+  commentId: M:Core2D.Editor.IStyleEditor.OnCopyTextStyle
+  fullName: Core2D.Editor.IStyleEditor.OnCopyTextStyle()
+  nameWithType: IStyleEditor.OnCopyTextStyle()
+- uid: Core2D.Editor.IStyleEditor.OnCopyTextStyle*
+  name: OnCopyTextStyle
+  href: api/Core2D.Editor.IStyleEditor.html#Core2D_Editor_IStyleEditor_OnCopyTextStyle_
+  commentId: Overload:Core2D.Editor.IStyleEditor.OnCopyTextStyle
+  isSpec: "True"
+  fullName: Core2D.Editor.IStyleEditor.OnCopyTextStyle
+  nameWithType: IStyleEditor.OnCopyTextStyle
+- uid: Core2D.Editor.IStyleEditor.OnPasteEndArrowStyle
+  name: OnPasteEndArrowStyle()
+  href: api/Core2D.Editor.IStyleEditor.html#Core2D_Editor_IStyleEditor_OnPasteEndArrowStyle
+  commentId: M:Core2D.Editor.IStyleEditor.OnPasteEndArrowStyle
+  fullName: Core2D.Editor.IStyleEditor.OnPasteEndArrowStyle()
+  nameWithType: IStyleEditor.OnPasteEndArrowStyle()
+- uid: Core2D.Editor.IStyleEditor.OnPasteEndArrowStyle*
+  name: OnPasteEndArrowStyle
+  href: api/Core2D.Editor.IStyleEditor.html#Core2D_Editor_IStyleEditor_OnPasteEndArrowStyle_
+  commentId: Overload:Core2D.Editor.IStyleEditor.OnPasteEndArrowStyle
+  isSpec: "True"
+  fullName: Core2D.Editor.IStyleEditor.OnPasteEndArrowStyle
+  nameWithType: IStyleEditor.OnPasteEndArrowStyle
+- uid: Core2D.Editor.IStyleEditor.OnPasteFill
+  name: OnPasteFill()
+  href: api/Core2D.Editor.IStyleEditor.html#Core2D_Editor_IStyleEditor_OnPasteFill
+  commentId: M:Core2D.Editor.IStyleEditor.OnPasteFill
+  fullName: Core2D.Editor.IStyleEditor.OnPasteFill()
+  nameWithType: IStyleEditor.OnPasteFill()
+- uid: Core2D.Editor.IStyleEditor.OnPasteFill*
+  name: OnPasteFill
+  href: api/Core2D.Editor.IStyleEditor.html#Core2D_Editor_IStyleEditor_OnPasteFill_
+  commentId: Overload:Core2D.Editor.IStyleEditor.OnPasteFill
+  isSpec: "True"
+  fullName: Core2D.Editor.IStyleEditor.OnPasteFill
+  nameWithType: IStyleEditor.OnPasteFill
+- uid: Core2D.Editor.IStyleEditor.OnPasteLineStyle
+  name: OnPasteLineStyle()
+  href: api/Core2D.Editor.IStyleEditor.html#Core2D_Editor_IStyleEditor_OnPasteLineStyle
+  commentId: M:Core2D.Editor.IStyleEditor.OnPasteLineStyle
+  fullName: Core2D.Editor.IStyleEditor.OnPasteLineStyle()
+  nameWithType: IStyleEditor.OnPasteLineStyle()
+- uid: Core2D.Editor.IStyleEditor.OnPasteLineStyle*
+  name: OnPasteLineStyle
+  href: api/Core2D.Editor.IStyleEditor.html#Core2D_Editor_IStyleEditor_OnPasteLineStyle_
+  commentId: Overload:Core2D.Editor.IStyleEditor.OnPasteLineStyle
+  isSpec: "True"
+  fullName: Core2D.Editor.IStyleEditor.OnPasteLineStyle
+  nameWithType: IStyleEditor.OnPasteLineStyle
+- uid: Core2D.Editor.IStyleEditor.OnPasteStartArrowStyle
+  name: OnPasteStartArrowStyle()
+  href: api/Core2D.Editor.IStyleEditor.html#Core2D_Editor_IStyleEditor_OnPasteStartArrowStyle
+  commentId: M:Core2D.Editor.IStyleEditor.OnPasteStartArrowStyle
+  fullName: Core2D.Editor.IStyleEditor.OnPasteStartArrowStyle()
+  nameWithType: IStyleEditor.OnPasteStartArrowStyle()
+- uid: Core2D.Editor.IStyleEditor.OnPasteStartArrowStyle*
+  name: OnPasteStartArrowStyle
+  href: api/Core2D.Editor.IStyleEditor.html#Core2D_Editor_IStyleEditor_OnPasteStartArrowStyle_
+  commentId: Overload:Core2D.Editor.IStyleEditor.OnPasteStartArrowStyle
+  isSpec: "True"
+  fullName: Core2D.Editor.IStyleEditor.OnPasteStartArrowStyle
+  nameWithType: IStyleEditor.OnPasteStartArrowStyle
+- uid: Core2D.Editor.IStyleEditor.OnPasteStroke
+  name: OnPasteStroke()
+  href: api/Core2D.Editor.IStyleEditor.html#Core2D_Editor_IStyleEditor_OnPasteStroke
+  commentId: M:Core2D.Editor.IStyleEditor.OnPasteStroke
+  fullName: Core2D.Editor.IStyleEditor.OnPasteStroke()
+  nameWithType: IStyleEditor.OnPasteStroke()
+- uid: Core2D.Editor.IStyleEditor.OnPasteStroke*
+  name: OnPasteStroke
+  href: api/Core2D.Editor.IStyleEditor.html#Core2D_Editor_IStyleEditor_OnPasteStroke_
+  commentId: Overload:Core2D.Editor.IStyleEditor.OnPasteStroke
+  isSpec: "True"
+  fullName: Core2D.Editor.IStyleEditor.OnPasteStroke
+  nameWithType: IStyleEditor.OnPasteStroke
 - uid: Core2D.Editor.IStyleEditor.OnPasteStyle
   name: OnPasteStyle()
   href: api/Core2D.Editor.IStyleEditor.html#Core2D_Editor_IStyleEditor_OnPasteStyle
@@ -9426,6 +9725,19 @@ references:
   isSpec: "True"
   fullName: Core2D.Editor.IStyleEditor.OnPasteStyle
   nameWithType: IStyleEditor.OnPasteStyle
+- uid: Core2D.Editor.IStyleEditor.OnPasteTextStyle
+  name: OnPasteTextStyle()
+  href: api/Core2D.Editor.IStyleEditor.html#Core2D_Editor_IStyleEditor_OnPasteTextStyle
+  commentId: M:Core2D.Editor.IStyleEditor.OnPasteTextStyle
+  fullName: Core2D.Editor.IStyleEditor.OnPasteTextStyle()
+  nameWithType: IStyleEditor.OnPasteTextStyle()
+- uid: Core2D.Editor.IStyleEditor.OnPasteTextStyle*
+  name: OnPasteTextStyle
+  href: api/Core2D.Editor.IStyleEditor.html#Core2D_Editor_IStyleEditor_OnPasteTextStyle_
+  commentId: Overload:Core2D.Editor.IStyleEditor.OnPasteTextStyle
+  isSpec: "True"
+  fullName: Core2D.Editor.IStyleEditor.OnPasteTextStyle
+  nameWithType: IStyleEditor.OnPasteTextStyle
 - uid: Core2D.Editor.IStyleEditor.OnStyleSetDashes(System.String)
   name: OnStyleSetDashes(String)
   href: api/Core2D.Editor.IStyleEditor.html#Core2D_Editor_IStyleEditor_OnStyleSetDashes_System_String_
@@ -11433,6 +11745,19 @@ references:
   isSpec: "True"
   fullName: Core2D.Editor.ProjectEditor.OnAddRecord
   nameWithType: ProjectEditor.OnAddRecord
+- uid: Core2D.Editor.ProjectEditor.OnAddScript
+  name: OnAddScript()
+  href: api/Core2D.Editor.ProjectEditor.html#Core2D_Editor_ProjectEditor_OnAddScript
+  commentId: M:Core2D.Editor.ProjectEditor.OnAddScript
+  fullName: Core2D.Editor.ProjectEditor.OnAddScript()
+  nameWithType: ProjectEditor.OnAddScript()
+- uid: Core2D.Editor.ProjectEditor.OnAddScript*
+  name: OnAddScript
+  href: api/Core2D.Editor.ProjectEditor.html#Core2D_Editor_ProjectEditor_OnAddScript_
+  commentId: Overload:Core2D.Editor.ProjectEditor.OnAddScript
+  isSpec: "True"
+  fullName: Core2D.Editor.ProjectEditor.OnAddScript
+  nameWithType: ProjectEditor.OnAddScript
 - uid: Core2D.Editor.ProjectEditor.OnAddShape(Core2D.Shapes.IBaseShape)
   name: OnAddShape(IBaseShape)
   href: api/Core2D.Editor.ProjectEditor.html#Core2D_Editor_ProjectEditor_OnAddShape_Core2D_Shapes_IBaseShape_
@@ -11926,21 +12251,12 @@ references:
   isSpec: "True"
   fullName: Core2D.Editor.ProjectEditor.OnExecuteRepl
   nameWithType: ProjectEditor.OnExecuteRepl
-- uid: Core2D.Editor.ProjectEditor.OnExecuteScript(System.String)
-  name: OnExecuteScript(String)
-  href: api/Core2D.Editor.ProjectEditor.html#Core2D_Editor_ProjectEditor_OnExecuteScript_System_String_
-  commentId: M:Core2D.Editor.ProjectEditor.OnExecuteScript(System.String)
-  fullName: Core2D.Editor.ProjectEditor.OnExecuteScript(System.String)
-  nameWithType: ProjectEditor.OnExecuteScript(String)
-- uid: Core2D.Editor.ProjectEditor.OnExecuteScript(System.String[])
-  name: OnExecuteScript(String[])
-  href: api/Core2D.Editor.ProjectEditor.html#Core2D_Editor_ProjectEditor_OnExecuteScript_System_String___
-  commentId: M:Core2D.Editor.ProjectEditor.OnExecuteScript(System.String[])
-  name.vb: OnExecuteScript(String())
-  fullName: Core2D.Editor.ProjectEditor.OnExecuteScript(System.String[])
-  fullName.vb: Core2D.Editor.ProjectEditor.OnExecuteScript(System.String())
-  nameWithType: ProjectEditor.OnExecuteScript(String[])
-  nameWithType.vb: ProjectEditor.OnExecuteScript(String())
+- uid: Core2D.Editor.ProjectEditor.OnExecuteScript(Core2D.Scripting.IScript)
+  name: OnExecuteScript(IScript)
+  href: api/Core2D.Editor.ProjectEditor.html#Core2D_Editor_ProjectEditor_OnExecuteScript_Core2D_Scripting_IScript_
+  commentId: M:Core2D.Editor.ProjectEditor.OnExecuteScript(Core2D.Scripting.IScript)
+  fullName: Core2D.Editor.ProjectEditor.OnExecuteScript(Core2D.Scripting.IScript)
+  nameWithType: ProjectEditor.OnExecuteScript(IScript)
 - uid: Core2D.Editor.ProjectEditor.OnExecuteScript*
   name: OnExecuteScript
   href: api/Core2D.Editor.ProjectEditor.html#Core2D_Editor_ProjectEditor_OnExecuteScript_
@@ -11948,6 +12264,28 @@ references:
   isSpec: "True"
   fullName: Core2D.Editor.ProjectEditor.OnExecuteScript
   nameWithType: ProjectEditor.OnExecuteScript
+- uid: Core2D.Editor.ProjectEditor.OnExecuteScriptFile(System.String)
+  name: OnExecuteScriptFile(String)
+  href: api/Core2D.Editor.ProjectEditor.html#Core2D_Editor_ProjectEditor_OnExecuteScriptFile_System_String_
+  commentId: M:Core2D.Editor.ProjectEditor.OnExecuteScriptFile(System.String)
+  fullName: Core2D.Editor.ProjectEditor.OnExecuteScriptFile(System.String)
+  nameWithType: ProjectEditor.OnExecuteScriptFile(String)
+- uid: Core2D.Editor.ProjectEditor.OnExecuteScriptFile(System.String[])
+  name: OnExecuteScriptFile(String[])
+  href: api/Core2D.Editor.ProjectEditor.html#Core2D_Editor_ProjectEditor_OnExecuteScriptFile_System_String___
+  commentId: M:Core2D.Editor.ProjectEditor.OnExecuteScriptFile(System.String[])
+  name.vb: OnExecuteScriptFile(String())
+  fullName: Core2D.Editor.ProjectEditor.OnExecuteScriptFile(System.String[])
+  fullName.vb: Core2D.Editor.ProjectEditor.OnExecuteScriptFile(System.String())
+  nameWithType: ProjectEditor.OnExecuteScriptFile(String[])
+  nameWithType.vb: ProjectEditor.OnExecuteScriptFile(String())
+- uid: Core2D.Editor.ProjectEditor.OnExecuteScriptFile*
+  name: OnExecuteScriptFile
+  href: api/Core2D.Editor.ProjectEditor.html#Core2D_Editor_ProjectEditor_OnExecuteScriptFile_
+  commentId: Overload:Core2D.Editor.ProjectEditor.OnExecuteScriptFile
+  isSpec: "True"
+  fullName: Core2D.Editor.ProjectEditor.OnExecuteScriptFile
+  nameWithType: ProjectEditor.OnExecuteScriptFile
 - uid: Core2D.Editor.ProjectEditor.OnExport(System.String,System.Object,Core2D.Interfaces.IFileWriter)
   name: OnExport(String, Object, IFileWriter)
   href: api/Core2D.Editor.ProjectEditor.html#Core2D_Editor_ProjectEditor_OnExport_System_String_System_Object_Core2D_Interfaces_IFileWriter_
@@ -12492,6 +12830,19 @@ references:
   isSpec: "True"
   fullName: Core2D.Editor.ProjectEditor.OnRemoveRecord
   nameWithType: ProjectEditor.OnRemoveRecord
+- uid: Core2D.Editor.ProjectEditor.OnRemoveScript(Core2D.Scripting.IScript)
+  name: OnRemoveScript(IScript)
+  href: api/Core2D.Editor.ProjectEditor.html#Core2D_Editor_ProjectEditor_OnRemoveScript_Core2D_Scripting_IScript_
+  commentId: M:Core2D.Editor.ProjectEditor.OnRemoveScript(Core2D.Scripting.IScript)
+  fullName: Core2D.Editor.ProjectEditor.OnRemoveScript(Core2D.Scripting.IScript)
+  nameWithType: ProjectEditor.OnRemoveScript(IScript)
+- uid: Core2D.Editor.ProjectEditor.OnRemoveScript*
+  name: OnRemoveScript
+  href: api/Core2D.Editor.ProjectEditor.html#Core2D_Editor_ProjectEditor_OnRemoveScript_
+  commentId: Overload:Core2D.Editor.ProjectEditor.OnRemoveScript
+  isSpec: "True"
+  fullName: Core2D.Editor.ProjectEditor.OnRemoveScript
+  nameWithType: ProjectEditor.OnRemoveScript
 - uid: Core2D.Editor.ProjectEditor.OnRemoveShape(Core2D.Shapes.IBaseShape)
   name: OnRemoveShape(IBaseShape)
   href: api/Core2D.Editor.ProjectEditor.html#Core2D_Editor_ProjectEditor_OnRemoveShape_Core2D_Shapes_IBaseShape_
@@ -13468,6 +13819,12 @@ references:
   commentId: F:Core2D.Editor.ProjectEditorConfiguration.DefaultPageName
   fullName: Core2D.Editor.ProjectEditorConfiguration.DefaultPageName
   nameWithType: ProjectEditorConfiguration.DefaultPageName
+- uid: Core2D.Editor.ProjectEditorConfiguration.DefaultScriptName
+  name: DefaultScriptName
+  href: api/Core2D.Editor.ProjectEditorConfiguration.html#Core2D_Editor_ProjectEditorConfiguration_DefaultScriptName
+  commentId: F:Core2D.Editor.ProjectEditorConfiguration.DefaultScriptName
+  fullName: Core2D.Editor.ProjectEditorConfiguration.DefaultScriptName
+  nameWithType: ProjectEditorConfiguration.DefaultScriptName
 - uid: Core2D.Editor.ProjectEditorConfiguration.DefaultTemplateName
   name: DefaultTemplateName
   href: api/Core2D.Editor.ProjectEditorConfiguration.html#Core2D_Editor_ProjectEditorConfiguration_DefaultTemplateName
@@ -13881,6 +14238,35 @@ references:
   isSpec: "True"
   fullName: Core2D.Editor.ProjectExtensions.AddRecord
   nameWithType: ProjectExtensions.AddRecord
+- uid: Core2D.Editor.ProjectExtensions.AddScript(Core2D.Containers.IProjectContainer,Core2D.Scripting.IScript)
+  name: AddScript(IProjectContainer, IScript)
+  href: api/Core2D.Editor.ProjectExtensions.html#Core2D_Editor_ProjectExtensions_AddScript_Core2D_Containers_IProjectContainer_Core2D_Scripting_IScript_
+  commentId: M:Core2D.Editor.ProjectExtensions.AddScript(Core2D.Containers.IProjectContainer,Core2D.Scripting.IScript)
+  fullName: Core2D.Editor.ProjectExtensions.AddScript(Core2D.Containers.IProjectContainer, Core2D.Scripting.IScript)
+  nameWithType: ProjectExtensions.AddScript(IProjectContainer, IScript)
+- uid: Core2D.Editor.ProjectExtensions.AddScript*
+  name: AddScript
+  href: api/Core2D.Editor.ProjectExtensions.html#Core2D_Editor_ProjectExtensions_AddScript_
+  commentId: Overload:Core2D.Editor.ProjectExtensions.AddScript
+  isSpec: "True"
+  fullName: Core2D.Editor.ProjectExtensions.AddScript
+  nameWithType: ProjectExtensions.AddScript
+- uid: Core2D.Editor.ProjectExtensions.AddScripts(Core2D.Containers.IProjectContainer,System.Collections.Generic.IEnumerable{Core2D.Scripting.IScript})
+  name: AddScripts(IProjectContainer, IEnumerable<IScript>)
+  href: api/Core2D.Editor.ProjectExtensions.html#Core2D_Editor_ProjectExtensions_AddScripts_Core2D_Containers_IProjectContainer_System_Collections_Generic_IEnumerable_Core2D_Scripting_IScript__
+  commentId: M:Core2D.Editor.ProjectExtensions.AddScripts(Core2D.Containers.IProjectContainer,System.Collections.Generic.IEnumerable{Core2D.Scripting.IScript})
+  name.vb: AddScripts(IProjectContainer, IEnumerable(Of IScript))
+  fullName: Core2D.Editor.ProjectExtensions.AddScripts(Core2D.Containers.IProjectContainer, System.Collections.Generic.IEnumerable<Core2D.Scripting.IScript>)
+  fullName.vb: Core2D.Editor.ProjectExtensions.AddScripts(Core2D.Containers.IProjectContainer, System.Collections.Generic.IEnumerable(Of Core2D.Scripting.IScript))
+  nameWithType: ProjectExtensions.AddScripts(IProjectContainer, IEnumerable<IScript>)
+  nameWithType.vb: ProjectExtensions.AddScripts(IProjectContainer, IEnumerable(Of IScript))
+- uid: Core2D.Editor.ProjectExtensions.AddScripts*
+  name: AddScripts
+  href: api/Core2D.Editor.ProjectExtensions.html#Core2D_Editor_ProjectExtensions_AddScripts_
+  commentId: Overload:Core2D.Editor.ProjectExtensions.AddScripts
+  isSpec: "True"
+  fullName: Core2D.Editor.ProjectExtensions.AddScripts
+  nameWithType: ProjectExtensions.AddScripts
 - uid: Core2D.Editor.ProjectExtensions.AddShape(Core2D.Containers.IProjectContainer,Core2D.Containers.ILayerContainer,Core2D.Shapes.IBaseShape)
   name: AddShape(IProjectContainer, ILayerContainer, IBaseShape)
   href: api/Core2D.Editor.ProjectExtensions.html#Core2D_Editor_ProjectExtensions_AddShape_Core2D_Containers_IProjectContainer_Core2D_Containers_ILayerContainer_Core2D_Shapes_IBaseShape_
@@ -14185,6 +14571,19 @@ references:
   isSpec: "True"
   fullName: Core2D.Editor.ProjectExtensions.RemoveRecord
   nameWithType: ProjectExtensions.RemoveRecord
+- uid: Core2D.Editor.ProjectExtensions.RemoveScript(Core2D.Containers.IProjectContainer,Core2D.Scripting.IScript)
+  name: RemoveScript(IProjectContainer, IScript)
+  href: api/Core2D.Editor.ProjectExtensions.html#Core2D_Editor_ProjectExtensions_RemoveScript_Core2D_Containers_IProjectContainer_Core2D_Scripting_IScript_
+  commentId: M:Core2D.Editor.ProjectExtensions.RemoveScript(Core2D.Containers.IProjectContainer,Core2D.Scripting.IScript)
+  fullName: Core2D.Editor.ProjectExtensions.RemoveScript(Core2D.Containers.IProjectContainer, Core2D.Scripting.IScript)
+  nameWithType: ProjectExtensions.RemoveScript(IProjectContainer, IScript)
+- uid: Core2D.Editor.ProjectExtensions.RemoveScript*
+  name: RemoveScript
+  href: api/Core2D.Editor.ProjectExtensions.html#Core2D_Editor_ProjectExtensions_RemoveScript_
+  commentId: Overload:Core2D.Editor.ProjectExtensions.RemoveScript
+  isSpec: "True"
+  fullName: Core2D.Editor.ProjectExtensions.RemoveScript
+  nameWithType: ProjectExtensions.RemoveScript
 - uid: Core2D.Editor.ProjectExtensions.RemoveShape(Core2D.Containers.IProjectContainer,Core2D.Containers.ILayerContainer,Core2D.Shapes.IBaseShape)
   name: RemoveShape(IProjectContainer, ILayerContainer, IBaseShape)
   href: api/Core2D.Editor.ProjectExtensions.html#Core2D_Editor_ProjectExtensions_RemoveShape_Core2D_Containers_IProjectContainer_Core2D_Containers_ILayerContainer_Core2D_Shapes_IBaseShape_
@@ -14509,6 +14908,71 @@ references:
   isSpec: "True"
   fullName: Core2D.Editor.StyleEditor.Copy
   nameWithType: StyleEditor.Copy
+- uid: Core2D.Editor.StyleEditor.OnCopyEndArrowStyle
+  name: OnCopyEndArrowStyle()
+  href: api/Core2D.Editor.StyleEditor.html#Core2D_Editor_StyleEditor_OnCopyEndArrowStyle
+  commentId: M:Core2D.Editor.StyleEditor.OnCopyEndArrowStyle
+  fullName: Core2D.Editor.StyleEditor.OnCopyEndArrowStyle()
+  nameWithType: StyleEditor.OnCopyEndArrowStyle()
+- uid: Core2D.Editor.StyleEditor.OnCopyEndArrowStyle*
+  name: OnCopyEndArrowStyle
+  href: api/Core2D.Editor.StyleEditor.html#Core2D_Editor_StyleEditor_OnCopyEndArrowStyle_
+  commentId: Overload:Core2D.Editor.StyleEditor.OnCopyEndArrowStyle
+  isSpec: "True"
+  fullName: Core2D.Editor.StyleEditor.OnCopyEndArrowStyle
+  nameWithType: StyleEditor.OnCopyEndArrowStyle
+- uid: Core2D.Editor.StyleEditor.OnCopyFill
+  name: OnCopyFill()
+  href: api/Core2D.Editor.StyleEditor.html#Core2D_Editor_StyleEditor_OnCopyFill
+  commentId: M:Core2D.Editor.StyleEditor.OnCopyFill
+  fullName: Core2D.Editor.StyleEditor.OnCopyFill()
+  nameWithType: StyleEditor.OnCopyFill()
+- uid: Core2D.Editor.StyleEditor.OnCopyFill*
+  name: OnCopyFill
+  href: api/Core2D.Editor.StyleEditor.html#Core2D_Editor_StyleEditor_OnCopyFill_
+  commentId: Overload:Core2D.Editor.StyleEditor.OnCopyFill
+  isSpec: "True"
+  fullName: Core2D.Editor.StyleEditor.OnCopyFill
+  nameWithType: StyleEditor.OnCopyFill
+- uid: Core2D.Editor.StyleEditor.OnCopyLineStyle
+  name: OnCopyLineStyle()
+  href: api/Core2D.Editor.StyleEditor.html#Core2D_Editor_StyleEditor_OnCopyLineStyle
+  commentId: M:Core2D.Editor.StyleEditor.OnCopyLineStyle
+  fullName: Core2D.Editor.StyleEditor.OnCopyLineStyle()
+  nameWithType: StyleEditor.OnCopyLineStyle()
+- uid: Core2D.Editor.StyleEditor.OnCopyLineStyle*
+  name: OnCopyLineStyle
+  href: api/Core2D.Editor.StyleEditor.html#Core2D_Editor_StyleEditor_OnCopyLineStyle_
+  commentId: Overload:Core2D.Editor.StyleEditor.OnCopyLineStyle
+  isSpec: "True"
+  fullName: Core2D.Editor.StyleEditor.OnCopyLineStyle
+  nameWithType: StyleEditor.OnCopyLineStyle
+- uid: Core2D.Editor.StyleEditor.OnCopyStartArrowStyle
+  name: OnCopyStartArrowStyle()
+  href: api/Core2D.Editor.StyleEditor.html#Core2D_Editor_StyleEditor_OnCopyStartArrowStyle
+  commentId: M:Core2D.Editor.StyleEditor.OnCopyStartArrowStyle
+  fullName: Core2D.Editor.StyleEditor.OnCopyStartArrowStyle()
+  nameWithType: StyleEditor.OnCopyStartArrowStyle()
+- uid: Core2D.Editor.StyleEditor.OnCopyStartArrowStyle*
+  name: OnCopyStartArrowStyle
+  href: api/Core2D.Editor.StyleEditor.html#Core2D_Editor_StyleEditor_OnCopyStartArrowStyle_
+  commentId: Overload:Core2D.Editor.StyleEditor.OnCopyStartArrowStyle
+  isSpec: "True"
+  fullName: Core2D.Editor.StyleEditor.OnCopyStartArrowStyle
+  nameWithType: StyleEditor.OnCopyStartArrowStyle
+- uid: Core2D.Editor.StyleEditor.OnCopyStroke
+  name: OnCopyStroke()
+  href: api/Core2D.Editor.StyleEditor.html#Core2D_Editor_StyleEditor_OnCopyStroke
+  commentId: M:Core2D.Editor.StyleEditor.OnCopyStroke
+  fullName: Core2D.Editor.StyleEditor.OnCopyStroke()
+  nameWithType: StyleEditor.OnCopyStroke()
+- uid: Core2D.Editor.StyleEditor.OnCopyStroke*
+  name: OnCopyStroke
+  href: api/Core2D.Editor.StyleEditor.html#Core2D_Editor_StyleEditor_OnCopyStroke_
+  commentId: Overload:Core2D.Editor.StyleEditor.OnCopyStroke
+  isSpec: "True"
+  fullName: Core2D.Editor.StyleEditor.OnCopyStroke
+  nameWithType: StyleEditor.OnCopyStroke
 - uid: Core2D.Editor.StyleEditor.OnCopyStyle
   name: OnCopyStyle()
   href: api/Core2D.Editor.StyleEditor.html#Core2D_Editor_StyleEditor_OnCopyStyle
@@ -14522,6 +14986,84 @@ references:
   isSpec: "True"
   fullName: Core2D.Editor.StyleEditor.OnCopyStyle
   nameWithType: StyleEditor.OnCopyStyle
+- uid: Core2D.Editor.StyleEditor.OnCopyTextStyle
+  name: OnCopyTextStyle()
+  href: api/Core2D.Editor.StyleEditor.html#Core2D_Editor_StyleEditor_OnCopyTextStyle
+  commentId: M:Core2D.Editor.StyleEditor.OnCopyTextStyle
+  fullName: Core2D.Editor.StyleEditor.OnCopyTextStyle()
+  nameWithType: StyleEditor.OnCopyTextStyle()
+- uid: Core2D.Editor.StyleEditor.OnCopyTextStyle*
+  name: OnCopyTextStyle
+  href: api/Core2D.Editor.StyleEditor.html#Core2D_Editor_StyleEditor_OnCopyTextStyle_
+  commentId: Overload:Core2D.Editor.StyleEditor.OnCopyTextStyle
+  isSpec: "True"
+  fullName: Core2D.Editor.StyleEditor.OnCopyTextStyle
+  nameWithType: StyleEditor.OnCopyTextStyle
+- uid: Core2D.Editor.StyleEditor.OnPasteEndArrowStyle
+  name: OnPasteEndArrowStyle()
+  href: api/Core2D.Editor.StyleEditor.html#Core2D_Editor_StyleEditor_OnPasteEndArrowStyle
+  commentId: M:Core2D.Editor.StyleEditor.OnPasteEndArrowStyle
+  fullName: Core2D.Editor.StyleEditor.OnPasteEndArrowStyle()
+  nameWithType: StyleEditor.OnPasteEndArrowStyle()
+- uid: Core2D.Editor.StyleEditor.OnPasteEndArrowStyle*
+  name: OnPasteEndArrowStyle
+  href: api/Core2D.Editor.StyleEditor.html#Core2D_Editor_StyleEditor_OnPasteEndArrowStyle_
+  commentId: Overload:Core2D.Editor.StyleEditor.OnPasteEndArrowStyle
+  isSpec: "True"
+  fullName: Core2D.Editor.StyleEditor.OnPasteEndArrowStyle
+  nameWithType: StyleEditor.OnPasteEndArrowStyle
+- uid: Core2D.Editor.StyleEditor.OnPasteFill
+  name: OnPasteFill()
+  href: api/Core2D.Editor.StyleEditor.html#Core2D_Editor_StyleEditor_OnPasteFill
+  commentId: M:Core2D.Editor.StyleEditor.OnPasteFill
+  fullName: Core2D.Editor.StyleEditor.OnPasteFill()
+  nameWithType: StyleEditor.OnPasteFill()
+- uid: Core2D.Editor.StyleEditor.OnPasteFill*
+  name: OnPasteFill
+  href: api/Core2D.Editor.StyleEditor.html#Core2D_Editor_StyleEditor_OnPasteFill_
+  commentId: Overload:Core2D.Editor.StyleEditor.OnPasteFill
+  isSpec: "True"
+  fullName: Core2D.Editor.StyleEditor.OnPasteFill
+  nameWithType: StyleEditor.OnPasteFill
+- uid: Core2D.Editor.StyleEditor.OnPasteLineStyle
+  name: OnPasteLineStyle()
+  href: api/Core2D.Editor.StyleEditor.html#Core2D_Editor_StyleEditor_OnPasteLineStyle
+  commentId: M:Core2D.Editor.StyleEditor.OnPasteLineStyle
+  fullName: Core2D.Editor.StyleEditor.OnPasteLineStyle()
+  nameWithType: StyleEditor.OnPasteLineStyle()
+- uid: Core2D.Editor.StyleEditor.OnPasteLineStyle*
+  name: OnPasteLineStyle
+  href: api/Core2D.Editor.StyleEditor.html#Core2D_Editor_StyleEditor_OnPasteLineStyle_
+  commentId: Overload:Core2D.Editor.StyleEditor.OnPasteLineStyle
+  isSpec: "True"
+  fullName: Core2D.Editor.StyleEditor.OnPasteLineStyle
+  nameWithType: StyleEditor.OnPasteLineStyle
+- uid: Core2D.Editor.StyleEditor.OnPasteStartArrowStyle
+  name: OnPasteStartArrowStyle()
+  href: api/Core2D.Editor.StyleEditor.html#Core2D_Editor_StyleEditor_OnPasteStartArrowStyle
+  commentId: M:Core2D.Editor.StyleEditor.OnPasteStartArrowStyle
+  fullName: Core2D.Editor.StyleEditor.OnPasteStartArrowStyle()
+  nameWithType: StyleEditor.OnPasteStartArrowStyle()
+- uid: Core2D.Editor.StyleEditor.OnPasteStartArrowStyle*
+  name: OnPasteStartArrowStyle
+  href: api/Core2D.Editor.StyleEditor.html#Core2D_Editor_StyleEditor_OnPasteStartArrowStyle_
+  commentId: Overload:Core2D.Editor.StyleEditor.OnPasteStartArrowStyle
+  isSpec: "True"
+  fullName: Core2D.Editor.StyleEditor.OnPasteStartArrowStyle
+  nameWithType: StyleEditor.OnPasteStartArrowStyle
+- uid: Core2D.Editor.StyleEditor.OnPasteStroke
+  name: OnPasteStroke()
+  href: api/Core2D.Editor.StyleEditor.html#Core2D_Editor_StyleEditor_OnPasteStroke
+  commentId: M:Core2D.Editor.StyleEditor.OnPasteStroke
+  fullName: Core2D.Editor.StyleEditor.OnPasteStroke()
+  nameWithType: StyleEditor.OnPasteStroke()
+- uid: Core2D.Editor.StyleEditor.OnPasteStroke*
+  name: OnPasteStroke
+  href: api/Core2D.Editor.StyleEditor.html#Core2D_Editor_StyleEditor_OnPasteStroke_
+  commentId: Overload:Core2D.Editor.StyleEditor.OnPasteStroke
+  isSpec: "True"
+  fullName: Core2D.Editor.StyleEditor.OnPasteStroke
+  nameWithType: StyleEditor.OnPasteStroke
 - uid: Core2D.Editor.StyleEditor.OnPasteStyle
   name: OnPasteStyle()
   href: api/Core2D.Editor.StyleEditor.html#Core2D_Editor_StyleEditor_OnPasteStyle
@@ -14535,6 +15077,19 @@ references:
   isSpec: "True"
   fullName: Core2D.Editor.StyleEditor.OnPasteStyle
   nameWithType: StyleEditor.OnPasteStyle
+- uid: Core2D.Editor.StyleEditor.OnPasteTextStyle
+  name: OnPasteTextStyle()
+  href: api/Core2D.Editor.StyleEditor.html#Core2D_Editor_StyleEditor_OnPasteTextStyle
+  commentId: M:Core2D.Editor.StyleEditor.OnPasteTextStyle
+  fullName: Core2D.Editor.StyleEditor.OnPasteTextStyle()
+  nameWithType: StyleEditor.OnPasteTextStyle()
+- uid: Core2D.Editor.StyleEditor.OnPasteTextStyle*
+  name: OnPasteTextStyle
+  href: api/Core2D.Editor.StyleEditor.html#Core2D_Editor_StyleEditor_OnPasteTextStyle_
+  commentId: Overload:Core2D.Editor.StyleEditor.OnPasteTextStyle
+  isSpec: "True"
+  fullName: Core2D.Editor.StyleEditor.OnPasteTextStyle
+  nameWithType: StyleEditor.OnPasteTextStyle
 - uid: Core2D.Editor.StyleEditor.OnStyleSetDashes(System.String)
   name: OnStyleSetDashes(String)
   href: api/Core2D.Editor.StyleEditor.html#Core2D_Editor_StyleEditor_OnStyleSetDashes_System_String_
@@ -20137,6 +20692,19 @@ references:
   isSpec: "True"
   fullName: Core2D.Factory.CreateRectangleShape
   nameWithType: Factory.CreateRectangleShape
+- uid: Core2D.Factory.CreateScript(System.String,System.String)
+  name: CreateScript(String, String)
+  href: api/Core2D.Factory.html#Core2D_Factory_CreateScript_System_String_System_String_
+  commentId: M:Core2D.Factory.CreateScript(System.String,System.String)
+  fullName: Core2D.Factory.CreateScript(System.String, System.String)
+  nameWithType: Factory.CreateScript(String, String)
+- uid: Core2D.Factory.CreateScript*
+  name: CreateScript
+  href: api/Core2D.Factory.html#Core2D_Factory_CreateScript_
+  commentId: Overload:Core2D.Factory.CreateScript
+  isSpec: "True"
+  fullName: Core2D.Factory.CreateScript
+  nameWithType: Factory.CreateScript
 - uid: Core2D.Factory.CreateShapeRendererState
   name: CreateShapeRendererState()
   href: api/Core2D.Factory.html#Core2D_Factory_CreateShapeRendererState
@@ -22270,6 +22838,19 @@ references:
   isSpec: "True"
   fullName: Core2D.Interfaces.IFactory.CreateRectangleShape
   nameWithType: IFactory.CreateRectangleShape
+- uid: Core2D.Interfaces.IFactory.CreateScript(System.String,System.String)
+  name: CreateScript(String, String)
+  href: api/Core2D.Interfaces.IFactory.html#Core2D_Interfaces_IFactory_CreateScript_System_String_System_String_
+  commentId: M:Core2D.Interfaces.IFactory.CreateScript(System.String,System.String)
+  fullName: Core2D.Interfaces.IFactory.CreateScript(System.String, System.String)
+  nameWithType: IFactory.CreateScript(String, String)
+- uid: Core2D.Interfaces.IFactory.CreateScript*
+  name: CreateScript
+  href: api/Core2D.Interfaces.IFactory.html#Core2D_Interfaces_IFactory_CreateScript_
+  commentId: Overload:Core2D.Interfaces.IFactory.CreateScript
+  isSpec: "True"
+  fullName: Core2D.Interfaces.IFactory.CreateScript
+  nameWithType: IFactory.CreateScript
 - uid: Core2D.Interfaces.IFactory.CreateShapeRendererState
   name: CreateShapeRendererState()
   href: api/Core2D.Interfaces.IFactory.html#Core2D_Interfaces_IFactory_CreateShapeRendererState
@@ -28591,6 +29172,79 @@ references:
   isSpec: "True"
   fullName: Core2D.Renderer.WinForms.WinFormsRenderer.State
   nameWithType: WinFormsRenderer.State
+- uid: Core2D.Scripting
+  name: Core2D.Scripting
+  href: api/Core2D.Scripting.html
+  commentId: N:Core2D.Scripting
+  fullName: Core2D.Scripting
+  nameWithType: Core2D.Scripting
+- uid: Core2D.Scripting.IScript
+  name: IScript
+  href: api/Core2D.Scripting.IScript.html
+  commentId: T:Core2D.Scripting.IScript
+  fullName: Core2D.Scripting.IScript
+  nameWithType: IScript
+- uid: Core2D.Scripting.IScript.Code
+  name: Code
+  href: api/Core2D.Scripting.IScript.html#Core2D_Scripting_IScript_Code
+  commentId: P:Core2D.Scripting.IScript.Code
+  fullName: Core2D.Scripting.IScript.Code
+  nameWithType: IScript.Code
+- uid: Core2D.Scripting.IScript.Code*
+  name: Code
+  href: api/Core2D.Scripting.IScript.html#Core2D_Scripting_IScript_Code_
+  commentId: Overload:Core2D.Scripting.IScript.Code
+  isSpec: "True"
+  fullName: Core2D.Scripting.IScript.Code
+  nameWithType: IScript.Code
+- uid: Core2D.Scripting.Script
+  name: Script
+  href: api/Core2D.Scripting.Script.html
+  commentId: T:Core2D.Scripting.Script
+  fullName: Core2D.Scripting.Script
+  nameWithType: Script
+- uid: Core2D.Scripting.Script.Code
+  name: Code
+  href: api/Core2D.Scripting.Script.html#Core2D_Scripting_Script_Code
+  commentId: P:Core2D.Scripting.Script.Code
+  fullName: Core2D.Scripting.Script.Code
+  nameWithType: Script.Code
+- uid: Core2D.Scripting.Script.Code*
+  name: Code
+  href: api/Core2D.Scripting.Script.html#Core2D_Scripting_Script_Code_
+  commentId: Overload:Core2D.Scripting.Script.Code
+  isSpec: "True"
+  fullName: Core2D.Scripting.Script.Code
+  nameWithType: Script.Code
+- uid: Core2D.Scripting.Script.Copy(System.Collections.Generic.IDictionary{System.Object,System.Object})
+  name: Copy(IDictionary<Object, Object>)
+  href: api/Core2D.Scripting.Script.html#Core2D_Scripting_Script_Copy_System_Collections_Generic_IDictionary_System_Object_System_Object__
+  commentId: M:Core2D.Scripting.Script.Copy(System.Collections.Generic.IDictionary{System.Object,System.Object})
+  name.vb: Copy(IDictionary(Of Object, Object))
+  fullName: Core2D.Scripting.Script.Copy(System.Collections.Generic.IDictionary<System.Object, System.Object>)
+  fullName.vb: Core2D.Scripting.Script.Copy(System.Collections.Generic.IDictionary(Of System.Object, System.Object))
+  nameWithType: Script.Copy(IDictionary<Object, Object>)
+  nameWithType.vb: Script.Copy(IDictionary(Of Object, Object))
+- uid: Core2D.Scripting.Script.Copy*
+  name: Copy
+  href: api/Core2D.Scripting.Script.html#Core2D_Scripting_Script_Copy_
+  commentId: Overload:Core2D.Scripting.Script.Copy
+  isSpec: "True"
+  fullName: Core2D.Scripting.Script.Copy
+  nameWithType: Script.Copy
+- uid: Core2D.Scripting.Script.ShouldSerializeCode
+  name: ShouldSerializeCode()
+  href: api/Core2D.Scripting.Script.html#Core2D_Scripting_Script_ShouldSerializeCode
+  commentId: M:Core2D.Scripting.Script.ShouldSerializeCode
+  fullName: Core2D.Scripting.Script.ShouldSerializeCode()
+  nameWithType: Script.ShouldSerializeCode()
+- uid: Core2D.Scripting.Script.ShouldSerializeCode*
+  name: ShouldSerializeCode
+  href: api/Core2D.Scripting.Script.html#Core2D_Scripting_Script_ShouldSerializeCode_
+  commentId: Overload:Core2D.Scripting.Script.ShouldSerializeCode
+  isSpec: "True"
+  fullName: Core2D.Scripting.Script.ShouldSerializeCode
+  nameWithType: Script.ShouldSerializeCode
 - uid: Core2D.ScriptRunner.Roslyn
   name: Core2D.ScriptRunner.Roslyn
   href: api/Core2D.ScriptRunner.Roslyn.html
@@ -37035,6 +37689,12 @@ references:
   commentId: T:Core2D.UI.Avalonia.Dock.Tools.ProjectTool
   fullName: Core2D.UI.Avalonia.Dock.Tools.ProjectTool
   nameWithType: ProjectTool
+- uid: Core2D.UI.Avalonia.Dock.Tools.ScriptsTool
+  name: ScriptsTool
+  href: api/Core2D.UI.Avalonia.Dock.Tools.ScriptsTool.html
+  commentId: T:Core2D.UI.Avalonia.Dock.Tools.ScriptsTool
+  fullName: Core2D.UI.Avalonia.Dock.Tools.ScriptsTool
+  nameWithType: ScriptsTool
 - uid: Core2D.UI.Avalonia.Dock.Tools.ScriptTool
   name: ScriptTool
   href: api/Core2D.UI.Avalonia.Dock.Tools.ScriptTool.html
@@ -37472,19 +38132,19 @@ references:
   isSpec: "True"
   fullName: Core2D.UI.Avalonia.Editor.AvaloniaProjectEditorPlatform.OnDocumentViewer
   nameWithType: AvaloniaProjectEditorPlatform.OnDocumentViewer
-- uid: Core2D.UI.Avalonia.Editor.AvaloniaProjectEditorPlatform.OnExecuteScript(System.String)
-  name: OnExecuteScript(String)
-  href: api/Core2D.UI.Avalonia.Editor.AvaloniaProjectEditorPlatform.html#Core2D_UI_Avalonia_Editor_AvaloniaProjectEditorPlatform_OnExecuteScript_System_String_
-  commentId: M:Core2D.UI.Avalonia.Editor.AvaloniaProjectEditorPlatform.OnExecuteScript(System.String)
-  fullName: Core2D.UI.Avalonia.Editor.AvaloniaProjectEditorPlatform.OnExecuteScript(System.String)
-  nameWithType: AvaloniaProjectEditorPlatform.OnExecuteScript(String)
-- uid: Core2D.UI.Avalonia.Editor.AvaloniaProjectEditorPlatform.OnExecuteScript*
-  name: OnExecuteScript
-  href: api/Core2D.UI.Avalonia.Editor.AvaloniaProjectEditorPlatform.html#Core2D_UI_Avalonia_Editor_AvaloniaProjectEditorPlatform_OnExecuteScript_
-  commentId: Overload:Core2D.UI.Avalonia.Editor.AvaloniaProjectEditorPlatform.OnExecuteScript
+- uid: Core2D.UI.Avalonia.Editor.AvaloniaProjectEditorPlatform.OnExecuteScriptFile(System.String)
+  name: OnExecuteScriptFile(String)
+  href: api/Core2D.UI.Avalonia.Editor.AvaloniaProjectEditorPlatform.html#Core2D_UI_Avalonia_Editor_AvaloniaProjectEditorPlatform_OnExecuteScriptFile_System_String_
+  commentId: M:Core2D.UI.Avalonia.Editor.AvaloniaProjectEditorPlatform.OnExecuteScriptFile(System.String)
+  fullName: Core2D.UI.Avalonia.Editor.AvaloniaProjectEditorPlatform.OnExecuteScriptFile(System.String)
+  nameWithType: AvaloniaProjectEditorPlatform.OnExecuteScriptFile(String)
+- uid: Core2D.UI.Avalonia.Editor.AvaloniaProjectEditorPlatform.OnExecuteScriptFile*
+  name: OnExecuteScriptFile
+  href: api/Core2D.UI.Avalonia.Editor.AvaloniaProjectEditorPlatform.html#Core2D_UI_Avalonia_Editor_AvaloniaProjectEditorPlatform_OnExecuteScriptFile_
+  commentId: Overload:Core2D.UI.Avalonia.Editor.AvaloniaProjectEditorPlatform.OnExecuteScriptFile
   isSpec: "True"
-  fullName: Core2D.UI.Avalonia.Editor.AvaloniaProjectEditorPlatform.OnExecuteScript
-  nameWithType: AvaloniaProjectEditorPlatform.OnExecuteScript
+  fullName: Core2D.UI.Avalonia.Editor.AvaloniaProjectEditorPlatform.OnExecuteScriptFile
+  nameWithType: AvaloniaProjectEditorPlatform.OnExecuteScriptFile
 - uid: Core2D.UI.Avalonia.Editor.AvaloniaProjectEditorPlatform.OnExit
   name: OnExit()
   href: api/Core2D.UI.Avalonia.Editor.AvaloniaProjectEditorPlatform.html#Core2D_UI_Avalonia_Editor_AvaloniaProjectEditorPlatform_OnExit
@@ -39151,25 +39811,50 @@ references:
   isSpec: "True"
   fullName: Core2D.UI.Avalonia.Views.Renderer.ShapeStateControl.ShapeStateControl
   nameWithType: ShapeStateControl.ShapeStateControl
-- uid: Core2D.UI.Avalonia.Views.ScriptControl
+- uid: Core2D.UI.Avalonia.Views.Scripting
+  name: Core2D.UI.Avalonia.Views.Scripting
+  href: api/Core2D.UI.Avalonia.Views.Scripting.html
+  commentId: N:Core2D.UI.Avalonia.Views.Scripting
+  fullName: Core2D.UI.Avalonia.Views.Scripting
+  nameWithType: Core2D.UI.Avalonia.Views.Scripting
+- uid: Core2D.UI.Avalonia.Views.Scripting.ScriptControl
   name: ScriptControl
-  href: api/Core2D.UI.Avalonia.Views.ScriptControl.html
-  commentId: T:Core2D.UI.Avalonia.Views.ScriptControl
-  fullName: Core2D.UI.Avalonia.Views.ScriptControl
+  href: api/Core2D.UI.Avalonia.Views.Scripting.ScriptControl.html
+  commentId: T:Core2D.UI.Avalonia.Views.Scripting.ScriptControl
+  fullName: Core2D.UI.Avalonia.Views.Scripting.ScriptControl
   nameWithType: ScriptControl
-- uid: Core2D.UI.Avalonia.Views.ScriptControl.#ctor
+- uid: Core2D.UI.Avalonia.Views.Scripting.ScriptControl.#ctor
   name: ScriptControl()
-  href: api/Core2D.UI.Avalonia.Views.ScriptControl.html#Core2D_UI_Avalonia_Views_ScriptControl__ctor
-  commentId: M:Core2D.UI.Avalonia.Views.ScriptControl.#ctor
-  fullName: Core2D.UI.Avalonia.Views.ScriptControl.ScriptControl()
+  href: api/Core2D.UI.Avalonia.Views.Scripting.ScriptControl.html#Core2D_UI_Avalonia_Views_Scripting_ScriptControl__ctor
+  commentId: M:Core2D.UI.Avalonia.Views.Scripting.ScriptControl.#ctor
+  fullName: Core2D.UI.Avalonia.Views.Scripting.ScriptControl.ScriptControl()
   nameWithType: ScriptControl.ScriptControl()
-- uid: Core2D.UI.Avalonia.Views.ScriptControl.#ctor*
+- uid: Core2D.UI.Avalonia.Views.Scripting.ScriptControl.#ctor*
   name: ScriptControl
-  href: api/Core2D.UI.Avalonia.Views.ScriptControl.html#Core2D_UI_Avalonia_Views_ScriptControl__ctor_
-  commentId: Overload:Core2D.UI.Avalonia.Views.ScriptControl.#ctor
+  href: api/Core2D.UI.Avalonia.Views.Scripting.ScriptControl.html#Core2D_UI_Avalonia_Views_Scripting_ScriptControl__ctor_
+  commentId: Overload:Core2D.UI.Avalonia.Views.Scripting.ScriptControl.#ctor
   isSpec: "True"
-  fullName: Core2D.UI.Avalonia.Views.ScriptControl.ScriptControl
+  fullName: Core2D.UI.Avalonia.Views.Scripting.ScriptControl.ScriptControl
   nameWithType: ScriptControl.ScriptControl
+- uid: Core2D.UI.Avalonia.Views.Scripting.ScriptsControl
+  name: ScriptsControl
+  href: api/Core2D.UI.Avalonia.Views.Scripting.ScriptsControl.html
+  commentId: T:Core2D.UI.Avalonia.Views.Scripting.ScriptsControl
+  fullName: Core2D.UI.Avalonia.Views.Scripting.ScriptsControl
+  nameWithType: ScriptsControl
+- uid: Core2D.UI.Avalonia.Views.Scripting.ScriptsControl.#ctor
+  name: ScriptsControl()
+  href: api/Core2D.UI.Avalonia.Views.Scripting.ScriptsControl.html#Core2D_UI_Avalonia_Views_Scripting_ScriptsControl__ctor
+  commentId: M:Core2D.UI.Avalonia.Views.Scripting.ScriptsControl.#ctor
+  fullName: Core2D.UI.Avalonia.Views.Scripting.ScriptsControl.ScriptsControl()
+  nameWithType: ScriptsControl.ScriptsControl()
+- uid: Core2D.UI.Avalonia.Views.Scripting.ScriptsControl.#ctor*
+  name: ScriptsControl
+  href: api/Core2D.UI.Avalonia.Views.Scripting.ScriptsControl.html#Core2D_UI_Avalonia_Views_Scripting_ScriptsControl__ctor_
+  commentId: Overload:Core2D.UI.Avalonia.Views.Scripting.ScriptsControl.#ctor
+  isSpec: "True"
+  fullName: Core2D.UI.Avalonia.Views.Scripting.ScriptsControl.ScriptsControl
+  nameWithType: ScriptsControl.ScriptsControl
 - uid: Core2D.UI.Avalonia.Views.Settings
   name: Core2D.UI.Avalonia.Views.Settings
   href: api/Core2D.UI.Avalonia.Views.Settings.html

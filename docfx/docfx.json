@@ -27,7 +27,10 @@
     ],
     "overwrite": "apidoc/*.md",
     "globalMetadata": {
-      "_appTitle": "Core2D Website"
+      "_appTitle": "Core2D Website",
+      "_appFooter": "Copyright © (c) Wiesław Šoltés",
+      "_appLogoPath": "images/logo.svg",
+      "_appFaviconPath": "images/favicon.ico"
     },
     "dest": ".",
     "template": [ "default", "template"]

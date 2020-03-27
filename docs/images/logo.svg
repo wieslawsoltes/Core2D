@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="256" height="256">
+	<rect fill="rgb(80,80,80)" fill-opacity="0" stroke="none" width="256" height="256"/>
+	<rect fill="rgb(255,255,255)" stroke="none" x="4" y="4" width="248" height="248"/>
+	<rect fill="none" stroke="rgb(0,0,0)" stroke-width="4" stroke-linecap="round" stroke-miterlimit="4" x="4" y="4" width="248" height="248"/>
+	<text fill="rgb(0,0,0)" stroke="none" font-size="192" font-weight="600" font-family="Consolas" x="32.71875" y="195.59375">
+			≥1
+	</text>
+</svg>

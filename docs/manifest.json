@@ -9,10 +9,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Attributes.ContentAttribute.html",
-          "hash": "WqrAGJEVjw20XmVbF86tpw=="
+          "hash": "BW+yvB/QZfYQP0dL9GdCaw=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -21,10 +21,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Attributes.NameAttribute.html",
-          "hash": "qgNN9ZVrZWt8ALV9/Bx9Rw=="
+          "hash": "0OpohQLq0F856k5HIIROWw=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -33,10 +33,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Attributes.html",
-          "hash": "zuI9RKX3maN3viWXtHkSnQ=="
+          "hash": "h6UnC5zA98IpL17szSzOzA=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -45,10 +45,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Containers.DocumentContainer.html",
-          "hash": "uY0MURklilyYqOc3SzGeIw=="
+          "hash": "YWexndCgfrkgLy2nfOaAyw=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -57,10 +57,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Containers.IBaseContainer.html",
-          "hash": "jZ6WQOm5EfaAATtIOMp6cg=="
+          "hash": "1+KjvbTekoI4jBSYR/V8DA=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -69,10 +69,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Containers.IDocumentContainer.html",
-          "hash": "bIX+BR57yZyI6VfKSCDsxA=="
+          "hash": "8h1Ejeqc1XsfTdxhlT1ttA=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -81,10 +81,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Containers.ILayerContainer.html",
-          "hash": "kYNEdTVh+OQKB+JBbKdj4A=="
+          "hash": "8TmY9mbCiLgLyZbrvCRERg=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -93,10 +93,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Containers.ILibrary-1.html",
-          "hash": "jNIJqA5mtYfCLjuEuHdJkw=="
+          "hash": "SzJ3bCZ6q5RkcnM1jyxqQg=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -105,10 +105,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Containers.ILibrary.html",
-          "hash": "PYmxJfi330z1X3Pz6qWnHQ=="
+          "hash": "7DK6WyZmlvlj1+r3QriGYA=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -117,10 +117,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Containers.IOptions.html",
-          "hash": "ErRvoYSIOAFASk5peNyNOw=="
+          "hash": "kKXNZla3R8niZJMl+dxz7g=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -129,10 +129,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Containers.IPageContainer.html",
-          "hash": "gZfoZX3DZ6F8aomMjQcS3w=="
+          "hash": "zKHLutwYHL7bQ9IQsh9tlg=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -141,10 +141,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Containers.IProjectContainer.html",
-          "hash": "IWI9PCUkMuLaVPa+MnuYsg=="
+          "hash": "gRK8lASyuN37qxYynWhnxw=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -153,10 +153,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Containers.InvalidateLayerEventArgs.html",
-          "hash": "qtlm6Ue+77NNYMZVdXVY/A=="
+          "hash": "dYHb2Sfn260UWR0KGhvBow=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -165,10 +165,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Containers.InvalidateLayerEventHandler.html",
-          "hash": "j6AHj3+dEPSLLd6cv8f2VQ=="
+          "hash": "2YtXMUyF8KU/DrqvDuCDsg=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -177,10 +177,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Containers.LayerContainer.html",
-          "hash": "RwYlG4558OUN665Yko8PIA=="
+          "hash": "0L21fahL4LWmObiWW/XsEg=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -189,10 +189,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Containers.Library-1.html",
-          "hash": "rFau5Q9MSp4dpr5Y6vlkqQ=="
+          "hash": "r8SFjA4uYECDz6MlNOUBRw=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -201,10 +201,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Containers.MoveMode.html",
-          "hash": "NBA07mn5bPFutwFNCS2UXw=="
+          "hash": "Zzv17oM0g1G7bgm08UEpbw=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -213,10 +213,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Containers.Options.html",
-          "hash": "KHoi2BeXmDvUETsxS8hIzQ=="
+          "hash": "nlm/cOvVLHIhoZ47ktNucQ=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -225,10 +225,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Containers.PageContainer.html",
-          "hash": "ndkSGYcAhxjHWFR9ifs8ig=="
+          "hash": "sYlsvPCF/FUVqJOVvoaT8A=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -237,10 +237,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Containers.ProjectContainer.html",
-          "hash": "wgvYg0VwiGMl1fzxaCb5Tg=="
+          "hash": "c+2ipeHIlEQPrpS7k2FbvQ=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -249,10 +249,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Containers.html",
-          "hash": "46ucDwzo6YCubFkEuZ65/Q=="
+          "hash": "TwgU0f0EsdJLBsyO0+/Okg=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -261,10 +261,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Data.Column.html",
-          "hash": "XgdM32MJHT/WNGMCXf/Dxg=="
+          "hash": "AbFkUdVk9JWo5LKo6OrbtQ=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -273,10 +273,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Data.Context.html",
-          "hash": "MUirlLS99KY/XWUs+qgDmA=="
+          "hash": "k1U3TNCd/sExFH8HgmI9Sw=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -285,10 +285,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Data.DataFlow.html",
-          "hash": "vZ+WVthctx5s53GFuClwVw=="
+          "hash": "svPHHL8o1ZfMqzyRG83+Hw=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -297,10 +297,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Data.Database.html",
-          "hash": "ucCQkAgacXlE5Ah8IpxWyA=="
+          "hash": "Bsm+5+Z0rD48kkC9S/sQAA=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -309,10 +309,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Data.DatabaseExtensions.html",
-          "hash": "C9aICwMM+vvanrig4KiZRg=="
+          "hash": "xmavJPclAlXdrHZNBH7Q1w=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -321,10 +321,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Data.IBindable.html",
-          "hash": "vm2skn+2QH7LU7gh/0WTpw=="
+          "hash": "f8s+AjKhwEwZcsZAl5AtbA=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -333,10 +333,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Data.IColumn.html",
-          "hash": "/zVoBT58BpYB0fQ2FVLg8w=="
+          "hash": "96K8Z5DP6+T5HCSKWG1rxw=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -345,10 +345,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Data.IContext.html",
-          "hash": "DF/vTNFaU12ZFYxZkQ46/Q=="
+          "hash": "8LD9qc11Qh7cef2WbzoKKg=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -357,10 +357,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Data.IDataFlow.html",
-          "hash": "EJGxcYEDL1rboBaYU2YaNA=="
+          "hash": "d0PG7Z70OCjuDzZ3mLyRgg=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -369,10 +369,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Data.IDatabase.html",
-          "hash": "Hlfdx0KT2tIwKiBZRgnFCw=="
+          "hash": "OLj4vG+f+vLR2HRZQfo10Q=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -381,10 +381,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Data.IProperty.html",
-          "hash": "EB2k6VJvt+9HG1aoEEr6RQ=="
+          "hash": "553eE06DWEhQHhhdzjZ5jg=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -393,10 +393,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Data.IRecord.html",
-          "hash": "H+iVj+SesJR8e0LLHqsJVA=="
+          "hash": "r5QYhG4KtLS5e575j6TkyA=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -405,10 +405,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Data.IValue.html",
-          "hash": "YVaq0WoaSu9JV0b6mBVtGQ=="
+          "hash": "05QmgT1nksUYuCMm3IEmiQ=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -417,10 +417,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Data.ImmutableArrayExtensions.html",
-          "hash": "JZoTWrevK/aTxCeKCjRcdw=="
+          "hash": "7YqxSALNHnNpc58g7x7Q6A=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -429,10 +429,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Data.Property.html",
-          "hash": "UcqZfWbEGOEQccgHT6iFlA=="
+          "hash": "PzTtkbmni0vz5L2mVLaXpQ=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -441,10 +441,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Data.Record.html",
-          "hash": "1fYG5TKME/wfjie5DCUO8g=="
+          "hash": "4ZXWCXGq0OAZqz0licl+9Q=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -453,10 +453,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Data.Value.html",
-          "hash": "UVc9aRgYqzt9HNKXU6aP5w=="
+          "hash": "n2ACezuCQQZVhbIjlaLZ0A=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -465,10 +465,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Data.html",
-          "hash": "6v8zvxzx8QTKtP6ygBt1Gw=="
+          "hash": "gn/qMCx8TzdsA1b5WfWs2w=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -477,10 +477,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Editor.AboutInfo.html",
-          "hash": "fAapGdFwWBuz901xipVw9A=="
+          "hash": "PjjwsArzcNLHTQk/Rvw5mQ=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -489,10 +489,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Editor.Bounds.HitTest.html",
-          "hash": "oAwxNDhrAfHURNRS7rqCnA=="
+          "hash": "lQ71LAoS//O6XwL8xaJOQQ=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -501,10 +501,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Editor.Bounds.HitTestHelper.html",
-          "hash": "ymHRHHkrf+bNs+2mF0LV0A=="
+          "hash": "Eli8b0z5UgmZjI79TZuWJA=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -513,10 +513,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Editor.Bounds.IBounds.html",
-          "hash": "/qnQA+kgysBEXsNur07Odg=="
+          "hash": "qYUM1KoB8MxQhWsRWoC2+A=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -525,10 +525,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Editor.Bounds.IHitTest.html",
-          "hash": "JJmuxoDUrtlZodAgWn4nXQ=="
+          "hash": "5J+/Ay8sdM+uvPsC8AeEPw=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -537,10 +537,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Editor.Bounds.Shapes.BoundsArc.html",
-          "hash": "lspwKHgMdewBaRBki+yZzg=="
+          "hash": "gmBKXPe/57PE1GXopOfZNQ=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -549,10 +549,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Editor.Bounds.Shapes.BoundsCubicBezier.html",
-          "hash": "MgdgnCDcQl5xFkFTsFoL4Q=="
+          "hash": "mlm529UdgvyvCQQSy+ODrw=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -561,10 +561,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Editor.Bounds.Shapes.BoundsEllipse.html",
-          "hash": "DNSVAF+6jefpj9fr/T8MPg=="
+          "hash": "ElfFX/iwg03ETd8N7SY3Hg=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -573,10 +573,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Editor.Bounds.Shapes.BoundsGroup.html",
-          "hash": "SrgCzU3DXe/V2ntZdxFgOg=="
+          "hash": "pYErdGnBnFjbJnyGNefwYg=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -585,10 +585,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Editor.Bounds.Shapes.BoundsImage.html",
-          "hash": "FQCFoC7xNpKgAQvD50uo/A=="
+          "hash": "ebzdnvrXI/qwg4xZhr5yTw=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -597,10 +597,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Editor.Bounds.Shapes.BoundsLine.html",
-          "hash": "4OPRAL/9P1+OUWS8WznG1A=="
+          "hash": "yNOC6zRKx5MoJpOBT7KGRw=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -609,10 +609,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Editor.Bounds.Shapes.BoundsPath.html",
-          "hash": "XncwagfLEbkkwwVi2BtseA=="
+          "hash": "6SdZJd3U+XS7kuKrkl+krw=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -621,10 +621,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Editor.Bounds.Shapes.BoundsPoint.html",
-          "hash": "Uei3Qdvf0MIi+/k1tmpV8A=="
+          "hash": "HGU3mQjdeSbEJUgUyXav5A=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -633,10 +633,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Editor.Bounds.Shapes.BoundsQuadraticBezier.html",
-          "hash": "6xpXhgOWP1DhbMxCdGBt+w=="
+          "hash": "R5Urxeq7gE0l4srSNUvs/Q=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -645,10 +645,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Editor.Bounds.Shapes.BoundsRectangle.html",
-          "hash": "0mDwgVwJ5O63+7ZoMJ7rCQ=="
+          "hash": "mwDRnibLLME87riPysim5g=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -657,10 +657,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Editor.Bounds.Shapes.BoundsText.html",
-          "hash": "gLlD0OeX4+YN9ZrcxYDd3A=="
+          "hash": "Y4e0LXoWA6zxWQt6IpMxEA=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -669,10 +669,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Editor.Bounds.Shapes.html",
-          "hash": "oo1pGNRn7r5eujEizK1S+g=="
+          "hash": "sYwoZYKbo1mfofu4GHZn/g=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -681,10 +681,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Editor.Bounds.html",
-          "hash": "U3sPXz4km+i5TVRalxG9wA=="
+          "hash": "7iy6SgUyqfWW/328z1uFog=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -693,10 +693,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Editor.Designer.DesignerContext.html",
-          "hash": "cHMARJXXlCS60GY5IUNvLQ=="
+          "hash": "bTeReSypmDmaSLXjZlm+KA=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -705,10 +705,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Editor.Designer.html",
-          "hash": "VqnjhqbADo7/1ulnZ2XBiw=="
+          "hash": "NuoS1KiwrL/Vtu3d7rocAw=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -717,10 +717,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Editor.EditorScript.html",
-          "hash": "6k6mE21ggjdOPr707DF2Ug=="
+          "hash": "TEERLOsTmAihth0qAJfDkA=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -729,10 +729,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Editor.Enums.html",
-          "hash": "bu+I4vuo8RXUqxyPYd8R4Q=="
+          "hash": "iL8h80dtnnshFlUNQqUDBQ=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -741,10 +741,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Editor.Factories.ContainerFactory.html",
-          "hash": "sDu980ogvxGnZxmCyWdjHg=="
+          "hash": "z+Xw6Dk3j0aQvdLTiOK31g=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -753,10 +753,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Editor.Factories.ShapeFactory.html",
-          "hash": "1Q/h3CKtDDTaYfjAyUs5ig=="
+          "hash": "nSNTeeb9KkehqvSJDQRAgQ=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -765,10 +765,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Editor.Factories.html",
-          "hash": "BqZph3MRqwnOq6QFeb5kUA=="
+          "hash": "/namxtt3ST6VHQ82gvMkbA=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -777,10 +777,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Editor.IEditorCanvasPlatform.html",
-          "hash": "AeKJqxojLzI9k6h97GLbrQ=="
+          "hash": "5OGRBSjABiwVzBXT65K7cg=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -789,10 +789,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Editor.IEditorLayoutPlatform.html",
-          "hash": "Y5m/3uLzb8GUerGfif8o3A=="
+          "hash": "0sYgui9fmvMYEHOo6QTMOA=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -801,10 +801,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Editor.IEditorTool.html",
-          "hash": "aiXvhBXk4knW33TvoszrTw=="
+          "hash": "EEk+p6q9Q0HayDApjpT5UA=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -813,10 +813,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Editor.IPathTool.html",
-          "hash": "YeEBzC2w+slEv5uo7XwFjw=="
+          "hash": "W+umPOSD+7b1gIeVF9AQzQ=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -825,10 +825,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Editor.IProjectEditor.html",
-          "hash": "DfSJUSfvqexBK4uhbpLv9w=="
+          "hash": "trcAND7u1Ot92FehSzBMoQ=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -837,10 +837,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Editor.IProjectEditorPlatform.html",
-          "hash": "qBsHtdpgh6pnm3pbJHdriQ=="
+          "hash": "hdJcKXtikHqZ3Ahsotz//A=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -849,10 +849,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Editor.ISettings.html",
-          "hash": "62NVi/AgULKvx4sa0DuiAQ=="
+          "hash": "0VrZ5X4+17NFF8ajgQLhww=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -861,10 +861,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Editor.IStyleEditor.html",
-          "hash": "vwsT6SLEL63tgulMBaOfUw=="
+          "hash": "rr/jK9lnfvpJrw2+J6csQA=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -873,10 +873,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Editor.ITool.html",
-          "hash": "GSEoXNzhVla7amivLUcd+w=="
+          "hash": "ZhGz8yzqiPCUdD8zF7PG2Q=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -885,10 +885,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Editor.Input.IInputSource.html",
-          "hash": "SYTyh3Tl0PhiQl8yfVT5hg=="
+          "hash": "ZPnTqtbNVytIbxxaCc+u5A=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -897,10 +897,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Editor.Input.IInputTarget.html",
-          "hash": "Xxn8iqEr8ayiC6BFIhNGZg=="
+          "hash": "yGOaZFjo2kgNS7KK7Wfl2Q=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -909,10 +909,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Editor.Input.InputArgs.html",
-          "hash": "eSMcBVDXIYyqatt406G0VA=="
+          "hash": "oTW6fYH2YlbVXhitaQBEqg=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -921,10 +921,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Editor.Input.InputProcessor.html",
-          "hash": "lc3IOKxYVP0urPWM154kyg=="
+          "hash": "7F1jqrBAhzmhvCDZCUIdcw=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -933,10 +933,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Editor.Input.InputSource.html",
-          "hash": "OACFduR4YVPyZDbGQV9ANg=="
+          "hash": "n7/AdG+WQc+ZRXiwJ18bdg=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -945,10 +945,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Editor.Input.html",
-          "hash": "mzsL/iEYFVhgggRSmsYf6w=="
+          "hash": "TmbR0cR60HTxy3gfegVlzg=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -957,10 +957,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Editor.Layout.AlignMode.html",
-          "hash": "FYb8H+aEpoktuuAozODAuA=="
+          "hash": "+Wj9qovEPFxmaHU4n8vMyg=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -969,10 +969,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Editor.Layout.BoxLayout.html",
-          "hash": "Nac/8hkv4BI/h0NTQdiz7Q=="
+          "hash": "gePhSOvewMvIQO/GBT6yZA=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -981,10 +981,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Editor.Layout.DistributeMode.html",
-          "hash": "wR4hPXxuuhoGk2TWBKwDGg=="
+          "hash": "Xg+hnmYhiTHZscl5UlBSIA=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -993,10 +993,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Editor.Layout.GroupBox.html",
-          "hash": "lHFM6FOlqZn7UPZEFNd0kQ=="
+          "hash": "EXc9p8VN8ewwHoluNcFPzQ=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -1005,10 +1005,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Editor.Layout.ShapeBox.html",
-          "hash": "5nOXLBU501qTmPZU/+02Uw=="
+          "hash": "2xR8m7OScKnSrtpSRAlk3A=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -1017,10 +1017,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Editor.Layout.StackMode.html",
-          "hash": "hktmY3bTEyLkJcuKiNeI5g=="
+          "hash": "JWajhc57PPcssEr/6iDmuw=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -1029,10 +1029,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Editor.Layout.html",
-          "hash": "xLjwmJYlkjX7mtwP3fTgbw=="
+          "hash": "GGakZgrN+gLm19qBieoGNw=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -1041,10 +1041,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Editor.Modifier.html",
-          "hash": "HTbo6dJKyWnXQfsfk7CEFw=="
+          "hash": "91rRslEcOHdiUNKE9RH65A=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -1053,10 +1053,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Editor.ModifierFlags.html",
-          "hash": "K2vT+gBj6uLjBhwbsTQADw=="
+          "hash": "UXIx2LfnNyYNZ+7N+ntHYg=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -1065,10 +1065,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Editor.ProjectEditor.html",
-          "hash": "ZBP8jQk1OiA96lPJZ6BOyQ=="
+          "hash": "w+oId/iTtxJA61/npqnYzg=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -1077,10 +1077,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Editor.ProjectEditorConfiguration.html",
-          "hash": "6pRTCYzcMblrFuncGrF0iQ=="
+          "hash": "w5wMLc+sC6bdYsP0SI2NxA=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -1089,10 +1089,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Editor.ProjectEditorInputTarget.html",
-          "hash": "nelDtKZbQBcQPkVxWvNreg=="
+          "hash": "3tCGeOTujvxH+OEVhZOb1A=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -1101,10 +1101,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Editor.ProjectExtensions.html",
-          "hash": "FMnP3l0R6ygHCt3kG/Tq/g=="
+          "hash": "AjL8lqGGBjUN2YutM7AoXA=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -1113,10 +1113,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Editor.ProjectObserver.html",
-          "hash": "nETc4NzxWJ29SBLdN2zJPw=="
+          "hash": "X2/b25FLbOosQEMhrZkM6w=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -1125,10 +1125,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Editor.Recent.RecentFile.html",
-          "hash": "Y/UabAm0IhSE0KLTHKndUQ=="
+          "hash": "797GecNYjmpiwBLvqFY9Ow=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -1137,10 +1137,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Editor.Recent.Recents.html",
-          "hash": "C7Ooh+smhAZ8+6eZQPYjag=="
+          "hash": "WzYyrTVNbOsjc/NaatSqaw=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -1149,10 +1149,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Editor.Recent.html",
-          "hash": "0iZm3vtigGSutcPV7hrM3w=="
+          "hash": "QeeT9w4Omgjj9AUHb6Pfkg=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -1161,10 +1161,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Editor.StyleEditor.html",
-          "hash": "BsncJg/y7hrjZTjobrVVUw=="
+          "hash": "YYrPkEr/j6DVN2HztfoBKQ=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -1173,10 +1173,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Editor.Tools.Path.PathToolArc.State.html",
-          "hash": "ah7vSDFsf7I0mWfWhnsrEA=="
+          "hash": "CT4RyMoMMK93KC1TOUKljw=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -1185,10 +1185,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Editor.Tools.Path.PathToolArc.html",
-          "hash": "vCO5hKPWtvUa/D6gN8Rdxw=="
+          "hash": "FADBUNxJ2emU2QPwwTz2Vg=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -1197,10 +1197,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Editor.Tools.Path.PathToolCubicBezier.State.html",
-          "hash": "v7Ifmw2eh5YMwvt3LfxX7A=="
+          "hash": "32V79qZ0XTWYJSsQXqqyOQ=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -1209,10 +1209,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Editor.Tools.Path.PathToolCubicBezier.html",
-          "hash": "IRF5Wf2jTP7RLrU1UqqMiA=="
+          "hash": "9eUUNImW5qKZfWjj1waKGw=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -1221,10 +1221,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Editor.Tools.Path.PathToolLine.State.html",
-          "hash": "j9xXOPLcVbna71rNTt+Qsg=="
+          "hash": "D12DGm4UvsdSBqJXn3Uf9A=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -1233,10 +1233,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Editor.Tools.Path.PathToolLine.html",
-          "hash": "Gcxhz6R6WpwogWQCiSLfCg=="
+          "hash": "qdM515kKCGruDSbeIwEwnw=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -1245,10 +1245,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Editor.Tools.Path.PathToolMove.State.html",
-          "hash": "HVDxDhGQgEKldvYqST3vow=="
+          "hash": "pzMS8S7nquwSpSDIelyjBw=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -1257,10 +1257,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Editor.Tools.Path.PathToolMove.html",
-          "hash": "fNHD4AxRh2yCa10MBGfePA=="
+          "hash": "KGnWPnXglM5OOqP+DaKkhA=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -1269,10 +1269,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Editor.Tools.Path.PathToolQuadraticBezier.State.html",
-          "hash": "3C9bW2+7l1lePfBPLcUDsQ=="
+          "hash": "wjb9ENpqLwb/5OxjNiK7Vw=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -1281,10 +1281,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Editor.Tools.Path.PathToolQuadraticBezier.html",
-          "hash": "lNPSYP1uQ5E4e+1CxNHWDg=="
+          "hash": "BGkTEQ4PIzGN9CLjfVP5EA=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -1293,10 +1293,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Editor.Tools.Path.Settings.PathToolSettingsArc.html",
-          "hash": "m+1IoRE6H6Q3ZGqxZ+rGdQ=="
+          "hash": "nmvnbFqr65PLT1u+Z+d3Hw=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -1305,10 +1305,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Editor.Tools.Path.Settings.PathToolSettingsCubicBezier.html",
-          "hash": "Pv+rBte03HcQwC1V6N7MPA=="
+          "hash": "eZdWrOrsKdeS7B3ZFbuZsA=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -1317,10 +1317,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Editor.Tools.Path.Settings.PathToolSettingsLine.html",
-          "hash": "ogye0eVQSJXYJtlLPlxPwQ=="
+          "hash": "VFhloqBs3yn9ohquhRZCEg=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -1329,10 +1329,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Editor.Tools.Path.Settings.PathToolSettingsMove.html",
-          "hash": "qGvAYR8Q1D8Cpt3LvGGjUQ=="
+          "hash": "rbEg806VtD7hyO8Gszu9oA=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -1341,10 +1341,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Editor.Tools.Path.Settings.PathToolSettingsQuadraticBezier.html",
-          "hash": "THfPrXCYlqqrEVrr4rHCaA=="
+          "hash": "JjIPUkz5SDFWpgDQp6DEvw=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -1353,10 +1353,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Editor.Tools.Path.Settings.html",
-          "hash": "Vy29h0/Kz6sECK4+NwcbHA=="
+          "hash": "+n1qH2yz/Nei+popRNxl2A=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -1365,10 +1365,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Editor.Tools.Path.html",
-          "hash": "j9CB4rZ+02bR4CEq7CLbxw=="
+          "hash": "TrURalID7xuBcYk3cqOR3A=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -1377,10 +1377,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Editor.Tools.Selection.ToolArcSelection.html",
-          "hash": "ePjPLUExF3t9FAqqKgYQhQ=="
+          "hash": "C18WgkTaqScEHJ2Ru+7JVg=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -1389,10 +1389,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Editor.Tools.Selection.ToolCubicBezierSelection.html",
-          "hash": "Lk9T4Pj1M7mUqw4tm2P0eA=="
+          "hash": "3NIvM6xvzdmGQ4vNbNo5jg=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -1401,10 +1401,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Editor.Tools.Selection.ToolEllipseSelection.html",
-          "hash": "ECDXTZ8dwstnmz/gineuag=="
+          "hash": "nKWKJOBgtqL/nC+3DFr4nw=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -1413,10 +1413,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Editor.Tools.Selection.ToolImageSelection.html",
-          "hash": "55ONuiyUUccR+uEWYpn+YA=="
+          "hash": "KWQPTfRuoDh5TIboqB5/+Q=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -1425,10 +1425,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Editor.Tools.Selection.ToolLineSelection.html",
-          "hash": "8Abp4UH1Pz7tQTjBYz7ABg=="
+          "hash": "iCoG7Dhb6aDaOIt2Asxmlw=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -1437,10 +1437,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Editor.Tools.Selection.ToolPathSelection.html",
-          "hash": "aaBIxS7gK/k0/9J+hpczCg=="
+          "hash": "fCj4DtLnw21gCjgpLVsToA=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -1449,10 +1449,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Editor.Tools.Selection.ToolPointSelection.html",
-          "hash": "MJ6umcxhrQCRbbqYfrgNEg=="
+          "hash": "QvxdPR4wK8VFvT0t/MUNuA=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -1461,10 +1461,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Editor.Tools.Selection.ToolQuadraticBezierSelection.html",
-          "hash": "GBzpeBmgNqNZKXJK7af7HA=="
+          "hash": "9b1dvFAVRzz3YybBcgjVzg=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -1473,10 +1473,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Editor.Tools.Selection.ToolRectangleSelection.html",
-          "hash": "EyHt//3+wBB32kXCaog2pQ=="
+          "hash": "31UTNtIvWMDhMZ7+R63mtQ=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -1485,10 +1485,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Editor.Tools.Selection.ToolTextSelection.html",
-          "hash": "EssAyioRGCFfkUP7slqcgw=="
+          "hash": "TNaArBw7tTFT5BWUYJ96HQ=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -1497,10 +1497,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Editor.Tools.Selection.html",
-          "hash": "HpQ48FentEahauU+UE50LA=="
+          "hash": "L9cvEyO4EIZnxI8eaIEf1A=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -1509,10 +1509,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Editor.Tools.Settings.ToolSettingsArc.html",
-          "hash": "MFIi+83Y9G6NfLX4A6x0iw=="
+          "hash": "LTe73JBTQRiR52YX9Or9LA=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -1521,10 +1521,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Editor.Tools.Settings.ToolSettingsCubicBezier.html",
-          "hash": "9F8HaH3X61yHFxrrFFIY5w=="
+          "hash": "+qby+lLUUmyAb7xQIUB2uA=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -1533,10 +1533,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Editor.Tools.Settings.ToolSettingsEllipse.html",
-          "hash": "sbfE8hVahhNC3GA7ntysqA=="
+          "hash": "vPwu7Fiop1nl4dSY65+2Qw=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -1545,10 +1545,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Editor.Tools.Settings.ToolSettingsImage.html",
-          "hash": "jbYxft8keTG5KcfCG6iTYg=="
+          "hash": "bh01n0Bgffi3ECYKfl11pw=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -1557,10 +1557,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Editor.Tools.Settings.ToolSettingsLine.html",
-          "hash": "Y+r+M9Yn7AQY5SHYxeQpFA=="
+          "hash": "ESEi6ymCCA79WUClMd86dg=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -1569,10 +1569,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Editor.Tools.Settings.ToolSettingsNone.html",
-          "hash": "jQO8siHpya8HthPXhPPIcA=="
+          "hash": "WCiQCvbbKWOX1By9+IzeNg=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -1581,10 +1581,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Editor.Tools.Settings.ToolSettingsPath.html",
-          "hash": "BWr74AA5rdY4UGi7+byojg=="
+          "hash": "uWfHEMpy4jZFWVaLTyq8bQ=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -1593,10 +1593,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Editor.Tools.Settings.ToolSettingsPoint.html",
-          "hash": "vp9eNrpjjYCR+BeGZ/nrHQ=="
+          "hash": "dgIE2yTcMW9TKs9QqrCZ0g=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -1605,10 +1605,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Editor.Tools.Settings.ToolSettingsQuadraticBezier.html",
-          "hash": "5Z02jgyXoJpU49TYWKrmJA=="
+          "hash": "yOKMZAxLgknUnaQXbMJl0Q=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -1617,10 +1617,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Editor.Tools.Settings.ToolSettingsRectangle.html",
-          "hash": "2r/HNgMiToZ3x2TfO7Q7ZA=="
+          "hash": "Nmg/aq3XYH8xi1f2YlKBKg=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -1629,10 +1629,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Editor.Tools.Settings.ToolSettingsSelection.html",
-          "hash": "3fRNh4S4s2fwgZUhHMOGCA=="
+          "hash": "vIkXe1D9xo+jm7GI9dAB3w=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -1641,10 +1641,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Editor.Tools.Settings.ToolSettingsText.html",
-          "hash": "XIjtgWCFIbtfka8YPBh6mw=="
+          "hash": "0s8qo7Ikf8XCWOLyZVe1nw=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -1653,10 +1653,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Editor.Tools.Settings.html",
-          "hash": "DEl8LECPWXcHIrBTAGNzpg=="
+          "hash": "5ScZt5AUs36SsVr3V52ebw=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -1665,10 +1665,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Editor.Tools.ToolArc.State.html",
-          "hash": "0XqF380Dxsw+qnQT8HUbCw=="
+          "hash": "9oEfSKRl65o3su+hi9/vlg=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -1677,10 +1677,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Editor.Tools.ToolArc.html",
-          "hash": "7p8PSuD4a5G7Ly6MUAKFCg=="
+          "hash": "IXLiiYXMt1V2oNF5Bpggng=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -1689,10 +1689,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Editor.Tools.ToolCubicBezier.State.html",
-          "hash": "PoLV7vvGTQJL9AQap/I3GQ=="
+          "hash": "IogVPLwLzUaZB3Wd0RKkNw=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -1701,10 +1701,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Editor.Tools.ToolCubicBezier.html",
-          "hash": "xs3HB7vSrlr6P2QEE0Spmg=="
+          "hash": "M0sU3r7QRj1ipTFKhp6JUA=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -1713,10 +1713,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Editor.Tools.ToolEllipse.Mode.html",
-          "hash": "mFystqThN//d2F3Si5fVuw=="
+          "hash": "OgzdSevby4bUIGytZV7rSw=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -1725,10 +1725,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Editor.Tools.ToolEllipse.State.html",
-          "hash": "nWe4dR/k1wowePbfEb1Afw=="
+          "hash": "52VouZ+D+rZ6BqIz1DnjlQ=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -1737,10 +1737,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Editor.Tools.ToolEllipse.html",
-          "hash": "h6TOBgiRARQExFNemTy/1w=="
+          "hash": "Qvz5zWhzTDgaJcCkTMt7yw=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -1749,10 +1749,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Editor.Tools.ToolImage.State.html",
-          "hash": "oS/kkyU8nbGcM6rajWNvCg=="
+          "hash": "y5eXTeFC/1QqHgUpbi1Fqg=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -1761,10 +1761,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Editor.Tools.ToolImage.html",
-          "hash": "I8omggmt0sHMX2pyXJ/mew=="
+          "hash": "FqTBdZMPtPIxB/5vS6hKjQ=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -1773,10 +1773,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Editor.Tools.ToolLine.State.html",
-          "hash": "w8RWzpFaK9H8AD98OEkPcQ=="
+          "hash": "sIApnREMYHiipAU5kqMNCA=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -1785,10 +1785,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Editor.Tools.ToolLine.html",
-          "hash": "y0e6AebQvWfyj/GekfS/ag=="
+          "hash": "X5rlrY8QvxLqfKi1KnEGPA=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -1797,10 +1797,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Editor.Tools.ToolNone.html",
-          "hash": "LZYysAh3ax+dN82DVl6HGg=="
+          "hash": "d198ggx0yE+OUee2GXST4Q=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -1809,10 +1809,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Editor.Tools.ToolPath.html",
-          "hash": "osQSxbhLdY1gW8h0PJ8NkA=="
+          "hash": "6+qfVM9N4kqW8q5vv8yTTA=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -1821,10 +1821,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Editor.Tools.ToolPoint.State.html",
-          "hash": "yFSmjIte//V8tsz07Btc3g=="
+          "hash": "7AGod4N+YvqsM1KfzTHNXA=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -1833,10 +1833,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Editor.Tools.ToolPoint.html",
-          "hash": "67duJQZbUf1yOY9J5NVDQA=="
+          "hash": "iyKYfL1OsRYT5/qQdWOU2Q=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -1845,10 +1845,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Editor.Tools.ToolQuadraticBezier.State.html",
-          "hash": "FbpFtZ580V2djZDmxQ99cw=="
+          "hash": "k8lo8aqCY0PvOm74aN8dew=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -1857,10 +1857,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Editor.Tools.ToolQuadraticBezier.html",
-          "hash": "3E0tdIB2obmWllVUj4II2g=="
+          "hash": "b5OBQ67ei8MQ/G3yyqiYOQ=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -1869,10 +1869,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Editor.Tools.ToolRectangle.State.html",
-          "hash": "4WNYBeadm1vMYVMpfQOsQQ=="
+          "hash": "i7PTjIOoirvD4DnS5yUMkg=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -1881,10 +1881,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Editor.Tools.ToolRectangle.html",
-          "hash": "lA0bCnTJo+LNwJecYTURyg=="
+          "hash": "OdbjO1ZA10SUrZ41vijcnw=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -1893,10 +1893,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Editor.Tools.ToolSelection.State.html",
-          "hash": "OGdZYFDHEHwqPGlXp0PSDQ=="
+          "hash": "HpEesMciaglfMN2Gs03zcw=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -1905,10 +1905,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Editor.Tools.ToolSelection.html",
-          "hash": "RGlq98R2fLDbpNki1RIBhg=="
+          "hash": "CRBRnGNnNQ5ItbD2vrG5Gg=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -1917,10 +1917,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Editor.Tools.ToolText.State.html",
-          "hash": "TmZHasRm7EWV7wVNYU49MA=="
+          "hash": "Qu9vASpJwtyhk52A9QRHmw=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -1929,10 +1929,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Editor.Tools.ToolText.html",
-          "hash": "/HKX873uksy+9ysMPC9TfA=="
+          "hash": "/K6uTe3Miw0NVWbNbQFo1Q=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -1941,10 +1941,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Editor.Tools.html",
-          "hash": "OMOd7J4WbVtuAR5/GOawXw=="
+          "hash": "TIEDq2lNRS/gx0I8rqS4uQ=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -1953,10 +1953,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Editor.html",
-          "hash": "Q2KeIrlyd901bDSLu+x5jw=="
+          "hash": "u6PeVwpc2tkSvDQhuQWBvA=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -1965,10 +1965,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Factory.html",
-          "hash": "eF04truaqVdFw49XFrUE3A=="
+          "hash": "MtwXjiQ92RZniCG02GjXIA=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -1977,10 +1977,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.FileSystem.DotNet.DotNetFileSystem.html",
-          "hash": "VEOikfDXP3gU01Bn9/GmFA=="
+          "hash": "3fRKAvd0r5oUoexEFZNT9A=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -1989,10 +1989,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.FileSystem.DotNet.html",
-          "hash": "iKLGzKlQtPJe8mMSJda9Ng=="
+          "hash": "S3CBGT1s1EEGhG4VawVr4A=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -2001,10 +2001,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.FileWriter.Dxf.DxfWriter.html",
-          "hash": "Qc6ERjrjffunfruJCakBWw=="
+          "hash": "cwb7Y2Cqa0E3WFzVlNQMQg=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -2013,10 +2013,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.FileWriter.Dxf.html",
-          "hash": "vjziZJulA9FdGT+zSzDxyQ=="
+          "hash": "ylhr+TAj1nL9ByfU8Ep63w=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -2025,10 +2025,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.FileWriter.Emf.EmfWriter.html",
-          "hash": "gtHNN722bBXM8/56EPiXJA=="
+          "hash": "owjnSGt/CJUrXH+Uu88wbw=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -2037,10 +2037,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.FileWriter.Emf.html",
-          "hash": "a+aOTPMfpFJGQ/HnGWJfXA=="
+          "hash": "hL/zaNzjAnqrTpBdifX1xw=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -2049,10 +2049,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.FileWriter.PdfSharp.PdfSharpWriter.html",
-          "hash": "tpJ/xo/XzOx2rrWS0lbYhA=="
+          "hash": "wtW0cNlGnN8GQ3qYtBK4UA=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -2061,10 +2061,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.FileWriter.PdfSharp.html",
-          "hash": "sRtLPCc0H8v0Wy/ewoTeug=="
+          "hash": "98Ccx8z145rPq0ADBofL/w=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -2073,10 +2073,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.FileWriter.SkiaSharpJpeg.JpegSkiaSharpExporter.html",
-          "hash": "GCjDqB0yeNqMrJewPi+SUg=="
+          "hash": "OdoWCr1hdMLi3j2D/gF0GA=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -2085,10 +2085,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.FileWriter.SkiaSharpJpeg.JpegSkiaSharpWriter.html",
-          "hash": "okXZzPhkqqYCJUA1vjJ3Og=="
+          "hash": "zVN0BfZxFmbCC8VSlwoGzg=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -2097,10 +2097,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.FileWriter.SkiaSharpJpeg.html",
-          "hash": "k+mMOWIsb+Oc3cS12Bwk1w=="
+          "hash": "5qM6VACPLcT5IHt2g+euAA=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -2109,10 +2109,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.FileWriter.SkiaSharpPdf.PdfSkiaSharpExporter.html",
-          "hash": "2X1p9GWwV+iY/9Z1Au4Z9Q=="
+          "hash": "YFoOqUQBHgBcwjj5FTd1aw=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -2121,10 +2121,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.FileWriter.SkiaSharpPdf.PdfSkiaSharpWriter.html",
-          "hash": "xcWME8Zo5ZbEp6c+kyf85g=="
+          "hash": "yiMBYSCk+aejdSLs0haVRw=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -2133,10 +2133,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.FileWriter.SkiaSharpPdf.html",
-          "hash": "HEfWYBXc1KZiCwuxb4aIIQ=="
+          "hash": "zHQ2MmFF0wVlcXTezKuaPQ=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -2145,10 +2145,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.FileWriter.SkiaSharpPng.PngSkiaSharpExporter.html",
-          "hash": "Up/zgb61emhsLAmYSSEf0Q=="
+          "hash": "j5DhU+GPPEeyBA/yB4NQjw=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -2157,10 +2157,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.FileWriter.SkiaSharpPng.PngSkiaSharpWriter.html",
-          "hash": "FyN4NOs7SalmMVfuET3O3Q=="
+          "hash": "niFMj73pIiIHWXXisXP6mg=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -2169,10 +2169,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.FileWriter.SkiaSharpPng.html",
-          "hash": "wIXoAfQVCD4PptauPHONXw=="
+          "hash": "ZjHAxMVCO5dh5pQU0QoiWQ=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -2181,10 +2181,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.FileWriter.SkiaSharpSvg.SvgSkiaSharpExporter.html",
-          "hash": "eFKTTEPVa2SY9pboCvMx7w=="
+          "hash": "MAAW0QRyFklmv79Z1wCk7g=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -2193,10 +2193,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.FileWriter.SkiaSharpSvg.SvgSkiaSharpWriter.html",
-          "hash": "N/1EmTwg+3H9lGA1mqf8yQ=="
+          "hash": "KgzUJREfU4F8pi7JQ6jo8g=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -2205,10 +2205,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.FileWriter.SkiaSharpSvg.html",
-          "hash": "e5bHwoIZz3MgEchaAcBLRA=="
+          "hash": "jQkswPD+fPmWQ97frI7lIw=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -2217,10 +2217,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.FileWriter.SkiaSharpWebp.WebpSkiaSharpExporter.html",
-          "hash": "s77NxoMLTxQjv01gW/A0mA=="
+          "hash": "t/Z8qP9gTI5t5vrDOiYWdA=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -2229,10 +2229,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.FileWriter.SkiaSharpWebp.WebpSkiaSharpWriter.html",
-          "hash": "KgO1by7cEm7S92VCXqI0Rw=="
+          "hash": "/coljEqXa0utB38zaIT/0A=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -2241,10 +2241,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.FileWriter.SkiaSharpWebp.html",
-          "hash": "VWwFVniG5by7y9H1164QNA=="
+          "hash": "poELejn7WoToRR5b+GLypw=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -2253,10 +2253,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.History.IHistory.html",
-          "hash": "934eM/l7vR4IOxijdbCkiw=="
+          "hash": "VOXeTjhZuQZyo29yrXb4mA=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -2265,10 +2265,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.History.html",
-          "hash": "zHHDHaS6vO73x0mxF72ivA=="
+          "hash": "LZbSe221aFLPhdXv2JcKKA=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -2277,10 +2277,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.IConnectable.html",
-          "hash": "c3NXsZJ6gsq4/Kgypqfl+A=="
+          "hash": "mm3m9lX7eJ5wY76hD6IF6g=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -2289,10 +2289,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.ICopyable.html",
-          "hash": "zQ1Guy2h0HKq3pm77C6wGg=="
+          "hash": "8+eqWX+VvWSicwbp/vXlEA=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -2301,10 +2301,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.IDrawable.html",
-          "hash": "77buknCfHx0cWxaOED0/FQ=="
+          "hash": "vAatYedI3ETsNgbqn9iO1w=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -2313,10 +2313,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.IObservableObject.html",
-          "hash": "eUwCcw0vOePwSsqb7pJCPA=="
+          "hash": "XprRBuiDis1uY8ME5O1yRg=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -2325,10 +2325,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.ISelectable.html",
-          "hash": "1FmioU6fAZC1DGYqjgmX9w=="
+          "hash": "ODlek3lV38iOsyE6oir+LQ=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -2337,10 +2337,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.ISelection.html",
-          "hash": "qcGtaCjTCYPinIeps52H9A=="
+          "hash": "mpgHbbI9/fICqdPWqa85XA=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -2349,10 +2349,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Interfaces.IContainerFactory.html",
-          "hash": "1BEzQ386P2UYAxLmlbBTGQ=="
+          "hash": "0I1AkTPLe1P4rwHV/CY8sw=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -2361,10 +2361,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Interfaces.IFactory.html",
-          "hash": "8IGIvxPfxkx6sSXqdWTBaQ=="
+          "hash": "SoFvwEcQ+iN4WRlF6to5EA=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -2373,10 +2373,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Interfaces.IFileSystem.html",
-          "hash": "6bLqau1yqinkXLMTlxPq6g=="
+          "hash": "GOhSNJhKevOIo7LXFONTWQ=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -2385,10 +2385,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Interfaces.IFileWriter.html",
-          "hash": "B4PXdr7DISE4fPU9jigorA=="
+          "hash": "7xHP+0XTj7+hOcklzpLlNQ=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -2397,10 +2397,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Interfaces.IImageImporter.html",
-          "hash": "7bYLPSSzxuORZORh+4DFYw=="
+          "hash": "Hy6SdKc3gidcnCsXnQeeOg=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -2409,10 +2409,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Interfaces.IJsonSerializer.html",
-          "hash": "P/TUB7yfD/8xSVlmIQmyug=="
+          "hash": "6B80N3af/CJSEidCJQPTMw=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -2421,10 +2421,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Interfaces.ILog.html",
-          "hash": "k5+fB15SFIJ7WvJs8Ijdeg=="
+          "hash": "EprzJKdUKzyn3K33spAfNw=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -2433,10 +2433,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Interfaces.IProjectExporter.html",
-          "hash": "bNU1njmV/1ahOr+XyhKilw=="
+          "hash": "LeyDZzsJQFs/aqQixQ9uVw=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -2445,10 +2445,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Interfaces.IScriptRunner.html",
-          "hash": "sU9o3egObWDCtOf5Ag94PA=="
+          "hash": "1W37THZw7F8rIAvjFq/8DA=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -2457,10 +2457,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Interfaces.IShapeFactory.html",
-          "hash": "hKt30y0g0Iv2WOGHcd1YEQ=="
+          "hash": "NRtClF06lcRHnZQOS0VeWA=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -2469,10 +2469,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Interfaces.ITextClipboard.html",
-          "hash": "Sa3p/bNAN8zmjlexsnk+ug=="
+          "hash": "ViGO+fDNpMHUZgN8hTdv+Q=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -2481,10 +2481,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Interfaces.ITextFieldReader-1.html",
-          "hash": "gyYHBErMxvrz3hyl5ptP9Q=="
+          "hash": "9BgbvuS6yEtfCJDaVgioLw=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -2493,10 +2493,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Interfaces.ITextFieldWriter-1.html",
-          "hash": "vtsFLKrSppgZ+U4uyQBN+w=="
+          "hash": "f7xZxoRd95MlYNf+wOVeoQ=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -2505,10 +2505,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Interfaces.IXamlSerializer.html",
-          "hash": "dp2rsWXftt8/MRQT8g0FXw=="
+          "hash": "ZSkrHV+8lHTSt7sPFVSmFQ=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -2517,10 +2517,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Interfaces.html",
-          "hash": "JNQQDZlsTX5nopxNpBeY4w=="
+          "hash": "Qb4LchQSSyxCSkVnYbgiuw=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -2529,10 +2529,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Log.Trace.TraceLog.html",
-          "hash": "sLOAFvBw5a0Snih3zoIQjg=="
+          "hash": "Avai9YbzssraIZ3EsN696A=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -2541,10 +2541,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Log.Trace.html",
-          "hash": "+BtBbt1rlIM4tG4G5Q4lBQ=="
+          "hash": "mdAXSiwTsDiHq5QBhCc6Zw=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -2553,10 +2553,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.ObservableObject.html",
-          "hash": "NOqifPCL1cNLrT0t235/0A=="
+          "hash": "C+su2j8xNCoboN9E3h654g=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -2565,10 +2565,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Path.FillRule.html",
-          "hash": "z6pXd2JWdSmSFVsENhsfnw=="
+          "hash": "NcSPeqLEGGD+RmUvCCH2HQ=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -2577,10 +2577,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Path.IGeometryContext.html",
-          "hash": "khzYcrYcccmUoYQQx5/tew=="
+          "hash": "FSTTK5K5VIL89AJ/aVtaUg=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -2589,10 +2589,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Path.IPathFigure.html",
-          "hash": "IuKO727L2iDJTMD5ZFY3Hw=="
+          "hash": "5n8+4TzNZbQ5dO8WupvVDw=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -2601,10 +2601,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Path.IPathGeometry.html",
-          "hash": "6yFwRMlMvLG6RuJpzfdojA=="
+          "hash": "m9nwZPZol1SdTpb3HER8tQ=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -2613,10 +2613,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Path.IPathPolySegment.html",
-          "hash": "sKpwCzYxf2WzTqEDDAq/Fg=="
+          "hash": "DW0c+O42rm8LgyJGEwXIaA=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -2625,10 +2625,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Path.IPathSegment.html",
-          "hash": "HyfFH9ZjzTLdhkb3zcNarA=="
+          "hash": "urnUy4yV8Z0Tu4u3lipgzA=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -2637,10 +2637,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Path.IPathSize.html",
-          "hash": "tLWJnLr6uy/vmQB3rGP13g=="
+          "hash": "XW7DhoBxNSGSvQ3dMAKJyg=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -2649,10 +2649,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Path.PathFigure.html",
-          "hash": "rCLSJEPJFX1mrYkIDKu6EA=="
+          "hash": "8/7FYNH/H6ccboDpZqZ1GA=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -2661,10 +2661,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Path.PathGeometry.html",
-          "hash": "EPl5Dbtsu8i/gOzaa4RhIw=="
+          "hash": "q22yxTRqsqs0MmPpNwGjtg=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -2673,10 +2673,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Path.PathGeometryContext.html",
-          "hash": "41QAMl0Nn64jG6LRr1rAKw=="
+          "hash": "fuhio4wXob3CWxAjSkyb/w=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -2685,10 +2685,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Path.PathPolySegment.html",
-          "hash": "IWu0e4Kfx0FO1DJqcsr+Lg=="
+          "hash": "9/LI8ShUDexpJHfEEZK4bA=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -2697,10 +2697,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Path.PathSegment.html",
-          "hash": "KMuIbI+vFOba2TKySIYz3w=="
+          "hash": "rs0o7IYKOZ+StrNGyb5y8A=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -2709,10 +2709,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Path.PathSize.html",
-          "hash": "NtfHOprk48yAAyXW+zzQUg=="
+          "hash": "AWzJgj+kXkwpccjEMsHa5g=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -2721,10 +2721,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Path.Segments.ArcSegment.html",
-          "hash": "b4ywkJfTtp5EtHYienaDAg=="
+          "hash": "XHBhBf+1FcuB997nqfzj9g=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -2733,10 +2733,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Path.Segments.CubicBezierSegment.html",
-          "hash": "WUr9H7azNQL69NK8vIaVyQ=="
+          "hash": "pKdee0twrqRCOfl0WcHxrw=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -2745,10 +2745,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Path.Segments.IArcSegment.html",
-          "hash": "XHXE0UMsRGOgAjjOrBt5JQ=="
+          "hash": "L+pkB4kNmmQOkbsN9gRw4A=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -2757,10 +2757,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Path.Segments.ICubicBezierSegment.html",
-          "hash": "YQT1Y18PzUl5ZP31iD4fwg=="
+          "hash": "FLu09mWRYLMf2vLhUhFfHQ=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -2769,10 +2769,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Path.Segments.ILineSegment.html",
-          "hash": "QZTzYoJ+lniCyVj/h+OABQ=="
+          "hash": "HsfA769rhRQuYeN2zqnNQA=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -2781,10 +2781,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Path.Segments.IPolyCubicBezierSegment.html",
-          "hash": "TmdJaUpspZ2XY2Mpyxn4oQ=="
+          "hash": "y0FZ/6McXOJLoxZHRXYGBA=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -2793,10 +2793,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Path.Segments.IPolyLineSegment.html",
-          "hash": "sIZ0vYstUIHUg8FZVqoQgA=="
+          "hash": "6OGiVNZgajl5d9aqIZR31w=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -2805,10 +2805,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Path.Segments.IPolyQuadraticBezierSegment.html",
-          "hash": "grsYwEsW+fM5v1B/ouI7eQ=="
+          "hash": "p+fR4gABbP9sigLIj8sImw=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -2817,10 +2817,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Path.Segments.IQuadraticBezierSegment.html",
-          "hash": "vWIw8LEmQWKoXzD4sbAJEQ=="
+          "hash": "liYzAsHHBOhlP9pxvLblaw=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -2829,10 +2829,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Path.Segments.LineSegment.html",
-          "hash": "AtFgDORqtSK8eZaNIVGUrA=="
+          "hash": "aHTU0rogKXFTGvi1S8b5PA=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -2841,10 +2841,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Path.Segments.PolyCubicBezierSegment.html",
-          "hash": "363CIe/aJg7qceWHArCwjQ=="
+          "hash": "DZV1+DKTc4NPNPtvBpnhjw=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -2853,10 +2853,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Path.Segments.PolyLineSegment.html",
-          "hash": "Kf1r/WBOHIQ9d/y8dNp3cw=="
+          "hash": "Ti6tXDZ9Krq+alMMlYIA9w=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -2865,10 +2865,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Path.Segments.PolyQuadraticBezierSegment.html",
-          "hash": "r8t+ui4wJ/quwkxvELx6Nw=="
+          "hash": "f3tXz/qXHV15gWM1p/1bhA=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -2877,10 +2877,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Path.Segments.QuadraticBezierSegment.html",
-          "hash": "ggJSaz+uXig1akMBStMxJQ=="
+          "hash": "/gsLXSijfd5mR6L3+bVTkg=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -2889,10 +2889,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Path.Segments.html",
-          "hash": "wGcj/cS4DK3NS5sUBHz7uQ=="
+          "hash": "87yv8ewbOnc8R1/rj3jOJQ=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -2901,10 +2901,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Path.SweepDirection.html",
-          "hash": "ffkyjl3BssOe0Da70tGEwQ=="
+          "hash": "xxCo+SU9AtVKhaBOSrm+jA=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -2913,10 +2913,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Path.html",
-          "hash": "Z29LEafipqcyqkE+jlJmzw=="
+          "hash": "zZ/Eu4WDGOS10p80ktCQmg=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -2925,10 +2925,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Renderer.Avalonia.AvaloniaRenderer.html",
-          "hash": "G/9Yb8k3O0SGJO8jgwROmg=="
+          "hash": "tzoYHoE1OoKpPNEKrKNNsA=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -2937,10 +2937,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Renderer.Avalonia.PathGeometryConverter.html",
-          "hash": "8ZS7iiNm0oFTPdQ9cZEUZg=="
+          "hash": "r1gi7Fa8NBbnA/ctqvGocA=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -2949,10 +2949,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Renderer.Avalonia.html",
-          "hash": "S97ljCjh3Rt10eUE7YiLpw=="
+          "hash": "t1sNxMj6jnRsELC4h7hhFg=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -2961,10 +2961,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Renderer.Cache-2.html",
-          "hash": "HF9imT/N+C9tEm5ddPmu0g=="
+          "hash": "sryJkL/gi7Cl1cxdSBMmZg=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -2973,10 +2973,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Renderer.Dxf.DxfRenderer.html",
-          "hash": "qgIvfAnIVyp+vXSfWSe95A=="
+          "hash": "eD+3ASu2lJ6IPVwFpY+lsw=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -2985,10 +2985,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Renderer.Dxf.html",
-          "hash": "77zqmUvz0r5lIeQx3Uj5bw=="
+          "hash": "sD2kiQ/vlBBNU8ty/A7VLg=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -2997,10 +2997,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Renderer.ICache-2.html",
-          "hash": "iUVWxQ00NVyoYBISOTbg8g=="
+          "hash": "7s4OTGEvzJsRcWRyVJH+9A=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -3009,10 +3009,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Renderer.IContainerPresenter.html",
-          "hash": "s0lmBCDVNlcAzNpvitsAWQ=="
+          "hash": "PG61ReHtintJJfswhNuR+A=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -3021,10 +3021,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Renderer.IImageCache.html",
-          "hash": "DTOYoDJMC0EjwoXNZC5bLw=="
+          "hash": "zVcBYz3eZ/qAPvSWqMe+Ng=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -3033,10 +3033,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Renderer.IImageKey.html",
-          "hash": "v9/3cM6jojisRqYyGWPlzw=="
+          "hash": "LG4V58jV3lQ2Rr7ZI1IMHg=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -3045,10 +3045,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Renderer.IMatrixObject.html",
-          "hash": "EfrJWA1a7YuWV3UuQmWFNw=="
+          "hash": "Qkh0RyMdoLfHBQhEC1lvBw=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -3057,10 +3057,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Renderer.IShapeRenderer.html",
-          "hash": "Xx+7SU5Leb6JMBY9XGDcuA=="
+          "hash": "nF4xVjgjDKYxZixobMFK4A=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -3069,10 +3069,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Renderer.IShapeRendererState.html",
-          "hash": "0J/ATERpd4NGdQUz3hgNsQ=="
+          "hash": "UEVVqclGrQb1sT5da5J9fw=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -3081,10 +3081,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Renderer.IShapeState.html",
-          "hash": "7nxMCYS1PTAA8fWIKAwRxg=="
+          "hash": "FDb0g5Onl2UWHXR5WpEUPw=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -3093,10 +3093,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Renderer.ImageKey.html",
-          "hash": "8p68V+p2BtroHH1vcQyvcw=="
+          "hash": "1lOl5PFtgGhz1mQilQKkHg=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -3105,10 +3105,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Renderer.MatrixObject.html",
-          "hash": "SjwOSyvUmYKOlyAykIp4iw=="
+          "hash": "m7GoRYfiHtSYMgQPuql/+A=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -3117,10 +3117,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Renderer.PdfSharp.PathGeometryConverter.html",
-          "hash": "mf3hZv9XLTCi27Nx1koU0w=="
+          "hash": "H8MhIQG4nnEuuDQXOW4GwQ=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -3129,10 +3129,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Renderer.PdfSharp.PdfSharpRenderer.html",
-          "hash": "yR8+XgI4skPmD5NnHqY8wg=="
+          "hash": "x0TIUJ3sM42gaeqh+v96Og=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -3141,10 +3141,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Renderer.PdfSharp.html",
-          "hash": "FLiz8PFXUzUpt4hNmOH6uA=="
+          "hash": "MMHc9PBzK2hSwE0pnb3WVw=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -3153,10 +3153,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Renderer.PointAlignment.html",
-          "hash": "hcx2azYGLEWkCyalL7v+ZQ=="
+          "hash": "KRGrsMMNIe5nTuWenldSfA=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -3165,10 +3165,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Renderer.Presenters.EditorPresenter.html",
-          "hash": "1otLXfsr3Ls2QlTn0IRoNQ=="
+          "hash": "ihRwrjyYLFKx4XXKSs8MbQ=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -3177,10 +3177,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Renderer.Presenters.ExportPresenter.html",
-          "hash": "Vrh8HClh/gXfwmM0Awh3qg=="
+          "hash": "zpGiSjFjn+gaFevvl7GdZA=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -3189,10 +3189,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Renderer.Presenters.TemplatePresenter.html",
-          "hash": "bGMBkTq/jNDHCI+zDR28Sg=="
+          "hash": "NOqOUFgKc/Sq54Ptv4BlgQ=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -3201,10 +3201,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Renderer.Presenters.html",
-          "hash": "gzSYPUEIddWC3KsOa/JzSQ=="
+          "hash": "58/2it+hOYRVHPMnRh50gw=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -3213,10 +3213,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Renderer.ShapeRendererState.html",
-          "hash": "SVT8VguQBAOBUiNqk7uCBQ=="
+          "hash": "4P/pE4v/fW+mV2ah279W1Q=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -3225,10 +3225,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Renderer.ShapeState.html",
-          "hash": "r4AQ0o9t0F0Ao1HaUEO1Fg=="
+          "hash": "QolfcBQrYMQ5SiHvs9QBJw=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -3237,10 +3237,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Renderer.ShapeStateFlags.html",
-          "hash": "lBt5b73Vx9ojaI5tCjY9iw=="
+          "hash": "n4FtFfwwh1RPp0BSd4zWvA=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -3249,10 +3249,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Renderer.SkiaSharp.MatrixHelper.html",
-          "hash": "jgVXePs//aoOjq5M/vW4+Q=="
+          "hash": "rk+WQMbzQZBcOTcobWyz8Q=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -3261,10 +3261,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Renderer.SkiaSharp.PathGeometryConverter.html",
-          "hash": "kdOh7ny/A7nM5ufguVBegg=="
+          "hash": "h1PMTD3cXTw5LnWAWJY5+w=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -3273,10 +3273,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Renderer.SkiaSharp.SkiaSharpRenderer.html",
-          "hash": "DwOsjTAE6oEpFBaH/RubxA=="
+          "hash": "ozdiFY0zKwcStMZ6ldm1jg=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -3285,10 +3285,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Renderer.SkiaSharp.html",
-          "hash": "4UKAK/TWxyT/f9vs2u8+Pw=="
+          "hash": "bR3/7nIXApfiMz/lNxs33Q=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -3297,10 +3297,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Renderer.WinForms.PathGeometryConverter.html",
-          "hash": "WR+h/4AqGfjBuwkTl/kgQA=="
+          "hash": "iZv+MwcByUHWlw6dqwnbUA=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -3309,10 +3309,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Renderer.WinForms.WinFormsRenderer.html",
-          "hash": "LVsC/9/vEQRF04I5eYU0gA=="
+          "hash": "O02UpgOh0oUCYZZioAgrqQ=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -3321,10 +3321,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Renderer.WinForms.html",
-          "hash": "j515BtoXtkdmN+82ZJTR/g=="
+          "hash": "Wn3fF+aXY1r5sJfuv2sGrQ=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -3333,10 +3333,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Renderer.html",
-          "hash": "WlhPFnbCLPZCrZFUQjuWbQ=="
+          "hash": "iocnImZHHbGm+SFHA81hUw=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -3345,10 +3345,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.ScriptRunner.Roslyn.RoslynScriptRunner.html",
-          "hash": "2NDVXuQOWS3fMHzdOOcakw=="
+          "hash": "RgnJGmz8WN8HJhG1kP+AmQ=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -3357,10 +3357,46 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.ScriptRunner.Roslyn.html",
-          "hash": "ruvupNJWyTOuoXLODNTF3g=="
+          "hash": "ppSIdBHb81hykYwSkFhvtQ=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Scripting.IScript.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Scripting.IScript.html",
+          "hash": "seLPOSM3qAGkWEM3ncGOIA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Scripting.Script.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Scripting.Script.html",
+          "hash": "Mhi8KMsbRi3i4C3/eqKgDg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Scripting.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Scripting.html",
+          "hash": "r+5sER2Rsohb4hhl4LE7Rw=="
+        }
+      },
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -3369,10 +3405,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Serializer.Newtonsoft.NewtonsoftJsonSerializer.html",
-          "hash": "7ws4nh89BkU4+PSJ2QQBXg=="
+          "hash": "kJVZJibXpQoAhbQuMaQc5A=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -3381,10 +3417,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Serializer.Newtonsoft.html",
-          "hash": "bhUxMr+IKv1oFXyJ81CKsw=="
+          "hash": "NXhKSmDKs3cUq9h/oq4BhQ=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -3393,10 +3429,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Serializer.Xaml.PortableXamlSerializer.html",
-          "hash": "ZLky9kKGNjW+fRdhxjv51w=="
+          "hash": "v5SOgAr5UiMciBGx7Yrg+A=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -3405,10 +3441,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Serializer.Xaml.XamlConstants.html",
-          "hash": "igU1uobQQtAsFRFI5LtVzw=="
+          "hash": "zGyaBQ8IYvu1wPwiHqKkDA=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -3417,10 +3453,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Serializer.Xaml.html",
-          "hash": "Arxsj48q1oyumTSrgSnZrQ=="
+          "hash": "MqWOsZz3XFxZ0BiXSgZT0A=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -3429,10 +3465,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.ServiceProvider.Autofac.AutofacServiceProvider.html",
-          "hash": "LbvlfgtcE/33Ypo+aQuSdA=="
+          "hash": "jlyjPO7VDwyCuLN25ZiauQ=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -3441,10 +3477,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.ServiceProvider.Autofac.html",
-          "hash": "0o/0utcD9wvLYUsVX6ewaw=="
+          "hash": "cuDtAMzWoOZNEe6dgrEMdg=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -3453,10 +3489,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.ServiceProviderExtensions.html",
-          "hash": "friGVs+n5WDB00uLJMjybA=="
+          "hash": "hOZSsTBqGV/DmaPemIYO9Q=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -3465,10 +3501,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Shapes.ArcShape.html",
-          "hash": "9/UNbnUXlz+2bJaOzWoY2A=="
+          "hash": "Tm/Kd2T14fBxO0qAsPnfxg=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -3477,10 +3513,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Shapes.BaseShape.html",
-          "hash": "sRC0HKNwKdEY9EnI/cuMKQ=="
+          "hash": "1A/X5hR0kK4z2fjM9cv19Q=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -3489,10 +3525,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Shapes.ConnectableShape.html",
-          "hash": "Pjpo5mZxSoxFU/TCCPWCAg=="
+          "hash": "i9mV6M0Lf39XNRjjl8zTpw=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -3501,10 +3537,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Shapes.ConnectableShapeExtensions.html",
-          "hash": "CwkACpVKD5qZag0NF9BmDQ=="
+          "hash": "EVFHTjNzFDsfhYDUJlvE6A=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -3513,10 +3549,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Shapes.CubicBezierShape.html",
-          "hash": "QwH63Ggaex3N+EUYPNXeeQ=="
+          "hash": "go6lPLX6EU5QtzrhwzAIkg=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -3525,10 +3561,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Shapes.EllipseShape.html",
-          "hash": "N6rMQ2V53+CybX9BUCZVAA=="
+          "hash": "iLbNZunR9KkJDazHzYDflQ=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -3537,10 +3573,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Shapes.GroupShape.html",
-          "hash": "dFsd1O/e9yVwGxjCcDyDsg=="
+          "hash": "+7132pKvPofMAe1qu1t9pQ=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -3549,10 +3585,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Shapes.GroupShapeExtensions.html",
-          "hash": "iMFRhdRu4KaUSmBjGQtmPw=="
+          "hash": "gEKL/+r6Wn4Hdoaai6Jltg=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -3561,10 +3597,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Shapes.IArcShape.html",
-          "hash": "7RRfvmkXl4CPnfrspnTiVA=="
+          "hash": "yRGjKB6H2R2bn+LHN68XSg=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -3573,10 +3609,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Shapes.IBaseShape.html",
-          "hash": "s4DPyb++NVtzSctKwqmQig=="
+          "hash": "4AVMw2jus65F3R3fMcnZ6Q=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -3585,10 +3621,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Shapes.IConnectableShape.html",
-          "hash": "JeufW5tRTLK8D6RuTUaGGQ=="
+          "hash": "faiiZM9G7Wy1yeIPV1yk+w=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -3597,10 +3633,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Shapes.ICubicBezierShape.html",
-          "hash": "fbRBve2vQI1utV6mRX9IZQ=="
+          "hash": "Lk4ftFRBlJ/9ovNQCR3+9w=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -3609,10 +3645,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Shapes.IEllipseShape.html",
-          "hash": "MEGyhaFoQvuddYX0qnX+Ig=="
+          "hash": "03S68l262x/V3OCOORC16g=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -3621,10 +3657,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Shapes.IGroupShape.html",
-          "hash": "+u+kM1XeDbooXHNHKnridA=="
+          "hash": "kS2XJuoFzx5BNydY11IDzw=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -3633,10 +3669,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Shapes.IImageShape.html",
-          "hash": "LDLYrsG6Jo++9X5hPW9Zxw=="
+          "hash": "aYTmwQbF+gTS7aTf3vRYGQ=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -3645,10 +3681,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Shapes.ILineShape.html",
-          "hash": "P7UhMRIhEfK//xp4mz7LPw=="
+          "hash": "28pUMooJCNAhKP7WpyOgqA=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -3657,10 +3693,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Shapes.IPathShape.html",
-          "hash": "fJnY/1LwJmFknytqYnDOIQ=="
+          "hash": "JCWdzAsO9Jz6qCxbVcw4Jw=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -3669,10 +3705,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Shapes.IPointShape.html",
-          "hash": "TWJY9kUBzyd1ByfPa7wskg=="
+          "hash": "8Q90qfFiI93n7paGWrr5dw=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -3681,10 +3717,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Shapes.IQuadraticBezierShape.html",
-          "hash": "/pMXG44DaCz82nuxNpiNIg=="
+          "hash": "iLCDoH1UQCXH14FR0REhQw=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -3693,10 +3729,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Shapes.IRectangleShape.html",
-          "hash": "Yau94HCTpgvg+0gAustfDQ=="
+          "hash": "YggWv7tp73qhKGRPekDvIg=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -3705,10 +3741,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Shapes.ITextShape.html",
-          "hash": "9PVlilpqIpcdi15ZdE1S9w=="
+          "hash": "RuWBpu436PqslrFEmO4Aew=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -3717,10 +3753,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Shapes.ImageShape.html",
-          "hash": "pwERojjxlzNKvmzF4AVLHQ=="
+          "hash": "Qm4eMMPAC8P5bmTAmJRn5Q=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -3729,10 +3765,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Shapes.LineShape.html",
-          "hash": "QU/3mtJIrJmOTjzB/1wTog=="
+          "hash": "Hb7s2k3SDd5c5eVlMCwpgg=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -3741,10 +3777,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Shapes.LineShapeExtensions.html",
-          "hash": "6lKxZlwp3E5yhUj3/9E3bw=="
+          "hash": "VU9NqwG99a+lvQq5dIgqGg=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -3753,10 +3789,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Shapes.PathShape.html",
-          "hash": "IKINFvMUSxWcciGg73CrUQ=="
+          "hash": "DeXUrpFIwDYvviu6LV6+8Q=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -3765,10 +3801,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Shapes.PointShape.html",
-          "hash": "AXB213jJZH+zUxZiRjrFoA=="
+          "hash": "P0ANZlEzJSzy0nghUsSIqg=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -3777,10 +3813,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Shapes.PointShapeExtentions.html",
-          "hash": "KBH3EOyHDEHDNX+6aebkEQ=="
+          "hash": "SDCIp3R5ACuj5tcBen6Q6A=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -3789,10 +3825,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Shapes.QuadraticBezierShape.html",
-          "hash": "CN8HsJ00I95ijiYxdMjT+g=="
+          "hash": "J4iFe6dqmKuKpvEO7fhrzQ=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -3801,10 +3837,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Shapes.RectangleShape.html",
-          "hash": "JXJ2jMuE+i/8z/qQa88kCw=="
+          "hash": "ZZ+zoTDXBytXx594hgRw3w=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -3813,10 +3849,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Shapes.TextShape.html",
-          "hash": "R/HR67rGHl7JTQHSsBOiRg=="
+          "hash": "RFmvCN/b7HkQtA3QJOfUtQ=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -3825,10 +3861,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Shapes.TextShapeExtensions.html",
-          "hash": "xc81bZgDRh/PpaWKUdu6JQ=="
+          "hash": "3vZeArwRbNWA78c2R4ir9w=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -3837,10 +3873,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Shapes.html",
-          "hash": "8gtXzk9i9kLP4d4A8YZNRA=="
+          "hash": "HAJJa6ANh1p8jvOsOnxY1A=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -3849,10 +3885,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Style.ArgbColor.html",
-          "hash": "MRLrYFtE8Q5jeOIzfFY9SQ=="
+          "hash": "S6QW3lOdceekC42ZX1Vvvg=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -3861,10 +3897,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Style.ArrowStyle.html",
-          "hash": "Og1E14wxS6X/dI+dnkFArg=="
+          "hash": "FA4zCq6spQtn1Qrobb7atQ=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -3873,10 +3909,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Style.ArrowType.html",
-          "hash": "BLe18r1pIj768ksICafMHA=="
+          "hash": "0CKnea84RC/uIrPVer09gA=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -3885,10 +3921,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Style.BaseStyle.html",
-          "hash": "Pz4FZey885aoWWq7+HiSlw=="
+          "hash": "oABCwPUgjs1FoB16b0+ekQ=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -3897,10 +3933,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Style.Colors.html",
-          "hash": "dCXL1Kt6a3/TdPiAqcOPmA=="
+          "hash": "UY7po/dVt6vipz/6qRiCdw=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -3909,10 +3945,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Style.CurveOrientation.html",
-          "hash": "QqwitwH3m5GO7F76V1TdKw=="
+          "hash": "qNK/TqZVqWFifvWSGZDKrA=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -3921,10 +3957,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Style.FontStyle.html",
-          "hash": "DCCTyb75JCnHdpfrCT10Vw=="
+          "hash": "mNyTxvNsXKkWRX979xtxwA=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -3933,10 +3969,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Style.FontStyleFlags.html",
-          "hash": "Yad6gjoNJ21O/AOYfZGNCA=="
+          "hash": "ccIpCmO3pXEbnBcJdch5Mw=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -3945,10 +3981,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Style.IArgbColor.html",
-          "hash": "h8Wo5E3E4FLA9P3Fu1OFgQ=="
+          "hash": "2fuqujEfc4OPMh8A5LJY0w=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -3957,10 +3993,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Style.IArrowStyle.html",
-          "hash": "f8m0IY6lBb61ziKOsh9uCQ=="
+          "hash": "JdrPbamJjuU8GcKygAfK1A=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -3969,10 +4005,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Style.IBaseStyle.html",
-          "hash": "NfasDY4HodsEjn0x1yn85g=="
+          "hash": "9u3DRlO6JHe2mNmrIyqmrw=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -3981,10 +4017,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Style.IColor.html",
-          "hash": "iDxk1l8GPMhdU8ws0kOHTg=="
+          "hash": "+zKyxHOSDkZB2/OgAAi0EQ=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -3993,10 +4029,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Style.IFontStyle.html",
-          "hash": "AUTyYQugKUB7c5N1AykmnQ=="
+          "hash": "wsLx6l4uil7n6L6I0bkghw=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -4005,10 +4041,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Style.ILineFixedLength.html",
-          "hash": "Qufx8Mob556XJFKXvtYqRw=="
+          "hash": "OdiFj8A2QyMJXObiIotMFw=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -4017,10 +4053,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Style.ILineStyle.html",
-          "hash": "Dlm7ydM/ZuJgn5kWGY/IbQ=="
+          "hash": "aMPDi/Ye/silMMazi9FXHQ=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -4029,10 +4065,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Style.IShapeStyle.html",
-          "hash": "HF95NFMhRHs2Wp6fCjLCZw=="
+          "hash": "jeVNyaclGEChWsWu0Prv+Q=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -4041,10 +4077,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Style.ITextStyle.html",
-          "hash": "Oy1LytVJk7MZ55RYrTKE5g=="
+          "hash": "6LstCZig222u5DYFds+Lww=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -4053,10 +4089,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Style.LineCap.html",
-          "hash": "yFjvYsKdndYzxUmRWzLANg=="
+          "hash": "tdgCRcWVLH8QWT6bUtLQFQ=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -4065,10 +4101,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Style.LineFixedLength.html",
-          "hash": "GL0BDoz/Yyt+yBbHx9v1mw=="
+          "hash": "kTwJacw9uN5ifU0mPKaiWA=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -4077,10 +4113,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Style.LineFixedLengthFlags.html",
-          "hash": "2aj68js/wQB1pDqRmy3K/A=="
+          "hash": "AfC0cw6QwC4G8IIN3SXJng=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -4089,10 +4125,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Style.LineStyle.html",
-          "hash": "NWEEwjgW/up33o6zk+SOyg=="
+          "hash": "eJs2nApuuL5G2ISUfK5dOg=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -4101,10 +4137,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Style.ShapeStyle.html",
-          "hash": "5Z30s3tmxh1ujHZLEQgmGA=="
+          "hash": "tGWvVTpzSojEGsaHjP0u8A=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -4113,10 +4149,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Style.StyleHelper.html",
-          "hash": "gQFORFaJMDVExGACgVSkBQ=="
+          "hash": "jOhQUvgyRKtH4dqxLCWEog=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -4125,10 +4161,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Style.TextHAlignment.html",
-          "hash": "L3vQUBrKnz0UTVPj39DrIg=="
+          "hash": "h2MkKbj7idWOGwjc8sRPyA=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -4137,10 +4173,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Style.TextStyle.html",
-          "hash": "bhU1s9+WMKsN+2EBzt2bmQ=="
+          "hash": "yGcmEws8izm5c39k4/xaeQ=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -4149,10 +4185,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Style.TextVAlignment.html",
-          "hash": "vlcv0uX392P/8+SUZ9XM+w=="
+          "hash": "guKFxOeSckqfPqVLu/1TiQ=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -4161,10 +4197,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Style.html",
-          "hash": "eD0GUudjHNxCK5MCd+kRAQ=="
+          "hash": "5KlUy0nuPYk9NODAQd/dfQ=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -4173,10 +4209,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.TextFieldReader.CsvHelper.CsvHelperReader.html",
-          "hash": "gKRAvb1NQi/rrTNGZvI2ew=="
+          "hash": "hAUHGvZbi+CpdJjUsONcAA=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -4185,10 +4221,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.TextFieldReader.CsvHelper.html",
-          "hash": "u+4bC6TYBHlNFDDjK2hLMg=="
+          "hash": "sN0VBUBrMYsxqwQTNNW/3w=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -4197,10 +4233,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.TextFieldWriter.CsvHelper.CsvHelperWriter.html",
-          "hash": "1XQzL9j+EylUcQw65Zkfrg=="
+          "hash": "WMFU9yLusYE47TAxIzniOA=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -4209,10 +4245,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.TextFieldWriter.CsvHelper.html",
-          "hash": "qV839MPemj69yM2oxX23Zw=="
+          "hash": "vX+4GjWcITjgb3TdL+VrHw=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -4221,10 +4257,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.App.html",
-          "hash": "obD3VIh81tZWZ5uBI9Eyng=="
+          "hash": "5KxghVhnDKrbkqCv3Ly1pw=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -4233,10 +4269,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Behaviors.AttachEditorBehavior.html",
-          "hash": "kvV1XxEh1Rhr+kHbvK8KNw=="
+          "hash": "8KLq93R82mCiX+MEbrHhmg=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -4245,10 +4281,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Behaviors.ProjectEditorInput.html",
-          "hash": "9zCio4JRrVxArCZglo6wSw=="
+          "hash": "C37k6oLfJVaykwrGVG0uoQ=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -4257,10 +4293,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Behaviors.html",
-          "hash": "iZo+irQ+XfPu6vYIjT4t1A=="
+          "hash": "lIabB1/JG3AbmAW+Ud+B8A=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -4269,10 +4305,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Converters.ArgbColorToBrushMultiConverter.html",
-          "hash": "UTYOg9UX1jbIFCwmp2vOHw=="
+          "hash": "Cl+4udKFq9PDB9g+XjyVWQ=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -4281,10 +4317,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Converters.EditorToStatsMultiConverter.html",
-          "hash": "XxLtSvY7RJ6F8RGfy4R2Tw=="
+          "hash": "k3XpF1SE8vo3JIbw5x8+fQ=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -4293,10 +4329,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Converters.EditorToTitleMultiConverter.html",
-          "hash": "oH/LmhXRJBA67p8q5aOcPw=="
+          "hash": "Crud+Jcy0olVlqJvdw9iQw=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -4305,10 +4341,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Converters.IsGroupConverter.html",
-          "hash": "4MDvPymvg+ICn5AcstR+ow=="
+          "hash": "OM68REPRtm8e13y+O4cbyw=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -4317,10 +4353,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Converters.IsNullConverter.html",
-          "hash": "9xsFJc1Phb7tQLShZgwCBw=="
+          "hash": "hOKP4zrdTSrt3J+cs+kiAQ=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -4329,10 +4365,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Converters.ObjectEqualityMultiConverter.html",
-          "hash": "IGC6Hoq8SfPK9E3ehegd+A=="
+          "hash": "bBe+I7E10n/1rkP5IlwBbQ=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -4341,10 +4377,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Converters.ObjectEqualsConverter.html",
-          "hash": "sKg6AYShQoF7VkjeeLbpag=="
+          "hash": "SJmeEzlwXywijwItJVRIXw=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -4353,10 +4389,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Converters.ObjectToJsonStringConverter.html",
-          "hash": "rjFc2dyyhWKBppzbXSjmXQ=="
+          "hash": "gydcaTOl+hI9hYLK6+HPaA=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -4365,10 +4401,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Converters.ObjectToObjectConverter.html",
-          "hash": "bSPlVn+R5nZULeqPw+BoKA=="
+          "hash": "3kL3d1Zh20Oxzl1C8zMebw=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -4377,10 +4413,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Converters.ObjectToTypeStringConverter.html",
-          "hash": "yliufCpYHCiyByqRCPyVRA=="
+          "hash": "04HbavQC9PreQgKpj8LR+w=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -4389,10 +4425,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Converters.ObjectToXamlStringConverter.html",
-          "hash": "h5CIVT8eZkKhFpUgClElYg=="
+          "hash": "BcliFjIec57VMvhZ3AjQQA=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -4401,10 +4437,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Converters.TreeViewSelectedItemToObjectConverter.html",
-          "hash": "hory13XGK/ClRkdQvim2nQ=="
+          "hash": "lkCxlgGpus+8BBHsWgcigg=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -4413,10 +4449,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Converters.html",
-          "hash": "+Nf/dk6OCuhpPwDuW7aqjQ=="
+          "hash": "ydtQ6mLdAr97qhuko9FMUA=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -4425,10 +4461,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Dock.Documents.PageDocument.html",
-          "hash": "4359yhkP+QetIkXtVjQung=="
+          "hash": "eO46W1bI3kaauAINnzb49w=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -4437,10 +4473,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Dock.Documents.html",
-          "hash": "2Edb4A1QuM55OUsu8KAQbQ=="
+          "hash": "NoWKWp1J65jPonp0YuBDuA=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -4449,10 +4485,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Dock.Factories.EditorDockFactory.html",
-          "hash": "zFB1KwynGG7sK0VD5rctgA=="
+          "hash": "tTer8TXFwKtr2fbiNgk9LA=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -4461,10 +4497,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Dock.Factories.html",
-          "hash": "AdvqNEbp7zNfGp2ISofy/Q=="
+          "hash": "Pzt92ML4d7kFbFbXrQguLA=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -4473,10 +4509,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Dock.Handlers.EditorDropHandler.html",
-          "hash": "tKjLu9iM7faDGhFlJ7s3BA=="
+          "hash": "ZMP8hMO71AiU3wUIxkksiA=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -4485,10 +4521,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Dock.Handlers.ListBoxDropHandler.html",
-          "hash": "Phdnk7inXGqcD8ez101RvA=="
+          "hash": "nlE/4bdVSiHqz5WZ+uJu5g=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -4497,10 +4533,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Dock.Handlers.TreeViewDropHandler.html",
-          "hash": "MBHSy41s8e7thBzjgQOFmQ=="
+          "hash": "EO83TlNbwi7MI0fdMN9kjQ=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -4509,10 +4545,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Dock.Handlers.html",
-          "hash": "7FyNtMzUFtihnrkdgeQ4NA=="
+          "hash": "0ufaDZs0+u3sX5C2vLgVfA=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -4521,10 +4557,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Dock.Tools.BrowserTool.html",
-          "hash": "Ujv23EY7+jEp3Im/yCymuQ=="
+          "hash": "Ah/vggViz+Z3vd67y6kuTg=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -4533,10 +4569,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Dock.Tools.ContainerTool.html",
-          "hash": "uSrd4nsp7AP+jW5pMfgwIg=="
+          "hash": "5zPUBaG+2uhZYYnXFRUGlA=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -4545,10 +4581,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Dock.Tools.DataTool.html",
-          "hash": "lZ8m99LsYFB4hQy3ABURgA=="
+          "hash": "nIBdoxuC5lkekBNCIVSKtw=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -4557,10 +4593,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Dock.Tools.DatabasesTool.html",
-          "hash": "JfwHmE7d973ei+MkkfJJhg=="
+          "hash": "8lmSuY+4mfnwQMY5M8jWjw=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -4569,10 +4605,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Dock.Tools.DocumentTool.html",
-          "hash": "qdgQFRZfcXADsRSzN2InYw=="
+          "hash": "is+LiCAj9vKPBvrIThTixw=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -4581,10 +4617,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Dock.Tools.ExportTool.html",
-          "hash": "6oygQ9Ce03cF4zmMd9A6eQ=="
+          "hash": "cnt0di6ZMwaQ2GJMg5gQYA=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -4593,10 +4629,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Dock.Tools.GroupsTool.html",
-          "hash": "Cap3uGg21JM255rR7FIcnw=="
+          "hash": "rU66SeFfHqMeXJ5Fz3rWRQ=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -4605,10 +4641,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Dock.Tools.ImagesTool.html",
-          "hash": "2B5FKSwlM9VCEbVJptoMSA=="
+          "hash": "jiWTRxhVUSt/lm+6EpjhwQ=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -4617,10 +4653,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Dock.Tools.OptionsTool.html",
-          "hash": "rpoQ6ICwKbQKRclLeJvbjQ=="
+          "hash": "R7J+8yhXxZigVCoIeHMNpw=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -4629,10 +4665,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Dock.Tools.ProjectTool.html",
-          "hash": "IKdRN0bbwytFYLsFIJ2C/A=="
+          "hash": "KhVSholH+Kn/g/L6Exgtpg=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -4641,10 +4677,22 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Dock.Tools.ScriptTool.html",
-          "hash": "LUc77DOZ59cbApwysjmJFg=="
+          "hash": "3g4ubXfM72p6RKKAmCgh4Q=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Dock.Tools.ScriptsTool.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Dock.Tools.ScriptsTool.html",
+          "hash": "lIaMKPxUWFrW51VYkbeiIQ=="
+        }
+      },
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -4653,10 +4701,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Dock.Tools.ShapeTool.html",
-          "hash": "5PqZ0zo0smOj2tzIlLzT6w=="
+          "hash": "7XPwpHVjMnfQFPAbBDjfKg=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -4665,10 +4713,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Dock.Tools.StyleTool.html",
-          "hash": "JyH1Auenmd9akeFZBPJ6kA=="
+          "hash": "oZ0Z9f1ONVpMDVafO1in7A=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -4677,10 +4725,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Dock.Tools.StylesTool.html",
-          "hash": "eSpNnUYLkmfK+w42GBDiBg=="
+          "hash": "Y8i/o9I6thwHZxu0gdtAYQ=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -4689,10 +4737,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Dock.Tools.TemplateTool.html",
-          "hash": "k//SJNpCoeKdo0vM1nFPbQ=="
+          "hash": "NxPCmClpDcQGL/+yDRSodg=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -4701,10 +4749,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Dock.Tools.TemplatesTool.html",
-          "hash": "g+5iED6wZuT9YNQhR31img=="
+          "hash": "8qWRcoDiJqK0eWK8Bk3QlA=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -4713,10 +4761,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Dock.Tools.ToolsTool.html",
-          "hash": "azLx3VOJdL/yp4o6hX+y1Q=="
+          "hash": "45QR2OTxj9UKKEcVUVt97Q=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -4725,10 +4773,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Dock.Tools.ZoomTool.html",
-          "hash": "uJorSOo7lHQa+KaZcYYayw=="
+          "hash": "W9sLI3leVlxibVsmCZbyXA=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -4737,10 +4785,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Dock.Tools.html",
-          "hash": "WACUiChWdJoJfWfoTSc7nA=="
+          "hash": "ZpsBoshS1js0zsIHM6uBSQ=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -4749,10 +4797,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Dock.Views.AboutView.html",
-          "hash": "yD5Q03mrS2thNBsueWejUA=="
+          "hash": "oP9NpNhgxBymsDLvMg0Suw=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -4761,10 +4809,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Dock.Views.BrowserView.html",
-          "hash": "+qw3MvxlE1/eRaUIYN0nIg=="
+          "hash": "cDDA+ZnczIGl4BmypDYEnA=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -4773,10 +4821,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Dock.Views.DashboardView.html",
-          "hash": "z4Gt53wAXb+wRNi5NU0Mmg=="
+          "hash": "ZWkZ02UaV/NpJ7uQ4fwoTg=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -4785,10 +4833,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Dock.Views.DocumentView.html",
-          "hash": "RsFm4g5bxzU5aH/XynYKqA=="
+          "hash": "GxrLuWQ5G4wi5KZzBtcOjg=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -4797,10 +4845,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Dock.Views.EditorView.html",
-          "hash": "NJH+nVcECQzpmbZxstkLfg=="
+          "hash": "YQLVaoHremgLg15xAr8RRw=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -4809,10 +4857,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Dock.Views.ExportView.html",
-          "hash": "UOZ0n1V2oBrlNGgImbEuaQ=="
+          "hash": "8A8PGa+IbS5by4yrNQdyxw=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -4821,10 +4869,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Dock.Views.ScriptView.html",
-          "hash": "x6q3EAskOlrxVr5hLUL+LQ=="
+          "hash": "m8ngLpObTiZOg9lUgjgymQ=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -4833,10 +4881,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Dock.Views.html",
-          "hash": "SUuzKREuHRC22PatXHAjig=="
+          "hash": "b0q9R+n5607SFxYOcDoEAg=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -4845,10 +4893,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Dock.Windows.ThemedHostWindow.html",
-          "hash": "2WI2EuWuQ/BWtu/RcFW5XQ=="
+          "hash": "W+HdYP3sjpmhZs7va5a9xA=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -4857,10 +4905,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Dock.Windows.html",
-          "hash": "lpQOLDorZNhCEPlncRoqMg=="
+          "hash": "zwEsryY5nRAUML88V1gDWw=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -4869,10 +4917,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Editor.AvaloniaEditorCanvasPlatform.html",
-          "hash": "Qf/K07XXA/CINbWZPWkvCw=="
+          "hash": "xnmQ4T6wgcbxN11EegYynQ=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -4881,10 +4929,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Editor.AvaloniaEditorLayoutPlatform.html",
-          "hash": "CmtZQVSYd/2363PDzzh5Zg=="
+          "hash": "73BPzqtARWAPl6m6F63r8Q=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -4893,10 +4941,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Editor.AvaloniaProjectEditorPlatform.html",
-          "hash": "d2LELWOmCsXrux4R38H7kg=="
+          "hash": "7KF1g3Y4sq3WZHiyVJONwA=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -4905,10 +4953,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Editor.html",
-          "hash": "Uk42TDMGWaOM9vyt22upFw=="
+          "hash": "GEpLZNRotkkmq0fta6OmwQ=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -4917,10 +4965,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Importers.AvaloniaImageImporter.html",
-          "hash": "WHAgLPZTgIGpiitX46xrmA=="
+          "hash": "d4qptLsyWRwixYaH+RKHuw=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -4929,10 +4977,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Importers.html",
-          "hash": "POs6U/CTQkkDSQUo4yxNaA=="
+          "hash": "8NRLJJucgCcfrcGy1MGTHw=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -4941,10 +4989,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Modules.AppModule.html",
-          "hash": "8bbr9ML81zECdNygQzNvTw=="
+          "hash": "MX5tngFqt91NPCo1/7iNmQ=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -4953,10 +5001,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Modules.CoreModule.html",
-          "hash": "D0iB9hywj/iviexBGqn0yw=="
+          "hash": "b+Wy/77mO5cRHB0Qyfr7xg=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -4965,10 +5013,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Modules.DependenciesModule.html",
-          "hash": "n5ypkcyn9FCPQghrWYxgYA=="
+          "hash": "exyx2qeMUAfzP1cYtghnMA=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -4977,10 +5025,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Modules.DesignerModule.html",
-          "hash": "BUX1K+GC4T91hwwBAqCwyQ=="
+          "hash": "F6zLtjjAZH8JbnExUD8MZQ=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -4989,10 +5037,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Modules.LocatorModule.html",
-          "hash": "NzMpIX9EJrVMRR104vcR1w=="
+          "hash": "U3WzpoaYLw54EiyUWPm3PQ=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -5001,10 +5049,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Modules.ViewModule.html",
-          "hash": "thlcXwcnmdBFC2sQeRb2Ag=="
+          "hash": "uvCipm0VbRPDXH6j2KUHaA=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -5013,10 +5061,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Modules.html",
-          "hash": "8g9qHZGU1GigqXfIPwD04w=="
+          "hash": "doKdUncNUWtP2l6mrKdwvg=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -5025,10 +5073,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Renderer.RendererOptions.html",
-          "hash": "tnWf0pz3Fe/ie1CL7rzC2g=="
+          "hash": "uiHc/gdAaCvfS4AtddmvLA=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -5037,10 +5085,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Renderer.html",
-          "hash": "3mFjEmOa6drLDxKT80lI5g=="
+          "hash": "K6QwzsRahF0XiW0L6p1PPg=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -5049,10 +5097,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Utilities.AvaloniaInputSource.html",
-          "hash": "yX/ap4q4lhftJFdTFN9mLw=="
+          "hash": "e193RyaIv6iYlmh4+7hKuw=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -5061,10 +5109,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Utilities.AvaloniaTextClipboard.html",
-          "hash": "8SiISk1KTvLAnDnHK3zvbg=="
+          "hash": "O/ir9TDlvpYJj4hCybaJJA=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -5073,10 +5121,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Utilities.html",
-          "hash": "W0YPwogaELpDzAnyyGagkw=="
+          "hash": "LQKNwwu35MMsejztpbzS7g=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -5085,10 +5133,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.ViewLocator.html",
-          "hash": "z7GyJNV/pCJ8DtXnvYuGXw=="
+          "hash": "v3ymV/PmAllSQ5+J2vnjwQ=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -5097,10 +5145,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Views.AboutControl.html",
-          "hash": "Wnya4W7yKY/5lZo1SCMYbg=="
+          "hash": "Dzsroo3yJJDtdMI1iEMSXg=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -5109,10 +5157,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Views.AboutMenuControl.html",
-          "hash": "N3dw2WoGweuLlkIiVFR/lw=="
+          "hash": "ws4i4AClB7Khw8T936qT7w=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -5121,10 +5169,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Views.BrowserControl.html",
-          "hash": "mvgDeEVAeTnVHkFnm2SeiQ=="
+          "hash": "x+DgCLP7uPH56NB5dv6K7w=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -5133,10 +5181,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Views.BrowserMenuControl.html",
-          "hash": "VrQBT81stfj+//DKsODqXw=="
+          "hash": "+ERnYf8OvIodHS6gbCyf6Q=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -5145,10 +5193,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Views.Containers.ContainerControl.html",
-          "hash": "QDjfu92bI1SZmt5tC3/46Q=="
+          "hash": "oi06DNyLDxsG2is4AMeeNw=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -5157,10 +5205,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Views.Containers.DatabasesControl.html",
-          "hash": "aHrWE3nyx94R6XzOF6s9qA=="
+          "hash": "oWDwVsebchZuZhuCHDVO+w=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -5169,10 +5217,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Views.Containers.DocumentControl.html",
-          "hash": "wIojm4lgIYUo/Mc3I/yTAQ=="
+          "hash": "bfAk0kMvf+LgRQsgcacfgw=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -5181,10 +5229,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Views.Containers.GroupsControl.html",
-          "hash": "qXx7Ts7v1M3Vaie+RIUHZg=="
+          "hash": "hrEkeFUPE9IJI6ipW4ZzqQ=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -5193,10 +5241,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Views.Containers.ImagesControl.html",
-          "hash": "ob0e/aZagBWJvvUK3nTMEw=="
+          "hash": "LWJrDuKevwzGoAXVIps24Q=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -5205,10 +5253,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Views.Containers.LayerControl.html",
-          "hash": "3O1tEercA06qv0AzS7aFcg=="
+          "hash": "HXNW97f2GMIc4/vITmf2Hw=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -5217,10 +5265,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Views.Containers.LayersControl.html",
-          "hash": "MJhQJappekD/ICQI60kl9g=="
+          "hash": "sgo6QUH3+8az6JMClcqEeg=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -5229,10 +5277,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Views.Containers.LibraryControl.html",
-          "hash": "f1j7yEmfLMQDT2jDliXvYw=="
+          "hash": "JEyywBlJ3cTHZ05h8CnPbA=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -5241,10 +5289,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Views.Containers.OptionsControl.html",
-          "hash": "EbyAG/0BRWcc2HC3evtLmg=="
+          "hash": "tKVl/S8lDql0mo258iONag=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -5253,10 +5301,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Views.Containers.ProjectControl.html",
-          "hash": "jT4rri5Xn/qGUnX0eDp87w=="
+          "hash": "wQfJigS3Q8Mpy3EAVmHHwA=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -5265,10 +5313,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Views.Containers.ShapesControl.html",
-          "hash": "woV2MRjb8+l8A7NdQS1mIA=="
+          "hash": "JnLcIcaV1ZAAhKoyiZ4H2g=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -5277,10 +5325,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Views.Containers.StylesControl.html",
-          "hash": "5PW0hZczkYw6oBDURj0ZGQ=="
+          "hash": "wIPE1OgK7VKk0unsu3hW+A=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -5289,10 +5337,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Views.Containers.TemplatesControl.html",
-          "hash": "w2nuzc/qHgd36HcElj618A=="
+          "hash": "vTl9sCmcfO2GDNhmXEgDfw=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -5301,10 +5349,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Views.Containers.ZoomControl.html",
-          "hash": "0yLgK/GKXdQAHj5ikjkLVA=="
+          "hash": "Lh46vzJjpuZAoX+QrpzaGg=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -5313,10 +5361,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Views.Containers.html",
-          "hash": "NxPPml/C33T48kTUfEd5GQ=="
+          "hash": "VYUVnldJwuphgTcXV73cLg=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -5325,10 +5373,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Views.DashboardControl.html",
-          "hash": "n587Sj8bGMVCRoXDXTrQ1w=="
+          "hash": "C8GTJKVMu0OKg0EQ3Jt30w=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -5337,10 +5385,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Views.DashboardMenuControl.html",
-          "hash": "CkqVlrjirzOjSNr+K8uMHg=="
+          "hash": "JFF/s8iEqh4/z5GzLHHdsQ=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -5349,10 +5397,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Views.Data.ColumnsControl.html",
-          "hash": "2QdhnO8/JIK7Okl7zGk+wQ=="
+          "hash": "/OO2Gj9c3/vlgYOeoidKEw=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -5361,10 +5409,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Views.Data.DataControl.html",
-          "hash": "nl36DDeHIilYB11hQquwxQ=="
+          "hash": "z+MLbLAQgsZf2dVpJs8G2Q=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -5373,10 +5421,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Views.Data.DatabaseControl.html",
-          "hash": "6JMKZA/s1yEqwhdeT+eSRw=="
+          "hash": "BbMLyauhBKtPsJ2HGHiYBg=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -5385,10 +5433,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Views.Data.PropertiesControl.html",
-          "hash": "tw/kVzsU50CAEJ9ZpUFRqg=="
+          "hash": "SP3zZlbOaLXRcLuPUPk+Og=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -5397,10 +5445,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Views.Data.RecordControl.html",
-          "hash": "OLWLTTYlRxZH92+/NvXfww=="
+          "hash": "qRao4XL+cToMNi14TbTAwQ=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -5409,10 +5457,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Views.Data.RecordsControl.html",
-          "hash": "2+7StpdZcOUbEUO48Fr4SQ=="
+          "hash": "Dr/gFXB5JQzYeTmmQd6XmQ=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -5421,10 +5469,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Views.Data.html",
-          "hash": "717F1YyzrcsEkCdQN28GJg=="
+          "hash": "jL8ldFqdJoWei+T1uu6avQ=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -5433,10 +5481,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Views.DocumentControl.html",
-          "hash": "oDQM9H5tHkp5Lxuc+YfFWg=="
+          "hash": "C/YEdorkwmKA32UIQ9mt3w=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -5445,10 +5493,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Views.DocumentMenuControl.html",
-          "hash": "U1fFi9vtw4KnptAtnF6jJg=="
+          "hash": "7tYDWecz8xvPGGhtGUuSbA=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -5457,10 +5505,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Views.EditorControl.html",
-          "hash": "i5jBNX84MiZOGL13dVlSYQ=="
+          "hash": "e1QtjYyONQrg836kj7cqDw=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -5469,10 +5517,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Views.EditorMenuControl.html",
-          "hash": "m8qe4Hf9qmtm/9C8e7U86Q=="
+          "hash": "GRusvFoSPOT+QXLZc7wpuw=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -5481,10 +5529,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Views.ExportControl.html",
-          "hash": "Kv0AZIs+F7VlyWnRybYjaQ=="
+          "hash": "afArBzCBmHDH1GMP4CwXIw=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -5493,10 +5541,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Views.MainControl.html",
-          "hash": "Ta+suhUAipnQXH8yB7CrQA=="
+          "hash": "xaZACqa5FNhq5ZZwHht+rQ=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -5505,10 +5553,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Views.PageControl.html",
-          "hash": "1dY/zqKXTvaVHHEyewaHFg=="
+          "hash": "7tNomPMO1/o5CGZP3npwHQ=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -5517,10 +5565,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Views.Path.ArcSegmentControl.html",
-          "hash": "0lh9NdeXMG/u224JTTOV/A=="
+          "hash": "/XfC+yjAQVORk7Uy7j1zAw=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -5529,10 +5577,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Views.Path.CubicBezierSegmentControl.html",
-          "hash": "4VG98X9nXR8uQBHnOS7Elg=="
+          "hash": "p37OA6Zm6//KCZnTdLMaOA=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -5541,10 +5589,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Views.Path.LineSegmentControl.html",
-          "hash": "P7Tek1JXoqvBKwrCEYc1XA=="
+          "hash": "WhwqpXuZdbe71sq180t9Sw=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -5553,10 +5601,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Views.Path.PathFigureControl.html",
-          "hash": "6vf9YRffFnnivhi8Ekk+wg=="
+          "hash": "PwauJxsLUhPCA3lhxfTTcA=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -5565,10 +5613,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Views.Path.PathGeometryControl.html",
-          "hash": "ut1T1mKOvi/Ny4hxN/8gkQ=="
+          "hash": "tCUJeiX5ABG1Gd/BIs8OGw=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -5577,10 +5625,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Views.Path.PathSizeControl.html",
-          "hash": "yK46mWx6DDEYT6hQBYzBRA=="
+          "hash": "LtqP41qRdnc+wUDlkmZPIg=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -5589,10 +5637,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Views.Path.PolyCubicBezierSegmentControl.html",
-          "hash": "GfNZwPSjviJGLiqL6Sfkmw=="
+          "hash": "Dh/+mhX6RgJ58aBi1qYnvw=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -5601,10 +5649,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Views.Path.PolyLineSegmentControl.html",
-          "hash": "R5oAspuuEBqeaU/uXM8Cjg=="
+          "hash": "P/Pj19z/5z4dgsxIFThZVQ=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -5613,10 +5661,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Views.Path.PolyQuadraticBezierSegmentControl.html",
-          "hash": "Ej6yUNNqH0SM6BbM8bR15w=="
+          "hash": "h67ZHVBSTr3LeSTIUCh9vQ=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -5625,10 +5673,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Views.Path.QuadraticBezierSegmentControl.html",
-          "hash": "PHqlu8ByZXCAAUnsP/4LQQ=="
+          "hash": "fZOdZ/7qyFKzue6SvFUc0w=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -5637,10 +5685,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Views.Path.html",
-          "hash": "nzoWkXILbdS8bb/10XImjw=="
+          "hash": "HY3PC+ZhSRgVtaT5Y4BsGA=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -5649,10 +5697,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Views.PresenterControl.html",
-          "hash": "PW2NskYLNYADsdH2OCaTXQ=="
+          "hash": "i4psdzufXPzaIoWCbS5qeg=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -5661,10 +5709,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Views.PresenterType.html",
-          "hash": "gW1wWu2D8AvjldUQRNQDWg=="
+          "hash": "wS6SrOiDY/RGyC2WC2lqmg=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -5673,10 +5721,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Views.Renderer.MatrixControl.html",
-          "hash": "ENX9QTtoeXSQlHf6IQqABg=="
+          "hash": "UUxtHFdePH76qgXyzBky9g=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -5685,10 +5733,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Views.Renderer.ShapeStateControl.html",
-          "hash": "AEYFm6LdPlUBnuNMOM+P8A=="
+          "hash": "tyXAJfEKqqqKIPp3QOuDhw=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -5697,22 +5745,46 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Views.Renderer.html",
-          "hash": "S7b3HOlEn2LCeijloE+hZA=="
+          "hash": "mdGE1LEZgLgm6oRq3j4EkA=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Core2D.UI.Avalonia.Views.ScriptControl.yml",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Views.Scripting.ScriptControl.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Core2D.UI.Avalonia.Views.ScriptControl.html",
-          "hash": "GXykGtepHZUZBtSyv376pA=="
+          "relative_path": "api/Core2D.UI.Avalonia.Views.Scripting.ScriptControl.html",
+          "hash": "n3TU/uIW083gkrQkLZjzhg=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Views.Scripting.ScriptsControl.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Views.Scripting.ScriptsControl.html",
+          "hash": "sdX+kW0yZZirQ0SUUY8A6A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Views.Scripting.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Views.Scripting.html",
+          "hash": "4M89N/Ioo+j3zEaS7oQajA=="
+        }
+      },
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -5721,10 +5793,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Views.Settings.Tools.ArcSettingsControl.html",
-          "hash": "AyBm1m7T1fUabIyut7duqw=="
+          "hash": "d9CFOGhwJZNoYK1Z3KK/ZA=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -5733,10 +5805,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Views.Settings.Tools.CubicBezierSettingsControl.html",
-          "hash": "NswqDy1gA2v95suUlyC95w=="
+          "hash": "Orb0njwkRPrLsZiRM1nxBg=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -5745,10 +5817,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Views.Settings.Tools.EllipseSettingsControl.html",
-          "hash": "LZ7AZELdbRybmaJeB3R8Qw=="
+          "hash": "9ytoq3BbFWH/7bETPWQNvg=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -5757,10 +5829,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Views.Settings.Tools.ImageSettingsControl.html",
-          "hash": "H8pGJgpo9qnngZYlam7r8g=="
+          "hash": "hcNjVscjCqq9iaWH2kno3Q=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -5769,10 +5841,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Views.Settings.Tools.LineSettingsControl.html",
-          "hash": "WVIV5de79r94Q9hqeWRong=="
+          "hash": "NHqBYLdL+4wIVEd3nnJfsw=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -5781,10 +5853,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Views.Settings.Tools.NoneSettingsControl.html",
-          "hash": "KaQj/0AjZFBZLxxVYVLrlQ=="
+          "hash": "pob9iOd/lASyvBgIqIZXOw=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -5793,10 +5865,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Views.Settings.Tools.Path.ArcSettingsControl.html",
-          "hash": "9IChn4sQ3EHf7KDD2ZVoXA=="
+          "hash": "9xfoknF00OrCYGxjU0YjEg=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -5805,10 +5877,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Views.Settings.Tools.Path.CubicBezierSettingsControl.html",
-          "hash": "n8wjM4JqRjbbSBGlQ3HYdQ=="
+          "hash": "xn/Cs6MU/5d45iDSsHb9yg=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -5817,10 +5889,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Views.Settings.Tools.Path.LineSettingsControl.html",
-          "hash": "t7Q1NRiTk3wNvQdNGXU1hQ=="
+          "hash": "U4GLoTimfksQMIphwr5IvQ=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -5829,10 +5901,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Views.Settings.Tools.Path.MoveSettingsControl.html",
-          "hash": "NbMkg4xcf2AA/3s/Q+Iy3Q=="
+          "hash": "8hBRJXedeU6CIiSz0IGqVA=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -5841,10 +5913,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Views.Settings.Tools.Path.QuadraticBezierSettingsControl.html",
-          "hash": "bNIS09bLsGu3ymGYtbw2Wg=="
+          "hash": "Xf57aq92iv+/8VCG2LZH8A=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -5853,10 +5925,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Views.Settings.Tools.Path.html",
-          "hash": "d4ondOGffKKAETfai98eGw=="
+          "hash": "+ISc1P2o66636DGYDD91kg=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -5865,10 +5937,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Views.Settings.Tools.PathSettingsControl.html",
-          "hash": "xET9z1p/USecbWOUEZRioA=="
+          "hash": "QhIkBJHcanxM/aH1vtbx5Q=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -5877,10 +5949,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Views.Settings.Tools.PointSettingsControl.html",
-          "hash": "upORv/MhsObBUVxDqYKnSA=="
+          "hash": "lPdABVn1JzD7HboQYdy1oA=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -5889,10 +5961,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Views.Settings.Tools.QuadraticBezierSettingsControl.html",
-          "hash": "9S92EwtQDnpkZ8RJzN00RQ=="
+          "hash": "O/mpeeVJMrMTj+yren8hDw=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -5901,10 +5973,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Views.Settings.Tools.RectangleSettingsControl.html",
-          "hash": "KO+FcsDjSlFnjkTdQemAkg=="
+          "hash": "aoMpK7Pe5sFCKZZYLTrIfw=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -5913,10 +5985,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Views.Settings.Tools.SelectionSettingsControl.html",
-          "hash": "wWDcas2q0IZkjTQ2gooTgA=="
+          "hash": "AC1SEOCRsLaq0AFXPzzYTw=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -5925,10 +5997,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Views.Settings.Tools.TextSettingsControl.html",
-          "hash": "ANr6GIu86KQQe0jPGimavw=="
+          "hash": "wN9rVDXxoQDA2y5fjaAfaA=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -5937,10 +6009,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Views.Settings.Tools.html",
-          "hash": "75zY4j3fJ914wlBa257A5Q=="
+          "hash": "9K45OoDYUUdjyVIhoyUYvw=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -5949,10 +6021,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Views.Settings.ToolsControl.html",
-          "hash": "SV+4ePhAVab/GQcp/Mwf2w=="
+          "hash": "5R4IxrO52mMGyJkpuYc6Bg=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -5961,10 +6033,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Views.Settings.html",
-          "hash": "aZtLwIi0fS6qPG6hAGGzuQ=="
+          "hash": "ujnMQ8p3MuiOQ6d71mJBrw=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -5973,10 +6045,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Views.Shapes.ArcControl.html",
-          "hash": "ZPNGkx0ZU3Qc/Mve4248Qw=="
+          "hash": "mJS459MaenV2WQXVBoRL2w=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -5985,10 +6057,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Views.Shapes.CubicBezierControl.html",
-          "hash": "gS/1Ffs2Tflwu251662ulw=="
+          "hash": "ln1vUh2bzdZ4mNyN8Y0U+Q=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -5997,10 +6069,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Views.Shapes.EllipseControl.html",
-          "hash": "SlFZw+HjYXXoGNRWwbKd8A=="
+          "hash": "FT4oFJOwalkgkaTEoMV9nQ=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -6009,10 +6081,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Views.Shapes.GroupControl.html",
-          "hash": "JfJkJG3UitZOdLipe3KeJw=="
+          "hash": "HO3j33Z/3obdTRcm+scwrA=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -6021,10 +6093,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Views.Shapes.ImageControl.html",
-          "hash": "9YVxotHPoemcKMAHEsjUsA=="
+          "hash": "CvWueB8KRs5Z+56htAOgsg=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -6033,10 +6105,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Views.Shapes.LineControl.html",
-          "hash": "9Cf+1kUJ8VcsSGYyhDFb9Q=="
+          "hash": "PUXXseYBJL37ruJyghVm0w=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -6045,10 +6117,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Views.Shapes.PathControl.html",
-          "hash": "m2wZWr5VAYUQ5nF8fsIlwg=="
+          "hash": "HCqJFWhshUbxDf7HH5XISg=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -6057,10 +6129,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Views.Shapes.PointControl.html",
-          "hash": "te+SxBMM/3HgiK1j57YoRw=="
+          "hash": "thT0vhU6Z2xZVYHAUCjytA=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -6069,10 +6141,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Views.Shapes.QuadraticBezierControl.html",
-          "hash": "PvG/xfpHyu1v8yRwy4VWaw=="
+          "hash": "NHota7mLDSbfn+3iK2hbUg=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -6081,10 +6153,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Views.Shapes.RectangleControl.html",
-          "hash": "GvCUmpFDhcmLyIh5D9SotQ=="
+          "hash": "ABP4GAuopcuBV5ke0Nyv2w=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -6093,10 +6165,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Views.Shapes.TextControl.html",
-          "hash": "B5tWIZmSNi8VWR2WxmGgsw=="
+          "hash": "28h0z/GJXeygdgzwd72N8g=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -6105,10 +6177,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Views.Shapes.html",
-          "hash": "sM3Gq63IGtZN36AghUk5wQ=="
+          "hash": "YjLLOU55bbo7/gDPid/fAg=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -6117,10 +6189,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Views.StatusControl.html",
-          "hash": "vtOROmo+eG304WoixtchKg=="
+          "hash": "QzngNUCJnTpWeAVUgtIX6w=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -6129,10 +6201,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Views.Style.ArgbColorControl.html",
-          "hash": "srArDbeOqqOauRnsM02upQ=="
+          "hash": "kvqzSfWkihH2Ul3GVSOEGA=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -6141,10 +6213,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Views.Style.ArrowStyleControl.html",
-          "hash": "RW+oYGSMv0RUGrzMsEk2UA=="
+          "hash": "iVpj7J30cpW2TJhOcAESKA=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -6153,10 +6225,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Views.Style.FontStyleControl.html",
-          "hash": "rOFAZKD5x1oJXTQnaCtWJA=="
+          "hash": "P77Au4mP9N4k48POPP3XJQ=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -6165,10 +6237,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Views.Style.LineFixedLengthControl.html",
-          "hash": "PpiMwykeLO92wdrkZ6Dozw=="
+          "hash": "pTe7SC7FPig35z/Zx5YblQ=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -6177,10 +6249,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Views.Style.LineStyleControl.html",
-          "hash": "sn23A1Wve0ZD4B1XB49KrA=="
+          "hash": "1yzg5mxKz7Xz7nkAWUdyHA=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -6189,10 +6261,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Views.Style.ShapeStyleControl.html",
-          "hash": "CHhImux8vXRVVHJgBuGZdw=="
+          "hash": "7JBRxSHzY6JfJ45OoCbQfA=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -6201,10 +6273,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Views.Style.StyleControl.html",
-          "hash": "E16rXqX1LO4zeoZWAM6/yA=="
+          "hash": "Hayx96eDQh3EK+w9+7SyLQ=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -6213,10 +6285,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Views.Style.TextStyleControl.html",
-          "hash": "7nnORBiou6+EbkvMbXUA8w=="
+          "hash": "Rdc2bmXD2yu32hy4iZwxJg=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -6225,10 +6297,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Views.Style.html",
-          "hash": "7d2PNOZxeWCmnrVH44Nkbw=="
+          "hash": "HNuotPyrLSp8/67dmFp39g=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -6237,10 +6309,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Views.html",
-          "hash": "cROqN+ayDGmYwDZz/xGAYQ=="
+          "hash": "SRfVXY1Gx1rjfUnd61qbvQ=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -6249,10 +6321,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Windows.AboutWindow.html",
-          "hash": "5/YBSUERF5ZW+4Cozj1oRw=="
+          "hash": "1UFO/QwmkGUZTbm/iKGZEA=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -6261,10 +6333,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Windows.BrowserWindow.html",
-          "hash": "G7sqjFmrSDD7GwjVz22E2w=="
+          "hash": "XniQuNZb0r3iazoI80P2yQ=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -6273,10 +6345,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Windows.DocumentWindow.html",
-          "hash": "pdfS4cPUym0pHrihdEqJSA=="
+          "hash": "hXTMrcwGetIMmS7/5qk4Rw=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -6285,10 +6357,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Windows.MainWindow.html",
-          "hash": "uNwOrnemUAQKX+wjllZUyw=="
+          "hash": "IZkOB/QFFw0lJ9rHEwXVag=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -6297,10 +6369,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Windows.ScriptWindow.html",
-          "hash": "tdYvksUV1f93nw9MdVLodg=="
+          "hash": "rWNnIjWfDAJeaC1WP8Pxrw=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -6309,10 +6381,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Windows.html",
-          "hash": "7T0jbMWTlcF/CK6RdU/lmQ=="
+          "hash": "/AYIlaZE2aKS5oIhdHUx2Q=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -6321,10 +6393,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.html",
-          "hash": "DVBtc8ejsb71x8SwQfVpmQ=="
+          "hash": "RX7bmvy6xEfnihoqnZqjkQ=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -6333,10 +6405,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.html",
-          "hash": "RnsUjQohdwtodZcKJjDQ2w=="
+          "hash": "1B/eGGj3BJv9hAeLlCpiDw=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -6345,10 +6417,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Dock.Avalonia.DefaultDropHandler.html",
-          "hash": "A+ansJTTXGnkRR7Wwm9t/Q=="
+          "hash": "wmMqrGoZm3oL/+IqhV9kZA=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -6357,10 +6429,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Dock.Avalonia.DragBehavior.html",
-          "hash": "lp8a6TLqr+0cRApLPyAIJw=="
+          "hash": "qV9VnF6WUokWYjDh80cDpg=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -6369,10 +6441,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Dock.Avalonia.DragDataFormats.html",
-          "hash": "opBtfhSK+CGZyTencFXSqg=="
+          "hash": "37TBCkgLjvlS99KD+sJU6Q=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -6381,10 +6453,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Dock.Avalonia.DropBehavior.html",
-          "hash": "wpl4z63KVUAxA+NW4q0rEw=="
+          "hash": "HQCZn3xWza59WgJxaAS6BQ=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -6393,10 +6465,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Dock.Avalonia.DropHelper.html",
-          "hash": "je0m/4mNMdOgWfAJ+raXaQ=="
+          "hash": "Hpkupz4qHBicDGYj6wJlFQ=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -6405,10 +6477,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Dock.Avalonia.IDragHandler.html",
-          "hash": "p3YcVZlHjuw4lLg4funaqQ=="
+          "hash": "EMq7psdxDHL0SvZ8MOkylw=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -6417,10 +6489,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Dock.Avalonia.IDropHandler.html",
-          "hash": "lVseRmtn0+yN12xtr6u2dw=="
+          "hash": "FnM0qejLaQinB3gJuqLcyQ=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -6429,10 +6501,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Dock.Avalonia.html",
-          "hash": "8eHCBELh0SoVqkjySRjMWw=="
+          "hash": "TGgHD3pv7OkHJlMGys2e7w=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -6441,7 +6513,29 @@
       "output": {
         ".html": {
           "relative_path": "api/toc.html",
-          "hash": "YHItKwU16wdcmqkOBBED8w=="
+          "hash": "zLjFbNwM3rKjm0AinEs80w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/favicon.ico",
+      "output": {
+        "resource": {
+          "relative_path": "images/favicon.ico"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/logo.svg",
+      "output": {
+        "resource": {
+          "relative_path": "images/logo.svg"
         }
       },
       "is_incremental": false,
@@ -6453,7 +6547,7 @@
       "output": {
         ".html": {
           "relative_path": "index.html",
-          "hash": "UOP6ocGVANV+qiBjzltUuQ=="
+          "hash": "cHCapMEb8eO1WWlVzG/2Gg=="
         }
       },
       "is_incremental": false,
@@ -6475,23 +6569,32 @@
   "incremental_info": [
     {
       "status": {
-        "can_incremental": true,
+        "can_incremental": false,
+        "details": "Cannot build incrementally because last build info is missing.",
         "incrementalPhase": "build",
         "total_file_count": 0,
-        "skipped_file_count": 0
+        "skipped_file_count": 0,
+        "full_build_reason_code": "NoAvailableBuildCache"
       },
       "processors": {
         "ConceptualDocumentProcessor": {
-          "can_incremental": true,
+          "can_incremental": false,
           "incrementalPhase": "build",
           "total_file_count": 1,
           "skipped_file_count": 0
         },
         "ManagedReferenceDocumentProcessor": {
-          "can_incremental": true,
+          "can_incremental": false,
           "incrementalPhase": "build",
-          "total_file_count": 536,
-          "skipped_file_count": 536
+          "total_file_count": 542,
+          "skipped_file_count": 0
+        },
+        "ResourceDocumentProcessor": {
+          "can_incremental": false,
+          "details": "Processor ResourceDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
+          "incrementalPhase": "build",
+          "total_file_count": 0,
+          "skipped_file_count": 0
         },
         "TocDocumentProcessor": {
           "can_incremental": false,
@@ -6504,8 +6607,8 @@
     },
     {
       "status": {
-        "can_incremental": true,
-        "details": "Can support incremental post processing.",
+        "can_incremental": false,
+        "details": "Cannot support incremental post processing, the reason is: last post processor info is null.",
         "incrementalPhase": "postProcessing",
         "total_file_count": 0,
         "skipped_file_count": 0
