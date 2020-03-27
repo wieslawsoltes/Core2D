@@ -168,34 +168,41 @@
             </MenuItem>
         </MenuItem>
         <MenuItem Header="St_yle">
-            <MenuItem Header="_Copy">
-                <MenuItem Header="_Style" Command="{Binding StyleEditor.OnCopyStyle}" InputGesture="Ctrl+Shift+C"/>
-                <Separator/>
-                <MenuItem Header="S_troke" Command="{Binding StyleEditor.OnCopyStroke}"/>
-                <MenuItem Header="_Fill" Command="{Binding StyleEditor.OnCopyFill}"/>
-                <Separator/>
-                <MenuItem Header="_Text Style" Command="{Binding StyleEditor.OnCopyTextStyle}"/>
-                <Separator/>
-                <MenuItem Header="St_art Arrow Style" Command="{Binding StyleEditor.OnCopyStartArrowStyle}"/>
-                <MenuItem Header="_End Arrow Style" Command="{Binding StyleEditor.OnCopyEndArrowStyle}"/>
-                <Separator/>
-                <MenuItem Header="_Line Style" Command="{Binding StyleEditor.OnCopyLineStyle}"/>
-            </MenuItem>
-            <MenuItem Header="_Paste">
-                <MenuItem Header="_Style" Command="{Binding StyleEditor.OnPasteStyle}" InputGesture="Ctrl+Shift+V"/>
-                <Separator/>
-                <MenuItem Header="S_troke" Command="{Binding StyleEditor.OnPasteStroke}"/>
-                <MenuItem Header="_Fill" Command="{Binding StyleEditor.OnPasteFill}"/>
-                <Separator/>
-                <MenuItem Header="_Text Style" Command="{Binding StyleEditor.OnPasteTextStyle}"/>
-                <Separator/>
-                <MenuItem Header="St_art Arrow Style" Command="{Binding StyleEditor.OnPasteStartArrowStyle}"/>
-                <MenuItem Header="_End Arrow Style" Command="{Binding StyleEditor.OnPasteEndArrowStyle}"/>
-                <Separator/>
-                <MenuItem Header="_Line Style" Command="{Binding StyleEditor.OnPasteLineStyle}"/>
-            </MenuItem>
+            <MenuItem Header="_Copy Style" Command="{Binding StyleEditor.OnCopyStyle}" InputGesture="Ctrl+Shift+C"/>
+            <MenuItem Header="Copy Stroke" Command="{Binding StyleEditor.OnCopyStroke}"/>
+            <MenuItem Header="Copy Fill" Command="{Binding StyleEditor.OnCopyFill}"/>
+            <MenuItem Header="Copy Text Style" Command="{Binding StyleEditor.OnCopyTextStyle}"/>
+            <MenuItem Header="Copy Start Arrow Style" Command="{Binding StyleEditor.OnCopyStartArrowStyle}"/>
+            <MenuItem Header="Copy End Arrow Style" Command="{Binding StyleEditor.OnCopyEndArrowStyle}"/>
+            <MenuItem Header="Copy Line Style" Command="{Binding StyleEditor.OnCopyLineStyle}"/>
+            <Separator/>
+            <MenuItem Header="_Paste Style" Command="{Binding StyleEditor.OnPasteStyle}" InputGesture="Ctrl+Shift+V"/>
+            <MenuItem Header="Paste Stroke" Command="{Binding StyleEditor.OnPasteStroke}"/>
+            <MenuItem Header="Paste Fill" Command="{Binding StyleEditor.OnPasteFill}"/>
+            <MenuItem Header="Paste Text Style" Command="{Binding StyleEditor.OnPasteTextStyle}"/>
+            <MenuItem Header="Paste Start Arrow Style" Command="{Binding StyleEditor.OnPasteStartArrowStyle}"/>
+            <MenuItem Header="Paste End Arrow Style" Command="{Binding StyleEditor.OnPasteEndArrowStyle}"/>
+            <MenuItem Header="Paste Line Style" Command="{Binding StyleEditor.OnPasteLineStyle}"/>
             <Separator/>
             <MenuItem Header="_Stroke">
+                <MenuItem Header="_Thickness">
+                    <MenuItem Header="0.25" Command="{Binding StyleEditor.OnStyleSetThickness}" CommandParameter="0.25"/>
+                    <MenuItem Header="0.5" Command="{Binding StyleEditor.OnStyleSetThickness}" CommandParameter="0.5"/>
+                    <MenuItem Header="0.75" Command="{Binding StyleEditor.OnStyleSetThickness}" CommandParameter="0.75"/>
+                    <MenuItem Header="1" Command="{Binding StyleEditor.OnStyleSetThickness}" CommandParameter="1"/>
+                    <MenuItem Header="1.5" Command="{Binding StyleEditor.OnStyleSetThickness}" CommandParameter="1.5"/>
+                    <MenuItem Header="2" Command="{Binding StyleEditor.OnStyleSetThickness}" CommandParameter="2"/>
+                    <MenuItem Header="2.25" Command="{Binding StyleEditor.OnStyleSetThickness}" CommandParameter="2.25"/>
+                    <MenuItem Header="3" Command="{Binding StyleEditor.OnStyleSetThickness}" CommandParameter="3"/>
+                    <MenuItem Header="4" Command="{Binding StyleEditor.OnStyleSetThickness}" CommandParameter="4"/>
+                    <MenuItem Header="4.5" Command="{Binding StyleEditor.OnStyleSetThickness}" CommandParameter="4.5"/>
+                    <MenuItem Header="5" Command="{Binding StyleEditor.OnStyleSetThickness}" CommandParameter="5"/>
+                    <MenuItem Header="6" Command="{Binding StyleEditor.OnStyleSetThickness}" CommandParameter="6"/>
+                    <MenuItem Header="7" Command="{Binding StyleEditor.OnStyleSetThickness}" CommandParameter="7"/>
+                    <MenuItem Header="8" Command="{Binding StyleEditor.OnStyleSetThickness}" CommandParameter="8"/>
+                    <MenuItem Header="9" Command="{Binding StyleEditor.OnStyleSetThickness}" CommandParameter="9"/>
+                    <MenuItem Header="10" Command="{Binding StyleEditor.OnStyleSetThickness}" CommandParameter="10"/>
+                </MenuItem>
                 <MenuItem Header="_Color">
                     <MenuItem Header="Blac_k" Command="{Binding StyleEditor.OnStyleSetStroke}" CommandParameter="Black"/>
                     <MenuItem Header="_Red" Command="{Binding StyleEditor.OnStyleSetStroke}" CommandParameter="Red"/>
@@ -218,17 +225,6 @@
                     <MenuItem Header="90%" Command="{Binding StyleEditor.OnStyleSetStrokeTransparency}" CommandParameter="229"/>
                     <MenuItem Header="100%" Command="{Binding StyleEditor.OnStyleSetStrokeTransparency}" CommandParameter="255"/>
                 </MenuItem>
-                <MenuItem Header="_Thickness">
-                    <MenuItem Header="0.25" Command="{Binding StyleEditor.OnStyleSetThickness}" CommandParameter="0.25"/>
-                    <MenuItem Header="0.5" Command="{Binding StyleEditor.OnStyleSetThickness}" CommandParameter="0.5"/>
-                    <MenuItem Header="0.75" Command="{Binding StyleEditor.OnStyleSetThickness}" CommandParameter="0.75"/>
-                    <MenuItem Header="1" Command="{Binding StyleEditor.OnStyleSetThickness}" CommandParameter="1"/>
-                    <MenuItem Header="1.5" Command="{Binding StyleEditor.OnStyleSetThickness}" CommandParameter="1.5"/>
-                    <MenuItem Header="2.25" Command="{Binding StyleEditor.OnStyleSetThickness}" CommandParameter="2.25"/>
-                    <MenuItem Header="3" Command="{Binding StyleEditor.OnStyleSetThickness}" CommandParameter="3"/>
-                    <MenuItem Header="4.5" Command="{Binding StyleEditor.OnStyleSetThickness}" CommandParameter="4.5"/>
-                    <MenuItem Header="6" Command="{Binding StyleEditor.OnStyleSetThickness}" CommandParameter="6"/>
-                </MenuItem>
                 <MenuItem Header="Line _Cap">
                     <MenuItem Header="Flat" Command="{Binding StyleEditor.OnStyleSetLineCap}" CommandParameter="Flat"/>
                     <MenuItem Header="Square" Command="{Binding StyleEditor.OnStyleSetLineCap}" CommandParameter="Square"/>
@@ -242,17 +238,17 @@
                     <MenuItem Header="Das_hDotDot" Command="{Binding StyleEditor.OnStyleSetDashes}" CommandParameter="2 2 0 2 0 2"/>
                 </MenuItem>
                 <MenuItem Header="Dash _Offset">
-                    <MenuItem Header="-5" Command="{Binding StyleEditor.OnStyleSetDashOffset}" CommandParameter="0"/>
-                    <MenuItem Header="-4" Command="{Binding StyleEditor.OnStyleSetDashOffset}" CommandParameter="0"/>
-                    <MenuItem Header="-3" Command="{Binding StyleEditor.OnStyleSetDashOffset}" CommandParameter="0"/>
-                    <MenuItem Header="-3" Command="{Binding StyleEditor.OnStyleSetDashOffset}" CommandParameter="0"/>
-                    <MenuItem Header="-1" Command="{Binding StyleEditor.OnStyleSetDashOffset}" CommandParameter="0"/>
+                    <MenuItem Header="-5" Command="{Binding StyleEditor.OnStyleSetDashOffset}" CommandParameter="-5"/>
+                    <MenuItem Header="-4" Command="{Binding StyleEditor.OnStyleSetDashOffset}" CommandParameter="-4"/>
+                    <MenuItem Header="-3" Command="{Binding StyleEditor.OnStyleSetDashOffset}" CommandParameter="-3"/>
+                    <MenuItem Header="-2" Command="{Binding StyleEditor.OnStyleSetDashOffset}" CommandParameter="-2"/>
+                    <MenuItem Header="-1" Command="{Binding StyleEditor.OnStyleSetDashOffset}" CommandParameter="-1"/>
                     <MenuItem Header="0" Command="{Binding StyleEditor.OnStyleSetDashOffset}" CommandParameter="0"/>
-                    <MenuItem Header="1" Command="{Binding StyleEditor.OnStyleSetDashOffset}" CommandParameter="0"/>
-                    <MenuItem Header="2" Command="{Binding StyleEditor.OnStyleSetDashOffset}" CommandParameter="0"/>
-                    <MenuItem Header="3" Command="{Binding StyleEditor.OnStyleSetDashOffset}" CommandParameter="0"/>
-                    <MenuItem Header="4" Command="{Binding StyleEditor.OnStyleSetDashOffset}" CommandParameter="0"/>
-                    <MenuItem Header="5" Command="{Binding StyleEditor.OnStyleSetDashOffset}" CommandParameter="0"/>
+                    <MenuItem Header="1" Command="{Binding StyleEditor.OnStyleSetDashOffset}" CommandParameter="1"/>
+                    <MenuItem Header="2" Command="{Binding StyleEditor.OnStyleSetDashOffset}" CommandParameter="2"/>
+                    <MenuItem Header="3" Command="{Binding StyleEditor.OnStyleSetDashOffset}" CommandParameter="3"/>
+                    <MenuItem Header="4" Command="{Binding StyleEditor.OnStyleSetDashOffset}" CommandParameter="4"/>
+                    <MenuItem Header="5" Command="{Binding StyleEditor.OnStyleSetDashOffset}" CommandParameter="5"/>
                 </MenuItem>
             </MenuItem>
             <MenuItem Header="_Fill">
@@ -368,6 +364,24 @@
                     <MenuItem Header="10" Command="{Binding StyleEditor.OnStyleSetStartArrowRadiusY}" CommandParameter="10"/>
                 </MenuItem>
                 <MenuItem Header="S_troke">
+                    <MenuItem Header="_Thickness">
+                        <MenuItem Header="0.25" Command="{Binding StyleEditor.OnStyleSetStartArrowThickness}" CommandParameter="0.25"/>
+                        <MenuItem Header="0.5" Command="{Binding StyleEditor.OnStyleSetStartArrowThickness}" CommandParameter="0.5"/>
+                        <MenuItem Header="0.75" Command="{Binding StyleEditor.OnStyleSetStartArrowThickness}" CommandParameter="0.75"/>
+                        <MenuItem Header="1" Command="{Binding StyleEditor.OnStyleSetStartArrowThickness}" CommandParameter="1"/>
+                        <MenuItem Header="1.5" Command="{Binding StyleEditor.OnStyleSetStartArrowThickness}" CommandParameter="1.5"/>
+                        <MenuItem Header="2" Command="{Binding StyleEditor.OnStyleSetStartArrowThickness}" CommandParameter="2"/>
+                        <MenuItem Header="2.25" Command="{Binding StyleEditor.OnStyleSetStartArrowThickness}" CommandParameter="2.25"/>
+                        <MenuItem Header="3" Command="{Binding StyleEditor.OnStyleSetStartArrowThickness}" CommandParameter="3"/>
+                        <MenuItem Header="4" Command="{Binding StyleEditor.OnStyleSetStartArrowThickness}" CommandParameter="4"/>
+                        <MenuItem Header="4.5" Command="{Binding StyleEditor.OnStyleSetStartArrowThickness}" CommandParameter="4.5"/>
+                        <MenuItem Header="5" Command="{Binding StyleEditor.OnStyleSetStartArrowThickness}" CommandParameter="5"/>
+                        <MenuItem Header="6" Command="{Binding StyleEditor.OnStyleSetStartArrowThickness}" CommandParameter="6"/>
+                        <MenuItem Header="7" Command="{Binding StyleEditor.OnStyleSetStartArrowThickness}" CommandParameter="7"/>
+                        <MenuItem Header="8" Command="{Binding StyleEditor.OnStyleSetStartArrowThickness}" CommandParameter="8"/>
+                        <MenuItem Header="9" Command="{Binding StyleEditor.OnStyleSetStartArrowThickness}" CommandParameter="9"/>
+                        <MenuItem Header="10" Command="{Binding StyleEditor.OnStyleSetStartArrowThickness}" CommandParameter="10"/>
+                    </MenuItem>
                     <MenuItem Header="_Color">
                         <MenuItem Header="Blac_k" Command="{Binding StyleEditor.OnStyleSetStartArrowStroke}" CommandParameter="Black"/>
                         <MenuItem Header="_Red" Command="{Binding StyleEditor.OnStyleSetStartArrowStroke}" CommandParameter="Red"/>
@@ -390,17 +404,6 @@
                         <MenuItem Header="90%" Command="{Binding StyleEditor.OnStyleSetStartArrowStrokeTransparency}" CommandParameter="229"/>
                         <MenuItem Header="100%" Command="{Binding StyleEditor.OnStyleSetStartArrowStrokeTransparency}" CommandParameter="255"/>
                     </MenuItem>
-                    <MenuItem Header="_Thickness">
-                        <MenuItem Header="0.25" Command="{Binding StyleEditor.OnStyleSetStartArrowThickness}" CommandParameter="0.25"/>
-                        <MenuItem Header="0.5" Command="{Binding StyleEditor.OnStyleSetStartArrowThickness}" CommandParameter="0.5"/>
-                        <MenuItem Header="0.75" Command="{Binding StyleEditor.OnStyleSetStartArrowThickness}" CommandParameter="0.75"/>
-                        <MenuItem Header="1" Command="{Binding StyleEditor.OnStyleSetStartArrowThickness}" CommandParameter="1"/>
-                        <MenuItem Header="1.5" Command="{Binding StyleEditor.OnStyleSetStartArrowThickness}" CommandParameter="1.5"/>
-                        <MenuItem Header="2.25" Command="{Binding StyleEditor.OnStyleSetStartArrowThickness}" CommandParameter="2.25"/>
-                        <MenuItem Header="3" Command="{Binding StyleEditor.OnStyleSetStartArrowThickness}" CommandParameter="3"/>
-                        <MenuItem Header="4.5" Command="{Binding StyleEditor.OnStyleSetStartArrowThickness}" CommandParameter="4.5"/>
-                        <MenuItem Header="6" Command="{Binding StyleEditor.OnStyleSetStartArrowThickness}" CommandParameter="6"/>
-                    </MenuItem>
                     <MenuItem Header="Line _Cap">
                         <MenuItem Header="Flat" Command="{Binding StyleEditor.OnStyleSetStartArrowLineCap}" CommandParameter="Flat"/>
                         <MenuItem Header="Square" Command="{Binding StyleEditor.OnStyleSetStartArrowLineCap}" CommandParameter="Square"/>
@@ -414,17 +417,17 @@
                         <MenuItem Header="Das_hDotDot" Command="{Binding StyleEditor.OnStyleSetStartArrowDashes}" CommandParameter="2 2 0 2 0 2"/>
                     </MenuItem>
                     <MenuItem Header="Dash _Offset">
-                        <MenuItem Header="-5" Command="{Binding StyleEditor.OnStyleSetStartArrowDashOffset}" CommandParameter="0"/>
-                        <MenuItem Header="-4" Command="{Binding StyleEditor.OnStyleSetStartArrowDashOffset}" CommandParameter="0"/>
-                        <MenuItem Header="-3" Command="{Binding StyleEditor.OnStyleSetStartArrowDashOffset}" CommandParameter="0"/>
-                        <MenuItem Header="-3" Command="{Binding StyleEditor.OnStyleSetStartArrowDashOffset}" CommandParameter="0"/>
-                        <MenuItem Header="-1" Command="{Binding StyleEditor.OnStyleSetStartArrowDashOffset}" CommandParameter="0"/>
+                        <MenuItem Header="-5" Command="{Binding StyleEditor.OnStyleSetStartArrowDashOffset}" CommandParameter="-5"/>
+                        <MenuItem Header="-4" Command="{Binding StyleEditor.OnStyleSetStartArrowDashOffset}" CommandParameter="-4"/>
+                        <MenuItem Header="-3" Command="{Binding StyleEditor.OnStyleSetStartArrowDashOffset}" CommandParameter="-3"/>
+                        <MenuItem Header="-2" Command="{Binding StyleEditor.OnStyleSetStartArrowDashOffset}" CommandParameter="-2"/>
+                        <MenuItem Header="-1" Command="{Binding StyleEditor.OnStyleSetStartArrowDashOffset}" CommandParameter="-1"/>
                         <MenuItem Header="0" Command="{Binding StyleEditor.OnStyleSetStartArrowDashOffset}" CommandParameter="0"/>
-                        <MenuItem Header="1" Command="{Binding StyleEditor.OnStyleSetStartArrowDashOffset}" CommandParameter="0"/>
-                        <MenuItem Header="2" Command="{Binding StyleEditor.OnStyleSetStartArrowDashOffset}" CommandParameter="0"/>
-                        <MenuItem Header="3" Command="{Binding StyleEditor.OnStyleSetStartArrowDashOffset}" CommandParameter="0"/>
-                        <MenuItem Header="4" Command="{Binding StyleEditor.OnStyleSetStartArrowDashOffset}" CommandParameter="0"/>
-                        <MenuItem Header="5" Command="{Binding StyleEditor.OnStyleSetStartArrowDashOffset}" CommandParameter="0"/>
+                        <MenuItem Header="1" Command="{Binding StyleEditor.OnStyleSetStartArrowDashOffset}" CommandParameter="1"/>
+                        <MenuItem Header="2" Command="{Binding StyleEditor.OnStyleSetStartArrowDashOffset}" CommandParameter="2"/>
+                        <MenuItem Header="3" Command="{Binding StyleEditor.OnStyleSetStartArrowDashOffset}" CommandParameter="3"/>
+                        <MenuItem Header="4" Command="{Binding StyleEditor.OnStyleSetStartArrowDashOffset}" CommandParameter="4"/>
+                        <MenuItem Header="5" Command="{Binding StyleEditor.OnStyleSetStartArrowDashOffset}" CommandParameter="5"/>
                     </MenuItem>
                 </MenuItem>
                 <MenuItem Header="F_ill">
@@ -488,6 +491,24 @@
                     <MenuItem Header="10" Command="{Binding StyleEditor.OnStyleSetEndArrowRadiusY}" CommandParameter="10"/>
                 </MenuItem>
                 <MenuItem Header="S_troke">
+                    <MenuItem Header="_Thickness">
+                        <MenuItem Header="0.25" Command="{Binding StyleEditor.OnStyleSetEndArrowThickness}" CommandParameter="0.25"/>
+                        <MenuItem Header="0.5" Command="{Binding StyleEditor.OnStyleSetEndArrowThickness}" CommandParameter="0.5"/>
+                        <MenuItem Header="0.75" Command="{Binding StyleEditor.OnStyleSetEndArrowThickness}" CommandParameter="0.75"/>
+                        <MenuItem Header="1" Command="{Binding StyleEditor.OnStyleSetEndArrowThickness}" CommandParameter="1"/>
+                        <MenuItem Header="1.5" Command="{Binding StyleEditor.OnStyleSetEndArrowThickness}" CommandParameter="1.5"/>
+                        <MenuItem Header="2" Command="{Binding StyleEditor.OnStyleSetEndArrowThickness}" CommandParameter="2"/>
+                        <MenuItem Header="2.25" Command="{Binding StyleEditor.OnStyleSetEndArrowThickness}" CommandParameter="2.25"/>
+                        <MenuItem Header="3" Command="{Binding StyleEditor.OnStyleSetEndArrowThickness}" CommandParameter="3"/>
+                        <MenuItem Header="4" Command="{Binding StyleEditor.OnStyleSetEndArrowThickness}" CommandParameter="4"/>
+                        <MenuItem Header="4.5" Command="{Binding StyleEditor.OnStyleSetEndArrowThickness}" CommandParameter="4.5"/>
+                        <MenuItem Header="5" Command="{Binding StyleEditor.OnStyleSetEndArrowThickness}" CommandParameter="5"/>
+                        <MenuItem Header="6" Command="{Binding StyleEditor.OnStyleSetEndArrowThickness}" CommandParameter="6"/>
+                        <MenuItem Header="7" Command="{Binding StyleEditor.OnStyleSetEndArrowThickness}" CommandParameter="7"/>
+                        <MenuItem Header="8" Command="{Binding StyleEditor.OnStyleSetEndArrowThickness}" CommandParameter="8"/>
+                        <MenuItem Header="9" Command="{Binding StyleEditor.OnStyleSetEndArrowThickness}" CommandParameter="9"/>
+                        <MenuItem Header="10" Command="{Binding StyleEditor.OnStyleSetEndArrowThickness}" CommandParameter="10"/>
+                    </MenuItem>
                     <MenuItem Header="_Color">
                         <MenuItem Header="Blac_k" Command="{Binding StyleEditor.OnStyleSetEndArrowStroke}" CommandParameter="Black"/>
                         <MenuItem Header="_Red" Command="{Binding StyleEditor.OnStyleSetEndArrowStroke}" CommandParameter="Red"/>
@@ -510,17 +531,6 @@
                         <MenuItem Header="90%" Command="{Binding StyleEditor.OnStyleSetEndArrowStrokeTransparency}" CommandParameter="229"/>
                         <MenuItem Header="100%" Command="{Binding StyleEditor.OnStyleSetEndArrowStrokeTransparency}" CommandParameter="255"/>
                     </MenuItem>
-                    <MenuItem Header="_Thickness">
-                        <MenuItem Header="0.25" Command="{Binding StyleEditor.OnStyleSetEndArrowThickness}" CommandParameter="0.25"/>
-                        <MenuItem Header="0.5" Command="{Binding StyleEditor.OnStyleSetEndArrowThickness}" CommandParameter="0.5"/>
-                        <MenuItem Header="0.75" Command="{Binding StyleEditor.OnStyleSetEndArrowThickness}" CommandParameter="0.75"/>
-                        <MenuItem Header="1" Command="{Binding StyleEditor.OnStyleSetEndArrowThickness}" CommandParameter="1"/>
-                        <MenuItem Header="1.5" Command="{Binding StyleEditor.OnStyleSetEndArrowThickness}" CommandParameter="1.5"/>
-                        <MenuItem Header="2.25" Command="{Binding StyleEditor.OnStyleSetEndArrowThickness}" CommandParameter="2.25"/>
-                        <MenuItem Header="3" Command="{Binding StyleEditor.OnStyleSetEndArrowThickness}" CommandParameter="3"/>
-                        <MenuItem Header="4.5" Command="{Binding StyleEditor.OnStyleSetEndArrowThickness}" CommandParameter="4.5"/>
-                        <MenuItem Header="6" Command="{Binding StyleEditor.OnStyleSetEndArrowThickness}" CommandParameter="6"/>
-                    </MenuItem>
                     <MenuItem Header="Line _Cap">
                         <MenuItem Header="Flat" Command="{Binding StyleEditor.OnStyleSetEndArrowLineCap}" CommandParameter="Flat"/>
                         <MenuItem Header="Square" Command="{Binding StyleEditor.OnStyleSetEndArrowLineCap}" CommandParameter="Square"/>
@@ -534,17 +544,17 @@
                         <MenuItem Header="Das_hDotDot" Command="{Binding StyleEditor.OnStyleSetEndArrowDashes}" CommandParameter="2 2 0 2 0 2"/>
                     </MenuItem>
                     <MenuItem Header="Dash _Offset">
-                        <MenuItem Header="-5" Command="{Binding StyleEditor.OnStyleSetEndArrowDashOffset}" CommandParameter="0"/>
-                        <MenuItem Header="-4" Command="{Binding StyleEditor.OnStyleSetEndArrowDashOffset}" CommandParameter="0"/>
-                        <MenuItem Header="-3" Command="{Binding StyleEditor.OnStyleSetEndArrowDashOffset}" CommandParameter="0"/>
-                        <MenuItem Header="-3" Command="{Binding StyleEditor.OnStyleSetEndArrowDashOffset}" CommandParameter="0"/>
-                        <MenuItem Header="-1" Command="{Binding StyleEditor.OnStyleSetEndArrowDashOffset}" CommandParameter="0"/>
+                        <MenuItem Header="-5" Command="{Binding StyleEditor.OnStyleSetEndArrowDashOffset}" CommandParameter="-5"/>
+                        <MenuItem Header="-4" Command="{Binding StyleEditor.OnStyleSetEndArrowDashOffset}" CommandParameter="-4"/>
+                        <MenuItem Header="-3" Command="{Binding StyleEditor.OnStyleSetEndArrowDashOffset}" CommandParameter="-3"/>
+                        <MenuItem Header="-2" Command="{Binding StyleEditor.OnStyleSetEndArrowDashOffset}" CommandParameter="-2"/>
+                        <MenuItem Header="-1" Command="{Binding StyleEditor.OnStyleSetEndArrowDashOffset}" CommandParameter="-1"/>
                         <MenuItem Header="0" Command="{Binding StyleEditor.OnStyleSetEndArrowDashOffset}" CommandParameter="0"/>
-                        <MenuItem Header="1" Command="{Binding StyleEditor.OnStyleSetEndArrowDashOffset}" CommandParameter="0"/>
-                        <MenuItem Header="2" Command="{Binding StyleEditor.OnStyleSetEndArrowDashOffset}" CommandParameter="0"/>
-                        <MenuItem Header="3" Command="{Binding StyleEditor.OnStyleSetEndArrowDashOffset}" CommandParameter="0"/>
-                        <MenuItem Header="4" Command="{Binding StyleEditor.OnStyleSetEndArrowDashOffset}" CommandParameter="0"/>
-                        <MenuItem Header="5" Command="{Binding StyleEditor.OnStyleSetEndArrowDashOffset}" CommandParameter="0"/>
+                        <MenuItem Header="1" Command="{Binding StyleEditor.OnStyleSetEndArrowDashOffset}" CommandParameter="1"/>
+                        <MenuItem Header="2" Command="{Binding StyleEditor.OnStyleSetEndArrowDashOffset}" CommandParameter="2"/>
+                        <MenuItem Header="3" Command="{Binding StyleEditor.OnStyleSetEndArrowDashOffset}" CommandParameter="3"/>
+                        <MenuItem Header="4" Command="{Binding StyleEditor.OnStyleSetEndArrowDashOffset}" CommandParameter="4"/>
+                        <MenuItem Header="5" Command="{Binding StyleEditor.OnStyleSetEndArrowDashOffset}" CommandParameter="5"/>
                     </MenuItem>
                 </MenuItem>
                 <MenuItem Header="F_ill">
