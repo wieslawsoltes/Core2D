@@ -94,6 +94,7 @@
             <Setter Property="Padding" Value="0"/>
             <Setter Property="FontSize" Value="{DynamicResource FontSizeNormal}"/>
             <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="VerticalAlignment" Value="Stretch"/>
         </Style>
         <Style Selector="Button.property /template/ ContentPresenter">
             <Setter Property="Padding" Value="0"/>
