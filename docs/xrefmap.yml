@@ -7610,15 +7610,15 @@ references:
   isSpec: "True"
   fullName: Core2D.Editor.IProjectEditor.OnDistributeVerticallySelected
   nameWithType: IProjectEditor.OnDistributeVerticallySelected
-- uid: Core2D.Editor.IProjectEditor.OnDropFiles(System.String[])
-  name: OnDropFiles(String[])
-  href: api/Core2D.Editor.IProjectEditor.html#Core2D_Editor_IProjectEditor_OnDropFiles_System_String___
-  commentId: M:Core2D.Editor.IProjectEditor.OnDropFiles(System.String[])
-  name.vb: OnDropFiles(String())
-  fullName: Core2D.Editor.IProjectEditor.OnDropFiles(System.String[])
-  fullName.vb: Core2D.Editor.IProjectEditor.OnDropFiles(System.String())
-  nameWithType: IProjectEditor.OnDropFiles(String[])
-  nameWithType.vb: IProjectEditor.OnDropFiles(String())
+- uid: Core2D.Editor.IProjectEditor.OnDropFiles(System.String[],System.Double,System.Double)
+  name: OnDropFiles(String[], Double, Double)
+  href: api/Core2D.Editor.IProjectEditor.html#Core2D_Editor_IProjectEditor_OnDropFiles_System_String___System_Double_System_Double_
+  commentId: M:Core2D.Editor.IProjectEditor.OnDropFiles(System.String[],System.Double,System.Double)
+  name.vb: OnDropFiles(String(), Double, Double)
+  fullName: Core2D.Editor.IProjectEditor.OnDropFiles(System.String[], System.Double, System.Double)
+  fullName.vb: Core2D.Editor.IProjectEditor.OnDropFiles(System.String(), System.Double, System.Double)
+  nameWithType: IProjectEditor.OnDropFiles(String[], Double, Double)
+  nameWithType.vb: IProjectEditor.OnDropFiles(String(), Double, Double)
 - uid: Core2D.Editor.IProjectEditor.OnDropFiles*
   name: OnDropFiles
   href: api/Core2D.Editor.IProjectEditor.html#Core2D_Editor_IProjectEditor_OnDropFiles_
@@ -7626,6 +7626,19 @@ references:
   isSpec: "True"
   fullName: Core2D.Editor.IProjectEditor.OnDropFiles
   nameWithType: IProjectEditor.OnDropFiles
+- uid: Core2D.Editor.IProjectEditor.OnDropImageKey(System.String,System.Double,System.Double)
+  name: OnDropImageKey(String, Double, Double)
+  href: api/Core2D.Editor.IProjectEditor.html#Core2D_Editor_IProjectEditor_OnDropImageKey_System_String_System_Double_System_Double_
+  commentId: M:Core2D.Editor.IProjectEditor.OnDropImageKey(System.String,System.Double,System.Double)
+  fullName: Core2D.Editor.IProjectEditor.OnDropImageKey(System.String, System.Double, System.Double)
+  nameWithType: IProjectEditor.OnDropImageKey(String, Double, Double)
+- uid: Core2D.Editor.IProjectEditor.OnDropImageKey*
+  name: OnDropImageKey
+  href: api/Core2D.Editor.IProjectEditor.html#Core2D_Editor_IProjectEditor_OnDropImageKey_
+  commentId: Overload:Core2D.Editor.IProjectEditor.OnDropImageKey
+  isSpec: "True"
+  fullName: Core2D.Editor.IProjectEditor.OnDropImageKey
+  nameWithType: IProjectEditor.OnDropImageKey
 - uid: Core2D.Editor.IProjectEditor.OnDropRecord(Core2D.Data.IRecord,System.Double,System.Double,System.Boolean)
   name: OnDropRecord(IRecord, Double, Double, Boolean)
   href: api/Core2D.Editor.IProjectEditor.html#Core2D_Editor_IProjectEditor_OnDropRecord_Core2D_Data_IRecord_System_Double_System_Double_System_Boolean_
@@ -12128,15 +12141,15 @@ references:
   isSpec: "True"
   fullName: Core2D.Editor.ProjectEditor.OnDistributeVerticallySelected
   nameWithType: ProjectEditor.OnDistributeVerticallySelected
-- uid: Core2D.Editor.ProjectEditor.OnDropFiles(System.String[])
-  name: OnDropFiles(String[])
-  href: api/Core2D.Editor.ProjectEditor.html#Core2D_Editor_ProjectEditor_OnDropFiles_System_String___
-  commentId: M:Core2D.Editor.ProjectEditor.OnDropFiles(System.String[])
-  name.vb: OnDropFiles(String())
-  fullName: Core2D.Editor.ProjectEditor.OnDropFiles(System.String[])
-  fullName.vb: Core2D.Editor.ProjectEditor.OnDropFiles(System.String())
-  nameWithType: ProjectEditor.OnDropFiles(String[])
-  nameWithType.vb: ProjectEditor.OnDropFiles(String())
+- uid: Core2D.Editor.ProjectEditor.OnDropFiles(System.String[],System.Double,System.Double)
+  name: OnDropFiles(String[], Double, Double)
+  href: api/Core2D.Editor.ProjectEditor.html#Core2D_Editor_ProjectEditor_OnDropFiles_System_String___System_Double_System_Double_
+  commentId: M:Core2D.Editor.ProjectEditor.OnDropFiles(System.String[],System.Double,System.Double)
+  name.vb: OnDropFiles(String(), Double, Double)
+  fullName: Core2D.Editor.ProjectEditor.OnDropFiles(System.String[], System.Double, System.Double)
+  fullName.vb: Core2D.Editor.ProjectEditor.OnDropFiles(System.String(), System.Double, System.Double)
+  nameWithType: ProjectEditor.OnDropFiles(String[], Double, Double)
+  nameWithType.vb: ProjectEditor.OnDropFiles(String(), Double, Double)
 - uid: Core2D.Editor.ProjectEditor.OnDropFiles*
   name: OnDropFiles
   href: api/Core2D.Editor.ProjectEditor.html#Core2D_Editor_ProjectEditor_OnDropFiles_
@@ -12144,6 +12157,19 @@ references:
   isSpec: "True"
   fullName: Core2D.Editor.ProjectEditor.OnDropFiles
   nameWithType: ProjectEditor.OnDropFiles
+- uid: Core2D.Editor.ProjectEditor.OnDropImageKey(System.String,System.Double,System.Double)
+  name: OnDropImageKey(String, Double, Double)
+  href: api/Core2D.Editor.ProjectEditor.html#Core2D_Editor_ProjectEditor_OnDropImageKey_System_String_System_Double_System_Double_
+  commentId: M:Core2D.Editor.ProjectEditor.OnDropImageKey(System.String,System.Double,System.Double)
+  fullName: Core2D.Editor.ProjectEditor.OnDropImageKey(System.String, System.Double, System.Double)
+  nameWithType: ProjectEditor.OnDropImageKey(String, Double, Double)
+- uid: Core2D.Editor.ProjectEditor.OnDropImageKey*
+  name: OnDropImageKey
+  href: api/Core2D.Editor.ProjectEditor.html#Core2D_Editor_ProjectEditor_OnDropImageKey_
+  commentId: Overload:Core2D.Editor.ProjectEditor.OnDropImageKey
+  isSpec: "True"
+  fullName: Core2D.Editor.ProjectEditor.OnDropImageKey
+  nameWithType: ProjectEditor.OnDropImageKey
 - uid: Core2D.Editor.ProjectEditor.OnDropRecord(Core2D.Data.IRecord,System.Double,System.Double,System.Boolean)
   name: OnDropRecord(IRecord, Double, Double, Boolean)
   href: api/Core2D.Editor.ProjectEditor.html#Core2D_Editor_ProjectEditor_OnDropRecord_Core2D_Data_IRecord_System_Double_System_Double_System_Boolean_
