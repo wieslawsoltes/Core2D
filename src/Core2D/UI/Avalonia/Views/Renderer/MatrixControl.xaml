@@ -11,17 +11,17 @@
     <ScrollViewer>
         <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto" ColumnDefinitions="Auto,*">
             <TextBlock Text="M11" Classes="left" Grid.Row="0" Grid.Column="0"/>
-            <TextBox Text="{Binding M11, Mode=TwoWay}" Classes="center" Grid.Row="0" Grid.Column="1"/>
+            <TextBox Text="{Binding M11, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
             <TextBlock Text="M12" Classes="left" Grid.Row="1" Grid.Column="0"/>
-            <TextBox Text="{Binding M12, Mode=TwoWay}" Classes="center" Grid.Row="1" Grid.Column="1"/>
+            <TextBox Text="{Binding M12, Mode=TwoWay}" Classes="left" Grid.Row="1" Grid.Column="1"/>
             <TextBlock Text="M21" Classes="left" Grid.Row="2" Grid.Column="0"/>
-            <TextBox Text="{Binding M21, Mode=TwoWay}" Classes="center" Grid.Row="2" Grid.Column="1"/>
+            <TextBox Text="{Binding M21, Mode=TwoWay}" Classes="left" Grid.Row="2" Grid.Column="1"/>
             <TextBlock Text="M22" Classes="left" Grid.Row="3" Grid.Column="0"/>
-            <TextBox Text="{Binding M22, Mode=TwoWay}" Classes="center" Grid.Row="3" Grid.Column="1"/>
+            <TextBox Text="{Binding M22, Mode=TwoWay}" Classes="left" Grid.Row="3" Grid.Column="1"/>
             <TextBlock Text="OffsetX" Classes="left" Grid.Row="4" Grid.Column="0"/>
-            <TextBox Text="{Binding OffsetX, Mode=TwoWay}" Classes="center" Grid.Row="4" Grid.Column="1"/>
+            <TextBox Text="{Binding OffsetX, Mode=TwoWay}" Classes="left" Grid.Row="4" Grid.Column="1"/>
             <TextBlock Text="OffsetY" Classes="left" Grid.Row="5" Grid.Column="0"/>
-            <TextBox Text="{Binding OffsetY, Mode=TwoWay}" Classes="center" Grid.Row="5" Grid.Column="1"/>
+            <TextBox Text="{Binding OffsetY, Mode=TwoWay}" Classes="left" Grid.Row="5" Grid.Column="1"/>
         </Grid>
     </ScrollViewer>
 </UserControl>
