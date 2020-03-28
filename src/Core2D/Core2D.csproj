@@ -118,6 +118,7 @@
     <PackageReference Include="Avalonia.Controls.PanAndZoom" Version="2.3.999-build*" />
     <PackageReference Include="Autofac" Version="5.1.2" />
     <PackageReference Include="CsvHelper" Version="15.0.3" />
+    <PackageReference Include="DocumentFormat.OpenXml" Version="2.10.1" />
     <PackageReference Include="Math.Spatial" Version="1.1.0" />
     <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Scripting" Version="3.5.0" Condition="'$(CoreRT)' != 'True'" />
     <PackageReference Include="netDXF.netstandard" Version="2.3.0" />
