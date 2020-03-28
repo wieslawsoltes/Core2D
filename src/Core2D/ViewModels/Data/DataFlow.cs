@@ -1,4 +1,5 @@
 ﻿using System.Collections.Immutable;
+using Core2D.Bindings;
 using Core2D.Containers;
 using Core2D.Shapes;
 
@@ -84,7 +85,7 @@ namespace Core2D.Data
         {
             var properties = (ImmutableArray<IProperty>)db;
             var record = (IRecord)r;
-            var tbind = text.BindText(properties, record);
+            var tbind = TextBinding.Bind(text, properties, record);
             text.SetProperty(nameof(ITextShape.Text), tbind);
         }
 
