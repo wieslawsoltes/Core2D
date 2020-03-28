@@ -6722,32 +6722,6 @@ references:
   isSpec: "True"
   fullName: Core2D.Editor.IProjectEditor.ContainerFactory
   nameWithType: IProjectEditor.ContainerFactory
-- uid: Core2D.Editor.IProjectEditor.CsvReader
-  name: CsvReader
-  href: api/Core2D.Editor.IProjectEditor.html#Core2D_Editor_IProjectEditor_CsvReader
-  commentId: P:Core2D.Editor.IProjectEditor.CsvReader
-  fullName: Core2D.Editor.IProjectEditor.CsvReader
-  nameWithType: IProjectEditor.CsvReader
-- uid: Core2D.Editor.IProjectEditor.CsvReader*
-  name: CsvReader
-  href: api/Core2D.Editor.IProjectEditor.html#Core2D_Editor_IProjectEditor_CsvReader_
-  commentId: Overload:Core2D.Editor.IProjectEditor.CsvReader
-  isSpec: "True"
-  fullName: Core2D.Editor.IProjectEditor.CsvReader
-  nameWithType: IProjectEditor.CsvReader
-- uid: Core2D.Editor.IProjectEditor.CsvWriter
-  name: CsvWriter
-  href: api/Core2D.Editor.IProjectEditor.html#Core2D_Editor_IProjectEditor_CsvWriter
-  commentId: P:Core2D.Editor.IProjectEditor.CsvWriter
-  fullName: Core2D.Editor.IProjectEditor.CsvWriter
-  nameWithType: IProjectEditor.CsvWriter
-- uid: Core2D.Editor.IProjectEditor.CsvWriter*
-  name: CsvWriter
-  href: api/Core2D.Editor.IProjectEditor.html#Core2D_Editor_IProjectEditor_CsvWriter_
-  commentId: Overload:Core2D.Editor.IProjectEditor.CsvWriter
-  isSpec: "True"
-  fullName: Core2D.Editor.IProjectEditor.CsvWriter
-  nameWithType: IProjectEditor.CsvWriter
 - uid: Core2D.Editor.IProjectEditor.CurrentPathTool
   name: CurrentPathTool
   href: api/Core2D.Editor.IProjectEditor.html#Core2D_Editor_IProjectEditor_CurrentPathTool
@@ -7807,12 +7781,15 @@ references:
   isSpec: "True"
   fullName: Core2D.Editor.IProjectEditor.OnExport
   nameWithType: IProjectEditor.OnExport
-- uid: Core2D.Editor.IProjectEditor.OnExportData(System.String,Core2D.Data.IDatabase)
-  name: OnExportData(String, IDatabase)
-  href: api/Core2D.Editor.IProjectEditor.html#Core2D_Editor_IProjectEditor_OnExportData_System_String_Core2D_Data_IDatabase_
-  commentId: M:Core2D.Editor.IProjectEditor.OnExportData(System.String,Core2D.Data.IDatabase)
-  fullName: Core2D.Editor.IProjectEditor.OnExportData(System.String, Core2D.Data.IDatabase)
-  nameWithType: IProjectEditor.OnExportData(String, IDatabase)
+- uid: Core2D.Editor.IProjectEditor.OnExportData(System.String,Core2D.Data.IDatabase,Core2D.Interfaces.ITextFieldWriter{Core2D.Data.IDatabase})
+  name: OnExportData(String, IDatabase, ITextFieldWriter<IDatabase>)
+  href: api/Core2D.Editor.IProjectEditor.html#Core2D_Editor_IProjectEditor_OnExportData_System_String_Core2D_Data_IDatabase_Core2D_Interfaces_ITextFieldWriter_Core2D_Data_IDatabase__
+  commentId: M:Core2D.Editor.IProjectEditor.OnExportData(System.String,Core2D.Data.IDatabase,Core2D.Interfaces.ITextFieldWriter{Core2D.Data.IDatabase})
+  name.vb: OnExportData(String, IDatabase, ITextFieldWriter(Of IDatabase))
+  fullName: Core2D.Editor.IProjectEditor.OnExportData(System.String, Core2D.Data.IDatabase, Core2D.Interfaces.ITextFieldWriter<Core2D.Data.IDatabase>)
+  fullName.vb: Core2D.Editor.IProjectEditor.OnExportData(System.String, Core2D.Data.IDatabase, Core2D.Interfaces.ITextFieldWriter(Of Core2D.Data.IDatabase))
+  nameWithType: IProjectEditor.OnExportData(String, IDatabase, ITextFieldWriter<IDatabase>)
+  nameWithType.vb: IProjectEditor.OnExportData(String, IDatabase, ITextFieldWriter(Of IDatabase))
 - uid: Core2D.Editor.IProjectEditor.OnExportData*
   name: OnExportData
   href: api/Core2D.Editor.IProjectEditor.html#Core2D_Editor_IProjectEditor_OnExportData_
@@ -7872,18 +7849,15 @@ references:
   isSpec: "True"
   fullName: Core2D.Editor.IProjectEditor.OnGroupSelected
   nameWithType: IProjectEditor.OnGroupSelected
-- uid: Core2D.Editor.IProjectEditor.OnImportData(Core2D.Containers.IProjectContainer,System.String)
-  name: OnImportData(IProjectContainer, String)
-  href: api/Core2D.Editor.IProjectEditor.html#Core2D_Editor_IProjectEditor_OnImportData_Core2D_Containers_IProjectContainer_System_String_
-  commentId: M:Core2D.Editor.IProjectEditor.OnImportData(Core2D.Containers.IProjectContainer,System.String)
-  fullName: Core2D.Editor.IProjectEditor.OnImportData(Core2D.Containers.IProjectContainer, System.String)
-  nameWithType: IProjectEditor.OnImportData(IProjectContainer, String)
-- uid: Core2D.Editor.IProjectEditor.OnImportData(System.String)
-  name: OnImportData(String)
-  href: api/Core2D.Editor.IProjectEditor.html#Core2D_Editor_IProjectEditor_OnImportData_System_String_
-  commentId: M:Core2D.Editor.IProjectEditor.OnImportData(System.String)
-  fullName: Core2D.Editor.IProjectEditor.OnImportData(System.String)
-  nameWithType: IProjectEditor.OnImportData(String)
+- uid: Core2D.Editor.IProjectEditor.OnImportData(Core2D.Containers.IProjectContainer,System.String,Core2D.Interfaces.ITextFieldReader{Core2D.Data.IDatabase})
+  name: OnImportData(IProjectContainer, String, ITextFieldReader<IDatabase>)
+  href: api/Core2D.Editor.IProjectEditor.html#Core2D_Editor_IProjectEditor_OnImportData_Core2D_Containers_IProjectContainer_System_String_Core2D_Interfaces_ITextFieldReader_Core2D_Data_IDatabase__
+  commentId: M:Core2D.Editor.IProjectEditor.OnImportData(Core2D.Containers.IProjectContainer,System.String,Core2D.Interfaces.ITextFieldReader{Core2D.Data.IDatabase})
+  name.vb: OnImportData(IProjectContainer, String, ITextFieldReader(Of IDatabase))
+  fullName: Core2D.Editor.IProjectEditor.OnImportData(Core2D.Containers.IProjectContainer, System.String, Core2D.Interfaces.ITextFieldReader<Core2D.Data.IDatabase>)
+  fullName.vb: Core2D.Editor.IProjectEditor.OnImportData(Core2D.Containers.IProjectContainer, System.String, Core2D.Interfaces.ITextFieldReader(Of Core2D.Data.IDatabase))
+  nameWithType: IProjectEditor.OnImportData(IProjectContainer, String, ITextFieldReader<IDatabase>)
+  nameWithType.vb: IProjectEditor.OnImportData(IProjectContainer, String, ITextFieldReader(Of IDatabase))
 - uid: Core2D.Editor.IProjectEditor.OnImportData*
   name: OnImportData
   href: api/Core2D.Editor.IProjectEditor.html#Core2D_Editor_IProjectEditor_OnImportData_
@@ -8890,12 +8864,15 @@ references:
   isSpec: "True"
   fullName: Core2D.Editor.IProjectEditor.OnUnload
   nameWithType: IProjectEditor.OnUnload
-- uid: Core2D.Editor.IProjectEditor.OnUpdateData(System.String,Core2D.Data.IDatabase)
-  name: OnUpdateData(String, IDatabase)
-  href: api/Core2D.Editor.IProjectEditor.html#Core2D_Editor_IProjectEditor_OnUpdateData_System_String_Core2D_Data_IDatabase_
-  commentId: M:Core2D.Editor.IProjectEditor.OnUpdateData(System.String,Core2D.Data.IDatabase)
-  fullName: Core2D.Editor.IProjectEditor.OnUpdateData(System.String, Core2D.Data.IDatabase)
-  nameWithType: IProjectEditor.OnUpdateData(String, IDatabase)
+- uid: Core2D.Editor.IProjectEditor.OnUpdateData(System.String,Core2D.Data.IDatabase,Core2D.Interfaces.ITextFieldReader{Core2D.Data.IDatabase})
+  name: OnUpdateData(String, IDatabase, ITextFieldReader<IDatabase>)
+  href: api/Core2D.Editor.IProjectEditor.html#Core2D_Editor_IProjectEditor_OnUpdateData_System_String_Core2D_Data_IDatabase_Core2D_Interfaces_ITextFieldReader_Core2D_Data_IDatabase__
+  commentId: M:Core2D.Editor.IProjectEditor.OnUpdateData(System.String,Core2D.Data.IDatabase,Core2D.Interfaces.ITextFieldReader{Core2D.Data.IDatabase})
+  name.vb: OnUpdateData(String, IDatabase, ITextFieldReader(Of IDatabase))
+  fullName: Core2D.Editor.IProjectEditor.OnUpdateData(System.String, Core2D.Data.IDatabase, Core2D.Interfaces.ITextFieldReader<Core2D.Data.IDatabase>)
+  fullName.vb: Core2D.Editor.IProjectEditor.OnUpdateData(System.String, Core2D.Data.IDatabase, Core2D.Interfaces.ITextFieldReader(Of Core2D.Data.IDatabase))
+  nameWithType: IProjectEditor.OnUpdateData(String, IDatabase, ITextFieldReader<IDatabase>)
+  nameWithType.vb: IProjectEditor.OnUpdateData(String, IDatabase, ITextFieldReader(Of IDatabase))
 - uid: Core2D.Editor.IProjectEditor.OnUpdateData*
   name: OnUpdateData
   href: api/Core2D.Editor.IProjectEditor.html#Core2D_Editor_IProjectEditor_OnUpdateData_
@@ -9097,6 +9074,32 @@ references:
   isSpec: "True"
   fullName: Core2D.Editor.IProjectEditor.TextClipboard
   nameWithType: IProjectEditor.TextClipboard
+- uid: Core2D.Editor.IProjectEditor.TextFieldReaders
+  name: TextFieldReaders
+  href: api/Core2D.Editor.IProjectEditor.html#Core2D_Editor_IProjectEditor_TextFieldReaders
+  commentId: P:Core2D.Editor.IProjectEditor.TextFieldReaders
+  fullName: Core2D.Editor.IProjectEditor.TextFieldReaders
+  nameWithType: IProjectEditor.TextFieldReaders
+- uid: Core2D.Editor.IProjectEditor.TextFieldReaders*
+  name: TextFieldReaders
+  href: api/Core2D.Editor.IProjectEditor.html#Core2D_Editor_IProjectEditor_TextFieldReaders_
+  commentId: Overload:Core2D.Editor.IProjectEditor.TextFieldReaders
+  isSpec: "True"
+  fullName: Core2D.Editor.IProjectEditor.TextFieldReaders
+  nameWithType: IProjectEditor.TextFieldReaders
+- uid: Core2D.Editor.IProjectEditor.TextFieldWriters
+  name: TextFieldWriters
+  href: api/Core2D.Editor.IProjectEditor.html#Core2D_Editor_IProjectEditor_TextFieldWriters
+  commentId: P:Core2D.Editor.IProjectEditor.TextFieldWriters
+  fullName: Core2D.Editor.IProjectEditor.TextFieldWriters
+  nameWithType: IProjectEditor.TextFieldWriters
+- uid: Core2D.Editor.IProjectEditor.TextFieldWriters*
+  name: TextFieldWriters
+  href: api/Core2D.Editor.IProjectEditor.html#Core2D_Editor_IProjectEditor_TextFieldWriters_
+  commentId: Overload:Core2D.Editor.IProjectEditor.TextFieldWriters
+  isSpec: "True"
+  fullName: Core2D.Editor.IProjectEditor.TextFieldWriters
+  nameWithType: IProjectEditor.TextFieldWriters
 - uid: Core2D.Editor.IProjectEditor.Tools
   name: Tools
   href: api/Core2D.Editor.IProjectEditor.html#Core2D_Editor_IProjectEditor_Tools
@@ -11253,32 +11256,6 @@ references:
   isSpec: "True"
   fullName: Core2D.Editor.ProjectEditor.Copy
   nameWithType: ProjectEditor.Copy
-- uid: Core2D.Editor.ProjectEditor.CsvReader
-  name: CsvReader
-  href: api/Core2D.Editor.ProjectEditor.html#Core2D_Editor_ProjectEditor_CsvReader
-  commentId: P:Core2D.Editor.ProjectEditor.CsvReader
-  fullName: Core2D.Editor.ProjectEditor.CsvReader
-  nameWithType: ProjectEditor.CsvReader
-- uid: Core2D.Editor.ProjectEditor.CsvReader*
-  name: CsvReader
-  href: api/Core2D.Editor.ProjectEditor.html#Core2D_Editor_ProjectEditor_CsvReader_
-  commentId: Overload:Core2D.Editor.ProjectEditor.CsvReader
-  isSpec: "True"
-  fullName: Core2D.Editor.ProjectEditor.CsvReader
-  nameWithType: ProjectEditor.CsvReader
-- uid: Core2D.Editor.ProjectEditor.CsvWriter
-  name: CsvWriter
-  href: api/Core2D.Editor.ProjectEditor.html#Core2D_Editor_ProjectEditor_CsvWriter
-  commentId: P:Core2D.Editor.ProjectEditor.CsvWriter
-  fullName: Core2D.Editor.ProjectEditor.CsvWriter
-  nameWithType: ProjectEditor.CsvWriter
-- uid: Core2D.Editor.ProjectEditor.CsvWriter*
-  name: CsvWriter
-  href: api/Core2D.Editor.ProjectEditor.html#Core2D_Editor_ProjectEditor_CsvWriter_
-  commentId: Overload:Core2D.Editor.ProjectEditor.CsvWriter
-  isSpec: "True"
-  fullName: Core2D.Editor.ProjectEditor.CsvWriter
-  nameWithType: ProjectEditor.CsvWriter
 - uid: Core2D.Editor.ProjectEditor.CurrentPathTool
   name: CurrentPathTool
   href: api/Core2D.Editor.ProjectEditor.html#Core2D_Editor_ProjectEditor_CurrentPathTool
@@ -12338,12 +12315,15 @@ references:
   isSpec: "True"
   fullName: Core2D.Editor.ProjectEditor.OnExport
   nameWithType: ProjectEditor.OnExport
-- uid: Core2D.Editor.ProjectEditor.OnExportData(System.String,Core2D.Data.IDatabase)
-  name: OnExportData(String, IDatabase)
-  href: api/Core2D.Editor.ProjectEditor.html#Core2D_Editor_ProjectEditor_OnExportData_System_String_Core2D_Data_IDatabase_
-  commentId: M:Core2D.Editor.ProjectEditor.OnExportData(System.String,Core2D.Data.IDatabase)
-  fullName: Core2D.Editor.ProjectEditor.OnExportData(System.String, Core2D.Data.IDatabase)
-  nameWithType: ProjectEditor.OnExportData(String, IDatabase)
+- uid: Core2D.Editor.ProjectEditor.OnExportData(System.String,Core2D.Data.IDatabase,Core2D.Interfaces.ITextFieldWriter{Core2D.Data.IDatabase})
+  name: OnExportData(String, IDatabase, ITextFieldWriter<IDatabase>)
+  href: api/Core2D.Editor.ProjectEditor.html#Core2D_Editor_ProjectEditor_OnExportData_System_String_Core2D_Data_IDatabase_Core2D_Interfaces_ITextFieldWriter_Core2D_Data_IDatabase__
+  commentId: M:Core2D.Editor.ProjectEditor.OnExportData(System.String,Core2D.Data.IDatabase,Core2D.Interfaces.ITextFieldWriter{Core2D.Data.IDatabase})
+  name.vb: OnExportData(String, IDatabase, ITextFieldWriter(Of IDatabase))
+  fullName: Core2D.Editor.ProjectEditor.OnExportData(System.String, Core2D.Data.IDatabase, Core2D.Interfaces.ITextFieldWriter<Core2D.Data.IDatabase>)
+  fullName.vb: Core2D.Editor.ProjectEditor.OnExportData(System.String, Core2D.Data.IDatabase, Core2D.Interfaces.ITextFieldWriter(Of Core2D.Data.IDatabase))
+  nameWithType: ProjectEditor.OnExportData(String, IDatabase, ITextFieldWriter<IDatabase>)
+  nameWithType.vb: ProjectEditor.OnExportData(String, IDatabase, ITextFieldWriter(Of IDatabase))
 - uid: Core2D.Editor.ProjectEditor.OnExportData*
   name: OnExportData
   href: api/Core2D.Editor.ProjectEditor.html#Core2D_Editor_ProjectEditor_OnExportData_
@@ -12403,18 +12383,15 @@ references:
   isSpec: "True"
   fullName: Core2D.Editor.ProjectEditor.OnGroupSelected
   nameWithType: ProjectEditor.OnGroupSelected
-- uid: Core2D.Editor.ProjectEditor.OnImportData(Core2D.Containers.IProjectContainer,System.String)
-  name: OnImportData(IProjectContainer, String)
-  href: api/Core2D.Editor.ProjectEditor.html#Core2D_Editor_ProjectEditor_OnImportData_Core2D_Containers_IProjectContainer_System_String_
-  commentId: M:Core2D.Editor.ProjectEditor.OnImportData(Core2D.Containers.IProjectContainer,System.String)
-  fullName: Core2D.Editor.ProjectEditor.OnImportData(Core2D.Containers.IProjectContainer, System.String)
-  nameWithType: ProjectEditor.OnImportData(IProjectContainer, String)
-- uid: Core2D.Editor.ProjectEditor.OnImportData(System.String)
-  name: OnImportData(String)
-  href: api/Core2D.Editor.ProjectEditor.html#Core2D_Editor_ProjectEditor_OnImportData_System_String_
-  commentId: M:Core2D.Editor.ProjectEditor.OnImportData(System.String)
-  fullName: Core2D.Editor.ProjectEditor.OnImportData(System.String)
-  nameWithType: ProjectEditor.OnImportData(String)
+- uid: Core2D.Editor.ProjectEditor.OnImportData(Core2D.Containers.IProjectContainer,System.String,Core2D.Interfaces.ITextFieldReader{Core2D.Data.IDatabase})
+  name: OnImportData(IProjectContainer, String, ITextFieldReader<IDatabase>)
+  href: api/Core2D.Editor.ProjectEditor.html#Core2D_Editor_ProjectEditor_OnImportData_Core2D_Containers_IProjectContainer_System_String_Core2D_Interfaces_ITextFieldReader_Core2D_Data_IDatabase__
+  commentId: M:Core2D.Editor.ProjectEditor.OnImportData(Core2D.Containers.IProjectContainer,System.String,Core2D.Interfaces.ITextFieldReader{Core2D.Data.IDatabase})
+  name.vb: OnImportData(IProjectContainer, String, ITextFieldReader(Of IDatabase))
+  fullName: Core2D.Editor.ProjectEditor.OnImportData(Core2D.Containers.IProjectContainer, System.String, Core2D.Interfaces.ITextFieldReader<Core2D.Data.IDatabase>)
+  fullName.vb: Core2D.Editor.ProjectEditor.OnImportData(Core2D.Containers.IProjectContainer, System.String, Core2D.Interfaces.ITextFieldReader(Of Core2D.Data.IDatabase))
+  nameWithType: ProjectEditor.OnImportData(IProjectContainer, String, ITextFieldReader<IDatabase>)
+  nameWithType.vb: ProjectEditor.OnImportData(IProjectContainer, String, ITextFieldReader(Of IDatabase))
 - uid: Core2D.Editor.ProjectEditor.OnImportData*
   name: OnImportData
   href: api/Core2D.Editor.ProjectEditor.html#Core2D_Editor_ProjectEditor_OnImportData_
@@ -13421,12 +13398,15 @@ references:
   isSpec: "True"
   fullName: Core2D.Editor.ProjectEditor.OnUnload
   nameWithType: ProjectEditor.OnUnload
-- uid: Core2D.Editor.ProjectEditor.OnUpdateData(System.String,Core2D.Data.IDatabase)
-  name: OnUpdateData(String, IDatabase)
-  href: api/Core2D.Editor.ProjectEditor.html#Core2D_Editor_ProjectEditor_OnUpdateData_System_String_Core2D_Data_IDatabase_
-  commentId: M:Core2D.Editor.ProjectEditor.OnUpdateData(System.String,Core2D.Data.IDatabase)
-  fullName: Core2D.Editor.ProjectEditor.OnUpdateData(System.String, Core2D.Data.IDatabase)
-  nameWithType: ProjectEditor.OnUpdateData(String, IDatabase)
+- uid: Core2D.Editor.ProjectEditor.OnUpdateData(System.String,Core2D.Data.IDatabase,Core2D.Interfaces.ITextFieldReader{Core2D.Data.IDatabase})
+  name: OnUpdateData(String, IDatabase, ITextFieldReader<IDatabase>)
+  href: api/Core2D.Editor.ProjectEditor.html#Core2D_Editor_ProjectEditor_OnUpdateData_System_String_Core2D_Data_IDatabase_Core2D_Interfaces_ITextFieldReader_Core2D_Data_IDatabase__
+  commentId: M:Core2D.Editor.ProjectEditor.OnUpdateData(System.String,Core2D.Data.IDatabase,Core2D.Interfaces.ITextFieldReader{Core2D.Data.IDatabase})
+  name.vb: OnUpdateData(String, IDatabase, ITextFieldReader(Of IDatabase))
+  fullName: Core2D.Editor.ProjectEditor.OnUpdateData(System.String, Core2D.Data.IDatabase, Core2D.Interfaces.ITextFieldReader<Core2D.Data.IDatabase>)
+  fullName.vb: Core2D.Editor.ProjectEditor.OnUpdateData(System.String, Core2D.Data.IDatabase, Core2D.Interfaces.ITextFieldReader(Of Core2D.Data.IDatabase))
+  nameWithType: ProjectEditor.OnUpdateData(String, IDatabase, ITextFieldReader<IDatabase>)
+  nameWithType.vb: ProjectEditor.OnUpdateData(String, IDatabase, ITextFieldReader(Of IDatabase))
 - uid: Core2D.Editor.ProjectEditor.OnUpdateData*
   name: OnUpdateData
   href: api/Core2D.Editor.ProjectEditor.html#Core2D_Editor_ProjectEditor_OnUpdateData_
@@ -13641,6 +13621,32 @@ references:
   isSpec: "True"
   fullName: Core2D.Editor.ProjectEditor.TextClipboard
   nameWithType: ProjectEditor.TextClipboard
+- uid: Core2D.Editor.ProjectEditor.TextFieldReaders
+  name: TextFieldReaders
+  href: api/Core2D.Editor.ProjectEditor.html#Core2D_Editor_ProjectEditor_TextFieldReaders
+  commentId: P:Core2D.Editor.ProjectEditor.TextFieldReaders
+  fullName: Core2D.Editor.ProjectEditor.TextFieldReaders
+  nameWithType: ProjectEditor.TextFieldReaders
+- uid: Core2D.Editor.ProjectEditor.TextFieldReaders*
+  name: TextFieldReaders
+  href: api/Core2D.Editor.ProjectEditor.html#Core2D_Editor_ProjectEditor_TextFieldReaders_
+  commentId: Overload:Core2D.Editor.ProjectEditor.TextFieldReaders
+  isSpec: "True"
+  fullName: Core2D.Editor.ProjectEditor.TextFieldReaders
+  nameWithType: ProjectEditor.TextFieldReaders
+- uid: Core2D.Editor.ProjectEditor.TextFieldWriters
+  name: TextFieldWriters
+  href: api/Core2D.Editor.ProjectEditor.html#Core2D_Editor_ProjectEditor_TextFieldWriters
+  commentId: P:Core2D.Editor.ProjectEditor.TextFieldWriters
+  fullName: Core2D.Editor.ProjectEditor.TextFieldWriters
+  nameWithType: ProjectEditor.TextFieldWriters
+- uid: Core2D.Editor.ProjectEditor.TextFieldWriters*
+  name: TextFieldWriters
+  href: api/Core2D.Editor.ProjectEditor.html#Core2D_Editor_ProjectEditor_TextFieldWriters_
+  commentId: Overload:Core2D.Editor.ProjectEditor.TextFieldWriters
+  isSpec: "True"
+  fullName: Core2D.Editor.ProjectEditor.TextFieldWriters
+  nameWithType: ProjectEditor.TextFieldWriters
 - uid: Core2D.Editor.ProjectEditor.Tools
   name: Tools
   href: api/Core2D.Editor.ProjectEditor.html#Core2D_Editor_ProjectEditor_Tools
@@ -13931,6 +13937,12 @@ references:
   commentId: F:Core2D.Editor.ProjectEditorConfiguration.XamlExtension
   fullName: Core2D.Editor.ProjectEditorConfiguration.XamlExtension
   nameWithType: ProjectEditorConfiguration.XamlExtension
+- uid: Core2D.Editor.ProjectEditorConfiguration.XlsxExtension
+  name: XlsxExtension
+  href: api/Core2D.Editor.ProjectEditorConfiguration.html#Core2D_Editor_ProjectEditorConfiguration_XlsxExtension
+  commentId: F:Core2D.Editor.ProjectEditorConfiguration.XlsxExtension
+  fullName: Core2D.Editor.ProjectEditorConfiguration.XlsxExtension
+  nameWithType: ProjectEditorConfiguration.XlsxExtension
 - uid: Core2D.Editor.ProjectEditorInputTarget
   name: ProjectEditorInputTarget
   href: api/Core2D.Editor.ProjectEditorInputTarget.html
@@ -23730,14 +23742,48 @@ references:
   fullName.vb: Core2D.Interfaces.ITextFieldReader(Of T)
   nameWithType: ITextFieldReader<T>
   nameWithType.vb: ITextFieldReader(Of T)
-- uid: Core2D.Interfaces.ITextFieldReader`1.Read(System.String,Core2D.Interfaces.IFileSystem)
-  name: Read(String, IFileSystem)
-  href: api/Core2D.Interfaces.ITextFieldReader-1.html#Core2D_Interfaces_ITextFieldReader_1_Read_System_String_Core2D_Interfaces_IFileSystem_
-  commentId: M:Core2D.Interfaces.ITextFieldReader`1.Read(System.String,Core2D.Interfaces.IFileSystem)
-  fullName: Core2D.Interfaces.ITextFieldReader<T>.Read(System.String, Core2D.Interfaces.IFileSystem)
-  fullName.vb: Core2D.Interfaces.ITextFieldReader(Of T).Read(System.String, Core2D.Interfaces.IFileSystem)
-  nameWithType: ITextFieldReader<T>.Read(String, IFileSystem)
-  nameWithType.vb: ITextFieldReader(Of T).Read(String, IFileSystem)
+- uid: Core2D.Interfaces.ITextFieldReader`1.Extension
+  name: Extension
+  href: api/Core2D.Interfaces.ITextFieldReader-1.html#Core2D_Interfaces_ITextFieldReader_1_Extension
+  commentId: P:Core2D.Interfaces.ITextFieldReader`1.Extension
+  fullName: Core2D.Interfaces.ITextFieldReader<T>.Extension
+  fullName.vb: Core2D.Interfaces.ITextFieldReader(Of T).Extension
+  nameWithType: ITextFieldReader<T>.Extension
+  nameWithType.vb: ITextFieldReader(Of T).Extension
+- uid: Core2D.Interfaces.ITextFieldReader`1.Extension*
+  name: Extension
+  href: api/Core2D.Interfaces.ITextFieldReader-1.html#Core2D_Interfaces_ITextFieldReader_1_Extension_
+  commentId: Overload:Core2D.Interfaces.ITextFieldReader`1.Extension
+  isSpec: "True"
+  fullName: Core2D.Interfaces.ITextFieldReader<T>.Extension
+  fullName.vb: Core2D.Interfaces.ITextFieldReader(Of T).Extension
+  nameWithType: ITextFieldReader<T>.Extension
+  nameWithType.vb: ITextFieldReader(Of T).Extension
+- uid: Core2D.Interfaces.ITextFieldReader`1.Name
+  name: Name
+  href: api/Core2D.Interfaces.ITextFieldReader-1.html#Core2D_Interfaces_ITextFieldReader_1_Name
+  commentId: P:Core2D.Interfaces.ITextFieldReader`1.Name
+  fullName: Core2D.Interfaces.ITextFieldReader<T>.Name
+  fullName.vb: Core2D.Interfaces.ITextFieldReader(Of T).Name
+  nameWithType: ITextFieldReader<T>.Name
+  nameWithType.vb: ITextFieldReader(Of T).Name
+- uid: Core2D.Interfaces.ITextFieldReader`1.Name*
+  name: Name
+  href: api/Core2D.Interfaces.ITextFieldReader-1.html#Core2D_Interfaces_ITextFieldReader_1_Name_
+  commentId: Overload:Core2D.Interfaces.ITextFieldReader`1.Name
+  isSpec: "True"
+  fullName: Core2D.Interfaces.ITextFieldReader<T>.Name
+  fullName.vb: Core2D.Interfaces.ITextFieldReader(Of T).Name
+  nameWithType: ITextFieldReader<T>.Name
+  nameWithType.vb: ITextFieldReader(Of T).Name
+- uid: Core2D.Interfaces.ITextFieldReader`1.Read(System.IO.Stream)
+  name: Read(Stream)
+  href: api/Core2D.Interfaces.ITextFieldReader-1.html#Core2D_Interfaces_ITextFieldReader_1_Read_System_IO_Stream_
+  commentId: M:Core2D.Interfaces.ITextFieldReader`1.Read(System.IO.Stream)
+  fullName: Core2D.Interfaces.ITextFieldReader<T>.Read(System.IO.Stream)
+  fullName.vb: Core2D.Interfaces.ITextFieldReader(Of T).Read(System.IO.Stream)
+  nameWithType: ITextFieldReader<T>.Read(Stream)
+  nameWithType.vb: ITextFieldReader(Of T).Read(Stream)
 - uid: Core2D.Interfaces.ITextFieldReader`1.Read*
   name: Read
   href: api/Core2D.Interfaces.ITextFieldReader-1.html#Core2D_Interfaces_ITextFieldReader_1_Read_
@@ -23756,14 +23802,48 @@ references:
   fullName.vb: Core2D.Interfaces.ITextFieldWriter(Of T)
   nameWithType: ITextFieldWriter<T>
   nameWithType.vb: ITextFieldWriter(Of T)
-- uid: Core2D.Interfaces.ITextFieldWriter`1.Write(System.String,Core2D.Interfaces.IFileSystem,`0)
-  name: Write(String, IFileSystem, T)
-  href: api/Core2D.Interfaces.ITextFieldWriter-1.html#Core2D_Interfaces_ITextFieldWriter_1_Write_System_String_Core2D_Interfaces_IFileSystem__0_
-  commentId: M:Core2D.Interfaces.ITextFieldWriter`1.Write(System.String,Core2D.Interfaces.IFileSystem,`0)
-  fullName: Core2D.Interfaces.ITextFieldWriter<T>.Write(System.String, Core2D.Interfaces.IFileSystem, T)
-  fullName.vb: Core2D.Interfaces.ITextFieldWriter(Of T).Write(System.String, Core2D.Interfaces.IFileSystem, T)
-  nameWithType: ITextFieldWriter<T>.Write(String, IFileSystem, T)
-  nameWithType.vb: ITextFieldWriter(Of T).Write(String, IFileSystem, T)
+- uid: Core2D.Interfaces.ITextFieldWriter`1.Extension
+  name: Extension
+  href: api/Core2D.Interfaces.ITextFieldWriter-1.html#Core2D_Interfaces_ITextFieldWriter_1_Extension
+  commentId: P:Core2D.Interfaces.ITextFieldWriter`1.Extension
+  fullName: Core2D.Interfaces.ITextFieldWriter<T>.Extension
+  fullName.vb: Core2D.Interfaces.ITextFieldWriter(Of T).Extension
+  nameWithType: ITextFieldWriter<T>.Extension
+  nameWithType.vb: ITextFieldWriter(Of T).Extension
+- uid: Core2D.Interfaces.ITextFieldWriter`1.Extension*
+  name: Extension
+  href: api/Core2D.Interfaces.ITextFieldWriter-1.html#Core2D_Interfaces_ITextFieldWriter_1_Extension_
+  commentId: Overload:Core2D.Interfaces.ITextFieldWriter`1.Extension
+  isSpec: "True"
+  fullName: Core2D.Interfaces.ITextFieldWriter<T>.Extension
+  fullName.vb: Core2D.Interfaces.ITextFieldWriter(Of T).Extension
+  nameWithType: ITextFieldWriter<T>.Extension
+  nameWithType.vb: ITextFieldWriter(Of T).Extension
+- uid: Core2D.Interfaces.ITextFieldWriter`1.Name
+  name: Name
+  href: api/Core2D.Interfaces.ITextFieldWriter-1.html#Core2D_Interfaces_ITextFieldWriter_1_Name
+  commentId: P:Core2D.Interfaces.ITextFieldWriter`1.Name
+  fullName: Core2D.Interfaces.ITextFieldWriter<T>.Name
+  fullName.vb: Core2D.Interfaces.ITextFieldWriter(Of T).Name
+  nameWithType: ITextFieldWriter<T>.Name
+  nameWithType.vb: ITextFieldWriter(Of T).Name
+- uid: Core2D.Interfaces.ITextFieldWriter`1.Name*
+  name: Name
+  href: api/Core2D.Interfaces.ITextFieldWriter-1.html#Core2D_Interfaces_ITextFieldWriter_1_Name_
+  commentId: Overload:Core2D.Interfaces.ITextFieldWriter`1.Name
+  isSpec: "True"
+  fullName: Core2D.Interfaces.ITextFieldWriter<T>.Name
+  fullName.vb: Core2D.Interfaces.ITextFieldWriter(Of T).Name
+  nameWithType: ITextFieldWriter<T>.Name
+  nameWithType.vb: ITextFieldWriter(Of T).Name
+- uid: Core2D.Interfaces.ITextFieldWriter`1.Write(System.IO.Stream,`0)
+  name: Write(Stream, T)
+  href: api/Core2D.Interfaces.ITextFieldWriter-1.html#Core2D_Interfaces_ITextFieldWriter_1_Write_System_IO_Stream__0_
+  commentId: M:Core2D.Interfaces.ITextFieldWriter`1.Write(System.IO.Stream,`0)
+  fullName: Core2D.Interfaces.ITextFieldWriter<T>.Write(System.IO.Stream, T)
+  fullName.vb: Core2D.Interfaces.ITextFieldWriter(Of T).Write(System.IO.Stream, T)
+  nameWithType: ITextFieldWriter<T>.Write(Stream, T)
+  nameWithType.vb: ITextFieldWriter(Of T).Write(Stream, T)
 - uid: Core2D.Interfaces.ITextFieldWriter`1.Write*
   name: Write
   href: api/Core2D.Interfaces.ITextFieldWriter-1.html#Core2D_Interfaces_ITextFieldWriter_1_Write_
@@ -32623,44 +32703,6 @@ references:
   isSpec: "True"
   fullName: Core2D.Shapes.TextShape.TopLeft
   nameWithType: TextShape.TopLeft
-- uid: Core2D.Shapes.TextShapeExtensions
-  name: TextShapeExtensions
-  href: api/Core2D.Shapes.TextShapeExtensions.html
-  commentId: T:Core2D.Shapes.TextShapeExtensions
-  fullName: Core2D.Shapes.TextShapeExtensions
-  nameWithType: TextShapeExtensions
-- uid: Core2D.Shapes.TextShapeExtensions.BindText(Core2D.Shapes.ITextShape,System.Collections.Immutable.ImmutableArray{Core2D.Data.IProperty},Core2D.Data.IRecord)
-  name: BindText(ITextShape, ImmutableArray<IProperty>, IRecord)
-  href: api/Core2D.Shapes.TextShapeExtensions.html#Core2D_Shapes_TextShapeExtensions_BindText_Core2D_Shapes_ITextShape_System_Collections_Immutable_ImmutableArray_Core2D_Data_IProperty__Core2D_Data_IRecord_
-  commentId: M:Core2D.Shapes.TextShapeExtensions.BindText(Core2D.Shapes.ITextShape,System.Collections.Immutable.ImmutableArray{Core2D.Data.IProperty},Core2D.Data.IRecord)
-  name.vb: BindText(ITextShape, ImmutableArray(Of IProperty), IRecord)
-  fullName: Core2D.Shapes.TextShapeExtensions.BindText(Core2D.Shapes.ITextShape, System.Collections.Immutable.ImmutableArray<Core2D.Data.IProperty>, Core2D.Data.IRecord)
-  fullName.vb: Core2D.Shapes.TextShapeExtensions.BindText(Core2D.Shapes.ITextShape, System.Collections.Immutable.ImmutableArray(Of Core2D.Data.IProperty), Core2D.Data.IRecord)
-  nameWithType: TextShapeExtensions.BindText(ITextShape, ImmutableArray<IProperty>, IRecord)
-  nameWithType.vb: TextShapeExtensions.BindText(ITextShape, ImmutableArray(Of IProperty), IRecord)
-- uid: Core2D.Shapes.TextShapeExtensions.BindText*
-  name: BindText
-  href: api/Core2D.Shapes.TextShapeExtensions.html#Core2D_Shapes_TextShapeExtensions_BindText_
-  commentId: Overload:Core2D.Shapes.TextShapeExtensions.BindText
-  isSpec: "True"
-  fullName: Core2D.Shapes.TextShapeExtensions.BindText
-  nameWithType: TextShapeExtensions.BindText
-- uid: Core2D.Shapes.TextShapeExtensions.IsBinding(System.String,System.String@)
-  name: IsBinding(String, out String)
-  href: api/Core2D.Shapes.TextShapeExtensions.html#Core2D_Shapes_TextShapeExtensions_IsBinding_System_String_System_String__
-  commentId: M:Core2D.Shapes.TextShapeExtensions.IsBinding(System.String,System.String@)
-  name.vb: IsBinding(String, ByRef String)
-  fullName: Core2D.Shapes.TextShapeExtensions.IsBinding(System.String, out System.String)
-  fullName.vb: Core2D.Shapes.TextShapeExtensions.IsBinding(System.String, ByRef System.String)
-  nameWithType: TextShapeExtensions.IsBinding(String, out String)
-  nameWithType.vb: TextShapeExtensions.IsBinding(String, ByRef String)
-- uid: Core2D.Shapes.TextShapeExtensions.IsBinding*
-  name: IsBinding
-  href: api/Core2D.Shapes.TextShapeExtensions.html#Core2D_Shapes_TextShapeExtensions_IsBinding_
-  commentId: Overload:Core2D.Shapes.TextShapeExtensions.IsBinding
-  isSpec: "True"
-  fullName: Core2D.Shapes.TextShapeExtensions.IsBinding
-  nameWithType: TextShapeExtensions.IsBinding
 - uid: Core2D.Style
   name: Core2D.Style
   href: api/Core2D.Style.html
@@ -36878,23 +36920,109 @@ references:
   isSpec: "True"
   fullName: Core2D.TextFieldReader.CsvHelper.CsvHelperReader.CsvHelperReader
   nameWithType: CsvHelperReader.CsvHelperReader
-- uid: Core2D.TextFieldReader.CsvHelper.CsvHelperReader.Core2D#Interfaces#ITextFieldReader{Core2D#Data#IDatabase}#Read(System.String,Core2D.Interfaces.IFileSystem)
-  name: ITextFieldReader<IDatabase>.Read(String, IFileSystem)
-  href: api/Core2D.TextFieldReader.CsvHelper.CsvHelperReader.html#Core2D_TextFieldReader_CsvHelper_CsvHelperReader_Core2D_Interfaces_ITextFieldReader_Core2D_Data_IDatabase__Read_System_String_Core2D_Interfaces_IFileSystem_
-  commentId: M:Core2D.TextFieldReader.CsvHelper.CsvHelperReader.Core2D#Interfaces#ITextFieldReader{Core2D#Data#IDatabase}#Read(System.String,Core2D.Interfaces.IFileSystem)
-  name.vb: Core2D.Interfaces.ITextFieldReader<Core2D.Data.IDatabase>.Read(String, IFileSystem)
-  fullName: Core2D.TextFieldReader.CsvHelper.CsvHelperReader.Core2D.Interfaces.ITextFieldReader<Core2D.Data.IDatabase>.Read(System.String, Core2D.Interfaces.IFileSystem)
-  nameWithType: CsvHelperReader.ITextFieldReader<IDatabase>.Read(String, IFileSystem)
-  nameWithType.vb: CsvHelperReader.Core2D.Interfaces.ITextFieldReader<Core2D.Data.IDatabase>.Read(String, IFileSystem)
-- uid: Core2D.TextFieldReader.CsvHelper.CsvHelperReader.Core2D#Interfaces#ITextFieldReader{Core2D#Data#IDatabase}#Read*
-  name: ITextFieldReader<IDatabase>.Read
-  href: api/Core2D.TextFieldReader.CsvHelper.CsvHelperReader.html#Core2D_TextFieldReader_CsvHelper_CsvHelperReader_Core2D_Interfaces_ITextFieldReader_Core2D_Data_IDatabase__Read_
-  commentId: Overload:Core2D.TextFieldReader.CsvHelper.CsvHelperReader.Core2D#Interfaces#ITextFieldReader{Core2D#Data#IDatabase}#Read
+- uid: Core2D.TextFieldReader.CsvHelper.CsvHelperReader.Extension
+  name: Extension
+  href: api/Core2D.TextFieldReader.CsvHelper.CsvHelperReader.html#Core2D_TextFieldReader_CsvHelper_CsvHelperReader_Extension
+  commentId: P:Core2D.TextFieldReader.CsvHelper.CsvHelperReader.Extension
+  fullName: Core2D.TextFieldReader.CsvHelper.CsvHelperReader.Extension
+  nameWithType: CsvHelperReader.Extension
+- uid: Core2D.TextFieldReader.CsvHelper.CsvHelperReader.Extension*
+  name: Extension
+  href: api/Core2D.TextFieldReader.CsvHelper.CsvHelperReader.html#Core2D_TextFieldReader_CsvHelper_CsvHelperReader_Extension_
+  commentId: Overload:Core2D.TextFieldReader.CsvHelper.CsvHelperReader.Extension
   isSpec: "True"
-  name.vb: Core2D.Interfaces.ITextFieldReader<Core2D.Data.IDatabase>.Read
-  fullName: Core2D.TextFieldReader.CsvHelper.CsvHelperReader.Core2D.Interfaces.ITextFieldReader<Core2D.Data.IDatabase>.Read
-  nameWithType: CsvHelperReader.ITextFieldReader<IDatabase>.Read
-  nameWithType.vb: CsvHelperReader.Core2D.Interfaces.ITextFieldReader<Core2D.Data.IDatabase>.Read
+  fullName: Core2D.TextFieldReader.CsvHelper.CsvHelperReader.Extension
+  nameWithType: CsvHelperReader.Extension
+- uid: Core2D.TextFieldReader.CsvHelper.CsvHelperReader.Name
+  name: Name
+  href: api/Core2D.TextFieldReader.CsvHelper.CsvHelperReader.html#Core2D_TextFieldReader_CsvHelper_CsvHelperReader_Name
+  commentId: P:Core2D.TextFieldReader.CsvHelper.CsvHelperReader.Name
+  fullName: Core2D.TextFieldReader.CsvHelper.CsvHelperReader.Name
+  nameWithType: CsvHelperReader.Name
+- uid: Core2D.TextFieldReader.CsvHelper.CsvHelperReader.Name*
+  name: Name
+  href: api/Core2D.TextFieldReader.CsvHelper.CsvHelperReader.html#Core2D_TextFieldReader_CsvHelper_CsvHelperReader_Name_
+  commentId: Overload:Core2D.TextFieldReader.CsvHelper.CsvHelperReader.Name
+  isSpec: "True"
+  fullName: Core2D.TextFieldReader.CsvHelper.CsvHelperReader.Name
+  nameWithType: CsvHelperReader.Name
+- uid: Core2D.TextFieldReader.CsvHelper.CsvHelperReader.Read(System.IO.Stream)
+  name: Read(Stream)
+  href: api/Core2D.TextFieldReader.CsvHelper.CsvHelperReader.html#Core2D_TextFieldReader_CsvHelper_CsvHelperReader_Read_System_IO_Stream_
+  commentId: M:Core2D.TextFieldReader.CsvHelper.CsvHelperReader.Read(System.IO.Stream)
+  fullName: Core2D.TextFieldReader.CsvHelper.CsvHelperReader.Read(System.IO.Stream)
+  nameWithType: CsvHelperReader.Read(Stream)
+- uid: Core2D.TextFieldReader.CsvHelper.CsvHelperReader.Read*
+  name: Read
+  href: api/Core2D.TextFieldReader.CsvHelper.CsvHelperReader.html#Core2D_TextFieldReader_CsvHelper_CsvHelperReader_Read_
+  commentId: Overload:Core2D.TextFieldReader.CsvHelper.CsvHelperReader.Read
+  isSpec: "True"
+  fullName: Core2D.TextFieldReader.CsvHelper.CsvHelperReader.Read
+  nameWithType: CsvHelperReader.Read
+- uid: Core2D.TextFieldReader.OpenXml
+  name: Core2D.TextFieldReader.OpenXml
+  href: api/Core2D.TextFieldReader.OpenXml.html
+  commentId: N:Core2D.TextFieldReader.OpenXml
+  fullName: Core2D.TextFieldReader.OpenXml
+  nameWithType: Core2D.TextFieldReader.OpenXml
+- uid: Core2D.TextFieldReader.OpenXml.OpenXmlReader
+  name: OpenXmlReader
+  href: api/Core2D.TextFieldReader.OpenXml.OpenXmlReader.html
+  commentId: T:Core2D.TextFieldReader.OpenXml.OpenXmlReader
+  fullName: Core2D.TextFieldReader.OpenXml.OpenXmlReader
+  nameWithType: OpenXmlReader
+- uid: Core2D.TextFieldReader.OpenXml.OpenXmlReader.#ctor(System.IServiceProvider)
+  name: OpenXmlReader(IServiceProvider)
+  href: api/Core2D.TextFieldReader.OpenXml.OpenXmlReader.html#Core2D_TextFieldReader_OpenXml_OpenXmlReader__ctor_System_IServiceProvider_
+  commentId: M:Core2D.TextFieldReader.OpenXml.OpenXmlReader.#ctor(System.IServiceProvider)
+  fullName: Core2D.TextFieldReader.OpenXml.OpenXmlReader.OpenXmlReader(System.IServiceProvider)
+  nameWithType: OpenXmlReader.OpenXmlReader(IServiceProvider)
+- uid: Core2D.TextFieldReader.OpenXml.OpenXmlReader.#ctor*
+  name: OpenXmlReader
+  href: api/Core2D.TextFieldReader.OpenXml.OpenXmlReader.html#Core2D_TextFieldReader_OpenXml_OpenXmlReader__ctor_
+  commentId: Overload:Core2D.TextFieldReader.OpenXml.OpenXmlReader.#ctor
+  isSpec: "True"
+  fullName: Core2D.TextFieldReader.OpenXml.OpenXmlReader.OpenXmlReader
+  nameWithType: OpenXmlReader.OpenXmlReader
+- uid: Core2D.TextFieldReader.OpenXml.OpenXmlReader.Extension
+  name: Extension
+  href: api/Core2D.TextFieldReader.OpenXml.OpenXmlReader.html#Core2D_TextFieldReader_OpenXml_OpenXmlReader_Extension
+  commentId: P:Core2D.TextFieldReader.OpenXml.OpenXmlReader.Extension
+  fullName: Core2D.TextFieldReader.OpenXml.OpenXmlReader.Extension
+  nameWithType: OpenXmlReader.Extension
+- uid: Core2D.TextFieldReader.OpenXml.OpenXmlReader.Extension*
+  name: Extension
+  href: api/Core2D.TextFieldReader.OpenXml.OpenXmlReader.html#Core2D_TextFieldReader_OpenXml_OpenXmlReader_Extension_
+  commentId: Overload:Core2D.TextFieldReader.OpenXml.OpenXmlReader.Extension
+  isSpec: "True"
+  fullName: Core2D.TextFieldReader.OpenXml.OpenXmlReader.Extension
+  nameWithType: OpenXmlReader.Extension
+- uid: Core2D.TextFieldReader.OpenXml.OpenXmlReader.Name
+  name: Name
+  href: api/Core2D.TextFieldReader.OpenXml.OpenXmlReader.html#Core2D_TextFieldReader_OpenXml_OpenXmlReader_Name
+  commentId: P:Core2D.TextFieldReader.OpenXml.OpenXmlReader.Name
+  fullName: Core2D.TextFieldReader.OpenXml.OpenXmlReader.Name
+  nameWithType: OpenXmlReader.Name
+- uid: Core2D.TextFieldReader.OpenXml.OpenXmlReader.Name*
+  name: Name
+  href: api/Core2D.TextFieldReader.OpenXml.OpenXmlReader.html#Core2D_TextFieldReader_OpenXml_OpenXmlReader_Name_
+  commentId: Overload:Core2D.TextFieldReader.OpenXml.OpenXmlReader.Name
+  isSpec: "True"
+  fullName: Core2D.TextFieldReader.OpenXml.OpenXmlReader.Name
+  nameWithType: OpenXmlReader.Name
+- uid: Core2D.TextFieldReader.OpenXml.OpenXmlReader.Read(System.IO.Stream)
+  name: Read(Stream)
+  href: api/Core2D.TextFieldReader.OpenXml.OpenXmlReader.html#Core2D_TextFieldReader_OpenXml_OpenXmlReader_Read_System_IO_Stream_
+  commentId: M:Core2D.TextFieldReader.OpenXml.OpenXmlReader.Read(System.IO.Stream)
+  fullName: Core2D.TextFieldReader.OpenXml.OpenXmlReader.Read(System.IO.Stream)
+  nameWithType: OpenXmlReader.Read(Stream)
+- uid: Core2D.TextFieldReader.OpenXml.OpenXmlReader.Read*
+  name: Read
+  href: api/Core2D.TextFieldReader.OpenXml.OpenXmlReader.html#Core2D_TextFieldReader_OpenXml_OpenXmlReader_Read_
+  commentId: Overload:Core2D.TextFieldReader.OpenXml.OpenXmlReader.Read
+  isSpec: "True"
+  fullName: Core2D.TextFieldReader.OpenXml.OpenXmlReader.Read
+  nameWithType: OpenXmlReader.Read
 - uid: Core2D.TextFieldWriter.CsvHelper
   name: Core2D.TextFieldWriter.CsvHelper
   href: api/Core2D.TextFieldWriter.CsvHelper.html
@@ -36920,23 +37048,109 @@ references:
   isSpec: "True"
   fullName: Core2D.TextFieldWriter.CsvHelper.CsvHelperWriter.CsvHelperWriter
   nameWithType: CsvHelperWriter.CsvHelperWriter
-- uid: Core2D.TextFieldWriter.CsvHelper.CsvHelperWriter.Core2D#Interfaces#ITextFieldWriter{Core2D#Data#IDatabase}#Write(System.String,Core2D.Interfaces.IFileSystem,Core2D.Data.IDatabase)
-  name: ITextFieldWriter<IDatabase>.Write(String, IFileSystem, IDatabase)
-  href: api/Core2D.TextFieldWriter.CsvHelper.CsvHelperWriter.html#Core2D_TextFieldWriter_CsvHelper_CsvHelperWriter_Core2D_Interfaces_ITextFieldWriter_Core2D_Data_IDatabase__Write_System_String_Core2D_Interfaces_IFileSystem_Core2D_Data_IDatabase_
-  commentId: M:Core2D.TextFieldWriter.CsvHelper.CsvHelperWriter.Core2D#Interfaces#ITextFieldWriter{Core2D#Data#IDatabase}#Write(System.String,Core2D.Interfaces.IFileSystem,Core2D.Data.IDatabase)
-  name.vb: Core2D.Interfaces.ITextFieldWriter<Core2D.Data.IDatabase>.Write(String, IFileSystem, IDatabase)
-  fullName: Core2D.TextFieldWriter.CsvHelper.CsvHelperWriter.Core2D.Interfaces.ITextFieldWriter<Core2D.Data.IDatabase>.Write(System.String, Core2D.Interfaces.IFileSystem, Core2D.Data.IDatabase)
-  nameWithType: CsvHelperWriter.ITextFieldWriter<IDatabase>.Write(String, IFileSystem, IDatabase)
-  nameWithType.vb: CsvHelperWriter.Core2D.Interfaces.ITextFieldWriter<Core2D.Data.IDatabase>.Write(String, IFileSystem, IDatabase)
-- uid: Core2D.TextFieldWriter.CsvHelper.CsvHelperWriter.Core2D#Interfaces#ITextFieldWriter{Core2D#Data#IDatabase}#Write*
-  name: ITextFieldWriter<IDatabase>.Write
-  href: api/Core2D.TextFieldWriter.CsvHelper.CsvHelperWriter.html#Core2D_TextFieldWriter_CsvHelper_CsvHelperWriter_Core2D_Interfaces_ITextFieldWriter_Core2D_Data_IDatabase__Write_
-  commentId: Overload:Core2D.TextFieldWriter.CsvHelper.CsvHelperWriter.Core2D#Interfaces#ITextFieldWriter{Core2D#Data#IDatabase}#Write
+- uid: Core2D.TextFieldWriter.CsvHelper.CsvHelperWriter.Extension
+  name: Extension
+  href: api/Core2D.TextFieldWriter.CsvHelper.CsvHelperWriter.html#Core2D_TextFieldWriter_CsvHelper_CsvHelperWriter_Extension
+  commentId: P:Core2D.TextFieldWriter.CsvHelper.CsvHelperWriter.Extension
+  fullName: Core2D.TextFieldWriter.CsvHelper.CsvHelperWriter.Extension
+  nameWithType: CsvHelperWriter.Extension
+- uid: Core2D.TextFieldWriter.CsvHelper.CsvHelperWriter.Extension*
+  name: Extension
+  href: api/Core2D.TextFieldWriter.CsvHelper.CsvHelperWriter.html#Core2D_TextFieldWriter_CsvHelper_CsvHelperWriter_Extension_
+  commentId: Overload:Core2D.TextFieldWriter.CsvHelper.CsvHelperWriter.Extension
   isSpec: "True"
-  name.vb: Core2D.Interfaces.ITextFieldWriter<Core2D.Data.IDatabase>.Write
-  fullName: Core2D.TextFieldWriter.CsvHelper.CsvHelperWriter.Core2D.Interfaces.ITextFieldWriter<Core2D.Data.IDatabase>.Write
-  nameWithType: CsvHelperWriter.ITextFieldWriter<IDatabase>.Write
-  nameWithType.vb: CsvHelperWriter.Core2D.Interfaces.ITextFieldWriter<Core2D.Data.IDatabase>.Write
+  fullName: Core2D.TextFieldWriter.CsvHelper.CsvHelperWriter.Extension
+  nameWithType: CsvHelperWriter.Extension
+- uid: Core2D.TextFieldWriter.CsvHelper.CsvHelperWriter.Name
+  name: Name
+  href: api/Core2D.TextFieldWriter.CsvHelper.CsvHelperWriter.html#Core2D_TextFieldWriter_CsvHelper_CsvHelperWriter_Name
+  commentId: P:Core2D.TextFieldWriter.CsvHelper.CsvHelperWriter.Name
+  fullName: Core2D.TextFieldWriter.CsvHelper.CsvHelperWriter.Name
+  nameWithType: CsvHelperWriter.Name
+- uid: Core2D.TextFieldWriter.CsvHelper.CsvHelperWriter.Name*
+  name: Name
+  href: api/Core2D.TextFieldWriter.CsvHelper.CsvHelperWriter.html#Core2D_TextFieldWriter_CsvHelper_CsvHelperWriter_Name_
+  commentId: Overload:Core2D.TextFieldWriter.CsvHelper.CsvHelperWriter.Name
+  isSpec: "True"
+  fullName: Core2D.TextFieldWriter.CsvHelper.CsvHelperWriter.Name
+  nameWithType: CsvHelperWriter.Name
+- uid: Core2D.TextFieldWriter.CsvHelper.CsvHelperWriter.Write(System.IO.Stream,Core2D.Data.IDatabase)
+  name: Write(Stream, IDatabase)
+  href: api/Core2D.TextFieldWriter.CsvHelper.CsvHelperWriter.html#Core2D_TextFieldWriter_CsvHelper_CsvHelperWriter_Write_System_IO_Stream_Core2D_Data_IDatabase_
+  commentId: M:Core2D.TextFieldWriter.CsvHelper.CsvHelperWriter.Write(System.IO.Stream,Core2D.Data.IDatabase)
+  fullName: Core2D.TextFieldWriter.CsvHelper.CsvHelperWriter.Write(System.IO.Stream, Core2D.Data.IDatabase)
+  nameWithType: CsvHelperWriter.Write(Stream, IDatabase)
+- uid: Core2D.TextFieldWriter.CsvHelper.CsvHelperWriter.Write*
+  name: Write
+  href: api/Core2D.TextFieldWriter.CsvHelper.CsvHelperWriter.html#Core2D_TextFieldWriter_CsvHelper_CsvHelperWriter_Write_
+  commentId: Overload:Core2D.TextFieldWriter.CsvHelper.CsvHelperWriter.Write
+  isSpec: "True"
+  fullName: Core2D.TextFieldWriter.CsvHelper.CsvHelperWriter.Write
+  nameWithType: CsvHelperWriter.Write
+- uid: Core2D.TextFieldWriter.OpenXml
+  name: Core2D.TextFieldWriter.OpenXml
+  href: api/Core2D.TextFieldWriter.OpenXml.html
+  commentId: N:Core2D.TextFieldWriter.OpenXml
+  fullName: Core2D.TextFieldWriter.OpenXml
+  nameWithType: Core2D.TextFieldWriter.OpenXml
+- uid: Core2D.TextFieldWriter.OpenXml.OpenXmlWriter
+  name: OpenXmlWriter
+  href: api/Core2D.TextFieldWriter.OpenXml.OpenXmlWriter.html
+  commentId: T:Core2D.TextFieldWriter.OpenXml.OpenXmlWriter
+  fullName: Core2D.TextFieldWriter.OpenXml.OpenXmlWriter
+  nameWithType: OpenXmlWriter
+- uid: Core2D.TextFieldWriter.OpenXml.OpenXmlWriter.#ctor(System.IServiceProvider)
+  name: OpenXmlWriter(IServiceProvider)
+  href: api/Core2D.TextFieldWriter.OpenXml.OpenXmlWriter.html#Core2D_TextFieldWriter_OpenXml_OpenXmlWriter__ctor_System_IServiceProvider_
+  commentId: M:Core2D.TextFieldWriter.OpenXml.OpenXmlWriter.#ctor(System.IServiceProvider)
+  fullName: Core2D.TextFieldWriter.OpenXml.OpenXmlWriter.OpenXmlWriter(System.IServiceProvider)
+  nameWithType: OpenXmlWriter.OpenXmlWriter(IServiceProvider)
+- uid: Core2D.TextFieldWriter.OpenXml.OpenXmlWriter.#ctor*
+  name: OpenXmlWriter
+  href: api/Core2D.TextFieldWriter.OpenXml.OpenXmlWriter.html#Core2D_TextFieldWriter_OpenXml_OpenXmlWriter__ctor_
+  commentId: Overload:Core2D.TextFieldWriter.OpenXml.OpenXmlWriter.#ctor
+  isSpec: "True"
+  fullName: Core2D.TextFieldWriter.OpenXml.OpenXmlWriter.OpenXmlWriter
+  nameWithType: OpenXmlWriter.OpenXmlWriter
+- uid: Core2D.TextFieldWriter.OpenXml.OpenXmlWriter.Extension
+  name: Extension
+  href: api/Core2D.TextFieldWriter.OpenXml.OpenXmlWriter.html#Core2D_TextFieldWriter_OpenXml_OpenXmlWriter_Extension
+  commentId: P:Core2D.TextFieldWriter.OpenXml.OpenXmlWriter.Extension
+  fullName: Core2D.TextFieldWriter.OpenXml.OpenXmlWriter.Extension
+  nameWithType: OpenXmlWriter.Extension
+- uid: Core2D.TextFieldWriter.OpenXml.OpenXmlWriter.Extension*
+  name: Extension
+  href: api/Core2D.TextFieldWriter.OpenXml.OpenXmlWriter.html#Core2D_TextFieldWriter_OpenXml_OpenXmlWriter_Extension_
+  commentId: Overload:Core2D.TextFieldWriter.OpenXml.OpenXmlWriter.Extension
+  isSpec: "True"
+  fullName: Core2D.TextFieldWriter.OpenXml.OpenXmlWriter.Extension
+  nameWithType: OpenXmlWriter.Extension
+- uid: Core2D.TextFieldWriter.OpenXml.OpenXmlWriter.Name
+  name: Name
+  href: api/Core2D.TextFieldWriter.OpenXml.OpenXmlWriter.html#Core2D_TextFieldWriter_OpenXml_OpenXmlWriter_Name
+  commentId: P:Core2D.TextFieldWriter.OpenXml.OpenXmlWriter.Name
+  fullName: Core2D.TextFieldWriter.OpenXml.OpenXmlWriter.Name
+  nameWithType: OpenXmlWriter.Name
+- uid: Core2D.TextFieldWriter.OpenXml.OpenXmlWriter.Name*
+  name: Name
+  href: api/Core2D.TextFieldWriter.OpenXml.OpenXmlWriter.html#Core2D_TextFieldWriter_OpenXml_OpenXmlWriter_Name_
+  commentId: Overload:Core2D.TextFieldWriter.OpenXml.OpenXmlWriter.Name
+  isSpec: "True"
+  fullName: Core2D.TextFieldWriter.OpenXml.OpenXmlWriter.Name
+  nameWithType: OpenXmlWriter.Name
+- uid: Core2D.TextFieldWriter.OpenXml.OpenXmlWriter.Write(System.IO.Stream,Core2D.Data.IDatabase)
+  name: Write(Stream, IDatabase)
+  href: api/Core2D.TextFieldWriter.OpenXml.OpenXmlWriter.html#Core2D_TextFieldWriter_OpenXml_OpenXmlWriter_Write_System_IO_Stream_Core2D_Data_IDatabase_
+  commentId: M:Core2D.TextFieldWriter.OpenXml.OpenXmlWriter.Write(System.IO.Stream,Core2D.Data.IDatabase)
+  fullName: Core2D.TextFieldWriter.OpenXml.OpenXmlWriter.Write(System.IO.Stream, Core2D.Data.IDatabase)
+  nameWithType: OpenXmlWriter.Write(Stream, IDatabase)
+- uid: Core2D.TextFieldWriter.OpenXml.OpenXmlWriter.Write*
+  name: Write
+  href: api/Core2D.TextFieldWriter.OpenXml.OpenXmlWriter.html#Core2D_TextFieldWriter_OpenXml_OpenXmlWriter_Write_
+  commentId: Overload:Core2D.TextFieldWriter.OpenXml.OpenXmlWriter.Write
+  isSpec: "True"
+  fullName: Core2D.TextFieldWriter.OpenXml.OpenXmlWriter.Write
+  nameWithType: OpenXmlWriter.Write
 - uid: Core2D.UI.Avalonia
   name: Core2D.UI.Avalonia
   href: api/Core2D.UI.Avalonia.html
@@ -37466,6 +37680,28 @@ references:
   isSpec: "True"
   fullName: Core2D.UI.Avalonia.Converters.ObjectToXamlStringConverter.ConvertBack
   nameWithType: ObjectToXamlStringConverter.ConvertBack
+- uid: Core2D.UI.Avalonia.Converters.PriorityMultiValueConverter
+  name: PriorityMultiValueConverter
+  href: api/Core2D.UI.Avalonia.Converters.PriorityMultiValueConverter.html
+  commentId: T:Core2D.UI.Avalonia.Converters.PriorityMultiValueConverter
+  fullName: Core2D.UI.Avalonia.Converters.PriorityMultiValueConverter
+  nameWithType: PriorityMultiValueConverter
+- uid: Core2D.UI.Avalonia.Converters.PriorityMultiValueConverter.Convert(System.Collections.Generic.IList{System.Object},System.Type,System.Object,System.Globalization.CultureInfo)
+  name: Convert(IList<Object>, Type, Object, CultureInfo)
+  href: api/Core2D.UI.Avalonia.Converters.PriorityMultiValueConverter.html#Core2D_UI_Avalonia_Converters_PriorityMultiValueConverter_Convert_System_Collections_Generic_IList_System_Object__System_Type_System_Object_System_Globalization_CultureInfo_
+  commentId: M:Core2D.UI.Avalonia.Converters.PriorityMultiValueConverter.Convert(System.Collections.Generic.IList{System.Object},System.Type,System.Object,System.Globalization.CultureInfo)
+  name.vb: Convert(IList(Of Object), Type, Object, CultureInfo)
+  fullName: Core2D.UI.Avalonia.Converters.PriorityMultiValueConverter.Convert(System.Collections.Generic.IList<System.Object>, System.Type, System.Object, System.Globalization.CultureInfo)
+  fullName.vb: Core2D.UI.Avalonia.Converters.PriorityMultiValueConverter.Convert(System.Collections.Generic.IList(Of System.Object), System.Type, System.Object, System.Globalization.CultureInfo)
+  nameWithType: PriorityMultiValueConverter.Convert(IList<Object>, Type, Object, CultureInfo)
+  nameWithType.vb: PriorityMultiValueConverter.Convert(IList(Of Object), Type, Object, CultureInfo)
+- uid: Core2D.UI.Avalonia.Converters.PriorityMultiValueConverter.Convert*
+  name: Convert
+  href: api/Core2D.UI.Avalonia.Converters.PriorityMultiValueConverter.html#Core2D_UI_Avalonia_Converters_PriorityMultiValueConverter_Convert_
+  commentId: Overload:Core2D.UI.Avalonia.Converters.PriorityMultiValueConverter.Convert
+  isSpec: "True"
+  fullName: Core2D.UI.Avalonia.Converters.PriorityMultiValueConverter.Convert
+  nameWithType: PriorityMultiValueConverter.Convert
 - uid: Core2D.UI.Avalonia.Converters.TreeViewSelectedItemToObjectConverter
   name: TreeViewSelectedItemToObjectConverter
   href: api/Core2D.UI.Avalonia.Converters.TreeViewSelectedItemToObjectConverter.html
@@ -37747,6 +37983,18 @@ references:
   commentId: T:Core2D.UI.Avalonia.Dock.Tools.ProjectTool
   fullName: Core2D.UI.Avalonia.Dock.Tools.ProjectTool
   nameWithType: ProjectTool
+- uid: Core2D.UI.Avalonia.Dock.Tools.PropertiesTool
+  name: PropertiesTool
+  href: api/Core2D.UI.Avalonia.Dock.Tools.PropertiesTool.html
+  commentId: T:Core2D.UI.Avalonia.Dock.Tools.PropertiesTool
+  fullName: Core2D.UI.Avalonia.Dock.Tools.PropertiesTool
+  nameWithType: PropertiesTool
+- uid: Core2D.UI.Avalonia.Dock.Tools.RecordTool
+  name: RecordTool
+  href: api/Core2D.UI.Avalonia.Dock.Tools.RecordTool.html
+  commentId: T:Core2D.UI.Avalonia.Dock.Tools.RecordTool
+  fullName: Core2D.UI.Avalonia.Dock.Tools.RecordTool
+  nameWithType: RecordTool
 - uid: Core2D.UI.Avalonia.Dock.Tools.ScriptsTool
   name: ScriptsTool
   href: api/Core2D.UI.Avalonia.Dock.Tools.ScriptsTool.html

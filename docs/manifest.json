@@ -1,6 +1,6 @@
 {
   "homepages": [],
-  "source_base_path": "/home/ubuntu/projects/Core2D/docfx",
+  "source_base_path": "C:/DOWNLOADS/GitHub/Core2D/docfx",
   "xrefmap": "xrefmap.yml",
   "files": [
     {
@@ -285,7 +285,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Data.DataFlow.html",
-          "hash": "svPHHL8o1ZfMqzyRG83+Hw=="
+          "hash": "DkWvdYTAIaNFUyEZ2mrzPw=="
         }
       },
       "is_incremental": false,
@@ -825,7 +825,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Editor.IProjectEditor.html",
-          "hash": "QhaouozSoAGhJby03Ys2yw=="
+          "hash": "71Dp6wCDxbUm9hQv0ZaKcQ=="
         }
       },
       "is_incremental": false,
@@ -1065,7 +1065,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Editor.ProjectEditor.html",
-          "hash": "6SFvwo/cY+AtZ98+esx7Og=="
+          "hash": "Bz3uM3TSHbjSvWQjdO6NtA=="
         }
       },
       "is_incremental": false,
@@ -1077,7 +1077,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Editor.ProjectEditorConfiguration.html",
-          "hash": "b0Hifk5geF9ITBo5DC8dJQ=="
+          "hash": "IPHfFeZlmZVqNStmXzbVyw=="
         }
       },
       "is_incremental": false,
@@ -2481,7 +2481,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Interfaces.ITextFieldReader-1.html",
-          "hash": "9BgbvuS6yEtfCJDaVgioLw=="
+          "hash": "caQ0oPofwmx6zLePs0jUgA=="
         }
       },
       "is_incremental": false,
@@ -2493,7 +2493,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Interfaces.ITextFieldWriter-1.html",
-          "hash": "f7xZxoRd95MlYNf+wOVeoQ=="
+          "hash": "jbRzqFfUSq8YnvnJhwMPOQ=="
         }
       },
       "is_incremental": false,
@@ -3561,7 +3561,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Shapes.EllipseShape.html",
-          "hash": "iLbNZunR9KkJDazHzYDflQ=="
+          "hash": "UkZ/YsJrjWRCuCcGvXH4uw=="
         }
       },
       "is_incremental": false,
@@ -3645,7 +3645,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Shapes.IEllipseShape.html",
-          "hash": "03S68l262x/V3OCOORC16g=="
+          "hash": "tvyF1SYxne9ttQ5TZoIdwg=="
         }
       },
       "is_incremental": false,
@@ -3669,7 +3669,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Shapes.IImageShape.html",
-          "hash": "aYTmwQbF+gTS7aTf3vRYGQ=="
+          "hash": "1iQ6zMhc3KvWuAO2BzKk7A=="
         }
       },
       "is_incremental": false,
@@ -3729,7 +3729,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Shapes.IRectangleShape.html",
-          "hash": "YggWv7tp73qhKGRPekDvIg=="
+          "hash": "eUYZ0Gw1neJsQsPmXpeQ4g=="
         }
       },
       "is_incremental": false,
@@ -3741,7 +3741,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Shapes.ITextShape.html",
-          "hash": "RuWBpu436PqslrFEmO4Aew=="
+          "hash": "aoPccst/gwagtEafW5DotQ=="
         }
       },
       "is_incremental": false,
@@ -3753,7 +3753,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Shapes.ImageShape.html",
-          "hash": "Qm4eMMPAC8P5bmTAmJRn5Q=="
+          "hash": "v88hhFgrC98wAjd0zZn34g=="
         }
       },
       "is_incremental": false,
@@ -3837,7 +3837,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Shapes.RectangleShape.html",
-          "hash": "ZZ+zoTDXBytXx594hgRw3w=="
+          "hash": "/aNm7etJRarGDcqOKFv4sQ=="
         }
       },
       "is_incremental": false,
@@ -3849,19 +3849,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Shapes.TextShape.html",
-          "hash": "RFmvCN/b7HkQtA3QJOfUtQ=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/Core2D.Shapes.TextShapeExtensions.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Core2D.Shapes.TextShapeExtensions.html",
-          "hash": "3vZeArwRbNWA78c2R4ir9w=="
+          "hash": "STT5q33jYxY6YeixhXpOGA=="
         }
       },
       "is_incremental": false,
@@ -3873,7 +3861,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Shapes.html",
-          "hash": "HAJJa6ANh1p8jvOsOnxY1A=="
+          "hash": "7K9qCarjz7orcOiuEhTJLA=="
         }
       },
       "is_incremental": false,
@@ -4209,7 +4197,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.TextFieldReader.CsvHelper.CsvHelperReader.html",
-          "hash": "hAUHGvZbi+CpdJjUsONcAA=="
+          "hash": "2ySEhbiNONebmABbj+W0VQ=="
         }
       },
       "is_incremental": false,
@@ -4229,11 +4217,35 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.TextFieldReader.OpenXml.OpenXmlReader.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.TextFieldReader.OpenXml.OpenXmlReader.html",
+          "hash": "MwQ3+M8SKbth3aoCmwzEbg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.TextFieldReader.OpenXml.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.TextFieldReader.OpenXml.html",
+          "hash": "r/i8ehGT1sol1qCCn+H+rA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/Core2D.TextFieldWriter.CsvHelper.CsvHelperWriter.yml",
       "output": {
         ".html": {
           "relative_path": "api/Core2D.TextFieldWriter.CsvHelper.CsvHelperWriter.html",
-          "hash": "WMFU9yLusYE47TAxIzniOA=="
+          "hash": "h4d8ZTyoAuGxLH0ppvbEeg=="
         }
       },
       "is_incremental": false,
@@ -4246,6 +4258,30 @@
         ".html": {
           "relative_path": "api/Core2D.TextFieldWriter.CsvHelper.html",
           "hash": "vX+4GjWcITjgb3TdL+VrHw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.TextFieldWriter.OpenXml.OpenXmlWriter.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.TextFieldWriter.OpenXml.OpenXmlWriter.html",
+          "hash": "Cq9Yl44osWRZeULZ1BfACQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.TextFieldWriter.OpenXml.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.TextFieldWriter.OpenXml.html",
+          "hash": "gDUEo/v+tKaGskbVvK04vw=="
         }
       },
       "is_incremental": false,
@@ -4433,6 +4469,18 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Converters.PriorityMultiValueConverter.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Converters.PriorityMultiValueConverter.html",
+          "hash": "p5fWzQ3GBs9cgUZdEQ5Fkw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/Core2D.UI.Avalonia.Converters.TreeViewSelectedItemToObjectConverter.yml",
       "output": {
         ".html": {
@@ -4449,7 +4497,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Converters.html",
-          "hash": "ydtQ6mLdAr97qhuko9FMUA=="
+          "hash": "QMwjHqDrn8ZGLP1uFd2ctQ=="
         }
       },
       "is_incremental": false,
@@ -4485,7 +4533,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Dock.Factories.EditorDockFactory.html",
-          "hash": "tTer8TXFwKtr2fbiNgk9LA=="
+          "hash": "8DSOFOGUVbFfXmGb+q9nQw=="
         }
       },
       "is_incremental": false,
@@ -4673,6 +4721,30 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Dock.Tools.PropertiesTool.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Dock.Tools.PropertiesTool.html",
+          "hash": "un9j6wApucv2m3QEzyvZBg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Dock.Tools.RecordTool.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Dock.Tools.RecordTool.html",
+          "hash": "6wfMTqWXKM8MG6/cWjXX5Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/Core2D.UI.Avalonia.Dock.Tools.ScriptTool.yml",
       "output": {
         ".html": {
@@ -4785,7 +4857,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Dock.Tools.html",
-          "hash": "ZpsBoshS1js0zsIHM6uBSQ=="
+          "hash": "DGyrl7do0tQv9W0GdI93Mw=="
         }
       },
       "is_incremental": false,
@@ -4941,7 +5013,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Editor.AvaloniaProjectEditorPlatform.html",
-          "hash": "7KF1g3Y4sq3WZHiyVJONwA=="
+          "hash": "7LjKczssjLffBpxfTQBn9w=="
         }
       },
       "is_incremental": false,
@@ -5013,7 +5085,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Modules.DependenciesModule.html",
-          "hash": "exyx2qeMUAfzP1cYtghnMA=="
+          "hash": "xdaE4kenxiCxbQj/d8Wjng=="
         }
       },
       "is_incremental": false,
@@ -6513,7 +6585,7 @@
       "output": {
         ".html": {
           "relative_path": "api/toc.html",
-          "hash": "zLjFbNwM3rKjm0AinEs80w=="
+          "hash": "r4wwI9PSXZCgga1onLACXQ=="
         }
       },
       "is_incremental": false,
@@ -6550,7 +6622,7 @@
           "hash": "cHCapMEb8eO1WWlVzG/2Gg=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -6569,23 +6641,25 @@
   "incremental_info": [
     {
       "status": {
-        "can_incremental": true,
+        "can_incremental": false,
+        "details": "Cannot build incrementally because last build info is missing.",
         "incrementalPhase": "build",
         "total_file_count": 0,
-        "skipped_file_count": 0
+        "skipped_file_count": 0,
+        "full_build_reason_code": "NoAvailableBuildCache"
       },
       "processors": {
         "ConceptualDocumentProcessor": {
-          "can_incremental": true,
+          "can_incremental": false,
           "incrementalPhase": "build",
           "total_file_count": 1,
-          "skipped_file_count": 1
+          "skipped_file_count": 0
         },
         "ManagedReferenceDocumentProcessor": {
-          "can_incremental": true,
+          "can_incremental": false,
           "incrementalPhase": "build",
-          "total_file_count": 542,
-          "skipped_file_count": 542
+          "total_file_count": 548,
+          "skipped_file_count": 0
         },
         "ResourceDocumentProcessor": {
           "can_incremental": false,
@@ -6605,8 +6679,8 @@
     },
     {
       "status": {
-        "can_incremental": true,
-        "details": "Can support incremental post processing.",
+        "can_incremental": false,
+        "details": "Cannot support incremental post processing, the reason is: last post processor info is null.",
         "incrementalPhase": "postProcessing",
         "total_file_count": 0,
         "skipped_file_count": 0
