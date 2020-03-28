@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Globalization;
+using System.IO;
 using Core2D.Data;
 using Core2D.Interfaces;
 using CSV = CsvHelper;
@@ -22,13 +23,18 @@ namespace Core2D.TextFieldWriter.CsvHelper
             _serviceProvider = serviceProvider;
         }
 
+        /// <inheritdoc/>
+        public string Name { get; } = "Csv (CsvHelper)";
+
+        /// <inheritdoc/>
+        public string Extension { get; } = "csv";
+
         /// <summary>
         /// Write database records to text based file format.
         /// </summary>
-        /// <param name="path">The fields file path.</param>
-        /// <param name="fs">The file system.</param>
+        /// <param name="stream">The fields file stream.</param>
         /// <param name="database">The source records database.</param>
-        void ITextFieldWriter<IDatabase>.Write(string path, IFileSystem fs, IDatabase database)
+        public void Write(Stream stream, IDatabase database)
         {
             using var writer = new System.IO.StringWriter();
             var configuration = new CSV.Configuration.CsvConfiguration(CultureInfo.CurrentCulture)
@@ -59,7 +65,11 @@ namespace Core2D.TextFieldWriter.CsvHelper
                 }
             }
 
-            fs.WriteUtf8Text(path, writer.ToString());
+            var fs = _serviceProvider.GetService<IFileSystem>();
+            if (fs != null)
+            {
+                fs.WriteUtf8Text(stream, writer.ToString());
+            }
         }
     }
 }
