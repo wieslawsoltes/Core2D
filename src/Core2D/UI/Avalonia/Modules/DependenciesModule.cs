@@ -19,7 +19,9 @@ using Core2D.ScriptRunner.Roslyn;
 using Core2D.Serializer.Newtonsoft;
 using Core2D.Serializer.Xaml;
 using Core2D.TextFieldReader.CsvHelper;
+using Core2D.TextFieldReader.OpenXml;
 using Core2D.TextFieldWriter.CsvHelper;
+using Core2D.TextFieldWriter.OpenXml;
 using Core2D.UI.Avalonia.Utilities;
 
 namespace Core2D.UI.Avalonia.Modules
@@ -50,7 +52,9 @@ namespace Core2D.UI.Avalonia.Modules
             builder.RegisterType<JpegSkiaSharpWriter>().As<IFileWriter>().InstancePerLifetimeScope();
             builder.RegisterType<WebpSkiaSharpWriter>().As<IFileWriter>().InstancePerLifetimeScope();
             builder.RegisterType<CsvHelperReader>().As<ITextFieldReader<IDatabase>>().InstancePerLifetimeScope();
+            builder.RegisterType<OpenXmlReader>().As<ITextFieldReader<IDatabase>>().InstancePerLifetimeScope();
             builder.RegisterType<CsvHelperWriter>().As<ITextFieldWriter<IDatabase>>().InstancePerLifetimeScope();
+            builder.RegisterType<OpenXmlWriter>().As<ITextFieldWriter<IDatabase>>().InstancePerLifetimeScope();
         }
     }
 }
