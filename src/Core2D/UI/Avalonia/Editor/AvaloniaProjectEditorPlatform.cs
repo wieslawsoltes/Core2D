@@ -348,14 +348,32 @@ namespace Core2D.UI.Avalonia.Editor
         {
             var dlg = new OpenFileDialog() { Title = "Open" };
             dlg.Filters.Add(new FileDialogFilter() { Name = "Csv", Extensions = { "csv" } });
+            dlg.Filters.Add(new FileDialogFilter() { Name = "Xlsx", Extensions = { "xlsx" } });
             dlg.Filters.Add(new FileDialogFilter() { Name = "All", Extensions = { "*" } });
             var result = await dlg.ShowAsync(_serviceProvider.GetService<MainWindow>());
             if (result != null)
             {
                 var path = result.FirstOrDefault();
-                if (path != null)
+                if (path == null)
                 {
-                    _serviceProvider.GetService<IProjectEditor>().OnImportData(project, path);
+                    return;
+                }
+                string resultExtension = System.IO.Path.GetExtension(path);
+                if (string.Compare(resultExtension, ".csv", StringComparison.OrdinalIgnoreCase) == 0)
+                {
+                    var reader = _serviceProvider.GetService<IProjectEditor>().TextFieldReaders.FirstOrDefault(x => x.Extension == "csv");
+                    if (reader != null)
+                    {
+                        _serviceProvider.GetService<IProjectEditor>().OnImportData(project, path, reader);
+                    }
+                }
+                else if (string.Compare(resultExtension, ".xlsx", StringComparison.OrdinalIgnoreCase) == 0)
+                {
+                    var reader = _serviceProvider.GetService<IProjectEditor>().TextFieldReaders.FirstOrDefault(x => x.Extension == "xlsx");
+                    if (reader != null)
+                    {
+                        _serviceProvider.GetService<IProjectEditor>().OnImportData(project, path, reader);
+                    }
                 }
             }
         }
@@ -367,13 +385,30 @@ namespace Core2D.UI.Avalonia.Editor
             {
                 var dlg = new SaveFileDialog() { Title = "Save" };
                 dlg.Filters.Add(new FileDialogFilter() { Name = "Csv", Extensions = { "csv" } });
+                dlg.Filters.Add(new FileDialogFilter() { Name = "Xlsx", Extensions = { "xlsx" } });
                 dlg.Filters.Add(new FileDialogFilter() { Name = "All", Extensions = { "*" } });
                 dlg.InitialFileName = db.Name;
                 dlg.DefaultExtension = "csv";
                 var result = await dlg.ShowAsync(_serviceProvider.GetService<MainWindow>());
                 if (result != null)
                 {
-                    _serviceProvider.GetService<IProjectEditor>().OnExportData(result, db);
+                    string resultExtension = System.IO.Path.GetExtension(result);
+                    if (string.Compare(resultExtension, ".csv", StringComparison.OrdinalIgnoreCase) == 0)
+                    {
+                        var writer = _serviceProvider.GetService<IProjectEditor>().TextFieldWriters.FirstOrDefault(x => x.Extension == "csv");
+                        if (writer != null)
+                        {
+                            _serviceProvider.GetService<IProjectEditor>().OnExportData(result, db, writer);
+                        }
+                    }
+                    else if (string.Compare(resultExtension, ".xlsx", StringComparison.OrdinalIgnoreCase) == 0)
+                    {
+                        var writer = _serviceProvider.GetService<IProjectEditor>().TextFieldWriters.FirstOrDefault(x => x.Extension == "xlsx");
+                        if (writer != null)
+                        {
+                            _serviceProvider.GetService<IProjectEditor>().OnExportData(result, db, writer);
+                        }
+                    }
                 }
             }
         }
@@ -385,14 +420,32 @@ namespace Core2D.UI.Avalonia.Editor
             {
                 var dlg = new OpenFileDialog() { Title = "Open" };
                 dlg.Filters.Add(new FileDialogFilter() { Name = "Csv", Extensions = { "csv" } });
+                dlg.Filters.Add(new FileDialogFilter() { Name = "Xlsx", Extensions = { "xlsx" } });
                 dlg.Filters.Add(new FileDialogFilter() { Name = "All", Extensions = { "*" } });
                 var result = await dlg.ShowAsync(_serviceProvider.GetService<MainWindow>());
                 if (result != null)
                 {
                     var path = result.FirstOrDefault();
-                    if (path != null)
+                    if (path == null)
                     {
-                        _serviceProvider.GetService<IProjectEditor>().OnUpdateData(path, db);
+                        return;
+                    }
+                    string resultExtension = System.IO.Path.GetExtension(path);
+                    if (string.Compare(resultExtension, ".csv", StringComparison.OrdinalIgnoreCase) == 0)
+                    {
+                        var reader = _serviceProvider.GetService<IProjectEditor>().TextFieldReaders.FirstOrDefault(x => x.Extension == "csv");
+                        if (reader != null)
+                        {
+                            _serviceProvider.GetService<IProjectEditor>().OnUpdateData(path, db, reader);
+                        }
+                    }
+                    else if (string.Compare(resultExtension, ".xlsx", StringComparison.OrdinalIgnoreCase) == 0)
+                    {
+                        var reader = _serviceProvider.GetService<IProjectEditor>().TextFieldReaders.FirstOrDefault(x => x.Extension == "xlsx");
+                        if (reader != null)
+                        {
+                            _serviceProvider.GetService<IProjectEditor>().OnUpdateData(path, db, reader);
+                        }
                     }
                 }
             }
