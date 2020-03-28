@@ -94,65 +94,69 @@ namespace Core2D.Shapes
         /// <summary>
         /// Bind properties or data record to <see cref="ITextShape.Text"/> property.
         /// </summary>
-        /// <param name="text">The text shape instance.</param>
+        /// <param name="shape">The text shape instance.</param>
         /// <param name="db">The properties database used for binding.</param>
         /// <param name="r">The external data record used for binding.</param>
         /// <returns>The string bound to properties or data record.</returns>
-        public static string BindText(this ITextShape text, ImmutableArray<IProperty> db, IRecord r)
+        public static string BindText(this ITextShape shape, ImmutableArray<IProperty> db, IRecord r)
         {
-            var record = text.Data?.Record ?? r;
+            var text = shape.Text;
+            var data = shape.Data;
+            var record = data?.Record ?? r;
 
-            if (!string.IsNullOrEmpty(text.Text))
+            if (string.IsNullOrEmpty(text))
             {
-                if (IsBinding(text.Text, out string binding))
+                return text;
+            }
+
+            if (IsBinding(text, out string binding))
+            {
+                // Try to bind to internal Record or external (r) data record using Text property as Column.Name name.
+                if (record != null)
                 {
-                    // Try to bind to internal Record or external (r) data record using Text property as Column.Name name.
-                    if (record != null)
+                    bool success = TryToBind(record, binding, out string value);
+                    if (success)
                     {
-                        bool success = TryToBind(record, binding, out string value);
-                        if (success)
-                        {
-                            return value;
-                        }
-                    }
-
-                    // Try to bind to external Properties database (e.g. Container.Data.Properties) using Text property as Property.Name name.
-                    if (db != null && db.Length > 0)
-                    {
-                        bool success = TryToBind(db, binding, out string value);
-                        if (success)
-                        {
-                            return value;
-                        }
-                    }
-
-                    // Try to bind to internal Properties database (e.g. Data.Properties) using Text property as Property.Name name.
-                    if (text.Data?.Properties != null && text.Data.Properties.Length > 0)
-                    {
-                        bool success = TryToBind(text.Data.Properties, binding, out string value);
-                        if (success)
-                        {
-                            return value;
-                        }
+                        return value;
                     }
                 }
 
-                // Try to bind to Properties using Text as formatting.
-                if (text.Data?.Properties != null && text.Data.Properties.Length > 0)
+                // Try to bind to external Properties database (e.g. Container.Data.Properties) using Text property as Property.Name name.
+                if (db != null && db.Length > 0)
                 {
-                    try
+                    bool success = TryToBind(db, binding, out string value);
+                    if (success)
                     {
-                        var args = text.Data.Properties.Where(x => x != null).Select(x => x.Value).ToArray();
-                        if (text.Text != null && args != null && args.Length > 0)
-                        {
-                            return string.Format(text.Text, args);
-                        }
+                        return value;
                     }
-                    catch (FormatException) { }
+                }
+
+                // Try to bind to internal Properties database (e.g. Data.Properties) using Text property as Property.Name name.
+                if (data?.Properties != null && data.Properties.Length > 0)
+                {
+                    bool success = TryToBind(data.Properties, binding, out string value);
+                    if (success)
+                    {
+                        return value;
+                    }
                 }
             }
 
-            return text.Text;
+            // Try to bind to Properties using Text as formatting.
+            if (data?.Properties != null && data.Properties.Length > 0)
+            {
+                try
+                {
+                    var args = data.Properties.Where(x => x != null).Select(x => x.Value).ToArray();
+                    if (args != null && args.Length > 0)
+                    {
+                        return string.Format(text, args);
+                    }
+                }
+                catch (FormatException) { }
+            }
+
+            return text;
         }
     }
 }
