@@ -117,6 +117,5 @@ namespace Core2D.Style
 
             return null;
         }
-
     }
 }
