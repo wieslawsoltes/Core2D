@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using Core2D.Data;
 using Core2D.Interfaces;
@@ -24,7 +25,13 @@ namespace Core2D.TextFieldReader.CsvHelper
             _serviceProvider = serviceProvider;
         }
 
-        private static IEnumerable<string[]> ReadInternal(System.IO.Stream stream)
+        /// <inheritdoc/>
+        public string Name { get; } = "Csv (CsvHelper)";
+
+        /// <inheritdoc/>
+        public string Extension { get; } = "csv";
+
+        private static IEnumerable<string[]> ReadFields(Stream stream)
         {
             using var reader = new System.IO.StreamReader(stream);
             var configuration = new CSV.Configuration.CsvConfiguration(CultureInfo.CurrentCulture)
@@ -50,14 +57,16 @@ namespace Core2D.TextFieldReader.CsvHelper
         /// <summary>
         /// Read fields from text database file format.
         /// </summary>
-        /// <param name="path">The fields file path.</param>
-        /// <param name="fs">The file system.</param>
+        /// <param name="stream">The fields file stream.</param>
         /// <returns>The new instance of the <see cref="IDatabase"/> class</returns>
-        IDatabase ITextFieldReader<IDatabase>.Read(string path, IFileSystem fs)
+        public IDatabase Read(Stream stream)
         {
-            using var stream = fs.Open(path);
-            var fields = ReadInternal(stream).ToList();
-            var name = System.IO.Path.GetFileNameWithoutExtension(path);
+            var fields = ReadFields(stream).ToList();
+            var name = "Db";
+            if (stream is FileStream fileStream)
+            {
+                name = System.IO.Path.GetDirectoryName(fileStream.Name);
+            }
             return _serviceProvider.GetService<IFactory>().FromFields(name, fields);
         }
     }
