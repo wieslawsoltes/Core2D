@@ -108,6 +108,14 @@
             </MenuItem>
         </MenuItem>
         <MenuItem Header="_Project">
+            <MenuItem Header="_Data">
+                <MenuItem Header="_Import..." Command="{Binding Platform.OnImportData}" CommandParameter="{Binding Project}"/>
+                <Separator/>
+                <MenuItem Header="_Export..." Command="{Binding Platform.OnExportData}" CommandParameter="{Binding Project.CurrentDatabase}"/>
+                <Separator/>
+                <MenuItem Header="_Update..." Command="{Binding Platform.OnUpdateData}" CommandParameter="{Binding Project.CurrentDatabase}"/>
+            </MenuItem>
+            <Separator/>
             <MenuItem Header="O_ptions">
                 <MenuItem Header="Default is Stro_ked" Command="{Binding OnToggleDefaultIsStroked}" InputGesture="K">
                     <MenuItem.Icon>
@@ -143,13 +151,8 @@
                     </MenuItem.Icon>
                 </MenuItem>
             </MenuItem>
-            <MenuItem Header="_Data">
-                <MenuItem Header="_Import..." Command="{Binding Platform.OnImportData}" CommandParameter="{Binding Project}"/>
-                <Separator/>
-                <MenuItem Header="_Export..." Command="{Binding Platform.OnExportData}" CommandParameter="{Binding Project.CurrentDatabase}"/>
-                <Separator/>
-                <MenuItem Header="_Update..." Command="{Binding Platform.OnUpdateData}" CommandParameter="{Binding Project.CurrentDatabase}"/>
-            </MenuItem>
+            <Separator/>
+            <MenuItem Header="E_xport Project" Command="{Binding Platform.OnExport}" CommandParameter="{Binding Project}"/>
         </MenuItem>
         <MenuItem Header="_Document">
             <MenuItem Header="_Add Document" Command="{Binding OnAddDocument}" CommandParameter="{Binding Mode=OneWay}"/>
