@@ -108,14 +108,6 @@
             </MenuItem>
         </MenuItem>
         <MenuItem Header="_Project">
-            <MenuItem Header="_Data">
-                <MenuItem Header="_Import..." Command="{Binding Platform.OnImportData}" CommandParameter="{Binding Project}"/>
-                <Separator/>
-                <MenuItem Header="_Export..." Command="{Binding Platform.OnExportData}" CommandParameter="{Binding Project.CurrentDatabase}"/>
-                <Separator/>
-                <MenuItem Header="_Update..." Command="{Binding Platform.OnUpdateData}" CommandParameter="{Binding Project.CurrentDatabase}"/>
-            </MenuItem>
-            <Separator/>
             <MenuItem Header="O_ptions">
                 <MenuItem Header="Default is Stro_ked" Command="{Binding OnToggleDefaultIsStroked}" InputGesture="K">
                     <MenuItem.Icon>
@@ -731,6 +723,13 @@
                     </MenuItem>
                 </MenuItem>
             </MenuItem>
+        </MenuItem>
+        <MenuItem Header="D_ata">
+            <MenuItem Header="_Import Database..." Command="{Binding Platform.OnImportData}" CommandParameter="{Binding Project}"/>
+            <Separator/>
+            <MenuItem Header="_Export Database..." Command="{Binding Platform.OnExportData}" CommandParameter="{Binding Project.CurrentDatabase}"/>
+            <Separator/>
+            <MenuItem Header="_Update Database..." Command="{Binding Platform.OnUpdateData}" CommandParameter="{Binding Project.CurrentDatabase}"/>
         </MenuItem>
         <MenuItem Header="_Tool">
             <MenuItem Header="_None" Command="{Binding OnToolNone}" InputGesture="N">
