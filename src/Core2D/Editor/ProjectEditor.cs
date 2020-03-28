@@ -53,8 +53,8 @@ namespace Core2D.Editor
         private readonly Lazy<IJsonSerializer> _jsonSerializer;
         private readonly Lazy<IXamlSerializer> _xamlSerializer;
         private readonly Lazy<ImmutableArray<IFileWriter>> _fileWriters;
-        private readonly Lazy<ITextFieldReader<IDatabase>> _csvReader;
-        private readonly Lazy<ITextFieldWriter<IDatabase>> _csvWriter;
+        private readonly Lazy<ImmutableArray<ITextFieldReader<IDatabase>>> _textFieldReaders;
+        private readonly Lazy<ImmutableArray<ITextFieldWriter<IDatabase>>> _textFieldWriters;
         private readonly Lazy<IImageImporter> _imageImporter;
         private readonly Lazy<IScriptRunner> _scriptRunner;
         private readonly Lazy<IProjectEditorPlatform> _platform;
@@ -182,10 +182,10 @@ namespace Core2D.Editor
         public ImmutableArray<IFileWriter> FileWriters => _fileWriters.Value;
 
         /// <inheritdoc/>
-        public ITextFieldReader<IDatabase> CsvReader => _csvReader.Value;
+        public ImmutableArray<ITextFieldReader<IDatabase>> TextFieldReaders => _textFieldReaders.Value;
 
         /// <inheritdoc/>
-        public ITextFieldWriter<IDatabase> CsvWriter => _csvWriter.Value;
+        public ImmutableArray<ITextFieldWriter<IDatabase>> TextFieldWriters => _textFieldWriters.Value;
 
         /// <inheritdoc/>
         public IImageImporter ImageImporter => _imageImporter.Value;
@@ -236,8 +236,8 @@ namespace Core2D.Editor
             _jsonSerializer = _serviceProvider.GetServiceLazily<IJsonSerializer>();
             _xamlSerializer = _serviceProvider.GetServiceLazily<IXamlSerializer>();
             _fileWriters = _serviceProvider.GetServiceLazily<IFileWriter[], ImmutableArray<IFileWriter>>((writers) => writers.ToImmutableArray());
-            _csvReader = _serviceProvider.GetServiceLazily<ITextFieldReader<IDatabase>>();
-            _csvWriter = _serviceProvider.GetServiceLazily<ITextFieldWriter<IDatabase>>();
+            _textFieldReaders = _serviceProvider.GetServiceLazily<ITextFieldReader<IDatabase>[], ImmutableArray<ITextFieldReader<IDatabase>>>((readers) => readers.ToImmutableArray());
+            _textFieldWriters = _serviceProvider.GetServiceLazily<ITextFieldWriter<IDatabase>[], ImmutableArray<ITextFieldWriter<IDatabase>>>((writers) => writers.ToImmutableArray());
             _imageImporter = _serviceProvider.GetServiceLazily<IImageImporter>();
             _scriptRunner = _serviceProvider.GetServiceLazily<IScriptRunner>();
             _platform = _serviceProvider.GetServiceLazily<IProjectEditorPlatform>();
@@ -451,13 +451,14 @@ namespace Core2D.Editor
         }
 
         /// <inheritdoc/>
-        public void OnImportData(IProjectContainer project, string path)
+        public void OnImportData(IProjectContainer project, string path, ITextFieldReader<IDatabase> reader)
         {
             try
             {
                 if (project != null)
                 {
-                    var db = CsvReader?.Read(path, FileIO);
+                    using var stream = FileIO.Open(path);
+                    var db = reader?.Read(stream);
                     if (db != null)
                     {
                         project.AddDatabase(db);
@@ -472,17 +473,12 @@ namespace Core2D.Editor
         }
 
         /// <inheritdoc/>
-        public void OnImportData(string path)
-        {
-            OnImportData(Project, path);
-        }
-
-        /// <inheritdoc/>
-        public void OnExportData(string path, IDatabase database)
+        public void OnExportData(string path, IDatabase database, ITextFieldWriter<IDatabase> writer)
         {
             try
             {
-                CsvWriter?.Write(path, FileIO, database);
+                using var stream = FileIO.Create(path);
+                writer?.Write(stream, database);
             }
             catch (Exception ex)
             {
@@ -491,11 +487,12 @@ namespace Core2D.Editor
         }
 
         /// <inheritdoc/>
-        public void OnUpdateData(string path, IDatabase database)
+        public void OnUpdateData(string path, IDatabase database, ITextFieldReader<IDatabase> reader)
         {
             try
             {
-                var db = CsvReader?.Read(path, FileIO);
+                using var stream = FileIO.Open(path);
+                var db = reader?.Read(stream);
                 if (db != null)
                 {
                     Project?.UpdateDatabase(database, db);
@@ -2596,8 +2593,21 @@ namespace Core2D.Editor
                         }
                         else if (string.Compare(ext, ProjectEditorConfiguration.CsvExtension, StringComparison.OrdinalIgnoreCase) == 0)
                         {
-                            OnImportData(path);
-                            result = true;
+                            var reader = TextFieldReaders.FirstOrDefault(x => x.Extension == "csv");
+                            if (reader != null)
+                            {
+                                OnImportData(Project, path, reader);
+                                result = true;
+                            }
+                        }
+                        else if (string.Compare(ext, ProjectEditorConfiguration.XlsxExtension, StringComparison.OrdinalIgnoreCase) == 0)
+                        {
+                            var reader = TextFieldReaders.FirstOrDefault(x => x.Extension == "xlsx");
+                            if (reader != null)
+                            {
+                                OnImportData(Project, path, reader);
+                                result = true;
+                            }
                         }
                         else if (string.Compare(ext, ProjectEditorConfiguration.JsonExtension, StringComparison.OrdinalIgnoreCase) == 0)
                         {
