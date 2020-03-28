@@ -105,6 +105,11 @@ namespace Core2D.Editor
         public static string CsvExtension = ".csv";
 
         /// <summary>
+        /// XLSX file extension.
+        /// </summary>
+        public static string XlsxExtension = ".xlsx";
+
+        /// <summary>
         /// Xaml file extension.
         /// </summary>
         public static string XamlExtension = ".xaml";
