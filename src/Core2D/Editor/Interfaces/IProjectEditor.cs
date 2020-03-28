@@ -147,14 +147,14 @@ namespace Core2D.Editor
         ImmutableArray<IFileWriter> FileWriters { get; }
 
         /// <summary>
-        /// Gets Csv file reader.
+        /// Gets available text field file readers.
         /// </summary>
-        ITextFieldReader<IDatabase> CsvReader { get; }
+        ImmutableArray<ITextFieldReader<IDatabase>> TextFieldReaders { get; }
 
         /// <summary>
-        /// Gets Csv file writer.
+        /// Gets available text field file writers.
         /// </summary>
-        ITextFieldWriter<IDatabase> CsvWriter { get; }
+        ImmutableArray<ITextFieldWriter<IDatabase>> TextFieldWriters { get; }
 
         /// <summary>
         /// Gets image key importer.
@@ -256,27 +256,24 @@ namespace Core2D.Editor
         /// </summary>
         /// <param name="project">The target project.</param>
         /// <param name="path">The database file path.</param>
-        void OnImportData(IProjectContainer project, string path);
-
-        /// <summary>
-        /// Import database.
-        /// </summary>
-        /// <param name="path">The database file path.</param>
-        void OnImportData(string path);
+        /// <param name="reader">The text field reader.</param>
+        void OnImportData(IProjectContainer project, string path, ITextFieldReader<IDatabase> reader);
 
         /// <summary>
         /// Export database.
         /// </summary>
         /// <param name="path">The database file path.</param>
         /// <param name="database">The database object.</param>
-        void OnExportData(string path, IDatabase database);
+        /// <param name="writer">The text field writer.</param>
+        void OnExportData(string path, IDatabase database, ITextFieldWriter<IDatabase> writer);
 
         /// <summary>
         /// Update database.
         /// </summary>
         /// <param name="path">The database file path.</param>
         /// <param name="database">The database object.</param>
-        void OnUpdateData(string path, IDatabase database);
+        /// <param name="reader">The text field reader.</param>
+        void OnUpdateData(string path, IDatabase database, ITextFieldReader<IDatabase> reader);
 
         /// <summary>
         /// Import object.
