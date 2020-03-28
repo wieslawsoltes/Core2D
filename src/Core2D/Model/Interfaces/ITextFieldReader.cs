@@ -1,4 +1,5 @@
-﻿
+﻿using System.IO;
+
 namespace Core2D.Interfaces
 {
     /// <summary>
@@ -8,11 +9,20 @@ namespace Core2D.Interfaces
     public interface ITextFieldReader<T>
     {
         /// <summary>
+        /// Gets text field reader name.
+        /// </summary>
+        string Name { get; }
+
+        /// <summary>
+        /// Gets text field reader extension.
+        /// </summary>
+        string Extension { get; }
+
+        /// <summary>
         /// Read fields from text database file format.
         /// </summary>
-        /// <param name="path">The fields file path.</param>
-        /// <param name="fs">The file system.</param>
+        /// <param name="stream">The fields file stream.</param>
         /// <returns>The new instance of the database.</returns>
-        T Read(string path, IFileSystem fs);
+        T Read(Stream stream);
     }
 }
