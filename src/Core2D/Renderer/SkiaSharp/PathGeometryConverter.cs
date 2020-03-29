@@ -11,16 +11,16 @@ namespace Core2D.Renderer.SkiaSharp
         {
             var path = new SKPath
             {
-                FillType = xpg.FillRule == FillRule.EvenOdd ? SKPathFillType.EvenOdd : SKPathFillType.Winding
+                FillType = pathGeometry.FillRule == FillRule.EvenOdd ? SKPathFillType.EvenOdd : SKPathFillType.Winding
             };
 
-            foreach (var xpf in xpg.Figures)
+            foreach (var pathFigure in pathGeometry.Figures)
             {
                 path.MoveTo(
-                    scale(xpf.StartPoint.X + dx),
-                    scale(xpf.StartPoint.Y + dy));
+                    scale(pathFigure.StartPoint.X + dx),
+                    scale(pathFigure.StartPoint.Y + dy));
 
-                foreach (var segment in xpf.Segments)
+                foreach (var segment in pathFigure.Segments)
                 {
                     if (segment is IArcSegment arcSegment)
                     {
@@ -134,7 +134,7 @@ namespace Core2D.Renderer.SkiaSharp
                     }
                 }
 
-                if (xpf.IsClosed)
+                if (pathFigure.IsClosed)
                 {
                     path.Close();
                 }
