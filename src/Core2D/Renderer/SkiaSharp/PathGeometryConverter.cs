@@ -193,7 +193,7 @@ namespace Core2D.Renderer.SkiaSharp
                 return path;
             }
 
-            SkiaSharpRenderer.GetSKPaint(tbind, text.Style, text.TopLeft, text.BottomRight, dx, dy, scale, 96.0, 72.0, true, out var pen, out var origin);
+            SkiaSharpRenderer.GetSKPaint(tbind, text.Style, text.TopLeft, text.BottomRight, dx, dy, scale, 96.0, 96.0, true, out var pen, out var origin);
 
             using var outlinePath = pen.GetTextPath(tbind, origin.X, origin.Y);
             using var fillPath = pen.GetFillPath(outlinePath);
