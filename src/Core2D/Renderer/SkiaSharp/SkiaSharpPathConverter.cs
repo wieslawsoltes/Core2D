@@ -50,6 +50,32 @@ namespace Core2D.Renderer.SkiaSharp
             };
         }
 
+        private void Op(SKPathOp op, IList<SKPath> paths, out SKPath result, out bool haveResult)
+        {
+            haveResult = false;
+            result = new SKPath(paths[0]) { FillType = paths[0].FillType };
+
+            if (paths.Count == 1)
+            {
+                using var empty = new SKPath() { FillType = paths[0].FillType };
+                result = empty.Op(paths[0], op);
+                haveResult = true;
+            }
+            else
+            {
+                for (int i = 1; i < paths.Count; i++)
+                {
+                    var next = result.Op(paths[i], op);
+                    if (next != null)
+                    {
+                        result.Dispose();
+                        result = next;
+                        haveResult = true;
+                    }
+                }
+            }
+        }
+
         /// <inheritdoc/>
         public IPathShape ToPathShape(IBaseShape shape)
         {
@@ -82,7 +108,13 @@ namespace Core2D.Renderer.SkiaSharp
             var result = paint.GetFillPath(path, 1.0f);
             if (result != null)
             {
-                var geometry = PathGeometryConverter.ToPathGeometry(result, 0.0, 0.0, factory, editor.Project.Options.PointShape);
+                Op(SKPathOp.Union, new[] { result, result }, out var union, out bool haveResult);
+                if (haveResult == false || union == null || union.IsEmpty)
+                {
+                    result.Dispose();
+                    return null;
+                }
+                var geometry = PathGeometryConverter.ToPathGeometry(union, 0.0, 0.0, factory, editor.Project.Options.PointShape);
                 var pathShape = factory.CreatePathShape(
                     "Path",
                     style,
@@ -90,6 +122,7 @@ namespace Core2D.Renderer.SkiaSharp
                     shape.IsStroked,
                     shape.IsFilled);
                 result.Dispose();
+                union.Dispose();
                 return pathShape;
             }
             return null;
@@ -110,7 +143,13 @@ namespace Core2D.Renderer.SkiaSharp
             var result = paint.GetFillPath(path, 1.0f);
             if (result != null)
             {
-                var geometry = PathGeometryConverter.ToPathGeometry(result, 0.0, 0.0, factory, editor.Project.Options.PointShape);
+                Op(SKPathOp.Union, new[] { result, result }, out var union, out bool haveResult);
+                if (haveResult == false || union == null || union.IsEmpty)
+                {
+                    result.Dispose();
+                    return null;
+                }
+                var geometry = PathGeometryConverter.ToPathGeometry(union, 0.0, 0.0, factory, editor.Project.Options.PointShape);
                 var pathShape = factory.CreatePathShape(
                     "Path",
                     style,
@@ -118,6 +157,7 @@ namespace Core2D.Renderer.SkiaSharp
                     shape.IsStroked,
                     shape.IsFilled);
                 result.Dispose();
+                union.Dispose();
                 return pathShape;
             }
             return null;
@@ -133,9 +173,9 @@ namespace Core2D.Renderer.SkiaSharp
 
             var paths = new List<SKPath>();
 
-            foreach (var shape in shapes)
+            foreach (var s in shapes)
             {
-                var path = ToSKPath(shape, 0.0, 0.0, (value) => (float)value);
+                var path = ToSKPath(s, 0.0, 0.0, (value) => (float)value);
                 if (path != null)
                 {
                     paths.Add(path);
@@ -147,48 +187,25 @@ namespace Core2D.Renderer.SkiaSharp
                 return null;
             }
 
-            var pathOp = ToSKPathOp(op);
-            var haveResult = false;
-            var result = new SKPath(paths[0]) { FillType = paths[0].FillType };
-
-            if (paths.Count == 1)
+            Op(ToSKPathOp(op), paths, out var result, out var haveResult);
+            if (haveResult == false || result == null || result.IsEmpty)
             {
-                using var empty = new SKPath() { FillType = paths[0].FillType };
-                result = empty.Op(paths[0], pathOp);
-                haveResult = true;
-            }
-            else
-            {
-                for (int i = 1; i < paths.Count; i++)
-                {
-                    var next = result.Op(paths[i], pathOp);
-                    if (next != null)
-                    {
-                        result.Dispose();
-                        result = next;
-                        haveResult = true;
-                    }
-                }
+                return null;
             }
 
-            if (haveResult)
-            {
-                var editor = _serviceProvider.GetService<IProjectEditor>();
-                var factory = _serviceProvider.GetService<IFactory>();
-                var shape = shapes.FirstOrDefault();
-                var style = (IShapeStyle)shape.Style?.Copy(null);
-                var geometry = PathGeometryConverter.ToPathGeometry(result, 0.0, 0.0, factory, editor.Project.Options.PointShape);
-                var pathShape = factory.CreatePathShape(
-                    "Path",
-                    style,
-                    geometry,
-                    shape.IsStroked,
-                    shape.IsFilled);
-                result.Dispose();
-                return pathShape;
-            }
-
-            return null;
+            var editor = _serviceProvider.GetService<IProjectEditor>();
+            var factory = _serviceProvider.GetService<IFactory>();
+            var shape = shapes.FirstOrDefault();
+            var style = (IShapeStyle)shape.Style?.Copy(null);
+            var geometry = PathGeometryConverter.ToPathGeometry(result, 0.0, 0.0, factory, editor.Project.Options.PointShape);
+            var pathShape = factory.CreatePathShape(
+                "Path",
+                style,
+                geometry,
+                shape.IsStroked,
+                shape.IsFilled);
+            result.Dispose();
+            return pathShape;
         }
     }
 }
