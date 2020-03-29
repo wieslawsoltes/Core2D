@@ -46,11 +46,7 @@ namespace Core2D.UI.Avalonia
             {
                 var builder = new ContainerBuilder();
 
-                builder.RegisterModule<LocatorModule>();
-                builder.RegisterModule<CoreModule>();
-                builder.RegisterModule<DesignerModule>();
-                builder.RegisterModule<AppModule>();
-                builder.RegisterModule<ViewModule>();
+                builder.RegisterModule<AvaloniaModule>();
 
                 var container = builder.Build();
 
@@ -110,11 +106,8 @@ namespace Core2D.UI.Avalonia
             if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktopLifetime)
             {
                 var builder = new ContainerBuilder();
-                builder.RegisterModule<LocatorModule>();
-                builder.RegisterModule<CoreModule>();
-                builder.RegisterModule<DependenciesModule>();
-                builder.RegisterModule<AppModule>();
-                builder.RegisterModule<ViewModule>();
+
+                builder.RegisterModule<AvaloniaModule>();
 
                 var container = builder.Build();
 
@@ -187,11 +180,8 @@ namespace Core2D.UI.Avalonia
             else if (ApplicationLifetime is ISingleViewApplicationLifetime singleViewLifetime)
             {
                 var builder = new ContainerBuilder();
-                builder.RegisterModule<LocatorModule>();
-                builder.RegisterModule<CoreModule>();
-                builder.RegisterModule<DependenciesModule>();
-                builder.RegisterModule<AppModule>();
-                builder.RegisterModule<ViewModule>();
+
+                builder.RegisterModule<AvaloniaModule>();
 
                 var container = builder.Build(); // TODO: Dispose()
                 var serviceProvider = container.Resolve<IServiceProvider>();
