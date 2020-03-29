@@ -239,6 +239,16 @@
                 <MenuItem Header="_Send to Back" Command="{Binding OnSendToBackSelected}" InputGesture="Ctrl+Shift+OemOpenBrackets"/>
                 <Separator/>
             </MenuItem>
+            <Separator/>
+            <MenuItem Header="Create Pat_h" Command="{Binding OnCreatePath}"/>
+            <MenuItem Header="Create Str_oke Path" Command="{Binding OnCreateStrokePath}"/>
+            <MenuItem Header="Create _Fill Path" Command="{Binding OnCreateFillPath}"/>
+            <Separator/>
+            <MenuItem Header="_Difference" ToolTip.Tip="Subtract the op path from the current path." Command="{Binding OnPathOp}" CommandParameter="Difference"/>
+            <MenuItem Header="_Intersect" ToolTip.Tip="Intersect the two paths." Command="{Binding OnPathOp}" CommandParameter="Intersect"/>
+            <MenuItem Header="_Union" ToolTip.Tip="Union (inclusive-or) the two paths." Command="{Binding OnPathOp}" CommandParameter="Union"/>
+            <MenuItem Header="_Xor" ToolTip.Tip="Exclusive-or the two paths." Command="{Binding OnPathOp}" CommandParameter="Xor"/>
+            <MenuItem Header="_Reverse Difference" ToolTip.Tip="Subtract the current path from the op path." Command="{Binding OnPathOp}" CommandParameter="ReverseDifference"/>
         </MenuItem>
         <MenuItem Header="F_ormat">
             <MenuItem Header="_Copy">
