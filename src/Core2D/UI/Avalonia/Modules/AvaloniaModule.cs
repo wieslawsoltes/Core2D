@@ -35,6 +35,7 @@ using Core2D.UI.Avalonia.Dock.Factories;
 using Core2D.UI.Avalonia.Dock.Windows;
 using Core2D.UI.Avalonia.Windows;
 using DM = Dock.Model;
+using Core2D.Renderer.SkiaSharp;
 
 namespace Core2D.UI.Avalonia.Modules
 {
@@ -86,6 +87,7 @@ namespace Core2D.UI.Avalonia.Modules
             builder.RegisterType<CsvHelperReader>().As<ITextFieldReader<IDatabase>>().InstancePerLifetimeScope();
             builder.RegisterType<OpenXmlWriter>().As<ITextFieldWriter<IDatabase>>().InstancePerLifetimeScope();
             builder.RegisterType<CsvHelperWriter>().As<ITextFieldWriter<IDatabase>>().InstancePerLifetimeScope();
+            builder.RegisterType<SkiaSharpPathConverter>().As<IPathConverter>().InstancePerLifetimeScope();
 
             // App
 
