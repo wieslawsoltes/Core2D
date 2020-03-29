@@ -55,7 +55,7 @@ namespace Core2D.Renderer.SkiaSharp
         {
             var editor = _serviceProvider.GetService<IProjectEditor>();
             var factory = _serviceProvider.GetService<IFactory>();
-            var style = (IShapeStyle)shape.Style.Copy(null);
+            var style = (IShapeStyle)shape.Style?.Copy(null);
             var path = ToSKPath(shape, 0.0, 0.0, (value) => (float)value);
             var geometry = PathGeometryConverter.ToPathGeometry(path, 0.0, 0.0, factory, editor.Project.Options.PointShape);
             var pathShape = factory.CreatePathShape(
@@ -77,7 +77,7 @@ namespace Core2D.Renderer.SkiaSharp
             }
             var editor = _serviceProvider.GetService<IProjectEditor>();
             var factory = _serviceProvider.GetService<IFactory>();
-            var style = (IShapeStyle)shape.Style.Copy(null);
+            var style = (IShapeStyle)shape.Style?.Copy(null);
             using var paint = SkiaSharpRenderer.ToSKPaintPen(shape.Style, (value) => (float)value, 96.0, 72.0, true);
             var result = paint.GetFillPath(path, 1.0f);
             if (result != null)
@@ -105,7 +105,7 @@ namespace Core2D.Renderer.SkiaSharp
             }
             var editor = _serviceProvider.GetService<IProjectEditor>();
             var factory = _serviceProvider.GetService<IFactory>();
-            var style = (IShapeStyle)shape.Style.Copy(null);
+            var style = (IShapeStyle)shape.Style?.Copy(null);
             using var paint = SkiaSharpRenderer.ToSKPaintBrush(shape.Style.Fill, true);
             var result = paint.GetFillPath(path, 1.0f);
             if (result != null)
@@ -176,7 +176,7 @@ namespace Core2D.Renderer.SkiaSharp
                 var editor = _serviceProvider.GetService<IProjectEditor>();
                 var factory = _serviceProvider.GetService<IFactory>();
                 var shape = shapes.FirstOrDefault();
-                var style = (IShapeStyle)shape.Style.Copy(null);
+                var style = (IShapeStyle)shape.Style?.Copy(null);
                 var geometry = PathGeometryConverter.ToPathGeometry(result, 0.0, 0.0, factory, editor.Project.Options.PointShape);
                 var pathShape = factory.CreatePathShape(
                     "Path",
