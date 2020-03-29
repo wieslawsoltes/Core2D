@@ -6,19 +6,8 @@ using PDF = PdfSharp.Drawing;
 
 namespace Core2D.Renderer.PdfSharp
 {
-    /// <summary>
-    /// 
-    /// </summary>
     public static class PathGeometryConverter
     {
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="pg"></param>
-        /// <param name="dx"></param>
-        /// <param name="dy"></param>
-        /// <param name="scale"></param>
-        /// <returns></returns>
         public static PDF.XGraphicsPath ToXGraphicsPath(this IPathGeometry pg, double dx, double dy, Func<double, double> scale)
         {
             var gp = new PDF.XGraphicsPath()
@@ -51,9 +40,8 @@ namespace Core2D.Renderer.PdfSharp
                             arcSegment.SweepDirection == SweepDirection.Clockwise ? PDF.XSweepDirection.Clockwise : PDF.XSweepDirection.Counterclockwise);
                         startPoint = arcSegment.Point;
 #else
-                        throw new NotSupportedException("Not supported segment type: " + segment.GetType());
                         // TODO: Convert WPF/SVG elliptical arc segment format to GDI+ bezier curves.
-                        //startPoint = arcSegment.Point;
+                        startPoint = arcSegment.Point;
 #endif
                     }
                     else if (segment is ICubicBezierSegment cubicBezierSegment)
