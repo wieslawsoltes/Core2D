@@ -92,40 +92,6 @@ namespace Core2D.UI.Avalonia
             };
         }
 
-        private void InitializeSingleView(ISingleViewApplicationLifetime singleViewLifetime)
-        {
-            var builder = new ContainerBuilder();
-
-            builder.RegisterModule<AvaloniaModule>();
-
-            var container = builder.Build(); // TODO: Dispose()
-            var serviceProvider = container.Resolve<IServiceProvider>();
-
-            InitializeConverters(serviceProvider);
-
-            var log = serviceProvider.GetService<ILog>(); // TODO: Dispose()
-            var fileIO = serviceProvider.GetService<IFileSystem>();
-
-            log?.Initialize(System.IO.Path.Combine(fileIO?.GetBaseDirectory(), "Core2D.log"));
-
-            var editor = serviceProvider.GetService<IProjectEditor>();
-
-            var dockFactory = serviceProvider.GetService<DM.IFactory>();
-            editor.Layout = editor.Layout ?? dockFactory.CreateLayout();
-            dockFactory.InitLayout(editor.Layout);
-
-            editor.CurrentTool = editor.Tools.FirstOrDefault(t => t.Title == "Selection");
-            editor.CurrentPathTool = editor.PathTools.FirstOrDefault(t => t.Title == "Line");
-            editor.IsToolIdle = true;
-
-            var mainView = new MainControl()
-            {
-                DataContext = editor
-            };
-
-            singleViewLifetime.MainView = mainView;
-        }
-
         private void InitializationClassicDesktopStyle(IClassicDesktopStyleApplicationLifetime desktopLifetime)
         {
             var builder = new ContainerBuilder();
@@ -199,6 +165,40 @@ namespace Core2D.UI.Avalonia
                 log.Dispose();
                 container.Dispose();
             };
+        }
+
+        private void InitializeSingleView(ISingleViewApplicationLifetime singleViewLifetime)
+        {
+            var builder = new ContainerBuilder();
+
+            builder.RegisterModule<AvaloniaModule>();
+
+            var container = builder.Build(); // TODO: Dispose()
+            var serviceProvider = container.Resolve<IServiceProvider>();
+
+            InitializeConverters(serviceProvider);
+
+            var log = serviceProvider.GetService<ILog>(); // TODO: Dispose()
+            var fileIO = serviceProvider.GetService<IFileSystem>();
+
+            log?.Initialize(System.IO.Path.Combine(fileIO?.GetBaseDirectory(), "Core2D.log"));
+
+            var editor = serviceProvider.GetService<IProjectEditor>();
+
+            var dockFactory = serviceProvider.GetService<DM.IFactory>();
+            editor.Layout = editor.Layout ?? dockFactory.CreateLayout();
+            dockFactory.InitLayout(editor.Layout);
+
+            editor.CurrentTool = editor.Tools.FirstOrDefault(t => t.Title == "Selection");
+            editor.CurrentPathTool = editor.PathTools.FirstOrDefault(t => t.Title == "Line");
+            editor.IsToolIdle = true;
+
+            var mainView = new MainControl()
+            {
+                DataContext = editor
+            };
+
+            singleViewLifetime.MainView = mainView;
         }
 
         /// <inheritdoc/>
