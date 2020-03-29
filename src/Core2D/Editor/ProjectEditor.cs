@@ -61,6 +61,7 @@ namespace Core2D.Editor
         private readonly Lazy<IEditorCanvasPlatform> _canvasPlatform;
         private readonly Lazy<IEditorLayoutPlatform> _layoutPlatform;
         private readonly Lazy<IStyleEditor> _styleEditor;
+        private readonly Lazy<IPathConverter> _pathConverter;
 
         /// <inheritdoc/>
         public IProjectContainer Project
@@ -205,6 +206,9 @@ namespace Core2D.Editor
         /// <inheritdoc/>
         public IStyleEditor StyleEditor => _styleEditor.Value;
 
+        /// <inheritdoc/>
+        public IPathConverter PathConverter => _pathConverter.Value;
+
         private object ScriptState { get; set; } = default;
 
         private IPageContainer PageToCopy { get; set; } = default;
@@ -244,6 +248,7 @@ namespace Core2D.Editor
             _canvasPlatform = _serviceProvider.GetServiceLazily<IEditorCanvasPlatform>();
             _layoutPlatform = _serviceProvider.GetServiceLazily<IEditorLayoutPlatform>();
             _styleEditor = _serviceProvider.GetServiceLazily<IStyleEditor>();
+            _pathConverter = _serviceProvider.GetServiceLazily<IPathConverter>();
         }
 
         /// <inheritdoc/>
@@ -1340,6 +1345,262 @@ namespace Core2D.Editor
                     SendToBack(s);
                 }
             }
+        }
+
+        /// <inheritdoc/>
+        public void OnCreatePath()
+        {
+            if (PathConverter == null)
+            {
+                return;
+            }
+
+            var layer = Project?.CurrentContainer?.CurrentLayer;
+            if (layer == null)
+            {
+                return;
+            }
+
+            var source = Renderers?[0]?.State?.SelectedShape;
+            if (source != null)
+            {
+                var path = PathConverter.ToPathShape(source);
+                if (path != null)
+                {
+                    var shapesBuilder = layer.Shapes.ToBuilder();
+
+                    var index = shapesBuilder.IndexOf(source);
+                    shapesBuilder[index] = path;
+
+                    var previous = layer.Shapes;
+                    var next = shapesBuilder.ToImmutable();
+                    Project?.History?.Snapshot(previous, next, (p) => layer.Shapes = p);
+                    layer.Shapes = next;
+
+                    Select(layer, path);
+                }
+            }
+
+            var sources = Renderers?[0]?.State?.SelectedShapes;
+            if (sources != null)
+            {
+                var paths = new List<IPathShape>();
+                var shapes = new List<IBaseShape>();
+
+                foreach (var s in sources)
+                {
+                    var path = PathConverter.ToPathShape(s);
+                    if (path != null)
+                    {
+                        paths.Add(path);
+                        shapes.Add(s);
+                    }
+                }
+
+                if (paths.Count > 0)
+                {
+                    var shapesBuilder = layer.Shapes.ToBuilder();
+
+                    for (int i = 0; i < paths.Count; i++)
+                    {
+                        var index = shapesBuilder.IndexOf(shapes[i]);
+                        shapesBuilder[index] = paths[i];
+                    }
+
+                    var previous = layer.Shapes;
+                    var next = shapesBuilder.ToImmutable();
+                    Project?.History?.Snapshot(previous, next, (p) => layer.Shapes = p);
+                    layer.Shapes = next;
+
+                    Select(layer, new HashSet<IBaseShape>(paths));
+                }
+            }
+        }
+
+        /// <inheritdoc/>
+        public void OnCreateStrokePath()
+        {
+            if (PathConverter == null)
+            {
+                return;
+            }
+
+            var layer = Project?.CurrentContainer?.CurrentLayer;
+            if (layer == null)
+            {
+                return;
+            }
+
+            var source = Renderers?[0]?.State?.SelectedShape;
+            if (source != null)
+            {
+                var path = PathConverter.ToStrokePathShape(source);
+                if (path != null)
+                {
+                    var shapesBuilder = layer.Shapes.ToBuilder();
+
+                    var index = shapesBuilder.IndexOf(source);
+                    shapesBuilder[index] = path;
+
+                    var previous = layer.Shapes;
+                    var next = shapesBuilder.ToImmutable();
+                    Project?.History?.Snapshot(previous, next, (p) => layer.Shapes = p);
+                    layer.Shapes = next;
+
+                    Select(layer, path);
+                }
+            }
+
+            var sources = Renderers?[0]?.State?.SelectedShapes;
+            if (sources != null)
+            {
+                var paths = new List<IPathShape>();
+                var shapes = new List<IBaseShape>();
+
+                foreach (var s in sources)
+                {
+                    var path = PathConverter.ToStrokePathShape(s);
+                    if (path != null)
+                    {
+                        paths.Add(path);
+                        shapes.Add(s);
+                    }
+                }
+
+                if (paths.Count > 0)
+                {
+                    var shapesBuilder = layer.Shapes.ToBuilder();
+
+                    for (int i = 0; i < paths.Count; i++)
+                    {
+                        var index = shapesBuilder.IndexOf(shapes[i]);
+                        shapesBuilder[index] = paths[i];
+                    }
+
+                    var previous = layer.Shapes;
+                    var next = shapesBuilder.ToImmutable();
+                    Project?.History?.Snapshot(previous, next, (p) => layer.Shapes = p);
+                    layer.Shapes = next;
+
+                    Select(layer, new HashSet<IBaseShape>(paths));
+                }
+            }
+        }
+
+        /// <inheritdoc/>
+        public void OnCreateFillPath()
+        {
+            if (PathConverter == null)
+            {
+                return;
+            }
+
+            var layer = Project?.CurrentContainer?.CurrentLayer;
+            if (layer == null)
+            {
+                return;
+            }
+
+            var source = Renderers?[0]?.State?.SelectedShape;
+            if (source != null)
+            {
+                var path = PathConverter.ToFillPathShape(source);
+                if (path != null)
+                {
+                    var shapesBuilder = layer.Shapes.ToBuilder();
+
+                    var index = shapesBuilder.IndexOf(source);
+                    shapesBuilder[index] = path;
+
+                    var previous = layer.Shapes;
+                    var next = shapesBuilder.ToImmutable();
+                    Project?.History?.Snapshot(previous, next, (p) => layer.Shapes = p);
+                    layer.Shapes = next;
+
+                    Select(layer, path);
+                }
+            }
+
+            var sources = Renderers?[0]?.State?.SelectedShapes;
+            if (sources != null)
+            {
+                var paths = new List<IPathShape>();
+                var shapes = new List<IBaseShape>();
+
+                foreach (var s in sources)
+                {
+                    var path = PathConverter.ToFillPathShape(s);
+                    if (path != null)
+                    {
+                        paths.Add(path);
+                        shapes.Add(s);
+                    }
+                }
+
+                if (paths.Count > 0)
+                {
+                    var shapesBuilder = layer.Shapes.ToBuilder();
+
+                    for (int i = 0; i < paths.Count; i++)
+                    {
+                        var index = shapesBuilder.IndexOf(shapes[i]);
+                        shapesBuilder[index] = paths[i];
+                    }
+
+                    var previous = layer.Shapes;
+                    var next = shapesBuilder.ToImmutable();
+                    Project?.History?.Snapshot(previous, next, (p) => layer.Shapes = p);
+                    layer.Shapes = next;
+
+                    Select(layer, new HashSet<IBaseShape>(paths));
+                }
+            }
+        }
+
+        /// <inheritdoc/>
+        public void OnPathOp(string op)
+        {
+            if (!Enum.TryParse<PathOp>(op, true, out var pathOp))
+            {
+                return;
+            }
+
+            if (PathConverter == null)
+            {
+                return;
+            }
+
+            var sources = Renderers?[0]?.State?.SelectedShapes;
+            if (sources == null)
+            {
+                return;
+            }
+
+            var layer = Project?.CurrentContainer?.CurrentLayer;
+            if (layer == null)
+            {
+                return;
+            }
+
+            var path = PathConverter.Op(sources, pathOp);
+            if (path == null)
+            {
+                return;
+            }
+
+            var shapesBuilder = layer.Shapes.ToBuilder();
+            foreach (var shape in sources)
+            {
+                shapesBuilder.Remove(shape);
+            }
+            shapesBuilder.Add(path);
+
+            var previous = layer.Shapes;
+            var next = shapesBuilder.ToImmutable();
+            Project?.History?.Snapshot(previous, next, (p) => layer.Shapes = p);
+            layer.Shapes = next;
+
+            Select(layer, path);
         }
 
         /// <inheritdoc/>
