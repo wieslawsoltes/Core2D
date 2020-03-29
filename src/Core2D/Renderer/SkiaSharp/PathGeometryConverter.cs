@@ -12,7 +12,7 @@ namespace Core2D.Renderer.SkiaSharp
 {
     public static class PathGeometryConverter
     {
-        public static IPathGeometry ToPathGeometry(SKPath path, double dx, double dy, IFactory factory)
+        public static IPathGeometry ToPathGeometry(SKPath path, double dx, double dy, IFactory factory, IBaseShape pointShape)
         {
             var geometry = factory.CreatePathGeometry(
                 ImmutableArray.Create<IPathFigure>(),
@@ -32,7 +32,7 @@ namespace Core2D.Renderer.SkiaSharp
                         case SKPathVerb.Move:
                             {
                                 context.BeginFigure(
-                                    factory.CreatePointShape(points[0].X + dx, points[0].Y + dy),
+                                    factory.CreatePointShape(points[0].X + dx, points[0].Y + dy, pointShape),
                                     false,
                                     false);
                             }
@@ -40,33 +40,33 @@ namespace Core2D.Renderer.SkiaSharp
                         case SKPathVerb.Line:
                             {
                                 context.LineTo(
-                                    factory.CreatePointShape(points[1].X + dx, points[1].Y + dy));
+                                    factory.CreatePointShape(points[1].X + dx, points[1].Y + dy, pointShape));
                             }
                             break;
                         case SKPathVerb.Cubic:
                             {
                                 context.CubicBezierTo(
-                                    factory.CreatePointShape(points[1].X + dx, points[1].Y + dy),
-                                    factory.CreatePointShape(points[2].X + dx, points[2].Y + dy),
-                                    factory.CreatePointShape(points[3].X + dx, points[3].Y + dy));
+                                    factory.CreatePointShape(points[1].X + dx, points[1].Y + dy, pointShape),
+                                    factory.CreatePointShape(points[2].X + dx, points[2].Y + dy, pointShape),
+                                    factory.CreatePointShape(points[3].X + dx, points[3].Y + dy, pointShape));
                             }
                             break;
                         case SKPathVerb.Quad:
                             {
                                 context.QuadraticBezierTo(
-                                    factory.CreatePointShape(points[1].X + dx, points[1].Y + dy),
-                                    factory.CreatePointShape(points[2].X + dx, points[2].Y + dy));
+                                    factory.CreatePointShape(points[1].X + dx, points[1].Y + dy, pointShape),
+                                    factory.CreatePointShape(points[2].X + dx, points[2].Y + dy, pointShape));
                             }
                             break;
                         case SKPathVerb.Conic:
                             {
                                 var quads = SKPath.ConvertConicToQuads(points[0], points[1], points[2], iterator.ConicWeight(), 1);
                                 context.QuadraticBezierTo(
-                                    factory.CreatePointShape(quads[1].X + dx, quads[1].Y + dy),
-                                    factory.CreatePointShape(quads[2].X + dx, quads[2].Y + dy));
+                                    factory.CreatePointShape(quads[1].X + dx, quads[1].Y + dy, pointShape),
+                                    factory.CreatePointShape(quads[2].X + dx, quads[2].Y + dy, pointShape));
                                 context.QuadraticBezierTo(
-                                    factory.CreatePointShape(quads[3].X + dx, quads[3].Y + dy),
-                                    factory.CreatePointShape(quads[4].X + dx, quads[4].Y + dy));
+                                    factory.CreatePointShape(quads[3].X + dx, quads[3].Y + dy, pointShape),
+                                    factory.CreatePointShape(quads[4].X + dx, quads[4].Y + dy, pointShape));
                             }
                             break;
                         case SKPathVerb.Close:
