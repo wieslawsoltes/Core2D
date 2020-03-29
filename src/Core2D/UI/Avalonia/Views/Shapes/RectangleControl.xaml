@@ -11,15 +11,15 @@
     <TabControl Classes="default">
         <TabItem Header="Rectangle" Classes="property">
             <ScrollViewer>
-                <Grid RowDefinitions="Auto,Auto,Auto,Auto" ColumnDefinitions="Auto,*">
+                <Grid RowDefinitions="Auto,Auto,Auto,*" ColumnDefinitions="Auto,*">
                     <TextBlock Text="Name" Classes="left" Grid.Row="0" Grid.Column="0"/>
                     <TextBox Text="{Binding Name, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
                     <TextBlock Text="IsStroked" Classes="left" Grid.Row="1" Grid.Column="0"/>
                     <CheckBox IsChecked="{Binding IsStroked, Mode=TwoWay}" Classes="left" Grid.Row="1" Grid.Column="1"/>
                     <TextBlock Text="IsFilled" Classes="left" Grid.Row="2" Grid.Column="0"/>
                     <CheckBox IsChecked="{Binding IsFilled, Mode=TwoWay}" Classes="left" Grid.Row="2" Grid.Column="1"/>
-                    <TextBlock Text="Text" Classes="left" Grid.Row="3" Grid.Column="0"/>
-                    <TextBox Text="{Binding Text, Mode=TwoWay}" AcceptsReturn="True" Classes="left" Grid.Row="3" Grid.Column="1"/>
+                    <TextBlock Text="Text" VerticalAlignment="Top" Classes="left" Grid.Row="3" Grid.Column="0"/>
+                    <TextBox Text="{Binding Text, Mode=TwoWay}" VerticalAlignment="Stretch" AcceptsReturn="True" Classes="left" Grid.Row="3" Grid.Column="1"/>
                 </Grid>
             </ScrollViewer>
         </TabItem>
