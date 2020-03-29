@@ -36,39 +36,44 @@ namespace Core2D.TextFieldWriter.CsvHelper
         /// <param name="database">The source records database.</param>
         public void Write(Stream stream, IDatabase database)
         {
-            using var writer = new System.IO.StringWriter();
+            using var writer = new StringWriter();
+
             var configuration = new CSV.Configuration.CsvConfiguration(CultureInfo.CurrentCulture)
             {
                 Delimiter = CultureInfo.CurrentCulture.TextInfo.ListSeparator,
                 CultureInfo = CultureInfo.CurrentCulture
             };
 
-            using (var csv = new CSV.CsvWriter(writer, configuration))
+            using (var csvWriter = new CSV.CsvWriter(writer, configuration))
             {
-                // columns
-                csv.WriteField(database.IdColumnName);
+                // Columns
+
+                csvWriter.WriteField(database.IdColumnName);
                 foreach (var column in database.Columns)
                 {
-                    csv.WriteField(column.Name);
+                    csvWriter.WriteField(column.Name);
                 }
-                csv.NextRecord();
+                csvWriter.NextRecord();
 
-                // records
+                // Records
+
                 foreach (var record in database.Records)
                 {
-                    csv.WriteField(record.Id.ToString());
+                    csvWriter.WriteField(record.Id.ToString());
                     foreach (var value in record.Values)
                     {
-                        csv.WriteField(value.Content);
+                        csvWriter.WriteField(value.Content);
                     }
-                    csv.NextRecord();
+                    csvWriter.NextRecord();
                 }
             }
 
-            var fs = _serviceProvider.GetService<IFileSystem>();
-            if (fs != null)
+            var csv = writer.ToString();
+
+            var fileIO = _serviceProvider.GetService<IFileSystem>();
+            if (fileIO != null)
             {
-                fs.WriteUtf8Text(stream, writer.ToString());
+                fileIO.WriteUtf8Text(stream, csv);
             }
         }
     }
