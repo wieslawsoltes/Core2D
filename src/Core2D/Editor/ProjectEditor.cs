@@ -2574,69 +2574,72 @@ namespace Core2D.Editor
         {
             try
             {
-                if (files?.Length >= 1)
+                if (files?.Length < 1)
                 {
-                    bool result = false;
-                    foreach (var path in files)
+                    return false;
+                }
+
+                bool result = false;
+
+                foreach (var path in files)
+                {
+                    if (string.IsNullOrEmpty(path))
                     {
-                        if (string.IsNullOrEmpty(path))
-                        {
-                            continue;
-                        }
+                        continue;
+                    }
 
-                        string ext = System.IO.Path.GetExtension(path);
+                    string ext = System.IO.Path.GetExtension(path);
 
-                        if (string.Compare(ext, ProjectEditorConfiguration.ProjectExtension, StringComparison.OrdinalIgnoreCase) == 0)
+                    if (string.Compare(ext, ProjectEditorConfiguration.ProjectExtension, StringComparison.OrdinalIgnoreCase) == 0)
+                    {
+                        OnOpenProject(path);
+                        result = true;
+                    }
+                    else if (string.Compare(ext, ProjectEditorConfiguration.CsvExtension, StringComparison.OrdinalIgnoreCase) == 0)
+                    {
+                        var reader = TextFieldReaders.FirstOrDefault(x => x.Extension == "csv");
+                        if (reader != null)
                         {
-                            OnOpenProject(path);
-                            result = true;
-                        }
-                        else if (string.Compare(ext, ProjectEditorConfiguration.CsvExtension, StringComparison.OrdinalIgnoreCase) == 0)
-                        {
-                            var reader = TextFieldReaders.FirstOrDefault(x => x.Extension == "csv");
-                            if (reader != null)
-                            {
-                                OnImportData(Project, path, reader);
-                                result = true;
-                            }
-                        }
-                        else if (string.Compare(ext, ProjectEditorConfiguration.XlsxExtension, StringComparison.OrdinalIgnoreCase) == 0)
-                        {
-                            var reader = TextFieldReaders.FirstOrDefault(x => x.Extension == "xlsx");
-                            if (reader != null)
-                            {
-                                OnImportData(Project, path, reader);
-                                result = true;
-                            }
-                        }
-                        else if (string.Compare(ext, ProjectEditorConfiguration.JsonExtension, StringComparison.OrdinalIgnoreCase) == 0)
-                        {
-                            OnImportJson(path);
-                            result = true;
-                        }
-                        else if (string.Compare(ext, ProjectEditorConfiguration.XamlExtension, StringComparison.OrdinalIgnoreCase) == 0)
-                        {
-                            OnImportXaml(path);
-                            result = true;
-                        }
-                        else if (string.Compare(ext, ProjectEditorConfiguration.ScriptExtension, StringComparison.OrdinalIgnoreCase) == 0)
-                        {
-                            OnExecuteScriptFile(path);
-                            result = true;
-                        }
-                        else if (ProjectEditorConfiguration.ImageExtensions.Any(x => string.Compare(ext, x, StringComparison.OrdinalIgnoreCase) == 0))
-                        {
-                            var key = OnGetImageKey(path);
-                            if (key != null && !string.IsNullOrEmpty(key))
-                            {
-                                OnDropImageKey(key, x, y);
-                            }
+                            OnImportData(Project, path, reader);
                             result = true;
                         }
                     }
-
-                    return result;
+                    else if (string.Compare(ext, ProjectEditorConfiguration.XlsxExtension, StringComparison.OrdinalIgnoreCase) == 0)
+                    {
+                        var reader = TextFieldReaders.FirstOrDefault(x => x.Extension == "xlsx");
+                        if (reader != null)
+                        {
+                            OnImportData(Project, path, reader);
+                            result = true;
+                        }
+                    }
+                    else if (string.Compare(ext, ProjectEditorConfiguration.JsonExtension, StringComparison.OrdinalIgnoreCase) == 0)
+                    {
+                        OnImportJson(path);
+                        result = true;
+                    }
+                    else if (string.Compare(ext, ProjectEditorConfiguration.XamlExtension, StringComparison.OrdinalIgnoreCase) == 0)
+                    {
+                        OnImportXaml(path);
+                        result = true;
+                    }
+                    else if (string.Compare(ext, ProjectEditorConfiguration.ScriptExtension, StringComparison.OrdinalIgnoreCase) == 0)
+                    {
+                        OnExecuteScriptFile(path);
+                        result = true;
+                    }
+                    else if (ProjectEditorConfiguration.ImageExtensions.Any(x => string.Compare(ext, x, StringComparison.OrdinalIgnoreCase) == 0))
+                    {
+                        var key = OnGetImageKey(path);
+                        if (key != null && !string.IsNullOrEmpty(key))
+                        {
+                            OnDropImageKey(key, x, y);
+                        }
+                        result = true;
+                    }
                 }
+
+                return result;
             }
             catch (Exception ex)
             {
