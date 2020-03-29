@@ -23,6 +23,27 @@
         <!-- Edit -->
         <KeyBinding Command="{Binding OnDelete}" CommandParameter="{Binding}" Gesture="Delete"/>
         <KeyBinding Command="{Binding OnCancel}" Gesture="Escape"/>
+        <KeyBinding Command="{Binding OnUndo}" Gesture="Ctrl+Z"/>
+        <KeyBinding Command="{Binding OnRedo}" Gesture="Ctrl+Y"/>
+        <KeyBinding Command="{Binding OnCut}" Gesture="Ctrl+X"/>
+        <KeyBinding Command="{Binding OnCopy}" Gesture="Ctrl+C"/>
+        <KeyBinding Command="{Binding OnPaste}" Gesture="Ctrl+V"/>
+        <KeyBinding Command="{Binding StyleEditor.OnCopyStyle}" Gesture="Ctrl+Shift+C"/>
+        <KeyBinding Command="{Binding StyleEditor.OnPasteStyle}" Gesture="Ctrl+Shift+V"/>
+        <KeyBinding Command="{Binding OnSelectAll}" Gesture="Ctrl+A"/>
+        <KeyBinding Command="{Binding OnGroupSelected}" Gesture="Ctrl+G"/>
+        <KeyBinding Command="{Binding OnUngroupSelected}" Gesture="Ctrl+U"/>
+        <!-- View -->
+        <KeyBinding Command="{Binding Platform.OnZoomReset}" Gesture="Z"/>
+        <KeyBinding Command="{Binding Platform.OnZoomAutoFit}" Gesture="X"/>
+        <!-- Options -->
+        <KeyBinding Command="{Binding OnToggleDefaultIsStroked}" Gesture="K"/>
+        <KeyBinding Command="{Binding OnToggleDefaultIsFilled}" Gesture="F"/>
+        <KeyBinding Command="{Binding OnToggleDefaultIsClosed}" Gesture="D"/>
+        <KeyBinding Command="{Binding OnToggleDefaultIsSmoothJoin}" Gesture="J"/>
+        <KeyBinding Command="{Binding OnToggleSnapToGrid}" Gesture="G"/>
+        <KeyBinding Command="{Binding OnToggleTryToConnect}" Gesture="C"/>
+        <!-- Shape -->
         <KeyBinding Command="{Binding OnMoveUpSelected}" Gesture="Up"/>
         <KeyBinding Command="{Binding OnMoveDownSelected}" Gesture="Down"/>
         <KeyBinding Command="{Binding OnMoveLeftSelected}" Gesture="Left"/>
@@ -42,20 +63,14 @@
         <KeyBinding Command="{Binding OnBringForwardSelected}" Gesture="Ctrl+OemCloseBrackets"/>
         <KeyBinding Command="{Binding OnSendBackwardSelected}" Gesture="Ctrl+OemOpenBrackets"/>
         <KeyBinding Command="{Binding OnSendToBackSelected}" Gesture="Ctrl+Shift+OemOpenBrackets"/>
-        <!-- Edit -->
-        <KeyBinding Command="{Binding OnUndo}" Gesture="Ctrl+Z"/>
-        <KeyBinding Command="{Binding OnRedo}" Gesture="Ctrl+Y"/>
-        <KeyBinding Command="{Binding OnCut}" Gesture="Ctrl+X"/>
-        <KeyBinding Command="{Binding OnCopy}" Gesture="Ctrl+C"/>
-        <KeyBinding Command="{Binding OnPaste}" Gesture="Ctrl+V"/>
-        <KeyBinding Command="{Binding StyleEditor.OnCopyStyle}" Gesture="Ctrl+Shift+C"/>
-        <KeyBinding Command="{Binding StyleEditor.OnPasteStyle}" Gesture="Ctrl+Shift+V"/>
-        <KeyBinding Command="{Binding OnSelectAll}" Gesture="Ctrl+A"/>
-        <KeyBinding Command="{Binding OnGroupSelected}" Gesture="Ctrl+G"/>
-        <KeyBinding Command="{Binding OnUngroupSelected}" Gesture="Ctrl+U"/>
-        <!-- View -->
-        <KeyBinding Command="{Binding Platform.OnZoomReset}" Gesture="Z"/>
-        <KeyBinding Command="{Binding Platform.OnZoomAutoFit}" Gesture="X"/>
+        <KeyBinding Command="{Binding OnCreatePath}" Gesture="Ctrl+H"/>
+        <KeyBinding Command="{Binding OnCreateStrokePath}" Gesture="Ctrl+J"/>
+        <KeyBinding Command="{Binding OnCreateFillPath}" Gesture="Ctrl+K"/>
+        <KeyBinding Command="{Binding OnPathOp}" CommandParameter="Difference" Gesture="Ctrl+Shift+D"/>
+        <KeyBinding Command="{Binding OnPathOp}" CommandParameter="Intersect" Gesture="Ctrl+Shift+I"/>
+        <KeyBinding Command="{Binding OnPathOp}" CommandParameter="Union" Gesture="Ctrl+Shift+U"/>
+        <KeyBinding Command="{Binding OnPathOp}" CommandParameter="Xor" Gesture="Ctrl+Shift+X"/>
+        <KeyBinding Command="{Binding OnPathOp}" CommandParameter="ReverseDifference" Gesture="Ctrl+Shift+R"/>
         <!-- Tool -->
         <KeyBinding Command="{Binding OnToolNone}" Gesture="N"/>
         <KeyBinding Command="{Binding OnToolSelection}" Gesture="S"/>
@@ -70,13 +85,6 @@
         <KeyBinding Command="{Binding OnToolEllipse}" Gesture="E"/>
         <KeyBinding Command="{Binding OnToolText}" Gesture="T"/>
         <KeyBinding Command="{Binding OnToolImage}" Gesture="I"/>
-        <!-- Options -->
-        <KeyBinding Command="{Binding OnToggleDefaultIsStroked}" Gesture="K"/>
-        <KeyBinding Command="{Binding OnToggleDefaultIsFilled}" Gesture="F"/>
-        <KeyBinding Command="{Binding OnToggleDefaultIsClosed}" Gesture="D"/>
-        <KeyBinding Command="{Binding OnToggleDefaultIsSmoothJoin}" Gesture="J"/>
-        <KeyBinding Command="{Binding OnToggleSnapToGrid}" Gesture="G"/>
-        <KeyBinding Command="{Binding OnToggleTryToConnect}" Gesture="C"/>
     </UserControl.KeyBindings>
     <i:Interaction.Behaviors>
         <iac:FocusOnAttachedToVisualTreeBehavior/>
