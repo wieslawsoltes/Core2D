@@ -70,7 +70,7 @@ namespace Core2D.TextFieldWriter.OpenXml
 
             uint nRows = (uint)database.Records.Length + 1U;
             uint nColumns = (uint)database.Columns.Length + 1U;
-            OpenXml.ExportValues(stream, values, nRows, nColumns, "Database", "Database");
+            OpenXml.Write(stream, values, nRows, nColumns, "Database");
         }
     }
 }
