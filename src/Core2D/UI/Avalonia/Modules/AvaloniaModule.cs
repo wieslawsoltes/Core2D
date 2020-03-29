@@ -47,8 +47,11 @@ namespace Core2D.UI.Avalonia.Modules
         protected override void Load(ContainerBuilder builder)
         {
             // Locator
+
             builder.RegisterType<AutofacServiceProvider>().As<IServiceProvider>().InstancePerLifetimeScope();
+
             // Core
+
             builder.RegisterType<ProjectEditor>().As<IProjectEditor>().InstancePerLifetimeScope();
             builder.RegisterType<StyleEditor>().As<IStyleEditor>().InstancePerLifetimeScope();
             builder.RegisterType<Factory>().As<IFactory>().InstancePerLifetimeScope();
@@ -59,7 +62,9 @@ namespace Core2D.UI.Avalonia.Modules
             builder.RegisterType<HitTest>().As<IHitTest>().InstancePerLifetimeScope();
             builder.RegisterAssemblyTypes(typeof(IBounds).GetTypeInfo().Assembly).As<IBounds>().AsSelf().InstancePerLifetimeScope();
             builder.RegisterType<DataFlow>().As<IDataFlow>().InstancePerLifetimeScope();
+
             // Dependencies
+
             builder.RegisterType<AvaloniaRenderer>().As<IShapeRenderer>().InstancePerDependency();
             builder.RegisterType<AvaloniaTextClipboard>().As<ITextClipboard>().InstancePerLifetimeScope();
             builder.RegisterType<TraceLog>().As<ILog>().SingleInstance();
@@ -81,12 +86,16 @@ namespace Core2D.UI.Avalonia.Modules
             builder.RegisterType<CsvHelperReader>().As<ITextFieldReader<IDatabase>>().InstancePerLifetimeScope();
             builder.RegisterType<OpenXmlWriter>().As<ITextFieldWriter<IDatabase>>().InstancePerLifetimeScope();
             builder.RegisterType<CsvHelperWriter>().As<ITextFieldWriter<IDatabase>>().InstancePerLifetimeScope();
+
             // App
+
             builder.RegisterType<AvaloniaImageImporter>().As<IImageImporter>().InstancePerLifetimeScope();
             builder.RegisterType<AvaloniaProjectEditorPlatform>().As<IProjectEditorPlatform>().InstancePerLifetimeScope();
             builder.RegisterType<AvaloniaEditorCanvasPlatform>().As<IEditorCanvasPlatform>().InstancePerLifetimeScope();
             builder.RegisterType<AvaloniaEditorLayoutPlatform>().As<IEditorLayoutPlatform>().InstancePerLifetimeScope();
+
             // View
+
             builder.RegisterAssemblyTypes(typeof(App).GetTypeInfo().Assembly).As<DM.IDock>().InstancePerLifetimeScope();
             builder.RegisterType<EditorDockFactory>().As<DM.IFactory>().InstancePerDependency();
             builder.Register(c => new ThemedHostWindow()).As<DM.IHostWindow>().InstancePerDependency();
