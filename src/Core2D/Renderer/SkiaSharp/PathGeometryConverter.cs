@@ -8,6 +8,7 @@ namespace Core2D.Renderer.SkiaSharp
     public static class PathGeometryConverter
     {
         public static SKPath ToSKPath(this IPathGeometry xpg, double dx, double dy, Func<double, float> scale)
+        public static SKPath ToSKPath(this IPathGeometry pathGeometry, double dx, double dy, Func<double, float> scale)
         {
             var path = new SKPath
             {
