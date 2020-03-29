@@ -8,53 +8,7 @@ namespace Core2D.TextFieldWriter.OpenXml
 {
     internal class OpenXml
     {
-        private static string ToRange(uint columnNumber)
-        {
-            uint end = columnNumber;
-            string name = string.Empty;
-            while (end > 0)
-            {
-                uint modulo = (end - 1) % 26;
-                name = Convert.ToChar(65 + modulo).ToString() + name;
-                end = (uint)((end - modulo) / 26);
-            }
-            return name;
-        }
-
-        private static string ToRange(uint startRow, uint endRow, uint startColumn, uint endColumn)
-        {
-            return ToRange(startColumn) + startRow.ToString() + ":" + ToRange(endColumn) + endRow.ToString();
-        }
-
-        public static void ExportValues(Stream stream, object[,] values, uint nRows, uint nColumns, string sheetName, string tableName)
-        {
-            var spreadsheetDocument = SpreadsheetDocument.Create(stream, SpreadsheetDocumentType.Workbook);
-
-            var workbookpart = spreadsheetDocument.AddWorkbookPart();
-            workbookpart.Workbook = new Workbook();
-
-            var worksheetPart = workbookpart.AddNewPart<WorksheetPart>();
-            worksheetPart.Worksheet = new Worksheet(new SheetData());
-
-            var sheets = spreadsheetDocument.WorkbookPart.Workbook.AppendChild<Sheets>(new Sheets());
-
-            Sheet sheet = new Sheet()
-            {
-                Id = spreadsheetDocument.WorkbookPart.GetIdOfPart(worksheetPart),
-                SheetId = 1,
-                Name = sheetName
-            };
-            sheets.Append(sheet);
-
-            var sheetData = worksheetPart.Worksheet.GetFirstChild<SheetData>();
-            WriteValues(sheetData, values, nRows, nColumns);
-            WriteTable(worksheetPart, 1U, values, nRows, nColumns);
-
-            workbookpart.Workbook.Save();
-            spreadsheetDocument.Close();
-        }
-
-        public static void WriteValues(SheetData sheetData, object[,] values, uint nRows, uint nColumns)
+        private static void WriteValues(SheetData sheetData, object[,] values, uint nRows, uint nColumns)
         {
             for (int r = 0; r < nRows; r++)
             {
@@ -71,6 +25,24 @@ namespace Core2D.TextFieldWriter.OpenXml
                     previous = cell;
                 }
             }
+        }
+
+        private static string ToRange(uint columnNumber)
+        {
+            uint end = columnNumber;
+            string name = string.Empty;
+            while (end > 0)
+            {
+                uint modulo = (end - 1) % 26;
+                name = Convert.ToChar(65 + modulo).ToString() + name;
+                end = (uint)((end - modulo) / 26);
+            }
+            return name;
+        }
+
+        private static string ToRange(uint startRow, uint endRow, uint startColumn, uint endColumn)
+        {
+            return ToRange(startColumn) + startRow.ToString() + ":" + ToRange(endColumn) + endRow.ToString();
         }
 
         private static void WriteTable(WorksheetPart worksheetPart, uint tableID, object[,] values, uint nRows, uint nColumns)
@@ -119,11 +91,39 @@ namespace Core2D.TextFieldWriter.OpenXml
             table.Append(tableColumns);
             table.Append(tableStyleInfo);
 
-            //var tableParts = worksheetPart.Worksheet.AppendChild<TableParts>(new TableParts());
-            //tableParts.AppendChild<TablePart>(new TablePart());
+            var tableParts = worksheetPart.Worksheet.AppendChild<TableParts>(new TableParts());
+            tableParts.AppendChild<TablePart>(new TablePart());
 
             var tableDefinitionPart = worksheetPart.AddNewPart<TableDefinitionPart>($"rId{tableID}");
             tableDefinitionPart.Table = table;
+        }
+
+        public static void Write(Stream stream, object[,] values, uint nRows, uint nColumns, string sheetName)
+        {
+            var spreadsheetDocument = SpreadsheetDocument.Create(stream, SpreadsheetDocumentType.Workbook);
+
+            var workbookpart = spreadsheetDocument.AddWorkbookPart();
+            workbookpart.Workbook = new Workbook();
+
+            var worksheetPart = workbookpart.AddNewPart<WorksheetPart>();
+            worksheetPart.Worksheet = new Worksheet(new SheetData());
+
+            var sheets = spreadsheetDocument.WorkbookPart.Workbook.AppendChild<Sheets>(new Sheets());
+
+            Sheet sheet = new Sheet()
+            {
+                Id = spreadsheetDocument.WorkbookPart.GetIdOfPart(worksheetPart),
+                SheetId = 1,
+                Name = sheetName
+            };
+            sheets.Append(sheet);
+
+            var sheetData = worksheetPart.Worksheet.GetFirstChild<SheetData>();
+            WriteValues(sheetData, values, nRows, nColumns);
+            WriteTable(worksheetPart, 1U, values, nRows, nColumns);
+
+            workbookpart.Workbook.Save();
+            spreadsheetDocument.Close();
         }
     }
 }
