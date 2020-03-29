@@ -1437,6 +1437,9 @@ namespace Core2D.Editor
                 var path = PathConverter.ToStrokePathShape(source);
                 if (path != null)
                 {
+                    path.IsStroked = false;
+                    path.IsFilled = true;
+
                     var shapesBuilder = layer.Shapes.ToBuilder();
 
                     var index = shapesBuilder.IndexOf(source);
@@ -1462,6 +1465,9 @@ namespace Core2D.Editor
                     var path = PathConverter.ToStrokePathShape(s);
                     if (path != null)
                     {
+                        path.IsStroked = false;
+                        path.IsFilled = true;
+
                         paths.Add(path);
                         shapes.Add(s);
                     }
@@ -1507,6 +1513,9 @@ namespace Core2D.Editor
                 var path = PathConverter.ToFillPathShape(source);
                 if (path != null)
                 {
+                    path.IsStroked = false;
+                    path.IsFilled = true;
+
                     var shapesBuilder = layer.Shapes.ToBuilder();
 
                     var index = shapesBuilder.IndexOf(source);
@@ -1532,6 +1541,9 @@ namespace Core2D.Editor
                     var path = PathConverter.ToFillPathShape(s);
                     if (path != null)
                     {
+                        path.IsStroked = false;
+                        path.IsFilled = true;
+
                         paths.Add(path);
                         shapes.Add(s);
                     }
