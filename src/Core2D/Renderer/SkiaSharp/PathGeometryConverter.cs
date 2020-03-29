@@ -3,7 +3,10 @@ using System.Collections.Immutable;
 using Core2D.Interfaces;
 using Core2D.Path;
 using Core2D.Path.Segments;
+using Core2D.Shapes;
 using SkiaSharp;
+using Spatial;
+using Spatial.Arc;
 
 namespace Core2D.Renderer.SkiaSharp
 {
@@ -76,6 +79,128 @@ namespace Core2D.Renderer.SkiaSharp
             }
 
             return geometry;
+        }
+
+        public static SKPath ToSKPath(this ILineShape line, double dx, double dy, Func<double, float> scale)
+        {
+            var path = new SKPath
+            {
+                FillType = SKPathFillType.Winding
+            };
+            path.MoveTo(
+                scale(line.Start.X + dx),
+                scale(line.Start.Y + dy));
+            path.LineTo(
+                scale(line.End.X + dx),
+                scale(line.End.Y + dy));
+            return path;
+        }
+
+        public static SKPath ToSKPath(this IRectangleShape rectangle, double dx, double dy, Func<double, float> scale)
+        {
+            var path = new SKPath
+            {
+                FillType = SKPathFillType.Winding
+            };
+            path.AddRect(
+                SkiaSharpRenderer.CreateRect(rectangle.TopLeft, rectangle.BottomRight, dx, dy, scale),
+                SKPathDirection.Clockwise);
+            return path;
+        }
+
+        public static SKPath ToSKPath(this IEllipseShape ellipse, double dx, double dy, Func<double, float> scale)
+        {
+            var path = new SKPath
+            {
+                FillType = SKPathFillType.Winding
+            };
+            path.AddOval(
+                SkiaSharpRenderer.CreateRect(ellipse.TopLeft, ellipse.BottomRight, dx, dy, scale),
+                SKPathDirection.Clockwise);
+            return path;
+        }
+
+        public static SKPath ToSKPath(this IArcShape arc, double dx, double dy, Func<double, float> scale)
+        {
+            var path = new SKPath
+            {
+                FillType = SKPathFillType.Winding
+            };
+            var a = new GdiArc(
+                Point2.FromXY(arc.Point1.X, arc.Point1.Y),
+                Point2.FromXY(arc.Point2.X, arc.Point2.Y),
+                Point2.FromXY(arc.Point3.X, arc.Point3.Y),
+                Point2.FromXY(arc.Point4.X, arc.Point4.Y));
+            var rect = new SKRect(
+                scale(a.X + dx),
+                scale(a.Y + dy),
+                scale(a.X + dx + a.Width),
+                scale(a.Y + dy + a.Height));
+            path.AddArc(rect, (float)a.StartAngle, (float)a.SweepAngle);
+            return path;
+        }
+
+        public static SKPath ToSKPath(this ICubicBezierShape cubicBezier, double dx, double dy, Func<double, float> scale)
+        {
+            var path = new SKPath
+            {
+                FillType = SKPathFillType.Winding
+            };
+            path.MoveTo(
+                scale(cubicBezier.Point1.X + dx),
+                scale(cubicBezier.Point1.Y + dy));
+            path.CubicTo(
+                scale(cubicBezier.Point2.X + dx),
+                scale(cubicBezier.Point2.Y + dy),
+                scale(cubicBezier.Point3.X + dx),
+                scale(cubicBezier.Point3.Y + dy),
+                scale(cubicBezier.Point4.X + dx),
+                scale(cubicBezier.Point4.Y + dy));
+            return path;
+        }
+
+        public static SKPath ToSKPath(this IQuadraticBezierShape quadraticBezier, double dx, double dy, Func<double, float> scale)
+        {
+            var path = new SKPath
+            {
+                FillType = SKPathFillType.Winding
+            };
+            path.MoveTo(
+                scale(quadraticBezier.Point1.X + dx),
+                scale(quadraticBezier.Point1.Y + dy));
+            path.QuadTo(
+                scale(quadraticBezier.Point2.X + dx),
+                scale(quadraticBezier.Point2.Y + dy),
+                scale(quadraticBezier.Point3.X + dx),
+                scale(quadraticBezier.Point3.Y + dy));
+            return path;
+        }
+
+        public static SKPath ToSKPath(this ITextShape text, double dx, double dy, Func<double, float> scale)
+        {
+            var path = new SKPath
+            {
+                FillType = SKPathFillType.Winding
+            };
+
+            if (!(text.GetProperty(nameof(ITextShape.Text)) is string tbind))
+            {
+                tbind = text.Text;
+            }
+
+            if (tbind == null)
+            {
+                return path;
+            }
+
+            SkiaSharpRenderer.GetSKPaint(tbind, text.Style, text.TopLeft, text.BottomRight, dx, dy, scale, 96.0, 72.0, true, out var pen, out var origin);
+
+            using var outlinePath = pen.GetTextPath(tbind, origin.X, origin.Y);
+            using var fillPath = pen.GetFillPath(outlinePath);
+
+            path.AddPath(fillPath, SKPathAddMode.Append);
+
+            return path;
         }
 
         public static SKPath ToSKPath(this IPathGeometry pathGeometry, double dx, double dy, Func<double, float> scale)
@@ -212,6 +337,11 @@ namespace Core2D.Renderer.SkiaSharp
             }
 
             return path;
+        }
+
+        public static SKPath ToSKPath(this IPathShape path, double dx, double dy, Func<double, float> scale)
+        {
+            return ToSKPath(path.Geometry, dx, dy, scale);
         }
     }
 }
