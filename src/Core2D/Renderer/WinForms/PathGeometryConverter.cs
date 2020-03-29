@@ -6,19 +6,8 @@ using D2D = System.Drawing.Drawing2D;
 
 namespace Core2D.Renderer.WinForms
 {
-    /// <summary>
-    /// 
-    /// </summary>
     public static class PathGeometryConverter
     {
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="pg"></param>
-        /// <param name="dx"></param>
-        /// <param name="dy"></param>
-        /// <param name="scale"></param>
-        /// <returns></returns>
         public static D2D.GraphicsPath ToGraphicsPath(this IPathGeometry pg, double dx, double dy, Func<double, float> scale)
         {
             var gp = new D2D.GraphicsPath
@@ -34,9 +23,8 @@ namespace Core2D.Renderer.WinForms
                 {
                     if (segment is IArcSegment arcSegment)
                     {
-                        throw new NotSupportedException("Not supported segment type: " + segment.GetType());
                         // TODO: Convert WPF/SVG elliptical arc segment format to GDI+ bezier curves.
-                        //startPoint = arcSegment.Point;
+                        startPoint = arcSegment.Point;
                     }
                     else if (segment is ICubicBezierSegment cubicBezierSegment)
                     {
