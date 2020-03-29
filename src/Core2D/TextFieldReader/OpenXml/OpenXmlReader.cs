@@ -1,8 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Core2D.Data;
 using Core2D.Interfaces;
+using DocumentFormat.OpenXml.Packaging;
+using DocumentFormat.OpenXml.Spreadsheet;
 
 namespace Core2D.TextFieldReader.OpenXml
 {
@@ -28,6 +31,25 @@ namespace Core2D.TextFieldReader.OpenXml
         /// <inheritdoc/>
         public string Extension { get; } = "xlsx";
 
+        public static IEnumerable<string[]> ReadFields(Stream stream)
+        {
+            var spreadsheetDocument = SpreadsheetDocument.Open(stream, false);
+
+            var workbookpart = spreadsheetDocument.WorkbookPart;
+
+            var worksheetPart = workbookpart.WorksheetParts.First();
+
+            var sheetData = worksheetPart.Worksheet.Elements<SheetData>().First();
+
+            foreach (var row in sheetData.Elements<Row>())
+            {
+                var fields = row.Elements<Cell>().Select(c => c.CellValue.Text).ToArray();
+                yield return fields;
+            }
+
+            spreadsheetDocument.Close();
+        }
+
         /// <summary>
         /// Read fields from text database file format.
         /// </summary>
@@ -35,12 +57,14 @@ namespace Core2D.TextFieldReader.OpenXml
         /// <returns>The new instance of the <see cref="IDatabase"/> class</returns>
         public IDatabase Read(Stream stream)
         {
-            var fields = OpenXmlSpreadsheet.Read(stream).ToList();
+            var fields = ReadFields(stream).ToList();
+
             var name = "Db";
             if (stream is FileStream fileStream)
             {
                 name = System.IO.Path.GetFileNameWithoutExtension(fileStream.Name);
             }
+
             return _serviceProvider.GetService<IFactory>().FromFields(name, fields);
         }
     }
