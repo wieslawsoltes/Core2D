@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Immutable;
+using Core2D.Interfaces;
 using Core2D.Path;
 using Core2D.Path.Segments;
 using SkiaSharp;
@@ -7,7 +9,75 @@ namespace Core2D.Renderer.SkiaSharp
 {
     public static class PathGeometryConverter
     {
-        public static SKPath ToSKPath(this IPathGeometry xpg, double dx, double dy, Func<double, float> scale)
+        public static IPathGeometry ToPathGeometry(SKPath path, double dx, double dy, IFactory factory)
+        {
+            var geometry = factory.CreatePathGeometry(
+                ImmutableArray.Create<IPathFigure>(),
+                path.FillType == SKPathFillType.EvenOdd ? FillRule.EvenOdd : FillRule.Nonzero);
+
+            var context = factory.CreateGeometryContext(geometry);
+
+            using (var iterator = path.CreateRawIterator())
+            {
+                var points = new SKPoint[4];
+                var pathVerb = SKPathVerb.Move;
+
+                while ((pathVerb = iterator.Next(points)) != SKPathVerb.Done)
+                {
+                    switch (pathVerb)
+                    {
+                        case SKPathVerb.Move:
+                            {
+                                context.BeginFigure(
+                                    factory.CreatePointShape(points[0].X + dx, points[0].Y + dy),
+                                    false,
+                                    false);
+                            }
+                            break;
+                        case SKPathVerb.Line:
+                            {
+                                context.LineTo(
+                                    factory.CreatePointShape(points[1].X + dx, points[1].Y + dy));
+                            }
+                            break;
+                        case SKPathVerb.Cubic:
+                            {
+                                context.CubicBezierTo(
+                                    factory.CreatePointShape(points[1].X + dx, points[1].Y + dy),
+                                    factory.CreatePointShape(points[2].X + dx, points[2].Y + dy),
+                                    factory.CreatePointShape(points[3].X + dx, points[3].Y + dy));
+                            }
+                            break;
+                        case SKPathVerb.Quad:
+                            {
+                                context.QuadraticBezierTo(
+                                    factory.CreatePointShape(points[1].X + dx, points[1].Y + dy),
+                                    factory.CreatePointShape(points[2].X + dx, points[2].Y + dy));
+                            }
+                            break;
+                        case SKPathVerb.Conic:
+                            {
+                                var quads = SKPath.ConvertConicToQuads(points[0], points[1], points[2], iterator.ConicWeight(), 1);
+                                context.QuadraticBezierTo(
+                                    factory.CreatePointShape(quads[1].X + dx, quads[1].Y + dy),
+                                    factory.CreatePointShape(quads[2].X + dx, quads[2].Y + dy));
+                                context.QuadraticBezierTo(
+                                    factory.CreatePointShape(quads[3].X + dx, quads[3].Y + dy),
+                                    factory.CreatePointShape(quads[4].X + dx, quads[4].Y + dy));
+                            }
+                            break;
+                        case SKPathVerb.Close:
+                            {
+                                context.SetClosedState(true);
+                            }
+                            break;
+                    }
+                }
+            }
+
+            return geometry;
+        }
+
         public static SKPath ToSKPath(this IPathGeometry pathGeometry, double dx, double dy, Func<double, float> scale)
         {
             var path = new SKPath
