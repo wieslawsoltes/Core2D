@@ -32,7 +32,6 @@ namespace Core2D.Renderer.Avalonia
         // TODO: Add PathShape cache.
         private readonly Func<double, float> _scaleToPage;
         private readonly double _textScaleFactor;
-        private readonly PathGeometryConverter _converter;
 
         /// <inheritdoc/>
         public IShapeRendererState State
@@ -56,7 +55,6 @@ namespace Core2D.Renderer.Avalonia
             _biCache = _serviceProvider.GetService<IFactory>().CreateCache<string, AMI.Bitmap>(bi => bi.Dispose());
             _textScaleFactor = textScaleFactor;
             _scaleToPage = (value) => (float)(value);
-            _converter = new PathGeometryConverter(_serviceProvider);
             ClearCache(isZooming: false);
         }
 
@@ -842,7 +840,7 @@ namespace Core2D.Renderer.Avalonia
 
             GetCached(style, out var fill, out var stroke);
 
-            var g = _converter.ToGeometry(path.Geometry, dx, dy);
+            var g = PathGeometryConverter.ToGeometry(path.Geometry, dx, dy);
 
             _dc.DrawGeometry(
                 path.IsFilled ? fill : null,
