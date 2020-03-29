@@ -187,6 +187,11 @@ namespace Core2D.Editor
         IStyleEditor StyleEditor { get; }
 
         /// <summary>
+        /// Gets path converter.
+        /// </summary>
+        IPathConverter PathConverter { get; }
+
+        /// <summary>
         /// Try to snap input arguments.
         /// </summary>
         /// <param name="args">The input arguments.</param>
@@ -510,6 +515,27 @@ namespace Core2D.Editor
         /// Bring selected shapes to the bottom of the stack.
         /// </summary>
         void OnSendToBackSelected();
+
+        /// <summary>
+        /// Create path.
+        /// </summary>
+        void OnCreatePath();
+
+        /// <summary>
+        /// Create stroke path.
+        /// </summary>
+        void OnCreateStrokePath();
+
+        /// <summary>
+        /// Create fill path.
+        /// </summary>
+        void OnCreateFillPath();
+
+        /// <summary>
+        /// Path op.
+        /// </summary>
+        /// <param name="op">The path op.</param>
+        void OnPathOp(string op);
 
         /// <summary>
         /// Set current tool to <see cref="ToolNone"/>.
