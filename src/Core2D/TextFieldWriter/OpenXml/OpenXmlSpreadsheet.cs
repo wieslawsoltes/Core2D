@@ -1,12 +1,14 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using DocumentFormat.OpenXml;
 using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Spreadsheet;
 
-namespace Core2D.TextFieldWriter.OpenXml
+namespace Core2D
 {
-    internal class OpenXml
+    internal class OpenXmlSpreadsheet
     {
         private static void WriteValues(SheetData sheetData, object[,] values, uint nRows, uint nColumns)
         {
@@ -123,6 +125,25 @@ namespace Core2D.TextFieldWriter.OpenXml
             WriteTable(worksheetPart, 1U, values, nRows, nColumns);
 
             workbookpart.Workbook.Save();
+            spreadsheetDocument.Close();
+        }
+
+        public static IEnumerable<string[]> Read(Stream stream)
+        {
+            var spreadsheetDocument = SpreadsheetDocument.Open(stream, false);
+
+            var workbookpart = spreadsheetDocument.WorkbookPart;
+
+            var worksheetPart = workbookpart.WorksheetParts.First();
+
+            var sheetData = worksheetPart.Worksheet.Elements<SheetData>().First();
+
+            foreach (var row in sheetData.Elements<Row>())
+            {
+                var fields = row.Elements<Cell>().Select(c => c.CellValue.Text).ToArray();
+                yield return fields;
+            }
+
             spreadsheetDocument.Close();
         }
     }

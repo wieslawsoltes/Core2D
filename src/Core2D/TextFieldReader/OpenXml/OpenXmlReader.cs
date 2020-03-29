@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using Core2D.Data;
 using Core2D.Interfaces;
 
@@ -34,8 +35,13 @@ namespace Core2D.TextFieldReader.OpenXml
         /// <returns>The new instance of the <see cref="IDatabase"/> class</returns>
         public IDatabase Read(Stream stream)
         {
-            // TODO:
-            throw new NotImplementedException();
+            var fields = OpenXmlSpreadsheet.Read(stream).ToList();
+            var name = "Db";
+            if (stream is FileStream fileStream)
+            {
+                name = System.IO.Path.GetFileNameWithoutExtension(fileStream.Name);
+            }
+            return _serviceProvider.GetService<IFactory>().FromFields(name, fields);
         }
     }
 }
