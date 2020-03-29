@@ -117,6 +117,7 @@ namespace Core2D.UI.Avalonia
                 builder.RegisterModule<ViewModule>();
 
                 var container = builder.Build();
+
                 var serviceProvider = container.Resolve<IServiceProvider>();
 
                 InitializeConverters(serviceProvider);
