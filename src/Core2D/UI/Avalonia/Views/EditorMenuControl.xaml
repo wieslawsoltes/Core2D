@@ -39,8 +39,8 @@
             <Separator/>
             <MenuItem Header="Execu_te Script..." Command="{Binding Platform.OnExecuteScriptFile}"/>
             <Separator/>
-            <MenuItem Header="Import Xa_ml..." Command="{Binding Platform.OnImportXaml}" InputGesture="Ctrl+Shift+X"/>
-            <MenuItem Header="Import _Json..." Command="{Binding Platform.OnImportJson}" InputGesture="Ctrl+Shift+J"/>
+            <MenuItem Header="Import Xa_ml..." Command="{Binding Platform.OnImportXaml}"/>
+            <MenuItem Header="Import _Json..." Command="{Binding Platform.OnImportJson}"/>
             <Separator/>
             <MenuItem Header="_Export..." Command="{Binding Platform.OnExport}" InputGesture="Ctrl+E"/>
             <Separator/>
@@ -75,11 +75,11 @@
             <MenuItem Header="Cance_l" Command="{Binding OnCancel}" InputGesture="Escape"/>
         </MenuItem>
         <MenuItem Header="_View">
-            <MenuItem Header="_Object Browser..." Command="{Binding Platform.OnObjectBrowser}" InputGesture="Ctrl+J"/>
+            <MenuItem Header="_Object Browser..." Command="{Binding Platform.OnObjectBrowser}"/>
             <Separator/>
-            <MenuItem Header="_Document Viewer..." Command="{Binding Platform.OnDocumentViewer}" InputGesture="Ctrl+D"/>
+            <MenuItem Header="_Document Viewer..." Command="{Binding Platform.OnDocumentViewer}"/>
             <Separator/>
-            <MenuItem Header="_Script Editor..." Command="{Binding Platform.OnScriptEditor}" InputGesture="Ctrl+R"/>
+            <MenuItem Header="_Script Editor..." Command="{Binding Platform.OnScriptEditor}"/>
             <Separator/>
             <MenuItem Header="_Reset Zoom" Command="{Binding Platform.OnZoomReset}" InputGesture="Z"/>
             <Separator/>
@@ -240,15 +240,15 @@
                 <Separator/>
             </MenuItem>
             <Separator/>
-            <MenuItem Header="Create Pat_h" Command="{Binding OnCreatePath}"/>
-            <MenuItem Header="Create Str_oke Path" Command="{Binding OnCreateStrokePath}"/>
-            <MenuItem Header="Create _Fill Path" Command="{Binding OnCreateFillPath}"/>
+            <MenuItem Header="Create Pat_h" Command="{Binding OnCreatePath}" InputGesture="Ctrl+H"/>
+            <MenuItem Header="Create Str_oke Path" Command="{Binding OnCreateStrokePath}" InputGesture="Ctrl+J"/>
+            <MenuItem Header="Create _Fill Path" Command="{Binding OnCreateFillPath}" InputGesture="Ctrl+K"/>
             <Separator/>
-            <MenuItem Header="_Difference" ToolTip.Tip="Subtract the op path from the current path." Command="{Binding OnPathOp}" CommandParameter="Difference"/>
-            <MenuItem Header="_Intersect" ToolTip.Tip="Intersect the two paths." Command="{Binding OnPathOp}" CommandParameter="Intersect"/>
-            <MenuItem Header="_Union" ToolTip.Tip="Union (inclusive-or) the two paths." Command="{Binding OnPathOp}" CommandParameter="Union"/>
-            <MenuItem Header="_Xor" ToolTip.Tip="Exclusive-or the two paths." Command="{Binding OnPathOp}" CommandParameter="Xor"/>
-            <MenuItem Header="_Reverse Difference" ToolTip.Tip="Subtract the current path from the op path." Command="{Binding OnPathOp}" CommandParameter="ReverseDifference"/>
+            <MenuItem Header="_Difference" ToolTip.Tip="Subtract the op path from the current path." Command="{Binding OnPathOp}" CommandParameter="Difference" InputGesture="Ctrl+Shift+D"/>
+            <MenuItem Header="_Intersect" ToolTip.Tip="Intersect the two paths." Command="{Binding OnPathOp}" CommandParameter="Intersect" InputGesture="Ctrl+Shift+I"/>
+            <MenuItem Header="_Union" ToolTip.Tip="Union (inclusive-or) the two paths." Command="{Binding OnPathOp}" CommandParameter="Union" InputGesture="Ctrl+Shift+U"/>
+            <MenuItem Header="_Xor" ToolTip.Tip="Exclusive-or the two paths." Command="{Binding OnPathOp}" CommandParameter="Xor" InputGesture="Ctrl+Shift+X"/>
+            <MenuItem Header="_Reverse Difference" ToolTip.Tip="Subtract the current path from the op path." Command="{Binding OnPathOp}" CommandParameter="ReverseDifference" InputGesture="Ctrl+Shift+R"/>
         </MenuItem>
         <MenuItem Header="F_ormat">
             <MenuItem Header="_Copy">
