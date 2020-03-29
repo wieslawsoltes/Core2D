@@ -33,7 +33,8 @@ namespace Core2D.TextFieldReader.CsvHelper
 
         private static IEnumerable<string[]> ReadFields(Stream stream)
         {
-            using var reader = new System.IO.StreamReader(stream);
+            using var reader = new StreamReader(stream);
+
             var configuration = new CSV.Configuration.CsvConfiguration(CultureInfo.CurrentCulture)
             {
                 Delimiter = CultureInfo.CurrentCulture.TextInfo.ListSeparator,
@@ -41,15 +42,15 @@ namespace Core2D.TextFieldReader.CsvHelper
                 AllowComments = true,
                 Comment = '#'
             };
-            using var parser = new CSV.CsvParser(reader, configuration);
+
+            using var csvParser = new CSV.CsvParser(reader, configuration);
             while (true)
             {
-                var fields = parser.Read();
+                var fields = csvParser.Read();
                 if (fields == null)
                 {
                     break;
                 }
-
                 yield return fields;
             }
         }
@@ -62,11 +63,13 @@ namespace Core2D.TextFieldReader.CsvHelper
         public IDatabase Read(Stream stream)
         {
             var fields = ReadFields(stream).ToList();
+
             var name = "Db";
             if (stream is FileStream fileStream)
             {
                 name = System.IO.Path.GetFileNameWithoutExtension(fileStream.Name);
             }
+
             return _serviceProvider.GetService<IFactory>().FromFields(name, fields);
         }
     }
