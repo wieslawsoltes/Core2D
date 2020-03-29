@@ -10,44 +10,10 @@ using AM = Avalonia.Media;
 
 namespace Core2D.Renderer.Avalonia
 {
-    /// <summary>
-    /// 
-    /// </summary>
-    public class PathGeometryConverter
+    public static class PathGeometryConverter
     {
-        private readonly IServiceProvider _serviceProvider;
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="PathGeometryConverter"/> class.
-        /// </summary>
-        /// <param name="serviceProvider">The service provider.</param>
-        public PathGeometryConverter(IServiceProvider serviceProvider)
+        public static IPathGeometry ToPathGeometry(AM.PathGeometry pg, double dx, double dy, IFactory factory)
         {
-            _serviceProvider = serviceProvider;
-        }
-
-        private ImmutableArray<IPointShape> ToPointShapes(IEnumerable<A.Point> points, double dx, double dy)
-        {
-            var factory = _serviceProvider.GetService<IFactory>();
-            var pointShapes = ImmutableArray.CreateBuilder<IPointShape>();
-            foreach (var point in points)
-            {
-                pointShapes.Add(factory.CreatePointShape(point.X + dx, point.Y + dy));
-            }
-            return pointShapes.ToImmutable();
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="pg"></param>
-        /// <param name="dx"></param>
-        /// <param name="dy"></param>
-        /// <returns></returns>
-        public IPathGeometry ToPathGeometry(AM.PathGeometry pg, double dx, double dy)
-        {
-            var factory = _serviceProvider.GetService<IFactory>();
-
             var geometry = factory.CreatePathGeometry(
                 ImmutableArray.Create<IPathFigure>(),
                 pg.FillRule == AM.FillRule.EvenOdd ? FillRule.EvenOdd : FillRule.Nonzero);
@@ -100,14 +66,7 @@ namespace Core2D.Renderer.Avalonia
             return geometry;
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="xpg"></param>
-        /// <param name="dx"></param>
-        /// <param name="dy"></param>
-        /// <returns></returns>
-        public AM.StreamGeometry ToStreamGeometry(IPathGeometry xpg, double dx, double dy)
+        public static AM.StreamGeometry ToStreamGeometry(IPathGeometry xpg, double dx, double dy)
         {
             var sg = new AM.StreamGeometry();
 
@@ -272,45 +231,23 @@ namespace Core2D.Renderer.Avalonia
             return sg;
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="source"></param>
-        /// <returns></returns>
-        public IPathGeometry ToPathGeometry(string source)
+        public static IPathGeometry ToPathGeometry(string source, IFactory factory)
         {
             var pg = AM.PathGeometry.Parse(source);
-            return ToPathGeometry(pg, 0.0, 0.0);
+            return ToPathGeometry(pg, 0.0, 0.0, factory);
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="xpg"></param>
-        /// <param name="dx"></param>
-        /// <param name="dy"></param>
-        /// <returns></returns>
-        public AM.Geometry ToGeometry(IPathGeometry xpg, double dx, double dy)
+        public static AM.Geometry ToGeometry(IPathGeometry xpg, double dx, double dy)
         {
             return ToStreamGeometry(xpg, dx, dy);
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="xpg"></param>
-        /// <returns></returns>
-        public string ToSource(IPathGeometry xpg)
+        public static string ToSource(IPathGeometry xpg)
         {
             return ToStreamGeometry(xpg, 0.0, 0.0).ToString();
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sg"></param>
-        /// <returns></returns>
-        public string ToSource(AM.StreamGeometry sg)
+        public static string ToSource(AM.StreamGeometry sg)
         {
             return sg.ToString();
         }
