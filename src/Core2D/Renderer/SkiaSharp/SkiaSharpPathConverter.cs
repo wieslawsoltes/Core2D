@@ -78,7 +78,7 @@ namespace Core2D.Renderer.SkiaSharp
             var editor = _serviceProvider.GetService<IProjectEditor>();
             var factory = _serviceProvider.GetService<IFactory>();
             var style = (IShapeStyle)shape.Style?.Copy(null);
-            using var paint = SkiaSharpRenderer.ToSKPaintPen(shape.Style, (value) => (float)value, 96.0, 72.0, true);
+            using var paint = SkiaSharpRenderer.ToSKPaintPen(shape.Style, (value) => (float)value, 96.0, 96.0, true);
             var result = paint.GetFillPath(path, 1.0f);
             if (result != null)
             {
