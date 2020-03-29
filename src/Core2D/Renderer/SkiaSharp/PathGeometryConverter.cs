@@ -1,24 +1,12 @@
 ﻿using System;
 using Core2D.Path;
 using Core2D.Path.Segments;
-using Core2D.Shapes;
 using SkiaSharp;
 
 namespace Core2D.Renderer.SkiaSharp
 {
-    /// <summary>
-    /// 
-    /// </summary>
     public static class PathGeometryConverter
     {
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="xpg"></param>
-        /// <param name="dx"></param>
-        /// <param name="dy"></param>
-        /// <param name="scale"></param>
-        /// <returns></returns>
         public static SKPath ToSKPath(this IPathGeometry xpg, double dx, double dy, Func<double, float> scale)
         {
             var path = new SKPath
@@ -28,14 +16,9 @@ namespace Core2D.Renderer.SkiaSharp
 
             foreach (var xpf in xpg.Figures)
             {
-                IPointShape previous = default;
-
-                // Begin new figure.
                 path.MoveTo(
                     scale(xpf.StartPoint.X + dx),
                     scale(xpf.StartPoint.Y + dy));
-
-                previous = xpf.StartPoint;
 
                 foreach (var segment in xpf.Segments)
                 {
@@ -49,8 +32,6 @@ namespace Core2D.Renderer.SkiaSharp
                             arcSegment.SweepDirection == SweepDirection.Clockwise ? SKPathDirection.Clockwise : SKPathDirection.CounterClockwise,
                             scale(arcSegment.Point.X + dx),
                             scale(arcSegment.Point.Y + dy));
-
-                        previous = arcSegment.Point;
                     }
                     else if (segment is ICubicBezierSegment cubicBezierSegment)
                     {
@@ -61,16 +42,12 @@ namespace Core2D.Renderer.SkiaSharp
                             scale(cubicBezierSegment.Point2.Y + dy),
                             scale(cubicBezierSegment.Point3.X + dx),
                             scale(cubicBezierSegment.Point3.Y + dy));
-
-                        previous = cubicBezierSegment.Point3;
                     }
                     else if (segment is ILineSegment lineSegment)
                     {
                         path.LineTo(
                             scale(lineSegment.Point.X + dx),
                             scale(lineSegment.Point.Y + dy));
-
-                        previous = lineSegment.Point;
                     }
                     else if (segment is IPolyCubicBezierSegment polyCubicBezierSegment)
                     {
@@ -83,8 +60,6 @@ namespace Core2D.Renderer.SkiaSharp
                                 scale(polyCubicBezierSegment.Points[1].Y + dy),
                                 scale(polyCubicBezierSegment.Points[2].X + dx),
                                 scale(polyCubicBezierSegment.Points[2].Y + dy));
-
-                            previous = polyCubicBezierSegment.Points[2];
                         }
 
                         if (polyCubicBezierSegment.Points.Length > 3
@@ -99,8 +74,6 @@ namespace Core2D.Renderer.SkiaSharp
                                     scale(polyCubicBezierSegment.Points[i + 1].Y + dy),
                                     scale(polyCubicBezierSegment.Points[i + 2].X + dx),
                                     scale(polyCubicBezierSegment.Points[i + 2].Y + dy));
-
-                                previous = polyCubicBezierSegment.Points[i + 2];
                             }
                         }
                     }
@@ -111,8 +84,6 @@ namespace Core2D.Renderer.SkiaSharp
                             path.LineTo(
                                 scale(polyLineSegment.Points[0].X + dx),
                                 scale(polyLineSegment.Points[0].Y + dy));
-
-                            previous = polyLineSegment.Points[0];
                         }
 
                         if (polyLineSegment.Points.Length > 1)
@@ -122,8 +93,6 @@ namespace Core2D.Renderer.SkiaSharp
                                 path.LineTo(
                                     scale(polyLineSegment.Points[i].X + dx),
                                     scale(polyLineSegment.Points[i].Y + dy));
-
-                                previous = polyLineSegment.Points[i];
                             }
                         }
                     }
@@ -136,8 +105,6 @@ namespace Core2D.Renderer.SkiaSharp
                                 scale(polyQuadraticSegment.Points[0].Y + dy),
                                 scale(polyQuadraticSegment.Points[1].X + dx),
                                 scale(polyQuadraticSegment.Points[1].Y + dy));
-
-                            previous = polyQuadraticSegment.Points[1];
                         }
 
                         if (polyQuadraticSegment.Points.Length > 2
@@ -150,8 +117,6 @@ namespace Core2D.Renderer.SkiaSharp
                                     scale(polyQuadraticSegment.Points[i].Y + dy),
                                     scale(polyQuadraticSegment.Points[i + 1].X + dx),
                                     scale(polyQuadraticSegment.Points[i + 1].Y + dy));
-
-                                previous = polyQuadraticSegment.Points[i + 1];
                             }
                         }
                     }
@@ -162,8 +127,6 @@ namespace Core2D.Renderer.SkiaSharp
                             scale(quadraticBezierSegment.Point1.Y + dy),
                             scale(quadraticBezierSegment.Point2.X + dx),
                             scale(quadraticBezierSegment.Point2.Y + dy));
-
-                        previous = quadraticBezierSegment.Point2;
                     }
                     else
                     {
