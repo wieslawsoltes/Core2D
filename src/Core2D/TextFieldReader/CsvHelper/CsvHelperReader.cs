@@ -65,7 +65,7 @@ namespace Core2D.TextFieldReader.CsvHelper
             var name = "Db";
             if (stream is FileStream fileStream)
             {
-                name = System.IO.Path.GetDirectoryName(fileStream.Name);
+                name = System.IO.Path.GetFileNameWithoutExtension(fileStream.Name);
             }
             return _serviceProvider.GetService<IFactory>().FromFields(name, fields);
         }
