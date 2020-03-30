@@ -384,7 +384,7 @@ namespace Core2D.UI.Avalonia.Editor
                 }
                 dlg.Filters.Add(new FileDialogFilter() { Name = "All", Extensions = { "*" } });
                 dlg.InitialFileName = db.Name;
-                dlg.DefaultExtension = editor?.FileWriters.FirstOrDefault()?.Extension;
+                dlg.DefaultExtension = editor?.TextFieldWriters.FirstOrDefault()?.Extension;
                 var result = await dlg.ShowAsync(_serviceProvider.GetService<MainWindow>());
                 if (result != null)
                 {
