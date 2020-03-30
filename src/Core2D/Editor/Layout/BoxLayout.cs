@@ -233,5 +233,48 @@ namespace Core2D.Editor.Layout
                     break;
             }
         }
+
+        public static void Rotate(IEnumerable<IBaseShape> shapes, double angle, IHistory history)
+        {
+            var boxes = new List<ShapeBox>();
+
+            foreach (var shape in shapes)
+            {
+                boxes.Add(new ShapeBox(shape));
+            }
+
+            if (boxes.Count <= 0)
+            {
+                return;
+            }
+
+            var bounds = new GroupBox(boxes);
+
+            var previous = new List<(IPointShape point, double x, double y)>();
+            var next = new List<(IPointShape point, double x, double y)>();
+
+            var radians = angle * Math.PI / 180.0;
+            var centerX = bounds.CenterX;
+            var centerY = bounds.CenterY;
+
+            foreach (var box in boxes)
+            {
+                foreach (var point in box.Points)
+                {
+                    var x = (point.X - centerX) * Math.Cos(radians) - (point.Y - centerY) * Math.Sin(radians) + centerX;
+                    var y = (point.X - centerX) * Math.Sin(radians) + (point.Y - centerY) * Math.Cos(radians) + centerY;
+                    previous.Add((point, point.X, point.Y));
+                    next.Add((point, x, y));
+                    point.X = x;
+                    point.Y = y;
+                }
+            }
+
+            history.Snapshot(previous, next, (p) => previous.ForEach(p =>
+            {
+                p.point.X = p.x;
+                p.point.Y = p.y;
+            }));
+        }
     }
 }
