@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using Core2D.Containers;
@@ -1129,6 +1130,62 @@ namespace Core2D.Editor
                 Renderers?[0]?.State?.SelectedShapes,
                 0.0,
                 Project.Options.SnapToGrid ? -Project.Options.SnapY : -1.0);
+        }
+
+        /// <inheritdoc/>
+        public void OnRotateSelected(string angle)
+        {
+            if (!double.TryParse(angle, NumberStyles.AllowDecimalPoint | NumberStyles.AllowThousands, CultureInfo.InvariantCulture, out var value))
+            {
+                return;
+            }
+
+            var source = Renderers?[0]?.State?.SelectedShape;
+            if (source != null)
+            {
+                // TODO:
+            }
+
+            var sources = Renderers?[0]?.State?.SelectedShapes;
+            if (sources != null)
+            {
+                foreach (var s in sources)
+                {
+                    // TODO: 
+                }
+            }
+        }
+
+        /// <inheritdoc/>
+        public void OnFlipHorizontalSelected()
+        {
+            var source = Renderers?[0]?.State?.SelectedShape;
+            if (source != null)
+            {
+                BoxLayout.Flip(Enumerable.Repeat(source, 1), FlipMode.Horizontal, Project?.History);
+            }
+
+            var sources = Renderers?[0]?.State?.SelectedShapes;
+            if (sources != null)
+            {
+                BoxLayout.Flip(sources, FlipMode.Horizontal, Project?.History);
+            }
+        }
+
+        /// <inheritdoc/>
+        public void OnFlipVerticalSelected()
+        {
+            var source = Renderers?[0]?.State?.SelectedShape;
+            if (source != null)
+            {
+                BoxLayout.Flip(Enumerable.Repeat(source, 1), FlipMode.Vertical, Project?.History);
+            }
+
+            var sources = Renderers?[0]?.State?.SelectedShapes;
+            if (sources != null)
+            {
+                BoxLayout.Flip(sources, FlipMode.Vertical, Project?.History);
+            }
         }
 
         /// <inheritdoc/>
