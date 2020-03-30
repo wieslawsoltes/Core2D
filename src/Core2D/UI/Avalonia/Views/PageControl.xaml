@@ -44,6 +44,10 @@
         <KeyBinding Command="{Binding OnToggleSnapToGrid}" Gesture="G"/>
         <KeyBinding Command="{Binding OnToggleTryToConnect}" Gesture="C"/>
         <!-- Shape -->
+        <KeyBinding Command="{Binding OnRotateSelected}" CommandParameter="90" Gesture="Ctrl+R"/>
+        <KeyBinding Command="{Binding OnRotateSelected}" CommandParameter="-90" Gesture="Ctrl+L"/>
+        <KeyBinding Command="{Binding OnFlipHorizontalSelected}" Gesture="Ctrl+H"/>
+        <KeyBinding Command="{Binding OnFlipVerticalSelected}" Gesture="Ctrl+J"/>
         <KeyBinding Command="{Binding OnMoveUpSelected}" Gesture="Up"/>
         <KeyBinding Command="{Binding OnMoveDownSelected}" Gesture="Down"/>
         <KeyBinding Command="{Binding OnMoveLeftSelected}" Gesture="Left"/>
@@ -63,9 +67,6 @@
         <KeyBinding Command="{Binding OnBringForwardSelected}" Gesture="Ctrl+OemCloseBrackets"/>
         <KeyBinding Command="{Binding OnSendBackwardSelected}" Gesture="Ctrl+OemOpenBrackets"/>
         <KeyBinding Command="{Binding OnSendToBackSelected}" Gesture="Ctrl+Shift+OemOpenBrackets"/>
-        <KeyBinding Command="{Binding OnCreatePath}" Gesture="Ctrl+H"/>
-        <KeyBinding Command="{Binding OnCreateStrokePath}" Gesture="Ctrl+J"/>
-        <KeyBinding Command="{Binding OnCreateFillPath}" Gesture="Ctrl+K"/>
         <KeyBinding Command="{Binding OnPathOp}" CommandParameter="Difference" Gesture="Ctrl+Shift+D"/>
         <KeyBinding Command="{Binding OnPathOp}" CommandParameter="Intersect" Gesture="Ctrl+Shift+I"/>
         <KeyBinding Command="{Binding OnPathOp}" CommandParameter="Union" Gesture="Ctrl+Shift+U"/>
