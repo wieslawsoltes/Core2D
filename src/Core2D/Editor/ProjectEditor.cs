@@ -1133,9 +1133,9 @@ namespace Core2D.Editor
         }
 
         /// <inheritdoc/>
-        public void OnRotateSelected(string angle)
+        public void OnRotateSelected(string degrees)
         {
-            if (!double.TryParse(angle, NumberStyles.AllowDecimalPoint | NumberStyles.AllowThousands, CultureInfo.InvariantCulture, out var value))
+            if (!double.TryParse(degrees, NumberStyles.AllowLeadingSign | NumberStyles.AllowDecimalPoint | NumberStyles.AllowThousands, CultureInfo.InvariantCulture, out var value))
             {
                 return;
             }
