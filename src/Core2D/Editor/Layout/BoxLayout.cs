@@ -261,8 +261,7 @@ namespace Core2D.Editor.Layout
             {
                 foreach (var point in box.Points)
                 {
-                    var x = (point.X - centerX) * Math.Cos(radians) - (point.Y - centerY) * Math.Sin(radians) + centerX;
-                    var y = (point.X - centerX) * Math.Sin(radians) + (point.Y - centerY) * Math.Cos(radians) + centerY;
+                    Rotate(point, radians, centerX, centerY, out var x, out var y);
                     previous.Add((point, point.X, point.Y));
                     next.Add((point, x, y));
                     point.X = x;
@@ -275,6 +274,12 @@ namespace Core2D.Editor.Layout
                 p.point.X = p.x;
                 p.point.Y = p.y;
             }));
+
+            static void Rotate(IPointShape point, double radians, double centerX, double centerY, out double x, out double y)
+            {
+                x = (point.X - centerX) * Math.Cos(radians) - (point.Y - centerY) * Math.Sin(radians) + centerX;
+                y = (point.X - centerX) * Math.Sin(radians) + (point.Y - centerY) * Math.Cos(radians) + centerY;
+            }
         }
     }
 }
