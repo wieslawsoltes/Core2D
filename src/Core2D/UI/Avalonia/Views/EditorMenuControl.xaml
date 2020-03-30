@@ -209,6 +209,12 @@
                 <MenuItem Header="_Group" Command="{Binding OnGroupSelected}" InputGesture="Ctrl+G"/>
                 <MenuItem Header="U_ngroup" Command="{Binding OnUngroupSelected}" InputGesture="Ctrl+U"/>
             </MenuItem>
+            <MenuItem Header="Rotat_e">
+                <MenuItem Header="Rotate _Right 90°" Command="{Binding OnRotateSelected}" CommandParameter="90" InputGesture="Ctrl+R"/>
+                <MenuItem Header="Rotate _Left 90°" Command="{Binding OnRotateSelected}" CommandParameter="-90" InputGesture="Ctrl+L"/>
+                <MenuItem Header="Flip _Horizontal" Command="{Binding OnFlipHorizontalSelected}" InputGesture="Ctrl+H"/>
+                <MenuItem Header="Flip _Vertical" Command="{Binding OnFlipVerticalSelected}" InputGesture="Ctrl+J"/>
+            </MenuItem>
             <MenuItem Header="_Move">
                 <MenuItem Header="_Up" Command="{Binding OnMoveUpSelected}" InputGesture="Up"/>
                 <MenuItem Header="_Down" Command="{Binding OnMoveDownSelected}" InputGesture="Down"/>
@@ -240,9 +246,9 @@
                 <Separator/>
             </MenuItem>
             <Separator/>
-            <MenuItem Header="Create Pat_h" Command="{Binding OnCreatePath}" InputGesture="Ctrl+H"/>
-            <MenuItem Header="Create Str_oke Path" Command="{Binding OnCreateStrokePath}" InputGesture="Ctrl+J"/>
-            <MenuItem Header="Create _Fill Path" Command="{Binding OnCreateFillPath}" InputGesture="Ctrl+K"/>
+            <MenuItem Header="Create Pat_h" Command="{Binding OnCreatePath}"/>
+            <MenuItem Header="Create Str_oke Path" Command="{Binding OnCreateStrokePath}"/>
+            <MenuItem Header="Create _Fill Path" Command="{Binding OnCreateFillPath}"/>
             <Separator/>
             <MenuItem Header="_Difference" ToolTip.Tip="Subtract the op path from the current path." Command="{Binding OnPathOp}" CommandParameter="Difference" InputGesture="Ctrl+Shift+D"/>
             <MenuItem Header="_Intersect" ToolTip.Tip="Intersect the two paths." Command="{Binding OnPathOp}" CommandParameter="Intersect" InputGesture="Ctrl+Shift+I"/>
