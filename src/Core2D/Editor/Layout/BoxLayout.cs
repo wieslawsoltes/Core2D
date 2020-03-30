@@ -215,15 +215,12 @@ namespace Core2D.Editor.Layout
                         var previous = new List<(IPointShape point, double y)>();
                         var next = new List<(IPointShape point, double y)>();
 
-                        foreach (var box in boxes)
+                        foreach (var point in boxes.SelectMany(box => box.Points).Distinct())
                         {
-                            foreach (var point in box.Points)
-                            {
-                                double y = bounds.Top + (bounds.Height + bounds.Top) - point.Y;
-                                previous.Add((point, point.Y));
-                                next.Add((point, y));
-                                point.Y = y;
-                            }
+                            double y = bounds.Top + (bounds.Height + bounds.Top) - point.Y;
+                            previous.Add((point, point.Y));
+                            next.Add((point, y));
+                            point.Y = y;
                         }
 
                         history.Snapshot(previous, next, (p) => previous.ForEach(p => p.point.Y = p.y));
