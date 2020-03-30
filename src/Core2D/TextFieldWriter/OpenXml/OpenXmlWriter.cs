@@ -144,9 +144,6 @@ namespace Core2D.TextFieldWriter.OpenXml
             table.Append(tableColumns);
             table.Append(tableStyleInfo);
 
-            var tableParts = worksheetPart.Worksheet.AppendChild<TableParts>(new TableParts());
-            tableParts.AppendChild<TablePart>(new TablePart());
-
             var tableDefinitionPart = worksheetPart.AddNewPart<TableDefinitionPart>($"rId{tableID}");
             tableDefinitionPart.Table = table;
         }
