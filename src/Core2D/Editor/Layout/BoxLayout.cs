@@ -173,5 +173,64 @@ namespace Core2D.Editor.Layout
                 }
             }
         }
+
+        public static void Flip(IEnumerable<IBaseShape> shapes, FlipMode mode, IHistory history)
+        {
+            var boxes = new List<ShapeBox>();
+
+            foreach (var shape in shapes)
+            {
+                boxes.Add(new ShapeBox(shape));
+            }
+
+            if (boxes.Count <= 0)
+            {
+                return;
+            }
+
+            var bounds = new GroupBox(boxes);
+
+            switch (mode)
+            {
+                case FlipMode.Horizontal:
+                    {
+                        var previous = new List<(IPointShape point, double x)>();
+                        var next = new List<(IPointShape point, double x)>();
+
+                        foreach (var box in boxes)
+                        {
+                            foreach (var point in box.Points)
+                            {
+                                double x = bounds.Left + (bounds.Width + bounds.Left) - point.X;
+                                previous.Add((point, point.X));
+                                next.Add((point, x));
+                                point.X = x;
+                            }
+                        }
+
+                        history.Snapshot(previous, next, (p) => previous.ForEach(p => p.point.X = p.x));
+                    }
+                    break;
+                case FlipMode.Vertical:
+                    {
+                        var previous = new List<(IPointShape point, double y)>();
+                        var next = new List<(IPointShape point, double y)>();
+
+                        foreach (var box in boxes)
+                        {
+                            foreach (var point in box.Points)
+                            {
+                                double y = bounds.Top + (bounds.Height + bounds.Top) - point.Y;
+                                previous.Add((point, point.Y));
+                                next.Add((point, y));
+                                point.Y = y;
+                            }
+                        }
+
+                        history.Snapshot(previous, next, (p) => previous.ForEach(p => p.point.Y = p.y));
+                    }
+                    break;
+            }
+        }
     }
 }
