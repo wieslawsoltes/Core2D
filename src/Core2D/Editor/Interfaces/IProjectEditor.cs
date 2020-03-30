@@ -427,6 +427,22 @@ namespace Core2D.Editor
         void OnUngroupSelected();
 
         /// <summary>
+        /// Rotate selected shapes.
+        /// </summary>
+        /// <param name="angle">The rotation angle.</param>
+        void OnRotateSelected(string angle);
+
+        /// <summary>
+        /// Flip horizontally selected shapes.
+        /// </summary>
+        void OnFlipHorizontalSelected();
+
+        /// <summary>
+        /// Flip vertically selected shapes.
+        /// </summary>
+        void OnFlipVerticalSelected();
+
+        /// <summary>
         /// Move selected shapes up.
         /// </summary>
         void OnMoveUpSelected();
