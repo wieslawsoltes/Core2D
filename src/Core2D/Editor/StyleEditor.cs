@@ -14,7 +14,7 @@ namespace Core2D.Editor
     /// </summary>
     public class StyleEditor : ObservableObject, IStyleEditor
     {
-        private const NumberStyles _numberStyles = NumberStyles.AllowDecimalPoint | NumberStyles.AllowThousands;
+        private const NumberStyles _numberStyles = NumberStyles.AllowLeadingSign | NumberStyles.AllowDecimalPoint | NumberStyles.AllowThousands;
         private readonly IServiceProvider _serviceProvider;
         private IShapeStyle _shapeStyleCopy;
         private IColor _strokeCopy;
