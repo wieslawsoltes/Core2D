@@ -429,8 +429,8 @@ namespace Core2D.Editor
         /// <summary>
         /// Rotate selected shapes.
         /// </summary>
-        /// <param name="angle">The rotation angle.</param>
-        void OnRotateSelected(string angle);
+        /// <param name="degrees">The rotation angle in degrees.</param>
+        void OnRotateSelected(string degrees);
 
         /// <summary>
         /// Flip horizontally selected shapes.
