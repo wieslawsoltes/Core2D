@@ -1143,16 +1143,13 @@ namespace Core2D.Editor
             var source = Renderers?[0]?.State?.SelectedShape;
             if (source != null)
             {
-                // TODO:
+                BoxLayout.Rotate(Enumerable.Repeat(source, 1), value, Project?.History);
             }
 
             var sources = Renderers?[0]?.State?.SelectedShapes;
             if (sources != null)
             {
-                foreach (var s in sources)
-                {
-                    // TODO: 
-                }
+                BoxLayout.Rotate(sources, value, Project?.History);
             }
         }
 
