@@ -252,16 +252,13 @@ namespace Core2D.Editor.Layout
             var centerX = bounds.CenterX;
             var centerY = bounds.CenterY;
 
-            foreach (var box in boxes)
+            foreach (var point in boxes.SelectMany(box => box.Points).Distinct())
             {
-                foreach (var point in box.Points)
-                {
-                    Rotate(point, radians, centerX, centerY, out var x, out var y);
-                    previous.Add((point, point.X, point.Y));
-                    next.Add((point, x, y));
-                    point.X = x;
-                    point.Y = y;
-                }
+                Rotate(point, radians, centerX, centerY, out var x, out var y);
+                previous.Add((point, point.X, point.Y));
+                next.Add((point, x, y));
+                point.X = x;
+                point.Y = y;
             }
 
             history.Snapshot(previous, next, (p) => previous.ForEach(p =>
