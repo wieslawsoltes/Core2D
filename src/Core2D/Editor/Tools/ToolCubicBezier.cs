@@ -59,7 +59,9 @@ namespace Core2D.Editor.Tools
             {
                 case State.Point1:
                     {
-                        var style = editor.Project.CurrentStyleLibrary.Selected;
+                        var style = editor.Project.CurrentStyleLibrary?.Selected != null ?
+                            editor.Project.CurrentStyleLibrary.Selected :
+                            editor.Factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
                         _cubicBezier = factory.CreateCubicBezierShape(
                             sx, sy,
                             (IShapeStyle)style.Copy(null),
