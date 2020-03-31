@@ -52,6 +52,7 @@
             </ListBox.DataTemplates>
         </ListBox>
         <Menu Classes="usercontrol" Grid.Row="0" HorizontalAlignment="Right">
+            <MenuItem Header="reset" Classes="usercontrol" Command="{Binding $parent[Window].DataContext.OnResetRepl}"/>
             <MenuItem Header="execute" Classes="usercontrol" Command="{Binding $parent[Window].DataContext.OnExecuteScript}" CommandParameter="{Binding CurrentScript}" IsVisible="{Binding !!#scripts.SelectedItem}"/>
             <MenuItem Header="+" Classes="usercontrol" Command="{Binding $parent[Window].DataContext.OnAddScript}"/>
             <MenuItem Header="&#727;" Classes="usercontrol" Command="{Binding $parent[Window].DataContext.OnRemoveScript}" CommandParameter="{Binding CurrentScript}" IsVisible="{Binding !!#scripts.SelectedItem}"/>
