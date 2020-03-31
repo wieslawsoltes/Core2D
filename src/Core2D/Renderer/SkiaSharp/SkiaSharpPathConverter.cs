@@ -22,44 +22,6 @@ namespace Core2D.Renderer.SkiaSharp
             _serviceProvider = serviceProvider;
         }
 
-        private SKPathOp ToSKPathOp(PathOp op)
-        {
-            return op switch
-            {
-                PathOp.Intersect => SKPathOp.Intersect,
-                PathOp.Union => SKPathOp.Union,
-                PathOp.Xor => SKPathOp.Xor,
-                PathOp.ReverseDifference => SKPathOp.ReverseDifference,
-                _ => SKPathOp.Difference,
-            };
-        }
-
-        private void Op(SKPathOp op, IList<SKPath> paths, out SKPath result, out bool haveResult)
-        {
-            haveResult = false;
-            result = new SKPath(paths[0]) { FillType = paths[0].FillType };
-
-            if (paths.Count == 1)
-            {
-                using var empty = new SKPath() { FillType = paths[0].FillType };
-                result = empty.Op(paths[0], op);
-                haveResult = true;
-            }
-            else
-            {
-                for (int i = 1; i < paths.Count; i++)
-                {
-                    var next = result.Op(paths[i], op);
-                    if (next != null)
-                    {
-                        result.Dispose();
-                        result = next;
-                        haveResult = true;
-                    }
-                }
-            }
-        }
-
         /// <inheritdoc/>
         public IPathShape ToPathShape(IEnumerable<IBaseShape> shapes)
         {
@@ -110,7 +72,7 @@ namespace Core2D.Renderer.SkiaSharp
             var result = paint.GetFillPath(path, 1.0f);
             if (result != null)
             {
-                Op(SKPathOp.Union, new[] { result, result }, out var union, out bool haveResult);
+                PathGeometryConverter.Op(new[] { result, result }, SKPathOp.Union, out var union, out bool haveResult);
                 if (haveResult == false || union == null || union.IsEmpty)
                 {
                     result.Dispose();
@@ -145,7 +107,7 @@ namespace Core2D.Renderer.SkiaSharp
             var result = paint.GetFillPath(path, 1.0f);
             if (result != null)
             {
-                Op(SKPathOp.Union, new[] { result, result }, out var union, out bool haveResult);
+                PathGeometryConverter.Op(new[] { result, result }, SKPathOp.Union, out var union, out bool haveResult);
                 if (haveResult == false || union == null || union.IsEmpty)
                 {
                     result.Dispose();
@@ -189,7 +151,7 @@ namespace Core2D.Renderer.SkiaSharp
                 return null;
             }
 
-            Op(ToSKPathOp(op), paths, out var result, out var haveResult);
+            PathGeometryConverter.Op(paths, PathGeometryConverter.ToSKPathOp(op), out var result, out var haveResult);
             if (haveResult == false || result == null || result.IsEmpty)
             {
                 return null;
