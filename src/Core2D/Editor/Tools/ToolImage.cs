@@ -70,7 +70,9 @@ namespace Core2D.Editor.Tools
                             return;
                         }
 
-                        var style = editor.Project.CurrentStyleLibrary.Selected;
+                        var style = editor.Project.CurrentStyleLibrary?.Selected != null ?
+                            editor.Project.CurrentStyleLibrary.Selected :
+                            editor.Factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
                         _image = factory.CreateImageShape(
                             sx, sy,
                             (IShapeStyle)style.Copy(null),
