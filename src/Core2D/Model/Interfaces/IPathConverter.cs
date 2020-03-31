@@ -10,6 +10,13 @@ namespace Core2D.Interfaces
     public interface IPathConverter
     {
         /// <summary>
+        /// Convert shapes to path shape.
+        /// </summary>
+        /// <param name="shapes">The shapes to convert.</param>
+        /// <returns>The new instance of object of type <see cref="IPathShape"/>.</returns>
+        IPathShape ToPathShape(IEnumerable<IBaseShape> shapes);
+
+        /// <summary>
         /// Convert shape to path shape.
         /// </summary>
         /// <param name="shape">The shape to convert.</param>
