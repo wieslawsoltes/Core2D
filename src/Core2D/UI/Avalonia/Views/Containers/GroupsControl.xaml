@@ -23,7 +23,7 @@
             <TextBox Text="{Binding CurrentGroupLibrary.Name, Mode=TwoWay}" Classes="left" Grid.Column="0" IsVisible="{Binding !!$self.DataContext.CurrentGroupLibrary}"/>
             <Menu Classes="usercontrol" Grid.Column="1" HorizontalAlignment="Right">
                 <MenuItem Header="+" Classes="usercontrol" Command="{Binding $parent[Window].DataContext.OnAddGroupLibrary}"/>
-                <MenuItem Header="&#727;" Classes="usercontrol" Command="{Binding $parent[Window].DataContext.OnRemoveGroupLibrary}" CommandParameter="{Binding CurrentGroupLibrary}" IsVisible="{Binding !!$self.DataContext}"/>
+                <MenuItem Header="&#727;" Classes="usercontrol" Command="{Binding $parent[Window].DataContext.OnRemoveGroupLibrary}" CommandParameter="{Binding CurrentGroupLibrary}" IsVisible="{Binding !!$self.DataContext.CurrentGroupLibrary}}"/>
             </Menu>
         </Grid>
         <ComboBox Items="{Binding GroupLibraries}" SelectedItem="{Binding CurrentGroupLibrary, Mode=TwoWay}" Classes="default" Grid.Row="1" IsVisible="{Binding !!$self.DataContext.CurrentGroupLibrary}">
