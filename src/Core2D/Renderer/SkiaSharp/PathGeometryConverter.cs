@@ -88,17 +88,28 @@ namespace Core2D.Renderer.SkiaSharp
             {
                 FillType = SKPathFillType.Winding
             };
+            var previous = default(IPointShape);
             foreach (var shape in shapes)
             {
                 switch (shape)
                 {
                     case ILineShape line:
-                        path.MoveTo(
-                            scale(line.Start.X + dx),
-                            scale(line.Start.Y + dy));
-                        path.LineTo(
-                            scale(line.End.X + dx),
-                            scale(line.End.Y + dy));
+                        if (previous != null && previous == line.Start)
+                        {
+                            path.LineTo(
+                                scale(line.End.X + dx),
+                                scale(line.End.Y + dy));
+                        }
+                        else
+                        {
+                            path.MoveTo(
+                                scale(line.Start.X + dx),
+                                scale(line.Start.Y + dy));
+                            path.LineTo(
+                                scale(line.End.X + dx),
+                                scale(line.End.Y + dy));
+                        }
+                        previous = line.End;
                         break;
                     case IRectangleShape rectangle:
                         path.AddRect(
