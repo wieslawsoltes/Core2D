@@ -59,7 +59,9 @@ namespace Core2D.Editor.Tools
             {
                 case State.TopLeft:
                     {
-                        var style = editor.Project.CurrentStyleLibrary.Selected;
+                        var style = editor.Project.CurrentStyleLibrary?.Selected != null ?
+                            editor.Project.CurrentStyleLibrary.Selected :
+                            editor.Factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
                         _text = factory.CreateTextShape(
                             sx, sy,
                             (IShapeStyle)style.Copy(null),
