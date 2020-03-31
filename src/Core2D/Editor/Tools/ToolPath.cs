@@ -173,7 +173,9 @@ namespace Core2D.Editor.Tools
                 editor.Project.Options.DefaultIsFilled,
                 editor.Project.Options.DefaultIsClosed);
 
-            var style = editor.Project.CurrentStyleLibrary.Selected;
+            var style = editor.Project.CurrentStyleLibrary?.Selected != null ?
+                editor.Project.CurrentStyleLibrary.Selected :
+                editor.Factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
             Path = factory.CreatePathShape(
                 "Path",
                 (IShapeStyle)style.Copy(null),
