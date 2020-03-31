@@ -14,8 +14,8 @@
              d:DataContext="{x:Static Designer:DesignerContext.Data}"
              d:DesignWidth="250" d:DesignHeight="400">
     <Grid RowDefinitions="Auto,*" ColumnDefinitions="*">
-        <Menu Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" HorizontalAlignment="Right">
-            <MenuItem Header="+" Command="{Binding $parent[Window].DataContext.OnAddProperty}" CommandParameter="{Binding}"/>
+        <Menu Classes="usercontrol" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" HorizontalAlignment="Right">
+            <MenuItem Header="+" Classes="usercontrol" Command="{Binding $parent[Window].DataContext.OnAddProperty}" CommandParameter="{Binding}"/>
         </Menu>
         <ScrollViewer Grid.Row="1" Grid.Column="0" IsVisible="{Binding !!Properties.Length}">
             <Grid RowDefinitions="Auto,*" ColumnDefinitions="50*,Auto,50*">

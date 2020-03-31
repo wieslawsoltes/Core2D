@@ -16,8 +16,8 @@
     <TabControl Classes="default">
         <TabItem Header="Shapes" Classes="property">
             <Grid RowDefinitions="Auto,*,Auto">
-                <Menu Grid.Row="0" HorizontalAlignment="Right">
-                    <MenuItem Header="&#727;" Command="{Binding $parent[Window].DataContext.OnRemoveShape}" CommandParameter="{Binding CurrentShape}" IsVisible="{Binding !!CurrentShape}"/>
+                <Menu Classes="usercontrol" Grid.Row="0" HorizontalAlignment="Right">
+                    <MenuItem Header="&#727;" Classes="usercontrol" Command="{Binding $parent[Window].DataContext.OnRemoveShape}" CommandParameter="{Binding CurrentShape}" IsVisible="{Binding !!CurrentShape}"/>
                 </Menu>
                 <ListBox x:Name="shapes" Items="{Binding CurrentLayer.Shapes}" SelectedItem="{Binding CurrentShape, Mode=TwoWay}" VirtualizationMode="Simple" Classes="default" Grid.Row="1">
                     <ListBox.ItemsPanel>

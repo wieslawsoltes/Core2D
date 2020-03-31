@@ -895,8 +895,8 @@
         </DataTemplate>
         <DataTemplate DataType="Tools:RecordTool">
             <Grid RowDefinitions="Auto,*" ColumnDefinitions="*" IsVisible="{Binding !!$self.DataContext}" DataContext="{Binding Context.Renderers[0].State.SelectedShape.Data}">
-                <Menu Grid.Row="0" HorizontalAlignment="Right" IsVisible="{Binding !!Record}">
-                    <MenuItem Header="&#727;" Command="{Binding $parent[Window].DataContext.OnResetRecord}" CommandParameter="{Binding}" IsVisible="{Binding !!Record}"/>
+                <Menu Classes="usercontrol" Grid.Row="0" HorizontalAlignment="Right" IsVisible="{Binding !!Record}">
+                    <MenuItem Header="&#727;" Classes="usercontrol" Command="{Binding $parent[Window].DataContext.OnResetRecord}" CommandParameter="{Binding}" IsVisible="{Binding !!Record}"/>
                 </Menu>
                 <data:RecordControl DataContext="{Binding Record}" IsVisible="{Binding !!$self.DataContext}" Grid.Row="1"/>
             </Grid>

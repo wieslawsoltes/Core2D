@@ -51,10 +51,10 @@
                 </DataTemplate>
             </ListBox.DataTemplates>
         </ListBox>
-        <Menu Grid.Row="0" HorizontalAlignment="Right">
-            <MenuItem Header="execute" Command="{Binding $parent[Window].DataContext.OnExecuteScript}" CommandParameter="{Binding CurrentScript}" IsVisible="{Binding !!#scripts.SelectedItem}"/>
-            <MenuItem Header="+" Command="{Binding $parent[Window].DataContext.OnAddScript}"/>
-            <MenuItem Header="&#727;" Command="{Binding $parent[Window].DataContext.OnRemoveScript}" CommandParameter="{Binding CurrentScript}" IsVisible="{Binding !!#scripts.SelectedItem}"/>
+        <Menu Classes="usercontrol" Grid.Row="0" HorizontalAlignment="Right">
+            <MenuItem Header="execute" Classes="usercontrol" Command="{Binding $parent[Window].DataContext.OnExecuteScript}" CommandParameter="{Binding CurrentScript}" IsVisible="{Binding !!#scripts.SelectedItem}"/>
+            <MenuItem Header="+" Classes="usercontrol" Command="{Binding $parent[Window].DataContext.OnAddScript}"/>
+            <MenuItem Header="&#727;" Classes="usercontrol" Command="{Binding $parent[Window].DataContext.OnRemoveScript}" CommandParameter="{Binding CurrentScript}" IsVisible="{Binding !!#scripts.SelectedItem}"/>
         </Menu>
         <Grid RowDefinitions="Auto" ColumnDefinitions="Auto,*" Grid.Row="2" IsVisible="{Binding !!#scripts.SelectedItem}">
             <TextBlock Text="Name" Classes="left" Grid.Row="0" Grid.Column="0"/>

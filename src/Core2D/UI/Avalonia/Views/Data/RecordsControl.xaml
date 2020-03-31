@@ -23,10 +23,10 @@
     <TabControl Classes="default">
         <TabItem Header="Records" Classes="property">
             <Grid RowDefinitions="Auto,*">
-                <Menu Grid.Row="0" HorizontalAlignment="Right">
-                    <MenuItem Header="apply" Command="{Binding $parent[Window].DataContext.OnApplyRecord}" CommandParameter="{Binding CurrentRecord}" IsVisible="{Binding !!CurrentRecord}"/>
-                    <MenuItem Header="+" Command="{Binding $parent[Window].DataContext.OnAddRecord}" CommandParameter="{Binding}"/>
-                    <MenuItem Header="&#727;" Command="{Binding $parent[Window].DataContext.OnRemoveRecord}" CommandParameter="{Binding CurrentRecord}" IsVisible="{Binding !!CurrentRecord}"/>
+                <Menu Classes="usercontrol" Grid.Row="0" HorizontalAlignment="Right">
+                    <MenuItem Header="apply" Classes="usercontrol" Command="{Binding $parent[Window].DataContext.OnApplyRecord}" CommandParameter="{Binding CurrentRecord}" IsVisible="{Binding !!CurrentRecord}"/>
+                    <MenuItem Header="+" Classes="usercontrol" Command="{Binding $parent[Window].DataContext.OnAddRecord}" CommandParameter="{Binding}"/>
+                    <MenuItem Header="&#727;" Classes="usercontrol" Command="{Binding $parent[Window].DataContext.OnRemoveRecord}" CommandParameter="{Binding CurrentRecord}" IsVisible="{Binding !!CurrentRecord}"/>
                 </Menu>
                 <ListBox x:Name="records" Items="{Binding Records}" SelectedItem="{Binding CurrentRecord, Mode=TwoWay}" VirtualizationMode="Simple" Grid.Row="1" Classes="default">
                     <ListBox.ItemsPanel>
@@ -60,9 +60,9 @@
         </TabItem>
         <TabItem Header="Columns" Classes="property">
             <Grid RowDefinitions="Auto,*">
-                <Menu Grid.Row="0" HorizontalAlignment="Right">
-                    <MenuItem Command="{Binding $parent[Window].DataContext.OnRemoveColumn}" CommandParameter="{Binding #columns.SelectedItem}" Header="&#727;"/>
-                    <MenuItem Command="{Binding $parent[Window].DataContext.OnAddColumn}" CommandParameter="{Binding}" Header="+"/>
+                <Menu Classes="usercontrol" Grid.Row="0" HorizontalAlignment="Right">
+                    <MenuItem Header="&#727;" Classes="usercontrol" Command="{Binding $parent[Window].DataContext.OnRemoveColumn}" CommandParameter="{Binding #columns.SelectedItem}"/>
+                    <MenuItem Header="+" Classes="usercontrol" Command="{Binding $parent[Window].DataContext.OnAddColumn}" CommandParameter="{Binding}"/>
                 </Menu>
                 <DataGrid x:Name="columns" Items="{Binding Columns}" AutoGenerateColumns="False" Grid.Row="1">
                     <DataGrid.Columns>
@@ -77,10 +77,10 @@
         </TabItem>
         <TabItem Header="Rows" Classes="property">
             <Grid RowDefinitions="Auto,*">
-                <Menu Grid.Row="1" HorizontalAlignment="Right">
-                    <MenuItem Header="apply" Command="{Binding $parent[Window].DataContext.OnApplyRecord}" CommandParameter="{Binding CurrentRecord}" IsVisible="{Binding !!CurrentRecord}"/>
-                    <MenuItem Header="+" Command="{Binding $parent[Window].DataContext.OnAddRecord}" CommandParameter="{Binding}"/>
-                    <MenuItem Header="&#727;" Command="{Binding $parent[Window].DataContext.OnRemoveRecord}" CommandParameter="{Binding CurrentRecord}" IsVisible="{Binding !!CurrentRecord}"/>
+                <Menu Classes="usercontrol" Grid.Row="1" HorizontalAlignment="Right">
+                    <MenuItem Header="apply" Classes="usercontrol" Command="{Binding $parent[Window].DataContext.OnApplyRecord}" CommandParameter="{Binding CurrentRecord}" IsVisible="{Binding !!CurrentRecord}"/>
+                    <MenuItem Header="+" Classes="usercontrol" Command="{Binding $parent[Window].DataContext.OnAddRecord}" CommandParameter="{Binding}"/>
+                    <MenuItem Header="&#727;" Classes="usercontrol" Command="{Binding $parent[Window].DataContext.OnRemoveRecord}" CommandParameter="{Binding CurrentRecord}" IsVisible="{Binding !!CurrentRecord}"/>
                 </Menu>
                 <DataGrid x:Name="rows" Items="{Binding Records}" SelectedItem="{Binding CurrentRecord}" AutoGenerateColumns="False" Grid.Row="1">
                     <DataGrid.Columns>

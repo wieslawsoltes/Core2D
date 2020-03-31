@@ -13,8 +13,8 @@
     <TabControl Classes="default" IsVisible="{Binding !!$self.DataContext}">
         <TabItem Header="Record" Classes="property">
             <Grid RowDefinitions="Auto,*" ColumnDefinitions="*">
-                <Menu Grid.Row="0" HorizontalAlignment="Right" IsVisible="{Binding !!Record}">
-                    <MenuItem Header="&#727;" Command="{Binding $parent[Window].DataContext.OnResetRecord}" CommandParameter="{Binding}" IsVisible="{Binding !!Record}"/>
+                <Menu Classes="usercontrol" Grid.Row="0" HorizontalAlignment="Right" IsVisible="{Binding !!Record}">
+                    <MenuItem Header="&#727;" Classes="usercontrol" Command="{Binding $parent[Window].DataContext.OnResetRecord}" CommandParameter="{Binding}" IsVisible="{Binding !!Record}"/>
                 </Menu>
                 <ContentControl Content="{Binding Record}" Grid.Row="1"/>
             </Grid>
