@@ -94,21 +94,15 @@ namespace Core2D.Renderer.SkiaSharp
                 switch (shape)
                 {
                     case ILineShape line:
-                        if (previous != null && previous == line.Start)
-                        {
-                            path.LineTo(
-                                scale(line.End.X + dx),
-                                scale(line.End.Y + dy));
-                        }
-                        else
+                        if (previous == null || previous != line.Start)
                         {
                             path.MoveTo(
                                 scale(line.Start.X + dx),
                                 scale(line.Start.Y + dy));
-                            path.LineTo(
-                                scale(line.End.X + dx),
-                                scale(line.End.Y + dy));
                         }
+                        path.LineTo(
+                            scale(line.End.X + dx),
+                            scale(line.End.Y + dy));
                         previous = line.End;
                         break;
                     case IRectangleShape rectangle:
@@ -135,9 +129,12 @@ namespace Core2D.Renderer.SkiaSharp
                         path.AddArc(rect, (float)a.StartAngle, (float)a.SweepAngle);
                         break;
                     case ICubicBezierShape cubicBezier:
-                        path.MoveTo(
-                            scale(cubicBezier.Point1.X + dx),
-                            scale(cubicBezier.Point1.Y + dy));
+                        if (previous == null || previous != cubicBezier.Point1)
+                        {
+                            path.MoveTo(
+                                scale(cubicBezier.Point1.X + dx),
+                                scale(cubicBezier.Point1.Y + dy));
+                        }
                         path.CubicTo(
                             scale(cubicBezier.Point2.X + dx),
                             scale(cubicBezier.Point2.Y + dy),
@@ -145,16 +142,21 @@ namespace Core2D.Renderer.SkiaSharp
                             scale(cubicBezier.Point3.Y + dy),
                             scale(cubicBezier.Point4.X + dx),
                             scale(cubicBezier.Point4.Y + dy));
+                        previous = cubicBezier.Point4;
                         break;
                     case IQuadraticBezierShape quadraticBezier:
-                        path.MoveTo(
-                            scale(quadraticBezier.Point1.X + dx),
-                            scale(quadraticBezier.Point1.Y + dy));
+                        if (previous == null || previous != quadraticBezier.Point1)
+                        {
+                            path.MoveTo(
+                                scale(quadraticBezier.Point1.X + dx),
+                                scale(quadraticBezier.Point1.Y + dy));
+                        }
                         path.QuadTo(
                             scale(quadraticBezier.Point2.X + dx),
                             scale(quadraticBezier.Point2.Y + dy),
                             scale(quadraticBezier.Point3.X + dx),
                             scale(quadraticBezier.Point3.Y + dy));
+                        previous = quadraticBezier.Point3;
                         break;
                 }
             }
