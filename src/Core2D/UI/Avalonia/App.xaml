@@ -285,6 +285,10 @@
         <Style Selector="MenuItem">
             <Setter Property="FontSize" Value="{DynamicResource FontSizeNormal}"/>
         </Style>
+        <!-- MenuItem.usercontrol -->
+        <Style Selector="MenuItem.usercontrol">
+            <Setter Property="Margin" Value="2"/>
+        </Style>
         <!-- Slider -->
         <Style Selector="Slider.slider">
             <Setter Property="Orientation" Value="Horizontal"/>
