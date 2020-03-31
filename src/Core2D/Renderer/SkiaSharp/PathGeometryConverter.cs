@@ -428,5 +428,43 @@ namespace Core2D.Renderer.SkiaSharp
         {
             return ToSKPath(path.Geometry, dx, dy, scale);
         }
+
+        public static SKPathOp ToSKPathOp(PathOp op)
+        {
+            return op switch
+            {
+                PathOp.Intersect => SKPathOp.Intersect,
+                PathOp.Union => SKPathOp.Union,
+                PathOp.Xor => SKPathOp.Xor,
+                PathOp.ReverseDifference => SKPathOp.ReverseDifference,
+                _ => SKPathOp.Difference,
+            };
+        }
+
+        public static void Op(IList<SKPath> paths, SKPathOp op, out SKPath result, out bool haveResult)
+        {
+            haveResult = false;
+            result = new SKPath(paths[0]) { FillType = paths[0].FillType };
+
+            if (paths.Count == 1)
+            {
+                using var empty = new SKPath() { FillType = paths[0].FillType };
+                result = empty.Op(paths[0], op);
+                haveResult = true;
+            }
+            else
+            {
+                for (int i = 1; i < paths.Count; i++)
+                {
+                    var next = result.Op(paths[i], op);
+                    if (next != null)
+                    {
+                        result.Dispose();
+                        result = next;
+                        haveResult = true;
+                    }
+                }
+            }
+        }
     }
 }
