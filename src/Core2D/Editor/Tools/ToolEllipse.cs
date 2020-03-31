@@ -79,7 +79,9 @@ namespace Core2D.Editor.Tools
                             _centerY = sy;
                         }
 
-                        var style = editor.Project.CurrentStyleLibrary.Selected;
+                        var style = editor.Project.CurrentStyleLibrary?.Selected != null ?
+                            editor.Project.CurrentStyleLibrary.Selected :
+                            editor.Factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
                         _ellipse = factory.CreateEllipseShape(
                             sx, sy,
                             (IShapeStyle)style.Copy(null),
