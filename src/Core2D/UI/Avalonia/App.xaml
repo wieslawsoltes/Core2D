@@ -277,6 +277,10 @@
         <Style Selector="Menu.default">
             <Setter Property="Background" Value="Transparent"/>
         </Style>
+        <!-- Menu.usercontrol -->
+        <Style Selector="Menu.usercontrol">
+            <Setter Property="Background" Value="Transparent"/>
+        </Style>
         <!-- MenuItem -->
         <Style Selector="MenuItem">
             <Setter Property="FontSize" Value="{DynamicResource FontSizeNormal}"/>
