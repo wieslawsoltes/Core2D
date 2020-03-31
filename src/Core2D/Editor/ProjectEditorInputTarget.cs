@@ -37,40 +37,35 @@ namespace Core2D.Editor
         public bool IsLeftDownAvailable()
         {
             return _editor?.Project?.CurrentContainer?.CurrentLayer != null
-                && _editor.Project.CurrentContainer.CurrentLayer.IsVisible
-                && _editor.Project.CurrentStyleLibrary?.Selected != null;
+                && _editor.Project.CurrentContainer.CurrentLayer.IsVisible;
         }
 
         /// <inheritdoc/>
         public bool IsLeftUpAvailable()
         {
             return _editor?.Project?.CurrentContainer?.CurrentLayer != null
-                && _editor.Project.CurrentContainer.CurrentLayer.IsVisible
-                && _editor.Project.CurrentStyleLibrary?.Selected != null;
+                && _editor.Project.CurrentContainer.CurrentLayer.IsVisible;
         }
 
         /// <inheritdoc/>
         public bool IsRightDownAvailable()
         {
             return _editor?.Project?.CurrentContainer?.CurrentLayer != null
-                && _editor.Project.CurrentContainer.CurrentLayer.IsVisible
-                && _editor.Project.CurrentStyleLibrary?.Selected != null;
+                && _editor.Project.CurrentContainer.CurrentLayer.IsVisible;
         }
 
         /// <inheritdoc/>
         public bool IsRightUpAvailable()
         {
             return _editor?.Project?.CurrentContainer?.CurrentLayer != null
-                && _editor.Project.CurrentContainer.CurrentLayer.IsVisible
-                && _editor.Project.CurrentStyleLibrary?.Selected != null;
+                && _editor.Project.CurrentContainer.CurrentLayer.IsVisible;
         }
 
         /// <inheritdoc/>
         public bool IsMoveAvailable()
         {
             return _editor.Project?.CurrentContainer?.CurrentLayer != null
-                && _editor.Project.CurrentContainer.CurrentLayer.IsVisible
-                && _editor.Project.CurrentStyleLibrary?.Selected != null;
+                && _editor.Project.CurrentContainer.CurrentLayer.IsVisible;
         }
 
         /// <inheritdoc/>
