@@ -1438,36 +1438,26 @@ namespace Core2D.Editor
             var sources = Renderers?[0]?.State?.SelectedShapes;
             if (sources != null)
             {
-                var paths = new List<IPathShape>();
-                var shapes = new List<IBaseShape>();
-
-                foreach (var s in sources)
+                var path = PathConverter.ToPathShape(sources);
+                if (path == null)
                 {
-                    var path = PathConverter.ToPathShape(s);
-                    if (path != null)
-                    {
-                        paths.Add(path);
-                        shapes.Add(s);
-                    }
+                    return;
                 }
 
-                if (paths.Count > 0)
+                var shapesBuilder = layer.Shapes.ToBuilder();
+
+                foreach (var shape in sources)
                 {
-                    var shapesBuilder = layer.Shapes.ToBuilder();
-
-                    for (int i = 0; i < paths.Count; i++)
-                    {
-                        var index = shapesBuilder.IndexOf(shapes[i]);
-                        shapesBuilder[index] = paths[i];
-                    }
-
-                    var previous = layer.Shapes;
-                    var next = shapesBuilder.ToImmutable();
-                    Project?.History?.Snapshot(previous, next, (p) => layer.Shapes = p);
-                    layer.Shapes = next;
-
-                    Select(layer, new HashSet<IBaseShape>(paths));
+                    shapesBuilder.Remove(shape);
                 }
+                shapesBuilder.Add(path);
+
+                var previous = layer.Shapes;
+                var next = shapesBuilder.ToImmutable();
+                Project?.History?.Snapshot(previous, next, (p) => layer.Shapes = p);
+                layer.Shapes = next;
+
+                Select(layer, path);
             }
         }
 
