@@ -34,22 +34,6 @@ namespace Core2D.Renderer.SkiaSharp
             };
         }
 
-        private SKPath ToSKPath(IBaseShape shape, double dx, double dy, Func<double, float> scale)
-        {
-            return shape switch
-            {
-                ILineShape line => PathGeometryConverter.ToSKPath(line, dx, dy, scale),
-                IRectangleShape rectangle => PathGeometryConverter.ToSKPath(rectangle, dx, dy, scale),
-                IEllipseShape ellipse => PathGeometryConverter.ToSKPath(ellipse, dx, dy, scale),
-                IArcShape arc => PathGeometryConverter.ToSKPath(arc, dx, dy, scale),
-                ICubicBezierShape cubicBezier => PathGeometryConverter.ToSKPath(cubicBezier, dx, dy, scale),
-                IQuadraticBezierShape quadraticBezier => PathGeometryConverter.ToSKPath(quadraticBezier, dx, dy, scale),
-                ITextShape text => PathGeometryConverter.ToSKPath(text, dx, dy, scale),
-                IPathShape path => PathGeometryConverter.ToSKPath(path, dx, dy, scale),
-                _ => null,
-            };
-        }
-
         private void Op(SKPathOp op, IList<SKPath> paths, out SKPath result, out bool haveResult)
         {
             haveResult = false;
@@ -77,12 +61,30 @@ namespace Core2D.Renderer.SkiaSharp
         }
 
         /// <inheritdoc/>
+        public IPathShape ToPathShape(IEnumerable<IBaseShape> shapes)
+        {
+            var editor = _serviceProvider.GetService<IProjectEditor>();
+            var factory = _serviceProvider.GetService<IFactory>();
+            var first = shapes.FirstOrDefault();
+            var style = (IShapeStyle)first.Style?.Copy(null);
+            var path = PathGeometryConverter.ToSKPath(shapes, 0.0, 0.0, (value) => (float)value);
+            var geometry = PathGeometryConverter.ToPathGeometry(path, 0.0, 0.0, factory, editor.Project.Options.PointShape);
+            var pathShape = factory.CreatePathShape(
+                "Path",
+                style,
+                geometry,
+                first.IsStroked,
+                first.IsFilled);
+            return pathShape;
+        }
+
+        /// <inheritdoc/>
         public IPathShape ToPathShape(IBaseShape shape)
         {
             var editor = _serviceProvider.GetService<IProjectEditor>();
             var factory = _serviceProvider.GetService<IFactory>();
             var style = (IShapeStyle)shape.Style?.Copy(null);
-            var path = ToSKPath(shape, 0.0, 0.0, (value) => (float)value);
+            var path = PathGeometryConverter.ToSKPath(shape, 0.0, 0.0, (value) => (float)value);
             var geometry = PathGeometryConverter.ToPathGeometry(path, 0.0, 0.0, factory, editor.Project.Options.PointShape);
             var pathShape = factory.CreatePathShape(
                 "Path",
@@ -96,7 +98,7 @@ namespace Core2D.Renderer.SkiaSharp
         /// <inheritdoc/>
         public IPathShape ToStrokePathShape(IBaseShape shape)
         {
-            var path = ToSKPath(shape, 0.0, 0.0, (value) => (float)value);
+            var path = PathGeometryConverter.ToSKPath(shape, 0.0, 0.0, (value) => (float)value);
             if (path == null)
             {
                 return null;
@@ -131,7 +133,7 @@ namespace Core2D.Renderer.SkiaSharp
         /// <inheritdoc/>
         public IPathShape ToFillPathShape(IBaseShape shape)
         {
-            var path = ToSKPath(shape, 0.0, 0.0, (value) => (float)value);
+            var path = PathGeometryConverter.ToSKPath(shape, 0.0, 0.0, (value) => (float)value);
             if (path == null)
             {
                 return null;
@@ -175,7 +177,7 @@ namespace Core2D.Renderer.SkiaSharp
 
             foreach (var s in shapes)
             {
-                var path = ToSKPath(s, 0.0, 0.0, (value) => (float)value);
+                var path = PathGeometryConverter.ToSKPath(s, 0.0, 0.0, (value) => (float)value);
                 if (path != null)
                 {
                     paths.Add(path);
