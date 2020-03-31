@@ -60,7 +60,9 @@ namespace Core2D.Editor.Tools
             {
                 case State.Start:
                     {
-                        var style = editor.Project.CurrentStyleLibrary.Selected;
+                        var style = editor.Project.CurrentStyleLibrary?.Selected != null ?
+                            editor.Project.CurrentStyleLibrary.Selected :
+                            editor.Factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
                         _line = factory.CreateLineShape(
                             sx, sy,
                             (IShapeStyle)style.Copy(null),
