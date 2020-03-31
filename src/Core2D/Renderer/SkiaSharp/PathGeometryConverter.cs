@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.Immutable;
 using Core2D.Interfaces;
 using Core2D.Path;
@@ -79,6 +80,90 @@ namespace Core2D.Renderer.SkiaSharp
             }
 
             return geometry;
+        }
+
+        public static SKPath ToSKPath(this IEnumerable<IBaseShape> shapes, double dx, double dy, Func<double, float> scale)
+        {
+            var path = new SKPath
+            {
+                FillType = SKPathFillType.Winding
+            };
+            foreach (var shape in shapes)
+            {
+                switch (shape)
+                {
+                    case ILineShape line:
+                        path.MoveTo(
+                            scale(line.Start.X + dx),
+                            scale(line.Start.Y + dy));
+                        path.LineTo(
+                            scale(line.End.X + dx),
+                            scale(line.End.Y + dy));
+                        break;
+                    case IRectangleShape rectangle:
+                        path.AddRect(
+                            SkiaSharpRenderer.CreateRect(rectangle.TopLeft, rectangle.BottomRight, dx, dy, scale),
+                            SKPathDirection.Clockwise);
+                        break;
+                    case IEllipseShape ellipse:
+                        path.AddOval(
+                            SkiaSharpRenderer.CreateRect(ellipse.TopLeft, ellipse.BottomRight, dx, dy, scale),
+                            SKPathDirection.Clockwise);
+                        break;
+                    case IArcShape arc:
+                        var a = new GdiArc(
+                            Point2.FromXY(arc.Point1.X, arc.Point1.Y),
+                            Point2.FromXY(arc.Point2.X, arc.Point2.Y),
+                            Point2.FromXY(arc.Point3.X, arc.Point3.Y),
+                            Point2.FromXY(arc.Point4.X, arc.Point4.Y));
+                        var rect = new SKRect(
+                            scale(a.X + dx),
+                            scale(a.Y + dy),
+                            scale(a.X + dx + a.Width),
+                            scale(a.Y + dy + a.Height));
+                        path.AddArc(rect, (float)a.StartAngle, (float)a.SweepAngle);
+                        break;
+                    case ICubicBezierShape cubicBezier:
+                        path.MoveTo(
+                            scale(cubicBezier.Point1.X + dx),
+                            scale(cubicBezier.Point1.Y + dy));
+                        path.CubicTo(
+                            scale(cubicBezier.Point2.X + dx),
+                            scale(cubicBezier.Point2.Y + dy),
+                            scale(cubicBezier.Point3.X + dx),
+                            scale(cubicBezier.Point3.Y + dy),
+                            scale(cubicBezier.Point4.X + dx),
+                            scale(cubicBezier.Point4.Y + dy));
+                        break;
+                    case IQuadraticBezierShape quadraticBezier:
+                        path.MoveTo(
+                            scale(quadraticBezier.Point1.X + dx),
+                            scale(quadraticBezier.Point1.Y + dy));
+                        path.QuadTo(
+                            scale(quadraticBezier.Point2.X + dx),
+                            scale(quadraticBezier.Point2.Y + dy),
+                            scale(quadraticBezier.Point3.X + dx),
+                            scale(quadraticBezier.Point3.Y + dy));
+                        break;
+                }
+            }
+            return path;
+        }
+
+        public static SKPath ToSKPath(this IBaseShape shape, double dx, double dy, Func<double, float> scale)
+        {
+            return shape switch
+            {
+                ILineShape line => ToSKPath(line, dx, dy, scale),
+                IRectangleShape rectangle => ToSKPath(rectangle, dx, dy, scale),
+                IEllipseShape ellipse => ToSKPath(ellipse, dx, dy, scale),
+                IArcShape arc => ToSKPath(arc, dx, dy, scale),
+                ICubicBezierShape cubicBezier => ToSKPath(cubicBezier, dx, dy, scale),
+                IQuadraticBezierShape quadraticBezier => ToSKPath(quadraticBezier, dx, dy, scale),
+                ITextShape text => ToSKPath(text, dx, dy, scale),
+                IPathShape path => ToSKPath(path, dx, dy, scale),
+                _ => null,
+            };
         }
 
         public static SKPath ToSKPath(this ILineShape line, double dx, double dy, Func<double, float> scale)
