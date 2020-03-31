@@ -93,70 +93,109 @@ namespace Core2D.Renderer.SkiaSharp
             {
                 switch (shape)
                 {
-                    case ILineShape line:
-                        if (previous == null || previous != line.Start)
+                    case ILineShape lineShape:
                         {
-                            path.MoveTo(
-                                scale(line.Start.X + dx),
-                                scale(line.Start.Y + dy));
+                            if (previous == null || previous != lineShape.Start)
+                            {
+                                path.MoveTo(
+                                    scale(lineShape.Start.X + dx),
+                                    scale(lineShape.Start.Y + dy));
+                            }
+                            path.LineTo(
+                                scale(lineShape.End.X + dx),
+                                scale(lineShape.End.Y + dy));
+                            previous = lineShape.End;
                         }
-                        path.LineTo(
-                            scale(line.End.X + dx),
-                            scale(line.End.Y + dy));
-                        previous = line.End;
                         break;
-                    case IRectangleShape rectangle:
-                        path.AddRect(
-                            SkiaSharpRenderer.CreateRect(rectangle.TopLeft, rectangle.BottomRight, dx, dy, scale),
-                            SKPathDirection.Clockwise);
-                        break;
-                    case IEllipseShape ellipse:
-                        path.AddOval(
-                            SkiaSharpRenderer.CreateRect(ellipse.TopLeft, ellipse.BottomRight, dx, dy, scale),
-                            SKPathDirection.Clockwise);
-                        break;
-                    case IArcShape arc:
-                        var a = new GdiArc(
-                            Point2.FromXY(arc.Point1.X, arc.Point1.Y),
-                            Point2.FromXY(arc.Point2.X, arc.Point2.Y),
-                            Point2.FromXY(arc.Point3.X, arc.Point3.Y),
-                            Point2.FromXY(arc.Point4.X, arc.Point4.Y));
-                        var rect = new SKRect(
-                            scale(a.X + dx),
-                            scale(a.Y + dy),
-                            scale(a.X + dx + a.Width),
-                            scale(a.Y + dy + a.Height));
-                        path.AddArc(rect, (float)a.StartAngle, (float)a.SweepAngle);
-                        break;
-                    case ICubicBezierShape cubicBezier:
-                        if (previous == null || previous != cubicBezier.Point1)
+                    case IRectangleShape rectangleShape:
                         {
-                            path.MoveTo(
-                                scale(cubicBezier.Point1.X + dx),
-                                scale(cubicBezier.Point1.Y + dy));
+                            path.AddRect(
+                                SkiaSharpRenderer.CreateRect(rectangleShape.TopLeft, rectangleShape.BottomRight, dx, dy, scale),
+                                SKPathDirection.Clockwise);
                         }
-                        path.CubicTo(
-                            scale(cubicBezier.Point2.X + dx),
-                            scale(cubicBezier.Point2.Y + dy),
-                            scale(cubicBezier.Point3.X + dx),
-                            scale(cubicBezier.Point3.Y + dy),
-                            scale(cubicBezier.Point4.X + dx),
-                            scale(cubicBezier.Point4.Y + dy));
-                        previous = cubicBezier.Point4;
                         break;
-                    case IQuadraticBezierShape quadraticBezier:
-                        if (previous == null || previous != quadraticBezier.Point1)
+                    case IEllipseShape ellipseShape:
                         {
-                            path.MoveTo(
-                                scale(quadraticBezier.Point1.X + dx),
-                                scale(quadraticBezier.Point1.Y + dy));
+                            path.AddOval(
+                                SkiaSharpRenderer.CreateRect(ellipseShape.TopLeft, ellipseShape.BottomRight, dx, dy, scale),
+                                SKPathDirection.Clockwise);
                         }
-                        path.QuadTo(
-                            scale(quadraticBezier.Point2.X + dx),
-                            scale(quadraticBezier.Point2.Y + dy),
-                            scale(quadraticBezier.Point3.X + dx),
-                            scale(quadraticBezier.Point3.Y + dy));
-                        previous = quadraticBezier.Point3;
+                        break;
+                    case IArcShape arcShape:
+                        {
+                            var a = new GdiArc(
+                                Point2.FromXY(arcShape.Point1.X, arcShape.Point1.Y),
+                                Point2.FromXY(arcShape.Point2.X, arcShape.Point2.Y),
+                                Point2.FromXY(arcShape.Point3.X, arcShape.Point3.Y),
+                                Point2.FromXY(arcShape.Point4.X, arcShape.Point4.Y));
+                            var rect = new SKRect(
+                                scale(a.X + dx),
+                                scale(a.Y + dy),
+                                scale(a.X + dx + a.Width),
+                                scale(a.Y + dy + a.Height));
+                            path.AddArc(rect, (float)a.StartAngle, (float)a.SweepAngle);
+                        }
+                        break;
+                    case ICubicBezierShape cubicBezierShape:
+                        {
+                            if (previous == null || previous != cubicBezierShape.Point1)
+                            {
+                                path.MoveTo(
+                                    scale(cubicBezierShape.Point1.X + dx),
+                                    scale(cubicBezierShape.Point1.Y + dy));
+                            }
+                            path.CubicTo(
+                                scale(cubicBezierShape.Point2.X + dx),
+                                scale(cubicBezierShape.Point2.Y + dy),
+                                scale(cubicBezierShape.Point3.X + dx),
+                                scale(cubicBezierShape.Point3.Y + dy),
+                                scale(cubicBezierShape.Point4.X + dx),
+                                scale(cubicBezierShape.Point4.Y + dy));
+                            previous = cubicBezierShape.Point4;
+                        }
+                        break;
+                    case IQuadraticBezierShape quadraticBezierShape:
+                        {
+                            if (previous == null || previous != quadraticBezierShape.Point1)
+                            {
+                                path.MoveTo(
+                                    scale(quadraticBezierShape.Point1.X + dx),
+                                    scale(quadraticBezierShape.Point1.Y + dy));
+                            }
+                            path.QuadTo(
+                                scale(quadraticBezierShape.Point2.X + dx),
+                                scale(quadraticBezierShape.Point2.Y + dy),
+                                scale(quadraticBezierShape.Point3.X + dx),
+                                scale(quadraticBezierShape.Point3.Y + dy));
+                            previous = quadraticBezierShape.Point3;
+                        }
+                        break;
+                    case ITextShape textShape:
+                        {
+                            var resultPath = ToSKPath(textShape, dx, dy, scale);
+                            if (resultPath != null && !resultPath.IsEmpty)
+                            {
+                                path.AddPath(resultPath, SKPathAddMode.Append);
+                            }
+                        }
+                        break;
+                    case IPathShape pathShape:
+                        {
+                            var resultPath = ToSKPath(pathShape, dx, dy, scale);
+                            if (resultPath != null && !resultPath.IsEmpty)
+                            {
+                                path.AddPath(resultPath, SKPathAddMode.Append);
+                            }
+                        }
+                        break;
+                    case IGroupShape groupShape:
+                        {
+                            var resultPath = ToSKPath(groupShape.Shapes, dx, dy, scale);
+                            if (resultPath != null && !resultPath.IsEmpty)
+                            {
+                                path.AddPath(resultPath, SKPathAddMode.Append);
+                            }
+                        }
                         break;
                 }
             }
