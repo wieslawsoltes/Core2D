@@ -22,7 +22,7 @@
             <TextBox Text="{Binding CurrentStyleLibrary.Name, Mode=TwoWay}" Classes="left" Grid.Column="0" IsVisible="{Binding !!$self.DataContext.CurrentStyleLibrary}"/>
             <Menu Classes="usercontrol" Grid.Column="1" HorizontalAlignment="Right">
                 <MenuItem Header="+" Classes="usercontrol" Command="{Binding $parent[Window].DataContext.OnAddStyleLibrary}"/>
-                <MenuItem Header="&#727;" Classes="usercontrol" Command="{Binding $parent[Window].DataContext.OnRemoveStyleLibrary}" CommandParameter="{Binding CurrentStyleLibrary}" IsVisible="{Binding !!$self.DataContext}"/>
+                <MenuItem Header="&#727;" Classes="usercontrol" Command="{Binding $parent[Window].DataContext.OnRemoveStyleLibrary}" CommandParameter="{Binding CurrentStyleLibrary}" IsVisible="{Binding !!$self.DataContext.CurrentStyleLibrary}"/>
             </Menu>
         </Grid>
         <ComboBox Items="{Binding StyleLibraries}" SelectedItem="{Binding CurrentStyleLibrary, Mode=TwoWay}" Grid.Row="1" Classes="default" IsVisible="{Binding !!$self.DataContext.CurrentStyleLibrary}">
