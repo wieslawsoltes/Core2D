@@ -1017,14 +1017,12 @@ namespace Core2D
                     0xFF, 0x00, 0x00, 0x00,
                     1.0);
 
-            options.PointStyle =
+            options.PointShape = FilledRectanglePointShape(
                 CreateShapeStyle(
                     "Point",
                     0xFF, 0x00, 0x00, 0x00,
                     0x80, 0xFF, 0xFF, 0xFF,
-                    2.0);
-
-            options.PointShape = FilledRectanglePointShape(options.PointStyle);
+                    2.0));
 
             return options;
         }

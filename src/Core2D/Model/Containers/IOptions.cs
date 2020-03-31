@@ -70,11 +70,6 @@ namespace Core2D.Containers
         IBaseShape PointShape { get; set; }
 
         /// <summary>
-        /// Gets or sets point shape style.
-        /// </summary>
-        IShapeStyle PointStyle { get; set; }
-
-        /// <summary>
         /// Gets or sets selection rectangle style.
         /// </summary>
         IShapeStyle SelectionStyle { get; set; }

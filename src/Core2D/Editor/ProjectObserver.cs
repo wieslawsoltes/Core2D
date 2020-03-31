@@ -424,11 +424,6 @@ namespace Core2D.Editor
                 Add(options.PointShape);
             }
 
-            if (options.PointStyle != null)
-            {
-                Add(options.PointStyle);
-            }
-
             if (options.SelectionStyle != null)
             {
                 Add(options.SelectionStyle);
@@ -450,11 +445,6 @@ namespace Core2D.Editor
             if (options.PointShape != null)
             {
                 Remove(options.PointShape);
-            }
-
-            if (options.PointStyle != null)
-            {
-                Remove(options.PointStyle);
             }
 
             if (options.SelectionStyle != null)

@@ -23,7 +23,6 @@ namespace Core2D.Containers
         private FillRule _defaultFillRule = FillRule.EvenOdd;
         private bool _tryToConnect = false;
         private IBaseShape _pointShape;
-        private IShapeStyle _pointStyle;
         private IShapeStyle _selectionStyle;
         private IShapeStyle _helperStyle;
 
@@ -136,15 +135,6 @@ namespace Core2D.Containers
         }
 
         /// <summary>
-        /// Gets or sets point shape style.
-        /// </summary>
-        public IShapeStyle PointStyle
-        {
-            get => _pointStyle;
-            set => Update(ref _pointStyle, value);
-        }
-
-        /// <summary>
         /// Gets or sets selection rectangle style.
         /// </summary>
         public IShapeStyle SelectionStyle
@@ -239,12 +229,6 @@ namespace Core2D.Containers
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
         public virtual bool ShouldSerializePointShape() => _pointShape != null;
-
-        /// <summary>
-        /// Check whether the <see cref="PointStyle"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializePointStyle() => _pointStyle != null;
 
         /// <summary>
         /// Check whether the <see cref="SelectionStyle"/> property has changed from its default value.

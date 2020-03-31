@@ -54,11 +54,6 @@
                         <ContentControl Content="{Binding PointShape}"/>
                     </ScrollViewer>
                 </TabItem>
-                <TabItem Header="PointStyle" Classes="property">
-                    <ScrollViewer>
-                        <ContentControl Content="{Binding PointStyle}"/>
-                    </ScrollViewer>
-                </TabItem>
                 <TabItem Header="SelectionStyle" Classes="property">
                     <ScrollViewer>
                         <ContentControl Content="{Binding SelectionStyle}"/>
