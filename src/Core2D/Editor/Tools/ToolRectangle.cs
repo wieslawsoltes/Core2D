@@ -59,7 +59,9 @@ namespace Core2D.Editor.Tools
             {
                 case State.TopLeft:
                     {
-                        var style = editor.Project.CurrentStyleLibrary.Selected;
+                        var style = editor.Project.CurrentStyleLibrary?.Selected != null ?
+                            editor.Project.CurrentStyleLibrary.Selected :
+                            editor.Factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
                         _rectangle = factory.CreateRectangleShape(
                             sx, sy,
                             (IShapeStyle)style.Copy(null),
