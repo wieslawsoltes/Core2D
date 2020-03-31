@@ -167,14 +167,15 @@ namespace Core2D.Renderer.SkiaSharp
         {
             return shape switch
             {
-                ILineShape line => ToSKPath(line, dx, dy, scale),
-                IRectangleShape rectangle => ToSKPath(rectangle, dx, dy, scale),
-                IEllipseShape ellipse => ToSKPath(ellipse, dx, dy, scale),
-                IArcShape arc => ToSKPath(arc, dx, dy, scale),
-                ICubicBezierShape cubicBezier => ToSKPath(cubicBezier, dx, dy, scale),
-                IQuadraticBezierShape quadraticBezier => ToSKPath(quadraticBezier, dx, dy, scale),
-                ITextShape text => ToSKPath(text, dx, dy, scale),
-                IPathShape path => ToSKPath(path, dx, dy, scale),
+                ILineShape lineShape => ToSKPath(lineShape, dx, dy, scale),
+                IRectangleShape rectangleShape => ToSKPath(rectangleShape, dx, dy, scale),
+                IEllipseShape ellipseShape => ToSKPath(ellipseShape, dx, dy, scale),
+                IArcShape arcShape => ToSKPath(arcShape, dx, dy, scale),
+                ICubicBezierShape cubicBezierShape => ToSKPath(cubicBezierShape, dx, dy, scale),
+                IQuadraticBezierShape quadraticBezierShape => ToSKPath(quadraticBezierShape, dx, dy, scale),
+                ITextShape textShape => ToSKPath(textShape, dx, dy, scale),
+                IPathShape pathShape => ToSKPath(pathShape, dx, dy, scale),
+                IGroupShape groupShape => ToSKPath(groupShape.Shapes, dx, dy, scale),
                 _ => null,
             };
         }
