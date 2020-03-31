@@ -273,7 +273,7 @@
             <Setter Property="BorderThickness" Value="1"/>
             <Setter Property="AutoScrollToSelectedItem" Value="True"/>
         </Style>
-        <!-- Menu -->
+        <!-- Menu.default -->
         <Style Selector="Menu.default">
             <Setter Property="Background" Value="Transparent"/>
         </Style>
