@@ -2979,7 +2979,9 @@ namespace Core2D.Editor
         /// <inheritdoc/>
         public void OnDropImageKey(string key, double x, double y)
         {
-            var selected = Project.CurrentStyleLibrary.Selected;
+            var selected = Project.CurrentStyleLibrary?.Selected != null ?
+                Project.CurrentStyleLibrary.Selected :
+                Factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
             var style = (IShapeStyle)selected.Copy(null);
             var point = Project?.Options?.PointShape;
             var layer = Project?.CurrentContainer?.CurrentLayer;
@@ -3149,7 +3151,9 @@ namespace Core2D.Editor
         /// <inheritdoc/>
         public void OnDropRecordAsGroup(IRecord record, double x, double y)
         {
-            var selected = Project.CurrentStyleLibrary.Selected;
+            var selected = Project.CurrentStyleLibrary?.Selected != null ?
+                Project.CurrentStyleLibrary.Selected :
+                Factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
             var style = (IShapeStyle)selected.Copy(null);
             var point = Project?.Options?.PointShape;
             var layer = Project?.CurrentContainer?.CurrentLayer;
@@ -3628,7 +3632,7 @@ namespace Core2D.Editor
 
                 var split = Factory.CreateLineShape(
                     x, y,
-                    line.Style,
+                    (IShapeStyle)line.Style.Copy(null),
                     Project.Options.PointShape,
                     line.IsStroked);
 
@@ -3687,7 +3691,7 @@ namespace Core2D.Editor
                 split = Factory.CreateLineShape(
                     p0,
                     line.End,
-                    line.Style,
+                    (IShapeStyle)line.Style.Copy(null),
                     Project.Options.PointShape,
                     line.IsStroked);
 
@@ -3698,7 +3702,7 @@ namespace Core2D.Editor
                 split = Factory.CreateLineShape(
                     p1,
                     line.End,
-                    line.Style,
+                    (IShapeStyle)line.Style.Copy(null),
                     Project.Options.PointShape,
                     line.IsStroked);
 
