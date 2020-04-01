@@ -102,21 +102,6 @@ namespace Core2D.Editor
         void OnUpdateData(IDatabase db);
 
         /// <summary>
-        /// Show document viewer.
-        /// </summary>
-        void OnDocumentViewer();
-
-        /// <summary>
-        /// Show object browser.
-        /// </summary>
-        void OnObjectBrowser();
-
-        /// <summary>
-        /// Show script editor.
-        /// </summary>
-        void OnScriptEditor();
-
-        /// <summary>
         /// Show about dialog.
         /// </summary>
         void OnAboutDialog();

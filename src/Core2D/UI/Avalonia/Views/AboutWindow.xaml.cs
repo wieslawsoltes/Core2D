@@ -1,19 +1,21 @@
-﻿using Avalonia.Controls;
+﻿using Avalonia;
+using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 
 namespace Core2D.UI.Avalonia.Views
 {
     /// <summary>
-    /// Interaction logic for <see cref="BrowserMenuControl"/> xaml.
+    /// Interaction logic for <see cref="AboutWindow"/> xaml.
     /// </summary>
-    public class BrowserMenuControl : UserControl
+    public class AboutWindow : Window
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="BrowserMenuControl"/> class.
+        /// Initializes a new instance of the <see cref="AboutWindow"/> class.
         /// </summary>
-        public BrowserMenuControl()
+        public AboutWindow()
         {
             InitializeComponent();
+            this.AttachDevTools();
         }
 
         /// <summary>
@@ -22,6 +24,7 @@ namespace Core2D.UI.Avalonia.Views
         private void InitializeComponent()
         {
             AvaloniaXamlLoader.Load(this);
+            App.Selector.EnableThemes(this);
         }
     }
 }

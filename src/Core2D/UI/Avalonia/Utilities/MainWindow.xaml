@@ -1,4 +1,4 @@
-﻿<Window x:Class="Core2D.UI.Avalonia.Windows.BrowserWindow"
+﻿<Window x:Class="Core2D.UI.Avalonia.Views.MainWindow"
         xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -9,16 +9,22 @@
         xmlns:idc="clr-namespace:Dock.Avalonia.Controls;assembly=Dock.Avalonia"
         xmlns:converters="clr-namespace:Core2D.UI.Avalonia.Converters;assembly=Core2D"
         xmlns:views="clr-namespace:Core2D.UI.Avalonia.Views;assembly=Core2D"
-        Width="1200" Height="715"
+        Width="1324" Height="690"
         UseLayoutRounding="True" RenderOptions.BitmapInterpolationMode="HighQuality"
-        WindowState="Normal" WindowStartupLocation="CenterScreen"
+        WindowState="Maximized" WindowStartupLocation="Manual"
         BorderThickness="1" BorderBrush="{DynamicResource ThemeBorderLightBrush}"
         Foreground="{DynamicResource ThemeForegroundBrush}"
         Icon="/Assets/Core2D.ico"
-        Title="Object Browser"
+        id:DragBehavior.IsEnabled="True" id:DropBehavior.IsEnabled="True"
         xmlns:Designer="clr-namespace:Core2D.Editor.Designer;assembly=Core2D"
         mc:Ignorable="d"
         d:DataContext="{x:Static Designer:DesignerContext.Editor}"
-        d:DesignWidth="1000" d:DesignHeight="600">
-    <views:BrowserControl/>
+        d:DesignWidth="1200" d:DesignHeight="580">
+    <Window.Title>
+        <MultiBinding Mode="OneWay" Converter="{StaticResource EditorToTitleMultiConverter}">
+            <Binding Path="Project.Name"/>
+            <Binding Path="IsProjectDirty"/>
+        </MultiBinding>
+    </Window.Title>
+    <views:MainControl/>
 </Window>

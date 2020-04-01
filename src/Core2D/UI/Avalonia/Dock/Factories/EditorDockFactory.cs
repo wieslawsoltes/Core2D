@@ -296,6 +296,12 @@ namespace Core2D.UI.Avalonia.Dock.Factories
 
             // Views
 
+            var dashboardView = new DashboardView
+            {
+                Id = nameof(DashboardView),
+                Title = "Dashboard"
+            };
+
             var editorView = new EditorView
             {
                 Id = nameof(EditorView),
@@ -305,42 +311,6 @@ namespace Core2D.UI.Avalonia.Dock.Factories
                 (
                    editorLayout
                 )
-            };
-
-            var aboutView = new AboutView
-            {
-                Id = nameof(AboutView),
-                Title = "About"
-            };
-
-            var browserView = new BrowserView
-            {
-                Id = nameof(BrowserView),
-                Title = "Browser"
-            };
-
-            var scriptView = new ScriptView
-            {
-                Id = nameof(ScriptView),
-                Title = "Script"
-            };
-
-            var exportView = new ExportView
-            {
-                Id = nameof(ExportView),
-                Title = "Export"
-            };
-
-            var documentView = new DocumentView
-            {
-                Id = nameof(DocumentView),
-                Title = "Document"
-            };
-
-            var dashboardView = new DashboardView
-            {
-                Id = nameof(DashboardView),
-                Title = "Dashboard"
             };
 
             // Root
@@ -355,12 +325,7 @@ namespace Core2D.UI.Avalonia.Dock.Factories
                 VisibleDockables = CreateList<DM.IDockable>
                 (
                     dashboardView,
-                    editorView,
-                    aboutView,
-                    browserView,
-                    scriptView,
-                    exportView,
-                    documentView
+                    editorView
                 )
             };
 
@@ -416,13 +381,8 @@ namespace Core2D.UI.Avalonia.Dock.Factories
                 [nameof(StyleTool)] = () => _serviceProvider.GetService<IProjectEditor>(),
                 [nameof(TemplateTool)] = () => _serviceProvider.GetService<IProjectEditor>(),
                 // Views
-                [nameof(EditorView)] = () => _serviceProvider.GetService<IProjectEditor>(),
-                [nameof(AboutView)] = () => _serviceProvider.GetService<IProjectEditor>(),
-                [nameof(ScriptView)] = () => _serviceProvider.GetService<IProjectEditor>(),
-                [nameof(ExportView)] = () => _serviceProvider.GetService<IProjectEditor>(),
-                [nameof(BrowserView)] = () => _serviceProvider.GetService<IProjectEditor>(),
-                [nameof(DocumentView)] = () => _serviceProvider.GetService<IProjectEditor>(),
-                [nameof(DashboardView)] = () => _serviceProvider.GetService<IProjectEditor>()
+                [nameof(DashboardView)] = () => _serviceProvider.GetService<IProjectEditor>(),
+                [nameof(EditorView)] = () => _serviceProvider.GetService<IProjectEditor>()
             };
 
             HostWindowLocator = new Dictionary<string, Func<DM.IHostWindow>>

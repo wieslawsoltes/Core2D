@@ -75,16 +75,11 @@
             <MenuItem Header="Cance_l" Command="{Binding OnCancel}" InputGesture="Escape"/>
         </MenuItem>
         <MenuItem Header="_View">
-            <MenuItem Header="_Object Browser..." Command="{Binding Platform.OnObjectBrowser}"/>
-            <Separator/>
-            <MenuItem Header="_Document Viewer..." Command="{Binding Platform.OnDocumentViewer}"/>
-            <Separator/>
-            <MenuItem Header="_Script Editor..." Command="{Binding Platform.OnScriptEditor}"/>
-            <Separator/>
-            <MenuItem Header="_Reset Zoom" Command="{Binding Platform.OnZoomReset}" InputGesture="Z"/>
-            <Separator/>
-            <MenuItem Header="_AutoFit Zoom" Command="{Binding Platform.OnZoomAutoFit}" InputGesture="X"/>
-            <Separator/>
+            <MenuItem Header="_Zoom">
+                <MenuItem Header="_Reset" Command="{Binding Platform.OnZoomReset}" InputGesture="Z"/>
+                <Separator/>
+                <MenuItem Header="_AutoFit" Command="{Binding Platform.OnZoomAutoFit}" InputGesture="X"/>
+            </MenuItem>
             <MenuItem Header="_Theme" DataContext="{x:Static app:App.Selector}" Items="{Binding Themes}">
                 <MenuItem.Styles>
                     <Style Selector="MenuItem">

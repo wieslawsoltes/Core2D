@@ -2,20 +2,22 @@
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 
-namespace Core2D.UI.Avalonia.Windows
+namespace Core2D.UI.Avalonia.Views
 {
     /// <summary>
-    /// Interaction logic for <see cref="BrowserWindow"/> xaml.
+    /// Interaction logic for <see cref="MainWindow"/> xaml.
     /// </summary>
-    public class BrowserWindow : Window
+    public class MainWindow : Window
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="BrowserWindow"/> class.
+        /// Initializes a new instance of the <see cref="MainWindow"/> class.
         /// </summary>
-        public BrowserWindow()
+        public MainWindow()
         {
             InitializeComponent();
             this.AttachDevTools();
+            //VisualRoot.Renderer.DrawDirtyRects = true;
+            //VisualRoot.Renderer.DrawFps = true;
             App.Selector.EnableThemes(this);
         }
 

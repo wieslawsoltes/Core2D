@@ -5,7 +5,7 @@ using Core2D.Containers;
 using Core2D.Data;
 using Core2D.Editor;
 using Core2D.Interfaces;
-using Core2D.UI.Avalonia.Windows;
+using Core2D.UI.Avalonia.Views;
 using DM = Dock.Model;
 
 namespace Core2D.UI.Avalonia.Editor
@@ -426,36 +426,6 @@ namespace Core2D.UI.Avalonia.Editor
                     }
                 }
             }
-        }
-
-        /// <inheritdoc/>
-        public void OnDocumentViewer()
-        {
-            new DocumentWindow()
-            {
-                DataContext = _serviceProvider.GetService<IProjectEditor>()
-            }
-            .Show();
-        }
-
-        /// <inheritdoc/>
-        public void OnObjectBrowser()
-        {
-            new BrowserWindow()
-            {
-                DataContext = _serviceProvider.GetService<IProjectEditor>()
-            }
-            .Show();
-        }
-
-        /// <inheritdoc/>
-        public void OnScriptEditor()
-        {
-            new ScriptWindow()
-            {
-                DataContext = _serviceProvider.GetService<IProjectEditor>()
-            }
-            .Show();
         }
 
         /// <inheritdoc/>

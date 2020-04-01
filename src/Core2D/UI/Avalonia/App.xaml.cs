@@ -146,7 +146,7 @@ namespace Core2D.UI.Avalonia
             var aboutInfo = CreateAboutInfo(runtimeInfo, windowingSubsystemName, renderingSubsystemName);
             editor.AboutInfo = aboutInfo;
 
-            var mainWindow = serviceProvider.GetService<Windows.MainWindow>();
+            var mainWindow = serviceProvider.GetService<MainWindow>();
 
             mainWindow.DataContext = editor;
 

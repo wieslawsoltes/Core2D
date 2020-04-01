@@ -33,7 +33,7 @@ using Core2D.UI.Avalonia.Editor;
 using Core2D.UI.Avalonia.Importers;
 using Core2D.UI.Avalonia.Dock.Factories;
 using Core2D.UI.Avalonia.Dock.Windows;
-using Core2D.UI.Avalonia.Windows;
+using Core2D.UI.Avalonia.Views;
 using DM = Dock.Model;
 using Core2D.Renderer.SkiaSharp;
 

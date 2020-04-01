@@ -809,34 +809,6 @@
                 <views:StatusControl Grid.Column="0" Grid.Row="2" Margin="6,2,6,4" DataContext="{Binding Context}"/>
             </Grid>
         </DataTemplate>
-        <DataTemplate DataType="Views:ScriptView">
-            <Grid RowDefinitions="*">
-                <scripting:ScriptControl Grid.Row="0" DataContext="{Binding Context.Project.CurrentScript}"/>
-            </Grid>
-        </DataTemplate>
-        <DataTemplate DataType="Views:ExportView">
-            <Grid RowDefinitions="*">
-                <views:ExportControl Grid.Row="0" DataContext="{Binding Context}"/>
-            </Grid>
-        </DataTemplate>
-        <DataTemplate DataType="Views:BrowserView">
-            <Grid RowDefinitions="Auto,*">
-                <views:BrowserMenuControl Grid.Row="0" DataContext="{Binding Context}"/>
-                <views:BrowserControl Grid.Row="1" DataContext="{Binding Context}"/>
-            </Grid>
-        </DataTemplate>
-        <DataTemplate DataType="Views:DocumentView">
-            <Grid RowDefinitions="Auto,*">
-                <views:DocumentMenuControl Grid.Row="0" DataContext="{Binding Context}"/>
-                <views:DocumentControl Grid.Row="1" DataContext="{Binding Context}"/>
-            </Grid>
-        </DataTemplate>
-        <DataTemplate DataType="Views:AboutView">
-            <Grid RowDefinitions="Auto,*">
-                <views:AboutMenuControl Grid.Row="0" DataContext="{Binding Context}"/>
-                <views:AboutControl Grid.Row="1" DataContext="{Binding Context}"/>
-            </Grid>
-        </DataTemplate>
         <!-- Documents -->
         <DataTemplate DataType="Documents:PageDocument">
             <views:PageControl DataContext="{Binding Context}"/>
