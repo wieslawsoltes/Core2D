@@ -53,10 +53,8 @@ namespace Core2D.Editor
         {
             if (_editor?.Project?.CurrentContainer != null)
             {
-                foreach (var renderer in _editor.Renderers)
-                {
-                    renderer.ClearCache(isZooming: false);
-                }
+                _editor.PageRenderer.ClearCache(isZooming: false);
+                _editor.DocumentRenderer.ClearCache(isZooming: false);
                 _editor.Project.CurrentContainer.Invalidate();
             }
         }

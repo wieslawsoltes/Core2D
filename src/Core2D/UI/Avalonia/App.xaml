@@ -863,10 +863,10 @@
             <ContentControl Content="{Binding Context.Project.CurrentContainer.CurrentShape}"/>
         </DataTemplate>
         <DataTemplate DataType="Tools:DataTool">
-            <data:DataControl DataContext="{Binding Context.Renderers[0].State.SelectedShape.Data}"/>
+            <data:DataControl DataContext="{Binding Context.PageState.SelectedShape.Data}"/>
         </DataTemplate>
         <DataTemplate DataType="Tools:RecordTool">
-            <Grid RowDefinitions="Auto,*" ColumnDefinitions="*" IsVisible="{Binding !!$self.DataContext}" DataContext="{Binding Context.Renderers[0].State.SelectedShape.Data}">
+            <Grid RowDefinitions="Auto,*" ColumnDefinitions="*" IsVisible="{Binding !!$self.DataContext}" DataContext="{Binding Context.PageState.SelectedShape.Data}">
                 <Menu Classes="usercontrol" Grid.Row="0" HorizontalAlignment="Right" IsVisible="{Binding !!Record}">
                     <MenuItem Header="&#727;" Classes="usercontrol" Command="{Binding $parent[Window].DataContext.OnResetRecord}" CommandParameter="{Binding}" IsVisible="{Binding !!Record}"/>
                 </Menu>
@@ -874,14 +874,14 @@
             </Grid>
         </DataTemplate>
         <DataTemplate DataType="Tools:PropertiesTool">
-            <data:PropertiesControl DataContext="{Binding Context.Renderers[0].State.SelectedShape.Data}" IsVisible="{Binding !!$self.DataContext}"/>
+            <data:PropertiesControl DataContext="{Binding Context.PageState.SelectedShape.Data}" IsVisible="{Binding !!$self.DataContext}"/>
         </DataTemplate>
         <DataTemplate DataType="Tools:StyleTool">
             <Grid DataContext="{Binding Context}">
                 <ContentControl>
                     <ContentControl.Content>
                         <MultiBinding Converter="{StaticResource PriorityMultiValueConverter}">
-                            <Binding Path="Renderers[0].State.SelectedShape.Style" FallbackValue="{x:Null}" />
+                            <Binding Path="PageState.SelectedShape.Style" FallbackValue="{x:Null}" />
                             <Binding Path="Project.CurrentStyleLibrary.Selected" FallbackValue="{x:Null}" />
                         </MultiBinding>
                     </ContentControl.Content>

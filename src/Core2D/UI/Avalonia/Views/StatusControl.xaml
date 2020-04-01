@@ -24,8 +24,8 @@
                     <Binding Path="Project.CurrentDocument.Pages"/>
                     <Binding Path="Project.CurrentContainer.Layers"/>
                     <Binding Path="Project.CurrentContainer.CurrentLayer.Shapes"/>
-                    <Binding Path="Renderers[0].State.SelectedShape" Converter="{StaticResource ObjectToObjectConverter}"/>
-                    <Binding Path="Renderers[0].State.SelectedShapes" Converter="{StaticResource ObjectToObjectConverter}"/>
+                    <Binding Path="PageState.SelectedShape" Converter="{StaticResource ObjectToObjectConverter}"/>
+                    <Binding Path="PageState.SelectedShapes" Converter="{StaticResource ObjectToObjectConverter}"/>
                 </MultiBinding>
             </TextBlock.Text>
         </TextBlock>

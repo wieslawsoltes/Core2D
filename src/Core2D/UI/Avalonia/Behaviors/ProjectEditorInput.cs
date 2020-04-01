@@ -28,7 +28,7 @@ namespace Core2D.UI.Avalonia.Behaviors
                 return;
             }
 
-            var state = projectEditor.Renderers[0]?.State;
+            var state = projectEditor.PageState;
             if (state != null)
             {
                 bool invalidateCache = state.ZoomX != zoomX || state.ZoomY != zoomY;

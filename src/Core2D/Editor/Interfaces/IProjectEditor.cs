@@ -102,9 +102,24 @@ namespace Core2D.Editor
         IDataFlow DataFlow { get; }
 
         /// <summary>
-        /// Gets current renderer's.
+        /// Gets page renderer.
         /// </summary>
-        IShapeRenderer[] Renderers { get; }
+        IShapeRenderer PageRenderer { get; }
+
+        /// <summary>
+        /// Gets page renderer state.
+        /// </summary>
+        IShapeRendererState PageState { get; }
+
+        /// <summary>
+        /// Gets document renderer.
+        /// </summary>
+        IShapeRenderer DocumentRenderer { get; }
+
+        /// <summary>
+        /// Gets document renderer state.
+        /// </summary>
+        IShapeRendererState DocumentState { get; }
 
         /// <summary>
         /// Gets current file system.
