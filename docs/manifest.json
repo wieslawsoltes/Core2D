@@ -1,6 +1,6 @@
 {
   "homepages": [],
-  "source_base_path": "C:/DOWNLOADS/GitHub/Core2D/docfx",
+  "source_base_path": "/home/ubuntu/projects/Core2D/docfx",
   "xrefmap": "xrefmap.yml",
   "files": [
     {
@@ -117,7 +117,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Containers.IOptions.html",
-          "hash": "kKXNZla3R8niZJMl+dxz7g=="
+          "hash": "+KD5mOsLjfmGWY4nFWf3tQ=="
         }
       },
       "is_incremental": false,
@@ -213,7 +213,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Containers.Options.html",
-          "hash": "nlm/cOvVLHIhoZ47ktNucQ=="
+          "hash": "LkgQTuhDB1lNDz5hVx8XxQ=="
         }
       },
       "is_incremental": false,
@@ -753,7 +753,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Editor.Factories.ShapeFactory.html",
-          "hash": "nSNTeeb9KkehqvSJDQRAgQ=="
+          "hash": "LnPWWUSYs68MUSCNkaP75w=="
         }
       },
       "is_incremental": false,
@@ -825,7 +825,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Editor.IProjectEditor.html",
-          "hash": "71Dp6wCDxbUm9hQv0ZaKcQ=="
+          "hash": "0mZI1Lclfi/LR7j2Ng6/Qw=="
         }
       },
       "is_incremental": false,
@@ -837,7 +837,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Editor.IProjectEditorPlatform.html",
-          "hash": "hdJcKXtikHqZ3Ahsotz//A=="
+          "hash": "GQ8M4qt35qouJ8vkAPah9Q=="
         }
       },
       "is_incremental": false,
@@ -969,7 +969,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Editor.Layout.BoxLayout.html",
-          "hash": "gePhSOvewMvIQO/GBT6yZA=="
+          "hash": "oSklQiIAb9O8yqpNAFaSrA=="
         }
       },
       "is_incremental": false,
@@ -982,6 +982,18 @@
         ".html": {
           "relative_path": "api/Core2D.Editor.Layout.DistributeMode.html",
           "hash": "Xg+hnmYhiTHZscl5UlBSIA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Editor.Layout.FlipMode.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Editor.Layout.FlipMode.html",
+          "hash": "ZTsVR0Bjti0HKDy7VWKPcQ=="
         }
       },
       "is_incremental": false,
@@ -1029,7 +1041,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Editor.Layout.html",
-          "hash": "GGakZgrN+gLm19qBieoGNw=="
+          "hash": "L5bKwkJrJbN/PwrGpmsqNw=="
         }
       },
       "is_incremental": false,
@@ -1065,7 +1077,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Editor.ProjectEditor.html",
-          "hash": "Bz3uM3TSHbjSvWQjdO6NtA=="
+          "hash": "Qzyxf2/u0C3z0qfsI/p2UQ=="
         }
       },
       "is_incremental": false,
@@ -1089,7 +1101,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Editor.ProjectEditorInputTarget.html",
-          "hash": "3tCGeOTujvxH+OEVhZOb1A=="
+          "hash": "WSn2Du/fEJ9VKZtka8cotA=="
         }
       },
       "is_incremental": false,
@@ -1113,7 +1125,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Editor.ProjectObserver.html",
-          "hash": "X2/b25FLbOosQEMhrZkM6w=="
+          "hash": "XGdlwwMHj/FVg74fHyDfJQ=="
         }
       },
       "is_incremental": false,
@@ -1677,7 +1689,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Editor.Tools.ToolArc.html",
-          "hash": "IXLiiYXMt1V2oNF5Bpggng=="
+          "hash": "jftYUKkextHBGh+XdqnRNw=="
         }
       },
       "is_incremental": false,
@@ -1701,7 +1713,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Editor.Tools.ToolCubicBezier.html",
-          "hash": "M0sU3r7QRj1ipTFKhp6JUA=="
+          "hash": "F5V96jgyl4sfKQD2/QsCaw=="
         }
       },
       "is_incremental": false,
@@ -1737,7 +1749,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Editor.Tools.ToolEllipse.html",
-          "hash": "Qvz5zWhzTDgaJcCkTMt7yw=="
+          "hash": "dEteVPN6M84NQ+Ys5q5Qew=="
         }
       },
       "is_incremental": false,
@@ -1761,7 +1773,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Editor.Tools.ToolImage.html",
-          "hash": "FqTBdZMPtPIxB/5vS6hKjQ=="
+          "hash": "4u0lbsdIp4J7GS0oG8yPxA=="
         }
       },
       "is_incremental": false,
@@ -1785,7 +1797,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Editor.Tools.ToolLine.html",
-          "hash": "X5rlrY8QvxLqfKi1KnEGPA=="
+          "hash": "dpOWAq36iPzhtx2safGDvw=="
         }
       },
       "is_incremental": false,
@@ -1809,7 +1821,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Editor.Tools.ToolPath.html",
-          "hash": "6+qfVM9N4kqW8q5vv8yTTA=="
+          "hash": "4vPOb19IXCP8sih2RtFXBw=="
         }
       },
       "is_incremental": false,
@@ -1857,7 +1869,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Editor.Tools.ToolQuadraticBezier.html",
-          "hash": "b5OBQ67ei8MQ/G3yyqiYOQ=="
+          "hash": "ht6eh8mlFxrYTJbbF/NrjQ=="
         }
       },
       "is_incremental": false,
@@ -1881,7 +1893,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Editor.Tools.ToolRectangle.html",
-          "hash": "OdbjO1ZA10SUrZ41vijcnw=="
+          "hash": "uXVb0XAtmPOyM7i/RJuWhA=="
         }
       },
       "is_incremental": false,
@@ -1929,7 +1941,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Editor.Tools.ToolText.html",
-          "hash": "/K6uTe3Miw0NVWbNbQFo1Q=="
+          "hash": "Ig6lAnU2kH8FO4s7iBlRVw=="
         }
       },
       "is_incremental": false,
@@ -1965,7 +1977,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Factory.html",
-          "hash": "MtwXjiQ92RZniCG02GjXIA=="
+          "hash": "U1rJrpU0gmIrGS+ZGiQQ2A=="
         }
       },
       "is_incremental": false,
@@ -2429,6 +2441,18 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Interfaces.IPathConverter.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Interfaces.IPathConverter.html",
+          "hash": "R6D60ovshNPXx6jGjUKS7Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/Core2D.Interfaces.IProjectExporter.yml",
       "output": {
         ".html": {
@@ -2517,7 +2541,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Interfaces.html",
-          "hash": "Qb4LchQSSyxCSkVnYbgiuw=="
+          "hash": "DLt8sydxqHwynWmx4STK/Q=="
         }
       },
       "is_incremental": false,
@@ -2925,7 +2949,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Renderer.Avalonia.AvaloniaRenderer.html",
-          "hash": "tzoYHoE1OoKpPNEKrKNNsA=="
+          "hash": "jMW9BCxeXcf59oe9S2n2Jg=="
         }
       },
       "is_incremental": false,
@@ -2937,7 +2961,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Renderer.Avalonia.PathGeometryConverter.html",
-          "hash": "r1gi7Fa8NBbnA/ctqvGocA=="
+          "hash": "PjZRM3dfzuJw5D/B+DDl9Q=="
         }
       },
       "is_incremental": false,
@@ -3113,11 +3137,23 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Renderer.PathOp.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Renderer.PathOp.html",
+          "hash": "8nwKcCjkyqAMoId9bloNVw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/Core2D.Renderer.PdfSharp.PathGeometryConverter.yml",
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Renderer.PdfSharp.PathGeometryConverter.html",
-          "hash": "H8MhIQG4nnEuuDQXOW4GwQ=="
+          "hash": "Y+5/V9w+R/Lryz1GwXdqYQ=="
         }
       },
       "is_incremental": false,
@@ -3261,7 +3297,19 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Renderer.SkiaSharp.PathGeometryConverter.html",
-          "hash": "h1PMTD3cXTw5LnWAWJY5+w=="
+          "hash": "Zf1Twyi2rIqEFNR4HrloIA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.Renderer.SkiaSharp.SkiaSharpPathConverter.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.Renderer.SkiaSharp.SkiaSharpPathConverter.html",
+          "hash": "yA9ndehkfYnO9ZMhI2tgyA=="
         }
       },
       "is_incremental": false,
@@ -3273,7 +3321,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Renderer.SkiaSharp.SkiaSharpRenderer.html",
-          "hash": "ozdiFY0zKwcStMZ6ldm1jg=="
+          "hash": "qOcHGdqRu6XoydMBHKllRQ=="
         }
       },
       "is_incremental": false,
@@ -3285,7 +3333,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Renderer.SkiaSharp.html",
-          "hash": "bR3/7nIXApfiMz/lNxs33Q=="
+          "hash": "0Ki1ouMWiBWMOk53HLH8zw=="
         }
       },
       "is_incremental": false,
@@ -3297,7 +3345,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Renderer.WinForms.PathGeometryConverter.html",
-          "hash": "iZv+MwcByUHWlw6dqwnbUA=="
+          "hash": "osUJWfnmxa7+ovND7kV1SA=="
         }
       },
       "is_incremental": false,
@@ -3333,7 +3381,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Renderer.html",
-          "hash": "iocnImZHHbGm+SFHA81hUw=="
+          "hash": "JAvlq582jefO3uiE6W3heQ=="
         }
       },
       "is_incremental": false,
@@ -3501,7 +3549,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Shapes.ArcShape.html",
-          "hash": "Tm/Kd2T14fBxO0qAsPnfxg=="
+          "hash": "4b/o10OjPrBwG9xvcdN1pw=="
         }
       },
       "is_incremental": false,
@@ -3513,7 +3561,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Shapes.BaseShape.html",
-          "hash": "1A/X5hR0kK4z2fjM9cv19Q=="
+          "hash": "fxoNuBph5QBrSDvn4bpTmA=="
         }
       },
       "is_incremental": false,
@@ -3525,7 +3573,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Shapes.ConnectableShape.html",
-          "hash": "i9mV6M0Lf39XNRjjl8zTpw=="
+          "hash": "d0KMjxyFChr7Ity9TBQfvQ=="
         }
       },
       "is_incremental": false,
@@ -3549,7 +3597,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Shapes.CubicBezierShape.html",
-          "hash": "go6lPLX6EU5QtzrhwzAIkg=="
+          "hash": "ehXJOMJgQQDTS9YIkk9OLA=="
         }
       },
       "is_incremental": false,
@@ -3561,7 +3609,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Shapes.EllipseShape.html",
-          "hash": "UkZ/YsJrjWRCuCcGvXH4uw=="
+          "hash": "dbhcsWlpd09JzmANOakemg=="
         }
       },
       "is_incremental": false,
@@ -3573,7 +3621,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Shapes.GroupShape.html",
-          "hash": "+7132pKvPofMAe1qu1t9pQ=="
+          "hash": "3Lxt2ycdME/Vn/4Llhvu0Q=="
         }
       },
       "is_incremental": false,
@@ -3597,7 +3645,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Shapes.IArcShape.html",
-          "hash": "yRGjKB6H2R2bn+LHN68XSg=="
+          "hash": "WUEc8oEi1uvOktBS34a2Mg=="
         }
       },
       "is_incremental": false,
@@ -3609,7 +3657,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Shapes.IBaseShape.html",
-          "hash": "4AVMw2jus65F3R3fMcnZ6Q=="
+          "hash": "ULqKsHmUSJK+c7eJP+HjiQ=="
         }
       },
       "is_incremental": false,
@@ -3621,7 +3669,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Shapes.IConnectableShape.html",
-          "hash": "faiiZM9G7Wy1yeIPV1yk+w=="
+          "hash": "2OAR7DUjs4UYia6rozxNug=="
         }
       },
       "is_incremental": false,
@@ -3633,7 +3681,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Shapes.ICubicBezierShape.html",
-          "hash": "Lk4ftFRBlJ/9ovNQCR3+9w=="
+          "hash": "2x9xRwIdBk6SsXMOdeL9NA=="
         }
       },
       "is_incremental": false,
@@ -3645,7 +3693,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Shapes.IEllipseShape.html",
-          "hash": "tvyF1SYxne9ttQ5TZoIdwg=="
+          "hash": "c+W5QVqt1qLG8sZMhHp1/w=="
         }
       },
       "is_incremental": false,
@@ -3657,7 +3705,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Shapes.IGroupShape.html",
-          "hash": "kS2XJuoFzx5BNydY11IDzw=="
+          "hash": "rRT00rARws2wk68Dq/2/og=="
         }
       },
       "is_incremental": false,
@@ -3669,7 +3717,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Shapes.IImageShape.html",
-          "hash": "1iQ6zMhc3KvWuAO2BzKk7A=="
+          "hash": "hqCANkTPxtHkW0XMg2l9Mw=="
         }
       },
       "is_incremental": false,
@@ -3681,7 +3729,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Shapes.ILineShape.html",
-          "hash": "28pUMooJCNAhKP7WpyOgqA=="
+          "hash": "l2OnIH0GvElwcCTGlyS80g=="
         }
       },
       "is_incremental": false,
@@ -3693,7 +3741,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Shapes.IPathShape.html",
-          "hash": "JCWdzAsO9Jz6qCxbVcw4Jw=="
+          "hash": "zjnbBYoruPvAyqk2SKvrmQ=="
         }
       },
       "is_incremental": false,
@@ -3705,7 +3753,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Shapes.IPointShape.html",
-          "hash": "8Q90qfFiI93n7paGWrr5dw=="
+          "hash": "3NOkHW5f/Z7Lr4NDcGjB1A=="
         }
       },
       "is_incremental": false,
@@ -3717,7 +3765,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Shapes.IQuadraticBezierShape.html",
-          "hash": "iLCDoH1UQCXH14FR0REhQw=="
+          "hash": "Zlw6dTDCUgHDecU4pfoTmw=="
         }
       },
       "is_incremental": false,
@@ -3729,7 +3777,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Shapes.IRectangleShape.html",
-          "hash": "eUYZ0Gw1neJsQsPmXpeQ4g=="
+          "hash": "XQENzLgTNg6ZVAqRvFHnIQ=="
         }
       },
       "is_incremental": false,
@@ -3741,7 +3789,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Shapes.ITextShape.html",
-          "hash": "aoPccst/gwagtEafW5DotQ=="
+          "hash": "HN9nVtudrS37FCR37/Y1dw=="
         }
       },
       "is_incremental": false,
@@ -3753,7 +3801,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Shapes.ImageShape.html",
-          "hash": "v88hhFgrC98wAjd0zZn34g=="
+          "hash": "WMFMuVT8+2ozVSPSV3tsMg=="
         }
       },
       "is_incremental": false,
@@ -3765,7 +3813,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Shapes.LineShape.html",
-          "hash": "Hb7s2k3SDd5c5eVlMCwpgg=="
+          "hash": "il8bWde/Uax6D0upo0IOEg=="
         }
       },
       "is_incremental": false,
@@ -3789,7 +3837,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Shapes.PathShape.html",
-          "hash": "DeXUrpFIwDYvviu6LV6+8Q=="
+          "hash": "wpAyJ2NAj2rgR2Jrw81K5A=="
         }
       },
       "is_incremental": false,
@@ -3801,7 +3849,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Shapes.PointShape.html",
-          "hash": "P0ANZlEzJSzy0nghUsSIqg=="
+          "hash": "Q9Oi/yOkbcJh8rgJmrI+vQ=="
         }
       },
       "is_incremental": false,
@@ -3825,7 +3873,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Shapes.QuadraticBezierShape.html",
-          "hash": "J4iFe6dqmKuKpvEO7fhrzQ=="
+          "hash": "uRQQYrnnvNpSn+RDyb+Uxw=="
         }
       },
       "is_incremental": false,
@@ -3837,7 +3885,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Shapes.RectangleShape.html",
-          "hash": "/aNm7etJRarGDcqOKFv4sQ=="
+          "hash": "neCgDOKCGAw/FZrC7ycx5Q=="
         }
       },
       "is_incremental": false,
@@ -3849,7 +3897,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.Shapes.TextShape.html",
-          "hash": "STT5q33jYxY6YeixhXpOGA=="
+          "hash": "Cglx1sjwtwvG+M/A+/E6FQ=="
         }
       },
       "is_incremental": false,
@@ -4197,7 +4245,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.TextFieldReader.CsvHelper.CsvHelperReader.html",
-          "hash": "2ySEhbiNONebmABbj+W0VQ=="
+          "hash": "DoNo0wDu4y6C8fpi1GxHvw=="
         }
       },
       "is_incremental": false,
@@ -4221,7 +4269,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.TextFieldReader.OpenXml.OpenXmlReader.html",
-          "hash": "MwQ3+M8SKbth3aoCmwzEbg=="
+          "hash": "D8pD89bZ2TJhinJsxxv/6Q=="
         }
       },
       "is_incremental": false,
@@ -4269,7 +4317,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.TextFieldWriter.OpenXml.OpenXmlWriter.html",
-          "hash": "Cq9Yl44osWRZeULZ1BfACQ=="
+          "hash": "a/QdVD6Tqv1VXxg9+M7zPQ=="
         }
       },
       "is_incremental": false,
@@ -4293,7 +4341,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.App.html",
-          "hash": "5KxghVhnDKrbkqCv3Ly1pw=="
+          "hash": "do8HsZ9xP2iRK4zWYJJCPQ=="
         }
       },
       "is_incremental": false,
@@ -4533,7 +4581,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Dock.Factories.EditorDockFactory.html",
-          "hash": "8DSOFOGUVbFfXmGb+q9nQw=="
+          "hash": "lmge+klKwIwI/mrGFR7aDw=="
         }
       },
       "is_incremental": false,
@@ -4865,47 +4913,11 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Core2D.UI.Avalonia.Dock.Views.AboutView.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Core2D.UI.Avalonia.Dock.Views.AboutView.html",
-          "hash": "oP9NpNhgxBymsDLvMg0Suw=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/Core2D.UI.Avalonia.Dock.Views.BrowserView.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Core2D.UI.Avalonia.Dock.Views.BrowserView.html",
-          "hash": "cDDA+ZnczIGl4BmypDYEnA=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
       "source_relative_path": "api/Core2D.UI.Avalonia.Dock.Views.DashboardView.yml",
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Dock.Views.DashboardView.html",
           "hash": "ZWkZ02UaV/NpJ7uQ4fwoTg=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/Core2D.UI.Avalonia.Dock.Views.DocumentView.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Core2D.UI.Avalonia.Dock.Views.DocumentView.html",
-          "hash": "GxrLuWQ5G4wi5KZzBtcOjg=="
         }
       },
       "is_incremental": false,
@@ -4925,35 +4937,11 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Core2D.UI.Avalonia.Dock.Views.ExportView.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Core2D.UI.Avalonia.Dock.Views.ExportView.html",
-          "hash": "8A8PGa+IbS5by4yrNQdyxw=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/Core2D.UI.Avalonia.Dock.Views.ScriptView.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Core2D.UI.Avalonia.Dock.Views.ScriptView.html",
-          "hash": "m8ngLpObTiZOg9lUgjgymQ=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
       "source_relative_path": "api/Core2D.UI.Avalonia.Dock.Views.yml",
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Dock.Views.html",
-          "hash": "b0q9R+n5607SFxYOcDoEAg=="
+          "hash": "gzYDEIfcZuc3pun7QWfHUg=="
         }
       },
       "is_incremental": false,
@@ -5013,7 +5001,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Editor.AvaloniaProjectEditorPlatform.html",
-          "hash": "7LjKczssjLffBpxfTQBn9w=="
+          "hash": "YFdi7lLnmaJgJOE3o+YnsA=="
         }
       },
       "is_incremental": false,
@@ -5057,71 +5045,11 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Core2D.UI.Avalonia.Modules.AppModule.yml",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Modules.AvaloniaModule.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Core2D.UI.Avalonia.Modules.AppModule.html",
-          "hash": "MX5tngFqt91NPCo1/7iNmQ=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/Core2D.UI.Avalonia.Modules.CoreModule.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Core2D.UI.Avalonia.Modules.CoreModule.html",
-          "hash": "b+Wy/77mO5cRHB0Qyfr7xg=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/Core2D.UI.Avalonia.Modules.DependenciesModule.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Core2D.UI.Avalonia.Modules.DependenciesModule.html",
-          "hash": "xdaE4kenxiCxbQj/d8Wjng=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/Core2D.UI.Avalonia.Modules.DesignerModule.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Core2D.UI.Avalonia.Modules.DesignerModule.html",
-          "hash": "F6zLtjjAZH8JbnExUD8MZQ=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/Core2D.UI.Avalonia.Modules.LocatorModule.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Core2D.UI.Avalonia.Modules.LocatorModule.html",
-          "hash": "U3WzpoaYLw54EiyUWPm3PQ=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/Core2D.UI.Avalonia.Modules.ViewModule.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Core2D.UI.Avalonia.Modules.ViewModule.html",
-          "hash": "uvCipm0VbRPDXH6j2KUHaA=="
+          "relative_path": "api/Core2D.UI.Avalonia.Modules.AvaloniaModule.html",
+          "hash": "4PcwqTQlN4VfS3WQa4G6jA=="
         }
       },
       "is_incremental": false,
@@ -5133,7 +5061,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Modules.html",
-          "hash": "doKdUncNUWtP2l6mrKdwvg=="
+          "hash": "DVKvwPCP1NPum2xDkCKH/A=="
         }
       },
       "is_incremental": false,
@@ -5225,11 +5153,11 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Core2D.UI.Avalonia.Views.AboutMenuControl.yml",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Views.AboutWindow.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Core2D.UI.Avalonia.Views.AboutMenuControl.html",
-          "hash": "ws4i4AClB7Khw8T936qT7w=="
+          "relative_path": "api/Core2D.UI.Avalonia.Views.AboutWindow.html",
+          "hash": "hGP0jOGQ35Rc9i0mCBwnHg=="
         }
       },
       "is_incremental": false,
@@ -5242,18 +5170,6 @@
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Views.BrowserControl.html",
           "hash": "x+DgCLP7uPH56NB5dv6K7w=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/Core2D.UI.Avalonia.Views.BrowserMenuControl.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Core2D.UI.Avalonia.Views.BrowserMenuControl.html",
-          "hash": "+ERnYf8OvIodHS6gbCyf6Q=="
         }
       },
       "is_incremental": false,
@@ -5561,18 +5477,6 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Core2D.UI.Avalonia.Views.DocumentMenuControl.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Core2D.UI.Avalonia.Views.DocumentMenuControl.html",
-          "hash": "7tYDWecz8xvPGGhtGUuSbA=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
       "source_relative_path": "api/Core2D.UI.Avalonia.Views.EditorControl.yml",
       "output": {
         ".html": {
@@ -5614,6 +5518,18 @@
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Views.MainControl.html",
           "hash": "xaZACqa5FNhq5ZZwHht+rQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core2D.UI.Avalonia.Views.MainWindow.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core2D.UI.Avalonia.Views.MainWindow.html",
+          "hash": "qbd05iph5abghUGzu9jsqg=="
         }
       },
       "is_incremental": false,
@@ -6381,79 +6297,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Core2D.UI.Avalonia.Views.html",
-          "hash": "SRfVXY1Gx1rjfUnd61qbvQ=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/Core2D.UI.Avalonia.Windows.AboutWindow.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Core2D.UI.Avalonia.Windows.AboutWindow.html",
-          "hash": "1UFO/QwmkGUZTbm/iKGZEA=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/Core2D.UI.Avalonia.Windows.BrowserWindow.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Core2D.UI.Avalonia.Windows.BrowserWindow.html",
-          "hash": "XniQuNZb0r3iazoI80P2yQ=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/Core2D.UI.Avalonia.Windows.DocumentWindow.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Core2D.UI.Avalonia.Windows.DocumentWindow.html",
-          "hash": "hXTMrcwGetIMmS7/5qk4Rw=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/Core2D.UI.Avalonia.Windows.MainWindow.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Core2D.UI.Avalonia.Windows.MainWindow.html",
-          "hash": "IZkOB/QFFw0lJ9rHEwXVag=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/Core2D.UI.Avalonia.Windows.ScriptWindow.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Core2D.UI.Avalonia.Windows.ScriptWindow.html",
-          "hash": "rWNnIjWfDAJeaC1WP8Pxrw=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/Core2D.UI.Avalonia.Windows.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Core2D.UI.Avalonia.Windows.html",
-          "hash": "/AYIlaZE2aKS5oIhdHUx2Q=="
+          "hash": "eeYm7hcNtZ7FzYmCXtiHnQ=="
         }
       },
       "is_incremental": false,
@@ -6585,7 +6429,7 @@
       "output": {
         ".html": {
           "relative_path": "api/toc.html",
-          "hash": "r4wwI9PSXZCgga1onLACXQ=="
+          "hash": "XM8MozLruRo/3T+IHBqwzQ=="
         }
       },
       "is_incremental": false,
@@ -6658,7 +6502,7 @@
         "ManagedReferenceDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build",
-          "total_file_count": 548,
+          "total_file_count": 535,
           "skipped_file_count": 0
         },
         "ResourceDocumentProcessor": {
