@@ -13,19 +13,17 @@
     <TabControl Classes="default">
         <TabItem Header="Arrow" Classes="property">
             <ScrollViewer>
-                <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto" ColumnDefinitions="Auto,50,*">
+                <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto" ColumnDefinitions="Auto,*">
                     <TextBlock Text="Arrow Type" Classes="left" Grid.Row="0" Grid.Column="0"/>
-                    <ComboBox Items="{x:Static Editor:Enums.ArrowTypeValues}" SelectedItem="{Binding ArrowType, Mode=TwoWay}" Classes="default" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2"/>
+                    <ComboBox Items="{x:Static Editor:Enums.ArrowTypeValues}" SelectedItem="{Binding ArrowType, Mode=TwoWay}" Classes="default" Grid.Row="0" Grid.Column="1"/>
                     <TextBlock Text="IsStroked" Classes="left" Grid.Row="1" Grid.Column="0"/>
-                    <CheckBox IsChecked="{Binding IsStroked, Mode=TwoWay}" Classes="left" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2"/>
+                    <CheckBox IsChecked="{Binding IsStroked, Mode=TwoWay}" Classes="left" Grid.Row="1" Grid.Column="1"/>
                     <TextBlock Text="IsFilled" Classes="left" Grid.Row="2" Grid.Column="0"/>
-                    <CheckBox IsChecked="{Binding IsFilled, Mode=TwoWay}" Classes="left" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2"/>
+                    <CheckBox IsChecked="{Binding IsFilled, Mode=TwoWay}" Classes="left" Grid.Row="2" Grid.Column="1"/>
                     <TextBlock Text="RadiusX" Classes="left" Grid.Row="3" Grid.Column="0"/>
                     <TextBox Text="{Binding RadiusX, Mode=TwoWay}" Classes="left" Grid.Row="3" Grid.Column="1"/>
-                    <Slider Classes="slider" Value="{Binding RadiusX, Mode=TwoWay}" Minimum="0" Maximum="30" Grid.Row="3" Grid.Column="2"/>
                     <TextBlock Text="RadiusY" Classes="left" Grid.Row="4" Grid.Column="0"/>
                     <TextBox Text="{Binding RadiusY, Mode=TwoWay}" Classes="left" Grid.Row="4" Grid.Column="1"/>
-                    <Slider Classes="slider" Value="{Binding RadiusY, Mode=TwoWay}" Minimum="0" Maximum="30" Grid.Row="4" Grid.Column="2"/>
                 </Grid>
             </ScrollViewer>
         </TabItem>

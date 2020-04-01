@@ -23,13 +23,11 @@
                     </TabItem>
                     <TabItem Header="Size" Classes="property">
                         <ScrollViewer>
-                            <Grid RowDefinitions="Auto,Auto" ColumnDefinitions="Auto,50,*">
+                            <Grid RowDefinitions="Auto,Auto" ColumnDefinitions="Auto,*">
                                 <TextBlock Text="Width" Classes="left" Grid.Row="0" Grid.Column="0"/>
-                                <TextBox Text="{Binding Width, Mode=TwoWay}" Classes="center" Grid.Row="0" Grid.Column="1"/>
-                                <Slider Classes="slider" Value="{Binding Width, Mode=TwoWay}" Minimum="0" Maximum="10000" Grid.Row="0" Grid.Column="2"/>
+                                <TextBox Text="{Binding Width, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
                                 <TextBlock Text="Height" Classes="left" Grid.Row="1" Grid.Column="0"/>
-                                <TextBox Text="{Binding Height, Mode=TwoWay}" Classes="center" Grid.Row="1" Grid.Column="1"/>
-                                <Slider Classes="slider" Value="{Binding Height, Mode=TwoWay}" Minimum="0" Maximum="10000" Grid.Row="1" Grid.Column="2"/>
+                                <TextBox Text="{Binding Height, Mode=TwoWay}" Classes="left" Grid.Row="1" Grid.Column="1"/>
                             </Grid>
                         </ScrollViewer>
                     </TabItem>
