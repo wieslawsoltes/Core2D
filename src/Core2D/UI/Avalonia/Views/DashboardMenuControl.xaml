@@ -45,8 +45,6 @@
             <MenuItem Header="E_xit" Command="{Binding Platform.OnExit}" InputGesture="Alt+F4"/>
         </MenuItem>
         <MenuItem Header="_View">
-            <MenuItem Header="_Script Editor..." Command="{Binding Platform.OnScriptEditor}" InputGesture="Ctrl+R"/>
-            <Separator/>
             <MenuItem Header="_Theme" DataContext="{x:Static app:App.Selector}" Items="{Binding Themes}">
                 <MenuItem.Styles>
                     <Style Selector="MenuItem">
