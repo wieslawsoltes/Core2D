@@ -379,6 +379,7 @@ namespace Core2D.Editor
             OnUnload();
             OnLoad(ContainerFactory?.GetProject() ?? Factory.CreateProjectContainer(), string.Empty);
             OnNavigate("EditorView");
+            CanvasPlatform?.ResetZoom?.Invoke();
             CanvasPlatform?.Invalidate?.Invoke();
         }
 
@@ -416,6 +417,8 @@ namespace Core2D.Editor
                     OnLoad(project, path);
                     OnAddRecent(path, project.Name);
                     OnNavigate("EditorView");
+                    CanvasPlatform?.ResetZoom?.Invoke();
+                    CanvasPlatform?.Invalidate?.Invoke();
                 }
             }
             catch (Exception ex)
