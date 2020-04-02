@@ -277,8 +277,9 @@ namespace Core2D.Editor
         /// <returns>The snapped value.</returns>
         public static double Snap(double value, double snap)
         {
-            double r = value % snap;
-            return r >= snap / 2.0 ? value + snap - r : value - r;
+            decimal c = (decimal)value % (decimal)snap;
+            decimal r = c >= (decimal)snap / 2m ? (decimal)value + (decimal)snap - c : (decimal)value - c;
+            return (double)r;
         }
 
         /// <inheritdoc/>
