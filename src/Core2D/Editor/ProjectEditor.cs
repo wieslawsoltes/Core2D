@@ -311,7 +311,6 @@ namespace Core2D.Editor
         /// <inheritdoc/>
         public void OnNew(object item)
         {
-            
             if (item is ILayerContainer layer)
             {
                 if (layer.Owner is IPageContainer page)
