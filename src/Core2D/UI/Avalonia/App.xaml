@@ -524,7 +524,7 @@
         <!-- TextBox.code -->
         <Style Selector="TextBox.code">
             <Setter Property="Padding" Value="4"/>
-            <Setter Property="FontSize" Value="{DynamicResource FontSizeNormal}"/>
+            <Setter Property="FontSize" Value="{DynamicResource FontSizeLarge}"/>
             <Setter Property="TextAlignment" Value="Left"/>
             <Setter Property="BorderThickness" Value="1"/>
             <Setter Property="AcceptsReturn" Value="True"/>
