@@ -8,12 +8,6 @@ namespace Core2D.Interfaces
     public interface IScriptRunner
     {
         /// <summary>
-        /// Executes code script.
-        /// </summary>
-        /// <param name="code">The script code.</param>
-        Task<object> Execute(string code);
-
-        /// <summary>
         /// Executes code script and return current script state.
         /// </summary>
         /// <param name="code">The script code.</param>
