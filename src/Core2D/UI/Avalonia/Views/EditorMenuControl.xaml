@@ -270,7 +270,6 @@
                 <MenuItem Header="_End Arrow Style" Command="{Binding StyleEditor.OnPasteEndArrowStyle}"/>
                 <MenuItem Header="_Line Style" Command="{Binding StyleEditor.OnPasteLineStyle}"/>
             </MenuItem>
-            <Separator/>
             <MenuItem Header="_Stroke">
                 <MenuItem Header="_Thickness">
                     <MenuItem Header="0.25" Command="{Binding StyleEditor.OnStyleSetThickness}" CommandParameter="0.25"/>
@@ -362,7 +361,6 @@
                     <MenuItem Header="100%" Command="{Binding StyleEditor.OnStyleSetFillTransparency}" CommandParameter="255"/>
                 </MenuItem>
             </MenuItem>
-            <Separator/>
             <MenuItem Header="_Text">
                 <MenuItem Header="Font _Name">
                     <MenuItem Header="_System" Command="{Binding StyleEditor.OnStyleSetFontName}" CommandParameter="System"/>
@@ -414,7 +412,6 @@
                     <MenuItem Header="_Bottom" Command="{Binding StyleEditor.OnStyleSetTextVAlignment}" CommandParameter="Bottom"/>
                 </MenuItem>
             </MenuItem>
-            <Separator/>
             <MenuItem Header="_Start Arrow">
                 <MenuItem Header="_Type">
                     <MenuItem Header="_None" Command="{Binding StyleEditor.OnStyleSetStartArrowType}" CommandParameter="None"/>
@@ -669,7 +666,6 @@
                     </MenuItem>
                 </MenuItem>
             </MenuItem>
-            <Separator/>
             <MenuItem Header="_Line">
                 <MenuItem Header="_Curvature">
                     <MenuItem Header="Toggle IsC_urved" Command="{Binding StyleEditor.OnStyleToggleLineIsCurved}"/>
