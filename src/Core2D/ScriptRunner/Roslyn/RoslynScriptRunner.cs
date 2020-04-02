@@ -25,47 +25,15 @@ namespace Core2D.ScriptRunner.Roslyn
         }
 
         /// <inheritdoc/>
-        public async Task<object> Execute(string code)
-        {
-            var options = ScriptOptions.Default
-                .WithImports("System");
-
-            try
-            {
-                var editor = _serviceProvider.GetService<IProjectEditor>();
-                return await CSharpScript.RunAsync(code, options, editor);
-            }
-            catch (CompilationErrorException ex)
-            {
-                var log = _serviceProvider.GetService<ILog>();
-                log?.LogException(ex);
-                log?.LogError($"{Environment.NewLine}{ex.Diagnostics}");
-            }
-            return null;
-        }
-
-        /// <inheritdoc/>
         public async Task<object> Execute(string code, object state)
         {
-            if (state is ScriptState<object> previous)
-            {
-                try
-                {
-                    return await previous.ContinueWithAsync(code);
-                }
-                catch (CompilationErrorException ex)
-                {
-                    var log = _serviceProvider.GetService<ILog>();
-                    log?.LogException(ex);
-                    log?.LogError($"{Environment.NewLine}{ex.Diagnostics}");
-                }
-            }
-
-            var options = ScriptOptions.Default
-                .WithImports("System");
-
             try
             {
+                if (state is ScriptState<object> previousState)
+                {
+                    return await previousState.ContinueWithAsync(code);
+                }
+                var options = ScriptOptions.Default.WithImports("System");
                 var editor = _serviceProvider.GetService<IProjectEditor>();
                 return await CSharpScript.RunAsync(code, options, editor);
             }
@@ -75,7 +43,6 @@ namespace Core2D.ScriptRunner.Roslyn
                 log?.LogException(ex);
                 log?.LogError($"{Environment.NewLine}{ex.Diagnostics}");
             }
-
             return null;
         }
     }
