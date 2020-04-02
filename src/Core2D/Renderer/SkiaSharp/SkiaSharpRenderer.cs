@@ -185,6 +185,7 @@ namespace Core2D.Renderer.SkiaSharp
                 null;
             return new SKPaint()
             {
+                Style = SKPaintStyle.Stroke,
                 IsAntialias = isAntialias,
                 IsStroke = true,
                 StrokeWidth = strokeWidth,
@@ -198,6 +199,7 @@ namespace Core2D.Renderer.SkiaSharp
         {
             return new SKPaint()
             {
+                Style = SKPaintStyle.Fill,
                 IsAntialias = isAntialias,
                 IsStroke = false,
                 LcdRenderText = true,
