@@ -798,7 +798,7 @@ namespace Core2D.Editor
             {
                 if (!string.IsNullOrWhiteSpace(csharp))
                 {
-                    ScriptRunner?.Execute(csharp);
+                    ScriptRunner?.Execute(csharp, null);
                 }
             }
             catch (Exception ex)
