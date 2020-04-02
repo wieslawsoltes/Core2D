@@ -93,20 +93,25 @@ namespace Core2D.Style
         /// Convert line dashes string format to floats array.
         /// </summary>
         /// <param name="value">The line dashes string.</param>
+        /// <param name="strokeWidth">The stroke width.</param>
         /// <returns>The converted line dashes floats array.</returns>
-        public static float[] ConvertDashesToFloatArray(string value)
+        public static float[] ConvertDashesToFloatArray(string value, double strokeWidth)
         {
             try
             {
                 if (value != null)
                 {
-                    string[] a = value.Split(
-                        new char[] { ' ' },
-                        StringSplitOptions.RemoveEmptyEntries);
-                    if (a != null && a.Length > 0)
+                    string[] values = value.Split(new char[] { ' ', ',' }, StringSplitOptions.RemoveEmptyEntries);
+                    float[] array = new float[values.Length];
+                    for (int i = 0; i < values.Length; i++)
                     {
-                        return a.Select(x => float.Parse(x, CultureInfo.InvariantCulture)).ToArray();
+                        array[i] = Convert.ToSingle(values[i]) * (float)strokeWidth;
                     }
+                    if (array.Length >= 2 && array.Length % 2 == 0)
+                    {
+                        return array;
+                    }
+                    return null;
                 }
             }
             catch (Exception ex)
