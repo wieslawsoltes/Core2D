@@ -78,13 +78,12 @@ namespace Core2D.Renderer.SkiaSharp
             var result = paint.GetFillPath(path, 1.0f);
             if (result != null)
             {
-                PathGeometryConverter.Op(new[] { result, result }, SKPathOp.Union, out var union, out bool haveResult);
-                if (haveResult == false || union == null || union.IsEmpty)
+                if (result.IsEmpty)
                 {
                     result.Dispose();
                     return null;
                 }
-                var geometry = PathGeometryConverter.ToPathGeometry(union, 0.0, 0.0, factory, editor.Project.Options.PointShape);
+                var geometry = PathGeometryConverter.ToPathGeometry(result, 0.0, 0.0, factory, editor.Project.Options.PointShape);
                 var pathShape = factory.CreatePathShape(
                     "Path",
                     style,
@@ -92,7 +91,6 @@ namespace Core2D.Renderer.SkiaSharp
                     shape.IsStroked,
                     shape.IsFilled);
                 result.Dispose();
-                union.Dispose();
                 return pathShape;
             }
             return null;
@@ -115,13 +113,12 @@ namespace Core2D.Renderer.SkiaSharp
             var result = paint.GetFillPath(path, 1.0f);
             if (result != null)
             {
-                PathGeometryConverter.Op(new[] { result, result }, SKPathOp.Union, out var union, out bool haveResult);
-                if (haveResult == false || union == null || union.IsEmpty)
+                if (result.IsEmpty)
                 {
                     result.Dispose();
                     return null;
                 }
-                var geometry = PathGeometryConverter.ToPathGeometry(union, 0.0, 0.0, factory, editor.Project.Options.PointShape);
+                var geometry = PathGeometryConverter.ToPathGeometry(result, 0.0, 0.0, factory, editor.Project.Options.PointShape);
                 var pathShape = factory.CreatePathShape(
                     "Path",
                     style,
@@ -129,7 +126,6 @@ namespace Core2D.Renderer.SkiaSharp
                     shape.IsStroked,
                     shape.IsFilled);
                 result.Dispose();
-                union.Dispose();
                 return pathShape;
             }
             return null;
