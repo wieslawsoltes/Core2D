@@ -109,15 +109,51 @@ namespace Core2D.Renderer.SkiaSharp
             pen.TextEncoding = SKTextEncoding.Utf16;
             pen.TextSize = scale(shapeStyle.TextStyle.FontSize * targetDpi / sourceDpi);
 
-            var fm = pen.FontMetrics;
-            var offset = -(fm.Top + fm.Bottom);
+            pen.TextAlign = shapeStyle.TextStyle.TextHAlignment switch
+            {
+                TextHAlignment.Center => SKTextAlign.Center,
+                TextHAlignment.Right => SKTextAlign.Right,
+                _ => SKTextAlign.Left,
+            };
+
+            var metrics = pen.FontMetrics;
+            var mAscent = metrics.Ascent;
+            var mDescent = metrics.Descent;
             var rect = CreateRect(topLeft, bottomRight, dx, dy, scale);
+            float x = rect.Left;
+            float y = rect.Top;
+            float width = rect.Width;
+            float height = rect.Height;
 
-            SKRect bounds = new SKRect();
-            pen.MeasureText(text, ref bounds);
+            switch (shapeStyle.TextStyle.TextVAlignment)
+            {
+                default:
+                case TextVAlignment.Top:
+                    y -= mAscent;
+                    break;
+                case TextVAlignment.Center:
+                    y += (height / 2.0f) - (mAscent / 2.0f) - mDescent / 2.0f;
+                    break;
+                case TextVAlignment.Bottom:
+                    y += height - mDescent;
+                    break;
+            }
 
-            origin = GetTextOrigin(shapeStyle, ref rect, ref bounds);
-            origin.Y += offset;
+            switch (shapeStyle.TextStyle.TextHAlignment)
+            {
+                default:
+                case TextHAlignment.Left:
+                    // x = x;
+                    break;
+                case TextHAlignment.Center:
+                    x += width / 2.0f;
+                    break;
+                case TextHAlignment.Right:
+                    x += width;
+                    break;
+            }
+
+            origin = new SKPoint(x, y);
         }
 
         internal static SKColor ToSKColor(IColor color)
