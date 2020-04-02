@@ -1,5 +1,6 @@
 #if !_CORERT
 using System;
+using System.Threading.Tasks;
 using Core2D.Editor;
 using Core2D.Interfaces;
 using Microsoft.CodeAnalysis.CSharp.Scripting;
@@ -24,21 +25,15 @@ namespace Core2D.ScriptRunner.Roslyn
         }
 
         /// <inheritdoc/>
-        public void Execute(string code)
+        public async Task<object> Execute(string code)
         {
-            ScriptState<object> state = null;
-
             var options = ScriptOptions.Default
                 .WithImports("System");
 
-            var globals = new EditorScript
-            {
-                Editor = _serviceProvider.GetService<IProjectEditor>()
-            };
-
             try
             {
-                state = CSharpScript.RunAsync(code, options, globals).Result;
+                var editor = _serviceProvider.GetService<IProjectEditor>();
+                return await CSharpScript.RunAsync(code, options, editor);
             }
             catch (CompilationErrorException ex)
             {
@@ -46,18 +41,17 @@ namespace Core2D.ScriptRunner.Roslyn
                 log?.LogException(ex);
                 log?.LogError($"{Environment.NewLine}{ex.Diagnostics}");
             }
+            return null;
         }
 
         /// <inheritdoc/>
-        public object Execute(string code, object state)
+        public async Task<object> Execute(string code, object state)
         {
-            ScriptState<object> next = null;
-
             if (state is ScriptState<object> previous)
             {
                 try
                 {
-                    next = previous.ContinueWithAsync(code).Result;
+                    return await previous.ContinueWithAsync(code);
                 }
                 catch (CompilationErrorException ex)
                 {
@@ -65,20 +59,15 @@ namespace Core2D.ScriptRunner.Roslyn
                     log?.LogException(ex);
                     log?.LogError($"{Environment.NewLine}{ex.Diagnostics}");
                 }
-                return next;
             }
 
             var options = ScriptOptions.Default
                 .WithImports("System");
 
-            var globals = new EditorScript
-            {
-                Editor = _serviceProvider.GetService<IProjectEditor>()
-            };
-
             try
             {
-                next = CSharpScript.RunAsync(code, options, globals).Result;
+                var editor = _serviceProvider.GetService<IProjectEditor>();
+                return await CSharpScript.RunAsync(code, options, editor);
             }
             catch (CompilationErrorException ex)
             {
@@ -87,7 +76,7 @@ namespace Core2D.ScriptRunner.Roslyn
                 log?.LogError($"{Environment.NewLine}{ex.Diagnostics}");
             }
 
-            return next;
+            return null;
         }
     }
 }
