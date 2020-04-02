@@ -1,1 +1,1 @@
-Editor.OnSaveProject("Project.project");
+OnSaveProject("Project.project");

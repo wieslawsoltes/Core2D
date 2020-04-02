@@ -1,1 +1,1 @@
-Editor.PageState.SelectedShape?.Move(null, 30, 0);
+PageState.SelectedShape?.Move(null, 30, 0);

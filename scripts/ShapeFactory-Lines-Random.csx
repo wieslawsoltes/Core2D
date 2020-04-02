@@ -11,8 +11,8 @@ double ToDouble(byte[] data, int index, double size)
 
 void RandomLines()
 {
-    double width = Editor.Project.CurrentContainer.Width;
-    double height = Editor.Project.CurrentContainer.Height;
+    double width = Project.CurrentContainer.Width;
+    double height = Project.CurrentContainer.Height;
     using (var rng = new RNGCryptoServiceProvider())
     {
         byte[] data = new byte[32];
@@ -23,7 +23,7 @@ void RandomLines()
             double y0 = ToDouble(data, 8, height);
             double x1 = ToDouble(data, 16, width);
             double y1 = ToDouble(data, 24, height);
-            Editor.ShapeFactory.Line(x0, y0, x1, y1, true);
+            ShapeFactory.Line(x0, y0, x1, y1, true);
         }
     }
 }

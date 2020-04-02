@@ -8,10 +8,10 @@ using Core2D.Editor;
 using Core2D.TextFieldReader.OpenXml;
 
 var path = "D:\\Db.xlsx";
-var reader = Editor.TextFieldReaders.FirstOrDefault(x => x.GetType() == typeof(OpenXmlReader));
-using (var stream = Editor.FileIO.Open(path))
+var reader = TextFieldReaders.FirstOrDefault(x => x.GetType() == typeof(OpenXmlReader));
+using (var stream = FileIO.Open(path))
 {
     var db = reader.Read(stream);
-    Editor.Project.AddDatabase(db);
-    Editor.Project.SetCurrentDatabase(db);
+    Project.AddDatabase(db);
+    Project.SetCurrentDatabase(db);
 }

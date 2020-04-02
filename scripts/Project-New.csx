@@ -1,1 +1,1 @@
-Editor.OnNewProject();
+OnNewProject();

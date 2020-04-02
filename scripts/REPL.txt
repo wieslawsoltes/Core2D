@@ -7,10 +7,10 @@ var y2 = 30;
 
 // Step 2
 
-Editor.ShapeFactory.Line(x1, y1, x2, y2, true);
+ShapeFactory.Line(x1, y1, x2, y2, true);
 
 // Step 3
 
 y1=60;
 y2=90;
-Editor.ShapeFactory.Line(x1, y1, x2, y2, true);
+ShapeFactory.Line(x1, y1, x2, y2, true);

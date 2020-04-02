@@ -1,11 +1,11 @@
-if (Editor.PageState.SelectedShape != null)
+if (PageState.SelectedShape != null)
 {
-    Editor.PageState.SelectedShape.IsFilled = false;
+    PageState.SelectedShape.IsFilled = false;
 }
 
-if (Editor.PageState.SelectedShapes != null)
+if (PageState.SelectedShapes != null)
 {
-    foreach (var shape in Editor.PageState.SelectedShapes)
+    foreach (var shape in PageState.SelectedShapes)
     {
         shape.IsFilled = false;
     }

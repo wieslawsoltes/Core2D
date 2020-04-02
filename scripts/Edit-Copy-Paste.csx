@@ -1,10 +1,10 @@
-Editor.OnSelectAll();
-Editor.OnCopy(null);
+OnSelectAll();
+OnCopy(null);
 
-var name = Editor.Project.CurrentContainer.Name;
+var name = Project.CurrentContainer.Name;
 
-Editor.OnNewPage(Editor.Project.CurrentContainer);
-Editor.OnPaste(null);
-Editor.OnDeselectAll();
+OnNewPage(Project.CurrentContainer);
+OnPaste(null);
+OnDeselectAll();
 
-Editor.Project.CurrentContainer.Name = name + "_copy";
+Project.CurrentContainer.Name = name + "_copy";

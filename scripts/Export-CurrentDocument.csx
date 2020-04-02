@@ -1,19 +1,19 @@
 using System.IO;
 using static System.Console;
 
-var document = Editor.Project.CurrentDocument;
+var document = Project.CurrentDocument;
 var dir = "D:\\";
 
 foreach (var page in document.Pages)
 {
-    foreach (var writer in Editor.FileWriters)
+    foreach (var writer in FileWriters)
     {
         try
         {
             var path = Path.Combine(dir, page.Name + "." + writer.Extension);
-            using (var stream = Editor.FileIO.Create(path))
+            using (var stream = FileIO.Create(path))
             {
-                writer.Save(stream, page, Editor.Project);
+                writer.Save(stream, page, Project);
             }
         }
         catch (Exception ex)

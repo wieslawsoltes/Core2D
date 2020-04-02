@@ -1,1 +1,1 @@
-Editor.OnRedo();
+OnRedo();

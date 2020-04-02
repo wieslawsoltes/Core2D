@@ -11,34 +11,34 @@ using Core2D.FileWriter.SkiaSharpSvg;
 using Core2D.FileWriter.Emf;
 
 var dir = "D:\\";
-var page = Editor.Project.CurrentContainer;
+var page = Project.CurrentContainer;
 
-var dxf = Editor.FileWriters.FirstOrDefault(x => x.GetType() == typeof(DxfWriter));
-using (var dxfStream = Editor.FileIO.Create(Path.Combine(dir, page.Name + "." + dxf.Extension)))
+var dxf = FileWriters.FirstOrDefault(x => x.GetType() == typeof(DxfWriter));
+using (var dxfStream = FileIO.Create(Path.Combine(dir, page.Name + "." + dxf.Extension)))
 {
-    dxf.Save(dxfStream, page, Editor.Project);
+    dxf.Save(dxfStream, page, Project);
 }
 
-var pdf = Editor.FileWriters.FirstOrDefault(x => x.GetType() == typeof(PdfSharpWriter));
-using (var pdfStream = Editor.FileIO.Create(Path.Combine(dir, page.Name + "." + pdf.Extension)))
+var pdf = FileWriters.FirstOrDefault(x => x.GetType() == typeof(PdfSharpWriter));
+using (var pdfStream = FileIO.Create(Path.Combine(dir, page.Name + "." + pdf.Extension)))
 {
-    pdf.Save(pdfStream, page, Editor.Project);
+    pdf.Save(pdfStream, page, Project);
 }
 
-var png = Editor.FileWriters.FirstOrDefault(x => x.GetType() == typeof(PngSkiaSharpWriter));
-using (var pngStream = Editor.FileIO.Create(Path.Combine(dir, page.Name + "." + png.Extension)))
+var png = FileWriters.FirstOrDefault(x => x.GetType() == typeof(PngSkiaSharpWriter));
+using (var pngStream = FileIO.Create(Path.Combine(dir, page.Name + "." + png.Extension)))
 {
-    png.Save(pngStream, page, Editor.Project);
+    png.Save(pngStream, page, Project);
 }
 
-var svg = Editor.FileWriters.FirstOrDefault(x => x.GetType() == typeof(SvgSkiaSharpWriter));
-using (var svgStream = Editor.FileIO.Create(Path.Combine(dir, page.Name + "." + svg.Extension)))
+var svg = FileWriters.FirstOrDefault(x => x.GetType() == typeof(SvgSkiaSharpWriter));
+using (var svgStream = FileIO.Create(Path.Combine(dir, page.Name + "." + svg.Extension)))
 {
-    svg.Save(svgStream, page, Editor.Project);
+    svg.Save(svgStream, page, Project);
 }
 
-var emf = Editor.FileWriters.FirstOrDefault(x => x.GetType() == typeof(EmfWriter));
-using (var emfStream = Editor.FileIO.Create(Path.Combine(dir, page.Name + "." + emf.Extension)))
+var emf = FileWriters.FirstOrDefault(x => x.GetType() == typeof(EmfWriter));
+using (var emfStream = FileIO.Create(Path.Combine(dir, page.Name + "." + emf.Extension)))
 {
-    emf.Save(emfStream, page, Editor.Project);
+    emf.Save(emfStream, page, Project);
 }

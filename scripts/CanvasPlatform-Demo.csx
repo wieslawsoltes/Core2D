@@ -1,3 +1,3 @@
-Editor.CanvasPlatform.Invalidate();
-Editor.CanvasPlatform.ResetZoom();
-Editor.CanvasPlatform.AutoFitZoom();
+CanvasPlatform.Invalidate();
+CanvasPlatform.ResetZoom();
+CanvasPlatform.AutoFitZoom();

@@ -1,1 +1,1 @@
-Editor.OnExecuteCode("Editor.CanvasPlatform.ResetZoom();");
+OnExecuteCode("CanvasPlatform.ResetZoom();");

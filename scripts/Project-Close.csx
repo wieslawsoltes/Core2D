@@ -1,1 +1,1 @@
-Editor.OnCloseProject();
+OnCloseProject();
