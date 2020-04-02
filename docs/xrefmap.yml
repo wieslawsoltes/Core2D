@@ -6767,6 +6767,32 @@ references:
   isSpec: "True"
   fullName: Core2D.Editor.IProjectEditor.Deselect
   nameWithType: IProjectEditor.Deselect
+- uid: Core2D.Editor.IProjectEditor.DocumentRenderer
+  name: DocumentRenderer
+  href: api/Core2D.Editor.IProjectEditor.html#Core2D_Editor_IProjectEditor_DocumentRenderer
+  commentId: P:Core2D.Editor.IProjectEditor.DocumentRenderer
+  fullName: Core2D.Editor.IProjectEditor.DocumentRenderer
+  nameWithType: IProjectEditor.DocumentRenderer
+- uid: Core2D.Editor.IProjectEditor.DocumentRenderer*
+  name: DocumentRenderer
+  href: api/Core2D.Editor.IProjectEditor.html#Core2D_Editor_IProjectEditor_DocumentRenderer_
+  commentId: Overload:Core2D.Editor.IProjectEditor.DocumentRenderer
+  isSpec: "True"
+  fullName: Core2D.Editor.IProjectEditor.DocumentRenderer
+  nameWithType: IProjectEditor.DocumentRenderer
+- uid: Core2D.Editor.IProjectEditor.DocumentState
+  name: DocumentState
+  href: api/Core2D.Editor.IProjectEditor.html#Core2D_Editor_IProjectEditor_DocumentState
+  commentId: P:Core2D.Editor.IProjectEditor.DocumentState
+  fullName: Core2D.Editor.IProjectEditor.DocumentState
+  nameWithType: IProjectEditor.DocumentState
+- uid: Core2D.Editor.IProjectEditor.DocumentState*
+  name: DocumentState
+  href: api/Core2D.Editor.IProjectEditor.html#Core2D_Editor_IProjectEditor_DocumentState_
+  commentId: Overload:Core2D.Editor.IProjectEditor.DocumentState
+  isSpec: "True"
+  fullName: Core2D.Editor.IProjectEditor.DocumentState
+  nameWithType: IProjectEditor.DocumentState
 - uid: Core2D.Editor.IProjectEditor.Factory
   name: Factory
   href: api/Core2D.Editor.IProjectEditor.html#Core2D_Editor_IProjectEditor_Factory
@@ -8932,6 +8958,32 @@ references:
   isSpec: "True"
   fullName: Core2D.Editor.IProjectEditor.OnUpdateData
   nameWithType: IProjectEditor.OnUpdateData
+- uid: Core2D.Editor.IProjectEditor.PageRenderer
+  name: PageRenderer
+  href: api/Core2D.Editor.IProjectEditor.html#Core2D_Editor_IProjectEditor_PageRenderer
+  commentId: P:Core2D.Editor.IProjectEditor.PageRenderer
+  fullName: Core2D.Editor.IProjectEditor.PageRenderer
+  nameWithType: IProjectEditor.PageRenderer
+- uid: Core2D.Editor.IProjectEditor.PageRenderer*
+  name: PageRenderer
+  href: api/Core2D.Editor.IProjectEditor.html#Core2D_Editor_IProjectEditor_PageRenderer_
+  commentId: Overload:Core2D.Editor.IProjectEditor.PageRenderer
+  isSpec: "True"
+  fullName: Core2D.Editor.IProjectEditor.PageRenderer
+  nameWithType: IProjectEditor.PageRenderer
+- uid: Core2D.Editor.IProjectEditor.PageState
+  name: PageState
+  href: api/Core2D.Editor.IProjectEditor.html#Core2D_Editor_IProjectEditor_PageState
+  commentId: P:Core2D.Editor.IProjectEditor.PageState
+  fullName: Core2D.Editor.IProjectEditor.PageState
+  nameWithType: IProjectEditor.PageState
+- uid: Core2D.Editor.IProjectEditor.PageState*
+  name: PageState
+  href: api/Core2D.Editor.IProjectEditor.html#Core2D_Editor_IProjectEditor_PageState_
+  commentId: Overload:Core2D.Editor.IProjectEditor.PageState
+  isSpec: "True"
+  fullName: Core2D.Editor.IProjectEditor.PageState
+  nameWithType: IProjectEditor.PageState
 - uid: Core2D.Editor.IProjectEditor.PathConverter
   name: PathConverter
   href: api/Core2D.Editor.IProjectEditor.html#Core2D_Editor_IProjectEditor_PathConverter
@@ -9010,19 +9062,6 @@ references:
   isSpec: "True"
   fullName: Core2D.Editor.IProjectEditor.RecentProjects
   nameWithType: IProjectEditor.RecentProjects
-- uid: Core2D.Editor.IProjectEditor.Renderers
-  name: Renderers
-  href: api/Core2D.Editor.IProjectEditor.html#Core2D_Editor_IProjectEditor_Renderers
-  commentId: P:Core2D.Editor.IProjectEditor.Renderers
-  fullName: Core2D.Editor.IProjectEditor.Renderers
-  nameWithType: IProjectEditor.Renderers
-- uid: Core2D.Editor.IProjectEditor.Renderers*
-  name: Renderers
-  href: api/Core2D.Editor.IProjectEditor.html#Core2D_Editor_IProjectEditor_Renderers_
-  commentId: Overload:Core2D.Editor.IProjectEditor.Renderers
-  isSpec: "True"
-  fullName: Core2D.Editor.IProjectEditor.Renderers
-  nameWithType: IProjectEditor.Renderers
 - uid: Core2D.Editor.IProjectEditor.ScriptRunner
   name: ScriptRunner
   href: api/Core2D.Editor.IProjectEditor.html#Core2D_Editor_IProjectEditor_ScriptRunner
@@ -11416,6 +11455,32 @@ references:
   isSpec: "True"
   fullName: Core2D.Editor.ProjectEditor.Deselect
   nameWithType: ProjectEditor.Deselect
+- uid: Core2D.Editor.ProjectEditor.DocumentRenderer
+  name: DocumentRenderer
+  href: api/Core2D.Editor.ProjectEditor.html#Core2D_Editor_ProjectEditor_DocumentRenderer
+  commentId: P:Core2D.Editor.ProjectEditor.DocumentRenderer
+  fullName: Core2D.Editor.ProjectEditor.DocumentRenderer
+  nameWithType: ProjectEditor.DocumentRenderer
+- uid: Core2D.Editor.ProjectEditor.DocumentRenderer*
+  name: DocumentRenderer
+  href: api/Core2D.Editor.ProjectEditor.html#Core2D_Editor_ProjectEditor_DocumentRenderer_
+  commentId: Overload:Core2D.Editor.ProjectEditor.DocumentRenderer
+  isSpec: "True"
+  fullName: Core2D.Editor.ProjectEditor.DocumentRenderer
+  nameWithType: ProjectEditor.DocumentRenderer
+- uid: Core2D.Editor.ProjectEditor.DocumentState
+  name: DocumentState
+  href: api/Core2D.Editor.ProjectEditor.html#Core2D_Editor_ProjectEditor_DocumentState
+  commentId: P:Core2D.Editor.ProjectEditor.DocumentState
+  fullName: Core2D.Editor.ProjectEditor.DocumentState
+  nameWithType: ProjectEditor.DocumentState
+- uid: Core2D.Editor.ProjectEditor.DocumentState*
+  name: DocumentState
+  href: api/Core2D.Editor.ProjectEditor.html#Core2D_Editor_ProjectEditor_DocumentState_
+  commentId: Overload:Core2D.Editor.ProjectEditor.DocumentState
+  isSpec: "True"
+  fullName: Core2D.Editor.ProjectEditor.DocumentState
+  nameWithType: ProjectEditor.DocumentState
 - uid: Core2D.Editor.ProjectEditor.Factory
   name: Factory
   href: api/Core2D.Editor.ProjectEditor.html#Core2D_Editor_ProjectEditor_Factory
@@ -13581,6 +13646,32 @@ references:
   isSpec: "True"
   fullName: Core2D.Editor.ProjectEditor.OnUpdateData
   nameWithType: ProjectEditor.OnUpdateData
+- uid: Core2D.Editor.ProjectEditor.PageRenderer
+  name: PageRenderer
+  href: api/Core2D.Editor.ProjectEditor.html#Core2D_Editor_ProjectEditor_PageRenderer
+  commentId: P:Core2D.Editor.ProjectEditor.PageRenderer
+  fullName: Core2D.Editor.ProjectEditor.PageRenderer
+  nameWithType: ProjectEditor.PageRenderer
+- uid: Core2D.Editor.ProjectEditor.PageRenderer*
+  name: PageRenderer
+  href: api/Core2D.Editor.ProjectEditor.html#Core2D_Editor_ProjectEditor_PageRenderer_
+  commentId: Overload:Core2D.Editor.ProjectEditor.PageRenderer
+  isSpec: "True"
+  fullName: Core2D.Editor.ProjectEditor.PageRenderer
+  nameWithType: ProjectEditor.PageRenderer
+- uid: Core2D.Editor.ProjectEditor.PageState
+  name: PageState
+  href: api/Core2D.Editor.ProjectEditor.html#Core2D_Editor_ProjectEditor_PageState
+  commentId: P:Core2D.Editor.ProjectEditor.PageState
+  fullName: Core2D.Editor.ProjectEditor.PageState
+  nameWithType: ProjectEditor.PageState
+- uid: Core2D.Editor.ProjectEditor.PageState*
+  name: PageState
+  href: api/Core2D.Editor.ProjectEditor.html#Core2D_Editor_ProjectEditor_PageState_
+  commentId: Overload:Core2D.Editor.ProjectEditor.PageState
+  isSpec: "True"
+  fullName: Core2D.Editor.ProjectEditor.PageState
+  nameWithType: ProjectEditor.PageState
 - uid: Core2D.Editor.ProjectEditor.PathConverter
   name: PathConverter
   href: api/Core2D.Editor.ProjectEditor.html#Core2D_Editor_ProjectEditor_PathConverter
@@ -13659,19 +13750,6 @@ references:
   isSpec: "True"
   fullName: Core2D.Editor.ProjectEditor.RecentProjects
   nameWithType: ProjectEditor.RecentProjects
-- uid: Core2D.Editor.ProjectEditor.Renderers
-  name: Renderers
-  href: api/Core2D.Editor.ProjectEditor.html#Core2D_Editor_ProjectEditor_Renderers
-  commentId: P:Core2D.Editor.ProjectEditor.Renderers
-  fullName: Core2D.Editor.ProjectEditor.Renderers
-  nameWithType: ProjectEditor.Renderers
-- uid: Core2D.Editor.ProjectEditor.Renderers*
-  name: Renderers
-  href: api/Core2D.Editor.ProjectEditor.html#Core2D_Editor_ProjectEditor_Renderers_
-  commentId: Overload:Core2D.Editor.ProjectEditor.Renderers
-  isSpec: "True"
-  fullName: Core2D.Editor.ProjectEditor.Renderers
-  nameWithType: ProjectEditor.Renderers
 - uid: Core2D.Editor.ProjectEditor.ScriptRunner
   name: ScriptRunner
   href: api/Core2D.Editor.ProjectEditor.html#Core2D_Editor_ProjectEditor_ScriptRunner
