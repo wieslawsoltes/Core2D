@@ -24,110 +24,50 @@ namespace Core2D.Editor.Factories
             _serviceProvider = serviceProvider;
         }
 
-        /// <summary>
-        /// Creates a new instance of the <see cref="ILibrary{IShapeStyle}"/> class.
-        /// </summary>
-        /// <returns>The new instance of the <see cref="ILibrary{IShapeStyle}"/>.</returns>
-        public ILibrary<IShapeStyle> DefaultStyleLibrary()
+        private ILibrary<IShapeStyle> DefaultStyleLibrary()
         {
             var factory = _serviceProvider.GetService<IFactory>();
             var sgd = factory.CreateLibrary<IShapeStyle>("Default");
 
             var builder = sgd.Items.ToBuilder();
+
             builder.Add(factory.CreateShapeStyle("Black", 255, 0, 0, 0, 255, 0, 0, 0, 2.0));
             builder.Add(factory.CreateShapeStyle("Red", 255, 255, 0, 0, 255, 255, 0, 0, 2.0));
             builder.Add(factory.CreateShapeStyle("Green", 255, 0, 255, 0, 255, 0, 255, 0, 2.0));
             builder.Add(factory.CreateShapeStyle("Blue", 255, 0, 0, 255, 255, 0, 0, 255, 2.0));
-            builder.Add(factory.CreateShapeStyle("Cyan", 255, 0, 255, 255, 255, 0, 255, 255, 2.0));
-            builder.Add(factory.CreateShapeStyle("Magenta", 255, 255, 0, 255, 255, 255, 0, 255, 2.0));
-            builder.Add(factory.CreateShapeStyle("Yellow", 255, 255, 255, 0, 255, 255, 255, 0, 2.0));
-            sgd.Items = builder.ToImmutable();
 
+            var dash = factory.CreateShapeStyle("Dash", 255, 0, 0, 0, 255, 0, 0, 0, 2.0);
+            dash.Dashes = "2 2";
+            dash.DashOffset = 1.0;
+            builder.Add(dash);
+
+            var dot = factory.CreateShapeStyle("Dot", 255, 0, 0, 0, 255, 0, 0, 0, 2.0);
+            dot.Dashes = "0 2";
+            dot.DashOffset = 0.0;
+            builder.Add(dot);
+
+            var dashDot = factory.CreateShapeStyle("DashDot", 255, 0, 0, 0, 255, 0, 0, 0, 2.0);
+            dashDot.Dashes = "2 2 0 2";
+            dashDot.DashOffset = 1.0;
+            builder.Add(dashDot);
+
+            var dashDotDot = factory.CreateShapeStyle("DashDotDot", 255, 0, 0, 0, 255, 0, 0, 0, 2.0);
+            dashDotDot.Dashes = "2 2 0 2 0 2";
+            dashDotDot.DashOffset = 1.0;
+            builder.Add(dashDotDot);
+
+            sgd.Items = builder.ToImmutable();
             sgd.Selected = sgd.Items.FirstOrDefault();
 
             return sgd;
         }
 
-        // TODO: Add WireStyleLibrary with `IsCurved=true`  (Auto, Horizontal, Vertical)
-
-        // TODO: Add ArrowStyleLibrary with arrow type: Rectangle, Ellipse, Arrow and (Start, End, Both)
-
-        /// <summary>
-        /// Creates a new instance of the <see cref="ILibrary{ShapeStyle}"/> class.
-        /// </summary>
-        /// <returns>The new instance of the <see cref="ILibrary{ShapeStyle}"/>.</returns>
-        public ILibrary<IShapeStyle> LinesStyleLibrary()
-        {
-            var factory = _serviceProvider.GetService<IFactory>();
-            var sgdl = factory.CreateLibrary<IShapeStyle>("Lines");
-
-            var solid = factory.CreateShapeStyle("Solid", 255, 0, 0, 0, 255, 0, 0, 0, 2.0);
-            solid.Dashes = default;
-            solid.DashOffset = 0.0;
-
-            var dash = factory.CreateShapeStyle("Dash", 255, 0, 0, 0, 255, 0, 0, 0, 2.0);
-            dash.Dashes = "2 2";
-            dash.DashOffset = 1.0;
-
-            var dot = factory.CreateShapeStyle("Dot", 255, 0, 0, 0, 255, 0, 0, 0, 2.0);
-            dot.Dashes = "0 2";
-            dot.DashOffset = 0.0;
-
-            var dashDot = factory.CreateShapeStyle("DashDot", 255, 0, 0, 0, 255, 0, 0, 0, 2.0);
-            dashDot.Dashes = "2 2 0 2";
-            dashDot.DashOffset = 1.0;
-
-            var dashDotDot = factory.CreateShapeStyle("DashDotDot", 255, 0, 0, 0, 255, 0, 0, 0, 2.0);
-            dashDotDot.Dashes = "2 2 0 2 0 2";
-            dashDotDot.DashOffset = 1.0;
-
-            var builder = sgdl.Items.ToBuilder();
-            builder.Add(solid);
-            builder.Add(dash);
-            builder.Add(dot);
-            builder.Add(dashDot);
-            builder.Add(dashDotDot);
-            sgdl.Items = builder.ToImmutable();
-
-            sgdl.Selected = sgdl.Items.FirstOrDefault();
-
-            return sgdl;
-        }
-
-        /// <summary>
-        /// Creates a new instance of the <see cref="ILibrary{ShapeStyle}"/> class.
-        /// </summary>
-        /// <returns>The new instance of the <see cref="ILibrary{ShapeStyle}"/>.</returns>
-        public ILibrary<IShapeStyle> TemplateStyleLibrary()
-        {
-            var factory = _serviceProvider.GetService<IFactory>();
-            var sgt = factory.CreateLibrary<IShapeStyle>("Template");
-            var gs = factory.CreateShapeStyle("Grid", 255, 222, 222, 222, 255, 222, 222, 222, 1.0);
-
-            var builder = sgt.Items.ToBuilder();
-            builder.Add(gs);
-            sgt.Items = builder.ToImmutable();
-
-            sgt.Selected = sgt.Items.FirstOrDefault();
-
-            return sgt;
-        }
-
-        /// <summary>
-        /// Creates a new instance of the <see cref="PageContainer"/> class.
-        /// </summary>
-        /// <param name="containerFactory">The container factory.</param>
-        /// <param name="project">The new container owner project.</param>
-        /// <param name="name">The new container name.</param>
-        /// <returns>The new instance of the <see cref="PageContainer"/>.</returns>
-        private IPageContainer CreateGridTemplate(IContainerFactory containerFactory, IProjectContainer project, string name)
+        private IPageContainer CreateDefaultTemplate(IContainerFactory containerFactory, IProjectContainer project, string name)
         {
             var factory = _serviceProvider.GetService<IFactory>();
             var template = containerFactory.GetTemplate(project, name);
 
-            var style = project
-                .StyleLibraries.FirstOrDefault(g => g.Name == "Template")
-                .Items.FirstOrDefault(s => s.Name == "Grid");
+            var style = factory.CreateShapeStyle("Default", 255, 222, 222, 222, 255, 222, 222, 222, 1.0);
             var layer = template.Layers.FirstOrDefault();
             var builder = layer.Shapes.ToBuilder();
             var grid = factory.CreateRectangleShape(
@@ -179,7 +119,7 @@ namespace Core2D.Editor.Factories
         {
             var factory = _serviceProvider.GetService<IFactory>();
             var containerFactory = this as IContainerFactory;
-            var project = factory.CreateProjectContainer();
+            var project = factory.CreateProjectContainer("Project1");
 
             // Group Libraries
             var glBuilder = project.GroupLibraries.ToBuilder();
@@ -191,8 +131,6 @@ namespace Core2D.Editor.Factories
             // Style Libraries
             var sgBuilder = project.StyleLibraries.ToBuilder();
             sgBuilder.Add(DefaultStyleLibrary());
-            sgBuilder.Add(LinesStyleLibrary());
-            sgBuilder.Add(TemplateStyleLibrary());
             project.StyleLibraries = sgBuilder.ToImmutable();
 
             project.SetCurrentStyleLibrary(project.StyleLibraries.FirstOrDefault());
@@ -200,10 +138,10 @@ namespace Core2D.Editor.Factories
             // Templates
             var templateBuilder = project.Templates.ToBuilder();
             templateBuilder.Add(containerFactory.GetTemplate(project, "Empty"));
-            templateBuilder.Add(CreateGridTemplate(this, project, "Grid"));
+            templateBuilder.Add(CreateDefaultTemplate(this, project, "Default"));
             project.Templates = templateBuilder.ToImmutable();
 
-            project.SetCurrentTemplate(project.Templates.FirstOrDefault(t => t.Name == "Grid"));
+            project.SetCurrentTemplate(project.Templates.FirstOrDefault(t => t.Name == "Default"));
 
             // Scripts
             var scriptBuilder = project.Scripts.ToBuilder();
@@ -213,8 +151,8 @@ namespace Core2D.Editor.Factories
             project.SetCurrentScript(project.Scripts.FirstOrDefault());
 
             // Documents and Pages
-            var document = containerFactory.GetDocument(project, "Document");
-            var page = containerFactory.GetPage(project, "Page");
+            var document = containerFactory.GetDocument(project, "Document1");
+            var page = containerFactory.GetPage(project, "Page1");
 
             var pageBuilder = document.Pages.ToBuilder();
             pageBuilder.Add(page);
