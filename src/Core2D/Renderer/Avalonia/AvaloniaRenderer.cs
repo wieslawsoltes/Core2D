@@ -116,7 +116,7 @@ namespace Core2D.Renderer.Avalonia
             if (style.Dashes != null)
             {
                 dashStyle = new AM.DashStyle(
-                    StyleHelper.ConvertDashesToDoubleArray(style.Dashes, strokeWidth),
+                    StyleHelper.ConvertDashesToDoubleArray(style.Dashes, 1.0),
                     style.DashOffset);
             }
 
