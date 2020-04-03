@@ -74,7 +74,6 @@
     <RdXmlFile Include="Native\csvhelper.rd.xml" />
     <RdXmlFile Include="Native\netdxf.rd.xml" />
     <RdXmlFile Include="Native\newtonsoft.json.rd.xml" />
-    <RdXmlFile Include="Native\portable.xaml.rd.xml" />
     <!--<RdXmlFile Include="Native\roslyn.rd.xml"/>-->
     <RdXmlFile Include="Native\rx.rd.xml" />
     <IlcArg Include="--stacktracedata" />
@@ -124,7 +123,6 @@
     <PackageReference Include="netDXF.netstandard" Version="2.3.0" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
     <PackageReference Include="PDFsharp" Version="1.50.5147" />
-    <PackageReference Include="Portable.Xaml" Version="0.24.0" />
     <PackageReference Include="reactiveui" Version="11.2.3" />
     <PackageReference Include="SkiaSharp" Version="1.68.1.1" />
     <PackageReference Include="SkiaSharp.NativeAssets.Linux" Version="1.68.1.1" />
