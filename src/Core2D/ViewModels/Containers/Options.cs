@@ -22,9 +22,6 @@ namespace Core2D.Containers
         private bool _defaultIsSmoothJoin = true;
         private FillRule _defaultFillRule = FillRule.EvenOdd;
         private bool _tryToConnect = false;
-        private IBaseShape _pointShape;
-        private IShapeStyle _selectionStyle;
-        private IShapeStyle _helperStyle;
 
         /// <summary>
         /// Gets or sets how grid snapping is handled. 
@@ -125,33 +122,6 @@ namespace Core2D.Containers
             set => Update(ref _tryToConnect, value);
         }
 
-        /// <summary>
-        /// Gets or sets shape used to draw points.
-        /// </summary>
-        public IBaseShape PointShape
-        {
-            get => _pointShape;
-            set => Update(ref _pointShape, value);
-        }
-
-        /// <summary>
-        /// Gets or sets selection rectangle style.
-        /// </summary>
-        public IShapeStyle SelectionStyle
-        {
-            get => _selectionStyle;
-            set => Update(ref _selectionStyle, value);
-        }
-
-        /// <summary>
-        /// Gets or sets editor helper shapes style.
-        /// </summary>
-        public IShapeStyle HelperStyle
-        {
-            get => _helperStyle;
-            set => Update(ref _helperStyle, value);
-        }
-
         /// <inheritdoc/>
         public override object Copy(IDictionary<object, object> shared)
         {
@@ -223,23 +193,5 @@ namespace Core2D.Containers
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
         public virtual bool ShouldSerializeTryToConnect() => _tryToConnect != default;
-
-        /// <summary>
-        /// Check whether the <see cref="PointShape"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializePointShape() => _pointShape != null;
-
-        /// <summary>
-        /// Check whether the <see cref="SelectionStyle"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeSelectionStyle() => _selectionStyle != null;
-
-        /// <summary>
-        /// Check whether the <see cref="HelperStyle"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeHelperStyle() => _helperStyle != null;
     }
 }

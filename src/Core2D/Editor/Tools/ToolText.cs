@@ -65,7 +65,6 @@ namespace Core2D.Editor.Tools
                         _text = factory.CreateTextShape(
                             sx, sy,
                             (IShapeStyle)style.Copy(null),
-                            editor.Project.Options.PointShape,
                             "Text",
                             editor.Project.Options.DefaultIsStroked);
 
@@ -171,8 +170,7 @@ namespace Core2D.Editor.Tools
                 _serviceProvider,
                 editor.Project.CurrentContainer.HelperLayer,
                 _text,
-                editor.Project.Options.HelperStyle,
-                editor.Project.Options.PointShape);
+                editor.PageState.HelperStyle);
 
             _selection.ToStateBottomRight();
         }

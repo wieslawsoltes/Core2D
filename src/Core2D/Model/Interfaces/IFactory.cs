@@ -265,11 +265,10 @@ namespace Core2D.Interfaces
         /// </summary>
         /// <param name="x">The X coordinate of point.</param>
         /// <param name="y">The Y coordinate of point.</param>
-        /// <param name="shape">The point template.</param>
         /// <param name="alignment">The point alignment.</param>
         /// <param name="name">The shape name.</param>
         /// <returns>The new instance of the <see cref="IPointShape"/> class.</returns>
-        IPointShape CreatePointShape(double x = 0.0, double y = 0.0, IBaseShape shape = null, PointAlignment alignment = PointAlignment.None, string name = "");
+        IPointShape CreatePointShape(double x = 0.0, double y = 0.0, PointAlignment alignment = PointAlignment.None, string name = "");
 
         /// <summary>
         /// Creates a new <see cref="ILineShape"/> instance.
@@ -277,11 +276,10 @@ namespace Core2D.Interfaces
         /// <param name="start">The <see cref="ILineShape.Start"/> point.</param>
         /// <param name="end">The <see cref="ILineShape.End"/> point.</param>
         /// <param name="style">The shape style.</param>
-        /// <param name="point">The point template.</param>
         /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
         /// <param name="name">The shape name.</param>
         /// <returns>The new instance of the <see cref="ILineShape"/> class.</returns>
-        ILineShape CreateLineShape(IPointShape start, IPointShape end, IShapeStyle style, IBaseShape point, bool isStroked = true, string name = "");
+        ILineShape CreateLineShape(IPointShape start, IPointShape end, IShapeStyle style, bool isStroked = true, string name = "");
 
         /// <summary>
         /// Creates a new <see cref="ILineShape"/> instance.
@@ -291,11 +289,10 @@ namespace Core2D.Interfaces
         /// <param name="x2">The X coordinate of <see cref="ILineShape.End"/> point.</param>
         /// <param name="y2">The Y coordinate of <see cref="ILineShape.End"/> point.</param>
         /// <param name="style">The shape style.</param>
-        /// <param name="point">The point template.</param>
         /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
         /// <param name="name">The shape name.</param>
         /// <returns>The new instance of the <see cref="ILineShape"/> class.</returns>
-        ILineShape CreateLineShape(double x1, double y1, double x2, double y2, IShapeStyle style, IBaseShape point, bool isStroked = true, string name = "");
+        ILineShape CreateLineShape(double x1, double y1, double x2, double y2, IShapeStyle style, bool isStroked = true, string name = "");
 
         /// <summary>
         /// Creates a new <see cref="ILineShape"/> instance.
@@ -303,11 +300,10 @@ namespace Core2D.Interfaces
         /// <param name="x">The X coordinate of <see cref="ILineShape.Start"/> and <see cref="ILineShape.End"/> points.</param>
         /// <param name="y">The Y coordinate of <see cref="ILineShape.Start"/> and <see cref="ILineShape.End"/> points.</param>
         /// <param name="style">The shape style.</param>
-        /// <param name="point">The point template.</param>
         /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
         /// <param name="name">The shape name.</param>
         /// <returns>The new instance of the <see cref="ILineShape"/> class.</returns>
-        ILineShape CreateLineShape(double x, double y, IShapeStyle style, IBaseShape point, bool isStroked = true, string name = "");
+        ILineShape CreateLineShape(double x, double y, IShapeStyle style, bool isStroked = true, string name = "");
 
         /// <summary>
         /// Creates a new <see cref="IArcShape"/> instance.
@@ -321,12 +317,11 @@ namespace Core2D.Interfaces
         /// <param name="x4">The X coordinate of <see cref="IArcShape.Point4"/> point.</param>
         /// <param name="y4">The Y coordinate of <see cref="IArcShape.Point4"/> point.</param>
         /// <param name="style">The shape style.</param>
-        /// <param name="point">The point template.</param>
         /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
         /// <param name="isFilled">The flag indicating whether shape is filled.</param>
         /// <param name="name">The shape name.</param>
         /// <returns>The new instance of the <see cref="IArcShape"/> class.</returns>
-        IArcShape CreateArcShape(double x1, double y1, double x2, double y2, double x3, double y3, double x4, double y4, IShapeStyle style, IBaseShape point, bool isStroked = true, bool isFilled = false, string name = "");
+        IArcShape CreateArcShape(double x1, double y1, double x2, double y2, double x3, double y3, double x4, double y4, IShapeStyle style, bool isStroked = true, bool isFilled = false, string name = "");
 
         /// <summary>
         /// Creates a new <see cref="IArcShape"/> instance.
@@ -334,12 +329,11 @@ namespace Core2D.Interfaces
         /// <param name="x">The X coordinate of <see cref="IArcShape.Point1"/>, <see cref="IArcShape.Point2"/>, <see cref="IArcShape.Point3"/> and <see cref="IArcShape.Point4"/> points.</param>
         /// <param name="y">The Y coordinate of <see cref="IArcShape.Point1"/>, <see cref="IArcShape.Point2"/>, <see cref="IArcShape.Point3"/> and <see cref="IArcShape.Point4"/> points.</param>
         /// <param name="style">The shape style.</param>
-        /// <param name="point">The point template.</param>
         /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
         /// <param name="isFilled">The flag indicating whether shape is filled.</param>
         /// <param name="name">The shape name.</param>
         /// <returns>The new instance of the <see cref="IArcShape"/> class.</returns>
-        IArcShape CreateArcShape(double x, double y, IShapeStyle style, IBaseShape point, bool isStroked = true, bool isFilled = false, string name = "");
+        IArcShape CreateArcShape(double x, double y, IShapeStyle style, bool isStroked = true, bool isFilled = false, string name = "");
 
         /// <summary>
         /// Creates a new <see cref="IArcShape"/> instance.
@@ -349,12 +343,11 @@ namespace Core2D.Interfaces
         /// <param name="point3">The <see cref="IArcShape.Point3"/> point.</param>
         /// <param name="point4">The <see cref="IArcShape.Point4"/> point.</param>
         /// <param name="style">The shape style.</param>
-        /// <param name="point">The point template.</param>
         /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
         /// <param name="isFilled">The flag indicating whether shape is filled.</param>
         /// <param name="name">The shape name.</param>
         /// <returns>The new instance of the <see cref="IArcShape"/> class.</returns>
-        IArcShape CreateArcShape(IPointShape point1, IPointShape point2, IPointShape point3, IPointShape point4, IShapeStyle style, IBaseShape point, bool isStroked = true, bool isFilled = false, string name = "");
+        IArcShape CreateArcShape(IPointShape point1, IPointShape point2, IPointShape point3, IPointShape point4, IShapeStyle style, bool isStroked = true, bool isFilled = false, string name = "");
 
         /// <summary>
         /// Creates a new <see cref="IQuadraticBezierShape"/> instance.
@@ -366,12 +359,11 @@ namespace Core2D.Interfaces
         /// <param name="x3">The X coordinate of <see cref="IQuadraticBezierShape.Point3"/> point.</param>
         /// <param name="y3">The Y coordinate of <see cref="IQuadraticBezierShape.Point3"/> point.</param>
         /// <param name="style">The shape style.</param>
-        /// <param name="point">The point template.</param>
         /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
         /// <param name="isFilled">The flag indicating whether shape is filled.</param>
         /// <param name="name">The shape name.</param>
         /// <returns>The new instance of the <see cref="IQuadraticBezierShape"/> class.</returns>
-        IQuadraticBezierShape CreateQuadraticBezierShape(double x1, double y1, double x2, double y2, double x3, double y3, IShapeStyle style, IBaseShape point, bool isStroked = true, bool isFilled = false, string name = "");
+        IQuadraticBezierShape CreateQuadraticBezierShape(double x1, double y1, double x2, double y2, double x3, double y3, IShapeStyle style, bool isStroked = true, bool isFilled = false, string name = "");
 
         /// <summary>
         /// Creates a new <see cref="IQuadraticBezierShape"/> instance.
@@ -379,12 +371,11 @@ namespace Core2D.Interfaces
         /// <param name="x">The X coordinate of <see cref="IQuadraticBezierShape.Point1"/>, <see cref="IQuadraticBezierShape.Point2"/> and <see cref="IQuadraticBezierShape.Point3"/> points.</param>
         /// <param name="y">The Y coordinate of <see cref="IQuadraticBezierShape.Point1"/>, <see cref="IQuadraticBezierShape.Point2"/> and <see cref="IQuadraticBezierShape.Point3"/> points.</param>
         /// <param name="style">The shape style.</param>
-        /// <param name="point">The point template.</param>
         /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
         /// <param name="isFilled">The flag indicating whether shape is filled.</param>
         /// <param name="name">The shape name.</param>
         /// <returns>The new instance of the <see cref="IQuadraticBezierShape"/> class.</returns>
-        IQuadraticBezierShape CreateQuadraticBezierShape(double x, double y, IShapeStyle style, IBaseShape point, bool isStroked = true, bool isFilled = false, string name = "");
+        IQuadraticBezierShape CreateQuadraticBezierShape(double x, double y, IShapeStyle style, bool isStroked = true, bool isFilled = false, string name = "");
 
         /// <summary>
         /// Creates a new <see cref="IQuadraticBezierShape"/> instance.
@@ -393,12 +384,11 @@ namespace Core2D.Interfaces
         /// <param name="point2">The <see cref="IQuadraticBezierShape.Point2"/> point.</param>
         /// <param name="point3">The <see cref="IQuadraticBezierShape.Point3"/> point.</param>
         /// <param name="style">The shape style.</param>
-        /// <param name="point">The point template.</param>
         /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
         /// <param name="isFilled">The flag indicating whether shape is filled.</param>
         /// <param name="name">The shape name.</param>
         /// <returns>The new instance of the <see cref="IQuadraticBezierShape"/> class.</returns>
-        IQuadraticBezierShape CreateQuadraticBezierShape(IPointShape point1, IPointShape point2, IPointShape point3, IShapeStyle style, IBaseShape point, bool isStroked = true, bool isFilled = false, string name = "");
+        IQuadraticBezierShape CreateQuadraticBezierShape(IPointShape point1, IPointShape point2, IPointShape point3, IShapeStyle style, bool isStroked = true, bool isFilled = false, string name = "");
 
         /// <summary>
         /// Creates a new <see cref="ICubicBezierShape"/> instance.
@@ -412,12 +402,11 @@ namespace Core2D.Interfaces
         /// <param name="x4">The X coordinate of <see cref="ICubicBezierShape.Point4"/> point.</param>
         /// <param name="y4">The Y coordinate of <see cref="ICubicBezierShape.Point4"/> point.</param>
         /// <param name="style">The shape style.</param>
-        /// <param name="point">The point template.</param>
         /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
         /// <param name="isFilled">The flag indicating whether shape is filled.</param>
         /// <param name="name">The shape name.</param>
         /// <returns>The new instance of the <see cref="ICubicBezierShape"/> class.</returns>
-        ICubicBezierShape CreateCubicBezierShape(double x1, double y1, double x2, double y2, double x3, double y3, double x4, double y4, IShapeStyle style, IBaseShape point, bool isStroked = true, bool isFilled = false, string name = "");
+        ICubicBezierShape CreateCubicBezierShape(double x1, double y1, double x2, double y2, double x3, double y3, double x4, double y4, IShapeStyle style, bool isStroked = true, bool isFilled = false, string name = "");
 
         /// <summary>
         /// Creates a new <see cref="ICubicBezierShape"/> instance.
@@ -425,12 +414,11 @@ namespace Core2D.Interfaces
         /// <param name="x">The X coordinate of <see cref="ICubicBezierShape.Point1"/>, <see cref="ICubicBezierShape.Point2"/>, <see cref="ICubicBezierShape.Point3"/> and <see cref="ICubicBezierShape.Point4"/> points.</param>
         /// <param name="y">The Y coordinate of <see cref="ICubicBezierShape.Point1"/>, <see cref="ICubicBezierShape.Point2"/>, <see cref="ICubicBezierShape.Point3"/> and <see cref="ICubicBezierShape.Point4"/> points.</param>
         /// <param name="style">The shape style.</param>
-        /// <param name="point">The point template.</param>
         /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
         /// <param name="isFilled">The flag indicating whether shape is filled.</param>
         /// <param name="name">The shape name.</param>
         /// <returns>The new instance of the <see cref="ICubicBezierShape"/> class.</returns>
-        ICubicBezierShape CreateCubicBezierShape(double x, double y, IShapeStyle style, IBaseShape point, bool isStroked = true, bool isFilled = false, string name = "");
+        ICubicBezierShape CreateCubicBezierShape(double x, double y, IShapeStyle style, bool isStroked = true, bool isFilled = false, string name = "");
 
         /// <summary>
         /// Creates a new <see cref="ICubicBezierShape"/> instance.
@@ -440,12 +428,11 @@ namespace Core2D.Interfaces
         /// <param name="point3">The <see cref="ICubicBezierShape.Point3"/> point.</param>
         /// <param name="point4">The <see cref="ICubicBezierShape.Point4"/> point.</param>
         /// <param name="style">The shape style.</param>
-        /// <param name="point">The point template.</param>
         /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
         /// <param name="isFilled">The flag indicating whether shape is filled.</param>
         /// <param name="name">The shape name.</param>
         /// <returns>The new instance of the <see cref="ICubicBezierShape"/> class.</returns>
-        ICubicBezierShape CreateCubicBezierShape(IPointShape point1, IPointShape point2, IPointShape point3, IPointShape point4, IShapeStyle style, IBaseShape point, bool isStroked = true, bool isFilled = false, string name = "");
+        ICubicBezierShape CreateCubicBezierShape(IPointShape point1, IPointShape point2, IPointShape point3, IPointShape point4, IShapeStyle style, bool isStroked = true, bool isFilled = false, string name = "");
 
         /// <summary>
         /// Creates a new <see cref="IRectangleShape"/> instance.
@@ -455,13 +442,12 @@ namespace Core2D.Interfaces
         /// <param name="x2">The X coordinate of <see cref="ITextShape.BottomRight"/> corner point.</param>
         /// <param name="y2">The Y coordinate of <see cref="ITextShape.BottomRight"/> corner point.</param>
         /// <param name="style">The shape style.</param>
-        /// <param name="point">The point template.</param>
         /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
         /// <param name="isFilled">The flag indicating whether shape is filled.</param>
         /// <param name="text">The text string.</param>
         /// <param name="name">The shape name.</param>
         /// <returns>The new instance of the <see cref="IRectangleShape"/> class.</returns>
-        IRectangleShape CreateRectangleShape(double x1, double y1, double x2, double y2, IShapeStyle style, IBaseShape point, bool isStroked = true, bool isFilled = false, string text = null, string name = "");
+        IRectangleShape CreateRectangleShape(double x1, double y1, double x2, double y2, IShapeStyle style, bool isStroked = true, bool isFilled = false, string text = null, string name = "");
 
         /// <summary>
         /// Creates a new <see cref="IRectangleShape"/> instance.
@@ -469,13 +455,12 @@ namespace Core2D.Interfaces
         /// <param name="x">The X coordinate of <see cref="ITextShape.TopLeft"/> and <see cref="ITextShape.BottomRight"/> corner points.</param>
         /// <param name="y">The Y coordinate of <see cref="ITextShape.TopLeft"/> and <see cref="ITextShape.BottomRight"/> corner points.</param>
         /// <param name="style">The shape style.</param>
-        /// <param name="point">The point template.</param>
         /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
         /// <param name="isFilled">The flag indicating whether shape is filled.</param>
         /// <param name="text">The text string.</param>
         /// <param name="name">The shape name.</param>
         /// <returns>The new instance of the <see cref="IRectangleShape"/> class.</returns>
-        IRectangleShape CreateRectangleShape(double x, double y, IShapeStyle style, IBaseShape point, bool isStroked = true, bool isFilled = false, string text = null, string name = "");
+        IRectangleShape CreateRectangleShape(double x, double y, IShapeStyle style, bool isStroked = true, bool isFilled = false, string text = null, string name = "");
 
         /// <summary>
         /// Creates a new <see cref="IRectangleShape"/> instance.
@@ -483,13 +468,12 @@ namespace Core2D.Interfaces
         /// <param name="topLeft">The <see cref="ITextShape.TopLeft"/> corner point.</param>
         /// <param name="bottomRight">The <see cref="ITextShape.BottomRight"/> corner point.</param>
         /// <param name="style">The shape style.</param>
-        /// <param name="point">The point template.</param>
         /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
         /// <param name="isFilled">The flag indicating whether shape is filled.</param>
         /// <param name="text">The text string.</param>
         /// <param name="name">The shape name.</param>
         /// <returns>The new instance of the <see cref="IRectangleShape"/> class.</returns>
-        IRectangleShape CreateRectangleShape(IPointShape topLeft, IPointShape bottomRight, IShapeStyle style, IBaseShape point, bool isStroked = true, bool isFilled = false, string text = null, string name = "");
+        IRectangleShape CreateRectangleShape(IPointShape topLeft, IPointShape bottomRight, IShapeStyle style, bool isStroked = true, bool isFilled = false, string text = null, string name = "");
 
         /// <summary>
         /// Creates a new <see cref="IEllipseShape"/> instance.
@@ -499,13 +483,12 @@ namespace Core2D.Interfaces
         /// <param name="x2">The X coordinate of <see cref="ITextShape.BottomRight"/> corner point.</param>
         /// <param name="y2">The Y coordinate of <see cref="ITextShape.BottomRight"/> corner point.</param>
         /// <param name="style">The shape style.</param>
-        /// <param name="point">The point template.</param>
         /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
         /// <param name="isFilled">The flag indicating whether shape is filled.</param>
         /// <param name="text">The text string.</param>
         /// <param name="name">The shape name.</param>
         /// <returns>The new instance of the <see cref="IEllipseShape"/> class.</returns>
-        IEllipseShape CreateEllipseShape(double x1, double y1, double x2, double y2, IShapeStyle style, IBaseShape point, bool isStroked = true, bool isFilled = false, string text = null, string name = "");
+        IEllipseShape CreateEllipseShape(double x1, double y1, double x2, double y2, IShapeStyle style, bool isStroked = true, bool isFilled = false, string text = null, string name = "");
 
         /// <summary>
         /// Creates a new <see cref="IEllipseShape"/> instance.
@@ -513,13 +496,12 @@ namespace Core2D.Interfaces
         /// <param name="x">The X coordinate of <see cref="ITextShape.TopLeft"/> and <see cref="ITextShape.BottomRight"/> corner points.</param>
         /// <param name="y">The Y coordinate of <see cref="ITextShape.TopLeft"/> and <see cref="ITextShape.BottomRight"/> corner points.</param>
         /// <param name="style">The shape style.</param>
-        /// <param name="point">The point template.</param>
         /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
         /// <param name="isFilled">The flag indicating whether shape is filled.</param>
         /// <param name="text">The text string.</param>
         /// <param name="name">The shape name.</param>
         /// <returns>The new instance of the <see cref="IEllipseShape"/> class.</returns>
-        IEllipseShape CreateEllipseShape(double x, double y, IShapeStyle style, IBaseShape point, bool isStroked = true, bool isFilled = false, string text = null, string name = "");
+        IEllipseShape CreateEllipseShape(double x, double y, IShapeStyle style, bool isStroked = true, bool isFilled = false, string text = null, string name = "");
 
         /// <summary>
         /// Creates a new <see cref="IEllipseShape"/> instance.
@@ -527,13 +509,12 @@ namespace Core2D.Interfaces
         /// <param name="topLeft">The <see cref="ITextShape.TopLeft"/> corner point.</param>
         /// <param name="bottomRight">The <see cref="ITextShape.BottomRight"/> corner point.</param>
         /// <param name="style">The shape style.</param>
-        /// <param name="point">The point template.</param>
         /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
         /// <param name="isFilled">The flag indicating whether shape is filled.</param>
         /// <param name="text">The text string.</param>
         /// <param name="name">The shape name.</param>
         /// <returns>The new instance of the <see cref="IEllipseShape"/> class.</returns>
-        IEllipseShape CreateEllipseShape(IPointShape topLeft, IPointShape bottomRight, IShapeStyle style, IBaseShape point, bool isStroked = true, bool isFilled = false, string text = null, string name = "");
+        IEllipseShape CreateEllipseShape(IPointShape topLeft, IPointShape bottomRight, IShapeStyle style, bool isStroked = true, bool isFilled = false, string text = null, string name = "");
 
         /// <summary>
         /// Creates a new <see cref="IPathShape"/> instance.
@@ -564,12 +545,11 @@ namespace Core2D.Interfaces
         /// <param name="x2">The X coordinate of <see cref="ITextShape.BottomRight"/> corner point.</param>
         /// <param name="y2">The Y coordinate of <see cref="ITextShape.BottomRight"/> corner point.</param>
         /// <param name="style">The shape style.</param>
-        /// <param name="point">The point template.</param>
         /// <param name="text">The text string.</param>
         /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
         /// <param name="name">The shape name.</param>
         /// <returns>The new instance of the <see cref="ITextShape"/> class.</returns>
-        ITextShape CreateTextShape(double x1, double y1, double x2, double y2, IShapeStyle style, IBaseShape point, string text, bool isStroked = true, string name = "");
+        ITextShape CreateTextShape(double x1, double y1, double x2, double y2, IShapeStyle style, string text, bool isStroked = true, string name = "");
 
         /// <summary>
         /// Creates a new <see cref="ITextShape"/> instance.
@@ -577,12 +557,11 @@ namespace Core2D.Interfaces
         /// <param name="x">The X coordinate of <see cref="ITextShape.TopLeft"/> and <see cref="ITextShape.BottomRight"/> corner points.</param>
         /// <param name="y">The Y coordinate of <see cref="ITextShape.TopLeft"/> and <see cref="ITextShape.BottomRight"/> corner points.</param>
         /// <param name="style">The shape style.</param>
-        /// <param name="point">The point template.</param>
         /// <param name="text">The text string.</param>
         /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
         /// <param name="name">The shape name.</param>
         /// <returns>The new instance of the <see cref="ITextShape"/> class.</returns>
-        ITextShape CreateTextShape(double x, double y, IShapeStyle style, IBaseShape point, string text, bool isStroked = true, string name = "");
+        ITextShape CreateTextShape(double x, double y, IShapeStyle style, string text, bool isStroked = true, string name = "");
 
         /// <summary>
         /// Creates a new <see cref="ITextShape"/> instance.
@@ -590,12 +569,11 @@ namespace Core2D.Interfaces
         /// <param name="topLeft">The <see cref="ITextShape.TopLeft"/> corner point.</param>
         /// <param name="bottomRight">The <see cref="ITextShape.BottomRight"/> corner point.</param>
         /// <param name="style">The shape style.</param>
-        /// <param name="point">The point template.</param>
         /// <param name="text">The text string.</param>
         /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
         /// <param name="name">The shape name.</param>
         /// <returns>The new instance of the <see cref="ITextShape"/> class.</returns>
-        ITextShape CreateTextShape(IPointShape topLeft, IPointShape bottomRight, IShapeStyle style, IBaseShape point, string text, bool isStroked = true, string name = "");
+        ITextShape CreateTextShape(IPointShape topLeft, IPointShape bottomRight, IShapeStyle style, string text, bool isStroked = true, string name = "");
 
         /// <summary>
         /// Creates a new <see cref="IImageShape"/> instance.
@@ -605,14 +583,13 @@ namespace Core2D.Interfaces
         /// <param name="x2">The X coordinate of <see cref="ITextShape.BottomRight"/> corner point.</param>
         /// <param name="y2">The Y coordinate of <see cref="ITextShape.BottomRight"/> corner point.</param>
         /// <param name="style">The shape style.</param>
-        /// <param name="point">The point template.</param>
         /// <param name="key">The image key.</param>
         /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
         /// <param name="isFilled">The flag indicating whether shape is filled.</param>
         /// <param name="text">The text string.</param>
         /// <param name="name">The shape name.</param>
         /// <returns>The new instance of the <see cref="IImageShape"/> class.</returns>
-        IImageShape CreateImageShape(double x1, double y1, double x2, double y2, IShapeStyle style, IBaseShape point, string key, bool isStroked = false, bool isFilled = false, string text = null, string name = "");
+        IImageShape CreateImageShape(double x1, double y1, double x2, double y2, IShapeStyle style, string key, bool isStroked = false, bool isFilled = false, string text = null, string name = "");
 
         /// <summary>
         /// Creates a new <see cref="IImageShape"/> instance.
@@ -620,14 +597,13 @@ namespace Core2D.Interfaces
         /// <param name="x">The X coordinate of <see cref="ITextShape.TopLeft"/> and <see cref="ITextShape.BottomRight"/> corner points.</param>
         /// <param name="y">The Y coordinate of <see cref="ITextShape.TopLeft"/> and <see cref="ITextShape.BottomRight"/> corner points.</param>
         /// <param name="style">The shape style.</param>
-        /// <param name="point">The point template.</param>
         /// <param name="key">The image key.</param>
         /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
         /// <param name="isFilled">The flag indicating whether shape is filled.</param>
         /// <param name="text">The text string.</param>
         /// <param name="name">The shape name.</param>
         /// <returns>The new instance of the <see cref="IImageShape"/> class.</returns>
-        IImageShape CreateImageShape(double x, double y, IShapeStyle style, IBaseShape point, string key, bool isStroked = false, bool isFilled = false, string text = null, string name = "");
+        IImageShape CreateImageShape(double x, double y, IShapeStyle style, string key, bool isStroked = false, bool isFilled = false, string text = null, string name = "");
 
         /// <summary>
         /// Creates a new <see cref="IImageShape"/> instance.
@@ -635,14 +611,13 @@ namespace Core2D.Interfaces
         /// <param name="topLeft">The <see cref="ITextShape.TopLeft"/> corner point.</param>
         /// <param name="bottomRight">The <see cref="ITextShape.BottomRight"/> corner point.</param>
         /// <param name="style">The shape style.</param>
-        /// <param name="point">The point template.</param>
         /// <param name="key">The image key.</param>
         /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
         /// <param name="isFilled">The flag indicating whether shape is filled.</param>
         /// <param name="text">The text string.</param>
         /// <param name="name">The shape name.</param>
         /// <returns>The new instance of the <see cref="IImageShape"/> class.</returns>
-        IImageShape CreateImageShape(IPointShape topLeft, IPointShape bottomRight, IShapeStyle style, IBaseShape point, string key, bool isStroked = false, bool isFilled = false, string text = null, string name = "");
+        IImageShape CreateImageShape(IPointShape topLeft, IPointShape bottomRight, IShapeStyle style, string key, bool isStroked = false, bool isFilled = false, string text = null, string name = "");
 
         /// <summary>
         /// Creates a new <see cref="IGroupShape"/> instance.

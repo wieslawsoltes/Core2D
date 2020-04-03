@@ -61,7 +61,7 @@ namespace Core2D.Editor.Tools.Path
             {
                 case State.Point1:
                     {
-                        _quadraticBezier.Point1 = editor.TryToGetConnectionPoint(sx, sy) ?? factory.CreatePointShape(sx, sy, editor.Project.Options.PointShape);
+                        _quadraticBezier.Point1 = editor.TryToGetConnectionPoint(sx, sy) ?? factory.CreatePointShape(sx, sy);
                         if (!pathTool.IsInitialized)
                         {
                             pathTool.InitializeWorkingPath(_quadraticBezier.Point1);
@@ -71,8 +71,8 @@ namespace Core2D.Editor.Tools.Path
                             _quadraticBezier.Point1 = pathTool.GetLastPathPoint();
                         }
 
-                        _quadraticBezier.Point2 = factory.CreatePointShape(sx, sy, editor.Project.Options.PointShape);
-                        _quadraticBezier.Point3 = factory.CreatePointShape(sx, sy, editor.Project.Options.PointShape);
+                        _quadraticBezier.Point2 = factory.CreatePointShape(sx, sy);
+                        _quadraticBezier.Point3 = factory.CreatePointShape(sx, sy);
                         pathTool.GeometryContext.QuadraticBezierTo(
                             _quadraticBezier.Point2,
                             _quadraticBezier.Point3,
@@ -123,8 +123,8 @@ namespace Core2D.Editor.Tools.Path
                         }
 
                         _quadraticBezier.Point1 = _quadraticBezier.Point3;
-                        _quadraticBezier.Point2 = factory.CreatePointShape(sx, sy, editor.Project.Options.PointShape);
-                        _quadraticBezier.Point3 = factory.CreatePointShape(sx, sy, editor.Project.Options.PointShape);
+                        _quadraticBezier.Point2 = factory.CreatePointShape(sx, sy);
+                        _quadraticBezier.Point3 = factory.CreatePointShape(sx, sy);
                         pathTool.GeometryContext.QuadraticBezierTo(
                             _quadraticBezier.Point2,
                             _quadraticBezier.Point3,
@@ -218,8 +218,7 @@ namespace Core2D.Editor.Tools.Path
                 _serviceProvider,
                 editor.Project.CurrentContainer.HelperLayer,
                 _quadraticBezier,
-                editor.Project.Options.HelperStyle,
-                editor.Project.Options.PointShape);
+                editor.PageState.HelperStyle);
             _selection.ToStatePoint3();
         }
 

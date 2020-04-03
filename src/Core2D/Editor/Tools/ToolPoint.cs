@@ -56,7 +56,7 @@ namespace Core2D.Editor.Tools
             {
                 case State.Point:
                     {
-                        _point = factory.CreatePointShape(sx, sy, editor.Project.Options.PointShape);
+                        _point = factory.CreatePointShape(sx, sy);
 
                         if (editor.Project.Options.TryToConnect)
                         {

@@ -17,7 +17,6 @@ namespace Core2D.Editor.Tools.Selection
         private readonly ILayerContainer _layer;
         private readonly IArcShape _arc;
         private readonly IShapeStyle _style;
-        private readonly IBaseShape _point;
         private ILineShape _startLine;
         private ILineShape _endLine;
         private IEllipseShape _ellipse;
@@ -34,14 +33,12 @@ namespace Core2D.Editor.Tools.Selection
         /// <param name="layer">The selection shapes layer.</param>
         /// <param name="shape">The selected shape.</param>
         /// <param name="style">The selection shapes style.</param>
-        /// <param name="point">The selection point shape.</param>
-        public ToolArcSelection(IServiceProvider serviceProvider, ILayerContainer layer, IArcShape shape, IShapeStyle style, IBaseShape point)
+        public ToolArcSelection(IServiceProvider serviceProvider, ILayerContainer layer, IArcShape shape, IShapeStyle style)
         {
             _serviceProvider = serviceProvider;
             _layer = layer;
             _arc = shape;
             _style = style;
-            _point = point;
         }
 
         /// <summary>
@@ -49,10 +46,10 @@ namespace Core2D.Editor.Tools.Selection
         /// </summary>
         public void ToStatePoint2()
         {
-            _ellipse = _serviceProvider.GetService<IFactory>().CreateEllipseShape(0, 0, _style, null);
-            _p1HelperPoint = _serviceProvider.GetService<IFactory>().CreatePointShape(0, 0, _point);
-            _p2HelperPoint = _serviceProvider.GetService<IFactory>().CreatePointShape(0, 0, _point);
-            _centerHelperPoint = _serviceProvider.GetService<IFactory>().CreatePointShape(0, 0, _point);
+            _ellipse = _serviceProvider.GetService<IFactory>().CreateEllipseShape(0, 0, _style);
+            _p1HelperPoint = _serviceProvider.GetService<IFactory>().CreatePointShape(0, 0);
+            _p2HelperPoint = _serviceProvider.GetService<IFactory>().CreatePointShape(0, 0);
+            _centerHelperPoint = _serviceProvider.GetService<IFactory>().CreatePointShape(0, 0);
 
             _layer.Shapes = _layer.Shapes.Add(_ellipse);
             _layer.Shapes = _layer.Shapes.Add(_p1HelperPoint);
@@ -77,8 +74,8 @@ namespace Core2D.Editor.Tools.Selection
                 _p2HelperPoint = null;
             }
 
-            _startLine = _serviceProvider.GetService<IFactory>().CreateLineShape(0, 0, _style, null);
-            _startHelperPoint = _serviceProvider.GetService<IFactory>().CreatePointShape(0, 0, _point);
+            _startLine = _serviceProvider.GetService<IFactory>().CreateLineShape(0, 0, _style);
+            _startHelperPoint = _serviceProvider.GetService<IFactory>().CreatePointShape(0, 0);
 
             _layer.Shapes = _layer.Shapes.Add(_startLine);
             _layer.Shapes = _layer.Shapes.Add(_startHelperPoint);
@@ -95,8 +92,8 @@ namespace Core2D.Editor.Tools.Selection
                 _ellipse = null;
             }
 
-            _endLine = _serviceProvider.GetService<IFactory>().CreateLineShape(0, 0, _style, null);
-            _endHelperPoint = _serviceProvider.GetService<IFactory>().CreatePointShape(0, 0, _point);
+            _endLine = _serviceProvider.GetService<IFactory>().CreateLineShape(0, 0, _style);
+            _endHelperPoint = _serviceProvider.GetService<IFactory>().CreatePointShape(0, 0);
 
             _layer.Shapes = _layer.Shapes.Add(_endLine);
             _layer.Shapes = _layer.Shapes.Add(_endHelperPoint);

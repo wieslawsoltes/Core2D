@@ -14,7 +14,6 @@ namespace Core2D.Shapes
         private double _x;
         private double _y;
         private PointAlignment _alignment;
-        private IBaseShape _shape;
 
         /// <inheritdoc/>
         public override Type TargetType => typeof(IPointShape);
@@ -41,37 +40,21 @@ namespace Core2D.Shapes
         }
 
         /// <inheritdoc/>
-        public IBaseShape Shape
-        {
-            get => _shape;
-            set => Update(ref _shape, value);
-        }
-
-        /// <inheritdoc/>
         public override void Draw(object dc, IShapeRenderer renderer, double dx, double dy)
         {
-            if (_shape != null)
+            if (State.Flags.HasFlag(ShapeStateFlags.Visible))
             {
-                if (State.Flags.HasFlag(ShapeStateFlags.Visible))
-                {
-                    var state = base.BeginTransform(dc, renderer);
+                var state = base.BeginTransform(dc, renderer);
 
-                    _shape.Draw(dc, renderer, X + dx, Y + dy);
+                renderer.Draw(dc, this, dx, dy);
 
-                    base.EndTransform(dc, renderer, state);
-                }
+                base.EndTransform(dc, renderer, state);
             }
         }
 
         /// <inheritdoc/>
         public override void Bind(IDataFlow dataFlow, object db, object r)
         {
-            if (_shape != null)
-            {
-                var record = Data?.Record ?? r;
-
-                _shape.Bind(dataFlow, db, record);
-            }
         }
 
         /// <inheritdoc/>
@@ -129,8 +112,7 @@ namespace Core2D.Shapes
                 Data = data,
                 X = X,
                 Y = Y,
-                Alignment = Alignment,
-                Shape = Shape
+                Alignment = Alignment
             };
         }
 
@@ -160,11 +142,5 @@ namespace Core2D.Shapes
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
         public virtual bool ShouldSerializeAlignment() => _alignment != default;
-
-        /// <summary>
-        /// Check whether the <see cref="Shape"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeShape() => _shape != null;
     }
 }

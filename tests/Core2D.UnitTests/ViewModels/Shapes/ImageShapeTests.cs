@@ -12,7 +12,7 @@ namespace Core2D.Shapes.UnitTests
         public void Inherits_From_TextShape()
         {
             var style = _factory.CreateShapeStyle();
-            var target = _factory.CreateImageShape(0, 0, style, null, "key");
+            var target = _factory.CreateImageShape(0, 0, style, "key");
             Assert.True(target is TextShape);
         }
     }

@@ -416,21 +416,6 @@ namespace Core2D.Editor
             {
                 return;
             }
-
-            if (options.PointShape != null)
-            {
-                Add(options.PointShape);
-            }
-
-            if (options.SelectionStyle != null)
-            {
-                Add(options.SelectionStyle);
-            }
-
-            if (options.HelperStyle != null)
-            {
-                Add(options.HelperStyle);
-            }
         }
 
         private void Remove(IOptions options)
@@ -438,21 +423,6 @@ namespace Core2D.Editor
             if (options == null)
             {
                 return;
-            }
-
-            if (options.PointShape != null)
-            {
-                Remove(options.PointShape);
-            }
-
-            if (options.SelectionStyle != null)
-            {
-                Remove(options.SelectionStyle);
-            }
-
-            if (options.HelperStyle != null)
-            {
-                Remove(options.HelperStyle);
             }
         }
 
@@ -729,14 +699,7 @@ namespace Core2D.Editor
                 shape.Transform.PropertyChanged += ObserveTransform;
             }
 
-            if (shape is IPointShape point)
-            {
-                if (point.Shape != null)
-                {
-                    point.Shape.PropertyChanged += ObserveShape;
-                }
-            }
-            else if (shape is ILineShape line)
+            if (shape is ILineShape line)
             {
                 if (line.Start != null)
                 {
@@ -907,14 +870,7 @@ namespace Core2D.Editor
                 shape.Transform.PropertyChanged -= ObserveTransform;
             }
 
-            if (shape is IPointShape point)
-            {
-                if (point.Shape != null)
-                {
-                    point.Shape.PropertyChanged -= ObserveShape;
-                }
-            }
-            else if (shape is ILineShape line)
+            if (shape is ILineShape line)
             {
                 if (line.Start != null)
                 {

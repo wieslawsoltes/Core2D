@@ -1,0 +1,86 @@
+﻿<UserControl x:Class="Core2D.UI.Avalonia.Views.Renderer.ShapeRendererStateControl"
+             xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:converters="clr-namespace:Core2D.UI.Avalonia.Converters;assembly=Core2D"
+             xmlns:ShapesCore="clr-namespace:Core2D.Shapes;assembly=Core2D" 
+             xmlns:Designer="clr-namespace:Core2D.Editor.Designer;assembly=Core2D"
+             mc:Ignorable="d"
+             d:DataContext="{x:Static Designer:DesignerContext.ShapeRendererState}"
+             d:DesignWidth="250" d:DesignHeight="400">
+    <TabControl Classes="default">
+        <TabItem Header="Zoom" Classes="property">
+            <ScrollViewer>
+                <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto" ColumnDefinitions="Auto,*">
+                    <TextBlock Text="PanX" Classes="left" Grid.Row="0" Grid.Column="0"/>
+                    <TextBox Text="{Binding PanX, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
+                    <TextBlock Text="PanY" Classes="left" Grid.Row="1" Grid.Column="0"/>
+                    <TextBox Text="{Binding PanY, Mode=TwoWay}" Classes="left" Grid.Row="1" Grid.Column="1"/>
+                    <TextBlock Text="ZoomX" Classes="left" Grid.Row="2" Grid.Column="0"/>
+                    <TextBox Text="{Binding ZoomX, Mode=TwoWay}" Classes="left" Grid.Row="2" Grid.Column="1"/>
+                    <TextBlock Text="ZoomY" Classes="left" Grid.Row="3" Grid.Column="0"/>
+                    <TextBox Text="{Binding ZoomY, Mode=TwoWay}" Classes="left" Grid.Row="3" Grid.Column="1"/>
+                </Grid>
+            </ScrollViewer>
+        </TabItem>
+        <TabItem Header="DrawShapeState" Classes="property">
+            <ScrollViewer>
+                <ContentControl Content="{Binding DrawShapeState}"/>
+            </ScrollViewer>
+        </TabItem>
+        <TabItem Header="HoveredShape" Classes="property">
+            <ScrollViewer>
+                <ContentControl Content="{Binding HoveredShape}"/>
+            </ScrollViewer>
+        </TabItem>
+        <TabItem Header="SelectedShape" Classes="property">
+            <ScrollViewer>
+                <ContentControl Content="{Binding SelectedShape}"/>
+            </ScrollViewer>
+        </TabItem>
+        <TabItem Header="SelectedShapes" Classes="property">
+            <ListBox x:Name="shapes" Items="{Binding SelectedShapes}" VirtualizationMode="Simple" Classes="default">
+                <ListBox.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <VirtualizingStackPanel Orientation="Vertical"/>
+                    </ItemsPanelTemplate>
+                </ListBox.ItemsPanel>
+                <ListBox.KeyBindings>
+                    <KeyBinding Command="{Binding $parent[Window].DataContext.OnRemoveShape}" CommandParameter="{Binding #shapes.SelectedItem}" Gesture="Delete"/>
+                </ListBox.KeyBindings>
+                <ListBox.DataTemplates>
+                    <DataTemplate DataType="ShapesCore:IBaseShape">
+                        <TextBlock Text="{Binding Mode=OneWay, Converter={StaticResource ObjectToTypeStringConverter}}" Classes="list">
+                            <TextBlock.ContextMenu>
+                                <ContextMenu Classes="default">
+                                    <MenuItem Header="_Delete" Command="{Binding $parent[Window].DataContext.OnRemoveShape}" CommandParameter="{Binding}"/>
+                                </ContextMenu>
+                            </TextBlock.ContextMenu>
+                        </TextBlock>
+                    </DataTemplate>
+                </ListBox.DataTemplates>
+            </ListBox>
+        </TabItem>
+        <TabItem Header="ImageCache" Classes="property">
+            <ScrollViewer>
+                <ContentControl Content="{Binding ImageCache}"/>
+            </ScrollViewer>
+        </TabItem>
+        <TabItem Header="PointShape" Classes="property">
+            <ScrollViewer>
+                <ContentControl Content="{Binding PointShape}"/>
+            </ScrollViewer>
+        </TabItem>
+        <TabItem Header="SelectionStyle" Classes="property">
+            <ScrollViewer>
+                <ContentControl Content="{Binding SelectionStyle}"/>
+            </ScrollViewer>
+        </TabItem>
+        <TabItem Header="HelperStyle" Classes="property">
+            <ScrollViewer>
+                <ContentControl Content="{Binding HelperStyle}"/>
+            </ScrollViewer>
+        </TabItem>
+    </TabControl>
+</UserControl>

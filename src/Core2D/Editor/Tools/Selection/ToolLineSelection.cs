@@ -15,7 +15,6 @@ namespace Core2D.Editor.Tools.Selection
         private readonly ILayerContainer _layer;
         private readonly ILineShape _line;
         private readonly IShapeStyle _style;
-        private readonly IBaseShape _point;
         private IPointShape _startHelperPoint;
         private IPointShape _endHelperPoint;
 
@@ -26,14 +25,12 @@ namespace Core2D.Editor.Tools.Selection
         /// <param name="layer">The selection shapes layer.</param>
         /// <param name="shape">The selected shape.</param>
         /// <param name="style">The selection shapes style.</param>
-        /// <param name="point">The selection point shape.</param>
-        public ToolLineSelection(IServiceProvider serviceProvider, ILayerContainer layer, ILineShape shape, IShapeStyle style, IBaseShape point)
+        public ToolLineSelection(IServiceProvider serviceProvider, ILayerContainer layer, ILineShape shape, IShapeStyle style)
         {
             _serviceProvider = serviceProvider;
             _layer = layer;
             _line = shape;
             _style = style;
-            _point = point;
         }
 
         /// <summary>
@@ -41,8 +38,8 @@ namespace Core2D.Editor.Tools.Selection
         /// </summary>
         public void ToStateEnd()
         {
-            _startHelperPoint = _serviceProvider.GetService<IFactory>().CreatePointShape(0, 0, _point);
-            _endHelperPoint = _serviceProvider.GetService<IFactory>().CreatePointShape(0, 0, _point);
+            _startHelperPoint = _serviceProvider.GetService<IFactory>().CreatePointShape(0, 0);
+            _endHelperPoint = _serviceProvider.GetService<IFactory>().CreatePointShape(0, 0);
 
             _layer.Shapes = _layer.Shapes.Add(_startHelperPoint);
             _layer.Shapes = _layer.Shapes.Add(_endHelperPoint);

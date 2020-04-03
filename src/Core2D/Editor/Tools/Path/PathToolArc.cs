@@ -66,7 +66,7 @@ namespace Core2D.Editor.Tools.Path
             {
                 case State.Start:
                     {
-                        _arc.Start = editor.TryToGetConnectionPoint(sx, sy) ?? factory.CreatePointShape(sx, sy, editor.Project.Options.PointShape);
+                        _arc.Start = editor.TryToGetConnectionPoint(sx, sy) ?? factory.CreatePointShape(sx, sy);
                         if (!pathTool.IsInitialized)
                         {
                             pathTool.InitializeWorkingPath(_arc.Start);
@@ -76,7 +76,7 @@ namespace Core2D.Editor.Tools.Path
                             _arc.Start = pathTool.GetLastPathPoint();
                         }
 
-                        _arc.End = factory.CreatePointShape(sx, sy, editor.Project.Options.PointShape);
+                        _arc.End = factory.CreatePointShape(sx, sy);
                         pathTool.GeometryContext.ArcTo(
                             _arc.End,
                             factory.CreatePathSize(
@@ -107,7 +107,7 @@ namespace Core2D.Editor.Tools.Path
                             }
                         }
                         _arc.Start = _arc.End;
-                        _arc.End = factory.CreatePointShape(sx, sy, editor.Project.Options.PointShape);
+                        _arc.End = factory.CreatePointShape(sx, sy);
                         pathTool.GeometryContext.ArcTo(
                             _arc.End,
                             factory.CreatePathSize(
@@ -196,8 +196,7 @@ namespace Core2D.Editor.Tools.Path
                 _serviceProvider,
                 editor.Project.CurrentContainer.HelperLayer,
                 _arc,
-                editor.Project.Options.HelperStyle,
-                editor.Project.Options.PointShape);
+                editor.PageState.HelperStyle);
 
             _selection.ToStateEnd();
         }

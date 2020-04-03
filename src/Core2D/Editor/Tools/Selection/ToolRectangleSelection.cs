@@ -15,7 +15,6 @@ namespace Core2D.Editor.Tools.Selection
         private readonly ILayerContainer _layer;
         private readonly IRectangleShape _rectangle;
         private readonly IShapeStyle _style;
-        private readonly IBaseShape _point;
         private IPointShape _topLeftHelperPoint;
         private IPointShape _bottomRightHelperPoint;
 
@@ -26,14 +25,12 @@ namespace Core2D.Editor.Tools.Selection
         /// <param name="layer">The selection shapes layer.</param>
         /// <param name="shape">The selected shape.</param>
         /// <param name="style">The selection shapes style.</param>
-        /// <param name="point">The selection point shape.</param>
-        public ToolRectangleSelection(IServiceProvider serviceProvider, ILayerContainer layer, IRectangleShape shape, IShapeStyle style, IBaseShape point)
+        public ToolRectangleSelection(IServiceProvider serviceProvider, ILayerContainer layer, IRectangleShape shape, IShapeStyle style)
         {
             _serviceProvider = serviceProvider;
             _layer = layer;
             _rectangle = shape;
             _style = style;
-            _point = point;
         }
 
         /// <summary>
@@ -41,8 +38,8 @@ namespace Core2D.Editor.Tools.Selection
         /// </summary>
         public void ToStateBottomRight()
         {
-            _topLeftHelperPoint = _serviceProvider.GetService<IFactory>().CreatePointShape(0, 0, _point);
-            _bottomRightHelperPoint = _serviceProvider.GetService<IFactory>().CreatePointShape(0, 0, _point);
+            _topLeftHelperPoint = _serviceProvider.GetService<IFactory>().CreatePointShape(0, 0);
+            _bottomRightHelperPoint = _serviceProvider.GetService<IFactory>().CreatePointShape(0, 0);
 
             _layer.Shapes = _layer.Shapes.Add(_topLeftHelperPoint);
             _layer.Shapes = _layer.Shapes.Add(_bottomRightHelperPoint);

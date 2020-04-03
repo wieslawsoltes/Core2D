@@ -30,9 +30,7 @@ namespace Core2D.Editor.Factories
             var factory = _serviceProvider.GetService<IFactory>();
             var editor = _serviceProvider.GetService<IProjectEditor>();
             var project = editor.Project;
-            var point = factory.CreatePointShape(
-                x, y,
-                project.Options.PointShape);
+            var point = factory.CreatePointShape(x, y);
             if (isStandalone)
             {
                 project.AddShape(project.CurrentContainer.CurrentLayer, point);
@@ -53,7 +51,6 @@ namespace Core2D.Editor.Factories
                 x1, y1,
                 x2, y2,
                 (IShapeStyle)style.Copy(null),
-                project.Options.PointShape,
                 isStroked);
             project.AddShape(project.CurrentContainer.CurrentLayer, line);
             return line;
@@ -72,7 +69,6 @@ namespace Core2D.Editor.Factories
                 start,
                 end,
                 (IShapeStyle)style.Copy(null),
-                project.Options.PointShape,
                 isStroked);
             project.AddShape(project.CurrentContainer.CurrentLayer, line);
             return line;
@@ -93,7 +89,6 @@ namespace Core2D.Editor.Factories
                 x3, y3,
                 x4, y4,
                 (IShapeStyle)style.Copy(null),
-                project.Options.PointShape,
                 isStroked,
                 isFilled);
             project.AddShape(project.CurrentContainer.CurrentLayer, arc);
@@ -115,7 +110,6 @@ namespace Core2D.Editor.Factories
                 point3,
                 point4,
                 (IShapeStyle)style.Copy(null),
-                project.Options.PointShape,
                 isStroked,
                 isFilled);
             project.AddShape(project.CurrentContainer.CurrentLayer, arc);
@@ -137,7 +131,6 @@ namespace Core2D.Editor.Factories
                 x3, y3,
                 x4, y4,
                 (IShapeStyle)style.Copy(null),
-                project.Options.PointShape,
                 isStroked,
                 isFilled);
             project.AddShape(project.CurrentContainer.CurrentLayer, cubicBezier);
@@ -159,7 +152,6 @@ namespace Core2D.Editor.Factories
                 point3,
                 point4,
                 (IShapeStyle)style.Copy(null),
-                project.Options.PointShape,
                 isStroked,
                 isFilled);
             project.AddShape(project.CurrentContainer.CurrentLayer, cubicBezier);
@@ -180,7 +172,6 @@ namespace Core2D.Editor.Factories
                 x2, y2,
                 x3, y3,
                 (IShapeStyle)style.Copy(null),
-                project.Options.PointShape,
                 isStroked,
                 isFilled);
             project.AddShape(project.CurrentContainer.CurrentLayer, quadraticBezier);
@@ -201,7 +192,6 @@ namespace Core2D.Editor.Factories
                 point2,
                 point3,
                 (IShapeStyle)style.Copy(null),
-                project.Options.PointShape,
                 isStroked,
                 isFilled);
             project.AddShape(project.CurrentContainer.CurrentLayer, quadraticBezier);
@@ -247,7 +237,6 @@ namespace Core2D.Editor.Factories
                 x1, y1,
                 x2, y2,
                 (IShapeStyle)style.Copy(null),
-                project.Options.PointShape,
                 isStroked,
                 isFilled,
                 text);
@@ -268,7 +257,6 @@ namespace Core2D.Editor.Factories
                 topLeft,
                 bottomRight,
                 (IShapeStyle)style.Copy(null),
-                project.Options.PointShape,
                 isStroked,
                 isFilled,
                 text);
@@ -289,7 +277,6 @@ namespace Core2D.Editor.Factories
                 x1, y1,
                 x2, y2,
                 (IShapeStyle)style.Copy(null),
-                project.Options.PointShape,
                 isStroked,
                 isFilled,
                 text);
@@ -310,7 +297,6 @@ namespace Core2D.Editor.Factories
                 topLeft,
                 bottomRight,
                 (IShapeStyle)style.Copy(null),
-                project.Options.PointShape,
                 isStroked,
                 isFilled,
                 text);
@@ -331,7 +317,6 @@ namespace Core2D.Editor.Factories
                 x1, y1,
                 x2, y2,
                 (IShapeStyle)style.Copy(null),
-                project.Options.PointShape,
                 text,
                 isStroked);
             project.AddShape(project.CurrentContainer.CurrentLayer, txt);
@@ -351,7 +336,6 @@ namespace Core2D.Editor.Factories
                 topLeft,
                 bottomRight,
                 (IShapeStyle)style.Copy(null),
-                project.Options.PointShape,
                 text,
                 isStroked);
             project.AddShape(project.CurrentContainer.CurrentLayer, txt);
@@ -371,7 +355,6 @@ namespace Core2D.Editor.Factories
                 x1, y1,
                 x2, y2,
                 (IShapeStyle)style.Copy(null),
-                project.Options.PointShape,
                 path,
                 isStroked,
                 isFilled,
@@ -402,7 +385,6 @@ namespace Core2D.Editor.Factories
                     topLeft,
                     bottomRight,
                     (IShapeStyle)style.Copy(null),
-                    project.Options.PointShape,
                     key,
                     isStroked,
                     isFilled,

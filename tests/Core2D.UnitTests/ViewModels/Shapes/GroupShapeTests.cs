@@ -86,7 +86,7 @@ namespace Core2D.Shapes.UnitTests
             var style = _factory.CreateShapeStyle();
             var target = _factory.CreateGroupShape();
 
-            var text = _factory.CreateTextShape(0, 0, style, null, "Text");
+            var text = _factory.CreateTextShape(0, 0, style, "Text");
             text.Data.Properties = text.Data.Properties.Add(_factory.CreateProperty(null, "", ""));
             target.Shapes = target.Shapes.Add(text);
 

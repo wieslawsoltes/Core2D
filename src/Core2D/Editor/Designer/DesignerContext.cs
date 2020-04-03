@@ -220,6 +220,11 @@ namespace Core2D.Editor.Designer
         public static IQuadraticBezierSegment QuadraticBezierSegment { get; set; }
 
         /// <summary>
+        /// The design time <see cref="IShapeRendererState"/>.
+        /// </summary>
+        public static IShapeRendererState ShapeRendererState { get; set; }
+
+        /// <summary>
         /// Initializes static designer context.
         /// </summary>
         /// <param name="serviceProvider">The service provider.</param>
@@ -272,7 +277,7 @@ namespace Core2D.Editor.Designer
 
             Page = factory.CreatePageContainer();
             var layer = Page.Layers.FirstOrDefault();
-            layer.Shapes = layer.Shapes.Add(factory.CreateLineShape(0, 0, null, null));
+            layer.Shapes = layer.Shapes.Add(factory.CreateLineShape(0, 0, null));
             Page.CurrentLayer = layer;
             Page.CurrentShape = layer.Shapes.FirstOrDefault();
             Page.Template = Template;
@@ -304,17 +309,17 @@ namespace Core2D.Editor.Designer
 
             // Shapes
 
-            Arc = factory.CreateArcShape(0, 0, Style, null);
-            CubicBezier = factory.CreateCubicBezierShape(0, 0, Style, null);
-            Ellipse = factory.CreateEllipseShape(0, 0, Style, null);
+            Arc = factory.CreateArcShape(0, 0, Style);
+            CubicBezier = factory.CreateCubicBezierShape(0, 0, Style);
+            Ellipse = factory.CreateEllipseShape(0, 0, Style);
             Group = factory.CreateGroupShape("Group");
-            Image = factory.CreateImageShape(0, 0, Style, null, "key");
-            Line = factory.CreateLineShape(0, 0, Style, null);
+            Image = factory.CreateImageShape(0, 0, Style, "key");
+            Line = factory.CreateLineShape(0, 0, Style);
             Path = factory.CreatePathShape(Style, null);
             Point = factory.CreatePointShape();
-            QuadraticBezier = factory.CreateQuadraticBezierShape(0, 0, Style, null);
-            Rectangle = factory.CreateRectangleShape(0, 0, Style, null);
-            Text = factory.CreateTextShape(0, 0, Style, null, "Text");
+            QuadraticBezier = factory.CreateQuadraticBezierShape(0, 0, Style);
+            Rectangle = factory.CreateRectangleShape(0, 0, Style);
+            Text = factory.CreateTextShape(0, 0, Style, "Text");
 
             // Path
 
@@ -325,6 +330,10 @@ namespace Core2D.Editor.Designer
             PathGeometry = factory.CreatePathGeometry(ImmutableArray.Create<IPathFigure>(), FillRule.EvenOdd);
             PathSize = factory.CreatePathSize();
             QuadraticBezierSegment = factory.CreateQuadraticBezierSegment(factory.CreatePointShape(), factory.CreatePointShape(), true, true);
+
+            // Renderer
+
+            ShapeRendererState = factory.CreateShapeRendererState();
         }
     }
 }

@@ -231,10 +231,48 @@ namespace Core2D
             };
         }
 
+        private IBaseShape EllipsePointShape(IShapeStyle style)
+        {
+            var ellipse = CreateEllipseShape(-4, -4, 4, 4, style, true, false);
+            ellipse.Name = "EllipsePoint";
+            return ellipse;
+        }
+
+        private IBaseShape FilledEllipsePointShape(IShapeStyle style)
+        {
+            var ellipse = CreateEllipseShape(-4, -4, 4, 4, style, true, true);
+            ellipse.Name = "FilledEllipsePoint";
+            return ellipse;
+        }
+
+        private IBaseShape RectanglePointShape(IShapeStyle style)
+        {
+            var rectangle = CreateRectangleShape(-4, -4, 4, 4, style, true, false);
+            rectangle.Name = "RectanglePoint";
+            return rectangle;
+        }
+
+        private IBaseShape FilledRectanglePointShape(IShapeStyle style)
+        {
+            var rectangle = CreateRectangleShape(-4, -4, 4, 4, style, true, true);
+            rectangle.Name = "FilledRectanglePoint";
+            return rectangle;
+        }
+
+        private IBaseShape CrossPointShape(IShapeStyle style)
+        {
+            var group = CreateGroupShape("CrossPoint");
+            var builder = group.Shapes.ToBuilder();
+            builder.Add(CreateLineShape(-4, 0, 4, 0, style));
+            builder.Add(CreateLineShape(0, -4, 0, 4, style));
+            group.Shapes = builder.ToImmutable();
+            return group;
+        }
+
         /// <inheritdoc/>
         public IShapeRendererState CreateShapeRendererState()
         {
-            return new ShapeRendererState()
+            var state = new ShapeRendererState()
             {
                 PanX = 0.0,
                 PanY = 0.0,
@@ -244,6 +282,29 @@ namespace Core2D
                 SelectedShape = default,
                 SelectedShapes = default
             };
+
+            state.SelectionStyle =
+                CreateShapeStyle(
+                    "Selection",
+                    0x7F, 0x33, 0x33, 0xFF,
+                    0x4F, 0x33, 0x33, 0xFF,
+                    1.0);
+
+            state.HelperStyle =
+                CreateShapeStyle(
+                    "Helper",
+                    0xFF, 0x00, 0x00, 0x00,
+                    0xFF, 0x00, 0x00, 0x00,
+                    1.0);
+
+            state.PointShape = FilledRectanglePointShape(
+                CreateShapeStyle(
+                    "Point",
+                    0xFF, 0x00, 0x00, 0x00,
+                    0x80, 0xFF, 0xFF, 0xFF,
+                    2.0));
+
+            return state;
         }
 
         /// <inheritdoc/>
@@ -364,7 +425,7 @@ namespace Core2D
         }
 
         /// <inheritdoc/>
-        public IPointShape CreatePointShape(double x = 0.0, double y = 0.0, IBaseShape shape = null, PointAlignment alignment = PointAlignment.None, string name = "")
+        public IPointShape CreatePointShape(double x = 0.0, double y = 0.0, PointAlignment alignment = PointAlignment.None, string name = "")
         {
             return new PointShape()
             {
@@ -375,13 +436,12 @@ namespace Core2D
                 Style = default,
                 X = x,
                 Y = y,
-                Alignment = alignment,
-                Shape = shape
+                Alignment = alignment
             };
         }
 
         /// <inheritdoc/>
-        public ILineShape CreateLineShape(IPointShape start, IPointShape end, IShapeStyle style, IBaseShape point, bool isStroked = true, string name = "")
+        public ILineShape CreateLineShape(IPointShape start, IPointShape end, IShapeStyle style, bool isStroked = true, string name = "")
         {
             return new LineShape()
             {
@@ -398,7 +458,7 @@ namespace Core2D
         }
 
         /// <inheritdoc/>
-        public ILineShape CreateLineShape(double x1, double y1, double x2, double y2, IShapeStyle style, IBaseShape point, bool isStroked = true, string name = "")
+        public ILineShape CreateLineShape(double x1, double y1, double x2, double y2, IShapeStyle style, bool isStroked = true, string name = "")
         {
             return new LineShape()
             {
@@ -409,19 +469,19 @@ namespace Core2D
                 Style = style,
                 IsStroked = isStroked,
                 IsFilled = false,
-                Start = CreatePointShape(x1, y1, point),
-                End = CreatePointShape(x2, y2, point)
+                Start = CreatePointShape(x1, y1),
+                End = CreatePointShape(x2, y2)
             };
         }
 
         /// <inheritdoc/>
-        public ILineShape CreateLineShape(double x, double y, IShapeStyle style, IBaseShape point, bool isStroked = true, string name = "")
+        public ILineShape CreateLineShape(double x, double y, IShapeStyle style, bool isStroked = true, string name = "")
         {
-            return CreateLineShape(x, y, x, y, style, point, isStroked, name);
+            return CreateLineShape(x, y, x, y, style, isStroked, name);
         }
 
         /// <inheritdoc/>
-        public IArcShape CreateArcShape(double x1, double y1, double x2, double y2, double x3, double y3, double x4, double y4, IShapeStyle style, IBaseShape point, bool isStroked = true, bool isFilled = false, string name = "")
+        public IArcShape CreateArcShape(double x1, double y1, double x2, double y2, double x3, double y3, double x4, double y4, IShapeStyle style, bool isStroked = true, bool isFilled = false, string name = "")
         {
             return new ArcShape()
             {
@@ -432,21 +492,21 @@ namespace Core2D
                 Style = style,
                 IsStroked = isStroked,
                 IsFilled = isFilled,
-                Point1 = CreatePointShape(x1, y1, point),
-                Point2 = CreatePointShape(x2, y2, point),
-                Point3 = CreatePointShape(x3, y3, point),
-                Point4 = CreatePointShape(x4, y4, point)
+                Point1 = CreatePointShape(x1, y1),
+                Point2 = CreatePointShape(x2, y2),
+                Point3 = CreatePointShape(x3, y3),
+                Point4 = CreatePointShape(x4, y4)
             };
         }
 
         /// <inheritdoc/>
-        public IArcShape CreateArcShape(double x, double y, IShapeStyle style, IBaseShape point, bool isStroked = true, bool isFilled = false, string name = "")
+        public IArcShape CreateArcShape(double x, double y, IShapeStyle style, bool isStroked = true, bool isFilled = false, string name = "")
         {
-            return CreateArcShape(x, y, x, y, x, y, x, y, style, point, isStroked, isFilled, name);
+            return CreateArcShape(x, y, x, y, x, y, x, y, style, isStroked, isFilled, name);
         }
 
         /// <inheritdoc/>
-        public IArcShape CreateArcShape(IPointShape point1, IPointShape point2, IPointShape point3, IPointShape point4, IShapeStyle style, IBaseShape point, bool isStroked = true, bool isFilled = false, string name = "")
+        public IArcShape CreateArcShape(IPointShape point1, IPointShape point2, IPointShape point3, IPointShape point4, IShapeStyle style, bool isStroked = true, bool isFilled = false, string name = "")
         {
             return new ArcShape()
             {
@@ -465,7 +525,7 @@ namespace Core2D
         }
 
         /// <inheritdoc/>
-        public IQuadraticBezierShape CreateQuadraticBezierShape(double x1, double y1, double x2, double y2, double x3, double y3, IShapeStyle style, IBaseShape point, bool isStroked = true, bool isFilled = false, string name = "")
+        public IQuadraticBezierShape CreateQuadraticBezierShape(double x1, double y1, double x2, double y2, double x3, double y3, IShapeStyle style, bool isStroked = true, bool isFilled = false, string name = "")
         {
             return new QuadraticBezierShape()
             {
@@ -476,20 +536,20 @@ namespace Core2D
                 Style = style,
                 IsStroked = isStroked,
                 IsFilled = isFilled,
-                Point1 = CreatePointShape(x1, y1, point),
-                Point2 = CreatePointShape(x2, y2, point),
-                Point3 = CreatePointShape(x3, y3, point)
+                Point1 = CreatePointShape(x1, y1),
+                Point2 = CreatePointShape(x2, y2),
+                Point3 = CreatePointShape(x3, y3)
             };
         }
 
         /// <inheritdoc/>
-        public IQuadraticBezierShape CreateQuadraticBezierShape(double x, double y, IShapeStyle style, IBaseShape point, bool isStroked = true, bool isFilled = false, string name = "")
+        public IQuadraticBezierShape CreateQuadraticBezierShape(double x, double y, IShapeStyle style, bool isStroked = true, bool isFilled = false, string name = "")
         {
-            return CreateQuadraticBezierShape(x, y, x, y, x, y, style, point, isStroked, isFilled, name);
+            return CreateQuadraticBezierShape(x, y, x, y, x, y, style, isStroked, isFilled, name);
         }
 
         /// <inheritdoc/>
-        public IQuadraticBezierShape CreateQuadraticBezierShape(IPointShape point1, IPointShape point2, IPointShape point3, IShapeStyle style, IBaseShape point, bool isStroked = true, bool isFilled = false, string name = "")
+        public IQuadraticBezierShape CreateQuadraticBezierShape(IPointShape point1, IPointShape point2, IPointShape point3, IShapeStyle style, bool isStroked = true, bool isFilled = false, string name = "")
         {
             return new QuadraticBezierShape()
             {
@@ -507,7 +567,7 @@ namespace Core2D
         }
 
         /// <inheritdoc/>
-        public ICubicBezierShape CreateCubicBezierShape(double x1, double y1, double x2, double y2, double x3, double y3, double x4, double y4, IShapeStyle style, IBaseShape point, bool isStroked = true, bool isFilled = false, string name = "")
+        public ICubicBezierShape CreateCubicBezierShape(double x1, double y1, double x2, double y2, double x3, double y3, double x4, double y4, IShapeStyle style, bool isStroked = true, bool isFilled = false, string name = "")
         {
             return new CubicBezierShape()
             {
@@ -518,21 +578,21 @@ namespace Core2D
                 Style = style,
                 IsStroked = isStroked,
                 IsFilled = isFilled,
-                Point1 = CreatePointShape(x1, y1, point),
-                Point2 = CreatePointShape(x2, y2, point),
-                Point3 = CreatePointShape(x3, y3, point),
-                Point4 = CreatePointShape(x4, y4, point)
+                Point1 = CreatePointShape(x1, y1),
+                Point2 = CreatePointShape(x2, y2),
+                Point3 = CreatePointShape(x3, y3),
+                Point4 = CreatePointShape(x4, y4)
             };
         }
 
         /// <inheritdoc/>
-        public ICubicBezierShape CreateCubicBezierShape(double x, double y, IShapeStyle style, IBaseShape point, bool isStroked = true, bool isFilled = false, string name = "")
+        public ICubicBezierShape CreateCubicBezierShape(double x, double y, IShapeStyle style, bool isStroked = true, bool isFilled = false, string name = "")
         {
-            return CreateCubicBezierShape(x, y, x, y, x, y, x, y, style, point, isStroked, isFilled, name);
+            return CreateCubicBezierShape(x, y, x, y, x, y, x, y, style, isStroked, isFilled, name);
         }
 
         /// <inheritdoc/>
-        public ICubicBezierShape CreateCubicBezierShape(IPointShape point1, IPointShape point2, IPointShape point3, IPointShape point4, IShapeStyle style, IBaseShape point, bool isStroked = true, bool isFilled = false, string name = "")
+        public ICubicBezierShape CreateCubicBezierShape(IPointShape point1, IPointShape point2, IPointShape point3, IPointShape point4, IShapeStyle style, bool isStroked = true, bool isFilled = false, string name = "")
         {
             return new CubicBezierShape()
             {
@@ -551,7 +611,7 @@ namespace Core2D
         }
 
         /// <inheritdoc/>
-        public IRectangleShape CreateRectangleShape(double x1, double y1, double x2, double y2, IShapeStyle style, IBaseShape point, bool isStroked = true, bool isFilled = false, string text = null, string name = "")
+        public IRectangleShape CreateRectangleShape(double x1, double y1, double x2, double y2, IShapeStyle style, bool isStroked = true, bool isFilled = false, string text = null, string name = "")
         {
             return new RectangleShape()
             {
@@ -562,8 +622,8 @@ namespace Core2D
                 Style = style,
                 IsStroked = isStroked,
                 IsFilled = isFilled,
-                TopLeft = CreatePointShape(x1, y1, point),
-                BottomRight = CreatePointShape(x2, y2, point),
+                TopLeft = CreatePointShape(x1, y1),
+                BottomRight = CreatePointShape(x2, y2),
                 Text = text,
                 IsGrid = false,
                 OffsetX = 30.0,
@@ -574,13 +634,13 @@ namespace Core2D
         }
 
         /// <inheritdoc/>
-        public IRectangleShape CreateRectangleShape(double x, double y, IShapeStyle style, IBaseShape point, bool isStroked = true, bool isFilled = false, string text = null, string name = "")
+        public IRectangleShape CreateRectangleShape(double x, double y, IShapeStyle style, bool isStroked = true, bool isFilled = false, string text = null, string name = "")
         {
-            return CreateRectangleShape(x, y, x, y, style, point, isStroked, isFilled, text, name);
+            return CreateRectangleShape(x, y, x, y, style, isStroked, isFilled, text, name);
         }
 
         /// <inheritdoc/>
-        public IRectangleShape CreateRectangleShape(IPointShape topLeft, IPointShape bottomRight, IShapeStyle style, IBaseShape point, bool isStroked = true, bool isFilled = false, string text = null, string name = "")
+        public IRectangleShape CreateRectangleShape(IPointShape topLeft, IPointShape bottomRight, IShapeStyle style, bool isStroked = true, bool isFilled = false, string text = null, string name = "")
         {
             return new RectangleShape()
             {
@@ -603,7 +663,7 @@ namespace Core2D
         }
 
         /// <inheritdoc/>
-        public IEllipseShape CreateEllipseShape(double x1, double y1, double x2, double y2, IShapeStyle style, IBaseShape point, bool isStroked = true, bool isFilled = false, string text = null, string name = "")
+        public IEllipseShape CreateEllipseShape(double x1, double y1, double x2, double y2, IShapeStyle style, bool isStroked = true, bool isFilled = false, string text = null, string name = "")
         {
             return new EllipseShape()
             {
@@ -614,20 +674,20 @@ namespace Core2D
                 Style = style,
                 IsStroked = isStroked,
                 IsFilled = isFilled,
-                TopLeft = CreatePointShape(x1, y1, point),
-                BottomRight = CreatePointShape(x2, y2, point),
+                TopLeft = CreatePointShape(x1, y1),
+                BottomRight = CreatePointShape(x2, y2),
                 Text = text,
             };
         }
 
         /// <inheritdoc/>
-        public IEllipseShape CreateEllipseShape(double x, double y, IShapeStyle style, IBaseShape point, bool isStroked = true, bool isFilled = false, string text = null, string name = "")
+        public IEllipseShape CreateEllipseShape(double x, double y, IShapeStyle style, bool isStroked = true, bool isFilled = false, string text = null, string name = "")
         {
-            return CreateEllipseShape(x, y, x, y, style, point, isStroked, isFilled, text, name);
+            return CreateEllipseShape(x, y, x, y, style, isStroked, isFilled, text, name);
         }
 
         /// <inheritdoc/>
-        public IEllipseShape CreateEllipseShape(IPointShape topLeft, IPointShape bottomRight, IShapeStyle style, IBaseShape point, bool isStroked = true, bool isFilled = false, string text = null, string name = "")
+        public IEllipseShape CreateEllipseShape(IPointShape topLeft, IPointShape bottomRight, IShapeStyle style, bool isStroked = true, bool isFilled = false, string text = null, string name = "")
         {
             return new EllipseShape()
             {
@@ -676,7 +736,7 @@ namespace Core2D
         }
 
         /// <inheritdoc/>
-        public ITextShape CreateTextShape(double x1, double y1, double x2, double y2, IShapeStyle style, IBaseShape point, string text, bool isStroked = true, string name = "")
+        public ITextShape CreateTextShape(double x1, double y1, double x2, double y2, IShapeStyle style, string text, bool isStroked = true, string name = "")
         {
             return new TextShape()
             {
@@ -686,20 +746,20 @@ namespace Core2D
                 Data = CreateContext(),
                 Style = style,
                 IsStroked = isStroked,
-                TopLeft = CreatePointShape(x1, y1, point),
-                BottomRight = CreatePointShape(x2, y2, point),
+                TopLeft = CreatePointShape(x1, y1),
+                BottomRight = CreatePointShape(x2, y2),
                 Text = text
             };
         }
 
         /// <inheritdoc/>
-        public ITextShape CreateTextShape(double x, double y, IShapeStyle style, IBaseShape point, string text, bool isStroked = true, string name = "")
+        public ITextShape CreateTextShape(double x, double y, IShapeStyle style, string text, bool isStroked = true, string name = "")
         {
-            return CreateTextShape(x, y, x, y, style, point, text, isStroked, name);
+            return CreateTextShape(x, y, x, y, style, text, isStroked, name);
         }
 
         /// <inheritdoc/>
-        public ITextShape CreateTextShape(IPointShape topLeft, IPointShape bottomRight, IShapeStyle style, IBaseShape point, string text, bool isStroked = true, string name = "")
+        public ITextShape CreateTextShape(IPointShape topLeft, IPointShape bottomRight, IShapeStyle style, string text, bool isStroked = true, string name = "")
         {
             return new TextShape()
             {
@@ -716,7 +776,7 @@ namespace Core2D
         }
 
         /// <inheritdoc/>
-        public IImageShape CreateImageShape(double x1, double y1, double x2, double y2, IShapeStyle style, IBaseShape point, string key, bool isStroked = false, bool isFilled = false, string text = null, string name = "")
+        public IImageShape CreateImageShape(double x1, double y1, double x2, double y2, IShapeStyle style, string key, bool isStroked = false, bool isFilled = false, string text = null, string name = "")
         {
             return new ImageShape()
             {
@@ -727,21 +787,21 @@ namespace Core2D
                 Style = style,
                 IsStroked = isStroked,
                 IsFilled = isFilled,
-                TopLeft = CreatePointShape(x1, y1, point),
-                BottomRight = CreatePointShape(x2, y2, point),
+                TopLeft = CreatePointShape(x1, y1),
+                BottomRight = CreatePointShape(x2, y2),
                 Key = key,
                 Text = text
             };
         }
 
         /// <inheritdoc/>
-        public IImageShape CreateImageShape(double x, double y, IShapeStyle style, IBaseShape point, string key, bool isStroked = false, bool isFilled = false, string text = null, string name = "")
+        public IImageShape CreateImageShape(double x, double y, IShapeStyle style, string key, bool isStroked = false, bool isFilled = false, string text = null, string name = "")
         {
-            return CreateImageShape(x, y, x, y, style, point, key, isStroked, isFilled, text, name);
+            return CreateImageShape(x, y, x, y, style, key, isStroked, isFilled, text, name);
         }
 
         /// <inheritdoc/>
-        public IImageShape CreateImageShape(IPointShape topLeft, IPointShape bottomRight, IShapeStyle style, IBaseShape point, string key, bool isStroked = false, bool isFilled = false, string text = null, string name = "")
+        public IImageShape CreateImageShape(IPointShape topLeft, IPointShape bottomRight, IShapeStyle style, string key, bool isStroked = false, bool isFilled = false, string text = null, string name = "")
         {
             return new ImageShape()
             {
@@ -914,48 +974,10 @@ namespace Core2D
             };
         }
 
-        private IBaseShape EllipsePointShape(IShapeStyle pss)
-        {
-            var ellipse = CreateEllipseShape(-4, -4, 4, 4, pss, null, true, false);
-            ellipse.Name = "EllipsePoint";
-            return ellipse;
-        }
-
-        private IBaseShape FilledEllipsePointShape(IShapeStyle pss)
-        {
-            var ellipse = CreateEllipseShape(-4, -4, 4, 4, pss, null, true, true);
-            ellipse.Name = "FilledEllipsePoint";
-            return ellipse;
-        }
-
-        private IBaseShape RectanglePointShape(IShapeStyle pss)
-        {
-            var rectangle = CreateRectangleShape(-4, -4, 4, 4, pss, null, true, false);
-            rectangle.Name = "RectanglePoint";
-            return rectangle;
-        }
-
-        private IBaseShape FilledRectanglePointShape(IShapeStyle pss)
-        {
-            var rectangle = CreateRectangleShape(-4, -4, 4, 4, pss, null, true, true);
-            rectangle.Name = "FilledRectanglePoint";
-            return rectangle;
-        }
-
-        private IBaseShape CrossPointShape(IShapeStyle pss)
-        {
-            var group = CreateGroupShape("CrossPoint");
-            var builder = group.Shapes.ToBuilder();
-            builder.Add(CreateLineShape(-4, 0, 4, 0, pss, null));
-            builder.Add(CreateLineShape(0, -4, 0, 4, pss, null));
-            group.Shapes = builder.ToImmutable();
-            return group;
-        }
-
         /// <inheritdoc/>
         public IOptions CreateOptions()
         {
-            var options = new Options()
+            return new Options()
             {
                 SnapToGrid = true,
                 SnapX = 15.0,
@@ -969,29 +991,6 @@ namespace Core2D
                 DefaultFillRule = FillRule.EvenOdd,
                 TryToConnect = false
             };
-
-            options.SelectionStyle =
-                CreateShapeStyle(
-                    "Selection",
-                    0x7F, 0x33, 0x33, 0xFF,
-                    0x4F, 0x33, 0x33, 0xFF,
-                    1.0);
-
-            options.HelperStyle =
-                CreateShapeStyle(
-                    "Helper",
-                    0xFF, 0x00, 0x00, 0x00,
-                    0xFF, 0x00, 0x00, 0x00,
-                    1.0);
-
-            options.PointShape = FilledRectanglePointShape(
-                CreateShapeStyle(
-                    "Point",
-                    0xFF, 0x00, 0x00, 0x00,
-                    0x80, 0xFF, 0xFF, 0xFF,
-                    2.0));
-
-            return options;
         }
 
         /// <inheritdoc/>

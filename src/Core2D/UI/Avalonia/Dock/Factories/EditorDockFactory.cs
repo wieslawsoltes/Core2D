@@ -122,6 +122,12 @@ namespace Core2D.UI.Avalonia.Dock.Factories
                 Title = "Zoom"
             };
 
+            var rendererTool = new RendererTool
+            {
+                Id = nameof(RendererTool),
+                Title = "Renderer"
+            };
+
             var shapeTool = new ShapeTool
             {
                 Id = nameof(ShapeTool),
@@ -179,8 +185,8 @@ namespace Core2D.UI.Avalonia.Dock.Factories
                         (
                             projectTool,
                             optionsTool,
-                            imagesTool,
-                            scriptsTool
+                            rendererTool,
+                            imagesTool
                         )
                     },
                     new DMC.SplitterDock()
@@ -198,7 +204,8 @@ namespace Core2D.UI.Avalonia.Dock.Factories
                         (
                             groupsTool,
                             databasesTool,
-                            toolsTool
+                            toolsTool,
+                            scriptsTool
                         )
                     }
                 )
@@ -373,6 +380,7 @@ namespace Core2D.UI.Avalonia.Dock.Factories
                 [nameof(ScriptsTool)] = () => _serviceProvider.GetService<IProjectEditor>(),
                 [nameof(ContainerTool)] = () => _serviceProvider.GetService<IProjectEditor>(),
                 [nameof(ZoomTool)] = () => _serviceProvider.GetService<IProjectEditor>(),
+                [nameof(RendererTool)] = () => _serviceProvider.GetService<IProjectEditor>(),
                 [nameof(ToolsTool)] = () => _serviceProvider.GetService<IProjectEditor>(),
                 [nameof(ShapeTool)] = () => _serviceProvider.GetService<IProjectEditor>(),
                 [nameof(DataTool)] = () => _serviceProvider.GetService<IProjectEditor>(),

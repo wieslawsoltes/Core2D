@@ -15,7 +15,6 @@ namespace Core2D.Editor.Tools.Selection
         private readonly ILayerContainer _layer;
         private readonly ICubicBezierShape _cubicBezier;
         private readonly IShapeStyle _style;
-        private readonly IBaseShape _point;
         private ILineShape _line12;
         private ILineShape _line43;
         private ILineShape _line23;
@@ -31,14 +30,12 @@ namespace Core2D.Editor.Tools.Selection
         /// <param name="layer">The selection shapes layer.</param>
         /// <param name="shape">The selected shape.</param>
         /// <param name="style">The selection shapes style.</param>
-        /// <param name="point">The selection point shape.</param>
-        public ToolCubicBezierSelection(IServiceProvider serviceProvider, ILayerContainer layer, ICubicBezierShape shape, IShapeStyle style, IBaseShape point)
+        public ToolCubicBezierSelection(IServiceProvider serviceProvider, ILayerContainer layer, ICubicBezierShape shape, IShapeStyle style)
         {
             _serviceProvider = serviceProvider;
             _layer = layer;
             _cubicBezier = shape;
             _style = style;
-            _point = point;
         }
 
         /// <summary>
@@ -46,9 +43,9 @@ namespace Core2D.Editor.Tools.Selection
         /// </summary>
         public void ToStatePoint4()
         {
-            _helperPoint1 = _serviceProvider.GetService<IFactory>().CreatePointShape(0, 0, _point);
+            _helperPoint1 = _serviceProvider.GetService<IFactory>().CreatePointShape(0, 0);
             _layer.Shapes = _layer.Shapes.Add(_helperPoint1);
-            _helperPoint4 = _serviceProvider.GetService<IFactory>().CreatePointShape(0, 0, _point);
+            _helperPoint4 = _serviceProvider.GetService<IFactory>().CreatePointShape(0, 0);
             _layer.Shapes = _layer.Shapes.Add(_helperPoint4);
         }
 
@@ -57,8 +54,8 @@ namespace Core2D.Editor.Tools.Selection
         /// </summary>
         public void ToStatePoint2()
         {
-            _line12 = _serviceProvider.GetService<IFactory>().CreateLineShape(0, 0, _style, null);
-            _helperPoint2 = _serviceProvider.GetService<IFactory>().CreatePointShape(0, 0, _point);
+            _line12 = _serviceProvider.GetService<IFactory>().CreateLineShape(0, 0, _style);
+            _helperPoint2 = _serviceProvider.GetService<IFactory>().CreatePointShape(0, 0);
 
             _layer.Shapes = _layer.Shapes.Add(_line12);
             _layer.Shapes = _layer.Shapes.Add(_helperPoint2);
@@ -69,9 +66,9 @@ namespace Core2D.Editor.Tools.Selection
         /// </summary>
         public void ToStatePoint3()
         {
-            _line43 = _serviceProvider.GetService<IFactory>().CreateLineShape(0, 0, _style, null);
-            _line23 = _serviceProvider.GetService<IFactory>().CreateLineShape(0, 0, _style, null);
-            _helperPoint3 = _serviceProvider.GetService<IFactory>().CreatePointShape(0, 0, _point);
+            _line43 = _serviceProvider.GetService<IFactory>().CreateLineShape(0, 0, _style);
+            _line23 = _serviceProvider.GetService<IFactory>().CreateLineShape(0, 0, _style);
+            _helperPoint3 = _serviceProvider.GetService<IFactory>().CreatePointShape(0, 0);
 
             _layer.Shapes = _layer.Shapes.Add(_line43);
             _layer.Shapes = _layer.Shapes.Add(_line23);

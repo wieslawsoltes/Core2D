@@ -66,7 +66,6 @@ namespace Core2D.Editor.Tools
                         _line = factory.CreateLineShape(
                             sx, sy,
                             (IShapeStyle)style.Copy(null),
-                            editor.Project.Options.PointShape,
                             editor.Project.Options.DefaultIsStroked);
                         if (editor.Project.Options.TryToConnect)
                         {
@@ -185,8 +184,7 @@ namespace Core2D.Editor.Tools
                 _serviceProvider,
                 editor.Project.CurrentContainer.HelperLayer,
                 _line,
-                editor.Project.Options.HelperStyle,
-                editor.Project.Options.PointShape);
+                editor.PageState.HelperStyle);
 
             _selection.ToStateEnd();
         }

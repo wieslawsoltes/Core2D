@@ -550,7 +550,6 @@ namespace Core2D.Editor
                     if (restore)
                     {
                         var shapes = Enumerable.Repeat(group, 1);
-                        ResetPointShapeToDefault(shapes);
                         TryToRestoreRecords(shapes);
                     }
                     Project.AddGroup(Project?.CurrentGroupLibrary, group);
@@ -564,7 +563,6 @@ namespace Core2D.Editor
             {
                 if (restore)
                 {
-                    ResetPointShapeToDefault(groups);
                     TryToRestoreRecords(groups);
                 }
                 Project.AddItems(Project?.CurrentGroupLibrary, groups);
@@ -579,14 +577,12 @@ namespace Core2D.Editor
             }
             else if (item is ILibrary<IGroupShape> gl)
             {
-                ResetPointShapeToDefault(gl.Items);
                 TryToRestoreRecords(gl.Items);
                 Project.AddGroupLibrary(gl);
             }
             else if (item is IList<ILibrary<IGroupShape>> gll)
             {
                 var shapes = gll.SelectMany(x => x.Items);
-                ResetPointShapeToDefault(shapes);
                 TryToRestoreRecords(shapes);
                 Project.AddGroupLibraries(gll);
             }
@@ -614,7 +610,6 @@ namespace Core2D.Editor
             {
                 if (restore)
                 {
-                    ResetPointShapeToDefault(layer.Shapes);
                     TryToRestoreRecords(layer.Shapes);
                 }
                 Project?.AddLayer(Project?.CurrentContainer, layer);
@@ -627,7 +622,6 @@ namespace Core2D.Editor
                     if (restore)
                     {
                         var shapes = page.Layers.SelectMany(x => x.Shapes);
-                        ResetPointShapeToDefault(shapes);
                         TryToRestoreRecords(shapes);
                     }
                     Project?.AddTemplate(page);
@@ -640,7 +634,6 @@ namespace Core2D.Editor
                         var shapes = Enumerable.Concat(
                             page.Layers.SelectMany(x => x.Shapes),
                             page.Template?.Layers.SelectMany(x => x.Shapes));
-                        ResetPointShapeToDefault(shapes);
                         TryToRestoreRecords(shapes);
                     }
                     Project?.AddPage(Project?.CurrentDocument, page);
@@ -651,7 +644,6 @@ namespace Core2D.Editor
                 if (restore)
                 {
                     var shapes = templates.SelectMany(x => x.Layers).SelectMany(x => x.Shapes);
-                    ResetPointShapeToDefault(shapes);
                     TryToRestoreRecords(shapes);
                 }
 
@@ -674,7 +666,6 @@ namespace Core2D.Editor
                     var shapes = Enumerable.Concat(
                         document.Pages.SelectMany(x => x.Layers).SelectMany(x => x.Shapes),
                         document.Pages.SelectMany(x => x.Template.Layers).SelectMany(x => x.Shapes));
-                    ResetPointShapeToDefault(shapes);
                     TryToRestoreRecords(shapes);
                 }
                 Project?.AddDocument(document);
@@ -2671,25 +2662,6 @@ namespace Core2D.Editor
         }
 
         /// <summary>
-        /// Try to restore point shape.
-        /// </summary>
-        /// <param name="shapes">The shapes collection.</param>
-        private void ResetPointShapeToDefault(IEnumerable<IBaseShape> shapes)
-        {
-            try
-            {
-                foreach (var point in shapes?.SelectMany(s => s?.GetPoints()))
-                {
-                    point.Shape = Project?.Options?.PointShape;
-                }
-            }
-            catch (Exception ex)
-            {
-                Log?.LogException(ex);
-            }
-        }
-
-        /// <summary>
         /// Generates record dictionary with id as the key.
         /// </summary>
         /// <returns>The record dictionary with id as the key.</returns>
@@ -2763,7 +2735,6 @@ namespace Core2D.Editor
         private void RestoreShape(IBaseShape shape)
         {
             var shapes = Enumerable.Repeat(shape, 1).ToList();
-            ResetPointShapeToDefault(shapes);
             TryToRestoreRecords(shapes);
         }
 
@@ -2773,12 +2744,8 @@ namespace Core2D.Editor
             try
             {
                 Deselect(Project?.CurrentContainer?.CurrentLayer);
-
-                ResetPointShapeToDefault(shapes);
                 TryToRestoreRecords(shapes);
-
                 Project.AddShapes(Project?.CurrentContainer?.CurrentLayer, shapes);
-
                 OnSelect(shapes);
             }
             catch (Exception ex)
@@ -2839,7 +2806,6 @@ namespace Core2D.Editor
                     if (clone != null)
                     {
                         var shapes = clone.Shapes;
-                        ResetPointShapeToDefault(shapes);
                         TryToRestoreRecords(shapes);
                         return clone;
                     }
@@ -2866,7 +2832,6 @@ namespace Core2D.Editor
                     if (clone != null)
                     {
                         var shapes = clone.Layers.SelectMany(l => l.Shapes);
-                        ResetPointShapeToDefault(shapes);
                         TryToRestoreRecords(shapes);
                         clone.Template = template;
                         return clone;
@@ -2897,7 +2862,6 @@ namespace Core2D.Editor
                         {
                             var container = clone.Pages[i];
                             var shapes = container.Layers.SelectMany(l => l.Shapes);
-                            ResetPointShapeToDefault(shapes);
                             TryToRestoreRecords(shapes);
                             container.Template = templates[i];
                         }
@@ -3000,12 +2964,11 @@ namespace Core2D.Editor
                 Project.CurrentStyleLibrary.Selected :
                 Factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
             var style = (IShapeStyle)selected.Copy(null);
-            var point = Project?.Options?.PointShape;
             var layer = Project?.CurrentContainer?.CurrentLayer;
             double sx = Project.Options.SnapToGrid ? Snap(x, Project.Options.SnapX) : x;
             double sy = Project.Options.SnapToGrid ? Snap(y, Project.Options.SnapY) : y;
 
-            var image = Factory.CreateImageShape(sx, sy, style, point, key);
+            var image = Factory.CreateImageShape(sx, sy, style, key);
             image.BottomRight.X = sx + 320;
             image.BottomRight.Y = sy + 180;
 
@@ -3017,62 +2980,14 @@ namespace Core2D.Editor
         {
             try
             {
-                if (PageState?.SelectedShape != null)
+                var layer = Project?.CurrentContainer?.CurrentLayer;
+                if (layer != null)
                 {
-                    var target = PageState.SelectedShape;
-                    if (target is IPointShape point)
+                    if (bExecute == true)
                     {
-                        if (bExecute == true)
-                        {
-                            point.Shape = shape;
-                        }
-                        return true;
+                        OnDropShapeAsClone(shape, x, y);
                     }
-                }
-                else if (PageState?.SelectedShapes != null && PageState?.SelectedShapes?.Count > 0)
-                {
-                    foreach (var target in PageState.SelectedShapes)
-                    {
-                        if (target is IPointShape point)
-                        {
-                            if (bExecute == true)
-                            {
-                                point.Shape = shape;
-                            }
-                            else
-                            {
-                                return true;
-                            }
-                        }
-                    }
-                }
-                else
-                {
-                    var layer = Project?.CurrentContainer?.CurrentLayer;
-                    if (layer != null)
-                    {
-                        var shapes = layer.Shapes.Reverse();
-                        var point = HitTest.TryToGetPoint(shapes, new Point2(x, y), Project.Options.HitThreshold);
-                        if (point != null)
-                        {
-                            if (bExecute == true)
-                            {
-                                point.Shape = shape;
-                            }
-                            else
-                            {
-                                return true;
-                            }
-                        }
-                        else
-                        {
-                            if (bExecute == true)
-                            {
-                                OnDropShapeAsClone(shape, x, y);
-                            }
-                            return true;
-                        }
-                    }
+                    return true;
                 }
             }
             catch (Exception ex)
@@ -3172,7 +3087,6 @@ namespace Core2D.Editor
                 Project.CurrentStyleLibrary.Selected :
                 Factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
             var style = (IShapeStyle)selected.Copy(null);
-            var point = Project?.Options?.PointShape;
             var layer = Project?.CurrentContainer?.CurrentLayer;
             double sx = Project.Options.SnapToGrid ? Snap(x, Project.Options.SnapX) : x;
             double sy = Project.Options.SnapToGrid ? Snap(y, Project.Options.SnapY) : y;
@@ -3195,19 +3109,19 @@ namespace Core2D.Editor
                 if (column.IsVisible)
                 {
                     var binding = "{" + db.Columns[i].Name + "}";
-                    var text = Factory.CreateTextShape(px, py, px + width, py + height, style, point, binding);
+                    var text = Factory.CreateTextShape(px, py, px + width, py + height, style, binding);
                     g.AddShape(text);
                     py += height;
                 }
             }
 
-            var rectangle = Factory.CreateRectangleShape(sx, sy, sx + width, sy + (length * height), style, point);
+            var rectangle = Factory.CreateRectangleShape(sx, sy, sx + width, sy + (length * height), style);
             g.AddShape(rectangle);
 
-            var pt = Factory.CreatePointShape(sx + (width / 2), sy, point);
-            var pb = Factory.CreatePointShape(sx + (width / 2), sy + (length * height), point);
-            var pl = Factory.CreatePointShape(sx, sy + ((length * height) / 2), point);
-            var pr = Factory.CreatePointShape(sx + width, sy + ((length * height) / 2), point);
+            var pt = Factory.CreatePointShape(sx + (width / 2), sy);
+            var pb = Factory.CreatePointShape(sx + (width / 2), sy + (length * height));
+            var pl = Factory.CreatePointShape(sx, sy + ((length * height) / 2));
+            var pr = Factory.CreatePointShape(sx + width, sy + ((length * height) / 2));
 
             g.AddConnectorAsNone(pt);
             g.AddConnectorAsNone(pb);
@@ -3650,7 +3564,6 @@ namespace Core2D.Editor
                 var split = Factory.CreateLineShape(
                     x, y,
                     (IShapeStyle)line.Style.Copy(null),
-                    Project.Options.PointShape,
                     line.IsStroked);
 
                 double ds = point.DistanceTo(line.Start);
@@ -3709,7 +3622,6 @@ namespace Core2D.Editor
                     p0,
                     line.End,
                     (IShapeStyle)line.Style.Copy(null),
-                    Project.Options.PointShape,
                     line.IsStroked);
 
                 SwapLineEnd(line, p1);
@@ -3720,7 +3632,6 @@ namespace Core2D.Editor
                     p1,
                     line.End,
                     (IShapeStyle)line.Style.Copy(null),
-                    Project.Options.PointShape,
                     line.IsStroked);
 
                 SwapLineEnd(line, p0);

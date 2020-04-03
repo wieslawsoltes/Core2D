@@ -847,6 +847,9 @@
         <DataTemplate DataType="Tools:ZoomTool">
             <containers:ZoomControl DataContext="{Binding Context.CanvasPlatform.Zoom}"/>
         </DataTemplate>
+        <DataTemplate DataType="Tools:RendererTool">
+            <renderer:ShapeRendererStateControl DataContext="{Binding Context.PageState}"/>
+        </DataTemplate>
         <DataTemplate DataType="Tools:ToolsTool">
             <settings:ToolsControl DataContext="{Binding Context}"/>
         </DataTemplate>

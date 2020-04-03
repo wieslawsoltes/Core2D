@@ -65,7 +65,6 @@ namespace Core2D.Editor.Tools
                         _quadraticBezier = factory.CreateQuadraticBezierShape(
                             sx, sy,
                             (IShapeStyle)style.Copy(null),
-                            editor.Project.Options.PointShape,
                             editor.Project.Options.DefaultIsStroked,
                             editor.Project.Options.DefaultIsFilled);
 
@@ -213,8 +212,7 @@ namespace Core2D.Editor.Tools
                 _serviceProvider,
                 editor.Project.CurrentContainer.HelperLayer,
                 _quadraticBezier,
-                editor.Project.Options.HelperStyle,
-                editor.Project.Options.PointShape);
+                editor.PageState.HelperStyle);
 
             _selection.ToStatePoint3();
         }
