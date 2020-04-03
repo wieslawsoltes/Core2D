@@ -31,7 +31,7 @@ namespace Core2D.Editor.Factories
 
             var builder = sgd.Items.ToBuilder();
 
-            builder.Add(factory.CreateShapeStyle("Default"));
+            builder.Add(factory.CreateShapeStyle("Solid"));
 
             sgd.Items = builder.ToImmutable();
             sgd.Selected = sgd.Items.FirstOrDefault();
