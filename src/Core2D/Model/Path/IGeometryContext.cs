@@ -60,29 +60,5 @@ namespace Core2D.Path
         /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
         /// <param name="isSmoothJoin">The flag indicating whether shape is smooth join.</param>
         void QuadraticBezierTo(IPointShape point1, IPointShape point2, bool isStroked = true, bool isSmoothJoin = true);
-
-        /// <summary>
-        /// Adds poly line segment.
-        /// </summary>
-        /// <param name="points">The points array.</param>
-        /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
-        /// <param name="isSmoothJoin">The flag indicating whether shape is smooth join.</param>
-        void PolyLineTo(ImmutableArray<IPointShape> points, bool isStroked = true, bool isSmoothJoin = true);
-
-        /// <summary>
-        /// Adds poly cubic bezier segment.
-        /// </summary>
-        /// <param name="points">The points array.</param>
-        /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
-        /// <param name="isSmoothJoin">The flag indicating whether shape is smooth join.</param>
-        void PolyCubicBezierTo(ImmutableArray<IPointShape> points, bool isStroked = true, bool isSmoothJoin = true);
-
-        /// <summary>
-        /// Adds poly quadratic bezier segment.
-        /// </summary>
-        /// <param name="points">The points array.</param>
-        /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
-        /// <param name="isSmoothJoin">The flag indicating whether shape is smooth join.</param>
-        void PolyQuadraticBezierTo(ImmutableArray<IPointShape> points, bool isStroked = true, bool isSmoothJoin = true);
     }
 }

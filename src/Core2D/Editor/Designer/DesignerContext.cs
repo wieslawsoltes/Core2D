@@ -215,21 +215,6 @@ namespace Core2D.Editor.Designer
         public static IPathSize PathSize { get; set; }
 
         /// <summary>
-        /// The design time <see cref="Path.Segments.PolyCubicBezierSegment"/>.
-        /// </summary>
-        public static IPolyCubicBezierSegment PolyCubicBezierSegment { get; set; }
-
-        /// <summary>
-        /// The design time <see cref="Path.Segments.PolyLineSegment"/>.
-        /// </summary>
-        public static IPolyLineSegment PolyLineSegment { get; set; }
-
-        /// <summary>
-        /// The design time <see cref="Path.Segments.PolyQuadraticBezierSegment"/>.
-        /// </summary>
-        public static IPolyQuadraticBezierSegment PolyQuadraticBezierSegment { get; set; }
-
-        /// <summary>
         /// The design time <see cref="Path.Segments.QuadraticBezierSegment"/>.
         /// </summary>
         public static IQuadraticBezierSegment QuadraticBezierSegment { get; set; }
@@ -339,9 +324,6 @@ namespace Core2D.Editor.Designer
             PathFigure = factory.CreatePathFigure(factory.CreatePointShape(), false, true);
             PathGeometry = factory.CreatePathGeometry(ImmutableArray.Create<IPathFigure>(), FillRule.EvenOdd);
             PathSize = factory.CreatePathSize();
-            PolyCubicBezierSegment = factory.CreatePolyCubicBezierSegment(ImmutableArray.Create<IPointShape>(), true, true);
-            PolyLineSegment = factory.CreatePolyLineSegment(ImmutableArray.Create<IPointShape>(), true, true);
-            PolyQuadraticBezierSegment = factory.CreatePolyQuadraticBezierSegment(ImmutableArray.Create<IPointShape>(), true, true);
             QuadraticBezierSegment = factory.CreateQuadraticBezierSegment(factory.CreatePointShape(), factory.CreatePointShape(), true, true);
         }
     }

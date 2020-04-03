@@ -1163,24 +1163,6 @@ namespace Core2D.Editor
                 quadraticBezierSegment.Point1.PropertyChanged += ObserveShape;
                 quadraticBezierSegment.Point2.PropertyChanged += ObserveShape;
             }
-            else if (segment is PolyLineSegment)
-            {
-                var polyLineSegment = segment as PolyLineSegment;
-
-                Add(polyLineSegment.Points);
-            }
-            else if (segment is PolyCubicBezierSegment)
-            {
-                var polyCubicBezierSegment = segment as PolyCubicBezierSegment;
-
-                Add(polyCubicBezierSegment.Points);
-            }
-            else if (segment is PolyQuadraticBezierSegment)
-            {
-                var polyQuadraticBezierSegment = segment as PolyQuadraticBezierSegment;
-
-                Add(polyQuadraticBezierSegment.Points);
-            }
         }
 
         private void Remove(IPathSegment segment)
@@ -1219,24 +1201,6 @@ namespace Core2D.Editor
 
                 quadraticBezierSegment.Point1.PropertyChanged -= ObserveShape;
                 quadraticBezierSegment.Point2.PropertyChanged -= ObserveShape;
-            }
-            else if (segment is PolyLineSegment)
-            {
-                var polyLineSegment = segment as PolyLineSegment;
-
-                Remove(polyLineSegment.Points);
-            }
-            else if (segment is PolyCubicBezierSegment)
-            {
-                var polyCubicBezierSegment = segment as PolyCubicBezierSegment;
-
-                Remove(polyCubicBezierSegment.Points);
-            }
-            else if (segment is PolyQuadraticBezierSegment)
-            {
-                var polyQuadraticBezierSegment = segment as PolyQuadraticBezierSegment;
-
-                Remove(polyQuadraticBezierSegment.Points);
             }
         }
 

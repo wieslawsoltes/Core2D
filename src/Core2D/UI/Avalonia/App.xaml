@@ -760,15 +760,6 @@
         <DataTemplate DataType="SegmentsCore:ILineSegment">
             <path:LineSegmentControl/>
         </DataTemplate>
-        <DataTemplate DataType="SegmentsCore:IPolyCubicBezierSegment">
-            <path:PolyCubicBezierSegmentControl/>
-        </DataTemplate>
-        <DataTemplate DataType="SegmentsCore:IPolyLineSegment">
-            <path:PolyLineSegmentControl/>
-        </DataTemplate>
-        <DataTemplate DataType="SegmentsCore:IPolyQuadraticBezierSegment">
-            <path:PolyQuadraticBezierSegmentControl/>
-        </DataTemplate>
         <DataTemplate DataType="SegmentsCore:IQuadraticBezierSegment">
             <path:QuadraticBezierSegmentControl/>
         </DataTemplate>

@@ -298,39 +298,6 @@ namespace Core2D
         }
 
         /// <inheritdoc/>
-        public IPolyLineSegment CreatePolyLineSegment(ImmutableArray<IPointShape> points, bool isStroked = true, bool isSmoothJoin = true)
-        {
-            return new PolyLineSegment()
-            {
-                Points = points,
-                IsStroked = isStroked,
-                IsSmoothJoin = isSmoothJoin
-            };
-        }
-
-        /// <inheritdoc/>
-        public IPolyQuadraticBezierSegment CreatePolyQuadraticBezierSegment(ImmutableArray<IPointShape> points, bool isStroked = true, bool isSmoothJoin = true)
-        {
-            return new PolyQuadraticBezierSegment()
-            {
-                Points = points,
-                IsStroked = isStroked,
-                IsSmoothJoin = isSmoothJoin
-            };
-        }
-
-        /// <inheritdoc/>
-        public IPolyCubicBezierSegment CreatePolyCubicBezierSegment(ImmutableArray<IPointShape> points, bool isStroked = true, bool isSmoothJoin = true)
-        {
-            return new PolyCubicBezierSegment()
-            {
-                Points = points,
-                IsStroked = isStroked,
-                IsSmoothJoin = isSmoothJoin
-            };
-        }
-
-        /// <inheritdoc/>
         public IPathSize CreatePathSize(double width = 0.0, double height = 0.0)
         {
             return new PathSize()

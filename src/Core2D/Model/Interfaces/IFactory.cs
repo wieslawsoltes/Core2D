@@ -209,33 +209,6 @@ namespace Core2D.Interfaces
         ICubicBezierSegment CreateCubicBezierSegment(IPointShape point1, IPointShape point2, IPointShape point3, bool isStroked = true, bool isSmoothJoin = true);
 
         /// <summary>
-        /// Creates a new <see cref="IPolyLineSegment"/> instance.
-        /// </summary>
-        /// <param name="points">The points array.</param>
-        /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
-        /// <param name="isSmoothJoin">The flag indicating whether shape is smooth join.</param>
-        /// <returns>The new instance of the <see cref="IPolyLineSegment"/> class.</returns>
-        IPolyLineSegment CreatePolyLineSegment(ImmutableArray<IPointShape> points, bool isStroked = true, bool isSmoothJoin = true);
-
-        /// <summary>
-        /// Creates a new <see cref="IPolyQuadraticBezierSegment"/> instance.
-        /// </summary>
-        /// <param name="points">The points array.</param>
-        /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
-        /// <param name="isSmoothJoin">The flag indicating whether shape is smooth join.</param>
-        /// <returns>The new instance of the <see cref="IPolyQuadraticBezierSegment"/> class.</returns>
-        IPolyQuadraticBezierSegment CreatePolyQuadraticBezierSegment(ImmutableArray<IPointShape> points, bool isStroked = true, bool isSmoothJoin = true);
-
-        /// <summary>
-        /// Creates a new <see cref="IPolyCubicBezierSegment"/> instance.
-        /// </summary>
-        /// <param name="points">The points array.</param>
-        /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
-        /// <param name="isSmoothJoin">The flag indicating whether shape is smooth join.</param>
-        /// <returns>The new instance of the <see cref="IPolyCubicBezierSegment"/> class.</returns>
-        IPolyCubicBezierSegment CreatePolyCubicBezierSegment(ImmutableArray<IPointShape> points, bool isStroked = true, bool isSmoothJoin = true);
-
-        /// <summary>
         /// Creates a new <see cref="IPathSize"/> instance.
         /// </summary>
         /// <param name="width">The width value.</param>

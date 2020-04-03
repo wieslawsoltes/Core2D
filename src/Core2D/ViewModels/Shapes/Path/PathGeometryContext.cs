@@ -84,35 +84,5 @@ namespace Core2D.Path
                 isSmoothJoin);
             _currentFigure.Segments = _currentFigure.Segments.Add(segment);
         }
-
-        /// <inheritdoc/>
-        public void PolyLineTo(ImmutableArray<IPointShape> points, bool isStroked = true, bool isSmoothJoin = true)
-        {
-            var segment = _factory.CreatePolyLineSegment(
-                points,
-                isStroked,
-                isSmoothJoin);
-            _currentFigure.Segments = _currentFigure.Segments.Add(segment);
-        }
-
-        /// <inheritdoc/>
-        public void PolyCubicBezierTo(ImmutableArray<IPointShape> points, bool isStroked = true, bool isSmoothJoin = true)
-        {
-            var segment = _factory.CreatePolyCubicBezierSegment(
-                points,
-                isStroked,
-                isSmoothJoin);
-            _currentFigure.Segments = _currentFigure.Segments.Add(segment);
-        }
-
-        /// <inheritdoc/>
-        public void PolyQuadraticBezierTo(ImmutableArray<IPointShape> points, bool isStroked = true, bool isSmoothJoin = true)
-        {
-            var segment = _factory.CreatePolyQuadraticBezierSegment(
-                points,
-                isStroked,
-                isSmoothJoin);
-            _currentFigure.Segments = _currentFigure.Segments.Add(segment);
-        }
     }
 }
