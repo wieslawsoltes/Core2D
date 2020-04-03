@@ -301,7 +301,7 @@ namespace Core2D
                 CreateShapeStyle(
                     "Point",
                     0xFF, 0x00, 0x00, 0x00,
-                    0x80, 0xFF, 0xFF, 0xFF,
+                    0xFF, 0xFF, 0xFF, 0xFF,
                     2.0));
 
             return state;
