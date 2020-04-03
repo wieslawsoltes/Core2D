@@ -152,11 +152,6 @@ namespace Core2D.Editor
         IJsonSerializer JsonSerializer { get; }
 
         /// <summary>
-        /// Gets Xaml serializer.
-        /// </summary>
-        IXamlSerializer XamlSerializer { get; }
-
-        /// <summary>
         /// Gets available file writers.
         /// </summary>
         ImmutableArray<IFileWriter> FileWriters { get; }
@@ -301,25 +296,6 @@ namespace Core2D.Editor
         /// <param name="item">The object to import.</param>
         /// <param name="restore">Try to restore objects by name.</param>
         void OnImportObject(object item, bool restore);
-
-        /// <summary>
-        /// Import Xaml from a file.
-        /// </summary>
-        /// <param name="path">The xaml file path.</param>
-        void OnImportXaml(string path);
-
-        /// <summary>
-        /// Import Xaml string.
-        /// </summary>
-        /// <param name="xaml">The xaml string.</param>
-        void OnImportXamlString(string xaml);
-
-        /// <summary>
-        /// Export Xaml to a file.
-        /// </summary>
-        /// <param name="path">The xaml file path.</param>
-        /// <param name="item">The object item.</param>
-        void OnExportXaml(string path, object item);
 
         /// <summary>
         /// Import Json from a file.

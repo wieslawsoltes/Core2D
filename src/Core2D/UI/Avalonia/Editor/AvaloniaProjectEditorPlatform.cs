@@ -125,7 +125,6 @@ namespace Core2D.UI.Avalonia.Editor
                 var dlg = new OpenFileDialog() { Title = "Open" };
                 dlg.AllowMultiple = true;
                 dlg.Filters.Add(new FileDialogFilter() { Name = "Json", Extensions = { "json" } });
-                dlg.Filters.Add(new FileDialogFilter() { Name = "Xaml", Extensions = { "xaml" } });
                 var result = await dlg.ShowAsync(_serviceProvider.GetService<MainWindow>());
                 if (result != null)
                 {
@@ -135,10 +134,6 @@ namespace Core2D.UI.Avalonia.Editor
                         {
                             string resultExtension = System.IO.Path.GetExtension(item);
                             if (string.Compare(resultExtension, ".json", StringComparison.OrdinalIgnoreCase) == 0)
-                            {
-                                _serviceProvider.GetService<IProjectEditor>().OnImportJson(item);
-                            }
-                            else if (string.Compare(resultExtension, ".xaml", StringComparison.OrdinalIgnoreCase) == 0)
                             {
                                 _serviceProvider.GetService<IProjectEditor>().OnImportJson(item);
                             }
@@ -155,41 +150,6 @@ namespace Core2D.UI.Avalonia.Editor
                     {
                         _serviceProvider.GetService<IProjectEditor>().OnImportJson(path);
                     }
-                    else if (string.Compare(resultExtension, ".xaml", StringComparison.OrdinalIgnoreCase) == 0)
-                    {
-                        _serviceProvider.GetService<IProjectEditor>().OnImportJson(path);
-                    }
-                }
-            }
-        }
-
-        /// <inheritdoc/>
-        public async void OnImportXaml(string path)
-        {
-            if (path == null)
-            {
-                var dlg = new OpenFileDialog() { Title = "Open" };
-                dlg.AllowMultiple = true;
-                dlg.Filters.Add(new FileDialogFilter() { Name = "Xaml", Extensions = { "xaml" } });
-                dlg.Filters.Add(new FileDialogFilter() { Name = "All", Extensions = { "*" } });
-
-                var result = await dlg.ShowAsync(_serviceProvider.GetService<MainWindow>());
-                if (result != null)
-                {
-                    foreach (var item in result)
-                    {
-                        if (item != null)
-                        {
-                            _serviceProvider.GetService<IProjectEditor>().OnImportXaml(item);
-                        }
-                    }
-                }
-            }
-            else
-            {
-                if (_serviceProvider.GetService<IFileSystem>().Exists(path))
-                {
-                    _serviceProvider.GetService<IProjectEditor>().OnImportXaml(path);
                 }
             }
         }
@@ -218,7 +178,6 @@ namespace Core2D.UI.Avalonia.Editor
             {
                 var dlg = new SaveFileDialog() { Title = "Save" };
                 dlg.Filters.Add(new FileDialogFilter() { Name = "Json", Extensions = { "json" } });
-                dlg.Filters.Add(new FileDialogFilter() { Name = "Xaml", Extensions = { "xaml" } });
                 dlg.InitialFileName = editor?.GetName(item);
                 dlg.DefaultExtension = "json";
                 var result = await dlg.ShowAsync(_serviceProvider.GetService<MainWindow>());
@@ -229,27 +188,7 @@ namespace Core2D.UI.Avalonia.Editor
                     {
                         editor.OnExportJson(result, item);
                     }
-                    else if (string.Compare(resultExtension, ".xaml", StringComparison.OrdinalIgnoreCase) == 0)
-                    {
-                        editor.OnExportXaml(result, item);
-                    }
                 }
-            }
-        }
-
-        /// <inheritdoc/>
-        public async void OnExportXaml(object item)
-        {
-            var editor = _serviceProvider.GetService<IProjectEditor>();
-            var dlg = new SaveFileDialog() { Title = "Save" };
-            dlg.Filters.Add(new FileDialogFilter() { Name = "Xaml", Extensions = { "xaml" } });
-            dlg.Filters.Add(new FileDialogFilter() { Name = "All", Extensions = { "*" } });
-            dlg.InitialFileName = editor?.GetName(item);
-            dlg.DefaultExtension = "xaml";
-            var result = await dlg.ShowAsync(_serviceProvider.GetService<MainWindow>());
-            if (result != null)
-            {
-                editor.OnExportXaml(result, item);
             }
         }
 

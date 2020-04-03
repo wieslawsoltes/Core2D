@@ -604,7 +604,6 @@
         <converters:ObjectToJsonStringConverter x:Key="ObjectToJsonStringConverter"/>
         <converters:ObjectToObjectConverter x:Key="ObjectToObjectConverter"/>
         <converters:ObjectToTypeStringConverter x:Key="ObjectToTypeStringConverter"/>
-        <converters:ObjectToXamlStringConverter x:Key="ObjectToXamlStringConverter"/>
         <converters:PriorityMultiValueConverter x:Key="PriorityMultiValueConverter"/>
         <converters:TreeViewSelectedItemToObjectConverter x:Key="TreeViewSelectedItemToObjectConverter"/>
     </Application.Resources>

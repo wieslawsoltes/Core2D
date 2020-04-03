@@ -24,7 +24,6 @@
     <UserControl.Resources>
         <converters:ObjectToJsonStringConverter x:Key="ObjectToJsonStringConverter"/>
         <converters:ObjectToTypeStringConverter x:Key="ObjectToTypeStringConverter"/>
-        <converters:ObjectToXamlStringConverter x:Key="ObjectToXamlStringConverter"/>
         <converters:TreeViewSelectedItemToObjectConverter x:Key="TreeViewSelectedItemToObjectConverter"/>
     </UserControl.Resources>
     <Grid ColumnDefinitions="250,Auto,*" RowDefinitions="*">
@@ -380,18 +379,6 @@
             <TabControl Classes="top">
                 <TabItem Header="Properties" Classes="property">
                     <ContentControl Content="{Binding #project.SelectedItem, Converter={StaticResource TreeViewSelectedItemToObjectConverter}}" Classes="project" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
-                </TabItem>
-                <TabItem Header="Xaml" Classes="property">
-                    <TextBox DataContext="{Binding #project.SelectedItem, Converter={StaticResource TreeViewSelectedItemToObjectConverter}}" Text="{Binding Mode=OneWay, Converter={StaticResource ObjectToXamlStringConverter}}" Classes="project" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                        <TextBox.KeyBindings>
-                            <KeyBinding Command="{Binding $parent[UserControl].DataContext.Platform.OnExportXaml}" CommandParameter="{Binding}" Gesture="Ctrl+E"/>
-                        </TextBox.KeyBindings>
-                        <TextBox.ContextMenu>
-                            <ContextMenu Classes="default">
-                                <MenuItem Header="E_xport" Command="{Binding $parent[UserControl].DataContext.Platform.OnExportXaml}" CommandParameter="{Binding}"/>
-                            </ContextMenu>
-                        </TextBox.ContextMenu>
-                    </TextBox>
                 </TabItem>
                 <TabItem Header="Json" Classes="property">
                     <TextBox DataContext="{Binding #project.SelectedItem, Converter={StaticResource TreeViewSelectedItemToObjectConverter}}" Text="{Binding Mode=OneWay, Converter={StaticResource ObjectToJsonStringConverter}}" Classes="project" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">

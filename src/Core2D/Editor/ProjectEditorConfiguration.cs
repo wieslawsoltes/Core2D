@@ -110,11 +110,6 @@ namespace Core2D.Editor
         public static string XlsxExtension = ".xlsx";
 
         /// <summary>
-        /// Xaml file extension.
-        /// </summary>
-        public static string XamlExtension = ".xaml";
-
-        /// <summary>
         /// Json file extension.
         /// </summary>
         public static string JsonExtension = ".json";

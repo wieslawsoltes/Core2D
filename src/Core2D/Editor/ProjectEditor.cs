@@ -53,7 +53,6 @@ namespace Core2D.Editor
         private readonly Lazy<IShapeFactory> _shapeFactory;
         private readonly Lazy<ITextClipboard> _textClipboard;
         private readonly Lazy<IJsonSerializer> _jsonSerializer;
-        private readonly Lazy<IXamlSerializer> _xamlSerializer;
         private readonly Lazy<ImmutableArray<IFileWriter>> _fileWriters;
         private readonly Lazy<ImmutableArray<ITextFieldReader<IDatabase>>> _textFieldReaders;
         private readonly Lazy<ImmutableArray<ITextFieldWriter<IDatabase>>> _textFieldWriters;
@@ -188,9 +187,6 @@ namespace Core2D.Editor
         public IJsonSerializer JsonSerializer => _jsonSerializer.Value;
 
         /// <inheritdoc/>
-        public IXamlSerializer XamlSerializer => _xamlSerializer.Value;
-
-        /// <inheritdoc/>
         public ImmutableArray<IFileWriter> FileWriters => _fileWriters.Value;
 
         /// <inheritdoc/>
@@ -250,7 +246,6 @@ namespace Core2D.Editor
             _shapeFactory = _serviceProvider.GetServiceLazily<IShapeFactory>();
             _textClipboard = _serviceProvider.GetServiceLazily<ITextClipboard>();
             _jsonSerializer = _serviceProvider.GetServiceLazily<IJsonSerializer>();
-            _xamlSerializer = _serviceProvider.GetServiceLazily<IXamlSerializer>();
             _fileWriters = _serviceProvider.GetServiceLazily<IFileWriter[], ImmutableArray<IFileWriter>>((writers) => writers.ToImmutableArray());
             _textFieldReaders = _serviceProvider.GetServiceLazily<ITextFieldReader<IDatabase>[], ImmutableArray<ITextFieldReader<IDatabase>>>((readers) => readers.ToImmutableArray());
             _textFieldWriters = _serviceProvider.GetServiceLazily<ITextFieldWriter<IDatabase>[], ImmutableArray<ITextFieldWriter<IDatabase>>>((writers) => writers.ToImmutableArray());
@@ -685,50 +680,6 @@ namespace Core2D.Editor
             else
             {
                 throw new NotSupportedException("Not supported import object.");
-            }
-        }
-
-        /// <inheritdoc/>
-        public void OnImportXaml(string path)
-        {
-            try
-            {
-                var xaml = FileIO?.ReadUtf8Text(path);
-                if (!string.IsNullOrWhiteSpace(xaml))
-                {
-                    OnImportXamlString(xaml);
-                }
-            }
-            catch (Exception ex)
-            {
-                Log?.LogException(ex);
-            }
-        }
-
-        /// <inheritdoc/>
-        public void OnImportXamlString(string xaml)
-        {
-            var item = XamlSerializer?.Deserialize<object>(xaml);
-            if (item != null)
-            {
-                OnImportObject(item, false);
-            }
-        }
-
-        /// <inheritdoc/>
-        public void OnExportXaml(string path, object item)
-        {
-            try
-            {
-                var xaml = XamlSerializer?.Serialize(item);
-                if (!string.IsNullOrWhiteSpace(xaml))
-                {
-                    FileIO?.WriteUtf8Text(path, xaml);
-                }
-            }
-            catch (Exception ex)
-            {
-                Log?.LogException(ex);
             }
         }
 
@@ -2624,21 +2575,6 @@ namespace Core2D.Editor
             {
                 var exception = default(Exception);
 
-                // Try to deserialize Xaml.
-                try
-                {
-                    if (XamlSerializer != null)
-                    {
-                        OnImportXamlString(text);
-                        return;
-                    }
-                }
-                catch (Exception ex)
-                {
-                    exception = ex;
-                }
-
-                // Try to deserialize Json.
                 try
                 {
                     var shapes = JsonSerializer?.Deserialize<IList<IBaseShape>>(text);
@@ -2924,11 +2860,6 @@ namespace Core2D.Editor
                     else if (string.Compare(ext, ProjectEditorConfiguration.JsonExtension, StringComparison.OrdinalIgnoreCase) == 0)
                     {
                         OnImportJson(path);
-                        result = true;
-                    }
-                    else if (string.Compare(ext, ProjectEditorConfiguration.XamlExtension, StringComparison.OrdinalIgnoreCase) == 0)
-                    {
-                        OnImportXaml(path);
                         result = true;
                     }
                     else if (string.Compare(ext, ProjectEditorConfiguration.ScriptExtension, StringComparison.OrdinalIgnoreCase) == 0)

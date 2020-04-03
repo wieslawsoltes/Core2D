@@ -37,12 +37,6 @@ namespace Core2D.Editor
         void OnImportObject(string path);
 
         /// <summary>
-        /// Import xaml.
-        /// </summary>
-        /// <param name="path">The xaml file path.</param>
-        void OnImportXaml(string path);
-
-        /// <summary>
         /// Export json.
         /// </summary>
         /// <param name="item">The object to export.</param>
@@ -53,12 +47,6 @@ namespace Core2D.Editor
         /// </summary>
         /// <param name="item">The object to export.</param>
         void OnExportObject(object item);
-
-        /// <summary>
-        /// Export xaml.
-        /// </summary>
-        /// <param name="item">The object to export.</param>
-        void OnExportXaml(object item);
 
         /// <summary>
         /// Export project, document or page.
