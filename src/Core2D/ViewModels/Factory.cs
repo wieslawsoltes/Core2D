@@ -1052,8 +1052,6 @@ namespace Core2D
 
             var builder = template.Layers.ToBuilder();
             builder.Add(CreateLayerContainer("TemplateLayer1", template));
-            builder.Add(CreateLayerContainer("TemplateLayer2", template));
-            builder.Add(CreateLayerContainer("TemplateLayer3", template));
             template.Layers = builder.ToImmutable();
 
             template.CurrentLayer = template.Layers.FirstOrDefault();
