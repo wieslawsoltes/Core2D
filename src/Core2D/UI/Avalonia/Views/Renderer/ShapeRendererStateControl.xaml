@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:converters="clr-namespace:Core2D.UI.Avalonia.Converters;assembly=Core2D"
+             xmlns:containers="clr-namespace:Core2D.UI.Avalonia.Views.Containers;assembly=Core2D"
              xmlns:ShapesCore="clr-namespace:Core2D.Shapes;assembly=Core2D" 
              xmlns:Designer="clr-namespace:Core2D.Editor.Designer;assembly=Core2D"
              mc:Ignorable="d"
@@ -63,9 +64,7 @@
             </ListBox>
         </TabItem>
         <TabItem Header="ImageCache" Classes="property">
-            <ScrollViewer>
-                <ContentControl Content="{Binding ImageCache}"/>
-            </ScrollViewer>
+            <containers:ImagesControl DataContext="{Binding ImageCache}"/>
         </TabItem>
         <TabItem Header="PointShape" Classes="property">
             <ScrollViewer>
