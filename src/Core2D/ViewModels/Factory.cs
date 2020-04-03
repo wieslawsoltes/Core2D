@@ -1027,8 +1027,6 @@ namespace Core2D
 
             var builder = page.Layers.ToBuilder();
             builder.Add(CreateLayerContainer("Layer1", page));
-            builder.Add(CreateLayerContainer("Layer2", page));
-            builder.Add(CreateLayerContainer("Layer3", page));
             page.Layers = builder.ToImmutable();
 
             page.CurrentLayer = page.Layers.FirstOrDefault();
