@@ -111,56 +111,5 @@ namespace Core2D.UnitTests
             Assert.True(segment.IsStroked);
             Assert.True(segment.IsSmoothJoin);
         }
-
-        [Fact]
-        [Trait("Core2D.Path", "Geometry")]
-        public void PolyLineTo_Adds_New_XPolyLineSegment()
-        {
-            var geometry = _factory.CreatePathGeometry();
-            var target = _factory.CreateGeometryContext(geometry);
-            target.BeginFigure(_factory.CreatePointShape());
-            Assert.Empty(geometry.Figures[0].Segments);
-
-            target.PolyLineTo(ImmutableArray.Create<IPointShape>(_factory.CreatePointShape(), _factory.CreatePointShape(), _factory.CreatePointShape()));
-
-            var segment = geometry.Figures[0].Segments[0];
-            Assert.IsType<PolyLineSegment>(segment);
-            Assert.True(segment.IsStroked);
-            Assert.True(segment.IsSmoothJoin);
-        }
-
-        [Fact]
-        [Trait("Core2D.Path", "Geometry")]
-        public void PolyCubicBezierTo_Adds_New_XPolyCubicBezierSegment()
-        {
-            var geometry = _factory.CreatePathGeometry();
-            var target = _factory.CreateGeometryContext(geometry);
-            target.BeginFigure(_factory.CreatePointShape());
-            Assert.Empty(geometry.Figures[0].Segments);
-
-            target.PolyCubicBezierTo(ImmutableArray.Create<IPointShape>(_factory.CreatePointShape(), _factory.CreatePointShape(), _factory.CreatePointShape()));
-
-            var segment = geometry.Figures[0].Segments[0];
-            Assert.IsType<PolyCubicBezierSegment>(segment);
-            Assert.True(segment.IsStroked);
-            Assert.True(segment.IsSmoothJoin);
-        }
-
-        [Fact]
-        [Trait("Core2D.Path", "Geometry")]
-        public void PolyQuadraticBezierTo_Adds_New_XPolyQuadraticBezierSegment()
-        {
-            var geometry = _factory.CreatePathGeometry();
-            var target = _factory.CreateGeometryContext(geometry);
-            target.BeginFigure(_factory.CreatePointShape());
-            Assert.Empty(geometry.Figures[0].Segments);
-
-            target.PolyQuadraticBezierTo(ImmutableArray.Create<IPointShape>(_factory.CreatePointShape(), _factory.CreatePointShape(), _factory.CreatePointShape()));
-
-            var segment = geometry.Figures[0].Segments[0];
-            Assert.IsType<PolyQuadraticBezierSegment>(segment);
-            Assert.True(segment.IsStroked);
-            Assert.True(segment.IsSmoothJoin);
-        }
     }
 }
