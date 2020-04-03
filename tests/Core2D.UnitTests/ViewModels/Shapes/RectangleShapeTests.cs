@@ -12,7 +12,7 @@ namespace Core2D.Shapes.UnitTests
         public void Inherits_From_TextShape()
         {
             var style = _factory.CreateShapeStyle();
-            var target = _factory.CreateRectangleShape(0, 0, 0, 0, style, null);
+            var target = _factory.CreateRectangleShape(0, 0, 0, 0, style);
             Assert.True(target is TextShape);
         }
     }
