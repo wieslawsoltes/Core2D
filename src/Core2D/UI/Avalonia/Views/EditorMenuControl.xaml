@@ -39,7 +39,6 @@
             <Separator/>
             <MenuItem Header="Execu_te Script..." Command="{Binding Platform.OnExecuteScriptFile}"/>
             <Separator/>
-            <MenuItem Header="Import Xa_ml..." Command="{Binding Platform.OnImportXaml}"/>
             <MenuItem Header="Import _Json..." Command="{Binding Platform.OnImportJson}"/>
             <Separator/>
             <MenuItem Header="_Export..." Command="{Binding Platform.OnExport}" InputGesture="Ctrl+E"/>
