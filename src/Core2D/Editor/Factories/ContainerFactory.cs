@@ -34,13 +34,13 @@ namespace Core2D.Editor.Factories
             var sgd = factory.CreateLibrary<IShapeStyle>("Default");
 
             var builder = sgd.Items.ToBuilder();
-            builder.Add(factory.CreateShapeStyle("Black", 255, 0, 0, 0, 80, 0, 0, 0, 2.0));
-            builder.Add(factory.CreateShapeStyle("Red", 255, 255, 0, 0, 80, 255, 0, 0, 2.0));
-            builder.Add(factory.CreateShapeStyle("Green", 255, 0, 255, 0, 80, 0, 255, 0, 2.0));
-            builder.Add(factory.CreateShapeStyle("Blue", 255, 0, 0, 255, 80, 0, 0, 255, 2.0));
-            builder.Add(factory.CreateShapeStyle("Cyan", 255, 0, 255, 255, 80, 0, 255, 255, 2.0));
-            builder.Add(factory.CreateShapeStyle("Magenta", 255, 255, 0, 255, 80, 255, 0, 255, 2.0));
-            builder.Add(factory.CreateShapeStyle("Yellow", 255, 255, 255, 0, 80, 255, 255, 0, 2.0));
+            builder.Add(factory.CreateShapeStyle("Black", 255, 0, 0, 0, 255, 0, 0, 0, 2.0));
+            builder.Add(factory.CreateShapeStyle("Red", 255, 255, 0, 0, 255, 255, 0, 0, 2.0));
+            builder.Add(factory.CreateShapeStyle("Green", 255, 0, 255, 0, 255, 0, 255, 0, 2.0));
+            builder.Add(factory.CreateShapeStyle("Blue", 255, 0, 0, 255, 255, 0, 0, 255, 2.0));
+            builder.Add(factory.CreateShapeStyle("Cyan", 255, 0, 255, 255, 255, 0, 255, 255, 2.0));
+            builder.Add(factory.CreateShapeStyle("Magenta", 255, 255, 0, 255, 255, 255, 0, 255, 2.0));
+            builder.Add(factory.CreateShapeStyle("Yellow", 255, 255, 255, 0, 255, 255, 255, 0, 2.0));
             sgd.Items = builder.ToImmutable();
 
             sgd.Selected = sgd.Items.FirstOrDefault();
@@ -61,23 +61,23 @@ namespace Core2D.Editor.Factories
             var factory = _serviceProvider.GetService<IFactory>();
             var sgdl = factory.CreateLibrary<IShapeStyle>("Lines");
 
-            var solid = factory.CreateShapeStyle("Solid", 255, 0, 0, 0, 80, 0, 0, 0, 2.0);
+            var solid = factory.CreateShapeStyle("Solid", 255, 0, 0, 0, 255, 0, 0, 0, 2.0);
             solid.Dashes = default;
             solid.DashOffset = 0.0;
 
-            var dash = factory.CreateShapeStyle("Dash", 255, 0, 0, 0, 80, 0, 0, 0, 2.0);
+            var dash = factory.CreateShapeStyle("Dash", 255, 0, 0, 0, 255, 0, 0, 0, 2.0);
             dash.Dashes = "2 2";
             dash.DashOffset = 1.0;
 
-            var dot = factory.CreateShapeStyle("Dot", 255, 0, 0, 0, 80, 0, 0, 0, 2.0);
+            var dot = factory.CreateShapeStyle("Dot", 255, 0, 0, 0, 255, 0, 0, 0, 2.0);
             dot.Dashes = "0 2";
             dot.DashOffset = 0.0;
 
-            var dashDot = factory.CreateShapeStyle("DashDot", 255, 0, 0, 0, 80, 0, 0, 0, 2.0);
+            var dashDot = factory.CreateShapeStyle("DashDot", 255, 0, 0, 0, 255, 0, 0, 0, 2.0);
             dashDot.Dashes = "2 2 0 2";
             dashDot.DashOffset = 1.0;
 
-            var dashDotDot = factory.CreateShapeStyle("DashDotDot", 255, 0, 0, 0, 80, 0, 0, 0, 2.0);
+            var dashDotDot = factory.CreateShapeStyle("DashDotDot", 255, 0, 0, 0, 255, 0, 0, 0, 2.0);
             dashDotDot.Dashes = "2 2 0 2 0 2";
             dashDotDot.DashOffset = 1.0;
 
