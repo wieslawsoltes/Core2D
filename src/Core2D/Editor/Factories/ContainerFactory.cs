@@ -31,30 +31,7 @@ namespace Core2D.Editor.Factories
 
             var builder = sgd.Items.ToBuilder();
 
-            builder.Add(factory.CreateShapeStyle("Black", 255, 0, 0, 0, 255, 0, 0, 0, 2.0));
-            builder.Add(factory.CreateShapeStyle("Red", 255, 255, 0, 0, 255, 255, 0, 0, 2.0));
-            builder.Add(factory.CreateShapeStyle("Green", 255, 0, 255, 0, 255, 0, 255, 0, 2.0));
-            builder.Add(factory.CreateShapeStyle("Blue", 255, 0, 0, 255, 255, 0, 0, 255, 2.0));
-
-            var dash = factory.CreateShapeStyle("Dash", 255, 0, 0, 0, 255, 0, 0, 0, 2.0);
-            dash.Dashes = "2 2";
-            dash.DashOffset = 1.0;
-            builder.Add(dash);
-
-            var dot = factory.CreateShapeStyle("Dot", 255, 0, 0, 0, 255, 0, 0, 0, 2.0);
-            dot.Dashes = "0 2";
-            dot.DashOffset = 0.0;
-            builder.Add(dot);
-
-            var dashDot = factory.CreateShapeStyle("DashDot", 255, 0, 0, 0, 255, 0, 0, 0, 2.0);
-            dashDot.Dashes = "2 2 0 2";
-            dashDot.DashOffset = 1.0;
-            builder.Add(dashDot);
-
-            var dashDotDot = factory.CreateShapeStyle("DashDotDot", 255, 0, 0, 0, 255, 0, 0, 0, 2.0);
-            dashDotDot.Dashes = "2 2 0 2 0 2";
-            dashDotDot.DashOffset = 1.0;
-            builder.Add(dashDotDot);
+            builder.Add(factory.CreateShapeStyle("Default"));
 
             sgd.Items = builder.ToImmutable();
             sgd.Selected = sgd.Items.FirstOrDefault();
@@ -102,7 +79,7 @@ namespace Core2D.Editor.Factories
         {
             var factory = _serviceProvider.GetService<IFactory>();
             var container = factory.CreatePageContainer(name);
-            container.Template = project.CurrentTemplate ?? (this as IContainerFactory).GetTemplate(project, "Empty");
+            container.Template = project.CurrentTemplate ?? (this as IContainerFactory).GetTemplate(project, "Default");
             return container;
         }
 
@@ -137,7 +114,6 @@ namespace Core2D.Editor.Factories
 
             // Templates
             var templateBuilder = project.Templates.ToBuilder();
-            templateBuilder.Add(containerFactory.GetTemplate(project, "Empty"));
             templateBuilder.Add(CreateDefaultTemplate(this, project, "Default"));
             project.Templates = templateBuilder.ToImmutable();
 
@@ -165,7 +141,7 @@ namespace Core2D.Editor.Factories
             project.Selected = document.Pages.FirstOrDefault();
 
             // Databases
-            var db = factory.CreateDatabase("Db");
+            var db = factory.CreateDatabase("Default");
             var columnsBuilder = db.Columns.ToBuilder();
             columnsBuilder.Add(factory.CreateColumn(db, "Column0"));
             columnsBuilder.Add(factory.CreateColumn(db, "Column1"));
