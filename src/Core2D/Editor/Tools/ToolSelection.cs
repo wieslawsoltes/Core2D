@@ -295,7 +295,7 @@ namespace Core2D.Editor.Tools
 
                         _rectangle = factory.CreateRectangleShape(
                             x, y,
-                            editor.Project.Options.SelectionStyle,
+                            editor.PageState.SelectionStyle,
                             true, true);
                         editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Add(_rectangle);
                         editor.Project.CurrentContainer.WorkingLayer.Invalidate();

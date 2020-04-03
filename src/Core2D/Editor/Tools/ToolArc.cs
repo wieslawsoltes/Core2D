@@ -264,7 +264,7 @@ namespace Core2D.Editor.Tools
                 _serviceProvider,
                 editor.Project.CurrentContainer.HelperLayer,
                 _arc,
-                editor.Project.Options.HelperStyle);
+                editor.PageState.HelperStyle);
 
             _selection.ToStatePoint2();
         }

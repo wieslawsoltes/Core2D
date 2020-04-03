@@ -231,10 +231,48 @@ namespace Core2D
             };
         }
 
+        private IBaseShape EllipsePointShape(IShapeStyle style)
+        {
+            var ellipse = CreateEllipseShape(-4, -4, 4, 4, style, true, false);
+            ellipse.Name = "EllipsePoint";
+            return ellipse;
+        }
+
+        private IBaseShape FilledEllipsePointShape(IShapeStyle style)
+        {
+            var ellipse = CreateEllipseShape(-4, -4, 4, 4, style, true, true);
+            ellipse.Name = "FilledEllipsePoint";
+            return ellipse;
+        }
+
+        private IBaseShape RectanglePointShape(IShapeStyle style)
+        {
+            var rectangle = CreateRectangleShape(-4, -4, 4, 4, style, true, false);
+            rectangle.Name = "RectanglePoint";
+            return rectangle;
+        }
+
+        private IBaseShape FilledRectanglePointShape(IShapeStyle style)
+        {
+            var rectangle = CreateRectangleShape(-4, -4, 4, 4, style, true, true);
+            rectangle.Name = "FilledRectanglePoint";
+            return rectangle;
+        }
+
+        private IBaseShape CrossPointShape(IShapeStyle style)
+        {
+            var group = CreateGroupShape("CrossPoint");
+            var builder = group.Shapes.ToBuilder();
+            builder.Add(CreateLineShape(-4, 0, 4, 0, style));
+            builder.Add(CreateLineShape(0, -4, 0, 4, style));
+            group.Shapes = builder.ToImmutable();
+            return group;
+        }
+
         /// <inheritdoc/>
         public IShapeRendererState CreateShapeRendererState()
         {
-            return new ShapeRendererState()
+            var state = new ShapeRendererState()
             {
                 PanX = 0.0,
                 PanY = 0.0,
@@ -244,6 +282,29 @@ namespace Core2D
                 SelectedShape = default,
                 SelectedShapes = default
             };
+
+            state.SelectionStyle =
+                CreateShapeStyle(
+                    "Selection",
+                    0x7F, 0x33, 0x33, 0xFF,
+                    0x4F, 0x33, 0x33, 0xFF,
+                    1.0);
+
+            state.HelperStyle =
+                CreateShapeStyle(
+                    "Helper",
+                    0xFF, 0x00, 0x00, 0x00,
+                    0xFF, 0x00, 0x00, 0x00,
+                    1.0);
+
+            state.PointShape = FilledRectanglePointShape(
+                CreateShapeStyle(
+                    "Point",
+                    0xFF, 0x00, 0x00, 0x00,
+                    0x80, 0xFF, 0xFF, 0xFF,
+                    2.0));
+
+            return state;
         }
 
         /// <inheritdoc/>
@@ -913,48 +974,10 @@ namespace Core2D
             };
         }
 
-        private IBaseShape EllipsePointShape(IShapeStyle pss)
-        {
-            var ellipse = CreateEllipseShape(-4, -4, 4, 4, pss, true, false);
-            ellipse.Name = "EllipsePoint";
-            return ellipse;
-        }
-
-        private IBaseShape FilledEllipsePointShape(IShapeStyle pss)
-        {
-            var ellipse = CreateEllipseShape(-4, -4, 4, 4, pss, true, true);
-            ellipse.Name = "FilledEllipsePoint";
-            return ellipse;
-        }
-
-        private IBaseShape RectanglePointShape(IShapeStyle pss)
-        {
-            var rectangle = CreateRectangleShape(-4, -4, 4, 4, pss, true, false);
-            rectangle.Name = "RectanglePoint";
-            return rectangle;
-        }
-
-        private IBaseShape FilledRectanglePointShape(IShapeStyle pss)
-        {
-            var rectangle = CreateRectangleShape(-4, -4, 4, 4, pss, true, true);
-            rectangle.Name = "FilledRectanglePoint";
-            return rectangle;
-        }
-
-        private IBaseShape CrossPointShape(IShapeStyle pss)
-        {
-            var group = CreateGroupShape("CrossPoint");
-            var builder = group.Shapes.ToBuilder();
-            builder.Add(CreateLineShape(-4, 0, 4, 0, pss));
-            builder.Add(CreateLineShape(0, -4, 0, 4, pss));
-            group.Shapes = builder.ToImmutable();
-            return group;
-        }
-
         /// <inheritdoc/>
         public IOptions CreateOptions()
         {
-            var options = new Options()
+            return new Options()
             {
                 SnapToGrid = true,
                 SnapX = 15.0,
@@ -968,29 +991,6 @@ namespace Core2D
                 DefaultFillRule = FillRule.EvenOdd,
                 TryToConnect = false
             };
-
-            options.SelectionStyle =
-                CreateShapeStyle(
-                    "Selection",
-                    0x7F, 0x33, 0x33, 0xFF,
-                    0x4F, 0x33, 0x33, 0xFF,
-                    1.0);
-
-            options.HelperStyle =
-                CreateShapeStyle(
-                    "Helper",
-                    0xFF, 0x00, 0x00, 0x00,
-                    0xFF, 0x00, 0x00, 0x00,
-                    1.0);
-
-            options.PointShape = FilledRectanglePointShape(
-                CreateShapeStyle(
-                    "Point",
-                    0xFF, 0x00, 0x00, 0x00,
-                    0x80, 0xFF, 0xFF, 0xFF,
-                    2.0));
-
-            return options;
         }
 
         /// <inheritdoc/>

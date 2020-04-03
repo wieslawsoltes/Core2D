@@ -220,6 +220,11 @@ namespace Core2D.Editor.Designer
         public static IQuadraticBezierSegment QuadraticBezierSegment { get; set; }
 
         /// <summary>
+        /// The design time <see cref="IShapeRendererState"/>.
+        /// </summary>
+        public static IShapeRendererState ShapeRendererState { get; set; }
+
+        /// <summary>
         /// Initializes static designer context.
         /// </summary>
         /// <param name="serviceProvider">The service provider.</param>
@@ -325,6 +330,10 @@ namespace Core2D.Editor.Designer
             PathGeometry = factory.CreatePathGeometry(ImmutableArray.Create<IPathFigure>(), FillRule.EvenOdd);
             PathSize = factory.CreatePathSize();
             QuadraticBezierSegment = factory.CreateQuadraticBezierSegment(factory.CreatePointShape(), factory.CreatePointShape(), true, true);
+
+            // Renderer
+
+            ShapeRendererState = factory.CreateShapeRendererState();
         }
     }
 }

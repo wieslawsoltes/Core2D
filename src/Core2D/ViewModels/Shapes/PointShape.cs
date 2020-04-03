@@ -46,7 +46,7 @@ namespace Core2D.Shapes
             {
                 var state = base.BeginTransform(dc, renderer);
 
-                // TODO: _shape.Draw(dc, renderer, X + dx, Y + dy);
+                renderer.Draw(dc, this, dx, dy);
 
                 base.EndTransform(dc, renderer, state);
             }

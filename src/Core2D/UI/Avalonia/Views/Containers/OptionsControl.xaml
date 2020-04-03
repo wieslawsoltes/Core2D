@@ -44,24 +44,5 @@
                 </Grid>
             </ScrollViewer>
         </TabItem>
-        <TabItem Header="Advanced" Classes="property">
-            <TabControl Classes="default">
-                <TabItem Header="PointShape" Classes="property">
-                    <ScrollViewer>
-                        <ContentControl Content="{Binding PointShape}"/>
-                    </ScrollViewer>
-                </TabItem>
-                <TabItem Header="SelectionStyle" Classes="property">
-                    <ScrollViewer>
-                        <ContentControl Content="{Binding SelectionStyle}"/>
-                    </ScrollViewer>
-                </TabItem>
-                <TabItem Header="HelperStyle" Classes="property">
-                    <ScrollViewer>
-                        <ContentControl Content="{Binding HelperStyle}"/>
-                    </ScrollViewer>
-                </TabItem>
-            </TabControl>
-        </TabItem>
     </TabControl>
 </UserControl>

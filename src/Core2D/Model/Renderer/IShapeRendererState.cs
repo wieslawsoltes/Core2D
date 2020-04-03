@@ -1,4 +1,6 @@
-﻿
+﻿using Core2D.Shapes;
+using Core2D.Style;
+
 namespace Core2D.Renderer
 {
     /// <summary>
@@ -35,5 +37,20 @@ namespace Core2D.Renderer
         /// Image cache repository.
         /// </summary>
         IImageCache ImageCache { get; set; }
+
+        /// <summary>
+        /// Gets or sets shape used to draw points.
+        /// </summary>
+        IBaseShape PointShape { get; set; }
+
+        /// <summary>
+        /// Gets or sets selection rectangle style.
+        /// </summary>
+        IShapeStyle SelectionStyle { get; set; }
+
+        /// <summary>
+        /// Gets or sets editor helper shapes style.
+        /// </summary>
+        IShapeStyle HelperStyle { get; set; }
     }
 }

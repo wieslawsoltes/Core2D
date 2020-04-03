@@ -218,7 +218,7 @@ namespace Core2D.Editor.Tools.Path
                 _serviceProvider,
                 editor.Project.CurrentContainer.HelperLayer,
                 _quadraticBezier,
-                editor.Project.Options.HelperStyle);
+                editor.PageState.HelperStyle);
             _selection.ToStatePoint3();
         }
 

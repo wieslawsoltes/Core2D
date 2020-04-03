@@ -184,7 +184,7 @@ namespace Core2D.Editor.Tools
                 _serviceProvider,
                 editor.Project.CurrentContainer.HelperLayer,
                 _line,
-                editor.Project.Options.HelperStyle);
+                editor.PageState.HelperStyle);
 
             _selection.ToStateEnd();
         }

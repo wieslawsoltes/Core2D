@@ -86,6 +86,15 @@ namespace Core2D.Renderer
         void Draw(object dc, ILayerContainer layer, double dx, double dy);
 
         /// <summary>
+        /// Draws a <see cref="IPointShape"/> shape using drawing context.
+        /// </summary>
+        /// <param name="dc">The native drawing context.</param>
+        /// <param name="point">The <see cref="IPointShape"/> shape.</param>
+        /// <param name="dx">The X coordinate offset.</param>
+        /// <param name="dy">The Y coordinate offset.</param>
+        void Draw(object dc, IPointShape point, double dx, double dy);
+
+        /// <summary>
         /// Draws a <see cref="ILineShape"/> shape using drawing context.
         /// </summary>
         /// <param name="dc">The native drawing context.</param>

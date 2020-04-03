@@ -63,20 +63,5 @@ namespace Core2D.Containers
         /// Gets or sets how point connection is handled.
         /// </summary>
         bool TryToConnect { get; set; }
-
-        /// <summary>
-        /// Gets or sets shape used to draw points.
-        /// </summary>
-        IBaseShape PointShape { get; set; }
-
-        /// <summary>
-        /// Gets or sets selection rectangle style.
-        /// </summary>
-        IShapeStyle SelectionStyle { get; set; }
-
-        /// <summary>
-        /// Gets or sets editor helper shapes style.
-        /// </summary>
-        IShapeStyle HelperStyle { get; set; }
     }
 }
