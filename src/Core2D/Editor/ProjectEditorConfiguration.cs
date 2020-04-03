@@ -47,7 +47,7 @@ namespace Core2D.Editor
         /// <summary>
         /// Default <see cref="IDatabase"/> name.
         /// </summary>
-        public static string DefaultDatabaseName = "Db";
+        public static string DefaultDatabaseName = "Database";
 
         /// <summary>
         /// Default <see cref="IColumn"/> name.
