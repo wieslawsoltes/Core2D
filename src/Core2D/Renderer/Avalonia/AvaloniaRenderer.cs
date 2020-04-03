@@ -111,16 +111,18 @@ namespace Core2D.Renderer.Avalonia
                     break;
             }
 
+            var strokeWidth = scale(style.Thickness / State.ZoomX);
+
             if (style.Dashes != null)
             {
                 dashStyle = new AM.DashStyle(
-                    StyleHelper.ConvertDashesToDoubleArray(style.Dashes),
+                    StyleHelper.ConvertDashesToDoubleArray(style.Dashes, strokeWidth),
                     style.DashOffset);
             }
 
             var pen = new AM.Pen(
                 ToBrush(style.Stroke),
-                scale(style.Thickness / State.ZoomX),
+                strokeWidth,
                 dashStyle, lineCap);
 
             return pen;

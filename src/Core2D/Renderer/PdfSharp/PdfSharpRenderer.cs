@@ -58,7 +58,8 @@ namespace Core2D.Renderer.PdfSharp
 
         private static XPen ToXPen(IBaseStyle style, Func<double, double> scale, double sourceDpi, double targetDpi)
         {
-            var pen = new XPen(ToXColor(style.Stroke), scale(style.Thickness * targetDpi / sourceDpi));
+            var strokeWidth = scale(style.Thickness * targetDpi / sourceDpi);
+            var pen = new XPen(ToXColor(style.Stroke), strokeWidth);
             switch (style.LineCap)
             {
                 case LineCap.Flat:
@@ -74,7 +75,7 @@ namespace Core2D.Renderer.PdfSharp
             if (style.Dashes != null)
             {
                 // TODO: Convert to correct dash values.
-                pen.DashPattern = StyleHelper.ConvertDashesToDoubleArray(style.Dashes);
+                pen.DashPattern = StyleHelper.ConvertDashesToDoubleArray(style.Dashes, strokeWidth);
                 pen.DashStyle = XDashStyle.Custom;
             }
             pen.DashOffset = style.DashOffset;
