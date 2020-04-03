@@ -729,14 +729,7 @@ namespace Core2D.Editor
                 shape.Transform.PropertyChanged += ObserveTransform;
             }
 
-            if (shape is IPointShape point)
-            {
-                if (point.Shape != null)
-                {
-                    point.Shape.PropertyChanged += ObserveShape;
-                }
-            }
-            else if (shape is ILineShape line)
+            if (shape is ILineShape line)
             {
                 if (line.Start != null)
                 {
@@ -907,14 +900,7 @@ namespace Core2D.Editor
                 shape.Transform.PropertyChanged -= ObserveTransform;
             }
 
-            if (shape is IPointShape point)
-            {
-                if (point.Shape != null)
-                {
-                    point.Shape.PropertyChanged -= ObserveShape;
-                }
-            }
-            else if (shape is ILineShape line)
+            if (shape is ILineShape line)
             {
                 if (line.Start != null)
                 {

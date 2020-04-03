@@ -65,7 +65,6 @@ namespace Core2D.Editor.Tools
                         _rectangle = factory.CreateRectangleShape(
                             sx, sy,
                             (IShapeStyle)style.Copy(null),
-                            editor.Project.Options.PointShape,
                             editor.Project.Options.DefaultIsStroked,
                             editor.Project.Options.DefaultIsFilled);
 
@@ -173,8 +172,7 @@ namespace Core2D.Editor.Tools
                 _serviceProvider,
                 editor.Project.CurrentContainer.HelperLayer,
                 _rectangle,
-                editor.Project.Options.HelperStyle,
-                editor.Project.Options.PointShape);
+                editor.Project.Options.HelperStyle);
 
             _selection.ToStateBottomRight();
         }

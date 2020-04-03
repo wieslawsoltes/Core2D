@@ -65,7 +65,6 @@ namespace Core2D.Editor.Tools
                         _cubicBezier = factory.CreateCubicBezierShape(
                             sx, sy,
                             (IShapeStyle)style.Copy(null),
-                            editor.Project.Options.PointShape,
                             editor.Project.Options.DefaultIsStroked,
                             editor.Project.Options.DefaultIsFilled);
 
@@ -251,8 +250,7 @@ namespace Core2D.Editor.Tools
                 _serviceProvider,
                 editor.Project.CurrentContainer.HelperLayer,
                 _cubicBezier,
-                editor.Project.Options.HelperStyle,
-                editor.Project.Options.PointShape);
+                editor.Project.Options.HelperStyle);
 
             _selection.ToStatePoint4();
         }

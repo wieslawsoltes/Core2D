@@ -76,7 +76,6 @@ namespace Core2D.Editor.Tools
                         _image = factory.CreateImageShape(
                             sx, sy,
                             (IShapeStyle)style.Copy(null),
-                            editor.Project.Options.PointShape,
                             key);
 
                         var result = editor.TryToGetConnectionPoint(sx, sy);
@@ -181,8 +180,7 @@ namespace Core2D.Editor.Tools
                 _serviceProvider,
                 editor.Project.CurrentContainer.HelperLayer,
                 _image,
-                editor.Project.Options.HelperStyle,
-                editor.Project.Options.PointShape);
+                editor.Project.Options.HelperStyle);
 
             _selection.ToStateBottomRight();
         }

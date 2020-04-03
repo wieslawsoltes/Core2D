@@ -30,9 +30,6 @@
         <TabItem Header="Data" Classes="property">
             <ContentControl Content="{Binding Data}"/>
         </TabItem>
-        <TabItem Header="Shape" Classes="property">
-            <ContentControl Content="{Binding Shape}"/>
-        </TabItem>
         <TabItem Header="Transform" Classes="property">
             <ContentControl Content="{Binding Transform}"/>
         </TabItem>

@@ -32,7 +32,7 @@ namespace Core2D.Renderer.SkiaSharp
                 (IShapeStyle)first.Style?.Copy(null) :
                 factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
             var path = PathGeometryConverter.ToSKPath(shapes, 0.0, 0.0, (value) => (float)value);
-            var geometry = PathGeometryConverter.ToPathGeometry(path, 0.0, 0.0, factory, editor.Project.Options.PointShape);
+            var geometry = PathGeometryConverter.ToPathGeometry(path, 0.0, 0.0, factory);
             var pathShape = factory.CreatePathShape(
                 "Path",
                 style,
@@ -51,7 +51,7 @@ namespace Core2D.Renderer.SkiaSharp
                 (IShapeStyle)shape.Style?.Copy(null) :
                 factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
             var path = PathGeometryConverter.ToSKPath(shape, 0.0, 0.0, (value) => (float)value);
-            var geometry = PathGeometryConverter.ToPathGeometry(path, 0.0, 0.0, factory, editor.Project.Options.PointShape);
+            var geometry = PathGeometryConverter.ToPathGeometry(path, 0.0, 0.0, factory);
             var pathShape = factory.CreatePathShape(
                 "Path",
                 style,
@@ -83,7 +83,7 @@ namespace Core2D.Renderer.SkiaSharp
                     result.Dispose();
                     return null;
                 }
-                var geometry = PathGeometryConverter.ToPathGeometry(result, 0.0, 0.0, factory, editor.Project.Options.PointShape);
+                var geometry = PathGeometryConverter.ToPathGeometry(result, 0.0, 0.0, factory);
                 var pathShape = factory.CreatePathShape(
                     "Path",
                     style,
@@ -118,7 +118,7 @@ namespace Core2D.Renderer.SkiaSharp
                     result.Dispose();
                     return null;
                 }
-                var geometry = PathGeometryConverter.ToPathGeometry(result, 0.0, 0.0, factory, editor.Project.Options.PointShape);
+                var geometry = PathGeometryConverter.ToPathGeometry(result, 0.0, 0.0, factory);
                 var pathShape = factory.CreatePathShape(
                     "Path",
                     style,
@@ -167,7 +167,7 @@ namespace Core2D.Renderer.SkiaSharp
             var style = shape.Style != null ?
                 (IShapeStyle)shape.Style?.Copy(null) :
                 factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
-            var geometry = PathGeometryConverter.ToPathGeometry(result, 0.0, 0.0, factory, editor.Project.Options.PointShape);
+            var geometry = PathGeometryConverter.ToPathGeometry(result, 0.0, 0.0, factory);
             var pathShape = factory.CreatePathShape(
                 "Path",
                 style,

@@ -15,7 +15,6 @@ namespace Core2D.Editor.Tools.Selection
         private readonly ILayerContainer _layer;
         private readonly IQuadraticBezierShape _quadraticBezier;
         private readonly IShapeStyle _style;
-        private readonly IBaseShape _point;
         private ILineShape _line12;
         private ILineShape _line32;
         private IPointShape _helperPoint1;
@@ -30,13 +29,12 @@ namespace Core2D.Editor.Tools.Selection
         /// <param name="shape">The selected shape.</param>
         /// <param name="style">The selection shapes style.</param>
         /// <param name="point">The selection point shape.</param>
-        public ToolQuadraticBezierSelection(IServiceProvider serviceProvider, ILayerContainer layer, IQuadraticBezierShape shape, IShapeStyle style, IBaseShape point)
+        public ToolQuadraticBezierSelection(IServiceProvider serviceProvider, ILayerContainer layer, IQuadraticBezierShape shape, IShapeStyle style)
         {
             _serviceProvider = serviceProvider;
             _layer = layer;
             _quadraticBezier = shape;
             _style = style;
-            _point = point;
         }
 
         /// <summary>
@@ -44,8 +42,8 @@ namespace Core2D.Editor.Tools.Selection
         /// </summary>
         public void ToStatePoint3()
         {
-            _helperPoint1 = _serviceProvider.GetService<IFactory>().CreatePointShape(0, 0, _point);
-            _helperPoint3 = _serviceProvider.GetService<IFactory>().CreatePointShape(0, 0, _point);
+            _helperPoint1 = _serviceProvider.GetService<IFactory>().CreatePointShape(0, 0);
+            _helperPoint3 = _serviceProvider.GetService<IFactory>().CreatePointShape(0, 0);
 
             _layer.Shapes = _layer.Shapes.Add(_helperPoint1);
             _layer.Shapes = _layer.Shapes.Add(_helperPoint3);
@@ -56,9 +54,9 @@ namespace Core2D.Editor.Tools.Selection
         /// </summary>
         public void ToStatePoint2()
         {
-            _line12 = _serviceProvider.GetService<IFactory>().CreateLineShape(0, 0, _style, null);
-            _line32 = _serviceProvider.GetService<IFactory>().CreateLineShape(0, 0, _style, null);
-            _helperPoint2 = _serviceProvider.GetService<IFactory>().CreatePointShape(0, 0, _point);
+            _line12 = _serviceProvider.GetService<IFactory>().CreateLineShape(0, 0, _style);
+            _line32 = _serviceProvider.GetService<IFactory>().CreateLineShape(0, 0, _style);
+            _helperPoint2 = _serviceProvider.GetService<IFactory>().CreatePointShape(0, 0);
 
             _layer.Shapes = _layer.Shapes.Add(_line12);
             _layer.Shapes = _layer.Shapes.Add(_line32);

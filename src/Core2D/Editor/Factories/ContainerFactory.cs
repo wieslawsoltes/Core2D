@@ -133,8 +133,7 @@ namespace Core2D.Editor.Factories
             var grid = factory.CreateRectangleShape(
                 30.0, 30.0,
                 template.Width - 30.0, template.Height - 30.0,
-                style,
-                project.Options.PointShape);
+                style);
             grid.IsStroked = true;
             grid.IsFilled = false;
             grid.IsGrid = true;

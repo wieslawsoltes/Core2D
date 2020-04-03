@@ -71,7 +71,6 @@ namespace Core2D.Editor.Tools
                         _arc = factory.CreateArcShape(
                             sx, sy,
                             (IShapeStyle)style.Copy(null),
-                            editor.Project.Options.PointShape,
                             editor.Project.Options.DefaultIsStroked,
                             editor.Project.Options.DefaultIsFilled);
 
@@ -265,8 +264,7 @@ namespace Core2D.Editor.Tools
                 _serviceProvider,
                 editor.Project.CurrentContainer.HelperLayer,
                 _arc,
-                editor.Project.Options.HelperStyle,
-                editor.Project.Options.PointShape);
+                editor.Project.Options.HelperStyle);
 
             _selection.ToStatePoint2();
         }

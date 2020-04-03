@@ -22,10 +22,5 @@ namespace Core2D.Shapes
         /// Gets or sets point alignment.
         /// </summary>
         PointAlignment Alignment { get; set; }
-
-        /// <summary>
-        /// Gets or sets point template shape.
-        /// </summary>
-        IBaseShape Shape { get; set; }
     }
 }

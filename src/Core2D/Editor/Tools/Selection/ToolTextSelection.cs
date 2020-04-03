@@ -15,7 +15,6 @@ namespace Core2D.Editor.Tools.Selection
         private readonly ILayerContainer _layer;
         private readonly ITextShape _text;
         private readonly IShapeStyle _style;
-        private readonly IBaseShape _point;
         private IPointShape _topLeftHelperPoint;
         private IPointShape _bottomRightHelperPoint;
         private IRectangleShape _helperRectangle;
@@ -28,13 +27,12 @@ namespace Core2D.Editor.Tools.Selection
         /// <param name="shape">The selected shape.</param>
         /// <param name="style">The selection shapes style.</param>
         /// <param name="point">The selection point shape.</param>
-        public ToolTextSelection(IServiceProvider serviceProvider, ILayerContainer layer, ITextShape shape, IShapeStyle style, IBaseShape point)
+        public ToolTextSelection(IServiceProvider serviceProvider, ILayerContainer layer, ITextShape shape, IShapeStyle style)
         {
             _serviceProvider = serviceProvider;
             _layer = layer;
             _text = shape;
             _style = style;
-            _point = point;
         }
 
         /// <summary>
@@ -42,9 +40,9 @@ namespace Core2D.Editor.Tools.Selection
         /// </summary>
         public void ToStateBottomRight()
         {
-            _helperRectangle = _serviceProvider.GetService<IFactory>().CreateRectangleShape(0, 0, _style, null);
-            _topLeftHelperPoint = _serviceProvider.GetService<IFactory>().CreatePointShape(0, 0, _point);
-            _bottomRightHelperPoint = _serviceProvider.GetService<IFactory>().CreatePointShape(0, 0, _point);
+            _helperRectangle = _serviceProvider.GetService<IFactory>().CreateRectangleShape(0, 0, _style);
+            _topLeftHelperPoint = _serviceProvider.GetService<IFactory>().CreatePointShape(0, 0);
+            _bottomRightHelperPoint = _serviceProvider.GetService<IFactory>().CreatePointShape(0, 0);
 
             _layer.Shapes = _layer.Shapes.Add(_helperRectangle);
             _layer.Shapes = _layer.Shapes.Add(_topLeftHelperPoint);
