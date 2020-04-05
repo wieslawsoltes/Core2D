@@ -24,11 +24,22 @@ namespace Core2D.UnitTests
 
         [Fact]
         [Trait("Core2D.Path", "Segments")]
-        public void ToString_Should_Return_Path_Markup()
+        public void ToXamlString_Should_Return_Path_Markup()
         {
             var target = _factory.CreateQuadraticBezierSegment(_factory.CreatePointShape(), _factory.CreatePointShape(), true, true);
 
-            var actual = target.ToString();
+            var actual = target.ToXamlString();
+
+            Assert.Equal("Q0,0 0,0", actual);
+        }
+
+        [Fact]
+        [Trait("Core2D.Path", "Segments")]
+        public void ToSvgString_Should_Return_Path_Markup()
+        {
+            var target = _factory.CreateQuadraticBezierSegment(_factory.CreatePointShape(), _factory.CreatePointShape(), true, true);
+
+            var actual = target.ToSvgString();
 
             Assert.Equal("Q0,0 0,0", actual);
         }

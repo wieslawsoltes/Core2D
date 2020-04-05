@@ -24,14 +24,28 @@ namespace Core2D.UnitTests
 
         [Fact]
         [Trait("Core2D.Path", "Segments")]
-        public void ToString_Should_Return_Path_Markup()
+        public void ToXamlString_Should_Return_Path_Markup()
         {
             var target = _factory.CreateArcSegment(_factory.CreatePointShape(), _factory.CreatePathSize(), 90, true, SweepDirection.Clockwise, true, true);
 
             target.Size.Width = 10;
             target.Size.Height = 20;
 
-            var actual = target.ToString();
+            var actual = target.ToXamlString();
+
+            Assert.Equal("A10,20 90 1 1 0,0", actual);
+        }
+
+        [Fact]
+        [Trait("Core2D.Path", "Segments")]
+        public void ToSvgString_Should_Return_Path_Markup()
+        {
+            var target = _factory.CreateArcSegment(_factory.CreatePointShape(), _factory.CreatePathSize(), 90, true, SweepDirection.Clockwise, true, true);
+
+            target.Size.Width = 10;
+            target.Size.Height = 20;
+
+            var actual = target.ToSvgString();
 
             Assert.Equal("A10,20 90 1 1 0,0", actual);
         }

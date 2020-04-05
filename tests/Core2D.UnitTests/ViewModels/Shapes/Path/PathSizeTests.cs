@@ -9,14 +9,27 @@ namespace Core2D.UnitTests
 
         [Fact]
         [Trait("Core2D.Path", "Geometry")]
-        public void ToString_Should_Return_Width_And_Height()
+        public void ToXamlString_Should_Return_Width_And_Height()
         {
             var target = _factory.CreatePathSize();
 
             target.Width = 50;
             target.Height = 30;
 
-            var actual = target.ToString();
+            var actual = target.ToXamlString();
+            Assert.Equal("50,30", actual);
+        }
+
+        [Fact]
+        [Trait("Core2D.Path", "Geometry")]
+        public void ToSvgString_Should_Return_Width_And_Height()
+        {
+            var target = _factory.CreatePathSize();
+
+            target.Width = 50;
+            target.Height = 30;
+
+            var actual = target.ToSvgString();
             Assert.Equal("50,30", actual);
         }
     }

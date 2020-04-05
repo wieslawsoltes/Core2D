@@ -68,36 +68,72 @@ namespace Core2D.UnitTests
 
         [Fact]
         [Trait("Core2D.Path", "Geometry")]
-        public void ToString_Should_Return_Empty()
+        public void ToXamlString_Should_Return_Empty()
         {
             var figure = _factory.CreatePathFigure();
 
             var target = ImmutableArray.Create<IPathSegment>();
-            var actual = (figure as PathFigure).ToString(target);
+            var actual = (figure as PathFigure).ToXamlString(target);
 
             Assert.Equal(string.Empty, actual);
         }
 
         [Fact]
         [Trait("Core2D.Path", "Geometry")]
-        public void ToString_Should_Return_Path_Markup_Empty_Not_Closed()
+        public void ToSvgString_Should_Return_Empty()
+        {
+            var figure = _factory.CreatePathFigure();
+
+            var target = ImmutableArray.Create<IPathSegment>();
+            var actual = (figure as PathFigure).ToSvgString(target);
+
+            Assert.Equal(string.Empty, actual);
+        }
+
+        [Fact]
+        [Trait("Core2D.Path", "Geometry")]
+        public void ToXamlString_Should_Return_Path_Markup_Empty_Not_Closed()
         {
             var target = _factory.CreatePathFigure();
 
-            var actual = target.ToString();
+            var actual = target.ToXamlString();
 
             Assert.Equal("M0,0", actual);
         }
 
         [Fact]
         [Trait("Core2D.Path", "Geometry")]
-        public void ToString_Should_Return_Path_Markup_Empty_Closed()
+        public void ToSvgString_Should_Return_Path_Markup_Empty_Not_Closed()
+        {
+            var target = _factory.CreatePathFigure();
+
+            var actual = target.ToSvgString();
+
+            Assert.Equal("M0,0", actual);
+        }
+
+        [Fact]
+        [Trait("Core2D.Path", "Geometry")]
+        public void ToXamlString_Should_Return_Path_Markup_Empty_Closed()
         {
             var target = _factory.CreatePathFigure();
 
             target.IsClosed = true;
 
-            var actual = target.ToString();
+            var actual = target.ToXamlString();
+
+            Assert.Equal("M0,0z", actual);
+        }
+
+        [Fact]
+        [Trait("Core2D.Path", "Geometry")]
+        public void ToSvgString_Should_Return_Path_Markup_Empty_Closed()
+        {
+            var target = _factory.CreatePathFigure();
+
+            target.IsClosed = true;
+
+            var actual = target.ToSvgString();
 
             Assert.Equal("M0,0z", actual);
         }
@@ -113,6 +149,18 @@ namespace Core2D.UnitTests
 
             /// <inheritdoc/>
             public override object Copy(IDictionary<object, object> shared)
+            {
+                throw new NotImplementedException();
+            }
+
+            /// <inheritdoc/>
+            public override string ToXamlString()
+            {
+                throw new NotImplementedException();
+            }
+
+            /// <inheritdoc/>
+            public override string ToSvgString()
             {
                 throw new NotImplementedException();
             }

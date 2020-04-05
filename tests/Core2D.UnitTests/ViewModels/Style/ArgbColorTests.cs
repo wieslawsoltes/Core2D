@@ -65,11 +65,20 @@ namespace Core2D.Style.UnitTests
 
         [Fact]
         [Trait("Core2D.Style", "Style")]
-        public void ToHtml_Should_Return_Color_String_Statring_With_Hash()
+        public void ToXamlHex_Should_Return_Color_String_Statring_With_Hash()
         {
             var target = _factory.CreateArgbColor(0xFF, 0x7F, 0x5A, 0x45);
 
-            Assert.Equal("#FF7F5A45", ArgbColor.ToHtml(target));
+            Assert.Equal("#FF7F5A45", ArgbColor.ToXamlHex(target));
+        }
+
+        [Fact]
+        [Trait("Core2D.Style", "Style")]
+        public void ToSvgHex_Should_Return_Color_String_Statring_With_Hash()
+        {
+            var target = _factory.CreateArgbColor(0xFF, 0x7F, 0x5A, 0x45);
+
+            Assert.Equal("#7F5A45FF", ArgbColor.ToSvgHex(target));
         }
     }
 }

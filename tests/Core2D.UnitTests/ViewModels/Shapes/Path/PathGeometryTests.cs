@@ -27,36 +27,72 @@ namespace Core2D.UnitTests
 
         [Fact]
         [Trait("Core2D.Path", "Geometry")]
-        public void ToString_Should_Return_Empty()
+        public void ToXamlString_Should_Return_Empty()
         {
             var geometry = _factory.CreatePathGeometry();
 
             var target = ImmutableArray.Create<IPathFigure>();
-            var actual = (geometry as PathGeometry).ToString(target);
+            var actual = (geometry as PathGeometry).ToXamlString(target);
 
             Assert.Equal(string.Empty, actual);
         }
 
         [Fact]
         [Trait("Core2D.Path", "Geometry")]
-        public void ToString_Should_Return_Path_Markup_Empty_Nonzero()
+        public void ToSvgString_Should_Return_Empty()
+        {
+            var geometry = _factory.CreatePathGeometry();
+
+            var target = ImmutableArray.Create<IPathFigure>();
+            var actual = (geometry as PathGeometry).ToSvgString(target);
+
+            Assert.Equal(string.Empty, actual);
+        }
+
+        [Fact]
+        [Trait("Core2D.Path", "Geometry")]
+        public void ToXamlString_Should_Return_Path_Markup_Empty_Nonzero()
         {
             var target = _factory.CreatePathGeometry();
 
-            var actual = target.ToString();
+            var actual = target.ToXamlString();
 
             Assert.Equal("F1", actual);
         }
 
         [Fact]
         [Trait("Core2D.Path", "Geometry")]
-        public void ToString_Should_Return_Path_Markup_Empty_EvenOdd()
+        public void ToSvgString_Should_Return_Path_Markup_Empty_Nonzero()
+        {
+            var target = _factory.CreatePathGeometry();
+
+            var actual = target.ToSvgString();
+
+            Assert.Equal("", actual);
+        }
+
+        [Fact]
+        [Trait("Core2D.Path", "Geometry")]
+        public void ToXamlString_Should_Return_Path_Markup_Empty_EvenOdd()
         {
             var target = _factory.CreatePathGeometry();
 
             target.FillRule = FillRule.EvenOdd;
 
-            var actual = target.ToString();
+            var actual = target.ToXamlString();
+
+            Assert.Equal("", actual);
+        }
+
+        [Fact]
+        [Trait("Core2D.Path", "Geometry")]
+        public void ToSvgString_Should_Return_Path_Markup_Empty_EvenOdd()
+        {
+            var target = _factory.CreatePathGeometry();
+
+            target.FillRule = FillRule.EvenOdd;
+
+            var actual = target.ToSvgString();
 
             Assert.Equal("", actual);
         }

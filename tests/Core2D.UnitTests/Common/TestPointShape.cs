@@ -11,5 +11,7 @@ namespace Core2D.Common.UnitTests
         public double Y { get; set; }
         public PointAlignment Alignment { get; set; }
         public IBaseShape Shape { get; set; }
+        public string ToXamlString() => throw new NotImplementedException();
+        public string ToSvgString() => throw new NotImplementedException();
     }
 }
