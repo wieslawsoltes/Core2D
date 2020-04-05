@@ -30,11 +30,13 @@ namespace Core2D.Path.Segments
             throw new NotImplementedException();
         }
 
-        /// <summary>
-        /// Returns a string that represents the current object.
-        /// </summary>
-        /// <returns>A string that represents the current object.</returns>
-        public override string ToString() => $"L{Point}";
+        /// <inheritdoc/>
+        public override string ToXamlString()
+            => $"L{Point.ToXamlString()}";
+
+        /// <inheritdoc/>
+        public override string ToSvgString()
+            => $"L{Point.ToSvgString()}";
 
         /// <summary>
         /// Check whether the <see cref="Point"/> property has changed from its default value.
