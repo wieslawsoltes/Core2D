@@ -19,7 +19,7 @@ namespace Core2D.Serializer.Newtonsoft
             switch (value as IColor)
             {
                 case IArgbColor argbColor:
-                    writer.WriteValue(ArgbColor.ToHtml(argbColor));
+                    writer.WriteValue(ArgbColor.ToXamlHex(argbColor));
                     break;
                 default:
                     throw new NotSupportedException($"The {value.GetType()} color type is not supported.");
