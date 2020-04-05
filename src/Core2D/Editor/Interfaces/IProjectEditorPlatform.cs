@@ -66,10 +66,16 @@ namespace Core2D.Editor
         void OnExit();
 
         /// <summary>
-        /// Copy page or selected shapes to clipboard as DrawingGroup.
+        /// Copy page or selected shapes to clipboard as Xaml.
         /// </summary>
-        /// <param name="item">The object to copy as DrawingGroup.</param>
-        void OnCopyAsDrawing(object item);
+        /// <param name="item">The object to copy as Xaml.</param>
+        void OnCopyAsXaml(object item);
+
+        /// <summary>
+        /// Copy page or selected shapes to clipboard as Svg.
+        /// </summary>
+        /// <param name="item">The object to copy as Svg.</param>
+        void OnCopyAsSvg(object item);
 
         /// <summary>
         /// Copy page or selected shapes to clipboard as Emf.
