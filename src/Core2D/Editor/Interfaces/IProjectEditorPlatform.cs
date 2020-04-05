@@ -66,6 +66,12 @@ namespace Core2D.Editor
         void OnExit();
 
         /// <summary>
+        /// Copy page or selected shapes to clipboard as DrawingGroup.
+        /// </summary>
+        /// <param name="item">The object to copy as DrawingGroup.</param>
+        void OnCopyAsDrawing(object item);
+
+        /// <summary>
         /// Copy page or selected shapes to clipboard as Emf.
         /// </summary>
         /// <param name="item">The object to copy as EMF.</param>
