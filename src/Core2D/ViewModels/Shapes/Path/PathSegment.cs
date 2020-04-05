@@ -28,6 +28,12 @@ namespace Core2D.Path
         /// <inheritdoc/>
         public abstract IEnumerable<IPointShape> GetPoints();
 
+        /// <inheritdoc/>
+        public abstract string ToXamlString();
+
+        /// <inheritdoc/>
+        public abstract string ToSvgString();
+
         /// <summary>
         /// Check whether the <see cref="IsStroked"/> property has changed from its default value.
         /// </summary>
