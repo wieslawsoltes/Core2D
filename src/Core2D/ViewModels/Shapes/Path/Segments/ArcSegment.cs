@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using Core2D.Shapes;
 
 namespace Core2D.Path.Segments
@@ -67,16 +68,7 @@ namespace Core2D.Path.Segments
         /// </summary>
         /// <returns>A string that represents the current object.</returns>
         public override string ToString()
-        {
-            return string.Format(
-                     "A{1}{0}{2}{0}{3}{0}{4}{0}{5}",
-                     " ",
-                     Size,
-                     RotationAngle,
-                     IsLargeArc ? "1" : "0",
-                     SweepDirection == SweepDirection.Clockwise ? "1" : "0",
-                     Point);
-        }
+            => $"A{Size} {RotationAngle.ToString(CultureInfo.InvariantCulture)} {(IsLargeArc ? "1" : "0")} {(SweepDirection == SweepDirection.Clockwise ? "1" : "0")} {Point}";
 
         /// <summary>
         /// Check whether the <see cref="Point"/> property has changed from its default value.
