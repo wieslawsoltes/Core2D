@@ -7,7 +7,7 @@ namespace Core2D.Path
     /// <summary>
     /// Defines path figure contract.
     /// </summary>
-    public interface IPathFigure : IObservableObject
+    public interface IPathFigure : IObservableObject, IStringExporter
     {
         /// <summary>
         /// Gets or sets start point.
