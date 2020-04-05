@@ -6,6 +6,7 @@ using Core2D.Data;
 using Core2D.Editor;
 using Core2D.Interfaces;
 using Core2D.UI.Avalonia.Views;
+using Core2D.XamlExporter.Avalonia;
 using DM = Dock.Model;
 
 namespace Core2D.UI.Avalonia.Editor
@@ -267,6 +268,60 @@ namespace Core2D.UI.Avalonia.Editor
         public void OnExit()
         {
             _serviceProvider.GetService<MainWindow>().Close();
+        }
+
+        /// <inheritdoc/>
+        public void OnCopyAsDrawing(object item)
+        {
+            try
+            {
+                if (item == null)
+                {
+                    var editor = _serviceProvider.GetService<IProjectEditor>();
+                    var exporter = new DrawingGroupXamlExporter(_serviceProvider);
+                    var container = editor.Project.CurrentContainer;
+
+                    var source = editor.PageState?.SelectedShape;
+                    if (source != null)
+                    {
+                        var key = !string.IsNullOrWhiteSpace(source.Name) ? source.Name : (!string.IsNullOrWhiteSpace(container?.Name) ? container?.Name : default);
+                        var xaml = exporter.Create(source, key);
+                        if (!string.IsNullOrEmpty(xaml))
+                        {
+                            editor.TextClipboard?.SetText(xaml);
+                        }
+                        return;
+                    }
+
+                    var sources = editor.PageState?.SelectedShapes;
+                    if (sources != null)
+                    {
+                        var key = container?.Name;
+                        var xaml = exporter.Create(source, key);
+                        if (!string.IsNullOrEmpty(xaml))
+                        {
+                            editor.TextClipboard?.SetText(xaml);
+                        }
+                        return;
+                    }
+
+                    var shapes = container.Layers.Select(x => x.Shapes);
+                    if (shapes != null)
+                    {
+                        var key = container?.Name;
+                        var xaml = exporter.Create(shapes, key);
+                        if (!string.IsNullOrEmpty(xaml))
+                        {
+                            editor.TextClipboard?.SetText(xaml);
+                        }
+                        return;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                _serviceProvider.GetService<ILog>()?.LogException(ex);
+            }
         }
 
         /// <inheritdoc/>
