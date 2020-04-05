@@ -117,14 +117,13 @@ namespace Core2D.Shapes
             };
         }
 
-        /// <summary>
-        /// Returns a string that represents the current object.
-        /// </summary>
-        /// <returns>A string that represents the current object.</returns>
-        public override string ToString()
-        {
-            return $"{_x.ToString(CultureInfo.InvariantCulture)},{_y.ToString(CultureInfo.InvariantCulture)}";
-        }
+        /// <inheritdoc/>
+        public string ToXamlString()
+            => $"{_x.ToString(CultureInfo.InvariantCulture)},{_y.ToString(CultureInfo.InvariantCulture)}";
+
+        /// <inheritdoc/>
+        public string ToSvgString()
+            => $"{_x.ToString(CultureInfo.InvariantCulture)},{_y.ToString(CultureInfo.InvariantCulture)}";
 
         /// <summary>
         /// Check whether the <see cref="X"/> property has changed from its default value.
