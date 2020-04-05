@@ -56,6 +56,14 @@ namespace Core2D.Style
             };
         }
 
+        /// <inheritdoc/>
+        public string ToXamlString()
+            => ToXamlHex(this);
+
+        /// <inheritdoc/>
+        public string ToSvgString()
+            => ToSvgHex(this);
+
         /// <summary>
         /// Creates a <see cref="ArgbColor"/> from an integer.
         /// </summary>
@@ -110,13 +118,23 @@ namespace Core2D.Style
         }
 
         /// <summary>
-        /// Converts a color to string.
+        /// Converts a color to xaml hex string.
         /// </summary>
         /// <param name="c">The color instance.</param>
         /// <returns>The color string.</returns>
-        public static string ToHtml(IArgbColor c)
+        public static string ToXamlHex(IArgbColor c)
         {
             return string.Concat('#', c.A.ToString("X2"), c.R.ToString("X2"), c.G.ToString("X2"), c.B.ToString("X2"));
+        }
+
+        /// <summary>
+        /// Converts a color to svg hex string.
+        /// </summary>
+        /// <param name="c">The color instance.</param>
+        /// <returns>The color string.</returns>
+        public static string ToSvgHex(IArgbColor c)
+        {
+            return string.Concat('#', c.R.ToString("X2"), c.G.ToString("X2"), c.B.ToString("X2"), c.A.ToString("X2"));
         }
 
         /// <summary>
