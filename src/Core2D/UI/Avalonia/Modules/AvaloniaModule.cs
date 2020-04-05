@@ -35,6 +35,8 @@ using Core2D.UI.Avalonia.Dock.Windows;
 using Core2D.UI.Avalonia.Views;
 using DM = Dock.Model;
 using Core2D.Renderer.SkiaSharp;
+using Core2D.FileWriter.Svg;
+using Core2D.FileWriter.Xaml;
 
 namespace Core2D.UI.Avalonia.Modules
 {
@@ -74,6 +76,8 @@ namespace Core2D.UI.Avalonia.Modules
 #endif
             builder.RegisterType<NewtonsoftJsonSerializer>().As<IJsonSerializer>().InstancePerLifetimeScope();
             builder.RegisterType<PdfSharpWriter>().As<IFileWriter>().InstancePerLifetimeScope();
+            builder.RegisterType<SvgSvgWriter>().As<IFileWriter>().InstancePerLifetimeScope();
+            builder.RegisterType<DrawingGroupXamlWriter>().As<IFileWriter>().InstancePerLifetimeScope();
             builder.RegisterType<PdfSkiaSharpWriter>().As<IFileWriter>().InstancePerLifetimeScope();
             builder.RegisterType<DxfWriter>().As<IFileWriter>().InstancePerLifetimeScope();
             builder.RegisterType<SvgSkiaSharpWriter>().As<IFileWriter>().InstancePerLifetimeScope();
