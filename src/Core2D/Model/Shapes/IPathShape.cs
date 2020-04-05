@@ -5,7 +5,7 @@ namespace Core2D.Shapes
     /// <summary>
     /// Defines path shape contract.
     /// </summary>
-    public interface IPathShape : IBaseShape
+    public interface IPathShape : IBaseShape, IStringExporter
     {
         /// <summary>
         /// Gets or sets path geometry used to draw shape.
