@@ -297,7 +297,7 @@ namespace Core2D.UI.Avalonia.Editor
                     if (sources != null)
                     {
                         var key = container?.Name;
-                        var xaml = exporter.Create(source, key);
+                        var xaml = exporter.Create(sources, key);
                         if (!string.IsNullOrEmpty(xaml))
                         {
                             editor.TextClipboard?.SetText(xaml);
