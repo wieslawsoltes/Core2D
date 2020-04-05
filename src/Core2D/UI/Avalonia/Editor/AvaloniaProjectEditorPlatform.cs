@@ -284,7 +284,7 @@ namespace Core2D.UI.Avalonia.Editor
                     var source = editor.PageState?.SelectedShape;
                     if (source != null)
                     {
-                        var key = !string.IsNullOrWhiteSpace(source.Name) ? source.Name : (!string.IsNullOrWhiteSpace(container?.Name) ? container?.Name : default);
+                        var key = source.Name;
                         var xaml = exporter.Create(source, key);
                         if (!string.IsNullOrEmpty(xaml))
                         {
