@@ -35,7 +35,7 @@ namespace Core2D.Path
             throw new NotImplementedException();
         }
 
-        private string ToXamlString(ImmutableArray<IPathFigure> figures)
+        public string ToXamlString(ImmutableArray<IPathFigure> figures)
         {
             if (figures.Length == 0)
             {
@@ -53,7 +53,7 @@ namespace Core2D.Path
             return sb.ToString();
         }
 
-        private string ToSvgString(ImmutableArray<IPathFigure> figures)
+        public string ToSvgString(ImmutableArray<IPathFigure> figures)
         {
             if (figures.Length == 0)
             {
