@@ -209,6 +209,7 @@ namespace Core2D.Renderer.SkiaSharp
                 ILineShape lineShape => ToSKPath(lineShape, dx, dy, scale),
                 IRectangleShape rectangleShape => ToSKPath(rectangleShape, dx, dy, scale),
                 IEllipseShape ellipseShape => ToSKPath(ellipseShape, dx, dy, scale),
+                IImageShape imageShape => ToSKPath(imageShape, dx, dy, scale),
                 IArcShape arcShape => ToSKPath(arcShape, dx, dy, scale),
                 ICubicBezierShape cubicBezierShape => ToSKPath(cubicBezierShape, dx, dy, scale),
                 IQuadraticBezierShape quadraticBezierShape => ToSKPath(quadraticBezierShape, dx, dy, scale),
@@ -243,6 +244,14 @@ namespace Core2D.Renderer.SkiaSharp
             path.AddRect(
                 SkiaSharpRenderer.CreateRect(rectangle.TopLeft, rectangle.BottomRight, dx, dy, scale),
                 SKPathDirection.Clockwise);
+            if (rectangle is ITextShape text)
+            {
+                var textPath = ToSKPath(text, dx, dy, scale);
+                if (textPath != null && !textPath.IsEmpty)
+                {
+                    path.AddPath(textPath, SKPathAddMode.Append);
+                }
+            }
             return path;
         }
 
@@ -255,6 +264,34 @@ namespace Core2D.Renderer.SkiaSharp
             path.AddOval(
                 SkiaSharpRenderer.CreateRect(ellipse.TopLeft, ellipse.BottomRight, dx, dy, scale),
                 SKPathDirection.Clockwise);
+            if (ellipse is ITextShape text)
+            {
+                var textPath = ToSKPath(text, dx, dy, scale);
+                if (textPath != null && !textPath.IsEmpty)
+                {
+                    path.AddPath(textPath, SKPathAddMode.Append);
+                }
+            }
+            return path;
+        }
+
+        public static SKPath ToSKPath(this IImageShape image, double dx, double dy, Func<double, float> scale)
+        {
+            var path = new SKPath
+            {
+                FillType = SKPathFillType.Winding
+            };
+            path.AddRect(
+                SkiaSharpRenderer.CreateRect(image.TopLeft, image.BottomRight, dx, dy, scale),
+                SKPathDirection.Clockwise);
+            if (image is ITextShape text)
+            {
+                var textPath = ToSKPath(text, dx, dy, scale);
+                if (textPath != null && !textPath.IsEmpty)
+                {
+                    path.AddPath(textPath, SKPathAddMode.Append);
+                }
+            }
             return path;
         }
 
