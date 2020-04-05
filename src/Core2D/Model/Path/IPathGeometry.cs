@@ -5,7 +5,7 @@ namespace Core2D.Path
     /// <summary>
     /// Defines path geometry contract.
     /// </summary>
-    public interface IPathGeometry : IObservableObject
+    public interface IPathGeometry : IObservableObject, IStringExporter
     {
         /// <summary>
         /// Gets or sets figures collection.
