@@ -4,7 +4,7 @@ namespace Core2D.Style
     /// <summary>
     /// Defines ARGB color contract.
     /// </summary>
-    public interface IArgbColor : IColor
+    public interface IArgbColor : IColor, IStringExporter
     {
         /// <summary>
         /// Alpha color channel.
