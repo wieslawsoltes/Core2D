@@ -72,7 +72,7 @@ namespace Core2D.Path
             throw new NotImplementedException();
         }
 
-        private string ToXamlString(ImmutableArray<IPathSegment> segments)
+        public string ToXamlString(ImmutableArray<IPathSegment> segments)
         {
             if (segments.Length == 0)
             {
@@ -86,7 +86,7 @@ namespace Core2D.Path
             return sb.ToString();
         }
 
-        private string ToSvgString(ImmutableArray<IPathSegment> segments)
+        public string ToSvgString(ImmutableArray<IPathSegment> segments)
         {
             if (segments.Length == 0)
             {
