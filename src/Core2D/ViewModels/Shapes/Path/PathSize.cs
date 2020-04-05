@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 
 namespace Core2D.Path
 {
@@ -35,7 +36,7 @@ namespace Core2D.Path
         /// Returns a string that represents the current object.
         /// </summary>
         /// <returns>A string that represents the current object.</returns>
-        public override string ToString() => $"{Width},{Height}";
+        public override string ToString() => $"{Width.ToString(CultureInfo.InvariantCulture)},{Height.ToString(CultureInfo.InvariantCulture)}";
 
         /// <summary>
         /// Check whether the <see cref="Width"/> property has changed from its default value.
