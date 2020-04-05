@@ -35,22 +35,16 @@ namespace Core2D.Path
             throw new NotImplementedException();
         }
 
-        /// <summary>
-        /// Creates a string representation of figures collection.
-        /// </summary>
-        /// <param name="figures">The figures collection.</param>
-        /// <returns>A string representation of figures collection.</returns>
-        public string ToString(ImmutableArray<IPathFigure> figures)
+        private string ToXamlString(ImmutableArray<IPathFigure> figures)
         {
             if (figures.Length == 0)
             {
                 return string.Empty;
             }
-
             var sb = new StringBuilder();
             for (int i = 0; i < figures.Length; i++)
             {
-                sb.Append(figures[i]);
+                sb.Append(figures[i].ToXamlString());
                 if (i != figures.Length - 1)
                 {
                     sb.Append(" ");
@@ -59,17 +53,32 @@ namespace Core2D.Path
             return sb.ToString();
         }
 
-        /// <summary>
-        /// Returns a string that represents the current object.
-        /// </summary>
-        /// <returns>A string that represents the current object.</returns>
-        public override string ToString()
+        private string ToSvgString(ImmutableArray<IPathFigure> figures)
+        {
+            if (figures.Length == 0)
+            {
+                return string.Empty;
+            }
+            var sb = new StringBuilder();
+            for (int i = 0; i < figures.Length; i++)
+            {
+                sb.Append(figures[i].ToSvgString());
+                if (i != figures.Length - 1)
+                {
+                    sb.Append(" ");
+                }
+            }
+            return sb.ToString();
+        }
+
+        /// <inheritdoc/>
+        public string ToXamlString()
         {
             string figuresString = string.Empty;
 
             if (Figures.Length > 0)
             {
-                figuresString = ToString(Figures);
+                figuresString = ToXamlString(Figures);
             }
 
             if (FillRule == FillRule.Nonzero)
@@ -78,6 +87,16 @@ namespace Core2D.Path
             }
 
             return figuresString;
+        }
+
+        /// <inheritdoc/>
+        public string ToSvgString()
+        {
+            if (Figures.Length > 0)
+            {
+                return ToSvgString(Figures);
+            }
+            return string.Empty;
         }
 
         /// <summary>
