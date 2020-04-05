@@ -133,6 +133,14 @@ namespace Core2D.Shapes
             throw new NotImplementedException();
         }
 
+        /// <inheritdoc/>
+        public string ToXamlString()
+            => Geometry?.ToXamlString();
+
+        /// <inheritdoc/>
+        public string ToSvgString()
+            => Geometry?.ToSvgString();
+
         /// <summary>
         /// Check whether the <see cref="Geometry"/> property has changed from its default value.
         /// </summary>
