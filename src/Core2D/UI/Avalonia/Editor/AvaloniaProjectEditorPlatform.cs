@@ -304,7 +304,7 @@ namespace Core2D.UI.Avalonia.Editor
                         return;
                     }
 
-                    var shapes = container.Layers.Select(x => x.Shapes);
+                    var shapes = container.Layers.SelectMany(x => x.Shapes);
                     if (shapes != null)
                     {
                         var xaml = exporter.Create(shapes, container.Width, container.Height);
@@ -356,7 +356,7 @@ namespace Core2D.UI.Avalonia.Editor
                         return;
                     }
 
-                    var shapes = container.Layers.Select(x => x.Shapes);
+                    var shapes = container.Layers.SelectMany(x => x.Shapes);
                     if (shapes != null)
                     {
                         var key = container?.Name;
