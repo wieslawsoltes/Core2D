@@ -1,12 +1,11 @@
-﻿
-using Core2D.Renderer;
+﻿using Core2D.Renderer;
 
 namespace Core2D.Shapes
 {
     /// <summary>
     /// Defines point shape contract.
     /// </summary>
-    public interface IPointShape : IBaseShape
+    public interface IPointShape : IBaseShape, IStringExporter
     {
         /// <summary>
         /// Gets or sets X coordinate of point.
