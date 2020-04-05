@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Globalization;
 using Core2D.Data;
 using Core2D.Renderer;
 
@@ -122,7 +123,7 @@ namespace Core2D.Shapes
         /// <returns>A string that represents the current object.</returns>
         public override string ToString()
         {
-            return string.Format("{0},{1}", _x, _y);
+            return $"{_x.ToString(CultureInfo.InvariantCulture)},{_y.ToString(CultureInfo.InvariantCulture)}";
         }
 
         /// <summary>
