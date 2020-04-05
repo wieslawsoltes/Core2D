@@ -72,36 +72,50 @@ namespace Core2D.Path
             throw new NotImplementedException();
         }
 
-        /// <summary>
-        /// Creates a string representation of segments collection.
-        /// </summary>
-        /// <param name="segments">The segments collection.</param>
-        /// <returns>A string representation of segments collection.</returns>
-        public string ToString(ImmutableArray<IPathSegment> segments)
+        private string ToXamlString(ImmutableArray<IPathSegment> segments)
         {
             if (segments.Length == 0)
             {
                 return string.Empty;
             }
-
             var sb = new StringBuilder();
             for (int i = 0; i < segments.Length; i++)
             {
-                sb.Append(segments[i].ToString());
+                sb.Append(segments[i].ToXamlString());
             }
             return sb.ToString();
         }
 
-        /// <summary>
-        /// Returns a string that represents the current object.
-        /// </summary>
-        /// <returns>A string that represents the current object.</returns>
-        public override string ToString()
+        private string ToSvgString(ImmutableArray<IPathSegment> segments)
+        {
+            if (segments.Length == 0)
+            {
+                return string.Empty;
+            }
+            var sb = new StringBuilder();
+            for (int i = 0; i < segments.Length; i++)
+            {
+                sb.Append(segments[i].ToSvgString());
+            }
+            return sb.ToString();
+        }
+
+        /// <inheritdoc/>
+        public string ToXamlString()
         {
             return
-                (StartPoint != null ? "M" + StartPoint.ToString() : "")
-                + (Segments != null ? ToString(Segments) : "")
+                (StartPoint != null ? "M" + StartPoint.ToXamlString() : "")
+                + (Segments != null ? ToXamlString(Segments) : "")
                 + (IsClosed ? "z" : "");
+        }
+
+        /// <inheritdoc/>
+        public string ToSvgString()
+        {
+            return
+                (StartPoint != null ? "M" + StartPoint.ToSvgString() : "")
+                + (Segments != null ? ToSvgString(Segments) : "")
+                + (IsClosed? "z" : "");
         }
 
         /// <summary>
