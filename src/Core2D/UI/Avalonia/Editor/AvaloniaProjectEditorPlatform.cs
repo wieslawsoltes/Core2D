@@ -5,6 +5,7 @@ using Core2D.Containers;
 using Core2D.Data;
 using Core2D.Editor;
 using Core2D.Interfaces;
+using Core2D.SvgExporter.Svg;
 using Core2D.UI.Avalonia.Views;
 using Core2D.XamlExporter.Avalonia;
 using DM = Dock.Model;
@@ -271,7 +272,58 @@ namespace Core2D.UI.Avalonia.Editor
         }
 
         /// <inheritdoc/>
-        public void OnCopyAsDrawing(object item)
+        public void OnCopyAsSvg(object item)
+        {
+            try
+            {
+                if (item == null)
+                {
+                    var editor = _serviceProvider.GetService<IProjectEditor>();
+                    var exporter = new SvgSvgExporter(_serviceProvider);
+                    var container = editor.Project.CurrentContainer;
+
+                    var source = editor.PageState?.SelectedShape;
+                    if (source != null)
+                    {
+                        var xaml = exporter.Create(source, container.Width, container.Height);
+                        if (!string.IsNullOrEmpty(xaml))
+                        {
+                            editor.TextClipboard?.SetText(xaml);
+                        }
+                        return;
+                    }
+
+                    var sources = editor.PageState?.SelectedShapes;
+                    if (sources != null)
+                    {
+                        var xaml = exporter.Create(sources, container.Width, container.Height);
+                        if (!string.IsNullOrEmpty(xaml))
+                        {
+                            editor.TextClipboard?.SetText(xaml);
+                        }
+                        return;
+                    }
+
+                    var shapes = container.Layers.Select(x => x.Shapes);
+                    if (shapes != null)
+                    {
+                        var xaml = exporter.Create(shapes, container.Width, container.Height);
+                        if (!string.IsNullOrEmpty(xaml))
+                        {
+                            editor.TextClipboard?.SetText(xaml);
+                        }
+                        return;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                _serviceProvider.GetService<ILog>()?.LogException(ex);
+            }
+        }
+
+        /// <inheritdoc/>
+        public void OnCopyAsXaml(object item)
         {
             try
             {
