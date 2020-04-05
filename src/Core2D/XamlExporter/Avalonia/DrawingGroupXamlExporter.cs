@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using Core2D.Containers;
-using Core2D.Editor;
 using Core2D.Interfaces;
 using Core2D.Shapes;
 using Core2D.Style;
@@ -77,8 +75,8 @@ namespace Core2D.XamlExporter.Avalonia
                 var path = converter.ToFillPathShape(shape);
                 if (path != null)
                 {
-                    var geometry = path.Geometry.ToString();
-                    var brush = ArgbColor.ToHtml(shape.Style.Fill as IArgbColor);
+                    var geometry = path.Geometry.ToXamlString();
+                    var brush = (shape.Style.Fill as IArgbColor).ToXamlString();
                     sb.AppendLine($"    <GeometryDrawing Brush=\"{brush}\" Geometry=\"{geometry}\"/>");
                 }
             }
@@ -88,8 +86,8 @@ namespace Core2D.XamlExporter.Avalonia
                 var path = converter.ToStrokePathShape(shape);
                 if (path != null)
                 {
-                    var geometry = path.Geometry.ToString();
-                    var brush = ArgbColor.ToHtml(shape.Style.Stroke as IArgbColor);
+                    var geometry = path.Geometry.ToXamlString();
+                    var brush = (shape.Style.Stroke as IArgbColor).ToXamlString();
                     sb.AppendLine($"    <GeometryDrawing Brush=\"{brush}\" Geometry=\"{geometry}\"/>");
                 }
             }
