@@ -34,7 +34,7 @@ namespace Core2D.Path.Segments
         /// Returns a string that represents the current object.
         /// </summary>
         /// <returns>A string that represents the current object.</returns>
-        public override string ToString() => "L" + Point.ToString();
+        public override string ToString() => $"L{Point}";
 
         /// <summary>
         /// Check whether the <see cref="Point"/> property has changed from its default value.
