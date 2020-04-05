@@ -64,7 +64,8 @@
             <MenuItem Header="_Paste" Command="{Binding OnPaste}" InputGesture="Ctrl+V"/>
             <MenuItem Header="_Delete" Command="{Binding OnDelete}" InputGesture="Delete"/>
             <Separator/>
-            <MenuItem Header="Copy As Draw_ing" Command="{Binding Platform.OnCopyAsDrawing}"/>
+            <MenuItem Header="Copy As _Xaml" Command="{Binding Platform.OnCopyAsXaml}"/>
+            <MenuItem Header="Copy As _Svg" Command="{Binding Platform.OnCopyAsSvg}"/>
             <MenuItem Header="Copy As _Metafile" Command="{Binding Platform.OnCopyAsEmf}"/>
             <Separator/>
             <MenuItem Header="Select _All" Command="{Binding OnSelectAll}" InputGesture="Ctrl+A"/>
