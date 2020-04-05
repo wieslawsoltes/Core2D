@@ -4,7 +4,7 @@ namespace Core2D.Path
     /// <summary>
     /// Defines path size contract.
     /// </summary>
-    public interface IPathSize : IObservableObject
+    public interface IPathSize : IObservableObject, IStringExporter
     {
         /// <summary>
         /// Gets or sets width value.
