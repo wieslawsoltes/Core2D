@@ -2879,6 +2879,11 @@ namespace Core2D.Editor
                         OnExecuteScriptFile(path);
                         result = true;
                     }
+                    else if (string.Compare(ext, ProjectEditorConfiguration.ScriptExtension, StringComparison.OrdinalIgnoreCase) == 0)
+                    {
+                        OnImportSvg(path);
+                        result = true;
+                    }
                     else if (ProjectEditorConfiguration.ImageExtensions.Any(x => string.Compare(ext, x, StringComparison.OrdinalIgnoreCase) == 0))
                     {
                         var key = OnGetImageKey(path);
