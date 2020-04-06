@@ -120,6 +120,11 @@ namespace Core2D.Editor
         public static string ScriptExtension = ".csx";
 
         /// <summary>
+        /// Svg file extension.
+        /// </summary>
+        public static string SvgExtension = ".svg";
+
+        /// <summary>
         /// Image file extension.
         /// </summary>
         public static string[] ImageExtensions = new string[] { ".jpg", ".jpeg", ".png", "webp" };
