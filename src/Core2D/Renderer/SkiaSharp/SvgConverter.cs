@@ -48,72 +48,72 @@ namespace Core2D.Renderer.SkiaSharp
             {
                 case AnchorDrawable anchorDrawable:
                     {
-
+                        // TODO:
                     }
                     break;
                 case FragmentDrawable fragmentDrawable:
                     {
-
+                        // TODO:
                     }
                     break;
                 case ImageDrawable imageDrawable:
                     {
-
+                        // TODO:
                     }
                     break;
                 case SwitchDrawable switchDrawable:
                     {
-
+                        // TODO:
                     }
                     break;
                 case UseDrawable useDrawable:
                     {
-
+                        // TODO:
                     }
                     break;
                 case CircleDrawable circleDrawable:
                     {
-
+                        // TODO:
                     }
                     break;
                 case EllipseDrawable ellipseDrawable:
                     {
-
+                        // TODO:
                     }
                     break;
                 case RectangleDrawable rectangleDrawable:
                     {
-
+                        // TODO:
                     }
                     break;
                 case GroupDrawable groupDrawable:
                     {
-
+                        // TODO:
                     }
                     break;
                 case LineDrawable lineDrawable:
                     {
-
+                        // TODO:
                     }
                     break;
                 case PathDrawable pathDrawable:
                     {
-
+                        // TODO:
                     }
                     break;
                 case PolylineDrawable polylineDrawable:
                     {
-
+                        // TODO:
                     }
                     break;
                 case PolygonDrawable polygonDrawable:
                     {
-
+                        // TODO:
                     }
                     break;
                 case TextDrawable textDrawable:
                     {
-
+                        // TODO:
                     }
                     break;
             }
