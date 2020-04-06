@@ -825,6 +825,12 @@ namespace Core2D.Editor
         void OnRemoveScript(IScript script);
 
         /// <summary>
+        /// Import svg file.
+        /// </summary>
+        /// <param name="path">The svg path.</param>
+        void OnImportSvg(string path);
+
+        /// <summary>
         /// Get image key.
         /// </summary>
         /// <param name="path">The image path.</param>
