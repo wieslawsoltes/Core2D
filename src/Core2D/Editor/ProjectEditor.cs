@@ -13,6 +13,7 @@ using Core2D.Editor.Layout;
 using Core2D.Editor.Recent;
 using Core2D.Interfaces;
 using Core2D.Renderer;
+using Core2D.Renderer.SkiaSharp;
 using Core2D.Scripting;
 using Core2D.Shapes;
 using Core2D.Style;
