@@ -2135,6 +2135,17 @@ namespace Core2D.Editor
         }
 
         /// <inheritdoc/>
+        public void OnImportSvg(string path)
+        {
+            var converter = new SvgConverter(_serviceProvider);
+            var shapes = converter.Convert(path);
+            if (shapes != null)
+            {
+                OnPasteShapes(shapes);
+            }
+        }
+
+        /// <inheritdoc/>
         public string OnGetImageKey(string path)
         {
             using var stream = FileIO.Open(path);
