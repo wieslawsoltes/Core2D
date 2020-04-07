@@ -1,35 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
+using Core2D.Interfaces;
 using Core2D.Shapes;
 using Svg.Skia;
 
 namespace Core2D.Renderer.SkiaSharp
 {
     /// <summary>
-    /// Define svg converter interface.
-    /// </summary>
-    public interface ISvgConverter
-    {
-        /// <summary>
-        /// Converts svg file to shapes.
-        /// </summary>
-        /// <param name="path">The svg path.</param>
-        /// <returns>The converted shapes.</returns>
-        IList<IBaseShape> Convert(string path);
-    }
-
-    /// <summary>
     /// Svg converter.
     /// </summary>
-    public class SvgConverter : ISvgConverter
+    public class SkiaSharpSvgConverter : ISvgConverter
     {
         private readonly IServiceProvider _serviceProvider;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="SvgConverter"/> class.
+        /// Initializes a new instance of the <see cref="SkiaSharpSvgConverter"/> class.
         /// </summary>
         /// <param name="serviceProvider">The service provider.</param>
-        public SvgConverter(IServiceProvider serviceProvider)
+        public SkiaSharpSvgConverter(IServiceProvider serviceProvider)
         {
             _serviceProvider = serviceProvider;
         }

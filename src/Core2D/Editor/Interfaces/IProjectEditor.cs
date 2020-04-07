@@ -202,6 +202,11 @@ namespace Core2D.Editor
         IPathConverter PathConverter { get; }
 
         /// <summary>
+        /// Gets svg converter.
+        /// </summary>
+        ISvgConverter SvgConverter { get; }
+
+        /// <summary>
         /// Try to snap input arguments.
         /// </summary>
         /// <param name="args">The input arguments.</param>

@@ -64,6 +64,7 @@ namespace Core2D.Editor
         private readonly Lazy<IEditorLayoutPlatform> _layoutPlatform;
         private readonly Lazy<IStyleEditor> _styleEditor;
         private readonly Lazy<IPathConverter> _pathConverter;
+        private readonly Lazy<ISvgConverter> _svgConverter;
 
         /// <inheritdoc/>
         public IProjectContainer Project
@@ -217,6 +218,9 @@ namespace Core2D.Editor
         /// <inheritdoc/>
         public IPathConverter PathConverter => _pathConverter.Value;
 
+        /// <inheritdoc/>
+        public ISvgConverter SvgConverter => _svgConverter.Value;
+
         private object ScriptState { get; set; } = default;
 
         private IPageContainer PageToCopy { get; set; } = default;
@@ -257,6 +261,7 @@ namespace Core2D.Editor
             _layoutPlatform = _serviceProvider.GetServiceLazily<IEditorLayoutPlatform>();
             _styleEditor = _serviceProvider.GetServiceLazily<IStyleEditor>();
             _pathConverter = _serviceProvider.GetServiceLazily<IPathConverter>();
+            _svgConverter = _serviceProvider.GetServiceLazily<ISvgConverter>();
         }
 
         /// <inheritdoc/>
@@ -2137,8 +2142,11 @@ namespace Core2D.Editor
         /// <inheritdoc/>
         public void OnImportSvg(string path)
         {
-            var converter = new SvgConverter(_serviceProvider);
-            var shapes = converter.Convert(path);
+            if (SvgConverter == null)
+            {
+                return;
+            }
+            var shapes = SvgConverter.Convert(path);
             if (shapes != null)
             {
                 OnPasteShapes(shapes);

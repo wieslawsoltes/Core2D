@@ -9,6 +9,9 @@ using SkiaSharp;
 
 namespace Core2D.Renderer.SkiaSharp
 {
+    /// <summary>
+    /// Path converter.
+    /// </summary>
     public class SkiaSharpPathConverter : IPathConverter
     {
         private readonly IServiceProvider _serviceProvider;
