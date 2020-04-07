@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Core2D.Editor;
 using Core2D.Interfaces;
 using Core2D.Shapes;
 using Svg.Skia;
@@ -22,89 +23,123 @@ namespace Core2D.Renderer.SkiaSharp
             _serviceProvider = serviceProvider;
         }
 
-        /// <inheritdoc/>
-        public IList<IBaseShape> Convert(string path)
+        private void FromDrawablePath(DrawablePath drawablePath, IList<IBaseShape> shapes)
         {
-            var document = SKSvg.Open(path);
-
-            if (document == null)
+            var path = drawablePath.Path;
+            if (path == null)
             {
-                return null;
+                return;
             }
+            var stroke = drawablePath.Stroke;
+            var fill = drawablePath.Fill;
+            var factory = _serviceProvider.GetService<IFactory>();
+            var style = factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
+            var geometry = PathGeometryConverter.ToPathGeometry(path, 0.0, 0.0, factory);
+            var pathShape = factory.CreatePathShape(
+                "Path",
+                style,
+                geometry,
+                stroke != null,
+                fill != null);
+            shapes.Add(pathShape);
+        }
 
-            var drawable = SKSvg.ToDrawable(document);
-            if (drawable == null)
+        private void FromDrawableContainer(DrawableContainer drawableContainer, IList<IBaseShape> shapes)
+        {
+            var factory = _serviceProvider.GetService<IFactory>();
+            var group = factory.CreateGroupShape(ProjectEditorConfiguration.DefaulGroupName);
+            var groupShapes = new List<IBaseShape>();
+            foreach (var child in drawableContainer.ChildrenDrawables)
             {
-                return null;
+                ToShape(child, groupShapes);
             }
+            foreach (var groupShape in groupShapes)
+            {
+                group.AddShape(groupShape);
+            }
+            shapes.Add(group);
+        }
 
-            var shapes = new List<IBaseShape>();
-
+        private void ToShape(Drawable drawable, IList<IBaseShape> shapes)
+        {
             switch (drawable)
             {
                 case AnchorDrawable anchorDrawable:
                     {
-                        // TODO:
+                        FromDrawableContainer(anchorDrawable, shapes);
                     }
                     break;
                 case FragmentDrawable fragmentDrawable:
                     {
-                        // TODO:
+                        FromDrawableContainer(fragmentDrawable, shapes);
                     }
                     break;
                 case ImageDrawable imageDrawable:
                     {
-                        // TODO:
+                        if (imageDrawable.Image != null)
+                        {
+                            // TODO: imageDrawable.Image
+                        }
+                        if (imageDrawable.FragmentDrawable != null)
+                        {
+                            ToShape(imageDrawable.FragmentDrawable, shapes);
+                        }
                     }
                     break;
                 case SwitchDrawable switchDrawable:
                     {
-                        // TODO:
+                        if (switchDrawable.FirstChild != null)
+                        {
+                            ToShape(switchDrawable.FirstChild, shapes);
+                        }
                     }
                     break;
                 case UseDrawable useDrawable:
                     {
-                        // TODO:
+                        if (useDrawable.ReferencedDrawable != null)
+                        {
+                            ToShape(useDrawable.ReferencedDrawable, shapes);
+                        }
                     }
                     break;
                 case CircleDrawable circleDrawable:
                     {
-                        // TODO:
+                        FromDrawablePath(circleDrawable, shapes);
                     }
                     break;
                 case EllipseDrawable ellipseDrawable:
                     {
-                        // TODO:
+                        FromDrawablePath(ellipseDrawable, shapes);
                     }
                     break;
                 case RectangleDrawable rectangleDrawable:
                     {
-                        // TODO:
+                        FromDrawablePath(rectangleDrawable, shapes);
                     }
                     break;
                 case GroupDrawable groupDrawable:
                     {
-                        // TODO:
+                        FromDrawableContainer(groupDrawable, shapes);
                     }
                     break;
                 case LineDrawable lineDrawable:
                     {
-                        // TODO:
+                        FromDrawablePath(lineDrawable, shapes);
                     }
                     break;
                 case PathDrawable pathDrawable:
                     {
-                        // TODO:
+                        FromDrawablePath(pathDrawable, shapes);
                     }
                     break;
                 case PolylineDrawable polylineDrawable:
                     {
-                        // TODO:
+                        FromDrawablePath(polylineDrawable, shapes);
                     }
                     break;
                 case PolygonDrawable polygonDrawable:
                     {
-                        // TODO:
+                        FromDrawablePath(polygonDrawable, shapes);
                     }
                     break;
                 case TextDrawable textDrawable:
@@ -113,6 +148,26 @@ namespace Core2D.Renderer.SkiaSharp
                     }
                     break;
             }
+        }
+
+        /// <inheritdoc/>
+        public IList<IBaseShape> Convert(string path)
+        {
+            var document = SKSvg.Open(path);
+            if (document == null)
+            {
+                return null;
+            }
+
+            using var drawable = SKSvg.ToDrawable(document);
+            if (drawable == null)
+            {
+                return null;
+            }
+
+            var shapes = new List<IBaseShape>();
+
+            ToShape(drawable, shapes);
 
             return shapes;
         }
