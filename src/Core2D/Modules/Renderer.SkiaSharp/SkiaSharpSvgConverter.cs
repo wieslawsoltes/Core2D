@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Core2D.Editor;
 using Core2D.Interfaces;
 using Core2D.Shapes;
+using SkiaSharp;
 using Svg.Skia;
 
 namespace Core2D.Renderer.SkiaSharp
@@ -23,7 +24,18 @@ namespace Core2D.Renderer.SkiaSharp
             _serviceProvider = serviceProvider;
         }
 
-        private void FromDrawablePath(DrawablePath drawablePath, IList<IBaseShape> shapes)
+        private IMatrixObject ToMatrixObject(SKMatrix matrix, IFactory factory)
+        {
+            return factory.CreateMatrixObject(
+                matrix.ScaleX,
+                matrix.SkewY,
+                matrix.SkewX,
+                matrix.ScaleY,
+                matrix.TransX,
+                matrix.TransY);
+        }
+
+        private void FromDrawablePath(DrawablePath drawablePath, IList<IBaseShape> shapes, IFactory factory)
         {
             var path = drawablePath.Path;
             if (path == null)
@@ -32,7 +44,6 @@ namespace Core2D.Renderer.SkiaSharp
             }
             var stroke = drawablePath.Stroke;
             var fill = drawablePath.Fill;
-            var factory = _serviceProvider.GetService<IFactory>();
             var style = factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
             var geometry = PathGeometryConverter.ToPathGeometry(path, 0.0, 0.0, factory);
             var pathShape = factory.CreatePathShape(
@@ -41,37 +52,38 @@ namespace Core2D.Renderer.SkiaSharp
                 geometry,
                 stroke != null,
                 fill != null);
+            pathShape.Transform = ToMatrixObject(drawablePath.Transform, factory);
             shapes.Add(pathShape);
         }
 
-        private void FromDrawableContainer(DrawableContainer drawableContainer, IList<IBaseShape> shapes)
+        private void FromDrawableContainer(DrawableContainer drawableContainer, IList<IBaseShape> shapes, IFactory factory)
         {
-            var factory = _serviceProvider.GetService<IFactory>();
             var group = factory.CreateGroupShape(ProjectEditorConfiguration.DefaulGroupName);
             var groupShapes = new List<IBaseShape>();
             foreach (var child in drawableContainer.ChildrenDrawables)
             {
-                ToShape(child, groupShapes);
+                ToShape(child, groupShapes, factory);
             }
             foreach (var groupShape in groupShapes)
             {
                 group.AddShape(groupShape);
             }
+            group.Transform = ToMatrixObject(drawableContainer.Transform, factory);
             shapes.Add(group);
         }
 
-        private void ToShape(Drawable drawable, IList<IBaseShape> shapes)
+        private void ToShape(Drawable drawable, IList<IBaseShape> shapes, IFactory factory)
         {
             switch (drawable)
             {
                 case AnchorDrawable anchorDrawable:
                     {
-                        FromDrawableContainer(anchorDrawable, shapes);
+                        FromDrawableContainer(anchorDrawable, shapes, factory);
                     }
                     break;
                 case FragmentDrawable fragmentDrawable:
                     {
-                        FromDrawableContainer(fragmentDrawable, shapes);
+                        FromDrawableContainer(fragmentDrawable, shapes, factory);
                     }
                     break;
                 case ImageDrawable imageDrawable:
@@ -82,7 +94,7 @@ namespace Core2D.Renderer.SkiaSharp
                         }
                         if (imageDrawable.FragmentDrawable != null)
                         {
-                            ToShape(imageDrawable.FragmentDrawable, shapes);
+                            ToShape(imageDrawable.FragmentDrawable, shapes, factory);
                         }
                     }
                     break;
@@ -90,7 +102,7 @@ namespace Core2D.Renderer.SkiaSharp
                     {
                         if (switchDrawable.FirstChild != null)
                         {
-                            ToShape(switchDrawable.FirstChild, shapes);
+                            ToShape(switchDrawable.FirstChild, shapes, factory);
                         }
                     }
                     break;
@@ -98,48 +110,48 @@ namespace Core2D.Renderer.SkiaSharp
                     {
                         if (useDrawable.ReferencedDrawable != null)
                         {
-                            ToShape(useDrawable.ReferencedDrawable, shapes);
+                            ToShape(useDrawable.ReferencedDrawable, shapes, factory);
                         }
                     }
                     break;
                 case CircleDrawable circleDrawable:
                     {
-                        FromDrawablePath(circleDrawable, shapes);
+                        FromDrawablePath(circleDrawable, shapes, factory);
                     }
                     break;
                 case EllipseDrawable ellipseDrawable:
                     {
-                        FromDrawablePath(ellipseDrawable, shapes);
+                        FromDrawablePath(ellipseDrawable, shapes, factory);
                     }
                     break;
                 case RectangleDrawable rectangleDrawable:
                     {
-                        FromDrawablePath(rectangleDrawable, shapes);
+                        FromDrawablePath(rectangleDrawable, shapes, factory);
                     }
                     break;
                 case GroupDrawable groupDrawable:
                     {
-                        FromDrawableContainer(groupDrawable, shapes);
+                        FromDrawableContainer(groupDrawable, shapes, factory);
                     }
                     break;
                 case LineDrawable lineDrawable:
                     {
-                        FromDrawablePath(lineDrawable, shapes);
+                        FromDrawablePath(lineDrawable, shapes, factory);
                     }
                     break;
                 case PathDrawable pathDrawable:
                     {
-                        FromDrawablePath(pathDrawable, shapes);
+                        FromDrawablePath(pathDrawable, shapes, factory);
                     }
                     break;
                 case PolylineDrawable polylineDrawable:
                     {
-                        FromDrawablePath(polylineDrawable, shapes);
+                        FromDrawablePath(polylineDrawable, shapes, factory);
                     }
                     break;
                 case PolygonDrawable polygonDrawable:
                     {
-                        FromDrawablePath(polygonDrawable, shapes);
+                        FromDrawablePath(polygonDrawable, shapes, factory);
                     }
                     break;
                 case TextDrawable textDrawable:
@@ -166,8 +178,9 @@ namespace Core2D.Renderer.SkiaSharp
             }
 
             var shapes = new List<IBaseShape>();
+            var factory = _serviceProvider.GetService<IFactory>();
 
-            ToShape(drawable, shapes);
+            ToShape(drawable, shapes, factory);
 
             return shapes;
         }
