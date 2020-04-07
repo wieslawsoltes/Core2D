@@ -9,7 +9,7 @@
     <IsPackable>False</IsPackable>
     <Nullable>disable</Nullable>
     <NoWarn>$(NoWarn);NU1701</NoWarn>
-    <ApplicationIcon>Assets\Core2D.ico</ApplicationIcon>
+    <ApplicationIcon>UI\Assets\Core2D.ico</ApplicationIcon>
   </PropertyGroup>
 
   <PropertyGroup>
@@ -55,27 +55,27 @@
     <AvaloniaResource Include="**\*.xaml">
       <SubType>Designer</SubType>
     </AvaloniaResource>
-    <AvaloniaResource Include="Assets\**" />
+    <AvaloniaResource Include="UI\Assets\**" />
   </ItemGroup>
 
   <ItemGroup Condition="'$(CoreRT)' == 'True'">
-    <RdXmlFile Include="Native\netcore.rd.xml" />
-    <RdXmlFile Include="Native\app.rd.xml" />
-    <RdXmlFile Include="Native\avalonia.rd.xml" />
-    <RdXmlFile Include="Native\avalonia.linux.rd.xml" Condition="'$(RuntimeIdentifier)' == 'linux-x64'" />
-    <RdXmlFile Include="Native\avalonia.osx.rd.xml" Condition="'$(RuntimeIdentifier)' == 'osx-x64'" />
-    <RdXmlFile Include="Native\avalonia.win.rd.xml" Condition="'$(RuntimeIdentifier)' == 'win-x64'" />
-    <RdXmlFile Include="Native\avalonia.reactiveui.rd.xml" />
-    <RdXmlFile Include="Native\avalonia.behaviors.rd.xml" />
-    <RdXmlFile Include="Native\avalonia.panandzoom.rd.xml" />
-    <RdXmlFile Include="Native\avalonia.thememanager.rd.xml" />
-    <RdXmlFile Include="Native\autofac.rd.xml" />
-    <RdXmlFile Include="Native\dock.rd.xml" />
-    <RdXmlFile Include="Native\csvhelper.rd.xml" />
-    <RdXmlFile Include="Native\netdxf.rd.xml" />
-    <RdXmlFile Include="Native\newtonsoft.json.rd.xml" />
-    <!--<RdXmlFile Include="Native\roslyn.rd.xml"/>-->
-    <RdXmlFile Include="Native\rx.rd.xml" />
+    <RdXmlFile Include="UI\Native\netcore.rd.xml" />
+    <RdXmlFile Include="UI\Native\app.rd.xml" />
+    <RdXmlFile Include="UI\Native\avalonia.rd.xml" />
+    <RdXmlFile Include="UI\Native\avalonia.linux.rd.xml" Condition="'$(RuntimeIdentifier)' == 'linux-x64'" />
+    <RdXmlFile Include="UI\Native\avalonia.osx.rd.xml" Condition="'$(RuntimeIdentifier)' == 'osx-x64'" />
+    <RdXmlFile Include="UI\Native\avalonia.win.rd.xml" Condition="'$(RuntimeIdentifier)' == 'win-x64'" />
+    <RdXmlFile Include="UI\Native\avalonia.reactiveui.rd.xml" />
+    <RdXmlFile Include="UI\Native\avalonia.behaviors.rd.xml" />
+    <RdXmlFile Include="UI\Native\avalonia.panandzoom.rd.xml" />
+    <RdXmlFile Include="UI\Native\avalonia.thememanager.rd.xml" />
+    <RdXmlFile Include="UI\Native\autofac.rd.xml" />
+    <RdXmlFile Include="UI\Native\dock.rd.xml" />
+    <RdXmlFile Include="UI\Native\csvhelper.rd.xml" />
+    <RdXmlFile Include="UI\Native\netdxf.rd.xml" />
+    <RdXmlFile Include="UI\Native\newtonsoft.json.rd.xml" />
+    <!--<RdXmlFile Include="UI\Native\roslyn.rd.xml"/>-->
+    <RdXmlFile Include="UI\Native\rx.rd.xml" />
     <IlcArg Include="--stacktracedata" />
   </ItemGroup>
 
@@ -93,6 +93,7 @@
     <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.0" PrivateAssets="All" />
     <PackageReference Include="Microsoft.DotNet.ILCompiler" Version="1.0.0-alpha-*" Condition="'$(CoreRT)' == 'True'" />
     <PackageReference Include="SourceLink.Create.CommandLine" Version="2.8.3" PrivateAssets="All" />
+    <PackageReference Include="Svg.Skia" Version="0.1.6" />
     <PackageReference Include="System.Collections.Immutable" Version="1.7.0" />
     <PackageReference Include="System.Diagnostics.TextWriterTraceListener" Version="4.3.0" Condition="!$(TargetFramework.StartsWith('net4'))" />
     <PackageReference Include="System.Diagnostics.TraceSource" Version="4.3.0" Condition="!$(TargetFramework.StartsWith('net4'))" />

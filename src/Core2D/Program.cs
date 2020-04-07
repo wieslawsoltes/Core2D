@@ -2,7 +2,7 @@
 using Avalonia;
 using Avalonia.Logging.Serilog;
 using Avalonia.ReactiveUI;
-using Core2D.UI.Avalonia;
+using Core2D.UI;
 
 namespace Core2D
 {

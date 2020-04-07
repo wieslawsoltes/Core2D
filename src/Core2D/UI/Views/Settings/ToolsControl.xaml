@@ -1,0 +1,39 @@
+﻿<UserControl x:Class="Core2D.UI.Views.Settings.ToolsControl"
+             xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:converters="clr-namespace:Core2D.UI.Converters;assembly=Core2D"
+             xmlns:Data="clr-namespace:Core2D.Data;assembly=Core2D"
+             xmlns:Editor="clr-namespace:Core2D.Editor;assembly=Core2D"
+             xmlns:Designer="clr-namespace:Core2D.Editor.Designer;assembly=Core2D"
+             mc:Ignorable="d"
+             d:DataContext="{x:Static Designer:DesignerContext.Editor}"
+             d:DesignWidth="250" d:DesignHeight="400">
+    <TabControl Classes="default">
+        <TabItem Header="Main" Classes="property">
+            <Grid RowDefinitions="Auto,*">
+                <ComboBox Items="{Binding Tools}" SelectedItem="{Binding CurrentTool, Mode=TwoWay}" Grid.Row="0" Classes="default">
+                    <ComboBox.DataTemplates>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Title}"/>
+                        </DataTemplate>
+                    </ComboBox.DataTemplates>
+                </ComboBox>
+                <ContentControl Content="{Binding CurrentTool.Settings}" Grid.Row="1"/>
+            </Grid>
+        </TabItem>
+        <TabItem Header="Path" Classes="property">
+            <Grid RowDefinitions="Auto,*">
+                <ComboBox Items="{Binding PathTools}" SelectedItem="{Binding CurrentPathTool, Mode=TwoWay}" Grid.Row="0" Classes="default">
+                    <ComboBox.DataTemplates>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Title}"/>
+                        </DataTemplate>
+                    </ComboBox.DataTemplates>
+                </ComboBox>
+                <ContentControl Content="{Binding CurrentPathTool.Settings}" Grid.Row="1"/>
+            </Grid>
+        </TabItem>
+    </TabControl>
+</UserControl>

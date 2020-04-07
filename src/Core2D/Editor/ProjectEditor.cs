@@ -13,6 +13,7 @@ using Core2D.Editor.Layout;
 using Core2D.Editor.Recent;
 using Core2D.Interfaces;
 using Core2D.Renderer;
+using Core2D.Renderer.SkiaSharp;
 using Core2D.Scripting;
 using Core2D.Shapes;
 using Core2D.Style;
@@ -63,6 +64,7 @@ namespace Core2D.Editor
         private readonly Lazy<IEditorLayoutPlatform> _layoutPlatform;
         private readonly Lazy<IStyleEditor> _styleEditor;
         private readonly Lazy<IPathConverter> _pathConverter;
+        private readonly Lazy<ISvgConverter> _svgConverter;
 
         /// <inheritdoc/>
         public IProjectContainer Project
@@ -216,6 +218,9 @@ namespace Core2D.Editor
         /// <inheritdoc/>
         public IPathConverter PathConverter => _pathConverter.Value;
 
+        /// <inheritdoc/>
+        public ISvgConverter SvgConverter => _svgConverter.Value;
+
         private object ScriptState { get; set; } = default;
 
         private IPageContainer PageToCopy { get; set; } = default;
@@ -256,6 +261,7 @@ namespace Core2D.Editor
             _layoutPlatform = _serviceProvider.GetServiceLazily<IEditorLayoutPlatform>();
             _styleEditor = _serviceProvider.GetServiceLazily<IStyleEditor>();
             _pathConverter = _serviceProvider.GetServiceLazily<IPathConverter>();
+            _svgConverter = _serviceProvider.GetServiceLazily<ISvgConverter>();
         }
 
         /// <inheritdoc/>
@@ -742,13 +748,13 @@ namespace Core2D.Editor
         }
 
         /// <inheritdoc/>
-        public void OnExecuteCode(string csharp)
+        public async Task OnExecuteCode(string csharp)
         {
             try
             {
                 if (!string.IsNullOrWhiteSpace(csharp))
                 {
-                    ScriptRunner?.Execute(csharp, null);
+                    await ScriptRunner?.Execute(csharp, null);
                 }
             }
             catch (Exception ex)
@@ -758,13 +764,13 @@ namespace Core2D.Editor
         }
 
         /// <inheritdoc/>
-        public void OnExecuteRepl(string csharp)
+        public async Task OnExecuteRepl(string csharp)
         {
             try
             {
                 if (!string.IsNullOrWhiteSpace(csharp))
                 {
-                    ScriptState = ScriptRunner?.Execute(csharp, ScriptState);
+                    ScriptState = await ScriptRunner?.Execute(csharp, ScriptState);
                 }
             }
             catch (Exception ex)
@@ -780,14 +786,14 @@ namespace Core2D.Editor
         }
 
         /// <inheritdoc/>
-        public void OnExecuteScriptFile(string path)
+        public async Task OnExecuteScriptFile(string path)
         {
             try
             {
                 var csharp = FileIO?.ReadUtf8Text(path);
                 if (!string.IsNullOrWhiteSpace(csharp))
                 {
-                    OnExecuteCode(csharp);
+                    await OnExecuteCode(csharp);
                 }
             }
             catch (Exception ex)
@@ -797,23 +803,23 @@ namespace Core2D.Editor
         }
 
         /// <inheritdoc/>
-        public void OnExecuteScriptFile(string[] paths)
+        public async Task OnExecuteScriptFile(string[] paths)
         {
             foreach (var path in paths)
             {
-                OnExecuteScriptFile(path);
+                await OnExecuteScriptFile(path);
             }
         }
 
         /// <inheritdoc/>
-        public void OnExecuteScript(IScript script)
+        public async Task OnExecuteScript(IScript script)
         {
             try
             {
                 var csharp = script?.Code;
                 if (!string.IsNullOrWhiteSpace(csharp))
                 {
-                    OnExecuteRepl(csharp);
+                    await OnExecuteRepl(csharp);
                 }
             }
             catch (Exception ex)
@@ -2134,6 +2140,20 @@ namespace Core2D.Editor
         }
 
         /// <inheritdoc/>
+        public void OnImportSvg(string path)
+        {
+            if (SvgConverter == null)
+            {
+                return;
+            }
+            var shapes = SvgConverter.Convert(path);
+            if (shapes != null)
+            {
+                OnPasteShapes(shapes);
+            }
+        }
+
+        /// <inheritdoc/>
         public string OnGetImageKey(string path)
         {
             using var stream = FileIO.Open(path);
@@ -2814,7 +2834,7 @@ namespace Core2D.Editor
         }
 
         /// <inheritdoc/>
-        public bool OnDropFiles(string[] files, double x, double y)
+        public async Task<bool> OnDropFiles(string[] files, double x, double y)
         {
             try
             {
@@ -2864,7 +2884,12 @@ namespace Core2D.Editor
                     }
                     else if (string.Compare(ext, ProjectEditorConfiguration.ScriptExtension, StringComparison.OrdinalIgnoreCase) == 0)
                     {
-                        OnExecuteScriptFile(path);
+                        await OnExecuteScriptFile(path);
+                        result = true;
+                    }
+                    else if (string.Compare(ext, ProjectEditorConfiguration.ScriptExtension, StringComparison.OrdinalIgnoreCase) == 0)
+                    {
+                        OnImportSvg(path);
                         result = true;
                     }
                     else if (ProjectEditorConfiguration.ImageExtensions.Any(x => string.Compare(ext, x, StringComparison.OrdinalIgnoreCase) == 0))
