@@ -88,6 +88,7 @@
     <div><a class="xref" href="Core2D.IObservableObject.html">IObservableObject</a></div>
     <div><span class="xref">System.ComponentModel.INotifyPropertyChanged</span></div>
     <div><a class="xref" href="Core2D.ICopyable.html">ICopyable</a></div>
+    <div><a class="xref" href="Core2D.IStringExporter.html">IStringExporter</a></div>
   </div>
   <div class="inheritedMembers">
     <h5>Inherited Members</h5>
@@ -142,12 +143,15 @@
     <div>
       <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
     </div>
+    <div>
+      <span class="xref">System.Object.ToString()</span>
+    </div>
   </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="Core2D.Path.html">Core2D.Path</a></h6>
   <h6><strong>Assembly</strong>: Core2D.dll</h6>
   <h5 id="Core2D_Path_PathFigure_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class PathFigure : ObservableObject, IPathFigure, IObservableObject, INotifyPropertyChanged, ICopyable</code></pre>
+    <pre><code class="lang-csharp hljs">public class PathFigure : ObservableObject, IPathFigure, IObservableObject, INotifyPropertyChanged, ICopyable, IStringExporter</code></pre>
   </div>
   <h3 id="properties">Properties
   </h3>
@@ -366,7 +370,7 @@
     <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Path_PathFigure_ShouldSerializeIsClosed.md&amp;value=---%0Auid%3A%20Core2D.Path.PathFigure.ShouldSerializeIsClosed%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/ViewModels/Shapes/Path/PathFigure.cs/#L129">View Source</a>
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/ViewModels/Shapes/Path/PathFigure.cs/#L143">View Source</a>
   </span>
   <a id="Core2D_Path_PathFigure_ShouldSerializeIsClosed_" data-uid="Core2D.Path.PathFigure.ShouldSerializeIsClosed*"></a>
   <h4 id="Core2D_Path_PathFigure_ShouldSerializeIsClosed" data-uid="Core2D.Path.PathFigure.ShouldSerializeIsClosed">ShouldSerializeIsClosed()</h4>
@@ -398,7 +402,7 @@
     <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Path_PathFigure_ShouldSerializeIsFilled.md&amp;value=---%0Auid%3A%20Core2D.Path.PathFigure.ShouldSerializeIsFilled%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/ViewModels/Shapes/Path/PathFigure.cs/#L123">View Source</a>
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/ViewModels/Shapes/Path/PathFigure.cs/#L137">View Source</a>
   </span>
   <a id="Core2D_Path_PathFigure_ShouldSerializeIsFilled_" data-uid="Core2D.Path.PathFigure.ShouldSerializeIsFilled*"></a>
   <h4 id="Core2D_Path_PathFigure_ShouldSerializeIsFilled" data-uid="Core2D.Path.PathFigure.ShouldSerializeIsFilled">ShouldSerializeIsFilled()</h4>
@@ -430,7 +434,7 @@
     <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Path_PathFigure_ShouldSerializeSegments.md&amp;value=---%0Auid%3A%20Core2D.Path.PathFigure.ShouldSerializeSegments%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/ViewModels/Shapes/Path/PathFigure.cs/#L117">View Source</a>
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/ViewModels/Shapes/Path/PathFigure.cs/#L131">View Source</a>
   </span>
   <a id="Core2D_Path_PathFigure_ShouldSerializeSegments_" data-uid="Core2D.Path.PathFigure.ShouldSerializeSegments*"></a>
   <h4 id="Core2D_Path_PathFigure_ShouldSerializeSegments" data-uid="Core2D.Path.PathFigure.ShouldSerializeSegments">ShouldSerializeSegments()</h4>
@@ -462,7 +466,7 @@
     <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Path_PathFigure_ShouldSerializeStartPoint.md&amp;value=---%0Auid%3A%20Core2D.Path.PathFigure.ShouldSerializeStartPoint%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/ViewModels/Shapes/Path/PathFigure.cs/#L111">View Source</a>
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/ViewModels/Shapes/Path/PathFigure.cs/#L125">View Source</a>
   </span>
   <a id="Core2D_Path_PathFigure_ShouldSerializeStartPoint_" data-uid="Core2D.Path.PathFigure.ShouldSerializeStartPoint*"></a>
   <h4 id="Core2D_Path_PathFigure_ShouldSerializeStartPoint" data-uid="Core2D.Path.PathFigure.ShouldSerializeStartPoint">ShouldSerializeStartPoint()</h4>
@@ -491,19 +495,19 @@
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Path_PathFigure_ToString.md&amp;value=---%0Auid%3A%20Core2D.Path.PathFigure.ToString%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Path_PathFigure_ToSvgString.md&amp;value=---%0Auid%3A%20Core2D.Path.PathFigure.ToSvgString%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/ViewModels/Shapes/Path/PathFigure.cs/#L99">View Source</a>
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/ViewModels/Shapes/Path/PathFigure.cs/#L113">View Source</a>
   </span>
-  <a id="Core2D_Path_PathFigure_ToString_" data-uid="Core2D.Path.PathFigure.ToString*"></a>
-  <h4 id="Core2D_Path_PathFigure_ToString" data-uid="Core2D.Path.PathFigure.ToString">ToString()</h4>
-  <div class="markdown level1 summary"><p>Returns a string that represents the current object.</p>
+  <a id="Core2D_Path_PathFigure_ToSvgString_" data-uid="Core2D.Path.PathFigure.ToSvgString*"></a>
+  <h4 id="Core2D_Path_PathFigure_ToSvgString" data-uid="Core2D.Path.PathFigure.ToSvgString">ToSvgString()</h4>
+  <div class="markdown level1 summary"><p>Creates svg path data string.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public override string ToString()</code></pre>
+    <pre><code class="lang-csharp hljs">public string ToSvgString()</code></pre>
   </div>
   <h5 class="returns">Returns</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -516,28 +520,25 @@
     <tbody>
       <tr>
         <td><span class="xref">System.String</span></td>
-        <td><p>A string that represents the current object.</p>
+        <td><p>The svg path data string.</p>
 </td>
       </tr>
     </tbody>
   </table>
-  <h5 class="overrides">Overrides</h5>
-  <div><span class="xref">System.Object.ToString()</span></div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Path_PathFigure_ToString_System_Collections_Immutable_ImmutableArray_Core2D_Path_IPathSegment__.md&amp;value=---%0Auid%3A%20Core2D.Path.PathFigure.ToString(System.Collections.Immutable.ImmutableArray%7BCore2D.Path.IPathSegment%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Path_PathFigure_ToSvgString_System_Collections_Immutable_ImmutableArray_Core2D_Path_IPathSegment__.md&amp;value=---%0Auid%3A%20Core2D.Path.PathFigure.ToSvgString(System.Collections.Immutable.ImmutableArray%7BCore2D.Path.IPathSegment%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/ViewModels/Shapes/Path/PathFigure.cs/#L80">View Source</a>
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/ViewModels/Shapes/Path/PathFigure.cs/#L89">View Source</a>
   </span>
-  <a id="Core2D_Path_PathFigure_ToString_" data-uid="Core2D.Path.PathFigure.ToString*"></a>
-  <h4 id="Core2D_Path_PathFigure_ToString_System_Collections_Immutable_ImmutableArray_Core2D_Path_IPathSegment__" data-uid="Core2D.Path.PathFigure.ToString(System.Collections.Immutable.ImmutableArray{Core2D.Path.IPathSegment})">ToString(ImmutableArray&lt;IPathSegment&gt;)</h4>
-  <div class="markdown level1 summary"><p>Creates a string representation of segments collection.</p>
-</div>
+  <a id="Core2D_Path_PathFigure_ToSvgString_" data-uid="Core2D.Path.PathFigure.ToSvgString*"></a>
+  <h4 id="Core2D_Path_PathFigure_ToSvgString_System_Collections_Immutable_ImmutableArray_Core2D_Path_IPathSegment__" data-uid="Core2D.Path.PathFigure.ToSvgString(System.Collections.Immutable.ImmutableArray{Core2D.Path.IPathSegment})">ToSvgString(ImmutableArray&lt;IPathSegment&gt;)</h4>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public string ToString(ImmutableArray&lt;IPathSegment&gt; segments)</code></pre>
+    <pre><code class="lang-csharp hljs">public string ToSvgString(ImmutableArray&lt;IPathSegment&gt; segments)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -552,8 +553,7 @@
       <tr>
         <td><span class="xref">System.Collections.Immutable.ImmutableArray</span>&lt;<a class="xref" href="Core2D.Path.IPathSegment.html">IPathSegment</a>&gt;</td>
         <td><span class="parametername">segments</span></td>
-        <td><p>The segments collection.</p>
-</td>
+        <td></td>
       </tr>
     </tbody>
   </table>
@@ -568,8 +568,86 @@
     <tbody>
       <tr>
         <td><span class="xref">System.String</span></td>
-        <td><p>A string representation of segments collection.</p>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Path_PathFigure_ToXamlString.md&amp;value=---%0Auid%3A%20Core2D.Path.PathFigure.ToXamlString%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/ViewModels/Shapes/Path/PathFigure.cs/#L104">View Source</a>
+  </span>
+  <a id="Core2D_Path_PathFigure_ToXamlString_" data-uid="Core2D.Path.PathFigure.ToXamlString*"></a>
+  <h4 id="Core2D_Path_PathFigure_ToXamlString" data-uid="Core2D.Path.PathFigure.ToXamlString">ToXamlString()</h4>
+  <div class="markdown level1 summary"><p>Creates xaml path data string.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string ToXamlString()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><p>The xaml path data string.</p>
 </td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Path_PathFigure_ToXamlString_System_Collections_Immutable_ImmutableArray_Core2D_Path_IPathSegment__.md&amp;value=---%0Auid%3A%20Core2D.Path.PathFigure.ToXamlString(System.Collections.Immutable.ImmutableArray%7BCore2D.Path.IPathSegment%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/ViewModels/Shapes/Path/PathFigure.cs/#L75">View Source</a>
+  </span>
+  <a id="Core2D_Path_PathFigure_ToXamlString_" data-uid="Core2D.Path.PathFigure.ToXamlString*"></a>
+  <h4 id="Core2D_Path_PathFigure_ToXamlString_System_Collections_Immutable_ImmutableArray_Core2D_Path_IPathSegment__" data-uid="Core2D.Path.PathFigure.ToXamlString(System.Collections.Immutable.ImmutableArray{Core2D.Path.IPathSegment})">ToXamlString(ImmutableArray&lt;IPathSegment&gt;)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string ToXamlString(ImmutableArray&lt;IPathSegment&gt; segments)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.Immutable.ImmutableArray</span>&lt;<a class="xref" href="Core2D.Path.IPathSegment.html">IPathSegment</a>&gt;</td>
+        <td><span class="parametername">segments</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td></td>
       </tr>
     </tbody>
   </table>
@@ -585,6 +663,9 @@
   </div>
   <div>
       <a class="xref" href="Core2D.ICopyable.html">ICopyable</a>
+  </div>
+  <div>
+      <a class="xref" href="Core2D.IStringExporter.html">IStringExporter</a>
   </div>
 </article>
           </div>

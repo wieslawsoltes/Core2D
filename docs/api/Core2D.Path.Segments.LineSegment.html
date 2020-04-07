@@ -90,6 +90,7 @@
     <div><a class="xref" href="Core2D.IObservableObject.html">IObservableObject</a></div>
     <div><span class="xref">System.ComponentModel.INotifyPropertyChanged</span></div>
     <div><a class="xref" href="Core2D.ICopyable.html">ICopyable</a></div>
+    <div><a class="xref" href="Core2D.IStringExporter.html">IStringExporter</a></div>
   </div>
   <div class="inheritedMembers">
     <h5>Inherited Members</h5>
@@ -156,12 +157,15 @@
     <div>
       <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
     </div>
+    <div>
+      <span class="xref">System.Object.ToString()</span>
+    </div>
   </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="Core2D.Path.Segments.html">Core2D.Path.Segments</a></h6>
   <h6><strong>Assembly</strong>: Core2D.dll</h6>
   <h5 id="Core2D_Path_Segments_LineSegment_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class LineSegment : PathSegment, ILineSegment, IPathSegment, IObservableObject, INotifyPropertyChanged, ICopyable</code></pre>
+    <pre><code class="lang-csharp hljs">public class LineSegment : PathSegment, ILineSegment, IPathSegment, IObservableObject, INotifyPropertyChanged, ICopyable, IStringExporter</code></pre>
   </div>
   <h3 id="properties">Properties
   </h3>
@@ -289,7 +293,7 @@
     <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Path_Segments_LineSegment_ShouldSerializePoint.md&amp;value=---%0Auid%3A%20Core2D.Path.Segments.LineSegment.ShouldSerializePoint%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/ViewModels/Shapes/Path/Segments/LineSegment.cs/#L43">View Source</a>
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/ViewModels/Shapes/Path/Segments/LineSegment.cs/#L45">View Source</a>
   </span>
   <a id="Core2D_Path_Segments_LineSegment_ShouldSerializePoint_" data-uid="Core2D.Path.Segments.LineSegment.ShouldSerializePoint*"></a>
   <h4 id="Core2D_Path_Segments_LineSegment_ShouldSerializePoint" data-uid="Core2D.Path.Segments.LineSegment.ShouldSerializePoint">ShouldSerializePoint()</h4>
@@ -318,19 +322,19 @@
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Path_Segments_LineSegment_ToString.md&amp;value=---%0Auid%3A%20Core2D.Path.Segments.LineSegment.ToString%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Path_Segments_LineSegment_ToSvgString.md&amp;value=---%0Auid%3A%20Core2D.Path.Segments.LineSegment.ToSvgString%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/ViewModels/Shapes/Path/Segments/LineSegment.cs/#L37">View Source</a>
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/ViewModels/Shapes/Path/Segments/LineSegment.cs/#L38">View Source</a>
   </span>
-  <a id="Core2D_Path_Segments_LineSegment_ToString_" data-uid="Core2D.Path.Segments.LineSegment.ToString*"></a>
-  <h4 id="Core2D_Path_Segments_LineSegment_ToString" data-uid="Core2D.Path.Segments.LineSegment.ToString">ToString()</h4>
-  <div class="markdown level1 summary"><p>Returns a string that represents the current object.</p>
+  <a id="Core2D_Path_Segments_LineSegment_ToSvgString_" data-uid="Core2D.Path.Segments.LineSegment.ToSvgString*"></a>
+  <h4 id="Core2D_Path_Segments_LineSegment_ToSvgString" data-uid="Core2D.Path.Segments.LineSegment.ToSvgString">ToSvgString()</h4>
+  <div class="markdown level1 summary"><p>Creates svg path data string.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public override string ToString()</code></pre>
+    <pre><code class="lang-csharp hljs">public override string ToSvgString()</code></pre>
   </div>
   <h5 class="returns">Returns</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -343,13 +347,47 @@
     <tbody>
       <tr>
         <td><span class="xref">System.String</span></td>
-        <td><p>A string that represents the current object.</p>
+        <td><p>The svg path data string.</p>
 </td>
       </tr>
     </tbody>
   </table>
   <h5 class="overrides">Overrides</h5>
-  <div><span class="xref">System.Object.ToString()</span></div>
+  <div><a class="xref" href="Core2D.Path.PathSegment.html#Core2D_Path_PathSegment_ToSvgString">PathSegment.ToSvgString()</a></div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Path_Segments_LineSegment_ToXamlString.md&amp;value=---%0Auid%3A%20Core2D.Path.Segments.LineSegment.ToXamlString%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/ViewModels/Shapes/Path/Segments/LineSegment.cs/#L34">View Source</a>
+  </span>
+  <a id="Core2D_Path_Segments_LineSegment_ToXamlString_" data-uid="Core2D.Path.Segments.LineSegment.ToXamlString*"></a>
+  <h4 id="Core2D_Path_Segments_LineSegment_ToXamlString" data-uid="Core2D.Path.Segments.LineSegment.ToXamlString">ToXamlString()</h4>
+  <div class="markdown level1 summary"><p>Creates xaml path data string.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override string ToXamlString()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><p>The xaml path data string.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="Core2D.Path.PathSegment.html#Core2D_Path_PathSegment_ToXamlString">PathSegment.ToXamlString()</a></div>
   <h3 id="implements">Implements</h3>
   <div>
       <a class="xref" href="Core2D.Path.Segments.ILineSegment.html">ILineSegment</a>
@@ -365,6 +403,9 @@
   </div>
   <div>
       <a class="xref" href="Core2D.ICopyable.html">ICopyable</a>
+  </div>
+  <div>
+      <a class="xref" href="Core2D.IStringExporter.html">IStringExporter</a>
   </div>
 </article>
           </div>
