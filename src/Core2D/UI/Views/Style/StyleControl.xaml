@@ -1,0 +1,26 @@
+﻿<UserControl x:Class="Core2D.UI.Views.Style.StyleControl"
+             xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:converters="clr-namespace:Core2D.UI.Converters;assembly=Core2D"
+             xmlns:Editor="clr-namespace:Core2D.Editor;assembly=Core2D"
+             xmlns:Designer="clr-namespace:Core2D.Editor.Designer;assembly=Core2D"
+             mc:Ignorable="d"
+             d:DataContext="{x:Static Designer:DesignerContext.Style}"
+             d:DesignWidth="250" d:DesignHeight="400">
+    <ScrollViewer>
+        <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto" ColumnDefinitions="Auto,*">
+            <TextBlock Text="Name" Classes="left" Grid.Row="0" Grid.Column="0"/>
+            <TextBox Text="{Binding Name, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
+            <TextBlock Text="Thickness" Classes="left" Grid.Row="1" Grid.Column="0"/>
+            <TextBox Text="{Binding Thickness, Mode=TwoWay}" Classes="left" Grid.Row="1" Grid.Column="1"/>
+            <TextBlock Text="Line Cap" Classes="left" Grid.Row="2" Grid.Column="0"/>
+            <ComboBox Items="{x:Static Editor:Enums.LineCapValues}" SelectedItem="{Binding LineCap, Mode=TwoWay}" Classes="default" Grid.Row="2" Grid.Column="1"/>
+            <TextBlock Text="Dashes" Classes="left" Grid.Row="3" Grid.Column="0"/>
+            <TextBox Text="{Binding Dashes, Mode=TwoWay}" Classes="left" Grid.Row="3" Grid.Column="1"/>
+            <TextBlock Text="Dash Offset" Classes="left" Grid.Row="4" Grid.Column="0"/>
+            <TextBox Text="{Binding DashOffset, Mode=TwoWay}" Classes="left" Grid.Row="4" Grid.Column="1"/>
+        </Grid>
+    </ScrollViewer>
+</UserControl>
