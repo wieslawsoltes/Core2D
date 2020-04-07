@@ -28,7 +28,6 @@ namespace Core2D.Renderer.SkiaSharp
         /// <inheritdoc/>
         public IPathShape ToPathShape(IEnumerable<IBaseShape> shapes)
         {
-            var editor = _serviceProvider.GetService<IProjectEditor>();
             var factory = _serviceProvider.GetService<IFactory>();
             var first = shapes.FirstOrDefault();
             var style = first.Style != null ?
@@ -48,7 +47,6 @@ namespace Core2D.Renderer.SkiaSharp
         /// <inheritdoc/>
         public IPathShape ToPathShape(IBaseShape shape)
         {
-            var editor = _serviceProvider.GetService<IProjectEditor>();
             var factory = _serviceProvider.GetService<IFactory>();
             var style = shape.Style != null ?
                 (IShapeStyle)shape.Style?.Copy(null) :
@@ -72,7 +70,6 @@ namespace Core2D.Renderer.SkiaSharp
             {
                 return null;
             }
-            var editor = _serviceProvider.GetService<IProjectEditor>();
             var factory = _serviceProvider.GetService<IFactory>();
             var style = shape.Style != null ?
                 (IShapeStyle)shape.Style?.Copy(null) :
@@ -107,7 +104,6 @@ namespace Core2D.Renderer.SkiaSharp
             {
                 return null;
             }
-            var editor = _serviceProvider.GetService<IProjectEditor>();
             var factory = _serviceProvider.GetService<IFactory>();
             var style = shape.Style != null ?
                 (IShapeStyle)shape.Style?.Copy(null) :
@@ -164,7 +160,6 @@ namespace Core2D.Renderer.SkiaSharp
                 return null;
             }
 
-            var editor = _serviceProvider.GetService<IProjectEditor>();
             var factory = _serviceProvider.GetService<IFactory>();
             var shape = shapes.FirstOrDefault();
             var style = shape.Style != null ?

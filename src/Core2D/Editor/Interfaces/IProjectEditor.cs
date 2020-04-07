@@ -327,13 +327,13 @@ namespace Core2D.Editor
         /// Execute code script.
         /// </summary>
         /// <param name="csharp">The script code.</param>
-        void OnExecuteCode(string csharp);
+        Task OnExecuteCode(string csharp);
 
         /// <summary>
         /// Execute code script in repl.
         /// </summary>
         /// <param name="path">The script code.</param>
-        void OnExecuteRepl(string csharp);
+        Task OnExecuteRepl(string csharp);
 
         /// <summary>
         /// Reset previous script repl.
@@ -344,19 +344,19 @@ namespace Core2D.Editor
         /// Execute code script from file.
         /// </summary>
         /// <param name="path">The code file path.</param>
-        void OnExecuteScriptFile(string path);
+        Task OnExecuteScriptFile(string path);
 
         /// <summary>
         /// Execute code scripts from files.
         /// </summary>
         /// <param name="paths">The code file paths.</param>
-        void OnExecuteScriptFile(string[] paths);
+        Task OnExecuteScriptFile(string[] paths);
 
         /// <summary>
         /// Execute code script.
         /// </summary>
         /// <param name="script">The script object.</param>
-        void OnExecuteScript(IScript script);
+        Task OnExecuteScript(IScript script);
 
         /// <summary>
         /// Undo last action.
@@ -1034,7 +1034,7 @@ namespace Core2D.Editor
         /// <param name="x">The X coordinate in container.</param>
         /// <param name="y">The Y coordinate in container.</param>
         /// <returns>Returns true if success.</returns>
-        bool OnDropFiles(string[] files, double x, double y);
+        Task<bool> OnDropFiles(string[] files, double x, double y);
 
         /// <summary>
         /// Drop image key in current container at specified location.

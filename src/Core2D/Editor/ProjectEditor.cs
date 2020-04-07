@@ -748,13 +748,13 @@ namespace Core2D.Editor
         }
 
         /// <inheritdoc/>
-        public void OnExecuteCode(string csharp)
+        public async Task OnExecuteCode(string csharp)
         {
             try
             {
                 if (!string.IsNullOrWhiteSpace(csharp))
                 {
-                    ScriptRunner?.Execute(csharp, null);
+                    await ScriptRunner?.Execute(csharp, null);
                 }
             }
             catch (Exception ex)
@@ -764,13 +764,13 @@ namespace Core2D.Editor
         }
 
         /// <inheritdoc/>
-        public void OnExecuteRepl(string csharp)
+        public async Task OnExecuteRepl(string csharp)
         {
             try
             {
                 if (!string.IsNullOrWhiteSpace(csharp))
                 {
-                    ScriptState = ScriptRunner?.Execute(csharp, ScriptState);
+                    ScriptState = await ScriptRunner?.Execute(csharp, ScriptState);
                 }
             }
             catch (Exception ex)
@@ -786,14 +786,14 @@ namespace Core2D.Editor
         }
 
         /// <inheritdoc/>
-        public void OnExecuteScriptFile(string path)
+        public async Task OnExecuteScriptFile(string path)
         {
             try
             {
                 var csharp = FileIO?.ReadUtf8Text(path);
                 if (!string.IsNullOrWhiteSpace(csharp))
                 {
-                    OnExecuteCode(csharp);
+                    await OnExecuteCode(csharp);
                 }
             }
             catch (Exception ex)
@@ -803,23 +803,23 @@ namespace Core2D.Editor
         }
 
         /// <inheritdoc/>
-        public void OnExecuteScriptFile(string[] paths)
+        public async Task OnExecuteScriptFile(string[] paths)
         {
             foreach (var path in paths)
             {
-                OnExecuteScriptFile(path);
+                await OnExecuteScriptFile(path);
             }
         }
 
         /// <inheritdoc/>
-        public void OnExecuteScript(IScript script)
+        public async Task OnExecuteScript(IScript script)
         {
             try
             {
                 var csharp = script?.Code;
                 if (!string.IsNullOrWhiteSpace(csharp))
                 {
-                    OnExecuteRepl(csharp);
+                    await OnExecuteRepl(csharp);
                 }
             }
             catch (Exception ex)
@@ -2834,7 +2834,7 @@ namespace Core2D.Editor
         }
 
         /// <inheritdoc/>
-        public bool OnDropFiles(string[] files, double x, double y)
+        public async Task<bool> OnDropFiles(string[] files, double x, double y)
         {
             try
             {
@@ -2884,7 +2884,7 @@ namespace Core2D.Editor
                     }
                     else if (string.Compare(ext, ProjectEditorConfiguration.ScriptExtension, StringComparison.OrdinalIgnoreCase) == 0)
                     {
-                        OnExecuteScriptFile(path);
+                        await OnExecuteScriptFile(path);
                         result = true;
                     }
                     else if (string.Compare(ext, ProjectEditorConfiguration.ScriptExtension, StringComparison.OrdinalIgnoreCase) == 0)

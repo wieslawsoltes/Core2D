@@ -259,7 +259,7 @@ namespace Core2D.UI.Editor
                 {
                     if (result.All(r => r != null))
                     {
-                        _serviceProvider.GetService<IProjectEditor>().OnExecuteScriptFile(result);
+                        await _serviceProvider.GetService<IProjectEditor>().OnExecuteScriptFile(result);
                     }
                 }
             }
