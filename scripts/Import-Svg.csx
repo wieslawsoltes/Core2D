@@ -1,0 +1,1 @@
+OnImportSvg(@"drawing.svg");
