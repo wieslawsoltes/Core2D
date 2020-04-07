@@ -14,7 +14,7 @@
         WindowState="Maximized" WindowStartupLocation="Manual"
         BorderThickness="1" BorderBrush="{DynamicResource ThemeBorderLightBrush}"
         Foreground="{DynamicResource ThemeForegroundBrush}"
-        Icon="/Assets/Core2D.ico"
+        Icon="/UI/Assets/Core2D.ico"
         id:DragBehavior.IsEnabled="True" id:DropBehavior.IsEnabled="True"
         xmlns:Designer="clr-namespace:Core2D.Editor.Designer;assembly=Core2D"
         mc:Ignorable="d"

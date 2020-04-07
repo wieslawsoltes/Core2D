@@ -14,7 +14,7 @@
         WindowState="Normal" WindowStartupLocation="CenterScreen"
         BorderThickness="1" BorderBrush="{DynamicResource ThemeBorderLightBrush}"
         Foreground="{DynamicResource ThemeForegroundBrush}"
-        Icon="/Assets/Core2D.ico"
+        Icon="/UI/Assets/Core2D.ico"
         Title="About Core2D"
         xmlns:Designer="clr-namespace:Core2D.Editor.Designer;assembly=Core2D"
         mc:Ignorable="d"
