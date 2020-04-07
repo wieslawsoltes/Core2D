@@ -27,8 +27,14 @@ namespace Core2D.Editor
         /// <summary>
         /// Import json.
         /// </summary>
-        /// <param name="path">The project json path.</param>
+        /// <param name="path">The json path.</param>
         void OnImportJson(string path);
+
+        /// <summary>
+        /// Import svg.
+        /// </summary>
+        /// <param name="path">The svg path.</param>
+        void OnImportSvg(string path);
 
         /// <summary>
         /// Import object.

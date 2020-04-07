@@ -120,6 +120,37 @@ namespace Core2D.UI.Editor
         }
 
         /// <inheritdoc/>
+        public async void OnImportSvg(string path)
+        {
+            if (path == null)
+            {
+                var dlg = new OpenFileDialog() { Title = "Open" };
+                dlg.AllowMultiple = true;
+                dlg.Filters.Add(new FileDialogFilter() { Name = "Svg", Extensions = { "svg" } });
+                dlg.Filters.Add(new FileDialogFilter() { Name = "All", Extensions = { "*" } });
+
+                var result = await dlg.ShowAsync(_serviceProvider.GetService<MainWindow>());
+                if (result != null)
+                {
+                    foreach (var item in result)
+                    {
+                        if (item != null)
+                        {
+                            _serviceProvider.GetService<IProjectEditor>().OnImportSvg(item);
+                        }
+                    }
+                }
+            }
+            else
+            {
+                if (_serviceProvider.GetService<IFileSystem>().Exists(path))
+                {
+                    _serviceProvider.GetService<IProjectEditor>().OnImportJson(path);
+                }
+            }
+        }
+
+        /// <inheritdoc/>
         public async void OnImportObject(string path)
         {
             if (path == null)

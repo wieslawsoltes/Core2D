@@ -697,7 +697,11 @@ namespace Core2D.Editor
                 var json = FileIO?.ReadUtf8Text(path);
                 if (!string.IsNullOrWhiteSpace(json))
                 {
-                    OnImportJsonString(json);
+                    var item = JsonSerializer.Deserialize<object>(json);
+                    if (item != null)
+                    {
+                        OnImportObject(item, true);
+                    }
                 }
             }
             catch (Exception ex)
@@ -707,12 +711,16 @@ namespace Core2D.Editor
         }
 
         /// <inheritdoc/>
-        private void OnImportJsonString(string json)
+        public void OnImportSvg(string path)
         {
-            var item = JsonSerializer.Deserialize<object>(json);
-            if (item != null)
+            if (SvgConverter == null)
             {
-                OnImportObject(item, true);
+                return;
+            }
+            var shapes = SvgConverter.Convert(path);
+            if (shapes != null)
+            {
+                OnPasteShapes(shapes);
             }
         }
 
@@ -2136,20 +2144,6 @@ namespace Core2D.Editor
             {
                 Project.ApplyTemplate(page, template);
                 Project.CurrentContainer.Invalidate();
-            }
-        }
-
-        /// <inheritdoc/>
-        public void OnImportSvg(string path)
-        {
-            if (SvgConverter == null)
-            {
-                return;
-            }
-            var shapes = SvgConverter.Convert(path);
-            if (shapes != null)
-            {
-                OnPasteShapes(shapes);
             }
         }
 

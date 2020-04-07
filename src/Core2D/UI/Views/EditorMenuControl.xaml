@@ -41,6 +41,8 @@
             <Separator/>
             <MenuItem Header="Import _Json..." Command="{Binding Platform.OnImportJson}"/>
             <Separator/>
+            <MenuItem Header="Import Sv_g..." Command="{Binding Platform.OnImportSvg}"/>
+            <Separator/>
             <MenuItem Header="_Export..." Command="{Binding Platform.OnExport}" InputGesture="Ctrl+E"/>
             <Separator/>
             <MenuItem Header="_Recent" Items="{Binding RecentProjects}">

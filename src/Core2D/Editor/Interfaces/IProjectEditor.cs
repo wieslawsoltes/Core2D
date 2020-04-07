@@ -309,6 +309,12 @@ namespace Core2D.Editor
         void OnImportJson(string path);
 
         /// <summary>
+        /// Import Svg from a file.
+        /// </summary>
+        /// <param name="path">The svg file path.</param>
+        void OnImportSvg(string path);
+
+        /// <summary>
         /// Export Json to a file.
         /// </summary>
         /// <param name="path">The json file path.</param>
@@ -828,12 +834,6 @@ namespace Core2D.Editor
         /// </summary>
         /// <param name="script">The script object.</param>
         void OnRemoveScript(IScript script);
-
-        /// <summary>
-        /// Import svg file.
-        /// </summary>
-        /// <param name="path">The svg path.</param>
-        void OnImportSvg(string path);
 
         /// <summary>
         /// Get image key.
