@@ -2887,7 +2887,7 @@ namespace Core2D.Editor
                         await OnExecuteScriptFile(path);
                         result = true;
                     }
-                    else if (string.Compare(ext, ProjectEditorConfiguration.ScriptExtension, StringComparison.OrdinalIgnoreCase) == 0)
+                    else if (string.Compare(ext, ProjectEditorConfiguration.SvgExtension, StringComparison.OrdinalIgnoreCase) == 0)
                     {
                         OnImportSvg(path);
                         result = true;
