@@ -1,1 +1,1 @@
-OnImportSvg(@"drawing.svg");
+OnImportSvg(@"file.svg");
