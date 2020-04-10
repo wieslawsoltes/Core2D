@@ -300,7 +300,7 @@ namespace Core2D
             state.PointShape = FilledRectanglePointShape(
                 CreateShapeStyle(
                     "Point",
-                    0xFF, 0x00, 0x00, 0x00,
+                    0xFF, 0x00, 0xBF, 0xFF,
                     0xFF, 0xFF, 0xFF, 0xFF,
                     2.0));
 
