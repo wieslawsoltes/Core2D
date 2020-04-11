@@ -503,14 +503,24 @@ namespace Core2D.Renderer.Avalonia
                     return;
                 }
 
-                double size = 4.0;
-                double scale = 1.0 / State.ZoomX;
+                double pointSize = _state.PointSize;
+                if (pointSize <= 0.0)
+                {
+                    return;
+                }
+
+                double scale = 1.0 / _state.ZoomX;
                 double translateX = 0.0 - (point.X * scale) + point.X;
                 double translateY = 0.0 - (point.Y * scale) + point.Y;
 
                 GetCached(pointStyle, out var fill, out var stroke, (value) => (float)(value / scale));
 
-                var rect = Rect2.FromPoints(point.X - size, point.Y - size, point.X + size, point.Y + size, dx, dy);
+                var rect = Rect2.FromPoints(
+                    point.X - pointSize, 
+                    point.Y - pointSize, 
+                    point.X + pointSize, 
+                    point.Y + pointSize, 
+                    dx, dy);
 
                 var translateMatrix = AME.MatrixHelper.Translate(translateX, translateY);
                 var scaleMatrix = AME.MatrixHelper.Scale(scale, scale);
