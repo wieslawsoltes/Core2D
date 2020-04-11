@@ -66,9 +66,9 @@
         <TabItem Header="ImageCache" Classes="property">
             <containers:ImagesControl DataContext="{Binding ImageCache}"/>
         </TabItem>
-        <TabItem Header="PointShape" Classes="property">
+        <TabItem Header="PointStyle" Classes="property">
             <ScrollViewer>
-                <ContentControl Content="{Binding PointShape}"/>
+                <ContentControl Content="{Binding PointStyle}"/>
             </ScrollViewer>
         </TabItem>
         <TabItem Header="SelectionStyle" Classes="property">
