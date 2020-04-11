@@ -288,7 +288,9 @@ namespace Core2D.Editor
         {
             if (Project != null && Project.Options.SnapToGrid == true)
             {
-                return (Snap(args.X, Project.Options.SnapX), Snap(args.Y, Project.Options.SnapY));
+                return (
+                    Snap(args.X, Project.Options.SnapX / PageState.ZoomX),
+                    Snap(args.Y, Project.Options.SnapY / PageState.ZoomY));
             }
             else
             {
@@ -1179,7 +1181,7 @@ namespace Core2D.Editor
             MoveBy(
                 PageState?.SelectedShape,
                 PageState?.SelectedShapes,
-                Project.Options.SnapToGrid ? -Project.Options.SnapX : -1.0,
+                Project.Options.SnapToGrid ? -(Project.Options.SnapX / PageState.ZoomX) : -1.0,
                 0.0);
         }
 
@@ -1189,7 +1191,7 @@ namespace Core2D.Editor
             MoveBy(
                 PageState?.SelectedShape,
                 PageState?.SelectedShapes,
-                Project.Options.SnapToGrid ? Project.Options.SnapX : 1.0,
+                Project.Options.SnapToGrid ? (Project.Options.SnapX / PageState.ZoomX) : 1.0,
                 0.0);
         }
 
@@ -2915,8 +2917,8 @@ namespace Core2D.Editor
                 Factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
             var style = (IShapeStyle)selected.Copy(null);
             var layer = Project?.CurrentContainer?.CurrentLayer;
-            double sx = Project.Options.SnapToGrid ? Snap(x, Project.Options.SnapX) : x;
-            double sy = Project.Options.SnapToGrid ? Snap(y, Project.Options.SnapY) : y;
+            double sx = Project.Options.SnapToGrid ? Snap(x, Project.Options.SnapX / PageState.ZoomX) : x;
+            double sy = Project.Options.SnapToGrid ? Snap(y, Project.Options.SnapY / PageState.ZoomY) : y;
 
             var image = Factory.CreateImageShape(sx, sy, style, key);
             image.BottomRight.X = sx + 320;
@@ -2950,8 +2952,8 @@ namespace Core2D.Editor
         /// <inheritdoc/>
         public void OnDropShapeAsClone<T>(T shape, double x, double y) where T : IBaseShape
         {
-            double sx = Project.Options.SnapToGrid ? Snap(x, Project.Options.SnapX) : x;
-            double sy = Project.Options.SnapToGrid ? Snap(y, Project.Options.SnapY) : y;
+            double sx = Project.Options.SnapToGrid ? Snap(x, Project.Options.SnapX / PageState.ZoomX) : x;
+            double sy = Project.Options.SnapToGrid ? Snap(y, Project.Options.SnapY / PageState.ZoomY) : y;
 
             try
             {
@@ -3003,7 +3005,7 @@ namespace Core2D.Editor
                     if (layer != null)
                     {
                         var shapes = layer.Shapes.Reverse();
-                        var result = HitTest.TryToGetShape(shapes, new Point2(x, y), Project.Options.HitThreshold);
+                        var result = HitTest.TryToGetShape(shapes, new Point2(x, y), Project.Options.HitThreshold / PageState.ZoomX);
                         if (result != null)
                         {
                             if (bExecute)
@@ -3038,8 +3040,8 @@ namespace Core2D.Editor
                 Factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
             var style = (IShapeStyle)selected.Copy(null);
             var layer = Project?.CurrentContainer?.CurrentLayer;
-            double sx = Project.Options.SnapToGrid ? Snap(x, Project.Options.SnapX) : x;
-            double sy = Project.Options.SnapToGrid ? Snap(y, Project.Options.SnapY) : y;
+            double sx = Project.Options.SnapToGrid ? Snap(x, Project.Options.SnapX / PageState.ZoomX) : x;
+            double sy = Project.Options.SnapToGrid ? Snap(y, Project.Options.SnapY / PageState.ZoomY) : y;
 
             var g = Factory.CreateGroupShape(ProjectEditorConfiguration.DefaulGroupName);
 
@@ -3101,7 +3103,7 @@ namespace Core2D.Editor
                     if (layer != null)
                     {
                         var shapes = layer.Shapes.Reverse();
-                        var result = HitTest.TryToGetShape(shapes, new Point2(x, y), Project.Options.HitThreshold);
+                        var result = HitTest.TryToGetShape(shapes, new Point2(x, y), Project.Options.HitThreshold / PageState.ZoomX);
                         if (result != null)
                         {
                             if (bExecute == true)
@@ -3281,14 +3283,14 @@ namespace Core2D.Editor
             {
                 var shapes = layer.Shapes.Reverse();
 
-                var point = HitTest.TryToGetPoint(shapes, new Point2(x, y), Project.Options.HitThreshold);
+                var point = HitTest.TryToGetPoint(shapes, new Point2(x, y), Project.Options.HitThreshold / PageState.ZoomX);
                 if (point != null)
                 {
                     Select(layer, point);
                     return true;
                 }
 
-                var shape = HitTest.TryToGetShape(shapes, new Point2(x, y), Project.Options.HitThreshold);
+                var shape = HitTest.TryToGetShape(shapes, new Point2(x, y), Project.Options.HitThreshold / PageState.ZoomX);
                 if (shape != null)
                 {
                     Select(layer, shape);
@@ -3315,7 +3317,7 @@ namespace Core2D.Editor
                     rectangle.BottomRight.X,
                     rectangle.BottomRight.Y);
                 var shapes = layer.Shapes;
-                var result = HitTest.TryToGetShapes(shapes, rect, Project.Options.HitThreshold);
+                var result = HitTest.TryToGetShapes(shapes, rect, Project.Options.HitThreshold / PageState.ZoomX);
                 if (result != null)
                 {
                     if (result.Count > 0)
@@ -3422,7 +3424,7 @@ namespace Core2D.Editor
             {
                 var shapes = Project.CurrentContainer?.CurrentLayer?.Shapes.Reverse();
 
-                var point = HitTest.TryToGetPoint(shapes, new Point2(x, y), Project.Options.HitThreshold);
+                var point = HitTest.TryToGetPoint(shapes, new Point2(x, y), Project.Options.HitThreshold / PageState.ZoomX);
                 if (point != null)
                 {
                     Hover(Project.CurrentContainer?.CurrentLayer, point);
@@ -3458,7 +3460,7 @@ namespace Core2D.Editor
                 return HitTest.TryToGetPoint(
                     shapes,
                     new Point2(x, y),
-                    Project.Options.HitThreshold);
+                    Project.Options.HitThreshold / PageState.ZoomX);
             }
             return null;
         }
@@ -3497,7 +3499,7 @@ namespace Core2D.Editor
             var result = HitTest.TryToGetShape(
                 shapes,
                 new Point2(x, y),
-                Project.Options.HitThreshold);
+                Project.Options.HitThreshold / PageState.ZoomX);
 
             if (result is ILineShape line)
             {
