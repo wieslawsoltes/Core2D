@@ -231,44 +231,6 @@ namespace Core2D
             };
         }
 
-        private IBaseShape EllipsePointShape(IShapeStyle style)
-        {
-            var ellipse = CreateEllipseShape(-4, -4, 4, 4, style, true, false);
-            ellipse.Name = "EllipsePoint";
-            return ellipse;
-        }
-
-        private IBaseShape FilledEllipsePointShape(IShapeStyle style)
-        {
-            var ellipse = CreateEllipseShape(-4, -4, 4, 4, style, true, true);
-            ellipse.Name = "FilledEllipsePoint";
-            return ellipse;
-        }
-
-        private IBaseShape RectanglePointShape(IShapeStyle style)
-        {
-            var rectangle = CreateRectangleShape(-4, -4, 4, 4, style, true, false);
-            rectangle.Name = "RectanglePoint";
-            return rectangle;
-        }
-
-        private IBaseShape FilledRectanglePointShape(IShapeStyle style)
-        {
-            var rectangle = CreateRectangleShape(-4, -4, 4, 4, style, true, true);
-            rectangle.Name = "FilledRectanglePoint";
-            return rectangle;
-        }
-
-        private IBaseShape CrossPointShape(IShapeStyle style)
-        {
-            var group = CreateGroupShape("CrossPoint");
-            var builder = group.Shapes.ToBuilder();
-            builder.Add(CreateLineShape(-4, 0, 4, 0, style));
-            builder.Add(CreateLineShape(0, -4, 0, 4, style));
-            group.Shapes = builder.ToImmutable();
-            return group;
-        }
-
         /// <inheritdoc/>
         public IShapeRendererState CreateShapeRendererState()
         {
