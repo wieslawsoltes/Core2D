@@ -289,8 +289,8 @@ namespace Core2D.Editor
             if (Project != null && Project.Options.SnapToGrid == true)
             {
                 return (
-                    Snap(args.X, Project.Options.SnapX / PageState.ZoomX),
-                    Snap(args.Y, Project.Options.SnapY / PageState.ZoomY));
+                    Snap(args.X, Project.Options.SnapX),
+                    Snap(args.Y, Project.Options.SnapY));
             }
             else
             {
@@ -2917,8 +2917,8 @@ namespace Core2D.Editor
                 Factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
             var style = (IShapeStyle)selected.Copy(null);
             var layer = Project?.CurrentContainer?.CurrentLayer;
-            double sx = Project.Options.SnapToGrid ? Snap(x, Project.Options.SnapX / PageState.ZoomX) : x;
-            double sy = Project.Options.SnapToGrid ? Snap(y, Project.Options.SnapY / PageState.ZoomY) : y;
+            double sx = Project.Options.SnapToGrid ? Snap(x, Project.Options.SnapX) : x;
+            double sy = Project.Options.SnapToGrid ? Snap(y, Project.Options.SnapY) : y;
 
             var image = Factory.CreateImageShape(sx, sy, style, key);
             image.BottomRight.X = sx + 320;
@@ -2952,8 +2952,8 @@ namespace Core2D.Editor
         /// <inheritdoc/>
         public void OnDropShapeAsClone<T>(T shape, double x, double y) where T : IBaseShape
         {
-            double sx = Project.Options.SnapToGrid ? Snap(x, Project.Options.SnapX / PageState.ZoomX) : x;
-            double sy = Project.Options.SnapToGrid ? Snap(y, Project.Options.SnapY / PageState.ZoomY) : y;
+            double sx = Project.Options.SnapToGrid ? Snap(x, Project.Options.SnapX) : x;
+            double sy = Project.Options.SnapToGrid ? Snap(y, Project.Options.SnapY) : y;
 
             try
             {
@@ -3040,8 +3040,8 @@ namespace Core2D.Editor
                 Factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
             var style = (IShapeStyle)selected.Copy(null);
             var layer = Project?.CurrentContainer?.CurrentLayer;
-            double sx = Project.Options.SnapToGrid ? Snap(x, Project.Options.SnapX / PageState.ZoomX) : x;
-            double sy = Project.Options.SnapToGrid ? Snap(y, Project.Options.SnapY / PageState.ZoomY) : y;
+            double sx = Project.Options.SnapToGrid ? Snap(x, Project.Options.SnapX) : x;
+            double sy = Project.Options.SnapToGrid ? Snap(y, Project.Options.SnapY) : y;
 
             var g = Factory.CreateGroupShape(ProjectEditorConfiguration.DefaulGroupName);
 
