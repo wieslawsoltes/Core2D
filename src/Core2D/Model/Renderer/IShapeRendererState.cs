@@ -39,9 +39,14 @@ namespace Core2D.Renderer
         IImageCache ImageCache { get; set; }
 
         /// <summary>
-        /// Gets or sets shape used to draw points.
+        /// Gets or sets style used to draw points.
         /// </summary>
-        IBaseShape PointShape { get; set; }
+        IShapeStyle PointStyle { get; set; }
+
+        /// <summary>
+        /// Gets or sets size used to draw points.
+        /// </summary>
+        double PointSize { get; set; }
 
         /// <summary>
         /// Gets or sets selection rectangle style.

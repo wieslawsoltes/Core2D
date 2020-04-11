@@ -19,7 +19,8 @@ namespace Core2D.Renderer
         private IBaseShape _selectedShape;
         private ISet<IBaseShape> _selectedShapes;
         private IImageCache _imageCache;
-        private IBaseShape _pointShape;
+        private IShapeStyle _pointStyle;
+        private double _pointSize;
         private IShapeStyle _selectionStyle;
         private IShapeStyle _helperStyle;
 
@@ -87,12 +88,21 @@ namespace Core2D.Renderer
         }
 
         /// <summary>
-        /// Gets or sets shape used to draw points.
+        /// Gets or sets style used to draw points.
         /// </summary>
-        public IBaseShape PointShape
+        public IShapeStyle PointStyle
         {
-            get => _pointShape;
-            set => Update(ref _pointShape, value);
+            get => _pointStyle;
+            set => Update(ref _pointStyle, value);
+        }
+
+        /// <summary>
+        /// Gets or sets size used to draw points.
+        /// </summary>
+        public double PointSize
+        {
+            get => _pointSize;
+            set => Update(ref _pointSize, value);
         }
 
         /// <summary>
@@ -174,10 +184,16 @@ namespace Core2D.Renderer
         public virtual bool ShouldSerializeImageCache() => _imageCache != null;
 
         /// <summary>
-        /// Check whether the <see cref="PointShape"/> property has changed from its default value.
+        /// Check whether the <see cref="PointStyle"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializePointShape() => _pointShape != null;
+        public virtual bool ShouldSerializePointStyle() => _pointStyle != null;
+
+        /// <summary>
+        /// Check whether the <see cref="PointSize"/> property has changed from its default value.
+        /// </summary>
+        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
+        public virtual bool ShouldSerializePointSize() => _pointSize != default;
 
         /// <summary>
         /// Check whether the <see cref="SelectionStyle"/> property has changed from its default value.
