@@ -2974,7 +2974,7 @@ namespace Core2D.Editor
                             TryToConnectLines(
                                 ProjectContainer.GetAllShapes<ILineShape>(Project?.CurrentContainer?.CurrentLayer?.Shapes),
                                 group.Connectors,
-                                Project.Options.HitThreshold);
+                                Project.Options.HitThreshold / PageState.ZoomX);
                         }
                     }
                 }
@@ -3432,7 +3432,7 @@ namespace Core2D.Editor
                 }
                 else
                 {
-                    var shape = HitTest.TryToGetShape(shapes, new Point2(x, y), Project.Options.HitThreshold);
+                    var shape = HitTest.TryToGetShape(shapes, new Point2(x, y), Project.Options.HitThreshold / PageState.ZoomX);
                     if (shape != null)
                     {
                         Hover(Project.CurrentContainer?.CurrentLayer, shape);
