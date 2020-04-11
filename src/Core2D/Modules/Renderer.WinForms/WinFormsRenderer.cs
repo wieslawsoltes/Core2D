@@ -405,14 +405,7 @@ namespace Core2D.Renderer.WinForms
         /// <inheritdoc/>
         public void Draw(object dc, IPointShape point, double dx, double dy)
         {
-            if (point != null && _state != null && _state.PointShape != null)
-            {
-                _state.PointShape.Draw(
-                    dc, 
-                    this, 
-                    point.X + dx, 
-                    point.Y + dy);
-            }
+            // TODO:
         }
 
         /// <inheritdoc/>
