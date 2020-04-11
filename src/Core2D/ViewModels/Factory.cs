@@ -259,12 +259,12 @@ namespace Core2D
                     0xFF, 0x00, 0x00, 0x00,
                     1.0);
 
-            state.PointShape = FilledRectanglePointShape(
+            state.PointStyle = 
                 CreateShapeStyle(
                     "Point",
                     0xFF, 0x00, 0xBF, 0xFF,
                     0xFF, 0xFF, 0xFF, 0xFF,
-                    2.0));
+                    2.0);
 
             return state;
         }
