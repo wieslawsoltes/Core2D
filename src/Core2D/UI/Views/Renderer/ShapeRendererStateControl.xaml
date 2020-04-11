@@ -66,10 +66,22 @@
         <TabItem Header="ImageCache" Classes="property">
             <containers:ImagesControl DataContext="{Binding ImageCache}"/>
         </TabItem>
-        <TabItem Header="PointStyle" Classes="property">
-            <ScrollViewer>
-                <ContentControl Content="{Binding PointStyle}"/>
-            </ScrollViewer>
+        <TabItem Header="Point" Classes="property">
+            <TabControl Classes="default">
+                <TabItem Header="Options" Classes="property">
+                    <ScrollViewer>
+                        <Grid RowDefinitions="Auto" ColumnDefinitions="Auto,*">
+                            <TextBlock Text="PointSize" Classes="left" Grid.Row="0" Grid.Column="0"/>
+                            <TextBox Text="{Binding PointSize, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
+                        </Grid>
+                    </ScrollViewer>
+                </TabItem>
+                <TabItem Header="PointStyle" Classes="property">
+                    <ScrollViewer>
+                        <ContentControl Content="{Binding PointStyle}"/>
+                    </ScrollViewer>
+                </TabItem>
+            </TabControl>
         </TabItem>
         <TabItem Header="SelectionStyle" Classes="property">
             <ScrollViewer>
