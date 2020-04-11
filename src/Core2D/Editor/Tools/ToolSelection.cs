@@ -271,7 +271,13 @@ namespace Core2D.Editor.Tools
                         if (editor.PageState.SelectedShape == null && editor.PageState.SelectedShapes != null)
                         {
                             var shapes = editor.Project.CurrentContainer.CurrentLayer.Shapes.Reverse();
-                            var result = editor.HitTest.TryToGetShape(shapes, new Point2(x, y), editor.Project.Options.HitThreshold / editor.PageState.ZoomX);
+
+                            IBaseShape result = editor.HitTest.TryToGetPoint(shapes, new Point2(x, y), editor.Project.Options.HitThreshold / editor.PageState.ZoomX);
+                            if (result == null)
+                            {
+                                result = editor.HitTest.TryToGetShape(shapes, new Point2(x, y), editor.Project.Options.HitThreshold / editor.PageState.ZoomX);
+                            }
+
                             if (result != null && editor.PageState.SelectedShapes.Contains(result))
                             {
                                 _startX = sx;
