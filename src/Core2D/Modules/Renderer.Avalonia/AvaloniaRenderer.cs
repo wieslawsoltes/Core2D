@@ -167,10 +167,10 @@ namespace Core2D.Renderer.Avalonia
         private void DrawLineArrowsInternal(AM.DrawingContext dc, ILineShape line, IShapeStyle style, double dx, double dy, out A.Point pt1, out A.Point pt2)
         {
             // Start arrow style.
-            GetCached(style.StartArrowStyle, out var fillStartArrow, out var strokeStartArrow);
+            GetCached(style.StartArrowStyle, out var fillStartArrow, out var strokeStartArrow, _scaleToPage);
 
             // End arrow style.
-            GetCached(style.EndArrowStyle, out var fillEndArrow, out var strokeEndArrow);
+            GetCached(style.EndArrowStyle, out var fillEndArrow, out var strokeEndArrow, _scaleToPage);
 
             // Line max length.
             double _x1 = line.Start.X + dx;
@@ -390,24 +390,24 @@ namespace Core2D.Renderer.Avalonia
             return new A.Matrix(m.M11, m.M12, m.M21, m.M22, m.OffsetX, m.OffsetY);
         }
 
-        private void GetCached(IArrowStyle style, out AM.IBrush fill, out AM.Pen stroke)
+        private void GetCached(IArrowStyle style, out AM.IBrush fill, out AM.Pen stroke, Func<double, float> scaleToPage)
         {
             (fill, stroke) = _arrowStyleCache.Get(style);
             if (fill == null || stroke == null)
             {
                 fill = ToBrush(style.Fill);
-                stroke = ToPen(style, _scaleToPage);
+                stroke = ToPen(style, scaleToPage);
                 _arrowStyleCache.Set(style, (fill, stroke));
             }
         }
 
-        private void GetCached(IShapeStyle style, out AM.IBrush fill, out AM.Pen stroke)
+        private void GetCached(IShapeStyle style, out AM.IBrush fill, out AM.Pen stroke, Func<double, float> scaleToPage)
         {
             (fill, stroke) = _styleCache.Get(style);
             if (fill == null || stroke == null)
             {
                 fill = ToBrush(style.Fill);
-                stroke = ToPen(style, _scaleToPage);
+                stroke = ToPen(style, scaleToPage);
                 _styleCache.Set(style, (fill, stroke));
             }
         }
@@ -493,13 +493,37 @@ namespace Core2D.Renderer.Avalonia
         /// <inheritdoc/>
         public void Draw(object dc, IPointShape point, double dx, double dy)
         {
-            if (point != null && _state != null && _state.PointShape != null)
+            if (point != null && _state != null && _state.PointStyle != null)
             {
-                _state.PointShape.Draw(
-                    dc, 
-                    this, 
-                    point.X + dx, 
-                    point.Y + dy);
+                var _dc = dc as AM.DrawingContext;
+
+                var style = _state.PointStyle;
+                if (style == null)
+                {
+                    return;
+                }
+
+                double size = 4.0;
+                double scale = 1.0 / State.ZoomX;
+                double translateX = 0.0 - (point.X * scale) + point.X;
+                double translateY = 0.0 - (point.Y * scale) + point.Y;
+
+                GetCached(style, out var fill, out var stroke, (value) => (float)(value / scale));
+
+                var rect = Rect2.FromPoints(point.X - size, point.Y - size, point.X + size, point.Y + size, dx, dy);
+
+                var translateMatrix = AME.MatrixHelper.Translate(translateX, translateY);
+                var scaleMatrix = AME.MatrixHelper.Scale(scale, scale);
+                using var translateDisposable = _dc.PushPreTransform(translateMatrix);
+                using var scaleDisposable = _dc.PushPreTransform(scaleMatrix);
+
+                DrawRectangleInternal(
+                    _dc,
+                    fill,
+                    stroke,
+                    true,
+                    true,
+                    ref rect);
             }
         }
 
@@ -514,7 +538,7 @@ namespace Core2D.Renderer.Avalonia
                 return;
             }
 
-            GetCached(style, out _, out var stroke);
+            GetCached(style, out _, out var stroke, _scaleToPage);
 
             DrawLineArrowsInternal(_dc, line, style, dx, dy, out var pt1, out var pt2);
 
@@ -546,7 +570,7 @@ namespace Core2D.Renderer.Avalonia
                 return;
             }
 
-            GetCached(style, out var fill, out var stroke);
+            GetCached(style, out var fill, out var stroke, _scaleToPage);
 
             var rect = CreateRect(rectangle.TopLeft, rectangle.BottomRight, dx, dy);
 
@@ -581,7 +605,7 @@ namespace Core2D.Renderer.Avalonia
                 return;
             }
 
-            GetCached(style, out var fill, out var stroke);
+            GetCached(style, out var fill, out var stroke, _scaleToPage);
 
             var rect = CreateRect(ellipse.TopLeft, ellipse.BottomRight, dx, dy);
 
@@ -610,7 +634,7 @@ namespace Core2D.Renderer.Avalonia
                 return;
             }
 
-            GetCached(style, out var fill, out var stroke);
+            GetCached(style, out var fill, out var stroke, _scaleToPage);
 
             var sg = ToStreamGeometry(arc, dx, dy);
 
@@ -636,7 +660,7 @@ namespace Core2D.Renderer.Avalonia
                 return;
             }
 
-            GetCached(style, out var fill, out var stroke);
+            GetCached(style, out var fill, out var stroke, _scaleToPage);
 
             var sg = ToStreamGeometry(cubicBezier, dx, dy);
 
@@ -662,7 +686,7 @@ namespace Core2D.Renderer.Avalonia
                 return;
             }
 
-            GetCached(style, out var fill, out var stroke);
+            GetCached(style, out var fill, out var stroke, _scaleToPage);
 
             var sg = ToStreamGeometry(quadraticBezier, dx, dy);
 
@@ -693,7 +717,7 @@ namespace Core2D.Renderer.Avalonia
                 return;
             }
 
-            GetCached(style, out _, out var stroke);
+            GetCached(style, out _, out var stroke, _scaleToPage);
 
             var rect = CreateRect(text.TopLeft, text.BottomRight, dx, dy);
 
@@ -776,7 +800,7 @@ namespace Core2D.Renderer.Avalonia
 
             if ((image.IsStroked || image.IsFilled) && style != null)
             {
-                GetCached(style, out var fill, out var stroke);
+                GetCached(style, out var fill, out var stroke, _scaleToPage);
 
                 DrawRectangleInternal(
                     _dc,
@@ -853,7 +877,7 @@ namespace Core2D.Renderer.Avalonia
                 return;
             }
 
-            GetCached(style, out var fill, out var stroke);
+            GetCached(style, out var fill, out var stroke, _scaleToPage);
 
             var g = PathGeometryConverter.ToGeometry(path.Geometry, dx, dy);
 
