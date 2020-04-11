@@ -497,8 +497,8 @@ namespace Core2D.Renderer.Avalonia
             {
                 var _dc = dc as AM.DrawingContext;
 
-                var style = _state.PointStyle;
-                if (style == null)
+                var pointStyle = _state.PointStyle;
+                if (pointStyle == null)
                 {
                     return;
                 }
@@ -508,7 +508,7 @@ namespace Core2D.Renderer.Avalonia
                 double translateX = 0.0 - (point.X * scale) + point.X;
                 double translateY = 0.0 - (point.Y * scale) + point.Y;
 
-                GetCached(style, out var fill, out var stroke, (value) => (float)(value / scale));
+                GetCached(pointStyle, out var fill, out var stroke, (value) => (float)(value / scale));
 
                 var rect = Rect2.FromPoints(point.X - size, point.Y - size, point.X + size, point.Y + size, dx, dy);
 
