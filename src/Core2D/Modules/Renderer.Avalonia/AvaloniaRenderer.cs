@@ -111,7 +111,7 @@ namespace Core2D.Renderer.Avalonia
                     break;
             }
 
-            var strokeWidth = scale(style.Thickness / State.ZoomX);
+            var strokeWidth = scale(style.Thickness / _state.ZoomX);
 
             if (style.Dashes != null)
             {
@@ -483,7 +483,7 @@ namespace Core2D.Renderer.Avalonia
         {
             foreach (var shape in layer.Shapes)
             {
-                if (shape.State.Flags.HasFlag(State.DrawShapeState.Flags))
+                if (shape.State.Flags.HasFlag(_state.DrawShapeState.Flags))
                 {
                     shape.Draw(dc, this, dx, dy);
                 }
@@ -828,14 +828,14 @@ namespace Core2D.Renderer.Avalonia
             }
             else
             {
-                if (State.ImageCache == null || string.IsNullOrEmpty(image.Key))
+                if (_state.ImageCache == null || string.IsNullOrEmpty(image.Key))
                 {
                     return;
                 }
 
                 try
                 {
-                    var bytes = State.ImageCache.GetImage(image.Key);
+                    var bytes = _state.ImageCache.GetImage(image.Key);
                     if (bytes != null)
                     {
                         using var ms = new System.IO.MemoryStream(bytes);
