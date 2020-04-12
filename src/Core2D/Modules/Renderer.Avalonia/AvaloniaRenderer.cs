@@ -125,66 +125,58 @@ namespace Core2D.Renderer.Avalonia
 
         private static void DrawLineInternal(AM.DrawingContext dc, AM.IPen pen, bool isStroked, ref A.Point p0, ref A.Point p1)
         {
-            if (isStroked)
+            if (!isStroked)
             {
-                dc.DrawLine(pen, p0, p1);
+                return;
             }
+            dc.DrawLine(pen, p0, p1);
         }
 
         private static void DrawLineCurveInternal(AM.DrawingContext _dc, AM.IPen pen, bool isStroked, ref A.Point pt1, ref A.Point pt2, double curvature, CurveOrientation orientation, PointAlignment pt1a, PointAlignment pt2a)
         {
-            if (isStroked)
+            if (!isStroked)
             {
-                var sg = new AM.StreamGeometry();
-                using (var sgc = sg.Open())
-                {
-                    sgc.BeginFigure(new A.Point(pt1.X, pt1.Y), false);
-                    double p1x = pt1.X;
-                    double p1y = pt1.Y;
-                    double p2x = pt2.X;
-                    double p2y = pt2.Y;
-                    LineShapeExtensions.GetCurvedLineBezierControlPoints(orientation, curvature, pt1a, pt2a, ref p1x, ref p1y, ref p2x, ref p2y);
-                    sgc.CubicBezierTo(
-                        new A.Point(p1x, p1y),
-                        new A.Point(p2x, p2y),
-                        new A.Point(pt2.X, pt2.Y));
-                    sgc.EndFigure(false);
-                }
-                _dc.DrawGeometry(null, pen, sg);
+                return;
             }
+            var sg = new AM.StreamGeometry();
+            using (var sgc = sg.Open())
+            {
+                sgc.BeginFigure(new A.Point(pt1.X, pt1.Y), false);
+                double p1x = pt1.X;
+                double p1y = pt1.Y;
+                double p2x = pt2.X;
+                double p2y = pt2.Y;
+                LineShapeExtensions.GetCurvedLineBezierControlPoints(orientation, curvature, pt1a, pt2a, ref p1x, ref p1y, ref p2x, ref p2y);
+                sgc.CubicBezierTo(
+                    new A.Point(p1x, p1y),
+                    new A.Point(p2x, p2y),
+                    new A.Point(pt2.X, pt2.Y));
+                sgc.EndFigure(false);
+            }
+            _dc.DrawGeometry(null, pen, sg);
         }
 
         private void DrawLineArrowsInternal(AM.DrawingContext dc, ILineShape line, IShapeStyle style, double dx, double dy, out A.Point pt1, out A.Point pt2)
         {
-            // Start arrow style.
             GetCached(style.StartArrowStyle, out var fillStartArrow, out var strokeStartArrow, _scaleToPage, false);
-
-            // End arrow style.
             GetCached(style.EndArrowStyle, out var fillEndArrow, out var strokeEndArrow, _scaleToPage, false);
 
-            // Line max length.
             double _x1 = line.Start.X + dx;
             double _y1 = line.Start.Y + dy;
             double _x2 = line.End.X + dx;
             double _y2 = line.End.Y + dy;
-
             line.GetMaxLength(ref _x1, ref _y1, ref _x2, ref _y2);
 
             float x1 = _scaleToPage(_x1);
             float y1 = _scaleToPage(_y1);
             float x2 = _scaleToPage(_x2);
             float y2 = _scaleToPage(_y2);
-
-            // Arrow transforms.
             var sas = style.StartArrowStyle;
             var eas = style.EndArrowStyle;
             double a1 = Math.Atan2(y1 - y2, x1 - x2);
             double a2 = Math.Atan2(y2 - y1, x2 - x1);
 
-            // Draw start arrow.
             pt1 = DrawLineArrowInternal(dc, strokeStartArrow, fillStartArrow, x1, y1, a1, sas);
-
-            // Draw end arrow.
             pt2 = DrawLineArrowInternal(dc, strokeEndArrow, fillEndArrow, x2, y2, a2, eas);
         }
 
@@ -195,7 +187,6 @@ namespace Core2D.Renderer.Avalonia
             double ry = style.RadiusY;
             double sx = 2.0 * rx;
             double sy = 2.0 * ry;
-
             A.Point pt;
             switch (style.ArrowType)
             {
@@ -241,7 +232,6 @@ namespace Core2D.Renderer.Avalonia
                     }
                     break;
             }
-
             return pt;
         }
 
@@ -251,14 +241,11 @@ namespace Core2D.Renderer.Avalonia
             {
                 return;
             }
-
             var r = new A.Rect(rect.X, rect.Y, rect.Width, rect.Height);
-
             if (isFilled)
             {
                 dc.FillRectangle(brush, r);
             }
-
             if (isStroked)
             {
                 dc.DrawRectangle(pen, r);
@@ -271,10 +258,8 @@ namespace Core2D.Renderer.Avalonia
             {
                 return;
             }
-
             var r = new A.Rect(rect.X, rect.Y, rect.Width, rect.Height);
             var g = new AM.EllipseGeometry(r);
-
             dc.DrawGeometry(
                 isFilled ? brush : null,
                 isStroked ? pen : null,
@@ -487,25 +472,14 @@ namespace Core2D.Renderer.Avalonia
 
             GetCached(pointStyle, out var fill, out var stroke, (value) => (float)(value / scale), true);
 
-            var rect = Rect2.FromPoints(
-                point.X - pointSize,
-                point.Y - pointSize,
-                point.X + pointSize,
-                point.Y + pointSize,
-                dx, dy);
+            var rect = Rect2.FromPoints(point.X - pointSize, point.Y - pointSize, point.X + pointSize, point.Y + pointSize, dx, dy);
 
             var translateMatrix = AME.MatrixHelper.Translate(translateX, translateY);
             var scaleMatrix = AME.MatrixHelper.Scale(scale, scale);
             using var translateDisposable = _dc.PushPreTransform(translateMatrix);
             using var scaleDisposable = _dc.PushPreTransform(scaleMatrix);
 
-            DrawRectangleInternal(
-                _dc,
-                fill,
-                stroke,
-                true,
-                true,
-                ref rect);
+            DrawRectangleInternal(_dc, fill, stroke, true, true, ref rect);
         }
 
         /// <inheritdoc/>
@@ -713,7 +687,6 @@ namespace Core2D.Renderer.Avalonia
             {
                 var fontStyle = AM.FontStyle.Normal;
                 var fontWeight = AM.FontWeight.Normal;
-                //var fontDecoration = AM.FontDecoration.None;
 
                 if (style.TextStyle.FontStyle != null)
                 {
@@ -726,20 +699,22 @@ namespace Core2D.Renderer.Avalonia
                     {
                         fontWeight |= AM.FontWeight.Bold;
                     }
-
-                    // TODO: Implement font decoration after Avalonia adds support.
-                    /*
-                    if (style.TextStyle.FontStyle.Flags.HasFlag(FontStyleFlags.Underline))
-                    {
-                        fontDecoration |= AM.FontDecoration.Underline;
-                    }
-
-                    if (style.TextStyle.FontStyle.Flags.HasFlag(FontStyleFlags.Strikeout))
-                    {
-                        fontDecoration |= AM.FontDecoration.Strikethrough;
-                    }
-                    */
                 }
+
+                //var fontDecoration = AM.FontDecoration.None;
+
+                // TODO: Implement font decoration after Avalonia adds support.
+                /*
+                if (style.TextStyle.FontStyle.Flags.HasFlag(FontStyleFlags.Underline))
+                {
+                    fontDecoration |= AM.FontDecoration.Underline;
+                }
+
+                if (style.TextStyle.FontStyle.Flags.HasFlag(FontStyleFlags.Strikeout))
+                {
+                    fontDecoration |= AM.FontDecoration.Strikethrough;
+                }
+                */
 
                 if (style.TextStyle.FontSize >= 0.0)
                 {
