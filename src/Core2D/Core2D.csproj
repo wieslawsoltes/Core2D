@@ -93,7 +93,7 @@
     <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.0" PrivateAssets="All" />
     <PackageReference Include="Microsoft.DotNet.ILCompiler" Version="1.0.0-alpha-*" Condition="'$(CoreRT)' == 'True'" />
     <PackageReference Include="SourceLink.Create.CommandLine" Version="2.8.3" PrivateAssets="All" />
-    <PackageReference Include="Svg.Skia" Version="0.1.6" />
+    <PackageReference Include="Svg.Skia" Version="0.1.7" />
     <PackageReference Include="System.Collections.Immutable" Version="1.7.0" />
     <PackageReference Include="System.Diagnostics.TextWriterTraceListener" Version="4.3.0" Condition="!$(TargetFramework.StartsWith('net4'))" />
     <PackageReference Include="System.Diagnostics.TraceSource" Version="4.3.0" Condition="!$(TargetFramework.StartsWith('net4'))" />
@@ -117,14 +117,14 @@
     <PackageReference Include="Avalonia.MatrixExtensions" Version="2.3.999-build*" />
     <PackageReference Include="Avalonia.Controls.PanAndZoom" Version="2.3.999-build*" />
     <PackageReference Include="Autofac" Version="5.1.2" />
-    <PackageReference Include="CsvHelper" Version="15.0.3" />
+    <PackageReference Include="CsvHelper" Version="15.0.4" />
     <PackageReference Include="DocumentFormat.OpenXml" Version="2.10.1" />
     <PackageReference Include="Math.Spatial" Version="1.2.0" />
     <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Scripting" Version="3.5.0" Condition="'$(CoreRT)' != 'True'" />
     <PackageReference Include="netDXF.netstandard" Version="2.3.0" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
     <PackageReference Include="PDFsharp" Version="1.50.5147" />
-    <PackageReference Include="reactiveui" Version="11.2.3" />
+    <PackageReference Include="reactiveui" Version="11.3.1" />
     <PackageReference Include="SkiaSharp" Version="1.68.1.1" />
     <PackageReference Include="SkiaSharp.NativeAssets.Linux" Version="1.68.1.1" />
   </ItemGroup>
