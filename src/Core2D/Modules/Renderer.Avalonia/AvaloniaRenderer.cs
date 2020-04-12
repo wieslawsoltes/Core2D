@@ -473,7 +473,6 @@ namespace Core2D.Renderer.Avalonia
             GetCached(pointStyle, out var fill, out var stroke, (value) => (float)(value / scale), true);
 
             var rect = Rect2.FromPoints(point.X - pointSize, point.Y - pointSize, point.X + pointSize, point.Y + pointSize, dx, dy);
-
             var translateMatrix = AME.MatrixHelper.Translate(translateX, translateY);
             var scaleMatrix = AME.MatrixHelper.Scale(scale, scale);
             using var translateDisposable = _dc.PushPreTransform(translateMatrix);
