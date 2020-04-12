@@ -700,10 +700,10 @@ namespace Core2D.Renderer.Avalonia
                     }
                 }
 
-                //var fontDecoration = AM.FontDecoration.None;
-
                 // TODO: Implement font decoration after Avalonia adds support.
                 /*
+                var fontDecoration = AM.FontDecoration.None;
+
                 if (style.TextStyle.FontStyle.Flags.HasFlag(FontStyleFlags.Underline))
                 {
                     fontDecoration |= AM.FontDecoration.Underline;
