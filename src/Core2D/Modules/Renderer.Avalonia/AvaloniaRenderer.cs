@@ -20,8 +20,8 @@ namespace Core2D.Renderer.Avalonia
     {
         private readonly IServiceProvider _serviceProvider;
         private IShapeRendererState _state;
-        private readonly ICache<IShapeStyle, (AM.IBrush, AM.Pen)> _styleCache;
-        private readonly ICache<IArrowStyle, (AM.IBrush, AM.Pen)> _arrowStyleCache;
+        private readonly ICache<IShapeStyle, (AM.IBrush, AM.IPen)> _styleCache;
+        private readonly ICache<IArrowStyle, (AM.IBrush, AM.IPen)> _arrowStyleCache;
         // TODO: Add LineShape cache.
         // TODO: Add EllipseShape cache.
         // TODO: Add ArcShape cache.
@@ -49,8 +49,8 @@ namespace Core2D.Renderer.Avalonia
         {
             _serviceProvider = serviceProvider;
             _state = _serviceProvider.GetService<IFactory>().CreateShapeRendererState();
-            _styleCache = _serviceProvider.GetService<IFactory>().CreateCache<IShapeStyle, (AM.IBrush, AM.Pen)>();
-            _arrowStyleCache = _serviceProvider.GetService<IFactory>().CreateCache<IArrowStyle, (AM.IBrush, AM.Pen)>();
+            _styleCache = _serviceProvider.GetService<IFactory>().CreateCache<IShapeStyle, (AM.IBrush, AM.IPen)>();
+            _arrowStyleCache = _serviceProvider.GetService<IFactory>().CreateCache<IArrowStyle, (AM.IBrush, AM.IPen)>();
             _textCache = _serviceProvider.GetService<IFactory>().CreateCache<ITextShape, (string, AM.FormattedText, IShapeStyle)>();
             _biCache = _serviceProvider.GetService<IFactory>().CreateCache<string, AMI.Bitmap>(bi => bi.Dispose());
             _textScaleFactor = textScaleFactor;
@@ -93,7 +93,7 @@ namespace Core2D.Renderer.Avalonia
             _ => throw new NotSupportedException($"The {color.GetType()} color type is not supported."),
         };
 
-        private AM.Pen ToPen(IBaseStyle style, Func<double, float> scale, bool scaleStrokeWidth)
+        private AM.IPen ToPen(IBaseStyle style, Func<double, float> scale, bool scaleStrokeWidth)
         {
             var lineCap = default(AM.PenLineCap);
             var dashStyle = default(AM.DashStyle);
@@ -134,7 +134,7 @@ namespace Core2D.Renderer.Avalonia
             return Rect2.FromPoints(tl.X, tl.Y, br.X, br.Y, dx, dy);
         }
 
-        private static void DrawLineInternal(AM.DrawingContext dc, AM.Pen pen, bool isStroked, ref A.Point p0, ref A.Point p1)
+        private static void DrawLineInternal(AM.DrawingContext dc, AM.IPen pen, bool isStroked, ref A.Point p0, ref A.Point p1)
         {
             if (isStroked)
             {
@@ -142,7 +142,7 @@ namespace Core2D.Renderer.Avalonia
             }
         }
 
-        private static void DrawLineCurveInternal(AM.DrawingContext _dc, AM.Pen pen, bool isStroked, ref A.Point pt1, ref A.Point pt2, double curvature, CurveOrientation orientation, PointAlignment pt1a, PointAlignment pt2a)
+        private static void DrawLineCurveInternal(AM.DrawingContext _dc, AM.IPen pen, bool isStroked, ref A.Point pt1, ref A.Point pt2, double curvature, CurveOrientation orientation, PointAlignment pt1a, PointAlignment pt2a)
         {
             if (isStroked)
             {
@@ -199,7 +199,7 @@ namespace Core2D.Renderer.Avalonia
             pt2 = DrawLineArrowInternal(dc, strokeEndArrow, fillEndArrow, x2, y2, a2, eas);
         }
 
-        private static A.Point DrawLineArrowInternal(AM.DrawingContext dc, AM.Pen pen, AM.IBrush brush, float x, float y, double angle, IArrowStyle style)
+        private static A.Point DrawLineArrowInternal(AM.DrawingContext dc, AM.IPen pen, AM.IBrush brush, float x, float y, double angle, IArrowStyle style)
         {
             var rt = AME.MatrixHelper.Rotation(angle, new A.Vector(x, y));
             double rx = style.RadiusX;
@@ -256,7 +256,7 @@ namespace Core2D.Renderer.Avalonia
             return pt;
         }
 
-        private static void DrawRectangleInternal(AM.DrawingContext dc, AM.IBrush brush, AM.Pen pen, bool isStroked, bool isFilled, ref Rect2 rect)
+        private static void DrawRectangleInternal(AM.DrawingContext dc, AM.IBrush brush, AM.IPen pen, bool isStroked, bool isFilled, ref Rect2 rect)
         {
             if (!isStroked && !isFilled)
             {
@@ -276,7 +276,7 @@ namespace Core2D.Renderer.Avalonia
             }
         }
 
-        private static void DrawEllipseInternal(AM.DrawingContext dc, AM.IBrush brush, AM.Pen pen, bool isStroked, bool isFilled, ref Rect2 rect)
+        private static void DrawEllipseInternal(AM.DrawingContext dc, AM.IBrush brush, AM.IPen pen, bool isStroked, bool isFilled, ref Rect2 rect)
         {
             if (!isFilled && !isStroked)
             {
@@ -292,7 +292,7 @@ namespace Core2D.Renderer.Avalonia
                 g);
         }
 
-        private void DrawGridInternal(AM.DrawingContext dc, AM.Pen stroke, ref Rect2 rect, double offsetX, double offsetY, double cellWidth, double cellHeight, bool isStroked)
+        private void DrawGridInternal(AM.DrawingContext dc, AM.IPen stroke, ref Rect2 rect, double offsetX, double offsetY, double cellWidth, double cellHeight, bool isStroked)
         {
             double ox = rect.X;
             double oy = rect.Y;
@@ -391,7 +391,7 @@ namespace Core2D.Renderer.Avalonia
             return new A.Matrix(m.M11, m.M12, m.M21, m.M22, m.OffsetX, m.OffsetY);
         }
 
-        private void GetCached(IArrowStyle style, out AM.IBrush fill, out AM.Pen stroke, Func<double, float> scaleToPage, bool scaleStrokeWidth)
+        private void GetCached(IArrowStyle style, out AM.IBrush fill, out AM.IPen stroke, Func<double, float> scaleToPage, bool scaleStrokeWidth)
         {
             (fill, stroke) = _arrowStyleCache.Get(style);
             if (fill == null || stroke == null)
@@ -402,7 +402,7 @@ namespace Core2D.Renderer.Avalonia
             }
         }
 
-        private void GetCached(IShapeStyle style, out AM.IBrush fill, out AM.Pen stroke, Func<double, float> scaleToPage, bool scaleStrokeWidth)
+        private void GetCached(IShapeStyle style, out AM.IBrush fill, out AM.IPen stroke, Func<double, float> scaleToPage, bool scaleStrokeWidth)
         {
             (fill, stroke) = _styleCache.Get(style);
             if (fill == null || stroke == null)
