@@ -95,36 +95,25 @@ namespace Core2D.Renderer.Avalonia
 
         private AM.IPen ToPen(IBaseStyle style, Func<double, float> scale, bool scaleStrokeWidth)
         {
-            var lineCap = default(AM.PenLineCap);
             var dashStyle = default(AM.DashStyle);
-
-            switch (style.LineCap)
+            if (style.Dashes != null)
             {
-                case LineCap.Flat:
-                    lineCap = AM.PenLineCap.Flat;
-                    break;
-                case LineCap.Square:
-                    lineCap = AM.PenLineCap.Square;
-                    break;
-                case LineCap.Round:
-                    lineCap = AM.PenLineCap.Round;
-                    break;
+                var dashes = StyleHelper.ConvertDashesToDoubleArray(style.Dashes, 1.0);
+                dashStyle = new AM.DashStyle(dashes, style.DashOffset);
             }
+
+            var lineCap = style.LineCap switch
+            {
+                LineCap.Flat => AM.PenLineCap.Flat,
+                LineCap.Square => AM.PenLineCap.Square,
+                LineCap.Round => AM.PenLineCap.Round,
+                _ => throw new NotImplementedException()
+            };
 
             var thickness = scaleStrokeWidth ? (style.Thickness / _state.ZoomX) : style.Thickness;
             var strokeWidth = scale(thickness);
-
-            if (style.Dashes != null)
-            {
-                dashStyle = new AM.DashStyle(
-                    StyleHelper.ConvertDashesToDoubleArray(style.Dashes, 1.0),
-                    style.DashOffset);
-            }
-
-            var pen = new AM.Pen(
-                ToBrush(style.Stroke),
-                strokeWidth,
-                dashStyle, lineCap);
+            var brush = ToBrush(style.Stroke);
+            var pen = new AM.Pen(brush, strokeWidth, dashStyle, lineCap);
 
             return pen;
         }
@@ -300,14 +289,12 @@ namespace Core2D.Renderer.Avalonia
             double sy = oy + offsetY;
             double ex = ox + rect.Width;
             double ey = oy + rect.Height;
-
             for (double x = sx; x < ex; x += cellWidth)
             {
                 var p0 = new A.Point(_scaleToPage(x), _scaleToPage(oy));
                 var p1 = new A.Point(_scaleToPage(x), _scaleToPage(ey));
                 DrawLineInternal(dc, stroke, isStroked, ref p0, ref p1);
             }
-
             for (double y = sy; y < ey; y += cellHeight)
             {
                 var p0 = new A.Point(_scaleToPage(ox), _scaleToPage(y));
@@ -319,70 +306,51 @@ namespace Core2D.Renderer.Avalonia
         private static AM.StreamGeometry ToStreamGeometry(IArcShape arc, double dx, double dy)
         {
             var sg = new AM.StreamGeometry();
-
-            using (var sgc = sg.Open())
-            {
-                var a = new WpfArc(
-                    Point2.FromXY(arc.Point1.X, arc.Point1.Y),
-                    Point2.FromXY(arc.Point2.X, arc.Point2.Y),
-                    Point2.FromXY(arc.Point3.X, arc.Point3.Y),
-                    Point2.FromXY(arc.Point4.X, arc.Point4.Y));
-
-                sgc.BeginFigure(
-                    new A.Point(a.Start.X + dx, a.Start.Y + dy),
-                    arc.IsFilled);
-
-                sgc.ArcTo(
-                    new A.Point(a.End.X + dx, a.End.Y + dy),
-                    new A.Size(a.Radius.Width, a.Radius.Height),
-                    0.0,
-                    a.IsLargeArc,
-                    AM.SweepDirection.Clockwise);
-
-                sgc.EndFigure(false);
-            }
-
+            using var sgc = sg.Open();
+            var a = new WpfArc(
+                Point2.FromXY(arc.Point1.X, arc.Point1.Y),
+                Point2.FromXY(arc.Point2.X, arc.Point2.Y),
+                Point2.FromXY(arc.Point3.X, arc.Point3.Y),
+                Point2.FromXY(arc.Point4.X, arc.Point4.Y));
+            sgc.BeginFigure(
+                new A.Point(a.Start.X + dx, a.Start.Y + dy),
+                arc.IsFilled);
+            sgc.ArcTo(
+                new A.Point(a.End.X + dx, a.End.Y + dy),
+                new A.Size(a.Radius.Width, a.Radius.Height),
+                0.0,
+                a.IsLargeArc,
+                AM.SweepDirection.Clockwise);
+            sgc.EndFigure(false);
             return sg;
         }
 
         private static AM.StreamGeometry ToStreamGeometry(ICubicBezierShape cubicBezier, double dx, double dy)
         {
             var sg = new AM.StreamGeometry();
-
-            using (var sgc = sg.Open())
-            {
-                sgc.BeginFigure(
-                    new A.Point(cubicBezier.Point1.X + dx, cubicBezier.Point1.Y + dy),
-                    cubicBezier.IsFilled);
-
-                sgc.CubicBezierTo(
-                    new A.Point(cubicBezier.Point2.X + dx, cubicBezier.Point2.Y + dy),
-                    new A.Point(cubicBezier.Point3.X + dx, cubicBezier.Point3.Y + dy),
-                    new A.Point(cubicBezier.Point4.X + dx, cubicBezier.Point4.Y + dy));
-
-                sgc.EndFigure(false);
-            }
-
+            using var sgc = sg.Open();
+            sgc.BeginFigure(
+                new A.Point(cubicBezier.Point1.X + dx, cubicBezier.Point1.Y + dy),
+                cubicBezier.IsFilled);
+            sgc.CubicBezierTo(
+                new A.Point(cubicBezier.Point2.X + dx, cubicBezier.Point2.Y + dy),
+                new A.Point(cubicBezier.Point3.X + dx, cubicBezier.Point3.Y + dy),
+                new A.Point(cubicBezier.Point4.X + dx, cubicBezier.Point4.Y + dy));
+            sgc.EndFigure(false);
             return sg;
         }
 
         private static AM.StreamGeometry ToStreamGeometry(IQuadraticBezierShape quadraticBezier, double dx, double dy)
         {
             var sg = new AM.StreamGeometry();
-
-            using (var sgc = sg.Open())
-            {
-                sgc.BeginFigure(
-                    new A.Point(quadraticBezier.Point1.X + dx, quadraticBezier.Point1.Y + dy),
-                    quadraticBezier.IsFilled);
-
-                sgc.QuadraticBezierTo(
-                    new A.Point(quadraticBezier.Point2.X + dx, quadraticBezier.Point2.Y + dy),
-                    new A.Point(quadraticBezier.Point3.X + dx, quadraticBezier.Point3.Y + dy));
-
-                sgc.EndFigure(false);
-            }
-
+            using var sgc = sg.Open();
+            sgc.BeginFigure(
+                new A.Point(quadraticBezier.Point1.X + dx, quadraticBezier.Point1.Y + dy),
+                quadraticBezier.IsFilled);
+            sgc.QuadraticBezierTo(
+                new A.Point(quadraticBezier.Point2.X + dx, quadraticBezier.Point2.Y + dy),
+                new A.Point(quadraticBezier.Point3.X + dx, quadraticBezier.Point3.Y + dy));
+            sgc.EndFigure(false);
             return sg;
         }
 
@@ -494,48 +462,50 @@ namespace Core2D.Renderer.Avalonia
         /// <inheritdoc/>
         public void Draw(object dc, IPointShape point, double dx, double dy)
         {
-            if (point != null && _state != null && _state.PointStyle != null)
+            if (point == null || _state == null || _state.PointStyle == null)
             {
-                var _dc = dc as AM.DrawingContext;
-
-                var pointStyle = _state.PointStyle;
-                if (pointStyle == null)
-                {
-                    return;
-                }
-
-                double pointSize = _state.PointSize;
-                if (pointSize <= 0.0)
-                {
-                    return;
-                }
-
-                double scale = 1.0 / _state.ZoomX;
-                double translateX = 0.0 - (point.X * scale) + point.X;
-                double translateY = 0.0 - (point.Y * scale) + point.Y;
-
-                GetCached(pointStyle, out var fill, out var stroke, (value) => (float)(value / scale), true);
-
-                var rect = Rect2.FromPoints(
-                    point.X - pointSize, 
-                    point.Y - pointSize, 
-                    point.X + pointSize, 
-                    point.Y + pointSize, 
-                    dx, dy);
-
-                var translateMatrix = AME.MatrixHelper.Translate(translateX, translateY);
-                var scaleMatrix = AME.MatrixHelper.Scale(scale, scale);
-                using var translateDisposable = _dc.PushPreTransform(translateMatrix);
-                using var scaleDisposable = _dc.PushPreTransform(scaleMatrix);
-
-                DrawRectangleInternal(
-                    _dc,
-                    fill,
-                    stroke,
-                    true,
-                    true,
-                    ref rect);
+                return;
             }
+
+            var _dc = dc as AM.DrawingContext;
+
+            var pointStyle = _state.PointStyle;
+            if (pointStyle == null)
+            {
+                return;
+            }
+
+            double pointSize = _state.PointSize;
+            if (pointSize <= 0.0)
+            {
+                return;
+            }
+
+            double scale = 1.0 / _state.ZoomX;
+            double translateX = 0.0 - (point.X * scale) + point.X;
+            double translateY = 0.0 - (point.Y * scale) + point.Y;
+
+            GetCached(pointStyle, out var fill, out var stroke, (value) => (float)(value / scale), true);
+
+            var rect = Rect2.FromPoints(
+                point.X - pointSize,
+                point.Y - pointSize,
+                point.X + pointSize,
+                point.Y + pointSize,
+                dx, dy);
+
+            var translateMatrix = AME.MatrixHelper.Translate(translateX, translateY);
+            var scaleMatrix = AME.MatrixHelper.Scale(scale, scale);
+            using var translateDisposable = _dc.PushPreTransform(translateMatrix);
+            using var scaleDisposable = _dc.PushPreTransform(scaleMatrix);
+
+            DrawRectangleInternal(
+                _dc,
+                fill,
+                stroke,
+                true,
+                true,
+                ref rect);
         }
 
         /// <inheritdoc/>
