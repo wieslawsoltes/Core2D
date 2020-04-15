@@ -1103,16 +1103,6 @@ namespace Core2D.Editor
         }
 
         /// <inheritdoc/>
-        public void OnMoveUpSelected()
-        {
-            MoveBy(
-                PageState?.SelectedShape,
-                PageState?.SelectedShapes,
-                0.0,
-                Project.Options.SnapToGrid ? -Project.Options.SnapY : -1.0);
-        }
-
-        /// <inheritdoc/>
         public void OnRotateSelected(string degrees)
         {
             if (!double.TryParse(degrees, NumberStyles.AllowLeadingSign | NumberStyles.AllowDecimalPoint | NumberStyles.AllowThousands, CultureInfo.InvariantCulture, out var value))
@@ -1163,6 +1153,16 @@ namespace Core2D.Editor
             {
                 BoxLayout.Flip(sources, FlipMode.Vertical, Project?.History);
             }
+        }
+
+        /// <inheritdoc/>
+        public void OnMoveUpSelected()
+        {
+            MoveBy(
+                PageState?.SelectedShape,
+                PageState?.SelectedShapes,
+                0.0,
+                Project.Options.SnapToGrid ? -Project.Options.SnapY : -1.0);
         }
 
         /// <inheritdoc/>
