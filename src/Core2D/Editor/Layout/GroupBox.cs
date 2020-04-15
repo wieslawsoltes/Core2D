@@ -6,49 +6,48 @@ namespace Core2D.Editor.Layout
 {
     public struct GroupBox
     {
-        public readonly List<ShapeBox> Boxes;
+        public readonly ShapeBox[] Boxes;
         public Box Bounds;
 
         public GroupBox(List<IBaseShape> shapes)
         {
-            Boxes = new List<ShapeBox>(shapes.Count);
+            Boxes = new ShapeBox[shapes.Count];
 
             for (int i = 0; i < shapes.Count; i++)
             {
-                Boxes.Add(new ShapeBox(shapes[i]));
+                Boxes[i] = new ShapeBox(shapes[i]);
             }
 
             Bounds = new Box();
 
-            Update(ref Bounds);
+            Update();
         }
 
-        public void Update(ref Box bounds)
+        public void Update()
         {
-            for (int i = 0; i < Boxes.Count; i++)
+            for (int i = 0; i < Boxes.Length; i++)
             {
-                var box = Boxes[i];
-                box.Update(ref box.Bounds);
+                Boxes[i].Update();
             }
 
-            bounds.Left = double.MaxValue;
-            bounds.Top = double.MaxValue;
-            bounds.Right = double.MinValue;
-            bounds.Bottom = double.MinValue;
+            Bounds.Left = double.MaxValue;
+            Bounds.Top = double.MaxValue;
+            Bounds.Right = double.MinValue;
+            Bounds.Bottom = double.MinValue;
 
-            for (int i = 0; i < Boxes.Count; i++)
+            for (int i = 0; i < Boxes.Length; i++)
             {
                 var box = Boxes[i];
-                bounds.Left = Math.Min(bounds.Left, box.Bounds.Left);
-                bounds.Top = Math.Min(bounds.Top, box.Bounds.Top);
-                bounds.Right = Math.Max(bounds.Right, box.Bounds.Right);
-                bounds.Bottom = Math.Max(bounds.Bottom, box.Bounds.Bottom);
+                Bounds.Left = Math.Min(Bounds.Left, box.Bounds.Left);
+                Bounds.Top = Math.Min(Bounds.Top, box.Bounds.Top);
+                Bounds.Right = Math.Max(Bounds.Right, box.Bounds.Right);
+                Bounds.Bottom = Math.Max(Bounds.Bottom, box.Bounds.Bottom);
             }
 
-            bounds.CenterX = (bounds.Left + bounds.Right) / 2.0;
-            bounds.CenterY = (bounds.Top + bounds.Bottom) / 2.0;
-            bounds.Width = Math.Abs(bounds.Right - bounds.Left);
-            bounds.Height = Math.Abs(bounds.Bottom - bounds.Top);
+            Bounds.CenterX = (Bounds.Left + Bounds.Right) / 2.0;
+            Bounds.CenterY = (Bounds.Top + Bounds.Bottom) / 2.0;
+            Bounds.Width = Math.Abs(Bounds.Right - Bounds.Left);
+            Bounds.Height = Math.Abs(Bounds.Bottom - Bounds.Top);
         }
     }
 }
