@@ -3,10 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using Core2D.Containers;
 using Core2D.Editor.Input;
+using Core2D.Editor.Layout;
+using Core2D.Editor.Tools.Decorators;
 using Core2D.Editor.Tools.Settings;
 using Core2D.Interfaces;
 using Core2D.Renderer;
 using Core2D.Shapes;
+using Core2D.Style;
 using Spatial;
 
 namespace Core2D.Editor.Tools
@@ -20,7 +23,9 @@ namespace Core2D.Editor.Tools
         private readonly IServiceProvider _serviceProvider;
         private ToolSettingsSelection _settings;
         private State _currentState = State.None;
-        private IRectangleShape _rectangle;
+        private IRectangleShape _rectangleShape;
+        private IDecorator _decorator;
+        private bool _enableDecorator = false;
         private double _startX;
         private double _startY;
         private double _historyX;
@@ -189,6 +194,63 @@ namespace Core2D.Editor.Tools
                 || editor?.PageState?.SelectedShapes != null;
         }
 
+        private void ShowHideOrUpdateDecorator(IProjectEditor editor)
+        {
+            if (_enableDecorator == false)
+            {
+                return;
+            }
+            if (editor.PageState?.SelectedShape != null || editor.PageState?.SelectedShapes != null)
+            {
+                var shapes = editor.PageState.SelectedShape != null ?
+                    Enumerable.Repeat(editor.PageState.SelectedShape, 1).ToList() :
+                    editor.PageState.SelectedShapes.ToList();
+
+                if (_decorator != null)
+                {
+                    _decorator.Shapes = shapes;
+                    _decorator.Update(true);
+                }
+                else
+                {
+                    _decorator = new BoxDecorator(
+                        shapes,
+                        editor.Project.CurrentContainer.WorkingLayer,
+                        editor.Factory);
+                    _decorator.Show();
+                }
+            }
+            else
+            {
+                HideDecorator(editor);
+            }
+        }
+
+        private void UpdateDecorator(IProjectEditor editor)
+        {
+            if (_enableDecorator == false)
+            {
+                return;
+            }
+            if (_decorator != null)
+            {
+                _decorator.Update(false);
+            }
+        }
+
+        private void HideDecorator(IProjectEditor editor)
+        {
+            if (_enableDecorator == false)
+            {
+                return;
+            }
+            if (_decorator != null)
+            {
+                _decorator.Hide();
+                _decorator = null;
+            }
+        }
+
         /// <inheritdoc/>
         public void LeftDown(InputArgs args)
         {
@@ -203,6 +265,8 @@ namespace Core2D.Editor.Tools
                         bool isControl = args.Modifier.HasFlag(ModifierFlags.Control);
 
                         editor.Dehover(editor.Project.CurrentContainer.CurrentLayer);
+
+                        // TODO: Hit-test box decorator.
 
                         if (isControl == true)
                         {
@@ -220,6 +284,7 @@ namespace Core2D.Editor.Tools
                                 {
                                     editor.PageState.SelectedShape = result;
                                     editor.Project.CurrentContainer.CurrentLayer.Invalidate();
+                                    ShowHideOrUpdateDecorator(editor);
                                     break;
                                 }
                                 else if (editor.PageState.SelectedShape != null && editor.PageState.SelectedShapes == null)
@@ -228,6 +293,7 @@ namespace Core2D.Editor.Tools
                                     {
                                         editor.PageState.SelectedShape = null;
                                         editor.Project.CurrentContainer.CurrentLayer.Invalidate();
+                                        HideDecorator(editor);
                                         break;
                                     }
                                     else
@@ -236,6 +302,7 @@ namespace Core2D.Editor.Tools
                                         editor.PageState.SelectedShape = null;
                                         editor.PageState.SelectedShapes = new HashSet<IBaseShape>() { selected, result };
                                         editor.Project.CurrentContainer.CurrentLayer.Invalidate();
+                                        ShowHideOrUpdateDecorator(editor);
                                         break;
                                     }
                                 }
@@ -248,12 +315,14 @@ namespace Core2D.Editor.Tools
                                         {
                                             editor.PageState.SelectedShape = null;
                                             editor.PageState.SelectedShapes = null;
+                                            HideDecorator(editor);
                                         }
                                         else if (editor.PageState.SelectedShapes.Count == 1)
                                         {
                                             var selected = editor.PageState.SelectedShapes.FirstOrDefault();
                                             editor.PageState.SelectedShape = selected;
                                             editor.PageState.SelectedShapes = null;
+                                            ShowHideOrUpdateDecorator(editor);
                                         }
                                         editor.Project.CurrentContainer.CurrentLayer.Invalidate();
                                         break;
@@ -262,11 +331,14 @@ namespace Core2D.Editor.Tools
                                     {
                                         editor.PageState.SelectedShapes.Add(result);
                                         editor.Project.CurrentContainer.CurrentLayer.Invalidate();
+                                        ShowHideOrUpdateDecorator(editor);
                                         break;
                                     }
                                 }
                             }
                         }
+
+                        HideDecorator(editor);
 
                         if (editor.PageState.SelectedShape == null && editor.PageState.SelectedShapes != null)
                         {
@@ -286,6 +358,7 @@ namespace Core2D.Editor.Tools
                                 _historyY = _startY;
                                 GenerateMoveSelectionCache();
                                 _currentState = State.Selected;
+                                ShowHideOrUpdateDecorator(editor);
                                 editor.IsToolIdle = false;
                                 break;
                             }
@@ -301,15 +374,16 @@ namespace Core2D.Editor.Tools
                             _historyY = _startY;
                             GenerateMoveSelectionCache();
                             _currentState = State.Selected;
+                            ShowHideOrUpdateDecorator(editor);
                             editor.IsToolIdle = false;
                             break;
                         }
 
-                        _rectangle = factory.CreateRectangleShape(
+                        _rectangleShape = factory.CreateRectangleShape(
                             x, y,
                             editor.PageState.SelectionStyle,
                             true, true);
-                        editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Add(_rectangle);
+                        editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Add(_rectangleShape);
                         editor.Project.CurrentContainer.WorkingLayer.Invalidate();
                         _currentState = State.Selected;
                         editor.IsToolIdle = false;
@@ -317,11 +391,11 @@ namespace Core2D.Editor.Tools
                     break;
                 case State.Selected:
                     {
-                        if (_rectangle != null)
+                        if (_rectangleShape != null)
                         {
-                            _rectangle.BottomRight.X = x;
-                            _rectangle.BottomRight.Y = y;
-                            editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_rectangle);
+                            _rectangleShape.BottomRight.X = x;
+                            _rectangleShape.BottomRight.Y = y;
+                            editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_rectangleShape);
                             editor.Project.CurrentContainer.WorkingLayer.Invalidate();
                             _currentState = State.None;
                             editor.IsToolIdle = true;
@@ -343,11 +417,11 @@ namespace Core2D.Editor.Tools
                     {
                         bool isControl = args.Modifier.HasFlag(ModifierFlags.Control);
 
-                        if (_rectangle != null)
+                        if (_rectangleShape != null)
                         {
-                            _rectangle.BottomRight.X = args.X;
-                            _rectangle.BottomRight.Y = args.Y;
-                            editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_rectangle);
+                            _rectangleShape.BottomRight.X = args.X;
+                            _rectangleShape.BottomRight.Y = args.Y;
+                            editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_rectangleShape);
                             editor.Project.CurrentContainer.WorkingLayer.Invalidate();
                         }
 
@@ -397,10 +471,11 @@ namespace Core2D.Editor.Tools
                         var deselect = !isControl;
                         var includeSelected = isControl;
 
-                        if (_rectangle != null)
+                        if (_rectangleShape != null)
                         {
                             _currentState = State.None;
-                            editor.TryToSelectShapes(editor.Project.CurrentContainer.CurrentLayer, _rectangle, deselect, includeSelected);
+                            editor.TryToSelectShapes(editor.Project.CurrentContainer.CurrentLayer, _rectangleShape, deselect, includeSelected);
+                            ShowHideOrUpdateDecorator(editor);
                             editor.IsToolIdle = true;
                         }
                     }
@@ -422,6 +497,7 @@ namespace Core2D.Editor.Tools
                 case State.Selected:
                     {
                         DisposeMoveSelectionCache();
+                        HideDecorator(editor);
                         editor.IsToolIdle = true;
                     }
                     break;
@@ -456,14 +532,15 @@ namespace Core2D.Editor.Tools
                         if (IsSelectionAvailable() && !isControl)
                         {
                             MoveSelectionCacheTo(args);
+                            UpdateDecorator(editor);
                             editor.Project.CurrentContainer.CurrentLayer.Invalidate();
                             break;
                         }
 
-                        if (_rectangle != null)
+                        if (_rectangleShape != null)
                         {
-                            _rectangle.BottomRight.X = args.X;
-                            _rectangle.BottomRight.Y = args.Y;
+                            _rectangleShape.BottomRight.X = args.X;
+                            _rectangleShape.BottomRight.Y = args.Y;
                             editor.Project.CurrentContainer.WorkingLayer.Invalidate();
                         }
                     }
@@ -484,6 +561,8 @@ namespace Core2D.Editor.Tools
         /// <inheritdoc/>
         public void Reset()
         {
+            var editor = _serviceProvider.GetService<IProjectEditor>();
+            HideDecorator(editor);
         }
     }
 }
