@@ -1181,7 +1181,7 @@ namespace Core2D.Editor
             MoveBy(
                 PageState?.SelectedShape,
                 PageState?.SelectedShapes,
-                Project.Options.SnapToGrid ? -(Project.Options.SnapX / PageState.ZoomX) : -1.0,
+                Project.Options.SnapToGrid ? -Project.Options.SnapX : -1.0,
                 0.0);
         }
 
@@ -1191,7 +1191,7 @@ namespace Core2D.Editor
             MoveBy(
                 PageState?.SelectedShape,
                 PageState?.SelectedShapes,
-                Project.Options.SnapToGrid ? (Project.Options.SnapX / PageState.ZoomX) : 1.0,
+                Project.Options.SnapToGrid ? Project.Options.SnapX : 1.0,
                 0.0);
         }
 
