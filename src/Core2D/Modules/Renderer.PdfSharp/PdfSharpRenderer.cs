@@ -75,10 +75,15 @@ namespace Core2D.Renderer.PdfSharp
             if (style.Dashes != null)
             {
                 // TODO: Convert to correct dash values.
-                pen.DashPattern = StyleHelper.ConvertDashesToDoubleArray(style.Dashes, strokeWidth);
-                pen.DashStyle = XDashStyle.Custom;
+                var dashPattern = StyleHelper.ConvertDashesToDoubleArray(style.Dashes, strokeWidth);
+                var dashOffset = style.DashOffset * strokeWidth;
+                if (dashPattern != null)
+                {
+                    pen.DashPattern = dashPattern;
+                    pen.DashStyle = XDashStyle.Custom;
+                    pen.DashOffset = dashOffset;
+                }
             }
-            pen.DashOffset = style.DashOffset;
             return pen;
         }
 

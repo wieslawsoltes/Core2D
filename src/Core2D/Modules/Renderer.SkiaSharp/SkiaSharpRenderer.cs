@@ -178,11 +178,16 @@ namespace Core2D.Renderer.SkiaSharp
         internal static SKPaint ToSKPaintPen(IBaseStyle style, Func<double, float> scale, double sourceDpi, double targetDpi, bool isAntialias)
         {
             var strokeWidth = scale(style.Thickness * targetDpi / sourceDpi);
-            var pathEffect = style.Dashes != null ? 
-                SKPathEffect.CreateDash(
-                    StyleHelper.ConvertDashesToFloatArray(style.Dashes, strokeWidth), 
-                    (float)style.DashOffset) : 
-                null;
+            var pathEffect = default(SKPathEffect);
+            if (style.Dashes != null)
+            {
+                var intervals = StyleHelper.ConvertDashesToFloatArray(style.Dashes, strokeWidth);
+                var phase = (float)(style.DashOffset * strokeWidth);
+                if (intervals != null)
+                {
+                    pathEffect = SKPathEffect.CreateDash(intervals, phase);
+                }
+            }
             return new SKPaint()
             {
                 Style = SKPaintStyle.Stroke,

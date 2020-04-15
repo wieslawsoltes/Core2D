@@ -99,7 +99,11 @@ namespace Core2D.Renderer.Avalonia
             if (style.Dashes != null)
             {
                 var dashes = StyleHelper.ConvertDashesToDoubleArray(style.Dashes, 1.0);
-                dashStyle = new AM.DashStyle(dashes, style.DashOffset);
+                var dashOffset = style.DashOffset;
+                if (dashes != null)
+                {
+                    dashStyle = new AM.DashStyle(dashes, dashOffset);
+                }
             }
 
             var lineCap = style.LineCap switch
