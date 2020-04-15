@@ -36,8 +36,9 @@ namespace Core2D.Editor.Layout
             bounds.Right = double.MinValue;
             bounds.Bottom = double.MinValue;
 
-            foreach (var box in Boxes)
+            for (int i = 0; i < Boxes.Count; i++)
             {
+                var box = Boxes[i];
                 bounds.Left = Math.Min(bounds.Left, box.Bounds.Left);
                 bounds.Top = Math.Min(bounds.Top, box.Bounds.Top);
                 bounds.Right = Math.Max(bounds.Right, box.Bounds.Right);
