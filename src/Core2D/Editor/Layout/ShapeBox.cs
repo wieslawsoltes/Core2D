@@ -70,10 +70,10 @@ namespace Core2D.Editor.Layout
 
             Bounds = new Box();
 
-            Update(ref Bounds);
+            Update();
         }
 
-        public void Update(ref Box bounds)
+        public void Update()
         {
             var left = double.MaxValue;
             var top = double.MaxValue;
@@ -89,14 +89,14 @@ namespace Core2D.Editor.Layout
                 bottom = Math.Max(bottom, point.Y);
             }
 
-            bounds.Left = left;
-            bounds.Top = top;
-            bounds.Right = right;
-            bounds.Bottom = bottom;
-            bounds.CenterX = (bounds.Left + bounds.Right) / 2.0;
-            bounds.CenterY = (bounds.Top + bounds.Bottom) / 2.0;
-            bounds.Width = Math.Abs(bounds.Right - bounds.Left);
-            bounds.Height = Math.Abs(bounds.Bottom - bounds.Top);
+            Bounds.Left = left;
+            Bounds.Top = top;
+            Bounds.Right = right;
+            Bounds.Bottom = bottom;
+            Bounds.CenterX = (Bounds.Left + Bounds.Right) / 2.0;
+            Bounds.CenterY = (Bounds.Top + Bounds.Bottom) / 2.0;
+            Bounds.Width = Math.Abs(Bounds.Right - Bounds.Left);
+            Bounds.Height = Math.Abs(Bounds.Bottom - Bounds.Top);
         }
 
         public void MoveByWithHistory(double dx, double dy, IHistory history)
