@@ -8,57 +8,41 @@ namespace Core2D.Editor.Layout
 {
     public static class BoxLayout
     {
-        private static void MoveShapeByWithHistory(IBaseShape shape, double dx, double dy, IHistory history)
-        {
-            var previous = new { DeltaX = -dx, DeltaY = -dy, shape };
-            var next = new { DeltaX = dx, DeltaY = dy, shape };
-            history.Snapshot(previous, next, (s) => s.shape.Move(null, s.DeltaX, s.DeltaY));
-            shape.Move(null, dx, dy);
-        }
-
         public static void Stack(IEnumerable<IBaseShape> shapes, StackMode mode, IHistory history)
         {
-            var boxes = new List<ShapeBox>();
-
-            foreach (var shape in shapes)
-            {
-                boxes.Add(new ShapeBox(shape));
-            }
-
-            if (boxes.Count < 2)
+            var groupBox = new GroupBox(shapes.ToList());
+            if (groupBox.Boxes.Count < 2)
             {
                 return;
             }
-
-            var bounds = new GroupBox(boxes);
 
             switch (mode)
             {
                 case StackMode.Horizontal:
                     {
-                        boxes.Sort(ShapeBox.CompareLeft);
-                        double offset = boxes[0].Left + boxes[0].Width;
-                        for (int i = 1; i <= boxes.Count - 1; i++)
+                        groupBox.Boxes.Sort(ShapeBox.CompareLeft);
+                        double offset = groupBox.Boxes[0].Bounds.Left + groupBox.Boxes[0].Bounds.Width;
+                        for (int i = 1; i <= groupBox.Boxes.Count - 1; i++)
                         {
-                            var box = boxes[i];
-                            double dx = offset - box.Left;
+                            var box = groupBox.Boxes[i];
+                            double dx = offset - box.Bounds.Left;
                             double dy = 0.0;
-                            MoveShapeByWithHistory(box.Shape, dx, dy, history);
-                            offset += box.Width;
+                            box.MoveByWithHistory(dx, dy, history);
+                            offset += box.Bounds.Width;
                         }
                     }
                     break;
                 case StackMode.Vertical:
                     {
-                        boxes.Sort(ShapeBox.CompareTop);
-                        double offset = boxes[0].Top + boxes[0].Height;
-                        for (int i = 1; i <= boxes.Count - 1; i++)
+                        groupBox.Boxes.Sort(ShapeBox.CompareTop);
+                        double offset = groupBox.Boxes[0].Bounds.Top + groupBox.Boxes[0].Bounds.Height;
+                        for (int i = 1; i <= groupBox.Boxes.Count - 1; i++)
                         {
-                            var box = boxes[i];
+                            var box = groupBox.Boxes[i];
                             double dx = 0.0;
-                            double dy = offset - box.Top;
-                            MoveShapeByWithHistory(box.Shape, dx, dy, history);
-                            offset += box.Height;
+                            double dy = offset - box.Bounds.Top;
+                            box.MoveByWithHistory(dx, dy, history);
+                            offset += box.Bounds.Height;
                         }
                     }
                     break;
@@ -67,59 +51,51 @@ namespace Core2D.Editor.Layout
 
         public static void Distribute(IEnumerable<IBaseShape> shapes, DistributeMode mode, IHistory history)
         {
-            var boxes = new List<ShapeBox>();
-
-            foreach (var shape in shapes)
-            {
-                boxes.Add(new ShapeBox(shape));
-            }
-
-            if (boxes.Count <= 2)
+            var groupBox = new GroupBox(shapes.ToList());
+            if (groupBox.Boxes.Count <= 2)
             {
                 return;
             }
 
-            var bounds = new GroupBox(boxes);
-
             double sw = 0.0;
             double sh = 0.0;
 
-            foreach (var box in boxes)
+            foreach (var box in groupBox.Boxes)
             {
-                sw += box.Width;
-                sh += box.Height;
+                sw += box.Bounds.Width;
+                sh += box.Bounds.Height;
             }
 
-            double gaph = (bounds.Width - sw) / (boxes.Count - 1);
-            double gapv = (bounds.Height - sh) / (boxes.Count - 1);
+            double gaph = (groupBox.Bounds.Width - sw) / (groupBox.Boxes.Count - 1);
+            double gapv = (groupBox.Bounds.Height - sh) / (groupBox.Boxes.Count - 1);
 
             switch (mode)
             {
                 case DistributeMode.Horizontal:
                     {
-                        boxes.Sort(ShapeBox.CompareLeft);
-                        double offset = boxes[0].Left + boxes[0].Width + gaph;
-                        for (int i = 1; i <= boxes.Count - 2; i++)
+                        groupBox.Boxes.Sort(ShapeBox.CompareLeft);
+                        double offset = groupBox.Boxes[0].Bounds.Left + groupBox.Boxes[0].Bounds.Width + gaph;
+                        for (int i = 1; i <= groupBox.Boxes.Count - 2; i++)
                         {
-                            var box = boxes[i];
-                            double dx = offset - box.Left;
+                            var box = groupBox.Boxes[i];
+                            double dx = offset - box.Bounds.Left;
                             double dy = 0.0;
-                            MoveShapeByWithHistory(box.Shape, dx, dy, history);
-                            offset += box.Width + gaph;
+                            box.MoveByWithHistory(dx, dy, history);
+                            offset += box.Bounds.Width + gaph;
                         }
                     }
                     break;
                 case DistributeMode.Vertical:
                     {
-                        boxes.Sort(ShapeBox.CompareTop);
-                        double offset = boxes[0].Top + boxes[0].Height + gapv;
-                        for (int i = 1; i <= boxes.Count - 2; i++)
+                        groupBox.Boxes.Sort(ShapeBox.CompareTop);
+                        double offset = groupBox.Boxes[0].Bounds.Top + groupBox.Boxes[0].Bounds.Height + gapv;
+                        for (int i = 1; i <= groupBox.Boxes.Count - 2; i++)
                         {
-                            var box = boxes[i];
+                            var box = groupBox.Boxes[i];
                             double dx = 0.0;
-                            double dy = offset - box.Top;
-                            MoveShapeByWithHistory(box.Shape, dx, dy, history);
-                            offset += box.Height + gapv;
+                            double dy = offset - box.Bounds.Top;
+                            box.MoveByWithHistory(dx, dy, history);
+                            offset += box.Bounds.Height + gapv;
                         }
                     }
                     break;
@@ -128,21 +104,13 @@ namespace Core2D.Editor.Layout
 
         public static void Align(IEnumerable<IBaseShape> shapes, AlignMode mode, IHistory history)
         {
-            var boxes = new List<ShapeBox>();
-
-            foreach (var shape in shapes)
-            {
-                boxes.Add(new ShapeBox(shape));
-            }
-
-            if (boxes.Count <= 1)
+            var groupBox = new GroupBox(shapes.ToList());
+            if (groupBox.Boxes.Count <= 1)
             {
                 return;
             }
 
-            var bounds = new GroupBox(boxes);
-
-            foreach (var box in boxes)
+            foreach (var box in groupBox.Boxes)
             {
                 double dx = 0.0;
                 double dy = 0.0;
@@ -150,47 +118,39 @@ namespace Core2D.Editor.Layout
                 switch (mode)
                 {
                     case AlignMode.Left:
-                        dx = bounds.Left - box.Left;
+                        dx = groupBox.Bounds.Left - box.Bounds.Left;
                         break;
                     case AlignMode.Centered:
-                        dx = bounds.CenterX - ((box.Left + box.Right) / 2.0);
+                        dx = groupBox.Bounds.CenterX - ((box.Bounds.Left + box.Bounds.Right) / 2.0);
                         break;
                     case AlignMode.Right:
-                        dx = bounds.Right - box.Right;
+                        dx = groupBox.Bounds.Right - box.Bounds.Right;
                         break;
                     case AlignMode.Top:
-                        dy = bounds.Top - box.Top;
+                        dy = groupBox.Bounds.Top - box.Bounds.Top;
                         break;
                     case AlignMode.Center:
-                        dy = bounds.CenterY - ((box.Top + box.Bottom) / 2.0);
+                        dy = groupBox.Bounds.CenterY - ((box.Bounds.Top + box.Bounds.Bottom) / 2.0);
                         break;
                     case AlignMode.Bottom:
-                        dy = bounds.Bottom - box.Bottom;
+                        dy = groupBox.Bounds.Bottom - box.Bounds.Bottom;
                         break;
                 }
 
                 if (dx != 0.0 || dy != 0.0)
                 {
-                    MoveShapeByWithHistory(box.Shape, dx, dy, history);
+                    box.MoveByWithHistory(dx, dy, history);
                 }
             }
         }
 
         public static void Flip(IEnumerable<IBaseShape> shapes, FlipMode mode, IHistory history)
         {
-            var boxes = new List<ShapeBox>();
-
-            foreach (var shape in shapes)
-            {
-                boxes.Add(new ShapeBox(shape));
-            }
-
-            if (boxes.Count <= 0)
+            var groupBox = new GroupBox(shapes.ToList());
+            if (groupBox.Boxes.Count <= 0)
             {
                 return;
             }
-
-            var bounds = new GroupBox(boxes);
 
             switch (mode)
             {
@@ -199,9 +159,9 @@ namespace Core2D.Editor.Layout
                         var previous = new List<(IPointShape point, double x)>();
                         var next = new List<(IPointShape point, double x)>();
 
-                        foreach (var point in boxes.SelectMany(box => box.Points).Distinct())
+                        foreach (var point in groupBox.Boxes.SelectMany(box => box.Points).Distinct())
                         {
-                            double x = bounds.Left + (bounds.Width + bounds.Left) - point.X;
+                            double x = groupBox.Bounds.Left + (groupBox.Bounds.Width + groupBox.Bounds.Left) - point.X;
                             previous.Add((point, point.X));
                             next.Add((point, x));
                             point.X = x;
@@ -215,9 +175,9 @@ namespace Core2D.Editor.Layout
                         var previous = new List<(IPointShape point, double y)>();
                         var next = new List<(IPointShape point, double y)>();
 
-                        foreach (var point in boxes.SelectMany(box => box.Points).Distinct())
+                        foreach (var point in groupBox.Boxes.SelectMany(box => box.Points).Distinct())
                         {
-                            double y = bounds.Top + (bounds.Height + bounds.Top) - point.Y;
+                            double y = groupBox.Bounds.Top + (groupBox.Bounds.Height + groupBox.Bounds.Top) - point.Y;
                             previous.Add((point, point.Y));
                             next.Add((point, y));
                             point.Y = y;
@@ -231,30 +191,22 @@ namespace Core2D.Editor.Layout
 
         public static void Rotate(IEnumerable<IBaseShape> shapes, double angle, IHistory history)
         {
-            var boxes = new List<ShapeBox>();
-
-            foreach (var shape in shapes)
-            {
-                boxes.Add(new ShapeBox(shape));
-            }
-
-            if (boxes.Count <= 0)
+            var groupBox = new GroupBox(shapes.ToList());
+            if (groupBox.Boxes.Count <= 0)
             {
                 return;
             }
-
-            var bounds = new GroupBox(boxes);
 
             var previous = new List<(IPointShape point, double x, double y)>();
             var next = new List<(IPointShape point, double x, double y)>();
 
             var radians = angle * Math.PI / 180.0;
-            var centerX = bounds.CenterX;
-            var centerY = bounds.CenterY;
+            var centerX = groupBox.Bounds.CenterX;
+            var centerY = groupBox.Bounds.CenterY;
 
-            foreach (var point in boxes.SelectMany(box => box.Points).Distinct())
+            foreach (var point in groupBox.Boxes.SelectMany(box => box.Points).Distinct())
             {
-                Rotate(point, radians, centerX, centerY, out var x, out var y);
+                ShapeBox.Rotate(point, radians, centerX, centerY, out var x, out var y);
                 previous.Add((point, point.X, point.Y));
                 next.Add((point, x, y));
                 point.X = x;
@@ -266,12 +218,6 @@ namespace Core2D.Editor.Layout
                 p.point.X = p.x;
                 p.point.Y = p.y;
             }));
-
-            static void Rotate(IPointShape point, double radians, double centerX, double centerY, out double x, out double y)
-            {
-                x = (point.X - centerX) * Math.Cos(radians) - (point.Y - centerY) * Math.Sin(radians) + centerX;
-                y = (point.X - centerX) * Math.Sin(radians) + (point.Y - centerY) * Math.Cos(radians) + centerY;
-            }
         }
     }
 }
