@@ -14,12 +14,12 @@ namespace Core2D.Editor.Tools.Decorators
     /// </summary>
     public class BoxDecorator : ObservableObject, IDrawable, IDecorator
     {
+        private bool _isVisible;
+        public IList<IBaseShape> _shapes;
         private IShapeStyle _style;
         private IMatrixObject _transform;
         private bool _isStroked;
         private bool _isFilled;
-        public IList<IBaseShape> _shapes;
-        private bool _isVisible;
         private readonly ILayerContainer _layer;
         private readonly IFactory _factory;
         private readonly double _sizeLarge;
@@ -41,7 +41,14 @@ namespace Core2D.Editor.Tools.Decorators
         private readonly IRectangleShape _rightHandle;
 
         /// <inheritdoc/>
-        public virtual IShapeStyle Style
+        public IList<IBaseShape> Shapes
+        {
+            get => _shapes;
+            set => Update(ref _shapes, value);
+        }
+
+        /// <inheritdoc/>
+        public IShapeStyle Style
         {
             get => _style;
             set => Update(ref _style, value);
@@ -55,26 +62,17 @@ namespace Core2D.Editor.Tools.Decorators
         }
 
         /// <inheritdoc/>
-        public virtual bool IsStroked
+        public bool IsStroked
         {
             get => _isStroked;
             set => Update(ref _isStroked, value);
         }
 
         /// <inheritdoc/>
-        public virtual bool IsFilled
+        public bool IsFilled
         {
             get => _isFilled;
             set => Update(ref _isFilled, value);
-        }
-
-        /// <summary>
-        /// Gets or sets decorator shapes.
-        /// </summary>
-        public IList<IBaseShape> Shapes
-        {
-            get => _shapes;
-            set => _shapes = value;
         }
 
         /// <summary>
