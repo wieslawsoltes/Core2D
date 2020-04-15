@@ -9,7 +9,7 @@ namespace Core2D.Editor.Layout
         public readonly ShapeBox[] Boxes;
         public Box Bounds;
 
-        public GroupBox(List<IBaseShape> shapes)
+        public GroupBox(IList<IBaseShape> shapes)
         {
             Boxes = new ShapeBox[shapes.Count];
 
