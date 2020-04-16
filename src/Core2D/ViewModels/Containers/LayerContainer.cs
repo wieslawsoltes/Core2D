@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
-using Core2D.Attributes;
 using Core2D.Shapes;
 
 namespace Core2D.Containers
@@ -29,7 +28,6 @@ namespace Core2D.Containers
         }
 
         /// <inheritdoc/>
-        [Content]
         public ImmutableArray<IBaseShape> Shapes
         {
             get => _shapes;

@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using Core2D.Attributes;
 
 namespace Core2D
 {
@@ -23,7 +22,6 @@ namespace Core2D
         }
 
         /// <inheritdoc/>
-        [Name]
         public virtual string Id
         {
             get => _id;

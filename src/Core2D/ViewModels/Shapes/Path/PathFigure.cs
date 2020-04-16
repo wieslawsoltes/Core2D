@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using System.Text;
-using Core2D.Attributes;
 using Core2D.Shapes;
 
 namespace Core2D.Path
@@ -30,7 +29,6 @@ namespace Core2D.Path
         /// <summary>
         /// Gets or sets segments collection.
         /// </summary>
-        [Content]
         public ImmutableArray<IPathSegment> Segments
         {
             get => _segments;

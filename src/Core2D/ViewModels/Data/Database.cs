@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Collections.Immutable;
-using Core2D.Attributes;
 
 namespace Core2D.Data
 {
@@ -29,7 +28,6 @@ namespace Core2D.Data
         }
 
         /// <inheritdoc/>
-        [Content]
         public ImmutableArray<IRecord> Records
         {
             get => _records;

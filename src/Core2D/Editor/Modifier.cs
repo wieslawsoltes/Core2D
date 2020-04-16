@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Core2D.Attributes;
 using Core2D.Input;
 
 namespace Core2D.Editor
@@ -15,7 +14,6 @@ namespace Core2D.Editor
         /// <summary>
         /// Gets or sets shape state flags.
         /// </summary>
-        [Content]
         public ModifierFlags Flags
         {
             get => _flags;

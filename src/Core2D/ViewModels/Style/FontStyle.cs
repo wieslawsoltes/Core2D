@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Core2D.Attributes;
 
 namespace Core2D.Style
 {
@@ -12,7 +11,6 @@ namespace Core2D.Style
         private FontStyleFlags _flags;
 
         /// <inheritdoc/>
-        [Content]
         public FontStyleFlags Flags
         {
             get => _flags;

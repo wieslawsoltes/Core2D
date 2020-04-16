@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Text;
-using Core2D.Attributes;
 
 namespace Core2D.Path
 {
@@ -15,7 +14,6 @@ namespace Core2D.Path
         private FillRule _fillRule;
 
         /// <inheritdoc/>
-        [Content]
         public ImmutableArray<IPathFigure> Figures
         {
             get => _figures;

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
-using Core2D.Attributes;
 
 namespace Core2D.Containers
 {
@@ -14,7 +13,6 @@ namespace Core2D.Containers
         private T _selected;
 
         /// <inheritdoc/>
-        [Content]
         public ImmutableArray<T> Items
         {
             get => _items;

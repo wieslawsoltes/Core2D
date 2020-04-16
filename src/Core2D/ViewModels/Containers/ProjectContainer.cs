@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
-using Core2D.Attributes;
 using Core2D.Data;
 using Core2D.History;
 using Core2D.Scripting;
@@ -83,7 +82,6 @@ namespace Core2D.Containers
         }
 
         /// <inheritdoc/>
-        [Content]
         public ImmutableArray<IDocumentContainer> Documents
         {
             get => _documents;

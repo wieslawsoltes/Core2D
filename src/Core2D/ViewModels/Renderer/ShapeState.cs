@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Core2D.Attributes;
 
 namespace Core2D.Renderer
 {
@@ -12,7 +11,6 @@ namespace Core2D.Renderer
         private ShapeStateFlags _flags;
 
         /// <inheritdoc/>
-        [Content]
         public ShapeStateFlags Flags
         {
             get => _flags;

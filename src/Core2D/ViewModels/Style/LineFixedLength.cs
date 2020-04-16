@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Core2D.Attributes;
 using Core2D.Renderer;
 
 namespace Core2D.Style
@@ -16,7 +15,6 @@ namespace Core2D.Style
         private double _length;
 
         /// <inheritdoc/>
-        [Content]
         public LineFixedLengthFlags Flags
         {
             get => _flags;

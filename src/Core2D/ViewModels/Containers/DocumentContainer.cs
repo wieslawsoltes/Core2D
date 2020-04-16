@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
-using Core2D.Attributes;
 
 namespace Core2D.Containers
 {
@@ -21,7 +20,6 @@ namespace Core2D.Containers
         }
 
         /// <inheritdoc/>
-        [Content]
         public ImmutableArray<IPageContainer> Pages
         {
             get => _pages;

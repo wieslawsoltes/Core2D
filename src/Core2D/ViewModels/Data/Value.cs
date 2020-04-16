@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using Core2D.Attributes;
 
 namespace Core2D.Data
 {
@@ -11,7 +10,6 @@ namespace Core2D.Data
         private string _content;
 
         /// <inheritdoc/>
-        [Content]
         public string Content
         {
             get => _content;
