@@ -259,6 +259,9 @@ namespace Core2D
                     0xFF, 0x00, 0x00, 0x00,
                     1.0);
 
+            state.DrawDecorators = true;
+            state.DrawPoints = true;
+
             state.PointStyle = 
                 CreateShapeStyle(
                     "Point",
