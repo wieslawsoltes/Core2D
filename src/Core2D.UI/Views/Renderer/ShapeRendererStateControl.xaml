@@ -11,6 +11,27 @@
              d:DataContext="{x:Static Designer:DesignerContext.ShapeRendererState}"
              d:DesignWidth="250" d:DesignHeight="400">
     <TabControl Classes="default">
+        <TabItem Header="Point" Classes="property">
+            <TabControl Classes="default">
+                <TabItem Header="Options" Classes="property">
+                    <ScrollViewer>
+                        <Grid RowDefinitions="Auto,Auto,Auto" ColumnDefinitions="Auto,*">
+                            <TextBlock Text="DrawDecorators" Classes="left" Grid.Row="0" Grid.Column="0"/>
+                            <CheckBox IsChecked="{Binding DrawDecorators, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
+                            <TextBlock Text="DrawPoints" Classes="left" Grid.Row="1" Grid.Column="0"/>
+                            <CheckBox IsChecked="{Binding DrawPoints, Mode=TwoWay}" Classes="left" Grid.Row="1" Grid.Column="1"/>
+                            <TextBlock Text="PointSize" Classes="left" Grid.Row="2" Grid.Column="0"/>
+                            <TextBox Text="{Binding PointSize, Mode=TwoWay}" Classes="left" Grid.Row="2" Grid.Column="1"/>
+                        </Grid>
+                    </ScrollViewer>
+                </TabItem>
+                <TabItem Header="PointStyle" Classes="property">
+                    <ScrollViewer>
+                        <ContentControl Content="{Binding PointStyle}"/>
+                    </ScrollViewer>
+                </TabItem>
+            </TabControl>
+        </TabItem>
         <TabItem Header="Zoom" Classes="property">
             <ScrollViewer>
                 <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto" ColumnDefinitions="Auto,*">
@@ -65,23 +86,6 @@
         </TabItem>
         <TabItem Header="ImageCache" Classes="property">
             <containers:ImagesControl DataContext="{Binding ImageCache}"/>
-        </TabItem>
-        <TabItem Header="Point" Classes="property">
-            <TabControl Classes="default">
-                <TabItem Header="Options" Classes="property">
-                    <ScrollViewer>
-                        <Grid RowDefinitions="Auto" ColumnDefinitions="Auto,*">
-                            <TextBlock Text="PointSize" Classes="left" Grid.Row="0" Grid.Column="0"/>
-                            <TextBox Text="{Binding PointSize, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
-                        </Grid>
-                    </ScrollViewer>
-                </TabItem>
-                <TabItem Header="PointStyle" Classes="property">
-                    <ScrollViewer>
-                        <ContentControl Content="{Binding PointStyle}"/>
-                    </ScrollViewer>
-                </TabItem>
-            </TabControl>
         </TabItem>
         <TabItem Header="SelectionStyle" Classes="property">
             <ScrollViewer>
