@@ -54,6 +54,8 @@
             <CheckBox Classes="options" Content="Filled" IsChecked="{Binding Project.Options.DefaultIsFilled, Mode=TwoWay}"/>
             <CheckBox Classes="options" Content="Closed" IsChecked="{Binding Project.Options.DefaultIsClosed, Mode=TwoWay}"/>
             <CheckBox Classes="options" Content="Snap" IsChecked="{Binding Project.Options.SnapToGrid, Mode=TwoWay}"/>
+            <CheckBox Classes="options" Content="Decorators" IsChecked="{Binding PageState.DrawDecorators, Mode=TwoWay}"/>
+            <CheckBox Classes="options" Content="Points" IsChecked="{Binding PageState.DrawPoints, Mode=TwoWay}"/>
             <CheckBox Classes="options" Content="Connect" IsChecked="{Binding Project.Options.TryToConnect, Mode=TwoWay}"/>
         </WrapPanel>
     </Grid>
