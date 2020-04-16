@@ -178,8 +178,6 @@ namespace Core2D.Editor.Tools.Decorators
                 _handleStyle, true, true, name: "_rightHandle");
 
             _handles = new List<IBaseShape>();
-            _handles.Add(_moveHandle);
-            _handles.Add(_rotateLine);
             _handles.Add(_rotateHandle);
             _handles.Add(_topLeftHandle);
             _handles.Add(_topRightHandle);
@@ -189,6 +187,8 @@ namespace Core2D.Editor.Tools.Decorators
             _handles.Add(_bottomHandle);
             _handles.Add(_leftHandle);
             _handles.Add(_rightHandle);
+            _handles.Add(_moveHandle);
+            _handles.Add(_rotateLine);
         }
 
         /// <inheritdoc/>
