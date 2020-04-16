@@ -456,6 +456,11 @@ namespace Core2D.Renderer.Avalonia
                 return;
             }
 
+            if (_state.DrawPoints == false)
+            {
+                return;
+            }
+
             var _dc = dc as AM.DrawingContext;
 
             var pointStyle = _state.PointStyle;
