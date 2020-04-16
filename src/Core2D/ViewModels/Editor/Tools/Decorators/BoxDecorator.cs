@@ -42,6 +42,7 @@ namespace Core2D.Editor.Tools.Decorators
         private readonly IRectangleShape _bottomHandle;
         private readonly IRectangleShape _leftHandle;
         private readonly IRectangleShape _rightHandle;
+        public IList<IBaseShape> _handles;
 
         /// <inheritdoc/>
         public IList<IBaseShape> Shapes
@@ -175,6 +176,19 @@ namespace Core2D.Editor.Tools.Decorators
                 _groupBox.Bounds.Right + _sizeSmall,
                 _groupBox.Bounds.CenterY + _sizeSmall,
                 _handleStyle, true, true, name: "_rightHandle");
+
+            _handles = new List<IBaseShape>();
+            _handles.Add(_moveHandle);
+            _handles.Add(_rotateLine);
+            _handles.Add(_rotateHandle);
+            _handles.Add(_topLeftHandle);
+            _handles.Add(_topRightHandle);
+            _handles.Add(_bottomLeftHandle);
+            _handles.Add(_bottomRightHandle);
+            _handles.Add(_topHandle);
+            _handles.Add(_bottomHandle);
+            _handles.Add(_leftHandle);
+            _handles.Add(_rightHandle);
         }
 
         /// <inheritdoc/>
@@ -209,17 +223,10 @@ namespace Core2D.Editor.Tools.Decorators
 
             if (_isVisible)
             {
-                _moveHandle.Draw(dc, renderer, dx, dy);
-                _rotateLine.Draw(dc, renderer, dx, dy);
-                _rotateHandle.Draw(dc, renderer, dx, dy);
-                _topLeftHandle.Draw(dc, renderer, dx, dy);
-                _topRightHandle.Draw(dc, renderer, dx, dy);
-                _bottomLeftHandle.Draw(dc, renderer, dx, dy);
-                _bottomRightHandle.Draw(dc, renderer, dx, dy);
-                _topHandle.Draw(dc, renderer, dx, dy);
-                _bottomHandle.Draw(dc, renderer, dx, dy);
-                _leftHandle.Draw(dc, renderer, dx, dy);
-                _rightHandle.Draw(dc, renderer, dx, dy);
+                foreach (var handle in _handles)
+                {
+                    handle.Draw(dc, renderer, dx, dy);
+                }
             }
 
             EndTransform(dc, renderer, state);
@@ -373,7 +380,7 @@ namespace Core2D.Editor.Tools.Decorators
             (double x, double y) = args;
             (double sx, double sy) = editor.TryToSnap(args);
 
-            var result = editor.HitTest.TryToGetShape(_shapes, new Point2(x, y), editor.Project.Options.HitThreshold / editor.PageState.ZoomX);
+            var result = editor.HitTest.TryToGetShape(_handles, new Point2(x, y), editor.Project.Options.HitThreshold / editor.PageState.ZoomX);
             if (result != null)
             {
                 _mode = Mode.None;
