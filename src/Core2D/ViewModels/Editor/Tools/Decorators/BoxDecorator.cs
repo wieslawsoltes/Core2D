@@ -16,6 +16,21 @@ namespace Core2D.Editor.Tools.Decorators
     /// </summary>
     public class BoxDecorator : ObservableObject, IDrawable, IDecorator
     {
+        private enum Mode
+        {
+            None,
+            Move,
+            Rotate,
+            Top,
+            Bottom,
+            Left,
+            Right,
+            TopLeft,
+            TopRight,
+            BottomLeft,
+            BottomRight
+        }
+
         private bool _isVisible;
         private readonly IServiceProvider _serviceProvider;
         private IShapeStyle _style;
@@ -43,6 +58,11 @@ namespace Core2D.Editor.Tools.Decorators
         private readonly IRectangleShape _leftHandle;
         private readonly IRectangleShape _rightHandle;
         public IList<IBaseShape> _handles;
+        private Mode _mode = Mode.None;
+        private double _startX;
+        private double _startY;
+        private double _historyX;
+        private double _historyY;
 
         /// <inheritdoc/>
         public IList<IBaseShape> Shapes
@@ -177,18 +197,20 @@ namespace Core2D.Editor.Tools.Decorators
                 _groupBox.Bounds.CenterY + _sizeSmall,
                 _handleStyle, true, true, name: "_rightHandle");
 
-            _handles = new List<IBaseShape>();
-            _handles.Add(_rotateHandle);
-            _handles.Add(_topLeftHandle);
-            _handles.Add(_topRightHandle);
-            _handles.Add(_bottomLeftHandle);
-            _handles.Add(_bottomRightHandle);
-            _handles.Add(_topHandle);
-            _handles.Add(_bottomHandle);
-            _handles.Add(_leftHandle);
-            _handles.Add(_rightHandle);
-            _handles.Add(_moveHandle);
-            _handles.Add(_rotateLine);
+            _handles = new List<IBaseShape>
+            {
+                _rotateHandle,
+                _topLeftHandle,
+                _topRightHandle,
+                _bottomLeftHandle,
+                _bottomRightHandle,
+                _topHandle,
+                _bottomHandle,
+                _leftHandle,
+                _rightHandle,
+                _moveHandle,
+                _rotateLine
+            };
         }
 
         /// <inheritdoc/>
@@ -350,27 +372,6 @@ namespace Core2D.Editor.Tools.Decorators
             shapesBuilder.Remove(_rightHandle);
             _layer.Shapes = shapesBuilder.ToImmutable();
             _layer.Invalidate();
-        }
-
-        private Mode _mode = Mode.None;
-        private double _startX;
-        private double _startY;
-        private double _historyX;
-        private double _historyY;
-
-        private enum Mode
-        {
-            None,
-            Move,
-            Rotate,
-            Top,
-            Bottom,
-            Left,
-            Right,
-            TopLeft,
-            TopRight,
-            BottomLeft,
-            BottomRight
         }
 
         /// <inheritdoc/>
