@@ -25,7 +25,7 @@ namespace Core2D.Editor.Tools
         private State _currentState = State.None;
         private IRectangleShape _rectangleShape;
         private IDecorator _decorator;
-        private bool _enableDecorator = false;
+        private bool _previousDrawPoints = true;
         private double _startX;
         private double _startY;
         private double _historyX;
@@ -196,15 +196,30 @@ namespace Core2D.Editor.Tools
 
         private void ShowHideOrUpdateDecorator(IProjectEditor editor)
         {
-            if (_enableDecorator == false)
+            if (editor.PageState == null)
             {
                 return;
             }
-            if (editor.PageState?.SelectedShape != null || editor.PageState?.SelectedShapes != null)
+
+            if (editor.PageState.DrawDecorators == false)
+            {
+                return;
+            }
+
+            if (editor.PageState.SelectedShape is IPointShape)
+            {
+                HideDecorator(editor);
+                return;
+            }
+
+            if (editor.PageState.SelectedShape != null || editor.PageState.SelectedShapes != null)
             {
                 var shapes = editor.PageState.SelectedShape != null ?
                     Enumerable.Repeat(editor.PageState.SelectedShape, 1).ToList() :
                     editor.PageState.SelectedShapes.ToList();
+
+                _previousDrawPoints = editor.PageState.DrawPoints;
+                editor.PageState.DrawPoints = false;
 
                 if (_decorator != null)
                 {
@@ -228,10 +243,16 @@ namespace Core2D.Editor.Tools
 
         private void UpdateDecorator(IProjectEditor editor)
         {
-            if (_enableDecorator == false)
+            if (editor.PageState == null)
             {
                 return;
             }
+
+            if (editor.PageState.DrawDecorators == false)
+            {
+                return;
+            }
+
             if (_decorator != null)
             {
                 _decorator.Update(false);
@@ -240,12 +261,23 @@ namespace Core2D.Editor.Tools
 
         private void HideDecorator(IProjectEditor editor)
         {
-            if (_enableDecorator == false)
+            if (editor.PageState == null)
             {
                 return;
             }
+
+            if (editor.PageState.DrawDecorators == false)
+            {
+                return;
+            }
+
             if (_decorator != null)
             {
+                if (editor.PageState != null)
+                {
+                    editor.PageState.DrawPoints = _previousDrawPoints;
+                }
+
                 _decorator.Hide();
                 _decorator = null;
             }
@@ -262,11 +294,16 @@ namespace Core2D.Editor.Tools
             {
                 case State.None:
                     {
+                        if (editor.PageState == null)
+                        {
+                            return;
+                        }
+
                         bool isControl = args.Modifier.HasFlag(ModifierFlags.Control);
 
                         editor.Dehover(editor.Project.CurrentContainer.CurrentLayer);
 
-                        if (_enableDecorator == true && _decorator != null)
+                        if (editor.PageState.DrawDecorators == true && _decorator != null)
                         {
                             bool result = _decorator.HitTest(args);
                             if (result == true)
@@ -524,9 +561,15 @@ namespace Core2D.Editor.Tools
             {
                 case State.None:
                     {
-                        if (_enableDecorator == true && _decorator != null)
+                        if (editor.PageState == null)
+                        {
+                            return;
+                        }
+
+                        if (editor.PageState.DrawDecorators == true && _decorator != null)
                         {
                             _decorator.Move(args);
+                            _decorator.Update(false);
                             return;
                         }
 
