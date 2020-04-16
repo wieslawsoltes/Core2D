@@ -19,6 +19,8 @@ namespace Core2D.Renderer
         private IBaseShape _selectedShape;
         private ISet<IBaseShape> _selectedShapes;
         private IImageCache _imageCache;
+        private bool _drawDecorators;
+        private bool _drawPoints;
         private IShapeStyle _pointStyle;
         private double _pointSize;
         private IShapeStyle _selectionStyle;
@@ -87,36 +89,42 @@ namespace Core2D.Renderer
             set => Update(ref _imageCache, value);
         }
 
-        /// <summary>
-        /// Gets or sets style used to draw points.
-        /// </summary>
+        /// <inheritdoc/>
+        public bool DrawDecorators
+        {
+            get => _drawDecorators;
+            set => Update(ref _drawDecorators, value);
+        }
+
+        /// <inheritdoc/>
+        public bool DrawPoints
+        {
+            get => _drawPoints;
+            set => Update(ref _drawPoints, value);
+        }
+
+        /// <inheritdoc/>
         public IShapeStyle PointStyle
         {
             get => _pointStyle;
             set => Update(ref _pointStyle, value);
         }
 
-        /// <summary>
-        /// Gets or sets size used to draw points.
-        /// </summary>
+        /// <inheritdoc/>
         public double PointSize
         {
             get => _pointSize;
             set => Update(ref _pointSize, value);
         }
 
-        /// <summary>
-        /// Gets or sets selection rectangle style.
-        /// </summary>
+        /// <inheritdoc/>
         public IShapeStyle SelectionStyle
         {
             get => _selectionStyle;
             set => Update(ref _selectionStyle, value);
         }
 
-        /// <summary>
-        /// Gets or sets editor helper shapes style.
-        /// </summary>
+        /// <inheritdoc/>
         public IShapeStyle HelperStyle
         {
             get => _helperStyle;
@@ -182,6 +190,18 @@ namespace Core2D.Renderer
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
         public virtual bool ShouldSerializeImageCache() => _imageCache != null;
+
+        /// <summary>
+        /// Check whether the <see cref="DrawDecorators"/> property has changed from its default value.
+        /// </summary>
+        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
+        public virtual bool ShouldSerializeDrawDecorators() => _drawDecorators != default;
+
+        /// <summary>
+        /// Check whether the <see cref="DrawPoints"/> property has changed from its default value.
+        /// </summary>
+        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
+        public virtual bool ShouldSerializeDrawPoints() => _drawPoints != default;
 
         /// <summary>
         /// Check whether the <see cref="PointStyle"/> property has changed from its default value.
