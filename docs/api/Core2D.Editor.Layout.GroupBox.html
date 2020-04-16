@@ -106,18 +106,18 @@
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Editor_Layout_GroupBox__ctor_System_Collections_Generic_IList_Core2D_Editor_Layout_ShapeBox__.md&amp;value=---%0Auid%3A%20Core2D.Editor.Layout.GroupBox.%23ctor(System.Collections.Generic.IList%7BCore2D.Editor.Layout.ShapeBox%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Editor_Layout_GroupBox__ctor_System_Collections_Generic_IList_Core2D_Shapes_IBaseShape__.md&amp;value=---%0Auid%3A%20Core2D.Editor.Layout.GroupBox.%23ctor(System.Collections.Generic.IList%7BCore2D.Shapes.IBaseShape%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Editor/Layout/GroupBox.cs/#L18">View Source</a>
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Editor/Layout/GroupBox.cs/#L12">View Source</a>
   </span>
   <a id="Core2D_Editor_Layout_GroupBox__ctor_" data-uid="Core2D.Editor.Layout.GroupBox.#ctor*"></a>
-  <h4 id="Core2D_Editor_Layout_GroupBox__ctor_System_Collections_Generic_IList_Core2D_Editor_Layout_ShapeBox__" data-uid="Core2D.Editor.Layout.GroupBox.#ctor(System.Collections.Generic.IList{Core2D.Editor.Layout.ShapeBox})">GroupBox(IList&lt;ShapeBox&gt;)</h4>
+  <h4 id="Core2D_Editor_Layout_GroupBox__ctor_System_Collections_Generic_IList_Core2D_Shapes_IBaseShape__" data-uid="Core2D.Editor.Layout.GroupBox.#ctor(System.Collections.Generic.IList{Core2D.Shapes.IBaseShape})">GroupBox(IList&lt;IBaseShape&gt;)</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public GroupBox(IList&lt;ShapeBox&gt; boxes)</code></pre>
+    <pre><code class="lang-csharp hljs">public GroupBox(IList&lt;IBaseShape&gt; shapes)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -130,8 +130,8 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.Collections.Generic.IList</span>&lt;<a class="xref" href="Core2D.Editor.Layout.ShapeBox.html">ShapeBox</a>&gt;</td>
-        <td><span class="parametername">boxes</span></td>
+        <td><span class="xref">System.Collections.Generic.IList</span>&lt;<a class="xref" href="Core2D.Shapes.IBaseShape.html">IBaseShape</a>&gt;</td>
+        <td><span class="parametername">shapes</span></td>
         <td></td>
       </tr>
     </tbody>
@@ -140,17 +140,17 @@
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Editor_Layout_GroupBox_Bottom.md&amp;value=---%0Auid%3A%20Core2D.Editor.Layout.GroupBox.Bottom%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Editor_Layout_GroupBox_Bounds.md&amp;value=---%0Auid%3A%20Core2D.Editor.Layout.GroupBox.Bounds%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Editor/Layout/GroupBox.cs/#L12">View Source</a>
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Editor/Layout/GroupBox.cs/#L10">View Source</a>
   </span>
-  <h4 id="Core2D_Editor_Layout_GroupBox_Bottom" data-uid="Core2D.Editor.Layout.GroupBox.Bottom">Bottom</h4>
+  <h4 id="Core2D_Editor_Layout_GroupBox_Bounds" data-uid="Core2D.Editor.Layout.GroupBox.Bounds">Bounds</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public readonly double Bottom</code></pre>
+    <pre><code class="lang-csharp hljs">public Box Bounds</code></pre>
   </div>
   <h5 class="fieldValue">Field Value</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -162,7 +162,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.Double</span></td>
+        <td><a class="xref" href="Core2D.Editor.Layout.Box.html">Box</a></td>
         <td></td>
       </tr>
     </tbody>
@@ -172,14 +172,14 @@
     <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Editor_Layout_GroupBox_Boxes.md&amp;value=---%0Auid%3A%20Core2D.Editor.Layout.GroupBox.Boxes%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Editor/Layout/GroupBox.cs/#L8">View Source</a>
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Editor/Layout/GroupBox.cs/#L9">View Source</a>
   </span>
   <h4 id="Core2D_Editor_Layout_GroupBox_Boxes" data-uid="Core2D.Editor.Layout.GroupBox.Boxes">Boxes</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public readonly IList&lt;ShapeBox&gt; Boxes</code></pre>
+    <pre><code class="lang-csharp hljs">public readonly ShapeBox[] Boxes</code></pre>
   </div>
   <h5 class="fieldValue">Field Value</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -191,214 +191,28 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.Collections.Generic.IList</span>&lt;<a class="xref" href="Core2D.Editor.Layout.ShapeBox.html">ShapeBox</a>&gt;</td>
+        <td><a class="xref" href="Core2D.Editor.Layout.ShapeBox.html">ShapeBox</a>[]</td>
         <td></td>
       </tr>
     </tbody>
   </table>
+  <h3 id="methods">Methods
+  </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Editor_Layout_GroupBox_CenterX.md&amp;value=---%0Auid%3A%20Core2D.Editor.Layout.GroupBox.CenterX%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Editor_Layout_GroupBox_Update.md&amp;value=---%0Auid%3A%20Core2D.Editor.Layout.GroupBox.Update%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Editor/Layout/GroupBox.cs/#L13">View Source</a>
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Editor/Layout/GroupBox.cs/#L26">View Source</a>
   </span>
-  <h4 id="Core2D_Editor_Layout_GroupBox_CenterX" data-uid="Core2D.Editor.Layout.GroupBox.CenterX">CenterX</h4>
+  <a id="Core2D_Editor_Layout_GroupBox_Update_" data-uid="Core2D.Editor.Layout.GroupBox.Update*"></a>
+  <h4 id="Core2D_Editor_Layout_GroupBox_Update" data-uid="Core2D.Editor.Layout.GroupBox.Update">Update()</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public readonly double CenterX</code></pre>
+    <pre><code class="lang-csharp hljs">public void Update()</code></pre>
   </div>
-  <h5 class="fieldValue">Field Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.Double</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Editor_Layout_GroupBox_CenterY.md&amp;value=---%0Auid%3A%20Core2D.Editor.Layout.GroupBox.CenterY%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Editor/Layout/GroupBox.cs/#L14">View Source</a>
-  </span>
-  <h4 id="Core2D_Editor_Layout_GroupBox_CenterY" data-uid="Core2D.Editor.Layout.GroupBox.CenterY">CenterY</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public readonly double CenterY</code></pre>
-  </div>
-  <h5 class="fieldValue">Field Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.Double</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Editor_Layout_GroupBox_Height.md&amp;value=---%0Auid%3A%20Core2D.Editor.Layout.GroupBox.Height%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Editor/Layout/GroupBox.cs/#L16">View Source</a>
-  </span>
-  <h4 id="Core2D_Editor_Layout_GroupBox_Height" data-uid="Core2D.Editor.Layout.GroupBox.Height">Height</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public readonly double Height</code></pre>
-  </div>
-  <h5 class="fieldValue">Field Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.Double</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Editor_Layout_GroupBox_Left.md&amp;value=---%0Auid%3A%20Core2D.Editor.Layout.GroupBox.Left%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Editor/Layout/GroupBox.cs/#L9">View Source</a>
-  </span>
-  <h4 id="Core2D_Editor_Layout_GroupBox_Left" data-uid="Core2D.Editor.Layout.GroupBox.Left">Left</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public readonly double Left</code></pre>
-  </div>
-  <h5 class="fieldValue">Field Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.Double</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Editor_Layout_GroupBox_Right.md&amp;value=---%0Auid%3A%20Core2D.Editor.Layout.GroupBox.Right%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Editor/Layout/GroupBox.cs/#L11">View Source</a>
-  </span>
-  <h4 id="Core2D_Editor_Layout_GroupBox_Right" data-uid="Core2D.Editor.Layout.GroupBox.Right">Right</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public readonly double Right</code></pre>
-  </div>
-  <h5 class="fieldValue">Field Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.Double</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Editor_Layout_GroupBox_Top.md&amp;value=---%0Auid%3A%20Core2D.Editor.Layout.GroupBox.Top%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Editor/Layout/GroupBox.cs/#L10">View Source</a>
-  </span>
-  <h4 id="Core2D_Editor_Layout_GroupBox_Top" data-uid="Core2D.Editor.Layout.GroupBox.Top">Top</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public readonly double Top</code></pre>
-  </div>
-  <h5 class="fieldValue">Field Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.Double</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Editor_Layout_GroupBox_Width.md&amp;value=---%0Auid%3A%20Core2D.Editor.Layout.GroupBox.Width%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Editor/Layout/GroupBox.cs/#L15">View Source</a>
-  </span>
-  <h4 id="Core2D_Editor_Layout_GroupBox_Width" data-uid="Core2D.Editor.Layout.GroupBox.Width">Width</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public readonly double Width</code></pre>
-  </div>
-  <h5 class="fieldValue">Field Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.Double</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
 </article>
           </div>
           
@@ -410,7 +224,7 @@
                     <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Editor_Layout_GroupBox.md&amp;value=---%0Auid%3A%20Core2D.Editor.Layout.GroupBox%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Editor/Layout/GroupBox.cs/#L6" class="contribution-link">View Source</a>
+                    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Editor/Layout/GroupBox.cs/#L7" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>
