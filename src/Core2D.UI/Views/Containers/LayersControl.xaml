@@ -1,0 +1,55 @@
+﻿<UserControl x:Class="Core2D.UI.Views.Containers.LayersControl"
+             xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
+             xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
+             xmlns:id="clr-namespace:Dock.Avalonia;assembly=Core2D.UI"
+             xmlns:converters="clr-namespace:Core2D.UI.Converters;assembly=Core2D.UI"
+             xmlns:Editor="clr-namespace:Core2D.Editor;assembly=Core2D"
+             xmlns:ContainersCore="clr-namespace:Core2D.Containers;assembly=Core2D"
+             xmlns:Designer="clr-namespace:Core2D.Editor.Designer;assembly=Core2D"
+             mc:Ignorable="d"
+             d:DataContext="{x:Static Designer:DesignerContext.Page}"
+             d:DesignWidth="250" d:DesignHeight="400">
+    <TabControl Classes="default">
+        <TabItem Header="Layers" Classes="property">
+            <Grid RowDefinitions="Auto,*,Auto">
+                <Menu Classes="usercontrol" Grid.Row="0" HorizontalAlignment="Right">
+                    <MenuItem Header="+" Classes="usercontrol" Command="{Binding $parent[Window].DataContext.OnAddLayer}" CommandParameter="{Binding}"/>
+                    <MenuItem Header="&#727;" Classes="usercontrol" Command="{Binding $parent[Window].DataContext.OnRemoveLayer}" CommandParameter="{Binding CurrentLayer}" IsVisible="{Binding !!CurrentLayer}"/>
+                </Menu>
+                <ListBox x:Name="layers" Items="{Binding Layers}" SelectedItem="{Binding CurrentLayer, Mode=TwoWay}" Classes="default" Grid.Row="1">
+                    <ListBox.KeyBindings>
+                        <KeyBinding Command="{Binding $parent[Window].DataContext.OnAddLayer}" CommandParameter="{Binding #layers.DataContext, Mode=OneWay}" Gesture="Ctrl+N"/>
+                        <KeyBinding Command="{Binding $parent[Window].DataContext.OnRemoveLayer}" CommandParameter="{Binding #layers.SelectedItem}" Gesture="Delete"/>
+                    </ListBox.KeyBindings>
+                    <ListBox.DataTemplates>
+                        <DataTemplate DataType="ContainersCore:ILayerContainer">
+                            <Grid ColumnDefinitions="Auto,*" Classes="drag">
+                                <i:Interaction.Behaviors>
+                                    <id:DragBehavior Context="{Binding}"/>
+                                </i:Interaction.Behaviors>
+                                <Grid.ContextMenu>
+                                    <ContextMenu Classes="default">
+                                        <MenuItem Header="_Delete" Command="{Binding $parent[Window].DataContext.OnRemoveLayer}" CommandParameter="{Binding Mode=OneWay}"/>
+                                    </ContextMenu>
+                                </Grid.ContextMenu>
+                                <CheckBox Content="" IsChecked="{Binding IsVisible, Mode=TwoWay}" Classes="default" Grid.Column="0"/>
+                                <TextBlock Text="{Binding Name}" Classes="list" Grid.Column="1"/>
+                            </Grid>
+                        </DataTemplate>
+                    </ListBox.DataTemplates>
+                </ListBox>
+                <Grid RowDefinitions="Auto" ColumnDefinitions="Auto,*" Grid.Row="2" IsVisible="{Binding !!CurrentLayer}">
+                    <TextBlock Text="Name" Classes="left" Grid.Row="0" Grid.Column="0"/>
+                    <TextBox Text="{Binding CurrentLayer.Name, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
+                </Grid>
+            </Grid>
+        </TabItem>
+        <TabItem Header="Selected" Classes="property">
+            <ContentControl Content="{Binding CurrentLayer}"/>
+        </TabItem>
+    </TabControl>
+</UserControl>

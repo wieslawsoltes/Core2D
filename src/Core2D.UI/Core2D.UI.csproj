@@ -1,0 +1,61 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>netcoreapp3.1;net461</TargetFrameworks>
+    <OutputType>Library</OutputType>
+    <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
+    <EnableDefaultCompileItems>False</EnableDefaultCompileItems>
+    <LangVersion>8.0</LangVersion>
+    <IsPackable>False</IsPackable>
+    <Nullable>disable</Nullable>
+    <NoWarn>$(NoWarn);NU1701</NoWarn>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <VersionPrefix>0.9.999</VersionPrefix>
+    <VersionSuffix></VersionSuffix>
+    <Authors>Wiesław Šoltés</Authors>
+    <Company>Wiesław Šoltés</Company>
+    <Description>A multi-platform data driven 2D diagram editor.</Description>
+    <Copyright>Copyright © Wiesław Šoltés 2020</Copyright>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="**\*.cs" Exclude="obj\**" />
+    <Compile Update="**\*.xaml.cs">
+      <DependentUpon>%(Filename)</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <AvaloniaResource Include="**\*.xaml">
+      <SubType>Designer</SubType>
+    </AvaloniaResource>
+    <AvaloniaResource Include="Assets\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.0" PrivateAssets="All" />
+    <PackageReference Include="SourceLink.Create.CommandLine" Version="2.8.3" PrivateAssets="All" />
+    <PackageReference Include="System.Text.Encoding.CodePages" Version="4.7.0" />
+    <PackageReference Include="Avalonia" Version="0.9.999-cibuild*" />
+    <PackageReference Include="Avalonia.Controls.DataGrid" Version="0.9.999-cibuild*" />
+    <PackageReference Include="Avalonia.Desktop" Version="0.9.999-cibuild*" />
+    <PackageReference Include="Avalonia.Diagnostics" Version="0.9.999-cibuild*" />
+    <PackageReference Include="Avalonia.Angle.Windows.Natives" Version="2.1.0.2019013001" />
+    <PackageReference Include="Avalonia.ReactiveUI" Version="0.9.999-cibuild*" />
+    <PackageReference Include="Dock.Avalonia" Version="0.9.999-build*" />
+    <PackageReference Include="Dock.Avalonia.Themes.Default" Version="0.9.999-build*" />
+    <PackageReference Include="Dock.Avalonia.Themes.Metro" Version="0.9.999-build*" />
+    <PackageReference Include="Dock.Model" Version="0.9.999-build*" />
+    <PackageReference Include="Dock.Model.ReactiveUI" Version="0.9.999-build*" />
+    <PackageReference Include="Avalonia.Xaml.Interactions" Version="0.9.999-build*" />
+    <PackageReference Include="Avalonia.Xaml.Interactions.Custom" Version="0.9.999-build*" />
+    <PackageReference Include="Avalonia.ThemeManager" Version="0.9.999-build*" />
+    <PackageReference Include="Avalonia.Controls.PanAndZoom" Version="2.3.999-build*" />
+    <PackageReference Include="reactiveui" Version="11.3.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Core2D\Core2D.csproj" />
+  </ItemGroup>
+
+</Project>

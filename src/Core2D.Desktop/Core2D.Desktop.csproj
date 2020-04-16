@@ -1,0 +1,102 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>netcoreapp3.1;net461</TargetFrameworks>
+    <OutputType>WinExe</OutputType>
+    <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
+    <EnableDefaultCompileItems>False</EnableDefaultCompileItems>
+    <LangVersion>8.0</LangVersion>
+    <IsPackable>False</IsPackable>
+    <Nullable>disable</Nullable>
+    <NoWarn>$(NoWarn);NU1701</NoWarn>
+    <ApplicationIcon>Assets\Core2D.ico</ApplicationIcon>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <VersionPrefix>0.9.999</VersionPrefix>
+    <VersionSuffix></VersionSuffix>
+    <Authors>Wiesław Šoltés</Authors>
+    <Company>Wiesław Šoltés</Company>
+    <Description>A multi-platform data driven 2D diagram editor.</Description>
+    <Copyright>Copyright © Wiesław Šoltés 2020</Copyright>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <CoreRT>False</CoreRT>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(RuntimeIdentifier)' == 'win-x64'">
+    <CoreRT>True</CoreRT>
+    <DefineConstants>$(DefineConstants);_CORERT;_CORERT_WIN_X64</DefineConstants>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(RuntimeIdentifier)' == 'linux-x64'">
+    <CoreRT>True</CoreRT>
+    <DefineConstants>$(DefineConstants);_CORERT;_CORERT_LINUX_X64</DefineConstants>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(RuntimeIdentifier)' == 'osx-x64'">
+    <CoreRT>True</CoreRT>
+    <DefineConstants>$(DefineConstants);_CORERT;_CORERT_OSX_X64</DefineConstants>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(CoreRT)' != 'True'">
+    <PublishTrimmed>False</PublishTrimmed>
+    <PublishSingleFile>False</PublishSingleFile>
+    <PublishReadyToRun>False</PublishReadyToRun>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="**\*.cs" Exclude="obj\**" />
+    <Compile Update="**\*.xaml.cs">
+      <DependentUpon>%(Filename)</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <AvaloniaResource Include="**\*.xaml">
+      <SubType>Designer</SubType>
+    </AvaloniaResource>
+    <AvaloniaResource Include="Assets\**" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(CoreRT)' == 'True'">
+    <RdXmlFile Include="Native\netcore.rd.xml" />
+    <RdXmlFile Include="Native\app.rd.xml" />
+    <RdXmlFile Include="Native\avalonia.rd.xml" />
+    <RdXmlFile Include="Native\avalonia.linux.rd.xml" Condition="'$(RuntimeIdentifier)' == 'linux-x64'" />
+    <RdXmlFile Include="Native\avalonia.osx.rd.xml" Condition="'$(RuntimeIdentifier)' == 'osx-x64'" />
+    <RdXmlFile Include="Native\avalonia.win.rd.xml" Condition="'$(RuntimeIdentifier)' == 'win-x64'" />
+    <RdXmlFile Include="Native\avalonia.reactiveui.rd.xml" />
+    <RdXmlFile Include="Native\avalonia.behaviors.rd.xml" />
+    <RdXmlFile Include="Native\avalonia.panandzoom.rd.xml" />
+    <RdXmlFile Include="Native\avalonia.thememanager.rd.xml" />
+    <RdXmlFile Include="Native\autofac.rd.xml" />
+    <RdXmlFile Include="Native\dock.rd.xml" />
+    <RdXmlFile Include="Native\csvhelper.rd.xml" />
+    <RdXmlFile Include="Native\netdxf.rd.xml" />
+    <RdXmlFile Include="Native\newtonsoft.json.rd.xml" />
+    <!--<RdXmlFile Include="Native\roslyn.rd.xml"/>-->
+    <RdXmlFile Include="Native\rx.rd.xml" />
+    <IlcArg Include="--stacktracedata" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <RootAllApplicationAssemblies>False</RootAllApplicationAssemblies>
+    <IlcGenerateCompleteTypeMetadata>False</IlcGenerateCompleteTypeMetadata>
+    <IlcGenerateStackTraceData>False</IlcGenerateStackTraceData>
+    <IlcDisableReflection>True</IlcDisableReflection>
+    <IlcOptimizationPreference>Speed</IlcOptimizationPreference>
+    <IlcFoldIdenticalMethodBodies>True</IlcFoldIdenticalMethodBodies>
+    <IlcDisableUnhandledExceptionExperience>True</IlcDisableUnhandledExceptionExperience>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.0" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.DotNet.ILCompiler" Version="1.0.0-alpha-*" Condition="'$(CoreRT)' == 'True'" />
+    <PackageReference Include="SourceLink.Create.CommandLine" Version="2.8.3" PrivateAssets="All" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Core2D.UI\Core2D.UI.csproj" />
+  </ItemGroup>
+
+</Project>

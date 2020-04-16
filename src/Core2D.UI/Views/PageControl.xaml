@@ -1,0 +1,112 @@
+﻿<UserControl x:Class="Core2D.UI.Views.PageControl"
+             xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
+             xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
+             xmlns:iac="clr-namespace:Avalonia.Xaml.Interactions.Custom;assembly=Avalonia.Xaml.Interactions.Custom"
+             xmlns:id="clr-namespace:Dock.Avalonia;assembly=Core2D.UI"
+             xmlns:handlers="clr-namespace:Core2D.UI.Dock.Handlers;assembly=Core2D.UI"
+             xmlns:converters="clr-namespace:Core2D.UI.Converters;assembly=Core2D.UI"
+             xmlns:behaviors="clr-namespace:Core2D.UI.Behaviors;assembly=Core2D.UI"
+             xmlns:paz="clr-namespace:Avalonia.Controls.PanAndZoom;assembly=Avalonia.Controls.PanAndZoom"
+             xmlns:views="clr-namespace:Core2D.UI.Views;assembly=Core2D.UI"
+             xmlns:Designer="clr-namespace:Core2D.Editor.Designer;assembly=Core2D"
+             mc:Ignorable="d"
+             d:DataContext="{x:Static Designer:DesignerContext.Editor}"
+             d:DesignWidth="1200" d:DesignHeight="540">
+    <UserControl.Resources>
+        <handlers:EditorDropHandler x:Key="EditorDropHandler"/>
+    </UserControl.Resources>
+    <UserControl.KeyBindings>
+        <!-- Edit -->
+        <KeyBinding Command="{Binding OnDelete}" CommandParameter="{Binding}" Gesture="Delete"/>
+        <KeyBinding Command="{Binding OnCancel}" Gesture="Escape"/>
+        <KeyBinding Command="{Binding OnUndo}" Gesture="Ctrl+Z"/>
+        <KeyBinding Command="{Binding OnRedo}" Gesture="Ctrl+Y"/>
+        <KeyBinding Command="{Binding OnCut}" Gesture="Ctrl+X"/>
+        <KeyBinding Command="{Binding OnCopy}" Gesture="Ctrl+C"/>
+        <KeyBinding Command="{Binding OnPaste}" Gesture="Ctrl+V"/>
+        <KeyBinding Command="{Binding StyleEditor.OnCopyStyle}" Gesture="Ctrl+Shift+C"/>
+        <KeyBinding Command="{Binding StyleEditor.OnPasteStyle}" Gesture="Ctrl+Shift+V"/>
+        <KeyBinding Command="{Binding OnSelectAll}" Gesture="Ctrl+A"/>
+        <KeyBinding Command="{Binding OnGroupSelected}" Gesture="Ctrl+G"/>
+        <KeyBinding Command="{Binding OnUngroupSelected}" Gesture="Ctrl+U"/>
+        <!-- View -->
+        <KeyBinding Command="{Binding Platform.OnZoomReset}" Gesture="Z"/>
+        <KeyBinding Command="{Binding Platform.OnZoomAutoFit}" Gesture="X"/>
+        <!-- Options -->
+        <KeyBinding Command="{Binding OnToggleDefaultIsStroked}" Gesture="K"/>
+        <KeyBinding Command="{Binding OnToggleDefaultIsFilled}" Gesture="F"/>
+        <KeyBinding Command="{Binding OnToggleDefaultIsClosed}" Gesture="D"/>
+        <KeyBinding Command="{Binding OnToggleDefaultIsSmoothJoin}" Gesture="J"/>
+        <KeyBinding Command="{Binding OnToggleSnapToGrid}" Gesture="G"/>
+        <KeyBinding Command="{Binding OnToggleTryToConnect}" Gesture="C"/>
+        <!-- Shape -->
+        <KeyBinding Command="{Binding OnRotateSelected}" CommandParameter="90" Gesture="Ctrl+R"/>
+        <KeyBinding Command="{Binding OnRotateSelected}" CommandParameter="-90" Gesture="Ctrl+L"/>
+        <KeyBinding Command="{Binding OnFlipHorizontalSelected}" Gesture="Ctrl+H"/>
+        <KeyBinding Command="{Binding OnFlipVerticalSelected}" Gesture="Ctrl+J"/>
+        <KeyBinding Command="{Binding OnMoveUpSelected}" Gesture="Up"/>
+        <KeyBinding Command="{Binding OnMoveDownSelected}" Gesture="Down"/>
+        <KeyBinding Command="{Binding OnMoveLeftSelected}" Gesture="Left"/>
+        <KeyBinding Command="{Binding OnMoveRightSelected}" Gesture="Right"/>
+        <KeyBinding Command="{Binding OnStackHorizontallySelected}" Gesture="Shift+H"/>
+        <KeyBinding Command="{Binding OnStackVerticallySelected}" Gesture="Shift+Y"/>
+        <KeyBinding Command="{Binding OnDistributeHorizontallySelected}" Gesture="Ctrl+Shift+H"/>
+        <KeyBinding Command="{Binding OnDistributeVerticallySelected}" Gesture="Ctrl+Shift+Y"/>
+        <KeyBinding Command="{Binding OnAlignLeftSelected}" Gesture="Ctrl+Shift+Left"/>
+        <KeyBinding Command="{Binding OnAlignCenteredSelected}" Gesture="Ctrl+Shift+OemMinus"/>
+        <KeyBinding Command="{Binding OnAlignCenteredSelected}" Gesture="Ctrl+Shift+Subtract"/>
+        <KeyBinding Command="{Binding OnAlignRightSelected}" Gesture="Ctrl+Shift+Right"/>
+        <KeyBinding Command="{Binding OnAlignTopSelected}" Gesture="Ctrl+Shift+Up"/>
+        <KeyBinding Command="{Binding OnAlignCenterSelected}" Gesture="Ctrl+Shift+OemPipe"/>
+        <KeyBinding Command="{Binding OnAlignBottomSelected}" Gesture="Ctrl+Shift+Down"/>
+        <KeyBinding Command="{Binding OnBringToFrontSelected}" Gesture="Ctrl+Shift+OemCloseBrackets"/>
+        <KeyBinding Command="{Binding OnBringForwardSelected}" Gesture="Ctrl+OemCloseBrackets"/>
+        <KeyBinding Command="{Binding OnSendBackwardSelected}" Gesture="Ctrl+OemOpenBrackets"/>
+        <KeyBinding Command="{Binding OnSendToBackSelected}" Gesture="Ctrl+Shift+OemOpenBrackets"/>
+        <KeyBinding Command="{Binding OnPathOp}" CommandParameter="Difference" Gesture="Ctrl+Shift+D"/>
+        <KeyBinding Command="{Binding OnPathOp}" CommandParameter="Intersect" Gesture="Ctrl+Shift+I"/>
+        <KeyBinding Command="{Binding OnPathOp}" CommandParameter="Union" Gesture="Ctrl+Shift+U"/>
+        <KeyBinding Command="{Binding OnPathOp}" CommandParameter="Xor" Gesture="Ctrl+Shift+X"/>
+        <KeyBinding Command="{Binding OnPathOp}" CommandParameter="ReverseDifference" Gesture="Ctrl+Shift+R"/>
+        <!-- Tool -->
+        <KeyBinding Command="{Binding OnToolNone}" Gesture="N"/>
+        <KeyBinding Command="{Binding OnToolSelection}" Gesture="S"/>
+        <KeyBinding Command="{Binding OnToolPoint}" Gesture="P"/>
+        <KeyBinding Command="{Binding OnToolLine}" Gesture="L"/>
+        <KeyBinding Command="{Binding OnToolArc}" Gesture="A"/>
+        <KeyBinding Command="{Binding OnToolCubicBezier}" Gesture="B"/>
+        <KeyBinding Command="{Binding OnToolQuadraticBezier}" Gesture="Q"/>
+        <KeyBinding Command="{Binding OnToolPath}" Gesture="H"/>
+        <KeyBinding Command="{Binding OnToolMove}" Gesture="M"/>
+        <KeyBinding Command="{Binding OnToolRectangle}" Gesture="R"/>
+        <KeyBinding Command="{Binding OnToolEllipse}" Gesture="E"/>
+        <KeyBinding Command="{Binding OnToolText}" Gesture="T"/>
+        <KeyBinding Command="{Binding OnToolImage}" Gesture="I"/>
+    </UserControl.KeyBindings>
+    <i:Interaction.Behaviors>
+        <iac:FocusOnAttachedToVisualTreeBehavior/>
+        <!--<iac:FocusOnPointerMovedBehavior/>-->
+        <!--<id:DropBehavior Context="{Binding Layout}" Handler="{StaticResource DockDropHandler}"/>-->
+        <id:DropBehavior Context="{Binding}" Handler="{StaticResource EditorDropHandler}"/>
+        <behaviors:AttachEditorBehavior/>
+    </i:Interaction.Behaviors>
+    <Border Classes="container">
+        <i:Interaction.Behaviors>
+            <!--<id:DropBehavior Context="{Binding Layout}" Handler="{StaticResource DockDropHandler}"/>-->
+            <id:DropBehavior Context="{Binding}" Handler="{StaticResource EditorDropHandler}"/>
+        </i:Interaction.Behaviors>
+        <Border Classes="transparent" ClipToBounds="True">
+            <paz:ZoomBorder x:Name="zoomBorder" Stretch="None" ZoomSpeed="1.2" PanButton="Right" EnableInput="{Binding IsToolIdle}" Background="Transparent" ClipToBounds="False" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                <Grid x:Name="gridTransformed" ClipToBounds="False">
+                    <views:PresenterControl x:Name="presenterControlData" Renderer="{Binding PageRenderer}" DataFlow="{Binding DataFlow}" Container="{Binding Project.CurrentContainer}" PresenterType="Data" ClipToBounds="False"/>
+                    <views:PresenterControl x:Name="presenterControlTemplate" Renderer="{Binding PageRenderer}" DataFlow="{Binding DataFlow}" Container="{Binding Project.CurrentContainer}" PresenterType="Template" ClipToBounds="False"/>
+                    <views:PresenterControl x:Name="presenterControlEditor" Renderer="{Binding PageRenderer}" DataFlow="{Binding DataFlow}" Container="{Binding Project.CurrentContainer}" PresenterType="Editor" ClipToBounds="False"/>
+                </Grid>
+            </paz:ZoomBorder>
+        </Border>
+    </Border>
+</UserControl>

@@ -2495,7 +2495,7 @@ namespace Core2D.Editor
                 try
                 {
                     var json = FileIO.ReadUtf8Text(path);
-                    var layout = JsonSerializer.Deserialize<DMC.RootDock>(json);
+                    var layout = JsonSerializer.Deserialize<DMC.IRootDock>(json);
                     if (layout != null)
                     {
                         Layout = layout;

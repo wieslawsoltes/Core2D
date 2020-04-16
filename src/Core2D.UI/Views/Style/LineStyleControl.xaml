@@ -1,0 +1,31 @@
+﻿<UserControl x:Class="Core2D.UI.Views.Style.LineStyleControl"
+             xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:converters="clr-namespace:Core2D.UI.Converters;assembly=Core2D.UI"
+             xmlns:Editor="clr-namespace:Core2D.Editor;assembly=Core2D"
+             xmlns:Designer="clr-namespace:Core2D.Editor.Designer;assembly=Core2D"
+             mc:Ignorable="d"
+             d:DataContext="{x:Static Designer:DesignerContext.LineStyle}"
+             d:DesignWidth="250" d:DesignHeight="400">
+    <TabControl Classes="default">
+        <TabItem Header="LineStyle" Classes="property">
+            <ScrollViewer>
+                <Grid RowDefinitions="Auto,Auto,Auto,Auto" ColumnDefinitions="Auto,*">
+                    <TextBlock Text="Name" Classes="left" Grid.Row="0" Grid.Column="0"/>
+                    <TextBox Text="{Binding Name, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
+                    <TextBlock Text="IsCurved" Classes="left" Grid.Row="1" Grid.Column="0"/>
+                    <CheckBox IsChecked="{Binding IsCurved, Mode=TwoWay}" Classes="left" Grid.Row="1" Grid.Column="1"/>
+                    <TextBlock Text="Curvature" Classes="left" Grid.Row="2" Grid.Column="0"/>
+                    <TextBox Text="{Binding Curvature, Mode=TwoWay}" Classes="left" Grid.Row="2" Grid.Column="1"/>
+                    <TextBlock Text="CurveOrientation" Classes="left" Grid.Row="3" Grid.Column="0"/>
+                    <ComboBox Items="{x:Static Editor:Enums.CurveOrientationValues}" SelectedItem="{Binding CurveOrientation, Mode=TwoWay}" Classes="default" Grid.Row="3" Grid.Column="1"/>
+                </Grid>
+            </ScrollViewer>
+        </TabItem>
+        <TabItem Header="FixedLength" Classes="property">
+            <ContentControl Content="{Binding FixedLength}"/>
+        </TabItem>
+    </TabControl>
+</UserControl>
