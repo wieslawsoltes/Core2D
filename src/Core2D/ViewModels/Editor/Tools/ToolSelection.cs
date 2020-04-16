@@ -194,7 +194,7 @@ namespace Core2D.Editor.Tools
                 || editor?.PageState?.SelectedShapes != null;
         }
 
-        private void ShowHideOrUpdateDecorator(IProjectEditor editor, InputArgs args)
+        private void ShowHideOrUpdateDecorator(IProjectEditor editor, InputArgs args, bool disableHitTest)
         {
             if (editor.PageState == null)
             {
@@ -235,11 +235,14 @@ namespace Core2D.Editor.Tools
                     _decorator.Show();
                 }
 
-                bool result = _decorator.HitTest(args);
-                if (result == true)
+                if (disableHitTest == false)
                 {
-                    _currentState = State.Selected;
-                    editor.IsToolIdle = false;
+                    bool result = _decorator.HitTest(args);
+                    if (result == true)
+                    {
+                        _currentState = State.Selected;
+                        editor.IsToolIdle = false;
+                    }
                 }
             }
             else
@@ -310,16 +313,16 @@ namespace Core2D.Editor.Tools
 
                         editor.Dehover(editor.Project.CurrentContainer.CurrentLayer);
 
-                        if (editor.PageState.DrawDecorators == true && _decorator != null)
-                        {
-                            bool result = _decorator.HitTest(args);
-                            if (result == true)
-                            {
-                                _currentState = State.Selected;
-                                editor.IsToolIdle = false;
-                                return;
-                            }
-                        }
+                        //if (editor.PageState.DrawDecorators == true && _decorator != null)
+                        //{
+                        //    bool result = _decorator.HitTest(args);
+                        //    if (result == true)
+                        //    {
+                        //        _currentState = State.Selected;
+                        //        editor.IsToolIdle = false;
+                        //        return;
+                        //    }
+                        //}
 
                         if (isControl == true)
                         {
@@ -337,7 +340,7 @@ namespace Core2D.Editor.Tools
                                 {
                                     editor.PageState.SelectedShape = result;
                                     editor.Project.CurrentContainer.CurrentLayer.Invalidate();
-                                    ShowHideOrUpdateDecorator(editor, args);
+                                    ShowHideOrUpdateDecorator(editor, args, isControl);
                                     break;
                                 }
                                 else if (editor.PageState.SelectedShape != null && editor.PageState.SelectedShapes == null)
@@ -355,7 +358,7 @@ namespace Core2D.Editor.Tools
                                         editor.PageState.SelectedShape = null;
                                         editor.PageState.SelectedShapes = new HashSet<IBaseShape>() { selected, result };
                                         editor.Project.CurrentContainer.CurrentLayer.Invalidate();
-                                        ShowHideOrUpdateDecorator(editor, args);
+                                        ShowHideOrUpdateDecorator(editor, args, isControl);
                                         break;
                                     }
                                 }
@@ -375,7 +378,7 @@ namespace Core2D.Editor.Tools
                                             var selected = editor.PageState.SelectedShapes.FirstOrDefault();
                                             editor.PageState.SelectedShape = selected;
                                             editor.PageState.SelectedShapes = null;
-                                            ShowHideOrUpdateDecorator(editor, args);
+                                            ShowHideOrUpdateDecorator(editor, args, isControl);
                                         }
                                         editor.Project.CurrentContainer.CurrentLayer.Invalidate();
                                         break;
@@ -384,7 +387,7 @@ namespace Core2D.Editor.Tools
                                     {
                                         editor.PageState.SelectedShapes.Add(result);
                                         editor.Project.CurrentContainer.CurrentLayer.Invalidate();
-                                        ShowHideOrUpdateDecorator(editor, args);
+                                        ShowHideOrUpdateDecorator(editor, args, isControl);
                                         break;
                                     }
                                 }
@@ -411,7 +414,7 @@ namespace Core2D.Editor.Tools
                                 _historyY = _startY;
                                 GenerateMoveSelectionCache();
                                 _currentState = State.Selected;
-                                ShowHideOrUpdateDecorator(editor, args);
+                                ShowHideOrUpdateDecorator(editor, args, isControl);
                                 editor.IsToolIdle = false;
                                 break;
                             }
@@ -427,7 +430,7 @@ namespace Core2D.Editor.Tools
                             _historyY = _startY;
                             GenerateMoveSelectionCache();
                             _currentState = State.Selected;
-                            ShowHideOrUpdateDecorator(editor, args);
+                            ShowHideOrUpdateDecorator(editor, args, isControl);
                             editor.IsToolIdle = false;
                             break;
                         }
@@ -528,7 +531,7 @@ namespace Core2D.Editor.Tools
                         {
                             _currentState = State.None;
                             editor.TryToSelectShapes(editor.Project.CurrentContainer.CurrentLayer, _rectangleShape, deselect, includeSelected);
-                            ShowHideOrUpdateDecorator(editor, args);
+                            ShowHideOrUpdateDecorator(editor, args, true);
                             editor.IsToolIdle = true;
                         }
                     }
