@@ -1,7 +1,7 @@
 #r "Core2D"
 #r "Math.Spatial"
 using static System.Math;
-using Core2D.Editor.Layout;
+using Core2D.Layout;
 using Core2D.Renderer;
 using Spatial;
 

@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using Core2D.Containers;
 using Core2D.Editor.Input;
-using Core2D.Editor.Layout;
 using Core2D.Interfaces;
+using Core2D.Layout;
 using Core2D.Renderer;
 using Core2D.Shapes;
 using Core2D.Style;

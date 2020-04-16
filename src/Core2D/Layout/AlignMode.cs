@@ -1,4 +1,5 @@
-﻿namespace Core2D.Editor.Layout
+﻿
+namespace Core2D.Layout
 {
     public enum AlignMode
     {

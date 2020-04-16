@@ -4,7 +4,7 @@ using Core2D.History;
 using Core2D.Shapes;
 using System.Linq;
 
-namespace Core2D.Editor.Layout
+namespace Core2D.Layout
 {
     public static class BoxLayout
     {
