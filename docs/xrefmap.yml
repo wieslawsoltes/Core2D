@@ -7,24 +7,6 @@ references:
   commentId: N:Core2D
   fullName: Core2D
   nameWithType: Core2D
-- uid: Core2D.Attributes
-  name: Core2D.Attributes
-  href: api/Core2D.Attributes.html
-  commentId: N:Core2D.Attributes
-  fullName: Core2D.Attributes
-  nameWithType: Core2D.Attributes
-- uid: Core2D.Attributes.ContentAttribute
-  name: ContentAttribute
-  href: api/Core2D.Attributes.ContentAttribute.html
-  commentId: T:Core2D.Attributes.ContentAttribute
-  fullName: Core2D.Attributes.ContentAttribute
-  nameWithType: ContentAttribute
-- uid: Core2D.Attributes.NameAttribute
-  name: NameAttribute
-  href: api/Core2D.Attributes.NameAttribute.html
-  commentId: T:Core2D.Attributes.NameAttribute
-  fullName: Core2D.Attributes.NameAttribute
-  nameWithType: NameAttribute
 - uid: Core2D.Containers
   name: Core2D.Containers
   href: api/Core2D.Containers.html
@@ -3612,19 +3594,19 @@ references:
   isSpec: "True"
   fullName: Core2D.Editor.Bounds.HitTest.Overlaps
   nameWithType: HitTest.Overlaps
-- uid: Core2D.Editor.Bounds.HitTest.Register(Core2D.Editor.Bounds.IBounds)
+- uid: Core2D.Editor.Bounds.HitTest.Register(Core2D.Editor.IBounds)
   name: Register(IBounds)
-  href: api/Core2D.Editor.Bounds.HitTest.html#Core2D_Editor_Bounds_HitTest_Register_Core2D_Editor_Bounds_IBounds_
-  commentId: M:Core2D.Editor.Bounds.HitTest.Register(Core2D.Editor.Bounds.IBounds)
-  fullName: Core2D.Editor.Bounds.HitTest.Register(Core2D.Editor.Bounds.IBounds)
+  href: api/Core2D.Editor.Bounds.HitTest.html#Core2D_Editor_Bounds_HitTest_Register_Core2D_Editor_IBounds_
+  commentId: M:Core2D.Editor.Bounds.HitTest.Register(Core2D.Editor.IBounds)
+  fullName: Core2D.Editor.Bounds.HitTest.Register(Core2D.Editor.IBounds)
   nameWithType: HitTest.Register(IBounds)
-- uid: Core2D.Editor.Bounds.HitTest.Register(System.Collections.Generic.IEnumerable{Core2D.Editor.Bounds.IBounds})
+- uid: Core2D.Editor.Bounds.HitTest.Register(System.Collections.Generic.IEnumerable{Core2D.Editor.IBounds})
   name: Register(IEnumerable<IBounds>)
-  href: api/Core2D.Editor.Bounds.HitTest.html#Core2D_Editor_Bounds_HitTest_Register_System_Collections_Generic_IEnumerable_Core2D_Editor_Bounds_IBounds__
-  commentId: M:Core2D.Editor.Bounds.HitTest.Register(System.Collections.Generic.IEnumerable{Core2D.Editor.Bounds.IBounds})
+  href: api/Core2D.Editor.Bounds.HitTest.html#Core2D_Editor_Bounds_HitTest_Register_System_Collections_Generic_IEnumerable_Core2D_Editor_IBounds__
+  commentId: M:Core2D.Editor.Bounds.HitTest.Register(System.Collections.Generic.IEnumerable{Core2D.Editor.IBounds})
   name.vb: Register(IEnumerable(Of IBounds))
-  fullName: Core2D.Editor.Bounds.HitTest.Register(System.Collections.Generic.IEnumerable<Core2D.Editor.Bounds.IBounds>)
-  fullName.vb: Core2D.Editor.Bounds.HitTest.Register(System.Collections.Generic.IEnumerable(Of Core2D.Editor.Bounds.IBounds))
+  fullName: Core2D.Editor.Bounds.HitTest.Register(System.Collections.Generic.IEnumerable<Core2D.Editor.IBounds>)
+  fullName.vb: Core2D.Editor.Bounds.HitTest.Register(System.Collections.Generic.IEnumerable(Of Core2D.Editor.IBounds))
   nameWithType: HitTest.Register(IEnumerable<IBounds>)
   nameWithType.vb: HitTest.Register(IEnumerable(Of IBounds))
 - uid: Core2D.Editor.Bounds.HitTest.Register*
@@ -3803,194 +3785,6 @@ references:
   isSpec: "True"
   fullName: Core2D.Editor.Bounds.HitTestHelper.ToSelection
   nameWithType: HitTestHelper.ToSelection
-- uid: Core2D.Editor.Bounds.IBounds
-  name: IBounds
-  href: api/Core2D.Editor.Bounds.IBounds.html
-  commentId: T:Core2D.Editor.Bounds.IBounds
-  fullName: Core2D.Editor.Bounds.IBounds
-  nameWithType: IBounds
-- uid: Core2D.Editor.Bounds.IBounds.Contains(Core2D.Shapes.IBaseShape,Point2,System.Double,System.Collections.Generic.IDictionary{System.Type,Core2D.Editor.Bounds.IBounds})
-  name: Contains(IBaseShape, Point2, Double, IDictionary<Type, IBounds>)
-  href: api/Core2D.Editor.Bounds.IBounds.html#Core2D_Editor_Bounds_IBounds_Contains_Core2D_Shapes_IBaseShape_Point2_System_Double_System_Collections_Generic_IDictionary_System_Type_Core2D_Editor_Bounds_IBounds__
-  commentId: M:Core2D.Editor.Bounds.IBounds.Contains(Core2D.Shapes.IBaseShape,Point2,System.Double,System.Collections.Generic.IDictionary{System.Type,Core2D.Editor.Bounds.IBounds})
-  name.vb: Contains(IBaseShape, Point2, Double, IDictionary(Of Type, IBounds))
-  fullName: Core2D.Editor.Bounds.IBounds.Contains(Core2D.Shapes.IBaseShape, Point2, System.Double, System.Collections.Generic.IDictionary<System.Type, Core2D.Editor.Bounds.IBounds>)
-  fullName.vb: Core2D.Editor.Bounds.IBounds.Contains(Core2D.Shapes.IBaseShape, Point2, System.Double, System.Collections.Generic.IDictionary(Of System.Type, Core2D.Editor.Bounds.IBounds))
-  nameWithType: IBounds.Contains(IBaseShape, Point2, Double, IDictionary<Type, IBounds>)
-  nameWithType.vb: IBounds.Contains(IBaseShape, Point2, Double, IDictionary(Of Type, IBounds))
-- uid: Core2D.Editor.Bounds.IBounds.Contains*
-  name: Contains
-  href: api/Core2D.Editor.Bounds.IBounds.html#Core2D_Editor_Bounds_IBounds_Contains_
-  commentId: Overload:Core2D.Editor.Bounds.IBounds.Contains
-  isSpec: "True"
-  fullName: Core2D.Editor.Bounds.IBounds.Contains
-  nameWithType: IBounds.Contains
-- uid: Core2D.Editor.Bounds.IBounds.Overlaps(Core2D.Shapes.IBaseShape,Rect2,System.Double,System.Collections.Generic.IDictionary{System.Type,Core2D.Editor.Bounds.IBounds})
-  name: Overlaps(IBaseShape, Rect2, Double, IDictionary<Type, IBounds>)
-  href: api/Core2D.Editor.Bounds.IBounds.html#Core2D_Editor_Bounds_IBounds_Overlaps_Core2D_Shapes_IBaseShape_Rect2_System_Double_System_Collections_Generic_IDictionary_System_Type_Core2D_Editor_Bounds_IBounds__
-  commentId: M:Core2D.Editor.Bounds.IBounds.Overlaps(Core2D.Shapes.IBaseShape,Rect2,System.Double,System.Collections.Generic.IDictionary{System.Type,Core2D.Editor.Bounds.IBounds})
-  name.vb: Overlaps(IBaseShape, Rect2, Double, IDictionary(Of Type, IBounds))
-  fullName: Core2D.Editor.Bounds.IBounds.Overlaps(Core2D.Shapes.IBaseShape, Rect2, System.Double, System.Collections.Generic.IDictionary<System.Type, Core2D.Editor.Bounds.IBounds>)
-  fullName.vb: Core2D.Editor.Bounds.IBounds.Overlaps(Core2D.Shapes.IBaseShape, Rect2, System.Double, System.Collections.Generic.IDictionary(Of System.Type, Core2D.Editor.Bounds.IBounds))
-  nameWithType: IBounds.Overlaps(IBaseShape, Rect2, Double, IDictionary<Type, IBounds>)
-  nameWithType.vb: IBounds.Overlaps(IBaseShape, Rect2, Double, IDictionary(Of Type, IBounds))
-- uid: Core2D.Editor.Bounds.IBounds.Overlaps*
-  name: Overlaps
-  href: api/Core2D.Editor.Bounds.IBounds.html#Core2D_Editor_Bounds_IBounds_Overlaps_
-  commentId: Overload:Core2D.Editor.Bounds.IBounds.Overlaps
-  isSpec: "True"
-  fullName: Core2D.Editor.Bounds.IBounds.Overlaps
-  nameWithType: IBounds.Overlaps
-- uid: Core2D.Editor.Bounds.IBounds.TargetType
-  name: TargetType
-  href: api/Core2D.Editor.Bounds.IBounds.html#Core2D_Editor_Bounds_IBounds_TargetType
-  commentId: P:Core2D.Editor.Bounds.IBounds.TargetType
-  fullName: Core2D.Editor.Bounds.IBounds.TargetType
-  nameWithType: IBounds.TargetType
-- uid: Core2D.Editor.Bounds.IBounds.TargetType*
-  name: TargetType
-  href: api/Core2D.Editor.Bounds.IBounds.html#Core2D_Editor_Bounds_IBounds_TargetType_
-  commentId: Overload:Core2D.Editor.Bounds.IBounds.TargetType
-  isSpec: "True"
-  fullName: Core2D.Editor.Bounds.IBounds.TargetType
-  nameWithType: IBounds.TargetType
-- uid: Core2D.Editor.Bounds.IBounds.TryToGetPoint(Core2D.Shapes.IBaseShape,Point2,System.Double,System.Collections.Generic.IDictionary{System.Type,Core2D.Editor.Bounds.IBounds})
-  name: TryToGetPoint(IBaseShape, Point2, Double, IDictionary<Type, IBounds>)
-  href: api/Core2D.Editor.Bounds.IBounds.html#Core2D_Editor_Bounds_IBounds_TryToGetPoint_Core2D_Shapes_IBaseShape_Point2_System_Double_System_Collections_Generic_IDictionary_System_Type_Core2D_Editor_Bounds_IBounds__
-  commentId: M:Core2D.Editor.Bounds.IBounds.TryToGetPoint(Core2D.Shapes.IBaseShape,Point2,System.Double,System.Collections.Generic.IDictionary{System.Type,Core2D.Editor.Bounds.IBounds})
-  name.vb: TryToGetPoint(IBaseShape, Point2, Double, IDictionary(Of Type, IBounds))
-  fullName: Core2D.Editor.Bounds.IBounds.TryToGetPoint(Core2D.Shapes.IBaseShape, Point2, System.Double, System.Collections.Generic.IDictionary<System.Type, Core2D.Editor.Bounds.IBounds>)
-  fullName.vb: Core2D.Editor.Bounds.IBounds.TryToGetPoint(Core2D.Shapes.IBaseShape, Point2, System.Double, System.Collections.Generic.IDictionary(Of System.Type, Core2D.Editor.Bounds.IBounds))
-  nameWithType: IBounds.TryToGetPoint(IBaseShape, Point2, Double, IDictionary<Type, IBounds>)
-  nameWithType.vb: IBounds.TryToGetPoint(IBaseShape, Point2, Double, IDictionary(Of Type, IBounds))
-- uid: Core2D.Editor.Bounds.IBounds.TryToGetPoint*
-  name: TryToGetPoint
-  href: api/Core2D.Editor.Bounds.IBounds.html#Core2D_Editor_Bounds_IBounds_TryToGetPoint_
-  commentId: Overload:Core2D.Editor.Bounds.IBounds.TryToGetPoint
-  isSpec: "True"
-  fullName: Core2D.Editor.Bounds.IBounds.TryToGetPoint
-  nameWithType: IBounds.TryToGetPoint
-- uid: Core2D.Editor.Bounds.IHitTest
-  name: IHitTest
-  href: api/Core2D.Editor.Bounds.IHitTest.html
-  commentId: T:Core2D.Editor.Bounds.IHitTest
-  fullName: Core2D.Editor.Bounds.IHitTest
-  nameWithType: IHitTest
-- uid: Core2D.Editor.Bounds.IHitTest.Contains(Core2D.Shapes.IBaseShape,Point2,System.Double)
-  name: Contains(IBaseShape, Point2, Double)
-  href: api/Core2D.Editor.Bounds.IHitTest.html#Core2D_Editor_Bounds_IHitTest_Contains_Core2D_Shapes_IBaseShape_Point2_System_Double_
-  commentId: M:Core2D.Editor.Bounds.IHitTest.Contains(Core2D.Shapes.IBaseShape,Point2,System.Double)
-  fullName: Core2D.Editor.Bounds.IHitTest.Contains(Core2D.Shapes.IBaseShape, Point2, System.Double)
-  nameWithType: IHitTest.Contains(IBaseShape, Point2, Double)
-- uid: Core2D.Editor.Bounds.IHitTest.Contains*
-  name: Contains
-  href: api/Core2D.Editor.Bounds.IHitTest.html#Core2D_Editor_Bounds_IHitTest_Contains_
-  commentId: Overload:Core2D.Editor.Bounds.IHitTest.Contains
-  isSpec: "True"
-  fullName: Core2D.Editor.Bounds.IHitTest.Contains
-  nameWithType: IHitTest.Contains
-- uid: Core2D.Editor.Bounds.IHitTest.Overlaps(Core2D.Shapes.IBaseShape,Rect2,System.Double)
-  name: Overlaps(IBaseShape, Rect2, Double)
-  href: api/Core2D.Editor.Bounds.IHitTest.html#Core2D_Editor_Bounds_IHitTest_Overlaps_Core2D_Shapes_IBaseShape_Rect2_System_Double_
-  commentId: M:Core2D.Editor.Bounds.IHitTest.Overlaps(Core2D.Shapes.IBaseShape,Rect2,System.Double)
-  fullName: Core2D.Editor.Bounds.IHitTest.Overlaps(Core2D.Shapes.IBaseShape, Rect2, System.Double)
-  nameWithType: IHitTest.Overlaps(IBaseShape, Rect2, Double)
-- uid: Core2D.Editor.Bounds.IHitTest.Overlaps*
-  name: Overlaps
-  href: api/Core2D.Editor.Bounds.IHitTest.html#Core2D_Editor_Bounds_IHitTest_Overlaps_
-  commentId: Overload:Core2D.Editor.Bounds.IHitTest.Overlaps
-  isSpec: "True"
-  fullName: Core2D.Editor.Bounds.IHitTest.Overlaps
-  nameWithType: IHitTest.Overlaps
-- uid: Core2D.Editor.Bounds.IHitTest.Register(Core2D.Editor.Bounds.IBounds)
-  name: Register(IBounds)
-  href: api/Core2D.Editor.Bounds.IHitTest.html#Core2D_Editor_Bounds_IHitTest_Register_Core2D_Editor_Bounds_IBounds_
-  commentId: M:Core2D.Editor.Bounds.IHitTest.Register(Core2D.Editor.Bounds.IBounds)
-  fullName: Core2D.Editor.Bounds.IHitTest.Register(Core2D.Editor.Bounds.IBounds)
-  nameWithType: IHitTest.Register(IBounds)
-- uid: Core2D.Editor.Bounds.IHitTest.Register(System.Collections.Generic.IEnumerable{Core2D.Editor.Bounds.IBounds})
-  name: Register(IEnumerable<IBounds>)
-  href: api/Core2D.Editor.Bounds.IHitTest.html#Core2D_Editor_Bounds_IHitTest_Register_System_Collections_Generic_IEnumerable_Core2D_Editor_Bounds_IBounds__
-  commentId: M:Core2D.Editor.Bounds.IHitTest.Register(System.Collections.Generic.IEnumerable{Core2D.Editor.Bounds.IBounds})
-  name.vb: Register(IEnumerable(Of IBounds))
-  fullName: Core2D.Editor.Bounds.IHitTest.Register(System.Collections.Generic.IEnumerable<Core2D.Editor.Bounds.IBounds>)
-  fullName.vb: Core2D.Editor.Bounds.IHitTest.Register(System.Collections.Generic.IEnumerable(Of Core2D.Editor.Bounds.IBounds))
-  nameWithType: IHitTest.Register(IEnumerable<IBounds>)
-  nameWithType.vb: IHitTest.Register(IEnumerable(Of IBounds))
-- uid: Core2D.Editor.Bounds.IHitTest.Register*
-  name: Register
-  href: api/Core2D.Editor.Bounds.IHitTest.html#Core2D_Editor_Bounds_IHitTest_Register_
-  commentId: Overload:Core2D.Editor.Bounds.IHitTest.Register
-  isSpec: "True"
-  fullName: Core2D.Editor.Bounds.IHitTest.Register
-  nameWithType: IHitTest.Register
-- uid: Core2D.Editor.Bounds.IHitTest.Registered
-  name: Registered
-  href: api/Core2D.Editor.Bounds.IHitTest.html#Core2D_Editor_Bounds_IHitTest_Registered
-  commentId: P:Core2D.Editor.Bounds.IHitTest.Registered
-  fullName: Core2D.Editor.Bounds.IHitTest.Registered
-  nameWithType: IHitTest.Registered
-- uid: Core2D.Editor.Bounds.IHitTest.Registered*
-  name: Registered
-  href: api/Core2D.Editor.Bounds.IHitTest.html#Core2D_Editor_Bounds_IHitTest_Registered_
-  commentId: Overload:Core2D.Editor.Bounds.IHitTest.Registered
-  isSpec: "True"
-  fullName: Core2D.Editor.Bounds.IHitTest.Registered
-  nameWithType: IHitTest.Registered
-- uid: Core2D.Editor.Bounds.IHitTest.TryToGetPoint(Core2D.Shapes.IBaseShape,Point2,System.Double)
-  name: TryToGetPoint(IBaseShape, Point2, Double)
-  href: api/Core2D.Editor.Bounds.IHitTest.html#Core2D_Editor_Bounds_IHitTest_TryToGetPoint_Core2D_Shapes_IBaseShape_Point2_System_Double_
-  commentId: M:Core2D.Editor.Bounds.IHitTest.TryToGetPoint(Core2D.Shapes.IBaseShape,Point2,System.Double)
-  fullName: Core2D.Editor.Bounds.IHitTest.TryToGetPoint(Core2D.Shapes.IBaseShape, Point2, System.Double)
-  nameWithType: IHitTest.TryToGetPoint(IBaseShape, Point2, Double)
-- uid: Core2D.Editor.Bounds.IHitTest.TryToGetPoint(System.Collections.Generic.IEnumerable{Core2D.Shapes.IBaseShape},Point2,System.Double)
-  name: TryToGetPoint(IEnumerable<IBaseShape>, Point2, Double)
-  href: api/Core2D.Editor.Bounds.IHitTest.html#Core2D_Editor_Bounds_IHitTest_TryToGetPoint_System_Collections_Generic_IEnumerable_Core2D_Shapes_IBaseShape__Point2_System_Double_
-  commentId: M:Core2D.Editor.Bounds.IHitTest.TryToGetPoint(System.Collections.Generic.IEnumerable{Core2D.Shapes.IBaseShape},Point2,System.Double)
-  name.vb: TryToGetPoint(IEnumerable(Of IBaseShape), Point2, Double)
-  fullName: Core2D.Editor.Bounds.IHitTest.TryToGetPoint(System.Collections.Generic.IEnumerable<Core2D.Shapes.IBaseShape>, Point2, System.Double)
-  fullName.vb: Core2D.Editor.Bounds.IHitTest.TryToGetPoint(System.Collections.Generic.IEnumerable(Of Core2D.Shapes.IBaseShape), Point2, System.Double)
-  nameWithType: IHitTest.TryToGetPoint(IEnumerable<IBaseShape>, Point2, Double)
-  nameWithType.vb: IHitTest.TryToGetPoint(IEnumerable(Of IBaseShape), Point2, Double)
-- uid: Core2D.Editor.Bounds.IHitTest.TryToGetPoint*
-  name: TryToGetPoint
-  href: api/Core2D.Editor.Bounds.IHitTest.html#Core2D_Editor_Bounds_IHitTest_TryToGetPoint_
-  commentId: Overload:Core2D.Editor.Bounds.IHitTest.TryToGetPoint
-  isSpec: "True"
-  fullName: Core2D.Editor.Bounds.IHitTest.TryToGetPoint
-  nameWithType: IHitTest.TryToGetPoint
-- uid: Core2D.Editor.Bounds.IHitTest.TryToGetShape(System.Collections.Generic.IEnumerable{Core2D.Shapes.IBaseShape},Point2,System.Double)
-  name: TryToGetShape(IEnumerable<IBaseShape>, Point2, Double)
-  href: api/Core2D.Editor.Bounds.IHitTest.html#Core2D_Editor_Bounds_IHitTest_TryToGetShape_System_Collections_Generic_IEnumerable_Core2D_Shapes_IBaseShape__Point2_System_Double_
-  commentId: M:Core2D.Editor.Bounds.IHitTest.TryToGetShape(System.Collections.Generic.IEnumerable{Core2D.Shapes.IBaseShape},Point2,System.Double)
-  name.vb: TryToGetShape(IEnumerable(Of IBaseShape), Point2, Double)
-  fullName: Core2D.Editor.Bounds.IHitTest.TryToGetShape(System.Collections.Generic.IEnumerable<Core2D.Shapes.IBaseShape>, Point2, System.Double)
-  fullName.vb: Core2D.Editor.Bounds.IHitTest.TryToGetShape(System.Collections.Generic.IEnumerable(Of Core2D.Shapes.IBaseShape), Point2, System.Double)
-  nameWithType: IHitTest.TryToGetShape(IEnumerable<IBaseShape>, Point2, Double)
-  nameWithType.vb: IHitTest.TryToGetShape(IEnumerable(Of IBaseShape), Point2, Double)
-- uid: Core2D.Editor.Bounds.IHitTest.TryToGetShape*
-  name: TryToGetShape
-  href: api/Core2D.Editor.Bounds.IHitTest.html#Core2D_Editor_Bounds_IHitTest_TryToGetShape_
-  commentId: Overload:Core2D.Editor.Bounds.IHitTest.TryToGetShape
-  isSpec: "True"
-  fullName: Core2D.Editor.Bounds.IHitTest.TryToGetShape
-  nameWithType: IHitTest.TryToGetShape
-- uid: Core2D.Editor.Bounds.IHitTest.TryToGetShapes(System.Collections.Generic.IEnumerable{Core2D.Shapes.IBaseShape},Rect2,System.Double)
-  name: TryToGetShapes(IEnumerable<IBaseShape>, Rect2, Double)
-  href: api/Core2D.Editor.Bounds.IHitTest.html#Core2D_Editor_Bounds_IHitTest_TryToGetShapes_System_Collections_Generic_IEnumerable_Core2D_Shapes_IBaseShape__Rect2_System_Double_
-  commentId: M:Core2D.Editor.Bounds.IHitTest.TryToGetShapes(System.Collections.Generic.IEnumerable{Core2D.Shapes.IBaseShape},Rect2,System.Double)
-  name.vb: TryToGetShapes(IEnumerable(Of IBaseShape), Rect2, Double)
-  fullName: Core2D.Editor.Bounds.IHitTest.TryToGetShapes(System.Collections.Generic.IEnumerable<Core2D.Shapes.IBaseShape>, Rect2, System.Double)
-  fullName.vb: Core2D.Editor.Bounds.IHitTest.TryToGetShapes(System.Collections.Generic.IEnumerable(Of Core2D.Shapes.IBaseShape), Rect2, System.Double)
-  nameWithType: IHitTest.TryToGetShapes(IEnumerable<IBaseShape>, Rect2, Double)
-  nameWithType.vb: IHitTest.TryToGetShapes(IEnumerable(Of IBaseShape), Rect2, Double)
-- uid: Core2D.Editor.Bounds.IHitTest.TryToGetShapes*
-  name: TryToGetShapes
-  href: api/Core2D.Editor.Bounds.IHitTest.html#Core2D_Editor_Bounds_IHitTest_TryToGetShapes_
-  commentId: Overload:Core2D.Editor.Bounds.IHitTest.TryToGetShapes
-  isSpec: "True"
-  fullName: Core2D.Editor.Bounds.IHitTest.TryToGetShapes
-  nameWithType: IHitTest.TryToGetShapes
 - uid: Core2D.Editor.Bounds.Shapes
   name: Core2D.Editor.Bounds.Shapes
   href: api/Core2D.Editor.Bounds.Shapes.html
@@ -4016,13 +3810,13 @@ references:
   isSpec: "True"
   fullName: Core2D.Editor.Bounds.Shapes.BoundsArc.ArcBounds
   nameWithType: BoundsArc.ArcBounds
-- uid: Core2D.Editor.Bounds.Shapes.BoundsArc.Contains(Core2D.Shapes.IBaseShape,Point2,System.Double,System.Collections.Generic.IDictionary{System.Type,Core2D.Editor.Bounds.IBounds})
+- uid: Core2D.Editor.Bounds.Shapes.BoundsArc.Contains(Core2D.Shapes.IBaseShape,Point2,System.Double,System.Collections.Generic.IDictionary{System.Type,Core2D.Editor.IBounds})
   name: Contains(IBaseShape, Point2, Double, IDictionary<Type, IBounds>)
-  href: api/Core2D.Editor.Bounds.Shapes.BoundsArc.html#Core2D_Editor_Bounds_Shapes_BoundsArc_Contains_Core2D_Shapes_IBaseShape_Point2_System_Double_System_Collections_Generic_IDictionary_System_Type_Core2D_Editor_Bounds_IBounds__
-  commentId: M:Core2D.Editor.Bounds.Shapes.BoundsArc.Contains(Core2D.Shapes.IBaseShape,Point2,System.Double,System.Collections.Generic.IDictionary{System.Type,Core2D.Editor.Bounds.IBounds})
+  href: api/Core2D.Editor.Bounds.Shapes.BoundsArc.html#Core2D_Editor_Bounds_Shapes_BoundsArc_Contains_Core2D_Shapes_IBaseShape_Point2_System_Double_System_Collections_Generic_IDictionary_System_Type_Core2D_Editor_IBounds__
+  commentId: M:Core2D.Editor.Bounds.Shapes.BoundsArc.Contains(Core2D.Shapes.IBaseShape,Point2,System.Double,System.Collections.Generic.IDictionary{System.Type,Core2D.Editor.IBounds})
   name.vb: Contains(IBaseShape, Point2, Double, IDictionary(Of Type, IBounds))
-  fullName: Core2D.Editor.Bounds.Shapes.BoundsArc.Contains(Core2D.Shapes.IBaseShape, Point2, System.Double, System.Collections.Generic.IDictionary<System.Type, Core2D.Editor.Bounds.IBounds>)
-  fullName.vb: Core2D.Editor.Bounds.Shapes.BoundsArc.Contains(Core2D.Shapes.IBaseShape, Point2, System.Double, System.Collections.Generic.IDictionary(Of System.Type, Core2D.Editor.Bounds.IBounds))
+  fullName: Core2D.Editor.Bounds.Shapes.BoundsArc.Contains(Core2D.Shapes.IBaseShape, Point2, System.Double, System.Collections.Generic.IDictionary<System.Type, Core2D.Editor.IBounds>)
+  fullName.vb: Core2D.Editor.Bounds.Shapes.BoundsArc.Contains(Core2D.Shapes.IBaseShape, Point2, System.Double, System.Collections.Generic.IDictionary(Of System.Type, Core2D.Editor.IBounds))
   nameWithType: BoundsArc.Contains(IBaseShape, Point2, Double, IDictionary<Type, IBounds>)
   nameWithType.vb: BoundsArc.Contains(IBaseShape, Point2, Double, IDictionary(Of Type, IBounds))
 - uid: Core2D.Editor.Bounds.Shapes.BoundsArc.Contains*
@@ -4032,13 +3826,13 @@ references:
   isSpec: "True"
   fullName: Core2D.Editor.Bounds.Shapes.BoundsArc.Contains
   nameWithType: BoundsArc.Contains
-- uid: Core2D.Editor.Bounds.Shapes.BoundsArc.Overlaps(Core2D.Shapes.IBaseShape,Rect2,System.Double,System.Collections.Generic.IDictionary{System.Type,Core2D.Editor.Bounds.IBounds})
+- uid: Core2D.Editor.Bounds.Shapes.BoundsArc.Overlaps(Core2D.Shapes.IBaseShape,Rect2,System.Double,System.Collections.Generic.IDictionary{System.Type,Core2D.Editor.IBounds})
   name: Overlaps(IBaseShape, Rect2, Double, IDictionary<Type, IBounds>)
-  href: api/Core2D.Editor.Bounds.Shapes.BoundsArc.html#Core2D_Editor_Bounds_Shapes_BoundsArc_Overlaps_Core2D_Shapes_IBaseShape_Rect2_System_Double_System_Collections_Generic_IDictionary_System_Type_Core2D_Editor_Bounds_IBounds__
-  commentId: M:Core2D.Editor.Bounds.Shapes.BoundsArc.Overlaps(Core2D.Shapes.IBaseShape,Rect2,System.Double,System.Collections.Generic.IDictionary{System.Type,Core2D.Editor.Bounds.IBounds})
+  href: api/Core2D.Editor.Bounds.Shapes.BoundsArc.html#Core2D_Editor_Bounds_Shapes_BoundsArc_Overlaps_Core2D_Shapes_IBaseShape_Rect2_System_Double_System_Collections_Generic_IDictionary_System_Type_Core2D_Editor_IBounds__
+  commentId: M:Core2D.Editor.Bounds.Shapes.BoundsArc.Overlaps(Core2D.Shapes.IBaseShape,Rect2,System.Double,System.Collections.Generic.IDictionary{System.Type,Core2D.Editor.IBounds})
   name.vb: Overlaps(IBaseShape, Rect2, Double, IDictionary(Of Type, IBounds))
-  fullName: Core2D.Editor.Bounds.Shapes.BoundsArc.Overlaps(Core2D.Shapes.IBaseShape, Rect2, System.Double, System.Collections.Generic.IDictionary<System.Type, Core2D.Editor.Bounds.IBounds>)
-  fullName.vb: Core2D.Editor.Bounds.Shapes.BoundsArc.Overlaps(Core2D.Shapes.IBaseShape, Rect2, System.Double, System.Collections.Generic.IDictionary(Of System.Type, Core2D.Editor.Bounds.IBounds))
+  fullName: Core2D.Editor.Bounds.Shapes.BoundsArc.Overlaps(Core2D.Shapes.IBaseShape, Rect2, System.Double, System.Collections.Generic.IDictionary<System.Type, Core2D.Editor.IBounds>)
+  fullName.vb: Core2D.Editor.Bounds.Shapes.BoundsArc.Overlaps(Core2D.Shapes.IBaseShape, Rect2, System.Double, System.Collections.Generic.IDictionary(Of System.Type, Core2D.Editor.IBounds))
   nameWithType: BoundsArc.Overlaps(IBaseShape, Rect2, Double, IDictionary<Type, IBounds>)
   nameWithType.vb: BoundsArc.Overlaps(IBaseShape, Rect2, Double, IDictionary(Of Type, IBounds))
 - uid: Core2D.Editor.Bounds.Shapes.BoundsArc.Overlaps*
@@ -4061,13 +3855,13 @@ references:
   isSpec: "True"
   fullName: Core2D.Editor.Bounds.Shapes.BoundsArc.TargetType
   nameWithType: BoundsArc.TargetType
-- uid: Core2D.Editor.Bounds.Shapes.BoundsArc.TryToGetPoint(Core2D.Shapes.IBaseShape,Point2,System.Double,System.Collections.Generic.IDictionary{System.Type,Core2D.Editor.Bounds.IBounds})
+- uid: Core2D.Editor.Bounds.Shapes.BoundsArc.TryToGetPoint(Core2D.Shapes.IBaseShape,Point2,System.Double,System.Collections.Generic.IDictionary{System.Type,Core2D.Editor.IBounds})
   name: TryToGetPoint(IBaseShape, Point2, Double, IDictionary<Type, IBounds>)
-  href: api/Core2D.Editor.Bounds.Shapes.BoundsArc.html#Core2D_Editor_Bounds_Shapes_BoundsArc_TryToGetPoint_Core2D_Shapes_IBaseShape_Point2_System_Double_System_Collections_Generic_IDictionary_System_Type_Core2D_Editor_Bounds_IBounds__
-  commentId: M:Core2D.Editor.Bounds.Shapes.BoundsArc.TryToGetPoint(Core2D.Shapes.IBaseShape,Point2,System.Double,System.Collections.Generic.IDictionary{System.Type,Core2D.Editor.Bounds.IBounds})
+  href: api/Core2D.Editor.Bounds.Shapes.BoundsArc.html#Core2D_Editor_Bounds_Shapes_BoundsArc_TryToGetPoint_Core2D_Shapes_IBaseShape_Point2_System_Double_System_Collections_Generic_IDictionary_System_Type_Core2D_Editor_IBounds__
+  commentId: M:Core2D.Editor.Bounds.Shapes.BoundsArc.TryToGetPoint(Core2D.Shapes.IBaseShape,Point2,System.Double,System.Collections.Generic.IDictionary{System.Type,Core2D.Editor.IBounds})
   name.vb: TryToGetPoint(IBaseShape, Point2, Double, IDictionary(Of Type, IBounds))
-  fullName: Core2D.Editor.Bounds.Shapes.BoundsArc.TryToGetPoint(Core2D.Shapes.IBaseShape, Point2, System.Double, System.Collections.Generic.IDictionary<System.Type, Core2D.Editor.Bounds.IBounds>)
-  fullName.vb: Core2D.Editor.Bounds.Shapes.BoundsArc.TryToGetPoint(Core2D.Shapes.IBaseShape, Point2, System.Double, System.Collections.Generic.IDictionary(Of System.Type, Core2D.Editor.Bounds.IBounds))
+  fullName: Core2D.Editor.Bounds.Shapes.BoundsArc.TryToGetPoint(Core2D.Shapes.IBaseShape, Point2, System.Double, System.Collections.Generic.IDictionary<System.Type, Core2D.Editor.IBounds>)
+  fullName.vb: Core2D.Editor.Bounds.Shapes.BoundsArc.TryToGetPoint(Core2D.Shapes.IBaseShape, Point2, System.Double, System.Collections.Generic.IDictionary(Of System.Type, Core2D.Editor.IBounds))
   nameWithType: BoundsArc.TryToGetPoint(IBaseShape, Point2, Double, IDictionary<Type, IBounds>)
   nameWithType.vb: BoundsArc.TryToGetPoint(IBaseShape, Point2, Double, IDictionary(Of Type, IBounds))
 - uid: Core2D.Editor.Bounds.Shapes.BoundsArc.TryToGetPoint*
@@ -4083,13 +3877,13 @@ references:
   commentId: T:Core2D.Editor.Bounds.Shapes.BoundsCubicBezier
   fullName: Core2D.Editor.Bounds.Shapes.BoundsCubicBezier
   nameWithType: BoundsCubicBezier
-- uid: Core2D.Editor.Bounds.Shapes.BoundsCubicBezier.Contains(Core2D.Shapes.IBaseShape,Point2,System.Double,System.Collections.Generic.IDictionary{System.Type,Core2D.Editor.Bounds.IBounds})
+- uid: Core2D.Editor.Bounds.Shapes.BoundsCubicBezier.Contains(Core2D.Shapes.IBaseShape,Point2,System.Double,System.Collections.Generic.IDictionary{System.Type,Core2D.Editor.IBounds})
   name: Contains(IBaseShape, Point2, Double, IDictionary<Type, IBounds>)
-  href: api/Core2D.Editor.Bounds.Shapes.BoundsCubicBezier.html#Core2D_Editor_Bounds_Shapes_BoundsCubicBezier_Contains_Core2D_Shapes_IBaseShape_Point2_System_Double_System_Collections_Generic_IDictionary_System_Type_Core2D_Editor_Bounds_IBounds__
-  commentId: M:Core2D.Editor.Bounds.Shapes.BoundsCubicBezier.Contains(Core2D.Shapes.IBaseShape,Point2,System.Double,System.Collections.Generic.IDictionary{System.Type,Core2D.Editor.Bounds.IBounds})
+  href: api/Core2D.Editor.Bounds.Shapes.BoundsCubicBezier.html#Core2D_Editor_Bounds_Shapes_BoundsCubicBezier_Contains_Core2D_Shapes_IBaseShape_Point2_System_Double_System_Collections_Generic_IDictionary_System_Type_Core2D_Editor_IBounds__
+  commentId: M:Core2D.Editor.Bounds.Shapes.BoundsCubicBezier.Contains(Core2D.Shapes.IBaseShape,Point2,System.Double,System.Collections.Generic.IDictionary{System.Type,Core2D.Editor.IBounds})
   name.vb: Contains(IBaseShape, Point2, Double, IDictionary(Of Type, IBounds))
-  fullName: Core2D.Editor.Bounds.Shapes.BoundsCubicBezier.Contains(Core2D.Shapes.IBaseShape, Point2, System.Double, System.Collections.Generic.IDictionary<System.Type, Core2D.Editor.Bounds.IBounds>)
-  fullName.vb: Core2D.Editor.Bounds.Shapes.BoundsCubicBezier.Contains(Core2D.Shapes.IBaseShape, Point2, System.Double, System.Collections.Generic.IDictionary(Of System.Type, Core2D.Editor.Bounds.IBounds))
+  fullName: Core2D.Editor.Bounds.Shapes.BoundsCubicBezier.Contains(Core2D.Shapes.IBaseShape, Point2, System.Double, System.Collections.Generic.IDictionary<System.Type, Core2D.Editor.IBounds>)
+  fullName.vb: Core2D.Editor.Bounds.Shapes.BoundsCubicBezier.Contains(Core2D.Shapes.IBaseShape, Point2, System.Double, System.Collections.Generic.IDictionary(Of System.Type, Core2D.Editor.IBounds))
   nameWithType: BoundsCubicBezier.Contains(IBaseShape, Point2, Double, IDictionary<Type, IBounds>)
   nameWithType.vb: BoundsCubicBezier.Contains(IBaseShape, Point2, Double, IDictionary(Of Type, IBounds))
 - uid: Core2D.Editor.Bounds.Shapes.BoundsCubicBezier.Contains*
@@ -4099,13 +3893,13 @@ references:
   isSpec: "True"
   fullName: Core2D.Editor.Bounds.Shapes.BoundsCubicBezier.Contains
   nameWithType: BoundsCubicBezier.Contains
-- uid: Core2D.Editor.Bounds.Shapes.BoundsCubicBezier.Overlaps(Core2D.Shapes.IBaseShape,Rect2,System.Double,System.Collections.Generic.IDictionary{System.Type,Core2D.Editor.Bounds.IBounds})
+- uid: Core2D.Editor.Bounds.Shapes.BoundsCubicBezier.Overlaps(Core2D.Shapes.IBaseShape,Rect2,System.Double,System.Collections.Generic.IDictionary{System.Type,Core2D.Editor.IBounds})
   name: Overlaps(IBaseShape, Rect2, Double, IDictionary<Type, IBounds>)
-  href: api/Core2D.Editor.Bounds.Shapes.BoundsCubicBezier.html#Core2D_Editor_Bounds_Shapes_BoundsCubicBezier_Overlaps_Core2D_Shapes_IBaseShape_Rect2_System_Double_System_Collections_Generic_IDictionary_System_Type_Core2D_Editor_Bounds_IBounds__
-  commentId: M:Core2D.Editor.Bounds.Shapes.BoundsCubicBezier.Overlaps(Core2D.Shapes.IBaseShape,Rect2,System.Double,System.Collections.Generic.IDictionary{System.Type,Core2D.Editor.Bounds.IBounds})
+  href: api/Core2D.Editor.Bounds.Shapes.BoundsCubicBezier.html#Core2D_Editor_Bounds_Shapes_BoundsCubicBezier_Overlaps_Core2D_Shapes_IBaseShape_Rect2_System_Double_System_Collections_Generic_IDictionary_System_Type_Core2D_Editor_IBounds__
+  commentId: M:Core2D.Editor.Bounds.Shapes.BoundsCubicBezier.Overlaps(Core2D.Shapes.IBaseShape,Rect2,System.Double,System.Collections.Generic.IDictionary{System.Type,Core2D.Editor.IBounds})
   name.vb: Overlaps(IBaseShape, Rect2, Double, IDictionary(Of Type, IBounds))
-  fullName: Core2D.Editor.Bounds.Shapes.BoundsCubicBezier.Overlaps(Core2D.Shapes.IBaseShape, Rect2, System.Double, System.Collections.Generic.IDictionary<System.Type, Core2D.Editor.Bounds.IBounds>)
-  fullName.vb: Core2D.Editor.Bounds.Shapes.BoundsCubicBezier.Overlaps(Core2D.Shapes.IBaseShape, Rect2, System.Double, System.Collections.Generic.IDictionary(Of System.Type, Core2D.Editor.Bounds.IBounds))
+  fullName: Core2D.Editor.Bounds.Shapes.BoundsCubicBezier.Overlaps(Core2D.Shapes.IBaseShape, Rect2, System.Double, System.Collections.Generic.IDictionary<System.Type, Core2D.Editor.IBounds>)
+  fullName.vb: Core2D.Editor.Bounds.Shapes.BoundsCubicBezier.Overlaps(Core2D.Shapes.IBaseShape, Rect2, System.Double, System.Collections.Generic.IDictionary(Of System.Type, Core2D.Editor.IBounds))
   nameWithType: BoundsCubicBezier.Overlaps(IBaseShape, Rect2, Double, IDictionary<Type, IBounds>)
   nameWithType.vb: BoundsCubicBezier.Overlaps(IBaseShape, Rect2, Double, IDictionary(Of Type, IBounds))
 - uid: Core2D.Editor.Bounds.Shapes.BoundsCubicBezier.Overlaps*
@@ -4128,13 +3922,13 @@ references:
   isSpec: "True"
   fullName: Core2D.Editor.Bounds.Shapes.BoundsCubicBezier.TargetType
   nameWithType: BoundsCubicBezier.TargetType
-- uid: Core2D.Editor.Bounds.Shapes.BoundsCubicBezier.TryToGetPoint(Core2D.Shapes.IBaseShape,Point2,System.Double,System.Collections.Generic.IDictionary{System.Type,Core2D.Editor.Bounds.IBounds})
+- uid: Core2D.Editor.Bounds.Shapes.BoundsCubicBezier.TryToGetPoint(Core2D.Shapes.IBaseShape,Point2,System.Double,System.Collections.Generic.IDictionary{System.Type,Core2D.Editor.IBounds})
   name: TryToGetPoint(IBaseShape, Point2, Double, IDictionary<Type, IBounds>)
-  href: api/Core2D.Editor.Bounds.Shapes.BoundsCubicBezier.html#Core2D_Editor_Bounds_Shapes_BoundsCubicBezier_TryToGetPoint_Core2D_Shapes_IBaseShape_Point2_System_Double_System_Collections_Generic_IDictionary_System_Type_Core2D_Editor_Bounds_IBounds__
-  commentId: M:Core2D.Editor.Bounds.Shapes.BoundsCubicBezier.TryToGetPoint(Core2D.Shapes.IBaseShape,Point2,System.Double,System.Collections.Generic.IDictionary{System.Type,Core2D.Editor.Bounds.IBounds})
+  href: api/Core2D.Editor.Bounds.Shapes.BoundsCubicBezier.html#Core2D_Editor_Bounds_Shapes_BoundsCubicBezier_TryToGetPoint_Core2D_Shapes_IBaseShape_Point2_System_Double_System_Collections_Generic_IDictionary_System_Type_Core2D_Editor_IBounds__
+  commentId: M:Core2D.Editor.Bounds.Shapes.BoundsCubicBezier.TryToGetPoint(Core2D.Shapes.IBaseShape,Point2,System.Double,System.Collections.Generic.IDictionary{System.Type,Core2D.Editor.IBounds})
   name.vb: TryToGetPoint(IBaseShape, Point2, Double, IDictionary(Of Type, IBounds))
-  fullName: Core2D.Editor.Bounds.Shapes.BoundsCubicBezier.TryToGetPoint(Core2D.Shapes.IBaseShape, Point2, System.Double, System.Collections.Generic.IDictionary<System.Type, Core2D.Editor.Bounds.IBounds>)
-  fullName.vb: Core2D.Editor.Bounds.Shapes.BoundsCubicBezier.TryToGetPoint(Core2D.Shapes.IBaseShape, Point2, System.Double, System.Collections.Generic.IDictionary(Of System.Type, Core2D.Editor.Bounds.IBounds))
+  fullName: Core2D.Editor.Bounds.Shapes.BoundsCubicBezier.TryToGetPoint(Core2D.Shapes.IBaseShape, Point2, System.Double, System.Collections.Generic.IDictionary<System.Type, Core2D.Editor.IBounds>)
+  fullName.vb: Core2D.Editor.Bounds.Shapes.BoundsCubicBezier.TryToGetPoint(Core2D.Shapes.IBaseShape, Point2, System.Double, System.Collections.Generic.IDictionary(Of System.Type, Core2D.Editor.IBounds))
   nameWithType: BoundsCubicBezier.TryToGetPoint(IBaseShape, Point2, Double, IDictionary<Type, IBounds>)
   nameWithType.vb: BoundsCubicBezier.TryToGetPoint(IBaseShape, Point2, Double, IDictionary(Of Type, IBounds))
 - uid: Core2D.Editor.Bounds.Shapes.BoundsCubicBezier.TryToGetPoint*
@@ -4150,13 +3944,13 @@ references:
   commentId: T:Core2D.Editor.Bounds.Shapes.BoundsEllipse
   fullName: Core2D.Editor.Bounds.Shapes.BoundsEllipse
   nameWithType: BoundsEllipse
-- uid: Core2D.Editor.Bounds.Shapes.BoundsEllipse.Contains(Core2D.Shapes.IBaseShape,Point2,System.Double,System.Collections.Generic.IDictionary{System.Type,Core2D.Editor.Bounds.IBounds})
+- uid: Core2D.Editor.Bounds.Shapes.BoundsEllipse.Contains(Core2D.Shapes.IBaseShape,Point2,System.Double,System.Collections.Generic.IDictionary{System.Type,Core2D.Editor.IBounds})
   name: Contains(IBaseShape, Point2, Double, IDictionary<Type, IBounds>)
-  href: api/Core2D.Editor.Bounds.Shapes.BoundsEllipse.html#Core2D_Editor_Bounds_Shapes_BoundsEllipse_Contains_Core2D_Shapes_IBaseShape_Point2_System_Double_System_Collections_Generic_IDictionary_System_Type_Core2D_Editor_Bounds_IBounds__
-  commentId: M:Core2D.Editor.Bounds.Shapes.BoundsEllipse.Contains(Core2D.Shapes.IBaseShape,Point2,System.Double,System.Collections.Generic.IDictionary{System.Type,Core2D.Editor.Bounds.IBounds})
+  href: api/Core2D.Editor.Bounds.Shapes.BoundsEllipse.html#Core2D_Editor_Bounds_Shapes_BoundsEllipse_Contains_Core2D_Shapes_IBaseShape_Point2_System_Double_System_Collections_Generic_IDictionary_System_Type_Core2D_Editor_IBounds__
+  commentId: M:Core2D.Editor.Bounds.Shapes.BoundsEllipse.Contains(Core2D.Shapes.IBaseShape,Point2,System.Double,System.Collections.Generic.IDictionary{System.Type,Core2D.Editor.IBounds})
   name.vb: Contains(IBaseShape, Point2, Double, IDictionary(Of Type, IBounds))
-  fullName: Core2D.Editor.Bounds.Shapes.BoundsEllipse.Contains(Core2D.Shapes.IBaseShape, Point2, System.Double, System.Collections.Generic.IDictionary<System.Type, Core2D.Editor.Bounds.IBounds>)
-  fullName.vb: Core2D.Editor.Bounds.Shapes.BoundsEllipse.Contains(Core2D.Shapes.IBaseShape, Point2, System.Double, System.Collections.Generic.IDictionary(Of System.Type, Core2D.Editor.Bounds.IBounds))
+  fullName: Core2D.Editor.Bounds.Shapes.BoundsEllipse.Contains(Core2D.Shapes.IBaseShape, Point2, System.Double, System.Collections.Generic.IDictionary<System.Type, Core2D.Editor.IBounds>)
+  fullName.vb: Core2D.Editor.Bounds.Shapes.BoundsEllipse.Contains(Core2D.Shapes.IBaseShape, Point2, System.Double, System.Collections.Generic.IDictionary(Of System.Type, Core2D.Editor.IBounds))
   nameWithType: BoundsEllipse.Contains(IBaseShape, Point2, Double, IDictionary<Type, IBounds>)
   nameWithType.vb: BoundsEllipse.Contains(IBaseShape, Point2, Double, IDictionary(Of Type, IBounds))
 - uid: Core2D.Editor.Bounds.Shapes.BoundsEllipse.Contains*
@@ -4166,13 +3960,13 @@ references:
   isSpec: "True"
   fullName: Core2D.Editor.Bounds.Shapes.BoundsEllipse.Contains
   nameWithType: BoundsEllipse.Contains
-- uid: Core2D.Editor.Bounds.Shapes.BoundsEllipse.Overlaps(Core2D.Shapes.IBaseShape,Rect2,System.Double,System.Collections.Generic.IDictionary{System.Type,Core2D.Editor.Bounds.IBounds})
+- uid: Core2D.Editor.Bounds.Shapes.BoundsEllipse.Overlaps(Core2D.Shapes.IBaseShape,Rect2,System.Double,System.Collections.Generic.IDictionary{System.Type,Core2D.Editor.IBounds})
   name: Overlaps(IBaseShape, Rect2, Double, IDictionary<Type, IBounds>)
-  href: api/Core2D.Editor.Bounds.Shapes.BoundsEllipse.html#Core2D_Editor_Bounds_Shapes_BoundsEllipse_Overlaps_Core2D_Shapes_IBaseShape_Rect2_System_Double_System_Collections_Generic_IDictionary_System_Type_Core2D_Editor_Bounds_IBounds__
-  commentId: M:Core2D.Editor.Bounds.Shapes.BoundsEllipse.Overlaps(Core2D.Shapes.IBaseShape,Rect2,System.Double,System.Collections.Generic.IDictionary{System.Type,Core2D.Editor.Bounds.IBounds})
+  href: api/Core2D.Editor.Bounds.Shapes.BoundsEllipse.html#Core2D_Editor_Bounds_Shapes_BoundsEllipse_Overlaps_Core2D_Shapes_IBaseShape_Rect2_System_Double_System_Collections_Generic_IDictionary_System_Type_Core2D_Editor_IBounds__
+  commentId: M:Core2D.Editor.Bounds.Shapes.BoundsEllipse.Overlaps(Core2D.Shapes.IBaseShape,Rect2,System.Double,System.Collections.Generic.IDictionary{System.Type,Core2D.Editor.IBounds})
   name.vb: Overlaps(IBaseShape, Rect2, Double, IDictionary(Of Type, IBounds))
-  fullName: Core2D.Editor.Bounds.Shapes.BoundsEllipse.Overlaps(Core2D.Shapes.IBaseShape, Rect2, System.Double, System.Collections.Generic.IDictionary<System.Type, Core2D.Editor.Bounds.IBounds>)
-  fullName.vb: Core2D.Editor.Bounds.Shapes.BoundsEllipse.Overlaps(Core2D.Shapes.IBaseShape, Rect2, System.Double, System.Collections.Generic.IDictionary(Of System.Type, Core2D.Editor.Bounds.IBounds))
+  fullName: Core2D.Editor.Bounds.Shapes.BoundsEllipse.Overlaps(Core2D.Shapes.IBaseShape, Rect2, System.Double, System.Collections.Generic.IDictionary<System.Type, Core2D.Editor.IBounds>)
+  fullName.vb: Core2D.Editor.Bounds.Shapes.BoundsEllipse.Overlaps(Core2D.Shapes.IBaseShape, Rect2, System.Double, System.Collections.Generic.IDictionary(Of System.Type, Core2D.Editor.IBounds))
   nameWithType: BoundsEllipse.Overlaps(IBaseShape, Rect2, Double, IDictionary<Type, IBounds>)
   nameWithType.vb: BoundsEllipse.Overlaps(IBaseShape, Rect2, Double, IDictionary(Of Type, IBounds))
 - uid: Core2D.Editor.Bounds.Shapes.BoundsEllipse.Overlaps*
@@ -4195,13 +3989,13 @@ references:
   isSpec: "True"
   fullName: Core2D.Editor.Bounds.Shapes.BoundsEllipse.TargetType
   nameWithType: BoundsEllipse.TargetType
-- uid: Core2D.Editor.Bounds.Shapes.BoundsEllipse.TryToGetPoint(Core2D.Shapes.IBaseShape,Point2,System.Double,System.Collections.Generic.IDictionary{System.Type,Core2D.Editor.Bounds.IBounds})
+- uid: Core2D.Editor.Bounds.Shapes.BoundsEllipse.TryToGetPoint(Core2D.Shapes.IBaseShape,Point2,System.Double,System.Collections.Generic.IDictionary{System.Type,Core2D.Editor.IBounds})
   name: TryToGetPoint(IBaseShape, Point2, Double, IDictionary<Type, IBounds>)
-  href: api/Core2D.Editor.Bounds.Shapes.BoundsEllipse.html#Core2D_Editor_Bounds_Shapes_BoundsEllipse_TryToGetPoint_Core2D_Shapes_IBaseShape_Point2_System_Double_System_Collections_Generic_IDictionary_System_Type_Core2D_Editor_Bounds_IBounds__
-  commentId: M:Core2D.Editor.Bounds.Shapes.BoundsEllipse.TryToGetPoint(Core2D.Shapes.IBaseShape,Point2,System.Double,System.Collections.Generic.IDictionary{System.Type,Core2D.Editor.Bounds.IBounds})
+  href: api/Core2D.Editor.Bounds.Shapes.BoundsEllipse.html#Core2D_Editor_Bounds_Shapes_BoundsEllipse_TryToGetPoint_Core2D_Shapes_IBaseShape_Point2_System_Double_System_Collections_Generic_IDictionary_System_Type_Core2D_Editor_IBounds__
+  commentId: M:Core2D.Editor.Bounds.Shapes.BoundsEllipse.TryToGetPoint(Core2D.Shapes.IBaseShape,Point2,System.Double,System.Collections.Generic.IDictionary{System.Type,Core2D.Editor.IBounds})
   name.vb: TryToGetPoint(IBaseShape, Point2, Double, IDictionary(Of Type, IBounds))
-  fullName: Core2D.Editor.Bounds.Shapes.BoundsEllipse.TryToGetPoint(Core2D.Shapes.IBaseShape, Point2, System.Double, System.Collections.Generic.IDictionary<System.Type, Core2D.Editor.Bounds.IBounds>)
-  fullName.vb: Core2D.Editor.Bounds.Shapes.BoundsEllipse.TryToGetPoint(Core2D.Shapes.IBaseShape, Point2, System.Double, System.Collections.Generic.IDictionary(Of System.Type, Core2D.Editor.Bounds.IBounds))
+  fullName: Core2D.Editor.Bounds.Shapes.BoundsEllipse.TryToGetPoint(Core2D.Shapes.IBaseShape, Point2, System.Double, System.Collections.Generic.IDictionary<System.Type, Core2D.Editor.IBounds>)
+  fullName.vb: Core2D.Editor.Bounds.Shapes.BoundsEllipse.TryToGetPoint(Core2D.Shapes.IBaseShape, Point2, System.Double, System.Collections.Generic.IDictionary(Of System.Type, Core2D.Editor.IBounds))
   nameWithType: BoundsEllipse.TryToGetPoint(IBaseShape, Point2, Double, IDictionary<Type, IBounds>)
   nameWithType.vb: BoundsEllipse.TryToGetPoint(IBaseShape, Point2, Double, IDictionary(Of Type, IBounds))
 - uid: Core2D.Editor.Bounds.Shapes.BoundsEllipse.TryToGetPoint*
@@ -4217,13 +4011,13 @@ references:
   commentId: T:Core2D.Editor.Bounds.Shapes.BoundsGroup
   fullName: Core2D.Editor.Bounds.Shapes.BoundsGroup
   nameWithType: BoundsGroup
-- uid: Core2D.Editor.Bounds.Shapes.BoundsGroup.Contains(Core2D.Shapes.IBaseShape,Point2,System.Double,System.Collections.Generic.IDictionary{System.Type,Core2D.Editor.Bounds.IBounds})
+- uid: Core2D.Editor.Bounds.Shapes.BoundsGroup.Contains(Core2D.Shapes.IBaseShape,Point2,System.Double,System.Collections.Generic.IDictionary{System.Type,Core2D.Editor.IBounds})
   name: Contains(IBaseShape, Point2, Double, IDictionary<Type, IBounds>)
-  href: api/Core2D.Editor.Bounds.Shapes.BoundsGroup.html#Core2D_Editor_Bounds_Shapes_BoundsGroup_Contains_Core2D_Shapes_IBaseShape_Point2_System_Double_System_Collections_Generic_IDictionary_System_Type_Core2D_Editor_Bounds_IBounds__
-  commentId: M:Core2D.Editor.Bounds.Shapes.BoundsGroup.Contains(Core2D.Shapes.IBaseShape,Point2,System.Double,System.Collections.Generic.IDictionary{System.Type,Core2D.Editor.Bounds.IBounds})
+  href: api/Core2D.Editor.Bounds.Shapes.BoundsGroup.html#Core2D_Editor_Bounds_Shapes_BoundsGroup_Contains_Core2D_Shapes_IBaseShape_Point2_System_Double_System_Collections_Generic_IDictionary_System_Type_Core2D_Editor_IBounds__
+  commentId: M:Core2D.Editor.Bounds.Shapes.BoundsGroup.Contains(Core2D.Shapes.IBaseShape,Point2,System.Double,System.Collections.Generic.IDictionary{System.Type,Core2D.Editor.IBounds})
   name.vb: Contains(IBaseShape, Point2, Double, IDictionary(Of Type, IBounds))
-  fullName: Core2D.Editor.Bounds.Shapes.BoundsGroup.Contains(Core2D.Shapes.IBaseShape, Point2, System.Double, System.Collections.Generic.IDictionary<System.Type, Core2D.Editor.Bounds.IBounds>)
-  fullName.vb: Core2D.Editor.Bounds.Shapes.BoundsGroup.Contains(Core2D.Shapes.IBaseShape, Point2, System.Double, System.Collections.Generic.IDictionary(Of System.Type, Core2D.Editor.Bounds.IBounds))
+  fullName: Core2D.Editor.Bounds.Shapes.BoundsGroup.Contains(Core2D.Shapes.IBaseShape, Point2, System.Double, System.Collections.Generic.IDictionary<System.Type, Core2D.Editor.IBounds>)
+  fullName.vb: Core2D.Editor.Bounds.Shapes.BoundsGroup.Contains(Core2D.Shapes.IBaseShape, Point2, System.Double, System.Collections.Generic.IDictionary(Of System.Type, Core2D.Editor.IBounds))
   nameWithType: BoundsGroup.Contains(IBaseShape, Point2, Double, IDictionary<Type, IBounds>)
   nameWithType.vb: BoundsGroup.Contains(IBaseShape, Point2, Double, IDictionary(Of Type, IBounds))
 - uid: Core2D.Editor.Bounds.Shapes.BoundsGroup.Contains*
@@ -4233,13 +4027,13 @@ references:
   isSpec: "True"
   fullName: Core2D.Editor.Bounds.Shapes.BoundsGroup.Contains
   nameWithType: BoundsGroup.Contains
-- uid: Core2D.Editor.Bounds.Shapes.BoundsGroup.Overlaps(Core2D.Shapes.IBaseShape,Rect2,System.Double,System.Collections.Generic.IDictionary{System.Type,Core2D.Editor.Bounds.IBounds})
+- uid: Core2D.Editor.Bounds.Shapes.BoundsGroup.Overlaps(Core2D.Shapes.IBaseShape,Rect2,System.Double,System.Collections.Generic.IDictionary{System.Type,Core2D.Editor.IBounds})
   name: Overlaps(IBaseShape, Rect2, Double, IDictionary<Type, IBounds>)
-  href: api/Core2D.Editor.Bounds.Shapes.BoundsGroup.html#Core2D_Editor_Bounds_Shapes_BoundsGroup_Overlaps_Core2D_Shapes_IBaseShape_Rect2_System_Double_System_Collections_Generic_IDictionary_System_Type_Core2D_Editor_Bounds_IBounds__
-  commentId: M:Core2D.Editor.Bounds.Shapes.BoundsGroup.Overlaps(Core2D.Shapes.IBaseShape,Rect2,System.Double,System.Collections.Generic.IDictionary{System.Type,Core2D.Editor.Bounds.IBounds})
+  href: api/Core2D.Editor.Bounds.Shapes.BoundsGroup.html#Core2D_Editor_Bounds_Shapes_BoundsGroup_Overlaps_Core2D_Shapes_IBaseShape_Rect2_System_Double_System_Collections_Generic_IDictionary_System_Type_Core2D_Editor_IBounds__
+  commentId: M:Core2D.Editor.Bounds.Shapes.BoundsGroup.Overlaps(Core2D.Shapes.IBaseShape,Rect2,System.Double,System.Collections.Generic.IDictionary{System.Type,Core2D.Editor.IBounds})
   name.vb: Overlaps(IBaseShape, Rect2, Double, IDictionary(Of Type, IBounds))
-  fullName: Core2D.Editor.Bounds.Shapes.BoundsGroup.Overlaps(Core2D.Shapes.IBaseShape, Rect2, System.Double, System.Collections.Generic.IDictionary<System.Type, Core2D.Editor.Bounds.IBounds>)
-  fullName.vb: Core2D.Editor.Bounds.Shapes.BoundsGroup.Overlaps(Core2D.Shapes.IBaseShape, Rect2, System.Double, System.Collections.Generic.IDictionary(Of System.Type, Core2D.Editor.Bounds.IBounds))
+  fullName: Core2D.Editor.Bounds.Shapes.BoundsGroup.Overlaps(Core2D.Shapes.IBaseShape, Rect2, System.Double, System.Collections.Generic.IDictionary<System.Type, Core2D.Editor.IBounds>)
+  fullName.vb: Core2D.Editor.Bounds.Shapes.BoundsGroup.Overlaps(Core2D.Shapes.IBaseShape, Rect2, System.Double, System.Collections.Generic.IDictionary(Of System.Type, Core2D.Editor.IBounds))
   nameWithType: BoundsGroup.Overlaps(IBaseShape, Rect2, Double, IDictionary<Type, IBounds>)
   nameWithType.vb: BoundsGroup.Overlaps(IBaseShape, Rect2, Double, IDictionary(Of Type, IBounds))
 - uid: Core2D.Editor.Bounds.Shapes.BoundsGroup.Overlaps*
@@ -4262,13 +4056,13 @@ references:
   isSpec: "True"
   fullName: Core2D.Editor.Bounds.Shapes.BoundsGroup.TargetType
   nameWithType: BoundsGroup.TargetType
-- uid: Core2D.Editor.Bounds.Shapes.BoundsGroup.TryToGetPoint(Core2D.Shapes.IBaseShape,Point2,System.Double,System.Collections.Generic.IDictionary{System.Type,Core2D.Editor.Bounds.IBounds})
+- uid: Core2D.Editor.Bounds.Shapes.BoundsGroup.TryToGetPoint(Core2D.Shapes.IBaseShape,Point2,System.Double,System.Collections.Generic.IDictionary{System.Type,Core2D.Editor.IBounds})
   name: TryToGetPoint(IBaseShape, Point2, Double, IDictionary<Type, IBounds>)
-  href: api/Core2D.Editor.Bounds.Shapes.BoundsGroup.html#Core2D_Editor_Bounds_Shapes_BoundsGroup_TryToGetPoint_Core2D_Shapes_IBaseShape_Point2_System_Double_System_Collections_Generic_IDictionary_System_Type_Core2D_Editor_Bounds_IBounds__
-  commentId: M:Core2D.Editor.Bounds.Shapes.BoundsGroup.TryToGetPoint(Core2D.Shapes.IBaseShape,Point2,System.Double,System.Collections.Generic.IDictionary{System.Type,Core2D.Editor.Bounds.IBounds})
+  href: api/Core2D.Editor.Bounds.Shapes.BoundsGroup.html#Core2D_Editor_Bounds_Shapes_BoundsGroup_TryToGetPoint_Core2D_Shapes_IBaseShape_Point2_System_Double_System_Collections_Generic_IDictionary_System_Type_Core2D_Editor_IBounds__
+  commentId: M:Core2D.Editor.Bounds.Shapes.BoundsGroup.TryToGetPoint(Core2D.Shapes.IBaseShape,Point2,System.Double,System.Collections.Generic.IDictionary{System.Type,Core2D.Editor.IBounds})
   name.vb: TryToGetPoint(IBaseShape, Point2, Double, IDictionary(Of Type, IBounds))
-  fullName: Core2D.Editor.Bounds.Shapes.BoundsGroup.TryToGetPoint(Core2D.Shapes.IBaseShape, Point2, System.Double, System.Collections.Generic.IDictionary<System.Type, Core2D.Editor.Bounds.IBounds>)
-  fullName.vb: Core2D.Editor.Bounds.Shapes.BoundsGroup.TryToGetPoint(Core2D.Shapes.IBaseShape, Point2, System.Double, System.Collections.Generic.IDictionary(Of System.Type, Core2D.Editor.Bounds.IBounds))
+  fullName: Core2D.Editor.Bounds.Shapes.BoundsGroup.TryToGetPoint(Core2D.Shapes.IBaseShape, Point2, System.Double, System.Collections.Generic.IDictionary<System.Type, Core2D.Editor.IBounds>)
+  fullName.vb: Core2D.Editor.Bounds.Shapes.BoundsGroup.TryToGetPoint(Core2D.Shapes.IBaseShape, Point2, System.Double, System.Collections.Generic.IDictionary(Of System.Type, Core2D.Editor.IBounds))
   nameWithType: BoundsGroup.TryToGetPoint(IBaseShape, Point2, Double, IDictionary<Type, IBounds>)
   nameWithType.vb: BoundsGroup.TryToGetPoint(IBaseShape, Point2, Double, IDictionary(Of Type, IBounds))
 - uid: Core2D.Editor.Bounds.Shapes.BoundsGroup.TryToGetPoint*
@@ -4284,13 +4078,13 @@ references:
   commentId: T:Core2D.Editor.Bounds.Shapes.BoundsImage
   fullName: Core2D.Editor.Bounds.Shapes.BoundsImage
   nameWithType: BoundsImage
-- uid: Core2D.Editor.Bounds.Shapes.BoundsImage.Contains(Core2D.Shapes.IBaseShape,Point2,System.Double,System.Collections.Generic.IDictionary{System.Type,Core2D.Editor.Bounds.IBounds})
+- uid: Core2D.Editor.Bounds.Shapes.BoundsImage.Contains(Core2D.Shapes.IBaseShape,Point2,System.Double,System.Collections.Generic.IDictionary{System.Type,Core2D.Editor.IBounds})
   name: Contains(IBaseShape, Point2, Double, IDictionary<Type, IBounds>)
-  href: api/Core2D.Editor.Bounds.Shapes.BoundsImage.html#Core2D_Editor_Bounds_Shapes_BoundsImage_Contains_Core2D_Shapes_IBaseShape_Point2_System_Double_System_Collections_Generic_IDictionary_System_Type_Core2D_Editor_Bounds_IBounds__
-  commentId: M:Core2D.Editor.Bounds.Shapes.BoundsImage.Contains(Core2D.Shapes.IBaseShape,Point2,System.Double,System.Collections.Generic.IDictionary{System.Type,Core2D.Editor.Bounds.IBounds})
+  href: api/Core2D.Editor.Bounds.Shapes.BoundsImage.html#Core2D_Editor_Bounds_Shapes_BoundsImage_Contains_Core2D_Shapes_IBaseShape_Point2_System_Double_System_Collections_Generic_IDictionary_System_Type_Core2D_Editor_IBounds__
+  commentId: M:Core2D.Editor.Bounds.Shapes.BoundsImage.Contains(Core2D.Shapes.IBaseShape,Point2,System.Double,System.Collections.Generic.IDictionary{System.Type,Core2D.Editor.IBounds})
   name.vb: Contains(IBaseShape, Point2, Double, IDictionary(Of Type, IBounds))
-  fullName: Core2D.Editor.Bounds.Shapes.BoundsImage.Contains(Core2D.Shapes.IBaseShape, Point2, System.Double, System.Collections.Generic.IDictionary<System.Type, Core2D.Editor.Bounds.IBounds>)
-  fullName.vb: Core2D.Editor.Bounds.Shapes.BoundsImage.Contains(Core2D.Shapes.IBaseShape, Point2, System.Double, System.Collections.Generic.IDictionary(Of System.Type, Core2D.Editor.Bounds.IBounds))
+  fullName: Core2D.Editor.Bounds.Shapes.BoundsImage.Contains(Core2D.Shapes.IBaseShape, Point2, System.Double, System.Collections.Generic.IDictionary<System.Type, Core2D.Editor.IBounds>)
+  fullName.vb: Core2D.Editor.Bounds.Shapes.BoundsImage.Contains(Core2D.Shapes.IBaseShape, Point2, System.Double, System.Collections.Generic.IDictionary(Of System.Type, Core2D.Editor.IBounds))
   nameWithType: BoundsImage.Contains(IBaseShape, Point2, Double, IDictionary<Type, IBounds>)
   nameWithType.vb: BoundsImage.Contains(IBaseShape, Point2, Double, IDictionary(Of Type, IBounds))
 - uid: Core2D.Editor.Bounds.Shapes.BoundsImage.Contains*
@@ -4300,13 +4094,13 @@ references:
   isSpec: "True"
   fullName: Core2D.Editor.Bounds.Shapes.BoundsImage.Contains
   nameWithType: BoundsImage.Contains
-- uid: Core2D.Editor.Bounds.Shapes.BoundsImage.Overlaps(Core2D.Shapes.IBaseShape,Rect2,System.Double,System.Collections.Generic.IDictionary{System.Type,Core2D.Editor.Bounds.IBounds})
+- uid: Core2D.Editor.Bounds.Shapes.BoundsImage.Overlaps(Core2D.Shapes.IBaseShape,Rect2,System.Double,System.Collections.Generic.IDictionary{System.Type,Core2D.Editor.IBounds})
   name: Overlaps(IBaseShape, Rect2, Double, IDictionary<Type, IBounds>)
-  href: api/Core2D.Editor.Bounds.Shapes.BoundsImage.html#Core2D_Editor_Bounds_Shapes_BoundsImage_Overlaps_Core2D_Shapes_IBaseShape_Rect2_System_Double_System_Collections_Generic_IDictionary_System_Type_Core2D_Editor_Bounds_IBounds__
-  commentId: M:Core2D.Editor.Bounds.Shapes.BoundsImage.Overlaps(Core2D.Shapes.IBaseShape,Rect2,System.Double,System.Collections.Generic.IDictionary{System.Type,Core2D.Editor.Bounds.IBounds})
+  href: api/Core2D.Editor.Bounds.Shapes.BoundsImage.html#Core2D_Editor_Bounds_Shapes_BoundsImage_Overlaps_Core2D_Shapes_IBaseShape_Rect2_System_Double_System_Collections_Generic_IDictionary_System_Type_Core2D_Editor_IBounds__
+  commentId: M:Core2D.Editor.Bounds.Shapes.BoundsImage.Overlaps(Core2D.Shapes.IBaseShape,Rect2,System.Double,System.Collections.Generic.IDictionary{System.Type,Core2D.Editor.IBounds})
   name.vb: Overlaps(IBaseShape, Rect2, Double, IDictionary(Of Type, IBounds))
-  fullName: Core2D.Editor.Bounds.Shapes.BoundsImage.Overlaps(Core2D.Shapes.IBaseShape, Rect2, System.Double, System.Collections.Generic.IDictionary<System.Type, Core2D.Editor.Bounds.IBounds>)
-  fullName.vb: Core2D.Editor.Bounds.Shapes.BoundsImage.Overlaps(Core2D.Shapes.IBaseShape, Rect2, System.Double, System.Collections.Generic.IDictionary(Of System.Type, Core2D.Editor.Bounds.IBounds))
+  fullName: Core2D.Editor.Bounds.Shapes.BoundsImage.Overlaps(Core2D.Shapes.IBaseShape, Rect2, System.Double, System.Collections.Generic.IDictionary<System.Type, Core2D.Editor.IBounds>)
+  fullName.vb: Core2D.Editor.Bounds.Shapes.BoundsImage.Overlaps(Core2D.Shapes.IBaseShape, Rect2, System.Double, System.Collections.Generic.IDictionary(Of System.Type, Core2D.Editor.IBounds))
   nameWithType: BoundsImage.Overlaps(IBaseShape, Rect2, Double, IDictionary<Type, IBounds>)
   nameWithType.vb: BoundsImage.Overlaps(IBaseShape, Rect2, Double, IDictionary(Of Type, IBounds))
 - uid: Core2D.Editor.Bounds.Shapes.BoundsImage.Overlaps*
@@ -4329,13 +4123,13 @@ references:
   isSpec: "True"
   fullName: Core2D.Editor.Bounds.Shapes.BoundsImage.TargetType
   nameWithType: BoundsImage.TargetType
-- uid: Core2D.Editor.Bounds.Shapes.BoundsImage.TryToGetPoint(Core2D.Shapes.IBaseShape,Point2,System.Double,System.Collections.Generic.IDictionary{System.Type,Core2D.Editor.Bounds.IBounds})
+- uid: Core2D.Editor.Bounds.Shapes.BoundsImage.TryToGetPoint(Core2D.Shapes.IBaseShape,Point2,System.Double,System.Collections.Generic.IDictionary{System.Type,Core2D.Editor.IBounds})
   name: TryToGetPoint(IBaseShape, Point2, Double, IDictionary<Type, IBounds>)
-  href: api/Core2D.Editor.Bounds.Shapes.BoundsImage.html#Core2D_Editor_Bounds_Shapes_BoundsImage_TryToGetPoint_Core2D_Shapes_IBaseShape_Point2_System_Double_System_Collections_Generic_IDictionary_System_Type_Core2D_Editor_Bounds_IBounds__
-  commentId: M:Core2D.Editor.Bounds.Shapes.BoundsImage.TryToGetPoint(Core2D.Shapes.IBaseShape,Point2,System.Double,System.Collections.Generic.IDictionary{System.Type,Core2D.Editor.Bounds.IBounds})
+  href: api/Core2D.Editor.Bounds.Shapes.BoundsImage.html#Core2D_Editor_Bounds_Shapes_BoundsImage_TryToGetPoint_Core2D_Shapes_IBaseShape_Point2_System_Double_System_Collections_Generic_IDictionary_System_Type_Core2D_Editor_IBounds__
+  commentId: M:Core2D.Editor.Bounds.Shapes.BoundsImage.TryToGetPoint(Core2D.Shapes.IBaseShape,Point2,System.Double,System.Collections.Generic.IDictionary{System.Type,Core2D.Editor.IBounds})
   name.vb: TryToGetPoint(IBaseShape, Point2, Double, IDictionary(Of Type, IBounds))
-  fullName: Core2D.Editor.Bounds.Shapes.BoundsImage.TryToGetPoint(Core2D.Shapes.IBaseShape, Point2, System.Double, System.Collections.Generic.IDictionary<System.Type, Core2D.Editor.Bounds.IBounds>)
-  fullName.vb: Core2D.Editor.Bounds.Shapes.BoundsImage.TryToGetPoint(Core2D.Shapes.IBaseShape, Point2, System.Double, System.Collections.Generic.IDictionary(Of System.Type, Core2D.Editor.Bounds.IBounds))
+  fullName: Core2D.Editor.Bounds.Shapes.BoundsImage.TryToGetPoint(Core2D.Shapes.IBaseShape, Point2, System.Double, System.Collections.Generic.IDictionary<System.Type, Core2D.Editor.IBounds>)
+  fullName.vb: Core2D.Editor.Bounds.Shapes.BoundsImage.TryToGetPoint(Core2D.Shapes.IBaseShape, Point2, System.Double, System.Collections.Generic.IDictionary(Of System.Type, Core2D.Editor.IBounds))
   nameWithType: BoundsImage.TryToGetPoint(IBaseShape, Point2, Double, IDictionary<Type, IBounds>)
   nameWithType.vb: BoundsImage.TryToGetPoint(IBaseShape, Point2, Double, IDictionary(Of Type, IBounds))
 - uid: Core2D.Editor.Bounds.Shapes.BoundsImage.TryToGetPoint*
@@ -4351,13 +4145,13 @@ references:
   commentId: T:Core2D.Editor.Bounds.Shapes.BoundsLine
   fullName: Core2D.Editor.Bounds.Shapes.BoundsLine
   nameWithType: BoundsLine
-- uid: Core2D.Editor.Bounds.Shapes.BoundsLine.Contains(Core2D.Shapes.IBaseShape,Point2,System.Double,System.Collections.Generic.IDictionary{System.Type,Core2D.Editor.Bounds.IBounds})
+- uid: Core2D.Editor.Bounds.Shapes.BoundsLine.Contains(Core2D.Shapes.IBaseShape,Point2,System.Double,System.Collections.Generic.IDictionary{System.Type,Core2D.Editor.IBounds})
   name: Contains(IBaseShape, Point2, Double, IDictionary<Type, IBounds>)
-  href: api/Core2D.Editor.Bounds.Shapes.BoundsLine.html#Core2D_Editor_Bounds_Shapes_BoundsLine_Contains_Core2D_Shapes_IBaseShape_Point2_System_Double_System_Collections_Generic_IDictionary_System_Type_Core2D_Editor_Bounds_IBounds__
-  commentId: M:Core2D.Editor.Bounds.Shapes.BoundsLine.Contains(Core2D.Shapes.IBaseShape,Point2,System.Double,System.Collections.Generic.IDictionary{System.Type,Core2D.Editor.Bounds.IBounds})
+  href: api/Core2D.Editor.Bounds.Shapes.BoundsLine.html#Core2D_Editor_Bounds_Shapes_BoundsLine_Contains_Core2D_Shapes_IBaseShape_Point2_System_Double_System_Collections_Generic_IDictionary_System_Type_Core2D_Editor_IBounds__
+  commentId: M:Core2D.Editor.Bounds.Shapes.BoundsLine.Contains(Core2D.Shapes.IBaseShape,Point2,System.Double,System.Collections.Generic.IDictionary{System.Type,Core2D.Editor.IBounds})
   name.vb: Contains(IBaseShape, Point2, Double, IDictionary(Of Type, IBounds))
-  fullName: Core2D.Editor.Bounds.Shapes.BoundsLine.Contains(Core2D.Shapes.IBaseShape, Point2, System.Double, System.Collections.Generic.IDictionary<System.Type, Core2D.Editor.Bounds.IBounds>)
-  fullName.vb: Core2D.Editor.Bounds.Shapes.BoundsLine.Contains(Core2D.Shapes.IBaseShape, Point2, System.Double, System.Collections.Generic.IDictionary(Of System.Type, Core2D.Editor.Bounds.IBounds))
+  fullName: Core2D.Editor.Bounds.Shapes.BoundsLine.Contains(Core2D.Shapes.IBaseShape, Point2, System.Double, System.Collections.Generic.IDictionary<System.Type, Core2D.Editor.IBounds>)
+  fullName.vb: Core2D.Editor.Bounds.Shapes.BoundsLine.Contains(Core2D.Shapes.IBaseShape, Point2, System.Double, System.Collections.Generic.IDictionary(Of System.Type, Core2D.Editor.IBounds))
   nameWithType: BoundsLine.Contains(IBaseShape, Point2, Double, IDictionary<Type, IBounds>)
   nameWithType.vb: BoundsLine.Contains(IBaseShape, Point2, Double, IDictionary(Of Type, IBounds))
 - uid: Core2D.Editor.Bounds.Shapes.BoundsLine.Contains*
@@ -4367,13 +4161,13 @@ references:
   isSpec: "True"
   fullName: Core2D.Editor.Bounds.Shapes.BoundsLine.Contains
   nameWithType: BoundsLine.Contains
-- uid: Core2D.Editor.Bounds.Shapes.BoundsLine.Overlaps(Core2D.Shapes.IBaseShape,Rect2,System.Double,System.Collections.Generic.IDictionary{System.Type,Core2D.Editor.Bounds.IBounds})
+- uid: Core2D.Editor.Bounds.Shapes.BoundsLine.Overlaps(Core2D.Shapes.IBaseShape,Rect2,System.Double,System.Collections.Generic.IDictionary{System.Type,Core2D.Editor.IBounds})
   name: Overlaps(IBaseShape, Rect2, Double, IDictionary<Type, IBounds>)
-  href: api/Core2D.Editor.Bounds.Shapes.BoundsLine.html#Core2D_Editor_Bounds_Shapes_BoundsLine_Overlaps_Core2D_Shapes_IBaseShape_Rect2_System_Double_System_Collections_Generic_IDictionary_System_Type_Core2D_Editor_Bounds_IBounds__
-  commentId: M:Core2D.Editor.Bounds.Shapes.BoundsLine.Overlaps(Core2D.Shapes.IBaseShape,Rect2,System.Double,System.Collections.Generic.IDictionary{System.Type,Core2D.Editor.Bounds.IBounds})
+  href: api/Core2D.Editor.Bounds.Shapes.BoundsLine.html#Core2D_Editor_Bounds_Shapes_BoundsLine_Overlaps_Core2D_Shapes_IBaseShape_Rect2_System_Double_System_Collections_Generic_IDictionary_System_Type_Core2D_Editor_IBounds__
+  commentId: M:Core2D.Editor.Bounds.Shapes.BoundsLine.Overlaps(Core2D.Shapes.IBaseShape,Rect2,System.Double,System.Collections.Generic.IDictionary{System.Type,Core2D.Editor.IBounds})
   name.vb: Overlaps(IBaseShape, Rect2, Double, IDictionary(Of Type, IBounds))
-  fullName: Core2D.Editor.Bounds.Shapes.BoundsLine.Overlaps(Core2D.Shapes.IBaseShape, Rect2, System.Double, System.Collections.Generic.IDictionary<System.Type, Core2D.Editor.Bounds.IBounds>)
-  fullName.vb: Core2D.Editor.Bounds.Shapes.BoundsLine.Overlaps(Core2D.Shapes.IBaseShape, Rect2, System.Double, System.Collections.Generic.IDictionary(Of System.Type, Core2D.Editor.Bounds.IBounds))
+  fullName: Core2D.Editor.Bounds.Shapes.BoundsLine.Overlaps(Core2D.Shapes.IBaseShape, Rect2, System.Double, System.Collections.Generic.IDictionary<System.Type, Core2D.Editor.IBounds>)
+  fullName.vb: Core2D.Editor.Bounds.Shapes.BoundsLine.Overlaps(Core2D.Shapes.IBaseShape, Rect2, System.Double, System.Collections.Generic.IDictionary(Of System.Type, Core2D.Editor.IBounds))
   nameWithType: BoundsLine.Overlaps(IBaseShape, Rect2, Double, IDictionary<Type, IBounds>)
   nameWithType.vb: BoundsLine.Overlaps(IBaseShape, Rect2, Double, IDictionary(Of Type, IBounds))
 - uid: Core2D.Editor.Bounds.Shapes.BoundsLine.Overlaps*
@@ -4396,13 +4190,13 @@ references:
   isSpec: "True"
   fullName: Core2D.Editor.Bounds.Shapes.BoundsLine.TargetType
   nameWithType: BoundsLine.TargetType
-- uid: Core2D.Editor.Bounds.Shapes.BoundsLine.TryToGetPoint(Core2D.Shapes.IBaseShape,Point2,System.Double,System.Collections.Generic.IDictionary{System.Type,Core2D.Editor.Bounds.IBounds})
+- uid: Core2D.Editor.Bounds.Shapes.BoundsLine.TryToGetPoint(Core2D.Shapes.IBaseShape,Point2,System.Double,System.Collections.Generic.IDictionary{System.Type,Core2D.Editor.IBounds})
   name: TryToGetPoint(IBaseShape, Point2, Double, IDictionary<Type, IBounds>)
-  href: api/Core2D.Editor.Bounds.Shapes.BoundsLine.html#Core2D_Editor_Bounds_Shapes_BoundsLine_TryToGetPoint_Core2D_Shapes_IBaseShape_Point2_System_Double_System_Collections_Generic_IDictionary_System_Type_Core2D_Editor_Bounds_IBounds__
-  commentId: M:Core2D.Editor.Bounds.Shapes.BoundsLine.TryToGetPoint(Core2D.Shapes.IBaseShape,Point2,System.Double,System.Collections.Generic.IDictionary{System.Type,Core2D.Editor.Bounds.IBounds})
+  href: api/Core2D.Editor.Bounds.Shapes.BoundsLine.html#Core2D_Editor_Bounds_Shapes_BoundsLine_TryToGetPoint_Core2D_Shapes_IBaseShape_Point2_System_Double_System_Collections_Generic_IDictionary_System_Type_Core2D_Editor_IBounds__
+  commentId: M:Core2D.Editor.Bounds.Shapes.BoundsLine.TryToGetPoint(Core2D.Shapes.IBaseShape,Point2,System.Double,System.Collections.Generic.IDictionary{System.Type,Core2D.Editor.IBounds})
   name.vb: TryToGetPoint(IBaseShape, Point2, Double, IDictionary(Of Type, IBounds))
-  fullName: Core2D.Editor.Bounds.Shapes.BoundsLine.TryToGetPoint(Core2D.Shapes.IBaseShape, Point2, System.Double, System.Collections.Generic.IDictionary<System.Type, Core2D.Editor.Bounds.IBounds>)
-  fullName.vb: Core2D.Editor.Bounds.Shapes.BoundsLine.TryToGetPoint(Core2D.Shapes.IBaseShape, Point2, System.Double, System.Collections.Generic.IDictionary(Of System.Type, Core2D.Editor.Bounds.IBounds))
+  fullName: Core2D.Editor.Bounds.Shapes.BoundsLine.TryToGetPoint(Core2D.Shapes.IBaseShape, Point2, System.Double, System.Collections.Generic.IDictionary<System.Type, Core2D.Editor.IBounds>)
+  fullName.vb: Core2D.Editor.Bounds.Shapes.BoundsLine.TryToGetPoint(Core2D.Shapes.IBaseShape, Point2, System.Double, System.Collections.Generic.IDictionary(Of System.Type, Core2D.Editor.IBounds))
   nameWithType: BoundsLine.TryToGetPoint(IBaseShape, Point2, Double, IDictionary<Type, IBounds>)
   nameWithType.vb: BoundsLine.TryToGetPoint(IBaseShape, Point2, Double, IDictionary(Of Type, IBounds))
 - uid: Core2D.Editor.Bounds.Shapes.BoundsLine.TryToGetPoint*
@@ -4418,13 +4212,13 @@ references:
   commentId: T:Core2D.Editor.Bounds.Shapes.BoundsPath
   fullName: Core2D.Editor.Bounds.Shapes.BoundsPath
   nameWithType: BoundsPath
-- uid: Core2D.Editor.Bounds.Shapes.BoundsPath.Contains(Core2D.Shapes.IBaseShape,Point2,System.Double,System.Collections.Generic.IDictionary{System.Type,Core2D.Editor.Bounds.IBounds})
+- uid: Core2D.Editor.Bounds.Shapes.BoundsPath.Contains(Core2D.Shapes.IBaseShape,Point2,System.Double,System.Collections.Generic.IDictionary{System.Type,Core2D.Editor.IBounds})
   name: Contains(IBaseShape, Point2, Double, IDictionary<Type, IBounds>)
-  href: api/Core2D.Editor.Bounds.Shapes.BoundsPath.html#Core2D_Editor_Bounds_Shapes_BoundsPath_Contains_Core2D_Shapes_IBaseShape_Point2_System_Double_System_Collections_Generic_IDictionary_System_Type_Core2D_Editor_Bounds_IBounds__
-  commentId: M:Core2D.Editor.Bounds.Shapes.BoundsPath.Contains(Core2D.Shapes.IBaseShape,Point2,System.Double,System.Collections.Generic.IDictionary{System.Type,Core2D.Editor.Bounds.IBounds})
+  href: api/Core2D.Editor.Bounds.Shapes.BoundsPath.html#Core2D_Editor_Bounds_Shapes_BoundsPath_Contains_Core2D_Shapes_IBaseShape_Point2_System_Double_System_Collections_Generic_IDictionary_System_Type_Core2D_Editor_IBounds__
+  commentId: M:Core2D.Editor.Bounds.Shapes.BoundsPath.Contains(Core2D.Shapes.IBaseShape,Point2,System.Double,System.Collections.Generic.IDictionary{System.Type,Core2D.Editor.IBounds})
   name.vb: Contains(IBaseShape, Point2, Double, IDictionary(Of Type, IBounds))
-  fullName: Core2D.Editor.Bounds.Shapes.BoundsPath.Contains(Core2D.Shapes.IBaseShape, Point2, System.Double, System.Collections.Generic.IDictionary<System.Type, Core2D.Editor.Bounds.IBounds>)
-  fullName.vb: Core2D.Editor.Bounds.Shapes.BoundsPath.Contains(Core2D.Shapes.IBaseShape, Point2, System.Double, System.Collections.Generic.IDictionary(Of System.Type, Core2D.Editor.Bounds.IBounds))
+  fullName: Core2D.Editor.Bounds.Shapes.BoundsPath.Contains(Core2D.Shapes.IBaseShape, Point2, System.Double, System.Collections.Generic.IDictionary<System.Type, Core2D.Editor.IBounds>)
+  fullName.vb: Core2D.Editor.Bounds.Shapes.BoundsPath.Contains(Core2D.Shapes.IBaseShape, Point2, System.Double, System.Collections.Generic.IDictionary(Of System.Type, Core2D.Editor.IBounds))
   nameWithType: BoundsPath.Contains(IBaseShape, Point2, Double, IDictionary<Type, IBounds>)
   nameWithType.vb: BoundsPath.Contains(IBaseShape, Point2, Double, IDictionary(Of Type, IBounds))
 - uid: Core2D.Editor.Bounds.Shapes.BoundsPath.Contains*
@@ -4434,13 +4228,13 @@ references:
   isSpec: "True"
   fullName: Core2D.Editor.Bounds.Shapes.BoundsPath.Contains
   nameWithType: BoundsPath.Contains
-- uid: Core2D.Editor.Bounds.Shapes.BoundsPath.Overlaps(Core2D.Shapes.IBaseShape,Rect2,System.Double,System.Collections.Generic.IDictionary{System.Type,Core2D.Editor.Bounds.IBounds})
+- uid: Core2D.Editor.Bounds.Shapes.BoundsPath.Overlaps(Core2D.Shapes.IBaseShape,Rect2,System.Double,System.Collections.Generic.IDictionary{System.Type,Core2D.Editor.IBounds})
   name: Overlaps(IBaseShape, Rect2, Double, IDictionary<Type, IBounds>)
-  href: api/Core2D.Editor.Bounds.Shapes.BoundsPath.html#Core2D_Editor_Bounds_Shapes_BoundsPath_Overlaps_Core2D_Shapes_IBaseShape_Rect2_System_Double_System_Collections_Generic_IDictionary_System_Type_Core2D_Editor_Bounds_IBounds__
-  commentId: M:Core2D.Editor.Bounds.Shapes.BoundsPath.Overlaps(Core2D.Shapes.IBaseShape,Rect2,System.Double,System.Collections.Generic.IDictionary{System.Type,Core2D.Editor.Bounds.IBounds})
+  href: api/Core2D.Editor.Bounds.Shapes.BoundsPath.html#Core2D_Editor_Bounds_Shapes_BoundsPath_Overlaps_Core2D_Shapes_IBaseShape_Rect2_System_Double_System_Collections_Generic_IDictionary_System_Type_Core2D_Editor_IBounds__
+  commentId: M:Core2D.Editor.Bounds.Shapes.BoundsPath.Overlaps(Core2D.Shapes.IBaseShape,Rect2,System.Double,System.Collections.Generic.IDictionary{System.Type,Core2D.Editor.IBounds})
   name.vb: Overlaps(IBaseShape, Rect2, Double, IDictionary(Of Type, IBounds))
-  fullName: Core2D.Editor.Bounds.Shapes.BoundsPath.Overlaps(Core2D.Shapes.IBaseShape, Rect2, System.Double, System.Collections.Generic.IDictionary<System.Type, Core2D.Editor.Bounds.IBounds>)
-  fullName.vb: Core2D.Editor.Bounds.Shapes.BoundsPath.Overlaps(Core2D.Shapes.IBaseShape, Rect2, System.Double, System.Collections.Generic.IDictionary(Of System.Type, Core2D.Editor.Bounds.IBounds))
+  fullName: Core2D.Editor.Bounds.Shapes.BoundsPath.Overlaps(Core2D.Shapes.IBaseShape, Rect2, System.Double, System.Collections.Generic.IDictionary<System.Type, Core2D.Editor.IBounds>)
+  fullName.vb: Core2D.Editor.Bounds.Shapes.BoundsPath.Overlaps(Core2D.Shapes.IBaseShape, Rect2, System.Double, System.Collections.Generic.IDictionary(Of System.Type, Core2D.Editor.IBounds))
   nameWithType: BoundsPath.Overlaps(IBaseShape, Rect2, Double, IDictionary<Type, IBounds>)
   nameWithType.vb: BoundsPath.Overlaps(IBaseShape, Rect2, Double, IDictionary(Of Type, IBounds))
 - uid: Core2D.Editor.Bounds.Shapes.BoundsPath.Overlaps*
@@ -4463,13 +4257,13 @@ references:
   isSpec: "True"
   fullName: Core2D.Editor.Bounds.Shapes.BoundsPath.TargetType
   nameWithType: BoundsPath.TargetType
-- uid: Core2D.Editor.Bounds.Shapes.BoundsPath.TryToGetPoint(Core2D.Shapes.IBaseShape,Point2,System.Double,System.Collections.Generic.IDictionary{System.Type,Core2D.Editor.Bounds.IBounds})
+- uid: Core2D.Editor.Bounds.Shapes.BoundsPath.TryToGetPoint(Core2D.Shapes.IBaseShape,Point2,System.Double,System.Collections.Generic.IDictionary{System.Type,Core2D.Editor.IBounds})
   name: TryToGetPoint(IBaseShape, Point2, Double, IDictionary<Type, IBounds>)
-  href: api/Core2D.Editor.Bounds.Shapes.BoundsPath.html#Core2D_Editor_Bounds_Shapes_BoundsPath_TryToGetPoint_Core2D_Shapes_IBaseShape_Point2_System_Double_System_Collections_Generic_IDictionary_System_Type_Core2D_Editor_Bounds_IBounds__
-  commentId: M:Core2D.Editor.Bounds.Shapes.BoundsPath.TryToGetPoint(Core2D.Shapes.IBaseShape,Point2,System.Double,System.Collections.Generic.IDictionary{System.Type,Core2D.Editor.Bounds.IBounds})
+  href: api/Core2D.Editor.Bounds.Shapes.BoundsPath.html#Core2D_Editor_Bounds_Shapes_BoundsPath_TryToGetPoint_Core2D_Shapes_IBaseShape_Point2_System_Double_System_Collections_Generic_IDictionary_System_Type_Core2D_Editor_IBounds__
+  commentId: M:Core2D.Editor.Bounds.Shapes.BoundsPath.TryToGetPoint(Core2D.Shapes.IBaseShape,Point2,System.Double,System.Collections.Generic.IDictionary{System.Type,Core2D.Editor.IBounds})
   name.vb: TryToGetPoint(IBaseShape, Point2, Double, IDictionary(Of Type, IBounds))
-  fullName: Core2D.Editor.Bounds.Shapes.BoundsPath.TryToGetPoint(Core2D.Shapes.IBaseShape, Point2, System.Double, System.Collections.Generic.IDictionary<System.Type, Core2D.Editor.Bounds.IBounds>)
-  fullName.vb: Core2D.Editor.Bounds.Shapes.BoundsPath.TryToGetPoint(Core2D.Shapes.IBaseShape, Point2, System.Double, System.Collections.Generic.IDictionary(Of System.Type, Core2D.Editor.Bounds.IBounds))
+  fullName: Core2D.Editor.Bounds.Shapes.BoundsPath.TryToGetPoint(Core2D.Shapes.IBaseShape, Point2, System.Double, System.Collections.Generic.IDictionary<System.Type, Core2D.Editor.IBounds>)
+  fullName.vb: Core2D.Editor.Bounds.Shapes.BoundsPath.TryToGetPoint(Core2D.Shapes.IBaseShape, Point2, System.Double, System.Collections.Generic.IDictionary(Of System.Type, Core2D.Editor.IBounds))
   nameWithType: BoundsPath.TryToGetPoint(IBaseShape, Point2, Double, IDictionary<Type, IBounds>)
   nameWithType.vb: BoundsPath.TryToGetPoint(IBaseShape, Point2, Double, IDictionary(Of Type, IBounds))
 - uid: Core2D.Editor.Bounds.Shapes.BoundsPath.TryToGetPoint*
@@ -4485,13 +4279,13 @@ references:
   commentId: T:Core2D.Editor.Bounds.Shapes.BoundsPoint
   fullName: Core2D.Editor.Bounds.Shapes.BoundsPoint
   nameWithType: BoundsPoint
-- uid: Core2D.Editor.Bounds.Shapes.BoundsPoint.Contains(Core2D.Shapes.IBaseShape,Point2,System.Double,System.Collections.Generic.IDictionary{System.Type,Core2D.Editor.Bounds.IBounds})
+- uid: Core2D.Editor.Bounds.Shapes.BoundsPoint.Contains(Core2D.Shapes.IBaseShape,Point2,System.Double,System.Collections.Generic.IDictionary{System.Type,Core2D.Editor.IBounds})
   name: Contains(IBaseShape, Point2, Double, IDictionary<Type, IBounds>)
-  href: api/Core2D.Editor.Bounds.Shapes.BoundsPoint.html#Core2D_Editor_Bounds_Shapes_BoundsPoint_Contains_Core2D_Shapes_IBaseShape_Point2_System_Double_System_Collections_Generic_IDictionary_System_Type_Core2D_Editor_Bounds_IBounds__
-  commentId: M:Core2D.Editor.Bounds.Shapes.BoundsPoint.Contains(Core2D.Shapes.IBaseShape,Point2,System.Double,System.Collections.Generic.IDictionary{System.Type,Core2D.Editor.Bounds.IBounds})
+  href: api/Core2D.Editor.Bounds.Shapes.BoundsPoint.html#Core2D_Editor_Bounds_Shapes_BoundsPoint_Contains_Core2D_Shapes_IBaseShape_Point2_System_Double_System_Collections_Generic_IDictionary_System_Type_Core2D_Editor_IBounds__
+  commentId: M:Core2D.Editor.Bounds.Shapes.BoundsPoint.Contains(Core2D.Shapes.IBaseShape,Point2,System.Double,System.Collections.Generic.IDictionary{System.Type,Core2D.Editor.IBounds})
   name.vb: Contains(IBaseShape, Point2, Double, IDictionary(Of Type, IBounds))
-  fullName: Core2D.Editor.Bounds.Shapes.BoundsPoint.Contains(Core2D.Shapes.IBaseShape, Point2, System.Double, System.Collections.Generic.IDictionary<System.Type, Core2D.Editor.Bounds.IBounds>)
-  fullName.vb: Core2D.Editor.Bounds.Shapes.BoundsPoint.Contains(Core2D.Shapes.IBaseShape, Point2, System.Double, System.Collections.Generic.IDictionary(Of System.Type, Core2D.Editor.Bounds.IBounds))
+  fullName: Core2D.Editor.Bounds.Shapes.BoundsPoint.Contains(Core2D.Shapes.IBaseShape, Point2, System.Double, System.Collections.Generic.IDictionary<System.Type, Core2D.Editor.IBounds>)
+  fullName.vb: Core2D.Editor.Bounds.Shapes.BoundsPoint.Contains(Core2D.Shapes.IBaseShape, Point2, System.Double, System.Collections.Generic.IDictionary(Of System.Type, Core2D.Editor.IBounds))
   nameWithType: BoundsPoint.Contains(IBaseShape, Point2, Double, IDictionary<Type, IBounds>)
   nameWithType.vb: BoundsPoint.Contains(IBaseShape, Point2, Double, IDictionary(Of Type, IBounds))
 - uid: Core2D.Editor.Bounds.Shapes.BoundsPoint.Contains*
@@ -4501,13 +4295,13 @@ references:
   isSpec: "True"
   fullName: Core2D.Editor.Bounds.Shapes.BoundsPoint.Contains
   nameWithType: BoundsPoint.Contains
-- uid: Core2D.Editor.Bounds.Shapes.BoundsPoint.Overlaps(Core2D.Shapes.IBaseShape,Rect2,System.Double,System.Collections.Generic.IDictionary{System.Type,Core2D.Editor.Bounds.IBounds})
+- uid: Core2D.Editor.Bounds.Shapes.BoundsPoint.Overlaps(Core2D.Shapes.IBaseShape,Rect2,System.Double,System.Collections.Generic.IDictionary{System.Type,Core2D.Editor.IBounds})
   name: Overlaps(IBaseShape, Rect2, Double, IDictionary<Type, IBounds>)
-  href: api/Core2D.Editor.Bounds.Shapes.BoundsPoint.html#Core2D_Editor_Bounds_Shapes_BoundsPoint_Overlaps_Core2D_Shapes_IBaseShape_Rect2_System_Double_System_Collections_Generic_IDictionary_System_Type_Core2D_Editor_Bounds_IBounds__
-  commentId: M:Core2D.Editor.Bounds.Shapes.BoundsPoint.Overlaps(Core2D.Shapes.IBaseShape,Rect2,System.Double,System.Collections.Generic.IDictionary{System.Type,Core2D.Editor.Bounds.IBounds})
+  href: api/Core2D.Editor.Bounds.Shapes.BoundsPoint.html#Core2D_Editor_Bounds_Shapes_BoundsPoint_Overlaps_Core2D_Shapes_IBaseShape_Rect2_System_Double_System_Collections_Generic_IDictionary_System_Type_Core2D_Editor_IBounds__
+  commentId: M:Core2D.Editor.Bounds.Shapes.BoundsPoint.Overlaps(Core2D.Shapes.IBaseShape,Rect2,System.Double,System.Collections.Generic.IDictionary{System.Type,Core2D.Editor.IBounds})
   name.vb: Overlaps(IBaseShape, Rect2, Double, IDictionary(Of Type, IBounds))
-  fullName: Core2D.Editor.Bounds.Shapes.BoundsPoint.Overlaps(Core2D.Shapes.IBaseShape, Rect2, System.Double, System.Collections.Generic.IDictionary<System.Type, Core2D.Editor.Bounds.IBounds>)
-  fullName.vb: Core2D.Editor.Bounds.Shapes.BoundsPoint.Overlaps(Core2D.Shapes.IBaseShape, Rect2, System.Double, System.Collections.Generic.IDictionary(Of System.Type, Core2D.Editor.Bounds.IBounds))
+  fullName: Core2D.Editor.Bounds.Shapes.BoundsPoint.Overlaps(Core2D.Shapes.IBaseShape, Rect2, System.Double, System.Collections.Generic.IDictionary<System.Type, Core2D.Editor.IBounds>)
+  fullName.vb: Core2D.Editor.Bounds.Shapes.BoundsPoint.Overlaps(Core2D.Shapes.IBaseShape, Rect2, System.Double, System.Collections.Generic.IDictionary(Of System.Type, Core2D.Editor.IBounds))
   nameWithType: BoundsPoint.Overlaps(IBaseShape, Rect2, Double, IDictionary<Type, IBounds>)
   nameWithType.vb: BoundsPoint.Overlaps(IBaseShape, Rect2, Double, IDictionary(Of Type, IBounds))
 - uid: Core2D.Editor.Bounds.Shapes.BoundsPoint.Overlaps*
@@ -4530,13 +4324,13 @@ references:
   isSpec: "True"
   fullName: Core2D.Editor.Bounds.Shapes.BoundsPoint.TargetType
   nameWithType: BoundsPoint.TargetType
-- uid: Core2D.Editor.Bounds.Shapes.BoundsPoint.TryToGetPoint(Core2D.Shapes.IBaseShape,Point2,System.Double,System.Collections.Generic.IDictionary{System.Type,Core2D.Editor.Bounds.IBounds})
+- uid: Core2D.Editor.Bounds.Shapes.BoundsPoint.TryToGetPoint(Core2D.Shapes.IBaseShape,Point2,System.Double,System.Collections.Generic.IDictionary{System.Type,Core2D.Editor.IBounds})
   name: TryToGetPoint(IBaseShape, Point2, Double, IDictionary<Type, IBounds>)
-  href: api/Core2D.Editor.Bounds.Shapes.BoundsPoint.html#Core2D_Editor_Bounds_Shapes_BoundsPoint_TryToGetPoint_Core2D_Shapes_IBaseShape_Point2_System_Double_System_Collections_Generic_IDictionary_System_Type_Core2D_Editor_Bounds_IBounds__
-  commentId: M:Core2D.Editor.Bounds.Shapes.BoundsPoint.TryToGetPoint(Core2D.Shapes.IBaseShape,Point2,System.Double,System.Collections.Generic.IDictionary{System.Type,Core2D.Editor.Bounds.IBounds})
+  href: api/Core2D.Editor.Bounds.Shapes.BoundsPoint.html#Core2D_Editor_Bounds_Shapes_BoundsPoint_TryToGetPoint_Core2D_Shapes_IBaseShape_Point2_System_Double_System_Collections_Generic_IDictionary_System_Type_Core2D_Editor_IBounds__
+  commentId: M:Core2D.Editor.Bounds.Shapes.BoundsPoint.TryToGetPoint(Core2D.Shapes.IBaseShape,Point2,System.Double,System.Collections.Generic.IDictionary{System.Type,Core2D.Editor.IBounds})
   name.vb: TryToGetPoint(IBaseShape, Point2, Double, IDictionary(Of Type, IBounds))
-  fullName: Core2D.Editor.Bounds.Shapes.BoundsPoint.TryToGetPoint(Core2D.Shapes.IBaseShape, Point2, System.Double, System.Collections.Generic.IDictionary<System.Type, Core2D.Editor.Bounds.IBounds>)
-  fullName.vb: Core2D.Editor.Bounds.Shapes.BoundsPoint.TryToGetPoint(Core2D.Shapes.IBaseShape, Point2, System.Double, System.Collections.Generic.IDictionary(Of System.Type, Core2D.Editor.Bounds.IBounds))
+  fullName: Core2D.Editor.Bounds.Shapes.BoundsPoint.TryToGetPoint(Core2D.Shapes.IBaseShape, Point2, System.Double, System.Collections.Generic.IDictionary<System.Type, Core2D.Editor.IBounds>)
+  fullName.vb: Core2D.Editor.Bounds.Shapes.BoundsPoint.TryToGetPoint(Core2D.Shapes.IBaseShape, Point2, System.Double, System.Collections.Generic.IDictionary(Of System.Type, Core2D.Editor.IBounds))
   nameWithType: BoundsPoint.TryToGetPoint(IBaseShape, Point2, Double, IDictionary<Type, IBounds>)
   nameWithType.vb: BoundsPoint.TryToGetPoint(IBaseShape, Point2, Double, IDictionary(Of Type, IBounds))
 - uid: Core2D.Editor.Bounds.Shapes.BoundsPoint.TryToGetPoint*
@@ -4552,13 +4346,13 @@ references:
   commentId: T:Core2D.Editor.Bounds.Shapes.BoundsQuadraticBezier
   fullName: Core2D.Editor.Bounds.Shapes.BoundsQuadraticBezier
   nameWithType: BoundsQuadraticBezier
-- uid: Core2D.Editor.Bounds.Shapes.BoundsQuadraticBezier.Contains(Core2D.Shapes.IBaseShape,Point2,System.Double,System.Collections.Generic.IDictionary{System.Type,Core2D.Editor.Bounds.IBounds})
+- uid: Core2D.Editor.Bounds.Shapes.BoundsQuadraticBezier.Contains(Core2D.Shapes.IBaseShape,Point2,System.Double,System.Collections.Generic.IDictionary{System.Type,Core2D.Editor.IBounds})
   name: Contains(IBaseShape, Point2, Double, IDictionary<Type, IBounds>)
-  href: api/Core2D.Editor.Bounds.Shapes.BoundsQuadraticBezier.html#Core2D_Editor_Bounds_Shapes_BoundsQuadraticBezier_Contains_Core2D_Shapes_IBaseShape_Point2_System_Double_System_Collections_Generic_IDictionary_System_Type_Core2D_Editor_Bounds_IBounds__
-  commentId: M:Core2D.Editor.Bounds.Shapes.BoundsQuadraticBezier.Contains(Core2D.Shapes.IBaseShape,Point2,System.Double,System.Collections.Generic.IDictionary{System.Type,Core2D.Editor.Bounds.IBounds})
+  href: api/Core2D.Editor.Bounds.Shapes.BoundsQuadraticBezier.html#Core2D_Editor_Bounds_Shapes_BoundsQuadraticBezier_Contains_Core2D_Shapes_IBaseShape_Point2_System_Double_System_Collections_Generic_IDictionary_System_Type_Core2D_Editor_IBounds__
+  commentId: M:Core2D.Editor.Bounds.Shapes.BoundsQuadraticBezier.Contains(Core2D.Shapes.IBaseShape,Point2,System.Double,System.Collections.Generic.IDictionary{System.Type,Core2D.Editor.IBounds})
   name.vb: Contains(IBaseShape, Point2, Double, IDictionary(Of Type, IBounds))
-  fullName: Core2D.Editor.Bounds.Shapes.BoundsQuadraticBezier.Contains(Core2D.Shapes.IBaseShape, Point2, System.Double, System.Collections.Generic.IDictionary<System.Type, Core2D.Editor.Bounds.IBounds>)
-  fullName.vb: Core2D.Editor.Bounds.Shapes.BoundsQuadraticBezier.Contains(Core2D.Shapes.IBaseShape, Point2, System.Double, System.Collections.Generic.IDictionary(Of System.Type, Core2D.Editor.Bounds.IBounds))
+  fullName: Core2D.Editor.Bounds.Shapes.BoundsQuadraticBezier.Contains(Core2D.Shapes.IBaseShape, Point2, System.Double, System.Collections.Generic.IDictionary<System.Type, Core2D.Editor.IBounds>)
+  fullName.vb: Core2D.Editor.Bounds.Shapes.BoundsQuadraticBezier.Contains(Core2D.Shapes.IBaseShape, Point2, System.Double, System.Collections.Generic.IDictionary(Of System.Type, Core2D.Editor.IBounds))
   nameWithType: BoundsQuadraticBezier.Contains(IBaseShape, Point2, Double, IDictionary<Type, IBounds>)
   nameWithType.vb: BoundsQuadraticBezier.Contains(IBaseShape, Point2, Double, IDictionary(Of Type, IBounds))
 - uid: Core2D.Editor.Bounds.Shapes.BoundsQuadraticBezier.Contains*
@@ -4568,13 +4362,13 @@ references:
   isSpec: "True"
   fullName: Core2D.Editor.Bounds.Shapes.BoundsQuadraticBezier.Contains
   nameWithType: BoundsQuadraticBezier.Contains
-- uid: Core2D.Editor.Bounds.Shapes.BoundsQuadraticBezier.Overlaps(Core2D.Shapes.IBaseShape,Rect2,System.Double,System.Collections.Generic.IDictionary{System.Type,Core2D.Editor.Bounds.IBounds})
+- uid: Core2D.Editor.Bounds.Shapes.BoundsQuadraticBezier.Overlaps(Core2D.Shapes.IBaseShape,Rect2,System.Double,System.Collections.Generic.IDictionary{System.Type,Core2D.Editor.IBounds})
   name: Overlaps(IBaseShape, Rect2, Double, IDictionary<Type, IBounds>)
-  href: api/Core2D.Editor.Bounds.Shapes.BoundsQuadraticBezier.html#Core2D_Editor_Bounds_Shapes_BoundsQuadraticBezier_Overlaps_Core2D_Shapes_IBaseShape_Rect2_System_Double_System_Collections_Generic_IDictionary_System_Type_Core2D_Editor_Bounds_IBounds__
-  commentId: M:Core2D.Editor.Bounds.Shapes.BoundsQuadraticBezier.Overlaps(Core2D.Shapes.IBaseShape,Rect2,System.Double,System.Collections.Generic.IDictionary{System.Type,Core2D.Editor.Bounds.IBounds})
+  href: api/Core2D.Editor.Bounds.Shapes.BoundsQuadraticBezier.html#Core2D_Editor_Bounds_Shapes_BoundsQuadraticBezier_Overlaps_Core2D_Shapes_IBaseShape_Rect2_System_Double_System_Collections_Generic_IDictionary_System_Type_Core2D_Editor_IBounds__
+  commentId: M:Core2D.Editor.Bounds.Shapes.BoundsQuadraticBezier.Overlaps(Core2D.Shapes.IBaseShape,Rect2,System.Double,System.Collections.Generic.IDictionary{System.Type,Core2D.Editor.IBounds})
   name.vb: Overlaps(IBaseShape, Rect2, Double, IDictionary(Of Type, IBounds))
-  fullName: Core2D.Editor.Bounds.Shapes.BoundsQuadraticBezier.Overlaps(Core2D.Shapes.IBaseShape, Rect2, System.Double, System.Collections.Generic.IDictionary<System.Type, Core2D.Editor.Bounds.IBounds>)
-  fullName.vb: Core2D.Editor.Bounds.Shapes.BoundsQuadraticBezier.Overlaps(Core2D.Shapes.IBaseShape, Rect2, System.Double, System.Collections.Generic.IDictionary(Of System.Type, Core2D.Editor.Bounds.IBounds))
+  fullName: Core2D.Editor.Bounds.Shapes.BoundsQuadraticBezier.Overlaps(Core2D.Shapes.IBaseShape, Rect2, System.Double, System.Collections.Generic.IDictionary<System.Type, Core2D.Editor.IBounds>)
+  fullName.vb: Core2D.Editor.Bounds.Shapes.BoundsQuadraticBezier.Overlaps(Core2D.Shapes.IBaseShape, Rect2, System.Double, System.Collections.Generic.IDictionary(Of System.Type, Core2D.Editor.IBounds))
   nameWithType: BoundsQuadraticBezier.Overlaps(IBaseShape, Rect2, Double, IDictionary<Type, IBounds>)
   nameWithType.vb: BoundsQuadraticBezier.Overlaps(IBaseShape, Rect2, Double, IDictionary(Of Type, IBounds))
 - uid: Core2D.Editor.Bounds.Shapes.BoundsQuadraticBezier.Overlaps*
@@ -4597,13 +4391,13 @@ references:
   isSpec: "True"
   fullName: Core2D.Editor.Bounds.Shapes.BoundsQuadraticBezier.TargetType
   nameWithType: BoundsQuadraticBezier.TargetType
-- uid: Core2D.Editor.Bounds.Shapes.BoundsQuadraticBezier.TryToGetPoint(Core2D.Shapes.IBaseShape,Point2,System.Double,System.Collections.Generic.IDictionary{System.Type,Core2D.Editor.Bounds.IBounds})
+- uid: Core2D.Editor.Bounds.Shapes.BoundsQuadraticBezier.TryToGetPoint(Core2D.Shapes.IBaseShape,Point2,System.Double,System.Collections.Generic.IDictionary{System.Type,Core2D.Editor.IBounds})
   name: TryToGetPoint(IBaseShape, Point2, Double, IDictionary<Type, IBounds>)
-  href: api/Core2D.Editor.Bounds.Shapes.BoundsQuadraticBezier.html#Core2D_Editor_Bounds_Shapes_BoundsQuadraticBezier_TryToGetPoint_Core2D_Shapes_IBaseShape_Point2_System_Double_System_Collections_Generic_IDictionary_System_Type_Core2D_Editor_Bounds_IBounds__
-  commentId: M:Core2D.Editor.Bounds.Shapes.BoundsQuadraticBezier.TryToGetPoint(Core2D.Shapes.IBaseShape,Point2,System.Double,System.Collections.Generic.IDictionary{System.Type,Core2D.Editor.Bounds.IBounds})
+  href: api/Core2D.Editor.Bounds.Shapes.BoundsQuadraticBezier.html#Core2D_Editor_Bounds_Shapes_BoundsQuadraticBezier_TryToGetPoint_Core2D_Shapes_IBaseShape_Point2_System_Double_System_Collections_Generic_IDictionary_System_Type_Core2D_Editor_IBounds__
+  commentId: M:Core2D.Editor.Bounds.Shapes.BoundsQuadraticBezier.TryToGetPoint(Core2D.Shapes.IBaseShape,Point2,System.Double,System.Collections.Generic.IDictionary{System.Type,Core2D.Editor.IBounds})
   name.vb: TryToGetPoint(IBaseShape, Point2, Double, IDictionary(Of Type, IBounds))
-  fullName: Core2D.Editor.Bounds.Shapes.BoundsQuadraticBezier.TryToGetPoint(Core2D.Shapes.IBaseShape, Point2, System.Double, System.Collections.Generic.IDictionary<System.Type, Core2D.Editor.Bounds.IBounds>)
-  fullName.vb: Core2D.Editor.Bounds.Shapes.BoundsQuadraticBezier.TryToGetPoint(Core2D.Shapes.IBaseShape, Point2, System.Double, System.Collections.Generic.IDictionary(Of System.Type, Core2D.Editor.Bounds.IBounds))
+  fullName: Core2D.Editor.Bounds.Shapes.BoundsQuadraticBezier.TryToGetPoint(Core2D.Shapes.IBaseShape, Point2, System.Double, System.Collections.Generic.IDictionary<System.Type, Core2D.Editor.IBounds>)
+  fullName.vb: Core2D.Editor.Bounds.Shapes.BoundsQuadraticBezier.TryToGetPoint(Core2D.Shapes.IBaseShape, Point2, System.Double, System.Collections.Generic.IDictionary(Of System.Type, Core2D.Editor.IBounds))
   nameWithType: BoundsQuadraticBezier.TryToGetPoint(IBaseShape, Point2, Double, IDictionary<Type, IBounds>)
   nameWithType.vb: BoundsQuadraticBezier.TryToGetPoint(IBaseShape, Point2, Double, IDictionary(Of Type, IBounds))
 - uid: Core2D.Editor.Bounds.Shapes.BoundsQuadraticBezier.TryToGetPoint*
@@ -4619,13 +4413,13 @@ references:
   commentId: T:Core2D.Editor.Bounds.Shapes.BoundsRectangle
   fullName: Core2D.Editor.Bounds.Shapes.BoundsRectangle
   nameWithType: BoundsRectangle
-- uid: Core2D.Editor.Bounds.Shapes.BoundsRectangle.Contains(Core2D.Shapes.IBaseShape,Point2,System.Double,System.Collections.Generic.IDictionary{System.Type,Core2D.Editor.Bounds.IBounds})
+- uid: Core2D.Editor.Bounds.Shapes.BoundsRectangle.Contains(Core2D.Shapes.IBaseShape,Point2,System.Double,System.Collections.Generic.IDictionary{System.Type,Core2D.Editor.IBounds})
   name: Contains(IBaseShape, Point2, Double, IDictionary<Type, IBounds>)
-  href: api/Core2D.Editor.Bounds.Shapes.BoundsRectangle.html#Core2D_Editor_Bounds_Shapes_BoundsRectangle_Contains_Core2D_Shapes_IBaseShape_Point2_System_Double_System_Collections_Generic_IDictionary_System_Type_Core2D_Editor_Bounds_IBounds__
-  commentId: M:Core2D.Editor.Bounds.Shapes.BoundsRectangle.Contains(Core2D.Shapes.IBaseShape,Point2,System.Double,System.Collections.Generic.IDictionary{System.Type,Core2D.Editor.Bounds.IBounds})
+  href: api/Core2D.Editor.Bounds.Shapes.BoundsRectangle.html#Core2D_Editor_Bounds_Shapes_BoundsRectangle_Contains_Core2D_Shapes_IBaseShape_Point2_System_Double_System_Collections_Generic_IDictionary_System_Type_Core2D_Editor_IBounds__
+  commentId: M:Core2D.Editor.Bounds.Shapes.BoundsRectangle.Contains(Core2D.Shapes.IBaseShape,Point2,System.Double,System.Collections.Generic.IDictionary{System.Type,Core2D.Editor.IBounds})
   name.vb: Contains(IBaseShape, Point2, Double, IDictionary(Of Type, IBounds))
-  fullName: Core2D.Editor.Bounds.Shapes.BoundsRectangle.Contains(Core2D.Shapes.IBaseShape, Point2, System.Double, System.Collections.Generic.IDictionary<System.Type, Core2D.Editor.Bounds.IBounds>)
-  fullName.vb: Core2D.Editor.Bounds.Shapes.BoundsRectangle.Contains(Core2D.Shapes.IBaseShape, Point2, System.Double, System.Collections.Generic.IDictionary(Of System.Type, Core2D.Editor.Bounds.IBounds))
+  fullName: Core2D.Editor.Bounds.Shapes.BoundsRectangle.Contains(Core2D.Shapes.IBaseShape, Point2, System.Double, System.Collections.Generic.IDictionary<System.Type, Core2D.Editor.IBounds>)
+  fullName.vb: Core2D.Editor.Bounds.Shapes.BoundsRectangle.Contains(Core2D.Shapes.IBaseShape, Point2, System.Double, System.Collections.Generic.IDictionary(Of System.Type, Core2D.Editor.IBounds))
   nameWithType: BoundsRectangle.Contains(IBaseShape, Point2, Double, IDictionary<Type, IBounds>)
   nameWithType.vb: BoundsRectangle.Contains(IBaseShape, Point2, Double, IDictionary(Of Type, IBounds))
 - uid: Core2D.Editor.Bounds.Shapes.BoundsRectangle.Contains*
@@ -4635,13 +4429,13 @@ references:
   isSpec: "True"
   fullName: Core2D.Editor.Bounds.Shapes.BoundsRectangle.Contains
   nameWithType: BoundsRectangle.Contains
-- uid: Core2D.Editor.Bounds.Shapes.BoundsRectangle.Overlaps(Core2D.Shapes.IBaseShape,Rect2,System.Double,System.Collections.Generic.IDictionary{System.Type,Core2D.Editor.Bounds.IBounds})
+- uid: Core2D.Editor.Bounds.Shapes.BoundsRectangle.Overlaps(Core2D.Shapes.IBaseShape,Rect2,System.Double,System.Collections.Generic.IDictionary{System.Type,Core2D.Editor.IBounds})
   name: Overlaps(IBaseShape, Rect2, Double, IDictionary<Type, IBounds>)
-  href: api/Core2D.Editor.Bounds.Shapes.BoundsRectangle.html#Core2D_Editor_Bounds_Shapes_BoundsRectangle_Overlaps_Core2D_Shapes_IBaseShape_Rect2_System_Double_System_Collections_Generic_IDictionary_System_Type_Core2D_Editor_Bounds_IBounds__
-  commentId: M:Core2D.Editor.Bounds.Shapes.BoundsRectangle.Overlaps(Core2D.Shapes.IBaseShape,Rect2,System.Double,System.Collections.Generic.IDictionary{System.Type,Core2D.Editor.Bounds.IBounds})
+  href: api/Core2D.Editor.Bounds.Shapes.BoundsRectangle.html#Core2D_Editor_Bounds_Shapes_BoundsRectangle_Overlaps_Core2D_Shapes_IBaseShape_Rect2_System_Double_System_Collections_Generic_IDictionary_System_Type_Core2D_Editor_IBounds__
+  commentId: M:Core2D.Editor.Bounds.Shapes.BoundsRectangle.Overlaps(Core2D.Shapes.IBaseShape,Rect2,System.Double,System.Collections.Generic.IDictionary{System.Type,Core2D.Editor.IBounds})
   name.vb: Overlaps(IBaseShape, Rect2, Double, IDictionary(Of Type, IBounds))
-  fullName: Core2D.Editor.Bounds.Shapes.BoundsRectangle.Overlaps(Core2D.Shapes.IBaseShape, Rect2, System.Double, System.Collections.Generic.IDictionary<System.Type, Core2D.Editor.Bounds.IBounds>)
-  fullName.vb: Core2D.Editor.Bounds.Shapes.BoundsRectangle.Overlaps(Core2D.Shapes.IBaseShape, Rect2, System.Double, System.Collections.Generic.IDictionary(Of System.Type, Core2D.Editor.Bounds.IBounds))
+  fullName: Core2D.Editor.Bounds.Shapes.BoundsRectangle.Overlaps(Core2D.Shapes.IBaseShape, Rect2, System.Double, System.Collections.Generic.IDictionary<System.Type, Core2D.Editor.IBounds>)
+  fullName.vb: Core2D.Editor.Bounds.Shapes.BoundsRectangle.Overlaps(Core2D.Shapes.IBaseShape, Rect2, System.Double, System.Collections.Generic.IDictionary(Of System.Type, Core2D.Editor.IBounds))
   nameWithType: BoundsRectangle.Overlaps(IBaseShape, Rect2, Double, IDictionary<Type, IBounds>)
   nameWithType.vb: BoundsRectangle.Overlaps(IBaseShape, Rect2, Double, IDictionary(Of Type, IBounds))
 - uid: Core2D.Editor.Bounds.Shapes.BoundsRectangle.Overlaps*
@@ -4664,13 +4458,13 @@ references:
   isSpec: "True"
   fullName: Core2D.Editor.Bounds.Shapes.BoundsRectangle.TargetType
   nameWithType: BoundsRectangle.TargetType
-- uid: Core2D.Editor.Bounds.Shapes.BoundsRectangle.TryToGetPoint(Core2D.Shapes.IBaseShape,Point2,System.Double,System.Collections.Generic.IDictionary{System.Type,Core2D.Editor.Bounds.IBounds})
+- uid: Core2D.Editor.Bounds.Shapes.BoundsRectangle.TryToGetPoint(Core2D.Shapes.IBaseShape,Point2,System.Double,System.Collections.Generic.IDictionary{System.Type,Core2D.Editor.IBounds})
   name: TryToGetPoint(IBaseShape, Point2, Double, IDictionary<Type, IBounds>)
-  href: api/Core2D.Editor.Bounds.Shapes.BoundsRectangle.html#Core2D_Editor_Bounds_Shapes_BoundsRectangle_TryToGetPoint_Core2D_Shapes_IBaseShape_Point2_System_Double_System_Collections_Generic_IDictionary_System_Type_Core2D_Editor_Bounds_IBounds__
-  commentId: M:Core2D.Editor.Bounds.Shapes.BoundsRectangle.TryToGetPoint(Core2D.Shapes.IBaseShape,Point2,System.Double,System.Collections.Generic.IDictionary{System.Type,Core2D.Editor.Bounds.IBounds})
+  href: api/Core2D.Editor.Bounds.Shapes.BoundsRectangle.html#Core2D_Editor_Bounds_Shapes_BoundsRectangle_TryToGetPoint_Core2D_Shapes_IBaseShape_Point2_System_Double_System_Collections_Generic_IDictionary_System_Type_Core2D_Editor_IBounds__
+  commentId: M:Core2D.Editor.Bounds.Shapes.BoundsRectangle.TryToGetPoint(Core2D.Shapes.IBaseShape,Point2,System.Double,System.Collections.Generic.IDictionary{System.Type,Core2D.Editor.IBounds})
   name.vb: TryToGetPoint(IBaseShape, Point2, Double, IDictionary(Of Type, IBounds))
-  fullName: Core2D.Editor.Bounds.Shapes.BoundsRectangle.TryToGetPoint(Core2D.Shapes.IBaseShape, Point2, System.Double, System.Collections.Generic.IDictionary<System.Type, Core2D.Editor.Bounds.IBounds>)
-  fullName.vb: Core2D.Editor.Bounds.Shapes.BoundsRectangle.TryToGetPoint(Core2D.Shapes.IBaseShape, Point2, System.Double, System.Collections.Generic.IDictionary(Of System.Type, Core2D.Editor.Bounds.IBounds))
+  fullName: Core2D.Editor.Bounds.Shapes.BoundsRectangle.TryToGetPoint(Core2D.Shapes.IBaseShape, Point2, System.Double, System.Collections.Generic.IDictionary<System.Type, Core2D.Editor.IBounds>)
+  fullName.vb: Core2D.Editor.Bounds.Shapes.BoundsRectangle.TryToGetPoint(Core2D.Shapes.IBaseShape, Point2, System.Double, System.Collections.Generic.IDictionary(Of System.Type, Core2D.Editor.IBounds))
   nameWithType: BoundsRectangle.TryToGetPoint(IBaseShape, Point2, Double, IDictionary<Type, IBounds>)
   nameWithType.vb: BoundsRectangle.TryToGetPoint(IBaseShape, Point2, Double, IDictionary(Of Type, IBounds))
 - uid: Core2D.Editor.Bounds.Shapes.BoundsRectangle.TryToGetPoint*
@@ -4686,13 +4480,13 @@ references:
   commentId: T:Core2D.Editor.Bounds.Shapes.BoundsText
   fullName: Core2D.Editor.Bounds.Shapes.BoundsText
   nameWithType: BoundsText
-- uid: Core2D.Editor.Bounds.Shapes.BoundsText.Contains(Core2D.Shapes.IBaseShape,Point2,System.Double,System.Collections.Generic.IDictionary{System.Type,Core2D.Editor.Bounds.IBounds})
+- uid: Core2D.Editor.Bounds.Shapes.BoundsText.Contains(Core2D.Shapes.IBaseShape,Point2,System.Double,System.Collections.Generic.IDictionary{System.Type,Core2D.Editor.IBounds})
   name: Contains(IBaseShape, Point2, Double, IDictionary<Type, IBounds>)
-  href: api/Core2D.Editor.Bounds.Shapes.BoundsText.html#Core2D_Editor_Bounds_Shapes_BoundsText_Contains_Core2D_Shapes_IBaseShape_Point2_System_Double_System_Collections_Generic_IDictionary_System_Type_Core2D_Editor_Bounds_IBounds__
-  commentId: M:Core2D.Editor.Bounds.Shapes.BoundsText.Contains(Core2D.Shapes.IBaseShape,Point2,System.Double,System.Collections.Generic.IDictionary{System.Type,Core2D.Editor.Bounds.IBounds})
+  href: api/Core2D.Editor.Bounds.Shapes.BoundsText.html#Core2D_Editor_Bounds_Shapes_BoundsText_Contains_Core2D_Shapes_IBaseShape_Point2_System_Double_System_Collections_Generic_IDictionary_System_Type_Core2D_Editor_IBounds__
+  commentId: M:Core2D.Editor.Bounds.Shapes.BoundsText.Contains(Core2D.Shapes.IBaseShape,Point2,System.Double,System.Collections.Generic.IDictionary{System.Type,Core2D.Editor.IBounds})
   name.vb: Contains(IBaseShape, Point2, Double, IDictionary(Of Type, IBounds))
-  fullName: Core2D.Editor.Bounds.Shapes.BoundsText.Contains(Core2D.Shapes.IBaseShape, Point2, System.Double, System.Collections.Generic.IDictionary<System.Type, Core2D.Editor.Bounds.IBounds>)
-  fullName.vb: Core2D.Editor.Bounds.Shapes.BoundsText.Contains(Core2D.Shapes.IBaseShape, Point2, System.Double, System.Collections.Generic.IDictionary(Of System.Type, Core2D.Editor.Bounds.IBounds))
+  fullName: Core2D.Editor.Bounds.Shapes.BoundsText.Contains(Core2D.Shapes.IBaseShape, Point2, System.Double, System.Collections.Generic.IDictionary<System.Type, Core2D.Editor.IBounds>)
+  fullName.vb: Core2D.Editor.Bounds.Shapes.BoundsText.Contains(Core2D.Shapes.IBaseShape, Point2, System.Double, System.Collections.Generic.IDictionary(Of System.Type, Core2D.Editor.IBounds))
   nameWithType: BoundsText.Contains(IBaseShape, Point2, Double, IDictionary<Type, IBounds>)
   nameWithType.vb: BoundsText.Contains(IBaseShape, Point2, Double, IDictionary(Of Type, IBounds))
 - uid: Core2D.Editor.Bounds.Shapes.BoundsText.Contains*
@@ -4702,13 +4496,13 @@ references:
   isSpec: "True"
   fullName: Core2D.Editor.Bounds.Shapes.BoundsText.Contains
   nameWithType: BoundsText.Contains
-- uid: Core2D.Editor.Bounds.Shapes.BoundsText.Overlaps(Core2D.Shapes.IBaseShape,Rect2,System.Double,System.Collections.Generic.IDictionary{System.Type,Core2D.Editor.Bounds.IBounds})
+- uid: Core2D.Editor.Bounds.Shapes.BoundsText.Overlaps(Core2D.Shapes.IBaseShape,Rect2,System.Double,System.Collections.Generic.IDictionary{System.Type,Core2D.Editor.IBounds})
   name: Overlaps(IBaseShape, Rect2, Double, IDictionary<Type, IBounds>)
-  href: api/Core2D.Editor.Bounds.Shapes.BoundsText.html#Core2D_Editor_Bounds_Shapes_BoundsText_Overlaps_Core2D_Shapes_IBaseShape_Rect2_System_Double_System_Collections_Generic_IDictionary_System_Type_Core2D_Editor_Bounds_IBounds__
-  commentId: M:Core2D.Editor.Bounds.Shapes.BoundsText.Overlaps(Core2D.Shapes.IBaseShape,Rect2,System.Double,System.Collections.Generic.IDictionary{System.Type,Core2D.Editor.Bounds.IBounds})
+  href: api/Core2D.Editor.Bounds.Shapes.BoundsText.html#Core2D_Editor_Bounds_Shapes_BoundsText_Overlaps_Core2D_Shapes_IBaseShape_Rect2_System_Double_System_Collections_Generic_IDictionary_System_Type_Core2D_Editor_IBounds__
+  commentId: M:Core2D.Editor.Bounds.Shapes.BoundsText.Overlaps(Core2D.Shapes.IBaseShape,Rect2,System.Double,System.Collections.Generic.IDictionary{System.Type,Core2D.Editor.IBounds})
   name.vb: Overlaps(IBaseShape, Rect2, Double, IDictionary(Of Type, IBounds))
-  fullName: Core2D.Editor.Bounds.Shapes.BoundsText.Overlaps(Core2D.Shapes.IBaseShape, Rect2, System.Double, System.Collections.Generic.IDictionary<System.Type, Core2D.Editor.Bounds.IBounds>)
-  fullName.vb: Core2D.Editor.Bounds.Shapes.BoundsText.Overlaps(Core2D.Shapes.IBaseShape, Rect2, System.Double, System.Collections.Generic.IDictionary(Of System.Type, Core2D.Editor.Bounds.IBounds))
+  fullName: Core2D.Editor.Bounds.Shapes.BoundsText.Overlaps(Core2D.Shapes.IBaseShape, Rect2, System.Double, System.Collections.Generic.IDictionary<System.Type, Core2D.Editor.IBounds>)
+  fullName.vb: Core2D.Editor.Bounds.Shapes.BoundsText.Overlaps(Core2D.Shapes.IBaseShape, Rect2, System.Double, System.Collections.Generic.IDictionary(Of System.Type, Core2D.Editor.IBounds))
   nameWithType: BoundsText.Overlaps(IBaseShape, Rect2, Double, IDictionary<Type, IBounds>)
   nameWithType.vb: BoundsText.Overlaps(IBaseShape, Rect2, Double, IDictionary(Of Type, IBounds))
 - uid: Core2D.Editor.Bounds.Shapes.BoundsText.Overlaps*
@@ -4731,13 +4525,13 @@ references:
   isSpec: "True"
   fullName: Core2D.Editor.Bounds.Shapes.BoundsText.TargetType
   nameWithType: BoundsText.TargetType
-- uid: Core2D.Editor.Bounds.Shapes.BoundsText.TryToGetPoint(Core2D.Shapes.IBaseShape,Point2,System.Double,System.Collections.Generic.IDictionary{System.Type,Core2D.Editor.Bounds.IBounds})
+- uid: Core2D.Editor.Bounds.Shapes.BoundsText.TryToGetPoint(Core2D.Shapes.IBaseShape,Point2,System.Double,System.Collections.Generic.IDictionary{System.Type,Core2D.Editor.IBounds})
   name: TryToGetPoint(IBaseShape, Point2, Double, IDictionary<Type, IBounds>)
-  href: api/Core2D.Editor.Bounds.Shapes.BoundsText.html#Core2D_Editor_Bounds_Shapes_BoundsText_TryToGetPoint_Core2D_Shapes_IBaseShape_Point2_System_Double_System_Collections_Generic_IDictionary_System_Type_Core2D_Editor_Bounds_IBounds__
-  commentId: M:Core2D.Editor.Bounds.Shapes.BoundsText.TryToGetPoint(Core2D.Shapes.IBaseShape,Point2,System.Double,System.Collections.Generic.IDictionary{System.Type,Core2D.Editor.Bounds.IBounds})
+  href: api/Core2D.Editor.Bounds.Shapes.BoundsText.html#Core2D_Editor_Bounds_Shapes_BoundsText_TryToGetPoint_Core2D_Shapes_IBaseShape_Point2_System_Double_System_Collections_Generic_IDictionary_System_Type_Core2D_Editor_IBounds__
+  commentId: M:Core2D.Editor.Bounds.Shapes.BoundsText.TryToGetPoint(Core2D.Shapes.IBaseShape,Point2,System.Double,System.Collections.Generic.IDictionary{System.Type,Core2D.Editor.IBounds})
   name.vb: TryToGetPoint(IBaseShape, Point2, Double, IDictionary(Of Type, IBounds))
-  fullName: Core2D.Editor.Bounds.Shapes.BoundsText.TryToGetPoint(Core2D.Shapes.IBaseShape, Point2, System.Double, System.Collections.Generic.IDictionary<System.Type, Core2D.Editor.Bounds.IBounds>)
-  fullName.vb: Core2D.Editor.Bounds.Shapes.BoundsText.TryToGetPoint(Core2D.Shapes.IBaseShape, Point2, System.Double, System.Collections.Generic.IDictionary(Of System.Type, Core2D.Editor.Bounds.IBounds))
+  fullName: Core2D.Editor.Bounds.Shapes.BoundsText.TryToGetPoint(Core2D.Shapes.IBaseShape, Point2, System.Double, System.Collections.Generic.IDictionary<System.Type, Core2D.Editor.IBounds>)
+  fullName.vb: Core2D.Editor.Bounds.Shapes.BoundsText.TryToGetPoint(Core2D.Shapes.IBaseShape, Point2, System.Double, System.Collections.Generic.IDictionary(Of System.Type, Core2D.Editor.IBounds))
   nameWithType: BoundsText.TryToGetPoint(IBaseShape, Point2, Double, IDictionary<Type, IBounds>)
   nameWithType.vb: BoundsText.TryToGetPoint(IBaseShape, Point2, Double, IDictionary(Of Type, IBounds))
 - uid: Core2D.Editor.Bounds.Shapes.BoundsText.TryToGetPoint*
@@ -5791,6 +5585,73 @@ references:
   fullName: Core2D.Editor.Factories.ShapeFactory.Core2D.IShapeFactory.Text
   nameWithType: ShapeFactory.IShapeFactory.Text
   nameWithType.vb: ShapeFactory.Core2D.IShapeFactory.Text
+- uid: Core2D.Editor.IBounds
+  name: IBounds
+  href: api/Core2D.Editor.IBounds.html
+  commentId: T:Core2D.Editor.IBounds
+  fullName: Core2D.Editor.IBounds
+  nameWithType: IBounds
+- uid: Core2D.Editor.IBounds.Contains(Core2D.Shapes.IBaseShape,Point2,System.Double,System.Collections.Generic.IDictionary{System.Type,Core2D.Editor.IBounds})
+  name: Contains(IBaseShape, Point2, Double, IDictionary<Type, IBounds>)
+  href: api/Core2D.Editor.IBounds.html#Core2D_Editor_IBounds_Contains_Core2D_Shapes_IBaseShape_Point2_System_Double_System_Collections_Generic_IDictionary_System_Type_Core2D_Editor_IBounds__
+  commentId: M:Core2D.Editor.IBounds.Contains(Core2D.Shapes.IBaseShape,Point2,System.Double,System.Collections.Generic.IDictionary{System.Type,Core2D.Editor.IBounds})
+  name.vb: Contains(IBaseShape, Point2, Double, IDictionary(Of Type, IBounds))
+  fullName: Core2D.Editor.IBounds.Contains(Core2D.Shapes.IBaseShape, Point2, System.Double, System.Collections.Generic.IDictionary<System.Type, Core2D.Editor.IBounds>)
+  fullName.vb: Core2D.Editor.IBounds.Contains(Core2D.Shapes.IBaseShape, Point2, System.Double, System.Collections.Generic.IDictionary(Of System.Type, Core2D.Editor.IBounds))
+  nameWithType: IBounds.Contains(IBaseShape, Point2, Double, IDictionary<Type, IBounds>)
+  nameWithType.vb: IBounds.Contains(IBaseShape, Point2, Double, IDictionary(Of Type, IBounds))
+- uid: Core2D.Editor.IBounds.Contains*
+  name: Contains
+  href: api/Core2D.Editor.IBounds.html#Core2D_Editor_IBounds_Contains_
+  commentId: Overload:Core2D.Editor.IBounds.Contains
+  isSpec: "True"
+  fullName: Core2D.Editor.IBounds.Contains
+  nameWithType: IBounds.Contains
+- uid: Core2D.Editor.IBounds.Overlaps(Core2D.Shapes.IBaseShape,Rect2,System.Double,System.Collections.Generic.IDictionary{System.Type,Core2D.Editor.IBounds})
+  name: Overlaps(IBaseShape, Rect2, Double, IDictionary<Type, IBounds>)
+  href: api/Core2D.Editor.IBounds.html#Core2D_Editor_IBounds_Overlaps_Core2D_Shapes_IBaseShape_Rect2_System_Double_System_Collections_Generic_IDictionary_System_Type_Core2D_Editor_IBounds__
+  commentId: M:Core2D.Editor.IBounds.Overlaps(Core2D.Shapes.IBaseShape,Rect2,System.Double,System.Collections.Generic.IDictionary{System.Type,Core2D.Editor.IBounds})
+  name.vb: Overlaps(IBaseShape, Rect2, Double, IDictionary(Of Type, IBounds))
+  fullName: Core2D.Editor.IBounds.Overlaps(Core2D.Shapes.IBaseShape, Rect2, System.Double, System.Collections.Generic.IDictionary<System.Type, Core2D.Editor.IBounds>)
+  fullName.vb: Core2D.Editor.IBounds.Overlaps(Core2D.Shapes.IBaseShape, Rect2, System.Double, System.Collections.Generic.IDictionary(Of System.Type, Core2D.Editor.IBounds))
+  nameWithType: IBounds.Overlaps(IBaseShape, Rect2, Double, IDictionary<Type, IBounds>)
+  nameWithType.vb: IBounds.Overlaps(IBaseShape, Rect2, Double, IDictionary(Of Type, IBounds))
+- uid: Core2D.Editor.IBounds.Overlaps*
+  name: Overlaps
+  href: api/Core2D.Editor.IBounds.html#Core2D_Editor_IBounds_Overlaps_
+  commentId: Overload:Core2D.Editor.IBounds.Overlaps
+  isSpec: "True"
+  fullName: Core2D.Editor.IBounds.Overlaps
+  nameWithType: IBounds.Overlaps
+- uid: Core2D.Editor.IBounds.TargetType
+  name: TargetType
+  href: api/Core2D.Editor.IBounds.html#Core2D_Editor_IBounds_TargetType
+  commentId: P:Core2D.Editor.IBounds.TargetType
+  fullName: Core2D.Editor.IBounds.TargetType
+  nameWithType: IBounds.TargetType
+- uid: Core2D.Editor.IBounds.TargetType*
+  name: TargetType
+  href: api/Core2D.Editor.IBounds.html#Core2D_Editor_IBounds_TargetType_
+  commentId: Overload:Core2D.Editor.IBounds.TargetType
+  isSpec: "True"
+  fullName: Core2D.Editor.IBounds.TargetType
+  nameWithType: IBounds.TargetType
+- uid: Core2D.Editor.IBounds.TryToGetPoint(Core2D.Shapes.IBaseShape,Point2,System.Double,System.Collections.Generic.IDictionary{System.Type,Core2D.Editor.IBounds})
+  name: TryToGetPoint(IBaseShape, Point2, Double, IDictionary<Type, IBounds>)
+  href: api/Core2D.Editor.IBounds.html#Core2D_Editor_IBounds_TryToGetPoint_Core2D_Shapes_IBaseShape_Point2_System_Double_System_Collections_Generic_IDictionary_System_Type_Core2D_Editor_IBounds__
+  commentId: M:Core2D.Editor.IBounds.TryToGetPoint(Core2D.Shapes.IBaseShape,Point2,System.Double,System.Collections.Generic.IDictionary{System.Type,Core2D.Editor.IBounds})
+  name.vb: TryToGetPoint(IBaseShape, Point2, Double, IDictionary(Of Type, IBounds))
+  fullName: Core2D.Editor.IBounds.TryToGetPoint(Core2D.Shapes.IBaseShape, Point2, System.Double, System.Collections.Generic.IDictionary<System.Type, Core2D.Editor.IBounds>)
+  fullName.vb: Core2D.Editor.IBounds.TryToGetPoint(Core2D.Shapes.IBaseShape, Point2, System.Double, System.Collections.Generic.IDictionary(Of System.Type, Core2D.Editor.IBounds))
+  nameWithType: IBounds.TryToGetPoint(IBaseShape, Point2, Double, IDictionary<Type, IBounds>)
+  nameWithType.vb: IBounds.TryToGetPoint(IBaseShape, Point2, Double, IDictionary(Of Type, IBounds))
+- uid: Core2D.Editor.IBounds.TryToGetPoint*
+  name: TryToGetPoint
+  href: api/Core2D.Editor.IBounds.html#Core2D_Editor_IBounds_TryToGetPoint_
+  commentId: Overload:Core2D.Editor.IBounds.TryToGetPoint
+  isSpec: "True"
+  fullName: Core2D.Editor.IBounds.TryToGetPoint
+  nameWithType: IBounds.TryToGetPoint
 - uid: Core2D.Editor.IDecorator
   name: IDecorator
   href: api/Core2D.Editor.IDecorator.html
@@ -5984,6 +5845,127 @@ references:
   commentId: T:Core2D.Editor.IEditorTool
   fullName: Core2D.Editor.IEditorTool
   nameWithType: IEditorTool
+- uid: Core2D.Editor.IHitTest
+  name: IHitTest
+  href: api/Core2D.Editor.IHitTest.html
+  commentId: T:Core2D.Editor.IHitTest
+  fullName: Core2D.Editor.IHitTest
+  nameWithType: IHitTest
+- uid: Core2D.Editor.IHitTest.Contains(Core2D.Shapes.IBaseShape,Point2,System.Double)
+  name: Contains(IBaseShape, Point2, Double)
+  href: api/Core2D.Editor.IHitTest.html#Core2D_Editor_IHitTest_Contains_Core2D_Shapes_IBaseShape_Point2_System_Double_
+  commentId: M:Core2D.Editor.IHitTest.Contains(Core2D.Shapes.IBaseShape,Point2,System.Double)
+  fullName: Core2D.Editor.IHitTest.Contains(Core2D.Shapes.IBaseShape, Point2, System.Double)
+  nameWithType: IHitTest.Contains(IBaseShape, Point2, Double)
+- uid: Core2D.Editor.IHitTest.Contains*
+  name: Contains
+  href: api/Core2D.Editor.IHitTest.html#Core2D_Editor_IHitTest_Contains_
+  commentId: Overload:Core2D.Editor.IHitTest.Contains
+  isSpec: "True"
+  fullName: Core2D.Editor.IHitTest.Contains
+  nameWithType: IHitTest.Contains
+- uid: Core2D.Editor.IHitTest.Overlaps(Core2D.Shapes.IBaseShape,Rect2,System.Double)
+  name: Overlaps(IBaseShape, Rect2, Double)
+  href: api/Core2D.Editor.IHitTest.html#Core2D_Editor_IHitTest_Overlaps_Core2D_Shapes_IBaseShape_Rect2_System_Double_
+  commentId: M:Core2D.Editor.IHitTest.Overlaps(Core2D.Shapes.IBaseShape,Rect2,System.Double)
+  fullName: Core2D.Editor.IHitTest.Overlaps(Core2D.Shapes.IBaseShape, Rect2, System.Double)
+  nameWithType: IHitTest.Overlaps(IBaseShape, Rect2, Double)
+- uid: Core2D.Editor.IHitTest.Overlaps*
+  name: Overlaps
+  href: api/Core2D.Editor.IHitTest.html#Core2D_Editor_IHitTest_Overlaps_
+  commentId: Overload:Core2D.Editor.IHitTest.Overlaps
+  isSpec: "True"
+  fullName: Core2D.Editor.IHitTest.Overlaps
+  nameWithType: IHitTest.Overlaps
+- uid: Core2D.Editor.IHitTest.Register(Core2D.Editor.IBounds)
+  name: Register(IBounds)
+  href: api/Core2D.Editor.IHitTest.html#Core2D_Editor_IHitTest_Register_Core2D_Editor_IBounds_
+  commentId: M:Core2D.Editor.IHitTest.Register(Core2D.Editor.IBounds)
+  fullName: Core2D.Editor.IHitTest.Register(Core2D.Editor.IBounds)
+  nameWithType: IHitTest.Register(IBounds)
+- uid: Core2D.Editor.IHitTest.Register(System.Collections.Generic.IEnumerable{Core2D.Editor.IBounds})
+  name: Register(IEnumerable<IBounds>)
+  href: api/Core2D.Editor.IHitTest.html#Core2D_Editor_IHitTest_Register_System_Collections_Generic_IEnumerable_Core2D_Editor_IBounds__
+  commentId: M:Core2D.Editor.IHitTest.Register(System.Collections.Generic.IEnumerable{Core2D.Editor.IBounds})
+  name.vb: Register(IEnumerable(Of IBounds))
+  fullName: Core2D.Editor.IHitTest.Register(System.Collections.Generic.IEnumerable<Core2D.Editor.IBounds>)
+  fullName.vb: Core2D.Editor.IHitTest.Register(System.Collections.Generic.IEnumerable(Of Core2D.Editor.IBounds))
+  nameWithType: IHitTest.Register(IEnumerable<IBounds>)
+  nameWithType.vb: IHitTest.Register(IEnumerable(Of IBounds))
+- uid: Core2D.Editor.IHitTest.Register*
+  name: Register
+  href: api/Core2D.Editor.IHitTest.html#Core2D_Editor_IHitTest_Register_
+  commentId: Overload:Core2D.Editor.IHitTest.Register
+  isSpec: "True"
+  fullName: Core2D.Editor.IHitTest.Register
+  nameWithType: IHitTest.Register
+- uid: Core2D.Editor.IHitTest.Registered
+  name: Registered
+  href: api/Core2D.Editor.IHitTest.html#Core2D_Editor_IHitTest_Registered
+  commentId: P:Core2D.Editor.IHitTest.Registered
+  fullName: Core2D.Editor.IHitTest.Registered
+  nameWithType: IHitTest.Registered
+- uid: Core2D.Editor.IHitTest.Registered*
+  name: Registered
+  href: api/Core2D.Editor.IHitTest.html#Core2D_Editor_IHitTest_Registered_
+  commentId: Overload:Core2D.Editor.IHitTest.Registered
+  isSpec: "True"
+  fullName: Core2D.Editor.IHitTest.Registered
+  nameWithType: IHitTest.Registered
+- uid: Core2D.Editor.IHitTest.TryToGetPoint(Core2D.Shapes.IBaseShape,Point2,System.Double)
+  name: TryToGetPoint(IBaseShape, Point2, Double)
+  href: api/Core2D.Editor.IHitTest.html#Core2D_Editor_IHitTest_TryToGetPoint_Core2D_Shapes_IBaseShape_Point2_System_Double_
+  commentId: M:Core2D.Editor.IHitTest.TryToGetPoint(Core2D.Shapes.IBaseShape,Point2,System.Double)
+  fullName: Core2D.Editor.IHitTest.TryToGetPoint(Core2D.Shapes.IBaseShape, Point2, System.Double)
+  nameWithType: IHitTest.TryToGetPoint(IBaseShape, Point2, Double)
+- uid: Core2D.Editor.IHitTest.TryToGetPoint(System.Collections.Generic.IEnumerable{Core2D.Shapes.IBaseShape},Point2,System.Double)
+  name: TryToGetPoint(IEnumerable<IBaseShape>, Point2, Double)
+  href: api/Core2D.Editor.IHitTest.html#Core2D_Editor_IHitTest_TryToGetPoint_System_Collections_Generic_IEnumerable_Core2D_Shapes_IBaseShape__Point2_System_Double_
+  commentId: M:Core2D.Editor.IHitTest.TryToGetPoint(System.Collections.Generic.IEnumerable{Core2D.Shapes.IBaseShape},Point2,System.Double)
+  name.vb: TryToGetPoint(IEnumerable(Of IBaseShape), Point2, Double)
+  fullName: Core2D.Editor.IHitTest.TryToGetPoint(System.Collections.Generic.IEnumerable<Core2D.Shapes.IBaseShape>, Point2, System.Double)
+  fullName.vb: Core2D.Editor.IHitTest.TryToGetPoint(System.Collections.Generic.IEnumerable(Of Core2D.Shapes.IBaseShape), Point2, System.Double)
+  nameWithType: IHitTest.TryToGetPoint(IEnumerable<IBaseShape>, Point2, Double)
+  nameWithType.vb: IHitTest.TryToGetPoint(IEnumerable(Of IBaseShape), Point2, Double)
+- uid: Core2D.Editor.IHitTest.TryToGetPoint*
+  name: TryToGetPoint
+  href: api/Core2D.Editor.IHitTest.html#Core2D_Editor_IHitTest_TryToGetPoint_
+  commentId: Overload:Core2D.Editor.IHitTest.TryToGetPoint
+  isSpec: "True"
+  fullName: Core2D.Editor.IHitTest.TryToGetPoint
+  nameWithType: IHitTest.TryToGetPoint
+- uid: Core2D.Editor.IHitTest.TryToGetShape(System.Collections.Generic.IEnumerable{Core2D.Shapes.IBaseShape},Point2,System.Double)
+  name: TryToGetShape(IEnumerable<IBaseShape>, Point2, Double)
+  href: api/Core2D.Editor.IHitTest.html#Core2D_Editor_IHitTest_TryToGetShape_System_Collections_Generic_IEnumerable_Core2D_Shapes_IBaseShape__Point2_System_Double_
+  commentId: M:Core2D.Editor.IHitTest.TryToGetShape(System.Collections.Generic.IEnumerable{Core2D.Shapes.IBaseShape},Point2,System.Double)
+  name.vb: TryToGetShape(IEnumerable(Of IBaseShape), Point2, Double)
+  fullName: Core2D.Editor.IHitTest.TryToGetShape(System.Collections.Generic.IEnumerable<Core2D.Shapes.IBaseShape>, Point2, System.Double)
+  fullName.vb: Core2D.Editor.IHitTest.TryToGetShape(System.Collections.Generic.IEnumerable(Of Core2D.Shapes.IBaseShape), Point2, System.Double)
+  nameWithType: IHitTest.TryToGetShape(IEnumerable<IBaseShape>, Point2, Double)
+  nameWithType.vb: IHitTest.TryToGetShape(IEnumerable(Of IBaseShape), Point2, Double)
+- uid: Core2D.Editor.IHitTest.TryToGetShape*
+  name: TryToGetShape
+  href: api/Core2D.Editor.IHitTest.html#Core2D_Editor_IHitTest_TryToGetShape_
+  commentId: Overload:Core2D.Editor.IHitTest.TryToGetShape
+  isSpec: "True"
+  fullName: Core2D.Editor.IHitTest.TryToGetShape
+  nameWithType: IHitTest.TryToGetShape
+- uid: Core2D.Editor.IHitTest.TryToGetShapes(System.Collections.Generic.IEnumerable{Core2D.Shapes.IBaseShape},Rect2,System.Double)
+  name: TryToGetShapes(IEnumerable<IBaseShape>, Rect2, Double)
+  href: api/Core2D.Editor.IHitTest.html#Core2D_Editor_IHitTest_TryToGetShapes_System_Collections_Generic_IEnumerable_Core2D_Shapes_IBaseShape__Rect2_System_Double_
+  commentId: M:Core2D.Editor.IHitTest.TryToGetShapes(System.Collections.Generic.IEnumerable{Core2D.Shapes.IBaseShape},Rect2,System.Double)
+  name.vb: TryToGetShapes(IEnumerable(Of IBaseShape), Rect2, Double)
+  fullName: Core2D.Editor.IHitTest.TryToGetShapes(System.Collections.Generic.IEnumerable<Core2D.Shapes.IBaseShape>, Rect2, System.Double)
+  fullName.vb: Core2D.Editor.IHitTest.TryToGetShapes(System.Collections.Generic.IEnumerable(Of Core2D.Shapes.IBaseShape), Rect2, System.Double)
+  nameWithType: IHitTest.TryToGetShapes(IEnumerable<IBaseShape>, Rect2, Double)
+  nameWithType.vb: IHitTest.TryToGetShapes(IEnumerable(Of IBaseShape), Rect2, Double)
+- uid: Core2D.Editor.IHitTest.TryToGetShapes*
+  name: TryToGetShapes
+  href: api/Core2D.Editor.IHitTest.html#Core2D_Editor_IHitTest_TryToGetShapes_
+  commentId: Overload:Core2D.Editor.IHitTest.TryToGetShapes
+  isSpec: "True"
+  fullName: Core2D.Editor.IHitTest.TryToGetShapes
+  nameWithType: IHitTest.TryToGetShapes
 - uid: Core2D.Editor.IPathTool
   name: IPathTool
   href: api/Core2D.Editor.IPathTool.html
