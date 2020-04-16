@@ -6,7 +6,7 @@
     <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
     <EnableDefaultCompileItems>False</EnableDefaultCompileItems>
     <LangVersion>8.0</LangVersion>
-    <IsPackable>TRUE</IsPackable>
+    <IsPackable>True</IsPackable>
     <Nullable>disable</Nullable>
     <NoWarn>$(NoWarn);NU1701</NoWarn>
   </PropertyGroup>
