@@ -380,7 +380,8 @@ namespace Core2D.Editor.Tools.Decorators
             (double x, double y) = args;
             (double sx, double sy) = editor.TryToSnap(args);
 
-            var result = editor.HitTest.TryToGetShape(_handles, new Point2(x, y), editor.Project.Options.HitThreshold / editor.PageState.ZoomX);
+            double radius = editor.Project.Options.HitThreshold / editor.PageState.ZoomX;
+            var result = editor.HitTest.TryToGetShape(_handles, new Point2(x, y), radius);
             if (result != null)
             {
                 _mode = Mode.None;
