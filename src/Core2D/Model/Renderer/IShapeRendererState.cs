@@ -39,6 +39,16 @@ namespace Core2D.Renderer
         IImageCache ImageCache { get; set; }
 
         /// <summary>
+        /// Gets or sets value indicating whether to draw decorators.
+        /// </summary>
+        bool DrawDecorators { get; set; }
+
+        /// <summary>
+        /// Gets or sets value indicating whether to draw points.
+        /// </summary>
+        bool DrawPoints { get; set; }
+
+        /// <summary>
         /// Gets or sets style used to draw points.
         /// </summary>
         IShapeStyle PointStyle { get; set; }
