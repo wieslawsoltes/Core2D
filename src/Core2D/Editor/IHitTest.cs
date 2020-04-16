@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Core2D.Shapes;
 using Spatial;
 
-namespace Core2D.Editor.Bounds
+namespace Core2D.Editor
 {
     public interface IHitTest
     {
