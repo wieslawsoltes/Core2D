@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Core2D.Attributes;
+using Core2D.Input;
 
 namespace Core2D.Editor
 {

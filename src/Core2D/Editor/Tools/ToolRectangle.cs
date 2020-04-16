@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using Core2D.Editor.Input;
 using Core2D.Editor.Tools.Selection;
 using Core2D.Editor.Tools.Settings;
+using Core2D.Input;
 using Core2D.Interfaces;
 using Core2D.Shapes;
 using Core2D.Style;

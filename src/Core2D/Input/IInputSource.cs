@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Core2D.Editor.Input
+namespace Core2D.Input
 {
     /// <summary>
     /// Defines input source contract.

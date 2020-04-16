@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
-using Core2D.Editor.Input;
 using Core2D.Editor.Tools.Path;
 using Core2D.Editor.Tools.Settings;
+using Core2D.Input;
 using Core2D.Interfaces;
 using Core2D.Path;
 using Core2D.Path.Segments;

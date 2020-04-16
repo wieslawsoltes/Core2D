@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Core2D.Editor.Input
+namespace Core2D.Input
 {
     //internal class InputArgsObserver : IObserver<InputArgs>
     //{

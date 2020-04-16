@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Core2D.Editor.Input;
 using Core2D.Editor.Tools.Path.Settings;
 using Core2D.Editor.Tools.Selection;
+using Core2D.Input;
 using Core2D.Interfaces;
 using Core2D.Path.Segments;
 using Core2D.Shapes;

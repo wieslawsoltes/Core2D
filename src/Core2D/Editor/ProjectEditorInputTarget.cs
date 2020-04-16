@@ -1,4 +1,4 @@
-﻿using Core2D.Editor.Input;
+﻿using Core2D.Input;
 
 namespace Core2D.Editor
 {
