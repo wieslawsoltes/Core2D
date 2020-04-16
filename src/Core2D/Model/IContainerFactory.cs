@@ -1,6 +1,6 @@
 ﻿using Core2D.Containers;
 
-namespace Core2D.Interfaces
+namespace Core2D
 {
     /// <summary>
     /// Defines container factory contract.

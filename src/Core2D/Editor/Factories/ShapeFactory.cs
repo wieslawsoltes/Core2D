@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Immutable;
-using Core2D.Interfaces;
+using Core2D;
 using Core2D.Path;
 using Core2D.Renderer;
 using Core2D.Shapes;

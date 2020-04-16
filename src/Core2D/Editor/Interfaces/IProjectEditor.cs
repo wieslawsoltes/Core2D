@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Threading.Tasks;
+using Core2D;
 using Core2D.Containers;
 using Core2D.Data;
 using Core2D.Editor.Bounds;
@@ -8,7 +9,6 @@ using Core2D.Editor.Recent;
 using Core2D.Editor.Tools;
 using Core2D.Editor.Tools.Path;
 using Core2D.Input;
-using Core2D.Interfaces;
 using Core2D.Renderer;
 using Core2D.Scripting;
 using Core2D.Shapes;

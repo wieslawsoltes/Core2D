@@ -1,5 +1,5 @@
-﻿using Core2D.Common.UnitTests;
-using Core2D.Interfaces;
+﻿using Core2D;
+using Core2D.Common.UnitTests;
 using Xunit;
 
 namespace Core2D.Renderer.UnitTests

@@ -11,7 +11,7 @@ using Core2D.Scripting;
 using Core2D.Shapes;
 using Core2D.Style;
 
-namespace Core2D.Interfaces
+namespace Core2D
 {
     /// <summary>
     /// Defines factory contract.

@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using Core2D.Interfaces;
+using Core2D;
 using Xunit;
 
 namespace Core2D.Style.UnitTests

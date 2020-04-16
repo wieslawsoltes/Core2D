@@ -1,5 +1,5 @@
 ﻿
-namespace Core2D.Interfaces
+namespace Core2D
 {
     /// <summary>
     /// Defines json string serializer contract.

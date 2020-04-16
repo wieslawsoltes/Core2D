@@ -1,5 +1,5 @@
 ﻿using System.Linq;
-using Core2D.Interfaces;
+using Core2D;
 using Xunit;
 
 namespace Core2D.UnitTests

@@ -3,7 +3,7 @@ using System.Diagnostics;
 using System.Globalization;
 using Avalonia;
 using Avalonia.Data.Converters;
-using Core2D.Interfaces;
+using Core2D;
 
 namespace Core2D.UI.Converters
 {

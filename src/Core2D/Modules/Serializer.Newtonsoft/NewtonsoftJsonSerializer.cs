@@ -1,5 +1,5 @@
 ﻿using System;
-using Core2D.Interfaces;
+using Core2D;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 

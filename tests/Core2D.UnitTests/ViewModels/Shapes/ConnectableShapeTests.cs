@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
+using Core2D;
 using Core2D.Data;
-using Core2D.Interfaces;
 using Core2D.Renderer;
 using Xunit;
 

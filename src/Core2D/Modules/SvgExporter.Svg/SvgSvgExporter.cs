@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Text;
-using Core2D.Interfaces;
+using Core2D;
 using Core2D.Path;
 using Core2D.Shapes;
 using Core2D.Style;

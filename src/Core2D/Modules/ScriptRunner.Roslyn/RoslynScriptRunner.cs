@@ -1,8 +1,8 @@
 #if !_CORERT
 using System;
 using System.Threading.Tasks;
+using Core2D;
 using Core2D.Editor;
-using Core2D.Interfaces;
 using Microsoft.CodeAnalysis.CSharp.Scripting;
 using Microsoft.CodeAnalysis.Scripting;
 

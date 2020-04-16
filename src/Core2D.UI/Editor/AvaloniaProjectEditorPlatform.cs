@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Linq;
 using Avalonia.Controls;
+using Core2D;
 using Core2D.Containers;
 using Core2D.Data;
 using Core2D.Editor;
-using Core2D.Interfaces;
 using Core2D.SvgExporter.Svg;
 using Core2D.UI.Views;
 using Core2D.XamlExporter.Avalonia;

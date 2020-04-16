@@ -1,6 +1,6 @@
 ﻿using System;
+using Core2D;
 using Core2D.Containers;
-using Core2D.Interfaces;
 using Core2D.Shapes;
 using Core2D.Style;
 using Spatial;

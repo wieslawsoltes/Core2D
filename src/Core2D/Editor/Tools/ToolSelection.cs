@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Core2D;
 using Core2D.Containers;
 using Core2D.Editor.Tools.Decorators;
 using Core2D.Editor.Tools.Settings;
 using Core2D.Input;
-using Core2D.Interfaces;
 using Core2D.Layout;
 using Core2D.Renderer;
 using Core2D.Shapes;

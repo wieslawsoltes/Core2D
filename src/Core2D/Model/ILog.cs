@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Core2D.Interfaces
+namespace Core2D
 {
     /// <summary>
     /// Defines logger contract.

@@ -2,9 +2,9 @@
 using System.IO;
 using System.Linq;
 using System.Text;
+using Core2D;
 using Core2D.Containers;
 using Core2D.Data;
-using Core2D.Interfaces;
 using Core2D.Renderer;
 using Core2D.SvgExporter.Svg;
 

@@ -1,7 +1,7 @@
 ﻿using Core2D.Path;
 using Core2D.Shapes;
 
-namespace Core2D.Interfaces
+namespace Core2D
 {
     /// <summary>
     /// Defines shape factory contract.

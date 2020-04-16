@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 using Avalonia;
-using Core2D.Interfaces;
+using Core2D;
 
 namespace Core2D.UI.Utilities
 {

@@ -1,6 +1,6 @@
 ﻿using System.IO;
 
-namespace Core2D.Interfaces
+namespace Core2D
 {
     /// <summary>
     /// Defines text field reader contract.

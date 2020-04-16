@@ -2,8 +2,8 @@
 using System.IO;
 using System.Linq;
 using System.Text;
+using Core2D;
 using Core2D.Common.UnitTests;
-using Core2D.Interfaces;
 using Xunit;
 
 namespace Core2D.FileSystem.DotNet.UnitTests

@@ -2,7 +2,7 @@
 using Core2D.Renderer;
 using Core2D.Shapes;
 
-namespace Core2D.Interfaces
+namespace Core2D
 {
     /// <summary>
     /// Define svg converter contract.

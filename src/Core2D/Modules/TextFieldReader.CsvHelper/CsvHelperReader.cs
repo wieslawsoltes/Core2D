@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using Core2D;
 using Core2D.Data;
-using Core2D.Interfaces;
 using CSV = CsvHelper;
 
 namespace Core2D.TextFieldReader.CsvHelper

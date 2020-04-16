@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using Core2D;
 using Core2D.Editor;
-using Core2D.Interfaces;
 using Core2D.Shapes;
 using SkiaSharp;
 using Svg.Skia;

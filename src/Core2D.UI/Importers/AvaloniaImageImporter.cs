@@ -2,8 +2,8 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Avalonia.Controls;
+using Core2D;
 using Core2D.Editor;
-using Core2D.Interfaces;
 using Core2D.Renderer;
 using Core2D.UI.Views;
 

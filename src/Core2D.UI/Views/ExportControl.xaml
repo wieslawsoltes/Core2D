@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
              xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
-             xmlns:Interfaces="clr-namespace:Core2D.Interfaces;assembly=Core2D"
+             xmlns:Interfaces="clr-namespace:Core2D;assembly=Core2D"
              xmlns:Designer="clr-namespace:Core2D.Editor.Designer;assembly=Core2D"
              mc:Ignorable="d"
              d:DataContext="{x:Static Designer:DesignerContext.Editor}"

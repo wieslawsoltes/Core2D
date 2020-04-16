@@ -1,5 +1,5 @@
 ﻿using System.Collections.Immutable;
-using Core2D.Interfaces;
+using Core2D;
 using Core2D.Path;
 using Xunit;
 

@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace Core2D.Interfaces
+namespace Core2D
 {
     /// <summary>
     /// Executes code scripts.

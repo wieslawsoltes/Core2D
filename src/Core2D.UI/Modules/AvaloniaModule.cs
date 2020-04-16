@@ -1,6 +1,6 @@
 ﻿using Autofac;
+using Core2D;
 using Core2D.Editor;
-using Core2D.Interfaces;
 using Core2D.ServiceProvider.Autofac;
 using System;
 using System.Reflection;
