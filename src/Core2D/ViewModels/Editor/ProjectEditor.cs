@@ -3164,6 +3164,8 @@ namespace Core2D.Editor
 
                 PageState.SelectedShape = default;
                 layer.Invalidate();
+
+                CurrentTool?.Reset();
             }
 
             if (PageState.SelectedShapes != null && PageState.SelectedShapes.Count > 0)
@@ -3183,6 +3185,8 @@ namespace Core2D.Editor
 
                 PageState.SelectedShapes = default;
                 layer.Invalidate();
+
+                CurrentTool?.Reset();
             }
         }
 
