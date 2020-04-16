@@ -214,9 +214,9 @@ namespace Core2D.Editor.Tools
                 else
                 {
                     _decorator = new BoxDecorator(
+                        _serviceProvider,
                         shapes,
-                        editor.Project.CurrentContainer.WorkingLayer,
-                        editor.Factory);
+                        editor.Project.CurrentContainer.WorkingLayer);
                     _decorator.Show();
                 }
             }
@@ -266,7 +266,14 @@ namespace Core2D.Editor.Tools
 
                         editor.Dehover(editor.Project.CurrentContainer.CurrentLayer);
 
-                        // TODO: Hit-test box decorator.
+                        if (_enableDecorator == true && _decorator != null)
+                        {
+                            bool result = _decorator.HitTest(args);
+                            if (result == true)
+                            {
+                                return;
+                            }
+                        }
 
                         if (isControl == true)
                         {
@@ -517,6 +524,12 @@ namespace Core2D.Editor.Tools
             {
                 case State.None:
                     {
+                        if (_enableDecorator == true && _decorator != null)
+                        {
+                            _decorator.Move(args);
+                            return;
+                        }
+
                         bool isControl = args.Modifier.HasFlag(ModifierFlags.Control);
 
                         if (!isControl)

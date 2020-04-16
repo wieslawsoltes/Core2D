@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using Core2D.Containers;
+using Core2D.Editor.Input;
 using Core2D.Editor.Layout;
 using Core2D.Interfaces;
 using Core2D.Renderer;
 using Core2D.Shapes;
 using Core2D.Style;
+using Spatial;
 
 namespace Core2D.Editor.Tools.Decorators
 {
@@ -15,11 +17,12 @@ namespace Core2D.Editor.Tools.Decorators
     public class BoxDecorator : ObservableObject, IDrawable, IDecorator
     {
         private bool _isVisible;
-        public IList<IBaseShape> _shapes;
+        private readonly IServiceProvider _serviceProvider;
         private IShapeStyle _style;
         private IMatrixObject _transform;
         private bool _isStroked;
         private bool _isFilled;
+        public IList<IBaseShape> _shapes;
         private readonly ILayerContainer _layer;
         private readonly IFactory _factory;
         private readonly double _sizeLarge;
@@ -28,7 +31,7 @@ namespace Core2D.Editor.Tools.Decorators
         private GroupBox _groupBox;
         private readonly IShapeStyle _handleStyle;
         private readonly IShapeStyle _boundsStyle;
-        private readonly IRectangleShape _boundsHandle;
+        private readonly IRectangleShape _moveHandle;
         private readonly ILineShape _rotateLine;
         private readonly IEllipseShape _rotateHandle;
         private readonly IEllipseShape _topLeftHandle;
@@ -78,14 +81,15 @@ namespace Core2D.Editor.Tools.Decorators
         /// <summary>
         /// Initialize new instance of <see cref="BoxDecorator"/> class.
         /// </summary>
-        /// <param name="state">The shape renderer state.</param>
+        /// <param name="serviceProvider">The service provider.</param>
+        /// <param name="shapes">The shapes collection.</param>
         /// <param name="layer">The layer container.</param>
-        /// <param name="factory">The factory.</param>
-        public BoxDecorator(List<IBaseShape> shapes, ILayerContainer layer, IFactory factory)
+        public BoxDecorator(IServiceProvider serviceProvider, List<IBaseShape> shapes, ILayerContainer layer)
         {
+            _serviceProvider = serviceProvider;
             _shapes = shapes;
             _layer = layer;
-            _factory = factory;
+            _factory = _serviceProvider.GetService<IFactory>();
             _sizeLarge = 3.75;
             _sizeSmall = 2.8125;
             _rotateDistance = -16.875;
@@ -95,12 +99,12 @@ namespace Core2D.Editor.Tools.Decorators
             _handleStyle = _factory.CreateShapeStyle("Handle", 255, 0, 191, 255, 255, 255, 255, 255, 2.0);
             _boundsStyle = _factory.CreateShapeStyle("Bounds", 255, 0, 191, 255, 255, 255, 255, 255, 1.0);
 
-            _boundsHandle = _factory.CreateRectangleShape(
+            _moveHandle = _factory.CreateRectangleShape(
                 _groupBox.Bounds.Left,
                 _groupBox.Bounds.Top,
                 _groupBox.Bounds.Right,
                 _groupBox.Bounds.Bottom,
-                _boundsStyle, true, false, name: "_boundsHandle");
+                _boundsStyle, true, false, name: "_moveHandle");
 
             _rotateLine = _factory.CreateLineShape(
                 _groupBox.Bounds.CenterX,
@@ -205,7 +209,7 @@ namespace Core2D.Editor.Tools.Decorators
 
             if (_isVisible)
             {
-                _boundsHandle.Draw(dc, renderer, dx, dy);
+                _moveHandle.Draw(dc, renderer, dx, dy);
                 _rotateLine.Draw(dc, renderer, dx, dy);
                 _rotateHandle.Draw(dc, renderer, dx, dy);
                 _topLeftHandle.Draw(dc, renderer, dx, dy);
@@ -239,10 +243,10 @@ namespace Core2D.Editor.Tools.Decorators
                 _groupBox.Update();
             }
 
-            _boundsHandle.TopLeft.X = _groupBox.Bounds.Left;
-            _boundsHandle.TopLeft.Y = _groupBox.Bounds.Top;
-            _boundsHandle.BottomRight.X = _groupBox.Bounds.Right;
-            _boundsHandle.BottomRight.Y = _groupBox.Bounds.Bottom;
+            _moveHandle.TopLeft.X = _groupBox.Bounds.Left;
+            _moveHandle.TopLeft.Y = _groupBox.Bounds.Top;
+            _moveHandle.BottomRight.X = _groupBox.Bounds.Right;
+            _moveHandle.BottomRight.Y = _groupBox.Bounds.Bottom;
 
             _rotateLine.Start.X = _groupBox.Bounds.CenterX;
             _rotateLine.Start.Y = _groupBox.Bounds.Top;
@@ -300,10 +304,11 @@ namespace Core2D.Editor.Tools.Decorators
         /// <inheritdoc/>
         public void Show()
         {
+            _mode = Mode.None;
             _isVisible = true;
 
             var shapesBuilder = _layer.Shapes.ToBuilder();
-            shapesBuilder.Add(_boundsHandle);
+            shapesBuilder.Add(_moveHandle);
             shapesBuilder.Add(_rotateLine);
             shapesBuilder.Add(_rotateHandle);
             shapesBuilder.Add(_topLeftHandle);
@@ -321,10 +326,11 @@ namespace Core2D.Editor.Tools.Decorators
         /// <inheritdoc/>
         public void Hide()
         {
+            _mode = Mode.None;
             _isVisible = false;
 
             var shapesBuilder = _layer.Shapes.ToBuilder();
-            shapesBuilder.Remove(_boundsHandle);
+            shapesBuilder.Remove(_moveHandle);
             shapesBuilder.Remove(_rotateLine);
             shapesBuilder.Remove(_rotateHandle);
             shapesBuilder.Remove(_topLeftHandle);
@@ -337,6 +343,163 @@ namespace Core2D.Editor.Tools.Decorators
             shapesBuilder.Remove(_rightHandle);
             _layer.Shapes = shapesBuilder.ToImmutable();
             _layer.Invalidate();
+        }
+
+        private Mode _mode = Mode.None;
+        private double _startX;
+        private double _startY;
+        private double _historyX;
+        private double _historyY;
+
+        private enum Mode
+        {
+            None,
+            Move,
+            Rotate,
+            Top,
+            Bottom,
+            Left,
+            Right,
+            TopLeft,
+            TopRight,
+            BottomLeft,
+            BottomRight
+        }
+
+        /// <inheritdoc/>
+        public bool HitTest(InputArgs args)
+        {
+            var editor = _serviceProvider.GetService<IProjectEditor>();
+            (double x, double y) = args;
+            (double sx, double sy) = editor.TryToSnap(args);
+
+            var result = editor.HitTest.TryToGetShape(_shapes, new Point2(x, y), editor.Project.Options.HitThreshold / editor.PageState.ZoomX);
+            if (result != null)
+            {
+                _mode = Mode.None;
+
+                if (result == _moveHandle)
+                {
+                    _mode = Mode.Move;
+                }
+                else if (result == _rotateHandle)
+                {
+                    _mode = Mode.Rotate;
+                }
+                else if (result == _topLeftHandle)
+                {
+                    _mode = Mode.TopLeft;
+                }
+                else if (result == _topRightHandle)
+                {
+                    _mode = Mode.TopRight;
+                }
+                else if (result == _bottomLeftHandle)
+                {
+                    _mode = Mode.BottomLeft;
+                }
+                else if (result == _bottomRightHandle)
+                {
+                    _mode = Mode.BottomRight;
+                }
+                else if (result == _topHandle)
+                {
+                    _mode = Mode.Top;
+                }
+                else if (result == _bottomHandle)
+                {
+                    _mode = Mode.Bottom;
+                }
+                else if (result == _leftHandle)
+                {
+                    _mode = Mode.Left;
+                }
+                else if (result == _rightHandle)
+                {
+                    _mode = Mode.Right;
+                }
+
+                if (_mode != Mode.None)
+                {
+                    _startX = sx;
+                    _startY = sy;
+                    _historyX = _startX;
+                    _historyY = _startY;
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        /// <inheritdoc/>
+        public void Move(InputArgs args)
+        {
+            var editor = _serviceProvider.GetService<IProjectEditor>();
+            (double sx, double sy) = editor.TryToSnap(args);
+            double dx = sx - _startX;
+            double dy = sy - _startY;
+
+            _startX = sx;
+            _startY = sy;
+
+            switch (_mode)
+            {
+                case Mode.None:
+                    break;
+                case Mode.Move:
+                    {
+                        foreach (var shape in _shapes)
+                        {
+                            shape.Move(null, dx, dy);
+                        }
+                    }
+                    break;
+                case Mode.Rotate:
+                    {
+                        // TODO:
+                    }
+                    break;
+                case Mode.Top:
+                    {
+                        // TODO:
+                    }
+                    break;
+                case Mode.Bottom:
+                    {
+                        // TODO:
+                    }
+                    break;
+                case Mode.Left:
+                    {
+                        // TODO:
+                    }
+                    break;
+                case Mode.Right:
+                    {
+                        // TODO:
+                    }
+                    break;
+                case Mode.TopLeft:
+                    {
+                        // TODO:
+                    }
+                    break;
+                case Mode.TopRight:
+                    {
+                        // TODO:
+                    }
+                    break;
+                case Mode.BottomLeft:
+                    {
+                        // TODO:
+                    }
+                    break;
+                case Mode.BottomRight:
+                    {
+                        // TODO:
+                    }
+                    break;
+            }
         }
     }
 }

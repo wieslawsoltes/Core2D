@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Core2D.Editor.Input;
 using Core2D.Shapes;
 
 namespace Core2D.Editor
@@ -28,5 +29,18 @@ namespace Core2D.Editor
         /// Hide decorator.
         /// </summary>
         void Hide();
+
+        /// <summary>
+        /// Hit test decorator.
+        /// </summary>
+        /// <param name="args">The input arguments.</param>
+        /// <returns>True if handle is available.</returns>
+        bool HitTest(InputArgs args);
+
+        /// <summary>
+        /// Move decorator.
+        /// </summary>
+        /// <param name="args">The input arguments.</param>
+        void Move(InputArgs args);
     }
 }
