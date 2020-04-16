@@ -194,7 +194,7 @@ namespace Core2D.Editor.Tools
                 || editor?.PageState?.SelectedShapes != null;
         }
 
-        private void ShowHideOrUpdateDecorator(IProjectEditor editor)
+        private void ShowHideOrUpdateDecorator(IProjectEditor editor, InputArgs args)
         {
             if (editor.PageState == null)
             {
@@ -233,6 +233,13 @@ namespace Core2D.Editor.Tools
                         shapes,
                         editor.Project.CurrentContainer.WorkingLayer);
                     _decorator.Show();
+                }
+
+                bool result = _decorator.HitTest(args);
+                if (result == true)
+                {
+                    _currentState = State.Selected;
+                    editor.IsToolIdle = false;
                 }
             }
             else
@@ -308,6 +315,8 @@ namespace Core2D.Editor.Tools
                             bool result = _decorator.HitTest(args);
                             if (result == true)
                             {
+                                _currentState = State.Selected;
+                                editor.IsToolIdle = false;
                                 return;
                             }
                         }
@@ -328,7 +337,7 @@ namespace Core2D.Editor.Tools
                                 {
                                     editor.PageState.SelectedShape = result;
                                     editor.Project.CurrentContainer.CurrentLayer.Invalidate();
-                                    ShowHideOrUpdateDecorator(editor);
+                                    ShowHideOrUpdateDecorator(editor, args);
                                     break;
                                 }
                                 else if (editor.PageState.SelectedShape != null && editor.PageState.SelectedShapes == null)
@@ -346,7 +355,7 @@ namespace Core2D.Editor.Tools
                                         editor.PageState.SelectedShape = null;
                                         editor.PageState.SelectedShapes = new HashSet<IBaseShape>() { selected, result };
                                         editor.Project.CurrentContainer.CurrentLayer.Invalidate();
-                                        ShowHideOrUpdateDecorator(editor);
+                                        ShowHideOrUpdateDecorator(editor, args);
                                         break;
                                     }
                                 }
@@ -366,7 +375,7 @@ namespace Core2D.Editor.Tools
                                             var selected = editor.PageState.SelectedShapes.FirstOrDefault();
                                             editor.PageState.SelectedShape = selected;
                                             editor.PageState.SelectedShapes = null;
-                                            ShowHideOrUpdateDecorator(editor);
+                                            ShowHideOrUpdateDecorator(editor, args);
                                         }
                                         editor.Project.CurrentContainer.CurrentLayer.Invalidate();
                                         break;
@@ -375,7 +384,7 @@ namespace Core2D.Editor.Tools
                                     {
                                         editor.PageState.SelectedShapes.Add(result);
                                         editor.Project.CurrentContainer.CurrentLayer.Invalidate();
-                                        ShowHideOrUpdateDecorator(editor);
+                                        ShowHideOrUpdateDecorator(editor, args);
                                         break;
                                     }
                                 }
@@ -402,7 +411,7 @@ namespace Core2D.Editor.Tools
                                 _historyY = _startY;
                                 GenerateMoveSelectionCache();
                                 _currentState = State.Selected;
-                                ShowHideOrUpdateDecorator(editor);
+                                ShowHideOrUpdateDecorator(editor, args);
                                 editor.IsToolIdle = false;
                                 break;
                             }
@@ -418,7 +427,7 @@ namespace Core2D.Editor.Tools
                             _historyY = _startY;
                             GenerateMoveSelectionCache();
                             _currentState = State.Selected;
-                            ShowHideOrUpdateDecorator(editor);
+                            ShowHideOrUpdateDecorator(editor, args);
                             editor.IsToolIdle = false;
                             break;
                         }
@@ -519,7 +528,7 @@ namespace Core2D.Editor.Tools
                         {
                             _currentState = State.None;
                             editor.TryToSelectShapes(editor.Project.CurrentContainer.CurrentLayer, _rectangleShape, deselect, includeSelected);
-                            ShowHideOrUpdateDecorator(editor);
+                            ShowHideOrUpdateDecorator(editor, args);
                             editor.IsToolIdle = true;
                         }
                     }
@@ -566,13 +575,6 @@ namespace Core2D.Editor.Tools
                             return;
                         }
 
-                        if (editor.PageState.DrawDecorators == true && _decorator != null)
-                        {
-                            _decorator.Move(args);
-                            _decorator.Update(false);
-                            return;
-                        }
-
                         bool isControl = args.Modifier.HasFlag(ModifierFlags.Control);
 
                         if (!isControl)
@@ -583,6 +585,13 @@ namespace Core2D.Editor.Tools
                     break;
                 case State.Selected:
                     {
+                        if (editor.PageState.DrawDecorators == true && _decorator != null)
+                        {
+                            _decorator.Move(args);
+                            _decorator.Update(false);
+                            return;
+                        }
+
                         bool isControl = args.Modifier.HasFlag(ModifierFlags.Control);
 
                         if (IsSelectionAvailable() && !isControl)
