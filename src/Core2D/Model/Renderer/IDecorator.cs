@@ -21,6 +21,11 @@ namespace Core2D.Renderer
         IList<IBaseShape> Shapes { get; set; }
 
         /// <summary>
+        /// Gets or sets flag indicating whether the decorator is visible.
+        /// </summary>
+        bool IsVisible { get; }
+
+        /// <summary>
         /// Update decorator.
         /// </summary>
         /// <param name="rebuild">The flag indicating whether to rebuild box.</param>
