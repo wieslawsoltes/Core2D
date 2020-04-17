@@ -25,6 +25,7 @@ namespace Core2D.Renderer
         private double _pointSize;
         private IShapeStyle _selectionStyle;
         private IShapeStyle _helperStyle;
+        private IDecorator _decorator;
 
         /// <inheritdoc/>
         public double PanX
@@ -132,6 +133,13 @@ namespace Core2D.Renderer
         }
 
         /// <inheritdoc/>
+        public IDecorator Decorator
+        {
+            get => _decorator;
+            set => Update(ref _decorator, value);
+        }
+
+        /// <inheritdoc/>
         public override object Copy(IDictionary<object, object> shared)
         {
             throw new NotImplementedException();
@@ -226,5 +234,11 @@ namespace Core2D.Renderer
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
         public virtual bool ShouldSerializeHelperStyle() => _helperStyle != null;
+
+        /// <summary>
+        /// Check whether the <see cref="Decorator"/> property has changed from its default value.
+        /// </summary>
+        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
+        public virtual bool ShouldSerializeDecorator() => _decorator != null;
     }
 }
