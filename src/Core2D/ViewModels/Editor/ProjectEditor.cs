@@ -278,6 +278,10 @@ namespace Core2D.Editor
         /// <returns>The snapped value.</returns>
         public static double Snap(double value, double snap)
         {
+            if (snap == 0.0)
+            {
+                return value;
+            }
             decimal c = (decimal)value % (decimal)snap;
             decimal r = c >= (decimal)snap / 2m ? (decimal)value + (decimal)snap - c : (decimal)value - c;
             return (double)r;
