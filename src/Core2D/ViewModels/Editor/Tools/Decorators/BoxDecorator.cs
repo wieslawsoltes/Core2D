@@ -37,8 +37,8 @@ namespace Core2D.Editor.Tools.Decorators
         private IMatrixObject _transform;
         private bool _isStroked;
         private bool _isFilled;
-        public IList<IBaseShape> _shapes;
-        private readonly ILayerContainer _layer;
+        private ILayerContainer _layer;
+        private IList<IBaseShape> _shapes;
         private readonly IFactory _factory;
         private readonly double _sizeLarge;
         private readonly double _sizeSmall;
@@ -57,12 +57,19 @@ namespace Core2D.Editor.Tools.Decorators
         private readonly IRectangleShape _bottomHandle;
         private readonly IRectangleShape _leftHandle;
         private readonly IRectangleShape _rightHandle;
-        public IList<IBaseShape> _handles;
+        private IList<IBaseShape> _handles;
         private Mode _mode = Mode.None;
         private double _startX;
         private double _startY;
         private double _historyX;
         private double _historyY;
+
+        /// <inheritdoc/>
+        public ILayerContainer Layer
+        {
+            get => _layer;
+            set => Update(ref _layer, value);
+        }
 
         /// <inheritdoc/>
         public IList<IBaseShape> Shapes
@@ -103,100 +110,26 @@ namespace Core2D.Editor.Tools.Decorators
         /// Initialize new instance of <see cref="BoxDecorator"/> class.
         /// </summary>
         /// <param name="serviceProvider">The service provider.</param>
-        /// <param name="shapes">The shapes collection.</param>
-        /// <param name="layer">The layer container.</param>
-        public BoxDecorator(IServiceProvider serviceProvider, List<IBaseShape> shapes, ILayerContainer layer)
+        public BoxDecorator(IServiceProvider serviceProvider)
         {
             _serviceProvider = serviceProvider;
-            _shapes = shapes;
-            _layer = layer;
             _factory = _serviceProvider.GetService<IFactory>();
             _sizeLarge = 3.75;
             _sizeSmall = 2.8125;
             _rotateDistance = -16.875;
-
-            _groupBox = new GroupBox(_shapes);
-
             _handleStyle = _factory.CreateShapeStyle("Handle", 255, 0, 191, 255, 255, 255, 255, 255, 2.0);
             _boundsStyle = _factory.CreateShapeStyle("Bounds", 255, 0, 191, 255, 255, 255, 255, 255, 1.0);
-
-            _moveHandle = _factory.CreateRectangleShape(
-                _groupBox.Bounds.Left,
-                _groupBox.Bounds.Top,
-                _groupBox.Bounds.Right,
-                _groupBox.Bounds.Bottom,
-                _boundsStyle, true, false, name: "_moveHandle");
-
-            _rotateLine = _factory.CreateLineShape(
-                _groupBox.Bounds.CenterX,
-                _groupBox.Bounds.Top,
-                _groupBox.Bounds.CenterX,
-                _groupBox.Bounds.Top + _rotateDistance,
-                _boundsStyle, true, name: "_rotateLine");
-
-            _rotateHandle = _factory.CreateEllipseShape(
-                _groupBox.Bounds.CenterX - _sizeLarge,
-                _groupBox.Bounds.Top + _rotateDistance - _sizeLarge,
-                _groupBox.Bounds.CenterX + _sizeLarge,
-                _groupBox.Bounds.Top + _rotateDistance + _sizeLarge,
-                _handleStyle, true, true, name: "_rotateHandle");
-
-            _topLeftHandle = _factory.CreateEllipseShape(
-                _groupBox.Bounds.Left - _sizeLarge,
-                _groupBox.Bounds.Top - _sizeLarge,
-                _groupBox.Bounds.Left + _sizeLarge,
-                _groupBox.Bounds.Top + _sizeLarge,
-                _handleStyle, true, true, name: "_topLeftHandle");
-
-            _topRightHandle = _factory.CreateEllipseShape(
-                _groupBox.Bounds.Right - _sizeLarge,
-                _groupBox.Bounds.Top - _sizeLarge,
-                _groupBox.Bounds.Right + _sizeLarge,
-                _groupBox.Bounds.Top + _sizeLarge,
-                _handleStyle, true, true, name: "_topRightHandle");
-
-            _bottomLeftHandle = _factory.CreateEllipseShape(
-                _groupBox.Bounds.Left - _sizeLarge,
-                _groupBox.Bounds.Bottom - _sizeLarge,
-                _groupBox.Bounds.Left + _sizeLarge,
-                _groupBox.Bounds.Bottom + _sizeLarge,
-                _handleStyle, true, true, name: "_bottomLeftHandle");
-
-            _bottomRightHandle = _factory.CreateEllipseShape(
-                _groupBox.Bounds.Right - _sizeLarge,
-                _groupBox.Bounds.Bottom - _sizeLarge,
-                _groupBox.Bounds.Right + _sizeLarge,
-                _groupBox.Bounds.Bottom + _sizeLarge,
-                _handleStyle, true, true, name: "_bottomRightHandle");
-
-            _topHandle = _factory.CreateRectangleShape(
-                _groupBox.Bounds.CenterX - _sizeSmall,
-                _groupBox.Bounds.Top - _sizeSmall,
-                _groupBox.Bounds.CenterX + _sizeSmall,
-                _groupBox.Bounds.Top + _sizeSmall,
-                _handleStyle, true, true, name: "_topHandle");
-
-            _bottomHandle = _factory.CreateRectangleShape(
-                _groupBox.Bounds.CenterX - _sizeSmall,
-                _groupBox.Bounds.Bottom - _sizeSmall,
-                _groupBox.Bounds.CenterX + _sizeSmall,
-                _groupBox.Bounds.Bottom + _sizeSmall,
-                _handleStyle, true, true, name: "_bottomHandle");
-
-            _leftHandle = _factory.CreateRectangleShape(
-                _groupBox.Bounds.Left - _sizeSmall,
-                _groupBox.Bounds.CenterY - _sizeSmall,
-                _groupBox.Bounds.Left + _sizeSmall,
-                _groupBox.Bounds.CenterY + _sizeSmall,
-                _handleStyle, true, true, name: "_leftHandle");
-
-            _rightHandle = _factory.CreateRectangleShape(
-                _groupBox.Bounds.Right - _sizeSmall,
-                _groupBox.Bounds.CenterY - _sizeSmall,
-                _groupBox.Bounds.Right + _sizeSmall,
-                _groupBox.Bounds.CenterY + _sizeSmall,
-                _handleStyle, true, true, name: "_rightHandle");
-
+            _moveHandle = _factory.CreateRectangleShape(0, 0, 0, 0, _boundsStyle, true, false, name: "_moveHandle");
+            _rotateLine = _factory.CreateLineShape(0, 0, 0, 0, _boundsStyle, true, name: "_rotateLine");
+            _rotateHandle = _factory.CreateEllipseShape(0, 0, 0, 0, _handleStyle, true, true, name: "_rotateHandle");
+            _topLeftHandle = _factory.CreateEllipseShape(0, 0, 0, 0, _handleStyle, true, true, name: "_topLeftHandle");
+            _topRightHandle = _factory.CreateEllipseShape(0, 0, 0, 0, _handleStyle, true, true, name: "_topRightHandle");
+            _bottomLeftHandle = _factory.CreateEllipseShape(0, 0, 0, 0, _handleStyle, true, true, name: "_bottomLeftHandle");
+            _bottomRightHandle = _factory.CreateEllipseShape(0, 0, 0, 0, _handleStyle, true, true, name: "_bottomRightHandle");
+            _topHandle = _factory.CreateRectangleShape(0, 0, 0, 0, _handleStyle, true, true, name: "_topHandle");
+            _bottomHandle = _factory.CreateRectangleShape(0, 0, 0, 0, _handleStyle, true, true, name: "_bottomHandle");
+            _leftHandle = _factory.CreateRectangleShape(0, 0, 0, 0, _handleStyle, true, true, name: "_leftHandle");
+            _rightHandle = _factory.CreateRectangleShape(0, 0, 0, 0, _handleStyle, true, true, name: "_rightHandle");
             _handles = new List<IBaseShape>
             {
                 _rotateHandle,
@@ -263,6 +196,11 @@ namespace Core2D.Editor.Tools.Decorators
         /// <inheritdoc/>
         public void Update(bool rebuild)
         {
+            if (_layer == null || _shapes == null)
+            {
+                return;
+            }
+
             if (rebuild)
             {
                 _groupBox = new GroupBox(_shapes);
@@ -333,6 +271,11 @@ namespace Core2D.Editor.Tools.Decorators
         /// <inheritdoc/>
         public void Show()
         {
+            if (_layer == null || _shapes == null)
+            {
+                return;
+            }
+
             _mode = Mode.None;
             _isVisible = true;
 
@@ -349,12 +292,18 @@ namespace Core2D.Editor.Tools.Decorators
             shapesBuilder.Add(_leftHandle);
             shapesBuilder.Add(_rightHandle);
             _layer.Shapes = shapesBuilder.ToImmutable();
+
             _layer.Invalidate();
         }
 
         /// <inheritdoc/>
         public void Hide()
         {
+            if (_layer == null || _shapes == null)
+            {
+                return;
+            }
+
             _mode = Mode.None;
             _isVisible = false;
 
@@ -443,6 +392,11 @@ namespace Core2D.Editor.Tools.Decorators
         /// <inheritdoc/>
         public void Move(InputArgs args)
         {
+            if (_layer == null || _shapes == null)
+            {
+                return;
+            }
+
             var editor = _serviceProvider.GetService<IProjectEditor>();
             (double sx, double sy) = editor.TryToSnap(args);
             double dx = sx - _startX;
