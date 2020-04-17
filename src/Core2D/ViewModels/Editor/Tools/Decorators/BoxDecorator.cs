@@ -63,6 +63,7 @@ namespace Core2D.Editor.Tools.Decorators
         private double _startY;
         private double _historyX;
         private double _historyY;
+        private bool _previousDrawPoints = true;
 
         /// <inheritdoc/>
         public ILayerContainer Layer
@@ -301,6 +302,15 @@ namespace Core2D.Editor.Tools.Decorators
                 return;
             }
 
+            if (_isVisible == true)
+            {
+                return;
+            }
+
+            var editor = _serviceProvider.GetService<IProjectEditor>();
+            _previousDrawPoints = editor.PageState.DrawPoints;
+            editor.PageState.DrawPoints = false;
+
             _mode = Mode.None;
             _isVisible = true;
 
@@ -329,6 +339,12 @@ namespace Core2D.Editor.Tools.Decorators
                 return;
             }
 
+            if (_isVisible == true)
+            {
+                var editor = _serviceProvider.GetService<IProjectEditor>();
+                editor.PageState.DrawPoints = _previousDrawPoints;
+            }
+
             _mode = Mode.None;
             _isVisible = false;
 
@@ -351,6 +367,11 @@ namespace Core2D.Editor.Tools.Decorators
         /// <inheritdoc/>
         public bool HitTest(InputArgs args)
         {
+            if (_isVisible == false)
+            {
+                return false;
+            }
+
             var editor = _serviceProvider.GetService<IProjectEditor>();
             (double x, double y) = args;
             (double sx, double sy) = editor.TryToSnap(args);
@@ -418,6 +439,11 @@ namespace Core2D.Editor.Tools.Decorators
         public void Move(InputArgs args)
         {
             if (_layer == null || _shapes == null)
+            {
+                return;
+            }
+
+            if (_isVisible == false)
             {
                 return;
             }
