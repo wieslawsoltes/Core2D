@@ -392,7 +392,10 @@ namespace Core2D.Editor.Tools
                             }
                         }
 
-                        HideDecorator(editor);
+                        if (isControl == false && editor.PageState.DrawDecorators == true && editor.PageState.Decorator != null && editor.PageState.Decorator.IsVisible == true)
+                        {
+                            HideDecorator(editor);
+                        }
 
                         if (editor.PageState.SelectedShape == null && editor.PageState.SelectedShapes != null)
                         {
@@ -587,14 +590,14 @@ namespace Core2D.Editor.Tools
                     break;
                 case State.Selected:
                     {
-                        if (editor.PageState.DrawDecorators == true && editor.PageState.Decorator != null && editor.PageState.Decorator.IsVisible == true)
+                        bool isControl = args.Modifier.HasFlag(ModifierFlags.Control);
+
+                        if (isControl == false && editor.PageState.DrawDecorators == true && editor.PageState.Decorator != null && editor.PageState.Decorator.IsVisible == true)
                         {
                             editor.PageState.Decorator.Move(args);
                             editor.PageState.Decorator.Update(false);
                             return;
                         }
-
-                        bool isControl = args.Modifier.HasFlag(ModifierFlags.Control);
 
                         if (IsSelectionAvailable() && !isControl)
                         {
