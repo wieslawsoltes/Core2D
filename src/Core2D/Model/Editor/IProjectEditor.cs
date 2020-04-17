@@ -398,6 +398,26 @@ namespace Core2D.Editor
         void OnDelete(object item);
 
         /// <summary>
+        /// Show decorator.
+        /// </summary>
+        void OnShowDecorator();
+
+        /// <summary>
+        /// Update decorator.
+        /// </summary>
+        void OnUpdateDecorator();
+
+        /// <summary>
+        /// Hide decorator.
+        /// </summary>
+        void OnHideDecorator();
+
+        /// <summary>
+        /// Show or hide decorator.
+        /// </summary>
+        void OnShowOrHideDecorator();
+
+        /// <summary>
         /// Select all shapes.
         /// </summary>
         void OnSelectAll();
