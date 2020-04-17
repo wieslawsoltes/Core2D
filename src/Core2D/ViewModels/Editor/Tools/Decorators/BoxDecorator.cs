@@ -79,6 +79,9 @@ namespace Core2D.Editor.Tools.Decorators
         }
 
         /// <inheritdoc/>
+        public bool IsVisible => _isVisible;
+
+        /// <inheritdoc/>
         public IShapeStyle Style
         {
             get => _style;
