@@ -194,7 +194,7 @@ namespace Core2D.Editor.Tools.Decorators
         }
 
         /// <inheritdoc/>
-        public void Update(bool rebuild)
+        public void Update(bool rebuild = true)
         {
             if (_layer == null || _shapes == null)
             {
