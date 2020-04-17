@@ -67,5 +67,10 @@ namespace Core2D.Renderer
         /// Gets or sets editor helper shapes style.
         /// </summary>
         IShapeStyle HelperStyle { get; set; }
+
+        /// <summary>
+        /// Gets or sets shapes decorator.
+        /// </summary>
+        IDecorator Decorator { get; set; }
     }
 }
