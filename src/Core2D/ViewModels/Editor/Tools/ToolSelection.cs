@@ -212,7 +212,7 @@ namespace Core2D.Editor.Tools
 
             if (editor.PageState.SelectedShape != null || editor.PageState.SelectedShapes != null)
             {
-                ShowDecorator(editor, args, disableHitTest);
+                ShowDecorator(editor);
 
                 if (disableHitTest == false)
                 {
@@ -225,7 +225,7 @@ namespace Core2D.Editor.Tools
             }
         }
 
-        private void ShowDecorator(IProjectEditor editor, InputArgs args, bool disableHitTest)
+        private void ShowDecorator(IProjectEditor editor)
         {
             var shapes = editor.PageState.SelectedShape != null ? 
                 Enumerable.Repeat(editor.PageState.SelectedShape, 1).ToList() : editor.PageState.SelectedShapes.ToList();
@@ -234,7 +234,6 @@ namespace Core2D.Editor.Tools
             {
                 editor.PageState.Decorator = new BoxDecorator(_serviceProvider);
             }
-
             editor.PageState.Decorator.Layer = editor.Project.CurrentContainer.WorkingLayer;
             editor.PageState.Decorator.Shapes = shapes;
             editor.PageState.Decorator.Update(true);
