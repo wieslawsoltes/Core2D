@@ -10,6 +10,7 @@ using Core2D.Data;
 using Core2D.Editor.Bounds;
 using Core2D.Editor.History;
 using Core2D.Editor.Recent;
+using Core2D.Editor.Tools.Decorators;
 using Core2D.Input;
 using Core2D.Layout;
 using Core2D.Renderer;
@@ -1025,6 +1026,91 @@ namespace Core2D.Editor
         }
 
         /// <inheritdoc/>
+        public void OnShowDecorator()
+        {
+            var shapes = PageState.SelectedShape != null ?
+                Enumerable.Repeat(PageState.SelectedShape, 1).ToList() :
+                PageState.SelectedShapes.ToList();
+
+            if (PageState.Decorator == null)
+            {
+                PageState.Decorator = new BoxDecorator(_serviceProvider);
+            }
+
+            PageState.Decorator.Layer = Project.CurrentContainer.WorkingLayer;
+            PageState.Decorator.Shapes = shapes;
+            PageState.Decorator.Update(true);
+            PageState.Decorator.Show();
+        }
+
+        /// <inheritdoc/>
+        public void OnUpdateDecorator()
+        {
+            if (PageState == null)
+            {
+                return;
+            }
+
+            if (PageState.DrawDecorators == false)
+            {
+                return;
+            }
+
+            if (PageState.Decorator != null)
+            {
+                PageState.Decorator.Update(false);
+            }
+        }
+
+        /// <inheritdoc/>
+        public void OnHideDecorator()
+        {
+            if (PageState == null)
+            {
+                return;
+            }
+
+            if (PageState.DrawDecorators == false)
+            {
+                return;
+            }
+
+            if (PageState.Decorator != null)
+            {
+                PageState.Decorator.Hide();
+            }
+        }
+
+        /// <inheritdoc/>
+        public void OnShowOrHideDecorator()
+        {
+            if (PageState == null)
+            {
+                return;
+            }
+
+            if (PageState.DrawDecorators == false)
+            {
+                return;
+            }
+
+            if (PageState.SelectedShape is IPointShape)
+            {
+                OnHideDecorator();
+                return;
+            }
+
+            if (PageState.SelectedShape != null || PageState.SelectedShapes != null)
+            {
+                OnShowDecorator();
+            }
+            else
+            {
+                OnHideDecorator();
+            }
+        }
+
+        /// <inheritdoc/>
         public void OnSelectAll()
         {
             try
@@ -1033,7 +1119,7 @@ namespace Core2D.Editor
                 Select(
                     Project?.CurrentContainer?.CurrentLayer,
                     new HashSet<IBaseShape>(Project?.CurrentContainer?.CurrentLayer?.Shapes));
-                PageState.Decorator?.Update();
+                OnUpdateDecorator();
             }
             catch (Exception ex)
             {
@@ -1047,7 +1133,7 @@ namespace Core2D.Editor
             try
             {
                 Deselect(Project?.CurrentContainer?.CurrentLayer);
-                PageState.Decorator?.Update();
+                OnUpdateDecorator();
             }
             catch (Exception ex)
             {
@@ -1072,7 +1158,7 @@ namespace Core2D.Editor
                     container.HelperLayer.Shapes = ImmutableArray.Create<IBaseShape>();
 
                     Project.CurrentContainer.Invalidate();
-                    PageState.Decorator?.Hide();
+                    OnHideDecorator();
                 }
             }
             catch (Exception ex)
@@ -1106,7 +1192,7 @@ namespace Core2D.Editor
             {
                 PageState.SelectedShape = null;
                 PageState.SelectedShapes = null;
-                PageState.Decorator?.Hide();
+                OnHideDecorator();
             }
         }
 
@@ -1122,14 +1208,14 @@ namespace Core2D.Editor
             if (source != null)
             {
                 BoxLayout.Rotate(Enumerable.Repeat(source, 1), value, Project?.History);
-                PageState.Decorator?.Update();
+                OnUpdateDecorator();
             }
 
             var sources = PageState?.SelectedShapes;
             if (sources != null)
             {
                 BoxLayout.Rotate(sources, value, Project?.History);
-                PageState.Decorator?.Update();
+                OnUpdateDecorator();
             }
         }
 
@@ -1140,14 +1226,14 @@ namespace Core2D.Editor
             if (source != null)
             {
                 BoxLayout.Flip(Enumerable.Repeat(source, 1), FlipMode.Horizontal, Project?.History);
-                PageState.Decorator?.Update();
+                OnUpdateDecorator();
             }
 
             var sources = PageState?.SelectedShapes;
             if (sources != null)
             {
                 BoxLayout.Flip(sources, FlipMode.Horizontal, Project?.History);
-                PageState.Decorator?.Update();
+                OnUpdateDecorator();
             }
         }
 
@@ -1158,14 +1244,14 @@ namespace Core2D.Editor
             if (source != null)
             {
                 BoxLayout.Flip(Enumerable.Repeat(source, 1), FlipMode.Vertical, Project?.History);
-                PageState.Decorator?.Update();
+                OnUpdateDecorator();
             }
 
             var sources = PageState?.SelectedShapes;
             if (sources != null)
             {
                 BoxLayout.Flip(sources, FlipMode.Vertical, Project?.History);
-                PageState.Decorator?.Update();
+                OnUpdateDecorator();
             }
         }
 
@@ -1217,7 +1303,7 @@ namespace Core2D.Editor
             {
                 var items = shapes.Where(s => !s.State.Flags.HasFlag(ShapeStateFlags.Locked));
                 BoxLayout.Stack(items, StackMode.Horizontal, Project?.History);
-                PageState.Decorator?.Update();
+                OnUpdateDecorator();
             }
         }
 
@@ -1229,7 +1315,7 @@ namespace Core2D.Editor
             {
                 var items = shapes.Where(s => !s.State.Flags.HasFlag(ShapeStateFlags.Locked));
                 BoxLayout.Stack(items, StackMode.Vertical, Project?.History);
-                PageState.Decorator?.Update();
+                OnUpdateDecorator();
             }
         }
 
@@ -1241,7 +1327,7 @@ namespace Core2D.Editor
             {
                 var items = shapes.Where(s => !s.State.Flags.HasFlag(ShapeStateFlags.Locked));
                 BoxLayout.Distribute(items, DistributeMode.Horizontal, Project?.History);
-                PageState.Decorator?.Update();
+                OnUpdateDecorator();
             }
         }
 
@@ -1253,7 +1339,7 @@ namespace Core2D.Editor
             {
                 var items = shapes.Where(s => !s.State.Flags.HasFlag(ShapeStateFlags.Locked));
                 BoxLayout.Distribute(items, DistributeMode.Vertical, Project?.History);
-                PageState.Decorator?.Update();
+                OnUpdateDecorator();
             }
         }
 
@@ -1265,7 +1351,7 @@ namespace Core2D.Editor
             {
                 var items = shapes.Where(s => !s.State.Flags.HasFlag(ShapeStateFlags.Locked));
                 BoxLayout.Align(items, AlignMode.Left, Project?.History);
-                PageState.Decorator?.Update();
+                OnUpdateDecorator();
             }
         }
 
@@ -1277,7 +1363,7 @@ namespace Core2D.Editor
             {
                 var items = shapes.Where(s => !s.State.Flags.HasFlag(ShapeStateFlags.Locked));
                 BoxLayout.Align(items, AlignMode.Centered, Project?.History);
-                PageState.Decorator?.Update();
+                OnUpdateDecorator();
             }
         }
 
@@ -1289,7 +1375,7 @@ namespace Core2D.Editor
             {
                 var items = shapes.Where(s => !s.State.Flags.HasFlag(ShapeStateFlags.Locked));
                 BoxLayout.Align(items, AlignMode.Right, Project?.History);
-                PageState.Decorator?.Update();
+                OnUpdateDecorator();
             }
         }
 
@@ -1301,7 +1387,7 @@ namespace Core2D.Editor
             {
                 var items = shapes.Where(s => !s.State.Flags.HasFlag(ShapeStateFlags.Locked));
                 BoxLayout.Align(items, AlignMode.Top, Project?.History);
-                PageState.Decorator?.Update();
+                OnUpdateDecorator();
             }
         }
 
@@ -1313,7 +1399,7 @@ namespace Core2D.Editor
             {
                 var items = shapes.Where(s => !s.State.Flags.HasFlag(ShapeStateFlags.Locked));
                 BoxLayout.Align(items, AlignMode.Center, Project?.History);
-                PageState.Decorator?.Update();
+                OnUpdateDecorator();
             }
         }
 
@@ -1325,7 +1411,7 @@ namespace Core2D.Editor
             {
                 var items = shapes.Where(s => !s.State.Flags.HasFlag(ShapeStateFlags.Locked));
                 BoxLayout.Align(items, AlignMode.Bottom, Project?.History);
-                PageState.Decorator?.Update();
+                OnUpdateDecorator();
             }
         }
 
@@ -3189,7 +3275,7 @@ namespace Core2D.Editor
                 PageState.SelectedShape = default;
                 layer.Invalidate();
 
-                PageState.Decorator?.Hide();
+                OnHideDecorator();
             }
 
             if (PageState.SelectedShapes != null && PageState.SelectedShapes.Count > 0)
@@ -3210,7 +3296,7 @@ namespace Core2D.Editor
                 PageState.SelectedShapes = default;
                 layer.Invalidate();
 
-                PageState.Decorator?.Hide();
+                OnHideDecorator();
             }
         }
 
@@ -3227,7 +3313,7 @@ namespace Core2D.Editor
                 PageState.SelectedShapes = default;
             }
 
-            PageState.Decorator?.Hide();
+            OnHideDecorator();
         }
 
         /// <inheritdoc/>
@@ -3241,7 +3327,7 @@ namespace Core2D.Editor
                 }
                 PageState.SelectedShape = shape;
 
-                PageState.Decorator?.Update();
+                OnUpdateDecorator();
             }
 
             if (layer.Owner is IPageContainer owner)
@@ -3270,7 +3356,7 @@ namespace Core2D.Editor
                 }
                 PageState.SelectedShapes = shapes;
 
-                PageState.Decorator?.Update();
+                OnShowDecorator();
             }
 
             if (layer.Owner is IPageContainer owner && owner.CurrentShape != null)
@@ -3893,12 +3979,13 @@ namespace Core2D.Editor
                     shape.Move(null, dx, dy);
                 }
             }
-            PageState.Decorator?.Update();
+            OnUpdateDecorator();
         }
 
         private void MoveShapesByWithHistory(IEnumerable<IBaseShape> shapes, double dx, double dy)
         {
-            MoveShapesBy(shapes, dx, dy);PageState.Decorator?.Update();
+            MoveShapesBy(shapes, dx, dy);
+            OnUpdateDecorator();
 
             var previous = new { DeltaX = -dx, DeltaY = -dy, Shapes = shapes };
             var next = new { DeltaX = dx, DeltaY = dy, Shapes = shapes };
