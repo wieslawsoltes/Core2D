@@ -24,7 +24,7 @@ namespace Core2D.Renderer
         /// Update decorator.
         /// </summary>
         /// <param name="rebuild">The flag indicating whether to rebuild box.</param>
-        void Update(bool rebuild);
+        void Update(bool rebuild = true);
 
         /// <summary>
         /// Show decorator.
