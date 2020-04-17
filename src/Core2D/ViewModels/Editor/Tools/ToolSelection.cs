@@ -196,7 +196,7 @@ namespace Core2D.Editor.Tools
         {
             var editor = _serviceProvider.GetService<IProjectEditor>();
 
-            if (isControl == false && editor.PageState.Decorator.IsVisible)
+            if (isControl == false && editor.PageState.Decorator != null && editor.PageState.Decorator.IsVisible)
             {
                 bool decoratorResult = editor.PageState.Decorator.HitTest(args);
                 if (decoratorResult == true)
