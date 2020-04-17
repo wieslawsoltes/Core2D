@@ -1029,6 +1029,7 @@ namespace Core2D.Editor
                 Select(
                     Project?.CurrentContainer?.CurrentLayer,
                     new HashSet<IBaseShape>(Project?.CurrentContainer?.CurrentLayer?.Shapes));
+                PageState.Decorator?.Hide();
             }
             catch (Exception ex)
             {
@@ -1042,6 +1043,7 @@ namespace Core2D.Editor
             try
             {
                 Deselect(Project?.CurrentContainer?.CurrentLayer);
+                PageState.Decorator?.Hide();
             }
             catch (Exception ex)
             {
@@ -3165,7 +3167,7 @@ namespace Core2D.Editor
                 PageState.SelectedShape = default;
                 layer.Invalidate();
 
-                CurrentTool?.Reset();
+                PageState.Decorator?.Hide();
             }
 
             if (PageState.SelectedShapes != null && PageState.SelectedShapes.Count > 0)
@@ -3186,7 +3188,7 @@ namespace Core2D.Editor
                 PageState.SelectedShapes = default;
                 layer.Invalidate();
 
-                CurrentTool?.Reset();
+                PageState.Decorator?.Hide();
             }
         }
 
