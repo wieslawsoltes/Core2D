@@ -265,6 +265,28 @@ namespace Core2D.Editor.Tools.Decorators
             _rightHandle.BottomRight.X = _groupBox.Bounds.Right + _sizeSmall;
             _rightHandle.BottomRight.Y = _groupBox.Bounds.CenterY + _sizeSmall;
 
+            if (_groupBox.Bounds.Height <= 0)
+            {
+                _leftHandle.State.Flags &= ~ShapeStateFlags.Visible;
+                _rightHandle.State.Flags &= ~ShapeStateFlags.Visible;
+            }
+            else
+            {
+                _leftHandle.State.Flags |= ShapeStateFlags.Visible;
+                _rightHandle.State.Flags |= ShapeStateFlags.Visible;
+            }
+
+            if (_groupBox.Bounds.Width <= 0)
+            {
+                _topHandle.State.Flags &= ~ShapeStateFlags.Visible;
+                _bottomHandle.State.Flags &= ~ShapeStateFlags.Visible;
+            }
+            else
+            {
+                _topHandle.State.Flags |= ShapeStateFlags.Visible;
+                _bottomHandle.State.Flags |= ShapeStateFlags.Visible;
+            }
+
             _layer.Invalidate();
         }
 
