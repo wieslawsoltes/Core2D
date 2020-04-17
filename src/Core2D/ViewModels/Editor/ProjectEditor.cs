@@ -1028,6 +1028,16 @@ namespace Core2D.Editor
         /// <inheritdoc/>
         public void OnShowDecorator()
         {
+            if (PageState == null)
+            {
+                return;
+            }
+
+            if (PageState.DrawDecorators == false)
+            {
+                return;
+            }
+
             var shapes = PageState.SelectedShape != null ?
                 Enumerable.Repeat(PageState.SelectedShape, 1).ToList() :
                 PageState.SelectedShapes.ToList();
