@@ -3337,7 +3337,7 @@ namespace Core2D.Editor
                 }
                 PageState.SelectedShape = shape;
 
-                OnUpdateDecorator();
+                OnShowDecorator();
             }
 
             if (layer.Owner is IPageContainer owner)
