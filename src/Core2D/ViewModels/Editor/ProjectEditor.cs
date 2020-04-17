@@ -1129,7 +1129,6 @@ namespace Core2D.Editor
                 Select(
                     Project?.CurrentContainer?.CurrentLayer,
                     new HashSet<IBaseShape>(Project?.CurrentContainer?.CurrentLayer?.Shapes));
-                OnUpdateDecorator();
             }
             catch (Exception ex)
             {
