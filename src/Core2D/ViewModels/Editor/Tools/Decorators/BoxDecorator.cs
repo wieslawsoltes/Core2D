@@ -118,8 +118,8 @@ namespace Core2D.Editor.Tools.Decorators
         {
             _serviceProvider = serviceProvider;
             _factory = _serviceProvider.GetService<IFactory>();
-            _sizeLarge = 3.75;
-            _sizeSmall = 2.8125;
+            _sizeLarge = 4;
+            _sizeSmall = 4;
             _rotateDistance = -16.875;
             _handleStyle = _factory.CreateShapeStyle("Handle", 255, 0, 191, 255, 255, 255, 255, 255, 2.0);
             _boundsStyle = _factory.CreateShapeStyle("Bounds", 255, 0, 191, 255, 255, 255, 255, 255, 1.0);
