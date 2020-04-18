@@ -51,12 +51,6 @@ namespace Core2D.Layout
             return (box1.Bounds.Height > box2.Bounds.Height) ? 1 : ((box1.Bounds.Height < box2.Bounds.Height) ? -1 : 0);
         }
 
-        public static void Rotate(IPointShape point, double radians, double centerX, double centerY, out double x, out double y)
-        {
-            x = (point.X - centerX) * Math.Cos(radians) - (point.Y - centerY) * Math.Sin(radians) + centerX;
-            y = (point.X - centerX) * Math.Sin(radians) + (point.Y - centerY) * Math.Cos(radians) + centerY;
-        }
-
         public ShapeBox(IBaseShape shape)
         {
             Shape = shape;
