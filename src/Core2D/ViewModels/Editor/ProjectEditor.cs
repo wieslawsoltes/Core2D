@@ -3337,7 +3337,21 @@ namespace Core2D.Editor
 
                 PageState.SelectedShape = shape;
 
-                OnShowDecorator();
+                if (PageState.DrawPoints == true)
+                {
+                    OnHideDecorator();
+                }
+                else
+                {
+                    if (shape is IPointShape)
+                    {
+                        OnHideDecorator();
+                    }
+                    else
+                    {
+                        OnShowDecorator();
+                    }
+                }
             }
 
             if (layer.Owner is IPageContainer owner)
