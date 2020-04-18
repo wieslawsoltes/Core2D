@@ -54,6 +54,11 @@ namespace Core2D.Renderer
         IShapeStyle PointStyle { get; set; }
 
         /// <summary>
+        /// Gets or sets style used to draw selected points.
+        /// </summary>
+        IShapeStyle SelectedPointStyle { get; set; }
+
+        /// <summary>
         /// Gets or sets size used to draw points.
         /// </summary>
         double PointSize { get; set; }
