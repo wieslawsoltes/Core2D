@@ -61,6 +61,10 @@ namespace Core2D.Editor.Tools.Decorators
         private readonly IRectangleShape _rightHandle;
         private IList<IBaseShape> _handles;
         private IBaseShape _currentHandle = null;
+        private Dictionary<IBaseShape, IPointShape> _anchorTop;
+        private Dictionary<IBaseShape, IPointShape> _anchorBottom;
+        private Dictionary<IBaseShape, IPointShape> _anchorLeft;
+        private Dictionary<IBaseShape, IPointShape> _anchorRight;
         private Mode _mode = Mode.None;
         private double _startX;
         private double _startY;
@@ -322,6 +326,10 @@ namespace Core2D.Editor.Tools.Decorators
             {
                 _currentHandle.Style = _currentHandle == _boundsHandle ? _boundsStyle : _handleStyle;
                 _currentHandle = null;
+                _anchorTop = null;
+                _anchorBottom = null;
+                _anchorLeft = null;
+                _anchorRight = null;
             }
             _isVisible = true;
 
@@ -361,6 +369,10 @@ namespace Core2D.Editor.Tools.Decorators
             {
                 _currentHandle.Style = _currentHandle == _boundsHandle ? _boundsStyle : _handleStyle;
                 _currentHandle = null;
+                _anchorTop = null;
+                _anchorBottom = null;
+                _anchorLeft = null;
+                _anchorRight = null;
             }
             _isVisible = false;
 
@@ -397,6 +409,10 @@ namespace Core2D.Editor.Tools.Decorators
             {
                 _currentHandle.Style = _currentHandle == _boundsHandle ? _boundsStyle : _handleStyle;
                 _currentHandle = null;
+                _anchorTop = null;
+                _anchorBottom = null;
+                _anchorLeft = null;
+                _anchorRight = null;
                 _layer.Invalidate();
             }
 
@@ -453,6 +469,10 @@ namespace Core2D.Editor.Tools.Decorators
                     _startY = sy;
                     _historyX = _startX;
                     _historyY = _startY;
+                    _anchorTop = new Dictionary<IBaseShape, IPointShape>();
+                    _anchorBottom = new Dictionary<IBaseShape, IPointShape>();
+                    _anchorLeft = new Dictionary<IBaseShape, IPointShape>();
+                    _anchorRight = new Dictionary<IBaseShape, IPointShape>();
                     _layer.Invalidate();
                     return true;
                 }
@@ -565,12 +585,17 @@ namespace Core2D.Editor.Tools.Decorators
                 }
                 points.Sort(PointShapeUtil.CompareY);
 
-                var lastPoint = points[points.Count - 1];
+                var shape = _groupBox.Boxes[i].Shape;
+                if (!_anchorTop.TryGetValue(shape, out var anchorPoint))
+                {
+                    anchorPoint = points[points.Count - 1];
+                    _anchorTop[shape] = anchorPoint;
+                }
 
                 for (int j = 0; j < points.Count; j++)
                 {
                     var point = points[j];
-                    if (point != lastPoint && point.Y != lastPoint.Y)
+                    if (point != anchorPoint && !(point.Y == anchorPoint.Y && points.Count > 2))
                     {
                         point.Move(null, 0, dyTop);
                     }
@@ -590,12 +615,17 @@ namespace Core2D.Editor.Tools.Decorators
                 }
                 points.Sort(PointShapeUtil.CompareY);
 
-                var firstPoint = points[0];
+                var shape = _groupBox.Boxes[i].Shape;
+                if (!_anchorBottom.TryGetValue(shape, out var anchorPoint))
+                {
+                    anchorPoint = points[0];
+                    _anchorBottom[shape] = anchorPoint;
+                }
 
                 for (int j = 0; j < points.Count; j++)
                 {
                     var point = points[j];
-                    if (point != firstPoint && point.Y != firstPoint.Y)
+                    if (point != anchorPoint && !(point.Y == anchorPoint.Y && points.Count > 2))
                     {
                         point.Move(null, 0, dyBottom);
                     }
@@ -615,12 +645,17 @@ namespace Core2D.Editor.Tools.Decorators
                 }
                 points.Sort(PointShapeUtil.CompareX);
 
-                var lastPoint = points[points.Count - 1];
+                var shape = _groupBox.Boxes[i].Shape;
+                if (!_anchorLeft.TryGetValue(shape, out var anchorPoint))
+                {
+                    anchorPoint = points[points.Count - 1];
+                    _anchorLeft[shape] = anchorPoint;
+                }
 
                 for (int j = 0; j < points.Count; j++)
                 {
                     var point = points[j];
-                    if (point != lastPoint && point.X != lastPoint.X)
+                    if (point != anchorPoint && !(point.X == anchorPoint.X && points.Count > 2))
                     {
                         point.Move(null, dxLeft, 0);
                     }
@@ -640,12 +675,17 @@ namespace Core2D.Editor.Tools.Decorators
                 }
                 points.Sort(PointShapeUtil.CompareX);
 
-                var firstPoint = points[0];
+                var shape = _groupBox.Boxes[i].Shape;
+                if (!_anchorRight.TryGetValue(shape, out var anchorPoint))
+                {
+                    anchorPoint = points[0];
+                    _anchorRight[shape] = anchorPoint;
+                }
 
                 for (int j = 0; j < points.Count; j++)
                 {
                     var point = points[j];
-                    if (point != firstPoint && point.X != firstPoint.X)
+                    if (point != anchorPoint && !(point.X == anchorPoint.X && points.Count > 2))
                     {
                         point.Move(null, dxRight, 0);
                     }
