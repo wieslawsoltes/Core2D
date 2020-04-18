@@ -451,7 +451,7 @@ namespace Core2D.Renderer.Avalonia
         /// <inheritdoc/>
         public void Draw(object dc, IPointShape point, double dx, double dy)
         {
-            if (point == null || _state == null || _state.PointStyle == null)
+            if (point == null || _state == null)
             {
                 return;
             }
@@ -461,13 +461,15 @@ namespace Core2D.Renderer.Avalonia
                 return;
             }
 
-            var _dc = dc as AM.DrawingContext;
-
-            var pointStyle = _state.PointStyle;
+            bool isSelected = (_state.SelectedShape != null && _state.SelectedShape == point)
+                || (_state.HoveredShape != null && _state.HoveredShape == point);
+            var pointStyle = isSelected ? _state.SelectedPointStyle : _state.PointStyle;
             if (pointStyle == null)
             {
                 return;
             }
+
+            var _dc = dc as AM.DrawingContext;
 
             double pointSize = _state.PointSize;
             if (pointSize <= 0.0)
