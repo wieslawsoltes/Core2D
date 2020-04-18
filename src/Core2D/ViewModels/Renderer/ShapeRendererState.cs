@@ -22,6 +22,7 @@ namespace Core2D.Renderer
         private bool _drawDecorators;
         private bool _drawPoints;
         private IShapeStyle _pointStyle;
+        private IShapeStyle _selectedPointStyle;
         private double _pointSize;
         private IShapeStyle _selectionStyle;
         private IShapeStyle _helperStyle;
@@ -109,6 +110,13 @@ namespace Core2D.Renderer
         {
             get => _pointStyle;
             set => Update(ref _pointStyle, value);
+        }
+
+        /// <inheritdoc/>
+        public IShapeStyle SelectedPointStyle
+        {
+            get => _selectedPointStyle;
+            set => Update(ref _selectedPointStyle, value);
         }
 
         /// <inheritdoc/>
@@ -216,6 +224,12 @@ namespace Core2D.Renderer
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
         public virtual bool ShouldSerializePointStyle() => _pointStyle != null;
+
+        /// <summary>
+        /// Check whether the <see cref="SelectedPointStyle"/> property has changed from its default value.
+        /// </summary>
+        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
+        public virtual bool ShouldSerializeSelectedPointStyle() => _selectedPointStyle != null;
 
         /// <summary>
         /// Check whether the <see cref="PointSize"/> property has changed from its default value.
