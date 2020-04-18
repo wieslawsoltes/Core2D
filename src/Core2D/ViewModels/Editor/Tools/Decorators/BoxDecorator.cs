@@ -46,7 +46,9 @@ namespace Core2D.Editor.Tools.Decorators
         private GroupBox _groupBox;
         private readonly IShapeStyle _handleStyle;
         private readonly IShapeStyle _boundsStyle;
-        private readonly IRectangleShape _moveHandle;
+        private readonly IShapeStyle _selectedHandleStyle;
+        private readonly IShapeStyle _selectedBoundsStyle;
+        private readonly IRectangleShape _boundsHandle;
         private readonly ILineShape _rotateLine;
         private readonly IEllipseShape _rotateHandle;
         private readonly IEllipseShape _topLeftHandle;
@@ -58,6 +60,7 @@ namespace Core2D.Editor.Tools.Decorators
         private readonly IRectangleShape _leftHandle;
         private readonly IRectangleShape _rightHandle;
         private IList<IBaseShape> _handles;
+        private IBaseShape _currentHandle = null;
         private Mode _mode = Mode.None;
         private double _startX;
         private double _startY;
@@ -123,8 +126,8 @@ namespace Core2D.Editor.Tools.Decorators
             _rotateDistance = -16.875;
             _handleStyle = _factory.CreateShapeStyle("Handle", 255, 0, 191, 255, 255, 255, 255, 255, 2.0);
             _boundsStyle = _factory.CreateShapeStyle("Bounds", 255, 0, 191, 255, 255, 255, 255, 255, 1.0);
-            _moveHandle = _factory.CreateRectangleShape(0, 0, 0, 0, _boundsStyle, true, false, name: "_moveHandle");
-            _rotateLine = _factory.CreateLineShape(0, 0, 0, 0, _boundsStyle, true, name: "_rotateLine");
+            _selectedHandleStyle = _factory.CreateShapeStyle("SelectedHandle", 255, 255, 0, 255, 255, 255, 255, 255, 2.0);
+            _selectedBoundsStyle = _factory.CreateShapeStyle("SelectedBounds", 255, 0, 191, 255, 255, 255, 255, 255, 1.0);
             _rotateHandle = _factory.CreateEllipseShape(0, 0, 0, 0, _handleStyle, true, true, name: "_rotateHandle");
             _topLeftHandle = _factory.CreateEllipseShape(0, 0, 0, 0, _handleStyle, true, true, name: "_topLeftHandle");
             _topRightHandle = _factory.CreateEllipseShape(0, 0, 0, 0, _handleStyle, true, true, name: "_topRightHandle");
@@ -134,6 +137,8 @@ namespace Core2D.Editor.Tools.Decorators
             _bottomHandle = _factory.CreateRectangleShape(0, 0, 0, 0, _handleStyle, true, true, name: "_bottomHandle");
             _leftHandle = _factory.CreateRectangleShape(0, 0, 0, 0, _handleStyle, true, true, name: "_leftHandle");
             _rightHandle = _factory.CreateRectangleShape(0, 0, 0, 0, _handleStyle, true, true, name: "_rightHandle");
+            _boundsHandle = _factory.CreateRectangleShape(0, 0, 0, 0, _boundsStyle, true, false, name: "_boundsHandle");
+            _rotateLine = _factory.CreateLineShape(0, 0, 0, 0, _boundsStyle, true, name: "_rotateLine");
             _handles = new List<IBaseShape>
             {
                 _rotateHandle,
@@ -145,9 +150,10 @@ namespace Core2D.Editor.Tools.Decorators
                 _bottomHandle,
                 _leftHandle,
                 _rightHandle,
-                _moveHandle,
+                _boundsHandle,
                 _rotateLine
             };
+            _currentHandle = null;
         }
 
         /// <inheritdoc/>
@@ -214,10 +220,10 @@ namespace Core2D.Editor.Tools.Decorators
                 _groupBox.Update();
             }
 
-            _moveHandle.TopLeft.X = _groupBox.Bounds.Left;
-            _moveHandle.TopLeft.Y = _groupBox.Bounds.Top;
-            _moveHandle.BottomRight.X = _groupBox.Bounds.Right;
-            _moveHandle.BottomRight.Y = _groupBox.Bounds.Bottom;
+            _boundsHandle.TopLeft.X = _groupBox.Bounds.Left;
+            _boundsHandle.TopLeft.Y = _groupBox.Bounds.Top;
+            _boundsHandle.BottomRight.X = _groupBox.Bounds.Right;
+            _boundsHandle.BottomRight.Y = _groupBox.Bounds.Bottom;
 
             _rotateLine.Start.X = _groupBox.Bounds.CenterX;
             _rotateLine.Start.Y = _groupBox.Bounds.Top;
@@ -312,10 +318,15 @@ namespace Core2D.Editor.Tools.Decorators
             editor.PageState.DrawPoints = false;
 
             _mode = Mode.None;
+            if (_currentHandle != null)
+            {
+                _currentHandle.Style = _currentHandle == _boundsHandle ? _boundsStyle : _handleStyle;
+            }
+            _currentHandle = null;
             _isVisible = true;
 
             var shapesBuilder = _layer.Shapes.ToBuilder();
-            shapesBuilder.Add(_moveHandle);
+            shapesBuilder.Add(_boundsHandle);
             shapesBuilder.Add(_rotateLine);
             shapesBuilder.Add(_rotateHandle);
             shapesBuilder.Add(_topLeftHandle);
@@ -346,10 +357,15 @@ namespace Core2D.Editor.Tools.Decorators
             }
 
             _mode = Mode.None;
+            if (_currentHandle != null)
+            {
+                _currentHandle.Style = _currentHandle == _boundsHandle ? _boundsStyle : _handleStyle;
+            }
+            _currentHandle = null;
             _isVisible = false;
 
             var shapesBuilder = _layer.Shapes.ToBuilder();
-            shapesBuilder.Remove(_moveHandle);
+            shapesBuilder.Remove(_boundsHandle);
             shapesBuilder.Remove(_rotateLine);
             shapesBuilder.Remove(_rotateHandle);
             shapesBuilder.Remove(_topLeftHandle);
@@ -381,8 +397,13 @@ namespace Core2D.Editor.Tools.Decorators
             if (result != null)
             {
                 _mode = Mode.None;
+                if (_currentHandle != null)
+                {
+                    _currentHandle.Style = _currentHandle == _boundsHandle ? _boundsStyle : _handleStyle;
+                }
+                _currentHandle = null;
 
-                if (result == _moveHandle)
+                if (result == _boundsHandle)
                 {
                     _mode = Mode.Move;
                 }
@@ -425,6 +446,8 @@ namespace Core2D.Editor.Tools.Decorators
 
                 if (_mode != Mode.None)
                 {
+                    _currentHandle = result;
+                    _currentHandle.Style = _currentHandle == _boundsHandle ? _selectedBoundsStyle : _selectedHandleStyle;
                     _startX = sx;
                     _startY = sy;
                     _historyX = _startX;
@@ -476,43 +499,155 @@ namespace Core2D.Editor.Tools.Decorators
                 case Mode.Top:
                     {
                         // TODO:
+                        MoveTop(dy);
                     }
                     break;
                 case Mode.Bottom:
                     {
                         // TODO:
+                        MoveBottom(dy);
                     }
                     break;
                 case Mode.Left:
                     {
                         // TODO:
+                        MoveLeft(dx);
                     }
                     break;
                 case Mode.Right:
                     {
                         // TODO:
+                        MoveRight(dx);
                     }
                     break;
                 case Mode.TopLeft:
                     {
                         // TODO:
+                        MoveTop(dy);
+                        MoveLeft(dx);
                     }
                     break;
                 case Mode.TopRight:
                     {
                         // TODO:
+                        MoveTop(dy);
+                        MoveRight(dx);
                     }
                     break;
                 case Mode.BottomLeft:
                     {
                         // TODO:
+                        MoveBottom(dy);
+                        MoveLeft(dx);
                     }
                     break;
                 case Mode.BottomRight:
                     {
                         // TODO:
+                        MoveBottom(dy);
+                        MoveRight(dx);
                     }
                     break;
+            }
+        }
+
+        private void MoveTop(double dy)
+        {
+            double dyTop = dy >= 0.0 ? dy : dy;
+            for (int i = 0; i < _groupBox.Boxes.Length; i++)
+            {
+                var points = _groupBox.Boxes[i].Points;
+                if (points.Count == 0)
+                {
+                    continue;
+                }
+                points.Sort(PointShapeUtil.CompareY);
+
+                var lastPoint = points[points.Count - 1];
+
+                for (int j = 0; j < points.Count; j++)
+                {
+                    var point = points[j];
+                    if (point != lastPoint && point.Y != lastPoint.Y)
+                    {
+                        point.Move(null, 0, dyTop);
+                    }
+                }
+            }
+        }
+
+        private void MoveBottom(double dy)
+        {
+            double dyBottom = dy;
+            for (int i = 0; i < _groupBox.Boxes.Length; i++)
+            {
+                var points = _groupBox.Boxes[i].Points;
+                if (points.Count == 0)
+                {
+                    continue;
+                }
+                points.Sort(PointShapeUtil.CompareY);
+
+                var firstPoint = points[0];
+
+                for (int j = 0; j < points.Count; j++)
+                {
+                    var point = points[j];
+                    if (point != firstPoint && point.Y != firstPoint.Y)
+                    {
+                        point.Move(null, 0, dyBottom);
+                    }
+                }
+            }
+        }
+
+        private void MoveLeft(double dx)
+        {
+            double dxLeft = dx >= 0.0 ? dx : dx;
+            for (int i = 0; i < _groupBox.Boxes.Length; i++)
+            {
+                var points = _groupBox.Boxes[i].Points;
+                if (points.Count == 0)
+                {
+                    continue;
+                }
+                points.Sort(PointShapeUtil.CompareX);
+
+                var lastPoint = points[points.Count - 1];
+
+                for (int j = 0; j < points.Count; j++)
+                {
+                    var point = points[j];
+                    if (point != lastPoint && point.X != lastPoint.X)
+                    {
+                        point.Move(null, dxLeft, 0);
+                    }
+                }
+            }
+        }
+
+        private void MoveRight(double dx)
+        {
+            double dxRight = dx;
+            for (int i = 0; i < _groupBox.Boxes.Length; i++)
+            {
+                var points = _groupBox.Boxes[i].Points;
+                if (points.Count == 0)
+                {
+                    continue;
+                }
+                points.Sort(PointShapeUtil.CompareX);
+
+                var firstPoint = points[0];
+
+                for (int j = 0; j < points.Count; j++)
+                {
+                    var point = points[j];
+                    if (point != firstPoint && point.X != firstPoint.X)
+                    {
+                        point.Move(null, dxRight, 0);
+                    }
+                }
             }
         }
     }
