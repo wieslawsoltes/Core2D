@@ -617,6 +617,7 @@ namespace Core2D.Editor.Tools.Decorators
             var p0 = new Point2(_groupBox.Bounds.CenterX, _groupBox.Bounds.CenterY);
             var p1 = new Point2(sx, sy);
             var angle = p0.AngleBetween(p1);
+            System.Diagnostics.Debug.WriteLine($"Rotate: {angle - 270.0} : {angle}");
         }
 
         private void Move(double dx, double dy)
