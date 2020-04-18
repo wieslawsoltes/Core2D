@@ -30,6 +30,11 @@
                         <ContentControl Content="{Binding PointStyle}"/>
                     </ScrollViewer>
                 </TabItem>
+                <TabItem Header="SelectedPointStyle" Classes="property">
+                    <ScrollViewer>
+                        <ContentControl Content="{Binding SelectedPointStyle}"/>
+                    </ScrollViewer>
+                </TabItem>
             </TabControl>
         </TabItem>
         <TabItem Header="Zoom" Classes="property">
