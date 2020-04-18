@@ -3334,6 +3334,7 @@ namespace Core2D.Editor
                 {
                     PageState.SelectedShapes = default;
                 }
+
                 PageState.SelectedShape = shape;
 
                 OnShowDecorator();
