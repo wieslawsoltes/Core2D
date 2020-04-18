@@ -536,9 +536,7 @@ namespace Core2D.Editor.Tools.Decorators
                 case Mode.Rotate:
                     {
                         // TODO:
-                        var p0 = new Point2(_groupBox.Bounds.CenterX, _groupBox.Bounds.CenterY);
-                        var p1 = new Point2(sx, sy);
-                        var angle = p0.AngleBetween(p1);
+                        Rotate(sx, sy);
                     }
                     break;
                 case Mode.Top:
@@ -612,6 +610,13 @@ namespace Core2D.Editor.Tools.Decorators
             }
 
             return true;
+        }
+
+        private void Rotate(double sx, double sy)
+        {
+            var p0 = new Point2(_groupBox.Bounds.CenterX, _groupBox.Bounds.CenterY);
+            var p1 = new Point2(sx, sy);
+            var angle = p0.AngleBetween(p1);
         }
 
         private void Move(double dx, double dy)
