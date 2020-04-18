@@ -321,8 +321,8 @@ namespace Core2D.Editor.Tools.Decorators
             if (_currentHandle != null)
             {
                 _currentHandle.Style = _currentHandle == _boundsHandle ? _boundsStyle : _handleStyle;
+                _currentHandle = null;
             }
-            _currentHandle = null;
             _isVisible = true;
 
             var shapesBuilder = _layer.Shapes.ToBuilder();
@@ -360,8 +360,8 @@ namespace Core2D.Editor.Tools.Decorators
             if (_currentHandle != null)
             {
                 _currentHandle.Style = _currentHandle == _boundsHandle ? _boundsStyle : _handleStyle;
+                _currentHandle = null;
             }
-            _currentHandle = null;
             _isVisible = false;
 
             var shapesBuilder = _layer.Shapes.ToBuilder();
@@ -392,17 +392,18 @@ namespace Core2D.Editor.Tools.Decorators
             (double x, double y) = args;
             (double sx, double sy) = editor.TryToSnap(args);
 
+            _mode = Mode.None;
+            if (_currentHandle != null)
+            {
+                _currentHandle.Style = _currentHandle == _boundsHandle ? _boundsStyle : _handleStyle;
+                _currentHandle = null;
+                _layer.Invalidate();
+            }
+
             double radius = editor.Project.Options.HitThreshold / editor.PageState.ZoomX;
             var result = editor.HitTest.TryToGetShape(_handles, new Point2(x, y), radius);
             if (result != null)
             {
-                _mode = Mode.None;
-                if (_currentHandle != null)
-                {
-                    _currentHandle.Style = _currentHandle == _boundsHandle ? _boundsStyle : _handleStyle;
-                }
-                _currentHandle = null;
-
                 if (result == _boundsHandle)
                 {
                     _mode = Mode.Move;
@@ -448,10 +449,12 @@ namespace Core2D.Editor.Tools.Decorators
                 {
                     _currentHandle = result;
                     _currentHandle.Style = _currentHandle == _boundsHandle ? _selectedBoundsStyle : _selectedHandleStyle;
+                    System.Diagnostics.Debug.WriteLine($"HitTest {_currentHandle.Name}");
                     _startX = sx;
                     _startY = sy;
                     _historyX = _startX;
                     _historyY = _startY;
+                    _layer.Invalidate();
                     return true;
                 }
             }
