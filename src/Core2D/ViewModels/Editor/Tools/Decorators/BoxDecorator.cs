@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Core2D;
 using Core2D.Containers;
 using Core2D.Input;
@@ -59,12 +60,16 @@ namespace Core2D.Editor.Tools.Decorators
         private readonly IRectangleShape _bottomHandle;
         private readonly IRectangleShape _leftHandle;
         private readonly IRectangleShape _rightHandle;
-        private IList<IBaseShape> _handles;
+        private List<IBaseShape> _handles;
         private IBaseShape _currentHandle = null;
-        private Dictionary<IBaseShape, IPointShape> _anchorTop;
-        private Dictionary<IBaseShape, IPointShape> _anchorBottom;
-        private Dictionary<IBaseShape, IPointShape> _anchorLeft;
-        private Dictionary<IBaseShape, IPointShape> _anchorRight;
+        private IPointShape _anchorTop;
+        private IPointShape _anchorBottom;
+        private IPointShape _anchorLeft;
+        private IPointShape _anchorRight;
+        private List<IPointShape> _pointsTop;
+        private List<IPointShape> _pointsBottom;
+        private List<IPointShape> _pointsLeft;
+        private List<IPointShape> _pointsRight;
         private Mode _mode = Mode.None;
         private double _startX;
         private double _startY;
@@ -330,6 +335,10 @@ namespace Core2D.Editor.Tools.Decorators
                 _anchorBottom = null;
                 _anchorLeft = null;
                 _anchorRight = null;
+                _pointsTop = null;
+                _pointsBottom = null;
+                _pointsLeft = null;
+                _pointsRight = null;
             }
             _isVisible = true;
 
@@ -373,6 +382,10 @@ namespace Core2D.Editor.Tools.Decorators
                 _anchorBottom = null;
                 _anchorLeft = null;
                 _anchorRight = null;
+                _pointsTop = null;
+                _pointsBottom = null;
+                _pointsLeft = null;
+                _pointsRight = null;
             }
             _isVisible = false;
 
@@ -413,6 +426,10 @@ namespace Core2D.Editor.Tools.Decorators
                 _anchorBottom = null;
                 _anchorLeft = null;
                 _anchorRight = null;
+                _pointsTop = null;
+                _pointsBottom = null;
+                _pointsLeft = null;
+                _pointsRight = null;
                 _layer.Invalidate();
             }
 
@@ -469,10 +486,14 @@ namespace Core2D.Editor.Tools.Decorators
                     _startY = sy;
                     _historyX = _startX;
                     _historyY = _startY;
-                    _anchorTop = new Dictionary<IBaseShape, IPointShape>();
-                    _anchorBottom = new Dictionary<IBaseShape, IPointShape>();
-                    _anchorLeft = new Dictionary<IBaseShape, IPointShape>();
-                    _anchorRight = new Dictionary<IBaseShape, IPointShape>();
+                    _anchorTop = null;
+                    _anchorBottom = null;
+                    _anchorLeft = null;
+                    _anchorRight = null;
+                    _pointsTop = null;
+                    _pointsBottom = null;
+                    _pointsLeft = null;
+                    _pointsRight = null;
                     _layer.Invalidate();
                     return true;
                 }
@@ -581,140 +602,108 @@ namespace Core2D.Editor.Tools.Decorators
 
         private void MoveTop(double dy)
         {
-            var moved = new HashSet<IPointShape>();
-            double dyTop = dy >= 0.0 ? dy : dy;
-            for (int i = 0; i < _groupBox.Boxes.Length; i++)
+            if (_anchorTop == null)
             {
-                var points = _groupBox.Boxes[i].Points;
+                var points = _groupBox.Boxes.SelectMany(x => x.Points).Distinct().ToList();
                 if (points.Count == 0)
                 {
-                    continue;
+                    return;
                 }
-                points.Sort(PointShapeUtil.CompareY);
+                _anchorTop = points[points.Count - 1];
+                _pointsTop = points;
+            }
 
-                var shape = _groupBox.Boxes[i].Shape;
-                if (!_anchorTop.TryGetValue(shape, out var anchorPoint))
-                {
-                    anchorPoint = points[points.Count - 1];
-                    _anchorTop[shape] = anchorPoint;
-                }
+            _pointsTop.Sort(PointShapeUtil.CompareY);
 
-                for (int j = 0; j < points.Count; j++)
+            for (int i = 0; i < _pointsTop.Count; i++)
+            {
+                var point = _pointsTop[i];
+                if (IsMovable(point)
+                    && point != _anchorTop
+                    && !(point.Y == _anchorTop.Y && _pointsTop.Count > 2))
                 {
-                    var point = points[j];
-                    if (point != anchorPoint && !(point.Y == anchorPoint.Y && points.Count > 2))
-                    {
-                        if (IsMovable(point) && !moved.Contains(point))
-                        {
-                            point.Move(null, 0, dyTop);
-                            moved.Add(point);
-                        }
-                    }
+                    point.Move(null, 0, dy);
                 }
             }
         }
 
         private void MoveBottom(double dy)
         {
-            var moved = new HashSet<IPointShape>();
-            double dyBottom = dy;
-            for (int i = 0; i < _groupBox.Boxes.Length; i++)
+            if (_anchorBottom == null)
             {
-                var points = _groupBox.Boxes[i].Points;
+                var points = _groupBox.Boxes.SelectMany(x => x.Points).Distinct().ToList();
                 if (points.Count == 0)
                 {
-                    continue;
+                    return;
                 }
-                points.Sort(PointShapeUtil.CompareY);
+                _anchorBottom = points[0];
+                _pointsBottom = points;
+            }
 
-                var shape = _groupBox.Boxes[i].Shape;
-                if (!_anchorBottom.TryGetValue(shape, out var anchorPoint))
-                {
-                    anchorPoint = points[0];
-                    _anchorBottom[shape] = anchorPoint;
-                }
+            _pointsBottom.Sort(PointShapeUtil.CompareY);
 
-                for (int j = 0; j < points.Count; j++)
+            for (int i = 0; i < _pointsBottom.Count; i++)
+            {
+                var point = _pointsBottom[i];
+                if (IsMovable(point)
+                    && point != _anchorBottom
+                    && !(point.Y == _anchorBottom.Y && _pointsBottom.Count > 2))
                 {
-                    var point = points[j];
-                    if (point != anchorPoint && !(point.Y == anchorPoint.Y && points.Count > 2))
-                    {
-                        if (IsMovable(point) && !moved.Contains(point))
-                        {
-                            point.Move(null, 0, dyBottom);
-                            moved.Add(point);
-                        }
-                    }
+                    point.Move(null, 0, dy);
                 }
             }
         }
 
         private void MoveLeft(double dx)
         {
-            var moved = new HashSet<IPointShape>();
-            double dxLeft = dx >= 0.0 ? dx : dx;
-            for (int i = 0; i < _groupBox.Boxes.Length; i++)
+            if (_anchorLeft == null)
             {
-                var points = _groupBox.Boxes[i].Points;
+                var points = _groupBox.Boxes.SelectMany(x => x.Points).Distinct().ToList();
                 if (points.Count == 0)
                 {
-                    continue;
+                    return;
                 }
-                points.Sort(PointShapeUtil.CompareX);
+                _anchorLeft = points[points.Count - 1];
+                _pointsLeft = points;
+            }
 
-                var shape = _groupBox.Boxes[i].Shape;
-                if (!_anchorLeft.TryGetValue(shape, out var anchorPoint))
-                {
-                    anchorPoint = points[points.Count - 1];
-                    _anchorLeft[shape] = anchorPoint;
-                }
+            _pointsLeft.Sort(PointShapeUtil.CompareX);
 
-                for (int j = 0; j < points.Count; j++)
+            for (int i = 0; i < _pointsLeft.Count; i++)
+            {
+                var point = _pointsLeft[i];
+                if (IsMovable(point)
+                    && point != _anchorLeft 
+                    && !(point.X == _anchorLeft.X && _pointsLeft.Count > 2))
                 {
-                    var point = points[j];
-                    if (point != anchorPoint && !(point.X == anchorPoint.X && points.Count > 2))
-                    {
-                        if (IsMovable(point) && !moved.Contains(point))
-                        {
-                            point.Move(null, dxLeft, 0);
-                            moved.Add(point);
-                        }
-                    }
+                    point.Move(null, dx, 0);
                 }
             }
         }
 
         private void MoveRight(double dx)
         {
-            var moved = new HashSet<IPointShape>();
-            double dxRight = dx;
-            for (int i = 0; i < _groupBox.Boxes.Length; i++)
+            if (_anchorRight == null)
             {
-                var points = _groupBox.Boxes[i].Points;
+                var points = _groupBox.Boxes.SelectMany(x => x.Points).Distinct().ToList();
                 if (points.Count == 0)
                 {
-                    continue;
+                    return;
                 }
-                points.Sort(PointShapeUtil.CompareX);
+                _anchorRight = points[0];
+                _pointsRight = points;
+            }
 
-                var shape = _groupBox.Boxes[i].Shape;
-                if (!_anchorRight.TryGetValue(shape, out var anchorPoint))
-                {
-                    anchorPoint = points[0];
-                    _anchorRight[shape] = anchorPoint;
-                }
+            _pointsRight.Sort(PointShapeUtil.CompareX);
 
-                for (int j = 0; j < points.Count; j++)
+            for (int i = 0; i < _pointsRight.Count; i++)
+            {
+                var point = _pointsRight[i];
+                if (IsMovable(point)
+                    && point != _anchorRight
+                    && !(point.X == _anchorRight.X && _pointsRight.Count > 2))
                 {
-                    var point = points[j];
-                    if (point != anchorPoint && !(point.X == anchorPoint.X && points.Count > 2))
-                    {
-                        if (IsMovable(point) && !moved.Contains(point))
-                        {
-                            point.Move(null, dxRight, 0);
-                            moved.Add(point);
-                        }
-                    }
+                    point.Move(null, dx, 0);
                 }
             }
         }
