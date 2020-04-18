@@ -449,7 +449,6 @@ namespace Core2D.Editor.Tools.Decorators
                 {
                     _currentHandle = result;
                     _currentHandle.Style = _currentHandle == _boundsHandle ? _selectedBoundsStyle : _selectedHandleStyle;
-                    System.Diagnostics.Debug.WriteLine($"HitTest {_currentHandle.Name}");
                     _startX = sx;
                     _startY = sy;
                     _historyX = _startX;
