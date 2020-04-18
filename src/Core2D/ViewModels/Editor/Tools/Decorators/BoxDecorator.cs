@@ -524,9 +524,6 @@ namespace Core2D.Editor.Tools.Decorators
             double dx = sx - _startX;
             double dy = sy - _startY;
 
-            _startX = sx;
-            _startY = sy;
-
             switch (_mode)
             {
                 case Mode.None:
@@ -594,6 +591,9 @@ namespace Core2D.Editor.Tools.Decorators
                     }
                     break;
             }
+
+            _startX = sx;
+            _startY = sy;
         }
 
         private bool IsMovable(IBaseShape shape, IPointShape point)
