@@ -48,7 +48,7 @@ namespace Core2D.Shapes
                 renderer.Draw(dc, this, dx, dy);
             }
 
-            if (renderer.State.SelectedShape != null)
+            if (renderer.State.SelectedShape != null && renderer.State.DrawPoints == true)
             {
                 if (this == renderer.State.SelectedShape)
                 {
@@ -70,7 +70,7 @@ namespace Core2D.Shapes
                 }
             }
 
-            if (renderer.State.SelectedShapes != null)
+            if (renderer.State.SelectedShapes != null && renderer.State.DrawPoints == true)
             {
                 if (renderer.State.SelectedShapes.Contains(this))
                 {
