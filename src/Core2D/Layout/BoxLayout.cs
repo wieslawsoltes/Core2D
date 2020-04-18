@@ -215,7 +215,7 @@ namespace Core2D.Layout
 
             foreach (var point in boxes.SelectMany(box => box.Points).Distinct())
             {
-                ShapeBox.Rotate(point, radians, centerX, centerY, out var x, out var y);
+                PointShapeUtil.Rotate(point, radians, centerX, centerY, out var x, out var y);
                 previous.Add((point, point.X, point.Y));
                 next.Add((point, x, y));
                 point.X = x;
