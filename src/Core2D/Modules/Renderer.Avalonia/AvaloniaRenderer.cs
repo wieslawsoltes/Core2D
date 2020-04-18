@@ -456,11 +456,6 @@ namespace Core2D.Renderer.Avalonia
                 return;
             }
 
-            if (_state.DrawPoints == false)
-            {
-                return;
-            }
-
             bool isSelected = (_state.SelectedShape != null && _state.SelectedShape == point)
                 || (_state.HoveredShape != null && _state.HoveredShape == point);
             var pointStyle = isSelected ? _state.SelectedPointStyle : _state.PointStyle;
