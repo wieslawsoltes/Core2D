@@ -66,6 +66,7 @@ namespace Core2D.Editor.Tools.Decorators
         private IPointShape _anchorBottom;
         private IPointShape _anchorLeft;
         private IPointShape _anchorRight;
+        private List<IPointShape> _pointsMove;
         private List<IPointShape> _pointsTop;
         private List<IPointShape> _pointsBottom;
         private List<IPointShape> _pointsLeft;
@@ -335,6 +336,7 @@ namespace Core2D.Editor.Tools.Decorators
                 _anchorBottom = null;
                 _anchorLeft = null;
                 _anchorRight = null;
+                _pointsMove = null;
                 _pointsTop = null;
                 _pointsBottom = null;
                 _pointsLeft = null;
@@ -382,6 +384,7 @@ namespace Core2D.Editor.Tools.Decorators
                 _anchorBottom = null;
                 _anchorLeft = null;
                 _anchorRight = null;
+                _pointsMove = null;
                 _pointsTop = null;
                 _pointsBottom = null;
                 _pointsLeft = null;
@@ -426,6 +429,7 @@ namespace Core2D.Editor.Tools.Decorators
                 _anchorBottom = null;
                 _anchorLeft = null;
                 _anchorRight = null;
+                _pointsMove = null;
                 _pointsTop = null;
                 _pointsBottom = null;
                 _pointsLeft = null;
@@ -490,6 +494,7 @@ namespace Core2D.Editor.Tools.Decorators
                     _anchorBottom = null;
                     _anchorLeft = null;
                     _anchorRight = null;
+                    _pointsMove = null;
                     _pointsTop = null;
                     _pointsBottom = null;
                     _pointsLeft = null;
@@ -528,10 +533,7 @@ namespace Core2D.Editor.Tools.Decorators
                     break;
                 case Mode.Move:
                     {
-                        foreach (var shape in _shapes)
-                        {
-                            shape.Move(null, dx, dy);
-                        }
+                        Move(dx, dy);
                     }
                     break;
                 case Mode.Rotate:
@@ -594,17 +596,45 @@ namespace Core2D.Editor.Tools.Decorators
             }
         }
 
-        private bool IsMovable(IPointShape point)
+        private bool IsMovable(IBaseShape shape, IPointShape point)
         {
-            return !point.State.Flags.HasFlag(ShapeStateFlags.Locked)
-                && !point.State.Flags.HasFlag(ShapeStateFlags.Connector);
+            if (point.State.Flags.HasFlag(ShapeStateFlags.Locked))
+            {
+                return false;
+            }
+
+            if (point.State.Flags.HasFlag(ShapeStateFlags.Connector) && point.Owner != shape)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        private void Move(double dx, double dy)
+        {
+            if (_pointsMove == null)
+            {
+                var points = _groupBox.Boxes.SelectMany(x => x.Points.Where(p => IsMovable(x.Shape, p))).Distinct().ToList();
+                if (points.Count == 0)
+                {
+                    return;
+                }
+                _pointsMove = points;
+            }
+
+            for (int i = 0; i < _pointsMove.Count; i++)
+            {
+                var point = _pointsMove[i];
+                point.Move(null, dx, dy);
+            }
         }
 
         private void MoveTop(double dy)
         {
             if (_anchorTop == null)
             {
-                var points = _groupBox.Boxes.SelectMany(x => x.Points).Distinct().ToList();
+                var points = _groupBox.Boxes.SelectMany(x => x.Points.Where(p => IsMovable(x.Shape, p))).Distinct().ToList();
                 if (points.Count == 0)
                 {
                     return;
@@ -618,9 +648,7 @@ namespace Core2D.Editor.Tools.Decorators
             for (int i = 0; i < _pointsTop.Count; i++)
             {
                 var point = _pointsTop[i];
-                if (IsMovable(point)
-                    && point != _anchorTop
-                    && !(point.Y == _anchorTop.Y && _pointsTop.Count > 2))
+                if (point != _anchorTop && !(point.Y == _anchorTop.Y && _pointsTop.Count > 2))
                 {
                     point.Move(null, 0, dy);
                 }
@@ -631,7 +659,7 @@ namespace Core2D.Editor.Tools.Decorators
         {
             if (_anchorBottom == null)
             {
-                var points = _groupBox.Boxes.SelectMany(x => x.Points).Distinct().ToList();
+                var points = _groupBox.Boxes.SelectMany(x => x.Points.Where(p => IsMovable(x.Shape, p))).Distinct().ToList();
                 if (points.Count == 0)
                 {
                     return;
@@ -645,9 +673,7 @@ namespace Core2D.Editor.Tools.Decorators
             for (int i = 0; i < _pointsBottom.Count; i++)
             {
                 var point = _pointsBottom[i];
-                if (IsMovable(point)
-                    && point != _anchorBottom
-                    && !(point.Y == _anchorBottom.Y && _pointsBottom.Count > 2))
+                if (point != _anchorBottom && !(point.Y == _anchorBottom.Y && _pointsBottom.Count > 2))
                 {
                     point.Move(null, 0, dy);
                 }
@@ -658,7 +684,7 @@ namespace Core2D.Editor.Tools.Decorators
         {
             if (_anchorLeft == null)
             {
-                var points = _groupBox.Boxes.SelectMany(x => x.Points).Distinct().ToList();
+                var points = _groupBox.Boxes.SelectMany(x => x.Points.Where(p => IsMovable(x.Shape, p))).Distinct().ToList();
                 if (points.Count == 0)
                 {
                     return;
@@ -672,9 +698,7 @@ namespace Core2D.Editor.Tools.Decorators
             for (int i = 0; i < _pointsLeft.Count; i++)
             {
                 var point = _pointsLeft[i];
-                if (IsMovable(point)
-                    && point != _anchorLeft 
-                    && !(point.X == _anchorLeft.X && _pointsLeft.Count > 2))
+                if (point != _anchorLeft && !(point.X == _anchorLeft.X && _pointsLeft.Count > 2))
                 {
                     point.Move(null, dx, 0);
                 }
@@ -685,7 +709,7 @@ namespace Core2D.Editor.Tools.Decorators
         {
             if (_anchorRight == null)
             {
-                var points = _groupBox.Boxes.SelectMany(x => x.Points).Distinct().ToList();
+                var points = _groupBox.Boxes.SelectMany(x => x.Points.Where(p => IsMovable(x.Shape, p))).Distinct().ToList();
                 if (points.Count == 0)
                 {
                     return;
@@ -699,9 +723,7 @@ namespace Core2D.Editor.Tools.Decorators
             for (int i = 0; i < _pointsRight.Count; i++)
             {
                 var point = _pointsRight[i];
-                if (IsMovable(point)
-                    && point != _anchorRight
-                    && !(point.X == _anchorRight.X && _pointsRight.Count > 2))
+                if (point != _anchorRight && !(point.X == _anchorRight.X && _pointsRight.Count > 2))
                 {
                     point.Move(null, dx, 0);
                 }
