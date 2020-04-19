@@ -41,6 +41,8 @@ namespace Core2D.Renderer.UnitTests
                 nameof(IShapeState.Visible),
                 nameof(IShapeState.Printable),
                 nameof(IShapeState.Locked),
+                nameof(IShapeState.Size),
+                nameof(IShapeState.Thickness),
                 nameof(IShapeState.Connector),
                 nameof(IShapeState.None),
                 nameof(IShapeState.Standalone),
@@ -100,6 +102,32 @@ namespace Core2D.Renderer.UnitTests
             Assert.Equal(ShapeStateFlags.Locked, target.Flags);
 
             target.Locked = false;
+            Assert.Equal(ShapeStateFlags.Default, target.Flags);
+        }
+
+        [Fact]
+        [Trait("Core2D.Renderer", "Renderer")]
+        public void Size_Property()
+        {
+            var target = _factory.CreateShapeState();
+
+            target.Size = true;
+            Assert.Equal(ShapeStateFlags.Size, target.Flags);
+
+            target.Size = false;
+            Assert.Equal(ShapeStateFlags.Default, target.Flags);
+        }
+
+        [Fact]
+        [Trait("Core2D.Renderer", "Renderer")]
+        public void Thickness_Property()
+        {
+            var target = _factory.CreateShapeState();
+
+            target.Thickness = true;
+            Assert.Equal(ShapeStateFlags.Thickness, target.Flags);
+
+            target.Thickness = false;
             Assert.Equal(ShapeStateFlags.Default, target.Flags);
         }
 
