@@ -27,7 +27,7 @@ namespace Core2D.Renderer
         bool Printable { get; set; }
 
         /// <summary>
-        /// Gets or sets <see cref="ShapeStateFlags.Default"/> flag.
+        /// Gets or sets <see cref="ShapeStateFlags.Locked"/> flag.
         /// </summary>
         bool Locked { get; set; }
 
