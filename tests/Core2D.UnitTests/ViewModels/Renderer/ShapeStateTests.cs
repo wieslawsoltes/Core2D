@@ -32,7 +32,7 @@ namespace Core2D.Renderer.UnitTests
                 ShapeStateFlags.Visible
                 | ShapeStateFlags.Printable
                 | ShapeStateFlags.Standalone, state.Flags);
-            Assert.Equal(10, target.PropertyNames.Count);
+            Assert.Equal(12, target.PropertyNames.Count);
 
             var propertyNames = new string[]
             {
