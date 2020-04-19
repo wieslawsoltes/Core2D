@@ -534,58 +534,49 @@ namespace Core2D.Editor.Tools.Decorators
                     break;
                 case Mode.Rotate:
                     {
-                        // TODO:
                         Rotate(sx, sy);
                     }
                     break;
                 case Mode.Top:
                     {
-                        // TODO:
                         MoveTop(dy);
                     }
                     break;
                 case Mode.Bottom:
                     {
-                        // TODO:
                         MoveBottom(dy);
                     }
                     break;
                 case Mode.Left:
                     {
-                        // TODO:
                         MoveLeft(dx);
                     }
                     break;
                 case Mode.Right:
                     {
-                        // TODO:
                         MoveRight(dx);
                     }
                     break;
                 case Mode.TopLeft:
                     {
-                        // TODO:
                         MoveTop(dy);
                         MoveLeft(dx);
                     }
                     break;
                 case Mode.TopRight:
                     {
-                        // TODO:
                         MoveTop(dy);
                         MoveRight(dx);
                     }
                     break;
                 case Mode.BottomLeft:
                     {
-                        // TODO:
                         MoveBottom(dy);
                         MoveLeft(dx);
                     }
                     break;
                 case Mode.BottomRight:
                     {
-                        // TODO:
                         MoveBottom(dy);
                         MoveRight(dx);
                     }
