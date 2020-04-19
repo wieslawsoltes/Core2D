@@ -636,8 +636,14 @@ namespace Core2D.Editor.Tools.Decorators
 
         private void ScaleTop(double dy)
         {
+            var oldSize = _groupBox.Bounds.Height;
+            var newSize = oldSize - dy;
+            if (oldSize <= 0)
+            {
+                return;
+            }
             var scaleX = 1.0;
-            var scaleY = (_groupBox.Bounds.Height - dy) / _groupBox.Bounds.Height;
+            var scaleY = newSize / oldSize;
             var centerX = _groupBox.Bounds.CenterX;
             var centerY = _groupBox.Bounds.Bottom;
             var matrix = Matrix2.ScaleAt(scaleX, scaleY, centerX, centerY);
@@ -647,8 +653,14 @@ namespace Core2D.Editor.Tools.Decorators
 
         private void ScaleBottom(double dy)
         {
+            var oldSize = _groupBox.Bounds.Height;
+            var newSize = oldSize + dy;
+            if (oldSize <= 0)
+            {
+                return;
+            }
             var scaleX = 1.0;
-            var scaleY = (_groupBox.Bounds.Height + dy) / _groupBox.Bounds.Height;
+            var scaleY = newSize / oldSize;
             var centerX = _groupBox.Bounds.CenterX;
             var centerY = _groupBox.Bounds.Top;
             var matrix = Matrix2.ScaleAt(scaleX, scaleY, centerX, centerY);
@@ -658,7 +670,13 @@ namespace Core2D.Editor.Tools.Decorators
 
         private void ScaleLeft(double dx)
         {
-            var scaleX = (_groupBox.Bounds.Width - dx) / _groupBox.Bounds.Width;
+            var oldSize = _groupBox.Bounds.Width;
+            var newSize = oldSize - dx;
+            if (oldSize <= 0)
+            {
+                return;
+            }
+            var scaleX = newSize / oldSize;
             var scaleY = 1.0;
             var centerX = _groupBox.Bounds.Right;
             var centerY = _groupBox.Bounds.CenterY;
@@ -669,7 +687,13 @@ namespace Core2D.Editor.Tools.Decorators
 
         private void ScaleRight(double dx)
         {
-            var scaleX = (_groupBox.Bounds.Width + dx) / _groupBox.Bounds.Width;
+            var oldSize = _groupBox.Bounds.Width;
+            var newSize = oldSize + dx;
+            if (oldSize <= 0)
+            {
+                return;
+            }
+            var scaleX = newSize / oldSize;
             var scaleY = 1.0;
             var centerX = _groupBox.Bounds.Left;
             var centerY = _groupBox.Bounds.CenterY;
