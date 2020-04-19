@@ -271,31 +271,14 @@ namespace Core2D.Editor
             throw new NotImplementedException();
         }
 
-        /// <summary>
-        /// Snap value by specified snap amount.
-        /// </summary>
-        /// <param name="value">The value to snap.</param>
-        /// <param name="snap">The snap amount.</param>
-        /// <returns>The snapped value.</returns>
-        public static double Snap(double value, double snap)
-        {
-            if (snap == 0.0)
-            {
-                return value;
-            }
-            decimal c = (decimal)value % (decimal)snap;
-            decimal r = c >= (decimal)snap / 2m ? (decimal)value + (decimal)snap - c : (decimal)value - c;
-            return (double)r;
-        }
-
         /// <inheritdoc/>
         public (double sx, double sy) TryToSnap(InputArgs args)
         {
             if (Project != null && Project.Options.SnapToGrid == true)
             {
                 return (
-                    Snap(args.X, Project.Options.SnapX),
-                    Snap(args.Y, Project.Options.SnapY));
+                    PointUtil.Snap(args.X, Project.Options.SnapX),
+                    PointUtil.Snap(args.Y, Project.Options.SnapY));
             }
             else
             {
@@ -3036,8 +3019,8 @@ namespace Core2D.Editor
                 Factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
             var style = (IShapeStyle)selected.Copy(null);
             var layer = Project?.CurrentContainer?.CurrentLayer;
-            double sx = Project.Options.SnapToGrid ? Snap(x, Project.Options.SnapX) : x;
-            double sy = Project.Options.SnapToGrid ? Snap(y, Project.Options.SnapY) : y;
+            double sx = Project.Options.SnapToGrid ? PointUtil.Snap(x, Project.Options.SnapX) : x;
+            double sy = Project.Options.SnapToGrid ? PointUtil.Snap(y, Project.Options.SnapY) : y;
 
             var image = Factory.CreateImageShape(sx, sy, style, key);
             image.BottomRight.X = sx + 320;
@@ -3071,8 +3054,8 @@ namespace Core2D.Editor
         /// <inheritdoc/>
         public void OnDropShapeAsClone<T>(T shape, double x, double y) where T : IBaseShape
         {
-            double sx = Project.Options.SnapToGrid ? Snap(x, Project.Options.SnapX) : x;
-            double sy = Project.Options.SnapToGrid ? Snap(y, Project.Options.SnapY) : y;
+            double sx = Project.Options.SnapToGrid ? PointUtil.Snap(x, Project.Options.SnapX) : x;
+            double sy = Project.Options.SnapToGrid ? PointUtil.Snap(y, Project.Options.SnapY) : y;
 
             try
             {
@@ -3159,8 +3142,8 @@ namespace Core2D.Editor
                 Factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
             var style = (IShapeStyle)selected.Copy(null);
             var layer = Project?.CurrentContainer?.CurrentLayer;
-            double sx = Project.Options.SnapToGrid ? Snap(x, Project.Options.SnapX) : x;
-            double sy = Project.Options.SnapToGrid ? Snap(y, Project.Options.SnapY) : y;
+            double sx = Project.Options.SnapToGrid ? PointUtil.Snap(x, Project.Options.SnapX) : x;
+            double sy = Project.Options.SnapToGrid ? PointUtil.Snap(y, Project.Options.SnapY) : y;
 
             var g = Factory.CreateGroupShape(ProjectEditorConfiguration.DefaulGroupName);
 
