@@ -343,7 +343,7 @@ namespace Core2D.Editor.Tools.Decorators
                 _pointsBottom = null;
                 _pointsLeft = null;
                 _pointsRight = null;
-                _rotateAngle = 270.0;
+                _rotateAngle = 0.0;
             }
             _isVisible = true;
 
@@ -393,7 +393,7 @@ namespace Core2D.Editor.Tools.Decorators
                 _pointsBottom = null;
                 _pointsLeft = null;
                 _pointsRight = null;
-                _rotateAngle = 270.0;
+                _rotateAngle = 0.0;
             }
             _isVisible = false;
 
@@ -440,7 +440,7 @@ namespace Core2D.Editor.Tools.Decorators
                 _pointsBottom = null;
                 _pointsLeft = null;
                 _pointsRight = null;
-                _rotateAngle = 270.0;
+                _rotateAngle = 0.0;
                 _layer.Invalidate();
             }
 
@@ -507,7 +507,7 @@ namespace Core2D.Editor.Tools.Decorators
                     _pointsBottom = null;
                     _pointsLeft = null;
                     _pointsRight = null;
-                    _rotateAngle = 270.0;
+                    _rotateAngle = 0.0;
                     _layer.Invalidate();
                     return true;
                 }
@@ -640,7 +640,7 @@ namespace Core2D.Editor.Tools.Decorators
                     return;
                 }
                 _pointsRotate = points;
-                _rotateAngle = 270.0;
+                _rotateAngle = 0.0;
             }
 
             var centerX = _groupBox.Bounds.CenterX;
@@ -650,6 +650,11 @@ namespace Core2D.Editor.Tools.Decorators
             var angle = p0.AngleBetween(p1) - 270.0;
 
             angle = PointUtil.Snap(angle, 90.0);
+            if (_rotateAngle == angle)
+            {
+                return;
+            }
+            _rotateAngle = angle;
 
             var radians = angle * (Math.PI / 180.0);
             var matrix = Matrix2.Rotation(radians, centerX, centerY);
