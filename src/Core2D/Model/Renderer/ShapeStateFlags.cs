@@ -29,28 +29,38 @@ namespace Core2D.Renderer
         Locked = 4,
 
         /// <summary>
+        /// Shape size is scaled.
+        /// </summary>
+        Size = 8,
+
+        /// <summary>
+        /// Shape thickness is scaled.
+        /// </summary>
+        Thickness = 16,
+
+        /// <summary>
         /// Shape is connector.
         /// </summary>
-        Connector = 8,
+        Connector = 32,
 
         /// <summary>
         /// Shape in none.
         /// </summary>
-        None = 16,
+        None = 64,
 
         /// <summary>
         /// Shape is standalone.
         /// </summary>
-        Standalone = 32,
+        Standalone = 128,
 
         /// <summary>
         /// Shape is an input.
         /// </summary>
-        Input = 64,
+        Input = 256,
 
         /// <summary>
         /// Shape is and output.
         /// </summary>
-        Output = 128
+        Output = 512
     }
 }
