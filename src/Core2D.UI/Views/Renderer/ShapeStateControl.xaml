@@ -14,6 +14,8 @@
             <CheckBox Content="Visible" IsChecked="{Binding Visible, Mode=TwoWay}" Classes="default"/>
             <CheckBox Content="Printable" IsChecked="{Binding Printable, Mode=TwoWay}" Classes="default"/>
             <CheckBox Content="Locked" IsChecked="{Binding Locked, Mode=TwoWay}" Classes="default"/>
+            <CheckBox Content="Size" IsChecked="{Binding Size, Mode=TwoWay}" Classes="default"/>
+            <CheckBox Content="Thickness" IsChecked="{Binding Thickness, Mode=TwoWay}" Classes="default"/>
             <CheckBox Content="Connector" IsChecked="{Binding Connector, Mode=TwoWay}" Classes="default"/>
             <CheckBox Content="None" IsChecked="{Binding None, Mode=TwoWay}" Classes="default"/>
             <CheckBox Content="Standalone" IsChecked="{Binding Standalone, Mode=TwoWay}" Classes="default"/>
