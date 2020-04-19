@@ -32,6 +32,16 @@ namespace Core2D.Renderer
         bool Locked { get; set; }
 
         /// <summary>
+        /// Gets or sets <see cref="ShapeStateFlags.Size"/> flag.
+        /// </summary>
+        bool Size { get; set; }
+
+        /// <summary>
+        /// Gets or sets <see cref="ShapeStateFlags.Thickness"/> flag.
+        /// </summary>
+        bool Thickness { get; set; }
+
+        /// <summary>
         /// Gets or sets <see cref="ShapeStateFlags.Connector"/> flag.
         /// </summary>
         bool Connector { get; set; }
