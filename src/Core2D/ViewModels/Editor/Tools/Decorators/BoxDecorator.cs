@@ -648,15 +648,8 @@ namespace Core2D.Editor.Tools.Decorators
             var p0 = new Point2(centerX, centerY);
             var p1 = new Point2(sx, sy);
             var angle = p0.AngleBetween(p1) - 270.0;
-
-            angle = PointUtil.Snap(angle, 90.0);
-            if (_rotateAngle == angle)
-            {
-                return;
-            }
-            _rotateAngle = angle;
-
-            var radians = angle * (Math.PI / 180.0);
+            var delta = angle - _rotateAngle;
+            var radians = delta * (Math.PI / 180.0);
             var matrix = Matrix2.Rotation(radians, centerX, centerY);
 
             for (int i = 0; i < _pointsRotate.Count; i++)
@@ -667,6 +660,7 @@ namespace Core2D.Editor.Tools.Decorators
                 point.Y = transformed.Y;
             }
 
+            _rotateAngle = angle;
             _groupBox.Update();
         }
 
