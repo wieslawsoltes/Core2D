@@ -156,6 +156,17 @@ namespace Core2D.Editor.Tools.Decorators
                 _rotateLine
             };
             _currentHandle = null;
+            _rotateHandle.State.Flags |= ShapeStateFlags.Size | ShapeStateFlags.Thickness;
+            _topLeftHandle.State.Flags |= ShapeStateFlags.Size | ShapeStateFlags.Thickness;
+            _topRightHandle.State.Flags |= ShapeStateFlags.Size | ShapeStateFlags.Thickness;
+            _bottomLeftHandle.State.Flags |= ShapeStateFlags.Size | ShapeStateFlags.Thickness;
+            _bottomRightHandle.State.Flags |= ShapeStateFlags.Size | ShapeStateFlags.Thickness;
+            _topHandle.State.Flags |= ShapeStateFlags.Size | ShapeStateFlags.Thickness;
+            _bottomHandle.State.Flags |= ShapeStateFlags.Size | ShapeStateFlags.Thickness;
+            _leftHandle.State.Flags |= ShapeStateFlags.Size | ShapeStateFlags.Thickness;
+            _rightHandle.State.Flags |= ShapeStateFlags.Size | ShapeStateFlags.Thickness;
+            _boundsHandle.State.Flags |= ShapeStateFlags.Thickness;
+            _rotateLine.State.Flags |= ShapeStateFlags.Thickness;
         }
 
         /// <inheritdoc/>
