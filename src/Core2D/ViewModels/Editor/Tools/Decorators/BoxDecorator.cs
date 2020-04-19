@@ -708,8 +708,8 @@ namespace Core2D.Editor.Tools.Decorators
 
             var scaleX = 1.0;
             var scaleY = (_groupBox.Bounds.Height - dy) / _groupBox.Bounds.Height;
-            var centerX = _anchorTop.X;
-            var centerY = _anchorTop.Y;
+            var centerX = _groupBox.Bounds.CenterX;
+            var centerY = _groupBox.Bounds.Bottom;
             var matrix = Matrix2.ScaleAt(scaleX, scaleY, centerX, centerY);
 
             for (int i = 0; i < _pointsTop.Count; i++)
