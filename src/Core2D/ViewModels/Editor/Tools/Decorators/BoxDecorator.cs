@@ -61,10 +61,6 @@ namespace Core2D.Editor.Tools.Decorators
         private readonly IRectangleShape _rightHandle;
         private List<IBaseShape> _handles;
         private IBaseShape _currentHandle = null;
-        private IPointShape _anchorTop;
-        private IPointShape _anchorBottom;
-        private IPointShape _anchorLeft;
-        private IPointShape _anchorRight;
         private List<IPointShape> _points;
         private Mode _mode = Mode.None;
         private double _startX;
@@ -328,10 +324,6 @@ namespace Core2D.Editor.Tools.Decorators
             {
                 _currentHandle.Style = _currentHandle == _boundsHandle ? _boundsStyle : _handleStyle;
                 _currentHandle = null;
-                _anchorTop = null;
-                _anchorBottom = null;
-                _anchorLeft = null;
-                _anchorRight = null;
                 _points = null;
                 _rotateAngle = 0.0;
             }
@@ -373,10 +365,6 @@ namespace Core2D.Editor.Tools.Decorators
             {
                 _currentHandle.Style = _currentHandle == _boundsHandle ? _boundsStyle : _handleStyle;
                 _currentHandle = null;
-                _anchorTop = null;
-                _anchorBottom = null;
-                _anchorLeft = null;
-                _anchorRight = null;
                 _points = null;
                 _rotateAngle = 0.0;
             }
@@ -415,10 +403,6 @@ namespace Core2D.Editor.Tools.Decorators
             {
                 _currentHandle.Style = _currentHandle == _boundsHandle ? _boundsStyle : _handleStyle;
                 _currentHandle = null;
-                _anchorTop = null;
-                _anchorBottom = null;
-                _anchorLeft = null;
-                _anchorRight = null;
                 _points = null;
                 _rotateAngle = 0.0;
                 _layer.Invalidate();
@@ -477,10 +461,6 @@ namespace Core2D.Editor.Tools.Decorators
                     _startY = sy;
                     _historyX = _startX;
                     _historyY = _startY;
-                    _anchorTop = null;
-                    _anchorBottom = null;
-                    _anchorLeft = null;
-                    _anchorRight = null;
                     _points = null;
                     _rotateAngle = 0.0;
                     _layer.Invalidate();
@@ -504,9 +484,21 @@ namespace Core2D.Editor.Tools.Decorators
             }
 
             var editor = _serviceProvider.GetService<IProjectEditor>();
+
             (double sx, double sy) = editor.TryToSnap(args);
             double dx = sx - _startX;
             double dy = sy - _startY;
+            _startX = sx;
+            _startY = sy;
+
+            if (_points == null)
+            {
+                _points = GetMovablePoints();
+                if (_points == null)
+                {
+                    return;
+                }
+            }
 
             switch (_mode)
             {
@@ -567,9 +559,6 @@ namespace Core2D.Editor.Tools.Decorators
                     }
                     break;
             }
-
-            _startX = sx;
-            _startY = sy;
         }
 
         private bool IsPointMovable(IPointShape point, IBaseShape parent)
@@ -605,19 +594,24 @@ namespace Core2D.Editor.Tools.Decorators
             return new List<IPointShape>(points);
         }
 
-        private void Rotate(double sx, double sy)
+        private void TransformPoints(ref Matrix2 matrix)
         {
-            if (_points == null)
+            if (_points == null || _points.Count == 0)
             {
-                var points = GetMovablePoints();
-                if (points.Count == 0)
-                {
-                    return;
-                }
-                _points = points;
-                _rotateAngle = 0.0;
+                return;
             }
 
+            for (int i = 0; i < _points.Count; i++)
+            {
+                var point = _points[i];
+                var transformed = Matrix2.TransformPoint(matrix, new Point2(point.X, point.Y));
+                point.X = transformed.X;
+                point.Y = transformed.Y;
+            }
+        }
+
+        private void Rotate(double sx, double sy)
+        {
             var centerX = _groupBox.Bounds.CenterX;
             var centerY = _groupBox.Bounds.CenterY;
             var p0 = new Point2(centerX, centerY);
@@ -627,167 +621,70 @@ namespace Core2D.Editor.Tools.Decorators
             var radians = delta * (Math.PI / 180.0);
             var matrix = Matrix2.Rotation(radians, centerX, centerY);
 
-            for (int i = 0; i < _points.Count; i++)
-            {
-                var point = _points[i];
-                var transformed = Matrix2.TransformPoint(matrix, new Point2(point.X, point.Y));
-                point.X = transformed.X;
-                point.Y = transformed.Y;
-            }
-
             _rotateAngle = angle;
+
+            TransformPoints(ref matrix);
+
             _groupBox.Update();
         }
 
         private void Move(double dx, double dy)
         {
-            if (_points == null)
-            {
-                var points = GetMovablePoints();
-                if (points.Count == 0)
-                {
-                    return;
-                }
-                _points = points;
-            }
-
             var matrix = Matrix2.Translate(dx, dy);
 
-            for (int i = 0; i < _points.Count; i++)
-            {
-                var point = _points[i];
-                var transformed = Matrix2.TransformPoint(matrix, new Point2(point.X, point.Y));
-                point.X = transformed.X;
-                point.Y = transformed.Y;
-            }
+            TransformPoints(ref matrix);
 
             _groupBox.Update();
         }
 
         private void MoveTop(double dy)
         {
-            if (_anchorTop == null)
-            {
-                var points = GetMovablePoints();
-                if (points.Count == 0)
-                {
-                    return;
-                }
-                _anchorTop = points[points.Count - 1];
-                _points = points;
-            }
-
-            _points.Sort(PointUtil.CompareY);
-
             var scaleX = 1.0;
             var scaleY = (_groupBox.Bounds.Height - dy) / _groupBox.Bounds.Height;
             var centerX = _groupBox.Bounds.CenterX;
             var centerY = _groupBox.Bounds.Bottom;
             var matrix = Matrix2.ScaleAt(scaleX, scaleY, centerX, centerY);
 
-            for (int i = 0; i < _points.Count; i++)
-            {
-                var point = _points[i];
-                var transformed = Matrix2.TransformPoint(matrix, new Point2(point.X, point.Y));
-                point.X = transformed.X;
-                point.Y = transformed.Y;
-            }
+            TransformPoints(ref matrix);
 
             _groupBox.Update();
         }
 
         private void MoveBottom(double dy)
         {
-            if (_anchorBottom == null)
-            {
-                var points = GetMovablePoints();
-                if (points.Count == 0)
-                {
-                    return;
-                }
-                _anchorBottom = points[0];
-                _points = points;
-            }
-
-            _points.Sort(PointUtil.CompareY);
-
             var scaleX = 1.0;
             var scaleY = (_groupBox.Bounds.Height + dy) / _groupBox.Bounds.Height;
             var centerX = _groupBox.Bounds.CenterX;
             var centerY = _groupBox.Bounds.Top;
             var matrix = Matrix2.ScaleAt(scaleX, scaleY, centerX, centerY);
 
-            for (int i = 0; i < _points.Count; i++)
-            {
-                var point = _points[i];
-                var transformed = Matrix2.TransformPoint(matrix, new Point2(point.X, point.Y));
-                point.X = transformed.X;
-                point.Y = transformed.Y;
-            }
+            TransformPoints(ref matrix);
 
             _groupBox.Update();
         }
 
         private void MoveLeft(double dx)
         {
-            if (_anchorLeft == null)
-            {
-                var points = GetMovablePoints();
-                if (points.Count == 0)
-                {
-                    return;
-                }
-                _anchorLeft = points[points.Count - 1];
-                _points = points;
-            }
-
-            _points.Sort(PointUtil.CompareX);
-
             var scaleX = (_groupBox.Bounds.Width - dx) / _groupBox.Bounds.Width;
             var scaleY = 1.0;
             var centerX = _groupBox.Bounds.Right;
             var centerY = _groupBox.Bounds.CenterY;
             var matrix = Matrix2.ScaleAt(scaleX, scaleY, centerX, centerY);
 
-            for (int i = 0; i < _points.Count; i++)
-            {
-                var point = _points[i];
-                var transformed = Matrix2.TransformPoint(matrix, new Point2(point.X, point.Y));
-                point.X = transformed.X;
-                point.Y = transformed.Y;
-            }
+            TransformPoints(ref matrix);
 
             _groupBox.Update();
         }
 
         private void MoveRight(double dx)
         {
-            if (_anchorRight == null)
-            {
-                var points = GetMovablePoints();
-                if (points.Count == 0)
-                {
-                    return;
-                }
-                _anchorRight = points[0];
-                _points = points;
-            }
-
-            _points.Sort(PointUtil.CompareX);
-
             var scaleX = (_groupBox.Bounds.Width + dx) / _groupBox.Bounds.Width;
             var scaleY = 1.0;
             var centerX = _groupBox.Bounds.Left;
             var centerY = _groupBox.Bounds.CenterY;
             var matrix = Matrix2.ScaleAt(scaleX, scaleY, centerX, centerY);
 
-            for (int i = 0; i < _points.Count; i++)
-            {
-                var point = _points[i];
-                var transformed = Matrix2.TransformPoint(matrix, new Point2(point.X, point.Y));
-                point.X = transformed.X;
-                point.Y = transformed.Y;
-            }
+            TransformPoints(ref matrix);
 
             _groupBox.Update();
         }
