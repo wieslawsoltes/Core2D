@@ -65,6 +65,7 @@ namespace Core2D.Editor.Tools.Decorators
         private IPointShape _anchorBottom;
         private IPointShape _anchorLeft;
         private IPointShape _anchorRight;
+        private List<IPointShape> _pointsRotate;
         private List<IPointShape> _pointsMove;
         private List<IPointShape> _pointsTop;
         private List<IPointShape> _pointsBottom;
@@ -75,6 +76,7 @@ namespace Core2D.Editor.Tools.Decorators
         private double _startY;
         private double _historyX;
         private double _historyY;
+        private double _rotateAngle = 270.0;
         private bool _previousDrawPoints = true;
 
         /// <inheritdoc/>
@@ -335,11 +337,13 @@ namespace Core2D.Editor.Tools.Decorators
                 _anchorBottom = null;
                 _anchorLeft = null;
                 _anchorRight = null;
+                _pointsRotate = null;
                 _pointsMove = null;
                 _pointsTop = null;
                 _pointsBottom = null;
                 _pointsLeft = null;
                 _pointsRight = null;
+                _rotateAngle = 270.0;
             }
             _isVisible = true;
 
@@ -383,11 +387,13 @@ namespace Core2D.Editor.Tools.Decorators
                 _anchorBottom = null;
                 _anchorLeft = null;
                 _anchorRight = null;
+                _pointsRotate = null;
                 _pointsMove = null;
                 _pointsTop = null;
                 _pointsBottom = null;
                 _pointsLeft = null;
                 _pointsRight = null;
+                _rotateAngle = 270.0;
             }
             _isVisible = false;
 
@@ -428,11 +434,13 @@ namespace Core2D.Editor.Tools.Decorators
                 _anchorBottom = null;
                 _anchorLeft = null;
                 _anchorRight = null;
+                _pointsRotate = null;
                 _pointsMove = null;
                 _pointsTop = null;
                 _pointsBottom = null;
                 _pointsLeft = null;
                 _pointsRight = null;
+                _rotateAngle = 270.0;
                 _layer.Invalidate();
             }
 
@@ -493,11 +501,13 @@ namespace Core2D.Editor.Tools.Decorators
                     _anchorBottom = null;
                     _anchorLeft = null;
                     _anchorRight = null;
+                    _pointsRotate = null;
                     _pointsMove = null;
                     _pointsTop = null;
                     _pointsBottom = null;
                     _pointsLeft = null;
                     _pointsRight = null;
+                    _rotateAngle = 270.0;
                     _layer.Invalidate();
                     return true;
                 }
@@ -622,12 +632,35 @@ namespace Core2D.Editor.Tools.Decorators
 
         private void Rotate(double sx, double sy)
         {
-            double cx = _groupBox.Bounds.CenterX;
-            double cy = _groupBox.Bounds.CenterY;
-            var p0 = new Point2(cx, cy);
+            if (_pointsRotate == null)
+            {
+                var points = GetMovablePoints();
+                if (points.Count == 0)
+                {
+                    return;
+                }
+                _pointsRotate = points;
+                _rotateAngle = 270.0;
+            }
+
+            var centerX = _groupBox.Bounds.CenterX;
+            var centerY = _groupBox.Bounds.CenterY;
+            var p0 = new Point2(centerX, centerY);
             var p1 = new Point2(sx, sy);
             var angle = p0.AngleBetween(p1) - 270.0;
-            System.Diagnostics.Debug.WriteLine($"Rotate: {angle} ({cx} {cy})");
+
+            angle = PointUtil.Snap(angle, 90.0);
+
+            var radians = angle * (Math.PI / 180.0);
+            var matrix = Matrix2.Rotation(radians, centerX, centerY);
+
+            for (int i = 0; i < _pointsRotate.Count; i++)
+            {
+                var point = _pointsRotate[i];
+                var transformed = Matrix2.TransformPoint(matrix, new Point2(point.X, point.Y));
+                point.X = transformed.X;
+                point.Y = transformed.Y;
+            }
         }
 
         private void Move(double dx, double dy)
@@ -642,10 +675,14 @@ namespace Core2D.Editor.Tools.Decorators
                 _pointsMove = points;
             }
 
+            var matrix = Matrix2.Translate(dx, dy);
+
             for (int i = 0; i < _pointsMove.Count; i++)
             {
                 var point = _pointsMove[i];
-                point.Move(null, dx, dy);
+                var transformed = Matrix2.TransformPoint(matrix, new Point2(point.X, point.Y));
+                point.X = transformed.X;
+                point.Y = transformed.Y;
             }
         }
 
@@ -662,7 +699,7 @@ namespace Core2D.Editor.Tools.Decorators
                 _pointsTop = points;
             }
 
-            _pointsTop.Sort(PointShapeUtil.CompareY);
+            _pointsTop.Sort(PointUtil.CompareY);
 
             var scaleX = 1.0;
             var scaleY = (_groupBox.Bounds.Height - dy) / _groupBox.Bounds.Height;
@@ -692,7 +729,7 @@ namespace Core2D.Editor.Tools.Decorators
                 _pointsBottom = points;
             }
 
-            _pointsBottom.Sort(PointShapeUtil.CompareY);
+            _pointsBottom.Sort(PointUtil.CompareY);
 
             var scaleX = 1.0;
             var scaleY = (_groupBox.Bounds.Height + dy) / _groupBox.Bounds.Height;
@@ -722,7 +759,7 @@ namespace Core2D.Editor.Tools.Decorators
                 _pointsLeft = points;
             }
 
-            _pointsLeft.Sort(PointShapeUtil.CompareX);
+            _pointsLeft.Sort(PointUtil.CompareX);
 
             var scaleX = (_groupBox.Bounds.Width - dx) / _groupBox.Bounds.Width;
             var scaleY = 1.0;
@@ -752,7 +789,7 @@ namespace Core2D.Editor.Tools.Decorators
                 _pointsRight = points;
             }
 
-            _pointsRight.Sort(PointShapeUtil.CompareX);
+            _pointsRight.Sort(PointUtil.CompareX);
 
             var scaleX = (_groupBox.Bounds.Width + dx) / _groupBox.Bounds.Width;
             var scaleY = 1.0;
