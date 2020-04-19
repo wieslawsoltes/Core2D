@@ -587,19 +587,37 @@ namespace Core2D.Editor.Tools.Decorators
             _startY = sy;
         }
 
-        private bool IsMovable(IBaseShape shape, IPointShape point)
+        private bool IsPointMovable(IPointShape point, IBaseShape parent)
         {
             if (point.State.Flags.HasFlag(ShapeStateFlags.Locked))
             {
                 return false;
             }
 
-            if (point.State.Flags.HasFlag(ShapeStateFlags.Connector) && point.Owner != shape)
+            if (point.State.Flags.HasFlag(ShapeStateFlags.Connector) && point.Owner != parent)
             {
                 return false;
             }
 
             return true;
+        }
+
+        private List<IPointShape> GetMovablePoints()
+        {
+            var points = new HashSet<IPointShape>();
+
+            for (int i = 0; i < _groupBox.Boxes.Length; i++)
+            {
+                foreach (var point in _groupBox.Boxes[i].Points)
+                {
+                    if (IsPointMovable(point, _groupBox.Boxes[i].Shape))
+                    {
+                        points.Add(point);
+                    }
+                }
+            }
+
+            return new List<IPointShape>(points);
         }
 
         private void Rotate(double sx, double sy)
@@ -616,7 +634,7 @@ namespace Core2D.Editor.Tools.Decorators
         {
             if (_pointsMove == null)
             {
-                var points = _groupBox.Boxes.SelectMany(x => x.Points.Where(p => IsMovable(x.Shape, p))).Distinct().ToList();
+                var points = GetMovablePoints();
                 if (points.Count == 0)
                 {
                     return;
@@ -635,7 +653,7 @@ namespace Core2D.Editor.Tools.Decorators
         {
             if (_anchorTop == null)
             {
-                var points = _groupBox.Boxes.SelectMany(x => x.Points.Where(p => IsMovable(x.Shape, p))).Distinct().ToList();
+                var points = GetMovablePoints();
                 if (points.Count == 0)
                 {
                     return;
@@ -660,7 +678,7 @@ namespace Core2D.Editor.Tools.Decorators
         {
             if (_anchorBottom == null)
             {
-                var points = _groupBox.Boxes.SelectMany(x => x.Points.Where(p => IsMovable(x.Shape, p))).Distinct().ToList();
+                var points = GetMovablePoints();
                 if (points.Count == 0)
                 {
                     return;
@@ -685,7 +703,7 @@ namespace Core2D.Editor.Tools.Decorators
         {
             if (_anchorLeft == null)
             {
-                var points = _groupBox.Boxes.SelectMany(x => x.Points.Where(p => IsMovable(x.Shape, p))).Distinct().ToList();
+                var points = GetMovablePoints();
                 if (points.Count == 0)
                 {
                     return;
@@ -710,7 +728,7 @@ namespace Core2D.Editor.Tools.Decorators
         {
             if (_anchorRight == null)
             {
-                var points = _groupBox.Boxes.SelectMany(x => x.Points.Where(p => IsMovable(x.Shape, p))).Distinct().ToList();
+                var points = GetMovablePoints();
                 if (points.Count == 0)
                 {
                     return;
