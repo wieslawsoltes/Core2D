@@ -664,13 +664,18 @@ namespace Core2D.Editor.Tools.Decorators
 
             _pointsTop.Sort(PointShapeUtil.CompareY);
 
+            var scaleX = 1.0;
+            var scaleY = (_groupBox.Bounds.Height - dy) / _groupBox.Bounds.Height;
+            var centerX = _anchorTop.X;
+            var centerY = _anchorTop.Y;
+            var matrix = Matrix2.ScaleAt(scaleX, scaleY, centerX, centerY);
+
             for (int i = 0; i < _pointsTop.Count; i++)
             {
                 var point = _pointsTop[i];
-                if (point != _anchorTop && !(point.Y == _anchorTop.Y && _pointsTop.Count > 2))
-                {
-                    point.Move(null, 0, dy);
-                }
+                var transformed = Matrix2.TransformPoint(matrix, new Point2(point.X, point.Y));
+                point.X = transformed.X;
+                point.Y = transformed.Y;
             }
         }
 
@@ -689,13 +694,18 @@ namespace Core2D.Editor.Tools.Decorators
 
             _pointsBottom.Sort(PointShapeUtil.CompareY);
 
+            var scaleX = 1.0;
+            var scaleY = (_groupBox.Bounds.Height + dy) / _groupBox.Bounds.Height;
+            var centerX = _anchorBottom.X;
+            var centerY = _anchorBottom.Y;
+            var matrix = Matrix2.ScaleAt(scaleX, scaleY, centerX, centerY);
+
             for (int i = 0; i < _pointsBottom.Count; i++)
             {
                 var point = _pointsBottom[i];
-                if (point != _anchorBottom && !(point.Y == _anchorBottom.Y && _pointsBottom.Count > 2))
-                {
-                    point.Move(null, 0, dy);
-                }
+                var transformed = Matrix2.TransformPoint(matrix, new Point2(point.X, point.Y));
+                point.X = transformed.X;
+                point.Y = transformed.Y;
             }
         }
 
@@ -714,13 +724,18 @@ namespace Core2D.Editor.Tools.Decorators
 
             _pointsLeft.Sort(PointShapeUtil.CompareX);
 
+            var scaleX = (_groupBox.Bounds.Width - dx) / _groupBox.Bounds.Width;
+            var scaleY = 1.0;
+            var centerX = _anchorLeft.X;
+            var centerY = _anchorLeft.Y;
+            var matrix = Matrix2.ScaleAt(scaleX, scaleY, centerX, centerY);
+
             for (int i = 0; i < _pointsLeft.Count; i++)
             {
                 var point = _pointsLeft[i];
-                if (point != _anchorLeft && !(point.X == _anchorLeft.X && _pointsLeft.Count > 2))
-                {
-                    point.Move(null, dx, 0);
-                }
+                var transformed = Matrix2.TransformPoint(matrix, new Point2(point.X, point.Y));
+                point.X = transformed.X;
+                point.Y = transformed.Y;
             }
         }
 
@@ -739,13 +754,18 @@ namespace Core2D.Editor.Tools.Decorators
 
             _pointsRight.Sort(PointShapeUtil.CompareX);
 
+            var scaleX = (_groupBox.Bounds.Width + dx) / _groupBox.Bounds.Width;
+            var scaleY = 1.0;
+            var centerX = _anchorRight.X;
+            var centerY = _anchorRight.Y;
+            var matrix = Matrix2.ScaleAt(scaleX, scaleY, centerX, centerY);
+
             for (int i = 0; i < _pointsRight.Count; i++)
             {
                 var point = _pointsRight[i];
-                if (point != _anchorRight && !(point.X == _anchorRight.X && _pointsRight.Count > 2))
-                {
-                    point.Move(null, dx, 0);
-                }
+                var transformed = Matrix2.TransformPoint(matrix, new Point2(point.X, point.Y));
+                point.X = transformed.X;
+                point.Y = transformed.Y;
             }
         }
     }
