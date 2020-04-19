@@ -160,10 +160,10 @@ namespace Core2D.Renderer.Avalonia
             _dc.DrawGeometry(null, pen, sg);
         }
 
-        private void DrawLineArrowsInternal(AM.DrawingContext dc, ILineShape line, IShapeStyle style, double dx, double dy, out A.Point pt1, out A.Point pt2)
+        private void DrawLineArrowsInternal(AM.DrawingContext dc, ILineShape line, IShapeStyle style, double dx, double dy, Func<double, float> scaleToPage, bool scaleStrokeWidth, out A.Point pt1, out A.Point pt2)
         {
-            GetCached(style.StartArrowStyle, out var fillStartArrow, out var strokeStartArrow, _scaleToPage, false);
-            GetCached(style.EndArrowStyle, out var fillEndArrow, out var strokeEndArrow, _scaleToPage, false);
+            GetCached(style.StartArrowStyle, out var fillStartArrow, out var strokeStartArrow, scaleToPage, scaleStrokeWidth);
+            GetCached(style.EndArrowStyle, out var fillEndArrow, out var strokeEndArrow, scaleToPage, scaleStrokeWidth);
 
             double _x1 = line.Start.X + dx;
             double _y1 = line.Start.Y + dy;
@@ -458,6 +458,7 @@ namespace Core2D.Renderer.Avalonia
 
             bool isSelected = (_state.SelectedShape != null && _state.SelectedShape == point)
                 || (_state.HoveredShape != null && _state.HoveredShape == point);
+
             var pointStyle = isSelected ? _state.SelectedPointStyle : _state.PointStyle;
             if (pointStyle == null)
             {
@@ -466,25 +467,31 @@ namespace Core2D.Renderer.Avalonia
 
             var _dc = dc as AM.DrawingContext;
 
-            double pointSize = _state.PointSize;
+            var pointSize = _state.PointSize;
             if (pointSize <= 0.0)
             {
                 return;
             }
 
-            double scale = 1.0 / _state.ZoomX;
-            double translateX = 0.0 - (point.X * scale) + point.X;
-            double translateY = 0.0 - (point.Y * scale) + point.Y;
-
-            GetCached(pointStyle, out var fill, out var stroke, (value) => (float)(value / scale), true);
-
+            var scaleThickness = true; // point.State.Flags.HasFlag(ShapeStateFlags.Thickness); // TODO:
+            var scaleSize = true; // point.State.Flags.HasFlag(ShapeStateFlags.Size); // TODO:
             var rect = Rect2.FromPoints(point.X - pointSize, point.Y - pointSize, point.X + pointSize, point.Y + pointSize, dx, dy);
-            var translateMatrix = AME.MatrixHelper.Translate(translateX, translateY);
-            var scaleMatrix = AME.MatrixHelper.Scale(scale, scale);
-            using var translateDisposable = _dc.PushPreTransform(translateMatrix);
-            using var scaleDisposable = _dc.PushPreTransform(scaleMatrix);
+
+            var scale = scaleSize ? 1.0 / _state.ZoomX : 1.0;
+            var scaleToPage = scale == 1.0 ? _scaleToPage : (value) => (float)(_scaleToPage(value) / scale);
+            var center = point;
+            var translateX = 0.0 - (center.X * scale) + center.X;
+            var translateY = 0.0 - (center.Y * scale) + center.Y;
+
+            GetCached(pointStyle, out var fill, out var stroke, scaleToPage, scaleThickness);
+
+            var translateDisposable = scale != 1.0 ? _dc.PushPreTransform(AME.MatrixHelper.Translate(translateX, translateY)) : default(IDisposable);
+            var scaleDisposable = scale != 1.0 ? _dc.PushPreTransform(AME.MatrixHelper.Scale(scale, scale)) : default(IDisposable);
 
             DrawRectangleInternal(_dc, fill, stroke, true, true, ref rect);
+
+            scaleDisposable?.Dispose();
+            translateDisposable?.Dispose();
         }
 
         /// <inheritdoc/>
@@ -498,9 +505,21 @@ namespace Core2D.Renderer.Avalonia
                 return;
             }
 
-            GetCached(style, out _, out var stroke, _scaleToPage, false);
+            var scaleThickness = line.State.Flags.HasFlag(ShapeStateFlags.Thickness);
+            var scaleSize = line.State.Flags.HasFlag(ShapeStateFlags.Size);
 
-            DrawLineArrowsInternal(_dc, line, style, dx, dy, out var pt1, out var pt2);
+            var scale = scaleSize ? 1.0 / _state.ZoomX : 1.0;
+            var scaleToPage = scale == 1.0 ? _scaleToPage : (value) => (float)(_scaleToPage(value) / scale);
+            var center = new Point2((line.Start.X + line.End.X) / 2.0, (line.Start.Y + line.End.Y) / 2.0);
+            var translateX = 0.0 - (center.X * scale) + center.X;
+            var translateY = 0.0 - (center.Y * scale) + center.Y;
+
+            GetCached(style, out _, out var stroke, scaleToPage, scaleThickness);
+
+            var translateDisposable = scale != 1.0 ? _dc.PushPreTransform(AME.MatrixHelper.Translate(translateX, translateY)) : default(IDisposable);
+            var scaleDisposable = scale != 1.0 ? _dc.PushPreTransform(AME.MatrixHelper.Scale(scale, scale)) : default(IDisposable);
+
+            DrawLineArrowsInternal(_dc, line, style, dx, dy, scaleToPage, scaleThickness, out var pt1, out var pt2);
 
             if (style.LineStyle.IsCurved)
             {
@@ -517,6 +536,9 @@ namespace Core2D.Renderer.Avalonia
             {
                 DrawLineInternal(_dc, stroke, line.IsStroked, ref pt1, ref pt2);
             }
+
+            scaleDisposable?.Dispose();
+            translateDisposable?.Dispose();
         }
 
         /// <inheritdoc/>
@@ -530,9 +552,20 @@ namespace Core2D.Renderer.Avalonia
                 return;
             }
 
-            GetCached(style, out var fill, out var stroke, _scaleToPage, rectangle.IsGrid ? true : false);
-
+            var scaleThickness = rectangle.State.Flags.HasFlag(ShapeStateFlags.Thickness);
+            var scaleSize = rectangle.State.Flags.HasFlag(ShapeStateFlags.Size);
             var rect = CreateRect(rectangle.TopLeft, rectangle.BottomRight, dx, dy);
+
+            var scale = scaleSize ? 1.0 / _state.ZoomX : 1.0;
+            var scaleToPage = scale == 1.0 ? _scaleToPage : (value) => (float)(_scaleToPage(value) / scale);
+            var center = rect.Center;
+            var translateX = 0.0 - (center.X * scale) + center.X;
+            var translateY = 0.0 - (center.Y * scale) + center.Y;
+
+            GetCached(style, out var fill, out var stroke, scaleToPage, rectangle.IsGrid ? true : scaleThickness);
+
+            var translateDisposable = scale != 1.0 ? _dc.PushPreTransform(AME.MatrixHelper.Translate(translateX, translateY)) : default(IDisposable);
+            var scaleDisposable = scale != 1.0 ? _dc.PushPreTransform(AME.MatrixHelper.Scale(scale, scale)) : default(IDisposable);
 
             DrawRectangleInternal(
                 _dc,
@@ -552,6 +585,9 @@ namespace Core2D.Renderer.Avalonia
                     rectangle.CellWidth, rectangle.CellHeight,
                     true);
             }
+
+            scaleDisposable?.Dispose();
+            translateDisposable?.Dispose();
         }
 
         /// <inheritdoc/>
@@ -565,9 +601,20 @@ namespace Core2D.Renderer.Avalonia
                 return;
             }
 
-            GetCached(style, out var fill, out var stroke, _scaleToPage, false);
-
+            var scaleThickness = ellipse.State.Flags.HasFlag(ShapeStateFlags.Thickness);
+            var scaleSize = ellipse.State.Flags.HasFlag(ShapeStateFlags.Size);
             var rect = CreateRect(ellipse.TopLeft, ellipse.BottomRight, dx, dy);
+
+            var scale = scaleSize ? 1.0 / _state.ZoomX : 1.0;
+            var scaleToPage = scale == 1.0 ? _scaleToPage : (value) => (float)(_scaleToPage(value) / scale);
+            var center = rect.Center;
+            var translateX = 0.0 - (center.X * scale) + center.X;
+            var translateY = 0.0 - (center.Y * scale) + center.Y;
+
+            GetCached(style, out var fill, out var stroke, scaleToPage, scaleThickness);
+
+            var translateDisposable = scale != 1.0 ? _dc.PushPreTransform(AME.MatrixHelper.Translate(translateX, translateY)) : default(IDisposable);
+            var scaleDisposable = scale != 1.0 ? _dc.PushPreTransform(AME.MatrixHelper.Scale(scale, scale)) : default(IDisposable);
 
             DrawEllipseInternal(
                 _dc,
@@ -576,6 +623,9 @@ namespace Core2D.Renderer.Avalonia
                 ellipse.IsStroked,
                 ellipse.IsFilled,
                 ref rect);
+
+            scaleDisposable?.Dispose();
+            translateDisposable?.Dispose();
         }
 
         /// <inheritdoc/>
@@ -594,14 +644,28 @@ namespace Core2D.Renderer.Avalonia
                 return;
             }
 
-            GetCached(style, out var fill, out var stroke, _scaleToPage, false);
+            var scaleThickness = arc.State.Flags.HasFlag(ShapeStateFlags.Thickness);
+            var scaleSize = arc.State.Flags.HasFlag(ShapeStateFlags.Size);
+            var geometry = ToStreamGeometry(arc, dx, dy);
 
-            var sg = ToStreamGeometry(arc, dx, dy);
+            var scale = scaleSize ? 1.0 / _state.ZoomX : 1.0;
+            var scaleToPage = scale == 1.0 ? _scaleToPage : (value) => (float)(_scaleToPage(value) / scale);
+            var center = geometry.Bounds.Center;
+            var translateX = 0.0 - (center.X * scale) + center.X;
+            var translateY = 0.0 - (center.Y * scale) + center.Y;
+
+            GetCached(style, out var fill, out var stroke, scaleToPage, scaleThickness);
+
+            var translateDisposable = scale != 1.0 ? _dc.PushPreTransform(AME.MatrixHelper.Translate(translateX, translateY)) : default(IDisposable);
+            var scaleDisposable = scale != 1.0 ? _dc.PushPreTransform(AME.MatrixHelper.Scale(scale, scale)) : default(IDisposable);
 
             _dc.DrawGeometry(
                 arc.IsFilled ? fill : null,
                 arc.IsStroked ? stroke : null,
-                sg);
+                geometry);
+
+            scaleDisposable?.Dispose();
+            translateDisposable?.Dispose();
         }
 
         /// <inheritdoc/>
@@ -620,14 +684,28 @@ namespace Core2D.Renderer.Avalonia
                 return;
             }
 
-            GetCached(style, out var fill, out var stroke, _scaleToPage, false);
+            var scaleThickness = cubicBezier.State.Flags.HasFlag(ShapeStateFlags.Thickness);
+            var scaleSize = cubicBezier.State.Flags.HasFlag(ShapeStateFlags.Size);
+            var geometry = ToStreamGeometry(cubicBezier, dx, dy);
 
-            var sg = ToStreamGeometry(cubicBezier, dx, dy);
+            var scale = scaleSize ? 1.0 / _state.ZoomX : 1.0;
+            var scaleToPage = scale == 1.0 ? _scaleToPage : (value) => (float)(_scaleToPage(value) / scale);
+            var center = geometry.Bounds.Center;
+            var translateX = 0.0 - (center.X * scale) + center.X;
+            var translateY = 0.0 - (center.Y * scale) + center.Y;
+
+            GetCached(style, out var fill, out var stroke, scaleToPage, scaleThickness);
+
+            var translateDisposable = scale != 1.0 ? _dc.PushPreTransform(AME.MatrixHelper.Translate(translateX, translateY)) : default(IDisposable);
+            var scaleDisposable = scale != 1.0 ? _dc.PushPreTransform(AME.MatrixHelper.Scale(scale, scale)) : default(IDisposable);
 
             _dc.DrawGeometry(
                 cubicBezier.IsFilled ? fill : null,
                 cubicBezier.IsStroked ? stroke : null,
-                sg);
+                geometry);
+
+            scaleDisposable?.Dispose();
+            translateDisposable?.Dispose();
         }
 
         /// <inheritdoc/>
@@ -646,14 +724,28 @@ namespace Core2D.Renderer.Avalonia
                 return;
             }
 
-            GetCached(style, out var fill, out var stroke, _scaleToPage, false);
+            var scaleThickness = quadraticBezier.State.Flags.HasFlag(ShapeStateFlags.Thickness);
+            var scaleSize = quadraticBezier.State.Flags.HasFlag(ShapeStateFlags.Size);
+            var geometry = ToStreamGeometry(quadraticBezier, dx, dy);
 
-            var sg = ToStreamGeometry(quadraticBezier, dx, dy);
+            var scale = scaleSize ? 1.0 / _state.ZoomX : 1.0;
+            var scaleToPage = scale == 1.0 ? _scaleToPage : (value) => (float)(_scaleToPage(value) / scale);
+            var center = geometry.Bounds.Center;
+            var translateX = 0.0 - (center.X * scale) + center.X;
+            var translateY = 0.0 - (center.Y * scale) + center.Y;
+
+            GetCached(style, out var fill, out var stroke, scaleToPage, scaleThickness);
+
+            var translateDisposable = scale != 1.0 ? _dc.PushPreTransform(AME.MatrixHelper.Translate(translateX, translateY)) : default(IDisposable);
+            var scaleDisposable = scale != 1.0 ? _dc.PushPreTransform(AME.MatrixHelper.Scale(scale, scale)) : default(IDisposable);
 
             _dc.DrawGeometry(
                 quadraticBezier.IsFilled ? fill : null,
                 quadraticBezier.IsStroked ? stroke : null,
-                sg);
+                geometry);
+
+            scaleDisposable?.Dispose();
+            translateDisposable?.Dispose();
         }
 
         /// <inheritdoc/>
@@ -677,9 +769,20 @@ namespace Core2D.Renderer.Avalonia
                 return;
             }
 
-            GetCached(style, out _, out var stroke, _scaleToPage, false);
-
+            var scaleThickness = text.State.Flags.HasFlag(ShapeStateFlags.Thickness);
+            var scaleSize = text.State.Flags.HasFlag(ShapeStateFlags.Size);
             var rect = CreateRect(text.TopLeft, text.BottomRight, dx, dy);
+
+            var scale = scaleSize ? 1.0 / _state.ZoomX : 1.0;
+            var scaleToPage = scale == 1.0 ? _scaleToPage : (value) => (float)(_scaleToPage(value) / scale);
+            var center = rect.Center;
+            var translateX = 0.0 - (center.X * scale) + center.X;
+            var translateY = 0.0 - (center.Y * scale) + center.Y;
+
+            GetCached(style, out _, out var stroke, scaleToPage, scaleThickness);
+
+            var translateDisposable = scale != 1.0 ? _dc.PushPreTransform(AME.MatrixHelper.Translate(translateX, translateY)) : default(IDisposable);
+            var scaleDisposable = scale != 1.0 ? _dc.PushPreTransform(AME.MatrixHelper.Scale(scale, scale)) : default(IDisposable);
 
             (string ct, var ft, var cs) = _textCache.Get(text);
             if (string.Compare(ct, tbind) == 0 && cs == style)
@@ -745,6 +848,9 @@ namespace Core2D.Renderer.Avalonia
                     _dc.DrawText(stroke.Brush, origin, ft);
                 }
             }
+
+            scaleDisposable?.Dispose();
+            translateDisposable?.Dispose();
         }
 
         /// <inheritdoc/>
@@ -757,11 +863,23 @@ namespace Core2D.Renderer.Avalonia
 
             var _dc = dc as AM.DrawingContext;
             var style = image.Style;
+
+            var scaleThickness = image.State.Flags.HasFlag(ShapeStateFlags.Thickness);
+            var scaleSize = image.State.Flags.HasFlag(ShapeStateFlags.Size);
             var rect = CreateRect(image.TopLeft, image.BottomRight, dx, dy);
+
+            var scale = scaleSize ? 1.0 / _state.ZoomX : 1.0;
+            var scaleToPage = scale == 1.0 ? _scaleToPage : (value) => (float)(_scaleToPage(value) / scale);
+            var center = rect.Center;
+            var translateX = 0.0 - (center.X * scale) + center.X;
+            var translateY = 0.0 - (center.Y * scale) + center.Y;
+
+            var translateDisposable = scale != 1.0 ? _dc.PushPreTransform(AME.MatrixHelper.Translate(translateX, translateY)) : default(IDisposable);
+            var scaleDisposable = scale != 1.0 ? _dc.PushPreTransform(AME.MatrixHelper.Scale(scale, scale)) : default(IDisposable);
 
             if ((image.IsStroked || image.IsFilled) && style != null)
             {
-                GetCached(style, out var fill, out var stroke, _scaleToPage, false);
+                GetCached(style, out var fill, out var stroke, scaleToPage, scaleThickness);
 
                 DrawRectangleInternal(
                     _dc,
@@ -815,6 +933,9 @@ namespace Core2D.Renderer.Avalonia
                     _serviceProvider.GetService<ILog>()?.LogException(ex);
                 }
             }
+
+            scaleDisposable?.Dispose();
+            translateDisposable?.Dispose();
         }
 
         /// <inheritdoc/>
@@ -838,14 +959,28 @@ namespace Core2D.Renderer.Avalonia
                 return;
             }
 
-            GetCached(style, out var fill, out var stroke, _scaleToPage, false);
+            var scaleThickness = path.State.Flags.HasFlag(ShapeStateFlags.Thickness);
+            var scaleSize = path.State.Flags.HasFlag(ShapeStateFlags.Size);
+            var geometry = PathGeometryConverter.ToGeometry(path.Geometry, dx, dy);
 
-            var g = PathGeometryConverter.ToGeometry(path.Geometry, dx, dy);
+            var scale = scaleSize ? 1.0 / _state.ZoomX : 1.0;
+            var scaleToPage = scale == 1.0 ? _scaleToPage : (value) => (float)(_scaleToPage(value) / scale);
+            var center = geometry.Bounds.Center;
+            var translateX = 0.0 - (center.X * scale) + center.X;
+            var translateY = 0.0 - (center.Y * scale) + center.Y;
+
+            GetCached(style, out var fill, out var stroke, scaleToPage, scaleThickness);
+
+            var translateDisposable = scale != 1.0 ? _dc.PushPreTransform(AME.MatrixHelper.Translate(translateX, translateY)) : default(IDisposable);
+            var scaleDisposable = scale != 1.0 ? _dc.PushPreTransform(AME.MatrixHelper.Scale(scale, scale)) : default(IDisposable);
 
             _dc.DrawGeometry(
                 path.IsFilled ? fill : null,
                 path.IsStroked ? stroke : null,
-                g);
+                geometry);
+
+            scaleDisposable?.Dispose();
+            translateDisposable?.Dispose();
         }
     }
 }
