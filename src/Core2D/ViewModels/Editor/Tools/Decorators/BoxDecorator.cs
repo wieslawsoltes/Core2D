@@ -666,6 +666,8 @@ namespace Core2D.Editor.Tools.Decorators
                 point.X = transformed.X;
                 point.Y = transformed.Y;
             }
+
+            _groupBox.Update();
         }
 
         private void Move(double dx, double dy)
@@ -689,6 +691,8 @@ namespace Core2D.Editor.Tools.Decorators
                 point.X = transformed.X;
                 point.Y = transformed.Y;
             }
+
+            _groupBox.Update();
         }
 
         private void MoveTop(double dy)
@@ -719,6 +723,8 @@ namespace Core2D.Editor.Tools.Decorators
                 point.X = transformed.X;
                 point.Y = transformed.Y;
             }
+
+            _groupBox.Update();
         }
 
         private void MoveBottom(double dy)
@@ -749,6 +755,8 @@ namespace Core2D.Editor.Tools.Decorators
                 point.X = transformed.X;
                 point.Y = transformed.Y;
             }
+
+            _groupBox.Update();
         }
 
         private void MoveLeft(double dx)
@@ -779,6 +787,8 @@ namespace Core2D.Editor.Tools.Decorators
                 point.X = transformed.X;
                 point.Y = transformed.Y;
             }
+
+            _groupBox.Update();
         }
 
         private void MoveRight(double dx)
@@ -809,6 +819,8 @@ namespace Core2D.Editor.Tools.Decorators
                 point.X = transformed.X;
                 point.Y = transformed.Y;
             }
+
+            _groupBox.Update();
         }
     }
 }
