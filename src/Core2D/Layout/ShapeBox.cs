@@ -69,24 +69,25 @@ namespace Core2D.Layout
 
         public void Update()
         {
-            var left = double.MaxValue;
-            var top = double.MaxValue;
-            var right = double.MinValue;
-            var bottom = double.MinValue;
-
             for (int i = 0; i < Points.Count; i++)
             {
                 var point = Points[i];
-                left = Math.Min(left, point.X);
-                top = Math.Min(top, point.Y);
-                right = Math.Max(right, point.X);
-                bottom = Math.Max(bottom, point.Y);
+                if (i == 0)
+                {
+                    Bounds.Left = point.X;
+                    Bounds.Top = point.Y;
+                    Bounds.Right = point.X;
+                    Bounds.Bottom = point.Y;
+                }
+                else
+                {
+                    Bounds.Left = Math.Min(Bounds.Left, point.X);
+                    Bounds.Top = Math.Min(Bounds.Top, point.Y);
+                    Bounds.Right = Math.Max(Bounds.Right, point.X);
+                    Bounds.Bottom = Math.Max(Bounds.Bottom, point.Y);
+                }
             }
 
-            Bounds.Left = left;
-            Bounds.Top = top;
-            Bounds.Right = right;
-            Bounds.Bottom = bottom;
             Bounds.CenterX = (Bounds.Left + Bounds.Right) / 2.0;
             Bounds.CenterY = (Bounds.Top + Bounds.Bottom) / 2.0;
             Bounds.Width = Math.Abs(Bounds.Right - Bounds.Left);
