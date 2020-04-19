@@ -30,18 +30,23 @@ namespace Core2D.Layout
                 Boxes[i].Update();
             }
 
-            Bounds.Left = double.MaxValue;
-            Bounds.Top = double.MaxValue;
-            Bounds.Right = double.MinValue;
-            Bounds.Bottom = double.MinValue;
-
             for (int i = 0; i < Boxes.Length; i++)
             {
                 var box = Boxes[i];
-                Bounds.Left = Math.Min(Bounds.Left, box.Bounds.Left);
-                Bounds.Top = Math.Min(Bounds.Top, box.Bounds.Top);
-                Bounds.Right = Math.Max(Bounds.Right, box.Bounds.Right);
-                Bounds.Bottom = Math.Max(Bounds.Bottom, box.Bounds.Bottom);
+                if (i == 0)
+                {
+                    Bounds.Left = box.Bounds.Left;
+                    Bounds.Top = box.Bounds.Top;
+                    Bounds.Right = box.Bounds.Right;
+                    Bounds.Bottom = box.Bounds.Bottom;
+                }
+                else
+                {
+                    Bounds.Left = Math.Min(Bounds.Left, box.Bounds.Left);
+                    Bounds.Top = Math.Min(Bounds.Top, box.Bounds.Top);
+                    Bounds.Right = Math.Max(Bounds.Right, box.Bounds.Right);
+                    Bounds.Bottom = Math.Max(Bounds.Bottom, box.Bounds.Bottom);
+                }
             }
 
             Bounds.CenterX = (Bounds.Left + Bounds.Right) / 2.0;
