@@ -640,6 +640,7 @@ namespace Core2D.Editor.Tools.Decorators
             var newSize = oldSize - dy;
             if (oldSize <= 0)
             {
+                Translate(0.0, dy);
                 return;
             }
             var scaleX = 1.0;
@@ -657,6 +658,7 @@ namespace Core2D.Editor.Tools.Decorators
             var newSize = oldSize + dy;
             if (oldSize <= 0)
             {
+                Translate(0.0, dy);
                 return;
             }
             var scaleX = 1.0;
@@ -674,6 +676,7 @@ namespace Core2D.Editor.Tools.Decorators
             var newSize = oldSize - dx;
             if (oldSize <= 0)
             {
+                Translate(dx, 0.0);
                 return;
             }
             var scaleX = newSize / oldSize;
@@ -691,6 +694,7 @@ namespace Core2D.Editor.Tools.Decorators
             var newSize = oldSize + dx;
             if (oldSize <= 0)
             {
+                Translate(dx, 0.0);
                 return;
             }
             var scaleX = newSize / oldSize;
