@@ -506,7 +506,7 @@ namespace Core2D.Editor.Tools.Decorators
                     break;
                 case Mode.Move:
                     {
-                        Move(dx, dy);
+                        Translate(dx, dy);
                     }
                     break;
                 case Mode.Rotate:
@@ -516,46 +516,46 @@ namespace Core2D.Editor.Tools.Decorators
                     break;
                 case Mode.Top:
                     {
-                        MoveTop(dy);
+                        ScaleTop(dy);
                     }
                     break;
                 case Mode.Bottom:
                     {
-                        MoveBottom(dy);
+                        ScaleBottom(dy);
                     }
                     break;
                 case Mode.Left:
                     {
-                        MoveLeft(dx);
+                        ScaleLeft(dx);
                     }
                     break;
                 case Mode.Right:
                     {
-                        MoveRight(dx);
+                        ScaleRight(dx);
                     }
                     break;
                 case Mode.TopLeft:
                     {
-                        MoveTop(dy);
-                        MoveLeft(dx);
+                        ScaleTop(dy);
+                        ScaleLeft(dx);
                     }
                     break;
                 case Mode.TopRight:
                     {
-                        MoveTop(dy);
-                        MoveRight(dx);
+                        ScaleTop(dy);
+                        ScaleRight(dx);
                     }
                     break;
                 case Mode.BottomLeft:
                     {
-                        MoveBottom(dy);
-                        MoveLeft(dx);
+                        ScaleBottom(dy);
+                        ScaleLeft(dx);
                     }
                     break;
                 case Mode.BottomRight:
                     {
-                        MoveBottom(dy);
-                        MoveRight(dx);
+                        ScaleBottom(dy);
+                        ScaleRight(dx);
                     }
                     break;
             }
@@ -620,72 +620,59 @@ namespace Core2D.Editor.Tools.Decorators
             var delta = angle - _rotateAngle;
             var radians = delta * (Math.PI / 180.0);
             var matrix = Matrix2.Rotation(radians, centerX, centerY);
-
-            _rotateAngle = angle;
-
             TransformPoints(ref matrix);
-
+            _rotateAngle = angle;
             _groupBox.Update();
         }
 
-        private void Move(double dx, double dy)
+        private void Translate(double dx, double dy)
         {
             var matrix = Matrix2.Translate(dx, dy);
-
             TransformPoints(ref matrix);
-
             _groupBox.Update();
         }
 
-        private void MoveTop(double dy)
+        private void ScaleTop(double dy)
         {
             var scaleX = 1.0;
             var scaleY = (_groupBox.Bounds.Height - dy) / _groupBox.Bounds.Height;
             var centerX = _groupBox.Bounds.CenterX;
             var centerY = _groupBox.Bounds.Bottom;
             var matrix = Matrix2.ScaleAt(scaleX, scaleY, centerX, centerY);
-
             TransformPoints(ref matrix);
-
             _groupBox.Update();
         }
 
-        private void MoveBottom(double dy)
+        private void ScaleBottom(double dy)
         {
             var scaleX = 1.0;
             var scaleY = (_groupBox.Bounds.Height + dy) / _groupBox.Bounds.Height;
             var centerX = _groupBox.Bounds.CenterX;
             var centerY = _groupBox.Bounds.Top;
             var matrix = Matrix2.ScaleAt(scaleX, scaleY, centerX, centerY);
-
             TransformPoints(ref matrix);
-
             _groupBox.Update();
         }
 
-        private void MoveLeft(double dx)
+        private void ScaleLeft(double dx)
         {
             var scaleX = (_groupBox.Bounds.Width - dx) / _groupBox.Bounds.Width;
             var scaleY = 1.0;
             var centerX = _groupBox.Bounds.Right;
             var centerY = _groupBox.Bounds.CenterY;
             var matrix = Matrix2.ScaleAt(scaleX, scaleY, centerX, centerY);
-
             TransformPoints(ref matrix);
-
             _groupBox.Update();
         }
 
-        private void MoveRight(double dx)
+        private void ScaleRight(double dx)
         {
             var scaleX = (_groupBox.Bounds.Width + dx) / _groupBox.Bounds.Width;
             var scaleY = 1.0;
             var centerX = _groupBox.Bounds.Left;
             var centerY = _groupBox.Bounds.CenterY;
             var matrix = Matrix2.ScaleAt(scaleX, scaleY, centerX, centerY);
-
             TransformPoints(ref matrix);
-
             _groupBox.Update();
         }
     }
