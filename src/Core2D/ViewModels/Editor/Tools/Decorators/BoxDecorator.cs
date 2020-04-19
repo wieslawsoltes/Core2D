@@ -627,7 +627,9 @@ namespace Core2D.Editor.Tools.Decorators
 
         private void Translate(double dx, double dy)
         {
-            var matrix = Matrix2.Translate(dx, dy);
+            double offsetX = dx;
+            double offsetY = dy;
+            var matrix = Matrix2.Translate(offsetX, offsetY);
             TransformPoints(ref matrix);
             _groupBox.Update();
         }
