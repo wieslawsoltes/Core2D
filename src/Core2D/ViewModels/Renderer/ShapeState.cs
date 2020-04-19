@@ -27,6 +27,8 @@ namespace Core2D.Renderer
             Notify(nameof(Visible));
             Notify(nameof(Printable));
             Notify(nameof(Locked));
+            Notify(nameof(Size));
+            Notify(nameof(Thickness));
             Notify(nameof(Connector));
             Notify(nameof(None));
             Notify(nameof(Standalone));
@@ -60,6 +62,20 @@ namespace Core2D.Renderer
         {
             get => _flags.HasFlag(ShapeStateFlags.Locked);
             set => Flags = value ? _flags | ShapeStateFlags.Locked : _flags & ~ShapeStateFlags.Locked;
+        }
+
+        /// <inheritdoc/>
+        public bool Size
+        {
+            get => _flags.HasFlag(ShapeStateFlags.Size);
+            set => Flags = value ? _flags | ShapeStateFlags.Size : _flags & ~ShapeStateFlags.Size;
+        }
+
+        /// <inheritdoc/>
+        public bool Thickness
+        {
+            get => _flags.HasFlag(ShapeStateFlags.Thickness);
+            set => Flags = value ? _flags | ShapeStateFlags.Thickness : _flags & ~ShapeStateFlags.Thickness;
         }
 
         /// <inheritdoc/>
@@ -158,6 +174,18 @@ namespace Core2D.Renderer
         /// </summary>
         /// <returns>Returns always false.</returns>
         public virtual bool ShouldSerializeLocked() => false;
+
+        /// <summary>
+        /// The <see cref="Size"/> property is not serialized.
+        /// </summary>
+        /// <returns>Returns always false.</returns>
+        public virtual bool ShouldSerializeSize() => false;
+
+        /// <summary>
+        /// The <see cref="Thickness"/> property is not serialized.
+        /// </summary>
+        /// <returns>Returns always false.</returns>
+        public virtual bool ShouldSerializeThickness() => false;
 
         /// <summary>
         /// The <see cref="Connector"/> property is not serialized.
