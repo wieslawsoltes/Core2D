@@ -93,6 +93,12 @@
     <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.0" PrivateAssets="All" />
     <PackageReference Include="Microsoft.DotNet.ILCompiler" Version="1.0.0-alpha-*" Condition="'$(CoreRT)' == 'True'" />
     <PackageReference Include="SourceLink.Create.CommandLine" Version="2.8.3" PrivateAssets="All" />
+    <PackageReference Include="Avalonia" Version="0.9.999-cibuild*" />
+    <PackageReference Include="Avalonia.Controls.DataGrid" Version="0.9.999-cibuild*" />
+    <PackageReference Include="Avalonia.Desktop" Version="0.9.999-cibuild*" />
+    <PackageReference Include="Avalonia.Diagnostics" Version="0.9.999-cibuild*" />
+    <PackageReference Include="Avalonia.Angle.Windows.Natives" Version="2.1.0.2019013001" />
+    <PackageReference Include="Avalonia.ReactiveUI" Version="0.9.999-cibuild*" />
   </ItemGroup>
 
   <ItemGroup>
