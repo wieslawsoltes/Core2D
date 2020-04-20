@@ -684,16 +684,6 @@ namespace Core2D.Renderer.PdfSharp
                 {
                     fontStyle |= XFontStyle.Italic;
                 }
-
-                if (text.Style.TextStyle.FontStyle.Flags.HasFlag(FontStyleFlags.Underline))
-                {
-                    fontStyle |= XFontStyle.Underline;
-                }
-
-                if (text.Style.TextStyle.FontStyle.Flags.HasFlag(FontStyleFlags.Strikeout))
-                {
-                    fontStyle |= XFontStyle.Strikeout;
-                }
             }
 
             var font = new XFont(

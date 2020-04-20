@@ -692,16 +692,6 @@ namespace Core2D.Renderer.WinForms
                 {
                     fontStyle |= System.Drawing.FontStyle.Italic;
                 }
-
-                if (text.Style.TextStyle.FontStyle.Flags.HasFlag(Core2D.Style.FontStyleFlags.Underline))
-                {
-                    fontStyle |= System.Drawing.FontStyle.Underline;
-                }
-
-                if (text.Style.TextStyle.FontStyle.Flags.HasFlag(Core2D.Style.FontStyleFlags.Strikeout))
-                {
-                    fontStyle |= System.Drawing.FontStyle.Strikeout;
-                }
             }
 
             Font font = new Font(

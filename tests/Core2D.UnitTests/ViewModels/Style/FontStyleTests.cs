@@ -26,25 +26,19 @@ namespace Core2D.Style.UnitTests
             style.Flags =
                 FontStyleFlags.Regular
                 | FontStyleFlags.Bold
-                | FontStyleFlags.Italic
-                | FontStyleFlags.Underline
-                | FontStyleFlags.Strikeout;
+                | FontStyleFlags.Italic;
 
             Assert.Equal(FontStyleFlags.Regular
                 | FontStyleFlags.Bold
-                | FontStyleFlags.Italic
-                | FontStyleFlags.Underline
-                | FontStyleFlags.Strikeout, style.Flags);
-            Assert.Equal(6, target.PropertyNames.Count);
+                | FontStyleFlags.Italic, style.Flags);
+            Assert.Equal(4, target.PropertyNames.Count);
 
             var propertyNames = new string[]
             {
                 nameof(IFontStyle.Flags),
                 nameof(IFontStyle.Regular),
                 nameof(IFontStyle.Bold),
-                nameof(IFontStyle.Italic),
-                nameof(IFontStyle.Underline),
-                nameof(IFontStyle.Strikeout)
+                nameof(IFontStyle.Italic)
             };
 
             Assert.Equal(propertyNames, target.PropertyNames);
@@ -91,54 +85,15 @@ namespace Core2D.Style.UnitTests
 
         [Fact]
         [Trait("Core2D.Style", "Style")]
-        public void Underline_Property()
-        {
-            var target = _factory.CreateFontStyle();
-
-            target.Underline = true;
-            Assert.Equal(FontStyleFlags.Underline, target.Flags);
-
-            target.Underline = false;
-            Assert.Equal(FontStyleFlags.Regular, target.Flags);
-        }
-
-        [Fact]
-        [Trait("Core2D.Style", "Style")]
-        public void Strikeout_Property()
-        {
-            var target = _factory.CreateFontStyle();
-
-            target.Strikeout = true;
-            Assert.Equal(FontStyleFlags.Strikeout, target.Flags);
-
-            target.Strikeout = false;
-            Assert.Equal(FontStyleFlags.Regular, target.Flags);
-        }
-
-        [Fact]
-        [Trait("Core2D.Style", "Style")]
-        public void Parse_FontStyleFlags_String()
-        {
-            var target = FontStyle.Parse("Bold, Italic, Strikeout");
-
-            Assert.Equal(
-                FontStyleFlags.Bold
-                | FontStyleFlags.Italic
-                | FontStyleFlags.Strikeout, target.Flags);
-        }
-
-        [Fact]
-        [Trait("Core2D.Style", "Style")]
         public void ToString_Should_Return_Flags_String()
         {
             var target = _factory.CreateFontStyle(
                 FontStyleFlags.Bold
-                | FontStyleFlags.Italic
-                | FontStyleFlags.Strikeout);
+                | FontStyleFlags.Italic);
 
             var actual = target.ToString();
 
-            Assert.Equal("Bold, Italic, Strikeout", actual);
+            Assert.Equal("Bold, Italic", actual);
         }
     }
 }

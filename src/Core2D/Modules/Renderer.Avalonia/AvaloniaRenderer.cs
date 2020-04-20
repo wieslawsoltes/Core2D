@@ -809,21 +809,6 @@ namespace Core2D.Renderer.Avalonia
                     }
                 }
 
-                // TODO: Implement font decoration after Avalonia adds support.
-                /*
-                var fontDecoration = AM.FontDecoration.None;
-
-                if (style.TextStyle.FontStyle.Flags.HasFlag(FontStyleFlags.Underline))
-                {
-                    fontDecoration |= AM.FontDecoration.Underline;
-                }
-
-                if (style.TextStyle.FontStyle.Flags.HasFlag(FontStyleFlags.Strikeout))
-                {
-                    fontDecoration |= AM.FontDecoration.Strikethrough;
-                }
-                */
-
                 if (style.TextStyle.FontSize >= 0.0)
                 {
                     var tf = new AM.Typeface(

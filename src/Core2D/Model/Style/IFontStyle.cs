@@ -25,15 +25,5 @@ namespace Core2D.Style
         /// Gets or sets <see cref="FontStyleFlags.Italic"/> flag.
         /// </summary>
         bool Italic { get; set; }
-
-        /// <summary>
-        /// Gets or sets <see cref="FontStyleFlags.Underline"/> flag.
-        /// </summary>
-        bool Underline { get; set; }
-
-        /// <summary>
-        /// Gets or sets <see cref="FontStyleFlags.Strikeout"/> flag.
-        /// </summary>
-        bool Strikeout { get; set; }
     }
 }

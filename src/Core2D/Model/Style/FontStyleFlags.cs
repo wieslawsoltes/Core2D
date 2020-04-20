@@ -21,16 +21,6 @@ namespace Core2D.Style
         /// <summary>
         /// Italic text.
         /// </summary>
-        Italic = 2,
-
-        /// <summary>
-        /// Underlined text.
-        /// </summary>
-        Underline = 4,
-
-        /// <summary>
-        /// Text with a line through the middle.
-        /// </summary>
-        Strikeout = 8
+        Italic = 2
     }
 }

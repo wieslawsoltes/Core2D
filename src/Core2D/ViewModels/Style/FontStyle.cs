@@ -26,8 +26,6 @@ namespace Core2D.Style
             Notify(nameof(Regular));
             Notify(nameof(Bold));
             Notify(nameof(Italic));
-            Notify(nameof(Underline));
-            Notify(nameof(Strikeout));
         }
 
         /// <inheritdoc/>
@@ -49,20 +47,6 @@ namespace Core2D.Style
         {
             get => _flags.HasFlag(FontStyleFlags.Italic);
             set => Flags = value ? _flags | FontStyleFlags.Italic : _flags & ~FontStyleFlags.Italic;
-        }
-
-        /// <inheritdoc/>
-        public bool Underline
-        {
-            get => _flags.HasFlag(FontStyleFlags.Underline);
-            set => Flags = value ? _flags | FontStyleFlags.Underline : _flags & ~FontStyleFlags.Underline;
-        }
-
-        /// <inheritdoc/>
-        public bool Strikeout
-        {
-            get => _flags.HasFlag(FontStyleFlags.Strikeout);
-            set => Flags = value ? _flags | FontStyleFlags.Strikeout : _flags & ~FontStyleFlags.Strikeout;
         }
 
         /// <inheritdoc/>
@@ -120,17 +104,5 @@ namespace Core2D.Style
         /// </summary>
         /// <returns>Returns always false.</returns>
         public virtual bool ShouldSerializeItalic() => false;
-
-        /// <summary>
-        /// The <see cref="Underline"/> property is not serialized.
-        /// </summary>
-        /// <returns>Returns always false.</returns>
-        public virtual bool ShouldSerializeUnderline() => false;
-
-        /// <summary>
-        /// The <see cref="Strikeout"/> property is not serialized.
-        /// </summary>
-        /// <returns>Returns always false.</returns>
-        public virtual bool ShouldSerializeStrikeout() => false;
     }
 }

@@ -92,16 +92,6 @@ namespace Core2D.Renderer.SkiaSharp
                 {
                     style |= SKFontStyleSlant.Italic;
                 }
-
-                if (shapeStyle.TextStyle.FontStyle.Flags.HasFlag(FontStyleFlags.Underline))
-                {
-                    // TODO: Add support for FontStyleFlags.Underline
-                }
-
-                if (shapeStyle.TextStyle.FontStyle.Flags.HasFlag(FontStyleFlags.Strikeout))
-                {
-                    // TODO: Add support for FontStyleFlags.Strikeout
-                }
             }
             pen = ToSKPaintBrush(shapeStyle.Stroke, isAntialias);
             var tf = SKTypeface.FromFamilyName(shapeStyle.TextStyle.FontName, weight, SKFontStyleWidth.Normal, style);

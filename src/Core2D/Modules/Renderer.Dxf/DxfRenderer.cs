@@ -813,8 +813,6 @@ namespace Core2D.Renderer.Dxf
             {
                 options.Bold = fs.Flags.HasFlag(FontStyleFlags.Bold);
                 options.Italic = fs.Flags.HasFlag(FontStyleFlags.Italic);
-                options.Underline = fs.Flags.HasFlag(FontStyleFlags.Underline);
-                options.StrikeThrough = fs.Flags.HasFlag(FontStyleFlags.Strikeout);
             }
 
             options.Color = null;

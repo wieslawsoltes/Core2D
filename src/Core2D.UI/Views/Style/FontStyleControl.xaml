@@ -13,8 +13,6 @@
             <CheckBox Content="Regular" IsChecked="{Binding Regular, Mode=TwoWay}" Classes="default"/>
             <CheckBox Content="Bold" IsChecked="{Binding Bold, Mode=TwoWay}" Classes="default"/>
             <CheckBox Content="Italic" IsChecked="{Binding Italic, Mode=TwoWay}" Classes="default"/>
-            <CheckBox Content="Underline" IsChecked="{Binding Underline, Mode=TwoWay}" Classes="default"/>
-            <CheckBox Content="Strikeout" IsChecked="{Binding Strikeout, Mode=TwoWay}" Classes="default"/>
         </StackPanel>
     </ScrollViewer>
 </UserControl>
