@@ -1,31 +1,34 @@
-﻿using System;
+﻿#define USE_CUSTOM_OBSERVER
+using System;
 
 namespace Core2D.Input
 {
-    //internal class InputArgsObserver : IObserver<InputArgs>
-    //{
-    //    private readonly IInputTarget _target;
-    //    private readonly Action<InputArgs> _onNext;
-    //
-    //    public InputArgsObserver(IInputTarget target, Action<InputArgs> onNext)
-    //    {
-    //        _target = target;
-    //        _onNext = onNext;
-    //    }
-    //
-    //    public void OnCompleted()
-    //    {
-    //    }
-    //
-    //    public void OnError(Exception error)
-    //    {
-    //    }
-    //
-    //    public void OnNext(InputArgs value)
-    //    {
-    //        _onNext(value);
-    //    }
-    //}
+#if USE_CUSTOM_OBSERVER
+    internal class InputArgsObserver : IObserver<InputArgs>
+    {
+        private readonly IInputTarget _target;
+        private readonly Action<IInputTarget, InputArgs> _onNext;
+
+        public InputArgsObserver(IInputTarget target, Action<IInputTarget, InputArgs> onNext)
+        {
+            _target = target;
+            _onNext = onNext;
+        }
+
+        public void OnCompleted()
+        {
+        }
+
+        public void OnError(Exception error)
+        {
+        }
+
+        public void OnNext(InputArgs value)
+        {
+            _onNext(_target, value);
+        }
+    } 
+#endif
 
     /// <summary>
     /// Provides mouse input for target object.
@@ -40,10 +43,14 @@ namespace Core2D.Input
 
         private static IDisposable ConnectLeftDown(IInputSource source, IInputTarget target)
         {
-            //var observer = new InputArgsObserver(target, OnNextLeftDown);
-            //return source.LeftDown.SubscribeSafe(observer);
+#if USE_CUSTOM_OBSERVER
+            var observer = new InputArgsObserver(target, OnNextLeftDown);
+            return source.LeftDown.Subscribe(observer);
+            void OnNextLeftDown(IInputTarget target, InputArgs args)
+#else
             return source.LeftDown.Subscribe(OnNextLeftDown);
             void OnNextLeftDown(InputArgs args)
+#endif
             {
                 if (target.IsLeftDownAvailable())
                 {
@@ -54,10 +61,14 @@ namespace Core2D.Input
 
         private static IDisposable ConnectLeftUp(IInputSource source, IInputTarget target)
         {
-            //var observer = new InputArgsObserver(target, OnNextLeftUp);
-            //return source.LeftUp.SubscribeSafe(observer);
+#if USE_CUSTOM_OBSERVER
+            var observer = new InputArgsObserver(target, OnNextLeftUp);
+            return source.LeftUp.Subscribe(observer);
+            void OnNextLeftUp(IInputTarget target, InputArgs args)
+#else
             return source.LeftUp.Subscribe(OnNextLeftUp);
             void OnNextLeftUp(InputArgs args)
+#endif
             {
                 if (target.IsLeftUpAvailable())
                 {
@@ -68,10 +79,14 @@ namespace Core2D.Input
 
         private static IDisposable ConnectRightDown(IInputSource source, IInputTarget target)
         {
-            //var observer = new InputArgsObserver(target, OnNextRightDown);
-            //return source.RightDown.SubscribeSafe(observer);
+#if USE_CUSTOM_OBSERVER
+            var observer = new InputArgsObserver(target, OnNextRightDown);
+            return source.RightDown.Subscribe(observer);
+            void OnNextRightDown(IInputTarget target, InputArgs args)
+#else
             return source.RightDown.Subscribe(OnNextRightDown);
             void OnNextRightDown(InputArgs args)
+#endif
             {
                 if (target.IsRightDownAvailable())
                 {
@@ -82,10 +97,14 @@ namespace Core2D.Input
 
         private static IDisposable ConnectRightUp(IInputSource source, IInputTarget target)
         {
-            //var observer = new InputArgsObserver(target, OnNextRightUp);
-            //return source.RightUp.SubscribeSafe(observer);
+#if USE_CUSTOM_OBSERVER
+            var observer = new InputArgsObserver(target, OnNextRightUp);
+            return source.RightUp.Subscribe(observer);
+            void OnNextRightUp(IInputTarget target, InputArgs args)
+#else
             return source.RightUp.Subscribe(OnNextRightUp);
             void OnNextRightUp(InputArgs args)
+#endif
             {
                 if (target.IsRightUpAvailable())
                 {
@@ -96,10 +115,14 @@ namespace Core2D.Input
 
         private static IDisposable ConnectMove(IInputSource source, IInputTarget target)
         {
-            //var observer = new InputArgsObserver(target, OnNextMove);
-            //return source.Move.SubscribeSafe(observer);
+#if USE_CUSTOM_OBSERVER
+            var observer = new InputArgsObserver(target, OnNextMove);
+            return source.Move.Subscribe(observer);
+            void OnNextMove(IInputTarget target, InputArgs args)
+#else
             return source.Move.Subscribe(OnNextMove);
             void OnNextMove(InputArgs args)
+#endif
             {
                 if (target.IsMoveAvailable())
                 {

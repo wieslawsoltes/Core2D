@@ -8,7 +8,7 @@ using Core2D.Shapes;
 using A = Avalonia;
 using AM = Avalonia.Media;
 
-namespace Core2D.Renderer.Avalonia
+namespace Core2D.UI.Renderer
 {
     public static class PathGeometryConverter
     {

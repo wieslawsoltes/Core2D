@@ -43,8 +43,6 @@
     <PackageReference Include="PDFsharp" Version="1.50.5147" />
     <PackageReference Include="SkiaSharp" Version="1.68.1.1" />
     <PackageReference Include="Dock.Model" Version="0.9.999-build*" />
-    <PackageReference Include="Avalonia" Version="0.9.999-cibuild*" />
-    <PackageReference Include="Avalonia.MatrixExtensions" Version="2.3.999-build*" />
   </ItemGroup>
 
   <ItemGroup Condition="$(TargetFramework.StartsWith('net4'))">

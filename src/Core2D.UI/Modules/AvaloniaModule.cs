@@ -18,7 +18,6 @@ using Core2D.FileWriter.SkiaSharpSvg;
 using Core2D.FileWriter.SkiaSharpWebp;
 using Core2D.Log.Trace;
 using Core2D.Renderer;
-using Core2D.Renderer.Avalonia;
 #if !_CORERT
 using Core2D.ScriptRunner.Roslyn;
 #endif
@@ -32,6 +31,7 @@ using Core2D.UI.Editor;
 using Core2D.UI.Importers;
 using Core2D.UI.Dock.Factories;
 using Core2D.UI.Dock.Windows;
+using Core2D.UI.Renderer;
 using Core2D.UI.Views;
 using DM = Dock.Model;
 using Core2D.Renderer.SkiaSharp;
