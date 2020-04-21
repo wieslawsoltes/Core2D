@@ -40,6 +40,8 @@
         <!-- Dock -->
         <StyleInclude Source="avares://Dock.Avalonia.Themes.Default/DefaultTheme.xaml"/>
         <StyleInclude Source="avares://Dock.Avalonia.Themes.Metro/DefaultTheme.xaml"/>
+        <!-- Icons -->
+        <StyleInclude Source="avares://Core2D.UI/Icons.xaml"/>
         <!-- Border -->
         <Style Selector="Border.panel">
             <Setter Property="Margin" Value="2"/>
