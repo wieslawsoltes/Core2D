@@ -20,6 +20,31 @@
     <UserControl.Resources>
         <converters:ObjectEqualityMultiConverter x:Key="ObjectEqualityMultiConverter"/>
         <converters:ObjectEqualsConverter x:Key="ObjectEqualsConverter"/>
+        <!-- Menu-Shape -->
+        <DrawingPresenter x:Key="DifferenceIcon" Drawing="{StaticResource Difference}" Width="16" Height="16"/>
+        <DrawingPresenter x:Key="IntersectIcon" Drawing="{StaticResource Intersect}" Width="16" Height="16"/>
+        <DrawingPresenter x:Key="UnionIcon" Drawing="{StaticResource Union}" Width="16" Height="16"/>
+        <DrawingPresenter x:Key="XorIcon" Drawing="{StaticResource Xor}" Width="16" Height="16"/>
+        <DrawingPresenter x:Key="ReverseDifferenceIcon" Drawing="{StaticResource ReverseDifference}" Width="16" Height="16"/>
+        <!-- Menu-Tool -->
+        <DrawingPresenter x:Key="NoneIcon" Drawing="{StaticResource None}" Width="16" Height="16"/>
+        <DrawingPresenter x:Key="SelectionIcon" Drawing="{StaticResource Selection}" Width="16" Height="16"/>
+        <DrawingPresenter x:Key="PointIcon" Drawing="{StaticResource Point}" Width="16" Height="16"/>
+        <DrawingPresenter x:Key="LineIcon" Drawing="{StaticResource Line}" Width="16" Height="16"/>
+        <DrawingPresenter x:Key="ArcIcon" Drawing="{StaticResource Arc}" Width="16" Height="16"/>
+        <DrawingPresenter x:Key="CubicBezierIcon" Drawing="{StaticResource CubicBezier}" Width="16" Height="16"/>
+        <DrawingPresenter x:Key="QuadraticBezierIcon" Drawing="{StaticResource QuadraticBezier}" Width="16" Height="16"/>
+        <DrawingPresenter x:Key="PathIcon" Drawing="{StaticResource Path}" Width="16" Height="16"/>
+        <DrawingPresenter x:Key="PathLineIcon" Drawing="{StaticResource Line}" Width="16" Height="16"/>
+        <DrawingPresenter x:Key="PathArcIcon" Drawing="{StaticResource Arc}" Width="16" Height="16"/>
+        <DrawingPresenter x:Key="PathCubicBezierIcon" Drawing="{StaticResource CubicBezier}" Width="16" Height="16"/>
+        <DrawingPresenter x:Key="PathQuadraticBezierIcon" Drawing="{StaticResource QuadraticBezier}" Width="16" Height="16"/>
+        <DrawingPresenter x:Key="PathMoveIcon" Drawing="{StaticResource Move}" Width="16" Height="16"/>        
+        <DrawingPresenter x:Key="RectangleIcon" Drawing="{StaticResource Rectangle}" Width="16" Height="16"/>
+        <DrawingPresenter x:Key="EllipseIcon" Drawing="{StaticResource Ellipse}" Width="16" Height="16"/>
+        <DrawingPresenter x:Key="CircleIcon" Drawing="{StaticResource Circle}" Width="16" Height="16"/>
+        <DrawingPresenter x:Key="TextIcon" Drawing="{StaticResource Text}" Width="16" Height="16"/>
+        <DrawingPresenter x:Key="ImageIcon" Drawing="{StaticResource Image}" Width="16" Height="16"/>
     </UserControl.Resources>
     <Menu Classes="default">
         <Menu.ItemsPanel>
@@ -248,11 +273,11 @@
             <MenuItem Header="Create Str_oke Path" Command="{Binding OnCreateStrokePath}"/>
             <MenuItem Header="Create _Fill Path" Command="{Binding OnCreateFillPath}"/>
             <Separator/>
-            <MenuItem Header="_Difference" ToolTip.Tip="Subtract the op path from the current path." Command="{Binding OnPathOp}" CommandParameter="Difference" InputGesture="Ctrl+Shift+D"/>
-            <MenuItem Header="_Intersect" ToolTip.Tip="Intersect the two paths." Command="{Binding OnPathOp}" CommandParameter="Intersect" InputGesture="Ctrl+Shift+I"/>
-            <MenuItem Header="_Union" ToolTip.Tip="Union (inclusive-or) the two paths." Command="{Binding OnPathOp}" CommandParameter="Union" InputGesture="Ctrl+Shift+U"/>
-            <MenuItem Header="_Xor" ToolTip.Tip="Exclusive-or the two paths." Command="{Binding OnPathOp}" CommandParameter="Xor" InputGesture="Ctrl+Shift+X"/>
-            <MenuItem Header="_Reverse Difference" ToolTip.Tip="Subtract the current path from the op path." Command="{Binding OnPathOp}" CommandParameter="ReverseDifference" InputGesture="Ctrl+Shift+R"/>
+            <MenuItem Header="_Difference" Icon="{StaticResource DifferenceIcon}" ToolTip.Tip="Subtract the op path from the current path." Command="{Binding OnPathOp}" CommandParameter="Difference" InputGesture="Ctrl+Shift+D"/>
+            <MenuItem Header="_Intersect" Icon="{StaticResource IntersectIcon}" ToolTip.Tip="Intersect the two paths." Command="{Binding OnPathOp}" CommandParameter="Intersect" InputGesture="Ctrl+Shift+I"/>
+            <MenuItem Header="_Union" Icon="{StaticResource UnionIcon}" ToolTip.Tip="Union (inclusive-or) the two paths." Command="{Binding OnPathOp}" CommandParameter="Union" InputGesture="Ctrl+Shift+U"/>
+            <MenuItem Header="_Xor" Icon="{StaticResource XorIcon}" ToolTip.Tip="Exclusive-or the two paths." Command="{Binding OnPathOp}" CommandParameter="Xor" InputGesture="Ctrl+Shift+X"/>
+            <MenuItem Header="_Reverse Difference" Icon="{StaticResource ReverseDifferenceIcon}" ToolTip.Tip="Subtract the current path from the op path." Command="{Binding OnPathOp}" CommandParameter="ReverseDifference" InputGesture="Ctrl+Shift+R"/>
         </MenuItem>
         <MenuItem Header="F_ormat">
             <MenuItem Header="_Copy">
@@ -740,100 +765,100 @@
             <MenuItem Header="_Update Database..." Command="{Binding Platform.OnUpdateData}" CommandParameter="{Binding Project.CurrentDatabase}"/>
         </MenuItem>
         <MenuItem Header="_Tool">
-            <MenuItem Header="_None" Command="{Binding OnToolNone}" InputGesture="N">
-                <MenuItem.Icon>
+            <MenuItem Header="_None" Icon="{StaticResource NoneIcon}" Command="{Binding OnToolNone}" InputGesture="N">
+                <!--<MenuItem.Icon>
                     <CheckBox IsChecked="{Binding CurrentTool.Title, Converter={StaticResource ObjectEqualsConverter}, ConverterParameter=None, Mode=OneWay}" Classes="menu"/>
-                </MenuItem.Icon>
+                </MenuItem.Icon>-->
             </MenuItem>
             <Separator/>
-            <MenuItem Header="_Selection" Command="{Binding OnToolSelection}" InputGesture="S">
-                <MenuItem.Icon>
+            <MenuItem Header="_Selection" Icon="{StaticResource SelectionIcon}" Command="{Binding OnToolSelection}" InputGesture="S">
+                <!--<MenuItem.Icon>
                     <CheckBox IsChecked="{Binding CurrentTool.Title, Converter={StaticResource ObjectEqualsConverter}, ConverterParameter=Selection, Mode=OneWay}" Classes="menu"/>
-                </MenuItem.Icon>
+                </MenuItem.Icon>-->
             </MenuItem>
             <Separator/>
-            <MenuItem Header="_Point" Command="{Binding OnToolPoint}" InputGesture="P">
-                <MenuItem.Icon>
+            <MenuItem Header="_Point" Icon="{StaticResource PointIcon}" Command="{Binding OnToolPoint}" InputGesture="P">
+                <!--<MenuItem.Icon>
                     <CheckBox IsChecked="{Binding CurrentTool.Title, Converter={StaticResource ObjectEqualsConverter}, ConverterParameter=Point, Mode=OneWay}" Classes="menu"/>
-                </MenuItem.Icon>
+                </MenuItem.Icon>-->
             </MenuItem>
             <Separator/>
-            <MenuItem Header="_Line" Command="{Binding OnToolLine}" InputGesture="L">
-                <MenuItem.Icon>
+            <MenuItem Header="_Line" Icon="{StaticResource LineIcon}" Command="{Binding OnToolLine}" InputGesture="L">
+                <!--<MenuItem.Icon>
                     <CheckBox IsChecked="{Binding CurrentTool.Title, Converter={StaticResource ObjectEqualsConverter}, ConverterParameter=Line, Mode=OneWay}" Classes="menu"/>
-                </MenuItem.Icon>
+                </MenuItem.Icon>-->
             </MenuItem>
-            <MenuItem Header="_Arc" Command="{Binding OnToolArc}" InputGesture="A">
-                <MenuItem.Icon>
+            <MenuItem Header="_Arc" Icon="{StaticResource ArcIcon}" Command="{Binding OnToolArc}" InputGesture="A">
+                <!--<MenuItem.Icon>
                     <CheckBox IsChecked="{Binding CurrentTool.Title, Converter={StaticResource ObjectEqualsConverter}, ConverterParameter=Arc, Mode=OneWay}" Classes="menu"/>
-                </MenuItem.Icon>
+                </MenuItem.Icon>-->
             </MenuItem>
-            <MenuItem Header="Cubic _Bezier" Command="{Binding OnToolCubicBezier}" InputGesture="B">
-                <MenuItem.Icon>
+            <MenuItem Header="Cubic _Bezier" Icon="{StaticResource CubicBezierIcon}" Command="{Binding OnToolCubicBezier}" InputGesture="B">
+                <!--<MenuItem.Icon>
                     <CheckBox IsChecked="{Binding CurrentTool.Title, Converter={StaticResource ObjectEqualsConverter}, ConverterParameter=CubicBezier, Mode=OneWay}" Classes="menu"/>
-                </MenuItem.Icon>
+                </MenuItem.Icon>-->
             </MenuItem>
-            <MenuItem Header="_Quadratic Bezier" Command="{Binding OnToolQuadraticBezier}" InputGesture="Q">
-                <MenuItem.Icon>
+            <MenuItem Header="_Quadratic Bezier" Icon="{StaticResource QuadraticBezierIcon}" Command="{Binding OnToolQuadraticBezier}" InputGesture="Q">
+                <!--<MenuItem.Icon>
                     <CheckBox IsChecked="{Binding CurrentTool.Title, Converter={StaticResource ObjectEqualsConverter}, ConverterParameter=QuadraticBezier, Mode=OneWay}" Classes="menu"/>
-                </MenuItem.Icon>
+                </MenuItem.Icon>-->
             </MenuItem>
             <Separator/>
-            <MenuItem Header="Pat_h" Command="{Binding OnToolPath}" InputGesture="H">
-                <MenuItem.Icon>
+            <MenuItem Header="Pat_h" Icon="{StaticResource PathIcon}" Command="{Binding OnToolPath}" InputGesture="H">
+                <!--<MenuItem.Icon>
                     <CheckBox IsChecked="{Binding CurrentTool.Title, Converter={StaticResource ObjectEqualsConverter}, ConverterParameter=Path, Mode=OneWay}" Classes="menu"/>
-                </MenuItem.Icon>
+                </MenuItem.Icon>-->
             </MenuItem>
             <MenuItem Header="Path T_ool">
-                <MenuItem Header="_Line" Command="{Binding OnToolLine}" InputGesture="L">
-                    <MenuItem.Icon>
+                <MenuItem Header="_Line" Icon="{StaticResource PathLineIcon}" Command="{Binding OnToolLine}" InputGesture="L">
+                    <!--<MenuItem.Icon>
                         <CheckBox IsChecked="{Binding CurrentPathTool.Title, Converter={StaticResource ObjectEqualsConverter}, ConverterParameter=Line, Mode=OneWay}" Classes="menu"/>
-                    </MenuItem.Icon>
+                    </MenuItem.Icon>-->
                 </MenuItem>
-                <MenuItem Header="_Arc" Command="{Binding OnToolArc}" InputGesture="A">
-                    <MenuItem.Icon>
+                <MenuItem Header="_Arc" Icon="{StaticResource PathArcIcon}" Command="{Binding OnToolArc}" InputGesture="A">
+                    <!--<MenuItem.Icon>
                         <CheckBox IsChecked="{Binding CurrentPathTool.Title, Converter={StaticResource ObjectEqualsConverter}, ConverterParameter=Arc, Mode=OneWay}" Classes="menu"/>
-                    </MenuItem.Icon>
+                    </MenuItem.Icon>-->
                 </MenuItem>
-                <MenuItem Header="Cubic _Bezier" Command="{Binding OnToolCubicBezier}" InputGesture="B">
-                    <MenuItem.Icon>
+                <MenuItem Header="Cubic _Bezier" Icon="{StaticResource PathCubicBezierIcon}" Command="{Binding OnToolCubicBezier}" InputGesture="B">
+                    <!--<MenuItem.Icon>
                         <CheckBox IsChecked="{Binding CurrentPathTool.Title, Converter={StaticResource ObjectEqualsConverter}, ConverterParameter=CubicBezier, Mode=OneWay}" Classes="menu"/>
-                    </MenuItem.Icon>
+                    </MenuItem.Icon>-->
                 </MenuItem>
-                <MenuItem Header="_Quadratic Bezier" Command="{Binding OnToolQuadraticBezier}" InputGesture="Q">
-                    <MenuItem.Icon>
+                <MenuItem Header="_Quadratic Bezier" Icon="{StaticResource PathQuadraticBezierIcon}" Command="{Binding OnToolQuadraticBezier}" InputGesture="Q">
+                    <!--<MenuItem.Icon>
                         <CheckBox IsChecked="{Binding CurrentPathTool.Title, Converter={StaticResource ObjectEqualsConverter}, ConverterParameter=QuadraticBezier, Mode=OneWay}" Classes="menu"/>
-                    </MenuItem.Icon>
+                    </MenuItem.Icon>-->
                 </MenuItem>
                 <Separator/>
-                <MenuItem Header="_Move" Command="{Binding OnToolMove}" InputGesture="M">
-                    <MenuItem.Icon>
+                <MenuItem Header="_Move" Icon="{StaticResource PathMoveIcon}" Command="{Binding OnToolMove}" InputGesture="M">
+                    <!--<MenuItem.Icon>
                         <CheckBox IsChecked="{Binding CurrentPathTool.Title, Converter={StaticResource ObjectEqualsConverter}, ConverterParameter=Move, Mode=OneWay}" Classes="menu"/>
-                    </MenuItem.Icon>
+                    </MenuItem.Icon>-->
                 </MenuItem>
             </MenuItem>
             <Separator/>
-            <MenuItem Header="_Rectangle" Command="{Binding OnToolRectangle}" InputGesture="R">
-                <MenuItem.Icon>
+            <MenuItem Header="_Rectangle" Icon="{StaticResource RectangleIcon}" Command="{Binding OnToolRectangle}" InputGesture="R">
+                <!--<MenuItem.Icon>
                     <CheckBox IsChecked="{Binding CurrentTool.Title, Converter={StaticResource ObjectEqualsConverter}, ConverterParameter=Rectangle, Mode=OneWay}" Classes="menu"/>
-                </MenuItem.Icon>
+                </MenuItem.Icon>-->
             </MenuItem>
-            <MenuItem Header="_Ellipse" Command="{Binding OnToolEllipse}" InputGesture="E">
-                <MenuItem.Icon>
+            <MenuItem Header="_Ellipse" Icon="{StaticResource EllipseIcon}" Command="{Binding OnToolEllipse}" InputGesture="E">
+                <!--<MenuItem.Icon>
                     <CheckBox IsChecked="{Binding CurrentTool.Title, Converter={StaticResource ObjectEqualsConverter}, ConverterParameter=Ellipse, Mode=OneWay}" Classes="menu"/>
-                </MenuItem.Icon>
+                </MenuItem.Icon>-->
             </MenuItem>
             <Separator/>
-            <MenuItem Header="_Text" Command="{Binding OnToolText}" InputGesture="T">
-                <MenuItem.Icon>
+            <MenuItem Header="_Text" Icon="{StaticResource TextIcon}" Command="{Binding OnToolText}" InputGesture="T">
+                <!--<MenuItem.Icon>
                     <CheckBox IsChecked="{Binding CurrentTool.Title, Converter={StaticResource ObjectEqualsConverter}, ConverterParameter=Text, Mode=OneWay}" Classes="menu"/>
-                </MenuItem.Icon>
+                </MenuItem.Icon>-->
             </MenuItem>
             <Separator/>
-            <MenuItem Header="_Image" Command="{Binding OnToolImage}" InputGesture="I">
-                <MenuItem.Icon>
+            <MenuItem Header="_Image" Icon="{StaticResource ImageIcon}" Command="{Binding OnToolImage}" InputGesture="I">
+                <!--<MenuItem.Icon>
                     <CheckBox IsChecked="{Binding CurrentTool.Title, Converter={StaticResource ObjectEqualsConverter}, ConverterParameter=Image, Mode=OneWay}" Classes="menu"/>
-                </MenuItem.Icon>
+                </MenuItem.Icon>-->
             </MenuItem>
             <Separator/>
             <MenuItem Header="Reset" Command="{Binding OnResetTool}"/>
