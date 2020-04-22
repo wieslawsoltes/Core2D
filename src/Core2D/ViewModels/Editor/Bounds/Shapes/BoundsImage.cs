@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Core2D.Renderer;
 using Core2D.Shapes;
 using Spatial;
 
@@ -9,7 +10,7 @@ namespace Core2D.Editor.Bounds.Shapes
     {
         public Type TargetType => typeof(IImageShape);
 
-        public IPointShape TryToGetPoint(IBaseShape shape, Point2 target, double radius, IDictionary<Type, IBounds> registered)
+        public IPointShape TryToGetPoint(IBaseShape shape, Point2 target, double radius, double scale, IDictionary<Type, IBounds> registered)
         {
             if (!(shape is IImageShape image))
             {
@@ -18,12 +19,12 @@ namespace Core2D.Editor.Bounds.Shapes
 
             var pointHitTest = registered[typeof(IPointShape)];
 
-            if (pointHitTest.TryToGetPoint(image.TopLeft, target, radius, registered) != null)
+            if (pointHitTest.TryToGetPoint(image.TopLeft, target, radius, scale, registered) != null)
             {
                 return image.TopLeft;
             }
 
-            if (pointHitTest.TryToGetPoint(image.BottomRight, target, radius, registered) != null)
+            if (pointHitTest.TryToGetPoint(image.BottomRight, target, radius, scale, registered) != null)
             {
                 return image.BottomRight;
             }
@@ -31,32 +32,50 @@ namespace Core2D.Editor.Bounds.Shapes
             return null;
         }
 
-        public bool Contains(IBaseShape shape, Point2 target, double radius, IDictionary<Type, IBounds> registered)
+        public bool Contains(IBaseShape shape, Point2 target, double radius, double scale, IDictionary<Type, IBounds> registered)
         {
             if (!(shape is IImageShape image))
             {
                 throw new ArgumentNullException(nameof(shape));
             }
 
-            return Rect2.FromPoints(
+            var rect = Rect2.FromPoints(
                 image.TopLeft.X,
                 image.TopLeft.Y,
                 image.BottomRight.X,
-                image.BottomRight.Y).Contains(target);
+                image.BottomRight.Y);
+
+            if (image.State.Flags.HasFlag(ShapeStateFlags.Size) && scale != 1.0)
+            {
+                return HitTestHelper.Inflate(ref rect, scale).Contains(target);
+            }
+            else
+            {
+                return rect.Contains(target);
+            }
         }
 
-        public bool Overlaps(IBaseShape shape, Rect2 target, double radius, IDictionary<Type, IBounds> registered)
+        public bool Overlaps(IBaseShape shape, Rect2 target, double radius, double scale, IDictionary<Type, IBounds> registered)
         {
             if (!(shape is IImageShape image))
             {
                 throw new ArgumentNullException(nameof(shape));
             }
 
-            return Rect2.FromPoints(
+            var rect = Rect2.FromPoints(
                 image.TopLeft.X,
                 image.TopLeft.Y,
                 image.BottomRight.X,
-                image.BottomRight.Y).IntersectsWith(target);
+                image.BottomRight.Y);
+
+            if (image.State.Flags.HasFlag(ShapeStateFlags.Size) && scale != 1.0)
+            {
+                return HitTestHelper.Inflate(ref rect, scale).IntersectsWith(target);
+            }
+            else
+            {
+                return rect.IntersectsWith(target);
+            }
         }
     }
 }

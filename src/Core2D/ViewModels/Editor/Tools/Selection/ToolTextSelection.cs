@@ -1,6 +1,7 @@
 ﻿using System;
 using Core2D;
 using Core2D.Containers;
+using Core2D.Renderer;
 using Core2D.Shapes;
 using Core2D.Style;
 
@@ -41,6 +42,8 @@ namespace Core2D.Editor.Tools.Selection
         public void ToStateBottomRight()
         {
             _helperRectangle = _serviceProvider.GetService<IFactory>().CreateRectangleShape(0, 0, _style);
+            _helperRectangle.State.Flags |= ShapeStateFlags.Thickness;
+
             _topLeftHelperPoint = _serviceProvider.GetService<IFactory>().CreatePointShape(0, 0);
             _bottomRightHelperPoint = _serviceProvider.GetService<IFactory>().CreatePointShape(0, 0);
 

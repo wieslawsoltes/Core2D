@@ -242,10 +242,10 @@ namespace Core2D.Editor.Tools
                         {
                             var shapes = editor.Project.CurrentContainer.CurrentLayer.Shapes.Reverse();
                             double radius = editor.Project.Options.HitThreshold / editor.PageState.ZoomX;
-                            IBaseShape result = editor.HitTest.TryToGetPoint(shapes, new Point2(x, y), radius);
+                            IBaseShape result = editor.HitTest.TryToGetPoint(shapes, new Point2(x, y), radius, editor.PageState.ZoomX);
                             if (result == null)
                             {
-                                result = editor.HitTest.TryToGetShape(shapes, new Point2(x, y), radius);
+                                result = editor.HitTest.TryToGetShape(shapes, new Point2(x, y), radius, editor.PageState.ZoomX);
                             }
 
                             if (result != null)
@@ -327,10 +327,10 @@ namespace Core2D.Editor.Tools
                             var shapes = editor.Project.CurrentContainer.CurrentLayer.Shapes.Reverse();
 
                             double radius = editor.Project.Options.HitThreshold / editor.PageState.ZoomX;
-                            IBaseShape result = editor.HitTest.TryToGetPoint(shapes, new Point2(x, y), radius);
+                            IBaseShape result = editor.HitTest.TryToGetPoint(shapes, new Point2(x, y), radius, editor.PageState.ZoomX);
                             if (result == null)
                             {
-                                result = editor.HitTest.TryToGetShape(shapes, new Point2(x, y), radius);
+                                result = editor.HitTest.TryToGetShape(shapes, new Point2(x, y), radius, editor.PageState.ZoomX);
                             }
 
                             if (result != null && editor.PageState.SelectedShapes.Contains(result))
@@ -368,6 +368,7 @@ namespace Core2D.Editor.Tools
                             x, y,
                             editor.PageState.SelectionStyle,
                             true, true);
+                        _rectangleShape.State.Flags |= ShapeStateFlags.Thickness;
                         editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Add(_rectangleShape);
                         editor.Project.CurrentContainer.WorkingLayer.Invalidate();
                         _currentState = State.Selected;

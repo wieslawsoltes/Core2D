@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Core2D.Renderer;
 using Core2D.Shapes;
 using Spatial;
 
@@ -9,7 +10,7 @@ namespace Core2D.Editor.Bounds.Shapes
     {
         public Type TargetType => typeof(IArcShape);
 
-        public IPointShape TryToGetPoint(IBaseShape shape, Point2 target, double radius, IDictionary<Type, IBounds> registered)
+        public IPointShape TryToGetPoint(IBaseShape shape, Point2 target, double radius, double scale, IDictionary<Type, IBounds> registered)
         {
             if (!(shape is IArcShape arc))
             {
@@ -18,22 +19,22 @@ namespace Core2D.Editor.Bounds.Shapes
 
             var pointHitTest = registered[typeof(IPointShape)];
 
-            if (pointHitTest.TryToGetPoint(arc.Point1, target, radius, registered) != null)
+            if (pointHitTest.TryToGetPoint(arc.Point1, target, radius, scale, registered) != null)
             {
                 return arc.Point1;
             }
 
-            if (pointHitTest.TryToGetPoint(arc.Point2, target, radius, registered) != null)
+            if (pointHitTest.TryToGetPoint(arc.Point2, target, radius, scale, registered) != null)
             {
                 return arc.Point2;
             }
 
-            if (pointHitTest.TryToGetPoint(arc.Point3, target, radius, registered) != null)
+            if (pointHitTest.TryToGetPoint(arc.Point3, target, radius, scale, registered) != null)
             {
                 return arc.Point3;
             }
 
-            if (pointHitTest.TryToGetPoint(arc.Point4, target, radius, registered) != null)
+            if (pointHitTest.TryToGetPoint(arc.Point4, target, radius, scale, registered) != null)
             {
                 return arc.Point4;
             }
@@ -41,24 +42,42 @@ namespace Core2D.Editor.Bounds.Shapes
             return null;
         }
 
-        public bool Contains(IBaseShape shape, Point2 target, double radius, IDictionary<Type, IBounds> registered)
+        public bool Contains(IBaseShape shape, Point2 target, double radius, double scale, IDictionary<Type, IBounds> registered)
         {
             if (!(shape is IArcShape arc))
             {
                 throw new ArgumentNullException(nameof(shape));
             }
 
-            return ArcBounds(arc).Contains(target);
+            var rect = ArcBounds(arc);
+
+            if (arc.State.Flags.HasFlag(ShapeStateFlags.Size) && scale != 1.0)
+            {
+                return HitTestHelper.Inflate(ref rect, scale).Contains(target);
+            }
+            else
+            {
+                return rect.Contains(target);
+            }
         }
 
-        public bool Overlaps(IBaseShape shape, Rect2 target, double radius, IDictionary<Type, IBounds> registered)
+        public bool Overlaps(IBaseShape shape, Rect2 target, double radius, double scale, IDictionary<Type, IBounds> registered)
         {
             if (!(shape is IArcShape arc))
             {
                 throw new ArgumentNullException(nameof(shape));
             }
 
-            return ArcBounds(arc).IntersectsWith(target);
+            var rect = ArcBounds(arc);
+
+            if (arc.State.Flags.HasFlag(ShapeStateFlags.Size) && scale != 1.0)
+            {
+                return HitTestHelper.Inflate(ref rect, scale).IntersectsWith(target);
+            }
+            else
+            {
+                return rect.IntersectsWith(target);
+            }
         }
 
         public static Rect2 ArcBounds(IArcShape arc)

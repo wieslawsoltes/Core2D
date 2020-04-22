@@ -65,6 +65,7 @@ namespace Core2D.Editor
         /// Gets or sets current recent project.
         /// </summary>
         RecentFile CurrentRecentProject { get; set; }
+
         /// <summary>
         /// Gets or sets current layout configuration.
         /// </summary>
@@ -1223,9 +1224,8 @@ namespace Core2D.Editor
         /// </summary>
         /// <param name="lines">The lines to connect.</param>
         /// <param name="connectors">The connectors array.</param>
-        /// <param name="threshold">The connection threshold.</param>
         /// <returns>True if connection was successful.</returns>
-        bool TryToConnectLines(IEnumerable<ILineShape> lines, ImmutableArray<IPointShape> connectors, double threshold);
+        bool TryToConnectLines(IEnumerable<ILineShape> lines, ImmutableArray<IPointShape> connectors);
 
         /// <summary>
         /// Group shapes.

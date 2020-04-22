@@ -1,6 +1,7 @@
 ﻿using System;
 using Core2D;
 using Core2D.Containers;
+using Core2D.Renderer;
 using Core2D.Shapes;
 using Core2D.Style;
 using Spatial;
@@ -47,6 +48,8 @@ namespace Core2D.Editor.Tools.Selection
         public void ToStatePoint2()
         {
             _ellipse = _serviceProvider.GetService<IFactory>().CreateEllipseShape(0, 0, _style);
+            _ellipse.State.Flags |= ShapeStateFlags.Thickness;
+
             _p1HelperPoint = _serviceProvider.GetService<IFactory>().CreatePointShape(0, 0);
             _p2HelperPoint = _serviceProvider.GetService<IFactory>().CreatePointShape(0, 0);
             _centerHelperPoint = _serviceProvider.GetService<IFactory>().CreatePointShape(0, 0);
@@ -75,6 +78,8 @@ namespace Core2D.Editor.Tools.Selection
             }
 
             _startLine = _serviceProvider.GetService<IFactory>().CreateLineShape(0, 0, _style);
+            _startLine.State.Flags |= ShapeStateFlags.Thickness;
+
             _startHelperPoint = _serviceProvider.GetService<IFactory>().CreatePointShape(0, 0);
 
             _layer.Shapes = _layer.Shapes.Add(_startLine);
@@ -93,6 +98,8 @@ namespace Core2D.Editor.Tools.Selection
             }
 
             _endLine = _serviceProvider.GetService<IFactory>().CreateLineShape(0, 0, _style);
+            _endLine.State.Flags |= ShapeStateFlags.Thickness;
+
             _endHelperPoint = _serviceProvider.GetService<IFactory>().CreatePointShape(0, 0);
 
             _layer.Shapes = _layer.Shapes.Add(_endLine);

@@ -8,8 +8,8 @@ namespace Core2D.Editor
     public interface IBounds
     {
         Type TargetType { get; }
-        IPointShape TryToGetPoint(IBaseShape shape, Point2 target, double radius, IDictionary<Type, IBounds> registered);
-        bool Contains(IBaseShape shape, Point2 target, double radius, IDictionary<Type, IBounds> registered);
-        bool Overlaps(IBaseShape shape, Rect2 target, double radius, IDictionary<Type, IBounds> registered);
+        IPointShape TryToGetPoint(IBaseShape shape, Point2 target, double radius, double scale, IDictionary<Type, IBounds> registered);
+        bool Contains(IBaseShape shape, Point2 target, double radius, double scale, IDictionary<Type, IBounds> registered);
+        bool Overlaps(IBaseShape shape, Rect2 target, double radius, double scale, IDictionary<Type, IBounds> registered);
     }
 }

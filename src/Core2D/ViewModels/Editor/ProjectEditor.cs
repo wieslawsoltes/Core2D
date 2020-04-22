@@ -3074,8 +3074,7 @@ namespace Core2D.Editor
                         if (clone is IGroupShape group)
                         {
                             var shapes = ProjectContainer.GetAllShapes<ILineShape>(Project?.CurrentContainer?.CurrentLayer?.Shapes);
-                            double threshold = Project.Options.HitThreshold / PageState.ZoomX;
-                            TryToConnectLines(shapes, group.Connectors, threshold);
+                            TryToConnectLines(shapes, group.Connectors);
                         }
                     }
                 }
@@ -3107,7 +3106,7 @@ namespace Core2D.Editor
                     {
                         var shapes = layer.Shapes.Reverse();
                         double radius = Project.Options.HitThreshold / PageState.ZoomX;
-                        var result = HitTest.TryToGetShape(shapes, new Point2(x, y), radius);
+                        var result = HitTest.TryToGetShape(shapes, new Point2(x, y), radius, PageState.ZoomX);
                         if (result != null)
                         {
                             if (bExecute)
@@ -3206,7 +3205,7 @@ namespace Core2D.Editor
                     {
                         var shapes = layer.Shapes.Reverse();
                         double radius = Project.Options.HitThreshold / PageState.ZoomX;
-                        var result = HitTest.TryToGetShape(shapes, new Point2(x, y), radius);
+                        var result = HitTest.TryToGetShape(shapes, new Point2(x, y), radius, PageState.ZoomX);
                         if (result != null)
                         {
                             if (bExecute == true)
@@ -3412,14 +3411,14 @@ namespace Core2D.Editor
                 var shapes = layer.Shapes.Reverse();
                 double radius = Project.Options.HitThreshold / PageState.ZoomX;
 
-                var point = HitTest.TryToGetPoint(shapes, new Point2(x, y), radius);
+                var point = HitTest.TryToGetPoint(shapes, new Point2(x, y), radius, PageState.ZoomX);
                 if (point != null)
                 {
                     Select(layer, point);
                     return true;
                 }
 
-                var shape = HitTest.TryToGetShape(shapes, new Point2(x, y), radius);
+                var shape = HitTest.TryToGetShape(shapes, new Point2(x, y), radius, PageState.ZoomX);
                 if (shape != null)
                 {
                     Select(layer, shape);
@@ -3447,7 +3446,7 @@ namespace Core2D.Editor
                     rectangle.BottomRight.Y);
                 var shapes = layer.Shapes;
                 double radius = Project.Options.HitThreshold / PageState.ZoomX;
-                var result = HitTest.TryToGetShapes(shapes, rect, radius);
+                var result = HitTest.TryToGetShapes(shapes, rect, radius, PageState.ZoomX);
                 if (result != null)
                 {
                     if (result.Count > 0)
@@ -3554,8 +3553,8 @@ namespace Core2D.Editor
             {
                 var shapes = Project.CurrentContainer?.CurrentLayer?.Shapes.Reverse();
 
-                double radius1 = Project.Options.HitThreshold / PageState.ZoomX;
-                var point = HitTest.TryToGetPoint(shapes, new Point2(x, y), radius1);
+                double radius = Project.Options.HitThreshold / PageState.ZoomX;
+                var point = HitTest.TryToGetPoint(shapes, new Point2(x, y), radius, PageState.ZoomX);
                 if (point != null)
                 {
                     Hover(Project.CurrentContainer?.CurrentLayer, point);
@@ -3563,8 +3562,7 @@ namespace Core2D.Editor
                 }
                 else
                 {
-                    double radius = Project.Options.HitThreshold / PageState.ZoomX;
-                    var shape = HitTest.TryToGetShape(shapes, new Point2(x, y), radius);
+                    var shape = HitTest.TryToGetShape(shapes, new Point2(x, y), radius, PageState.ZoomX);
                     if (shape != null)
                     {
                         Hover(Project.CurrentContainer?.CurrentLayer, shape);
@@ -3590,7 +3588,7 @@ namespace Core2D.Editor
             {
                 var shapes = Project.CurrentContainer.CurrentLayer.Shapes.Reverse();
                 double radius = Project.Options.HitThreshold / PageState.ZoomX;
-                return HitTest.TryToGetPoint(shapes, new Point2(x, y), radius);
+                return HitTest.TryToGetPoint(shapes, new Point2(x, y), radius, PageState.ZoomX);
             }
             return null;
         }
@@ -3627,7 +3625,7 @@ namespace Core2D.Editor
 
             var shapes = Project.CurrentContainer.CurrentLayer.Shapes.Reverse();
             double radius = Project.Options.HitThreshold / PageState.ZoomX;
-            var result = HitTest.TryToGetShape(shapes, new Point2(x, y), radius);
+            var result = HitTest.TryToGetShape(shapes, new Point2(x, y), radius, PageState.ZoomX);
 
             if (result is ILineShape line)
             {
@@ -3723,11 +3721,14 @@ namespace Core2D.Editor
         }
 
         /// <inheritdoc/>
-        public bool TryToConnectLines(IEnumerable<ILineShape> lines, ImmutableArray<IPointShape> connectors, double threshold)
+        public bool TryToConnectLines(IEnumerable<ILineShape> lines, ImmutableArray<IPointShape> connectors)
         {
             if (connectors.Length > 0)
             {
                 var lineToPoints = new Dictionary<ILineShape, IList<IPointShape>>();
+
+                double threshold = Project.Options.HitThreshold / PageState.ZoomX;
+                double scale = PageState.ZoomX;
 
                 // Find possible connector to line connections.
                 foreach (var connector in connectors)
@@ -3735,7 +3736,8 @@ namespace Core2D.Editor
                     ILineShape result = null;
                     foreach (var line in lines)
                     {
-                        if (HitTest.Contains(line, new Point2(connector.X, connector.Y), threshold))
+                        double radius = Project.Options.HitThreshold / PageState.ZoomX;
+                        if (HitTest.Contains(line, new Point2(connector.X, connector.Y), threshold, scale))
                         {
                             result = line;
                             break;

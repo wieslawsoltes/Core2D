@@ -255,8 +255,8 @@ namespace Core2D
             state.HelperStyle =
                 CreateShapeStyle(
                     "Helper",
-                    0xFF, 0x00, 0x00, 0x00,
-                    0xFF, 0x00, 0x00, 0x00,
+                    0xFF, 0x00, 0xBF, 0xFF,
+                    0xFF, 0x00, 0xBF, 0xFF,
                     1.0);
 
             state.DrawDecorators = true;
@@ -270,7 +270,7 @@ namespace Core2D
                     2.0);
             state.SelectedPointStyle =
                 CreateShapeStyle(
-                    "Point",
+                    "SelectionPoint",
                     0xFF, 0x00, 0xBF, 0xFF,
                     0xFF, 0x00, 0xBF, 0xFF,
                     2.0);

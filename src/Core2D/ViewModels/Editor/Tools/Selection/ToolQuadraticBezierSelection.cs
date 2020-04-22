@@ -1,6 +1,7 @@
 ﻿using System;
 using Core2D;
 using Core2D.Containers;
+using Core2D.Renderer;
 using Core2D.Shapes;
 using Core2D.Style;
 
@@ -55,7 +56,11 @@ namespace Core2D.Editor.Tools.Selection
         public void ToStatePoint2()
         {
             _line12 = _serviceProvider.GetService<IFactory>().CreateLineShape(0, 0, _style);
+            _line12.State.Flags |= ShapeStateFlags.Thickness;
+
             _line32 = _serviceProvider.GetService<IFactory>().CreateLineShape(0, 0, _style);
+            _line32.State.Flags |= ShapeStateFlags.Thickness;
+
             _helperPoint2 = _serviceProvider.GetService<IFactory>().CreatePointShape(0, 0);
 
             _layer.Shapes = _layer.Shapes.Add(_line12);
