@@ -317,22 +317,8 @@ namespace Core2D.Renderer.WinForms
             }
         }
 
-        private Matrix ToMatrix(IMatrixObject matrix)
-        {
-            return new Matrix(
-                (float)matrix.M11, (float)matrix.M12,
-                (float)matrix.M21, (float)matrix.M22,
-                (float)matrix.OffsetX, (float)matrix.OffsetY);
-        }
-
         /// <inheritdoc/>
         public void InvalidateCache(IShapeStyle style)
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <inheritdoc/>
-        public void InvalidateCache(IMatrixObject matrix)
         {
             throw new NotImplementedException();
         }
@@ -367,23 +353,6 @@ namespace Core2D.Renderer.WinForms
         }
 
         /// <inheritdoc/>
-        public object PushMatrix(object dc, IMatrixObject matrix)
-        {
-            var _gfx = dc as Graphics;
-            var state = _gfx.Save();
-            _gfx.MultiplyTransform(ToMatrix(matrix));
-            return state;
-        }
-
-        /// <inheritdoc/>
-        public void PopMatrix(object dc, object state)
-        {
-            var _gfx = dc as Graphics;
-            var _state = state as GraphicsState;
-            _gfx.Restore(_state);
-        }
-
-        /// <inheritdoc/>
         public void Draw(object dc, IPageContainer container, double dx, double dy)
         {
             foreach (var layer in container.Layers)
@@ -402,7 +371,15 @@ namespace Core2D.Renderer.WinForms
             {
                 if (shape.State.Flags.HasFlag(State.DrawShapeState.Flags))
                 {
-                    shape.Draw(dc, this, dx, dy);
+                    shape.DrawShape(dc, this, dx, dy);
+                }
+            }
+
+            foreach (var shape in layer.Shapes)
+            {
+                if (shape.State.Flags.HasFlag(_state.DrawShapeState.Flags))
+                {
+                    shape.DrawPoints(dc, this, dx, dy);
                 }
             }
         }

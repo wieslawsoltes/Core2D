@@ -14,7 +14,6 @@ namespace Core2D.Shapes
         private IDictionary<string, object> _properties = new Dictionary<string, object>();
         private IShapeState _state;
         private IShapeStyle _style;
-        private IMatrixObject _transform;
         private bool _isStroked;
         private bool _isFilled;
         private IContext _data;
@@ -34,13 +33,6 @@ namespace Core2D.Shapes
         {
             get => _style;
             set => Update(ref _style, value);
-        }
-
-        /// <inheritdoc/>
-        public IMatrixObject Transform
-        {
-            get => _transform;
-            set => Update(ref _transform, value);
         }
 
         /// <inheritdoc/>
@@ -65,26 +57,10 @@ namespace Core2D.Shapes
         }
 
         /// <inheritdoc/>
-        public virtual object BeginTransform(object dc, IShapeRenderer renderer)
-        {
-            if (Transform != null)
-            {
-                return renderer.PushMatrix(dc, Transform);
-            }
-            return null;
-        }
+        public abstract void DrawShape(object dc, IShapeRenderer renderer, double dx, double dy);
 
         /// <inheritdoc/>
-        public virtual void EndTransform(object dc, IShapeRenderer renderer, object state)
-        {
-            if (Transform != null)
-            {
-                renderer.PopMatrix(dc, state);
-            }
-        }
-
-        /// <inheritdoc/>
-        public abstract void Draw(object dc, IShapeRenderer renderer, double dx, double dy);
+        public abstract void DrawPoints(object dc, IShapeRenderer renderer, double dx, double dy);
 
         /// <inheritdoc/>
         public virtual bool Invalidate(IShapeRenderer renderer, double dx, double dy)
@@ -150,12 +126,6 @@ namespace Core2D.Shapes
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
         public virtual bool ShouldSerializeStyle() => _style != null;
-
-        /// <summary>
-        /// Check whether the <see cref="Transform"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeTransform() => _transform != null;
 
         /// <summary>
         /// Check whether the <see cref="IsStroked"/> property has changed from its default value.

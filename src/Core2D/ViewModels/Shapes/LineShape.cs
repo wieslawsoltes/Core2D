@@ -31,29 +31,31 @@ namespace Core2D.Shapes
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, IShapeRenderer renderer, double dx, double dy)
+        public override void DrawShape(object dc, IShapeRenderer renderer, double dx, double dy)
         {
-            var state = base.BeginTransform(dc, renderer);
-
             if (State.Flags.HasFlag(ShapeStateFlags.Visible))
             {
                 renderer.Draw(dc, this, dx, dy);
             }
+        }
 
+        /// <inheritdoc/>
+        public override void DrawPoints(object dc, IShapeRenderer renderer, double dx, double dy)
+        {
             if (renderer.State.SelectedShape != null && renderer.State.DrawPoints == true)
             {
                 if (this == renderer.State.SelectedShape)
                 {
-                    _start.Draw(dc, renderer, dx, dy);
-                    _end.Draw(dc, renderer, dx, dy);
+                    _start.DrawShape(dc, renderer, dx, dy);
+                    _end.DrawShape(dc, renderer, dx, dy);
                 }
                 else if (_start == renderer.State.SelectedShape)
                 {
-                    _start.Draw(dc, renderer, dx, dy);
+                    _start.DrawShape(dc, renderer, dx, dy);
                 }
                 else if (_end == renderer.State.SelectedShape)
                 {
-                    _end.Draw(dc, renderer, dx, dy);
+                    _end.DrawShape(dc, renderer, dx, dy);
                 }
             }
 
@@ -61,12 +63,10 @@ namespace Core2D.Shapes
             {
                 if (renderer.State.SelectedShapes.Contains(this))
                 {
-                    _start.Draw(dc, renderer, dx, dy);
-                    _end.Draw(dc, renderer, dx, dy);
+                    _start.DrawShape(dc, renderer, dx, dy);
+                    _end.DrawShape(dc, renderer, dx, dy);
                 }
             }
-
-            base.EndTransform(dc, renderer, state);
         }
 
         /// <inheritdoc/>

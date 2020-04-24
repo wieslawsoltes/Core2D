@@ -39,29 +39,31 @@ namespace Core2D.Shapes
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, IShapeRenderer renderer, double dx, double dy)
+        public override void DrawShape(object dc, IShapeRenderer renderer, double dx, double dy)
         {
-            var state = base.BeginTransform(dc, renderer);
-
             if (State.Flags.HasFlag(ShapeStateFlags.Visible))
             {
                 renderer.Draw(dc, this, dx, dy);
             }
+        }
 
+        /// <inheritdoc/>
+        public override void DrawPoints(object dc, IShapeRenderer renderer, double dx, double dy)
+        {
             if (renderer.State.SelectedShape != null && renderer.State.DrawPoints == true)
             {
                 if (this == renderer.State.SelectedShape)
                 {
-                    _topLeft.Draw(dc, renderer, dx, dy);
-                    _bottomRight.Draw(dc, renderer, dx, dy);
+                    _topLeft.DrawShape(dc, renderer, dx, dy);
+                    _bottomRight.DrawShape(dc, renderer, dx, dy);
                 }
                 else if (_topLeft == renderer.State.SelectedShape)
                 {
-                    _topLeft.Draw(dc, renderer, dx, dy);
+                    _topLeft.DrawShape(dc, renderer, dx, dy);
                 }
                 else if (_bottomRight == renderer.State.SelectedShape)
                 {
-                    _bottomRight.Draw(dc, renderer, dx, dy);
+                    _bottomRight.DrawShape(dc, renderer, dx, dy);
                 }
             }
 
@@ -69,12 +71,10 @@ namespace Core2D.Shapes
             {
                 if (renderer.State.SelectedShapes.Contains(this))
                 {
-                    _topLeft.Draw(dc, renderer, dx, dy);
-                    _bottomRight.Draw(dc, renderer, dx, dy);
+                    _topLeft.DrawShape(dc, renderer, dx, dy);
+                    _bottomRight.DrawShape(dc, renderer, dx, dy);
                 }
             }
-
-            base.EndTransform(dc, renderer, state);
         }
 
         /// <inheritdoc/>

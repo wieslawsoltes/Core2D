@@ -103,8 +103,5 @@
         <TabItem Header="Data" Classes="property">
             <ContentControl Content="{Binding Data}"/>
         </TabItem>
-        <TabItem Header="Transform" Classes="property">
-            <ContentControl Content="{Binding Transform}"/>
-        </TabItem>
     </TabControl>
 </UserControl>

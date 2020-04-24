@@ -47,39 +47,41 @@ namespace Core2D.Shapes
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, IShapeRenderer renderer, double dx, double dy)
+        public override void DrawShape(object dc, IShapeRenderer renderer, double dx, double dy)
         {
-            var state = base.BeginTransform(dc, renderer);
-
             if (State.Flags.HasFlag(ShapeStateFlags.Visible))
             {
                 renderer.Draw(dc, this, dx, dy);
             }
+        }
 
+        /// <inheritdoc/>
+        public override void DrawPoints(object dc, IShapeRenderer renderer, double dx, double dy)
+        {
             if (renderer.State.SelectedShape != null && renderer.State.DrawPoints == true)
             {
                 if (this == renderer.State.SelectedShape)
                 {
-                    _point1.Draw(dc, renderer, dx, dy);
-                    _point2.Draw(dc, renderer, dx, dy);
-                    _point3.Draw(dc, renderer, dx, dy);
-                    _point4.Draw(dc, renderer, dx, dy);
+                    _point1.DrawShape(dc, renderer, dx, dy);
+                    _point2.DrawShape(dc, renderer, dx, dy);
+                    _point3.DrawShape(dc, renderer, dx, dy);
+                    _point4.DrawShape(dc, renderer, dx, dy);
                 }
                 else if (_point1 == renderer.State.SelectedShape)
                 {
-                    _point1.Draw(dc, renderer, dx, dy);
+                    _point1.DrawShape(dc, renderer, dx, dy);
                 }
                 else if (_point2 == renderer.State.SelectedShape)
                 {
-                    _point2.Draw(dc, renderer, dx, dy);
+                    _point2.DrawShape(dc, renderer, dx, dy);
                 }
                 else if (_point3 == renderer.State.SelectedShape)
                 {
-                    _point3.Draw(dc, renderer, dx, dy);
+                    _point3.DrawShape(dc, renderer, dx, dy);
                 }
                 else if (_point4 == renderer.State.SelectedShape)
                 {
-                    _point4.Draw(dc, renderer, dx, dy);
+                    _point4.DrawShape(dc, renderer, dx, dy);
                 }
             }
 
@@ -87,14 +89,12 @@ namespace Core2D.Shapes
             {
                 if (renderer.State.SelectedShapes.Contains(this))
                 {
-                    _point1.Draw(dc, renderer, dx, dy);
-                    _point2.Draw(dc, renderer, dx, dy);
-                    _point3.Draw(dc, renderer, dx, dy);
-                    _point4.Draw(dc, renderer, dx, dy);
+                    _point1.DrawShape(dc, renderer, dx, dy);
+                    _point2.DrawShape(dc, renderer, dx, dy);
+                    _point3.DrawShape(dc, renderer, dx, dy);
+                    _point4.DrawShape(dc, renderer, dx, dy);
                 }
             }
-
-            base.EndTransform(dc, renderer, state);
         }
 
         /// <inheritdoc/>

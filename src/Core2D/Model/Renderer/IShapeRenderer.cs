@@ -21,12 +21,6 @@ namespace Core2D.Renderer
         void InvalidateCache(IShapeStyle style);
 
         /// <summary>
-        /// Invalidates matrix cache.
-        /// </summary>
-        /// <param name="matrix">The matrix to invalidate.</param>
-        void InvalidateCache(IMatrixObject matrix);
-
-        /// <summary>
         /// Invalidates shape cache.
         /// </summary>
         /// <param name="shape">The shape to invalidate.</param>
@@ -51,21 +45,6 @@ namespace Core2D.Renderer
         /// <param name="height">The height of rectangle.</param>
         /// <param name="color">The fill color.</param>
         void Fill(object dc, double x, double y, double width, double height, IColor color);
-
-        /// <summary>
-        /// Push matrix.
-        /// </summary>
-        /// <param name="dc">The native drawing context.</param>
-        /// <param name="matrix">The matrix to push.</param>
-        /// <returns>The previous matrix state.</returns>
-        object PushMatrix(object dc, IMatrixObject matrix);
-
-        /// <summary>
-        /// Pop matrix.
-        /// </summary>
-        /// <param name="dc">The native drawing context.</param>
-        /// <param name="state">The previous matrix state.</param>
-        void PopMatrix(object dc, object state);
 
         /// <summary>
         /// Draws a <see cref="IPageContainer"/> using drawing context.

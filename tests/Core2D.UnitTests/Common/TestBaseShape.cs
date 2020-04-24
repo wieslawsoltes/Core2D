@@ -20,16 +20,10 @@ namespace Core2D.Common.UnitTests
         public IShapeStyle Style { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
         public bool IsStroked { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
         public bool IsFilled { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public IMatrixObject Transform { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
 #pragma warning disable CS0067
         public event PropertyChangedEventHandler PropertyChanged;
 #pragma warning restore CS0067
-
-        public object BeginTransform(object dc, IShapeRenderer renderer)
-        {
-            throw new NotImplementedException();
-        }
 
         public object Copy(IDictionary<object, object> shared)
         {
@@ -41,12 +35,12 @@ namespace Core2D.Common.UnitTests
             throw new NotImplementedException();
         }
 
-        public void Draw(object dc, IShapeRenderer renderer, double dx, double dy)
+        public void DrawShape(object dc, IShapeRenderer renderer, double dx, double dy)
         {
             throw new NotImplementedException();
         }
 
-        public void EndTransform(object dc, IShapeRenderer renderer, object state)
+        public void DrawPoints(object dc, IShapeRenderer renderer, double dx, double dy)
         {
             throw new NotImplementedException();
         }

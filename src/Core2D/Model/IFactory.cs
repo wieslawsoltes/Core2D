@@ -141,18 +141,6 @@ namespace Core2D
         ICache<TKey, TValue> CreateCache<TKey, TValue>(Action<TValue> dispose = null);
 
         /// <summary>
-        /// Creates a new <see cref="IMatrixObject"/> instance.
-        /// </summary>
-        /// <param name="m11">The value of the first row and first column.</param>
-        /// <param name="m12">The value of the first row and second column.</param>
-        /// <param name="m21">The value of the second row and first column.</param>
-        /// <param name="m22">The value of the second row and second column.</param>
-        /// <param name="offsetX">The value of the third row and first column.</param>
-        /// <param name="offsetY">The value of the third row and second column.</param>
-        /// <returns>The new instance of the <see cref="IMatrixObject"/> class.</returns>
-        IMatrixObject CreateMatrixObject(double m11 = 1.0, double m12 = 0.0, double m21 = 0.0, double m22 = 1.0, double offsetX = 0.0, double offsetY = 0.0);
-
-        /// <summary>
         /// Creates a new <see cref="IShapeState"/> instance.
         /// </summary>
         /// <param name="flags">The state flags.</param>

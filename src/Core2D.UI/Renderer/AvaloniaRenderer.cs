@@ -344,11 +344,6 @@ namespace Core2D.UI.Renderer
             return sg;
         }
 
-        private A.Matrix ToMatrix(IMatrixObject m)
-        {
-            return new A.Matrix(m.M11, m.M12, m.M21, m.M22, m.OffsetX, m.OffsetY);
-        }
-
         private void GetCached(IArrowStyle style, out AM.IBrush fill, out AM.IPen stroke, Func<double, float> scaleToPage, bool scaleStrokeWidth)
         {
             (fill, stroke) = _arrowStyleCache.Get(style);
@@ -373,12 +368,6 @@ namespace Core2D.UI.Renderer
 
         /// <inheritdoc/>
         public void InvalidateCache(IShapeStyle style)
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <inheritdoc/>
-        public void InvalidateCache(IMatrixObject matrix)
         {
             throw new NotImplementedException();
         }
@@ -412,20 +401,6 @@ namespace Core2D.UI.Renderer
         }
 
         /// <inheritdoc/>
-        public object PushMatrix(object dc, IMatrixObject matrix)
-        {
-            var _dc = dc as AM.DrawingContext;
-            return _dc.PushPreTransform(ToMatrix(matrix));
-        }
-
-        /// <inheritdoc/>
-        public void PopMatrix(object dc, object state)
-        {
-            var _state = (AM.DrawingContext.PushedState)state;
-            _state.Dispose();
-        }
-
-        /// <inheritdoc/>
         public void Draw(object dc, IPageContainer container, double dx, double dy)
         {
             foreach (var layer in container.Layers)
@@ -444,7 +419,15 @@ namespace Core2D.UI.Renderer
             {
                 if (shape.State.Flags.HasFlag(_state.DrawShapeState.Flags))
                 {
-                    shape.Draw(dc, this, dx, dy);
+                    shape.DrawShape(dc, this, dx, dy);
+                }
+            }
+
+            foreach (var shape in layer.Shapes)
+            {
+                if (shape.State.Flags.HasFlag(_state.DrawShapeState.Flags))
+                {
+                    shape.DrawPoints(dc, this, dx, dy);
                 }
             }
         }

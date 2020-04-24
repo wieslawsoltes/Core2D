@@ -217,12 +217,6 @@ namespace Core2D
         }
 
         /// <inheritdoc/>
-        public IMatrixObject CreateMatrixObject(double m11 = 1.0, double m12 = 0.0, double m21 = 0.0, double m22 = 1.0, double offsetX = 0.0, double offsetY = 0.0)
-        {
-            return new MatrixObject(m11, m12, m21, m22, offsetX, offsetY);
-        }
-
-        /// <inheritdoc/>
         public IShapeState CreateShapeState(ShapeStateFlags flags = ShapeStateFlags.Default)
         {
             return new ShapeState()
@@ -403,7 +397,6 @@ namespace Core2D
             {
                 Name = name,
                 State = CreateShapeState(ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone),
-                Transform = CreateMatrixObject(),
                 Data = CreateContext(),
                 Style = default,
                 X = x,
@@ -419,7 +412,6 @@ namespace Core2D
             {
                 Name = name,
                 State = CreateShapeState(ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone),
-                Transform = CreateMatrixObject(),
                 Data = CreateContext(),
                 Style = style,
                 IsStroked = isStroked,
@@ -436,7 +428,6 @@ namespace Core2D
             {
                 Name = name,
                 State = CreateShapeState(ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone),
-                Transform = CreateMatrixObject(),
                 Data = CreateContext(),
                 Style = style,
                 IsStroked = isStroked,
@@ -459,7 +450,6 @@ namespace Core2D
             {
                 Name = name,
                 State = CreateShapeState(ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone),
-                Transform = CreateMatrixObject(),
                 Data = CreateContext(),
                 Style = style,
                 IsStroked = isStroked,
@@ -484,7 +474,6 @@ namespace Core2D
             {
                 Name = name,
                 State = CreateShapeState(ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone),
-                Transform = CreateMatrixObject(),
                 Data = CreateContext(),
                 Style = style,
                 IsStroked = isStroked,
@@ -503,7 +492,6 @@ namespace Core2D
             {
                 Name = name,
                 State = CreateShapeState(ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone),
-                Transform = CreateMatrixObject(),
                 Data = CreateContext(),
                 Style = style,
                 IsStroked = isStroked,
@@ -527,7 +515,6 @@ namespace Core2D
             {
                 Name = name,
                 State = CreateShapeState(ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone),
-                Transform = CreateMatrixObject(),
                 Data = CreateContext(),
                 Style = style,
                 IsStroked = isStroked,
@@ -545,7 +532,6 @@ namespace Core2D
             {
                 Name = name,
                 State = CreateShapeState(ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone),
-                Transform = CreateMatrixObject(),
                 Data = CreateContext(),
                 Style = style,
                 IsStroked = isStroked,
@@ -570,7 +556,6 @@ namespace Core2D
             {
                 Name = name,
                 State = CreateShapeState(ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone),
-                Transform = CreateMatrixObject(),
                 Data = CreateContext(),
                 Style = style,
                 IsStroked = isStroked,
@@ -589,7 +574,6 @@ namespace Core2D
             {
                 Name = name,
                 State = CreateShapeState(ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone),
-                Transform = CreateMatrixObject(),
                 Data = CreateContext(),
                 Style = style,
                 IsStroked = isStroked,
@@ -618,7 +602,6 @@ namespace Core2D
             {
                 Name = name,
                 State = CreateShapeState(ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone),
-                Transform = CreateMatrixObject(),
                 Data = CreateContext(),
                 Style = style,
                 IsStroked = isStroked,
@@ -641,7 +624,6 @@ namespace Core2D
             {
                 Name = name,
                 State = CreateShapeState(ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone),
-                Transform = CreateMatrixObject(),
                 Data = CreateContext(),
                 Style = style,
                 IsStroked = isStroked,
@@ -665,7 +647,6 @@ namespace Core2D
             {
                 Name = name,
                 State = CreateShapeState(ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone),
-                Transform = CreateMatrixObject(),
                 Data = CreateContext(),
                 Style = style,
                 IsStroked = isStroked,
@@ -682,7 +663,6 @@ namespace Core2D
             return new PathShape()
             {
                 State = CreateShapeState(ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone),
-                Transform = CreateMatrixObject(),
                 Data = CreateContext(),
                 Style = style,
                 IsStroked = isStroked,
@@ -698,7 +678,6 @@ namespace Core2D
             {
                 Name = name,
                 State = CreateShapeState(ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone),
-                Transform = CreateMatrixObject(),
                 Data = CreateContext(),
                 Style = style,
                 IsStroked = isStroked,
@@ -714,7 +693,6 @@ namespace Core2D
             {
                 Name = name,
                 State = CreateShapeState(ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone),
-                Transform = CreateMatrixObject(),
                 Data = CreateContext(),
                 Style = style,
                 IsStroked = isStroked,
@@ -737,7 +715,6 @@ namespace Core2D
             {
                 Name = name,
                 State = CreateShapeState(ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone),
-                Transform = CreateMatrixObject(),
                 Data = CreateContext(),
                 Style = style,
                 IsStroked = isStroked,
@@ -754,7 +731,6 @@ namespace Core2D
             {
                 Name = name,
                 State = CreateShapeState(ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone),
-                Transform = CreateMatrixObject(),
                 Data = CreateContext(),
                 Style = style,
                 IsStroked = isStroked,
@@ -779,7 +755,6 @@ namespace Core2D
             {
                 Name = name,
                 State = CreateShapeState(ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone),
-                Transform = CreateMatrixObject(),
                 Data = CreateContext(),
                 Style = style,
                 IsStroked = isStroked,
@@ -798,7 +773,6 @@ namespace Core2D
             {
                 Name = name,
                 State = CreateShapeState(ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone),
-                Transform = CreateMatrixObject(),
                 Data = CreateContext(),
                 Connectors = ImmutableArray.Create<IPointShape>(),
                 Shapes = ImmutableArray.Create<IBaseShape>()

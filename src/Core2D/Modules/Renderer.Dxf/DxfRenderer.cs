@@ -411,12 +411,6 @@ namespace Core2D.Renderer.Dxf
         }
 
         /// <inheritdoc/>
-        public void InvalidateCache(IMatrixObject matrix)
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <inheritdoc/>
         public void InvalidateCache(IBaseShape shape, IShapeStyle style, double dx, double dy)
         {
             throw new NotImplementedException();
@@ -437,19 +431,6 @@ namespace Core2D.Renderer.Dxf
             var dxf = dc as DXF.DxfDocument;
             var rect = Spatial.Rect2.FromPoints(x, y, x + width, y + height);
             FillRectangle(dxf, _currentLayer, x, y, width, height, color);
-        }
-
-        /// <inheritdoc/>
-        public object PushMatrix(object dc, IMatrixObject matrix)
-        {
-            // TODO: Implement push matrix.
-            return null;
-        }
-
-        /// <inheritdoc/>
-        public void PopMatrix(object dc, object state)
-        {
-            // TODO: Implement pop matrix.
         }
 
         /// <inheritdoc/>
@@ -481,7 +462,15 @@ namespace Core2D.Renderer.Dxf
             {
                 if (shape.State.Flags.HasFlag(State.DrawShapeState.Flags))
                 {
-                    shape.Draw(dxf, this, dx, dy);
+                    shape.DrawShape(dxf, this, dx, dy);
+                }
+            }
+
+            foreach (var shape in layer.Shapes)
+            {
+                if (shape.State.Flags.HasFlag(State.DrawShapeState.Flags))
+                {
+                    shape.DrawPoints(dxf, this, dx, dy);
                 }
             }
         }

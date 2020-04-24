@@ -76,7 +76,7 @@ namespace Core2D.FileWriter.Emf
 
                     foreach (var shape in shapes)
                     {
-                        shape.Draw(g, r, 0, 0);
+                        shape.DrawShape(g, r, 0, 0);
                     }
 
                     r.ClearCache(isZooming: false);

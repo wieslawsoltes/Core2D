@@ -21,7 +21,12 @@ namespace Core2D.Shapes
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, IShapeRenderer renderer, double dx, double dy)
+        public override void DrawShape(object dc, IShapeRenderer renderer, double dx, double dy)
+        {
+        }
+
+        /// <inheritdoc/>
+        public override void DrawPoints(object dc, IShapeRenderer renderer, double dx, double dy)
         {
             if (renderer.State.SelectedShape != null)
             {
@@ -31,8 +36,8 @@ namespace Core2D.Shapes
                     {
                         foreach (var connector in Connectors)
                         {
-                            connector.Draw(dc, renderer, dx, dy);
-                        } 
+                            connector.DrawShape(dc, renderer, dx, dy);
+                        }
                     }
                 }
                 else
@@ -41,7 +46,7 @@ namespace Core2D.Shapes
                     {
                         if (connector == renderer.State.SelectedShape)
                         {
-                            connector.Draw(dc, renderer, dx, dy);
+                            connector.DrawShape(dc, renderer, dx, dy);
                         }
                     }
                 }
@@ -53,7 +58,7 @@ namespace Core2D.Shapes
                 {
                     foreach (var connector in Connectors)
                     {
-                        connector.Draw(dc, renderer, dx, dy);
+                        connector.DrawShape(dc, renderer, dx, dy);
                     }
                 }
             }

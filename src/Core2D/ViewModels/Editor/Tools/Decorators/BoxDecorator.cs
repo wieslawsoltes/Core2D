@@ -34,7 +34,6 @@ namespace Core2D.Editor.Tools.Decorators
         private bool _isVisible;
         private readonly IServiceProvider _serviceProvider;
         private IShapeStyle _style;
-        private IMatrixObject _transform;
         private bool _isStroked;
         private bool _isFilled;
         private ILayerContainer _layer;
@@ -92,13 +91,6 @@ namespace Core2D.Editor.Tools.Decorators
         {
             get => _style;
             set => Update(ref _style, value);
-        }
-
-        /// <inheritdoc/>
-        public IMatrixObject Transform
-        {
-            get => _transform;
-            set => Update(ref _transform, value);
         }
 
         /// <inheritdoc/>
@@ -176,38 +168,21 @@ namespace Core2D.Editor.Tools.Decorators
         }
 
         /// <inheritdoc/>
-        public virtual object BeginTransform(object dc, IShapeRenderer renderer)
+        public virtual void DrawShape(object dc, IShapeRenderer renderer, double dx, double dy)
         {
-            if (Transform != null)
-            {
-                return renderer.PushMatrix(dc, Transform);
-            }
-            return null;
-        }
-
-        /// <inheritdoc/>
-        public virtual void EndTransform(object dc, IShapeRenderer renderer, object state)
-        {
-            if (Transform != null)
-            {
-                renderer.PopMatrix(dc, state);
-            }
-        }
-
-        /// <inheritdoc/>
-        public virtual void Draw(object dc, IShapeRenderer renderer, double dx, double dy)
-        {
-            var state = BeginTransform(dc, renderer);
-
             if (_isVisible)
             {
                 foreach (var handle in _handles)
                 {
-                    handle.Draw(dc, renderer, dx, dy);
+                    handle.DrawShape(dc, renderer, dx, dy);
                 }
             }
+        }
 
-            EndTransform(dc, renderer, state);
+        /// <inheritdoc/>
+        public virtual void DrawPoints(object dc, IShapeRenderer renderer, double dx, double dy)
+        {
+
         }
 
         /// <inheritdoc/>

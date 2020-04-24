@@ -648,9 +648,6 @@
             <data:DataControl/>
         </DataTemplate>
         <!-- Renderer -->
-        <DataTemplate DataType="RendererCore:IMatrixObject">
-            <renderer:MatrixControl/>
-        </DataTemplate>
         <DataTemplate DataType="RendererCore:IShapeState">
             <renderer:ShapeStateControl/>
         </DataTemplate>

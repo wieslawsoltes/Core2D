@@ -25,11 +25,6 @@ namespace Core2D.Editor.Designer
         public static IProjectEditor Editor { get; set; }
 
         /// <summary>
-        /// The design time <see cref="IMatrixObject"/> template.
-        /// </summary>
-        public static IMatrixObject Transform { get; set; }
-
-        /// <summary>
         /// The design time <see cref="IPageContainer"/> template.
         /// </summary>
         public static IPageContainer Template { get; set; }
@@ -244,10 +239,6 @@ namespace Core2D.Editor.Designer
             // New Project
 
             Editor.OnNewProject();
-
-            // Transform
-
-            Transform = MatrixObject.Identity;
 
             // Data
 

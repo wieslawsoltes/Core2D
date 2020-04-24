@@ -24,17 +24,6 @@ namespace Core2D.Renderer.SkiaSharp
             _serviceProvider = serviceProvider;
         }
 
-        private IMatrixObject ToMatrixObject(SKMatrix matrix, IFactory factory)
-        {
-            return factory.CreateMatrixObject(
-                matrix.ScaleX,
-                matrix.SkewY,
-                matrix.SkewX,
-                matrix.ScaleY,
-                matrix.TransX,
-                matrix.TransY);
-        }
-
         private void FromDrawablePath(DrawablePath drawablePath, IList<IBaseShape> shapes, IFactory factory)
         {
             var path = drawablePath.Path;
@@ -52,7 +41,6 @@ namespace Core2D.Renderer.SkiaSharp
                 geometry,
                 stroke != null,
                 fill != null);
-            pathShape.Transform = ToMatrixObject(drawablePath.Transform, factory);
             shapes.Add(pathShape);
         }
 
@@ -68,7 +56,6 @@ namespace Core2D.Renderer.SkiaSharp
             {
                 group.AddShape(groupShape);
             }
-            group.Transform = ToMatrixObject(drawableContainer.Transform, factory);
             shapes.Add(group);
         }
 

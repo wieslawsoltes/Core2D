@@ -274,22 +274,8 @@ namespace Core2D.Renderer.PdfSharp
             }
         }
 
-        private XMatrix ToXMatrix(IMatrixObject matrix)
-        {
-            return new XMatrix(
-                matrix.M11, matrix.M12,
-                matrix.M21, matrix.M22,
-                matrix.OffsetX, matrix.OffsetY);
-        }
-
         /// <inheritdoc/>
         public void InvalidateCache(IShapeStyle style)
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <inheritdoc/>
-        public void InvalidateCache(IMatrixObject matrix)
         {
             throw new NotImplementedException();
         }
@@ -322,23 +308,6 @@ namespace Core2D.Renderer.PdfSharp
         }
 
         /// <inheritdoc/>
-        public object PushMatrix(object dc, IMatrixObject matrix)
-        {
-            var _gfx = dc as XGraphics;
-            var state = _gfx.Save();
-            _gfx.MultiplyTransform(ToXMatrix(matrix));
-            return state;
-        }
-
-        /// <inheritdoc/>
-        public void PopMatrix(object dc, object state)
-        {
-            var _gfx = dc as XGraphics;
-            var _state = state as XGraphicsState;
-            _gfx.Restore(_state);
-        }
-
-        /// <inheritdoc/>
         public void Draw(object dc, IPageContainer container, double dx, double dy)
         {
             foreach (var layer in container.Layers)
@@ -357,7 +326,15 @@ namespace Core2D.Renderer.PdfSharp
             {
                 if (shape.State.Flags.HasFlag(State.DrawShapeState.Flags))
                 {
-                    shape.Draw(dc, this, dx, dy);
+                    shape.DrawShape(dc, this, dx, dy);
+                }
+            }
+
+            foreach (var shape in layer.Shapes)
+            {
+                if (shape.State.Flags.HasFlag(_state.DrawShapeState.Flags))
+                {
+                    shape.DrawPoints(dc, this, dx, dy);
                 }
             }
         }

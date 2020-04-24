@@ -14,17 +14,21 @@ namespace Core2D.Shapes
         public override Type TargetType => typeof(IEllipseShape);
 
         /// <inheritdoc/>
-        public override void Draw(object dc, IShapeRenderer renderer, double dx, double dy)
+        public override void DrawShape(object dc, IShapeRenderer renderer, double dx, double dy)
         {
             if (State.Flags.HasFlag(ShapeStateFlags.Visible))
             {
-                var state = base.BeginTransform(dc, renderer);
-
                 renderer.Draw(dc, this, dx, dy);
+                base.DrawShape(dc, renderer, dx, dy);
+            }
+        }
 
-                base.EndTransform(dc, renderer, state);
-
-                base.Draw(dc, renderer, dx, dy);
+        /// <inheritdoc/>
+        public override void DrawPoints(object dc, IShapeRenderer renderer, double dx, double dy)
+        {
+            if (State.Flags.HasFlag(ShapeStateFlags.Visible))
+            {
+                base.DrawPoints(dc, renderer, dx, dy);
             }
         }
 

@@ -294,12 +294,6 @@ namespace Core2D.Editor
             MarkAsDirty();
         }
 
-        private void ObserveTransform(object sender, PropertyChangedEventArgs e)
-        {
-            _invalidateShapes();
-            MarkAsDirty();
-        }
-
         private void Add(IDatabase database)
         {
             if (database == null)
@@ -694,11 +688,6 @@ namespace Core2D.Editor
                 shape.State.PropertyChanged += ObserveState;
             }
 
-            if (shape.Transform != null)
-            {
-                shape.Transform.PropertyChanged += ObserveTransform;
-            }
-
             if (shape is ILineShape line)
             {
                 if (line.Start != null)
@@ -863,11 +852,6 @@ namespace Core2D.Editor
             if (shape.State != null)
             {
                 shape.State.PropertyChanged -= ObserveState;
-            }
-
-            if (shape.Transform != null)
-            {
-                shape.Transform.PropertyChanged -= ObserveTransform;
             }
 
             if (shape is ILineShape line)

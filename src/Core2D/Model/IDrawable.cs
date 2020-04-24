@@ -24,34 +24,22 @@ namespace Core2D
         bool IsFilled { get; set; }
 
         /// <summary>
-        /// Get or sets shape matrix transform.
-        /// </summary>
-        IMatrixObject Transform { get; set; }
-
-        /// <summary>
-        /// Begins matrix transform.
-        /// </summary>
-        /// <param name="dc">The generic drawing context object.</param>
-        /// <param name="renderer">The generic renderer object used to draw shape.</param>
-        /// <returns>The previous transform state.</returns>
-        object BeginTransform(object dc, IShapeRenderer renderer);
-
-        /// <summary>
-        /// Ends matrix transform.
-        /// </summary>
-        /// <param name="dc">The generic drawing context object.</param>
-        /// <param name="renderer">The generic renderer object used to draw shape.</param>
-        /// <param name="state">The previous transform state.</param>
-        void EndTransform(object dc, IShapeRenderer renderer, object state);
-
-        /// <summary>
         /// Draws shape using current <see cref="IShapeRenderer"/>.
         /// </summary>
         /// <param name="dc">The generic drawing context object.</param>
         /// <param name="renderer">The generic renderer object used to draw shape.</param>
         /// <param name="dx">The X axis draw position offset.</param>
         /// <param name="dy">The Y axis draw position offset.</param>
-        void Draw(object dc, IShapeRenderer renderer, double dx, double dy);
+        void DrawShape(object dc, IShapeRenderer renderer, double dx, double dy);
+
+        /// <summary>
+        /// Draws points using current <see cref="IShapeRenderer"/>.
+        /// </summary>
+        /// <param name="dc">The generic drawing context object.</param>
+        /// <param name="renderer">The generic renderer object used to draw points.</param>
+        /// <param name="dx">The X axis draw position offset.</param>
+        /// <param name="dy">The Y axis draw position offset.</param>
+        void DrawPoints(object dc, IShapeRenderer renderer, double dx, double dy);
 
         /// <summary>
         /// Invalidates shape renderer cache.
