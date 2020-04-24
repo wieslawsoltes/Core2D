@@ -143,7 +143,7 @@ namespace Core2D.Editor.Tools.Decorators
             _rotateLine = _factory.CreateLineShape(0, 0, 0, 0, _boundsStyle, true, name: "_rotateLine");
             _handles = new List<IBaseShape>
             {
-                _rotateHandle,
+                //_rotateHandle,
                 _topLeftHandle,
                 _topRightHandle,
                 _bottomLeftHandle,
@@ -153,7 +153,7 @@ namespace Core2D.Editor.Tools.Decorators
                 _leftHandle,
                 _rightHandle,
                 _boundsHandle,
-                _rotateLine
+                //_rotateLine
             };
             _currentHandle = null;
             _rotateHandle.State.Flags |= ShapeStateFlags.Size | ShapeStateFlags.Thickness;
@@ -335,8 +335,8 @@ namespace Core2D.Editor.Tools.Decorators
 
             var shapesBuilder = _layer.Shapes.ToBuilder();
             shapesBuilder.Add(_boundsHandle);
-            shapesBuilder.Add(_rotateLine);
-            shapesBuilder.Add(_rotateHandle);
+            //shapesBuilder.Add(_rotateLine);
+            //shapesBuilder.Add(_rotateHandle);
             shapesBuilder.Add(_topLeftHandle);
             shapesBuilder.Add(_topRightHandle);
             shapesBuilder.Add(_bottomLeftHandle);
@@ -376,8 +376,8 @@ namespace Core2D.Editor.Tools.Decorators
 
             var shapesBuilder = _layer.Shapes.ToBuilder();
             shapesBuilder.Remove(_boundsHandle);
-            shapesBuilder.Remove(_rotateLine);
-            shapesBuilder.Remove(_rotateHandle);
+            //shapesBuilder.Remove(_rotateLine);
+            //shapesBuilder.Remove(_rotateHandle);
             shapesBuilder.Remove(_topLeftHandle);
             shapesBuilder.Remove(_topRightHandle);
             shapesBuilder.Remove(_bottomLeftHandle);
