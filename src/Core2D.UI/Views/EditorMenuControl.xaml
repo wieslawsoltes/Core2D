@@ -757,13 +757,6 @@
                 </MenuItem>
             </MenuItem>
         </MenuItem>
-        <MenuItem Header="D_ata">
-            <MenuItem Header="_Import Database..." Command="{Binding Platform.OnImportData}" CommandParameter="{Binding Project}"/>
-            <Separator/>
-            <MenuItem Header="_Export Database..." Command="{Binding Platform.OnExportData}" CommandParameter="{Binding Project.CurrentDatabase}"/>
-            <Separator/>
-            <MenuItem Header="_Update Database..." Command="{Binding Platform.OnUpdateData}" CommandParameter="{Binding Project.CurrentDatabase}"/>
-        </MenuItem>
         <MenuItem Header="_Tool">
             <MenuItem Header="_None" Icon="{StaticResource NoneIcon}" Command="{Binding OnToolNone}" InputGesture="N">
                 <!--<MenuItem.Icon>
@@ -862,6 +855,13 @@
             </MenuItem>
             <Separator/>
             <MenuItem Header="Reset" Command="{Binding OnResetTool}"/>
+        </MenuItem>
+        <MenuItem Header="D_ata">
+            <MenuItem Header="_Import Database..." Command="{Binding Platform.OnImportData}" CommandParameter="{Binding Project}"/>
+            <Separator/>
+            <MenuItem Header="_Export Database..." Command="{Binding Platform.OnExportData}" CommandParameter="{Binding Project.CurrentDatabase}"/>
+            <Separator/>
+            <MenuItem Header="_Update Database..." Command="{Binding Platform.OnUpdateData}" CommandParameter="{Binding Project.CurrentDatabase}"/>
         </MenuItem>
         <MenuItem Header="_Window">
             <MenuItem Header="_Load Layout..." Command="{Binding LayoutPlatform.LoadLayout}"/>
