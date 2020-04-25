@@ -617,7 +617,7 @@ namespace Core2D.Editor.Tools.Decorators
         {
             var oldSize = _groupBox.Bounds.Height;
             var newSize = oldSize - dy;
-            if (oldSize <= 0)
+            if (newSize <= 0 || oldSize <= 0)
             {
                 Translate(0.0, dy);
                 return;
@@ -635,7 +635,7 @@ namespace Core2D.Editor.Tools.Decorators
         {
             var oldSize = _groupBox.Bounds.Height;
             var newSize = oldSize + dy;
-            if (oldSize <= 0)
+            if (newSize <= 0 || oldSize <= 0)
             {
                 Translate(0.0, dy);
                 return;
@@ -653,7 +653,7 @@ namespace Core2D.Editor.Tools.Decorators
         {
             var oldSize = _groupBox.Bounds.Width;
             var newSize = oldSize - dx;
-            if (oldSize <= 0)
+            if (newSize <= 0 || oldSize <= 0)
             {
                 Translate(dx, 0.0);
                 return;
@@ -671,7 +671,7 @@ namespace Core2D.Editor.Tools.Decorators
         {
             var oldSize = _groupBox.Bounds.Width;
             var newSize = oldSize + dx;
-            if (oldSize <= 0)
+            if (newSize <= 0 || oldSize <= 0)
             {
                 Translate(dx, 0.0);
                 return;
