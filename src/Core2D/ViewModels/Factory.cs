@@ -393,7 +393,7 @@ namespace Core2D
         /// <inheritdoc/>
         public IPointShape CreatePointShape(double x = 0.0, double y = 0.0, PointAlignment alignment = PointAlignment.None, string name = "")
         {
-            return new PointShape()
+            var pointShape = new PointShape()
             {
                 Name = name,
                 State = CreateShapeState(ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone),
@@ -403,38 +403,48 @@ namespace Core2D
                 Y = y,
                 Alignment = alignment
             };
+            return pointShape;
         }
 
         /// <inheritdoc/>
         public ILineShape CreateLineShape(IPointShape start, IPointShape end, IShapeStyle style, bool isStroked = true, string name = "")
         {
-            return new LineShape()
+            var lineShape = new LineShape()
             {
                 Name = name,
                 State = CreateShapeState(ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone),
                 Data = CreateContext(),
                 Style = style,
                 IsStroked = isStroked,
-                IsFilled = false,
-                Start = start,
-                End = end
+                IsFilled = false
             };
+
+            lineShape.Start = start;
+            lineShape.End = end;
+
+            return lineShape;
         }
 
         /// <inheritdoc/>
         public ILineShape CreateLineShape(double x1, double y1, double x2, double y2, IShapeStyle style, bool isStroked = true, string name = "")
         {
-            return new LineShape()
+            var lineShape = new LineShape()
             {
                 Name = name,
                 State = CreateShapeState(ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone),
                 Data = CreateContext(),
                 Style = style,
                 IsStroked = isStroked,
-                IsFilled = false,
-                Start = CreatePointShape(x1, y1),
-                End = CreatePointShape(x2, y2)
+                IsFilled = false
             };
+
+            lineShape.Start = CreatePointShape(x1, y1);
+            lineShape.Start.Owner = lineShape;
+
+            lineShape.End = CreatePointShape(x2, y2);
+            lineShape.End.Owner = lineShape;
+
+            return lineShape;
         }
 
         /// <inheritdoc/>
@@ -446,19 +456,29 @@ namespace Core2D
         /// <inheritdoc/>
         public IArcShape CreateArcShape(double x1, double y1, double x2, double y2, double x3, double y3, double x4, double y4, IShapeStyle style, bool isStroked = true, bool isFilled = false, string name = "")
         {
-            return new ArcShape()
+            var arcShape = new ArcShape()
             {
                 Name = name,
                 State = CreateShapeState(ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone),
                 Data = CreateContext(),
                 Style = style,
                 IsStroked = isStroked,
-                IsFilled = isFilled,
-                Point1 = CreatePointShape(x1, y1),
-                Point2 = CreatePointShape(x2, y2),
-                Point3 = CreatePointShape(x3, y3),
-                Point4 = CreatePointShape(x4, y4)
+                IsFilled = isFilled
             };
+
+            arcShape.Point1 = CreatePointShape(x1, y1);
+            arcShape.Point1.Owner = arcShape;
+
+            arcShape.Point2 = CreatePointShape(x2, y2);
+            arcShape.Point2.Owner = arcShape;
+
+            arcShape.Point3 = CreatePointShape(x3, y3);
+            arcShape.Point3.Owner = arcShape;
+
+            arcShape.Point4 = CreatePointShape(x4, y4);
+            arcShape.Point4.Owner = arcShape;
+
+            return arcShape;
         }
 
         /// <inheritdoc/>
@@ -470,36 +490,47 @@ namespace Core2D
         /// <inheritdoc/>
         public IArcShape CreateArcShape(IPointShape point1, IPointShape point2, IPointShape point3, IPointShape point4, IShapeStyle style, bool isStroked = true, bool isFilled = false, string name = "")
         {
-            return new ArcShape()
+            var arcShape = new ArcShape()
             {
                 Name = name,
                 State = CreateShapeState(ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone),
                 Data = CreateContext(),
                 Style = style,
                 IsStroked = isStroked,
-                IsFilled = isFilled,
-                Point1 = point1,
-                Point2 = point2,
-                Point3 = point3,
-                Point4 = point4
+                IsFilled = isFilled
             };
+
+            arcShape.Point1 = point1;
+            arcShape.Point2 = point2;
+            arcShape.Point3 = point3;
+            arcShape.Point4 = point4;
+
+            return arcShape;
         }
 
         /// <inheritdoc/>
         public IQuadraticBezierShape CreateQuadraticBezierShape(double x1, double y1, double x2, double y2, double x3, double y3, IShapeStyle style, bool isStroked = true, bool isFilled = false, string name = "")
         {
-            return new QuadraticBezierShape()
+            var quadraticBezierShape = new QuadraticBezierShape()
             {
                 Name = name,
                 State = CreateShapeState(ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone),
                 Data = CreateContext(),
                 Style = style,
                 IsStroked = isStroked,
-                IsFilled = isFilled,
-                Point1 = CreatePointShape(x1, y1),
-                Point2 = CreatePointShape(x2, y2),
-                Point3 = CreatePointShape(x3, y3)
+                IsFilled = isFilled
             };
+
+            quadraticBezierShape.Point1 = CreatePointShape(x1, y1);
+            quadraticBezierShape.Point1.Owner = quadraticBezierShape;
+
+            quadraticBezierShape.Point2 = CreatePointShape(x2, y2);
+            quadraticBezierShape.Point2.Owner = quadraticBezierShape;
+
+            quadraticBezierShape.Point3 = CreatePointShape(x3, y3);
+            quadraticBezierShape.Point3.Owner = quadraticBezierShape;
+
+            return quadraticBezierShape;
         }
 
         /// <inheritdoc/>
@@ -511,36 +542,49 @@ namespace Core2D
         /// <inheritdoc/>
         public IQuadraticBezierShape CreateQuadraticBezierShape(IPointShape point1, IPointShape point2, IPointShape point3, IShapeStyle style, bool isStroked = true, bool isFilled = false, string name = "")
         {
-            return new QuadraticBezierShape()
+            var quadraticBezierShape = new QuadraticBezierShape()
             {
                 Name = name,
                 State = CreateShapeState(ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone),
                 Data = CreateContext(),
                 Style = style,
                 IsStroked = isStroked,
-                IsFilled = isFilled,
-                Point1 = point1,
-                Point2 = point2,
-                Point3 = point3
+                IsFilled = isFilled
             };
+
+            quadraticBezierShape.Point1 = point1;
+            quadraticBezierShape.Point2 = point2;
+            quadraticBezierShape.Point3 = point3;
+
+            return quadraticBezierShape;
         }
 
         /// <inheritdoc/>
         public ICubicBezierShape CreateCubicBezierShape(double x1, double y1, double x2, double y2, double x3, double y3, double x4, double y4, IShapeStyle style, bool isStroked = true, bool isFilled = false, string name = "")
         {
-            return new CubicBezierShape()
+            var cubicBezierShape = new CubicBezierShape()
             {
                 Name = name,
                 State = CreateShapeState(ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone),
                 Data = CreateContext(),
                 Style = style,
                 IsStroked = isStroked,
-                IsFilled = isFilled,
-                Point1 = CreatePointShape(x1, y1),
-                Point2 = CreatePointShape(x2, y2),
-                Point3 = CreatePointShape(x3, y3),
-                Point4 = CreatePointShape(x4, y4)
+                IsFilled = isFilled
             };
+
+            cubicBezierShape.Point1 = CreatePointShape(x1, y1);
+            cubicBezierShape.Point1.Owner = cubicBezierShape;
+
+            cubicBezierShape.Point2 = CreatePointShape(x2, y2);
+            cubicBezierShape.Point2.Owner = cubicBezierShape;
+
+            cubicBezierShape.Point3 = CreatePointShape(x3, y3);
+            cubicBezierShape.Point3.Owner = cubicBezierShape;
+
+            cubicBezierShape.Point4 = CreatePointShape(x4, y4);
+            cubicBezierShape.Point4.Owner = cubicBezierShape;
+
+            return cubicBezierShape;
         }
 
         /// <inheritdoc/>
@@ -552,25 +596,28 @@ namespace Core2D
         /// <inheritdoc/>
         public ICubicBezierShape CreateCubicBezierShape(IPointShape point1, IPointShape point2, IPointShape point3, IPointShape point4, IShapeStyle style, bool isStroked = true, bool isFilled = false, string name = "")
         {
-            return new CubicBezierShape()
+            var cubicBezierShape = new CubicBezierShape()
             {
                 Name = name,
                 State = CreateShapeState(ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone),
                 Data = CreateContext(),
                 Style = style,
                 IsStroked = isStroked,
-                IsFilled = isFilled,
-                Point1 = point1,
-                Point2 = point2,
-                Point3 = point3,
-                Point4 = point4
+                IsFilled = isFilled
             };
+
+            cubicBezierShape.Point1 = point1;
+            cubicBezierShape.Point2 = point2;
+            cubicBezierShape.Point3 = point3;
+            cubicBezierShape.Point4 = point4;
+
+            return cubicBezierShape;
         }
 
         /// <inheritdoc/>
         public IRectangleShape CreateRectangleShape(double x1, double y1, double x2, double y2, IShapeStyle style, bool isStroked = true, bool isFilled = false, string text = null, string name = "")
         {
-            return new RectangleShape()
+            var rectangleShape = new RectangleShape()
             {
                 Name = name,
                 State = CreateShapeState(ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone),
@@ -578,8 +625,6 @@ namespace Core2D
                 Style = style,
                 IsStroked = isStroked,
                 IsFilled = isFilled,
-                TopLeft = CreatePointShape(x1, y1),
-                BottomRight = CreatePointShape(x2, y2),
                 Text = text,
                 IsGrid = false,
                 OffsetX = 30.0,
@@ -587,6 +632,14 @@ namespace Core2D
                 CellWidth = 30.0,
                 CellHeight = 30.0
             };
+
+            rectangleShape.TopLeft = CreatePointShape(x1, y1);
+            rectangleShape.TopLeft.Owner = rectangleShape;
+
+            rectangleShape.BottomRight = CreatePointShape(x2, y2);
+            rectangleShape.BottomRight.Owner = rectangleShape;
+
+            return rectangleShape;
         }
 
         /// <inheritdoc/>
@@ -598,7 +651,7 @@ namespace Core2D
         /// <inheritdoc/>
         public IRectangleShape CreateRectangleShape(IPointShape topLeft, IPointShape bottomRight, IShapeStyle style, bool isStroked = true, bool isFilled = false, string text = null, string name = "")
         {
-            return new RectangleShape()
+            var rectangleShape = new RectangleShape()
             {
                 Name = name,
                 State = CreateShapeState(ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone),
@@ -606,8 +659,6 @@ namespace Core2D
                 Style = style,
                 IsStroked = isStroked,
                 IsFilled = isFilled,
-                TopLeft = topLeft,
-                BottomRight = bottomRight,
                 Text = text,
                 IsGrid = false,
                 OffsetX = 30.0,
@@ -615,12 +666,17 @@ namespace Core2D
                 CellWidth = 30.0,
                 CellHeight = 30.0
             };
+
+            rectangleShape.TopLeft = topLeft;
+            rectangleShape.BottomRight = bottomRight;
+
+            return rectangleShape;
         }
 
         /// <inheritdoc/>
         public IEllipseShape CreateEllipseShape(double x1, double y1, double x2, double y2, IShapeStyle style, bool isStroked = true, bool isFilled = false, string text = null, string name = "")
         {
-            return new EllipseShape()
+            var ellipseShape = new EllipseShape()
             {
                 Name = name,
                 State = CreateShapeState(ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone),
@@ -628,10 +684,16 @@ namespace Core2D
                 Style = style,
                 IsStroked = isStroked,
                 IsFilled = isFilled,
-                TopLeft = CreatePointShape(x1, y1),
-                BottomRight = CreatePointShape(x2, y2),
                 Text = text,
             };
+
+            ellipseShape.TopLeft = CreatePointShape(x1, y1);
+            ellipseShape.TopLeft.Owner = ellipseShape;
+
+            ellipseShape.BottomRight = CreatePointShape(x2, y2);
+            ellipseShape.BottomRight.Owner = ellipseShape;
+
+            return ellipseShape;
         }
 
         /// <inheritdoc/>
@@ -643,7 +705,7 @@ namespace Core2D
         /// <inheritdoc/>
         public IEllipseShape CreateEllipseShape(IPointShape topLeft, IPointShape bottomRight, IShapeStyle style, bool isStroked = true, bool isFilled = false, string text = null, string name = "")
         {
-            return new EllipseShape()
+            var ellipseShape = new EllipseShape()
             {
                 Name = name,
                 State = CreateShapeState(ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone),
@@ -655,12 +717,17 @@ namespace Core2D
                 BottomRight = bottomRight,
                 Text = text,
             };
+
+            ellipseShape.TopLeft = topLeft;
+            ellipseShape.BottomRight = bottomRight;
+
+            return ellipseShape;
         }
 
         /// <inheritdoc/>
         public IPathShape CreatePathShape(IShapeStyle style, IPathGeometry geometry, bool isStroked = true, bool isFilled = true)
         {
-            return new PathShape()
+            var pathShape = new PathShape()
             {
                 State = CreateShapeState(ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone),
                 Data = CreateContext(),
@@ -669,12 +736,26 @@ namespace Core2D
                 IsFilled = isFilled,
                 Geometry = geometry
             };
+
+            geometry.Owner = pathShape;
+
+            foreach (var figure in geometry.Figures)
+            {
+                figure.Owner = pathShape;
+
+                foreach (var segment in figure.Segments)
+                {
+                    segment.Owner = pathShape;
+                }
+            }
+
+            return pathShape;
         }
 
         /// <inheritdoc/>
         public IPathShape CreatePathShape(string name, IShapeStyle style, IPathGeometry geometry, bool isStroked = true, bool isFilled = true)
         {
-            return new PathShape()
+            var pathShape = new PathShape()
             {
                 Name = name,
                 State = CreateShapeState(ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone),
@@ -684,22 +765,42 @@ namespace Core2D
                 IsFilled = isFilled,
                 Geometry = geometry
             };
+
+            geometry.Owner = pathShape;
+
+            foreach (var figure in geometry.Figures)
+            {
+                figure.Owner = pathShape;
+
+                foreach (var segment in figure.Segments)
+                {
+                    segment.Owner = pathShape;
+                }
+            }
+
+            return pathShape;
         }
 
         /// <inheritdoc/>
         public ITextShape CreateTextShape(double x1, double y1, double x2, double y2, IShapeStyle style, string text, bool isStroked = true, string name = "")
         {
-            return new TextShape()
+            var textShape = new TextShape()
             {
                 Name = name,
                 State = CreateShapeState(ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone),
                 Data = CreateContext(),
                 Style = style,
                 IsStroked = isStroked,
-                TopLeft = CreatePointShape(x1, y1),
-                BottomRight = CreatePointShape(x2, y2),
                 Text = text
             };
+
+            textShape.TopLeft = CreatePointShape(x1, y1);
+            textShape.TopLeft.Owner = textShape;
+
+            textShape.BottomRight = CreatePointShape(x2, y2);
+            textShape.BottomRight.Owner = textShape;
+
+            return textShape;
         }
 
         /// <inheritdoc/>
@@ -711,7 +812,7 @@ namespace Core2D
         /// <inheritdoc/>
         public ITextShape CreateTextShape(IPointShape topLeft, IPointShape bottomRight, IShapeStyle style, string text, bool isStroked = true, string name = "")
         {
-            return new TextShape()
+            var textShape = new TextShape()
             {
                 Name = name,
                 State = CreateShapeState(ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone),
@@ -722,12 +823,17 @@ namespace Core2D
                 BottomRight = bottomRight,
                 Text = text
             };
+
+            textShape.TopLeft = topLeft;
+            textShape.BottomRight = bottomRight;
+
+            return textShape;
         }
 
         /// <inheritdoc/>
         public IImageShape CreateImageShape(double x1, double y1, double x2, double y2, IShapeStyle style, string key, bool isStroked = false, bool isFilled = false, string text = null, string name = "")
         {
-            return new ImageShape()
+            var imageShape = new ImageShape()
             {
                 Name = name,
                 State = CreateShapeState(ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone),
@@ -735,11 +841,17 @@ namespace Core2D
                 Style = style,
                 IsStroked = isStroked,
                 IsFilled = isFilled,
-                TopLeft = CreatePointShape(x1, y1),
-                BottomRight = CreatePointShape(x2, y2),
                 Key = key,
                 Text = text
             };
+
+            imageShape.TopLeft = CreatePointShape(x1, y1);
+            imageShape.TopLeft.Owner = imageShape;
+
+            imageShape.BottomRight = CreatePointShape(x2, y2);
+            imageShape.BottomRight.Owner = imageShape;
+
+            return imageShape;
         }
 
         /// <inheritdoc/>
@@ -751,7 +863,7 @@ namespace Core2D
         /// <inheritdoc/>
         public IImageShape CreateImageShape(IPointShape topLeft, IPointShape bottomRight, IShapeStyle style, string key, bool isStroked = false, bool isFilled = false, string text = null, string name = "")
         {
-            return new ImageShape()
+            var imageShape = new ImageShape()
             {
                 Name = name,
                 State = CreateShapeState(ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone),
@@ -764,6 +876,11 @@ namespace Core2D
                 Key = key,
                 Text = text
             };
+
+            imageShape.TopLeft = topLeft;
+            imageShape.BottomRight = bottomRight;
+
+            return imageShape;
         }
 
         /// <inheritdoc/>
