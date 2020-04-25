@@ -472,7 +472,7 @@ namespace Core2D.Editor.Tools.Decorators
 
             if (_points == null)
             {
-                _points = GetMovablePoints();
+                _points = _groupBox.GetMovablePoints();
                 if (_points == null)
                 {
                     return;
@@ -485,204 +485,59 @@ namespace Core2D.Editor.Tools.Decorators
                     break;
                 case Mode.Move:
                     {
-                        Translate(dx, dy);
+                        _groupBox.Translate(dx, dy, _points);
                     }
                     break;
                 case Mode.Rotate:
                     {
-                        Rotate(sx, sy);
+                        _groupBox.Rotate(sx, sy, _points, ref _rotateAngle);
                     }
                     break;
                 case Mode.Top:
                     {
-                        ScaleTop(dy);
+                        _groupBox.ScaleTop(dy, _points);
                     }
                     break;
                 case Mode.Bottom:
                     {
-                        ScaleBottom(dy);
+                        _groupBox.ScaleBottom(dy, _points);
                     }
                     break;
                 case Mode.Left:
                     {
-                        ScaleLeft(dx);
+                        _groupBox.ScaleLeft(dx, _points);
                     }
                     break;
                 case Mode.Right:
                     {
-                        ScaleRight(dx);
+                        _groupBox.ScaleRight(dx, _points);
                     }
                     break;
                 case Mode.TopLeft:
                     {
-                        ScaleTop(dy);
-                        ScaleLeft(dx);
+                        _groupBox.ScaleTop(dy, _points);
+                        _groupBox.ScaleLeft(dx, _points);
                     }
                     break;
                 case Mode.TopRight:
                     {
-                        ScaleTop(dy);
-                        ScaleRight(dx);
+                        _groupBox.ScaleTop(dy, _points);
+                        _groupBox.ScaleRight(dx, _points);
                     }
                     break;
                 case Mode.BottomLeft:
                     {
-                        ScaleBottom(dy);
-                        ScaleLeft(dx);
+                        _groupBox.ScaleBottom(dy, _points);
+                        _groupBox.ScaleLeft(dx, _points);
                     }
                     break;
                 case Mode.BottomRight:
                     {
-                        ScaleBottom(dy);
-                        ScaleRight(dx);
+                        _groupBox.ScaleBottom(dy, _points);
+                        _groupBox.ScaleRight(dx, _points);
                     }
                     break;
             }
-        }
-
-        private bool IsPointMovable(IPointShape point, IBaseShape parent)
-        {
-            if (point.State.Flags.HasFlag(ShapeStateFlags.Locked))
-            {
-                return false;
-            }
-
-            if (point.State.Flags.HasFlag(ShapeStateFlags.Connector) && point.Owner != parent)
-            {
-                return false;
-            }
-
-            return true;
-        }
-
-        private List<IPointShape> GetMovablePoints()
-        {
-            var points = new HashSet<IPointShape>();
-
-            for (int i = 0; i < _groupBox.Boxes.Length; i++)
-            {
-                foreach (var point in _groupBox.Boxes[i].Points)
-                {
-                    if (IsPointMovable(point, _groupBox.Boxes[i].Shape))
-                    {
-                        points.Add(point);
-                    }
-                }
-            }
-
-            return new List<IPointShape>(points);
-        }
-
-        private void TransformPoints(ref Matrix2 matrix)
-        {
-            if (_points == null || _points.Count == 0)
-            {
-                return;
-            }
-
-            for (int i = 0; i < _points.Count; i++)
-            {
-                var point = _points[i];
-                var transformed = Matrix2.TransformPoint(matrix, new Point2(point.X, point.Y));
-                point.X = transformed.X;
-                point.Y = transformed.Y;
-            }
-        }
-
-        private void Rotate(double sx, double sy)
-        {
-            var centerX = _groupBox.Bounds.CenterX;
-            var centerY = _groupBox.Bounds.CenterY;
-            var p0 = new Point2(centerX, centerY);
-            var p1 = new Point2(sx, sy);
-            var angle = p0.AngleBetween(p1) - 270.0;
-            var delta = angle - _rotateAngle;
-            var radians = delta * (Math.PI / 180.0);
-            var matrix = Matrix2.Rotation(radians, centerX, centerY);
-            TransformPoints(ref matrix);
-            _rotateAngle = angle;
-            _groupBox.Update();
-        }
-
-        private void Translate(double dx, double dy)
-        {
-            double offsetX = dx;
-            double offsetY = dy;
-            var matrix = Matrix2.Translate(offsetX, offsetY);
-            TransformPoints(ref matrix);
-            _groupBox.Update();
-        }
-
-        private void ScaleTop(double dy)
-        {
-            var oldSize = _groupBox.Bounds.Height;
-            var newSize = oldSize - dy;
-            if (newSize <= 0 || oldSize <= 0)
-            {
-                Translate(0.0, dy);
-                return;
-            }
-            var scaleX = 1.0;
-            var scaleY = newSize / oldSize;
-            var centerX = _groupBox.Bounds.CenterX;
-            var centerY = _groupBox.Bounds.Bottom;
-            var matrix = Matrix2.ScaleAt(scaleX, scaleY, centerX, centerY);
-            TransformPoints(ref matrix);
-            _groupBox.Update();
-        }
-
-        private void ScaleBottom(double dy)
-        {
-            var oldSize = _groupBox.Bounds.Height;
-            var newSize = oldSize + dy;
-            if (newSize <= 0 || oldSize <= 0)
-            {
-                Translate(0.0, dy);
-                return;
-            }
-            var scaleX = 1.0;
-            var scaleY = newSize / oldSize;
-            var centerX = _groupBox.Bounds.CenterX;
-            var centerY = _groupBox.Bounds.Top;
-            var matrix = Matrix2.ScaleAt(scaleX, scaleY, centerX, centerY);
-            TransformPoints(ref matrix);
-            _groupBox.Update();
-        }
-
-        private void ScaleLeft(double dx)
-        {
-            var oldSize = _groupBox.Bounds.Width;
-            var newSize = oldSize - dx;
-            if (newSize <= 0 || oldSize <= 0)
-            {
-                Translate(dx, 0.0);
-                return;
-            }
-            var scaleX = newSize / oldSize;
-            var scaleY = 1.0;
-            var centerX = _groupBox.Bounds.Right;
-            var centerY = _groupBox.Bounds.CenterY;
-            var matrix = Matrix2.ScaleAt(scaleX, scaleY, centerX, centerY);
-            TransformPoints(ref matrix);
-            _groupBox.Update();
-        }
-
-        private void ScaleRight(double dx)
-        {
-            var oldSize = _groupBox.Bounds.Width;
-            var newSize = oldSize + dx;
-            if (newSize <= 0 || oldSize <= 0)
-            {
-                Translate(dx, 0.0);
-                return;
-            }
-            var scaleX = newSize / oldSize;
-            var scaleY = 1.0;
-            var centerX = _groupBox.Bounds.Left;
-            var centerY = _groupBox.Bounds.CenterY;
-            var matrix = Matrix2.ScaleAt(scaleX, scaleY, centerX, centerY);
-            TransformPoints(ref matrix);
-            _groupBox.Update();
         }
     }
 }
