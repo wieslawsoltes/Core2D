@@ -66,9 +66,9 @@ namespace Core2D.Editor.Tools
         /// <param name="shape">The shape object.</param>
         /// <param name="point">The point to validate.</param>
         /// <returns>True if point is valid, otherwise false.</returns>
-        private static bool Validate(IBaseShape shape, IPointShape point)
+        private static bool IsPointMovable(IBaseShape shape, IPointShape point)
         {
-            if (point.State.Flags.HasFlag(ShapeStateFlags.Locked))
+            if (point.State.Flags.HasFlag(ShapeStateFlags.Locked) || (point.Owner is IBaseShape ower && ower.State.Flags.HasFlag(ShapeStateFlags.Locked)))
             {
                 return false;
             }
@@ -88,7 +88,7 @@ namespace Core2D.Editor.Tools
         /// <returns>All points in the shape.</returns>
         private static IEnumerable<IPointShape> GetMovePoints(IEnumerable<IBaseShape> shapes)
         {
-            return shapes.SelectMany(s => s.GetPoints().Where(p => Validate(s, p))).Distinct();
+            return shapes.SelectMany(s => s.GetPoints().Where(p => IsPointMovable(s, p))).Distinct();
         }
 
         /// <summary>
