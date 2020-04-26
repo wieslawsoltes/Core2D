@@ -231,6 +231,8 @@ namespace Core2D.Renderer.SkiaSharp
                     var pathFigures = new List<IPathFigure>();
                     var pathShapes = new List<IPathShape>();
 
+                    // TODO:
+
                     //foreach (var result in results)
                     //{
                     //    var pathGeometry = PathGeometryConverter.ToPathGeometry(result, 0.0, 0.0, factory);
