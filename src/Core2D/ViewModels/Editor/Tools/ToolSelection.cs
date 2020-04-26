@@ -462,7 +462,6 @@ namespace Core2D.Editor.Tools
                             _currentState = State.None;
                             editor.TryToSelectShapes(editor.Project.CurrentContainer.CurrentLayer, _rectangleShape, deselect, includeSelected);
                             editor.OnShowOrHideDecorator();
-                            HitTestDecorator(args, isControl, false);
                             editor.IsToolIdle = true;
                         }
                     }
