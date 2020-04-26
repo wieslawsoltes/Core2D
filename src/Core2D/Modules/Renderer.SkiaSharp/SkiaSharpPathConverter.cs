@@ -184,69 +184,80 @@ namespace Core2D.Renderer.SkiaSharp
                 return null;
             }
 
-            var converted = new List<(SKPath Path, IBaseShape Shape)>();
+            var paths = new List<SKPath>();
 
-            foreach (var shape in shapes)
+            foreach (var s in shapes)
             {
-                var path = PathGeometryConverter.ToSKPath(shape, 0.0, 0.0, (value) => (float)value);
+                var path = PathGeometryConverter.ToSKPath(s, 0.0, 0.0, (value) => (float)value);
                 if (path != null)
                 {
-                    converted.Add((path, shape));
+                    paths.Add(path);
                 }
             }
 
-            if (converted == null || converted.Count <= 1)
+            if (paths == null || paths.Count <= 1)
             {
                 return null;
             }
 
-            var results = new List<(SKPath Path, IBaseShape Shape)>();
-
-            if (converted.Count == 2)
+            if (paths.Count == 2)
             {
-                PathGeometryConverter.Op(converted[0].Path, converted[1].Path, SKPathOp.Difference, out var difference, out var haveResultDifference);
+                var results = new List<SKPath>();
+
+                PathGeometryConverter.Op(paths[0], paths[1], SKPathOp.Difference, out var difference, out var haveResultDifference);
                 if (haveResultDifference == true && difference != null && !difference.IsEmpty)
                 {
-                    results.Add((difference, converted[0].Shape));
+                    results.Add(difference);
+                }
+                else
+                {
+                    return null;
                 }
 
-                PathGeometryConverter.Op(converted[0].Path, converted[1].Path, SKPathOp.Intersect, out var intersect, out var haveResultIntersect);
+                PathGeometryConverter.Op(paths[0], paths[1], SKPathOp.Intersect, out var intersect, out var haveResultIntersect);
                 if (haveResultIntersect == true && intersect != null && !intersect.IsEmpty)
                 {
-                    results.Add((intersect, converted[0].Shape));
+                    results.Add(intersect);
+                }
+                else
+                {
+                    return null;
                 }
 
-                PathGeometryConverter.Op(converted[0].Path, converted[1].Path, SKPathOp.ReverseDifference, out var reverseDifference, out var haveResultReverseDifference);
+                PathGeometryConverter.Op(paths[0], paths[1], SKPathOp.ReverseDifference, out var reverseDifference, out var haveResultReverseDifference);
                 if (haveResultReverseDifference == true && reverseDifference != null && !reverseDifference.IsEmpty)
                 {
-                    results.Add((reverseDifference, converted[0].Shape));
+                    results.Add(reverseDifference);
                 }
-            }
-
-            // TODO:
-
-            if (results.Count > 0)
-            {
-                var factory = _serviceProvider.GetService<IFactory>();
-                var pathShapes = new List<IPathShape>();
-
-                foreach (var result in results)
+                else
                 {
-                    var style = result.Shape.Style != null ?
-                        (IShapeStyle)result.Shape.Style?.Copy(null) :
-                        factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
-                    var geometry = PathGeometryConverter.ToPathGeometry(result.Path, 0.0, 0.0, factory);
-                    var pathShape = factory.CreatePathShape(
-                        "Path",
-                        style,
-                        geometry,
-                        result.Shape.IsStroked,
-                        result.Shape.IsFilled);
-                    result.Path.Dispose();
-                    pathShapes.Add(pathShape);
+                    return null;
                 }
 
-                return pathShapes;
+                if (results.Count > 0)
+                {
+                    var factory = _serviceProvider.GetService<IFactory>();
+                    var shape = shapes.FirstOrDefault();
+                    var pathShapes = new List<IPathShape>();
+
+                    foreach (var result in results)
+                    {
+                        var style = shape.Style != null ?
+                            (IShapeStyle)shape.Style?.Copy(null) :
+                            factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
+                        var geometry = PathGeometryConverter.ToPathGeometry(result, 0.0, 0.0, factory);
+                        var pathShape = factory.CreatePathShape(
+                            "Path",
+                            style,
+                            geometry,
+                            shape.IsStroked,
+                            shape.IsFilled);
+                        result.Dispose();
+                        pathShapes.Add(pathShape);
+                    }
+
+                    return pathShapes;
+                }
             }
 
             return null;
