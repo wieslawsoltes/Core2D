@@ -90,8 +90,8 @@ namespace Core2D.Renderer.SkiaSharp
                     "Path",
                     style,
                     geometry,
-                    shape.IsStroked,
-                    shape.IsFilled);
+                    true,
+                    false);
                 result.Dispose();
                 return pathShape;
             }
@@ -124,8 +124,8 @@ namespace Core2D.Renderer.SkiaSharp
                     "Path",
                     style,
                     geometry,
-                    shape.IsStroked,
-                    shape.IsFilled);
+                    false,
+                    true);
                 result.Dispose();
                 return pathShape;
             }
