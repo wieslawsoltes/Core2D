@@ -76,6 +76,10 @@ namespace Core2D.Renderer.SkiaSharp
             var style = shape.Style != null ?
                 (IShapeStyle)shape.Style?.Copy(null) :
                 factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
+            var stroke = (IColor)style.Stroke.Copy(null);
+            var fill = (IColor)style.Fill.Copy(null);
+            style.Stroke = fill;
+            style.Fill = stroke;
             using var paint = SkiaSharpRenderer.ToSKPaintPen(style, (value) => (float)value, 96.0, 96.0, true);
             var result = paint.GetFillPath(path, 1.0f);
             if (result != null)
