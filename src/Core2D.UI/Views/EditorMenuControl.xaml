@@ -26,6 +26,7 @@
         <DrawingPresenter x:Key="UnionIcon" Drawing="{StaticResource Union}" Width="16" Height="16"/>
         <DrawingPresenter x:Key="XorIcon" Drawing="{StaticResource Xor}" Width="16" Height="16"/>
         <DrawingPresenter x:Key="ReverseDifferenceIcon" Drawing="{StaticResource ReverseDifference}" Width="16" Height="16"/>
+        <DrawingPresenter x:Key="FragmentIcon" Drawing="{StaticResource Fragment}" Width="16" Height="16"/>
         <!-- Menu-Tool -->
         <DrawingPresenter x:Key="NoneIcon" Drawing="{StaticResource None}" Width="16" Height="16"/>
         <DrawingPresenter x:Key="SelectionIcon" Drawing="{StaticResource Selection}" Width="16" Height="16"/>
@@ -285,6 +286,8 @@
             <MenuItem Header="_Union" Icon="{StaticResource UnionIcon}" ToolTip.Tip="Union (inclusive-or) the two paths." Command="{Binding OnPathOp}" CommandParameter="Union" InputGesture="Ctrl+Shift+U"/>
             <MenuItem Header="_Xor" Icon="{StaticResource XorIcon}" ToolTip.Tip="Exclusive-or the two paths." Command="{Binding OnPathOp}" CommandParameter="Xor" InputGesture="Ctrl+Shift+X"/>
             <MenuItem Header="_Reverse Difference" Icon="{StaticResource ReverseDifferenceIcon}" ToolTip.Tip="Subtract the current path from the op path." Command="{Binding OnPathOp}" CommandParameter="ReverseDifference" InputGesture="Ctrl+Shift+R"/>
+            <Separator/>
+            <MenuItem Header="Fragm_ent" Icon="{StaticResource FragmentIcon}" Command="{Binding OnPathFragment}"/>
         </MenuItem>
         <MenuItem Header="F_ormat">
             <MenuItem Header="_Copy">

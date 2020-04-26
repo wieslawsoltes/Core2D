@@ -27,7 +27,7 @@ namespace Core2D.Renderer
         Xor = 3,
 
         /// <summary>
-        /// Reverse difference,
+        /// Reverse difference.
         /// </summary>
         ReverseDifference = 4
     }

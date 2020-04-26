@@ -1742,6 +1742,52 @@ namespace Core2D.Editor
         }
 
         /// <inheritdoc/>
+        public void OnPathFragment()
+        {
+            if (PathConverter == null)
+            {
+                return;
+            }
+
+            var sources = PageState?.SelectedShapes;
+            if (sources == null)
+            {
+                return;
+            }
+
+            var layer = Project?.CurrentContainer?.CurrentLayer;
+            if (layer == null)
+            {
+                return;
+            }
+
+            var paths = PathConverter.Fragment(sources);
+            if (paths == null)
+            {
+                return;
+            }
+
+            var shapesBuilder = layer.Shapes.ToBuilder();
+
+            foreach (var shape in sources)
+            {
+                shapesBuilder.Remove(shape);
+            }
+
+            foreach (var path in paths)
+            {
+                shapesBuilder.Add(path);
+            }
+
+            var previous = layer.Shapes;
+            var next = shapesBuilder.ToImmutable();
+            Project?.History?.Snapshot(previous, next, (p) => layer.Shapes = p);
+            layer.Shapes = next;
+
+            Select(layer, new HashSet<IBaseShape>(paths));
+        }
+
+        /// <inheritdoc/>
         public void OnToolNone()
         {
             CurrentTool = Tools.FirstOrDefault(t => t.Title == "None");
