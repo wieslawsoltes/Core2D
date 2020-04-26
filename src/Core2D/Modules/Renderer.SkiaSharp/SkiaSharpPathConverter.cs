@@ -209,29 +209,17 @@ namespace Core2D.Renderer.SkiaSharp
                 {
                     results.Add(difference);
                 }
-                else
-                {
-                    return null;
-                }
 
                 PathGeometryConverter.Op(paths[0], paths[1], SKPathOp.Intersect, out var intersect, out var haveResultIntersect);
                 if (haveResultIntersect == true && intersect != null && !intersect.IsEmpty)
                 {
                     results.Add(intersect);
                 }
-                else
-                {
-                    return null;
-                }
 
                 PathGeometryConverter.Op(paths[0], paths[1], SKPathOp.ReverseDifference, out var reverseDifference, out var haveResultReverseDifference);
                 if (haveResultReverseDifference == true && reverseDifference != null && !reverseDifference.IsEmpty)
                 {
                     results.Add(reverseDifference);
-                }
-                else
-                {
-                    return null;
                 }
 
                 if (results.Count > 0)
