@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using Core2D;
 using Core2D.Editor;
+using Core2D.Path;
 using Core2D.Shapes;
 using Core2D.Style;
 using SkiaSharp;
@@ -226,7 +228,31 @@ namespace Core2D.Renderer.SkiaSharp
                 {
                     var factory = _serviceProvider.GetService<IFactory>();
                     var shape = shapes.FirstOrDefault();
+                    var pathFigures = new List<IPathFigure>();
                     var pathShapes = new List<IPathShape>();
+
+                    //foreach (var result in results)
+                    //{
+                    //    var pathGeometry = PathGeometryConverter.ToPathGeometry(result, 0.0, 0.0, factory);
+                    //    pathFigures.AddRange(pathGeometry.Figures);
+                    //}
+
+                    //foreach (var pathFigure in pathFigures)
+                    //{
+                    //    var geometry = factory.CreatePathGeometry(
+                    //        ImmutableArray.Create<IPathFigure>(pathFigure),
+                    //        paths[0].FillType == SKPathFillType.EvenOdd ? FillRule.EvenOdd : FillRule.Nonzero);
+                    //    var style = shape.Style != null ?
+                    //        (IShapeStyle)shape.Style?.Copy(null) :
+                    //        factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
+                    //    var pathShape = factory.CreatePathShape(
+                    //        "Path",
+                    //        style,
+                    //        geometry,
+                    //        shape.IsStroked,
+                    //        shape.IsFilled);
+                    //    pathShapes.Add(pathShape);
+                    //}
 
                     foreach (var result in results)
                     {
