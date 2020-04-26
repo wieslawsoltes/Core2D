@@ -460,6 +460,20 @@ namespace Core2D.Renderer.SkiaSharp
             };
         }
 
+        public static void Op(SKPath first, SKPath second, SKPathOp op, out SKPath result, out bool haveResult)
+        {
+            haveResult = false;
+            result = new SKPath(first) { FillType = first.FillType };
+
+            var next = result.Op(second, op);
+            if (next != null)
+            {
+                result.Dispose();
+                result = next;
+                haveResult = true;
+            }
+        }
+
         public static void Op(IList<SKPath> paths, SKPathOp op, out SKPath result, out bool haveResult)
         {
             haveResult = false;
