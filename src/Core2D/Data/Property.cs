@@ -21,8 +21,8 @@ namespace Core2D.Data
         {
             return new Property()
             {
-                Name = this.Name,
-                Value = this.Value
+                Name = Name,
+                Value = Value
             };
         }
 
