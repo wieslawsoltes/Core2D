@@ -4,6 +4,7 @@ using System.Linq;
 using Core2D;
 using Core2D.Containers;
 using Core2D.Data;
+using Core2D.Editor;
 using Core2D.Editor.Recent;
 using Core2D.Path;
 using Core2D.Path.Segments;
@@ -12,7 +13,7 @@ using Core2D.Scripting;
 using Core2D.Shapes;
 using Core2D.Style;
 
-namespace Core2D.Editor.Designer
+namespace Core2D.UI.Designer
 {
     /// <summary>
     /// Design time DataContext base class.
@@ -75,17 +76,17 @@ namespace Core2D.Editor.Designer
         public static IShapeState State { get; set; }
 
         /// <summary>
-        /// The design time <see cref="Data.IDatabase"/>.
+        /// The design time <see cref="IDatabase"/>.
         /// </summary>
         public static IDatabase Database { get; set; }
 
         /// <summary>
-        /// The design time <see cref="Data.IContext"/>.
+        /// The design time <see cref="IContext"/>.
         /// </summary>
         public static IContext Data { get; set; }
 
         /// <summary>
-        /// The design time <see cref="Data.IRecord"/>.
+        /// The design time <see cref="IRecord"/>.
         /// </summary>
         public static IRecord Record { get; set; }
 
@@ -95,32 +96,32 @@ namespace Core2D.Editor.Designer
         public static IArgbColor ArgbColor { get; set; }
 
         /// <summary>
-        /// The design time <see cref="Style.IArrowStyle"/>.
+        /// The design time <see cref="IArrowStyle"/>.
         /// </summary>
         public static IArrowStyle ArrowStyle { get; set; }
 
         /// <summary>
-        /// The design time <see cref="Style.IFontStyle"/>.
+        /// The design time <see cref="IFontStyle"/>.
         /// </summary>
         public static IFontStyle FontStyle { get; set; }
 
         /// <summary>
-        /// The design time <see cref="Style.ILineFixedLength"/>.
+        /// The design time <see cref="ILineFixedLength"/>.
         /// </summary>
         public static ILineFixedLength LineFixedLength { get; set; }
 
         /// <summary>
-        /// The design time <see cref="Style.ILineStyle"/>.
+        /// The design time <see cref="ILineStyle"/>.
         /// </summary>
         public static ILineStyle LineStyle { get; set; }
 
         /// <summary>
-        /// The design time <see cref="Style.IShapeStyle"/>.
+        /// The design time <see cref="IShapeStyle"/>.
         /// </summary>
         public static IShapeStyle Style { get; set; }
 
         /// <summary>
-        /// The design time <see cref="Style.ITextStyle"/>.
+        /// The design time <see cref="ITextStyle"/>.
         /// </summary>
         public static ITextStyle TextStyle { get; set; }
 

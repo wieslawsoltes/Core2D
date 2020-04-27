@@ -1,7 +1,7 @@
 ﻿
 namespace Core2D.Layout
 {
-    public enum DistributeMode
+    internal enum DistributeMode
     {
         Horizontal,
         Vertical

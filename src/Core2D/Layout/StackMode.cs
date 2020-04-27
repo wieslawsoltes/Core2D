@@ -1,7 +1,7 @@
 ﻿
 namespace Core2D.Layout
 {
-    public enum StackMode
+    internal enum StackMode
     {
         Horizontal,
         Vertical

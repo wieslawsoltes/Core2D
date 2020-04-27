@@ -13,7 +13,7 @@
              xmlns:Recent="clr-namespace:Core2D.Editor.Recent;assembly=Core2D"
              xmlns:ContainersCore="clr-namespace:Core2D.Containers;assembly=Core2D"
              xmlns:Themes="clr-namespace:Core2D.UI;assembly=Core2D.UI"
-             xmlns:Designer="clr-namespace:Core2D.Editor.Designer;assembly=Core2D"
+             xmlns:Designer="clr-namespace:Core2D.UI.Designer;assembly=Core2D.UI"
              mc:Ignorable="d"
              d:DataContext="{x:Static Designer:DesignerContext.Editor}"
              d:DesignWidth="800" d:DesignHeight="20">

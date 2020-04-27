@@ -6,7 +6,7 @@ using Spatial;
 
 namespace Core2D.Layout
 {
-    public struct GroupBox
+    internal struct GroupBox
     {
         public static void TransformPoint(ref Matrix2 matrix, IPointShape point)
         {

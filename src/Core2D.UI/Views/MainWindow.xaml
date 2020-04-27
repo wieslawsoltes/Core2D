@@ -16,7 +16,7 @@
         Foreground="{DynamicResource ThemeForegroundBrush}"
         Icon="/Assets/Core2D.ico"
         id:DragBehavior.IsEnabled="True" id:DropBehavior.IsEnabled="True"
-        xmlns:Designer="clr-namespace:Core2D.Editor.Designer;assembly=Core2D"
+        xmlns:Designer="clr-namespace:Core2D.UI.Designer;assembly=Core2D.UI"
         mc:Ignorable="d"
         d:DataContext="{x:Static Designer:DesignerContext.Editor}"
         d:DesignWidth="1200" d:DesignHeight="580">

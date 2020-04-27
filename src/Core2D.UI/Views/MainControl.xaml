@@ -12,7 +12,7 @@
              xmlns:Views="clr-namespace:Core2D.UI.Dock.Views;assembly=Core2D.UI"
              xmlns:Dock="clr-namespace:Dock.Model;assembly=Dock.Model"
              UseLayoutRounding="True"
-             xmlns:Designer="clr-namespace:Core2D.Editor.Designer;assembly=Core2D"
+             xmlns:Designer="clr-namespace:Core2D.UI.Designer;assembly=Core2D.UI"
              mc:Ignorable="d"
              d:DataContext="{x:Static Designer:DesignerContext.Editor}"
              d:DesignWidth="1200" d:DesignHeight="580">

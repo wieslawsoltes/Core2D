@@ -17,7 +17,7 @@
              xmlns:ScriptingCore="clr-namespace:Core2D.Scripting;assembly=Core2D"
              xmlns:ShapesCore="clr-namespace:Core2D.Shapes;assembly=Core2D"
              xmlns:StyleCore="clr-namespace:Core2D.Style;assembly=Core2D"
-             xmlns:Designer="clr-namespace:Core2D.Editor.Designer;assembly=Core2D"
+             xmlns:Designer="clr-namespace:Core2D.UI.Designer;assembly=Core2D.UI"
              mc:Ignorable="d"
              d:DataContext="{x:Static Designer:DesignerContext.Editor}"
              d:DesignWidth="1000" d:DesignHeight="600">
