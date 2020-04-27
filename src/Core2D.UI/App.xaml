@@ -603,7 +603,6 @@
         <converters:IsNullConverter x:Key="IsNullConverter"/>
         <converters:ObjectEqualityMultiConverter x:Key="ObjectEqualityMultiConverter"/>
         <converters:ObjectEqualsConverter x:Key="ObjectEqualsConverter"/>
-        <converters:ObjectToJsonStringConverter x:Key="ObjectToJsonStringConverter"/>
         <converters:ObjectToObjectConverter x:Key="ObjectToObjectConverter"/>
         <converters:ObjectToTypeStringConverter x:Key="ObjectToTypeStringConverter"/>
         <converters:PriorityMultiValueConverter x:Key="PriorityMultiValueConverter"/>

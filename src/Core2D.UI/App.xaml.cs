@@ -55,15 +55,6 @@ namespace Core2D.UI
         }
 
         /// <summary>
-        /// Initializes converters.
-        /// </summary>
-        /// <param name="serviceProvider">The service provider.</param>
-        public static void InitializeConverters(IServiceProvider serviceProvider)
-        {
-            ObjectToJsonStringConverter.JsonSerializer = serviceProvider.GetServiceLazily<IJsonSerializer>();
-        }
-
-        /// <summary>
         /// Initialize application about information.
         /// </summary>
         /// <param name="runtimeInfo">The runtime info.</param>
@@ -100,8 +91,6 @@ namespace Core2D.UI
             var container = builder.Build();
 
             var serviceProvider = container.Resolve<IServiceProvider>();
-
-            InitializeConverters(serviceProvider);
 
             Selector = ThemeSelector.Create("Themes");
             Selector.LoadSelectedTheme("Core2D.theme");
@@ -174,8 +163,6 @@ namespace Core2D.UI
 
             var container = builder.Build(); // TODO: Dispose()
             var serviceProvider = container.Resolve<IServiceProvider>();
-
-            InitializeConverters(serviceProvider);
 
             var log = serviceProvider.GetService<ILog>(); // TODO: Dispose()
             var fileIO = serviceProvider.GetService<IFileSystem>();
