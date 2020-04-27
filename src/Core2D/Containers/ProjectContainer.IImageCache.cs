@@ -9,7 +9,7 @@ namespace Core2D.Containers
     /// </summary>
     public partial class ProjectContainer : ObservableObject, IImageCache
     {
-        private IDictionary<string, byte[]> _images = new Dictionary<string, byte[]>();
+        private readonly IDictionary<string, byte[]> _images = new Dictionary<string, byte[]>();
 
         private IEnumerable<IImageKey> GetKeys() => _images.Select(i => new ImageKey() { Key = i.Key }).ToList();
 
