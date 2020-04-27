@@ -7,10 +7,6 @@ namespace Core2D.Layout
 {
     public struct ShapeBox
     {
-        public readonly IBaseShape Shape;
-        public readonly List<IPointShape> Points;
-        public Box Bounds;
-
         public static int CompareLeft(ShapeBox box1, ShapeBox box2)
         {
             return (box1.Bounds.Left > box2.Bounds.Left) ? 1 : ((box1.Bounds.Left < box2.Bounds.Left) ? -1 : 0);
@@ -50,6 +46,10 @@ namespace Core2D.Layout
         {
             return (box1.Bounds.Height > box2.Bounds.Height) ? 1 : ((box1.Bounds.Height < box2.Bounds.Height) ? -1 : 0);
         }
+
+        public readonly IBaseShape Shape;
+        public readonly List<IPointShape> Points;
+        public Box Bounds;
 
         public ShapeBox(IBaseShape shape)
         {
