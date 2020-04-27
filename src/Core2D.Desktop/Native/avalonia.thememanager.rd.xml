@@ -1,7 +1,0 @@
-<Directives>
-    <Application>
-
-        <Assembly Name="Avalonia.ThemeManager" Dynamic="Required All" />
-
-    </Application>
-</Directives>

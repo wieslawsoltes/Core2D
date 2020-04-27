@@ -18,9 +18,7 @@ using Core2D.FileWriter.SkiaSharpSvg;
 using Core2D.FileWriter.SkiaSharpWebp;
 using Core2D.Log.Trace;
 using Core2D.Renderer;
-#if !_CORERT
 using Core2D.ScriptRunner.Roslyn;
-#endif
 using Core2D.Serializer.Newtonsoft;
 using Core2D.TextFieldReader.CsvHelper;
 using Core2D.TextFieldReader.OpenXml;
@@ -71,9 +69,7 @@ namespace Core2D.UI.Modules
             builder.RegisterType<AvaloniaTextClipboard>().As<ITextClipboard>().InstancePerLifetimeScope();
             builder.RegisterType<TraceLog>().As<ILog>().SingleInstance();
             builder.RegisterType<DotNetFileSystem>().As<IFileSystem>().InstancePerLifetimeScope();
-#if !_CORERT
             builder.RegisterType<RoslynScriptRunner>().As<IScriptRunner>().InstancePerLifetimeScope();
-#endif
             builder.RegisterType<NewtonsoftJsonSerializer>().As<IJsonSerializer>().InstancePerLifetimeScope();
             builder.RegisterType<PdfSharpWriter>().As<IFileWriter>().InstancePerLifetimeScope();
             builder.RegisterType<SvgSvgWriter>().As<IFileWriter>().InstancePerLifetimeScope();

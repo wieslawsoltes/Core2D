@@ -1,4 +1,3 @@
-#if !_CORERT
 using System;
 using System.Threading.Tasks;
 using Core2D;
@@ -47,4 +46,3 @@ namespace Core2D.ScriptRunner.Roslyn
         }
     }
 }
-#endif

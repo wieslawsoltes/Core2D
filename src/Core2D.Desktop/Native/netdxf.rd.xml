@@ -1,7 +1,0 @@
-<Directives>
-    <Application>
-
-        <Assembly Name="netDXF.netstandard" Dynamic="Required All" />
-
-    </Application>
-</Directives>

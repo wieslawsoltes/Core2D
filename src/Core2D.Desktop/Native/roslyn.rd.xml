@@ -1,8 +1,0 @@
-<Directives>
-    <Application>
-
-        <Assembly Name="Microsoft.CodeAnalysis.CSharp" Dynamic="Required All" />
-        <Assembly Name="System.Runtime.Extensions" Dynamic="Required All" />
-  
-    </Application>
-</Directives>

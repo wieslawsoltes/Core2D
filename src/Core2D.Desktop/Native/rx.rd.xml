@@ -1,7 +1,0 @@
-<Directives>
-    <Application>
-
-        <Assembly Name="System.Reactive" Dynamic="Required All" />
-
-    </Application>
-</Directives>
