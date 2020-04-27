@@ -440,8 +440,7 @@ namespace Core2D.UI.Renderer
                 return;
             }
 
-            bool isSelected = (_state.SelectedShape != null && _state.SelectedShape == point)
-                || (_state.HoveredShape != null && _state.HoveredShape == point);
+            bool isSelected = _state.SelectedShapes?.Count == 1 && _state.SelectedShapes.Contains(point);
 
             var pointStyle = isSelected ? _state.SelectedPointStyle : _state.PointStyle;
             if (pointStyle == null)

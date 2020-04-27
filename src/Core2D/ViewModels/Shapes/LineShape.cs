@@ -42,29 +42,24 @@ namespace Core2D.Shapes
         /// <inheritdoc/>
         public override void DrawPoints(object dc, IShapeRenderer renderer, double dx, double dy)
         {
-            if (renderer.State.SelectedShape != null && renderer.State.DrawPoints == true)
-            {
-                if (this == renderer.State.SelectedShape)
-                {
-                    _start.DrawShape(dc, renderer, dx, dy);
-                    _end.DrawShape(dc, renderer, dx, dy);
-                }
-                else if (_start == renderer.State.SelectedShape)
-                {
-                    _start.DrawShape(dc, renderer, dx, dy);
-                }
-                else if (_end == renderer.State.SelectedShape)
-                {
-                    _end.DrawShape(dc, renderer, dx, dy);
-                }
-            }
-
             if (renderer.State.SelectedShapes != null && renderer.State.DrawPoints == true)
             {
                 if (renderer.State.SelectedShapes.Contains(this))
                 {
                     _start.DrawShape(dc, renderer, dx, dy);
                     _end.DrawShape(dc, renderer, dx, dy);
+                }
+                else
+                {
+                    if (renderer.State.SelectedShapes.Contains(_start))
+                    {
+                        _start.DrawShape(dc, renderer, dx, dy);
+                    }
+
+                    if (renderer.State.SelectedShapes.Contains(_end))
+                    {
+                        _end.DrawShape(dc, renderer, dx, dy);
+                    }
                 }
             }
         }

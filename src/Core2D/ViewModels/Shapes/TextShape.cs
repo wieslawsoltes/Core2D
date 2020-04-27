@@ -50,29 +50,24 @@ namespace Core2D.Shapes
         /// <inheritdoc/>
         public override void DrawPoints(object dc, IShapeRenderer renderer, double dx, double dy)
         {
-            if (renderer.State.SelectedShape != null && renderer.State.DrawPoints == true)
-            {
-                if (this == renderer.State.SelectedShape)
-                {
-                    _topLeft.DrawShape(dc, renderer, dx, dy);
-                    _bottomRight.DrawShape(dc, renderer, dx, dy);
-                }
-                else if (_topLeft == renderer.State.SelectedShape)
-                {
-                    _topLeft.DrawShape(dc, renderer, dx, dy);
-                }
-                else if (_bottomRight == renderer.State.SelectedShape)
-                {
-                    _bottomRight.DrawShape(dc, renderer, dx, dy);
-                }
-            }
-
             if (renderer.State.SelectedShapes != null && renderer.State.DrawPoints == true)
             {
                 if (renderer.State.SelectedShapes.Contains(this))
                 {
                     _topLeft.DrawShape(dc, renderer, dx, dy);
                     _bottomRight.DrawShape(dc, renderer, dx, dy);
+                }
+                else
+                {
+                    if (renderer.State.SelectedShapes.Contains(_topLeft))
+                    {
+                        _topLeft.DrawShape(dc, renderer, dx, dy);
+                    }
+
+                    if (renderer.State.SelectedShapes.Contains(_bottomRight))
+                    {
+                        _bottomRight.DrawShape(dc, renderer, dx, dy);
+                    }
                 }
             }
         }

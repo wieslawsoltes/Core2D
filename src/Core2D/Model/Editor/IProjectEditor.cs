@@ -1237,9 +1237,8 @@ namespace Core2D.Editor
         /// <summary>
         /// Ungroup shapes.
         /// </summary>
-        /// <param name="shape">The selected shape.</param>
         /// <param name="shapes">The selected shapes.</param>
-        bool Ungroup(IBaseShape shape, ISet<IBaseShape> shapes);
+        bool Ungroup(ISet<IBaseShape> shapes);
 
         /// <summary>
         /// Bring a shape to the top of the stack.
@@ -1276,11 +1275,10 @@ namespace Core2D.Editor
         /// <summary>
         /// Move shape(s) by specified offset.
         /// </summary>
-        /// <param name="shape">The selected shape.</param>
         /// <param name="shapes">The selected shapes.</param>
         /// <param name="dx">The X coordinate offset.</param>
         /// <param name="dy">The Y coordinate offset.</param>
-        void MoveBy(IBaseShape shape, ISet<IBaseShape> shapes, double dx, double dy);
+        void MoveBy(ISet<IBaseShape> shapes, double dx, double dy);
 
         /// <summary>
         /// Move items in the library.

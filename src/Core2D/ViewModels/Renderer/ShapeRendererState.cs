@@ -15,8 +15,6 @@ namespace Core2D.Renderer
         private double _zoomX;
         private double _zoomY;
         private IShapeState _drawShapeState;
-        private IBaseShape _hoveredShape;
-        private IBaseShape _selectedShape;
         private ISet<IBaseShape> _selectedShapes;
         private IImageCache _imageCache;
         private bool _drawDecorators;
@@ -61,20 +59,6 @@ namespace Core2D.Renderer
         {
             get => _drawShapeState;
             set => Update(ref _drawShapeState, value);
-        }
-
-        /// <inheritdoc/>
-        public IBaseShape HoveredShape
-        {
-            get => _hoveredShape;
-            set => Update(ref _hoveredShape, value);
-        }
-
-        /// <inheritdoc/>
-        public IBaseShape SelectedShape
-        {
-            get => _selectedShape;
-            set => Update(ref _selectedShape, value);
         }
 
         /// <inheritdoc/>
@@ -182,18 +166,6 @@ namespace Core2D.Renderer
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
         public virtual bool ShouldSerializeDrawShapeState() => _drawShapeState != null;
-
-        /// <summary>
-        /// Check whether the <see cref="HoveredShape"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeHoveredShape() => _hoveredShape != null;
-
-        /// <summary>
-        /// Check whether the <see cref="SelectedShape"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeSelectedShape() => _selectedShape != null;
 
         /// <summary>
         /// Check whether the <see cref="SelectedShapes"/> property has changed from its default value.

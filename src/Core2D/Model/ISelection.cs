@@ -9,16 +9,6 @@ namespace Core2D
     public interface ISelection
     {
         /// <summary>
-        /// Currently hovered shape.
-        /// </summary>
-        IBaseShape HoveredShape { get; set; }
-
-        /// <summary>
-        /// Currently selected shape.
-        /// </summary>
-        IBaseShape SelectedShape { get; set; }
-
-        /// <summary>
         /// Currently selected shapes.
         /// </summary>
         ISet<IBaseShape> SelectedShapes { get; set; }

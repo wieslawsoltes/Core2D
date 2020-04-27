@@ -36,9 +36,9 @@ namespace Core2D.Shapes
         /// <inheritdoc/>
         public override void DrawPoints(object dc, IShapeRenderer renderer, double dx, double dy)
         {
-            if (renderer.State.SelectedShape != null && renderer.State.DrawPoints == true)
+            if (renderer.State.SelectedShapes != null && renderer.State.DrawPoints == true)
             {
-                if (this == renderer.State.SelectedShape)
+                if (renderer.State.SelectedShapes.Contains(this))
                 {
                     var points = GetPoints();
                     foreach (var point in points)
@@ -51,22 +51,10 @@ namespace Core2D.Shapes
                     var points = GetPoints();
                     foreach (var point in points)
                     {
-                        if (point == renderer.State.SelectedShape)
+                        if (renderer.State.SelectedShapes.Contains(point))
                         {
                             point.DrawShape(dc, renderer, dx, dy);
                         }
-                    }
-                }
-            }
-
-            if (renderer.State.SelectedShapes != null && renderer.State.DrawPoints == true)
-            {
-                if (renderer.State.SelectedShapes.Contains(this))
-                {
-                    var points = GetPoints();
-                    foreach (var point in points)
-                    {
-                        point.DrawShape(dc, renderer, dx, dy);
                     }
                 }
             }

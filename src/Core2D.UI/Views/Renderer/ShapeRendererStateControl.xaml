@@ -56,16 +56,6 @@
                 <ContentControl Content="{Binding DrawShapeState}"/>
             </ScrollViewer>
         </TabItem>
-        <TabItem Header="HoveredShape" Classes="property">
-            <ScrollViewer>
-                <ContentControl Content="{Binding HoveredShape}"/>
-            </ScrollViewer>
-        </TabItem>
-        <TabItem Header="SelectedShape" Classes="property">
-            <ScrollViewer>
-                <ContentControl Content="{Binding SelectedShape}"/>
-            </ScrollViewer>
-        </TabItem>
         <TabItem Header="SelectedShapes" Classes="property">
             <ListBox x:Name="shapes" Items="{Binding SelectedShapes}" VirtualizationMode="Simple" Classes="default">
                 <ListBox.ItemsPanel>

@@ -98,37 +98,6 @@ namespace Core2D.Editor.Tools
         {
             var editor = _serviceProvider.GetService<IProjectEditor>();
 
-            if (editor.PageState.SelectedShape != null)
-            {
-                var state = editor.PageState.SelectedShape.State;
-
-                switch (editor.Project.Options.MoveMode)
-                {
-                    case MoveMode.Point:
-                        {
-                            if (!state.Flags.HasFlag(ShapeStateFlags.Locked)
-                                && !state.Flags.HasFlag(ShapeStateFlags.Connector))
-                            {
-                                var shape = editor.PageState.SelectedShape;
-                                var shapes = Enumerable.Repeat(shape, 1);
-                                _pointsCache = GetMovePoints(shapes).ToList();
-                            }
-                        }
-                        break;
-                    case MoveMode.Shape:
-                        {
-                            if (!state.Flags.HasFlag(ShapeStateFlags.Locked)
-                                && !state.Flags.HasFlag(ShapeStateFlags.Connector))
-                            {
-                                var shape = editor.PageState.SelectedShape;
-                                var shapes = Enumerable.Repeat(shape, 1).ToList();
-                                _shapesCache = shapes;
-                            }
-                        }
-                        break;
-                }
-            }
-
             if (editor.PageState.SelectedShapes != null)
             {
                 var shapes = editor.PageState.SelectedShapes
@@ -188,8 +157,7 @@ namespace Core2D.Editor.Tools
         private bool IsSelectionAvailable()
         {
             var editor = _serviceProvider.GetService<IProjectEditor>();
-            return editor?.PageState?.SelectedShape != null
-                || editor?.PageState?.SelectedShapes != null;
+            return editor?.PageState?.SelectedShapes != null;
         }
 
         private bool HitTestDecorator(InputArgs args, bool isControl, bool isHover)
@@ -250,55 +218,29 @@ namespace Core2D.Editor.Tools
 
                             if (result != null)
                             {
-                                if (editor.PageState.SelectedShape == null && editor.PageState.SelectedShapes == null)
+                                if (editor.PageState.SelectedShapes == null)
                                 {
-                                    editor.PageState.SelectedShape = result;
+                                    editor.PageState.SelectedShapes = new HashSet<IBaseShape>() { result };
                                     editor.Project.CurrentContainer.CurrentLayer.Invalidate();
                                     editor.OnShowOrHideDecorator();
                                     HitTestDecorator(args, isControl, false);
                                     break;
                                 }
-                                else if (editor.PageState.SelectedShape != null && editor.PageState.SelectedShapes == null)
-                                {
-                                    if (editor.PageState.SelectedShape == result)
-                                    {
-                                        editor.PageState.SelectedShape = null;
-                                        editor.Project.CurrentContainer.CurrentLayer.Invalidate();
-                                        editor.OnHideDecorator();
-                                        break;
-                                    }
-                                    else
-                                    {
-                                        var selected = editor.PageState.SelectedShape;
-                                        editor.PageState.SelectedShape = null;
-                                        editor.PageState.SelectedShapes = new HashSet<IBaseShape>() { selected, result };
-                                        editor.Project.CurrentContainer.CurrentLayer.Invalidate();
-                                        editor.OnShowOrHideDecorator();
-                                        HitTestDecorator(args, isControl, false);
-                                        break;
-                                    }
-                                }
-                                else if (editor.PageState.SelectedShape == null && editor.PageState.SelectedShapes != null)
+                                else if (editor.PageState.SelectedShapes != null)
                                 {
                                     if (editor.PageState.SelectedShapes.Contains(result))
                                     {
-                                        editor.PageState.SelectedShapes.Remove(result);
-                                        if (editor.PageState.SelectedShapes.Count == 0)
+                                        var selected = new HashSet<IBaseShape>(editor.PageState.SelectedShapes);
+                                        selected.Remove(result);
+
+                                        if (selected.Count == 0)
                                         {
-                                            editor.PageState.SelectedShape = null;
                                             editor.PageState.SelectedShapes = null;
                                             editor.OnHideDecorator();
                                         }
-                                        else if (editor.PageState.SelectedShapes.Count == 1)
-                                        {
-                                            var selected = editor.PageState.SelectedShapes.FirstOrDefault();
-                                            editor.PageState.SelectedShape = selected;
-                                            editor.PageState.SelectedShapes = null;
-                                            editor.OnShowOrHideDecorator();
-                                            HitTestDecorator(args, isControl, false);
-                                        }
                                         else
                                         {
+                                            editor.PageState.SelectedShapes = selected;
                                             editor.OnShowOrHideDecorator();
                                             HitTestDecorator(args, isControl, false);
                                         }
@@ -307,7 +249,11 @@ namespace Core2D.Editor.Tools
                                     }
                                     else
                                     {
-                                        editor.PageState.SelectedShapes.Add(result);
+                                        var selected = new HashSet<IBaseShape>(editor.PageState.SelectedShapes);
+                                        selected.Add(result);
+
+                                        editor.PageState.SelectedShapes = selected;
+
                                         editor.Project.CurrentContainer.CurrentLayer.Invalidate();
                                         editor.OnShowOrHideDecorator();
                                         HitTestDecorator(args, isControl, false);
@@ -322,7 +268,7 @@ namespace Core2D.Editor.Tools
                             editor.OnHideDecorator();
                         }
 
-                        if (editor.PageState.SelectedShape == null && editor.PageState.SelectedShapes != null)
+                        if (editor.PageState.SelectedShapes != null)
                         {
                             var shapes = editor.Project.CurrentContainer.CurrentLayer.Shapes.Reverse();
 

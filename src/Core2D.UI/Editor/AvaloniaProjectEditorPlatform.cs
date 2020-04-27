@@ -313,17 +313,6 @@ namespace Core2D.UI.Editor
                     var exporter = new SvgSvgExporter(_serviceProvider);
                     var container = editor.Project.CurrentContainer;
 
-                    var source = editor.PageState?.SelectedShape;
-                    if (source != null)
-                    {
-                        var xaml = exporter.Create(source, container.Width, container.Height);
-                        if (!string.IsNullOrEmpty(xaml))
-                        {
-                            editor.TextClipboard?.SetText(xaml);
-                        }
-                        return;
-                    }
-
                     var sources = editor.PageState?.SelectedShapes;
                     if (sources != null)
                     {
@@ -363,18 +352,6 @@ namespace Core2D.UI.Editor
                     var editor = _serviceProvider.GetService<IProjectEditor>();
                     var exporter = new DrawingGroupXamlExporter(_serviceProvider);
                     var container = editor.Project.CurrentContainer;
-
-                    var source = editor.PageState?.SelectedShape;
-                    if (source != null)
-                    {
-                        var key = source.Name;
-                        var xaml = exporter.Create(source, key);
-                        if (!string.IsNullOrEmpty(xaml))
-                        {
-                            editor.TextClipboard?.SetText(xaml);
-                        }
-                        return;
-                    }
 
                     var sources = editor.PageState?.SelectedShapes;
                     if (sources != null)

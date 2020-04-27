@@ -71,8 +71,7 @@ namespace Core2D.Editor
         /// <inheritdoc/>
         public bool IsSelectionAvailable()
         {
-            return _editor?.PageState?.SelectedShape != null
-                || _editor?.PageState?.SelectedShapes != null;
+            return _editor?.PageState?.SelectedShapes != null;
         }
     }
 }

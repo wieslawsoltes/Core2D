@@ -235,7 +235,6 @@ namespace Core2D
                 ZoomX = 1.0,
                 ZoomY = 1.0,
                 DrawShapeState = CreateShapeState(ShapeStateFlags.Visible),
-                SelectedShape = default,
                 SelectedShapes = default
             };
 

@@ -7,14 +7,12 @@ using System.Threading.Tasks;
 using Core2D;
 using Core2D.Containers;
 using Core2D.Data;
-using Core2D.Editor.Bounds;
 using Core2D.Editor.History;
 using Core2D.Editor.Recent;
 using Core2D.Editor.Tools.Decorators;
 using Core2D.Input;
 using Core2D.Layout;
 using Core2D.Renderer;
-using Core2D.Renderer.SkiaSharp;
 using Core2D.Scripting;
 using Core2D.Shapes;
 using Core2D.Style;
@@ -579,7 +577,7 @@ namespace Core2D.Editor
             }
             else if (item is IContext context)
             {
-                if (PageState?.SelectedShape != null || (PageState?.SelectedShapes?.Count > 0))
+                if (PageState?.SelectedShapes?.Count > 0)
                 {
                     OnApplyData(context);
                 }
@@ -907,11 +905,6 @@ namespace Core2D.Editor
             {
                 if (CanCopy())
                 {
-                    if (PageState?.SelectedShape != null)
-                    {
-                        OnCopyShapes(Enumerable.Repeat(PageState.SelectedShape, 1).ToList());
-                    }
-
                     if (PageState?.SelectedShapes != null)
                     {
                         OnCopyShapes(PageState.SelectedShapes.ToList());
@@ -1021,9 +1014,7 @@ namespace Core2D.Editor
                 return;
             }
 
-            var shapes = PageState.SelectedShape != null ?
-                Enumerable.Repeat(PageState.SelectedShape, 1).ToList() :
-                PageState.SelectedShapes.ToList();
+            var shapes = PageState.SelectedShapes?.ToList();
 
             if (PageState.Decorator == null)
             {
@@ -1086,14 +1077,14 @@ namespace Core2D.Editor
             {
                 return;
             }
-
-            if (PageState.SelectedShape is IPointShape)
+      
+            if (PageState.SelectedShapes?.Count == 1 && PageState.SelectedShapes?.FirstOrDefault() is IPointShape)
             {
                 OnHideDecorator();
                 return;
             }
 
-            if (PageState.SelectedShape != null || PageState.SelectedShapes != null)
+            if (PageState.SelectedShapes != null)
             {
                 OnShowDecorator();
             }
@@ -1179,10 +1170,9 @@ namespace Core2D.Editor
         /// <inheritdoc/>
         public void OnUngroupSelected()
         {
-            var result = Ungroup(PageState?.SelectedShape, PageState?.SelectedShapes);
+            var result = Ungroup(PageState?.SelectedShapes);
             if (result == true && PageState != null)
             {
-                PageState.SelectedShape = null;
                 PageState.SelectedShapes = null;
                 OnHideDecorator();
             }
@@ -1196,13 +1186,6 @@ namespace Core2D.Editor
                 return;
             }
 
-            var source = PageState?.SelectedShape;
-            if (source != null)
-            {
-                BoxLayout.Rotate(Enumerable.Repeat(source, 1), value, Project?.History);
-                OnUpdateDecorator();
-            }
-
             var sources = PageState?.SelectedShapes;
             if (sources != null)
             {
@@ -1214,13 +1197,6 @@ namespace Core2D.Editor
         /// <inheritdoc/>
         public void OnFlipHorizontalSelected()
         {
-            var source = PageState?.SelectedShape;
-            if (source != null)
-            {
-                BoxLayout.Flip(Enumerable.Repeat(source, 1), FlipMode.Horizontal, Project?.History);
-                OnUpdateDecorator();
-            }
-
             var sources = PageState?.SelectedShapes;
             if (sources != null)
             {
@@ -1232,13 +1208,6 @@ namespace Core2D.Editor
         /// <inheritdoc/>
         public void OnFlipVerticalSelected()
         {
-            var source = PageState?.SelectedShape;
-            if (source != null)
-            {
-                BoxLayout.Flip(Enumerable.Repeat(source, 1), FlipMode.Vertical, Project?.History);
-                OnUpdateDecorator();
-            }
-
             var sources = PageState?.SelectedShapes;
             if (sources != null)
             {
@@ -1251,7 +1220,6 @@ namespace Core2D.Editor
         public void OnMoveUpSelected()
         {
             MoveBy(
-                PageState?.SelectedShape,
                 PageState?.SelectedShapes,
                 0.0,
                 Project.Options.SnapToGrid ? -Project.Options.SnapY : -1.0);
@@ -1261,7 +1229,6 @@ namespace Core2D.Editor
         public void OnMoveDownSelected()
         {
             MoveBy(
-                PageState?.SelectedShape,
                 PageState?.SelectedShapes,
                 0.0,
                 Project.Options.SnapToGrid ? Project.Options.SnapY : 1.0);
@@ -1271,7 +1238,6 @@ namespace Core2D.Editor
         public void OnMoveLeftSelected()
         {
             MoveBy(
-                PageState?.SelectedShape,
                 PageState?.SelectedShapes,
                 Project.Options.SnapToGrid ? -Project.Options.SnapX : -1.0,
                 0.0);
@@ -1281,7 +1247,6 @@ namespace Core2D.Editor
         public void OnMoveRightSelected()
         {
             MoveBy(
-                PageState?.SelectedShape,
                 PageState?.SelectedShapes,
                 Project.Options.SnapToGrid ? Project.Options.SnapX : 1.0,
                 0.0);
@@ -1410,12 +1375,6 @@ namespace Core2D.Editor
         /// <inheritdoc/>
         public void OnBringToFrontSelected()
         {
-            var source = PageState?.SelectedShape;
-            if (source != null)
-            {
-                BringToFront(source);
-            }
-
             var sources = PageState?.SelectedShapes;
             if (sources != null)
             {
@@ -1429,12 +1388,6 @@ namespace Core2D.Editor
         /// <inheritdoc/>
         public void OnBringForwardSelected()
         {
-            var source = PageState?.SelectedShape;
-            if (source != null)
-            {
-                BringForward(source);
-            }
-
             var sources = PageState?.SelectedShapes;
             if (sources != null)
             {
@@ -1448,12 +1401,6 @@ namespace Core2D.Editor
         /// <inheritdoc/>
         public void OnSendBackwardSelected()
         {
-            var source = PageState?.SelectedShape;
-            if (source != null)
-            {
-                SendBackward(source);
-            }
-
             var sources = PageState?.SelectedShapes;
             if (sources != null)
             {
@@ -1467,12 +1414,6 @@ namespace Core2D.Editor
         /// <inheritdoc/>
         public void OnSendToBackSelected()
         {
-            var source = PageState?.SelectedShape;
-            if (source != null)
-            {
-                SendToBack(source);
-            }
-
             var sources = PageState?.SelectedShapes;
             if (sources != null)
             {
@@ -1497,8 +1438,10 @@ namespace Core2D.Editor
                 return;
             }
 
-            var source = PageState?.SelectedShape;
-            if (source != null)
+            var sources = PageState?.SelectedShapes;
+            var source = PageState?.SelectedShapes?.FirstOrDefault();
+
+            if (sources != null && sources.Count == 1)
             {
                 var path = PathConverter.ToPathShape(source);
                 if (path != null)
@@ -1517,8 +1460,7 @@ namespace Core2D.Editor
                 }
             }
 
-            var sources = PageState?.SelectedShapes;
-            if (sources != null)
+            if (sources != null && sources.Count > 1)
             {
                 var path = PathConverter.ToPathShape(sources);
                 if (path == null)
@@ -1557,8 +1499,10 @@ namespace Core2D.Editor
                 return;
             }
 
-            var source = PageState?.SelectedShape;
-            if (source != null)
+            var sources = PageState?.SelectedShapes;
+            var source = PageState?.SelectedShapes?.FirstOrDefault();
+
+            if (sources != null && sources.Count == 1)
             {
                 var path = PathConverter.ToStrokePathShape(source);
                 if (path != null)
@@ -1580,8 +1524,7 @@ namespace Core2D.Editor
                 }
             }
 
-            var sources = PageState?.SelectedShapes;
-            if (sources != null)
+            if (sources != null && sources.Count > 1)
             {
                 var paths = new List<IPathShape>();
                 var shapes = new List<IBaseShape>();
@@ -1633,8 +1576,10 @@ namespace Core2D.Editor
                 return;
             }
 
-            var source = PageState?.SelectedShape;
-            if (source != null)
+            var sources = PageState?.SelectedShapes;
+            var source = PageState?.SelectedShapes?.FirstOrDefault();
+
+            if (sources != null && sources.Count == 1)
             {
                 var path = PathConverter.ToFillPathShape(source);
                 if (path != null)
@@ -1656,8 +1601,7 @@ namespace Core2D.Editor
                 }
             }
 
-            var sources = PageState?.SelectedShapes;
-            if (sources != null)
+            if (sources != null && sources.Count > 1)
             {
                 var paths = new List<IPathShape>();
                 var shapes = new List<IBaseShape>();
@@ -1965,13 +1909,6 @@ namespace Core2D.Editor
         {
             if (record != null)
             {
-                // Selected shape.
-                if (PageState?.SelectedShape != null)
-                {
-                    Project?.ApplyRecord(PageState.SelectedShape?.Data, record);
-                }
-
-                // Selected shapes.
                 if (PageState?.SelectedShapes?.Count > 0)
                 {
                     foreach (var shape in PageState.SelectedShapes)
@@ -1980,8 +1917,7 @@ namespace Core2D.Editor
                     }
                 }
 
-                // Current page.
-                if (PageState.SelectedShape == null && PageState.SelectedShapes == null)
+                if (PageState.SelectedShapes == null)
                 {
                     var container = Project?.CurrentContainer;
                     if (container != null)
@@ -2024,7 +1960,7 @@ namespace Core2D.Editor
         {
             if (Project != null && library != null)
             {
-                if (PageState?.SelectedShape is IGroupShape group)
+                if (PageState.SelectedShapes?.Count == 1 && PageState.SelectedShapes?.FirstOrDefault() is IGroupShape group)
                 {
                     var clone = CloneShape(group);
                     if (clone != null)
@@ -2094,23 +2030,22 @@ namespace Core2D.Editor
         /// <inheritdoc/>
         public void OnAddStyle(ILibrary<IShapeStyle> library)
         {
-            IShapeStyle style = null;
-
-            if (PageState?.SelectedShape != null)
+            if (PageState?.SelectedShapes != null)
             {
-                var shape = PageState?.SelectedShape;
-                if (shape.Style != null)
+                foreach (var shape in PageState.SelectedShapes)
                 {
-                    style = (IShapeStyle)shape.Style.Copy(null);
+                    if (shape.Style != null)
+                    {
+                        var style = (IShapeStyle)shape.Style.Copy(null);
+                        Project.AddStyle(library, style);
+                    }
                 }
             }
-
-            if (style == null)
+            else
             {
-                style = Factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
+                var style = Factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
+                Project.AddStyle(library, style);
             }
-
-            Project.AddStyle(library, style);
         }
 
         /// <inheritdoc/>
@@ -2125,13 +2060,6 @@ namespace Core2D.Editor
         {
             if (style != null)
             {
-                // Selected shape.
-                if (PageState?.SelectedShape != null)
-                {
-                    Project?.ApplyStyle(PageState.SelectedShape, style);
-                }
-
-                // Selected shapes.
                 if (PageState?.SelectedShapes?.Count > 0)
                 {
                     foreach (var shape in PageState.SelectedShapes)
@@ -2147,13 +2075,6 @@ namespace Core2D.Editor
         {
             if (data != null)
             {
-                // Selected shape.
-                if (PageState?.SelectedShape != null)
-                {
-                    Project?.ApplyData(PageState.SelectedShape, data);
-                }
-
-                // Selected shapes.
                 if (PageState?.SelectedShapes?.Count > 0)
                 {
                     foreach (var shape in PageState.SelectedShapes)
@@ -2651,8 +2572,7 @@ namespace Core2D.Editor
         /// <inheritdoc/>
         public bool CanCopy()
         {
-            return PageState?.SelectedShape != null
-                || PageState?.SelectedShapes != null;
+            return PageState?.SelectedShapes != null;
         }
 
         /// <inheritdoc/>
@@ -3090,8 +3010,7 @@ namespace Core2D.Editor
         {
             try
             {
-                if (PageState?.SelectedShape != null
-                    || (PageState?.SelectedShapes != null && PageState?.SelectedShapes.Count > 0))
+                if (PageState?.SelectedShapes?.Count > 0)
                 {
                     if (bExecute)
                     {
@@ -3189,8 +3108,7 @@ namespace Core2D.Editor
         {
             try
             {
-                if (PageState?.SelectedShape != null
-                    || (PageState?.SelectedShapes != null && PageState?.SelectedShapes.Count > 0))
+                if (PageState?.SelectedShapes?.Count > 0)
                 {
                     if (bExecute == true)
                     {
@@ -3254,22 +3172,7 @@ namespace Core2D.Editor
                 return;
             }
 
-            if (PageState.SelectedShape != null)
-            {
-                var layer = Project.CurrentContainer.CurrentLayer;
-
-                var previous = layer.Shapes;
-                var next = layer.Shapes.Remove(PageState.SelectedShape);
-                Project?.History?.Snapshot(previous, next, (p) => layer.Shapes = p);
-                layer.Shapes = next;
-
-                PageState.SelectedShape = default;
-                layer.Invalidate();
-
-                OnHideDecorator();
-            }
-
-            if (PageState.SelectedShapes != null && PageState.SelectedShapes.Count > 0)
+            if (PageState.SelectedShapes?.Count > 0)
             {
                 var layer = Project.CurrentContainer.CurrentLayer;
 
@@ -3294,11 +3197,6 @@ namespace Core2D.Editor
         /// <inheritdoc/>
         public void Deselect()
         {
-            if (PageState?.SelectedShape != null)
-            {
-                PageState.SelectedShape = default;
-            }
-
             if (PageState?.SelectedShapes != null)
             {
                 PageState.SelectedShapes = default;
@@ -3312,12 +3210,7 @@ namespace Core2D.Editor
         {
             if (PageState != null)
             {
-                if (PageState.SelectedShapes != null)
-                {
-                    PageState.SelectedShapes = default;
-                }
-
-                PageState.SelectedShape = shape;
+                PageState.SelectedShapes = new HashSet<IBaseShape>() { shape };
 
                 if (PageState.DrawPoints == true)
                 {
@@ -3356,10 +3249,6 @@ namespace Core2D.Editor
         {
             if (PageState != null)
             {
-                if (PageState.SelectedShape != null)
-                {
-                    PageState.SelectedShape = default;
-                }
                 PageState.SelectedShapes = shapes;
 
                 OnShowDecorator();
@@ -3455,18 +3344,6 @@ namespace Core2D.Editor
                         {
                             if (PageState != null)
                             {
-                                if (PageState.SelectedShape != null)
-                                {
-                                    if (result.Contains(PageState.SelectedShape))
-                                    {
-                                        result.Remove(PageState.SelectedShape);
-                                    }
-                                    else
-                                    {
-                                        result.Add(PageState.SelectedShape);
-                                    }
-                                }
-
                                 if (PageState.SelectedShapes != null)
                                 {
                                     foreach (var shape in PageState.SelectedShapes)
@@ -3548,8 +3425,12 @@ namespace Core2D.Editor
                 return false;
             }
 
-            if (PageState?.SelectedShapes == null
-                && !(PageState?.SelectedShape != null && HoveredShape != PageState?.SelectedShape))
+            if (PageState.SelectedShapes?.Count > 1)
+            {
+                return false;
+            }
+
+            if (!(PageState.SelectedShapes?.Count == 1 && HoveredShape != PageState.SelectedShapes?.FirstOrDefault()))
             {
                 var shapes = Project.CurrentContainer?.CurrentLayer?.Shapes.Reverse();
 
@@ -3570,7 +3451,7 @@ namespace Core2D.Editor
                     }
                     else
                     {
-                        if (PageState.SelectedShape != null && PageState.SelectedShape == HoveredShape)
+                        if (PageState.SelectedShapes?.Count == 1 && HoveredShape == PageState.SelectedShapes?.FirstOrDefault())
                         {
                             Dehover(Project.CurrentContainer?.CurrentLayer);
                         }
@@ -3873,17 +3754,11 @@ namespace Core2D.Editor
         }
 
         /// <inheritdoc/>
-        public bool Ungroup(IBaseShape shape, ISet<IBaseShape> shapes)
+        public bool Ungroup(ISet<IBaseShape> shapes)
         {
             var layer = Project?.CurrentContainer?.CurrentLayer;
             if (layer != null)
             {
-                if (shape != null && shape is IGroupShape group)
-                {
-                    Ungroup(layer, group);
-                    return true;
-                }
-
                 if (shapes != null)
                 {
                     Ungroup(layer, shapes);
@@ -4002,33 +3877,8 @@ namespace Core2D.Editor
         }
 
         /// <inheritdoc/>
-        public void MoveBy(IBaseShape shape, ISet<IBaseShape> shapes, double dx, double dy)
+        public void MoveBy(ISet<IBaseShape> shapes, double dx, double dy)
         {
-            if (shape != null)
-            {
-                switch (Project?.Options?.MoveMode)
-                {
-                    case MoveMode.Point:
-                        {
-                            if (!shape.State.Flags.HasFlag(ShapeStateFlags.Locked))
-                            {
-                                var distinct = Enumerable.Repeat(shape, 1).SelectMany(s => s.GetPoints()).Distinct().ToList();
-                                MoveShapesByWithHistory(distinct, dx, dy);
-                            }
-                        }
-                        break;
-                    case MoveMode.Shape:
-                        {
-                            if (!shape.State.Flags.HasFlag(ShapeStateFlags.Locked) && !shape.State.Flags.HasFlag(ShapeStateFlags.Connector))
-                            {
-                                var items = Enumerable.Repeat(shape, 1).ToList();
-                                MoveShapesByWithHistory(items, dx, dy);
-                            }
-                        }
-                        break;
-                }
-            }
-
             if (shapes != null)
             {
                 switch (Project?.Options?.MoveMode)

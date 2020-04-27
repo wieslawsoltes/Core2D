@@ -58,33 +58,6 @@ namespace Core2D.Shapes
         /// <inheritdoc/>
         public override void DrawPoints(object dc, IShapeRenderer renderer, double dx, double dy)
         {
-            if (renderer.State.SelectedShape != null && renderer.State.DrawPoints == true)
-            {
-                if (this == renderer.State.SelectedShape)
-                {
-                    _point1.DrawShape(dc, renderer, dx, dy);
-                    _point2.DrawShape(dc, renderer, dx, dy);
-                    _point3.DrawShape(dc, renderer, dx, dy);
-                    _point4.DrawShape(dc, renderer, dx, dy);
-                }
-                else if (_point1 == renderer.State.SelectedShape)
-                {
-                    _point1.DrawShape(dc, renderer, dx, dy);
-                }
-                else if (_point2 == renderer.State.SelectedShape)
-                {
-                    _point2.DrawShape(dc, renderer, dx, dy);
-                }
-                else if (_point3 == renderer.State.SelectedShape)
-                {
-                    _point3.DrawShape(dc, renderer, dx, dy);
-                }
-                else if (_point4 == renderer.State.SelectedShape)
-                {
-                    _point4.DrawShape(dc, renderer, dx, dy);
-                }
-            }
-
             if (renderer.State.SelectedShapes != null && renderer.State.DrawPoints == true)
             {
                 if (renderer.State.SelectedShapes.Contains(this))
@@ -93,6 +66,28 @@ namespace Core2D.Shapes
                     _point2.DrawShape(dc, renderer, dx, dy);
                     _point3.DrawShape(dc, renderer, dx, dy);
                     _point4.DrawShape(dc, renderer, dx, dy);
+                }
+                else
+                {
+                    if (renderer.State.SelectedShapes.Contains(_point1))
+                    {
+                        _point1.DrawShape(dc, renderer, dx, dy);
+                    }
+
+                    if (renderer.State.SelectedShapes.Contains(_point2))
+                    {
+                        _point2.DrawShape(dc, renderer, dx, dy);
+                    }
+
+                    if (renderer.State.SelectedShapes.Contains(_point3))
+                    {
+                        _point3.DrawShape(dc, renderer, dx, dy);
+                    }
+
+                    if (renderer.State.SelectedShapes.Contains(_point4))
+                    {
+                        _point4.DrawShape(dc, renderer, dx, dy);
+                    }
                 }
             }
         }

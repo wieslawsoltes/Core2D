@@ -28,37 +28,23 @@ namespace Core2D.Shapes
         /// <inheritdoc/>
         public override void DrawPoints(object dc, IShapeRenderer renderer, double dx, double dy)
         {
-            if (renderer.State.SelectedShape != null)
-            {
-                if (this == renderer.State.SelectedShape)
-                {
-                    if (renderer.State.DrawPoints == true)
-                    {
-                        foreach (var connector in Connectors)
-                        {
-                            connector.DrawShape(dc, renderer, dx, dy);
-                        }
-                    }
-                }
-                else
-                {
-                    foreach (var connector in Connectors)
-                    {
-                        if (connector == renderer.State.SelectedShape)
-                        {
-                            connector.DrawShape(dc, renderer, dx, dy);
-                        }
-                    }
-                }
-            }
-
             if (renderer.State.SelectedShapes != null && renderer.State.DrawPoints == true)
             {
                 if (renderer.State.SelectedShapes.Contains(this))
                 {
-                    foreach (var connector in Connectors)
+                    foreach (var connector in _connectors)
                     {
                         connector.DrawShape(dc, renderer, dx, dy);
+                    }
+                }
+                else
+                {
+                    foreach (var connector in _connectors)
+                    {
+                        if (renderer.State.SelectedShapes.Contains(connector))
+                        {
+                            connector.DrawShape(dc, renderer, dx, dy);
+                        }
                     }
                 }
             }
@@ -69,7 +55,7 @@ namespace Core2D.Shapes
         {
             var record = Data?.Record ?? r;
 
-            foreach (var connector in Connectors)
+            foreach (var connector in _connectors)
             {
                 connector.Bind(dataFlow, db, record);
             }
@@ -78,7 +64,7 @@ namespace Core2D.Shapes
         /// <inheritdoc/>
         public override void Move(ISelection selection, double dx, double dy)
         {
-            foreach (var connector in Connectors)
+            foreach (var connector in _connectors)
             {
                 connector.Move(selection, dx, dy);
             }
@@ -89,7 +75,7 @@ namespace Core2D.Shapes
         {
             base.Select(selection);
 
-            foreach (var connector in Connectors)
+            foreach (var connector in _connectors)
             {
                 connector.Select(selection);
             }
@@ -100,7 +86,7 @@ namespace Core2D.Shapes
         {
             base.Deselect(selection);
 
-            foreach (var connector in Connectors)
+            foreach (var connector in _connectors)
             {
                 connector.Deselect(selection);
             }
@@ -109,7 +95,7 @@ namespace Core2D.Shapes
         /// <inheritdoc/>
         public override IEnumerable<IPointShape> GetPoints()
         {
-            return Connectors;
+            return _connectors;
         }
 
         /// <inheritdoc/>

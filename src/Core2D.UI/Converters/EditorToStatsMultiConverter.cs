@@ -30,7 +30,7 @@ namespace Core2D.UI.Converters
         /// <returns>The converted value.</returns>
         public object Convert(IList<object> values, Type targetType, object parameter, CultureInfo culture)
         {
-            if (values != null && values.Count() == 6 && values.All(x => x != AvaloniaProperty.UnsetValue))
+            if (values != null && values.Count() == 5 && values.All(x => x != AvaloniaProperty.UnsetValue))
             {
                 int nDocuments = 0;
                 int nPages = 0;
@@ -58,12 +58,7 @@ namespace Core2D.UI.Converters
                     nShapes = shapes.Length;
                 }
 
-                if (values[4] is BaseShape selectedShape)
-                {
-                    nSelectedShapes = 1;
-                }
-
-                if (values[5] is HashSet<IBaseShape> selectedShapes)
+                if (values[4] is HashSet<IBaseShape> selectedShapes)
                 {
                     nSelectedShapes = selectedShapes.Count;
                 }

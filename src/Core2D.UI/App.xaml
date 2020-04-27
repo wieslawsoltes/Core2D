@@ -604,6 +604,7 @@
         </VisualBrush>
         <!-- Converters -->
         <converters:ArgbColorToBrushMultiConverter x:Key="ArgbColorToBrushMultiConverter"/>
+        <converters:DataMultiValueConverter x:Key="DataMultiValueConverter"/>
         <converters:EditorToStatsMultiConverter x:Key="EditorToStatsMultiConverter"/>
         <converters:EditorToTitleMultiConverter x:Key="EditorToTitleMultiConverter"/>
         <converters:IsGroupConverter x:Key="IsGroupConverter"/>
@@ -613,6 +614,7 @@
         <converters:ObjectToObjectConverter x:Key="ObjectToObjectConverter"/>
         <converters:ObjectToTypeStringConverter x:Key="ObjectToTypeStringConverter"/>
         <converters:PriorityMultiValueConverter x:Key="PriorityMultiValueConverter"/>
+        <converters:StyleMultiValueConverter x:Key="StyleMultiValueConverter"/>
         <converters:TreeViewSelectedItemToObjectConverter x:Key="TreeViewSelectedItemToObjectConverter"/>
     </Application.Resources>
     <Application.DataTemplates>
@@ -858,33 +860,86 @@
             <settings:ToolsControl DataContext="{Binding Context}"/>
         </DataTemplate>
         <DataTemplate DataType="Tools:ShapeTool">
-            <ContentControl Content="{Binding Context.Project.CurrentContainer.CurrentShape}"/>
+            <ScrollViewer DataContext="{Binding Context}" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                <ItemsRepeater Items="{Binding PageState.SelectedShapes}">
+                    <ItemsRepeater.Layout>
+                        <StackLayout Orientation="Vertical"/>
+                    </ItemsRepeater.Layout>
+                    <ItemsRepeater.ItemTemplate>
+                        <DataTemplate>
+                            <ContentControl Content="{Binding}"/>
+                        </DataTemplate>
+                    </ItemsRepeater.ItemTemplate>
+                </ItemsRepeater>
+            </ScrollViewer>
         </DataTemplate>
         <DataTemplate DataType="Tools:DataTool">
             <data:DataControl DataContext="{Binding Context.PageState.SelectedShape.Data}"/>
         </DataTemplate>
         <DataTemplate DataType="Tools:RecordTool">
-            <Grid RowDefinitions="Auto,*" ColumnDefinitions="*" IsVisible="{Binding !!$self.DataContext}" DataContext="{Binding Context.PageState.SelectedShape.Data}">
-                <Menu Classes="usercontrol" Grid.Row="0" HorizontalAlignment="Right" IsVisible="{Binding !!Record}">
-                    <MenuItem Header="&#727;" Classes="usercontrol" Command="{Binding $parent[Window].DataContext.OnResetRecord}" CommandParameter="{Binding}" IsVisible="{Binding !!Record}"/>
-                </Menu>
-                <data:RecordControl DataContext="{Binding Record}" IsVisible="{Binding !!$self.DataContext}" Grid.Row="1"/>
-            </Grid>
+            <ScrollViewer DataContext="{Binding Context}" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                <ItemsRepeater>
+                    <ItemsRepeater.Items>
+                        <MultiBinding Converter="{StaticResource DataMultiValueConverter}">
+                            <Binding Path="PageState.SelectedShapes" FallbackValue="{x:Null}" />
+                            <Binding Path="Project.CurrentContainer" FallbackValue="{x:Null}" />
+                        </MultiBinding>
+                    </ItemsRepeater.Items>
+                    <ItemsRepeater.Layout>
+                        <StackLayout Orientation="Vertical"/>
+                    </ItemsRepeater.Layout>
+                    <ItemsRepeater.ItemTemplate>
+                        <DataTemplate>
+                            <Grid RowDefinitions="Auto,*" ColumnDefinitions="*" IsVisible="{Binding !!Record}">
+                                <Menu Classes="usercontrol" Grid.Row="0" HorizontalAlignment="Right" IsVisible="{Binding !!Record}">
+                                    <MenuItem Header="&#727;" Classes="usercontrol" Command="{Binding $parent[Window].DataContext.OnResetRecord}" CommandParameter="{Binding}" IsVisible="{Binding !!Record}"/>
+                                </Menu>
+                                <data:RecordControl DataContext="{Binding Record}" IsVisible="{Binding !!$self.DataContext}" Grid.Row="1"/>
+                            </Grid>
+                        </DataTemplate>
+                    </ItemsRepeater.ItemTemplate>
+                </ItemsRepeater>
+            </ScrollViewer>
         </DataTemplate>
         <DataTemplate DataType="Tools:PropertiesTool">
-            <data:PropertiesControl DataContext="{Binding Context.PageState.SelectedShape.Data}" IsVisible="{Binding !!$self.DataContext}"/>
+            <ScrollViewer DataContext="{Binding Context}" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                <ItemsRepeater>
+                    <ItemsRepeater.Items>
+                        <MultiBinding Converter="{StaticResource DataMultiValueConverter}">
+                            <Binding Path="PageState.SelectedShapes" FallbackValue="{x:Null}" />
+                            <Binding Path="Project.CurrentContainer" FallbackValue="{x:Null}" />
+                        </MultiBinding>
+                    </ItemsRepeater.Items>
+                    <ItemsRepeater.Layout>
+                        <StackLayout Orientation="Vertical"/>
+                    </ItemsRepeater.Layout>
+                    <ItemsRepeater.ItemTemplate>
+                        <DataTemplate>
+                            <data:PropertiesControl DataContext="{Binding}"/>
+                        </DataTemplate>
+                    </ItemsRepeater.ItemTemplate>
+                </ItemsRepeater>
+            </ScrollViewer>
         </DataTemplate>
         <DataTemplate DataType="Tools:StyleTool">
-            <Grid DataContext="{Binding Context}">
-                <ContentControl>
-                    <ContentControl.Content>
-                        <MultiBinding Converter="{StaticResource PriorityMultiValueConverter}">
-                            <Binding Path="PageState.SelectedShape.Style" FallbackValue="{x:Null}" />
+            <ScrollViewer DataContext="{Binding Context}" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                <ItemsRepeater>
+                    <ItemsRepeater.Items>
+                        <MultiBinding Converter="{StaticResource StyleMultiValueConverter}">
+                            <Binding Path="PageState.SelectedShapes" FallbackValue="{x:Null}" />
                             <Binding Path="Project.CurrentStyleLibrary.Selected" FallbackValue="{x:Null}" />
                         </MultiBinding>
-                    </ContentControl.Content>
-                </ContentControl>
-            </Grid>
+                    </ItemsRepeater.Items>
+                    <ItemsRepeater.Layout>
+                        <StackLayout Orientation="Vertical"/>
+                    </ItemsRepeater.Layout>
+                    <ItemsRepeater.ItemTemplate>
+                        <DataTemplate>
+                            <ContentControl Content="{Binding}"/>
+                        </DataTemplate>
+                    </ItemsRepeater.ItemTemplate>
+                </ItemsRepeater>
+            </ScrollViewer>
         </DataTemplate>
         <DataTemplate DataType="Tools:TemplateTool">
             <ContentControl Content="{Binding Context.Project.CurrentTemplate}"/>

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using Core2D.Containers;
 using Core2D.History;
 using Core2D.Renderer;
@@ -44,9 +45,9 @@ namespace Core2D.Editor
         {
             var editor = _serviceProvider.GetService<IProjectEditor>();
 
-            if (editor.PageState?.SelectedShape != null)
+            if (editor.PageState?.SelectedShapes != null)
             {
-                var style = editor.PageState?.SelectedShape?.Style;
+                var style = editor.PageState?.SelectedShapes.FirstOrDefault()?.Style;
                 _shapeStyleCopy = (IShapeStyle)style?.Copy(null);
             }
         }
@@ -75,9 +76,9 @@ namespace Core2D.Editor
         {
             var editor = _serviceProvider.GetService<IProjectEditor>();
 
-            if (editor.PageState?.SelectedShape != null)
+            if (editor.PageState?.SelectedShapes != null)
             {
-                var stroke = editor.PageState?.SelectedShape?.Style?.Stroke;
+                var stroke = editor.PageState?.SelectedShapes.FirstOrDefault()?.Style?.Stroke;
                 _strokeCopy = (IColor)stroke?.Copy(null);
             }
         }
@@ -108,9 +109,9 @@ namespace Core2D.Editor
         {
             var editor = _serviceProvider.GetService<IProjectEditor>();
 
-            if (editor.PageState?.SelectedShape != null)
+            if (editor.PageState?.SelectedShapes != null)
             {
-                var fill = editor.PageState?.SelectedShape?.Style?.Fill;
+                var fill = editor.PageState?.SelectedShapes.FirstOrDefault()?.Style?.Fill;
                 _fillCopy = (IColor)fill?.Copy(null);
             }
         }
@@ -141,9 +142,9 @@ namespace Core2D.Editor
         {
             var editor = _serviceProvider.GetService<IProjectEditor>();
 
-            if (editor.PageState?.SelectedShape != null)
+            if (editor.PageState?.SelectedShapes != null)
             {
-                var lineStyle = editor.PageState?.SelectedShape?.Style?.LineStyle;
+                var lineStyle = editor.PageState?.SelectedShapes.FirstOrDefault()?.Style?.LineStyle;
                 _lineStyleCopy = (ILineStyle)lineStyle?.Copy(null);
             }
         }
@@ -174,9 +175,9 @@ namespace Core2D.Editor
         {
             var editor = _serviceProvider.GetService<IProjectEditor>();
 
-            if (editor.PageState?.SelectedShape != null)
+            if (editor.PageState?.SelectedShapes != null)
             {
-                var startArrowStyle = editor.PageState?.SelectedShape?.Style?.StartArrowStyle;
+                var startArrowStyle = editor.PageState?.SelectedShapes.FirstOrDefault()?.Style?.StartArrowStyle;
                 _startArrowStyleCopy = (IArrowStyle)startArrowStyle?.Copy(null);
             }
         }
@@ -207,9 +208,9 @@ namespace Core2D.Editor
         {
             var editor = _serviceProvider.GetService<IProjectEditor>();
 
-            if (editor.PageState?.SelectedShape != null)
+            if (editor.PageState?.SelectedShapes != null)
             {
-                var endArrowStyle = editor.PageState?.SelectedShape?.Style?.EndArrowStyle;
+                var endArrowStyle = editor.PageState?.SelectedShapes.FirstOrDefault()?.Style?.EndArrowStyle;
                 _endArrowStyleCopy = (IArrowStyle)endArrowStyle?.Copy(null);
             }
         }
@@ -240,9 +241,9 @@ namespace Core2D.Editor
         {
             var editor = _serviceProvider.GetService<IProjectEditor>();
 
-            if (editor.PageState?.SelectedShape != null)
+            if (editor.PageState?.SelectedShapes != null)
             {
-                var textStyle = editor.PageState?.SelectedShape?.Style?.TextStyle;
+                var textStyle = editor.PageState?.SelectedShapes.FirstOrDefault()?.Style?.TextStyle;
                 _textStyleCopy = (ITextStyle)textStyle?.Copy(null);
             }
         }
@@ -908,23 +909,6 @@ namespace Core2D.Editor
 
         private IEnumerable<IBaseShape> GetShapes(IProjectEditor editor)
         {
-            if (editor.PageState?.SelectedShape != null)
-            {
-                var shape = editor.PageState?.SelectedShape;
-                if (shape is IGroupShape group)
-                {
-                    var groupShapes = ProjectContainer.GetAllShapes(group.Shapes);
-                    foreach (var child in groupShapes)
-                    {
-                        yield return child;
-                    }
-                }
-                else
-                {
-                    yield return shape;
-                }
-            }
-
             if (editor.PageState?.SelectedShapes?.Count > 0)
             {
                 foreach (var shape in editor.PageState.SelectedShapes)
