@@ -1,4 +1,4 @@
-﻿#define DEBUG_POINTER_EVENTS
+﻿//#define DEBUG_POINTER_EVENTS
 using System;
 using System.Collections.Generic;
 using Avalonia;
