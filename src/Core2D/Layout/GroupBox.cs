@@ -8,6 +8,26 @@ namespace Core2D.Layout
 {
     public struct GroupBox
     {
+        public static void TransformPoint(ref Matrix2 matrix, IPointShape point)
+        {
+            var transformed = Matrix2.TransformPoint(matrix, new Point2(point.X, point.Y));
+            point.X = transformed.X;
+            point.Y = transformed.Y;
+        }
+
+        public static void TransformPoints(ref Matrix2 matrix, IList<IPointShape> points)
+        {
+            if (points == null || points.Count == 0)
+            {
+                return;
+            }
+
+            for (int i = 0; i < points.Count; i++)
+            {
+                TransformPoint(ref matrix, points[i]);
+            }
+        }
+
         public readonly ShapeBox[] Boxes;
         public Box Bounds;
 
@@ -88,22 +108,6 @@ namespace Core2D.Layout
             }
 
             return new List<IPointShape>(points);
-        }
-
-        public void TransformPoints(ref Matrix2 matrix, List<IPointShape> points)
-        {
-            if (points == null || points.Count == 0)
-            {
-                return;
-            }
-
-            for (int i = 0; i < points.Count; i++)
-            {
-                var point = points[i];
-                var transformed = Matrix2.TransformPoint(matrix, new Point2(point.X, point.Y));
-                point.X = transformed.X;
-                point.Y = transformed.Y;
-            }
         }
 
         public void Rotate(double sx, double sy, List<IPointShape> points, ref double rotateAngle)
