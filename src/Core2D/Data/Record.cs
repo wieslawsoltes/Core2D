@@ -29,11 +29,11 @@ namespace Core2D.Data
         /// <inheritdoc/>
         public override object Copy(IDictionary<object, object> shared)
         {
-            var values = this._values.Copy(shared).ToImmutable();
+            var values = _values.Copy(shared).ToImmutable();
 
             return new Record()
             {
-                Name = this.Name,
+                Name = Name,
                 Values = values
             };
         }
