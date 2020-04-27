@@ -216,6 +216,13 @@
         <Style Selector="ComboBox.autofit:focus /template/ Border#border">
             <Setter Property="BorderThickness" Value="1"/>
         </Style>
+        <!-- Expander -->
+        <Style Selector="Expander">
+            <Setter Property="ContentTransition" Value="{x:Null}"/>
+        </Style>
+        <Style Selector="Expander /template/ ToggleButton#PART_toggle /template/ Grid">
+            <Setter Property="Background" Value="Transparent" />
+        </Style>
         <!-- Grid -->
         <Style Selector="Grid.container">
             <Setter Property="Background" Value="{DynamicResource TemplateCheckerBoard}"/>
