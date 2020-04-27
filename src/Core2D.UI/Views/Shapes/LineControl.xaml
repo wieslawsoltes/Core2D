@@ -4,10 +4,46 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:converters="clr-namespace:Core2D.UI.Converters;assembly=Core2D.UI"
+             xmlns:data="clr-namespace:Core2D.UI.Views.Data;assembly=Core2D.UI"
              xmlns:Designer="clr-namespace:Core2D.Editor.Designer;assembly=Core2D"
              mc:Ignorable="d"
              d:DataContext="{x:Static Designer:DesignerContext.Line}"
              d:DesignWidth="250" d:DesignHeight="400">
+    <!--<ScrollViewer>
+        <StackPanel>
+            <Expander Header="Line" IsExpanded="True">
+                <Grid RowDefinitions="Auto,Auto" ColumnDefinitions="Auto,*">
+                    <TextBlock Text="Name" Classes="left" Grid.Row="0" Grid.Column="0"/>
+                    <TextBox Text="{Binding Name, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
+                    <TextBlock Text="IsStroked" Classes="left" Grid.Row="1" Grid.Column="0"/>
+                    <CheckBox IsChecked="{Binding IsStroked, Mode=TwoWay}" Classes="left" Grid.Row="1" Grid.Column="1"/>
+                </Grid>
+            </Expander>
+            <Expander Header="Start" IsExpanded="True">
+                <ContentControl Content="{Binding Start}"/>
+            </Expander>
+            <Expander Header="End" IsExpanded="True">
+                <ContentControl Content="{Binding End}"/>
+            </Expander>
+            <Expander Header="State" IsExpanded="True">
+                <ContentControl Content="{Binding State}"/>
+            </Expander>
+            <Expander Header="Record" IsExpanded="True">
+                <Grid RowDefinitions="Auto,*" ColumnDefinitions="*" DataContext="{Binding Data}">
+                    <Menu Classes="usercontrol" Grid.Row="0" HorizontalAlignment="Right" IsVisible="{Binding !!Record}">
+                        <MenuItem Header="&#727;" Classes="usercontrol" Command="{Binding $parent[Window].DataContext.OnResetRecord}" CommandParameter="{Binding}" IsVisible="{Binding !!Record}"/>
+                    </Menu>
+                    <data:RecordControl DataContext="{Binding Record}" IsVisible="{Binding !!$self.DataContext}" Grid.Row="1"/>
+                </Grid>
+            </Expander>
+            <Expander Header="Properties" IsExpanded="True">
+                <data:PropertiesControl DataContext="{Binding Data}"/>
+            </Expander>
+            <Expander Header="Style" IsExpanded="True">
+                <ContentControl Content="{Binding Style}"/>
+            </Expander>
+        </StackPanel>
+    </ScrollViewer>-->
     <TabControl Classes="default">
         <TabItem Header="Line" Classes="property">
             <ScrollViewer>
