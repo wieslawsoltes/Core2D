@@ -113,7 +113,7 @@ namespace Core2D.UI
             }
 
             var dockFactory = serviceProvider.GetService<DM.IFactory>();
-            editor.Layout = editor.Layout ?? dockFactory.CreateLayout();
+            editor.Layout ??= dockFactory.CreateLayout();
             dockFactory.InitLayout(editor.Layout);
 
             var recentPath = System.IO.Path.Combine(fileIO.GetBaseDirectory(), "Core2D.recent");
@@ -172,7 +172,7 @@ namespace Core2D.UI
             var editor = serviceProvider.GetService<IProjectEditor>();
 
             var dockFactory = serviceProvider.GetService<DM.IFactory>();
-            editor.Layout = editor.Layout ?? dockFactory.CreateLayout();
+            editor.Layout ??= dockFactory.CreateLayout();
             dockFactory.InitLayout(editor.Layout);
 
             editor.CurrentTool = editor.Tools.FirstOrDefault(t => t.Title == "Selection");
