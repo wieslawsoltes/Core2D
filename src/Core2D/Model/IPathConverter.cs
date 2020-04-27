@@ -44,12 +44,5 @@ namespace Core2D
         /// <param name="op">The convert operation.</param>
         /// <returns>The new instance of object of type <see cref="IPathShape"/>.</returns>
         IPathShape Op(IEnumerable<IBaseShape> shapes, PathOp op);
-
-        /// <summary>
-        /// Convert shapes to fragment path shapes.
-        /// </summary>
-        /// <param name="shapes">The shapes to convert.</param>
-        /// <returns>The new instance of object of type <see cref="IEnumerable<IPathShape>"/>.</returns>
-        IEnumerable<IPathShape> Fragment(IEnumerable<IBaseShape> shapes);
     }
 }

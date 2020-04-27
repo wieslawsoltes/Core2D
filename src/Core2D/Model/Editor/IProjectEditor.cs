@@ -576,11 +576,6 @@ namespace Core2D.Editor
         void OnPathOp(string op);
 
         /// <summary>
-        /// Path fragment.
-        /// </summary>
-        void OnPathFragment();
-
-        /// <summary>
         /// Set current tool to <see cref="ToolNone"/>.
         /// </summary>
         void OnToolNone();

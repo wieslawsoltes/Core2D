@@ -32,15 +32,6 @@
             <GeometryDrawing Brush="#FF424242" Geometry="F1M5,5L15,5L15,15L5,15z M6,6L6,14L14,14L14,6z"/>
             <GeometryDrawing Brush="#80424242" Geometry="M5.5,10.5L5.5,14.5L14.5,14.5L14.5,5.5L10.5,5.5L10.5,10.5L5.5,10.5z"/>
         </DrawingGroup>
-        <DrawingGroup x:Key="Fragment">
-            <GeometryDrawing Brush="#00000000" Geometry="F1M0,0L16,0L16,16L0,16z"/>
-            <GeometryDrawing Brush="#FF424242" Geometry="F1M1.5,1L9,1L9,5L4.5,5L4.5,4.5L5,4.5L5,9L1,9L1,1z M1.5,2L1.5,1.5L2,1.5L2,8.5L1.5,8.5L1.5,8L4.5,8L4.5,8.5L4,8.5L4,4L8.5,4L8.5,4.5L8,4.5L8,1.5L8.5,1.5L8.5,2L1.5,2z"/>
-            <GeometryDrawing Brush="#FF424242" Geometry="F1M6,6L10,6L10,10L6,10z M7,7L7,9L9,9L9,7z"/>
-            <GeometryDrawing Brush="#FF424242" Geometry="F1M14.5,15L7,15L7,11L11.5,11L11.5,11.5L11,11.5L11,7L15,7L15,15z M14.5,14L14.5,14.5L14,14.5L14,7.5L14.5,7.5L14.5,8L11.5,8L11.5,7.5L12,7.5L12,12L7.5,12L7.5,11.5L8,11.5L8,14.5L7.5,14.5L7.5,14L14.5,14z"/>
-            <GeometryDrawing Brush="#80424242" Geometry="M8.5,1.5L1.5,1.5L1.5,8.5L4.5,8.5L4.5,4.5L8.5,4.5L8.5,1.5z"/>
-            <GeometryDrawing Brush="#80424242" Geometry="M9.5,6.5L9.5,9.5L6.5,9.5L6.5,6.5L9.5,6.5z"/>
-            <GeometryDrawing Brush="#80424242" Geometry="M7.5,11.5L7.5,14.5L14.5,14.5L14.5,7.5L11.5,7.5L11.5,11.5L7.5,11.5z"/>
-        </DrawingGroup>
         <!-- Menu-Tool -->
         <DrawingGroup x:Key="None">
             <GeometryDrawing Brush="#00000000" Geometry="F1M0,0L16,0L16,16L0,16z"/>
