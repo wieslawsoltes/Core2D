@@ -28,6 +28,21 @@ namespace Core2D.Layout
             }
         }
 
+        public static bool IsPointMovable(IPointShape point, IBaseShape parent)
+        {
+            if (point.State.Flags.HasFlag(ShapeStateFlags.Locked) || (point.Owner is IBaseShape ower && ower.State.Flags.HasFlag(ShapeStateFlags.Locked)))
+            {
+                return false;
+            }
+
+            if (point.State.Flags.HasFlag(ShapeStateFlags.Connector) && point.Owner != parent)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
         public readonly ShapeBox[] Boxes;
         public Box Bounds;
 
@@ -75,21 +90,6 @@ namespace Core2D.Layout
             Bounds.CenterY = (Bounds.Top + Bounds.Bottom) / 2.0;
             Bounds.Width = Math.Abs(Bounds.Right - Bounds.Left);
             Bounds.Height = Math.Abs(Bounds.Bottom - Bounds.Top);
-        }
-
-        public bool IsPointMovable(IPointShape point, IBaseShape parent)
-        {
-            if (point.State.Flags.HasFlag(ShapeStateFlags.Locked) || (point.Owner is IBaseShape ower && ower.State.Flags.HasFlag(ShapeStateFlags.Locked)))
-            {
-                return false;
-            }
-
-            if (point.State.Flags.HasFlag(ShapeStateFlags.Connector) && point.Owner != parent)
-            {
-                return false;
-            }
-
-            return true;
         }
 
         public List<IPointShape> GetMovablePoints()
