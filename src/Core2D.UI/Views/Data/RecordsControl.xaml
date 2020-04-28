@@ -92,11 +92,22 @@
                     <MenuItem Header="+" Classes="usercontrol" Command="{Binding $parent[Window].DataContext.OnAddRecord}" CommandParameter="{Binding}"/>
                     <MenuItem Header="&#727;" Classes="usercontrol" Command="{Binding $parent[Window].DataContext.OnRemoveRecord}" CommandParameter="{Binding CurrentRecord}" IsVisible="{Binding !!CurrentRecord}"/>
                 </Menu>
-                <DataGrid x:Name="rows" Items="{Binding Records}" SelectedItem="{Binding CurrentRecord}" AutoGenerateColumns="False" Grid.Row="1">
-                    <DataGrid.Columns>
+                <DataGrid x:Name="rowsDataGrid"
+                          Items="{Binding Records}"
+                          SelectedItem="{Binding CurrentRecord, Mode=TwoWay}"
+                          AutoGenerateColumns="False"
+                          IsReadOnly="False"
+                          BorderThickness="0"
+                          RowBackground="Transparent"
+                          Grid.Row="1">
+                    <DataGrid.KeyBindings>
+                        <KeyBinding Command="{Binding $parent[Window].DataContext.OnAddRecord}" CommandParameter="{Binding #rowsDataGrid.DataContext, Mode=OneWay}" Gesture="Ctrl+N"/>
+                        <KeyBinding Command="{Binding $parent[Window].DataContext.OnRemoveRecord}" CommandParameter="{Binding #rowsDataGrid.SelectedItem}" Gesture="Delete"/>
+                    </DataGrid.KeyBindings>
+                    <!--<DataGrid.Columns>
                         <DataGridTextColumn Header="Owner" Binding="{Binding Owner.Name}" IsReadOnly="True"/>
                         <DataGridTextColumn Header="Id" Binding="{Binding Id}"/>
-                    </DataGrid.Columns>
+                    </DataGrid.Columns>-->
                 </DataGrid>
             </Grid>
         </TabItem>
