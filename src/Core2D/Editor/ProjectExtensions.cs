@@ -582,7 +582,7 @@ namespace Core2D.Editor
         /// <param name="column">The <see cref="IColumn"/> to remove.</param>
         public static void RemoveColumn(this IProjectContainer project, IColumn column)
         {
-            if (column.Owner is IDatabase db && db.Columns != null)
+            if (column?.Owner is IDatabase db && db.Columns != null)
             {
                 var previous = db.Columns;
                 var next = db.Columns.Remove(column);
@@ -615,7 +615,7 @@ namespace Core2D.Editor
         /// <param name="record">The record instance.</param>
         public static void RemoveRecord(this IProjectContainer project, IRecord record)
         {
-            if (record.Owner is IDatabase db && db.Records != null)
+            if (record?.Owner is IDatabase db && db.Records != null)
             {
                 var previous = db.Records;
                 var next = db.Records.Remove(record);
