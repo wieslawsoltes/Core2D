@@ -76,7 +76,7 @@
                         <KeyBinding Command="{Binding $parent[Window].DataContext.OnRemoveColumn}" CommandParameter="{Binding #columnsDataGrid.SelectedItem}" Gesture="Delete"/>
                     </DataGrid.KeyBindings>
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Name" Binding="{Binding Name}"/>
+                        <DataGridTextColumn Header="Name" IsReadOnly="False" Binding="{Binding Name}"/>
                         <DataGridTextColumn Header="Width" Binding="{Binding Width}"/>
                         <DataGridCheckBoxColumn Header="IsVisible" Binding="{Binding IsVisible}"/>
                         <DataGridTextColumn Header="Owner" Binding="{Binding Owner.Name}" IsReadOnly="True"/>
