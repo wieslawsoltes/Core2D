@@ -87,22 +87,6 @@
                         <DataGridTextColumn Header="Owner" Binding="{Binding Owner.Name}" IsReadOnly="True"/>
                         <DataGridTextColumn Header="Id" Binding="{Binding Id}"/>
                     </DataGrid.Columns>
-                    <DataGrid.RowDetailsTemplate>
-                        <DataTemplate>
-                            <DockPanel>
-                                <DataGrid Items="{Binding Owner.Columns}" AutoGenerateColumns="False" HeadersVisibility="None" DockPanel.Dock="Left">
-                                    <DataGrid.Columns>
-                                        <DataGridTextColumn Header="Name" Binding="{Binding Name}" IsReadOnly="True"/>
-                                    </DataGrid.Columns>
-                                </DataGrid>
-                                <DataGrid Items="{Binding Values}" AutoGenerateColumns="False" HeadersVisibility="None" DockPanel.Dock="Right">
-                                    <DataGrid.Columns>
-                                        <DataGridTextColumn Header="Content" Binding="{Binding Content}" IsReadOnly="False"/>
-                                    </DataGrid.Columns>
-                                </DataGrid>
-                            </DockPanel>
-                        </DataTemplate>
-                    </DataGrid.RowDetailsTemplate>
                 </DataGrid>
             </Grid>
         </TabItem>
