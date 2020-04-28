@@ -64,7 +64,17 @@
                     <MenuItem Header="&#727;" Classes="usercontrol" Command="{Binding $parent[Window].DataContext.OnRemoveColumn}" CommandParameter="{Binding #columns.SelectedItem}"/>
                     <MenuItem Header="+" Classes="usercontrol" Command="{Binding $parent[Window].DataContext.OnAddColumn}" CommandParameter="{Binding}"/>
                 </Menu>
-                <DataGrid x:Name="columns" Items="{Binding Columns}" AutoGenerateColumns="False" Grid.Row="1">
+                <DataGrid x:Name="columnsDataGrid"
+                          Items="{Binding Columns}"
+                          AutoGenerateColumns="False"
+                          IsReadOnly="False"
+                          BorderThickness="0"
+                          RowBackground="Transparent"
+                          Grid.Row="1">
+                    <DataGrid.KeyBindings>
+                        <KeyBinding Command="{Binding $parent[Window].DataContext.OnAddColumn}" CommandParameter="{Binding}" Gesture="Ctrl+N"/>
+                        <KeyBinding Command="{Binding $parent[Window].DataContext.OnRemoveColumn}" CommandParameter="{Binding #columnsDataGrid.SelectedItem}" Gesture="Delete"/>
+                    </DataGrid.KeyBindings>
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Name" Binding="{Binding Name}"/>
                         <DataGridTextColumn Header="Width" Binding="{Binding Width}"/>
