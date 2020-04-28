@@ -28,15 +28,15 @@
                     <MenuItem Header="+" Classes="usercontrol" Command="{Binding $parent[Window].DataContext.OnAddRecord}" CommandParameter="{Binding}"/>
                     <MenuItem Header="&#727;" Classes="usercontrol" Command="{Binding $parent[Window].DataContext.OnRemoveRecord}" CommandParameter="{Binding CurrentRecord}" IsVisible="{Binding !!CurrentRecord}"/>
                 </Menu>
-                <ListBox x:Name="records" Items="{Binding Records}" SelectedItem="{Binding CurrentRecord, Mode=TwoWay}" VirtualizationMode="Simple" Grid.Row="1" Classes="default">
+                <ListBox x:Name="recordsListBox" Items="{Binding Records}" SelectedItem="{Binding CurrentRecord, Mode=TwoWay}" VirtualizationMode="Simple" Grid.Row="1" Classes="default">
                     <ListBox.ItemsPanel>
                         <ItemsPanelTemplate>
                             <VirtualizingStackPanel Orientation="Vertical"/>
                         </ItemsPanelTemplate>
                     </ListBox.ItemsPanel>
                     <ListBox.KeyBindings>
-                        <KeyBinding Command="{Binding $parent[Window].DataContext.OnAddRecord}" CommandParameter="{Binding #records.DataContext, Mode=OneWay}" Gesture="Ctrl+N"/>
-                        <KeyBinding Command="{Binding $parent[Window].DataContext.OnRemoveRecord}" CommandParameter="{Binding #records.SelectedItem}" Gesture="Delete"/>
+                        <KeyBinding Command="{Binding $parent[Window].DataContext.OnAddRecord}" CommandParameter="{Binding #recordsListBox.DataContext, Mode=OneWay}" Gesture="Ctrl+N"/>
+                        <KeyBinding Command="{Binding $parent[Window].DataContext.OnRemoveRecord}" CommandParameter="{Binding #recordsListBox.SelectedItem}" Gesture="Delete"/>
                     </ListBox.KeyBindings>
                     <ListBox.DataTemplates>
                         <DataTemplate DataType="DataCore:IRecord">
