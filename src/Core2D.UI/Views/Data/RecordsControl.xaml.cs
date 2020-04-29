@@ -1,4 +1,6 @@
-﻿using Avalonia;
+﻿using System;
+using System.ComponentModel;
+using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Data;
 using Avalonia.Input;
@@ -6,8 +8,6 @@ using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
 using Core2D.Data;
 using Dock.Avalonia;
-using System;
-using System.ComponentModel;
 
 namespace Core2D.UI.Views.Data
 {
