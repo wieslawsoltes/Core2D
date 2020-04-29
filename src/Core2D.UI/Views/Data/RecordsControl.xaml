@@ -104,10 +104,6 @@
                         <KeyBinding Command="{Binding $parent[Window].DataContext.OnAddRecord}" CommandParameter="{Binding #rowsDataGrid.DataContext, Mode=OneWay}" Gesture="Ctrl+N"/>
                         <KeyBinding Command="{Binding $parent[Window].DataContext.OnRemoveRecord}" CommandParameter="{Binding #rowsDataGrid.SelectedItem}" Gesture="Delete"/>
                     </DataGrid.KeyBindings>
-                    <!--<DataGrid.Columns>
-                        <DataGridTextColumn Header="Owner" Binding="{Binding Owner.Name}" IsReadOnly="True"/>
-                        <DataGridTextColumn Header="Id" Binding="{Binding Id}"/>
-                    </DataGrid.Columns>-->
                 </DataGrid>
             </Grid>
         </TabItem>
