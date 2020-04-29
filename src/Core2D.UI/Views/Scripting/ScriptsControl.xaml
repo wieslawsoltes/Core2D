@@ -15,12 +15,12 @@
              d:DataContext="{x:Static Designer:DesignerContext.Project}"
              d:DesignWidth="250" d:DesignHeight="400">
     <UserControl.Resources>
-        <handlers:ListBoxDropHandler x:Key="ListBoxDropHandler"/>
+        <handlers:ScriptsListBoxDropHandler x:Key="ScriptsListBoxDropHandler"/>
     </UserControl.Resources>
     <Grid RowDefinitions="Auto,*,Auto">
         <ListBox x:Name="scripts" Items="{Binding Scripts}" SelectedItem="{Binding CurrentScript, Mode=TwoWay}" Grid.Row="1" Classes="default">
             <i:Interaction.Behaviors>
-                <idd:ContextDropBehavior Context="{Binding $parent[Window].DataContext, FallbackValue={x:Null}}" Handler="{StaticResource ListBoxDropHandler}"/>
+                <idd:ContextDropBehavior Context="{Binding FallbackValue={x:Null}}" Handler="{StaticResource ScriptsListBoxDropHandler}"/>
             </i:Interaction.Behaviors>
             <ListBox.KeyBindings>
                 <KeyBinding Command="{Binding $parent[Window].DataContext.OnAddScript}" Gesture="Ctrl+N"/>
