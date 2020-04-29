@@ -15,7 +15,7 @@
              d:DataContext="{x:Static Designer:DesignerContext.Project}"
              d:DesignWidth="250" d:DesignHeight="400">
     <UserControl.Resources>
-        <handlers:ListBoxDropHandler x:Key="ListBoxDropHandler"/>
+        <handlers:StylesListBoxDropHandler x:Key="StylesListBoxDropHandler"/>
     </UserControl.Resources>
     <Grid RowDefinitions="Auto,Auto,Auto,*,Auto">
         <Grid RowDefinitions="*" ColumnDefinitions="*,Auto" Grid.Row="0">
@@ -39,7 +39,7 @@
         </Menu>
         <ListBox x:Name="styles" Items="{Binding CurrentStyleLibrary.Items}" SelectedItem="{Binding CurrentStyleLibrary.Selected, Mode=TwoWay}" Grid.Row="3" Classes="default">
             <i:Interaction.Behaviors>
-                <idd:ContextDropBehavior Context="{Binding CurrentStyleLibrary, FallbackValue={x:Null}}" Handler="{StaticResource ListBoxDropHandler}"/>
+                <idd:ContextDropBehavior Context="{Binding CurrentStyleLibrary, FallbackValue={x:Null}}" Handler="{StaticResource StylesListBoxDropHandler}"/>
             </i:Interaction.Behaviors>
             <ListBox.KeyBindings>
                 <KeyBinding Command="{Binding $parent[Window].DataContext.OnAddStyle}" CommandParameter="{Binding #styles.DataContext, Mode=OneWay}" Gesture="Ctrl+N"/>
