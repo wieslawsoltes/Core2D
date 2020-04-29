@@ -21,6 +21,7 @@ namespace Core2D.UI.Views.Data
         private Point _dragStartPoint;
         private PointerEventArgs _triggerEvent;
         private IRecord _record;
+        private bool _lock = false;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="RecordsControl"/> class.
@@ -57,7 +58,7 @@ namespace Core2D.UI.Views.Data
                     _dragStartPoint = e.GetPosition(null);
                     _triggerEvent = e;
                     _record = record;
-                    e.Handled = true;
+                    _lock = true;
                 }
             }
         }
@@ -71,9 +72,17 @@ namespace Core2D.UI.Views.Data
                 var diff = _dragStartPoint - point;
                 if (Math.Abs(diff.X) > 5 || Math.Abs(diff.Y) > 3)
                 {
+                    if (_lock == true)
+                    {
+                        _lock = false;
+                    }
+                    else
+                    {
+                        return;
+                    }
+
                     var data = new DataObject();
                     data.Set(DragDataFormats.Context, _record);
-
                     var effect = DragDropEffects.None;
                     if (e.KeyModifiers.HasFlag(KeyModifiers.Alt))
                     {
@@ -91,11 +100,10 @@ namespace Core2D.UI.Views.Data
                     {
                         effect |= DragDropEffects.Move;
                     }
-
                     var result = await DragDrop.DoDragDrop(_triggerEvent, data, effect);
+
                     _triggerEvent = null;
                     _record = null;
-                    e.Handled = true;
                 }
             }
         }
