@@ -13,8 +13,6 @@ namespace Core2D.UI.DragAndDrop.Handlers
     /// </summary>
     public class EditorDropHandler : DefaultDropHandler
     {
-        public static IDropHandler Instance = new EditorDropHandler();
-
         private bool Validate(IProjectEditor editor, object sender, DragEventArgs e, bool bExecute)
         {
             var point = GetPosition(sender, e);
