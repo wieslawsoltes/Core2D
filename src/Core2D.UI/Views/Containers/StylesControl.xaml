@@ -39,7 +39,7 @@
         </Menu>
         <ListBox x:Name="styles" Items="{Binding CurrentStyleLibrary.Items}" SelectedItem="{Binding CurrentStyleLibrary.Selected, Mode=TwoWay}" Grid.Row="3" Classes="default">
             <i:Interaction.Behaviors>
-                <idd:ContextDropBehavior Context="{Binding $parent[UserControl].DataContext, FallbackValue={x:Null}}" Handler="{StaticResource ListBoxDropHandler}"/>
+                <idd:ContextDropBehavior Context="{Binding CurrentStyleLibrary, FallbackValue={x:Null}}" Handler="{StaticResource ListBoxDropHandler}"/>
             </i:Interaction.Behaviors>
             <ListBox.KeyBindings>
                 <KeyBinding Command="{Binding $parent[Window].DataContext.OnAddStyle}" CommandParameter="{Binding #styles.DataContext, Mode=OneWay}" Gesture="Ctrl+N"/>
