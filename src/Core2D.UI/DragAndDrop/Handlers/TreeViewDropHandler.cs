@@ -28,11 +28,11 @@ namespace Core2D.UI.DragAndDrop.Handlers
 
             switch (sourceItem)
             {
-                case LayerContainer sourceLayer:
+                case ILayerContainer sourceLayer:
                     {
                         switch (targetItem)
                         {
-                            case LayerContainer targetLayer:
+                            case ILayerContainer targetLayer:
                                 {
                                     if (bExecute)
                                     {
@@ -40,7 +40,7 @@ namespace Core2D.UI.DragAndDrop.Handlers
                                     }
                                     return true;
                                 }
-                            case PageContainer targetPage:
+                            case IPageContainer targetPage:
                                 {
                                     if (e.DragEffects == DragDropEffects.Copy)
                                     {
@@ -71,23 +71,23 @@ namespace Core2D.UI.DragAndDrop.Handlers
                                     }
                                     return false;
                                 }
-                            case DocumentContainer targetDocument:
+                            case IDocumentContainer targetDocument:
                                 {
-                                    if (bExecute)
-                                    {
-                                        // TODO:
-                                    }
-                                    return true;
+                                    return false;
                                 }
                         }
 
                         return false;
                     }
-                case PageContainer sourcePage:
+                case IPageContainer sourcePage:
                     {
                         switch (targetItem)
                         {
-                            case LayerContainer targetLayer:
+                            case ILayerContainer targetLayer:
+                                {
+                                    return false;
+                                }
+                            case IPageContainer targetPage:
                                 {
                                     if (bExecute)
                                     {
@@ -95,15 +95,7 @@ namespace Core2D.UI.DragAndDrop.Handlers
                                     }
                                     return true;
                                 }
-                            case PageContainer targetPage:
-                                {
-                                    if (bExecute)
-                                    {
-                                        // TODO:
-                                    }
-                                    return true;
-                                }
-                            case DocumentContainer targetDocument:
+                            case IDocumentContainer targetDocument:
                                 {
                                     if (e.DragEffects == DragDropEffects.Copy)
                                     {
@@ -140,27 +132,19 @@ namespace Core2D.UI.DragAndDrop.Handlers
 
                         return false;
                     }
-                case DocumentContainer sourceDocument:
+                case IDocumentContainer sourceDocument:
                     {
                         switch (targetItem)
                         {
-                            case LayerContainer targetLayer:
+                            case ILayerContainer targetLayer:
                                 {
-                                    if (bExecute)
-                                    {
-                                        // TODO:
-                                    }
-                                    return true;
+                                    return false;
                                 }
-                            case PageContainer targetPage:
+                            case IPageContainer targetPage:
                                 {
-                                    if (bExecute)
-                                    {
-                                        // TODO:
-                                    }
-                                    return true;
+                                    return false;
                                 }
-                            case DocumentContainer targetDocument:
+                            case IDocumentContainer targetDocument:
                                 {
                                     if (bExecute)
                                     {
@@ -172,6 +156,7 @@ namespace Core2D.UI.DragAndDrop.Handlers
                         return false;
                     }
             }
+
             return false;
         }
 
