@@ -20,7 +20,8 @@ namespace Core2D.UI.Views.Data
         private IDatabase _database;
         private Point _dragStartPoint;
         private PointerEventArgs _triggerEvent;
-        private IRecord _record;
+        private Type _dataType = typeof(IRecord);
+        private object _dataObject;
         private bool _lock = false;
 
         /// <summary>
@@ -31,13 +32,9 @@ namespace Core2D.UI.Views.Data
             InitializeComponent();
 
             _rowsDataGrid = this.FindControl<DataGrid>("rowsDataGrid");
-            //_rowsDataGrid.PointerPressed += RowsDataGrid_PointerPressed;
-            //_rowsDataGrid.PointerMoved += RowsDataGrid_PointerMoved;
-
-            _rowsDataGrid.AddHandler(InputElement.PointerPressedEvent, Pressed, RoutingStrategies.Direct | RoutingStrategies.Tunnel | RoutingStrategies.Bubble);
-            _rowsDataGrid.AddHandler(InputElement.PointerMovedEvent, Moved, RoutingStrategies.Direct | RoutingStrategies.Tunnel | RoutingStrategies.Bubble);
-
-            DataContextChanged += RecordsControl_DataContextChanged;
+            _rowsDataGrid.AddHandler(InputElement.PointerPressedEvent, RowsDataGrid_PointerPressed, RoutingStrategies.Direct | RoutingStrategies.Tunnel | RoutingStrategies.Bubble);
+            _rowsDataGrid.AddHandler(InputElement.PointerMovedEvent, RowsDataGrid_PointerMoved, RoutingStrategies.Direct | RoutingStrategies.Tunnel | RoutingStrategies.Bubble);
+            _rowsDataGrid.DataContextChanged += RowsDataGrid_DataContextChanged;
         }
 
         /// <summary>
@@ -48,22 +45,22 @@ namespace Core2D.UI.Views.Data
             AvaloniaXamlLoader.Load(this);
         }
 
-        private void Pressed(object sender, PointerPressedEventArgs e)
+        private void RowsDataGrid_PointerPressed(object sender, PointerPressedEventArgs e)
         {
             var properties = e.GetCurrentPoint(_rowsDataGrid).Properties;
             if (properties.IsLeftButtonPressed)
             {
-                if (e.Source is IControl control && control.DataContext is IRecord record)
+                if (e.Source is IControl control && _dataType.IsAssignableFrom(control.DataContext?.GetType()) == true)
                 {
                     _dragStartPoint = e.GetPosition(null);
                     _triggerEvent = e;
-                    _record = record;
+                    _dataObject = control.DataContext;
                     _lock = true;
                 }
             }
         }
 
-        private async void Moved(object sender, PointerEventArgs e)
+        private async void RowsDataGrid_PointerMoved(object sender, PointerEventArgs e)
         {
             var properties = e.GetCurrentPoint(_rowsDataGrid).Properties;
             if (properties.IsLeftButtonPressed && _triggerEvent != null)
@@ -82,7 +79,7 @@ namespace Core2D.UI.Views.Data
                     }
 
                     var data = new DataObject();
-                    data.Set(DragDataFormats.Context, _record);
+                    data.Set(DragDataFormats.Context, _dataObject);
                     var effect = DragDropEffects.None;
                     if (e.KeyModifiers.HasFlag(KeyModifiers.Alt))
                     {
@@ -100,24 +97,15 @@ namespace Core2D.UI.Views.Data
                     {
                         effect |= DragDropEffects.Move;
                     }
-                    var result = await DragDrop.DoDragDrop(_triggerEvent, data, effect);
+                    await DragDrop.DoDragDrop(_triggerEvent, data, effect);
 
                     _triggerEvent = null;
-                    _record = null;
+                    _dataObject = null;
                 }
             }
         }
 
-        private void RowsDataGrid_PointerPressed(object sender, PointerPressedEventArgs e)
-        {
-
-        }
-
-        private void RowsDataGrid_PointerMoved(object sender, PointerEventArgs e)
-        {
-        }
-
-        private void RecordsControl_DataContextChanged(object sender, System.EventArgs e)
+        private void RowsDataGrid_DataContextChanged(object sender, EventArgs e)
         {
             if (_database != null)
             {
