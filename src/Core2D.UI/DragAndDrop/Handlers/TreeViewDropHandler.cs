@@ -1,4 +1,9 @@
-﻿using Avalonia.Input;
+﻿using System.Diagnostics;
+using Avalonia.Controls;
+using Avalonia.Input;
+using Avalonia.VisualTree;
+using Core2D.Containers;
+using Core2D.Editor;
 
 namespace Core2D.UI.DragAndDrop.Handlers
 {
@@ -7,203 +12,186 @@ namespace Core2D.UI.DragAndDrop.Handlers
     /// </summary>
     public class TreeViewDropHandler : DefaultDropHandler
     {
-        // FIXME:
-        /*
-        private bool ValidateTreeView(IProjectEditor editor, DragEventArgs e, bool bExecute, TreeView tree)
+        private bool ValidateContainer(TreeView treeView, DragEventArgs e, object sourceContext, object targetContext, bool bExecute)
         {
-            var sourceItem = e.Data.Get(DragDataFormats.Parent);
-            var targetItem = (e.Source as IControl)?.Parent?.Parent;
-
-            if (sourceItem is TreeViewItem source && targetItem is TreeViewItem target)
+            if (!(sourceContext is IBaseContainer sourceItem)
+                || !(targetContext is IProjectContainer)
+                || !(treeView.GetVisualAt(e.GetPosition(treeView)) is IControl targetControl)
+                || !(treeView.GetVisualRoot() is IControl rootControl)
+                || !(rootControl.DataContext is IProjectEditor editor)
+                || !(targetControl.DataContext is IBaseContainer targetItem))
             {
-                var sourceData = source.DataContext;
-                var targetData = target.DataContext;
-
-                switch (sourceData)
-                {
-                    case LayerContainer sourceLayer:
-                        {
-                            switch (targetData)
-                            {
-                                case LayerContainer targetLayer:
-                                    {
-                                        if (bExecute)
-                                        {
-                                            // TODO:
-                                        }
-                                        return true;
-                                    }
-                                case PageContainer targetPage:
-                                    {
-                                        if (e.DragEffects == DragDropEffects.Copy)
-                                        {
-                                            if (bExecute)
-                                            {
-                                                var layer = editor?.Clone(sourceLayer);
-                                                editor?.Project.AddLayer(targetPage, layer);
-                                            }
-                                            return true;
-                                        }
-                                        else if (e.DragEffects == DragDropEffects.Move)
-                                        {
-                                            if (bExecute)
-                                            {
-                                                editor?.Project?.RemoveLayer(sourceLayer);
-                                                editor?.Project.AddLayer(targetPage, sourceLayer);
-                                            }
-                                            return true;
-                                        }
-                                        else if (e.DragEffects == DragDropEffects.Link)
-                                        {
-                                            if (bExecute)
-                                            {
-                                                editor?.Project.AddLayer(targetPage, sourceLayer);
-                                                e.DragEffects = DragDropEffects.None;
-                                            }
-                                            return true;
-                                        }
-                                        return false;
-                                    }
-                                case DocumentContainer targetDocument:
-                                    {
-                                        if (bExecute)
-                                        {
-                                            // TODO:
-                                        }
-                                        return true;
-                                    }
-                            }
-
-                            return false;
-                        }
-                    case PageContainer sourcePage:
-                        {
-                            switch (targetData)
-                            {
-                                case LayerContainer targetLayer:
-                                    {
-                                        if (bExecute)
-                                        {
-                                            // TODO:
-                                        }
-                                        return true;
-                                    }
-                                case PageContainer targetPage:
-                                    {
-                                        if (bExecute)
-                                        {
-                                            // TODO:
-                                        }
-                                        return true;
-                                    }
-                                case DocumentContainer targetDocument:
-                                    {
-                                        if (e.DragEffects == DragDropEffects.Copy)
-                                        {
-                                            if (bExecute)
-                                            {
-                                                var page = editor?.Clone(sourcePage);
-                                                editor?.Project.AddPage(targetDocument, page);
-                                                editor?.Project?.SetCurrentContainer(page);
-                                            }
-                                            return true;
-                                        }
-                                        else if (e.DragEffects == DragDropEffects.Move)
-                                        {
-                                            if (bExecute)
-                                            {
-                                                editor?.Project?.RemovePage(sourcePage);
-                                                editor?.Project.AddPage(targetDocument, sourcePage);
-                                                editor?.Project?.SetCurrentContainer(sourcePage);
-                                            }
-                                            return true;
-                                        }
-                                        else if (e.DragEffects == DragDropEffects.Link)
-                                        {
-                                            if (bExecute)
-                                            {
-                                                editor?.Project.AddPage(targetDocument, sourcePage);
-                                                editor?.Project?.SetCurrentContainer(sourcePage);
-                                            }
-                                            return true;
-                                        }
-                                        return false;
-                                    }
-                            }
-
-                            return false;
-                        }
-                    case DocumentContainer sourceDocument:
-                        {
-                            switch (targetData)
-                            {
-                                case LayerContainer targetLayer:
-                                    {
-                                        if (bExecute)
-                                        {
-                                            // TODO:
-                                        }
-                                        return true;
-                                    }
-                                case PageContainer targetPage:
-                                    {
-                                        if (bExecute)
-                                        {
-                                            // TODO:
-                                        }
-                                        return true;
-                                    }
-                                case DocumentContainer targetDocument:
-                                    {
-                                        if (bExecute)
-                                        {
-                                            // TODO:
-                                        }
-                                        return true;
-                                    }
-                            }
-
-                            return false;
-                        }
-                }
+                return false;
             }
 
-            return false;
-        }
+            Debug.WriteLine($"{sourceItem} -> {targetItem}");
 
-        private bool Validate(IProjectEditor editor, object sender, DragEventArgs e, bool bExecute)
-        {
-            var point = DropHelper.GetPosition(sender, e);
-
-            switch (sender)
+            switch (sourceItem)
             {
-                case TreeView tree:
-                    return ValidateTreeView(editor, e, bExecute, tree);
-            }
+                case LayerContainer sourceLayer:
+                    {
+                        switch (targetItem)
+                        {
+                            case LayerContainer targetLayer:
+                                {
+                                    if (bExecute)
+                                    {
+                                        // TODO:
+                                    }
+                                    return true;
+                                }
+                            case PageContainer targetPage:
+                                {
+                                    if (e.DragEffects == DragDropEffects.Copy)
+                                    {
+                                        if (bExecute)
+                                        {
+                                            var layer = editor?.Clone(sourceLayer);
+                                            editor?.Project.AddLayer(targetPage, layer);
+                                        }
+                                        return true;
+                                    }
+                                    else if (e.DragEffects == DragDropEffects.Move)
+                                    {
+                                        if (bExecute)
+                                        {
+                                            editor?.Project?.RemoveLayer(sourceLayer);
+                                            editor?.Project.AddLayer(targetPage, sourceLayer);
+                                        }
+                                        return true;
+                                    }
+                                    else if (e.DragEffects == DragDropEffects.Link)
+                                    {
+                                        if (bExecute)
+                                        {
+                                            editor?.Project.AddLayer(targetPage, sourceLayer);
+                                            e.DragEffects = DragDropEffects.None;
+                                        }
+                                        return true;
+                                    }
+                                    return false;
+                                }
+                            case DocumentContainer targetDocument:
+                                {
+                                    if (bExecute)
+                                    {
+                                        // TODO:
+                                    }
+                                    return true;
+                                }
+                        }
 
+                        return false;
+                    }
+                case PageContainer sourcePage:
+                    {
+                        switch (targetItem)
+                        {
+                            case LayerContainer targetLayer:
+                                {
+                                    if (bExecute)
+                                    {
+                                        // TODO:
+                                    }
+                                    return true;
+                                }
+                            case PageContainer targetPage:
+                                {
+                                    if (bExecute)
+                                    {
+                                        // TODO:
+                                    }
+                                    return true;
+                                }
+                            case DocumentContainer targetDocument:
+                                {
+                                    if (e.DragEffects == DragDropEffects.Copy)
+                                    {
+                                        if (bExecute)
+                                        {
+                                            var page = editor?.Clone(sourcePage);
+                                            editor?.Project.AddPage(targetDocument, page);
+                                            editor?.Project?.SetCurrentContainer(page);
+                                        }
+                                        return true;
+                                    }
+                                    else if (e.DragEffects == DragDropEffects.Move)
+                                    {
+                                        if (bExecute)
+                                        {
+                                            editor?.Project?.RemovePage(sourcePage);
+                                            editor?.Project.AddPage(targetDocument, sourcePage);
+                                            editor?.Project?.SetCurrentContainer(sourcePage);
+                                        }
+                                        return true;
+                                    }
+                                    else if (e.DragEffects == DragDropEffects.Link)
+                                    {
+                                        if (bExecute)
+                                        {
+                                            editor?.Project.AddPage(targetDocument, sourcePage);
+                                            editor?.Project?.SetCurrentContainer(sourcePage);
+                                        }
+                                        return true;
+                                    }
+                                    return false;
+                                }
+                        }
+
+                        return false;
+                    }
+                case DocumentContainer sourceDocument:
+                    {
+                        switch (targetItem)
+                        {
+                            case LayerContainer targetLayer:
+                                {
+                                    if (bExecute)
+                                    {
+                                        // TODO:
+                                    }
+                                    return true;
+                                }
+                            case PageContainer targetPage:
+                                {
+                                    if (bExecute)
+                                    {
+                                        // TODO:
+                                    }
+                                    return true;
+                                }
+                            case DocumentContainer targetDocument:
+                                {
+                                    if (bExecute)
+                                    {
+                                        // TODO:
+                                    }
+                                    return true;
+                                }
+                        }
+                        return false;
+                    }
+            }
             return false;
         }
-        */
 
         /// <inheritdoc/>
         public override bool Validate(object sender, DragEventArgs e, object sourceContext, object targetContext, object state)
         {
-            // FIXME:
-            //if (context is IProjectEditor editor)
-            //{
-            //    return Validate(editor, sender, e, false);
-            //}
+            if (e.Source is IControl && sender is TreeView treeView)
+            {
+                return ValidateContainer(treeView, e, sourceContext, targetContext, false);
+            }
             return false;
         }
 
         /// <inheritdoc/>
         public override bool Execute(object sender, DragEventArgs e, object sourceContext, object targetContext, object state)
         {
-            // FIXME:
-            //if (context is IProjectEditor editor)
-            //{
-            //    return Validate(editor, sender, e, true);
-            //}
+            if (e.Source is IControl && sender is TreeView treeView)
+            {
+                return ValidateContainer(treeView, e, sourceContext, targetContext, true);
+            }
             return false;
         }
     }
