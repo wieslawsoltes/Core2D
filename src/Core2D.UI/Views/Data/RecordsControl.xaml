@@ -15,9 +15,9 @@
              d:DesignWidth="250" d:DesignHeight="400">
     <UserControl.Styles>
         <Style Selector="DataGrid">
-            <Setter Property="CanUserReorderColumns" Value="True"/>
+            <Setter Property="CanUserReorderColumns" Value="False "/>
             <Setter Property="CanUserResizeColumns" Value="True"/>
-            <Setter Property="CanUserSortColumns" Value="True"/>
+            <Setter Property="CanUserSortColumns" Value="False"/>
         </Style>
     </UserControl.Styles>
     <TabControl Classes="default">
