@@ -28,7 +28,7 @@
         </Grid>
         <TreeView x:Name="documents" Items="{Binding Documents}" SelectedItem="{Binding Selected, Mode=TwoWay}" Grid.Row="1" Classes="default">
             <i:Interaction.Behaviors>
-                <idd:ContextDropBehavior Context="{Binding $parent[Window].DataContext, FallbackValue={x:Null}}" Handler="{StaticResource TreeViewDropHandler}"/>
+                <idd:ContextDropBehavior Context="{Binding FallbackValue={x:Null}}" Handler="{StaticResource TreeViewDropHandler}"/>
             </i:Interaction.Behaviors>
             <TreeView.KeyBindings>
                 <KeyBinding Command="{Binding $parent[Window].DataContext.OnNew}" CommandParameter="{Binding #documents.SelectedItem}" Gesture="Ctrl+N"/>
