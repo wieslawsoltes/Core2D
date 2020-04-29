@@ -12,53 +12,48 @@ namespace Core2D.UI.DragAndDrop.Handlers
     /// </summary>
     public class ListBoxDropHandler : DefaultDropHandler
     {
-        private bool Validate(object sender, DragEventArgs e, object sourceContext, object targetContext, object state, bool bExecute)
+        private bool ValidateLibrary<T>(ListBox listBox, DragEventArgs e, object sourceContext, object targetContext, bool bExecute) where T : IObservableObject
         {
-            if (e.Source is IControl sourceControl
-                 && sender is ListBox listBox
-                 && sourceContext is IShapeStyle sourceStyle
-                 && targetContext is ILibrary<IShapeStyle> library)
+            if (sourceContext is T sourceStyle && targetContext is ILibrary<T> library)
             {
-                var point = e.GetPosition(listBox);
-                var visual = listBox.GetVisualAt(point);
-                var root = listBox.GetVisualRoot();
-
-                if (visual is IControl targetControl
-                    && root is Window window
-                    && window.DataContext is IProjectEditor editor
-                    && targetControl.DataContext is IShapeStyle targetStyle)
+                if (listBox.GetVisualAt(e.GetPosition(listBox)) is IControl targetControl
+                    && listBox.GetVisualRoot() is IControl rootControl
+                    && rootControl.DataContext is IProjectEditor editor
+                    && targetControl.DataContext is T targetStyle)
                 {
                     int sourceIndex = library.Items.IndexOf(sourceStyle);
                     int targetIndex = library.Items.IndexOf(targetStyle);
 
-                    if (sourceIndex >= 0 && targetIndex >= 0)
+                    if (sourceIndex < 0 || targetIndex < 0)
                     {
-                        if (e.DragEffects == DragDropEffects.Copy)
+                        return false;
+                    }
+
+                    if (e.DragEffects == DragDropEffects.Copy)
+                    {
+                        if (bExecute)
                         {
-                            if (bExecute)
-                            {
-                                var clone = (IShapeStyle)sourceStyle.Copy(null);
-                                clone.Name += "-copy";
-                                editor.InsertItem(library, clone, targetIndex + 1);
-                            }
-                            return true;
+                            var clone = (T)sourceStyle.Copy(null);
+                            clone.Name += "-copy";
+                            editor.InsertItem(library, clone, targetIndex + 1);
                         }
-                        else if (e.DragEffects == DragDropEffects.Move)
+                        return true;
+                    }
+                    else if (e.DragEffects == DragDropEffects.Move)
+                    {
+                        if (bExecute)
                         {
-                            if (bExecute)
-                            {
-                                editor.MoveItem(library, sourceIndex, targetIndex);
-                            }
-                            return true;
+                            editor.MoveItem(library, sourceIndex, targetIndex);
                         }
-                        else if (e.DragEffects == DragDropEffects.Link)
+                        return true;
+                    }
+                    else if (e.DragEffects == DragDropEffects.Link)
+                    {
+                        if (bExecute)
                         {
-                            if (bExecute)
-                            {
-                                editor.SwapItem(library, sourceIndex, targetIndex);
-                            }
-                            return true;
+                            editor.SwapItem(library, sourceIndex, targetIndex);
                         }
+                        return true;
                     }
                 }
             }
@@ -69,13 +64,21 @@ namespace Core2D.UI.DragAndDrop.Handlers
         /// <inheritdoc/>
         public override bool Validate(object sender, DragEventArgs e, object sourceContext, object targetContext, object state)
         {
-            return Validate(sender, e, sourceContext, targetContext, state, false);
+            if (e.Source is IControl && sender is ListBox listBox)
+            {
+                return ValidateLibrary<IShapeStyle>(listBox, e, sourceContext, targetContext, false);
+            }
+            return false;
         }
 
         /// <inheritdoc/>
         public override bool Execute(object sender, DragEventArgs e, object sourceContext, object targetContext, object state)
         {
-            return Validate(sender, e, sourceContext, targetContext, state, true);
+            if (e.Source is IControl && sender is ListBox listBox)
+            {
+                return ValidateLibrary<IShapeStyle>(listBox, e, sourceContext, targetContext, true);
+            }
+            return false;
         }
     }
 }
