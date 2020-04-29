@@ -8,9 +8,9 @@ using Core2D.Editor;
 namespace Core2D.UI.DragAndDrop.Handlers
 {
     /// <summary>
-    /// Tree view drop handler.
+    /// Project tree view drop handler.
     /// </summary>
-    public class TreeViewDropHandler : DefaultDropHandler
+    public class ProjectTreeViewDropHandler : DefaultDropHandler
     {
         private bool ValidateContainer(TreeView treeView, DragEventArgs e, object sourceContext, object targetContext, bool bExecute)
         {
