@@ -3,9 +3,7 @@ using Avalonia.Controls;
 using Avalonia.Data;
 using Avalonia.Markup.Xaml;
 using Core2D.Data;
-using DocumentFormat.OpenXml.InkML;
 using System.ComponentModel;
-using System.Reactive;
 
 namespace Core2D.UI.Views.Data
 {
