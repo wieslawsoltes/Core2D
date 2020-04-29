@@ -1,7 +1,9 @@
-﻿using Avalonia;
+﻿using System;
+using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Data;
 using Avalonia.Input;
+using Avalonia.Interactivity;
 using Avalonia.Xaml.Interactivity;
 
 namespace Dock.Avalonia
@@ -71,45 +73,80 @@ namespace Dock.Avalonia
         protected override void OnAttached()
         {
             base.OnAttached();
-            AssociatedObject.PointerPressed += DoDrag;
+            AssociatedObject.AddHandler(InputElement.PointerPressedEvent, AssociatedObject_PointerPressed, RoutingStrategies.Direct | RoutingStrategies.Tunnel | RoutingStrategies.Bubble);
+            AssociatedObject.AddHandler(InputElement.PointerMovedEvent, AssociatedObject_PointerMoved, RoutingStrategies.Direct | RoutingStrategies.Tunnel | RoutingStrategies.Bubble);
         }
 
         /// <inheritdoc/>
         protected override void OnDetaching()
         {
             base.OnDetaching();
-            AssociatedObject.PointerPressed -= DoDrag;
+            AssociatedObject.RemoveHandler(InputElement.PointerPressedEvent, AssociatedObject_PointerPressed);
+            AssociatedObject.RemoveHandler(InputElement.PointerMovedEvent, AssociatedObject_PointerMoved);
         }
 
-        private async void DoDrag(object sender, PointerPressedEventArgs e)
+        private Point _dragStartPoint;
+        private PointerEventArgs _triggerEvent;
+        private bool _lock = false;
+
+        private void AssociatedObject_PointerPressed(object sender, PointerPressedEventArgs e)
         {
-            if (e.GetCurrentPoint(AssociatedObject).Properties.IsLeftButtonPressed && GetIsEnabled(AssociatedObject))
+            var properties = e.GetCurrentPoint(AssociatedObject).Properties;
+            if (properties.IsLeftButtonPressed)
             {
-                Handler?.BeforeDragDrop(sender, e, Context);
+                if (e.Source is IControl)
+                {
+                    _dragStartPoint = e.GetPosition(null);
+                    _triggerEvent = e;
+                    _lock = true;
+                }
+            }
+        }
 
-                var data = new DataObject();
-                data.Set(DragDataFormats.Context, Context);
+        private async void AssociatedObject_PointerMoved(object sender, PointerEventArgs e)
+        {
+            var properties = e.GetCurrentPoint(AssociatedObject).Properties;
+            if (properties.IsLeftButtonPressed && _triggerEvent != null)
+            {
+                var point = e.GetPosition(null);
+                var diff = _dragStartPoint - point;
+                if (Math.Abs(diff.X) > 3 || Math.Abs(diff.Y) > 3)
+                {
+                    if (_lock == true)
+                    {
+                        _lock = false;
+                    }
+                    else
+                    {
+                        return;
+                    }
 
-                var effect = DragDropEffects.None;
-                if (e.KeyModifiers.HasFlag(KeyModifiers.Alt))
-                {
-                    effect |= DragDropEffects.Link;
-                }
-                else if (e.KeyModifiers.HasFlag(KeyModifiers.Shift))
-                {
-                    effect |= DragDropEffects.Move;
-                }
-                else if (e.KeyModifiers.HasFlag(KeyModifiers.Control))
-                {
-                    effect |= DragDropEffects.Copy;
-                }
-                else
-                {
-                    effect |= DragDropEffects.Move;
-                }
+                    Handler?.BeforeDragDrop(sender, _triggerEvent, Context);
 
-                var result = await DragDrop.DoDragDrop(e, data, effect);
-                Handler?.AfterDragDrop(sender, e, Context);
+                    var data = new DataObject();
+                    data.Set(DragDataFormats.Context, Context);
+                    var effect = DragDropEffects.None;
+                    if (e.KeyModifiers.HasFlag(KeyModifiers.Alt))
+                    {
+                        effect |= DragDropEffects.Link;
+                    }
+                    else if (e.KeyModifiers.HasFlag(KeyModifiers.Shift))
+                    {
+                        effect |= DragDropEffects.Move;
+                    }
+                    else if (e.KeyModifiers.HasFlag(KeyModifiers.Control))
+                    {
+                        effect |= DragDropEffects.Copy;
+                    }
+                    else
+                    {
+                        effect |= DragDropEffects.Move;
+                    }
+                    await DragDrop.DoDragDrop(_triggerEvent, data, effect);
+                    Handler?.AfterDragDrop(sender, _triggerEvent, Context);
+
+                    _triggerEvent = null;
+                }
             }
         }
     }
