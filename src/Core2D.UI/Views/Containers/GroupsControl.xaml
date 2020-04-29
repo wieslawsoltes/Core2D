@@ -16,7 +16,7 @@
              d:DesignWidth="250" d:DesignHeight="400">
     <UserControl.Resources>
         <converters:IsGroupConverter x:Key="IsGroupConverter"/>
-        <handlers:ListBoxDropHandler x:Key="ListBoxDropHandler"/>
+        <handlers:GroupsListBoxDropHandler x:Key="GroupsListBoxDropHandler"/>
     </UserControl.Resources>
     <Grid RowDefinitions="Auto,Auto,Auto,*,Auto">
         <Grid RowDefinitions="*" ColumnDefinitions="*,Auto" Grid.Row="0">
@@ -40,7 +40,7 @@
         </Menu>
         <ListBox x:Name="groups" Items="{Binding CurrentGroupLibrary.Items}" SelectedItem="{Binding CurrentGroupLibrary.Selected, Mode=TwoWay}" Grid.Row="3" Classes="default">
             <i:Interaction.Behaviors>
-                <idd:ContextDropBehavior Context="{Binding $parent[Window].DataContext, FallbackValue={x:Null}}" Handler="{StaticResource ListBoxDropHandler}"/>
+                <idd:ContextDropBehavior Context="{Binding CurrentGroupLibrary, FallbackValue={x:Null}}" Handler="{StaticResource GroupsListBoxDropHandler}"/>
             </i:Interaction.Behaviors>
             <ListBox.KeyBindings>
                 <KeyBinding Command="{Binding $parent[Window].DataContext.OnAddGroup}" CommandParameter="{Binding #groups.DataContext}" Gesture="Ctrl+N"/>
