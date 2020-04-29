@@ -43,7 +43,7 @@
         <TabItem Header="Columns" Classes="property">
             <Grid RowDefinitions="Auto,*">
                 <Menu Classes="usercontrol" Grid.Row="0" HorizontalAlignment="Right">
-                    <MenuItem Header="&#727;" Classes="usercontrol" Command="{Binding $parent[Window].DataContext.OnRemoveColumn}" CommandParameter="{Binding #columns.SelectedItem}"/>
+                    <MenuItem Header="&#727;" Classes="usercontrol" Command="{Binding $parent[Window].DataContext.OnRemoveColumn}" CommandParameter="{Binding #columnsDataGrid.SelectedItem}"/>
                     <MenuItem Header="+" Classes="usercontrol" Command="{Binding $parent[Window].DataContext.OnAddColumn}" CommandParameter="{Binding}"/>
                 </Menu>
                 <DataGrid x:Name="columnsDataGrid"
