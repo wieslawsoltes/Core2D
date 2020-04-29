@@ -67,7 +67,7 @@ namespace Core2D.UI.Views.Data
             {
                 var point = e.GetPosition(null);
                 var diff = _dragStartPoint - point;
-                if (Math.Abs(diff.X) > 5 || Math.Abs(diff.Y) > 3)
+                if (Math.Abs(diff.X) > 3 || Math.Abs(diff.Y) > 3)
                 {
                     if (_lock == true)
                     {
