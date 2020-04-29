@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
              xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
-             xmlns:id="clr-namespace:Dock.Avalonia;assembly=Core2D.UI"
+             xmlns:idd="clr-namespace:Core2D.UI.DragAndDrop;assembly=Core2D.UI"
              xmlns:converters="clr-namespace:Core2D.UI.Converters;assembly=Core2D.UI"
              xmlns:DataCore="clr-namespace:Core2D.Data;assembly=Core2D"
              xmlns:Designer="clr-namespace:Core2D.UI.Designer;assembly=Core2D.UI"
@@ -22,7 +22,7 @@
                     <DataTemplate DataType="DataCore:IColumn">
                         <Grid VerticalAlignment="Top" Classes="drag">
                             <i:Interaction.Behaviors>
-                                <id:DragBehavior Context="{Binding}"/>
+                                <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}"/>
                             </i:Interaction.Behaviors>
                             <TextBox VerticalAlignment="Center" Text="{Binding Name, Mode=TwoWay}" Classes="property"/>
                         </Grid>
@@ -34,7 +34,7 @@
                     <DataTemplate DataType="DataCore:IValue">
                         <Grid VerticalAlignment="Top" Classes="drag">
                             <i:Interaction.Behaviors>
-                                <id:DragBehavior Context="{Binding}"/>
+                                <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}"/>
                             </i:Interaction.Behaviors>
                             <TextBox VerticalAlignment="Center" Text="{Binding Content, Mode=TwoWay}" Classes="property"/>
                         </Grid>

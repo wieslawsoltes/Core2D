@@ -5,9 +5,9 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
              xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
-             xmlns:id="clr-namespace:Dock.Avalonia;assembly=Core2D.UI"
+             xmlns:idd="clr-namespace:Core2D.UI.DragAndDrop;assembly=Core2D.UI"
              xmlns:idc="clr-namespace:Dock.Avalonia.Controls;assembly=Dock.Avalonia"
-             xmlns:handlers="clr-namespace:Core2D.UI.Dock.Handlers;assembly=Core2D.UI"
+             xmlns:handlers="clr-namespace:Core2D.UI.DragAndDrop.Handlers;assembly=Core2D.UI"
              xmlns:converters="clr-namespace:Core2D.UI.Converters;assembly=Core2D.UI"
              xmlns:Base="clr-namespace:Core2D;assembly=Core2D"
              xmlns:DataCore="clr-namespace:Core2D.Data;assembly=Core2D"
@@ -53,7 +53,7 @@
                         <TreeDataTemplate DataType="ContainersCore:ILibrary" ItemsSource="{Binding Items}">
                             <TextBlock Text="{Binding Name}" Classes="tree drag">
                                 <i:Interaction.Behaviors>
-                                    <id:DragBehavior Context="{Binding}"/>
+                                    <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}"/>
                                 </i:Interaction.Behaviors>
                                 <TextBlock.ContextMenu>
                                     <ContextMenu Classes="default">
@@ -65,7 +65,7 @@
                         <DataTemplate DataType="StyleCore:IShapeStyle">
                             <TextBlock Text="{Binding Name}" Classes="tree drag">
                                 <i:Interaction.Behaviors>
-                                    <id:DragBehavior Context="{Binding}"/>
+                                    <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}"/>
                                 </i:Interaction.Behaviors>
                                 <TextBlock.ContextMenu>
                                     <ContextMenu Classes="default">
@@ -92,7 +92,7 @@
                         <TreeDataTemplate DataType="ContainersCore:ILibrary" ItemsSource="{Binding Items}">
                             <TextBlock Text="{Binding Name}" Classes="tree drag">
                                 <i:Interaction.Behaviors>
-                                    <id:DragBehavior Context="{Binding}"/>
+                                    <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}"/>
                                 </i:Interaction.Behaviors>
                                 <TextBlock.ContextMenu>
                                     <ContextMenu Classes="default">
@@ -104,7 +104,7 @@
                         <TreeDataTemplate DataType="ShapesCore:IGroupShape" ItemsSource="{Binding Resources}">
                             <TextBlock Text="{Binding Name}" Classes="tree drag">
                                 <i:Interaction.Behaviors>
-                                    <id:DragBehavior Context="{Binding}"/>
+                                    <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}"/>
                                 </i:Interaction.Behaviors>
                                 <TextBlock.ContextMenu>
                                     <ContextMenu Classes="default">
@@ -116,7 +116,7 @@
                         <DataTemplate DataType="Base:IObservableObject">
                             <TextBlock Text="{Binding Mode=OneWay, Converter={StaticResource ObjectToTypeStringConverter}}" Classes="tree drag">
                                 <i:Interaction.Behaviors>
-                                    <id:DragBehavior Context="{Binding}"/>
+                                    <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}"/>
                                 </i:Interaction.Behaviors>
                                 <TextBlock.ContextMenu>
                                     <ContextMenu Classes="default">
@@ -143,7 +143,7 @@
                         <DataTemplate DataType="DataCore:IDatabase">
                             <TextBlock Text="{Binding Name}" Classes="tree drag">
                                 <i:Interaction.Behaviors>
-                                    <id:DragBehavior Context="{Binding}"/>
+                                    <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}"/>
                                 </i:Interaction.Behaviors>
                                 <TextBlock.ContextMenu>
                                     <ContextMenu Classes="default">
@@ -170,7 +170,7 @@
                         <TreeDataTemplate DataType="ContainersCore:IPageContainer" ItemsSource="{Binding Layers}">
                             <TextBlock Text="{Binding Name}" Classes="tree drag">
                                 <i:Interaction.Behaviors>
-                                    <id:DragBehavior Context="{Binding}"/>
+                                    <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}"/>
                                 </i:Interaction.Behaviors>
                                 <TextBlock.ContextMenu>
                                     <ContextMenu Classes="default">
@@ -182,7 +182,7 @@
                         <TreeDataTemplate DataType="ContainersCore:ILayerContainer" ItemsSource="{Binding Shapes}">
                             <TextBlock Text="{Binding Name}" Classes="tree drag">
                                 <i:Interaction.Behaviors>
-                                    <id:DragBehavior Context="{Binding}"/>
+                                    <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}"/>
                                 </i:Interaction.Behaviors>
                                 <TextBlock.ContextMenu>
                                     <ContextMenu Classes="default">
@@ -194,7 +194,7 @@
                         <TreeDataTemplate DataType="ShapesCore:IBaseShape" ItemsSource="{Binding Resources}">
                             <TextBlock Text="{Binding Mode=OneWay, Converter={StaticResource ObjectToTypeStringConverter}}" Classes="tree drag">
                                 <i:Interaction.Behaviors>
-                                    <id:DragBehavior Context="{Binding}"/>
+                                    <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}"/>
                                 </i:Interaction.Behaviors>
                                 <TextBlock.ContextMenu>
                                     <ContextMenu Classes="default">
@@ -206,7 +206,7 @@
                         <DataTemplate DataType="Base:IObservableObject">
                             <TextBlock Text="{Binding Mode=OneWay, Converter={StaticResource ObjectToTypeStringConverter}}" Classes="tree drag">
                                 <i:Interaction.Behaviors>
-                                    <id:DragBehavior Context="{Binding}"/>
+                                    <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}"/>
                                 </i:Interaction.Behaviors>
                                 <TextBlock.ContextMenu>
                                     <ContextMenu Classes="default">
@@ -233,7 +233,7 @@
                         <DataTemplate DataType="Base:IObservableObject">
                             <TextBlock Text="{Binding Mode=OneWay, Converter={StaticResource ObjectToTypeStringConverter}}" Classes="tree drag">
                                 <i:Interaction.Behaviors>
-                                    <id:DragBehavior Context="{Binding}"/>
+                                    <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}"/>
                                 </i:Interaction.Behaviors>
                                 <TextBlock.ContextMenu>
                                     <ContextMenu Classes="default">
@@ -260,7 +260,7 @@
                         <TreeDataTemplate DataType="ContainersCore:IDocumentContainer" ItemsSource="{Binding Pages}">
                             <TextBlock Text="{Binding Name}" Classes="tree drag">
                                 <i:Interaction.Behaviors>
-                                    <id:DragBehavior Context="{Binding}"/>
+                                    <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}"/>
                                 </i:Interaction.Behaviors>
                                 <TextBlock.ContextMenu>
                                     <ContextMenu Classes="default">
@@ -272,7 +272,7 @@
                         <TreeDataTemplate DataType="ContainersCore:IPageContainer" ItemsSource="{Binding Layers}">
                             <TextBlock Text="{Binding Name}" Classes="tree drag">
                                 <i:Interaction.Behaviors>
-                                    <id:DragBehavior Context="{Binding}"/>
+                                    <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}"/>
                                 </i:Interaction.Behaviors>
                                 <TextBlock.ContextMenu>
                                     <ContextMenu Classes="default">
@@ -284,7 +284,7 @@
                         <TreeDataTemplate DataType="ContainersCore:ILayerContainer" ItemsSource="{Binding Shapes}">
                             <TextBlock Text="{Binding Name}" Classes="tree drag">
                                 <i:Interaction.Behaviors>
-                                    <id:DragBehavior Context="{Binding}"/>
+                                    <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}"/>
                                 </i:Interaction.Behaviors>
                                 <TextBlock.ContextMenu>
                                     <ContextMenu Classes="default">
@@ -296,7 +296,7 @@
                         <TreeDataTemplate DataType="ShapesCore:IBaseShape" ItemsSource="{Binding Resources}">
                             <TextBlock Text="{Binding Mode=OneWay, Converter={StaticResource ObjectToTypeStringConverter}}" Classes="tree drag">
                                 <i:Interaction.Behaviors>
-                                    <id:DragBehavior Context="{Binding}"/>
+                                    <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}"/>
                                 </i:Interaction.Behaviors>
                                 <TextBlock.ContextMenu>
                                     <ContextMenu Classes="default">
@@ -308,7 +308,7 @@
                         <DataTemplate DataType="Base:IObservableObject">
                             <TextBlock Text="{Binding Mode=OneWay, Converter={StaticResource ObjectToTypeStringConverter}}" Classes="tree drag">
                                 <i:Interaction.Behaviors>
-                                    <id:DragBehavior Context="{Binding}"/>
+                                    <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}"/>
                                 </i:Interaction.Behaviors>
                                 <TextBlock.ContextMenu>
                                     <ContextMenu Classes="default">

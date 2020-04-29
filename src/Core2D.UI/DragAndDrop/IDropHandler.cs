@@ -1,7 +1,7 @@
 ﻿using Avalonia.Input;
 using Avalonia.Interactivity;
 
-namespace Dock.Avalonia
+namespace Core2D.UI.DragAndDrop
 {
     /// <summary>
     /// Drop handler contract.

@@ -6,8 +6,8 @@
              xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
              xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
              xmlns:iac="clr-namespace:Avalonia.Xaml.Interactions.Custom;assembly=Avalonia.Xaml.Interactions.Custom"
-             xmlns:id="clr-namespace:Dock.Avalonia;assembly=Core2D.UI"
-             xmlns:handlers="clr-namespace:Core2D.UI.Dock.Handlers;assembly=Core2D.UI"
+             xmlns:idd="clr-namespace:Core2D.UI.DragAndDrop;assembly=Core2D.UI"
+             xmlns:handlers="clr-namespace:Core2D.UI.DragAndDrop.Handlers;assembly=Core2D.UI"
              xmlns:converters="clr-namespace:Core2D.UI.Converters;assembly=Core2D.UI"
              xmlns:behaviors="clr-namespace:Core2D.UI.Behaviors;assembly=Core2D.UI"
              xmlns:paz="clr-namespace:Avalonia.Controls.PanAndZoom;assembly=Avalonia.Controls.PanAndZoom"
@@ -90,14 +90,14 @@
     <i:Interaction.Behaviors>
         <iac:FocusOnAttachedToVisualTreeBehavior/>
         <!--<iac:FocusOnPointerMovedBehavior/>-->
-        <!--<id:DropBehavior Context="{Binding Layout}" Handler="{StaticResource DockDropHandler}"/>-->
-        <id:DropBehavior Context="{Binding}" Handler="{StaticResource EditorDropHandler}"/>
+        <!--<idd:ContextDropBehavior Context="{Binding Layout, FallbackValue={x:Null}}" Handler="{StaticResource DockDropHandler}"/>-->
+        <idd:ContextDropBehavior Context="{Binding FallbackValue={x:Null}}" Handler="{StaticResource EditorDropHandler}"/>
         <behaviors:AttachEditorBehavior/>
     </i:Interaction.Behaviors>
     <Border Classes="container">
         <i:Interaction.Behaviors>
-            <!--<id:DropBehavior Context="{Binding Layout}" Handler="{StaticResource DockDropHandler}"/>-->
-            <id:DropBehavior Context="{Binding}" Handler="{StaticResource EditorDropHandler}"/>
+            <!--<idd:ContextDropBehavior Context="{Binding Layout, FallbackValue={x:Null}}" Handler="{StaticResource DockDropHandler}"/>-->
+            <idd:ContextDropBehavior Context="{Binding FallbackValue={x:Null}}" Handler="{StaticResource EditorDropHandler}"/>
         </i:Interaction.Behaviors>
         <Border Classes="transparent" ClipToBounds="True">
             <paz:ZoomBorder x:Name="zoomBorder" Stretch="None" ZoomSpeed="1.2" PanButton="Right" EnableInput="{Binding IsToolIdle}" Background="Transparent" ClipToBounds="False" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">

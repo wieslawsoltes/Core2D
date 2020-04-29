@@ -4,17 +4,14 @@ using Avalonia.VisualTree;
 using Core2D.Containers;
 using Core2D.Editor;
 using Core2D.Style;
-using Dock.Avalonia;
 
-namespace Core2D.UI.Dock.Handlers
+namespace Core2D.UI.DragAndDrop.Handlers
 {
     /// <summary>
     /// List box drop handler.
     /// </summary>
     public class ListBoxDropHandler : DefaultDropHandler
     {
-        public static IDropHandler Instance = new ListBoxDropHandler();
-
         private bool Validate(object sender, DragEventArgs e, object sourceContext, object targetContext, object state, bool bExecute)
         {
             if (e.Source is IControl sourceControl

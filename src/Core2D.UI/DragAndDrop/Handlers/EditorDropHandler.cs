@@ -5,9 +5,8 @@ using Core2D.Data;
 using Core2D.Editor;
 using Core2D.Shapes;
 using Core2D.Style;
-using Dock.Avalonia;
 
-namespace Core2D.UI.Dock.Handlers
+namespace Core2D.UI.DragAndDrop.Handlers
 {
     /// <summary>
     /// Project editor drop handler.
@@ -18,7 +17,7 @@ namespace Core2D.UI.Dock.Handlers
 
         private bool Validate(IProjectEditor editor, object sender, DragEventArgs e, bool bExecute)
         {
-            var point = DropHelper.GetPosition(sender, e);
+            var point = GetPosition(sender, e);
 
             if (e.Data.Contains(DataFormats.Text))
             {

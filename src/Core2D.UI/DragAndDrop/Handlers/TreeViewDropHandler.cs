@@ -1,15 +1,12 @@
 ﻿using Avalonia.Input;
-using Dock.Avalonia;
 
-namespace Core2D.UI.Dock.Handlers
+namespace Core2D.UI.DragAndDrop.Handlers
 {
     /// <summary>
     /// Tree view drop handler.
     /// </summary>
     public class TreeViewDropHandler : DefaultDropHandler
     {
-        public static IDropHandler Instance = new TreeViewDropHandler();
-
         // FIXME:
         /*
         private bool ValidateTreeView(IProjectEditor editor, DragEventArgs e, bool bExecute, TreeView tree)
@@ -187,6 +184,7 @@ namespace Core2D.UI.Dock.Handlers
             return false;
         }
         */
+
         /// <inheritdoc/>
         public override bool Validate(object sender, DragEventArgs e, object sourceContext, object targetContext, object state)
         {

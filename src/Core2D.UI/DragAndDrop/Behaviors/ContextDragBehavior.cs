@@ -1,35 +1,33 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Avalonia;
 using Avalonia.Controls;
-using Avalonia.Data;
 using Avalonia.Input;
 using Avalonia.Interactivity;
 using Avalonia.Xaml.Interactivity;
 
-namespace Dock.Avalonia
+namespace Core2D.UI.DragAndDrop
 {
     /// <summary>
     /// Drag behavior.
     /// </summary>
-    public sealed class DragBehavior : Behavior<Control>
+    public sealed class ContextDragBehavior : Behavior<Control>
     {
+        private Point _dragStartPoint;
+        private PointerEventArgs _triggerEvent;
+        private bool _lock = false;
+
         /// <summary>
         /// Define <see cref="Context"/> property.
         /// </summary>
-        public static readonly AvaloniaProperty ContextProperty =
-            AvaloniaProperty.Register<DragBehavior, object>(nameof(Context));
+        public static readonly StyledProperty<object> ContextProperty =
+            AvaloniaProperty.Register<ContextDragBehavior, object>(nameof(Context));
 
         /// <summary>
         /// Define <see cref="Handler"/> property.
         /// </summary>
-        public static readonly AvaloniaProperty HandlerProperty =
-            AvaloniaProperty.Register<DragBehavior, IDragHandler>(nameof(Handler));
-
-        /// <summary>
-        /// Define IsEnabled attached property.
-        /// </summary>
-        public static readonly AvaloniaProperty IsEnabledProperty =
-            AvaloniaProperty.RegisterAttached<Control, bool>("IsEnabled", typeof(DragBehavior), true, true, BindingMode.TwoWay);
+        public static readonly StyledProperty<IDragHandler> HandlerProperty =
+            AvaloniaProperty.Register<ContextDragBehavior, IDragHandler>(nameof(Handler));
 
         /// <summary>
         /// Gets or sets drag behavior context.
@@ -45,28 +43,8 @@ namespace Dock.Avalonia
         /// </summary>
         public IDragHandler Handler
         {
-            get => (IDragHandler)GetValue(HandlerProperty);
+            get => GetValue(HandlerProperty);
             set => SetValue(HandlerProperty, value);
-        }
-
-        /// <summary>
-        /// Gets a value indicating whether the given control has drag operation enabled.
-        /// </summary>
-        /// <param name="control">The control object.</param>
-        /// <returns>True if drag operation is enabled.</returns>
-        public static bool GetIsEnabled(Control control)
-        {
-            return (bool)control.GetValue(IsEnabledProperty);
-        }
-
-        /// <summary>
-        /// Sets IsEnabled attached property.
-        /// </summary>
-        /// <param name="control">The control object.</param>
-        /// <param name="value">The drag operation flag.</param>
-        public static void SetIsEnabled(Control control, bool value)
-        {
-            control.SetValue(IsEnabledProperty, value);
         }
 
         /// <inheritdoc/>
@@ -85,9 +63,32 @@ namespace Dock.Avalonia
             AssociatedObject.RemoveHandler(InputElement.PointerMovedEvent, AssociatedObject_PointerMoved);
         }
 
-        private Point _dragStartPoint;
-        private PointerEventArgs _triggerEvent;
-        private bool _lock = false;
+        private async Task DoDragDrop(PointerEventArgs triggerEvent, object value)
+        {
+            var data = new DataObject();
+            data.Set(ContextDropBehavior.DataFormat, value);
+
+            var effect = DragDropEffects.None;
+
+            if (triggerEvent.KeyModifiers.HasFlag(KeyModifiers.Alt))
+            {
+                effect |= DragDropEffects.Link;
+            }
+            else if (triggerEvent.KeyModifiers.HasFlag(KeyModifiers.Shift))
+            {
+                effect |= DragDropEffects.Move;
+            }
+            else if (triggerEvent.KeyModifiers.HasFlag(KeyModifiers.Control))
+            {
+                effect |= DragDropEffects.Copy;
+            }
+            else
+            {
+                effect |= DragDropEffects.Move;
+            }
+
+            await DragDrop.DoDragDrop(triggerEvent, data, effect);
+        }
 
         private void AssociatedObject_PointerPressed(object sender, PointerPressedEventArgs e)
         {
@@ -123,26 +124,8 @@ namespace Dock.Avalonia
 
                     Handler?.BeforeDragDrop(sender, _triggerEvent, Context);
 
-                    var data = new DataObject();
-                    data.Set(DragDataFormats.Context, Context);
-                    var effect = DragDropEffects.None;
-                    if (e.KeyModifiers.HasFlag(KeyModifiers.Alt))
-                    {
-                        effect |= DragDropEffects.Link;
-                    }
-                    else if (e.KeyModifiers.HasFlag(KeyModifiers.Shift))
-                    {
-                        effect |= DragDropEffects.Move;
-                    }
-                    else if (e.KeyModifiers.HasFlag(KeyModifiers.Control))
-                    {
-                        effect |= DragDropEffects.Copy;
-                    }
-                    else
-                    {
-                        effect |= DragDropEffects.Move;
-                    }
-                    await DragDrop.DoDragDrop(_triggerEvent, data, effect);
+                    await DoDragDrop(_triggerEvent, Context);
+
                     Handler?.AfterDragDrop(sender, _triggerEvent, Context);
 
                     _triggerEvent = null;
