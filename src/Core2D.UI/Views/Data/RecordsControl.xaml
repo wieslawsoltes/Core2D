@@ -99,6 +99,7 @@
                           IsReadOnly="False"
                           BorderThickness="0"
                           RowBackground="Transparent"
+                          Background="Transparent"
                           Grid.Row="1">
                     <DataGrid.KeyBindings>
                         <KeyBinding Command="{Binding $parent[Window].DataContext.OnAddRecord}" CommandParameter="{Binding #rowsDataGrid.DataContext, Mode=OneWay}" Gesture="Ctrl+N"/>
