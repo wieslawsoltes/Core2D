@@ -40,6 +40,7 @@
         <KeyBinding Command="{Binding OnToggleSnapToGrid}" Gesture="G"/>
         <KeyBinding Command="{Binding OnToggleTryToConnect}" Gesture="C"/>
         <!-- Shape -->
+        <KeyBinding Command="{Binding OnDuplicateSelected}" Gesture="Ctrl+D"/>
         <KeyBinding Command="{Binding OnGroupSelected}" Gesture="Ctrl+G"/>
         <KeyBinding Command="{Binding OnUngroupSelected}" Gesture="Ctrl+U"/>
         <KeyBinding Command="{Binding OnRotateSelected}" CommandParameter="90" Gesture="Ctrl+R"/>
