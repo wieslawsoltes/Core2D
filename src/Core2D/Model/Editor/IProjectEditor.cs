@@ -570,6 +570,11 @@ namespace Core2D.Editor
         void OnCreateFillPath();
 
         /// <summary>
+        /// Simplify path.
+        /// </summary>
+        void OnPathSimplify();
+
+        /// <summary>
         /// Path op.
         /// </summary>
         /// <param name="op">The path op.</param>

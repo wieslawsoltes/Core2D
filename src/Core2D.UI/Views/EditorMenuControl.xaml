@@ -279,6 +279,7 @@
             <MenuItem Header="Create Pat_h" Command="{Binding OnCreatePath}"/>
             <MenuItem Header="Create Str_oke Path" Command="{Binding OnCreateStrokePath}"/>
             <MenuItem Header="Create _Fill Path" Command="{Binding OnCreateFillPath}"/>
+            <MenuItem Header="_Simplify Path" Command="{Binding OnPathSimplify}"/>
             <Separator/>
             <MenuItem Header="_Difference" Icon="{StaticResource DifferenceIcon}" ToolTip.Tip="Subtract the op path from the current path." Command="{Binding OnPathOp}" CommandParameter="Difference" InputGesture="Ctrl+Shift+D"/>
             <MenuItem Header="_Intersect" Icon="{StaticResource IntersectIcon}" ToolTip.Tip="Intersect the two paths." Command="{Binding OnPathOp}" CommandParameter="Intersect" InputGesture="Ctrl+Shift+I"/>

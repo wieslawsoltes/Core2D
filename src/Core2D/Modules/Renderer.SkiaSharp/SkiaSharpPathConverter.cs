@@ -137,6 +137,28 @@ namespace Core2D.Renderer.SkiaSharp
         }
 
         /// <inheritdoc/>
+        public IPathShape Simplify(IBaseShape shape)
+        {
+            var factory = _serviceProvider.GetService<IFactory>();
+            var style = shape.Style != null ?
+                (IShapeStyle)shape.Style?.Copy(null) :
+                factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
+            var path = PathGeometryConverter.ToSKPath(shape, 0.0, 0.0, (value) => (float)value)?.Simplify();
+            if (path == null)
+            {
+                return null;
+            }
+            var geometry = PathGeometryConverter.ToPathGeometry(path, 0.0, 0.0, factory);
+            var pathShape = factory.CreatePathShape(
+                "Path",
+                style,
+                geometry,
+                shape.IsStroked,
+                shape.IsFilled);
+            return pathShape;
+        }
+
+        /// <inheritdoc/>
         public IPathShape Op(IEnumerable<IBaseShape> shapes, PathOp op)
         {
             if (shapes == null || shapes.Count() <= 0)
