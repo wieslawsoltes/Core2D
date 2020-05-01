@@ -1741,6 +1741,12 @@ namespace Core2D.Editor
         }
 
         /// <inheritdoc/>
+        public void OnPathBreak()
+        {
+            // TODO:
+        }
+
+        /// <inheritdoc/>
         public void OnPathOp(string op)
         {
             if (!Enum.TryParse<PathOp>(op, true, out var pathOp))
