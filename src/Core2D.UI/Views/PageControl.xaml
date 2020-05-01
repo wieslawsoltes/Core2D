@@ -28,11 +28,7 @@
         <KeyBinding Command="{Binding OnCut}" Gesture="Ctrl+X"/>
         <KeyBinding Command="{Binding OnCopy}" Gesture="Ctrl+C"/>
         <KeyBinding Command="{Binding OnPaste}" Gesture="Ctrl+V"/>
-        <KeyBinding Command="{Binding StyleEditor.OnCopyStyle}" Gesture="Ctrl+Shift+C"/>
-        <KeyBinding Command="{Binding StyleEditor.OnPasteStyle}" Gesture="Ctrl+Shift+V"/>
         <KeyBinding Command="{Binding OnSelectAll}" Gesture="Ctrl+A"/>
-        <KeyBinding Command="{Binding OnGroupSelected}" Gesture="Ctrl+G"/>
-        <KeyBinding Command="{Binding OnUngroupSelected}" Gesture="Ctrl+U"/>
         <!-- View -->
         <KeyBinding Command="{Binding Platform.OnZoomReset}" Gesture="Z"/>
         <KeyBinding Command="{Binding Platform.OnZoomAutoFit}" Gesture="X"/>
@@ -44,6 +40,8 @@
         <KeyBinding Command="{Binding OnToggleSnapToGrid}" Gesture="G"/>
         <KeyBinding Command="{Binding OnToggleTryToConnect}" Gesture="C"/>
         <!-- Shape -->
+        <KeyBinding Command="{Binding OnGroupSelected}" Gesture="Ctrl+G"/>
+        <KeyBinding Command="{Binding OnUngroupSelected}" Gesture="Ctrl+U"/>
         <KeyBinding Command="{Binding OnRotateSelected}" CommandParameter="90" Gesture="Ctrl+R"/>
         <KeyBinding Command="{Binding OnRotateSelected}" CommandParameter="-90" Gesture="Ctrl+L"/>
         <KeyBinding Command="{Binding OnFlipHorizontalSelected}" Gesture="Ctrl+H"/>
@@ -72,6 +70,9 @@
         <KeyBinding Command="{Binding OnPathOp}" CommandParameter="Union" Gesture="Ctrl+Shift+U"/>
         <KeyBinding Command="{Binding OnPathOp}" CommandParameter="Xor" Gesture="Ctrl+Shift+X"/>
         <KeyBinding Command="{Binding OnPathOp}" CommandParameter="ReverseDifference" Gesture="Ctrl+Shift+R"/>
+        <!-- Format -->
+        <KeyBinding Command="{Binding StyleEditor.OnCopyStyle}" Gesture="Ctrl+Shift+C"/>
+        <KeyBinding Command="{Binding StyleEditor.OnPasteStyle}" Gesture="Ctrl+Shift+V"/>
         <!-- Tool -->
         <KeyBinding Command="{Binding OnToolNone}" Gesture="N"/>
         <KeyBinding Command="{Binding OnToolSelection}" Gesture="S"/>
