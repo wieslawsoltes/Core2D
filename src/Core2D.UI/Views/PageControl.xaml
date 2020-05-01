@@ -66,6 +66,7 @@
         <KeyBinding Command="{Binding OnBringForwardSelected}" Gesture="Ctrl+OemCloseBrackets"/>
         <KeyBinding Command="{Binding OnSendBackwardSelected}" Gesture="Ctrl+OemOpenBrackets"/>
         <KeyBinding Command="{Binding OnSendToBackSelected}" Gesture="Ctrl+Shift+OemOpenBrackets"/>
+        <KeyBinding Command="{Binding OnPathBreak}" Gesture="Ctrl+B"/>
         <KeyBinding Command="{Binding OnPathOp}" CommandParameter="Difference" Gesture="Ctrl+Shift+D"/>
         <KeyBinding Command="{Binding OnPathOp}" CommandParameter="Intersect" Gesture="Ctrl+Shift+I"/>
         <KeyBinding Command="{Binding OnPathOp}" CommandParameter="Union" Gesture="Ctrl+Shift+U"/>
