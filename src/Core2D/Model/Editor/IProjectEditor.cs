@@ -439,6 +439,11 @@ namespace Core2D.Editor
         void OnCancel();
 
         /// <summary>
+        /// Duplicate shapes.
+        /// </summary>
+        void OnDuplicateSelected();
+
+        /// <summary>
         /// Group selected shapes.
         /// </summary>
         void OnGroupSelected();
