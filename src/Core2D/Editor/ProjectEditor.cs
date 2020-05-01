@@ -1158,6 +1158,36 @@ namespace Core2D.Editor
         }
 
         /// <inheritdoc/>
+        public void OnDuplicateSelected()
+        {
+            try
+            {
+                if (PageState?.SelectedShapes == null)
+                {
+                    return;
+                }
+
+                var json = JsonSerializer?.Serialize(PageState.SelectedShapes.ToList());
+                if (string.IsNullOrEmpty(json))
+                {
+                    return;
+                }
+
+                var shapes = JsonSerializer?.Deserialize<IList<IBaseShape>>(json);
+                if (shapes?.Count() <= 0)
+                {
+                    return;
+                }
+
+                OnPasteShapes(shapes);
+            }
+            catch (Exception ex)
+            {
+                Log?.LogException(ex);
+            }
+        }
+
+        /// <inheritdoc/>
         public void OnGroupSelected()
         {
             var group = Group(PageState?.SelectedShapes, ProjectEditorConfiguration.DefaulGroupName);
