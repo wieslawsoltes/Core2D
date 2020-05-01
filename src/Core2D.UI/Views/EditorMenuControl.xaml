@@ -235,6 +235,8 @@
             <MenuItem Header="_Delete Layer" Command="{Binding OnRemoveLayer}" CommandParameter="{Binding Project.CurrentContainer.CurrentLayer}"/>
         </MenuItem>
         <MenuItem Header="_Shape">
+            <MenuItem Header="Du_plicate" Command="{Binding OnDuplicateSelected}" InputGesture="Ctrl+D"/>
+            <Separator/>
             <MenuItem Header="_Group">
                 <MenuItem Header="_Group" Command="{Binding OnGroupSelected}" InputGesture="Ctrl+G"/>
                 <MenuItem Header="U_ngroup" Command="{Binding OnUngroupSelected}" InputGesture="Ctrl+U"/>
