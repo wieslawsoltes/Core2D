@@ -580,6 +580,11 @@ namespace Core2D.Editor
         void OnPathSimplify();
 
         /// <summary>
+        /// Break path.
+        /// </summary>
+        void OnPathBreak();
+
+        /// <summary>
         /// Path op.
         /// </summary>
         /// <param name="op">The path op.</param>
