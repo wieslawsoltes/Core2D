@@ -3833,21 +3833,6 @@ namespace Core2D.Editor
             }
         }
 
-        private void Ungroup(ILayerContainer layer, IGroupShape group)
-        {
-            if (layer != null && group != null)
-            {
-                var source = layer.Shapes.ToBuilder();
-
-                group.Ungroup(source);
-
-                var previous = layer.Shapes;
-                var next = source.ToImmutable();
-                Project?.History?.Snapshot(previous, next, (p) => layer.Shapes = p);
-                layer.Shapes = next;
-            }
-        }
-
         /// <inheritdoc/>
         public IGroupShape Group(ISet<IBaseShape> shapes, string name)
         {
