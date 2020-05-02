@@ -12,6 +12,8 @@ using Core2D.Editor.Recent;
 using Core2D.Editor.Tools.Decorators;
 using Core2D.Input;
 using Core2D.Layout;
+using Core2D.Path;
+using Core2D.Path.Segments;
 using Core2D.Renderer;
 using Core2D.Scripting;
 using Core2D.Shapes;
