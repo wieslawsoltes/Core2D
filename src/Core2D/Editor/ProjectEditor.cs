@@ -1745,7 +1745,210 @@ namespace Core2D.Editor
         /// <inheritdoc/>
         public void OnPathBreak()
         {
-            // TODO:
+            if (PathConverter == null)
+            {
+                return;
+            }
+
+            var layer = Project?.CurrentContainer?.CurrentLayer;
+            if (layer == null)
+            {
+                return;
+            }
+
+            var sources = PageState?.SelectedShapes;
+ 
+            if (sources != null && sources.Count >= 1)
+            {
+                var result = new List<IBaseShape>();
+                var shapes = new List<IBaseShape>();
+
+                foreach (var s in sources)
+                {
+                    switch (s)
+                    {
+                        case IPathShape pathShape:
+                            {
+                                var factory = _serviceProvider.GetService<IFactory>();
+
+                                if (pathShape.Geometry.Figures.Length == 1)
+                                {
+                                    var pathFigure = pathShape.Geometry.Figures[0];
+
+                                    var firstPoint = pathFigure.StartPoint;
+                                    var lastPoint = pathFigure.StartPoint;
+
+                                    foreach (var segment in pathFigure.Segments)
+                                    {
+                                        switch (segment)
+                                        {
+                                            case ILineSegment lineSegment:
+                                                {
+                                                    var style = pathShape.Style != null ?
+                                                        (IShapeStyle)pathShape.Style?.Copy(null) :
+                                                        factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
+
+                                                    var convertedPathShape = factory.CreateLineShape(
+                                                        lastPoint,
+                                                        lineSegment.Point,
+                                                        style,
+                                                        pathShape.IsStroked);
+
+                                                    lastPoint = lineSegment.Point;
+
+                                                    result.Add(convertedPathShape);
+                                                }
+                                                break;
+                                            case IQuadraticBezierSegment quadraticBezierSegment:
+                                                {
+                                                    var style = pathShape.Style != null ?
+                                                        (IShapeStyle)pathShape.Style?.Copy(null) :
+                                                        factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
+
+                                                    var convertedPathShape = factory.CreateQuadraticBezierShape(
+                                                        lastPoint,
+                                                        quadraticBezierSegment.Point1,
+                                                        quadraticBezierSegment.Point2,
+                                                        style,
+                                                        pathShape.IsStroked,
+                                                        pathShape.IsFilled);
+
+                                                    lastPoint = quadraticBezierSegment.Point2;
+
+                                                    result.Add(convertedPathShape);
+                                                }
+                                                break;
+                                            case ICubicBezierSegment cubicBezierSegment:
+                                                {
+                                                    var style = pathShape.Style != null ?
+                                                        (IShapeStyle)pathShape.Style?.Copy(null) :
+                                                        factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
+
+                                                    var convertedPathShape = factory.CreateCubicBezierShape(
+                                                        lastPoint,
+                                                        cubicBezierSegment.Point1,
+                                                        cubicBezierSegment.Point2,
+                                                        cubicBezierSegment.Point3,
+                                                        style,
+                                                        pathShape.IsStroked,
+                                                        pathShape.IsFilled);
+
+                                                    lastPoint = cubicBezierSegment.Point3;
+
+                                                    result.Add(convertedPathShape);
+                                                }
+                                                break;
+                                            case IArcSegment arcSegment:
+                                                {
+                                                    var style = pathShape.Style != null ?
+                                                        (IShapeStyle)pathShape.Style?.Copy(null) :
+                                                        factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
+
+                                                    var point2 = factory.CreatePointShape(0, 0); // TODO:
+
+                                                    var point3 = factory.CreatePointShape(0, 0); // TODO:
+
+                                                    var convertedPathShape = factory.CreateArcShape(
+                                                        lastPoint,
+                                                        point2,
+                                                        point3,
+                                                        arcSegment.Point,
+                                                        style,
+                                                        pathShape.IsStroked,
+                                                        pathShape.IsFilled);
+
+                                                    lastPoint = arcSegment.Point;
+
+                                                    result.Add(convertedPathShape);
+                                                }
+                                                break;
+                                        }
+                                    }
+
+                                    if (pathFigure.Segments.Length > 1 && pathFigure.IsClosed)
+                                    {
+                                        var style = pathShape.Style != null ?
+                                            (IShapeStyle)pathShape.Style?.Copy(null) :
+                                            factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
+
+                                        var convertedPathShape = factory.CreateLineShape(
+                                            lastPoint,
+                                            firstPoint,
+                                            style,
+                                            pathShape.IsStroked);
+
+                                        result.Add(convertedPathShape);
+                                    }
+
+                                    shapes.Add(pathShape);
+                                }
+                                else if (pathShape.Geometry.Figures.Length > 1)
+                                {
+                                    foreach (var pathFigure in pathShape.Geometry.Figures)
+                                    {
+                                        var style = pathShape.Style != null ?
+                                            (IShapeStyle)pathShape.Style?.Copy(null) :
+                                            factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
+
+                                        var geometry = factory.CreatePathGeometry(ImmutableArray.Create<IPathFigure>(), pathShape.Geometry.FillRule);
+                                        geometry.Figures = geometry.Figures.Add(pathFigure);
+
+                                        var convertedPathShape = factory.CreatePathShape(
+                                            "Path",
+                                            style,
+                                            geometry,
+                                            pathShape.IsStroked,
+                                            pathShape.IsFilled);
+
+                                        result.Add(convertedPathShape);
+                                    }
+
+                                    shapes.Add(pathShape);
+                                }
+                            }
+                            break;
+                        case IGroupShape groupShape:
+                            {
+                                GroupShapeExtensions.Ungroup(groupShape.Shapes, result);
+                                GroupShapeExtensions.Ungroup(groupShape.Connectors, result);
+                                shapes.Add(groupShape);
+                            }
+                            break;
+                        default:
+                            {
+                                var path = PathConverter.ToPathShape(s);
+                                if (path != null)
+                                {
+                                    result.Add(path);
+                                    shapes.Add(s);
+                                }
+                            }
+                            break;
+                    }
+                }
+
+                if (result.Count > 0)
+                {
+                    var shapesBuilder = layer.Shapes.ToBuilder();
+
+                    for (int i = 0; i < shapes.Count; i++)
+                    {
+                        shapesBuilder.Remove(shapes[i]);
+                    }
+
+                    for (int i = 0; i < result.Count; i++)
+                    {
+                        shapesBuilder.Add(result[i]);
+                    }
+
+                    var previous = layer.Shapes;
+                    var next = shapesBuilder.ToImmutable();
+                    Project?.History?.Snapshot(previous, next, (p) => layer.Shapes = p);
+                    layer.Shapes = next;
+
+                    Select(layer, new HashSet<IBaseShape>(result));
+                }
+            }
         }
 
         /// <inheritdoc/>
