@@ -437,7 +437,7 @@ namespace Core2D.Renderer.SkiaSharp
         {
             var path = new SKPath
             {
-                FillType = pathGeometry.FillRule == FillRule.EvenOdd ? SKPathFillType.EvenOdd : SKPathFillType.Winding
+                FillType = fillType
             };
 
             foreach (var pathFigure in pathGeometry.Figures)
