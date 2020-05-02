@@ -789,8 +789,7 @@ namespace Core2D
                 State = CreateShapeState(ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone),
                 Data = CreateContext(),
                 Style = style,
-                IsStroked = false,
-                IsFilled = isStroked,
+                IsStroked = isStroked,
                 Text = text
             };
 
@@ -818,8 +817,7 @@ namespace Core2D
                 State = CreateShapeState(ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone),
                 Data = CreateContext(),
                 Style = style,
-                IsStroked = false,
-                IsFilled = isStroked,
+                IsStroked = isStroked,
                 TopLeft = topLeft,
                 BottomRight = bottomRight,
                 Text = text
