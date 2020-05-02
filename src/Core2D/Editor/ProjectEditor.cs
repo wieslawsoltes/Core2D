@@ -3849,13 +3849,10 @@ namespace Core2D.Editor
         public bool Ungroup(ISet<IBaseShape> shapes)
         {
             var layer = Project?.CurrentContainer?.CurrentLayer;
-            if (layer != null)
+            if (layer != null && shapes != null)
             {
-                if (shapes != null)
-                {
-                    Ungroup(layer, shapes);
-                    return true;
-                }
+                Ungroup(layer, shapes);
+                return true;
             }
 
             return false;
