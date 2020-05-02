@@ -21,28 +21,7 @@ namespace Core2D.Renderer.SkiaSharp
 
             foreach (var segment in pathFigure.Segments)
             {
-                if (segment is IArcSegment arcSegment)
-                {
-                    path.ArcTo(
-                        scale(arcSegment.Size.Width),
-                        scale(arcSegment.Size.Height),
-                        (float)arcSegment.RotationAngle,
-                        arcSegment.IsLargeArc ? SKPathArcSize.Large : SKPathArcSize.Small,
-                        arcSegment.SweepDirection == SweepDirection.Clockwise ? SKPathDirection.Clockwise : SKPathDirection.CounterClockwise,
-                        scale(arcSegment.Point.X + dx),
-                        scale(arcSegment.Point.Y + dy));
-                }
-                else if (segment is ICubicBezierSegment cubicBezierSegment)
-                {
-                    path.CubicTo(
-                        scale(cubicBezierSegment.Point1.X + dx),
-                        scale(cubicBezierSegment.Point1.Y + dy),
-                        scale(cubicBezierSegment.Point2.X + dx),
-                        scale(cubicBezierSegment.Point2.Y + dy),
-                        scale(cubicBezierSegment.Point3.X + dx),
-                        scale(cubicBezierSegment.Point3.Y + dy));
-                }
-                else if (segment is ILineSegment lineSegment)
+                if (segment is ILineSegment lineSegment)
                 {
                     path.LineTo(
                         scale(lineSegment.Point.X + dx),
@@ -55,6 +34,27 @@ namespace Core2D.Renderer.SkiaSharp
                         scale(quadraticBezierSegment.Point1.Y + dy),
                         scale(quadraticBezierSegment.Point2.X + dx),
                         scale(quadraticBezierSegment.Point2.Y + dy));
+                }
+                else if (segment is ICubicBezierSegment cubicBezierSegment)
+                {
+                    path.CubicTo(
+                        scale(cubicBezierSegment.Point1.X + dx),
+                        scale(cubicBezierSegment.Point1.Y + dy),
+                        scale(cubicBezierSegment.Point2.X + dx),
+                        scale(cubicBezierSegment.Point2.Y + dy),
+                        scale(cubicBezierSegment.Point3.X + dx),
+                        scale(cubicBezierSegment.Point3.Y + dy));
+                }
+                else if(segment is IArcSegment arcSegment)
+                {
+                    path.ArcTo(
+                        scale(arcSegment.Size.Width),
+                        scale(arcSegment.Size.Height),
+                        (float)arcSegment.RotationAngle,
+                        arcSegment.IsLargeArc ? SKPathArcSize.Large : SKPathArcSize.Small,
+                        arcSegment.SweepDirection == SweepDirection.Clockwise ? SKPathDirection.Clockwise : SKPathDirection.CounterClockwise,
+                        scale(arcSegment.Point.X + dx),
+                        scale(arcSegment.Point.Y + dy));
                 }
                 else
                 {
