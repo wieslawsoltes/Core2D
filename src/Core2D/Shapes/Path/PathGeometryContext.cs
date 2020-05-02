@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Immutable;
 using Core2D;
 using Core2D.Shapes;
 
