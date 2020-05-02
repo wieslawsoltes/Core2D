@@ -442,57 +442,7 @@ namespace Core2D.Renderer.SkiaSharp
 
             foreach (var pathFigure in pathGeometry.Figures)
             {
-                path.MoveTo(
-                    scale(pathFigure.StartPoint.X + dx),
-                    scale(pathFigure.StartPoint.Y + dy));
-
-                foreach (var segment in pathFigure.Segments)
-                {
-                    if (segment is IArcSegment arcSegment)
-                    {
-                        path.ArcTo(
-                            scale(arcSegment.Size.Width),
-                            scale(arcSegment.Size.Height),
-                            (float)arcSegment.RotationAngle,
-                            arcSegment.IsLargeArc ? SKPathArcSize.Large : SKPathArcSize.Small,
-                            arcSegment.SweepDirection == SweepDirection.Clockwise ? SKPathDirection.Clockwise : SKPathDirection.CounterClockwise,
-                            scale(arcSegment.Point.X + dx),
-                            scale(arcSegment.Point.Y + dy));
-                    }
-                    else if (segment is ICubicBezierSegment cubicBezierSegment)
-                    {
-                        path.CubicTo(
-                            scale(cubicBezierSegment.Point1.X + dx),
-                            scale(cubicBezierSegment.Point1.Y + dy),
-                            scale(cubicBezierSegment.Point2.X + dx),
-                            scale(cubicBezierSegment.Point2.Y + dy),
-                            scale(cubicBezierSegment.Point3.X + dx),
-                            scale(cubicBezierSegment.Point3.Y + dy));
-                    }
-                    else if (segment is ILineSegment lineSegment)
-                    {
-                        path.LineTo(
-                            scale(lineSegment.Point.X + dx),
-                            scale(lineSegment.Point.Y + dy));
-                    }
-                    else if (segment is IQuadraticBezierSegment quadraticBezierSegment)
-                    {
-                        path.QuadTo(
-                            scale(quadraticBezierSegment.Point1.X + dx),
-                            scale(quadraticBezierSegment.Point1.Y + dy),
-                            scale(quadraticBezierSegment.Point2.X + dx),
-                            scale(quadraticBezierSegment.Point2.Y + dy));
-                    }
-                    else
-                    {
-                        throw new NotSupportedException("Not supported segment type: " + segment.GetType());
-                    }
-                }
-
-                if (pathFigure.IsClosed)
-                {
-                    path.Close();
-                }
+                CreateFigure(pathFigure, dx, dy, scale, path);
             }
 
             return path;
