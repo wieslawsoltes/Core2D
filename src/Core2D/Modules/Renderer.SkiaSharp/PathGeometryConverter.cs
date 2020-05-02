@@ -435,6 +435,7 @@ namespace Core2D.Renderer.SkiaSharp
 
         public static SKPath ToSKPath(this IPathGeometry pathGeometry, double dx, double dy, Func<double, float> scale)
         {
+            var fillType = pathGeometry.FillRule == FillRule.EvenOdd ? SKPathFillType.EvenOdd : SKPathFillType.Winding;
             var path = new SKPath
             {
                 FillType = fillType
