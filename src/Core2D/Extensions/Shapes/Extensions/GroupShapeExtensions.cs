@@ -59,7 +59,7 @@ namespace Core2D.Shapes
         /// </summary>
         /// <param name="shapes">The shapes collection.</param>
         /// <param name="source">The source shapes collection.</param>
-        private static void Ungroup(IEnumerable<IBaseShape> shapes, IList<IBaseShape> source)
+        public static void Ungroup(IEnumerable<IBaseShape> shapes, IList<IBaseShape> source)
         {
             if (shapes != null && source != null)
             {
@@ -67,7 +67,6 @@ namespace Core2D.Shapes
                 {
                     if (shape is IPointShape point)
                     {
-                        // Remove connector related state flags.
                         point.State.Flags &=
                             ~(ShapeStateFlags.Connector
                             | ShapeStateFlags.None
@@ -75,11 +74,12 @@ namespace Core2D.Shapes
                             | ShapeStateFlags.Output);
                     }
 
-                    // Add shape standalone flag.
                     shape.State.Flags |= ShapeStateFlags.Standalone;
 
-                    // Add shape to source collection.
-                    source.Add(shape);
+                    if (source != null)
+                    {
+                        source.Add(shape);
+                    }
                 }
             }
         }
@@ -94,8 +94,10 @@ namespace Core2D.Shapes
             Ungroup(group.Shapes, source);
             Ungroup(group.Connectors, source);
 
-            // Remove group from source collection.
-            source.Remove(group);
+            if (source != null)
+            {
+                source.Remove(group);
+            }
         }
     }
 }
