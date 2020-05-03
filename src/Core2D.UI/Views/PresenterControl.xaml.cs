@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics;
 using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Controls.PanAndZoom;
 using Avalonia.Markup.Xaml;
 using Avalonia.Media;
 using Avalonia.Media.Imaging;
@@ -8,6 +9,7 @@ using Avalonia.Platform;
 using Avalonia.Rendering.SceneGraph;
 using Avalonia.Skia;
 using Avalonia.Threading;
+using Avalonia.VisualTree;
 using Core2D.Containers;
 using Core2D.Data;
 using Core2D.Renderer;
@@ -55,6 +57,12 @@ namespace Core2D.UI.Views
         private static readonly IContainerPresenter s_editorPresenter = new EditorPresenter();
         private static readonly IContainerPresenter s_templatePresenter = new TemplatePresenter();
         private static readonly IContainerPresenter s_exportPresenter = new ExportPresenter();
+        
+        /// <summary>
+        /// Gets or sets zoom border property.
+        /// </summary>
+        public static readonly StyledProperty<ZoomBorder> ZoomBorderProperty =
+            AvaloniaProperty.Register<PresenterControl, ZoomBorder>(nameof(ZoomBorder), null);
 
         /// <summary>
         /// Gets or sets container property.
@@ -79,6 +87,15 @@ namespace Core2D.UI.Views
         /// </summary>
         public static readonly StyledProperty<PresenterType> PresenterTypeProperty =
             AvaloniaProperty.Register<PresenterControl, PresenterType>(nameof(PresenterType), PresenterType.None);
+
+        /// <summary>
+        /// Gets or sets zoom border property.
+        /// </summary>
+        public ZoomBorder ZoomBorder
+        {
+            get => GetValue(ZoomBorderProperty);
+            set => SetValue(ZoomBorderProperty, value);
+        }
 
         /// <summary>
         /// Gets or sets container property.
@@ -233,7 +250,7 @@ namespace Core2D.UI.Views
 
             _customDrawOperation.PresenterControl = this;
             _customDrawOperation.CustomState = customState;
-            _customDrawOperation.Bounds = this.Bounds;
+            _customDrawOperation.Bounds = ZoomBorder != null ? ZoomBorder.Bounds : this.Bounds;
 
             context.Custom(_customDrawOperation);
 #else
