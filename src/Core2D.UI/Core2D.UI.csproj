@@ -54,7 +54,11 @@
     <PackageReference Include="Avalonia.Controls.PanAndZoom" Version="2.3.999-build*" />
     <PackageReference Include="reactiveui" Version="11.3.8" />
   </ItemGroup>
-
+  
+  <PropertyGroup>
+    <!--<DefineConstants>$(DefineConstants);USE_SKIA</DefineConstants>-->
+  </PropertyGroup>
+  
   <ItemGroup>
     <ProjectReference Include="..\Core2D\Core2D.csproj" />
   </ItemGroup>
