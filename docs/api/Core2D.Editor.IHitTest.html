@@ -117,18 +117,18 @@
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Editor_IHitTest_Contains_Core2D_Shapes_IBaseShape_Point2_System_Double_.md&amp;value=---%0Auid%3A%20Core2D.Editor.IHitTest.Contains(Core2D.Shapes.IBaseShape%2CPoint2%2CSystem.Double)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Editor_IHitTest_Contains_Core2D_Shapes_IBaseShape_Point2_System_Double_System_Double_.md&amp;value=---%0Auid%3A%20Core2D.Editor.IHitTest.Contains(Core2D.Shapes.IBaseShape%2CPoint2%2CSystem.Double%2CSystem.Double)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Model/Editor/IHitTest.cs/#L15">View Source</a>
   </span>
   <a id="Core2D_Editor_IHitTest_Contains_" data-uid="Core2D.Editor.IHitTest.Contains*"></a>
-  <h4 id="Core2D_Editor_IHitTest_Contains_Core2D_Shapes_IBaseShape_Point2_System_Double_" data-uid="Core2D.Editor.IHitTest.Contains(Core2D.Shapes.IBaseShape,Point2,System.Double)">Contains(IBaseShape, Point2, Double)</h4>
+  <h4 id="Core2D_Editor_IHitTest_Contains_Core2D_Shapes_IBaseShape_Point2_System_Double_System_Double_" data-uid="Core2D.Editor.IHitTest.Contains(Core2D.Shapes.IBaseShape,Point2,System.Double,System.Double)">Contains(IBaseShape, Point2, Double, Double)</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">bool Contains(IBaseShape shape, Point2 target, double radius)</code></pre>
+    <pre><code class="lang-csharp hljs">bool Contains(IBaseShape shape, Point2 target, double radius, double scale)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -155,6 +155,11 @@
         <td><span class="parametername">radius</span></td>
         <td></td>
       </tr>
+      <tr>
+        <td><span class="xref">System.Double</span></td>
+        <td><span class="parametername">scale</span></td>
+        <td></td>
+      </tr>
     </tbody>
   </table>
   <h5 class="returns">Returns</h5>
@@ -174,18 +179,18 @@
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Editor_IHitTest_Overlaps_Core2D_Shapes_IBaseShape_Rect2_System_Double_.md&amp;value=---%0Auid%3A%20Core2D.Editor.IHitTest.Overlaps(Core2D.Shapes.IBaseShape%2CRect2%2CSystem.Double)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Editor_IHitTest_Overlaps_Core2D_Shapes_IBaseShape_Rect2_System_Double_System_Double_.md&amp;value=---%0Auid%3A%20Core2D.Editor.IHitTest.Overlaps(Core2D.Shapes.IBaseShape%2CRect2%2CSystem.Double%2CSystem.Double)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Model/Editor/IHitTest.cs/#L16">View Source</a>
   </span>
   <a id="Core2D_Editor_IHitTest_Overlaps_" data-uid="Core2D.Editor.IHitTest.Overlaps*"></a>
-  <h4 id="Core2D_Editor_IHitTest_Overlaps_Core2D_Shapes_IBaseShape_Rect2_System_Double_" data-uid="Core2D.Editor.IHitTest.Overlaps(Core2D.Shapes.IBaseShape,Rect2,System.Double)">Overlaps(IBaseShape, Rect2, Double)</h4>
+  <h4 id="Core2D_Editor_IHitTest_Overlaps_Core2D_Shapes_IBaseShape_Rect2_System_Double_System_Double_" data-uid="Core2D.Editor.IHitTest.Overlaps(Core2D.Shapes.IBaseShape,Rect2,System.Double,System.Double)">Overlaps(IBaseShape, Rect2, Double, Double)</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">bool Overlaps(IBaseShape shape, Rect2 target, double radius)</code></pre>
+    <pre><code class="lang-csharp hljs">bool Overlaps(IBaseShape shape, Rect2 target, double radius, double scale)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -210,6 +215,11 @@
       <tr>
         <td><span class="xref">System.Double</span></td>
         <td><span class="parametername">radius</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Double</span></td>
+        <td><span class="parametername">scale</span></td>
         <td></td>
       </tr>
     </tbody>
@@ -295,18 +305,18 @@
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Editor_IHitTest_TryToGetPoint_Core2D_Shapes_IBaseShape_Point2_System_Double_.md&amp;value=---%0Auid%3A%20Core2D.Editor.IHitTest.TryToGetPoint(Core2D.Shapes.IBaseShape%2CPoint2%2CSystem.Double)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Editor_IHitTest_TryToGetPoint_Core2D_Shapes_IBaseShape_Point2_System_Double_System_Double_.md&amp;value=---%0Auid%3A%20Core2D.Editor.IHitTest.TryToGetPoint(Core2D.Shapes.IBaseShape%2CPoint2%2CSystem.Double%2CSystem.Double)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Model/Editor/IHitTest.cs/#L13">View Source</a>
   </span>
   <a id="Core2D_Editor_IHitTest_TryToGetPoint_" data-uid="Core2D.Editor.IHitTest.TryToGetPoint*"></a>
-  <h4 id="Core2D_Editor_IHitTest_TryToGetPoint_Core2D_Shapes_IBaseShape_Point2_System_Double_" data-uid="Core2D.Editor.IHitTest.TryToGetPoint(Core2D.Shapes.IBaseShape,Point2,System.Double)">TryToGetPoint(IBaseShape, Point2, Double)</h4>
+  <h4 id="Core2D_Editor_IHitTest_TryToGetPoint_Core2D_Shapes_IBaseShape_Point2_System_Double_System_Double_" data-uid="Core2D.Editor.IHitTest.TryToGetPoint(Core2D.Shapes.IBaseShape,Point2,System.Double,System.Double)">TryToGetPoint(IBaseShape, Point2, Double, Double)</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">IPointShape TryToGetPoint(IBaseShape shape, Point2 target, double radius)</code></pre>
+    <pre><code class="lang-csharp hljs">IPointShape TryToGetPoint(IBaseShape shape, Point2 target, double radius, double scale)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -333,6 +343,11 @@
         <td><span class="parametername">radius</span></td>
         <td></td>
       </tr>
+      <tr>
+        <td><span class="xref">System.Double</span></td>
+        <td><span class="parametername">scale</span></td>
+        <td></td>
+      </tr>
     </tbody>
   </table>
   <h5 class="returns">Returns</h5>
@@ -352,18 +367,18 @@
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Editor_IHitTest_TryToGetPoint_System_Collections_Generic_IEnumerable_Core2D_Shapes_IBaseShape__Point2_System_Double_.md&amp;value=---%0Auid%3A%20Core2D.Editor.IHitTest.TryToGetPoint(System.Collections.Generic.IEnumerable%7BCore2D.Shapes.IBaseShape%7D%2CPoint2%2CSystem.Double)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Editor_IHitTest_TryToGetPoint_System_Collections_Generic_IEnumerable_Core2D_Shapes_IBaseShape__Point2_System_Double_System_Double_.md&amp;value=---%0Auid%3A%20Core2D.Editor.IHitTest.TryToGetPoint(System.Collections.Generic.IEnumerable%7BCore2D.Shapes.IBaseShape%7D%2CPoint2%2CSystem.Double%2CSystem.Double)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Model/Editor/IHitTest.cs/#L14">View Source</a>
   </span>
   <a id="Core2D_Editor_IHitTest_TryToGetPoint_" data-uid="Core2D.Editor.IHitTest.TryToGetPoint*"></a>
-  <h4 id="Core2D_Editor_IHitTest_TryToGetPoint_System_Collections_Generic_IEnumerable_Core2D_Shapes_IBaseShape__Point2_System_Double_" data-uid="Core2D.Editor.IHitTest.TryToGetPoint(System.Collections.Generic.IEnumerable{Core2D.Shapes.IBaseShape},Point2,System.Double)">TryToGetPoint(IEnumerable&lt;IBaseShape&gt;, Point2, Double)</h4>
+  <h4 id="Core2D_Editor_IHitTest_TryToGetPoint_System_Collections_Generic_IEnumerable_Core2D_Shapes_IBaseShape__Point2_System_Double_System_Double_" data-uid="Core2D.Editor.IHitTest.TryToGetPoint(System.Collections.Generic.IEnumerable{Core2D.Shapes.IBaseShape},Point2,System.Double,System.Double)">TryToGetPoint(IEnumerable&lt;IBaseShape&gt;, Point2, Double, Double)</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">IPointShape TryToGetPoint(IEnumerable&lt;IBaseShape&gt; shapes, Point2 target, double radius)</code></pre>
+    <pre><code class="lang-csharp hljs">IPointShape TryToGetPoint(IEnumerable&lt;IBaseShape&gt; shapes, Point2 target, double radius, double scale)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -388,6 +403,11 @@
       <tr>
         <td><span class="xref">System.Double</span></td>
         <td><span class="parametername">radius</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Double</span></td>
+        <td><span class="parametername">scale</span></td>
         <td></td>
       </tr>
     </tbody>
@@ -409,18 +429,18 @@
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Editor_IHitTest_TryToGetShape_System_Collections_Generic_IEnumerable_Core2D_Shapes_IBaseShape__Point2_System_Double_.md&amp;value=---%0Auid%3A%20Core2D.Editor.IHitTest.TryToGetShape(System.Collections.Generic.IEnumerable%7BCore2D.Shapes.IBaseShape%7D%2CPoint2%2CSystem.Double)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Editor_IHitTest_TryToGetShape_System_Collections_Generic_IEnumerable_Core2D_Shapes_IBaseShape__Point2_System_Double_System_Double_.md&amp;value=---%0Auid%3A%20Core2D.Editor.IHitTest.TryToGetShape(System.Collections.Generic.IEnumerable%7BCore2D.Shapes.IBaseShape%7D%2CPoint2%2CSystem.Double%2CSystem.Double)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Model/Editor/IHitTest.cs/#L17">View Source</a>
   </span>
   <a id="Core2D_Editor_IHitTest_TryToGetShape_" data-uid="Core2D.Editor.IHitTest.TryToGetShape*"></a>
-  <h4 id="Core2D_Editor_IHitTest_TryToGetShape_System_Collections_Generic_IEnumerable_Core2D_Shapes_IBaseShape__Point2_System_Double_" data-uid="Core2D.Editor.IHitTest.TryToGetShape(System.Collections.Generic.IEnumerable{Core2D.Shapes.IBaseShape},Point2,System.Double)">TryToGetShape(IEnumerable&lt;IBaseShape&gt;, Point2, Double)</h4>
+  <h4 id="Core2D_Editor_IHitTest_TryToGetShape_System_Collections_Generic_IEnumerable_Core2D_Shapes_IBaseShape__Point2_System_Double_System_Double_" data-uid="Core2D.Editor.IHitTest.TryToGetShape(System.Collections.Generic.IEnumerable{Core2D.Shapes.IBaseShape},Point2,System.Double,System.Double)">TryToGetShape(IEnumerable&lt;IBaseShape&gt;, Point2, Double, Double)</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">IBaseShape TryToGetShape(IEnumerable&lt;IBaseShape&gt; shapes, Point2 target, double radius)</code></pre>
+    <pre><code class="lang-csharp hljs">IBaseShape TryToGetShape(IEnumerable&lt;IBaseShape&gt; shapes, Point2 target, double radius, double scale)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -445,6 +465,11 @@
       <tr>
         <td><span class="xref">System.Double</span></td>
         <td><span class="parametername">radius</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Double</span></td>
+        <td><span class="parametername">scale</span></td>
         <td></td>
       </tr>
     </tbody>
@@ -466,18 +491,18 @@
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Editor_IHitTest_TryToGetShapes_System_Collections_Generic_IEnumerable_Core2D_Shapes_IBaseShape__Rect2_System_Double_.md&amp;value=---%0Auid%3A%20Core2D.Editor.IHitTest.TryToGetShapes(System.Collections.Generic.IEnumerable%7BCore2D.Shapes.IBaseShape%7D%2CRect2%2CSystem.Double)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Editor_IHitTest_TryToGetShapes_System_Collections_Generic_IEnumerable_Core2D_Shapes_IBaseShape__Rect2_System_Double_System_Double_.md&amp;value=---%0Auid%3A%20Core2D.Editor.IHitTest.TryToGetShapes(System.Collections.Generic.IEnumerable%7BCore2D.Shapes.IBaseShape%7D%2CRect2%2CSystem.Double%2CSystem.Double)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Model/Editor/IHitTest.cs/#L18">View Source</a>
   </span>
   <a id="Core2D_Editor_IHitTest_TryToGetShapes_" data-uid="Core2D.Editor.IHitTest.TryToGetShapes*"></a>
-  <h4 id="Core2D_Editor_IHitTest_TryToGetShapes_System_Collections_Generic_IEnumerable_Core2D_Shapes_IBaseShape__Rect2_System_Double_" data-uid="Core2D.Editor.IHitTest.TryToGetShapes(System.Collections.Generic.IEnumerable{Core2D.Shapes.IBaseShape},Rect2,System.Double)">TryToGetShapes(IEnumerable&lt;IBaseShape&gt;, Rect2, Double)</h4>
+  <h4 id="Core2D_Editor_IHitTest_TryToGetShapes_System_Collections_Generic_IEnumerable_Core2D_Shapes_IBaseShape__Rect2_System_Double_System_Double_" data-uid="Core2D.Editor.IHitTest.TryToGetShapes(System.Collections.Generic.IEnumerable{Core2D.Shapes.IBaseShape},Rect2,System.Double,System.Double)">TryToGetShapes(IEnumerable&lt;IBaseShape&gt;, Rect2, Double, Double)</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">ISet&lt;IBaseShape&gt; TryToGetShapes(IEnumerable&lt;IBaseShape&gt; shapes, Rect2 target, double radius)</code></pre>
+    <pre><code class="lang-csharp hljs">ISet&lt;IBaseShape&gt; TryToGetShapes(IEnumerable&lt;IBaseShape&gt; shapes, Rect2 target, double radius, double scale)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -502,6 +527,11 @@
       <tr>
         <td><span class="xref">System.Double</span></td>
         <td><span class="parametername">radius</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Double</span></td>
+        <td><span class="parametername">scale</span></td>
         <td></td>
       </tr>
     </tbody>

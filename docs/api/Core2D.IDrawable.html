@@ -177,54 +177,23 @@
       </tr>
     </tbody>
   </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_IDrawable_Transform.md&amp;value=---%0Auid%3A%20Core2D.IDrawable.Transform%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Model/IDrawable.cs/#L29">View Source</a>
-  </span>
-  <a id="Core2D_IDrawable_Transform_" data-uid="Core2D.IDrawable.Transform*"></a>
-  <h4 id="Core2D_IDrawable_Transform" data-uid="Core2D.IDrawable.Transform">Transform</h4>
-  <div class="markdown level1 summary"><p>Get or sets shape matrix transform.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">IMatrixObject Transform { get; set; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="Core2D.Renderer.IMatrixObject.html">IMatrixObject</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
   <h3 id="methods">Methods
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_IDrawable_BeginTransform_System_Object_Core2D_Renderer_IShapeRenderer_.md&amp;value=---%0Auid%3A%20Core2D.IDrawable.BeginTransform(System.Object%2CCore2D.Renderer.IShapeRenderer)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_IDrawable_DrawPoints_System_Object_Core2D_Renderer_IShapeRenderer_System_Double_System_Double_.md&amp;value=---%0Auid%3A%20Core2D.IDrawable.DrawPoints(System.Object%2CCore2D.Renderer.IShapeRenderer%2CSystem.Double%2CSystem.Double)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Model/IDrawable.cs/#L37">View Source</a>
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Model/IDrawable.cs/#L42">View Source</a>
   </span>
-  <a id="Core2D_IDrawable_BeginTransform_" data-uid="Core2D.IDrawable.BeginTransform*"></a>
-  <h4 id="Core2D_IDrawable_BeginTransform_System_Object_Core2D_Renderer_IShapeRenderer_" data-uid="Core2D.IDrawable.BeginTransform(System.Object,Core2D.Renderer.IShapeRenderer)">BeginTransform(Object, IShapeRenderer)</h4>
-  <div class="markdown level1 summary"><p>Begins matrix transform.</p>
+  <a id="Core2D_IDrawable_DrawPoints_" data-uid="Core2D.IDrawable.DrawPoints*"></a>
+  <h4 id="Core2D_IDrawable_DrawPoints_System_Object_Core2D_Renderer_IShapeRenderer_System_Double_System_Double_" data-uid="Core2D.IDrawable.DrawPoints(System.Object,Core2D.Renderer.IShapeRenderer,System.Double,System.Double)">DrawPoints(Object, IShapeRenderer, Double, Double)</h4>
+  <div class="markdown level1 summary"><p>Draws points using current <a class="xref" href="Core2D.Renderer.IShapeRenderer.html">IShapeRenderer</a>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">object BeginTransform(object dc, IShapeRenderer renderer)</code></pre>
+    <pre><code class="lang-csharp hljs">void DrawPoints(object dc, IShapeRenderer renderer, double dx, double dy)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -245,42 +214,38 @@
       <tr>
         <td><a class="xref" href="Core2D.Renderer.IShapeRenderer.html">IShapeRenderer</a></td>
         <td><span class="parametername">renderer</span></td>
-        <td><p>The generic renderer object used to draw shape.</p>
+        <td><p>The generic renderer object used to draw points.</p>
 </td>
       </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
       <tr>
-        <th>Type</th>
-        <th>Description</th>
+        <td><span class="xref">System.Double</span></td>
+        <td><span class="parametername">dx</span></td>
+        <td><p>The X axis draw position offset.</p>
+</td>
       </tr>
-    </thead>
-    <tbody>
       <tr>
-        <td><span class="xref">System.Object</span></td>
-        <td><p>The previous transform state.</p>
+        <td><span class="xref">System.Double</span></td>
+        <td><span class="parametername">dy</span></td>
+        <td><p>The Y axis draw position offset.</p>
 </td>
       </tr>
     </tbody>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_IDrawable_Draw_System_Object_Core2D_Renderer_IShapeRenderer_System_Double_System_Double_.md&amp;value=---%0Auid%3A%20Core2D.IDrawable.Draw(System.Object%2CCore2D.Renderer.IShapeRenderer%2CSystem.Double%2CSystem.Double)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_IDrawable_DrawShape_System_Object_Core2D_Renderer_IShapeRenderer_System_Double_System_Double_.md&amp;value=---%0Auid%3A%20Core2D.IDrawable.DrawShape(System.Object%2CCore2D.Renderer.IShapeRenderer%2CSystem.Double%2CSystem.Double)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Model/IDrawable.cs/#L54">View Source</a>
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Model/IDrawable.cs/#L33">View Source</a>
   </span>
-  <a id="Core2D_IDrawable_Draw_" data-uid="Core2D.IDrawable.Draw*"></a>
-  <h4 id="Core2D_IDrawable_Draw_System_Object_Core2D_Renderer_IShapeRenderer_System_Double_System_Double_" data-uid="Core2D.IDrawable.Draw(System.Object,Core2D.Renderer.IShapeRenderer,System.Double,System.Double)">Draw(Object, IShapeRenderer, Double, Double)</h4>
+  <a id="Core2D_IDrawable_DrawShape_" data-uid="Core2D.IDrawable.DrawShape*"></a>
+  <h4 id="Core2D_IDrawable_DrawShape_System_Object_Core2D_Renderer_IShapeRenderer_System_Double_System_Double_" data-uid="Core2D.IDrawable.DrawShape(System.Object,Core2D.Renderer.IShapeRenderer,System.Double,System.Double)">DrawShape(Object, IShapeRenderer, Double, Double)</h4>
   <div class="markdown level1 summary"><p>Draws shape using current <a class="xref" href="Core2D.Renderer.IShapeRenderer.html">IShapeRenderer</a>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">void Draw(object dc, IShapeRenderer renderer, double dx, double dy)</code></pre>
+    <pre><code class="lang-csharp hljs">void DrawShape(object dc, IShapeRenderer renderer, double dx, double dy)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -320,56 +285,10 @@
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_IDrawable_EndTransform_System_Object_Core2D_Renderer_IShapeRenderer_System_Object_.md&amp;value=---%0Auid%3A%20Core2D.IDrawable.EndTransform(System.Object%2CCore2D.Renderer.IShapeRenderer%2CSystem.Object)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Model/IDrawable.cs/#L45">View Source</a>
-  </span>
-  <a id="Core2D_IDrawable_EndTransform_" data-uid="Core2D.IDrawable.EndTransform*"></a>
-  <h4 id="Core2D_IDrawable_EndTransform_System_Object_Core2D_Renderer_IShapeRenderer_System_Object_" data-uid="Core2D.IDrawable.EndTransform(System.Object,Core2D.Renderer.IShapeRenderer,System.Object)">EndTransform(Object, IShapeRenderer, Object)</h4>
-  <div class="markdown level1 summary"><p>Ends matrix transform.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">void EndTransform(object dc, IShapeRenderer renderer, object state)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.Object</span></td>
-        <td><span class="parametername">dc</span></td>
-        <td><p>The generic drawing context object.</p>
-</td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="Core2D.Renderer.IShapeRenderer.html">IShapeRenderer</a></td>
-        <td><span class="parametername">renderer</span></td>
-        <td><p>The generic renderer object used to draw shape.</p>
-</td>
-      </tr>
-      <tr>
-        <td><span class="xref">System.Object</span></td>
-        <td><span class="parametername">state</span></td>
-        <td><p>The previous transform state.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
     <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_IDrawable_Invalidate_Core2D_Renderer_IShapeRenderer_System_Double_System_Double_.md&amp;value=---%0Auid%3A%20Core2D.IDrawable.Invalidate(Core2D.Renderer.IShapeRenderer%2CSystem.Double%2CSystem.Double)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Model/IDrawable.cs/#L63">View Source</a>
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Model/IDrawable.cs/#L51">View Source</a>
   </span>
   <a id="Core2D_IDrawable_Invalidate_" data-uid="Core2D.IDrawable.Invalidate*"></a>
   <h4 id="Core2D_IDrawable_Invalidate_Core2D_Renderer_IShapeRenderer_System_Double_System_Double_" data-uid="Core2D.IDrawable.Invalidate(Core2D.Renderer.IShapeRenderer,System.Double,System.Double)">Invalidate(IShapeRenderer, Double, Double)</h4>

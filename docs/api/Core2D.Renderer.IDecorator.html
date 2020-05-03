@@ -68,10 +68,10 @@
         </div>
         <div class="article row grid-right">
           <div class="col-md-10">
-            <article class="content wrap" id="_content" data-uid="Core2D.Editor.IDecorator">
+            <article class="content wrap" id="_content" data-uid="Core2D.Renderer.IDecorator">
   
   
-  <h1 id="Core2D_Editor_IDecorator" data-uid="Core2D.Editor.IDecorator" class="text-break">Interface IDecorator
+  <h1 id="Core2D_Renderer_IDecorator" data-uid="Core2D.Renderer.IDecorator" class="text-break">Interface IDecorator
   </h1>
   <div class="markdown level0 summary"><p>Defines decorator contract.</p>
 </div>
@@ -112,24 +112,18 @@
       <a class="xref" href="Core2D.IDrawable.html#Core2D_IDrawable_IsFilled">IDrawable.IsFilled</a>
     </div>
     <div>
-      <a class="xref" href="Core2D.IDrawable.html#Core2D_IDrawable_Transform">IDrawable.Transform</a>
+      <a class="xref" href="Core2D.IDrawable.html#Core2D_IDrawable_DrawShape_System_Object_Core2D_Renderer_IShapeRenderer_System_Double_System_Double_">IDrawable.DrawShape(Object, IShapeRenderer, Double, Double)</a>
     </div>
     <div>
-      <a class="xref" href="Core2D.IDrawable.html#Core2D_IDrawable_BeginTransform_System_Object_Core2D_Renderer_IShapeRenderer_">IDrawable.BeginTransform(Object, IShapeRenderer)</a>
-    </div>
-    <div>
-      <a class="xref" href="Core2D.IDrawable.html#Core2D_IDrawable_EndTransform_System_Object_Core2D_Renderer_IShapeRenderer_System_Object_">IDrawable.EndTransform(Object, IShapeRenderer, Object)</a>
-    </div>
-    <div>
-      <a class="xref" href="Core2D.IDrawable.html#Core2D_IDrawable_Draw_System_Object_Core2D_Renderer_IShapeRenderer_System_Double_System_Double_">IDrawable.Draw(Object, IShapeRenderer, Double, Double)</a>
+      <a class="xref" href="Core2D.IDrawable.html#Core2D_IDrawable_DrawPoints_System_Object_Core2D_Renderer_IShapeRenderer_System_Double_System_Double_">IDrawable.DrawPoints(Object, IShapeRenderer, Double, Double)</a>
     </div>
     <div>
       <a class="xref" href="Core2D.IDrawable.html#Core2D_IDrawable_Invalidate_Core2D_Renderer_IShapeRenderer_System_Double_System_Double_">IDrawable.Invalidate(IShapeRenderer, Double, Double)</a>
     </div>
   </div>
-  <h6><strong>Namespace</strong>: <a class="xref" href="Core2D.Editor.html">Core2D.Editor</a></h6>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Core2D.Renderer.html">Core2D.Renderer</a></h6>
   <h6><strong>Assembly</strong>: Core2D.dll</h6>
-  <h5 id="Core2D_Editor_IDecorator_syntax">Syntax</h5>
+  <h5 id="Core2D_Renderer_IDecorator_syntax">Syntax</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public interface IDecorator : IObservableObject, INotifyPropertyChanged, ICopyable, IDrawable</code></pre>
   </div>
@@ -137,13 +131,75 @@
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Editor_IDecorator_Shapes.md&amp;value=---%0Auid%3A%20Core2D.Editor.IDecorator.Shapes%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Renderer_IDecorator_IsVisible.md&amp;value=---%0Auid%3A%20Core2D.Renderer.IDecorator.IsVisible%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Model/Editor/IDecorator.cs/#L15">View Source</a>
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Model/Renderer/IDecorator.cs/#L26">View Source</a>
   </span>
-  <a id="Core2D_Editor_IDecorator_Shapes_" data-uid="Core2D.Editor.IDecorator.Shapes*"></a>
-  <h4 id="Core2D_Editor_IDecorator_Shapes" data-uid="Core2D.Editor.IDecorator.Shapes">Shapes</h4>
+  <a id="Core2D_Renderer_IDecorator_IsVisible_" data-uid="Core2D.Renderer.IDecorator.IsVisible*"></a>
+  <h4 id="Core2D_Renderer_IDecorator_IsVisible" data-uid="Core2D.Renderer.IDecorator.IsVisible">IsVisible</h4>
+  <div class="markdown level1 summary"><p>Gets or sets flag indicating whether the decorator is visible.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">bool IsVisible { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Renderer_IDecorator_Layer.md&amp;value=---%0Auid%3A%20Core2D.Renderer.IDecorator.Layer%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Model/Renderer/IDecorator.cs/#L16">View Source</a>
+  </span>
+  <a id="Core2D_Renderer_IDecorator_Layer_" data-uid="Core2D.Renderer.IDecorator.Layer*"></a>
+  <h4 id="Core2D_Renderer_IDecorator_Layer" data-uid="Core2D.Renderer.IDecorator.Layer">Layer</h4>
+  <div class="markdown level1 summary"><p>Gets or sets decorated layer.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">ILayerContainer Layer { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Core2D.Containers.ILayerContainer.html">ILayerContainer</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Renderer_IDecorator_Shapes.md&amp;value=---%0Auid%3A%20Core2D.Renderer.IDecorator.Shapes%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Model/Renderer/IDecorator.cs/#L21">View Source</a>
+  </span>
+  <a id="Core2D_Renderer_IDecorator_Shapes_" data-uid="Core2D.Renderer.IDecorator.Shapes*"></a>
+  <h4 id="Core2D_Renderer_IDecorator_Shapes" data-uid="Core2D.Renderer.IDecorator.Shapes">Shapes</h4>
   <div class="markdown level1 summary"><p>Gets or sets decorated shapes.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -170,13 +226,13 @@
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Editor_IDecorator_Hide.md&amp;value=---%0Auid%3A%20Core2D.Editor.IDecorator.Hide%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Renderer_IDecorator_Hide.md&amp;value=---%0Auid%3A%20Core2D.Renderer.IDecorator.Hide%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Model/Editor/IDecorator.cs/#L31">View Source</a>
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Model/Renderer/IDecorator.cs/#L42">View Source</a>
   </span>
-  <a id="Core2D_Editor_IDecorator_Hide_" data-uid="Core2D.Editor.IDecorator.Hide*"></a>
-  <h4 id="Core2D_Editor_IDecorator_Hide" data-uid="Core2D.Editor.IDecorator.Hide">Hide()</h4>
+  <a id="Core2D_Renderer_IDecorator_Hide_" data-uid="Core2D.Renderer.IDecorator.Hide*"></a>
+  <h4 id="Core2D_Renderer_IDecorator_Hide" data-uid="Core2D.Renderer.IDecorator.Hide">Hide()</h4>
   <div class="markdown level1 summary"><p>Hide decorator.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -186,13 +242,13 @@
   </div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Editor_IDecorator_HitTest_Core2D_Input_InputArgs_.md&amp;value=---%0Auid%3A%20Core2D.Editor.IDecorator.HitTest(Core2D.Input.InputArgs)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Renderer_IDecorator_HitTest_Core2D_Input_InputArgs_.md&amp;value=---%0Auid%3A%20Core2D.Renderer.IDecorator.HitTest(Core2D.Input.InputArgs)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Model/Editor/IDecorator.cs/#L38">View Source</a>
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Model/Renderer/IDecorator.cs/#L49">View Source</a>
   </span>
-  <a id="Core2D_Editor_IDecorator_HitTest_" data-uid="Core2D.Editor.IDecorator.HitTest*"></a>
-  <h4 id="Core2D_Editor_IDecorator_HitTest_Core2D_Input_InputArgs_" data-uid="Core2D.Editor.IDecorator.HitTest(Core2D.Input.InputArgs)">HitTest(InputArgs)</h4>
+  <a id="Core2D_Renderer_IDecorator_HitTest_" data-uid="Core2D.Renderer.IDecorator.HitTest*"></a>
+  <h4 id="Core2D_Renderer_IDecorator_HitTest_Core2D_Input_InputArgs_" data-uid="Core2D.Renderer.IDecorator.HitTest(Core2D.Input.InputArgs)">HitTest(InputArgs)</h4>
   <div class="markdown level1 summary"><p>Hit test decorator.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -236,13 +292,13 @@
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Editor_IDecorator_Move_Core2D_Input_InputArgs_.md&amp;value=---%0Auid%3A%20Core2D.Editor.IDecorator.Move(Core2D.Input.InputArgs)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Renderer_IDecorator_Move_Core2D_Input_InputArgs_.md&amp;value=---%0Auid%3A%20Core2D.Renderer.IDecorator.Move(Core2D.Input.InputArgs)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Model/Editor/IDecorator.cs/#L44">View Source</a>
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Model/Renderer/IDecorator.cs/#L55">View Source</a>
   </span>
-  <a id="Core2D_Editor_IDecorator_Move_" data-uid="Core2D.Editor.IDecorator.Move*"></a>
-  <h4 id="Core2D_Editor_IDecorator_Move_Core2D_Input_InputArgs_" data-uid="Core2D.Editor.IDecorator.Move(Core2D.Input.InputArgs)">Move(InputArgs)</h4>
+  <a id="Core2D_Renderer_IDecorator_Move_" data-uid="Core2D.Renderer.IDecorator.Move*"></a>
+  <h4 id="Core2D_Renderer_IDecorator_Move_Core2D_Input_InputArgs_" data-uid="Core2D.Renderer.IDecorator.Move(Core2D.Input.InputArgs)">Move(InputArgs)</h4>
   <div class="markdown level1 summary"><p>Move decorator.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -270,13 +326,13 @@
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Editor_IDecorator_Show.md&amp;value=---%0Auid%3A%20Core2D.Editor.IDecorator.Show%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Renderer_IDecorator_Show.md&amp;value=---%0Auid%3A%20Core2D.Renderer.IDecorator.Show%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Model/Editor/IDecorator.cs/#L26">View Source</a>
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Model/Renderer/IDecorator.cs/#L37">View Source</a>
   </span>
-  <a id="Core2D_Editor_IDecorator_Show_" data-uid="Core2D.Editor.IDecorator.Show*"></a>
-  <h4 id="Core2D_Editor_IDecorator_Show" data-uid="Core2D.Editor.IDecorator.Show">Show()</h4>
+  <a id="Core2D_Renderer_IDecorator_Show_" data-uid="Core2D.Renderer.IDecorator.Show*"></a>
+  <h4 id="Core2D_Renderer_IDecorator_Show" data-uid="Core2D.Renderer.IDecorator.Show">Show()</h4>
   <div class="markdown level1 summary"><p>Show decorator.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -286,19 +342,19 @@
   </div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Editor_IDecorator_Update_System_Boolean_.md&amp;value=---%0Auid%3A%20Core2D.Editor.IDecorator.Update(System.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Renderer_IDecorator_Update_System_Boolean_.md&amp;value=---%0Auid%3A%20Core2D.Renderer.IDecorator.Update(System.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Model/Editor/IDecorator.cs/#L21">View Source</a>
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Model/Renderer/IDecorator.cs/#L32">View Source</a>
   </span>
-  <a id="Core2D_Editor_IDecorator_Update_" data-uid="Core2D.Editor.IDecorator.Update*"></a>
-  <h4 id="Core2D_Editor_IDecorator_Update_System_Boolean_" data-uid="Core2D.Editor.IDecorator.Update(System.Boolean)">Update(Boolean)</h4>
+  <a id="Core2D_Renderer_IDecorator_Update_" data-uid="Core2D.Renderer.IDecorator.Update*"></a>
+  <h4 id="Core2D_Renderer_IDecorator_Update_System_Boolean_" data-uid="Core2D.Renderer.IDecorator.Update(System.Boolean)">Update(Boolean)</h4>
   <div class="markdown level1 summary"><p>Update decorator.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">void Update(bool rebuild)</code></pre>
+    <pre><code class="lang-csharp hljs">void Update(bool rebuild = true)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -326,10 +382,10 @@
               <div class="contribution">
                 <ul class="nav">
                   <li>
-                    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Editor_IDecorator.md&amp;value=---%0Auid%3A%20Core2D.Editor.IDecorator%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Renderer_IDecorator.md&amp;value=---%0Auid%3A%20Core2D.Renderer.IDecorator%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Model/Editor/IDecorator.cs/#L10" class="contribution-link">View Source</a>
+                    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Model/Renderer/IDecorator.cs/#L11" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>
