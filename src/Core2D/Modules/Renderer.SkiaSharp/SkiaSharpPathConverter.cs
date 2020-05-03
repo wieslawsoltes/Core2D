@@ -30,12 +30,16 @@ namespace Core2D.Renderer.SkiaSharp
         /// <inheritdoc/>
         public IPathShape ToPathShape(IEnumerable<IBaseShape> shapes)
         {
+            var path = PathGeometryConverter.ToSKPath(shapes, 0.0, 0.0, (value) => (float)value);
+            if (path == null)
+            {
+                return null;
+            }
             var factory = _serviceProvider.GetService<IFactory>();
             var first = shapes.FirstOrDefault();
             var style = first.Style != null ?
                 (IShapeStyle)first.Style?.Copy(null) :
                 factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
-            var path = PathGeometryConverter.ToSKPath(shapes, 0.0, 0.0, (value) => (float)value);
             var geometry = PathGeometryConverter.ToPathGeometry(path, 0.0, 0.0, factory);
             var pathShape = factory.CreatePathShape(
                 "Path",
