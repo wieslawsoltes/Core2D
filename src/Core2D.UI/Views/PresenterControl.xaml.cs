@@ -1,7 +1,13 @@
-﻿using Avalonia;
+﻿using System.Diagnostics;
+using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 using Avalonia.Media;
+using Avalonia.Media.Imaging;
+using Avalonia.Platform;
+using Avalonia.Rendering.SceneGraph;
+using Avalonia.Skia;
+using Avalonia.Threading;
 using Core2D.Containers;
 using Core2D.Data;
 using Core2D.Renderer;
@@ -126,6 +132,51 @@ namespace Core2D.UI.Views
             AvaloniaXamlLoader.Load(this);
         }
 
+        internal struct CustomState
+        {
+            public IPageContainer Container;
+            public IShapeRenderer Renderer;
+            public IDataFlow DataFlow;
+            public PresenterType PresenterType;
+        }
+
+        internal class CustomDrawOperation : ICustomDrawOperation
+        {
+            public PresenterControl PresenterControl { get; set; }
+
+            public CustomState CustomState { get; set; }
+
+            public Rect Bounds { get; set; }
+
+            public void Dispose()
+            {
+            }
+
+            public bool HitTest(Point p) => false;
+
+            public bool Equals(ICustomDrawOperation other) => this.Equals(other);
+
+            public void Render(IDrawingContextImpl context)
+            {
+                var canvas = (context as ISkiaDrawingContextImpl)?.SkCanvas;
+                if (canvas == null)
+                {
+                    return;
+                }
+
+                canvas.Save();
+
+                PresenterControl.Draw(CustomState, canvas);
+
+                canvas.Restore();
+            }
+        }
+
+        //private RenderTargetBitmap _renderTarget;
+#if USE_SKIA
+        private CustomDrawOperation _customDrawOperation;
+#endif
+
         /// <summary>
         /// Renders presenter control contents.
         /// </summary>
@@ -134,52 +185,110 @@ namespace Core2D.UI.Views
         {
             base.Render(context);
 
-            var container = Container;
-            var renderer = Renderer ?? GetValue(RendererOptions.RendererProperty);
-            var dataFlow = DataFlow ?? GetValue(RendererOptions.DataFlowProperty);
-            var presenterType = PresenterType;
+            var customState = new CustomState()
+            {
+                Container = Container,
+                Renderer = Renderer ?? GetValue(RendererOptions.RendererProperty),
+                DataFlow = DataFlow ?? GetValue(RendererOptions.DataFlowProperty),
+                PresenterType = PresenterType,
+            };
 
-            switch (presenterType)
+            //double width = Bounds.Width;
+            //double height = Bounds.Height;
+
+            //if (width > 0 && height > 0)
+            //{
+            //    if (_renderTarget == null)
+            //    {
+            //        _renderTarget = new RenderTargetBitmap(new PixelSize((int)width, (int)height), new Vector(96, 96));
+            //    }
+            //    else if (_renderTarget.PixelSize.Width != (int)width || _renderTarget.PixelSize.Height != (int)height)
+            //    {
+            //        _renderTarget.Dispose();
+            //        _renderTarget = new RenderTargetBitmap(new PixelSize((int)width, (int)height), new Vector(96, 96));
+            //    }
+
+            //    using var drawingContextImpl = _renderTarget.CreateDrawingContext(null);
+            //    var skiaDrawingContextImpl = drawingContextImpl as ISkiaDrawingContextImpl;
+
+            //    var canvas = skiaDrawingContextImpl.SkCanvas;
+
+            //    canvas.Clear();
+            //    canvas.Save();
+
+            //    Draw(customState, canvas);
+
+            //    canvas.Restore();
+
+            //    context.DrawImage(_renderTarget,
+            //        new Rect(0, 0, _renderTarget.PixelSize.Width, _renderTarget.PixelSize.Height),
+            //        new Rect(0, 0, width, height));
+            //}
+
+#if USE_SKIA
+            if (_customDrawOperation == null)
+            {
+                _customDrawOperation = new CustomDrawOperation();
+            }
+
+            _customDrawOperation.PresenterControl = this;
+            _customDrawOperation.CustomState = customState;
+            _customDrawOperation.Bounds = this.Bounds;
+
+            context.Custom(_customDrawOperation);
+#else
+            Draw(customState, context);
+#endif
+        }
+
+        /// <summary>
+        /// Draws presenter control contents.
+        /// </summary>
+        /// <param name="customState">The custom state.</param>
+        /// <param name="context">The drawing context.</param>
+        internal void Draw(CustomState customState, object context)
+        {
+            switch (customState.PresenterType)
             {
                 case PresenterType.None:
                     break;
                 case PresenterType.Data:
                     {
-                        if (container != null && dataFlow != null)
+                        if (customState.Container != null && customState.DataFlow != null)
                         {
-                            var db = (object)container.Data.Properties;
-                            var record = (object)container.Data.Record;
+                            var db = (object)customState.Container.Data.Properties;
+                            var record = (object)customState.Container.Data.Record;
 
-                            if (container.Template != null)
+                            if (customState.Container.Template != null)
                             {
-                                dataFlow.Bind(container.Template, db, record);
+                                customState.DataFlow.Bind(customState.Container.Template, db, record);
                             }
 
-                            dataFlow.Bind(container, db, record);
+                            customState.DataFlow.Bind(customState.Container, db, record);
                         }
                     }
                     break;
                 case PresenterType.Template:
                     {
-                        if (container != null && renderer != null)
+                        if (customState.Container != null && customState.Renderer != null)
                         {
-                            s_templatePresenter.Render(context, renderer, Container, 0.0, 0.0);
+                            s_templatePresenter.Render(context, customState.Renderer, customState.Container, 0.0, 0.0);
                         }
                     }
                     break;
                 case PresenterType.Editor:
                     {
-                        if (container != null && renderer != null)
+                        if (customState.Container != null && customState.Renderer != null)
                         {
-                            s_editorPresenter.Render(context, renderer, Container, 0.0, 0.0);
+                            s_editorPresenter.Render(context, customState.Renderer, customState.Container, 0.0, 0.0);
                         }
                     }
                     break;
                 case PresenterType.Export:
                     {
-                        if (container != null && renderer != null)
+                        if (customState.Container != null && customState.Renderer != null)
                         {
-                            s_exportPresenter.Render(context, renderer, Container, 0.0, 0.0);
+                            s_exportPresenter.Render(context, customState.Renderer, customState.Container, 0.0, 0.0);
                         }
                     }
                     break;
