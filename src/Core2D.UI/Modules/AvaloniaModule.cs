@@ -65,7 +65,11 @@ namespace Core2D.UI.Modules
 
             // Dependencies
 
+#if USE_SKIA
+            builder.RegisterType<SkiaSharpRenderer>().As<IShapeRenderer>().InstancePerDependency();
+#else
             builder.RegisterType<AvaloniaRenderer>().As<IShapeRenderer>().InstancePerDependency();
+#endif
             builder.RegisterType<AvaloniaTextClipboard>().As<ITextClipboard>().InstancePerLifetimeScope();
             builder.RegisterType<TraceLog>().As<ILog>().SingleInstance();
             builder.RegisterType<DotNetFileSystem>().As<IFileSystem>().InstancePerLifetimeScope();
