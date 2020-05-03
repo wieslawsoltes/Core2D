@@ -105,9 +105,9 @@
         <Border Classes="transparent" ClipToBounds="True">
             <paz:ZoomBorder x:Name="zoomBorder" Stretch="None" ZoomSpeed="1.2" PanButton="Right" EnableInput="{Binding IsToolIdle}" Background="Transparent" ClipToBounds="False" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
                 <Grid x:Name="gridTransformed" ClipToBounds="False">
-                    <views:PresenterControl x:Name="presenterControlData" Renderer="{Binding PageRenderer}" DataFlow="{Binding DataFlow}" Container="{Binding Project.CurrentContainer}" PresenterType="Data" ClipToBounds="False"/>
-                    <views:PresenterControl x:Name="presenterControlTemplate" Renderer="{Binding PageRenderer}" DataFlow="{Binding DataFlow}" Container="{Binding Project.CurrentContainer}" PresenterType="Template" ClipToBounds="False"/>
-                    <views:PresenterControl x:Name="presenterControlEditor" Renderer="{Binding PageRenderer}" DataFlow="{Binding DataFlow}" Container="{Binding Project.CurrentContainer}" PresenterType="Editor" ClipToBounds="False"/>
+                    <views:PresenterControl x:Name="presenterControlData" ZoomBorder="{Binding #zoomBorder}" Renderer="{Binding PageRenderer}" DataFlow="{Binding DataFlow}" Container="{Binding Project.CurrentContainer}" PresenterType="Data" ClipToBounds="False"/>
+                    <views:PresenterControl x:Name="presenterControlTemplate" ZoomBorder="{Binding #zoomBorder}" Renderer="{Binding PageRenderer}" DataFlow="{Binding DataFlow}" Container="{Binding Project.CurrentContainer}" PresenterType="Template" ClipToBounds="False"/>
+                    <views:PresenterControl x:Name="presenterControlEditor" ZoomBorder="{Binding #zoomBorder}" Renderer="{Binding PageRenderer}" DataFlow="{Binding DataFlow}" Container="{Binding Project.CurrentContainer}" PresenterType="Editor" ClipToBounds="False"/>
                 </Grid>
             </paz:ZoomBorder>
         </Border>
