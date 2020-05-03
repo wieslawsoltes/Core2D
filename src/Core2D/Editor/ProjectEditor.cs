@@ -25,12 +25,219 @@ using DMC = Dock.Model.Controls;
 
 namespace Core2D.Editor
 {
+    internal interface IShapeEditor
+    {
+        void BreakPathFigure(IPathFigure pathFigure, IShapeStyle style, bool isStroked, bool isFilled, List<IBaseShape> result);
+        bool BreakPathShape(IPathShape pathShape, List<IBaseShape> result);
+        void BreakShape(IBaseShape shape, List<IBaseShape> result, List<IBaseShape> remove);
+    }
+
+    internal class ShapeEditor : IShapeEditor
+    {
+        private readonly IServiceProvider _serviceProvider;
+
+        public ShapeEditor(IServiceProvider serviceProvider)
+        {
+            _serviceProvider = serviceProvider;
+        }
+
+        public void BreakPathFigure(IPathFigure pathFigure, IShapeStyle style, bool isStroked, bool isFilled, List<IBaseShape> result)
+        {
+            var factory = _serviceProvider.GetService<IFactory>();
+
+            var firstPoint = pathFigure.StartPoint;
+            var lastPoint = pathFigure.StartPoint;
+
+            foreach (var segment in pathFigure.Segments)
+            {
+                switch (segment)
+                {
+                    case ILineSegment lineSegment:
+                        {
+                            var convertedStyle = style != null ?
+                                (IShapeStyle)style?.Copy(null) :
+                                factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
+
+                            var convertedPathShape = factory.CreateLineShape(
+                                lastPoint,
+                                lineSegment.Point,
+                                convertedStyle,
+                                isStroked);
+
+                            lastPoint = lineSegment.Point;
+
+                            result.Add(convertedPathShape);
+                        }
+                        break;
+                    case IQuadraticBezierSegment quadraticBezierSegment:
+                        {
+                            var convertedStyle = style != null ?
+                                (IShapeStyle)style?.Copy(null) :
+                                factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
+
+                            var convertedPathShape = factory.CreateQuadraticBezierShape(
+                                lastPoint,
+                                quadraticBezierSegment.Point1,
+                                quadraticBezierSegment.Point2,
+                                convertedStyle,
+                                isStroked,
+                                isFilled);
+
+                            lastPoint = quadraticBezierSegment.Point2;
+
+                            result.Add(convertedPathShape);
+                        }
+                        break;
+                    case ICubicBezierSegment cubicBezierSegment:
+                        {
+                            var convertedStyle = style != null ?
+                                (IShapeStyle)style?.Copy(null) :
+                                factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
+
+                            var convertedPathShape = factory.CreateCubicBezierShape(
+                                lastPoint,
+                                cubicBezierSegment.Point1,
+                                cubicBezierSegment.Point2,
+                                cubicBezierSegment.Point3,
+                                convertedStyle,
+                                isStroked,
+                                isFilled);
+
+                            lastPoint = cubicBezierSegment.Point3;
+
+                            result.Add(convertedPathShape);
+                        }
+                        break;
+                    case IArcSegment arcSegment:
+                        {
+                            var convertedStyle = style != null ?
+                                (IShapeStyle)style?.Copy(null) :
+                                factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
+
+                            var point2 = factory.CreatePointShape(0, 0); // TODO:
+
+                            var point3 = factory.CreatePointShape(0, 0); // TODO:
+
+                            var convertedPathShape = factory.CreateArcShape(
+                                lastPoint,
+                                point2,
+                                point3,
+                                arcSegment.Point,
+                                convertedStyle,
+                                isStroked,
+                                isFilled);
+
+                            lastPoint = arcSegment.Point;
+
+                            result.Add(convertedPathShape);
+                        }
+                        break;
+                }
+            }
+
+            if (pathFigure.Segments.Length > 0 && pathFigure.IsClosed)
+            {
+                var convertedStyle = style != null ?
+                    (IShapeStyle)style?.Copy(null) :
+                    factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
+
+                var convertedPathShape = factory.CreateLineShape(
+                    lastPoint,
+                    firstPoint,
+                    convertedStyle,
+                    isStroked);
+
+                result.Add(convertedPathShape);
+            }
+        }
+
+        public bool BreakPathShape(IPathShape pathShape, List<IBaseShape> result)
+        {
+            var factory = _serviceProvider.GetService<IFactory>();
+
+            if (pathShape.Geometry.Figures.Length == 1)
+            {
+                BreakPathFigure(pathShape.Geometry.Figures[0], pathShape.Style, pathShape.IsStroked, pathShape.IsFilled, result);
+                return true;
+            }
+            else if (pathShape.Geometry.Figures.Length > 1)
+            {
+                foreach (var pathFigure in pathShape.Geometry.Figures)
+                {
+                    var style = pathShape.Style != null ?
+                        (IShapeStyle)pathShape.Style?.Copy(null) :
+                        factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
+
+                    var convertedGeometry = factory.CreatePathGeometry(ImmutableArray.Create<IPathFigure>(), pathShape.Geometry.FillRule);
+                    convertedGeometry.Figures = convertedGeometry.Figures.Add(pathFigure);
+
+                    var convertedPathShape = factory.CreatePathShape(
+                        pathShape.Name,
+                        style,
+                        convertedGeometry,
+                        pathShape.IsStroked,
+                        pathShape.IsFilled);
+
+                    result.Add(convertedPathShape);
+                }
+
+                return true;
+            }
+
+            return false;
+        }
+
+        public void BreakShape(IBaseShape shape, List<IBaseShape> result, List<IBaseShape> remove)
+        {
+            switch (shape)
+            {
+                case IPathShape pathShape:
+                    {
+                        if (BreakPathShape(pathShape, result) == true)
+                        {
+                            remove.Add(pathShape);
+                        }
+                    }
+                    break;
+                case IGroupShape groupShape:
+                    {
+                        if (groupShape.Shapes.Length > 0)
+                        {
+                            var groupShapes = new List<IBaseShape>();
+
+                            GroupShapeExtensions.Ungroup(groupShape.Shapes, groupShapes);
+
+                            foreach (var brokenGroupShape in groupShapes)
+                            {
+                                BreakShape(brokenGroupShape, result, remove);
+                            }
+
+                            remove.Add(groupShape);
+                        }
+                    }
+                    break;
+                default:
+                    {
+                        var pathConverter = _serviceProvider.GetService<IPathConverter>();
+                        var path = pathConverter?.ToPathShape(shape);
+                        if (path != null)
+                        {
+                            BreakShape(path, result, remove);
+                            remove.Add(shape);
+                        }
+                    }
+                    break;
+            }
+        }
+    }
+
     /// <summary>
     /// Project editor.
     /// </summary>
     public class ProjectEditor : ObservableObject, IProjectEditor
     {
         private readonly IServiceProvider _serviceProvider;
+        private IShapeEditor _shapeEditor;
         private IProjectContainer _project;
         private string _projectPath;
         private bool _isProjectDirty;
@@ -237,6 +444,7 @@ namespace Core2D.Editor
         public ProjectEditor(IServiceProvider serviceProvider)
         {
             _serviceProvider = serviceProvider;
+            _shapeEditor = new ShapeEditor(_serviceProvider);
             _recentProjects = ImmutableArray.Create<RecentFile>();
             _currentRecentProject = default;
             _tools = _serviceProvider.GetServiceLazily<IEditorTool[], ImmutableArray<IEditorTool>>((tools) => tools.Where(tool => !tool.GetType().Name.StartsWith("PathTool")).ToImmutableArray());
@@ -1742,194 +1950,6 @@ namespace Core2D.Editor
             }
         }
 
-        private void BreakPathFigure(IPathFigure pathFigure, IShapeStyle style, bool isStroked, bool isFilled, List<IBaseShape> result)
-        {
-            var factory = _serviceProvider.GetService<IFactory>();
-
-            var firstPoint = pathFigure.StartPoint;
-            var lastPoint = pathFigure.StartPoint;
-
-            foreach (var segment in pathFigure.Segments)
-            {
-                switch (segment)
-                {
-                    case ILineSegment lineSegment:
-                        {
-                            var convertedStyle = style != null ?
-                                (IShapeStyle)style?.Copy(null) :
-                                factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
-
-                            var convertedPathShape = factory.CreateLineShape(
-                                lastPoint,
-                                lineSegment.Point,
-                                convertedStyle,
-                                isStroked);
-
-                            lastPoint = lineSegment.Point;
-
-                            result.Add(convertedPathShape);
-                        }
-                        break;
-                    case IQuadraticBezierSegment quadraticBezierSegment:
-                        {
-                            var convertedStyle = style != null ?
-                                (IShapeStyle)style?.Copy(null) :
-                                factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
-
-                            var convertedPathShape = factory.CreateQuadraticBezierShape(
-                                lastPoint,
-                                quadraticBezierSegment.Point1,
-                                quadraticBezierSegment.Point2,
-                                convertedStyle,
-                                isStroked,
-                                isFilled);
-
-                            lastPoint = quadraticBezierSegment.Point2;
-
-                            result.Add(convertedPathShape);
-                        }
-                        break;
-                    case ICubicBezierSegment cubicBezierSegment:
-                        {
-                            var convertedStyle = style != null ?
-                                (IShapeStyle)style?.Copy(null) :
-                                factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
-
-                            var convertedPathShape = factory.CreateCubicBezierShape(
-                                lastPoint,
-                                cubicBezierSegment.Point1,
-                                cubicBezierSegment.Point2,
-                                cubicBezierSegment.Point3,
-                                convertedStyle,
-                                isStroked,
-                                isFilled);
-
-                            lastPoint = cubicBezierSegment.Point3;
-
-                            result.Add(convertedPathShape);
-                        }
-                        break;
-                    case IArcSegment arcSegment:
-                        {
-                            var convertedStyle = style != null ?
-                                (IShapeStyle)style?.Copy(null) :
-                                factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
-
-                            var point2 = factory.CreatePointShape(0, 0); // TODO:
-
-                            var point3 = factory.CreatePointShape(0, 0); // TODO:
-
-                            var convertedPathShape = factory.CreateArcShape(
-                                lastPoint,
-                                point2,
-                                point3,
-                                arcSegment.Point,
-                                convertedStyle,
-                                isStroked,
-                                isFilled);
-
-                            lastPoint = arcSegment.Point;
-
-                            result.Add(convertedPathShape);
-                        }
-                        break;
-                }
-            }
-
-            if (pathFigure.Segments.Length > 0 && pathFigure.IsClosed)
-            {
-                var convertedStyle = style != null ?
-                    (IShapeStyle)style?.Copy(null) :
-                    factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
-
-                var convertedPathShape = factory.CreateLineShape(
-                    lastPoint,
-                    firstPoint,
-                    convertedStyle,
-                    isStroked);
-
-                result.Add(convertedPathShape);
-            }
-        }
-
-        private bool BreakPathShape(IPathShape pathShape, List<IBaseShape> result)
-        {
-            var factory = _serviceProvider.GetService<IFactory>();
-
-            if (pathShape.Geometry.Figures.Length == 1)
-            {
-                BreakPathFigure(pathShape.Geometry.Figures[0], pathShape.Style, pathShape.IsStroked, pathShape.IsFilled, result);
-                return true;
-            }
-            else if (pathShape.Geometry.Figures.Length > 1)
-            {
-                foreach (var pathFigure in pathShape.Geometry.Figures)
-                {
-                    var style = pathShape.Style != null ?
-                        (IShapeStyle)pathShape.Style?.Copy(null) :
-                        factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
-
-                    var convertedGeometry = factory.CreatePathGeometry(ImmutableArray.Create<IPathFigure>(), pathShape.Geometry.FillRule);
-                    convertedGeometry.Figures = convertedGeometry.Figures.Add(pathFigure);
-
-                    var convertedPathShape = factory.CreatePathShape(
-                        pathShape.Name,
-                        style,
-                        convertedGeometry,
-                        pathShape.IsStroked,
-                        pathShape.IsFilled);
-
-                    result.Add(convertedPathShape);
-                }
-
-                return true;
-            }
-
-            return false;
-        }
-
-        private void BreakShape(IBaseShape shape, List<IBaseShape> result, List<IBaseShape> remove)
-        {
-            switch (shape)
-            {
-                case IPathShape pathShape:
-                    {
-                        if (BreakPathShape(pathShape, result) == true)
-                        {
-                            remove.Add(pathShape);
-                        }
-                    }
-                    break;
-                case IGroupShape groupShape:
-                    {
-                        if (groupShape.Shapes.Length > 0)
-                        {
-                            var groupShapes = new List<IBaseShape>();
-
-                            GroupShapeExtensions.Ungroup(groupShape.Shapes, groupShapes);
-
-                            foreach (var brokenGroupShape in groupShapes)
-                            {
-                                BreakShape(brokenGroupShape, result, remove);
-                            }
-
-                            remove.Add(groupShape); 
-                        }
-                    }
-                    break;
-                default:
-                    {
-                        var path = PathConverter.ToPathShape(shape);
-                        if (path != null)
-                        {
-                            BreakShape(path, result, remove);
-                            remove.Add(shape);
-                        }
-                    }
-                    break;
-            }
-        }
-
         /// <inheritdoc/>
         public void OnPathBreak()
         {
@@ -1953,7 +1973,7 @@ namespace Core2D.Editor
 
                 foreach (var s in sources)
                 {
-                    BreakShape(s, result, remove);
+                    _shapeEditor.BreakShape(s, result, remove);
                 }
 
                 if (result.Count > 0)
