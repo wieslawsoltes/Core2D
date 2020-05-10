@@ -24,6 +24,8 @@ namespace Core2D.Renderer.SkiaSharp
             _serviceProvider = serviceProvider;
         }
 
+        // TODO:
+        /*
         private void FromDrawablePath(DrawablePath drawablePath, IList<IBaseShape> shapes, IFactory factory)
         {
             var path = drawablePath.Path;
@@ -148,6 +150,7 @@ namespace Core2D.Renderer.SkiaSharp
                     break;
             }
         }
+        */
 
         /// <inheritdoc/>
         public IList<IBaseShape> Convert(string path)
@@ -158,6 +161,8 @@ namespace Core2D.Renderer.SkiaSharp
                 return null;
             }
 
+            // TODO:
+            /*
             using var drawable = SKSvg.ToDrawable(document);
             if (drawable == null)
             {
@@ -170,6 +175,9 @@ namespace Core2D.Renderer.SkiaSharp
             ToShape(drawable, shapes, factory);
 
             return shapes;
+            */
+
+            return null;
         }
     }
 }
