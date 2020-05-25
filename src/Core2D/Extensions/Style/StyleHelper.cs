@@ -71,7 +71,7 @@ namespace Core2D.Style
                     double[] array = new double[values.Length];
                     for (int i = 0; i < values.Length; i++)
                     {
-                        array[i] = Convert.ToDouble(values[i]) * strokeWidth;
+                        array[i] = Convert.ToDouble(values[i], CultureInfo.InvariantCulture) * strokeWidth;
                     }
                     if (array.Length >= 2 && array.Length % 2 == 0)
                     {
@@ -104,7 +104,7 @@ namespace Core2D.Style
                     float[] array = new float[values.Length];
                     for (int i = 0; i < values.Length; i++)
                     {
-                        array[i] = Convert.ToSingle(values[i]) * (float)strokeWidth;
+                        array[i] = Convert.ToSingle(values[i], CultureInfo.InvariantCulture) * (float)strokeWidth;
                     }
                     if (array.Length >= 2 && array.Length % 2 == 0)
                     {
