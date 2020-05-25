@@ -95,6 +95,10 @@
             <MenuItem Header="Copy As _Svg" Command="{Binding Platform.OnCopyAsSvg}"/>
             <MenuItem Header="Copy As _Metafile" Command="{Binding Platform.OnCopyAsEmf}"/>
             <Separator/>
+            <MenuItem Header="Copy As Svg Path Data" Command="{Binding Platform.OnCopyAsPathData}"/>
+            <MenuItem Header="Paste Stroked Svg Path Data" Command="{Binding Platform.OnPastePathDataStroked}"/>
+            <MenuItem Header="Paste Filled Svg Path Data" Command="{Binding Platform.OnPastePathDataFilled}"/>
+            <Separator/>
             <MenuItem Header="Select _All" Command="{Binding OnSelectAll}" InputGesture="Ctrl+A"/>
             <MenuItem Header="De_select All" Command="{Binding OnDeselectAll}" InputGesture="Ctrl+Shift+A"/>
             <Separator/>

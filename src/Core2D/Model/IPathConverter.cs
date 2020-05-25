@@ -51,5 +51,21 @@ namespace Core2D
         /// <param name="op">The convert operation.</param>
         /// <returns>The new instance of object of type <see cref="IPathShape"/>.</returns>
         IPathShape Op(IEnumerable<IBaseShape> shapes, PathOp op);
+
+        /// <summary>
+        /// Creates a path based on the SVG path data string.
+        /// </summary>
+        /// <param name="svgPath">The SVG path data.</param>
+        /// <param name="isStroked">The flag indicating whether path is stroked.</param>
+        /// <param name="isFilled">The flag indicating whether path is filled.</param>
+        /// <returns>The new instance of object of type <see cref="IPathShape"/>.</returns>
+        public IPathShape FromSvgPathData(string svgPath, bool isStroked, bool isFilled);
+
+        /// <summary>
+        /// Returns a SVG path data representation of the shape.
+        /// </summary>
+        /// <param name="shape">The shape to convert.</param>
+        /// <returns>The SVG path data.</returns>
+        public string ToSvgPathData(IBaseShape shape);
     }
 }

@@ -90,6 +90,22 @@ namespace Core2D.Editor
         void OnCopyAsEmf(object item);
 
         /// <summary>
+        /// Copy page or selected shapes to clipboard as Path Data.
+        /// </summary>
+        /// <param name="item">The object to copy as Path Data.</param>
+        void OnCopyAsPathData(object item);
+
+        /// <summary>
+        /// Paste Path Data from clipboard as stroked path.
+        /// </summary>
+        void OnPastePathDataStroked();
+
+        /// <summary>
+        /// Paste Path Data from clipboard as filled path.
+        /// </summary>
+        void OnPastePathDataFilled();
+
+        /// <summary>
         /// Import database.
         /// </summary>
         /// <param name="project">The target project.</param>

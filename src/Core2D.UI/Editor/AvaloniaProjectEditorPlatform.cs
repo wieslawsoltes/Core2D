@@ -1,13 +1,16 @@
 ﻿using System;
 using System.Linq;
+using System.Text;
 using Avalonia.Controls;
 using Core2D;
 using Core2D.Containers;
 using Core2D.Data;
 using Core2D.Editor;
+using Core2D.Shapes;
 using Core2D.SvgExporter.Svg;
 using Core2D.UI.Views;
 using Core2D.XamlExporter.Avalonia;
+using Microsoft.CodeAnalysis;
 using DM = Dock.Model;
 
 namespace Core2D.UI.Editor
@@ -389,6 +392,95 @@ namespace Core2D.UI.Editor
             try
             {
                 throw new NotImplementedException();
+            }
+            catch (Exception ex)
+            {
+                _serviceProvider.GetService<ILog>()?.LogException(ex);
+            }
+        }
+
+        /// <inheritdoc/>
+        public async void OnCopyAsPathData(object item)
+        {
+            try
+            {
+                if (item == null)
+                {
+                    var editor = _serviceProvider.GetService<IProjectEditor>();
+                    var converter = editor.PathConverter;
+                    var container = editor.Project.CurrentContainer;
+
+                    var shapes = editor.PageState?.SelectedShapes ?? container?.Layers.SelectMany(x => x.Shapes);
+                    if (shapes == null)
+                    {
+                        return;
+                    }
+
+                    var sb = new StringBuilder();
+
+                    foreach (var shape in shapes)
+                    {
+                        var svgPath = converter.ToSvgPathData(shape);
+                        if (!string.IsNullOrEmpty(svgPath))
+                        {
+                            sb.Append(svgPath);
+                        }
+                    }
+
+                    var result = sb.ToString();
+                    if (!string.IsNullOrEmpty(result))
+                    {
+                        await editor.TextClipboard?.SetText(result);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                _serviceProvider.GetService<ILog>()?.LogException(ex);
+            }
+        }
+
+        /// <inheritdoc/>
+        public async void OnPastePathDataStroked()
+        {
+            try
+            {
+                var editor = _serviceProvider.GetService<IProjectEditor>();
+                var converter = editor.PathConverter;
+
+                var svgPath = await editor.TextClipboard?.GetText();
+                if (!string.IsNullOrEmpty(svgPath))
+                {
+                    var pathShape = converter.FromSvgPathData(svgPath, isStroked: true, isFilled: false);
+                    if (pathShape != null)
+                    {
+                        editor.OnPasteShapes(Enumerable.Repeat<IBaseShape>(pathShape, 1));
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                _serviceProvider.GetService<ILog>()?.LogException(ex);
+            }
+        }
+
+        /// <inheritdoc/>
+        public async void OnPastePathDataFilled()
+        {
+            try
+            {
+                var editor = _serviceProvider.GetService<IProjectEditor>();
+                var converter = editor.PathConverter;
+
+                var svgPath = await editor.TextClipboard?.GetText();
+                if (!string.IsNullOrEmpty(svgPath))
+                {
+                    var pathShape = converter.FromSvgPathData(svgPath, isStroked: false, isFilled: true);
+                    if (pathShape != null)
+                    {
+                        editor.OnPasteShapes(Enumerable.Repeat<IBaseShape>(pathShape, 1));
+                    }
+                }
             }
             catch (Exception ex)
             {

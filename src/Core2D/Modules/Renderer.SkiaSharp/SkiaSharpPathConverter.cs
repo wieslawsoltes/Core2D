@@ -213,5 +213,36 @@ namespace Core2D.Renderer.SkiaSharp
             result.Dispose();
             return pathShape;
         }
+
+        /// <inheritdoc/>
+        public IPathShape FromSvgPathData(string svgPath, bool isStroked, bool isFilled)
+        {
+            var path = SKPath.ParseSvgPathData(svgPath);
+            if (path == null)
+            {
+                return null;
+            }
+            var factory = _serviceProvider.GetService<IFactory>();
+            var style = factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
+            var geometry = PathGeometryConverter.ToPathGeometry(path, 0.0, 0.0, factory);
+            var pathShape = factory.CreatePathShape(
+                "Path",
+                style,
+                geometry,
+                isStroked,
+                isFilled);
+            return pathShape;
+        }
+
+        /// <inheritdoc/>
+        public string ToSvgPathData(IBaseShape shape)
+        {
+            var path = PathGeometryConverter.ToSKPath(shape, 0.0, 0.0, (value) => (float)value);
+            if (path == null)
+            {
+                return null;
+            }
+            return path.ToSvgPathData();
+        }
     }
 }
