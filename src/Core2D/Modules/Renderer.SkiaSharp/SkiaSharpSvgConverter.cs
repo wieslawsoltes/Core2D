@@ -123,7 +123,11 @@ namespace Core2D.Renderer.SkiaSharp
 
             if (paint.Typeface != null)
             {
-                style.TextStyle.FontName = paint.Typeface.FamilyName;
+                if (paint.Typeface.FamilyName != null)
+                {
+                    style.TextStyle.FontName = paint.Typeface.FamilyName;
+                }
+
                 style.TextStyle.FontSize = paint.TextSize;
                 style.TextStyle.TextHAlignment = ToTextHAlignment(paint.TextAlign);
 
