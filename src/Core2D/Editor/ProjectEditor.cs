@@ -2976,6 +2976,23 @@ namespace Core2D.Editor
 
                 try
                 {
+                    if (!string.IsNullOrEmpty(text))
+                    {
+                        var pathShape = PathConverter?.FromSvgPathData(text, isStroked: false, isFilled: true);
+                        if (pathShape != null)
+                        {
+                            OnPasteShapes(Enumerable.Repeat<IBaseShape>(pathShape, 1));
+                            return;
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    exception = ex;
+                }
+
+                try
+                {
                     var shapes = JsonSerializer?.Deserialize<IList<IBaseShape>>(text);
                     if (shapes?.Count() > 0)
                     {
