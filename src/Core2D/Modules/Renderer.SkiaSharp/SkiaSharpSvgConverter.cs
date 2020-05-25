@@ -129,6 +129,7 @@ namespace Core2D.Renderer.SkiaSharp
                 }
 
                 style.TextStyle.FontSize = paint.TextSize;
+
                 style.TextStyle.TextHAlignment = ToTextHAlignment(paint.TextAlign);
 
                 if (paint.Typeface.Weight == SP.FontStyleWeight.Bold)
