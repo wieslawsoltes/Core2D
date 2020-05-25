@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Data;
+using System.Linq;
 using Core2D.Editor;
 using Core2D.Path;
 using Core2D.Shapes;
@@ -547,7 +549,11 @@ namespace Core2D.Renderer.SkiaSharp
 
             ToShape(picture, shapes, factory);
 
-            return shapes;
+            var group = factory.CreateGroupShape("svg");
+
+            group.Shapes = group.Shapes.AddRange(shapes);
+
+            return Enumerable.Repeat<IBaseShape>(group, 1).ToList();
         }
     }
 }
