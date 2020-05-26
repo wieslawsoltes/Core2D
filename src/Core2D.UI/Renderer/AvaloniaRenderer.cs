@@ -126,6 +126,46 @@ namespace Core2D.UI.Renderer
         }
     }
 
+    internal class EllipseDrawNode : DrawNode
+    {
+        public AM.Geometry Geometry { get; set; }
+
+        public override void OnDraw(AM.DrawingContext context, double dx, double dy, double zoom)
+        {
+            context.DrawGeometry(Shape.IsFilled ? Fill : null, Shape.IsStroked ? Stroke : null, Geometry);
+        }
+    }
+
+    internal class ArcDrawNode : DrawNode
+    {
+        public AM.Geometry Geometry { get; set; }
+
+        public override void OnDraw(AM.DrawingContext context, double dx, double dy, double zoom)
+        {
+            context.DrawGeometry(Shape.IsFilled ? Fill : null, Shape.IsStroked ? Stroke : null, Geometry);
+        }
+    }
+
+    internal class CubicBezierDrawNode : DrawNode
+    {
+        public AM.Geometry Geometry { get; set; }
+
+        public override void OnDraw(AM.DrawingContext context, double dx, double dy, double zoom)
+        {
+            context.DrawGeometry(Shape.IsFilled ? Fill : null, Shape.IsStroked ? Stroke : null, Geometry);
+        }
+    }
+
+    internal class QuadraticBezierDrawNode : DrawNode
+    {
+        public AM.Geometry Geometry { get; set; }
+
+        public override void OnDraw(AM.DrawingContext context, double dx, double dy, double zoom)
+        {
+            context.DrawGeometry(Shape.IsFilled ? Fill : null, Shape.IsStroked ? Stroke : null, Geometry);
+        }
+    }
+
     internal class PathDrawNode : DrawNode
     {
         public AM.Geometry Geometry { get; set; }
@@ -143,8 +183,6 @@ namespace Core2D.UI.Renderer
     {
         private readonly IServiceProvider _serviceProvider;
         private IShapeRendererState _state;
-        private readonly ICache<IShapeStyle, (AM.IBrush, AM.IPen)> _styleCache;
-        private readonly ICache<IArrowStyle, (AM.IBrush, AM.IPen)> _arrowStyleCache;
         private readonly ICache<ITextShape, (string, AM.FormattedText, IShapeStyle)> _textCache;
         private readonly ICache<string, AMI.Bitmap> _biCache;
         private readonly ICache<IBaseShape, DrawNode> _drawNodeCache;
@@ -166,8 +204,6 @@ namespace Core2D.UI.Renderer
         {
             _serviceProvider = serviceProvider;
             _state = _serviceProvider.GetService<IFactory>().CreateShapeRendererState();
-            _styleCache = _serviceProvider.GetService<IFactory>().CreateCache<IShapeStyle, (AM.IBrush, AM.IPen)>();
-            _arrowStyleCache = _serviceProvider.GetService<IFactory>().CreateCache<IArrowStyle, (AM.IBrush, AM.IPen)>();
             _textCache = _serviceProvider.GetService<IFactory>().CreateCache<ITextShape, (string, AM.FormattedText, IShapeStyle)>();
             _biCache = _serviceProvider.GetService<IFactory>().CreateCache<string, AMI.Bitmap>(x => x.Dispose());
             _drawNodeCache = _serviceProvider.GetService<IFactory>().CreateCache<IBaseShape, DrawNode>(x => x.Dispose());
@@ -210,34 +246,6 @@ namespace Core2D.UI.Renderer
             _ => throw new NotSupportedException($"The {color.GetType()} color type is not supported."),
         };
 
-        private AM.IPen ToPen(IBaseStyle style, bool scaleStrokeWidth)
-        {
-            var dashStyle = default(AM.DashStyle);
-            if (style.Dashes != null)
-            {
-                var dashes = StyleHelper.ConvertDashesToDoubleArray(style.Dashes, 1.0);
-                var dashOffset = style.DashOffset;
-                if (dashes != null)
-                {
-                    dashStyle = new AM.DashStyle(dashes, dashOffset);
-                }
-            }
-
-            var lineCap = style.LineCap switch
-            {
-                LineCap.Flat => AM.PenLineCap.Flat,
-                LineCap.Square => AM.PenLineCap.Square,
-                LineCap.Round => AM.PenLineCap.Round,
-                _ => throw new NotImplementedException()
-            };
-
-            var thickness = scaleStrokeWidth ? (style.Thickness / _state.ZoomX) : style.Thickness;
-            var strokeWidth = thickness;
-            var brush = ToBrush(style.Stroke);
-            var pen = new AM.Pen(brush, strokeWidth, dashStyle, lineCap);
-
-            return pen;
-        }
 
         private AM.Pen ToPen(IBaseStyle style)
         {
@@ -304,7 +312,7 @@ namespace Core2D.UI.Renderer
             }
             _dc.DrawGeometry(null, pen, sg);
         }
-
+        /*
         private void DrawLineArrowsInternal(AM.DrawingContext dc, ILineShape line, IShapeStyle style, double dx, double dy, Func<double, float> scaleToPage, bool scaleStrokeWidth, out A.Point pt1, out A.Point pt2)
         {
             GetCached(style.StartArrowStyle, out var fillStartArrow, out var strokeStartArrow, scaleStrokeWidth);
@@ -383,7 +391,7 @@ namespace Core2D.UI.Renderer
             }
             return pt;
         }
-
+        */
         private static void DrawRectangleInternal(AM.DrawingContext dc, AM.IBrush brush, AM.IPen pen, bool isStroked, bool isFilled, ref Rect2 rect)
         {
             if (!isStroked && !isFilled)
@@ -415,79 +423,6 @@ namespace Core2D.UI.Renderer
                 g);
         }
 
-        private static AM.StreamGeometry ToStreamGeometry(IArcShape arc, double dx, double dy)
-        {
-            var sg = new AM.StreamGeometry();
-            using var sgc = sg.Open();
-            var a = new WpfArc(
-                Point2.FromXY(arc.Point1.X, arc.Point1.Y),
-                Point2.FromXY(arc.Point2.X, arc.Point2.Y),
-                Point2.FromXY(arc.Point3.X, arc.Point3.Y),
-                Point2.FromXY(arc.Point4.X, arc.Point4.Y));
-            sgc.BeginFigure(
-                new A.Point(a.Start.X + dx, a.Start.Y + dy),
-                arc.IsFilled);
-            sgc.ArcTo(
-                new A.Point(a.End.X + dx, a.End.Y + dy),
-                new A.Size(a.Radius.Width, a.Radius.Height),
-                0.0,
-                a.IsLargeArc,
-                AM.SweepDirection.Clockwise);
-            sgc.EndFigure(false);
-            return sg;
-        }
-
-        private static AM.StreamGeometry ToStreamGeometry(ICubicBezierShape cubicBezier, double dx, double dy)
-        {
-            var sg = new AM.StreamGeometry();
-            using var sgc = sg.Open();
-            sgc.BeginFigure(
-                new A.Point(cubicBezier.Point1.X + dx, cubicBezier.Point1.Y + dy),
-                cubicBezier.IsFilled);
-            sgc.CubicBezierTo(
-                new A.Point(cubicBezier.Point2.X + dx, cubicBezier.Point2.Y + dy),
-                new A.Point(cubicBezier.Point3.X + dx, cubicBezier.Point3.Y + dy),
-                new A.Point(cubicBezier.Point4.X + dx, cubicBezier.Point4.Y + dy));
-            sgc.EndFigure(false);
-            return sg;
-        }
-
-        private static AM.StreamGeometry ToStreamGeometry(IQuadraticBezierShape quadraticBezier, double dx, double dy)
-        {
-            var sg = new AM.StreamGeometry();
-            using var sgc = sg.Open();
-            sgc.BeginFigure(
-                new A.Point(quadraticBezier.Point1.X + dx, quadraticBezier.Point1.Y + dy),
-                quadraticBezier.IsFilled);
-            sgc.QuadraticBezierTo(
-                new A.Point(quadraticBezier.Point2.X + dx, quadraticBezier.Point2.Y + dy),
-                new A.Point(quadraticBezier.Point3.X + dx, quadraticBezier.Point3.Y + dy));
-            sgc.EndFigure(false);
-            return sg;
-        }
-
-        private void GetCached(IArrowStyle style, out AM.IBrush fill, out AM.IPen stroke, bool scaleStrokeWidth)
-        {
-            (fill, stroke) = _arrowStyleCache.Get(style);
-            if (fill == null || stroke == null)
-            {
-                fill = ToBrush(style.Fill);
-                stroke = ToPen(style, scaleStrokeWidth);
-                _arrowStyleCache.Set(style, (fill, stroke));
-            }
-        }
-
-        private void GetCached(IShapeStyle style, out AM.IBrush fill, out AM.IPen stroke, Func<double, float> scaleToPage, bool scaleStrokeWidth)
-        {
-            (fill, stroke) = _styleCache.Get(style);
-            if (fill == null || stroke == null)
-            {
-                fill = ToBrush(style.Fill);
-                stroke = ToPen(style, scaleStrokeWidth);
-                _styleCache.Set(style, (fill, stroke));
-            }
-        }
-
         /// <inheritdoc/>
         public void InvalidateCache(IShapeStyle style)
         {
@@ -503,9 +438,6 @@ namespace Core2D.UI.Renderer
         /// <inheritdoc/>
         public void ClearCache(bool isZooming)
         {
-            _styleCache.Reset();
-            _arrowStyleCache.Reset();
-
             if (!isZooming)
             {
                 _textCache.Reset();
@@ -517,10 +449,10 @@ namespace Core2D.UI.Renderer
         /// <inheritdoc/>
         public void Fill(object dc, double x, double y, double width, double height, IColor color)
         {
-            var _dc = dc as AM.DrawingContext;
+            var context = dc as AM.DrawingContext;
             var brush = ToBrush(color);
             var rect = new A.Rect(x, y, width, height);
-            _dc.FillRectangle(brush, rect);
+            context.FillRectangle(brush, rect);
         }
 
         /// <inheritdoc/>
@@ -735,167 +667,177 @@ namespace Core2D.UI.Renderer
         /// <inheritdoc/>
         public void Draw(object dc, IEllipseShape ellipse, double dx, double dy)
         {
-            /*
-            var _dc = dc as AM.DrawingContext;
-
             var style = ellipse.Style;
             if (style == null)
             {
                 return;
             }
 
-            var scaleThickness = ellipse.State.Flags.HasFlag(ShapeStateFlags.Thickness);
-            var scaleSize = ellipse.State.Flags.HasFlag(ShapeStateFlags.Size);
-            var rect = CreateRect(ellipse.TopLeft, ellipse.BottomRight, dx, dy);
+            if (!ellipse.IsFilled && !ellipse.IsStroked)
+            {
+                return;
+            }
 
-            var scale = scaleSize ? 1.0 / _state.ZoomX : 1.0;
-            var scaleToPage = scale == 1.0 ? _scaleToPage : (value) => (float)(_scaleToPage(value) / scale);
-            var center = rect.Center;
-            var translateX = 0.0 - (center.X * scale) + center.X;
-            var translateY = 0.0 - (center.Y * scale) + center.Y;
+            var context = dc as AM.DrawingContext;
 
-            GetCached(style, out var fill, out var stroke, scaleThickness);
+            var drawNodeCached = _drawNodeCache.Get(ellipse);
+            if (drawNodeCached != null)
+            {
+                drawNodeCached.Draw(context, dx, dy, _state.ZoomX);
+            }
+            else
+            {
+                var geometry = PathGeometryConverter.ToGeometry(ellipse, 0, 0);
+                var center = geometry.Bounds.Center;
 
-            var translateDisposable = scale != 1.0 ? _dc.PushPreTransform(AME.MatrixHelper.Translate(translateX, translateY)) : default(IDisposable);
-            var scaleDisposable = scale != 1.0 ? _dc.PushPreTransform(AME.MatrixHelper.Scale(scale, scale)) : default(IDisposable);
+                var pathDrawNode = new PathDrawNode()
+                {
+                    Shape = ellipse,
+                    Style = style,
+                    ScaleThickness = ellipse.State.Flags.HasFlag(ShapeStateFlags.Thickness),
+                    ScaleSize = ellipse.State.Flags.HasFlag(ShapeStateFlags.Size),
+                    Fill = ToBrush(style.Fill),
+                    Stroke = ToPen(style),
+                    Center = center,
+                    Geometry = geometry
+                };
 
-            DrawEllipseInternal(
-                _dc,
-                fill,
-                stroke,
-                ellipse.IsStroked,
-                ellipse.IsFilled,
-                ref rect);
+                _drawNodeCache.Set(ellipse, pathDrawNode);
 
-            scaleDisposable?.Dispose();
-            translateDisposable?.Dispose();
-            */
+                pathDrawNode.Draw(context, dx, dy, _state.ZoomX);
+            }
         }
 
         /// <inheritdoc/>
         public void Draw(object dc, IArcShape arc, double dx, double dy)
         {
-            /*
-            if (!arc.IsFilled && !arc.IsStroked)
-            {
-                return;
-            }
-
-            var _dc = dc as AM.DrawingContext;
-
             var style = arc.Style;
             if (style == null)
             {
                 return;
             }
 
-            var scaleThickness = arc.State.Flags.HasFlag(ShapeStateFlags.Thickness);
-            var scaleSize = arc.State.Flags.HasFlag(ShapeStateFlags.Size);
-            var geometry = ToStreamGeometry(arc, dx, dy);
+            if (!arc.IsFilled && !arc.IsStroked)
+            {
+                return;
+            }
 
-            var scale = scaleSize ? 1.0 / _state.ZoomX : 1.0;
-            var scaleToPage = scale == 1.0 ? _scaleToPage : (value) => (float)(_scaleToPage(value) / scale);
-            var center = geometry.Bounds.Center;
-            var translateX = 0.0 - (center.X * scale) + center.X;
-            var translateY = 0.0 - (center.Y * scale) + center.Y;
+            var context = dc as AM.DrawingContext;
 
-            GetCached(style, out var fill, out var stroke, scaleThickness);
+            var drawNodeCached = _drawNodeCache.Get(arc);
+            if (drawNodeCached != null)
+            {
+                drawNodeCached.Draw(context, dx, dy, _state.ZoomX);
+            }
+            else
+            {
+                var geometry = PathGeometryConverter.ToGeometry(arc, 0, 0);
+                var center = geometry.Bounds.Center;
 
-            var translateDisposable = scale != 1.0 ? _dc.PushPreTransform(AME.MatrixHelper.Translate(translateX, translateY)) : default(IDisposable);
-            var scaleDisposable = scale != 1.0 ? _dc.PushPreTransform(AME.MatrixHelper.Scale(scale, scale)) : default(IDisposable);
+                var pathDrawNode = new PathDrawNode()
+                {
+                    Shape = arc,
+                    Style = style,
+                    ScaleThickness = arc.State.Flags.HasFlag(ShapeStateFlags.Thickness),
+                    ScaleSize = arc.State.Flags.HasFlag(ShapeStateFlags.Size),
+                    Fill = ToBrush(style.Fill),
+                    Stroke = ToPen(style),
+                    Center = center,
+                    Geometry = geometry
+                };
 
-            _dc.DrawGeometry(
-                arc.IsFilled ? fill : null,
-                arc.IsStroked ? stroke : null,
-                geometry);
+                _drawNodeCache.Set(arc, pathDrawNode);
 
-            scaleDisposable?.Dispose();
-            translateDisposable?.Dispose();
-            */
+                pathDrawNode.Draw(context, dx, dy, _state.ZoomX);
+            }
         }
 
         /// <inheritdoc/>
         public void Draw(object dc, ICubicBezierShape cubicBezier, double dx, double dy)
         {
-            /*
-            if (!cubicBezier.IsFilled && !cubicBezier.IsStroked)
-            {
-                return;
-            }
-
-            var _dc = dc as AM.DrawingContext;
-
             var style = cubicBezier.Style;
             if (style == null)
             {
                 return;
             }
 
-            var scaleThickness = cubicBezier.State.Flags.HasFlag(ShapeStateFlags.Thickness);
-            var scaleSize = cubicBezier.State.Flags.HasFlag(ShapeStateFlags.Size);
-            var geometry = ToStreamGeometry(cubicBezier, dx, dy);
+            if (!cubicBezier.IsFilled && !cubicBezier.IsStroked)
+            {
+                return;
+            }
 
-            var scale = scaleSize ? 1.0 / _state.ZoomX : 1.0;
-            var scaleToPage = scale == 1.0 ? _scaleToPage : (value) => (float)(_scaleToPage(value) / scale);
-            var center = geometry.Bounds.Center;
-            var translateX = 0.0 - (center.X * scale) + center.X;
-            var translateY = 0.0 - (center.Y * scale) + center.Y;
+            var context = dc as AM.DrawingContext;
 
-            GetCached(style, out var fill, out var stroke, scaleThickness);
+            var drawNodeCached = _drawNodeCache.Get(cubicBezier);
+            if (drawNodeCached != null)
+            {
+                drawNodeCached.Draw(context, dx, dy, _state.ZoomX);
+            }
+            else
+            {
+                var geometry = PathGeometryConverter.ToGeometry(cubicBezier, 0, 0);
+                var center = geometry.Bounds.Center;
 
-            var translateDisposable = scale != 1.0 ? _dc.PushPreTransform(AME.MatrixHelper.Translate(translateX, translateY)) : default(IDisposable);
-            var scaleDisposable = scale != 1.0 ? _dc.PushPreTransform(AME.MatrixHelper.Scale(scale, scale)) : default(IDisposable);
+                var pathDrawNode = new PathDrawNode()
+                {
+                    Shape = cubicBezier,
+                    Style = style,
+                    ScaleThickness = cubicBezier.State.Flags.HasFlag(ShapeStateFlags.Thickness),
+                    ScaleSize = cubicBezier.State.Flags.HasFlag(ShapeStateFlags.Size),
+                    Fill = ToBrush(style.Fill),
+                    Stroke = ToPen(style),
+                    Center = center,
+                    Geometry = geometry
+                };
 
-            _dc.DrawGeometry(
-                cubicBezier.IsFilled ? fill : null,
-                cubicBezier.IsStroked ? stroke : null,
-                geometry);
+                _drawNodeCache.Set(cubicBezier, pathDrawNode);
 
-            scaleDisposable?.Dispose();
-            translateDisposable?.Dispose();
-            */
+                pathDrawNode.Draw(context, dx, dy, _state.ZoomX);
+            }
         }
 
         /// <inheritdoc/>
         public void Draw(object dc, IQuadraticBezierShape quadraticBezier, double dx, double dy)
         {
-            /*
-            if (!quadraticBezier.IsFilled && !quadraticBezier.IsStroked)
-            {
-                return;
-            }
-
-            var _dc = dc as AM.DrawingContext;
-
             var style = quadraticBezier.Style;
             if (style == null)
             {
                 return;
             }
 
-            var scaleThickness = quadraticBezier.State.Flags.HasFlag(ShapeStateFlags.Thickness);
-            var scaleSize = quadraticBezier.State.Flags.HasFlag(ShapeStateFlags.Size);
-            var geometry = ToStreamGeometry(quadraticBezier, dx, dy);
+            if (!quadraticBezier.IsFilled && !quadraticBezier.IsStroked)
+            {
+                return;
+            }
 
-            var scale = scaleSize ? 1.0 / _state.ZoomX : 1.0;
-            var scaleToPage = scale == 1.0 ? _scaleToPage : (value) => (float)(_scaleToPage(value) / scale);
-            var center = geometry.Bounds.Center;
-            var translateX = 0.0 - (center.X * scale) + center.X;
-            var translateY = 0.0 - (center.Y * scale) + center.Y;
+            var context = dc as AM.DrawingContext;
 
-            GetCached(style, out var fill, out var stroke, scaleThickness);
+            var drawNodeCached = _drawNodeCache.Get(quadraticBezier);
+            if (drawNodeCached != null)
+            {
+                drawNodeCached.Draw(context, dx, dy, _state.ZoomX);
+            }
+            else
+            {
+                var geometry = PathGeometryConverter.ToGeometry(quadraticBezier, 0, 0);
+                var center = geometry.Bounds.Center;
 
-            var translateDisposable = scale != 1.0 ? _dc.PushPreTransform(AME.MatrixHelper.Translate(translateX, translateY)) : default(IDisposable);
-            var scaleDisposable = scale != 1.0 ? _dc.PushPreTransform(AME.MatrixHelper.Scale(scale, scale)) : default(IDisposable);
+                var pathDrawNode = new PathDrawNode()
+                {
+                    Shape = quadraticBezier,
+                    Style = style,
+                    ScaleThickness = quadraticBezier.State.Flags.HasFlag(ShapeStateFlags.Thickness),
+                    ScaleSize = quadraticBezier.State.Flags.HasFlag(ShapeStateFlags.Size),
+                    Fill = ToBrush(style.Fill),
+                    Stroke = ToPen(style),
+                    Center = center,
+                    Geometry = geometry
+                };
 
-            _dc.DrawGeometry(
-                quadraticBezier.IsFilled ? fill : null,
-                quadraticBezier.IsStroked ? stroke : null,
-                geometry);
+                _drawNodeCache.Set(quadraticBezier, pathDrawNode);
 
-            scaleDisposable?.Dispose();
-            translateDisposable?.Dispose();
-            */
+                pathDrawNode.Draw(context, dx, dy, _state.ZoomX);
+            }
         }
 
         /// <inheritdoc/>
@@ -1406,57 +1348,6 @@ namespace Core2D.UI.Renderer
             }
         }
 
-        private static AM.StreamGeometry ToStreamGeometry(IArcShape arc, double dx, double dy)
-        {
-            var sg = new AM.StreamGeometry();
-            using var sgc = sg.Open();
-            var a = new WpfArc(
-                Point2.FromXY(arc.Point1.X, arc.Point1.Y),
-                Point2.FromXY(arc.Point2.X, arc.Point2.Y),
-                Point2.FromXY(arc.Point3.X, arc.Point3.Y),
-                Point2.FromXY(arc.Point4.X, arc.Point4.Y));
-            sgc.BeginFigure(
-                new A.Point(a.Start.X + dx, a.Start.Y + dy),
-                arc.IsFilled);
-            sgc.ArcTo(
-                new A.Point(a.End.X + dx, a.End.Y + dy),
-                new A.Size(a.Radius.Width, a.Radius.Height),
-                0.0,
-                a.IsLargeArc,
-                AM.SweepDirection.Clockwise);
-            sgc.EndFigure(false);
-            return sg;
-        }
-
-        private static AM.StreamGeometry ToStreamGeometry(ICubicBezierShape cubicBezier, double dx, double dy)
-        {
-            var sg = new AM.StreamGeometry();
-            using var sgc = sg.Open();
-            sgc.BeginFigure(
-                new A.Point(cubicBezier.Point1.X + dx, cubicBezier.Point1.Y + dy),
-                cubicBezier.IsFilled);
-            sgc.CubicBezierTo(
-                new A.Point(cubicBezier.Point2.X + dx, cubicBezier.Point2.Y + dy),
-                new A.Point(cubicBezier.Point3.X + dx, cubicBezier.Point3.Y + dy),
-                new A.Point(cubicBezier.Point4.X + dx, cubicBezier.Point4.Y + dy));
-            sgc.EndFigure(false);
-            return sg;
-        }
-
-        private static AM.StreamGeometry ToStreamGeometry(IQuadraticBezierShape quadraticBezier, double dx, double dy)
-        {
-            var sg = new AM.StreamGeometry();
-            using var sgc = sg.Open();
-            sgc.BeginFigure(
-                new A.Point(quadraticBezier.Point1.X + dx, quadraticBezier.Point1.Y + dy),
-                quadraticBezier.IsFilled);
-            sgc.QuadraticBezierTo(
-                new A.Point(quadraticBezier.Point2.X + dx, quadraticBezier.Point2.Y + dy),
-                new A.Point(quadraticBezier.Point3.X + dx, quadraticBezier.Point3.Y + dy));
-            sgc.EndFigure(false);
-            return sg;
-        }
-
         private void GetCached(IArrowStyle style, out AM.IBrush fill, out AM.IPen stroke, Func<double, float> scaleToPage, bool scaleStrokeWidth)
         {
             (fill, stroke) = _arrowStyleCache.Get(style);
@@ -1742,7 +1633,7 @@ namespace Core2D.UI.Renderer
 
             var scaleThickness = arc.State.Flags.HasFlag(ShapeStateFlags.Thickness);
             var scaleSize = arc.State.Flags.HasFlag(ShapeStateFlags.Size);
-            var geometry = ToStreamGeometry(arc, dx, dy);
+            var geometry = PathGeometryConverter.ToGeometry(arc, dx, dy);
 
             var scale = scaleSize ? 1.0 / _state.ZoomX : 1.0;
             var scaleToPage = scale == 1.0 ? _scaleToPage : (value) => (float)(_scaleToPage(value) / scale);
@@ -1782,7 +1673,7 @@ namespace Core2D.UI.Renderer
 
             var scaleThickness = cubicBezier.State.Flags.HasFlag(ShapeStateFlags.Thickness);
             var scaleSize = cubicBezier.State.Flags.HasFlag(ShapeStateFlags.Size);
-            var geometry = ToStreamGeometry(cubicBezier, dx, dy);
+            var geometry = PathGeometryConverter.ToGeometry(cubicBezier, dx, dy);
 
             var scale = scaleSize ? 1.0 / _state.ZoomX : 1.0;
             var scaleToPage = scale == 1.0 ? _scaleToPage : (value) => (float)(_scaleToPage(value) / scale);
@@ -1822,7 +1713,7 @@ namespace Core2D.UI.Renderer
 
             var scaleThickness = quadraticBezier.State.Flags.HasFlag(ShapeStateFlags.Thickness);
             var scaleSize = quadraticBezier.State.Flags.HasFlag(ShapeStateFlags.Size);
-            var geometry = ToStreamGeometry(quadraticBezier, dx, dy);
+            var geometry = PathGeometryConverter.ToGeometry(quadraticBezier, dx, dy);
 
             var scale = scaleSize ? 1.0 / _state.ZoomX : 1.0;
             var scaleToPage = scale == 1.0 ? _scaleToPage : (value) => (float)(_scaleToPage(value) / scale);
