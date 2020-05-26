@@ -217,11 +217,10 @@ namespace Core2D.UI.Renderer
             throw new NotImplementedException();
         }
 
-        private static AM.Color ToColor(IColor color) => color switch
+        private static AM.Color ToColor(IArgbColor argbColor) 
         {
-            IArgbColor argbColor => AM.Color.FromArgb(argbColor.A, argbColor.R, argbColor.G, argbColor.B),
-            _ => throw new NotSupportedException($"The {color.GetType()} color type is not supported."),
-        };
+            return AM.Color.FromArgb(argbColor.A, argbColor.R, argbColor.G, argbColor.B);
+        }
 
         private AM.IBrush ToBrush(IColor color) => color switch
         {
@@ -255,11 +254,6 @@ namespace Core2D.UI.Renderer
             var pen = new AM.Pen(brush, thickness, dashStyle, lineCap);
 
             return pen;
-        }
-
-        private static Rect2 CreateRect(IPointShape tl, IPointShape br, double dx, double dy)
-        {
-            return Rect2.FromPoints(tl.X, tl.Y, br.X, br.Y, dx, dy);
         }
 
         /*
@@ -638,7 +632,7 @@ namespace Core2D.UI.Renderer
             }
             else
             {
-                var rect2 = CreateRect(rectangle.TopLeft, rectangle.BottomRight, 0, 0);
+                var rect2 = Rect2.FromPoints(rectangle.TopLeft.X, rectangle.TopLeft.Y, rectangle.BottomRight.X, rectangle.BottomRight.Y, 0, 0);
                 var rect = new A.Rect(rect2.X, rect2.Y, rect2.Width, rect2.Height);
                 var center = rect.Center;
 
@@ -865,7 +859,7 @@ namespace Core2D.UI.Renderer
 
             var scaleThickness = text.State.Flags.HasFlag(ShapeStateFlags.Thickness);
             var scaleSize = text.State.Flags.HasFlag(ShapeStateFlags.Size);
-            var rect = CreateRect(text.TopLeft, text.BottomRight, dx, dy);
+            var rect = Rect2.FromPoints(text.TopLeft.X, text.TopLeft.Y, text.BottomRight.X, text.BottomRight.Y, dx, dy);
 
             var scale = scaleSize ? 1.0 / _state.ZoomX : 1.0;
             var scaleToPage = scale == 1.0 ? _scaleToPage : (value) => (float)(_scaleToPage(value) / scale);
@@ -947,7 +941,7 @@ namespace Core2D.UI.Renderer
 
             var scaleThickness = image.State.Flags.HasFlag(ShapeStateFlags.Thickness);
             var scaleSize = image.State.Flags.HasFlag(ShapeStateFlags.Size);
-            var rect = CreateRect(image.TopLeft, image.BottomRight, dx, dy);
+            var rect = Rect2.FromPoints(image.TopLeft.X, image.TopLeft.Y, image.BottomRight.X, image.BottomRight.Y, dx, dy);
 
             var scale = scaleSize ? 1.0 / _state.ZoomX : 1.0;
             var scaleToPage = scale == 1.0 ? _scaleToPage : (value) => (float)(_scaleToPage(value) / scale);
