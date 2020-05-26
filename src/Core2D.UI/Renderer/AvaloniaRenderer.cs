@@ -24,37 +24,55 @@ namespace Core2D.UI.Renderer
         public AM.Pen Stroke { get; set; }
         public A.Point Center { get; set; }
 
-        public void Draw(AM.DrawingContext context, double dx, double dy, Func<double, float> scaleFunc, double zoom)
+        public void Draw(AM.DrawingContext context, double dx, double dy, double zoom)
         {
             var scale = ScaleSize ? 1.0 / zoom : 1.0;
-            var scaleToPage = scale == 1.0 ? scaleFunc : (value) => (float)(scaleFunc(value) / scale);
             var translateX = 0.0 - (Center.X * scale) + Center.X;
             var translateY = 0.0 - (Center.Y * scale) + Center.Y;
 
+            double thickness = Style.Thickness;
+
             if (ScaleThickness)
             {
-                Stroke.Thickness = scaleFunc(Style.Thickness / zoom);
+                thickness /= zoom;
             }
-            else
+
+            if (scale != 1.0)
             {
-                Stroke.Thickness = scaleFunc(Style.Thickness);
+                thickness /= scale;
             }
+
+            Stroke.Thickness = thickness;
 
             var offsetDisposable = dx != 0.0 || dy != 0.0 ? context.PushPreTransform(AME.MatrixHelper.Translate(dx, dy)) : default(IDisposable);
             var translateDisposable = scale != 1.0 ? context.PushPreTransform(AME.MatrixHelper.Translate(translateX, translateY)) : default(IDisposable);
             var scaleDisposable = scale != 1.0 ? context.PushPreTransform(AME.MatrixHelper.Scale(scale, scale)) : default(IDisposable);
 
-            OnDraw(context, dx, dy, scaleToPage, zoom);
+            OnDraw(context, dx, dy, zoom);
 
             scaleDisposable?.Dispose();
             translateDisposable?.Dispose();
             offsetDisposable?.Dispose();
         }
 
-        public abstract void OnDraw(AM.DrawingContext context, double dx, double dy, Func<double, float> scaleToPage, double zoom);
+        public abstract void OnDraw(AM.DrawingContext context, double dx, double dy, double zoom);
 
         public virtual void Dispose()
         {
+        }
+    }
+
+    internal class LineDrawNode : DrawNode
+    {
+        public A.Point P0 { get; set; }
+        public A.Point P1 { get; set; }
+
+        public override void OnDraw(AM.DrawingContext context, double dx, double dy, double zoom)
+        {
+            if (Shape.IsStroked)
+            {
+                context.DrawLine(Stroke, P0, P1);
+            }
         }
     }
 
@@ -67,7 +85,7 @@ namespace Core2D.UI.Renderer
         public double CellWidth { get; set; }
         public double CellHeight { get; set; }
 
-        public override void OnDraw(AM.DrawingContext context, double dx, double dy, Func<double, float> scaleToPage, double zoom)
+        public override void OnDraw(AM.DrawingContext context, double dx, double dy, double zoom)
         {
             if (Shape.IsFilled)
             {
@@ -90,16 +108,16 @@ namespace Core2D.UI.Renderer
 
                 for (double x = sx; x < ex; x += CellWidth)
                 {
-                    var p0 = new A.Point(scaleToPage(x), scaleToPage(oy));
-                    var p1 = new A.Point(scaleToPage(x), scaleToPage(ey));
+                    var p0 = new A.Point(x, oy);
+                    var p1 = new A.Point(x, ey);
                     context.DrawLine(Stroke, p0, p1);
 
                 }
 
                 for (double y = sy; y < ey; y += CellHeight)
                 {
-                    var p0 = new A.Point(scaleToPage(ox), scaleToPage(y));
-                    var p1 = new A.Point(scaleToPage(ex), scaleToPage(y));
+                    var p0 = new A.Point(ox, y);
+                    var p1 = new A.Point(ex, y);
                     context.DrawLine(Stroke, p0, p1);
                 }
             }
@@ -110,7 +128,7 @@ namespace Core2D.UI.Renderer
     {
         public AM.Geometry Geometry { get; set; }
 
-        public override void OnDraw(AM.DrawingContext context, double dx, double dy, Func<double, float> scaleToPage, double zoom)
+        public override void OnDraw(AM.DrawingContext context, double dx, double dy, double zoom)
         {
             context.DrawGeometry(Shape.IsFilled ? Fill : null, Shape.IsStroked ? Stroke : null, Geometry);
         }
@@ -134,7 +152,6 @@ namespace Core2D.UI.Renderer
         private readonly ICache<string, AMI.Bitmap> _biCache;
         private readonly ICache<IBaseShape, DrawNode> _drawNodeCache;
         // TODO: Add PathShape cache.
-        private readonly Func<double, float> _scaleToPage;
         private readonly double _textScaleFactor;
 
         /// <inheritdoc/>
@@ -159,7 +176,6 @@ namespace Core2D.UI.Renderer
             _biCache = _serviceProvider.GetService<IFactory>().CreateCache<string, AMI.Bitmap>(x => x.Dispose());
             _drawNodeCache = _serviceProvider.GetService<IFactory>().CreateCache<IBaseShape, DrawNode>(x => x.Dispose());
             _textScaleFactor = textScaleFactor;
-            _scaleToPage = (value) => (float)(value);
             ClearCache(isZooming: false);
         }
 
@@ -198,7 +214,7 @@ namespace Core2D.UI.Renderer
             _ => throw new NotSupportedException($"The {color.GetType()} color type is not supported."),
         };
 
-        private AM.IPen ToPen(IBaseStyle style, Func<double, float> scale, bool scaleStrokeWidth)
+        private AM.IPen ToPen(IBaseStyle style, bool scaleStrokeWidth)
         {
             var dashStyle = default(AM.DashStyle);
             if (style.Dashes != null)
@@ -220,7 +236,7 @@ namespace Core2D.UI.Renderer
             };
 
             var thickness = scaleStrokeWidth ? (style.Thickness / _state.ZoomX) : style.Thickness;
-            var strokeWidth = scale(thickness);
+            var strokeWidth = thickness;
             var brush = ToBrush(style.Stroke);
             var pen = new AM.Pen(brush, strokeWidth, dashStyle, lineCap);
 
@@ -295,8 +311,8 @@ namespace Core2D.UI.Renderer
 
         private void DrawLineArrowsInternal(AM.DrawingContext dc, ILineShape line, IShapeStyle style, double dx, double dy, Func<double, float> scaleToPage, bool scaleStrokeWidth, out A.Point pt1, out A.Point pt2)
         {
-            GetCached(style.StartArrowStyle, out var fillStartArrow, out var strokeStartArrow, scaleToPage, scaleStrokeWidth);
-            GetCached(style.EndArrowStyle, out var fillEndArrow, out var strokeEndArrow, scaleToPage, scaleStrokeWidth);
+            GetCached(style.StartArrowStyle, out var fillStartArrow, out var strokeStartArrow, scaleStrokeWidth);
+            GetCached(style.EndArrowStyle, out var fillEndArrow, out var strokeEndArrow, scaleStrokeWidth);
 
             double _x1 = line.Start.X + dx;
             double _y1 = line.Start.Y + dy;
@@ -304,10 +320,10 @@ namespace Core2D.UI.Renderer
             double _y2 = line.End.Y + dy;
             line.GetMaxLength(ref _x1, ref _y1, ref _x2, ref _y2);
 
-            float x1 = _scaleToPage(_x1);
-            float y1 = _scaleToPage(_y1);
-            float x2 = _scaleToPage(_x2);
-            float y2 = _scaleToPage(_y2);
+            float x1 = (float)_x1;
+            float y1 = (float)_y1;
+            float x2 = (float)_x2;
+            float y2 = (float)_y2;
             var sas = style.StartArrowStyle;
             var eas = style.EndArrowStyle;
             double a1 = Math.Atan2(y1 - y2, x1 - x2);
@@ -454,13 +470,13 @@ namespace Core2D.UI.Renderer
             return sg;
         }
 
-        private void GetCached(IArrowStyle style, out AM.IBrush fill, out AM.IPen stroke, Func<double, float> scaleToPage, bool scaleStrokeWidth)
+        private void GetCached(IArrowStyle style, out AM.IBrush fill, out AM.IPen stroke, bool scaleStrokeWidth)
         {
             (fill, stroke) = _arrowStyleCache.Get(style);
             if (fill == null || stroke == null)
             {
                 fill = ToBrush(style.Fill);
-                stroke = ToPen(style, scaleToPage, scaleStrokeWidth);
+                stroke = ToPen(style, scaleStrokeWidth);
                 _arrowStyleCache.Set(style, (fill, stroke));
             }
         }
@@ -471,7 +487,7 @@ namespace Core2D.UI.Renderer
             if (fill == null || stroke == null)
             {
                 fill = ToBrush(style.Fill);
-                stroke = ToPen(style, scaleToPage, scaleStrokeWidth);
+                stroke = ToPen(style, scaleStrokeWidth);
                 _styleCache.Set(style, (fill, stroke));
             }
         }
@@ -546,6 +562,7 @@ namespace Core2D.UI.Renderer
         /// <inheritdoc/>
         public void Draw(object dc, IPointShape point, double dx, double dy)
         {
+            /*
             if (point == null || _state == null)
             {
                 return;
@@ -559,7 +576,7 @@ namespace Core2D.UI.Renderer
                 return;
             }
 
-            var _dc = dc as AM.DrawingContext;
+            var context = dc as AM.DrawingContext;
 
             var pointSize = _state.PointSize;
             if (pointSize <= 0.0)
@@ -577,20 +594,58 @@ namespace Core2D.UI.Renderer
             var translateX = 0.0 - (center.X * scale) + center.X;
             var translateY = 0.0 - (center.Y * scale) + center.Y;
 
-            GetCached(pointStyle, out var fill, out var stroke, scaleToPage, scaleThickness);
+            GetCached(pointStyle, out var fill, out var stroke, scaleThickness);
 
-            var translateDisposable = scale != 1.0 ? _dc.PushPreTransform(AME.MatrixHelper.Translate(translateX, translateY)) : default(IDisposable);
-            var scaleDisposable = scale != 1.0 ? _dc.PushPreTransform(AME.MatrixHelper.Scale(scale, scale)) : default(IDisposable);
+            var translateDisposable = scale != 1.0 ? context.PushPreTransform(AME.MatrixHelper.Translate(translateX, translateY)) : default(IDisposable);
+            var scaleDisposable = scale != 1.0 ? context.PushPreTransform(AME.MatrixHelper.Scale(scale, scale)) : default(IDisposable);
 
-            DrawRectangleInternal(_dc, fill, stroke, true, true, ref rect);
+            DrawRectangleInternal(context, fill, stroke, true, true, ref rect);
 
             scaleDisposable?.Dispose();
             translateDisposable?.Dispose();
+            */
         }
 
         /// <inheritdoc/>
         public void Draw(object dc, ILineShape line, double dx, double dy)
         {
+            var style = line.Style;
+            if (style == null)
+            {
+                return;
+            }
+
+            var context = dc as AM.DrawingContext;
+
+            var drawNodeCached = _drawNodeCache.Get(line);
+            if (drawNodeCached != null)
+            {
+                drawNodeCached.Draw(context, dx, dy, _state.ZoomX);
+            }
+            else
+            {
+                var p0 = new A.Point(line.Start.X, line.Start.Y);
+                var p1 = new A.Point(line.End.X, line.End.Y);
+                var center = new A.Point((p0.X + p1.X) / 2.0, (p0.Y + p1.Y) / 2.0);
+
+                var drawNode = new LineDrawNode()
+                {
+                    Shape = line,
+                    Style = style,
+                    ScaleThickness = line.State.Flags.HasFlag(ShapeStateFlags.Thickness),
+                    ScaleSize = line.State.Flags.HasFlag(ShapeStateFlags.Size),
+                    Fill = ToBrush(style.Fill),
+                    Stroke = ToPen(style),
+                    Center = center,
+                    P0 = p0,
+                    P1 = p1
+                };
+
+                _drawNodeCache.Set(line, drawNode);
+
+                drawNode.Draw(context, dx, dy, _state.ZoomX);
+            }
+            /*
             var _dc = dc as AM.DrawingContext;
 
             var style = line.Style;
@@ -608,7 +663,7 @@ namespace Core2D.UI.Renderer
             var translateX = 0.0 - (center.X * scale) + center.X;
             var translateY = 0.0 - (center.Y * scale) + center.Y;
 
-            GetCached(style, out _, out var stroke, scaleToPage, scaleThickness);
+            GetCached(style, out _, out var stroke, scaleThickness);
 
             var translateDisposable = scale != 1.0 ? _dc.PushPreTransform(AME.MatrixHelper.Translate(translateX, translateY)) : default(IDisposable);
             var scaleDisposable = scale != 1.0 ? _dc.PushPreTransform(AME.MatrixHelper.Scale(scale, scale)) : default(IDisposable);
@@ -633,6 +688,7 @@ namespace Core2D.UI.Renderer
 
             scaleDisposable?.Dispose();
             translateDisposable?.Dispose();
+            */
         }
 
         /// <inheritdoc/>
@@ -649,11 +705,11 @@ namespace Core2D.UI.Renderer
             var drawNodeCached = _drawNodeCache.Get(rectangle);
             if (drawNodeCached != null)
             {
-                drawNodeCached.Draw(context, dx, dy, _scaleToPage, _state.ZoomX);
+                drawNodeCached.Draw(context, dx, dy, _state.ZoomX);
             }
             else
             {
-                var rect2 = CreateRect(rectangle.TopLeft, rectangle.BottomRight, dx, dy);
+                var rect2 = CreateRect(rectangle.TopLeft, rectangle.BottomRight, 0, 0);
                 var rect = new A.Rect(rect2.X, rect2.Y, rect2.Width, rect2.Height);
                 var center = rect.Center;
 
@@ -676,13 +732,14 @@ namespace Core2D.UI.Renderer
 
                 _drawNodeCache.Set(rectangle, drawNode);
 
-                drawNode.Draw(context, dx, dy, _scaleToPage, _state.ZoomX);
+                drawNode.Draw(context, dx, dy, _state.ZoomX);
             }
         }
 
         /// <inheritdoc/>
         public void Draw(object dc, IEllipseShape ellipse, double dx, double dy)
         {
+            /*
             var _dc = dc as AM.DrawingContext;
 
             var style = ellipse.Style;
@@ -701,7 +758,7 @@ namespace Core2D.UI.Renderer
             var translateX = 0.0 - (center.X * scale) + center.X;
             var translateY = 0.0 - (center.Y * scale) + center.Y;
 
-            GetCached(style, out var fill, out var stroke, scaleToPage, scaleThickness);
+            GetCached(style, out var fill, out var stroke, scaleThickness);
 
             var translateDisposable = scale != 1.0 ? _dc.PushPreTransform(AME.MatrixHelper.Translate(translateX, translateY)) : default(IDisposable);
             var scaleDisposable = scale != 1.0 ? _dc.PushPreTransform(AME.MatrixHelper.Scale(scale, scale)) : default(IDisposable);
@@ -716,11 +773,13 @@ namespace Core2D.UI.Renderer
 
             scaleDisposable?.Dispose();
             translateDisposable?.Dispose();
+            */
         }
 
         /// <inheritdoc/>
         public void Draw(object dc, IArcShape arc, double dx, double dy)
         {
+            /*
             if (!arc.IsFilled && !arc.IsStroked)
             {
                 return;
@@ -744,7 +803,7 @@ namespace Core2D.UI.Renderer
             var translateX = 0.0 - (center.X * scale) + center.X;
             var translateY = 0.0 - (center.Y * scale) + center.Y;
 
-            GetCached(style, out var fill, out var stroke, scaleToPage, scaleThickness);
+            GetCached(style, out var fill, out var stroke, scaleThickness);
 
             var translateDisposable = scale != 1.0 ? _dc.PushPreTransform(AME.MatrixHelper.Translate(translateX, translateY)) : default(IDisposable);
             var scaleDisposable = scale != 1.0 ? _dc.PushPreTransform(AME.MatrixHelper.Scale(scale, scale)) : default(IDisposable);
@@ -756,11 +815,13 @@ namespace Core2D.UI.Renderer
 
             scaleDisposable?.Dispose();
             translateDisposable?.Dispose();
+            */
         }
 
         /// <inheritdoc/>
         public void Draw(object dc, ICubicBezierShape cubicBezier, double dx, double dy)
         {
+            /*
             if (!cubicBezier.IsFilled && !cubicBezier.IsStroked)
             {
                 return;
@@ -784,7 +845,7 @@ namespace Core2D.UI.Renderer
             var translateX = 0.0 - (center.X * scale) + center.X;
             var translateY = 0.0 - (center.Y * scale) + center.Y;
 
-            GetCached(style, out var fill, out var stroke, scaleToPage, scaleThickness);
+            GetCached(style, out var fill, out var stroke, scaleThickness);
 
             var translateDisposable = scale != 1.0 ? _dc.PushPreTransform(AME.MatrixHelper.Translate(translateX, translateY)) : default(IDisposable);
             var scaleDisposable = scale != 1.0 ? _dc.PushPreTransform(AME.MatrixHelper.Scale(scale, scale)) : default(IDisposable);
@@ -796,11 +857,13 @@ namespace Core2D.UI.Renderer
 
             scaleDisposable?.Dispose();
             translateDisposable?.Dispose();
+            */
         }
 
         /// <inheritdoc/>
         public void Draw(object dc, IQuadraticBezierShape quadraticBezier, double dx, double dy)
         {
+            /*
             if (!quadraticBezier.IsFilled && !quadraticBezier.IsStroked)
             {
                 return;
@@ -824,7 +887,7 @@ namespace Core2D.UI.Renderer
             var translateX = 0.0 - (center.X * scale) + center.X;
             var translateY = 0.0 - (center.Y * scale) + center.Y;
 
-            GetCached(style, out var fill, out var stroke, scaleToPage, scaleThickness);
+            GetCached(style, out var fill, out var stroke, scaleThickness);
 
             var translateDisposable = scale != 1.0 ? _dc.PushPreTransform(AME.MatrixHelper.Translate(translateX, translateY)) : default(IDisposable);
             var scaleDisposable = scale != 1.0 ? _dc.PushPreTransform(AME.MatrixHelper.Scale(scale, scale)) : default(IDisposable);
@@ -836,11 +899,13 @@ namespace Core2D.UI.Renderer
 
             scaleDisposable?.Dispose();
             translateDisposable?.Dispose();
+            */
         }
 
         /// <inheritdoc/>
         public void Draw(object dc, ITextShape text, double dx, double dy)
         {
+            /*
             var _dc = dc as AM.DrawingContext;
 
             var style = text.Style;
@@ -869,7 +934,7 @@ namespace Core2D.UI.Renderer
             var translateX = 0.0 - (center.X * scale) + center.X;
             var translateY = 0.0 - (center.Y * scale) + center.Y;
 
-            GetCached(style, out _, out var stroke, scaleToPage, scaleThickness);
+            GetCached(style, out _, out var stroke, scaleThickness);
 
             var translateDisposable = scale != 1.0 ? _dc.PushPreTransform(AME.MatrixHelper.Translate(translateX, translateY)) : default(IDisposable);
             var scaleDisposable = scale != 1.0 ? _dc.PushPreTransform(AME.MatrixHelper.Scale(scale, scale)) : default(IDisposable);
@@ -926,11 +991,13 @@ namespace Core2D.UI.Renderer
 
             scaleDisposable?.Dispose();
             translateDisposable?.Dispose();
+            */
         }
 
         /// <inheritdoc/>
         public void Draw(object dc, IImageShape image, double dx, double dy)
         {
+            /*
             if (image.Key == null)
             {
                 return;
@@ -954,7 +1021,7 @@ namespace Core2D.UI.Renderer
 
             if ((image.IsStroked || image.IsFilled) && style != null)
             {
-                GetCached(style, out var fill, out var stroke, scaleToPage, scaleThickness);
+                GetCached(style, out var fill, out var stroke, scaleThickness);
 
                 DrawRectangleInternal(
                     _dc,
@@ -1011,6 +1078,7 @@ namespace Core2D.UI.Renderer
 
             scaleDisposable?.Dispose();
             translateDisposable?.Dispose();
+            */
         }
 
         /// <inheritdoc/>
@@ -1037,7 +1105,7 @@ namespace Core2D.UI.Renderer
             var drawNodeCached = _drawNodeCache.Get(path);
             if (drawNodeCached != null)
             {
-                drawNodeCached.Draw(context, dx, dy, _scaleToPage, _state.ZoomX);
+                drawNodeCached.Draw(context, dx, dy, _state.ZoomX);
             }
             else
             {
@@ -1058,7 +1126,7 @@ namespace Core2D.UI.Renderer
 
                 _drawNodeCache.Set(path, pathDrawNode);
 
-                pathDrawNode.Draw(context, dx, dy, _scaleToPage, _state.ZoomX);
+                pathDrawNode.Draw(context, dx, dy, _state.ZoomX);
             }
         }
     }
