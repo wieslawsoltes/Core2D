@@ -132,6 +132,7 @@ namespace Core2D.UI.Renderer
         // TODO: Add QuadraticBezierShape cache.
         private readonly ICache<ITextShape, (string, AM.FormattedText, IShapeStyle)> _textCache;
         private readonly ICache<string, AMI.Bitmap> _biCache;
+        private readonly ICache<IBaseShape, DrawNode> _drawNodeCache;
         // TODO: Add PathShape cache.
         private readonly Func<double, float> _scaleToPage;
         private readonly double _textScaleFactor;
@@ -155,7 +156,8 @@ namespace Core2D.UI.Renderer
             _styleCache = _serviceProvider.GetService<IFactory>().CreateCache<IShapeStyle, (AM.IBrush, AM.IPen)>();
             _arrowStyleCache = _serviceProvider.GetService<IFactory>().CreateCache<IArrowStyle, (AM.IBrush, AM.IPen)>();
             _textCache = _serviceProvider.GetService<IFactory>().CreateCache<ITextShape, (string, AM.FormattedText, IShapeStyle)>();
-            _biCache = _serviceProvider.GetService<IFactory>().CreateCache<string, AMI.Bitmap>(bi => bi.Dispose());
+            _biCache = _serviceProvider.GetService<IFactory>().CreateCache<string, AMI.Bitmap>(x => x.Dispose());
+            _drawNodeCache = _serviceProvider.GetService<IFactory>().CreateCache<IBaseShape, DrawNode>(x => x.Dispose());
             _textScaleFactor = textScaleFactor;
             _scaleToPage = (value) => (float)(value);
             ClearCache(isZooming: false);
@@ -221,6 +223,34 @@ namespace Core2D.UI.Renderer
             var strokeWidth = scale(thickness);
             var brush = ToBrush(style.Stroke);
             var pen = new AM.Pen(brush, strokeWidth, dashStyle, lineCap);
+
+            return pen;
+        }
+
+        private AM.Pen ToPen(IBaseStyle style)
+        {
+            var dashStyle = default(AM.DashStyle);
+            if (style.Dashes != null)
+            {
+                var dashes = StyleHelper.ConvertDashesToDoubleArray(style.Dashes, 1.0);
+                var dashOffset = style.DashOffset;
+                if (dashes != null)
+                {
+                    dashStyle = new AM.DashStyle(dashes, dashOffset);
+                }
+            }
+
+            var lineCap = style.LineCap switch
+            {
+                LineCap.Flat => AM.PenLineCap.Flat,
+                LineCap.Square => AM.PenLineCap.Square,
+                LineCap.Round => AM.PenLineCap.Round,
+                _ => throw new NotImplementedException()
+            };
+
+            var thickness = style.Thickness;
+            var brush = ToBrush(style.Stroke);
+            var pen = new AM.Pen(brush, thickness, dashStyle, lineCap);
 
             return pen;
         }
@@ -373,28 +403,6 @@ namespace Core2D.UI.Renderer
                 g);
         }
 
-        private void DrawGridInternal(AM.DrawingContext dc, AM.IPen stroke, ref Rect2 rect, double offsetX, double offsetY, double cellWidth, double cellHeight, bool isStroked)
-        {
-            double ox = rect.X;
-            double oy = rect.Y;
-            double sx = ox + offsetX;
-            double sy = oy + offsetY;
-            double ex = ox + rect.Width;
-            double ey = oy + rect.Height;
-            for (double x = sx; x < ex; x += cellWidth)
-            {
-                var p0 = new A.Point(_scaleToPage(x), _scaleToPage(oy));
-                var p1 = new A.Point(_scaleToPage(x), _scaleToPage(ey));
-                DrawLineInternal(dc, stroke, isStroked, ref p0, ref p1);
-            }
-            for (double y = sy; y < ey; y += cellHeight)
-            {
-                var p0 = new A.Point(_scaleToPage(ox), _scaleToPage(y));
-                var p1 = new A.Point(_scaleToPage(ex), _scaleToPage(y));
-                DrawLineInternal(dc, stroke, isStroked, ref p0, ref p1);
-            }
-        }
-
         private static AM.StreamGeometry ToStreamGeometry(IArcShape arc, double dx, double dy)
         {
             var sg = new AM.StreamGeometry();
@@ -490,6 +498,7 @@ namespace Core2D.UI.Renderer
             {
                 _textCache.Reset();
                 _biCache.Reset();
+                //_drawNodeCache.Reset();
             }
         }
 
@@ -629,50 +638,46 @@ namespace Core2D.UI.Renderer
         /// <inheritdoc/>
         public void Draw(object dc, IRectangleShape rectangle, double dx, double dy)
         {
-            var _dc = dc as AM.DrawingContext;
-
             var style = rectangle.Style;
             if (style == null)
             {
                 return;
             }
 
-            var scaleThickness = rectangle.State.Flags.HasFlag(ShapeStateFlags.Thickness);
-            var scaleSize = rectangle.State.Flags.HasFlag(ShapeStateFlags.Size);
-            var rect = CreateRect(rectangle.TopLeft, rectangle.BottomRight, dx, dy);
+            var context = dc as AM.DrawingContext;
 
-            var scale = scaleSize ? 1.0 / _state.ZoomX : 1.0;
-            var scaleToPage = scale == 1.0 ? _scaleToPage : (value) => (float)(_scaleToPage(value) / scale);
-            var center = rect.Center;
-            var translateX = 0.0 - (center.X * scale) + center.X;
-            var translateY = 0.0 - (center.Y * scale) + center.Y;
-
-            GetCached(style, out var fill, out var stroke, scaleToPage, rectangle.IsGrid ? true : scaleThickness);
-
-            var translateDisposable = scale != 1.0 ? _dc.PushPreTransform(AME.MatrixHelper.Translate(translateX, translateY)) : default(IDisposable);
-            var scaleDisposable = scale != 1.0 ? _dc.PushPreTransform(AME.MatrixHelper.Scale(scale, scale)) : default(IDisposable);
-
-            DrawRectangleInternal(
-                _dc,
-                fill,
-                stroke,
-                rectangle.IsStroked,
-                rectangle.IsFilled,
-                ref rect);
-
-            if (rectangle.IsGrid)
+            var drawNodeCached = _drawNodeCache.Get(rectangle);
+            if (drawNodeCached != null)
             {
-                DrawGridInternal(
-                    _dc,
-                    stroke,
-                    ref rect,
-                    rectangle.OffsetX, rectangle.OffsetY,
-                    rectangle.CellWidth, rectangle.CellHeight,
-                    true);
+                drawNodeCached.Draw(context, dx, dy, _scaleToPage, _state.ZoomX);
             }
+            else
+            {
+                var rect2 = CreateRect(rectangle.TopLeft, rectangle.BottomRight, dx, dy);
+                var rect = new A.Rect(rect2.X, rect2.Y, rect2.Width, rect2.Height);
+                var center = rect.Center;
 
-            scaleDisposable?.Dispose();
-            translateDisposable?.Dispose();
+                var drawNode = new RectangleDrawNode()
+                {
+                    Shape = rectangle,
+                    Style = style,
+                    ScaleThickness = rectangle.State.Flags.HasFlag(ShapeStateFlags.Thickness),
+                    ScaleSize = rectangle.State.Flags.HasFlag(ShapeStateFlags.Size),
+                    Fill = ToBrush(style.Fill),
+                    Stroke = ToPen(style),
+                    Center = center,
+                    Rect = rect,
+                    IsGrid = rectangle.IsGrid,
+                    OffsetX = rectangle.OffsetX,
+                    OffsetY = rectangle.OffsetY,
+                    CellWidth = rectangle.CellWidth,
+                    CellHeight = rectangle.CellHeight
+                };
+
+                _drawNodeCache.Set(rectangle, drawNode);
+
+                drawNode.Draw(context, dx, dy, _scaleToPage, _state.ZoomX);
+            }
         }
 
         /// <inheritdoc/>
@@ -1011,6 +1016,12 @@ namespace Core2D.UI.Renderer
         /// <inheritdoc/>
         public void Draw(object dc, IPathShape path, double dx, double dy)
         {
+            var style = path.Style;
+            if (style == null)
+            {
+                return;
+            }
+
             if (path.Geometry == null)
             {
                 return;
@@ -1021,36 +1032,34 @@ namespace Core2D.UI.Renderer
                 return;
             }
 
-            var _dc = dc as AM.DrawingContext;
+            var context = dc as AM.DrawingContext;
 
-            var style = path.Style;
-            if (style == null)
+            var drawNodeCached = _drawNodeCache.Get(path);
+            if (drawNodeCached != null)
             {
-                return;
+                drawNodeCached.Draw(context, dx, dy, _scaleToPage, _state.ZoomX);
             }
+            else
+            {
+                var geometry = PathGeometryConverter.ToGeometry(path.Geometry, 0, 0);
+                var center = geometry.Bounds.Center;
 
-            var scaleThickness = path.State.Flags.HasFlag(ShapeStateFlags.Thickness);
-            var scaleSize = path.State.Flags.HasFlag(ShapeStateFlags.Size);
-            var geometry = PathGeometryConverter.ToGeometry(path.Geometry, dx, dy);
+                var pathDrawNode = new PathDrawNode()
+                {
+                    Shape = path,
+                    Style = style,
+                    ScaleThickness = path.State.Flags.HasFlag(ShapeStateFlags.Thickness),
+                    ScaleSize = path.State.Flags.HasFlag(ShapeStateFlags.Size),
+                    Fill = ToBrush(style.Fill),
+                    Stroke = ToPen(style),
+                    Center = center,
+                    Geometry = geometry
+                };
 
-            var scale = scaleSize ? 1.0 / _state.ZoomX : 1.0;
-            var scaleToPage = scale == 1.0 ? _scaleToPage : (value) => (float)(_scaleToPage(value) / scale);
-            var center = geometry.Bounds.Center;
-            var translateX = 0.0 - (center.X * scale) + center.X;
-            var translateY = 0.0 - (center.Y * scale) + center.Y;
+                _drawNodeCache.Set(path, pathDrawNode);
 
-            GetCached(style, out var fill, out var stroke, scaleToPage, scaleThickness);
-
-            var translateDisposable = scale != 1.0 ? _dc.PushPreTransform(AME.MatrixHelper.Translate(translateX, translateY)) : default(IDisposable);
-            var scaleDisposable = scale != 1.0 ? _dc.PushPreTransform(AME.MatrixHelper.Scale(scale, scale)) : default(IDisposable);
-
-            _dc.DrawGeometry(
-                path.IsFilled ? fill : null,
-                path.IsStroked ? stroke : null,
-                geometry);
-
-            scaleDisposable?.Dispose();
-            translateDisposable?.Dispose();
+                pathDrawNode.Draw(context, dx, dy, _scaleToPage, _state.ZoomX);
+            }
         }
     }
 }
