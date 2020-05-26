@@ -217,23 +217,6 @@ namespace Core2D.UI.Renderer
             throw new NotImplementedException();
         }
 
-        private A.Point GetTextOrigin(IShapeStyle style, ref Rect2 rect, ref A.Size size)
-        {
-            var ox = style.TextStyle.TextHAlignment switch
-            {
-                TextHAlignment.Left => rect.X,
-                TextHAlignment.Right => rect.Right - size.Width,
-                _ => (rect.Left + rect.Width / 2.0) - (size.Width / 2.0),
-            };
-            var oy = style.TextStyle.TextVAlignment switch
-            {
-                TextVAlignment.Top => rect.Y,
-                TextVAlignment.Bottom => rect.Bottom - size.Height,
-                _ => (rect.Bottom - rect.Height / 2f) - (size.Height / 2f),
-            };
-            return new A.Point(ox, oy);
-        }
-
         private static AM.Color ToColor(IColor color) => color switch
         {
             IArgbColor argbColor => AM.Color.FromArgb(argbColor.A, argbColor.R, argbColor.G, argbColor.B),
@@ -245,7 +228,6 @@ namespace Core2D.UI.Renderer
             IArgbColor argbColor => new AM.SolidColorBrush(ToColor(argbColor)),
             _ => throw new NotSupportedException($"The {color.GetType()} color type is not supported."),
         };
-
 
         private AM.Pen ToPen(IBaseStyle style)
         {
@@ -280,6 +262,24 @@ namespace Core2D.UI.Renderer
             return Rect2.FromPoints(tl.X, tl.Y, br.X, br.Y, dx, dy);
         }
 
+        /*
+        private A.Point GetTextOrigin(IShapeStyle style, ref Rect2 rect, ref A.Size size)
+        {
+            var ox = style.TextStyle.TextHAlignment switch
+            {
+                TextHAlignment.Left => rect.X,
+                TextHAlignment.Right => rect.Right - size.Width,
+                _ => (rect.Left + rect.Width / 2.0) - (size.Width / 2.0),
+            };
+            var oy = style.TextStyle.TextVAlignment switch
+            {
+                TextVAlignment.Top => rect.Y,
+                TextVAlignment.Bottom => rect.Bottom - size.Height,
+                _ => (rect.Bottom - rect.Height / 2f) - (size.Height / 2f),
+            };
+            return new A.Point(ox, oy);
+        }
+
         private static void DrawLineInternal(AM.DrawingContext dc, AM.IPen pen, bool isStroked, ref A.Point p0, ref A.Point p1)
         {
             if (!isStroked)
@@ -312,7 +312,7 @@ namespace Core2D.UI.Renderer
             }
             _dc.DrawGeometry(null, pen, sg);
         }
-        /*
+
         private void DrawLineArrowsInternal(AM.DrawingContext dc, ILineShape line, IShapeStyle style, double dx, double dy, Func<double, float> scaleToPage, bool scaleStrokeWidth, out A.Point pt1, out A.Point pt2)
         {
             GetCached(style.StartArrowStyle, out var fillStartArrow, out var strokeStartArrow, scaleStrokeWidth);
@@ -391,7 +391,7 @@ namespace Core2D.UI.Renderer
             }
             return pt;
         }
-        */
+
         private static void DrawRectangleInternal(AM.DrawingContext dc, AM.IBrush brush, AM.IPen pen, bool isStroked, bool isFilled, ref Rect2 rect)
         {
             if (!isStroked && !isFilled)
@@ -422,6 +422,7 @@ namespace Core2D.UI.Renderer
                 isStroked ? pen : null,
                 g);
         }
+        */
 
         /// <inheritdoc/>
         public void InvalidateCache(IShapeStyle style)
