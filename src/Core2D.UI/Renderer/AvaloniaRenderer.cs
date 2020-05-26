@@ -14,6 +14,108 @@ using AMI = Avalonia.Media.Imaging;
 
 namespace Core2D.UI.Renderer
 {
+    internal abstract class DrawNode : IDisposable
+    {
+        public IBaseShape Shape { get; set; }
+        public IShapeStyle Style { get; set; }
+        public bool ScaleThickness { get; set; }
+        public bool ScaleSize { get; set; }
+        public AM.IBrush Fill { get; set; }
+        public AM.Pen Stroke { get; set; }
+        public A.Point Center { get; set; }
+
+        public void Draw(AM.DrawingContext context, double dx, double dy, Func<double, float> scaleFunc, double zoom)
+        {
+            var scale = ScaleSize ? 1.0 / zoom : 1.0;
+            var scaleToPage = scale == 1.0 ? scaleFunc : (value) => (float)(scaleFunc(value) / scale);
+            var translateX = 0.0 - (Center.X * scale) + Center.X;
+            var translateY = 0.0 - (Center.Y * scale) + Center.Y;
+
+            if (ScaleThickness)
+            {
+                Stroke.Thickness = scaleFunc(Style.Thickness / zoom);
+            }
+            else
+            {
+                Stroke.Thickness = scaleFunc(Style.Thickness);
+            }
+
+            var offsetDisposable = dx != 0.0 || dy != 0.0 ? context.PushPreTransform(AME.MatrixHelper.Translate(dx, dy)) : default(IDisposable);
+            var translateDisposable = scale != 1.0 ? context.PushPreTransform(AME.MatrixHelper.Translate(translateX, translateY)) : default(IDisposable);
+            var scaleDisposable = scale != 1.0 ? context.PushPreTransform(AME.MatrixHelper.Scale(scale, scale)) : default(IDisposable);
+
+            OnDraw(context, dx, dy, scaleToPage, zoom);
+
+            scaleDisposable?.Dispose();
+            translateDisposable?.Dispose();
+            offsetDisposable?.Dispose();
+        }
+
+        public abstract void OnDraw(AM.DrawingContext context, double dx, double dy, Func<double, float> scaleToPage, double zoom);
+
+        public virtual void Dispose()
+        {
+        }
+    }
+
+    internal class RectangleDrawNode : DrawNode
+    {
+        public A.Rect Rect { get; set; }
+        public bool IsGrid { get; set; }
+        public double OffsetX { get; set; }
+        public double OffsetY { get; set; }
+        public double CellWidth { get; set; }
+        public double CellHeight { get; set; }
+
+        public override void OnDraw(AM.DrawingContext context, double dx, double dy, Func<double, float> scaleToPage, double zoom)
+        {
+            if (Shape.IsFilled)
+            {
+                context.FillRectangle(Fill, Rect);
+            }
+
+            if (Shape.IsStroked)
+            {
+                context.DrawRectangle(Stroke, Rect);
+            }
+
+            if (Shape.IsStroked && IsGrid)
+            {
+                double ox = Rect.X;
+                double oy = Rect.Y;
+                double sx = ox + OffsetX;
+                double sy = oy + OffsetY;
+                double ex = ox + Rect.Width;
+                double ey = oy + Rect.Height;
+
+                for (double x = sx; x < ex; x += CellWidth)
+                {
+                    var p0 = new A.Point(scaleToPage(x), scaleToPage(oy));
+                    var p1 = new A.Point(scaleToPage(x), scaleToPage(ey));
+                    context.DrawLine(Stroke, p0, p1);
+
+                }
+
+                for (double y = sy; y < ey; y += CellHeight)
+                {
+                    var p0 = new A.Point(scaleToPage(ox), scaleToPage(y));
+                    var p1 = new A.Point(scaleToPage(ex), scaleToPage(y));
+                    context.DrawLine(Stroke, p0, p1);
+                }
+            }
+        }
+    }
+
+    internal class PathDrawNode : DrawNode
+    {
+        public AM.Geometry Geometry { get; set; }
+
+        public override void OnDraw(AM.DrawingContext context, double dx, double dy, Func<double, float> scaleToPage, double zoom)
+        {
+            context.DrawGeometry(Shape.IsFilled ? Fill : null, Shape.IsStroked ? Stroke : null, Geometry);
+        }
+    }
+
     /// <summary>
     /// Native Avalonia shape renderer.
     /// </summary>
