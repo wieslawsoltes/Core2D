@@ -145,15 +145,9 @@ namespace Core2D.UI.Renderer
         private IShapeRendererState _state;
         private readonly ICache<IShapeStyle, (AM.IBrush, AM.IPen)> _styleCache;
         private readonly ICache<IArrowStyle, (AM.IBrush, AM.IPen)> _arrowStyleCache;
-        // TODO: Add LineShape cache.
-        // TODO: Add EllipseShape cache.
-        // TODO: Add ArcShape cache.
-        // TODO: Add CubicBezierShape cache.
-        // TODO: Add QuadraticBezierShape cache.
         private readonly ICache<ITextShape, (string, AM.FormattedText, IShapeStyle)> _textCache;
         private readonly ICache<string, AMI.Bitmap> _biCache;
         private readonly ICache<IBaseShape, DrawNode> _drawNodeCache;
-        // TODO: Add PathShape cache.
         private readonly double _textScaleFactor;
 
         /// <inheritdoc/>
