@@ -5,6 +5,8 @@ using Core2D;
 using Core2D.Path;
 using Core2D.Path.Segments;
 using Core2D.Shapes;
+using Spatial;
+using Spatial.Arc;
 using A = Avalonia;
 using AM = Avalonia.Media;
 
@@ -145,6 +147,65 @@ namespace Core2D.UI.Renderer
         public static AM.Geometry ToGeometry(IPathGeometry xpg, double dx, double dy)
         {
             return ToStreamGeometry(xpg, dx, dy);
+        }
+
+        public static AM.Geometry ToGeometry(IEllipseShape ellipse, double dx, double dy)
+        {
+            var rect2 = Rect2.FromPoints(ellipse.TopLeft.X, ellipse.TopLeft.Y, ellipse.BottomRight.X, ellipse.BottomRight.Y, dx, dy);
+            var rect = new A.Rect(rect2.X, rect2.Y, rect2.Width, rect2.Height);
+            var g = new AM.EllipseGeometry(rect);
+            return g;
+        }
+
+        public static AM.Geometry ToGeometry(IArcShape arc, double dx, double dy)
+        {
+            var sg = new AM.StreamGeometry();
+            using var sgc = sg.Open();
+            var a = new WpfArc(
+                Point2.FromXY(arc.Point1.X, arc.Point1.Y),
+                Point2.FromXY(arc.Point2.X, arc.Point2.Y),
+                Point2.FromXY(arc.Point3.X, arc.Point3.Y),
+                Point2.FromXY(arc.Point4.X, arc.Point4.Y));
+            sgc.BeginFigure(
+                new A.Point(a.Start.X + dx, a.Start.Y + dy),
+                arc.IsFilled);
+            sgc.ArcTo(
+                new A.Point(a.End.X + dx, a.End.Y + dy),
+                new A.Size(a.Radius.Width, a.Radius.Height),
+                0.0,
+                a.IsLargeArc,
+                AM.SweepDirection.Clockwise);
+            sgc.EndFigure(false);
+            return sg;
+        }
+
+        public static AM.Geometry ToGeometry(ICubicBezierShape cubicBezier, double dx, double dy)
+        {
+            var sg = new AM.StreamGeometry();
+            using var sgc = sg.Open();
+            sgc.BeginFigure(
+                new A.Point(cubicBezier.Point1.X + dx, cubicBezier.Point1.Y + dy),
+                cubicBezier.IsFilled);
+            sgc.CubicBezierTo(
+                new A.Point(cubicBezier.Point2.X + dx, cubicBezier.Point2.Y + dy),
+                new A.Point(cubicBezier.Point3.X + dx, cubicBezier.Point3.Y + dy),
+                new A.Point(cubicBezier.Point4.X + dx, cubicBezier.Point4.Y + dy));
+            sgc.EndFigure(false);
+            return sg;
+        }
+
+        public static AM.Geometry ToGeometry(IQuadraticBezierShape quadraticBezier, double dx, double dy)
+        {
+            var sg = new AM.StreamGeometry();
+            using var sgc = sg.Open();
+            sgc.BeginFigure(
+                new A.Point(quadraticBezier.Point1.X + dx, quadraticBezier.Point1.Y + dy),
+                quadraticBezier.IsFilled);
+            sgc.QuadraticBezierTo(
+                new A.Point(quadraticBezier.Point2.X + dx, quadraticBezier.Point2.Y + dy),
+                new A.Point(quadraticBezier.Point3.X + dx, quadraticBezier.Point3.Y + dy));
+            sgc.EndFigure(false);
+            return sg;
         }
 
         public static string ToSource(IPathGeometry xpg)
