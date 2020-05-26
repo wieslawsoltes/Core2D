@@ -171,7 +171,7 @@ namespace Core2D.UI.Views
 
             public bool HitTest(Point p) => false;
 
-            public bool Equals(ICustomDrawOperation other) => this.Equals(other);
+            public bool Equals(ICustomDrawOperation other) => false;
 
             public void Render(IDrawingContextImpl context)
             {
