@@ -30,9 +30,9 @@ namespace Core2D.Path
         bool IsClosed { get; set; }
 
         /// <summary>
-        /// Get all points in the figure.
+        /// Get all points in the shape.
         /// </summary>
-        /// <returns>All points in the figure.</returns>
-        IEnumerable<IPointShape> GetPoints();
+        /// <param name="points">The points list.</param>
+        void GetPoints(IList<IPointShape> points);
     }
 }

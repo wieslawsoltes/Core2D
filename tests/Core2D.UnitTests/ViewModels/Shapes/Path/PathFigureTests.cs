@@ -57,7 +57,8 @@ namespace Core2D.UnitTests
             var segment2 = new TestSegment() { Point = _factory.CreatePointShape() };
             figure.Segments = figure.Segments.Add(segment2);
 
-            var target = figure.GetPoints();
+            var target = new List<IPointShape>();
+            figure.GetPoints(target);
 
             Assert.Equal(3, target.Count());
 
@@ -142,9 +143,9 @@ namespace Core2D.UnitTests
         {
             public IPointShape Point { get; set; }
 
-            public override IEnumerable<IPointShape> GetPoints()
+            public override void GetPoints(IList<IPointShape> points)
             {
-                yield return Point;
+                points.Add(Point);
             }
 
             /// <inheritdoc/>

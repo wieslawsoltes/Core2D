@@ -55,7 +55,7 @@ namespace Core2D.Common.UnitTests
             throw new NotImplementedException();
         }
 
-        public IEnumerable<IPointShape> GetPoints()
+        public void GetPoints(IList<IPointShape> points)
         {
             throw new NotImplementedException();
         }

@@ -4245,7 +4245,17 @@ namespace Core2D.Editor
                 {
                     case MoveMode.Point:
                         {
-                            var distinct = shapes.Where(s => !s.State.Flags.HasFlag(ShapeStateFlags.Locked)).SelectMany(s => s.GetPoints()).Distinct().ToList();
+                            var points = new List<IPointShape>();
+
+                            foreach (var shape in shapes)
+                            {
+                                if (!shape.State.Flags.HasFlag(ShapeStateFlags.Locked))
+                                {
+                                    shape.GetPoints(points);
+                                }
+                            }
+
+                            var distinct = points.Distinct().ToList();
                             MoveShapesByWithHistory(distinct, dx, dy);
                         }
                         break;

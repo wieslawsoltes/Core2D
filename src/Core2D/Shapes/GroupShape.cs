@@ -132,9 +132,14 @@ namespace Core2D.Shapes
         }
 
         /// <inheritdoc/>
-        public override IEnumerable<IPointShape> GetPoints()
+        public override void GetPoints(IList<IPointShape> points)
         {
-            return Enumerable.Concat(Shapes.SelectMany(s => s.GetPoints()), base.GetPoints());
+            foreach (var shape in Shapes)
+            {
+                shape.GetPoints(points);
+            }
+
+            base.GetPoints(points);
         }
 
         /// <inheritdoc/>

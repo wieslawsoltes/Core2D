@@ -19,9 +19,9 @@ namespace Core2D.Path.Segments
         }
 
         /// <inheritdoc/>
-        public override IEnumerable<IPointShape> GetPoints()
+        public override void GetPoints(IList<IPointShape> points)
         {
-            yield return Point;
+            points.Add(Point);
         }
 
         /// <inheritdoc/>

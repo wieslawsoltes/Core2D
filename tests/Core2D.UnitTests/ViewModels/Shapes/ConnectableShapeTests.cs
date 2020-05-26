@@ -51,7 +51,9 @@ namespace Core2D.Shapes.UnitTests
             point.Data.Properties = point.Data.Properties.Add(_factory.CreateProperty(null, "", ""));
             target.Connectors = target.Connectors.Add(point);
 
-            var count = target.GetPoints().Count();
+            var points = new List<IPointShape>();
+            target.GetPoints(points);
+            var count = points.Count();
             Assert.Equal(1, count);
         }
 
@@ -145,7 +147,7 @@ namespace Core2D.Shapes.UnitTests
                 throw new NotImplementedException();
             }
 
-            public override IEnumerable<IPointShape> GetPoints()
+            public override void GetPoints(IList<IPointShape> points)
             {
                 throw new NotImplementedException();
             }

@@ -28,7 +28,7 @@ namespace Core2D.Shapes
         /// <summary>
         /// Get all points in the shape.
         /// </summary>
-        /// <returns>All points in the shape.</returns>
-        IEnumerable<IPointShape> GetPoints();
+        /// <param name="points">The points list.</param>
+        void GetPoints(IList<IPointShape> points);
     }
 }

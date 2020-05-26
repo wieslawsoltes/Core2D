@@ -19,9 +19,9 @@ namespace Core2D.Path
         bool IsSmoothJoin { get; set; }
 
         /// <summary>
-        /// Get all points in the segment.
+        /// Get all points in the shape.
         /// </summary>
-        /// <returns>All points in the segment.</returns>
-        IEnumerable<IPointShape> GetPoints();
+        /// <param name="points">The points list.</param>
+        void GetPoints(IList<IPointShape> points);
     }
 }

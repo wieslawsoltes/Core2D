@@ -57,10 +57,7 @@ namespace Core2D.Layout
 
             Points = new List<IPointShape>();
 
-            foreach (var point in Shape.GetPoints())
-            {
-                Points.Add(point);
-            }
+            Shape.GetPoints(Points);
 
             Bounds = new Box();
 

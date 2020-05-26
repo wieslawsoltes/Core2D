@@ -8,6 +8,8 @@ namespace Core2D.Editor.Bounds.Shapes
 {
     public class BoundsCubicBezier : IBounds
     {
+        private List<IPointShape> _points = new List<IPointShape>();
+
         public Type TargetType => typeof(ICubicBezierShape);
 
         public IPointShape TryToGetPoint(IBaseShape shape, Point2 target, double radius, double scale, IDictionary<Type, IBounds> registered)
@@ -49,15 +51,16 @@ namespace Core2D.Editor.Bounds.Shapes
                 throw new ArgumentNullException(nameof(shape));
             }
 
-            var points = cubic.GetPoints();
+            _points.Clear();
+            cubic.GetPoints(_points);
 
             if (cubic.State.Flags.HasFlag(ShapeStateFlags.Size) && scale != 1.0)
             {
-                return HitTestHelper.Contains(points, target, scale);
+                return HitTestHelper.Contains(_points, target, scale);
             }
             else
             {
-                return HitTestHelper.Contains(points, target, 1.0);
+                return HitTestHelper.Contains(_points, target, 1.0);
             }
         }
 
@@ -68,15 +71,16 @@ namespace Core2D.Editor.Bounds.Shapes
                 throw new ArgumentNullException(nameof(shape));
             }
 
-            var points = cubic.GetPoints();
+            _points.Clear();
+            cubic.GetPoints(_points);
 
             if (cubic.State.Flags.HasFlag(ShapeStateFlags.Size) && scale != 1.0)
             {
-                return HitTestHelper.Overlap(points, target, scale);
+                return HitTestHelper.Overlap(_points, target, scale);
             }
             else
             {
-                return HitTestHelper.Overlap(points, target, 1.0);
+                return HitTestHelper.Overlap(_points, target, 1.0);
             }
         }
     }

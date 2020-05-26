@@ -46,7 +46,7 @@ namespace Core2D.Shapes.UnitTests
                 throw new NotImplementedException();
             }
 
-            public override IEnumerable<IPointShape> GetPoints()
+            public override void GetPoints(IList<IPointShape> points)
             {
                 throw new NotImplementedException();
             }

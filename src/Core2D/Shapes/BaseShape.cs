@@ -109,11 +109,8 @@ namespace Core2D.Shapes
             }
         }
 
-        /// <summary>
-        /// Get all points in the shape.
-        /// </summary>
-        /// <returns>All points in the shape.</returns>
-        public abstract IEnumerable<IPointShape> GetPoints();
+        /// <inheritdoc/>
+        public abstract void GetPoints(IList<IPointShape> points);
 
         /// <summary>
         /// Check whether the <see cref="State"/> property has changed from its default value.

@@ -88,7 +88,14 @@ namespace Core2D.Editor.Tools
         /// <returns>All points in the shape.</returns>
         private static IEnumerable<IPointShape> GetMovePoints(IEnumerable<IBaseShape> shapes)
         {
-            return shapes.SelectMany(s => s.GetPoints().Where(p => IsPointMovable(s, p))).Distinct();
+            var points = new List<IPointShape>();
+
+            foreach (var shape in shapes)
+            {
+                shape.GetPoints(points);
+            }
+
+            return points.Where(p => IsPointMovable(p.Owner as IBaseShape, p)).Distinct();
         }
 
         /// <summary>

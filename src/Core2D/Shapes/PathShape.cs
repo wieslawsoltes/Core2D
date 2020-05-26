@@ -12,6 +12,7 @@ namespace Core2D.Shapes
     /// </summary>
     public class PathShape : BaseShape, IPathShape
     {
+        private List<IPointShape> _points = new List<IPointShape>();
         private IPathGeometry _geometry;
 
         /// <inheritdoc/>
@@ -40,16 +41,20 @@ namespace Core2D.Shapes
             {
                 if (renderer.State.SelectedShapes.Contains(this))
                 {
-                    var points = GetPoints();
-                    foreach (var point in points)
+                    _points.Clear();
+                    GetPoints(_points);
+
+                    foreach (var point in _points)
                     {
                         point.DrawShape(dc, renderer, dx, dy);
                     }
                 }
                 else
                 {
-                    var points = GetPoints();
-                    foreach (var point in points)
+                    _points.Clear();
+                    GetPoints(_points);
+
+                    foreach (var point in _points)
                     {
                         if (renderer.State.SelectedShapes.Contains(point))
                         {
@@ -67,9 +72,10 @@ namespace Core2D.Shapes
 
             dataFlow.Bind(this, db, record);
 
-            var points = GetPoints();
+            _points.Clear();
+            GetPoints(_points);
 
-            foreach (var point in points)
+            foreach (var point in _points)
             {
                 point.Bind(dataFlow, db, record);
             }
@@ -78,8 +84,10 @@ namespace Core2D.Shapes
         /// <inheritdoc/>
         public override void Move(ISelection selection, double dx, double dy)
         {
-            var points = GetPoints();
-            foreach (var point in points)
+            _points.Clear();
+            GetPoints(_points);
+
+            foreach (var point in _points)
             {
                 point.Move(selection, dx, dy);
             }
@@ -90,8 +98,10 @@ namespace Core2D.Shapes
         {
             base.Select(selection);
 
-            var points = GetPoints();
-            foreach (var point in points)
+            _points.Clear();
+            GetPoints(_points);
+
+            foreach (var point in _points)
             {
                 point.Select(selection);
             }
@@ -102,17 +112,22 @@ namespace Core2D.Shapes
         {
             base.Deselect(selection);
 
-            var points = GetPoints();
-            foreach (var point in points)
+            _points.Clear();
+            GetPoints(_points);
+
+            foreach (var point in _points)
             {
                 point.Deselect(selection);
             }
         }
 
         /// <inheritdoc/>
-        public override IEnumerable<IPointShape> GetPoints()
+        public override void GetPoints(IList<IPointShape> points)
         {
-            return Geometry.Figures.SelectMany(f => f.GetPoints());
+            foreach (var figure in Geometry.Figures)
+            {
+                figure.GetPoints(points);
+            }
         }
 
         /// <inheritdoc/>

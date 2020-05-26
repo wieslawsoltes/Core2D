@@ -54,13 +54,13 @@ namespace Core2D.Path
         }
 
         /// <inheritdoc/>
-        public IEnumerable<IPointShape> GetPoints()
+        public void GetPoints(IList<IPointShape> points)
         {
-            yield return StartPoint;
+            points.Add(StartPoint);
 
-            foreach (var point in Segments.SelectMany(s => s.GetPoints()))
+            foreach (var segment in Segments)
             {
-                yield return point;
+                segment.GetPoints(points);
             }
         }
 

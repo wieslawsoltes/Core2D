@@ -93,9 +93,12 @@ namespace Core2D.Shapes
         }
 
         /// <inheritdoc/>
-        public override IEnumerable<IPointShape> GetPoints()
+        public override void GetPoints(IList<IPointShape> points)
         {
-            return _connectors;
+            foreach (var connector in _connectors)
+            {
+                points.Add(connector);
+            }
         }
 
         /// <inheritdoc/>

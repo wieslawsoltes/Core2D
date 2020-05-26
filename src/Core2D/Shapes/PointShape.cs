@@ -67,9 +67,9 @@ namespace Core2D.Shapes
         }
 
         /// <inheritdoc/>
-        public override IEnumerable<IPointShape> GetPoints()
+        public override void GetPoints(IList<IPointShape> points)
         {
-            yield return this;
+            points.Add(this);
         }
 
         /// <inheritdoc/>

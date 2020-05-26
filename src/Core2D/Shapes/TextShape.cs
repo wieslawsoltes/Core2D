@@ -114,10 +114,10 @@ namespace Core2D.Shapes
         }
 
         /// <inheritdoc/>
-        public override IEnumerable<IPointShape> GetPoints()
+        public override void GetPoints(IList<IPointShape> points)
         {
-            yield return TopLeft;
-            yield return BottomRight;
+            points.Add(TopLeft);
+            points.Add(BottomRight);
         }
 
         /// <inheritdoc/>

@@ -26,7 +26,7 @@ namespace Core2D.Path
         }
 
         /// <inheritdoc/>
-        public abstract IEnumerable<IPointShape> GetPoints();
+        public abstract void GetPoints(IList<IPointShape> points);
 
         /// <inheritdoc/>
         public abstract string ToXamlString();
