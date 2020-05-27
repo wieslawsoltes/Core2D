@@ -299,9 +299,15 @@ namespace Core2D.UI.Views
                     {
                         if (customState.Container != null && customState.Renderer != null)
                         {
+                            //var swRender = Stopwatch.StartNew();
                             s_editorPresenter.Render(context, customState.Renderer, customState.Container, 0.0, 0.0);
+                            //swRender.Stop();
+                            //Trace.WriteLine($"Render {swRender.Elapsed.TotalMilliseconds}ms");
 
+                            //var swInvalidate = Stopwatch.StartNew();
                             customState.Container?.Invalidate();
+                            //swInvalidate.Stop();
+                            //Trace.WriteLine($"Invalidate {swInvalidate.Elapsed.TotalMilliseconds}ms");
                         }
                     }
                     break;
