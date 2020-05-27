@@ -413,6 +413,32 @@ namespace Core2D.UI.Renderer
         }
     }
 
+    internal class ImageDrawNode : DrawNode
+    {
+        public IImageShape Image { get; set; }
+        // TODO:
+
+        public ImageDrawNode(IImageShape image, IShapeStyle style)
+        {
+            Style = style;
+            Image = image;
+            UpdateGeometry();
+        }
+
+        public override void UpdateGeometry()
+        {
+            ScaleThickness = Image.State.Flags.HasFlag(ShapeStateFlags.Thickness);
+            ScaleSize = Image.State.Flags.HasFlag(ShapeStateFlags.Size);
+            // TODO:
+            // TODO: Center
+        }
+
+        public override void OnDraw(AM.DrawingContext context, double dx, double dy, double zoom)
+        {
+            // TODO:
+        }
+    }
+
     internal class PathDrawNode : DrawNode
     {
         public IPathShape Path { get; set; }
