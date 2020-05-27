@@ -175,17 +175,35 @@ namespace Core2D.Containers
         {
             var isDirty = base.IsDirty();
 
-            isDirty |= Background.IsDirty();
+            if (Background != null)
+            {
+                isDirty |= Background.IsDirty(); 
+            }
 
             foreach (var layer in Layers)
             {
                 isDirty |= layer.IsDirty();
             }
 
-            isDirty |= WorkingLayer.IsDirty();
-            isDirty |= HelperLayer.IsDirty();
-            isDirty |= Template.IsDirty();
-            isDirty |= Data.IsDirty();
+            if (WorkingLayer != null)
+            {
+                isDirty |= WorkingLayer.IsDirty(); 
+            }
+
+            if (HelperLayer != null)
+            {
+                isDirty |= HelperLayer.IsDirty(); 
+            }
+
+            if (Template != null)
+            {
+                isDirty |= Template.IsDirty(); 
+            }
+
+            if (Data != null)
+            {
+                isDirty |= Data.IsDirty(); 
+            }
 
             return isDirty;
         }
@@ -195,17 +213,17 @@ namespace Core2D.Containers
         {
             base.Invalidate();
 
-            Background.Invalidate();
+            Background?.Invalidate();
 
             foreach (var layer in Layers)
             {
                 layer.Invalidate();
             }
 
-            WorkingLayer.Invalidate();
-            HelperLayer.Invalidate();
-            Template.Invalidate();
-            Data.Invalidate();
+            WorkingLayer?.Invalidate();
+            HelperLayer?.Invalidate();
+            Template?.Invalidate();
+            Data?.Invalidate();
         }
 
         /// <summary>
