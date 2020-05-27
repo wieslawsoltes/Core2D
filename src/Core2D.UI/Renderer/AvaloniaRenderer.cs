@@ -18,7 +18,6 @@ namespace Core2D.UI.Renderer
 #if USE_DRAW_NODES
     internal abstract class DrawNode : IDisposable
     {
-        public IBaseShape Shape { get; set; }
         public IShapeStyle Style { get; set; }
         public bool ScaleThickness { get; set; }
         public bool ScaleSize { get; set; }
@@ -69,6 +68,8 @@ namespace Core2D.UI.Renderer
         {
         }
 
+        public abstract void UpdateGeometry();
+
         public virtual void UpdateStyle()
         {
             Fill = ToBrush(Style.Fill);
@@ -117,6 +118,25 @@ namespace Core2D.UI.Renderer
     {
         public A.Rect Rect { get; set; }
         public IColor Color { get; set; }
+        public double X { get; set; }
+        public double Y { get; set; }
+        public double Width { get; set; }
+        public double Height { get; set; }
+
+        public FillDrawNode(double x, double y, double width, double height)
+        {
+            X = x;
+            Y = y;
+            Width = width;
+            Height = height;
+            UpdateGeometry();
+        }
+
+        public override void UpdateGeometry()
+        {
+            Rect = new A.Rect(X, Y, Width, Height);
+            Center = Rect.Center;
+        }
 
         public override void UpdateStyle()
         {
@@ -134,14 +154,62 @@ namespace Core2D.UI.Renderer
         }
     }
 
-    internal class LineDrawNode : DrawNode
+    internal class PointDrawNode : DrawNode
     {
-        public A.Point P0 { get; set; }
-        public A.Point P1 { get; set; }
+        public IPointShape Point { get; set; }
+        public double PointSize { get; set; }
+        public A.Rect Rect { get; set; }
+
+        public PointDrawNode(IPointShape point, IShapeStyle style, double pointSize)
+        {
+            Style = style;
+            Point = point;
+            PointSize = pointSize;
+            UpdateGeometry();
+        }
+
+        public override void UpdateGeometry()
+        {
+            ScaleThickness = true; // Point.State.Flags.HasFlag(ShapeStateFlags.Thickness);
+            ScaleSize = true; // Point.State.Flags.HasFlag(ShapeStateFlags.Size);
+            var rect2 = Rect2.FromPoints(Point.X - PointSize, Point.Y - PointSize, Point.X + PointSize, Point.Y + PointSize, 0, 0);
+            Rect = new A.Rect(rect2.X, rect2.Y, rect2.Width, rect2.Height);
+            Center = Rect.Center;
+        }
 
         public override void OnDraw(AM.DrawingContext context, double dx, double dy, double zoom)
         {
-            if (Shape.IsStroked)
+            context.FillRectangle(Fill, Rect);
+            context.DrawRectangle(Stroke, Rect);
+        }
+    }
+
+
+    internal class LineDrawNode : DrawNode
+    {
+        public ILineShape Line { get; set; }
+        public A.Point P0 { get; set; }
+        public A.Point P1 { get; set; }
+
+        public LineDrawNode(ILineShape line, IShapeStyle style)
+        {
+            Style = style;
+            Line = line;
+            UpdateGeometry();
+        }
+
+        public override void UpdateGeometry()
+        {
+            ScaleThickness = Line.State.Flags.HasFlag(ShapeStateFlags.Thickness);
+            ScaleSize = Line.State.Flags.HasFlag(ShapeStateFlags.Size);
+            P0 = new A.Point(Line.Start.X, Line.Start.Y);
+            P1 = new A.Point(Line.End.X, Line.End.Y);
+            Center = new A.Point((P0.X + P1.X) / 2.0, (P0.Y + P1.Y) / 2.0);
+        }
+
+        public override void OnDraw(AM.DrawingContext context, double dx, double dy, double zoom)
+        {
+            if (Line.IsStroked)
             {
                 context.DrawLine(Stroke, P0, P1);
             }
@@ -150,35 +218,47 @@ namespace Core2D.UI.Renderer
 
     internal class RectangleDrawNode : DrawNode
     {
+        public IRectangleShape Rectangle { get; set; }
         public A.Rect Rect { get; set; }
-        public bool IsGrid { get; set; }
-        public double OffsetX { get; set; }
-        public double OffsetY { get; set; }
-        public double CellWidth { get; set; }
-        public double CellHeight { get; set; }
+
+        public RectangleDrawNode(IRectangleShape rectangle, IShapeStyle style)
+        {
+            Style = style;
+            Rectangle = rectangle;
+            UpdateGeometry();
+        }
+
+        public override void UpdateGeometry()
+        {
+            ScaleThickness = Rectangle.State.Flags.HasFlag(ShapeStateFlags.Thickness);
+            ScaleSize = Rectangle.State.Flags.HasFlag(ShapeStateFlags.Size);
+            var rect2 = Rect2.FromPoints(Rectangle.TopLeft.X, Rectangle.TopLeft.Y, Rectangle.BottomRight.X, Rectangle.BottomRight.Y, 0, 0);
+            Rect = new A.Rect(rect2.X, rect2.Y, rect2.Width, rect2.Height);
+            Center = Rect.Center;
+        }
 
         public override void OnDraw(AM.DrawingContext context, double dx, double dy, double zoom)
         {
-            if (Shape.IsFilled)
+            if (Rectangle.IsFilled)
             {
                 context.FillRectangle(Fill, Rect);
             }
 
-            if (Shape.IsStroked)
+            if (Rectangle.IsStroked)
             {
                 context.DrawRectangle(Stroke, Rect);
             }
 
-            if (Shape.IsStroked && IsGrid)
+            if (Rectangle.IsStroked && Rectangle.IsGrid)
             {
                 double ox = Rect.X;
                 double oy = Rect.Y;
-                double sx = ox + OffsetX;
-                double sy = oy + OffsetY;
+                double sx = ox + Rectangle.OffsetX;
+                double sy = oy + Rectangle.OffsetY;
                 double ex = ox + Rect.Width;
                 double ey = oy + Rect.Height;
 
-                for (double x = sx; x < ex; x += CellWidth)
+                for (double x = sx; x < ex; x += Rectangle.CellWidth)
                 {
                     var p0 = new A.Point(x, oy);
                     var p1 = new A.Point(x, ey);
@@ -186,7 +266,7 @@ namespace Core2D.UI.Renderer
 
                 }
 
-                for (double y = sy; y < ey; y += CellHeight)
+                for (double y = sy; y < ey; y += Rectangle.CellHeight)
                 {
                     var p0 = new A.Point(ox, y);
                     var p1 = new A.Point(ex, y);
@@ -198,51 +278,131 @@ namespace Core2D.UI.Renderer
 
     internal class EllipseDrawNode : DrawNode
     {
+        public IEllipseShape Ellipse { get; set; }
         public AM.Geometry Geometry { get; set; }
+
+        public EllipseDrawNode(IEllipseShape ellipse, IShapeStyle style)
+        {
+            Style = style;
+            Ellipse = ellipse;
+            UpdateGeometry();
+        }
+
+        public override void UpdateGeometry()
+        {
+            ScaleThickness = Ellipse.State.Flags.HasFlag(ShapeStateFlags.Thickness);
+            ScaleSize = Ellipse.State.Flags.HasFlag(ShapeStateFlags.Size);
+            Geometry = PathGeometryConverter.ToGeometry(Ellipse, 0, 0);
+            Center = Geometry.Bounds.Center;
+        }
 
         public override void OnDraw(AM.DrawingContext context, double dx, double dy, double zoom)
         {
-            context.DrawGeometry(Shape.IsFilled ? Fill : null, Shape.IsStroked ? Stroke : null, Geometry);
+            context.DrawGeometry(Ellipse.IsFilled ? Fill : null, Ellipse.IsStroked ? Stroke : null, Geometry);
         }
     }
 
     internal class ArcDrawNode : DrawNode
     {
+        public IArcShape Arc { get; set; }
         public AM.Geometry Geometry { get; set; }
+
+        public ArcDrawNode(IArcShape arc, IShapeStyle style)
+        {
+            Style = style;
+            Arc = arc;
+            UpdateGeometry();
+        }
+
+        public override void UpdateGeometry()
+        {
+            ScaleThickness = Arc.State.Flags.HasFlag(ShapeStateFlags.Thickness);
+            ScaleSize = Arc.State.Flags.HasFlag(ShapeStateFlags.Size);
+            Geometry = PathGeometryConverter.ToGeometry(Arc, 0, 0);
+            Center = Geometry.Bounds.Center;
+        }
 
         public override void OnDraw(AM.DrawingContext context, double dx, double dy, double zoom)
         {
-            context.DrawGeometry(Shape.IsFilled ? Fill : null, Shape.IsStroked ? Stroke : null, Geometry);
+            context.DrawGeometry(Arc.IsFilled ? Fill : null, Arc.IsStroked ? Stroke : null, Geometry);
         }
     }
 
     internal class CubicBezierDrawNode : DrawNode
     {
+        public ICubicBezierShape CubicBezier { get; set; }
         public AM.Geometry Geometry { get; set; }
+
+        public CubicBezierDrawNode(ICubicBezierShape cubicBezier, IShapeStyle style)
+        {
+            Style = style;
+            CubicBezier = cubicBezier;
+            UpdateGeometry();
+        }
+
+        public override void UpdateGeometry()
+        {
+            ScaleThickness = CubicBezier.State.Flags.HasFlag(ShapeStateFlags.Thickness);
+            ScaleSize = CubicBezier.State.Flags.HasFlag(ShapeStateFlags.Size);
+            Geometry = PathGeometryConverter.ToGeometry(CubicBezier, 0, 0);
+            Center = Geometry.Bounds.Center;
+        }
 
         public override void OnDraw(AM.DrawingContext context, double dx, double dy, double zoom)
         {
-            context.DrawGeometry(Shape.IsFilled ? Fill : null, Shape.IsStroked ? Stroke : null, Geometry);
+            context.DrawGeometry(CubicBezier.IsFilled ? Fill : null, CubicBezier.IsStroked ? Stroke : null, Geometry);
         }
     }
 
     internal class QuadraticBezierDrawNode : DrawNode
     {
+        public IQuadraticBezierShape QuadraticBezier { get; set; }
         public AM.Geometry Geometry { get; set; }
+
+        public QuadraticBezierDrawNode(IQuadraticBezierShape quadraticBezier, IShapeStyle style)
+        {
+            Style = style;
+            QuadraticBezier = quadraticBezier;
+            UpdateGeometry();
+        }
+
+        public override void UpdateGeometry()
+        {
+            ScaleThickness = QuadraticBezier.State.Flags.HasFlag(ShapeStateFlags.Thickness);
+            ScaleSize = QuadraticBezier.State.Flags.HasFlag(ShapeStateFlags.Size);
+            Geometry = PathGeometryConverter.ToGeometry(QuadraticBezier, 0, 0);
+            Center = Geometry.Bounds.Center;
+        }
 
         public override void OnDraw(AM.DrawingContext context, double dx, double dy, double zoom)
         {
-            context.DrawGeometry(Shape.IsFilled ? Fill : null, Shape.IsStroked ? Stroke : null, Geometry);
+            context.DrawGeometry(QuadraticBezier.IsFilled ? Fill : null, QuadraticBezier.IsStroked ? Stroke : null, Geometry);
         }
     }
 
     internal class PathDrawNode : DrawNode
     {
+        public IPathShape Path { get; set; }
         public AM.Geometry Geometry { get; set; }
+
+        public PathDrawNode(IPathShape path, IShapeStyle style)
+        {
+            Style = style;
+            Path = path;
+            UpdateGeometry();
+        }
+
+        public override void UpdateGeometry()
+        {
+            ScaleThickness = Path.State.Flags.HasFlag(ShapeStateFlags.Thickness);
+            ScaleSize = Path.State.Flags.HasFlag(ShapeStateFlags.Size);
+            Geometry = PathGeometryConverter.ToGeometry(Path.Geometry, 0, 0);
+            Center = Geometry.Bounds.Center;
+        }
 
         public override void OnDraw(AM.DrawingContext context, double dx, double dy, double zoom)
         {
-            context.DrawGeometry(Shape.IsFilled ? Fill : null, Shape.IsStroked ? Stroke : null, Geometry);
+            context.DrawGeometry(Path.IsFilled ? Fill : null, Path.IsStroked ? Stroke : null, Geometry);
         }
     }
 
@@ -482,8 +642,11 @@ namespace Core2D.UI.Renderer
             {
                 if (drawNodeCached is FillDrawNode drawNode)
                 {
-                    drawNode.Rect = new A.Rect(x, y, width, height);
-                    drawNode.Center = drawNode.Rect.Center;
+                    drawNode.X = x;
+                    drawNode.Y = y;
+                    drawNode.Width = width;
+                    drawNode.Height = height;
+                    drawNode.UpdateGeometry();
                     drawNode.Color = color;
                     drawNode.UpdateStyle();
                     drawNode.Draw(context, 0, 0, _state.ZoomX);
@@ -491,18 +654,11 @@ namespace Core2D.UI.Renderer
             }
             else
             {
-                var rect = new A.Rect(x, y, width, height);
-                var center = rect.Center;
-
-                var drawNode = new FillDrawNode()
+                var drawNode = new FillDrawNode(x, y, width, height)
                 {
-                    Shape = null,
                     Style = null,
                     ScaleThickness = false,
-                    ScaleSize = false,
-                    Center = center,
-                    Rect = rect,
-                    Color = color
+                    ScaleSize = false
                 };
 
                 drawNode.UpdateStyle();
@@ -548,21 +704,12 @@ namespace Core2D.UI.Renderer
         /// <inheritdoc/>
         public void Draw(object dc, IPointShape point, double dx, double dy)
         {
-            /*
-            if (point == null || _state == null)
-            {
-                return;
-            }
-
             bool isSelected = _state.SelectedShapes?.Count > 0 && _state.SelectedShapes.Contains(point);
-
             var pointStyle = isSelected ? _state.SelectedPointStyle : _state.PointStyle;
             if (pointStyle == null)
             {
                 return;
             }
-
-            var context = dc as AM.DrawingContext;
 
             var pointSize = _state.PointSize;
             if (pointSize <= 0.0)
@@ -570,37 +717,28 @@ namespace Core2D.UI.Renderer
                 return;
             }
 
-            var scaleThickness = true; // point.State.Flags.HasFlag(ShapeStateFlags.Thickness); // TODO:
-            var scaleSize = true; // point.State.Flags.HasFlag(ShapeStateFlags.Size); // TODO:
-            var rect = Rect2.FromPoints(point.X - pointSize, point.Y - pointSize, point.X + pointSize, point.Y + pointSize, dx, dy);
+            var context = dc as AM.DrawingContext;
 
-            var scale = scaleSize ? 1.0 / _state.ZoomX : 1.0;
-            var scaleToPage = scale == 1.0 ? _scaleToPage : (value) => (float)(_scaleToPage(value) / scale);
-            var center = point;
-            var translateX = 0.0 - (center.X * scale) + center.X;
-            var translateY = 0.0 - (center.Y * scale) + center.Y;
+            var drawNodeCached = _drawNodeCache.Get(point);
+            if (drawNodeCached != null)
+            {
+                drawNodeCached.Draw(context, dx, dy, _state.ZoomX);
+            }
+            else
+            {
+                var drawNode = new PointDrawNode(point, pointStyle, pointSize);
 
-            GetCached(pointStyle, out var fill, out var stroke, scaleThickness);
+                drawNode.UpdateStyle();
 
-            var translateDisposable = scale != 1.0 ? context.PushPreTransform(AME.MatrixHelper.Translate(translateX, translateY)) : default(IDisposable);
-            var scaleDisposable = scale != 1.0 ? context.PushPreTransform(AME.MatrixHelper.Scale(scale, scale)) : default(IDisposable);
+                _drawNodeCache.Set(point, drawNode);
 
-            DrawRectangleInternal(context, fill, stroke, true, true, ref rect);
-
-            scaleDisposable?.Dispose();
-            translateDisposable?.Dispose();
-            */
+                drawNode.Draw(context, dx, dy, _state.ZoomX);
+            }
         }
 
         /// <inheritdoc/>
         public void Draw(object dc, ILineShape line, double dx, double dy)
         {
-            var style = line.Style;
-            if (style == null)
-            {
-                return;
-            }
-
             var context = dc as AM.DrawingContext;
 
             var drawNodeCached = _drawNodeCache.Get(line);
@@ -610,20 +748,7 @@ namespace Core2D.UI.Renderer
             }
             else
             {
-                var p0 = new A.Point(line.Start.X, line.Start.Y);
-                var p1 = new A.Point(line.End.X, line.End.Y);
-                var center = new A.Point((p0.X + p1.X) / 2.0, (p0.Y + p1.Y) / 2.0);
-
-                var drawNode = new LineDrawNode()
-                {
-                    Shape = line,
-                    Style = style,
-                    ScaleThickness = line.State.Flags.HasFlag(ShapeStateFlags.Thickness),
-                    ScaleSize = line.State.Flags.HasFlag(ShapeStateFlags.Size),
-                    Center = center,
-                    P0 = p0,
-                    P1 = p1
-                };
+                var drawNode = new LineDrawNode(line, line.Style);
 
                 drawNode.UpdateStyle();
 
@@ -680,12 +805,6 @@ namespace Core2D.UI.Renderer
         /// <inheritdoc/>
         public void Draw(object dc, IRectangleShape rectangle, double dx, double dy)
         {
-            var style = rectangle.Style;
-            if (style == null)
-            {
-                return;
-            }
-
             var context = dc as AM.DrawingContext;
 
             var drawNodeCached = _drawNodeCache.Get(rectangle);
@@ -695,24 +814,7 @@ namespace Core2D.UI.Renderer
             }
             else
             {
-                var rect2 = Rect2.FromPoints(rectangle.TopLeft.X, rectangle.TopLeft.Y, rectangle.BottomRight.X, rectangle.BottomRight.Y, 0, 0);
-                var rect = new A.Rect(rect2.X, rect2.Y, rect2.Width, rect2.Height);
-                var center = rect.Center;
-
-                var drawNode = new RectangleDrawNode()
-                {
-                    Shape = rectangle,
-                    Style = style,
-                    ScaleThickness = rectangle.State.Flags.HasFlag(ShapeStateFlags.Thickness),
-                    ScaleSize = rectangle.State.Flags.HasFlag(ShapeStateFlags.Size),
-                    Center = center,
-                    Rect = rect,
-                    IsGrid = rectangle.IsGrid,
-                    OffsetX = rectangle.OffsetX,
-                    OffsetY = rectangle.OffsetY,
-                    CellWidth = rectangle.CellWidth,
-                    CellHeight = rectangle.CellHeight
-                };
+                var drawNode = new RectangleDrawNode(rectangle, rectangle.Style);
 
                 drawNode.UpdateStyle();
 
@@ -725,17 +827,6 @@ namespace Core2D.UI.Renderer
         /// <inheritdoc/>
         public void Draw(object dc, IEllipseShape ellipse, double dx, double dy)
         {
-            var style = ellipse.Style;
-            if (style == null)
-            {
-                return;
-            }
-
-            if (!ellipse.IsFilled && !ellipse.IsStroked)
-            {
-                return;
-            }
-
             var context = dc as AM.DrawingContext;
 
             var drawNodeCached = _drawNodeCache.Get(ellipse);
@@ -745,18 +836,7 @@ namespace Core2D.UI.Renderer
             }
             else
             {
-                var geometry = PathGeometryConverter.ToGeometry(ellipse, 0, 0);
-                var center = geometry.Bounds.Center;
-
-                var drawNode = new PathDrawNode()
-                {
-                    Shape = ellipse,
-                    Style = style,
-                    ScaleThickness = ellipse.State.Flags.HasFlag(ShapeStateFlags.Thickness),
-                    ScaleSize = ellipse.State.Flags.HasFlag(ShapeStateFlags.Size),
-                    Center = center,
-                    Geometry = geometry
-                };
+                var drawNode = new EllipseDrawNode(ellipse, ellipse.Style);
 
                 drawNode.UpdateStyle();
 
@@ -769,17 +849,6 @@ namespace Core2D.UI.Renderer
         /// <inheritdoc/>
         public void Draw(object dc, IArcShape arc, double dx, double dy)
         {
-            var style = arc.Style;
-            if (style == null)
-            {
-                return;
-            }
-
-            if (!arc.IsFilled && !arc.IsStroked)
-            {
-                return;
-            }
-
             var context = dc as AM.DrawingContext;
 
             var drawNodeCached = _drawNodeCache.Get(arc);
@@ -792,15 +861,7 @@ namespace Core2D.UI.Renderer
                 var geometry = PathGeometryConverter.ToGeometry(arc, 0, 0);
                 var center = geometry.Bounds.Center;
 
-                var drawNode = new PathDrawNode()
-                {
-                    Shape = arc,
-                    Style = style,
-                    ScaleThickness = arc.State.Flags.HasFlag(ShapeStateFlags.Thickness),
-                    ScaleSize = arc.State.Flags.HasFlag(ShapeStateFlags.Size),
-                    Center = center,
-                    Geometry = geometry
-                };
+                var drawNode = new ArcDrawNode(arc, arc.Style);
 
                 drawNode.UpdateStyle();
 
@@ -813,17 +874,6 @@ namespace Core2D.UI.Renderer
         /// <inheritdoc/>
         public void Draw(object dc, ICubicBezierShape cubicBezier, double dx, double dy)
         {
-            var style = cubicBezier.Style;
-            if (style == null)
-            {
-                return;
-            }
-
-            if (!cubicBezier.IsFilled && !cubicBezier.IsStroked)
-            {
-                return;
-            }
-
             var context = dc as AM.DrawingContext;
 
             var drawNodeCached = _drawNodeCache.Get(cubicBezier);
@@ -833,18 +883,7 @@ namespace Core2D.UI.Renderer
             }
             else
             {
-                var geometry = PathGeometryConverter.ToGeometry(cubicBezier, 0, 0);
-                var center = geometry.Bounds.Center;
-
-                var drawNode = new PathDrawNode()
-                {
-                    Shape = cubicBezier,
-                    Style = style,
-                    ScaleThickness = cubicBezier.State.Flags.HasFlag(ShapeStateFlags.Thickness),
-                    ScaleSize = cubicBezier.State.Flags.HasFlag(ShapeStateFlags.Size),
-                    Center = center,
-                    Geometry = geometry
-                };
+                var drawNode = new CubicBezierDrawNode(cubicBezier, cubicBezier.Style);
 
                 drawNode.UpdateStyle();
 
@@ -857,17 +896,6 @@ namespace Core2D.UI.Renderer
         /// <inheritdoc/>
         public void Draw(object dc, IQuadraticBezierShape quadraticBezier, double dx, double dy)
         {
-            var style = quadraticBezier.Style;
-            if (style == null)
-            {
-                return;
-            }
-
-            if (!quadraticBezier.IsFilled && !quadraticBezier.IsStroked)
-            {
-                return;
-            }
-
             var context = dc as AM.DrawingContext;
 
             var drawNodeCached = _drawNodeCache.Get(quadraticBezier);
@@ -877,18 +905,7 @@ namespace Core2D.UI.Renderer
             }
             else
             {
-                var geometry = PathGeometryConverter.ToGeometry(quadraticBezier, 0, 0);
-                var center = geometry.Bounds.Center;
-
-                var drawNode = new PathDrawNode()
-                {
-                    Shape = quadraticBezier,
-                    Style = style,
-                    ScaleThickness = quadraticBezier.State.Flags.HasFlag(ShapeStateFlags.Thickness),
-                    ScaleSize = quadraticBezier.State.Flags.HasFlag(ShapeStateFlags.Size),
-                    Center = center,
-                    Geometry = geometry
-                };
+                var drawNode = new QuadraticBezierDrawNode(quadraticBezier, quadraticBezier.Style);
 
                 drawNode.UpdateStyle();
 
@@ -1080,22 +1097,6 @@ namespace Core2D.UI.Renderer
         /// <inheritdoc/>
         public void Draw(object dc, IPathShape path, double dx, double dy)
         {
-            var style = path.Style;
-            if (style == null)
-            {
-                return;
-            }
-
-            if (path.Geometry == null)
-            {
-                return;
-            }
-
-            if (!path.IsFilled && !path.IsStroked)
-            {
-                return;
-            }
-
             var context = dc as AM.DrawingContext;
 
             var drawNodeCached = _drawNodeCache.Get(path);
@@ -1105,18 +1106,7 @@ namespace Core2D.UI.Renderer
             }
             else
             {
-                var geometry = PathGeometryConverter.ToGeometry(path.Geometry, 0, 0);
-                var center = geometry.Bounds.Center;
-
-                var drawNode = new PathDrawNode()
-                {
-                    Shape = path,
-                    Style = style,
-                    ScaleThickness = path.State.Flags.HasFlag(ShapeStateFlags.Thickness),
-                    ScaleSize = path.State.Flags.HasFlag(ShapeStateFlags.Size),
-                    Center = center,
-                    Geometry = geometry
-                };
+                var drawNode = new PathDrawNode(path, path.Style);
 
                 drawNode.UpdateStyle();
 
