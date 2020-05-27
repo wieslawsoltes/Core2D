@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿//#define DIAGNOSTICS
+using System.Diagnostics;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.PanAndZoom;
@@ -299,15 +300,22 @@ namespace Core2D.UI.Views
                     {
                         if (customState.Container != null && customState.Renderer != null)
                         {
-                            //var swRender = Stopwatch.StartNew();
+#if DIAGNOSTICS
+                            var swRender = Stopwatch.StartNew();
+#endif
                             s_editorPresenter.Render(context, customState.Renderer, customState.Container, 0.0, 0.0);
-                            //swRender.Stop();
-                            //Trace.WriteLine($"Render {swRender.Elapsed.TotalMilliseconds}ms");
-
-                            //var swInvalidate = Stopwatch.StartNew();
+#if DIAGNOSTICS
+                            swRender.Stop();
+#endif
+                            Trace.WriteLine($"Render {swRender.Elapsed.TotalMilliseconds}ms");
+#if DIAGNOSTICS
+                            var swInvalidate = Stopwatch.StartNew();
+#endif
                             customState.Container?.Invalidate();
-                            //swInvalidate.Stop();
-                            //Trace.WriteLine($"Invalidate {swInvalidate.Elapsed.TotalMilliseconds}ms");
+#if DIAGNOSTICS
+                            swInvalidate.Stop();
+                            Trace.WriteLine($"Invalidate {swInvalidate.Elapsed.TotalMilliseconds}ms");
+#endif
                         }
                     }
                     break;
