@@ -49,4 +49,8 @@
     <Reference Include="System.Drawing" />
   </ItemGroup>
 
+  <PropertyGroup>
+    <DefineConstants>$(DefineConstants);USE_CUSTOM_OBSERVER</DefineConstants>
+  </PropertyGroup>
+
 </Project>
