@@ -206,6 +206,8 @@ namespace Core2D.UI.Renderer
             P0 = new A.Point(Line.Start.X, Line.Start.Y);
             P1 = new A.Point(Line.End.X, Line.End.Y);
             Center = new A.Point((P0.X + P1.X) / 2.0, (P0.Y + P1.Y) / 2.0);
+            // TODO: Arrows
+            // TODO: Curved
         }
 
         public override void OnDraw(AM.DrawingContext context, double dx, double dy, double zoom)
@@ -214,6 +216,10 @@ namespace Core2D.UI.Renderer
             {
                 context.DrawLine(Stroke, P0, P1);
             }
+
+            // TODO: Arrows
+
+            // TODO: Curved
         }
     }
 
