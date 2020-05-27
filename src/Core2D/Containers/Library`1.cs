@@ -35,6 +35,36 @@ namespace Core2D.Containers
             throw new NotImplementedException();
         }
 
+        /// <inheritdoc/>
+        public override bool IsDirty()
+        {
+            var isDirty = base.IsDirty();
+
+            foreach (var item in Items)
+            {
+                if (item is IObservableObject observableObject)
+                {
+                    isDirty |= observableObject.IsDirty();
+                }
+            }
+
+            return isDirty;
+        }
+
+        /// <inheritdoc/>
+        public override void Invalidate()
+        {
+            base.Invalidate();
+
+            foreach (var item in Items)
+            {
+                if (item is IObservableObject observableObject)
+                {
+                    observableObject.Invalidate();
+                }
+            }
+        }
+
         /// <summary>
         /// Check whether the <see cref="Items"/> property has changed from its default value.
         /// </summary>
