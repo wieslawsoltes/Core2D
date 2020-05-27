@@ -56,6 +56,7 @@
   </ItemGroup>
   
   <PropertyGroup>
+    <DefineConstants>$(DefineConstants);USE_DRAW_NODES</DefineConstants>
     <!--<DefineConstants>$(DefineConstants);USE_SKIA</DefineConstants>-->
   </PropertyGroup>
   

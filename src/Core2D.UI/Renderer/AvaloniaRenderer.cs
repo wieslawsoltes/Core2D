@@ -1,5 +1,4 @@
-﻿#define USE_DRAW_NODES
-using System;
+﻿using System;
 using System.Collections.Generic;
 using Core2D;
 using Core2D.Containers;
