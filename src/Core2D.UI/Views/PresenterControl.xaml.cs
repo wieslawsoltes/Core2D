@@ -306,8 +306,8 @@ namespace Core2D.UI.Views
                             s_editorPresenter.Render(context, customState.Renderer, customState.Container, 0.0, 0.0);
 #if DIAGNOSTICS
                             swRender.Stop();
-#endif
                             Trace.WriteLine($"Render {swRender.Elapsed.TotalMilliseconds}ms");
+#endif
 #if DIAGNOSTICS
                             var swInvalidate = Stopwatch.StartNew();
 #endif
