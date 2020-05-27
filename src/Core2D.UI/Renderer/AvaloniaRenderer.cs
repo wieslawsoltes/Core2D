@@ -123,17 +123,20 @@ namespace Core2D.UI.Renderer
         public double Width { get; set; }
         public double Height { get; set; }
 
-        public FillDrawNode(double x, double y, double width, double height)
+        public FillDrawNode(double x, double y, double width, double height, IColor color)
         {
             X = x;
             Y = y;
             Width = width;
             Height = height;
+            Color = color;
             UpdateGeometry();
         }
 
         public override void UpdateGeometry()
         {
+            ScaleThickness = false;
+            ScaleSize = false;
             Rect = new A.Rect(X, Y, Width, Height);
             Center = Rect.Center;
         }
@@ -654,12 +657,7 @@ namespace Core2D.UI.Renderer
             }
             else
             {
-                var drawNode = new FillDrawNode(x, y, width, height)
-                {
-                    Style = null,
-                    ScaleThickness = false,
-                    ScaleSize = false
-                };
+                var drawNode = new FillDrawNode(x, y, width, height, color);
 
                 drawNode.UpdateStyle();
 
