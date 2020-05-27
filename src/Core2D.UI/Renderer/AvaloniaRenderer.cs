@@ -735,7 +735,7 @@ namespace Core2D.UI.Renderer
                 if (point.IsDirty())
                 {
                     drawNodeCached.UpdateGeometry();
-                    point.Invalidate();
+                    //point.Invalidate();
                 }
 
                 drawNodeCached.Draw(context, dx, dy, _state.ZoomX);
@@ -770,7 +770,7 @@ namespace Core2D.UI.Renderer
                 if (line.IsDirty())
                 {
                     drawNodeCached.UpdateGeometry();
-                    line.Invalidate();
+                    //line.Invalidate();
                 }
 
                 drawNodeCached.Draw(context, dx, dy, _state.ZoomX);
@@ -849,7 +849,7 @@ namespace Core2D.UI.Renderer
                 if (rectangle.IsDirty())
                 {
                     drawNodeCached.UpdateGeometry();
-                    rectangle.Invalidate();
+                    //rectangle.Invalidate();
                 }
 
                 drawNodeCached.Draw(context, dx, dy, _state.ZoomX);
@@ -884,7 +884,7 @@ namespace Core2D.UI.Renderer
                 if (ellipse.IsDirty())
                 {
                     drawNodeCached.UpdateGeometry();
-                    ellipse.Invalidate();
+                    //ellipse.Invalidate();
                 }
 
                 drawNodeCached.Draw(context, dx, dy, _state.ZoomX);
@@ -919,7 +919,7 @@ namespace Core2D.UI.Renderer
                 if (arc.IsDirty())
                 {
                     drawNodeCached.UpdateGeometry();
-                    arc.Invalidate();
+                    //arc.Invalidate();
                 }
 
                 drawNodeCached.Draw(context, dx, dy, _state.ZoomX);
@@ -954,7 +954,7 @@ namespace Core2D.UI.Renderer
                 if (cubicBezier.IsDirty())
                 {
                     drawNodeCached.UpdateGeometry();
-                    cubicBezier.Invalidate();
+                    //cubicBezier.Invalidate();
                 }
 
                 drawNodeCached.Draw(context, dx, dy, _state.ZoomX);
@@ -989,7 +989,7 @@ namespace Core2D.UI.Renderer
                 if (quadraticBezier.IsDirty())
                 {
                     drawNodeCached.UpdateGeometry();
-                    quadraticBezier.Invalidate();
+                    //quadraticBezier.Invalidate();
                 }
 
                 drawNodeCached.Draw(context, dx, dy, _state.ZoomX);
@@ -1203,7 +1203,7 @@ namespace Core2D.UI.Renderer
                 if (path.IsDirty())
                 {
                     drawNodeCached.UpdateGeometry();
-                    path.Invalidate();
+                    //path.Invalidate();
                 }
 
                 drawNodeCached.Draw(context, dx, dy, _state.ZoomX);
