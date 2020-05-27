@@ -1187,6 +1187,36 @@ namespace Core2D.UI.Renderer
         /// <inheritdoc/>
         public void Draw(object dc, IImageShape image, double dx, double dy)
         {
+            var context = dc as AM.DrawingContext;
+
+            var drawNodeCached = _drawNodeCache.Get(image);
+            if (drawNodeCached != null)
+            {
+                if (image.Style.IsDirty())
+                {
+                    drawNodeCached.Style = image.Style;
+                    drawNodeCached.UpdateStyle();
+                    image.Style.Invalidate();
+                }
+
+                if (image.IsDirty())
+                {
+                    drawNodeCached.UpdateGeometry();
+                    //image.Invalidate();
+                }
+
+                drawNodeCached.Draw(context, dx, dy, _state.ZoomX);
+            }
+            else
+            {
+                var drawNode = new ImageDrawNode(image, image.Style);
+
+                drawNode.UpdateStyle();
+
+                _drawNodeCache.Set(image, drawNode);
+
+                drawNode.Draw(context, dx, dy, _state.ZoomX);
+            }
             /*
             if (image.Key == null)
             {
