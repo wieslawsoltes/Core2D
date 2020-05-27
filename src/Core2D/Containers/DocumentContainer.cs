@@ -32,6 +32,30 @@ namespace Core2D.Containers
             throw new NotImplementedException();
         }
 
+        /// <inheritdoc/>
+        public override bool IsDirty()
+        {
+            var isDirty = base.IsDirty();
+
+            foreach (var page in Pages)
+            {
+                isDirty |= page.IsDirty();
+            }
+
+            return isDirty;
+        }
+
+        /// <inheritdoc/>
+        public override void Invalidate()
+        {
+            base.Invalidate();
+
+            foreach (var page in Pages)
+            {
+                page.Invalidate();
+            }
+        }
+
         /// <summary>
         /// Check whether the <see cref="IsExpanded"/> property has changed from its default value.
         /// </summary>
