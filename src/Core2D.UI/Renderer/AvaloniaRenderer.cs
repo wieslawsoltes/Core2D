@@ -26,7 +26,56 @@ namespace Core2D.UI.Renderer
         public AM.Pen Stroke { get; set; }
         public A.Point Center { get; set; }
 
-        public void Draw(AM.DrawingContext context, double dx, double dy, double zoom)
+        protected AM.Color ToColor(IArgbColor argbColor)
+        {
+            return AM.Color.FromArgb(argbColor.A, argbColor.R, argbColor.G, argbColor.B);
+        }
+
+        protected AM.IBrush ToBrush(IColor color) => color switch
+        {
+            IArgbColor argbColor => new AM.SolidColorBrush(ToColor(argbColor)),
+            _ => throw new NotSupportedException($"The {color.GetType()} color type is not supported."),
+        };
+
+        protected AM.Pen ToPen(IBaseStyle style)
+        {
+            var dashStyle = default(AM.DashStyle);
+            if (style.Dashes != null)
+            {
+                var dashes = StyleHelper.ConvertDashesToDoubleArray(style.Dashes, 1.0);
+                var dashOffset = style.DashOffset;
+                if (dashes != null)
+                {
+                    dashStyle = new AM.DashStyle(dashes, dashOffset);
+                }
+            }
+
+            var lineCap = style.LineCap switch
+            {
+                LineCap.Flat => AM.PenLineCap.Flat,
+                LineCap.Square => AM.PenLineCap.Square,
+                LineCap.Round => AM.PenLineCap.Round,
+                _ => throw new NotImplementedException()
+            };
+
+            var thickness = style.Thickness;
+            var brush = ToBrush(style.Stroke);
+            var pen = new AM.Pen(brush, thickness, dashStyle, lineCap);
+
+            return pen;
+        }
+
+        public DrawNode()
+        {
+        }
+
+        public virtual void UpdateStyle()
+        {
+            Fill = ToBrush(Style.Fill);
+            Stroke = ToPen(Style);
+        }
+
+        public virtual void Draw(AM.DrawingContext context, double dx, double dy, double zoom)
         {
             var scale = ScaleSize ? 1.0 / zoom : 1.0;
             var translateX = 0.0 - (Center.X * scale) + Center.X;
@@ -61,6 +110,27 @@ namespace Core2D.UI.Renderer
 
         public virtual void Dispose()
         {
+        }
+    }
+
+    internal class FillDrawNode : DrawNode
+    {
+        public A.Rect Rect { get; set; }
+        public IColor Color { get; set; }
+
+        public override void UpdateStyle()
+        {
+            Fill = ToBrush(Color);
+        }
+
+        public override void Draw(AM.DrawingContext context, double dx, double dy, double zoom)
+        {
+            OnDraw(context, dx, dy, zoom);
+        }
+
+        public override void OnDraw(AM.DrawingContext context, double dx, double dy, double zoom)
+        {
+            context.FillRectangle(Fill, Rect);
         }
     }
 
@@ -185,7 +255,7 @@ namespace Core2D.UI.Renderer
         private IShapeRendererState _state;
         private readonly ICache<ITextShape, (string, AM.FormattedText, IShapeStyle)> _textCache;
         private readonly ICache<string, AMI.Bitmap> _biCache;
-        private readonly ICache<IBaseShape, DrawNode> _drawNodeCache;
+        private readonly ICache<object, DrawNode> _drawNodeCache;
         private readonly double _textScaleFactor;
 
         /// <inheritdoc/>
@@ -206,7 +276,7 @@ namespace Core2D.UI.Renderer
             _state = _serviceProvider.GetService<IFactory>().CreateShapeRendererState();
             _textCache = _serviceProvider.GetService<IFactory>().CreateCache<ITextShape, (string, AM.FormattedText, IShapeStyle)>();
             _biCache = _serviceProvider.GetService<IFactory>().CreateCache<string, AMI.Bitmap>(x => x.Dispose());
-            _drawNodeCache = _serviceProvider.GetService<IFactory>().CreateCache<IBaseShape, DrawNode>(x => x.Dispose());
+            _drawNodeCache = _serviceProvider.GetService<IFactory>().CreateCache<object, DrawNode>(x => x.Dispose());
             _textScaleFactor = textScaleFactor;
             ClearCache(isZooming: false);
         }
@@ -215,45 +285,6 @@ namespace Core2D.UI.Renderer
         public override object Copy(IDictionary<object, object> shared)
         {
             throw new NotImplementedException();
-        }
-
-        private static AM.Color ToColor(IArgbColor argbColor) 
-        {
-            return AM.Color.FromArgb(argbColor.A, argbColor.R, argbColor.G, argbColor.B);
-        }
-
-        private AM.IBrush ToBrush(IColor color) => color switch
-        {
-            IArgbColor argbColor => new AM.SolidColorBrush(ToColor(argbColor)),
-            _ => throw new NotSupportedException($"The {color.GetType()} color type is not supported."),
-        };
-
-        private AM.Pen ToPen(IBaseStyle style)
-        {
-            var dashStyle = default(AM.DashStyle);
-            if (style.Dashes != null)
-            {
-                var dashes = StyleHelper.ConvertDashesToDoubleArray(style.Dashes, 1.0);
-                var dashOffset = style.DashOffset;
-                if (dashes != null)
-                {
-                    dashStyle = new AM.DashStyle(dashes, dashOffset);
-                }
-            }
-
-            var lineCap = style.LineCap switch
-            {
-                LineCap.Flat => AM.PenLineCap.Flat,
-                LineCap.Square => AM.PenLineCap.Square,
-                LineCap.Round => AM.PenLineCap.Round,
-                _ => throw new NotImplementedException()
-            };
-
-            var thickness = style.Thickness;
-            var brush = ToBrush(style.Stroke);
-            var pen = new AM.Pen(brush, thickness, dashStyle, lineCap);
-
-            return pen;
         }
 
         /*
@@ -445,9 +476,41 @@ namespace Core2D.UI.Renderer
         public void Fill(object dc, double x, double y, double width, double height, IColor color)
         {
             var context = dc as AM.DrawingContext;
-            var brush = ToBrush(color);
-            var rect = new A.Rect(x, y, width, height);
-            context.FillRectangle(brush, rect);
+
+            var drawNodeCached = _drawNodeCache.Get(color);
+            if (drawNodeCached != null)
+            {
+                if (drawNodeCached is FillDrawNode drawNode)
+                {
+                    drawNode.Rect = new A.Rect(x, y, width, height);
+                    drawNode.Center = drawNode.Rect.Center;
+                    drawNode.Color = color;
+                    drawNode.UpdateStyle();
+                    drawNode.Draw(context, 0, 0, _state.ZoomX);
+                }
+            }
+            else
+            {
+                var rect = new A.Rect(x, y, width, height);
+                var center = rect.Center;
+
+                var drawNode = new FillDrawNode()
+                {
+                    Shape = null,
+                    Style = null,
+                    ScaleThickness = false,
+                    ScaleSize = false,
+                    Center = center,
+                    Rect = rect,
+                    Color = color
+                };
+
+                drawNode.UpdateStyle();
+
+                _drawNodeCache.Set(color, drawNode);
+
+                drawNode.Draw(context, 0, 0, _state.ZoomX);
+            }
         }
 
         /// <inheritdoc/>
@@ -557,12 +620,12 @@ namespace Core2D.UI.Renderer
                     Style = style,
                     ScaleThickness = line.State.Flags.HasFlag(ShapeStateFlags.Thickness),
                     ScaleSize = line.State.Flags.HasFlag(ShapeStateFlags.Size),
-                    Fill = ToBrush(style.Fill),
-                    Stroke = ToPen(style),
                     Center = center,
                     P0 = p0,
                     P1 = p1
                 };
+
+                drawNode.UpdateStyle();
 
                 _drawNodeCache.Set(line, drawNode);
 
@@ -642,8 +705,6 @@ namespace Core2D.UI.Renderer
                     Style = style,
                     ScaleThickness = rectangle.State.Flags.HasFlag(ShapeStateFlags.Thickness),
                     ScaleSize = rectangle.State.Flags.HasFlag(ShapeStateFlags.Size),
-                    Fill = ToBrush(style.Fill),
-                    Stroke = ToPen(style),
                     Center = center,
                     Rect = rect,
                     IsGrid = rectangle.IsGrid,
@@ -652,6 +713,8 @@ namespace Core2D.UI.Renderer
                     CellWidth = rectangle.CellWidth,
                     CellHeight = rectangle.CellHeight
                 };
+
+                drawNode.UpdateStyle();
 
                 _drawNodeCache.Set(rectangle, drawNode);
 
@@ -685,21 +748,21 @@ namespace Core2D.UI.Renderer
                 var geometry = PathGeometryConverter.ToGeometry(ellipse, 0, 0);
                 var center = geometry.Bounds.Center;
 
-                var pathDrawNode = new PathDrawNode()
+                var drawNode = new PathDrawNode()
                 {
                     Shape = ellipse,
                     Style = style,
                     ScaleThickness = ellipse.State.Flags.HasFlag(ShapeStateFlags.Thickness),
                     ScaleSize = ellipse.State.Flags.HasFlag(ShapeStateFlags.Size),
-                    Fill = ToBrush(style.Fill),
-                    Stroke = ToPen(style),
                     Center = center,
                     Geometry = geometry
                 };
 
-                _drawNodeCache.Set(ellipse, pathDrawNode);
+                drawNode.UpdateStyle();
 
-                pathDrawNode.Draw(context, dx, dy, _state.ZoomX);
+                _drawNodeCache.Set(ellipse, drawNode);
+
+                drawNode.Draw(context, dx, dy, _state.ZoomX);
             }
         }
 
@@ -729,21 +792,21 @@ namespace Core2D.UI.Renderer
                 var geometry = PathGeometryConverter.ToGeometry(arc, 0, 0);
                 var center = geometry.Bounds.Center;
 
-                var pathDrawNode = new PathDrawNode()
+                var drawNode = new PathDrawNode()
                 {
                     Shape = arc,
                     Style = style,
                     ScaleThickness = arc.State.Flags.HasFlag(ShapeStateFlags.Thickness),
                     ScaleSize = arc.State.Flags.HasFlag(ShapeStateFlags.Size),
-                    Fill = ToBrush(style.Fill),
-                    Stroke = ToPen(style),
                     Center = center,
                     Geometry = geometry
                 };
 
-                _drawNodeCache.Set(arc, pathDrawNode);
+                drawNode.UpdateStyle();
 
-                pathDrawNode.Draw(context, dx, dy, _state.ZoomX);
+                _drawNodeCache.Set(arc, drawNode);
+
+                drawNode.Draw(context, dx, dy, _state.ZoomX);
             }
         }
 
@@ -773,21 +836,21 @@ namespace Core2D.UI.Renderer
                 var geometry = PathGeometryConverter.ToGeometry(cubicBezier, 0, 0);
                 var center = geometry.Bounds.Center;
 
-                var pathDrawNode = new PathDrawNode()
+                var drawNode = new PathDrawNode()
                 {
                     Shape = cubicBezier,
                     Style = style,
                     ScaleThickness = cubicBezier.State.Flags.HasFlag(ShapeStateFlags.Thickness),
                     ScaleSize = cubicBezier.State.Flags.HasFlag(ShapeStateFlags.Size),
-                    Fill = ToBrush(style.Fill),
-                    Stroke = ToPen(style),
                     Center = center,
                     Geometry = geometry
                 };
 
-                _drawNodeCache.Set(cubicBezier, pathDrawNode);
+                drawNode.UpdateStyle();
 
-                pathDrawNode.Draw(context, dx, dy, _state.ZoomX);
+                _drawNodeCache.Set(cubicBezier, drawNode);
+
+                drawNode.Draw(context, dx, dy, _state.ZoomX);
             }
         }
 
@@ -817,21 +880,21 @@ namespace Core2D.UI.Renderer
                 var geometry = PathGeometryConverter.ToGeometry(quadraticBezier, 0, 0);
                 var center = geometry.Bounds.Center;
 
-                var pathDrawNode = new PathDrawNode()
+                var drawNode = new PathDrawNode()
                 {
                     Shape = quadraticBezier,
                     Style = style,
                     ScaleThickness = quadraticBezier.State.Flags.HasFlag(ShapeStateFlags.Thickness),
                     ScaleSize = quadraticBezier.State.Flags.HasFlag(ShapeStateFlags.Size),
-                    Fill = ToBrush(style.Fill),
-                    Stroke = ToPen(style),
                     Center = center,
                     Geometry = geometry
                 };
 
-                _drawNodeCache.Set(quadraticBezier, pathDrawNode);
+                drawNode.UpdateStyle();
 
-                pathDrawNode.Draw(context, dx, dy, _state.ZoomX);
+                _drawNodeCache.Set(quadraticBezier, drawNode);
+
+                drawNode.Draw(context, dx, dy, _state.ZoomX);
             }
         }
 
@@ -1045,21 +1108,21 @@ namespace Core2D.UI.Renderer
                 var geometry = PathGeometryConverter.ToGeometry(path.Geometry, 0, 0);
                 var center = geometry.Bounds.Center;
 
-                var pathDrawNode = new PathDrawNode()
+                var drawNode = new PathDrawNode()
                 {
                     Shape = path,
                     Style = style,
                     ScaleThickness = path.State.Flags.HasFlag(ShapeStateFlags.Thickness),
                     ScaleSize = path.State.Flags.HasFlag(ShapeStateFlags.Size),
-                    Fill = ToBrush(style.Fill),
-                    Stroke = ToPen(style),
                     Center = center,
                     Geometry = geometry
                 };
 
-                _drawNodeCache.Set(path, pathDrawNode);
+                drawNode.UpdateStyle();
 
-                pathDrawNode.Draw(context, dx, dy, _state.ZoomX);
+                _drawNodeCache.Set(path, drawNode);
+
+                drawNode.Draw(context, dx, dy, _state.ZoomX);
             }
         }
     }
