@@ -57,6 +57,19 @@ namespace Core2D.Style
         }
 
         /// <inheritdoc/>
+        public override bool IsDirty()
+        {
+            var isDirty = base.IsDirty();
+            return isDirty;
+        }
+
+        /// <inheritdoc/>
+        public override void Invalidate()
+        {
+            base.Invalidate();
+        }
+
+        /// <inheritdoc/>
         public string ToXamlString()
             => ToXamlHex(this);
 

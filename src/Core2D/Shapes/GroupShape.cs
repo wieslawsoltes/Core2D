@@ -148,6 +148,30 @@ namespace Core2D.Shapes
             throw new NotImplementedException();
         }
 
+        /// <inheritdoc/>
+        public override bool IsDirty()
+        {
+            var isDirty = base.IsDirty();
+
+            foreach (var shape in Shapes)
+            {
+                isDirty |= shape.IsDirty();
+            }
+
+            return isDirty;
+        }
+
+        /// <inheritdoc/>
+        public override void Invalidate()
+        {
+            base.Invalidate();
+
+            foreach (var shape in Shapes)
+            {
+                shape.Invalidate();
+            }
+        }
+
         /// <summary>
         /// Check whether the <see cref="Shapes"/> property has changed from its default value.
         /// </summary>

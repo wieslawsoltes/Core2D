@@ -57,6 +57,25 @@ namespace Core2D.Shapes
         }
 
         /// <inheritdoc/>
+        public override bool IsDirty()
+        {
+            var isDirty = base.IsDirty();
+
+            isDirty |= State.IsDirty();
+            isDirty |= Data.IsDirty();
+
+            return isDirty;
+        }
+
+        /// <inheritdoc/>
+        public override void Invalidate()
+        {
+            base.Invalidate();
+            State.Invalidate();
+            Data.Invalidate();
+        }
+
+        /// <inheritdoc/>
         public abstract void DrawShape(object dc, IShapeRenderer renderer, double dx, double dy);
 
         /// <inheritdoc/>

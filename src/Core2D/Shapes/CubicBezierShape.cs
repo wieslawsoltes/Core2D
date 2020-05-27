@@ -164,6 +164,29 @@ namespace Core2D.Shapes
             throw new NotImplementedException();
         }
 
+        /// <inheritdoc/>
+        public override bool IsDirty()
+        {
+            var isDirty = base.IsDirty();
+
+            isDirty |= Point1.IsDirty();
+            isDirty |= Point2.IsDirty();
+            isDirty |= Point3.IsDirty();
+            isDirty |= Point4.IsDirty();
+
+            return isDirty;
+        }
+
+        /// <inheritdoc/>
+        public override void Invalidate()
+        {
+            base.Invalidate();
+            Point1.Invalidate();
+            Point2.Invalidate();
+            Point3.Invalidate();
+            Point4.Invalidate();
+        }
+
         /// <summary>
         /// Check whether the <see cref="Point1"/> property has changed from its default value.
         /// </summary>

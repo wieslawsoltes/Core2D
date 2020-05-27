@@ -89,6 +89,19 @@ namespace Core2D.Shapes
             throw new NotImplementedException();
         }
 
+        /// <inheritdoc/>
+        public override bool IsDirty()
+        {
+            var isDirty = base.IsDirty();
+            return isDirty;
+        }
+
+        /// <inheritdoc/>
+        public override void Invalidate()
+        {
+            base.Invalidate();
+        }
+
         /// <summary>
         /// Check whether the <see cref="IsGrid"/> property has changed from its default value.
         /// </summary>

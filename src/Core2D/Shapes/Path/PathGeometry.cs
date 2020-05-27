@@ -33,6 +33,30 @@ namespace Core2D.Path
             throw new NotImplementedException();
         }
 
+        /// <inheritdoc/>
+        public override bool IsDirty()
+        {
+            var isDirty = base.IsDirty();
+
+            foreach (var figure in Figures)
+            {
+                isDirty |= figure.IsDirty();
+            }
+
+            return isDirty;
+        }
+
+        /// <inheritdoc/>
+        public override void Invalidate()
+        {
+            base.Invalidate();
+
+            foreach (var figure in Figures)
+            {
+                figure.Invalidate();
+            }
+        }
+
         public string ToXamlString(ImmutableArray<IPathFigure> figures)
         {
             if (figures.Length == 0)

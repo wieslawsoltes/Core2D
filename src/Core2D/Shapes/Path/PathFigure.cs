@@ -70,6 +70,34 @@ namespace Core2D.Path
             throw new NotImplementedException();
         }
 
+        /// <inheritdoc/>
+        public override bool IsDirty()
+        {
+            var isDirty = base.IsDirty();
+
+            isDirty |= StartPoint.IsDirty();
+
+            foreach (var segment in Segments)
+            {
+                isDirty |= segment.IsDirty();
+            }
+
+            return isDirty;
+        }
+
+        /// <inheritdoc/>
+        public override void Invalidate()
+        {
+            base.Invalidate();
+
+            StartPoint.Invalidate();
+
+            foreach (var segment in Segments)
+            {
+                segment.Invalidate();
+            }
+        }
+
         public string ToXamlString(ImmutableArray<IPathSegment> segments)
         {
             if (segments.Length == 0)

@@ -137,6 +137,23 @@ namespace Core2D.Shapes
         }
 
         /// <inheritdoc/>
+        public override bool IsDirty()
+        {
+            var isDirty = base.IsDirty();
+
+            isDirty |= Geometry.IsDirty();
+
+            return isDirty;
+        }
+
+        /// <inheritdoc/>
+        public override void Invalidate()
+        {
+            base.Invalidate();
+            Geometry.Invalidate();
+        }
+
+        /// <inheritdoc/>
         public string ToXamlString()
             => Geometry?.ToXamlString();
 

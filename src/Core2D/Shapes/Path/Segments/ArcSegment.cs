@@ -64,6 +64,26 @@ namespace Core2D.Path.Segments
         }
 
         /// <inheritdoc/>
+        public override bool IsDirty()
+        {
+            var isDirty = base.IsDirty();
+
+            isDirty |= Point.IsDirty();
+            isDirty |= Size.IsDirty();
+
+            return isDirty;
+        }
+
+        /// <inheritdoc/>
+        public override void Invalidate()
+        {
+            base.Invalidate();
+
+            Point.Invalidate();
+            Size.Invalidate();
+        }
+
+        /// <inheritdoc/>
         public override string ToXamlString()
             => $"A{Size.ToXamlString()} {RotationAngle.ToString(CultureInfo.InvariantCulture)} {(IsLargeArc ? "1" : "0")} {(SweepDirection == SweepDirection.Clockwise ? "1" : "0")} {Point.ToXamlString()}";
 

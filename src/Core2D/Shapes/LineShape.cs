@@ -118,6 +118,25 @@ namespace Core2D.Shapes
             throw new NotImplementedException();
         }
 
+        /// <inheritdoc/>
+        public override bool IsDirty()
+        {
+            var isDirty = base.IsDirty();
+
+            isDirty |= Start.IsDirty();
+            isDirty |= End.IsDirty();
+
+            return isDirty;
+        }
+
+        /// <inheritdoc/>
+        public override void Invalidate()
+        {
+            base.Invalidate();
+            Start.Invalidate();
+            End.Invalidate();
+        }
+
         /// <summary>
         /// Check whether the <see cref="Start"/> property has changed from its default value.
         /// </summary>

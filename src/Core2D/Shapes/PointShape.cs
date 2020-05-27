@@ -41,6 +41,19 @@ namespace Core2D.Shapes
         }
 
         /// <inheritdoc/>
+        public override bool IsDirty()
+        {
+            var isDirty = base.IsDirty();
+            return isDirty;
+        }
+
+        /// <inheritdoc/>
+        public override void Invalidate()
+        {
+            base.Invalidate();
+        }
+
+        /// <inheritdoc/>
         public override void DrawShape(object dc, IShapeRenderer renderer, double dx, double dy)
         {
             if (State.Flags.HasFlag(ShapeStateFlags.Visible))

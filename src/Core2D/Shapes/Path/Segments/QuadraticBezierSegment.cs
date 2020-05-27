@@ -40,6 +40,26 @@ namespace Core2D.Path.Segments
         }
 
         /// <inheritdoc/>
+        public override bool IsDirty()
+        {
+            var isDirty = base.IsDirty();
+
+            isDirty |= Point1.IsDirty();
+            isDirty |= Point2.IsDirty();
+
+            return isDirty;
+        }
+
+        /// <inheritdoc/>
+        public override void Invalidate()
+        {
+            base.Invalidate();
+
+            Point1.Invalidate();
+            Point2.Invalidate();
+        }
+
+        /// <inheritdoc/>
         public override string ToXamlString()
             => $"Q{Point1.ToXamlString()} {Point2.ToXamlString()}";
 

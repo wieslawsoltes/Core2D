@@ -126,6 +126,25 @@ namespace Core2D.Shapes
             throw new NotImplementedException();
         }
 
+        /// <inheritdoc/>
+        public override bool IsDirty()
+        {
+            var isDirty = base.IsDirty();
+
+            isDirty |= TopLeft.IsDirty();
+            isDirty |= BottomRight.IsDirty();
+
+            return isDirty;
+        }
+
+        /// <inheritdoc/>
+        public override void Invalidate()
+        {
+            base.Invalidate();
+            TopLeft.Invalidate();
+            BottomRight.Invalidate();
+        }
+
         /// <summary>
         /// Check whether the <see cref="TopLeft"/> property has changed from its default value.
         /// </summary>

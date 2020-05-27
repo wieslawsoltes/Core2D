@@ -55,6 +55,25 @@ namespace Core2D.Style
             set => Update(ref _dashOffset, value);
         }
 
+        /// <inheritdoc/>
+        public override bool IsDirty()
+        {
+            var isDirty = base.IsDirty();
+
+            isDirty |= Stroke.IsDirty();
+            isDirty |= Fill.IsDirty();
+
+            return isDirty;
+        }
+
+        /// <inheritdoc/>
+        public override void Invalidate()
+        {
+            base.Invalidate();
+            Stroke.Invalidate();
+            Fill.Invalidate();
+        }
+
         /// <summary>
         /// Check whether the <see cref="Stroke"/> property has changed from its default value.
         /// </summary>
