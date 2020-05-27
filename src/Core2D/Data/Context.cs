@@ -48,7 +48,10 @@ namespace Core2D.Data
                 isDirty |= property.IsDirty();
             }
 
-            isDirty |= Record.IsDirty();
+            if (Record != null)
+            {
+                isDirty |= Record.IsDirty();
+            }
 
             return isDirty;
         }
@@ -63,7 +66,10 @@ namespace Core2D.Data
                 property.Invalidate();
             }
 
-            Record.Invalidate();
+            if (Record != null)
+            {
+                Record.Invalidate();
+            }
         }
 
         /// <summary>
