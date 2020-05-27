@@ -1,13 +1,11 @@
 ﻿using Core2D.Path;
-using Core2D.Shapes;
-using Core2D.Style;
 
 namespace Core2D.Containers
 {
     /// <summary>
     /// Defines options interface.
     /// </summary>
-    public interface IOptions
+    public interface IOptions : IObservableObject
     {
         /// <summary>
         /// Gets or sets how grid snapping is handled. 
