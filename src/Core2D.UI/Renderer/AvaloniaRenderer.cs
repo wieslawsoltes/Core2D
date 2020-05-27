@@ -187,7 +187,6 @@ namespace Core2D.UI.Renderer
         }
     }
 
-
     internal class LineDrawNode : DrawNode
     {
         public ILineShape Line { get; set; }
