@@ -76,7 +76,7 @@ namespace Core2D.Editor.Tools.Path
                             _line.End,
                             editor.Project.Options.DefaultIsStroked,
                             editor.Project.Options.DefaultIsSmoothJoin);
-                        editor.Project.CurrentContainer.WorkingLayer.Invalidate();
+                        editor.Project.CurrentContainer.WorkingLayer.InvalidateLayer();
                         ToStateEnd();
                         Move(null);
                         _currentState = State.End;
@@ -103,7 +103,7 @@ namespace Core2D.Editor.Tools.Path
                         pathTool.GeometryContext.LineTo(_line.End,
                             editor.Project.Options.DefaultIsStroked,
                             editor.Project.Options.DefaultIsSmoothJoin);
-                        editor.Project.CurrentContainer.WorkingLayer.Invalidate();
+                        editor.Project.CurrentContainer.WorkingLayer.InvalidateLayer();
                         Move(null);
                         _currentState = State.End;
                     }
@@ -157,7 +157,7 @@ namespace Core2D.Editor.Tools.Path
                         }
                         _line.End.X = sx;
                         _line.End.Y = sy;
-                        editor.Project.CurrentContainer.WorkingLayer.Invalidate();
+                        editor.Project.CurrentContainer.WorkingLayer.InvalidateLayer();
                         Move(null);
                     }
                     break;
@@ -214,7 +214,7 @@ namespace Core2D.Editor.Tools.Path
                         }
                         else
                         {
-                            editor.Project.CurrentContainer.WorkingLayer.Invalidate();
+                            editor.Project.CurrentContainer.WorkingLayer.InvalidateLayer();
                         }
                     }
                     break;

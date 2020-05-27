@@ -95,7 +95,7 @@ namespace Core2D.Editor.Tools
                         }
 
                         editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Add(_ellipse);
-                        editor.Project.CurrentContainer.WorkingLayer.Invalidate();
+                        editor.Project.CurrentContainer.WorkingLayer.InvalidateLayer();
                         ToStateBottomRight();
                         Move(_ellipse);
                         _currentState = State.BottomRight;
@@ -190,7 +190,7 @@ namespace Core2D.Editor.Tools
                                 _ellipse.BottomRight.X = sx;
                                 _ellipse.BottomRight.Y = sy;
                             }
-                            editor.Project.CurrentContainer.WorkingLayer.Invalidate();
+                            editor.Project.CurrentContainer.WorkingLayer.InvalidateLayer();
                             Move(_ellipse);
                         }
                     }
@@ -236,7 +236,7 @@ namespace Core2D.Editor.Tools
                 case State.BottomRight:
                     {
                         editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_ellipse);
-                        editor.Project.CurrentContainer.WorkingLayer.Invalidate();
+                        editor.Project.CurrentContainer.WorkingLayer.InvalidateLayer();
                     }
                     break;
             }

@@ -80,7 +80,7 @@ namespace Core2D.Editor.Tools.Path
                             _cubicBezier.Point4,
                             editor.Project.Options.DefaultIsStroked,
                             editor.Project.Options.DefaultIsSmoothJoin);
-                        editor.Project.CurrentContainer.WorkingLayer.Invalidate();
+                        editor.Project.CurrentContainer.WorkingLayer.InvalidateLayer();
                         ToStatePoint4();
                         Move(null);
                         _currentState = State.Point4;
@@ -102,7 +102,7 @@ namespace Core2D.Editor.Tools.Path
                                 _cubicBezier.Point4 = point3;
                             }
                         }
-                        editor.Project.CurrentContainer.WorkingLayer.Invalidate();
+                        editor.Project.CurrentContainer.WorkingLayer.InvalidateLayer();
                         ToStatePoint2();
                         Move(null);
                         _currentState = State.Point2;
@@ -123,7 +123,7 @@ namespace Core2D.Editor.Tools.Path
                                 _cubicBezier.Point2 = point1;
                             }
                         }
-                        editor.Project.CurrentContainer.WorkingLayer.Invalidate();
+                        editor.Project.CurrentContainer.WorkingLayer.InvalidateLayer();
                         ToStateThree();
                         Move(null);
                         _currentState = State.Point3;
@@ -155,7 +155,7 @@ namespace Core2D.Editor.Tools.Path
                             _cubicBezier.Point4,
                             editor.Project.Options.DefaultIsStroked,
                             editor.Project.Options.DefaultIsSmoothJoin);
-                        editor.Project.CurrentContainer.WorkingLayer.Invalidate();
+                        editor.Project.CurrentContainer.WorkingLayer.InvalidateLayer();
                         ToStatePoint4();
                         Move(null);
                         _currentState = State.Point4;
@@ -216,7 +216,7 @@ namespace Core2D.Editor.Tools.Path
                         _cubicBezier.Point3.Y = sy;
                         _cubicBezier.Point4.X = sx;
                         _cubicBezier.Point4.Y = sy;
-                        editor.Project.CurrentContainer.WorkingLayer.Invalidate();
+                        editor.Project.CurrentContainer.WorkingLayer.InvalidateLayer();
                         Move(null);
                     }
                     break;
@@ -228,7 +228,7 @@ namespace Core2D.Editor.Tools.Path
                         }
                         _cubicBezier.Point2.X = sx;
                         _cubicBezier.Point2.Y = sy;
-                        editor.Project.CurrentContainer.WorkingLayer.Invalidate();
+                        editor.Project.CurrentContainer.WorkingLayer.InvalidateLayer();
                         Move(null);
                     }
                     break;
@@ -240,7 +240,7 @@ namespace Core2D.Editor.Tools.Path
                         }
                         _cubicBezier.Point3.X = sx;
                         _cubicBezier.Point3.Y = sy;
-                        editor.Project.CurrentContainer.WorkingLayer.Invalidate();
+                        editor.Project.CurrentContainer.WorkingLayer.InvalidateLayer();
                         Move(null);
                     }
                     break;
@@ -315,7 +315,7 @@ namespace Core2D.Editor.Tools.Path
                         }
                         else
                         {
-                            editor.Project.CurrentContainer.WorkingLayer.Invalidate();
+                            editor.Project.CurrentContainer.WorkingLayer.InvalidateLayer();
                         }
                     }
                     break;

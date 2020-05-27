@@ -75,7 +75,7 @@ namespace Core2D.Editor.Tools
                         }
 
                         editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Add(_quadraticBezier);
-                        editor.Project.CurrentContainer.WorkingLayer.Invalidate();
+                        editor.Project.CurrentContainer.WorkingLayer.InvalidateLayer();
                         ToStatePoint3();
                         Move(_quadraticBezier);
                         _currentState = State.Point3;
@@ -97,7 +97,7 @@ namespace Core2D.Editor.Tools
                                 _quadraticBezier.Point3 = result;
                             }
 
-                            editor.Project.CurrentContainer.WorkingLayer.Invalidate();
+                            editor.Project.CurrentContainer.WorkingLayer.InvalidateLayer();
                             ToStatePoint2();
                             Move(_quadraticBezier);
                             _currentState = State.Point2;
@@ -179,7 +179,7 @@ namespace Core2D.Editor.Tools
                             _quadraticBezier.Point2.Y = sy;
                             _quadraticBezier.Point3.X = sx;
                             _quadraticBezier.Point3.Y = sy;
-                            editor.Project.CurrentContainer.WorkingLayer.Invalidate();
+                            editor.Project.CurrentContainer.WorkingLayer.InvalidateLayer();
                             Move(_quadraticBezier);
                         }
                     }
@@ -194,7 +194,7 @@ namespace Core2D.Editor.Tools
                             }
                             _quadraticBezier.Point2.X = sx;
                             _quadraticBezier.Point2.Y = sy;
-                            editor.Project.CurrentContainer.WorkingLayer.Invalidate();
+                            editor.Project.CurrentContainer.WorkingLayer.InvalidateLayer();
                             Move(_quadraticBezier);
                         }
                     }
@@ -249,7 +249,7 @@ namespace Core2D.Editor.Tools
                 case State.Point2:
                     {
                         editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_quadraticBezier);
-                        editor.Project.CurrentContainer.WorkingLayer.Invalidate();
+                        editor.Project.CurrentContainer.WorkingLayer.InvalidateLayer();
                     }
                     break;
             }

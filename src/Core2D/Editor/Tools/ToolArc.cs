@@ -80,7 +80,7 @@ namespace Core2D.Editor.Tools
                             _arc.Point1 = result;
                         }
 
-                        editor.Project.CurrentContainer.WorkingLayer.Invalidate();
+                        editor.Project.CurrentContainer.WorkingLayer.InvalidateLayer();
                         ToStatePoint2();
                         Move(_arc);
                         _currentState = State.Point2;
@@ -102,7 +102,7 @@ namespace Core2D.Editor.Tools
                                 _arc.Point2 = result;
                             }
 
-                            editor.Project.CurrentContainer.WorkingLayer.Invalidate();
+                            editor.Project.CurrentContainer.WorkingLayer.InvalidateLayer();
                             ToStatePoint3();
                             Move(_arc);
                             _currentState = State.Point3;
@@ -130,7 +130,7 @@ namespace Core2D.Editor.Tools
                             }
 
                             editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Add(_arc);
-                            editor.Project.CurrentContainer.WorkingLayer.Invalidate();
+                            editor.Project.CurrentContainer.WorkingLayer.InvalidateLayer();
                             ToStatePoint4();
                             Move(_arc);
                             _currentState = State.Point4;
@@ -216,7 +216,7 @@ namespace Core2D.Editor.Tools
                             }
                             _arc.Point2.X = sx;
                             _arc.Point2.Y = sy;
-                            editor.Project.CurrentContainer.WorkingLayer.Invalidate();
+                            editor.Project.CurrentContainer.WorkingLayer.InvalidateLayer();
                             Move(_arc);
                         }
                     }
@@ -231,7 +231,7 @@ namespace Core2D.Editor.Tools
                             }
                             _arc.Point3.X = sx;
                             _arc.Point3.Y = sy;
-                            editor.Project.CurrentContainer.WorkingLayer.Invalidate();
+                            editor.Project.CurrentContainer.WorkingLayer.InvalidateLayer();
                             Move(_arc);
                         }
                     }
@@ -246,7 +246,7 @@ namespace Core2D.Editor.Tools
                             }
                             _arc.Point4.X = sx;
                             _arc.Point4.Y = sy;
-                            editor.Project.CurrentContainer.WorkingLayer.Invalidate();
+                            editor.Project.CurrentContainer.WorkingLayer.InvalidateLayer();
                             Move(_arc);
                         }
                     }
@@ -328,7 +328,7 @@ namespace Core2D.Editor.Tools
                 case State.Point4:
                     {
                         editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_arc);
-                        editor.Project.CurrentContainer.WorkingLayer.Invalidate();
+                        editor.Project.CurrentContainer.WorkingLayer.InvalidateLayer();
                     }
                     break;
             }

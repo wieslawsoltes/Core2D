@@ -135,7 +135,7 @@ namespace Core2D.Editor.Tools.Selection
                 _helperPoint4.Y = _cubicBezier.Point4.Y;
             }
 
-            _layer.Invalidate();
+            _layer.InvalidateLayer();
         }
 
         /// <summary>
@@ -185,7 +185,7 @@ namespace Core2D.Editor.Tools.Selection
                 _helperPoint4 = null;
             }
 
-            _layer.Invalidate();
+            _layer.InvalidateLayer();
         }
     }
 }

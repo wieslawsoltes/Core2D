@@ -24,7 +24,7 @@ namespace Core2D.Containers
         /// <summary>
         /// Invalidate layer event.
         /// </summary>
-        event InvalidateLayerEventHandler InvalidateLayer;
+        event InvalidateLayerEventHandler InvalidateLayerHandler;
 
         /// <summary>
         /// Gets or sets flag indicating whether layer is visible.
@@ -39,6 +39,6 @@ namespace Core2D.Containers
         /// <summary>
         /// Invalidate layer shapes.
         /// </summary>
-        void Invalidate();
+        void InvalidateLayer();
     }
 }

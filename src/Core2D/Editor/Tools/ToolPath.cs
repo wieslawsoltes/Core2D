@@ -128,8 +128,8 @@ namespace Core2D.Editor.Tools
             }
 
             var editor = _serviceProvider.GetService<IProjectEditor>();
-            editor.Project.CurrentContainer.WorkingLayer.Invalidate();
-            editor.Project.CurrentContainer.HelperLayer.Invalidate();
+            editor.Project.CurrentContainer.WorkingLayer.InvalidateLayer();
+            editor.Project.CurrentContainer.HelperLayer.InvalidateLayer();
         }
 
         /// <summary>

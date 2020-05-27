@@ -37,10 +37,16 @@ namespace Core2D
         }
 
         /// <inheritdoc/>
-        public virtual bool IsDirty() => _isDirty;
+        public virtual bool IsDirty()
+        {
+            return _isDirty;
+        }
 
         /// <inheritdoc/>
-        public virtual void SetIsDirty(bool value) => _isDirty = value;
+        public virtual void Invalidate()
+        {
+            _isDirty = false;
+        }
 
         /// <summary>
         /// Occurs when a property value changes.

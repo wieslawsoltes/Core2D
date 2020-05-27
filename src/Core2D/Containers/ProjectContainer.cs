@@ -260,7 +260,7 @@ namespace Core2D.Containers
                     if (CurrentContainer != container)
                     {
                         CurrentContainer = container;
-                        CurrentContainer.Invalidate();
+                        CurrentContainer.InvalidateLayer();
                     }
                 }
             }

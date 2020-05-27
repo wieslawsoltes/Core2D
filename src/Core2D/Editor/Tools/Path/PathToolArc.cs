@@ -87,7 +87,7 @@ namespace Core2D.Editor.Tools.Path
                             _defaultSweepDirection,
                             editor.Project.Options.DefaultIsStroked,
                             editor.Project.Options.DefaultIsSmoothJoin);
-                        editor.Project.CurrentContainer.WorkingLayer.Invalidate();
+                        editor.Project.CurrentContainer.WorkingLayer.InvalidateLayer();
                         ToStateEnd();
                         Move(null);
                         _currentState = State.End;
@@ -118,7 +118,7 @@ namespace Core2D.Editor.Tools.Path
                             _defaultSweepDirection,
                             editor.Project.Options.DefaultIsStroked,
                             editor.Project.Options.DefaultIsSmoothJoin);
-                        editor.Project.CurrentContainer.WorkingLayer.Invalidate();
+                        editor.Project.CurrentContainer.WorkingLayer.InvalidateLayer();
                         Move(null);
                         _currentState = State.End;
                     }
@@ -178,7 +178,7 @@ namespace Core2D.Editor.Tools.Path
                         arc.Point = _arc.End;
                         arc.Size.Width = Abs(_arc.Start.X - _arc.End.X);
                         arc.Size.Height = Abs(_arc.Start.Y - _arc.End.Y);
-                        editor.Project.CurrentContainer.WorkingLayer.Invalidate();
+                        editor.Project.CurrentContainer.WorkingLayer.InvalidateLayer();
                         Move(null);
                     }
                     break;
@@ -236,7 +236,7 @@ namespace Core2D.Editor.Tools.Path
                         }
                         else
                         {
-                            editor.Project.CurrentContainer.WorkingLayer.Invalidate();
+                            editor.Project.CurrentContainer.WorkingLayer.InvalidateLayer();
                         }
                     }
                     break;

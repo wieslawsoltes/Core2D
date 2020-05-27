@@ -63,7 +63,7 @@ namespace Core2D.UI.Behaviors
 
             if (projectEditor.CanvasPlatform is IEditorCanvasPlatform canvasPlatform)
             {
-                canvasPlatform.Invalidate = () =>
+                canvasPlatform.InvalidateControl = () =>
                 {
                     presenterControlData?.InvalidateVisual();
                     presenterControlTemplate?.InvalidateVisual();
@@ -96,7 +96,7 @@ namespace Core2D.UI.Behaviors
 
             if (projectEditor.CanvasPlatform is IEditorCanvasPlatform canvasPlatform)
             {
-                canvasPlatform.Invalidate = null;
+                canvasPlatform.InvalidateControl = null;
                 canvasPlatform.ResetZoom = null;
                 canvasPlatform.AutoFitZoom = null;
                 canvasPlatform.Zoom = null;

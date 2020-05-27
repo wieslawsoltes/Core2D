@@ -45,7 +45,7 @@ namespace Core2D.Editor
         {
             if (_editor?.Project?.CurrentContainer != null)
             {
-                _editor.Project.CurrentContainer.Invalidate();
+                _editor.Project.CurrentContainer.InvalidateLayer();
             }
         }
 
@@ -55,7 +55,7 @@ namespace Core2D.Editor
             {
                 _editor.PageRenderer.ClearCache(isZooming: false);
                 _editor.DocumentRenderer.ClearCache(isZooming: false);
-                _editor.Project.CurrentContainer.Invalidate();
+                _editor.Project.CurrentContainer.InvalidateLayer();
             }
         }
 
@@ -212,7 +212,7 @@ namespace Core2D.Editor
 
         private void ObserveInvalidateLayer(object sender, InvalidateLayerEventArgs e)
         {
-            _editor?.CanvasPlatform?.Invalidate?.Invoke();
+            _editor?.CanvasPlatform?.InvalidateControl?.Invoke();
         }
 
         private void ObserveLayer(object sender, PropertyChangedEventArgs e)
@@ -586,12 +586,12 @@ namespace Core2D.Editor
 
             if (container.WorkingLayer != null)
             {
-                container.WorkingLayer.InvalidateLayer += ObserveInvalidateLayer;
+                container.WorkingLayer.InvalidateLayerHandler += ObserveInvalidateLayer;
             }
 
             if (container.HelperLayer != null)
             {
-                container.HelperLayer.InvalidateLayer += ObserveInvalidateLayer;
+                container.HelperLayer.InvalidateLayerHandler += ObserveInvalidateLayer;
             }
         }
 
@@ -621,12 +621,12 @@ namespace Core2D.Editor
 
             if (container.WorkingLayer != null)
             {
-                container.WorkingLayer.InvalidateLayer -= ObserveInvalidateLayer;
+                container.WorkingLayer.InvalidateLayerHandler -= ObserveInvalidateLayer;
             }
 
             if (container.HelperLayer != null)
             {
-                container.HelperLayer.InvalidateLayer -= ObserveInvalidateLayer;
+                container.HelperLayer.InvalidateLayerHandler -= ObserveInvalidateLayer;
             }
         }
 
@@ -644,7 +644,7 @@ namespace Core2D.Editor
                 Add(layer.Shapes);
             }
 
-            layer.InvalidateLayer += ObserveInvalidateLayer;
+            layer.InvalidateLayerHandler += ObserveInvalidateLayer;
         }
 
         private void Remove(ILayerContainer layer)
@@ -661,7 +661,7 @@ namespace Core2D.Editor
                 Remove(layer.Shapes);
             }
 
-            layer.InvalidateLayer -= ObserveInvalidateLayer;
+            layer.InvalidateLayerHandler -= ObserveInvalidateLayer;
         }
 
         private void Add(IBaseShape shape)

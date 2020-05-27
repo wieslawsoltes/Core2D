@@ -138,29 +138,29 @@ namespace Core2D.Containers
         public void SetCurrentLayer(ILayerContainer layer) => CurrentLayer = layer;
 
         /// <inheritdoc/>
-        public virtual void Invalidate()
+        public virtual void InvalidateLayer()
         {
             if (Template != null)
             {
-                Template.Invalidate();
+                Template.InvalidateLayer();
             }
 
             if (Layers != null)
             {
                 foreach (var layer in Layers)
                 {
-                    layer.Invalidate();
+                    layer.InvalidateLayer();
                 }
             }
 
             if (WorkingLayer != null)
             {
-                WorkingLayer.Invalidate();
+                WorkingLayer.InvalidateLayer();
             }
 
             if (HelperLayer != null)
             {
-                HelperLayer.Invalidate();
+                HelperLayer.InvalidateLayer();
             }
         }
 

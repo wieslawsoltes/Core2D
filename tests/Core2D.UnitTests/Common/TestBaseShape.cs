@@ -25,12 +25,12 @@ namespace Core2D.Common.UnitTests
         public event PropertyChangedEventHandler PropertyChanged;
 #pragma warning restore CS0067
 
-        public bool IsDirty()
+        public virtual bool IsDirty()
         {
             throw new NotImplementedException();
         }
 
-        public virtual void SetIsDirty(bool value)
+        public virtual void Invalidate()
         {
             throw new NotImplementedException();
         }

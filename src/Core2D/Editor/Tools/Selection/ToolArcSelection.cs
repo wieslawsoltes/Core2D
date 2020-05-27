@@ -171,7 +171,7 @@ namespace Core2D.Editor.Tools.Selection
                 _endHelperPoint.Y = a.End.Y;
             }
 
-            _layer.Invalidate();
+            _layer.InvalidateLayer();
         }
 
         /// <summary>
@@ -227,7 +227,7 @@ namespace Core2D.Editor.Tools.Selection
                 _endHelperPoint = null;
             }
 
-            _layer.Invalidate();
+            _layer.InvalidateLayer();
         }
     }
 }

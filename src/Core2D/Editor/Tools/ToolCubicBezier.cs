@@ -75,7 +75,7 @@ namespace Core2D.Editor.Tools
                         }
 
                         editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Add(_cubicBezier);
-                        editor.Project.CurrentContainer.WorkingLayer.Invalidate();
+                        editor.Project.CurrentContainer.WorkingLayer.InvalidateLayer();
                         ToStatePoint4();
                         Move(_cubicBezier);
                         _currentState = State.Point4;
@@ -97,7 +97,7 @@ namespace Core2D.Editor.Tools
                                 _cubicBezier.Point4 = result;
                             }
 
-                            editor.Project.CurrentContainer.WorkingLayer.Invalidate();
+                            editor.Project.CurrentContainer.WorkingLayer.InvalidateLayer();
                             ToStatePoint2();
                             Move(_cubicBezier);
                             _currentState = State.Point2;
@@ -117,7 +117,7 @@ namespace Core2D.Editor.Tools
                                 _cubicBezier.Point2 = result;
                             }
 
-                            editor.Project.CurrentContainer.WorkingLayer.Invalidate();
+                            editor.Project.CurrentContainer.WorkingLayer.InvalidateLayer();
                             ToStatePoint3();
                             Move(_cubicBezier);
                             _currentState = State.Point3;
@@ -202,7 +202,7 @@ namespace Core2D.Editor.Tools
                             _cubicBezier.Point3.Y = sy;
                             _cubicBezier.Point4.X = sx;
                             _cubicBezier.Point4.Y = sy;
-                            editor.Project.CurrentContainer.WorkingLayer.Invalidate();
+                            editor.Project.CurrentContainer.WorkingLayer.InvalidateLayer();
                             Move(_cubicBezier);
                         }
                     }
@@ -217,7 +217,7 @@ namespace Core2D.Editor.Tools
                             }
                             _cubicBezier.Point2.X = sx;
                             _cubicBezier.Point2.Y = sy;
-                            editor.Project.CurrentContainer.WorkingLayer.Invalidate();
+                            editor.Project.CurrentContainer.WorkingLayer.InvalidateLayer();
                             Move(_cubicBezier);
                         }
                     }
@@ -232,7 +232,7 @@ namespace Core2D.Editor.Tools
                             }
                             _cubicBezier.Point3.X = sx;
                             _cubicBezier.Point3.Y = sy;
-                            editor.Project.CurrentContainer.WorkingLayer.Invalidate();
+                            editor.Project.CurrentContainer.WorkingLayer.InvalidateLayer();
                             Move(_cubicBezier);
                         }
                     }
@@ -296,7 +296,7 @@ namespace Core2D.Editor.Tools
                 case State.Point3:
                     {
                         editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_cubicBezier);
-                        editor.Project.CurrentContainer.WorkingLayer.Invalidate();
+                        editor.Project.CurrentContainer.WorkingLayer.InvalidateLayer();
                     }
                     break;
             }

@@ -278,7 +278,7 @@ namespace Core2D.Editor.Tools.Decorators
                 _bottomHandle.State.Flags |= ShapeStateFlags.Visible;
             }
 
-            _layer.Invalidate();
+            _layer.InvalidateLayer();
         }
 
         /// <inheritdoc/>
@@ -322,7 +322,7 @@ namespace Core2D.Editor.Tools.Decorators
             shapesBuilder.Add(_rightHandle);
             _layer.Shapes = shapesBuilder.ToImmutable();
 
-            _layer.Invalidate();
+            _layer.InvalidateLayer();
         }
 
         /// <inheritdoc/>
@@ -362,7 +362,7 @@ namespace Core2D.Editor.Tools.Decorators
             shapesBuilder.Remove(_leftHandle);
             shapesBuilder.Remove(_rightHandle);
             _layer.Shapes = shapesBuilder.ToImmutable();
-            _layer.Invalidate();
+            _layer.InvalidateLayer();
         }
 
         /// <inheritdoc/>
@@ -384,7 +384,7 @@ namespace Core2D.Editor.Tools.Decorators
                 _currentHandle = null;
                 _points = null;
                 _rotateAngle = 0.0;
-                _layer.Invalidate();
+                _layer.InvalidateLayer();
             }
 
             double radius = editor.Project.Options.HitThreshold / editor.PageState.ZoomX;
@@ -442,7 +442,7 @@ namespace Core2D.Editor.Tools.Decorators
                     _historyY = _startY;
                     _points = null;
                     _rotateAngle = 0.0;
-                    _layer.Invalidate();
+                    _layer.InvalidateLayer();
                     return true;
                 }
             }

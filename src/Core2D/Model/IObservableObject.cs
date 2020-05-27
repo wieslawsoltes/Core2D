@@ -29,10 +29,9 @@ namespace Core2D
         public bool IsDirty();
 
         /// <summary>
-        /// Set the IsDirty flag value.
+        /// Invalidates dirty flag.
         /// </summary>
-        /// <param name="value">The new value of IsDirty flag.</param>
-        void SetIsDirty(bool value);
+        void Invalidate();
 
         /// <summary>
         /// Notify observers about property changes.
