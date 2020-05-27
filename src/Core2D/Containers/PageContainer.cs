@@ -170,6 +170,44 @@ namespace Core2D.Containers
             throw new NotImplementedException();
         }
 
+        /// <inheritdoc/>
+        public override bool IsDirty()
+        {
+            var isDirty = base.IsDirty();
+
+            isDirty |= Background.IsDirty();
+
+            foreach (var layer in Layers)
+            {
+                isDirty |= layer.IsDirty();
+            }
+
+            isDirty |= WorkingLayer.IsDirty();
+            isDirty |= HelperLayer.IsDirty();
+            isDirty |= Template.IsDirty();
+            isDirty |= Data.IsDirty();
+
+            return isDirty;
+        }
+
+        /// <inheritdoc/>
+        public override void Invalidate()
+        {
+            base.Invalidate();
+
+            Background.Invalidate();
+
+            foreach (var layer in Layers)
+            {
+                layer.Invalidate();
+            }
+
+            WorkingLayer.Invalidate();
+            HelperLayer.Invalidate();
+            Template.Invalidate();
+            Data.Invalidate();
+        }
+
         /// <summary>
         /// Check whether the <see cref="Width"/> property has changed from its default value.
         /// </summary>
