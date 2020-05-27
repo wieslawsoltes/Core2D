@@ -1065,6 +1065,36 @@ namespace Core2D.UI.Renderer
         /// <inheritdoc/>
         public void Draw(object dc, ITextShape text, double dx, double dy)
         {
+            var context = dc as AM.DrawingContext;
+
+            var drawNodeCached = _drawNodeCache.Get(text);
+            if (drawNodeCached != null)
+            {
+                if (text.Style.IsDirty())
+                {
+                    drawNodeCached.Style = text.Style;
+                    drawNodeCached.UpdateStyle();
+                    text.Style.Invalidate();
+                }
+
+                if (text.IsDirty())
+                {
+                    drawNodeCached.UpdateGeometry();
+                    //text.Invalidate();
+                }
+
+                drawNodeCached.Draw(context, dx, dy, _state.ZoomX);
+            }
+            else
+            {
+                var drawNode = new TextDrawNode(text, text.Style);
+
+                drawNode.UpdateStyle();
+
+                _drawNodeCache.Set(text, drawNode);
+
+                drawNode.Draw(context, dx, dy, _state.ZoomX);
+            }
             /*
             var _dc = dc as AM.DrawingContext;
 
