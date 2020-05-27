@@ -290,6 +290,7 @@ namespace Core2D.UI.Views
                         if (customState.Container != null && customState.Renderer != null)
                         {
                             s_templatePresenter.Render(context, customState.Renderer, customState.Container, 0.0, 0.0);
+                            customState.Container?.Template?.Invalidate();
                         }
                     }
                     break;
