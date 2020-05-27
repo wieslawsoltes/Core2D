@@ -199,6 +199,151 @@ namespace Core2D.UI.Renderer
             UpdateGeometry();
         }
 
+        /*
+        private static void DrawLineInternal(AM.DrawingContext dc, AM.IPen pen, bool isStroked, ref A.Point p0, ref A.Point p1)
+        {
+            if (!isStroked)
+            {
+                return;
+            }
+            dc.DrawLine(pen, p0, p1);
+        }
+
+        private static void DrawLineCurveInternal(AM.DrawingContext _dc, AM.IPen pen, bool isStroked, ref A.Point pt1, ref A.Point pt2, double curvature, CurveOrientation orientation, PointAlignment pt1a, PointAlignment pt2a)
+        {
+            if (!isStroked)
+            {
+                return;
+            }
+            var sg = new AM.StreamGeometry();
+            using (var sgc = sg.Open())
+            {
+                sgc.BeginFigure(new A.Point(pt1.X, pt1.Y), false);
+                double p1x = pt1.X;
+                double p1y = pt1.Y;
+                double p2x = pt2.X;
+                double p2y = pt2.Y;
+                LineShapeExtensions.GetCurvedLineBezierControlPoints(orientation, curvature, pt1a, pt2a, ref p1x, ref p1y, ref p2x, ref p2y);
+                sgc.CubicBezierTo(
+                    new A.Point(p1x, p1y),
+                    new A.Point(p2x, p2y),
+                    new A.Point(pt2.X, pt2.Y));
+                sgc.EndFigure(false);
+            }
+            _dc.DrawGeometry(null, pen, sg);
+        }
+
+        private void DrawLineArrowsInternal(AM.DrawingContext dc, ILineShape line, IShapeStyle style, double dx, double dy, Func<double, float> scaleToPage, bool scaleStrokeWidth, out A.Point pt1, out A.Point pt2)
+        {
+            GetCached(style.StartArrowStyle, out var fillStartArrow, out var strokeStartArrow, scaleStrokeWidth);
+            GetCached(style.EndArrowStyle, out var fillEndArrow, out var strokeEndArrow, scaleStrokeWidth);
+
+            double _x1 = line.Start.X + dx;
+            double _y1 = line.Start.Y + dy;
+            double _x2 = line.End.X + dx;
+            double _y2 = line.End.Y + dy;
+            line.GetMaxLength(ref _x1, ref _y1, ref _x2, ref _y2);
+
+            float x1 = (float)_x1;
+            float y1 = (float)_y1;
+            float x2 = (float)_x2;
+            float y2 = (float)_y2;
+            var sas = style.StartArrowStyle;
+            var eas = style.EndArrowStyle;
+            double a1 = Math.Atan2(y1 - y2, x1 - x2);
+            double a2 = Math.Atan2(y2 - y1, x2 - x1);
+
+            pt1 = DrawLineArrowInternal(dc, strokeStartArrow, fillStartArrow, x1, y1, a1, sas);
+            pt2 = DrawLineArrowInternal(dc, strokeEndArrow, fillEndArrow, x2, y2, a2, eas);
+        }
+
+        private static A.Point DrawLineArrowInternal(AM.DrawingContext dc, AM.IPen pen, AM.IBrush brush, float x, float y, double angle, IArrowStyle style)
+        {
+            var rt = AME.MatrixHelper.Rotation(angle, new A.Vector(x, y));
+            double rx = style.RadiusX;
+            double ry = style.RadiusY;
+            double sx = 2.0 * rx;
+            double sy = 2.0 * ry;
+            A.Point pt;
+            switch (style.ArrowType)
+            {
+                default:
+                case ArrowType.None:
+                    {
+                        pt = new A.Point(x, y);
+                    }
+                    break;
+                case ArrowType.Rectangle:
+                    {
+                        pt = AME.MatrixHelper.TransformPoint(rt, new A.Point(x - (float)sx, y));
+                        var rect = new Rect2(x - sx, y - ry, sx, sy);
+                        using var d = dc.PushPreTransform(rt);
+                        DrawRectangleInternal(dc, brush, pen, style.IsStroked, style.IsFilled, ref rect);
+                    }
+                    break;
+                case ArrowType.Ellipse:
+                    {
+                        pt = AME.MatrixHelper.TransformPoint(rt, new A.Point(x - (float)sx, y));
+                        using var d = dc.PushPreTransform(rt);
+                        var rect = new Rect2(x - sx, y - ry, sx, sy);
+                        DrawEllipseInternal(dc, brush, pen, style.IsStroked, style.IsFilled, ref rect);
+                    }
+                    break;
+                case ArrowType.Arrow:
+                    {
+                        var pts = new A.Point[]
+                        {
+                            new A.Point(x, y),
+                            new A.Point(x - (float)sx, y + (float)sy),
+                            new A.Point(x, y),
+                            new A.Point(x - (float)sx, y - (float)sy),
+                            new A.Point(x, y)
+                        };
+                        pt = AME.MatrixHelper.TransformPoint(rt, pts[0]);
+                        var p11 = AME.MatrixHelper.TransformPoint(rt, pts[1]);
+                        var p21 = AME.MatrixHelper.TransformPoint(rt, pts[2]);
+                        var p12 = AME.MatrixHelper.TransformPoint(rt, pts[3]);
+                        var p22 = AME.MatrixHelper.TransformPoint(rt, pts[4]);
+                        DrawLineInternal(dc, pen, style.IsStroked, ref p11, ref p21);
+                        DrawLineInternal(dc, pen, style.IsStroked, ref p12, ref p22);
+                    }
+                    break;
+            }
+            return pt;
+        }
+
+        private static void DrawRectangleInternal(AM.DrawingContext dc, AM.IBrush brush, AM.IPen pen, bool isStroked, bool isFilled, ref Rect2 rect)
+        {
+            if (!isStroked && !isFilled)
+            {
+                return;
+            }
+            var r = new A.Rect(rect.X, rect.Y, rect.Width, rect.Height);
+            if (isFilled)
+            {
+                dc.FillRectangle(brush, r);
+            }
+            if (isStroked)
+            {
+                dc.DrawRectangle(pen, r);
+            }
+        }
+
+        private static void DrawEllipseInternal(AM.DrawingContext dc, AM.IBrush brush, AM.IPen pen, bool isStroked, bool isFilled, ref Rect2 rect)
+        {
+            if (!isFilled && !isStroked)
+            {
+                return;
+            }
+            var r = new A.Rect(rect.X, rect.Y, rect.Width, rect.Height);
+            var g = new AM.EllipseGeometry(r);
+            dc.DrawGeometry(
+                isFilled ? brush : null,
+                isStroked ? pen : null,
+                g);
+        }
+        */
+
         public override void UpdateGeometry()
         {
             ScaleThickness = Line.State.Flags.HasFlag(ShapeStateFlags.Thickness);
@@ -399,6 +544,25 @@ namespace Core2D.UI.Renderer
             UpdateGeometry();
         }
 
+        /*
+        private A.Point GetTextOrigin(IShapeStyle style, ref Rect2 rect, ref A.Size size)
+        {
+            var ox = style.TextStyle.TextHAlignment switch
+            {
+                TextHAlignment.Left => rect.X,
+                TextHAlignment.Right => rect.Right - size.Width,
+                _ => (rect.Left + rect.Width / 2.0) - (size.Width / 2.0),
+            };
+            var oy = style.TextStyle.TextVAlignment switch
+            {
+                TextVAlignment.Top => rect.Y,
+                TextVAlignment.Bottom => rect.Bottom - size.Height,
+                _ => (rect.Bottom - rect.Height / 2f) - (size.Height / 2f),
+            };
+            return new A.Point(ox, oy);
+        }
+        */
+
         public override void UpdateGeometry()
         {
             ScaleThickness = Text.State.Flags.HasFlag(ShapeStateFlags.Thickness);
@@ -410,6 +574,93 @@ namespace Core2D.UI.Renderer
         public override void OnDraw(AM.DrawingContext context, double dx, double dy, double zoom)
         {
             // TODO:
+            /*
+            var _dc = dc as AM.DrawingContext;
+
+            var style = text.Style;
+            if (style == null)
+            {
+                return;
+            }
+
+            if (!(text.GetProperty(nameof(ITextShape.Text)) is string tbind))
+            {
+                tbind = text.Text;
+            }
+
+            if (tbind == null)
+            {
+                return;
+            }
+
+            var scaleThickness = text.State.Flags.HasFlag(ShapeStateFlags.Thickness);
+            var scaleSize = text.State.Flags.HasFlag(ShapeStateFlags.Size);
+            var rect = Rect2.FromPoints(text.TopLeft.X, text.TopLeft.Y, text.BottomRight.X, text.BottomRight.Y, dx, dy);
+
+            var scale = scaleSize ? 1.0 / _state.ZoomX : 1.0;
+            var scaleToPage = scale == 1.0 ? _scaleToPage : (value) => (float)(_scaleToPage(value) / scale);
+            var center = rect.Center;
+            var translateX = 0.0 - (center.X * scale) + center.X;
+            var translateY = 0.0 - (center.Y * scale) + center.Y;
+
+            GetCached(style, out _, out var stroke, scaleThickness);
+
+            var translateDisposable = scale != 1.0 ? _dc.PushPreTransform(AME.MatrixHelper.Translate(translateX, translateY)) : default(IDisposable);
+            var scaleDisposable = scale != 1.0 ? _dc.PushPreTransform(AME.MatrixHelper.Scale(scale, scale)) : default(IDisposable);
+
+            (string ct, var ft, var cs) = _textCache.Get(text);
+            if (string.Compare(ct, tbind) == 0 && cs == style)
+            {
+                var size = ft.Bounds.Size;
+                var origin = GetTextOrigin(style, ref rect, ref size);
+                _dc.DrawText(stroke.Brush, origin, ft);
+            }
+            else
+            {
+                var fontStyle = AM.FontStyle.Normal;
+                var fontWeight = AM.FontWeight.Normal;
+
+                if (style.TextStyle.FontStyle != null)
+                {
+                    if (style.TextStyle.FontStyle.Flags.HasFlag(FontStyleFlags.Italic))
+                    {
+                        fontStyle |= AM.FontStyle.Italic;
+                    }
+
+                    if (style.TextStyle.FontStyle.Flags.HasFlag(FontStyleFlags.Bold))
+                    {
+                        fontWeight |= AM.FontWeight.Bold;
+                    }
+                }
+
+                if (style.TextStyle.FontSize >= 0.0)
+                {
+                    var tf = new AM.Typeface(
+                        style.TextStyle.FontName,
+                        fontWeight,
+                        fontStyle);
+
+                    ft = new AM.FormattedText()
+                    {
+                        Typeface = tf,
+                        Text = tbind,
+                        TextAlignment = AM.TextAlignment.Left,
+                        TextWrapping = AM.TextWrapping.NoWrap,
+                        FontSize = style.TextStyle.FontSize * _textScaleFactor
+                    };
+
+                    var size = ft.Bounds.Size;
+                    var origin = GetTextOrigin(style, ref rect, ref size);
+
+                    _textCache.Set(text, (tbind, ft, style));
+
+                    _dc.DrawText(stroke.Brush, origin, ft);
+                }
+            }
+
+            scaleDisposable?.Dispose();
+            translateDisposable?.Dispose();
+            */
         }
     }
 
@@ -436,6 +687,88 @@ namespace Core2D.UI.Renderer
         public override void OnDraw(AM.DrawingContext context, double dx, double dy, double zoom)
         {
             // TODO:
+            /*
+            if (image.Key == null)
+            {
+                return;
+            }
+
+            var _dc = dc as AM.DrawingContext;
+            var style = image.Style;
+
+            var scaleThickness = image.State.Flags.HasFlag(ShapeStateFlags.Thickness);
+            var scaleSize = image.State.Flags.HasFlag(ShapeStateFlags.Size);
+            var rect = Rect2.FromPoints(image.TopLeft.X, image.TopLeft.Y, image.BottomRight.X, image.BottomRight.Y, dx, dy);
+
+            var scale = scaleSize ? 1.0 / _state.ZoomX : 1.0;
+            var scaleToPage = scale == 1.0 ? _scaleToPage : (value) => (float)(_scaleToPage(value) / scale);
+            var center = rect.Center;
+            var translateX = 0.0 - (center.X * scale) + center.X;
+            var translateY = 0.0 - (center.Y * scale) + center.Y;
+
+            var translateDisposable = scale != 1.0 ? _dc.PushPreTransform(AME.MatrixHelper.Translate(translateX, translateY)) : default(IDisposable);
+            var scaleDisposable = scale != 1.0 ? _dc.PushPreTransform(AME.MatrixHelper.Scale(scale, scale)) : default(IDisposable);
+
+            if ((image.IsStroked || image.IsFilled) && style != null)
+            {
+                GetCached(style, out var fill, out var stroke, scaleThickness);
+
+                DrawRectangleInternal(
+                    _dc,
+                    fill,
+                    stroke,
+                    image.IsStroked,
+                    image.IsFilled,
+                    ref rect);
+            }
+
+            var imageCached = _biCache.Get(image.Key);
+            if (imageCached != null)
+            {
+                try
+                {
+                    _dc.DrawImage(
+                        imageCached,
+                        new A.Rect(0, 0, imageCached.PixelSize.Width, imageCached.PixelSize.Height),
+                        new A.Rect(rect.X, rect.Y, rect.Width, rect.Height));
+                }
+                catch (Exception ex)
+                {
+                    _serviceProvider.GetService<ILog>()?.LogException(ex);
+                }
+            }
+            else
+            {
+                if (_state.ImageCache == null || string.IsNullOrEmpty(image.Key))
+                {
+                    return;
+                }
+
+                try
+                {
+                    var bytes = _state.ImageCache.GetImage(image.Key);
+                    if (bytes != null)
+                    {
+                        using var ms = new System.IO.MemoryStream(bytes);
+                        var bi = new AMI.Bitmap(ms);
+
+                        _biCache.Set(image.Key, bi);
+
+                        _dc.DrawImage(
+                            bi,
+                            new A.Rect(0, 0, bi.PixelSize.Width, bi.PixelSize.Height),
+                            new A.Rect(rect.X, rect.Y, rect.Width, rect.Height));
+                    }
+                }
+                catch (Exception ex)
+                {
+                    _serviceProvider.GetService<ILog>()?.LogException(ex);
+                }
+            }
+
+            scaleDisposable?.Dispose();
+            translateDisposable?.Dispose();
+            */
         }
     }
 
@@ -506,168 +839,6 @@ namespace Core2D.UI.Renderer
             throw new NotImplementedException();
         }
 
-        /*
-        private A.Point GetTextOrigin(IShapeStyle style, ref Rect2 rect, ref A.Size size)
-        {
-            var ox = style.TextStyle.TextHAlignment switch
-            {
-                TextHAlignment.Left => rect.X,
-                TextHAlignment.Right => rect.Right - size.Width,
-                _ => (rect.Left + rect.Width / 2.0) - (size.Width / 2.0),
-            };
-            var oy = style.TextStyle.TextVAlignment switch
-            {
-                TextVAlignment.Top => rect.Y,
-                TextVAlignment.Bottom => rect.Bottom - size.Height,
-                _ => (rect.Bottom - rect.Height / 2f) - (size.Height / 2f),
-            };
-            return new A.Point(ox, oy);
-        }
-
-        private static void DrawLineInternal(AM.DrawingContext dc, AM.IPen pen, bool isStroked, ref A.Point p0, ref A.Point p1)
-        {
-            if (!isStroked)
-            {
-                return;
-            }
-            dc.DrawLine(pen, p0, p1);
-        }
-
-        private static void DrawLineCurveInternal(AM.DrawingContext _dc, AM.IPen pen, bool isStroked, ref A.Point pt1, ref A.Point pt2, double curvature, CurveOrientation orientation, PointAlignment pt1a, PointAlignment pt2a)
-        {
-            if (!isStroked)
-            {
-                return;
-            }
-            var sg = new AM.StreamGeometry();
-            using (var sgc = sg.Open())
-            {
-                sgc.BeginFigure(new A.Point(pt1.X, pt1.Y), false);
-                double p1x = pt1.X;
-                double p1y = pt1.Y;
-                double p2x = pt2.X;
-                double p2y = pt2.Y;
-                LineShapeExtensions.GetCurvedLineBezierControlPoints(orientation, curvature, pt1a, pt2a, ref p1x, ref p1y, ref p2x, ref p2y);
-                sgc.CubicBezierTo(
-                    new A.Point(p1x, p1y),
-                    new A.Point(p2x, p2y),
-                    new A.Point(pt2.X, pt2.Y));
-                sgc.EndFigure(false);
-            }
-            _dc.DrawGeometry(null, pen, sg);
-        }
-
-        private void DrawLineArrowsInternal(AM.DrawingContext dc, ILineShape line, IShapeStyle style, double dx, double dy, Func<double, float> scaleToPage, bool scaleStrokeWidth, out A.Point pt1, out A.Point pt2)
-        {
-            GetCached(style.StartArrowStyle, out var fillStartArrow, out var strokeStartArrow, scaleStrokeWidth);
-            GetCached(style.EndArrowStyle, out var fillEndArrow, out var strokeEndArrow, scaleStrokeWidth);
-
-            double _x1 = line.Start.X + dx;
-            double _y1 = line.Start.Y + dy;
-            double _x2 = line.End.X + dx;
-            double _y2 = line.End.Y + dy;
-            line.GetMaxLength(ref _x1, ref _y1, ref _x2, ref _y2);
-
-            float x1 = (float)_x1;
-            float y1 = (float)_y1;
-            float x2 = (float)_x2;
-            float y2 = (float)_y2;
-            var sas = style.StartArrowStyle;
-            var eas = style.EndArrowStyle;
-            double a1 = Math.Atan2(y1 - y2, x1 - x2);
-            double a2 = Math.Atan2(y2 - y1, x2 - x1);
-
-            pt1 = DrawLineArrowInternal(dc, strokeStartArrow, fillStartArrow, x1, y1, a1, sas);
-            pt2 = DrawLineArrowInternal(dc, strokeEndArrow, fillEndArrow, x2, y2, a2, eas);
-        }
-
-        private static A.Point DrawLineArrowInternal(AM.DrawingContext dc, AM.IPen pen, AM.IBrush brush, float x, float y, double angle, IArrowStyle style)
-        {
-            var rt = AME.MatrixHelper.Rotation(angle, new A.Vector(x, y));
-            double rx = style.RadiusX;
-            double ry = style.RadiusY;
-            double sx = 2.0 * rx;
-            double sy = 2.0 * ry;
-            A.Point pt;
-            switch (style.ArrowType)
-            {
-                default:
-                case ArrowType.None:
-                    {
-                        pt = new A.Point(x, y);
-                    }
-                    break;
-                case ArrowType.Rectangle:
-                    {
-                        pt = AME.MatrixHelper.TransformPoint(rt, new A.Point(x - (float)sx, y));
-                        var rect = new Rect2(x - sx, y - ry, sx, sy);
-                        using var d = dc.PushPreTransform(rt);
-                        DrawRectangleInternal(dc, brush, pen, style.IsStroked, style.IsFilled, ref rect);
-                    }
-                    break;
-                case ArrowType.Ellipse:
-                    {
-                        pt = AME.MatrixHelper.TransformPoint(rt, new A.Point(x - (float)sx, y));
-                        using var d = dc.PushPreTransform(rt);
-                        var rect = new Rect2(x - sx, y - ry, sx, sy);
-                        DrawEllipseInternal(dc, brush, pen, style.IsStroked, style.IsFilled, ref rect);
-                    }
-                    break;
-                case ArrowType.Arrow:
-                    {
-                        var pts = new A.Point[]
-                        {
-                            new A.Point(x, y),
-                            new A.Point(x - (float)sx, y + (float)sy),
-                            new A.Point(x, y),
-                            new A.Point(x - (float)sx, y - (float)sy),
-                            new A.Point(x, y)
-                        };
-                        pt = AME.MatrixHelper.TransformPoint(rt, pts[0]);
-                        var p11 = AME.MatrixHelper.TransformPoint(rt, pts[1]);
-                        var p21 = AME.MatrixHelper.TransformPoint(rt, pts[2]);
-                        var p12 = AME.MatrixHelper.TransformPoint(rt, pts[3]);
-                        var p22 = AME.MatrixHelper.TransformPoint(rt, pts[4]);
-                        DrawLineInternal(dc, pen, style.IsStroked, ref p11, ref p21);
-                        DrawLineInternal(dc, pen, style.IsStroked, ref p12, ref p22);
-                    }
-                    break;
-            }
-            return pt;
-        }
-
-        private static void DrawRectangleInternal(AM.DrawingContext dc, AM.IBrush brush, AM.IPen pen, bool isStroked, bool isFilled, ref Rect2 rect)
-        {
-            if (!isStroked && !isFilled)
-            {
-                return;
-            }
-            var r = new A.Rect(rect.X, rect.Y, rect.Width, rect.Height);
-            if (isFilled)
-            {
-                dc.FillRectangle(brush, r);
-            }
-            if (isStroked)
-            {
-                dc.DrawRectangle(pen, r);
-            }
-        }
-
-        private static void DrawEllipseInternal(AM.DrawingContext dc, AM.IBrush brush, AM.IPen pen, bool isStroked, bool isFilled, ref Rect2 rect)
-        {
-            if (!isFilled && !isStroked)
-            {
-                return;
-            }
-            var r = new A.Rect(rect.X, rect.Y, rect.Width, rect.Height);
-            var g = new AM.EllipseGeometry(r);
-            dc.DrawGeometry(
-                isFilled ? brush : null,
-                isStroked ? pen : null,
-                g);
-        }
-        */
-
         /// <inheritdoc/>
         public void InvalidateCache(IShapeStyle style)
         {
@@ -687,7 +858,7 @@ namespace Core2D.UI.Renderer
             {
                 _textCache.Reset();
                 _biCache.Reset();
-                //_drawNodeCache.Reset();
+                // TODO: _drawNodeCache.Reset();
             }
         }
 
@@ -1095,93 +1266,6 @@ namespace Core2D.UI.Renderer
 
                 drawNode.Draw(context, dx, dy, _state.ZoomX);
             }
-            /*
-            var _dc = dc as AM.DrawingContext;
-
-            var style = text.Style;
-            if (style == null)
-            {
-                return;
-            }
-
-            if (!(text.GetProperty(nameof(ITextShape.Text)) is string tbind))
-            {
-                tbind = text.Text;
-            }
-
-            if (tbind == null)
-            {
-                return;
-            }
-
-            var scaleThickness = text.State.Flags.HasFlag(ShapeStateFlags.Thickness);
-            var scaleSize = text.State.Flags.HasFlag(ShapeStateFlags.Size);
-            var rect = Rect2.FromPoints(text.TopLeft.X, text.TopLeft.Y, text.BottomRight.X, text.BottomRight.Y, dx, dy);
-
-            var scale = scaleSize ? 1.0 / _state.ZoomX : 1.0;
-            var scaleToPage = scale == 1.0 ? _scaleToPage : (value) => (float)(_scaleToPage(value) / scale);
-            var center = rect.Center;
-            var translateX = 0.0 - (center.X * scale) + center.X;
-            var translateY = 0.0 - (center.Y * scale) + center.Y;
-
-            GetCached(style, out _, out var stroke, scaleThickness);
-
-            var translateDisposable = scale != 1.0 ? _dc.PushPreTransform(AME.MatrixHelper.Translate(translateX, translateY)) : default(IDisposable);
-            var scaleDisposable = scale != 1.0 ? _dc.PushPreTransform(AME.MatrixHelper.Scale(scale, scale)) : default(IDisposable);
-
-            (string ct, var ft, var cs) = _textCache.Get(text);
-            if (string.Compare(ct, tbind) == 0 && cs == style)
-            {
-                var size = ft.Bounds.Size;
-                var origin = GetTextOrigin(style, ref rect, ref size);
-                _dc.DrawText(stroke.Brush, origin, ft);
-            }
-            else
-            {
-                var fontStyle = AM.FontStyle.Normal;
-                var fontWeight = AM.FontWeight.Normal;
-
-                if (style.TextStyle.FontStyle != null)
-                {
-                    if (style.TextStyle.FontStyle.Flags.HasFlag(FontStyleFlags.Italic))
-                    {
-                        fontStyle |= AM.FontStyle.Italic;
-                    }
-
-                    if (style.TextStyle.FontStyle.Flags.HasFlag(FontStyleFlags.Bold))
-                    {
-                        fontWeight |= AM.FontWeight.Bold;
-                    }
-                }
-
-                if (style.TextStyle.FontSize >= 0.0)
-                {
-                    var tf = new AM.Typeface(
-                        style.TextStyle.FontName,
-                        fontWeight,
-                        fontStyle);
-
-                    ft = new AM.FormattedText()
-                    {
-                        Typeface = tf,
-                        Text = tbind,
-                        TextAlignment = AM.TextAlignment.Left,
-                        TextWrapping = AM.TextWrapping.NoWrap,
-                        FontSize = style.TextStyle.FontSize * _textScaleFactor
-                    };
-
-                    var size = ft.Bounds.Size;
-                    var origin = GetTextOrigin(style, ref rect, ref size);
-
-                    _textCache.Set(text, (tbind, ft, style));
-
-                    _dc.DrawText(stroke.Brush, origin, ft);
-                }
-            }
-
-            scaleDisposable?.Dispose();
-            translateDisposable?.Dispose();
-            */
         }
 
         /// <inheritdoc/>
@@ -1217,88 +1301,6 @@ namespace Core2D.UI.Renderer
 
                 drawNode.Draw(context, dx, dy, _state.ZoomX);
             }
-            /*
-            if (image.Key == null)
-            {
-                return;
-            }
-
-            var _dc = dc as AM.DrawingContext;
-            var style = image.Style;
-
-            var scaleThickness = image.State.Flags.HasFlag(ShapeStateFlags.Thickness);
-            var scaleSize = image.State.Flags.HasFlag(ShapeStateFlags.Size);
-            var rect = Rect2.FromPoints(image.TopLeft.X, image.TopLeft.Y, image.BottomRight.X, image.BottomRight.Y, dx, dy);
-
-            var scale = scaleSize ? 1.0 / _state.ZoomX : 1.0;
-            var scaleToPage = scale == 1.0 ? _scaleToPage : (value) => (float)(_scaleToPage(value) / scale);
-            var center = rect.Center;
-            var translateX = 0.0 - (center.X * scale) + center.X;
-            var translateY = 0.0 - (center.Y * scale) + center.Y;
-
-            var translateDisposable = scale != 1.0 ? _dc.PushPreTransform(AME.MatrixHelper.Translate(translateX, translateY)) : default(IDisposable);
-            var scaleDisposable = scale != 1.0 ? _dc.PushPreTransform(AME.MatrixHelper.Scale(scale, scale)) : default(IDisposable);
-
-            if ((image.IsStroked || image.IsFilled) && style != null)
-            {
-                GetCached(style, out var fill, out var stroke, scaleThickness);
-
-                DrawRectangleInternal(
-                    _dc,
-                    fill,
-                    stroke,
-                    image.IsStroked,
-                    image.IsFilled,
-                    ref rect);
-            }
-
-            var imageCached = _biCache.Get(image.Key);
-            if (imageCached != null)
-            {
-                try
-                {
-                    _dc.DrawImage(
-                        imageCached,
-                        new A.Rect(0, 0, imageCached.PixelSize.Width, imageCached.PixelSize.Height),
-                        new A.Rect(rect.X, rect.Y, rect.Width, rect.Height));
-                }
-                catch (Exception ex)
-                {
-                    _serviceProvider.GetService<ILog>()?.LogException(ex);
-                }
-            }
-            else
-            {
-                if (_state.ImageCache == null || string.IsNullOrEmpty(image.Key))
-                {
-                    return;
-                }
-
-                try
-                {
-                    var bytes = _state.ImageCache.GetImage(image.Key);
-                    if (bytes != null)
-                    {
-                        using var ms = new System.IO.MemoryStream(bytes);
-                        var bi = new AMI.Bitmap(ms);
-
-                        _biCache.Set(image.Key, bi);
-
-                        _dc.DrawImage(
-                            bi,
-                            new A.Rect(0, 0, bi.PixelSize.Width, bi.PixelSize.Height),
-                            new A.Rect(rect.X, rect.Y, rect.Width, rect.Height));
-                    }
-                }
-                catch (Exception ex)
-                {
-                    _serviceProvider.GetService<ILog>()?.LogException(ex);
-                }
-            }
-
-            scaleDisposable?.Dispose();
-            translateDisposable?.Dispose();
-            */
         }
 
         /// <inheritdoc/>
