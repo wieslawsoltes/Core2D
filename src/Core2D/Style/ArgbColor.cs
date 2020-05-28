@@ -147,7 +147,7 @@ namespace Core2D.Style
         /// <returns>The color string.</returns>
         public static string ToSvgHex(IArgbColor c)
         {
-            return string.Concat('#', c.R.ToString("X2"), c.G.ToString("X2"), c.B.ToString("X2"), c.A.ToString("X2"));
+            return string.Concat('#', c.R.ToString("X2"), c.G.ToString("X2"), c.B.ToString("X2")); // NOTE: Not using c.A.ToString("X2")
         }
 
         /// <summary>
