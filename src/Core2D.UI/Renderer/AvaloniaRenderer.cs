@@ -369,15 +369,16 @@ namespace Core2D.UI.Renderer
         }
     }
 
-    internal class RectangleDrawNode : DrawNode
+    internal class RectangleDrawNode : TextDrawNode
     {
         public IRectangleShape Rectangle { get; set; }
-        public A.Rect Rect { get; set; }
 
         public RectangleDrawNode(IRectangleShape rectangle, IShapeStyle style)
+            : base()
         {
             Style = style;
             Rectangle = rectangle;
+            Text = rectangle;
             UpdateGeometry();
         }
 
@@ -388,6 +389,8 @@ namespace Core2D.UI.Renderer
             var rect2 = Rect2.FromPoints(Rectangle.TopLeft.X, Rectangle.TopLeft.Y, Rectangle.BottomRight.X, Rectangle.BottomRight.Y, 0, 0);
             Rect = new A.Rect(rect2.X, rect2.Y, rect2.Width, rect2.Height);
             Center = Rect.Center;
+
+            base.UpdateTextGeometry();
         }
 
         public override void OnDraw(AM.DrawingContext context, double dx, double dy, double zoom)
@@ -426,18 +429,22 @@ namespace Core2D.UI.Renderer
                     context.DrawLine(Stroke, p0, p1);
                 }
             }
+
+            base.OnDraw(context, dx, dy, zoom);
         }
     }
 
-    internal class EllipseDrawNode : DrawNode
+    internal class EllipseDrawNode : TextDrawNode
     {
         public IEllipseShape Ellipse { get; set; }
         public AM.Geometry Geometry { get; set; }
 
         public EllipseDrawNode(IEllipseShape ellipse, IShapeStyle style)
+            : base()
         {
             Style = style;
             Ellipse = ellipse;
+            Text = ellipse;
             UpdateGeometry();
         }
 
@@ -446,12 +453,17 @@ namespace Core2D.UI.Renderer
             ScaleThickness = Ellipse.State.Flags.HasFlag(ShapeStateFlags.Thickness);
             ScaleSize = Ellipse.State.Flags.HasFlag(ShapeStateFlags.Size);
             Geometry = PathGeometryConverter.ToGeometry(Ellipse, 0, 0);
+            Rect = Geometry.Bounds;
             Center = Geometry.Bounds.Center;
+
+            base.UpdateTextGeometry();
         }
 
         public override void OnDraw(AM.DrawingContext context, double dx, double dy, double zoom)
         {
             context.DrawGeometry(Ellipse.IsFilled ? Fill : null, Ellipse.IsStroked ? Stroke : null, Geometry);
+
+            base.OnDraw(context, dx, dy, zoom);
         }
     }
 
@@ -542,6 +554,10 @@ namespace Core2D.UI.Renderer
         public AM.FormattedText FormattedText { get; set; }
         public string BoundText { get; set; }
 
+        protected TextDrawNode()
+        {
+        }
+
         public TextDrawNode(ITextShape text, IShapeStyle style)
         {
             Style = style;
@@ -560,7 +576,7 @@ namespace Core2D.UI.Renderer
             UpdateTextGeometry();
         }
 
-        private void UpdateTextGeometry()
+        protected void UpdateTextGeometry()
         {
             BoundText = Text.GetProperty(nameof(ITextShape.Text)) is string boundText ? boundText : Text.Text;
 
@@ -639,7 +655,7 @@ namespace Core2D.UI.Renderer
         }
     }
 
-    internal class ImageDrawNode : DrawNode
+    internal class ImageDrawNode : TextDrawNode
     {
         public IImageShape Image { get; set; }
         public IImageCache ImageCache { get; set; }
@@ -649,9 +665,11 @@ namespace Core2D.UI.Renderer
         public A.Rect DestRect { get; set; }
 
         public ImageDrawNode(IImageShape image, IShapeStyle style, IImageCache imageCache, ICache<string, AMI.Bitmap> bitmapCache)
+            : base()
         {
             Style = style;
             Image = image;
+            Text = image;
             ImageCache = imageCache;
             BitmapCache = bitmapCache;
             UpdateGeometry();
@@ -697,6 +715,8 @@ namespace Core2D.UI.Renderer
             var rect2 = Rect2.FromPoints(Image.TopLeft.X, Image.TopLeft.Y, Image.BottomRight.X, Image.BottomRight.Y, 0, 0);
             DestRect = new A.Rect(rect2.X, rect2.Y, rect2.Width, rect2.Height);
             Center = DestRect.Center;
+
+            base.UpdateTextGeometry();
         }
 
         public override void OnDraw(AM.DrawingContext context, double dx, double dy, double zoom)
@@ -723,6 +743,8 @@ namespace Core2D.UI.Renderer
                     Debug.WriteLine($"{ex.StackTrace}");
                 }
             }
+
+            base.OnDraw(context, dx, dy, zoom);
         }
     }
 
