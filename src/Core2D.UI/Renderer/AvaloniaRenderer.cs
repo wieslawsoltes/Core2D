@@ -1273,7 +1273,7 @@ namespace Core2D.UI.Renderer
             }
             else
             {
-                var drawNode = new ImageDrawNode(image, image.Style);
+                var drawNode = new ImageDrawNode(image, image.Style, _state.ImageCache, _biCache);
 
                 drawNode.UpdateStyle();
 
