@@ -78,10 +78,14 @@ namespace Core2D.SvgExporter.Svg
                 var path = converter.ToFillPathShape(shape);
                 if (path != null)
                 {
-                    var geometry = path.Geometry.ToSvgString();
-                    var brush = (shape.Style.Fill as IArgbColor).ToSvgString();
-                    var fillRule = path.Geometry.FillRule == FillRule.Nonzero ? "nonzero" : "evenodd";
-                    sb.AppendLine($"    <path fill=\"{brush}\" fill-rule=\"{fillRule}\" d=\"{geometry}\"/>");
+                    if (shape.Style.Fill is IArgbColor argbColor)
+                    {
+                        var geometry = path.Geometry.ToSvgString();
+                        var fill = argbColor.ToSvgString();
+                        var fillOpacity = (argbColor.A / 255.0).ToString(CultureInfo.InvariantCulture);
+                        var fillRule = path.Geometry.FillRule == FillRule.Nonzero ? "nonzero" : "evenodd";
+                        sb.AppendLine($"    <path fill=\"{fill}\" fill-opacity=\"{fillOpacity}\" fill-rule=\"{fillRule}\" d=\"{geometry}\"/>"); 
+                    }
                 }
             }
             if (shape.IsStroked)
@@ -89,10 +93,14 @@ namespace Core2D.SvgExporter.Svg
                 var path = converter.ToStrokePathShape(shape);
                 if (path != null)
                 {
-                    var geometry = path.Geometry.ToSvgString();
-                    var brush = (shape.Style.Stroke as IArgbColor).ToSvgString();
-                    var fillRule = path.Geometry.FillRule == FillRule.Nonzero ? "nonzero" : "evenodd";
-                    sb.AppendLine($"    <path fill=\"{brush}\" fill-rule=\"{fillRule}\" d=\"{geometry}\"/>");
+                    if (shape.Style.Stroke is IArgbColor argbColor)
+                    {
+                        var geometry = path.Geometry.ToSvgString();
+                        var fill = argbColor.ToSvgString();
+                        var fillOpacity = (argbColor.A / 255.0).ToString(CultureInfo.InvariantCulture);
+                        var fillRule = path.Geometry.FillRule == FillRule.Nonzero ? "nonzero" : "evenodd";
+                        sb.AppendLine($"    <path fill=\"{fill}\" fill-opacity=\"{fillOpacity}\" fill-rule=\"{fillRule}\" d=\"{geometry}\"/>");
+                    }
                 }
             }
         }
