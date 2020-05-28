@@ -557,6 +557,11 @@ namespace Core2D.UI.Renderer
             Rect = new A.Rect(rect2.X, rect2.Y, rect2.Width, rect2.Height);
             Center = Rect.Center;
 
+            UpdateTextGeometry();
+        }
+
+        private void UpdateTextGeometry()
+        {
             BoundText = Text.GetProperty(nameof(ITextShape.Text)) is string boundText ? boundText : Text.Text;
 
             if (BoundText == null)
