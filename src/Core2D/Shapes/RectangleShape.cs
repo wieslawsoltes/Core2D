@@ -60,7 +60,9 @@ namespace Core2D.Shapes
             if (State.Flags.HasFlag(ShapeStateFlags.Visible))
             {
                 renderer.Draw(dc, this, dx, dy);
+#if !USE_DRAW_NODES // TODO:
                 base.DrawShape(dc, renderer, dx, dy);
+#endif
             }
         }
 
