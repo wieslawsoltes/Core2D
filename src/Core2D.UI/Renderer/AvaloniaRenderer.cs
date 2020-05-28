@@ -607,7 +607,7 @@ namespace Core2D.UI.Renderer
             var size = FormattedText.Bounds.Size;
             var rect = Rect;
 
-            var originX = 0.0; // NOTE: Using AM.TextAlignment
+            var originX = rect.X; // NOTE: Using AM.TextAlignment
             //var originX = Style.TextStyle.TextHAlignment switch
             //{
             //    TextHAlignment.Left => rect.X,
