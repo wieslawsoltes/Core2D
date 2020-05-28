@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using Core2D;
 using Core2D.Containers;
 using Core2D.Renderer;
@@ -667,12 +668,18 @@ namespace Core2D.UI.Renderer
     internal class ImageDrawNode : DrawNode
     {
         public IImageShape Image { get; set; }
-        // TODO:
+        public IImageCache ImageCache { get; set; }
+        public ICache<string, AMI.Bitmap> BitmapCache { get; set; }
+        public AMI.Bitmap ImageCached { get; set; }
+        public A.Rect SourceRect { get; set; }
+        public A.Rect DestRect { get; set; }
 
-        public ImageDrawNode(IImageShape image, IShapeStyle style)
+        public ImageDrawNode(IImageShape image, IShapeStyle style, IImageCache imageCache, ICache<string, AMI.Bitmap> bitmapCache)
         {
             Style = style;
             Image = image;
+            ImageCache = imageCache;
+            BitmapCache = bitmapCache;
             UpdateGeometry();
         }
 
@@ -680,95 +687,68 @@ namespace Core2D.UI.Renderer
         {
             ScaleThickness = Image.State.Flags.HasFlag(ShapeStateFlags.Thickness);
             ScaleSize = Image.State.Flags.HasFlag(ShapeStateFlags.Size);
-            // TODO:
-            // TODO: Center
-        }
 
-        public override void OnDraw(AM.DrawingContext context, double dx, double dy, double zoom)
-        {
-            // TODO:
-            /*
-            if (image.Key == null)
+            if (!string.IsNullOrEmpty(Image.Key))
             {
-                return;
-            }
-
-            var _dc = dc as AM.DrawingContext;
-            var style = image.Style;
-
-            var scaleThickness = image.State.Flags.HasFlag(ShapeStateFlags.Thickness);
-            var scaleSize = image.State.Flags.HasFlag(ShapeStateFlags.Size);
-            var rect = Rect2.FromPoints(image.TopLeft.X, image.TopLeft.Y, image.BottomRight.X, image.BottomRight.Y, dx, dy);
-
-            var scale = scaleSize ? 1.0 / _state.ZoomX : 1.0;
-            var scaleToPage = scale == 1.0 ? _scaleToPage : (value) => (float)(_scaleToPage(value) / scale);
-            var center = rect.Center;
-            var translateX = 0.0 - (center.X * scale) + center.X;
-            var translateY = 0.0 - (center.Y * scale) + center.Y;
-
-            var translateDisposable = scale != 1.0 ? _dc.PushPreTransform(AME.MatrixHelper.Translate(translateX, translateY)) : default(IDisposable);
-            var scaleDisposable = scale != 1.0 ? _dc.PushPreTransform(AME.MatrixHelper.Scale(scale, scale)) : default(IDisposable);
-
-            if ((image.IsStroked || image.IsFilled) && style != null)
-            {
-                GetCached(style, out var fill, out var stroke, scaleThickness);
-
-                DrawRectangleInternal(
-                    _dc,
-                    fill,
-                    stroke,
-                    image.IsStroked,
-                    image.IsFilled,
-                    ref rect);
-            }
-
-            var imageCached = _biCache.Get(image.Key);
-            if (imageCached != null)
-            {
-                try
+                ImageCached = BitmapCache.Get(Image.Key);
+                if (ImageCached == null && ImageCache != null)
                 {
-                    _dc.DrawImage(
-                        imageCached,
-                        new A.Rect(0, 0, imageCached.PixelSize.Width, imageCached.PixelSize.Height),
-                        new A.Rect(rect.X, rect.Y, rect.Width, rect.Height));
+                    try
+                    {
+                        var bytes = ImageCache.GetImage(Image.Key);
+                        if (bytes != null)
+                        {
+                            using var ms = new System.IO.MemoryStream(bytes);
+                            ImageCached = new AMI.Bitmap(ms);
+                            BitmapCache.Set(Image.Key, ImageCached);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Debug.WriteLine($"{ex.Message}");
+                        Debug.WriteLine($"{ex.StackTrace}");
+                    }
                 }
-                catch (Exception ex)
+
+                if (ImageCached != null)
                 {
-                    _serviceProvider.GetService<ILog>()?.LogException(ex);
+                    SourceRect = new A.Rect(0, 0, ImageCached.PixelSize.Width, ImageCached.PixelSize.Height);
                 }
             }
             else
             {
-                if (_state.ImageCache == null || string.IsNullOrEmpty(image.Key))
-                {
-                    return;
-                }
+                ImageCached = null;
+            }
 
+            var rect2 = Rect2.FromPoints(Image.TopLeft.X, Image.TopLeft.Y, Image.BottomRight.X, Image.BottomRight.Y, 0, 0);
+            DestRect = new A.Rect(rect2.X, rect2.Y, rect2.Width, rect2.Height);
+            Center = DestRect.Center;
+        }
+
+        public override void OnDraw(AM.DrawingContext context, double dx, double dy, double zoom)
+        {
+            if (Image.IsFilled)
+            {
+                context.FillRectangle(Fill, DestRect);
+            }
+
+            if (Image.IsStroked)
+            {
+                context.DrawRectangle(Stroke, DestRect);
+            }
+
+            if (ImageCached != null)
+            {
                 try
                 {
-                    var bytes = _state.ImageCache.GetImage(image.Key);
-                    if (bytes != null)
-                    {
-                        using var ms = new System.IO.MemoryStream(bytes);
-                        var bi = new AMI.Bitmap(ms);
-
-                        _biCache.Set(image.Key, bi);
-
-                        _dc.DrawImage(
-                            bi,
-                            new A.Rect(0, 0, bi.PixelSize.Width, bi.PixelSize.Height),
-                            new A.Rect(rect.X, rect.Y, rect.Width, rect.Height));
-                    }
+                    context.DrawImage(ImageCached, SourceRect, DestRect);
                 }
                 catch (Exception ex)
                 {
-                    _serviceProvider.GetService<ILog>()?.LogException(ex);
+                    Debug.WriteLine($"{ex.Message}");
+                    Debug.WriteLine($"{ex.StackTrace}");
                 }
             }
-
-            scaleDisposable?.Dispose();
-            translateDisposable?.Dispose();
-            */
         }
     }
 
