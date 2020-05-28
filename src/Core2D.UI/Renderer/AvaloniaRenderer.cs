@@ -857,7 +857,7 @@ namespace Core2D.UI.Renderer
             if (!isZooming)
             {
                 _textCache.Reset();
-                _biCache.Reset();
+                // TODO: _biCache.Reset();
                 // TODO: _drawNodeCache.Reset();
             }
         }
