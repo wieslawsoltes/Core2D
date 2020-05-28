@@ -536,7 +536,11 @@ namespace Core2D.UI.Renderer
     internal class TextDrawNode : DrawNode
     {
         public ITextShape Text { get; set; }
-        // TODO:
+        public A.Rect Rect { get; set; }
+        public A.Point Origin { get; set; }
+        public AM.Typeface Typeface { get; set; }
+        public AM.FormattedText FormattedText { get; set; }
+        public string BoundText { get; set; }
 
         public TextDrawNode(ITextShape text, IShapeStyle style)
         {
@@ -545,123 +549,88 @@ namespace Core2D.UI.Renderer
             UpdateGeometry();
         }
 
-        /*
-        private A.Point GetTextOrigin(IShapeStyle style, ref Rect2 rect, ref A.Size size)
-        {
-            var ox = style.TextStyle.TextHAlignment switch
-            {
-                TextHAlignment.Left => rect.X,
-                TextHAlignment.Right => rect.Right - size.Width,
-                _ => (rect.Left + rect.Width / 2.0) - (size.Width / 2.0),
-            };
-            var oy = style.TextStyle.TextVAlignment switch
-            {
-                TextVAlignment.Top => rect.Y,
-                TextVAlignment.Bottom => rect.Bottom - size.Height,
-                _ => (rect.Bottom - rect.Height / 2f) - (size.Height / 2f),
-            };
-            return new A.Point(ox, oy);
-        }
-        */
-
         public override void UpdateGeometry()
         {
             ScaleThickness = Text.State.Flags.HasFlag(ShapeStateFlags.Thickness);
             ScaleSize = Text.State.Flags.HasFlag(ShapeStateFlags.Size);
-            // TODO:
-            // TODO: Center
+            var rect2 = Rect2.FromPoints(Text.TopLeft.X, Text.TopLeft.Y, Text.BottomRight.X, Text.BottomRight.Y, 0, 0);
+            Rect = new A.Rect(rect2.X, rect2.Y, rect2.Width, rect2.Height);
+            Center = Rect.Center;
+
+            BoundText = Text.GetProperty(nameof(ITextShape.Text)) is string boundText ? boundText : Text.Text;
+
+            if (BoundText == null)
+            {
+                return;
+            }
+
+            if (Style.TextStyle.FontSize < 0.0)
+            {
+                return;
+            }
+
+            var fontStyle = AM.FontStyle.Normal;
+            var fontWeight = AM.FontWeight.Normal;
+
+            if (Style.TextStyle.FontStyle.Flags.HasFlag(FontStyleFlags.Italic))
+            {
+                fontStyle |= AM.FontStyle.Italic;
+            }
+
+            if (Style.TextStyle.FontStyle.Flags.HasFlag(FontStyleFlags.Bold))
+            {
+                fontWeight |= AM.FontWeight.Bold;
+            }
+
+            // TODO: Cache Typeface
+            // TODO: Cache FormattedText
+
+            Typeface = new AM.Typeface(Style.TextStyle.FontName, fontWeight, fontStyle);
+
+            var textAlignment = Style.TextStyle.TextHAlignment switch
+            {
+                TextHAlignment.Right => AM.TextAlignment.Right,
+                TextHAlignment.Center => AM.TextAlignment.Center,
+                _ => AM.TextAlignment.Left,
+            };
+
+            FormattedText = new AM.FormattedText()
+            {
+                Typeface = Typeface,
+                Text = BoundText,
+                TextAlignment = textAlignment,
+                TextWrapping = AM.TextWrapping.NoWrap,
+                FontSize = Style.TextStyle.FontSize,
+                Constraint = Rect.Size
+            };
+
+            var size = FormattedText.Bounds.Size;
+            var rect = Rect;
+
+            var originX = 0.0; // NOTE: Using AM.TextAlignment
+            //var originX = Style.TextStyle.TextHAlignment switch
+            //{
+            //    TextHAlignment.Left => rect.X,
+            //    TextHAlignment.Right => rect.Right - size.Width,
+            //    _ => (rect.Left + rect.Width / 2.0) - (size.Width / 2.0)
+            //};
+
+            var originY = Style.TextStyle.TextVAlignment switch
+            {
+                TextVAlignment.Top => rect.Y,
+                TextVAlignment.Bottom => rect.Bottom - size.Height,
+                _ => (rect.Bottom - rect.Height / 2f) - (size.Height / 2f)
+            };
+
+            Origin = new A.Point(originX, originY);
         }
 
         public override void OnDraw(AM.DrawingContext context, double dx, double dy, double zoom)
         {
-            // TODO:
-            /*
-            var _dc = dc as AM.DrawingContext;
-
-            var style = text.Style;
-            if (style == null)
+            if (FormattedText != null)
             {
-                return;
+                context.DrawText(Stroke.Brush, Origin, FormattedText); 
             }
-
-            if (!(text.GetProperty(nameof(ITextShape.Text)) is string tbind))
-            {
-                tbind = text.Text;
-            }
-
-            if (tbind == null)
-            {
-                return;
-            }
-
-            var scaleThickness = text.State.Flags.HasFlag(ShapeStateFlags.Thickness);
-            var scaleSize = text.State.Flags.HasFlag(ShapeStateFlags.Size);
-            var rect = Rect2.FromPoints(text.TopLeft.X, text.TopLeft.Y, text.BottomRight.X, text.BottomRight.Y, dx, dy);
-
-            var scale = scaleSize ? 1.0 / _state.ZoomX : 1.0;
-            var scaleToPage = scale == 1.0 ? _scaleToPage : (value) => (float)(_scaleToPage(value) / scale);
-            var center = rect.Center;
-            var translateX = 0.0 - (center.X * scale) + center.X;
-            var translateY = 0.0 - (center.Y * scale) + center.Y;
-
-            GetCached(style, out _, out var stroke, scaleThickness);
-
-            var translateDisposable = scale != 1.0 ? _dc.PushPreTransform(AME.MatrixHelper.Translate(translateX, translateY)) : default(IDisposable);
-            var scaleDisposable = scale != 1.0 ? _dc.PushPreTransform(AME.MatrixHelper.Scale(scale, scale)) : default(IDisposable);
-
-            (string ct, var ft, var cs) = _textCache.Get(text);
-            if (string.Compare(ct, tbind) == 0 && cs == style)
-            {
-                var size = ft.Bounds.Size;
-                var origin = GetTextOrigin(style, ref rect, ref size);
-                _dc.DrawText(stroke.Brush, origin, ft);
-            }
-            else
-            {
-                var fontStyle = AM.FontStyle.Normal;
-                var fontWeight = AM.FontWeight.Normal;
-
-                if (style.TextStyle.FontStyle != null)
-                {
-                    if (style.TextStyle.FontStyle.Flags.HasFlag(FontStyleFlags.Italic))
-                    {
-                        fontStyle |= AM.FontStyle.Italic;
-                    }
-
-                    if (style.TextStyle.FontStyle.Flags.HasFlag(FontStyleFlags.Bold))
-                    {
-                        fontWeight |= AM.FontWeight.Bold;
-                    }
-                }
-
-                if (style.TextStyle.FontSize >= 0.0)
-                {
-                    var tf = new AM.Typeface(
-                        style.TextStyle.FontName,
-                        fontWeight,
-                        fontStyle);
-
-                    ft = new AM.FormattedText()
-                    {
-                        Typeface = tf,
-                        Text = tbind,
-                        TextAlignment = AM.TextAlignment.Left,
-                        TextWrapping = AM.TextWrapping.NoWrap,
-                        FontSize = style.TextStyle.FontSize * _textScaleFactor
-                    };
-
-                    var size = ft.Bounds.Size;
-                    var origin = GetTextOrigin(style, ref rect, ref size);
-
-                    _textCache.Set(text, (tbind, ft, style));
-
-                    _dc.DrawText(stroke.Brush, origin, ft);
-                }
-            }
-
-            scaleDisposable?.Dispose();
-            translateDisposable?.Dispose();
-            */
         }
     }
 
@@ -785,10 +754,8 @@ namespace Core2D.UI.Renderer
     {
         private readonly IServiceProvider _serviceProvider;
         private IShapeRendererState _state;
-        private readonly ICache<ITextShape, (string, AM.FormattedText, IShapeStyle)> _textCache;
         private readonly ICache<string, AMI.Bitmap> _biCache;
         private readonly ICache<object, DrawNode> _drawNodeCache;
-        private readonly double _textScaleFactor;
 
         /// <inheritdoc/>
         public IShapeRendererState State
@@ -801,15 +768,12 @@ namespace Core2D.UI.Renderer
         /// Initializes a new instance of the <see cref="AvaloniaRenderer"/> class.
         /// </summary>
         /// <param name="serviceProvider">The service provider.</param>
-        /// <param name="textScaleFactor">The text scale factor.</param>
-        public AvaloniaRenderer(IServiceProvider serviceProvider, double textScaleFactor = 1.0)
+        public AvaloniaRenderer(IServiceProvider serviceProvider)
         {
             _serviceProvider = serviceProvider;
             _state = _serviceProvider.GetService<IFactory>().CreateShapeRendererState();
-            _textCache = _serviceProvider.GetService<IFactory>().CreateCache<ITextShape, (string, AM.FormattedText, IShapeStyle)>();
             _biCache = _serviceProvider.GetService<IFactory>().CreateCache<string, AMI.Bitmap>(x => x.Dispose());
             _drawNodeCache = _serviceProvider.GetService<IFactory>().CreateCache<object, DrawNode>(x => x.Dispose());
-            _textScaleFactor = textScaleFactor;
             ClearCache(isZooming: false);
         }
 
@@ -836,7 +800,6 @@ namespace Core2D.UI.Renderer
         {
             if (!isZooming)
             {
-                _textCache.Reset();
                 // TODO: _biCache.Reset();
                 // TODO: _drawNodeCache.Reset();
             }
