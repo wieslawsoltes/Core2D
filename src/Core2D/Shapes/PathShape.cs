@@ -141,7 +141,10 @@ namespace Core2D.Shapes
         {
             var isDirty = base.IsDirty();
 
-            isDirty |= Geometry.IsDirty();
+            if (Geometry != null)
+            {
+                isDirty |= Geometry.IsDirty();
+            }
 
             return isDirty;
         }
@@ -150,7 +153,11 @@ namespace Core2D.Shapes
         public override void Invalidate()
         {
             base.Invalidate();
-            Geometry.Invalidate();
+
+            if (Geometry != null)
+            {
+                Geometry.Invalidate(); 
+            }
         }
 
         /// <inheritdoc/>
