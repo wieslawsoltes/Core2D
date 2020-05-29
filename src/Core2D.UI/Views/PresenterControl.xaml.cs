@@ -275,11 +275,18 @@ namespace Core2D.UI.Views
                         {
                             var db = (object)customState.Container.Data.Properties;
                             var record = (object)customState.Container.Data.Record;
+#if USE_DIAGNOSTICS
+                            var swDataFlow = Stopwatch.StartNew();
+#endif
                             if (customState.Container.Template != null)
                             {
                                 customState.DataFlow.Bind(customState.Container.Template, db, record);
                             }
                             customState.DataFlow.Bind(customState.Container, db, record);
+#if USE_DIAGNOSTICS
+                            swDataFlow.Stop();
+                            Trace.WriteLine($"DataFlow {swDataFlow.Elapsed.TotalMilliseconds}ms");
+#endif
                         }
                     }
                     break;
