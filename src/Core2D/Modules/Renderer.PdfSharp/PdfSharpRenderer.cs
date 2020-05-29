@@ -426,6 +426,8 @@ namespace Core2D.Renderer.PdfSharp
                     rectangle.CellWidth, rectangle.CellHeight,
                     true);
             }
+
+            DrawText(dc, rectangle, dx, dy);
         }
 
         /// <inheritdoc/>
@@ -468,6 +470,8 @@ namespace Core2D.Renderer.PdfSharp
                     _scaleToPage(rect.Width),
                     _scaleToPage(rect.Height));
             }
+
+            DrawText(dc, ellipse, dx, dy);
         }
 
         /// <inheritdoc/>
@@ -753,30 +757,30 @@ namespace Core2D.Renderer.PdfSharp
             }
             else
             {
-                if (State.ImageCache == null || string.IsNullOrEmpty(image.Key))
+                if (State.ImageCache != null && !string.IsNullOrEmpty(image.Key))
                 {
-                    return;
-                }
-
-                var bytes = State.ImageCache.GetImage(image.Key);
-                if (bytes != null)
-                {
-                    var ms = new System.IO.MemoryStream(bytes);
+                    var bytes = State.ImageCache.GetImage(image.Key);
+                    if (bytes != null)
+                    {
+                        var ms = new System.IO.MemoryStream(bytes);
 #if WPF
-                    var bs = new BitmapImage();
-                    bs.BeginInit();
-                    bs.StreamSource = ms;
-                    bs.EndInit();
-                    bs.Freeze();
-                    var bi = XImage.FromBitmapSource(bs);
+                        var bs = new BitmapImage();
+                        bs.BeginInit();
+                        bs.StreamSource = ms;
+                        bs.EndInit();
+                        bs.Freeze();
+                        var bi = XImage.FromBitmapSource(bs);
 #else
-                    var bi = XImage.FromStream(ms);
+                        var bi = XImage.FromStream(ms);
 #endif
-                    _biCache.Set(image.Key, bi);
+                        _biCache.Set(image.Key, bi);
 
-                    _gfx.DrawImage(bi, srect);
+                        _gfx.DrawImage(bi, srect);
+                    }
                 }
             }
+
+            DrawText(dc, image, dx, dy);
         }
 
         /// <inheritdoc/>
