@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using Core2D;
 using Core2D.Containers;
 using Core2D.Renderer;
 using Core2D.Shapes;
 using Core2D.Style;
 using Spatial;
-using Spatial.Arc;
 using A = Avalonia;
 using AM = Avalonia.Media;
 using AME = Avalonia.MatrixExtensions;
