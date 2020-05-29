@@ -168,6 +168,30 @@ namespace Core2D.Editor.Tools.Decorators
         }
 
         /// <inheritdoc/>
+        public override bool IsDirty()
+        {
+            var isDirty = base.IsDirty();
+
+            foreach (var handle in _handles)
+            {
+                isDirty |= handle.IsDirty();
+            }
+
+            return isDirty;
+        }
+
+        /// <inheritdoc/>
+        public override void Invalidate()
+        {
+            base.Invalidate();
+
+            foreach (var handle in _handles)
+            {
+                handle.Invalidate();
+            }
+        }
+
+        /// <inheritdoc/>
         public virtual void DrawShape(object dc, IShapeRenderer renderer, double dx, double dy)
         {
             if (_isVisible)
