@@ -960,7 +960,7 @@ namespace Core2D.UI.Renderer
             var drawNodeCached = _drawNodeCache.Get(line);
             if (drawNodeCached != null)
             {
-                if (line.Style.IsDirty())
+                if (line.Style.IsDirty() || drawNodeCached.Style != line.Style)
                 {
                     drawNodeCached.Style = line.Style;
                     drawNodeCached.UpdateStyle();
@@ -1039,7 +1039,7 @@ namespace Core2D.UI.Renderer
             var drawNodeCached = _drawNodeCache.Get(rectangle);
             if (drawNodeCached != null)
             {
-                if (rectangle.Style.IsDirty())
+                if (rectangle.Style.IsDirty() || drawNodeCached.Style != rectangle.Style)
                 {
                     drawNodeCached.Style = rectangle.Style;
                     drawNodeCached.UpdateStyle();
@@ -1074,7 +1074,7 @@ namespace Core2D.UI.Renderer
             var drawNodeCached = _drawNodeCache.Get(ellipse);
             if (drawNodeCached != null)
             {
-                if (ellipse.Style.IsDirty())
+                if (ellipse.Style.IsDirty() || drawNodeCached.Style != ellipse.Style)
                 {
                     drawNodeCached.Style = ellipse.Style;
                     drawNodeCached.UpdateStyle();
@@ -1109,7 +1109,7 @@ namespace Core2D.UI.Renderer
             var drawNodeCached = _drawNodeCache.Get(arc);
             if (drawNodeCached != null)
             {
-                if (arc.Style.IsDirty())
+                if (arc.Style.IsDirty() || drawNodeCached.Style != arc.Style)
                 {
                     drawNodeCached.Style = arc.Style;
                     drawNodeCached.UpdateStyle();
@@ -1144,7 +1144,7 @@ namespace Core2D.UI.Renderer
             var drawNodeCached = _drawNodeCache.Get(cubicBezier);
             if (drawNodeCached != null)
             {
-                if (cubicBezier.Style.IsDirty())
+                if (cubicBezier.Style.IsDirty() || drawNodeCached.Style != cubicBezier.Style)
                 {
                     drawNodeCached.Style = cubicBezier.Style;
                     drawNodeCached.UpdateStyle();
@@ -1179,7 +1179,7 @@ namespace Core2D.UI.Renderer
             var drawNodeCached = _drawNodeCache.Get(quadraticBezier);
             if (drawNodeCached != null)
             {
-                if (quadraticBezier.Style.IsDirty())
+                if (quadraticBezier.Style.IsDirty() || drawNodeCached.Style != quadraticBezier.Style)
                 {
                     drawNodeCached.Style = quadraticBezier.Style;
                     drawNodeCached.UpdateStyle();
@@ -1214,7 +1214,7 @@ namespace Core2D.UI.Renderer
             var drawNodeCached = _drawNodeCache.Get(text);
             if (drawNodeCached != null)
             {
-                if (text.Style.IsDirty())
+                if (text.Style.IsDirty() || drawNodeCached.Style != text.Style)
                 {
                     drawNodeCached.Style = text.Style;
                     drawNodeCached.UpdateStyle();
@@ -1249,7 +1249,7 @@ namespace Core2D.UI.Renderer
             var drawNodeCached = _drawNodeCache.Get(image);
             if (drawNodeCached != null)
             {
-                if (image.Style.IsDirty())
+                if (image.Style.IsDirty() || drawNodeCached.Style != image.Style)
                 {
                     drawNodeCached.Style = image.Style;
                     drawNodeCached.UpdateStyle();
@@ -1284,7 +1284,7 @@ namespace Core2D.UI.Renderer
             var drawNodeCached = _drawNodeCache.Get(path);
             if (drawNodeCached != null)
             {
-                if (path.Style.IsDirty())
+                if (path.Style.IsDirty() || drawNodeCached.Style != path.Style)
                 {
                     drawNodeCached.Style = path.Style;
                     drawNodeCached.UpdateStyle();
