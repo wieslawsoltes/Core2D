@@ -665,6 +665,8 @@ namespace Core2D.Renderer.SkiaSharp
                     rectangle.CellHeight,
                     isStroked: true);
             }
+
+            DrawText(dc, rectangle, dx, dy);
         }
 
         /// <inheritdoc/>
@@ -690,6 +692,8 @@ namespace Core2D.Renderer.SkiaSharp
 
             var rect = CreateRect(ellipse.TopLeft, ellipse.BottomRight, dx, dy, _scaleToPage);
             DrawEllipseInternal(canvas, brush, pen, ellipse.IsStroked, ellipse.IsFilled, ref rect);
+
+            DrawText(dc, ellipse, dx, dy);
         }
 
         /// <inheritdoc/>
@@ -857,21 +861,21 @@ namespace Core2D.Renderer.SkiaSharp
             }
             else
             {
-                if (State.ImageCache == null || string.IsNullOrEmpty(image.Key))
+                if (State.ImageCache != null && !string.IsNullOrEmpty(image.Key))
                 {
-                    return;
-                }
+                    var bytes = State.ImageCache.GetImage(image.Key);
+                    if (bytes != null)
+                    {
+                        var bi = SKBitmap.Decode(bytes);
 
-                var bytes = State.ImageCache.GetImage(image.Key);
-                if (bytes != null)
-                {
-                    var bi = SKBitmap.Decode(bytes);
+                        _biCache.Set(image.Key, bi);
 
-                    _biCache.Set(image.Key, bi);
-
-                    canvas.DrawBitmap(bi, rect);
+                        canvas.DrawBitmap(bi, rect);
+                    }
                 }
             }
+
+            DrawText(dc, image, dx, dy);
         }
 
         /// <inheritdoc/>
