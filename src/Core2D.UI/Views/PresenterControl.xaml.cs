@@ -275,7 +275,6 @@ namespace Core2D.UI.Views
                         {
                             var db = (object)customState.Container.Data.Properties;
                             var record = (object)customState.Container.Data.Record;
-
                             if (customState.Container.Template != null)
                             {
                                 customState.DataFlow.Bind(customState.Container.Template, db, record);
