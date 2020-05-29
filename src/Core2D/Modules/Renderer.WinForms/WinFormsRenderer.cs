@@ -463,6 +463,8 @@ namespace Core2D.Renderer.WinForms
 
             brush.Dispose();
             pen.Dispose();
+
+            DrawText(dc, rectangle, dx, dy);
         }
 
         /// <inheritdoc/>
@@ -500,6 +502,8 @@ namespace Core2D.Renderer.WinForms
 
             brush.Dispose();
             pen.Dispose();
+
+            DrawText(dc, ellipse, dx, dy);
         }
 
         /// <inheritdoc/>
@@ -510,43 +514,42 @@ namespace Core2D.Renderer.WinForms
                 Point2.FromXY(arc.Point2.X, arc.Point2.Y),
                 Point2.FromXY(arc.Point3.X, arc.Point3.Y),
                 Point2.FromXY(arc.Point4.X, arc.Point4.Y));
-            if (a.Width <= 0.0 || a.Height <= 0.0)
+
+            if (a.Width > 0.0 && a.Height > 0.0)
             {
-                return;
+                var _gfx = dc as Graphics;
+
+                var brush = ToBrush(arc.Style.Fill);
+                var pen = ToPen(arc.Style, _scaleToPage);
+
+                if (arc.IsFilled)
+                {
+                    var path = new GraphicsPath();
+                    path.AddArc(
+                        _scaleToPage(a.X + dx),
+                        _scaleToPage(a.Y + dy),
+                        _scaleToPage(a.Width),
+                        _scaleToPage(a.Height),
+                        (float)a.StartAngle,
+                        (float)a.SweepAngle);
+                    _gfx.FillPath(brush, path);
+                }
+
+                if (arc.IsStroked)
+                {
+                    _gfx.DrawArc(
+                        pen,
+                        _scaleToPage(a.X + dx),
+                        _scaleToPage(a.Y + dy),
+                        _scaleToPage(a.Width),
+                        _scaleToPage(a.Height),
+                        (float)a.StartAngle,
+                        (float)a.SweepAngle);
+                }
+
+                brush.Dispose();
+                pen.Dispose();
             }
-
-            var _gfx = dc as Graphics;
-
-            var brush = ToBrush(arc.Style.Fill);
-            var pen = ToPen(arc.Style, _scaleToPage);
-
-            if (arc.IsFilled)
-            {
-                var path = new GraphicsPath();
-                path.AddArc(
-                    _scaleToPage(a.X + dx),
-                    _scaleToPage(a.Y + dy),
-                    _scaleToPage(a.Width),
-                    _scaleToPage(a.Height),
-                    (float)a.StartAngle,
-                    (float)a.SweepAngle);
-                _gfx.FillPath(brush, path);
-            }
-
-            if (arc.IsStroked)
-            {
-                _gfx.DrawArc(
-                    pen,
-                    _scaleToPage(a.X + dx),
-                    _scaleToPage(a.Y + dy),
-                    _scaleToPage(a.Width),
-                    _scaleToPage(a.Height),
-                    (float)a.StartAngle,
-                    (float)a.SweepAngle);
-            }
-
-            brush.Dispose();
-            pen.Dispose();
         }
 
         /// <inheritdoc/>
@@ -770,25 +773,25 @@ namespace Core2D.Renderer.WinForms
             }
             else
             {
-                if (State.ImageCache == null || string.IsNullOrEmpty(image.Key))
+                if (State.ImageCache != null && !string.IsNullOrEmpty(image.Key))
                 {
-                    return;
-                }
+                    var bytes = State.ImageCache.GetImage(image.Key);
+                    if (bytes != null)
+                    {
+                        var ms = new System.IO.MemoryStream(bytes);
+                        var bi = Image.FromStream(ms);
+                        ms.Dispose();
 
-                var bytes = State.ImageCache.GetImage(image.Key);
-                if (bytes != null)
-                {
-                    var ms = new System.IO.MemoryStream(bytes);
-                    var bi = Image.FromStream(ms);
-                    ms.Dispose();
+                        _biCache.Set(image.Key, bi);
 
-                    _biCache.Set(image.Key, bi);
-
-                    _gfx.DrawImage(bi, srect);
+                        _gfx.DrawImage(bi, srect);
+                    }
                 }
             }
 
             brush.Dispose();
+
+            DrawText(dc, image, dx, dy);
         }
 
         /// <inheritdoc/>
