@@ -13,7 +13,6 @@ using AMI = Avalonia.Media.Imaging;
 
 namespace Core2D.UI.Renderer
 {
-#if USE_DRAW_NODES
     internal abstract class DrawNode : IDisposable
     {
         public IShapeStyle Style { get; set; }
@@ -775,7 +774,7 @@ namespace Core2D.UI.Renderer
     /// <summary>
     /// Native Avalonia shape renderer.
     /// </summary>
-    public class AvaloniaRenderer : ObservableObject, IShapeRenderer
+    public class AvaloniaCachedRenderer : ObservableObject, IShapeRenderer
     {
         private readonly IServiceProvider _serviceProvider;
         private IShapeRendererState _state;
@@ -790,10 +789,10 @@ namespace Core2D.UI.Renderer
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="AvaloniaRenderer"/> class.
+        /// Initializes a new instance of the <see cref="AvaloniaCachedRenderer"/> class.
         /// </summary>
         /// <param name="serviceProvider">The service provider.</param>
-        public AvaloniaRenderer(IServiceProvider serviceProvider)
+        public AvaloniaCachedRenderer(IServiceProvider serviceProvider)
         {
             _serviceProvider = serviceProvider;
             _state = _serviceProvider.GetService<IFactory>().CreateShapeRendererState();
@@ -1306,7 +1305,7 @@ namespace Core2D.UI.Renderer
             }
         }
     }
-#else
+
     /// <summary>
     /// Native Avalonia shape renderer.
     /// </summary>
@@ -2193,5 +2192,4 @@ namespace Core2D.UI.Renderer
             translateDisposable?.Dispose();
         }
     }
-#endif
 }
