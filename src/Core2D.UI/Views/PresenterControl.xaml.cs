@@ -280,7 +280,6 @@ namespace Core2D.UI.Views
                             {
                                 customState.DataFlow.Bind(customState.Container.Template, db, record);
                             }
-
                             customState.DataFlow.Bind(customState.Container, db, record);
                         }
                     }
