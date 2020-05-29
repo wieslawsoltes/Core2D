@@ -926,6 +926,12 @@ namespace Core2D.UI.Renderer
                 //    pointStyle.Invalidate();
                 //}
 
+                if (drawNodeCached.Style != pointStyle)
+                {                
+                    drawNodeCached.Style = pointStyle;
+                    drawNodeCached.UpdateStyle();
+                }
+
                 if (point.IsDirty())
                 {
                     drawNodeCached.UpdateGeometry();
