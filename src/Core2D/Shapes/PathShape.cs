@@ -12,7 +12,7 @@ namespace Core2D.Shapes
     /// </summary>
     public class PathShape : BaseShape, IPathShape
     {
-        private List<IPointShape> _points = new List<IPointShape>();
+        private List<IPointShape> _points;
         private IPathGeometry _geometry;
 
         /// <inheritdoc/>
@@ -23,6 +23,20 @@ namespace Core2D.Shapes
         {
             get => _geometry;
             set => Update(ref _geometry, value);
+        }
+
+        private void UpdatePoints()
+        {
+            if (_points == null)
+            {
+                _points = new List<IPointShape>();
+                GetPoints(_points);
+            }
+            else
+            {
+                _points.Clear();
+                GetPoints(_points);
+            }
         }
 
         /// <inheritdoc/>
@@ -41,8 +55,7 @@ namespace Core2D.Shapes
             {
                 if (renderer.State.SelectedShapes.Contains(this))
                 {
-                    _points.Clear();
-                    GetPoints(_points);
+                    UpdatePoints();
 
                     foreach (var point in _points)
                     {
@@ -51,8 +64,7 @@ namespace Core2D.Shapes
                 }
                 else
                 {
-                    _points.Clear();
-                    GetPoints(_points);
+                    UpdatePoints();
 
                     foreach (var point in _points)
                     {
@@ -72,8 +84,7 @@ namespace Core2D.Shapes
 
             dataFlow.Bind(this, db, record);
 
-            _points.Clear();
-            GetPoints(_points);
+            UpdatePoints();
 
             foreach (var point in _points)
             {
@@ -84,8 +95,7 @@ namespace Core2D.Shapes
         /// <inheritdoc/>
         public override void Move(ISelection selection, double dx, double dy)
         {
-            _points.Clear();
-            GetPoints(_points);
+            UpdatePoints();
 
             foreach (var point in _points)
             {
@@ -98,8 +108,7 @@ namespace Core2D.Shapes
         {
             base.Select(selection);
 
-            _points.Clear();
-            GetPoints(_points);
+            UpdatePoints();
 
             foreach (var point in _points)
             {
@@ -112,8 +121,7 @@ namespace Core2D.Shapes
         {
             base.Deselect(selection);
 
-            _points.Clear();
-            GetPoints(_points);
+            UpdatePoints();
 
             foreach (var point in _points)
             {
