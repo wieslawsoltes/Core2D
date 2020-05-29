@@ -43,7 +43,7 @@ namespace Core2D.Shapes
         {
             if (State.Flags.HasFlag(ShapeStateFlags.Visible))
             {
-                renderer.Draw(dc, this, dx, dy);
+                renderer.DrawText(dc, this, dx, dy);
             }
         }
 

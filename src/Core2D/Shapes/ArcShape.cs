@@ -51,7 +51,7 @@ namespace Core2D.Shapes
         {
             if (State.Flags.HasFlag(ShapeStateFlags.Visible))
             {
-                renderer.Draw(dc, this, dx, dy);
+                renderer.DrawArc(dc, this, dx, dy);
             }
         }
 
