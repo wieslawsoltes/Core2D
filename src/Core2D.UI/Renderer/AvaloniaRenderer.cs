@@ -47,7 +47,7 @@ namespace Core2D.UI.Renderer
            
 #endif
 #if USE_IMMUTABLE_MEDIA
-        protected AM.IPen ToPen(IBaseStyle style)
+        protected AM.IPen ToPen(IBaseStyle style, double thickness)
 #else
         protected AM.Pen ToPen(IBaseStyle style)
 #endif
@@ -79,11 +79,11 @@ namespace Core2D.UI.Renderer
                 _ => throw new NotImplementedException()
             };
 
-            var thickness = style.Thickness;
             var brush = ToBrush(style.Stroke);
 #if USE_IMMUTABLE_MEDIA
             var pen = new AM.Immutable.ImmutablePen(brush, thickness, dashStyle, lineCap);
 #else
+            var thickness = style.Thickness;
             var pen = new AM.Pen(brush, thickness, dashStyle, lineCap);
 #endif
 
@@ -99,7 +99,11 @@ namespace Core2D.UI.Renderer
         public virtual void UpdateStyle()
         {
             Fill = ToBrush(Style.Fill);
+#if USE_IMMUTABLE_MEDIA
+            Stroke = ToPen(Style, Style.Thickness);
+#else
             Stroke = ToPen(Style);
+#endif
         }
 
         public virtual void Draw(AM.DrawingContext context, double dx, double dy, double zoom)
@@ -123,7 +127,7 @@ namespace Core2D.UI.Renderer
             if (Stroke.Thickness != thickness)
             {
 #if USE_IMMUTABLE_MEDIA
-                Stroke = ToPen(Style);
+                Stroke = ToPen(Style, thickness);
 #else
                 Stroke.Thickness = thickness;
 #endif
