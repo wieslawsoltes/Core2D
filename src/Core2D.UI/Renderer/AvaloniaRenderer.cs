@@ -936,15 +936,10 @@ namespace Core2D.UI.Renderer
         /// <inheritdoc/>
         public void DrawPoint(object dc, IPointShape point, double dx, double dy)
         {
-            bool isSelected = _state.SelectedShapes?.Count > 0 && _state.SelectedShapes.Contains(point);
+            var isSelected = _state.SelectedShapes?.Count > 0 && _state.SelectedShapes.Contains(point);
             var pointStyle = isSelected ? _state.SelectedPointStyle : _state.PointStyle;
-            if (pointStyle == null)
-            {
-                return;
-            }
-
             var pointSize = _state.PointSize;
-            if (pointSize <= 0.0)
+            if (pointStyle == null || pointSize <= 0.0)
             {
                 return;
             }
@@ -954,16 +949,8 @@ namespace Core2D.UI.Renderer
             var drawNodeCached = _drawNodeCache.Get(point);
             if (drawNodeCached != null)
             {
-                // TODO:
-                //if (pointStyle.IsDirty())
-                //{
-                //    drawNodeCached.Style = pointStyle;
-                //    drawNodeCached.UpdateStyle();
-                //    pointStyle.Invalidate();
-                //}
-
-                if (drawNodeCached.Style != pointStyle)
-                {                
+                if (pointStyle.IsDirty() || drawNodeCached.Style != pointStyle)
+                {
                     drawNodeCached.Style = pointStyle;
                     drawNodeCached.UpdateStyle();
                 }
