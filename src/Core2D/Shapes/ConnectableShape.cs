@@ -28,7 +28,7 @@ namespace Core2D.Shapes
         /// <inheritdoc/>
         public override void DrawPoints(object dc, IShapeRenderer renderer, double dx, double dy)
         {
-            if (renderer.State.SelectedShapes != null && renderer.State.DrawPoints == true)
+            if (renderer.State.SelectedShapes != null)
             {
                 if (renderer.State.SelectedShapes.Contains(this))
                 {
