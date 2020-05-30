@@ -315,6 +315,8 @@ namespace Core2D.UI.Views
                             var swInvalidate = Stopwatch.StartNew();
 #endif
                             customState.Container?.Invalidate();
+                            customState.Renderer.State.PointStyle.Invalidate();
+                            customState.Renderer.State.SelectedPointStyle.Invalidate();
 #if USE_DIAGNOSTICS
                             swInvalidate.Stop();
                             Trace.WriteLine($"Invalidate {swInvalidate.Elapsed.TotalMilliseconds}ms");
