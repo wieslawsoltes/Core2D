@@ -494,6 +494,8 @@ namespace Core2D.Editor.Tools.Decorators
 
             var editor = _serviceProvider.GetService<IProjectEditor>();
 
+            bool isProportionalResize = args.Modifier.HasFlag(ModifierFlags.Shift);
+
             (double sx, double sy) = editor.TryToSnap(args);
             double dx = sx - _startX;
             double dy = sy - _startY;
