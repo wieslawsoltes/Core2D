@@ -1,5 +1,4 @@
-﻿#define USE_IMMUTABLE_MEDIA
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using Core2D.Containers;

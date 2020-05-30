@@ -57,6 +57,7 @@
   
   <PropertyGroup>
     <DefineConstants>$(DefineConstants);USE_DRAW_NODES</DefineConstants>
+    <DefineConstants>$(DefineConstants);USE_IMMUTABLE_MEDIA</DefineConstants>
     <!--<DefineConstants>$(DefineConstants);USE_DIAGNOSTICS</DefineConstants>-->
     <!--<DefineConstants>$(DefineConstants);USE_SKIA</DefineConstants>-->
   </PropertyGroup>
