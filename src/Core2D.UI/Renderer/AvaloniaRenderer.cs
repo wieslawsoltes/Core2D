@@ -974,7 +974,10 @@ namespace Core2D.UI.Renderer
                     //point.Invalidate();
                 }
 
-                drawNodeCached.Draw(context, dx, dy, _state.ZoomX);
+                if (_state.DrawPoints == true)
+                {
+                    drawNodeCached.Draw(context, dx, dy, _state.ZoomX);
+                }
             }
             else
             {
@@ -984,7 +987,10 @@ namespace Core2D.UI.Renderer
 
                 _drawNodeCache.Set(point, drawNode);
 
-                drawNode.Draw(context, dx, dy, _state.ZoomX);
+                if (_state.DrawPoints == true)
+                {
+                    drawNode.Draw(context, dx, dy, _state.ZoomX);
+                }
             }
         }
 
