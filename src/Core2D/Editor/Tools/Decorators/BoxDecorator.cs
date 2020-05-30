@@ -565,6 +565,31 @@ namespace Core2D.Editor.Tools.Decorators
                     break;
                 case Mode.BottomRight:
                     {
+                        if (isProportionalResize)
+                        {
+                            double sd = Math.Max(sx, sy);
+                            _startX = sd;
+                            _startY = sd;
+
+                            double d = Math.Max(dx, dy);
+
+                            var width = _groupBox.Bounds.Width;
+                            var height = _groupBox.Bounds.Height;
+
+                            if (width >= height)
+                            {
+                                var ratio = width / height;
+                                dx = d * ratio;
+                                dy = d;
+                            }
+                            else
+                            {
+                                var ratio = height / width;
+                                dx = d;
+                                dy = d * ratio;
+                            }
+                        }
+
                         _groupBox.ScaleBottom(dy, _points);
                         _groupBox.ScaleRight(dx, _points);
                     }
