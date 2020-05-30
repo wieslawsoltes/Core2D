@@ -636,10 +636,10 @@ namespace Core2D.Editor.Tools.Decorators
                             var height = _groupBox.Bounds.Height;
 
                             var ratioWidth = (width + dx) / width;
-                            var ratioHeight = (height + dy) / height;
-
-                            //dx = (width * ratioHeight) - width;
                             dy = (height * ratioWidth) - height;
+
+                            //var ratioHeight = (height + dy) / height;
+                            //dx = (width * ratioHeight) - width;
 
                             _groupBox.ScaleBottom(dy, _points);
                             _groupBox.ScaleRight(dx, _points);
