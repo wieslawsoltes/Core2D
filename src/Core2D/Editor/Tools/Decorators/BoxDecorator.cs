@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Core2D;
 using Core2D.Containers;
 using Core2D.Input;
@@ -293,6 +294,8 @@ namespace Core2D.Editor.Tools.Decorators
                 _rightHandle.State.Flags &= ~ShapeStateFlags.Visible;
                 _topHandle.State.Flags &= ~ShapeStateFlags.Visible;
                 _bottomHandle.State.Flags &= ~ShapeStateFlags.Visible;
+                _topRightHandle.State.Flags &= ~ShapeStateFlags.Visible;
+                _bottomLeftHandle.State.Flags &= ~ShapeStateFlags.Visible;
             }
             else
             {
@@ -300,6 +303,8 @@ namespace Core2D.Editor.Tools.Decorators
                 _rightHandle.State.Flags |= ShapeStateFlags.Visible;
                 _topHandle.State.Flags |= ShapeStateFlags.Visible;
                 _bottomHandle.State.Flags |= ShapeStateFlags.Visible;
+                _topRightHandle.State.Flags |= ShapeStateFlags.Visible;
+                _bottomLeftHandle.State.Flags |= ShapeStateFlags.Visible;
             }
 
             _layer.InvalidateLayer();
@@ -412,7 +417,8 @@ namespace Core2D.Editor.Tools.Decorators
             }
 
             double radius = editor.Project.Options.HitThreshold / editor.PageState.ZoomX;
-            var result = editor.HitTest.TryToGetShape(_handles, new Point2(x, y), radius, editor.PageState.ZoomX);
+            var handles = _handles.Where(x => x.State.Flags.HasFlag(ShapeStateFlags.Visible));
+            var result = editor.HitTest.TryToGetShape(handles, new Point2(x, y), radius, editor.PageState.ZoomX);
             if (result != null)
             {
                 if (result == _boundsHandle)
