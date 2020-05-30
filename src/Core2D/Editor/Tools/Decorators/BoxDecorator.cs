@@ -632,17 +632,31 @@ namespace Core2D.Editor.Tools.Decorators
                     {
                         if (isProportionalResize)
                         {
-                            var width = _groupBox.Bounds.Width;
-                            var height = _groupBox.Bounds.Height;
+                            {
+                                var width = _groupBox.Bounds.Width;
+                                var height = _groupBox.Bounds.Height;
+                                var ratioHeight = (height + dy) / height;
 
-                            var ratioWidth = (width + dx) / width;
-                            var ratioHeight = (height + dy) / height;
+                                dx = (width * ratioHeight) - width;
 
-                            //dx = (width * ratioHeight) - width;
-                            dy = (height * ratioWidth) - height;
+                                //_groupBox.ScaleLeft(-dx / 2.0, _points);
+                                _groupBox.ScaleRight(dx / 2.0, _points);
 
-                            _groupBox.ScaleBottom(dy, _points);
-                            _groupBox.ScaleRight(dx, _points);
+                                _groupBox.ScaleBottom(dy, _points);
+                            }
+
+                            {
+                                var width = _groupBox.Bounds.Width;
+                                var height = _groupBox.Bounds.Height;
+                                var ratioWidth = (width + dx) / width;
+
+                                dy = (height * ratioWidth) - height;
+
+                                //_groupBox.ScaleTop(-dy / 2.0, _points);
+                                _groupBox.ScaleBottom(dy / 2.0, _points);
+
+                                _groupBox.ScaleRight(dx, _points);
+                            }
                         }
                         else
                         {
