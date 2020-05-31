@@ -1225,6 +1225,10 @@ namespace Core2D.Editor
             }
 
             var shapes = PageState.SelectedShapes?.ToList();
+            if (shapes == null || shapes.Count <= 0)
+            {
+                return;
+            }
 
             if (PageState.Decorator == null)
             {
