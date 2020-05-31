@@ -35,7 +35,7 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.0" PrivateAssets="All" />
     <PackageReference Include="SourceLink.Create.CommandLine" Version="2.8.3" PrivateAssets="All" />
-    <PackageReference Include="System.Text.Encoding.CodePages" Version="4.7.0" />
+    <PackageReference Include="System.Text.Encoding.CodePages" Version="4.7.1" />
     <PackageReference Include="Avalonia" Version="0.9.999-cibuild*" />
     <PackageReference Include="Avalonia.Controls.DataGrid" Version="0.9.999-cibuild*" />
     <PackageReference Include="Avalonia.Desktop" Version="0.9.999-cibuild*" />
@@ -52,7 +52,7 @@
     <PackageReference Include="Avalonia.ThemeManager" Version="0.9.999-build*" />
     <PackageReference Include="Avalonia.MatrixExtensions" Version="2.3.999-build*" />
     <PackageReference Include="Avalonia.Controls.PanAndZoom" Version="2.3.999-build*" />
-    <PackageReference Include="reactiveui" Version="11.3.8" />
+    <PackageReference Include="reactiveui" Version="11.4.1" />
   </ItemGroup>
   
   <PropertyGroup>
