@@ -19,11 +19,7 @@ namespace Core2D.UI.Renderer
         public bool ScaleThickness { get; set; }
         public bool ScaleSize { get; set; }
         public AM.IBrush Fill { get; set; }
-#if USE_IMMUTABLE_MEDIA
         public AM.IPen Stroke { get; set; }
-#else
-        public AM.Pen Stroke { get; set; }
-#endif
         public A.Point Center { get; set; }
 
         protected AM.Color ToColor(IArgbColor argbColor)
@@ -31,42 +27,22 @@ namespace Core2D.UI.Renderer
             return AM.Color.FromArgb(argbColor.A, argbColor.R, argbColor.G, argbColor.B);
         }
 
-#if USE_IMMUTABLE_MEDIA
         protected AM.IBrush ToBrush(IColor color) => color switch
         {
             IArgbColor argbColor => new AM.Immutable.ImmutableSolidColorBrush(ToColor(argbColor)),
             _ => throw new NotSupportedException($"The {color.GetType()} color type is not supported.")
         };
-#else
-        protected AM.IBrush ToBrush(IColor color) => color switch
-        {
-             IArgbColor argbColor => new AM.SolidColorBrush(ToColor(argbColor)),
-            _ => throw new NotSupportedException($"The {color.GetType()} color type is not supported.")
-        };
-           
-#endif
-#if USE_IMMUTABLE_MEDIA
+
         protected AM.IPen ToPen(IBaseStyle style, double thickness)
-#else
-        protected AM.Pen ToPen(IBaseStyle style)
-#endif
         {
-#if USE_IMMUTABLE_MEDIA
             var dashStyle = default(AM.Immutable.ImmutableDashStyle);
-#else
-            var dashStyle = default(AM.DashStyle);
-#endif
             if (style.Dashes != null)
             {
                 var dashes = StyleHelper.ConvertDashesToDoubleArray(style.Dashes, 1.0);
                 var dashOffset = style.DashOffset;
                 if (dashes != null)
                 {
-#if USE_IMMUTABLE_MEDIA
                     dashStyle = new AM.Immutable.ImmutableDashStyle(dashes, dashOffset);
-#else
-                    dashStyle = new AM.DashStyle(dashes, dashOffset);
-#endif
                 }
             }
 
@@ -79,12 +55,7 @@ namespace Core2D.UI.Renderer
             };
 
             var brush = ToBrush(style.Stroke);
-#if USE_IMMUTABLE_MEDIA
             var pen = new AM.Immutable.ImmutablePen(brush, thickness, dashStyle, lineCap);
-#else
-            var thickness = style.Thickness;
-            var pen = new AM.Pen(brush, thickness, dashStyle, lineCap);
-#endif
 
             return pen;
         }
@@ -98,11 +69,7 @@ namespace Core2D.UI.Renderer
         public virtual void UpdateStyle()
         {
             Fill = ToBrush(Style.Fill);
-#if USE_IMMUTABLE_MEDIA
             Stroke = ToPen(Style, Style.Thickness);
-#else
-            Stroke = ToPen(Style);
-#endif
         }
 
         public virtual void Draw(AM.DrawingContext context, double dx, double dy, double zoom)
@@ -125,11 +92,7 @@ namespace Core2D.UI.Renderer
 
             if (Stroke.Thickness != thickness)
             {
-#if USE_IMMUTABLE_MEDIA
                 Stroke = ToPen(Style, thickness);
-#else
-                Stroke.Thickness = thickness;
-#endif
             }
 
             var offsetDisposable = dx != 0.0 || dy != 0.0 ? context.PushPreTransform(AME.MatrixHelper.Translate(dx, dy)) : default(IDisposable);
