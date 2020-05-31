@@ -92,7 +92,10 @@
             <MenuItem Header="_Delete" Command="{Binding OnDelete}" InputGesture="Delete"/>
             <Separator/>
             <MenuItem Header="Copy As _Xaml" Command="{Binding Platform.OnCopyAsXaml}"/>
+            <Separator/>
             <MenuItem Header="Copy As _Svg" Command="{Binding Platform.OnCopyAsSvg}"/>
+            <MenuItem Header="Paste Sv_g" Command="{Binding Platform.OnPasteSvg}"/>
+            <Separator/>
             <MenuItem Header="Copy As _Metafile" Command="{Binding Platform.OnCopyAsEmf}"/>
             <Separator/>
             <MenuItem Header="Copy As Svg Path Data" Command="{Binding Platform.OnCopyAsPathData}"/>

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Data;
+using System.IO;
 using System.Linq;
 using Core2D.Editor;
 using Core2D.Path;
@@ -534,15 +535,18 @@ namespace Core2D.Renderer.SkiaSharp
             }
         }
 
-        /// <inheritdoc/>
-        public IList<IBaseShape> Convert(string path)
+        private static Stream ToStream(string text)
         {
-            var document = SKSvg.Open(path);
-            if (document == null)
-            {
-                return null;
-            }
+            var stream = new MemoryStream();
+            var writer = new StreamWriter(stream);
+            writer.Write(text);
+            writer.Flush();
+            stream.Position = 0;
+            return stream;
+        }
 
+        private IList<IBaseShape> Convert(Svg.SvgDocument document)
+        {
             var picture = SKSvg.ToModel(document);
             if (picture == null)
             {
@@ -559,6 +563,29 @@ namespace Core2D.Renderer.SkiaSharp
             group.Shapes = group.Shapes.AddRange(shapes);
 
             return Enumerable.Repeat<IBaseShape>(group, 1).ToList();
+        }
+
+        /// <inheritdoc/>
+        public IList<IBaseShape> Convert(string path)
+        {
+            var document = SKSvg.Open(path);
+            if (document == null)
+            {
+                return null;
+            }
+            return Convert(document);
+        }
+
+        /// <inheritdoc/>
+        public IList<IBaseShape> FromString(string text)
+        {
+            using var stream = ToStream(text);
+            var document = SKSvg.Open(stream);
+            if (document == null)
+            {
+                return null;
+            }
+            return Convert(document);
         }
     }
 }

@@ -346,6 +346,30 @@ namespace Core2D.UI.Editor
         }
 
         /// <inheritdoc/>
+        public async void OnPasteSvg()
+        {
+            try
+            {
+                var editor = _serviceProvider.GetService<IProjectEditor>();
+                var converter = editor.SvgConverter;
+
+                var svgText = await editor.TextClipboard?.GetText();
+                if (!string.IsNullOrEmpty(svgText))
+                {
+                    var shapes = converter.FromString(svgText);
+                    if (shapes != null)
+                    {
+                        editor.OnPasteShapes(shapes);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                _serviceProvider.GetService<ILog>()?.LogException(ex);
+            }
+        }
+
+        /// <inheritdoc/>
         public void OnCopyAsXaml(object item)
         {
             try

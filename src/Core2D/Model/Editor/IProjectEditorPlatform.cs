@@ -84,6 +84,11 @@ namespace Core2D.Editor
         void OnCopyAsSvg(object item);
 
         /// <summary>
+        /// Paste Svg from clipboard as shape.
+        /// </summary>
+        void OnPasteSvg();
+
+        /// <summary>
         /// Copy page or selected shapes to clipboard as Emf.
         /// </summary>
         /// <param name="item">The object to copy as EMF.</param>
