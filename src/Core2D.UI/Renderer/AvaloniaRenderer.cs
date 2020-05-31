@@ -1250,6 +1250,7 @@ namespace Core2D.UI.Renderer
                 {
                     drawNodeCached.Style = text.Style;
                     drawNodeCached.UpdateStyle();
+                    drawNodeCached.UpdateGeometry();
                     text.Style.Invalidate();
                 }
 
