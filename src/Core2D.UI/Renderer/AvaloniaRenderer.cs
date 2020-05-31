@@ -813,7 +813,7 @@ namespace Core2D.UI.Renderer
     /// <summary>
     /// Native Avalonia shape renderer.
     /// </summary>
-    public class AvaloniaCachedRenderer : ObservableObject, IShapeRenderer
+    public class AvaloniaRenderer : ObservableObject, IShapeRenderer
     {
         private readonly IServiceProvider _serviceProvider;
         private IShapeRendererState _state;
@@ -828,10 +828,10 @@ namespace Core2D.UI.Renderer
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="AvaloniaCachedRenderer"/> class.
+        /// Initializes a new instance of the <see cref="AvaloniaRenderer"/> class.
         /// </summary>
         /// <param name="serviceProvider">The service provider.</param>
-        public AvaloniaCachedRenderer(IServiceProvider serviceProvider)
+        public AvaloniaRenderer(IServiceProvider serviceProvider)
         {
             _serviceProvider = serviceProvider;
             _state = _serviceProvider.GetService<IFactory>().CreateShapeRendererState();
