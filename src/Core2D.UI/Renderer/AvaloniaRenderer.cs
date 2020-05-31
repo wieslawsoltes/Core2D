@@ -351,8 +351,10 @@ namespace Core2D.UI.Renderer
             P0 = new A.Point(Line.Start.X, Line.Start.Y);
             P1 = new A.Point(Line.End.X, Line.End.Y);
             Center = new A.Point((P0.X + P1.X) / 2.0, (P0.Y + P1.Y) / 2.0);
-            // TODO: Arrows
+
             // TODO: Curved
+
+            // TODO: Arrows
         }
 
         public override void OnDraw(AM.DrawingContext context, double dx, double dy, double zoom)
@@ -362,9 +364,54 @@ namespace Core2D.UI.Renderer
                 context.DrawLine(Stroke, P0, P1);
             }
 
+            // TODO: Curved
+
             // TODO: Arrows
 
-            // TODO: Curved
+            /*
+            var _dc = dc as AM.DrawingContext;
+
+            var style = line.Style;
+            if (style == null)
+            {
+                return;
+            }
+
+            var scaleThickness = line.State.Flags.HasFlag(ShapeStateFlags.Thickness);
+            var scaleSize = line.State.Flags.HasFlag(ShapeStateFlags.Size);
+
+            var scale = scaleSize ? 1.0 / _state.ZoomX : 1.0;
+            var scaleToPage = scale == 1.0 ? _scaleToPage : (value) => (float)(_scaleToPage(value) / scale);
+            var center = new Point2((line.Start.X + line.End.X) / 2.0, (line.Start.Y + line.End.Y) / 2.0);
+            var translateX = 0.0 - (center.X * scale) + center.X;
+            var translateY = 0.0 - (center.Y * scale) + center.Y;
+
+            GetCached(style, out _, out var stroke, scaleThickness);
+
+            var translateDisposable = scale != 1.0 ? _dc.PushPreTransform(AME.MatrixHelper.Translate(translateX, translateY)) : default(IDisposable);
+            var scaleDisposable = scale != 1.0 ? _dc.PushPreTransform(AME.MatrixHelper.Scale(scale, scale)) : default(IDisposable);
+
+            DrawLineArrowsInternal(_dc, line, style, dx, dy, scaleToPage, scaleThickness, out var pt1, out var pt2);
+
+            if (style.LineStyle.IsCurved)
+            {
+                DrawLineCurveInternal(
+                    _dc,
+                    stroke, line.IsStroked,
+                    ref pt1, ref pt2,
+                    style.LineStyle.Curvature,
+                    style.LineStyle.CurveOrientation,
+                    line.Start.Alignment,
+                    line.End.Alignment);
+            }
+            else
+            {
+                DrawLineInternal(_dc, stroke, line.IsStroked, ref pt1, ref pt2);
+            }
+
+            scaleDisposable?.Dispose();
+            translateDisposable?.Dispose();
+            */
         }
     }
 
@@ -978,50 +1025,6 @@ namespace Core2D.UI.Renderer
 
                 drawNode.Draw(context, dx, dy, _state.ZoomX);
             }
-            /*
-            var _dc = dc as AM.DrawingContext;
-
-            var style = line.Style;
-            if (style == null)
-            {
-                return;
-            }
-
-            var scaleThickness = line.State.Flags.HasFlag(ShapeStateFlags.Thickness);
-            var scaleSize = line.State.Flags.HasFlag(ShapeStateFlags.Size);
-
-            var scale = scaleSize ? 1.0 / _state.ZoomX : 1.0;
-            var scaleToPage = scale == 1.0 ? _scaleToPage : (value) => (float)(_scaleToPage(value) / scale);
-            var center = new Point2((line.Start.X + line.End.X) / 2.0, (line.Start.Y + line.End.Y) / 2.0);
-            var translateX = 0.0 - (center.X * scale) + center.X;
-            var translateY = 0.0 - (center.Y * scale) + center.Y;
-
-            GetCached(style, out _, out var stroke, scaleThickness);
-
-            var translateDisposable = scale != 1.0 ? _dc.PushPreTransform(AME.MatrixHelper.Translate(translateX, translateY)) : default(IDisposable);
-            var scaleDisposable = scale != 1.0 ? _dc.PushPreTransform(AME.MatrixHelper.Scale(scale, scale)) : default(IDisposable);
-
-            DrawLineArrowsInternal(_dc, line, style, dx, dy, scaleToPage, scaleThickness, out var pt1, out var pt2);
-
-            if (style.LineStyle.IsCurved)
-            {
-                DrawLineCurveInternal(
-                    _dc,
-                    stroke, line.IsStroked,
-                    ref pt1, ref pt2,
-                    style.LineStyle.Curvature,
-                    style.LineStyle.CurveOrientation,
-                    line.Start.Alignment,
-                    line.End.Alignment);
-            }
-            else
-            {
-                DrawLineInternal(_dc, stroke, line.IsStroked, ref pt1, ref pt2);
-            }
-
-            scaleDisposable?.Dispose();
-            translateDisposable?.Dispose();
-            */
         }
 
         /// <inheritdoc/>
