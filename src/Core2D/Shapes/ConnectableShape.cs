@@ -28,7 +28,7 @@ namespace Core2D.Shapes
         /// <inheritdoc/>
         public override void DrawPoints(object dc, IShapeRenderer renderer, double dx, double dy)
         {
-            if (renderer.State.SelectedShapes != null && renderer.State.DrawPoints == true)
+            if (renderer.State.SelectedShapes != null)
             {
                 if (renderer.State.SelectedShapes.Contains(this))
                 {
@@ -93,15 +93,42 @@ namespace Core2D.Shapes
         }
 
         /// <inheritdoc/>
-        public override IEnumerable<IPointShape> GetPoints()
+        public override void GetPoints(IList<IPointShape> points)
         {
-            return _connectors;
+            foreach (var connector in _connectors)
+            {
+                points.Add(connector);
+            }
         }
 
         /// <inheritdoc/>
         public override object Copy(IDictionary<object, object> shared)
         {
             throw new NotImplementedException();
+        }
+
+        /// <inheritdoc/>
+        public override bool IsDirty()
+        {
+            var isDirty = base.IsDirty();
+
+            foreach (var connector in Connectors)
+            {
+                isDirty |= connector.IsDirty();
+            }
+
+            return isDirty;
+        }
+
+        /// <inheritdoc/>
+        public override void Invalidate()
+        {
+            base.Invalidate();
+
+            foreach (var connector in Connectors)
+            {
+                connector.Invalidate();
+            }
         }
 
         /// <summary>

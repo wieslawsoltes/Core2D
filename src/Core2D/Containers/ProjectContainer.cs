@@ -260,7 +260,7 @@ namespace Core2D.Containers
                     if (CurrentContainer != container)
                     {
                         CurrentContainer = container;
-                        CurrentContainer.Invalidate();
+                        CurrentContainer.InvalidateLayer();
                     }
                 }
             }
@@ -285,6 +285,84 @@ namespace Core2D.Containers
         public override object Copy(IDictionary<object, object> shared)
         {
             throw new NotImplementedException();
+        }
+
+        /// <inheritdoc/>
+        public override bool IsDirty()
+        {
+            var isDirty = base.IsDirty();
+
+            isDirty |= Options.IsDirty();
+
+            foreach (var styleLibrary in StyleLibraries)
+            {
+                isDirty |= styleLibrary.IsDirty();
+            }
+
+            foreach (var groupLibrary in GroupLibraries)
+            {
+                isDirty |= groupLibrary.IsDirty();
+            }
+
+            foreach (var database in Databases)
+            {
+                isDirty |= database.IsDirty();
+            }
+
+            foreach (var template in Templates)
+            {
+                isDirty |= template.IsDirty();
+            }
+
+            foreach (var script in Scripts)
+            {
+                isDirty |= script.IsDirty();
+            }
+
+            foreach (var document in Documents)
+            {
+                isDirty |= document.IsDirty();
+            }
+
+            return isDirty;
+        }
+
+        /// <inheritdoc/>
+        public override void Invalidate()
+        {
+            base.Invalidate();
+
+            Options.Invalidate();
+
+            foreach (var styleLibrary in StyleLibraries)
+            {
+                styleLibrary.Invalidate();
+            }
+
+            foreach (var groupLibrary in GroupLibraries)
+            {
+                groupLibrary.Invalidate();
+            }
+
+            foreach (var database in Databases)
+            {
+                database.Invalidate();
+            }
+
+            foreach (var template in Templates)
+            {
+                template.Invalidate();
+            }
+
+            foreach (var script in Scripts)
+            {
+                script.Invalidate();
+            }
+
+            foreach (var document in Documents)
+            {
+                document.Invalidate();
+            }
         }
 
         /// <summary>

@@ -19,15 +19,33 @@ namespace Core2D.Path.Segments
         }
 
         /// <inheritdoc/>
-        public override IEnumerable<IPointShape> GetPoints()
+        public override void GetPoints(IList<IPointShape> points)
         {
-            yield return Point;
+            points.Add(Point);
         }
 
         /// <inheritdoc/>
         public override object Copy(IDictionary<object, object> shared)
         {
             throw new NotImplementedException();
+        }
+
+        /// <inheritdoc/>
+        public override bool IsDirty()
+        {
+            var isDirty = base.IsDirty();
+
+            isDirty |= Point.IsDirty();
+
+            return isDirty;
+        }
+
+        /// <inheritdoc/>
+        public override void Invalidate()
+        {
+            base.Invalidate();
+
+            Point.Invalidate();
         }
 
         /// <inheritdoc/>

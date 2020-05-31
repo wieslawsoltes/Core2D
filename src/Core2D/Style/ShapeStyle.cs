@@ -59,6 +59,29 @@ namespace Core2D.Style
             };
         }
 
+        /// <inheritdoc/>
+        public override bool IsDirty()
+        {
+            var isDirty = base.IsDirty();
+
+            isDirty |= LineStyle.IsDirty();
+            isDirty |= StartArrowStyle.IsDirty();
+            isDirty |= EndArrowStyle.IsDirty();
+            isDirty |= TextStyle.IsDirty();
+
+            return isDirty;
+        }
+
+        /// <inheritdoc/>
+        public override void Invalidate()
+        {
+            base.Invalidate();
+            LineStyle.Invalidate();
+            StartArrowStyle.Invalidate();
+            EndArrowStyle.Invalidate();
+            TextStyle.Invalidate();
+        }
+
         /// <summary>
         /// Check whether the <see cref="LineStyle"/> property has changed from its default value.
         /// </summary>

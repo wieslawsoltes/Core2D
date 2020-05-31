@@ -59,8 +59,7 @@ namespace Core2D.Shapes
         {
             if (State.Flags.HasFlag(ShapeStateFlags.Visible))
             {
-                renderer.Draw(dc, this, dx, dy);
-                base.DrawShape(dc, renderer, dx, dy);
+                renderer.DrawRectangle(dc, this, dx, dy);
             }
         }
 
@@ -87,6 +86,19 @@ namespace Core2D.Shapes
         public override object Copy(IDictionary<object, object> shared)
         {
             throw new NotImplementedException();
+        }
+
+        /// <inheritdoc/>
+        public override bool IsDirty()
+        {
+            var isDirty = base.IsDirty();
+            return isDirty;
+        }
+
+        /// <inheritdoc/>
+        public override void Invalidate()
+        {
+            base.Invalidate();
         }
 
         /// <summary>

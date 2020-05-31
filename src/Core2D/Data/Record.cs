@@ -38,6 +38,30 @@ namespace Core2D.Data
             };
         }
 
+        /// <inheritdoc/>
+        public override bool IsDirty()
+        {
+            var isDirty = base.IsDirty();
+
+            foreach (var value in Values)
+            {
+                isDirty |= value.IsDirty();
+            }
+
+            return isDirty;
+        }
+
+        /// <inheritdoc/>
+        public override void Invalidate()
+        {
+            base.Invalidate();
+
+            foreach (var value in Values)
+            {
+                value.Invalidate();
+            }
+        }
+
         /// <summary>
         /// Check whether the <see cref="Values"/> property has changed from its default value.
         /// </summary>

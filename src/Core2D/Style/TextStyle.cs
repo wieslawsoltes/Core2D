@@ -71,6 +71,23 @@ namespace Core2D.Style
             };
         }
 
+        /// <inheritdoc/>
+        public override bool IsDirty()
+        {
+            var isDirty = base.IsDirty();
+
+            isDirty |= FontStyle.IsDirty();
+
+            return isDirty;
+        }
+
+        /// <inheritdoc/>
+        public override void Invalidate()
+        {
+            base.Invalidate();
+            FontStyle.Invalidate();
+        }
+
         /// <summary>
         /// Check whether the <see cref="FontName"/> property has changed from its default value.
         /// </summary>

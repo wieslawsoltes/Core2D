@@ -25,6 +25,16 @@ namespace Core2D.Common.UnitTests
         public event PropertyChangedEventHandler PropertyChanged;
 #pragma warning restore CS0067
 
+        public virtual bool IsDirty()
+        {
+            throw new NotImplementedException();
+        }
+
+        public virtual void Invalidate()
+        {
+            throw new NotImplementedException();
+        }
+
         public object Copy(IDictionary<object, object> shared)
         {
             throw new NotImplementedException();
@@ -45,7 +55,7 @@ namespace Core2D.Common.UnitTests
             throw new NotImplementedException();
         }
 
-        public IEnumerable<IPointShape> GetPoints()
+        public void GetPoints(IList<IPointShape> points)
         {
             throw new NotImplementedException();
         }
@@ -66,11 +76,6 @@ namespace Core2D.Common.UnitTests
         }
 
         public object GetProperty(string name)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void MarkAsDirty(bool value)
         {
             throw new NotImplementedException();
         }

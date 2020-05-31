@@ -32,7 +32,7 @@ namespace Core2D.UnitTests
 
             bool raised = false;
 
-            target.InvalidateLayer += (sender, e) =>
+            target.InvalidateLayerHandler += (sender, e) =>
             {
                 raised = true;
             };
@@ -50,12 +50,12 @@ namespace Core2D.UnitTests
 
             bool raised = false;
 
-            target.InvalidateLayer += (sender, e) =>
+            target.InvalidateLayerHandler += (sender, e) =>
             {
                 raised = true;
             };
 
-            target.Invalidate();
+            target.InvalidateLayer();
 
             Assert.True(raised);
         }
@@ -68,12 +68,12 @@ namespace Core2D.UnitTests
 
             InvalidateLayerEventArgs args = null;
 
-            target.InvalidateLayer += (sender, e) =>
+            target.InvalidateLayerHandler += (sender, e) =>
             {
                 args = e;
             };
 
-            target.Invalidate();
+            target.InvalidateLayer();
 
             Assert.NotNull(args);
             Assert.True(args is InvalidateLayerEventArgs);

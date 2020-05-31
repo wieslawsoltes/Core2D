@@ -12,6 +12,7 @@ namespace Core2D.Shapes
     /// </summary>
     public class PathShape : BaseShape, IPathShape
     {
+        private List<IPointShape> _points;
         private IPathGeometry _geometry;
 
         /// <inheritdoc/>
@@ -24,32 +25,48 @@ namespace Core2D.Shapes
             set => Update(ref _geometry, value);
         }
 
+        private void UpdatePoints()
+        {
+            if (_points == null)
+            {
+                _points = new List<IPointShape>();
+                GetPoints(_points);
+            }
+            else
+            {
+                _points.Clear();
+                GetPoints(_points);
+            }
+        }
+
         /// <inheritdoc/>
         public override void DrawShape(object dc, IShapeRenderer renderer, double dx, double dy)
         {
             if (State.Flags.HasFlag(ShapeStateFlags.Visible))
             {
-                renderer.Draw(dc, this, dx, dy);
+                renderer.DrawPath(dc, this, dx, dy);
             }
         }
 
         /// <inheritdoc/>
         public override void DrawPoints(object dc, IShapeRenderer renderer, double dx, double dy)
         {
-            if (renderer.State.SelectedShapes != null && renderer.State.DrawPoints == true)
+            if (renderer.State.SelectedShapes != null)
             {
                 if (renderer.State.SelectedShapes.Contains(this))
                 {
-                    var points = GetPoints();
-                    foreach (var point in points)
+                    UpdatePoints();
+
+                    foreach (var point in _points)
                     {
                         point.DrawShape(dc, renderer, dx, dy);
                     }
                 }
                 else
                 {
-                    var points = GetPoints();
-                    foreach (var point in points)
+                    UpdatePoints();
+
+                    foreach (var point in _points)
                     {
                         if (renderer.State.SelectedShapes.Contains(point))
                         {
@@ -67,9 +84,9 @@ namespace Core2D.Shapes
 
             dataFlow.Bind(this, db, record);
 
-            var points = GetPoints();
+            UpdatePoints();
 
-            foreach (var point in points)
+            foreach (var point in _points)
             {
                 point.Bind(dataFlow, db, record);
             }
@@ -78,8 +95,9 @@ namespace Core2D.Shapes
         /// <inheritdoc/>
         public override void Move(ISelection selection, double dx, double dy)
         {
-            var points = GetPoints();
-            foreach (var point in points)
+            UpdatePoints();
+
+            foreach (var point in _points)
             {
                 point.Move(selection, dx, dy);
             }
@@ -90,8 +108,9 @@ namespace Core2D.Shapes
         {
             base.Select(selection);
 
-            var points = GetPoints();
-            foreach (var point in points)
+            UpdatePoints();
+
+            foreach (var point in _points)
             {
                 point.Select(selection);
             }
@@ -102,23 +121,51 @@ namespace Core2D.Shapes
         {
             base.Deselect(selection);
 
-            var points = GetPoints();
-            foreach (var point in points)
+            UpdatePoints();
+
+            foreach (var point in _points)
             {
                 point.Deselect(selection);
             }
         }
 
         /// <inheritdoc/>
-        public override IEnumerable<IPointShape> GetPoints()
+        public override void GetPoints(IList<IPointShape> points)
         {
-            return Geometry.Figures.SelectMany(f => f.GetPoints());
+            foreach (var figure in Geometry.Figures)
+            {
+                figure.GetPoints(points);
+            }
         }
 
         /// <inheritdoc/>
         public override object Copy(IDictionary<object, object> shared)
         {
             throw new NotImplementedException();
+        }
+
+        /// <inheritdoc/>
+        public override bool IsDirty()
+        {
+            var isDirty = base.IsDirty();
+
+            if (Geometry != null)
+            {
+                isDirty |= Geometry.IsDirty();
+            }
+
+            return isDirty;
+        }
+
+        /// <inheritdoc/>
+        public override void Invalidate()
+        {
+            base.Invalidate();
+
+            if (Geometry != null)
+            {
+                Geometry.Invalidate(); 
+            }
         }
 
         /// <inheritdoc/>

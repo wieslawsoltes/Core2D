@@ -18,10 +18,10 @@ namespace Core2D.Renderer.Presenters
 
             if (container.Template != null)
             {
-                renderer.Draw(dc, container.Template, dx, dy);
+                renderer.DrawPage(dc, container.Template, dx, dy);
             }
 
-            renderer.Draw(dc, container, dx, dy);
+            renderer.DrawPage(dc, container, dx, dy);
 
             renderer.State.DrawShapeState.Flags = flags;
         }

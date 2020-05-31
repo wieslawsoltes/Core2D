@@ -109,6 +109,25 @@ namespace Core2D.Style
             };
         }
 
+        /// <inheritdoc/>
+        public override bool IsDirty()
+        {
+            var isDirty = base.IsDirty();
+
+            isDirty |= StartTrigger.IsDirty();
+            isDirty |= EndTrigger.IsDirty();
+
+            return isDirty;
+        }
+
+        /// <inheritdoc/>
+        public override void Invalidate()
+        {
+            base.Invalidate();
+            StartTrigger.Invalidate();
+            EndTrigger.Invalidate();
+        }
+
         /// <summary>
         /// Parses a line fixed length string.
         /// </summary>

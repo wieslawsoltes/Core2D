@@ -353,19 +353,19 @@ namespace Core2D.Renderer.WinForms
         }
 
         /// <inheritdoc/>
-        public void Draw(object dc, IPageContainer container, double dx, double dy)
+        public void DrawPage(object dc, IPageContainer container, double dx, double dy)
         {
             foreach (var layer in container.Layers)
             {
                 if (layer.IsVisible)
                 {
-                    Draw(dc, layer, dx, dy);
+                    DrawLayer(dc, layer, dx, dy);
                 }
             }
         }
 
         /// <inheritdoc/>
-        public void Draw(object dc, ILayerContainer layer, double dx, double dy)
+        public void DrawLayer(object dc, ILayerContainer layer, double dx, double dy)
         {
             foreach (var shape in layer.Shapes)
             {
@@ -385,13 +385,13 @@ namespace Core2D.Renderer.WinForms
         }
 
         /// <inheritdoc/>
-        public void Draw(object dc, IPointShape point, double dx, double dy)
+        public void DrawPoint(object dc, IPointShape point, double dx, double dy)
         {
             // TODO:
         }
 
         /// <inheritdoc/>
-        public void Draw(object dc, ILineShape line, double dx, double dy)
+        public void DrawLine(object dc, ILineShape line, double dx, double dy)
         {
             var _gfx = dc as Graphics;
 
@@ -418,7 +418,7 @@ namespace Core2D.Renderer.WinForms
         }
 
         /// <inheritdoc/>
-        public void Draw(object dc, IRectangleShape rectangle, double dx, double dy)
+        public void DrawRectangle(object dc, IRectangleShape rectangle, double dx, double dy)
         {
             var _gfx = dc as Graphics;
 
@@ -463,10 +463,12 @@ namespace Core2D.Renderer.WinForms
 
             brush.Dispose();
             pen.Dispose();
+
+            DrawText(dc, rectangle, dx, dy);
         }
 
         /// <inheritdoc/>
-        public void Draw(object dc, IEllipseShape ellipse, double dx, double dy)
+        public void DrawEllipse(object dc, IEllipseShape ellipse, double dx, double dy)
         {
             var _gfx = dc as Graphics;
 
@@ -500,57 +502,58 @@ namespace Core2D.Renderer.WinForms
 
             brush.Dispose();
             pen.Dispose();
+
+            DrawText(dc, ellipse, dx, dy);
         }
 
         /// <inheritdoc/>
-        public void Draw(object dc, IArcShape arc, double dx, double dy)
+        public void DrawArc(object dc, IArcShape arc, double dx, double dy)
         {
             var a = new GdiArc(
                 Point2.FromXY(arc.Point1.X, arc.Point1.Y),
                 Point2.FromXY(arc.Point2.X, arc.Point2.Y),
                 Point2.FromXY(arc.Point3.X, arc.Point3.Y),
                 Point2.FromXY(arc.Point4.X, arc.Point4.Y));
-            if (a.Width <= 0.0 || a.Height <= 0.0)
+
+            if (a.Width > 0.0 && a.Height > 0.0)
             {
-                return;
+                var _gfx = dc as Graphics;
+
+                var brush = ToBrush(arc.Style.Fill);
+                var pen = ToPen(arc.Style, _scaleToPage);
+
+                if (arc.IsFilled)
+                {
+                    var path = new GraphicsPath();
+                    path.AddArc(
+                        _scaleToPage(a.X + dx),
+                        _scaleToPage(a.Y + dy),
+                        _scaleToPage(a.Width),
+                        _scaleToPage(a.Height),
+                        (float)a.StartAngle,
+                        (float)a.SweepAngle);
+                    _gfx.FillPath(brush, path);
+                }
+
+                if (arc.IsStroked)
+                {
+                    _gfx.DrawArc(
+                        pen,
+                        _scaleToPage(a.X + dx),
+                        _scaleToPage(a.Y + dy),
+                        _scaleToPage(a.Width),
+                        _scaleToPage(a.Height),
+                        (float)a.StartAngle,
+                        (float)a.SweepAngle);
+                }
+
+                brush.Dispose();
+                pen.Dispose();
             }
-
-            var _gfx = dc as Graphics;
-
-            var brush = ToBrush(arc.Style.Fill);
-            var pen = ToPen(arc.Style, _scaleToPage);
-
-            if (arc.IsFilled)
-            {
-                var path = new GraphicsPath();
-                path.AddArc(
-                    _scaleToPage(a.X + dx),
-                    _scaleToPage(a.Y + dy),
-                    _scaleToPage(a.Width),
-                    _scaleToPage(a.Height),
-                    (float)a.StartAngle,
-                    (float)a.SweepAngle);
-                _gfx.FillPath(brush, path);
-            }
-
-            if (arc.IsStroked)
-            {
-                _gfx.DrawArc(
-                    pen,
-                    _scaleToPage(a.X + dx),
-                    _scaleToPage(a.Y + dy),
-                    _scaleToPage(a.Width),
-                    _scaleToPage(a.Height),
-                    (float)a.StartAngle,
-                    (float)a.SweepAngle);
-            }
-
-            brush.Dispose();
-            pen.Dispose();
         }
 
         /// <inheritdoc/>
-        public void Draw(object dc, ICubicBezierShape cubicBezier, double dx, double dy)
+        public void DrawCubicBezier(object dc, ICubicBezierShape cubicBezier, double dx, double dy)
         {
             var _gfx = dc as Graphics;
 
@@ -591,7 +594,7 @@ namespace Core2D.Renderer.WinForms
         }
 
         /// <inheritdoc/>
-        public void Draw(object dc, IQuadraticBezierShape quadraticBezier, double dx, double dy)
+        public void DrawQuadraticBezier(object dc, IQuadraticBezierShape quadraticBezier, double dx, double dy)
         {
             var _gfx = dc as Graphics;
 
@@ -641,7 +644,7 @@ namespace Core2D.Renderer.WinForms
         }
 
         /// <inheritdoc/>
-        public void Draw(object dc, ITextShape text, double dx, double dy)
+        public void DrawText(object dc, ITextShape text, double dx, double dy)
         {
             var _gfx = dc as Graphics;
 
@@ -729,7 +732,7 @@ namespace Core2D.Renderer.WinForms
         }
 
         /// <inheritdoc/>
-        public void Draw(object dc, IImageShape image, double dx, double dy)
+        public void DrawImage(object dc, IImageShape image, double dx, double dy)
         {
             var _gfx = dc as Graphics;
 
@@ -770,29 +773,29 @@ namespace Core2D.Renderer.WinForms
             }
             else
             {
-                if (State.ImageCache == null || string.IsNullOrEmpty(image.Key))
+                if (State.ImageCache != null && !string.IsNullOrEmpty(image.Key))
                 {
-                    return;
-                }
+                    var bytes = State.ImageCache.GetImage(image.Key);
+                    if (bytes != null)
+                    {
+                        var ms = new System.IO.MemoryStream(bytes);
+                        var bi = Image.FromStream(ms);
+                        ms.Dispose();
 
-                var bytes = State.ImageCache.GetImage(image.Key);
-                if (bytes != null)
-                {
-                    var ms = new System.IO.MemoryStream(bytes);
-                    var bi = Image.FromStream(ms);
-                    ms.Dispose();
+                        _biCache.Set(image.Key, bi);
 
-                    _biCache.Set(image.Key, bi);
-
-                    _gfx.DrawImage(bi, srect);
+                        _gfx.DrawImage(bi, srect);
+                    }
                 }
             }
 
             brush.Dispose();
+
+            DrawText(dc, image, dx, dy);
         }
 
         /// <inheritdoc/>
-        public void Draw(object dc, IPathShape path, double dx, double dy)
+        public void DrawPath(object dc, IPathShape path, double dx, double dy)
         {
             var _gfx = dc as Graphics;
 

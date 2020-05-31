@@ -1,5 +1,7 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using Core2D;
+using Core2D.Shapes;
 using Xunit;
 
 namespace Core2D.UnitTests
@@ -14,7 +16,8 @@ namespace Core2D.UnitTests
         {
             var segment = _factory.CreateCubicBezierSegment(_factory.CreatePointShape(), _factory.CreatePointShape(), _factory.CreatePointShape(), true, true);
 
-            var target = segment.GetPoints();
+            var target = new List<IPointShape>();
+            segment.GetPoints(target);
 
             Assert.Equal(3, target.Count());
 

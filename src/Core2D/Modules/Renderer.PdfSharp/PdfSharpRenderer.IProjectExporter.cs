@@ -129,10 +129,10 @@ namespace Core2D.Renderer.PdfSharp
                 Fill(gfx, 0, 0, pdfPage.Width.Value / scale, pdfPage.Height.Value / scale, container.Template.Background);
 
                 // Draw template contents to pdf graphics.
-                Draw(gfx, container.Template, 0.0, 0.0);
+                DrawPage(gfx, container.Template, 0.0, 0.0);
 
                 // Draw page contents to pdf graphics.
-                Draw(gfx, container, 0.0, 0.0);
+                DrawPage(gfx, container, 0.0, 0.0);
             }
 
             return pdfPage;

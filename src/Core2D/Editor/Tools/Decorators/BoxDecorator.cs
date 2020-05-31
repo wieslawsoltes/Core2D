@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
 using Core2D;
 using Core2D.Containers;
 using Core2D.Input;
@@ -168,6 +170,30 @@ namespace Core2D.Editor.Tools.Decorators
         }
 
         /// <inheritdoc/>
+        public override bool IsDirty()
+        {
+            var isDirty = base.IsDirty();
+
+            foreach (var handle in _handles)
+            {
+                isDirty |= handle.IsDirty();
+            }
+
+            return isDirty;
+        }
+
+        /// <inheritdoc/>
+        public override void Invalidate()
+        {
+            base.Invalidate();
+
+            foreach (var handle in _handles)
+            {
+                handle.Invalidate();
+            }
+        }
+
+        /// <inheritdoc/>
         public virtual void DrawShape(object dc, IShapeRenderer renderer, double dx, double dy)
         {
             if (_isVisible)
@@ -269,6 +295,8 @@ namespace Core2D.Editor.Tools.Decorators
                 _rightHandle.State.Flags &= ~ShapeStateFlags.Visible;
                 _topHandle.State.Flags &= ~ShapeStateFlags.Visible;
                 _bottomHandle.State.Flags &= ~ShapeStateFlags.Visible;
+                _topRightHandle.State.Flags &= ~ShapeStateFlags.Visible;
+                _bottomLeftHandle.State.Flags &= ~ShapeStateFlags.Visible;
             }
             else
             {
@@ -276,9 +304,11 @@ namespace Core2D.Editor.Tools.Decorators
                 _rightHandle.State.Flags |= ShapeStateFlags.Visible;
                 _topHandle.State.Flags |= ShapeStateFlags.Visible;
                 _bottomHandle.State.Flags |= ShapeStateFlags.Visible;
+                _topRightHandle.State.Flags |= ShapeStateFlags.Visible;
+                _bottomLeftHandle.State.Flags |= ShapeStateFlags.Visible;
             }
 
-            _layer.Invalidate();
+            _layer.InvalidateLayer();
         }
 
         /// <inheritdoc/>
@@ -322,7 +352,7 @@ namespace Core2D.Editor.Tools.Decorators
             shapesBuilder.Add(_rightHandle);
             _layer.Shapes = shapesBuilder.ToImmutable();
 
-            _layer.Invalidate();
+            _layer.InvalidateLayer();
         }
 
         /// <inheritdoc/>
@@ -362,7 +392,7 @@ namespace Core2D.Editor.Tools.Decorators
             shapesBuilder.Remove(_leftHandle);
             shapesBuilder.Remove(_rightHandle);
             _layer.Shapes = shapesBuilder.ToImmutable();
-            _layer.Invalidate();
+            _layer.InvalidateLayer();
         }
 
         /// <inheritdoc/>
@@ -384,11 +414,12 @@ namespace Core2D.Editor.Tools.Decorators
                 _currentHandle = null;
                 _points = null;
                 _rotateAngle = 0.0;
-                _layer.Invalidate();
+                _layer.InvalidateLayer();
             }
 
             double radius = editor.Project.Options.HitThreshold / editor.PageState.ZoomX;
-            var result = editor.HitTest.TryToGetShape(_handles, new Point2(x, y), radius, editor.PageState.ZoomX);
+            var handles = _handles.Where(x => x.State.Flags.HasFlag(ShapeStateFlags.Visible));
+            var result = editor.HitTest.TryToGetShape(handles, new Point2(x, y), radius, editor.PageState.ZoomX);
             if (result != null)
             {
                 if (result == _boundsHandle)
@@ -442,7 +473,7 @@ namespace Core2D.Editor.Tools.Decorators
                     _historyY = _startY;
                     _points = null;
                     _rotateAngle = 0.0;
-                    _layer.Invalidate();
+                    _layer.InvalidateLayer();
                     return true;
                 }
             }
@@ -463,6 +494,8 @@ namespace Core2D.Editor.Tools.Decorators
             }
 
             var editor = _serviceProvider.GetService<IProjectEditor>();
+
+            bool isProportionalResize = args.Modifier.HasFlag(ModifierFlags.Shift);
 
             (double sx, double sy) = editor.TryToSnap(args);
             double dx = sx - _startX;
@@ -495,46 +528,178 @@ namespace Core2D.Editor.Tools.Decorators
                     break;
                 case Mode.Top:
                     {
-                        _groupBox.ScaleTop(dy, _points);
+                        if (isProportionalResize)
+                        {
+                            var width = _groupBox.Bounds.Width;
+                            var height = _groupBox.Bounds.Height;
+                            var ratioHeight = (height + dy) / height;
+
+                            dx = (width * ratioHeight) - width;
+
+                            _groupBox.ScaleLeft(dx / 2.0, _points);
+                            _groupBox.ScaleRight(-dx / 2.0, _points);
+
+                            _groupBox.ScaleTop(dy, _points);
+                        }
+                        else
+                        {
+                            _groupBox.ScaleTop(dy, _points);
+                        }
                     }
                     break;
                 case Mode.Bottom:
                     {
-                        _groupBox.ScaleBottom(dy, _points);
+                        if (isProportionalResize)
+                        {
+                            var width = _groupBox.Bounds.Width;
+                            var height = _groupBox.Bounds.Height;
+                            var ratioHeight = (height + dy) / height;
+
+                            dx = (width * ratioHeight) - width;
+
+                            _groupBox.ScaleLeft(-dx / 2.0, _points);
+                            _groupBox.ScaleRight(dx / 2.0, _points);
+
+                            _groupBox.ScaleBottom(dy, _points);
+                        }
+                        else
+                        {
+                            _groupBox.ScaleBottom(dy, _points);
+                        }
                     }
                     break;
                 case Mode.Left:
                     {
-                        _groupBox.ScaleLeft(dx, _points);
+                        if (isProportionalResize)
+                        {
+                            var width = _groupBox.Bounds.Width;
+                            var height = _groupBox.Bounds.Height;
+                            var ratioWidth = (width + dx) / width;
+
+                            dy = (height * ratioWidth) - height;
+
+                            _groupBox.ScaleTop(dy / 2.0, _points);
+                            _groupBox.ScaleBottom(-dy / 2.0, _points);
+
+                            _groupBox.ScaleLeft(dx, _points);
+                        }
+                        else
+                        {
+                            _groupBox.ScaleLeft(dx, _points);
+                        }
                     }
                     break;
                 case Mode.Right:
                     {
-                        _groupBox.ScaleRight(dx, _points);
+                        if (isProportionalResize)
+                        {
+                            var width = _groupBox.Bounds.Width;
+                            var height = _groupBox.Bounds.Height;
+                            var ratioWidth = (width + dx) / width;
+
+                            dy = (height * ratioWidth) - height;
+
+                            _groupBox.ScaleTop(-dy / 2.0, _points);
+                            _groupBox.ScaleBottom(dy / 2.0, _points);
+
+                            _groupBox.ScaleRight(dx, _points);
+                        }
+                        else
+                        {
+                            _groupBox.ScaleRight(dx, _points);
+                        }
                     }
                     break;
                 case Mode.TopLeft:
                     {
-                        _groupBox.ScaleTop(dy, _points);
-                        _groupBox.ScaleLeft(dx, _points);
+                        if (isProportionalResize)
+                        {
+                            var width = _groupBox.Bounds.Width;
+                            var height = _groupBox.Bounds.Height;
+
+                            var ratioWidth = (width + dx) / width;
+                            dy = (height * ratioWidth) - height;
+
+                            //var ratioHeight = (height + dy) / height;
+                            //dx = (width * ratioHeight) - width;
+
+                            _groupBox.ScaleTop(dy, _points);
+                            _groupBox.ScaleLeft(dx, _points);
+                        }
+                        else
+                        {
+                            _groupBox.ScaleTop(dy, _points);
+                            _groupBox.ScaleLeft(dx, _points);
+                        }
                     }
                     break;
                 case Mode.TopRight:
                     {
-                        _groupBox.ScaleTop(dy, _points);
-                        _groupBox.ScaleRight(dx, _points);
+                        if (isProportionalResize)
+                        {
+                            var width = _groupBox.Bounds.Width;
+                            var height = _groupBox.Bounds.Height;
+
+                            var ratioWidth = (width - dx) / width;
+                            dy = (height * ratioWidth) - height;
+
+                            //var ratioHeight = (height - dy) / height;
+                            //dx = (width * ratioHeight) - width;
+
+                            _groupBox.ScaleTop(dy, _points);
+                            _groupBox.ScaleRight(dx, _points);
+                        }
+                        else
+                        {
+                            _groupBox.ScaleTop(dy, _points);
+                            _groupBox.ScaleRight(dx, _points);
+                        }
                     }
                     break;
                 case Mode.BottomLeft:
                     {
-                        _groupBox.ScaleBottom(dy, _points);
-                        _groupBox.ScaleLeft(dx, _points);
+                        if (isProportionalResize)
+                        {
+                            var width = _groupBox.Bounds.Width;
+                            var height = _groupBox.Bounds.Height;
+
+                            var ratioWidth = (width - dx) / width;
+                            dy = (height * ratioWidth) - height;
+
+                            //var ratioHeight = (height - dy) / height;
+                            //dx = (width * ratioHeight) - width;
+
+                            _groupBox.ScaleBottom(dy, _points);
+                            _groupBox.ScaleLeft(dx, _points);
+                        }
+                        else
+                        {
+                            _groupBox.ScaleBottom(dy, _points);
+                            _groupBox.ScaleLeft(dx, _points);
+                        }
                     }
                     break;
                 case Mode.BottomRight:
                     {
-                        _groupBox.ScaleBottom(dy, _points);
-                        _groupBox.ScaleRight(dx, _points);
+                        if (isProportionalResize)
+                        {
+                            var width = _groupBox.Bounds.Width;
+                            var height = _groupBox.Bounds.Height;
+
+                            var ratioWidth = (width + dx) / width;
+                            dy = (height * ratioWidth) - height;
+
+                            //var ratioHeight = (height + dy) / height;
+                            //dx = (width * ratioHeight) - width;
+
+                            _groupBox.ScaleBottom(dy, _points);
+                            _groupBox.ScaleRight(dx, _points);
+                        }
+                        else
+                        {
+                            _groupBox.ScaleBottom(dy, _points);
+                            _groupBox.ScaleRight(dx, _points);
+                        }
                     }
                     break;
             }

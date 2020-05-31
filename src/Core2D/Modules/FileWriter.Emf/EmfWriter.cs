@@ -133,8 +133,8 @@ namespace Core2D.FileWriter.Emf
 
                     g.PageUnit = GraphicsUnit.Display;
 
-                    r.Draw(g, container.Template, 0.0, 0.0);
-                    r.Draw(g, container, 0.0, 0.0);
+                    r.DrawPage(g, container.Template, 0.0, 0.0);
+                    r.DrawPage(g, container, 0.0, 0.0);
 
                     r.ClearCache(isZooming: false);
                 }

@@ -10,6 +10,7 @@ namespace Core2D
     /// </summary>
     public abstract class ObservableObject : IObservableObject
     {
+        private bool _isDirty;
         private IObservableObject _owner = null;
         private string _id = Guid.NewGuid().ToString();
         private string _name = "";
@@ -35,13 +36,17 @@ namespace Core2D
             set => Update(ref _name, value);
         }
 
-        /// <summary>
-        /// Gets or sets is dirty flag.
-        /// </summary>
-        internal bool IsDirty { get; set; }
+        /// <inheritdoc/>
+        public virtual bool IsDirty()
+        {
+            return _isDirty;
+        }
 
         /// <inheritdoc/>
-        public void MarkAsDirty(bool value) => IsDirty = value;
+        public virtual void Invalidate()
+        {
+            _isDirty = false;
+        }
 
         /// <summary>
         /// Occurs when a property value changes.
@@ -63,7 +68,7 @@ namespace Core2D
             if (!Equals(field, value))
             {
                 field = value;
-                IsDirty = true;
+                _isDirty = true;
                 Notify(propertyName);
                 return true;
             }
@@ -89,7 +94,7 @@ namespace Core2D
         public virtual bool ShouldSerializeName() => !string.IsNullOrWhiteSpace(_name);
 
         /// <summary>
-        /// The <see cref="IsDirty"/> property is not serialized.
+        /// The <see cref="_isDirty"/> property is not serialized.
         /// </summary>
         /// <returns>Returns always false.</returns>
         public virtual bool ShouldSerializeIsDirty() => false;

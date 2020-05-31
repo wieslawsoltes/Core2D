@@ -24,10 +24,14 @@ namespace Core2D
         string Name { get; set; }
 
         /// <summary>
-        /// Set the IsDirty flag value.
+        /// Gets is dirty flag.
         /// </summary>
-        /// <param name="value">The new value of IsDirty flag.</param>
-        void MarkAsDirty(bool value);
+        public bool IsDirty();
+
+        /// <summary>
+        /// Invalidates dirty flag.
+        /// </summary>
+        void Invalidate();
 
         /// <summary>
         /// Notify observers about property changes.

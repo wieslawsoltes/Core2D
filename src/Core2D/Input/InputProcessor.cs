@@ -1,5 +1,4 @@
-﻿#define USE_CUSTOM_OBSERVER
-using System;
+﻿using System;
 
 namespace Core2D.Input
 {

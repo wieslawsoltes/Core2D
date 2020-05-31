@@ -84,6 +84,6 @@ namespace Core2D.Containers
         /// <summary>
         /// Invalidate container layers.
         /// </summary>
-        void Invalidate();
+        void InvalidateLayer();
     }
 }

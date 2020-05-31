@@ -598,7 +598,7 @@ namespace Core2D.Editor
             OnLoad(ContainerFactory?.GetProject() ?? Factory.CreateProjectContainer(), string.Empty);
             OnNavigate("EditorView");
             CanvasPlatform?.ResetZoom?.Invoke();
-            CanvasPlatform?.Invalidate?.Invoke();
+            CanvasPlatform?.InvalidateControl?.Invoke();
         }
 
         /// <inheritdoc/>
@@ -636,7 +636,7 @@ namespace Core2D.Editor
                     OnAddRecent(path, project.Name);
                     OnNavigate("EditorView");
                     CanvasPlatform?.ResetZoom?.Invoke();
-                    CanvasPlatform?.Invalidate?.Invoke();
+                    CanvasPlatform?.InvalidateControl?.Invoke();
                 }
             }
             catch (Exception ex)
@@ -1350,7 +1350,7 @@ namespace Core2D.Editor
                     container.WorkingLayer.Shapes = ImmutableArray.Create<IBaseShape>();
                     container.HelperLayer.Shapes = ImmutableArray.Create<IBaseShape>();
 
-                    Project.CurrentContainer.Invalidate();
+                    Project.CurrentContainer.InvalidateLayer();
                     OnHideDecorator();
                 }
             }
@@ -2498,7 +2498,7 @@ namespace Core2D.Editor
             if (Project != null && template != null)
             {
                 Project.SetCurrentContainer(template);
-                Project.CurrentContainer?.Invalidate();
+                Project.CurrentContainer?.InvalidateLayer();
             }
         }
 
@@ -2529,7 +2529,7 @@ namespace Core2D.Editor
             if (page != null && template != null && page != template)
             {
                 Project.ApplyTemplate(page, template);
-                Project.CurrentContainer.Invalidate();
+                Project.CurrentContainer.InvalidateLayer();
             }
         }
 
@@ -2783,7 +2783,7 @@ namespace Core2D.Editor
                     DocumentRenderer.ClearCache(isZooming);
                 }
 
-                Project?.CurrentContainer?.Invalidate();
+                Project?.CurrentContainer?.InvalidateLayer();
             }
             catch (Exception ex)
             {
@@ -3566,7 +3566,7 @@ namespace Core2D.Editor
                 layer.Shapes = next;
 
                 PageState.SelectedShapes = default;
-                layer.Invalidate();
+                layer.InvalidateLayer();
 
                 OnHideDecorator();
             }
@@ -3614,11 +3614,11 @@ namespace Core2D.Editor
 
             if (layer != null)
             {
-                layer.Invalidate();
+                layer.InvalidateLayer();
             }
             else
             {
-                CanvasPlatform?.Invalidate?.Invoke();
+                CanvasPlatform?.InvalidateControl?.Invoke();
             }
         }
 
@@ -3639,11 +3639,11 @@ namespace Core2D.Editor
 
             if (layer != null)
             {
-                layer.Invalidate();
+                layer.InvalidateLayer();
             }
             else
             {
-                CanvasPlatform?.Invalidate?.Invoke();
+                CanvasPlatform?.InvalidateControl?.Invoke();
             }
         }
 
@@ -3659,13 +3659,13 @@ namespace Core2D.Editor
 
             if (layer != null)
             {
-                layer.Invalidate();
+                layer.InvalidateLayer();
             }
             else
             {
-                if (CanvasPlatform?.Invalidate != null)
+                if (CanvasPlatform?.InvalidateControl != null)
                 {
-                    CanvasPlatform?.Invalidate();
+                    CanvasPlatform?.InvalidateControl();
                 }
             }
         }
@@ -4245,7 +4245,17 @@ namespace Core2D.Editor
                 {
                     case MoveMode.Point:
                         {
-                            var distinct = shapes.Where(s => !s.State.Flags.HasFlag(ShapeStateFlags.Locked)).SelectMany(s => s.GetPoints()).Distinct().ToList();
+                            var points = new List<IPointShape>();
+
+                            foreach (var shape in shapes)
+                            {
+                                if (!shape.State.Flags.HasFlag(ShapeStateFlags.Locked))
+                                {
+                                    shape.GetPoints(points);
+                                }
+                            }
+
+                            var distinct = points.Distinct().ToList();
                             MoveShapesByWithHistory(distinct, dx, dy);
                         }
                         break;

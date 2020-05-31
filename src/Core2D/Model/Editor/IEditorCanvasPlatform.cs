@@ -11,7 +11,7 @@ namespace Core2D.Editor
         /// Gets or sets invalidate action.
         /// </summary>
         /// <remarks>Invalidate current container control.</remarks>
-        Action Invalidate { get; set; }
+        Action InvalidateControl { get; set; }
 
         /// <summary>
         /// Gets or sets reset zoom action.

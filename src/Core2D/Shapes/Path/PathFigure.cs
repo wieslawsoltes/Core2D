@@ -54,13 +54,13 @@ namespace Core2D.Path
         }
 
         /// <inheritdoc/>
-        public IEnumerable<IPointShape> GetPoints()
+        public void GetPoints(IList<IPointShape> points)
         {
-            yield return StartPoint;
+            points.Add(StartPoint);
 
-            foreach (var point in Segments.SelectMany(s => s.GetPoints()))
+            foreach (var segment in Segments)
             {
-                yield return point;
+                segment.GetPoints(points);
             }
         }
 
@@ -68,6 +68,34 @@ namespace Core2D.Path
         public override object Copy(IDictionary<object, object> shared)
         {
             throw new NotImplementedException();
+        }
+
+        /// <inheritdoc/>
+        public override bool IsDirty()
+        {
+            var isDirty = base.IsDirty();
+
+            isDirty |= StartPoint.IsDirty();
+
+            foreach (var segment in Segments)
+            {
+                isDirty |= segment.IsDirty();
+            }
+
+            return isDirty;
+        }
+
+        /// <inheritdoc/>
+        public override void Invalidate()
+        {
+            base.Invalidate();
+
+            StartPoint.Invalidate();
+
+            foreach (var segment in Segments)
+            {
+                segment.Invalidate();
+            }
         }
 
         public string ToXamlString(ImmutableArray<IPathSegment> segments)

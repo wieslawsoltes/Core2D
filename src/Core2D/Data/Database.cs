@@ -58,6 +58,40 @@ namespace Core2D.Data
             };
         }
 
+        /// <inheritdoc/>
+        public override bool IsDirty()
+        {
+            var isDirty = base.IsDirty();
+
+            foreach (var column in Columns)
+            {
+                isDirty |= column.IsDirty();
+            }
+
+            foreach (var record in Records)
+            {
+                isDirty |= record.IsDirty();
+            }
+
+            return isDirty;
+        }
+
+        /// <inheritdoc/>
+        public override void Invalidate()
+        {
+            base.Invalidate();
+
+            foreach (var column in Columns)
+            {
+                column.Invalidate();
+            }
+
+            foreach (var record in Records)
+            {
+                record.Invalidate();
+            }
+        }
+
         /// <summary>
         /// Check whether the <see cref="IdColumnName"/> property has changed from its default value.
         /// </summary>

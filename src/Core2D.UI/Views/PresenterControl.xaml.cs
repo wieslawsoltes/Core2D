@@ -157,6 +157,9 @@ namespace Core2D.UI.Views
             public PresenterType PresenterType;
         }
 
+#if USE_SKIA
+        //private RenderTargetBitmap _renderTarget;
+
         internal class CustomDrawOperation : ICustomDrawOperation
         {
             public PresenterControl PresenterControl { get; set; }
@@ -188,9 +191,7 @@ namespace Core2D.UI.Views
                 canvas.Restore();
             }
         }
-
-        //private RenderTargetBitmap _renderTarget;
-#if USE_SKIA
+        
         private CustomDrawOperation _customDrawOperation;
 #endif
 
@@ -209,10 +210,10 @@ namespace Core2D.UI.Views
                 DataFlow = DataFlow ?? GetValue(RendererOptions.DataFlowProperty),
                 PresenterType = PresenterType,
             };
-
+#if USE_SKIA
             //double width = Bounds.Width;
             //double height = Bounds.Height;
-
+            //
             //if (width > 0 && height > 0)
             //{
             //    if (_renderTarget == null)
@@ -224,34 +225,33 @@ namespace Core2D.UI.Views
             //        _renderTarget.Dispose();
             //        _renderTarget = new RenderTargetBitmap(new PixelSize((int)width, (int)height), new Vector(96, 96));
             //    }
-
+            //
             //    using var drawingContextImpl = _renderTarget.CreateDrawingContext(null);
             //    var skiaDrawingContextImpl = drawingContextImpl as ISkiaDrawingContextImpl;
-
+            //
             //    var canvas = skiaDrawingContextImpl.SkCanvas;
-
+            //
             //    canvas.Clear();
             //    canvas.Save();
-
+            //
             //    Draw(customState, canvas);
-
+            //
             //    canvas.Restore();
-
+            //
             //    context.DrawImage(_renderTarget,
             //        new Rect(0, 0, _renderTarget.PixelSize.Width, _renderTarget.PixelSize.Height),
             //        new Rect(0, 0, width, height));
             //}
 
-#if USE_SKIA
             if (_customDrawOperation == null)
             {
                 _customDrawOperation = new CustomDrawOperation();
             }
-
+            
             _customDrawOperation.PresenterControl = this;
             _customDrawOperation.CustomState = customState;
             _customDrawOperation.Bounds = ZoomBorder != null ? ZoomBorder.Bounds : this.Bounds;
-
+            
             context.Custom(_customDrawOperation);
 #else
             Draw(customState, context);
@@ -275,13 +275,18 @@ namespace Core2D.UI.Views
                         {
                             var db = (object)customState.Container.Data.Properties;
                             var record = (object)customState.Container.Data.Record;
-
+#if USE_DIAGNOSTICS
+                            var swDataFlow = Stopwatch.StartNew();
+#endif
                             if (customState.Container.Template != null)
                             {
                                 customState.DataFlow.Bind(customState.Container.Template, db, record);
                             }
-
                             customState.DataFlow.Bind(customState.Container, db, record);
+#if USE_DIAGNOSTICS
+                            swDataFlow.Stop();
+                            Trace.WriteLine($"DataFlow {swDataFlow.Elapsed.TotalMilliseconds}ms");
+#endif
                         }
                     }
                     break;
@@ -290,6 +295,7 @@ namespace Core2D.UI.Views
                         if (customState.Container != null && customState.Renderer != null)
                         {
                             s_templatePresenter.Render(context, customState.Renderer, customState.Container, 0.0, 0.0);
+                            customState.Container?.Template?.Invalidate();
                         }
                     }
                     break;
@@ -297,7 +303,24 @@ namespace Core2D.UI.Views
                     {
                         if (customState.Container != null && customState.Renderer != null)
                         {
+#if USE_DIAGNOSTICS
+                            var swRender = Stopwatch.StartNew();
+#endif
                             s_editorPresenter.Render(context, customState.Renderer, customState.Container, 0.0, 0.0);
+#if USE_DIAGNOSTICS
+                            swRender.Stop();
+                            Trace.WriteLine($"Render {swRender.Elapsed.TotalMilliseconds}ms");
+#endif
+#if USE_DIAGNOSTICS
+                            var swInvalidate = Stopwatch.StartNew();
+#endif
+                            customState.Container?.Invalidate();
+                            customState.Renderer.State.PointStyle.Invalidate();
+                            customState.Renderer.State.SelectedPointStyle.Invalidate();
+#if USE_DIAGNOSTICS
+                            swInvalidate.Stop();
+                            Trace.WriteLine($"Invalidate {swInvalidate.Elapsed.TotalMilliseconds}ms");
+#endif
                         }
                     }
                     break;

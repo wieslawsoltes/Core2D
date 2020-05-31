@@ -11,16 +11,16 @@ namespace Core2D.UI.Editor
     {
         private readonly IServiceProvider _serviceProvider;
 
-        private Action _invalidate;
+        private Action _invalidateControl;
         private Action _resetZoom;
         private Action _extentZoom;
         private object _zoom;
 
         /// <inheritdoc/>
-        public Action Invalidate
+        public Action InvalidateControl
         {
-            get => _invalidate;
-            set => Update(ref _invalidate, value);
+            get => _invalidateControl;
+            set => Update(ref _invalidateControl, value);
         }
 
         /// <inheritdoc/>

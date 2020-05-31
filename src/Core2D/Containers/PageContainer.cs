@@ -138,29 +138,29 @@ namespace Core2D.Containers
         public void SetCurrentLayer(ILayerContainer layer) => CurrentLayer = layer;
 
         /// <inheritdoc/>
-        public virtual void Invalidate()
+        public virtual void InvalidateLayer()
         {
             if (Template != null)
             {
-                Template.Invalidate();
+                Template.InvalidateLayer();
             }
 
             if (Layers != null)
             {
                 foreach (var layer in Layers)
                 {
-                    layer.Invalidate();
+                    layer.InvalidateLayer();
                 }
             }
 
             if (WorkingLayer != null)
             {
-                WorkingLayer.Invalidate();
+                WorkingLayer.InvalidateLayer();
             }
 
             if (HelperLayer != null)
             {
-                HelperLayer.Invalidate();
+                HelperLayer.InvalidateLayer();
             }
         }
 
@@ -168,6 +168,62 @@ namespace Core2D.Containers
         public override object Copy(IDictionary<object, object> shared)
         {
             throw new NotImplementedException();
+        }
+
+        /// <inheritdoc/>
+        public override bool IsDirty()
+        {
+            var isDirty = base.IsDirty();
+
+            if (Background != null)
+            {
+                isDirty |= Background.IsDirty(); 
+            }
+
+            foreach (var layer in Layers)
+            {
+                isDirty |= layer.IsDirty();
+            }
+
+            if (WorkingLayer != null)
+            {
+                isDirty |= WorkingLayer.IsDirty(); 
+            }
+
+            if (HelperLayer != null)
+            {
+                isDirty |= HelperLayer.IsDirty(); 
+            }
+
+            if (Template != null)
+            {
+                isDirty |= Template.IsDirty(); 
+            }
+
+            if (Data != null)
+            {
+                isDirty |= Data.IsDirty(); 
+            }
+
+            return isDirty;
+        }
+
+        /// <inheritdoc/>
+        public override void Invalidate()
+        {
+            base.Invalidate();
+
+            Background?.Invalidate();
+
+            foreach (var layer in Layers)
+            {
+                layer.Invalidate();
+            }
+
+            WorkingLayer?.Invalidate();
+            HelperLayer?.Invalidate();
+            Template?.Invalidate();
+            Data?.Invalidate();
         }
 
         /// <summary>

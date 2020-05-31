@@ -35,14 +35,14 @@ namespace Core2D.Shapes
         {
             if (State.Flags.HasFlag(ShapeStateFlags.Visible))
             {
-                renderer.Draw(dc, this, dx, dy);
+                renderer.DrawLine(dc, this, dx, dy);
             }
         }
 
         /// <inheritdoc/>
         public override void DrawPoints(object dc, IShapeRenderer renderer, double dx, double dy)
         {
-            if (renderer.State.SelectedShapes != null && renderer.State.DrawPoints == true)
+            if (renderer.State.SelectedShapes != null)
             {
                 if (renderer.State.SelectedShapes.Contains(this))
                 {
@@ -106,16 +106,35 @@ namespace Core2D.Shapes
         }
 
         /// <inheritdoc/>
-        public override IEnumerable<IPointShape> GetPoints()
+        public override void GetPoints(IList<IPointShape> points)
         {
-            yield return Start;
-            yield return End;
+            points.Add(Start);
+            points.Add(End);
         }
 
         /// <inheritdoc/>
         public override object Copy(IDictionary<object, object> shared)
         {
             throw new NotImplementedException();
+        }
+
+        /// <inheritdoc/>
+        public override bool IsDirty()
+        {
+            var isDirty = base.IsDirty();
+
+            isDirty |= Start.IsDirty();
+            isDirty |= End.IsDirty();
+
+            return isDirty;
+        }
+
+        /// <inheritdoc/>
+        public override void Invalidate()
+        {
+            base.Invalidate();
+            Start.Invalidate();
+            End.Invalidate();
         }
 
         /// <summary>

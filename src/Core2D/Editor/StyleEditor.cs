@@ -945,7 +945,7 @@ namespace Core2D.Editor
                 SetThickness(shape, value, history);
             }
 
-            editor.Project?.CurrentContainer?.Invalidate();
+            editor.Project?.CurrentContainer?.InvalidateLayer();
         }
 
         /// <inheritdoc/>
@@ -964,7 +964,7 @@ namespace Core2D.Editor
                 SetLineCap(shape, value, history);
             }
 
-            editor.Project?.CurrentContainer?.Invalidate();
+            editor.Project?.CurrentContainer?.InvalidateLayer();
         }
 
         /// <inheritdoc/>
@@ -978,7 +978,7 @@ namespace Core2D.Editor
                 SetDashes(shape, dashes, history);
             }
 
-            editor.Project?.CurrentContainer?.Invalidate();
+            editor.Project?.CurrentContainer?.InvalidateLayer();
         }
 
         /// <inheritdoc/>
@@ -997,7 +997,7 @@ namespace Core2D.Editor
                 SetDashOffset(shape, value, history);
             }
 
-            editor.Project?.CurrentContainer?.Invalidate();
+            editor.Project?.CurrentContainer?.InvalidateLayer();
         }
 
         /// <inheritdoc/>
@@ -1021,7 +1021,7 @@ namespace Core2D.Editor
                 SetStroke(shape, value, history);
             }
 
-            editor.Project?.CurrentContainer?.Invalidate();
+            editor.Project?.CurrentContainer?.InvalidateLayer();
         }
 
         /// <inheritdoc/>
@@ -1040,7 +1040,7 @@ namespace Core2D.Editor
                 SetStrokeTransparency(shape, value, history);
             }
 
-            editor.Project?.CurrentContainer?.Invalidate();
+            editor.Project?.CurrentContainer?.InvalidateLayer();
         }
 
         /// <inheritdoc/>
@@ -1081,7 +1081,7 @@ namespace Core2D.Editor
                 SetFillTransparency(shape, value, history);
             }
 
-            editor.Project?.CurrentContainer?.Invalidate();
+            editor.Project?.CurrentContainer?.InvalidateLayer();
         }
 
         /// <inheritdoc/>
@@ -1454,7 +1454,7 @@ namespace Core2D.Editor
                 SetStartArrowStrokeTransparency(shape, value, history);
             }
 
-            editor.Project?.CurrentContainer?.Invalidate();
+            editor.Project?.CurrentContainer?.InvalidateLayer();
         }
 
         /// <inheritdoc/>
@@ -1478,7 +1478,7 @@ namespace Core2D.Editor
                 SetStartArrowFill(shape, value, history);
             }
 
-            editor.Project?.CurrentContainer?.Invalidate();
+            editor.Project?.CurrentContainer?.InvalidateLayer();
         }
 
         /// <inheritdoc/>
@@ -1497,7 +1497,7 @@ namespace Core2D.Editor
                 SetStartArrowFillTransparency(shape, value, history);
             }
 
-            editor.Project?.CurrentContainer?.Invalidate();
+            editor.Project?.CurrentContainer?.InvalidateLayer();
         }
 
         /// <inheritdoc/>
@@ -1516,7 +1516,7 @@ namespace Core2D.Editor
                 SetEndArrowType(shape, value, history);
             }
 
-            editor.Project?.CurrentContainer?.Invalidate();
+            editor.Project?.CurrentContainer?.InvalidateLayer();
         }
 
         /// <inheritdoc/>
@@ -1530,7 +1530,7 @@ namespace Core2D.Editor
                 ToggleEndArrowIsStroked(shape, history);
             }
 
-            editor.Project?.CurrentContainer?.Invalidate();
+            editor.Project?.CurrentContainer?.InvalidateLayer();
         }
 
         /// <inheritdoc/>
@@ -1544,7 +1544,7 @@ namespace Core2D.Editor
                 ToggleEndArrowIsFilled(shape, history);
             }
 
-            editor.Project?.CurrentContainer?.Invalidate();
+            editor.Project?.CurrentContainer?.InvalidateLayer();
         }
 
         /// <inheritdoc/>
@@ -1563,7 +1563,7 @@ namespace Core2D.Editor
                 SetEndArrowRadiusX(shape, value, history);
             }
 
-            editor.Project?.CurrentContainer?.Invalidate();
+            editor.Project?.CurrentContainer?.InvalidateLayer();
         }
 
         /// <inheritdoc/>
@@ -1582,7 +1582,7 @@ namespace Core2D.Editor
                 SetEndArrowRadiusY(shape, value, history);
             }
 
-            editor.Project?.CurrentContainer?.Invalidate();
+            editor.Project?.CurrentContainer?.InvalidateLayer();
         }
 
         /// <inheritdoc/>
@@ -1601,7 +1601,7 @@ namespace Core2D.Editor
                 SetEndArrowThickness(shape, value, history);
             }
 
-            editor.Project?.CurrentContainer?.Invalidate();
+            editor.Project?.CurrentContainer?.InvalidateLayer();
         }
 
         /// <inheritdoc/>
@@ -1620,7 +1620,7 @@ namespace Core2D.Editor
                 SetEndArrowLineCap(shape, value, history);
             }
 
-            editor.Project?.CurrentContainer?.Invalidate();
+            editor.Project?.CurrentContainer?.InvalidateLayer();
         }
 
         /// <inheritdoc/>
@@ -1651,7 +1651,7 @@ namespace Core2D.Editor
                 SetEndArrowDashOffset(shape, value, history);
             }
 
-            editor.Project?.CurrentContainer?.Invalidate();
+            editor.Project?.CurrentContainer?.InvalidateLayer();
         }
 
         /// <inheritdoc/>
@@ -1675,7 +1675,7 @@ namespace Core2D.Editor
                 SetEndArrowStroke(shape, value, history);
             }
 
-            editor.Project?.CurrentContainer?.Invalidate();
+            editor.Project?.CurrentContainer?.InvalidateLayer();
         }
 
         /// <inheritdoc/>
@@ -1694,7 +1694,7 @@ namespace Core2D.Editor
                 SetEndArrowStrokeTransparency(shape, value, history);
             }
 
-            editor.Project?.CurrentContainer?.Invalidate();
+            editor.Project?.CurrentContainer?.InvalidateLayer();
         }
 
         /// <inheritdoc/>
@@ -1735,7 +1735,7 @@ namespace Core2D.Editor
                 SetEndArrowFillTransparency(shape, value, history);
             }
 
-            editor.Project?.CurrentContainer?.Invalidate();
+            editor.Project?.CurrentContainer?.InvalidateLayer();
         }
     }
 }

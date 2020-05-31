@@ -501,19 +501,19 @@ namespace Core2D.Renderer.SkiaSharp
         }
 
         /// <inheritdoc/>
-        public void Draw(object dc, IPageContainer container, double dx, double dy)
+        public void DrawPage(object dc, IPageContainer container, double dx, double dy)
         {
             foreach (var layer in container.Layers)
             {
                 if (layer.IsVisible)
                 {
-                    Draw(dc, layer, dx, dy);
+                    DrawLayer(dc, layer, dx, dy);
                 }
             }
         }
 
         /// <inheritdoc/>
-        public void Draw(object dc, ILayerContainer layer, double dx, double dy)
+        public void DrawLayer(object dc, ILayerContainer layer, double dx, double dy)
         {
             foreach (var shape in layer.Shapes)
             {
@@ -533,7 +533,7 @@ namespace Core2D.Renderer.SkiaSharp
         }
 
         /// <inheritdoc/>
-        public void Draw(object dc, IPointShape point, double dx, double dy)
+        public void DrawPoint(object dc, IPointShape point, double dx, double dy)
         {
             if (point == null || _state == null)
             {
@@ -599,7 +599,7 @@ namespace Core2D.Renderer.SkiaSharp
         }
 
         /// <inheritdoc/>
-        public void Draw(object dc, ILineShape line, double dx, double dy)
+        public void DrawLine(object dc, ILineShape line, double dx, double dy)
         {
             var canvas = dc as SKCanvas;
 
@@ -631,7 +631,7 @@ namespace Core2D.Renderer.SkiaSharp
         }
 
         /// <inheritdoc/>
-        public void Draw(object dc, IRectangleShape rectangle, double dx, double dy)
+        public void DrawRectangle(object dc, IRectangleShape rectangle, double dx, double dy)
         {
             var canvas = dc as SKCanvas;
 
@@ -665,10 +665,12 @@ namespace Core2D.Renderer.SkiaSharp
                     rectangle.CellHeight,
                     isStroked: true);
             }
+
+            DrawText(dc, rectangle, dx, dy);
         }
 
         /// <inheritdoc/>
-        public void Draw(object dc, IEllipseShape ellipse, double dx, double dy)
+        public void DrawEllipse(object dc, IEllipseShape ellipse, double dx, double dy)
         {
             var canvas = dc as SKCanvas;
 
@@ -690,10 +692,12 @@ namespace Core2D.Renderer.SkiaSharp
 
             var rect = CreateRect(ellipse.TopLeft, ellipse.BottomRight, dx, dy, _scaleToPage);
             DrawEllipseInternal(canvas, brush, pen, ellipse.IsStroked, ellipse.IsFilled, ref rect);
+
+            DrawText(dc, ellipse, dx, dy);
         }
 
         /// <inheritdoc/>
-        public void Draw(object dc, IArcShape arc, double dx, double dy)
+        public void DrawArc(object dc, IArcShape arc, double dx, double dy)
         {
             var canvas = dc as SKCanvas;
 
@@ -729,7 +733,7 @@ namespace Core2D.Renderer.SkiaSharp
         }
 
         /// <inheritdoc/>
-        public void Draw(object dc, ICubicBezierShape cubicBezier, double dx, double dy)
+        public void DrawCubicBezier(object dc, ICubicBezierShape cubicBezier, double dx, double dy)
         {
             var canvas = dc as SKCanvas;
 
@@ -764,7 +768,7 @@ namespace Core2D.Renderer.SkiaSharp
         }
 
         /// <inheritdoc/>
-        public void Draw(object dc, IQuadraticBezierShape quadraticBezier, double dx, double dy)
+        public void DrawQuadraticBezier(object dc, IQuadraticBezierShape quadraticBezier, double dx, double dy)
         {
             var canvas = dc as SKCanvas;
 
@@ -797,7 +801,7 @@ namespace Core2D.Renderer.SkiaSharp
         }
 
         /// <inheritdoc/>
-        public void Draw(object dc, ITextShape text, double dx, double dy)
+        public void DrawText(object dc, ITextShape text, double dx, double dy)
         {
             var canvas = dc as SKCanvas;
 
@@ -823,7 +827,7 @@ namespace Core2D.Renderer.SkiaSharp
         }
 
         /// <inheritdoc/>
-        public void Draw(object dc, IImageShape image, double dx, double dy)
+        public void DrawImage(object dc, IImageShape image, double dx, double dy)
         {
             var canvas = dc as SKCanvas;
 
@@ -857,25 +861,25 @@ namespace Core2D.Renderer.SkiaSharp
             }
             else
             {
-                if (State.ImageCache == null || string.IsNullOrEmpty(image.Key))
+                if (State.ImageCache != null && !string.IsNullOrEmpty(image.Key))
                 {
-                    return;
-                }
+                    var bytes = State.ImageCache.GetImage(image.Key);
+                    if (bytes != null)
+                    {
+                        var bi = SKBitmap.Decode(bytes);
 
-                var bytes = State.ImageCache.GetImage(image.Key);
-                if (bytes != null)
-                {
-                    var bi = SKBitmap.Decode(bytes);
+                        _biCache.Set(image.Key, bi);
 
-                    _biCache.Set(image.Key, bi);
-
-                    canvas.DrawBitmap(bi, rect);
+                        canvas.DrawBitmap(bi, rect);
+                    }
                 }
             }
+
+            DrawText(dc, image, dx, dy);
         }
 
         /// <inheritdoc/>
-        public void Draw(object dc, IPathShape path, double dx, double dy)
+        public void DrawPath(object dc, IPathShape path, double dx, double dy)
         {
             var canvas = dc as SKCanvas;
 

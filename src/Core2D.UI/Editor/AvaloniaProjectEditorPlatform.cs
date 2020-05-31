@@ -48,7 +48,7 @@ namespace Core2D.UI.Editor
                     {
                         var editor = _serviceProvider.GetService<IProjectEditor>();
                         editor.OnOpenProject(item);
-                        editor.CanvasPlatform?.Invalidate?.Invoke();
+                        editor.CanvasPlatform?.InvalidateControl?.Invoke();
                     }
                 }
             }

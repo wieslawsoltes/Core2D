@@ -136,6 +136,24 @@ namespace Core2D.Renderer
         {
             throw new NotImplementedException();
         }
+        
+        /// <inheritdoc/>
+        public override bool IsDirty()
+        {
+            var isDirty = base.IsDirty();
+
+            isDirty |= DrawShapeState.IsDirty();
+
+            return isDirty;
+        }
+
+        /// <inheritdoc/>
+        public override void Invalidate()
+        {
+            base.Invalidate();
+
+            DrawShapeState.Invalidate();
+        }
 
         /// <summary>
         /// Check whether the <see cref="PanX"/> property has changed from its default value.

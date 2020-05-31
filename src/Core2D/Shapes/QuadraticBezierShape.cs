@@ -43,14 +43,14 @@ namespace Core2D.Shapes
         {
             if (State.Flags.HasFlag(ShapeStateFlags.Visible))
             {
-                renderer.Draw(dc, this, dx, dy);
+                renderer.DrawQuadraticBezier(dc, this, dx, dy);
             }
         }
 
         /// <inheritdoc/>
         public override void DrawPoints(object dc, IShapeRenderer renderer, double dx, double dy)
         {
-            if (renderer.State.SelectedShapes != null && renderer.State.DrawPoints == true)
+            if (renderer.State.SelectedShapes != null)
             {
                 if (renderer.State.SelectedShapes.Contains(this))
                 {
@@ -128,17 +128,38 @@ namespace Core2D.Shapes
         }
 
         /// <inheritdoc/>
-        public override IEnumerable<IPointShape> GetPoints()
+        public override void GetPoints(IList<IPointShape> points)
         {
-            yield return Point1;
-            yield return Point2;
-            yield return Point3;
+            points.Add(Point1);
+            points.Add(Point2);
+            points.Add(Point3);
         }
 
         /// <inheritdoc/>
         public override object Copy(IDictionary<object, object> shared)
         {
             throw new NotImplementedException();
+        }
+
+        /// <inheritdoc/>
+        public override bool IsDirty()
+        {
+            var isDirty = base.IsDirty();
+
+            isDirty |= Point1.IsDirty();
+            isDirty |= Point2.IsDirty();
+            isDirty |= Point3.IsDirty();
+
+            return isDirty;
+        }
+
+        /// <inheritdoc/>
+        public override void Invalidate()
+        {
+            base.Invalidate();
+            Point1.Invalidate();
+            Point2.Invalidate();
+            Point3.Invalidate();
         }
 
         /// <summary>

@@ -206,7 +206,7 @@ namespace Core2D.UnitTests
 
             bool raised = false;
 
-            layer.InvalidateLayer += (sender, e) =>
+            layer.InvalidateLayerHandler += (sender, e) =>
             {
                 raised = true;
             };

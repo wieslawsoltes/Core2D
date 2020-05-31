@@ -11,7 +11,7 @@ namespace Core2D.Containers
     public class LayerContainer : ObservableObject, ILayerContainer
     {
         /// <inheritdoc/>
-        public event InvalidateLayerEventHandler InvalidateLayer;
+        public event InvalidateLayerEventHandler InvalidateLayerHandler;
 
         private bool _isVisible = true;
         private ImmutableArray<IBaseShape> _shapes;
@@ -23,7 +23,7 @@ namespace Core2D.Containers
             set
             {
                 Update(ref _isVisible, value);
-                Invalidate();
+                InvalidateLayer();
             }
         }
 
@@ -35,12 +35,36 @@ namespace Core2D.Containers
         }
 
         /// <inheritdoc/>
-        public void Invalidate() => InvalidateLayer?.Invoke(this, new InvalidateLayerEventArgs());
+        public void InvalidateLayer() => InvalidateLayerHandler?.Invoke(this, new InvalidateLayerEventArgs());
 
         /// <inheritdoc/>
         public override object Copy(IDictionary<object, object> shared)
         {
             throw new NotImplementedException();
+        }
+
+        /// <inheritdoc/>
+        public override bool IsDirty()
+        {
+            var isDirty = base.IsDirty();
+
+            foreach (var shape in Shapes)
+            {
+                isDirty |= shape.IsDirty();
+            }
+
+            return isDirty;
+        }
+
+        /// <inheritdoc/>
+        public override void Invalidate()
+        {
+            base.Invalidate();
+
+            foreach (var shape in Shapes)
+            {
+                shape.Invalidate();
+            }
         }
 
         /// <summary>

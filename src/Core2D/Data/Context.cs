@@ -38,6 +38,40 @@ namespace Core2D.Data
             };
         }
 
+        /// <inheritdoc/>
+        public override bool IsDirty()
+        {
+            var isDirty = base.IsDirty();
+
+            foreach (var property in Properties)
+            {
+                isDirty |= property.IsDirty();
+            }
+
+            if (Record != null)
+            {
+                isDirty |= Record.IsDirty();
+            }
+
+            return isDirty;
+        }
+
+        /// <inheritdoc/>
+        public override void Invalidate()
+        {
+            base.Invalidate();
+
+            foreach (var property in Properties)
+            {
+                property.Invalidate();
+            }
+
+            if (Record != null)
+            {
+                Record.Invalidate();
+            }
+        }
+
         /// <summary>
         /// Check whether the <see cref="Properties"/> property has changed from its default value.
         /// </summary>

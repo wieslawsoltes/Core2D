@@ -58,6 +58,19 @@ namespace Core2D.Style
             };
         }
 
+        /// <inheritdoc/>
+        public override bool IsDirty()
+        {
+            var isDirty = base.IsDirty();
+            return isDirty;
+        }
+
+        /// <inheritdoc/>
+        public override void Invalidate()
+        {
+            base.Invalidate();
+        }
+
         /// <summary>
         /// Parses a font style string.
         /// </summary>

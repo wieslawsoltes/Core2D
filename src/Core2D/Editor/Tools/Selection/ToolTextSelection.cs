@@ -77,7 +77,7 @@ namespace Core2D.Editor.Tools.Selection
                 _bottomRightHelperPoint.Y = _text.BottomRight.Y;
             }
 
-            _layer.Invalidate();
+            _layer.InvalidateLayer();
         }
 
         /// <summary>
@@ -103,7 +103,7 @@ namespace Core2D.Editor.Tools.Selection
                 _bottomRightHelperPoint = null;
             }
 
-            _layer.Invalidate();
+            _layer.InvalidateLayer();
         }
     }
 }

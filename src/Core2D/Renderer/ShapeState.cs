@@ -122,6 +122,19 @@ namespace Core2D.Renderer
             };
         }
 
+        /// <inheritdoc/>
+        public override bool IsDirty()
+        {
+            var isDirty = base.IsDirty();
+            return isDirty;
+        }
+
+        /// <inheritdoc/>
+        public override void Invalidate()
+        {
+            base.Invalidate();
+        }
+
         /// <summary>
         /// Parses a shape state string.
         /// </summary>

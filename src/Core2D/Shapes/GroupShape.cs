@@ -132,15 +132,44 @@ namespace Core2D.Shapes
         }
 
         /// <inheritdoc/>
-        public override IEnumerable<IPointShape> GetPoints()
+        public override void GetPoints(IList<IPointShape> points)
         {
-            return Enumerable.Concat(Shapes.SelectMany(s => s.GetPoints()), base.GetPoints());
+            foreach (var shape in Shapes)
+            {
+                shape.GetPoints(points);
+            }
+
+            base.GetPoints(points);
         }
 
         /// <inheritdoc/>
         public override object Copy(IDictionary<object, object> shared)
         {
             throw new NotImplementedException();
+        }
+
+        /// <inheritdoc/>
+        public override bool IsDirty()
+        {
+            var isDirty = base.IsDirty();
+
+            foreach (var shape in Shapes)
+            {
+                isDirty |= shape.IsDirty();
+            }
+
+            return isDirty;
+        }
+
+        /// <inheritdoc/>
+        public override void Invalidate()
+        {
+            base.Invalidate();
+
+            foreach (var shape in Shapes)
+            {
+                shape.Invalidate();
+            }
         }
 
         /// <summary>

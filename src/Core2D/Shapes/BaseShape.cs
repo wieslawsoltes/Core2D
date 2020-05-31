@@ -57,6 +57,25 @@ namespace Core2D.Shapes
         }
 
         /// <inheritdoc/>
+        public override bool IsDirty()
+        {
+            var isDirty = base.IsDirty();
+
+            isDirty |= State.IsDirty();
+            isDirty |= Data.IsDirty();
+
+            return isDirty;
+        }
+
+        /// <inheritdoc/>
+        public override void Invalidate()
+        {
+            base.Invalidate();
+            State.Invalidate();
+            Data.Invalidate();
+        }
+
+        /// <inheritdoc/>
         public abstract void DrawShape(object dc, IShapeRenderer renderer, double dx, double dy);
 
         /// <inheritdoc/>
@@ -109,11 +128,8 @@ namespace Core2D.Shapes
             }
         }
 
-        /// <summary>
-        /// Get all points in the shape.
-        /// </summary>
-        /// <returns>All points in the shape.</returns>
-        public abstract IEnumerable<IPointShape> GetPoints();
+        /// <inheritdoc/>
+        public abstract void GetPoints(IList<IPointShape> points);
 
         /// <summary>
         /// Check whether the <see cref="State"/> property has changed from its default value.

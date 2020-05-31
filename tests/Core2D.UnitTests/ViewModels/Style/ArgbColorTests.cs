@@ -78,7 +78,7 @@ namespace Core2D.Style.UnitTests
         {
             var target = _factory.CreateArgbColor(0xFF, 0x7F, 0x5A, 0x45);
 
-            Assert.Equal("#7F5A45FF", ArgbColor.ToSvgHex(target));
+            Assert.Equal("#7F5A45", ArgbColor.ToSvgHex(target)); // NOTE: 0xFF Alpha value is not used in Svg
         }
     }
 }
