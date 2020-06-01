@@ -87,10 +87,6 @@ namespace Core2D.UI.Renderer
         public ILineShape Line { get; set; }
         public A.Point P0 { get; set; }
         public A.Point P1 { get; set; }
-        public AM.IBrush FillStartArrow { get; set; }
-        public AM.IPen StrokeStartArrow { get; set; }
-        public AM.IBrush FillEndArrow { get; set; }
-        public AM.IPen StrokeEndArrow { get; set; }
         public Marker StartMarker { get; set; }
         public Marker EndMarker { get; set; }
         public AM.StreamGeometry CurveGeometry { get; set; }
