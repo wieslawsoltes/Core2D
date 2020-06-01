@@ -33,7 +33,7 @@ namespace Core2D.UI.Renderer
 
         public override void UpdateStyle()
         {
-            Fill = ToBrush(Color);
+            Fill = DrawUtil.ToBrush(Color);
         }
 
         public override void Draw(AM.DrawingContext context, double dx, double dy, double zoom)
