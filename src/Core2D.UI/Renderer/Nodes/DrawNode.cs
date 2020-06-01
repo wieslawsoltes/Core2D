@@ -15,44 +15,6 @@ namespace Core2D.UI.Renderer
         public AM.IPen Stroke { get; set; }
         public A.Point Center { get; set; }
 
-        protected AM.Color ToColor(IArgbColor argbColor)
-        {
-            return AM.Color.FromArgb(argbColor.A, argbColor.R, argbColor.G, argbColor.B);
-        }
-
-        protected AM.IBrush ToBrush(IColor color) => color switch
-        {
-            IArgbColor argbColor => new AM.Immutable.ImmutableSolidColorBrush(ToColor(argbColor)),
-            _ => throw new NotSupportedException($"The {color.GetType()} color type is not supported.")
-        };
-
-        protected AM.IPen ToPen(IBaseStyle style, double thickness)
-        {
-            var dashStyle = default(AM.Immutable.ImmutableDashStyle);
-            if (style.Dashes != null)
-            {
-                var dashes = StyleHelper.ConvertDashesToDoubleArray(style.Dashes, 1.0);
-                var dashOffset = style.DashOffset;
-                if (dashes != null)
-                {
-                    dashStyle = new AM.Immutable.ImmutableDashStyle(dashes, dashOffset);
-                }
-            }
-
-            var lineCap = style.LineCap switch
-            {
-                LineCap.Flat => AM.PenLineCap.Flat,
-                LineCap.Square => AM.PenLineCap.Square,
-                LineCap.Round => AM.PenLineCap.Round,
-                _ => throw new NotImplementedException()
-            };
-
-            var brush = ToBrush(style.Stroke);
-            var pen = new AM.Immutable.ImmutablePen(brush, thickness, dashStyle, lineCap);
-
-            return pen;
-        }
-
         public DrawNode()
         {
         }
@@ -61,8 +23,8 @@ namespace Core2D.UI.Renderer
 
         public virtual void UpdateStyle()
         {
-            Fill = ToBrush(Style.Fill);
-            Stroke = ToPen(Style, Style.Thickness);
+            Fill = DrawUtil.ToBrush(Style.Fill);
+            Stroke = DrawUtil.ToPen(Style, Style.Thickness);
         }
 
         public virtual void Draw(AM.DrawingContext context, double dx, double dy, double zoom)
@@ -85,7 +47,7 @@ namespace Core2D.UI.Renderer
 
             if (Stroke.Thickness != thickness)
             {
-                Stroke = ToPen(Style, thickness);
+                Stroke = DrawUtil.ToPen(Style, thickness);
             }
 
             var offsetDisposable = dx != 0.0 || dy != 0.0 ? context.PushPreTransform(AME.MatrixHelper.Translate(dx, dy)) : default(IDisposable);
