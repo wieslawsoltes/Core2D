@@ -9,81 +9,81 @@ using AME = Avalonia.MatrixExtensions;
 
 namespace Core2D.UI.Renderer
 {
+    internal abstract class Marker
+    {
+        public IArrowStyle Style { get; set; }
+        public AM.IBrush Brush { get; set; }
+        public AM.IPen Pen { get; set; }
+        public A.Matrix Rotation { get; set; }
+        public A.Point Point { get; set; }
+
+        public abstract void Draw(AM.DrawingContext context);
+
+        public virtual void UpdateStyle()
+        {
+            Brush = DrawUtil.ToBrush(Style.Fill);
+            Pen = DrawUtil.ToPen(Style, Style.Thickness);
+        }
+    }
+
+    internal class NoneMarker : Marker
+    {
+        public override void Draw(AM.DrawingContext context)
+        {
+        }
+    }
+
+    internal class RectangleMarker : Marker
+    {
+        public A.Rect Rect { get; set; }
+
+        public override void Draw(AM.DrawingContext context)
+        {
+            using var rotationDisposable = context.PushPreTransform(Rotation);
+
+            if (Style.IsFilled)
+            {
+                context.FillRectangle(Brush, Rect);
+            }
+
+            if (Style.IsStroked)
+            {
+                context.DrawRectangle(Pen, Rect);
+            }
+        }
+    }
+
+    internal class EllipseMarker : Marker
+    {
+        public AM.EllipseGeometry EllipseGeometry { get; set; }
+
+        public override void Draw(AM.DrawingContext context)
+        {
+            using var rotationDisposable = context.PushPreTransform(Rotation);
+
+            context.DrawGeometry(Style.IsFilled ? Brush : null, Style.IsStroked ? Pen : null, EllipseGeometry);
+        }
+    }
+
+    internal class ArrowMarker : Marker
+    {
+        public A.Point P11;
+        public A.Point P21;
+        public A.Point P12;
+        public A.Point P22;
+
+        public override void Draw(AM.DrawingContext context)
+        {
+            if (Style.IsStroked)
+            {
+                context.DrawLine(Pen, P11, P21);
+                context.DrawLine(Pen, P12, P22);
+            }
+        }
+    }
+
     internal class LineDrawNode : DrawNode
     {
-        public abstract class Marker
-        {
-            public IArrowStyle Style;
-            public AM.IBrush Brush;
-            public AM.IPen Pen;
-            public A.Matrix Rotation;
-            public A.Point Point;
-
-            public abstract void Draw(AM.DrawingContext context);
-
-            public virtual void UpdateStyle()
-            {
-                Brush = DrawUtil.ToBrush(Style.Fill);
-                Pen = DrawUtil.ToPen(Style, Style.Thickness);
-            }
-        }
-
-        public class NoneMarker : Marker
-        {
-            public override void Draw(AM.DrawingContext context)
-            {
-            }
-        }
-
-        public class RectangleMarker : Marker
-        {
-            public A.Rect Rect;
-
-            public override void Draw(AM.DrawingContext context)
-            {
-                using var rotationDisposable = context.PushPreTransform(Rotation);
-
-                if (Style.IsFilled)
-                {
-                    context.FillRectangle(Brush, Rect);
-                }
-
-                if (Style.IsStroked)
-                {
-                    context.DrawRectangle(Pen, Rect);
-                }
-            }
-        }
-
-        public class EllipseMarker : Marker
-        {
-            public AM.EllipseGeometry EllipseGeometry;
-
-            public override void Draw(AM.DrawingContext context)
-            {
-                using var rotationDisposable = context.PushPreTransform(Rotation);
-
-                context.DrawGeometry(Style.IsFilled ? Brush : null, Style.IsStroked ? Pen : null, EllipseGeometry);
-            }
-        }
-
-        public class ArrowMarker : Marker
-        {
-            public A.Point P11;
-            public A.Point P21;
-            public A.Point P12;
-            public A.Point P22;
-
-            public override void Draw(AM.DrawingContext context)
-            {
-                if (Style.IsStroked)
-                {
-                    context.DrawLine(Pen, P11, P21);
-                    context.DrawLine(Pen, P12, P22);
-                }
-            }
-        }
-
         public ILineShape Line { get; set; }
         public A.Point P0 { get; set; }
         public A.Point P1 { get; set; }
@@ -98,29 +98,7 @@ namespace Core2D.UI.Renderer
             UpdateGeometry();
         }
 
-        private AM.StreamGeometry CreateLineCurveGeometry(A.Point p0, A.Point p1, double curvature, CurveOrientation orientation, PointAlignment pt0a, PointAlignment pt1a)
-        {
-            var curveGeometry = new AM.StreamGeometry();
-
-            using (var geometryContext = curveGeometry.Open())
-            {
-                geometryContext.BeginFigure(new A.Point(p0.X, p0.Y), false);
-                double p0x = p0.X;
-                double p0y = p0.Y;
-                double p1x = p1.X;
-                double p1y = p1.Y;
-                LineShapeExtensions.GetCurvedLineBezierControlPoints(orientation, curvature, pt0a, pt1a, ref p0x, ref p0y, ref p1x, ref p1y);
-                var point1 = new A.Point(p0x, p0y);
-                var point2 = new A.Point(p1x, p1y);
-                var point3 = new A.Point(p1.X, p1.Y);
-                geometryContext.CubicBezierTo(point1, point2, point3);
-                geometryContext.EndFigure(false);
-            }
-
-            return curveGeometry;
-        }
-
-        private Marker CreateLineArrowMarker(double x, double y, double angle, IArrowStyle style)
+        private Marker CreatArrowMarker(double x, double y, double angle, IArrowStyle style)
         {
             switch (style.ArrowType)
             {
@@ -194,6 +172,28 @@ namespace Core2D.UI.Renderer
             }
         }
 
+        private AM.StreamGeometry CreateCurveGeometry(A.Point p0, A.Point p1, double curvature, CurveOrientation orientation, PointAlignment pt0a, PointAlignment pt1a)
+        {
+            var curveGeometry = new AM.StreamGeometry();
+
+            using (var geometryContext = curveGeometry.Open())
+            {
+                geometryContext.BeginFigure(new A.Point(p0.X, p0.Y), false);
+                double p0x = p0.X;
+                double p0y = p0.Y;
+                double p1x = p1.X;
+                double p1y = p1.Y;
+                LineShapeExtensions.GetCurvedLineBezierControlPoints(orientation, curvature, pt0a, pt1a, ref p0x, ref p0y, ref p1x, ref p1y);
+                var point1 = new A.Point(p0x, p0y);
+                var point2 = new A.Point(p1x, p1y);
+                var point3 = new A.Point(p1.X, p1.Y);
+                geometryContext.CubicBezierTo(point1, point2, point3);
+                geometryContext.EndFigure(false);
+            }
+
+            return curveGeometry;
+        }
+
         private void UpdateMarkers()
         {
             double x1 = Line.Start.X;
@@ -205,7 +205,7 @@ namespace Core2D.UI.Renderer
             if (Style.StartArrowStyle.ArrowType != ArrowType.None)
             {
                 double a1 = Math.Atan2(y1 - y2, x1 - x2);
-                StartMarker = CreateLineArrowMarker(x1, y1, a1, Style.StartArrowStyle);
+                StartMarker = CreatArrowMarker(x1, y1, a1, Style.StartArrowStyle);
                 StartMarker.UpdateStyle();
                 P0 = StartMarker.Point;
             }
@@ -218,7 +218,7 @@ namespace Core2D.UI.Renderer
             if (Style.EndArrowStyle.ArrowType != ArrowType.None)
             {
                 double a2 = Math.Atan2(y2 - y1, x2 - x1);
-                EndMarker = CreateLineArrowMarker(x2, y2, a2, Style.EndArrowStyle);
+                EndMarker = CreatArrowMarker(x2, y2, a2, Style.EndArrowStyle);
                 EndMarker.UpdateStyle();
                 P1 = EndMarker.Point;
             }
@@ -233,7 +233,7 @@ namespace Core2D.UI.Renderer
         {
             if (Style.LineStyle.IsCurved)
             {
-                CurveGeometry = CreateLineCurveGeometry(P0, P1, Style.LineStyle.Curvature, Style.LineStyle.CurveOrientation, Line.Start.Alignment, Line.End.Alignment);
+                CurveGeometry = CreateCurveGeometry(P0, P1, Style.LineStyle.Curvature, Style.LineStyle.CurveOrientation, Line.Start.Alignment, Line.End.Alignment);
             }
             else
             {
