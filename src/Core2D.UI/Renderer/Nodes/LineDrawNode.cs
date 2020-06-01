@@ -275,6 +275,15 @@ namespace Core2D.UI.Renderer
         {
             if (Line.IsStroked)
             {
+                if (Style.LineStyle.IsCurved)
+                {
+                    context.DrawGeometry(null, Stroke, CurveGeometry);
+                }
+                else
+                {
+                    context.DrawLine(Stroke, P0, P1);
+                }
+
                 if (Style.StartArrowStyle.ArrowType != ArrowType.None)
                 {
                     StartMarker?.Draw(context);
@@ -283,15 +292,6 @@ namespace Core2D.UI.Renderer
                 if (Style.EndArrowStyle.ArrowType != ArrowType.None)
                 {
                     EndMarker?.Draw(context);
-                }
-
-                if (Style.LineStyle.IsCurved)
-                {
-                    context.DrawGeometry(null, Stroke, CurveGeometry);
-                }
-                else
-                {
-                    context.DrawLine(Stroke, P0, P1);
                 }
             }
         }
