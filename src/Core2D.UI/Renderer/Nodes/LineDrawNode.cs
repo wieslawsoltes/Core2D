@@ -20,6 +20,12 @@ namespace Core2D.UI.Renderer
             public A.Point Point;
 
             public abstract void Draw(AM.DrawingContext context);
+
+            public virtual void UpdateStyle()
+            {
+                Brush = DrawUtil.ToBrush(Style.Fill);
+                Pen = DrawUtil.ToPen(Style, Style.Thickness);
+            }
         }
 
         public class NoneMarker : Marker
@@ -35,6 +41,8 @@ namespace Core2D.UI.Renderer
 
             public override void Draw(AM.DrawingContext context)
             {
+                using var rotationDisposable = context.PushPreTransform(Rotation);
+
                 if (Style.IsFilled)
                 {
                     context.FillRectangle(Brush, Rect);
@@ -54,6 +62,7 @@ namespace Core2D.UI.Renderer
             public override void Draw(AM.DrawingContext context)
             {
                 using var rotationDisposable = context.PushPreTransform(Rotation);
+
                 context.DrawGeometry(Style.IsFilled ? Brush : null, Style.IsStroked ? Pen : null, EllipseGeometry);
             }
         }
@@ -115,7 +124,7 @@ namespace Core2D.UI.Renderer
             return curveGeometry;
         }
 
-        private Marker CreateLineArrowMarker(AM.IPen pen, AM.IBrush brush, double x, double y, double angle, IArrowStyle style)
+        private Marker CreateLineArrowMarker(double x, double y, double angle, IArrowStyle style)
         {
             switch (style.ArrowType)
             {
@@ -125,8 +134,6 @@ namespace Core2D.UI.Renderer
                         var marker = new NoneMarker();
 
                         marker.Style = style;
-                        marker.Brush = brush;
-                        marker.Pen = pen;
                         marker.Point = new A.Point(x, y);
 
                         return marker;
@@ -141,8 +148,6 @@ namespace Core2D.UI.Renderer
                         var marker = new RectangleMarker();
 
                         marker.Style = style;
-                        marker.Brush = brush;
-                        marker.Pen = pen;
                         marker.Rotation = AME.MatrixHelper.Rotation(angle, new A.Vector(x, y));
                         marker.Point = AME.MatrixHelper.TransformPoint(marker.Rotation, new A.Point(x - (float)sx, y));
 
@@ -161,8 +166,6 @@ namespace Core2D.UI.Renderer
                         var marker = new EllipseMarker();
 
                         marker.Style = style;
-                        marker.Brush = brush;
-                        marker.Pen = pen;
                         marker.Rotation = AME.MatrixHelper.Rotation(angle, new A.Vector(x, y));
                         marker.Point = AME.MatrixHelper.TransformPoint(marker.Rotation, new A.Point(x - (float)sx, y));
 
@@ -182,8 +185,6 @@ namespace Core2D.UI.Renderer
                         var marker = new ArrowMarker();
 
                         marker.Style = style;
-                        marker.Brush = brush;
-                        marker.Pen = pen;
                         marker.Rotation = AME.MatrixHelper.Rotation(angle, new A.Vector(x, y));
                         marker.Point = AME.MatrixHelper.TransformPoint(marker.Rotation, new A.Point(x, y));
 
@@ -197,14 +198,8 @@ namespace Core2D.UI.Renderer
             }
         }
 
-        public override void UpdateGeometry()
+        private void UpdateMarkers()
         {
-            ScaleThickness = Line.State.Flags.HasFlag(ShapeStateFlags.Thickness);
-            ScaleSize = Line.State.Flags.HasFlag(ShapeStateFlags.Size);
-            P0 = new A.Point(Line.Start.X, Line.Start.Y);
-            P1 = new A.Point(Line.End.X, Line.End.Y);
-            Center = new A.Point((P0.X + P1.X) / 2.0, (P0.Y + P1.Y) / 2.0);
-
             double x1 = Line.Start.X;
             double y1 = Line.Start.Y;
             double x2 = Line.End.X;
@@ -214,18 +209,51 @@ namespace Core2D.UI.Renderer
             if (Style.StartArrowStyle.ArrowType != ArrowType.None)
             {
                 double a1 = Math.Atan2(y1 - y2, x1 - x2);
-                StartMarker = CreateLineArrowMarker(StrokeStartArrow, FillStartArrow, x1, y1, a1, Style.StartArrowStyle);
+                StartMarker = CreateLineArrowMarker(x1, y1, a1, Style.StartArrowStyle);
+                StartMarker.UpdateStyle();
                 P0 = StartMarker.Point;
+            }
+            else
+            {
+                StartMarker = null;
+                P0 = new A.Point(x1, y1);
             }
 
             if (Style.EndArrowStyle.ArrowType != ArrowType.None)
             {
                 double a2 = Math.Atan2(y2 - y1, x2 - x1);
-                EndMarker = CreateLineArrowMarker(StrokeEndArrow, FillEndArrow, x2, y2, a2, Style.EndArrowStyle);
+                EndMarker = CreateLineArrowMarker(x2, y2, a2, Style.EndArrowStyle);
+                EndMarker.UpdateStyle();
                 P1 = EndMarker.Point;
             }
+            else
+            {
+                EndMarker = null;
+                P1 = new A.Point(x2, y2);
+            }
+        }
 
-            CurveGeometry = CreateLineCurveGeometry(P0, P1, Style.LineStyle.Curvature, Style.LineStyle.CurveOrientation, Line.Start.Alignment, Line.End.Alignment);
+        private void UpdateCurveGeometry()
+        {
+            if (Style.LineStyle.IsCurved)
+            {
+                CurveGeometry = CreateLineCurveGeometry(P0, P1, Style.LineStyle.Curvature, Style.LineStyle.CurveOrientation, Line.Start.Alignment, Line.End.Alignment);
+            }
+            else
+            {
+                CurveGeometry = null;
+            }
+        }
+
+        public override void UpdateGeometry()
+        {
+            ScaleThickness = Line.State.Flags.HasFlag(ShapeStateFlags.Thickness);
+            ScaleSize = Line.State.Flags.HasFlag(ShapeStateFlags.Size);
+            P0 = new A.Point(Line.Start.X, Line.Start.Y);
+            P1 = new A.Point(Line.End.X, Line.End.Y);
+            Center = new A.Point((P0.X + P1.X) / 2.0, (P0.Y + P1.Y) / 2.0);
+            UpdateMarkers();
+            UpdateCurveGeometry();
         }
 
         public override void UpdateStyle()
@@ -234,14 +262,12 @@ namespace Core2D.UI.Renderer
 
             if (Style.StartArrowStyle.ArrowType != ArrowType.None)
             {
-                FillStartArrow = ToBrush(Style.StartArrowStyle.Fill);
-                StrokeStartArrow = ToPen(Style.StartArrowStyle, Style.StartArrowStyle.Thickness);
+                StartMarker?.UpdateStyle();
             }
 
             if (Style.EndArrowStyle.ArrowType != ArrowType.None)
             {
-                FillEndArrow = ToBrush(Style.EndArrowStyle.Fill);
-                StrokeEndArrow = ToPen(Style.EndArrowStyle, Style.EndArrowStyle.Thickness);
+                EndMarker?.UpdateStyle();
             }
         }
 
