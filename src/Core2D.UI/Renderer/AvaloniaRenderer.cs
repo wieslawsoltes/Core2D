@@ -194,6 +194,7 @@ namespace Core2D.UI.Renderer
                 {
                     drawNodeCached.Style = line.Style;
                     drawNodeCached.UpdateStyle();
+                    drawNodeCached.UpdateGeometry();
                     line.Style.Invalidate();
                 }
 
