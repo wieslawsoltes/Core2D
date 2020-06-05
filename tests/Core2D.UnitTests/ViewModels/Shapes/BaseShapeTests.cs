@@ -31,12 +31,12 @@ namespace Core2D.Shapes.UnitTests
                 throw new NotImplementedException();
             }
 
-            public override void DrawShape(object dc, IShapeRenderer renderer, double dx, double dy)
+            public override void DrawShape(object dc, IShapeRenderer renderer)
             {
                 throw new NotImplementedException();
             }
 
-            public override void DrawPoints(object dc, IShapeRenderer renderer, double dx, double dy)
+            public override void DrawPoints(object dc, IShapeRenderer renderer)
             {
                 throw new NotImplementedException();
             }
