@@ -28,26 +28,20 @@ namespace Core2D
         /// </summary>
         /// <param name="dc">The generic drawing context object.</param>
         /// <param name="renderer">The generic renderer object used to draw shape.</param>
-        /// <param name="dx">The X axis draw position offset.</param>
-        /// <param name="dy">The Y axis draw position offset.</param>
-        void DrawShape(object dc, IShapeRenderer renderer, double dx, double dy);
+        void DrawShape(object dc, IShapeRenderer renderer);
 
         /// <summary>
         /// Draws points using current <see cref="IShapeRenderer"/>.
         /// </summary>
         /// <param name="dc">The generic drawing context object.</param>
         /// <param name="renderer">The generic renderer object used to draw points.</param>
-        /// <param name="dx">The X axis draw position offset.</param>
-        /// <param name="dy">The Y axis draw position offset.</param>
-        void DrawPoints(object dc, IShapeRenderer renderer, double dx, double dy);
+        void DrawPoints(object dc, IShapeRenderer renderer);
 
         /// <summary>
         /// Invalidates shape renderer cache.
         /// </summary>
         /// <param name="renderer">The generic renderer object used to draw shape.</param>
-        /// <param name="dx">The X axis draw position offset.</param>
-        /// <param name="dy">The Y axis draw position offset.</param>
         /// <returns>Returns true if shape was invalidated; otherwise, returns false.</returns>
-        bool Invalidate(IShapeRenderer renderer, double dx, double dy);
+        bool Invalidate(IShapeRenderer renderer);
     }
 }

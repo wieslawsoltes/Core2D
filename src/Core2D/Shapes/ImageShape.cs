@@ -23,20 +23,20 @@ namespace Core2D.Shapes
         }
 
         /// <inheritdoc/>
-        public override void DrawShape(object dc, IShapeRenderer renderer, double dx, double dy)
+        public override void DrawShape(object dc, IShapeRenderer renderer)
         {
             if (State.Flags.HasFlag(ShapeStateFlags.Visible))
             {
-                renderer.DrawImage(dc, this, dx, dy);
+                renderer.DrawImage(dc, this);
             }
         }
 
         /// <inheritdoc/>
-        public override void DrawPoints(object dc, IShapeRenderer renderer, double dx, double dy)
+        public override void DrawPoints(object dc, IShapeRenderer renderer)
         {
             if (State.Flags.HasFlag(ShapeStateFlags.Visible))
             {
-                base.DrawPoints(dc, renderer, dx, dy);
+                base.DrawPoints(dc, renderer);
             }
         }
 

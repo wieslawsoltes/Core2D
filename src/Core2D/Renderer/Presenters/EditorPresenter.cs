@@ -10,16 +10,16 @@ namespace Core2D.Renderer.Presenters
         /// <inheritdoc/>
         public void Render(object dc, IShapeRenderer renderer, IPageContainer container, double dx, double dy)
         {
-            renderer.DrawPage(dc, container, dx, dy);
+            renderer.DrawPage(dc, container);
 
             if (container.WorkingLayer != null)
             {
-                renderer.DrawLayer(dc, container.WorkingLayer, dx, dy);
+                renderer.DrawLayer(dc, container.WorkingLayer);
             }
 
             if (container.HelperLayer != null)
             {
-                renderer.DrawLayer(dc, container.HelperLayer, dx, dy);
+                renderer.DrawLayer(dc, container.HelperLayer);
             }
         }
     }

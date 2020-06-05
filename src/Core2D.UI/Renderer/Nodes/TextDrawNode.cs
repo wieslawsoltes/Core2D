@@ -108,7 +108,7 @@ namespace Core2D.UI.Renderer
             Origin = new A.Point(originX, originY);
         }
 
-        public override void OnDraw(AM.DrawingContext context, double dx, double dy, double zoom)
+        public override void OnDraw(AM.DrawingContext context, double zoom)
         {
             if (FormattedText != null)
             {

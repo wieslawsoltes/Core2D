@@ -40,16 +40,16 @@ namespace Core2D.Shapes
         }
 
         /// <inheritdoc/>
-        public override void DrawShape(object dc, IShapeRenderer renderer, double dx, double dy)
+        public override void DrawShape(object dc, IShapeRenderer renderer)
         {
             if (State.Flags.HasFlag(ShapeStateFlags.Visible))
             {
-                renderer.DrawPath(dc, this, dx, dy);
+                renderer.DrawPath(dc, this);
             }
         }
 
         /// <inheritdoc/>
-        public override void DrawPoints(object dc, IShapeRenderer renderer, double dx, double dy)
+        public override void DrawPoints(object dc, IShapeRenderer renderer)
         {
             if (renderer.State.SelectedShapes != null)
             {
@@ -59,7 +59,7 @@ namespace Core2D.Shapes
 
                     foreach (var point in _points)
                     {
-                        point.DrawShape(dc, renderer, dx, dy);
+                        point.DrawShape(dc, renderer);
                     }
                 }
                 else
@@ -70,7 +70,7 @@ namespace Core2D.Shapes
                     {
                         if (renderer.State.SelectedShapes.Contains(point))
                         {
-                            point.DrawShape(dc, renderer, dx, dy);
+                            point.DrawShape(dc, renderer);
                         }
                     }
                 }

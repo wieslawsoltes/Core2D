@@ -30,11 +30,11 @@ namespace Core2D.UI.Renderer
             base.UpdateTextGeometry();
         }
 
-        public override void OnDraw(AM.DrawingContext context, double dx, double dy, double zoom)
+        public override void OnDraw(AM.DrawingContext context, double zoom)
         {
             context.DrawGeometry(Ellipse.IsFilled ? Fill : null, Ellipse.IsStroked ? Stroke : null, Geometry);
 
-            base.OnDraw(context, dx, dy, zoom);
+            base.OnDraw(context, zoom);
         }
     }
 }

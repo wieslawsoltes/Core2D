@@ -39,40 +39,40 @@ namespace Core2D.Shapes
         }
 
         /// <inheritdoc/>
-        public override void DrawShape(object dc, IShapeRenderer renderer, double dx, double dy)
+        public override void DrawShape(object dc, IShapeRenderer renderer)
         {
             if (State.Flags.HasFlag(ShapeStateFlags.Visible))
             {
-                renderer.DrawQuadraticBezier(dc, this, dx, dy);
+                renderer.DrawQuadraticBezier(dc, this);
             }
         }
 
         /// <inheritdoc/>
-        public override void DrawPoints(object dc, IShapeRenderer renderer, double dx, double dy)
+        public override void DrawPoints(object dc, IShapeRenderer renderer)
         {
             if (renderer.State.SelectedShapes != null)
             {
                 if (renderer.State.SelectedShapes.Contains(this))
                 {
-                    _point1.DrawShape(dc, renderer, dx, dy);
-                    _point2.DrawShape(dc, renderer, dx, dy);
-                    _point3.DrawShape(dc, renderer, dx, dy);
+                    _point1.DrawShape(dc, renderer);
+                    _point2.DrawShape(dc, renderer);
+                    _point3.DrawShape(dc, renderer);
                 }
                 else
                 {
                     if (renderer.State.SelectedShapes.Contains(_point1))
                     {
-                        _point1.DrawShape(dc, renderer, dx, dy);
+                        _point1.DrawShape(dc, renderer);
                     }
 
                     if (renderer.State.SelectedShapes.Contains(_point2))
                     {
-                        _point2.DrawShape(dc, renderer, dx, dy);
+                        _point2.DrawShape(dc, renderer);
                     }
 
                     if (renderer.State.SelectedShapes.Contains(_point3))
                     {
-                        _point3.DrawShape(dc, renderer, dx, dy);
+                        _point3.DrawShape(dc, renderer);
                     }
                 }
             }

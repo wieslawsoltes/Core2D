@@ -13,37 +13,37 @@ namespace Core2D.Renderer.SkiaSharp
 {
     public static class PathGeometryConverter
     {
-        public static void CreateFigure(this IPathFigure pathFigure, double dx, double dy, Func<double, float> scale, SKPath path)
+        public static void CreateFigure(this IPathFigure pathFigure, Func<double, float> scale, SKPath path)
         {
             path.MoveTo(
-                scale(pathFigure.StartPoint.X + dx),
-                scale(pathFigure.StartPoint.Y + dy));
+                scale(pathFigure.StartPoint.X),
+                scale(pathFigure.StartPoint.Y));
 
             foreach (var segment in pathFigure.Segments)
             {
                 if (segment is ILineSegment lineSegment)
                 {
                     path.LineTo(
-                        scale(lineSegment.Point.X + dx),
-                        scale(lineSegment.Point.Y + dy));
+                        scale(lineSegment.Point.X),
+                        scale(lineSegment.Point.Y));
                 }
                 else if (segment is IQuadraticBezierSegment quadraticBezierSegment)
                 {
                     path.QuadTo(
-                        scale(quadraticBezierSegment.Point1.X + dx),
-                        scale(quadraticBezierSegment.Point1.Y + dy),
-                        scale(quadraticBezierSegment.Point2.X + dx),
-                        scale(quadraticBezierSegment.Point2.Y + dy));
+                        scale(quadraticBezierSegment.Point1.X),
+                        scale(quadraticBezierSegment.Point1.Y),
+                        scale(quadraticBezierSegment.Point2.X),
+                        scale(quadraticBezierSegment.Point2.Y));
                 }
                 else if (segment is ICubicBezierSegment cubicBezierSegment)
                 {
                     path.CubicTo(
-                        scale(cubicBezierSegment.Point1.X + dx),
-                        scale(cubicBezierSegment.Point1.Y + dy),
-                        scale(cubicBezierSegment.Point2.X + dx),
-                        scale(cubicBezierSegment.Point2.Y + dy),
-                        scale(cubicBezierSegment.Point3.X + dx),
-                        scale(cubicBezierSegment.Point3.Y + dy));
+                        scale(cubicBezierSegment.Point1.X),
+                        scale(cubicBezierSegment.Point1.Y),
+                        scale(cubicBezierSegment.Point2.X),
+                        scale(cubicBezierSegment.Point2.Y),
+                        scale(cubicBezierSegment.Point3.X),
+                        scale(cubicBezierSegment.Point3.Y));
                 }
                 else if(segment is IArcSegment arcSegment)
                 {
@@ -53,8 +53,8 @@ namespace Core2D.Renderer.SkiaSharp
                         (float)arcSegment.RotationAngle,
                         arcSegment.IsLargeArc ? SKPathArcSize.Large : SKPathArcSize.Small,
                         arcSegment.SweepDirection == SweepDirection.Clockwise ? SKPathDirection.Clockwise : SKPathDirection.CounterClockwise,
-                        scale(arcSegment.Point.X + dx),
-                        scale(arcSegment.Point.Y + dy));
+                        scale(arcSegment.Point.X),
+                        scale(arcSegment.Point.Y));
                 }
                 else
                 {
@@ -88,7 +88,7 @@ namespace Core2D.Renderer.SkiaSharp
                         case SKPathVerb.Move:
                             {
                                 context.BeginFigure(
-                                    factory.CreatePointShape(points[0].X + dx, points[0].Y + dy),
+                                    factory.CreatePointShape(points[0].X, points[0].Y),
                                     false,
                                     false);
                             }
@@ -96,33 +96,33 @@ namespace Core2D.Renderer.SkiaSharp
                         case SKPathVerb.Line:
                             {
                                 context.LineTo(
-                                    factory.CreatePointShape(points[1].X + dx, points[1].Y + dy));
+                                    factory.CreatePointShape(points[1].X, points[1].Y));
                             }
                             break;
                         case SKPathVerb.Cubic:
                             {
                                 context.CubicBezierTo(
-                                    factory.CreatePointShape(points[1].X + dx, points[1].Y + dy),
-                                    factory.CreatePointShape(points[2].X + dx, points[2].Y + dy),
-                                    factory.CreatePointShape(points[3].X + dx, points[3].Y + dy));
+                                    factory.CreatePointShape(points[1].X, points[1].Y),
+                                    factory.CreatePointShape(points[2].X, points[2].Y),
+                                    factory.CreatePointShape(points[3].X, points[3].Y));
                             }
                             break;
                         case SKPathVerb.Quad:
                             {
                                 context.QuadraticBezierTo(
-                                    factory.CreatePointShape(points[1].X + dx, points[1].Y + dy),
-                                    factory.CreatePointShape(points[2].X + dx, points[2].Y + dy));
+                                    factory.CreatePointShape(points[1].X, points[1].Y),
+                                    factory.CreatePointShape(points[2].X, points[2].Y));
                             }
                             break;
                         case SKPathVerb.Conic:
                             {
                                 var quads = SKPath.ConvertConicToQuads(points[0], points[1], points[2], iterator.ConicWeight(), 1);
                                 context.QuadraticBezierTo(
-                                    factory.CreatePointShape(quads[1].X + dx, quads[1].Y + dy),
-                                    factory.CreatePointShape(quads[2].X + dx, quads[2].Y + dy));
+                                    factory.CreatePointShape(quads[1].X, quads[1].Y),
+                                    factory.CreatePointShape(quads[2].X, quads[2].Y));
                                 context.QuadraticBezierTo(
-                                    factory.CreatePointShape(quads[3].X + dx, quads[3].Y + dy),
-                                    factory.CreatePointShape(quads[4].X + dx, quads[4].Y + dy));
+                                    factory.CreatePointShape(quads[3].X, quads[3].Y),
+                                    factory.CreatePointShape(quads[4].X, quads[4].Y));
                             }
                             break;
                         case SKPathVerb.Close:
@@ -153,26 +153,26 @@ namespace Core2D.Renderer.SkiaSharp
                             if (previous == null || previous != lineShape.Start)
                             {
                                 path.MoveTo(
-                                    scale(lineShape.Start.X + dx),
-                                    scale(lineShape.Start.Y + dy));
+                                    scale(lineShape.Start.X),
+                                    scale(lineShape.Start.Y));
                             }
                             path.LineTo(
-                                scale(lineShape.End.X + dx),
-                                scale(lineShape.End.Y + dy));
+                                scale(lineShape.End.X),
+                                scale(lineShape.End.Y));
                             previous = lineShape.End;
                         }
                         break;
                     case IRectangleShape rectangleShape:
                         {
                             path.AddRect(
-                                SkiaSharpRenderer.CreateRect(rectangleShape.TopLeft, rectangleShape.BottomRight, dx, dy, scale),
+                                SkiaSharpRenderer.CreateRect(rectangleShape.TopLeft, rectangleShape.BottomRight, scale),
                                 SKPathDirection.Clockwise);
                         }
                         break;
                     case IEllipseShape ellipseShape:
                         {
                             path.AddOval(
-                                SkiaSharpRenderer.CreateRect(ellipseShape.TopLeft, ellipseShape.BottomRight, dx, dy, scale),
+                                SkiaSharpRenderer.CreateRect(ellipseShape.TopLeft, ellipseShape.BottomRight, scale),
                                 SKPathDirection.Clockwise);
                         }
                         break;
@@ -184,10 +184,10 @@ namespace Core2D.Renderer.SkiaSharp
                                 Point2.FromXY(arcShape.Point3.X, arcShape.Point3.Y),
                                 Point2.FromXY(arcShape.Point4.X, arcShape.Point4.Y));
                             var rect = new SKRect(
-                                scale(a.X + dx),
-                                scale(a.Y + dy),
-                                scale(a.X + dx + a.Width),
-                                scale(a.Y + dy + a.Height));
+                                scale(a.X),
+                                scale(a.Y),
+                                scale(a.X + a.Width),
+                                scale(a.Y + a.Height));
                             path.AddArc(rect, (float)a.StartAngle, (float)a.SweepAngle);
                         }
                         break;
@@ -196,16 +196,16 @@ namespace Core2D.Renderer.SkiaSharp
                             if (previous == null || previous != cubicBezierShape.Point1)
                             {
                                 path.MoveTo(
-                                    scale(cubicBezierShape.Point1.X + dx),
-                                    scale(cubicBezierShape.Point1.Y + dy));
+                                    scale(cubicBezierShape.Point1.X),
+                                    scale(cubicBezierShape.Point1.Y));
                             }
                             path.CubicTo(
-                                scale(cubicBezierShape.Point2.X + dx),
-                                scale(cubicBezierShape.Point2.Y + dy),
-                                scale(cubicBezierShape.Point3.X + dx),
-                                scale(cubicBezierShape.Point3.Y + dy),
-                                scale(cubicBezierShape.Point4.X + dx),
-                                scale(cubicBezierShape.Point4.Y + dy));
+                                scale(cubicBezierShape.Point2.X),
+                                scale(cubicBezierShape.Point2.Y),
+                                scale(cubicBezierShape.Point3.X),
+                                scale(cubicBezierShape.Point3.Y),
+                                scale(cubicBezierShape.Point4.X),
+                                scale(cubicBezierShape.Point4.Y));
                             previous = cubicBezierShape.Point4;
                         }
                         break;
@@ -214,14 +214,14 @@ namespace Core2D.Renderer.SkiaSharp
                             if (previous == null || previous != quadraticBezierShape.Point1)
                             {
                                 path.MoveTo(
-                                    scale(quadraticBezierShape.Point1.X + dx),
-                                    scale(quadraticBezierShape.Point1.Y + dy));
+                                    scale(quadraticBezierShape.Point1.X),
+                                    scale(quadraticBezierShape.Point1.Y));
                             }
                             path.QuadTo(
-                                scale(quadraticBezierShape.Point2.X + dx),
-                                scale(quadraticBezierShape.Point2.Y + dy),
-                                scale(quadraticBezierShape.Point3.X + dx),
-                                scale(quadraticBezierShape.Point3.Y + dy));
+                                scale(quadraticBezierShape.Point2.X),
+                                scale(quadraticBezierShape.Point2.Y),
+                                scale(quadraticBezierShape.Point3.X),
+                                scale(quadraticBezierShape.Point3.Y));
                             previous = quadraticBezierShape.Point3;
                         }
                         break;
@@ -282,11 +282,11 @@ namespace Core2D.Renderer.SkiaSharp
                 FillType = SKPathFillType.Winding
             };
             path.MoveTo(
-                scale(line.Start.X + dx),
-                scale(line.Start.Y + dy));
+                scale(line.Start.X),
+                scale(line.Start.Y));
             path.LineTo(
-                scale(line.End.X + dx),
-                scale(line.End.Y + dy));
+                scale(line.End.X),
+                scale(line.End.Y));
             return path;
         }
 
@@ -297,7 +297,7 @@ namespace Core2D.Renderer.SkiaSharp
                 FillType = SKPathFillType.Winding
             };
             path.AddRect(
-                SkiaSharpRenderer.CreateRect(rectangle.TopLeft, rectangle.BottomRight, dx, dy, scale),
+                SkiaSharpRenderer.CreateRect(rectangle.TopLeft, rectangle.BottomRight, scale),
                 SKPathDirection.Clockwise);
             if (rectangle is ITextShape text)
             {
@@ -317,7 +317,7 @@ namespace Core2D.Renderer.SkiaSharp
                 FillType = SKPathFillType.Winding
             };
             path.AddOval(
-                SkiaSharpRenderer.CreateRect(ellipse.TopLeft, ellipse.BottomRight, dx, dy, scale),
+                SkiaSharpRenderer.CreateRect(ellipse.TopLeft, ellipse.BottomRight, scale),
                 SKPathDirection.Clockwise);
             if (ellipse is ITextShape text)
             {
@@ -337,7 +337,7 @@ namespace Core2D.Renderer.SkiaSharp
                 FillType = SKPathFillType.Winding
             };
             path.AddRect(
-                SkiaSharpRenderer.CreateRect(image.TopLeft, image.BottomRight, dx, dy, scale),
+                SkiaSharpRenderer.CreateRect(image.TopLeft, image.BottomRight, scale),
                 SKPathDirection.Clockwise);
             if (image is ITextShape text)
             {
@@ -362,10 +362,10 @@ namespace Core2D.Renderer.SkiaSharp
                 Point2.FromXY(arc.Point3.X, arc.Point3.Y),
                 Point2.FromXY(arc.Point4.X, arc.Point4.Y));
             var rect = new SKRect(
-                scale(a.X + dx),
-                scale(a.Y + dy),
-                scale(a.X + dx + a.Width),
-                scale(a.Y + dy + a.Height));
+                scale(a.X),
+                scale(a.Y),
+                scale(a.X + a.Width),
+                scale(a.Y + a.Height));
             path.AddArc(rect, (float)a.StartAngle, (float)a.SweepAngle);
             return path;
         }
@@ -377,15 +377,15 @@ namespace Core2D.Renderer.SkiaSharp
                 FillType = SKPathFillType.Winding
             };
             path.MoveTo(
-                scale(cubicBezier.Point1.X + dx),
-                scale(cubicBezier.Point1.Y + dy));
+                scale(cubicBezier.Point1.X),
+                scale(cubicBezier.Point1.Y));
             path.CubicTo(
-                scale(cubicBezier.Point2.X + dx),
-                scale(cubicBezier.Point2.Y + dy),
-                scale(cubicBezier.Point3.X + dx),
-                scale(cubicBezier.Point3.Y + dy),
-                scale(cubicBezier.Point4.X + dx),
-                scale(cubicBezier.Point4.Y + dy));
+                scale(cubicBezier.Point2.X),
+                scale(cubicBezier.Point2.Y),
+                scale(cubicBezier.Point3.X),
+                scale(cubicBezier.Point3.Y),
+                scale(cubicBezier.Point4.X),
+                scale(cubicBezier.Point4.Y));
             return path;
         }
 
@@ -396,13 +396,13 @@ namespace Core2D.Renderer.SkiaSharp
                 FillType = SKPathFillType.Winding
             };
             path.MoveTo(
-                scale(quadraticBezier.Point1.X + dx),
-                scale(quadraticBezier.Point1.Y + dy));
+                scale(quadraticBezier.Point1.X),
+                scale(quadraticBezier.Point1.Y));
             path.QuadTo(
-                scale(quadraticBezier.Point2.X + dx),
-                scale(quadraticBezier.Point2.Y + dy),
-                scale(quadraticBezier.Point3.X + dx),
-                scale(quadraticBezier.Point3.Y + dy));
+                scale(quadraticBezier.Point2.X),
+                scale(quadraticBezier.Point2.Y),
+                scale(quadraticBezier.Point3.X),
+                scale(quadraticBezier.Point3.Y));
             return path;
         }
 
@@ -424,7 +424,7 @@ namespace Core2D.Renderer.SkiaSharp
             }
 
             using var pen = new SKPaint();
-            SkiaSharpRenderer.GetSKPaint(tbind, text.Style, text.TopLeft, text.BottomRight, dx, dy, scale, 96.0, 96.0, true, pen, out var origin);
+            SkiaSharpRenderer.GetSKPaint(tbind, text.Style, text.TopLeft, text.BottomRight, scale, 96.0, 96.0, true, pen, out var origin);
 
             using var outlinePath = pen.GetTextPath(tbind, origin.X, origin.Y);
             using var fillPath = pen.GetFillPath(outlinePath);
@@ -434,7 +434,7 @@ namespace Core2D.Renderer.SkiaSharp
             return path;
         }
 
-        public static SKPath ToSKPath(this IPathGeometry pathGeometry, double dx, double dy, Func<double, float> scale)
+        public static SKPath ToSKPath(this IPathGeometry pathGeometry, Func<double, float> scale)
         {
             var fillType = pathGeometry.FillRule == FillRule.EvenOdd ? SKPathFillType.EvenOdd : SKPathFillType.Winding;
             var path = new SKPath
@@ -444,7 +444,7 @@ namespace Core2D.Renderer.SkiaSharp
 
             foreach (var pathFigure in pathGeometry.Figures)
             {
-                CreateFigure(pathFigure, dx, dy, scale, path);
+                CreateFigure(pathFigure, scale, path);
             }
 
             return path;
@@ -452,7 +452,7 @@ namespace Core2D.Renderer.SkiaSharp
 
         public static SKPath ToSKPath(this IPathShape path, double dx, double dy, Func<double, float> scale)
         {
-            return ToSKPath(path.Geometry, dx, dy, scale);
+            return ToSKPath(path.Geometry, scale);
         }
 
         public static SKPathOp ToSKPathOp(PathOp op)
