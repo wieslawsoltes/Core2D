@@ -411,7 +411,7 @@ namespace Core2D.Renderer.Dxf
         }
 
         /// <inheritdoc/>
-        public void InvalidateCache(IBaseShape shape, IShapeStyle style, double dx, double dy)
+        public void InvalidateCache(IBaseShape shape, IShapeStyle style)
         {
             throw new NotImplementedException();
         }
