@@ -51,7 +51,7 @@ namespace Core2D.Renderer.PdfSharp
             }
 
             pdf.Save(stream);
-            ClearCache(isZooming: false);
+            ClearCache();
         }
 
         /// <inheritdoc/>
@@ -98,7 +98,7 @@ namespace Core2D.Renderer.PdfSharp
             }
 
             pdf.Save(stream);
-            ClearCache(isZooming: false);
+            ClearCache();
         }
 
         private PdfPage Add(PdfDocument pdf, IPageContainer container)

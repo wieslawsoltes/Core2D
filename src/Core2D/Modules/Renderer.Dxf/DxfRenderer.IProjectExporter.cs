@@ -31,7 +31,7 @@ namespace Core2D.Renderer.Dxf
             Add(dxf, container);
 
             dxf.Save(stream);
-            ClearCache(isZooming: false);
+            ClearCache();
         }
 
         /// <inheritdoc/>
@@ -51,7 +51,7 @@ namespace Core2D.Renderer.Dxf
             Add(dxf, document);
 
             dxf.Save(stream);
-            ClearCache(isZooming: false);
+            ClearCache();
         }
 
         /// <inheritdoc/>
@@ -71,7 +71,7 @@ namespace Core2D.Renderer.Dxf
             Add(dxf, project);
 
             dxf.Save(stream);
-            ClearCache(isZooming: false);
+            ClearCache();
         }
 
         private void Add(DXF.DxfDocument dxf, IPageContainer container)

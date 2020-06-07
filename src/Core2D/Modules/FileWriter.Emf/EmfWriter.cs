@@ -79,7 +79,7 @@ namespace Core2D.FileWriter.Emf
                         shape.DrawShape(g, r);
                     }
 
-                    r.ClearCache(isZooming: false);
+                    r.ClearCache();
                 }
             }
             finally
@@ -136,7 +136,7 @@ namespace Core2D.FileWriter.Emf
                     r.DrawPage(g, container.Template);
                     r.DrawPage(g, container);
 
-                    r.ClearCache(isZooming: false);
+                    r.ClearCache();
                 }
             }
             finally

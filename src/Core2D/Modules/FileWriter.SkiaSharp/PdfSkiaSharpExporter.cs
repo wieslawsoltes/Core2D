@@ -51,7 +51,7 @@ namespace Core2D.FileWriter.SkiaSharpPdf
                 Add(pdf, container);
             }
             pdf.Close();
-            _renderer.ClearCache(isZooming: false);
+            _renderer.ClearCache();
         }
 
         /// <inheritdoc/>
@@ -66,7 +66,7 @@ namespace Core2D.FileWriter.SkiaSharpPdf
                 }
             }
             pdf.Close();
-            _renderer.ClearCache(isZooming: false);
+            _renderer.ClearCache();
         }
     }
 }
