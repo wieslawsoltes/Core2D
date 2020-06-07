@@ -36,7 +36,6 @@ namespace Core2D.UI.Renderer
             _state = _serviceProvider.GetService<IFactory>().CreateShapeRendererState();
             _biCache = _serviceProvider.GetService<IFactory>().CreateCache<string, AMI.Bitmap>(x => x.Dispose());
             _drawNodeCache = _serviceProvider.GetService<IFactory>().CreateCache<object, DrawNode>(x => x.Dispose());
-            ClearCache(isZooming: false);
         }
 
         /// <inheritdoc/>
@@ -46,13 +45,10 @@ namespace Core2D.UI.Renderer
         }
 
         /// <inheritdoc/>
-        public void ClearCache(bool isZooming)
+        public void ClearCache()
         {
-            if (!isZooming)
-            {
-                // TODO: _biCache.Reset();
-                // TODO: _drawNodeCache.Reset();
-            }
+            _biCache.Reset();
+            _drawNodeCache.Reset();
         }
 
         /// <inheritdoc/>

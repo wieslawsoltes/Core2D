@@ -17,8 +17,7 @@ namespace Core2D.Renderer
         /// <summary>
         /// Clears renderer cache.
         /// </summary>
-        /// <param name="isZooming">The flag indicating zooming state.</param>
-        void ClearCache(bool isZooming);
+        void ClearCache();
 
         /// <summary>
         /// Fills rectangle with specified color using drawing context.

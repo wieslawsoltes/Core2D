@@ -41,7 +41,6 @@ namespace Core2D.Renderer.WinForms
             _biCache = _serviceProvider.GetService<IFactory>().CreateCache<string, Image>(bi => bi.Dispose());
             _textScaleFactor = textScaleFactor;
             _scaleToPage = (value) => (float)(value);
-            ClearCache(isZooming: false);
         }
 
         /// <inheritdoc/>
@@ -318,12 +317,9 @@ namespace Core2D.Renderer.WinForms
         }
 
         /// <inheritdoc/>
-        public void ClearCache(bool isZooming)
+        public void ClearCache()
         {
-            if (!isZooming)
-            {
-                _biCache.Reset();
-            }
+            _biCache.Reset();
         }
 
         /// <inheritdoc/>

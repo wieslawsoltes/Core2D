@@ -31,15 +31,10 @@ namespace Core2D.UI.Behaviors
             var state = projectEditor.PageState;
             if (state != null)
             {
-                bool invalidateCache = state.ZoomX != zoomX || state.ZoomY != zoomY;
                 state.ZoomX = zoomX;
                 state.ZoomY = zoomY;
                 state.PanX = offsetX;
                 state.PanY = offsetY;
-                if (invalidateCache)
-                {
-                    projectEditor.OnInvalidateCache(isZooming: true);
-                }
             }
         }
 

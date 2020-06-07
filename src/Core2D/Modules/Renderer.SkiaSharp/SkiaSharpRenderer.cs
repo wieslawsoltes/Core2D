@@ -52,7 +52,6 @@ namespace Core2D.Renderer.SkiaSharp
             _isAntialias = isAntialias;
             _scaleToPage = (value) => (float)(value);
             _targetDpi = targetDpi;
-            ClearCache(isZooming: false);
         }
 
         /// <inheritdoc/>
@@ -459,16 +458,13 @@ namespace Core2D.Renderer.SkiaSharp
         }
 
         /// <inheritdoc/>
-        public void ClearCache(bool isZooming)
+        public void ClearCache()
         {
-            if (!isZooming)
-            {
-                _biCache.Reset();
-                //_fillCache.Reset();
-                //_strokeCache.Reset();
-                //_arrowCache.Reset();
-                //_textCache.Reset();
-            }
+            _biCache.Reset();
+            _fillCache.Reset();
+            _strokeCache.Reset();
+            _arrowCache.Reset();
+            _textCache.Reset();
         }
 
         /// <inheritdoc/>

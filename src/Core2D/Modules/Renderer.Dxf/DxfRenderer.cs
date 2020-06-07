@@ -45,7 +45,6 @@ namespace Core2D.Renderer.Dxf
             _serviceProvider = serviceProvider;
             _state = _serviceProvider.GetService<IFactory>().CreateShapeRendererState();
             _biCache = _serviceProvider.GetService<IFactory>().CreateCache<string, DXFO.ImageDefinition>();
-            ClearCache(isZooming: false);
         }
 
         /// <inheritdoc/>
@@ -405,12 +404,9 @@ namespace Core2D.Renderer.Dxf
         }
 
         /// <inheritdoc/>
-        public void ClearCache(bool isZooming)
+        public void ClearCache()
         {
-            if (!isZooming)
-            {
-                _biCache.Reset();
-            }
+            _biCache.Reset();
         }
 
         /// <inheritdoc/>
