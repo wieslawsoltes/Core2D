@@ -46,18 +46,6 @@ namespace Core2D.UI.Renderer
         }
 
         /// <inheritdoc/>
-        public void InvalidateCache(IShapeStyle style)
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <inheritdoc/>
-        public void InvalidateCache(IBaseShape shape, IShapeStyle style)
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <inheritdoc/>
         public void ClearCache(bool isZooming)
         {
             if (!isZooming)

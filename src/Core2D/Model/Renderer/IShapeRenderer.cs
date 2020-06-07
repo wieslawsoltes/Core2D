@@ -15,19 +15,6 @@ namespace Core2D.Renderer
         IShapeRendererState State { get; set; }
 
         /// <summary>
-        /// Invalidates style cache.
-        /// </summary>
-        /// <param name="style">The style to invalidate.</param>
-        void InvalidateCache(IShapeStyle style);
-
-        /// <summary>
-        /// Invalidates shape cache.
-        /// </summary>
-        /// <param name="shape">The shape to invalidate.</param>
-        /// <param name="style">The style to invalidate.</param>
-        void InvalidateCache(IBaseShape shape, IShapeStyle style);
-
-        /// <summary>
         /// Clears renderer cache.
         /// </summary>
         /// <param name="isZooming">The flag indicating zooming state.</param>
