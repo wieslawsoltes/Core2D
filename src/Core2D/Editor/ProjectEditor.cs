@@ -2713,13 +2713,13 @@ namespace Core2D.Editor
         {
             if (PageRenderer != null)
             {
-                PageRenderer.ClearCache(isZooming: false);
+                PageRenderer.ClearCache();
                 PageRenderer.State.ImageCache = cache;
             }
 
             if (DocumentRenderer != null)
             {
-                DocumentRenderer.ClearCache(isZooming: false);
+                DocumentRenderer.ClearCache();
                 DocumentRenderer.State.ImageCache = cache;
             }
         }
@@ -2773,21 +2773,19 @@ namespace Core2D.Editor
         }
 
         /// <inheritdoc/>
-        public void OnInvalidateCache(bool isZooming)
+        public void OnInvalidateCache()
         {
             try
             {
                 if (PageRenderer != null)
                 {
-                    PageRenderer.ClearCache(isZooming);
+                    PageRenderer.ClearCache();
                 }
 
                 if (DocumentRenderer != null)
                 {
-                    DocumentRenderer.ClearCache(isZooming);
+                    DocumentRenderer.ClearCache();
                 }
-
-                Project?.CurrentContainer?.InvalidateLayer();
             }
             catch (Exception ex)
             {

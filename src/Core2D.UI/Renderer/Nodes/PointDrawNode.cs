@@ -29,7 +29,7 @@ namespace Core2D.UI.Renderer
             Center = Rect.Center;
         }
 
-        public override void OnDraw(AM.DrawingContext context, double dx, double dy, double zoom)
+        public override void OnDraw(AM.DrawingContext context, double zoom)
         {
             context.FillRectangle(Fill, Rect);
             context.DrawRectangle(Stroke, Rect);

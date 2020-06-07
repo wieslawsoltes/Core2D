@@ -36,12 +36,12 @@ namespace Core2D.UI.Renderer
             Fill = DrawUtil.ToBrush(Color);
         }
 
-        public override void Draw(AM.DrawingContext context, double dx, double dy, double zoom)
+        public override void Draw(AM.DrawingContext context, double zoom)
         {
-            OnDraw(context, dx, dy, zoom);
+            OnDraw(context, zoom);
         }
 
-        public override void OnDraw(AM.DrawingContext context, double dx, double dy, double zoom)
+        public override void OnDraw(AM.DrawingContext context, double zoom)
         {
             context.FillRectangle(Fill, Rect);
         }

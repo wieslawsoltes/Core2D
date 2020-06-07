@@ -31,7 +31,7 @@ namespace Core2D.Renderer.Dxf
             Add(dxf, container);
 
             dxf.Save(stream);
-            ClearCache(isZooming: false);
+            ClearCache();
         }
 
         /// <inheritdoc/>
@@ -51,7 +51,7 @@ namespace Core2D.Renderer.Dxf
             Add(dxf, document);
 
             dxf.Save(stream);
-            ClearCache(isZooming: false);
+            ClearCache();
         }
 
         /// <inheritdoc/>
@@ -71,7 +71,7 @@ namespace Core2D.Renderer.Dxf
             Add(dxf, project);
 
             dxf.Save(stream);
-            ClearCache(isZooming: false);
+            ClearCache();
         }
 
         private void Add(DXF.DxfDocument dxf, IPageContainer container)
@@ -87,14 +87,14 @@ namespace Core2D.Renderer.Dxf
             {
                 _pageWidth = container.Template.Width;
                 _pageHeight = container.Template.Height;
-                DrawPage(dxf, container.Template, 0.0, 0.0);
+                DrawPage(dxf, container.Template);
             }
             else
             {
                 throw new NullReferenceException("Container template must be set.");
             }
 
-            DrawPage(dxf, container, 0.0, 0.0);
+            DrawPage(dxf, container);
         }
 
         private void Add(DXF.DxfDocument dxf, IDocumentContainer document)

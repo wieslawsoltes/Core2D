@@ -36,7 +36,6 @@ namespace Core2D.UI.Renderer
             _state = _serviceProvider.GetService<IFactory>().CreateShapeRendererState();
             _biCache = _serviceProvider.GetService<IFactory>().CreateCache<string, AMI.Bitmap>(x => x.Dispose());
             _drawNodeCache = _serviceProvider.GetService<IFactory>().CreateCache<object, DrawNode>(x => x.Dispose());
-            ClearCache(isZooming: false);
         }
 
         /// <inheritdoc/>
@@ -46,25 +45,10 @@ namespace Core2D.UI.Renderer
         }
 
         /// <inheritdoc/>
-        public void InvalidateCache(IShapeStyle style)
+        public void ClearCache()
         {
-            throw new NotImplementedException();
-        }
-
-        /// <inheritdoc/>
-        public void InvalidateCache(IBaseShape shape, IShapeStyle style, double dx, double dy)
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <inheritdoc/>
-        public void ClearCache(bool isZooming)
-        {
-            if (!isZooming)
-            {
-                // TODO: _biCache.Reset();
-                // TODO: _drawNodeCache.Reset();
-            }
+            _biCache.Reset();
+            _drawNodeCache.Reset();
         }
 
         /// <inheritdoc/>
@@ -88,7 +72,7 @@ namespace Core2D.UI.Renderer
                         drawNode.UpdateStyle();
                         color.Invalidate();
                     }
-                    drawNode.Draw(context, 0, 0, _state.ZoomX);
+                    drawNode.Draw(context, _state.ZoomX);
                 }
             }
             else
@@ -99,30 +83,30 @@ namespace Core2D.UI.Renderer
 
                 _drawNodeCache.Set(color, drawNode);
 
-                drawNode.Draw(context, 0, 0, _state.ZoomX);
+                drawNode.Draw(context, _state.ZoomX);
             }
         }
 
         /// <inheritdoc/>
-        public void DrawPage(object dc, IPageContainer container, double dx, double dy)
+        public void DrawPage(object dc, IPageContainer container)
         {
             foreach (var layer in container.Layers)
             {
                 if (layer.IsVisible)
                 {
-                    DrawLayer(dc, layer, dx, dy);
+                    DrawLayer(dc, layer);
                 }
             }
         }
 
         /// <inheritdoc/>
-        public void DrawLayer(object dc, ILayerContainer layer, double dx, double dy)
+        public void DrawLayer(object dc, ILayerContainer layer)
         {
             foreach (var shape in layer.Shapes)
             {
                 if (shape.State.Flags.HasFlag(_state.DrawShapeState.Flags))
                 {
-                    shape.DrawShape(dc, this, dx, dy);
+                    shape.DrawShape(dc, this);
                 }
             }
 
@@ -130,13 +114,13 @@ namespace Core2D.UI.Renderer
             {
                 if (shape.State.Flags.HasFlag(_state.DrawShapeState.Flags))
                 {
-                    shape.DrawPoints(dc, this, dx, dy);
+                    shape.DrawPoints(dc, this);
                 }
             }
         }
 
         /// <inheritdoc/>
-        public void DrawPoint(object dc, IPointShape point, double dx, double dy)
+        public void DrawPoint(object dc, IPointShape point)
         {
             var isSelected = _state.SelectedShapes?.Count > 0 && _state.SelectedShapes.Contains(point);
             var pointStyle = isSelected ? _state.SelectedPointStyle : _state.PointStyle;
@@ -164,7 +148,7 @@ namespace Core2D.UI.Renderer
 
                 if (_state.DrawPoints == true)
                 {
-                    drawNodeCached.Draw(context, dx, dy, _state.ZoomX);
+                    drawNodeCached.Draw(context, _state.ZoomX);
                 }
             }
             else
@@ -177,13 +161,13 @@ namespace Core2D.UI.Renderer
 
                 if (_state.DrawPoints == true)
                 {
-                    drawNode.Draw(context, dx, dy, _state.ZoomX);
+                    drawNode.Draw(context, _state.ZoomX);
                 }
             }
         }
 
         /// <inheritdoc/>
-        public void DrawLine(object dc, ILineShape line, double dx, double dy)
+        public void DrawLine(object dc, ILineShape line)
         {
             var context = dc as AM.DrawingContext;
 
@@ -203,7 +187,7 @@ namespace Core2D.UI.Renderer
                     drawNodeCached.UpdateGeometry();
                 }
 
-                drawNodeCached.Draw(context, dx, dy, _state.ZoomX);
+                drawNodeCached.Draw(context, _state.ZoomX);
             }
             else
             {
@@ -213,12 +197,12 @@ namespace Core2D.UI.Renderer
 
                 _drawNodeCache.Set(line, drawNode);
 
-                drawNode.Draw(context, dx, dy, _state.ZoomX);
+                drawNode.Draw(context, _state.ZoomX);
             }
         }
 
         /// <inheritdoc/>
-        public void DrawRectangle(object dc, IRectangleShape rectangle, double dx, double dy)
+        public void DrawRectangle(object dc, IRectangleShape rectangle)
         {
             var context = dc as AM.DrawingContext;
 
@@ -237,7 +221,7 @@ namespace Core2D.UI.Renderer
                     drawNodeCached.UpdateGeometry();
                 }
 
-                drawNodeCached.Draw(context, dx, dy, _state.ZoomX);
+                drawNodeCached.Draw(context, _state.ZoomX);
             }
             else
             {
@@ -247,12 +231,12 @@ namespace Core2D.UI.Renderer
 
                 _drawNodeCache.Set(rectangle, drawNode);
 
-                drawNode.Draw(context, dx, dy, _state.ZoomX);
+                drawNode.Draw(context, _state.ZoomX);
             }
         }
 
         /// <inheritdoc/>
-        public void DrawEllipse(object dc, IEllipseShape ellipse, double dx, double dy)
+        public void DrawEllipse(object dc, IEllipseShape ellipse)
         {
             var context = dc as AM.DrawingContext;
 
@@ -271,7 +255,7 @@ namespace Core2D.UI.Renderer
                     drawNodeCached.UpdateGeometry();
                 }
 
-                drawNodeCached.Draw(context, dx, dy, _state.ZoomX);
+                drawNodeCached.Draw(context, _state.ZoomX);
             }
             else
             {
@@ -281,12 +265,12 @@ namespace Core2D.UI.Renderer
 
                 _drawNodeCache.Set(ellipse, drawNode);
 
-                drawNode.Draw(context, dx, dy, _state.ZoomX);
+                drawNode.Draw(context, _state.ZoomX);
             }
         }
 
         /// <inheritdoc/>
-        public void DrawArc(object dc, IArcShape arc, double dx, double dy)
+        public void DrawArc(object dc, IArcShape arc)
         {
             var context = dc as AM.DrawingContext;
 
@@ -305,7 +289,7 @@ namespace Core2D.UI.Renderer
                     drawNodeCached.UpdateGeometry();
                 }
 
-                drawNodeCached.Draw(context, dx, dy, _state.ZoomX);
+                drawNodeCached.Draw(context, _state.ZoomX);
             }
             else
             {
@@ -315,12 +299,12 @@ namespace Core2D.UI.Renderer
 
                 _drawNodeCache.Set(arc, drawNode);
 
-                drawNode.Draw(context, dx, dy, _state.ZoomX);
+                drawNode.Draw(context, _state.ZoomX);
             }
         }
 
         /// <inheritdoc/>
-        public void DrawCubicBezier(object dc, ICubicBezierShape cubicBezier, double dx, double dy)
+        public void DrawCubicBezier(object dc, ICubicBezierShape cubicBezier)
         {
             var context = dc as AM.DrawingContext;
 
@@ -339,7 +323,7 @@ namespace Core2D.UI.Renderer
                     drawNodeCached.UpdateGeometry();
                 }
 
-                drawNodeCached.Draw(context, dx, dy, _state.ZoomX);
+                drawNodeCached.Draw(context, _state.ZoomX);
             }
             else
             {
@@ -349,12 +333,12 @@ namespace Core2D.UI.Renderer
 
                 _drawNodeCache.Set(cubicBezier, drawNode);
 
-                drawNode.Draw(context, dx, dy, _state.ZoomX);
+                drawNode.Draw(context, _state.ZoomX);
             }
         }
 
         /// <inheritdoc/>
-        public void DrawQuadraticBezier(object dc, IQuadraticBezierShape quadraticBezier, double dx, double dy)
+        public void DrawQuadraticBezier(object dc, IQuadraticBezierShape quadraticBezier)
         {
             var context = dc as AM.DrawingContext;
 
@@ -373,7 +357,7 @@ namespace Core2D.UI.Renderer
                     drawNodeCached.UpdateGeometry();
                 }
 
-                drawNodeCached.Draw(context, dx, dy, _state.ZoomX);
+                drawNodeCached.Draw(context, _state.ZoomX);
             }
             else
             {
@@ -383,12 +367,12 @@ namespace Core2D.UI.Renderer
 
                 _drawNodeCache.Set(quadraticBezier, drawNode);
 
-                drawNode.Draw(context, dx, dy, _state.ZoomX);
+                drawNode.Draw(context, _state.ZoomX);
             }
         }
 
         /// <inheritdoc/>
-        public void DrawText(object dc, ITextShape text, double dx, double dy)
+        public void DrawText(object dc, ITextShape text)
         {
             var context = dc as AM.DrawingContext;
 
@@ -408,7 +392,7 @@ namespace Core2D.UI.Renderer
                     drawNodeCached.UpdateGeometry();
                 }
 
-                drawNodeCached.Draw(context, dx, dy, _state.ZoomX);
+                drawNodeCached.Draw(context, _state.ZoomX);
             }
             else
             {
@@ -418,12 +402,12 @@ namespace Core2D.UI.Renderer
 
                 _drawNodeCache.Set(text, drawNode);
 
-                drawNode.Draw(context, dx, dy, _state.ZoomX);
+                drawNode.Draw(context, _state.ZoomX);
             }
         }
 
         /// <inheritdoc/>
-        public void DrawImage(object dc, IImageShape image, double dx, double dy)
+        public void DrawImage(object dc, IImageShape image)
         {
             var context = dc as AM.DrawingContext;
 
@@ -442,7 +426,7 @@ namespace Core2D.UI.Renderer
                     drawNodeCached.UpdateGeometry();
                 }
 
-                drawNodeCached.Draw(context, dx, dy, _state.ZoomX);
+                drawNodeCached.Draw(context, _state.ZoomX);
             }
             else
             {
@@ -452,12 +436,12 @@ namespace Core2D.UI.Renderer
 
                 _drawNodeCache.Set(image, drawNode);
 
-                drawNode.Draw(context, dx, dy, _state.ZoomX);
+                drawNode.Draw(context, _state.ZoomX);
             }
         }
 
         /// <inheritdoc/>
-        public void DrawPath(object dc, IPathShape path, double dx, double dy)
+        public void DrawPath(object dc, IPathShape path)
         {
             var context = dc as AM.DrawingContext;
 
@@ -476,7 +460,7 @@ namespace Core2D.UI.Renderer
                     drawNodeCached.UpdateGeometry();
                 }
 
-                drawNodeCached.Draw(context, dx, dy, _state.ZoomX);
+                drawNodeCached.Draw(context, _state.ZoomX);
             }
             else
             {
@@ -486,7 +470,7 @@ namespace Core2D.UI.Renderer
 
                 _drawNodeCache.Set(path, drawNode);
 
-                drawNode.Draw(context, dx, dy, _state.ZoomX);
+                drawNode.Draw(context, _state.ZoomX);
             }
         }
     }

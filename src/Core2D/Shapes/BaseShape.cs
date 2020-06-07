@@ -76,13 +76,13 @@ namespace Core2D.Shapes
         }
 
         /// <inheritdoc/>
-        public abstract void DrawShape(object dc, IShapeRenderer renderer, double dx, double dy);
+        public abstract void DrawShape(object dc, IShapeRenderer renderer);
 
         /// <inheritdoc/>
-        public abstract void DrawPoints(object dc, IShapeRenderer renderer, double dx, double dy);
+        public abstract void DrawPoints(object dc, IShapeRenderer renderer);
 
         /// <inheritdoc/>
-        public virtual bool Invalidate(IShapeRenderer renderer, double dx, double dy)
+        public virtual bool Invalidate(IShapeRenderer renderer)
         {
             return false;
         }

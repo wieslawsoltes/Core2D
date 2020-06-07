@@ -54,16 +54,16 @@ namespace Core2D.Shapes
         }
 
         /// <inheritdoc/>
-        public override void DrawShape(object dc, IShapeRenderer renderer, double dx, double dy)
+        public override void DrawShape(object dc, IShapeRenderer renderer)
         {
             if (State.Flags.HasFlag(ShapeStateFlags.Visible))
             {
-                renderer.DrawPoint(dc, this, dx, dy);
+                renderer.DrawPoint(dc, this);
             }
         }
 
         /// <inheritdoc/>
-        public override void DrawPoints(object dc, IShapeRenderer renderer, double dx, double dy)
+        public override void DrawPoints(object dc, IShapeRenderer renderer)
         {
         }
 

@@ -76,10 +76,10 @@ namespace Core2D.FileWriter.Emf
 
                     foreach (var shape in shapes)
                     {
-                        shape.DrawShape(g, r, 0, 0);
+                        shape.DrawShape(g, r);
                     }
 
-                    r.ClearCache(isZooming: false);
+                    r.ClearCache();
                 }
             }
             finally
@@ -133,10 +133,10 @@ namespace Core2D.FileWriter.Emf
 
                     g.PageUnit = GraphicsUnit.Display;
 
-                    r.DrawPage(g, container.Template, 0.0, 0.0);
-                    r.DrawPage(g, container, 0.0, 0.0);
+                    r.DrawPage(g, container.Template);
+                    r.DrawPage(g, container);
 
-                    r.ClearCache(isZooming: false);
+                    r.ClearCache();
                 }
             }
             finally

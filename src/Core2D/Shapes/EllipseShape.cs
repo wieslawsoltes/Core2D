@@ -14,20 +14,20 @@ namespace Core2D.Shapes
         public override Type TargetType => typeof(IEllipseShape);
 
         /// <inheritdoc/>
-        public override void DrawShape(object dc, IShapeRenderer renderer, double dx, double dy)
+        public override void DrawShape(object dc, IShapeRenderer renderer)
         {
             if (State.Flags.HasFlag(ShapeStateFlags.Visible))
             {
-                renderer.DrawEllipse(dc, this, dx, dy);
+                renderer.DrawEllipse(dc, this);
             }
         }
 
         /// <inheritdoc/>
-        public override void DrawPoints(object dc, IShapeRenderer renderer, double dx, double dy)
+        public override void DrawPoints(object dc, IShapeRenderer renderer)
         {
             if (State.Flags.HasFlag(ShapeStateFlags.Visible))
             {
-                base.DrawPoints(dc, renderer, dx, dy);
+                base.DrawPoints(dc, renderer);
             }
         }
 

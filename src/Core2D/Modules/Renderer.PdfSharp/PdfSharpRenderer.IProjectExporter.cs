@@ -51,7 +51,7 @@ namespace Core2D.Renderer.PdfSharp
             }
 
             pdf.Save(stream);
-            ClearCache(isZooming: false);
+            ClearCache();
         }
 
         /// <inheritdoc/>
@@ -98,7 +98,7 @@ namespace Core2D.Renderer.PdfSharp
             }
 
             pdf.Save(stream);
-            ClearCache(isZooming: false);
+            ClearCache();
         }
 
         private PdfPage Add(PdfDocument pdf, IPageContainer container)
@@ -129,10 +129,10 @@ namespace Core2D.Renderer.PdfSharp
                 Fill(gfx, 0, 0, pdfPage.Width.Value / scale, pdfPage.Height.Value / scale, container.Template.Background);
 
                 // Draw template contents to pdf graphics.
-                DrawPage(gfx, container.Template, 0.0, 0.0);
+                DrawPage(gfx, container.Template);
 
                 // Draw page contents to pdf graphics.
-                DrawPage(gfx, container, 0.0, 0.0);
+                DrawPage(gfx, container);
             }
 
             return pdfPage;

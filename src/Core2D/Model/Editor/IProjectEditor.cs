@@ -945,8 +945,7 @@ namespace Core2D.Editor
         /// <summary>
         /// Invalidate renderer's cache.
         /// </summary>
-        /// <param name="isZooming">The flag indicating whether is zooming.</param>
-        void OnInvalidateCache(bool isZooming);
+        void OnInvalidateCache();
 
         /// <summary>
         /// Add recent project file.

@@ -45,12 +45,12 @@ namespace Core2D.Common.UnitTests
             throw new NotImplementedException();
         }
 
-        public void DrawShape(object dc, IShapeRenderer renderer, double dx, double dy)
+        public void DrawShape(object dc, IShapeRenderer renderer)
         {
             throw new NotImplementedException();
         }
 
-        public void DrawPoints(object dc, IShapeRenderer renderer, double dx, double dy)
+        public void DrawPoints(object dc, IShapeRenderer renderer)
         {
             throw new NotImplementedException();
         }
@@ -60,7 +60,7 @@ namespace Core2D.Common.UnitTests
             throw new NotImplementedException();
         }
 
-        public bool Invalidate(IShapeRenderer renderer, double dx, double dy)
+        public bool Invalidate(IShapeRenderer renderer)
         {
             throw new NotImplementedException();
         }

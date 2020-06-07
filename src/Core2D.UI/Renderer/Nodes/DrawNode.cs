@@ -27,7 +27,7 @@ namespace Core2D.UI.Renderer
             Stroke = DrawUtil.ToPen(Style, Style.Thickness);
         }
 
-        public virtual void Draw(AM.DrawingContext context, double dx, double dy, double zoom)
+        public virtual void Draw(AM.DrawingContext context, double zoom)
         {
             var scale = ScaleSize ? 1.0 / zoom : 1.0;
             var translateX = 0.0 - (Center.X * scale) + Center.X;
@@ -50,18 +50,16 @@ namespace Core2D.UI.Renderer
                 Stroke = DrawUtil.ToPen(Style, thickness);
             }
 
-            var offsetDisposable = dx != 0.0 || dy != 0.0 ? context.PushPreTransform(AME.MatrixHelper.Translate(dx, dy)) : default(IDisposable);
             var translateDisposable = scale != 1.0 ? context.PushPreTransform(AME.MatrixHelper.Translate(translateX, translateY)) : default(IDisposable);
             var scaleDisposable = scale != 1.0 ? context.PushPreTransform(AME.MatrixHelper.Scale(scale, scale)) : default(IDisposable);
 
-            OnDraw(context, dx, dy, zoom);
+            OnDraw(context, zoom);
 
             scaleDisposable?.Dispose();
             translateDisposable?.Dispose();
-            offsetDisposable?.Dispose();
         }
 
-        public abstract void OnDraw(AM.DrawingContext context, double dx, double dy, double zoom);
+        public abstract void OnDraw(AM.DrawingContext context, double zoom);
 
         public virtual void Dispose()
         {

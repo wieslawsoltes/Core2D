@@ -31,7 +31,7 @@ namespace Core2D.UI.Renderer
             base.UpdateTextGeometry();
         }
 
-        public override void OnDraw(AM.DrawingContext context, double dx, double dy, double zoom)
+        public override void OnDraw(AM.DrawingContext context, double zoom)
         {
             if (Rectangle.IsFilled)
             {
@@ -68,7 +68,7 @@ namespace Core2D.UI.Renderer
                 }
             }
 
-            base.OnDraw(context, dx, dy, zoom);
+            base.OnDraw(context, zoom);
         }
     }
 }

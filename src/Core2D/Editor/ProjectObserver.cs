@@ -33,7 +33,7 @@ namespace Core2D.Editor
                 _editor = editor;
 
                 _invalidateContainer = () => { };
-                _invalidateStyles = () => InvalidateAndClearCache();
+                _invalidateStyles = () => Invalidate();
                 _invalidateLayers = () => Invalidate();
                 _invalidateShapes = () => Invalidate();
 
@@ -45,16 +45,6 @@ namespace Core2D.Editor
         {
             if (_editor?.Project?.CurrentContainer != null)
             {
-                _editor.Project.CurrentContainer.InvalidateLayer();
-            }
-        }
-
-        private void InvalidateAndClearCache()
-        {
-            if (_editor?.Project?.CurrentContainer != null)
-            {
-                _editor.PageRenderer.ClearCache(isZooming: false);
-                _editor.DocumentRenderer.ClearCache(isZooming: false);
                 _editor.Project.CurrentContainer.InvalidateLayer();
             }
         }

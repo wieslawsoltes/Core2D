@@ -8,7 +8,7 @@ namespace Core2D.Renderer.WinForms
 {
     public static class PathGeometryConverter
     {
-        public static D2D.GraphicsPath ToGraphicsPath(this IPathGeometry pg, double dx, double dy, Func<double, float> scale)
+        public static D2D.GraphicsPath ToGraphicsPath(this IPathGeometry pg, Func<double, float> scale)
         {
             var gp = new D2D.GraphicsPath
             {
@@ -29,23 +29,23 @@ namespace Core2D.Renderer.WinForms
                     else if (segment is ICubicBezierSegment cubicBezierSegment)
                     {
                         gp.AddBezier(
-                            scale(startPoint.X + dx),
-                            scale(startPoint.Y + dy),
-                            scale(cubicBezierSegment.Point1.X + dx),
-                            scale(cubicBezierSegment.Point1.Y + dy),
-                            scale(cubicBezierSegment.Point2.X + dx),
-                            scale(cubicBezierSegment.Point2.Y + dy),
-                            scale(cubicBezierSegment.Point3.X + dx),
-                            scale(cubicBezierSegment.Point3.Y + dy));
+                            scale(startPoint.X),
+                            scale(startPoint.Y),
+                            scale(cubicBezierSegment.Point1.X),
+                            scale(cubicBezierSegment.Point1.Y),
+                            scale(cubicBezierSegment.Point2.X),
+                            scale(cubicBezierSegment.Point2.Y),
+                            scale(cubicBezierSegment.Point3.X),
+                            scale(cubicBezierSegment.Point3.Y));
                         startPoint = cubicBezierSegment.Point3;
                     }
                     else if (segment is ILineSegment lineSegment)
                     {
                         gp.AddLine(
-                            scale(startPoint.X + dx),
-                            scale(startPoint.Y + dy),
-                            scale(lineSegment.Point.X + dx),
-                            scale(lineSegment.Point.Y + dy));
+                            scale(startPoint.X),
+                            scale(startPoint.Y),
+                            scale(lineSegment.Point.X),
+                            scale(lineSegment.Point.Y));
                         startPoint = lineSegment.Point;
                     }
                     else if (segment is IQuadraticBezierSegment quadraticBezierSegment)
@@ -62,14 +62,14 @@ namespace Core2D.Renderer.WinForms
                         double x4 = p3.X;
                         double y4 = p3.Y;
                         gp.AddBezier(
-                            scale(x1 + dx),
-                            scale(y1 + dy),
-                            scale(x2 + dx),
-                            scale(y2 + dy),
-                            scale(x3 + dx),
-                            scale(y3 + dy),
-                            scale(x4 + dx),
-                            scale(y4 + dy));
+                            scale(x1),
+                            scale(y1),
+                            scale(x2),
+                            scale(y2),
+                            scale(x3),
+                            scale(y3),
+                            scale(x4),
+                            scale(y4));
                         startPoint = quadraticBezierSegment.Point2;
                     }
                     else

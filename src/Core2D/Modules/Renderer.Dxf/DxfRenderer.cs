@@ -45,7 +45,6 @@ namespace Core2D.Renderer.Dxf
             _serviceProvider = serviceProvider;
             _state = _serviceProvider.GetService<IFactory>().CreateShapeRendererState();
             _biCache = _serviceProvider.GetService<IFactory>().CreateCache<string, DXFO.ImageDefinition>();
-            ClearCache(isZooming: false);
         }
 
         /// <inheritdoc/>
@@ -116,7 +115,7 @@ namespace Core2D.Renderer.Dxf
             };
         }
 
-        private DXFE.Ellipse CreateEllipticalArc(IArcShape arc, double dx, double dy)
+        private DXFE.Ellipse CreateEllipticalArc(IArcShape arc)
         {
             var a = new Spatial.Arc.GdiArc(
                 Spatial.Point2.FromXY(arc.Point1.X, arc.Point1.Y),
@@ -124,8 +123,8 @@ namespace Core2D.Renderer.Dxf
                 Spatial.Point2.FromXY(arc.Point3.X, arc.Point3.Y),
                 Spatial.Point2.FromXY(arc.Point4.X, arc.Point4.Y));
 
-            double _cx = ToDxfX(a.X + dx + a.Width / 2.0);
-            double _cy = ToDxfY(a.Y + dy + a.Height / 2.0);
+            double _cx = ToDxfX(a.X + a.Width / 2.0);
+            double _cy = ToDxfY(a.Y + a.Height / 2.0);
             double minor = Math.Min(a.Height, a.Width);
             double major = Math.Max(a.Height, a.Width);
             double startAngle = -a.EndAngle;
@@ -332,7 +331,7 @@ namespace Core2D.Renderer.Dxf
             }
         }
 
-        private void CreateHatchBoundsAndEntitiess(IPathGeometry pg, double dx, double dy, out IList<DXFE.HatchBoundaryPath> bounds, out ICollection<DXFE.EntityObject> entities)
+        private void CreateHatchBoundsAndEntitiess(IPathGeometry pg, out IList<DXFE.HatchBoundaryPath> bounds, out ICollection<DXFE.EntityObject> entities)
         {
             bounds = new List<DXFE.HatchBoundaryPath>();
             entities = new List<DXFE.EntityObject>();
@@ -355,14 +354,14 @@ namespace Core2D.Renderer.Dxf
                     else if (segment is ICubicBezierSegment cubicBezierSegment)
                     {
                         var dxfSpline = CreateCubicSpline(
-                            startPoint.X + dx,
-                            startPoint.Y + dy,
-                            cubicBezierSegment.Point1.X + dx,
-                            cubicBezierSegment.Point1.Y + dy,
-                            cubicBezierSegment.Point2.X + dx,
-                            cubicBezierSegment.Point2.Y + dy,
-                            cubicBezierSegment.Point3.X + dx,
-                            cubicBezierSegment.Point3.Y + dy);
+                            startPoint.X,
+                            startPoint.Y,
+                            cubicBezierSegment.Point1.X,
+                            cubicBezierSegment.Point1.Y,
+                            cubicBezierSegment.Point2.X,
+                            cubicBezierSegment.Point2.Y,
+                            cubicBezierSegment.Point3.X,
+                            cubicBezierSegment.Point3.Y);
                         edges.Add(dxfSpline);
                         entities.Add((DXFE.Spline)dxfSpline.Clone());
                         startPoint = cubicBezierSegment.Point3;
@@ -370,10 +369,10 @@ namespace Core2D.Renderer.Dxf
                     else if (segment is ILineSegment lineSegment)
                     {
                         var dxfLine = CreateLine(
-                            startPoint.X + dx,
-                            startPoint.Y + dy,
-                            lineSegment.Point.X + dx,
-                            lineSegment.Point.Y + dy);
+                            startPoint.X,
+                            startPoint.Y,
+                            lineSegment.Point.X,
+                            lineSegment.Point.Y);
                         edges.Add(dxfLine);
                         entities.Add((DXFE.Line)dxfLine.Clone());
                         startPoint = lineSegment.Point;
@@ -381,12 +380,12 @@ namespace Core2D.Renderer.Dxf
                     else if (segment is IQuadraticBezierSegment quadraticBezierSegment)
                     {
                         var dxfSpline = CreateQuadraticSpline(
-                            startPoint.X + dx,
-                            startPoint.Y + dy,
-                            quadraticBezierSegment.Point1.X + dx,
-                            quadraticBezierSegment.Point1.Y + dy,
-                            quadraticBezierSegment.Point2.X + dx,
-                            quadraticBezierSegment.Point2.Y + dy);
+                            startPoint.X,
+                            startPoint.Y,
+                            quadraticBezierSegment.Point1.X,
+                            quadraticBezierSegment.Point1.Y,
+                            quadraticBezierSegment.Point2.X,
+                            quadraticBezierSegment.Point2.Y);
                         edges.Add(dxfSpline);
                         entities.Add((DXFE.Spline)dxfSpline.Clone());
                         startPoint = quadraticBezierSegment.Point2;
@@ -405,24 +404,9 @@ namespace Core2D.Renderer.Dxf
         }
 
         /// <inheritdoc/>
-        public void InvalidateCache(IShapeStyle style)
+        public void ClearCache()
         {
-            throw new NotImplementedException();
-        }
-
-        /// <inheritdoc/>
-        public void InvalidateCache(IBaseShape shape, IShapeStyle style, double dx, double dy)
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <inheritdoc/>
-        public void ClearCache(bool isZooming)
-        {
-            if (!isZooming)
-            {
-                _biCache.Reset();
-            }
+            _biCache.Reset();
         }
 
         /// <inheritdoc/>
@@ -434,7 +418,7 @@ namespace Core2D.Renderer.Dxf
         }
 
         /// <inheritdoc/>
-        public void DrawPage(object dc, IPageContainer container, double dx, double dy)
+        public void DrawPage(object dc, IPageContainer container)
         {
             var dxf = dc as DXF.DxfDocument;
 
@@ -449,12 +433,12 @@ namespace Core2D.Renderer.Dxf
 
                 _currentLayer = dxfLayer;
 
-                DrawLayer(dc, layer, dx, dy);
+                DrawLayer(dc, layer);
             }
         }
 
         /// <inheritdoc/>
-        public void DrawLayer(object dc, ILayerContainer layer, double dx, double dy)
+        public void DrawLayer(object dc, ILayerContainer layer)
         {
             var dxf = dc as DXF.DxfDocument;
 
@@ -462,7 +446,7 @@ namespace Core2D.Renderer.Dxf
             {
                 if (shape.State.Flags.HasFlag(State.DrawShapeState.Flags))
                 {
-                    shape.DrawShape(dxf, this, dx, dy);
+                    shape.DrawShape(dxf, this);
                 }
             }
 
@@ -470,28 +454,28 @@ namespace Core2D.Renderer.Dxf
             {
                 if (shape.State.Flags.HasFlag(State.DrawShapeState.Flags))
                 {
-                    shape.DrawPoints(dxf, this, dx, dy);
+                    shape.DrawPoints(dxf, this);
                 }
             }
         }
 
         /// <inheritdoc/>
-        public void DrawPoint(object dc, IPointShape point, double dx, double dy)
+        public void DrawPoint(object dc, IPointShape point)
         {
             // TODO:
         }
 
         /// <inheritdoc/>
-        public void DrawLine(object dc, ILineShape line, double dx, double dy)
+        public void DrawLine(object dc, ILineShape line)
         {
             if (line.IsStroked)
             {
                 var dxf = dc as DXF.DxfDocument;
 
-                double _x1 = line.Start.X + dx;
-                double _y1 = line.Start.Y + dy;
-                double _x2 = line.End.X + dx;
-                double _y2 = line.End.Y + dy;
+                double _x1 = line.Start.X;
+                double _y1 = line.Start.Y;
+                double _x2 = line.End.X;
+                double _y2 = line.End.Y;
 
                 LineShapeExtensions.GetMaxLength(line, ref _x1, ref _y1, ref _x2, ref _y2);
 
@@ -506,7 +490,7 @@ namespace Core2D.Renderer.Dxf
         }
 
         /// <inheritdoc/>
-        public void DrawRectangle(object dc, IRectangleShape rectangle, double dx, double dy)
+        public void DrawRectangle(object dc, IRectangleShape rectangle)
         {
             if (rectangle.IsStroked || rectangle.IsFilled || rectangle.IsGrid)
             {
@@ -517,7 +501,7 @@ namespace Core2D.Renderer.Dxf
                     rectangle.TopLeft.Y,
                     rectangle.BottomRight.X,
                     rectangle.BottomRight.Y,
-                    dx, dy);
+                    0, 0);
 
                 DrawRectangleInternal(dxf, _currentLayer, rectangle.IsFilled, rectangle.IsStroked, style, ref rect);
 
@@ -533,11 +517,11 @@ namespace Core2D.Renderer.Dxf
                 }
             }
 
-            DrawText(dc, rectangle, dx, dy);
+            DrawText(dc, rectangle);
         }
 
         /// <inheritdoc/>
-        public void DrawEllipse(object dc, IEllipseShape ellipse, double dx, double dy)
+        public void DrawEllipse(object dc, IEllipseShape ellipse)
         {
             if (ellipse.IsStroked || ellipse.IsFilled)
             {
@@ -548,21 +532,21 @@ namespace Core2D.Renderer.Dxf
                     ellipse.TopLeft.Y,
                     ellipse.BottomRight.X,
                     ellipse.BottomRight.Y,
-                    dx, dy);
+                    0, 0);
 
                 DrawEllipseInternal(dxf, _currentLayer, ellipse.IsFilled, ellipse.IsStroked, style, ref rect);
             }
 
-            DrawText(dc, ellipse, dx, dy);
+            DrawText(dc, ellipse);
         }
 
         /// <inheritdoc/>
-        public void DrawArc(object dc, IArcShape arc, double dx, double dy)
+        public void DrawArc(object dc, IArcShape arc)
         {
             var dxf = dc as DXF.DxfDocument;
             var style = arc.Style;
 
-            var dxfEllipse = CreateEllipticalArc(arc, dx, dy);
+            var dxfEllipse = CreateEllipticalArc(arc);
 
             if (arc.IsFilled)
             {
@@ -606,7 +590,7 @@ namespace Core2D.Renderer.Dxf
         }
 
         /// <inheritdoc/>
-        public void DrawCubicBezier(object dc, ICubicBezierShape cubicBezier, double dx, double dy)
+        public void DrawCubicBezier(object dc, ICubicBezierShape cubicBezier)
         {
             if (cubicBezier.IsStroked || cubicBezier.IsFilled)
             {
@@ -614,14 +598,14 @@ namespace Core2D.Renderer.Dxf
                 var style = cubicBezier.Style;
 
                 var dxfSpline = CreateCubicSpline(
-                    cubicBezier.Point1.X + dx,
-                    cubicBezier.Point1.Y + dy,
-                    cubicBezier.Point2.X + dx,
-                    cubicBezier.Point2.Y + dy,
-                    cubicBezier.Point3.X + dx,
-                    cubicBezier.Point3.Y + dy,
-                    cubicBezier.Point4.X + dx,
-                    cubicBezier.Point4.Y + dy);
+                    cubicBezier.Point1.X,
+                    cubicBezier.Point1.Y,
+                    cubicBezier.Point2.X,
+                    cubicBezier.Point2.Y,
+                    cubicBezier.Point3.X,
+                    cubicBezier.Point3.Y,
+                    cubicBezier.Point4.X,
+                    cubicBezier.Point4.Y);
 
                 if (cubicBezier.IsFilled)
                 {
@@ -665,7 +649,7 @@ namespace Core2D.Renderer.Dxf
         }
 
         /// <inheritdoc/>
-        public void DrawQuadraticBezier(object dc, IQuadraticBezierShape quadraticBezier, double dx, double dy)
+        public void DrawQuadraticBezier(object dc, IQuadraticBezierShape quadraticBezier)
         {
             if (quadraticBezier.IsStroked || quadraticBezier.IsFilled)
             {
@@ -673,12 +657,12 @@ namespace Core2D.Renderer.Dxf
                 var style = quadraticBezier.Style;
 
                 var dxfSpline = CreateQuadraticSpline(
-                    quadraticBezier.Point1.X + dx,
-                    quadraticBezier.Point1.Y + dy,
-                    quadraticBezier.Point2.X + dx,
-                    quadraticBezier.Point2.Y + dy,
-                    quadraticBezier.Point3.X + dx,
-                    quadraticBezier.Point3.Y + dy);
+                    quadraticBezier.Point1.X,
+                    quadraticBezier.Point1.Y,
+                    quadraticBezier.Point2.X,
+                    quadraticBezier.Point2.Y,
+                    quadraticBezier.Point3.X,
+                    quadraticBezier.Point3.Y);
 
                 if (quadraticBezier.IsFilled)
                 {
@@ -722,7 +706,7 @@ namespace Core2D.Renderer.Dxf
         }
 
         /// <inheritdoc/>
-        public void DrawText(object dc, ITextShape text, double dx, double dy)
+        public void DrawText(object dc, ITextShape text)
         {
             var dxf = dc as DXF.DxfDocument;
 
@@ -746,7 +730,7 @@ namespace Core2D.Renderer.Dxf
                 text.TopLeft.Y,
                 text.BottomRight.X,
                 text.BottomRight.Y,
-                dx, dy);
+                0, 0);
             var x = text.Style.TextStyle.TextHAlignment switch
             {
                 TextHAlignment.Center => rect.X + rect.Width / 2.0,
@@ -809,7 +793,7 @@ namespace Core2D.Renderer.Dxf
         }
 
         /// <inheritdoc/>
-        public void DrawImage(object dc, IImageShape image, double dx, double dy)
+        public void DrawImage(object dc, IImageShape image)
         {
             var dxf = dc as DXF.DxfDocument;
 
@@ -821,7 +805,7 @@ namespace Core2D.Renderer.Dxf
                     image.TopLeft.Y,
                     image.BottomRight.X,
                     image.BottomRight.Y,
-                    dx, dy);
+                    0, 0);
 
                 var dxfImageDefinitionCached = _biCache.Get(image.Key);
                 if (dxfImageDefinitionCached != null)
@@ -853,18 +837,18 @@ namespace Core2D.Renderer.Dxf
                 }
             }
 
-            DrawText(dc, image, dx, dy);
+            DrawText(dc, image);
         }
 
         /// <inheritdoc/>
-        public void DrawPath(object dc, IPathShape path, double dx, double dy)
+        public void DrawPath(object dc, IPathShape path)
         {
             if (path.IsStroked || path.IsFilled)
             {
                 var dxf = dc as DXF.DxfDocument;
                 var style = path.Style;
 
-                CreateHatchBoundsAndEntitiess(path.Geometry, dx, dy, out var bounds, out var entities);
+                CreateHatchBoundsAndEntitiess(path.Geometry, out var bounds, out var entities);
                 if (entities == null || bounds == null)
                 {
                     return;

@@ -25,7 +25,7 @@ namespace Core2D.UI.Renderer
             Center = Geometry.Bounds.Center;
         }
 
-        public override void OnDraw(AM.DrawingContext context, double dx, double dy, double zoom)
+        public override void OnDraw(AM.DrawingContext context, double zoom)
         {
             context.DrawGeometry(Arc.IsFilled ? Fill : null, Arc.IsStroked ? Stroke : null, Geometry);
         }

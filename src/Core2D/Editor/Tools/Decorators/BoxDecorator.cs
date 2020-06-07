@@ -194,25 +194,25 @@ namespace Core2D.Editor.Tools.Decorators
         }
 
         /// <inheritdoc/>
-        public virtual void DrawShape(object dc, IShapeRenderer renderer, double dx, double dy)
+        public virtual void DrawShape(object dc, IShapeRenderer renderer)
         {
             if (_isVisible)
             {
                 foreach (var handle in _handles)
                 {
-                    handle.DrawShape(dc, renderer, dx, dy);
+                    handle.DrawShape(dc, renderer);
                 }
             }
         }
 
         /// <inheritdoc/>
-        public virtual void DrawPoints(object dc, IShapeRenderer renderer, double dx, double dy)
+        public virtual void DrawPoints(object dc, IShapeRenderer renderer)
         {
 
         }
 
         /// <inheritdoc/>
-        public virtual bool Invalidate(IShapeRenderer renderer, double dx, double dy)
+        public virtual bool Invalidate(IShapeRenderer renderer)
         {
             return false;
         }
