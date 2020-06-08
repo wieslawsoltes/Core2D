@@ -21,7 +21,7 @@ namespace Core2D.UI.Renderer
         {
             ScaleThickness = Arc.State.Flags.HasFlag(ShapeStateFlags.Thickness);
             ScaleSize = Arc.State.Flags.HasFlag(ShapeStateFlags.Size);
-            Geometry = PathGeometryConverter.ToGeometry(Arc, 0, 0);
+            Geometry = PathGeometryConverter.ToGeometry(Arc);
             Center = Geometry.Bounds.Center;
         }
 

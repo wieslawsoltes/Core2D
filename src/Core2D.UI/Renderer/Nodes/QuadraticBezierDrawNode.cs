@@ -21,7 +21,7 @@ namespace Core2D.UI.Renderer
         {
             ScaleThickness = QuadraticBezier.State.Flags.HasFlag(ShapeStateFlags.Thickness);
             ScaleSize = QuadraticBezier.State.Flags.HasFlag(ShapeStateFlags.Size);
-            Geometry = PathGeometryConverter.ToGeometry(QuadraticBezier, 0, 0);
+            Geometry = PathGeometryConverter.ToGeometry(QuadraticBezier);
             Center = Geometry.Bounds.Center;
         }
 

@@ -30,7 +30,7 @@ namespace Core2D.Renderer.SkiaSharp
         /// <inheritdoc/>
         public IPathShape ToPathShape(IEnumerable<IBaseShape> shapes)
         {
-            var path = PathGeometryConverter.ToSKPath(shapes, 0.0, 0.0, (value) => (float)value);
+            var path = PathGeometryConverter.ToSKPath(shapes);
             if (path == null)
             {
                 return null;
@@ -40,7 +40,7 @@ namespace Core2D.Renderer.SkiaSharp
             var style = first.Style != null ?
                 (IShapeStyle)first.Style?.Copy(null) :
                 factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
-            var geometry = PathGeometryConverter.ToPathGeometry(path, 0.0, 0.0, factory);
+            var geometry = PathGeometryConverter.ToPathGeometry(path, factory);
             var pathShape = factory.CreatePathShape(
                 "Path",
                 style,
@@ -53,7 +53,7 @@ namespace Core2D.Renderer.SkiaSharp
         /// <inheritdoc/>
         public IPathShape ToPathShape(IBaseShape shape)
         {
-            var path = PathGeometryConverter.ToSKPath(shape, 0.0, 0.0, (value) => (float)value);
+            var path = PathGeometryConverter.ToSKPath(shape);
             if (path == null)
             {
                 return null;
@@ -62,7 +62,7 @@ namespace Core2D.Renderer.SkiaSharp
             var style = shape.Style != null ?
                 (IShapeStyle)shape.Style?.Copy(null) :
                 factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
-            var geometry = PathGeometryConverter.ToPathGeometry(path, 0.0, 0.0, factory);
+            var geometry = PathGeometryConverter.ToPathGeometry(path, factory);
             var pathShape = factory.CreatePathShape(
                 "Path",
                 style,
@@ -75,7 +75,7 @@ namespace Core2D.Renderer.SkiaSharp
         /// <inheritdoc/>
         public IPathShape ToStrokePathShape(IBaseShape shape)
         {
-            var path = PathGeometryConverter.ToSKPath(shape, 0.0, 0.0, (value) => (float)value);
+            var path = PathGeometryConverter.ToSKPath(shape);
             if (path == null)
             {
                 return null;
@@ -89,7 +89,7 @@ namespace Core2D.Renderer.SkiaSharp
             style.Stroke = fill;
             style.Fill = stroke;
             using var pen = new SKPaint();
-            SkiaSharpRenderer.ToSKPaintPen(style, (value) => (float)value, 96.0, 96.0, true, pen);
+            SkiaSharpRenderer.ToSKPaintPen(style, 96.0, 96.0, true, pen);
             var result = pen.GetFillPath(path, 1.0f);
             if (result != null)
             {
@@ -98,7 +98,7 @@ namespace Core2D.Renderer.SkiaSharp
                     result.Dispose();
                     return null;
                 }
-                var geometry = PathGeometryConverter.ToPathGeometry(result, 0.0, 0.0, factory);
+                var geometry = PathGeometryConverter.ToPathGeometry(result, factory);
                 var pathShape = factory.CreatePathShape(
                     "Path",
                     style,
@@ -114,7 +114,7 @@ namespace Core2D.Renderer.SkiaSharp
         /// <inheritdoc/>
         public IPathShape ToFillPathShape(IBaseShape shape)
         {
-            var path = PathGeometryConverter.ToSKPath(shape, 0.0, 0.0, (value) => (float)value);
+            var path = PathGeometryConverter.ToSKPath(shape);
             if (path == null)
             {
                 return null;
@@ -133,7 +133,7 @@ namespace Core2D.Renderer.SkiaSharp
                     result.Dispose();
                     return null;
                 }
-                var geometry = PathGeometryConverter.ToPathGeometry(result, 0.0, 0.0, factory);
+                var geometry = PathGeometryConverter.ToPathGeometry(result, factory);
                 var pathShape = factory.CreatePathShape(
                     "Path",
                     style,
@@ -149,7 +149,7 @@ namespace Core2D.Renderer.SkiaSharp
         /// <inheritdoc/>
         public IPathShape Simplify(IBaseShape shape)
         {
-            var path = PathGeometryConverter.ToSKPath(shape, 0.0, 0.0, (value) => (float)value)?.Simplify();
+            var path = PathGeometryConverter.ToSKPath(shape)?.Simplify();
             if (path == null)
             {
                 return null;
@@ -158,7 +158,7 @@ namespace Core2D.Renderer.SkiaSharp
             var style = shape.Style != null ?
                 (IShapeStyle)shape.Style?.Copy(null) :
                 factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
-            var geometry = PathGeometryConverter.ToPathGeometry(path, 0.0, 0.0, factory);
+            var geometry = PathGeometryConverter.ToPathGeometry(path, factory);
             var pathShape = factory.CreatePathShape(
                 "Path",
                 style,
@@ -180,7 +180,7 @@ namespace Core2D.Renderer.SkiaSharp
 
             foreach (var s in shapes)
             {
-                var path = PathGeometryConverter.ToSKPath(s, 0.0, 0.0, (value) => (float)value);
+                var path = PathGeometryConverter.ToSKPath(s);
                 if (path != null)
                 {
                     paths.Add(path);
@@ -203,7 +203,7 @@ namespace Core2D.Renderer.SkiaSharp
             var style = shape.Style != null ?
                 (IShapeStyle)shape.Style?.Copy(null) :
                 factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
-            var geometry = PathGeometryConverter.ToPathGeometry(result, 0.0, 0.0, factory);
+            var geometry = PathGeometryConverter.ToPathGeometry(result, factory);
             var pathShape = factory.CreatePathShape(
                 "Path",
                 style,
@@ -224,7 +224,7 @@ namespace Core2D.Renderer.SkiaSharp
             }
             var factory = _serviceProvider.GetService<IFactory>();
             var style = factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
-            var geometry = PathGeometryConverter.ToPathGeometry(path, 0.0, 0.0, factory);
+            var geometry = PathGeometryConverter.ToPathGeometry(path, factory);
             var pathShape = factory.CreatePathShape(
                 "Path",
                 style,
@@ -237,7 +237,7 @@ namespace Core2D.Renderer.SkiaSharp
         /// <inheritdoc/>
         public string ToSvgPathData(IBaseShape shape)
         {
-            var path = PathGeometryConverter.ToSKPath(shape, 0.0, 0.0, (value) => (float)value);
+            var path = PathGeometryConverter.ToSKPath(shape);
             if (path == null)
             {
                 return null;

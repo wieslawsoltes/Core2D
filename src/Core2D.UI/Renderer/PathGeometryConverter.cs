@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.Immutable;
 using Core2D;
 using Core2D.Path;
@@ -14,7 +13,7 @@ namespace Core2D.UI.Renderer
 {
     public static class PathGeometryConverter
     {
-        public static IPathGeometry ToPathGeometry(AM.PathGeometry pg, double dx, double dy, IFactory factory)
+        public static IPathGeometry ToPathGeometry(AM.PathGeometry pg, IFactory factory)
         {
             var geometry = factory.CreatePathGeometry(
                 ImmutableArray.Create<IPathFigure>(),
@@ -25,7 +24,7 @@ namespace Core2D.UI.Renderer
             foreach (var pf in pg.Figures)
             {
                 context.BeginFigure(
-                    factory.CreatePointShape(pf.StartPoint.X + dx, pf.StartPoint.Y + dy),
+                    factory.CreatePointShape(pf.StartPoint.X, pf.StartPoint.Y),
                     pf.IsFilled,
                     pf.IsClosed);
 
@@ -34,7 +33,7 @@ namespace Core2D.UI.Renderer
                     if (segment is AM.ArcSegment arcSegment)
                     {
                         context.ArcTo(
-                            factory.CreatePointShape(arcSegment.Point.X + dx, arcSegment.Point.Y + dy),
+                            factory.CreatePointShape(arcSegment.Point.X, arcSegment.Point.Y),
                             factory.CreatePathSize(arcSegment.Size.Width, arcSegment.Size.Height),
                             arcSegment.RotationAngle,
                             arcSegment.IsLargeArc,
@@ -43,20 +42,20 @@ namespace Core2D.UI.Renderer
                     else if (segment is AM.BezierSegment cubicBezierSegment)
                     {
                         context.CubicBezierTo(
-                            factory.CreatePointShape(cubicBezierSegment.Point1.X + dx, cubicBezierSegment.Point1.Y + dy),
-                            factory.CreatePointShape(cubicBezierSegment.Point2.X + dx, cubicBezierSegment.Point2.Y + dy),
-                            factory.CreatePointShape(cubicBezierSegment.Point3.X + dx, cubicBezierSegment.Point3.Y + dy));
+                            factory.CreatePointShape(cubicBezierSegment.Point1.X, cubicBezierSegment.Point1.Y),
+                            factory.CreatePointShape(cubicBezierSegment.Point2.X, cubicBezierSegment.Point2.Y),
+                            factory.CreatePointShape(cubicBezierSegment.Point3.X, cubicBezierSegment.Point3.Y));
                     }
                     else if (segment is AM.LineSegment lineSegment)
                     {
                         context.LineTo(
-                            factory.CreatePointShape(lineSegment.Point.X + dx, lineSegment.Point.Y + dy));
+                            factory.CreatePointShape(lineSegment.Point.X, lineSegment.Point.Y));
                     }
                     else if (segment is AM.QuadraticBezierSegment quadraticBezierSegment)
                     {
                         context.QuadraticBezierTo(
-                            factory.CreatePointShape(quadraticBezierSegment.Point1.X + dx, quadraticBezierSegment.Point1.Y + dy),
-                            factory.CreatePointShape(quadraticBezierSegment.Point2.X + dx, quadraticBezierSegment.Point2.Y + dy));
+                            factory.CreatePointShape(quadraticBezierSegment.Point1.X, quadraticBezierSegment.Point1.Y),
+                            factory.CreatePointShape(quadraticBezierSegment.Point2.X, quadraticBezierSegment.Point2.Y));
                     }
                     else
                     {
@@ -68,7 +67,7 @@ namespace Core2D.UI.Renderer
             return geometry;
         }
 
-        public static AM.StreamGeometry ToStreamGeometry(IPathGeometry xpg, double dx, double dy)
+        public static AM.StreamGeometry ToStreamGeometry(IPathGeometry xpg)
         {
             var sg = new AM.StreamGeometry();
 
@@ -80,7 +79,7 @@ namespace Core2D.UI.Renderer
 
                 foreach (var xpf in xpg.Figures)
                 {
-                    sgc.BeginFigure(new A.Point(xpf.StartPoint.X + dx, xpf.StartPoint.Y + dy), xpf.IsFilled);
+                    sgc.BeginFigure(new A.Point(xpf.StartPoint.X, xpf.StartPoint.Y), xpf.IsFilled);
 
                     previous = xpf.StartPoint;
 
@@ -89,7 +88,7 @@ namespace Core2D.UI.Renderer
                         if (segment is IArcSegment arcSegment)
                         {
                             sgc.ArcTo(
-                                new A.Point(arcSegment.Point.X + dx, arcSegment.Point.Y + dy),
+                                new A.Point(arcSegment.Point.X, arcSegment.Point.Y),
                                 new A.Size(arcSegment.Size.Width, arcSegment.Size.Height),
                                 arcSegment.RotationAngle,
                                 arcSegment.IsLargeArc,
@@ -100,16 +99,16 @@ namespace Core2D.UI.Renderer
                         else if (segment is ICubicBezierSegment cubicBezierSegment)
                         {
                             sgc.CubicBezierTo(
-                                new A.Point(cubicBezierSegment.Point1.X + dx, cubicBezierSegment.Point1.Y + dy),
-                                new A.Point(cubicBezierSegment.Point2.X + dx, cubicBezierSegment.Point2.Y + dy),
-                                new A.Point(cubicBezierSegment.Point3.X + dx, cubicBezierSegment.Point3.Y + dy));
+                                new A.Point(cubicBezierSegment.Point1.X, cubicBezierSegment.Point1.Y),
+                                new A.Point(cubicBezierSegment.Point2.X, cubicBezierSegment.Point2.Y),
+                                new A.Point(cubicBezierSegment.Point3.X, cubicBezierSegment.Point3.Y));
 
                             previous = cubicBezierSegment.Point3;
                         }
                         else if (segment is ILineSegment lineSegment)
                         {
                             sgc.LineTo(
-                                new A.Point(lineSegment.Point.X + dx, lineSegment.Point.Y + dy));
+                                new A.Point(lineSegment.Point.X, lineSegment.Point.Y));
 
                             previous = lineSegment.Point;
                         }
@@ -117,11 +116,11 @@ namespace Core2D.UI.Renderer
                         {
                             sgc.QuadraticBezierTo(
                                 new A.Point(
-                                    quadraticBezierSegment.Point1.X + dx,
-                                    quadraticBezierSegment.Point1.Y + dy),
+                                    quadraticBezierSegment.Point1.X,
+                                    quadraticBezierSegment.Point1.Y),
                                 new A.Point(
-                                    quadraticBezierSegment.Point2.X + dx,
-                                    quadraticBezierSegment.Point2.Y + dy));
+                                    quadraticBezierSegment.Point2.X,
+                                    quadraticBezierSegment.Point2.Y));
 
                             previous = quadraticBezierSegment.Point2;
                         }
@@ -141,23 +140,23 @@ namespace Core2D.UI.Renderer
         public static IPathGeometry ToPathGeometry(string source, IFactory factory)
         {
             var pg = AM.PathGeometry.Parse(source);
-            return ToPathGeometry(pg, 0.0, 0.0, factory);
+            return ToPathGeometry(pg, factory);
         }
 
-        public static AM.Geometry ToGeometry(IPathGeometry xpg, double dx, double dy)
+        public static AM.Geometry ToGeometry(IPathGeometry xpg)
         {
-            return ToStreamGeometry(xpg, dx, dy);
+            return ToStreamGeometry(xpg);
         }
 
-        public static AM.Geometry ToGeometry(IEllipseShape ellipse, double dx, double dy)
+        public static AM.Geometry ToGeometry(IEllipseShape ellipse)
         {
-            var rect2 = Rect2.FromPoints(ellipse.TopLeft.X, ellipse.TopLeft.Y, ellipse.BottomRight.X, ellipse.BottomRight.Y, dx, dy);
+            var rect2 = Rect2.FromPoints(ellipse.TopLeft.X, ellipse.TopLeft.Y, ellipse.BottomRight.X, ellipse.BottomRight.Y);
             var rect = new A.Rect(rect2.X, rect2.Y, rect2.Width, rect2.Height);
             var g = new AM.EllipseGeometry(rect);
             return g;
         }
 
-        public static AM.Geometry ToGeometry(IArcShape arc, double dx, double dy)
+        public static AM.Geometry ToGeometry(IArcShape arc)
         {
             var sg = new AM.StreamGeometry();
             using var sgc = sg.Open();
@@ -167,10 +166,10 @@ namespace Core2D.UI.Renderer
                 Point2.FromXY(arc.Point3.X, arc.Point3.Y),
                 Point2.FromXY(arc.Point4.X, arc.Point4.Y));
             sgc.BeginFigure(
-                new A.Point(a.Start.X + dx, a.Start.Y + dy),
+                new A.Point(a.Start.X, a.Start.Y),
                 arc.IsFilled);
             sgc.ArcTo(
-                new A.Point(a.End.X + dx, a.End.Y + dy),
+                new A.Point(a.End.X, a.End.Y),
                 new A.Size(a.Radius.Width, a.Radius.Height),
                 0.0,
                 a.IsLargeArc,
@@ -179,38 +178,38 @@ namespace Core2D.UI.Renderer
             return sg;
         }
 
-        public static AM.Geometry ToGeometry(ICubicBezierShape cubicBezier, double dx, double dy)
+        public static AM.Geometry ToGeometry(ICubicBezierShape cubicBezier)
         {
             var sg = new AM.StreamGeometry();
             using var sgc = sg.Open();
             sgc.BeginFigure(
-                new A.Point(cubicBezier.Point1.X + dx, cubicBezier.Point1.Y + dy),
+                new A.Point(cubicBezier.Point1.X, cubicBezier.Point1.Y),
                 cubicBezier.IsFilled);
             sgc.CubicBezierTo(
-                new A.Point(cubicBezier.Point2.X + dx, cubicBezier.Point2.Y + dy),
-                new A.Point(cubicBezier.Point3.X + dx, cubicBezier.Point3.Y + dy),
-                new A.Point(cubicBezier.Point4.X + dx, cubicBezier.Point4.Y + dy));
+                new A.Point(cubicBezier.Point2.X, cubicBezier.Point2.Y),
+                new A.Point(cubicBezier.Point3.X, cubicBezier.Point3.Y),
+                new A.Point(cubicBezier.Point4.X, cubicBezier.Point4.Y));
             sgc.EndFigure(false);
             return sg;
         }
 
-        public static AM.Geometry ToGeometry(IQuadraticBezierShape quadraticBezier, double dx, double dy)
+        public static AM.Geometry ToGeometry(IQuadraticBezierShape quadraticBezier)
         {
             var sg = new AM.StreamGeometry();
             using var sgc = sg.Open();
             sgc.BeginFigure(
-                new A.Point(quadraticBezier.Point1.X + dx, quadraticBezier.Point1.Y + dy),
+                new A.Point(quadraticBezier.Point1.X, quadraticBezier.Point1.Y),
                 quadraticBezier.IsFilled);
             sgc.QuadraticBezierTo(
-                new A.Point(quadraticBezier.Point2.X + dx, quadraticBezier.Point2.Y + dy),
-                new A.Point(quadraticBezier.Point3.X + dx, quadraticBezier.Point3.Y + dy));
+                new A.Point(quadraticBezier.Point2.X, quadraticBezier.Point2.Y),
+                new A.Point(quadraticBezier.Point3.X, quadraticBezier.Point3.Y));
             sgc.EndFigure(false);
             return sg;
         }
 
         public static string ToSource(IPathGeometry xpg)
         {
-            return ToStreamGeometry(xpg, 0.0, 0.0).ToString();
+            return ToStreamGeometry(xpg).ToString();
         }
 
         public static string ToSource(AM.StreamGeometry sg)
