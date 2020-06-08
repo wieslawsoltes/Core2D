@@ -5,7 +5,12 @@ using AM = Avalonia.Media;
 
 namespace Core2D.UI.Renderer
 {
-    internal class CubicBezierDrawNode : DrawNode
+    internal interface ICubicBezierDrawNode : IDrawNode
+    {
+        ICubicBezierShape CubicBezier { get; set; }
+    }
+
+    internal class CubicBezierDrawNode : DrawNode, ICubicBezierDrawNode
     {
         public ICubicBezierShape CubicBezier { get; set; }
         public AM.Geometry Geometry { get; set; }
@@ -25,8 +30,10 @@ namespace Core2D.UI.Renderer
             Center = Geometry.Bounds.Center;
         }
 
-        public override void OnDraw(AM.DrawingContext context, double zoom)
+        public override void OnDraw(object dc, double zoom)
         {
+            var context = dc as AM.DrawingContext;
+
             context.DrawGeometry(CubicBezier.IsFilled ? Fill : null, CubicBezier.IsStroked ? Stroke : null, Geometry);
         }
     }

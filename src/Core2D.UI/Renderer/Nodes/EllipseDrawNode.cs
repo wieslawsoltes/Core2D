@@ -5,7 +5,12 @@ using AM = Avalonia.Media;
 
 namespace Core2D.UI.Renderer
 {
-    internal class EllipseDrawNode : TextDrawNode
+    internal interface IEllipseDrawNode : ITextDrawNode
+    {
+        IEllipseShape Ellipse { get; set; }
+    }
+
+    internal class EllipseDrawNode : TextDrawNode, IEllipseDrawNode
     {
         public IEllipseShape Ellipse { get; set; }
         public AM.Geometry Geometry { get; set; }
@@ -30,11 +35,13 @@ namespace Core2D.UI.Renderer
             base.UpdateTextGeometry();
         }
 
-        public override void OnDraw(AM.DrawingContext context, double zoom)
+        public override void OnDraw(object dc, double zoom)
         {
+            var context = dc as AM.DrawingContext;
+
             context.DrawGeometry(Ellipse.IsFilled ? Fill : null, Ellipse.IsStroked ? Stroke : null, Geometry);
 
-            base.OnDraw(context, zoom);
+            base.OnDraw(dc, zoom);
         }
     }
 }

@@ -9,7 +9,21 @@ using AME = Avalonia.MatrixExtensions;
 
 namespace Core2D.UI.Renderer
 {
-    internal abstract class Marker
+    internal interface IMarker
+    {
+        IArrowStyle Style { get; set; }
+        void Draw(object dc);
+        void UpdateStyle();
+    }
+
+    internal interface ILineDrawNode : IDrawNode
+    {
+        ILineShape Line { get; set; }
+        public IMarker StartMarker { get; set; }
+        public IMarker EndMarker { get; set; }
+    }
+
+    internal abstract class Marker : IMarker
     {
         public IArrowStyle Style { get; set; }
         public AM.IBrush Brush { get; set; }
@@ -17,7 +31,7 @@ namespace Core2D.UI.Renderer
         public A.Matrix Rotation { get; set; }
         public A.Point Point { get; set; }
 
-        public abstract void Draw(AM.DrawingContext context);
+        public abstract void Draw(object dc);
 
         public virtual void UpdateStyle()
         {
@@ -28,7 +42,7 @@ namespace Core2D.UI.Renderer
 
     internal class NoneMarker : Marker
     {
-        public override void Draw(AM.DrawingContext context)
+        public override void Draw(object dc)
         {
         }
     }
@@ -37,8 +51,10 @@ namespace Core2D.UI.Renderer
     {
         public A.Rect Rect { get; set; }
 
-        public override void Draw(AM.DrawingContext context)
+        public override void Draw(object dc)
         {
+            var context = dc as AM.DrawingContext;
+
             using var rotationDisposable = context.PushPreTransform(Rotation);
 
             if (Style.IsFilled)
@@ -57,8 +73,10 @@ namespace Core2D.UI.Renderer
     {
         public AM.EllipseGeometry EllipseGeometry { get; set; }
 
-        public override void Draw(AM.DrawingContext context)
+        public override void Draw(object dc)
         {
+            var context = dc as AM.DrawingContext;
+
             using var rotationDisposable = context.PushPreTransform(Rotation);
 
             context.DrawGeometry(Style.IsFilled ? Brush : null, Style.IsStroked ? Pen : null, EllipseGeometry);
@@ -72,8 +90,10 @@ namespace Core2D.UI.Renderer
         public A.Point P12;
         public A.Point P22;
 
-        public override void Draw(AM.DrawingContext context)
+        public override void Draw(object dc)
         {
+            var context = dc as AM.DrawingContext;
+
             if (Style.IsStroked)
             {
                 context.DrawLine(Pen, P11, P21);
@@ -82,13 +102,13 @@ namespace Core2D.UI.Renderer
         }
     }
 
-    internal class LineDrawNode : DrawNode
+    internal class LineDrawNode : DrawNode, ILineDrawNode
     {
         public ILineShape Line { get; set; }
         public A.Point P0 { get; set; }
         public A.Point P1 { get; set; }
-        public Marker StartMarker { get; set; }
-        public Marker EndMarker { get; set; }
+        public IMarker StartMarker { get; set; }
+        public IMarker EndMarker { get; set; }
         public AM.StreamGeometry CurveGeometry { get; set; }
 
         public LineDrawNode(ILineShape line, IShapeStyle style)
@@ -207,7 +227,7 @@ namespace Core2D.UI.Renderer
                 double a1 = Math.Atan2(y1 - y2, x1 - x2);
                 StartMarker = CreatArrowMarker(x1, y1, a1, Style.StartArrowStyle);
                 StartMarker.UpdateStyle();
-                P0 = StartMarker.Point;
+                P0 = (StartMarker as Marker).Point;
             }
             else
             {
@@ -220,7 +240,7 @@ namespace Core2D.UI.Renderer
                 double a2 = Math.Atan2(y2 - y1, x2 - x1);
                 EndMarker = CreatArrowMarker(x2, y2, a2, Style.EndArrowStyle);
                 EndMarker.UpdateStyle();
-                P1 = EndMarker.Point;
+                P1 = (EndMarker as Marker).Point;
             }
             else
             {
@@ -267,8 +287,10 @@ namespace Core2D.UI.Renderer
             }
         }
 
-        public override void OnDraw(AM.DrawingContext context, double zoom)
+        public override void OnDraw(object dc, double zoom)
         {
+            var context = dc as AM.DrawingContext;
+
             if (Line.IsStroked)
             {
                 if (Style.LineStyle.IsCurved)
@@ -282,12 +304,12 @@ namespace Core2D.UI.Renderer
 
                 if (Style.StartArrowStyle.ArrowType != ArrowType.None)
                 {
-                    StartMarker?.Draw(context);
+                    StartMarker?.Draw(dc);
                 }
 
                 if (Style.EndArrowStyle.ArrowType != ArrowType.None)
                 {
-                    EndMarker?.Draw(context);
+                    EndMarker?.Draw(dc);
                 }
             }
         }

@@ -17,7 +17,7 @@ namespace Core2D.Renderer.SkiaSharp
     {
         private readonly IServiceProvider _serviceProvider;
         private IShapeRendererState _state;
-        private ICache<string, SKBitmap> _biCache;
+        private ICache<string, IDisposable> _biCache;
 
         /// <inheritdoc/>
         public IShapeRendererState State
@@ -34,7 +34,7 @@ namespace Core2D.Renderer.SkiaSharp
         {
             _serviceProvider = serviceProvider;
             _state = _serviceProvider.GetService<IFactory>().CreateShapeRendererState();
-            _biCache = _serviceProvider.GetService<IFactory>().CreateCache<string, SKBitmap>(bi => bi.Dispose());
+            _biCache = _serviceProvider.GetService<IFactory>().CreateCache<string, IDisposable>(bi => bi.Dispose());
         }
 
         /// <inheritdoc/>
@@ -688,7 +688,7 @@ namespace Core2D.Renderer.SkiaSharp
                 DrawRectangleInternal(canvas, brush, pen, image.IsStroked, image.IsFilled, ref rect);
             }
 
-            var imageCached = _biCache.Get(image.Key);
+            var imageCached = _biCache.Get(image.Key) as SKBitmap;
             if (imageCached != null)
             {
                 canvas.DrawBitmap(imageCached, rect);

@@ -5,7 +5,12 @@ using AM = Avalonia.Media;
 
 namespace Core2D.UI.Renderer
 {
-    internal class QuadraticBezierDrawNode : DrawNode
+    internal interface IQuadraticBezierDrawNode : IDrawNode
+    {
+        IQuadraticBezierShape QuadraticBezier { get; set; }
+    }
+
+    internal class QuadraticBezierDrawNode : DrawNode, IQuadraticBezierDrawNode
     {
         public IQuadraticBezierShape QuadraticBezier { get; set; }
         public AM.Geometry Geometry { get; set; }
@@ -25,8 +30,10 @@ namespace Core2D.UI.Renderer
             Center = Geometry.Bounds.Center;
         }
 
-        public override void OnDraw(AM.DrawingContext context, double zoom)
+        public override void OnDraw(object dc, double zoom)
         {
+            var context = dc as AM.DrawingContext;
+
             context.DrawGeometry(QuadraticBezier.IsFilled ? Fill : null, QuadraticBezier.IsStroked ? Stroke : null, Geometry);
         }
     }

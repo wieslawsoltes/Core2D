@@ -5,7 +5,12 @@ using AM = Avalonia.Media;
 
 namespace Core2D.UI.Renderer
 {
-    internal class PathDrawNode : DrawNode
+    internal interface IPathDrawNode : IDrawNode
+    {
+        IPathShape Path { get; set; }
+    }
+
+    internal class PathDrawNode : DrawNode, IPathDrawNode
     {
         public IPathShape Path { get; set; }
         public AM.Geometry Geometry { get; set; }
@@ -25,8 +30,10 @@ namespace Core2D.UI.Renderer
             Center = Geometry.Bounds.Center;
         }
 
-        public override void OnDraw(AM.DrawingContext context, double zoom)
+        public override void OnDraw(object dc, double zoom)
         {
+            var context = dc as AM.DrawingContext;
+
             context.DrawGeometry(Path.IsFilled ? Fill : null, Path.IsStroked ? Stroke : null, Geometry);
         }
     }

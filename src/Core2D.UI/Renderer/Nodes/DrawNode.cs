@@ -6,7 +6,18 @@ using AME = Avalonia.MatrixExtensions;
 
 namespace Core2D.UI.Renderer
 {
-    internal abstract class DrawNode : IDisposable
+    internal interface IDrawNode : IDisposable
+    {
+        IShapeStyle Style { get; set; }
+        bool ScaleThickness { get; set; }
+        bool ScaleSize { get; set; }
+        void UpdateGeometry();
+        void UpdateStyle();
+        void Draw(object dc, double zoom);
+        void OnDraw(object dc, double zoom);
+    }
+
+    internal abstract class DrawNode : IDrawNode
     {
         public IShapeStyle Style { get; set; }
         public bool ScaleThickness { get; set; }
@@ -27,7 +38,7 @@ namespace Core2D.UI.Renderer
             Stroke = DrawUtil.ToPen(Style, Style.Thickness);
         }
 
-        public virtual void Draw(AM.DrawingContext context, double zoom)
+        public virtual void Draw(object dc, double zoom)
         {
             var scale = ScaleSize ? 1.0 / zoom : 1.0;
             var translateX = 0.0 - (Center.X * scale) + Center.X;
@@ -50,16 +61,17 @@ namespace Core2D.UI.Renderer
                 Stroke = DrawUtil.ToPen(Style, thickness);
             }
 
+            var context = dc as AM.DrawingContext;
             var translateDisposable = scale != 1.0 ? context.PushPreTransform(AME.MatrixHelper.Translate(translateX, translateY)) : default(IDisposable);
             var scaleDisposable = scale != 1.0 ? context.PushPreTransform(AME.MatrixHelper.Scale(scale, scale)) : default(IDisposable);
 
-            OnDraw(context, zoom);
+            OnDraw(dc, zoom);
 
             scaleDisposable?.Dispose();
             translateDisposable?.Dispose();
         }
 
-        public abstract void OnDraw(AM.DrawingContext context, double zoom);
+        public abstract void OnDraw(object dc, double zoom);
 
         public virtual void Dispose()
         {

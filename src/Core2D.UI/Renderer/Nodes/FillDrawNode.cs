@@ -4,7 +4,16 @@ using AM = Avalonia.Media;
 
 namespace Core2D.UI.Renderer
 {
-    internal class FillDrawNode : DrawNode
+    internal interface IFillDrawNode : IDrawNode
+    {
+        IColor Color { get; set; }
+        double X { get; set; }
+        double Y { get; set; }
+        double Width { get; set; }
+        double Height { get; set; }
+    }
+
+    internal class FillDrawNode : DrawNode, IFillDrawNode
     {
         public A.Rect Rect { get; set; }
         public IColor Color { get; set; }
@@ -36,13 +45,15 @@ namespace Core2D.UI.Renderer
             Fill = DrawUtil.ToBrush(Color);
         }
 
-        public override void Draw(AM.DrawingContext context, double zoom)
+        public override void Draw(object dc, double zoom)
         {
-            OnDraw(context, zoom);
+            OnDraw(dc, zoom);
         }
 
-        public override void OnDraw(AM.DrawingContext context, double zoom)
+        public override void OnDraw(object dc, double zoom)
         {
+            var context = dc as AM.DrawingContext;
+
             context.FillRectangle(Fill, Rect);
         }
     }

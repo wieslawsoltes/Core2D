@@ -16,7 +16,7 @@ namespace Core2D.UI.Renderer
     {
         private readonly IServiceProvider _serviceProvider;
         private IShapeRendererState _state;
-        private readonly ICache<string, AMI.Bitmap> _biCache;
+        private readonly ICache<string, IDisposable> _biCache;
         private readonly ICache<object, DrawNode> _drawNodeCache;
 
         /// <inheritdoc/>
@@ -34,7 +34,7 @@ namespace Core2D.UI.Renderer
         {
             _serviceProvider = serviceProvider;
             _state = _serviceProvider.GetService<IFactory>().CreateShapeRendererState();
-            _biCache = _serviceProvider.GetService<IFactory>().CreateCache<string, AMI.Bitmap>(x => x.Dispose());
+            _biCache = _serviceProvider.GetService<IFactory>().CreateCache<string, IDisposable>(x => x.Dispose());
             _drawNodeCache = _serviceProvider.GetService<IFactory>().CreateCache<object, DrawNode>(x => x.Dispose());
         }
 

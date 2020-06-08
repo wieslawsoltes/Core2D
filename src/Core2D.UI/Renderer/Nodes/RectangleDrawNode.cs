@@ -7,7 +7,12 @@ using AM = Avalonia.Media;
 
 namespace Core2D.UI.Renderer
 {
-    internal class RectangleDrawNode : TextDrawNode
+    internal interface IRectangleDrawNode : ITextDrawNode
+    {
+        IRectangleShape Rectangle { get; set; }
+    }
+
+    internal class RectangleDrawNode : TextDrawNode, IRectangleDrawNode
     {
         public IRectangleShape Rectangle { get; set; }
 
@@ -31,8 +36,10 @@ namespace Core2D.UI.Renderer
             base.UpdateTextGeometry();
         }
 
-        public override void OnDraw(AM.DrawingContext context, double zoom)
+        public override void OnDraw(object dc, double zoom)
         {
+            var context = dc as AM.DrawingContext;
+
             if (Rectangle.IsFilled)
             {
                 context.FillRectangle(Fill, Rect);
@@ -68,7 +75,7 @@ namespace Core2D.UI.Renderer
                 }
             }
 
-            base.OnDraw(context, zoom);
+            base.OnDraw(dc, zoom);
         }
     }
 }

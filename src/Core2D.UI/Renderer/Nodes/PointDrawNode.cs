@@ -6,7 +6,13 @@ using AM = Avalonia.Media;
 
 namespace Core2D.UI.Renderer
 {
-    internal class PointDrawNode : DrawNode
+    internal interface IPointDrawNode : IDrawNode
+    {
+        IPointShape Point { get; set; }
+        double PointSize { get; set; }
+    }
+
+    internal class PointDrawNode : DrawNode, IPointDrawNode
     {
         public IPointShape Point { get; set; }
         public double PointSize { get; set; }
@@ -29,8 +35,10 @@ namespace Core2D.UI.Renderer
             Center = Rect.Center;
         }
 
-        public override void OnDraw(AM.DrawingContext context, double zoom)
+        public override void OnDraw(object dc, double zoom)
         {
+            var context = dc as AM.DrawingContext;
+
             context.FillRectangle(Fill, Rect);
             context.DrawRectangle(Stroke, Rect);
         }

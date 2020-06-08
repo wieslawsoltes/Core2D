@@ -7,7 +7,13 @@ using AM = Avalonia.Media;
 
 namespace Core2D.UI.Renderer
 {
-    internal class TextDrawNode : DrawNode
+    internal interface ITextDrawNode : IDrawNode
+    {
+        ITextShape Text { get; set; }
+        string BoundText { get; set; }
+    }
+
+    internal class TextDrawNode : DrawNode, ITextDrawNode
     {
         public ITextShape Text { get; set; }
         public A.Rect Rect { get; set; }
@@ -108,8 +114,10 @@ namespace Core2D.UI.Renderer
             Origin = new A.Point(originX, originY);
         }
 
-        public override void OnDraw(AM.DrawingContext context, double zoom)
+        public override void OnDraw(object dc, double zoom)
         {
+            var context = dc as AM.DrawingContext;
+
             if (FormattedText != null)
             {
                 context.DrawText(Stroke.Brush, Origin, FormattedText); 

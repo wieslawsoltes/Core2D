@@ -10,16 +10,23 @@ using AMI = Avalonia.Media.Imaging;
 
 namespace Core2D.UI.Renderer
 {
-    internal class ImageDrawNode : TextDrawNode
+    internal interface IImageDrawNode : ITextDrawNode
+    {
+        IImageShape Image { get; set; }
+        IImageCache ImageCache { get; set; }
+        ICache<string, IDisposable> BitmapCache { get; set; }
+    }
+
+    internal class ImageDrawNode : TextDrawNode, IImageDrawNode
     {
         public IImageShape Image { get; set; }
         public IImageCache ImageCache { get; set; }
-        public ICache<string, AMI.Bitmap> BitmapCache { get; set; }
+        public ICache<string, IDisposable> BitmapCache { get; set; }
         public AMI.Bitmap ImageCached { get; set; }
         public A.Rect SourceRect { get; set; }
         public A.Rect DestRect { get; set; }
 
-        public ImageDrawNode(IImageShape image, IShapeStyle style, IImageCache imageCache, ICache<string, AMI.Bitmap> bitmapCache)
+        public ImageDrawNode(IImageShape image, IShapeStyle style, IImageCache imageCache, ICache<string, IDisposable> bitmapCache)
             : base()
         {
             Style = style;
@@ -37,7 +44,7 @@ namespace Core2D.UI.Renderer
 
             if (!string.IsNullOrEmpty(Image.Key))
             {
-                ImageCached = BitmapCache.Get(Image.Key);
+                ImageCached = BitmapCache.Get(Image.Key) as AMI.Bitmap;
                 if (ImageCached == null && ImageCache != null)
                 {
                     try
@@ -74,8 +81,10 @@ namespace Core2D.UI.Renderer
             base.UpdateTextGeometry();
         }
 
-        public override void OnDraw(AM.DrawingContext context, double zoom)
+        public override void OnDraw(object dc, double zoom)
         {
+            var context = dc as AM.DrawingContext;
+
             if (Image.IsFilled)
             {
                 context.FillRectangle(Fill, DestRect);
@@ -99,7 +108,7 @@ namespace Core2D.UI.Renderer
                 }
             }
 
-            base.OnDraw(context, zoom);
+            base.OnDraw(dc, zoom);
         }
     }
 }
