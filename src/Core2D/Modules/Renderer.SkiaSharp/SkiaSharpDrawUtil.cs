@@ -7,6 +7,82 @@ namespace Core2D.Renderer.SkiaSharp
 {
     internal static class SkiaSharpDrawUtil
     {
+        public static SKRect ToSKRect(double x, double y, double width, double height)
+        {
+            float left = (float)x;
+            float top = (float)y;
+            float right = (float)(x + width);
+            float bottom = (float)(y + height);
+            return new SKRect(left, top, right, bottom);
+        }
+
+        public static SKRect CreateRect(IPointShape tl, IPointShape br)
+        {
+            float left = (float)Math.Min(tl.X, br.X);
+            float top = (float)Math.Min(tl.Y, br.Y);
+            float right = (float)Math.Max(tl.X, br.X);
+            float bottom = (float)Math.Max(tl.Y, br.Y);
+            return new SKRect(left, top, right, bottom);
+        }
+        public static SKColor ToSKColor(IColor color)
+        {
+            return color switch
+            {
+                IArgbColor argbColor => new SKColor(argbColor.R, argbColor.G, argbColor.B, argbColor.A),
+                _ => throw new NotSupportedException($"The {color.GetType()} color type is not supported."),
+            };
+        }
+
+        public static SKPaint ToSKPaintBrush(IColor color)
+        {
+            var brush = new SKPaint();
+
+            brush.Style = SKPaintStyle.Fill;
+            brush.IsAntialias = true;
+            brush.IsStroke = false;
+            brush.LcdRenderText = true;
+            brush.SubpixelText = true;
+            brush.Color = ToSKColor(color);
+
+            return brush;
+        }
+
+        public static SKStrokeCap ToStrokeCap(IBaseStyle style)
+        {
+            return style.LineCap switch
+            {
+                LineCap.Square => SKStrokeCap.Square,
+                LineCap.Round => SKStrokeCap.Round,
+                _ => SKStrokeCap.Butt,
+            };
+        }
+
+        public static SKPaint ToSKPaintPen(IBaseStyle style, double strokeWidth)
+        {
+            var pen = new SKPaint();
+
+            var pathEffect = default(SKPathEffect);
+            if (style.Dashes != null)
+            {
+                var intervals = StyleHelper.ConvertDashesToFloatArray(style.Dashes, strokeWidth);
+                var phase = (float)(style.DashOffset * strokeWidth);
+                if (intervals != null)
+                {
+                    pathEffect = SKPathEffect.CreateDash(intervals, phase);
+                }
+            }
+
+            pen.Style = SKPaintStyle.Stroke;
+            pen.IsAntialias = true;
+            pen.IsStroke = true;
+            pen.StrokeWidth = (float)strokeWidth;
+            pen.Color = ToSKColor(style.Stroke);
+            pen.StrokeCap = ToStrokeCap(style);
+            pen.PathEffect = pathEffect;
+
+            return pen;
+        }
+
         public static SKPoint GetTextOrigin(IShapeStyle style, ref SKRect rect, ref SKRect size)
         {
             double rwidth = Math.Abs(rect.Right - rect.Left);
@@ -102,83 +178,6 @@ namespace Core2D.Renderer.SkiaSharp
             origin = new SKPoint(x, y);
 
             return pen;
-        }
-
-        public static SKColor ToSKColor(IColor color)
-        {
-            return color switch
-            {
-                IArgbColor argbColor => new SKColor(argbColor.R, argbColor.G, argbColor.B, argbColor.A),
-                _ => throw new NotSupportedException($"The {color.GetType()} color type is not supported."),
-            };
-        }
-
-        public static SKStrokeCap ToStrokeCap(IBaseStyle style)
-        {
-            return style.LineCap switch
-            {
-                LineCap.Square => SKStrokeCap.Square,
-                LineCap.Round => SKStrokeCap.Round,
-                _ => SKStrokeCap.Butt,
-            };
-        }
-
-        public static SKPaint ToSKPaintPen(IBaseStyle style, double strokeWidth)
-        {
-            var pen = new SKPaint();
-
-            var pathEffect = default(SKPathEffect);
-            if (style.Dashes != null)
-            {
-                var intervals = StyleHelper.ConvertDashesToFloatArray(style.Dashes, strokeWidth);
-                var phase = (float)(style.DashOffset * strokeWidth);
-                if (intervals != null)
-                {
-                    pathEffect = SKPathEffect.CreateDash(intervals, phase);
-                }
-            }
-
-            pen.Style = SKPaintStyle.Stroke;
-            pen.IsAntialias = true;
-            pen.IsStroke = true;
-            pen.StrokeWidth = (float)strokeWidth;
-            pen.Color = ToSKColor(style.Stroke);
-            pen.StrokeCap = ToStrokeCap(style);
-            pen.PathEffect = pathEffect;
-
-            return pen;
-        }
-
-        public static SKPaint ToSKPaintBrush(IColor color)
-        {
-            var brush = new SKPaint();
-
-            brush.Style = SKPaintStyle.Fill;
-            brush.IsAntialias = true;
-            brush.IsStroke = false;
-            brush.LcdRenderText = true;
-            brush.SubpixelText = true;
-            brush.Color = ToSKColor(color);
-
-            return brush;
-        }
-
-        public static SKRect ToSKRect(double x, double y, double width, double height)
-        {
-            float left = (float)x;
-            float top = (float)y;
-            float right = (float)(x + width);
-            float bottom = (float)(y + height);
-            return new SKRect(left, top, right, bottom);
-        }
-
-        public static SKRect CreateRect(IPointShape tl, IPointShape br)
-        {
-            float left = (float)Math.Min(tl.X, br.X);
-            float top = (float)Math.Min(tl.Y, br.Y);
-            float right = (float)Math.Max(tl.X, br.X);
-            float bottom = (float)Math.Max(tl.Y, br.Y);
-            return new SKRect(left, top, right, bottom);
         }
     }
 }
