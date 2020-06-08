@@ -7,12 +7,6 @@ using AM = Avalonia.Media;
 
 namespace Core2D.UI.Renderer
 {
-    internal interface ITextDrawNode : IDrawNode
-    {
-        ITextShape Text { get; set; }
-        string BoundText { get; set; }
-    }
-
     internal class TextDrawNode : DrawNode, ITextDrawNode
     {
         public ITextShape Text { get; set; }

@@ -1,4 +1,5 @@
-﻿using Core2D.Shapes;
+﻿using Core2D.Renderer;
+using Core2D.Shapes;
 using Core2D.Style;
 using Spatial;
 using A = Avalonia;
@@ -6,21 +7,15 @@ using AM = Avalonia.Media;
 
 namespace Core2D.UI.Renderer
 {
-    internal interface IPointDrawNode : IDrawNode
-    {
-        IPointShape Point { get; set; }
-        double PointSize { get; set; }
-    }
-
     internal class PointDrawNode : DrawNode, IPointDrawNode
     {
         public IPointShape Point { get; set; }
         public double PointSize { get; set; }
         public A.Rect Rect { get; set; }
 
-        public PointDrawNode(IPointShape point, IShapeStyle style, double pointSize)
+        public PointDrawNode(IPointShape point, IShapeStyle pointStyle, double pointSize)
         {
-            Style = style;
+            Style = pointStyle;
             Point = point;
             PointSize = pointSize;
             UpdateGeometry();

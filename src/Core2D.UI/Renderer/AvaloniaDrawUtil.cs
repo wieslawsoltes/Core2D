@@ -4,7 +4,7 @@ using AM = Avalonia.Media;
 
 namespace Core2D.UI.Renderer
 {
-    internal static class DrawUtil
+    internal static class AvaloniaDrawUtil
     {
         public static AM.Color ToColor(IArgbColor argbColor)
         {

@@ -5,11 +5,6 @@ using AM = Avalonia.Media;
 
 namespace Core2D.UI.Renderer
 {
-    internal interface ICubicBezierDrawNode : IDrawNode
-    {
-        ICubicBezierShape CubicBezier { get; set; }
-    }
-
     internal class CubicBezierDrawNode : DrawNode, ICubicBezierDrawNode
     {
         public ICubicBezierShape CubicBezier { get; set; }

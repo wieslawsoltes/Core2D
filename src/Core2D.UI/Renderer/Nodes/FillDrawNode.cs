@@ -1,18 +1,10 @@
-﻿using Core2D.Style;
+﻿using Core2D.Renderer;
+using Core2D.Style;
 using A = Avalonia;
 using AM = Avalonia.Media;
 
 namespace Core2D.UI.Renderer
 {
-    internal interface IFillDrawNode : IDrawNode
-    {
-        IColor Color { get; set; }
-        double X { get; set; }
-        double Y { get; set; }
-        double Width { get; set; }
-        double Height { get; set; }
-    }
-
     internal class FillDrawNode : DrawNode, IFillDrawNode
     {
         public A.Rect Rect { get; set; }
@@ -42,7 +34,7 @@ namespace Core2D.UI.Renderer
 
         public override void UpdateStyle()
         {
-            Fill = DrawUtil.ToBrush(Color);
+            Fill = AvaloniaDrawUtil.ToBrush(Color);
         }
 
         public override void Draw(object dc, double zoom)

@@ -10,13 +10,6 @@ using AMI = Avalonia.Media.Imaging;
 
 namespace Core2D.UI.Renderer
 {
-    internal interface IImageDrawNode : ITextDrawNode
-    {
-        IImageShape Image { get; set; }
-        IImageCache ImageCache { get; set; }
-        ICache<string, IDisposable> BitmapCache { get; set; }
-    }
-
     internal class ImageDrawNode : TextDrawNode, IImageDrawNode
     {
         public IImageShape Image { get; set; }

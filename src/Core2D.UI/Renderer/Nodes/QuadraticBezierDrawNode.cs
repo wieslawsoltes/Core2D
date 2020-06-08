@@ -5,11 +5,6 @@ using AM = Avalonia.Media;
 
 namespace Core2D.UI.Renderer
 {
-    internal interface IQuadraticBezierDrawNode : IDrawNode
-    {
-        IQuadraticBezierShape QuadraticBezier { get; set; }
-    }
-
     internal class QuadraticBezierDrawNode : DrawNode, IQuadraticBezierDrawNode
     {
         public IQuadraticBezierShape QuadraticBezier { get; set; }

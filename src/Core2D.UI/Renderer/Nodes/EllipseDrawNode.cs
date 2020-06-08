@@ -5,11 +5,6 @@ using AM = Avalonia.Media;
 
 namespace Core2D.UI.Renderer
 {
-    internal interface IEllipseDrawNode : ITextDrawNode
-    {
-        IEllipseShape Ellipse { get; set; }
-    }
-
     internal class EllipseDrawNode : TextDrawNode, IEllipseDrawNode
     {
         public IEllipseShape Ellipse { get; set; }

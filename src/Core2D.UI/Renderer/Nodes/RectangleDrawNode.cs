@@ -7,11 +7,6 @@ using AM = Avalonia.Media;
 
 namespace Core2D.UI.Renderer
 {
-    internal interface IRectangleDrawNode : ITextDrawNode
-    {
-        IRectangleShape Rectangle { get; set; }
-    }
-
     internal class RectangleDrawNode : TextDrawNode, IRectangleDrawNode
     {
         public IRectangleShape Rectangle { get; set; }

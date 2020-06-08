@@ -5,11 +5,6 @@ using AM = Avalonia.Media;
 
 namespace Core2D.UI.Renderer
 {
-    internal interface IPathDrawNode : IDrawNode
-    {
-        IPathShape Path { get; set; }
-    }
-
     internal class PathDrawNode : DrawNode, IPathDrawNode
     {
         public IPathShape Path { get; set; }

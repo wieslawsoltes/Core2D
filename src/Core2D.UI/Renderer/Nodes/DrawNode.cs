@@ -1,4 +1,5 @@
 ﻿using System;
+using Core2D.Renderer;
 using Core2D.Style;
 using A = Avalonia;
 using AM = Avalonia.Media;
@@ -6,17 +7,6 @@ using AME = Avalonia.MatrixExtensions;
 
 namespace Core2D.UI.Renderer
 {
-    internal interface IDrawNode : IDisposable
-    {
-        IShapeStyle Style { get; set; }
-        bool ScaleThickness { get; set; }
-        bool ScaleSize { get; set; }
-        void UpdateGeometry();
-        void UpdateStyle();
-        void Draw(object dc, double zoom);
-        void OnDraw(object dc, double zoom);
-    }
-
     internal abstract class DrawNode : IDrawNode
     {
         public IShapeStyle Style { get; set; }
@@ -34,8 +24,8 @@ namespace Core2D.UI.Renderer
 
         public virtual void UpdateStyle()
         {
-            Fill = DrawUtil.ToBrush(Style.Fill);
-            Stroke = DrawUtil.ToPen(Style, Style.Thickness);
+            Fill = AvaloniaDrawUtil.ToBrush(Style.Fill);
+            Stroke = AvaloniaDrawUtil.ToPen(Style, Style.Thickness);
         }
 
         public virtual void Draw(object dc, double zoom)
@@ -58,7 +48,7 @@ namespace Core2D.UI.Renderer
 
             if (Stroke.Thickness != thickness)
             {
-                Stroke = DrawUtil.ToPen(Style, thickness);
+                Stroke = AvaloniaDrawUtil.ToPen(Style, thickness);
             }
 
             var context = dc as AM.DrawingContext;

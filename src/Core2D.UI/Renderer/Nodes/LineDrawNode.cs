@@ -9,20 +9,6 @@ using AME = Avalonia.MatrixExtensions;
 
 namespace Core2D.UI.Renderer
 {
-    internal interface IMarker
-    {
-        IArrowStyle Style { get; set; }
-        void Draw(object dc);
-        void UpdateStyle();
-    }
-
-    internal interface ILineDrawNode : IDrawNode
-    {
-        ILineShape Line { get; set; }
-        public IMarker StartMarker { get; set; }
-        public IMarker EndMarker { get; set; }
-    }
-
     internal abstract class Marker : IMarker
     {
         public IArrowStyle Style { get; set; }
@@ -35,8 +21,8 @@ namespace Core2D.UI.Renderer
 
         public virtual void UpdateStyle()
         {
-            Brush = DrawUtil.ToBrush(Style.Fill);
-            Pen = DrawUtil.ToPen(Style, Style.Thickness);
+            Brush = AvaloniaDrawUtil.ToBrush(Style.Fill);
+            Pen = AvaloniaDrawUtil.ToPen(Style, Style.Thickness);
         }
     }
 
