@@ -5,7 +5,12 @@ using AM = Avalonia.Media;
 
 namespace Core2D.UI.Renderer
 {
-    internal class ArcDrawNode : DrawNode
+    internal interface IArcDrawNode : IDrawNode
+    {
+        IArcShape Arc { get; set; }
+    }
+
+    internal class ArcDrawNode : DrawNode, IArcDrawNode
     {
         public IArcShape Arc { get; set; }
         public AM.Geometry Geometry { get; set; }
