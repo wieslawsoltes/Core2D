@@ -57,7 +57,7 @@ namespace Core2D.UI.Views
         private static readonly IContainerPresenter s_editorPresenter = new EditorPresenter();
         private static readonly IContainerPresenter s_templatePresenter = new TemplatePresenter();
         private static readonly IContainerPresenter s_exportPresenter = new ExportPresenter();
-        
+
         /// <summary>
         /// Gets or sets zoom border property.
         /// </summary>
@@ -158,8 +158,6 @@ namespace Core2D.UI.Views
         }
 
 #if USE_SKIA
-        //private RenderTargetBitmap _renderTarget;
-
         internal class CustomDrawOperation : ICustomDrawOperation
         {
             public PresenterControl PresenterControl { get; set; }
@@ -191,8 +189,8 @@ namespace Core2D.UI.Views
                 canvas.Restore();
             }
         }
-        
-        private CustomDrawOperation _customDrawOperation;
+#elif USE_SKIA_RTB
+        private RenderTargetBitmap _renderTarget;
 #endif
 
         /// <summary>
@@ -211,48 +209,45 @@ namespace Core2D.UI.Views
                 PresenterType = PresenterType,
             };
 #if USE_SKIA
-            //double width = Bounds.Width;
-            //double height = Bounds.Height;
-            //
-            //if (width > 0 && height > 0)
-            //{
-            //    if (_renderTarget == null)
-            //    {
-            //        _renderTarget = new RenderTargetBitmap(new PixelSize((int)width, (int)height), new Vector(96, 96));
-            //    }
-            //    else if (_renderTarget.PixelSize.Width != (int)width || _renderTarget.PixelSize.Height != (int)height)
-            //    {
-            //        _renderTarget.Dispose();
-            //        _renderTarget = new RenderTargetBitmap(new PixelSize((int)width, (int)height), new Vector(96, 96));
-            //    }
-            //
-            //    using var drawingContextImpl = _renderTarget.CreateDrawingContext(null);
-            //    var skiaDrawingContextImpl = drawingContextImpl as ISkiaDrawingContextImpl;
-            //
-            //    var canvas = skiaDrawingContextImpl.SkCanvas;
-            //
-            //    canvas.Clear();
-            //    canvas.Save();
-            //
-            //    Draw(customState, canvas);
-            //
-            //    canvas.Restore();
-            //
-            //    context.DrawImage(_renderTarget,
-            //        new Rect(0, 0, _renderTarget.PixelSize.Width, _renderTarget.PixelSize.Height),
-            //        new Rect(0, 0, width, height));
-            //}
-
-            if (_customDrawOperation == null)
+            var customDrawOperation = new CustomDrawOperation
             {
-                _customDrawOperation = new CustomDrawOperation();
+                PresenterControl = this,
+                CustomState = customState,
+                Bounds = ZoomBorder != null ? ZoomBorder.Bounds : this.Bounds
+            };
+            context.Custom(customDrawOperation);
+#elif USE_SKIA_RTB
+            double width = Bounds.Width;
+            double height = Bounds.Height;
+
+            if (width > 0 && height > 0)
+            {
+                if (_renderTarget == null)
+                {
+                    _renderTarget = new RenderTargetBitmap(new PixelSize((int)width, (int)height), new Vector(96, 96));
+                }
+                else if (_renderTarget.PixelSize.Width != (int)width || _renderTarget.PixelSize.Height != (int)height)
+                {
+                    _renderTarget.Dispose();
+                    _renderTarget = new RenderTargetBitmap(new PixelSize((int)width, (int)height), new Vector(96, 96));
+                }
+
+                using var drawingContextImpl = _renderTarget.CreateDrawingContext(null);
+                var skiaDrawingContextImpl = drawingContextImpl as ISkiaDrawingContextImpl;
+
+                var canvas = skiaDrawingContextImpl.SkCanvas;
+
+                canvas.Clear();
+                canvas.Save();
+
+                Draw(customState, canvas);
+
+                canvas.Restore();
+
+                context.DrawImage(_renderTarget,
+                    new Rect(0, 0, _renderTarget.PixelSize.Width, _renderTarget.PixelSize.Height),
+                    new Rect(0, 0, width, height));
             }
-            
-            _customDrawOperation.PresenterControl = this;
-            _customDrawOperation.CustomState = customState;
-            _customDrawOperation.Bounds = ZoomBorder != null ? ZoomBorder.Bounds : this.Bounds;
-            
-            context.Custom(_customDrawOperation);
 #else
             Draw(customState, context);
 #endif
