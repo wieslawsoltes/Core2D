@@ -473,5 +473,11 @@ namespace Core2D.UI.Renderer
                 drawNode.Draw(context, _state.ZoomX);
             }
         }
+
+        /// <summary>
+        /// Check whether the <see cref="State"/> property has changed from its default value.
+        /// </summary>
+        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
+        public bool ShouldSerializeState() => _state != null;
     }
 }
