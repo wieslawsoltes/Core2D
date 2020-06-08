@@ -89,7 +89,7 @@ namespace Core2D.Renderer.SkiaSharp
             style.Stroke = fill;
             style.Fill = stroke;
             using var pen = new SKPaint();
-            SkiaSharpRenderer.ToSKPaintPen(style, 96.0, 96.0, true, pen);
+            SkiaSharpRenderer.ToSKPaintPen(style, true, pen);
             var result = pen.GetFillPath(path, 1.0f);
             if (result != null)
             {

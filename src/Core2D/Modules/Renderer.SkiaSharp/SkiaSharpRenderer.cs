@@ -15,16 +15,14 @@ namespace Core2D.Renderer.SkiaSharp
     /// </summary>
     public class SkiaSharpRenderer : ObservableObject, IShapeRenderer
     {
+        private readonly bool _isAntialias = true;
         private readonly IServiceProvider _serviceProvider;
         private IShapeRendererState _state;
-        private bool _isAntialias = true;
         private ICache<string, SKBitmap> _biCache;
         private ICache<IColor, SKPaint> _fillCache;
         private ICache<IShapeStyle, SKPaint> _strokeCache;
         private ICache<IArrowStyle, SKPaint> _arrowCache;
         private ICache<IShapeStyle, SKPaint> _textCache;
-        private readonly double _sourceDpi = 96.0;
-        private readonly double _targetDpi = 72.0;
 
         /// <inheritdoc/>
         public IShapeRendererState State
@@ -37,9 +35,7 @@ namespace Core2D.Renderer.SkiaSharp
         /// Initializes a new instance of the <see cref="SkiaSharpRenderer"/> class.
         /// </summary>
         /// <param name="serviceProvider">The service provider.</param>
-        /// <param name="isAntialias">The flag indicating whether paint is antialiased.</param>
-        /// <param name="targetDpi">The target renderer dpi.</param>
-        public SkiaSharpRenderer(IServiceProvider serviceProvider, bool isAntialias = true, double targetDpi = 96.0)
+        public SkiaSharpRenderer(IServiceProvider serviceProvider)
         {
             _serviceProvider = serviceProvider;
             _state = _serviceProvider.GetService<IFactory>().CreateShapeRendererState();
@@ -48,8 +44,6 @@ namespace Core2D.Renderer.SkiaSharp
             _strokeCache = _serviceProvider.GetService<IFactory>().CreateCache<IShapeStyle, SKPaint>(paint => paint.Dispose());
             _arrowCache = _serviceProvider.GetService<IFactory>().CreateCache<IArrowStyle, SKPaint>(paint => paint.Dispose());
             _textCache = _serviceProvider.GetService<IFactory>().CreateCache<IShapeStyle, SKPaint>(paint => paint.Dispose());
-            _isAntialias = isAntialias;
-            _targetDpi = targetDpi;
         }
 
         /// <inheritdoc/>
@@ -79,7 +73,7 @@ namespace Core2D.Renderer.SkiaSharp
             return new SKPoint((float)ox, (float)oy);
         }
 
-        internal static void GetSKPaint(string text, IShapeStyle shapeStyle, IPointShape topLeft, IPointShape bottomRight, double sourceDpi, double targetDpi, bool isAntialias, SKPaint pen, out SKPoint origin)
+        internal static void GetSKPaint(string text, IShapeStyle shapeStyle, IPointShape topLeft, IPointShape bottomRight, bool isAntialias, SKPaint pen, out SKPoint origin)
         {
             var weight = SKFontStyleWeight.Normal;
             if (shapeStyle.TextStyle.FontStyle != null)
@@ -103,7 +97,7 @@ namespace Core2D.Renderer.SkiaSharp
             var tf = SKTypeface.FromFamilyName(shapeStyle.TextStyle.FontName, weight, SKFontStyleWidth.Normal, style);
             pen.Typeface = tf;
             pen.TextEncoding = SKTextEncoding.Utf16;
-            pen.TextSize = (float)(shapeStyle.TextStyle.FontSize * targetDpi / sourceDpi);
+            pen.TextSize = (float)(shapeStyle.TextStyle.FontSize);
 
             pen.TextAlign = shapeStyle.TextStyle.TextHAlignment switch
             {
@@ -171,9 +165,9 @@ namespace Core2D.Renderer.SkiaSharp
             };
         }
 
-        internal static void ToSKPaintPen(IBaseStyle style, double sourceDpi, double targetDpi, bool isAntialias, SKPaint pen)
+        internal static void ToSKPaintPen(IBaseStyle style, bool isAntialias, SKPaint pen)
         {
-            var strokeWidth = (float)(style.Thickness * targetDpi / sourceDpi);
+            var strokeWidth = (float)(style.Thickness);
             var pathEffect = default(SKPathEffect);
             if (style.Dashes != null)
             {
@@ -267,7 +261,7 @@ namespace Core2D.Renderer.SkiaSharp
                 strokeStartArrow = new SKPaint();
                 _arrowCache.Set(line.Style.StartArrowStyle, strokeStartArrow);
             }
-            ToSKPaintPen(line.Style.StartArrowStyle, _sourceDpi, _targetDpi, _isAntialias, strokeStartArrow);
+            ToSKPaintPen(line.Style.StartArrowStyle, _isAntialias, strokeStartArrow);
 
             var fillEndArrow = _fillCache.Get(line.Style.EndArrowStyle.Fill);
             if (fillEndArrow == null)
@@ -283,7 +277,7 @@ namespace Core2D.Renderer.SkiaSharp
                 strokeEndArrow = new SKPaint();
                 _arrowCache.Set(line.Style.EndArrowStyle, strokeEndArrow);
             }
-            ToSKPaintPen(line.Style.EndArrowStyle, _sourceDpi, _targetDpi, _isAntialias, strokeEndArrow);
+            ToSKPaintPen(line.Style.EndArrowStyle, _isAntialias, strokeEndArrow);
 
             double _x1 = line.Start.X;
             double _y1 = line.Start.Y;
@@ -433,24 +427,6 @@ namespace Core2D.Renderer.SkiaSharp
             }
         }
 
-        private void DrawBackgroundInternal(SKCanvas canvas, IColor color, Rect2 rect)
-        {
-            var brush = _fillCache.Get(color);
-            if (brush == null)
-            {
-                brush = new SKPaint();
-                _fillCache.Set(color, brush);
-            }
-            ToSKPaintBrush(color, _isAntialias, brush);
-
-            SKRect srect = SKRect.Create(
-                (float)rect.X,
-                (float)rect.Y,
-                (float)rect.Width,
-                (float)rect.Height);
-            canvas.DrawRect(srect, brush);
-        }
-
         /// <inheritdoc/>
         public void ClearCache()
         {
@@ -558,7 +534,7 @@ namespace Core2D.Renderer.SkiaSharp
                 stroke = new SKPaint();
                 _strokeCache.Set(pointStyle, stroke);
             }
-            ToSKPaintPen(pointStyle, _sourceDpi, _targetDpi, _isAntialias, stroke);
+            ToSKPaintPen(pointStyle, _isAntialias, stroke);
 
             if (scale != 1.0)
             {
@@ -586,7 +562,7 @@ namespace Core2D.Renderer.SkiaSharp
                 strokeLine = new SKPaint();
                 _strokeCache.Set(line.Style, strokeLine);
             }
-            ToSKPaintPen(line.Style, _sourceDpi, _targetDpi, _isAntialias, strokeLine);
+            ToSKPaintPen(line.Style, _isAntialias, strokeLine);
 
             DrawLineArrowsInternal(canvas, line, out var pt1, out var pt2);
 
@@ -626,7 +602,7 @@ namespace Core2D.Renderer.SkiaSharp
                 pen = new SKPaint();
                 _strokeCache.Set(rectangle.Style, pen);
             }
-            ToSKPaintPen(rectangle.Style, _sourceDpi, _targetDpi, _isAntialias, pen);
+            ToSKPaintPen(rectangle.Style, _isAntialias, pen);
 
             var rect = CreateRect(rectangle.TopLeft, rectangle.BottomRight);
             DrawRectangleInternal(canvas, brush, pen, rectangle.IsStroked, rectangle.IsFilled, ref rect);
@@ -665,7 +641,7 @@ namespace Core2D.Renderer.SkiaSharp
                 pen = new SKPaint();
                 _strokeCache.Set(ellipse.Style, pen);
             }
-            ToSKPaintPen(ellipse.Style, _sourceDpi, _targetDpi, _isAntialias, pen);
+            ToSKPaintPen(ellipse.Style, _isAntialias, pen);
 
             var rect = CreateRect(ellipse.TopLeft, ellipse.BottomRight);
             DrawEllipseInternal(canvas, brush, pen, ellipse.IsStroked, ellipse.IsFilled, ref rect);
@@ -692,7 +668,7 @@ namespace Core2D.Renderer.SkiaSharp
                 pen = new SKPaint();
                 _strokeCache.Set(arc.Style, pen);
             }
-            ToSKPaintPen(arc.Style, _sourceDpi, _targetDpi, _isAntialias, pen);
+            ToSKPaintPen(arc.Style, _isAntialias, pen);
 
             using var path = new SKPath();
             var a = new GdiArc(
@@ -728,7 +704,7 @@ namespace Core2D.Renderer.SkiaSharp
                 pen = new SKPaint();
                 _strokeCache.Set(cubicBezier.Style, pen);
             }
-            ToSKPaintPen(cubicBezier.Style, _sourceDpi, _targetDpi, _isAntialias, pen);
+            ToSKPaintPen(cubicBezier.Style, _isAntialias, pen);
 
             using var path = new SKPath();
             path.MoveTo(
@@ -763,7 +739,7 @@ namespace Core2D.Renderer.SkiaSharp
                 pen = new SKPaint();
                 _strokeCache.Set(quadraticBezier.Style, pen);
             }
-            ToSKPaintPen(quadraticBezier.Style, _sourceDpi, _targetDpi, _isAntialias, pen);
+            ToSKPaintPen(quadraticBezier.Style, _isAntialias, pen);
 
             using var path = new SKPath();
             path.MoveTo(
@@ -798,7 +774,7 @@ namespace Core2D.Renderer.SkiaSharp
                 pen = new SKPaint();
                 _textCache.Set(text.Style, pen);
             }
-            GetSKPaint(tbind, text.Style, text.TopLeft, text.BottomRight, _sourceDpi, _targetDpi, _isAntialias, pen, out var origin);
+            GetSKPaint(tbind, text.Style, text.TopLeft, text.BottomRight, _isAntialias, pen, out var origin);
 
             canvas.DrawText(tbind, origin.X, origin.Y, pen);
         }
@@ -826,7 +802,7 @@ namespace Core2D.Renderer.SkiaSharp
                     pen = new SKPaint();
                     _strokeCache.Set(image.Style, pen);
                 }
-                ToSKPaintPen(image.Style, _sourceDpi, _targetDpi, _isAntialias, pen);
+                ToSKPaintPen(image.Style, _isAntialias, pen);
 
                 DrawRectangleInternal(canvas, brush, pen, image.IsStroked, image.IsFilled, ref rect);
             }
@@ -874,7 +850,7 @@ namespace Core2D.Renderer.SkiaSharp
                 pen = new SKPaint();
                 _strokeCache.Set(path.Style, pen);
             }
-            ToSKPaintPen(path.Style, _sourceDpi, _targetDpi, _isAntialias, pen);
+            ToSKPaintPen(path.Style, _isAntialias, pen);
 
             using var spath = path.Geometry.ToSKPath();
             DrawPathInternal(canvas, brush, pen, path.IsStroked, path.IsFilled, spath);
