@@ -165,14 +165,14 @@ namespace Core2D.Renderer.SkiaSharp
                     case IRectangleShape rectangleShape:
                         {
                             path.AddRect(
-                                SkiaSharpRenderer.CreateRect(rectangleShape.TopLeft, rectangleShape.BottomRight),
+                                SkiaSharpDrawUtil.CreateRect(rectangleShape.TopLeft, rectangleShape.BottomRight),
                                 SKPathDirection.Clockwise);
                         }
                         break;
                     case IEllipseShape ellipseShape:
                         {
                             path.AddOval(
-                                SkiaSharpRenderer.CreateRect(ellipseShape.TopLeft, ellipseShape.BottomRight),
+                                SkiaSharpDrawUtil.CreateRect(ellipseShape.TopLeft, ellipseShape.BottomRight),
                                 SKPathDirection.Clockwise);
                         }
                         break;
@@ -297,7 +297,7 @@ namespace Core2D.Renderer.SkiaSharp
                 FillType = SKPathFillType.Winding
             };
             path.AddRect(
-                SkiaSharpRenderer.CreateRect(rectangle.TopLeft, rectangle.BottomRight),
+                SkiaSharpDrawUtil.CreateRect(rectangle.TopLeft, rectangle.BottomRight),
                 SKPathDirection.Clockwise);
             if (rectangle is ITextShape text)
             {
@@ -317,7 +317,7 @@ namespace Core2D.Renderer.SkiaSharp
                 FillType = SKPathFillType.Winding
             };
             path.AddOval(
-                SkiaSharpRenderer.CreateRect(ellipse.TopLeft, ellipse.BottomRight),
+                SkiaSharpDrawUtil.CreateRect(ellipse.TopLeft, ellipse.BottomRight),
                 SKPathDirection.Clockwise);
             if (ellipse is ITextShape text)
             {
@@ -337,7 +337,7 @@ namespace Core2D.Renderer.SkiaSharp
                 FillType = SKPathFillType.Winding
             };
             path.AddRect(
-                SkiaSharpRenderer.CreateRect(image.TopLeft, image.BottomRight),
+                SkiaSharpDrawUtil.CreateRect(image.TopLeft, image.BottomRight),
                 SKPathDirection.Clockwise);
             if (image is ITextShape text)
             {
@@ -423,9 +423,7 @@ namespace Core2D.Renderer.SkiaSharp
                 return path;
             }
 
-            using var pen = new SKPaint();
-            SkiaSharpRenderer.GetSKPaint(tbind, text.Style, text.TopLeft, text.BottomRight, pen, out var origin);
-
+            using var pen = SkiaSharpDrawUtil.GetSKPaint(tbind, text.Style, text.TopLeft, text.BottomRight, out var origin);
             using var outlinePath = pen.GetTextPath(tbind, origin.X, origin.Y);
             using var fillPath = pen.GetFillPath(outlinePath);
 

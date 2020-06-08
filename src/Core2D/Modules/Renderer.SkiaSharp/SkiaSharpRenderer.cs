@@ -13,31 +13,43 @@ namespace Core2D.Renderer.SkiaSharp
     /// <summary>
     /// Native SkiaSharp shape renderer.
     /// </summary>
-    public class SkiaSharpRenderer : ObservableObject, IShapeRenderer
+    public class SkiaSharpRenderer : NodeRenderer
+    {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SkiaSharpRenderer"/> class.
+        /// </summary>
+        /// <param name="serviceProvider">The service provider.</param>
+        public SkiaSharpRenderer(IServiceProvider serviceProvider)
+            : base(serviceProvider, new SkiaSharpDrawNodeFactory())
+        {
+        }
+
+        /// <inheritdoc/>
+        public override object Copy(IDictionary<object, object> shared)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    public class SkiaSharpRendererDepracated : ObservableObject, IShapeRenderer
     {
         private readonly IServiceProvider _serviceProvider;
         private IShapeRendererState _state;
         private ICache<string, IDisposable> _biCache;
 
-        /// <inheritdoc/>
         public IShapeRendererState State
         {
             get => _state;
             set => Update(ref _state, value);
         }
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="SkiaSharpRenderer"/> class.
-        /// </summary>
-        /// <param name="serviceProvider">The service provider.</param>
-        public SkiaSharpRenderer(IServiceProvider serviceProvider)
+        public SkiaSharpRendererDepracated(IServiceProvider serviceProvider)
         {
             _serviceProvider = serviceProvider;
             _state = _serviceProvider.GetService<IFactory>().CreateShapeRendererState();
             _biCache = _serviceProvider.GetService<IFactory>().CreateCache<string, IDisposable>(bi => bi.Dispose());
         }
 
-        /// <inheritdoc/>
         public override object Copy(IDictionary<object, object> shared)
         {
             throw new NotImplementedException();
@@ -397,13 +409,11 @@ namespace Core2D.Renderer.SkiaSharp
             }
         }
 
-        /// <inheritdoc/>
         public void ClearCache()
         {
             _biCache.Reset();
         }
 
-        /// <inheritdoc/>
         public void Fill(object dc, double x, double y, double width, double height, IColor color)
         {
             var canvas = dc as SKCanvas;
@@ -415,7 +425,6 @@ namespace Core2D.Renderer.SkiaSharp
             canvas.DrawRect(rect, paint);
         }
 
-        /// <inheritdoc/>
         public void DrawPage(object dc, IPageContainer container)
         {
             foreach (var layer in container.Layers)
@@ -427,7 +436,6 @@ namespace Core2D.Renderer.SkiaSharp
             }
         }
 
-        /// <inheritdoc/>
         public void DrawLayer(object dc, ILayerContainer layer)
         {
             foreach (var shape in layer.Shapes)
@@ -447,7 +455,6 @@ namespace Core2D.Renderer.SkiaSharp
             }
         }
 
-        /// <inheritdoc/>
         public void DrawPoint(object dc, IPointShape point)
         {
             if (point == null || _state == null)
@@ -502,7 +509,6 @@ namespace Core2D.Renderer.SkiaSharp
             }
         }
 
-        /// <inheritdoc/>
         public void DrawLine(object dc, ILineShape line)
         {
             var canvas = dc as SKCanvas;
@@ -529,7 +535,6 @@ namespace Core2D.Renderer.SkiaSharp
             }
         }
 
-        /// <inheritdoc/>
         public void DrawRectangle(object dc, IRectangleShape rectangle)
         {
             var canvas = dc as SKCanvas;
@@ -558,7 +563,6 @@ namespace Core2D.Renderer.SkiaSharp
             DrawText(dc, rectangle);
         }
 
-        /// <inheritdoc/>
         public void DrawEllipse(object dc, IEllipseShape ellipse)
         {
             var canvas = dc as SKCanvas;
@@ -575,7 +579,6 @@ namespace Core2D.Renderer.SkiaSharp
             DrawText(dc, ellipse);
         }
 
-        /// <inheritdoc/>
         public void DrawArc(object dc, IArcShape arc)
         {
             var canvas = dc as SKCanvas;
@@ -601,7 +604,6 @@ namespace Core2D.Renderer.SkiaSharp
             DrawPathInternal(canvas, brush, pen, arc.IsStroked, arc.IsFilled, path);
         }
 
-        /// <inheritdoc/>
         public void DrawCubicBezier(object dc, ICubicBezierShape cubicBezier)
         {
             var canvas = dc as SKCanvas;
@@ -626,7 +628,6 @@ namespace Core2D.Renderer.SkiaSharp
             DrawPathInternal(canvas, brush, pen, cubicBezier.IsStroked, cubicBezier.IsFilled, path);
         }
 
-        /// <inheritdoc/>
         public void DrawQuadraticBezier(object dc, IQuadraticBezierShape quadraticBezier)
         {
             var canvas = dc as SKCanvas;
@@ -649,7 +650,6 @@ namespace Core2D.Renderer.SkiaSharp
             DrawPathInternal(canvas, brush, pen, quadraticBezier.IsStroked, quadraticBezier.IsFilled, path);
         }
 
-        /// <inheritdoc/>
         public void DrawText(object dc, ITextShape text)
         {
             var canvas = dc as SKCanvas;
@@ -670,7 +670,6 @@ namespace Core2D.Renderer.SkiaSharp
             canvas.DrawText(tbind, origin.X, origin.Y, pen);
         }
 
-        /// <inheritdoc/>
         public void DrawImage(object dc, IImageShape image)
         {
             var canvas = dc as SKCanvas;
@@ -712,7 +711,6 @@ namespace Core2D.Renderer.SkiaSharp
             DrawText(dc, image);
         }
 
-        /// <inheritdoc/>
         public void DrawPath(object dc, IPathShape path)
         {
             var canvas = dc as SKCanvas;
@@ -726,11 +724,5 @@ namespace Core2D.Renderer.SkiaSharp
             using var spath = path.Geometry.ToSKPath();
             DrawPathInternal(canvas, brush, pen, path.IsStroked, path.IsFilled, spath);
         }
-
-        /// <summary>
-        /// Check whether the <see cref="State"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public bool ShouldSerializeState() => _state != null;
     }
 }
