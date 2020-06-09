@@ -102,9 +102,6 @@
       <a class="xref" href="Core2D.ObservableObject.html#Core2D_ObservableObject_Name">ObservableObject.Name</a>
     </div>
     <div>
-      <a class="xref" href="Core2D.ObservableObject.html#Core2D_ObservableObject_MarkAsDirty_System_Boolean_">ObservableObject.MarkAsDirty(Boolean)</a>
-    </div>
-    <div>
       <a class="xref" href="Core2D.ObservableObject.html#Core2D_ObservableObject_PropertyChanged">ObservableObject.PropertyChanged</a>
     </div>
     <div>
@@ -276,23 +273,74 @@
     <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Containers_LayerContainer_Invalidate.md&amp;value=---%0Auid%3A%20Core2D.Containers.LayerContainer.Invalidate%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Containers/LayerContainer.cs/#L38">View Source</a>
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Containers/LayerContainer.cs/#L60">View Source</a>
   </span>
   <a id="Core2D_Containers_LayerContainer_Invalidate_" data-uid="Core2D.Containers.LayerContainer.Invalidate*"></a>
   <h4 id="Core2D_Containers_LayerContainer_Invalidate" data-uid="Core2D.Containers.LayerContainer.Invalidate">Invalidate()</h4>
+  <div class="markdown level1 summary"><p>Invalidates dirty flag.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override void Invalidate()</code></pre>
+  </div>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="Core2D.ObservableObject.html#Core2D_ObservableObject_Invalidate">ObservableObject.Invalidate()</a></div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Containers_LayerContainer_InvalidateLayer.md&amp;value=---%0Auid%3A%20Core2D.Containers.LayerContainer.InvalidateLayer%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Containers/LayerContainer.cs/#L38">View Source</a>
+  </span>
+  <a id="Core2D_Containers_LayerContainer_InvalidateLayer_" data-uid="Core2D.Containers.LayerContainer.InvalidateLayer*"></a>
+  <h4 id="Core2D_Containers_LayerContainer_InvalidateLayer" data-uid="Core2D.Containers.LayerContainer.InvalidateLayer">InvalidateLayer()</h4>
   <div class="markdown level1 summary"><p>Invalidate layer shapes.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void Invalidate()</code></pre>
+    <pre><code class="lang-csharp hljs">public void InvalidateLayer()</code></pre>
   </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Containers_LayerContainer_IsDirty.md&amp;value=---%0Auid%3A%20Core2D.Containers.LayerContainer.IsDirty%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Containers/LayerContainer.cs/#L47">View Source</a>
+  </span>
+  <a id="Core2D_Containers_LayerContainer_IsDirty_" data-uid="Core2D.Containers.LayerContainer.IsDirty*"></a>
+  <h4 id="Core2D_Containers_LayerContainer_IsDirty" data-uid="Core2D.Containers.LayerContainer.IsDirty">IsDirty()</h4>
+  <div class="markdown level1 summary"><p>Gets is dirty flag.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override bool IsDirty()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="Core2D.ObservableObject.html#Core2D_ObservableObject_IsDirty">ObservableObject.IsDirty()</a></div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
     <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Containers_LayerContainer_ShouldSerializeIsVisible.md&amp;value=---%0Auid%3A%20Core2D.Containers.LayerContainer.ShouldSerializeIsVisible%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Containers/LayerContainer.cs/#L50">View Source</a>
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Containers/LayerContainer.cs/#L74">View Source</a>
   </span>
   <a id="Core2D_Containers_LayerContainer_ShouldSerializeIsVisible_" data-uid="Core2D.Containers.LayerContainer.ShouldSerializeIsVisible*"></a>
   <h4 id="Core2D_Containers_LayerContainer_ShouldSerializeIsVisible" data-uid="Core2D.Containers.LayerContainer.ShouldSerializeIsVisible">ShouldSerializeIsVisible()</h4>
@@ -324,7 +372,7 @@
     <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Containers_LayerContainer_ShouldSerializeShapes.md&amp;value=---%0Auid%3A%20Core2D.Containers.LayerContainer.ShouldSerializeShapes%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Containers/LayerContainer.cs/#L56">View Source</a>
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Containers/LayerContainer.cs/#L80">View Source</a>
   </span>
   <a id="Core2D_Containers_LayerContainer_ShouldSerializeShapes_" data-uid="Core2D.Containers.LayerContainer.ShouldSerializeShapes*"></a>
   <h4 id="Core2D_Containers_LayerContainer_ShouldSerializeShapes" data-uid="Core2D.Containers.LayerContainer.ShouldSerializeShapes">ShouldSerializeShapes()</h4>
@@ -355,18 +403,18 @@
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Containers_LayerContainer_InvalidateLayer.md&amp;value=---%0Auid%3A%20Core2D.Containers.LayerContainer.InvalidateLayer%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Containers_LayerContainer_InvalidateLayerHandler.md&amp;value=---%0Auid%3A%20Core2D.Containers.LayerContainer.InvalidateLayerHandler%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Containers/LayerContainer.cs/#L14">View Source</a>
   </span>
-  <h4 id="Core2D_Containers_LayerContainer_InvalidateLayer" data-uid="Core2D.Containers.LayerContainer.InvalidateLayer">InvalidateLayer</h4>
+  <h4 id="Core2D_Containers_LayerContainer_InvalidateLayerHandler" data-uid="Core2D.Containers.LayerContainer.InvalidateLayerHandler">InvalidateLayerHandler</h4>
   <div class="markdown level1 summary"><p>Invalidate layer event.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public event InvalidateLayerEventHandler InvalidateLayer</code></pre>
+    <pre><code class="lang-csharp hljs">public event InvalidateLayerEventHandler InvalidateLayerHandler</code></pre>
   </div>
   <h5 class="eventType">Event Type</h5>
   <table class="table table-bordered table-striped table-condensed">

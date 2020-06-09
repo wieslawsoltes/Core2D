@@ -101,7 +101,10 @@
       <a class="xref" href="Core2D.ObservableObject.html#Core2D_ObservableObject_Name">ObservableObject.Name</a>
     </div>
     <div>
-      <a class="xref" href="Core2D.ObservableObject.html#Core2D_ObservableObject_MarkAsDirty_System_Boolean_">ObservableObject.MarkAsDirty(Boolean)</a>
+      <a class="xref" href="Core2D.ObservableObject.html#Core2D_ObservableObject_IsDirty">ObservableObject.IsDirty()</a>
+    </div>
+    <div>
+      <a class="xref" href="Core2D.ObservableObject.html#Core2D_ObservableObject_Invalidate">ObservableObject.Invalidate()</a>
     </div>
     <div>
       <a class="xref" href="Core2D.ObservableObject.html#Core2D_ObservableObject_PropertyChanged">ObservableObject.PropertyChanged</a>
@@ -231,44 +234,26 @@
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Renderer_WinForms_WinFormsRenderer_ClearCache_System_Boolean_.md&amp;value=---%0Auid%3A%20Core2D.Renderer.WinForms.WinFormsRenderer.ClearCache(System.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Renderer_WinForms_WinFormsRenderer_ClearCache.md&amp;value=---%0Auid%3A%20Core2D.Renderer.WinForms.WinFormsRenderer.ClearCache%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Modules/Renderer.WinForms/WinFormsRenderer.cs/#L333">View Source</a>
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Modules/Renderer.WinForms/WinFormsRenderer.cs/#L320">View Source</a>
   </span>
   <a id="Core2D_Renderer_WinForms_WinFormsRenderer_ClearCache_" data-uid="Core2D.Renderer.WinForms.WinFormsRenderer.ClearCache*"></a>
-  <h4 id="Core2D_Renderer_WinForms_WinFormsRenderer_ClearCache_System_Boolean_" data-uid="Core2D.Renderer.WinForms.WinFormsRenderer.ClearCache(System.Boolean)">ClearCache(Boolean)</h4>
+  <h4 id="Core2D_Renderer_WinForms_WinFormsRenderer_ClearCache" data-uid="Core2D.Renderer.WinForms.WinFormsRenderer.ClearCache">ClearCache()</h4>
   <div class="markdown level1 summary"><p>Clears renderer cache.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void ClearCache(bool isZooming)</code></pre>
+    <pre><code class="lang-csharp hljs">public void ClearCache()</code></pre>
   </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.Boolean</span></td>
-        <td><span class="parametername">isZooming</span></td>
-        <td><p>The flag indicating zooming state.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
     <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Renderer_WinForms_WinFormsRenderer_Copy_System_Collections_Generic_IDictionary_System_Object_System_Object__.md&amp;value=---%0Auid%3A%20Core2D.Renderer.WinForms.WinFormsRenderer.Copy(System.Collections.Generic.IDictionary%7BSystem.Object%2CSystem.Object%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Modules/Renderer.WinForms/WinFormsRenderer.cs/#L48">View Source</a>
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Modules/Renderer.WinForms/WinFormsRenderer.cs/#L47">View Source</a>
   </span>
   <a id="Core2D_Renderer_WinForms_WinFormsRenderer_Copy_" data-uid="Core2D.Renderer.WinForms.WinFormsRenderer.Copy*"></a>
   <h4 id="Core2D_Renderer_WinForms_WinFormsRenderer_Copy_System_Collections_Generic_IDictionary_System_Object_System_Object__" data-uid="Core2D.Renderer.WinForms.WinFormsRenderer.Copy(System.Collections.Generic.IDictionary{System.Object,System.Object})">Copy(IDictionary&lt;Object, Object&gt;)</h4>
@@ -317,123 +302,19 @@
   <div><a class="xref" href="Core2D.ObservableObject.html#Core2D_ObservableObject_Copy_System_Collections_Generic_IDictionary_System_Object_System_Object__">ObservableObject.Copy(IDictionary&lt;Object, Object&gt;)</a></div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Renderer_WinForms_WinFormsRenderer_Draw_System_Object_Core2D_Containers_ILayerContainer_System_Double_System_Double_.md&amp;value=---%0Auid%3A%20Core2D.Renderer.WinForms.WinFormsRenderer.Draw(System.Object%2CCore2D.Containers.ILayerContainer%2CSystem.Double%2CSystem.Double)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Renderer_WinForms_WinFormsRenderer_DrawArc_System_Object_Core2D_Shapes_IArcShape_.md&amp;value=---%0Auid%3A%20Core2D.Renderer.WinForms.WinFormsRenderer.DrawArc(System.Object%2CCore2D.Shapes.IArcShape)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Modules/Renderer.WinForms/WinFormsRenderer.cs/#L368">View Source</a>
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Modules/Renderer.WinForms/WinFormsRenderer.cs/#L494">View Source</a>
   </span>
-  <a id="Core2D_Renderer_WinForms_WinFormsRenderer_Draw_" data-uid="Core2D.Renderer.WinForms.WinFormsRenderer.Draw*"></a>
-  <h4 id="Core2D_Renderer_WinForms_WinFormsRenderer_Draw_System_Object_Core2D_Containers_ILayerContainer_System_Double_System_Double_" data-uid="Core2D.Renderer.WinForms.WinFormsRenderer.Draw(System.Object,Core2D.Containers.ILayerContainer,System.Double,System.Double)">Draw(Object, ILayerContainer, Double, Double)</h4>
-  <div class="markdown level1 summary"><p>Draws a <a class="xref" href="Core2D.Containers.ILayerContainer.html">ILayerContainer</a> using drawing context.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void Draw(object dc, ILayerContainer layer, double dx, double dy)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.Object</span></td>
-        <td><span class="parametername">dc</span></td>
-        <td><p>The native drawing context.</p>
-</td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="Core2D.Containers.ILayerContainer.html">ILayerContainer</a></td>
-        <td><span class="parametername">layer</span></td>
-        <td><p>The <a class="xref" href="Core2D.Containers.ILayerContainer.html">ILayerContainer</a> object.</p>
-</td>
-      </tr>
-      <tr>
-        <td><span class="xref">System.Double</span></td>
-        <td><span class="parametername">dx</span></td>
-        <td><p>The X coordinate offset.</p>
-</td>
-      </tr>
-      <tr>
-        <td><span class="xref">System.Double</span></td>
-        <td><span class="parametername">dy</span></td>
-        <td><p>The Y coordinate offset.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Renderer_WinForms_WinFormsRenderer_Draw_System_Object_Core2D_Containers_IPageContainer_System_Double_System_Double_.md&amp;value=---%0Auid%3A%20Core2D.Renderer.WinForms.WinFormsRenderer.Draw(System.Object%2CCore2D.Containers.IPageContainer%2CSystem.Double%2CSystem.Double)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Modules/Renderer.WinForms/WinFormsRenderer.cs/#L356">View Source</a>
-  </span>
-  <a id="Core2D_Renderer_WinForms_WinFormsRenderer_Draw_" data-uid="Core2D.Renderer.WinForms.WinFormsRenderer.Draw*"></a>
-  <h4 id="Core2D_Renderer_WinForms_WinFormsRenderer_Draw_System_Object_Core2D_Containers_IPageContainer_System_Double_System_Double_" data-uid="Core2D.Renderer.WinForms.WinFormsRenderer.Draw(System.Object,Core2D.Containers.IPageContainer,System.Double,System.Double)">Draw(Object, IPageContainer, Double, Double)</h4>
-  <div class="markdown level1 summary"><p>Draws a <a class="xref" href="Core2D.Containers.IPageContainer.html">IPageContainer</a> using drawing context.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void Draw(object dc, IPageContainer container, double dx, double dy)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.Object</span></td>
-        <td><span class="parametername">dc</span></td>
-        <td><p>The native drawing context.</p>
-</td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="Core2D.Containers.IPageContainer.html">IPageContainer</a></td>
-        <td><span class="parametername">container</span></td>
-        <td><p>The <a class="xref" href="Core2D.Containers.IPageContainer.html">IPageContainer</a> object.</p>
-</td>
-      </tr>
-      <tr>
-        <td><span class="xref">System.Double</span></td>
-        <td><span class="parametername">dx</span></td>
-        <td><p>The X coordinate offset.</p>
-</td>
-      </tr>
-      <tr>
-        <td><span class="xref">System.Double</span></td>
-        <td><span class="parametername">dy</span></td>
-        <td><p>The Y coordinate offset.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Renderer_WinForms_WinFormsRenderer_Draw_System_Object_Core2D_Shapes_IArcShape_System_Double_System_Double_.md&amp;value=---%0Auid%3A%20Core2D.Renderer.WinForms.WinFormsRenderer.Draw(System.Object%2CCore2D.Shapes.IArcShape%2CSystem.Double%2CSystem.Double)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Modules/Renderer.WinForms/WinFormsRenderer.cs/#L506">View Source</a>
-  </span>
-  <a id="Core2D_Renderer_WinForms_WinFormsRenderer_Draw_" data-uid="Core2D.Renderer.WinForms.WinFormsRenderer.Draw*"></a>
-  <h4 id="Core2D_Renderer_WinForms_WinFormsRenderer_Draw_System_Object_Core2D_Shapes_IArcShape_System_Double_System_Double_" data-uid="Core2D.Renderer.WinForms.WinFormsRenderer.Draw(System.Object,Core2D.Shapes.IArcShape,System.Double,System.Double)">Draw(Object, IArcShape, Double, Double)</h4>
+  <a id="Core2D_Renderer_WinForms_WinFormsRenderer_DrawArc_" data-uid="Core2D.Renderer.WinForms.WinFormsRenderer.DrawArc*"></a>
+  <h4 id="Core2D_Renderer_WinForms_WinFormsRenderer_DrawArc_System_Object_Core2D_Shapes_IArcShape_" data-uid="Core2D.Renderer.WinForms.WinFormsRenderer.DrawArc(System.Object,Core2D.Shapes.IArcShape)">DrawArc(Object, IArcShape)</h4>
   <div class="markdown level1 summary"><p>Draws a <a class="xref" href="Core2D.Shapes.IArcShape.html">IArcShape</a> shape using drawing context.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void Draw(object dc, IArcShape arc, double dx, double dy)</code></pre>
+    <pre><code class="lang-csharp hljs">public void DrawArc(object dc, IArcShape arc)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -457,35 +338,23 @@
         <td><p>The <a class="xref" href="Core2D.Shapes.IArcShape.html">IArcShape</a> shape.</p>
 </td>
       </tr>
-      <tr>
-        <td><span class="xref">System.Double</span></td>
-        <td><span class="parametername">dx</span></td>
-        <td><p>The X coordinate offset.</p>
-</td>
-      </tr>
-      <tr>
-        <td><span class="xref">System.Double</span></td>
-        <td><span class="parametername">dy</span></td>
-        <td><p>The Y coordinate offset.</p>
-</td>
-      </tr>
     </tbody>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Renderer_WinForms_WinFormsRenderer_Draw_System_Object_Core2D_Shapes_ICubicBezierShape_System_Double_System_Double_.md&amp;value=---%0Auid%3A%20Core2D.Renderer.WinForms.WinFormsRenderer.Draw(System.Object%2CCore2D.Shapes.ICubicBezierShape%2CSystem.Double%2CSystem.Double)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Renderer_WinForms_WinFormsRenderer_DrawCubicBezier_System_Object_Core2D_Shapes_ICubicBezierShape_.md&amp;value=---%0Auid%3A%20Core2D.Renderer.WinForms.WinFormsRenderer.DrawCubicBezier(System.Object%2CCore2D.Shapes.ICubicBezierShape)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Modules/Renderer.WinForms/WinFormsRenderer.cs/#L553">View Source</a>
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Modules/Renderer.WinForms/WinFormsRenderer.cs/#L540">View Source</a>
   </span>
-  <a id="Core2D_Renderer_WinForms_WinFormsRenderer_Draw_" data-uid="Core2D.Renderer.WinForms.WinFormsRenderer.Draw*"></a>
-  <h4 id="Core2D_Renderer_WinForms_WinFormsRenderer_Draw_System_Object_Core2D_Shapes_ICubicBezierShape_System_Double_System_Double_" data-uid="Core2D.Renderer.WinForms.WinFormsRenderer.Draw(System.Object,Core2D.Shapes.ICubicBezierShape,System.Double,System.Double)">Draw(Object, ICubicBezierShape, Double, Double)</h4>
+  <a id="Core2D_Renderer_WinForms_WinFormsRenderer_DrawCubicBezier_" data-uid="Core2D.Renderer.WinForms.WinFormsRenderer.DrawCubicBezier*"></a>
+  <h4 id="Core2D_Renderer_WinForms_WinFormsRenderer_DrawCubicBezier_System_Object_Core2D_Shapes_ICubicBezierShape_" data-uid="Core2D.Renderer.WinForms.WinFormsRenderer.DrawCubicBezier(System.Object,Core2D.Shapes.ICubicBezierShape)">DrawCubicBezier(Object, ICubicBezierShape)</h4>
   <div class="markdown level1 summary"><p>Draws a <a class="xref" href="Core2D.Shapes.ICubicBezierShape.html">ICubicBezierShape</a> shape using drawing context.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void Draw(object dc, ICubicBezierShape cubicBezier, double dx, double dy)</code></pre>
+    <pre><code class="lang-csharp hljs">public void DrawCubicBezier(object dc, ICubicBezierShape cubicBezier)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -509,35 +378,23 @@
         <td><p>The <a class="xref" href="Core2D.Shapes.ICubicBezierShape.html">ICubicBezierShape</a> shape.</p>
 </td>
       </tr>
-      <tr>
-        <td><span class="xref">System.Double</span></td>
-        <td><span class="parametername">dx</span></td>
-        <td><p>The X coordinate offset.</p>
-</td>
-      </tr>
-      <tr>
-        <td><span class="xref">System.Double</span></td>
-        <td><span class="parametername">dy</span></td>
-        <td><p>The Y coordinate offset.</p>
-</td>
-      </tr>
     </tbody>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Renderer_WinForms_WinFormsRenderer_Draw_System_Object_Core2D_Shapes_IEllipseShape_System_Double_System_Double_.md&amp;value=---%0Auid%3A%20Core2D.Renderer.WinForms.WinFormsRenderer.Draw(System.Object%2CCore2D.Shapes.IEllipseShape%2CSystem.Double%2CSystem.Double)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Renderer_WinForms_WinFormsRenderer_DrawEllipse_System_Object_Core2D_Shapes_IEllipseShape_.md&amp;value=---%0Auid%3A%20Core2D.Renderer.WinForms.WinFormsRenderer.DrawEllipse(System.Object%2CCore2D.Shapes.IEllipseShape)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Modules/Renderer.WinForms/WinFormsRenderer.cs/#L469">View Source</a>
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Modules/Renderer.WinForms/WinFormsRenderer.cs/#L455">View Source</a>
   </span>
-  <a id="Core2D_Renderer_WinForms_WinFormsRenderer_Draw_" data-uid="Core2D.Renderer.WinForms.WinFormsRenderer.Draw*"></a>
-  <h4 id="Core2D_Renderer_WinForms_WinFormsRenderer_Draw_System_Object_Core2D_Shapes_IEllipseShape_System_Double_System_Double_" data-uid="Core2D.Renderer.WinForms.WinFormsRenderer.Draw(System.Object,Core2D.Shapes.IEllipseShape,System.Double,System.Double)">Draw(Object, IEllipseShape, Double, Double)</h4>
+  <a id="Core2D_Renderer_WinForms_WinFormsRenderer_DrawEllipse_" data-uid="Core2D.Renderer.WinForms.WinFormsRenderer.DrawEllipse*"></a>
+  <h4 id="Core2D_Renderer_WinForms_WinFormsRenderer_DrawEllipse_System_Object_Core2D_Shapes_IEllipseShape_" data-uid="Core2D.Renderer.WinForms.WinFormsRenderer.DrawEllipse(System.Object,Core2D.Shapes.IEllipseShape)">DrawEllipse(Object, IEllipseShape)</h4>
   <div class="markdown level1 summary"><p>Draws a <a class="xref" href="Core2D.Shapes.IEllipseShape.html">IEllipseShape</a> shape using drawing context.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void Draw(object dc, IEllipseShape ellipse, double dx, double dy)</code></pre>
+    <pre><code class="lang-csharp hljs">public void DrawEllipse(object dc, IEllipseShape ellipse)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -561,35 +418,23 @@
         <td><p>The <a class="xref" href="Core2D.Shapes.IEllipseShape.html">IEllipseShape</a> shape.</p>
 </td>
       </tr>
-      <tr>
-        <td><span class="xref">System.Double</span></td>
-        <td><span class="parametername">dx</span></td>
-        <td><p>The X coordinate offset.</p>
-</td>
-      </tr>
-      <tr>
-        <td><span class="xref">System.Double</span></td>
-        <td><span class="parametername">dy</span></td>
-        <td><p>The Y coordinate offset.</p>
-</td>
-      </tr>
     </tbody>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Renderer_WinForms_WinFormsRenderer_Draw_System_Object_Core2D_Shapes_IImageShape_System_Double_System_Double_.md&amp;value=---%0Auid%3A%20Core2D.Renderer.WinForms.WinFormsRenderer.Draw(System.Object%2CCore2D.Shapes.IImageShape%2CSystem.Double%2CSystem.Double)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Renderer_WinForms_WinFormsRenderer_DrawImage_System_Object_Core2D_Shapes_IImageShape_.md&amp;value=---%0Auid%3A%20Core2D.Renderer.WinForms.WinFormsRenderer.DrawImage(System.Object%2CCore2D.Shapes.IImageShape)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Modules/Renderer.WinForms/WinFormsRenderer.cs/#L732">View Source</a>
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Modules/Renderer.WinForms/WinFormsRenderer.cs/#L719">View Source</a>
   </span>
-  <a id="Core2D_Renderer_WinForms_WinFormsRenderer_Draw_" data-uid="Core2D.Renderer.WinForms.WinFormsRenderer.Draw*"></a>
-  <h4 id="Core2D_Renderer_WinForms_WinFormsRenderer_Draw_System_Object_Core2D_Shapes_IImageShape_System_Double_System_Double_" data-uid="Core2D.Renderer.WinForms.WinFormsRenderer.Draw(System.Object,Core2D.Shapes.IImageShape,System.Double,System.Double)">Draw(Object, IImageShape, Double, Double)</h4>
+  <a id="Core2D_Renderer_WinForms_WinFormsRenderer_DrawImage_" data-uid="Core2D.Renderer.WinForms.WinFormsRenderer.DrawImage*"></a>
+  <h4 id="Core2D_Renderer_WinForms_WinFormsRenderer_DrawImage_System_Object_Core2D_Shapes_IImageShape_" data-uid="Core2D.Renderer.WinForms.WinFormsRenderer.DrawImage(System.Object,Core2D.Shapes.IImageShape)">DrawImage(Object, IImageShape)</h4>
   <div class="markdown level1 summary"><p>Draws a <a class="xref" href="Core2D.Shapes.IImageShape.html">IImageShape</a> shape using drawing context.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void Draw(object dc, IImageShape image, double dx, double dy)</code></pre>
+    <pre><code class="lang-csharp hljs">public void DrawImage(object dc, IImageShape image)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -613,35 +458,63 @@
         <td><p>The <a class="xref" href="Core2D.Shapes.IImageShape.html">IImageShape</a> shape.</p>
 </td>
       </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Renderer_WinForms_WinFormsRenderer_DrawLayer_System_Object_Core2D_Containers_ILayerContainer_.md&amp;value=---%0Auid%3A%20Core2D.Renderer.WinForms.WinFormsRenderer.DrawLayer(System.Object%2CCore2D.Containers.ILayerContainer)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Modules/Renderer.WinForms/WinFormsRenderer.cs/#L352">View Source</a>
+  </span>
+  <a id="Core2D_Renderer_WinForms_WinFormsRenderer_DrawLayer_" data-uid="Core2D.Renderer.WinForms.WinFormsRenderer.DrawLayer*"></a>
+  <h4 id="Core2D_Renderer_WinForms_WinFormsRenderer_DrawLayer_System_Object_Core2D_Containers_ILayerContainer_" data-uid="Core2D.Renderer.WinForms.WinFormsRenderer.DrawLayer(System.Object,Core2D.Containers.ILayerContainer)">DrawLayer(Object, ILayerContainer)</h4>
+  <div class="markdown level1 summary"><p>Draws a <a class="xref" href="Core2D.Containers.ILayerContainer.html">ILayerContainer</a> using drawing context.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void DrawLayer(object dc, ILayerContainer layer)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
       <tr>
-        <td><span class="xref">System.Double</span></td>
-        <td><span class="parametername">dx</span></td>
-        <td><p>The X coordinate offset.</p>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td><span class="parametername">dc</span></td>
+        <td><p>The native drawing context.</p>
 </td>
       </tr>
       <tr>
-        <td><span class="xref">System.Double</span></td>
-        <td><span class="parametername">dy</span></td>
-        <td><p>The Y coordinate offset.</p>
+        <td><a class="xref" href="Core2D.Containers.ILayerContainer.html">ILayerContainer</a></td>
+        <td><span class="parametername">layer</span></td>
+        <td><p>The <a class="xref" href="Core2D.Containers.ILayerContainer.html">ILayerContainer</a> object.</p>
 </td>
       </tr>
     </tbody>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Renderer_WinForms_WinFormsRenderer_Draw_System_Object_Core2D_Shapes_ILineShape_System_Double_System_Double_.md&amp;value=---%0Auid%3A%20Core2D.Renderer.WinForms.WinFormsRenderer.Draw(System.Object%2CCore2D.Shapes.ILineShape%2CSystem.Double%2CSystem.Double)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Renderer_WinForms_WinFormsRenderer_DrawLine_System_Object_Core2D_Shapes_ILineShape_.md&amp;value=---%0Auid%3A%20Core2D.Renderer.WinForms.WinFormsRenderer.DrawLine(System.Object%2CCore2D.Shapes.ILineShape)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Modules/Renderer.WinForms/WinFormsRenderer.cs/#L394">View Source</a>
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Modules/Renderer.WinForms/WinFormsRenderer.cs/#L378">View Source</a>
   </span>
-  <a id="Core2D_Renderer_WinForms_WinFormsRenderer_Draw_" data-uid="Core2D.Renderer.WinForms.WinFormsRenderer.Draw*"></a>
-  <h4 id="Core2D_Renderer_WinForms_WinFormsRenderer_Draw_System_Object_Core2D_Shapes_ILineShape_System_Double_System_Double_" data-uid="Core2D.Renderer.WinForms.WinFormsRenderer.Draw(System.Object,Core2D.Shapes.ILineShape,System.Double,System.Double)">Draw(Object, ILineShape, Double, Double)</h4>
+  <a id="Core2D_Renderer_WinForms_WinFormsRenderer_DrawLine_" data-uid="Core2D.Renderer.WinForms.WinFormsRenderer.DrawLine*"></a>
+  <h4 id="Core2D_Renderer_WinForms_WinFormsRenderer_DrawLine_System_Object_Core2D_Shapes_ILineShape_" data-uid="Core2D.Renderer.WinForms.WinFormsRenderer.DrawLine(System.Object,Core2D.Shapes.ILineShape)">DrawLine(Object, ILineShape)</h4>
   <div class="markdown level1 summary"><p>Draws a <a class="xref" href="Core2D.Shapes.ILineShape.html">ILineShape</a> shape using drawing context.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void Draw(object dc, ILineShape line, double dx, double dy)</code></pre>
+    <pre><code class="lang-csharp hljs">public void DrawLine(object dc, ILineShape line)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -665,35 +538,63 @@
         <td><p>The <a class="xref" href="Core2D.Shapes.ILineShape.html">ILineShape</a> shape.</p>
 </td>
       </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Renderer_WinForms_WinFormsRenderer_DrawPage_System_Object_Core2D_Containers_IPageContainer_.md&amp;value=---%0Auid%3A%20Core2D.Renderer.WinForms.WinFormsRenderer.DrawPage(System.Object%2CCore2D.Containers.IPageContainer)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Modules/Renderer.WinForms/WinFormsRenderer.cs/#L340">View Source</a>
+  </span>
+  <a id="Core2D_Renderer_WinForms_WinFormsRenderer_DrawPage_" data-uid="Core2D.Renderer.WinForms.WinFormsRenderer.DrawPage*"></a>
+  <h4 id="Core2D_Renderer_WinForms_WinFormsRenderer_DrawPage_System_Object_Core2D_Containers_IPageContainer_" data-uid="Core2D.Renderer.WinForms.WinFormsRenderer.DrawPage(System.Object,Core2D.Containers.IPageContainer)">DrawPage(Object, IPageContainer)</h4>
+  <div class="markdown level1 summary"><p>Draws a <a class="xref" href="Core2D.Containers.IPageContainer.html">IPageContainer</a> using drawing context.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void DrawPage(object dc, IPageContainer container)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
       <tr>
-        <td><span class="xref">System.Double</span></td>
-        <td><span class="parametername">dx</span></td>
-        <td><p>The X coordinate offset.</p>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td><span class="parametername">dc</span></td>
+        <td><p>The native drawing context.</p>
 </td>
       </tr>
       <tr>
-        <td><span class="xref">System.Double</span></td>
-        <td><span class="parametername">dy</span></td>
-        <td><p>The Y coordinate offset.</p>
+        <td><a class="xref" href="Core2D.Containers.IPageContainer.html">IPageContainer</a></td>
+        <td><span class="parametername">container</span></td>
+        <td><p>The <a class="xref" href="Core2D.Containers.IPageContainer.html">IPageContainer</a> object.</p>
 </td>
       </tr>
     </tbody>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Renderer_WinForms_WinFormsRenderer_Draw_System_Object_Core2D_Shapes_IPathShape_System_Double_System_Double_.md&amp;value=---%0Auid%3A%20Core2D.Renderer.WinForms.WinFormsRenderer.Draw(System.Object%2CCore2D.Shapes.IPathShape%2CSystem.Double%2CSystem.Double)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Renderer_WinForms_WinFormsRenderer_DrawPath_System_Object_Core2D_Shapes_IPathShape_.md&amp;value=---%0Auid%3A%20Core2D.Renderer.WinForms.WinFormsRenderer.DrawPath(System.Object%2CCore2D.Shapes.IPathShape)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Modules/Renderer.WinForms/WinFormsRenderer.cs/#L795">View Source</a>
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Modules/Renderer.WinForms/WinFormsRenderer.cs/#L782">View Source</a>
   </span>
-  <a id="Core2D_Renderer_WinForms_WinFormsRenderer_Draw_" data-uid="Core2D.Renderer.WinForms.WinFormsRenderer.Draw*"></a>
-  <h4 id="Core2D_Renderer_WinForms_WinFormsRenderer_Draw_System_Object_Core2D_Shapes_IPathShape_System_Double_System_Double_" data-uid="Core2D.Renderer.WinForms.WinFormsRenderer.Draw(System.Object,Core2D.Shapes.IPathShape,System.Double,System.Double)">Draw(Object, IPathShape, Double, Double)</h4>
+  <a id="Core2D_Renderer_WinForms_WinFormsRenderer_DrawPath_" data-uid="Core2D.Renderer.WinForms.WinFormsRenderer.DrawPath*"></a>
+  <h4 id="Core2D_Renderer_WinForms_WinFormsRenderer_DrawPath_System_Object_Core2D_Shapes_IPathShape_" data-uid="Core2D.Renderer.WinForms.WinFormsRenderer.DrawPath(System.Object,Core2D.Shapes.IPathShape)">DrawPath(Object, IPathShape)</h4>
   <div class="markdown level1 summary"><p>Draws a <a class="xref" href="Core2D.Shapes.IPathShape.html">IPathShape</a> shape using drawing context.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void Draw(object dc, IPathShape path, double dx, double dy)</code></pre>
+    <pre><code class="lang-csharp hljs">public void DrawPath(object dc, IPathShape path)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -717,35 +618,23 @@
         <td><p>The <a class="xref" href="Core2D.Shapes.IPathShape.html">IPathShape</a> shape.</p>
 </td>
       </tr>
-      <tr>
-        <td><span class="xref">System.Double</span></td>
-        <td><span class="parametername">dx</span></td>
-        <td><p>The X coordinate offset.</p>
-</td>
-      </tr>
-      <tr>
-        <td><span class="xref">System.Double</span></td>
-        <td><span class="parametername">dy</span></td>
-        <td><p>The Y coordinate offset.</p>
-</td>
-      </tr>
     </tbody>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Renderer_WinForms_WinFormsRenderer_Draw_System_Object_Core2D_Shapes_IPointShape_System_Double_System_Double_.md&amp;value=---%0Auid%3A%20Core2D.Renderer.WinForms.WinFormsRenderer.Draw(System.Object%2CCore2D.Shapes.IPointShape%2CSystem.Double%2CSystem.Double)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Renderer_WinForms_WinFormsRenderer_DrawPoint_System_Object_Core2D_Shapes_IPointShape_.md&amp;value=---%0Auid%3A%20Core2D.Renderer.WinForms.WinFormsRenderer.DrawPoint(System.Object%2CCore2D.Shapes.IPointShape)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Modules/Renderer.WinForms/WinFormsRenderer.cs/#L388">View Source</a>
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Modules/Renderer.WinForms/WinFormsRenderer.cs/#L372">View Source</a>
   </span>
-  <a id="Core2D_Renderer_WinForms_WinFormsRenderer_Draw_" data-uid="Core2D.Renderer.WinForms.WinFormsRenderer.Draw*"></a>
-  <h4 id="Core2D_Renderer_WinForms_WinFormsRenderer_Draw_System_Object_Core2D_Shapes_IPointShape_System_Double_System_Double_" data-uid="Core2D.Renderer.WinForms.WinFormsRenderer.Draw(System.Object,Core2D.Shapes.IPointShape,System.Double,System.Double)">Draw(Object, IPointShape, Double, Double)</h4>
+  <a id="Core2D_Renderer_WinForms_WinFormsRenderer_DrawPoint_" data-uid="Core2D.Renderer.WinForms.WinFormsRenderer.DrawPoint*"></a>
+  <h4 id="Core2D_Renderer_WinForms_WinFormsRenderer_DrawPoint_System_Object_Core2D_Shapes_IPointShape_" data-uid="Core2D.Renderer.WinForms.WinFormsRenderer.DrawPoint(System.Object,Core2D.Shapes.IPointShape)">DrawPoint(Object, IPointShape)</h4>
   <div class="markdown level1 summary"><p>Draws a <a class="xref" href="Core2D.Shapes.IPointShape.html">IPointShape</a> shape using drawing context.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void Draw(object dc, IPointShape point, double dx, double dy)</code></pre>
+    <pre><code class="lang-csharp hljs">public void DrawPoint(object dc, IPointShape point)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -769,35 +658,23 @@
         <td><p>The <a class="xref" href="Core2D.Shapes.IPointShape.html">IPointShape</a> shape.</p>
 </td>
       </tr>
-      <tr>
-        <td><span class="xref">System.Double</span></td>
-        <td><span class="parametername">dx</span></td>
-        <td><p>The X coordinate offset.</p>
-</td>
-      </tr>
-      <tr>
-        <td><span class="xref">System.Double</span></td>
-        <td><span class="parametername">dy</span></td>
-        <td><p>The Y coordinate offset.</p>
-</td>
-      </tr>
     </tbody>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Renderer_WinForms_WinFormsRenderer_Draw_System_Object_Core2D_Shapes_IQuadraticBezierShape_System_Double_System_Double_.md&amp;value=---%0Auid%3A%20Core2D.Renderer.WinForms.WinFormsRenderer.Draw(System.Object%2CCore2D.Shapes.IQuadraticBezierShape%2CSystem.Double%2CSystem.Double)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Renderer_WinForms_WinFormsRenderer_DrawQuadraticBezier_System_Object_Core2D_Shapes_IQuadraticBezierShape_.md&amp;value=---%0Auid%3A%20Core2D.Renderer.WinForms.WinFormsRenderer.DrawQuadraticBezier(System.Object%2CCore2D.Shapes.IQuadraticBezierShape)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Modules/Renderer.WinForms/WinFormsRenderer.cs/#L594">View Source</a>
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Modules/Renderer.WinForms/WinFormsRenderer.cs/#L581">View Source</a>
   </span>
-  <a id="Core2D_Renderer_WinForms_WinFormsRenderer_Draw_" data-uid="Core2D.Renderer.WinForms.WinFormsRenderer.Draw*"></a>
-  <h4 id="Core2D_Renderer_WinForms_WinFormsRenderer_Draw_System_Object_Core2D_Shapes_IQuadraticBezierShape_System_Double_System_Double_" data-uid="Core2D.Renderer.WinForms.WinFormsRenderer.Draw(System.Object,Core2D.Shapes.IQuadraticBezierShape,System.Double,System.Double)">Draw(Object, IQuadraticBezierShape, Double, Double)</h4>
+  <a id="Core2D_Renderer_WinForms_WinFormsRenderer_DrawQuadraticBezier_" data-uid="Core2D.Renderer.WinForms.WinFormsRenderer.DrawQuadraticBezier*"></a>
+  <h4 id="Core2D_Renderer_WinForms_WinFormsRenderer_DrawQuadraticBezier_System_Object_Core2D_Shapes_IQuadraticBezierShape_" data-uid="Core2D.Renderer.WinForms.WinFormsRenderer.DrawQuadraticBezier(System.Object,Core2D.Shapes.IQuadraticBezierShape)">DrawQuadraticBezier(Object, IQuadraticBezierShape)</h4>
   <div class="markdown level1 summary"><p>Draws a <a class="xref" href="Core2D.Shapes.IQuadraticBezierShape.html">IQuadraticBezierShape</a> shape using drawing context.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void Draw(object dc, IQuadraticBezierShape quadraticBezier, double dx, double dy)</code></pre>
+    <pre><code class="lang-csharp hljs">public void DrawQuadraticBezier(object dc, IQuadraticBezierShape quadraticBezier)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -821,35 +698,23 @@
         <td><p>The <a class="xref" href="Core2D.Shapes.IQuadraticBezierShape.html">IQuadraticBezierShape</a> shape.</p>
 </td>
       </tr>
-      <tr>
-        <td><span class="xref">System.Double</span></td>
-        <td><span class="parametername">dx</span></td>
-        <td><p>The X coordinate offset.</p>
-</td>
-      </tr>
-      <tr>
-        <td><span class="xref">System.Double</span></td>
-        <td><span class="parametername">dy</span></td>
-        <td><p>The Y coordinate offset.</p>
-</td>
-      </tr>
     </tbody>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Renderer_WinForms_WinFormsRenderer_Draw_System_Object_Core2D_Shapes_IRectangleShape_System_Double_System_Double_.md&amp;value=---%0Auid%3A%20Core2D.Renderer.WinForms.WinFormsRenderer.Draw(System.Object%2CCore2D.Shapes.IRectangleShape%2CSystem.Double%2CSystem.Double)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Renderer_WinForms_WinFormsRenderer_DrawRectangle_System_Object_Core2D_Shapes_IRectangleShape_.md&amp;value=---%0Auid%3A%20Core2D.Renderer.WinForms.WinFormsRenderer.DrawRectangle(System.Object%2CCore2D.Shapes.IRectangleShape)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Modules/Renderer.WinForms/WinFormsRenderer.cs/#L421">View Source</a>
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Modules/Renderer.WinForms/WinFormsRenderer.cs/#L405">View Source</a>
   </span>
-  <a id="Core2D_Renderer_WinForms_WinFormsRenderer_Draw_" data-uid="Core2D.Renderer.WinForms.WinFormsRenderer.Draw*"></a>
-  <h4 id="Core2D_Renderer_WinForms_WinFormsRenderer_Draw_System_Object_Core2D_Shapes_IRectangleShape_System_Double_System_Double_" data-uid="Core2D.Renderer.WinForms.WinFormsRenderer.Draw(System.Object,Core2D.Shapes.IRectangleShape,System.Double,System.Double)">Draw(Object, IRectangleShape, Double, Double)</h4>
+  <a id="Core2D_Renderer_WinForms_WinFormsRenderer_DrawRectangle_" data-uid="Core2D.Renderer.WinForms.WinFormsRenderer.DrawRectangle*"></a>
+  <h4 id="Core2D_Renderer_WinForms_WinFormsRenderer_DrawRectangle_System_Object_Core2D_Shapes_IRectangleShape_" data-uid="Core2D.Renderer.WinForms.WinFormsRenderer.DrawRectangle(System.Object,Core2D.Shapes.IRectangleShape)">DrawRectangle(Object, IRectangleShape)</h4>
   <div class="markdown level1 summary"><p>Draws a <a class="xref" href="Core2D.Shapes.IRectangleShape.html">IRectangleShape</a> shape using drawing context.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void Draw(object dc, IRectangleShape rectangle, double dx, double dy)</code></pre>
+    <pre><code class="lang-csharp hljs">public void DrawRectangle(object dc, IRectangleShape rectangle)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -873,35 +738,23 @@
         <td><p>The <a class="xref" href="Core2D.Shapes.IRectangleShape.html">IRectangleShape</a> shape.</p>
 </td>
       </tr>
-      <tr>
-        <td><span class="xref">System.Double</span></td>
-        <td><span class="parametername">dx</span></td>
-        <td><p>The X coordinate offset.</p>
-</td>
-      </tr>
-      <tr>
-        <td><span class="xref">System.Double</span></td>
-        <td><span class="parametername">dy</span></td>
-        <td><p>The Y coordinate offset.</p>
-</td>
-      </tr>
     </tbody>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Renderer_WinForms_WinFormsRenderer_Draw_System_Object_Core2D_Shapes_ITextShape_System_Double_System_Double_.md&amp;value=---%0Auid%3A%20Core2D.Renderer.WinForms.WinFormsRenderer.Draw(System.Object%2CCore2D.Shapes.ITextShape%2CSystem.Double%2CSystem.Double)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Renderer_WinForms_WinFormsRenderer_DrawText_System_Object_Core2D_Shapes_ITextShape_.md&amp;value=---%0Auid%3A%20Core2D.Renderer.WinForms.WinFormsRenderer.DrawText(System.Object%2CCore2D.Shapes.ITextShape)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Modules/Renderer.WinForms/WinFormsRenderer.cs/#L644">View Source</a>
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Modules/Renderer.WinForms/WinFormsRenderer.cs/#L631">View Source</a>
   </span>
-  <a id="Core2D_Renderer_WinForms_WinFormsRenderer_Draw_" data-uid="Core2D.Renderer.WinForms.WinFormsRenderer.Draw*"></a>
-  <h4 id="Core2D_Renderer_WinForms_WinFormsRenderer_Draw_System_Object_Core2D_Shapes_ITextShape_System_Double_System_Double_" data-uid="Core2D.Renderer.WinForms.WinFormsRenderer.Draw(System.Object,Core2D.Shapes.ITextShape,System.Double,System.Double)">Draw(Object, ITextShape, Double, Double)</h4>
+  <a id="Core2D_Renderer_WinForms_WinFormsRenderer_DrawText_" data-uid="Core2D.Renderer.WinForms.WinFormsRenderer.DrawText*"></a>
+  <h4 id="Core2D_Renderer_WinForms_WinFormsRenderer_DrawText_System_Object_Core2D_Shapes_ITextShape_" data-uid="Core2D.Renderer.WinForms.WinFormsRenderer.DrawText(System.Object,Core2D.Shapes.ITextShape)">DrawText(Object, ITextShape)</h4>
   <div class="markdown level1 summary"><p>Draws a <a class="xref" href="Core2D.Shapes.ITextShape.html">ITextShape</a> shape using drawing context.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void Draw(object dc, ITextShape text, double dx, double dy)</code></pre>
+    <pre><code class="lang-csharp hljs">public void DrawText(object dc, ITextShape text)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -925,18 +778,6 @@
         <td><p>The <a class="xref" href="Core2D.Shapes.ITextShape.html">ITextShape</a> shape.</p>
 </td>
       </tr>
-      <tr>
-        <td><span class="xref">System.Double</span></td>
-        <td><span class="parametername">dx</span></td>
-        <td><p>The X coordinate offset.</p>
-</td>
-      </tr>
-      <tr>
-        <td><span class="xref">System.Double</span></td>
-        <td><span class="parametername">dy</span></td>
-        <td><p>The Y coordinate offset.</p>
-</td>
-      </tr>
     </tbody>
   </table>
   <span class="small pull-right mobile-hide">
@@ -944,7 +785,7 @@
     <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Renderer_WinForms_WinFormsRenderer_Fill_System_Object_System_Double_System_Double_System_Double_System_Double_Core2D_Style_IColor_.md&amp;value=---%0Auid%3A%20Core2D.Renderer.WinForms.WinFormsRenderer.Fill(System.Object%2CSystem.Double%2CSystem.Double%2CSystem.Double%2CSystem.Double%2CCore2D.Style.IColor)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Modules/Renderer.WinForms/WinFormsRenderer.cs/#L342">View Source</a>
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Modules/Renderer.WinForms/WinFormsRenderer.cs/#L326">View Source</a>
   </span>
   <a id="Core2D_Renderer_WinForms_WinFormsRenderer_Fill_" data-uid="Core2D.Renderer.WinForms.WinFormsRenderer.Fill*"></a>
   <h4 id="Core2D_Renderer_WinForms_WinFormsRenderer_Fill_System_Object_System_Double_System_Double_System_Double_System_Double_Core2D_Style_IColor_" data-uid="Core2D.Renderer.WinForms.WinFormsRenderer.Fill(System.Object,System.Double,System.Double,System.Double,System.Double,Core2D.Style.IColor)">Fill(Object, Double, Double, Double, Double, IColor)</h4>
@@ -1005,96 +846,10 @@
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Renderer_WinForms_WinFormsRenderer_InvalidateCache_Core2D_Shapes_IBaseShape_Core2D_Style_IShapeStyle_System_Double_System_Double_.md&amp;value=---%0Auid%3A%20Core2D.Renderer.WinForms.WinFormsRenderer.InvalidateCache(Core2D.Shapes.IBaseShape%2CCore2D.Style.IShapeStyle%2CSystem.Double%2CSystem.Double)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Modules/Renderer.WinForms/WinFormsRenderer.cs/#L327">View Source</a>
-  </span>
-  <a id="Core2D_Renderer_WinForms_WinFormsRenderer_InvalidateCache_" data-uid="Core2D.Renderer.WinForms.WinFormsRenderer.InvalidateCache*"></a>
-  <h4 id="Core2D_Renderer_WinForms_WinFormsRenderer_InvalidateCache_Core2D_Shapes_IBaseShape_Core2D_Style_IShapeStyle_System_Double_System_Double_" data-uid="Core2D.Renderer.WinForms.WinFormsRenderer.InvalidateCache(Core2D.Shapes.IBaseShape,Core2D.Style.IShapeStyle,System.Double,System.Double)">InvalidateCache(IBaseShape, IShapeStyle, Double, Double)</h4>
-  <div class="markdown level1 summary"><p>Invalidates shape cache.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void InvalidateCache(IBaseShape shape, IShapeStyle style, double dx, double dy)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="Core2D.Shapes.IBaseShape.html">IBaseShape</a></td>
-        <td><span class="parametername">shape</span></td>
-        <td><p>The shape to invalidate.</p>
-</td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="Core2D.Style.IShapeStyle.html">IShapeStyle</a></td>
-        <td><span class="parametername">style</span></td>
-        <td><p>The style to invalidate.</p>
-</td>
-      </tr>
-      <tr>
-        <td><span class="xref">System.Double</span></td>
-        <td><span class="parametername">dx</span></td>
-        <td><p>The X coordinate offset.</p>
-</td>
-      </tr>
-      <tr>
-        <td><span class="xref">System.Double</span></td>
-        <td><span class="parametername">dy</span></td>
-        <td><p>The Y coordinate offset.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Renderer_WinForms_WinFormsRenderer_InvalidateCache_Core2D_Style_IShapeStyle_.md&amp;value=---%0Auid%3A%20Core2D.Renderer.WinForms.WinFormsRenderer.InvalidateCache(Core2D.Style.IShapeStyle)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Modules/Renderer.WinForms/WinFormsRenderer.cs/#L321">View Source</a>
-  </span>
-  <a id="Core2D_Renderer_WinForms_WinFormsRenderer_InvalidateCache_" data-uid="Core2D.Renderer.WinForms.WinFormsRenderer.InvalidateCache*"></a>
-  <h4 id="Core2D_Renderer_WinForms_WinFormsRenderer_InvalidateCache_Core2D_Style_IShapeStyle_" data-uid="Core2D.Renderer.WinForms.WinFormsRenderer.InvalidateCache(Core2D.Style.IShapeStyle)">InvalidateCache(IShapeStyle)</h4>
-  <div class="markdown level1 summary"><p>Invalidates style cache.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void InvalidateCache(IShapeStyle style)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="Core2D.Style.IShapeStyle.html">IShapeStyle</a></td>
-        <td><span class="parametername">style</span></td>
-        <td><p>The style to invalidate.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
     <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Renderer_WinForms_WinFormsRenderer_ShouldSerializeState.md&amp;value=---%0Auid%3A%20Core2D.Renderer.WinForms.WinFormsRenderer.ShouldSerializeState%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Modules/Renderer.WinForms/WinFormsRenderer.cs/#L836">View Source</a>
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Modules/Renderer.WinForms/WinFormsRenderer.cs/#L823">View Source</a>
   </span>
   <a id="Core2D_Renderer_WinForms_WinFormsRenderer_ShouldSerializeState_" data-uid="Core2D.Renderer.WinForms.WinFormsRenderer.ShouldSerializeState*"></a>
   <h4 id="Core2D_Renderer_WinForms_WinFormsRenderer_ShouldSerializeState" data-uid="Core2D.Renderer.WinForms.WinFormsRenderer.ShouldSerializeState">ShouldSerializeState()</h4>

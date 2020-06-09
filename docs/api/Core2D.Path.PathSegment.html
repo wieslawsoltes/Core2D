@@ -106,9 +106,6 @@
       <a class="xref" href="Core2D.ObservableObject.html#Core2D_ObservableObject_Name">ObservableObject.Name</a>
     </div>
     <div>
-      <a class="xref" href="Core2D.ObservableObject.html#Core2D_ObservableObject_MarkAsDirty_System_Boolean_">ObservableObject.MarkAsDirty(Boolean)</a>
-    </div>
-    <div>
       <a class="xref" href="Core2D.ObservableObject.html#Core2D_ObservableObject_PropertyChanged">ObservableObject.PropertyChanged</a>
     </div>
     <div>
@@ -228,19 +225,71 @@
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Path_PathSegment_GetPoints.md&amp;value=---%0Auid%3A%20Core2D.Path.PathSegment.GetPoints%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Path_PathSegment_GetPoints_System_Collections_Generic_IList_Core2D_Shapes_IPointShape__.md&amp;value=---%0Auid%3A%20Core2D.Path.PathSegment.GetPoints(System.Collections.Generic.IList%7BCore2D.Shapes.IPointShape%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Shapes/Path/PathSegment.cs/#L29">View Source</a>
   </span>
   <a id="Core2D_Path_PathSegment_GetPoints_" data-uid="Core2D.Path.PathSegment.GetPoints*"></a>
-  <h4 id="Core2D_Path_PathSegment_GetPoints" data-uid="Core2D.Path.PathSegment.GetPoints">GetPoints()</h4>
-  <div class="markdown level1 summary"><p>Get all points in the segment.</p>
+  <h4 id="Core2D_Path_PathSegment_GetPoints_System_Collections_Generic_IList_Core2D_Shapes_IPointShape__" data-uid="Core2D.Path.PathSegment.GetPoints(System.Collections.Generic.IList{Core2D.Shapes.IPointShape})">GetPoints(IList&lt;IPointShape&gt;)</h4>
+  <div class="markdown level1 summary"><p>Get all points in the shape.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public abstract IEnumerable&lt;IPointShape&gt; GetPoints()</code></pre>
+    <pre><code class="lang-csharp hljs">public abstract void GetPoints(IList&lt;IPointShape&gt; points)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.IList</span>&lt;<a class="xref" href="Core2D.Shapes.IPointShape.html">IPointShape</a>&gt;</td>
+        <td><span class="parametername">points</span></td>
+        <td><p>The points list.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Path_PathSegment_Invalidate.md&amp;value=---%0Auid%3A%20Core2D.Path.PathSegment.Invalidate%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Shapes/Path/PathSegment.cs/#L45">View Source</a>
+  </span>
+  <a id="Core2D_Path_PathSegment_Invalidate_" data-uid="Core2D.Path.PathSegment.Invalidate*"></a>
+  <h4 id="Core2D_Path_PathSegment_Invalidate" data-uid="Core2D.Path.PathSegment.Invalidate">Invalidate()</h4>
+  <div class="markdown level1 summary"><p>Invalidates dirty flag.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override void Invalidate()</code></pre>
+  </div>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="Core2D.ObservableObject.html#Core2D_ObservableObject_Invalidate">ObservableObject.Invalidate()</a></div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Path_PathSegment_IsDirty.md&amp;value=---%0Auid%3A%20Core2D.Path.PathSegment.IsDirty%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Shapes/Path/PathSegment.cs/#L38">View Source</a>
+  </span>
+  <a id="Core2D_Path_PathSegment_IsDirty_" data-uid="Core2D.Path.PathSegment.IsDirty*"></a>
+  <h4 id="Core2D_Path_PathSegment_IsDirty" data-uid="Core2D.Path.PathSegment.IsDirty">IsDirty()</h4>
+  <div class="markdown level1 summary"><p>Gets is dirty flag.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override bool IsDirty()</code></pre>
   </div>
   <h5 class="returns">Returns</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -252,18 +301,19 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<a class="xref" href="Core2D.Shapes.IPointShape.html">IPointShape</a>&gt;</td>
-        <td><p>All points in the segment.</p>
-</td>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
       </tr>
     </tbody>
   </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="Core2D.ObservableObject.html#Core2D_ObservableObject_IsDirty">ObservableObject.IsDirty()</a></div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
     <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Path_PathSegment_ShouldSerializeIsSmoothJoin.md&amp;value=---%0Auid%3A%20Core2D.Path.PathSegment.ShouldSerializeIsSmoothJoin%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Shapes/Path/PathSegment.cs/#L47">View Source</a>
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Shapes/Path/PathSegment.cs/#L60">View Source</a>
   </span>
   <a id="Core2D_Path_PathSegment_ShouldSerializeIsSmoothJoin_" data-uid="Core2D.Path.PathSegment.ShouldSerializeIsSmoothJoin*"></a>
   <h4 id="Core2D_Path_PathSegment_ShouldSerializeIsSmoothJoin" data-uid="Core2D.Path.PathSegment.ShouldSerializeIsSmoothJoin">ShouldSerializeIsSmoothJoin()</h4>
@@ -295,7 +345,7 @@
     <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Path_PathSegment_ShouldSerializeIsStroked.md&amp;value=---%0Auid%3A%20Core2D.Path.PathSegment.ShouldSerializeIsStroked%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Shapes/Path/PathSegment.cs/#L41">View Source</a>
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Shapes/Path/PathSegment.cs/#L54">View Source</a>
   </span>
   <a id="Core2D_Path_PathSegment_ShouldSerializeIsStroked_" data-uid="Core2D.Path.PathSegment.ShouldSerializeIsStroked*"></a>
   <h4 id="Core2D_Path_PathSegment_ShouldSerializeIsStroked" data-uid="Core2D.Path.PathSegment.ShouldSerializeIsStroked">ShouldSerializeIsStroked()</h4>

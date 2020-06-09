@@ -88,7 +88,10 @@
       <a class="xref" href="Core2D.IObservableObject.html#Core2D_IObservableObject_Name">IObservableObject.Name</a>
     </div>
     <div>
-      <a class="xref" href="Core2D.IObservableObject.html#Core2D_IObservableObject_MarkAsDirty_System_Boolean_">IObservableObject.MarkAsDirty(Boolean)</a>
+      <a class="xref" href="Core2D.IObservableObject.html#Core2D_IObservableObject_IsDirty">IObservableObject.IsDirty()</a>
+    </div>
+    <div>
+      <a class="xref" href="Core2D.IObservableObject.html#Core2D_IObservableObject_Invalidate">IObservableObject.Invalidate()</a>
     </div>
     <div>
       <a class="xref" href="Core2D.IObservableObject.html#Core2D_IObservableObject_Notify_System_String_">IObservableObject.Notify(String)</a>
@@ -652,7 +655,7 @@
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">Dock.Model.IDock Layout { get; set; }</code></pre>
+    <pre><code class="lang-csharp hljs">IDock Layout { get; set; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -1265,7 +1268,7 @@
     <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Editor_IProjectEditor_BringForward_Core2D_Shapes_IBaseShape_.md&amp;value=---%0Auid%3A%20Core2D.Editor.IProjectEditor.BringForward(Core2D.Shapes.IBaseShape)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Model/Editor/IProjectEditor.cs/#L1268">View Source</a>
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Model/Editor/IProjectEditor.cs/#L1267">View Source</a>
   </span>
   <a id="Core2D_Editor_IProjectEditor_BringForward_" data-uid="Core2D.Editor.IProjectEditor.BringForward*"></a>
   <h4 id="Core2D_Editor_IProjectEditor_BringForward_Core2D_Shapes_IBaseShape_" data-uid="Core2D.Editor.IProjectEditor.BringForward(Core2D.Shapes.IBaseShape)">BringForward(IBaseShape)</h4>
@@ -1299,7 +1302,7 @@
     <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Editor_IProjectEditor_BringToFront_Core2D_Shapes_IBaseShape_.md&amp;value=---%0Auid%3A%20Core2D.Editor.IProjectEditor.BringToFront(Core2D.Shapes.IBaseShape)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Model/Editor/IProjectEditor.cs/#L1262">View Source</a>
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Model/Editor/IProjectEditor.cs/#L1261">View Source</a>
   </span>
   <a id="Core2D_Editor_IProjectEditor_BringToFront_" data-uid="Core2D.Editor.IProjectEditor.BringToFront*"></a>
   <h4 id="Core2D_Editor_IProjectEditor_BringToFront_Core2D_Shapes_IBaseShape_" data-uid="Core2D.Editor.IProjectEditor.BringToFront(Core2D.Shapes.IBaseShape)">BringToFront(IBaseShape)</h4>
@@ -1333,7 +1336,7 @@
     <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Editor_IProjectEditor_CanCopy.md&amp;value=---%0Auid%3A%20Core2D.Editor.IProjectEditor.CanCopy%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Model/Editor/IProjectEditor.cs/#L1004">View Source</a>
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Model/Editor/IProjectEditor.cs/#L1003">View Source</a>
   </span>
   <a id="Core2D_Editor_IProjectEditor_CanCopy_" data-uid="Core2D.Editor.IProjectEditor.CanCopy*"></a>
   <h4 id="Core2D_Editor_IProjectEditor_CanCopy" data-uid="Core2D.Editor.IProjectEditor.CanCopy">CanCopy()</h4>
@@ -1365,7 +1368,7 @@
     <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Editor_IProjectEditor_CanPaste.md&amp;value=---%0Auid%3A%20Core2D.Editor.IProjectEditor.CanPaste%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Model/Editor/IProjectEditor.cs/#L1010">View Source</a>
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Model/Editor/IProjectEditor.cs/#L1009">View Source</a>
   </span>
   <a id="Core2D_Editor_IProjectEditor_CanPaste_" data-uid="Core2D.Editor.IProjectEditor.CanPaste*"></a>
   <h4 id="Core2D_Editor_IProjectEditor_CanPaste" data-uid="Core2D.Editor.IProjectEditor.CanPaste">CanPaste()</h4>
@@ -1397,7 +1400,7 @@
     <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Editor_IProjectEditor_CanRedo.md&amp;value=---%0Auid%3A%20Core2D.Editor.IProjectEditor.CanRedo%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Model/Editor/IProjectEditor.cs/#L998">View Source</a>
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Model/Editor/IProjectEditor.cs/#L997">View Source</a>
   </span>
   <a id="Core2D_Editor_IProjectEditor_CanRedo_" data-uid="Core2D.Editor.IProjectEditor.CanRedo*"></a>
   <h4 id="Core2D_Editor_IProjectEditor_CanRedo" data-uid="Core2D.Editor.IProjectEditor.CanRedo">CanRedo()</h4>
@@ -1429,7 +1432,7 @@
     <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Editor_IProjectEditor_CanUndo.md&amp;value=---%0Auid%3A%20Core2D.Editor.IProjectEditor.CanUndo%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Model/Editor/IProjectEditor.cs/#L992">View Source</a>
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Model/Editor/IProjectEditor.cs/#L991">View Source</a>
   </span>
   <a id="Core2D_Editor_IProjectEditor_CanUndo_" data-uid="Core2D.Editor.IProjectEditor.CanUndo*"></a>
   <h4 id="Core2D_Editor_IProjectEditor_CanUndo" data-uid="Core2D.Editor.IProjectEditor.CanUndo">CanUndo()</h4>
@@ -1461,7 +1464,7 @@
     <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Editor_IProjectEditor_Clone_Core2D_Containers_IDocumentContainer_.md&amp;value=---%0Auid%3A%20Core2D.Editor.IProjectEditor.Clone(Core2D.Containers.IDocumentContainer)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Model/Editor/IProjectEditor.cs/#L1063">View Source</a>
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Model/Editor/IProjectEditor.cs/#L1062">View Source</a>
   </span>
   <a id="Core2D_Editor_IProjectEditor_Clone_" data-uid="Core2D.Editor.IProjectEditor.Clone*"></a>
   <h4 id="Core2D_Editor_IProjectEditor_Clone_Core2D_Containers_IDocumentContainer_" data-uid="Core2D.Editor.IProjectEditor.Clone(Core2D.Containers.IDocumentContainer)">Clone(IDocumentContainer)</h4>
@@ -1511,7 +1514,7 @@
     <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Editor_IProjectEditor_Clone_Core2D_Containers_ILayerContainer_.md&amp;value=---%0Auid%3A%20Core2D.Editor.IProjectEditor.Clone(Core2D.Containers.ILayerContainer)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Model/Editor/IProjectEditor.cs/#L1049">View Source</a>
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Model/Editor/IProjectEditor.cs/#L1048">View Source</a>
   </span>
   <a id="Core2D_Editor_IProjectEditor_Clone_" data-uid="Core2D.Editor.IProjectEditor.Clone*"></a>
   <h4 id="Core2D_Editor_IProjectEditor_Clone_Core2D_Containers_ILayerContainer_" data-uid="Core2D.Editor.IProjectEditor.Clone(Core2D.Containers.ILayerContainer)">Clone(ILayerContainer)</h4>
@@ -1561,7 +1564,7 @@
     <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Editor_IProjectEditor_Clone_Core2D_Containers_IPageContainer_.md&amp;value=---%0Auid%3A%20Core2D.Editor.IProjectEditor.Clone(Core2D.Containers.IPageContainer)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Model/Editor/IProjectEditor.cs/#L1056">View Source</a>
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Model/Editor/IProjectEditor.cs/#L1055">View Source</a>
   </span>
   <a id="Core2D_Editor_IProjectEditor_Clone_" data-uid="Core2D.Editor.IProjectEditor.Clone*"></a>
   <h4 id="Core2D_Editor_IProjectEditor_Clone_Core2D_Containers_IPageContainer_" data-uid="Core2D.Editor.IProjectEditor.Clone(Core2D.Containers.IPageContainer)">Clone(IPageContainer)</h4>
@@ -1611,7 +1614,7 @@
     <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Editor_IProjectEditor_CloneShape__1___0_.md&amp;value=---%0Auid%3A%20Core2D.Editor.IProjectEditor.CloneShape%60%601(%60%600)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Model/Editor/IProjectEditor.cs/#L1042">View Source</a>
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Model/Editor/IProjectEditor.cs/#L1041">View Source</a>
   </span>
   <a id="Core2D_Editor_IProjectEditor_CloneShape_" data-uid="Core2D.Editor.IProjectEditor.CloneShape*"></a>
   <h4 id="Core2D_Editor_IProjectEditor_CloneShape__1___0_" data-uid="Core2D.Editor.IProjectEditor.CloneShape``1(``0)">CloneShape&lt;T&gt;(T)</h4>
@@ -1678,7 +1681,7 @@
     <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Editor_IProjectEditor_Dehover_Core2D_Containers_ILayerContainer_.md&amp;value=---%0Auid%3A%20Core2D.Editor.IProjectEditor.Dehover(Core2D.Containers.ILayerContainer)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Model/Editor/IProjectEditor.cs/#L1200">View Source</a>
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Model/Editor/IProjectEditor.cs/#L1199">View Source</a>
   </span>
   <a id="Core2D_Editor_IProjectEditor_Dehover_" data-uid="Core2D.Editor.IProjectEditor.Dehover*"></a>
   <h4 id="Core2D_Editor_IProjectEditor_Dehover_Core2D_Containers_ILayerContainer_" data-uid="Core2D.Editor.IProjectEditor.Dehover(Core2D.Containers.ILayerContainer)">Dehover(ILayerContainer)</h4>
@@ -1712,7 +1715,7 @@
     <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Editor_IProjectEditor_Deselect.md&amp;value=---%0Auid%3A%20Core2D.Editor.IProjectEditor.Deselect%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Model/Editor/IProjectEditor.cs/#L1147">View Source</a>
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Model/Editor/IProjectEditor.cs/#L1146">View Source</a>
   </span>
   <a id="Core2D_Editor_IProjectEditor_Deselect_" data-uid="Core2D.Editor.IProjectEditor.Deselect*"></a>
   <h4 id="Core2D_Editor_IProjectEditor_Deselect" data-uid="Core2D.Editor.IProjectEditor.Deselect">Deselect()</h4>
@@ -1728,7 +1731,7 @@
     <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Editor_IProjectEditor_Deselect_Core2D_Containers_ILayerContainer_.md&amp;value=---%0Auid%3A%20Core2D.Editor.IProjectEditor.Deselect(Core2D.Containers.ILayerContainer)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Model/Editor/IProjectEditor.cs/#L1167">View Source</a>
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Model/Editor/IProjectEditor.cs/#L1166">View Source</a>
   </span>
   <a id="Core2D_Editor_IProjectEditor_Deselect_" data-uid="Core2D.Editor.IProjectEditor.Deselect*"></a>
   <h4 id="Core2D_Editor_IProjectEditor_Deselect_Core2D_Containers_ILayerContainer_" data-uid="Core2D.Editor.IProjectEditor.Deselect(Core2D.Containers.ILayerContainer)">Deselect(ILayerContainer)</h4>
@@ -1811,7 +1814,7 @@
     <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Editor_IProjectEditor_Group_System_Collections_Generic_ISet_Core2D_Shapes_IBaseShape__System_String_.md&amp;value=---%0Auid%3A%20Core2D.Editor.IProjectEditor.Group(System.Collections.Generic.ISet%7BCore2D.Shapes.IBaseShape%7D%2CSystem.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Model/Editor/IProjectEditor.cs/#L1250">View Source</a>
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Model/Editor/IProjectEditor.cs/#L1249">View Source</a>
   </span>
   <a id="Core2D_Editor_IProjectEditor_Group_" data-uid="Core2D.Editor.IProjectEditor.Group*"></a>
   <h4 id="Core2D_Editor_IProjectEditor_Group_System_Collections_Generic_ISet_Core2D_Shapes_IBaseShape__System_String_" data-uid="Core2D.Editor.IProjectEditor.Group(System.Collections.Generic.ISet{Core2D.Shapes.IBaseShape},System.String)">Group(ISet&lt;IBaseShape&gt;, String)</h4>
@@ -1866,7 +1869,7 @@
     <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Editor_IProjectEditor_Hover_Core2D_Containers_ILayerContainer_Core2D_Shapes_IBaseShape_.md&amp;value=---%0Auid%3A%20Core2D.Editor.IProjectEditor.Hover(Core2D.Containers.ILayerContainer%2CCore2D.Shapes.IBaseShape)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Model/Editor/IProjectEditor.cs/#L1194">View Source</a>
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Model/Editor/IProjectEditor.cs/#L1193">View Source</a>
   </span>
   <a id="Core2D_Editor_IProjectEditor_Hover_" data-uid="Core2D.Editor.IProjectEditor.Hover*"></a>
   <h4 id="Core2D_Editor_IProjectEditor_Hover_Core2D_Containers_ILayerContainer_Core2D_Shapes_IBaseShape_" data-uid="Core2D.Editor.IProjectEditor.Hover(Core2D.Containers.ILayerContainer,Core2D.Shapes.IBaseShape)">Hover(ILayerContainer, IBaseShape)</h4>
@@ -1906,7 +1909,7 @@
     <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Editor_IProjectEditor_InsertItem__1_Core2D_Containers_ILibrary___0____0_System_Int32_.md&amp;value=---%0Auid%3A%20Core2D.Editor.IProjectEditor.InsertItem%60%601(Core2D.Containers.ILibrary%7B%60%600%7D%2C%60%600%2CSystem.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Model/Editor/IProjectEditor.cs/#L1323">View Source</a>
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Model/Editor/IProjectEditor.cs/#L1322">View Source</a>
   </span>
   <a id="Core2D_Editor_IProjectEditor_InsertItem_" data-uid="Core2D.Editor.IProjectEditor.InsertItem*"></a>
   <h4 id="Core2D_Editor_IProjectEditor_InsertItem__1_Core2D_Containers_ILibrary___0____0_System_Int32_" data-uid="Core2D.Editor.IProjectEditor.InsertItem``1(Core2D.Containers.ILibrary{``0},``0,System.Int32)">InsertItem&lt;T&gt;(ILibrary&lt;T&gt;, T, Int32)</h4>
@@ -1967,7 +1970,7 @@
     <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Editor_IProjectEditor_MoveBy_System_Collections_Generic_ISet_Core2D_Shapes_IBaseShape__System_Double_System_Double_.md&amp;value=---%0Auid%3A%20Core2D.Editor.IProjectEditor.MoveBy(System.Collections.Generic.ISet%7BCore2D.Shapes.IBaseShape%7D%2CSystem.Double%2CSystem.Double)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Model/Editor/IProjectEditor.cs/#L1296">View Source</a>
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Model/Editor/IProjectEditor.cs/#L1295">View Source</a>
   </span>
   <a id="Core2D_Editor_IProjectEditor_MoveBy_" data-uid="Core2D.Editor.IProjectEditor.MoveBy*"></a>
   <h4 id="Core2D_Editor_IProjectEditor_MoveBy_System_Collections_Generic_ISet_Core2D_Shapes_IBaseShape__System_Double_System_Double_" data-uid="Core2D.Editor.IProjectEditor.MoveBy(System.Collections.Generic.ISet{Core2D.Shapes.IBaseShape},System.Double,System.Double)">MoveBy(ISet&lt;IBaseShape&gt;, Double, Double)</h4>
@@ -2013,7 +2016,7 @@
     <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Editor_IProjectEditor_MoveItem__1_Core2D_Containers_ILibrary___0__System_Int32_System_Int32_.md&amp;value=---%0Auid%3A%20Core2D.Editor.IProjectEditor.MoveItem%60%601(Core2D.Containers.ILibrary%7B%60%600%7D%2CSystem.Int32%2CSystem.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Model/Editor/IProjectEditor.cs/#L1305">View Source</a>
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Model/Editor/IProjectEditor.cs/#L1304">View Source</a>
   </span>
   <a id="Core2D_Editor_IProjectEditor_MoveItem_" data-uid="Core2D.Editor.IProjectEditor.MoveItem*"></a>
   <h4 id="Core2D_Editor_IProjectEditor_MoveItem__1_Core2D_Containers_ILibrary___0__System_Int32_System_Int32_" data-uid="Core2D.Editor.IProjectEditor.MoveItem``1(Core2D.Containers.ILibrary{``0},System.Int32,System.Int32)">MoveItem&lt;T&gt;(ILibrary&lt;T&gt;, Int32, Int32)</h4>
@@ -2075,7 +2078,7 @@
     <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Editor_IProjectEditor_MoveShapesBy_System_Collections_Generic_IEnumerable_Core2D_Shapes_IBaseShape__System_Double_System_Double_.md&amp;value=---%0Auid%3A%20Core2D.Editor.IProjectEditor.MoveShapesBy(System.Collections.Generic.IEnumerable%7BCore2D.Shapes.IBaseShape%7D%2CSystem.Double%2CSystem.Double)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Model/Editor/IProjectEditor.cs/#L1288">View Source</a>
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Model/Editor/IProjectEditor.cs/#L1287">View Source</a>
   </span>
   <a id="Core2D_Editor_IProjectEditor_MoveShapesBy_" data-uid="Core2D.Editor.IProjectEditor.MoveShapesBy*"></a>
   <h4 id="Core2D_Editor_IProjectEditor_MoveShapesBy_System_Collections_Generic_IEnumerable_Core2D_Shapes_IBaseShape__System_Double_System_Double_" data-uid="Core2D.Editor.IProjectEditor.MoveShapesBy(System.Collections.Generic.IEnumerable{Core2D.Shapes.IBaseShape},System.Double,System.Double)">MoveShapesBy(IEnumerable&lt;IBaseShape&gt;, Double, Double)</h4>
@@ -2406,7 +2409,7 @@
     <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Editor_IProjectEditor_OnAddRecent_System_String_System_String_.md&amp;value=---%0Auid%3A%20Core2D.Editor.IProjectEditor.OnAddRecent(System.String%2CSystem.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Model/Editor/IProjectEditor.cs/#L956">View Source</a>
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Model/Editor/IProjectEditor.cs/#L955">View Source</a>
   </span>
   <a id="Core2D_Editor_IProjectEditor_OnAddRecent_" data-uid="Core2D.Editor.IProjectEditor.OnAddRecent*"></a>
   <h4 id="Core2D_Editor_IProjectEditor_OnAddRecent_System_String_System_String_" data-uid="Core2D.Editor.IProjectEditor.OnAddRecent(System.String,System.String)">OnAddRecent(String, String)</h4>
@@ -2942,7 +2945,7 @@
     <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Editor_IProjectEditor_OnCopyShapes_System_Collections_Generic_IList_Core2D_Shapes_IBaseShape__.md&amp;value=---%0Auid%3A%20Core2D.Editor.IProjectEditor.OnCopyShapes(System.Collections.Generic.IList%7BCore2D.Shapes.IBaseShape%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Model/Editor/IProjectEditor.cs/#L1016">View Source</a>
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Model/Editor/IProjectEditor.cs/#L1015">View Source</a>
   </span>
   <a id="Core2D_Editor_IProjectEditor_OnCopyShapes_" data-uid="Core2D.Editor.IProjectEditor.OnCopyShapes*"></a>
   <h4 id="Core2D_Editor_IProjectEditor_OnCopyShapes_System_Collections_Generic_IList_Core2D_Shapes_IBaseShape__" data-uid="Core2D.Editor.IProjectEditor.OnCopyShapes(System.Collections.Generic.IList{Core2D.Shapes.IBaseShape})">OnCopyShapes(IList&lt;IBaseShape&gt;)</h4>
@@ -3091,7 +3094,7 @@
     <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Editor_IProjectEditor_OnDeleteSelected.md&amp;value=---%0Auid%3A%20Core2D.Editor.IProjectEditor.OnDeleteSelected%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Model/Editor/IProjectEditor.cs/#L1142">View Source</a>
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Model/Editor/IProjectEditor.cs/#L1141">View Source</a>
   </span>
   <a id="Core2D_Editor_IProjectEditor_OnDeleteSelected_" data-uid="Core2D.Editor.IProjectEditor.OnDeleteSelected*"></a>
   <h4 id="Core2D_Editor_IProjectEditor_OnDeleteSelected" data-uid="Core2D.Editor.IProjectEditor.OnDeleteSelected">OnDeleteSelected()</h4>
@@ -3155,7 +3158,7 @@
     <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Editor_IProjectEditor_OnDropFiles_System_String___System_Double_System_Double_.md&amp;value=---%0Auid%3A%20Core2D.Editor.IProjectEditor.OnDropFiles(System.String%5B%5D%2CSystem.Double%2CSystem.Double)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Model/Editor/IProjectEditor.cs/#L1072">View Source</a>
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Model/Editor/IProjectEditor.cs/#L1071">View Source</a>
   </span>
   <a id="Core2D_Editor_IProjectEditor_OnDropFiles_" data-uid="Core2D.Editor.IProjectEditor.OnDropFiles*"></a>
   <h4 id="Core2D_Editor_IProjectEditor_OnDropFiles_System_String___System_Double_System_Double_" data-uid="Core2D.Editor.IProjectEditor.OnDropFiles(System.String[],System.Double,System.Double)">OnDropFiles(String[], Double, Double)</h4>
@@ -3217,7 +3220,7 @@
     <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Editor_IProjectEditor_OnDropImageKey_System_String_System_Double_System_Double_.md&amp;value=---%0Auid%3A%20Core2D.Editor.IProjectEditor.OnDropImageKey(System.String%2CSystem.Double%2CSystem.Double)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Model/Editor/IProjectEditor.cs/#L1080">View Source</a>
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Model/Editor/IProjectEditor.cs/#L1079">View Source</a>
   </span>
   <a id="Core2D_Editor_IProjectEditor_OnDropImageKey_" data-uid="Core2D.Editor.IProjectEditor.OnDropImageKey*"></a>
   <h4 id="Core2D_Editor_IProjectEditor_OnDropImageKey_System_String_System_Double_System_Double_" data-uid="Core2D.Editor.IProjectEditor.OnDropImageKey(System.String,System.Double,System.Double)">OnDropImageKey(String, Double, Double)</h4>
@@ -3263,7 +3266,7 @@
     <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Editor_IProjectEditor_OnDropRecord_Core2D_Data_IRecord_System_Double_System_Double_System_Boolean_.md&amp;value=---%0Auid%3A%20Core2D.Editor.IProjectEditor.OnDropRecord(Core2D.Data.IRecord%2CSystem.Double%2CSystem.Double%2CSystem.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Model/Editor/IProjectEditor.cs/#L1109">View Source</a>
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Model/Editor/IProjectEditor.cs/#L1108">View Source</a>
   </span>
   <a id="Core2D_Editor_IProjectEditor_OnDropRecord_" data-uid="Core2D.Editor.IProjectEditor.OnDropRecord*"></a>
   <h4 id="Core2D_Editor_IProjectEditor_OnDropRecord_Core2D_Data_IRecord_System_Double_System_Double_System_Boolean_" data-uid="Core2D.Editor.IProjectEditor.OnDropRecord(Core2D.Data.IRecord,System.Double,System.Double,System.Boolean)">OnDropRecord(IRecord, Double, Double, Boolean)</h4>
@@ -3331,7 +3334,7 @@
     <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Editor_IProjectEditor_OnDropRecordAsGroup_Core2D_Data_IRecord_System_Double_System_Double_.md&amp;value=---%0Auid%3A%20Core2D.Editor.IProjectEditor.OnDropRecordAsGroup(Core2D.Data.IRecord%2CSystem.Double%2CSystem.Double)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Model/Editor/IProjectEditor.cs/#L1117">View Source</a>
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Model/Editor/IProjectEditor.cs/#L1116">View Source</a>
   </span>
   <a id="Core2D_Editor_IProjectEditor_OnDropRecordAsGroup_" data-uid="Core2D.Editor.IProjectEditor.OnDropRecordAsGroup*"></a>
   <h4 id="Core2D_Editor_IProjectEditor_OnDropRecordAsGroup_Core2D_Data_IRecord_System_Double_System_Double_" data-uid="Core2D.Editor.IProjectEditor.OnDropRecordAsGroup(Core2D.Data.IRecord,System.Double,System.Double)">OnDropRecordAsGroup(IRecord, Double, Double)</h4>
@@ -3377,7 +3380,7 @@
     <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Editor_IProjectEditor_OnDropShape_Core2D_Shapes_IBaseShape_System_Double_System_Double_System_Boolean_.md&amp;value=---%0Auid%3A%20Core2D.Editor.IProjectEditor.OnDropShape(Core2D.Shapes.IBaseShape%2CSystem.Double%2CSystem.Double%2CSystem.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Model/Editor/IProjectEditor.cs/#L1090">View Source</a>
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Model/Editor/IProjectEditor.cs/#L1089">View Source</a>
   </span>
   <a id="Core2D_Editor_IProjectEditor_OnDropShape_" data-uid="Core2D.Editor.IProjectEditor.OnDropShape*"></a>
   <h4 id="Core2D_Editor_IProjectEditor_OnDropShape_Core2D_Shapes_IBaseShape_System_Double_System_Double_System_Boolean_" data-uid="Core2D.Editor.IProjectEditor.OnDropShape(Core2D.Shapes.IBaseShape,System.Double,System.Double,System.Boolean)">OnDropShape(IBaseShape, Double, Double, Boolean)</h4>
@@ -3445,7 +3448,7 @@
     <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Editor_IProjectEditor_OnDropShapeAsClone__1___0_System_Double_System_Double_.md&amp;value=---%0Auid%3A%20Core2D.Editor.IProjectEditor.OnDropShapeAsClone%60%601(%60%600%2CSystem.Double%2CSystem.Double)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Model/Editor/IProjectEditor.cs/#L1099">View Source</a>
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Model/Editor/IProjectEditor.cs/#L1098">View Source</a>
   </span>
   <a id="Core2D_Editor_IProjectEditor_OnDropShapeAsClone_" data-uid="Core2D.Editor.IProjectEditor.OnDropShapeAsClone*"></a>
   <h4 id="Core2D_Editor_IProjectEditor_OnDropShapeAsClone__1___0_System_Double_System_Double_" data-uid="Core2D.Editor.IProjectEditor.OnDropShapeAsClone``1(``0,System.Double,System.Double)">OnDropShapeAsClone&lt;T&gt;(T, Double, Double)</h4>
@@ -3508,7 +3511,7 @@
     <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Editor_IProjectEditor_OnDropStyle_Core2D_Style_IShapeStyle_System_Double_System_Double_System_Boolean_.md&amp;value=---%0Auid%3A%20Core2D.Editor.IProjectEditor.OnDropStyle(Core2D.Style.IShapeStyle%2CSystem.Double%2CSystem.Double%2CSystem.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Model/Editor/IProjectEditor.cs/#L1127">View Source</a>
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Model/Editor/IProjectEditor.cs/#L1126">View Source</a>
   </span>
   <a id="Core2D_Editor_IProjectEditor_OnDropStyle_" data-uid="Core2D.Editor.IProjectEditor.OnDropStyle*"></a>
   <h4 id="Core2D_Editor_IProjectEditor_OnDropStyle_Core2D_Style_IShapeStyle_System_Double_System_Double_System_Boolean_" data-uid="Core2D.Editor.IProjectEditor.OnDropStyle(Core2D.Style.IShapeStyle,System.Double,System.Double,System.Boolean)">OnDropStyle(IShapeStyle, Double, Double, Boolean)</h4>
@@ -3576,7 +3579,7 @@
     <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Editor_IProjectEditor_OnDropTemplate_Core2D_Containers_IPageContainer_System_Double_System_Double_System_Boolean_.md&amp;value=---%0Auid%3A%20Core2D.Editor.IProjectEditor.OnDropTemplate(Core2D.Containers.IPageContainer%2CSystem.Double%2CSystem.Double%2CSystem.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Model/Editor/IProjectEditor.cs/#L1137">View Source</a>
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Model/Editor/IProjectEditor.cs/#L1136">View Source</a>
   </span>
   <a id="Core2D_Editor_IProjectEditor_OnDropTemplate_" data-uid="Core2D.Editor.IProjectEditor.OnDropTemplate*"></a>
   <h4 id="Core2D_Editor_IProjectEditor_OnDropTemplate_Core2D_Containers_IPageContainer_System_Double_System_Double_System_Boolean_" data-uid="Core2D.Editor.IProjectEditor.OnDropTemplate(Core2D.Containers.IPageContainer,System.Double,System.Double,System.Boolean)">OnDropTemplate(IPageContainer, Double, Double, Boolean)</h4>
@@ -4503,38 +4506,20 @@
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Editor_IProjectEditor_OnInvalidateCache_System_Boolean_.md&amp;value=---%0Auid%3A%20Core2D.Editor.IProjectEditor.OnInvalidateCache(System.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Editor_IProjectEditor_OnInvalidateCache.md&amp;value=---%0Auid%3A%20Core2D.Editor.IProjectEditor.OnInvalidateCache%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Model/Editor/IProjectEditor.cs/#L949">View Source</a>
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Model/Editor/IProjectEditor.cs/#L948">View Source</a>
   </span>
   <a id="Core2D_Editor_IProjectEditor_OnInvalidateCache_" data-uid="Core2D.Editor.IProjectEditor.OnInvalidateCache*"></a>
-  <h4 id="Core2D_Editor_IProjectEditor_OnInvalidateCache_System_Boolean_" data-uid="Core2D.Editor.IProjectEditor.OnInvalidateCache(System.Boolean)">OnInvalidateCache(Boolean)</h4>
+  <h4 id="Core2D_Editor_IProjectEditor_OnInvalidateCache" data-uid="Core2D.Editor.IProjectEditor.OnInvalidateCache">OnInvalidateCache()</h4>
   <div class="markdown level1 summary"><p>Invalidate renderer&apos;s cache.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">void OnInvalidateCache(bool isZooming)</code></pre>
+    <pre><code class="lang-csharp hljs">void OnInvalidateCache()</code></pre>
   </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.Boolean</span></td>
-        <td><span class="parametername">isZooming</span></td>
-        <td><p>The flag indicating whether is zooming.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
     <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Editor_IProjectEditor_OnLoad_Core2D_Containers_IProjectContainer_System_String_.md&amp;value=---%0Auid%3A%20Core2D.Editor.IProjectEditor.OnLoad(Core2D.Containers.IProjectContainer%2CSystem.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
@@ -4580,7 +4565,7 @@
     <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Editor_IProjectEditor_OnLoadLayout_System_String_.md&amp;value=---%0Auid%3A%20Core2D.Editor.IProjectEditor.OnLoadLayout(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Model/Editor/IProjectEditor.cs/#L974">View Source</a>
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Model/Editor/IProjectEditor.cs/#L973">View Source</a>
   </span>
   <a id="Core2D_Editor_IProjectEditor_OnLoadLayout_" data-uid="Core2D.Editor.IProjectEditor.OnLoadLayout*"></a>
   <h4 id="Core2D_Editor_IProjectEditor_OnLoadLayout_System_String_" data-uid="Core2D.Editor.IProjectEditor.OnLoadLayout(System.String)">OnLoadLayout(String)</h4>
@@ -4614,7 +4599,7 @@
     <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Editor_IProjectEditor_OnLoadRecent_System_String_.md&amp;value=---%0Auid%3A%20Core2D.Editor.IProjectEditor.OnLoadRecent(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Model/Editor/IProjectEditor.cs/#L962">View Source</a>
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Model/Editor/IProjectEditor.cs/#L961">View Source</a>
   </span>
   <a id="Core2D_Editor_IProjectEditor_OnLoadRecent_" data-uid="Core2D.Editor.IProjectEditor.OnLoadRecent*"></a>
   <h4 id="Core2D_Editor_IProjectEditor_OnLoadRecent_System_String_" data-uid="Core2D.Editor.IProjectEditor.OnLoadRecent(System.String)">OnLoadRecent(String)</h4>
@@ -4712,7 +4697,7 @@
     <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Editor_IProjectEditor_OnNavigate_System_Object_.md&amp;value=---%0Auid%3A%20Core2D.Editor.IProjectEditor.OnNavigate(System.Object)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Model/Editor/IProjectEditor.cs/#L986">View Source</a>
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Model/Editor/IProjectEditor.cs/#L985">View Source</a>
   </span>
   <a id="Core2D_Editor_IProjectEditor_OnNavigate_" data-uid="Core2D.Editor.IProjectEditor.OnNavigate*"></a>
   <h4 id="Core2D_Editor_IProjectEditor_OnNavigate_System_Object_" data-uid="Core2D.Editor.IProjectEditor.OnNavigate(System.Object)">OnNavigate(Object)</h4>
@@ -4988,7 +4973,7 @@
     <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Editor_IProjectEditor_OnPasteShapes_System_Collections_Generic_IEnumerable_Core2D_Shapes_IBaseShape__.md&amp;value=---%0Auid%3A%20Core2D.Editor.IProjectEditor.OnPasteShapes(System.Collections.Generic.IEnumerable%7BCore2D.Shapes.IBaseShape%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Model/Editor/IProjectEditor.cs/#L1028">View Source</a>
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Model/Editor/IProjectEditor.cs/#L1027">View Source</a>
   </span>
   <a id="Core2D_Editor_IProjectEditor_OnPasteShapes_" data-uid="Core2D.Editor.IProjectEditor.OnPasteShapes*"></a>
   <h4 id="Core2D_Editor_IProjectEditor_OnPasteShapes_System_Collections_Generic_IEnumerable_Core2D_Shapes_IBaseShape__" data-uid="Core2D.Editor.IProjectEditor.OnPasteShapes(System.Collections.Generic.IEnumerable{Core2D.Shapes.IBaseShape})">OnPasteShapes(IEnumerable&lt;IBaseShape&gt;)</h4>
@@ -5646,7 +5631,7 @@
     <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Editor_IProjectEditor_OnSaveLayout_System_String_.md&amp;value=---%0Auid%3A%20Core2D.Editor.IProjectEditor.OnSaveLayout(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Model/Editor/IProjectEditor.cs/#L980">View Source</a>
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Model/Editor/IProjectEditor.cs/#L979">View Source</a>
   </span>
   <a id="Core2D_Editor_IProjectEditor_OnSaveLayout_" data-uid="Core2D.Editor.IProjectEditor.OnSaveLayout*"></a>
   <h4 id="Core2D_Editor_IProjectEditor_OnSaveLayout_System_String_" data-uid="Core2D.Editor.IProjectEditor.OnSaveLayout(System.String)">OnSaveLayout(String)</h4>
@@ -5714,7 +5699,7 @@
     <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Editor_IProjectEditor_OnSaveRecent_System_String_.md&amp;value=---%0Auid%3A%20Core2D.Editor.IProjectEditor.OnSaveRecent(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Model/Editor/IProjectEditor.cs/#L968">View Source</a>
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Model/Editor/IProjectEditor.cs/#L967">View Source</a>
   </span>
   <a id="Core2D_Editor_IProjectEditor_OnSaveRecent_" data-uid="Core2D.Editor.IProjectEditor.OnSaveRecent*"></a>
   <h4 id="Core2D_Editor_IProjectEditor_OnSaveRecent_System_String_" data-uid="Core2D.Editor.IProjectEditor.OnSaveRecent(System.String)">OnSaveRecent(String)</h4>
@@ -5748,7 +5733,7 @@
     <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Editor_IProjectEditor_OnSelect_System_Collections_Generic_IEnumerable_Core2D_Shapes_IBaseShape__.md&amp;value=---%0Auid%3A%20Core2D.Editor.IProjectEditor.OnSelect(System.Collections.Generic.IEnumerable%7BCore2D.Shapes.IBaseShape%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Model/Editor/IProjectEditor.cs/#L1034">View Source</a>
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Model/Editor/IProjectEditor.cs/#L1033">View Source</a>
   </span>
   <a id="Core2D_Editor_IProjectEditor_OnSelect_" data-uid="Core2D.Editor.IProjectEditor.OnSelect*"></a>
   <h4 id="Core2D_Editor_IProjectEditor_OnSelect_System_Collections_Generic_IEnumerable_Core2D_Shapes_IBaseShape__" data-uid="Core2D.Editor.IProjectEditor.OnSelect(System.Collections.Generic.IEnumerable{Core2D.Shapes.IBaseShape})">OnSelect(IEnumerable&lt;IBaseShape&gt;)</h4>
@@ -6232,7 +6217,7 @@
     <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Editor_IProjectEditor_OnTryPaste_System_String_.md&amp;value=---%0Auid%3A%20Core2D.Editor.IProjectEditor.OnTryPaste(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Model/Editor/IProjectEditor.cs/#L1022">View Source</a>
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Model/Editor/IProjectEditor.cs/#L1021">View Source</a>
   </span>
   <a id="Core2D_Editor_IProjectEditor_OnTryPaste_" data-uid="Core2D.Editor.IProjectEditor.OnTryPaste*"></a>
   <h4 id="Core2D_Editor_IProjectEditor_OnTryPaste_System_String_" data-uid="Core2D.Editor.IProjectEditor.OnTryPaste(System.String)">OnTryPaste(String)</h4>
@@ -6376,7 +6361,7 @@
     <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Editor_IProjectEditor_Select_Core2D_Containers_ILayerContainer_Core2D_Shapes_IBaseShape_.md&amp;value=---%0Auid%3A%20Core2D.Editor.IProjectEditor.Select(Core2D.Containers.ILayerContainer%2CCore2D.Shapes.IBaseShape)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Model/Editor/IProjectEditor.cs/#L1154">View Source</a>
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Model/Editor/IProjectEditor.cs/#L1153">View Source</a>
   </span>
   <a id="Core2D_Editor_IProjectEditor_Select_" data-uid="Core2D.Editor.IProjectEditor.Select*"></a>
   <h4 id="Core2D_Editor_IProjectEditor_Select_Core2D_Containers_ILayerContainer_Core2D_Shapes_IBaseShape_" data-uid="Core2D.Editor.IProjectEditor.Select(Core2D.Containers.ILayerContainer,Core2D.Shapes.IBaseShape)">Select(ILayerContainer, IBaseShape)</h4>
@@ -6416,7 +6401,7 @@
     <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Editor_IProjectEditor_Select_Core2D_Containers_ILayerContainer_System_Collections_Generic_ISet_Core2D_Shapes_IBaseShape__.md&amp;value=---%0Auid%3A%20Core2D.Editor.IProjectEditor.Select(Core2D.Containers.ILayerContainer%2CSystem.Collections.Generic.ISet%7BCore2D.Shapes.IBaseShape%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Model/Editor/IProjectEditor.cs/#L1161">View Source</a>
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Model/Editor/IProjectEditor.cs/#L1160">View Source</a>
   </span>
   <a id="Core2D_Editor_IProjectEditor_Select_" data-uid="Core2D.Editor.IProjectEditor.Select*"></a>
   <h4 id="Core2D_Editor_IProjectEditor_Select_Core2D_Containers_ILayerContainer_System_Collections_Generic_ISet_Core2D_Shapes_IBaseShape__" data-uid="Core2D.Editor.IProjectEditor.Select(Core2D.Containers.ILayerContainer,System.Collections.Generic.ISet{Core2D.Shapes.IBaseShape})">Select(ILayerContainer, ISet&lt;IBaseShape&gt;)</h4>
@@ -6456,7 +6441,7 @@
     <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Editor_IProjectEditor_SendBackward_Core2D_Shapes_IBaseShape_.md&amp;value=---%0Auid%3A%20Core2D.Editor.IProjectEditor.SendBackward(Core2D.Shapes.IBaseShape)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Model/Editor/IProjectEditor.cs/#L1274">View Source</a>
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Model/Editor/IProjectEditor.cs/#L1273">View Source</a>
   </span>
   <a id="Core2D_Editor_IProjectEditor_SendBackward_" data-uid="Core2D.Editor.IProjectEditor.SendBackward*"></a>
   <h4 id="Core2D_Editor_IProjectEditor_SendBackward_Core2D_Shapes_IBaseShape_" data-uid="Core2D.Editor.IProjectEditor.SendBackward(Core2D.Shapes.IBaseShape)">SendBackward(IBaseShape)</h4>
@@ -6490,7 +6475,7 @@
     <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Editor_IProjectEditor_SendToBack_Core2D_Shapes_IBaseShape_.md&amp;value=---%0Auid%3A%20Core2D.Editor.IProjectEditor.SendToBack(Core2D.Shapes.IBaseShape)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Model/Editor/IProjectEditor.cs/#L1280">View Source</a>
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Model/Editor/IProjectEditor.cs/#L1279">View Source</a>
   </span>
   <a id="Core2D_Editor_IProjectEditor_SendToBack_" data-uid="Core2D.Editor.IProjectEditor.SendToBack*"></a>
   <h4 id="Core2D_Editor_IProjectEditor_SendToBack_Core2D_Shapes_IBaseShape_" data-uid="Core2D.Editor.IProjectEditor.SendToBack(Core2D.Shapes.IBaseShape)">SendToBack(IBaseShape)</h4>
@@ -6524,7 +6509,7 @@
     <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Editor_IProjectEditor_SwapItem__1_Core2D_Containers_ILibrary___0__System_Int32_System_Int32_.md&amp;value=---%0Auid%3A%20Core2D.Editor.IProjectEditor.SwapItem%60%601(Core2D.Containers.ILibrary%7B%60%600%7D%2CSystem.Int32%2CSystem.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Model/Editor/IProjectEditor.cs/#L1314">View Source</a>
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Model/Editor/IProjectEditor.cs/#L1313">View Source</a>
   </span>
   <a id="Core2D_Editor_IProjectEditor_SwapItem_" data-uid="Core2D.Editor.IProjectEditor.SwapItem*"></a>
   <h4 id="Core2D_Editor_IProjectEditor_SwapItem__1_Core2D_Containers_ILibrary___0__System_Int32_System_Int32_" data-uid="Core2D.Editor.IProjectEditor.SwapItem``1(Core2D.Containers.ILibrary{``0},System.Int32,System.Int32)">SwapItem&lt;T&gt;(ILibrary&lt;T&gt;, Int32, Int32)</h4>
@@ -6586,7 +6571,7 @@
     <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Editor_IProjectEditor_TryToConnectLines_System_Collections_Generic_IEnumerable_Core2D_Shapes_ILineShape__System_Collections_Immutable_ImmutableArray_Core2D_Shapes_IPointShape__.md&amp;value=---%0Auid%3A%20Core2D.Editor.IProjectEditor.TryToConnectLines(System.Collections.Generic.IEnumerable%7BCore2D.Shapes.ILineShape%7D%2CSystem.Collections.Immutable.ImmutableArray%7BCore2D.Shapes.IPointShape%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Model/Editor/IProjectEditor.cs/#L1243">View Source</a>
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Model/Editor/IProjectEditor.cs/#L1242">View Source</a>
   </span>
   <a id="Core2D_Editor_IProjectEditor_TryToConnectLines_" data-uid="Core2D.Editor.IProjectEditor.TryToConnectLines*"></a>
   <h4 id="Core2D_Editor_IProjectEditor_TryToConnectLines_System_Collections_Generic_IEnumerable_Core2D_Shapes_ILineShape__System_Collections_Immutable_ImmutableArray_Core2D_Shapes_IPointShape__" data-uid="Core2D.Editor.IProjectEditor.TryToConnectLines(System.Collections.Generic.IEnumerable{Core2D.Shapes.ILineShape},System.Collections.Immutable.ImmutableArray{Core2D.Shapes.IPointShape})">TryToConnectLines(IEnumerable&lt;ILineShape&gt;, ImmutableArray&lt;IPointShape&gt;)</h4>
@@ -6642,7 +6627,7 @@
     <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Editor_IProjectEditor_TryToGetConnectionPoint_System_Double_System_Double_.md&amp;value=---%0Auid%3A%20Core2D.Editor.IProjectEditor.TryToGetConnectionPoint(System.Double%2CSystem.Double)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Model/Editor/IProjectEditor.cs/#L1216">View Source</a>
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Model/Editor/IProjectEditor.cs/#L1215">View Source</a>
   </span>
   <a id="Core2D_Editor_IProjectEditor_TryToGetConnectionPoint_" data-uid="Core2D.Editor.IProjectEditor.TryToGetConnectionPoint*"></a>
   <h4 id="Core2D_Editor_IProjectEditor_TryToGetConnectionPoint_System_Double_System_Double_" data-uid="Core2D.Editor.IProjectEditor.TryToGetConnectionPoint(System.Double,System.Double)">TryToGetConnectionPoint(Double, Double)</h4>
@@ -6698,7 +6683,7 @@
     <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Editor_IProjectEditor_TryToHoverShape_System_Double_System_Double_.md&amp;value=---%0Auid%3A%20Core2D.Editor.IProjectEditor.TryToHoverShape(System.Double%2CSystem.Double)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Model/Editor/IProjectEditor.cs/#L1208">View Source</a>
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Model/Editor/IProjectEditor.cs/#L1207">View Source</a>
   </span>
   <a id="Core2D_Editor_IProjectEditor_TryToHoverShape_" data-uid="Core2D.Editor.IProjectEditor.TryToHoverShape*"></a>
   <h4 id="Core2D_Editor_IProjectEditor_TryToHoverShape_System_Double_System_Double_" data-uid="Core2D.Editor.IProjectEditor.TryToHoverShape(System.Double,System.Double)">TryToHoverShape(Double, Double)</h4>
@@ -6754,7 +6739,7 @@
     <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Editor_IProjectEditor_TryToSelectShape_Core2D_Containers_ILayerContainer_System_Double_System_Double_System_Boolean_.md&amp;value=---%0Auid%3A%20Core2D.Editor.IProjectEditor.TryToSelectShape(Core2D.Containers.ILayerContainer%2CSystem.Double%2CSystem.Double%2CSystem.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Model/Editor/IProjectEditor.cs/#L1177">View Source</a>
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Model/Editor/IProjectEditor.cs/#L1176">View Source</a>
   </span>
   <a id="Core2D_Editor_IProjectEditor_TryToSelectShape_" data-uid="Core2D.Editor.IProjectEditor.TryToSelectShape*"></a>
   <h4 id="Core2D_Editor_IProjectEditor_TryToSelectShape_Core2D_Containers_ILayerContainer_System_Double_System_Double_System_Boolean_" data-uid="Core2D.Editor.IProjectEditor.TryToSelectShape(Core2D.Containers.ILayerContainer,System.Double,System.Double,System.Boolean)">TryToSelectShape(ILayerContainer, Double, Double, Boolean)</h4>
@@ -6822,7 +6807,7 @@
     <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Editor_IProjectEditor_TryToSelectShapes_Core2D_Containers_ILayerContainer_Core2D_Shapes_IRectangleShape_System_Boolean_System_Boolean_.md&amp;value=---%0Auid%3A%20Core2D.Editor.IProjectEditor.TryToSelectShapes(Core2D.Containers.ILayerContainer%2CCore2D.Shapes.IRectangleShape%2CSystem.Boolean%2CSystem.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Model/Editor/IProjectEditor.cs/#L1187">View Source</a>
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Model/Editor/IProjectEditor.cs/#L1186">View Source</a>
   </span>
   <a id="Core2D_Editor_IProjectEditor_TryToSelectShapes_" data-uid="Core2D.Editor.IProjectEditor.TryToSelectShapes*"></a>
   <h4 id="Core2D_Editor_IProjectEditor_TryToSelectShapes_Core2D_Containers_ILayerContainer_Core2D_Shapes_IRectangleShape_System_Boolean_System_Boolean_" data-uid="Core2D.Editor.IProjectEditor.TryToSelectShapes(Core2D.Containers.ILayerContainer,Core2D.Shapes.IRectangleShape,System.Boolean,System.Boolean)">TryToSelectShapes(ILayerContainer, IRectangleShape, Boolean, Boolean)</h4>
@@ -6940,7 +6925,7 @@
     <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Editor_IProjectEditor_TryToSplitLine_Core2D_Shapes_ILineShape_Core2D_Shapes_IPointShape_Core2D_Shapes_IPointShape_.md&amp;value=---%0Auid%3A%20Core2D.Editor.IProjectEditor.TryToSplitLine(Core2D.Shapes.ILineShape%2CCore2D.Shapes.IPointShape%2CCore2D.Shapes.IPointShape)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Model/Editor/IProjectEditor.cs/#L1235">View Source</a>
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Model/Editor/IProjectEditor.cs/#L1234">View Source</a>
   </span>
   <a id="Core2D_Editor_IProjectEditor_TryToSplitLine_" data-uid="Core2D.Editor.IProjectEditor.TryToSplitLine*"></a>
   <h4 id="Core2D_Editor_IProjectEditor_TryToSplitLine_Core2D_Shapes_ILineShape_Core2D_Shapes_IPointShape_Core2D_Shapes_IPointShape_" data-uid="Core2D.Editor.IProjectEditor.TryToSplitLine(Core2D.Shapes.ILineShape,Core2D.Shapes.IPointShape,Core2D.Shapes.IPointShape)">TryToSplitLine(ILineShape, IPointShape, IPointShape)</h4>
@@ -7002,7 +6987,7 @@
     <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Editor_IProjectEditor_TryToSplitLine_System_Double_System_Double_Core2D_Shapes_IPointShape_System_Boolean_.md&amp;value=---%0Auid%3A%20Core2D.Editor.IProjectEditor.TryToSplitLine(System.Double%2CSystem.Double%2CCore2D.Shapes.IPointShape%2CSystem.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Model/Editor/IProjectEditor.cs/#L1226">View Source</a>
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Model/Editor/IProjectEditor.cs/#L1225">View Source</a>
   </span>
   <a id="Core2D_Editor_IProjectEditor_TryToSplitLine_" data-uid="Core2D.Editor.IProjectEditor.TryToSplitLine*"></a>
   <h4 id="Core2D_Editor_IProjectEditor_TryToSplitLine_System_Double_System_Double_Core2D_Shapes_IPointShape_System_Boolean_" data-uid="Core2D.Editor.IProjectEditor.TryToSplitLine(System.Double,System.Double,Core2D.Shapes.IPointShape,System.Boolean)">TryToSplitLine(Double, Double, IPointShape, Boolean)</h4>
@@ -7070,7 +7055,7 @@
     <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Editor_IProjectEditor_Ungroup_System_Collections_Generic_ISet_Core2D_Shapes_IBaseShape__.md&amp;value=---%0Auid%3A%20Core2D.Editor.IProjectEditor.Ungroup(System.Collections.Generic.ISet%7BCore2D.Shapes.IBaseShape%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Model/Editor/IProjectEditor.cs/#L1256">View Source</a>
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Model/Editor/IProjectEditor.cs/#L1255">View Source</a>
   </span>
   <a id="Core2D_Editor_IProjectEditor_Ungroup_" data-uid="Core2D.Editor.IProjectEditor.Ungroup*"></a>
   <h4 id="Core2D_Editor_IProjectEditor_Ungroup_System_Collections_Generic_ISet_Core2D_Shapes_IBaseShape__" data-uid="Core2D.Editor.IProjectEditor.Ungroup(System.Collections.Generic.ISet{Core2D.Shapes.IBaseShape})">Ungroup(ISet&lt;IBaseShape&gt;)</h4>

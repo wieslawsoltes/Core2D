@@ -88,7 +88,10 @@
       <a class="xref" href="Core2D.IObservableObject.html#Core2D_IObservableObject_Name">IObservableObject.Name</a>
     </div>
     <div>
-      <a class="xref" href="Core2D.IObservableObject.html#Core2D_IObservableObject_MarkAsDirty_System_Boolean_">IObservableObject.MarkAsDirty(Boolean)</a>
+      <a class="xref" href="Core2D.IObservableObject.html#Core2D_IObservableObject_IsDirty">IObservableObject.IsDirty()</a>
+    </div>
+    <div>
+      <a class="xref" href="Core2D.IObservableObject.html#Core2D_IObservableObject_Invalidate">IObservableObject.Invalidate()</a>
     </div>
     <div>
       <a class="xref" href="Core2D.IObservableObject.html#Core2D_IObservableObject_Notify_System_String_">IObservableObject.Notify(String)</a>
@@ -183,32 +186,34 @@
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Path_IPathSegment_GetPoints.md&amp;value=---%0Auid%3A%20Core2D.Path.IPathSegment.GetPoints%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Path_IPathSegment_GetPoints_System_Collections_Generic_IList_Core2D_Shapes_IPointShape__.md&amp;value=---%0Auid%3A%20Core2D.Path.IPathSegment.GetPoints(System.Collections.Generic.IList%7BCore2D.Shapes.IPointShape%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Model/Path/IPathSegment.cs/#L25">View Source</a>
   </span>
   <a id="Core2D_Path_IPathSegment_GetPoints_" data-uid="Core2D.Path.IPathSegment.GetPoints*"></a>
-  <h4 id="Core2D_Path_IPathSegment_GetPoints" data-uid="Core2D.Path.IPathSegment.GetPoints">GetPoints()</h4>
-  <div class="markdown level1 summary"><p>Get all points in the segment.</p>
+  <h4 id="Core2D_Path_IPathSegment_GetPoints_System_Collections_Generic_IList_Core2D_Shapes_IPointShape__" data-uid="Core2D.Path.IPathSegment.GetPoints(System.Collections.Generic.IList{Core2D.Shapes.IPointShape})">GetPoints(IList&lt;IPointShape&gt;)</h4>
+  <div class="markdown level1 summary"><p>Get all points in the shape.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">IEnumerable&lt;IPointShape&gt; GetPoints()</code></pre>
+    <pre><code class="lang-csharp hljs">void GetPoints(IList&lt;IPointShape&gt; points)</code></pre>
   </div>
-  <h5 class="returns">Returns</h5>
+  <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
     <thead>
       <tr>
         <th>Type</th>
+        <th>Name</th>
         <th>Description</th>
       </tr>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<a class="xref" href="Core2D.Shapes.IPointShape.html">IPointShape</a>&gt;</td>
-        <td><p>All points in the segment.</p>
+        <td><span class="xref">System.Collections.Generic.IList</span>&lt;<a class="xref" href="Core2D.Shapes.IPointShape.html">IPointShape</a>&gt;</td>
+        <td><span class="parametername">points</span></td>
+        <td><p>The points list.</p>
 </td>
       </tr>
     </tbody>

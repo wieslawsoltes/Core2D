@@ -122,7 +122,7 @@
     <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Renderer_SkiaSharp_SkiaSharpSvgConverter__ctor_System_IServiceProvider_.md&amp;value=---%0Auid%3A%20Core2D.Renderer.SkiaSharp.SkiaSharpSvgConverter.%23ctor(System.IServiceProvider)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Modules/Renderer.SkiaSharp/SkiaSharpSvgConverter.cs/#L22">View Source</a>
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Modules/Renderer.SkiaSharp/SkiaSharpSvgConverter.cs/#L27">View Source</a>
   </span>
   <a id="Core2D_Renderer_SkiaSharp_SkiaSharpSvgConverter__ctor_" data-uid="Core2D.Renderer.SkiaSharp.SkiaSharpSvgConverter.#ctor*"></a>
   <h4 id="Core2D_Renderer_SkiaSharp_SkiaSharpSvgConverter__ctor_System_IServiceProvider_" data-uid="Core2D.Renderer.SkiaSharp.SkiaSharpSvgConverter.#ctor(System.IServiceProvider)">SkiaSharpSvgConverter(IServiceProvider)</h4>
@@ -158,7 +158,7 @@
     <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Renderer_SkiaSharp_SkiaSharpSvgConverter_Convert_System_String_.md&amp;value=---%0Auid%3A%20Core2D.Renderer.SkiaSharp.SkiaSharpSvgConverter.Convert(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Modules/Renderer.SkiaSharp/SkiaSharpSvgConverter.cs/#L153">View Source</a>
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Modules/Renderer.SkiaSharp/SkiaSharpSvgConverter.cs/#L569">View Source</a>
   </span>
   <a id="Core2D_Renderer_SkiaSharp_SkiaSharpSvgConverter_Convert_" data-uid="Core2D.Renderer.SkiaSharp.SkiaSharpSvgConverter.Convert*"></a>
   <h4 id="Core2D_Renderer_SkiaSharp_SkiaSharpSvgConverter_Convert_System_String_" data-uid="Core2D.Renderer.SkiaSharp.SkiaSharpSvgConverter.Convert(System.String)">Convert(String)</h4>
@@ -203,6 +203,227 @@
       </tr>
     </tbody>
   </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Renderer_SkiaSharp_SkiaSharpSvgConverter_FromString_System_String_.md&amp;value=---%0Auid%3A%20Core2D.Renderer.SkiaSharp.SkiaSharpSvgConverter.FromString(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Modules/Renderer.SkiaSharp/SkiaSharpSvgConverter.cs/#L580">View Source</a>
+  </span>
+  <a id="Core2D_Renderer_SkiaSharp_SkiaSharpSvgConverter_FromString_" data-uid="Core2D.Renderer.SkiaSharp.SkiaSharpSvgConverter.FromString*"></a>
+  <h4 id="Core2D_Renderer_SkiaSharp_SkiaSharpSvgConverter_FromString_System_String_" data-uid="Core2D.Renderer.SkiaSharp.SkiaSharpSvgConverter.FromString(System.String)">FromString(String)</h4>
+  <div class="markdown level1 summary"><p>Converts svg text to shapes.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IList&lt;IBaseShape&gt; FromString(string text)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">text</span></td>
+        <td><p>The svg text.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.IList</span>&lt;<a class="xref" href="Core2D.Shapes.IBaseShape.html">IBaseShape</a>&gt;</td>
+        <td><p>The converted shapes.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Renderer_SkiaSharp_SkiaSharpSvgConverter_ToPathGeometry_Svg_Picture_AddPolyPathCommand_Svg_Picture_PathFillType_System_Boolean_System_Boolean_Core2D_IFactory_.md&amp;value=---%0Auid%3A%20Core2D.Renderer.SkiaSharp.SkiaSharpSvgConverter.ToPathGeometry(Svg.Picture.AddPolyPathCommand%2CSvg.Picture.PathFillType%2CSystem.Boolean%2CSystem.Boolean%2CCore2D.IFactory)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Modules/Renderer.SkiaSharp/SkiaSharpSvgConverter.cs/#L306">View Source</a>
+  </span>
+  <a id="Core2D_Renderer_SkiaSharp_SkiaSharpSvgConverter_ToPathGeometry_" data-uid="Core2D.Renderer.SkiaSharp.SkiaSharpSvgConverter.ToPathGeometry*"></a>
+  <h4 id="Core2D_Renderer_SkiaSharp_SkiaSharpSvgConverter_ToPathGeometry_Svg_Picture_AddPolyPathCommand_Svg_Picture_PathFillType_System_Boolean_System_Boolean_Core2D_IFactory_" data-uid="Core2D.Renderer.SkiaSharp.SkiaSharpSvgConverter.ToPathGeometry(Svg.Picture.AddPolyPathCommand,Svg.Picture.PathFillType,System.Boolean,System.Boolean,Core2D.IFactory)">ToPathGeometry(AddPolyPathCommand, PathFillType, Boolean, Boolean, IFactory)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static IPathGeometry ToPathGeometry(AddPolyPathCommand addPolyPathCommand, PathFillType fillType, bool isFilled, bool isClosed, IFactory factory)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Svg.Picture.AddPolyPathCommand</span></td>
+        <td><span class="parametername">addPolyPathCommand</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">Svg.Picture.PathFillType</span></td>
+        <td><span class="parametername">fillType</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><span class="parametername">isFilled</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><span class="parametername">isClosed</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Core2D.IFactory.html">IFactory</a></td>
+        <td><span class="parametername">factory</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Core2D.Path.IPathGeometry.html">IPathGeometry</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Renderer_SkiaSharp_SkiaSharpSvgConverter_ToPathGeometry_Svg_Picture_Path_System_Boolean_Core2D_IFactory_.md&amp;value=---%0Auid%3A%20Core2D.Renderer.SkiaSharp.SkiaSharpSvgConverter.ToPathGeometry(Svg.Picture.Path%2CSystem.Boolean%2CCore2D.IFactory)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Modules/Renderer.SkiaSharp/SkiaSharpSvgConverter.cs/#L150">View Source</a>
+  </span>
+  <a id="Core2D_Renderer_SkiaSharp_SkiaSharpSvgConverter_ToPathGeometry_" data-uid="Core2D.Renderer.SkiaSharp.SkiaSharpSvgConverter.ToPathGeometry*"></a>
+  <h4 id="Core2D_Renderer_SkiaSharp_SkiaSharpSvgConverter_ToPathGeometry_Svg_Picture_Path_System_Boolean_Core2D_IFactory_" data-uid="Core2D.Renderer.SkiaSharp.SkiaSharpSvgConverter.ToPathGeometry(Svg.Picture.Path,System.Boolean,Core2D.IFactory)">ToPathGeometry(Path, Boolean, IFactory)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static IPathGeometry ToPathGeometry(Path path, bool isFilled, IFactory factory)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Svg.Picture.Path</span></td>
+        <td><span class="parametername">path</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><span class="parametername">isFilled</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Core2D.IFactory.html">IFactory</a></td>
+        <td><span class="parametername">factory</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Core2D.Path.IPathGeometry.html">IPathGeometry</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Renderer_SkiaSharp_SkiaSharpSvgConverter_ToTextHAlignment_Svg_Picture_TextAlign_.md&amp;value=---%0Auid%3A%20Core2D.Renderer.SkiaSharp.SkiaSharpSvgConverter.ToTextHAlignment(Svg.Picture.TextAlign)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Modules/Renderer.SkiaSharp/SkiaSharpSvgConverter.cs/#L73">View Source</a>
+  </span>
+  <a id="Core2D_Renderer_SkiaSharp_SkiaSharpSvgConverter_ToTextHAlignment_" data-uid="Core2D.Renderer.SkiaSharp.SkiaSharpSvgConverter.ToTextHAlignment*"></a>
+  <h4 id="Core2D_Renderer_SkiaSharp_SkiaSharpSvgConverter_ToTextHAlignment_Svg_Picture_TextAlign_" data-uid="Core2D.Renderer.SkiaSharp.SkiaSharpSvgConverter.ToTextHAlignment(Svg.Picture.TextAlign)">ToTextHAlignment(TextAlign)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static TextHAlignment ToTextHAlignment(TextAlign textAlign)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Svg.Picture.TextAlign</span></td>
+        <td><span class="parametername">textAlign</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Core2D.Style.TextHAlignment.html">TextHAlignment</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
   <h3 id="implements">Implements</h3>
   <div>
       <a class="xref" href="Core2D.ISvgConverter.html">ISvgConverter</a>
@@ -218,7 +439,7 @@
                     <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Renderer_SkiaSharp_SkiaSharpSvgConverter.md&amp;value=---%0Auid%3A%20Core2D.Renderer.SkiaSharp.SkiaSharpSvgConverter%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Modules/Renderer.SkiaSharp/SkiaSharpSvgConverter.cs/#L14" class="contribution-link">View Source</a>
+                    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Modules/Renderer.SkiaSharp/SkiaSharpSvgConverter.cs/#L19" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>

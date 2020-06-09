@@ -116,9 +116,6 @@
       <a class="xref" href="Core2D.ObservableObject.html#Core2D_ObservableObject_Name">ObservableObject.Name</a>
     </div>
     <div>
-      <a class="xref" href="Core2D.ObservableObject.html#Core2D_ObservableObject_MarkAsDirty_System_Boolean_">ObservableObject.MarkAsDirty(Boolean)</a>
-    </div>
-    <div>
       <a class="xref" href="Core2D.ObservableObject.html#Core2D_ObservableObject_PropertyChanged">ObservableObject.PropertyChanged</a>
     </div>
     <div>
@@ -256,19 +253,73 @@
   <div><a class="xref" href="Core2D.ObservableObject.html#Core2D_ObservableObject_Copy_System_Collections_Generic_IDictionary_System_Object_System_Object__">ObservableObject.Copy(IDictionary&lt;Object, Object&gt;)</a></div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Path_Segments_LineSegment_GetPoints.md&amp;value=---%0Auid%3A%20Core2D.Path.Segments.LineSegment.GetPoints%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Path_Segments_LineSegment_GetPoints_System_Collections_Generic_IList_Core2D_Shapes_IPointShape__.md&amp;value=---%0Auid%3A%20Core2D.Path.Segments.LineSegment.GetPoints(System.Collections.Generic.IList%7BCore2D.Shapes.IPointShape%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Shapes/Path/Segments/LineSegment.cs/#L22">View Source</a>
   </span>
   <a id="Core2D_Path_Segments_LineSegment_GetPoints_" data-uid="Core2D.Path.Segments.LineSegment.GetPoints*"></a>
-  <h4 id="Core2D_Path_Segments_LineSegment_GetPoints" data-uid="Core2D.Path.Segments.LineSegment.GetPoints">GetPoints()</h4>
-  <div class="markdown level1 summary"><p>Get all points in the segment.</p>
+  <h4 id="Core2D_Path_Segments_LineSegment_GetPoints_System_Collections_Generic_IList_Core2D_Shapes_IPointShape__" data-uid="Core2D.Path.Segments.LineSegment.GetPoints(System.Collections.Generic.IList{Core2D.Shapes.IPointShape})">GetPoints(IList&lt;IPointShape&gt;)</h4>
+  <div class="markdown level1 summary"><p>Get all points in the shape.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public override IEnumerable&lt;IPointShape&gt; GetPoints()</code></pre>
+    <pre><code class="lang-csharp hljs">public override void GetPoints(IList&lt;IPointShape&gt; points)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.IList</span>&lt;<a class="xref" href="Core2D.Shapes.IPointShape.html">IPointShape</a>&gt;</td>
+        <td><span class="parametername">points</span></td>
+        <td><p>The points list.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="Core2D.Path.PathSegment.html#Core2D_Path_PathSegment_GetPoints_System_Collections_Generic_IList_Core2D_Shapes_IPointShape__">PathSegment.GetPoints(IList&lt;IPointShape&gt;)</a></div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Path_Segments_LineSegment_Invalidate.md&amp;value=---%0Auid%3A%20Core2D.Path.Segments.LineSegment.Invalidate%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Shapes/Path/Segments/LineSegment.cs/#L44">View Source</a>
+  </span>
+  <a id="Core2D_Path_Segments_LineSegment_Invalidate_" data-uid="Core2D.Path.Segments.LineSegment.Invalidate*"></a>
+  <h4 id="Core2D_Path_Segments_LineSegment_Invalidate" data-uid="Core2D.Path.Segments.LineSegment.Invalidate">Invalidate()</h4>
+  <div class="markdown level1 summary"><p>Invalidates dirty flag.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override void Invalidate()</code></pre>
+  </div>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="Core2D.Path.PathSegment.html#Core2D_Path_PathSegment_Invalidate">PathSegment.Invalidate()</a></div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Path_Segments_LineSegment_IsDirty.md&amp;value=---%0Auid%3A%20Core2D.Path.Segments.LineSegment.IsDirty%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Shapes/Path/Segments/LineSegment.cs/#L34">View Source</a>
+  </span>
+  <a id="Core2D_Path_Segments_LineSegment_IsDirty_" data-uid="Core2D.Path.Segments.LineSegment.IsDirty*"></a>
+  <h4 id="Core2D_Path_Segments_LineSegment_IsDirty" data-uid="Core2D.Path.Segments.LineSegment.IsDirty">IsDirty()</h4>
+  <div class="markdown level1 summary"><p>Gets is dirty flag.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override bool IsDirty()</code></pre>
   </div>
   <h5 class="returns">Returns</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -280,20 +331,19 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<a class="xref" href="Core2D.Shapes.IPointShape.html">IPointShape</a>&gt;</td>
-        <td><p>All points in the segment.</p>
-</td>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
       </tr>
     </tbody>
   </table>
   <h5 class="overrides">Overrides</h5>
-  <div><a class="xref" href="Core2D.Path.PathSegment.html#Core2D_Path_PathSegment_GetPoints">PathSegment.GetPoints()</a></div>
+  <div><a class="xref" href="Core2D.Path.PathSegment.html#Core2D_Path_PathSegment_IsDirty">PathSegment.IsDirty()</a></div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
     <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Path_Segments_LineSegment_ShouldSerializePoint.md&amp;value=---%0Auid%3A%20Core2D.Path.Segments.LineSegment.ShouldSerializePoint%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Shapes/Path/Segments/LineSegment.cs/#L45">View Source</a>
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Shapes/Path/Segments/LineSegment.cs/#L63">View Source</a>
   </span>
   <a id="Core2D_Path_Segments_LineSegment_ShouldSerializePoint_" data-uid="Core2D.Path.Segments.LineSegment.ShouldSerializePoint*"></a>
   <h4 id="Core2D_Path_Segments_LineSegment_ShouldSerializePoint" data-uid="Core2D.Path.Segments.LineSegment.ShouldSerializePoint">ShouldSerializePoint()</h4>
@@ -325,7 +375,7 @@
     <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Path_Segments_LineSegment_ToSvgString.md&amp;value=---%0Auid%3A%20Core2D.Path.Segments.LineSegment.ToSvgString%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Shapes/Path/Segments/LineSegment.cs/#L38">View Source</a>
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Shapes/Path/Segments/LineSegment.cs/#L56">View Source</a>
   </span>
   <a id="Core2D_Path_Segments_LineSegment_ToSvgString_" data-uid="Core2D.Path.Segments.LineSegment.ToSvgString*"></a>
   <h4 id="Core2D_Path_Segments_LineSegment_ToSvgString" data-uid="Core2D.Path.Segments.LineSegment.ToSvgString">ToSvgString()</h4>
@@ -359,7 +409,7 @@
     <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Path_Segments_LineSegment_ToXamlString.md&amp;value=---%0Auid%3A%20Core2D.Path.Segments.LineSegment.ToXamlString%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Shapes/Path/Segments/LineSegment.cs/#L34">View Source</a>
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Shapes/Path/Segments/LineSegment.cs/#L52">View Source</a>
   </span>
   <a id="Core2D_Path_Segments_LineSegment_ToXamlString_" data-uid="Core2D.Path.Segments.LineSegment.ToXamlString*"></a>
   <h4 id="Core2D_Path_Segments_LineSegment_ToXamlString" data-uid="Core2D.Path.Segments.LineSegment.ToXamlString">ToXamlString()</h4>

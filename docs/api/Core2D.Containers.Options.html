@@ -84,10 +84,10 @@
   </div>
   <div classs="implements">
     <h5>Implements</h5>
+    <div><a class="xref" href="Core2D.Containers.IOptions.html">IOptions</a></div>
     <div><a class="xref" href="Core2D.IObservableObject.html">IObservableObject</a></div>
     <div><span class="xref">System.ComponentModel.INotifyPropertyChanged</span></div>
     <div><a class="xref" href="Core2D.ICopyable.html">ICopyable</a></div>
-    <div><a class="xref" href="Core2D.Containers.IOptions.html">IOptions</a></div>
   </div>
   <div class="inheritedMembers">
     <h5>Inherited Members</h5>
@@ -99,9 +99,6 @@
     </div>
     <div>
       <a class="xref" href="Core2D.ObservableObject.html#Core2D_ObservableObject_Name">ObservableObject.Name</a>
-    </div>
-    <div>
-      <a class="xref" href="Core2D.ObservableObject.html#Core2D_ObservableObject_MarkAsDirty_System_Boolean_">ObservableObject.MarkAsDirty(Boolean)</a>
     </div>
     <div>
       <a class="xref" href="Core2D.ObservableObject.html#Core2D_ObservableObject_PropertyChanged">ObservableObject.PropertyChanged</a>
@@ -150,7 +147,7 @@
   <h6><strong>Assembly</strong>: Core2D.dll</h6>
   <h5 id="Core2D_Containers_Options_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class Options : ObservableObject, IObservableObject, INotifyPropertyChanged, ICopyable, IOptions</code></pre>
+    <pre><code class="lang-csharp hljs">public class Options : ObservableObject, IOptions, IObservableObject, INotifyPropertyChanged, ICopyable</code></pre>
   </div>
   <h3 id="properties">Properties
   </h3>
@@ -551,10 +548,61 @@
   <div><a class="xref" href="Core2D.ObservableObject.html#Core2D_ObservableObject_Copy_System_Collections_Generic_IDictionary_System_Object_System_Object__">ObservableObject.Copy(IDictionary&lt;Object, Object&gt;)</a></div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Containers_Options_Invalidate.md&amp;value=---%0Auid%3A%20Core2D.Containers.Options.Invalidate%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Containers/Options.cs/#L139">View Source</a>
+  </span>
+  <a id="Core2D_Containers_Options_Invalidate_" data-uid="Core2D.Containers.Options.Invalidate*"></a>
+  <h4 id="Core2D_Containers_Options_Invalidate" data-uid="Core2D.Containers.Options.Invalidate">Invalidate()</h4>
+  <div class="markdown level1 summary"><p>Invalidates dirty flag.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override void Invalidate()</code></pre>
+  </div>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="Core2D.ObservableObject.html#Core2D_ObservableObject_Invalidate">ObservableObject.Invalidate()</a></div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Containers_Options_IsDirty.md&amp;value=---%0Auid%3A%20Core2D.Containers.Options.IsDirty%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Containers/Options.cs/#L132">View Source</a>
+  </span>
+  <a id="Core2D_Containers_Options_IsDirty_" data-uid="Core2D.Containers.Options.IsDirty*"></a>
+  <h4 id="Core2D_Containers_Options_IsDirty" data-uid="Core2D.Containers.Options.IsDirty">IsDirty()</h4>
+  <div class="markdown level1 summary"><p>Gets is dirty flag.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override bool IsDirty()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="Core2D.ObservableObject.html#Core2D_ObservableObject_IsDirty">ObservableObject.IsDirty()</a></div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
     <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Containers_Options_ShouldSerializeDefaultFillRule.md&amp;value=---%0Auid%3A%20Core2D.Containers.Options.ShouldSerializeDefaultFillRule%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Containers/Options.cs/#L189">View Source</a>
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Containers/Options.cs/#L202">View Source</a>
   </span>
   <a id="Core2D_Containers_Options_ShouldSerializeDefaultFillRule_" data-uid="Core2D.Containers.Options.ShouldSerializeDefaultFillRule*"></a>
   <h4 id="Core2D_Containers_Options_ShouldSerializeDefaultFillRule" data-uid="Core2D.Containers.Options.ShouldSerializeDefaultFillRule">ShouldSerializeDefaultFillRule()</h4>
@@ -586,7 +634,7 @@
     <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Containers_Options_ShouldSerializeDefaultIsClosed.md&amp;value=---%0Auid%3A%20Core2D.Containers.Options.ShouldSerializeDefaultIsClosed%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Containers/Options.cs/#L177">View Source</a>
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Containers/Options.cs/#L190">View Source</a>
   </span>
   <a id="Core2D_Containers_Options_ShouldSerializeDefaultIsClosed_" data-uid="Core2D.Containers.Options.ShouldSerializeDefaultIsClosed*"></a>
   <h4 id="Core2D_Containers_Options_ShouldSerializeDefaultIsClosed" data-uid="Core2D.Containers.Options.ShouldSerializeDefaultIsClosed">ShouldSerializeDefaultIsClosed()</h4>
@@ -618,7 +666,7 @@
     <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Containers_Options_ShouldSerializeDefaultIsFilled.md&amp;value=---%0Auid%3A%20Core2D.Containers.Options.ShouldSerializeDefaultIsFilled%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Containers/Options.cs/#L171">View Source</a>
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Containers/Options.cs/#L184">View Source</a>
   </span>
   <a id="Core2D_Containers_Options_ShouldSerializeDefaultIsFilled_" data-uid="Core2D.Containers.Options.ShouldSerializeDefaultIsFilled*"></a>
   <h4 id="Core2D_Containers_Options_ShouldSerializeDefaultIsFilled" data-uid="Core2D.Containers.Options.ShouldSerializeDefaultIsFilled">ShouldSerializeDefaultIsFilled()</h4>
@@ -650,7 +698,7 @@
     <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Containers_Options_ShouldSerializeDefaultIsSmoothJoin.md&amp;value=---%0Auid%3A%20Core2D.Containers.Options.ShouldSerializeDefaultIsSmoothJoin%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Containers/Options.cs/#L183">View Source</a>
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Containers/Options.cs/#L196">View Source</a>
   </span>
   <a id="Core2D_Containers_Options_ShouldSerializeDefaultIsSmoothJoin_" data-uid="Core2D.Containers.Options.ShouldSerializeDefaultIsSmoothJoin*"></a>
   <h4 id="Core2D_Containers_Options_ShouldSerializeDefaultIsSmoothJoin" data-uid="Core2D.Containers.Options.ShouldSerializeDefaultIsSmoothJoin">ShouldSerializeDefaultIsSmoothJoin()</h4>
@@ -682,7 +730,7 @@
     <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Containers_Options_ShouldSerializeDefaultIsStroked.md&amp;value=---%0Auid%3A%20Core2D.Containers.Options.ShouldSerializeDefaultIsStroked%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Containers/Options.cs/#L165">View Source</a>
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Containers/Options.cs/#L178">View Source</a>
   </span>
   <a id="Core2D_Containers_Options_ShouldSerializeDefaultIsStroked_" data-uid="Core2D.Containers.Options.ShouldSerializeDefaultIsStroked*"></a>
   <h4 id="Core2D_Containers_Options_ShouldSerializeDefaultIsStroked" data-uid="Core2D.Containers.Options.ShouldSerializeDefaultIsStroked">ShouldSerializeDefaultIsStroked()</h4>
@@ -714,7 +762,7 @@
     <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Containers_Options_ShouldSerializeHitThreshold.md&amp;value=---%0Auid%3A%20Core2D.Containers.Options.ShouldSerializeHitThreshold%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Containers/Options.cs/#L153">View Source</a>
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Containers/Options.cs/#L166">View Source</a>
   </span>
   <a id="Core2D_Containers_Options_ShouldSerializeHitThreshold_" data-uid="Core2D.Containers.Options.ShouldSerializeHitThreshold*"></a>
   <h4 id="Core2D_Containers_Options_ShouldSerializeHitThreshold" data-uid="Core2D.Containers.Options.ShouldSerializeHitThreshold">ShouldSerializeHitThreshold()</h4>
@@ -746,7 +794,7 @@
     <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Containers_Options_ShouldSerializeMoveMode.md&amp;value=---%0Auid%3A%20Core2D.Containers.Options.ShouldSerializeMoveMode%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Containers/Options.cs/#L159">View Source</a>
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Containers/Options.cs/#L172">View Source</a>
   </span>
   <a id="Core2D_Containers_Options_ShouldSerializeMoveMode_" data-uid="Core2D.Containers.Options.ShouldSerializeMoveMode*"></a>
   <h4 id="Core2D_Containers_Options_ShouldSerializeMoveMode" data-uid="Core2D.Containers.Options.ShouldSerializeMoveMode">ShouldSerializeMoveMode()</h4>
@@ -778,7 +826,7 @@
     <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Containers_Options_ShouldSerializeSnapToGrid.md&amp;value=---%0Auid%3A%20Core2D.Containers.Options.ShouldSerializeSnapToGrid%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Containers/Options.cs/#L135">View Source</a>
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Containers/Options.cs/#L148">View Source</a>
   </span>
   <a id="Core2D_Containers_Options_ShouldSerializeSnapToGrid_" data-uid="Core2D.Containers.Options.ShouldSerializeSnapToGrid*"></a>
   <h4 id="Core2D_Containers_Options_ShouldSerializeSnapToGrid" data-uid="Core2D.Containers.Options.ShouldSerializeSnapToGrid">ShouldSerializeSnapToGrid()</h4>
@@ -810,7 +858,7 @@
     <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Containers_Options_ShouldSerializeSnapX.md&amp;value=---%0Auid%3A%20Core2D.Containers.Options.ShouldSerializeSnapX%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Containers/Options.cs/#L141">View Source</a>
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Containers/Options.cs/#L154">View Source</a>
   </span>
   <a id="Core2D_Containers_Options_ShouldSerializeSnapX_" data-uid="Core2D.Containers.Options.ShouldSerializeSnapX*"></a>
   <h4 id="Core2D_Containers_Options_ShouldSerializeSnapX" data-uid="Core2D.Containers.Options.ShouldSerializeSnapX">ShouldSerializeSnapX()</h4>
@@ -842,7 +890,7 @@
     <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Containers_Options_ShouldSerializeSnapY.md&amp;value=---%0Auid%3A%20Core2D.Containers.Options.ShouldSerializeSnapY%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Containers/Options.cs/#L147">View Source</a>
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Containers/Options.cs/#L160">View Source</a>
   </span>
   <a id="Core2D_Containers_Options_ShouldSerializeSnapY_" data-uid="Core2D.Containers.Options.ShouldSerializeSnapY*"></a>
   <h4 id="Core2D_Containers_Options_ShouldSerializeSnapY" data-uid="Core2D.Containers.Options.ShouldSerializeSnapY">ShouldSerializeSnapY()</h4>
@@ -874,7 +922,7 @@
     <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Containers_Options_ShouldSerializeTryToConnect.md&amp;value=---%0Auid%3A%20Core2D.Containers.Options.ShouldSerializeTryToConnect%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Containers/Options.cs/#L195">View Source</a>
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Containers/Options.cs/#L208">View Source</a>
   </span>
   <a id="Core2D_Containers_Options_ShouldSerializeTryToConnect_" data-uid="Core2D.Containers.Options.ShouldSerializeTryToConnect*"></a>
   <h4 id="Core2D_Containers_Options_ShouldSerializeTryToConnect" data-uid="Core2D.Containers.Options.ShouldSerializeTryToConnect">ShouldSerializeTryToConnect()</h4>
@@ -903,6 +951,9 @@
   </table>
   <h3 id="implements">Implements</h3>
   <div>
+      <a class="xref" href="Core2D.Containers.IOptions.html">IOptions</a>
+  </div>
+  <div>
       <a class="xref" href="Core2D.IObservableObject.html">IObservableObject</a>
   </div>
   <div>
@@ -910,9 +961,6 @@
   </div>
   <div>
       <a class="xref" href="Core2D.ICopyable.html">ICopyable</a>
-  </div>
-  <div>
-      <a class="xref" href="Core2D.Containers.IOptions.html">IOptions</a>
   </div>
 </article>
           </div>
