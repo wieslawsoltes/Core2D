@@ -16,6 +16,7 @@ namespace Core2D.UI.Views
         {
             InitializeComponent();
             this.AttachDevTools();
+            App.Selector.EnableThemes(this);
         }
 
         /// <summary>
@@ -24,7 +25,6 @@ namespace Core2D.UI.Views
         private void InitializeComponent()
         {
             AvaloniaXamlLoader.Load(this);
-            App.Selector.EnableThemes(this);
         }
     }
 }
