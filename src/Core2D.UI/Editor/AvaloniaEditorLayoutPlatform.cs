@@ -11,6 +11,134 @@ using DMC = Dock.Model.Controls;
 namespace Core2D.UI.Editor
 {
     /// <summary>
+    /// Save layout view model.
+    /// </summary>
+    public class SaveLayoutViewModel
+    {
+        private Window _window;
+
+        /// <summary>
+        /// Gets or sets result property.
+        /// </summary>
+        public bool Result { get; set; }
+
+        /// <summary>
+        /// Gets or sets title property.
+        /// </summary>
+        public string Title { get; set; }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SaveLayoutViewModel"/> class.
+        /// </summary>
+        public SaveLayoutViewModel(Window window)
+        {
+            _window = window;
+
+            _window.KeyDown += (sender, e) =>
+            {
+                if (e.Key == Avalonia.Input.Key.Enter)
+                {
+                    OnOK();
+                }
+
+                if (e.Key == Avalonia.Input.Key.Escape)
+                {
+                    OnCancel();
+                }
+            };
+        }
+
+        /// <summary>
+        /// Performs OK button action.
+        /// </summary>
+        public void OnOK()
+        {
+            Result = true;
+            _window?.Close();
+        }
+
+        /// <summary>
+        /// Performs Cancel button action.
+        /// </summary>
+        public void OnCancel()
+        {
+            Result = false;
+            _window?.Close();
+        }
+    }
+
+    /// <summary>
+    /// Manage layouts view model.
+    /// </summary>
+    public class ManageLayoutsViewModel
+    {
+        private Window _window;
+
+        /// <summary>
+        /// Gets or sets result property.
+        /// </summary>
+        public bool Result { get; set; }
+
+        /// <summary>
+        /// Gets or sets layout property.
+        /// </summary>
+        public object Layout { get; set; }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ManageLayoutsViewModel"/> class.
+        /// </summary>
+        public ManageLayoutsViewModel(Window window)
+        {
+            _window = window;
+
+            _window.KeyDown += (sender, e) =>
+            {
+                if (e.Key == Avalonia.Input.Key.Enter)
+                {
+                    OnOK();
+                }
+
+                if (e.Key == Avalonia.Input.Key.Escape)
+                {
+                    OnCancel();
+                }
+            };
+        }
+
+        /// <summary>
+        /// Performs OK button action.
+        /// </summary>
+        public void OnOK()
+        {
+            Result = true;
+            _window?.Close();
+        }
+
+        /// <summary>
+        /// Performs Cancel button action.
+        /// </summary>
+        public void OnCancel()
+        {
+            Result = false;
+            _window?.Close();
+        }
+
+        /// <summary>
+        /// Performs Delete button action.
+        /// </summary>
+        public void OnDelete(object layout)
+        {
+            if (Layout is DM.IDock rootLayout && layout is DM.IDock dockLayout)
+            {
+                if (rootLayout?.ActiveDockable is DM.IDock active && dockLayout != active)
+                {
+                    rootLayout.Factory.RemoveDockable(dockLayout, false);
+                }
+            }
+        }
+    }
+
+    /// <summary>
     /// Editor layout Avalonia platform.
     /// </summary>
     public class AvaloniaEditorLayoutPlatform : ObservableObject, IEditorLayoutPlatform
@@ -101,16 +229,22 @@ namespace Core2D.UI.Editor
                 {
                     var window = new SaveLayoutWindow();
 
-                    window.String = activeLayout.Title;
+                    var viewModel = new SaveLayoutViewModel(window)
+                    {
+                        Result = false,
+                        Title = activeLayout.Title
+                    };
+
+                    window.DataContext = viewModel;
 
                     await window.ShowDialog(onwer);
 
-                    if (window.Result == true)
+                    if (viewModel.Result == true)
                     {
                         var clone = (DM.IDock)activeLayout.Clone();
                         if (clone != null)
                         {
-                            clone.Title = window.String;
+                            clone.Title = viewModel.Title;
                             activeLayout.Close();
                             rootLayout.Factory?.AddDockable(rootLayout, clone);
                             rootLayout.Navigate(clone);
@@ -144,7 +278,7 @@ namespace Core2D.UI.Editor
             {
                 if (rootLayout?.ActiveDockable is DM.IDock active && dockLayout != active)
                 {
-                    rootLayout.Factory.RemoveDockable(active, false);
+                    rootLayout.Factory.RemoveDockable(dockLayout, false);
                 }
             }
         }
@@ -179,7 +313,13 @@ namespace Core2D.UI.Editor
                 {
                     var window = new ManageLayoutsWindow();
 
-                    window.DataContext = rootLayout;
+                    var viewModel = new ManageLayoutsViewModel(window)
+                    {
+                        Result = false,
+                        Layout = rootLayout
+                    };
+
+                    window.DataContext = viewModel;
 
                     await window.ShowDialog(onwer);
                 }

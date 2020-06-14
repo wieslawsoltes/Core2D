@@ -6,16 +6,16 @@
         mc:Ignorable="d"
         d:DesignWidth="350" d:DesignHeight="140"
         UseLayoutRounding="True" RenderOptions.BitmapInterpolationMode="HighQuality"
-        WindowState="Normal" WindowStartupLocation="CenterScreen"
+        WindowState="Normal" WindowStartupLocation="CenterOwner"
         Foreground="{DynamicResource ThemeForegroundBrush}"
         BorderThickness="1" BorderBrush="{DynamicResource ThemeBorderLowBrush}"
         Title="Save Layout" Height="150" Width="350">
     <Grid RowDefinitions="Auto,Auto,Auto">
         <TextBlock Text="Title:" Margin="10" TextWrapping="Wrap" Grid.Row="0"/>
-        <TextBox Text="{Binding $parent[Window].String}" Margin="10" Grid.Row="1"/>
+        <TextBox Text="{Binding Title}" Margin="10" Grid.Row="1"/>
         <StackPanel HorizontalAlignment="Right" Orientation="Horizontal" Grid.Row="2">
-            <Button Command="{Binding $parent[Window].OnOK}" Content="OK" Margin="0,10,5,10" Padding="10,5"/>
-            <Button Command="{Binding $parent[Window].OnCancel}" Content="Cancel" Margin="5,10,10,10" Padding="10,5"/>
+            <Button Command="{Binding OnOK}" Content="OK" Margin="0,10,5,10" Padding="10,5"/>
+            <Button Command="{Binding OnCancel}" Content="Cancel" Margin="5,10,10,10" Padding="10,5"/>
         </StackPanel>
     </Grid>
 </Window>

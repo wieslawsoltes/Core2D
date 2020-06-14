@@ -10,16 +10,6 @@ namespace Core2D.UI.Views.Layouts
     public class SaveLayoutWindow : Window
     {
         /// <summary>
-        /// Gets or sets string property.
-        /// </summary>
-        public string String { get; set; }
-
-        /// <summary>
-        /// Gets or sets result property.
-        /// </summary>
-        public bool Result { get; set; }
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="SaveLayoutWindow"/> class.
         /// </summary>
         public SaveLayoutWindow()
@@ -35,24 +25,6 @@ namespace Core2D.UI.Views.Layouts
         private void InitializeComponent()
         {
             AvaloniaXamlLoader.Load(this);
-        }
-
-        /// <summary>
-        /// Performs OK button action.
-        /// </summary>
-        public void OnOK()
-        {
-            Result = true;
-            Close();
-        }
-
-        /// <summary>
-        /// Performs Cancel button action.
-        /// </summary>
-        public void OnCancel()
-        {
-            Result = false;
-            Close();
         }
     }
 }
