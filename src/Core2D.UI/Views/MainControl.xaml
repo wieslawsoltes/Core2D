@@ -26,5 +26,5 @@
         <KeyBinding Command="{Binding Platform.OnExport}" Gesture="Ctrl+E"/>
         <KeyBinding Command="{Binding Platform.OnExit}" Gesture="Alt+F4"/>
     </UserControl.KeyBindings>
-    <idc:DockControl Layout="{Binding Layout}"/>
+    <idc:DockControl Layout="{Binding LayoutPlatform.Layout}"/>
 </UserControl>

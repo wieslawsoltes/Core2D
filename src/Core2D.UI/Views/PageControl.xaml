@@ -93,13 +93,13 @@
     <i:Interaction.Behaviors>
         <iac:FocusOnAttachedToVisualTreeBehavior/>
         <!--<iac:FocusOnPointerMovedBehavior/>-->
-        <!--<idd:ContextDropBehavior Context="{Binding Layout, FallbackValue={x:Null}}" Handler="{StaticResource DockDropHandler}"/>-->
+        <!--<idd:ContextDropBehavior Context="{Binding LayoutPlatform.Layout, FallbackValue={x:Null}}" Handler="{StaticResource DockDropHandler}"/>-->
         <idd:ContextDropBehavior Context="{Binding FallbackValue={x:Null}}" Handler="{StaticResource EditorDropHandler}"/>
         <behaviors:AttachEditorBehavior/>
     </i:Interaction.Behaviors>
     <Border Classes="container">
         <i:Interaction.Behaviors>
-            <!--<idd:ContextDropBehavior Context="{Binding Layout, FallbackValue={x:Null}}" Handler="{StaticResource DockDropHandler}"/>-->
+            <!--<idd:ContextDropBehavior Context="{Binding LayoutPlatform.Layout, FallbackValue={x:Null}}" Handler="{StaticResource DockDropHandler}"/>-->
             <idd:ContextDropBehavior Context="{Binding FallbackValue={x:Null}}" Handler="{StaticResource EditorDropHandler}"/>
         </i:Interaction.Behaviors>
         <Border Classes="transparent" ClipToBounds="True">

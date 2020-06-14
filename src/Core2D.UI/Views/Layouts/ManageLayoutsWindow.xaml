@@ -12,7 +12,13 @@
         Title="Manage Layouts" Height="350" Width="350">
     <Grid RowDefinitions="Auto,*,Auto">
         <TextBlock Text="Layouts:" Margin="10,10,10,5" TextWrapping="Wrap" Grid.Row="0"/>
-        <ListBox Name="VisibleDockablesListBox" Margin="10,5,10,5" Items="{Binding VisibleDockables}" SelectedItem="{Binding ActiveDockable, Mode=OneWay}" Grid.Row="1"/>
+        <ListBox Name="VisibleDockablesListBox" Margin="10,5,10,5" Items="{Binding VisibleDockables}" SelectedItem="{Binding ActiveDockable, Mode=OneWay}" Grid.Row="1">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Title}"/>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
         <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" Grid.Row="2">
             <Button Command="{Binding $parent[Window].OnRename}" Content="Rename" Margin="10,10,5,10" Padding="10,5"/>
             <Button Command="{Binding $parent[Window].OnDelete}" Content="Delete" Margin="5,10,0,10" Padding="10,5"/>
