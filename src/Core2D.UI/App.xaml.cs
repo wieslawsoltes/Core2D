@@ -11,11 +11,11 @@ using Avalonia.Platform;
 using Avalonia.ThemeManager;
 using Core2D;
 using Core2D.Editor;
-using Core2D.UI.Converters;
 using Core2D.UI.Designer;
 using Core2D.UI.Modules;
 using Core2D.UI.Views;
 using DM = Dock.Model;
+using DMC = Dock.Model.Controls;
 
 namespace Core2D.UI
 {
@@ -102,19 +102,30 @@ namespace Core2D.UI
 
             var editor = serviceProvider.GetService<IProjectEditor>();
 
-            editor.LayoutPlatform.LoadLayout = () => editor.Platform.OnLoadLayout();
-            editor.LayoutPlatform.SaveLayout = () => editor.Platform.OnSaveLayout();
-            editor.LayoutPlatform.ResetLayout = () => editor.Platform.OnResetLayout();
-
             var layoutPath = System.IO.Path.Combine(fileIO.GetBaseDirectory(), "Core2D.layout");
-            if (fileIO.Exists(layoutPath))
+            if (fileIO.Exists(layoutPath) && editor.LayoutPlatform != null)
             {
-                editor.OnLoadLayout(layoutPath);
+                var layout = editor.LayoutPlatform.DeserializeLayout(layoutPath);
+                if (layout != null)
+                {
+                    editor.LayoutPlatform.Layout = layout;
+                }
             }
 
-            var dockFactory = serviceProvider.GetService<DM.IFactory>();
-            editor.Layout ??= dockFactory.CreateLayout();
-            dockFactory.InitLayout(editor.Layout);
+            if (editor.LayoutPlatform != null)
+            {
+                var dockFactory = serviceProvider.GetService<DM.IFactory>();
+
+                if (editor.LayoutPlatform.Layout == null)
+                {
+                    editor.LayoutPlatform.Layout = dockFactory.CreateLayout();
+                }
+
+                if (editor.LayoutPlatform.Layout is DMC.IRootDock layout)
+                {
+                    dockFactory.InitLayout(layout);  
+                }
+            }
 
             var recentPath = System.IO.Path.Combine(fileIO.GetBaseDirectory(), "Core2D.recent");
             if (fileIO.Exists(recentPath))
@@ -140,8 +151,11 @@ namespace Core2D.UI
 
             mainWindow.Closing += (sender, e) =>
             {
-                editor.Layout.Close();
-                editor.OnSaveLayout(layoutPath);
+                if (editor.LayoutPlatform?.Layout is DMC.IRootDock layout)
+                {
+                    layout.Close();
+                }
+                editor.LayoutPlatform?.SerializeLayout(layoutPath, editor.LayoutPlatform?.Layout);
                 editor.OnSaveRecent(recentPath);
                 Selector.SaveSelectedTheme("Core2D.theme");
             };
@@ -171,9 +185,20 @@ namespace Core2D.UI
 
             var editor = serviceProvider.GetService<IProjectEditor>();
 
-            var dockFactory = serviceProvider.GetService<DM.IFactory>();
-            editor.Layout ??= dockFactory.CreateLayout();
-            dockFactory.InitLayout(editor.Layout);
+            if (editor.LayoutPlatform != null)
+            {
+                var dockFactory = serviceProvider.GetService<DM.IFactory>();
+
+                if (editor.LayoutPlatform.Layout == null)
+                {
+                    editor.LayoutPlatform.Layout = dockFactory.CreateLayout();
+                }
+
+                if (editor.LayoutPlatform.Layout is DMC.IRootDock layout)
+                {
+                    dockFactory.InitLayout(layout);
+                }
+            }
 
             editor.CurrentTool = editor.Tools.FirstOrDefault(t => t.Title == "Selection");
             editor.CurrentPathTool = editor.PathTools.FirstOrDefault(t => t.Title == "Line");

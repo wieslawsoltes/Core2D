@@ -1,0 +1,24 @@
+﻿<Window x:Class="Core2D.UI.Views.Layouts.ManageLayoutsWindow"
+        xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        mc:Ignorable="d"
+        d:DesignWidth="350" d:DesignHeight="350"
+        UseLayoutRounding="True" RenderOptions.BitmapInterpolationMode="HighQuality"
+        WindowState="Normal" WindowStartupLocation="CenterScreen"
+        Foreground="{DynamicResource ThemeForegroundBrush}"
+        BorderThickness="1" BorderBrush="{DynamicResource ThemeBorderLowBrush}"
+        Title="Manage Layouts" Height="350" Width="350">
+    <Grid RowDefinitions="Auto,*,Auto">
+        <TextBlock Text="Layouts:" Margin="10,10,10,5" TextWrapping="Wrap" Grid.Row="0"/>
+        <ListBox Name="VisibleDockablesListBox" Margin="10,5,10,5" Items="{Binding VisibleDockables}" SelectedItem="{Binding ActiveDockable, Mode=OneWay}" Grid.Row="1"/>
+        <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" Grid.Row="2">
+            <Button Command="{Binding $parent[Window].OnRename}" Content="Rename" Margin="10,10,5,10" Padding="10,5"/>
+            <Button Command="{Binding $parent[Window].OnDelete}" Content="Delete" Margin="5,10,0,10" Padding="10,5"/>
+        </StackPanel>
+        <StackPanel HorizontalAlignment="Right" Orientation="Horizontal" Grid.Row="2">
+            <Button Command="{Binding $parent[Window].OnOK}" Content="Close" Margin="0,10,10,10" Padding="10,5"/>
+        </StackPanel>
+    </Grid>
+</Window>

@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Threading.Tasks;
-using Core2D;
 using Core2D.Containers;
 using Core2D.Data;
 using Core2D.Editor.Recent;
@@ -12,7 +11,6 @@ using Core2D.Renderer;
 using Core2D.Scripting;
 using Core2D.Shapes;
 using Core2D.Style;
-using DM = Dock.Model;
 
 namespace Core2D.Editor
 {
@@ -65,11 +63,6 @@ namespace Core2D.Editor
         /// Gets or sets current recent project.
         /// </summary>
         RecentFile CurrentRecentProject { get; set; }
-
-        /// <summary>
-        /// Gets or sets current layout configuration.
-        /// </summary>
-        DM.IDock Layout { get; set; }
 
         /// <summary>
         /// Gets or sets about info.
@@ -965,24 +958,6 @@ namespace Core2D.Editor
         /// </summary>
         /// <param name="path">The recent projects path.</param>
         void OnSaveRecent(string path);
-
-        /// <summary>
-        /// Load layout configuration.
-        /// </summary>
-        /// <param name="path">The layout configuration path.</param>
-        void OnLoadLayout(string path);
-
-        /// <summary>
-        /// Save layout configuration.
-        /// </summary>
-        /// <param name="path">The layout configuration path.</param>
-        void OnSaveLayout(string path);
-
-        /// <summary>
-        /// Navigate to view.
-        /// </summary>
-        /// <param name="view">The view to navigate to.</param>
-        void OnNavigate(object view);
 
         /// <summary>
         /// Check if undo action is available.

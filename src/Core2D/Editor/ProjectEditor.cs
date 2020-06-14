@@ -4,7 +4,6 @@ using System.Collections.Immutable;
 using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
-using Core2D;
 using Core2D.Containers;
 using Core2D.Data;
 using Core2D.Editor.History;
@@ -12,225 +11,15 @@ using Core2D.Editor.Recent;
 using Core2D.Editor.Tools.Decorators;
 using Core2D.Input;
 using Core2D.Layout;
-using Core2D.Path;
-using Core2D.Path.Segments;
 using Core2D.Renderer;
 using Core2D.Scripting;
 using Core2D.Shapes;
 using Core2D.Style;
 using Spatial;
 using static System.Math;
-using DM = Dock.Model;
-using DMC = Dock.Model.Controls;
 
 namespace Core2D.Editor
 {
-    internal interface IShapeEditor
-    {
-        void BreakPathFigure(IPathFigure pathFigure, IShapeStyle style, bool isStroked, bool isFilled, List<IBaseShape> result);
-        bool BreakPathShape(IPathShape pathShape, List<IBaseShape> result);
-        void BreakShape(IBaseShape shape, List<IBaseShape> result, List<IBaseShape> remove);
-    }
-
-    internal class ShapeEditor : IShapeEditor
-    {
-        private readonly IServiceProvider _serviceProvider;
-
-        public ShapeEditor(IServiceProvider serviceProvider)
-        {
-            _serviceProvider = serviceProvider;
-        }
-
-        public void BreakPathFigure(IPathFigure pathFigure, IShapeStyle style, bool isStroked, bool isFilled, List<IBaseShape> result)
-        {
-            var factory = _serviceProvider.GetService<IFactory>();
-
-            var firstPoint = pathFigure.StartPoint;
-            var lastPoint = pathFigure.StartPoint;
-
-            foreach (var segment in pathFigure.Segments)
-            {
-                switch (segment)
-                {
-                    case ILineSegment lineSegment:
-                        {
-                            var convertedStyle = style != null ?
-                                (IShapeStyle)style?.Copy(null) :
-                                factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
-
-                            var convertedPathShape = factory.CreateLineShape(
-                                lastPoint,
-                                lineSegment.Point,
-                                convertedStyle,
-                                isStroked);
-
-                            lastPoint = lineSegment.Point;
-
-                            result.Add(convertedPathShape);
-                        }
-                        break;
-                    case IQuadraticBezierSegment quadraticBezierSegment:
-                        {
-                            var convertedStyle = style != null ?
-                                (IShapeStyle)style?.Copy(null) :
-                                factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
-
-                            var convertedPathShape = factory.CreateQuadraticBezierShape(
-                                lastPoint,
-                                quadraticBezierSegment.Point1,
-                                quadraticBezierSegment.Point2,
-                                convertedStyle,
-                                isStroked,
-                                isFilled);
-
-                            lastPoint = quadraticBezierSegment.Point2;
-
-                            result.Add(convertedPathShape);
-                        }
-                        break;
-                    case ICubicBezierSegment cubicBezierSegment:
-                        {
-                            var convertedStyle = style != null ?
-                                (IShapeStyle)style?.Copy(null) :
-                                factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
-
-                            var convertedPathShape = factory.CreateCubicBezierShape(
-                                lastPoint,
-                                cubicBezierSegment.Point1,
-                                cubicBezierSegment.Point2,
-                                cubicBezierSegment.Point3,
-                                convertedStyle,
-                                isStroked,
-                                isFilled);
-
-                            lastPoint = cubicBezierSegment.Point3;
-
-                            result.Add(convertedPathShape);
-                        }
-                        break;
-                    case IArcSegment arcSegment:
-                        {
-                            var convertedStyle = style != null ?
-                                (IShapeStyle)style?.Copy(null) :
-                                factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
-
-                            var point2 = factory.CreatePointShape(0, 0); // TODO:
-
-                            var point3 = factory.CreatePointShape(0, 0); // TODO:
-
-                            var convertedPathShape = factory.CreateArcShape(
-                                lastPoint,
-                                point2,
-                                point3,
-                                arcSegment.Point,
-                                convertedStyle,
-                                isStroked,
-                                isFilled);
-
-                            lastPoint = arcSegment.Point;
-
-                            result.Add(convertedPathShape);
-                        }
-                        break;
-                }
-            }
-
-            if (pathFigure.Segments.Length > 0 && pathFigure.IsClosed)
-            {
-                var convertedStyle = style != null ?
-                    (IShapeStyle)style?.Copy(null) :
-                    factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
-
-                var convertedPathShape = factory.CreateLineShape(
-                    lastPoint,
-                    firstPoint,
-                    convertedStyle,
-                    isStroked);
-
-                result.Add(convertedPathShape);
-            }
-        }
-
-        public bool BreakPathShape(IPathShape pathShape, List<IBaseShape> result)
-        {
-            var factory = _serviceProvider.GetService<IFactory>();
-
-            if (pathShape.Geometry.Figures.Length == 1)
-            {
-                BreakPathFigure(pathShape.Geometry.Figures[0], pathShape.Style, pathShape.IsStroked, pathShape.IsFilled, result);
-                return true;
-            }
-            else if (pathShape.Geometry.Figures.Length > 1)
-            {
-                foreach (var pathFigure in pathShape.Geometry.Figures)
-                {
-                    var style = pathShape.Style != null ?
-                        (IShapeStyle)pathShape.Style?.Copy(null) :
-                        factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
-
-                    var convertedGeometry = factory.CreatePathGeometry(ImmutableArray.Create<IPathFigure>(), pathShape.Geometry.FillRule);
-                    convertedGeometry.Figures = convertedGeometry.Figures.Add(pathFigure);
-
-                    var convertedPathShape = factory.CreatePathShape(
-                        pathShape.Name,
-                        style,
-                        convertedGeometry,
-                        pathShape.IsStroked,
-                        pathShape.IsFilled);
-
-                    result.Add(convertedPathShape);
-                }
-
-                return true;
-            }
-
-            return false;
-        }
-
-        public void BreakShape(IBaseShape shape, List<IBaseShape> result, List<IBaseShape> remove)
-        {
-            switch (shape)
-            {
-                case IPathShape pathShape:
-                    {
-                        if (BreakPathShape(pathShape, result) == true)
-                        {
-                            remove.Add(pathShape);
-                        }
-                    }
-                    break;
-                case IGroupShape groupShape:
-                    {
-                        if (groupShape.Shapes.Length > 0)
-                        {
-                            var groupShapes = new List<IBaseShape>();
-
-                            GroupShapeExtensions.Ungroup(groupShape.Shapes, groupShapes);
-
-                            foreach (var brokenGroupShape in groupShapes)
-                            {
-                                BreakShape(brokenGroupShape, result, remove);
-                            }
-
-                            remove.Add(groupShape);
-                        }
-                    }
-                    break;
-                default:
-                    {
-                        var pathConverter = _serviceProvider.GetService<IPathConverter>();
-                        var path = pathConverter?.ToPathShape(shape);
-                        if (path != null)
-                        {
-                            BreakShape(path, result, remove);
-                            remove.Add(shape);
-                        }
-                    }
-                    break;
-            }
-        }
-    }
-
     /// <summary>
     /// Project editor.
     /// </summary>
@@ -247,7 +36,6 @@ namespace Core2D.Editor
         private IPathTool _currentPathTool;
         private ImmutableArray<RecentFile> _recentProjects;
         private RecentFile _currentRecentProject;
-        private DM.IDock _layout;
         private AboutInfo _aboutInfo;
         private readonly Lazy<ImmutableArray<IEditorTool>> _tools;
         private readonly Lazy<ImmutableArray<IPathTool>> _pathTools;
@@ -335,13 +123,6 @@ namespace Core2D.Editor
         {
             get => _currentRecentProject;
             set => Update(ref _currentRecentProject, value);
-        }
-
-        /// <inheritdoc/>
-        public DM.IDock Layout
-        {
-            get => _layout;
-            set => Update(ref _layout, value);
         }
 
         /// <inheritdoc/>
@@ -596,7 +377,7 @@ namespace Core2D.Editor
         {
             OnUnload();
             OnLoad(ContainerFactory?.GetProject() ?? Factory.CreateProjectContainer(), string.Empty);
-            OnNavigate("EditorView");
+            LayoutPlatform?.Navigate("EditorView");
             CanvasPlatform?.ResetZoom?.Invoke();
             CanvasPlatform?.InvalidateControl?.Invoke();
         }
@@ -634,7 +415,7 @@ namespace Core2D.Editor
                     OnUnload();
                     OnLoad(project, path);
                     OnAddRecent(path, project.Name);
-                    OnNavigate("EditorView");
+                    LayoutPlatform?.Navigate("EditorView");
                     CanvasPlatform?.ResetZoom?.Invoke();
                     CanvasPlatform?.InvalidateControl?.Invoke();
                 }
@@ -648,7 +429,7 @@ namespace Core2D.Editor
         /// <inheritdoc/>
         public void OnCloseProject()
         {
-            OnNavigate("DashboardView");
+            LayoutPlatform?.Navigate("DashboardView");
             Project?.History?.Reset();
             OnUnload();
         }
@@ -2870,53 +2651,6 @@ namespace Core2D.Editor
                 {
                     Log?.LogException(ex);
                 }
-            }
-        }
-
-        /// <inheritdoc/>
-        public void OnLoadLayout(string path)
-        {
-            if (JsonSerializer != null)
-            {
-                try
-                {
-                    var json = FileIO.ReadUtf8Text(path);
-                    var layout = JsonSerializer.Deserialize<DMC.IRootDock>(json);
-                    if (layout != null)
-                    {
-                        Layout = layout;
-                    }
-                }
-                catch (Exception ex)
-                {
-                    Log?.LogException(ex);
-                }
-            }
-        }
-
-        /// <inheritdoc/>
-        public void OnSaveLayout(string path)
-        {
-            if (JsonSerializer != null)
-            {
-                try
-                {
-                    var json = JsonSerializer.Serialize(_layout);
-                    FileIO.WriteUtf8Text(path, json);
-                }
-                catch (Exception ex)
-                {
-                    Log?.LogException(ex);
-                }
-            }
-        }
-
-        /// <inheritdoc/>
-        public void OnNavigate(object view)
-        {
-            if (Layout is DM.IDock dock)
-            {
-                dock.Navigate(view);
             }
         }
 

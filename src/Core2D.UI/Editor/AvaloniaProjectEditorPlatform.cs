@@ -2,7 +2,6 @@
 using System.Linq;
 using System.Text;
 using Avalonia.Controls;
-using Core2D;
 using Core2D.Containers;
 using Core2D.Data;
 using Core2D.Editor;
@@ -11,7 +10,6 @@ using Core2D.SvgExporter.Svg;
 using Core2D.UI.Views;
 using Core2D.XamlExporter.Avalonia;
 using Microsoft.CodeAnalysis;
-using DM = Dock.Model;
 
 namespace Core2D.UI.Editor
 {
@@ -31,6 +29,11 @@ namespace Core2D.UI.Editor
             _serviceProvider = serviceProvider;
         }
 
+        private MainWindow GetWindow()
+        {
+            return _serviceProvider.GetService<MainWindow>();
+        }
+
         /// <inheritdoc/>
         public async void OnOpen(string path)
         {
@@ -39,8 +42,7 @@ namespace Core2D.UI.Editor
                 var dlg = new OpenFileDialog() { Title = "Open" };
                 dlg.Filters.Add(new FileDialogFilter() { Name = "Project", Extensions = { "project" } });
                 dlg.Filters.Add(new FileDialogFilter() { Name = "All", Extensions = { "*" } });
-                var window = _serviceProvider.GetService<MainWindow>();
-                var result = await dlg.ShowAsync(window);
+                var result = await dlg.ShowAsync(GetWindow());
                 if (result != null)
                 {
                     var item = result.FirstOrDefault();
@@ -84,7 +86,7 @@ namespace Core2D.UI.Editor
             dlg.Filters.Add(new FileDialogFilter() { Name = "All", Extensions = { "*" } });
             dlg.InitialFileName = editor.Project?.Name;
             dlg.DefaultExtension = "project";
-            var result = await dlg.ShowAsync(_serviceProvider.GetService<MainWindow>());
+            var result = await dlg.ShowAsync(GetWindow());
             if (result != null)
             {
                 editor.OnSaveProject(result);
@@ -101,7 +103,7 @@ namespace Core2D.UI.Editor
                 dlg.Filters.Add(new FileDialogFilter() { Name = "Json", Extensions = { "json" } });
                 dlg.Filters.Add(new FileDialogFilter() { Name = "All", Extensions = { "*" } });
 
-                var result = await dlg.ShowAsync(_serviceProvider.GetService<MainWindow>());
+                var result = await dlg.ShowAsync(GetWindow());
                 if (result != null)
                 {
                     foreach (var item in result)
@@ -132,7 +134,7 @@ namespace Core2D.UI.Editor
                 dlg.Filters.Add(new FileDialogFilter() { Name = "Svg", Extensions = { "svg" } });
                 dlg.Filters.Add(new FileDialogFilter() { Name = "All", Extensions = { "*" } });
 
-                var result = await dlg.ShowAsync(_serviceProvider.GetService<MainWindow>());
+                var result = await dlg.ShowAsync(GetWindow());
                 if (result != null)
                 {
                     foreach (var item in result)
@@ -161,7 +163,7 @@ namespace Core2D.UI.Editor
                 var dlg = new OpenFileDialog() { Title = "Open" };
                 dlg.AllowMultiple = true;
                 dlg.Filters.Add(new FileDialogFilter() { Name = "Json", Extensions = { "json" } });
-                var result = await dlg.ShowAsync(_serviceProvider.GetService<MainWindow>());
+                var result = await dlg.ShowAsync(GetWindow());
                 if (result != null)
                 {
                     foreach (var item in result)
@@ -199,7 +201,7 @@ namespace Core2D.UI.Editor
             dlg.Filters.Add(new FileDialogFilter() { Name = "All", Extensions = { "*" } });
             dlg.InitialFileName = editor?.GetName(item);
             dlg.DefaultExtension = "json";
-            var result = await dlg.ShowAsync(_serviceProvider.GetService<MainWindow>());
+            var result = await dlg.ShowAsync(GetWindow());
             if (result != null)
             {
                 editor.OnExportJson(result, item);
@@ -216,7 +218,7 @@ namespace Core2D.UI.Editor
                 dlg.Filters.Add(new FileDialogFilter() { Name = "Json", Extensions = { "json" } });
                 dlg.InitialFileName = editor?.GetName(item);
                 dlg.DefaultExtension = "json";
-                var result = await dlg.ShowAsync(_serviceProvider.GetService<MainWindow>());
+                var result = await dlg.ShowAsync(GetWindow());
                 if (result != null)
                 {
                     string resultExtension = System.IO.Path.GetExtension(result);
@@ -267,7 +269,7 @@ namespace Core2D.UI.Editor
             dlg.InitialFileName = name;
             dlg.DefaultExtension = editor?.FileWriters.FirstOrDefault()?.Extension;
 
-            var result = await dlg.ShowAsync(_serviceProvider.GetService<MainWindow>());
+            var result = await dlg.ShowAsync(GetWindow());
             if (result != null)
             {
                 string ext = System.IO.Path.GetExtension(result).ToLower().TrimStart('.');
@@ -288,7 +290,7 @@ namespace Core2D.UI.Editor
                 dlg.Filters.Add(new FileDialogFilter() { Name = "Script", Extensions = { "csx", "cs" } });
                 dlg.Filters.Add(new FileDialogFilter() { Name = "All", Extensions = { "*" } });
                 dlg.AllowMultiple = true;
-                var result = await dlg.ShowAsync(_serviceProvider.GetService<MainWindow>());
+                var result = await dlg.ShowAsync(GetWindow());
                 if (result != null)
                 {
                     if (result.All(r => r != null))
@@ -302,7 +304,7 @@ namespace Core2D.UI.Editor
         /// <inheritdoc/>
         public void OnExit()
         {
-            _serviceProvider.GetService<MainWindow>().Close();
+            GetWindow().Close();
         }
 
         /// <inheritdoc/>
@@ -522,7 +524,7 @@ namespace Core2D.UI.Editor
                 dlg.Filters.Add(new FileDialogFilter() { Name = reader.Name, Extensions = { reader.Extension } });
             }
             dlg.Filters.Add(new FileDialogFilter() { Name = "All", Extensions = { "*" } });
-            var result = await dlg.ShowAsync(_serviceProvider.GetService<MainWindow>());
+            var result = await dlg.ShowAsync(GetWindow());
 
             if (result != null)
             {
@@ -554,7 +556,7 @@ namespace Core2D.UI.Editor
                 dlg.Filters.Add(new FileDialogFilter() { Name = "All", Extensions = { "*" } });
                 dlg.InitialFileName = db.Name;
                 dlg.DefaultExtension = editor?.TextFieldWriters.FirstOrDefault()?.Extension;
-                var result = await dlg.ShowAsync(_serviceProvider.GetService<MainWindow>());
+                var result = await dlg.ShowAsync(GetWindow());
                 if (result != null)
                 {
                     string ext = System.IO.Path.GetExtension(result).ToLower().TrimStart('.');
@@ -579,7 +581,7 @@ namespace Core2D.UI.Editor
                     dlg.Filters.Add(new FileDialogFilter() { Name = reader.Name, Extensions = { reader.Extension } });
                 }
                 dlg.Filters.Add(new FileDialogFilter() { Name = "All", Extensions = { "*" } });
-                var result = await dlg.ShowAsync(_serviceProvider.GetService<MainWindow>());
+                var result = await dlg.ShowAsync(GetWindow());
                 if (result != null)
                 {
                     var path = result.FirstOrDefault();
@@ -604,7 +606,7 @@ namespace Core2D.UI.Editor
             {
                 DataContext = _serviceProvider.GetService<IProjectEditor>()
             }
-            .ShowDialog(_serviceProvider.GetService<MainWindow>());
+            .ShowDialog(GetWindow());
         }
 
         /// <inheritdoc/>
@@ -617,61 +619,6 @@ namespace Core2D.UI.Editor
         public void OnZoomReset()
         {
             _serviceProvider.GetService<IProjectEditor>().CanvasPlatform?.ResetZoom?.Invoke();
-        }
-
-        /// <inheritdoc/>
-        public async void OnLoadLayout()
-        {
-            var dlg = new OpenFileDialog() { Title = "Open" };
-            dlg.Filters.Add(new FileDialogFilter() { Name = "Layout", Extensions = { "layout" } });
-            dlg.Filters.Add(new FileDialogFilter() { Name = "All", Extensions = { "*" } });
-            var window = _serviceProvider.GetService<MainWindow>();
-            var result = await dlg.ShowAsync(window);
-            if (result != null)
-            {
-                var path = result.FirstOrDefault();
-                if (path != null)
-                {
-                    var editor = _serviceProvider.GetService<IProjectEditor>();
-                    editor.OnLoadLayout(path);
-
-                    var dockFactory = _serviceProvider.GetService<DM.IFactory>();
-                    dockFactory.InitLayout(editor.Layout);
-                }
-            }
-        }
-
-        /// <inheritdoc/>
-        public async void OnSaveLayout()
-        {
-            var dlg = new SaveFileDialog() { Title = "Save" };
-            dlg.Filters.Add(new FileDialogFilter() { Name = "Layout", Extensions = { "layout" } });
-            dlg.Filters.Add(new FileDialogFilter() { Name = "All", Extensions = { "*" } });
-            dlg.InitialFileName = "Core2D";
-            dlg.DefaultExtension = "layout";
-            var result = await dlg.ShowAsync(_serviceProvider.GetService<MainWindow>());
-            if (result != null)
-            {
-                var editor = _serviceProvider.GetService<IProjectEditor>();
-                editor.OnSaveLayout(result);
-            }
-        }
-
-        /// <inheritdoc/>
-        public void OnResetLayout()
-        {
-            var editor = _serviceProvider.GetService<IProjectEditor>();
-            var dockFactory = _serviceProvider.GetService<DM.IFactory>();
-
-            var activeDockableId = editor.Layout.ActiveDockable.Id;
-            editor.Layout = dockFactory.CreateLayout();
-            dockFactory.InitLayout(editor.Layout);
-
-            var dockable = dockFactory.FindDockable(editor.Layout, (v) => v.Id == activeDockableId);
-            if (dockable != null)
-            {
-                editor.Layout.Navigate(dockable);
-            }
         }
     }
 }

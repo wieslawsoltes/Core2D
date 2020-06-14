@@ -1,5 +1,4 @@
-﻿using System;
-
+﻿
 namespace Core2D.Editor
 {
     /// <summary>
@@ -8,21 +7,65 @@ namespace Core2D.Editor
     public interface IEditorLayoutPlatform
     {
         /// <summary>
-        /// Gets or sets load layout action.
+        /// Gets or sets current layout configuration.
         /// </summary>
-        /// <remarks>Loads layout configuration.</remarks>
-        Action LoadLayout { get; set; }
+        object Layout { get; set; }
 
         /// <summary>
-        /// Gets or sets save layout action.
+        /// Serializes layout configuration.
         /// </summary>
-        /// <remarks>Saves layout configuration.</remarks>
-        Action SaveLayout { get; set; }
+        /// <param name="path">The layout configuration file path.</param>
+        /// <param name="layout">The layout configuration.</param>
+        void SerializeLayout(string path, object layout);
 
         /// <summary>
-        /// Gets or sets reset layout action.
+        /// Deserializes layout configuration.
         /// </summary>
-        /// <remarks>Resets layout configuration.</remarks>
-        Action ResetLayout { get; set; }
+        /// <param name="path">The layout configuration file path.</param>
+        /// <returns>The layout configuration.</returns>
+        object DeserializeLayout(string path);
+
+        /// <summary>
+        /// Navigate to view.
+        /// </summary>
+        /// <param name="view">The view to navigate to.</param>
+        void Navigate(object view);
+
+        /// <summary>
+        /// Saves layout configuration.
+        /// </summary>
+        void SaveLayout();
+
+        /// <summary>
+        /// Applies layout configuration.
+        /// </summary>
+        /// <param name="layout">The layout configuration.</param>
+        void ApplyLayout(object layout);
+
+        /// <summary>
+        /// Removes layout configuration.
+        /// </summary>
+        /// <param name="layout">The layout configuration.</param>
+        void DeleteLayout(object layout);
+
+        /// <summary>
+        /// Resets layout configuration.
+        /// </summary>
+        void ResetLayout();
+
+        /// <summary>
+        /// Manages layout configurations.
+        /// </summary>
+        void ManageLayouts();
+
+        /// <summary>
+        /// Imports layout configuration.
+        /// </summary>
+        void ImportLayout();
+
+        /// <summary>
+        /// Exports layout configuration.
+        /// </summary>
+        void ExportLayout();
     }
 }

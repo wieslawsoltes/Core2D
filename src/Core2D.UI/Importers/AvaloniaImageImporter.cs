@@ -25,6 +25,11 @@ namespace Core2D.UI.Importers
             _serviceProvider = serviceProvider;
         }
 
+        private MainWindow GetWindow()
+        {
+            return _serviceProvider.GetService<MainWindow>();
+        }
+
         /// <inheritdoc/>
         public async Task<string> GetImageKeyAsync()
         {
@@ -32,7 +37,7 @@ namespace Core2D.UI.Importers
             {
                 var dlg = new OpenFileDialog() { Title = "Open" };
                 dlg.Filters.Add(new FileDialogFilter() { Name = "All", Extensions = { "*" } });
-                var result = await dlg.ShowAsync(_serviceProvider.GetService<MainWindow>());
+                var result = await dlg.ShowAsync(GetWindow());
                 if (result != null)
                 {
                     var path = result.FirstOrDefault();
