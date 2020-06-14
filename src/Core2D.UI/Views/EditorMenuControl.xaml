@@ -885,12 +885,11 @@
                     </Style>
                 </MenuItem.Styles>
             </MenuItem>
-            <MenuItem Header="_Reset Layout" Command="{Binding LayoutPlatform.ResetLayout}"/>
             <MenuItem Header="_Delete Layout" Command="{Binding LayoutPlatform.DeleteLayout}" CommandParameter="{Binding LayoutPlatform.Layout.ActiveDockable}"/>
             <Separator/>
+            <MenuItem Header="_Reset Layouts" Command="{Binding LayoutPlatform.ResetLayouts}"/>
             <MenuItem Header="_Import Layouts..." Command="{Binding LayoutPlatform.ImportLayouts}"/>
             <MenuItem Header="_Export Layouts..." Command="{Binding LayoutPlatform.ExportLayouts}"/>
-            <Separator/>
             <MenuItem Header="_Manage Layouts..." Command="{Binding LayoutPlatform.ManageLayouts}"/>
         </MenuItem>
         <MenuItem Header="_Help">

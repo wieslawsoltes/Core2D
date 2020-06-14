@@ -284,7 +284,7 @@ namespace Core2D.UI.Editor
         }
 
         /// <inheritdoc/>
-        public void ResetLayout()
+        public void ResetLayouts()
         {
             if (Layout is DM.IDock currentLayout)
             {

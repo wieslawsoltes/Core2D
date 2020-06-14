@@ -49,9 +49,9 @@ namespace Core2D.Editor
         void DeleteLayout(object layout);
 
         /// <summary>
-        /// Resets layout configuration.
+        /// Resets layout configurations.
         /// </summary>
-        void ResetLayout();
+        void ResetLayouts();
 
         /// <summary>
         /// Manages layout configurations.
