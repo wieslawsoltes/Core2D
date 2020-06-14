@@ -187,9 +187,9 @@ namespace Core2D.UI.Editor
         }
 
         /// <inheritdoc/>
-        public async void ImportLayout()
+        public async void ImportLayouts()
         {
-            var dlg = new OpenFileDialog() { Title = "Open" };
+            var dlg = new OpenFileDialog() { Title = "Import" };
             dlg.Filters.Add(new FileDialogFilter() { Name = "Layout", Extensions = { "layout" } });
             dlg.Filters.Add(new FileDialogFilter() { Name = "All", Extensions = { "*" } });
             var result = await dlg.ShowAsync(GetWindow());
@@ -210,9 +210,9 @@ namespace Core2D.UI.Editor
         }
 
         /// <inheritdoc/>
-        public async void ExportLayout()
+        public async void ExportLayouts()
         {
-            var dlg = new SaveFileDialog() { Title = "Save" };
+            var dlg = new SaveFileDialog() { Title = "Export" };
             dlg.Filters.Add(new FileDialogFilter() { Name = "Layout", Extensions = { "layout" } });
             dlg.Filters.Add(new FileDialogFilter() { Name = "All", Extensions = { "*" } });
             dlg.InitialFileName = "Core2D";

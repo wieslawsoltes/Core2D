@@ -59,13 +59,13 @@ namespace Core2D.Editor
         void ManageLayouts();
 
         /// <summary>
-        /// Imports layout configuration.
+        /// Imports layout configurations.
         /// </summary>
-        void ImportLayout();
+        void ImportLayouts();
 
         /// <summary>
-        /// Exports layout configuration.
+        /// Exports layout configurations.
         /// </summary>
-        void ExportLayout();
+        void ExportLayouts();
     }
 }

@@ -888,8 +888,8 @@
             <MenuItem Header="_Reset Layout" Command="{Binding LayoutPlatform.ResetLayout}"/>
             <MenuItem Header="_Delete Layout" Command="{Binding LayoutPlatform.DeleteLayout}" CommandParameter="{Binding LayoutPlatform.Layout.ActiveDockable}"/>
             <Separator/>
-            <MenuItem Header="_Import Layout..." Command="{Binding LayoutPlatform.ImportLayout}"/>
-            <MenuItem Header="_Export Layout..." Command="{Binding LayoutPlatform.ExportLayout}"/>
+            <MenuItem Header="_Import Layouts..." Command="{Binding LayoutPlatform.ImportLayouts}"/>
+            <MenuItem Header="_Export Layouts..." Command="{Binding LayoutPlatform.ExportLayouts}"/>
             <Separator/>
             <MenuItem Header="_Manage Layouts..." Command="{Binding LayoutPlatform.ManageLayouts}"/>
         </MenuItem>
