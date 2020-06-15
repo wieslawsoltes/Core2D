@@ -30,15 +30,17 @@
         </TabItem>
         <TabItem Header="Options" Classes="property">
             <ScrollViewer>
-                <Grid RowDefinitions="Auto,Auto,Auto,Auto" ColumnDefinitions="Auto,*">
+                <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto" ColumnDefinitions="Auto,*">
                     <TextBlock Text="PanButton:" Classes="left" Grid.Row="0" Grid.Column="0"/>
                     <ComboBox Items="{x:Static paz:ZoomBorder.ButtonNames}" SelectedItem="{Binding PanButton, Mode=TwoWay}" Classes="default" Grid.Row="0" Grid.Column="1"/>
                     <TextBlock Text="Stretch:" Classes="left" Grid.Row="1" Grid.Column="0"/>
                     <ComboBox Items="{x:Static paz:ZoomBorder.StretchModes}" SelectedItem="{Binding Stretch, Mode=TwoWay}" Classes="default" Grid.Row="1" Grid.Column="1"/>
                     <TextBlock Text="ZoomSpeed:" Classes="left" Grid.Row="2" Grid.Column="0"/>
                     <TextBox Text="{Binding ZoomSpeed, Mode=TwoWay}" Classes="left" Grid.Row="2" Grid.Column="1"/>
-                    <TextBlock Text="EnableInput:" Classes="left" Grid.Row="3" Grid.Column="0"/>
-                    <CheckBox IsChecked="{Binding EnableInput}" Content="" Classes="default" Grid.Row="3" Grid.Column="1"/>
+                    <TextBlock Text="EnablePan:" Classes="left" Grid.Row="3" Grid.Column="0"/>
+                    <CheckBox IsChecked="{Binding EnablePan}" Content="" Classes="default" Grid.Row="3" Grid.Column="1"/>
+                    <TextBlock Text="EnableZoom:" Classes="left" Grid.Row="4" Grid.Column="0"/>
+                    <CheckBox IsChecked="{Binding EnableZoom}" Content="" Classes="default" Grid.Row="4" Grid.Column="1"/>
                 </Grid>
             </ScrollViewer>
         </TabItem>

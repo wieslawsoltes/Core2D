@@ -50,8 +50,8 @@
     <PackageReference Include="Avalonia.Xaml.Interactions" Version="0.9.999-build*" />
     <PackageReference Include="Avalonia.Xaml.Interactions.Custom" Version="0.9.999-build*" />
     <PackageReference Include="Avalonia.ThemeManager" Version="0.9.999-build*" />
-    <PackageReference Include="Avalonia.MatrixExtensions" Version="2.3.999-build*" />
-    <PackageReference Include="Avalonia.Controls.PanAndZoom" Version="2.3.999-build*" />
+    <PackageReference Include="Avalonia.MatrixExtensions" Version="3.0.999-build*" />
+    <PackageReference Include="Avalonia.Controls.PanAndZoom" Version="3.0.999-build*" />
     <PackageReference Include="reactiveui" Version="11.4.1" />
   </ItemGroup>
   
