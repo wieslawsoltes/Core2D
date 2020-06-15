@@ -85,9 +85,9 @@
                         <TextBlock Text="{Binding Name}" Classes="tree">
                             <TextBlock.ContextMenu>
                                 <ContextMenu Classes="default">
-                                    <MenuItem Header="Te_mplate" Items="{Binding #root.Tag.Project.Templates}">
+                                    <MenuItem Header="Te_mplate" Classes="template" Items="{Binding #root.Tag.Project.Templates}">
                                         <MenuItem.Styles>
-                                            <Style Selector="MenuItem">
+                                            <Style Selector="MenuItem.template > MenuItem">
                                                 <Setter Property="Header" Value="{Binding Name}"/>
                                                 <Setter Property="Command" Value="{Binding $parent[Window].DataContext.OnApplyTemplate}"/>
                                                 <Setter Property="CommandParameter" Value="{Binding}"/>
