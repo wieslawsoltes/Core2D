@@ -241,15 +241,15 @@ namespace Core2D.UI.Editor
 
                     if (viewModel.Result == true)
                     {
-                        var clone = (DM.IDock)activeLayout.Clone();
-                        if (clone != null)
+                        var cloneLayout = (DM.IDock)activeLayout.Clone();
+                        if (cloneLayout != null)
                         {
-                            clone.Title = viewModel.Title;
+                            cloneLayout.Title = viewModel.Title;
                             activeLayout.Close();
-                            rootLayout.Factory?.AddDockable(rootLayout, clone);
-                            rootLayout.Navigate(clone);
-                            rootLayout.Factory?.SetFocusedDockable(rootLayout, clone);
-                            rootLayout.DefaultDockable = clone;
+                            rootLayout.Factory?.AddDockable(rootLayout, cloneLayout);
+                            rootLayout.Navigate(cloneLayout);
+                            rootLayout.Factory?.SetFocusedDockable(rootLayout, cloneLayout);
+                            // TODO: rootLayout.DefaultDockable = cloneLayout;
                         }
                     }
                 }
@@ -266,7 +266,7 @@ namespace Core2D.UI.Editor
                     active.Close();
                     rootLayout.Navigate(dockLayout);
                     rootLayout.Factory?.SetFocusedDockable(rootLayout, dockLayout);
-                    rootLayout.DefaultDockable = dockLayout;
+                    // TODO: rootLayout.DefaultDockable = dockLayout;
                 }
             }
         }
