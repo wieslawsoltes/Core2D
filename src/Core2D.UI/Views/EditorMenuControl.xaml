@@ -115,9 +115,9 @@
                 <Separator/>
                 <MenuItem Header="_AutoFit" Command="{Binding Platform.OnZoomAutoFit}" InputGesture="X"/>
             </MenuItem>
-            <MenuItem Header="_Theme" DataContext="{x:Static app:App.Selector}" Items="{Binding Themes}">
+            <MenuItem Header="_Theme" Classes="theme" DataContext="{x:Static app:App.Selector}" Items="{Binding Themes}">
                 <MenuItem.Styles>
-                    <Style Selector="MenuItem">
+                    <Style Selector="MenuItem.theme > MenuItem">
                         <Setter Property="Header" Value="{Binding Name}"/>
                         <Setter Property="Command" Value="{Binding ApplyTheme}"/>
                         <Setter Property="CommandParameter" Value="{Binding}"/>
@@ -211,9 +211,9 @@
             <Separator/>
             <MenuItem Header="E_xport Page" Command="{Binding Platform.OnExport}" CommandParameter="{Binding Project.CurrentContainer}"/>
             <Separator/>
-            <MenuItem Header="Te_mplate" Items="{Binding Project.Templates}">
+            <MenuItem Header="Te_mplate" Classes="template" Items="{Binding Project.Templates}">
                 <MenuItem.Styles>
-                    <Style Selector="MenuItem">
+                    <Style Selector="MenuItem.template > MenuItem">
                         <Setter Property="Header" Value="{Binding Name}"/>
                         <Setter Property="Command" Value="{Binding $parent[UserControl].DataContext.OnApplyTemplate}"/>
                         <Setter Property="CommandParameter" Value="{Binding}"/>

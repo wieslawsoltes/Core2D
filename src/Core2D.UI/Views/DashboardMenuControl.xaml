@@ -45,9 +45,9 @@
             <MenuItem Header="E_xit" Command="{Binding Platform.OnExit}" InputGesture="Alt+F4"/>
         </MenuItem>
         <MenuItem Header="_View">
-            <MenuItem Header="_Theme" DataContext="{x:Static app:App.Selector}" Items="{Binding Themes}">
+            <MenuItem Header="_Theme" Classes="theme" DataContext="{x:Static app:App.Selector}" Items="{Binding Themes}">
                 <MenuItem.Styles>
-                    <Style Selector="MenuItem">
+                    <Style Selector="MenuItem.theme > MenuItem">
                         <Setter Property="Header" Value="{Binding Name}"/>
                         <Setter Property="Command" Value="{Binding ApplyTheme}"/>
                         <Setter Property="CommandParameter" Value="{Binding}"/>
