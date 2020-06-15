@@ -24,7 +24,6 @@ using Core2D.TextFieldReader.CsvHelper;
 using Core2D.TextFieldReader.OpenXml;
 using Core2D.TextFieldWriter.CsvHelper;
 using Core2D.TextFieldWriter.OpenXml;
-using Core2D.UI.Utilities;
 using Core2D.UI.Editor;
 using Core2D.UI.Importers;
 using Core2D.UI.Dock.Factories;
