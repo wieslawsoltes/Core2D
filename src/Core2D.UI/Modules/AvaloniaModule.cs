@@ -1,10 +1,8 @@
-﻿using Autofac;
-using Core2D;
-using Core2D.Editor;
-using Core2D.ServiceProvider.Autofac;
-using System;
+﻿using System;
 using System.Reflection;
+using Autofac;
 using Core2D.Data;
+using Core2D.Editor;
 using Core2D.Editor.Bounds;
 using Core2D.Editor.Factories;
 using Core2D.FileSystem.DotNet;
@@ -16,24 +14,25 @@ using Core2D.FileWriter.SkiaSharpPdf;
 using Core2D.FileWriter.SkiaSharpPng;
 using Core2D.FileWriter.SkiaSharpSvg;
 using Core2D.FileWriter.SkiaSharpWebp;
+using Core2D.FileWriter.Svg;
+using Core2D.FileWriter.Xaml;
 using Core2D.Log.Trace;
 using Core2D.Renderer;
+using Core2D.Renderer.SkiaSharp;
 using Core2D.ScriptRunner.Roslyn;
 using Core2D.Serializer.Newtonsoft;
+using Core2D.ServiceProvider.Autofac;
 using Core2D.TextFieldReader.CsvHelper;
 using Core2D.TextFieldReader.OpenXml;
 using Core2D.TextFieldWriter.CsvHelper;
 using Core2D.TextFieldWriter.OpenXml;
-using Core2D.UI.Editor;
-using Core2D.UI.Importers;
 using Core2D.UI.Dock.Factories;
 using Core2D.UI.Dock.Windows;
+using Core2D.UI.Editor;
+using Core2D.UI.Importers;
 using Core2D.UI.Renderer;
 using Core2D.UI.Views;
 using DM = Dock.Model;
-using Core2D.Renderer.SkiaSharp;
-using Core2D.FileWriter.Svg;
-using Core2D.FileWriter.Xaml;
 
 namespace Core2D.UI.Modules
 {
