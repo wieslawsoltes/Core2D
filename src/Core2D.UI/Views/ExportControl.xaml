@@ -1,11 +1,22 @@
 ﻿<UserControl x:Class="Core2D.UI.Views.ExportControl"
              xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
              xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
              xmlns:Interfaces="clr-namespace:Core2D;assembly=Core2D"
+             xmlns:Dxf="clr-namespace:Core2D.FileWriter.Dxf;assembly=Core2D"
+             xmlns:Emf="clr-namespace:Core2D.FileWriter.Emf;assembly=Core2D"
+             xmlns:PdfSharp="clr-namespace:Core2D.FileWriter.PdfSharp;assembly=Core2D"
+             xmlns:SkiaSharpJpeg="clr-namespace:Core2D.FileWriter.SkiaSharpJpeg;assembly=Core2D"
+             xmlns:SkiaSharpPdf="clr-namespace:Core2D.FileWriter.SkiaSharpPdf;assembly=Core2D"
+             xmlns:SkiaSharpPng="clr-namespace:Core2D.FileWriter.SkiaSharpPng;assembly=Core2D"
+             xmlns:SkiaSharpSvg="clr-namespace:Core2D.FileWriter.SkiaSharpSvg;assembly=Core2D"
+             xmlns:SkiaSharpWebp="clr-namespace:Core2D.FileWriter.SkiaSharpWebp;assembly=Core2D"
+             xmlns:Svg="clr-namespace:Core2D.FileWriter.Svg;assembly=Core2D"
+             xmlns:Xaml="clr-namespace:Core2D.FileWriter.Xaml;assembly=Core2D"
+             xmlns:settingsFileWriters="clr-namespace:Core2D.UI.Views.Settings.FileWriters;assembly=Core2D.UI"
              xmlns:Designer="clr-namespace:Core2D.UI.Designer;assembly=Core2D.UI"
              mc:Ignorable="d"
              d:DataContext="{x:Static Designer:DesignerContext.Editor}"
@@ -21,6 +32,40 @@
         <GridSplitter Classes="vertical" Grid.Column="1" Grid.Row="0" Width="6"/>
         <Border Classes="writers" Grid.Column="2" Grid.Row="0" Margin="0,6,6,6">
             <!-- TODO: -->
+            <ContentControl Content="{Binding #fileWriters.SelectedItem}">
+                <ContentControl.DataTemplates>
+                    <DataTemplate DataType="Dxf:DxfWriter">
+                        <settingsFileWriters:DxfSettings/>
+                    </DataTemplate>
+                    <DataTemplate DataType="Emf:EmfWriter">
+                        <settingsFileWriters:EmfSettings/>
+                    </DataTemplate>
+                    <DataTemplate DataType="PdfSharp:PdfSharpWriter">
+                        <settingsFileWriters:PdfSharpSettings/>
+                    </DataTemplate>
+                    <DataTemplate DataType="SkiaSharpJpeg:JpegSkiaSharpWriter">
+                        <settingsFileWriters:JpegSkiaSharpSettings/>
+                    </DataTemplate>
+                    <DataTemplate DataType="SkiaSharpPdf:PdfSkiaSharpWriter">
+                        <settingsFileWriters:PdfSkiaSharpSettings/>
+                    </DataTemplate>
+                    <DataTemplate DataType="SkiaSharpPng:PngSkiaSharpWriter">
+                        <settingsFileWriters:PngSkiaSharpSettings/>
+                    </DataTemplate>
+                    <DataTemplate DataType="SkiaSharpSvg:SvgSkiaSharpWriter">
+                        <settingsFileWriters:SvgSkiaSharpSettings/>
+                    </DataTemplate>
+                    <DataTemplate DataType="SkiaSharpWebp:WebpSkiaSharpWriter">
+                        <settingsFileWriters:WebpSkiaSharpSettings/>
+                    </DataTemplate>
+                    <DataTemplate DataType="Svg:SvgSvgWriter">
+                        <settingsFileWriters:SvgSvgSettings/>
+                    </DataTemplate>
+                    <DataTemplate DataType="Xaml:DrawingGroupXamlWriter">
+                        <settingsFileWriters:DrawingGroupXamlSettings/>
+                    </DataTemplate>
+                </ContentControl.DataTemplates>
+            </ContentControl>
         </Border>
     </Grid>
 </UserControl>
