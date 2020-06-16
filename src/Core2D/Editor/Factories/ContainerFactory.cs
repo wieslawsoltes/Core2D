@@ -59,6 +59,7 @@ namespace Core2D.Editor.Factories
             grid.CellWidth = 30.0;
             grid.CellHeight = 30.0;
             grid.State.Flags &= ~ShapeStateFlags.Printable;
+            grid.State.Flags |= ShapeStateFlags.Thickness;
             builder.Add(grid);
             layer.Shapes = builder.ToImmutable();
 
