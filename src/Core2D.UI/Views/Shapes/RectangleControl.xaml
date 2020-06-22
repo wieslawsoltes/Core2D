@@ -13,13 +13,13 @@
         <TabControl>
             <TabItem Header="Rectangle" Padding="0,0,0,0">
                 <StackPanel>
-                    <TextBlock Text="Name" Margin="0,9,0,9"/>
+                    <TextBlock Text="Name" Margin="{DynamicResource TextControlThemePadding}"/>
                     <TextBox Text="{Binding Name, Mode=TwoWay}"/>
-                    <TextBlock Text="IsStroked" Margin="0,9,0,9"/>
+                    <TextBlock Text="IsStroked" Margin="{DynamicResource TextControlThemePadding}"/>
                     <CheckBox IsChecked="{Binding IsStroked, Mode=TwoWay}"/>
-                    <TextBlock Text="IsFilled" Margin="0,9,0,9"/>
+                    <TextBlock Text="IsFilled" Margin="{DynamicResource TextControlThemePadding}"/>
                     <CheckBox IsChecked="{Binding IsFilled, Mode=TwoWay}"/>
-                    <TextBlock Text="Text" Margin="0,9,0,9"/>
+                    <TextBlock Text="Text" Margin="{DynamicResource TextControlThemePadding}"/>
                     <TextBox Text="{Binding Text, Mode=TwoWay}" VerticalAlignment="Stretch" AcceptsReturn="True"/>
                 </StackPanel>
             </TabItem>
