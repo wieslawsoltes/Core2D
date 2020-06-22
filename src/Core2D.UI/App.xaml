@@ -33,8 +33,10 @@
              xmlns:views="clr-namespace:Core2D.UI.Views;assembly=Core2D.UI">
     <Application.Styles>
         <!-- Theme -->
-        <StyleInclude Source="avares://Avalonia.Themes.Default/DefaultTheme.xaml"/>
-        <StyleInclude Source="avares://Avalonia.Themes.Default/Accents/BaseLight.xaml"/>
+        <!--<StyleInclude Source="avares://Avalonia.Themes.Default/DefaultTheme.xaml"/>-->
+        <!--<StyleInclude Source="avares://Avalonia.Themes.Default/Accents/BaseLight.xaml"/>-->
+        <StyleInclude Source="avares://Avalonia.Themes.Fluent/Accents/FluentLight.xaml"/>
+        <!--<StyleInclude Source="avares://Avalonia.Themes.Fluent/Accents/FluentDark.xaml"/>-->
         <!-- DataGrid -->
         <StyleInclude Source="avares://Avalonia.Controls.DataGrid/Themes/Default.xaml"/>
         <!-- Dock -->
@@ -43,7 +45,7 @@
         <!-- Icons -->
         <StyleInclude Source="avares://Core2D.UI/Icons.xaml"/>
         <!-- Default -->
-        <StyleInclude Source="avares://Core2D.UI/Default.xaml"/>
+        <!--<StyleInclude Source="avares://Core2D.UI/Default.xaml"/>-->
     </Application.Styles>
     <Application.Resources>
         <!-- Brushes -->
