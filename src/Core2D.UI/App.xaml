@@ -46,6 +46,7 @@
         <StyleInclude Source="avares://Core2D.UI/Icons.xaml"/>
         <!-- Default -->
         <!--<StyleInclude Source="avares://Core2D.UI/Default.xaml"/>-->
+        <StyleInclude Source="avares://Core2D.UI/Compact.xaml"/>
     </Application.Styles>
     <Application.Resources>
         <!-- Brushes -->
