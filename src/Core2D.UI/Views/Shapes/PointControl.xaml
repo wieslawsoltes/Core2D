@@ -9,7 +9,23 @@
              mc:Ignorable="d"
              d:DataContext="{x:Static Designer:DesignerContext.Point}"
              d:DesignWidth="250" d:DesignHeight="400">
-    <TabControl Classes="default">
+    <!--<StackPanel>
+        <TabControl>
+            <TabItem Header="Point" Padding="0,0,0,0">-->
+                <StackPanel>
+                    <TextBlock Text="Name" Margin="0,9,0,9"/>
+                    <TextBox Text="{Binding Name, Mode=TwoWay}"/>
+                    <TextBlock Text="X" Margin="0,9,0,9"/>
+                    <TextBox Text="{Binding X, Mode=TwoWay}"/>
+                    <TextBlock Text="Y" Margin="0,9,0,9"/>
+                    <TextBox Text="{Binding Y, Mode=TwoWay}" Classes="left" Grid.Row="2" Grid.Column="1"/>
+                    <TextBlock Text="Alignment" Margin="0,9,0,9"/>
+                    <ComboBox Items="{x:Static Editor:Enums.PointAlignmentValues}" SelectedItem="{Binding Alignment, Mode=TwoWay}"/>
+                </StackPanel>
+            <!--</TabItem>
+        </TabControl>
+    </StackPanel>-->
+    <!--<TabControl Classes="default">
         <TabItem Header="Point" Classes="property">
             <ScrollViewer>
                 <Grid RowDefinitions="Auto,Auto,Auto,Auto" ColumnDefinitions="Auto,*">
@@ -30,5 +46,5 @@
         <TabItem Header="Data" Classes="property">
             <ContentControl Content="{Binding Data}"/>
         </TabItem>
-    </TabControl>
+    </TabControl>-->
 </UserControl>
