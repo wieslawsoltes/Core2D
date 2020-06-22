@@ -5,11 +5,60 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:converters="clr-namespace:Core2D.UI.Converters;assembly=Core2D.UI"
              xmlns:style="clr-namespace:Core2D.UI.Views.Style;assembly=Core2D.UI"
+             xmlns:Editor="clr-namespace:Core2D.Editor;assembly=Core2D"
              xmlns:Designer="clr-namespace:Core2D.UI.Designer;assembly=Core2D.UI"
              mc:Ignorable="d"
              d:DataContext="{x:Static Designer:DesignerContext.Style}"
              d:DesignWidth="250" d:DesignHeight="400">
-    <TabControl Classes="default">
+    <StackPanel>
+        <TabControl>
+            <TabItem Header="Style" Padding="0,0,0,0">
+                <StackPanel>
+                    <TextBlock Text="Name" Margin="0,9,0,9"/>
+                    <TextBox Text="{Binding Name, Mode=TwoWay}"/>
+                    <TextBlock Text="Thickness" Margin="0,9,0,9"/>
+                    <TextBox Text="{Binding Thickness, Mode=TwoWay}"/>
+                    <TextBlock Text="Line Cap" Margin="0,9,0,9"/>
+                    <ComboBox Items="{x:Static Editor:Enums.LineCapValues}" SelectedItem="{Binding LineCap, Mode=TwoWay}"/>
+                    <TextBlock Text="Dashes" Margin="0,9,0,9"/>
+                    <TextBox Text="{Binding Dashes, Mode=TwoWay}"/>
+                    <TextBlock Text="Dash Offset" Margin="0,9,0,9"/>
+                    <TextBox Text="{Binding DashOffset, Mode=TwoWay}"/>
+                </StackPanel>
+            </TabItem>
+        </TabControl>
+        <TabControl>
+            <TabItem Header="Stroke" Padding="0,0,0,0">
+                <style:ArgbColorControl DataContext="{Binding Stroke}"/>
+            </TabItem>
+        </TabControl>
+        <TabControl>
+            <TabItem Header="Fill" Padding="0,0,0,0">
+                <style:ArgbColorControl DataContext="{Binding Fill}"/>
+            </TabItem>
+        </TabControl>
+        <TabControl>
+            <TabItem Header="Text" Padding="0,0,0,0">
+                <style:TextStyleControl DataContext="{Binding TextStyle}"/>
+            </TabItem>
+        </TabControl>
+        <!--<TabControl>
+            <TabItem Header="Line" Padding="0,0,0,0">
+                <style:LineStyleControl DataContext="{Binding LineStyle}"/>
+            </TabItem>
+        </TabControl>
+        <TabControl>
+            <TabItem Header="Start Arrow" Padding="0,0,0,0">
+                <style:ArrowStyleControl DataContext="{Binding StartArrowStyle}"/>
+            </TabItem>
+        </TabControl>
+        <TabControl>
+            <TabItem Header="End Arrow" Padding="0,0,0,0">
+                <style:ArrowStyleControl DataContext="{Binding EndArrowStyle}"/>
+            </TabItem>
+        </TabControl>-->
+    </StackPanel>
+    <!--<TabControl Classes="default">
         <TabItem Header="Style" Classes="property">
             <style:StyleControl/>
         </TabItem>
@@ -35,5 +84,5 @@
                 </TabItem>
             </TabControl>
         </TabItem>
-    </TabControl>
+    </TabControl>-->
 </UserControl>
