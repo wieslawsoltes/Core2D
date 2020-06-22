@@ -13,13 +13,13 @@
         <TabControl>
             <TabItem Header="Point" Padding="0,0,0,0">-->
                 <StackPanel>
-                    <TextBlock Text="Name" Margin="0,9,0,9"/>
+                    <TextBlock Text="Name" Margin="{DynamicResource TextControlThemePadding}"/>
                     <TextBox Text="{Binding Name, Mode=TwoWay}"/>
-                    <TextBlock Text="X" Margin="0,9,0,9"/>
+                    <TextBlock Text="X" Margin="{DynamicResource TextControlThemePadding}"/>
                     <TextBox Text="{Binding X, Mode=TwoWay}"/>
-                    <TextBlock Text="Y" Margin="0,9,0,9"/>
+                    <TextBlock Text="Y" Margin="{DynamicResource TextControlThemePadding}"/>
                     <TextBox Text="{Binding Y, Mode=TwoWay}" Classes="left" Grid.Row="2" Grid.Column="1"/>
-                    <TextBlock Text="Alignment" Margin="0,9,0,9"/>
+                    <TextBlock Text="Alignment" Margin="{DynamicResource TextControlThemePadding}"/>
                     <ComboBox Items="{x:Static Editor:Enums.PointAlignmentValues}" SelectedItem="{Binding Alignment, Mode=TwoWay}"/>
                 </StackPanel>
             <!--</TabItem>
