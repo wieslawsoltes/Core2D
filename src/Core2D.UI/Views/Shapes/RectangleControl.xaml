@@ -4,11 +4,38 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:converters="clr-namespace:Core2D.UI.Converters;assembly=Core2D.UI"
+             xmlns:shapes="clr-namespace:Core2D.UI.Views.Shapes;assembly=Core2D.UI"
              xmlns:Designer="clr-namespace:Core2D.UI.Designer;assembly=Core2D.UI"
              mc:Ignorable="d"
              d:DataContext="{x:Static Designer:DesignerContext.Rectangle}"
              d:DesignWidth="250" d:DesignHeight="400">
-    <TabControl Classes="default">
+    <StackPanel>
+        <TabControl>
+            <TabItem Header="Rectangle" Padding="0,0,0,0">
+                <StackPanel>
+                    <TextBlock Text="Name" Margin="0,9,0,9"/>
+                    <TextBox Text="{Binding Name, Mode=TwoWay}"/>
+                    <TextBlock Text="IsStroked" Margin="0,9,0,9"/>
+                    <CheckBox IsChecked="{Binding IsStroked, Mode=TwoWay}"/>
+                    <TextBlock Text="IsFilled" Margin="0,9,0,9"/>
+                    <CheckBox IsChecked="{Binding IsFilled, Mode=TwoWay}"/>
+                    <TextBlock Text="Text" Margin="0,9,0,9"/>
+                    <TextBox Text="{Binding Text, Mode=TwoWay}" VerticalAlignment="Stretch" AcceptsReturn="True"/>
+                </StackPanel>
+            </TabItem>
+        </TabControl>
+        <TabControl>
+            <TabItem Header="TopLeft" Padding="0,0,0,0">
+                <shapes:PointControl DataContext="{Binding TopLeft}"/>
+            </TabItem>
+        </TabControl>
+        <TabControl>
+            <TabItem Header="BottomRight" Padding="0,0,0,0">
+                <shapes:PointControl DataContext="{Binding BottomRight}"/>
+            </TabItem>
+        </TabControl>
+    </StackPanel>
+    <!--<TabControl Classes="default">
         <TabItem Header="Rectangle" Classes="property">
             <ScrollViewer>
                 <Grid RowDefinitions="Auto,Auto,Auto,*" ColumnDefinitions="Auto,*">
@@ -58,5 +85,5 @@
         <TabItem Header="Style" Classes="property">
             <ContentControl Content="{Binding Style}"/>
         </TabItem>
-    </TabControl>
+    </TabControl>-->
 </UserControl>
