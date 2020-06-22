@@ -12,7 +12,7 @@
         <converters:ArgbColorToBrushMultiConverter x:Key="ArgbColorToBrushMultiConverter"/>
     </UserControl.Resources>
     <StackPanel>
-        <Grid Height="34" Margin="0,9,0,0">
+        <Grid Height="34" Margin="{DynamicResource TextControlThemePadding}">
             <Border BorderThickness="0" CornerRadius="3" Background="{DynamicResource ColorCheckerBoard}"/>
             <Border BorderThickness="0" CornerRadius="3">
                 <Border.Background>
@@ -25,16 +25,16 @@
                 </Border.Background>
             </Border>
         </Grid>
-        <TextBlock Text="Red" Margin="0,9,0,9"/>
+        <TextBlock Text="Red" Margin="{DynamicResource TextControlThemePadding}"/>
         <TextBox Text="{Binding R, Mode=TwoWay}"/>
         <Slider Classes="slider" Value="{Binding R}" Minimum="0" Maximum="255" TickFrequency="1"/>
-        <TextBlock Text="Green" Margin="0,9,0,9"/>
+        <TextBlock Text="Green" Margin="{DynamicResource TextControlThemePadding}"/>
         <TextBox Text="{Binding G, Mode=TwoWay}"/>
         <Slider Classes="slider" Value="{Binding G}" Minimum="0" Maximum="255" TickFrequency="1"/>
-        <TextBlock Text="Blue" Margin="0,9,0,9"/>
+        <TextBlock Text="Blue" Margin="{DynamicResource TextControlThemePadding}"/>
         <TextBox Text="{Binding B, Mode=TwoWay}"/>
         <Slider Classes="slider" Value="{Binding B}" Minimum="0" Maximum="255" TickFrequency="1"/>
-        <TextBlock Text="Alpha" Margin="0,9,0,9"/>
+        <TextBlock Text="Alpha" Margin="{DynamicResource TextControlThemePadding}"/>
         <TextBox Text="{Binding A, Mode=TwoWay}"/>
         <Slider Classes="slider" Value="{Binding A}" Minimum="0" Maximum="255" TickFrequency="1"/>
     </StackPanel>
