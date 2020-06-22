@@ -9,7 +9,23 @@
              mc:Ignorable="d"
              d:DataContext="{x:Static Designer:DesignerContext.TextStyle}"
              d:DesignWidth="250" d:DesignHeight="400">
-    <ScrollViewer>
+    <StackPanel>
+        <TextBlock Text="Name"/>
+        <TextBox Text="{Binding Name, Mode=TwoWay}"/>
+        <TextBlock Text="FontName"/>
+        <TextBox Text="{Binding FontName, Mode=TwoWay}"/>
+        <TextBlock Text="FontFile"/>
+        <TextBox Text="{Binding FontFile, Mode=TwoWay}"/>
+        <TextBlock Text="FontSize"/>
+        <TextBox Text="{Binding FontSize, Mode=TwoWay}"/>
+        <TextBlock Text="FontStyle"/>
+        <ContentControl Content="{Binding FontStyle}"/>
+        <TextBlock Text="HAlignment"/>
+        <ComboBox Items="{x:Static Editor:Enums.TextHAlignmentValues}" SelectedItem="{Binding TextHAlignment, Mode=TwoWay}"/>
+        <TextBlock Text="VAlignment"/>
+        <ComboBox Items="{x:Static Editor:Enums.TextVAlignmentValues}" SelectedItem="{Binding TextVAlignment, Mode=TwoWay}"/>
+    </StackPanel>
+    <!--<ScrollViewer>
         <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto" ColumnDefinitions="Auto,*">
             <TextBlock Text="Name" Classes="left" Grid.Row="0" Grid.Column="0"/>
             <TextBox Text="{Binding Name, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
@@ -26,5 +42,5 @@
             <TextBlock Text="VAlignment" Classes="left" Grid.Row="6" Grid.Column="0"/>
             <ComboBox Items="{x:Static Editor:Enums.TextVAlignmentValues}" SelectedItem="{Binding TextVAlignment, Mode=TwoWay}" Classes="default" Grid.Row="6" Grid.Column="1"/>
         </Grid>
-    </ScrollViewer>
+    </ScrollViewer>-->
 </UserControl>
