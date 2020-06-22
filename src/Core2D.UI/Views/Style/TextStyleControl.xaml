@@ -10,19 +10,19 @@
              d:DataContext="{x:Static Designer:DesignerContext.TextStyle}"
              d:DesignWidth="250" d:DesignHeight="400">
     <StackPanel>
-        <TextBlock Text="Name"/>
+        <TextBlock Text="Name" Margin="{DynamicResource TextControlThemePadding}"/>
         <TextBox Text="{Binding Name, Mode=TwoWay}"/>
-        <TextBlock Text="FontName"/>
+        <TextBlock Text="FontName" Margin="{DynamicResource TextControlThemePadding}"/>
         <TextBox Text="{Binding FontName, Mode=TwoWay}"/>
-        <TextBlock Text="FontFile"/>
+        <TextBlock Text="FontFile" Margin="{DynamicResource TextControlThemePadding}"/>
         <TextBox Text="{Binding FontFile, Mode=TwoWay}"/>
-        <TextBlock Text="FontSize"/>
+        <TextBlock Text="FontSize" Margin="{DynamicResource TextControlThemePadding}"/>
         <TextBox Text="{Binding FontSize, Mode=TwoWay}"/>
-        <TextBlock Text="FontStyle"/>
+        <TextBlock Text="FontStyle" Margin="{DynamicResource TextControlThemePadding}"/>
         <ContentControl Content="{Binding FontStyle}"/>
-        <TextBlock Text="HAlignment"/>
+        <TextBlock Text="HAlignment" Margin="{DynamicResource TextControlThemePadding}"/>
         <ComboBox Items="{x:Static Editor:Enums.TextHAlignmentValues}" SelectedItem="{Binding TextHAlignment, Mode=TwoWay}"/>
-        <TextBlock Text="VAlignment"/>
+        <TextBlock Text="VAlignment" Margin="{DynamicResource TextControlThemePadding}"/>
         <ComboBox Items="{x:Static Editor:Enums.TextVAlignmentValues}" SelectedItem="{Binding TextVAlignment, Mode=TwoWay}"/>
     </StackPanel>
     <!--<ScrollViewer>
