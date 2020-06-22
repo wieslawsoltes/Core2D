@@ -18,7 +18,7 @@ namespace Core2D.UI.Views
             this.AttachDevTools();
             //VisualRoot.Renderer.DrawDirtyRects = true;
             //VisualRoot.Renderer.DrawFps = true;
-            App.Selector.EnableThemes(this);
+            //App.Selector.EnableThemes(this);
         }
 
         /// <summary>
