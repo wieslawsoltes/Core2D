@@ -9,6 +9,8 @@
              xmlns:idc="clr-namespace:Dock.Avalonia.Controls;assembly=Dock.Avalonia"
              xmlns:handlers="clr-namespace:Core2D.UI.DragAndDrop.Handlers;assembly=Core2D.UI"
              xmlns:converters="clr-namespace:Core2D.UI.Converters;assembly=Core2D.UI"
+             xmlns:views="clr-namespace:Core2D.UI.Views;assembly=Core2D.UI"
+             xmlns:containers="clr-namespace:Core2D.UI.Views.Containers;assembly=Core2D.UI"
              xmlns:Views="clr-namespace:Core2D.UI.Dock.Views;assembly=Core2D.UI"
              xmlns:Dock="clr-namespace:Dock.Model;assembly=Dock.Model"
              UseLayoutRounding="True"
@@ -26,5 +28,49 @@
         <KeyBinding Command="{Binding Platform.OnExport}" Gesture="Ctrl+E"/>
         <KeyBinding Command="{Binding Platform.OnExit}" Gesture="Alt+F4"/>
     </UserControl.KeyBindings>
-    <idc:DockControl Layout="{Binding LayoutPlatform.Layout}"/>
+    <!--<idc:DockControl Layout="{Binding LayoutPlatform.Layout}"/>-->
+    <Grid ColumnDefinitions="220,6,*,6,250" RowDefinitions="Auto,*,Auto">
+        <views:EditorMenuControl Grid.Column="0" Grid.ColumnSpan="5" Grid.Row="0"/>
+        <Grid ColumnDefinitions="*" RowDefinitions="50*,6,50*" Grid.Column="0" Grid.Row="1">
+            <containers:ProjectControl DataContext="{Binding Project}" Grid.Column="0" Grid.Row="0"/>
+            <GridSplitter ResizeDirection="Rows" ResizeBehavior="PreviousAndNext" Background="Transparent" Height="6" Grid.Column="0" Grid.Row="1"/>
+            <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Grid.Column="0" Grid.Row="2">
+                <ItemsRepeater Items="{Binding PageState.SelectedShapes}">
+                    <ItemsRepeater.Layout>
+                        <StackLayout Orientation="Vertical"/>
+                    </ItemsRepeater.Layout>
+                    <ItemsRepeater.ItemTemplate>
+                        <DataTemplate>
+                            <ContentControl Content="{Binding}"/>
+                        </DataTemplate>
+                    </ItemsRepeater.ItemTemplate>
+                </ItemsRepeater>
+            </ScrollViewer>
+        </Grid>
+        <GridSplitter ResizeDirection="Columns" ResizeBehavior="PreviousAndNext" Background="Transparent" Width="6" Grid.Column="1" Grid.Row="1"/>
+        <views:PageControl Grid.Column="2" Grid.Row="1"/>
+        <GridSplitter ResizeDirection="Columns" ResizeBehavior="PreviousAndNext" Background="Transparent" Width="6" Grid.Column="3" Grid.Row="1"/>
+        <Grid ColumnDefinitions="*" RowDefinitions="50*,6,50*" Grid.Column="4" Grid.Row="1">
+            <containers:StylesControl DataContext="{Binding Project}" Grid.Column="0" Grid.Row="0"/>
+            <GridSplitter ResizeDirection="Rows" ResizeBehavior="PreviousAndNext" Background="Transparent" Height="6" Grid.Column="0" Grid.Row="1"/>
+            <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Grid.Column="0" Grid.Row="2">
+                <ItemsRepeater>
+                    <ItemsRepeater.Items>
+                        <MultiBinding Converter="{StaticResource StyleMultiValueConverter}">
+                            <Binding Path="PageState.SelectedShapes" FallbackValue="{x:Null}" />
+                            <Binding Path="Project.CurrentStyleLibrary.Selected" FallbackValue="{x:Null}" />
+                        </MultiBinding>
+                    </ItemsRepeater.Items>
+                    <ItemsRepeater.Layout>
+                        <StackLayout Orientation="Vertical"/>
+                    </ItemsRepeater.Layout>
+                    <ItemsRepeater.ItemTemplate>
+                        <DataTemplate>
+                            <ContentControl Content="{Binding}"/>
+                        </DataTemplate>
+                    </ItemsRepeater.ItemTemplate>
+                </ItemsRepeater>
+            </ScrollViewer>
+        </Grid>
+    </Grid>
 </UserControl>
