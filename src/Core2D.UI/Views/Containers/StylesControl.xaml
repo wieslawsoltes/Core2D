@@ -18,7 +18,7 @@
         <handlers:StylesListBoxDropHandler x:Key="StylesListBoxDropHandler"/>
     </UserControl.Resources>
     <Grid RowDefinitions="Auto,Auto,Auto,*,Auto">
-        <Grid RowDefinitions="*" ColumnDefinitions="*,Auto" Grid.Row="0">
+        <!--<Grid RowDefinitions="*" ColumnDefinitions="*,Auto" Grid.Row="0">
             <TextBox Text="{Binding CurrentStyleLibrary.Name, Mode=TwoWay}" Classes="left" Grid.Column="0" IsVisible="{Binding !!$self.DataContext.CurrentStyleLibrary}"/>
             <Menu Classes="usercontrol" Grid.Column="1" HorizontalAlignment="Right">
                 <MenuItem Header="+" Classes="usercontrol" Command="{Binding $parent[Window].DataContext.OnAddStyleLibrary}"/>
@@ -31,7 +31,7 @@
                     <TextBlock Text="{Binding Name}" Classes="default"/>
                 </DataTemplate>
             </ComboBox.DataTemplates>
-        </ComboBox>
+        </ComboBox>-->
         <Menu Classes="usercontrol" Grid.Row="2" HorizontalAlignment="Right" IsVisible="{Binding !!$self.DataContext.CurrentStyleLibrary}">
             <MenuItem Header="apply" Classes="usercontrol" Command="{Binding $parent[Window].DataContext.OnApplyStyle}" CommandParameter="{Binding CurrentStyleLibrary.Selected}" IsVisible="{Binding !!CurrentStyleLibrary.Selected}"/>
             <MenuItem Header="+" Classes="usercontrol" Command="{Binding $parent[Window].DataContext.OnAddStyle}" CommandParameter="{Binding CurrentStyleLibrary}"/>
@@ -66,9 +66,9 @@
                 </DataTemplate>
             </ListBox.DataTemplates>
         </ListBox>
-        <Grid RowDefinitions="Auto" ColumnDefinitions="Auto,*" Grid.Row="4" IsVisible="{Binding !!#styles.SelectedItem}">
+        <!--<Grid RowDefinitions="Auto" ColumnDefinitions="Auto,*" Grid.Row="4" IsVisible="{Binding !!#styles.SelectedItem}">
             <TextBlock Text="Name" Classes="left" Grid.Row="0" Grid.Column="0"/>
             <TextBox Text="{Binding #styles.SelectedItem.Name, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
-        </Grid>
+        </Grid>-->
     </Grid>
 </UserControl>
