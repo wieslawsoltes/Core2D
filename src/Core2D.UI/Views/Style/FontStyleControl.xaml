@@ -8,11 +8,9 @@
              mc:Ignorable="d"
              d:DataContext="{x:Static Designer:DesignerContext.FontStyle}"
              d:DesignWidth="250" d:DesignHeight="400">
-    <ScrollViewer>
-        <StackPanel>
-            <CheckBox Content="Regular" IsChecked="{Binding Regular, Mode=TwoWay}" Classes="default"/>
-            <CheckBox Content="Bold" IsChecked="{Binding Bold, Mode=TwoWay}" Classes="default"/>
-            <CheckBox Content="Italic" IsChecked="{Binding Italic, Mode=TwoWay}" Classes="default"/>
-        </StackPanel>
-    </ScrollViewer>
+    <StackPanel>
+        <CheckBox Content="Regular" IsChecked="{Binding Regular, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
+        <CheckBox Content="Bold" IsChecked="{Binding Bold, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
+        <CheckBox Content="Italic" IsChecked="{Binding Italic, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
+    </StackPanel>
 </UserControl>
