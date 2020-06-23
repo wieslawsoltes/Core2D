@@ -8,12 +8,10 @@
              mc:Ignorable="d"
              d:DataContext="{x:Static Designer:DesignerContext.PathSize}"
              d:DesignWidth="250" d:DesignHeight="400">
-    <ScrollViewer>
-        <Grid RowDefinitions="Auto,Auto" ColumnDefinitions="Auto,*">
-            <TextBlock Text="Width" Classes="left" Grid.Row="0" Grid.Column="0"/>
-            <TextBox Text="{Binding Width, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
-            <TextBlock Text="Height" Classes="left" Grid.Row="1" Grid.Column="0"/>
-            <TextBox Text="{Binding Height, Mode=TwoWay}" Classes="left" Grid.Row="1" Grid.Column="1"/>
-        </Grid>
-    </ScrollViewer>
+    <StackPanel>
+        <TextBlock Text="Width" Margin="{DynamicResource TextControlThemePadding}"/>
+        <TextBox Text="{Binding Width, Mode=TwoWay}"/>
+        <TextBlock Text="Height" Margin="{DynamicResource TextControlThemePadding}"/>
+        <TextBox Text="{Binding Height, Mode=TwoWay}"/>
+    </StackPanel>
 </UserControl>
