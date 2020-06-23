@@ -11,22 +11,15 @@
              mc:Ignorable="d"
              d:DataContext="{x:Static Designer:DesignerContext.PathFigure}"
              d:DesignWidth="250" d:DesignHeight="400">
-    <TabControl Classes="default">
-        <TabItem Header="PathFigure" Classes="property">
-            <ScrollViewer>
-                <Grid RowDefinitions="Auto,Auto" ColumnDefinitions="Auto,*">
-                    <TextBlock Text="IsFilled" Classes="left" Grid.Row="0" Grid.Column="0"/>
-                    <CheckBox IsChecked="{Binding IsFilled, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
-                    <TextBlock Text="IsClosed" Classes="left" Grid.Row="1" Grid.Column="0"/>
-                    <CheckBox IsChecked="{Binding IsClosed, Mode=TwoWay}" Classes="left" Grid.Row="1" Grid.Column="1"/>
-                </Grid>
-            </ScrollViewer>
-        </TabItem>
-        <TabItem Header="StartPoint" Classes="property">
-            <ContentControl Content="{Binding StartPoint}"/>
-        </TabItem>
-        <TabItem Header="Segments" Classes="property">
-            <ListBox Items="{Binding Segments}" Classes="default">
+    <StackPanel>
+        <CheckBox Content="IsFilled" IsChecked="{Binding IsFilled, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
+        <CheckBox Content="IsClosed" IsChecked="{Binding IsClosed, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
+        <TabControl>
+            <TabItem Header="StartPoint" Padding="0,0,0,0">
+                <ContentControl Content="{Binding StartPoint}"/>
+            </TabItem>
+            <TabItem Header="Segments" Padding="12,0,0,0">
+            <ListBox Items="{Binding Segments}">
                 <ListBox.DataTemplates>
                     <DataTemplate>
                         <TextBlock Text="{Binding Mode=OneWay, Converter={StaticResource ObjectToTypeStringConverter}}" Classes="list drag">
@@ -37,6 +30,7 @@
                     </DataTemplate>
                 </ListBox.DataTemplates>
             </ListBox>
-        </TabItem>
-    </TabControl>
+            </TabItem>
+        </TabControl>
+    </StackPanel>
 </UserControl>
