@@ -13,34 +13,30 @@
              mc:Ignorable="d"
              d:DataContext="{x:Static Designer:DesignerContext.PathGeometry}"
              d:DesignWidth="250" d:DesignHeight="400">
-    <TabControl Classes="default">
-        <TabItem Header="PathGeometry" Classes="property">
-            <ScrollViewer>
-                <Grid RowDefinitions="Auto" ColumnDefinitions="Auto,*">
-                    <TextBlock Text="FillRule" Classes="left" Grid.Row="0" Grid.Column="0"/>
-                    <ComboBox Items="{x:Static Editor:Enums.XFillRuleValues}" SelectedItem="{Binding FillRule, Mode=TwoWay}" Classes="default" Grid.Row="0" Grid.Column="1"/>
-                </Grid>
-            </ScrollViewer>
-        </TabItem>
-        <TabItem Header="Figures" Classes="property">
-            <TreeView x:Name="tree" Items="{Binding Figures}" Classes="default">
-                <TreeView.Styles>
-                    <Style Selector="TreeViewItem">
-                        <Setter Property="IsExpanded" Value="False"/>
-                    </Style>
-                </TreeView.Styles>
-                <TreeView.DataTemplates>
-                    <TreeDataTemplate DataType="PathCore:IPathFigure" ItemsSource="{Binding Segments}">
-                        <TextBlock Text="{Binding Mode=OneWay, Converter={StaticResource ObjectToTypeStringConverter}}" Classes="tree"/>
-                    </TreeDataTemplate>
-                    <DataTemplate DataType="PathCore:IPathSegment">
-                        <TextBlock Text="{Binding Mode=OneWay, Converter={StaticResource ObjectToTypeStringConverter}}" Classes="tree"/>
-                    </DataTemplate>
-                </TreeView.DataTemplates>
-            </TreeView>
-        </TabItem>
-        <TabItem Header="Selected" Classes="property">
-            <ContentControl Content="{Binding #tree.SelectedItem}"/>
-        </TabItem>
-    </TabControl>
+    <StackPanel>
+        <TextBlock Text="FillRule" Margin="{DynamicResource TextControlThemePadding}"/>
+        <ComboBox Items="{x:Static Editor:Enums.XFillRuleValues}" SelectedItem="{Binding FillRule, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
+        <TabControl>
+            <TabItem Header="Figures" Padding="0,0,0,0">
+                <TreeView x:Name="tree" Items="{Binding Figures}" Classes="default">
+                    <TreeView.Styles>
+                        <Style Selector="TreeViewItem">
+                            <Setter Property="IsExpanded" Value="False"/>
+                        </Style>
+                    </TreeView.Styles>
+                    <TreeView.DataTemplates>
+                        <TreeDataTemplate DataType="PathCore:IPathFigure" ItemsSource="{Binding Segments}">
+                            <TextBlock Text="{Binding Mode=OneWay, Converter={StaticResource ObjectToTypeStringConverter}}" Classes="tree"/>
+                        </TreeDataTemplate>
+                        <DataTemplate DataType="PathCore:IPathSegment">
+                            <TextBlock Text="{Binding Mode=OneWay, Converter={StaticResource ObjectToTypeStringConverter}}" Classes="tree"/>
+                        </DataTemplate>
+                    </TreeView.DataTemplates>
+                </TreeView>
+            </TabItem>
+            <TabItem Header="Selected" Padding="12,0,0,0">
+                <ContentControl Content="{Binding #tree.SelectedItem}"/>
+            </TabItem>
+        </TabControl>
+    </StackPanel>
 </UserControl>
