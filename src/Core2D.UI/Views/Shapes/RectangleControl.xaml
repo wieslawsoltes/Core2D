@@ -4,10 +4,6 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:converters="clr-namespace:Core2D.UI.Converters;assembly=Core2D.UI"
-             xmlns:data="clr-namespace:Core2D.UI.Views.Data;assembly=Core2D.UI"
-             xmlns:renderer="clr-namespace:Core2D.UI.Views.Renderer;assembly=Core2D.UI"
-             xmlns:shapes="clr-namespace:Core2D.UI.Views.Shapes;assembly=Core2D.UI"
-             xmlns:style="clr-namespace:Core2D.UI.Views.Style;assembly=Core2D.UI"
              xmlns:Designer="clr-namespace:Core2D.UI.Designer;assembly=Core2D.UI"
              mc:Ignorable="d"
              d:DataContext="{x:Static Designer:DesignerContext.Rectangle}"
@@ -25,21 +21,21 @@
                 </StackPanel>
             </TabItem>
             <TabItem Header="Data" Padding="12,0,0,0">
-                <data:DataControl DataContext="{Binding Data}"/>
+                <ContentControl Content="{Binding Data}"/>
             </TabItem>
             <TabItem Header="Style" Padding="12,0,0,0">
-                <style:ShapeStyleControl DataContext="{Binding Style}"/>
+                <ContentControl Content="{Binding Style}"/>
             </TabItem>
             <TabItem Header="State" Padding="12,0,0,0">
-                <renderer:ShapeStateControl DataContext="{Binding State}"/>
+                <ContentControl Content="{Binding State}"/>
             </TabItem>
         </TabControl>
         <TabControl>
             <TabItem Header="TopLeft" Padding="0,0,0,0">
-                <shapes:PointControl DataContext="{Binding TopLeft}"/>
+                <ContentControl Content="{Binding TopLeft}"/>
             </TabItem>
             <TabItem Header="BottomRight" Padding="12,0,0,0">
-                <shapes:PointControl DataContext="{Binding BottomRight}"/>
+                <ContentControl Content="{Binding BottomRight}"/>
             </TabItem>
         </TabControl>
         <TabControl>
