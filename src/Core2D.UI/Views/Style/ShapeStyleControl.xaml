@@ -31,9 +31,7 @@
             <TabItem Header="Stroke" Padding="0,0,0,0">
                 <style:ArgbColorControl DataContext="{Binding Stroke}"/>
             </TabItem>
-        </TabControl>
-        <TabControl>
-            <TabItem Header="Fill" Padding="0,0,0,0">
+            <TabItem Header="Fill" Padding="12,0,0,0">
                 <style:ArgbColorControl DataContext="{Binding Fill}"/>
             </TabItem>
         </TabControl>
@@ -46,43 +44,12 @@
             <TabItem Header="Line" Padding="0,0,0,0">
                 <style:LineStyleControl DataContext="{Binding LineStyle}"/>
             </TabItem>
-        </TabControl>
-        <TabControl>
-            <TabItem Header="Start Arrow" Padding="0,0,0,0">
+            <TabItem Header="Start Arrow" Padding="12,0,0,0">
                 <style:ArrowStyleControl DataContext="{Binding StartArrowStyle}"/>
             </TabItem>
-        </TabControl>
-        <TabControl>
-            <TabItem Header="End Arrow" Padding="0,0,0,0">
+            <TabItem Header="End Arrow" Padding="12,0,0,0">
                 <style:ArrowStyleControl DataContext="{Binding EndArrowStyle}"/>
             </TabItem>
         </TabControl>-->
     </StackPanel>
-    <!--<TabControl Classes="default">
-        <TabItem Header="Style" Classes="property">
-            <style:StyleControl/>
-        </TabItem>
-        <TabItem Header="Stroke" Classes="property">
-            <ContentControl Content="{Binding Stroke}"/>
-        </TabItem>
-        <TabItem Header="Fill" Classes="property">
-            <ContentControl Content="{Binding Fill}"/>
-        </TabItem>
-        <TabItem Header="Text" Classes="property">
-            <ContentControl Content="{Binding TextStyle}"/>
-        </TabItem>
-        <TabItem Header="Line" Classes="property">
-            <TabControl Classes="default">
-                <TabItem Header="LineStyle" Classes="property">
-                    <ContentControl Content="{Binding LineStyle}"/>
-                </TabItem>
-                <TabItem Header="StartArrow" Classes="property">
-                    <ContentControl Content="{Binding StartArrowStyle}"/>
-                </TabItem>
-                <TabItem Header="EndArrow" Classes="property">
-                    <ContentControl Content="{Binding EndArrowStyle}"/>
-                </TabItem>
-            </TabControl>
-        </TabItem>
-    </TabControl>-->
 </UserControl>
