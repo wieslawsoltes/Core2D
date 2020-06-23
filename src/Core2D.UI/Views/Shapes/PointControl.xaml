@@ -20,7 +20,7 @@
                     <TextBlock Text="Y" Margin="{DynamicResource TextControlThemePadding}"/>
                     <TextBox Text="{Binding Y, Mode=TwoWay}" Classes="left" Grid.Row="2" Grid.Column="1"/>
                     <TextBlock Text="Alignment" Margin="{DynamicResource TextControlThemePadding}"/>
-                    <ComboBox Items="{x:Static Editor:Enums.PointAlignmentValues}" SelectedItem="{Binding Alignment, Mode=TwoWay}"/>
+                    <ComboBox Items="{x:Static Editor:Enums.PointAlignmentValues}" SelectedItem="{Binding Alignment, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
                 </StackPanel>
             <!--</TabItem>
         </TabControl>
