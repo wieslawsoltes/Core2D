@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using Avalonia;
 using Avalonia.Data.Converters;
 using Core2D.Shapes;
@@ -25,21 +26,14 @@ namespace Core2D.UI.Converters
         {
             if (values != null && values.Count == 2)
             {
-                if (values[0] is ISet<IBaseShape> shapes)
+                if (values[0] is ISet<IBaseShape> shapes && shapes.Count > 0)
                 {
-                    var styles = new List<IShapeStyle>();
-                    foreach (var shape in shapes)
-                    {
-                        styles.Add(shape.Style);
-                    }
-                    return styles;
+                    return shapes.FirstOrDefault().Style;
                 }
 
                 if (values[1] is IShapeStyle style)
                 {
-                    var styles = new List<IShapeStyle>();
-                    styles.Add(style);
-                    return styles;
+                    return style;
                 }
             }
             return AvaloniaProperty.UnsetValue;
