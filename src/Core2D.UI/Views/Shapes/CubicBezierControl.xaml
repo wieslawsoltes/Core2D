@@ -8,43 +8,39 @@
              mc:Ignorable="d"
              d:DataContext="{x:Static Designer:DesignerContext.CubicBezier}"
              d:DesignWidth="250" d:DesignHeight="400">
-    <TabControl Classes="default">
-        <TabItem Header="CubicBezier" Classes="property">
-            <ScrollViewer>
-                <Grid RowDefinitions="Auto,Auto,Auto" ColumnDefinitions="Auto,*">
-                    <TextBlock Text="Name" Classes="left" Grid.Row="0" Grid.Column="0"/>
-                    <TextBox Text="{Binding Name, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
-                    <TextBlock Text="IsStroked" Classes="left" Grid.Row="1" Grid.Column="0"/>
-                    <CheckBox IsChecked="{Binding IsStroked, Mode=TwoWay}" Classes="left" Grid.Row="1" Grid.Column="1"/>
-                    <TextBlock Text="IsFilled" Classes="left" Grid.Row="2" Grid.Column="0"/>
-                    <CheckBox IsChecked="{Binding IsFilled, Mode=TwoWay}" Classes="left" Grid.Row="2" Grid.Column="1"/>
-                </Grid>
-            </ScrollViewer>
-        </TabItem>
-        <TabItem Header="Points" Classes="property">
-            <TabControl Classes="default">
-                <TabItem Header="Point1" Classes="property">
-                    <ContentControl Content="{Binding Point1}"/>
-                </TabItem>
-                <TabItem Header="Point2" Classes="property">
-                    <ContentControl Content="{Binding Point2}"/>
-                </TabItem>
-                <TabItem Header="Point3" Classes="property">
-                    <ContentControl Content="{Binding Point3}"/>
-                </TabItem>
-                <TabItem Header="Point4" Classes="property">
-                    <ContentControl Content="{Binding Point4}"/>
-                </TabItem>
-            </TabControl>
-        </TabItem>
-        <TabItem Header="State" Classes="property">
-            <ContentControl Content="{Binding State}"/>
-        </TabItem>
-        <TabItem Header="Data" Classes="property">
-            <ContentControl Content="{Binding Data}"/>
-        </TabItem>
-        <TabItem Header="Style" Classes="property">
-            <ContentControl Content="{Binding Style}"/>
-        </TabItem>
-    </TabControl>
+    <StackPanel>
+        <TabControl>
+            <TabItem Header="CubicBezier" Padding="0,0,0,0">
+                <StackPanel>
+                    <TextBlock Text="Name" Margin="{DynamicResource TextControlThemePadding}"/>
+                    <TextBox Text="{Binding Name, Mode=TwoWay}"/>
+                    <CheckBox Content="IsStroked" IsChecked="{Binding IsStroked, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
+                    <CheckBox Content="IsFilled" IsChecked="{Binding IsFilled, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
+                </StackPanel>
+            </TabItem>
+            <TabItem Header="Data" Padding="12,0,0,0">
+                <ContentControl Content="{Binding Data}"/>
+            </TabItem>
+            <TabItem Header="Style" Padding="12,0,0,0">
+                <ContentControl Content="{Binding Style}"/>
+            </TabItem>
+            <TabItem Header="State" Padding="12,0,0,0">
+                <ContentControl Content="{Binding State}"/>
+            </TabItem>
+        </TabControl>
+        <TabControl>
+            <TabItem Header="Point1" Padding="0,0,0,0">
+                <ContentControl Content="{Binding Point1}"/>
+            </TabItem>
+            <TabItem Header="Point2" Padding="12,0,0,0">
+                <ContentControl Content="{Binding Point2}"/>
+            </TabItem>
+            <TabItem Header="Point3" Padding="12,0,0,0">
+                <ContentControl Content="{Binding Point3}"/>
+            </TabItem>
+            <TabItem Header="Point4" Padding="12,0,0,0">
+                <ContentControl Content="{Binding Point4}"/>
+            </TabItem>
+        </TabControl>
+    </StackPanel>
 </UserControl>
