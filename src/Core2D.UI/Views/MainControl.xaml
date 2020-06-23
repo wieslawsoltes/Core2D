@@ -18,6 +18,10 @@
              mc:Ignorable="d"
              d:DataContext="{x:Static Designer:DesignerContext.Editor}"
              d:DesignWidth="1200" d:DesignHeight="580">
+    <UserControl.Resources>
+        <converters:FirstSelectedItemValueConverter x:Key="FirstSelectedItemValueConverter"/>
+        <converters:StyleMultiValueConverter x:Key="StyleMultiValueConverter"/>
+    </UserControl.Resources>
     <UserControl.KeyBindings>
         <!-- File -->
         <KeyBinding Command="{Binding OnNew}" CommandParameter="{Binding}" Gesture="Ctrl+N"/>
@@ -35,16 +39,7 @@
             <containers:ProjectControl DataContext="{Binding Project}" Grid.Column="0" Grid.Row="0"/>
             <GridSplitter ResizeDirection="Rows" ResizeBehavior="PreviousAndNext" Background="Transparent" Height="6" Grid.Column="0" Grid.Row="1"/>
             <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Grid.Column="0" Grid.Row="2">
-                <ItemsRepeater Items="{Binding PageState.SelectedShapes}">
-                    <ItemsRepeater.Layout>
-                        <StackLayout Orientation="Vertical"/>
-                    </ItemsRepeater.Layout>
-                    <ItemsRepeater.ItemTemplate>
-                        <DataTemplate>
-                            <ContentControl Content="{Binding}"/>
-                        </DataTemplate>
-                    </ItemsRepeater.ItemTemplate>
-                </ItemsRepeater>
+                <ContentControl Content="{Binding PageState.SelectedShapes, Converter={StaticResource FirstSelectedItemValueConverter}}"/>
             </ScrollViewer>
         </Grid>
         <GridSplitter ResizeDirection="Columns" ResizeBehavior="PreviousAndNext" Background="Transparent" Width="6" Grid.Column="1" Grid.Row="1"/>
@@ -54,22 +49,14 @@
             <containers:StylesControl DataContext="{Binding Project}" Grid.Column="0" Grid.Row="0"/>
             <GridSplitter ResizeDirection="Rows" ResizeBehavior="PreviousAndNext" Background="Transparent" Height="6" Grid.Column="0" Grid.Row="1"/>
             <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Grid.Column="0" Grid.Row="2">
-                <ItemsRepeater>
-                    <ItemsRepeater.Items>
+                <ContentControl>
+                    <ContentControl.Content>
                         <MultiBinding Converter="{StaticResource StyleMultiValueConverter}">
                             <Binding Path="PageState.SelectedShapes" FallbackValue="{x:Null}" />
                             <Binding Path="Project.CurrentStyleLibrary.Selected" FallbackValue="{x:Null}" />
                         </MultiBinding>
-                    </ItemsRepeater.Items>
-                    <ItemsRepeater.Layout>
-                        <StackLayout Orientation="Vertical"/>
-                    </ItemsRepeater.Layout>
-                    <ItemsRepeater.ItemTemplate>
-                        <DataTemplate>
-                            <ContentControl Content="{Binding}"/>
-                        </DataTemplate>
-                    </ItemsRepeater.ItemTemplate>
-                </ItemsRepeater>
+                    </ContentControl.Content>
+                </ContentControl>
             </ScrollViewer>
         </Grid>
     </Grid>
