@@ -13,8 +13,8 @@
     </UserControl.Resources>
     <StackPanel>
         <Grid Height="34" Margin="{DynamicResource TextControlThemePadding}">
-            <Border BorderThickness="0" CornerRadius="3" Background="{DynamicResource ColorCheckerBoard}"/>
-            <Border BorderThickness="0" CornerRadius="3">
+            <Border BorderThickness="0" CornerRadius="2" Background="{DynamicResource ColorCheckerBoard}"/>
+            <Border BorderThickness="0" CornerRadius="2">
                 <Border.Background>
                     <MultiBinding Mode="OneWay" Converter="{StaticResource ArgbColorToBrushMultiConverter}">
                         <Binding Path="A"/>
