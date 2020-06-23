@@ -15,10 +15,8 @@
                 <StackPanel>
                     <TextBlock Text="Name" Margin="{DynamicResource TextControlThemePadding}"/>
                     <TextBox Text="{Binding Name, Mode=TwoWay}"/>
-                    <TextBlock Text="IsStroked" Margin="{DynamicResource TextControlThemePadding}"/>
-                    <CheckBox IsChecked="{Binding IsStroked, Mode=TwoWay}"/>
-                    <TextBlock Text="IsFilled" Margin="{DynamicResource TextControlThemePadding}"/>
-                    <CheckBox IsChecked="{Binding IsFilled, Mode=TwoWay}"/>
+                    <CheckBox Content="IsStroked" IsChecked="{Binding IsStroked, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
+                    <CheckBox Content="IsFilled" IsChecked="{Binding IsFilled, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
                     <TextBlock Text="Text" Margin="{DynamicResource TextControlThemePadding}"/>
                     <TextBox Text="{Binding Text, Mode=TwoWay}" VerticalAlignment="Stretch" AcceptsReturn="True"/>
                 </StackPanel>
