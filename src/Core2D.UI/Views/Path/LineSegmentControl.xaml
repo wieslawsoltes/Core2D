@@ -8,19 +8,13 @@
              mc:Ignorable="d"
              d:DataContext="{x:Static Designer:DesignerContext.LineSegment}"
              d:DesignWidth="250" d:DesignHeight="400">
-    <TabControl Classes="default">
-        <TabItem Header="LineSegment" Classes="property">
-            <ScrollViewer>
-                <Grid RowDefinitions="Auto,Auto" ColumnDefinitions="Auto,*">
-                    <TextBlock Text="IsStroked" Classes="left" Grid.Row="0" Grid.Column="0"/>
-                    <CheckBox IsChecked="{Binding IsStroked, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
-                    <TextBlock Text="IsSmoothJoin" Classes="left" Grid.Row="1" Grid.Column="0"/>
-                    <CheckBox IsChecked="{Binding IsSmoothJoin, Mode=TwoWay}" Classes="left" Grid.Row="1" Grid.Column="1"/>
-                </Grid>
-            </ScrollViewer>
-        </TabItem>
-        <TabItem Header="Point" Classes="property">
-            <ContentControl Content="{Binding Point}"/>
-        </TabItem>
-    </TabControl>
+    <StackPanel>
+        <CheckBox Content="IsStroked" IsChecked="{Binding IsStroked, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
+        <CheckBox Content="IsSmoothJoin" IsChecked="{Binding IsSmoothJoin, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
+        <TabControl>
+            <TabItem Header="Point" Padding="0,0,0,0">
+                <ContentControl Content="{Binding Point}"/>
+            </TabItem>
+        </TabControl>
+    </StackPanel>
 </UserControl>
