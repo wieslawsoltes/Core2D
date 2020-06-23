@@ -8,19 +8,17 @@
              mc:Ignorable="d"
              d:DataContext="{x:Static Designer:DesignerContext.State}"
              d:DesignWidth="250" d:DesignHeight="400">
-    <ScrollViewer>
-        <StackPanel>
-            <CheckBox Content="Default" IsChecked="{Binding Default, Mode=TwoWay}" Classes="default"/>
-            <CheckBox Content="Visible" IsChecked="{Binding Visible, Mode=TwoWay}" Classes="default"/>
-            <CheckBox Content="Printable" IsChecked="{Binding Printable, Mode=TwoWay}" Classes="default"/>
-            <CheckBox Content="Locked" IsChecked="{Binding Locked, Mode=TwoWay}" Classes="default"/>
-            <CheckBox Content="Size" IsChecked="{Binding Size, Mode=TwoWay}" Classes="default"/>
-            <CheckBox Content="Thickness" IsChecked="{Binding Thickness, Mode=TwoWay}" Classes="default"/>
-            <CheckBox Content="Connector" IsChecked="{Binding Connector, Mode=TwoWay}" Classes="default"/>
-            <CheckBox Content="None" IsChecked="{Binding None, Mode=TwoWay}" Classes="default"/>
-            <CheckBox Content="Standalone" IsChecked="{Binding Standalone, Mode=TwoWay}" Classes="default"/>
-            <CheckBox Content="Input" IsChecked="{Binding Input, Mode=TwoWay}" Classes="default"/>
-            <CheckBox Content="Output" IsChecked="{Binding Output, Mode=TwoWay}" Classes="default"/>
-        </StackPanel>
-    </ScrollViewer>
+    <StackPanel>
+        <CheckBox Content="Default" IsChecked="{Binding Default, Mode=TwoWay}"/>
+        <CheckBox Content="Visible" IsChecked="{Binding Visible, Mode=TwoWay}"/>
+        <CheckBox Content="Printable" IsChecked="{Binding Printable, Mode=TwoWay}"/>
+        <CheckBox Content="Locked" IsChecked="{Binding Locked, Mode=TwoWay}"/>
+        <CheckBox Content="Size" IsChecked="{Binding Size, Mode=TwoWay}"/>
+        <CheckBox Content="Thickness" IsChecked="{Binding Thickness, Mode=TwoWay}"/>
+        <CheckBox Content="Connector" IsChecked="{Binding Connector, Mode=TwoWay}"/>
+        <CheckBox Content="None" IsChecked="{Binding None, Mode=TwoWay}"/>
+        <CheckBox Content="Standalone" IsChecked="{Binding Standalone, Mode=TwoWay}"/>
+        <CheckBox Content="Input" IsChecked="{Binding Input, Mode=TwoWay}"/>
+        <CheckBox Content="Output" IsChecked="{Binding Output, Mode=TwoWay}"/>
+    </StackPanel>
 </UserControl>
