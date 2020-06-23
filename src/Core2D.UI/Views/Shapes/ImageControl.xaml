@@ -8,41 +8,37 @@
              mc:Ignorable="d"
              d:DataContext="{x:Static Designer:DesignerContext.Image}"
              d:DesignWidth="250" d:DesignHeight="400">
-    <TabControl Classes="default">
-        <TabItem Header="Image" Classes="property">
-            <ScrollViewer>
-                <Grid RowDefinitions="Auto,Auto,Auto,Auto,*" ColumnDefinitions="Auto,*">
-                    <TextBlock Text="Name" Classes="left" Grid.Row="0" Grid.Column="0"/>
-                    <TextBox Text="{Binding Name, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
-                    <TextBlock Text="IsStroked" Classes="left" Grid.Row="1" Grid.Column="0"/>
-                    <CheckBox IsChecked="{Binding IsStroked, Mode=TwoWay}" Classes="left" Grid.Row="1" Grid.Column="1"/>
-                    <TextBlock Text="IsFilled" Classes="left" Grid.Row="2" Grid.Column="0"/>
-                    <CheckBox IsChecked="{Binding IsFilled, Mode=TwoWay}" Classes="left" Grid.Row="2" Grid.Column="1"/>
-                    <TextBlock Text="Key" Classes="left" Grid.Row="3" Grid.Column="0"/>
-                    <TextBox Text="{Binding Key, Mode=TwoWay}" Classes="left" Grid.Row="3" Grid.Column="1"/>
-                    <TextBlock Text="Text" VerticalAlignment="Top" Classes="left" Grid.Row="4" Grid.Column="0"/>
-                    <TextBox Text="{Binding Text, Mode=TwoWay}" VerticalAlignment="Stretch" AcceptsReturn="True" Classes="left" Grid.Row="4" Grid.Column="1"/>
-                </Grid>
-            </ScrollViewer>
-        </TabItem>
-        <TabItem Header="Points" Classes="property">
-            <TabControl Classes="default">
-                <TabItem Header="TopLeft" Classes="property">
-                    <ContentControl Content="{Binding TopLeft}"/>
-                </TabItem>
-                <TabItem Header="BottomRight" Classes="property">
-                    <ContentControl Content="{Binding BottomRight}"/>
-                </TabItem>
-            </TabControl>
-        </TabItem>
-        <TabItem Header="State" Classes="property">
-            <ContentControl Content="{Binding State}"/>
-        </TabItem>
-        <TabItem Header="Data" Classes="property">
-            <ContentControl Content="{Binding Data}"/>
-        </TabItem>
-        <TabItem Header="Style" Classes="property">
-            <ContentControl Content="{Binding Style}"/>
-        </TabItem>
-    </TabControl>
+    <StackPanel>
+        <TabControl>
+            <TabItem Header="Image" Padding="0,0,0,0">
+                <StackPanel>
+                    <TextBlock Text="Name" Margin="{DynamicResource TextControlThemePadding}"/>
+                    <TextBox Text="{Binding Name, Mode=TwoWay}"/>
+                    <CheckBox Content="IsStroked" IsChecked="{Binding IsStroked, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
+                    <CheckBox Content="IsFilled" IsChecked="{Binding IsFilled, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
+                    <TextBlock Text="Key" Margin="{DynamicResource TextControlThemePadding}"/>
+                    <TextBox Text="{Binding Key, Mode=TwoWay}"/>
+                    <TextBlock Text="Text" Margin="{DynamicResource TextControlThemePadding}"/>
+                    <TextBox Text="{Binding Text, Mode=TwoWay}" VerticalAlignment="Stretch" AcceptsReturn="True"/>
+                </StackPanel>
+            </TabItem>
+            <TabItem Header="Data" Padding="12,0,0,0">
+                <ContentControl Content="{Binding Data}"/>
+            </TabItem>
+            <TabItem Header="Style" Padding="12,0,0,0">
+                <ContentControl Content="{Binding Style}"/>
+            </TabItem>
+            <TabItem Header="State" Padding="12,0,0,0">
+                <ContentControl Content="{Binding State}"/>
+            </TabItem>
+        </TabControl>
+        <TabControl>
+            <TabItem Header="TopLeft" Padding="0,0,0,0">
+                <ContentControl Content="{Binding TopLeft}"/>
+            </TabItem>
+            <TabItem Header="BottomRight" Padding="12,0,0,0">
+                <ContentControl Content="{Binding BottomRight}"/>
+            </TabItem>
+        </TabControl>
+    </StackPanel>
 </UserControl>
