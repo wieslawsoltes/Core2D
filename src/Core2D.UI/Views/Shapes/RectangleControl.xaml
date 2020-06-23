@@ -4,7 +4,10 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:converters="clr-namespace:Core2D.UI.Converters;assembly=Core2D.UI"
+             xmlns:data="clr-namespace:Core2D.UI.Views.Data;assembly=Core2D.UI"
+             xmlns:renderer="clr-namespace:Core2D.UI.Views.Renderer;assembly=Core2D.UI"
              xmlns:shapes="clr-namespace:Core2D.UI.Views.Shapes;assembly=Core2D.UI"
+             xmlns:style="clr-namespace:Core2D.UI.Views.Style;assembly=Core2D.UI"
              xmlns:Designer="clr-namespace:Core2D.UI.Designer;assembly=Core2D.UI"
              mc:Ignorable="d"
              d:DataContext="{x:Static Designer:DesignerContext.Rectangle}"
@@ -21,67 +24,38 @@
                     <TextBox Text="{Binding Text, Mode=TwoWay}" VerticalAlignment="Stretch" AcceptsReturn="True"/>
                 </StackPanel>
             </TabItem>
+            <TabItem Header="Data" Padding="12,0,0,0">
+                <data:DataControl DataContext="{Binding Data}"/>
+            </TabItem>
+            <TabItem Header="Style" Padding="12,0,0,0">
+                <style:ShapeStyleControl DataContext="{Binding Style}"/>
+            </TabItem>
+            <TabItem Header="State" Padding="12,0,0,0">
+                <renderer:ShapeStateControl DataContext="{Binding State}"/>
+            </TabItem>
         </TabControl>
         <TabControl>
             <TabItem Header="TopLeft" Padding="0,0,0,0">
                 <shapes:PointControl DataContext="{Binding TopLeft}"/>
             </TabItem>
-        </TabControl>
-        <TabControl>
-            <TabItem Header="BottomRight" Padding="0,0,0,0">
+            <TabItem Header="BottomRight" Padding="12,0,0,0">
                 <shapes:PointControl DataContext="{Binding BottomRight}"/>
             </TabItem>
         </TabControl>
+        <TabControl>
+            <TabItem Header="Grid" Padding="0,0,0,0">
+                <StackPanel>
+                    <CheckBox Content="IsGrid" IsChecked="{Binding IsGrid, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
+                    <TextBlock Text="OffsetX" Margin="{DynamicResource TextControlThemePadding}"/>
+                    <TextBox Text="{Binding OffsetX, Mode=TwoWay}"/>
+                    <TextBlock Text="OffsetY" Margin="{DynamicResource TextControlThemePadding}"/>
+                    <TextBox Text="{Binding OffsetY, Mode=TwoWay}"/>
+                    <TextBlock Text="CellWidth" Margin="{DynamicResource TextControlThemePadding}"/>
+                    <TextBox Text="{Binding CellWidth, Mode=TwoWay}"/>
+                    <TextBlock Text="CellHeight" Margin="{DynamicResource TextControlThemePadding}"/>
+                    <TextBox Text="{Binding CellHeight, Mode=TwoWay}"/>
+                </StackPanel>  
+            </TabItem>
+        </TabControl>
     </StackPanel>
-    <!--<TabControl Classes="default">
-        <TabItem Header="Rectangle" Classes="property">
-            <ScrollViewer>
-                <Grid RowDefinitions="Auto,Auto,Auto,*" ColumnDefinitions="Auto,*">
-                    <TextBlock Text="Name" Classes="left" Grid.Row="0" Grid.Column="0"/>
-                    <TextBox Text="{Binding Name, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
-                    <TextBlock Text="IsStroked" Classes="left" Grid.Row="1" Grid.Column="0"/>
-                    <CheckBox IsChecked="{Binding IsStroked, Mode=TwoWay}" Classes="left" Grid.Row="1" Grid.Column="1"/>
-                    <TextBlock Text="IsFilled" Classes="left" Grid.Row="2" Grid.Column="0"/>
-                    <CheckBox IsChecked="{Binding IsFilled, Mode=TwoWay}" Classes="left" Grid.Row="2" Grid.Column="1"/>
-                    <TextBlock Text="Text" VerticalAlignment="Top" Classes="left" Grid.Row="3" Grid.Column="0"/>
-                    <TextBox Text="{Binding Text, Mode=TwoWay}" VerticalAlignment="Stretch" AcceptsReturn="True" Classes="left" Grid.Row="3" Grid.Column="1"/>
-                </Grid>
-            </ScrollViewer>
-        </TabItem>
-        <TabItem Header="Points" Classes="property">
-            <TabControl Classes="default">
-                <TabItem Header="TopLeft" Classes="property">
-                    <ContentControl Content="{Binding TopLeft}"/>
-                </TabItem>
-                <TabItem Header="BottomRight" Classes="property">
-                    <ContentControl Content="{Binding BottomRight}"/>
-                </TabItem>
-            </TabControl>
-        </TabItem>
-        <TabItem Header="Grid" Classes="property">
-            <ScrollViewer>
-                <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto" ColumnDefinitions="Auto,*">
-                    <TextBlock Text="IsGrid" Classes="left" Grid.Row="0" Grid.Column="0"/>
-                    <CheckBox IsChecked="{Binding IsGrid, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
-                    <TextBlock Text="OffsetX" Classes="left" Grid.Row="1" Grid.Column="0"/>
-                    <TextBox Text="{Binding OffsetX, Mode=TwoWay}" Classes="left" Grid.Row="1" Grid.Column="1"/>
-                    <TextBlock Text="OffsetY" Classes="left" Grid.Row="2" Grid.Column="0"/>
-                    <TextBox Text="{Binding OffsetY, Mode=TwoWay}" Classes="left" Grid.Row="2" Grid.Column="1"/>
-                    <TextBlock Text="CellWidth" Classes="left" Grid.Row="3" Grid.Column="0"/>
-                    <TextBox Text="{Binding CellWidth, Mode=TwoWay}" Classes="left" Grid.Row="3" Grid.Column="1"/>
-                    <TextBlock Text="CellHeight" Classes="left" Grid.Row="4" Grid.Column="0"/>
-                    <TextBox Text="{Binding CellHeight, Mode=TwoWay}" Classes="left" Grid.Row="4" Grid.Column="1"/>
-                </Grid>
-            </ScrollViewer>
-        </TabItem>
-        <TabItem Header="State" Classes="property">
-            <ContentControl Content="{Binding State}"/>
-        </TabItem>
-        <TabItem Header="Data" Classes="property">
-            <ContentControl Content="{Binding Data}"/>
-        </TabItem>
-        <TabItem Header="Style" Classes="property">
-            <ContentControl Content="{Binding Style}"/>
-        </TabItem>
-    </TabControl>-->
 </UserControl>
