@@ -21,9 +21,9 @@
         <TextBlock Text="FontStyle" Margin="{DynamicResource TextControlThemePadding}"/>
         <ContentControl Content="{Binding FontStyle}"/>
         <TextBlock Text="HAlignment" Margin="{DynamicResource TextControlThemePadding}"/>
-        <ComboBox Items="{x:Static Editor:Enums.TextHAlignmentValues}" SelectedItem="{Binding TextHAlignment, Mode=TwoWay}"/>
+        <ComboBox Items="{x:Static Editor:Enums.TextHAlignmentValues}" SelectedItem="{Binding TextHAlignment, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
         <TextBlock Text="VAlignment" Margin="{DynamicResource TextControlThemePadding}"/>
-        <ComboBox Items="{x:Static Editor:Enums.TextVAlignmentValues}" SelectedItem="{Binding TextVAlignment, Mode=TwoWay}"/>
+        <ComboBox Items="{x:Static Editor:Enums.TextVAlignmentValues}" SelectedItem="{Binding TextVAlignment, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
     </StackPanel>
     <!--<ScrollViewer>
         <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto" ColumnDefinitions="Auto,*">
