@@ -115,7 +115,7 @@
                 <Separator/>
                 <MenuItem Header="_AutoFit" Command="{Binding Platform.OnZoomAutoFit}" InputGesture="X"/>
             </MenuItem>
-            <MenuItem Header="_Theme" Classes="theme" DataContext="{x:Static app:App.Selector}" Items="{Binding Themes}">
+            <!--<MenuItem Header="_Theme" Classes="theme" DataContext="{x:Static app:App.Selector}" Items="{Binding Themes}">
                 <MenuItem.Styles>
                     <Style Selector="MenuItem.theme > MenuItem">
                         <Setter Property="Header" Value="{Binding Name}"/>
@@ -135,7 +135,7 @@
                         </Setter>
                     </Style>
                 </MenuItem.Styles>
-            </MenuItem>
+            </MenuItem>-->
         </MenuItem>
         <MenuItem Header="_Project">
             <MenuItem Header="D_ata">
@@ -874,7 +874,7 @@
             <Separator/>
             <MenuItem Header="Reset" Command="{Binding OnResetTool}"/>
         </MenuItem>
-        <MenuItem Header="_Window">
+        <!--<MenuItem Header="_Window">
             <MenuItem Header="_Save Layout" Command="{Binding LayoutPlatform.SaveLayout}"/>
             <MenuItem Header="_Apply Layout" Items="{Binding LayoutPlatform.Layout.VisibleDockables}">
                 <MenuItem.Styles>
@@ -893,7 +893,7 @@
             <MenuItem Header="_Export Layouts..." Command="{Binding LayoutPlatform.ExportLayouts}"/>
             <Separator/>
             <MenuItem Header="_Manage Layouts..." Command="{Binding LayoutPlatform.ManageLayouts}"/>
-        </MenuItem>
+        </MenuItem>-->
         <MenuItem Header="_Help">
             <MenuItem Header="_About Core2D" Command="{Binding Platform.OnAboutDialog}"/>
         </MenuItem>
