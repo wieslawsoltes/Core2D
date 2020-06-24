@@ -32,11 +32,12 @@
              xmlns:style="clr-namespace:Core2D.UI.Views.Style;assembly=Core2D.UI"
              xmlns:views="clr-namespace:Core2D.UI.Views;assembly=Core2D.UI">
     <Application.Styles>
-        <!-- Theme -->
+        <!-- Theme Default -->
         <!--<StyleInclude Source="avares://Avalonia.Themes.Default/DefaultTheme.xaml"/>-->
         <!--<StyleInclude Source="avares://Avalonia.Themes.Default/Accents/BaseLight.xaml"/>-->
-        <StyleInclude Source="avares://Avalonia.Themes.Fluent/Accents/FluentLight.xaml"/>
-        <!--<StyleInclude Source="avares://Avalonia.Themes.Fluent/Accents/FluentDark.xaml"/>-->
+        <!-- Theme Fluent -->
+        <!--<StyleInclude Source="avares://Avalonia.Themes.Fluent/Accents/FluentLight.xaml"/>-->
+        <StyleInclude Source="avares://Avalonia.Themes.Fluent/Accents/FluentDark.xaml"/>
         <!-- DataGrid -->
         <StyleInclude Source="avares://Avalonia.Controls.DataGrid/Themes/Default.xaml"/>
         <!-- Dock -->
