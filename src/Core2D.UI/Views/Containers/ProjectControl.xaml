@@ -137,8 +137,8 @@
                                 <MenuItem Header="_Delete" Command="{Binding $parent[Window].DataContext.OnRemoveLayer}" CommandParameter="{Binding Mode=OneWay}"/>
                             </ContextMenu>
                         </StackPanel.ContextMenu>
-                        <CheckBox IsChecked="{Binding IsVisible, Mode=TwoWay}" Classes="default"/>
-                        <TextBlock Text="{Binding Name}" Classes="tree"/>
+                        <CheckBox IsChecked="{Binding IsVisible, Mode=TwoWay}" MinWidth="0" VerticalAlignment="Center" Classes="default"/>
+                        <TextBlock Text="{Binding Name}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Classes="tree"/>
                     </StackPanel>
                 </DataTemplate>
             </TreeView.DataTemplates>
