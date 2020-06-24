@@ -34,7 +34,8 @@
     <Application.Resources>
         <!-- Fonts -->
         <!--<FontFamily x:Key="UiFontFamily">avares://Core2D.UI/Assets/Fonts#Lato</FontFamily>-->
-        <FontFamily x:Key="UiFontFamily">Segoe UI</FontFamily>
+        <!--<FontFamily x:Key="UiFontFamily">avares://Core2D.UI/Assets/Fonts#Noto Sans</FontFamily>-->
+        <FontFamily x:Key="UiFontFamily">Segoe UI, SF Pro Display, Noto Sans, Cantarel</FontFamily>
         <!--<FontFamily x:Key="CodeFontFamily">avares://Core2D.UI/Assets/Fonts#Source Code Pro</FontFamily>-->
         <StaticResource x:Key="ContentControlThemeFontFamily" ResourceKey="UiFontFamily" />
         <!-- Brushes -->
