@@ -9,39 +9,30 @@
              mc:Ignorable="d"
              d:DataContext="{x:Static Designer:DesignerContext.Page}"
              d:DesignWidth="250" d:DesignHeight="400">
-    <TabControl Classes="default">
-        <TabItem Header="Container" Classes="property">
-            <Grid RowDefinitions="Auto,*" ColumnDefinitions="Auto,*">
-                <TextBlock Text="Name" Classes="left" Grid.Row="0" Grid.Column="0"/>
-                <TextBox Text="{Binding Name, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
-                <TabControl Classes="default" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
-                    <TabItem Header="Layers" Classes="property">
-                        <containers:LayersControl/>
-                    </TabItem>
-                    <TabItem Header="Shapes" Classes="property">
-                        <containers:ShapesControl/>
-                    </TabItem>
-                    <TabItem Header="Size" Classes="property">
-                        <ScrollViewer>
-                            <Grid RowDefinitions="Auto,Auto" ColumnDefinitions="Auto,*">
-                                <TextBlock Text="Width" Classes="left" Grid.Row="0" Grid.Column="0"/>
-                                <TextBox Text="{Binding Width, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
-                                <TextBlock Text="Height" Classes="left" Grid.Row="1" Grid.Column="0"/>
-                                <TextBox Text="{Binding Height, Mode=TwoWay}" Classes="left" Grid.Row="1" Grid.Column="1"/>
-                            </Grid>
-                        </ScrollViewer>
-                    </TabItem>
-                    <TabItem Header="Background" Classes="property">
-                        <ContentControl Content="{Binding Background}"/>
-                    </TabItem>
-                </TabControl>
-            </Grid>
-        </TabItem>
-        <TabItem Header="Owner" Classes="property">
-            <ContentControl Content="{Binding Owner}"/>
-        </TabItem>
-        <TabItem Header="Data" Classes="property">
-            <ContentControl Content="{Binding Data}"/>
-        </TabItem>
-    </TabControl>
+    <StackPanel>
+        <StackPanel>
+            <TextBlock Text="Name" Margin="{DynamicResource TextControlThemePadding}"/>
+            <TextBox Text="{Binding Name, Mode=TwoWay}"/>
+            <TextBlock Text="Width" Margin="{DynamicResource TextControlThemePadding}"/>
+            <TextBox Text="{Binding Width, Mode=TwoWay}"/>
+            <TextBlock Text="Height" Margin="{DynamicResource TextControlThemePadding}"/>
+            <TextBox Text="{Binding Height, Mode=TwoWay}"/>
+            <TextBlock Text="Background" Margin="{DynamicResource TextControlThemePadding}"/>
+            <ContentControl Content="{Binding Background}"/>
+        </StackPanel>
+        <!--<TabControl>
+            <TabItem Header="Layers" Padding="0,0,0,0">
+                <containers:LayersControl/>
+            </TabItem>
+            <TabItem Header="Shapes" Padding="12,0,0,0">
+                <containers:ShapesControl/>
+            </TabItem>
+            <TabItem Header="Data" Padding="12,0,0,0">
+                <ContentControl Content="{Binding Data}"/>
+            </TabItem>
+            <TabItem Header="Owner" Padding="12,0,0,0">
+                <ContentControl Content="{Binding Owner}"/>
+            </TabItem>
+        </TabControl>-->
+    </StackPanel>
 </UserControl>
