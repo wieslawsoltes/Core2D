@@ -61,16 +61,20 @@
                 </TabItem>
             </TabControl>
             <GridSplitter ResizeDirection="Rows" ResizeBehavior="PreviousAndNext" Background="Transparent" Height="6" Grid.Column="0" Grid.Row="1"/>
-            <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Grid.Column="0" Grid.Row="2">
-                <ContentControl>
-                    <ContentControl.Content>
-                        <MultiBinding Converter="{StaticResource StyleMultiValueConverter}">
-                            <Binding Path="PageState.SelectedShapes" FallbackValue="{x:Null}" />
-                            <Binding Path="Project.CurrentStyleLibrary.Selected" FallbackValue="{x:Null}" />
-                        </MultiBinding>
-                    </ContentControl.Content>
-                </ContentControl>
-            </ScrollViewer>
+            <TabControl Grid.Column="0" Grid.Row="2">
+                <TabItem Header="Style" Padding="0,0,0,0">
+                    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                        <ContentControl Margin="0,0,12,0">
+                            <ContentControl.Content>
+                                <MultiBinding Converter="{StaticResource StyleMultiValueConverter}">
+                                    <Binding Path="PageState.SelectedShapes" FallbackValue="{x:Null}" />
+                                    <Binding Path="Project.CurrentStyleLibrary.Selected" FallbackValue="{x:Null}" />
+                                </MultiBinding>
+                            </ContentControl.Content>
+                        </ContentControl>
+                    </ScrollViewer>
+                </TabItem>
+            </TabControl>
         </Grid>
     </Grid>
 </UserControl>
