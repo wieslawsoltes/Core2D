@@ -19,13 +19,13 @@
         <handlers:ProjectTreeViewDropHandler x:Key="ProjectTreeViewDropHandler"/>
     </UserControl.Resources>
     <Grid RowDefinitions="Auto,*,Auto" ColumnDefinitions="*">
-        <!--<Grid Grid.Row="0" RowDefinitions="*" ColumnDefinitions="*,Auto">
-            <TextBox Text="{Binding Name, Mode=TwoWay}" Classes="left" Grid.Column="0"/>
+        <Grid Grid.Row="0" RowDefinitions="*" ColumnDefinitions="*,Auto">
+            <TextBox Text="{Binding Name, Mode=TwoWay}" BorderBrush="Transparent" Background="Transparent" VerticalAlignment="Center" Grid.Column="0"/>
             <Menu Classes="usercontrol" Grid.Column="1" HorizontalAlignment="Right">
                 <MenuItem Header="+" Classes="usercontrol" Command="{Binding $parent[Window].DataContext.OnNew}" CommandParameter="{Binding Selected}"/>
                 <MenuItem Header="&#727;" Classes="usercontrol" Command="{Binding $parent[Window].DataContext.OnDelete}" CommandParameter="{Binding Selected}" IsVisible="{Binding !!Selected}"/>
             </Menu>
-        </Grid>-->
+        </Grid>
         <TreeView x:Name="documents" Items="{Binding Documents}" SelectedItem="{Binding Selected, Mode=TwoWay}" Grid.Row="1" Classes="default">
             <i:Interaction.Behaviors>
                 <idd:ContextDropBehavior Context="{Binding FallbackValue={x:Null}}" Handler="{StaticResource ProjectTreeViewDropHandler}"/>
@@ -143,9 +143,6 @@
                 </DataTemplate>
             </TreeView.DataTemplates>
         </TreeView>
-        <!--<Grid RowDefinitions="Auto" ColumnDefinitions="Auto,*" Grid.Row="2" IsVisible="{Binding !!Selected}">
-            <TextBlock Text="Name" Classes="left" Grid.Row="0" Grid.Column="0"/>
-            <TextBox Text="{Binding Selected.Name, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
-        </Grid>-->
+        <TextBox Text="{Binding Selected.Name, Mode=TwoWay}" IsVisible="{Binding !!Selected}" BorderBrush="Transparent" Background="Transparent" Grid.Row="2"/>
     </Grid>
 </UserControl>
