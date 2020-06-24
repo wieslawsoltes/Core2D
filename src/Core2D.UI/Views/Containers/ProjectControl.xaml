@@ -52,11 +52,11 @@
             </TreeView.Styles>
             <TreeView.DataTemplates>
                 <TreeDataTemplate DataType="ContainersCore:IDocumentContainer" ItemsSource="{Binding Pages}">
-                    <Grid Classes="drag">
+                    <Grid Background="Transparent">
                         <i:Interaction.Behaviors>
                             <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}"/>
                         </i:Interaction.Behaviors>
-                        <TextBlock Text="{Binding Name}" Classes="tree">
+                        <TextBlock Text="{Binding Name}">
                             <TextBlock.ContextMenu>
                                 <ContextMenu Classes="default">
                                     <MenuItem Header="_Add Page" Command="{Binding $parent[Window].DataContext.OnAddPage}" CommandParameter="{Binding Mode=OneWay}"/>
@@ -77,12 +77,12 @@
                     </Grid>
                 </TreeDataTemplate>
                 <TreeDataTemplate DataType="ContainersCore:IPageContainer" ItemsSource="{Binding Layers}">
-                    <Grid x:Name="root" Classes="drag">
+                    <Grid x:Name="root" Background="Transparent">
                         <i:Interaction.Behaviors>
                             <iac:BindTagToVisualRootDataContextBehavior/>
                             <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}"/>
                         </i:Interaction.Behaviors>
-                        <TextBlock Text="{Binding Name}" Classes="tree">
+                        <TextBlock Text="{Binding Name}">
                             <TextBlock.ContextMenu>
                                 <ContextMenu Classes="default">
                                     <MenuItem Header="Te_mplate" Classes="template" Items="{Binding #root.Tag.Project.Templates}">
@@ -126,7 +126,7 @@
                     </Grid>
                 </TreeDataTemplate>
                 <DataTemplate DataType="ContainersCore:ILayerContainer">
-                    <StackPanel Orientation="Horizontal" Classes="drag">
+                    <StackPanel Orientation="Horizontal" Background="Transparent">
                         <i:Interaction.Behaviors>
                             <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}"/>
                         </i:Interaction.Behaviors>
@@ -137,8 +137,8 @@
                                 <MenuItem Header="_Delete" Command="{Binding $parent[Window].DataContext.OnRemoveLayer}" CommandParameter="{Binding Mode=OneWay}"/>
                             </ContextMenu>
                         </StackPanel.ContextMenu>
-                        <CheckBox IsChecked="{Binding IsVisible, Mode=TwoWay}" MinWidth="0" VerticalAlignment="Center" Classes="default"/>
-                        <TextBlock Text="{Binding Name}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Classes="tree"/>
+                        <CheckBox IsChecked="{Binding IsVisible, Mode=TwoWay}" MinWidth="0" VerticalAlignment="Center"/>
+                        <TextBlock Text="{Binding Name}" VerticalAlignment="Center"/>
                     </StackPanel>
                 </DataTemplate>
             </TreeView.DataTemplates>
