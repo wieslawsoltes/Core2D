@@ -12,7 +12,7 @@
         Width="1324" Height="690"
         UseLayoutRounding="True" RenderOptions.BitmapInterpolationMode="HighQuality"
         WindowState="Maximized" WindowStartupLocation="Manual"
-        BorderThickness="1" BorderBrush="{DynamicResource ThemeBorderLightBrush}"
+        FontFamily="{StaticResource UiFontFamily}"
         Foreground="{StaticResource SystemBaseHighColor}"
         Icon="/Assets/Core2D.ico"
         xmlns:Designer="clr-namespace:Core2D.UI.Designer;assembly=Core2D.UI"
