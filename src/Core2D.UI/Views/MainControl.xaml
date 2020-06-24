@@ -56,7 +56,7 @@
                 </TabItem>
                 <TabItem Header="Page" Padding="12,0,0,0">
                     <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-                        <containers:ContainerControl DataContext="{Binding Project.CurrentContainer}" Margin="12,0,12,0"/>
+                        <containers:ContainerControl DataContext="{Binding Project.CurrentContainer}" Margin="0,0,12,0"/>
                     </ScrollViewer>
                 </TabItem>
             </TabControl>
