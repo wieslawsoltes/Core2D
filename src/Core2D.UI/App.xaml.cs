@@ -145,7 +145,7 @@ namespace Core2D.UI
             var aboutInfo = CreateAboutInfo(runtimeInfo, windowingSubsystemName, renderingSubsystemName);
             editor.AboutInfo = aboutInfo;
 
-            editor.OnNew(null);
+            //editor.OnNew(null);
 
             var mainWindow = serviceProvider.GetService<MainWindow>();
 
