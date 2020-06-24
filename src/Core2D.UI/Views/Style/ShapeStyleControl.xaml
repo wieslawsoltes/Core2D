@@ -11,22 +11,18 @@
              d:DataContext="{x:Static Designer:DesignerContext.Style}"
              d:DesignWidth="250" d:DesignHeight="400">
     <StackPanel>
-        <TabControl>
-            <TabItem Header="Style" Padding="0,0,0,0">
-                <StackPanel>
-                    <TextBlock Text="Name" Margin="{DynamicResource TextControlThemePadding}"/>
-                    <TextBox Text="{Binding Name, Mode=TwoWay}"/>
-                    <TextBlock Text="Thickness" Margin="{DynamicResource TextControlThemePadding}"/>
-                    <TextBox Text="{Binding Thickness, Mode=TwoWay}"/>
-                    <TextBlock Text="Line Cap" Margin="{DynamicResource TextControlThemePadding}"/>
-                    <ComboBox Items="{x:Static Editor:Enums.LineCapValues}" SelectedItem="{Binding LineCap, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
-                    <TextBlock Text="Dashes" Margin="{DynamicResource TextControlThemePadding}"/>
-                    <TextBox Text="{Binding Dashes, Mode=TwoWay}"/>
-                    <TextBlock Text="Dash Offset" Margin="{DynamicResource TextControlThemePadding}"/>
-                    <TextBox Text="{Binding DashOffset, Mode=TwoWay}"/>
-                </StackPanel>
-            </TabItem>
-        </TabControl>
+        <StackPanel>
+            <TextBlock Text="Name" Margin="{DynamicResource TextControlThemePadding}"/>
+            <TextBox Text="{Binding Name, Mode=TwoWay}"/>
+            <TextBlock Text="Thickness" Margin="{DynamicResource TextControlThemePadding}"/>
+            <TextBox Text="{Binding Thickness, Mode=TwoWay}"/>
+            <TextBlock Text="Line Cap" Margin="{DynamicResource TextControlThemePadding}"/>
+            <ComboBox Items="{x:Static Editor:Enums.LineCapValues}" SelectedItem="{Binding LineCap, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
+            <TextBlock Text="Dashes" Margin="{DynamicResource TextControlThemePadding}"/>
+            <TextBox Text="{Binding Dashes, Mode=TwoWay}"/>
+            <TextBlock Text="Dash Offset" Margin="{DynamicResource TextControlThemePadding}"/>
+            <TextBox Text="{Binding DashOffset, Mode=TwoWay}"/>
+        </StackPanel>
         <TabControl>
             <TabItem Header="Stroke" Padding="0,0,0,0">
                 <style:ArgbColorControl DataContext="{Binding Stroke}"/>
