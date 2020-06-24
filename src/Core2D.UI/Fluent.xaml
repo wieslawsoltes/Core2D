@@ -12,4 +12,7 @@
         <Setter Property="BorderBrush" Value="Transparent"/>
         <Setter Property="BorderThickness" Value="1"/>
     </Style>
+    <!--<Style Selector="TextBlock.code">
+        <Setter Property="FontFamily" Value="{StaticResource CodeFontFamily}" />
+    </Style>-->
 </Styles>
