@@ -44,7 +44,7 @@
             <Separator/>
             <MenuItem Header="E_xit" Command="{Binding Platform.OnExit}" InputGesture="Alt+F4"/>
         </MenuItem>
-        <MenuItem Header="_View">
+        <!--<MenuItem Header="_View">
             <MenuItem Header="_Theme" Classes="theme" DataContext="{x:Static app:App.Selector}" Items="{Binding Themes}">
                 <MenuItem.Styles>
                     <Style Selector="MenuItem.theme > MenuItem">
@@ -66,8 +66,8 @@
                     </Style>
                 </MenuItem.Styles>
             </MenuItem>
-        </MenuItem>
-        <MenuItem Header="_Window">
+        </MenuItem>-->
+        <!--<MenuItem Header="_Window">
             <MenuItem Header="_Save Layout" Command="{Binding LayoutPlatform.SaveLayout}"/>
             <MenuItem Header="_Apply Layout" Items="{Binding LayoutPlatform.Layout.VisibleDockables}">
                 <MenuItem.Styles>
@@ -86,7 +86,7 @@
             <MenuItem Header="_Export Layouts..." Command="{Binding LayoutPlatform.ExportLayouts}"/>
             <Separator/>
             <MenuItem Header="_Manage Layouts..." Command="{Binding LayoutPlatform.ManageLayouts}"/>
-        </MenuItem>
+        </MenuItem>-->
         <MenuItem Header="_Help">
             <MenuItem Header="_About Core2D" Command="{Binding Platform.OnAboutDialog}"/>
         </MenuItem>
