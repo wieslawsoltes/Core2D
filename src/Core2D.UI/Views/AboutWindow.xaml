@@ -12,7 +12,7 @@
         Width="800" Height="450"
         UseLayoutRounding="True" RenderOptions.BitmapInterpolationMode="HighQuality"
         WindowState="Normal" WindowStartupLocation="CenterScreen"
-        BorderThickness="1" BorderBrush="{DynamicResource ThemeBorderLightBrush}"
+        FontFamily="{StaticResource UiFontFamily}"
         Foreground="{StaticResource SystemBaseHighColor}"
         Icon="/Assets/Core2D.ico"
         Title="About Core2D"
