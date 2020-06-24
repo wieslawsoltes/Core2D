@@ -31,28 +31,12 @@
              xmlns:shapes="clr-namespace:Core2D.UI.Views.Shapes;assembly=Core2D.UI"
              xmlns:style="clr-namespace:Core2D.UI.Views.Style;assembly=Core2D.UI"
              xmlns:views="clr-namespace:Core2D.UI.Views;assembly=Core2D.UI">
-    <Application.Styles>
-        <!-- Theme Default -->
-        <!--<StyleInclude Source="avares://Avalonia.Themes.Default/DefaultTheme.xaml"/>-->
-        <!--<StyleInclude Source="avares://Avalonia.Themes.Default/Accents/BaseLight.xaml"/>-->
-        <!-- Theme Fluent -->
-        <StyleInclude Source="avares://Avalonia.Themes.Fluent/Accents/FluentLight.xaml"/>
-        <!--<StyleInclude Source="avares://Avalonia.Themes.Fluent/Accents/FluentDark.xaml"/>-->
-        <!-- DataGrid -->
-        <StyleInclude Source="avares://Avalonia.Controls.DataGrid/Themes/Default.xaml"/>
-        <!-- Dock -->
-        <StyleInclude Source="avares://Dock.Avalonia.Themes.Default/DefaultTheme.xaml"/>
-        <StyleInclude Source="avares://Dock.Avalonia.Themes.Metro/DefaultTheme.xaml"/>
-        <!-- Icons -->
-        <StyleInclude Source="avares://Core2D.UI/Icons.xaml"/>
-        <!-- Default -->
-        <!--<StyleInclude Source="avares://Core2D.UI/Default.xaml"/>-->
-        <!-- Fluent -->
-        <StyleInclude Source="avares://Core2D.UI/Compact.xaml"/>
-        <!--<StyleInclude Source="avares://Avalonia.Themes.Fluent/DensityStyles/Compact.xaml"/>-->
-        <StyleInclude Source="avares://Core2D.UI/Fluent.xaml"/>
-    </Application.Styles>
     <Application.Resources>
+        <!-- Fonts -->
+        <!--<FontFamily x:Key="UiFontFamily">avares://Core2D.UI/Assets/Fonts#Lato</FontFamily>-->
+        <FontFamily x:Key="UiFontFamily">Segoe UI</FontFamily>
+        <!--<FontFamily x:Key="CodeFontFamily">avares://Core2D.UI/Assets/Fonts#Source Code Pro</FontFamily>-->
+        <StaticResource x:Key="ContentControlThemeFontFamily" ResourceKey="UiFontFamily" />
         <!-- Brushes -->
         <SolidColorBrush x:Key="TransparentBrush">#00FFFFFF</SolidColorBrush>
         <VisualBrush x:Key="ColorCheckerBoard" TileMode="Tile" Stretch="None" AlignmentX="Left" AlignmentY="Top" SourceRect="0,0,20,20" DestinationRect="0,0,20,20">
@@ -98,6 +82,27 @@
         <converters:StyleMultiValueConverter x:Key="StyleMultiValueConverter"/>
         <converters:TreeViewSelectedItemToObjectConverter x:Key="TreeViewSelectedItemToObjectConverter"/>
     </Application.Resources>
+    <Application.Styles>
+        <!-- Theme Default -->
+        <!--<StyleInclude Source="avares://Avalonia.Themes.Default/DefaultTheme.xaml"/>-->
+        <!--<StyleInclude Source="avares://Avalonia.Themes.Default/Accents/BaseLight.xaml"/>-->
+        <!-- Theme Fluent -->
+        <StyleInclude Source="avares://Avalonia.Themes.Fluent/Accents/FluentLight.xaml"/>
+        <!--<StyleInclude Source="avares://Avalonia.Themes.Fluent/Accents/FluentDark.xaml"/>-->
+        <!-- DataGrid -->
+        <StyleInclude Source="avares://Avalonia.Controls.DataGrid/Themes/Default.xaml"/>
+        <!-- Dock -->
+        <StyleInclude Source="avares://Dock.Avalonia.Themes.Default/DefaultTheme.xaml"/>
+        <StyleInclude Source="avares://Dock.Avalonia.Themes.Metro/DefaultTheme.xaml"/>
+        <!-- Icons -->
+        <StyleInclude Source="avares://Core2D.UI/Icons.xaml"/>
+        <!-- Default -->
+        <!--<StyleInclude Source="avares://Core2D.UI/Default.xaml"/>-->
+        <!-- Fluent -->
+        <StyleInclude Source="avares://Core2D.UI/Compact.xaml"/>
+        <!--<StyleInclude Source="avares://Avalonia.Themes.Fluent/DensityStyles/Compact.xaml"/>-->
+        <StyleInclude Source="avares://Core2D.UI/Fluent.xaml"/>
+    </Application.Styles>
     <Application.DataTemplates>
         <!--<local:ViewLocator/>-->
         <!-- Editor -->
