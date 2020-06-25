@@ -4,7 +4,6 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:converters="clr-namespace:Core2D.UI.Converters;assembly=Core2D.UI"
-             xmlns:style="clr-namespace:Core2D.UI.Views.Style;assembly=Core2D.UI"
              xmlns:Editor="clr-namespace:Core2D.Editor;assembly=Core2D"
              xmlns:Designer="clr-namespace:Core2D.UI.Designer;assembly=Core2D.UI"
              mc:Ignorable="d"
@@ -25,27 +24,25 @@
         </StackPanel>
         <TabControl>
             <TabItem Header="Stroke" Padding="0,0,0,0">
-                <style:ArgbColorControl DataContext="{Binding Stroke}"/>
+                <ContentControl Content="{Binding Stroke}"/>
             </TabItem>
             <TabItem Header="Fill" Padding="12,0,0,0">
-                <style:ArgbColorControl DataContext="{Binding Fill}"/>
+                <ContentControl Content="{Binding Fill}"/>
             </TabItem>
         </TabControl>
         <TabControl>
             <TabItem Header="Text" Padding="0,0,0,0">
-                <style:TextStyleControl DataContext="{Binding TextStyle}"/>
+                <ContentControl Content="{Binding TextStyle}"/>
             </TabItem>
-        </TabControl>
-        <!--<TabControl>
             <TabItem Header="Line" Padding="0,0,0,0">
-                <style:LineStyleControl DataContext="{Binding LineStyle}"/>
+                <ContentControl Content="{Binding LineStyle}"/>
             </TabItem>
             <TabItem Header="Start Arrow" Padding="12,0,0,0">
-                <style:ArrowStyleControl DataContext="{Binding StartArrowStyle}"/>
+                <ContentControl Content="{Binding StartArrowStyle}"/>
             </TabItem>
             <TabItem Header="End Arrow" Padding="12,0,0,0">
-                <style:ArrowStyleControl DataContext="{Binding EndArrowStyle}"/>
+                <ContentControl Content="{Binding EndArrowStyle}"/>
             </TabItem>
-        </TabControl>-->
+        </TabControl>
     </StackPanel>
 </UserControl>
