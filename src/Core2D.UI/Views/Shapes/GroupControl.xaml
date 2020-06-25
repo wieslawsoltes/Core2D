@@ -1,7 +1,7 @@
 ﻿<UserControl x:Class="Core2D.UI.Views.Shapes.GroupControl"
              xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
              xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
@@ -16,10 +16,10 @@
     <StackPanel>
         <TabControl>
             <TabItem Header="Group" Padding="0,0,0,0">
-               <StackPanel>
+                <StackPanel>
                     <TextBlock Text="Name"  Margin="{DynamicResource TextControlThemePadding}"/>
                     <TextBox Text="{Binding Name, Mode=TwoWay}"/>
-            </StackPanel>
+                </StackPanel>
             </TabItem>
             <TabItem Header="Data" Padding="12,0,0,0">
                 <ContentControl Content="{Binding Data}"/>
@@ -27,7 +27,7 @@
             <TabItem Header="State" Padding="12,0,0,0">
                 <ContentControl Content="{Binding State}"/>
             </TabItem>
-        </TabControl>        
+        </TabControl>
         <TabControl>
             <TabItem Header="Properties" Padding="0,0,0,0">
                 <Grid RowDefinitions="Auto,*" ColumnDefinitions="50*,Auto,50*" IsVisible="{Binding !!ShapesProperties.Length}">
@@ -60,7 +60,7 @@
                     </ItemsControl>
                 </Grid>
             </TabItem>
-        </TabControl>  
+        </TabControl>
         <TabControl>
             <TabItem Header="Shapes" Padding="0,0,0,0">
                 <ListBox x:Name="shapes" Items="{Binding Shapes}">
