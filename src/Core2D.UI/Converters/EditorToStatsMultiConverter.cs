@@ -63,7 +63,7 @@ namespace Core2D.UI.Converters
                     nSelectedShapes = selectedShapes.Count;
                 }
 
-                return $"Documents: {nDocuments} - Pages: {nPages} - Layers: {nLayers} - Shapes: {nShapes} - Selected: {nSelectedShapes}";
+                return $"Documents: {nDocuments} Pages: {nPages} Layers: {nLayers} Shapes: {nShapes} Selected: {nSelectedShapes}";
             }
             return s_defaultStats;
         }
