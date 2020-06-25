@@ -16,10 +16,8 @@
             <TextBox Text="{Binding Name, Mode=TwoWay}"/>
             <TextBlock Text="Arrow Type" Margin="{DynamicResource TextControlThemePadding}"/>
             <ComboBox Items="{x:Static Editor:Enums.ArrowTypeValues}" SelectedItem="{Binding ArrowType, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
-            <TextBlock Text="IsStroked" Margin="{DynamicResource TextControlThemePadding}"/>
-            <CheckBox IsChecked="{Binding IsStroked, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
-            <TextBlock Text="IsFilled" Margin="{DynamicResource TextControlThemePadding}"/>
-            <CheckBox IsChecked="{Binding IsFilled, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
+            <CheckBox Content="IsStroked" IsChecked="{Binding IsStroked, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
+            <CheckBox Content="IsFilled" IsChecked="{Binding IsFilled, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
             <TextBlock Text="RadiusX" Margin="{DynamicResource TextControlThemePadding}"/>
             <TextBox Text="{Binding RadiusX, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
             <TextBlock Text="RadiusY" Margin="{DynamicResource TextControlThemePadding}"/>
@@ -34,10 +32,10 @@
             <TextBox Text="{Binding DashOffset, Mode=TwoWay}"/>
         </StackPanel>
         <TabControl>
-            <TabItem Header="Stroke" Classes="property">
+            <TabItem Header="Stroke" Padding="0,0,0,0">
                 <ContentControl Content="{Binding Stroke}"/>
             </TabItem>
-            <TabItem Header="Fill" Classes="property">
+            <TabItem Header="Fill" Padding="12,0,0,0">
                 <ContentControl Content="{Binding Fill}"/>
             </TabItem>
         </TabControl>
