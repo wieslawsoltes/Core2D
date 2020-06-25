@@ -107,18 +107,7 @@
                     <TabItem Header="Styles" Padding="0,0,0,0">
                         <containers:StylesControl DataContext="{Binding Project}" Margin="0,0,12,0"/>
                     </TabItem>
-                    <TabItem Header="Page" Padding="12,0,0,0">
-                        <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-                            <containers:ContainerControl DataContext="{Binding Project.CurrentContainer}" Margin="0,0,12,0"/>
-                        </ScrollViewer>
-                    </TabItem>
-                    <TabItem Header="Layers" Padding="12,0,0,0">
-                        <containers:LayersControl DataContext="{Binding Project.CurrentContainer}" Margin="0,0,12,0"/>
-                    </TabItem>
-                </TabControl>
-                <GridSplitter ResizeDirection="Rows" ResizeBehavior="PreviousAndNext" Background="Transparent" Height="6" Grid.Column="0" Grid.Row="1"/>
-                <TabControl Grid.Column="0" Grid.Row="2">
-                    <TabItem Header="Style" Padding="0,0,0,0">
+                    <TabItem Header="Style" Padding="12,0,0,0">
                         <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
                             <ContentControl Margin="0,0,12,0">
                                 <ContentControl.Content>
@@ -128,6 +117,17 @@
                                     </MultiBinding>
                                 </ContentControl.Content>
                             </ContentControl>
+                        </ScrollViewer>
+                    </TabItem>
+                </TabControl>
+                <GridSplitter ResizeDirection="Rows" ResizeBehavior="PreviousAndNext" Background="Transparent" Height="6" Grid.Column="0" Grid.Row="1"/>
+                <TabControl Grid.Column="0" Grid.Row="2">
+                    <TabItem Header="Layers" Padding="0,0,0,0">
+                        <containers:LayersControl DataContext="{Binding Project.CurrentContainer}" Margin="0,0,12,0"/>
+                    </TabItem>
+                    <TabItem Header="Page" Padding="12,0,0,0">
+                        <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                            <containers:ContainerControl DataContext="{Binding Project.CurrentContainer}" Margin="0,0,12,0"/>
                         </ScrollViewer>
                     </TabItem>
                 </TabControl>
