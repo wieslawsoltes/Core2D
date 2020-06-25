@@ -1,36 +1,28 @@
 ﻿<UserControl x:Class="Core2D.UI.Views.Style.LineFixedLengthControl"
              xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:converters="clr-namespace:Core2D.UI.Converters;assembly=Core2D.UI"
              xmlns:Designer="clr-namespace:Core2D.UI.Designer;assembly=Core2D.UI"
              mc:Ignorable="d"
              d:DataContext="{x:Static Designer:DesignerContext.LineFixedLength}"
              d:DesignWidth="250" d:DesignHeight="400">
-    <TabControl Classes="default">
-        <TabItem Header="FixedLength" Classes="property">
-            <ScrollViewer>
-                <Grid RowDefinitions="Auto,Auto" ColumnDefinitions="Auto,*">
-                    <TextBlock Text="Length" Classes="left" Grid.Row="0" Grid.Column="0"/>
-                    <TextBox Text="{Binding Length, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
-                    <TextBlock Text="Flags" Classes="left" Grid.Row="1" Grid.Column="0"/>
-                    <StackPanel Grid.Row="1" Grid.Column="1">
-                        <CheckBox Content="Disabled" IsChecked="{Binding Disabled, Mode=TwoWay}" Classes="default"/>
-                        <CheckBox Content="Start" IsChecked="{Binding Start, Mode=TwoWay}" Classes="default"/>
-                        <CheckBox Content="End" IsChecked="{Binding End, Mode=TwoWay}" Classes="default"/>
-                        <CheckBox Content="Vertical" IsChecked="{Binding Vertical, Mode=TwoWay}" Classes="default"/>
-                        <CheckBox Content="Horizontal" IsChecked="{Binding Horizontal, Mode=TwoWay}" Classes="default"/>
-                        <CheckBox Content="All" IsChecked="{Binding All, Mode=TwoWay}" Classes="default"/>
-                    </StackPanel>
-                </Grid>
-            </ScrollViewer>
-        </TabItem>
-        <TabItem Header="StartTrigger" Classes="property">
-            <ContentControl Content="{Binding StartTrigger}"/>
-        </TabItem>
-        <TabItem Header="EndTrigger" Classes="property">
-            <ContentControl Content="{Binding EndTrigger}"/>
-        </TabItem>
-    </TabControl>
+    <StackPanel>
+        <TextBlock Text="Length" Margin="{DynamicResource TextControlThemePadding}"/>
+        <TextBox Text="{Binding Length, Mode=TwoWay}"/>
+        <TextBlock Text="Flags" Margin="{DynamicResource TextControlThemePadding}"/>
+        <StackPanel>
+            <CheckBox Content="Disabled" IsChecked="{Binding Disabled, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
+            <CheckBox Content="Start" IsChecked="{Binding Start, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
+            <CheckBox Content="End" IsChecked="{Binding End, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
+            <CheckBox Content="Vertical" IsChecked="{Binding Vertical, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
+            <CheckBox Content="Horizontal" IsChecked="{Binding Horizontal, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
+            <CheckBox Content="All" IsChecked="{Binding All, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
+        </StackPanel>
+        <TextBlock Text="StartTrigger" Margin="{DynamicResource TextControlThemePadding}"/>
+        <ContentControl Content="{Binding StartTrigger}"/>
+        <TextBlock Text="EndTrigger" Margin="{DynamicResource TextControlThemePadding}"/>
+        <ContentControl Content="{Binding EndTrigger}"/>
+    </StackPanel>
 </UserControl>
