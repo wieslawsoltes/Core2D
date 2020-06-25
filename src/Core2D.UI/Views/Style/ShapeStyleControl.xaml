@@ -34,7 +34,7 @@
             <TabItem Header="Text" Padding="0,0,0,0">
                 <ContentControl Content="{Binding TextStyle}"/>
             </TabItem>
-            <TabItem Header="Line" Padding="0,0,0,0">
+            <TabItem Header="Line" Padding="12,0,0,0">
                 <ContentControl Content="{Binding LineStyle}"/>
             </TabItem>
             <TabItem Header="Start Arrow" Padding="12,0,0,0">
