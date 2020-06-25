@@ -87,7 +87,7 @@
                 </ListBox>
             </Grid>
         </Grid>
-        <Grid ColumnDefinitions="250,6,*,6,250" RowDefinitions="Auto,*,Auto,12" IsVisible="{Binding Project, Converter={x:Static ObjectConverters.IsNotNull}}">
+        <Grid ColumnDefinitions="250,6,*,6,250" RowDefinitions="Auto,*,Auto,Auto" IsVisible="{Binding Project, Converter={x:Static ObjectConverters.IsNotNull}}">
             <views:EditorMenuControl Grid.Column="0" Grid.ColumnSpan="5" Grid.Row="0"/>
             <TabControl Grid.Column="0" Grid.Row="1">
                 <TabItem Header="Project Explorer" Padding="0,0,0,0">
@@ -127,6 +127,7 @@
                     </ScrollViewer>
                 </TabItem>
             </TabControl>
+            <views:StatusControl Grid.Column="0" Grid.ColumnSpan="5" Grid.Row="3"/>
         </Grid>
     </Grid>
 </UserControl>
