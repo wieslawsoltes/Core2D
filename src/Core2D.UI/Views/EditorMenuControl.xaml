@@ -280,9 +280,9 @@
             <MenuItem Header="_Arange">
                 <MenuItem Header="_Bring to Front" Command="{Binding OnBringToFrontSelected}" InputGesture="Ctrl+Shift+OemCloseBrackets"/>
                 <MenuItem Header="Bring _Forward" Command="{Binding OnBringForwardSelected}" InputGesture="Ctrl+OemCloseBrackets"/>
+                <Separator/>
                 <MenuItem Header="Send Back_ward" Command="{Binding OnSendBackwardSelected}" InputGesture="Ctrl+OemOpenBrackets"/>
                 <MenuItem Header="_Send to Back" Command="{Binding OnSendToBackSelected}" InputGesture="Ctrl+Shift+OemOpenBrackets"/>
-                <Separator/>
             </MenuItem>
             <Separator/>
             <MenuItem Header="Create Pat_h" Command="{Binding OnCreatePath}"/>
