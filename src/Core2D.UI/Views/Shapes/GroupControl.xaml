@@ -19,36 +19,6 @@
                <StackPanel>
                     <TextBlock Text="Name"  Margin="{DynamicResource TextControlThemePadding}"/>
                     <TextBox Text="{Binding Name, Mode=TwoWay}"/>
-                    <TextBlock Text="Properties"  Margin="{DynamicResource TextControlThemePadding}"/>
-                    <Grid RowDefinitions="Auto,*" ColumnDefinitions="50*,Auto,50*" IsVisible="{Binding !!ShapesProperties.Length}">
-                        <TextBlock Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" Text="Name"/>
-                        <ItemsControl VerticalAlignment="Stretch" Grid.Column="0" Grid.Row="1" Items="{Binding ShapesProperties}">
-                            <ItemsControl.DataTemplates>
-                                <DataTemplate DataType="DataCore:IProperty">
-                                    <Grid VerticalAlignment="Top" Background="Transparent">
-                                        <i:Interaction.Behaviors>
-                                            <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}"/>
-                                        </i:Interaction.Behaviors>
-                                        <TextBox VerticalAlignment="Center" Text="{Binding Name, Mode=TwoWay}"/>
-                                    </Grid>
-                                </DataTemplate>
-                            </ItemsControl.DataTemplates>
-                        </ItemsControl>
-                        <GridSplitter ResizeDirection="Columns" ResizeBehavior="PreviousAndNext" Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" Width="6"/>
-                        <TextBlock Grid.Column="2" Grid.Row="0" VerticalAlignment="Center" Text="Value"/>
-                        <ItemsControl VerticalAlignment="Stretch" Grid.Column="2" Grid.Row="1" Items="{Binding ShapesProperties}">
-                            <ItemsControl.DataTemplates>
-                                <DataTemplate DataType="DataCore:IProperty">
-                                    <Grid VerticalAlignment="Top" Background="Transparent">
-                                        <i:Interaction.Behaviors>
-                                            <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}"/>
-                                        </i:Interaction.Behaviors>
-                                        <TextBox VerticalAlignment="Center" Text="{Binding Value, Mode=TwoWay}"/>
-                                    </Grid>
-                                </DataTemplate>
-                            </ItemsControl.DataTemplates>
-                        </ItemsControl>
-                    </Grid>
             </StackPanel>
             </TabItem>
             <TabItem Header="Data" Padding="12,0,0,0">
@@ -57,7 +27,40 @@
             <TabItem Header="State" Padding="12,0,0,0">
                 <ContentControl Content="{Binding State}"/>
             </TabItem>
-        </TabControl>
+        </TabControl>        
+        <TabControl>
+            <TabItem Header="Properties" Padding="0,0,0,0">
+                <Grid RowDefinitions="Auto,*" ColumnDefinitions="50*,Auto,50*" IsVisible="{Binding !!ShapesProperties.Length}">
+                    <TextBlock Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" Text="Name"/>
+                    <ItemsControl VerticalAlignment="Stretch" Grid.Column="0" Grid.Row="1" Items="{Binding ShapesProperties}">
+                        <ItemsControl.DataTemplates>
+                            <DataTemplate DataType="DataCore:IProperty">
+                                <Grid VerticalAlignment="Top" Background="Transparent">
+                                    <i:Interaction.Behaviors>
+                                        <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}"/>
+                                    </i:Interaction.Behaviors>
+                                    <TextBox VerticalAlignment="Center" Text="{Binding Name, Mode=TwoWay}"/>
+                                </Grid>
+                            </DataTemplate>
+                        </ItemsControl.DataTemplates>
+                    </ItemsControl>
+                    <GridSplitter ResizeDirection="Columns" ResizeBehavior="PreviousAndNext" Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" Width="6"/>
+                    <TextBlock Grid.Column="2" Grid.Row="0" VerticalAlignment="Center" Text="Value"/>
+                    <ItemsControl VerticalAlignment="Stretch" Grid.Column="2" Grid.Row="1" Items="{Binding ShapesProperties}">
+                        <ItemsControl.DataTemplates>
+                            <DataTemplate DataType="DataCore:IProperty">
+                                <Grid VerticalAlignment="Top" Background="Transparent">
+                                    <i:Interaction.Behaviors>
+                                        <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}"/>
+                                    </i:Interaction.Behaviors>
+                                    <TextBox VerticalAlignment="Center" Text="{Binding Value, Mode=TwoWay}"/>
+                                </Grid>
+                            </DataTemplate>
+                        </ItemsControl.DataTemplates>
+                    </ItemsControl>
+                </Grid>
+            </TabItem>
+        </TabControl>  
         <TabControl>
             <TabItem Header="Shapes" Padding="0,0,0,0">
                 <ListBox x:Name="shapes" Items="{Binding Shapes}">
