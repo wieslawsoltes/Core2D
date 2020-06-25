@@ -18,12 +18,10 @@
             <TextBox Text="{Binding Curvature, Mode=TwoWay}"/>
             <TextBlock Text="CurveOrientation" Margin="{DynamicResource TextControlThemePadding}"/>
             <ComboBox Items="{x:Static Editor:Enums.CurveOrientationValues}" SelectedItem="{Binding CurveOrientation, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
-            <TextBlock Text="FixedLength" Margin="{DynamicResource TextControlThemePadding}"/>
-            <ContentControl Content="{Binding FixedLength}"/>
         </StackPanel>
         <TabControl>
             <TabItem Header="FixedLength" Padding="0,0,0,0">
-                <ContentControl Content="{Binding Stroke}"/>
+                <ContentControl Content="{Binding FixedLength}"/>
             </TabItem>
         </TabControl>
     </StackPanel>
