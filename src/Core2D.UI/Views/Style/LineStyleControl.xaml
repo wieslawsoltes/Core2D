@@ -10,14 +10,21 @@
              d:DataContext="{x:Static Designer:DesignerContext.LineStyle}"
              d:DesignWidth="250" d:DesignHeight="400">
     <StackPanel>
-        <TextBlock Text="Name" Margin="{DynamicResource TextControlThemePadding}"/>
-        <TextBox Text="{Binding Name, Mode=TwoWay}"/>
-        <CheckBox Content="IsCurved" IsChecked="{Binding IsCurved, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
-        <TextBlock Text="Curvature" Margin="{DynamicResource TextControlThemePadding}"/>
-        <TextBox Text="{Binding Curvature, Mode=TwoWay}"/>
-        <TextBlock Text="CurveOrientation" Margin="{DynamicResource TextControlThemePadding}"/>
-        <ComboBox Items="{x:Static Editor:Enums.CurveOrientationValues}" SelectedItem="{Binding CurveOrientation, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
-        <TextBlock Text="FixedLength" Margin="{DynamicResource TextControlThemePadding}"/>
-        <ContentControl Content="{Binding FixedLength}"/>
+        <StackPanel>
+            <TextBlock Text="Name" Margin="{DynamicResource TextControlThemePadding}"/>
+            <TextBox Text="{Binding Name, Mode=TwoWay}"/>
+            <CheckBox Content="IsCurved" IsChecked="{Binding IsCurved, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
+            <TextBlock Text="Curvature" Margin="{DynamicResource TextControlThemePadding}"/>
+            <TextBox Text="{Binding Curvature, Mode=TwoWay}"/>
+            <TextBlock Text="CurveOrientation" Margin="{DynamicResource TextControlThemePadding}"/>
+            <ComboBox Items="{x:Static Editor:Enums.CurveOrientationValues}" SelectedItem="{Binding CurveOrientation, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
+            <TextBlock Text="FixedLength" Margin="{DynamicResource TextControlThemePadding}"/>
+            <ContentControl Content="{Binding FixedLength}"/>
+        </StackPanel>
+        <TabControl>
+            <TabItem Header="FixedLength" Padding="0,0,0,0">
+                <ContentControl Content="{Binding Stroke}"/>
+            </TabItem>
+        </TabControl>
     </StackPanel>
 </UserControl>
