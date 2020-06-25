@@ -1,7 +1,7 @@
 ﻿<UserControl x:Class="Core2D.UI.Views.Style.ArrowStyleControl"
              xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:converters="clr-namespace:Core2D.UI.Converters;assembly=Core2D.UI"
              xmlns:Editor="clr-namespace:Core2D.Editor;assembly=Core2D"
@@ -10,31 +10,36 @@
              mc:Ignorable="d"
              d:DataContext="{x:Static Designer:DesignerContext.ArrowStyle}"
              d:DesignWidth="250" d:DesignHeight="400">
-    <TabControl Classes="default">
-        <TabItem Header="Arrow" Classes="property">
-            <ScrollViewer>
-                <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto" ColumnDefinitions="Auto,*">
-                    <TextBlock Text="Arrow Type" Classes="left" Grid.Row="0" Grid.Column="0"/>
-                    <ComboBox Items="{x:Static Editor:Enums.ArrowTypeValues}" SelectedItem="{Binding ArrowType, Mode=TwoWay}" Classes="default" Grid.Row="0" Grid.Column="1"/>
-                    <TextBlock Text="IsStroked" Classes="left" Grid.Row="1" Grid.Column="0"/>
-                    <CheckBox IsChecked="{Binding IsStroked, Mode=TwoWay}" Classes="left" Grid.Row="1" Grid.Column="1"/>
-                    <TextBlock Text="IsFilled" Classes="left" Grid.Row="2" Grid.Column="0"/>
-                    <CheckBox IsChecked="{Binding IsFilled, Mode=TwoWay}" Classes="left" Grid.Row="2" Grid.Column="1"/>
-                    <TextBlock Text="RadiusX" Classes="left" Grid.Row="3" Grid.Column="0"/>
-                    <TextBox Text="{Binding RadiusX, Mode=TwoWay}" Classes="left" Grid.Row="3" Grid.Column="1"/>
-                    <TextBlock Text="RadiusY" Classes="left" Grid.Row="4" Grid.Column="0"/>
-                    <TextBox Text="{Binding RadiusY, Mode=TwoWay}" Classes="left" Grid.Row="4" Grid.Column="1"/>
-                </Grid>
-            </ScrollViewer>
-        </TabItem>
-        <TabItem Header="Style" Classes="property">
-            <style:StyleControl/>
-        </TabItem>
-        <TabItem Header="Stroke" Classes="property">
-            <ContentControl Content="{Binding Stroke}"/>
-        </TabItem>
-        <TabItem Header="Fill" Classes="property">
-            <ContentControl Content="{Binding Fill}"/>
-        </TabItem>
-    </TabControl>
+    <StackPanel>
+        <StackPanel>
+            <TextBlock Text="Name" Margin="{DynamicResource TextControlThemePadding}"/>
+            <TextBox Text="{Binding Name, Mode=TwoWay}"/>
+            <TextBlock Text="Arrow Type" Margin="{DynamicResource TextControlThemePadding}"/>
+            <ComboBox Items="{x:Static Editor:Enums.ArrowTypeValues}" SelectedItem="{Binding ArrowType, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
+            <TextBlock Text="IsStroked" Margin="{DynamicResource TextControlThemePadding}"/>
+            <CheckBox IsChecked="{Binding IsStroked, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
+            <TextBlock Text="IsFilled" Margin="{DynamicResource TextControlThemePadding}"/>
+            <CheckBox IsChecked="{Binding IsFilled, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
+            <TextBlock Text="RadiusX" Margin="{DynamicResource TextControlThemePadding}"/>
+            <TextBox Text="{Binding RadiusX, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
+            <TextBlock Text="RadiusY" Margin="{DynamicResource TextControlThemePadding}"/>
+            <TextBox Text="{Binding RadiusY, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
+            <TextBlock Text="Thickness" Margin="{DynamicResource TextControlThemePadding}"/>
+            <TextBox Text="{Binding Thickness, Mode=TwoWay}"/>
+            <TextBlock Text="Line Cap" Margin="{DynamicResource TextControlThemePadding}"/>
+            <ComboBox Items="{x:Static Editor:Enums.LineCapValues}" SelectedItem="{Binding LineCap, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
+            <TextBlock Text="Dashes" Margin="{DynamicResource TextControlThemePadding}"/>
+            <TextBox Text="{Binding Dashes, Mode=TwoWay}"/>
+            <TextBlock Text="Dash Offset" Margin="{DynamicResource TextControlThemePadding}"/>
+            <TextBox Text="{Binding DashOffset, Mode=TwoWay}"/>
+        </StackPanel>
+        <TabControl>
+            <TabItem Header="Stroke" Classes="property">
+                <ContentControl Content="{Binding Stroke}"/>
+            </TabItem>
+            <TabItem Header="Fill" Classes="property">
+                <ContentControl Content="{Binding Fill}"/>
+            </TabItem>
+        </TabControl>
+    </StackPanel>
 </UserControl>
