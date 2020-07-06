@@ -91,12 +91,8 @@
         <StyleInclude Source="avares://Avalonia.Controls.DataGrid/Themes/Default.xaml"/>
         <!-- Icons -->
         <StyleInclude Source="avares://Core2D.UI/Icons.xaml"/>
-        <!-- Default -->
-        <!--<StyleInclude Source="avares://Core2D.UI/Default.xaml"/>-->
         <!-- Fluent -->
-        <StyleInclude Source="avares://Core2D.UI/Compact.xaml"/>
-        <!--<StyleInclude Source="avares://Avalonia.Themes.Fluent/DensityStyles/Compact.xaml"/>-->
-        <StyleInclude Source="avares://Core2D.UI/Fluent.xaml"/>
+        <StyleInclude Source="avares://Avalonia.Themes.Fluent/DensityStyles/Compact.xaml"/>
     </Application.Styles>
     <Application.DataTemplates>
         <!--<local:ViewLocator/>-->
