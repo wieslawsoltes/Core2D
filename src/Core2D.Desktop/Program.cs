@@ -161,22 +161,58 @@ namespace Core2D
                     }
                     else
                     {
-#if false
-                        builder.AfterSetup(_ =>
+#if true
+                        builder.AfterSetup(async _ =>
                         {
-                            DispatcherTimer.RunOnce(() =>
+                            var window = default(Window?);
+                            var headlessWindow = default(IHeadlessWindow?);
+                            var control = default(UserControl?);
+                            var editor = default(IProjectEditor?);
+                            var pt = new Point(-1, -1);
+                            var size = new Size(1366, 690);
+
+                            await Dispatcher.UIThread.InvokeAsync(() =>
                             {
-                                var window = ((IClassicDesktopStyleApplicationLifetime)Application.Current.ApplicationLifetime).MainWindow;
-                                var control = window.Content as UserControl;
-                                if (control != null && control.DataContext != null)
+                                window = ((IClassicDesktopStyleApplicationLifetime)Application.Current.ApplicationLifetime).MainWindow;
+                                headlessWindow = window?.PlatformImpl as IHeadlessWindow;
+                                control = window?.Content as UserControl;
+                                editor = control?.DataContext as IProjectEditor;
+                                Dispatcher.UIThread.RunJobs();
+                            });
+
+                            await Dispatcher.UIThread.InvokeAsync(() =>
+                            {
+                                headlessWindow?.MouseMove(pt);
+                                Dispatcher.UIThread.RunJobs();
+                            });
+
+                            await Dispatcher.UIThread.InvokeAsync(() =>
+                            {
+                                if (control != null)
                                 {
-                                    control.Background = new SolidColorBrush(Color.Parse("#FFE6E6E6"));
-                                    var editor = control.DataContext as IProjectEditor;
-                                    editor?.OnNew(null);
-                                    var size = new Size(1366, 690);
-                                    Screenshot(control, size, "Core2D.png");
+                                    Screenshot(control, size, "Core2D-Dashboard.png");
+                                    Dispatcher.UIThread.RunJobs();
                                 }
-                            }, TimeSpan.FromSeconds(1));
+                            });
+
+                            await Dispatcher.UIThread.InvokeAsync(() =>
+                            {
+                                if (control != null)
+                                {
+                                    editor?.OnNew(null);
+                                    control?.InvalidateVisual();
+                                    Dispatcher.UIThread.RunJobs();
+                                }
+                            });
+
+                            await Dispatcher.UIThread.InvokeAsync(() =>
+                            {
+                                if (control != null)
+                                {
+                                    Screenshot(control, size, "Core2D-Editor.png");
+                                    Dispatcher.UIThread.RunJobs();
+                                }
+                            });
                         })
                         .StartWithClassicDesktopLifetime(args);
 #else
