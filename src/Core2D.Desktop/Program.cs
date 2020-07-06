@@ -55,13 +55,11 @@ namespace Core2D
             var factory = AvaloniaLocator.Current.GetService<IPlatformRenderInterface>();
             var pixelSize = new PixelSize((int)size.Width, (int)size.Height);
             var dpiVector = new Vector(dpi, dpi);
-            using (RenderTargetBitmap bitmap = new RenderTargetBitmap(pixelSize, dpiVector))
-            {
-                target.Measure(size);
-                target.Arrange(new Rect(size));
-                bitmap.Render(target);
-                bitmap.Save(path);
-            }
+            using RenderTargetBitmap bitmap = new RenderTargetBitmap(pixelSize, dpiVector);
+            target.Measure(size);
+            target.Arrange(new Rect(size));
+            bitmap.Render(target);
+            bitmap.Save(path);
         }
 
         [DllImport("kernel32.dll", SetLastError = true, ExactSpelling = true)]
