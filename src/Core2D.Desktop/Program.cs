@@ -2,9 +2,12 @@
 using System.CommandLine;
 using System.CommandLine.Invocation;
 using Avalonia;
+using Avalonia.Controls;
+using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Dialogs;
 using Avalonia.Headless;
 using Avalonia.ReactiveUI;
+using Avalonia.Threading;
 using Core2D.UI;
 
 namespace Core2D
@@ -13,6 +16,7 @@ namespace Core2D
     {
         public bool UseManagedSystemDialogs { get; set; }
         public bool UseHeadless { get; set; }
+        public bool UseHeadlessVnc { get; set; }
     }
 
     internal class Program
@@ -32,6 +36,11 @@ namespace Core2D
                 Argument = new Argument<bool>()
             };
 
+            var optionUseHeadlessVnc = new Option(new[] { "--useHeadlessVnc" }, "Use headless vnc")
+            {
+                Argument = new Argument<bool>()
+            };
+
             var rootCommand = new RootCommand()
             {
                 Description = "A multi-platform data driven 2D diagram editor."
@@ -39,6 +48,7 @@ namespace Core2D
 
             rootCommand.AddOption(optionUseManagedSystemDialogs);
             rootCommand.AddOption(optionUseHeadless);
+            rootCommand.AddOption(optionUseHeadlessVnc);
 
             rootCommand.Handler = CommandHandler.Create((Settings settings) =>
             {
@@ -51,11 +61,16 @@ namespace Core2D
                 {
                     builder.UseHeadless(true);
                 }
+
+                if (settings.UseHeadlessVnc)
+                {
+                    return builder.StartWithHeadlessVncPlatform(null, 5901, args, ShutdownMode.OnMainWindowClose);
+                }
+
+                return builder.StartWithClassicDesktopLifetime(args);
             });
 
             rootCommand.Invoke(args);
-
-            builder.StartWithClassicDesktopLifetime(args);
         }
 
         public static AppBuilder BuildAvaloniaApp()
