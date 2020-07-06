@@ -22,15 +22,15 @@
              d:DataContext="{x:Static Designer:DesignerContext.Editor}"
              d:DesignWidth="1000" d:DesignHeight="600">
     <Grid ColumnDefinitions="250,Auto,*" RowDefinitions="*">
-        <ListBox x:Name="fileWriters" Items="{Binding FileWriters}" Grid.Column="0" Grid.Row="0" Margin="6,6,0,6" Classes="writers">
+        <ListBox x:Name="fileWriters" Items="{Binding FileWriters}" Grid.Column="0" Grid.Row="0" Margin="6,6,0,6">
             <ListBox.DataTemplates>
                 <DataTemplate DataType="Interfaces:IFileWriter">
-                    <TextBlock Text="{Binding Name}" Classes="list"/>
+                    <TextBlock Text="{Binding Name}"/>
                 </DataTemplate>
             </ListBox.DataTemplates>
         </ListBox>
-        <GridSplitter Classes="vertical" Grid.Column="1" Grid.Row="0" Width="6"/>
-        <Border Classes="writers" Grid.Column="2" Grid.Row="0" Margin="0,6,6,6">
+        <GridSplitter ResizeDirection="Columns" ResizeBehavior="PreviousAndNext" Background="Transparent" Width="6" Grid.Column="1" Grid.Row="0"/>
+        <Border Grid.Column="2" Grid.Row="0" Margin="0,6,6,6">
             <!-- TODO: -->
             <ContentControl Content="{Binding #fileWriters.SelectedItem}">
                 <ContentControl.DataTemplates>

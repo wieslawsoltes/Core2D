@@ -10,87 +10,95 @@
              mc:Ignorable="d"
              d:DataContext="{x:Static Designer:DesignerContext.ShapeRendererState}"
              d:DesignWidth="250" d:DesignHeight="400">
-    <TabControl Classes="default">
-        <TabItem Header="Point" Classes="property">
-            <TabControl Classes="default">
-                <TabItem Header="Options" Classes="property">
-                    <ScrollViewer>
-                        <Grid RowDefinitions="Auto,Auto,Auto" ColumnDefinitions="Auto,*">
-                            <TextBlock Text="DrawDecorators" Classes="left" Grid.Row="0" Grid.Column="0"/>
-                            <CheckBox IsChecked="{Binding DrawDecorators, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
-                            <TextBlock Text="DrawPoints" Classes="left" Grid.Row="1" Grid.Column="0"/>
-                            <CheckBox IsChecked="{Binding DrawPoints, Mode=TwoWay}" Classes="left" Grid.Row="1" Grid.Column="1"/>
-                            <TextBlock Text="PointSize" Classes="left" Grid.Row="2" Grid.Column="0"/>
-                            <TextBox Text="{Binding PointSize, Mode=TwoWay}" Classes="left" Grid.Row="2" Grid.Column="1"/>
-                        </Grid>
-                    </ScrollViewer>
-                </TabItem>
-                <TabItem Header="PointStyle" Classes="property">
-                    <ScrollViewer>
-                        <ContentControl Content="{Binding PointStyle}"/>
-                    </ScrollViewer>
-                </TabItem>
-                <TabItem Header="SelectedPointStyle" Classes="property">
-                    <ScrollViewer>
-                        <ContentControl Content="{Binding SelectedPointStyle}"/>
-                    </ScrollViewer>
-                </TabItem>
-            </TabControl>
-        </TabItem>
-        <TabItem Header="Zoom" Classes="property">
-            <ScrollViewer>
-                <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto" ColumnDefinitions="Auto,*">
-                    <TextBlock Text="PanX" Classes="left" Grid.Row="0" Grid.Column="0"/>
-                    <TextBox Text="{Binding PanX, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
-                    <TextBlock Text="PanY" Classes="left" Grid.Row="1" Grid.Column="0"/>
-                    <TextBox Text="{Binding PanY, Mode=TwoWay}" Classes="left" Grid.Row="1" Grid.Column="1"/>
-                    <TextBlock Text="ZoomX" Classes="left" Grid.Row="2" Grid.Column="0"/>
-                    <TextBox Text="{Binding ZoomX, Mode=TwoWay}" Classes="left" Grid.Row="2" Grid.Column="1"/>
-                    <TextBlock Text="ZoomY" Classes="left" Grid.Row="3" Grid.Column="0"/>
-                    <TextBox Text="{Binding ZoomY, Mode=TwoWay}" Classes="left" Grid.Row="3" Grid.Column="1"/>
-                </Grid>
-            </ScrollViewer>
-        </TabItem>
-        <TabItem Header="DrawShapeState" Classes="property">
-            <ScrollViewer>
-                <ContentControl Content="{Binding DrawShapeState}"/>
-            </ScrollViewer>
-        </TabItem>
-        <TabItem Header="SelectedShapes" Classes="property">
-            <ListBox x:Name="shapes" Items="{Binding SelectedShapes}" VirtualizationMode="Simple" Classes="default">
-                <ListBox.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <VirtualizingStackPanel Orientation="Vertical"/>
-                    </ItemsPanelTemplate>
-                </ListBox.ItemsPanel>
-                <ListBox.KeyBindings>
-                    <KeyBinding Command="{Binding $parent[Window].DataContext.OnRemoveShape}" CommandParameter="{Binding #shapes.SelectedItem}" Gesture="Delete"/>
-                </ListBox.KeyBindings>
-                <ListBox.DataTemplates>
-                    <DataTemplate DataType="ShapesCore:IBaseShape">
-                        <TextBlock Text="{Binding Mode=OneWay, Converter={StaticResource ObjectToTypeStringConverter}}" Classes="list">
-                            <TextBlock.ContextMenu>
-                                <ContextMenu Classes="default">
-                                    <MenuItem Header="_Delete" Command="{Binding $parent[Window].DataContext.OnRemoveShape}" CommandParameter="{Binding}"/>
-                                </ContextMenu>
-                            </TextBlock.ContextMenu>
-                        </TextBlock>
-                    </DataTemplate>
-                </ListBox.DataTemplates>
-            </ListBox>
-        </TabItem>
-        <TabItem Header="ImageCache" Classes="property">
-            <containers:ImagesControl DataContext="{Binding ImageCache}"/>
-        </TabItem>
-        <TabItem Header="SelectionStyle" Classes="property">
-            <ScrollViewer>
-                <ContentControl Content="{Binding SelectionStyle}"/>
-            </ScrollViewer>
-        </TabItem>
-        <TabItem Header="HelperStyle" Classes="property">
-            <ScrollViewer>
-                <ContentControl Content="{Binding HelperStyle}"/>
-            </ScrollViewer>
-        </TabItem>
-    </TabControl>
+    <StackPanel>
+        <TabControl>
+            <TabItem Header="Point" Padding="0,0,0,0">
+                <ScrollViewer>
+                    <StackPanel>
+                        <CheckBox IsChecked="{Binding DrawDecorators, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
+                        <CheckBox IsChecked="{Binding DrawPoints, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
+                        <TextBlock Text="PointSize" Margin="{DynamicResource TextControlThemePadding}"/>
+                        <TextBox Text="{Binding PointSize, Mode=TwoWay}"/>
+                    </StackPanel>
+                </ScrollViewer>
+            </TabItem>
+            <TabItem Header="Normal Style" Padding="12,0,0,0">
+                <ScrollViewer>
+                    <ContentControl Content="{Binding PointStyle}"/>
+                </ScrollViewer>
+            </TabItem>
+            <TabItem Header="Selected Style" Padding="12,0,0,0">
+                <ScrollViewer>
+                    <ContentControl Content="{Binding SelectedPointStyle}"/>
+                </ScrollViewer>
+            </TabItem>
+        </TabControl>
+        <TabControl>
+            <TabItem Header="Zoom" Padding="0,0,0,0">
+                <ScrollViewer>
+                    <StackPanel>
+                        <TextBlock Text="PanX" Margin="{DynamicResource TextControlThemePadding}"/>
+                        <TextBox Text="{Binding PanX, Mode=TwoWay}"/>
+                        <TextBlock Text="PanY" Margin="{DynamicResource TextControlThemePadding}"/>
+                        <TextBox Text="{Binding PanY, Mode=TwoWay}"/>
+                        <TextBlock Text="ZoomX" Margin="{DynamicResource TextControlThemePadding}"/>
+                        <TextBox Text="{Binding ZoomX, Mode=TwoWay}"/>
+                        <TextBlock Text="ZoomY" Margin="{DynamicResource TextControlThemePadding}"/>
+                        <TextBox Text="{Binding ZoomY, Mode=TwoWay}"/>
+                    </StackPanel>
+                </ScrollViewer>
+            </TabItem>
+        </TabControl>
+        <TabControl>
+            <TabItem Header="DrawShapeState" Padding="0,0,0,0">
+                <ScrollViewer>
+                    <ContentControl Content="{Binding DrawShapeState}"/>
+                </ScrollViewer>
+            </TabItem>
+        </TabControl>
+        <TabControl>
+            <TabItem Header="SelectedShapes" Padding="0,0,0,0">
+                <ListBox x:Name="shapes" Items="{Binding SelectedShapes}" VirtualizationMode="Simple">
+                    <ListBox.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <VirtualizingStackPanel Orientation="Vertical"/>
+                        </ItemsPanelTemplate>
+                    </ListBox.ItemsPanel>
+                    <ListBox.KeyBindings>
+                        <KeyBinding Command="{Binding $parent[Window].DataContext.OnRemoveShape}" CommandParameter="{Binding #shapes.SelectedItem}" Gesture="Delete"/>
+                    </ListBox.KeyBindings>
+                    <ListBox.DataTemplates>
+                        <DataTemplate DataType="ShapesCore:IBaseShape">
+                            <TextBlock Text="{Binding Mode=OneWay, Converter={StaticResource ObjectToTypeStringConverter}}">
+                                <TextBlock.ContextMenu>
+                                    <ContextMenu>
+                                        <MenuItem Header="_Delete" Command="{Binding $parent[Window].DataContext.OnRemoveShape}" CommandParameter="{Binding}"/>
+                                    </ContextMenu>
+                                </TextBlock.ContextMenu>
+                            </TextBlock>
+                        </DataTemplate>
+                    </ListBox.DataTemplates>
+                </ListBox>
+            </TabItem>
+        </TabControl>
+        <TabControl>
+            <TabItem Header="ImageCache" Padding="0,0,0,0">
+                <containers:ImagesControl DataContext="{Binding ImageCache}"/>
+            </TabItem>
+        </TabControl>
+        <TabControl>
+            <TabItem Header="SelectionStyle" Padding="0,0,0,0">
+                <ScrollViewer>
+                    <ContentControl Content="{Binding SelectionStyle}"/>
+                </ScrollViewer>
+            </TabItem>
+        </TabControl>
+        <TabControl>
+            <TabItem Header="HelperStyle" Padding="0,0,0,0">
+                <ScrollViewer>
+                    <ContentControl Content="{Binding HelperStyle}"/>
+                </ScrollViewer>
+            </TabItem>
+        </TabControl>
+    </StackPanel>
 </UserControl>

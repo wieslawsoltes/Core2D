@@ -12,28 +12,25 @@
              mc:Ignorable="d"
              d:DataContext="{x:Static Designer:DesignerContext.Document}"
              d:DesignWidth="250" d:DesignHeight="400">
-    <TabControl Classes="default">
-        <TabItem Header="Document" Classes="property">
-            <Grid RowDefinitions="Auto" ColumnDefinitions="Auto,*">
-                <TextBlock Text="Name" Classes="left" Grid.Row="0" Grid.Column="0"/>
-                <TextBox Text="{Binding Name, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
-            </Grid>
-        </TabItem>
-        <TabItem Header="Owner" Classes="property">
-            <ContentControl Content="{Binding Owner}"/>
-        </TabItem>
-        <TabItem Header="Pages" Classes="property">
-            <ListBox Items="{Binding Pages}" Classes="default">
-                <ListBox.DataTemplates>
-                    <DataTemplate DataType="ContainersCore:IPageContainer">
-                        <TextBlock Text="{Binding Name}" Classes="list drag">
-                            <i:Interaction.Behaviors>
-                                <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}"/>
-                            </i:Interaction.Behaviors>
-                        </TextBlock>
-                    </DataTemplate>
-                </ListBox.DataTemplates>
-            </ListBox>
-        </TabItem>
-    </TabControl>
+    <StackPanel>
+        <StackPanel>
+            <TextBlock Text="Name" Margin="{DynamicResource TextControlThemePadding}"/>
+            <TextBox Text="{Binding Name, Mode=TwoWay}"/>
+        </StackPanel>
+        <TabControl>
+            <TabItem Header="Pages" Padding="0,0,0,0">
+                <ListBox Items="{Binding Pages}">
+                    <ListBox.DataTemplates>
+                        <DataTemplate DataType="ContainersCore:IPageContainer">
+                            <TextBlock Text="{Binding Name}" Background="Transparent">
+                                <i:Interaction.Behaviors>
+                                    <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}"/>
+                                </i:Interaction.Behaviors>
+                            </TextBlock>
+                        </DataTemplate>
+                    </ListBox.DataTemplates>
+                </ListBox>
+            </TabItem>
+        </TabControl>
+    </StackPanel>
 </UserControl>

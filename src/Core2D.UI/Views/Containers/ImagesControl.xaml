@@ -15,19 +15,19 @@
              d:DesignWidth="250" d:DesignHeight="400">
     <ScrollViewer>
         <Grid RowDefinitions="Auto,Auto,*" ColumnDefinitions="*" >
-            <Menu Classes="usercontrol" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Right">
-                <MenuItem Header="+" Classes="usercontrol" Command="{Binding $parent[Window].DataContext.OnAddImageKey}"/>
+            <Menu Grid.Row="0" Grid.Column="0" HorizontalAlignment="Right">
+                <MenuItem Header="+" Command="{Binding $parent[Window].DataContext.OnAddImageKey}"/>
             </Menu>
-            <TextBlock Grid.Column="0" Grid.Row="1" VerticalAlignment="Center" Text="Key" Classes="default"/>
+            <TextBlock Grid.Column="0" Grid.Row="1" VerticalAlignment="Center" Text="Key"/>
             <ItemsControl VerticalAlignment="Stretch" Grid.Column="0" Grid.Row="2" Items="{Binding Keys}">
                 <ItemsControl.DataTemplates>
                     <DataTemplate DataType="RendererCore:IImageKey">
-                        <Grid VerticalAlignment="Top" ColumnDefinitions="*,30" Classes="drag">
+                        <Grid VerticalAlignment="Top" ColumnDefinitions="*,30" Background="Transparent">
                             <i:Interaction.Behaviors>
                                 <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}"/>
                             </i:Interaction.Behaviors>
-                            <TextBox VerticalAlignment="Center" Text="{Binding Key, Mode=OneWay}" Classes="property" Grid.Column="0"/>
-                            <Button VerticalAlignment="Center" Content="-" Classes="property" Grid.Column="1" Command="{Binding $parent[Window].DataContext.OnRemoveImageKey}" CommandParameter="{Binding Key}"/>
+                            <TextBox VerticalAlignment="Center" Text="{Binding Key, Mode=OneWay}" Grid.Column="0"/>
+                            <Button VerticalAlignment="Center" Content="-" Grid.Column="1" Command="{Binding $parent[Window].DataContext.OnRemoveImageKey}" CommandParameter="{Binding Key}"/>
                         </Grid>
                     </DataTemplate>
                 </ItemsControl.DataTemplates>

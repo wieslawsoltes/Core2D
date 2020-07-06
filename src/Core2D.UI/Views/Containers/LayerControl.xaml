@@ -12,39 +12,30 @@
              mc:Ignorable="d"
              d:DataContext="{x:Static Designer:DesignerContext.Layer}"
              d:DesignWidth="250" d:DesignHeight="400">
-    <TabControl Classes="default">
-        <TabItem Header="Layer" Classes="property">
-            <ScrollViewer>
-                <Grid RowDefinitions="Auto,Auto" ColumnDefinitions="Auto,*">
-                    <TextBlock Text="Name" Classes="left" Grid.Row="0" Grid.Column="0"/>
-                    <TextBox Text="{Binding Name, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
-                    <TextBlock Text="IsVisible" Classes="left" Grid.Row="1" Grid.Column="0"/>
-                    <CheckBox IsChecked="{Binding IsVisible, Mode=TwoWay}" Classes="left" Grid.Row="1" Grid.Column="1"/>
-                </Grid>
-            </ScrollViewer>
-        </TabItem>
-        <TabItem Header="Owner" Classes="property">
-            <ContentControl Content="{Binding Owner}"/>
-        </TabItem>
-        <TabItem Header="Shapes" Classes="property">
-            <TabControl Classes="default">
-                <TabItem Header="Shapes" Classes="property">
-                    <ListBox x:Name="shapes" Items="{Binding Shapes}" Classes="default">
-                        <ListBox.DataTemplates>
-                            <DataTemplate DataType="ShapesCore:IBaseShape">
-                                <TextBlock Text="{Binding Mode=OneWay, Converter={StaticResource ObjectToTypeStringConverter}}" Classes="list drag">
-                                    <i:Interaction.Behaviors>
-                                        <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}"/>
-                                    </i:Interaction.Behaviors>
-                                </TextBlock>
-                            </DataTemplate>
-                        </ListBox.DataTemplates>
-                    </ListBox>
-                </TabItem>
-                <TabItem Header="Selected" Classes="property">
-                    <ContentControl Content="{Binding #shapes.SelectedItem}"/>
-                </TabItem>
-            </TabControl>
-        </TabItem>
-    </TabControl>
+
+    <StackPanel>
+        <StackPanel>
+            <TextBlock Text="Name" Margin="{DynamicResource TextControlThemePadding}"/>
+            <TextBox Text="{Binding Name, Mode=TwoWay}"/>
+            <CheckBox Content="IsVisible" IsChecked="{Binding IsVisible, Mode=TwoWay}"/>
+        </StackPanel>
+        <TabControl>
+            <TabItem Header="Shapes" Padding="0,0,0,0">
+                <ListBox x:Name="shapes" Items="{Binding Shapes}">
+                    <ListBox.DataTemplates>
+                        <DataTemplate DataType="ShapesCore:IBaseShape">
+                            <TextBlock Text="{Binding Mode=OneWay, Converter={StaticResource ObjectToTypeStringConverter}}" Background="Transparent">
+                                <i:Interaction.Behaviors>
+                                    <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}"/>
+                                </i:Interaction.Behaviors>
+                            </TextBlock>
+                        </DataTemplate>
+                    </ListBox.DataTemplates>
+                </ListBox>
+            </TabItem>
+            <TabItem Header="Selected Shape" Padding="12,0,0,0">
+                <ContentControl Content="{Binding #shapes.SelectedItem}"/>
+            </TabItem>
+        </TabControl>
+    </StackPanel>
 </UserControl>

@@ -96,11 +96,11 @@
         <idd:ContextDropBehavior Context="{Binding FallbackValue={x:Null}}" Handler="{StaticResource EditorDropHandler}"/>
         <behaviors:AttachEditorBehavior/>
     </i:Interaction.Behaviors>
-    <Border Classes="container">
+    <Border>
         <i:Interaction.Behaviors>
             <idd:ContextDropBehavior Context="{Binding FallbackValue={x:Null}}" Handler="{StaticResource EditorDropHandler}"/>
         </i:Interaction.Behaviors>
-        <Border Classes="transparent" ClipToBounds="True">
+        <Border ClipToBounds="True">
             <paz:ZoomBorder x:Name="zoomBorder" Stretch="None" ZoomSpeed="1.2" PanButton="Right" EnablePan="{Binding IsToolIdle}" EnableZoom="True" Background="Transparent" ClipToBounds="False" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
                 <Grid x:Name="gridTransformed" ClipToBounds="False">
                     <views:PresenterControl x:Name="presenterControlData" ZoomBorder="{Binding #zoomBorder}" Renderer="{Binding PageRenderer}" DataFlow="{Binding DataFlow}" Container="{Binding Project.CurrentContainer}" PresenterType="Data" ClipToBounds="False"/>

@@ -14,7 +14,7 @@
         <TabControl>
             <TabItem Header="Record" Padding="0,0,0,0">
                 <Grid RowDefinitions="Auto,*" ColumnDefinitions="*">
-                    <Menu Classes="usercontrol" Grid.Row="0" HorizontalAlignment="Right" IsVisible="{Binding !!Record}">
+                    <Menu Grid.Row="0" HorizontalAlignment="Right" IsVisible="{Binding !!Record}">
                         <MenuItem Header="&#727;" Command="{Binding $parent[Window].DataContext.OnResetRecord}" CommandParameter="{Binding}" IsVisible="{Binding !!Record}"/>
                     </Menu>
                     <ContentControl Content="{Binding Record}" Grid.Row="1"/>

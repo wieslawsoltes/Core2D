@@ -11,62 +11,55 @@
              xmlns:Designer="clr-namespace:Core2D.UI.Designer;assembly=Core2D.UI"
              mc:Ignorable="d"
              d:DesignWidth="250" d:DesignHeight="400">
-    <TabControl Classes="default">
-        <TabItem Header="Status" Classes="property">
-            <ScrollViewer>
-                <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto" ColumnDefinitions="Auto,*">
-                    <TextBlock Text="ZoomX:" Classes="left" Grid.Row="0" Grid.Column="0"/>
-                    <TextBlock Text="{Binding ZoomX, Mode=OneWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
-                    <TextBlock Text="ZoomY:" Classes="left" Grid.Row="1" Grid.Column="0"/>
-                    <TextBlock Text="{Binding ZoomY, Mode=OneWay}" Classes="left" Grid.Row="1" Grid.Column="1"/>
-                    <TextBlock Text="OffsetX:" Classes="left" Grid.Row="2" Grid.Column="0"/>
-                    <TextBlock Text="{Binding OffsetX, Mode=OneWay}" Classes="left" Grid.Row="2" Grid.Column="1"/>
-                    <TextBlock Text="OffsetY:" Classes="left" Grid.Row="3" Grid.Column="0"/>
-                    <TextBlock Text="{Binding OffsetY, Mode=OneWay}" Classes="left" Grid.Row="3" Grid.Column="1"/>
-                    <Button Content="Reset" Command="{Binding $parent[Window].DataContext.Platform.OnZoomReset}" Classes="default" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2"/>
-                    <Button Content="AutoFit" Command="{Binding $parent[Window].DataContext.Platform.OnZoomAutoFit}" Classes="default" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2"/>
-                </Grid>
-            </ScrollViewer>
-        </TabItem>
-        <TabItem Header="Options" Classes="property">
-            <ScrollViewer>
-                <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto" ColumnDefinitions="Auto,*">
-                    <TextBlock Text="PanButton:" Classes="left" Grid.Row="0" Grid.Column="0"/>
-                    <ComboBox Items="{x:Static paz:ZoomBorder.ButtonNames}" SelectedItem="{Binding PanButton, Mode=TwoWay}" Classes="default" Grid.Row="0" Grid.Column="1"/>
-                    <TextBlock Text="Stretch:" Classes="left" Grid.Row="1" Grid.Column="0"/>
-                    <ComboBox Items="{x:Static paz:ZoomBorder.StretchModes}" SelectedItem="{Binding Stretch, Mode=TwoWay}" Classes="default" Grid.Row="1" Grid.Column="1"/>
-                    <TextBlock Text="ZoomSpeed:" Classes="left" Grid.Row="2" Grid.Column="0"/>
-                    <TextBox Text="{Binding ZoomSpeed, Mode=TwoWay}" Classes="left" Grid.Row="2" Grid.Column="1"/>
-                    <TextBlock Text="EnablePan:" Classes="left" Grid.Row="3" Grid.Column="0"/>
-                    <CheckBox IsChecked="{Binding EnablePan}" Content="" Classes="default" Grid.Row="3" Grid.Column="1"/>
-                    <TextBlock Text="EnableZoom:" Classes="left" Grid.Row="4" Grid.Column="0"/>
-                    <CheckBox IsChecked="{Binding EnableZoom}" Content="" Classes="default" Grid.Row="4" Grid.Column="1"/>
-                </Grid>
-            </ScrollViewer>
-        </TabItem>
-        <TabItem Header="Constrains" Classes="property">
-            <ScrollViewer>
-                <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto" ColumnDefinitions="Auto,*">
-                    <TextBlock Text="MinZoomX:" Classes="left" Grid.Row="0" Grid.Column="0"/>
-                    <TextBox Text="{Binding MinZoomX, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
-                    <TextBlock Text="MaxZoomX:" Classes="left" Grid.Row="1" Grid.Column="0"/>
-                    <TextBox Text="{Binding MaxZoomX, Mode=TwoWay}" Classes="left" Grid.Row="1" Grid.Column="1"/>
-                    <TextBlock Text="MinZoomY:" Classes="left" Grid.Row="2" Grid.Column="0"/>
-                    <TextBox Text="{Binding MinZoomY, Mode=TwoWay}" Classes="left" Grid.Row="2" Grid.Column="1"/>
-                    <TextBlock Text="MaxZoomY:" Classes="left" Grid.Row="3" Grid.Column="0"/>
-                    <TextBox Text="{Binding MaxZoomY, Mode=TwoWay}" Classes="left" Grid.Row="3" Grid.Column="1"/>
-                    <TextBlock Text="MinOffsetY:" Classes="left" Grid.Row="4" Grid.Column="0"/>
-                    <TextBox Text="{Binding MinOffsetY, Mode=TwoWay}" Classes="left" Grid.Row="4" Grid.Column="1"/>
-                    <TextBlock Text="MaxOffsetX:" Classes="left" Grid.Row="5" Grid.Column="0"/>
-                    <TextBox Text="{Binding MaxOffsetX, Mode=TwoWay}" Classes="left" Grid.Row="5" Grid.Column="1"/>
-                    <TextBlock Text="MinOffsetX:" Classes="left" Grid.Row="6" Grid.Column="0"/>
-                    <TextBox Text="{Binding MinOffsetX, Mode=TwoWay}" Classes="left" Grid.Row="6" Grid.Column="1"/>
-                    <TextBlock Text="MaxOffsetY:" Classes="left" Grid.Row="7" Grid.Column="0"/>
-                    <TextBox Text="{Binding MaxOffsetY, Mode=TwoWay}" Classes="left" Grid.Row="7" Grid.Column="1"/>
-                    <TextBlock Text="EnableConstrains:" Classes="left" Grid.Row="8" Grid.Column="0"/>
-                    <CheckBox IsChecked="{Binding EnableConstrains}" Content="" Classes="default" Grid.Row="8" Grid.Column="1"/>
-                </Grid>
-            </ScrollViewer>
-        </TabItem>
-    </TabControl>
+    <ScrollViewer>
+        <StackPanel>
+            <Expander Header="Zoom" IsExpanded="True">
+                <StackPanel>
+                    <TextBlock Text="ZoomX:" Margin="{DynamicResource TextControlThemePadding}"/>
+                    <TextBlock Text="{Binding ZoomX, Mode=OneWay}" Margin="{DynamicResource TextControlThemePadding}"/>
+                    <TextBlock Text="ZoomY:" Margin="{DynamicResource TextControlThemePadding}"/>
+                    <TextBlock Text="{Binding ZoomY, Mode=OneWay}" Margin="{DynamicResource TextControlThemePadding}"/>
+                    <TextBlock Text="OffsetX:" Margin="{DynamicResource TextControlThemePadding}"/>
+                    <TextBlock Text="{Binding OffsetX, Mode=OneWay}" Margin="{DynamicResource TextControlThemePadding}"/>
+                    <TextBlock Text="OffsetY:" Margin="{DynamicResource TextControlThemePadding}"/>
+                    <TextBlock Text="{Binding OffsetY, Mode=OneWay}" Margin="{DynamicResource TextControlThemePadding}"/>
+                    <Button Content="Reset" Command="{Binding $parent[Window].DataContext.Platform.OnZoomReset}" Margin="{DynamicResource TextControlThemePadding}"/>
+                    <Button Content="AutoFit" Command="{Binding $parent[Window].DataContext.Platform.OnZoomAutoFit}" Margin="{DynamicResource TextControlThemePadding}"/>
+                </StackPanel>
+            </Expander>
+            <Expander Header="Options" IsExpanded="True">
+                <StackPanel>
+                    <TextBlock Text="PanButton" Margin="{DynamicResource TextControlThemePadding}"/>
+                    <ComboBox Items="{x:Static paz:ZoomBorder.ButtonNames}" SelectedItem="{Binding PanButton, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
+                    <TextBlock Text="Stretch" Margin="{DynamicResource TextControlThemePadding}"/>
+                    <ComboBox Items="{x:Static paz:ZoomBorder.StretchModes}" SelectedItem="{Binding Stretch, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
+                    <TextBlock Text="ZoomSpeed" Margin="{DynamicResource TextControlThemePadding}"/>
+                    <TextBox Text="{Binding ZoomSpeed, Mode=TwoWay}"/>
+                    <CheckBox Content="EnablePan" IsChecked="{Binding EnablePan}" HorizontalAlignment="Stretch"/>
+                    <CheckBox Content="EnableZoom" IsChecked="{Binding EnableZoom}" HorizontalAlignment="Stretch"/>
+                </StackPanel>
+            </Expander>
+            <Expander Header="Constrains" IsExpanded="True">
+                <StackPanel>
+                    <TextBlock Text="MinZoomX" Margin="{DynamicResource TextControlThemePadding}"/>
+                    <TextBox Text="{Binding MinZoomX, Mode=TwoWay}"/>
+                    <TextBlock Text="MaxZoomX" Margin="{DynamicResource TextControlThemePadding}"/>
+                    <TextBox Text="{Binding MaxZoomX, Mode=TwoWay}"/>
+                    <TextBlock Text="MinZoomY" Margin="{DynamicResource TextControlThemePadding}"/>
+                    <TextBox Text="{Binding MinZoomY, Mode=TwoWay}"/>
+                    <TextBlock Text="MaxZoomY" Margin="{DynamicResource TextControlThemePadding}"/>
+                    <TextBox Text="{Binding MaxZoomY, Mode=TwoWay}"/>
+                    <TextBlock Text="MinOffsetX" Margin="{DynamicResource TextControlThemePadding}"/>
+                    <TextBox Text="{Binding MinOffsetX, Mode=TwoWay}"/>
+                    <TextBlock Text="MinOffsetY" Margin="{DynamicResource TextControlThemePadding}"/>
+                    <TextBox Text="{Binding MinOffsetY, Mode=TwoWay}"/>
+                    <TextBlock Text="MaxOffsetX" Margin="{DynamicResource TextControlThemePadding}"/>
+                    <TextBox Text="{Binding MaxOffsetX, Mode=TwoWay}"/>
+                    <TextBlock Text="MaxOffsetY" Margin="{DynamicResource TextControlThemePadding}"/>
+                    <TextBox Text="{Binding MaxOffsetY, Mode=TwoWay}"/>
+                    <CheckBox Content="EnableConstrains" IsChecked="{Binding EnableConstrains}" HorizontalAlignment="Stretch"/>
+                </StackPanel>
+            </Expander>
+        </StackPanel>
+    </ScrollViewer>
 </UserControl>

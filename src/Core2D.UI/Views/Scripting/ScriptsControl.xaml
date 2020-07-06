@@ -18,7 +18,13 @@
         <handlers:ScriptsListBoxDropHandler x:Key="ScriptsListBoxDropHandler"/>
     </UserControl.Resources>
     <Grid RowDefinitions="Auto,*,Auto">
-        <ListBox x:Name="scripts" Items="{Binding Scripts}" SelectedItem="{Binding CurrentScript, Mode=TwoWay}" Grid.Row="1" Classes="default">
+        <Menu Grid.Row="0" HorizontalAlignment="Right">
+            <MenuItem Header="reset" Command="{Binding $parent[Window].DataContext.OnResetRepl}"/>
+            <MenuItem Header="execute" Command="{Binding $parent[Window].DataContext.OnExecuteScript}" CommandParameter="{Binding CurrentScript}" IsVisible="{Binding !!#scripts.SelectedItem}"/>
+            <MenuItem Header="+" Command="{Binding $parent[Window].DataContext.OnAddScript}"/>
+            <MenuItem Header="&#727;" Command="{Binding $parent[Window].DataContext.OnRemoveScript}" CommandParameter="{Binding CurrentScript}" IsVisible="{Binding !!#scripts.SelectedItem}"/>
+        </Menu>
+        <ListBox x:Name="scripts" Items="{Binding Scripts}" SelectedItem="{Binding CurrentScript, Mode=TwoWay}" Grid.Row="1">
             <i:Interaction.Behaviors>
                 <idd:ContextDropBehavior Context="{Binding FallbackValue={x:Null}}" Handler="{StaticResource ScriptsListBoxDropHandler}"/>
             </i:Interaction.Behaviors>
@@ -29,7 +35,7 @@
             </ListBox.KeyBindings>
             <ListBox.DataTemplates>
                 <DataTemplate DataType="ScriptingCore:IScript">
-                    <TextBlock x:Name="script" Text="{Binding Name}" Classes="list drag">
+                    <TextBlock x:Name="script" Text="{Binding Name}" Background="Transparent">
                         <i:Interaction.Behaviors>
                             <ia:EventTriggerBehavior EventName="DoubleTapped" SourceObject="{Binding #script}">
                                 <ia:InvokeCommandAction Command="{Binding $parent[Window].DataContext.OnExecuteScript}" CommandParameter="{Binding Mode=OneWay}"/>
@@ -37,7 +43,7 @@
                             <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}"/>
                         </i:Interaction.Behaviors>
                         <TextBlock.ContextMenu>
-                            <ContextMenu Classes="default">
+                            <ContextMenu>
                                 <MenuItem Header="_Execute Script" Command="{Binding $parent[Window].DataContext.OnExecuteScript}" CommandParameter="{Binding Mode=OneWay}"/>
                                 <Separator/>
                                 <MenuItem Header="_Add Script" Command="{Binding $parent[Window].DataContext.OnAddScript}"/>
@@ -51,15 +57,6 @@
                 </DataTemplate>
             </ListBox.DataTemplates>
         </ListBox>
-        <Menu Classes="usercontrol" Grid.Row="0" HorizontalAlignment="Right">
-            <MenuItem Header="reset" Classes="usercontrol" Command="{Binding $parent[Window].DataContext.OnResetRepl}"/>
-            <MenuItem Header="execute" Classes="usercontrol" Command="{Binding $parent[Window].DataContext.OnExecuteScript}" CommandParameter="{Binding CurrentScript}" IsVisible="{Binding !!#scripts.SelectedItem}"/>
-            <MenuItem Header="+" Classes="usercontrol" Command="{Binding $parent[Window].DataContext.OnAddScript}"/>
-            <MenuItem Header="&#727;" Classes="usercontrol" Command="{Binding $parent[Window].DataContext.OnRemoveScript}" CommandParameter="{Binding CurrentScript}" IsVisible="{Binding !!#scripts.SelectedItem}"/>
-        </Menu>
-        <Grid RowDefinitions="Auto" ColumnDefinitions="Auto,*" Grid.Row="2" IsVisible="{Binding !!#scripts.SelectedItem}">
-            <TextBlock Text="Name" Classes="left" Grid.Row="0" Grid.Column="0"/>
-            <TextBox Text="{Binding #scripts.SelectedItem.Name, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
-        </Grid>
+        <TextBox Text="{Binding #scripts.SelectedItem.Name, Mode=TwoWay}" IsVisible="{Binding !!#scripts.SelectedItem}" BorderBrush="Transparent" Background="Transparent" Margin="0,12,0,0"  Grid.Row="2"/>
     </Grid>
 </UserControl>

@@ -3,25 +3,111 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
+             xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
+             xmlns:idd="clr-namespace:Core2D.UI.DragAndDrop;assembly=Core2D.UI"
              xmlns:converters="clr-namespace:Core2D.UI.Converters;assembly=Core2D.UI"
-             xmlns:data="clr-namespace:Core2D.UI.Views.Data;assembly=Core2D.UI"
+             xmlns:DataCore="clr-namespace:Core2D.Data;assembly=Core2D"
+             xmlns:Editor="clr-namespace:Core2D.Editor;assembly=Core2D"
              xmlns:Designer="clr-namespace:Core2D.UI.Designer;assembly=Core2D.UI"
              mc:Ignorable="d"
              d:DataContext="{x:Static Designer:DesignerContext.Database}"
              d:DesignWidth="250" d:DesignHeight="400">
-    <TabControl Classes="default">
-        <TabItem Header="Database" Classes="property">
-            <Grid RowDefinitions="Auto,*" ColumnDefinitions="Auto,*">
-                <TextBlock Text="Name" Classes="left" Grid.Row="0" Grid.Column="0"/>
-                <TextBox Text="{Binding Name, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
-                <data:RecordsControl Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"/>
-            </Grid>
-        </TabItem>
-        <TabItem Header="Columns" Classes="property">
-            <data:ColumnsControl/>
-        </TabItem>
-        <TabItem Header="Selected" Classes="property">
-            <ContentControl Content="{Binding CurrentRecord}"/>
-        </TabItem>
-    </TabControl>
+    <StackPanel>
+        <StackPanel>
+            <TextBlock Text="Name" Margin="{DynamicResource TextControlThemePadding}"/>
+            <TextBox Text="{Binding Name, Mode=TwoWay}"/>
+        </StackPanel>
+        <TabControl>
+            <TabItem Header="Records" Padding="0,0,0,0">
+                <Grid RowDefinitions="Auto,*">
+                    <Menu Grid.Row="0" HorizontalAlignment="Right">
+                        <MenuItem Header="apply" Command="{Binding $parent[Window].DataContext.OnApplyRecord}" CommandParameter="{Binding CurrentRecord}" IsVisible="{Binding !!CurrentRecord}"/>
+                        <MenuItem Header="+" Command="{Binding $parent[Window].DataContext.OnAddRecord}" CommandParameter="{Binding}"/>
+                        <MenuItem Header="&#727;" Command="{Binding $parent[Window].DataContext.OnRemoveRecord}" CommandParameter="{Binding CurrentRecord}" IsVisible="{Binding !!CurrentRecord}"/>
+                    </Menu>
+                    <DataGrid x:Name="rowsDataGrid"
+                              Items="{Binding Records}"
+                              SelectedItem="{Binding CurrentRecord, Mode=TwoWay}"
+                              AutoGenerateColumns="False"
+                              IsReadOnly="False"
+                              CanUserReorderColumns="False"
+                              CanUserResizeColumns="True"
+                              CanUserSortColumns="False"
+                              BorderThickness="0"
+                              RowBackground="Transparent"
+                              Background="Transparent"
+                              Grid.Row="1">
+                        <i:Interaction.Behaviors>
+                            <idd:TypedDragBehavior DataType="{x:Type DataCore:IRecord}"/>
+                        </i:Interaction.Behaviors>
+                        <DataGrid.KeyBindings>
+                            <KeyBinding Command="{Binding $parent[Window].DataContext.OnAddRecord}" CommandParameter="{Binding #rowsDataGrid.DataContext, Mode=OneWay}" Gesture="Ctrl+N"/>
+                            <KeyBinding Command="{Binding $parent[Window].DataContext.OnRemoveRecord}" CommandParameter="{Binding #rowsDataGrid.SelectedItem}" Gesture="Delete"/>
+                        </DataGrid.KeyBindings>
+                    </DataGrid>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Current Record" Padding="12,0,0,0">
+                <ContentControl Content="{Binding CurrentRecord}"/>
+            </TabItem>
+            <TabItem Header="Columns" Padding="12,0,0,0">
+                <Grid RowDefinitions="Auto,*">
+                    <Menu Grid.Row="0" HorizontalAlignment="Right">
+                        <MenuItem Header="&#727;" Command="{Binding $parent[Window].DataContext.OnRemoveColumn}" CommandParameter="{Binding #columnsDataGrid.SelectedItem}"/>
+                        <MenuItem Header="+" Command="{Binding $parent[Window].DataContext.OnAddColumn}" CommandParameter="{Binding}"/>
+                    </Menu>
+                    <DataGrid x:Name="columnsDataGrid"
+                              Items="{Binding Columns}"
+                              AutoGenerateColumns="False"
+                              IsReadOnly="False"
+                              CanUserReorderColumns="False"
+                              CanUserResizeColumns="True"
+                              CanUserSortColumns="False"
+                              BorderThickness="0"
+                              RowBackground="Transparent"
+                              Background="Transparent"
+                              Grid.Row="1">
+                        <i:Interaction.Behaviors>
+                            <idd:TypedDragBehavior DataType="{x:Type DataCore:IColumn}"/>
+                        </i:Interaction.Behaviors>
+                        <DataGrid.KeyBindings>
+                            <KeyBinding Command="{Binding $parent[Window].DataContext.OnAddColumn}" CommandParameter="{Binding}" Gesture="Ctrl+N"/>
+                            <KeyBinding Command="{Binding $parent[Window].DataContext.OnRemoveColumn}" CommandParameter="{Binding #columnsDataGrid.SelectedItem}" Gesture="Delete"/>
+                        </DataGrid.KeyBindings>
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Name" IsReadOnly="False" Binding="{Binding Name}"/>
+                            <DataGridTextColumn Header="Width" Binding="{Binding Width}"/>
+                            <DataGridCheckBoxColumn Header="IsVisible" Binding="{Binding IsVisible}"/>
+                            <DataGridTextColumn Header="Owner" Binding="{Binding Owner.Name}" IsReadOnly="True"/>
+                            <DataGridTextColumn Header="Id" Binding="{Binding Id}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+                <!--
+                <Grid RowDefinitions="Auto,Auto,*" ColumnDefinitions="*" >
+                    <Menu Grid.Row="0" Grid.Column="0" HorizontalAlignment="Right">
+                        <MenuItem Header="+" Command="{Binding $parent[Window].DataContext.OnAddColumn}" CommandParameter="{Binding}"/>
+                    </Menu>
+                    <TextBlock Grid.Column="0" Grid.Row="1" VerticalAlignment="Center" Text="Name" IsVisible="{Binding !!Columns.Length}"/>
+                    <ScrollViewer Grid.Column="0" Grid.Row="2" IsVisible="{Binding !!Columns.Length}">
+                        <ItemsControl Items="{Binding Columns}" VerticalAlignment="Stretch">
+                            <ItemsControl.DataTemplates>
+                                <DataTemplate DataType="DataCore:IColumn">
+                                    <Grid VerticalAlignment="Top" ColumnDefinitions="*,30" Background="Transparent">
+                                        <i:Interaction.Behaviors>
+                                            <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}"/>
+                                        </i:Interaction.Behaviors>
+                                        <TextBox Text="{Binding Name, Mode=TwoWay}" Grid.Column="0"/>
+                                        <Button Content="-" Grid.Column="1" Command="{Binding $parent[Window].DataContext.OnRemoveColumn}" CommandParameter="{Binding}"/>
+                                    </Grid>
+                                </DataTemplate>
+                            </ItemsControl.DataTemplates>
+                        </ItemsControl>
+                    </ScrollViewer>
+                </Grid>
+                -->
+            </TabItem>
+        </TabControl>
+    </StackPanel>
 </UserControl>

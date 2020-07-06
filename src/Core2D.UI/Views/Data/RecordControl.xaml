@@ -14,29 +14,29 @@
              d:DesignWidth="250" d:DesignHeight="400">
     <ScrollViewer>
         <Grid RowDefinitions="Auto,*" ColumnDefinitions="50*,Auto,50*">
-            <GridSplitter Classes="vertical" Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" Width="6"/>
-            <TextBlock Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" Text="Name" Classes="default"/>
-            <TextBlock Grid.Column="2" Grid.Row="0" VerticalAlignment="Center" Text="Value" Classes="default"/>
+            <TextBlock Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" Text="Name"/>
             <ItemsControl VerticalAlignment="Stretch" Grid.Column="0" Grid.Row="1" Items="{Binding Owner.Columns}">
                 <ItemsControl.DataTemplates>
                     <DataTemplate DataType="DataCore:IColumn">
-                        <Grid VerticalAlignment="Top" Classes="drag">
+                        <Grid VerticalAlignment="Top" Background="Transparent">
                             <i:Interaction.Behaviors>
                                 <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}"/>
                             </i:Interaction.Behaviors>
-                            <TextBox VerticalAlignment="Center" Text="{Binding Name, Mode=TwoWay}" Classes="property"/>
+                            <TextBox VerticalAlignment="Center" Text="{Binding Name, Mode=TwoWay}" />
                         </Grid>
                     </DataTemplate>
                 </ItemsControl.DataTemplates>
             </ItemsControl>
+            <GridSplitter ResizeDirection="Columns" ResizeBehavior="PreviousAndNext" Background="Transparent" Width="6" Grid.Column="1" Grid.Row="0" Grid.RowSpan="2"/>
+            <TextBlock Grid.Column="2" Grid.Row="0" VerticalAlignment="Center" Text="Value"/>
             <ItemsControl VerticalAlignment="Stretch" Grid.Column="2" Grid.Row="1" Items="{Binding Values}">
                 <ItemsControl.DataTemplates>
                     <DataTemplate DataType="DataCore:IValue">
-                        <Grid VerticalAlignment="Top" Classes="drag">
+                        <Grid VerticalAlignment="Top" Background="Transparent">
                             <i:Interaction.Behaviors>
                                 <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}"/>
                             </i:Interaction.Behaviors>
-                            <TextBox VerticalAlignment="Center" Text="{Binding Content, Mode=TwoWay}" Classes="property"/>
+                            <TextBox VerticalAlignment="Center" Text="{Binding Content, Mode=TwoWay}"/>
                         </Grid>
                     </DataTemplate>
                 </ItemsControl.DataTemplates>

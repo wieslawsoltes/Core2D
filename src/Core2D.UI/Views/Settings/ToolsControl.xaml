@@ -10,10 +10,10 @@
              mc:Ignorable="d"
              d:DataContext="{x:Static Designer:DesignerContext.Editor}"
              d:DesignWidth="250" d:DesignHeight="400">
-    <TabControl Classes="default">
-        <TabItem Header="Main" Classes="property">
+    <TabControl>
+        <TabItem Header="Main" Padding="0,0,0,0">
             <Grid RowDefinitions="Auto,*">
-                <ComboBox Items="{Binding Tools}" SelectedItem="{Binding CurrentTool, Mode=TwoWay}" Grid.Row="0" Classes="default">
+                <ComboBox Items="{Binding Tools}" SelectedItem="{Binding CurrentTool, Mode=TwoWay}" Grid.Row="0">
                     <ComboBox.DataTemplates>
                         <DataTemplate>
                             <TextBlock Text="{Binding Title}"/>
@@ -23,9 +23,9 @@
                 <ContentControl Content="{Binding CurrentTool.Settings}" Grid.Row="1"/>
             </Grid>
         </TabItem>
-        <TabItem Header="Path" Classes="property">
+        <TabItem Header="Path" Padding="12,0,0,0">
             <Grid RowDefinitions="Auto,*">
-                <ComboBox Items="{Binding PathTools}" SelectedItem="{Binding CurrentPathTool, Mode=TwoWay}" Grid.Row="0" Classes="default">
+                <ComboBox Items="{Binding PathTools}" SelectedItem="{Binding CurrentPathTool, Mode=TwoWay}" Grid.Row="0">
                     <ComboBox.DataTemplates>
                         <DataTemplate>
                             <TextBlock Text="{Binding Title}"/>

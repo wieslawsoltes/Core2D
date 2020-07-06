@@ -29,25 +29,25 @@
             <TabItem Header="Alpha" Padding="0,0,0,0">
                 <StackPanel>
                     <TextBox Text="{Binding A, Mode=TwoWay}"/>
-                    <Slider Classes="slider" Value="{Binding A}" Minimum="0" Maximum="255" TickFrequency="1"/>
+                    <Slider Value="{Binding A}" Minimum="0" Maximum="255" TickFrequency="1"/>
                 </StackPanel>
             </TabItem>
             <TabItem Header="Red" Padding="12,0,0,0">
                 <StackPanel>
                     <TextBox Text="{Binding R, Mode=TwoWay}"/>
-                    <Slider Classes="slider" Value="{Binding R}" Minimum="0" Maximum="255" TickFrequency="1"/>
+                    <Slider Value="{Binding R}" Minimum="0" Maximum="255" TickFrequency="1"/>
                 </StackPanel>
             </TabItem>
             <TabItem Header="Green" Padding="12,0,0,0">
                 <StackPanel>
                     <TextBox Text="{Binding G, Mode=TwoWay}"/>
-                    <Slider Classes="slider" Value="{Binding G}" Minimum="0" Maximum="255" TickFrequency="1"/>
+                    <Slider Value="{Binding G}" Minimum="0" Maximum="255" TickFrequency="1"/>
                 </StackPanel>
             </TabItem>
             <TabItem Header="Blue" Padding="12,0,0,0">
                 <StackPanel>
                     <TextBox Text="{Binding B, Mode=TwoWay}"/>
-                    <Slider Classes="slider" Value="{Binding B}" Minimum="0" Maximum="255" TickFrequency="1"/>
+                    <Slider Value="{Binding B}" Minimum="0" Maximum="255" TickFrequency="1"/>
                 </StackPanel>
             </TabItem>
         </TabControl>

@@ -20,7 +20,7 @@
             <TextBlock Text="Background" Margin="{DynamicResource TextControlThemePadding}"/>
             <ContentControl Content="{Binding Background}"/>
         </StackPanel>
-        <!--<TabControl>
+        <TabControl>
             <TabItem Header="Layers" Padding="0,0,0,0">
                 <containers:LayersControl/>
             </TabItem>
@@ -30,9 +30,9 @@
             <TabItem Header="Data" Padding="12,0,0,0">
                 <ContentControl Content="{Binding Data}"/>
             </TabItem>
-            <TabItem Header="Owner" Padding="12,0,0,0">
-                <ContentControl Content="{Binding Owner}"/>
+            <TabItem Header="Template" Padding="12,0,0,0">
+                <ContentControl Content="{Binding Template}"/>
             </TabItem>
-        </TabControl>-->
+        </TabControl>
     </StackPanel>
 </UserControl>

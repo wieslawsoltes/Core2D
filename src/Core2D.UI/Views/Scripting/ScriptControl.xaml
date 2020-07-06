@@ -13,8 +13,8 @@
         <KeyBinding Command="{Binding $parent[Window].DataContext.OnExecuteRepl}" CommandParameter="{Binding #textCode.Text}" Gesture="Ctrl+Enter"/>
     </UserControl.KeyBindings>
     <Grid RowDefinitions="*,Auto" ColumnDefinitions="50*,50*">
-        <TextBox x:Name="textCode" Text="{Binding Code}" Classes="code" Margin="3" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"/>
-        <Button Content="Reset" Command="{Binding $parent[Window].DataContext.OnResetRepl}" Classes="code" Margin="3" Grid.Row="1" Grid.Column="0"/>
-        <Button Content="Run" Command="{Binding $parent[Window].DataContext.OnExecuteRepl}" CommandParameter="{Binding #textCode.Text}" Classes="code" Margin="3" Grid.Row="1" Grid.Column="1"/>
+        <TextBox x:Name="textCode" Text="{Binding Code}" Margin="3" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"/>
+        <Button Content="Reset" Command="{Binding $parent[Window].DataContext.OnResetRepl}" Margin="3" Grid.Row="1" Grid.Column="0"/>
+        <Button Content="Run" Command="{Binding $parent[Window].DataContext.OnExecuteRepl}" CommandParameter="{Binding #textCode.Text}" Margin="3" Grid.Row="1" Grid.Column="1"/>
     </Grid>
 </UserControl>

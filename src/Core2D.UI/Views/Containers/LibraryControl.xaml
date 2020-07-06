@@ -8,8 +8,8 @@
              xmlns:Designer="clr-namespace:Core2D.UI.Designer;assembly=Core2D.UI"
              mc:Ignorable="d"
              d:DesignWidth="250" d:DesignHeight="400">
-    <Grid RowDefinitions="Auto" ColumnDefinitions="Auto,50,*">
-        <TextBlock Text="Name" Classes="left" Grid.Row="0" Grid.Column="0"/>
-        <TextBox Text="{Binding Name, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2"/>
-    </Grid>
+    <StackPanel>
+        <TextBlock Text="Name" Margin="{DynamicResource TextControlThemePadding}"/>
+        <TextBox Text="{Binding Name, Mode=TwoWay}"/>
+    </StackPanel>
 </UserControl>

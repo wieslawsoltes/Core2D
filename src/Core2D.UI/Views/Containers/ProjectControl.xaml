@@ -21,12 +21,12 @@
     <Grid RowDefinitions="Auto,*,Auto" ColumnDefinitions="*">
         <Grid Grid.Row="0" RowDefinitions="*" ColumnDefinitions="*,Auto">
             <TextBox Text="{Binding Name, Mode=TwoWay}" BorderBrush="Transparent" Background="Transparent" VerticalAlignment="Center" Grid.Column="0"/>
-            <Menu Classes="usercontrol" Grid.Column="1" HorizontalAlignment="Right">
-                <MenuItem Header="+" Classes="usercontrol" Command="{Binding $parent[Window].DataContext.OnNew}" CommandParameter="{Binding Selected}"/>
-                <MenuItem Header="&#727;" Classes="usercontrol" Command="{Binding $parent[Window].DataContext.OnDelete}" CommandParameter="{Binding Selected}" IsVisible="{Binding !!Selected}"/>
+            <Menu Grid.Column="1" HorizontalAlignment="Right">
+                <MenuItem Header="+" Command="{Binding $parent[Window].DataContext.OnNew}" CommandParameter="{Binding Selected}"/>
+                <MenuItem Header="&#727;" Command="{Binding $parent[Window].DataContext.OnDelete}" CommandParameter="{Binding Selected}" IsVisible="{Binding !!Selected}"/>
             </Menu>
         </Grid>
-        <TreeView x:Name="documents" Items="{Binding Documents}" SelectedItem="{Binding Selected, Mode=TwoWay}" Grid.Row="1" Classes="default">
+        <TreeView x:Name="documents" Items="{Binding Documents}" SelectedItem="{Binding Selected, Mode=TwoWay}" Grid.Row="1">
             <i:Interaction.Behaviors>
                 <idd:ContextDropBehavior Context="{Binding FallbackValue={x:Null}}" Handler="{StaticResource ProjectTreeViewDropHandler}"/>
             </i:Interaction.Behaviors>
@@ -39,7 +39,7 @@
                 <KeyBinding Command="{Binding $parent[Window].DataContext.Platform.OnExport}" CommandParameter="{Binding #documents.SelectedItem}" Gesture="Ctrl+E"/>
             </TreeView.KeyBindings>
             <TreeView.ContextMenu>
-                <ContextMenu Classes="default">
+                <ContextMenu>
                     <MenuItem Header="_Add Document" Command="{Binding $parent[Window].DataContext.OnAddDocument}" CommandParameter="{Binding Mode=OneWay}"/>
                     <Separator/>
                     <MenuItem Header="E_xport" Command="{Binding $parent[Window].DataContext.Platform.OnExport}" CommandParameter="{Binding Mode=OneWay}"/>
@@ -58,7 +58,7 @@
                         </i:Interaction.Behaviors>
                         <TextBlock Text="{Binding Name}">
                             <TextBlock.ContextMenu>
-                                <ContextMenu Classes="default">
+                                <ContextMenu>
                                     <MenuItem Header="_Add Page" Command="{Binding $parent[Window].DataContext.OnAddPage}" CommandParameter="{Binding Mode=OneWay}"/>
                                     <Separator/>
                                     <MenuItem Header="Insert Document Bef_ore" Command="{Binding $parent[Window].DataContext.OnInsertDocumentBefore}" CommandParameter="{Binding Mode=OneWay}"/>
@@ -84,8 +84,8 @@
                         </i:Interaction.Behaviors>
                         <TextBlock Text="{Binding Name}">
                             <TextBlock.ContextMenu>
-                                <ContextMenu Classes="default">
-                                    <MenuItem Header="Te_mplate" Classes="template" Items="{Binding #root.Tag.Project.Templates}">
+                                <ContextMenu>
+                                    <MenuItem Header="Te_mplate" Items="{Binding #root.Tag.Project.Templates}">
                                         <MenuItem.Styles>
                                             <Style Selector="MenuItem.template > MenuItem">
                                                 <Setter Property="Header" Value="{Binding Name}"/>
@@ -93,7 +93,7 @@
                                                 <Setter Property="CommandParameter" Value="{Binding}"/>
                                                 <Setter Property="Icon">
                                                     <Template>
-                                                        <CheckBox x:Name="icon" Classes="menu">
+                                                        <CheckBox x:Name="icon">
                                                             <i:Interaction.Behaviors>
                                                                 <iac:BindTagToVisualRootDataContextBehavior/>
                                                             </i:Interaction.Behaviors>
@@ -131,7 +131,7 @@
                             <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}"/>
                         </i:Interaction.Behaviors>
                         <StackPanel.ContextMenu>
-                            <ContextMenu Classes="default">
+                            <ContextMenu>
                                 <MenuItem Header="_Add Layer" Command="{Binding $parent[Window].DataContext.OnAddLayer}" CommandParameter="{Binding Owner, Mode=OneWay}"/>
                                 <Separator/>
                                 <MenuItem Header="_Delete" Command="{Binding $parent[Window].DataContext.OnRemoveLayer}" CommandParameter="{Binding Mode=OneWay}"/>

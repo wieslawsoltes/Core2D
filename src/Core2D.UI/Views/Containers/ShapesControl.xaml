@@ -13,13 +13,13 @@
              mc:Ignorable="d"
              d:DataContext="{x:Static Designer:DesignerContext.Page}"
              d:DesignWidth="250" d:DesignHeight="400">
-    <TabControl Classes="default">
-        <TabItem Header="Shapes" Classes="property">
+    <TabControl>
+        <TabItem Header="Shapes" Padding="0,0,0,0">
             <Grid RowDefinitions="Auto,*,Auto">
-                <Menu Classes="usercontrol" Grid.Row="0" HorizontalAlignment="Right">
-                    <MenuItem Header="&#727;" Classes="usercontrol" Command="{Binding $parent[Window].DataContext.OnRemoveShape}" CommandParameter="{Binding CurrentShape}" IsVisible="{Binding !!CurrentShape}"/>
+                <Menu Grid.Row="0" HorizontalAlignment="Right">
+                    <MenuItem Header="&#727;" Command="{Binding $parent[Window].DataContext.OnRemoveShape}" CommandParameter="{Binding CurrentShape}" IsVisible="{Binding !!CurrentShape}"/>
                 </Menu>
-                <ListBox x:Name="shapes" Items="{Binding CurrentLayer.Shapes}" SelectedItem="{Binding CurrentShape, Mode=TwoWay}" VirtualizationMode="Simple" Classes="default" Grid.Row="1">
+                <ListBox x:Name="shapes" Items="{Binding CurrentLayer.Shapes}" SelectedItem="{Binding CurrentShape, Mode=TwoWay}" VirtualizationMode="Simple" Grid.Row="1">
                     <ListBox.ItemsPanel>
                         <ItemsPanelTemplate>
                             <VirtualizingStackPanel Orientation="Vertical"/>
@@ -30,12 +30,12 @@
                     </ListBox.KeyBindings>
                     <ListBox.DataTemplates>
                         <DataTemplate DataType="ShapesCore:IBaseShape">
-                            <TextBlock Text="{Binding Mode=OneWay, Converter={StaticResource ObjectToTypeStringConverter}}" Classes="list drag">
+                            <TextBlock Text="{Binding Mode=OneWay, Converter={StaticResource ObjectToTypeStringConverter}}" Background="Transparent">
                                 <i:Interaction.Behaviors>
                                     <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}"/>
                                 </i:Interaction.Behaviors>
                                 <TextBlock.ContextMenu>
-                                    <ContextMenu Classes="default">
+                                    <ContextMenu>
                                         <MenuItem Header="_Delete" Command="{Binding $parent[Window].DataContext.OnRemoveShape}" CommandParameter="{Binding}"/>
                                     </ContextMenu>
                                 </TextBlock.ContextMenu>
@@ -44,12 +44,12 @@
                     </ListBox.DataTemplates>
                 </ListBox>
                 <Grid RowDefinitions="Auto" ColumnDefinitions="Auto,*" Grid.Row="2" IsVisible="{Binding !!CurrentShape}">
-                    <TextBlock Text="Name" Classes="left" Grid.Row="0" Grid.Column="0"/>
-                    <TextBox Text="{Binding CurrentShape.Name, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
+                    <TextBlock Text="Name" Grid.Row="0" Grid.Column="0"/>
+                    <TextBox Text="{Binding CurrentShape.Name, Mode=TwoWay}" Grid.Row="0" Grid.Column="1"/>
                 </Grid>
             </Grid>
         </TabItem>
-        <TabItem Header="Selected" Classes="property">
+        <TabItem Header="Selected" Padding="12,0,0,0">
             <ContentControl Content="{Binding CurrentShape}"/>
         </TabItem>
     </TabControl>

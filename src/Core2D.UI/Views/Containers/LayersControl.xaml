@@ -14,11 +14,11 @@
              d:DataContext="{x:Static Designer:DesignerContext.Page}"
              d:DesignWidth="250" d:DesignHeight="400">
     <Grid RowDefinitions="Auto,*,Auto">
-        <Menu Classes="usercontrol" Grid.Row="0" HorizontalAlignment="Right">
-            <MenuItem Header="+" Classes="usercontrol" Command="{Binding $parent[Window].DataContext.OnAddLayer}" CommandParameter="{Binding}"/>
-            <MenuItem Header="&#727;" Classes="usercontrol" Command="{Binding $parent[Window].DataContext.OnRemoveLayer}" CommandParameter="{Binding CurrentLayer}" IsVisible="{Binding !!CurrentLayer}"/>
+        <Menu Grid.Row="0" HorizontalAlignment="Right">
+            <MenuItem Header="+" Command="{Binding $parent[Window].DataContext.OnAddLayer}" CommandParameter="{Binding}"/>
+            <MenuItem Header="&#727;" Command="{Binding $parent[Window].DataContext.OnRemoveLayer}" CommandParameter="{Binding CurrentLayer}" IsVisible="{Binding !!CurrentLayer}"/>
         </Menu>
-        <ListBox x:Name="layers" Items="{Binding Layers}" SelectedItem="{Binding CurrentLayer, Mode=TwoWay}" Classes="default" Grid.Row="1">
+        <ListBox x:Name="layers" Items="{Binding Layers}" SelectedItem="{Binding CurrentLayer, Mode=TwoWay}" Grid.Row="1">
             <ListBox.KeyBindings>
                 <KeyBinding Command="{Binding $parent[Window].DataContext.OnAddLayer}" CommandParameter="{Binding #layers.DataContext, Mode=OneWay}" Gesture="Ctrl+N"/>
                 <KeyBinding Command="{Binding $parent[Window].DataContext.OnRemoveLayer}" CommandParameter="{Binding #layers.SelectedItem}" Gesture="Delete"/>
@@ -30,7 +30,7 @@
                             <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}"/>
                         </i:Interaction.Behaviors>
                         <Grid.ContextMenu>
-                            <ContextMenu Classes="default">
+                            <ContextMenu>
                                 <MenuItem Header="_Delete" Command="{Binding $parent[Window].DataContext.OnRemoveLayer}" CommandParameter="{Binding Mode=OneWay}"/>
                             </ContextMenu>
                         </Grid.ContextMenu>
@@ -42,9 +42,11 @@
         </ListBox>
         <TextBox Text="{Binding CurrentLayer.Name, Mode=TwoWay}" IsVisible="{Binding !!CurrentLayer}" BorderBrush="Transparent" Background="Transparent" Margin="0,12,0,0" Grid.Row="2"/>
     </Grid>
-    <!--<TabControl Classes="default">
-        <TabItem Header="Selected" Classes="property">
+    <!--
+    <TabControl>
+        <TabItem Header="Selected Layer" Padding="0,0,0,0">
             <ContentControl Content="{Binding CurrentLayer}"/>
         </TabItem>
-    </TabControl>-->
+    </TabControl>
+    -->
 </UserControl>

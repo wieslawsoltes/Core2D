@@ -19,7 +19,7 @@
     <UserControl.Resources>
         <converters:ObjectEqualityMultiConverter x:Key="ObjectEqualityMultiConverter"/>
     </UserControl.Resources>
-    <Menu Classes="default">
+    <Menu>
         <Menu.ItemsPanel>
             <ItemsPanelTemplate>
                 <WrapPanel/>

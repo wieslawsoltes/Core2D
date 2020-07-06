@@ -11,14 +11,14 @@
              d:DataContext="{x:Static Designer:DesignerContext.Project}"
              d:DesignWidth="250" d:DesignHeight="400">
     <Grid RowDefinitions="Auto,Auto,*">
-        <Menu Classes="usercontrol" Grid.Row="0" HorizontalAlignment="Right">
-            <MenuItem Header="+" Classes="usercontrol" Command="{Binding $parent[Window].DataContext.OnAddDatabase}"/>
-            <MenuItem Header="&#727;" Classes="usercontrol" Command="{Binding $parent[Window].DataContext.OnRemoveDatabase}" CommandParameter="{Binding CurrentDatabase}" IsVisible="{Binding !!CurrentDatabase}"/>
+        <Menu Grid.Row="0" HorizontalAlignment="Right">
+            <MenuItem Header="+" Command="{Binding $parent[Window].DataContext.OnAddDatabase}"/>
+            <MenuItem Header="&#727;" Command="{Binding $parent[Window].DataContext.OnRemoveDatabase}" CommandParameter="{Binding CurrentDatabase}" IsVisible="{Binding !!CurrentDatabase}"/>
         </Menu>
-        <ComboBox Items="{Binding Databases}" SelectedItem="{Binding CurrentDatabase, Mode=TwoWay}" Grid.Row="1" Classes="default" IsVisible="{Binding !!CurrentDatabase}">
+        <ComboBox Items="{Binding Databases}" SelectedItem="{Binding CurrentDatabase, Mode=TwoWay}" Grid.Row="1" IsVisible="{Binding !!CurrentDatabase}">
             <ComboBox.DataTemplates>
                 <DataTemplate DataType="DataCore:IDatabase">
-                    <TextBlock Text="{Binding Name}" Classes="default"/>
+                    <TextBlock Text="{Binding Name}"/>
                 </DataTemplate>
             </ComboBox.DataTemplates>
         </ComboBox>

@@ -18,7 +18,13 @@
         <handlers:TemplatesListBoxDropHandler x:Key="TemplatesListBoxDropHandler"/>
     </UserControl.Resources>
     <Grid RowDefinitions="Auto,*,Auto">
-        <ListBox x:Name="templates" Items="{Binding Templates}" SelectedItem="{Binding CurrentTemplate, Mode=TwoWay}" Grid.Row="1" Classes="default">
+        <Menu Grid.Row="0" HorizontalAlignment="Right">
+            <MenuItem Header="apply" Command="{Binding $parent[Window].DataContext.OnApplyTemplate}" CommandParameter="{Binding CurrentTemplate}" IsVisible="{Binding !!#templates.SelectedItem}"/>
+            <MenuItem Header="edit" Command="{Binding $parent[Window].DataContext.OnEditTemplate}" CommandParameter="{Binding CurrentTemplate}" IsVisible="{Binding !!#templates.SelectedItem}"/>
+            <MenuItem Header="+" Command="{Binding $parent[Window].DataContext.OnAddTemplate}"/>
+            <MenuItem Header="&#727;" Command="{Binding $parent[Window].DataContext.OnRemoveTemplate}" CommandParameter="{Binding CurrentTemplate}" IsVisible="{Binding !!#templates.SelectedItem}"/>
+        </Menu>
+        <ListBox x:Name="templates" Items="{Binding Templates}" SelectedItem="{Binding CurrentTemplate, Mode=TwoWay}" Grid.Row="1">
             <i:Interaction.Behaviors>
                 <idd:ContextDropBehavior Context="{Binding FallbackValue={x:Null}}" Handler="{StaticResource TemplatesListBoxDropHandler}"/>
             </i:Interaction.Behaviors>
@@ -30,7 +36,7 @@
             </ListBox.KeyBindings>
             <ListBox.DataTemplates>
                 <DataTemplate DataType="ContainersCore:IPageContainer">
-                    <TextBlock x:Name="template" Text="{Binding Name}" Classes="list drag">
+                    <TextBlock x:Name="template" Text="{Binding Name}" Background="Transparent">
                         <i:Interaction.Behaviors>
                             <ia:EventTriggerBehavior EventName="DoubleTapped" SourceObject="{Binding #template}">
                                 <ia:InvokeCommandAction Command="{Binding $parent[Window].DataContext.OnApplyTemplate}" CommandParameter="{Binding Mode=OneWay}"/>
@@ -38,7 +44,7 @@
                             <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}"/>
                         </i:Interaction.Behaviors>
                         <TextBlock.ContextMenu>
-                            <ContextMenu Classes="default">
+                            <ContextMenu>
                                 <MenuItem Header="_Edit Template" Command="{Binding $parent[Window].DataContext.OnEditTemplate}" CommandParameter="{Binding Mode=OneWay}"/>
                                 <Separator/>
                                 <MenuItem Header="_Add Template" Command="{Binding $parent[Window].DataContext.OnAddTemplate}"/>
@@ -52,15 +58,13 @@
                 </DataTemplate>
             </ListBox.DataTemplates>
         </ListBox>
-        <Menu Classes="usercontrol" Grid.Row="0" HorizontalAlignment="Right">
-            <MenuItem Header="apply" Classes="usercontrol" Command="{Binding $parent[Window].DataContext.OnApplyTemplate}" CommandParameter="{Binding CurrentTemplate}" IsVisible="{Binding !!#templates.SelectedItem}"/>
-            <MenuItem Header="edit" Classes="usercontrol" Command="{Binding $parent[Window].DataContext.OnEditTemplate}" CommandParameter="{Binding CurrentTemplate}" IsVisible="{Binding !!#templates.SelectedItem}"/>
-            <MenuItem Header="+" Classes="usercontrol" Command="{Binding $parent[Window].DataContext.OnAddTemplate}"/>
-            <MenuItem Header="&#727;" Classes="usercontrol" Command="{Binding $parent[Window].DataContext.OnRemoveTemplate}" CommandParameter="{Binding CurrentTemplate}" IsVisible="{Binding !!#templates.SelectedItem}"/>
-        </Menu>
-        <Grid RowDefinitions="Auto" ColumnDefinitions="Auto,*" Grid.Row="2" IsVisible="{Binding !!#templates.SelectedItem}">
-            <TextBlock Text="Name" Classes="left" Grid.Row="0" Grid.Column="0"/>
-            <TextBox Text="{Binding #templates.SelectedItem.Name, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
-        </Grid>
+        <TextBox Text="{Binding #templates.SelectedItem.Name, Mode=TwoWay}" IsVisible="{Binding !!#templates.SelectedItem}" BorderBrush="Transparent" Background="Transparent" Margin="0,12,0,0" Grid.Row="2"/>
     </Grid>
+    <!--
+    <TabControl>
+        <TabItem Header="Selected Layer" Padding="0,0,0,0">
+            <ContentControl Content="{Binding CurrentTemplate}"/>
+        </TabItem>
+    </TabControl>
+    -->
 </UserControl>

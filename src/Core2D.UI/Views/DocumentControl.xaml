@@ -14,9 +14,7 @@
              mc:Ignorable="d"
              d:DataContext="{x:Static Designer:DesignerContext.Editor}"
              d:DesignWidth="1200" d:DesignHeight="540">
-    <Grid Classes="container"
-          renderer:RendererOptions.Renderer="{Binding DocumentRenderer}"
-          renderer:RendererOptions.DataFlow="{Binding DataFlow}">
+    <Grid renderer:RendererOptions.Renderer="{Binding DocumentRenderer}" renderer:RendererOptions.DataFlow="{Binding DataFlow}">
         <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
             <Carousel Items="{Binding Project.Documents}" SelectedItem="{Binding Project.CurrentDocument}" IsVirtualized="False" VerticalAlignment="Center" Margin="2">
                 <Carousel.DataTemplates>

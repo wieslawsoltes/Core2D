@@ -46,7 +46,7 @@
         <DrawingPresenter x:Key="TextIcon" Drawing="{StaticResource Text}" Width="16" Height="16"/>
         <DrawingPresenter x:Key="ImageIcon" Drawing="{StaticResource Image}" Width="16" Height="16"/>
     </UserControl.Resources>
-    <Menu Classes="default">
+    <Menu>
         <Menu.ItemsPanel>
             <ItemsPanelTemplate>
                 <WrapPanel/>
@@ -127,35 +127,35 @@
             <MenuItem Header="O_ptions">
                 <MenuItem Header="Default is Stro_ked" Command="{Binding OnToggleDefaultIsStroked}" InputGesture="K">
                     <MenuItem.Icon>
-                        <CheckBox IsChecked="{Binding Project.Options.DefaultIsStroked}" Classes="menu"/>
+                        <CheckBox IsChecked="{Binding Project.Options.DefaultIsStroked}"/>
                     </MenuItem.Icon>
                 </MenuItem>
                 <MenuItem Header="Default is _Filled" Command="{Binding OnToggleDefaultIsFilled}" InputGesture="F">
                     <MenuItem.Icon>
-                        <CheckBox IsChecked="{Binding Project.Options.DefaultIsFilled}" Classes="menu"/>
+                        <CheckBox IsChecked="{Binding Project.Options.DefaultIsFilled}"/>
                     </MenuItem.Icon>
                 </MenuItem>
                 <Separator/>
                 <MenuItem Header="Default is Close_d" Command="{Binding OnToggleDefaultIsClosed}" InputGesture="D">
                     <MenuItem.Icon>
-                        <CheckBox IsChecked="{Binding Project.Options.DefaultIsClosed}" Classes="menu"/>
+                        <CheckBox IsChecked="{Binding Project.Options.DefaultIsClosed}"/>
                     </MenuItem.Icon>
                 </MenuItem>
                 <MenuItem Header="Default is Smooth _Join" Command="{Binding OnToggleDefaultIsSmoothJoin}" InputGesture="J">
                     <MenuItem.Icon>
-                        <CheckBox IsChecked="{Binding Project.Options.DefaultIsSmoothJoin}" Classes="menu"/>
+                        <CheckBox IsChecked="{Binding Project.Options.DefaultIsSmoothJoin}"/>
                     </MenuItem.Icon>
                 </MenuItem>
                 <Separator/>
                 <MenuItem Header="Snap to _Grid" Command="{Binding OnToggleSnapToGrid}" InputGesture="G">
                     <MenuItem.Icon>
-                        <CheckBox IsChecked="{Binding Project.Options.SnapToGrid}" Classes="menu"/>
+                        <CheckBox IsChecked="{Binding Project.Options.SnapToGrid}"/>
                     </MenuItem.Icon>
                 </MenuItem>
                 <Separator/>
                 <MenuItem Header="Try To _Connect" Command="{Binding OnToggleTryToConnect}" InputGesture="C">
                     <MenuItem.Icon>
-                        <CheckBox IsChecked="{Binding Project.Options.TryToConnect}" Classes="menu"/>
+                        <CheckBox IsChecked="{Binding Project.Options.TryToConnect}"/>
                     </MenuItem.Icon>
                 </MenuItem>
             </MenuItem>
@@ -190,7 +190,7 @@
             <Separator/>
             <MenuItem Header="E_xport Page" Command="{Binding Platform.OnExport}" CommandParameter="{Binding Project.CurrentContainer}"/>
             <Separator/>
-            <MenuItem Header="Te_mplate" Classes="template" Items="{Binding Project.Templates}">
+            <MenuItem Header="Te_mplate" Items="{Binding Project.Templates}">
                 <MenuItem.Styles>
                     <Style Selector="MenuItem.template > MenuItem">
                         <Setter Property="Header" Value="{Binding Name}"/>
@@ -198,7 +198,7 @@
                         <Setter Property="CommandParameter" Value="{Binding}"/>
                         <Setter Property="Icon">
                             <Template>
-                                <CheckBox x:Name="icon" Classes="menu">
+                                <CheckBox x:Name="icon">
                                     <i:Interaction.Behaviors>
                                         <iac:BindTagToVisualRootDataContextBehavior/>
                                     </i:Interaction.Behaviors>
@@ -763,97 +763,97 @@
         <MenuItem Header="_Tool">
             <MenuItem Header="_None" Icon="{StaticResource NoneIcon}" Command="{Binding OnToolNone}" InputGesture="N">
                 <!--<MenuItem.Icon>
-                    <CheckBox IsChecked="{Binding CurrentTool.Title, Converter={StaticResource ObjectEqualsConverter}, ConverterParameter=None, Mode=OneWay}" Classes="menu"/>
+                    <CheckBox IsChecked="{Binding CurrentTool.Title, Converter={StaticResource ObjectEqualsConverter}, ConverterParameter=None, Mode=OneWay}"/>
                 </MenuItem.Icon>-->
             </MenuItem>
             <Separator/>
             <MenuItem Header="_Selection" Icon="{StaticResource SelectionIcon}" Command="{Binding OnToolSelection}" InputGesture="S">
                 <!--<MenuItem.Icon>
-                    <CheckBox IsChecked="{Binding CurrentTool.Title, Converter={StaticResource ObjectEqualsConverter}, ConverterParameter=Selection, Mode=OneWay}" Classes="menu"/>
+                    <CheckBox IsChecked="{Binding CurrentTool.Title, Converter={StaticResource ObjectEqualsConverter}, ConverterParameter=Selection, Mode=OneWay}"/>
                 </MenuItem.Icon>-->
             </MenuItem>
             <Separator/>
             <MenuItem Header="_Point" Icon="{StaticResource PointIcon}" Command="{Binding OnToolPoint}" InputGesture="P">
                 <!--<MenuItem.Icon>
-                    <CheckBox IsChecked="{Binding CurrentTool.Title, Converter={StaticResource ObjectEqualsConverter}, ConverterParameter=Point, Mode=OneWay}" Classes="menu"/>
+                    <CheckBox IsChecked="{Binding CurrentTool.Title, Converter={StaticResource ObjectEqualsConverter}, ConverterParameter=Point, Mode=OneWay}"/>
                 </MenuItem.Icon>-->
             </MenuItem>
             <Separator/>
             <MenuItem Header="_Line" Icon="{StaticResource LineIcon}" Command="{Binding OnToolLine}" InputGesture="L">
                 <!--<MenuItem.Icon>
-                    <CheckBox IsChecked="{Binding CurrentTool.Title, Converter={StaticResource ObjectEqualsConverter}, ConverterParameter=Line, Mode=OneWay}" Classes="menu"/>
+                    <CheckBox IsChecked="{Binding CurrentTool.Title, Converter={StaticResource ObjectEqualsConverter}, ConverterParameter=Line, Mode=OneWay}"/>
                 </MenuItem.Icon>-->
             </MenuItem>
             <MenuItem Header="_Arc" Icon="{StaticResource ArcIcon}" Command="{Binding OnToolArc}" InputGesture="A">
                 <!--<MenuItem.Icon>
-                    <CheckBox IsChecked="{Binding CurrentTool.Title, Converter={StaticResource ObjectEqualsConverter}, ConverterParameter=Arc, Mode=OneWay}" Classes="menu"/>
+                    <CheckBox IsChecked="{Binding CurrentTool.Title, Converter={StaticResource ObjectEqualsConverter}, ConverterParameter=Arc, Mode=OneWay}"/>
                 </MenuItem.Icon>-->
             </MenuItem>
             <MenuItem Header="Cubic _Bezier" Icon="{StaticResource CubicBezierIcon}" Command="{Binding OnToolCubicBezier}" InputGesture="B">
                 <!--<MenuItem.Icon>
-                    <CheckBox IsChecked="{Binding CurrentTool.Title, Converter={StaticResource ObjectEqualsConverter}, ConverterParameter=CubicBezier, Mode=OneWay}" Classes="menu"/>
+                    <CheckBox IsChecked="{Binding CurrentTool.Title, Converter={StaticResource ObjectEqualsConverter}, ConverterParameter=CubicBezier, Mode=OneWay}"/>
                 </MenuItem.Icon>-->
             </MenuItem>
             <MenuItem Header="_Quadratic Bezier" Icon="{StaticResource QuadraticBezierIcon}" Command="{Binding OnToolQuadraticBezier}" InputGesture="Q">
                 <!--<MenuItem.Icon>
-                    <CheckBox IsChecked="{Binding CurrentTool.Title, Converter={StaticResource ObjectEqualsConverter}, ConverterParameter=QuadraticBezier, Mode=OneWay}" Classes="menu"/>
+                    <CheckBox IsChecked="{Binding CurrentTool.Title, Converter={StaticResource ObjectEqualsConverter}, ConverterParameter=QuadraticBezier, Mode=OneWay}"/>
                 </MenuItem.Icon>-->
             </MenuItem>
             <Separator/>
             <MenuItem Header="Pat_h" Icon="{StaticResource PathIcon}" Command="{Binding OnToolPath}" InputGesture="H">
                 <!--<MenuItem.Icon>
-                    <CheckBox IsChecked="{Binding CurrentTool.Title, Converter={StaticResource ObjectEqualsConverter}, ConverterParameter=Path, Mode=OneWay}" Classes="menu"/>
+                    <CheckBox IsChecked="{Binding CurrentTool.Title, Converter={StaticResource ObjectEqualsConverter}, ConverterParameter=Path, Mode=OneWay}"/>
                 </MenuItem.Icon>-->
             </MenuItem>
             <MenuItem Header="Path T_ool">
                 <MenuItem Header="_Line" Icon="{StaticResource PathLineIcon}" Command="{Binding OnToolLine}" InputGesture="L">
                     <!--<MenuItem.Icon>
-                        <CheckBox IsChecked="{Binding CurrentPathTool.Title, Converter={StaticResource ObjectEqualsConverter}, ConverterParameter=Line, Mode=OneWay}" Classes="menu"/>
+                        <CheckBox IsChecked="{Binding CurrentPathTool.Title, Converter={StaticResource ObjectEqualsConverter}, ConverterParameter=Line, Mode=OneWay}"/>
                     </MenuItem.Icon>-->
                 </MenuItem>
                 <MenuItem Header="_Arc" Icon="{StaticResource PathArcIcon}" Command="{Binding OnToolArc}" InputGesture="A">
                     <!--<MenuItem.Icon>
-                        <CheckBox IsChecked="{Binding CurrentPathTool.Title, Converter={StaticResource ObjectEqualsConverter}, ConverterParameter=Arc, Mode=OneWay}" Classes="menu"/>
+                        <CheckBox IsChecked="{Binding CurrentPathTool.Title, Converter={StaticResource ObjectEqualsConverter}, ConverterParameter=Arc, Mode=OneWay}"/>
                     </MenuItem.Icon>-->
                 </MenuItem>
                 <MenuItem Header="Cubic _Bezier" Icon="{StaticResource PathCubicBezierIcon}" Command="{Binding OnToolCubicBezier}" InputGesture="B">
                     <!--<MenuItem.Icon>
-                        <CheckBox IsChecked="{Binding CurrentPathTool.Title, Converter={StaticResource ObjectEqualsConverter}, ConverterParameter=CubicBezier, Mode=OneWay}" Classes="menu"/>
+                        <CheckBox IsChecked="{Binding CurrentPathTool.Title, Converter={StaticResource ObjectEqualsConverter}, ConverterParameter=CubicBezier, Mode=OneWay}"/>
                     </MenuItem.Icon>-->
                 </MenuItem>
                 <MenuItem Header="_Quadratic Bezier" Icon="{StaticResource PathQuadraticBezierIcon}" Command="{Binding OnToolQuadraticBezier}" InputGesture="Q">
                     <!--<MenuItem.Icon>
-                        <CheckBox IsChecked="{Binding CurrentPathTool.Title, Converter={StaticResource ObjectEqualsConverter}, ConverterParameter=QuadraticBezier, Mode=OneWay}" Classes="menu"/>
+                        <CheckBox IsChecked="{Binding CurrentPathTool.Title, Converter={StaticResource ObjectEqualsConverter}, ConverterParameter=QuadraticBezier, Mode=OneWay}"/>
                     </MenuItem.Icon>-->
                 </MenuItem>
                 <Separator/>
                 <MenuItem Header="_Move" Icon="{StaticResource PathMoveIcon}" Command="{Binding OnToolMove}" InputGesture="M">
                     <!--<MenuItem.Icon>
-                        <CheckBox IsChecked="{Binding CurrentPathTool.Title, Converter={StaticResource ObjectEqualsConverter}, ConverterParameter=Move, Mode=OneWay}" Classes="menu"/>
+                        <CheckBox IsChecked="{Binding CurrentPathTool.Title, Converter={StaticResource ObjectEqualsConverter}, ConverterParameter=Move, Mode=OneWay}"/>
                     </MenuItem.Icon>-->
                 </MenuItem>
             </MenuItem>
             <Separator/>
             <MenuItem Header="_Rectangle" Icon="{StaticResource RectangleIcon}" Command="{Binding OnToolRectangle}" InputGesture="R">
                 <!--<MenuItem.Icon>
-                    <CheckBox IsChecked="{Binding CurrentTool.Title, Converter={StaticResource ObjectEqualsConverter}, ConverterParameter=Rectangle, Mode=OneWay}" Classes="menu"/>
+                    <CheckBox IsChecked="{Binding CurrentTool.Title, Converter={StaticResource ObjectEqualsConverter}, ConverterParameter=Rectangle, Mode=OneWay}"/>
                 </MenuItem.Icon>-->
             </MenuItem>
             <MenuItem Header="_Ellipse" Icon="{StaticResource EllipseIcon}" Command="{Binding OnToolEllipse}" InputGesture="E">
                 <!--<MenuItem.Icon>
-                    <CheckBox IsChecked="{Binding CurrentTool.Title, Converter={StaticResource ObjectEqualsConverter}, ConverterParameter=Ellipse, Mode=OneWay}" Classes="menu"/>
+                    <CheckBox IsChecked="{Binding CurrentTool.Title, Converter={StaticResource ObjectEqualsConverter}, ConverterParameter=Ellipse, Mode=OneWay}"/>
                 </MenuItem.Icon>-->
             </MenuItem>
             <Separator/>
             <MenuItem Header="_Text" Icon="{StaticResource TextIcon}" Command="{Binding OnToolText}" InputGesture="T">
                 <!--<MenuItem.Icon>
-                    <CheckBox IsChecked="{Binding CurrentTool.Title, Converter={StaticResource ObjectEqualsConverter}, ConverterParameter=Text, Mode=OneWay}" Classes="menu"/>
+                    <CheckBox IsChecked="{Binding CurrentTool.Title, Converter={StaticResource ObjectEqualsConverter}, ConverterParameter=Text, Mode=OneWay}"/>
                 </MenuItem.Icon>-->
             </MenuItem>
             <Separator/>
             <MenuItem Header="_Image" Icon="{StaticResource ImageIcon}" Command="{Binding OnToolImage}" InputGesture="I">
                 <!--<MenuItem.Icon>
-                    <CheckBox IsChecked="{Binding CurrentTool.Title, Converter={StaticResource ObjectEqualsConverter}, ConverterParameter=Image, Mode=OneWay}" Classes="menu"/>
+                    <CheckBox IsChecked="{Binding CurrentTool.Title, Converter={StaticResource ObjectEqualsConverter}, ConverterParameter=Image, Mode=OneWay}"/>
                 </MenuItem.Icon>-->
             </MenuItem>
             <Separator/>
