@@ -17,9 +17,6 @@
              xmlns:SettingsPath="clr-namespace:Core2D.Editor.Tools.Path.Settings;assembly=Core2D"
              xmlns:ShapesCore="clr-namespace:Core2D.Shapes;assembly=Core2D"
              xmlns:StyleCore="clr-namespace:Core2D.Style;assembly=Core2D"
-             xmlns:Views="clr-namespace:Core2D.UI.Dock.Views;assembly=Core2D.UI"
-             xmlns:Documents="clr-namespace:Core2D.UI.Dock.Documents;assembly=Core2D.UI"
-             xmlns:Tools="clr-namespace:Core2D.UI.Dock.Tools;assembly=Core2D.UI"
              xmlns:data="clr-namespace:Core2D.UI.Views.Data;assembly=Core2D.UI"
              xmlns:path="clr-namespace:Core2D.UI.Views.Path;assembly=Core2D.UI"
              xmlns:containers="clr-namespace:Core2D.UI.Views.Containers;assembly=Core2D.UI"
@@ -92,9 +89,6 @@
         <!--<StyleInclude Source="avares://Avalonia.Themes.Fluent/Accents/FluentDark.xaml"/>-->
         <!-- DataGrid -->
         <StyleInclude Source="avares://Avalonia.Controls.DataGrid/Themes/Default.xaml"/>
-        <!-- Dock -->
-        <StyleInclude Source="avares://Dock.Avalonia.Themes.Default/DefaultTheme.xaml"/>
-        <StyleInclude Source="avares://Dock.Avalonia.Themes.Metro/DefaultTheme.xaml"/>
         <!-- Icons -->
         <StyleInclude Source="avares://Core2D.UI/Icons.xaml"/>
         <!-- Default -->
@@ -278,161 +272,6 @@
         <!-- Scripting -->
         <DataTemplate DataType="ScriptingCore:IScript">
             <scripting:ScriptControl/>
-        </DataTemplate>
-        <!-- Views -->
-        <DataTemplate DataType="Views:DashboardView">
-            <Grid RowDefinitions="Auto,*">
-                <views:DashboardMenuControl Grid.Row="0" DataContext="{Binding Context}"/>
-                <views:DashboardControl Grid.Row="1" DataContext="{Binding Context}"/>
-            </Grid>
-        </DataTemplate>
-        <DataTemplate DataType="Views:EditorView">
-            <Grid RowDefinitions="Auto,*,Auto">
-                <views:EditorMenuControl Grid.Row="0" DataContext="{Binding Context}"/>
-                <views:EditorControl Grid.Row="1" Margin="6,6,6,2"/>
-                <views:StatusControl Grid.Column="0" Grid.Row="2" Margin="6,2,6,4" DataContext="{Binding Context}"/>
-            </Grid>
-        </DataTemplate>
-        <!-- Documents -->
-        <DataTemplate DataType="Documents:PageDocument">
-            <views:PageControl DataContext="{Binding Context}"/>
-        </DataTemplate>
-        <!-- Tools -->
-        <DataTemplate DataType="Tools:ScriptTool">
-            <scripting:ScriptControl DataContext="{Binding Context.Project.CurrentScript}"/>
-        </DataTemplate>
-        <DataTemplate DataType="Tools:ExportTool">
-            <views:ExportControl DataContext="{Binding Context}"/>
-        </DataTemplate>
-        <DataTemplate DataType="Tools:BrowserTool">
-            <views:BrowserControl DataContext="{Binding Context}"/>
-        </DataTemplate>
-        <DataTemplate DataType="Tools:DocumentTool">
-            <views:DocumentControl DataContext="{Binding Context}"/>
-        </DataTemplate>
-        <DataTemplate DataType="Tools:ProjectTool">
-            <containers:ProjectControl DataContext="{Binding Context.Project}"/>
-        </DataTemplate>
-        <DataTemplate DataType="Tools:OptionsTool">
-            <ContentControl Content="{Binding Context.Project.Options}"/>
-        </DataTemplate>
-        <DataTemplate DataType="Tools:ImagesTool">
-            <containers:ImagesControl DataContext="{Binding Context.Project}"/>
-        </DataTemplate>
-        <DataTemplate DataType="Tools:GroupsTool">
-            <containers:GroupsControl DataContext="{Binding Context.Project}"/>
-        </DataTemplate>
-        <DataTemplate DataType="Tools:DatabasesTool">
-            <containers:DatabasesControl DataContext="{Binding Context.Project}"/>
-        </DataTemplate>
-        <DataTemplate DataType="Tools:StylesTool">
-            <containers:StylesControl DataContext="{Binding Context.Project}"/>
-        </DataTemplate>
-        <DataTemplate DataType="Tools:TemplatesTool">
-            <containers:TemplatesControl DataContext="{Binding Context.Project}"/>
-        </DataTemplate>
-        <DataTemplate DataType="Tools:ScriptsTool">
-            <scripting:ScriptsControl DataContext="{Binding Context.Project}"/>
-        </DataTemplate>
-        <DataTemplate DataType="Tools:ContainerTool">
-            <ContentControl Content="{Binding Context.Project.CurrentContainer}"/>
-        </DataTemplate>
-        <DataTemplate DataType="Tools:ZoomTool">
-            <containers:ZoomControl DataContext="{Binding Context.CanvasPlatform.Zoom}"/>
-        </DataTemplate>
-        <DataTemplate DataType="Tools:RendererTool">
-            <renderer:ShapeRendererStateControl DataContext="{Binding Context.PageState}"/>
-        </DataTemplate>
-        <DataTemplate DataType="Tools:ToolsTool">
-            <settings:ToolsControl DataContext="{Binding Context}"/>
-        </DataTemplate>
-        <DataTemplate DataType="Tools:ShapeTool">
-            <ScrollViewer DataContext="{Binding Context}" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-                <ItemsRepeater Items="{Binding PageState.SelectedShapes}">
-                    <ItemsRepeater.Layout>
-                        <StackLayout Orientation="Vertical"/>
-                    </ItemsRepeater.Layout>
-                    <ItemsRepeater.ItemTemplate>
-                        <DataTemplate>
-                            <ContentControl Content="{Binding}"/>
-                        </DataTemplate>
-                    </ItemsRepeater.ItemTemplate>
-                </ItemsRepeater>
-            </ScrollViewer>
-        </DataTemplate>
-        <DataTemplate DataType="Tools:DataTool">
-            <data:DataControl DataContext="{Binding Context.PageState.SelectedShape.Data}"/>
-        </DataTemplate>
-        <DataTemplate DataType="Tools:RecordTool">
-            <ScrollViewer DataContext="{Binding Context}" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-                <ItemsRepeater>
-                    <ItemsRepeater.Items>
-                        <MultiBinding Converter="{StaticResource DataMultiValueConverter}">
-                            <Binding Path="PageState.SelectedShapes" FallbackValue="{x:Null}" />
-                            <Binding Path="Project.CurrentContainer" FallbackValue="{x:Null}" />
-                        </MultiBinding>
-                    </ItemsRepeater.Items>
-                    <ItemsRepeater.Layout>
-                        <StackLayout Orientation="Vertical"/>
-                    </ItemsRepeater.Layout>
-                    <ItemsRepeater.ItemTemplate>
-                        <DataTemplate>
-                            <Grid RowDefinitions="Auto,*" ColumnDefinitions="*" IsVisible="{Binding !!Record}">
-                                <Menu Classes="usercontrol" Grid.Row="0" HorizontalAlignment="Right" IsVisible="{Binding !!Record}">
-                                    <MenuItem Header="&#727;" Classes="usercontrol" Command="{Binding $parent[Window].DataContext.OnResetRecord}" CommandParameter="{Binding}" IsVisible="{Binding !!Record}"/>
-                                </Menu>
-                                <data:RecordControl DataContext="{Binding Record}" IsVisible="{Binding !!$self.DataContext}" Grid.Row="1"/>
-                            </Grid>
-                        </DataTemplate>
-                    </ItemsRepeater.ItemTemplate>
-                </ItemsRepeater>
-            </ScrollViewer>
-        </DataTemplate>
-        <DataTemplate DataType="Tools:PropertiesTool">
-            <ScrollViewer DataContext="{Binding Context}" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-                <ItemsRepeater>
-                    <ItemsRepeater.Items>
-                        <MultiBinding Converter="{StaticResource DataMultiValueConverter}">
-                            <Binding Path="PageState.SelectedShapes" FallbackValue="{x:Null}" />
-                            <Binding Path="Project.CurrentContainer" FallbackValue="{x:Null}" />
-                        </MultiBinding>
-                    </ItemsRepeater.Items>
-                    <ItemsRepeater.Layout>
-                        <StackLayout Orientation="Vertical"/>
-                    </ItemsRepeater.Layout>
-                    <ItemsRepeater.ItemTemplate>
-                        <DataTemplate>
-                            <data:PropertiesControl DataContext="{Binding}"/>
-                        </DataTemplate>
-                    </ItemsRepeater.ItemTemplate>
-                </ItemsRepeater>
-            </ScrollViewer>
-        </DataTemplate>
-        <DataTemplate DataType="Tools:StyleTool">
-            <ScrollViewer DataContext="{Binding Context}" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-                <ItemsRepeater>
-                    <ItemsRepeater.Items>
-                        <MultiBinding Converter="{StaticResource StyleMultiValueConverter}">
-                            <Binding Path="PageState.SelectedShapes" FallbackValue="{x:Null}" />
-                            <Binding Path="Project.CurrentStyleLibrary.Selected" FallbackValue="{x:Null}" />
-                        </MultiBinding>
-                    </ItemsRepeater.Items>
-                    <ItemsRepeater.Layout>
-                        <StackLayout Orientation="Vertical"/>
-                    </ItemsRepeater.Layout>
-                    <ItemsRepeater.ItemTemplate>
-                        <DataTemplate>
-                            <ContentControl Content="{Binding}"/>
-                        </DataTemplate>
-                    </ItemsRepeater.ItemTemplate>
-                </ItemsRepeater>
-            </ScrollViewer>
-        </DataTemplate>
-        <DataTemplate DataType="Tools:TemplateTool">
-            <ContentControl Content="{Binding Context.Project.CurrentTemplate}"/>
-        </DataTemplate>
-        <DataTemplate DataType="Tools:ScriptTool">
-            <ContentControl Content="{Binding Context.Project.CurrentScript}"/>
         </DataTemplate>
     </Application.DataTemplates>
 </Application>

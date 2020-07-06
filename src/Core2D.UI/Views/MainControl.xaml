@@ -12,7 +12,6 @@
              xmlns:converters="clr-namespace:Core2D.UI.Converters;assembly=Core2D.UI"
              xmlns:views="clr-namespace:Core2D.UI.Views;assembly=Core2D.UI"
              xmlns:containers="clr-namespace:Core2D.UI.Views.Containers;assembly=Core2D.UI"
-             xmlns:Views="clr-namespace:Core2D.UI.Dock.Views;assembly=Core2D.UI"
              xmlns:Dock="clr-namespace:Dock.Model;assembly=Dock.Model"
              xmlns:Editor="clr-namespace:Core2D.Editor;assembly=Core2D"
              xmlns:Recent="clr-namespace:Core2D.Editor.Recent;assembly=Core2D"
@@ -37,7 +36,6 @@
         <KeyBinding Command="{Binding Platform.OnExport}" Gesture="Ctrl+E"/>
         <KeyBinding Command="{Binding Platform.OnExit}" Gesture="Alt+F4"/>
     </UserControl.KeyBindings>
-    <!--<idc:DockControl Layout="{Binding LayoutPlatform.Layout}"/>-->
     <i:Interaction.Behaviors>
         <idd:ContextDropBehavior Context="{Binding FallbackValue={x:Null}}" Handler="{StaticResource EditorDropHandler}"/>
     </i:Interaction.Behaviors>

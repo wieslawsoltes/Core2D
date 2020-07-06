@@ -10,17 +10,21 @@
              mc:Ignorable="d"
              d:DataContext="{x:Static Designer:DesignerContext.Data}"
              d:DesignWidth="250" d:DesignHeight="400">
-    <TabControl Classes="default" IsVisible="{Binding !!$self.DataContext}">
-        <TabItem Header="Record" Classes="property">
-            <Grid RowDefinitions="Auto,*" ColumnDefinitions="*">
-                <Menu Classes="usercontrol" Grid.Row="0" HorizontalAlignment="Right" IsVisible="{Binding !!Record}">
-                    <MenuItem Header="&#727;" Classes="usercontrol" Command="{Binding $parent[Window].DataContext.OnResetRecord}" CommandParameter="{Binding}" IsVisible="{Binding !!Record}"/>
-                </Menu>
-                <ContentControl Content="{Binding Record}" Grid.Row="1"/>
-            </Grid>
-        </TabItem>
-        <TabItem Header="Properties" Classes="property">
-            <data:PropertiesControl/>
-        </TabItem>
-    </TabControl>
+    <StackPanel IsVisible="{Binding !!$self.DataContext}">
+        <TabControl>
+            <TabItem Header="Record" Padding="0,0,0,0">
+                <Grid RowDefinitions="Auto,*" ColumnDefinitions="*">
+                    <Menu Classes="usercontrol" Grid.Row="0" HorizontalAlignment="Right" IsVisible="{Binding !!Record}">
+                        <MenuItem Header="&#727;" Command="{Binding $parent[Window].DataContext.OnResetRecord}" CommandParameter="{Binding}" IsVisible="{Binding !!Record}"/>
+                    </Menu>
+                    <ContentControl Content="{Binding Record}" Grid.Row="1"/>
+                </Grid>
+            </TabItem>
+        </TabControl>
+        <TabControl>
+            <TabItem Header="Properties" Padding="0,0,0,0">
+                <data:PropertiesControl/>
+            </TabItem>
+        </TabControl>
+    </StackPanel>
 </UserControl>

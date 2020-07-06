@@ -46,14 +46,8 @@
     <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.0" PrivateAssets="All" />
     <PackageReference Include="System.Text.Encoding.CodePages" Version="4.7.1" />
     <PackageReference Include="reactiveui" Version="11.4.1" />
-    <PackageReference Include="Dock.Avalonia" Version="0.9.999-build*" />
-    <PackageReference Include="Dock.Avalonia.Themes.Default" Version="0.9.999-build*" />
-    <PackageReference Include="Dock.Avalonia.Themes.Metro" Version="0.9.999-build*" />
-    <PackageReference Include="Dock.Model" Version="0.9.999-build*" />
-    <PackageReference Include="Dock.Model.ReactiveUI" Version="0.9.999-build*" />
     <PackageReference Include="Avalonia.Xaml.Interactions" Version="0.9.999-build*" />
     <PackageReference Include="Avalonia.Xaml.Interactions.Custom" Version="0.9.999-build*" />
-    <PackageReference Include="Avalonia.ThemeManager" Version="0.9.999-build*" />
     <PackageReference Include="Avalonia.MatrixExtensions" Version="3.0.999-build*" />
     <PackageReference Include="Avalonia.Controls.PanAndZoom" Version="3.0.999-build*" />
     <PackageReference Include="Avalonia" Version="$(AvaloniaVersion)" />

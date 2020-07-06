@@ -26,13 +26,10 @@ using Core2D.TextFieldReader.CsvHelper;
 using Core2D.TextFieldReader.OpenXml;
 using Core2D.TextFieldWriter.CsvHelper;
 using Core2D.TextFieldWriter.OpenXml;
-using Core2D.UI.Dock.Factories;
-using Core2D.UI.Dock.Windows;
 using Core2D.UI.Editor;
 using Core2D.UI.Importers;
 using Core2D.UI.Renderer;
 using Core2D.UI.Views;
-using DM = Dock.Model;
 
 namespace Core2D.UI.Modules
 {
@@ -95,13 +92,9 @@ namespace Core2D.UI.Modules
             builder.RegisterType<AvaloniaImageImporter>().As<IImageImporter>().InstancePerLifetimeScope();
             builder.RegisterType<AvaloniaProjectEditorPlatform>().As<IProjectEditorPlatform>().InstancePerLifetimeScope();
             builder.RegisterType<AvaloniaEditorCanvasPlatform>().As<IEditorCanvasPlatform>().InstancePerLifetimeScope();
-            builder.RegisterType<AvaloniaEditorLayoutPlatform>().As<IEditorLayoutPlatform>().InstancePerLifetimeScope();
 
             // View
 
-            builder.RegisterAssemblyTypes(typeof(App).GetTypeInfo().Assembly).As<DM.IDock>().InstancePerLifetimeScope();
-            builder.RegisterType<EditorDockFactory>().As<DM.IFactory>().InstancePerDependency();
-            builder.Register(c => new ThemedHostWindow()).As<DM.IHostWindow>().InstancePerDependency();
             builder.RegisterType<MainWindow>().As<MainWindow>().InstancePerLifetimeScope();
         }
     }

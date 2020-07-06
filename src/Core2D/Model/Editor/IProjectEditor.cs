@@ -180,11 +180,6 @@ namespace Core2D.Editor
         IEditorCanvasPlatform CanvasPlatform { get; }
 
         /// <summary>
-        /// Gets editor layout platform.
-        /// </summary>
-        IEditorLayoutPlatform LayoutPlatform { get; }
-
-        /// <summary>
         /// Gets style editor.
         /// </summary>
         IStyleEditor StyleEditor { get; }

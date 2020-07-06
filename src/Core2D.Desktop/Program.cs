@@ -52,22 +52,41 @@ namespace Core2D
 
             rootCommand.Handler = CommandHandler.Create((Settings settings) =>
             {
-                if (settings.UseManagedSystemDialogs)
+                try
                 {
-                    builder.UseManagedSystemDialogs();
+                    if (settings.UseManagedSystemDialogs)
+                    {
+                        builder.UseManagedSystemDialogs();
+                    }
+
+                    if (settings.UseHeadless)
+                    {
+                        builder.UseHeadless(true);
+                    }
+
+                    if (settings.UseHeadlessVnc)
+                    {
+                        builder.StartWithHeadlessVncPlatform(null, 5901, args, ShutdownMode.OnMainWindowClose);
+                    }
+                    else
+                    {
+                        builder.StartWithClassicDesktopLifetime(args);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Log(ex);
                 }
 
-                if (settings.UseHeadless)
+                static void Log(Exception ex)
                 {
-                    builder.UseHeadless(true);
+                    Console.WriteLine(ex.Message);
+                    Console.WriteLine(ex.StackTrace);
+                    if (ex.InnerException != null)
+                    {
+                        Log(ex.InnerException);
+                    }
                 }
-
-                if (settings.UseHeadlessVnc)
-                {
-                    return builder.StartWithHeadlessVncPlatform(null, 5901, args, ShutdownMode.OnMainWindowClose);
-                }
-
-                return builder.StartWithClassicDesktopLifetime(args);
             });
 
             rootCommand.Invoke(args);

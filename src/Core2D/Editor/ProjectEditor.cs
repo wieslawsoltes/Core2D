@@ -57,7 +57,6 @@ namespace Core2D.Editor
         private readonly Lazy<IScriptRunner> _scriptRunner;
         private readonly Lazy<IProjectEditorPlatform> _platform;
         private readonly Lazy<IEditorCanvasPlatform> _canvasPlatform;
-        private readonly Lazy<IEditorLayoutPlatform> _layoutPlatform;
         private readonly Lazy<IStyleEditor> _styleEditor;
         private readonly Lazy<IPathConverter> _pathConverter;
         private readonly Lazy<ISvgConverter> _svgConverter;
@@ -199,9 +198,6 @@ namespace Core2D.Editor
         public IEditorCanvasPlatform CanvasPlatform => _canvasPlatform.Value;
 
         /// <inheritdoc/>
-        public IEditorLayoutPlatform LayoutPlatform => _layoutPlatform.Value;
-
-        /// <inheritdoc/>
         public IStyleEditor StyleEditor => _styleEditor.Value;
 
         /// <inheritdoc/>
@@ -248,7 +244,6 @@ namespace Core2D.Editor
             _scriptRunner = _serviceProvider.GetServiceLazily<IScriptRunner>();
             _platform = _serviceProvider.GetServiceLazily<IProjectEditorPlatform>();
             _canvasPlatform = _serviceProvider.GetServiceLazily<IEditorCanvasPlatform>();
-            _layoutPlatform = _serviceProvider.GetServiceLazily<IEditorLayoutPlatform>();
             _styleEditor = _serviceProvider.GetServiceLazily<IStyleEditor>();
             _pathConverter = _serviceProvider.GetServiceLazily<IPathConverter>();
             _svgConverter = _serviceProvider.GetServiceLazily<ISvgConverter>();
@@ -377,7 +372,6 @@ namespace Core2D.Editor
         {
             OnUnload();
             OnLoad(ContainerFactory?.GetProject() ?? Factory.CreateProjectContainer(), string.Empty);
-            LayoutPlatform?.Navigate("EditorView");
             CanvasPlatform?.ResetZoom?.Invoke();
             CanvasPlatform?.InvalidateControl?.Invoke();
         }
@@ -415,7 +409,6 @@ namespace Core2D.Editor
                     OnUnload();
                     OnLoad(project, path);
                     OnAddRecent(path, project.Name);
-                    LayoutPlatform?.Navigate("EditorView");
                     CanvasPlatform?.ResetZoom?.Invoke();
                     CanvasPlatform?.InvalidateControl?.Invoke();
                 }
@@ -429,7 +422,6 @@ namespace Core2D.Editor
         /// <inheritdoc/>
         public void OnCloseProject()
         {
-            LayoutPlatform?.Navigate("DashboardView");
             Project?.History?.Reset();
             OnUnload();
         }

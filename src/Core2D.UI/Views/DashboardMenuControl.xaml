@@ -44,49 +44,6 @@
             <Separator/>
             <MenuItem Header="E_xit" Command="{Binding Platform.OnExit}" InputGesture="Alt+F4"/>
         </MenuItem>
-        <!--<MenuItem Header="_View">
-            <MenuItem Header="_Theme" Classes="theme" DataContext="{x:Static app:App.Selector}" Items="{Binding Themes}">
-                <MenuItem.Styles>
-                    <Style Selector="MenuItem.theme > MenuItem">
-                        <Setter Property="Header" Value="{Binding Name}"/>
-                        <Setter Property="Command" Value="{Binding ApplyTheme}"/>
-                        <Setter Property="CommandParameter" Value="{Binding}"/>
-                        <Setter Property="Icon">
-                            <Template>
-                                <CheckBox Classes="menu">
-                                    <CheckBox.IsChecked>
-                                        <MultiBinding Mode="OneWay" Converter="{StaticResource ObjectEqualityMultiConverter}">
-                                            <Binding Path="DataContext" RelativeSource="{RelativeSource Self}"/>
-                                            <Binding Path="Selector.SelectedTheme"/>
-                                        </MultiBinding>
-                                    </CheckBox.IsChecked>
-                                </CheckBox>
-                            </Template>
-                        </Setter>
-                    </Style>
-                </MenuItem.Styles>
-            </MenuItem>
-        </MenuItem>-->
-        <!--<MenuItem Header="_Window">
-            <MenuItem Header="_Save Layout" Command="{Binding LayoutPlatform.SaveLayout}"/>
-            <MenuItem Header="_Apply Layout" Items="{Binding LayoutPlatform.Layout.VisibleDockables}">
-                <MenuItem.Styles>
-                    <Style Selector="MenuItem">
-                        <Setter Property="Header" Value="{Binding Title}"/>
-                        <Setter Property="Command" Value="{Binding $parent.DataContext.LayoutPlatform.ApplyLayout}"/>
-                        <Setter Property="CommandParameter" Value="{Binding}"/>
-                    </Style>
-                </MenuItem.Styles>
-            </MenuItem>
-            <MenuItem Header="_Delete Layout" Command="{Binding LayoutPlatform.DeleteLayout}" CommandParameter="{Binding LayoutPlatform.Layout.ActiveDockable}"/>
-            <Separator/>
-            <MenuItem Header="_Reset Layouts" Command="{Binding LayoutPlatform.ResetLayouts}"/>
-            <Separator/>
-            <MenuItem Header="_Import Layouts..." Command="{Binding LayoutPlatform.ImportLayouts}"/>
-            <MenuItem Header="_Export Layouts..." Command="{Binding LayoutPlatform.ExportLayouts}"/>
-            <Separator/>
-            <MenuItem Header="_Manage Layouts..." Command="{Binding LayoutPlatform.ManageLayouts}"/>
-        </MenuItem>-->
         <MenuItem Header="_Help">
             <MenuItem Header="_About Core2D" Command="{Binding Platform.OnAboutDialog}"/>
         </MenuItem>
