@@ -12,14 +12,13 @@
              mc:Ignorable="d"
              d:DataContext="{x:Static Designer:DesignerContext.Layer}"
              d:DesignWidth="250" d:DesignHeight="400">
-
-    <StackPanel>
-        <StackPanel>
+    <Grid RowDefinitions="Auto,*">
+        <StackPanel Grid.Row="0">
             <TextBlock Text="Name" Margin="{DynamicResource TextControlThemePadding}"/>
             <TextBox Text="{Binding Name, Mode=TwoWay}"/>
             <CheckBox Content="IsVisible" IsChecked="{Binding IsVisible, Mode=TwoWay}"/>
         </StackPanel>
-        <TabControl>
+        <TabControl Grid.Row="1">
             <TabItem Header="Shapes" Padding="0,0,0,0">
                 <ListBox x:Name="shapes" Items="{Binding Shapes}">
                     <ListBox.DataTemplates>
@@ -37,5 +36,5 @@
                 <ContentControl Content="{Binding #shapes.SelectedItem}"/>
             </TabItem>
         </TabControl>
-    </StackPanel>
+    </Grid>
 </UserControl>

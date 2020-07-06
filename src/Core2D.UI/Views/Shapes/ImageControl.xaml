@@ -8,8 +8,8 @@
              mc:Ignorable="d"
              d:DataContext="{x:Static Designer:DesignerContext.Image}"
              d:DesignWidth="250" d:DesignHeight="400">
-    <StackPanel>
-        <TabControl>
+    <Grid RowDefinitions="Auto,*">
+        <TabControl Grid.Row="0">
             <TabItem Header="Image" Padding="0,0,0,0">
                 <StackPanel>
                     <TextBlock Text="Name" Margin="{DynamicResource TextControlThemePadding}"/>
@@ -32,7 +32,7 @@
                 <ContentControl Content="{Binding State}"/>
             </TabItem>
         </TabControl>
-        <TabControl>
+        <TabControl Grid.Row="1">
             <TabItem Header="TopLeft" Padding="0,0,0,0">
                 <ContentControl Content="{Binding TopLeft}"/>
             </TabItem>
@@ -40,5 +40,5 @@
                 <ContentControl Content="{Binding BottomRight}"/>
             </TabItem>
         </TabControl>
-    </StackPanel>
+    </Grid>
 </UserControl>

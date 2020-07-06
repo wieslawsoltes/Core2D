@@ -13,8 +13,8 @@
              mc:Ignorable="d"
              d:DataContext="{x:Static Designer:DesignerContext.Group}"
              d:DesignWidth="250" d:DesignHeight="400">
-    <StackPanel>
-        <TabControl>
+    <Grid RowDefinitions="Auto,Auto,Auto,*">
+        <TabControl Grid.Row="0">
             <TabItem Header="Group" Padding="0,0,0,0">
                 <StackPanel>
                     <TextBlock Text="Name"  Margin="{DynamicResource TextControlThemePadding}"/>
@@ -28,7 +28,7 @@
                 <ContentControl Content="{Binding State}"/>
             </TabItem>
         </TabControl>
-        <TabControl>
+        <TabControl Grid.Row="1">
             <TabItem Header="Properties" Padding="0,0,0,0">
                 <Grid RowDefinitions="Auto,*" ColumnDefinitions="50*,Auto,50*" IsVisible="{Binding !!ShapesProperties.Length}">
                     <TextBlock Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" Text="Name"/>
@@ -61,7 +61,7 @@
                 </Grid>
             </TabItem>
         </TabControl>
-        <TabControl>
+        <TabControl Grid.Row="2">
             <TabItem Header="Shapes" Padding="0,0,0,0">
                 <ListBox x:Name="shapes" Items="{Binding Shapes}">
                     <ListBox.DataTemplates>
@@ -79,7 +79,7 @@
                 <ContentControl Content="{Binding #shapes.SelectedItem}"/>
             </TabItem>
         </TabControl>
-        <TabControl>
+        <TabControl Grid.Row="3">
             <TabItem Header="Connectors" Padding="0,0,0,0">
                 <ListBox x:Name="connectors" Items="{Binding Connectors}">
                     <ListBox.DataTemplates>
@@ -97,5 +97,5 @@
                 <ContentControl Content="{Binding #connectors.SelectedItem}"/>
             </TabItem>
         </TabControl>
-    </StackPanel>
+    </Grid>
 </UserControl>

@@ -13,44 +13,41 @@
              mc:Ignorable="d"
              d:DataContext="{x:Static Designer:DesignerContext.Page}"
              d:DesignWidth="250" d:DesignHeight="400">
+    <Grid RowDefinitions="Auto,*,Auto">
+        <Menu Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Center">
+            <MenuItem Header="&#727;" Command="{Binding $parent[Window].DataContext.OnRemoveShape}" CommandParameter="{Binding CurrentShape}" IsVisible="{Binding !!CurrentShape}"/>
+        </Menu>
+        <ListBox x:Name="shapes" Items="{Binding CurrentLayer.Shapes}" SelectedItem="{Binding CurrentShape, Mode=TwoWay}" VirtualizationMode="Simple" Grid.Row="1">
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <VirtualizingStackPanel Orientation="Vertical"/>
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
+            <ListBox.KeyBindings>
+                <KeyBinding Command="{Binding $parent[Window].DataContext.OnRemoveShape}" CommandParameter="{Binding #shapes.SelectedItem}" Gesture="Delete"/>
+            </ListBox.KeyBindings>
+            <ListBox.DataTemplates>
+                <DataTemplate DataType="Shapes:IBaseShape">
+                    <TextBlock Text="{Binding Mode=OneWay, Converter={StaticResource ObjectToTypeStringConverter}}" Background="Transparent">
+                        <i:Interaction.Behaviors>
+                            <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}"/>
+                        </i:Interaction.Behaviors>
+                        <TextBlock.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Header="_Delete" Command="{Binding $parent[Window].DataContext.OnRemoveShape}" CommandParameter="{Binding}"/>
+                            </ContextMenu>
+                        </TextBlock.ContextMenu>
+                    </TextBlock>
+                </DataTemplate>
+            </ListBox.DataTemplates>
+        </ListBox>
+        <TextBox Text="{Binding CurrentShape.Name, Mode=TwoWay}" IsVisible="{Binding !!CurrentShape}" BorderBrush="Transparent" Background="Transparent" Grid.Row="2" />
+    </Grid>
+    <!--
     <TabControl>
-        <TabItem Header="Shapes" Padding="0,0,0,0">
-            <Grid RowDefinitions="Auto,*,Auto">
-                <Menu Grid.Row="0" HorizontalAlignment="Right">
-                    <MenuItem Header="&#727;" Command="{Binding $parent[Window].DataContext.OnRemoveShape}" CommandParameter="{Binding CurrentShape}" IsVisible="{Binding !!CurrentShape}"/>
-                </Menu>
-                <ListBox x:Name="shapes" Items="{Binding CurrentLayer.Shapes}" SelectedItem="{Binding CurrentShape, Mode=TwoWay}" VirtualizationMode="Simple" Grid.Row="1">
-                    <ListBox.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <VirtualizingStackPanel Orientation="Vertical"/>
-                        </ItemsPanelTemplate>
-                    </ListBox.ItemsPanel>
-                    <ListBox.KeyBindings>
-                        <KeyBinding Command="{Binding $parent[Window].DataContext.OnRemoveShape}" CommandParameter="{Binding #shapes.SelectedItem}" Gesture="Delete"/>
-                    </ListBox.KeyBindings>
-                    <ListBox.DataTemplates>
-                        <DataTemplate DataType="Shapes:IBaseShape">
-                            <TextBlock Text="{Binding Mode=OneWay, Converter={StaticResource ObjectToTypeStringConverter}}" Background="Transparent">
-                                <i:Interaction.Behaviors>
-                                    <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}"/>
-                                </i:Interaction.Behaviors>
-                                <TextBlock.ContextMenu>
-                                    <ContextMenu>
-                                        <MenuItem Header="_Delete" Command="{Binding $parent[Window].DataContext.OnRemoveShape}" CommandParameter="{Binding}"/>
-                                    </ContextMenu>
-                                </TextBlock.ContextMenu>
-                            </TextBlock>
-                        </DataTemplate>
-                    </ListBox.DataTemplates>
-                </ListBox>
-                <Grid RowDefinitions="Auto" ColumnDefinitions="Auto,*" Grid.Row="2" IsVisible="{Binding !!CurrentShape}">
-                    <TextBlock Text="Name" Grid.Row="0" Grid.Column="0"/>
-                    <TextBox Text="{Binding CurrentShape.Name, Mode=TwoWay}" Grid.Row="0" Grid.Column="1"/>
-                </Grid>
-            </Grid>
-        </TabItem>
-        <TabItem Header="Selected" Padding="12,0,0,0">
+        <TabItem Header="Selected Shape" Padding="0,0,0,0">
             <ContentControl Content="{Binding CurrentShape}"/>
         </TabItem>
     </TabControl>
+    -->
 </UserControl>

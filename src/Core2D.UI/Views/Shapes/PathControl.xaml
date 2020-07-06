@@ -8,8 +8,8 @@
              mc:Ignorable="d"
              d:DataContext="{x:Static Designer:DesignerContext.Path}"
              d:DesignWidth="250" d:DesignHeight="400">
-    <StackPanel>
-        <TabControl>
+    <Grid RowDefinitions="Auto,*">
+        <TabControl Grid.Row="0">
             <TabItem Header="Path" Padding="0,0,0,0">
                 <StackPanel>
                     <TextBlock Text="Name" Margin="{DynamicResource TextControlThemePadding}"/>
@@ -28,10 +28,10 @@
                 <ContentControl Content="{Binding State}"/>
             </TabItem>
         </TabControl>
-        <TabControl>
+        <TabControl Grid.Row="1">
             <TabItem Header="Geometry" Padding="0,0,0,0">
                 <ContentControl Content="{Binding Geometry}"/>
             </TabItem>
         </TabControl>
-    </StackPanel>
+    </Grid>
 </UserControl>

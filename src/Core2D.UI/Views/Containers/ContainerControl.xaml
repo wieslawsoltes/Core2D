@@ -9,8 +9,8 @@
              mc:Ignorable="d"
              d:DataContext="{x:Static Designer:DesignerContext.Page}"
              d:DesignWidth="250" d:DesignHeight="400">
-    <StackPanel>
-        <StackPanel>
+    <Grid RowDefinitions="Auto,*">
+        <StackPanel Grid.Row="0">
             <TextBlock Text="Name" Margin="{DynamicResource TextControlThemePadding}"/>
             <TextBox Text="{Binding Name, Mode=TwoWay}"/>
             <TextBlock Text="Width" Margin="{DynamicResource TextControlThemePadding}"/>
@@ -20,7 +20,7 @@
             <TextBlock Text="Background" Margin="{DynamicResource TextControlThemePadding}"/>
             <ContentControl Content="{Binding Background}"/>
         </StackPanel>
-        <TabControl>
+        <TabControl Grid.Row="1">
             <TabItem Header="Layers" Padding="0,0,0,0">
                 <containers:LayersControl/>
             </TabItem>
@@ -34,5 +34,5 @@
                 <ContentControl Content="{Binding Template}"/>
             </TabItem>
         </TabControl>
-    </StackPanel>
+    </Grid>
 </UserControl>

@@ -12,12 +12,12 @@
              mc:Ignorable="d"
              d:DataContext="{x:Static Designer:DesignerContext.Document}"
              d:DesignWidth="250" d:DesignHeight="400">
-    <StackPanel>
-        <StackPanel>
+    <Grid RowDefinitions="Auto,*">
+        <StackPanel Grid.Row="0">
             <TextBlock Text="Name" Margin="{DynamicResource TextControlThemePadding}"/>
             <TextBox Text="{Binding Name, Mode=TwoWay}"/>
         </StackPanel>
-        <TabControl>
+        <TabControl Grid.Row="1">
             <TabItem Header="Pages" Padding="0,0,0,0">
                 <ListBox Items="{Binding Pages}">
                     <ListBox.DataTemplates>
@@ -32,5 +32,5 @@
                 </ListBox>
             </TabItem>
         </TabControl>
-    </StackPanel>
+    </Grid>
 </UserControl>

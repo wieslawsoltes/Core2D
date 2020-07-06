@@ -100,7 +100,9 @@
                     </ScrollViewer>
                 </TabItem>
                 <TabItem x:Name="OptionsTabItem" Header="Options" Padding="12,0,0,0">
-                    <ContentControl Content="{Binding Project.Options}"/>
+                    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                        <ContentControl Content="{Binding Project.Options}"/>
+                    </ScrollViewer>
                 </TabItem>
             </TabControl>
             <GridSplitter x:Name="LeftGridSplitter" ResizeDirection="Columns" ResizeBehavior="PreviousAndNext" Background="Transparent" Width="6" Grid.Column="1" Grid.Row="1"/>
