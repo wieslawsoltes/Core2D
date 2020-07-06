@@ -4,19 +4,19 @@ using System.CommandLine.Invocation;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Threading;
+using System.Threading.Tasks;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Dialogs;
 using Avalonia.Headless;
-using Avalonia.Media;
 using Avalonia.Media.Imaging;
-using Avalonia.Platform;
 using Avalonia.ReactiveUI;
-using Avalonia.Rendering;
 using Avalonia.Threading;
 using Core2D.Editor;
 using Core2D.UI;
+using Microsoft.CodeAnalysis.CSharp.Scripting;
+using Microsoft.CodeAnalysis.Scripting;
 
 namespace Core2D
 {
@@ -24,46 +24,110 @@ namespace Core2D
     {
         public FileInfo? Project { get; set; }
         public FileInfo? Script { get; set; }
+        public bool Repl { get; set; }
         public bool UseManagedSystemDialogs { get; set; }
         public bool UseHeadless { get; set; }
         public bool UseHeadlessDrawing { get; set; }
         public bool UseHeadlessVnc { get; set; }
+        public bool CreateHeadlessScreenshots { get; set; }
         public string? VncHost { get; set; } = null;
         public int VncPort { get; set; } = 5901;
     }
 
     internal class Program
     {
-        private static Thread? ReplThread;
+        [DllImport("kernel32.dll", SetLastError = true, ExactSpelling = true)]
+        private static extern bool AttachConsole(int processId);
 
-        private static void Repl()
+        private static Thread? s_replThread;
+
+        private static void Log(Exception ex)
         {
-            ReplThread = new Thread(() =>
+            Console.WriteLine(ex.Message);
+            Console.WriteLine(ex.StackTrace);
+            if (ex.InnerException != null)
             {
+                Log(ex.InnerException);
+            }
+        }
+
+        private static void Repl(Application instance)
+        {
+            s_replThread = new Thread(async () =>
+            {
+                ScriptState<object>? state = null;
+
                 while (true)
                 {
-                    var line = Console.ReadLine();
-                    Console.WriteLine(line);
+                    try
+                    {
+                        var code = Console.ReadLine();
+
+                        if (state is ScriptState<object> previous)
+                        {
+                            state = await previous.ContinueWithAsync(code);
+                        }
+                        else
+                        {
+                            var options = ScriptOptions.Default.WithImports("System");
+                            state = await CSharpScript.RunAsync(code, options, instance);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Log(ex);
+                    }
                 }
             })
             { IsBackground = true };
-            ReplThread?.Start();
+            s_replThread?.Start();
         }
 
         private static void Screenshot(Control target, Size size, string path = "screenshot.png", double dpi = 96)
         {
-            var factory = AvaloniaLocator.Current.GetService<IPlatformRenderInterface>();
             var pixelSize = new PixelSize((int)size.Width, (int)size.Height);
             var dpiVector = new Vector(dpi, dpi);
-            using RenderTargetBitmap bitmap = new RenderTargetBitmap(pixelSize, dpiVector);
+            using var bitmap = new RenderTargetBitmap(pixelSize, dpiVector);
             target.Measure(size);
             target.Arrange(new Rect(size));
             bitmap.Render(target);
             bitmap.Save(path);
         }
 
-        [DllImport("kernel32.dll", SetLastError = true, ExactSpelling = true)]
-        private static extern bool AttachConsole(int processId);
+        private static async Task CreateScreenshots()
+        {
+            await Dispatcher.UIThread.InvokeAsync(() =>
+            {
+                var window = ((IClassicDesktopStyleApplicationLifetime)Application.Current.ApplicationLifetime).MainWindow;
+                var headlessWindow = window?.PlatformImpl as IHeadlessWindow;
+                var control = window?.Content as UserControl;
+                var editor = control?.DataContext as IProjectEditor;
+
+                var pt = new Point(-1, -1);
+                headlessWindow?.MouseMove(pt);
+                Dispatcher.UIThread.RunJobs();
+
+                var size = new Size(1366, 690);
+
+                if (control != null)
+                {
+                    Screenshot(control, size, "Core2D-Dashboard.png");
+                    Dispatcher.UIThread.RunJobs();
+                }
+
+                if (control != null)
+                {
+                    editor?.OnNew(null);
+                    Dispatcher.UIThread.RunJobs();
+                }
+
+                if (control != null)
+                {
+                    Screenshot(control, size, "Core2D-Editor.png");
+                    Dispatcher.UIThread.RunJobs();
+                }
+            });
+        }
 
         [STAThread]
         private static void Main(string[] args)
@@ -72,8 +136,6 @@ namespace Core2D
             {
                 AttachConsole(-1);
             }
-
-            //Repl();
 
             var builder = BuildAvaloniaApp();
 
@@ -85,6 +147,11 @@ namespace Core2D
             var optionScript = new Option(new[] { "--script", "-s" }, "The relative or absolute path to the script file")
             {
                 Argument = new Argument<FileInfo?>()
+            };
+
+            var optionRepl = new Option(new[] { "--repl" }, "Run scripting repl")
+            {
+                Argument = new Argument<bool>()
             };
 
             var optionUseManagedSystemDialogs = new Option(new[] { "--useManagedSystemDialogs" }, "Use managed system dialogs")
@@ -107,6 +174,11 @@ namespace Core2D
                 Argument = new Argument<bool>()
             };
 
+            var optionCreateHeadlessScreenshots = new Option(new[] { "--createHeadlessScreenshots" }, "Create headless screenshots")
+            {
+                Argument = new Argument<bool>()
+            };
+
             var optionVncHost = new Option(new[] { "--vncHost" }, "Vnc host")
             {
                 Argument = new Argument<string?>()
@@ -124,10 +196,12 @@ namespace Core2D
 
             rootCommand.AddOption(optionProject);
             rootCommand.AddOption(optionScript);
+            rootCommand.AddOption(optionRepl);
             rootCommand.AddOption(optionUseManagedSystemDialogs);
             rootCommand.AddOption(optionUseHeadless);
             rootCommand.AddOption(optionUseHeadlessDrawing);
             rootCommand.AddOption(optionUseHeadlessVnc);
+            rootCommand.AddOption(optionCreateHeadlessScreenshots);
             rootCommand.AddOption(optionVncHost);
             rootCommand.AddOption(optionVncPort);
 
@@ -135,6 +209,11 @@ namespace Core2D
             {
                 try
                 {
+                    if (settings.Repl)
+                    {
+                        Repl(builder.Instance);
+                    }
+
                     if (settings.Project != null)
                     {
                         // TODO:
@@ -150,6 +229,17 @@ namespace Core2D
                         builder.UseManagedSystemDialogs();
                     }
 
+                    if (settings.CreateHeadlessScreenshots)
+                    {
+                        builder.UseHeadless(false)
+                               .AfterSetup(async _ =>
+                               {
+                                   await CreateScreenshots();
+                               })
+                               .StartWithClassicDesktopLifetime(args);
+                        return;
+                    }
+
                     if (settings.UseHeadless)
                     {
                         builder.UseHeadless(settings.UseHeadlessDrawing);
@@ -158,81 +248,17 @@ namespace Core2D
                     if (settings.UseHeadlessVnc)
                     {
                         builder.StartWithHeadlessVncPlatform(settings.VncHost, settings.VncPort, args, ShutdownMode.OnMainWindowClose);
+                        return;
                     }
                     else
                     {
-#if true
-                        builder.AfterSetup(async _ =>
-                        {
-                            var window = default(Window?);
-                            var headlessWindow = default(IHeadlessWindow?);
-                            var control = default(UserControl?);
-                            var editor = default(IProjectEditor?);
-                            var pt = new Point(-1, -1);
-                            var size = new Size(1366, 690);
-
-                            await Dispatcher.UIThread.InvokeAsync(() =>
-                            {
-                                window = ((IClassicDesktopStyleApplicationLifetime)Application.Current.ApplicationLifetime).MainWindow;
-                                headlessWindow = window?.PlatformImpl as IHeadlessWindow;
-                                control = window?.Content as UserControl;
-                                editor = control?.DataContext as IProjectEditor;
-                                Dispatcher.UIThread.RunJobs();
-                            });
-
-                            await Dispatcher.UIThread.InvokeAsync(() =>
-                            {
-                                headlessWindow?.MouseMove(pt);
-                                Dispatcher.UIThread.RunJobs();
-                            });
-
-                            await Dispatcher.UIThread.InvokeAsync(() =>
-                            {
-                                if (control != null)
-                                {
-                                    Screenshot(control, size, "Core2D-Dashboard.png");
-                                    Dispatcher.UIThread.RunJobs();
-                                }
-                            });
-
-                            await Dispatcher.UIThread.InvokeAsync(() =>
-                            {
-                                if (control != null)
-                                {
-                                    editor?.OnNew(null);
-                                    control?.InvalidateVisual();
-                                    Dispatcher.UIThread.RunJobs();
-                                }
-                            });
-
-                            await Dispatcher.UIThread.InvokeAsync(() =>
-                            {
-                                if (control != null)
-                                {
-                                    Screenshot(control, size, "Core2D-Editor.png");
-                                    Dispatcher.UIThread.RunJobs();
-                                }
-                            });
-                        })
-                        .StartWithClassicDesktopLifetime(args);
-#else
                         builder.StartWithClassicDesktopLifetime(args);
-#endif
+                        return;
                     }
                 }
                 catch (Exception ex)
                 {
                     Log(ex);
-                }
-
-                static void Log(Exception ex)
-                {
-                    Console.WriteLine(ex.Message);
-                    Console.WriteLine(ex.StackTrace);
-                    if (ex.InnerException != null)
-                    {
-                        Log(ex.InnerException);
-                    }
                 }
             });
 
