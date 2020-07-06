@@ -2,6 +2,7 @@
 using System.CommandLine;
 using System.CommandLine.Invocation;
 using System.IO;
+using System.Runtime.InteropServices;
 using System.Threading;
 using Avalonia;
 using Avalonia.Controls;
@@ -63,9 +64,17 @@ namespace Core2D
             }
         }
 
+        [DllImport("kernel32.dll", SetLastError = true, ExactSpelling = true)]
+        private static extern bool AttachConsole(int processId);
+
         [STAThread]
         private static void Main(string[] args)
         {
+            if (Environment.OSVersion.Platform == PlatformID.Win32NT)
+            {
+                AttachConsole(-1);
+            }
+
             //Repl();
 
             var builder = BuildAvaloniaApp();
