@@ -85,8 +85,8 @@ namespace Core2D
 
     internal class Settings
     {
-        public FileInfo? Project { get; set; }
         public FileInfo? Script { get; set; }
+        public FileInfo? Project { get; set; }
         public bool Repl { get; set; }
         public bool UseManagedSystemDialogs { get; set; }
         public bool UseHeadless { get; set; }
@@ -188,6 +188,32 @@ namespace Core2D
             });
         }
 
+        internal static async Task ProcessSettings(Settings settings)
+        {
+            await Dispatcher.UIThread.InvokeAsync(() =>
+            {
+                var applicationLifetime = (IClassicDesktopStyleApplicationLifetime)Application.Current.ApplicationLifetime;
+                var mainWindow = applicationLifetime?.MainWindow;
+                var mainConntrol = mainWindow?.Content as MainControl;
+                var editor = mainConntrol?.DataContext as IProjectEditor;
+
+                if (mainConntrol != null)
+                {
+                    if (settings.Script != null)
+                    {
+                        editor?.OnExecuteScriptFile(settings.Script.FullName);
+                        Dispatcher.UIThread.RunJobs();
+                    }
+
+                    if (settings.Project != null)
+                    {
+                        editor?.OnOpenProject(settings.Project.FullName);
+                        Dispatcher.UIThread.RunJobs();
+                    }
+                }
+            });
+        }
+
         [STAThread]
         internal static void Main(string[] args)
         {
@@ -198,12 +224,12 @@ namespace Core2D
 
             var builder = BuildAvaloniaApp();
 
-            var optionProject = new Option(new[] { "--project", "-p" }, "The relative or absolute path to the project file")
+            var optionScript = new Option(new[] { "--script", "-s" }, "The relative or absolute path to the script file")
             {
                 Argument = new Argument<FileInfo?>()
             };
 
-            var optionScript = new Option(new[] { "--script", "-s" }, "The relative or absolute path to the script file")
+            var optionProject = new Option(new[] { "--project", "-p" }, "The relative or absolute path to the project file")
             {
                 Argument = new Argument<FileInfo?>()
             };
@@ -253,8 +279,8 @@ namespace Core2D
                 Description = "A multi-platform data driven 2D diagram editor."
             };
 
-            rootCommand.AddOption(optionProject);
             rootCommand.AddOption(optionScript);
+            rootCommand.AddOption(optionProject);
             rootCommand.AddOption(optionRepl);
             rootCommand.AddOption(optionUseManagedSystemDialogs);
             rootCommand.AddOption(optionUseHeadless);
@@ -271,16 +297,6 @@ namespace Core2D
                     if (settings.Repl)
                     {
                         Repl();
-                    }
-
-                    if (settings.Project != null)
-                    {
-                        // TODO:
-                    }
-
-                    if (settings.Script != null)
-                    {
-                        // TODO:
                     }
 
                     if (settings.UseManagedSystemDialogs)
@@ -303,12 +319,14 @@ namespace Core2D
 
                     if (settings.UseHeadlessVnc)
                     {
-                        builder.StartWithHeadlessVncPlatform(settings.VncHost, settings.VncPort, args, ShutdownMode.OnMainWindowClose);
+                        builder.AfterSetup(async _ => await ProcessSettings(settings))
+                               .StartWithHeadlessVncPlatform(settings.VncHost, settings.VncPort, args, ShutdownMode.OnMainWindowClose);
                         return;
                     }
                     else
                     {
-                        builder.StartWithClassicDesktopLifetime(args);
+                        builder.AfterSetup(async _ => await ProcessSettings(settings))
+                               .StartWithClassicDesktopLifetime(args);
                         return;
                     }
                 }
