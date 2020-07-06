@@ -1,6 +1,7 @@
 ﻿using System;
 using System.CommandLine;
 using System.CommandLine.Invocation;
+using System.IO;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
@@ -14,11 +15,13 @@ namespace Core2D
 {
     internal class Settings
     {
+        public FileInfo? Project { get; set; }
+        public FileInfo? Script { get; set; }
         public bool UseManagedSystemDialogs { get; set; }
         public bool UseHeadless { get; set; }
         public bool UseHeadlessDrawing { get; set; }
         public bool UseHeadlessVnc { get; set; }
-        public string VncHost { get; set; } = null;
+        public string? VncHost { get; set; } = null;
         public int VncPort { get; set; } = 5901;
     }
 
@@ -28,6 +31,16 @@ namespace Core2D
         private static void Main(string[] args)
         {
             var builder = BuildAvaloniaApp();
+
+            var optionProject = new Option(new[] { "--project", "-p" }, "The relative or absolute path to the project file")
+            {
+                Argument = new Argument<FileInfo?>()
+            };
+
+            var optionScript = new Option(new[] { "--script", "-s" }, "The relative or absolute path to the script file")
+            {
+                Argument = new Argument<FileInfo?>()
+            };
 
             var optionUseManagedSystemDialogs = new Option(new[] { "--useManagedSystemDialogs" }, "Use managed system dialogs")
             {
@@ -51,7 +64,7 @@ namespace Core2D
 
             var optionVncHost = new Option(new[] { "--vncHost" }, "Vnc host")
             {
-                Argument = new Argument<string>(getDefaultValue: () => null)
+                Argument = new Argument<string?>()
             };
 
             var optionVncPort = new Option(new[] { "--vncPort" }, "Vnc port")
@@ -64,6 +77,8 @@ namespace Core2D
                 Description = "A multi-platform data driven 2D diagram editor."
             };
 
+            rootCommand.AddOption(optionProject);
+            rootCommand.AddOption(optionScript);
             rootCommand.AddOption(optionUseManagedSystemDialogs);
             rootCommand.AddOption(optionUseHeadless);
             rootCommand.AddOption(optionUseHeadlessDrawing);
@@ -75,6 +90,16 @@ namespace Core2D
             {
                 try
                 {
+                    if (settings.Project != null)
+                    {
+                        // TODO:
+                    }
+
+                    if (settings.Script != null)
+                    {
+                        // TODO:
+                    }
+
                     if (settings.UseManagedSystemDialogs)
                     {
                         builder.UseManagedSystemDialogs();

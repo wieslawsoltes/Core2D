@@ -88,7 +88,6 @@ namespace Core2D.UI
             var fileIO = serviceProvider.GetService<IFileSystem>();
 
             log?.Initialize(System.IO.Path.Combine(fileIO?.GetBaseDirectory(), "Core2D.log"));
-            log?.Initialize(System.IO.Path.Combine(fileIO?.GetBaseDirectory(), "Core2D.log"));
 
             var editor = serviceProvider.GetService<IProjectEditor>();
 
