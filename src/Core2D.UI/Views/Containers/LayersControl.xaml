@@ -14,7 +14,7 @@
              d:DataContext="{x:Static Designer:DesignerContext.Page}"
              d:DesignWidth="250" d:DesignHeight="400">
     <Grid RowDefinitions="Auto,*,Auto">
-        <Menu Grid.Row="0" HorizontalAlignment="Right">
+        <Menu Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Center">
             <MenuItem Header="+" Command="{Binding $parent[Window].DataContext.OnAddLayer}" CommandParameter="{Binding}"/>
             <MenuItem Header="&#727;" Command="{Binding $parent[Window].DataContext.OnRemoveLayer}" CommandParameter="{Binding CurrentLayer}" IsVisible="{Binding !!CurrentLayer}"/>
         </Menu>
