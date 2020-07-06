@@ -39,17 +39,19 @@
     <AvaloniaResource Include="Assets\**" />
   </ItemGroup>
 
+  <PropertyGroup>
+    <AvaloniaVersion>0.9.999-cibuild0009048-beta</AvaloniaVersion>
+  </PropertyGroup>
+
   <ItemGroup>
     <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.0" PrivateAssets="All" />
     <PackageReference Include="System.CommandLine" Version="2.0.0-beta1.20303.1" />
-    <PackageReference Include="SourceLink.Create.CommandLine" Version="2.8.3" PrivateAssets="All" />
-    <PackageReference Include="Avalonia" Version="0.9.999-cibuild0009048-beta" />
-    <PackageReference Include="Avalonia.Controls.DataGrid" Version="0.9.999-cibuild0009048-beta" />
-    <PackageReference Include="Avalonia.Desktop" Version="0.9.999-cibuild0009048-beta" />
-    <PackageReference Include="Avalonia.Diagnostics" Version="0.9.999-cibuild0009048-beta" />
-    <PackageReference Include="Avalonia.Angle.Windows.Natives" Version="2.1.0.2019013001" />
-    <PackageReference Include="Avalonia.ReactiveUI" Version="0.9.999-cibuild0009048-beta" />
-    <PackageReference Include="Avalonia.Headless" Version="0.9.999-cibuild0009048-beta" />
+    <PackageReference Include="Avalonia" Version="$(AvaloniaVersion)" />
+    <PackageReference Include="Avalonia.Controls.DataGrid" Version="$(AvaloniaVersion)" />
+    <PackageReference Include="Avalonia.Desktop" Version="$(AvaloniaVersion)" />
+    <PackageReference Include="Avalonia.Diagnostics" Version="$(AvaloniaVersion)" />
+    <PackageReference Include="Avalonia.ReactiveUI" Version="$(AvaloniaVersion)" />
+    <PackageReference Include="Avalonia.Headless" Version="$(AvaloniaVersion)" />
   </ItemGroup>
 
   <ItemGroup>

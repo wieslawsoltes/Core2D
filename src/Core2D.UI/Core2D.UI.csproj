@@ -32,16 +32,20 @@
     <AvaloniaResource Include="Assets\**" />
   </ItemGroup>
 
+  <PropertyGroup>
+    <!--<DefineConstants>$(DefineConstants);USE_DIAGNOSTICS</DefineConstants>-->
+    <!--<DefineConstants>$(DefineConstants);USE_SKIA</DefineConstants>-->
+    <!--<DefineConstants>$(DefineConstants);USE_SKIA_RTB</DefineConstants>-->
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <AvaloniaVersion>0.9.999-cibuild0009048-beta</AvaloniaVersion>
+  </PropertyGroup> 
+
   <ItemGroup>
     <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.0" PrivateAssets="All" />
-    <PackageReference Include="SourceLink.Create.CommandLine" Version="2.8.3" PrivateAssets="All" />
     <PackageReference Include="System.Text.Encoding.CodePages" Version="4.7.1" />
-    <PackageReference Include="Avalonia" Version="0.9.999-cibuild0009048-beta" />
-    <PackageReference Include="Avalonia.Controls.DataGrid" Version="0.9.999-cibuild0009048-beta" />
-    <PackageReference Include="Avalonia.Desktop" Version="0.9.999-cibuild0009048-beta" />
-    <PackageReference Include="Avalonia.Diagnostics" Version="0.9.999-cibuild0009048-beta" />
-    <PackageReference Include="Avalonia.Angle.Windows.Natives" Version="2.1.0.2019013001" />
-    <PackageReference Include="Avalonia.ReactiveUI" Version="0.9.999-cibuild0009048-beta" />
+    <PackageReference Include="reactiveui" Version="11.4.1" />
     <PackageReference Include="Dock.Avalonia" Version="0.9.999-build*" />
     <PackageReference Include="Dock.Avalonia.Themes.Default" Version="0.9.999-build*" />
     <PackageReference Include="Dock.Avalonia.Themes.Metro" Version="0.9.999-build*" />
@@ -52,15 +56,14 @@
     <PackageReference Include="Avalonia.ThemeManager" Version="0.9.999-build*" />
     <PackageReference Include="Avalonia.MatrixExtensions" Version="3.0.999-build*" />
     <PackageReference Include="Avalonia.Controls.PanAndZoom" Version="3.0.999-build*" />
-    <PackageReference Include="reactiveui" Version="11.4.1" />
+    <PackageReference Include="Avalonia" Version="$(AvaloniaVersion)" />
+    <PackageReference Include="Avalonia.Controls.DataGrid" Version="$(AvaloniaVersion)" />
+    <PackageReference Include="Avalonia.Desktop" Version="$(AvaloniaVersion)" />
+    <PackageReference Include="Avalonia.Diagnostics" Version="$(AvaloniaVersion)" />
+    <PackageReference Include="Avalonia.Angle.Windows.Natives" Version="2.1.0.2019013001" />
+    <PackageReference Include="Avalonia.ReactiveUI" Version="$(AvaloniaVersion)" />
   </ItemGroup>
-  
-  <PropertyGroup>
-    <!--<DefineConstants>$(DefineConstants);USE_DIAGNOSTICS</DefineConstants>-->
-    <!--<DefineConstants>$(DefineConstants);USE_SKIA</DefineConstants>-->
-    <!--<DefineConstants>$(DefineConstants);USE_SKIA_RTB</DefineConstants>-->
-  </PropertyGroup>
-  
+
   <ItemGroup>
     <ProjectReference Include="..\Core2D\Core2D.csproj" />
   </ItemGroup>
