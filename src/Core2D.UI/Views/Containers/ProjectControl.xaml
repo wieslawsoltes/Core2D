@@ -20,8 +20,8 @@
     </UserControl.Resources>
     <Grid RowDefinitions="Auto,*,Auto" ColumnDefinitions="*">
         <Grid Grid.Row="0" RowDefinitions="*" ColumnDefinitions="*,Auto">
-            <TextBox Text="{Binding Name, Mode=TwoWay}" BorderBrush="Transparent" Background="Transparent" VerticalAlignment="Center" Grid.Column="0"/>
-            <Menu Grid.Column="1" HorizontalAlignment="Right">
+            <TextBox Text="{Binding Name, Mode=TwoWay}" BorderBrush="Transparent" Background="Transparent" VerticalAlignment="Center" Margin="0,0,0,0" Grid.Column="0"/>
+            <Menu Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center">
                 <MenuItem Header="+" Command="{Binding $parent[Window].DataContext.OnNew}" CommandParameter="{Binding Selected}"/>
                 <MenuItem Header="&#727;" Command="{Binding $parent[Window].DataContext.OnDelete}" CommandParameter="{Binding Selected}" IsVisible="{Binding !!Selected}"/>
             </Menu>
