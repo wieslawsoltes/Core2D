@@ -85,7 +85,7 @@ namespace Core2D
 
     internal class Settings
     {
-        public FileInfo? Script { get; set; }
+        public FileInfo[]? Scripts { get; set; }
         public FileInfo? Project { get; set; }
         public bool Repl { get; set; }
         public bool UseManagedSystemDialogs { get; set; }
@@ -199,10 +199,13 @@ namespace Core2D
 
                 if (mainConntrol != null)
                 {
-                    if (settings.Script != null)
+                    if (settings.Scripts != null)
                     {
-                        editor?.OnExecuteScriptFile(settings.Script.FullName);
-                        Dispatcher.UIThread.RunJobs();
+                        foreach (var script in settings.Scripts)
+                        {
+                            editor?.OnExecuteScriptFile(script.FullName);
+                            Dispatcher.UIThread.RunJobs();
+                        }
                     }
 
                     if (settings.Project != null)
@@ -224,9 +227,9 @@ namespace Core2D
 
             var builder = BuildAvaloniaApp();
 
-            var optionScript = new Option(new[] { "--script", "-s" }, "The relative or absolute path to the script file")
+            var optionScripts = new Option(new[] { "--scripts", "-s" }, "The relative or absolute path to the script files")
             {
-                Argument = new Argument<FileInfo?>()
+                Argument = new Argument<FileInfo[]?>()
             };
 
             var optionProject = new Option(new[] { "--project", "-p" }, "The relative or absolute path to the project file")
@@ -279,7 +282,7 @@ namespace Core2D
                 Description = "A multi-platform data driven 2D diagram editor."
             };
 
-            rootCommand.AddOption(optionScript);
+            rootCommand.AddOption(optionScripts);
             rootCommand.AddOption(optionProject);
             rootCommand.AddOption(optionRepl);
             rootCommand.AddOption(optionUseManagedSystemDialogs);
