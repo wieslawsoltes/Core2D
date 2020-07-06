@@ -189,31 +189,6 @@
             <MenuItem Header="_Delete Page" Command="{Binding OnDelete}" CommandParameter="{Binding Project.CurrentContainer}"/>
             <Separator/>
             <MenuItem Header="E_xport Page" Command="{Binding Platform.OnExport}" CommandParameter="{Binding Project.CurrentContainer}"/>
-            <Separator/>
-            <MenuItem Header="Te_mplate" Items="{Binding Project.Templates}">
-                <MenuItem.Styles>
-                    <Style Selector="MenuItem.template > MenuItem">
-                        <Setter Property="Header" Value="{Binding Name}"/>
-                        <Setter Property="Command" Value="{Binding $parent[UserControl].DataContext.OnApplyTemplate}"/>
-                        <Setter Property="CommandParameter" Value="{Binding}"/>
-                        <Setter Property="Icon">
-                            <Template>
-                                <CheckBox x:Name="icon">
-                                    <i:Interaction.Behaviors>
-                                        <iac:BindTagToVisualRootDataContextBehavior/>
-                                    </i:Interaction.Behaviors>
-                                    <CheckBox.IsChecked>
-                                        <MultiBinding Mode="OneWay" Converter="{StaticResource ObjectEqualityMultiConverter}">
-                                            <Binding ElementName="icon" Path="DataContext"/>
-                                            <Binding ElementName="icon" Path="Tag.Project.CurrentContainer.Template"/>
-                                        </MultiBinding>
-                                    </CheckBox.IsChecked>
-                                </CheckBox>
-                            </Template>
-                        </Setter>
-                    </Style>
-                </MenuItem.Styles>
-            </MenuItem>
         </MenuItem>
         <MenuItem Header="_Layer">
             <MenuItem Header="_Add Layer" Command="{Binding OnAddLayer}" CommandParameter="{Binding Project.CurrentContainer}"/>
