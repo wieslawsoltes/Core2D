@@ -38,7 +38,7 @@ Usage:
   Core2D.Desktop [options]
 
 Options:
-  -s, --script <script>          The relative or absolute path to the script file
+  -s, --scripts <scripts>        The relative or absolute path to the script files
   -p, --project <project>        The relative or absolute path to the project file
   --repl                         Run scripting repl
   --useManagedSystemDialogs      Use managed system dialogs
