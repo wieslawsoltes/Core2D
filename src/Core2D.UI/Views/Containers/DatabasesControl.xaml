@@ -11,11 +11,11 @@
              d:DataContext="{x:Static Designer:DesignerContext.Project}"
              d:DesignWidth="250" d:DesignHeight="400">
     <Grid RowDefinitions="Auto,Auto,*">
-        <Menu Grid.Row="0" HorizontalAlignment="Right">
+        <Menu Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Center">
             <MenuItem Header="+" Command="{Binding $parent[Window].DataContext.OnAddDatabase}"/>
             <MenuItem Header="&#727;" Command="{Binding $parent[Window].DataContext.OnRemoveDatabase}" CommandParameter="{Binding CurrentDatabase}" IsVisible="{Binding !!CurrentDatabase}"/>
         </Menu>
-        <ComboBox Items="{Binding Databases}" SelectedItem="{Binding CurrentDatabase, Mode=TwoWay}" Grid.Row="1" IsVisible="{Binding !!CurrentDatabase}">
+        <ComboBox Items="{Binding Databases}" SelectedItem="{Binding CurrentDatabase, Mode=TwoWay}" Grid.Row="1" IsVisible="{Binding !!CurrentDatabase}" HorizontalAlignment="Stretch">
             <ComboBox.DataTemplates>
                 <DataTemplate DataType="Data:IDatabase">
                     <TextBlock Text="{Binding Name}"/>
