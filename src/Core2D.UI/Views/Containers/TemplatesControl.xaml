@@ -18,7 +18,7 @@
         <handlers:TemplatesListBoxDropHandler x:Key="TemplatesListBoxDropHandler"/>
     </UserControl.Resources>
     <Grid RowDefinitions="Auto,*,Auto">
-        <Menu Grid.Row="0" HorizontalAlignment="Right">
+        <Menu Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Center">
             <MenuItem Header="apply" Command="{Binding $parent[Window].DataContext.OnApplyTemplate}" CommandParameter="{Binding CurrentTemplate}" IsVisible="{Binding !!#templates.SelectedItem}"/>
             <MenuItem Header="edit" Command="{Binding $parent[Window].DataContext.OnEditTemplate}" CommandParameter="{Binding CurrentTemplate}" IsVisible="{Binding !!#templates.SelectedItem}"/>
             <MenuItem Header="+" Command="{Binding $parent[Window].DataContext.OnAddTemplate}"/>
