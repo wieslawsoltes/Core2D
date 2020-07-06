@@ -8,7 +8,8 @@
              xmlns:Designer="clr-namespace:Core2D.UI.Designer;assembly=Core2D.UI"
              mc:Ignorable="d"
              d:DataContext="{x:Static Designer:DesignerContext.ArgbColor}"
-             d:DesignWidth="250" d:DesignHeight="400">
+             d:DesignWidth="250" d:DesignHeight="400"
+             x:DataType="Style:IArgbColor" x:CompileBindings="True">
     <UserControl.Resources>
         <converters:ArgbColorToBrushMultiConverter x:Key="ArgbColorToBrushMultiConverter"/>
     </UserControl.Resources>
