@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="Core2D.UI.Views.Style.ShapeStyleControl"
+<UserControl x:Class="Core2D.UI.Views.Style.ShapeStyleControl"
              xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
