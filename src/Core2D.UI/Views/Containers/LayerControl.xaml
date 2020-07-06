@@ -7,7 +7,7 @@
              xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
              xmlns:idd="clr-namespace:Core2D.UI.DragAndDrop;assembly=Core2D.UI"
              xmlns:converters="clr-namespace:Core2D.UI.Converters;assembly=Core2D.UI"
-             xmlns:ShapesCore="clr-namespace:Core2D.Shapes;assembly=Core2D" 
+             xmlns:Shapes="clr-namespace:Core2D.Shapes;assembly=Core2D" 
              xmlns:Designer="clr-namespace:Core2D.UI.Designer;assembly=Core2D.UI"
              mc:Ignorable="d"
              d:DataContext="{x:Static Designer:DesignerContext.Layer}"
@@ -23,7 +23,7 @@
             <TabItem Header="Shapes" Padding="0,0,0,0">
                 <ListBox x:Name="shapes" Items="{Binding Shapes}">
                     <ListBox.DataTemplates>
-                        <DataTemplate DataType="ShapesCore:IBaseShape">
+                        <DataTemplate DataType="Shapes:IBaseShape">
                             <TextBlock Text="{Binding Mode=OneWay, Converter={StaticResource ObjectToTypeStringConverter}}" Background="Transparent">
                                 <i:Interaction.Behaviors>
                                     <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}"/>

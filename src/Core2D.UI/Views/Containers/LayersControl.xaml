@@ -8,7 +8,7 @@
              xmlns:idd="clr-namespace:Core2D.UI.DragAndDrop;assembly=Core2D.UI"
              xmlns:converters="clr-namespace:Core2D.UI.Converters;assembly=Core2D.UI"
              xmlns:Editor="clr-namespace:Core2D.Editor;assembly=Core2D"
-             xmlns:ContainersCore="clr-namespace:Core2D.Containers;assembly=Core2D"
+             xmlns:Containers="clr-namespace:Core2D.Containers;assembly=Core2D"
              xmlns:Designer="clr-namespace:Core2D.UI.Designer;assembly=Core2D.UI"
              mc:Ignorable="d"
              d:DataContext="{x:Static Designer:DesignerContext.Page}"
@@ -24,7 +24,7 @@
                 <KeyBinding Command="{Binding $parent[Window].DataContext.OnRemoveLayer}" CommandParameter="{Binding #layers.SelectedItem}" Gesture="Delete"/>
             </ListBox.KeyBindings>
             <ListBox.DataTemplates>
-                <DataTemplate DataType="ContainersCore:ILayerContainer">
+                <DataTemplate DataType="Containers:ILayerContainer">
                     <Grid ColumnDefinitions="Auto,*" Background="Transparent">
                         <i:Interaction.Behaviors>
                             <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}"/>

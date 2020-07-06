@@ -7,7 +7,7 @@
              xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
              xmlns:idd="clr-namespace:Core2D.UI.DragAndDrop;assembly=Core2D.UI"
              xmlns:converters="clr-namespace:Core2D.UI.Converters;assembly=Core2D.UI"
-             xmlns:ContainersCore="clr-namespace:Core2D.Containers;assembly=Core2D"
+             xmlns:Containers="clr-namespace:Core2D.Containers;assembly=Core2D"
              xmlns:renderer="clr-namespace:Core2D.UI.Renderer;assembly=Core2D.UI"
              xmlns:views="clr-namespace:Core2D.UI.Views;assembly=Core2D.UI"
              xmlns:Designer="clr-namespace:Core2D.UI.Designer;assembly=Core2D.UI"
@@ -18,10 +18,10 @@
         <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
             <Carousel Items="{Binding Project.Documents}" SelectedItem="{Binding Project.CurrentDocument}" IsVirtualized="False" VerticalAlignment="Center" Margin="2">
                 <Carousel.DataTemplates>
-                    <DataTemplate DataType="ContainersCore:IDocumentContainer">
+                    <DataTemplate DataType="Containers:IDocumentContainer">
                         <ItemsControl VerticalAlignment="Stretch" Items="{Binding Pages}">
                             <ItemsControl.DataTemplates>
-                                <DataTemplate DataType="ContainersCore:IPageContainer">
+                                <DataTemplate DataType="Containers:IPageContainer">
                                     <Grid ClipToBounds="False" Margin="0,4,0,4">
                                         <views:PresenterControl Container="{Binding}" PresenterType="Data" ClipToBounds="False"/>
                                         <views:PresenterControl Container="{Binding}" PresenterType="Export" ClipToBounds="False"/>

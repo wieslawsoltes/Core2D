@@ -10,7 +10,7 @@
              xmlns:handlers="clr-namespace:Core2D.UI.DragAndDrop.Handlers;assembly=Core2D.UI"
              xmlns:converters="clr-namespace:Core2D.UI.Converters;assembly=Core2D.UI"
              xmlns:Editor="clr-namespace:Core2D.Editor;assembly=Core2D"
-             xmlns:ContainersCore="clr-namespace:Core2D.Containers;assembly=Core2D"
+             xmlns:Containers="clr-namespace:Core2D.Containers;assembly=Core2D"
              xmlns:Designer="clr-namespace:Core2D.UI.Designer;assembly=Core2D.UI"
              mc:Ignorable="d"
              d:DataContext="{x:Static Designer:DesignerContext.Project}"
@@ -51,7 +51,7 @@
                 </Style>
             </TreeView.Styles>
             <TreeView.DataTemplates>
-                <TreeDataTemplate DataType="ContainersCore:IDocumentContainer" ItemsSource="{Binding Pages}">
+                <TreeDataTemplate DataType="Containers:IDocumentContainer" ItemsSource="{Binding Pages}">
                     <Grid Background="Transparent">
                         <i:Interaction.Behaviors>
                             <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}"/>
@@ -76,7 +76,7 @@
                         </TextBlock>                        
                     </Grid>
                 </TreeDataTemplate>
-                <TreeDataTemplate DataType="ContainersCore:IPageContainer" ItemsSource="{Binding Layers}">
+                <TreeDataTemplate DataType="Containers:IPageContainer" ItemsSource="{Binding Layers}">
                     <Grid x:Name="root" Background="Transparent">
                         <i:Interaction.Behaviors>
                             <iac:BindTagToVisualRootDataContextBehavior/>
@@ -125,7 +125,7 @@
                         </TextBlock>
                     </Grid>
                 </TreeDataTemplate>
-                <DataTemplate DataType="ContainersCore:ILayerContainer">
+                <DataTemplate DataType="Containers:ILayerContainer">
                     <StackPanel Orientation="Horizontal" Background="Transparent">
                         <i:Interaction.Behaviors>
                             <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}"/>

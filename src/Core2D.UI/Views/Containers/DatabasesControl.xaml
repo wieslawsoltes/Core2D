@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:converters="clr-namespace:Core2D.UI.Converters;assembly=Core2D.UI"
-             xmlns:DataCore="clr-namespace:Core2D.Data;assembly=Core2D"
+             xmlns:Data="clr-namespace:Core2D.Data;assembly=Core2D"
              xmlns:Editor="clr-namespace:Core2D.Editor;assembly=Core2D"
              xmlns:Designer="clr-namespace:Core2D.UI.Designer;assembly=Core2D.UI"
              mc:Ignorable="d"
@@ -17,7 +17,7 @@
         </Menu>
         <ComboBox Items="{Binding Databases}" SelectedItem="{Binding CurrentDatabase, Mode=TwoWay}" Grid.Row="1" IsVisible="{Binding !!CurrentDatabase}">
             <ComboBox.DataTemplates>
-                <DataTemplate DataType="DataCore:IDatabase">
+                <DataTemplate DataType="Data:IDatabase">
                     <TextBlock Text="{Binding Name}"/>
                 </DataTemplate>
             </ComboBox.DataTemplates>

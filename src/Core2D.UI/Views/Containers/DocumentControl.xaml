@@ -7,7 +7,7 @@
              xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
              xmlns:idd="clr-namespace:Core2D.UI.DragAndDrop;assembly=Core2D.UI"
              xmlns:converters="clr-namespace:Core2D.UI.Converters;assembly=Core2D.UI"
-             xmlns:ContainersCore="clr-namespace:Core2D.Containers;assembly=Core2D"
+             xmlns:Containers="clr-namespace:Core2D.Containers;assembly=Core2D"
              xmlns:Designer="clr-namespace:Core2D.UI.Designer;assembly=Core2D.UI"
              mc:Ignorable="d"
              d:DataContext="{x:Static Designer:DesignerContext.Document}"
@@ -21,7 +21,7 @@
             <TabItem Header="Pages" Padding="0,0,0,0">
                 <ListBox Items="{Binding Pages}">
                     <ListBox.DataTemplates>
-                        <DataTemplate DataType="ContainersCore:IPageContainer">
+                        <DataTemplate DataType="Containers:IPageContainer">
                             <TextBlock Text="{Binding Name}" Background="Transparent">
                                 <i:Interaction.Behaviors>
                                     <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}"/>

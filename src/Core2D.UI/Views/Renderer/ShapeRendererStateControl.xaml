@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:converters="clr-namespace:Core2D.UI.Converters;assembly=Core2D.UI"
              xmlns:containers="clr-namespace:Core2D.UI.Views.Containers;assembly=Core2D.UI"
-             xmlns:ShapesCore="clr-namespace:Core2D.Shapes;assembly=Core2D" 
+             xmlns:Shapes="clr-namespace:Core2D.Shapes;assembly=Core2D" 
              xmlns:Designer="clr-namespace:Core2D.UI.Designer;assembly=Core2D.UI"
              mc:Ignorable="d"
              d:DataContext="{x:Static Designer:DesignerContext.ShapeRendererState}"
@@ -68,7 +68,7 @@
                         <KeyBinding Command="{Binding $parent[Window].DataContext.OnRemoveShape}" CommandParameter="{Binding #shapes.SelectedItem}" Gesture="Delete"/>
                     </ListBox.KeyBindings>
                     <ListBox.DataTemplates>
-                        <DataTemplate DataType="ShapesCore:IBaseShape">
+                        <DataTemplate DataType="Shapes:IBaseShape">
                             <TextBlock Text="{Binding Mode=OneWay, Converter={StaticResource ObjectToTypeStringConverter}}">
                                 <TextBlock.ContextMenu>
                                     <ContextMenu>

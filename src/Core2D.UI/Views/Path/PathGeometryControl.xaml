@@ -8,7 +8,7 @@
              xmlns:idd="clr-namespace:Core2D.UI.DragAndDrop;assembly=Core2D.UI"
              xmlns:converters="clr-namespace:Core2D.UI.Converters;assembly=Core2D.UI"
              xmlns:Editor="clr-namespace:Core2D.Editor;assembly=Core2D"
-             xmlns:PathCore="clr-namespace:Core2D.Path;assembly=Core2D"
+             xmlns:Path="clr-namespace:Core2D.Path;assembly=Core2D"
              xmlns:Designer="clr-namespace:Core2D.UI.Designer;assembly=Core2D.UI"
              mc:Ignorable="d"
              d:DataContext="{x:Static Designer:DesignerContext.PathGeometry}"
@@ -25,10 +25,10 @@
                         </Style>
                     </TreeView.Styles>
                     <TreeView.DataTemplates>
-                        <TreeDataTemplate DataType="PathCore:IPathFigure" ItemsSource="{Binding Segments}">
+                        <TreeDataTemplate DataType="Path:IPathFigure" ItemsSource="{Binding Segments}">
                             <TextBlock Text="{Binding Mode=OneWay, Converter={StaticResource ObjectToTypeStringConverter}}"/>
                         </TreeDataTemplate>
-                        <DataTemplate DataType="PathCore:IPathSegment">
+                        <DataTemplate DataType="Path:IPathSegment">
                             <TextBlock Text="{Binding Mode=OneWay, Converter={StaticResource ObjectToTypeStringConverter}}"/>
                         </DataTemplate>
                     </TreeView.DataTemplates>

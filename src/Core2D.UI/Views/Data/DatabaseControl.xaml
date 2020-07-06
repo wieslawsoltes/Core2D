@@ -7,7 +7,7 @@
              xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
              xmlns:idd="clr-namespace:Core2D.UI.DragAndDrop;assembly=Core2D.UI"
              xmlns:converters="clr-namespace:Core2D.UI.Converters;assembly=Core2D.UI"
-             xmlns:DataCore="clr-namespace:Core2D.Data;assembly=Core2D"
+             xmlns:Data="clr-namespace:Core2D.Data;assembly=Core2D"
              xmlns:Editor="clr-namespace:Core2D.Editor;assembly=Core2D"
              xmlns:Designer="clr-namespace:Core2D.UI.Designer;assembly=Core2D.UI"
              mc:Ignorable="d"
@@ -39,7 +39,7 @@
                               Background="Transparent"
                               Grid.Row="1">
                         <i:Interaction.Behaviors>
-                            <idd:TypedDragBehavior DataType="{x:Type DataCore:IRecord}"/>
+                            <idd:TypedDragBehavior DataType="{x:Type Data:IRecord}"/>
                         </i:Interaction.Behaviors>
                         <DataGrid.KeyBindings>
                             <KeyBinding Command="{Binding $parent[Window].DataContext.OnAddRecord}" CommandParameter="{Binding #rowsDataGrid.DataContext, Mode=OneWay}" Gesture="Ctrl+N"/>
@@ -69,7 +69,7 @@
                               Background="Transparent"
                               Grid.Row="1">
                         <i:Interaction.Behaviors>
-                            <idd:TypedDragBehavior DataType="{x:Type DataCore:IColumn}"/>
+                            <idd:TypedDragBehavior DataType="{x:Type Data:IColumn}"/>
                         </i:Interaction.Behaviors>
                         <DataGrid.KeyBindings>
                             <KeyBinding Command="{Binding $parent[Window].DataContext.OnAddColumn}" CommandParameter="{Binding}" Gesture="Ctrl+N"/>
@@ -93,7 +93,7 @@
                     <ScrollViewer Grid.Column="0" Grid.Row="2" IsVisible="{Binding !!Columns.Length}">
                         <ItemsControl Items="{Binding Columns}" VerticalAlignment="Stretch">
                             <ItemsControl.DataTemplates>
-                                <DataTemplate DataType="DataCore:IColumn">
+                                <DataTemplate DataType="Data:IColumn">
                                     <Grid VerticalAlignment="Top" ColumnDefinitions="*,30" Background="Transparent">
                                         <i:Interaction.Behaviors>
                                             <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}"/>

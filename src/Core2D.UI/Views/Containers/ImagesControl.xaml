@@ -8,7 +8,7 @@
              xmlns:idd="clr-namespace:Core2D.UI.DragAndDrop;assembly=Core2D.UI"
              xmlns:converters="clr-namespace:Core2D.UI.Converters;assembly=Core2D.UI"
              xmlns:Editor="clr-namespace:Core2D.Editor;assembly=Core2D"
-             xmlns:RendererCore="clr-namespace:Core2D.Renderer;assembly=Core2D"
+             xmlns:Renderer="clr-namespace:Core2D.Renderer;assembly=Core2D"
              xmlns:Designer="clr-namespace:Core2D.UI.Designer;assembly=Core2D.UI"
              mc:Ignorable="d"
              d:DataContext="{x:Static Designer:DesignerContext.Project}"
@@ -21,7 +21,7 @@
             <TextBlock Grid.Column="0" Grid.Row="1" VerticalAlignment="Center" Text="Key"/>
             <ItemsControl VerticalAlignment="Stretch" Grid.Column="0" Grid.Row="2" Items="{Binding Keys}">
                 <ItemsControl.DataTemplates>
-                    <DataTemplate DataType="RendererCore:IImageKey">
+                    <DataTemplate DataType="Renderer:IImageKey">
                         <Grid VerticalAlignment="Top" ColumnDefinitions="*,30" Background="Transparent">
                             <i:Interaction.Behaviors>
                                 <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}"/>
