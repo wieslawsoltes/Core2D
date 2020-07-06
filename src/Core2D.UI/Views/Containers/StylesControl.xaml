@@ -25,7 +25,7 @@
                 <MenuItem Header="&#727;" Command="{Binding $parent[Window].DataContext.OnRemoveStyleLibrary}" CommandParameter="{Binding CurrentStyleLibrary}" IsVisible="{Binding !!$self.DataContext.CurrentStyleLibrary}"/>
             </Menu>
         </Grid>
-        <ComboBox Items="{Binding StyleLibraries}" SelectedItem="{Binding CurrentStyleLibrary, Mode=TwoWay}" Grid.Row="1" IsVisible="{Binding !!$self.DataContext.CurrentStyleLibrary}">
+        <ComboBox Items="{Binding StyleLibraries}" SelectedItem="{Binding CurrentStyleLibrary, Mode=TwoWay}" Grid.Row="1" IsVisible="{Binding !!$self.DataContext.CurrentStyleLibrary}" HorizontalAlignment="Stretch">
             <ComboBox.DataTemplates>
                 <DataTemplate>
                     <TextBlock Text="{Binding Name}"/>

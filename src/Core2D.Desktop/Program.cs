@@ -2,13 +2,19 @@
 using System.CommandLine;
 using System.CommandLine.Invocation;
 using System.IO;
+using System.Threading;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Dialogs;
 using Avalonia.Headless;
+using Avalonia.Media;
+using Avalonia.Media.Imaging;
+using Avalonia.Platform;
 using Avalonia.ReactiveUI;
+using Avalonia.Rendering;
 using Avalonia.Threading;
+using Core2D.Editor;
 using Core2D.UI;
 
 namespace Core2D
@@ -27,9 +33,41 @@ namespace Core2D
 
     internal class Program
     {
+        private static Thread? ReplThread;
+
+        private static void Repl()
+        {
+            ReplThread = new Thread(() =>
+            {
+                while (true)
+                {
+                    var line = Console.ReadLine();
+                    Console.WriteLine(line);
+                }
+            })
+            { IsBackground = true };
+            ReplThread?.Start();
+        }
+
+        private static void Screenshot(Control target, Size size, string path = "screenshot.png", double dpi = 96)
+        {
+            var factory = AvaloniaLocator.Current.GetService<IPlatformRenderInterface>();
+            var pixelSize = new PixelSize((int)size.Width, (int)size.Height);
+            var dpiVector = new Vector(dpi, dpi);
+            using (RenderTargetBitmap bitmap = new RenderTargetBitmap(pixelSize, dpiVector))
+            {
+                target.Measure(size);
+                target.Arrange(new Rect(size));
+                bitmap.Render(target);
+                bitmap.Save(path);
+            }
+        }
+
         [STAThread]
         private static void Main(string[] args)
         {
+            //Repl();
+
             var builder = BuildAvaloniaApp();
 
             var optionProject = new Option(new[] { "--project", "-p" }, "The relative or absolute path to the project file")
@@ -116,7 +154,27 @@ namespace Core2D
                     }
                     else
                     {
+#if false
+                        builder.AfterSetup(_ =>
+                        {
+                            DispatcherTimer.RunOnce(() =>
+                            {
+                                var window = ((IClassicDesktopStyleApplicationLifetime)Application.Current.ApplicationLifetime).MainWindow;
+                                var control = window.Content as UserControl;
+                                if (control != null && control.DataContext != null)
+                                {
+                                    control.Background = new SolidColorBrush(Color.Parse("#FFE6E6E6"));
+                                    var editor = control.DataContext as IProjectEditor;
+                                    editor?.OnNew(null);
+                                    var size = new Size(1366, 690);
+                                    Screenshot(control, size, "Core2D.png");
+                                }
+                            }, TimeSpan.FromSeconds(1));
+                        })
+                        .StartWithClassicDesktopLifetime(args);
+#else
                         builder.StartWithClassicDesktopLifetime(args);
+#endif
                     }
                 }
                 catch (Exception ex)

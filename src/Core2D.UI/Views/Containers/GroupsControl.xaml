@@ -26,7 +26,7 @@
                 <MenuItem Header="&#727;" Command="{Binding $parent[Window].DataContext.OnRemoveGroupLibrary}" CommandParameter="{Binding CurrentGroupLibrary}" IsVisible="{Binding !!$self.DataContext.CurrentGroupLibrary}}"/>
             </Menu>
         </Grid>
-        <ComboBox Items="{Binding GroupLibraries}" SelectedItem="{Binding CurrentGroupLibrary, Mode=TwoWay}" Grid.Row="1" IsVisible="{Binding !!$self.DataContext.CurrentGroupLibrary}">
+        <ComboBox Items="{Binding GroupLibraries}" SelectedItem="{Binding CurrentGroupLibrary, Mode=TwoWay}" Grid.Row="1" IsVisible="{Binding !!$self.DataContext.CurrentGroupLibrary}" HorizontalAlignment="Stretch">
             <ComboBox.DataTemplates>
                 <DataTemplate>
                     <TextBlock Text="{Binding Name}"/>

@@ -96,7 +96,7 @@
         <idd:ContextDropBehavior Context="{Binding FallbackValue={x:Null}}" Handler="{StaticResource EditorDropHandler}"/>
         <behaviors:AttachEditorBehavior/>
     </i:Interaction.Behaviors>
-    <Border>
+    <Border Background="{DynamicResource TemplateCheckerBoard}">
         <i:Interaction.Behaviors>
             <idd:ContextDropBehavior Context="{Binding FallbackValue={x:Null}}" Handler="{StaticResource EditorDropHandler}"/>
         </i:Interaction.Behaviors>
