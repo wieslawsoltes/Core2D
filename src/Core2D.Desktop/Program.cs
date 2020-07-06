@@ -16,7 +16,10 @@ namespace Core2D
     {
         public bool UseManagedSystemDialogs { get; set; }
         public bool UseHeadless { get; set; }
+        public bool UseHeadlessDrawing { get; set; }
         public bool UseHeadlessVnc { get; set; }
+        public string VncHost { get; set; } = null;
+        public int VncPort { get; set; } = 5901;
     }
 
     internal class Program
@@ -36,9 +39,24 @@ namespace Core2D
                 Argument = new Argument<bool>()
             };
 
+            var optionUseHeadlessDrawing = new Option(new[] { "--useHeadlessDrawing" }, "Use headless drawing")
+            {
+                Argument = new Argument<bool>()
+            };
+
             var optionUseHeadlessVnc = new Option(new[] { "--useHeadlessVnc" }, "Use headless vnc")
             {
                 Argument = new Argument<bool>()
+            };
+
+            var optionVncHost = new Option(new[] { "--vncHost" }, "Vnc host")
+            {
+                Argument = new Argument<string>(getDefaultValue: () => null)
+            };
+
+            var optionVncPort = new Option(new[] { "--vncPort" }, "Vnc port")
+            {
+                Argument = new Argument<int>(getDefaultValue: () => 5901)
             };
 
             var rootCommand = new RootCommand()
@@ -48,7 +66,10 @@ namespace Core2D
 
             rootCommand.AddOption(optionUseManagedSystemDialogs);
             rootCommand.AddOption(optionUseHeadless);
+            rootCommand.AddOption(optionUseHeadlessDrawing);
             rootCommand.AddOption(optionUseHeadlessVnc);
+            rootCommand.AddOption(optionVncHost);
+            rootCommand.AddOption(optionVncPort);
 
             rootCommand.Handler = CommandHandler.Create((Settings settings) =>
             {
@@ -61,12 +82,12 @@ namespace Core2D
 
                     if (settings.UseHeadless)
                     {
-                        builder.UseHeadless(true);
+                        builder.UseHeadless(settings.UseHeadlessDrawing);
                     }
 
                     if (settings.UseHeadlessVnc)
                     {
-                        builder.StartWithHeadlessVncPlatform(null, 5901, args, ShutdownMode.OnMainWindowClose);
+                        builder.StartWithHeadlessVncPlatform(settings.VncHost, settings.VncPort, args, ShutdownMode.OnMainWindowClose);
                     }
                     else
                     {
