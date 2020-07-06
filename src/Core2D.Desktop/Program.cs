@@ -15,11 +15,74 @@ using Avalonia.ReactiveUI;
 using Avalonia.Threading;
 using Core2D.Editor;
 using Core2D.UI;
+using Core2D.UI.Views;
 using Microsoft.CodeAnalysis.CSharp.Scripting;
 using Microsoft.CodeAnalysis.Scripting;
 
 namespace Core2D
 {
+    public class Util
+    {
+        public static void Screenshot(Control target, Size size, string path, double dpi = 96)
+        {
+            var pixelSize = new PixelSize((int)size.Width, (int)size.Height);
+            var dpiVector = new Vector(dpi, dpi);
+            using var bitmap = new RenderTargetBitmap(pixelSize, dpiVector);
+            target.Measure(size);
+            target.Arrange(new Rect(size));
+            bitmap.Render(target);
+            bitmap.Save(path);
+        }
+
+        public static async Task RunUIJob(Action action)
+        {
+            await Dispatcher.UIThread.InvokeAsync(() =>
+            {
+                action.Invoke();
+                Dispatcher.UIThread.RunJobs();
+            });
+        }
+    }
+
+    public class ScriptGlobals
+    {
+        public static Application GetApplication()
+        {
+            return Application.Current;
+        }
+
+        public static Window? GetMainwWindow()
+        {
+            var applicationLifetime = (IClassicDesktopStyleApplicationLifetime)GetApplication().ApplicationLifetime;
+            return applicationLifetime?.MainWindow;
+        }
+
+        public static MainControl? GetMainwControl()
+        {
+            var mainWindow = GetMainwWindow();
+            return mainWindow?.Content as MainControl;
+        }
+
+        public static IProjectEditor? GetEditor()
+        {
+            var mainWidnow = GetMainwWindow();
+            return mainWidnow?.DataContext as IProjectEditor;
+        }
+
+        public static async Task Screenshot(string path = "screenshot.png", double width = 1366, double height = 690)
+        {
+            await Util.RunUIJob(() =>
+            {
+                var mainConntrol = GetMainwControl();
+                if (mainConntrol != null)
+                {
+                    var size = new Size(width, height);
+                    Util.Screenshot(mainConntrol, size, path);
+                }
+            });
+        }
+    }
+
     internal class Settings
     {
         public FileInfo? Project { get; set; }
@@ -37,11 +100,11 @@ namespace Core2D
     internal class Program
     {
         [DllImport("kernel32.dll", SetLastError = true, ExactSpelling = true)]
-        private static extern bool AttachConsole(int processId);
+        internal static extern bool AttachConsole(int processId);
 
-        private static Thread? s_replThread;
+        internal static Thread? s_replThread;
 
-        private static void Log(Exception ex)
+        internal static void Log(Exception ex)
         {
             Console.WriteLine(ex.Message);
             Console.WriteLine(ex.StackTrace);
@@ -51,7 +114,7 @@ namespace Core2D
             }
         }
 
-        private static void Repl(Application instance)
+        internal static void Repl()
         {
             s_replThread = new Thread(async () =>
             {
@@ -65,12 +128,18 @@ namespace Core2D
 
                         if (state is ScriptState<object> previous)
                         {
-                            state = await previous.ContinueWithAsync(code);
+                            await Util.RunUIJob(async () =>
+                            {
+                                state = await previous.ContinueWithAsync(code);
+                            });
                         }
                         else
                         {
-                            var options = ScriptOptions.Default.WithImports("System");
-                            state = await CSharpScript.RunAsync(code, options, instance);
+                            await Util.RunUIJob(async () =>
+                            {
+                                var options = ScriptOptions.Default.WithImports("System");
+                                state = await CSharpScript.RunAsync(code, options, new ScriptGlobals());
+                            });
                         }
                     }
                     catch (Exception ex)
@@ -83,25 +152,15 @@ namespace Core2D
             s_replThread?.Start();
         }
 
-        private static void Screenshot(Control target, Size size, string path = "screenshot.png", double dpi = 96)
-        {
-            var pixelSize = new PixelSize((int)size.Width, (int)size.Height);
-            var dpiVector = new Vector(dpi, dpi);
-            using var bitmap = new RenderTargetBitmap(pixelSize, dpiVector);
-            target.Measure(size);
-            target.Arrange(new Rect(size));
-            bitmap.Render(target);
-            bitmap.Save(path);
-        }
-
-        private static async Task CreateScreenshots()
+        internal static async Task CreateScreenshots()
         {
             await Dispatcher.UIThread.InvokeAsync(() =>
             {
-                var window = ((IClassicDesktopStyleApplicationLifetime)Application.Current.ApplicationLifetime).MainWindow;
-                var headlessWindow = window?.PlatformImpl as IHeadlessWindow;
-                var control = window?.Content as UserControl;
-                var editor = control?.DataContext as IProjectEditor;
+                var applicationLifetime = (IClassicDesktopStyleApplicationLifetime)Application.Current.ApplicationLifetime;
+                var mainWindow = applicationLifetime?.MainWindow;
+                var headlessWindow = mainWindow?.PlatformImpl as IHeadlessWindow;
+                var mainConntrol = mainWindow?.Content as MainControl;
+                var editor = mainConntrol?.DataContext as IProjectEditor;
 
                 var pt = new Point(-1, -1);
                 headlessWindow?.MouseMove(pt);
@@ -109,28 +168,28 @@ namespace Core2D
 
                 var size = new Size(1366, 690);
 
-                if (control != null)
+                if (mainConntrol != null)
                 {
-                    Screenshot(control, size, "Core2D-Dashboard.png");
+                    Util.Screenshot(mainConntrol, size, "Core2D-Dashboard.png");
                     Dispatcher.UIThread.RunJobs();
                 }
 
-                if (control != null)
+                if (mainConntrol != null)
                 {
                     editor?.OnNew(null);
                     Dispatcher.UIThread.RunJobs();
                 }
 
-                if (control != null)
+                if (mainConntrol != null)
                 {
-                    Screenshot(control, size, "Core2D-Editor.png");
+                    Util.Screenshot(mainConntrol, size, "Core2D-Editor.png");
                     Dispatcher.UIThread.RunJobs();
                 }
             });
         }
 
         [STAThread]
-        private static void Main(string[] args)
+        internal static void Main(string[] args)
         {
             if (Environment.OSVersion.Platform == PlatformID.Win32NT)
             {
@@ -211,7 +270,7 @@ namespace Core2D
                 {
                     if (settings.Repl)
                     {
-                        Repl(builder.Instance);
+                        Repl();
                     }
 
                     if (settings.Project != null)
@@ -232,10 +291,7 @@ namespace Core2D
                     if (settings.CreateHeadlessScreenshots)
                     {
                         builder.UseHeadless(false)
-                               .AfterSetup(async _ =>
-                               {
-                                   await CreateScreenshots();
-                               })
+                               .AfterSetup(async _ => await CreateScreenshots())
                                .StartWithClassicDesktopLifetime(args);
                         return;
                     }
