@@ -4,30 +4,33 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:converters="clr-namespace:Core2D.UI.Converters;assembly=Core2D.UI"
+             xmlns:Core="clr-namespace:Core2D;assembly=Core2D"
+             xmlns:Style="clr-namespace:Core2D.Style;assembly=Core2D"
              xmlns:Editor="clr-namespace:Core2D.Editor;assembly=Core2D"
              xmlns:Designer="clr-namespace:Core2D.UI.Designer;assembly=Core2D.UI"
              mc:Ignorable="d"
              d:DataContext="{x:Static Designer:DesignerContext.Style}"
-             d:DesignWidth="250" d:DesignHeight="400">
+             d:DesignWidth="250" d:DesignHeight="400"
+             x:DataType="Style:IShapeStyle" x:CompileBindings="True">
     <StackPanel>
         <StackPanel>
             <TextBlock Text="Name" Margin="{DynamicResource TextControlThemePadding}"/>
-            <TextBox Text="{Binding Name, Mode=TwoWay}"/>
+            <TextBox Text="{Binding Name, Mode=TwoWay}" x:DataType="Core:IObservableObject"/>
             <TextBlock Text="Thickness" Margin="{DynamicResource TextControlThemePadding}"/>
-            <TextBox Text="{Binding Thickness, Mode=TwoWay}"/>
+            <TextBox Text="{Binding Thickness, Mode=TwoWay}" x:DataType="Style:IBaseStyle"/>
             <TextBlock Text="Line Cap" Margin="{DynamicResource TextControlThemePadding}"/>
-            <ComboBox Items="{x:Static Editor:Enums.LineCapValues}" SelectedItem="{Binding LineCap, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
+            <ComboBox Items="{x:Static Editor:Enums.LineCapValues}" SelectedItem="{Binding LineCap, Mode=TwoWay}" x:DataType="Style:IBaseStyle" HorizontalAlignment="Stretch"/>
             <TextBlock Text="Dashes" Margin="{DynamicResource TextControlThemePadding}"/>
-            <TextBox Text="{Binding Dashes, Mode=TwoWay}"/>
+            <TextBox Text="{Binding Dashes, Mode=TwoWay}" x:DataType="Style:IBaseStyle"/>
             <TextBlock Text="Dash Offset" Margin="{DynamicResource TextControlThemePadding}"/>
-            <TextBox Text="{Binding DashOffset, Mode=TwoWay}"/>
+            <TextBox Text="{Binding DashOffset, Mode=TwoWay}" x:DataType="Style:IBaseStyle"/>
         </StackPanel>
         <TabControl>
             <TabItem Header="Stroke" Padding="0,0,0,0">
-                <ContentControl Content="{Binding Stroke}"/>
+                <ContentControl Content="{Binding Stroke}" x:DataType="Style:IBaseStyle"/>
             </TabItem>
             <TabItem Header="Fill" Padding="12,0,0,0">
-                <ContentControl Content="{Binding Fill}"/>
+                <ContentControl Content="{Binding Fill}" x:DataType="Style:IBaseStyle"/>
             </TabItem>
         </TabControl>
         <TabControl>

@@ -4,15 +4,18 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:converters="clr-namespace:Core2D.UI.Converters;assembly=Core2D.UI"
+             xmlns:Core="clr-namespace:Core2D;assembly=Core2D"
+             xmlns:Style="clr-namespace:Core2D.Style;assembly=Core2D"
              xmlns:Editor="clr-namespace:Core2D.Editor;assembly=Core2D"
              xmlns:Designer="clr-namespace:Core2D.UI.Designer;assembly=Core2D.UI"
              mc:Ignorable="d"
              d:DataContext="{x:Static Designer:DesignerContext.Style}"
-             d:DesignWidth="250" d:DesignHeight="400">
+             d:DesignWidth="250" d:DesignHeight="400"
+             x:DataType="Style:IBaseStyle" x:CompileBindings="True">
     <ScrollViewer>
         <StackPanel>
             <TextBlock Text="Name" Margin="{DynamicResource TextControlThemePadding}"/>
-            <TextBox Text="{Binding Name, Mode=TwoWay}"/>
+            <TextBox Text="{Binding Name, Mode=TwoWay}" x:DataType="Core:IObservableObject"/>
             <TextBlock Text="Thickness" Margin="{DynamicResource TextControlThemePadding}"/>
             <TextBox Text="{Binding Thickness, Mode=TwoWay}"/>
             <TextBlock Text="Line Cap" Margin="{DynamicResource TextControlThemePadding}"/>

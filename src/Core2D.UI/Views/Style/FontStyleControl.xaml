@@ -4,10 +4,12 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:converters="clr-namespace:Core2D.UI.Converters;assembly=Core2D.UI"
+             xmlns:Style="clr-namespace:Core2D.Style;assembly=Core2D"
              xmlns:Designer="clr-namespace:Core2D.UI.Designer;assembly=Core2D.UI"
              mc:Ignorable="d"
              d:DataContext="{x:Static Designer:DesignerContext.FontStyle}"
-             d:DesignWidth="250" d:DesignHeight="400">
+             d:DesignWidth="250" d:DesignHeight="400"
+             x:DataType="Style:IFontStyle" x:CompileBindings="True">
     <StackPanel>
         <CheckBox Content="Regular" IsChecked="{Binding Regular, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
         <CheckBox Content="Bold" IsChecked="{Binding Bold, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
