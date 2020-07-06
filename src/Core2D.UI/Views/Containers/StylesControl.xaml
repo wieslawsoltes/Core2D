@@ -19,7 +19,7 @@
     </UserControl.Resources>
     <Grid RowDefinitions="Auto,Auto,Auto,*,Auto">
         <Grid RowDefinitions="*" ColumnDefinitions="*,Auto" Grid.Row="0">
-            <TextBox Text="{Binding CurrentStyleLibrary.Name, Mode=TwoWay}" BorderBrush="Transparent" Background="Transparent" Margin="0,12,0,0" IsVisible="{Binding !!$self.DataContext.CurrentStyleLibrary}" Grid.Column="0"/>
+            <TextBox Text="{Binding CurrentStyleLibrary.Name, Mode=TwoWay}" BorderBrush="Transparent" Background="Transparent" VerticalAlignment="Center" Margin="0,0,0,0" IsVisible="{Binding !!$self.DataContext.CurrentStyleLibrary}" Grid.Column="0"/>
             <Menu Grid.Column="1" HorizontalAlignment="Right">
                 <MenuItem Header="+" Command="{Binding $parent[Window].DataContext.OnAddStyleLibrary}"/>
                 <MenuItem Header="&#727;" Command="{Binding $parent[Window].DataContext.OnRemoveStyleLibrary}" CommandParameter="{Binding CurrentStyleLibrary}" IsVisible="{Binding !!$self.DataContext.CurrentStyleLibrary}"/>
