@@ -14,7 +14,10 @@
              xmlns:Editor="clr-namespace:Core2D.Editor;assembly=Core2D"
              xmlns:Recent="clr-namespace:Core2D.Editor.Recent;assembly=Core2D"
              xmlns:Designer="clr-namespace:Core2D.UI.Designer;assembly=Core2D.UI"
-             UseLayoutRounding="True"
+             FontFamily="{DynamicResource UiFontFamily}"
+             Background="{DynamicResource SystemChromeMediumColor}"
+             Foreground="{DynamicResource SystemBaseHighColor}"
+             UseLayoutRounding="True" RenderOptions.BitmapInterpolationMode="HighQuality"
              mc:Ignorable="d"
              d:DataContext="{x:Static Designer:DesignerContext.Editor}"
              d:DesignWidth="1200" d:DesignHeight="580">
