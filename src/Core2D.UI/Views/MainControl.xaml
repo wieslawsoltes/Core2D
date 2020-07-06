@@ -99,11 +99,9 @@
                         </ContentControl>
                     </ScrollViewer>
                 </TabItem>
-               <!--
                <TabItem Header="Options" Padding="12,0,0,0">
                     <ContentControl Content="{Binding Project.Options}"/>
                 </TabItem>
-                -->
             </TabControl>
             <GridSplitter ResizeDirection="Columns" ResizeBehavior="PreviousAndNext" Background="Transparent" Width="6" Grid.Column="1" Grid.Row="1"/>
             <views:PageControl Grid.Column="2" Grid.Row="1"/>
@@ -116,11 +114,8 @@
                     <containers:LayersControl DataContext="{Binding Project.CurrentContainer}" Margin="0,0,12,0"/>
                 </TabItem>
                 <TabItem Header="Page" Padding="12,0,0,0">
-                    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-                        <containers:ContainerControl DataContext="{Binding Project.CurrentContainer}" Margin="0,0,12,0"/>
-                    </ScrollViewer>
+                    <containers:ContainerControl DataContext="{Binding Project.CurrentContainer}" Margin="0,0,12,0"/>
                 </TabItem>
-                <!--
                 <TabItem Header="Groups" Padding="12,0,0,0">
                     <containers:GroupsControl DataContext="{Binding Project}" Margin="0,0,12,0"/>
                 </TabItem>
@@ -130,7 +125,6 @@
                 <TabItem Header="Templates" Padding="12,0,0,0">
                     <containers:TemplatesControl DataContext="{Binding Project}" Margin="0,0,12,0"/>
                 </TabItem>
-                -->
             </TabControl>
             <views:StatusControl Grid.Column="0" Grid.ColumnSpan="5" Grid.Row="3"/>
         </Grid>
