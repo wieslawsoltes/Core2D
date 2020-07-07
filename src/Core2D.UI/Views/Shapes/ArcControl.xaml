@@ -4,28 +4,31 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:converters="clr-namespace:Core2D.UI.Converters;assembly=Core2D.UI"
+             xmlns:Core="clr-namespace:Core2D;assembly=Core2D"
+             xmlns:Shapes="clr-namespace:Core2D.Shapes;assembly=Core2D"
              xmlns:Designer="clr-namespace:Core2D.UI.Designer;assembly=Core2D.UI"
              mc:Ignorable="d"
              d:DataContext="{x:Static Designer:DesignerContext.Arc}"
-             d:DesignWidth="250" d:DesignHeight="400">
+             d:DesignWidth="250" d:DesignHeight="400"
+             x:DataType="Shapes:IArcShape" x:CompileBindings="True">
     <Grid RowDefinitions="Auto,*">
         <TabControl Grid.Row="0">
             <TabItem Header="Arc" Padding="0,0,0,0">
                 <StackPanel>
                     <TextBlock Text="Name" Margin="{DynamicResource TextControlThemePadding}"/>
-                    <TextBox Text="{Binding Name, Mode=TwoWay}"/>
-                    <CheckBox Content="IsStroked" IsChecked="{Binding IsStroked, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
-                    <CheckBox Content="IsFilled" IsChecked="{Binding IsFilled, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
+                    <TextBox Text="{Binding Name, Mode=TwoWay}" x:DataType="Core:IObservableObject"/>
+                    <CheckBox Content="IsStroked" IsChecked="{Binding IsStroked, Mode=TwoWay}" x:DataType="Core:IDrawable" HorizontalAlignment="Stretch"/>
+                    <CheckBox Content="IsFilled" IsChecked="{Binding IsFilled, Mode=TwoWay}" x:DataType="Core:IDrawable" HorizontalAlignment="Stretch"/>
                 </StackPanel>
             </TabItem>
             <TabItem Header="Data" Padding="12,0,0,0">
-                <ContentControl Content="{Binding Data}"/>
+                <ContentControl Content="{Binding Data}" x:DataType="Shapes:IBaseShape"/>
             </TabItem>
             <TabItem Header="Style" Padding="12,0,0,0">
-                <ContentControl Content="{Binding Style}"/>
+                <ContentControl Content="{Binding Style}" x:DataType="Core:IDrawable"/>
             </TabItem>
             <TabItem Header="State" Padding="12,0,0,0">
-                <ContentControl Content="{Binding State}"/>
+                <ContentControl Content="{Binding State}" x:DataType="Shapes:IBaseShape"/>
             </TabItem>
         </TabControl>
         <TabControl Grid.Row="1">

@@ -4,16 +4,17 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:converters="clr-namespace:Core2D.UI.Converters;assembly=Core2D.UI"
-             xmlns:data="clr-namespace:Core2D.UI.Views.Data;assembly=Core2D.UI"
-             xmlns:renderer="clr-namespace:Core2D.UI.Views.Renderer;assembly=Core2D.UI"
              xmlns:Editor="clr-namespace:Core2D.Editor;assembly=Core2D"
+             xmlns:Core="clr-namespace:Core2D;assembly=Core2D"
+             xmlns:Shapes="clr-namespace:Core2D.Shapes;assembly=Core2D"
              xmlns:Designer="clr-namespace:Core2D.UI.Designer;assembly=Core2D.UI"
              mc:Ignorable="d"
              d:DataContext="{x:Static Designer:DesignerContext.Point}"
-             d:DesignWidth="250" d:DesignHeight="400">
+             d:DesignWidth="250" d:DesignHeight="400"
+             x:DataType="Shapes:IPointShape" x:CompileBindings="True">
     <StackPanel>
         <TextBlock Text="Name" Margin="{DynamicResource TextControlThemePadding}"/>
-        <TextBox Text="{Binding Name, Mode=TwoWay}"/>
+        <TextBox Text="{Binding Name, Mode=TwoWay}" x:DataType="Core:IObservableObject"/>
         <TextBlock Text="X" Margin="{DynamicResource TextControlThemePadding}"/>
         <TextBox Text="{Binding X, Mode=TwoWay}"/>
         <TextBlock Text="Y" Margin="{DynamicResource TextControlThemePadding}"/>
@@ -21,8 +22,8 @@
         <TextBlock Text="Alignment" Margin="{DynamicResource TextControlThemePadding}"/>
         <ComboBox Items="{x:Static Editor:Enums.PointAlignmentValues}" SelectedItem="{Binding Alignment, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
         <TextBlock Text="State" Margin="{DynamicResource TextControlThemePadding}"/>
-        <renderer:ShapeStateControl DataContext="{Binding State}"/>
+        <ContentControl Content="{Binding State}" x:DataType="Shapes:IBaseShape"/>
         <!--<TextBlock Text="Data" Margin="{DynamicResource TextControlThemePadding}"/>
-        <data:DataControl DataContext="{Binding Data}"/>-->
+        <ContentControl Content="{Binding Data}" x:DataType="Shapes:IBaseShape"/>-->
     </StackPanel>
 </UserControl>
