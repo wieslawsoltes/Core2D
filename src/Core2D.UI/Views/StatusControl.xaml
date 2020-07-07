@@ -29,14 +29,14 @@
             </TextBlock.Text>
         </TextBlock>
         <WrapPanel Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center">
-            <ComboBox Items="{Binding Tools}" SelectedItem="{Binding CurrentTool, Mode=TwoWay}" Margin="12,0,0,0">
+            <ComboBox Items="{Binding Tools}" SelectedItem="{Binding CurrentTool, Mode=TwoWay}" Margin="12,0,0,0" VerticalAlignment="Center">
                 <ComboBox.DataTemplates>
                     <DataTemplate>
                         <TextBlock Text="{Binding Title}"/>
                     </DataTemplate>
                 </ComboBox.DataTemplates>
             </ComboBox>
-            <ComboBox Items="{Binding PathTools}" SelectedItem="{Binding CurrentPathTool, Mode=TwoWay}" Margin="12,0,0,0">
+            <ComboBox Items="{Binding PathTools}" SelectedItem="{Binding CurrentPathTool, Mode=TwoWay}" Margin="12,0,0,0" VerticalAlignment="Center">
                 <ComboBox.DataTemplates>
                     <DataTemplate>
                         <TextBlock Text="{Binding Title}"/>
@@ -49,13 +49,13 @@
                     </MultiBinding>
                 </ComboBox.IsVisible>
             </ComboBox>
-            <CheckBox MinWidth="0" Margin="12,0,0,0" Content="Stroked" IsChecked="{Binding Project.Options.DefaultIsStroked, Mode=TwoWay}"/>
-            <CheckBox MinWidth="0" Margin="12,0,0,0" Content="Filled" IsChecked="{Binding Project.Options.DefaultIsFilled, Mode=TwoWay}"/>
-            <CheckBox MinWidth="0" Margin="12,0,0,0" Content="Closed" IsChecked="{Binding Project.Options.DefaultIsClosed, Mode=TwoWay}"/>
-            <CheckBox MinWidth="0" Margin="12,0,0,0" Content="Snap" IsChecked="{Binding Project.Options.SnapToGrid, Mode=TwoWay}"/>
-            <CheckBox MinWidth="0" Margin="12,0,0,0" Content="Decorators" IsChecked="{Binding PageState.DrawDecorators, Mode=TwoWay}"/>
-            <CheckBox MinWidth="0" Margin="12,0,0,0" Content="Points" IsChecked="{Binding PageState.DrawPoints, Mode=TwoWay}"/>
-            <CheckBox MinWidth="0" Margin="12,0,12,0" Content="Connect" IsChecked="{Binding Project.Options.TryToConnect, Mode=TwoWay}"/>
+            <CheckBox Content="Stroked" IsChecked="{Binding Project.Options.DefaultIsStroked, Mode=TwoWay}" MinWidth="0" Margin="12,0,0,0" VerticalAlignment="Center"/>
+            <CheckBox Content="Filled" IsChecked="{Binding Project.Options.DefaultIsFilled, Mode=TwoWay}" MinWidth="0" Margin="12,0,0,0" VerticalAlignment="Center"/>
+            <CheckBox Content="Closed" IsChecked="{Binding Project.Options.DefaultIsClosed, Mode=TwoWay}" MinWidth="0" Margin="12,0,0,0" VerticalAlignment="Center"/>
+            <CheckBox Content="Snap" IsChecked="{Binding Project.Options.SnapToGrid, Mode=TwoWay}" MinWidth="0" Margin="12,0,0,0" VerticalAlignment="Center"/>
+            <CheckBox Content="Decorators" IsChecked="{Binding PageState.DrawDecorators, Mode=TwoWay}" MinWidth="0" Margin="12,0,0,0" VerticalAlignment="Center"/>
+            <CheckBox Content="Points" IsChecked="{Binding PageState.DrawPoints, Mode=TwoWay}" MinWidth="0" Margin="12,0,0,0" VerticalAlignment="Center"/>
+            <CheckBox Content="Connect" IsChecked="{Binding Project.Options.TryToConnect, Mode=TwoWay}" MinWidth="0" Margin="12,0,12,0" VerticalAlignment="Center"/>
         </WrapPanel>
     </Grid>
 </UserControl>

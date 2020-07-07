@@ -20,27 +20,12 @@
         <converters:ObjectEqualityMultiConverter x:Key="ObjectEqualityMultiConverter"/>
     </UserControl.Resources>
     <Menu>
-        <Menu.ItemsPanel>
-            <ItemsPanelTemplate>
-                <WrapPanel/>
-            </ItemsPanelTemplate>
-        </Menu.ItemsPanel>
         <MenuItem Header="_File">
             <MenuItem Header="_New" Command="{Binding OnNew}" CommandParameter="{Binding}" InputGesture="Ctrl+N"/>
             <Separator/>
             <MenuItem Header="_Open..." Command="{Binding Platform.OnOpen}" InputGesture="Ctrl+O"/>
             <Separator/>
             <MenuItem Header="Execu_te Script..." Command="{Binding Platform.OnExecuteScriptFile}"/>
-            <Separator/>
-            <MenuItem Header="_Recent" Items="{Binding RecentProjects}">
-                <MenuItem.Styles>
-                    <Style Selector="MenuItem">
-                        <Setter Property="Header" Value="{Binding Name}"/>
-                        <Setter Property="Command" Value="{Binding $parent[UserControl].DataContext.Platform.OnOpen}"/>
-                        <Setter Property="CommandParameter" Value="{Binding Path}"/>
-                    </Style>
-                </MenuItem.Styles>
-            </MenuItem>
             <Separator/>
             <MenuItem Header="E_xit" Command="{Binding Platform.OnExit}" InputGesture="Alt+F4"/>
         </MenuItem>
