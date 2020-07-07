@@ -12,6 +12,7 @@
              xmlns:views="clr-namespace:Core2D.UI.Views;assembly=Core2D.UI"
              xmlns:containers="clr-namespace:Core2D.UI.Views.Containers;assembly=Core2D.UI"
              xmlns:scripting="clr-namespace:Core2D.UI.Views.Scripting;assembly=Core2D.UI"
+             xmlns:renderer="clr-namespace:Core2D.UI.Views.Renderer;assembly=Core2D.UI"
              xmlns:Editor="clr-namespace:Core2D.Editor;assembly=Core2D"
              xmlns:Recent="clr-namespace:Core2D.Editor.Recent;assembly=Core2D"
              xmlns:Designer="clr-namespace:Core2D.UI.Designer;assembly=Core2D.UI"
@@ -101,9 +102,16 @@
                     </ScrollViewer>
                 </TabItem>
                 <TabItem x:Name="OptionsTabItem" Header="Options" Padding="12,0,0,0">
-                    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-                        <ContentControl Content="{Binding Project.Options}"/>
-                    </ScrollViewer>
+                    <TabControl x:Name="OptionsTabControl">
+                        <TabItem x:Name="ProjectOptionsTabItem" Header="Project" Padding="0,0,0,0">
+                            <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                                <ContentControl Content="{Binding Project.Options}" Margin="0,0,12,0"/>
+                            </ScrollViewer>
+                        </TabItem>
+                        <TabItem x:Name="RendererOptionsTabItem" Header="Renderer" Padding="12,0,0,0">
+                            <renderer:ShapeRendererStateControl DataContext="{Binding PageState}" Margin="0,0,12,0"/>
+                        </TabItem>
+                    </TabControl>
                 </TabItem>
             </TabControl>
             <GridSplitter x:Name="LeftGridSplitter" ResizeDirection="Columns" ResizeBehavior="PreviousAndNext" Background="Transparent" Width="6" Grid.Column="1" Grid.Row="1"/>
@@ -135,7 +143,7 @@
                 <TabItem x:Name="ScriptsTabItem" Header="Scripts" Padding="12,0,0,0">
                     <Grid RowDefinitions="50*,50*">
                         <scripting:ScriptsControl DataContext="{Binding Project}" Grid.Row="0" Margin="0,0,12,0"/>
-                        <scripting:ScriptsControl DataContext="{Binding Project.CurrentScript}" Grid.Row="1" Margin="0,0,12,0"/>
+                        <scripting:ScriptControl DataContext="{Binding Project.CurrentScript}" Grid.Row="1" Margin="0,0,12,0"/>
                      </Grid>
                 </TabItem>
             </TabControl>

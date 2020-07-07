@@ -15,8 +15,8 @@
             <TabItem Header="Point" Padding="0,0,0,0">
                 <ScrollViewer>
                     <StackPanel>
-                        <CheckBox IsChecked="{Binding DrawDecorators, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
-                        <CheckBox IsChecked="{Binding DrawPoints, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
+                        <CheckBox Content="DrawDecorators" IsChecked="{Binding DrawDecorators, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
+                        <CheckBox Content="DrawPoints" IsChecked="{Binding DrawPoints, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
                         <TextBlock Text="PointSize" Margin="{DynamicResource TextControlThemePadding}"/>
                         <TextBox Text="{Binding PointSize, Mode=TwoWay}"/>
                     </StackPanel>
