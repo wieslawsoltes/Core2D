@@ -36,7 +36,7 @@ namespace Core2D.UI
             new StyleInclude(new Uri("avares://Core2D.UI/Styles"))
             {
                 Source = new Uri("avares://Core2D.UI/Themes/DefaultDark.xaml")
-            },
+            }
         };
 
         public static Styles DefaultLight = new Styles
@@ -44,7 +44,7 @@ namespace Core2D.UI
             new StyleInclude(new Uri("avares://Core2D.UI/Styles"))
             {
                 Source = new Uri("avares://Core2D.UI/Themes/DefaultLight.xaml")
-            },
+            }
         };
 
         public static Styles FluentDark = new Styles
@@ -52,7 +52,7 @@ namespace Core2D.UI
             new StyleInclude(new Uri("avares://Core2D.UI/Styles"))
             {
                 Source = new Uri("avares://Core2D.UI/Themes/FluentDark.xaml")
-            },
+            }
         };
 
         public static Styles FluentLight = new Styles
@@ -60,7 +60,7 @@ namespace Core2D.UI
             new StyleInclude(new Uri("avares://Core2D.UI/Styles"))
             {
                 Source = new Uri("avares://Core2D.UI/Themes/FluentLight.xaml")
-            },
+            }
         };
 
         public static ThemeName DefaultTheme = ThemeName.FluentLight;
