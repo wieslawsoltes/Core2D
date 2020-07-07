@@ -29,9 +29,9 @@ namespace Core2D.UI
     /// <summary>
     /// Encapsulates an Avalonia application.
     /// </summary>
-    public partial class App : Application
+    public class App : Application
     {
-        public static Styles DefaultDark = new Styles
+        public Styles DefaultDark = new Styles
         {
             new StyleInclude(new Uri("avares://Core2D.UI/Styles"))
             {
@@ -39,7 +39,7 @@ namespace Core2D.UI
             }
         };
 
-        public static Styles DefaultLight = new Styles
+        public Styles DefaultLight = new Styles
         {
             new StyleInclude(new Uri("avares://Core2D.UI/Styles"))
             {
@@ -47,7 +47,7 @@ namespace Core2D.UI
             }
         };
 
-        public static Styles FluentDark = new Styles
+        public Styles FluentDark = new Styles
         {
             new StyleInclude(new Uri("avares://Core2D.UI/Styles"))
             {
@@ -55,7 +55,7 @@ namespace Core2D.UI
             }
         };
 
-        public static Styles FluentLight = new Styles
+        public Styles FluentLight = new Styles
         {
             new StyleInclude(new Uri("avares://Core2D.UI/Styles"))
             {
