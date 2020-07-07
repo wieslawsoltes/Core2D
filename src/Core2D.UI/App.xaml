@@ -29,10 +29,7 @@
              xmlns:views="clr-namespace:Core2D.UI.Views;assembly=Core2D.UI">
     <Application.Resources>
         <!-- Fonts -->
-        <!--<FontFamily x:Key="UiFontFamily">avares://Core2D.UI/Assets/Fonts#Lato</FontFamily>-->
-        <!--<FontFamily x:Key="UiFontFamily">avares://Core2D.UI/Assets/Fonts#Noto Sans</FontFamily>-->
         <FontFamily x:Key="UiFontFamily">Segoe UI, SF Pro Display, Noto Sans, Cantarel</FontFamily>
-        <!--<FontFamily x:Key="CodeFontFamily">avares://Core2D.UI/Assets/Fonts#Source Code Pro</FontFamily>-->
         <StaticResource x:Key="ContentControlThemeFontFamily" ResourceKey="UiFontFamily" />
         <!-- Brushes -->
         <SolidColorBrush x:Key="TransparentBrush">#00FFFFFF</SolidColorBrush>
