@@ -13,7 +13,7 @@
              mc:Ignorable="d"
              d:DataContext="{x:Static Designer:DesignerContext.Group}"
              d:DesignWidth="250" d:DesignHeight="400">
-    <Grid RowDefinitions="Auto,Auto,Auto,*">
+    <Grid RowDefinitions="Auto,Auto,50*,50*">
         <TabControl Grid.Row="0">
             <TabItem Header="Group" Padding="0,0,0,0">
                 <StackPanel>
