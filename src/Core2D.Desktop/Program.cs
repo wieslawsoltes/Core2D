@@ -85,6 +85,7 @@ namespace Core2D
 
     internal class Settings
     {
+        public ThemeName? Theme { get; set; } = ThemeName.FluentLight;
         public FileInfo[]? Scripts { get; set; }
         public FileInfo? Project { get; set; }
         public bool Repl { get; set; }
@@ -170,7 +171,7 @@ namespace Core2D
 
                 if (mainConntrol != null)
                 {
-                    Util.Screenshot(mainConntrol, size, "Core2D-Dashboard.png");
+                    Util.Screenshot(mainConntrol, size, $"Core2D-Dashboard-{App.DefaultTheme}.png");
                     Dispatcher.UIThread.RunJobs();
                 }
 
@@ -182,9 +183,11 @@ namespace Core2D
 
                 if (mainConntrol != null)
                 {
-                    Util.Screenshot(mainConntrol, size, "Core2D-Editor.png");
+                    Util.Screenshot(mainConntrol, size, $"Core2D-Editor-{App.DefaultTheme}.png");
                     Dispatcher.UIThread.RunJobs();
                 }
+
+                applicationLifetime?.Shutdown();
             });
         }
 
@@ -226,6 +229,11 @@ namespace Core2D
             }
 
             var builder = BuildAvaloniaApp();
+
+            var optionTheme = new Option(new[] { "--theme", "-t" }, "Set application theme")
+            {
+                Argument = new Argument<ThemeName>(getDefaultValue: () => ThemeName.FluentLight)
+            };
 
             var optionScripts = new Option(new[] { "--scripts", "-s" }, "The relative or absolute path to the script files")
             {
@@ -282,6 +290,7 @@ namespace Core2D
                 Description = "A multi-platform data driven 2D diagram editor."
             };
 
+            rootCommand.AddOption(optionTheme);
             rootCommand.AddOption(optionScripts);
             rootCommand.AddOption(optionProject);
             rootCommand.AddOption(optionRepl);
@@ -297,6 +306,11 @@ namespace Core2D
             {
                 try
                 {
+                    if (settings.Theme != null)
+                    {
+                        App.DefaultTheme = settings.Theme.Value;
+                    }
+
                     if (settings.Repl)
                     {
                         Repl();

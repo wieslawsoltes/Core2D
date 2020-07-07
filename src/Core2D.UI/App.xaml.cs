@@ -7,7 +7,9 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
+using Avalonia.Markup.Xaml.Styling;
 using Avalonia.Platform;
+using Avalonia.Styling;
 using Core2D;
 using Core2D.Editor;
 using Core2D.UI.Designer;
@@ -16,11 +18,53 @@ using Core2D.UI.Views;
 
 namespace Core2D.UI
 {
+    public enum ThemeName
+    {
+        DefaultDark,
+        DefaultLight,
+        FluentDark,
+        FluentLight
+    }
+
     /// <summary>
     /// Encapsulates an Avalonia application.
     /// </summary>
     public partial class App : Application
     {
+        public static Styles DefaultDark = new Styles
+        {
+            new StyleInclude(new Uri("avares://Core2D.UI/Styles"))
+            {
+                Source = new Uri("avares://Core2D.UI/Themes/DefaultDark.xaml")
+            },
+        };
+
+        public static Styles DefaultLight = new Styles
+        {
+            new StyleInclude(new Uri("avares://Core2D.UI/Styles"))
+            {
+                Source = new Uri("avares://Core2D.UI/Themes/DefaultLight.xaml")
+            },
+        };
+
+        public static Styles FluentDark = new Styles
+        {
+            new StyleInclude(new Uri("avares://Core2D.UI/Styles"))
+            {
+                Source = new Uri("avares://Core2D.UI/Themes/FluentDark.xaml")
+            },
+        };
+
+        public static Styles FluentLight = new Styles
+        {
+            new StyleInclude(new Uri("avares://Core2D.UI/Styles"))
+            {
+                Source = new Uri("avares://Core2D.UI/Themes/FluentLight.xaml")
+            },
+        };
+
+        public static ThemeName DefaultTheme = ThemeName.FluentLight;
+
         /// <summary>
         /// Initializes static data.
         /// </summary>
@@ -178,6 +222,23 @@ namespace Core2D.UI
         public override void Initialize()
         {
             AvaloniaXamlLoader.Load(this);
+
+            switch (DefaultTheme)
+            {
+                case ThemeName.DefaultDark:
+                    Styles.Insert(0, DefaultDark);
+                    break;
+                case ThemeName.DefaultLight:
+                    Styles.Insert(0, DefaultLight);
+                    break;
+                case ThemeName.FluentDark:
+                    Styles.Insert(0, FluentDark);
+                    break;
+                default:
+                case ThemeName.FluentLight:
+                    Styles.Insert(0, FluentLight);
+                    break;
+            }
         }
     }
 }
