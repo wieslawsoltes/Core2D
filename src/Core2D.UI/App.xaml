@@ -75,13 +75,23 @@
         <converters:PriorityMultiValueConverter x:Key="PriorityMultiValueConverter"/>
         <converters:StyleMultiValueConverter x:Key="StyleMultiValueConverter"/>
         <converters:TreeViewSelectedItemToObjectConverter x:Key="TreeViewSelectedItemToObjectConverter"/>
+        <!-- Theme Default Light -->
+        <!--<Color x:Key="SystemChromeMediumColor">#FFFFFFFF</Color>
+        <Color x:Key="SystemBaseHighColor">#FF000000</Color>-->
+        <!-- Theme Default Dark -->
+        <!--<Color x:Key="SystemChromeMediumColor">#FF282828</Color>
+        <Color x:Key="SystemBaseHighColor">#FFDEDEDE</Color>-->
     </Application.Resources>
     <Application.Styles>
         <!-- Theme Default -->
         <!--<StyleInclude Source="avares://Avalonia.Themes.Default/DefaultTheme.xaml"/>-->
+        <!-- Theme Default Light -->
         <!--<StyleInclude Source="avares://Avalonia.Themes.Default/Accents/BaseLight.xaml"/>-->
-        <!-- Theme Fluent -->
+        <!-- Theme Default Dark -->
+        <!--<StyleInclude Source="avares://Avalonia.Themes.Default/Accents/BaseDark.xaml"/>-->
+        <!-- Theme Fluent Light -->
         <StyleInclude Source="avares://Avalonia.Themes.Fluent/Accents/FluentLight.xaml"/>
+        <!-- Theme Fluent Dark -->
         <!--<StyleInclude Source="avares://Avalonia.Themes.Fluent/Accents/FluentDark.xaml"/>-->
         <!-- DataGrid -->
         <StyleInclude Source="avares://Avalonia.Controls.DataGrid/Themes/Default.xaml"/>
