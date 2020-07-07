@@ -7,22 +7,28 @@
              xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
              xmlns:idd="clr-namespace:Core2D.UI.DragAndDrop;assembly=Core2D.UI"
              xmlns:converters="clr-namespace:Core2D.UI.Converters;assembly=Core2D.UI"
+             xmlns:Core="clr-namespace:Core2D;assembly=Core2D"
              xmlns:Data="clr-namespace:Core2D.Data;assembly=Core2D"
              xmlns:Designer="clr-namespace:Core2D.UI.Designer;assembly=Core2D.UI"
              mc:Ignorable="d"
              d:DataContext="{x:Static Designer:DesignerContext.Record}"
-             d:DesignWidth="250" d:DesignHeight="400">
+             d:DesignWidth="250" d:DesignHeight="400"
+             x:DataType="Data:IRecord" x:CompileBindings="True">
     <ScrollViewer>
         <Grid RowDefinitions="Auto,*" ColumnDefinitions="50*,Auto,50*">
             <TextBlock Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" Text="Name"/>
-            <ItemsControl VerticalAlignment="Stretch" Grid.Column="0" Grid.Row="1" Items="{Binding Owner.Columns}">
+            <ItemsControl VerticalAlignment="Stretch" Grid.Column="0" Grid.Row="1" Items="{Binding Columns}" x:DataType="Data:IDatabase">
+                <ItemsControl.DataContext>
+                    <!-- TODO: Enable CompileBindings -->
+                    <Binding Path="Owner" x:DataType="Core:IObservableObject" x:CompileBindings="False"/>
+                </ItemsControl.DataContext>
                 <ItemsControl.DataTemplates>
                     <DataTemplate DataType="Data:IColumn">
                         <Grid VerticalAlignment="Top" Background="Transparent">
                             <i:Interaction.Behaviors>
                                 <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}"/>
                             </i:Interaction.Behaviors>
-                            <TextBox VerticalAlignment="Center" Text="{Binding Name, Mode=TwoWay}" />
+                            <TextBox VerticalAlignment="Center" Text="{Binding Name, Mode=TwoWay}" x:DataType="Core:IObservableObject"/>
                         </Grid>
                     </DataTemplate>
                 </ItemsControl.DataTemplates>

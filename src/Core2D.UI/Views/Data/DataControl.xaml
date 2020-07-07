@@ -4,24 +4,31 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:converters="clr-namespace:Core2D.UI.Converters;assembly=Core2D.UI"
-             xmlns:Editor="clr-namespace:Core2D.Editor;assembly=Core2D"
              xmlns:data="clr-namespace:Core2D.UI.Views.Data;assembly=Core2D.UI"
+             xmlns:Editor="clr-namespace:Core2D.Editor;assembly=Core2D"
+             xmlns:Core="clr-namespace:Core2D;assembly=Core2D"
+             xmlns:Data="clr-namespace:Core2D.Data;assembly=Core2D"
              xmlns:Designer="clr-namespace:Core2D.UI.Designer;assembly=Core2D.UI"
              mc:Ignorable="d"
              d:DataContext="{x:Static Designer:DesignerContext.Data}"
-             d:DesignWidth="250" d:DesignHeight="400">
-    <StackPanel IsVisible="{Binding !!$self.DataContext}">
-        <TabControl>
+             d:DesignWidth="250" d:DesignHeight="400"
+             x:DataType="Data:IContext" x:CompileBindings="True">
+    <StackPanel>
+        <TabControl IsVisible="{Binding !!Record}">
             <TabItem Header="Record" Padding="0,0,0,0">
                 <Grid RowDefinitions="Auto,*" ColumnDefinitions="*">
                     <Menu Grid.Row="0" HorizontalAlignment="Right" IsVisible="{Binding !!Record}">
-                        <MenuItem Header="&#727;" Command="{Binding $parent[Window].DataContext.OnResetRecord}" CommandParameter="{Binding}" IsVisible="{Binding !!Record}"/>
+                        <MenuItem Header="&#727;" CommandParameter="{Binding}" IsVisible="{Binding !!Record}">
+                            <MenuItem.Command>
+                                <Binding Path="$parent[Window].DataContext.OnResetRecord" x:CompileBindings="False" x:DataType="Editor:IProjectEditor"/>
+                            </MenuItem.Command>
+                        </MenuItem>
                     </Menu>
                     <ContentControl Content="{Binding Record}" Grid.Row="1"/>
                 </Grid>
             </TabItem>
         </TabControl>
-        <TabControl>
+        <TabControl IsVisible="{Binding !!Properties.Length}">
             <TabItem Header="Properties" Padding="0,0,0,0">
                 <data:PropertiesControl/>
             </TabItem>

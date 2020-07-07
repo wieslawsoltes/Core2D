@@ -7,15 +7,21 @@
              xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
              xmlns:idd="clr-namespace:Core2D.UI.DragAndDrop;assembly=Core2D.UI"
              xmlns:converters="clr-namespace:Core2D.UI.Converters;assembly=Core2D.UI"
+             xmlns:Core="clr-namespace:Core2D;assembly=Core2D"
              xmlns:Data="clr-namespace:Core2D.Data;assembly=Core2D"
              xmlns:Editor="clr-namespace:Core2D.Editor;assembly=Core2D"
              xmlns:Designer="clr-namespace:Core2D.UI.Designer;assembly=Core2D.UI"
              mc:Ignorable="d"
              d:DataContext="{x:Static Designer:DesignerContext.Data}"
-             d:DesignWidth="250" d:DesignHeight="400">
+             d:DesignWidth="250" d:DesignHeight="400"
+             x:DataType="Data:IContext" x:CompileBindings="True">
     <Grid RowDefinitions="Auto,*" ColumnDefinitions="*">
         <Menu Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" HorizontalAlignment="Right">
-            <MenuItem Header="+" Command="{Binding $parent[Window].DataContext.OnAddProperty}" CommandParameter="{Binding}"/>
+            <MenuItem Header="+" CommandParameter="{Binding}">
+                <MenuItem.Command>
+                    <Binding Path="$parent[Window].DataContext.OnAddProperty" x:CompileBindings="False" x:DataType="Editor:IProjectEditor"/>
+                </MenuItem.Command>
+            </MenuItem>
         </Menu>
         <ScrollViewer Grid.Row="1" Grid.Column="0" IsVisible="{Binding !!Properties.Length}">
             <Grid RowDefinitions="Auto,*" ColumnDefinitions="50*,Auto,50*">
@@ -27,7 +33,7 @@
                                 <i:Interaction.Behaviors>
                                     <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}"/>
                                 </i:Interaction.Behaviors>
-                                <TextBox VerticalAlignment="Center" Text="{Binding Name, Mode=TwoWay}"/>
+                                <TextBox VerticalAlignment="Center" Text="{Binding Name, Mode=TwoWay}" x:DataType="Core:IObservableObject"/>
                             </Grid>
                         </DataTemplate>
                     </ItemsControl.DataTemplates>
@@ -42,7 +48,11 @@
                                     <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}"/>
                                 </i:Interaction.Behaviors>
                                 <TextBox Text="{Binding Value, Mode=TwoWay}" Grid.Column="0"/>
-                                <Button Content="-" Grid.Column="1" Command="{Binding $parent[Window].DataContext.OnRemoveProperty}" CommandParameter="{Binding}" Padding="0" VerticalAlignment="Stretch" VerticalContentAlignment="Center" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"/>
+                                <Button Content="-" Grid.Column="1" CommandParameter="{Binding}" Padding="0" VerticalAlignment="Stretch" VerticalContentAlignment="Center" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center">
+                                    <Button.Command>
+                                        <Binding Path="$parent[Window].DataContext.OnRemoveProperty" x:CompileBindings="False" x:DataType="Editor:IProjectEditor"/>
+                                    </Button.Command>
+                                </Button>
                             </Grid>
                         </DataTemplate>
                     </ItemsControl.DataTemplates>

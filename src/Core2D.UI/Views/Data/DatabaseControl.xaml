@@ -7,24 +7,39 @@
              xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
              xmlns:idd="clr-namespace:Core2D.UI.DragAndDrop;assembly=Core2D.UI"
              xmlns:converters="clr-namespace:Core2D.UI.Converters;assembly=Core2D.UI"
+             xmlns:Core="clr-namespace:Core2D;assembly=Core2D"
              xmlns:Data="clr-namespace:Core2D.Data;assembly=Core2D"
              xmlns:Editor="clr-namespace:Core2D.Editor;assembly=Core2D"
              xmlns:Designer="clr-namespace:Core2D.UI.Designer;assembly=Core2D.UI"
              mc:Ignorable="d"
              d:DataContext="{x:Static Designer:DesignerContext.Database}"
-             d:DesignWidth="250" d:DesignHeight="400">
+             d:DesignWidth="250" d:DesignHeight="400"
+             x:DataType="Data:IDatabase" x:CompileBindings="True">
     <StackPanel>
         <StackPanel>
             <TextBlock Text="Name" Margin="{DynamicResource TextControlThemePadding}"/>
-            <TextBox Text="{Binding Name, Mode=TwoWay}"/>
+            <TextBox Text="{Binding Name, Mode=TwoWay}" x:DataType="Core:IObservableObject"/>
         </StackPanel>
         <TabControl>
             <TabItem Header="Records" Padding="0,0,0,0">
                 <Grid RowDefinitions="Auto,*">
                     <Menu Grid.Row="0" HorizontalAlignment="Right">
-                        <MenuItem Header="apply" Command="{Binding $parent[Window].DataContext.OnApplyRecord}" CommandParameter="{Binding CurrentRecord}" IsVisible="{Binding !!CurrentRecord}"/>
-                        <MenuItem Header="+" Command="{Binding $parent[Window].DataContext.OnAddRecord}" CommandParameter="{Binding}"/>
-                        <MenuItem Header="&#727;" Command="{Binding $parent[Window].DataContext.OnRemoveRecord}" CommandParameter="{Binding CurrentRecord}" IsVisible="{Binding !!CurrentRecord}"/>
+                        <!--<MenuItem Header="apply" Command="{Binding $parent[Window].DataContext.OnApplyRecord}" CommandParameter="{Binding CurrentRecord}" IsVisible="{Binding !!CurrentRecord}"/>-->
+                        <MenuItem Header="apply" CommandParameter="{Binding CurrentRecord}" IsVisible="{Binding !!CurrentRecord}">
+                            <MenuItem.Command>
+                                <Binding Path="$parent[Window].DataContext.OnApplyRecord" x:CompileBindings="False" x:DataType="Editor:IProjectEditor"/>
+                            </MenuItem.Command>
+                        </MenuItem>
+                        <MenuItem Header="+" CommandParameter="{Binding}">
+                            <MenuItem.Command>
+                                <Binding Path="$parent[Window].DataContext.OnAddRecord" x:CompileBindings="False" x:DataType="Editor:IProjectEditor"/>
+                            </MenuItem.Command>
+                        </MenuItem>
+                        <MenuItem Header="&#727;" CommandParameter="{Binding CurrentRecord}" IsVisible="{Binding !!CurrentRecord}">
+                            <MenuItem.Command>
+                                <Binding Path="$parent[Window].DataContext.OnRemoveRecord" x:CompileBindings="False" x:DataType="Editor:IProjectEditor"/>
+                            </MenuItem.Command>
+                        </MenuItem>
                     </Menu>
                     <DataGrid x:Name="rowsDataGrid"
                               Items="{Binding Records}"
@@ -42,8 +57,16 @@
                             <idd:TypedDragBehavior DataType="{x:Type Data:IRecord}"/>
                         </i:Interaction.Behaviors>
                         <DataGrid.KeyBindings>
-                            <KeyBinding Command="{Binding $parent[Window].DataContext.OnAddRecord}" CommandParameter="{Binding #rowsDataGrid.DataContext, Mode=OneWay}" Gesture="Ctrl+N"/>
-                            <KeyBinding Command="{Binding $parent[Window].DataContext.OnRemoveRecord}" CommandParameter="{Binding #rowsDataGrid.SelectedItem}" Gesture="Delete"/>
+                            <KeyBinding CommandParameter="{Binding #rowsDataGrid.DataContext, Mode=OneWay}" Gesture="Ctrl+N">
+                                <KeyBinding.Command>
+                                    <Binding Path="$parent[Window].DataContext.OnAddRecord" x:CompileBindings="False" x:DataType="Editor:IProjectEditor"/>
+                                </KeyBinding.Command>
+                            </KeyBinding>
+                            <KeyBinding CommandParameter="{Binding #rowsDataGrid.SelectedItem}" Gesture="Delete">
+                                <KeyBinding.Command>
+                                    <Binding Path="$parent[Window].DataContext.OnRemoveRecord" x:CompileBindings="False" x:DataType="Editor:IProjectEditor"/>
+                                </KeyBinding.Command>
+                            </KeyBinding>
                         </DataGrid.KeyBindings>
                     </DataGrid>
                 </Grid>
@@ -54,8 +77,16 @@
             <TabItem Header="Columns" Padding="12,0,0,0">
                 <Grid RowDefinitions="Auto,*">
                     <Menu Grid.Row="0" HorizontalAlignment="Right">
-                        <MenuItem Header="&#727;" Command="{Binding $parent[Window].DataContext.OnRemoveColumn}" CommandParameter="{Binding #columnsDataGrid.SelectedItem}"/>
-                        <MenuItem Header="+" Command="{Binding $parent[Window].DataContext.OnAddColumn}" CommandParameter="{Binding}"/>
+                        <MenuItem Header="&#727;" CommandParameter="{Binding #columnsDataGrid.SelectedItem}">
+                            <MenuItem.Command>
+                                <Binding Path="$parent[Window].DataContext.OnRemoveColumn" x:CompileBindings="False" x:DataType="Editor:IProjectEditor"/>
+                            </MenuItem.Command>
+                        </MenuItem>
+                        <MenuItem Header="+" CommandParameter="{Binding}">
+                            <MenuItem.Command>
+                                <Binding Path="$parent[Window].DataContext.OnAddColumn" x:CompileBindings="False" x:DataType="Editor:IProjectEditor"/>
+                            </MenuItem.Command>
+                        </MenuItem>
                     </Menu>
                     <DataGrid x:Name="columnsDataGrid"
                               Items="{Binding Columns}"
@@ -72,22 +103,34 @@
                             <idd:TypedDragBehavior DataType="{x:Type Data:IColumn}"/>
                         </i:Interaction.Behaviors>
                         <DataGrid.KeyBindings>
-                            <KeyBinding Command="{Binding $parent[Window].DataContext.OnAddColumn}" CommandParameter="{Binding}" Gesture="Ctrl+N"/>
-                            <KeyBinding Command="{Binding $parent[Window].DataContext.OnRemoveColumn}" CommandParameter="{Binding #columnsDataGrid.SelectedItem}" Gesture="Delete"/>
+                            <KeyBinding CommandParameter="{Binding}" Gesture="Ctrl+N">
+                                <KeyBinding.Command>
+                                    <Binding Path="$parent[Window].DataContext.OnAddColumn" x:CompileBindings="False" x:DataType="Editor:IProjectEditor"/>
+                                </KeyBinding.Command>
+                            </KeyBinding>
+                            <KeyBinding CommandParameter="{Binding #columnsDataGrid.SelectedItem}" Gesture="Delete">
+                                <KeyBinding.Command>
+                                    <Binding Path="$parent[Window].DataContext.OnRemoveColumn" x:CompileBindings="False" x:DataType="Editor:IProjectEditor"/>
+                                </KeyBinding.Command>
+                            </KeyBinding>
                         </DataGrid.KeyBindings>
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="Name" IsReadOnly="False" Binding="{Binding Name}"/>
-                            <DataGridTextColumn Header="Width" Binding="{Binding Width}"/>
-                            <DataGridCheckBoxColumn Header="IsVisible" Binding="{Binding IsVisible}"/>
-                            <DataGridTextColumn Header="Owner" Binding="{Binding Owner.Name}" IsReadOnly="True"/>
-                            <DataGridTextColumn Header="Id" Binding="{Binding Id}"/>
+                            <DataGridTextColumn Header="Name" IsReadOnly="False" Binding="{Binding Name}" x:DataType="Core:IObservableObject"/>
+                            <DataGridTextColumn Header="Width" Binding="{Binding Width}" x:DataType="Data:IColumn"/>
+                            <DataGridCheckBoxColumn Header="IsVisible" Binding="{Binding IsVisible}" x:DataType="Data:IColumn"/>
+                            <DataGridTextColumn Header="Owner" Binding="{Binding Owner.Name}" x:DataType="Core:IObservableObject" IsReadOnly="True"/>
+                            <DataGridTextColumn Header="Id" Binding="{Binding Id}" x:DataType="Core:IObservableObject"/>
                         </DataGrid.Columns>
                     </DataGrid>
                 </Grid>
                 <!--
                 <Grid RowDefinitions="Auto,Auto,*" ColumnDefinitions="*" >
                     <Menu Grid.Row="0" Grid.Column="0" HorizontalAlignment="Right">
-                        <MenuItem Header="+" Command="{Binding $parent[Window].DataContext.OnAddColumn}" CommandParameter="{Binding}"/>
+                        <MenuItem Header="+" CommandParameter="{Binding}">
+                            <MenuItem.Command>
+                                <Binding Path="$parent[Window].DataContext.OnAddColumn" x:CompileBindings="False" x:DataType="Editor:IProjectEditor"/>
+                            </MenuItem.Command>
+                        </MenuItem>
                     </Menu>
                     <TextBlock Grid.Column="0" Grid.Row="1" VerticalAlignment="Center" Text="Name" IsVisible="{Binding !!Columns.Length}"/>
                     <ScrollViewer Grid.Column="0" Grid.Row="2" IsVisible="{Binding !!Columns.Length}">
@@ -99,7 +142,11 @@
                                             <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}"/>
                                         </i:Interaction.Behaviors>
                                         <TextBox Text="{Binding Name, Mode=TwoWay}" Grid.Column="0"/>
-                                        <Button Content="-" Grid.Column="1" Command="{Binding $parent[Window].DataContext.OnRemoveColumn}" CommandParameter="{Binding}"/>
+                                        <Button Content="-" Grid.Column="1" CommandParameter="{Binding}">
+                                            <Button.Command>
+                                                <Binding Path="$parent[Window].DataContext.OnRemoveColumn" x:CompileBindings="False" x:DataType="Editor:IProjectEditor"/>
+                                            </Button.Command>
+                                        </Button>
                                     </Grid>
                                 </DataTemplate>
                             </ItemsControl.DataTemplates>
