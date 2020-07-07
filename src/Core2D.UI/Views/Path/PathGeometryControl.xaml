@@ -34,7 +34,7 @@
                     </TreeView.DataTemplates>
                 </TreeView>
             </TabItem>
-            <TabItem Header="Selected" Padding="12,0,0,0">
+            <TabItem Header="Selected Figure" Padding="12,0,0,0">
                 <ContentControl Content="{Binding #tree.SelectedItem}"/>
             </TabItem>
         </TabControl>
