@@ -92,6 +92,10 @@
         <StyleInclude Source="avares://Core2D.UI/Icons.xaml"/>
         <!-- Fluent -->
         <StyleInclude Source="avares://Avalonia.Themes.Fluent/DensityStyles/Compact.xaml"/>
+        <!-- Styles -->
+        <Style Selector="TabItem">
+            <Setter Property="FontWeight" Value="Normal"/>
+        </Style>
     </Application.Styles>
     <Application.DataTemplates>
         <!--<local:ViewLocator/>-->
