@@ -18,17 +18,13 @@
             <TabItem Header="Record" Padding="0,0,0,0">
                 <Grid RowDefinitions="Auto,*" ColumnDefinitions="*">
                     <Menu Grid.Row="0" HorizontalAlignment="Right" IsVisible="{Binding !!Record}">
-                        <MenuItem Header="&#727;" CommandParameter="{Binding}" IsVisible="{Binding !!Record}">
-                            <MenuItem.Command>
-                                <Binding Path="$parent[Window].DataContext.OnResetRecord" x:CompileBindings="False" x:DataType="Editor:IProjectEditor"/>
-                            </MenuItem.Command>
-                        </MenuItem>
+                        <MenuItem Header="&#727;" Command="{Binding $parent[Window].DataContext.OnResetRecord}" CommandParameter="{Binding}" IsVisible="{Binding !!Record}" x:CompileBindings="False"/>
                     </Menu>
                     <ContentControl Content="{Binding Record}" Grid.Row="1"/>
                 </Grid>
             </TabItem>
         </TabControl>
-        <TabControl IsVisible="{Binding !!Properties.Length}">
+        <TabControl>
             <TabItem Header="Properties" Padding="0,0,0,0">
                 <data:PropertiesControl/>
             </TabItem>

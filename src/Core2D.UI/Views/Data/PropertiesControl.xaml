@@ -17,11 +17,7 @@
              x:DataType="Data:IContext" x:CompileBindings="True">
     <Grid RowDefinitions="Auto,*" ColumnDefinitions="*">
         <Menu Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" HorizontalAlignment="Right">
-            <MenuItem Header="+" CommandParameter="{Binding}">
-                <MenuItem.Command>
-                    <Binding Path="$parent[Window].DataContext.OnAddProperty" x:CompileBindings="False" x:DataType="Editor:IProjectEditor"/>
-                </MenuItem.Command>
-            </MenuItem>
+            <MenuItem Header="+" Command="{Binding $parent[Window].DataContext.OnAddProperty}" CommandParameter="{Binding}" x:CompileBindings="False"/>
         </Menu>
         <ScrollViewer Grid.Row="1" Grid.Column="0" IsVisible="{Binding !!Properties.Length}">
             <Grid RowDefinitions="Auto,*" ColumnDefinitions="50*,Auto,50*">
@@ -48,11 +44,7 @@
                                     <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}"/>
                                 </i:Interaction.Behaviors>
                                 <TextBox Text="{Binding Value, Mode=TwoWay}" Grid.Column="0"/>
-                                <Button Content="-" Grid.Column="1" CommandParameter="{Binding}" Padding="0" VerticalAlignment="Stretch" VerticalContentAlignment="Center" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center">
-                                    <Button.Command>
-                                        <Binding Path="$parent[Window].DataContext.OnRemoveProperty" x:CompileBindings="False" x:DataType="Editor:IProjectEditor"/>
-                                    </Button.Command>
-                                </Button>
+                                <Button Content="-" Grid.Column="1" Command="{Binding $parent[Window].DataContext.OnRemoveProperty}" CommandParameter="{Binding}" Padding="0" VerticalAlignment="Stretch" VerticalContentAlignment="Center" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" x:CompileBindings="False"/>
                             </Grid>
                         </DataTemplate>
                     </ItemsControl.DataTemplates>
