@@ -13,25 +13,23 @@
              mc:Ignorable="d"
              d:DataContext="{x:Static Designer:DesignerContext.Project}"
              d:DesignWidth="250" d:DesignHeight="400">
-    <ScrollViewer>
-        <Grid RowDefinitions="Auto,Auto,*" ColumnDefinitions="*" >
-            <Menu Grid.Row="0" Grid.Column="0" HorizontalAlignment="Right">
-                <MenuItem Header="+" Command="{Binding $parent[Window].DataContext.OnAddImageKey}"/>
-            </Menu>
-            <TextBlock Grid.Column="0" Grid.Row="1" VerticalAlignment="Center" Text="Key"/>
-            <ItemsControl VerticalAlignment="Stretch" Grid.Column="0" Grid.Row="2" Items="{Binding Keys}">
-                <ItemsControl.DataTemplates>
-                    <DataTemplate DataType="Renderer:IImageKey">
-                        <Grid VerticalAlignment="Top" ColumnDefinitions="*,30" Background="Transparent">
-                            <i:Interaction.Behaviors>
-                                <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}"/>
-                            </i:Interaction.Behaviors>
-                            <TextBox VerticalAlignment="Center" Text="{Binding Key, Mode=OneWay}" Grid.Column="0"/>
-                            <Button VerticalAlignment="Center" Content="-" Grid.Column="1" Command="{Binding $parent[Window].DataContext.OnRemoveImageKey}" CommandParameter="{Binding Key}"/>
-                        </Grid>
-                    </DataTemplate>
-                </ItemsControl.DataTemplates>
-            </ItemsControl>
-        </Grid>
-    </ScrollViewer>
+    <Grid RowDefinitions="Auto,Auto,*" ColumnDefinitions="*" >
+        <Menu Grid.Row="0" Grid.Column="0" HorizontalAlignment="Right">
+            <MenuItem Header="+" Command="{Binding $parent[Window].DataContext.OnAddImageKey}"/>
+        </Menu>
+        <TextBlock Grid.Column="0" Grid.Row="1" VerticalAlignment="Center" Text="Key"/>
+        <ItemsControl VerticalAlignment="Stretch" Grid.Column="0" Grid.Row="2" Items="{Binding Keys}">
+            <ItemsControl.DataTemplates>
+                <DataTemplate DataType="Renderer:IImageKey">
+                    <Grid VerticalAlignment="Top" ColumnDefinitions="*,30" Background="Transparent">
+                        <i:Interaction.Behaviors>
+                            <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}"/>
+                        </i:Interaction.Behaviors>
+                        <TextBox VerticalAlignment="Center" Text="{Binding Key, Mode=OneWay}" Grid.Column="0"/>
+                        <Button Content="-" Grid.Column="1" Command="{Binding $parent[Window].DataContext.OnRemoveImageKey}" CommandParameter="{Binding Key}" Padding="0" VerticalAlignment="Stretch" VerticalContentAlignment="Center" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"/>
+                    </Grid>
+                </DataTemplate>
+            </ItemsControl.DataTemplates>
+        </ItemsControl>
+    </Grid>
 </UserControl>

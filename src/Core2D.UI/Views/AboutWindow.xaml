@@ -17,5 +17,7 @@
         mc:Ignorable="d"
         d:DataContext="{x:Static Designer:DesignerContext.Editor}"
         d:DesignWidth="1000" d:DesignHeight="600">
-    <views:AboutControl VerticalAlignment="Center" HorizontalAlignment="Center"/>
+    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+        <views:AboutControl VerticalAlignment="Center" HorizontalAlignment="Center"/>
+    </ScrollViewer>
 </Window>

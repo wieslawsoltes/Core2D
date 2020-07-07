@@ -14,61 +14,55 @@
     <StackPanel>
         <TabControl>
             <TabItem Header="Status" Padding="0,0,0,0">
-                <ScrollViewer>
-                    <StackPanel>
-                        <TextBlock Text="ZoomX:" Margin="{DynamicResource TextControlThemePadding}"/>
-                        <TextBlock Text="{Binding ZoomX, Mode=OneWay}" Margin="{DynamicResource TextControlThemePadding}"/>
-                        <TextBlock Text="ZoomY:" Margin="{DynamicResource TextControlThemePadding}"/>
-                        <TextBlock Text="{Binding ZoomY, Mode=OneWay}" Margin="{DynamicResource TextControlThemePadding}"/>
-                        <TextBlock Text="OffsetX:" Margin="{DynamicResource TextControlThemePadding}"/>
-                        <TextBlock Text="{Binding OffsetX, Mode=OneWay}" Margin="{DynamicResource TextControlThemePadding}"/>
-                        <TextBlock Text="OffsetY:" Margin="{DynamicResource TextControlThemePadding}"/>
-                        <TextBlock Text="{Binding OffsetY, Mode=OneWay}" Margin="{DynamicResource TextControlThemePadding}"/>
-                        <Button Content="Reset" Command="{Binding $parent[Window].DataContext.Platform.OnZoomReset}" Margin="{DynamicResource TextControlThemePadding}"/>
-                        <Button Content="AutoFit" Command="{Binding $parent[Window].DataContext.Platform.OnZoomAutoFit}" Margin="{DynamicResource TextControlThemePadding}"/>
-                    </StackPanel>
-                </ScrollViewer>
+                <StackPanel>
+                    <TextBlock Text="ZoomX" Margin="{DynamicResource TextControlThemePadding}"/>
+                    <TextBlock Text="{Binding ZoomX, Mode=OneWay}" Margin="{DynamicResource TextControlThemePadding}"/>
+                    <TextBlock Text="ZoomY" Margin="{DynamicResource TextControlThemePadding}"/>
+                    <TextBlock Text="{Binding ZoomY, Mode=OneWay}" Margin="{DynamicResource TextControlThemePadding}"/>
+                    <TextBlock Text="OffsetX" Margin="{DynamicResource TextControlThemePadding}"/>
+                    <TextBlock Text="{Binding OffsetX, Mode=OneWay}" Margin="{DynamicResource TextControlThemePadding}"/>
+                    <TextBlock Text="OffsetY" Margin="{DynamicResource TextControlThemePadding}"/>
+                    <TextBlock Text="{Binding OffsetY, Mode=OneWay}" Margin="{DynamicResource TextControlThemePadding}"/>
+                    <Button Content="Reset" Command="{Binding $parent[Window].DataContext.Platform.OnZoomReset}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Margin="{DynamicResource TextControlThemePadding}"/>
+                    <Button Content="AutoFit" Command="{Binding $parent[Window].DataContext.Platform.OnZoomAutoFit}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Margin="{DynamicResource TextControlThemePadding}"/>
+                </StackPanel>
             </TabItem>
         </TabControl>
         <TabControl>
             <TabItem Header="Options" Padding="0,0,0,0">
-                <ScrollViewer>
-                    <StackPanel>
-                        <TextBlock Text="PanButton" Margin="{DynamicResource TextControlThemePadding}"/>
-                        <ComboBox Items="{x:Static paz:ZoomBorder.ButtonNames}" SelectedItem="{Binding PanButton, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
-                        <TextBlock Text="Stretch" Margin="{DynamicResource TextControlThemePadding}"/>
-                        <ComboBox Items="{x:Static paz:ZoomBorder.StretchModes}" SelectedItem="{Binding Stretch, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
-                        <TextBlock Text="ZoomSpeed" Margin="{DynamicResource TextControlThemePadding}"/>
-                        <TextBox Text="{Binding ZoomSpeed, Mode=TwoWay}"/>
-                        <CheckBox Content="EnablePan" IsChecked="{Binding EnablePan}" HorizontalAlignment="Stretch"/>
-                        <CheckBox Content="EnableZoom" IsChecked="{Binding EnableZoom}" HorizontalAlignment="Stretch"/>
-                    </StackPanel>
-                </ScrollViewer>
+                <StackPanel>
+                    <TextBlock Text="PanButton" Margin="{DynamicResource TextControlThemePadding}"/>
+                    <ComboBox Items="{x:Static paz:ZoomBorder.ButtonNames}" SelectedItem="{Binding PanButton, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
+                    <TextBlock Text="Stretch" Margin="{DynamicResource TextControlThemePadding}"/>
+                    <ComboBox Items="{x:Static paz:ZoomBorder.StretchModes}" SelectedItem="{Binding Stretch, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
+                    <TextBlock Text="ZoomSpeed" Margin="{DynamicResource TextControlThemePadding}"/>
+                    <TextBox Text="{Binding ZoomSpeed, Mode=TwoWay}"/>
+                    <CheckBox Content="EnablePan" IsChecked="{Binding EnablePan}" HorizontalAlignment="Stretch"/>
+                    <CheckBox Content="EnableZoom" IsChecked="{Binding EnableZoom}" HorizontalAlignment="Stretch"/>
+                </StackPanel>
             </TabItem>
         </TabControl>
         <TabControl>
             <TabItem Header="Constrains" Padding="0,0,0,0">
-                <ScrollViewer>
-                    <StackPanel>
-                        <TextBlock Text="MinZoomX" Margin="{DynamicResource TextControlThemePadding}"/>
-                        <TextBox Text="{Binding MinZoomX, Mode=TwoWay}"/>
-                        <TextBlock Text="MaxZoomX" Margin="{DynamicResource TextControlThemePadding}"/>
-                        <TextBox Text="{Binding MaxZoomX, Mode=TwoWay}"/>
-                        <TextBlock Text="MinZoomY" Margin="{DynamicResource TextControlThemePadding}"/>
-                        <TextBox Text="{Binding MinZoomY, Mode=TwoWay}"/>
-                        <TextBlock Text="MaxZoomY" Margin="{DynamicResource TextControlThemePadding}"/>
-                        <TextBox Text="{Binding MaxZoomY, Mode=TwoWay}"/>
-                        <TextBlock Text="MinOffsetX" Margin="{DynamicResource TextControlThemePadding}"/>
-                        <TextBox Text="{Binding MinOffsetX, Mode=TwoWay}"/>
-                        <TextBlock Text="MinOffsetY" Margin="{DynamicResource TextControlThemePadding}"/>
-                        <TextBox Text="{Binding MinOffsetY, Mode=TwoWay}"/>
-                        <TextBlock Text="MaxOffsetX" Margin="{DynamicResource TextControlThemePadding}"/>
-                        <TextBox Text="{Binding MaxOffsetX, Mode=TwoWay}"/>
-                        <TextBlock Text="MaxOffsetY" Margin="{DynamicResource TextControlThemePadding}"/>
-                        <TextBox Text="{Binding MaxOffsetY, Mode=TwoWay}"/>
-                        <CheckBox Content="EnableConstrains" IsChecked="{Binding EnableConstrains}" HorizontalAlignment="Stretch"/>
-                    </StackPanel>
-                </ScrollViewer>
+                <StackPanel>
+                    <TextBlock Text="MinZoomX" Margin="{DynamicResource TextControlThemePadding}"/>
+                    <TextBox Text="{Binding MinZoomX, Mode=TwoWay}"/>
+                    <TextBlock Text="MaxZoomX" Margin="{DynamicResource TextControlThemePadding}"/>
+                    <TextBox Text="{Binding MaxZoomX, Mode=TwoWay}"/>
+                    <TextBlock Text="MinZoomY" Margin="{DynamicResource TextControlThemePadding}"/>
+                    <TextBox Text="{Binding MinZoomY, Mode=TwoWay}"/>
+                    <TextBlock Text="MaxZoomY" Margin="{DynamicResource TextControlThemePadding}"/>
+                    <TextBox Text="{Binding MaxZoomY, Mode=TwoWay}"/>
+                    <TextBlock Text="MinOffsetX" Margin="{DynamicResource TextControlThemePadding}"/>
+                    <TextBox Text="{Binding MinOffsetX, Mode=TwoWay}"/>
+                    <TextBlock Text="MinOffsetY" Margin="{DynamicResource TextControlThemePadding}"/>
+                    <TextBox Text="{Binding MinOffsetY, Mode=TwoWay}"/>
+                    <TextBlock Text="MaxOffsetX" Margin="{DynamicResource TextControlThemePadding}"/>
+                    <TextBox Text="{Binding MaxOffsetX, Mode=TwoWay}"/>
+                    <TextBlock Text="MaxOffsetY" Margin="{DynamicResource TextControlThemePadding}"/>
+                    <TextBox Text="{Binding MaxOffsetY, Mode=TwoWay}"/>
+                    <CheckBox Content="EnableConstrains" IsChecked="{Binding EnableConstrains}" HorizontalAlignment="Stretch"/>
+                </StackPanel>
             </TabItem>
         </TabControl>
     </StackPanel>

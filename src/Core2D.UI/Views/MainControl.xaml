@@ -109,13 +109,19 @@
                             </ScrollViewer>
                         </TabItem>
                         <TabItem x:Name="RendererOptionsTabItem" Header="Renderer" Padding="12,0,0,0">
-                            <renderer:ShapeRendererStateControl DataContext="{Binding PageState}" Margin="0,0,12,0"/>
+                            <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                                <renderer:ShapeRendererStateControl DataContext="{Binding PageState}" Margin="0,0,12,0"/>
+                            </ScrollViewer>
                         </TabItem>
                         <TabItem x:Name="ZoomOptionsTabItem" Header="Zoom" Padding="12,0,0,0">
-                            <containers:ZoomControl DataContext="{Binding CanvasPlatform.Zoom}" Margin="0,0,12,0"/>
+                            <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                                <containers:ZoomControl DataContext="{Binding CanvasPlatform.Zoom}" Margin="0,0,12,0"/>
+                            </ScrollViewer>
                         </TabItem>
                         <TabItem x:Name="ImagesOptionsTabItem" Header="Images" Padding="12,0,0,0">
-                            <containers:ImagesControl DataContext="{Binding Project}" Margin="0,0,12,0"/>
+                            <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                                <containers:ImagesControl DataContext="{Binding Project}" Margin="0,0,12,0"/>
+                            </ScrollViewer>
                         </TabItem>
                     </TabControl>
                 </TabItem>

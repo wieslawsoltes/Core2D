@@ -13,47 +13,37 @@
     <StackPanel>
         <TabControl>
             <TabItem Header="Point" Padding="0,0,0,0">
-                <ScrollViewer>
-                    <StackPanel>
-                        <CheckBox Content="DrawDecorators" IsChecked="{Binding DrawDecorators, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
-                        <CheckBox Content="DrawPoints" IsChecked="{Binding DrawPoints, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
-                        <TextBlock Text="PointSize" Margin="{DynamicResource TextControlThemePadding}"/>
-                        <TextBox Text="{Binding PointSize, Mode=TwoWay}"/>
-                    </StackPanel>
-                </ScrollViewer>
+                <StackPanel>
+                    <CheckBox Content="DrawDecorators" IsChecked="{Binding DrawDecorators, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
+                    <CheckBox Content="DrawPoints" IsChecked="{Binding DrawPoints, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
+                    <TextBlock Text="PointSize" Margin="{DynamicResource TextControlThemePadding}"/>
+                    <TextBox Text="{Binding PointSize, Mode=TwoWay}"/>
+                </StackPanel>
             </TabItem>
             <TabItem Header="Normal Style" Padding="12,0,0,0">
-                <ScrollViewer>
-                    <ContentControl Content="{Binding PointStyle}"/>
-                </ScrollViewer>
+                <ContentControl Content="{Binding PointStyle}"/>
             </TabItem>
             <TabItem Header="Selected Style" Padding="12,0,0,0">
-                <ScrollViewer>
-                    <ContentControl Content="{Binding SelectedPointStyle}"/>
-                </ScrollViewer>
+                <ContentControl Content="{Binding SelectedPointStyle}"/>
             </TabItem>
         </TabControl>
         <TabControl>
             <TabItem Header="Zoom" Padding="0,0,0,0">
-                <ScrollViewer>
-                    <StackPanel>
-                        <TextBlock Text="PanX" Margin="{DynamicResource TextControlThemePadding}"/>
-                        <TextBox Text="{Binding PanX, Mode=TwoWay}"/>
-                        <TextBlock Text="PanY" Margin="{DynamicResource TextControlThemePadding}"/>
-                        <TextBox Text="{Binding PanY, Mode=TwoWay}"/>
-                        <TextBlock Text="ZoomX" Margin="{DynamicResource TextControlThemePadding}"/>
-                        <TextBox Text="{Binding ZoomX, Mode=TwoWay}"/>
-                        <TextBlock Text="ZoomY" Margin="{DynamicResource TextControlThemePadding}"/>
-                        <TextBox Text="{Binding ZoomY, Mode=TwoWay}"/>
-                    </StackPanel>
-                </ScrollViewer>
+                <StackPanel>
+                    <TextBlock Text="PanX" Margin="{DynamicResource TextControlThemePadding}"/>
+                    <TextBox Text="{Binding PanX, Mode=TwoWay}"/>
+                    <TextBlock Text="PanY" Margin="{DynamicResource TextControlThemePadding}"/>
+                    <TextBox Text="{Binding PanY, Mode=TwoWay}"/>
+                    <TextBlock Text="ZoomX" Margin="{DynamicResource TextControlThemePadding}"/>
+                    <TextBox Text="{Binding ZoomX, Mode=TwoWay}"/>
+                    <TextBlock Text="ZoomY" Margin="{DynamicResource TextControlThemePadding}"/>
+                    <TextBox Text="{Binding ZoomY, Mode=TwoWay}"/>
+                </StackPanel>
             </TabItem>
         </TabControl>
         <TabControl>
             <TabItem Header="DrawShapeState" Padding="0,0,0,0">
-                <ScrollViewer>
-                    <ContentControl Content="{Binding DrawShapeState}"/>
-                </ScrollViewer>
+                <ContentControl Content="{Binding DrawShapeState}"/>
             </TabItem>
         </TabControl>
         <TabControl>
@@ -88,16 +78,12 @@
         </TabControl>
         <TabControl>
             <TabItem Header="SelectionStyle" Padding="0,0,0,0">
-                <ScrollViewer>
-                    <ContentControl Content="{Binding SelectionStyle}"/>
-                </ScrollViewer>
+                <ContentControl Content="{Binding SelectionStyle}"/>
             </TabItem>
         </TabControl>
         <TabControl>
             <TabItem Header="HelperStyle" Padding="0,0,0,0">
-                <ScrollViewer>
-                    <ContentControl Content="{Binding HelperStyle}"/>
-                </ScrollViewer>
+                <ContentControl Content="{Binding HelperStyle}"/>
             </TabItem>
         </TabControl>
     </StackPanel>
