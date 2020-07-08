@@ -12,8 +12,8 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <VersionPrefix>0.9.999</VersionPrefix>
-    <VersionSuffix></VersionSuffix>
+    <VersionPrefix>0.10.0</VersionPrefix>
+    <VersionSuffix>preview1</VersionSuffix>
     <Authors>Wiesław Šoltés</Authors>
     <Company>Wiesław Šoltés</Company>
     <Description>A multi-platform data driven 2D diagram editor.</Description>
