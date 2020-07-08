@@ -16,7 +16,7 @@
         <TabControl Grid.Row="1">
             <TabItem Header="Point">
                 <ContentControl Content="{Binding Point}"/>
-            </TabItem
+            </TabItem>
         </TabControl>
     </Grid>
 </UserControl>

@@ -25,7 +25,6 @@
             </StackPanel>
         </StackPanel>
         <TabControl Grid.Row="1">
-        <TabControl>
             <TabItem Header="StartTrigger">
                 <ContentControl Content="{Binding StartTrigger}"/>
             </TabItem>
