@@ -11,7 +11,7 @@
              d:DataContext="{x:Static Designer:DesignerContext.Rectangle}"
              d:DesignWidth="250" d:DesignHeight="400"
              x:DataType="Shapes:IRectangleShape" x:CompileBindings="True">
-    <Grid RowDefinitions="Auto,Auto,*">
+    <Grid RowDefinitions="Auto,*">
         <TabControl Grid.Row="0">
             <TabItem Header="Rectangle">
                 <StackPanel>
@@ -40,8 +40,6 @@
             <TabItem Header="BottomRight">
                 <ContentControl Content="{Binding BottomRight}" x:DataType="Shapes:ITextShape"/>
             </TabItem>
-        </TabControl>
-        <TabControl Grid.Row="2">
             <TabItem Header="Grid">
                 <StackPanel>
                     <CheckBox Content="IsGrid" IsChecked="{Binding IsGrid, Mode=TwoWay}" HorizontalAlignment="Stretch"/>

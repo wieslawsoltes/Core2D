@@ -12,18 +12,24 @@
              d:DataContext="{x:Static Designer:DesignerContext.Point}"
              d:DesignWidth="250" d:DesignHeight="400"
              x:DataType="Shapes:IPointShape" x:CompileBindings="True">
-    <StackPanel>
-        <TextBlock Text="Name" Margin="{DynamicResource TextControlThemePadding}"/>
-        <TextBox Text="{Binding Name, Mode=TwoWay}" x:DataType="Core:IObservableObject"/>
-        <TextBlock Text="X" Margin="{DynamicResource TextControlThemePadding}"/>
-        <TextBox Text="{Binding X, Mode=TwoWay}"/>
-        <TextBlock Text="Y" Margin="{DynamicResource TextControlThemePadding}"/>
-        <TextBox Text="{Binding Y, Mode=TwoWay}"/>
-        <TextBlock Text="Alignment" Margin="{DynamicResource TextControlThemePadding}"/>
-        <ComboBox Items="{x:Static Editor:Enums.PointAlignmentValues}" SelectedItem="{Binding Alignment, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
-        <TextBlock Text="State" Margin="{DynamicResource TextControlThemePadding}"/>
-        <ContentControl Content="{Binding State}" x:DataType="Shapes:IBaseShape"/>
-        <!--<TextBlock Text="Data" Margin="{DynamicResource TextControlThemePadding}"/>
-        <ContentControl Content="{Binding Data}" x:DataType="Shapes:IBaseShape"/>-->
-    </StackPanel>
+    <TabControl>
+        <TabItem Header="Point">
+            <StackPanel>
+                <TextBlock Text="Name" Margin="{DynamicResource TextControlThemePadding}"/>
+                <TextBox Text="{Binding Name, Mode=TwoWay}" x:DataType="Core:IObservableObject"/>
+                <TextBlock Text="X" Margin="{DynamicResource TextControlThemePadding}"/>
+                <TextBox Text="{Binding X, Mode=TwoWay}"/>
+                <TextBlock Text="Y" Margin="{DynamicResource TextControlThemePadding}"/>
+                <TextBox Text="{Binding Y, Mode=TwoWay}"/>
+                <TextBlock Text="Alignment" Margin="{DynamicResource TextControlThemePadding}"/>
+                <ComboBox Items="{x:Static Editor:Enums.PointAlignmentValues}" SelectedItem="{Binding Alignment, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
+            </StackPanel>
+        </TabItem>
+        <TabItem Header="Data">
+            <ContentControl Content="{Binding Data}" x:DataType="Shapes:IBaseShape"/>
+        </TabItem>
+        <TabItem Header="State">
+            <ContentControl Content="{Binding State}" x:DataType="Shapes:IBaseShape"/>
+        </TabItem>
+    </TabControl>
 </UserControl>
