@@ -8,6 +8,9 @@
             <Color x:Key="SystemBaseHighColor">#FF000000</Color>
         </Style.Resources>
     </Style>
+    <Style Selector="ListBoxItem">
+        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+    </Style>
     <Style Selector="TabControl">
         <Setter Property="Padding" Value="6,0,6,0"/>
     </Style>

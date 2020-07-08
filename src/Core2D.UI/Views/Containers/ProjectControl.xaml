@@ -56,7 +56,7 @@
                         <i:Interaction.Behaviors>
                             <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}"/>
                         </i:Interaction.Behaviors>
-                        <TextBlock Text="{Binding Name}">
+                        <TextBlock Text="{Binding Name}" Background="Transparent">
                             <TextBlock.ContextMenu>
                                 <ContextMenu>
                                     <MenuItem Header="_Add Page" Command="{Binding $parent[Window].DataContext.OnAddPage}" CommandParameter="{Binding Mode=OneWay}"/>
@@ -82,7 +82,7 @@
                             <iac:BindTagToVisualRootDataContextBehavior/>
                             <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}"/>
                         </i:Interaction.Behaviors>
-                        <TextBlock Text="{Binding Name}">
+                        <TextBlock Text="{Binding Name}" Background="Transparent">
                             <TextBlock.ContextMenu>
                                 <ContextMenu>
                                     <MenuItem Header="Te_mplate" Items="{Binding #root.Tag.Project.Templates}">
@@ -138,7 +138,7 @@
                             </ContextMenu>
                         </StackPanel.ContextMenu>
                         <CheckBox IsChecked="{Binding IsVisible, Mode=TwoWay}" MinWidth="0" VerticalAlignment="Center"/>
-                        <TextBlock Text="{Binding Name}" VerticalAlignment="Center"/>
+                        <TextBlock Text="{Binding Name}" VerticalAlignment="Center" Background="Transparent"/>
                     </StackPanel>
                 </DataTemplate>
             </TreeView.DataTemplates>

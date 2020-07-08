@@ -28,19 +28,19 @@
             </Border>
         </Grid>
         <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto" ColumnDefinitions="Auto,*" Grid.Row="1">
-            <TextBlock Text="Red" Margin="{DynamicResource TextControlThemePadding}" Grid.Row="0" Grid.Column="0"/>
+            <TextBlock Text="Red" Margin="{DynamicResource TextControlThemePadding}" VerticalAlignment="Center" Grid.Row="0" Grid.Column="0"/>
             <TextBlock Text="Green" Margin="{DynamicResource TextControlThemePadding}" Grid.Row="1" Grid.Column="0"/>
             <TextBlock Text="Blue" Margin="{DynamicResource TextControlThemePadding}" Grid.Row="2" Grid.Column="0"/>
             <TextBlock Text="Alpha" Margin="{DynamicResource TextControlThemePadding}" Grid.Row="3" Grid.Column="0"/>
-            <Slider Value="{Binding R}" Minimum="0" Maximum="255" TickFrequency="1" Grid.Row="0" Grid.Column="1"/>
-            <Slider Value="{Binding G}" Minimum="0" Maximum="255" TickFrequency="1" Grid.Row="1" Grid.Column="1"/>
-            <Slider Value="{Binding B}" Minimum="0" Maximum="255" TickFrequency="1" Grid.Row="2" Grid.Column="1"/>
-            <Slider Value="{Binding A}" Minimum="0" Maximum="255" TickFrequency="1" Grid.Row="3" Grid.Column="1"/>
+            <Slider Value="{Binding R}" Minimum="0" Maximum="255" TickFrequency="1" Margin="{DynamicResource TextControlThemePadding}" Grid.Row="0" Grid.Column="1"/>
+            <Slider Value="{Binding G}" Minimum="0" Maximum="255" TickFrequency="1" Margin="{DynamicResource TextControlThemePadding}" Grid.Row="1" Grid.Column="1"/>
+            <Slider Value="{Binding B}" Minimum="0" Maximum="255" TickFrequency="1" Margin="{DynamicResource TextControlThemePadding}" Grid.Row="2" Grid.Column="1"/>
+            <Slider Value="{Binding A}" Minimum="0" Maximum="255" TickFrequency="1" Margin="{DynamicResource TextControlThemePadding}" Grid.Row="3" Grid.Column="1"/>
             <Grid ColumnDefinitions="25*,25*,25*,25*" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2">
-                <TextBox Text="{Binding R, Mode=TwoWay}" Grid.Column="0"/>
-                <TextBox Text="{Binding G, Mode=TwoWay}" Grid.Column="1"/>
-                <TextBox Text="{Binding B, Mode=TwoWay}" Grid.Column="2"/>
-                <TextBox Text="{Binding A, Mode=TwoWay}" Grid.Column="3"/>
+                <TextBox Text="{Binding R, Mode=TwoWay}" TextAlignment="Center" Margin="{DynamicResource TextControlThemePadding}" MinWidth="40" Grid.Column="0"/>
+                <TextBox Text="{Binding G, Mode=TwoWay}" TextAlignment="Center" Margin="{DynamicResource TextControlThemePadding}" MinWidth="40" Grid.Column="1"/>
+                <TextBox Text="{Binding B, Mode=TwoWay}" TextAlignment="Center" Margin="{DynamicResource TextControlThemePadding}" MinWidth="40" Grid.Column="2"/>
+                <TextBox Text="{Binding A, Mode=TwoWay}" TextAlignment="Center" Margin="{DynamicResource TextControlThemePadding}" MinWidth="40" Grid.Column="3"/>
             </Grid>
         </Grid>
         <!--

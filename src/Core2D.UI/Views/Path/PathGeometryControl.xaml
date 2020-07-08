@@ -28,10 +28,10 @@
                     </TreeView.Styles>
                     <TreeView.DataTemplates>
                         <TreeDataTemplate DataType="Path:IPathFigure" ItemsSource="{Binding Segments}">
-                            <TextBlock Text="{Binding Mode=OneWay, Converter={StaticResource ObjectToTypeStringConverter}}"/>
+                            <TextBlock Text="{Binding Mode=OneWay, Converter={StaticResource ObjectToTypeStringConverter}}" Background="Transparent"/>
                         </TreeDataTemplate>
                         <DataTemplate DataType="Path:IPathSegment">
-                            <TextBlock Text="{Binding Mode=OneWay, Converter={StaticResource ObjectToTypeStringConverter}}"/>
+                            <TextBlock Text="{Binding Mode=OneWay, Converter={StaticResource ObjectToTypeStringConverter}}" Background="Transparent"/>
                         </DataTemplate>
                     </TreeView.DataTemplates>
                 </TreeView>
