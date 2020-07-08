@@ -11,26 +11,28 @@
              mc:Ignorable="d"
              d:DataContext="{x:Static Designer:DesignerContext.PathFigure}"
              d:DesignWidth="250" d:DesignHeight="400">
-    <StackPanel>
-        <CheckBox Content="IsFilled" IsChecked="{Binding IsFilled, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
-        <CheckBox Content="IsClosed" IsChecked="{Binding IsClosed, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
-        <TabControl>
+    <Grid RowDefinitions="Auto,*">
+        <StackPanel Grid.Row="0">
+            <CheckBox Content="IsFilled" IsChecked="{Binding IsFilled, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
+            <CheckBox Content="IsClosed" IsChecked="{Binding IsClosed, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
+        </StackPanel>
+        <TabControl Grid.Row="1">
             <TabItem Header="StartPoint">
                 <ContentControl Content="{Binding StartPoint}"/>
             </TabItem>
             <TabItem Header="Segments">
-            <ListBox Items="{Binding Segments}">
-                <ListBox.DataTemplates>
-                    <DataTemplate>
-                        <TextBlock Text="{Binding Mode=OneWay, Converter={StaticResource ObjectToTypeStringConverter}}" Background="Transparent">
-                            <i:Interaction.Behaviors>
-                                <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}"/>
-                            </i:Interaction.Behaviors>
-                        </TextBlock>
-                    </DataTemplate>
-                </ListBox.DataTemplates>
-            </ListBox>
+                <ListBox Items="{Binding Segments}">
+                    <ListBox.DataTemplates>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Mode=OneWay, Converter={StaticResource ObjectToTypeStringConverter}}" Background="Transparent">
+                                <i:Interaction.Behaviors>
+                                    <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}"/>
+                                </i:Interaction.Behaviors>
+                            </TextBlock>
+                        </DataTemplate>
+                    </ListBox.DataTemplates>
+                </ListBox>
             </TabItem>
         </TabControl>
-    </StackPanel>
+    </Grid>
 </UserControl>

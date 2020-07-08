@@ -9,15 +9,17 @@
              mc:Ignorable="d"
              d:DataContext="{x:Static Designer:DesignerContext.ArcSegment}"
              d:DesignWidth="250" d:DesignHeight="400">
-    <StackPanel>
-        <CheckBox Content="IsStroked" IsChecked="{Binding IsStroked, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
-        <CheckBox Content="IsSmoothJoin" IsChecked="{Binding IsSmoothJoin, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
-        <TextBlock Text="RotationAngle" Margin="{DynamicResource TextControlThemePadding}"/>
-        <TextBox Text="{Binding RotationAngle, Mode=TwoWay}"/>
-        <CheckBox Content="IsLargeArc" IsChecked="{Binding IsLargeArc, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
-        <TextBlock Text="SweepDirection" Margin="{DynamicResource TextControlThemePadding}"/>
-        <ComboBox Items="{x:Static Editor:Enums.XSweepDirectionValues}" SelectedItem="{Binding SweepDirection, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
-        <TabControl>
+    <Grid RowDefinitions="Auto,*">
+        <StackPanel Grid.Row="0">
+            <CheckBox Content="IsStroked" IsChecked="{Binding IsStroked, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
+            <CheckBox Content="IsSmoothJoin" IsChecked="{Binding IsSmoothJoin, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
+            <TextBlock Text="RotationAngle" Margin="{DynamicResource TextControlThemePadding}"/>
+            <TextBox Text="{Binding RotationAngle, Mode=TwoWay}"/>
+            <CheckBox Content="IsLargeArc" IsChecked="{Binding IsLargeArc, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
+            <TextBlock Text="SweepDirection" Margin="{DynamicResource TextControlThemePadding}"/>
+            <ComboBox Items="{x:Static Editor:Enums.XSweepDirectionValues}" SelectedItem="{Binding SweepDirection, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
+        </StackPanel>
+        <TabControl Grid.Row="1">
             <TabItem Header="Point">
                 <ContentControl Content="{Binding Point}"/>
             </TabItem>
@@ -25,5 +27,5 @@
                 <ContentControl Content="{Binding Size}"/>
             </TabItem>
         </TabControl>
-    </StackPanel>
+    </Grid>
 </UserControl>

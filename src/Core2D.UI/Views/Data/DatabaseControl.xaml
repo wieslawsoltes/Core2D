@@ -15,12 +15,12 @@
              d:DataContext="{x:Static Designer:DesignerContext.Database}"
              d:DesignWidth="250" d:DesignHeight="400"
              x:DataType="Data:IDatabase" x:CompileBindings="True">
-    <StackPanel>
-        <StackPanel>
+    <Grid RowDefinitions="Auto,*">
+        <StackPanel Grid.Row="0">
             <TextBlock Text="Name" Margin="{DynamicResource TextControlThemePadding}"/>
             <TextBox Text="{Binding Name, Mode=TwoWay}" x:DataType="Core:IObservableObject"/>
         </StackPanel>
-        <TabControl>
+        <TabControl Grid.Row="1">
             <TabItem Header="Records">
                 <Grid RowDefinitions="Auto,*">
                     <Menu Grid.Row="0" HorizontalAlignment="Right">
@@ -111,5 +111,5 @@
                 -->
             </TabItem>
         </TabControl>
-    </StackPanel>
+    </Grid>
 </UserControl>

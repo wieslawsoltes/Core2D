@@ -13,10 +13,12 @@
              mc:Ignorable="d"
              d:DataContext="{x:Static Designer:DesignerContext.PathGeometry}"
              d:DesignWidth="250" d:DesignHeight="400">
-    <StackPanel>
-        <TextBlock Text="FillRule" Margin="{DynamicResource TextControlThemePadding}"/>
-        <ComboBox Items="{x:Static Editor:Enums.XFillRuleValues}" SelectedItem="{Binding FillRule, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
-        <TabControl>
+    <Grid RowDefinitions="Auto,*">
+        <StackPanel Grid.Row="0">
+            <TextBlock Text="FillRule" Margin="{DynamicResource TextControlThemePadding}"/>
+            <ComboBox Items="{x:Static Editor:Enums.XFillRuleValues}" SelectedItem="{Binding FillRule, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
+        </StackPanel>
+        <TabControl Grid.Row="1">
             <TabItem Header="Figures">
                 <TreeView x:Name="tree" Items="{Binding Figures}">
                     <TreeView.Styles>
@@ -38,5 +40,5 @@
                 <ContentControl Content="{Binding #tree.SelectedItem}"/>
             </TabItem>
         </TabControl>
-    </StackPanel>
+    </Grid>
 </UserControl>

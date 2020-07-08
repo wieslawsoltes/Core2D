@@ -133,16 +133,10 @@
                 <TabItem x:Name="PageTabItem" Header="Page">
                     <containers:ContainerControl DataContext="{Binding Project.CurrentContainer}" Margin="0,0,12,0"/>
                 </TabItem>
-                <TabItem x:Name="LayersTabItem" Header="Layers">
-                    <containers:LayersControl DataContext="{Binding Project.CurrentContainer}" Margin="0,0,12,0"/>
-                </TabItem>
                 <TabItem x:Name="LibrariesTabItem" Header="Libraries">
                     <TabControl x:Name="LibrariesTabControl">
                         <TabItem x:Name="StylesTabItem" Header="Styles">
                             <containers:StylesControl DataContext="{Binding Project}" Margin="0,0,12,0"/>
-                        </TabItem>
-                        <TabItem x:Name="TemplatesTabItem" Header="Templates">
-                            <containers:TemplatesControl DataContext="{Binding Project}" Margin="0,0,12,0"/>
                         </TabItem>
                         <TabItem x:Name="GroupsTabItem" Header="Groups">
                             <containers:GroupsControl DataContext="{Binding Project}" Margin="0,0,12,0"/>
@@ -150,8 +144,14 @@
                         <TabItem x:Name="DataTabItem" Header="Data">
                             <containers:DatabasesControl DataContext="{Binding Project}" Margin="0,0,12,0"/>
                         </TabItem>
+                        <TabItem x:Name="TemplatesTabItem" Header="Templates">
+                            <containers:TemplatesControl DataContext="{Binding Project}" Margin="0,0,12,0"/>
+                        </TabItem>
                     </TabControl>
                 </TabItem>
+                <!--<TabItem x:Name="LayersTabItem" Header="Layers">
+                    <containers:LayersControl DataContext="{Binding Project.CurrentContainer}" Margin="0,0,12,0"/>
+                </TabItem>-->
                 <TabItem x:Name="ScriptsTabItem" Header="Scripts">
                     <Grid RowDefinitions="50*,50*">
                         <scripting:ScriptsControl DataContext="{Binding Project}" Grid.Row="0" Margin="0,0,12,0"/>

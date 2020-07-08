@@ -8,10 +8,12 @@
              mc:Ignorable="d"
              d:DataContext="{x:Static Designer:DesignerContext.CubicBezierSegment}"
              d:DesignWidth="250" d:DesignHeight="400">
-    <StackPanel>
-        <CheckBox Content="IsStroked" IsChecked="{Binding IsStroked, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
-        <CheckBox Content="IsSmoothJoin" IsChecked="{Binding IsSmoothJoin, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
-        <TabControl>
+    <Grid RowDefinitions="Auto,*">
+        <StackPanel Grid.Row="0">
+            <CheckBox Content="IsStroked" IsChecked="{Binding IsStroked, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
+            <CheckBox Content="IsSmoothJoin" IsChecked="{Binding IsSmoothJoin, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
+        </StackPanel>
+        <TabControl Grid.Row="1">
             <TabItem Header="Point1">
                 <ContentControl Content="{Binding Point1}"/>
             </TabItem>
@@ -22,5 +24,5 @@
                 <ContentControl Content="{Binding Point3}"/>
             </TabItem>
         </TabControl>
-    </StackPanel>
+    </Grid>
 </UserControl>

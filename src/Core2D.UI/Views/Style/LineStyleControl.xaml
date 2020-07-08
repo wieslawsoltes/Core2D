@@ -12,8 +12,8 @@
              d:DataContext="{x:Static Designer:DesignerContext.LineStyle}"
              d:DesignWidth="250" d:DesignHeight="400"
              x:DataType="Style:ILineStyle" x:CompileBindings="True">
-    <StackPanel>
-        <StackPanel>
+    <Grid RowDefinitions="Auto,*">
+        <StackPanel Grid.Row="0">
             <TextBlock Text="Name" Margin="{DynamicResource TextControlThemePadding}"/>
             <TextBox Text="{Binding Name, Mode=TwoWay}" x:DataType="Core:IObservableObject"/>
             <CheckBox Content="IsCurved" IsChecked="{Binding IsCurved, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
@@ -22,10 +22,10 @@
             <TextBlock Text="CurveOrientation" Margin="{DynamicResource TextControlThemePadding}"/>
             <ComboBox Items="{x:Static Editor:Enums.CurveOrientationValues}" SelectedItem="{Binding CurveOrientation, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
         </StackPanel>
-        <TabControl>
+        <TabControl Grid.Row="1">
             <TabItem Header="FixedLength">
                 <ContentControl Content="{Binding FixedLength}"/>
             </TabItem>
         </TabControl>
-    </StackPanel>
+    </Grid>
 </UserControl>

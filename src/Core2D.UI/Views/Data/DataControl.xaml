@@ -13,10 +13,16 @@
              d:DataContext="{x:Static Designer:DesignerContext.Data}"
              d:DesignWidth="250" d:DesignHeight="400"
              x:DataType="Data:IContext" x:CompileBindings="True">
-    <StackPanel>
-        <TabControl IsVisible="{Binding !!Record}">
+    <Grid RowDefinitions="50*,6,50*">
+        <TabControl Grid.Row="0">
+            <TabItem Header="Properties">
+                <data:PropertiesControl/>
+            </TabItem>
+        </TabControl>
+        <GridSplitter ResizeDirection="Rows" ResizeBehavior="PreviousAndNext" Background="Transparent" Height="6" Grid.Column="1" Grid.Row="1"/>
+        <TabControl Grid.Row="1">
             <TabItem Header="Record">
-                <Grid RowDefinitions="Auto,*" ColumnDefinitions="*">
+                <Grid RowDefinitions="Auto,*" ColumnDefinitions="*" IsVisible="{Binding !!Record}">
                     <Menu Grid.Row="0" HorizontalAlignment="Right" IsVisible="{Binding !!Record}">
                         <MenuItem Header="&#727;" Command="{Binding $parent[Window].DataContext.OnResetRecord}" CommandParameter="{Binding}" IsVisible="{Binding !!Record}" x:CompileBindings="False"/>
                     </Menu>
@@ -24,10 +30,5 @@
                 </Grid>
             </TabItem>
         </TabControl>
-        <TabControl>
-            <TabItem Header="Properties">
-                <data:PropertiesControl/>
-            </TabItem>
-        </TabControl>
-    </StackPanel>
+    </Grid>
 </UserControl>

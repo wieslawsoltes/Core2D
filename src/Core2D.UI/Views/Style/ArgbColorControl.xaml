@@ -13,8 +13,8 @@
     <UserControl.Resources>
         <converters:ArgbColorToBrushMultiConverter x:Key="ArgbColorToBrushMultiConverter"/>
     </UserControl.Resources>
-    <StackPanel>
-        <Grid Height="30" Margin="{DynamicResource TextControlThemePadding}">
+    <Grid RowDefinitions="Auto,*">
+        <Grid Height="30" Margin="{DynamicResource TextControlThemePadding}" Grid.Row="0">
             <Border BorderThickness="0" CornerRadius="2" Background="{DynamicResource ColorCheckerBoard}"/>
             <Border BorderThickness="0" CornerRadius="2">
                 <Border.Background>
@@ -27,7 +27,7 @@
                 </Border.Background>
             </Border>
         </Grid>
-        <TabControl>
+        <TabControl Grid.Row="1">
             <TabItem Header="Alpha">
                 <StackPanel>
                     <TextBox Text="{Binding A, Mode=TwoWay}"/>
@@ -53,5 +53,5 @@
                 </StackPanel>
             </TabItem>
         </TabControl>
-    </StackPanel>
+    </Grid>
 </UserControl>

@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="Core2D.UI.Views.Style.ArrowStyleControl"
+<UserControl x:Class="Core2D.UI.Views.Style.ArrowStyleControl"
              xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -13,8 +13,8 @@
              d:DataContext="{x:Static Designer:DesignerContext.ArrowStyle}"
              d:DesignWidth="250" d:DesignHeight="400"
              x:DataType="Style:IArrowStyle" x:CompileBindings="True">
-    <StackPanel>
-        <StackPanel>
+    <Grid RowDefinitions="Auto,*">
+        <StackPanel Grid.Row="0">
             <TextBlock Text="Name" Margin="{DynamicResource TextControlThemePadding}"/>
             <TextBox Text="{Binding Name, Mode=TwoWay}" x:DataType="Core:IObservableObject"/>
             <TextBlock Text="Arrow Type" Margin="{DynamicResource TextControlThemePadding}"/>
@@ -34,7 +34,7 @@
             <TextBlock Text="Dash Offset" Margin="{DynamicResource TextControlThemePadding}"/>
             <TextBox Text="{Binding DashOffset, Mode=TwoWay}" x:DataType="Style:IBaseStyle"/>
         </StackPanel>
-        <TabControl>
+        <TabControl Grid.Row="1">
             <TabItem Header="Stroke">
                 <ContentControl Content="{Binding Stroke}" x:DataType="Style:IBaseStyle"/>
             </TabItem>
@@ -42,5 +42,5 @@
                 <ContentControl Content="{Binding Fill}" x:DataType="Style:IBaseStyle"/>
             </TabItem>
         </TabControl>
-    </StackPanel>
+    </Grid>
 </UserControl>
