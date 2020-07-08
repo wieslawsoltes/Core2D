@@ -15,11 +15,11 @@
              d:DataContext="{x:Static Designer:DesignerContext.Database}"
              d:DesignWidth="250" d:DesignHeight="400"
              x:DataType="Data:IDatabase" x:CompileBindings="True">
-    <Grid RowDefinitions="Auto,*">
-        <StackPanel Grid.Row="0">
+    <Grid RowDefinitions="Auto,*,6,Auto">
+        <!--<StackPanel Grid.Row="0">
             <TextBlock Text="Name" Margin="{DynamicResource TextControlThemePadding}"/>
             <TextBox Text="{Binding Name, Mode=TwoWay}" x:DataType="Core:IObservableObject"/>
-        </StackPanel>
+        </StackPanel>-->
         <TabControl Grid.Row="1">
             <TabItem Header="Records">
                 <Grid RowDefinitions="Auto,*">
@@ -49,9 +49,6 @@
                         </DataGrid.KeyBindings>
                     </DataGrid>
                 </Grid>
-            </TabItem>
-            <TabItem Header="Current Record">
-                <ContentControl Content="{Binding CurrentRecord}"/>
             </TabItem>
             <TabItem Header="Columns">
                 <Grid RowDefinitions="Auto,*">
@@ -109,6 +106,12 @@
                     </ScrollViewer>
                 </Grid>
                 -->
+            </TabItem>
+        </TabControl>
+        <GridSplitter ResizeDirection="Rows" ResizeBehavior="PreviousAndNext" Background="Transparent" Height="6" Grid.Column="1" Grid.Row="2"/>
+        <TabControl Grid.Row="3" IsVisible="{Binding !!CurrentRecord}">
+            <TabItem Header="Current Record">
+                <ContentControl Content="{Binding CurrentRecord}"/>
             </TabItem>
         </TabControl>
     </Grid>

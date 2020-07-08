@@ -20,7 +20,7 @@
             </TabItem>
         </TabControl>
         <GridSplitter ResizeDirection="Rows" ResizeBehavior="PreviousAndNext" Background="Transparent" Height="6" Grid.Column="1" Grid.Row="1"/>
-        <TabControl Grid.Row="1">
+        <TabControl Grid.Row="2">
             <TabItem Header="Record">
                 <Grid RowDefinitions="Auto,*" ColumnDefinitions="*" IsVisible="{Binding !!Record}">
                     <Menu Grid.Row="0" HorizontalAlignment="Right" IsVisible="{Binding !!Record}">
