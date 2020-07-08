@@ -26,26 +26,26 @@
             <TextBox Text="{Binding DashOffset, Mode=TwoWay}" x:DataType="Style:IBaseStyle"/>
         </StackPanel>
         <TabControl Grid.Row="1">
-            <TabItem Header="Stroke" Padding="0,0,0,0">
+            <TabItem Header="Stroke">
                 <ContentControl Content="{Binding Stroke}" x:DataType="Style:IBaseStyle"/>
             </TabItem>
-            <TabItem Header="Fill" Padding="12,0,0,0">
+            <TabItem Header="Fill">
                 <ContentControl Content="{Binding Fill}" x:DataType="Style:IBaseStyle"/>
             </TabItem>
         </TabControl>
         <TabControl Grid.Row="2">
-            <TabItem Header="Text" Padding="0,0,0,0">
+            <TabItem Header="Text">
                 <ContentControl Content="{Binding TextStyle}"/>
             </TabItem>
-            <TabItem Header="Line" Padding="12,0,0,0">
+            <TabItem Header="Line">
                 <ContentControl Content="{Binding LineStyle}"/>
             </TabItem>
-            <TabItem Header="Arrow" Padding="12,0,0,0">
+            <TabItem Header="Arrow">
                 <TabControl>
-                    <TabItem Header="Start" Padding="0,0,0,0">
+                    <TabItem Header="Start">
                         <ContentControl Content="{Binding StartArrowStyle}"/>
                     </TabItem>
-                    <TabItem Header="End" Padding="12,0,0,0">
+                    <TabItem Header="End">
                         <ContentControl Content="{Binding EndArrowStyle}"/>
                     </TabItem>
                 </TabControl>

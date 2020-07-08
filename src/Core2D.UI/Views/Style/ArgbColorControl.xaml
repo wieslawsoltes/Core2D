@@ -28,25 +28,25 @@
             </Border>
         </Grid>
         <TabControl>
-            <TabItem Header="Alpha" Padding="0,0,0,0">
+            <TabItem Header="Alpha">
                 <StackPanel>
                     <TextBox Text="{Binding A, Mode=TwoWay}"/>
                     <Slider Value="{Binding A}" Minimum="0" Maximum="255" TickFrequency="1"/>
                 </StackPanel>
             </TabItem>
-            <TabItem Header="Red" Padding="12,0,0,0">
+            <TabItem Header="Red">
                 <StackPanel>
                     <TextBox Text="{Binding R, Mode=TwoWay}"/>
                     <Slider Value="{Binding R}" Minimum="0" Maximum="255" TickFrequency="1"/>
                 </StackPanel>
             </TabItem>
-            <TabItem Header="Green" Padding="12,0,0,0">
+            <TabItem Header="Green">
                 <StackPanel>
                     <TextBox Text="{Binding G, Mode=TwoWay}"/>
                     <Slider Value="{Binding G}" Minimum="0" Maximum="255" TickFrequency="1"/>
                 </StackPanel>
             </TabItem>
-            <TabItem Header="Blue" Padding="12,0,0,0">
+            <TabItem Header="Blue">
                 <StackPanel>
                     <TextBox Text="{Binding B, Mode=TwoWay}"/>
                     <Slider Value="{Binding B}" Minimum="0" Maximum="255" TickFrequency="1"/>

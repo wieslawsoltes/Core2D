@@ -21,16 +21,16 @@
             <ContentControl Content="{Binding Background}"/>
         </StackPanel>
         <TabControl Grid.Row="1">
-            <TabItem Header="Layers" Padding="0,0,0,0">
+            <TabItem Header="Layers">
                 <containers:LayersControl/>
             </TabItem>
-            <TabItem Header="Shapes" Padding="12,0,0,0">
+            <TabItem Header="Shapes">
                 <containers:ShapesControl/>
             </TabItem>
-            <TabItem Header="Data" Padding="12,0,0,0">
+            <TabItem Header="Data">
                 <ContentControl Content="{Binding Data}"/>
             </TabItem>
-            <TabItem Header="Template" Padding="12,0,0,0">
+            <TabItem Header="Template">
                 <ContentControl Content="{Binding Template}"/>
             </TabItem>
         </TabControl>

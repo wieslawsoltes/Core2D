@@ -81,15 +81,15 @@
         <Grid ColumnDefinitions="250,6,*,6,250" RowDefinitions="Auto,*,Auto,Auto" IsVisible="{Binding Project, Converter={x:Static ObjectConverters.IsNotNull}}">
             <views:EditorMenuControl Grid.Column="0" Grid.ColumnSpan="5" Grid.Row="0"/>
             <TabControl x:Name="LeftTabControl" Grid.Column="0" Grid.Row="1">
-                <TabItem x:Name="ProjectTabItem" Header="Project" Padding="0,0,0,0">
+                <TabItem x:Name="ProjectTabItem" Header="Project">
                     <containers:ProjectControl DataContext="{Binding Project}"/>
                 </TabItem>
-                <TabItem x:Name="PropertiesTabItem" Header="Properties" Padding="12,0,0,0">
+                <TabItem x:Name="PropertiesTabItem" Header="Properties">
                     <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
                         <ContentControl Content="{Binding PageState.SelectedShapes, Converter={StaticResource FirstSelectedItemValueConverter}}"/>
                     </ScrollViewer>
                 </TabItem>
-                <TabItem x:Name="StyleTabItem" Header="Style" Padding="12,0,0,0">
+                <TabItem x:Name="StyleTabItem" Header="Style">
                     <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
                         <ContentControl Margin="0,0,12,0">
                             <ContentControl.Content>
@@ -101,24 +101,24 @@
                         </ContentControl>
                     </ScrollViewer>
                 </TabItem>
-                <TabItem x:Name="OptionsTabItem" Header="Options" Padding="12,0,0,0">
+                <TabItem x:Name="OptionsTabItem" Header="Options">
                     <TabControl x:Name="OptionsTabControl">
-                        <TabItem x:Name="ProjectOptionsTabItem" Header="Project" Padding="0,0,0,0">
+                        <TabItem x:Name="ProjectOptionsTabItem" Header="Project">
                             <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
                                 <ContentControl Content="{Binding Project.Options}" Margin="0,0,12,0"/>
                             </ScrollViewer>
                         </TabItem>
-                        <TabItem x:Name="RendererOptionsTabItem" Header="Renderer" Padding="12,0,0,0">
+                        <TabItem x:Name="RendererOptionsTabItem" Header="Renderer">
                             <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
                                 <renderer:ShapeRendererStateControl DataContext="{Binding PageState}" Margin="0,0,12,0"/>
                             </ScrollViewer>
                         </TabItem>
-                        <TabItem x:Name="ZoomOptionsTabItem" Header="Zoom" Padding="12,0,0,0">
+                        <TabItem x:Name="ZoomOptionsTabItem" Header="Zoom">
                             <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
                                 <containers:ZoomControl DataContext="{Binding CanvasPlatform.Zoom}" Margin="0,0,12,0"/>
                             </ScrollViewer>
                         </TabItem>
-                        <TabItem x:Name="ImagesOptionsTabItem" Header="Images" Padding="12,0,0,0">
+                        <TabItem x:Name="ImagesOptionsTabItem" Header="Images">
                             <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
                                 <containers:ImagesControl DataContext="{Binding Project}" Margin="0,0,12,0"/>
                             </ScrollViewer>
@@ -130,29 +130,29 @@
             <views:PageControl x:Name="Page" Grid.Column="2" Grid.Row="1"/>
             <GridSplitter x:Name="RightGridSplitter" ResizeDirection="Columns" ResizeBehavior="PreviousAndNext" Background="Transparent" Width="6" Grid.Column="3" Grid.Row="1"/>
             <TabControl x:Name="RightTabControl" Grid.Column="4" Grid.Row="1">
-                <TabItem x:Name="PageTabItem" Header="Page" Padding="0,0,0,0">
+                <TabItem x:Name="PageTabItem" Header="Page">
                     <containers:ContainerControl DataContext="{Binding Project.CurrentContainer}" Margin="0,0,12,0"/>
                 </TabItem>
-                <TabItem x:Name="LayersTabItem" Header="Layers" Padding="12,0,0,0">
+                <TabItem x:Name="LayersTabItem" Header="Layers">
                     <containers:LayersControl DataContext="{Binding Project.CurrentContainer}" Margin="0,0,12,0"/>
                 </TabItem>
-                <TabItem x:Name="LibrariesTabItem" Header="Libraries" Padding="12,0,0,0">
+                <TabItem x:Name="LibrariesTabItem" Header="Libraries">
                     <TabControl x:Name="LibrariesTabControl">
-                        <TabItem x:Name="StylesTabItem" Header="Styles" Padding="0,0,0,0">
+                        <TabItem x:Name="StylesTabItem" Header="Styles">
                             <containers:StylesControl DataContext="{Binding Project}" Margin="0,0,12,0"/>
                         </TabItem>
-                        <TabItem x:Name="TemplatesTabItem" Header="Templates" Padding="12,0,0,0">
+                        <TabItem x:Name="TemplatesTabItem" Header="Templates">
                             <containers:TemplatesControl DataContext="{Binding Project}" Margin="0,0,12,0"/>
                         </TabItem>
-                        <TabItem x:Name="GroupsTabItem" Header="Groups" Padding="12,0,0,0">
+                        <TabItem x:Name="GroupsTabItem" Header="Groups">
                             <containers:GroupsControl DataContext="{Binding Project}" Margin="0,0,12,0"/>
                         </TabItem>
-                        <TabItem x:Name="DataTabItem" Header="Data" Padding="12,0,0,0">
+                        <TabItem x:Name="DataTabItem" Header="Data">
                             <containers:DatabasesControl DataContext="{Binding Project}" Margin="0,0,12,0"/>
                         </TabItem>
                     </TabControl>
                 </TabItem>
-                <TabItem x:Name="ScriptsTabItem" Header="Scripts" Padding="12,0,0,0">
+                <TabItem x:Name="ScriptsTabItem" Header="Scripts">
                     <Grid RowDefinitions="50*,50*">
                         <scripting:ScriptsControl DataContext="{Binding Project}" Grid.Row="0" Margin="0,0,12,0"/>
                         <scripting:ScriptControl DataContext="{Binding Project.CurrentScript}" Grid.Row="1" Margin="0,0,12,0"/>

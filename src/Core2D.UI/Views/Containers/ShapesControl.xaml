@@ -45,7 +45,7 @@
     </Grid>
     <!--
     <TabControl>
-        <TabItem Header="Selected Shape" Padding="0,0,0,0">
+        <TabItem Header="Selected Shape">
             <ContentControl Content="{Binding CurrentShape}"/>
         </TabItem>
     </TabControl>

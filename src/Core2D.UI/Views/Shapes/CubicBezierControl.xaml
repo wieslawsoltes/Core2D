@@ -13,7 +13,7 @@
              x:DataType="Shapes:ICubicBezierShape" x:CompileBindings="True">
     <Grid RowDefinitions="Auto,*">
         <TabControl Grid.Row="0">
-            <TabItem Header="CubicBezier" Padding="0,0,0,0">
+            <TabItem Header="CubicBezier">
                 <StackPanel>
                     <TextBlock Text="Name" Margin="{DynamicResource TextControlThemePadding}"/>
                     <TextBox Text="{Binding Name, Mode=TwoWay}" x:DataType="Core:IObservableObject"/>
@@ -21,27 +21,27 @@
                     <CheckBox Content="IsFilled" IsChecked="{Binding IsFilled, Mode=TwoWay}" x:DataType="Core:IDrawable" HorizontalAlignment="Stretch"/>
                 </StackPanel>
             </TabItem>
-            <TabItem Header="Data" Padding="12,0,0,0">
+            <TabItem Header="Data">
                 <ContentControl Content="{Binding Data}" x:DataType="Shapes:IBaseShape"/>
             </TabItem>
-            <TabItem Header="Style" Padding="12,0,0,0">
+            <TabItem Header="Style">
                 <ContentControl Content="{Binding Style}" x:DataType="Core:IDrawable"/>
             </TabItem>
-            <TabItem Header="State" Padding="12,0,0,0">
+            <TabItem Header="State">
                 <ContentControl Content="{Binding State}" x:DataType="Shapes:IBaseShape"/>
             </TabItem>
         </TabControl>
         <TabControl Grid.Row="1">
-            <TabItem Header="Point1" Padding="0,0,0,0">
+            <TabItem Header="Point1">
                 <ContentControl Content="{Binding Point1}"/>
             </TabItem>
-            <TabItem Header="Point2" Padding="12,0,0,0">
+            <TabItem Header="Point2">
                 <ContentControl Content="{Binding Point2}"/>
             </TabItem>
-            <TabItem Header="Point3" Padding="12,0,0,0">
+            <TabItem Header="Point3">
                 <ContentControl Content="{Binding Point3}"/>
             </TabItem>
-            <TabItem Header="Point4" Padding="12,0,0,0">
+            <TabItem Header="Point4">
                 <ContentControl Content="{Binding Point4}"/>
             </TabItem>
         </TabControl>

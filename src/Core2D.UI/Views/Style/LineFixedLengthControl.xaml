@@ -25,10 +25,10 @@
             </StackPanel>
         </StackPanel>
         <TabControl>
-            <TabItem Header="StartTrigger" Padding="0,0,0,0">
+            <TabItem Header="StartTrigger">
                 <ContentControl Content="{Binding StartTrigger}"/>
             </TabItem>
-            <TabItem Header="EndTrigger" Padding="12,0,0,0">
+            <TabItem Header="EndTrigger">
                 <ContentControl Content="{Binding EndTrigger}"/>
             </TabItem>
         </TabControl>

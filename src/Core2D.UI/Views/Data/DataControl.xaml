@@ -15,7 +15,7 @@
              x:DataType="Data:IContext" x:CompileBindings="True">
     <StackPanel>
         <TabControl IsVisible="{Binding !!Record}">
-            <TabItem Header="Record" Padding="0,0,0,0">
+            <TabItem Header="Record">
                 <Grid RowDefinitions="Auto,*" ColumnDefinitions="*">
                     <Menu Grid.Row="0" HorizontalAlignment="Right" IsVisible="{Binding !!Record}">
                         <MenuItem Header="&#727;" Command="{Binding $parent[Window].DataContext.OnResetRecord}" CommandParameter="{Binding}" IsVisible="{Binding !!Record}" x:CompileBindings="False"/>
@@ -25,7 +25,7 @@
             </TabItem>
         </TabControl>
         <TabControl>
-            <TabItem Header="Properties" Padding="0,0,0,0">
+            <TabItem Header="Properties">
                 <data:PropertiesControl/>
             </TabItem>
         </TabControl>

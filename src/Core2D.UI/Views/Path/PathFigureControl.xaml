@@ -15,10 +15,10 @@
         <CheckBox Content="IsFilled" IsChecked="{Binding IsFilled, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
         <CheckBox Content="IsClosed" IsChecked="{Binding IsClosed, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
         <TabControl>
-            <TabItem Header="StartPoint" Padding="0,0,0,0">
+            <TabItem Header="StartPoint">
                 <ContentControl Content="{Binding StartPoint}"/>
             </TabItem>
-            <TabItem Header="Segments" Padding="12,0,0,0">
+            <TabItem Header="Segments">
             <ListBox Items="{Binding Segments}">
                 <ListBox.DataTemplates>
                     <DataTemplate>

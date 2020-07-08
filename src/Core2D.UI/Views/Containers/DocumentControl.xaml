@@ -18,7 +18,7 @@
             <TextBox Text="{Binding Name, Mode=TwoWay}"/>
         </StackPanel>
         <TabControl Grid.Row="1">
-            <TabItem Header="Pages" Padding="0,0,0,0">
+            <TabItem Header="Pages">
                 <ListBox Items="{Binding Pages}">
                     <ListBox.DataTemplates>
                         <DataTemplate DataType="Containers:IPageContainer">

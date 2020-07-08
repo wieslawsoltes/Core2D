@@ -21,7 +21,7 @@
             <TextBox Text="{Binding Name, Mode=TwoWay}" x:DataType="Core:IObservableObject"/>
         </StackPanel>
         <TabControl>
-            <TabItem Header="Records" Padding="0,0,0,0">
+            <TabItem Header="Records">
                 <Grid RowDefinitions="Auto,*">
                     <Menu Grid.Row="0" HorizontalAlignment="Right">
                         <MenuItem Header="apply" Command="{Binding $parent[Window].DataContext.OnApplyRecord}" CommandParameter="{Binding CurrentRecord}" IsVisible="{Binding !!CurrentRecord}" x:CompileBindings="False"/>
@@ -50,10 +50,10 @@
                     </DataGrid>
                 </Grid>
             </TabItem>
-            <TabItem Header="Current Record" Padding="12,0,0,0">
+            <TabItem Header="Current Record">
                 <ContentControl Content="{Binding CurrentRecord}"/>
             </TabItem>
-            <TabItem Header="Columns" Padding="12,0,0,0">
+            <TabItem Header="Columns">
                 <Grid RowDefinitions="Auto,*">
                     <Menu Grid.Row="0" HorizontalAlignment="Right">
                         <MenuItem Header="&#727;" Command="{Binding $parent[Window].DataContext.OnRemoveColumn}" CommandParameter="{Binding #columnsDataGrid.SelectedItem}" x:CompileBindings="False"/>

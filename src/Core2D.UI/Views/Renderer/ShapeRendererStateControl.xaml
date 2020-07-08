@@ -12,7 +12,7 @@
              d:DesignWidth="250" d:DesignHeight="400">
     <StackPanel>
         <TabControl>
-            <TabItem Header="Point" Padding="0,0,0,0">
+            <TabItem Header="Point">
                 <StackPanel>
                     <CheckBox Content="DrawDecorators" IsChecked="{Binding DrawDecorators, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
                     <CheckBox Content="DrawPoints" IsChecked="{Binding DrawPoints, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
@@ -20,15 +20,15 @@
                     <TextBox Text="{Binding PointSize, Mode=TwoWay}"/>
                 </StackPanel>
             </TabItem>
-            <TabItem Header="Normal Style" Padding="12,0,0,0">
+            <TabItem Header="Normal Style">
                 <ContentControl Content="{Binding PointStyle}"/>
             </TabItem>
-            <TabItem Header="Selected Style" Padding="12,0,0,0">
+            <TabItem Header="Selected Style">
                 <ContentControl Content="{Binding SelectedPointStyle}"/>
             </TabItem>
         </TabControl>
         <TabControl>
-            <TabItem Header="Zoom" Padding="0,0,0,0">
+            <TabItem Header="Zoom">
                 <StackPanel>
                     <TextBlock Text="PanX" Margin="{DynamicResource TextControlThemePadding}"/>
                     <TextBox Text="{Binding PanX, Mode=TwoWay}"/>
@@ -42,12 +42,12 @@
             </TabItem>
         </TabControl>
         <TabControl>
-            <TabItem Header="DrawShapeState" Padding="0,0,0,0">
+            <TabItem Header="DrawShapeState">
                 <ContentControl Content="{Binding DrawShapeState}"/>
             </TabItem>
         </TabControl>
         <TabControl>
-            <TabItem Header="SelectedShapes" Padding="0,0,0,0">
+            <TabItem Header="SelectedShapes">
                 <ListBox x:Name="shapes" Items="{Binding SelectedShapes}" VirtualizationMode="Simple">
                     <ListBox.ItemsPanel>
                         <ItemsPanelTemplate>
@@ -72,17 +72,17 @@
             </TabItem>
         </TabControl>
         <TabControl>
-            <TabItem Header="ImageCache" Padding="0,0,0,0">
+            <TabItem Header="ImageCache">
                 <containers:ImagesControl DataContext="{Binding ImageCache}"/>
             </TabItem>
         </TabControl>
         <TabControl>
-            <TabItem Header="SelectionStyle" Padding="0,0,0,0">
+            <TabItem Header="SelectionStyle">
                 <ContentControl Content="{Binding SelectionStyle}"/>
             </TabItem>
         </TabControl>
         <TabControl>
-            <TabItem Header="HelperStyle" Padding="0,0,0,0">
+            <TabItem Header="HelperStyle">
                 <ContentControl Content="{Binding HelperStyle}"/>
             </TabItem>
         </TabControl>

@@ -23,7 +23,7 @@
             <ComboBox Items="{x:Static Editor:Enums.CurveOrientationValues}" SelectedItem="{Binding CurveOrientation, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
         </StackPanel>
         <TabControl>
-            <TabItem Header="FixedLength" Padding="0,0,0,0">
+            <TabItem Header="FixedLength">
                 <ContentControl Content="{Binding FixedLength}"/>
             </TabItem>
         </TabControl>

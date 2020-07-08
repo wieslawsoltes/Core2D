@@ -18,10 +18,10 @@
         <TextBlock Text="SweepDirection" Margin="{DynamicResource TextControlThemePadding}"/>
         <ComboBox Items="{x:Static Editor:Enums.XSweepDirectionValues}" SelectedItem="{Binding SweepDirection, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
         <TabControl>
-            <TabItem Header="Point" Padding="0,0,0,0">
+            <TabItem Header="Point">
                 <ContentControl Content="{Binding Point}"/>
             </TabItem>
-            <TabItem Header="Size" Padding="12,0,0,0">
+            <TabItem Header="Size">
                 <ContentControl Content="{Binding Size}"/>
             </TabItem>
         </TabControl>

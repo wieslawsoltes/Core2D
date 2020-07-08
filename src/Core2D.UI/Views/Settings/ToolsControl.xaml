@@ -11,7 +11,7 @@
              d:DataContext="{x:Static Designer:DesignerContext.Editor}"
              d:DesignWidth="250" d:DesignHeight="400">
     <TabControl>
-        <TabItem Header="Main" Padding="0,0,0,0">
+        <TabItem Header="Main">
             <Grid RowDefinitions="Auto,*">
                 <ComboBox Items="{Binding Tools}" SelectedItem="{Binding CurrentTool, Mode=TwoWay}" Grid.Row="0">
                     <ComboBox.DataTemplates>
@@ -23,7 +23,7 @@
                 <ContentControl Content="{Binding CurrentTool.Settings}" Grid.Row="1"/>
             </Grid>
         </TabItem>
-        <TabItem Header="Path" Padding="12,0,0,0">
+        <TabItem Header="Path">
             <Grid RowDefinitions="Auto,*">
                 <ComboBox Items="{Binding PathTools}" SelectedItem="{Binding CurrentPathTool, Mode=TwoWay}" Grid.Row="0">
                     <ComboBox.DataTemplates>

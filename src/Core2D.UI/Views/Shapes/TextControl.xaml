@@ -13,7 +13,7 @@
              x:DataType="Shapes:ITextShape" x:CompileBindings="True">
     <Grid RowDefinitions="Auto,*">
         <TabControl Grid.Row="0">
-            <TabItem Header="Text" Padding="0,0,0,0">
+            <TabItem Header="Text">
                 <StackPanel>
                     <TextBlock Text="Name" Margin="{DynamicResource TextControlThemePadding}"/>
                     <TextBox Text="{Binding Name, Mode=TwoWay}" x:DataType="Core:IObservableObject"/>
@@ -23,21 +23,21 @@
                     <TextBox Text="{Binding Text, Mode=TwoWay}" VerticalAlignment="Stretch" AcceptsReturn="True"/>
                 </StackPanel>
             </TabItem>
-            <TabItem Header="Data" Padding="12,0,0,0">
+            <TabItem Header="Data">
                 <ContentControl Content="{Binding Data}" x:DataType="Shapes:IBaseShape"/>
             </TabItem>
-            <TabItem Header="Style" Padding="12,0,0,0">
+            <TabItem Header="Style">
                 <ContentControl Content="{Binding Style}" x:DataType="Core:IDrawable"/>
             </TabItem>
-            <TabItem Header="State" Padding="12,0,0,0">
+            <TabItem Header="State">
                 <ContentControl Content="{Binding State}" x:DataType="Shapes:IBaseShape"/>
             </TabItem>
         </TabControl>
         <TabControl Grid.Row="1">
-            <TabItem Header="TopLeft" Padding="0,0,0,0">
+            <TabItem Header="TopLeft">
                 <ContentControl Content="{Binding TopLeft}"/>
             </TabItem>
-            <TabItem Header="BottomRight" Padding="12,0,0,0">
+            <TabItem Header="BottomRight">
                 <ContentControl Content="{Binding BottomRight}"/>
             </TabItem>
         </TabControl>

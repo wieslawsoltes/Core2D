@@ -13,7 +13,7 @@
              d:DesignWidth="250" d:DesignHeight="400">
     <StackPanel>
         <TabControl>
-            <TabItem Header="Status" Padding="0,0,0,0">
+            <TabItem Header="Status">
                 <StackPanel>
                     <TextBlock Text="ZoomX" Margin="{DynamicResource TextControlThemePadding}"/>
                     <TextBlock Text="{Binding ZoomX, Mode=OneWay}" Margin="{DynamicResource TextControlThemePadding}"/>
@@ -29,7 +29,7 @@
             </TabItem>
         </TabControl>
         <TabControl>
-            <TabItem Header="Options" Padding="0,0,0,0">
+            <TabItem Header="Options">
                 <StackPanel>
                     <TextBlock Text="PanButton" Margin="{DynamicResource TextControlThemePadding}"/>
                     <ComboBox Items="{x:Static paz:ZoomBorder.ButtonNames}" SelectedItem="{Binding PanButton, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
@@ -43,7 +43,7 @@
             </TabItem>
         </TabControl>
         <TabControl>
-            <TabItem Header="Constrains" Padding="0,0,0,0">
+            <TabItem Header="Constrains">
                 <StackPanel>
                     <TextBlock Text="MinZoomX" Margin="{DynamicResource TextControlThemePadding}"/>
                     <TextBox Text="{Binding MinZoomX, Mode=TwoWay}"/>

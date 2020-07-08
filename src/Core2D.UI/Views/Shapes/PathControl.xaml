@@ -13,7 +13,7 @@
              x:DataType="Shapes:IPathShape" x:CompileBindings="True">
     <Grid RowDefinitions="Auto,*">
         <TabControl Grid.Row="0">
-            <TabItem Header="Path" Padding="0,0,0,0">
+            <TabItem Header="Path">
                 <StackPanel>
                     <TextBlock Text="Name" Margin="{DynamicResource TextControlThemePadding}"/>
                     <TextBox Text="{Binding Name, Mode=TwoWay}" x:DataType="Core:IObservableObject"/>
@@ -21,18 +21,18 @@
                     <CheckBox Content="IsFilled" IsChecked="{Binding IsFilled, Mode=TwoWay}" x:DataType="Core:IDrawable" HorizontalAlignment="Stretch"/>
                 </StackPanel>
             </TabItem>
-            <TabItem Header="Data" Padding="12,0,0,0">
+            <TabItem Header="Data">
                 <ContentControl Content="{Binding Data}" x:DataType="Shapes:IBaseShape"/>
             </TabItem>
-            <TabItem Header="Style" Padding="12,0,0,0">
+            <TabItem Header="Style">
                 <ContentControl Content="{Binding Style}" x:DataType="Core:IDrawable"/>
             </TabItem>
-            <TabItem Header="State" Padding="12,0,0,0">
+            <TabItem Header="State">
                 <ContentControl Content="{Binding State}" x:DataType="Shapes:IBaseShape"/>
             </TabItem>
         </TabControl>
         <TabControl Grid.Row="1">
-            <TabItem Header="Geometry" Padding="0,0,0,0">
+            <TabItem Header="Geometry">
                 <ContentControl Content="{Binding Geometry}"/>
             </TabItem>
         </TabControl>

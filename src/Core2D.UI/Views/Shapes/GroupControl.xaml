@@ -17,21 +17,21 @@
              x:DataType="Shapes:IGroupShape" x:CompileBindings="True">
     <Grid RowDefinitions="Auto,Auto,50*,50*">
         <TabControl Grid.Row="0">
-            <TabItem Header="Group" Padding="0,0,0,0">
+            <TabItem Header="Group">
                 <StackPanel>
                     <TextBlock Text="Name"  Margin="{DynamicResource TextControlThemePadding}"/>
                     <TextBox Text="{Binding Name, Mode=TwoWay}" x:DataType="Core:IObservableObject"/>
                 </StackPanel>
             </TabItem>
-            <TabItem Header="Data" Padding="12,0,0,0">
+            <TabItem Header="Data">
                 <ContentControl Content="{Binding Data}" x:DataType="Shapes:IBaseShape"/>
             </TabItem>
-            <TabItem Header="State" Padding="12,0,0,0">
+            <TabItem Header="State">
                 <ContentControl Content="{Binding State}" x:DataType="Shapes:IBaseShape"/>
             </TabItem>
         </TabControl>
         <TabControl Grid.Row="1">
-            <TabItem Header="Properties" Padding="0,0,0,0">
+            <TabItem Header="Properties">
                 <Grid RowDefinitions="Auto,*" ColumnDefinitions="50*,Auto,50*" IsVisible="{Binding !!ShapesProperties.Length}">
                     <TextBlock Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" Text="Name"/>
                     <ItemsControl VerticalAlignment="Stretch" Grid.Column="0" Grid.Row="1" Items="{Binding ShapesProperties}">
@@ -64,7 +64,7 @@
             </TabItem>
         </TabControl>
         <TabControl Grid.Row="2">
-            <TabItem Header="Shapes" Padding="0,0,0,0">
+            <TabItem Header="Shapes">
                 <ListBox x:Name="shapes" Items="{Binding Shapes}">
                     <ListBox.DataTemplates>
                         <DataTemplate DataType="Shapes:IBaseShape">
@@ -77,12 +77,12 @@
                     </ListBox.DataTemplates>
                 </ListBox>
             </TabItem>
-            <TabItem Header="Selected Shape" Padding="12,0,0,0">
+            <TabItem Header="Selected Shape">
                 <ContentControl Content="{Binding #shapes.SelectedItem}"/>
             </TabItem>
         </TabControl>
         <TabControl Grid.Row="3">
-            <TabItem Header="Connectors" Padding="0,0,0,0">
+            <TabItem Header="Connectors">
                 <ListBox x:Name="connectors" Items="{Binding Connectors}" x:DataType="Shapes:IConnectableShape">
                     <ListBox.DataTemplates>
                         <DataTemplate DataType="Shapes:IPointShape">
@@ -95,7 +95,7 @@
                     </ListBox.DataTemplates>
                 </ListBox>
             </TabItem>
-            <TabItem Header="Selected Connector" Padding="12,0,0,0">
+            <TabItem Header="Selected Connector">
                 <ContentControl Content="{Binding #connectors.SelectedItem}"/>
             </TabItem>
         </TabControl>

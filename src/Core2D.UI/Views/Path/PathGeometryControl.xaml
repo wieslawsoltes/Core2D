@@ -17,7 +17,7 @@
         <TextBlock Text="FillRule" Margin="{DynamicResource TextControlThemePadding}"/>
         <ComboBox Items="{x:Static Editor:Enums.XFillRuleValues}" SelectedItem="{Binding FillRule, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
         <TabControl>
-            <TabItem Header="Figures" Padding="0,0,0,0">
+            <TabItem Header="Figures">
                 <TreeView x:Name="tree" Items="{Binding Figures}">
                     <TreeView.Styles>
                         <Style Selector="TreeViewItem">
@@ -34,7 +34,7 @@
                     </TreeView.DataTemplates>
                 </TreeView>
             </TabItem>
-            <TabItem Header="Selected Figure" Padding="12,0,0,0">
+            <TabItem Header="Selected Figure">
                 <ContentControl Content="{Binding #tree.SelectedItem}"/>
             </TabItem>
         </TabControl>

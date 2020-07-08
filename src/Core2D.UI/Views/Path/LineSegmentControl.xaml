@@ -12,7 +12,7 @@
         <CheckBox Content="IsStroked" IsChecked="{Binding IsStroked, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
         <CheckBox Content="IsSmoothJoin" IsChecked="{Binding IsSmoothJoin, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
         <TabControl>
-            <TabItem Header="Point" Padding="0,0,0,0">
+            <TabItem Header="Point">
                 <ContentControl Content="{Binding Point}"/>
             </TabItem>
         </TabControl>

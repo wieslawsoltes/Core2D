@@ -11,7 +11,7 @@
              d:DesignWidth="250" d:DesignHeight="400">
     <StackPanel>
         <TabControl>
-            <TabItem Header="General" Padding="0,0,0,0">
+            <TabItem Header="General">
                 <StackPanel>
                     <CheckBox Content="SnapToGrid" IsChecked="{Binding SnapToGrid, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
                     <TextBlock Text="SnapX" Margin="{DynamicResource TextControlThemePadding}"/>
@@ -27,7 +27,7 @@
             </TabItem>
         </TabControl>
         <TabControl>
-            <TabItem Header="Defaults" Padding="0,0,0,0">
+            <TabItem Header="Defaults">
                 <StackPanel>
                     <CheckBox Content="IsStroked" IsChecked="{Binding DefaultIsStroked, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
                     <CheckBox Content="IsFilled" IsChecked="{Binding DefaultIsFilled, Mode=TwoWay}" HorizontalAlignment="Stretch"/>

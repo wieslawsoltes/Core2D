@@ -62,7 +62,7 @@
     </Grid>
     <!--
     <TabControl>
-        <TabItem Header="Selected Layer" Padding="0,0,0,0">
+        <TabItem Header="Selected Layer">
             <ContentControl Content="{Binding CurrentTemplate}"/>
         </TabItem>
     </TabControl>

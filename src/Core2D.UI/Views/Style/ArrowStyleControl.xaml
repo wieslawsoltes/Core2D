@@ -35,10 +35,10 @@
             <TextBox Text="{Binding DashOffset, Mode=TwoWay}" x:DataType="Style:IBaseStyle"/>
         </StackPanel>
         <TabControl>
-            <TabItem Header="Stroke" Padding="0,0,0,0">
+            <TabItem Header="Stroke">
                 <ContentControl Content="{Binding Stroke}" x:DataType="Style:IBaseStyle"/>
             </TabItem>
-            <TabItem Header="Fill" Padding="12,0,0,0">
+            <TabItem Header="Fill">
                 <ContentControl Content="{Binding Fill}" x:DataType="Style:IBaseStyle"/>
             </TabItem>
         </TabControl>
