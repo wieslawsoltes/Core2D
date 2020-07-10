@@ -194,7 +194,7 @@ namespace Core2D.UI
             return new AboutInfo()
             {
                 Title = "Core2D",
-                Version = $"{GetType().GetTypeInfo().Assembly.GetName().Version}",
+                Version = $"{Assembly.GetEntryAssembly().GetCustomAttribute<AssemblyInformationalVersionAttribute> ().InformationalVersion}",
                 Description = "A multi-platform data driven 2D diagram editor.",
                 Copyright = "Copyright (c) Wiesław Šoltés. All rights reserved.",
                 License = "Licensed under the MIT license. See LICENSE file in the project root for full license information.",
