@@ -30,6 +30,7 @@
     <Application.Resources>
         <!-- Fonts -->
         <FontFamily x:Key="UiFontFamily">Segoe UI, SF Pro Display, Noto Sans, Cantarel</FontFamily>
+        <FontFamily x:Key="CodeFontFamily">Consolas, Menlo, Monaco, Courier, Courier New, Andale Mono, DejaVu Sans Mono</FontFamily>
         <StaticResource x:Key="ContentControlThemeFontFamily" ResourceKey="UiFontFamily" />
         <!-- Brushes -->
         <SolidColorBrush x:Key="TransparentBrush">#00FFFFFF</SolidColorBrush>
