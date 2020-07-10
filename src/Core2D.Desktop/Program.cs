@@ -220,6 +220,135 @@ namespace Core2D
             });
         }
 
+        internal static void StartAvaloniaApp(Settings settings, string[] args)
+        {
+            var builder = BuildAvaloniaApp();
+
+            try
+            {
+                if (settings.Theme != null)
+                {
+                    App.DefaultTheme = settings.Theme.Value;
+                }
+
+                if (settings.Repl)
+                {
+                    Repl();
+                }
+
+                if (settings.UseManagedSystemDialogs)
+                {
+                    builder.UseManagedSystemDialogs();
+                }
+
+                if (settings.CreateHeadlessScreenshots)
+                {
+                    builder.UseHeadless(false)
+                           .AfterSetup(async _ => await CreateScreenshots())
+                           .StartWithClassicDesktopLifetime(args);
+                    return;
+                }
+
+                if (settings.UseHeadless)
+                {
+                    builder.UseHeadless(settings.UseHeadlessDrawing);
+                }
+
+                if (settings.UseHeadlessVnc)
+                {
+                    builder.AfterSetup(async _ => await ProcessSettings(settings))
+                           .StartWithHeadlessVncPlatform(settings.VncHost, settings.VncPort, args, ShutdownMode.OnMainWindowClose);
+                    return;
+                }
+                else
+                {
+                    builder.AfterSetup(async _ => await ProcessSettings(settings))
+                           .StartWithClassicDesktopLifetime(args);
+                    return;
+                }
+            }
+            catch (Exception ex)
+            {
+                Log(ex);
+            }
+        }
+
+        internal static RootCommand CreateRootCommand()
+        {
+            var rootCommand = new RootCommand()
+            {
+                Description = "A multi-platform data driven 2D diagram editor."
+            };
+
+            var optionTheme = new Option(new[] { "--theme", "-t" }, "Set application theme")
+            {
+                Argument = new Argument<ThemeName>(getDefaultValue: () => ThemeName.FluentLight)
+            };
+            rootCommand.AddOption(optionTheme);
+
+            var optionScripts = new Option(new[] { "--scripts", "-s" }, "The relative or absolute path to the script files")
+            {
+                Argument = new Argument<FileInfo[]?>()
+            };
+            rootCommand.AddOption(optionScripts);
+
+            var optionProject = new Option(new[] { "--project", "-p" }, "The relative or absolute path to the project file")
+            {
+                Argument = new Argument<FileInfo?>()
+            };
+            rootCommand.AddOption(optionProject);
+
+            var optionRepl = new Option(new[] { "--repl" }, "Run scripting repl")
+            {
+                Argument = new Argument<bool>()
+            };
+            rootCommand.AddOption(optionRepl);
+
+            var optionUseManagedSystemDialogs = new Option(new[] { "--useManagedSystemDialogs" }, "Use managed system dialogs")
+            {
+                Argument = new Argument<bool>()
+            };
+            rootCommand.AddOption(optionUseManagedSystemDialogs);
+
+            var optionUseHeadless = new Option(new[] { "--useHeadless" }, "Use headless")
+            {
+                Argument = new Argument<bool>()
+            };
+            rootCommand.AddOption(optionUseHeadless);
+
+            var optionUseHeadlessDrawing = new Option(new[] { "--useHeadlessDrawing" }, "Use headless drawing")
+            {
+                Argument = new Argument<bool>()
+            };
+            rootCommand.AddOption(optionUseHeadlessDrawing);
+
+            var optionUseHeadlessVnc = new Option(new[] { "--useHeadlessVnc" }, "Use headless vnc")
+            {
+                Argument = new Argument<bool>()
+            };
+            rootCommand.AddOption(optionUseHeadlessVnc);
+
+            var optionCreateHeadlessScreenshots = new Option(new[] { "--createHeadlessScreenshots" }, "Create headless screenshots")
+            {
+                Argument = new Argument<bool>()
+            };
+            rootCommand.AddOption(optionCreateHeadlessScreenshots);
+
+            var optionVncHost = new Option(new[] { "--vncHost" }, "Vnc host")
+            {
+                Argument = new Argument<string?>()
+            };
+            rootCommand.AddOption(optionVncHost);
+
+            var optionVncPort = new Option(new[] { "--vncPort" }, "Vnc port")
+            {
+                Argument = new Argument<int>(getDefaultValue: () => 5901)
+            };
+            rootCommand.AddOption(optionVncPort);
+
+            return rootCommand;
+        }
+
         [STAThread]
         internal static void Main(string[] args)
         {
@@ -228,132 +357,20 @@ namespace Core2D
                 AttachConsole(-1);
             }
 
-            var builder = BuildAvaloniaApp();
-
-            var optionTheme = new Option(new[] { "--theme", "-t" }, "Set application theme")
-            {
-                Argument = new Argument<ThemeName>(getDefaultValue: () => ThemeName.FluentLight)
-            };
-
-            var optionScripts = new Option(new[] { "--scripts", "-s" }, "The relative or absolute path to the script files")
-            {
-                Argument = new Argument<FileInfo[]?>()
-            };
-
-            var optionProject = new Option(new[] { "--project", "-p" }, "The relative or absolute path to the project file")
-            {
-                Argument = new Argument<FileInfo?>()
-            };
-
-            var optionRepl = new Option(new[] { "--repl" }, "Run scripting repl")
-            {
-                Argument = new Argument<bool>()
-            };
-
-            var optionUseManagedSystemDialogs = new Option(new[] { "--useManagedSystemDialogs" }, "Use managed system dialogs")
-            {
-                Argument = new Argument<bool>()
-            };
-
-            var optionUseHeadless = new Option(new[] { "--useHeadless" }, "Use headless")
-            {
-                Argument = new Argument<bool>()
-            };
-
-            var optionUseHeadlessDrawing = new Option(new[] { "--useHeadlessDrawing" }, "Use headless drawing")
-            {
-                Argument = new Argument<bool>()
-            };
-
-            var optionUseHeadlessVnc = new Option(new[] { "--useHeadlessVnc" }, "Use headless vnc")
-            {
-                Argument = new Argument<bool>()
-            };
-
-            var optionCreateHeadlessScreenshots = new Option(new[] { "--createHeadlessScreenshots" }, "Create headless screenshots")
-            {
-                Argument = new Argument<bool>()
-            };
-
-            var optionVncHost = new Option(new[] { "--vncHost" }, "Vnc host")
-            {
-                Argument = new Argument<string?>()
-            };
-
-            var optionVncPort = new Option(new[] { "--vncPort" }, "Vnc port")
-            {
-                Argument = new Argument<int>(getDefaultValue: () => 5901)
-            };
-
-            var rootCommand = new RootCommand()
-            {
-                Description = "A multi-platform data driven 2D diagram editor."
-            };
-
-            rootCommand.AddOption(optionTheme);
-            rootCommand.AddOption(optionScripts);
-            rootCommand.AddOption(optionProject);
-            rootCommand.AddOption(optionRepl);
-            rootCommand.AddOption(optionUseManagedSystemDialogs);
-            rootCommand.AddOption(optionUseHeadless);
-            rootCommand.AddOption(optionUseHeadlessDrawing);
-            rootCommand.AddOption(optionUseHeadlessVnc);
-            rootCommand.AddOption(optionCreateHeadlessScreenshots);
-            rootCommand.AddOption(optionVncHost);
-            rootCommand.AddOption(optionVncPort);
+            var rootCommand = CreateRootCommand();
+            var rootSettings = default(Settings?);
 
             rootCommand.Handler = CommandHandler.Create((Settings settings) =>
             {
-                try
-                {
-                    if (settings.Theme != null)
-                    {
-                        App.DefaultTheme = settings.Theme.Value;
-                    }
-
-                    if (settings.Repl)
-                    {
-                        Repl();
-                    }
-
-                    if (settings.UseManagedSystemDialogs)
-                    {
-                        builder.UseManagedSystemDialogs();
-                    }
-
-                    if (settings.CreateHeadlessScreenshots)
-                    {
-                        builder.UseHeadless(false)
-                               .AfterSetup(async _ => await CreateScreenshots())
-                               .StartWithClassicDesktopLifetime(args);
-                        return;
-                    }
-
-                    if (settings.UseHeadless)
-                    {
-                        builder.UseHeadless(settings.UseHeadlessDrawing);
-                    }
-
-                    if (settings.UseHeadlessVnc)
-                    {
-                        builder.AfterSetup(async _ => await ProcessSettings(settings))
-                               .StartWithHeadlessVncPlatform(settings.VncHost, settings.VncPort, args, ShutdownMode.OnMainWindowClose);
-                        return;
-                    }
-                    else
-                    {
-                        builder.AfterSetup(async _ => await ProcessSettings(settings))
-                               .StartWithClassicDesktopLifetime(args);
-                        return;
-                    }
-                }
-                catch (Exception ex)
-                {
-                    Log(ex);
-                }
+                rootSettings = settings;
             });
 
             rootCommand.Invoke(args);
+
+            if (rootSettings != null)
+            {
+                StartAvaloniaApp(rootSettings, args);
+            }
         }
 
         public static AppBuilder BuildAvaloniaApp()
