@@ -13,10 +13,17 @@
         <StackPanel Grid.Row="0">
             <TextBlock Text="Name" Margin="{DynamicResource TextControlThemePadding}"/>
             <TextBox Text="{Binding Name, Mode=TwoWay}"/>
-            <TextBlock Text="Width" Margin="{DynamicResource TextControlThemePadding}"/>
-            <TextBox Text="{Binding Width, Mode=TwoWay}"/>
-            <TextBlock Text="Height" Margin="{DynamicResource TextControlThemePadding}"/>
-            <TextBox Text="{Binding Height, Mode=TwoWay}"/>
+            <Grid ColumnDefinitions="50*,6,50*">
+                <StackPanel Grid.Column="0">
+                    <TextBlock Text="Width" Margin="{DynamicResource TextControlThemePadding}"/>
+                    <TextBox Text="{Binding Width, Mode=TwoWay}"/>
+                </StackPanel>
+                <GridSplitter ResizeDirection="Columns" ResizeBehavior="PreviousAndNext" Background="Transparent" Width="6" Grid.Column="1"/>
+                <StackPanel Grid.Column="2">
+                    <TextBlock Text="Height" Margin="{DynamicResource TextControlThemePadding}"/>
+                    <TextBox Text="{Binding Height, Mode=TwoWay}"/>
+                </StackPanel>
+            </Grid>
             <TextBlock Text="Background" Margin="{DynamicResource TextControlThemePadding}"/>
             <ContentControl Content="{Binding Background}"/>
         </StackPanel>
