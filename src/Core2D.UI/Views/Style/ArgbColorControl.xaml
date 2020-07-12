@@ -29,9 +29,9 @@
         </Grid>
         <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto" ColumnDefinitions="Auto,*" Grid.Row="1">
             <TextBlock Text="Red" Margin="{DynamicResource TextControlThemePadding}" VerticalAlignment="Center" Grid.Row="0" Grid.Column="0"/>
-            <TextBlock Text="Green" Margin="{DynamicResource TextControlThemePadding}" Grid.Row="1" Grid.Column="0"/>
-            <TextBlock Text="Blue" Margin="{DynamicResource TextControlThemePadding}" Grid.Row="2" Grid.Column="0"/>
-            <TextBlock Text="Alpha" Margin="{DynamicResource TextControlThemePadding}" Grid.Row="3" Grid.Column="0"/>
+            <TextBlock Text="Green" Margin="{DynamicResource TextControlThemePadding}" VerticalAlignment="Center" Grid.Row="1" Grid.Column="0"/>
+            <TextBlock Text="Blue" Margin="{DynamicResource TextControlThemePadding}" VerticalAlignment="Center" Grid.Row="2" Grid.Column="0"/>
+            <TextBlock Text="Alpha" Margin="{DynamicResource TextControlThemePadding}" VerticalAlignment="Center" Grid.Row="3" Grid.Column="0"/>
             <Slider Value="{Binding R}" Minimum="0" Maximum="255" TickFrequency="1" Margin="{DynamicResource TextControlThemePadding}" Grid.Row="0" Grid.Column="1"/>
             <Slider Value="{Binding G}" Minimum="0" Maximum="255" TickFrequency="1" Margin="{DynamicResource TextControlThemePadding}" Grid.Row="1" Grid.Column="1"/>
             <Slider Value="{Binding B}" Minimum="0" Maximum="255" TickFrequency="1" Margin="{DynamicResource TextControlThemePadding}" Grid.Row="2" Grid.Column="1"/>
