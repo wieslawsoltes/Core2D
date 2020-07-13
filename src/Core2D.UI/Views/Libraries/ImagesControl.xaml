@@ -12,9 +12,10 @@
              xmlns:Designer="clr-namespace:Core2D.UI.Designer;assembly=Core2D.UI"
              mc:Ignorable="d"
              d:DataContext="{x:Static Designer:DesignerContext.Project}"
-             d:DesignWidth="250" d:DesignHeight="400">
+             d:DesignWidth="250" d:DesignHeight="400"
+             x:DataType="Renderer:IImageCache" x:CompileBindings="True">
     <Grid RowDefinitions="Auto,Auto,*" ColumnDefinitions="*" >
-        <Menu Grid.Row="0" Grid.Column="0" HorizontalAlignment="Right">
+        <Menu Grid.Row="0" Grid.Column="0" HorizontalAlignment="Right" x:CompileBindings="False">
             <MenuItem Header="+" Command="{Binding $parent[Window].DataContext.OnAddImageKey}"/>
         </Menu>
         <TextBlock Grid.Column="0" Grid.Row="1" VerticalAlignment="Center" Text="Key"/>
@@ -26,7 +27,7 @@
                             <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}"/>
                         </i:Interaction.Behaviors>
                         <TextBox VerticalAlignment="Center" Text="{Binding Key, Mode=OneWay}" Grid.Column="0"/>
-                        <Button Content="-" Grid.Column="1" Command="{Binding $parent[Window].DataContext.OnRemoveImageKey}" CommandParameter="{Binding Key}" Padding="0" VerticalAlignment="Stretch" VerticalContentAlignment="Center" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"/>
+                        <Button Content="-" Grid.Column="1" Command="{Binding $parent[Window].DataContext.OnRemoveImageKey}" CommandParameter="{Binding Key}" Padding="0" VerticalAlignment="Stretch" VerticalContentAlignment="Center" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" x:CompileBindings="False"/>
                     </Grid>
                 </DataTemplate>
             </ItemsControl.DataTemplates>

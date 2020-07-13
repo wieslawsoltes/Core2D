@@ -9,7 +9,8 @@
              xmlns:Designer="clr-namespace:Core2D.UI.Designer;assembly=Core2D.UI"
              mc:Ignorable="d"
              d:DataContext="{x:Static Designer:DesignerContext.Editor}"
-             d:DesignWidth="250" d:DesignHeight="400">
+             d:DesignWidth="250" d:DesignHeight="400"
+             x:DataType="Editor:IProjectEditor" x:CompileBindings="True">
     <TabControl>
         <TabItem Header="Main">
             <Grid RowDefinitions="Auto,*">
@@ -20,7 +21,7 @@
                         </DataTemplate>
                     </ComboBox.DataTemplates>
                 </ComboBox>
-                <ContentControl Content="{Binding CurrentTool.Settings}" Grid.Row="1"/>
+                <ContentControl DataContext="{Binding CurrentTool}" Content="{Binding Settings}" Grid.Row="1" x:DataType="Editor:ITool" x:CompileBindings="False"/>
             </Grid>
         </TabItem>
         <TabItem Header="Path">
@@ -32,7 +33,7 @@
                         </DataTemplate>
                     </ComboBox.DataTemplates>
                 </ComboBox>
-                <ContentControl Content="{Binding CurrentPathTool.Settings}" Grid.Row="1"/>
+                <ContentControl DataContext="{Binding CurrentPathTool}" Content="{Binding Settings}" Grid.Row="1" x:DataType="Editor:IPathTool" x:CompileBindings="False"/>
             </Grid>
         </TabItem>
     </TabControl>

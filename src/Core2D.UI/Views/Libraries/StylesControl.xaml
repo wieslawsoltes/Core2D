@@ -9,30 +9,32 @@
              xmlns:handlers="clr-namespace:Core2D.UI.DragAndDrop.Handlers;assembly=Core2D.UI"
              xmlns:converters="clr-namespace:Core2D.UI.Converters;assembly=Core2D.UI"
              xmlns:Editor="clr-namespace:Core2D.Editor;assembly=Core2D"
+             xmlns:Containers="clr-namespace:Core2D.Containers;assembly=Core2D"
              xmlns:Style="clr-namespace:Core2D.Style;assembly=Core2D"
              xmlns:Designer="clr-namespace:Core2D.UI.Designer;assembly=Core2D.UI"
              mc:Ignorable="d"
              d:DataContext="{x:Static Designer:DesignerContext.Project}"
-             d:DesignWidth="250" d:DesignHeight="400">
+             d:DesignWidth="250" d:DesignHeight="400"
+             x:DataType="Containers:IProjectContainer" x:CompileBindings="True">
     <UserControl.Resources>
         <handlers:StylesListBoxDropHandler x:Key="StylesListBoxDropHandler"/>
     </UserControl.Resources>
     <Grid RowDefinitions="Auto,Auto,Auto,*,Auto">
         <Grid RowDefinitions="*" ColumnDefinitions="*,Auto" Grid.Row="0">
-            <TextBox Text="{Binding CurrentStyleLibrary.Name, Mode=TwoWay}" BorderBrush="Transparent" Background="Transparent" VerticalAlignment="Center" Margin="0,0,0,0" IsVisible="{Binding !!$self.DataContext.CurrentStyleLibrary}" Grid.Column="0"/>
-            <Menu Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center">
+            <TextBox Text="{Binding CurrentStyleLibrary.Name, Mode=TwoWay}" BorderBrush="Transparent" Background="Transparent" VerticalAlignment="Center" Margin="0,0,0,0" IsVisible="{Binding !!$self.DataContext.CurrentStyleLibrary}" Grid.Column="0" x:CompileBindings="False"/>
+            <Menu Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center" x:CompileBindings="False">
                 <MenuItem Header="+" Command="{Binding $parent[Window].DataContext.OnAddStyleLibrary}"/>
                 <MenuItem Header="&#727;" Command="{Binding $parent[Window].DataContext.OnRemoveStyleLibrary}" CommandParameter="{Binding CurrentStyleLibrary}" IsVisible="{Binding !!$self.DataContext.CurrentStyleLibrary}"/>
             </Menu>
         </Grid>
-        <ComboBox Items="{Binding StyleLibraries}" SelectedItem="{Binding CurrentStyleLibrary, Mode=TwoWay}" Grid.Row="1" IsVisible="{Binding !!$self.DataContext.CurrentStyleLibrary}" HorizontalAlignment="Stretch">
+        <ComboBox Items="{Binding StyleLibraries}" SelectedItem="{Binding CurrentStyleLibrary, Mode=TwoWay}" Grid.Row="1" IsVisible="{Binding !!$self.DataContext.CurrentStyleLibrary}" HorizontalAlignment="Stretch" x:CompileBindings="False">
             <ComboBox.DataTemplates>
                 <DataTemplate>
                     <TextBlock Text="{Binding Name}"/>
                 </DataTemplate>
             </ComboBox.DataTemplates>
         </ComboBox>
-        <Menu Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Center" IsVisible="{Binding !!$self.DataContext.CurrentStyleLibrary}">
+        <Menu Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Center" IsVisible="{Binding !!$self.DataContext.CurrentStyleLibrary}" x:CompileBindings="False">
             <MenuItem Header="apply" Command="{Binding $parent[Window].DataContext.OnApplyStyle}" CommandParameter="{Binding CurrentStyleLibrary.Selected}" IsVisible="{Binding !!CurrentStyleLibrary.Selected}"/>
             <MenuItem Header="+" Command="{Binding $parent[Window].DataContext.OnAddStyle}" CommandParameter="{Binding CurrentStyleLibrary}"/>
             <MenuItem Header="&#727;" Command="{Binding $parent[Window].DataContext.OnRemoveStyle}" CommandParameter="{Binding CurrentStyleLibrary.Selected}" IsVisible="{Binding !!CurrentStyleLibrary.Selected}"/>
@@ -42,21 +44,21 @@
                 <idd:ContextDropBehavior Context="{Binding CurrentStyleLibrary, FallbackValue={x:Null}}" Handler="{StaticResource StylesListBoxDropHandler}"/>
             </i:Interaction.Behaviors>
             <ListBox.KeyBindings>
-                <KeyBinding Command="{Binding $parent[Window].DataContext.OnAddStyle}" CommandParameter="{Binding #styles.DataContext, Mode=OneWay}" Gesture="Ctrl+N"/>
-                <KeyBinding Command="{Binding $parent[Window].DataContext.OnRemoveStyle}" CommandParameter="{Binding #styles.SelectedItem}" Gesture="Delete"/>
-                <KeyBinding Command="{Binding $parent[Window].DataContext.Platform.OnExportObject}" CommandParameter="{Binding #styles.SelectedItem}" Gesture="Ctrl+E"/>
+                <KeyBinding Command="{Binding $parent[Window].DataContext.OnAddStyle}" CommandParameter="{Binding #styles.DataContext, Mode=OneWay}" Gesture="Ctrl+N" x:CompileBindings="False"/>
+                <KeyBinding Command="{Binding $parent[Window].DataContext.OnRemoveStyle}" CommandParameter="{Binding #styles.SelectedItem}" Gesture="Delete" x:CompileBindings="False"/>
+                <KeyBinding Command="{Binding $parent[Window].DataContext.Platform.OnExportObject}" CommandParameter="{Binding #styles.SelectedItem}" Gesture="Ctrl+E" x:CompileBindings="False"/>
             </ListBox.KeyBindings>
             <ListBox.DataTemplates>
                 <DataTemplate DataType="Style:IShapeStyle">
                     <TextBlock x:Name="style" Text="{Binding Name}" Background="Transparent">
                         <i:Interaction.Behaviors>
-                            <ia:EventTriggerBehavior EventName="DoubleTapped" SourceObject="{Binding #style}">
-                                <ia:InvokeCommandAction Command="{Binding $parent[Window].DataContext.OnApplyStyle}" CommandParameter="{Binding Mode=OneWay}"/>
+                            <ia:EventTriggerBehavior EventName="DoubleTapped" SourceObject="{Binding #style}" x:CompileBindings="False">
+                                <ia:InvokeCommandAction Command="{Binding $parent[Window].DataContext.OnApplyStyle}" CommandParameter="{Binding Mode=OneWay}" x:CompileBindings="False"/>
                             </ia:EventTriggerBehavior>
                             <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}"/>
                         </i:Interaction.Behaviors>
                         <TextBlock.ContextMenu>
-                            <ContextMenu>
+                            <ContextMenu x:CompileBindings="False">
                                 <MenuItem Header="_Delete" Command="{Binding $parent[Window].DataContext.OnRemoveStyle}" CommandParameter="{Binding Mode=OneWay}"/>
                                 <Separator/>
                                 <MenuItem Header="E_xport" Command="{Binding $parent[Window].DataContext.Platform.OnExportObject}" CommandParameter="{Binding Mode=OneWay}"/>
@@ -66,6 +68,6 @@
                 </DataTemplate>
             </ListBox.DataTemplates>
         </ListBox>
-        <TextBox Text="{Binding #styles.SelectedItem.Name, Mode=TwoWay}" IsVisible="{Binding !!#styles.SelectedItem}" BorderBrush="Transparent" Background="Transparent" Margin="0,12,0,0" Grid.Row="4"/>
+        <TextBox Text="{Binding #styles.SelectedItem.Name, Mode=TwoWay}" IsVisible="{Binding !!#styles.SelectedItem}" BorderBrush="Transparent" Background="Transparent" Margin="0,12,0,0" Grid.Row="4" x:CompileBindings="False"/>
     </Grid>
 </UserControl>

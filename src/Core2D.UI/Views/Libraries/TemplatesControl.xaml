@@ -13,12 +13,13 @@
              xmlns:Designer="clr-namespace:Core2D.UI.Designer;assembly=Core2D.UI"
              mc:Ignorable="d"
              d:DataContext="{x:Static Designer:DesignerContext.Project}"
-             d:DesignWidth="250" d:DesignHeight="400">
+             d:DesignWidth="250" d:DesignHeight="400"
+             x:DataType="Containers:IProjectContainer" x:CompileBindings="True">
     <UserControl.Resources>
         <handlers:TemplatesListBoxDropHandler x:Key="TemplatesListBoxDropHandler"/>
     </UserControl.Resources>
     <Grid RowDefinitions="Auto,*,Auto">
-        <Menu Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Center">
+        <Menu Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Center" x:CompileBindings="False">
             <MenuItem Header="apply" Command="{Binding $parent[Window].DataContext.OnApplyTemplate}" CommandParameter="{Binding CurrentTemplate}" IsVisible="{Binding !!#templates.SelectedItem}"/>
             <MenuItem Header="edit" Command="{Binding $parent[Window].DataContext.OnEditTemplate}" CommandParameter="{Binding CurrentTemplate}" IsVisible="{Binding !!#templates.SelectedItem}"/>
             <MenuItem Header="+" Command="{Binding $parent[Window].DataContext.OnAddTemplate}"/>
@@ -29,22 +30,22 @@
                 <idd:ContextDropBehavior Context="{Binding FallbackValue={x:Null}}" Handler="{StaticResource TemplatesListBoxDropHandler}"/>
             </i:Interaction.Behaviors>
             <ListBox.KeyBindings>
-                <KeyBinding Command="{Binding $parent[Window].DataContext.OnAddTemplate}" Gesture="Ctrl+N"/>
-                <KeyBinding Command="{Binding $parent[Window].DataContext.OnEditTemplate}" CommandParameter="{Binding #templates.SelectedItem}" Gesture="Ctrl+T"/>
-                <KeyBinding Command="{Binding $parent[Window].DataContext.OnRemoveTemplate}" CommandParameter="{Binding #templates.SelectedItem}" Gesture="Delete"/>
-                <KeyBinding Command="{Binding $parent[Window].DataContext.Platform.OnExportObject}" CommandParameter="{Binding #templates.SelectedItem}" Gesture="Ctrl+E"/>
+                <KeyBinding Command="{Binding $parent[Window].DataContext.OnAddTemplate}" Gesture="Ctrl+N" x:CompileBindings="False"/>
+                <KeyBinding Command="{Binding $parent[Window].DataContext.OnEditTemplate}" CommandParameter="{Binding #templates.SelectedItem}" Gesture="Ctrl+T" x:CompileBindings="False"/>
+                <KeyBinding Command="{Binding $parent[Window].DataContext.OnRemoveTemplate}" CommandParameter="{Binding #templates.SelectedItem}" Gesture="Delete" x:CompileBindings="False"/>
+                <KeyBinding Command="{Binding $parent[Window].DataContext.Platform.OnExportObject}" CommandParameter="{Binding #templates.SelectedItem}" Gesture="Ctrl+E" x:CompileBindings="False"/>
             </ListBox.KeyBindings>
             <ListBox.DataTemplates>
                 <DataTemplate DataType="Containers:IPageContainer">
                     <TextBlock x:Name="template" Text="{Binding Name}" Background="Transparent">
                         <i:Interaction.Behaviors>
-                            <ia:EventTriggerBehavior EventName="DoubleTapped" SourceObject="{Binding #template}">
-                                <ia:InvokeCommandAction Command="{Binding $parent[Window].DataContext.OnApplyTemplate}" CommandParameter="{Binding Mode=OneWay}"/>
+                            <ia:EventTriggerBehavior EventName="DoubleTapped" SourceObject="{Binding #template}" x:CompileBindings="False">
+                                <ia:InvokeCommandAction Command="{Binding $parent[Window].DataContext.OnApplyTemplate}" CommandParameter="{Binding Mode=OneWay}" x:CompileBindings="False"/>
                             </ia:EventTriggerBehavior>
                             <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}"/>
                         </i:Interaction.Behaviors>
                         <TextBlock.ContextMenu>
-                            <ContextMenu>
+                            <ContextMenu x:CompileBindings="False">
                                 <MenuItem Header="_Edit Template" Command="{Binding $parent[Window].DataContext.OnEditTemplate}" CommandParameter="{Binding Mode=OneWay}"/>
                                 <Separator/>
                                 <MenuItem Header="_Add Template" Command="{Binding $parent[Window].DataContext.OnAddTemplate}"/>
@@ -58,7 +59,7 @@
                 </DataTemplate>
             </ListBox.DataTemplates>
         </ListBox>
-        <TextBox Text="{Binding #templates.SelectedItem.Name, Mode=TwoWay}" IsVisible="{Binding !!#templates.SelectedItem}" BorderBrush="Transparent" Background="Transparent" Margin="0,12,0,0" Grid.Row="2"/>
+        <TextBox Text="{Binding #templates.SelectedItem.Name, Mode=TwoWay}" IsVisible="{Binding !!#templates.SelectedItem}" BorderBrush="Transparent" Background="Transparent" Margin="0,12,0,0" Grid.Row="2" x:CompileBindings="False"/>
     </Grid>
     <!--
     <TabControl>
