@@ -15,7 +15,7 @@
              d:DataContext="{x:Static Designer:DesignerContext.Group}"
              d:DesignWidth="250" d:DesignHeight="400"
              x:DataType="Shapes:IGroupShape" x:CompileBindings="True">
-    <Grid RowDefinitions="Auto,Auto,50*,50*">
+    <Grid RowDefinitions="Auto,Auto,6,50*,6,50*">
         <TabControl Grid.Row="0">
             <TabItem Header="Group">
                 <StackPanel>
@@ -63,7 +63,8 @@
                 </Grid>
             </TabItem>
         </TabControl>
-        <TabControl Grid.Row="2">
+        <GridSplitter ResizeDirection="Rows" ResizeBehavior="PreviousAndNext" Background="Transparent" Height="6" Grid.Row="2"/>
+        <TabControl Grid.Row="3">
             <TabItem Header="Shapes">
                 <ListBox x:Name="shapes" Items="{Binding Shapes}">
                     <ListBox.DataTemplates>
@@ -81,7 +82,8 @@
                 <ContentControl Content="{Binding #shapes.SelectedItem}"/>
             </TabItem>
         </TabControl>
-        <TabControl Grid.Row="3">
+        <GridSplitter ResizeDirection="Rows" ResizeBehavior="PreviousAndNext" Background="Transparent" Height="6" Grid.Row="4"/>
+        <TabControl Grid.Row="5">
             <TabItem Header="Connectors">
                 <ListBox x:Name="connectors" Items="{Binding Connectors}" x:DataType="Shapes:IConnectableShape">
                     <ListBox.DataTemplates>
