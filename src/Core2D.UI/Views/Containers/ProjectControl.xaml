@@ -78,7 +78,7 @@
                     </Grid>
                 </TreeDataTemplate>
                 <TreeDataTemplate DataType="Containers:IPageContainer" ItemsSource="{Binding Layers}" x:CompileBindings="False">
-                    <Grid x:Name="root" Background="Transparent"> x:CompileBindings="True"
+                    <Grid x:Name="root" Background="Transparent">
                         <i:Interaction.Behaviors>
                             <iac:BindTagToVisualRootDataContextBehavior/>
                             <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}"/>
