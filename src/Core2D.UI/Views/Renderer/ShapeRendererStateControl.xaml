@@ -5,11 +5,13 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:converters="clr-namespace:Core2D.UI.Converters;assembly=Core2D.UI"
              xmlns:libraries="clr-namespace:Core2D.UI.Views.Libraries;assembly=Core2D.UI"
+             xmlns:Renderer="clr-namespace:Core2D.Renderer;assembly=Core2D" 
              xmlns:Shapes="clr-namespace:Core2D.Shapes;assembly=Core2D" 
              xmlns:Designer="clr-namespace:Core2D.UI.Designer;assembly=Core2D.UI"
              mc:Ignorable="d"
              d:DataContext="{x:Static Designer:DesignerContext.ShapeRendererState}"
-             d:DesignWidth="250" d:DesignHeight="400">
+             d:DesignWidth="250" d:DesignHeight="400"
+             x:DataType="Renderer:IShapeRendererState" x:CompileBindings="True">
     <StackPanel>
         <TabControl>
             <TabItem Header="Point">
@@ -55,13 +57,13 @@
                         </ItemsPanelTemplate>
                     </ListBox.ItemsPanel>
                     <ListBox.KeyBindings>
-                        <KeyBinding Command="{Binding $parent[Window].DataContext.OnRemoveShape}" CommandParameter="{Binding #shapes.SelectedItem}" Gesture="Delete"/>
+                        <KeyBinding Command="{Binding $parent[Window].DataContext.OnRemoveShape}" CommandParameter="{Binding #shapes.SelectedItem}" Gesture="Delete" x:CompileBindings="False"/>
                     </ListBox.KeyBindings>
                     <ListBox.DataTemplates>
                         <DataTemplate DataType="Shapes:IBaseShape">
                             <TextBlock Text="{Binding Mode=OneWay, Converter={StaticResource ObjectToTypeStringConverter}}">
                                 <TextBlock.ContextMenu>
-                                    <ContextMenu>
+                                    <ContextMenu x:CompileBindings="False">
                                         <MenuItem Header="_Delete" Command="{Binding $parent[Window].DataContext.OnRemoveShape}" CommandParameter="{Binding}"/>
                                     </ContextMenu>
                                 </TextBlock.ContextMenu>
