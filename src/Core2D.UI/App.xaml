@@ -238,9 +238,6 @@
             <path:QuadraticBezierSegmentControl/>
         </DataTemplate>
         <!-- Containers -->
-        <DataTemplate DataType="Containers:ILibrary">
-            <containers:LibraryControl/>
-        </DataTemplate>
         <DataTemplate DataType="Containers:IOptions">
             <containers:OptionsControl/>
         </DataTemplate>
