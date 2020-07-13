@@ -1,17 +1,17 @@
 ﻿using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 
-namespace Core2D.UI.Views.Containers
+namespace Core2D.UI.Views.Libraries
 {
     /// <summary>
-    /// Interaction logic for <see cref="TemplatesControl"/> xaml.
+    /// Interaction logic for <see cref="StylesControl"/> xaml.
     /// </summary>
-    public class TemplatesControl : UserControl
+    public class StylesControl : UserControl
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="TemplatesControl"/> class.
+        /// Initializes a new instance of the <see cref="StylesControl"/> class.
         /// </summary>
-        public TemplatesControl()
+        public StylesControl()
         {
             InitializeComponent();
         }

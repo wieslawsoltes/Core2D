@@ -1,17 +1,17 @@
 ﻿using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 
-namespace Core2D.UI.Views.Containers
+namespace Core2D.UI.Views.Libraries
 {
     /// <summary>
-    /// Interaction logic for <see cref="ShapesControl"/> xaml.
+    /// Interaction logic for <see cref="TemplatesControl"/> xaml.
     /// </summary>
-    public class ShapesControl : UserControl
+    public class TemplatesControl : UserControl
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="ShapesControl"/> class.
+        /// Initializes a new instance of the <see cref="TemplatesControl"/> class.
         /// </summary>
-        public ShapesControl()
+        public TemplatesControl()
         {
             InitializeComponent();
         }

@@ -1,17 +1,17 @@
 ﻿using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 
-namespace Core2D.UI.Views.Containers
+namespace Core2D.UI.Views.Libraries
 {
     /// <summary>
-    /// Interaction logic for <see cref="DatabasesControl"/> xaml.
+    /// Interaction logic for <see cref="GroupsControl"/> xaml.
     /// </summary>
-    public class DatabasesControl : UserControl
+    public class GroupsControl : UserControl
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="DatabasesControl"/> class.
+        /// Initializes a new instance of the <see cref="GroupsControl"/> class.
         /// </summary>
-        public DatabasesControl()
+        public GroupsControl()
         {
             InitializeComponent();
         }

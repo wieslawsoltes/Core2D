@@ -13,6 +13,7 @@
              xmlns:containers="clr-namespace:Core2D.UI.Views.Containers;assembly=Core2D.UI"
              xmlns:scripting="clr-namespace:Core2D.UI.Views.Scripting;assembly=Core2D.UI"
              xmlns:renderer="clr-namespace:Core2D.UI.Views.Renderer;assembly=Core2D.UI"
+             xmlns:libraries="clr-namespace:Core2D.UI.Views.Libraries;assembly=Core2D.UI"
              xmlns:Editor="clr-namespace:Core2D.Editor;assembly=Core2D"
              xmlns:Recent="clr-namespace:Core2D.Editor.Recent;assembly=Core2D"
              xmlns:Designer="clr-namespace:Core2D.UI.Designer;assembly=Core2D.UI"
@@ -115,12 +116,12 @@
                         </TabItem>
                         <TabItem x:Name="ZoomOptionsTabItem" Header="Zoom">
                             <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-                                <containers:ZoomControl DataContext="{Binding CanvasPlatform.Zoom}" Margin="0,0,12,0"/>
+                                <views:ZoomControl DataContext="{Binding CanvasPlatform.Zoom}" Margin="0,0,12,0"/>
                             </ScrollViewer>
                         </TabItem>
                         <TabItem x:Name="ImagesOptionsTabItem" Header="Images">
                             <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-                                <containers:ImagesControl DataContext="{Binding Project}" Margin="0,0,12,0"/>
+                                <libraries:ImagesControl DataContext="{Binding Project}" Margin="0,0,12,0"/>
                             </ScrollViewer>
                         </TabItem>
                     </TabControl>
@@ -136,22 +137,19 @@
                 <TabItem x:Name="LibrariesTabItem" Header="Libraries">
                     <TabControl x:Name="LibrariesTabControl">
                         <TabItem x:Name="StylesTabItem" Header="Styles">
-                            <containers:StylesControl DataContext="{Binding Project}" Margin="0,0,12,0"/>
+                            <libraries:StylesControl DataContext="{Binding Project}" Margin="0,0,12,0"/>
                         </TabItem>
                         <TabItem x:Name="GroupsTabItem" Header="Groups">
-                            <containers:GroupsControl DataContext="{Binding Project}" Margin="0,0,12,0"/>
+                            <libraries:GroupsControl DataContext="{Binding Project}" Margin="0,0,12,0"/>
                         </TabItem>
                         <TabItem x:Name="DataTabItem" Header="Data">
-                            <containers:DatabasesControl DataContext="{Binding Project}" Margin="0,0,12,0"/>
+                            <libraries:DatabasesControl DataContext="{Binding Project}" Margin="0,0,12,0"/>
                         </TabItem>
                         <TabItem x:Name="TemplatesTabItem" Header="Templates">
-                            <containers:TemplatesControl DataContext="{Binding Project}" Margin="0,0,12,0"/>
+                            <libraries:TemplatesControl DataContext="{Binding Project}" Margin="0,0,12,0"/>
                         </TabItem>
                     </TabControl>
                 </TabItem>
-                <!--<TabItem x:Name="LayersTabItem" Header="Layers">
-                    <containers:LayersControl DataContext="{Binding Project.CurrentContainer}" Margin="0,0,12,0"/>
-                </TabItem>-->
                 <TabItem x:Name="ScriptsTabItem" Header="Scripts">
                     <Grid RowDefinitions="50*,6,50*">
                         <scripting:ScriptsControl DataContext="{Binding Project}" Grid.Row="0" Margin="0,0,12,0"/>
