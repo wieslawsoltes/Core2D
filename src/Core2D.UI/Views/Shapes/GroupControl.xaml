@@ -20,14 +20,14 @@
             <TabItem Header="Group">
                 <StackPanel>
                     <TextBlock Text="Name"  Margin="{DynamicResource TextControlThemePadding}"/>
-                    <TextBox Text="{Binding Name, Mode=TwoWay}" x:DataType="Core:IObservableObject"/>
+                    <TextBox Text="{Binding Name, Mode=TwoWay}"/>
                 </StackPanel>
             </TabItem>
             <TabItem Header="Data">
-                <ContentControl Content="{Binding Data}" x:DataType="Shapes:IBaseShape"/>
+                <ContentControl Content="{Binding Data}"/>
             </TabItem>
             <TabItem Header="State">
-                <ContentControl Content="{Binding State}" x:DataType="Shapes:IBaseShape"/>
+                <ContentControl Content="{Binding State}"/>
             </TabItem>
         </TabControl>
         <TabControl Grid.Row="1">
@@ -41,7 +41,7 @@
                                     <i:Interaction.Behaviors>
                                         <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}"/>
                                     </i:Interaction.Behaviors>
-                                    <TextBox VerticalAlignment="Center" Text="{Binding Name, Mode=TwoWay}" x:DataType="Core:IObservableObject"/>
+                                    <TextBox VerticalAlignment="Center" Text="{Binding Name, Mode=TwoWay}"/>
                                 </Grid>
                             </DataTemplate>
                         </ItemsControl.DataTemplates>

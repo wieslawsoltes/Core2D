@@ -14,7 +14,7 @@
              x:DataType="Style:ITextStyle" x:CompileBindings="True">
     <StackPanel>
         <TextBlock Text="Name" Margin="{DynamicResource TextControlThemePadding}"/>
-        <TextBox Text="{Binding Name, Mode=TwoWay}" x:DataType="Core:IObservableObject"/>
+        <TextBox Text="{Binding Name, Mode=TwoWay}"/>
         <TextBlock Text="FontName" Margin="{DynamicResource TextControlThemePadding}"/>
         <TextBox Text="{Binding FontName, Mode=TwoWay}"/>
         <TextBlock Text="FontFile" Margin="{DynamicResource TextControlThemePadding}"/>

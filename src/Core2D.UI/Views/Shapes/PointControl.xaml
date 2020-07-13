@@ -16,7 +16,7 @@
         <TabItem Header="Point">
             <StackPanel>
                 <TextBlock Text="Name" Margin="{DynamicResource TextControlThemePadding}"/>
-                <TextBox Text="{Binding Name, Mode=TwoWay}" x:DataType="Core:IObservableObject"/>
+                <TextBox Text="{Binding Name, Mode=TwoWay}"/>
                 <TextBlock Text="X" Margin="{DynamicResource TextControlThemePadding}"/>
                 <TextBox Text="{Binding X, Mode=TwoWay}"/>
                 <TextBlock Text="Y" Margin="{DynamicResource TextControlThemePadding}"/>
@@ -26,10 +26,10 @@
             </StackPanel>
         </TabItem>
         <TabItem Header="Data">
-            <ContentControl Content="{Binding Data}" x:DataType="Shapes:IBaseShape"/>
+            <ContentControl Content="{Binding Data}"/>
         </TabItem>
         <TabItem Header="State">
-            <ContentControl Content="{Binding State}" x:DataType="Shapes:IBaseShape"/>
+            <ContentControl Content="{Binding State}"/>
         </TabItem>
     </TabControl>
 </UserControl>

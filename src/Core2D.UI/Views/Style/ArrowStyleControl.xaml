@@ -16,7 +16,7 @@
     <Grid RowDefinitions="Auto,*">
         <StackPanel Grid.Row="0">
             <TextBlock Text="Name" Margin="{DynamicResource TextControlThemePadding}"/>
-            <TextBox Text="{Binding Name, Mode=TwoWay}" x:DataType="Core:IObservableObject"/>
+            <TextBox Text="{Binding Name, Mode=TwoWay}"/>
             <TextBlock Text="Arrow Type" Margin="{DynamicResource TextControlThemePadding}"/>
             <ComboBox Items="{x:Static Editor:Enums.ArrowTypeValues}" SelectedItem="{Binding ArrowType, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
             <CheckBox Content="IsStroked" IsChecked="{Binding IsStroked, Mode=TwoWay}" HorizontalAlignment="Stretch"/>

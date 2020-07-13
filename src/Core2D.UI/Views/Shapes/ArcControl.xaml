@@ -16,19 +16,19 @@
             <TabItem Header="Arc">
                 <StackPanel>
                     <TextBlock Text="Name" Margin="{DynamicResource TextControlThemePadding}"/>
-                    <TextBox Text="{Binding Name, Mode=TwoWay}" x:DataType="Core:IObservableObject"/>
-                    <CheckBox Content="IsStroked" IsChecked="{Binding IsStroked, Mode=TwoWay}" x:DataType="Core:IDrawable" HorizontalAlignment="Stretch"/>
-                    <CheckBox Content="IsFilled" IsChecked="{Binding IsFilled, Mode=TwoWay}" x:DataType="Core:IDrawable" HorizontalAlignment="Stretch"/>
+                    <TextBox Text="{Binding Name, Mode=TwoWay}"/>
+                    <CheckBox Content="IsStroked" IsChecked="{Binding IsStroked, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
+                    <CheckBox Content="IsFilled" IsChecked="{Binding IsFilled, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
                 </StackPanel>
             </TabItem>
             <TabItem Header="Data">
-                <ContentControl Content="{Binding Data}" x:DataType="Shapes:IBaseShape"/>
+                <ContentControl Content="{Binding Data}"/>
             </TabItem>
             <TabItem Header="Style">
-                <ContentControl Content="{Binding Style}" x:DataType="Core:IDrawable"/>
+                <ContentControl Content="{Binding Style}"/>
             </TabItem>
             <TabItem Header="State">
-                <ContentControl Content="{Binding State}" x:DataType="Shapes:IBaseShape"/>
+                <ContentControl Content="{Binding State}"/>
             </TabItem>
         </TabControl>
         <TabControl Grid.Row="1">

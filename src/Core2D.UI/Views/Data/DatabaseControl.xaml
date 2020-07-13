@@ -18,7 +18,7 @@
     <Grid RowDefinitions="Auto,*,6,Auto">
         <!--<StackPanel Grid.Row="0">
             <TextBlock Text="Name" Margin="{DynamicResource TextControlThemePadding}"/>
-            <TextBox Text="{Binding Name, Mode=TwoWay}" x:DataType="Core:IObservableObject"/>
+            <TextBox Text="{Binding Name, Mode=TwoWay}"/>
         </StackPanel>-->
         <TabControl Grid.Row="1">
             <TabItem Header="Records">
@@ -75,11 +75,11 @@
                             <KeyBinding Command="{Binding $parent[Window].DataContext.OnRemoveColumn}" CommandParameter="{Binding #columnsDataGrid.SelectedItem}" Gesture="Delete" x:CompileBindings="False"/>
                         </DataGrid.KeyBindings>
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="Name" IsReadOnly="False" Binding="{Binding Name}" x:DataType="Core:IObservableObject"/>
+                            <DataGridTextColumn Header="Name" IsReadOnly="False" Binding="{Binding Name}"/>
                             <DataGridTextColumn Header="Width" Binding="{Binding Width}" x:DataType="Data:IColumn"/>
                             <DataGridCheckBoxColumn Header="IsVisible" Binding="{Binding IsVisible}" x:DataType="Data:IColumn"/>
-                            <DataGridTextColumn Header="Owner" Binding="{Binding Owner.Name}" x:DataType="Core:IObservableObject" IsReadOnly="True"/>
-                            <DataGridTextColumn Header="Id" Binding="{Binding Id}" x:DataType="Core:IObservableObject"/>
+                            <DataGridTextColumn Header="Owner" Binding="{Binding Owner.Name}" IsReadOnly="True"/>
+                            <DataGridTextColumn Header="Id" Binding="{Binding Id}"/>
                         </DataGrid.Columns>
                     </DataGrid>
                 </Grid>

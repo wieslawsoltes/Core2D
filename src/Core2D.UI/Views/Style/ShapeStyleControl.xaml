@@ -15,7 +15,7 @@
     <Grid RowDefinitions="Auto,*">
         <StackPanel Grid.Row="0">
             <TextBlock Text="Name" Margin="{DynamicResource TextControlThemePadding}"/>
-            <TextBox Text="{Binding Name, Mode=TwoWay}" x:DataType="Core:IObservableObject"/>
+            <TextBox Text="{Binding Name, Mode=TwoWay}"/>
             <TextBlock Text="Thickness" Margin="{DynamicResource TextControlThemePadding}"/>
             <TextBox Text="{Binding Thickness, Mode=TwoWay}" x:DataType="Style:IBaseStyle"/>
             <TextBlock Text="Line Cap" Margin="{DynamicResource TextControlThemePadding}"/>

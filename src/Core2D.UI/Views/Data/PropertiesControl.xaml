@@ -29,7 +29,7 @@
                                 <i:Interaction.Behaviors>
                                     <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}"/>
                                 </i:Interaction.Behaviors>
-                                <TextBox VerticalAlignment="Center" Text="{Binding Name, Mode=TwoWay}" x:DataType="Core:IObservableObject"/>
+                                <TextBox VerticalAlignment="Center" Text="{Binding Name, Mode=TwoWay}"/>
                             </Grid>
                         </DataTemplate>
                     </ItemsControl.DataTemplates>

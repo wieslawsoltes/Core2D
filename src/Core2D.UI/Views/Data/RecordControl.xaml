@@ -17,14 +17,14 @@
     <ScrollViewer>
         <Grid RowDefinitions="Auto,*" ColumnDefinitions="50*,Auto,50*">
             <TextBlock Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" Text="Name"/>
-            <ItemsControl VerticalAlignment="Stretch" Grid.Column="0" Grid.Row="1" Items="{Binding Owner.Columns}" x:DataType="Data:IDatabase" x:CompileBindings="False">
+            <ItemsControl VerticalAlignment="Stretch" Grid.Column="0" Grid.Row="1" DataContext="{Binding Owner}" Items="{Binding Columns}" x:DataType="Data:IDatabase">
                 <ItemsControl.DataTemplates>
                     <DataTemplate DataType="Data:IColumn">
                         <Grid VerticalAlignment="Top" Background="Transparent">
                             <i:Interaction.Behaviors>
                                 <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}"/>
                             </i:Interaction.Behaviors>
-                            <TextBox VerticalAlignment="Center" Text="{Binding Name, Mode=TwoWay}" x:DataType="Core:IObservableObject"/>
+                            <TextBox VerticalAlignment="Center" Text="{Binding Name, Mode=TwoWay}"/>
                         </Grid>
                     </DataTemplate>
                 </ItemsControl.DataTemplates>
