@@ -7,10 +7,12 @@
              xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
              xmlns:idd="clr-namespace:Core2D.UI.DragAndDrop;assembly=Core2D.UI"
              xmlns:converters="clr-namespace:Core2D.UI.Converters;assembly=Core2D.UI"
+             xmlns:Editor="clr-namespace:Core2D.Editor;assembly=Core2D"
              xmlns:Designer="clr-namespace:Core2D.UI.Designer;assembly=Core2D.UI"
              mc:Ignorable="d"
              d:DataContext="{x:Static Designer:DesignerContext.Editor}"
-             d:DesignWidth="1200" d:DesignHeight="540">
+             d:DesignWidth="1200" d:DesignHeight="540"
+             x:DataType="Editor:IProjectEditor" x:CompileBindings="True">
     <UserControl.Resources>
         <converters:EditorToStatsMultiConverter x:Key="EditorToStatsMultiConverter"/>
         <converters:ObjectToObjectConverter x:Key="ObjectToObjectConverter"/>

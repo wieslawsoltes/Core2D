@@ -5,6 +5,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:converters="clr-namespace:Core2D.UI.Converters;assembly=Core2D.UI"
         xmlns:views="clr-namespace:Core2D.UI.Views;assembly=Core2D.UI"
+        xmlns:Editor="clr-namespace:Core2D.Editor;assembly=Core2D"
         xmlns:Designer="clr-namespace:Core2D.UI.Designer;assembly=Core2D.UI"
         Width="1324" Height="690"
         WindowState="Maximized" WindowStartupLocation="Manual"
@@ -15,7 +16,8 @@
         Icon="/Assets/Core2D.ico"
         mc:Ignorable="d"
         d:DataContext="{x:Static Designer:DesignerContext.Editor}"
-        d:DesignWidth="1200" d:DesignHeight="580">
+        d:DesignWidth="1200" d:DesignHeight="580"
+             x:DataType="Editor:IProjectEditor" x:CompileBindings="True">
     <Window.Title>
         <MultiBinding Mode="OneWay" Converter="{StaticResource EditorToTitleMultiConverter}">
             <Binding Path="Project.Name"/>

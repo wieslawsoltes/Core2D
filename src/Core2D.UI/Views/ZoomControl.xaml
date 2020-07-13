@@ -8,9 +8,11 @@
              xmlns:idd="clr-namespace:Core2D.UI.DragAndDrop;assembly=Core2D.UI"
              xmlns:converters="clr-namespace:Core2D.UI.Converters;assembly=Core2D.UI"
              xmlns:paz="clr-namespace:Avalonia.Controls.PanAndZoom;assembly=Avalonia.Controls.PanAndZoom"
+             xmlns:Editor="clr-namespace:Core2D.Editor;assembly=Core2D"
              xmlns:Designer="clr-namespace:Core2D.UI.Designer;assembly=Core2D.UI"
              mc:Ignorable="d"
-             d:DesignWidth="250" d:DesignHeight="400">
+             d:DesignWidth="250" d:DesignHeight="400"
+             x:DataType="paz:ZoomBorder" x:CompileBindings="True">
     <StackPanel>
         <TabControl>
             <TabItem Header="Status">
@@ -23,8 +25,8 @@
                     <TextBlock Text="{Binding OffsetX, Mode=OneWay}" Margin="{DynamicResource TextControlThemePadding}"/>
                     <TextBlock Text="OffsetY" Margin="{DynamicResource TextControlThemePadding}"/>
                     <TextBlock Text="{Binding OffsetY, Mode=OneWay}" Margin="{DynamicResource TextControlThemePadding}"/>
-                    <Button Content="Reset" Command="{Binding $parent[Window].DataContext.Platform.OnZoomReset}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Margin="{DynamicResource TextControlThemePadding}"/>
-                    <Button Content="AutoFit" Command="{Binding $parent[Window].DataContext.Platform.OnZoomAutoFit}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Margin="{DynamicResource TextControlThemePadding}"/>
+                    <Button Content="Reset" Command="{Binding $parent[Window].DataContext.Platform.OnZoomReset}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Margin="{DynamicResource TextControlThemePadding}" x:CompileBindings="False"/>
+                    <Button Content="AutoFit" Command="{Binding $parent[Window].DataContext.Platform.OnZoomAutoFit}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Margin="{DynamicResource TextControlThemePadding}" x:CompileBindings="False"/>
                 </StackPanel>
             </TabItem>
         </TabControl>

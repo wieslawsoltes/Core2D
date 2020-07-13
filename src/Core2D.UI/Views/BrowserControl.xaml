@@ -18,7 +18,8 @@
              xmlns:Designer="clr-namespace:Core2D.UI.Designer;assembly=Core2D.UI"
              mc:Ignorable="d"
              d:DataContext="{x:Static Designer:DesignerContext.Editor}"
-             d:DesignWidth="1000" d:DesignHeight="600">
+             d:DesignWidth="1000" d:DesignHeight="600"
+             x:DataType="Editor:IProjectEditor" x:CompileBindings="True">
     <UserControl.Resources>
         <converters:ObjectToTypeStringConverter x:Key="ObjectToTypeStringConverter"/>
         <converters:TreeViewSelectedItemToObjectConverter x:Key="TreeViewSelectedItemToObjectConverter"/>
@@ -26,17 +27,17 @@
     <Grid RowDefinitions="50*,6,50*">
         <TreeView x:Name="project" Grid.Row="0">
             <TreeView.KeyBindings>
-                <KeyBinding Command="{Binding $parent[UserControl].DataContext.Platform.OnExportObject}" CommandParameter="{Binding #project.SelectedItem}" Gesture="Ctrl+E"/>
+                <KeyBinding Command="{Binding $parent[UserControl].DataContext.Platform.OnExportObject}" CommandParameter="{Binding #project.SelectedItem}" Gesture="Ctrl+E" x:CompileBindings="False"/>
             </TreeView.KeyBindings>
             <TreeViewItem Header="{Binding Name}" DataContext="{Binding Project}" IsExpanded="True">
                 <TreeViewItem.ContextMenu>
                     <ContextMenu>
-                        <MenuItem Header="E_xport" Command="{Binding $parent[UserControl].DataContext.Platform.OnExportObject}" CommandParameter="{Binding}"/>
+                        <MenuItem Header="E_xport" Command="{Binding $parent[UserControl].DataContext.Platform.OnExportObject}" CommandParameter="{Binding}" x:CompileBindings="False"/>
                     </ContextMenu>
                 </TreeViewItem.ContextMenu>
                 <TreeViewItem Header="Styles" DataContext="{Binding StyleLibraries}" Items="{Binding}">
                     <TreeViewItem.ContextMenu>
-                        <ContextMenu>
+                        <ContextMenu x:CompileBindings="False">
                             <MenuItem Header="E_xport" Command="{Binding $parent[UserControl].DataContext.Platform.OnExportObject}" CommandParameter="{Binding}"/>
                         </ContextMenu>
                     </TreeViewItem.ContextMenu>
@@ -46,13 +47,13 @@
                         </Style>
                     </TreeViewItem.Styles>
                     <TreeViewItem.DataTemplates>
-                        <TreeDataTemplate DataType="Containers:ILibrary" ItemsSource="{Binding Items}">
+                        <TreeDataTemplate DataType="Containers:ILibrary" ItemsSource="{Binding Items}" x:CompileBindings="False">
                             <TextBlock Text="{Binding Name}" Background="Transparent">
                                 <i:Interaction.Behaviors>
                                     <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}"/>
                                 </i:Interaction.Behaviors>
                                 <TextBlock.ContextMenu>
-                                    <ContextMenu>
+                                    <ContextMenu x:CompileBindings="False">
                                         <MenuItem Header="E_xport" Command="{Binding $parent[UserControl].DataContext.Platform.OnExportObject}" CommandParameter="{Binding}"/>
                                     </ContextMenu>
                                 </TextBlock.ContextMenu>
@@ -64,7 +65,7 @@
                                     <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}"/>
                                 </i:Interaction.Behaviors>
                                 <TextBlock.ContextMenu>
-                                    <ContextMenu>
+                                    <ContextMenu x:CompileBindings="False">
                                         <MenuItem Header="E_xport" Command="{Binding $parent[UserControl].DataContext.Platform.OnExportObject}" CommandParameter="{Binding}"/>
                                     </ContextMenu>
                                 </TextBlock.ContextMenu>
@@ -74,7 +75,7 @@
                 </TreeViewItem>
                 <TreeViewItem Header="Groups" DataContext="{Binding GroupLibraries}" Items="{Binding}">
                     <TreeViewItem.ContextMenu>
-                        <ContextMenu>
+                        <ContextMenu x:CompileBindings="False">
                             <MenuItem Header="E_xport" Command="{Binding $parent[UserControl].DataContext.Platform.OnExportObject}" CommandParameter="{Binding}"/>
                         </ContextMenu>
                     </TreeViewItem.ContextMenu>
@@ -84,25 +85,25 @@
                         </Style>
                     </TreeViewItem.Styles>
                     <TreeViewItem.DataTemplates>
-                        <TreeDataTemplate DataType="Containers:ILibrary" ItemsSource="{Binding Items}">
+                        <TreeDataTemplate DataType="Containers:ILibrary" ItemsSource="{Binding Items}" x:CompileBindings="False">
                             <TextBlock Text="{Binding Name}" Background="Transparent">
                                 <i:Interaction.Behaviors>
                                     <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}"/>
                                 </i:Interaction.Behaviors>
                                 <TextBlock.ContextMenu>
-                                    <ContextMenu>
+                                    <ContextMenu x:CompileBindings="False">
                                         <MenuItem Header="E_xport" Command="{Binding $parent[UserControl].DataContext.Platform.OnExportObject}" CommandParameter="{Binding}"/>
                                     </ContextMenu>
                                 </TextBlock.ContextMenu>
                             </TextBlock>
                         </TreeDataTemplate>
-                        <TreeDataTemplate DataType="Shapes:IGroupShape" ItemsSource="{Binding Resources}">
+                        <TreeDataTemplate DataType="Shapes:IGroupShape" ItemsSource="{Binding Resources}" x:CompileBindings="False">
                             <TextBlock Text="{Binding Name}" Background="Transparent">
                                 <i:Interaction.Behaviors>
                                     <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}"/>
                                 </i:Interaction.Behaviors>
                                 <TextBlock.ContextMenu>
-                                    <ContextMenu>
+                                    <ContextMenu x:CompileBindings="False">
                                         <MenuItem Header="E_xport" Command="{Binding $parent[UserControl].DataContext.Platform.OnExportObject}" CommandParameter="{Binding}"/>
                                     </ContextMenu>
                                 </TextBlock.ContextMenu>
@@ -114,7 +115,7 @@
                                     <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}"/>
                                 </i:Interaction.Behaviors>
                                 <TextBlock.ContextMenu>
-                                    <ContextMenu>
+                                    <ContextMenu x:CompileBindings="False">
                                         <MenuItem Header="E_xport" Command="{Binding $parent[UserControl].DataContext.Platform.OnExportObject}" CommandParameter="{Binding}"/>
                                     </ContextMenu>
                                 </TextBlock.ContextMenu>
@@ -124,7 +125,7 @@
                 </TreeViewItem>
                 <TreeViewItem Header="Databases" DataContext="{Binding Databases}" Items="{Binding}">
                     <TreeViewItem.ContextMenu>
-                        <ContextMenu>
+                        <ContextMenu x:CompileBindings="False">
                             <MenuItem Header="E_xport" Command="{Binding $parent[UserControl].DataContext.Platform.OnExportObject}" CommandParameter="{Binding}"/>
                         </ContextMenu>
                     </TreeViewItem.ContextMenu>
@@ -140,7 +141,7 @@
                                     <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}"/>
                                 </i:Interaction.Behaviors>
                                 <TextBlock.ContextMenu>
-                                    <ContextMenu>
+                                    <ContextMenu x:CompileBindings="False">
                                         <MenuItem Header="E_xport" Command="{Binding $parent[UserControl].DataContext.Platform.OnExportObject}" CommandParameter="{Binding}"/>
                                     </ContextMenu>
                                 </TextBlock.ContextMenu>
@@ -150,7 +151,7 @@
                 </TreeViewItem>
                 <TreeViewItem Header="Templates" DataContext="{Binding Templates}" Items="{Binding}">
                     <TreeViewItem.ContextMenu>
-                        <ContextMenu>
+                        <ContextMenu x:CompileBindings="False">
                             <MenuItem Header="E_xport" Command="{Binding $parent[UserControl].DataContext.Platform.OnExportObject}" CommandParameter="{Binding}"/>
                         </ContextMenu>
                     </TreeViewItem.ContextMenu>
@@ -160,37 +161,37 @@
                         </Style>
                     </TreeViewItem.Styles>
                     <TreeViewItem.DataTemplates>
-                        <TreeDataTemplate DataType="Containers:IPageContainer" ItemsSource="{Binding Layers}">
+                        <TreeDataTemplate DataType="Containers:IPageContainer" ItemsSource="{Binding Layers}" x:CompileBindings="False">
                             <TextBlock Text="{Binding Name}" Background="Transparent">
                                 <i:Interaction.Behaviors>
                                     <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}"/>
                                 </i:Interaction.Behaviors>
                                 <TextBlock.ContextMenu>
-                                    <ContextMenu>
+                                    <ContextMenu x:CompileBindings="False">
                                         <MenuItem Header="E_xport" Command="{Binding $parent[UserControl].DataContext.Platform.OnExportObject}" CommandParameter="{Binding}"/>
                                     </ContextMenu>
                                 </TextBlock.ContextMenu>
                             </TextBlock>
                         </TreeDataTemplate>
-                        <TreeDataTemplate DataType="Containers:ILayerContainer" ItemsSource="{Binding Shapes}">
+                        <TreeDataTemplate DataType="Containers:ILayerContainer" ItemsSource="{Binding Shapes}" x:CompileBindings="False">
                             <TextBlock Text="{Binding Name}" Background="Transparent">
                                 <i:Interaction.Behaviors>
                                     <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}"/>
                                 </i:Interaction.Behaviors>
                                 <TextBlock.ContextMenu>
-                                    <ContextMenu>
+                                    <ContextMenu x:CompileBindings="False">
                                         <MenuItem Header="E_xport" Command="{Binding $parent[UserControl].DataContext.Platform.OnExportObject}" CommandParameter="{Binding}"/>
                                     </ContextMenu>
                                 </TextBlock.ContextMenu>
                             </TextBlock>
                         </TreeDataTemplate>
-                        <TreeDataTemplate DataType="Shapes:IBaseShape" ItemsSource="{Binding Resources}">
+                        <TreeDataTemplate DataType="Shapes:IBaseShape" ItemsSource="{Binding Resources}" x:CompileBindings="False">
                             <TextBlock Text="{Binding Mode=OneWay, Converter={StaticResource ObjectToTypeStringConverter}}" Background="Transparent">
                                 <i:Interaction.Behaviors>
                                     <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}"/>
                                 </i:Interaction.Behaviors>
                                 <TextBlock.ContextMenu>
-                                    <ContextMenu>
+                                    <ContextMenu x:CompileBindings="False">
                                         <MenuItem Header="E_xport" Command="{Binding $parent[UserControl].DataContext.Platform.OnExportObject}" CommandParameter="{Binding}"/>
                                     </ContextMenu>
                                 </TextBlock.ContextMenu>
@@ -202,7 +203,7 @@
                                     <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}"/>
                                 </i:Interaction.Behaviors>
                                 <TextBlock.ContextMenu>
-                                    <ContextMenu>
+                                    <ContextMenu x:CompileBindings="False">
                                         <MenuItem Header="E_xport" Command="{Binding $parent[UserControl].DataContext.Platform.OnExportObject}" CommandParameter="{Binding}"/>
                                     </ContextMenu>
                                 </TextBlock.ContextMenu>
@@ -212,7 +213,7 @@
                 </TreeViewItem>
                 <TreeViewItem Header="Scripts" DataContext="{Binding Scripts}" Items="{Binding}">
                     <TreeViewItem.ContextMenu>
-                        <ContextMenu>
+                        <ContextMenu x:CompileBindings="False">
                             <MenuItem Header="E_xport" Command="{Binding $parent[UserControl].DataContext.Platform.OnExportObject}" CommandParameter="{Binding}"/>
                         </ContextMenu>
                     </TreeViewItem.ContextMenu>
@@ -228,7 +229,7 @@
                                     <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}"/>
                                 </i:Interaction.Behaviors>
                                 <TextBlock.ContextMenu>
-                                    <ContextMenu>
+                                    <ContextMenu x:CompileBindings="False">
                                         <MenuItem Header="E_xport" Command="{Binding $parent[UserControl].DataContext.Platform.OnExportObject}" CommandParameter="{Binding}"/>
                                     </ContextMenu>
                                 </TextBlock.ContextMenu>
@@ -238,7 +239,7 @@
                 </TreeViewItem>
                 <TreeViewItem Header="Documents" DataContext="{Binding Documents}" Items="{Binding}">
                     <TreeViewItem.ContextMenu>
-                        <ContextMenu>
+                        <ContextMenu x:CompileBindings="False">
                             <MenuItem Header="E_xport" Command="{Binding $parent[UserControl].DataContext.Platform.OnExportObject}" CommandParameter="{Binding}"/>
                         </ContextMenu>
                     </TreeViewItem.ContextMenu>
@@ -248,49 +249,49 @@
                         </Style>
                     </TreeViewItem.Styles>
                     <TreeViewItem.DataTemplates>
-                        <TreeDataTemplate DataType="Containers:IDocumentContainer" ItemsSource="{Binding Pages}">
+                        <TreeDataTemplate DataType="Containers:IDocumentContainer" ItemsSource="{Binding Pages}" x:CompileBindings="False">
                             <TextBlock Text="{Binding Name}" Background="Transparent">
                                 <i:Interaction.Behaviors>
                                     <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}"/>
                                 </i:Interaction.Behaviors>
                                 <TextBlock.ContextMenu>
-                                    <ContextMenu>
+                                    <ContextMenu x:CompileBindings="False">
                                         <MenuItem Header="E_xport" Command="{Binding $parent[UserControl].DataContext.Platform.OnExportObject}" CommandParameter="{Binding}"/>
                                     </ContextMenu>
                                 </TextBlock.ContextMenu>
                             </TextBlock>
                         </TreeDataTemplate>
-                        <TreeDataTemplate DataType="Containers:IPageContainer" ItemsSource="{Binding Layers}">
+                        <TreeDataTemplate DataType="Containers:IPageContainer" ItemsSource="{Binding Layers}" x:CompileBindings="False">
                             <TextBlock Text="{Binding Name}" Background="Transparent">
                                 <i:Interaction.Behaviors>
                                     <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}"/>
                                 </i:Interaction.Behaviors>
                                 <TextBlock.ContextMenu>
-                                    <ContextMenu>
+                                    <ContextMenu x:CompileBindings="False">
                                         <MenuItem Header="E_xport" Command="{Binding $parent[UserControl].DataContext.Platform.OnExportObject}" CommandParameter="{Binding}"/>
                                     </ContextMenu>
                                 </TextBlock.ContextMenu>
                             </TextBlock>
                         </TreeDataTemplate>
-                        <TreeDataTemplate DataType="Containers:ILayerContainer" ItemsSource="{Binding Shapes}">
+                        <TreeDataTemplate DataType="Containers:ILayerContainer" ItemsSource="{Binding Shapes}" x:CompileBindings="False">
                             <TextBlock Text="{Binding Name}" Background="Transparent">
                                 <i:Interaction.Behaviors>
                                     <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}"/>
                                 </i:Interaction.Behaviors>
                                 <TextBlock.ContextMenu>
-                                    <ContextMenu>
+                                    <ContextMenu x:CompileBindings="False">
                                         <MenuItem Header="E_xport" Command="{Binding $parent[UserControl].DataContext.Platform.OnExportObject}" CommandParameter="{Binding}"/>
                                     </ContextMenu>
                                 </TextBlock.ContextMenu>
                             </TextBlock>
                         </TreeDataTemplate>
-                        <TreeDataTemplate DataType="Shapes:IBaseShape" ItemsSource="{Binding Resources}">
+                        <TreeDataTemplate DataType="Shapes:IBaseShape" ItemsSource="{Binding Resources}" x:CompileBindings="False">
                             <TextBlock Text="{Binding Mode=OneWay, Converter={StaticResource ObjectToTypeStringConverter}}" Background="Transparent">
                                 <i:Interaction.Behaviors>
                                     <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}"/>
                                 </i:Interaction.Behaviors>
                                 <TextBlock.ContextMenu>
-                                    <ContextMenu>
+                                    <ContextMenu x:CompileBindings="False">
                                         <MenuItem Header="E_xport" Command="{Binding $parent[UserControl].DataContext.Platform.OnExportObject}" CommandParameter="{Binding}"/>
                                     </ContextMenu>
                                 </TextBlock.ContextMenu>
@@ -302,7 +303,7 @@
                                     <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}"/>
                                 </i:Interaction.Behaviors>
                                 <TextBlock.ContextMenu>
-                                    <ContextMenu>
+                                    <ContextMenu x:CompileBindings="False">
                                         <MenuItem Header="E_xport" Command="{Binding $parent[UserControl].DataContext.Platform.OnExportObject}" CommandParameter="{Binding}"/>
                                     </ContextMenu>
                                 </TextBlock.ContextMenu>
@@ -314,7 +315,7 @@
         </TreeView>
         <GridSplitter ResizeDirection="Rows" ResizeBehavior="PreviousAndNext" Background="Transparent" Height="6" Grid.Row="1"/>
         <Border Grid.Row="2">
-            <ContentControl Content="{Binding #project.SelectedItem, Converter={StaticResource TreeViewSelectedItemToObjectConverter}}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+            <ContentControl Content="{Binding #project.SelectedItem, Converter={StaticResource TreeViewSelectedItemToObjectConverter}}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" x:CompileBindings="False"/>
         </Border>
     </Grid>
 </UserControl>
