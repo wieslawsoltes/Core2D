@@ -23,19 +23,17 @@
         <converters:ObjectToTypeStringConverter x:Key="ObjectToTypeStringConverter"/>
         <converters:TreeViewSelectedItemToObjectConverter x:Key="TreeViewSelectedItemToObjectConverter"/>
     </UserControl.Resources>
-    <Grid ColumnDefinitions="250,Auto,*" RowDefinitions="*">
-        <TreeView x:Name="project" Grid.Column="0" Grid.Row="0" Margin="6,6,0,6">
+    <Grid RowDefinitions="50*,6,50*">
+        <TreeView x:Name="project" Grid.Row="0">
             <TreeView.KeyBindings>
                 <KeyBinding Command="{Binding $parent[UserControl].DataContext.Platform.OnExportObject}" CommandParameter="{Binding #project.SelectedItem}" Gesture="Ctrl+E"/>
             </TreeView.KeyBindings>
-            <!-- Containers -->
-            <TreeViewItem Header="Project" DataContext="{Binding Project}" IsExpanded="True">
+            <TreeViewItem Header="{Binding Name}" DataContext="{Binding Project}" IsExpanded="True">
                 <TreeViewItem.ContextMenu>
                     <ContextMenu>
                         <MenuItem Header="E_xport" Command="{Binding $parent[UserControl].DataContext.Platform.OnExportObject}" CommandParameter="{Binding}"/>
                     </ContextMenu>
                 </TreeViewItem.ContextMenu>
-                <!-- Styles -->
                 <TreeViewItem Header="Styles" DataContext="{Binding StyleLibraries}" Items="{Binding}">
                     <TreeViewItem.ContextMenu>
                         <ContextMenu>
@@ -74,7 +72,6 @@
                         </DataTemplate>
                     </TreeViewItem.DataTemplates>
                 </TreeViewItem>
-                <!-- Groups -->
                 <TreeViewItem Header="Groups" DataContext="{Binding GroupLibraries}" Items="{Binding}">
                     <TreeViewItem.ContextMenu>
                         <ContextMenu>
@@ -125,7 +122,6 @@
                         </DataTemplate>
                     </TreeViewItem.DataTemplates>
                 </TreeViewItem>
-                <!-- Databases -->
                 <TreeViewItem Header="Databases" DataContext="{Binding Databases}" Items="{Binding}">
                     <TreeViewItem.ContextMenu>
                         <ContextMenu>
@@ -152,7 +148,6 @@
                         </DataTemplate>
                     </TreeViewItem.DataTemplates>
                 </TreeViewItem>
-                <!-- Templates -->
                 <TreeViewItem Header="Templates" DataContext="{Binding Templates}" Items="{Binding}">
                     <TreeViewItem.ContextMenu>
                         <ContextMenu>
@@ -215,7 +210,6 @@
                         </DataTemplate>
                     </TreeViewItem.DataTemplates>
                 </TreeViewItem>
-                <!-- Scripts -->
                 <TreeViewItem Header="Scripts" DataContext="{Binding Scripts}" Items="{Binding}">
                     <TreeViewItem.ContextMenu>
                         <ContextMenu>
@@ -242,7 +236,6 @@
                         </DataTemplate>
                     </TreeViewItem.DataTemplates>
                 </TreeViewItem>
-                <!-- Documents -->
                 <TreeViewItem Header="Documents" DataContext="{Binding Documents}" Items="{Binding}">
                     <TreeViewItem.ContextMenu>
                         <ContextMenu>
@@ -318,61 +311,9 @@
                     </TreeViewItem.DataTemplates>
                 </TreeViewItem>
             </TreeViewItem>
-            <!-- Current -->
-            <TreeViewItem Header="Current" IsExpanded="True">
-                <TreeViewItem Header="Options" DataContext="{Binding Project.Options}">
-                    <TreeViewItem.ContextMenu>
-                        <ContextMenu>
-                            <MenuItem Header="E_xport" Command="{Binding $parent[UserControl].DataContext.Platform.OnExportObject}" CommandParameter="{Binding}"/>
-                        </ContextMenu>
-                    </TreeViewItem.ContextMenu>
-                </TreeViewItem>
-                <TreeViewItem Header="Shape" DataContext="{Binding Project.CurrentContainer.CurrentShape}">
-                    <TreeViewItem.ContextMenu>
-                        <ContextMenu>
-                            <MenuItem Header="E_xport" Command="{Binding $parent[UserControl].DataContext.Platform.OnExportObject}" CommandParameter="{Binding}"/>
-                        </ContextMenu>
-                    </TreeViewItem.ContextMenu>
-                </TreeViewItem>
-                <TreeViewItem Header="Data" DataContext="{Binding Project.CurrentContainer.CurrentShape.Data}">
-                    <TreeViewItem.ContextMenu>
-                        <ContextMenu>
-                            <MenuItem Header="E_xport" Command="{Binding $parent[UserControl].DataContext.Platform.OnExportObject}" CommandParameter="{Binding}"/>
-                        </ContextMenu>
-                    </TreeViewItem.ContextMenu>
-                </TreeViewItem>
-                <TreeViewItem Header="Style" DataContext="{Binding Project.CurrentStyleLibrary.Selected}">
-                    <TreeViewItem.ContextMenu>
-                        <ContextMenu>
-                            <MenuItem Header="E_xport" Command="{Binding $parent[UserControl].DataContext.Platform.OnExportObject}" CommandParameter="{Binding}"/>
-                        </ContextMenu>
-                    </TreeViewItem.ContextMenu>
-                </TreeViewItem>
-                <TreeViewItem Header="Container" DataContext="{Binding Project.CurrentContainer}">
-                    <TreeViewItem.ContextMenu>
-                        <ContextMenu>
-                            <MenuItem Header="E_xport" Command="{Binding $parent[UserControl].DataContext.Platform.OnExportObject}" CommandParameter="{Binding}"/>
-                        </ContextMenu>
-                    </TreeViewItem.ContextMenu>
-                </TreeViewItem>
-                <TreeViewItem Header="Template" DataContext="{Binding Project.CurrentTemplate}">
-                    <TreeViewItem.ContextMenu>
-                        <ContextMenu>
-                            <MenuItem Header="E_xport" Command="{Binding $parent[UserControl].DataContext.Platform.OnExportObject}" CommandParameter="{Binding}"/>
-                        </ContextMenu>
-                    </TreeViewItem.ContextMenu>
-                </TreeViewItem>
-                <TreeViewItem Header="Script" DataContext="{Binding Project.CurrentScript}">
-                    <TreeViewItem.ContextMenu>
-                        <ContextMenu>
-                            <MenuItem Header="E_xport" Command="{Binding $parent[UserControl].DataContext.Platform.OnExportObject}" CommandParameter="{Binding}"/>
-                        </ContextMenu>
-                    </TreeViewItem.ContextMenu>
-                </TreeViewItem>
-            </TreeViewItem>
         </TreeView>
-        <GridSplitter ResizeDirection="Columns" ResizeBehavior="PreviousAndNext" Background="Transparent" Width="6" Grid.Column="1" Grid.Row="0"/>
-        <Border Grid.Column="2" Grid.Row="0" Margin="0,6,6,6">
+        <GridSplitter ResizeDirection="Rows" ResizeBehavior="PreviousAndNext" Background="Transparent" Height="6" Grid.Row="1"/>
+        <Border Grid.Row="2">
             <ContentControl Content="{Binding #project.SelectedItem, Converter={StaticResource TreeViewSelectedItemToObjectConverter}}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
         </Border>
     </Grid>
