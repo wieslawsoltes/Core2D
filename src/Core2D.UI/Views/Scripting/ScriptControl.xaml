@@ -5,17 +5,19 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
              xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
+             xmlns:Scripting="clr-namespace:Core2D.Scripting;assembly=Core2D" 
              xmlns:Designer="clr-namespace:Core2D.UI.Designer;assembly=Core2D.UI"
              mc:Ignorable="d"
              d:DataContext="{x:Static Designer:DesignerContext.Script}"
-             d:DesignWidth="1000" d:DesignHeight="600">
+             d:DesignWidth="1000" d:DesignHeight="600"
+             x:DataType="Scripting:IScript" x:CompileBindings="True">
     <UserControl.KeyBindings>
-        <KeyBinding Command="{Binding $parent[Window].DataContext.OnExecuteRepl}" CommandParameter="{Binding #textCode.Text}" Gesture="Ctrl+Enter"/>
+        <KeyBinding Command="{Binding $parent[Window].DataContext.OnExecuteRepl}" CommandParameter="{Binding #textCode.Text}" Gesture="Ctrl+Enter" x:CompileBindings="False"/>
     </UserControl.KeyBindings>
     <Grid RowDefinitions="*,Auto" ColumnDefinitions="33*,33*,33*">
         <TextBox x:Name="textCode" Text="{Binding Code}" FontFamily="{DynamicResource UiFontFamily}" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto" AcceptsReturn="True" AcceptsTab="True" Margin="3" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3"/>
-        <Button Content="Reset" Command="{Binding $parent[Window].DataContext.OnResetRepl}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Margin="3" Grid.Row="1" Grid.Column="0"/>
-        <Button Content="Repl" Command="{Binding $parent[Window].DataContext.OnExecuteRepl}" CommandParameter="{Binding #textCode.Text}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Margin="3" Grid.Row="1" Grid.Column="1"/>
-        <Button Content="Execute" Command="{Binding $parent[Window].DataContext.OnExecuteCode}" CommandParameter="{Binding #textCode.Text}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Margin="3" Grid.Row="1" Grid.Column="2"/>
+        <Button Content="Reset" Command="{Binding $parent[Window].DataContext.OnResetRepl}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Margin="3" Grid.Row="1" Grid.Column="0" x:CompileBindings="False"/>
+        <Button Content="Repl" Command="{Binding $parent[Window].DataContext.OnExecuteRepl}" CommandParameter="{Binding #textCode.Text}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Margin="3" Grid.Row="1" Grid.Column="1" x:CompileBindings="False"/>
+        <Button Content="Execute" Command="{Binding $parent[Window].DataContext.OnExecuteCode}" CommandParameter="{Binding #textCode.Text}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Margin="3" Grid.Row="1" Grid.Column="2" x:CompileBindings="False"/>
     </Grid>
 </UserControl>
