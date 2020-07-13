@@ -154,9 +154,10 @@
                     <containers:LayersControl DataContext="{Binding Project.CurrentContainer}" Margin="0,0,12,0"/>
                 </TabItem>-->
                 <TabItem x:Name="ScriptsTabItem" Header="Scripts">
-                    <Grid RowDefinitions="50*,50*">
+                    <Grid RowDefinitions="50*,6,50*">
                         <scripting:ScriptsControl DataContext="{Binding Project}" Grid.Row="0" Margin="0,0,12,0"/>
-                        <scripting:ScriptControl DataContext="{Binding Project.CurrentScript}" Grid.Row="1" Margin="0,0,12,0"/>
+                        <GridSplitter ResizeDirection="Rows" ResizeBehavior="PreviousAndNext" Background="Transparent" Height="6" Grid.Row="1"/>
+                        <scripting:ScriptControl DataContext="{Binding Project.CurrentScript}" Grid.Row="2" Margin="0,0,6,0"/>
                      </Grid>
                 </TabItem>
             </TabControl>
