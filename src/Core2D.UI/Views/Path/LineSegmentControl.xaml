@@ -4,10 +4,12 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:converters="clr-namespace:Core2D.UI.Converters;assembly=Core2D.UI"
+             xmlns:Segments="clr-namespace:Core2D.Path.Segments;assembly=Core2D"
              xmlns:Designer="clr-namespace:Core2D.UI.Designer;assembly=Core2D.UI"
              mc:Ignorable="d"
              d:DataContext="{x:Static Designer:DesignerContext.LineSegment}"
-             d:DesignWidth="250" d:DesignHeight="400">
+             d:DesignWidth="250" d:DesignHeight="400"
+             x:DataType="Segments:ILineSegment" x:CompileBindings="True">
     <Grid RowDefinitions="Auto,*">
         <StackPanel Grid.Row="0">
             <CheckBox Content="IsStroked" IsChecked="{Binding IsStroked, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
