@@ -20,7 +20,8 @@
     <Grid RowDefinitions="Auto,*,Auto">
         <Menu Grid.Row="0" HorizontalAlignment="Right">
             <MenuItem Header="reset" Command="{Binding $parent[Window].DataContext.OnResetRepl}"/>
-            <MenuItem Header="execute" Command="{Binding $parent[Window].DataContext.OnExecuteScript}" CommandParameter="{Binding CurrentScript}" IsVisible="{Binding !!#scripts.SelectedItem}"/>
+            <MenuItem Header="repl" Command="{Binding $parent[Window].DataContext.OnExecuteRepl}" CommandParameter="{Binding CurrentScript.Code}" IsVisible="{Binding !!#scripts.SelectedItem}"/>
+            <MenuItem Header="execute" Command="{Binding $parent[Window].DataContext.OnExecuteCode}" CommandParameter="{Binding CurrentScript.Code}" IsVisible="{Binding !!#scripts.SelectedItem}"/>
             <MenuItem Header="+" Command="{Binding $parent[Window].DataContext.OnAddScript}"/>
             <MenuItem Header="&#727;" Command="{Binding $parent[Window].DataContext.OnRemoveScript}" CommandParameter="{Binding CurrentScript}" IsVisible="{Binding !!#scripts.SelectedItem}"/>
         </Menu>
@@ -44,7 +45,11 @@
                         </i:Interaction.Behaviors>
                         <TextBlock.ContextMenu>
                             <ContextMenu>
-                                <MenuItem Header="_Execute Script" Command="{Binding $parent[Window].DataContext.OnExecuteScript}" CommandParameter="{Binding Mode=OneWay}"/>
+                                <MenuItem Header="_Execute" Command="{Binding $parent[Window].DataContext.OnExecuteCode}" CommandParameter="{Binding Path=Code, Mode=OneWay}"/>
+                                <Separator/>
+                                <MenuItem Header="_Repl" Command="{Binding $parent[Window].DataContext.OnExecuteRepl}" CommandParameter="{Binding Path=Code, Mode=OneWay}"/>
+                                <Separator/>
+                                <MenuItem Header="Re_set" Command="{Binding $parent[Window].DataContext.OnResetRepl}"/>
                                 <Separator/>
                                 <MenuItem Header="_Add Script" Command="{Binding $parent[Window].DataContext.OnAddScript}"/>
                                 <Separator/>
