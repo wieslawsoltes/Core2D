@@ -13,11 +13,12 @@ namespace Core2D.UI.Views
     /// </summary>
     public class MainControl : UserControl
     {
+#if false
         private SplitView _splitView;
         private Button _pinButton;
         private TextBlock _pinTextBlock;
         private LayoutTransformControl _layoutTransform;
-
+#endif
         /// <summary>
         /// Initializes a new instance of the <see cref="MainControl"/> class.
         /// </summary>
