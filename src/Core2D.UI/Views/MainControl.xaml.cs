@@ -78,6 +78,9 @@ namespace Core2D.UI.Views
         /// <summary>
         /// Initialize the Xaml components.
         /// </summary>
-        private void InitializeComponent() => AvaloniaXamlLoader.Load(this);
+        private void InitializeComponent()
+        {
+            AvaloniaXamlLoader.Load(this);
+        }
     }
 }
