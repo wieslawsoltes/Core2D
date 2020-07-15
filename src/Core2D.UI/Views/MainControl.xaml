@@ -125,6 +125,11 @@
                                 <libraries:ImagesControl DataContext="{Binding Project}" Margin="0,0,12,0"/>
                             </ScrollViewer>
                         </TabItem>
+                        <TabItem x:Name="ToolsTabItem" Header="Tools">
+                            <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                                <views:ToolsControl DataContext="{Binding}" Margin="0,0,12,0"/>
+                            </ScrollViewer>
+                        </TabItem>
                     </TabControl>
                 </TabItem>
             </TabControl>

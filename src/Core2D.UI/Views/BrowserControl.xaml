@@ -6,6 +6,7 @@
              xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
              xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
              xmlns:idd="clr-namespace:Core2D.UI.DragAndDrop;assembly=Core2D.UI"
+             xmlns:locator="clr-namespace:Core2D.UI;assembly=Core2D.UI"
              xmlns:handlers="clr-namespace:Core2D.UI.DragAndDrop.Handlers;assembly=Core2D.UI"
              xmlns:converters="clr-namespace:Core2D.UI.Converters;assembly=Core2D.UI"
              xmlns:Base="clr-namespace:Core2D;assembly=Core2D"
@@ -315,7 +316,14 @@
         </TreeView>
         <GridSplitter ResizeDirection="Rows" ResizeBehavior="PreviousAndNext" Background="Transparent" Height="6" Grid.Row="1"/>
         <Border Grid.Row="2">
-            <ContentControl Content="{Binding #project.SelectedItem, Converter={StaticResource TreeViewSelectedItemToObjectConverter}}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" x:CompileBindings="False"/>
+            <ContentControl Content="{Binding #project.SelectedItem, Converter={StaticResource TreeViewSelectedItemToObjectConverter}}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" x:CompileBindings="False">
+                <ContentControl.DataTemplates>
+                    <locator:ViewLocator/>
+                    <DataTemplate>
+                        <TextBlock Text="Not Supported"/>
+                    </DataTemplate>
+                </ContentControl.DataTemplates>
+            </ContentControl>
         </Border>
     </Grid>
 </UserControl>

@@ -14,6 +14,9 @@
              d:DataContext="{x:Static Designer:DesignerContext.Layer}"
              d:DesignWidth="250" d:DesignHeight="400"
              x:DataType="Containers:ILayerContainer" x:CompileBindings="True">
+    <UserControl.Resources>
+        <converters:ObjectToTypeStringConverter x:Key="ObjectToTypeStringConverter"/>
+    </UserControl.Resources>
     <Grid RowDefinitions="Auto,*">
         <StackPanel Grid.Row="0">
             <TextBlock Text="Name" Margin="{DynamicResource TextControlThemePadding}"/>

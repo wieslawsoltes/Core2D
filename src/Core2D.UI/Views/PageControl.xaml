@@ -20,6 +20,20 @@
              x:DataType="Editor:IProjectEditor" x:CompileBindings="True">
     <UserControl.Resources>
         <handlers:EditorDropHandler x:Key="EditorDropHandler"/>
+        <VisualBrush x:Key="TemplateCheckerBoard" TileMode="Tile" Stretch="None" AlignmentX="Left" AlignmentY="Top" SourceRect="0,0,20,20" DestinationRect="0,0,20,20">
+            <VisualBrush.Visual>
+                <StackPanel Orientation="Horizontal">
+                    <StackPanel Orientation="Vertical">
+                        <Rectangle Width="10" Height="10" Fill="#FFF0F0F0"/>
+                        <Rectangle Width="10" Height="10" Fill="#FFF5F5F5"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Vertical">
+                        <Rectangle Width="10" Height="10" Fill="#FFF5F5F5"/>
+                        <Rectangle Width="10" Height="10" Fill="#FFF0F0F0"/>
+                    </StackPanel>
+                </StackPanel>
+            </VisualBrush.Visual>
+        </VisualBrush>
     </UserControl.Resources>
     <UserControl.KeyBindings>
         <!-- Edit -->

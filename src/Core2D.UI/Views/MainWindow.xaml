@@ -18,6 +18,9 @@
         d:DataContext="{x:Static Designer:DesignerContext.Editor}"
         d:DesignWidth="1200" d:DesignHeight="580"
              x:DataType="Editor:IProjectEditor" x:CompileBindings="True">
+    <Window.Resources>
+        <converters:EditorToTitleMultiConverter x:Key="EditorToTitleMultiConverter"/>
+    </Window.Resources>
     <Window.Title>
         <MultiBinding Mode="OneWay" Converter="{StaticResource EditorToTitleMultiConverter}">
             <Binding Path="Project.Name"/>

@@ -13,6 +13,9 @@
              d:DataContext="{x:Static Designer:DesignerContext.PathFigure}"
              d:DesignWidth="250" d:DesignHeight="400"
              x:DataType="Path:IPathFigure" x:CompileBindings="True">
+    <UserControl.Resources>
+        <converters:ObjectToTypeStringConverter x:Key="ObjectToTypeStringConverter"/>
+    </UserControl.Resources>
     <Grid RowDefinitions="Auto,*">
         <StackPanel Grid.Row="0">
             <CheckBox Content="IsFilled" IsChecked="{Binding IsFilled, Mode=TwoWay}" HorizontalAlignment="Stretch"/>

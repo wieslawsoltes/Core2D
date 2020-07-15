@@ -12,6 +12,9 @@
              d:DataContext="{x:Static Designer:DesignerContext.ShapeRendererState}"
              d:DesignWidth="250" d:DesignHeight="400"
              x:DataType="Renderer:IShapeRendererState" x:CompileBindings="True">
+    <UserControl.Resources>
+        <converters:ObjectToTypeStringConverter x:Key="ObjectToTypeStringConverter"/>
+    </UserControl.Resources>
     <StackPanel>
         <TabControl>
             <TabItem Header="Point">

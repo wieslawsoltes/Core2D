@@ -14,6 +14,9 @@
              d:DataContext="{x:Static Designer:DesignerContext.PathGeometry}"
              d:DesignWidth="250" d:DesignHeight="400"
              x:DataType="Path:IPathGeometry" x:CompileBindings="True">
+    <UserControl.Resources>
+        <converters:ObjectToTypeStringConverter x:Key="ObjectToTypeStringConverter"/>
+    </UserControl.Resources>
     <Grid RowDefinitions="Auto,*">
         <StackPanel Grid.Row="0">
             <TextBlock Text="FillRule" Margin="{DynamicResource TextControlThemePadding}"/>

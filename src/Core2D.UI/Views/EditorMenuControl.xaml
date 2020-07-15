@@ -19,7 +19,6 @@
              d:DesignWidth="800" d:DesignHeight="20"
              x:DataType="Editor:IProjectEditor" x:CompileBindings="True">
     <UserControl.Resources>
-        <converters:ObjectEqualityMultiConverter x:Key="ObjectEqualityMultiConverter"/>
         <converters:ObjectEqualsConverter x:Key="ObjectEqualsConverter"/>
         <!-- Menu-Shape -->
         <DrawingPresenter x:Key="DifferenceIcon" Drawing="{StaticResource Difference}" Width="16" Height="16"/>

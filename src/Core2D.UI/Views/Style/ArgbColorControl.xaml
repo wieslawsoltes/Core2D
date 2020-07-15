@@ -12,6 +12,20 @@
              x:DataType="Style:IArgbColor" x:CompileBindings="True">
     <UserControl.Resources>
         <converters:ArgbColorToBrushMultiConverter x:Key="ArgbColorToBrushMultiConverter"/>
+        <VisualBrush x:Key="ColorCheckerBoard" TileMode="Tile" Stretch="None" AlignmentX="Left" AlignmentY="Top" SourceRect="0,0,20,20" DestinationRect="0,0,20,20">
+            <VisualBrush.Visual>
+                <StackPanel Orientation="Horizontal">
+                    <StackPanel Orientation="Vertical">
+                        <Rectangle Width="10" Height="10" Fill="DarkGray"/>
+                        <Rectangle Width="10" Height="10" Fill="LightGray"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Vertical">
+                        <Rectangle Width="10" Height="10" Fill="LightGray"/>
+                        <Rectangle Width="10" Height="10" Fill="DarkGray"/>
+                    </StackPanel>
+                </StackPanel>
+            </VisualBrush.Visual>
+        </VisualBrush>
     </UserControl.Resources>
     <Grid RowDefinitions="Auto,*">
         <Grid Height="30" Margin="{DynamicResource TextControlThemePadding}" Grid.Row="0">
