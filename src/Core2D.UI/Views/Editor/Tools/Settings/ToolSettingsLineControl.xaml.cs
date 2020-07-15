@@ -4,14 +4,14 @@ using Avalonia.Markup.Xaml;
 namespace Core2D.UI.Views.Editor.Tools.Settings
 {
     /// <summary>
-    /// Interaction logic for <see cref="PathToolSettingsLineControl"/> xaml.
+    /// Interaction logic for <see cref="ToolSettingsLineControl"/> xaml.
     /// </summary>
-    public class PathToolSettingsLineControl : UserControl
+    public class ToolSettingsLineControl : UserControl
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="PathToolSettingsLineControl"/> class.
+        /// Initializes a new instance of the <see cref="ToolSettingsLineControl"/> class.
         /// </summary>
-        public PathToolSettingsLineControl()
+        public ToolSettingsLineControl()
         {
             InitializeComponent();
         }

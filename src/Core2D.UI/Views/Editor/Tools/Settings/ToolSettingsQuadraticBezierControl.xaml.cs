@@ -4,14 +4,14 @@ using Avalonia.Markup.Xaml;
 namespace Core2D.UI.Views.Editor.Tools.Settings
 {
     /// <summary>
-    /// Interaction logic for <see cref="PathToolSettingsQuadraticBezierControl"/> xaml.
+    /// Interaction logic for <see cref="ToolSettingsQuadraticBezierControl"/> xaml.
     /// </summary>
-    public class PathToolSettingsQuadraticBezierControl : UserControl
+    public class ToolSettingsQuadraticBezierControl : UserControl
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="PathToolSettingsQuadraticBezierControl"/> class.
+        /// Initializes a new instance of the <see cref="ToolSettingsQuadraticBezierControl"/> class.
         /// </summary>
-        public PathToolSettingsQuadraticBezierControl()
+        public ToolSettingsQuadraticBezierControl()
         {
             InitializeComponent();
         }
