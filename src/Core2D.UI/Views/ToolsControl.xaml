@@ -14,7 +14,7 @@
     <TabControl>
         <TabItem Header="Main">
             <Grid RowDefinitions="Auto,*">
-                <ComboBox Items="{Binding Tools}" SelectedItem="{Binding CurrentTool, Mode=TwoWay}" Grid.Row="0">
+                <ComboBox Items="{Binding Tools}" SelectedItem="{Binding CurrentTool, Mode=TwoWay}" Grid.Row="0" HorizontalAlignment="Stretch">
                     <ComboBox.DataTemplates>
                         <DataTemplate>
                             <TextBlock Text="{Binding Title}"/>
@@ -26,7 +26,7 @@
         </TabItem>
         <TabItem Header="Path">
             <Grid RowDefinitions="Auto,*">
-                <ComboBox Items="{Binding PathTools}" SelectedItem="{Binding CurrentPathTool, Mode=TwoWay}" Grid.Row="0">
+                <ComboBox Items="{Binding PathTools}" SelectedItem="{Binding CurrentPathTool, Mode=TwoWay}" Grid.Row="0" HorizontalAlignment="Stretch">
                     <ComboBox.DataTemplates>
                         <DataTemplate>
                             <TextBlock Text="{Binding Title}"/>
