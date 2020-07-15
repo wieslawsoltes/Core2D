@@ -84,7 +84,7 @@
             <views:EditorMenuControl x:Name="EditorMenuControl" Grid.Column="0" Grid.ColumnSpan="5" Grid.Row="0"/>
             <TabControl x:Name="LeftTabControl" Grid.Column="0" Grid.Row="1">
                 <TabItem x:Name="ProjectTabItem" Header="Project">
-                    <containers:ProjectControl DataContext="{Binding Project}"/>
+                    <containers:ProjectContainerControl DataContext="{Binding Project}"/>
                 </TabItem>
                 <TabItem x:Name="PropertiesTabItem" Header="Properties">
                     <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
@@ -133,7 +133,7 @@
             <GridSplitter x:Name="RightGridSplitter" ResizeDirection="Columns" ResizeBehavior="PreviousAndNext" Background="Transparent" Width="6" Grid.Column="3" Grid.Row="1"/>
             <TabControl x:Name="RightTabControl" Grid.Column="4" Grid.Row="1">
                 <TabItem x:Name="PageTabItem" Header="Page">
-                    <containers:ContainerControl DataContext="{Binding Project.CurrentContainer}" Margin="0,0,12,0"/>
+                    <containers:PageContainerControl DataContext="{Binding Project.CurrentContainer}" Margin="0,0,12,0"/>
                 </TabItem>
                 <TabItem x:Name="LibrariesTabItem" Header="Libraries">
                     <TabControl x:Name="LibrariesTabControl">
@@ -182,7 +182,7 @@
                         <TextBlock x:Name="PinTextBlock" Text="Project" Background="Transparent" HorizontalAlignment="Stretch" TextAlignment="Left" VerticalAlignment="Center" Margin="0" Padding="4"/>
                     </LayoutTransformControl>
                     <Button x:Name="PinButton" IsVisible="{Binding #SplitView.IsPaneOpen}" Content="{StaticResource PinIcon}" Grid.Row="0" Grid.Column="1" Background="Transparent" BorderThickness="0" Margin="4"/>
-                    <containers:ProjectControl DataContext="{Binding Project}" IsVisible="{Binding #SplitView.IsPaneOpen}" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"/>
+                    <containers:ProjectContainerControl DataContext="{Binding Project}" IsVisible="{Binding #SplitView.IsPaneOpen}" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"/>
                 </Grid>
             </SplitView.Pane>
             <Grid>

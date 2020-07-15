@@ -11,7 +11,6 @@ using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Dialogs;
 using Avalonia.Headless;
 using Avalonia.Media.Imaging;
-using Avalonia.ReactiveUI;
 using Avalonia.Threading;
 using Core2D.Editor;
 using Core2D.UI;
@@ -376,7 +375,6 @@ namespace Core2D
         public static AppBuilder BuildAvaloniaApp()
             => AppBuilder.Configure<App>()
                          .UsePlatformDetect()
-                         .UseReactiveUI()
                          .LogToDebug();
     }
 }

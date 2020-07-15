@@ -1,17 +1,17 @@
 ﻿using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 
-namespace Core2D.UI.Views
+namespace Core2D.UI.Views.Containers
 {
     /// <summary>
-    /// Interaction logic for <see cref="DocumentContainerControl"/> xaml.
+    /// Interaction logic for <see cref="PageContainerControl"/> xaml.
     /// </summary>
-    public class DocumentContainerControl : UserControl
+    public class PageContainerControl : UserControl
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="DocumentContainerControl"/> class.
+        /// Initializes a new instance of the <see cref="PageContainerControl"/> class.
         /// </summary>
-        public DocumentContainerControl()
+        public PageContainerControl()
         {
             InitializeComponent();
         }

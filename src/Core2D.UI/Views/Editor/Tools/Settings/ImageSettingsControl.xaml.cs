@@ -1,17 +1,17 @@
 ﻿using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 
-namespace Core2D.UI.Views
+namespace Core2D.UI.Views.Editor.Tools.Settings
 {
     /// <summary>
-    /// Interaction logic for <see cref="DocumentContainerControl"/> xaml.
+    /// Interaction logic for <see cref="ImageSettingsControl"/> xaml.
     /// </summary>
-    public class DocumentContainerControl : UserControl
+    public class ImageSettingsControl : UserControl
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="DocumentContainerControl"/> class.
+        /// Initializes a new instance of the <see cref="ImageSettingsControl"/> class.
         /// </summary>
-        public DocumentContainerControl()
+        public ImageSettingsControl()
         {
             InitializeComponent();
         }

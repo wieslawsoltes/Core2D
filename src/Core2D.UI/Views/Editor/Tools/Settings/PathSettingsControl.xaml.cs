@@ -1,17 +1,17 @@
 ﻿using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 
-namespace Core2D.UI.Views
+namespace Core2D.UI.Views.Editor.Tools.Settings
 {
     /// <summary>
-    /// Interaction logic for <see cref="DocumentContainerControl"/> xaml.
+    /// Interaction logic for <see cref="PathSettingsControl"/> xaml.
     /// </summary>
-    public class DocumentContainerControl : UserControl
+    public class PathSettingsControl : UserControl
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="DocumentContainerControl"/> class.
+        /// Initializes a new instance of the <see cref="PathSettingsControl"/> class.
         /// </summary>
-        public DocumentContainerControl()
+        public PathSettingsControl()
         {
             InitializeComponent();
         }

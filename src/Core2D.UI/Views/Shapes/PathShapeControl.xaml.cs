@@ -1,17 +1,17 @@
 ﻿using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 
-namespace Core2D.UI.Views
+namespace Core2D.UI.Views.Shapes
 {
     /// <summary>
-    /// Interaction logic for <see cref="DocumentContainerControl"/> xaml.
+    /// Interaction logic for <see cref="PathShapeControl"/> xaml.
     /// </summary>
-    public class DocumentContainerControl : UserControl
+    public class PathShapeControl : UserControl
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="DocumentContainerControl"/> class.
+        /// Initializes a new instance of the <see cref="PathShapeControl"/> class.
         /// </summary>
-        public DocumentContainerControl()
+        public PathShapeControl()
         {
             InitializeComponent();
         }

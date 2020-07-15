@@ -1,17 +1,17 @@
 ﻿using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 
-namespace Core2D.UI.Views
+namespace Core2D.UI.Views.Editor.Tools.Path.Settings
 {
     /// <summary>
-    /// Interaction logic for <see cref="DocumentContainerControl"/> xaml.
+    /// Interaction logic for <see cref="MoveSettingsControl"/> xaml.
     /// </summary>
-    public class DocumentContainerControl : UserControl
+    public class MoveSettingsControl : UserControl
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="DocumentContainerControl"/> class.
+        /// Initializes a new instance of the <see cref="MoveSettingsControl"/> class.
         /// </summary>
-        public DocumentContainerControl()
+        public MoveSettingsControl()
         {
             InitializeComponent();
         }

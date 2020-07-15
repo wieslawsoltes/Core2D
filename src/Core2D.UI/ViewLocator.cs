@@ -1,7 +1,6 @@
 using System;
 using Avalonia.Controls;
 using Avalonia.Controls.Templates;
-using ReactiveUI;
 
 namespace Core2D.UI
 {
@@ -11,7 +10,7 @@ namespace Core2D.UI
 
         public IControl Build(object data)
         {
-            var name = data.GetType()?.FullName?.Replace("ViewModel", "View");
+            var name = data.GetType()?.FullName?.Replace("Core2D", "Core2D.UI.Views") + "Control";
             if (name == null)
             {
                 return new TextBlock { Text = "Invalid Data Type" };
@@ -37,7 +36,7 @@ namespace Core2D.UI
 
         public bool Match(object data)
         {
-            return data is ReactiveObject;
+            return data is ObservableObject;
         }
     }
 }
