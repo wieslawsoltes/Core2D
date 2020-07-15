@@ -174,22 +174,19 @@
                 <DrawingPresenter x:Key="PinOffIcon" Drawing="{StaticResource PinOff}" Width="20" Height="20"/>
             </SplitView.Resources>
             <SplitView.Pane>
-                <Grid ColumnDefinitions="*,Auto" VerticalAlignment="Top">
-                    <LayoutTransformControl x:Name="LayoutTransform" Grid.Column="0" Margin="0">
+                <Grid RowDefinitions="Auto,*" ColumnDefinitions="*,Auto" VerticalAlignment="Stretch">
+                    <LayoutTransformControl x:Name="LayoutTransform" Grid.Row="0" Grid.Column="0" Margin="0">
                         <LayoutTransformControl.LayoutTransform>
                             <RotateTransform Angle="0"/>
                         </LayoutTransformControl.LayoutTransform>
                         <TextBlock x:Name="PinTextBlock" Text="Project" Background="Transparent" HorizontalAlignment="Stretch" TextAlignment="Left" VerticalAlignment="Center" Margin="0" Padding="4"/>
                     </LayoutTransformControl>
-                    <Button x:Name="PinButton" IsVisible="{Binding #SplitView.IsPaneOpen}" Content="{StaticResource PinIcon}" Grid.Column="1" Background="Transparent" BorderThickness="0" Margin="4"/>
+                    <Button x:Name="PinButton" IsVisible="{Binding #SplitView.IsPaneOpen}" Content="{StaticResource PinIcon}" Grid.Row="0" Grid.Column="1" Background="Transparent" BorderThickness="0" Margin="4"/>
+                    <containers:ProjectControl DataContext="{Binding Project}" IsVisible="{Binding #SplitView.IsPaneOpen}" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"/>
                 </Grid>
             </SplitView.Pane>
             <Grid>
-                <TextBlock Text="SplitViewContent" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{DynamicResource SystemControlForegroundBaseHighBrush}" />
-                <TextBlock Text="SplitViewContent" TextAlignment="Left" Foreground="{DynamicResource SystemControlForegroundBaseHighBrush}" />
-                <TextBlock Text="SplitViewContent" HorizontalAlignment="Right" TextAlignment="Left" Foreground="{DynamicResource SystemControlForegroundBaseHighBrush}" />
-                <TextBlock Text="SplitViewContent" VerticalAlignment="Bottom" TextAlignment="Left" Foreground="{DynamicResource SystemControlForegroundBaseHighBrush}" />
-                <TextBlock Text="SplitViewContent" VerticalAlignment="Bottom" HorizontalAlignment="Right" TextAlignment="Left" Foreground="{DynamicResource SystemControlForegroundBaseHighBrush}" />
+                <views:PageControl x:Name="Page"/>
             </Grid>
         </SplitView>
     </Grid>-->
