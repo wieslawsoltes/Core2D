@@ -7,27 +7,155 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
+using Avalonia.Markup.Xaml.Styling;
 using Avalonia.Platform;
-using Avalonia.ThemeManager;
+using Avalonia.Styling;
 using Core2D;
 using Core2D.Editor;
 using Core2D.UI.Designer;
 using Core2D.UI.Modules;
 using Core2D.UI.Views;
-using DM = Dock.Model;
-using DMC = Dock.Model.Controls;
 
 namespace Core2D.UI
 {
+    public enum ThemeName
+    {
+        DefaultDark,
+        DefaultLight,
+        FluentDark,
+        FluentLight
+    }
+
+    /// <summary>
+    /// Window settings.
+    /// </summary>
+    public class WindowSettings
+    {
+        /// <summary>
+        /// Gets or sets X-axis window position.
+        /// </summary>
+        public double X { get; set; } = double.NaN;
+
+        /// <summary>
+        /// Gets or sets Y-axis window position.
+        /// </summary>
+        public double Y { get; set; } = double.NaN;
+
+        /// <summary>
+        /// Gets or sets window width.
+        /// </summary>
+        public double Width { get; set; } = double.NaN;
+
+        /// <summary>
+        /// Gets or sets window width.
+        /// </summary>
+        public double Height { get; set; } = double.NaN;
+
+        /// <summary>
+        /// Gets or sets window state.
+        /// </summary>
+        public WindowState WindowState { get; set; } = WindowState.Normal;
+
+        /// <summary>
+        /// Gets window settings.
+        /// </summary>
+        /// <param name="window">The window.</param>
+        /// <returns>The window settings.</returns>
+        public static WindowSettings GetWindowSettings(Window window)
+        {
+            return new WindowSettings()
+           {
+                Width = window.Width,
+                Height = window.Height,
+                X = window.Position.X,
+                Y = window.Position.Y,
+                WindowState = window.WindowState
+            };
+        }
+
+        /// <summary>
+        /// Sets window settings.
+        /// </summary>
+        /// <param name="window">The window.</param>
+        public static void SetWindowSettings(Window window, WindowSettings settings)
+        {
+            if (!double.IsNaN(settings.Width))
+            {
+                window.Width = settings.Width;
+            }
+
+            if (!double.IsNaN(settings.Height))
+            {
+                window.Height = settings.Height;
+            }
+
+            if (!double.IsNaN(settings.X) && !double.IsNaN(settings.Y))
+            {
+                window.Position = new PixelPoint((int)settings.X, (int)settings.Y);
+                window.WindowStartupLocation = WindowStartupLocation.Manual;
+            }
+            else
+            {
+                window.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            }
+
+            window.WindowState = settings.WindowState;
+        }
+    }
+
     /// <summary>
     /// Encapsulates an Avalonia application.
     /// </summary>
-    public partial class App : Application
+    public class App : Application
     {
-        /// <summary>
-        /// Gets the theme selector instance.
+        // <summary>
+        /// Default dark theme.
         /// </summary>
-        public static IThemeSelector Selector { get; set; }
+        public Styles DefaultDark = new Styles
+        {
+            new StyleInclude(new Uri("avares://Core2D.UI/Styles"))
+            {
+                Source = new Uri("avares://Core2D.UI/Themes/DefaultDark.xaml")
+            }
+        };
+
+        // <summary>
+        /// Default light theme.
+        /// </summary>
+        public Styles DefaultLight = new Styles
+        {
+            new StyleInclude(new Uri("avares://Core2D.UI/Styles"))
+            {
+                Source = new Uri("avares://Core2D.UI/Themes/DefaultLight.xaml")
+            }
+        };
+
+        // <summary>
+        /// Default fluent dark theme.
+        /// </summary>
+        public Styles FluentDark = new Styles
+        {
+            new StyleInclude(new Uri("avares://Core2D.UI/Styles"))
+            {
+                Source = new Uri("avares://Core2D.UI/Themes/FluentDark.xaml")
+            }
+        };
+
+        // <summary>
+        /// Default fluent light theme.
+        /// </summary>
+        public Styles FluentLight = new Styles
+        {
+            new StyleInclude(new Uri("avares://Core2D.UI/Styles"))
+            {
+                Source = new Uri("avares://Core2D.UI/Themes/FluentLight.xaml")
+            }
+        };
+
+        /// <summary>
+        /// Gets or sets default theme.
+        /// </summary>
+        public static ThemeName DefaultTheme { get; set; } = ThemeName.FluentLight;
 
         /// <summary>
         /// Initializes static data.
@@ -66,7 +194,7 @@ namespace Core2D.UI
             return new AboutInfo()
             {
                 Title = "Core2D",
-                Version = $"{GetType().GetTypeInfo().Assembly.GetName().Version}",
+                Version = $"{Assembly.GetEntryAssembly().GetCustomAttribute<AssemblyInformationalVersionAttribute> ().InformationalVersion}",
                 Description = "A multi-platform data driven 2D diagram editor.",
                 Copyright = "Copyright (c) Wiesław Šoltés. All rights reserved.",
                 License = "Licensed under the MIT license. See LICENSE file in the project root for full license information.",
@@ -92,40 +220,24 @@ namespace Core2D.UI
 
             var serviceProvider = container.Resolve<IServiceProvider>();
 
-            Selector = ThemeSelector.Create("Themes");
-            Selector.LoadSelectedTheme("Core2D.theme");
-
             var log = serviceProvider.GetService<ILog>();
             var fileIO = serviceProvider.GetService<IFileSystem>();
+            var jsonSerializer = serviceProvider.GetService<IJsonSerializer>();
 
             log?.Initialize(System.IO.Path.Combine(fileIO?.GetBaseDirectory(), "Core2D.log"));
 
+            var windowSettings = default(WindowSettings);
+            var windowSettingsPath = System.IO.Path.Combine(fileIO?.GetBaseDirectory(), "Core2D.window");
+            if (fileIO.Exists(windowSettingsPath))
+            {
+                var jsonWindowSettings = fileIO?.ReadUtf8Text(windowSettingsPath);
+                if (!string.IsNullOrEmpty(jsonWindowSettings))
+                {
+                    windowSettings = jsonSerializer.Deserialize<WindowSettings>(jsonWindowSettings);
+                }
+            }
+
             var editor = serviceProvider.GetService<IProjectEditor>();
-
-            var layoutPath = System.IO.Path.Combine(fileIO.GetBaseDirectory(), "Core2D.layout");
-            if (fileIO.Exists(layoutPath) && editor.LayoutPlatform != null)
-            {
-                var layout = editor.LayoutPlatform.DeserializeLayout(layoutPath);
-                if (layout != null)
-                {
-                    editor.LayoutPlatform.Layout = layout;
-                }
-            }
-
-            if (editor.LayoutPlatform != null)
-            {
-                var dockFactory = serviceProvider.GetService<DM.IFactory>();
-
-                if (editor.LayoutPlatform.Layout == null)
-                {
-                    editor.LayoutPlatform.Layout = dockFactory.CreateLayout();
-                }
-
-                if (editor.LayoutPlatform.Layout is DMC.IRootDock layout)
-                {
-                    dockFactory.InitLayout(layout);  
-                }
-            }
 
             var recentPath = System.IO.Path.Combine(fileIO.GetBaseDirectory(), "Core2D.recent");
             if (fileIO.Exists(recentPath))
@@ -145,19 +257,27 @@ namespace Core2D.UI
             var aboutInfo = CreateAboutInfo(runtimeInfo, windowingSubsystemName, renderingSubsystemName);
             editor.AboutInfo = aboutInfo;
 
+            //editor.OnNew(null);
+
             var mainWindow = serviceProvider.GetService<MainWindow>();
+
+            if (windowSettings != null)
+            {
+                WindowSettings.SetWindowSettings(mainWindow, windowSettings);
+            }
 
             mainWindow.DataContext = editor;
 
             mainWindow.Closing += (sender, e) =>
             {
-                if (editor.LayoutPlatform?.Layout is DMC.IRootDock layout)
-                {
-                    layout.Close();
-                }
-                editor.LayoutPlatform?.SerializeLayout(layoutPath, editor.LayoutPlatform?.Layout);
                 editor.OnSaveRecent(recentPath);
-                Selector.SaveSelectedTheme("Core2D.theme");
+
+                windowSettings = WindowSettings.GetWindowSettings(mainWindow);
+                var jsonWindowSettings = jsonSerializer?.Serialize(windowSettings);
+                if (!string.IsNullOrEmpty(jsonWindowSettings))
+                {
+                    fileIO?.WriteUtf8Text(windowSettingsPath, jsonWindowSettings);
+                }
             };
 
             desktopLifetime.MainWindow = mainWindow;
@@ -184,21 +304,6 @@ namespace Core2D.UI
             log?.Initialize(System.IO.Path.Combine(fileIO?.GetBaseDirectory(), "Core2D.log"));
 
             var editor = serviceProvider.GetService<IProjectEditor>();
-
-            if (editor.LayoutPlatform != null)
-            {
-                var dockFactory = serviceProvider.GetService<DM.IFactory>();
-
-                if (editor.LayoutPlatform.Layout == null)
-                {
-                    editor.LayoutPlatform.Layout = dockFactory.CreateLayout();
-                }
-
-                if (editor.LayoutPlatform.Layout is DMC.IRootDock layout)
-                {
-                    dockFactory.InitLayout(layout);
-                }
-            }
 
             editor.CurrentTool = editor.Tools.FirstOrDefault(t => t.Title == "Selection");
             editor.CurrentPathTool = editor.PathTools.FirstOrDefault(t => t.Title == "Line");
@@ -233,6 +338,23 @@ namespace Core2D.UI
         public override void Initialize()
         {
             AvaloniaXamlLoader.Load(this);
+
+            switch (DefaultTheme)
+            {
+                case ThemeName.DefaultDark:
+                    Styles.Insert(0, DefaultDark);
+                    break;
+                case ThemeName.DefaultLight:
+                    Styles.Insert(0, DefaultLight);
+                    break;
+                case ThemeName.FluentDark:
+                    Styles.Insert(0, FluentDark);
+                    break;
+                default:
+                case ThemeName.FluentLight:
+                    Styles.Insert(0, FluentLight);
+                    break;
+            }
         }
     }
 }

@@ -7,36 +7,34 @@
              xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
              xmlns:idd="clr-namespace:Core2D.UI.DragAndDrop;assembly=Core2D.UI"
              xmlns:converters="clr-namespace:Core2D.UI.Converters;assembly=Core2D.UI"
+             xmlns:Path="clr-namespace:Core2D.Path;assembly=Core2D"
              xmlns:Designer="clr-namespace:Core2D.UI.Designer;assembly=Core2D.UI"
              mc:Ignorable="d"
              d:DataContext="{x:Static Designer:DesignerContext.PathFigure}"
-             d:DesignWidth="250" d:DesignHeight="400">
-    <TabControl Classes="default">
-        <TabItem Header="PathFigure" Classes="property">
-            <ScrollViewer>
-                <Grid RowDefinitions="Auto,Auto" ColumnDefinitions="Auto,*">
-                    <TextBlock Text="IsFilled" Classes="left" Grid.Row="0" Grid.Column="0"/>
-                    <CheckBox IsChecked="{Binding IsFilled, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
-                    <TextBlock Text="IsClosed" Classes="left" Grid.Row="1" Grid.Column="0"/>
-                    <CheckBox IsChecked="{Binding IsClosed, Mode=TwoWay}" Classes="left" Grid.Row="1" Grid.Column="1"/>
-                </Grid>
-            </ScrollViewer>
-        </TabItem>
-        <TabItem Header="StartPoint" Classes="property">
-            <ContentControl Content="{Binding StartPoint}"/>
-        </TabItem>
-        <TabItem Header="Segments" Classes="property">
-            <ListBox Items="{Binding Segments}" Classes="default">
-                <ListBox.DataTemplates>
-                    <DataTemplate>
-                        <TextBlock Text="{Binding Mode=OneWay, Converter={StaticResource ObjectToTypeStringConverter}}" Classes="list drag">
-                            <i:Interaction.Behaviors>
-                                <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}"/>
-                            </i:Interaction.Behaviors>
-                        </TextBlock>
-                    </DataTemplate>
-                </ListBox.DataTemplates>
-            </ListBox>
-        </TabItem>
-    </TabControl>
+             d:DesignWidth="250" d:DesignHeight="400"
+             x:DataType="Path:IPathFigure" x:CompileBindings="True">
+    <Grid RowDefinitions="Auto,*">
+        <StackPanel Grid.Row="0">
+            <CheckBox Content="IsFilled" IsChecked="{Binding IsFilled, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
+            <CheckBox Content="IsClosed" IsChecked="{Binding IsClosed, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
+        </StackPanel>
+        <TabControl Grid.Row="1">
+            <TabItem Header="StartPoint">
+                <ContentControl Content="{Binding StartPoint}"/>
+            </TabItem>
+            <TabItem Header="Segments">
+                <ListBox Items="{Binding Segments}">
+                    <ListBox.DataTemplates>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Mode=OneWay, Converter={StaticResource ObjectToTypeStringConverter}}" Background="Transparent">
+                                <i:Interaction.Behaviors>
+                                    <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}"/>
+                                </i:Interaction.Behaviors>
+                            </TextBlock>
+                        </DataTemplate>
+                    </ListBox.DataTemplates>
+                </ListBox>
+            </TabItem>
+        </TabControl>
+    </Grid>
 </UserControl>

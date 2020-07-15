@@ -3,22 +3,23 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
-        xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
-        xmlns:idd="clr-namespace:Core2D.UI.DragAndDrop;assembly=Core2D.UI"
-        xmlns:idc="clr-namespace:Dock.Avalonia.Controls;assembly=Dock.Avalonia"
         xmlns:converters="clr-namespace:Core2D.UI.Converters;assembly=Core2D.UI"
         xmlns:views="clr-namespace:Core2D.UI.Views;assembly=Core2D.UI"
-        Width="700" Height="340"
+        xmlns:Editor="clr-namespace:Core2D.Editor;assembly=Core2D"
+        xmlns:Designer="clr-namespace:Core2D.UI.Designer;assembly=Core2D.UI"
+        Width="800" Height="450"
         UseLayoutRounding="True" RenderOptions.BitmapInterpolationMode="HighQuality"
         WindowState="Normal" WindowStartupLocation="CenterScreen"
-        BorderThickness="1" BorderBrush="{DynamicResource ThemeBorderLightBrush}"
-        Foreground="{DynamicResource ThemeForegroundBrush}"
+        FontFamily="{DynamicResource UiFontFamily}"
+        Background="{DynamicResource SystemChromeMediumColor}"
+        Foreground="{DynamicResource SystemBaseHighColor}"
         Icon="/Assets/Core2D.ico"
         Title="About Core2D"
-        xmlns:Designer="clr-namespace:Core2D.UI.Designer;assembly=Core2D.UI"
         mc:Ignorable="d"
         d:DataContext="{x:Static Designer:DesignerContext.Editor}"
-        d:DesignWidth="1000" d:DesignHeight="600">
-    <views:AboutControl VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        d:DesignWidth="1000" d:DesignHeight="600"
+        x:DataType="Editor:IProjectEditor" x:CompileBindings="True">
+    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+        <views:AboutControl DataContext="{Binding AboutInfo}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+    </ScrollViewer>
 </Window>

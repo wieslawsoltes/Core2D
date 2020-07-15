@@ -5,21 +5,17 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:Core2D.UI;assembly=Core2D.UI"
              xmlns:converters="clr-namespace:Core2D.UI.Converters;assembly=Core2D.UI"
-             xmlns:DataCore="clr-namespace:Core2D.Data;assembly=Core2D"
-             xmlns:Dock="clr-namespace:Dock.Model;assembly=Dock.Model"
+             xmlns:Data="clr-namespace:Core2D.Data;assembly=Core2D"
              xmlns:Editor="clr-namespace:Core2D.Editor;assembly=Core2D"
-             xmlns:PathCore="clr-namespace:Core2D.Path;assembly=Core2D"
-             xmlns:SegmentsCore="clr-namespace:Core2D.Path.Segments;assembly=Core2D"
-             xmlns:ContainersCore="clr-namespace:Core2D.Containers;assembly=Core2D"
-             xmlns:ScriptingCore="clr-namespace:Core2D.Scripting;assembly=Core2D"
-             xmlns:RendererCore="clr-namespace:Core2D.Renderer;assembly=Core2D"
+             xmlns:Path="clr-namespace:Core2D.Path;assembly=Core2D"
+             xmlns:Segments="clr-namespace:Core2D.Path.Segments;assembly=Core2D"
+             xmlns:Containers="clr-namespace:Core2D.Containers;assembly=Core2D"
+             xmlns:Scripting="clr-namespace:Core2D.Scripting;assembly=Core2D"
+             xmlns:Renderer="clr-namespace:Core2D.Renderer;assembly=Core2D"
              xmlns:SettingsTools="clr-namespace:Core2D.Editor.Tools.Settings;assembly=Core2D"
              xmlns:SettingsPath="clr-namespace:Core2D.Editor.Tools.Path.Settings;assembly=Core2D"
-             xmlns:ShapesCore="clr-namespace:Core2D.Shapes;assembly=Core2D"
-             xmlns:StyleCore="clr-namespace:Core2D.Style;assembly=Core2D"
-             xmlns:Views="clr-namespace:Core2D.UI.Dock.Views;assembly=Core2D.UI"
-             xmlns:Documents="clr-namespace:Core2D.UI.Dock.Documents;assembly=Core2D.UI"
-             xmlns:Tools="clr-namespace:Core2D.UI.Dock.Tools;assembly=Core2D.UI"
+             xmlns:Shapes="clr-namespace:Core2D.Shapes;assembly=Core2D"
+             xmlns:Style="clr-namespace:Core2D.Style;assembly=Core2D"
              xmlns:data="clr-namespace:Core2D.UI.Views.Data;assembly=Core2D.UI"
              xmlns:path="clr-namespace:Core2D.UI.Views.Path;assembly=Core2D.UI"
              xmlns:containers="clr-namespace:Core2D.UI.Views.Containers;assembly=Core2D.UI"
@@ -31,21 +27,11 @@
              xmlns:shapes="clr-namespace:Core2D.UI.Views.Shapes;assembly=Core2D.UI"
              xmlns:style="clr-namespace:Core2D.UI.Views.Style;assembly=Core2D.UI"
              xmlns:views="clr-namespace:Core2D.UI.Views;assembly=Core2D.UI">
-    <Application.Styles>
-        <!-- Theme -->
-        <StyleInclude Source="avares://Avalonia.Themes.Default/DefaultTheme.xaml"/>
-        <StyleInclude Source="avares://Avalonia.Themes.Default/Accents/BaseLight.xaml"/>
-        <!-- DataGrid -->
-        <StyleInclude Source="avares://Avalonia.Controls.DataGrid/Themes/Default.xaml"/>
-        <!-- Dock -->
-        <StyleInclude Source="avares://Dock.Avalonia.Themes.Default/DefaultTheme.xaml"/>
-        <StyleInclude Source="avares://Dock.Avalonia.Themes.Metro/DefaultTheme.xaml"/>
-        <!-- Icons -->
-        <StyleInclude Source="avares://Core2D.UI/Icons.xaml"/>
-        <!-- Default -->
-        <StyleInclude Source="avares://Core2D.UI/Default.xaml"/>
-    </Application.Styles>
     <Application.Resources>
+        <!-- Fonts -->
+        <FontFamily x:Key="UiFontFamily">Segoe UI, SF Pro Display, Noto Sans, Cantarel</FontFamily>
+        <FontFamily x:Key="CodeFontFamily">Consolas, Menlo, Monaco, Courier, Courier New, Andale Mono, DejaVu Sans Mono</FontFamily>
+        <StaticResource x:Key="ContentControlThemeFontFamily" ResourceKey="UiFontFamily" />
         <!-- Brushes -->
         <SolidColorBrush x:Key="TransparentBrush">#00FFFFFF</SolidColorBrush>
         <VisualBrush x:Key="ColorCheckerBoard" TileMode="Tile" Stretch="None" AlignmentX="Left" AlignmentY="Top" SourceRect="0,0,20,20" DestinationRect="0,0,20,20">
@@ -91,6 +77,14 @@
         <converters:StyleMultiValueConverter x:Key="StyleMultiValueConverter"/>
         <converters:TreeViewSelectedItemToObjectConverter x:Key="TreeViewSelectedItemToObjectConverter"/>
     </Application.Resources>
+    <Application.Styles>
+        <!--<StyleInclude Source="avares://Core2D.UI/Themes/DefaultLight.xaml"/>-->
+        <!--<StyleInclude Source="avares://Core2D.UI/Themes/DefaultDark.xaml"/>-->
+        <!--<StyleInclude Source="avares://Core2D.UI/Themes/FluentLight.xaml"/>-->
+        <!--<StyleInclude Source="avares://Core2D.UI/Themes/FluentDark.xaml"/>-->
+        <StyleInclude Source="avares://Avalonia.Controls.DataGrid/Themes/Default.xaml"/>
+        <StyleInclude Source="avares://Core2D.UI/Icons.xaml"/>
+    </Application.Styles>
     <Application.DataTemplates>
         <!--<local:ViewLocator/>-->
         <!-- Editor -->
@@ -98,39 +92,39 @@
             <Grid/>
         </DataTemplate>
         <!-- Style -->
-        <DataTemplate DataType="StyleCore:IArgbColor">
+        <DataTemplate DataType="Style:IArgbColor">
             <style:ArgbColorControl/>
         </DataTemplate>
-        <DataTemplate DataType="StyleCore:IArrowStyle">
+        <DataTemplate DataType="Style:IArrowStyle">
             <style:ArrowStyleControl/>
         </DataTemplate>
-        <DataTemplate DataType="StyleCore:IFontStyle">
+        <DataTemplate DataType="Style:IFontStyle">
             <style:FontStyleControl/>
         </DataTemplate>
-        <DataTemplate DataType="StyleCore:ITextStyle">
+        <DataTemplate DataType="Style:ITextStyle">
             <style:TextStyleControl/>
         </DataTemplate>
-        <DataTemplate DataType="StyleCore:ILineFixedLength">
+        <DataTemplate DataType="Style:ILineFixedLength">
             <style:LineFixedLengthControl/>
         </DataTemplate>
-        <DataTemplate DataType="StyleCore:ILineStyle">
+        <DataTemplate DataType="Style:ILineStyle">
             <style:LineStyleControl/>
         </DataTemplate>
-        <DataTemplate DataType="StyleCore:IShapeStyle">
+        <DataTemplate DataType="Style:IShapeStyle">
             <style:ShapeStyleControl/>
         </DataTemplate>
         <!-- Data -->
-        <DataTemplate DataType="DataCore:IRecord">
+        <DataTemplate DataType="Data:IRecord">
             <data:RecordControl/>
         </DataTemplate>
-        <DataTemplate DataType="DataCore:IDatabase">
+        <DataTemplate DataType="Data:IDatabase">
             <data:DatabaseControl/>
         </DataTemplate>
-        <DataTemplate DataType="DataCore:IContext">
+        <DataTemplate DataType="Data:IContext">
             <data:DataControl/>
         </DataTemplate>
         <!-- Renderer -->
-        <DataTemplate DataType="RendererCore:IShapeState">
+        <DataTemplate DataType="Renderer:IShapeState">
             <renderer:ShapeStateControl/>
         </DataTemplate>
         <!-- Settings Tools -->
@@ -187,239 +181,81 @@
             <settingsPath:QuadraticBezierSettingsControl/>
         </DataTemplate>
         <!-- Shapes -->
-        <DataTemplate DataType="ShapesCore:IPointShape">
+        <DataTemplate DataType="Shapes:IPointShape">
             <shapes:PointControl/>
         </DataTemplate>
-        <DataTemplate DataType="ShapesCore:ILineShape">
+        <DataTemplate DataType="Shapes:ILineShape">
             <shapes:LineControl/>
         </DataTemplate>
-        <DataTemplate DataType="ShapesCore:IRectangleShape">
+        <DataTemplate DataType="Shapes:IRectangleShape">
             <shapes:RectangleControl/>
         </DataTemplate>
-        <DataTemplate DataType="ShapesCore:IEllipseShape">
+        <DataTemplate DataType="Shapes:IEllipseShape">
             <shapes:EllipseControl/>
         </DataTemplate>
-        <DataTemplate DataType="ShapesCore:IImageShape">
+        <DataTemplate DataType="Shapes:IImageShape">
             <shapes:ImageControl/>
         </DataTemplate>
-        <DataTemplate DataType="ShapesCore:ITextShape">
+        <DataTemplate DataType="Shapes:ITextShape">
             <shapes:TextControl/>
         </DataTemplate>
-        <DataTemplate DataType="ShapesCore:IArcShape">
+        <DataTemplate DataType="Shapes:IArcShape">
             <shapes:ArcControl/>
         </DataTemplate>
-        <DataTemplate DataType="ShapesCore:ICubicBezierShape">
+        <DataTemplate DataType="Shapes:ICubicBezierShape">
             <shapes:CubicBezierControl/>
         </DataTemplate>
-        <DataTemplate DataType="ShapesCore:IQuadraticBezierShape">
+        <DataTemplate DataType="Shapes:IQuadraticBezierShape">
             <shapes:QuadraticBezierControl/>
         </DataTemplate>
-        <DataTemplate DataType="ShapesCore:IGroupShape">
+        <DataTemplate DataType="Shapes:IGroupShape">
             <shapes:GroupControl/>
         </DataTemplate>
-        <DataTemplate DataType="ShapesCore:IPathShape">
+        <DataTemplate DataType="Shapes:IPathShape">
             <shapes:PathControl/>
         </DataTemplate>
         <!-- Path -->
-        <DataTemplate DataType="PathCore:IPathSize">
+        <DataTemplate DataType="Path:IPathSize">
             <path:PathSizeControl/>
         </DataTemplate>
-        <DataTemplate DataType="PathCore:IPathFigure">
+        <DataTemplate DataType="Path:IPathFigure">
             <path:PathFigureControl/>
         </DataTemplate>
-        <DataTemplate DataType="PathCore:IPathGeometry">
+        <DataTemplate DataType="Path:IPathGeometry">
             <path:PathGeometryControl/>
         </DataTemplate>
         <!-- Segments -->
-        <DataTemplate DataType="SegmentsCore:IArcSegment">
+        <DataTemplate DataType="Segments:IArcSegment">
             <path:ArcSegmentControl/>
         </DataTemplate>
-        <DataTemplate DataType="SegmentsCore:ICubicBezierSegment">
+        <DataTemplate DataType="Segments:ICubicBezierSegment">
             <path:CubicBezierSegmentControl/>
         </DataTemplate>
-        <DataTemplate DataType="SegmentsCore:ILineSegment">
+        <DataTemplate DataType="Segments:ILineSegment">
             <path:LineSegmentControl/>
         </DataTemplate>
-        <DataTemplate DataType="SegmentsCore:IQuadraticBezierSegment">
+        <DataTemplate DataType="Segments:IQuadraticBezierSegment">
             <path:QuadraticBezierSegmentControl/>
         </DataTemplate>
         <!-- Containers -->
-        <DataTemplate DataType="ContainersCore:ILibrary">
-            <containers:LibraryControl/>
-        </DataTemplate>
-        <DataTemplate DataType="ContainersCore:IOptions">
+        <DataTemplate DataType="Containers:IOptions">
             <containers:OptionsControl/>
         </DataTemplate>
-        <DataTemplate DataType="ContainersCore:IProjectContainer">
+        <DataTemplate DataType="Containers:IProjectContainer">
             <containers:ProjectControl/>
         </DataTemplate>
-        <DataTemplate DataType="ContainersCore:IDocumentContainer">
+        <DataTemplate DataType="Containers:IDocumentContainer">
             <containers:DocumentControl/>
         </DataTemplate>
-        <DataTemplate DataType="ContainersCore:IPageContainer">
+        <DataTemplate DataType="Containers:IPageContainer">
             <containers:ContainerControl/>
         </DataTemplate>
-        <DataTemplate DataType="ContainersCore:ILayerContainer">
+        <DataTemplate DataType="Containers:ILayerContainer">
             <containers:LayerControl/>
         </DataTemplate>
         <!-- Scripting -->
-        <DataTemplate DataType="ScriptingCore:IScript">
+        <DataTemplate DataType="Scripting:IScript">
             <scripting:ScriptControl/>
-        </DataTemplate>
-        <!-- Views -->
-        <DataTemplate DataType="Views:DashboardView">
-            <Grid RowDefinitions="Auto,*">
-                <views:DashboardMenuControl Grid.Row="0" DataContext="{Binding Context}"/>
-                <views:DashboardControl Grid.Row="1" DataContext="{Binding Context}"/>
-            </Grid>
-        </DataTemplate>
-        <DataTemplate DataType="Views:EditorView">
-            <Grid RowDefinitions="Auto,*,Auto">
-                <views:EditorMenuControl Grid.Row="0" DataContext="{Binding Context}"/>
-                <views:EditorControl Grid.Row="1" Margin="6,6,6,2"/>
-                <views:StatusControl Grid.Column="0" Grid.Row="2" Margin="6,2,6,4" DataContext="{Binding Context}"/>
-            </Grid>
-        </DataTemplate>
-        <!-- Documents -->
-        <DataTemplate DataType="Documents:PageDocument">
-            <views:PageControl DataContext="{Binding Context}"/>
-        </DataTemplate>
-        <!-- Tools -->
-        <DataTemplate DataType="Tools:ScriptTool">
-            <scripting:ScriptControl DataContext="{Binding Context.Project.CurrentScript}"/>
-        </DataTemplate>
-        <DataTemplate DataType="Tools:ExportTool">
-            <views:ExportControl DataContext="{Binding Context}"/>
-        </DataTemplate>
-        <DataTemplate DataType="Tools:BrowserTool">
-            <views:BrowserControl DataContext="{Binding Context}"/>
-        </DataTemplate>
-        <DataTemplate DataType="Tools:DocumentTool">
-            <views:DocumentControl DataContext="{Binding Context}"/>
-        </DataTemplate>
-        <DataTemplate DataType="Tools:ProjectTool">
-            <containers:ProjectControl DataContext="{Binding Context.Project}"/>
-        </DataTemplate>
-        <DataTemplate DataType="Tools:OptionsTool">
-            <ContentControl Content="{Binding Context.Project.Options}"/>
-        </DataTemplate>
-        <DataTemplate DataType="Tools:ImagesTool">
-            <containers:ImagesControl DataContext="{Binding Context.Project}"/>
-        </DataTemplate>
-        <DataTemplate DataType="Tools:GroupsTool">
-            <containers:GroupsControl DataContext="{Binding Context.Project}"/>
-        </DataTemplate>
-        <DataTemplate DataType="Tools:DatabasesTool">
-            <containers:DatabasesControl DataContext="{Binding Context.Project}"/>
-        </DataTemplate>
-        <DataTemplate DataType="Tools:StylesTool">
-            <containers:StylesControl DataContext="{Binding Context.Project}"/>
-        </DataTemplate>
-        <DataTemplate DataType="Tools:TemplatesTool">
-            <containers:TemplatesControl DataContext="{Binding Context.Project}"/>
-        </DataTemplate>
-        <DataTemplate DataType="Tools:ScriptsTool">
-            <scripting:ScriptsControl DataContext="{Binding Context.Project}"/>
-        </DataTemplate>
-        <DataTemplate DataType="Tools:ContainerTool">
-            <ContentControl Content="{Binding Context.Project.CurrentContainer}"/>
-        </DataTemplate>
-        <DataTemplate DataType="Tools:ZoomTool">
-            <containers:ZoomControl DataContext="{Binding Context.CanvasPlatform.Zoom}"/>
-        </DataTemplate>
-        <DataTemplate DataType="Tools:RendererTool">
-            <renderer:ShapeRendererStateControl DataContext="{Binding Context.PageState}"/>
-        </DataTemplate>
-        <DataTemplate DataType="Tools:ToolsTool">
-            <settings:ToolsControl DataContext="{Binding Context}"/>
-        </DataTemplate>
-        <DataTemplate DataType="Tools:ShapeTool">
-            <ScrollViewer DataContext="{Binding Context}" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-                <ItemsRepeater Items="{Binding PageState.SelectedShapes}">
-                    <ItemsRepeater.Layout>
-                        <StackLayout Orientation="Vertical"/>
-                    </ItemsRepeater.Layout>
-                    <ItemsRepeater.ItemTemplate>
-                        <DataTemplate>
-                            <ContentControl Content="{Binding}"/>
-                        </DataTemplate>
-                    </ItemsRepeater.ItemTemplate>
-                </ItemsRepeater>
-            </ScrollViewer>
-        </DataTemplate>
-        <DataTemplate DataType="Tools:DataTool">
-            <data:DataControl DataContext="{Binding Context.PageState.SelectedShape.Data}"/>
-        </DataTemplate>
-        <DataTemplate DataType="Tools:RecordTool">
-            <ScrollViewer DataContext="{Binding Context}" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-                <ItemsRepeater>
-                    <ItemsRepeater.Items>
-                        <MultiBinding Converter="{StaticResource DataMultiValueConverter}">
-                            <Binding Path="PageState.SelectedShapes" FallbackValue="{x:Null}" />
-                            <Binding Path="Project.CurrentContainer" FallbackValue="{x:Null}" />
-                        </MultiBinding>
-                    </ItemsRepeater.Items>
-                    <ItemsRepeater.Layout>
-                        <StackLayout Orientation="Vertical"/>
-                    </ItemsRepeater.Layout>
-                    <ItemsRepeater.ItemTemplate>
-                        <DataTemplate>
-                            <Grid RowDefinitions="Auto,*" ColumnDefinitions="*" IsVisible="{Binding !!Record}">
-                                <Menu Classes="usercontrol" Grid.Row="0" HorizontalAlignment="Right" IsVisible="{Binding !!Record}">
-                                    <MenuItem Header="&#727;" Classes="usercontrol" Command="{Binding $parent[Window].DataContext.OnResetRecord}" CommandParameter="{Binding}" IsVisible="{Binding !!Record}"/>
-                                </Menu>
-                                <data:RecordControl DataContext="{Binding Record}" IsVisible="{Binding !!$self.DataContext}" Grid.Row="1"/>
-                            </Grid>
-                        </DataTemplate>
-                    </ItemsRepeater.ItemTemplate>
-                </ItemsRepeater>
-            </ScrollViewer>
-        </DataTemplate>
-        <DataTemplate DataType="Tools:PropertiesTool">
-            <ScrollViewer DataContext="{Binding Context}" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-                <ItemsRepeater>
-                    <ItemsRepeater.Items>
-                        <MultiBinding Converter="{StaticResource DataMultiValueConverter}">
-                            <Binding Path="PageState.SelectedShapes" FallbackValue="{x:Null}" />
-                            <Binding Path="Project.CurrentContainer" FallbackValue="{x:Null}" />
-                        </MultiBinding>
-                    </ItemsRepeater.Items>
-                    <ItemsRepeater.Layout>
-                        <StackLayout Orientation="Vertical"/>
-                    </ItemsRepeater.Layout>
-                    <ItemsRepeater.ItemTemplate>
-                        <DataTemplate>
-                            <data:PropertiesControl DataContext="{Binding}"/>
-                        </DataTemplate>
-                    </ItemsRepeater.ItemTemplate>
-                </ItemsRepeater>
-            </ScrollViewer>
-        </DataTemplate>
-        <DataTemplate DataType="Tools:StyleTool">
-            <ScrollViewer DataContext="{Binding Context}" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-                <ItemsRepeater>
-                    <ItemsRepeater.Items>
-                        <MultiBinding Converter="{StaticResource StyleMultiValueConverter}">
-                            <Binding Path="PageState.SelectedShapes" FallbackValue="{x:Null}" />
-                            <Binding Path="Project.CurrentStyleLibrary.Selected" FallbackValue="{x:Null}" />
-                        </MultiBinding>
-                    </ItemsRepeater.Items>
-                    <ItemsRepeater.Layout>
-                        <StackLayout Orientation="Vertical"/>
-                    </ItemsRepeater.Layout>
-                    <ItemsRepeater.ItemTemplate>
-                        <DataTemplate>
-                            <ContentControl Content="{Binding}"/>
-                        </DataTemplate>
-                    </ItemsRepeater.ItemTemplate>
-                </ItemsRepeater>
-            </ScrollViewer>
-        </DataTemplate>
-        <DataTemplate DataType="Tools:TemplateTool">
-            <ContentControl Content="{Binding Context.Project.CurrentTemplate}"/>
-        </DataTemplate>
-        <DataTemplate DataType="Tools:ScriptTool">
-            <ContentControl Content="{Binding Context.Project.CurrentScript}"/>
         </DataTemplate>
     </Application.DataTemplates>
 </Application>

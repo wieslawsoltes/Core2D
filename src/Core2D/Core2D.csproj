@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>netcoreapp3.1;net461</TargetFrameworks>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
     <OutputType>Library</OutputType>
     <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
     <EnableDefaultCompileItems>False</EnableDefaultCompileItems>
@@ -12,8 +12,8 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <VersionPrefix>0.9.999</VersionPrefix>
-    <VersionSuffix></VersionSuffix>
+    <VersionPrefix>0.10.0</VersionPrefix>
+    <VersionSuffix>preview1</VersionSuffix>
     <Authors>Wiesław Šoltés</Authors>
     <Company>Wiesław Šoltés</Company>
     <Description>A multi-platform data driven 2D diagram editor.</Description>
@@ -26,7 +26,6 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.0" PrivateAssets="All" />
-    <PackageReference Include="SourceLink.Create.CommandLine" Version="2.8.3" PrivateAssets="All" />
     <PackageReference Include="Svg.Skia" Version="0.4.0-build*" />
     <PackageReference Include="System.Collections.Immutable" Version="1.7.1" />
     <PackageReference Include="System.Diagnostics.TextWriterTraceListener" Version="4.3.0" Condition="!$(TargetFramework.StartsWith('net4'))" />
@@ -42,7 +41,6 @@
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
     <PackageReference Include="PDFsharp" Version="1.50.5147" />
     <PackageReference Include="SkiaSharp" Version="1.68.3" />
-    <PackageReference Include="Dock.Model" Version="0.9.999-build*" />
   </ItemGroup>
 
   <ItemGroup Condition="$(TargetFramework.StartsWith('net4'))">

@@ -4,23 +4,21 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:converters="clr-namespace:Core2D.UI.Converters;assembly=Core2D.UI"
+             xmlns:Segments="clr-namespace:Core2D.Path.Segments;assembly=Core2D"
              xmlns:Designer="clr-namespace:Core2D.UI.Designer;assembly=Core2D.UI"
              mc:Ignorable="d"
              d:DataContext="{x:Static Designer:DesignerContext.LineSegment}"
-             d:DesignWidth="250" d:DesignHeight="400">
-    <TabControl Classes="default">
-        <TabItem Header="LineSegment" Classes="property">
-            <ScrollViewer>
-                <Grid RowDefinitions="Auto,Auto" ColumnDefinitions="Auto,*">
-                    <TextBlock Text="IsStroked" Classes="left" Grid.Row="0" Grid.Column="0"/>
-                    <CheckBox IsChecked="{Binding IsStroked, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
-                    <TextBlock Text="IsSmoothJoin" Classes="left" Grid.Row="1" Grid.Column="0"/>
-                    <CheckBox IsChecked="{Binding IsSmoothJoin, Mode=TwoWay}" Classes="left" Grid.Row="1" Grid.Column="1"/>
-                </Grid>
-            </ScrollViewer>
-        </TabItem>
-        <TabItem Header="Point" Classes="property">
-            <ContentControl Content="{Binding Point}"/>
-        </TabItem>
-    </TabControl>
+             d:DesignWidth="250" d:DesignHeight="400"
+             x:DataType="Segments:ILineSegment" x:CompileBindings="True">
+    <Grid RowDefinitions="Auto,*">
+        <StackPanel Grid.Row="0">
+            <CheckBox Content="IsStroked" IsChecked="{Binding IsStroked, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
+            <CheckBox Content="IsSmoothJoin" IsChecked="{Binding IsSmoothJoin, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
+        </StackPanel>
+        <TabControl Grid.Row="1">
+            <TabItem Header="Point">
+                <ContentControl Content="{Binding Point}"/>
+            </TabItem>
+        </TabControl>
+    </Grid>
 </UserControl>

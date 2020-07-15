@@ -28,6 +28,31 @@ You can automate drawing and processing by using C# scripting.
 * `Linux`
 * `macOS`
 
+## Usage
+
+```
+Core2D.Desktop:
+  A multi-platform data driven 2D diagram editor.
+
+Usage:
+  Core2D.Desktop [options]
+
+Options:
+  -t, --theme <DefaultDark|DefaultLight|FluentDark|FluentLight>    Set application theme [default: FluentLight]
+  -s, --scripts <scripts>                                          The relative or absolute path to the script files
+  -p, --project <project>                                          The relative or absolute path to the project file
+  --repl                                                           Run scripting repl
+  --useManagedSystemDialogs                                        Use managed system dialogs
+  --useHeadless                                                    Use headless
+  --useHeadlessDrawing                                             Use headless drawing
+  --useHeadlessVnc                                                 Use headless vnc
+  --createHeadlessScreenshots                                      Create headless screenshots
+  --vncHost <vnchost>                                              Vnc host
+  --vncPort <vncport>                                              Vnc port [default: 5901]
+  --version                                                        Show version information
+  -?, -h, --help                                                   Show help and usage information
+```
+
 ## Resources
 
 * [GitHub source code repository.](https://github.com/wieslawsoltes/Core2D)

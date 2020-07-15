@@ -11,20 +11,16 @@
              xmlns:views="clr-namespace:Core2D.UI.Views;assembly=Core2D.UI"
              xmlns:Editor="clr-namespace:Core2D.Editor;assembly=Core2D"
              xmlns:Recent="clr-namespace:Core2D.Editor.Recent;assembly=Core2D"
-             xmlns:ContainersCore="clr-namespace:Core2D.Containers;assembly=Core2D"
+             xmlns:Containers="clr-namespace:Core2D.Containers;assembly=Core2D"
              xmlns:Designer="clr-namespace:Core2D.UI.Designer;assembly=Core2D.UI"
              mc:Ignorable="d"
              d:DataContext="{x:Static Designer:DesignerContext.Editor}"
-             d:DesignWidth="800" d:DesignHeight="20">
+             d:DesignWidth="800" d:DesignHeight="20"
+             x:DataType="Editor:IProjectEditor" x:CompileBindings="True">
     <UserControl.Resources>
         <converters:ObjectEqualityMultiConverter x:Key="ObjectEqualityMultiConverter"/>
     </UserControl.Resources>
-    <Menu Classes="default">
-        <Menu.ItemsPanel>
-            <ItemsPanelTemplate>
-                <WrapPanel/>
-            </ItemsPanelTemplate>
-        </Menu.ItemsPanel>
+    <Menu x:CompileBindings="False">
         <MenuItem Header="_File">
             <MenuItem Header="_New" Command="{Binding OnNew}" CommandParameter="{Binding}" InputGesture="Ctrl+N"/>
             <Separator/>
@@ -43,49 +39,6 @@
             </MenuItem>
             <Separator/>
             <MenuItem Header="E_xit" Command="{Binding Platform.OnExit}" InputGesture="Alt+F4"/>
-        </MenuItem>
-        <MenuItem Header="_View">
-            <MenuItem Header="_Theme" Classes="theme" DataContext="{x:Static app:App.Selector}" Items="{Binding Themes}">
-                <MenuItem.Styles>
-                    <Style Selector="MenuItem.theme > MenuItem">
-                        <Setter Property="Header" Value="{Binding Name}"/>
-                        <Setter Property="Command" Value="{Binding ApplyTheme}"/>
-                        <Setter Property="CommandParameter" Value="{Binding}"/>
-                        <Setter Property="Icon">
-                            <Template>
-                                <CheckBox Classes="menu">
-                                    <CheckBox.IsChecked>
-                                        <MultiBinding Mode="OneWay" Converter="{StaticResource ObjectEqualityMultiConverter}">
-                                            <Binding Path="DataContext" RelativeSource="{RelativeSource Self}"/>
-                                            <Binding Path="Selector.SelectedTheme"/>
-                                        </MultiBinding>
-                                    </CheckBox.IsChecked>
-                                </CheckBox>
-                            </Template>
-                        </Setter>
-                    </Style>
-                </MenuItem.Styles>
-            </MenuItem>
-        </MenuItem>
-        <MenuItem Header="_Window">
-            <MenuItem Header="_Save Layout" Command="{Binding LayoutPlatform.SaveLayout}"/>
-            <MenuItem Header="_Apply Layout" Items="{Binding LayoutPlatform.Layout.VisibleDockables}">
-                <MenuItem.Styles>
-                    <Style Selector="MenuItem">
-                        <Setter Property="Header" Value="{Binding Title}"/>
-                        <Setter Property="Command" Value="{Binding $parent.DataContext.LayoutPlatform.ApplyLayout}"/>
-                        <Setter Property="CommandParameter" Value="{Binding}"/>
-                    </Style>
-                </MenuItem.Styles>
-            </MenuItem>
-            <MenuItem Header="_Delete Layout" Command="{Binding LayoutPlatform.DeleteLayout}" CommandParameter="{Binding LayoutPlatform.Layout.ActiveDockable}"/>
-            <Separator/>
-            <MenuItem Header="_Reset Layouts" Command="{Binding LayoutPlatform.ResetLayouts}"/>
-            <Separator/>
-            <MenuItem Header="_Import Layouts..." Command="{Binding LayoutPlatform.ImportLayouts}"/>
-            <MenuItem Header="_Export Layouts..." Command="{Binding LayoutPlatform.ExportLayouts}"/>
-            <Separator/>
-            <MenuItem Header="_Manage Layouts..." Command="{Binding LayoutPlatform.ManageLayouts}"/>
         </MenuItem>
         <MenuItem Header="_Help">
             <MenuItem Header="_About Core2D" Command="{Binding Platform.OnAboutDialog}"/>

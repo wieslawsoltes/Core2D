@@ -3,45 +3,121 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
+             xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
+             xmlns:iac="clr-namespace:Avalonia.Xaml.Interactions.Custom;assembly=Avalonia.Xaml.Interactions.Custom"
+             xmlns:idd="clr-namespace:Core2D.UI.DragAndDrop;assembly=Core2D.UI"
+             xmlns:handlers="clr-namespace:Core2D.UI.DragAndDrop.Handlers;assembly=Core2D.UI"
              xmlns:converters="clr-namespace:Core2D.UI.Converters;assembly=Core2D.UI"
-             xmlns:containers="clr-namespace:Core2D.UI.Views.Containers;assembly=Core2D.UI"
+             xmlns:Containers="clr-namespace:Core2D.Containers;assembly=Core2D"
+             xmlns:Shapes="clr-namespace:Core2D.Shapes;assembly=Core2D"
              xmlns:Designer="clr-namespace:Core2D.UI.Designer;assembly=Core2D.UI"
              mc:Ignorable="d"
              d:DataContext="{x:Static Designer:DesignerContext.Page}"
-             d:DesignWidth="250" d:DesignHeight="400">
-    <TabControl Classes="default">
-        <TabItem Header="Container" Classes="property">
-            <Grid RowDefinitions="Auto,*" ColumnDefinitions="Auto,*">
-                <TextBlock Text="Name" Classes="left" Grid.Row="0" Grid.Column="0"/>
-                <TextBox Text="{Binding Name, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
-                <TabControl Classes="default" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
-                    <TabItem Header="Layers" Classes="property">
-                        <containers:LayersControl/>
-                    </TabItem>
-                    <TabItem Header="Shapes" Classes="property">
-                        <containers:ShapesControl/>
-                    </TabItem>
-                    <TabItem Header="Size" Classes="property">
-                        <ScrollViewer>
-                            <Grid RowDefinitions="Auto,Auto" ColumnDefinitions="Auto,*">
-                                <TextBlock Text="Width" Classes="left" Grid.Row="0" Grid.Column="0"/>
-                                <TextBox Text="{Binding Width, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
-                                <TextBlock Text="Height" Classes="left" Grid.Row="1" Grid.Column="0"/>
-                                <TextBox Text="{Binding Height, Mode=TwoWay}" Classes="left" Grid.Row="1" Grid.Column="1"/>
-                            </Grid>
-                        </ScrollViewer>
-                    </TabItem>
-                    <TabItem Header="Background" Classes="property">
-                        <ContentControl Content="{Binding Background}"/>
+             d:DesignWidth="250" d:DesignHeight="400"
+             x:DataType="Containers:IPageContainer" x:CompileBindings="True">
+    <Grid RowDefinitions="Auto,*">
+        <StackPanel Grid.Row="0">
+            <TextBlock Text="Name" Margin="{DynamicResource TextControlThemePadding}"/>
+            <TextBox Text="{Binding Name, Mode=TwoWay}"/>
+            <Grid ColumnDefinitions="50*,6,50*">
+                <StackPanel Grid.Column="0">
+                    <TextBlock Text="Width" Margin="{DynamicResource TextControlThemePadding}"/>
+                    <TextBox Text="{Binding Width, Mode=TwoWay}"/>
+                </StackPanel>
+                <GridSplitter ResizeDirection="Columns" ResizeBehavior="PreviousAndNext" Background="Transparent" Width="6" Grid.Column="1"/>
+                <StackPanel Grid.Column="2">
+                    <TextBlock Text="Height" Margin="{DynamicResource TextControlThemePadding}"/>
+                    <TextBox Text="{Binding Height, Mode=TwoWay}"/>
+                </StackPanel>
+            </Grid>
+            <TextBlock Text="Background" Margin="{DynamicResource TextControlThemePadding}"/>
+            <ContentControl Content="{Binding Background}"/>
+        </StackPanel>
+        <TabControl Grid.Row="1">
+            <TabItem Header="Layers" x:CompileBindings="False">
+                <Grid RowDefinitions="Auto,*,Auto">
+                    <Menu Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Center">
+                        <MenuItem Header="+" Command="{Binding $parent[Window].DataContext.OnAddLayer}" CommandParameter="{Binding}"/>
+                        <MenuItem Header="&#727;" Command="{Binding $parent[Window].DataContext.OnRemoveLayer}" CommandParameter="{Binding CurrentLayer}" IsVisible="{Binding !!CurrentLayer}"/>
+                    </Menu>
+                    <ListBox x:Name="layers" Items="{Binding Layers}" SelectedItem="{Binding CurrentLayer, Mode=TwoWay}" Grid.Row="1">
+                        <ListBox.KeyBindings>
+                            <KeyBinding Command="{Binding $parent[Window].DataContext.OnAddLayer}" CommandParameter="{Binding #layers.DataContext, Mode=OneWay}" Gesture="Ctrl+N"/>
+                            <KeyBinding Command="{Binding $parent[Window].DataContext.OnRemoveLayer}" CommandParameter="{Binding #layers.SelectedItem}" Gesture="Delete"/>
+                        </ListBox.KeyBindings>
+                        <ListBox.DataTemplates>
+                            <DataTemplate DataType="Containers:ILayerContainer">
+                                <Grid ColumnDefinitions="Auto,*" Background="Transparent">
+                                    <i:Interaction.Behaviors>
+                                        <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}"/>
+                                    </i:Interaction.Behaviors>
+                                    <Grid.ContextMenu>
+                                        <ContextMenu>
+                                            <MenuItem Header="_Delete" Command="{Binding $parent[Window].DataContext.OnRemoveLayer}" CommandParameter="{Binding Mode=OneWay}"/>
+                                        </ContextMenu>
+                                    </Grid.ContextMenu>
+                                    <CheckBox Content="" IsChecked="{Binding IsVisible, Mode=TwoWay}" MinWidth="0" VerticalAlignment="Center" Grid.Column="0"/>
+                                    <TextBlock Text="{Binding Name}" VerticalAlignment="Center" Grid.Column="1"/>
+                                </Grid>
+                            </DataTemplate>
+                        </ListBox.DataTemplates>
+                    </ListBox>
+                    <TextBox Text="{Binding CurrentLayer.Name, Mode=TwoWay}" IsVisible="{Binding !!CurrentLayer}" BorderBrush="Transparent" Background="Transparent" Margin="0,12,0,0" Grid.Row="2"/>
+                </Grid>
+                <!--
+                <TabControl>
+                    <TabItem Header="Selected Layer">
+                        <ContentControl Content="{Binding CurrentLayer}"/>
                     </TabItem>
                 </TabControl>
-            </Grid>
-        </TabItem>
-        <TabItem Header="Owner" Classes="property">
-            <ContentControl Content="{Binding Owner}"/>
-        </TabItem>
-        <TabItem Header="Data" Classes="property">
-            <ContentControl Content="{Binding Data}"/>
-        </TabItem>
-    </TabControl>
+                -->
+            </TabItem>
+            <TabItem Header="Shapes" x:CompileBindings="False">
+                <Grid RowDefinitions="Auto,*,Auto">
+                    <Menu Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Center">
+                        <MenuItem Header="&#727;" Command="{Binding $parent[Window].DataContext.OnRemoveShape}" CommandParameter="{Binding CurrentShape}" IsVisible="{Binding !!CurrentShape}"/>
+                    </Menu>
+                    <ListBox x:Name="shapes" Items="{Binding CurrentLayer.Shapes}" SelectedItem="{Binding CurrentShape, Mode=TwoWay}" VirtualizationMode="Simple" Grid.Row="1">
+                        <ListBox.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <VirtualizingStackPanel Orientation="Vertical"/>
+                            </ItemsPanelTemplate>
+                        </ListBox.ItemsPanel>
+                        <ListBox.KeyBindings>
+                            <KeyBinding Command="{Binding $parent[Window].DataContext.OnRemoveShape}" CommandParameter="{Binding #shapes.SelectedItem}" Gesture="Delete"/>
+                        </ListBox.KeyBindings>
+                        <ListBox.DataTemplates>
+                            <DataTemplate DataType="Shapes:IBaseShape">
+                                <TextBlock Text="{Binding Mode=OneWay, Converter={StaticResource ObjectToTypeStringConverter}}" Background="Transparent">
+                                    <i:Interaction.Behaviors>
+                                        <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}"/>
+                                    </i:Interaction.Behaviors>
+                                    <TextBlock.ContextMenu>
+                                        <ContextMenu>
+                                            <MenuItem Header="_Delete" Command="{Binding $parent[Window].DataContext.OnRemoveShape}" CommandParameter="{Binding}"/>
+                                        </ContextMenu>
+                                    </TextBlock.ContextMenu>
+                                </TextBlock>
+                            </DataTemplate>
+                        </ListBox.DataTemplates>
+                    </ListBox>
+                    <TextBox Text="{Binding CurrentShape.Name, Mode=TwoWay}" IsVisible="{Binding !!CurrentShape}" BorderBrush="Transparent" Background="Transparent" Grid.Row="2" />
+                </Grid>
+                <!--
+                <TabControl>
+                    <TabItem Header="Selected Shape">
+                        <ContentControl Content="{Binding CurrentShape}"/>
+                    </TabItem>
+                </TabControl>
+                -->
+            </TabItem>
+            <TabItem Header="Data">
+                <ContentControl Content="{Binding Data}"/>
+            </TabItem>
+            <TabItem Header="Template">
+                <ContentControl Content="{Binding Template}"/>
+            </TabItem>
+        </TabControl>
+    </Grid>
 </UserControl>

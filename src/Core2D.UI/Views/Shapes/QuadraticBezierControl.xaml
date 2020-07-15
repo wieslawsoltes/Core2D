@@ -4,42 +4,42 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:converters="clr-namespace:Core2D.UI.Converters;assembly=Core2D.UI"
+             xmlns:Shapes="clr-namespace:Core2D.Shapes;assembly=Core2D"
              xmlns:Designer="clr-namespace:Core2D.UI.Designer;assembly=Core2D.UI"
              mc:Ignorable="d"
              d:DataContext="{x:Static Designer:DesignerContext.QuadraticBezier}"
-             d:DesignWidth="250" d:DesignHeight="400">
-    <TabControl Classes="default">
-        <TabItem Header="QuadraticBezier" Classes="property">
-            <Grid RowDefinitions="Auto,Auto,Auto" ColumnDefinitions="Auto,*">
-                <TextBlock Text="Name" Classes="left" Grid.Row="0" Grid.Column="0"/>
-                <TextBox Text="{Binding Name, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
-                <TextBlock Text="IsStroked" Classes="left" Grid.Row="1" Grid.Column="0"/>
-                <CheckBox IsChecked="{Binding IsStroked, Mode=TwoWay}" Classes="left" Grid.Row="1" Grid.Column="1"/>
-                <TextBlock Text="IsFilled" Classes="left" Grid.Row="2" Grid.Column="0"/>
-                <CheckBox IsChecked="{Binding IsFilled, Mode=TwoWay}" Classes="left" Grid.Row="2" Grid.Column="1"/>
-            </Grid>
-        </TabItem>
-        <TabItem Header="Points" Classes="property">
-            <TabControl Classes="default">
-                <TabItem Header="Point1" Classes="property">
-                    <ContentControl Content="{Binding Point1}"/>
-                </TabItem>
-                <TabItem Header="Point2" Classes="property">
-                    <ContentControl Content="{Binding Point2}"/>
-                </TabItem>
-                <TabItem Header="Point3" Classes="property">
-                    <ContentControl Content="{Binding Point3}"/>
-                </TabItem>
-            </TabControl>
-        </TabItem>
-        <TabItem Header="State" Classes="property">
-            <ContentControl Content="{Binding State}"/>
-        </TabItem>
-        <TabItem Header="Data" Classes="property">
-            <ContentControl Content="{Binding Data}"/>
-        </TabItem>
-        <TabItem Header="Style" Classes="property">
-            <ContentControl Content="{Binding Style}"/>
-        </TabItem>
-    </TabControl>
+             d:DesignWidth="250" d:DesignHeight="400"
+             x:DataType="Shapes:IQuadraticBezierShape" x:CompileBindings="True">
+    <Grid RowDefinitions="Auto,*">
+        <TabControl Grid.Row="0">
+            <TabItem Header="QuadraticBezier">
+                <StackPanel>
+                    <TextBlock Text="Name" Margin="{DynamicResource TextControlThemePadding}"/>
+                    <TextBox Text="{Binding Name, Mode=TwoWay}"/>
+                    <CheckBox Content="IsStroked" IsChecked="{Binding IsStroked, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
+                    <CheckBox Content="IsFilled" IsChecked="{Binding IsFilled, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
+                </StackPanel>
+            </TabItem>
+            <TabItem Header="Data">
+                <ContentControl Content="{Binding Data}"/>
+            </TabItem>
+            <TabItem Header="Style">
+                <ContentControl Content="{Binding Style}"/>
+            </TabItem>
+            <TabItem Header="State">
+                <ContentControl Content="{Binding State}"/>
+            </TabItem>
+        </TabControl>
+        <TabControl Grid.Row="1">
+            <TabItem Header="Point1">
+                <ContentControl Content="{Binding Point1}"/>
+            </TabItem>
+            <TabItem Header="Point2">
+                <ContentControl Content="{Binding Point2}"/>
+            </TabItem>
+            <TabItem Header="Point3">
+                <ContentControl Content="{Binding Point3}"/>
+            </TabItem>
+        </TabControl>
+    </Grid>
 </UserControl>

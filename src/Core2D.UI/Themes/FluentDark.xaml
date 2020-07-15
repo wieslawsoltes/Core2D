@@ -1,0 +1,21 @@
+﻿<Styles xmlns="https://github.com/avaloniaui" 
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <StyleInclude Source="avares://Avalonia.Themes.Fluent/Accents/FluentDark.xaml"/>
+    <StyleInclude Source="avares://Avalonia.Themes.Fluent/DensityStyles/Compact.xaml"/>
+    <Style>
+        <Style.Resources>
+            <GridLength x:Key="SliderPreContentMargin">3</GridLength>
+            <GridLength x:Key="SliderPostContentMargin">3</GridLength>
+        </Style.Resources>
+    </Style>
+    <Style Selector="ListBoxItem">
+        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+    </Style>
+    <Style Selector="TabControl">
+        <Setter Property="Padding" Value="6,0,6,0"/>
+    </Style>
+    <Style Selector="TabItem">
+        <Setter Property="FontWeight" Value="Normal"/>
+        <Setter Property="Padding" Value="6,0,6,0"/>
+    </Style>
+</Styles>

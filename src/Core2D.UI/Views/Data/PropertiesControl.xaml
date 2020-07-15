@@ -7,42 +7,43 @@
              xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
              xmlns:idd="clr-namespace:Core2D.UI.DragAndDrop;assembly=Core2D.UI"
              xmlns:converters="clr-namespace:Core2D.UI.Converters;assembly=Core2D.UI"
-             xmlns:DataCore="clr-namespace:Core2D.Data;assembly=Core2D"
+             xmlns:Data="clr-namespace:Core2D.Data;assembly=Core2D"
              xmlns:Editor="clr-namespace:Core2D.Editor;assembly=Core2D"
              xmlns:Designer="clr-namespace:Core2D.UI.Designer;assembly=Core2D.UI"
              mc:Ignorable="d"
              d:DataContext="{x:Static Designer:DesignerContext.Data}"
-             d:DesignWidth="250" d:DesignHeight="400">
+             d:DesignWidth="250" d:DesignHeight="400"
+             x:DataType="Data:IContext" x:CompileBindings="True">
     <Grid RowDefinitions="Auto,*" ColumnDefinitions="*">
-        <Menu Classes="usercontrol" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" HorizontalAlignment="Right">
-            <MenuItem Header="+" Classes="usercontrol" Command="{Binding $parent[Window].DataContext.OnAddProperty}" CommandParameter="{Binding}"/>
+        <Menu Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" HorizontalAlignment="Right">
+            <MenuItem Header="+" Command="{Binding $parent[Window].DataContext.OnAddProperty}" CommandParameter="{Binding}" x:CompileBindings="False"/>
         </Menu>
         <ScrollViewer Grid.Row="1" Grid.Column="0" IsVisible="{Binding !!Properties.Length}">
             <Grid RowDefinitions="Auto,*" ColumnDefinitions="50*,Auto,50*">
-                <GridSplitter Classes="vertical" Grid.Column="1" Grid.Row="1" Grid.RowSpan="2" Width="6"/>
-                <TextBlock Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" Text="Name" Classes="default"/>
-                <TextBlock Grid.Column="2" Grid.Row="0" VerticalAlignment="Center" Text="Value" Classes="default"/>
+                <TextBlock Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" Text="Name"/>
                 <ItemsControl VerticalAlignment="Stretch" Grid.Column="0" Grid.Row="1" Items="{Binding Properties}">
                     <ItemsControl.DataTemplates>
-                        <DataTemplate DataType="DataCore:IProperty">
-                            <Grid VerticalAlignment="Top" Classes="drag">
+                        <DataTemplate DataType="Data:IProperty">
+                            <Grid VerticalAlignment="Top" Background="Transparent">
                                 <i:Interaction.Behaviors>
                                     <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}"/>
                                 </i:Interaction.Behaviors>
-                                <TextBox VerticalAlignment="Center" Text="{Binding Name, Mode=TwoWay}" Classes="property"/>
+                                <TextBox VerticalAlignment="Center" Text="{Binding Name, Mode=TwoWay}"/>
                             </Grid>
                         </DataTemplate>
                     </ItemsControl.DataTemplates>
                 </ItemsControl>
+                <GridSplitter ResizeDirection="Columns" ResizeBehavior="PreviousAndNext" Background="Transparent" Width="6" Grid.Column="1" Grid.Row="1" Grid.RowSpan="2"/>
+                <TextBlock Grid.Column="2" Grid.Row="0" VerticalAlignment="Center" Text="Value"/>
                 <ItemsControl VerticalAlignment="Stretch" Grid.Column="2" Grid.Row="1" Items="{Binding Properties}">
                     <ItemsControl.DataTemplates>
-                        <DataTemplate DataType="DataCore:IProperty">
-                            <Grid VerticalAlignment="Top" ColumnDefinitions="*,30" Classes="drag">
+                        <DataTemplate DataType="Data:IProperty">
+                            <Grid VerticalAlignment="Top" ColumnDefinitions="*,30" Background="Transparent">
                                 <i:Interaction.Behaviors>
                                     <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}"/>
                                 </i:Interaction.Behaviors>
-                                <TextBox Text="{Binding Value, Mode=TwoWay}" Classes="property" Grid.Column="0"/>
-                                <Button Content="-" Classes="property" Grid.Column="1" Command="{Binding $parent[Window].DataContext.OnRemoveProperty}" CommandParameter="{Binding}"/>
+                                <TextBox Text="{Binding Value, Mode=TwoWay}" Grid.Column="0"/>
+                                <Button Content="-" Grid.Column="1" Command="{Binding $parent[Window].DataContext.OnRemoveProperty}" CommandParameter="{Binding}" Padding="0" VerticalAlignment="Stretch" VerticalContentAlignment="Center" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" x:CompileBindings="False"/>
                             </Grid>
                         </DataTemplate>
                     </ItemsControl.DataTemplates>

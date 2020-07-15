@@ -3,7 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:Settings="clr-namespace:Core2D.Editor.Tools.Settings;assembly=Core2D" 
              xmlns:Designer="clr-namespace:Core2D.UI.Designer;assembly=Core2D.UI"
              mc:Ignorable="d"
-             d:DesignWidth="250" d:DesignHeight="400">
+             d:DesignWidth="250" d:DesignHeight="400"
+             x:DataType="Settings:ToolSettingsSelection" x:CompileBindings="True">
 </UserControl>

@@ -17,20 +17,22 @@
              xmlns:Svg="clr-namespace:Core2D.FileWriter.Svg;assembly=Core2D"
              xmlns:Xaml="clr-namespace:Core2D.FileWriter.Xaml;assembly=Core2D"
              xmlns:settingsFileWriters="clr-namespace:Core2D.UI.Views.Settings.FileWriters;assembly=Core2D.UI"
+             xmlns:Editor="clr-namespace:Core2D.Editor;assembly=Core2D"
              xmlns:Designer="clr-namespace:Core2D.UI.Designer;assembly=Core2D.UI"
              mc:Ignorable="d"
              d:DataContext="{x:Static Designer:DesignerContext.Editor}"
-             d:DesignWidth="1000" d:DesignHeight="600">
+             d:DesignWidth="1000" d:DesignHeight="600"
+             x:DataType="Editor:IProjectEditor" x:CompileBindings="True">
     <Grid ColumnDefinitions="250,Auto,*" RowDefinitions="*">
-        <ListBox x:Name="fileWriters" Items="{Binding FileWriters}" Grid.Column="0" Grid.Row="0" Margin="6,6,0,6" Classes="writers">
+        <ListBox x:Name="fileWriters" Items="{Binding FileWriters}" Grid.Column="0" Grid.Row="0" Margin="6,6,0,6">
             <ListBox.DataTemplates>
                 <DataTemplate DataType="Interfaces:IFileWriter">
-                    <TextBlock Text="{Binding Name}" Classes="list"/>
+                    <TextBlock Text="{Binding Name}"/>
                 </DataTemplate>
             </ListBox.DataTemplates>
         </ListBox>
-        <GridSplitter Classes="vertical" Grid.Column="1" Grid.Row="0" Width="6"/>
-        <Border Classes="writers" Grid.Column="2" Grid.Row="0" Margin="0,6,6,6">
+        <GridSplitter ResizeDirection="Columns" ResizeBehavior="PreviousAndNext" Background="Transparent" Width="6" Grid.Column="1" Grid.Row="0"/>
+        <Border Grid.Column="2" Grid.Row="0" Margin="0,6,6,6">
             <!-- TODO: -->
             <ContentControl Content="{Binding #fileWriters.SelectedItem}">
                 <ContentControl.DataTemplates>

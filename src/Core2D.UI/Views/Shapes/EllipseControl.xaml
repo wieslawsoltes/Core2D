@@ -4,43 +4,41 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:converters="clr-namespace:Core2D.UI.Converters;assembly=Core2D.UI"
+             xmlns:Shapes="clr-namespace:Core2D.Shapes;assembly=Core2D"
              xmlns:Designer="clr-namespace:Core2D.UI.Designer;assembly=Core2D.UI"
              mc:Ignorable="d"
              d:DataContext="{x:Static Designer:DesignerContext.Ellipse}"
-             d:DesignWidth="250" d:DesignHeight="400">
-    <TabControl Classes="default">
-        <TabItem Header="Ellipse" Classes="property">
-            <ScrollViewer>
-                <Grid RowDefinitions="Auto,Auto,Auto,*" ColumnDefinitions="Auto,*">
-                    <TextBlock Text="Name" Classes="left" Grid.Row="0" Grid.Column="0"/>
-                    <TextBox Text="{Binding Name, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
-                    <TextBlock Text="IsStroked" Classes="left" Grid.Row="1" Grid.Column="0"/>
-                    <CheckBox IsChecked="{Binding IsStroked, Mode=TwoWay}" Classes="left" Grid.Row="1" Grid.Column="1"/>
-                    <TextBlock Text="IsFilled" Classes="left" Grid.Row="2" Grid.Column="0"/>
-                    <CheckBox IsChecked="{Binding IsFilled, Mode=TwoWay}" Classes="left" Grid.Row="2" Grid.Column="1"/>
-                    <TextBlock Text="Text" VerticalAlignment="Top" Classes="left" Grid.Row="3" Grid.Column="0"/>
-                    <TextBox Text="{Binding Text, Mode=TwoWay}" VerticalAlignment="Stretch" AcceptsReturn="True" Classes="left" Grid.Row="3" Grid.Column="1"/>
-                </Grid>
-            </ScrollViewer>
-        </TabItem>
-        <TabItem Header="Points" Classes="property">
-            <TabControl Classes="default">
-                <TabItem Header="TopLeft" Classes="property">
-                    <ContentControl Content="{Binding TopLeft}"/>
-                </TabItem>
-                <TabItem Header="BottomRight" Classes="property">
-                    <ContentControl Content="{Binding BottomRight}"/>
-                </TabItem>
-            </TabControl>
-        </TabItem>
-        <TabItem Header="State" Classes="property">
-            <ContentControl Content="{Binding State}"/>
-        </TabItem>
-        <TabItem Header="Data" Classes="property">
-            <ContentControl Content="{Binding Data}"/>
-        </TabItem>
-        <TabItem Header="Style" Classes="property">
-            <ContentControl Content="{Binding Style}"/>
-        </TabItem>
-    </TabControl>
+             d:DesignWidth="250" d:DesignHeight="400"
+             x:DataType="Shapes:IEllipseShape" x:CompileBindings="True">
+    <Grid RowDefinitions="Auto,*">
+        <TabControl Grid.Row="0">
+            <TabItem Header="Ellipse">
+                <StackPanel>
+                    <TextBlock Text="Name" Margin="{DynamicResource TextControlThemePadding}"/>
+                    <TextBox Text="{Binding Name, Mode=TwoWay}"/>
+                    <CheckBox Content="IsStroked" IsChecked="{Binding IsStroked, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
+                    <CheckBox Content="IsFilled" IsChecked="{Binding IsFilled, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
+                    <TextBlock Text="Text" Margin="{DynamicResource TextControlThemePadding}"/>
+                    <TextBox Text="{Binding Text, Mode=TwoWay}" x:DataType="Shapes:ITextShape" VerticalAlignment="Stretch" AcceptsReturn="True"/>
+                </StackPanel>
+            </TabItem>
+            <TabItem Header="Data">
+                <ContentControl Content="{Binding Data}"/>
+            </TabItem>
+            <TabItem Header="Style">
+                <ContentControl Content="{Binding Style}"/>
+            </TabItem>
+            <TabItem Header="State">
+                <ContentControl Content="{Binding State}"/>
+            </TabItem>
+        </TabControl>
+        <TabControl Grid.Row="1">
+            <TabItem Header="TopLeft">
+                <ContentControl Content="{Binding TopLeft}" x:DataType="Shapes:ITextShape"/>
+            </TabItem>
+            <TabItem Header="BottomRight">
+                <ContentControl Content="{Binding BottomRight}" x:DataType="Shapes:ITextShape"/>
+            </TabItem>
+        </TabControl>
+    </Grid>
 </UserControl>

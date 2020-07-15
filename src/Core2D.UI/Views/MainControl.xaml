@@ -1,30 +1,193 @@
 ﻿<UserControl x:Class="Core2D.UI.Views.MainControl"
              xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
              xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
+             xmlns:iac="clr-namespace:Avalonia.Xaml.Interactions.Custom;assembly=Avalonia.Xaml.Interactions.Custom"
              xmlns:idd="clr-namespace:Core2D.UI.DragAndDrop;assembly=Core2D.UI"
-             xmlns:idc="clr-namespace:Dock.Avalonia.Controls;assembly=Dock.Avalonia"
              xmlns:handlers="clr-namespace:Core2D.UI.DragAndDrop.Handlers;assembly=Core2D.UI"
              xmlns:converters="clr-namespace:Core2D.UI.Converters;assembly=Core2D.UI"
-             xmlns:Views="clr-namespace:Core2D.UI.Dock.Views;assembly=Core2D.UI"
-             xmlns:Dock="clr-namespace:Dock.Model;assembly=Dock.Model"
-             UseLayoutRounding="True"
+             xmlns:views="clr-namespace:Core2D.UI.Views;assembly=Core2D.UI"
+             xmlns:containers="clr-namespace:Core2D.UI.Views.Containers;assembly=Core2D.UI"
+             xmlns:scripting="clr-namespace:Core2D.UI.Views.Scripting;assembly=Core2D.UI"
+             xmlns:renderer="clr-namespace:Core2D.UI.Views.Renderer;assembly=Core2D.UI"
+             xmlns:libraries="clr-namespace:Core2D.UI.Views.Libraries;assembly=Core2D.UI"
+             xmlns:Editor="clr-namespace:Core2D.Editor;assembly=Core2D"
+             xmlns:Recent="clr-namespace:Core2D.Editor.Recent;assembly=Core2D"
              xmlns:Designer="clr-namespace:Core2D.UI.Designer;assembly=Core2D.UI"
+             FontFamily="{DynamicResource UiFontFamily}"
+             Background="{DynamicResource SystemChromeMediumColor}"
+             Foreground="{DynamicResource SystemBaseHighColor}"
+             UseLayoutRounding="True" RenderOptions.BitmapInterpolationMode="HighQuality"
              mc:Ignorable="d"
              d:DataContext="{x:Static Designer:DesignerContext.Editor}"
-             d:DesignWidth="1200" d:DesignHeight="580">
+             d:DesignWidth="1200" d:DesignHeight="580"
+             x:DataType="Editor:IProjectEditor" x:CompileBindings="True">
+    <UserControl.Resources>
+        <converters:FirstSelectedItemValueConverter x:Key="FirstSelectedItemValueConverter"/>
+        <converters:StyleMultiValueConverter x:Key="StyleMultiValueConverter"/>
+        <handlers:EditorDropHandler x:Key="EditorDropHandler"/>
+    </UserControl.Resources>
     <UserControl.KeyBindings>
         <!-- File -->
-        <KeyBinding Command="{Binding OnNew}" CommandParameter="{Binding}" Gesture="Ctrl+N"/>
-        <KeyBinding Command="{Binding Platform.OnOpen}" Gesture="Ctrl+O"/>
-        <KeyBinding Command="{Binding OnCloseProject}" Gesture="Ctrl+F4"/>
-        <KeyBinding Command="{Binding Platform.OnSave}" Gesture="Ctrl+S"/>
-        <KeyBinding Command="{Binding Platform.OnSaveAs}" Gesture="Ctrl+Shift+S"/>
-        <KeyBinding Command="{Binding Platform.OnExport}" Gesture="Ctrl+E"/>
-        <KeyBinding Command="{Binding Platform.OnExit}" Gesture="Alt+F4"/>
+        <KeyBinding Command="{Binding OnNew}" CommandParameter="{Binding}" Gesture="Ctrl+N" x:CompileBindings="False"/>
+        <KeyBinding Command="{Binding Platform.OnOpen}" Gesture="Ctrl+O" x:CompileBindings="False"/>
+        <KeyBinding Command="{Binding OnCloseProject}" Gesture="Ctrl+F4" x:CompileBindings="False"/>
+        <KeyBinding Command="{Binding Platform.OnSave}" Gesture="Ctrl+S" x:CompileBindings="False"/>
+        <KeyBinding Command="{Binding Platform.OnSaveAs}" Gesture="Ctrl+Shift+S" x:CompileBindings="False"/>
+        <KeyBinding Command="{Binding Platform.OnExport}" Gesture="Ctrl+E" x:CompileBindings="False"/>
+        <KeyBinding Command="{Binding Platform.OnExit}" Gesture="Alt+F4" x:CompileBindings="False"/>
     </UserControl.KeyBindings>
-    <idc:DockControl Layout="{Binding LayoutPlatform.Layout}"/>
+    <i:Interaction.Behaviors>
+        <idd:ContextDropBehavior Context="{Binding FallbackValue={x:Null}}" Handler="{StaticResource EditorDropHandler}"/>
+    </i:Interaction.Behaviors>
+    <Grid x:Name="LayoutGrid">
+        <Grid x:Name="DashboardGrid" RowDefinitions="Auto,*" IsVisible="{Binding Project, Converter={x:Static ObjectConverters.IsNull}}">
+            <views:DashboardMenuControl Grid.Row="0"/>
+            <Grid MaxWidth="800" MaxHeight="600" RowDefinitions="0.2*,50,30,1*,30,1*,30,1*,20,0.2*" ColumnDefinitions="5*,50*,30,40*,5*" Grid.Row="1">
+                <TextBlock Text="Core2D" FontSize="20" FontWeight="SemiBold" Grid.Column="1" Grid.ColumnSpan="3" Grid.Row="1" Grid.RowSpan="1"/>
+                <Button Content="New Project" FontSize="14" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="1" Grid.RowSpan="1" Command="{Binding OnNewProject}" x:CompileBindings="False">
+                    <i:Interaction.Behaviors>
+                        <iac:FocusOnPointerMovedBehavior/>
+                    </i:Interaction.Behaviors>
+                </Button>
+                <Button Content="Open Project" FontSize="14" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.Column="1" Grid.Row="5" Grid.ColumnSpan="1" Grid.RowSpan="1" Command="{Binding Platform.OnOpen}" x:CompileBindings="False">
+                    <i:Interaction.Behaviors>
+                        <iac:FocusOnPointerMovedBehavior/>
+                    </i:Interaction.Behaviors>
+                </Button>
+                <Button Content="Open Recent" FontSize="14" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.Column="1" Grid.Row="7" Grid.ColumnSpan="1" Grid.RowSpan="1" Command="{Binding OnOpenProject}" CommandParameter="{Binding CurrentRecentProject.Path}" x:CompileBindings="False">
+                    <i:Interaction.Behaviors>
+                        <iac:FocusOnPointerMovedBehavior/>
+                    </i:Interaction.Behaviors>
+                </Button>
+                <TextBlock Text="recent" Grid.Column="3" Grid.ColumnSpan="1" Grid.Row="2" Grid.RowSpan="1"/>
+                <ListBox x:Name="recent" Items="{Binding RecentProjects}" SelectedItem="{Binding CurrentRecentProject, Mode=TwoWay}" Grid.Column="3" Grid.Row="3" Grid.ColumnSpan="1" Grid.RowSpan="5">
+                    <ListBox.DataTemplates>
+                        <DataTemplate DataType="Recent:RecentFile">
+                            <Grid x:Name="grid" Cursor="Hand">
+                                <i:Interaction.Behaviors>
+                                    <ia:EventTriggerBehavior EventName="DoubleTapped" SourceObject="{Binding #grid}" x:CompileBindings="False">
+                                        <ia:InvokeCommandAction Command="{Binding #recent.DataContext.OnOpenProject}" CommandParameter="{Binding #grid.DataContext.Path}" x:CompileBindings="False"/>
+                                    </ia:EventTriggerBehavior>
+                                </i:Interaction.Behaviors>
+                                <TextBlock Text="{Binding Name}" Grid.Column="0" ToolTip.Tip="{Binding Path}"/>
+                            </Grid>
+                        </DataTemplate>
+                    </ListBox.DataTemplates>
+                </ListBox>
+            </Grid>
+        </Grid>
+        <Grid x:Name="EditorGrid" ColumnDefinitions="250,6,*,6,250" RowDefinitions="Auto,*,Auto,Auto" IsVisible="{Binding Project, Converter={x:Static ObjectConverters.IsNotNull}}">
+            <views:EditorMenuControl x:Name="EditorMenuControl" Grid.Column="0" Grid.ColumnSpan="5" Grid.Row="0"/>
+            <TabControl x:Name="LeftTabControl" Grid.Column="0" Grid.Row="1">
+                <TabItem x:Name="ProjectTabItem" Header="Project">
+                    <containers:ProjectControl DataContext="{Binding Project}"/>
+                </TabItem>
+                <TabItem x:Name="PropertiesTabItem" Header="Properties">
+                    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                        <ContentControl Content="{Binding PageState.SelectedShapes, Converter={StaticResource FirstSelectedItemValueConverter}}"/>
+                    </ScrollViewer>
+                </TabItem>
+                <TabItem x:Name="StyleTabItem" Header="Style">
+                    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                        <ContentControl Margin="0,0,12,0">
+                            <ContentControl.Content>
+                                <MultiBinding Converter="{StaticResource StyleMultiValueConverter}">
+                                    <Binding Path="PageState.SelectedShapes" FallbackValue="{x:Null}" />
+                                    <Binding Path="Project.CurrentStyleLibrary.Selected" FallbackValue="{x:Null}" />
+                                </MultiBinding>
+                            </ContentControl.Content>
+                        </ContentControl>
+                    </ScrollViewer>
+                </TabItem>
+                <TabItem x:Name="OptionsTabItem" Header="Options">
+                    <TabControl x:Name="OptionsTabControl">
+                        <TabItem x:Name="ProjectOptionsTabItem" Header="Project">
+                            <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                                <ContentControl Content="{Binding Project.Options}" Margin="0,0,12,0"/>
+                            </ScrollViewer>
+                        </TabItem>
+                        <TabItem x:Name="RendererOptionsTabItem" Header="Renderer">
+                            <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                                <renderer:ShapeRendererStateControl DataContext="{Binding PageState}" Margin="0,0,12,0"/>
+                            </ScrollViewer>
+                        </TabItem>
+                        <TabItem x:Name="ZoomOptionsTabItem" Header="Zoom">
+                            <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                                <views:ZoomControl DataContext="{Binding CanvasPlatform.Zoom}" Margin="0,0,12,0"/>
+                            </ScrollViewer>
+                        </TabItem>
+                        <TabItem x:Name="ImagesOptionsTabItem" Header="Images">
+                            <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                                <libraries:ImagesControl DataContext="{Binding Project}" Margin="0,0,12,0"/>
+                            </ScrollViewer>
+                        </TabItem>
+                    </TabControl>
+                </TabItem>
+            </TabControl>
+            <GridSplitter x:Name="LeftGridSplitter" ResizeDirection="Columns" ResizeBehavior="PreviousAndNext" Background="Transparent" Width="6" Grid.Column="1" Grid.Row="1"/>
+            <views:PageControl x:Name="Page" Grid.Column="2" Grid.Row="1"/>
+            <GridSplitter x:Name="RightGridSplitter" ResizeDirection="Columns" ResizeBehavior="PreviousAndNext" Background="Transparent" Width="6" Grid.Column="3" Grid.Row="1"/>
+            <TabControl x:Name="RightTabControl" Grid.Column="4" Grid.Row="1">
+                <TabItem x:Name="PageTabItem" Header="Page">
+                    <containers:ContainerControl DataContext="{Binding Project.CurrentContainer}" Margin="0,0,12,0"/>
+                </TabItem>
+                <TabItem x:Name="LibrariesTabItem" Header="Libraries">
+                    <TabControl x:Name="LibrariesTabControl">
+                        <TabItem x:Name="StylesTabItem" Header="Styles">
+                            <libraries:StylesControl DataContext="{Binding Project}" Margin="0,0,12,0"/>
+                        </TabItem>
+                        <TabItem x:Name="GroupsTabItem" Header="Groups">
+                            <libraries:GroupsControl DataContext="{Binding Project}" Margin="0,0,12,0"/>
+                        </TabItem>
+                        <TabItem x:Name="DataTabItem" Header="Data">
+                            <libraries:DatabasesControl DataContext="{Binding Project}" Margin="0,0,12,0"/>
+                        </TabItem>
+                        <TabItem x:Name="TemplatesTabItem" Header="Templates">
+                            <libraries:TemplatesControl DataContext="{Binding Project}" Margin="0,0,12,0"/>
+                        </TabItem>
+                    </TabControl>
+                </TabItem>
+                <TabItem x:Name="ScriptsTabItem" Header="Scripts">
+                    <libraries:ScriptsControl DataContext="{Binding Project}" Margin="0,0,12,0"/>
+                </TabItem>
+                <TabItem x:Name="BrowserTabItem" Header="Browser">
+                    <views:BrowserControl Margin="0,0,12,0"/>
+                </TabItem>
+            </TabControl>
+            <views:StatusControl x:Name="StatusControl" Grid.Column="0" Grid.ColumnSpan="5" Grid.Row="3"/>
+        </Grid>
+    </Grid>
+    <!--<Grid>
+        <SplitView x:Name="SplitView"
+                    PanePlacement="Left"
+                    PaneBackground="{DynamicResource SystemControlBackgroundChromeMediumLowBrush}"
+                    OpenPaneLength="250"
+                    CompactPaneLength="28"
+                    DisplayMode="Inline"
+                    IsPaneOpen="True">
+            <SplitView.Resources>
+                <DrawingPresenter x:Key="PinIcon" Drawing="{StaticResource Pin}" Width="20" Height="20"/>
+                <DrawingPresenter x:Key="PinOffIcon" Drawing="{StaticResource PinOff}" Width="20" Height="20"/>
+            </SplitView.Resources>
+            <SplitView.Pane>
+                <Grid RowDefinitions="Auto,*" ColumnDefinitions="*,Auto" VerticalAlignment="Stretch">
+                    <LayoutTransformControl x:Name="LayoutTransform" Grid.Row="0" Grid.Column="0" Margin="0">
+                        <LayoutTransformControl.LayoutTransform>
+                            <RotateTransform Angle="0"/>
+                        </LayoutTransformControl.LayoutTransform>
+                        <TextBlock x:Name="PinTextBlock" Text="Project" Background="Transparent" HorizontalAlignment="Stretch" TextAlignment="Left" VerticalAlignment="Center" Margin="0" Padding="4"/>
+                    </LayoutTransformControl>
+                    <Button x:Name="PinButton" IsVisible="{Binding #SplitView.IsPaneOpen}" Content="{StaticResource PinIcon}" Grid.Row="0" Grid.Column="1" Background="Transparent" BorderThickness="0" Margin="4"/>
+                    <containers:ProjectControl DataContext="{Binding Project}" IsVisible="{Binding #SplitView.IsPaneOpen}" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"/>
+                </Grid>
+            </SplitView.Pane>
+            <Grid>
+                <views:PageControl x:Name="Page"/>
+            </Grid>
+        </SplitView>
+    </Grid>-->
 </UserControl>

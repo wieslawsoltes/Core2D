@@ -3,39 +3,38 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:Editor="clr-namespace:Core2D.Editor;assembly=Core2D"
              xmlns:Designer="clr-namespace:Core2D.UI.Designer;assembly=Core2D.UI"
              mc:Ignorable="d"
-             d:DataContext="{x:Static Designer:DesignerContext.Editor}"
-             d:DesignWidth="1000" d:DesignHeight="600">
-    <ScrollViewer>
-        <Grid ColumnDefinitions="Auto,*" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto">
-            <TextBlock Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Classes="aboutTitle" Text="{Binding AboutInfo.Title}"/>
-            <TextBlock Grid.Column="0" Grid.Row="1" Classes="aboutText" Text="Version"/>
-            <TextBlock Grid.Column="1" Grid.Row="1" Classes="aboutText" Text="{Binding AboutInfo.Version}"/>
-            <TextBlock Grid.Column="0" Grid.Row="2" Classes="aboutText" Text="Description"/>
-            <TextBlock Grid.Column="1" Grid.Row="2" Classes="aboutText" Text="{Binding AboutInfo.Description}"/>
-            <TextBlock Grid.Column="0" Grid.Row="3" Classes="aboutText" Text="Copyright"/>
-            <TextBlock Grid.Column="1" Grid.Row="3" Classes="aboutText" Text="{Binding AboutInfo.Copyright}"/>
-            <TextBlock Grid.Column="0" Grid.Row="4" Classes="aboutText" Text="License"/>
-            <TextBlock Grid.Column="1" Grid.Row="4" Classes="aboutText" Text="{Binding AboutInfo.License}"/>
-            <TextBlock Grid.Column="0" Grid.Row="5" Classes="aboutText" Text="OperatingSystem"/>
-            <TextBlock Grid.Column="1" Grid.Row="5" Classes="aboutText" Text="{Binding AboutInfo.OperatingSystem}"/>
-            <TextBlock Grid.Column="0" Grid.Row="6" Classes="aboutText" Text="IsDesktop"/>
-            <TextBlock Grid.Column="1" Grid.Row="6" Classes="aboutText" Text="{Binding AboutInfo.IsDesktop}"/>
-            <TextBlock Grid.Column="0" Grid.Row="7" Classes="aboutText" Text="IsMobile"/>
-            <TextBlock Grid.Column="1" Grid.Row="7" Classes="aboutText" Text="{Binding AboutInfo.IsMobile}"/>
-            <TextBlock Grid.Column="0" Grid.Row="8" Classes="aboutText" Text="IsCoreClr"/>
-            <TextBlock Grid.Column="1" Grid.Row="8" Classes="aboutText" Text="{Binding AboutInfo.IsCoreClr}"/>
-            <TextBlock Grid.Column="0" Grid.Row="9" Classes="aboutText" Text="IsMono"/>
-            <TextBlock Grid.Column="1" Grid.Row="9" Classes="aboutText" Text="{Binding AboutInfo.IsMono}"/>
-            <TextBlock Grid.Column="0" Grid.Row="10" Classes="aboutText" Text="IsDotNetFramework"/>
-            <TextBlock Grid.Column="1" Grid.Row="10" Classes="aboutText" Text="{Binding AboutInfo.IsDotNetFramework}"/>
-            <TextBlock Grid.Column="0" Grid.Row="11" Classes="aboutText" Text="IsUnix"/>
-            <TextBlock Grid.Column="1" Grid.Row="11" Classes="aboutText" Text="{Binding AboutInfo.IsUnix}"/>
-            <TextBlock Grid.Column="0" Grid.Row="12" Classes="aboutText" Text="WindowingSubsystem"/>
-            <TextBlock Grid.Column="1" Grid.Row="12" Classes="aboutText" Text="{Binding AboutInfo.WindowingSubsystemName}"/>
-            <TextBlock Grid.Column="0" Grid.Row="13" Classes="aboutText" Text="RenderingSubsystem"/>
-            <TextBlock Grid.Column="1" Grid.Row="13" Classes="aboutText" Text="{Binding AboutInfo.RenderingSubsystemName}"/>
-        </Grid>
-    </ScrollViewer>
+             d:DesignWidth="1000" d:DesignHeight="600"
+             x:DataType="Editor:AboutInfo" x:CompileBindings="True">
+    <Grid ColumnDefinitions="Auto,*" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto" Margin="10">
+        <TextBlock Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Margin="4" FontSize="18" FontWeight="SemiBold" Text="{Binding Title}"/>
+        <TextBlock Grid.Column="0" Grid.Row="1" Margin="4" Text="Version"/>
+        <TextBlock Grid.Column="1" Grid.Row="1" Margin="4" Text="{Binding Version}"/>
+        <TextBlock Grid.Column="0" Grid.Row="2" Margin="4" Text="Description"/>
+        <TextBlock Grid.Column="1" Grid.Row="2" Margin="4" Text="{Binding Description}"/>
+        <TextBlock Grid.Column="0" Grid.Row="3" Margin="4" Text="Copyright"/>
+        <TextBlock Grid.Column="1" Grid.Row="3" Margin="4" Text="{Binding Copyright}"/>
+        <TextBlock Grid.Column="0" Grid.Row="4" Margin="4" Text="License"/>
+        <TextBlock Grid.Column="1" Grid.Row="4" Margin="4" Text="{Binding License}"/>
+        <TextBlock Grid.Column="0" Grid.Row="5" Margin="4" Text="OperatingSystem"/>
+        <TextBlock Grid.Column="1" Grid.Row="5" Margin="4" Text="{Binding OperatingSystem}"/>
+        <TextBlock Grid.Column="0" Grid.Row="6" Margin="4" Text="IsDesktop"/>
+        <TextBlock Grid.Column="1" Grid.Row="6" Margin="4" Text="{Binding IsDesktop}"/>
+        <TextBlock Grid.Column="0" Grid.Row="7" Margin="4" Text="IsMobile"/>
+        <TextBlock Grid.Column="1" Grid.Row="7" Margin="4" Text="{Binding IsMobile}"/>
+        <TextBlock Grid.Column="0" Grid.Row="8" Margin="4" Text="IsCoreClr"/>
+        <TextBlock Grid.Column="1" Grid.Row="8" Margin="4" Text="{Binding IsCoreClr}"/>
+        <TextBlock Grid.Column="0" Grid.Row="9" Margin="4" Text="IsMono"/>
+        <TextBlock Grid.Column="1" Grid.Row="9" Margin="4" Text="{Binding IsMono}"/>
+        <TextBlock Grid.Column="0" Grid.Row="10" Margin="4" Text="IsDotNetFramework"/>
+        <TextBlock Grid.Column="1" Grid.Row="10" Margin="4" Text="{Binding IsDotNetFramework}"/>
+        <TextBlock Grid.Column="0" Grid.Row="11" Margin="4" Text="IsUnix"/>
+        <TextBlock Grid.Column="1" Grid.Row="11" Margin="4" Text="{Binding IsUnix}"/>
+        <TextBlock Grid.Column="0" Grid.Row="12" Margin="4" Text="WindowingSubsystem"/>
+        <TextBlock Grid.Column="1" Grid.Row="12" Margin="4" Text="{Binding WindowingSubsystemName}"/>
+        <TextBlock Grid.Column="0" Grid.Row="13" Margin="4" Text="RenderingSubsystem"/>
+        <TextBlock Grid.Column="1" Grid.Row="13" Margin="4" Text="{Binding RenderingSubsystemName}"/>
+    </Grid>
 </UserControl>

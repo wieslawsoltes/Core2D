@@ -68,7 +68,7 @@ namespace Core2D.UI.Renderer
             // TODO: Cache Typeface
             // TODO: Cache FormattedText
 
-            Typeface = new AM.Typeface(Style.TextStyle.FontName, fontWeight, fontStyle);
+            Typeface = new AM.Typeface(Style.TextStyle.FontName, fontStyle, fontWeight);
 
             var textAlignment = Style.TextStyle.TextHAlignment switch
             {

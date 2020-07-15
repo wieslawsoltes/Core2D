@@ -1,7 +1,6 @@
 using System;
 using Avalonia.Controls;
 using Avalonia.Controls.Templates;
-using Dock.Model;
 using ReactiveUI;
 
 namespace Core2D.UI
@@ -38,7 +37,7 @@ namespace Core2D.UI
 
         public bool Match(object data)
         {
-            return data is ReactiveObject || data is IDockable;
+            return data is ReactiveObject;
         }
     }
 }

@@ -16,7 +16,6 @@ namespace Core2D.UI.Views
         {
             InitializeComponent();
             this.AttachDevTools();
-            // FIXME: App.Selector.EnableThemes(this);
         }
 
         /// <summary>

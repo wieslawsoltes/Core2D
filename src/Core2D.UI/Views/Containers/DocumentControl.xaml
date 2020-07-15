@@ -7,33 +7,31 @@
              xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
              xmlns:idd="clr-namespace:Core2D.UI.DragAndDrop;assembly=Core2D.UI"
              xmlns:converters="clr-namespace:Core2D.UI.Converters;assembly=Core2D.UI"
-             xmlns:ContainersCore="clr-namespace:Core2D.Containers;assembly=Core2D"
+             xmlns:Containers="clr-namespace:Core2D.Containers;assembly=Core2D"
              xmlns:Designer="clr-namespace:Core2D.UI.Designer;assembly=Core2D.UI"
              mc:Ignorable="d"
              d:DataContext="{x:Static Designer:DesignerContext.Document}"
-             d:DesignWidth="250" d:DesignHeight="400">
-    <TabControl Classes="default">
-        <TabItem Header="Document" Classes="property">
-            <Grid RowDefinitions="Auto" ColumnDefinitions="Auto,*">
-                <TextBlock Text="Name" Classes="left" Grid.Row="0" Grid.Column="0"/>
-                <TextBox Text="{Binding Name, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
-            </Grid>
-        </TabItem>
-        <TabItem Header="Owner" Classes="property">
-            <ContentControl Content="{Binding Owner}"/>
-        </TabItem>
-        <TabItem Header="Pages" Classes="property">
-            <ListBox Items="{Binding Pages}" Classes="default">
-                <ListBox.DataTemplates>
-                    <DataTemplate DataType="ContainersCore:IPageContainer">
-                        <TextBlock Text="{Binding Name}" Classes="list drag">
-                            <i:Interaction.Behaviors>
-                                <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}"/>
-                            </i:Interaction.Behaviors>
-                        </TextBlock>
-                    </DataTemplate>
-                </ListBox.DataTemplates>
-            </ListBox>
-        </TabItem>
-    </TabControl>
+             d:DesignWidth="250" d:DesignHeight="400"
+             x:DataType="Containers:IDocumentContainer" x:CompileBindings="True">
+    <Grid RowDefinitions="Auto,*">
+        <StackPanel Grid.Row="0">
+            <TextBlock Text="Name" Margin="{DynamicResource TextControlThemePadding}"/>
+            <TextBox Text="{Binding Name, Mode=TwoWay}"/>
+        </StackPanel>
+        <TabControl Grid.Row="1">
+            <TabItem Header="Pages">
+                <ListBox Items="{Binding Pages}">
+                    <ListBox.DataTemplates>
+                        <DataTemplate DataType="Containers:IPageContainer">
+                            <TextBlock Text="{Binding Name}" Background="Transparent">
+                                <i:Interaction.Behaviors>
+                                    <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}"/>
+                                </i:Interaction.Behaviors>
+                            </TextBlock>
+                        </DataTemplate>
+                    </ListBox.DataTemplates>
+                </ListBox>
+            </TabItem>
+        </TabControl>
+    </Grid>
 </UserControl>
