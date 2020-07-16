@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Globalization;
 using Avalonia.Collections;
 using Avalonia.Controls;
 using Avalonia.LogicalTree;
@@ -7,10 +8,22 @@ namespace Core2D.UI.Configuration.Layouts
 {
     public static class LayoutConfigurationFactory
     {
-        private static GridLayout CreateGridLayout(Grid grid)
+        private static string ToString(GridLength gridLength)
+        {
+            if (gridLength.IsAuto)
+            {
+                return "Auto";
+            }
+
+            string s = gridLength.Value.ToString(CultureInfo.InvariantCulture);
+            return gridLength.IsStar ? s + "*" : s;
+        }
+
+        private static GridLayout CreateGridLayout(Grid grid, string prefix)
         {
             var name = grid.Name;
-            var hasName = !string.IsNullOrWhiteSpace(name);
+
+            var hasName = !string.IsNullOrWhiteSpace(name) && name.Trim().StartsWith(prefix);
             if (!hasName)
             {
                 return null;
@@ -25,21 +38,22 @@ namespace Core2D.UI.Configuration.Layouts
 
             foreach (var row in grid.RowDefinitions)
             {
-                gridLayout.Rows.Add(new Row() { Height = row.Height.ToString() });
+                gridLayout.Rows.Add(new Row() { Height = ToString(row.Height) });
             }
 
             foreach (var column in grid.ColumnDefinitions)
             {
-                gridLayout.Columns.Add(new Column() { Width = column.Width.ToString() });
+                gridLayout.Columns.Add(new Column() { Width = ToString(column.Width) });
             }
 
             return gridLayout;
         }
 
-        private static TabLayout CreateTabLayout(TabControl tabControl)
+        private static TabLayout CreateTabLayout(TabControl tabControl, string prefix)
         {
             var name = tabControl.Name;
-            var hasName = !string.IsNullOrWhiteSpace(name);
+
+            var hasName = !string.IsNullOrWhiteSpace(name) && name.Trim().StartsWith(prefix);
             if (!hasName)
             {
                 return null;
@@ -53,10 +67,10 @@ namespace Core2D.UI.Configuration.Layouts
 
             foreach (var item in tabControl.Items)
             {
-                if (item is TabItem tab)
+                if (item is TabItem tabItem)
                 {
-                    var tabName = tab.Name;
-                    var hasTabName = !string.IsNullOrWhiteSpace(name);
+                    var tabName = tabItem.Name;
+                    var hasTabName = !string.IsNullOrWhiteSpace(tabName) && tabName.Trim().StartsWith(prefix);
                     if (hasTabName)
                     {
                         tabLayout.Tabs.Add(new Tab() { Name = tabName });
@@ -69,7 +83,7 @@ namespace Core2D.UI.Configuration.Layouts
             return tabLayout;
         }
 
-        public static LayoutConfiguration Save(Control control)
+        public static LayoutConfiguration Save(Control control, string prefix = "LAYOUT_")
         {
             var layoutConfiguration = new LayoutConfiguration()
             {
@@ -89,7 +103,7 @@ namespace Core2D.UI.Configuration.Layouts
                     {
                         case Grid grid:
                             {
-                                var gridLayout = CreateGridLayout(grid);
+                                var gridLayout = CreateGridLayout(grid, prefix);
                                 if (gridLayout != null)
                                 {
                                     layoutConfiguration.GridLayouts.Add(gridLayout); 
@@ -98,7 +112,7 @@ namespace Core2D.UI.Configuration.Layouts
                             break;
                         case TabControl tabControl:
                             {
-                                var tabLayout = CreateTabLayout(tabControl);
+                                var tabLayout = CreateTabLayout(tabControl, prefix);
                                 if (tabLayout != null)
                                 {
                                     layoutConfiguration.TabLayouts.Add(tabLayout);
