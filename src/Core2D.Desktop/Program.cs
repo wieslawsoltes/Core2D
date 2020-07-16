@@ -14,6 +14,7 @@ using Avalonia.Media.Imaging;
 using Avalonia.Threading;
 using Core2D.Editor;
 using Core2D.UI;
+using Core2D.UI.Configuration.Themes;
 using Core2D.UI.Views;
 using Microsoft.CodeAnalysis.CSharp.Scripting;
 using Microsoft.CodeAnalysis.Scripting;

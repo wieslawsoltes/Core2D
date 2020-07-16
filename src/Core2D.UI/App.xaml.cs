@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using System.Text.Json;
 using Autofac;
 using Avalonia;
 using Avalonia.Controls;
@@ -12,105 +13,17 @@ using Avalonia.Platform;
 using Avalonia.Styling;
 using Core2D;
 using Core2D.Editor;
+using Core2D.UI.Configuration.Layouts;
+using Core2D.UI.Configuration.Themes;
+using Core2D.UI.Configuration.Windows;
 using Core2D.UI.Designer;
 using Core2D.UI.Modules;
 using Core2D.UI.Views;
 
 namespace Core2D.UI
 {
-    public enum ThemeName
-    {
-        DefaultDark,
-        DefaultLight,
-        FluentDark,
-        FluentLight
-    }
-
-    /// <summary>
-    /// Window settings.
-    /// </summary>
-    public class WindowSettings
-    {
-        /// <summary>
-        /// Gets or sets X-axis window position.
-        /// </summary>
-        public double X { get; set; } = double.NaN;
-
-        /// <summary>
-        /// Gets or sets Y-axis window position.
-        /// </summary>
-        public double Y { get; set; } = double.NaN;
-
-        /// <summary>
-        /// Gets or sets window width.
-        /// </summary>
-        public double Width { get; set; } = double.NaN;
-
-        /// <summary>
-        /// Gets or sets window width.
-        /// </summary>
-        public double Height { get; set; } = double.NaN;
-
-        /// <summary>
-        /// Gets or sets window state.
-        /// </summary>
-        public WindowState WindowState { get; set; } = WindowState.Normal;
-
-        /// <summary>
-        /// Gets window settings.
-        /// </summary>
-        /// <param name="window">The window.</param>
-        /// <returns>The window settings.</returns>
-        public static WindowSettings GetWindowSettings(Window window)
-        {
-            return new WindowSettings()
-           {
-                Width = window.Width,
-                Height = window.Height,
-                X = window.Position.X,
-                Y = window.Position.Y,
-                WindowState = window.WindowState
-            };
-        }
-
-        /// <summary>
-        /// Sets window settings.
-        /// </summary>
-        /// <param name="window">The window.</param>
-        public static void SetWindowSettings(Window window, WindowSettings settings)
-        {
-            if (!double.IsNaN(settings.Width))
-            {
-                window.Width = settings.Width;
-            }
-
-            if (!double.IsNaN(settings.Height))
-            {
-                window.Height = settings.Height;
-            }
-
-            if (!double.IsNaN(settings.X) && !double.IsNaN(settings.Y))
-            {
-                window.Position = new PixelPoint((int)settings.X, (int)settings.Y);
-                window.WindowStartupLocation = WindowStartupLocation.Manual;
-            }
-            else
-            {
-                window.WindowStartupLocation = WindowStartupLocation.CenterScreen;
-            }
-
-            window.WindowState = settings.WindowState;
-        }
-    }
-
-    /// <summary>
-    /// Encapsulates an Avalonia application.
-    /// </summary>
     public class App : Application
     {
-        // <summary>
-        /// Default dark theme.
-        /// </summary>
         public Styles DefaultDark = new Styles
         {
             new StyleInclude(new Uri("avares://Core2D.UI/Styles"))
@@ -119,9 +32,6 @@ namespace Core2D.UI
             }
         };
 
-        // <summary>
-        /// Default light theme.
-        /// </summary>
         public Styles DefaultLight = new Styles
         {
             new StyleInclude(new Uri("avares://Core2D.UI/Styles"))
@@ -130,9 +40,6 @@ namespace Core2D.UI
             }
         };
 
-        // <summary>
-        /// Default fluent dark theme.
-        /// </summary>
         public Styles FluentDark = new Styles
         {
             new StyleInclude(new Uri("avares://Core2D.UI/Styles"))
@@ -141,9 +48,6 @@ namespace Core2D.UI
             }
         };
 
-        // <summary>
-        /// Default fluent light theme.
-        /// </summary>
         public Styles FluentLight = new Styles
         {
             new StyleInclude(new Uri("avares://Core2D.UI/Styles"))
@@ -152,22 +56,13 @@ namespace Core2D.UI
             }
         };
 
-        /// <summary>
-        /// Gets or sets default theme.
-        /// </summary>
         public static ThemeName DefaultTheme { get; set; } = ThemeName.FluentLight;
 
-        /// <summary>
-        /// Initializes static data.
-        /// </summary>
         static App()
         {
             InitializeDesigner();
         }
 
-        /// <summary>
-        /// Initializes designer.
-        /// </summary>
         public static void InitializeDesigner()
         {
             if (Design.IsDesignMode)
@@ -182,13 +77,6 @@ namespace Core2D.UI
             }
         }
 
-        /// <summary>
-        /// Initialize application about information.
-        /// </summary>
-        /// <param name="runtimeInfo">The runtime info.</param>
-        /// <param name="windowingSubsystem">The windowing subsystem.</param>
-        /// <param name="renderingSubsystem">The rendering subsystem.</param>
-        /// <returns>The about information.</returns>
         public AboutInfo CreateAboutInfo(RuntimePlatformInfo runtimeInfo, string windowingSubsystem, string renderingSubsystem)
         {
             return new AboutInfo()
@@ -222,18 +110,28 @@ namespace Core2D.UI
 
             var log = serviceProvider.GetService<ILog>();
             var fileIO = serviceProvider.GetService<IFileSystem>();
-            var jsonSerializer = serviceProvider.GetService<IJsonSerializer>();
 
             log?.Initialize(System.IO.Path.Combine(fileIO?.GetBaseDirectory(), "Core2D.log"));
 
-            var windowSettings = default(WindowSettings);
+            var windowSettings = default(WindowConfiguration);
             var windowSettingsPath = System.IO.Path.Combine(fileIO?.GetBaseDirectory(), "Core2D.window");
             if (fileIO.Exists(windowSettingsPath))
             {
                 var jsonWindowSettings = fileIO?.ReadUtf8Text(windowSettingsPath);
                 if (!string.IsNullOrEmpty(jsonWindowSettings))
                 {
-                    windowSettings = jsonSerializer.Deserialize<WindowSettings>(jsonWindowSettings);
+                    windowSettings = JsonSerializer.Deserialize<WindowConfiguration>(jsonWindowSettings);
+                }
+            }
+
+            var windowLayout = default(LayoutConfiguration);
+            var windowLayoutPath = System.IO.Path.Combine(fileIO?.GetBaseDirectory(), "Core2D.layout");
+            if (fileIO.Exists(windowLayoutPath))
+            {
+                var jsonWindowLayout = fileIO?.ReadUtf8Text(windowLayoutPath);
+                if (!string.IsNullOrEmpty(jsonWindowLayout))
+                {
+                    windowLayout = JsonSerializer.Deserialize<LayoutConfiguration>(jsonWindowLayout);
                 }
             }
 
@@ -258,10 +156,16 @@ namespace Core2D.UI
             editor.AboutInfo = aboutInfo;
 
             var mainWindow = serviceProvider.GetService<MainWindow>();
+            var mainControl = mainWindow.FindControl<MainControl>("MainControl");
 
             if (windowSettings != null)
             {
-                WindowSettings.SetWindowSettings(mainWindow, windowSettings);
+                WindowConfigurationFactory.Load(mainWindow, windowSettings);
+            }
+
+            if (mainControl != null && windowLayout != null)
+            {
+                LayoutConfigurationFactory.Load(mainControl, windowLayout);
             }
 
             mainWindow.DataContext = editor;
@@ -270,11 +174,18 @@ namespace Core2D.UI
             {
                 editor.OnSaveRecent(recentPath);
 
-                windowSettings = WindowSettings.GetWindowSettings(mainWindow);
-                var jsonWindowSettings = jsonSerializer?.Serialize(windowSettings);
+                windowSettings = WindowConfigurationFactory.Save(mainWindow);
+                var jsonWindowSettings = JsonSerializer.Serialize(windowSettings, new JsonSerializerOptions() { WriteIndented = true });
                 if (!string.IsNullOrEmpty(jsonWindowSettings))
                 {
                     fileIO?.WriteUtf8Text(windowSettingsPath, jsonWindowSettings);
+                }
+
+                windowLayout = LayoutConfigurationFactory.Save(mainControl);
+                var jsonWindowLayout = JsonSerializer.Serialize(windowLayout, new JsonSerializerOptions() { WriteIndented = true });
+                if (!string.IsNullOrEmpty(jsonWindowLayout))
+                {
+                    fileIO?.WriteUtf8Text(windowLayoutPath, jsonWindowLayout);
                 }
             };
 
@@ -315,7 +226,6 @@ namespace Core2D.UI
             singleViewLifetime.MainView = mainView;
         }
 
-        /// <inheritdoc/>
         public override void OnFrameworkInitializationCompleted()
         {
             Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
@@ -332,7 +242,6 @@ namespace Core2D.UI
             base.OnFrameworkInitializationCompleted();
         }
 
-        /// <inheritdoc/>
         public override void Initialize()
         {
             AvaloniaXamlLoader.Load(this);
