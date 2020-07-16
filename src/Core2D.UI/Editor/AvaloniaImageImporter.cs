@@ -2,12 +2,10 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Avalonia.Controls;
-using Core2D;
 using Core2D.Editor;
-using Core2D.Renderer;
 using Core2D.UI.Views;
 
-namespace Core2D.UI.Importers
+namespace Core2D.UI.Editor
 {
     /// <summary>
     /// File image importer.

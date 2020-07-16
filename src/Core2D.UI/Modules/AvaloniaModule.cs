@@ -27,7 +27,6 @@ using Core2D.TextFieldReader.OpenXml;
 using Core2D.TextFieldWriter.CsvHelper;
 using Core2D.TextFieldWriter.OpenXml;
 using Core2D.UI.Editor;
-using Core2D.UI.Importers;
 using Core2D.UI.Renderer;
 using Core2D.UI.Views;
 
@@ -87,7 +86,7 @@ namespace Core2D.UI.Modules
             builder.RegisterType<SkiaSharpPathConverter>().As<IPathConverter>().InstancePerLifetimeScope();
             builder.RegisterType<SkiaSharpSvgConverter>().As<ISvgConverter>().InstancePerLifetimeScope();
 
-            // App
+            // Editor
 
             builder.RegisterType<AvaloniaImageImporter>().As<IImageImporter>().InstancePerLifetimeScope();
             builder.RegisterType<AvaloniaProjectEditorPlatform>().As<IProjectEditorPlatform>().InstancePerLifetimeScope();
