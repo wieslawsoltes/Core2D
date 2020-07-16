@@ -504,7 +504,7 @@ namespace Core2D.Renderer.SkiaSharp
                             }
                         }
                         break;
-                    case SP.DrawPositionedTextCanvasCommand drawPositionedTextCanvasCommand:
+                    case SP.DrawTextBlobCanvasCommand drawTextBlobCanvasCommand:
                         {
                             // TODO:
                         }
