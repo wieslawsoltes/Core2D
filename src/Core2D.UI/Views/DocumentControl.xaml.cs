@@ -4,14 +4,14 @@ using Avalonia.Markup.Xaml;
 namespace Core2D.UI.Views
 {
     /// <summary>
-    /// Interaction logic for <see cref="DocumentContainerControl"/> xaml.
+    /// Interaction logic for <see cref="DocumentControl"/> xaml.
     /// </summary>
-    public class DocumentContainerControl : UserControl
+    public class DocumentControl : UserControl
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="DocumentContainerControl"/> class.
+        /// Initializes a new instance of the <see cref="DocumentControl"/> class.
         /// </summary>
-        public DocumentContainerControl()
+        public DocumentControl()
         {
             InitializeComponent();
         }
