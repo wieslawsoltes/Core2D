@@ -26,7 +26,6 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.0" PrivateAssets="All" />
-    <PackageReference Include="Svg.Skia" Version="0.4.0-build*" />
     <PackageReference Include="System.Collections.Immutable" Version="1.7.1" />
     <PackageReference Include="System.Diagnostics.TextWriterTraceListener" Version="4.3.0" Condition="!$(TargetFramework.StartsWith('net4'))" />
     <PackageReference Include="System.Diagnostics.TraceSource" Version="4.3.0" Condition="!$(TargetFramework.StartsWith('net4'))" />
@@ -34,13 +33,15 @@
     <PackageReference Include="System.IO.Compression" Version="4.3.0" />
     <PackageReference Include="Autofac" Version="5.2.0" />
     <PackageReference Include="CsvHelper" Version="15.0.5" />
-    <PackageReference Include="DocumentFormat.OpenXml" Version="2.11.0" />
+    <PackageReference Include="DocumentFormat.OpenXml" Version="2.11.2" />
     <PackageReference Include="Math.Spatial" Version="1.2.0" />
     <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Scripting" Version="3.6.0" Condition="'$(CoreRT)' != 'True'" />
     <PackageReference Include="netDXF.netstandard" Version="2.3.0" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
     <PackageReference Include="PDFsharp" Version="1.50.5147" />
-    <PackageReference Include="SkiaSharp" Version="1.68.3" />
+    <PackageReference Include="SkiaSharp" Version="2.80.1" />
+    <PackageReference Include="SkiaSharp.NativeAssets.Linux" Version="2.80.1" />
+    <PackageReference Include="Svg.Skia" Version="0.4.0-build*" />
   </ItemGroup>
 
   <ItemGroup Condition="$(TargetFramework.StartsWith('net4'))">
