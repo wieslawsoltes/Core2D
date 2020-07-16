@@ -144,9 +144,21 @@ namespace Core2D.UI.Configuration.Layouts
                 {
                     if (tabControl.Items is AvaloniaList<object> tabItems && tabItems.Count == tabLayout.Tabs.Count)
                     {
-                        for (int i = 0; i < tabItems.Count; i++)
+                        for (int i = 0; i < tabLayout.Tabs.Count; i++)
                         {
-                            // TODO: Change tab order, tabItems[i].Name == tabLayout.Tabs[i].Name
+                            for (int j = 0; j < tabItems.Count; j++)
+                            {
+                                if (tabItems[j] is TabItem tabItem)
+                                {
+                                    if (tabItem.Name == tabLayout.Tabs[i].Name)
+                                    {
+                                        if (i != j)
+                                        {
+                                            tabItems.Move(j, i);
+                                        }
+                                    }
+                                }
+                            }
                         }
 
                         tabControl.SelectedIndex = tabLayout.SelectedTab;
