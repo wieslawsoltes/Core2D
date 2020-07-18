@@ -63,7 +63,7 @@ namespace Core2D.UI.Renderer
                 thickness /= scale;
             }
 
-            if (Grid.GridStrokeThickness != thickness)
+            if (Stroke.Thickness != thickness)
             {
                 Stroke = AvaloniaDrawUtil.ToPen(Grid.GridStrokeColor, thickness);
             }
