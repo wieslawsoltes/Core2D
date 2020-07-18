@@ -19,7 +19,7 @@
     <UserControl.Resources>
         <converters:ObjectToTypeStringConverter x:Key="ObjectToTypeStringConverter"/>
     </UserControl.Resources>
-    <Grid RowDefinitions="Auto,*">
+    <Grid RowDefinitions="Auto,Auto,*,*">
         <StackPanel Grid.Row="0">
             <TextBlock Text="Name" Margin="{DynamicResource TextControlThemePadding}"/>
             <TextBox Text="{Binding Name, Mode=TwoWay}"/>
@@ -34,10 +34,12 @@
                     <TextBox Text="{Binding Height, Mode=TwoWay}"/>
                 </StackPanel>
             </Grid>
-            <TextBlock Text="Background" Margin="{DynamicResource TextControlThemePadding}"/>
-            <ContentControl Content="{Binding Background}"/>
         </StackPanel>
-        <TabControl Grid.Row="1">
+        <TextBlock Text="Background" Margin="{DynamicResource TextControlThemePadding}" Grid.Row="1"/>
+        <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Grid.Row="2">
+            <ContentControl Content="{Binding Background}"/>
+        </ScrollViewer>
+        <TabControl Grid.Row="3">
             <TabItem Header="Layers" x:CompileBindings="False">
                 <Grid RowDefinitions="Auto,*,Auto">
                     <Menu Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Center">
