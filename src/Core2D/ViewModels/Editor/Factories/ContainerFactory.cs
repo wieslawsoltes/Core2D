@@ -44,24 +44,16 @@ namespace Core2D.Editor.Factories
             var factory = _serviceProvider.GetService<IFactory>();
             var template = containerFactory.GetTemplate(project, name);
 
-            var style = factory.CreateShapeStyle("Default", 255, 222, 222, 222, 255, 222, 222, 222, 1.0);
-            var layer = template.Layers.FirstOrDefault();
-            var builder = layer.Shapes.ToBuilder();
-            var grid = factory.CreateRectangleShape(
-                30.0, 30.0,
-                template.Width - 30.0, template.Height - 30.0,
-                style);
-            grid.IsStroked = true;
-            grid.IsFilled = false;
-            grid.IsGrid = true;
-            grid.OffsetX = 30.0;
-            grid.OffsetY = 30.0;
-            grid.CellWidth = 30.0;
-            grid.CellHeight = 30.0;
-            grid.State.Flags &= ~ShapeStateFlags.Printable;
-            grid.State.Flags |= ShapeStateFlags.Thickness;
-            builder.Add(grid);
-            layer.Shapes = builder.ToImmutable();
+            template.IsGridEnabled = true;
+            template.IsBorderEnabled = true;
+            template.GridOffsetLeft = 30.0;
+            template.GridOffsetTop = 30.0;
+            template.GridOffsetRight = -30.0;
+            template.GridOffsetBottom = -30.0;
+            template.GridCellWidth = 30.0;
+            template.GridCellHeight = 30.0;
+            template.GridStrokeColor = factory.CreateArgbColor(0xFF, 0xDE, 0xDE, 0xDE);
+            template.GridStrokeThickness = 1.0;
 
             return template;
         }

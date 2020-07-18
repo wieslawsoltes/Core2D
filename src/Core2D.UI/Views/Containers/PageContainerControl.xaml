@@ -9,6 +9,7 @@
              xmlns:idd="clr-namespace:Core2D.UI.DragAndDrop;assembly=Core2D.UI"
              xmlns:handlers="clr-namespace:Core2D.UI.DragAndDrop.Handlers;assembly=Core2D.UI"
              xmlns:converters="clr-namespace:Core2D.UI.Converters;assembly=Core2D.UI"
+             xmlns:renderer="clr-namespace:Core2D.UI.Views.Renderer;assembly=Core2D.UI"
              xmlns:Containers="clr-namespace:Core2D.Containers;assembly=Core2D"
              xmlns:Shapes="clr-namespace:Core2D.Shapes;assembly=Core2D"
              xmlns:Designer="clr-namespace:Core2D.UI.Designer;assembly=Core2D.UI"
@@ -19,27 +20,39 @@
     <UserControl.Resources>
         <converters:ObjectToTypeStringConverter x:Key="ObjectToTypeStringConverter"/>
     </UserControl.Resources>
-    <Grid RowDefinitions="Auto,Auto,*,*">
+    <Grid RowDefinitions="Auto,Auto,*">
         <StackPanel Grid.Row="0">
             <TextBlock Text="Name" Margin="{DynamicResource TextControlThemePadding}"/>
             <TextBox Text="{Binding Name, Mode=TwoWay}"/>
-            <Grid ColumnDefinitions="50*,6,50*">
-                <StackPanel Grid.Column="0">
-                    <TextBlock Text="Width" Margin="{DynamicResource TextControlThemePadding}"/>
-                    <TextBox Text="{Binding Width, Mode=TwoWay}"/>
-                </StackPanel>
-                <GridSplitter ResizeDirection="Columns" ResizeBehavior="PreviousAndNext" Background="Transparent" Width="6" Grid.Column="1"/>
-                <StackPanel Grid.Column="2">
-                    <TextBlock Text="Height" Margin="{DynamicResource TextControlThemePadding}"/>
-                    <TextBox Text="{Binding Height, Mode=TwoWay}"/>
-                </StackPanel>
-            </Grid>
         </StackPanel>
-        <TextBlock Text="Background" Margin="{DynamicResource TextControlThemePadding}" Grid.Row="1"/>
-        <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Grid.Row="2">
-            <ContentControl Content="{Binding Background}"/>
-        </ScrollViewer>
-        <TabControl Grid.Row="3">
+        <TabControl Grid.Row="1">
+            <TabItem Header="Size">
+                <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Grid.Row="2">
+                    <Grid ColumnDefinitions="50*,6,50*">
+                        <StackPanel Grid.Column="0">
+                            <TextBlock Text="Width" Margin="{DynamicResource TextControlThemePadding}"/>
+                            <TextBox Text="{Binding Width, Mode=TwoWay}"/>
+                        </StackPanel>
+                        <GridSplitter ResizeDirection="Columns" ResizeBehavior="PreviousAndNext" Background="Transparent" Width="6" Grid.Column="1"/>
+                        <StackPanel Grid.Column="2">
+                            <TextBlock Text="Height" Margin="{DynamicResource TextControlThemePadding}"/>
+                            <TextBox Text="{Binding Height, Mode=TwoWay}"/>
+                        </StackPanel>
+                    </Grid>
+                </ScrollViewer>
+            </TabItem>
+            <TabItem Header="Background">
+                <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Grid.Row="2">
+                    <ContentControl Content="{Binding Background}"/>
+                </ScrollViewer>
+            </TabItem>
+            <TabItem Header="Grid">
+                <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                    <renderer:GridControl/>
+                </ScrollViewer>
+            </TabItem>
+        </TabControl>
+        <TabControl Grid.Row="2">
             <TabItem Header="Layers" x:CompileBindings="False">
                 <Grid RowDefinitions="Auto,*,Auto">
                     <Menu Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Center">

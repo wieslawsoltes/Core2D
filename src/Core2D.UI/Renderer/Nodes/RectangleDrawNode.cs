@@ -45,31 +45,6 @@ namespace Core2D.UI.Renderer
                 context.DrawRectangle(Stroke, Rect);
             }
 
-            if (Rectangle.IsStroked && Rectangle.IsGrid)
-            {
-                double ox = Rect.X;
-                double oy = Rect.Y;
-                double sx = ox + Rectangle.OffsetX;
-                double sy = oy + Rectangle.OffsetY;
-                double ex = ox + Rect.Width;
-                double ey = oy + Rect.Height;
-
-                for (double x = sx; x < ex; x += Rectangle.CellWidth)
-                {
-                    var p0 = new A.Point(x, oy);
-                    var p1 = new A.Point(x, ey);
-                    context.DrawLine(Stroke, p0, p1);
-
-                }
-
-                for (double y = sy; y < ey; y += Rectangle.CellHeight)
-                {
-                    var p0 = new A.Point(ox, y);
-                    var p1 = new A.Point(ex, y);
-                    context.DrawLine(Stroke, p0, p1);
-                }
-            }
-
             base.OnDraw(dc, zoom);
         }
     }

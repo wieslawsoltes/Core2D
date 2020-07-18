@@ -207,6 +207,22 @@ namespace Core2D.Renderer.Dxf
             }
         }
 
+        private void DrawLineInternal(DXF.DxfDocument dxf, DXFT.Layer layer, IColor color, double thickness, double x1, double y1, double x2, double y2)
+        {
+            var stroke = ToColor(color);
+            var strokeTansparency = ToTransparency(color);
+            var lineweight = ToLineweight(thickness);
+
+            var dxfLine = CreateLine(x1, y1, x2, y2);
+
+            dxfLine.Layer = layer;
+            dxfLine.Color = stroke;
+            dxfLine.Transparency.Value = strokeTansparency;
+            dxfLine.Lineweight = lineweight;
+
+            dxf.AddEntity(dxfLine);
+        }
+
         private void DrawRectangleInternal(DXF.DxfDocument dxf, DXFT.Layer layer, bool isFilled, bool isStroked, IBaseStyle style, ref Spatial.Rect2 rect)
         {
             if (isFilled)
@@ -256,6 +272,13 @@ namespace Core2D.Renderer.Dxf
             DrawLineInternal(dxf, layer, style, true, x, y + height, x, y);
         }
 
+        private void StrokeRectangle(DXF.DxfDocument dxf, DXFT.Layer layer, IColor color, double thickness, double x, double y, double width, double height)
+        {
+            DrawLineInternal(dxf, layer, color, thickness, x, y, x + width, y);
+            DrawLineInternal(dxf, layer, color, thickness, x + width, y, x + width, y + height);
+            DrawLineInternal(dxf, layer, color, thickness, x + width, y + height, x, y + height);
+            DrawLineInternal(dxf, layer, color, thickness, x, y + height, x, y);
+        }
         private void DrawEllipseInternal(DXF.DxfDocument dxf, DXFT.Layer layer, bool isFilled, bool isStroked, IBaseStyle style, ref Spatial.Rect2 rect)
         {
             var dxfEllipse = CreateEllipse(rect.X, rect.Y, rect.Width, rect.Height);
@@ -311,23 +334,23 @@ namespace Core2D.Renderer.Dxf
             dxf.AddEntity(hatch);
         }
 
-        private void DrawGridInternal(DXF.DxfDocument dxf, DXFT.Layer layer, IShapeStyle style, double offsetX, double offsetY, double cellWidth, double cellHeight, ref Spatial.Rect2 rect)
+        private void DrawGridInternal(DXF.DxfDocument dxf, DXFT.Layer layer, IGrid grid, ref Spatial.Rect2 rect)
         {
             double ox = rect.X;
+            double ex = rect.X + rect.Width;
             double oy = rect.Y;
-            double sx = ox + offsetX;
-            double sy = oy + offsetY;
-            double ex = ox + rect.Width;
-            double ey = oy + rect.Height;
+            double ey = rect.Y + rect.Height;
+            double cw = grid.GridCellWidth;
+            double ch = grid.GridCellHeight;
 
-            for (double gx = sx; gx < ex; gx += cellWidth)
+            for (double gx = ox + cw; gx < ex; gx += cw)
             {
-                DrawLineInternal(dxf, layer, style, true, gx, oy, gx, ey);
+                DrawLineInternal(dxf, layer, grid.GridStrokeColor, grid.GridStrokeThickness, gx, oy, gx, ey);
             }
 
-            for (double gy = sy; gy < ey; gy += cellHeight)
+            for (double gy = oy + ch; gy < ey; gy += ch)
             {
-                DrawLineInternal(dxf, layer, style, true, ox, gy, ex, gy);
+                DrawLineInternal(dxf, layer, grid.GridStrokeColor, grid.GridStrokeThickness, ox, gy, ex, gy);
             }
         }
 
@@ -413,8 +436,34 @@ namespace Core2D.Renderer.Dxf
         public void Fill(object dc, double x, double y, double width, double height, IColor color)
         {
             var dxf = dc as DXF.DxfDocument;
-            var rect = Spatial.Rect2.FromPoints(x, y, x + width, y + height);
             FillRectangle(dxf, _currentLayer, x, y, width, height, color);
+        }
+
+        /// <inheritdoc/>
+        public void Grid(object dc, IGrid grid, double x, double y, double width, double height)
+        {
+            var dxf = dc as DXF.DxfDocument;
+
+            var rect = Spatial.Rect2.FromPoints(
+                x + grid.GridOffsetLeft,
+                y + grid.GridOffsetTop,
+                x + width - grid.GridOffsetLeft + grid.GridOffsetRight,
+                y + height - grid.GridOffsetTop + grid.GridOffsetBottom,
+                0, 0);
+
+            if (grid.IsGridEnabled)
+            {
+                DrawGridInternal(
+                    dxf,
+                    _currentLayer,
+                    grid,
+                    ref rect);
+            }
+
+            if (grid.IsBorderEnabled)
+            {
+                StrokeRectangle(dxf, _currentLayer, grid.GridStrokeColor, grid.GridStrokeThickness, rect.X, rect.Y, rect.Width, rect.Height);
+            }
         }
 
         /// <inheritdoc/>
@@ -492,7 +541,7 @@ namespace Core2D.Renderer.Dxf
         /// <inheritdoc/>
         public void DrawRectangle(object dc, IRectangleShape rectangle)
         {
-            if (rectangle.IsStroked || rectangle.IsFilled || rectangle.IsGrid)
+            if (rectangle.IsStroked || rectangle.IsFilled )
             {
                 var dxf = dc as DXF.DxfDocument;
                 var style = rectangle.Style;
@@ -504,17 +553,6 @@ namespace Core2D.Renderer.Dxf
                     0, 0);
 
                 DrawRectangleInternal(dxf, _currentLayer, rectangle.IsFilled, rectangle.IsStroked, style, ref rect);
-
-                if (rectangle.IsGrid)
-                {
-                    DrawGridInternal(
-                        dxf,
-                        _currentLayer,
-                        style,
-                        rectangle.OffsetX, rectangle.OffsetY,
-                        rectangle.CellWidth, rectangle.CellHeight,
-                        ref rect);
-                }
             }
 
             DrawText(dc, rectangle);

@@ -31,6 +31,17 @@ namespace Core2D.Renderer
         void Fill(object dc, double x, double y, double width, double height, IColor color);
 
         /// <summary>
+        /// Draws a <see cref="IGrid"/> using drawing context.
+        /// </summary>
+        /// <param name="dc">The native drawing context.</param>
+        /// <param name="grid">The <see cref="IGrid"/> object.</param>
+        /// <param name="x">The X coordinate of grid origin point.</param>
+        /// <param name="y">The Y coordinate of grid origin point.</param>
+        /// <param name="width">The width of grid.</param>
+        /// <param name="height">The height of grid.</param>
+        void Grid(object dc, IGrid grid, double x, double y, double width, double height);
+
+        /// <summary>
         /// Draws a <see cref="IPageContainer"/> using drawing context.
         /// </summary>
         /// <param name="dc">The native drawing context.</param>

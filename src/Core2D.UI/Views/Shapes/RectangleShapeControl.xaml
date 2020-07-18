@@ -49,21 +49,6 @@
                     <ContentControl Content="{Binding BottomRight}" x:DataType="Shapes:ITextShape"/>
                 </ScrollViewer>
             </TabItem>
-            <TabItem Header="Grid">
-                <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-                    <StackPanel>
-                        <CheckBox Content="IsGrid" IsChecked="{Binding IsGrid, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
-                        <TextBlock Text="OffsetX" Margin="{DynamicResource TextControlThemePadding}"/>
-                        <TextBox Text="{Binding OffsetX, Mode=TwoWay}"/>
-                        <TextBlock Text="OffsetY" Margin="{DynamicResource TextControlThemePadding}"/>
-                        <TextBox Text="{Binding OffsetY, Mode=TwoWay}"/>
-                        <TextBlock Text="CellWidth" Margin="{DynamicResource TextControlThemePadding}"/>
-                        <TextBox Text="{Binding CellWidth, Mode=TwoWay}"/>
-                        <TextBlock Text="CellHeight" Margin="{DynamicResource TextControlThemePadding}"/>
-                        <TextBox Text="{Binding CellHeight, Mode=TwoWay}"/>
-                    </StackPanel>
-                </ScrollViewer>
-            </TabItem>
         </TabControl>
     </Grid>
 </UserControl>
