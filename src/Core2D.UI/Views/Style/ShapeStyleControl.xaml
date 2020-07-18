@@ -26,24 +26,36 @@
         </StackPanel>
         <TabControl Grid.Row="1">
             <TabItem Header="Stroke">
-                <ContentControl Content="{Binding Stroke}" x:DataType="Style:IBaseStyle"/>
+                <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                    <ContentControl Content="{Binding Stroke}" x:DataType="Style:IBaseStyle"/>
+                </ScrollViewer>
             </TabItem>
             <TabItem Header="Fill">
-                <ContentControl Content="{Binding Fill}" x:DataType="Style:IBaseStyle"/>
+                <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                    <ContentControl Content="{Binding Fill}" x:DataType="Style:IBaseStyle"/>
+                </ScrollViewer>
             </TabItem>
             <TabItem Header="Text">
-                <ContentControl Content="{Binding TextStyle}"/>
+                <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                    <ContentControl Content="{Binding TextStyle}"/>
+                </ScrollViewer>
             </TabItem>
             <TabItem Header="Line">
-                <ContentControl Content="{Binding LineStyle}"/>
+                <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                    <ContentControl Content="{Binding LineStyle}"/>
+                </ScrollViewer>
             </TabItem>
             <TabItem Header="Arrow">
                 <TabControl>
                     <TabItem Header="Start">
-                        <ContentControl Content="{Binding StartArrowStyle}"/>
+                        <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                            <ContentControl Content="{Binding StartArrowStyle}"/>
+                        </ScrollViewer>
                     </TabItem>
                     <TabItem Header="End">
-                        <ContentControl Content="{Binding EndArrowStyle}"/>
+                        <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                            <ContentControl Content="{Binding EndArrowStyle}"/>
+                        </ScrollViewer>
                     </TabItem>
                 </TabControl>
             </TabItem>
