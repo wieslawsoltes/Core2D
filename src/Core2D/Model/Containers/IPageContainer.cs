@@ -1,6 +1,6 @@
-﻿
-using System.Collections.Immutable;
+﻿using System.Collections.Immutable;
 using Core2D.Data;
+using Core2D.Renderer;
 using Core2D.Shapes;
 using Core2D.Style;
 
@@ -9,7 +9,7 @@ namespace Core2D.Containers
     /// <summary>
     /// Defines page container interface.
     /// </summary>
-    public interface IPageContainer : IBaseContainer
+    public interface IPageContainer : IBaseContainer, IGrid
     {
         /// <summary>
         /// Gets or sets container width.

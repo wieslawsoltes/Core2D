@@ -9,6 +9,7 @@
              xmlns:idd="clr-namespace:Core2D.UI.DragAndDrop;assembly=Core2D.UI"
              xmlns:handlers="clr-namespace:Core2D.UI.DragAndDrop.Handlers;assembly=Core2D.UI"
              xmlns:converters="clr-namespace:Core2D.UI.Converters;assembly=Core2D.UI"
+             xmlns:renderer="clr-namespace:Core2D.UI.Views.Renderer;assembly=Core2D.UI"
              xmlns:Containers="clr-namespace:Core2D.Containers;assembly=Core2D"
              xmlns:Shapes="clr-namespace:Core2D.Shapes;assembly=Core2D"
              xmlns:Designer="clr-namespace:Core2D.UI.Designer;assembly=Core2D.UI"
@@ -111,6 +112,11 @@
             <TabItem Header="Template">
                 <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
                     <ContentControl Content="{Binding Template}"/>
+                </ScrollViewer>
+            </TabItem>
+            <TabItem Header="Grid" IsVisible="{Binding !!GridStrokeColor}">
+                <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                    <renderer:GridControl/>
                 </ScrollViewer>
             </TabItem>
         </TabControl>

@@ -624,12 +624,7 @@ namespace Core2D
                 Style = style,
                 IsStroked = isStroked,
                 IsFilled = isFilled,
-                Text = text,
-                IsGrid = false,
-                OffsetX = 30.0,
-                OffsetY = 30.0,
-                CellWidth = 30.0,
-                CellHeight = 30.0
+                Text = text
             };
 
             rectangleShape.TopLeft = CreatePointShape(x1, y1);
@@ -658,12 +653,7 @@ namespace Core2D
                 Style = style,
                 IsStroked = isStroked,
                 IsFilled = isFilled,
-                Text = text,
-                IsGrid = false,
-                OffsetX = 30.0,
-                OffsetY = 30.0,
-                CellWidth = 30.0,
-                CellHeight = 30.0
+                Text = text
             };
 
             rectangleShape.TopLeft = topLeft;

@@ -79,6 +79,40 @@ namespace Core2D.Renderer
         }
 
         /// <inheritdoc/>
+        public void Grid(object dc, IGrid grid, double x, double y, double width, double height)
+        {
+            var drawNodeCached = _drawNodeCache.Get(grid);
+            if (drawNodeCached != null)
+            {
+                if (drawNodeCached is IGridDrawNode drawNode)
+                {
+                    drawNode.X = x;
+                    drawNode.Y = y;
+                    drawNode.Width = width;
+                    drawNode.Height = height;
+                    drawNode.UpdateGeometry();
+                    if (grid.GridStrokeColor != null && grid.GridStrokeColor.IsDirty())
+                    {
+                        drawNode.Grid = grid;
+                        drawNode.UpdateStyle();
+                        grid.GridStrokeColor.Invalidate();
+                    }
+                    drawNode.Draw(dc, _state.ZoomX);
+                }
+            }
+            else
+            {
+                var drawNode = _drawNodeFactory.CreateGridDrawNode(grid, x, y, width, height);
+
+                drawNode.UpdateStyle();
+
+                _drawNodeCache.Set(grid, drawNode);
+
+                drawNode.Draw(dc, _state.ZoomX);
+            }
+        }
+
+        /// <inheritdoc/>
         public void DrawPage(object dc, IPageContainer container)
         {
             foreach (var layer in container.Layers)

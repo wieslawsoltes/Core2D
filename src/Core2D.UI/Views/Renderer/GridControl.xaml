@@ -1,0 +1,33 @@
+﻿<UserControl x:Class="Core2D.UI.Views.Renderer.GridControl"
+             xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:converters="clr-namespace:Core2D.UI.Converters;assembly=Core2D.UI"
+             xmlns:Renderer="clr-namespace:Core2D.Renderer;assembly=Core2D" 
+             xmlns:Designer="clr-namespace:Core2D.UI.Designer;assembly=Core2D.UI"
+             mc:Ignorable="d"
+             d:DataContext="{x:Static Designer:DesignerContext.Page}"
+             d:DesignWidth="250" d:DesignHeight="400"
+             x:DataType="Renderer:IGrid" x:CompileBindings="True">
+    <StackPanel>
+        <CheckBox Content="IsGridEnabled" IsChecked="{Binding IsGridEnabled, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
+        <CheckBox Content="IsBorderEnabled" IsChecked="{Binding IsBorderEnabled, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
+        <TextBlock Text="GridOffsetLeft" Margin="{DynamicResource TextControlThemePadding}"/>
+        <TextBox Text="{Binding GridOffsetLeft, Mode=TwoWay}"/>
+        <TextBlock Text="GridOffsetTop" Margin="{DynamicResource TextControlThemePadding}"/>
+        <TextBox Text="{Binding GridOffsetTop, Mode=TwoWay}"/>
+        <TextBlock Text="GridOffsetRight" Margin="{DynamicResource TextControlThemePadding}"/>
+        <TextBox Text="{Binding GridOffsetRight, Mode=TwoWay}"/>
+        <TextBlock Text="GridOffsetBottom" Margin="{DynamicResource TextControlThemePadding}"/>
+        <TextBox Text="{Binding GridOffsetBottom, Mode=TwoWay}"/>
+        <TextBlock Text="GridCellWidth" Margin="{DynamicResource TextControlThemePadding}"/>
+        <TextBox Text="{Binding GridCellWidth, Mode=TwoWay}"/>
+        <TextBlock Text="GridCellHeight" Margin="{DynamicResource TextControlThemePadding}"/>
+        <TextBox Text="{Binding GridCellHeight, Mode=TwoWay}"/>
+        <TextBlock Text="GridStrokeColor" Margin="{DynamicResource TextControlThemePadding}"/>
+        <ContentControl Content="{Binding GridStrokeColor}"/>
+        <TextBlock Text="GridStrokeThickness" Margin="{DynamicResource TextControlThemePadding}"/>
+        <TextBox Text="{Binding GridStrokeThickness, Mode=TwoWay}"/>
+    </StackPanel>
+</UserControl>

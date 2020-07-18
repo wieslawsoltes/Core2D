@@ -103,6 +103,17 @@ namespace Core2D.Renderer.WinForms
             return pen;
         }
 
+        private Pen ToPen(IColor color, double thickness, Func<double, float> scale)
+        {
+            var pen = new Pen(ToColor(color), (float)(thickness / State.ZoomX));
+
+            pen.StartCap = System.Drawing.Drawing2D.LineCap.Flat;
+            pen.EndCap = System.Drawing.Drawing2D.LineCap.Flat;
+            pen.DashCap = System.Drawing.Drawing2D.DashCap.Flat;
+
+            return pen;
+        }
+
         private static Rect2 CreateRect(IPointShape tl, IPointShape br, double dx, double dy) => Rect2.FromPoints(tl.X, tl.Y, br.X, br.Y, dx, dy);
 
         private static void DrawLineInternal(Graphics gfx, Pen pen, bool isStroked, ref PointF p0, ref PointF p1)
@@ -284,16 +295,16 @@ namespace Core2D.Renderer.WinForms
             }
         }
 
-        private void DrawGridInternal(Graphics gfx, Pen stroke, ref Rect2 rect, double offsetX, double offsetY, double cellWidth, double cellHeight, bool isStroked)
+        private void DrawGridInternal(Graphics gfx, IGrid grid, Pen stroke, ref Rect2 rect)
         {
             double ox = rect.X;
+            double ex = rect.X + rect.Width;
             double oy = rect.Y;
-            double sx = ox + offsetX;
-            double sy = oy + offsetY;
-            double ex = ox + rect.Width;
-            double ey = oy + rect.Height;
+            double ey = rect.Y + rect.Height;
+            double cw = grid.GridCellWidth;
+            double ch = grid.GridCellHeight;
 
-            for (double x = sx; x < ex; x += cellWidth)
+            for (double x = ox; x < ex; x += cw)
             {
                 var p0 = new PointF(
                     _scaleToPage(x),
@@ -301,10 +312,10 @@ namespace Core2D.Renderer.WinForms
                 var p1 = new PointF(
                     _scaleToPage(x),
                     _scaleToPage(ey));
-                DrawLineInternal(gfx, stroke, isStroked, ref p0, ref p1);
+                DrawLineInternal(gfx, stroke, true, ref p0, ref p1);
             }
 
-            for (double y = sy; y < ey; y += cellHeight)
+            for (double y = oy; y < ey; y += ch)
             {
                 var p0 = new PointF(
                     _scaleToPage(ox),
@@ -312,7 +323,7 @@ namespace Core2D.Renderer.WinForms
                 var p1 = new PointF(
                     _scaleToPage(ex),
                     _scaleToPage(y));
-                DrawLineInternal(gfx, stroke, isStroked, ref p0, ref p1);
+                DrawLineInternal(gfx, stroke, true, ref p0, ref p1);
             }
         }
 
@@ -334,6 +345,42 @@ namespace Core2D.Renderer.WinForms
                 (float)width,
                 (float)height);
             brush.Dispose();
+        }
+
+        /// <inheritdoc/>
+        public void Grid(object dc, IGrid grid, double x, double y, double width, double height)
+        {
+            var _gfx = dc as Graphics;
+
+            var pen = ToPen(grid.GridStrokeColor, grid.GridStrokeThickness, _scaleToPage);
+
+            var rect = Spatial.Rect2.FromPoints(
+                x + grid.GridOffsetLeft,
+                y + grid.GridOffsetTop,
+                x + width - grid.GridOffsetLeft + grid.GridOffsetRight,
+                y + height - grid.GridOffsetTop + grid.GridOffsetBottom,
+                0, 0);
+
+            if (grid.IsGridEnabled)
+            {
+                DrawGridInternal(
+                    _gfx,
+                    grid,
+                    pen,
+                    ref rect);
+            }
+
+            if (grid.IsBorderEnabled)
+            {
+                _gfx.DrawRectangle(
+                    pen,
+                    _scaleToPage(rect.X),
+                    _scaleToPage(rect.Y),
+                    _scaleToPage(rect.Width),
+                    _scaleToPage(rect.Height));
+            }
+
+            pen.Dispose();
         }
 
         /// <inheritdoc/>
@@ -432,17 +479,6 @@ namespace Core2D.Renderer.WinForms
                     _scaleToPage(rect.Y),
                     _scaleToPage(rect.Width),
                     _scaleToPage(rect.Height));
-            }
-
-            if (rectangle.IsGrid)
-            {
-                DrawGridInternal(
-                    _gfx,
-                    pen,
-                    ref rect,
-                    rectangle.OffsetX, rectangle.OffsetY,
-                    rectangle.CellWidth, rectangle.CellHeight,
-                    true);
             }
 
             brush.Dispose();

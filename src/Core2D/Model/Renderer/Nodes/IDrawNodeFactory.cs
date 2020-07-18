@@ -8,6 +8,7 @@ namespace Core2D.Renderer
     public interface IDrawNodeFactory
     {
         IFillDrawNode CreateFillDrawNode(double x, double y, double width, double height, IColor color);
+        IGridDrawNode CreateGridDrawNode(IGrid grid, double x, double y, double width, double height);
         IPointDrawNode CreatePointDrawNode(IPointShape point, IShapeStyle pointStyle, double pointSize);
         ILineDrawNode CreateLineDrawNode(ILineShape line, IShapeStyle style);
         IRectangleDrawNode CreateRectangleDrawNode(IRectangleShape rectangle, IShapeStyle style);

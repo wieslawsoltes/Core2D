@@ -12,6 +12,11 @@ namespace Core2D.UI.Renderer
             return new FillDrawNode(x, y, width, height, color);
         }
 
+        public IGridDrawNode CreateGridDrawNode(IGrid grid, double x, double y, double width, double height)
+        {
+            return new GridDrawNode(grid, x, y, width, height);
+        }
+
         public IPointDrawNode CreatePointDrawNode(IPointShape point, IShapeStyle pointStyle, double pointSize)
         {
             return new PointDrawNode(point, pointStyle, pointSize);

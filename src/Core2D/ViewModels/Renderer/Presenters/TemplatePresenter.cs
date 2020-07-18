@@ -12,6 +12,8 @@ namespace Core2D.Renderer.Presenters
         {
             renderer.Fill(dc, dx, dy, container.Width, container.Height, container.Background);
 
+            renderer.Grid(dc, container, 0, 0, container.Width, container.Height);
+
             if (container.Template != null)
             {
                 renderer.DrawPage(dc, container.Template);

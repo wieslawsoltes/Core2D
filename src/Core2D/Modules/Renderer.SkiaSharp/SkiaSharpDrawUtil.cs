@@ -24,6 +24,7 @@ namespace Core2D.Renderer.SkiaSharp
             float bottom = (float)Math.Max(tl.Y, br.Y);
             return new SKRect(left, top, right, bottom);
         }
+
         public static SKColor ToSKColor(IColor color)
         {
             return color switch
@@ -78,6 +79,23 @@ namespace Core2D.Renderer.SkiaSharp
             pen.StrokeWidth = (float)strokeWidth;
             pen.Color = ToSKColor(style.Stroke);
             pen.StrokeCap = ToStrokeCap(style);
+            pen.PathEffect = pathEffect;
+
+            return pen;
+        }
+
+        public static SKPaint ToSKPaintPen(IColor color, double strokeWidth)
+        {
+            var pen = new SKPaint();
+
+            var pathEffect = default(SKPathEffect);
+
+            pen.Style = SKPaintStyle.Stroke;
+            pen.IsAntialias = true;
+            pen.IsStroke = true;
+            pen.StrokeWidth = (float)strokeWidth;
+            pen.Color = ToSKColor(color);
+            pen.StrokeCap = SKStrokeCap.Butt;
             pen.PathEffect = pathEffect;
 
             return pen;

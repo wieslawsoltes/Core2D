@@ -86,6 +86,14 @@ namespace Core2D.Renderer.PdfSharp
             return pen;
         }
 
+        private static XPen ToXPen(IColor color, double thickness, Func<double, double> scale, double sourceDpi, double targetDpi)
+        {
+            var strokeWidth = scale(thickness * targetDpi / sourceDpi);
+            var pen = new XPen(ToXColor(color), strokeWidth);
+            pen.LineCap = XLineCap.Flat;
+            return pen;
+        }
+
         private static XBrush ToXBrush(IColor color)
         {
             return color switch
@@ -241,16 +249,16 @@ namespace Core2D.Renderer.PdfSharp
             }
         }
 
-        private void DrawGridInternal(XGraphics gfx, XPen stroke, ref Spatial.Rect2 rect, double offsetX, double offsetY, double cellWidth, double cellHeight, bool isStroked)
+        private void DrawGridInternal(XGraphics gfx, IGrid grid, XPen stroke, ref Spatial.Rect2 rect)
         {
             double ox = rect.X;
+            double ex = rect.X + rect.Width;
             double oy = rect.Y;
-            double sx = ox + offsetX;
-            double sy = oy + offsetY;
-            double ex = ox + rect.Width;
-            double ey = oy + rect.Height;
+            double ey = rect.Y + rect.Height;
+            double cw = grid.GridCellWidth;
+            double ch = grid.GridCellHeight;
 
-            for (double x = sx; x < ex; x += cellWidth)
+            for (double x = ox; x < ex; x += cw)
             {
                 var p0 = new XPoint(
                     _scaleToPage(x),
@@ -258,10 +266,10 @@ namespace Core2D.Renderer.PdfSharp
                 var p1 = new XPoint(
                     _scaleToPage(x),
                     _scaleToPage(ey));
-                DrawLineInternal(gfx, stroke, isStroked, ref p0, ref p1);
+                DrawLineInternal(gfx, stroke, true, ref p0, ref p1);
             }
 
-            for (double y = sy; y < ey; y += cellHeight)
+            for (double y = oy; y < ey; y += ch)
             {
                 var p0 = new XPoint(
                     _scaleToPage(ox),
@@ -269,7 +277,7 @@ namespace Core2D.Renderer.PdfSharp
                 var p1 = new XPoint(
                     _scaleToPage(ex),
                     _scaleToPage(y));
-                DrawLineInternal(gfx, stroke, isStroked, ref p0, ref p1);
+                DrawLineInternal(gfx, stroke, true, ref p0, ref p1);
             }
         }
 
@@ -289,6 +297,40 @@ namespace Core2D.Renderer.PdfSharp
                 _scaleToPage(y),
                 _scaleToPage(width),
                 _scaleToPage(height));
+        }
+
+        /// <inheritdoc/>
+        public void Grid(object dc, IGrid grid, double x, double y, double width, double height)
+        {
+            var _gfx = dc as XGraphics;
+
+            var strokeLine = ToXPen(grid.GridStrokeColor, grid.GridStrokeThickness, _scaleToPage, _sourceDpi, _targetDpi);
+
+            var rect = Spatial.Rect2.FromPoints(
+                x + grid.GridOffsetLeft,
+                y + grid.GridOffsetTop,
+                x + width - grid.GridOffsetLeft + grid.GridOffsetRight,
+                y + height - grid.GridOffsetTop + grid.GridOffsetBottom,
+                0, 0);
+
+            if (grid.IsGridEnabled)
+            {
+                DrawGridInternal(
+                    _gfx,
+                    grid,
+                    ToXPen(grid.GridStrokeColor, grid.GridStrokeThickness, _scaleToPage, _sourceDpi, _targetDpi),
+                    ref rect);
+            }
+
+            if (grid.IsBorderEnabled)
+            {
+                _gfx.DrawRectangle(
+                    ToXPen(grid.GridStrokeColor, grid.GridStrokeThickness, _scaleToPage, _sourceDpi, _targetDpi),
+                    _scaleToPage(rect.X),
+                    _scaleToPage(rect.Y),
+                    _scaleToPage(rect.Width),
+                    _scaleToPage(rect.Height));
+            }
         }
 
         /// <inheritdoc/>
@@ -398,17 +440,6 @@ namespace Core2D.Renderer.PdfSharp
                     _scaleToPage(rect.Y),
                     _scaleToPage(rect.Width),
                     _scaleToPage(rect.Height));
-            }
-
-            if (rectangle.IsGrid)
-            {
-                DrawGridInternal(
-                    _gfx,
-                    ToXPen(rectangle.Style, _scaleToPage, _sourceDpi, _targetDpi),
-                    ref rect,
-                    rectangle.OffsetX, rectangle.OffsetY,
-                    rectangle.CellWidth, rectangle.CellHeight,
-                    true);
             }
 
             DrawText(dc, rectangle);

@@ -43,5 +43,14 @@ namespace Core2D.UI.Renderer
 
             return pen;
         }
+
+        public static AM.IPen ToPen(IColor color, double thickness)
+        {
+            var dashStyle = default(AM.Immutable.ImmutableDashStyle);
+            var lineCap = AM.PenLineCap.Flat;
+            var brush = ToBrush(color);
+            var pen = new AM.Immutable.ImmutablePen(brush, thickness, dashStyle, lineCap);
+            return pen;
+        }
     }
 }
