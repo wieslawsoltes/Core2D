@@ -35,10 +35,14 @@
         </StackPanel>
         <TabControl Grid.Row="1">
             <TabItem Header="Stroke">
-                <ContentControl Content="{Binding Stroke}" x:DataType="Style:IBaseStyle"/>
+                <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                    <ContentControl Content="{Binding Stroke}" x:DataType="Style:IBaseStyle"/>
+                </ScrollViewer>
             </TabItem>
             <TabItem Header="Fill">
-                <ContentControl Content="{Binding Fill}" x:DataType="Style:IBaseStyle"/>
+                <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                    <ContentControl Content="{Binding Fill}" x:DataType="Style:IBaseStyle"/>
+                </ScrollViewer>
             </TabItem>
         </TabControl>
     </Grid>

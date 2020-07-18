@@ -23,7 +23,9 @@
         </StackPanel>
         <TabControl Grid.Row="1">
             <TabItem Header="FixedLength">
-                <ContentControl Content="{Binding FixedLength}"/>
+                <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                    <ContentControl Content="{Binding FixedLength}"/>
+                </ScrollViewer>
             </TabItem>
         </TabControl>
     </Grid>

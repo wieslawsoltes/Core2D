@@ -1,7 +1,7 @@
 ﻿<UserControl x:Class="Core2D.UI.Views.Shapes.EllipseShapeControl"
              xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:converters="clr-namespace:Core2D.UI.Converters;assembly=Core2D.UI"
              xmlns:Shapes="clr-namespace:Core2D.Shapes;assembly=Core2D"
@@ -23,21 +23,31 @@
                 </StackPanel>
             </TabItem>
             <TabItem Header="Data">
-                <ContentControl Content="{Binding Data}"/>
+                <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                    <ContentControl Content="{Binding Data}"/>
+                </ScrollViewer>
             </TabItem>
             <TabItem Header="Style">
-                <ContentControl Content="{Binding Style}"/>
+                <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                    <ContentControl Content="{Binding Style}"/>
+                </ScrollViewer>
             </TabItem>
             <TabItem Header="State">
-                <ContentControl Content="{Binding State}"/>
+                <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                    <ContentControl Content="{Binding State}"/>
+                </ScrollViewer>
             </TabItem>
         </TabControl>
         <TabControl Grid.Row="1">
             <TabItem Header="TopLeft">
-                <ContentControl Content="{Binding TopLeft}" x:DataType="Shapes:ITextShape"/>
+                <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                    <ContentControl Content="{Binding TopLeft}" x:DataType="Shapes:ITextShape"/>
+                </ScrollViewer>
             </TabItem>
             <TabItem Header="BottomRight">
-                <ContentControl Content="{Binding BottomRight}" x:DataType="Shapes:ITextShape"/>
+                <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                    <ContentControl Content="{Binding BottomRight}" x:DataType="Shapes:ITextShape"/>
+                </ScrollViewer>
             </TabItem>
         </TabControl>
     </Grid>

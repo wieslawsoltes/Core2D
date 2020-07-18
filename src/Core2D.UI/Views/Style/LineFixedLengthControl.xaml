@@ -26,10 +26,14 @@
         </StackPanel>
         <TabControl Grid.Row="1">
             <TabItem Header="StartTrigger">
-                <ContentControl Content="{Binding StartTrigger}"/>
+                <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                    <ContentControl Content="{Binding StartTrigger}"/>
+                </ScrollViewer>
             </TabItem>
             <TabItem Header="EndTrigger">
-                <ContentControl Content="{Binding EndTrigger}"/>
+                <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                    <ContentControl Content="{Binding EndTrigger}"/>
+                </ScrollViewer>
             </TabItem>
         </TabControl>
     </Grid>
