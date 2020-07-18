@@ -87,34 +87,48 @@
                     <containers:ProjectContainerControl DataContext="{Binding Project}"/>
                 </TabItem>
                 <TabItem x:Name="LAYOUT_PropertiesTabItem" Header="Properties">
-                    <ContentControl Content="{Binding PageState.SelectedShapes, Converter={StaticResource FirstSelectedItemValueConverter}}"/>
+                    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                        <ContentControl Content="{Binding PageState.SelectedShapes, Converter={StaticResource FirstSelectedItemValueConverter}}"/>
+                    </ScrollViewer>
                 </TabItem>
                 <TabItem x:Name="LAYOUT_StyleTabItem" Header="Style">
-                    <ContentControl Margin="0,0,12,0">
-                        <ContentControl.Content>
-                            <MultiBinding Converter="{StaticResource StyleMultiValueConverter}">
-                                <Binding Path="PageState.SelectedShapes" FallbackValue="{x:Null}" />
-                                <Binding Path="Project.CurrentStyleLibrary.Selected" FallbackValue="{x:Null}" />
-                            </MultiBinding>
-                        </ContentControl.Content>
-                    </ContentControl>
+                    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                        <ContentControl Margin="0,0,12,0">
+                            <ContentControl.Content>
+                                <MultiBinding Converter="{StaticResource StyleMultiValueConverter}">
+                                    <Binding Path="PageState.SelectedShapes" FallbackValue="{x:Null}" />
+                                    <Binding Path="Project.CurrentStyleLibrary.Selected" FallbackValue="{x:Null}" />
+                                </MultiBinding>
+                            </ContentControl.Content>
+                        </ContentControl>
+                    </ScrollViewer>
                 </TabItem>
                 <TabItem x:Name="LAYOUT_OptionsTabItem" Header="Options">
                     <TabControl x:Name="LAYOUT_OptionsTabControl">
                         <TabItem x:Name="LAYOUT_ProjectOptionsTabItem" Header="Project">
-                            <ContentControl Content="{Binding Project.Options}" Margin="0,0,12,0"/>
+                            <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                                <ContentControl Content="{Binding Project.Options}" Margin="0,0,12,0"/>
+                            </ScrollViewer>
                         </TabItem>
                         <TabItem x:Name="LAYOUT_RendererOptionsTabItem" Header="Renderer">
-                            <renderer:ShapeRendererStateControl DataContext="{Binding PageState}" Margin="0,0,12,0"/>
+                            <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                                <renderer:ShapeRendererStateControl DataContext="{Binding PageState}" Margin="0,0,12,0"/>
+                            </ScrollViewer>
                         </TabItem>
                         <TabItem x:Name="LAYOUT_ZoomOptionsTabItem" Header="Zoom">
-                            <views:ZoomControl DataContext="{Binding CanvasPlatform.Zoom}" Margin="0,0,12,0"/>
+                            <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                                <views:ZoomControl DataContext="{Binding CanvasPlatform.Zoom}" Margin="0,0,12,0"/>
+                            </ScrollViewer>
                         </TabItem>
                         <TabItem x:Name="LAYOUT_ImagesOptionsTabItem" Header="Images">
-                            <libraries:ImagesControl DataContext="{Binding Project}" Margin="0,0,12,0"/>
+                            <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                                <libraries:ImagesControl DataContext="{Binding Project}" Margin="0,0,12,0"/>
+                            </ScrollViewer>
                         </TabItem>
                         <TabItem x:Name="LAYOUT_ToolsTabItem" Header="Tools">
-                            <views:ToolsControl DataContext="{Binding}" Margin="0,0,12,0"/>
+                            <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                                <views:ToolsControl DataContext="{Binding}" Margin="0,0,12,0"/>
+                            </ScrollViewer>
                         </TabItem>
                     </TabControl>
                 </TabItem>
