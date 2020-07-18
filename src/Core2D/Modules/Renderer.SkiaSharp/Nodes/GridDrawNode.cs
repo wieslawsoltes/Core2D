@@ -65,14 +65,14 @@ namespace Core2D.Renderer.SkiaSharp
                     float cw = (float)Grid.GridCellWidth;
                     float ch = (float)Grid.GridCellHeight;
 
-                    for (float x = ox; x < ex; x += cw)
+                    for (float x = ox + cw; x < ex; x += cw)
                     {
                         var p0 = new SKPoint(x, oy);
                         var p1 = new SKPoint(x, ey);
                         canvas.DrawLine(p0, p1, Stroke);
                     }
 
-                    for (float y = oy; y < ey; y += ch)
+                    for (float y = oy + ch; y < ey; y += ch)
                     {
                         var p0 = new SKPoint(ox, y);
                         var p1 = new SKPoint(ex, y);

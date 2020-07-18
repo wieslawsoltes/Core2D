@@ -304,7 +304,7 @@ namespace Core2D.Renderer.WinForms
             double cw = grid.GridCellWidth;
             double ch = grid.GridCellHeight;
 
-            for (double x = ox; x < ex; x += cw)
+            for (double x = ox + ch; x < ex; x += cw)
             {
                 var p0 = new PointF(
                     _scaleToPage(x),
@@ -315,7 +315,7 @@ namespace Core2D.Renderer.WinForms
                 DrawLineInternal(gfx, stroke, true, ref p0, ref p1);
             }
 
-            for (double y = oy; y < ey; y += ch)
+            for (double y = oy + ch; y < ey; y += ch)
             {
                 var p0 = new PointF(
                     _scaleToPage(ox),

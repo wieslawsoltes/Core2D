@@ -67,14 +67,14 @@ namespace Core2D.UI.Renderer
                     double cw = Grid.GridCellWidth;
                     double ch = Grid.GridCellHeight;
 
-                    for (double x = ox; x < ex; x += cw)
+                    for (double x = ox + cw; x < ex; x += cw)
                     {
                         var p0 = new A.Point(x, oy);
                         var p1 = new A.Point(x, ey);
                         context.DrawLine(Stroke, p0, p1);
                     }
 
-                    for (double y = oy; y < ey; y += ch)
+                    for (double y = oy + ch; y < ey; y += ch)
                     {
                         var p0 = new A.Point(ox, y);
                         var p1 = new A.Point(ex, y);

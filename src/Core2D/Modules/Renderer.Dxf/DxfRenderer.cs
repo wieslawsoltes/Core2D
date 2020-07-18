@@ -343,12 +343,12 @@ namespace Core2D.Renderer.Dxf
             double cw = grid.GridCellWidth;
             double ch = grid.GridCellHeight;
 
-            for (double gx = ox; gx < ex; gx += cw)
+            for (double gx = ox + cw; gx < ex; gx += cw)
             {
                 DrawLineInternal(dxf, layer, grid.GridStrokeColor, grid.GridStrokeThickness, gx, oy, gx, ey);
             }
 
-            for (double gy = oy; gy < ey; gy += ch)
+            for (double gy = oy + ch; gy < ey; gy += ch)
             {
                 DrawLineInternal(dxf, layer, grid.GridStrokeColor, grid.GridStrokeThickness, ox, gy, ex, gy);
             }

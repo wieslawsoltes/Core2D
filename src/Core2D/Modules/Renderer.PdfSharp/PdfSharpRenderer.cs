@@ -258,7 +258,7 @@ namespace Core2D.Renderer.PdfSharp
             double cw = grid.GridCellWidth;
             double ch = grid.GridCellHeight;
 
-            for (double x = ox; x < ex; x += cw)
+            for (double x = ox + cw; x < ex; x += cw)
             {
                 var p0 = new XPoint(
                     _scaleToPage(x),
@@ -269,7 +269,7 @@ namespace Core2D.Renderer.PdfSharp
                 DrawLineInternal(gfx, stroke, true, ref p0, ref p1);
             }
 
-            for (double y = oy; y < ey; y += ch)
+            for (double y = oy + ch; y < ey; y += ch)
             {
                 var p0 = new XPoint(
                     _scaleToPage(ox),
