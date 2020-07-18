@@ -23,7 +23,7 @@ namespace Core2D.Renderer.SkiaSharp
 
         public override void UpdateGeometry()
         {
-            ScaleThickness = false;
+            ScaleThickness = true;
             ScaleSize = false;
             Rect = SKRect.Create(
                 (float)(X + Grid.GridOffsetLeft),
@@ -47,6 +47,25 @@ namespace Core2D.Renderer.SkiaSharp
 
         public override void Draw(object dc, double zoom)
         {
+            var scale = ScaleSize ? 1.0 / zoom : 1.0;
+
+            double thickness = Grid.GridStrokeThickness;
+
+            if (ScaleThickness)
+            {
+                thickness /= zoom;
+            }
+
+            if (scale != 1.0)
+            {
+                thickness /= scale;
+            }
+
+            if (Stroke.StrokeWidth != thickness)
+            {
+                Stroke.StrokeWidth = (float)thickness;
+            }
+
             OnDraw(dc, zoom);
         }
 
