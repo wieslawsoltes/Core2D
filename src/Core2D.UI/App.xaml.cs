@@ -3,6 +3,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Text.Json;
+using System.Windows.Input;
 using Autofac;
 using Avalonia;
 using Avalonia.Controls;
@@ -24,42 +25,84 @@ namespace Core2D.UI
 {
     public class App : Application
     {
-        public Styles DefaultDark = new Styles
-        {
-            new StyleInclude(new Uri("avares://Core2D.UI/Styles"))
-            {
-                Source = new Uri("avares://Core2D.UI/Themes/DefaultDark.xaml")
-            }
-        };
+        public static Styles DefaultDark;
 
-        public Styles DefaultLight = new Styles
-        {
-            new StyleInclude(new Uri("avares://Core2D.UI/Styles"))
-            {
-                Source = new Uri("avares://Core2D.UI/Themes/DefaultLight.xaml")
-            }
-        };
+        public static Styles DefaultLight;
 
-        public Styles FluentDark = new Styles
-        {
-            new StyleInclude(new Uri("avares://Core2D.UI/Styles"))
-            {
-                Source = new Uri("avares://Core2D.UI/Themes/FluentDark.xaml")
-            }
-        };
+        public static Styles FluentDark;
 
-        public Styles FluentLight = new Styles
-        {
-            new StyleInclude(new Uri("avares://Core2D.UI/Styles"))
-            {
-                Source = new Uri("avares://Core2D.UI/Themes/FluentLight.xaml")
-            }
-        };
+        public static Styles FluentLight;
 
-        public static ThemeName DefaultTheme { get; set; } = ThemeName.FluentLight;
+        public static ThemeName DefaultTheme { get; set; }
+
+        public static ICommand ChangeTheme { get; set; }
+
+        private class ChangeThemeCommand : ICommand
+        {
+#pragma warning disable CS0067
+            public event EventHandler CanExecuteChanged;
+#pragma warning restore CS0067
+
+            public bool CanExecute(object parameter)
+            {
+                //if (parameter is string value)
+                //{
+                //    return Enum.TryParse<ThemeName>(value, out var _);
+                //}
+                //return false;
+                return true;
+            }
+
+            public void Execute(object parameter)
+            {
+                if (parameter is string value)
+                {
+                    if (Enum.TryParse<ThemeName>(value, out var result))
+                    {
+                        App.SetTheme(result);
+                    }
+                }
+            }
+        }
 
         static App()
         {
+            DefaultDark = new Styles
+            {
+                new StyleInclude(new Uri("avares://Core2D.UI/Styles"))
+                {
+                    Source = new Uri("avares://Core2D.UI/Themes/DefaultDark.xaml")
+                }
+            };
+
+            DefaultLight = new Styles
+            {
+                new StyleInclude(new Uri("avares://Core2D.UI/Styles"))
+                {
+                    Source = new Uri("avares://Core2D.UI/Themes/DefaultLight.xaml")
+                }
+            };
+
+            FluentDark = new Styles
+            {
+                new StyleInclude(new Uri("avares://Core2D.UI/Styles"))
+                {
+                    Source = new Uri("avares://Core2D.UI/Themes/FluentDark.xaml")
+                }
+            };
+
+            FluentLight = new Styles
+            {
+                new StyleInclude(new Uri("avares://Core2D.UI/Styles"))
+                {
+                    Source = new Uri("avares://Core2D.UI/Themes/FluentLight.xaml")
+                }
+            };
+
+            DefaultTheme = ThemeName.FluentLight;
+
+            ChangeTheme = new ChangeThemeCommand();
+
             InitializeDesigner();
         }
 
@@ -82,7 +125,7 @@ namespace Core2D.UI
             return new AboutInfo()
             {
                 Title = "Core2D",
-                Version = $"{Assembly.GetEntryAssembly().GetCustomAttribute<AssemblyInformationalVersionAttribute> ().InformationalVersion}",
+                Version = $"{Assembly.GetEntryAssembly().GetCustomAttribute<AssemblyInformationalVersionAttribute>().InformationalVersion}",
                 Description = "A multi-platform data driven 2D diagram editor.",
                 Copyright = "Copyright (c) Wiesław Šoltés. All rights reserved.",
                 License = "Licensed under the MIT license. See LICENSE file in the project root for full license information.",
@@ -226,6 +269,46 @@ namespace Core2D.UI
             singleViewLifetime.MainView = mainView;
         }
 
+        public static void InitTheme(ThemeName themeName)
+        {
+            switch (themeName)
+            {
+                case ThemeName.DefaultDark:
+                    Current.Styles.Insert(0, DefaultDark);
+                    break;
+                case ThemeName.DefaultLight:
+                    Current.Styles.Insert(0, DefaultLight);
+                    break;
+                case ThemeName.FluentDark:
+                    Current.Styles.Insert(0, FluentDark);
+                    break;
+                default:
+                case ThemeName.FluentLight:
+                    Current.Styles.Insert(0, FluentLight);
+                    break;
+            }
+        }
+
+        public static void SetTheme(ThemeName themeName)
+        {
+            switch (themeName)
+            {
+                case ThemeName.DefaultDark:
+                    Current.Styles[0] = DefaultDark;
+                    break;
+                case ThemeName.DefaultLight:
+                    Current.Styles[0] = DefaultLight;
+                    break;
+                case ThemeName.FluentDark:
+                    Current.Styles[0] = FluentDark;
+                    break;
+                default:
+                case ThemeName.FluentLight:
+                    Current.Styles[0] = FluentLight;
+                    break;
+            }
+        }
+
         public override void OnFrameworkInitializationCompleted()
         {
             Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
@@ -246,22 +329,7 @@ namespace Core2D.UI
         {
             AvaloniaXamlLoader.Load(this);
 
-            switch (DefaultTheme)
-            {
-                case ThemeName.DefaultDark:
-                    Styles.Insert(0, DefaultDark);
-                    break;
-                case ThemeName.DefaultLight:
-                    Styles.Insert(0, DefaultLight);
-                    break;
-                case ThemeName.FluentDark:
-                    Styles.Insert(0, FluentDark);
-                    break;
-                default:
-                case ThemeName.FluentLight:
-                    Styles.Insert(0, FluentLight);
-                    break;
-            }
+            InitTheme(DefaultTheme);
         }
     }
 }
