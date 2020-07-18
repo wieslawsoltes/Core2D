@@ -38,7 +38,7 @@ Usage:
   Core2D.Desktop [options]
 
 Options:
-  -t, --theme <DefaultDark|DefaultLight|FluentDark|FluentLight>    Set application theme [default: FluentLight]
+  -t, --theme <DefaultDark|DefaultLight|FluentDark|FluentLight>    Set application theme
   -s, --scripts <scripts>                                          The relative or absolute path to the script files
   -p, --project <project>                                          The relative or absolute path to the project file
   --repl                                                           Run scripting repl
