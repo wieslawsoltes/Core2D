@@ -15,10 +15,6 @@
              d:DesignWidth="250" d:DesignHeight="400"
              x:DataType="Data:IDatabase" x:CompileBindings="True">
     <Grid RowDefinitions="Auto,*,6,Auto">
-        <!--<StackPanel Grid.Row="0">
-            <TextBlock Text="Name" Margin="{DynamicResource TextControlThemePadding}"/>
-            <TextBox Text="{Binding Name, Mode=TwoWay}"/>
-        </StackPanel>-->
         <TabControl Grid.Row="1">
             <TabItem Header="Records">
                 <Grid RowDefinitions="Auto,*">
