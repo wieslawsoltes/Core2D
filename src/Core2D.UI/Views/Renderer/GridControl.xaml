@@ -13,21 +13,39 @@
     <StackPanel>
         <CheckBox Content="IsGridEnabled" IsChecked="{Binding IsGridEnabled, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
         <CheckBox Content="IsBorderEnabled" IsChecked="{Binding IsBorderEnabled, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
-        <TextBlock Text="GridOffsetLeft" Margin="{DynamicResource TextControlThemePadding}"/>
-        <TextBox Text="{Binding GridOffsetLeft, Mode=TwoWay}"/>
-        <TextBlock Text="GridOffsetTop" Margin="{DynamicResource TextControlThemePadding}"/>
-        <TextBox Text="{Binding GridOffsetTop, Mode=TwoWay}"/>
-        <TextBlock Text="GridOffsetRight" Margin="{DynamicResource TextControlThemePadding}"/>
-        <TextBox Text="{Binding GridOffsetRight, Mode=TwoWay}"/>
-        <TextBlock Text="GridOffsetBottom" Margin="{DynamicResource TextControlThemePadding}"/>
-        <TextBox Text="{Binding GridOffsetBottom, Mode=TwoWay}"/>
-        <TextBlock Text="GridCellWidth" Margin="{DynamicResource TextControlThemePadding}"/>
-        <TextBox Text="{Binding GridCellWidth, Mode=TwoWay}"/>
-        <TextBlock Text="GridCellHeight" Margin="{DynamicResource TextControlThemePadding}"/>
-        <TextBox Text="{Binding GridCellHeight, Mode=TwoWay}"/>
-        <TextBlock Text="GridStrokeColor" Margin="{DynamicResource TextControlThemePadding}"/>
-        <ContentControl Content="{Binding GridStrokeColor}"/>
-        <TextBlock Text="GridStrokeThickness" Margin="{DynamicResource TextControlThemePadding}"/>
+        <TextBlock Text="Thickness" Margin="{DynamicResource TextControlThemePadding}"/>
         <TextBox Text="{Binding GridStrokeThickness, Mode=TwoWay}"/>
+        <TabControl>
+            <TabItem Header="Offset">
+                <Grid ColumnDefinitions="25*,25*,25*,25*" RowDefinitions="Auto,Auto">
+                    <TextBlock Text="Left" Margin="{DynamicResource TextControlThemePadding}" Grid.Row="0" Grid.Column="0"/>
+                    <TextBlock Text="Top" Margin="{DynamicResource TextControlThemePadding}" Grid.Row="0" Grid.Column="1"/>
+                    <TextBlock Text="Right" Margin="{DynamicResource TextControlThemePadding}" Grid.Row="0" Grid.Column="2"/>
+                    <TextBlock Text="Bottom" Margin="{DynamicResource TextControlThemePadding}" Grid.Row="0" Grid.Column="3"/>
+                    <TextBox Text="{Binding GridOffsetLeft, Mode=TwoWay}" TextAlignment="Center" Margin="{DynamicResource TextControlThemePadding}" MinWidth="35" Grid.Row="1" Grid.Column="0"/>
+                    <TextBox Text="{Binding GridOffsetTop, Mode=TwoWay}" TextAlignment="Center" Margin="{DynamicResource TextControlThemePadding}" MinWidth="35" Grid.Row="1" Grid.Column="1"/>
+                    <TextBox Text="{Binding GridOffsetRight, Mode=TwoWay}" TextAlignment="Center" Margin="{DynamicResource TextControlThemePadding}" MinWidth="35" Grid.Row="1" Grid.Column="2"/>
+                    <TextBox Text="{Binding GridOffsetBottom, Mode=TwoWay}" TextAlignment="Center" Margin="{DynamicResource TextControlThemePadding}" MinWidth="35" Grid.Row="1" Grid.Column="3"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Cell">
+                <Grid ColumnDefinitions="50*,6,50*">
+                    <StackPanel Grid.Column="0">
+                        <TextBlock Text="Width" Margin="{DynamicResource TextControlThemePadding}"/>
+                        <TextBox Text="{Binding GridCellWidth, Mode=TwoWay}"/>
+                    </StackPanel>
+                    <GridSplitter ResizeDirection="Columns" ResizeBehavior="PreviousAndNext" Background="Transparent" Width="6" Grid.Column="1"/>
+                    <StackPanel Grid.Column="2">
+                        <TextBlock Text="Height" Margin="{DynamicResource TextControlThemePadding}"/>
+                        <TextBox Text="{Binding GridCellHeight, Mode=TwoWay}"/>
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Color">
+                <StackPanel>
+                    <ContentControl Content="{Binding GridStrokeColor}"/>
+                </StackPanel>
+            </TabItem>
+        </TabControl>
     </StackPanel>
 </UserControl>
