@@ -13,8 +13,6 @@
     <StackPanel>
         <CheckBox Content="IsGridEnabled" IsChecked="{Binding IsGridEnabled, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
         <CheckBox Content="IsBorderEnabled" IsChecked="{Binding IsBorderEnabled, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
-        <TextBlock Text="Thickness" Margin="{DynamicResource TextControlThemePadding}"/>
-        <TextBox Text="{Binding GridStrokeThickness, Mode=TwoWay}"/>
         <TabControl>
             <TabItem Header="Offset">
                 <Grid ColumnDefinitions="25*,25*,25*,25*" RowDefinitions="Auto,Auto">
@@ -44,6 +42,12 @@
             <TabItem Header="Color">
                 <StackPanel>
                     <ContentControl Content="{Binding GridStrokeColor}"/>
+                </StackPanel>
+            </TabItem>
+            <TabItem Header="Thickness">
+                <StackPanel>
+                    <TextBlock Text="Thickness" Margin="{DynamicResource TextControlThemePadding}"/>
+                    <TextBox Text="{Binding GridStrokeThickness, Mode=TwoWay}"/>
                 </StackPanel>
             </TabItem>
         </TabControl>
