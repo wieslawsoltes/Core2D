@@ -17,7 +17,7 @@
     <UserControl.Resources>
         <converters:ObjectToTypeStringConverter x:Key="ObjectToTypeStringConverter"/>
     </UserControl.Resources>
-    <Grid RowDefinitions="Auto,Auto,6,50*,6,50*">
+    <Grid RowDefinitions="Auto,*">
         <TabControl Grid.Row="0">
             <TabItem Header="Group">
                 <StackPanel>
@@ -64,43 +64,43 @@
                     </ItemsControl>
                 </Grid>
             </TabItem>
-        </TabControl>
-        <GridSplitter ResizeDirection="Rows" ResizeBehavior="PreviousAndNext" Background="Transparent" Height="6" Grid.Row="2"/>
-        <TabControl Grid.Row="3">
             <TabItem Header="Shapes">
-                <ListBox x:Name="shapes" Items="{Binding Shapes}">
-                    <ListBox.DataTemplates>
-                        <DataTemplate DataType="Shapes:IBaseShape">
-                            <TextBlock Text="{Binding Mode=OneWay, Converter={StaticResource ObjectToTypeStringConverter}}" Background="Transparent" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-                                <i:Interaction.Behaviors>
-                                    <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}"/>
-                                </i:Interaction.Behaviors>
-                            </TextBlock>
-                        </DataTemplate>
-                    </ListBox.DataTemplates>
-                </ListBox>
+                <Grid RowDefinitions="50*,6,50*">
+                    <ListBox x:Name="shapes" Items="{Binding Shapes}" Grid.Row="0">
+                        <ListBox.DataTemplates>
+                            <DataTemplate DataType="Shapes:IBaseShape">
+                                <TextBlock Text="{Binding Mode=OneWay, Converter={StaticResource ObjectToTypeStringConverter}}" Background="Transparent" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                                    <i:Interaction.Behaviors>
+                                        <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}"/>
+                                    </i:Interaction.Behaviors>
+                                </TextBlock>
+                            </DataTemplate>
+                        </ListBox.DataTemplates>
+                    </ListBox>
+                    <GridSplitter ResizeDirection="Rows" ResizeBehavior="PreviousAndNext" Background="Transparent" Height="6" Grid.Row="1"/>
+                    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Grid.Row="2">
+                        <ContentControl Content="{Binding #shapes.SelectedItem}"/>
+                    </ScrollViewer>
+                </Grid>
             </TabItem>
-            <TabItem Header="Selected Shape">
-                <ContentControl Content="{Binding #shapes.SelectedItem}"/>
-            </TabItem>
-        </TabControl>
-        <GridSplitter ResizeDirection="Rows" ResizeBehavior="PreviousAndNext" Background="Transparent" Height="6" Grid.Row="4"/>
-        <TabControl Grid.Row="5">
             <TabItem Header="Connectors">
-                <ListBox x:Name="connectors" Items="{Binding Connectors}" x:DataType="Shapes:IConnectableShape">
-                    <ListBox.DataTemplates>
-                        <DataTemplate DataType="Shapes:IPointShape">
-                            <TextBlock Text="{Binding Mode=OneWay, Converter={StaticResource ObjectToTypeStringConverter}}" Background="Transparent" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-                                <i:Interaction.Behaviors>
-                                    <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}"/>
-                                </i:Interaction.Behaviors>
-                            </TextBlock>
-                        </DataTemplate>
-                    </ListBox.DataTemplates>
-                </ListBox>
-            </TabItem>
-            <TabItem Header="Selected Connector">
-                <ContentControl Content="{Binding #connectors.SelectedItem}"/>
+                <Grid RowDefinitions="50*,6,50*">
+                    <ListBox x:Name="connectors" Items="{Binding Connectors}" x:DataType="Shapes:IConnectableShape" Grid.Row="0">
+                        <ListBox.DataTemplates>
+                            <DataTemplate DataType="Shapes:IPointShape">
+                                <TextBlock Text="{Binding Mode=OneWay, Converter={StaticResource ObjectToTypeStringConverter}}" Background="Transparent" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                                    <i:Interaction.Behaviors>
+                                        <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}"/>
+                                    </i:Interaction.Behaviors>
+                                </TextBlock>
+                            </DataTemplate>
+                        </ListBox.DataTemplates>
+                    </ListBox>
+                    <GridSplitter ResizeDirection="Rows" ResizeBehavior="PreviousAndNext" Background="Transparent" Height="6" Grid.Row="1"/>
+                    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Grid.Row="2">
+                        <ContentControl Content="{Binding #connectors.SelectedItem}"/>
+                    </ScrollViewer>
+                </Grid>
             </TabItem>
         </TabControl>
     </Grid>
