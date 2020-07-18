@@ -94,7 +94,7 @@ namespace Core2D.Renderer
                     if (grid.IsDirty() || (grid.GridStrokeColor != null && grid.GridStrokeColor.IsDirty()))
                     {
                         drawNode.UpdateStyle();
-                        grid.GridStrokeColor.Invalidate();
+                        grid.GridStrokeColor?.Invalidate();
                     }
                     drawNode.Draw(dc, _state.ZoomX);
                 }
