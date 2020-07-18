@@ -85,7 +85,7 @@ namespace Core2D
 
     internal class Settings
     {
-        public ThemeName? Theme { get; set; } = ThemeName.FluentLight;
+        public ThemeName? Theme { get; set; } = null;
         public FileInfo[]? Scripts { get; set; }
         public FileInfo? Project { get; set; }
         public bool Repl { get; set; }
