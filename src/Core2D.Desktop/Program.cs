@@ -282,7 +282,7 @@ namespace Core2D
 
             var optionTheme = new Option(new[] { "--theme", "-t" }, "Set application theme")
             {
-                Argument = new Argument<ThemeName>(getDefaultValue: () => ThemeName.FluentLight)
+                Argument = new Argument<ThemeName?>()
             };
             rootCommand.AddOption(optionTheme);
 
