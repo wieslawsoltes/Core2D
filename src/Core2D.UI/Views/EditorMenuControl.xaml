@@ -110,13 +110,13 @@
                 <Separator/>
                 <MenuItem Header="_AutoFit" Command="{Binding Platform.OnZoomAutoFit}" InputGesture="X"/>
             </MenuItem>
-            <MenuItem Header="_Theme">
+            <!--<MenuItem Header="_Theme">
                 <MenuItem Header="Fluent _Light" Command="{x:Static app:App.ChangeTheme}" CommandParameter="FluentLight"/>
                 <MenuItem Header="Fluent _Dark" Command="{x:Static app:App.ChangeTheme}" CommandParameter="FluentDark"/>
                 <Separator/>
                 <MenuItem Header="Default L_ight" Command="{x:Static app:App.ChangeTheme}" CommandParameter="DefaultLight"/>
                 <MenuItem Header="Default D_ark" Command="{x:Static app:App.ChangeTheme}" CommandParameter="DefaultDark"/>
-            </MenuItem>
+            </MenuItem>-->
         </MenuItem>
         <MenuItem Header="_Project">
             <MenuItem Header="D_ata">
