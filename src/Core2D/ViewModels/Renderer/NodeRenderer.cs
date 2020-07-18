@@ -91,9 +91,8 @@ namespace Core2D.Renderer
                     drawNode.Width = width;
                     drawNode.Height = height;
                     drawNode.UpdateGeometry();
-                    if (grid.GridStrokeColor != null && grid.GridStrokeColor.IsDirty())
+                    if (grid.IsDirty() || (grid.GridStrokeColor != null && grid.GridStrokeColor.IsDirty()))
                     {
-                        drawNode.Grid = grid;
                         drawNode.UpdateStyle();
                         grid.GridStrokeColor.Invalidate();
                     }
