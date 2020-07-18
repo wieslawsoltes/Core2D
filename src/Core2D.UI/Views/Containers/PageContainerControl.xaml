@@ -68,13 +68,6 @@
                     </ListBox>
                     <TextBox Text="{Binding CurrentLayer.Name, Mode=TwoWay}" IsVisible="{Binding !!CurrentLayer}" BorderBrush="Transparent" Background="Transparent" Margin="0,12,0,0" Grid.Row="2"/>
                 </Grid>
-                <!--
-                <TabControl>
-                    <TabItem Header="Selected Layer">
-                        <ContentControl Content="{Binding CurrentLayer}"/>
-                    </TabItem>
-                </TabControl>
-                -->
             </TabItem>
             <TabItem Header="Shapes" x:CompileBindings="False">
                 <Grid RowDefinitions="Auto,*,Auto">
@@ -107,19 +100,16 @@
                     </ListBox>
                     <TextBox Text="{Binding CurrentShape.Name, Mode=TwoWay}" IsVisible="{Binding !!CurrentShape}" BorderBrush="Transparent" Background="Transparent" Grid.Row="2" />
                 </Grid>
-                <!--
-                <TabControl>
-                    <TabItem Header="Selected Shape">
-                        <ContentControl Content="{Binding CurrentShape}"/>
-                    </TabItem>
-                </TabControl>
-                -->
             </TabItem>
             <TabItem Header="Data">
-                <ContentControl Content="{Binding Data}"/>
+                <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                    <ContentControl Content="{Binding Data}"/>
+                </ScrollViewer>
             </TabItem>
             <TabItem Header="Template">
-                <ContentControl Content="{Binding Template}"/>
+                <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                    <ContentControl Content="{Binding Template}"/>
+                </ScrollViewer>
             </TabItem>
         </TabControl>
     </Grid>
