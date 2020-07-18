@@ -61,7 +61,7 @@ namespace Core2D.Renderer.SkiaSharp
                 thickness /= scale;
             }
 
-            if (Stroke.StrokeWidth != thickness)
+            if (Stroke != null && Stroke.StrokeWidth != thickness)
             {
                 Stroke.StrokeWidth = (float)thickness;
             }
