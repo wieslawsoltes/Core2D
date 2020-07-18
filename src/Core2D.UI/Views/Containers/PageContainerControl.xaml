@@ -20,7 +20,7 @@
     <UserControl.Resources>
         <converters:ObjectToTypeStringConverter x:Key="ObjectToTypeStringConverter"/>
     </UserControl.Resources>
-    <Grid RowDefinitions="Auto,Auto,*,*">
+    <Grid RowDefinitions="Auto,Auto,*">
         <StackPanel Grid.Row="0">
             <TextBlock Text="Name" Margin="{DynamicResource TextControlThemePadding}"/>
             <TextBox Text="{Binding Name, Mode=TwoWay}"/>
@@ -36,11 +36,19 @@
                 </StackPanel>
             </Grid>
         </StackPanel>
-        <TextBlock Text="Background" Margin="{DynamicResource TextControlThemePadding}" Grid.Row="1"/>
-        <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Grid.Row="2">
-            <ContentControl Content="{Binding Background}"/>
-        </ScrollViewer>
-        <TabControl Grid.Row="3">
+        <TabControl Grid.Row="1">
+            <TabItem Header="Background">
+                <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Grid.Row="2">
+                    <ContentControl Content="{Binding Background}"/>
+                </ScrollViewer>
+            </TabItem>
+            <TabItem Header="Grid">
+                <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                    <renderer:GridControl/>
+                </ScrollViewer>
+            </TabItem>
+        </TabControl>
+        <TabControl Grid.Row="2">
             <TabItem Header="Layers" x:CompileBindings="False">
                 <Grid RowDefinitions="Auto,*,Auto">
                     <Menu Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Center">
@@ -112,11 +120,6 @@
             <TabItem Header="Template">
                 <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
                     <ContentControl Content="{Binding Template}"/>
-                </ScrollViewer>
-            </TabItem>
-            <TabItem Header="Grid" IsVisible="{Binding !!GridStrokeColor}">
-                <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-                    <renderer:GridControl/>
                 </ScrollViewer>
             </TabItem>
         </TabControl>
