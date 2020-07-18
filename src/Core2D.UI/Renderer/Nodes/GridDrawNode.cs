@@ -25,12 +25,12 @@ namespace Core2D.UI.Renderer
 
         public override void UpdateGeometry()
         {
-            ScaleThickness = false;
+            ScaleThickness = true;
             ScaleSize = false;
             Rect = new A.Rect(
-                X + Grid.GridOffsetLeft, 
+                X + Grid.GridOffsetLeft,
                 Y + Grid.GridOffsetTop,
-                Width - Grid.GridOffsetLeft + Grid.GridOffsetRight, 
+                Width - Grid.GridOffsetLeft + Grid.GridOffsetRight,
                 Height - Grid.GridOffsetTop + Grid.GridOffsetBottom);
             Center = Rect.Center;
         }
@@ -39,7 +39,7 @@ namespace Core2D.UI.Renderer
         {
             if (Grid.GridStrokeColor != null)
             {
-                Stroke = AvaloniaDrawUtil.ToPen(Grid.GridStrokeColor, Grid.GridStrokeThickness); 
+                Stroke = AvaloniaDrawUtil.ToPen(Grid.GridStrokeColor, Grid.GridStrokeThickness);
             }
             else
             {
@@ -49,6 +49,25 @@ namespace Core2D.UI.Renderer
 
         public override void Draw(object dc, double zoom)
         {
+            var scale = ScaleSize ? 1.0 / zoom : 1.0;
+
+            double thickness = Grid.GridStrokeThickness;
+
+            if (ScaleThickness)
+            {
+                thickness /= zoom;
+            }
+
+            if (scale != 1.0)
+            {
+                thickness /= scale;
+            }
+
+            if (Grid.GridStrokeThickness != thickness)
+            {
+                Stroke = AvaloniaDrawUtil.ToPen(Grid.GridStrokeColor, thickness);
+            }
+
             OnDraw(dc, zoom);
         }
 
