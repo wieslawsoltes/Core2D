@@ -45,11 +45,6 @@ namespace Core2D.UI
 
             public bool CanExecute(object parameter)
             {
-                //if (parameter is string value)
-                //{
-                //    return Enum.TryParse<ThemeName>(value, out var _);
-                //}
-                //return false;
                 return true;
             }
 
@@ -57,10 +52,7 @@ namespace Core2D.UI
             {
                 if (parameter is string value)
                 {
-                    if (Enum.TryParse<ThemeName>(value, out var result))
-                    {
-                        App.SetTheme(result);
-                    }
+                    App.SetTheme(value);
                 }
             }
         }
@@ -306,6 +298,14 @@ namespace Core2D.UI
                 case ThemeName.FluentLight:
                     Current.Styles[0] = FluentLight;
                     break;
+            }
+        }
+
+        public static void SetTheme(string themeName)
+        {
+            if (Enum.TryParse<ThemeName>(themeName, out var result))
+            {
+                SetTheme(result);
             }
         }
 
