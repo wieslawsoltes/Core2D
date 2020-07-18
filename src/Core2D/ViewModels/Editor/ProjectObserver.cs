@@ -5,6 +5,7 @@ using Core2D.Containers;
 using Core2D.Data;
 using Core2D.Path;
 using Core2D.Path.Segments;
+using Core2D.Renderer;
 using Core2D.Scripting;
 using Core2D.Shapes;
 using Core2D.Style;
@@ -193,6 +194,35 @@ namespace Core2D.Editor
             }
             _invalidateLayers();
             MarkAsDirty();
+        }
+
+        private void ObserveGridStrokeColor(object sender, PropertyChangedEventArgs e)
+        {
+            _editor.Project.CurrentContainer.Notify(nameof(IGrid.GridStrokeColor));
+            var page = _editor.Project.CurrentContainer;
+            if (page != null)
+            {
+                page.Template.Notify(nameof(IGrid.GridStrokeColor));
+            }
+            _invalidateLayers();
+            MarkAsDirty();
+        }
+
+        private void ObserveGrid(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(IGrid.IsGridEnabled)
+                || e.PropertyName == nameof(IGrid.IsBorderEnabled)
+                || e.PropertyName == nameof(IGrid.GridOffsetLeft)
+                || e.PropertyName == nameof(IGrid.GridOffsetTop)
+                || e.PropertyName == nameof(IGrid.GridOffsetRight)
+                || e.PropertyName == nameof(IGrid.GridOffsetBottom)
+                || e.PropertyName == nameof(IGrid.GridCellWidth)
+                || e.PropertyName == nameof(IGrid.GridCellHeight)
+                || e.PropertyName == nameof(IGrid.GridStrokeThickness))
+            {
+                _invalidateLayers();
+                MarkAsDirty();
+            }
         }
 
         private void ObserveScript(object sender, PropertyChangedEventArgs e)
@@ -564,6 +594,13 @@ namespace Core2D.Editor
                 container.Background.PropertyChanged += ObserveTemplateBackgroud;
             }
 
+            if (container.GridStrokeColor != null)
+            {
+                container.GridStrokeColor.PropertyChanged += ObserveGridStrokeColor;
+            }
+
+            container.PropertyChanged += ObserveGrid;
+
             if (container.Layers != null)
             {
                 Add(container.Layers);
@@ -598,6 +635,13 @@ namespace Core2D.Editor
             {
                 container.Background.PropertyChanged -= ObserveTemplateBackgroud;
             }
+
+            if (container.GridStrokeColor != null)
+            {
+                container.GridStrokeColor.PropertyChanged -= ObserveGridStrokeColor;
+            }
+
+            container.PropertyChanged -= ObserveGrid;
 
             if (container.Layers != null)
             {
