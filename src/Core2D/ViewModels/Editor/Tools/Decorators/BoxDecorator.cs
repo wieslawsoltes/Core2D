@@ -208,7 +208,6 @@ namespace Core2D.Editor.Tools.Decorators
         /// <inheritdoc/>
         public virtual void DrawPoints(object dc, IShapeRenderer renderer)
         {
-
         }
 
         /// <inheritdoc/>
