@@ -433,6 +433,12 @@ namespace Core2D.Editor
             {
                 if (Project != null && FileIO != null && JsonSerializer != null)
                 {
+                    var isDecoratorVisible = PageState.Decorator?.IsVisible == true;
+                    if (isDecoratorVisible)
+                    {
+                        OnHideDecorator();
+                    }
+
                     Factory.SaveProjectContainer(Project, path, FileIO, JsonSerializer);
                     OnAddRecent(path, Project.Name);
 
@@ -442,6 +448,11 @@ namespace Core2D.Editor
                     }
 
                     IsProjectDirty = false;
+
+                    if (isDecoratorVisible)
+                    {
+                        OnShowDecorator();
+                    }
                 }
             }
             catch (Exception ex)
