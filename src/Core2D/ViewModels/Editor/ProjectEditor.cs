@@ -1082,6 +1082,12 @@ namespace Core2D.Editor
                 return;
             }
 
+            if (PageState.SelectedShapes?.Count == 1 && PageState.SelectedShapes?.FirstOrDefault() is ILineShape)
+            {
+                OnHideDecorator();
+                return;
+            }
+
             if (PageState.SelectedShapes != null)
             {
                 OnShowDecorator();
@@ -3335,7 +3341,7 @@ namespace Core2D.Editor
                 }
                 else
                 {
-                    if (shape is IPointShape)
+                    if (shape is IPointShape || shape is ILineShape)
                     {
                         OnHideDecorator();
                     }
