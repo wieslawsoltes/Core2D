@@ -1,10 +1,14 @@
 ﻿using System;
+using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using Avalonia.Controls;
 using Core2D.Containers;
 using Core2D.Data;
 using Core2D.Editor;
+using Core2D.FileWriter.Emf;
+using Core2D.Renderer;
 using Core2D.Shapes;
 using Core2D.SvgExporter.Svg;
 using Core2D.UI.Views;
@@ -412,12 +416,97 @@ namespace Core2D.UI.Editor
             }
         }
 
+        private static class Win32
+        {
+            public const uint CF_ENHMETAFILE = 14;
+
+            [DllImport("user32.dll", SetLastError = true)]
+            [return: MarshalAs(UnmanagedType.Bool)]
+            public static extern bool OpenClipboard(IntPtr hWndNewOwner);
+
+            [DllImport("user32.dll")]
+            [return: MarshalAs(UnmanagedType.Bool)]
+            public static extern bool EmptyClipboard();
+
+            [DllImport("user32.dll", SetLastError = true)]
+            public static extern bool CloseClipboard();
+
+            [DllImport("user32.dll")]
+            public static extern IntPtr SetClipboardData(uint uFormat, IntPtr hMem);
+
+            [DllImport("gdi32.dll")]
+            public static extern IntPtr CopyEnhMetaFile(IntPtr hemetafileSrc, IntPtr hNULL);
+
+            [DllImport("gdi32.dll")]
+            [return: MarshalAs(UnmanagedType.Bool)]
+            public static extern bool DeleteEnhMetaFile(IntPtr hemetafile);
+        }
+
+        private void SetClipboardMetafile(MemoryStream ms)
+        {
+            using var metafile = new System.Drawing.Imaging.Metafile(ms);
+
+            var emfHandle = metafile.GetHenhmetafile();
+            if (emfHandle.Equals(IntPtr.Zero))
+            {
+                return;
+            }
+
+            var emfCloneHandle = Win32.CopyEnhMetaFile(emfHandle, IntPtr.Zero);
+            if (emfCloneHandle.Equals(IntPtr.Zero))
+            {
+                return;
+            }
+
+            try
+            {
+                if (Win32.OpenClipboard(IntPtr.Zero) && Win32.EmptyClipboard())
+                {
+                    Win32.SetClipboardData(Win32.CF_ENHMETAFILE, emfCloneHandle);
+                    Win32.CloseClipboard();
+                }
+            }
+            finally
+            {
+                Win32.DeleteEnhMetaFile(emfHandle);
+            }
+        }
+
         /// <inheritdoc/>
         public void OnCopyAsEmf(object item)
         {
+            if (Environment.OSVersion.Platform != PlatformID.Win32NT)
+            {
+                return;
+            }
+
             try
             {
-                throw new NotImplementedException();
+                var editor = _serviceProvider.GetService<IProjectEditor>();
+                var imageChache = editor.Project as IImageCache;
+                var page = editor.Project.CurrentContainer;
+                var shapes = editor.PageState.SelectedShapes;
+                var writer = editor.FileWriters.FirstOrDefault(x => x.GetType() == typeof(EmfWriter)) as EmfWriter;
+
+                var db = (object)page.Data.Properties;
+                var record = (object)page.Data.Record;
+                editor.DataFlow.Bind(page.Template, db, record);
+                editor.DataFlow.Bind(page, db, record);
+
+                using var bitmap = new System.Drawing.Bitmap((int)page.Width, (int)page.Height);
+
+                if (shapes != null && shapes.Count > 0)
+                {
+                    using var ms = writer.MakeMetafileStream(bitmap, shapes, imageChache);
+                    ms.Position = 0;
+                    SetClipboardMetafile(ms);
+                }
+                else
+                {
+                    using var ms = writer.MakeMetafileStream(bitmap, page, imageChache);
+                    ms.Position = 0;
+                    SetClipboardMetafile(ms);
+                }
             }
             catch (Exception ex)
             {
