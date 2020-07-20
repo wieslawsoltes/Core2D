@@ -563,6 +563,11 @@ namespace Core2D.Editor
         void OnCreateFillPath();
 
         /// <summary>
+        /// Create winding path.
+        /// </summary>
+        void OnCreateWindingPath();
+
+        /// <summary>
         /// Simplify path.
         /// </summary>
         void OnPathSimplify();

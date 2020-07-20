@@ -244,6 +244,7 @@
             <MenuItem Header="Create Pat_h" Command="{Binding OnCreatePath}"/>
             <MenuItem Header="Create Str_oke Path" Command="{Binding OnCreateStrokePath}"/>
             <MenuItem Header="Create _Fill Path" Command="{Binding OnCreateFillPath}"/>
+            <MenuItem Header="Create _Winding Path" Command="{Binding OnCreateWindingPath}"/>
             <MenuItem Header="_Simplify Path" Command="{Binding OnPathSimplify}"/>
             <MenuItem Header="_Break Path" Command="{Binding OnPathBreak}" InputGesture="Ctrl+B"/>
             <Separator/>

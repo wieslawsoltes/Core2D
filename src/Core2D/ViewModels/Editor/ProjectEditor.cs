@@ -1674,6 +1674,83 @@ namespace Core2D.Editor
         }
 
         /// <inheritdoc/>
+        public void OnCreateWindingPath()
+        {
+            if (PathConverter == null)
+            {
+                return;
+            }
+
+            var layer = Project?.CurrentContainer?.CurrentLayer;
+            if (layer == null)
+            {
+                return;
+            }
+
+            var sources = PageState?.SelectedShapes;
+            var source = PageState?.SelectedShapes?.FirstOrDefault();
+
+            if (sources != null && sources.Count == 1)
+            {
+                var path = PathConverter.ToWindingPathShape(source);
+                if (path != null)
+                {
+                    path.IsStroked = false;
+                    path.IsFilled = true;
+
+                    var shapesBuilder = layer.Shapes.ToBuilder();
+
+                    var index = shapesBuilder.IndexOf(source);
+                    shapesBuilder[index] = path;
+
+                    var previous = layer.Shapes;
+                    var next = shapesBuilder.ToImmutable();
+                    Project?.History?.Snapshot(previous, next, (p) => layer.Shapes = p);
+                    layer.Shapes = next;
+
+                    Select(layer, path);
+                }
+            }
+
+            if (sources != null && sources.Count > 1)
+            {
+                var paths = new List<IPathShape>();
+                var shapes = new List<IBaseShape>();
+
+                foreach (var s in sources)
+                {
+                    var path = PathConverter.ToWindingPathShape(s);
+                    if (path != null)
+                    {
+                        path.IsStroked = false;
+                        path.IsFilled = true;
+
+                        paths.Add(path);
+                        shapes.Add(s);
+                    }
+                }
+
+                if (paths.Count > 0)
+                {
+                    var shapesBuilder = layer.Shapes.ToBuilder();
+
+                    for (int i = 0; i < paths.Count; i++)
+                    {
+                        var index = shapesBuilder.IndexOf(shapes[i]);
+                        shapesBuilder[index] = paths[i];
+                    }
+
+                    var previous = layer.Shapes;
+                    var next = shapesBuilder.ToImmutable();
+                    Project?.History?.Snapshot(previous, next, (p) => layer.Shapes = p);
+                    layer.Shapes = next;
+
+                    Select(layer, new HashSet<IBaseShape>(paths));
+                }
+            }
+        }
+
+        /// <inheritdoc/>
         public void OnPathSimplify()
         {
             if (PathConverter == null)
