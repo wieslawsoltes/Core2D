@@ -319,9 +319,6 @@
             <ContentControl Content="{Binding #project.SelectedItem, Converter={StaticResource TreeViewSelectedItemToObjectConverter}}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" x:CompileBindings="False">
                 <ContentControl.DataTemplates>
                     <locator:ViewLocator/>
-                    <DataTemplate>
-                        <TextBlock Text="Not Supported"/>
-                    </DataTemplate>
                 </ContentControl.DataTemplates>
             </ContentControl>
         </Border>
