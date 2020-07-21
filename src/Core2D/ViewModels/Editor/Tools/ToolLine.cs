@@ -55,7 +55,7 @@ namespace Core2D.Editor.Tools
             var factory = _serviceProvider.GetService<IFactory>();
             var editor = _serviceProvider.GetService<IProjectEditor>();
             (double x, double y) = args;
-            (double sx, double sy) = editor.TryToSnap(args);
+            (decimal sx, decimal sy) = editor.TryToSnap(args);
             switch (_currentState)
             {
                 case State.Start:
@@ -64,12 +64,12 @@ namespace Core2D.Editor.Tools
                             editor.Project.CurrentStyleLibrary.Selected :
                             editor.Factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
                         _line = factory.CreateLineShape(
-                            sx, sy,
+                            (double)sx, (double)sy,
                             (IShapeStyle)style.Copy(null),
                             editor.Project.Options.DefaultIsStroked);
                         if (editor.Project.Options.TryToConnect)
                         {
-                            var result = editor.TryToGetConnectionPoint(sx, sy);
+                            var result = editor.TryToGetConnectionPoint((double)sx, (double)sy);
                             if (result != null)
                             {
                                 _line.Start = result;
@@ -91,12 +91,12 @@ namespace Core2D.Editor.Tools
                     {
                         if (_line != null)
                         {
-                            _line.End.X = sx;
-                            _line.End.Y = sy;
+                            _line.End.X = (double)sx;
+                            _line.End.Y = (double)sy;
 
                             if (editor.Project.Options.TryToConnect)
                             {
-                                var result = editor.TryToGetConnectionPoint(sx, sy);
+                                var result = editor.TryToGetConnectionPoint((double)sx, (double)sy);
                                 if (result != null)
                                 {
                                     _line.End = result;
@@ -145,14 +145,14 @@ namespace Core2D.Editor.Tools
         public void Move(InputArgs args)
         {
             var editor = _serviceProvider.GetService<IProjectEditor>();
-            (double sx, double sy) = editor.TryToSnap(args);
+            (decimal sx, decimal sy) = editor.TryToSnap(args);
             switch (_currentState)
             {
                 case State.Start:
                     {
                         if (editor.Project.Options.TryToConnect)
                         {
-                            editor.TryToHoverShape(sx, sy);
+                            editor.TryToHoverShape((double)sx, (double)sy);
                         }
                     }
                     break;
@@ -162,10 +162,10 @@ namespace Core2D.Editor.Tools
                         {
                             if (editor.Project.Options.TryToConnect)
                             {
-                                editor.TryToHoverShape(sx, sy);
+                                editor.TryToHoverShape((double)sx, (double)sy);
                             }
-                            _line.End.X = sx;
-                            _line.End.Y = sy;
+                            _line.End.X = (double)sx;
+                            _line.End.Y = (double)sy;
                             editor.Project.CurrentContainer.WorkingLayer.InvalidateLayer();
                             Move(_line);
                         }

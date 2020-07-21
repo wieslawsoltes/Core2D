@@ -56,12 +56,12 @@ namespace Core2D.Editor.Tools.Path
             var factory = _serviceProvider.GetService<IFactory>();
             var editor = _serviceProvider.GetService<IProjectEditor>();
             var pathTool = _serviceProvider.GetService<ToolPath>();
-            (double sx, double sy) = editor.TryToSnap(args);
+            (decimal sx, decimal sy) = editor.TryToSnap(args);
             switch (_currentState)
             {
                 case State.Point1:
                     {
-                        _cubicBezier.Point1 = editor.TryToGetConnectionPoint(sx, sy) ?? factory.CreatePointShape(sx, sy);
+                        _cubicBezier.Point1 = editor.TryToGetConnectionPoint((double)sx, (double)sy) ?? factory.CreatePointShape((double)sx, (double)sy);
                         if (!pathTool.IsInitialized)
                         {
                             pathTool.InitializeWorkingPath(_cubicBezier.Point1);
@@ -71,9 +71,9 @@ namespace Core2D.Editor.Tools.Path
                             _cubicBezier.Point1 = pathTool.GetLastPathPoint();
                         }
 
-                        _cubicBezier.Point2 = factory.CreatePointShape(sx, sy);
-                        _cubicBezier.Point3 = factory.CreatePointShape(sx, sy);
-                        _cubicBezier.Point4 = factory.CreatePointShape(sx, sy);
+                        _cubicBezier.Point2 = factory.CreatePointShape((double)sx, (double)sy);
+                        _cubicBezier.Point3 = factory.CreatePointShape((double)sx, (double)sy);
+                        _cubicBezier.Point4 = factory.CreatePointShape((double)sx, (double)sy);
                         pathTool.GeometryContext.CubicBezierTo(
                             _cubicBezier.Point2,
                             _cubicBezier.Point3,
@@ -89,11 +89,11 @@ namespace Core2D.Editor.Tools.Path
                     break;
                 case State.Point4:
                     {
-                        _cubicBezier.Point4.X = sx;
-                        _cubicBezier.Point4.Y = sy;
+                        _cubicBezier.Point4.X = (double)sx;
+                        _cubicBezier.Point4.Y = (double)sy;
                         if (editor.Project.Options.TryToConnect)
                         {
-                            var point3 = editor.TryToGetConnectionPoint(sx, sy);
+                            var point3 = editor.TryToGetConnectionPoint((double)sx, (double)sy);
                             if (point3 != null)
                             {
                                 var figure = pathTool.Geometry.Figures.LastOrDefault();
@@ -110,11 +110,11 @@ namespace Core2D.Editor.Tools.Path
                     break;
                 case State.Point2:
                     {
-                        _cubicBezier.Point2.X = sx;
-                        _cubicBezier.Point2.Y = sy;
+                        _cubicBezier.Point2.X = (double)sx;
+                        _cubicBezier.Point2.Y = (double)sy;
                         if (editor.Project.Options.TryToConnect)
                         {
-                            var point1 = editor.TryToGetConnectionPoint(sx, sy);
+                            var point1 = editor.TryToGetConnectionPoint((double)sx, (double)sy);
                             if (point1 != null)
                             {
                                 var figure = pathTool.Geometry.Figures.LastOrDefault();
@@ -131,11 +131,11 @@ namespace Core2D.Editor.Tools.Path
                     break;
                 case State.Point3:
                     {
-                        _cubicBezier.Point3.X = sx;
-                        _cubicBezier.Point3.Y = sy;
+                        _cubicBezier.Point3.X = (double)sx;
+                        _cubicBezier.Point3.Y = (double)sy;
                         if (editor.Project.Options.TryToConnect)
                         {
-                            var point2 = editor.TryToGetConnectionPoint(sx, sy);
+                            var point2 = editor.TryToGetConnectionPoint((double)sx, (double)sy);
                             if (point2 != null)
                             {
                                 var figure = pathTool.Geometry.Figures.LastOrDefault();
@@ -146,9 +146,9 @@ namespace Core2D.Editor.Tools.Path
                         }
 
                         _cubicBezier.Point1 = _cubicBezier.Point4;
-                        _cubicBezier.Point2 = factory.CreatePointShape(sx, sy);
-                        _cubicBezier.Point3 = factory.CreatePointShape(sx, sy);
-                        _cubicBezier.Point4 = factory.CreatePointShape(sx, sy);
+                        _cubicBezier.Point2 = factory.CreatePointShape((double)sx, (double)sy);
+                        _cubicBezier.Point3 = factory.CreatePointShape((double)sx, (double)sy);
+                        _cubicBezier.Point4 = factory.CreatePointShape((double)sx, (double)sy);
                         pathTool.GeometryContext.CubicBezierTo(
                             _cubicBezier.Point2,
                             _cubicBezier.Point3,
@@ -193,14 +193,14 @@ namespace Core2D.Editor.Tools.Path
         public void Move(InputArgs args)
         {
             var editor = _serviceProvider.GetService<IProjectEditor>();
-            (double sx, double sy) = editor.TryToSnap(args);
+            (decimal sx, decimal sy) = editor.TryToSnap(args);
             switch (_currentState)
             {
                 case State.Point1:
                     {
                         if (editor.Project.Options.TryToConnect)
                         {
-                            editor.TryToHoverShape(sx, sy);
+                            editor.TryToHoverShape((double)sx, (double)sy);
                         }
                     }
                     break;
@@ -208,14 +208,14 @@ namespace Core2D.Editor.Tools.Path
                     {
                         if (editor.Project.Options.TryToConnect)
                         {
-                            editor.TryToHoverShape(sx, sy);
+                            editor.TryToHoverShape((double)sx, (double)sy);
                         }
-                        _cubicBezier.Point2.X = sx;
-                        _cubicBezier.Point2.Y = sy;
-                        _cubicBezier.Point3.X = sx;
-                        _cubicBezier.Point3.Y = sy;
-                        _cubicBezier.Point4.X = sx;
-                        _cubicBezier.Point4.Y = sy;
+                        _cubicBezier.Point2.X = (double)sx;
+                        _cubicBezier.Point2.Y = (double)sy;
+                        _cubicBezier.Point3.X = (double)sx;
+                        _cubicBezier.Point3.Y = (double)sy;
+                        _cubicBezier.Point4.X = (double)sx;
+                        _cubicBezier.Point4.Y = (double)sy;
                         editor.Project.CurrentContainer.WorkingLayer.InvalidateLayer();
                         Move(null);
                     }
@@ -224,10 +224,10 @@ namespace Core2D.Editor.Tools.Path
                     {
                         if (editor.Project.Options.TryToConnect)
                         {
-                            editor.TryToHoverShape(sx, sy);
+                            editor.TryToHoverShape((double)sx, (double)sy);
                         }
-                        _cubicBezier.Point2.X = sx;
-                        _cubicBezier.Point2.Y = sy;
+                        _cubicBezier.Point2.X = (double)sx;
+                        _cubicBezier.Point2.Y = (double)sy;
                         editor.Project.CurrentContainer.WorkingLayer.InvalidateLayer();
                         Move(null);
                     }
@@ -236,10 +236,10 @@ namespace Core2D.Editor.Tools.Path
                     {
                         if (editor.Project.Options.TryToConnect)
                         {
-                            editor.TryToHoverShape(sx, sy);
+                            editor.TryToHoverShape((double)sx, (double)sy);
                         }
-                        _cubicBezier.Point3.X = sx;
-                        _cubicBezier.Point3.Y = sy;
+                        _cubicBezier.Point3.X = (double)sx;
+                        _cubicBezier.Point3.Y = (double)sy;
                         editor.Project.CurrentContainer.WorkingLayer.InvalidateLayer();
                         Move(null);
                     }

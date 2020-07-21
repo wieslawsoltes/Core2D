@@ -56,12 +56,12 @@ namespace Core2D.Editor.Tools.Path
             var factory = _serviceProvider.GetService<IFactory>();
             var editor = _serviceProvider.GetService<IProjectEditor>();
             var pathTool = _serviceProvider.GetService<ToolPath>();
-            (double sx, double sy) = editor.TryToSnap(args);
+            (decimal sx, decimal sy) = editor.TryToSnap(args);
             switch (_currentState)
             {
                 case State.Start:
                     {
-                        _line.Start = editor.TryToGetConnectionPoint(sx, sy) ?? factory.CreatePointShape(sx, sy);
+                        _line.Start = editor.TryToGetConnectionPoint((double)sx, (double)sy) ?? factory.CreatePointShape((double)sx, (double)sy);
                         if (!pathTool.IsInitialized)
                         {
                             pathTool.InitializeWorkingPath(_line.Start);
@@ -71,7 +71,7 @@ namespace Core2D.Editor.Tools.Path
                             _line.Start = pathTool.GetLastPathPoint();
                         }
 
-                        _line.End = factory.CreatePointShape(sx, sy);
+                        _line.End = factory.CreatePointShape((double)sx, (double)sy);
                         pathTool.GeometryContext.LineTo(
                             _line.End,
                             editor.Project.Options.DefaultIsStroked,
@@ -85,11 +85,11 @@ namespace Core2D.Editor.Tools.Path
                     break;
                 case State.End:
                     {
-                        _line.End.X = sx;
-                        _line.End.Y = sy;
+                        _line.End.X = (double)sx;
+                        _line.End.Y = (double)sy;
                         if (editor.Project.Options.TryToConnect)
                         {
-                            var end = editor.TryToGetConnectionPoint(sx, sy);
+                            var end = editor.TryToGetConnectionPoint((double)sx, (double)sy);
                             if (end != null)
                             {
                                 var figure = pathTool.Geometry.Figures.LastOrDefault();
@@ -99,7 +99,7 @@ namespace Core2D.Editor.Tools.Path
                         }
 
                         _line.Start = _line.End;
-                        _line.End = factory.CreatePointShape(sx, sy);
+                        _line.End = factory.CreatePointShape((double)sx, (double)sy);
                         pathTool.GeometryContext.LineTo(_line.End,
                             editor.Project.Options.DefaultIsStroked,
                             editor.Project.Options.DefaultIsSmoothJoin);
@@ -138,14 +138,14 @@ namespace Core2D.Editor.Tools.Path
         public void Move(InputArgs args)
         {
             var editor = _serviceProvider.GetService<IProjectEditor>();
-            (double sx, double sy) = editor.TryToSnap(args);
+            (decimal sx, decimal sy) = editor.TryToSnap(args);
             switch (_currentState)
             {
                 case State.Start:
                     {
                         if (editor.Project.Options.TryToConnect)
                         {
-                            editor.TryToHoverShape(sx, sy);
+                            editor.TryToHoverShape((double)sx, (double)sy);
                         }
                     }
                     break;
@@ -153,10 +153,10 @@ namespace Core2D.Editor.Tools.Path
                     {
                         if (editor.Project.Options.TryToConnect)
                         {
-                            editor.TryToHoverShape(sx, sy);
+                            editor.TryToHoverShape((double)sx, (double)sy);
                         }
-                        _line.End.X = sx;
-                        _line.End.Y = sy;
+                        _line.End.X = (double)sx;
+                        _line.End.Y = (double)sy;
                         editor.Project.CurrentContainer.WorkingLayer.InvalidateLayer();
                         Move(null);
                     }

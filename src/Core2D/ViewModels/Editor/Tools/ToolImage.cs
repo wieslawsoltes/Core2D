@@ -54,7 +54,7 @@ namespace Core2D.Editor.Tools
         {
             var factory = _serviceProvider.GetService<IFactory>();
             var editor = _serviceProvider.GetService<IProjectEditor>();
-            (double sx, double sy) = editor.TryToSnap(args);
+            (decimal sx, decimal sy) = editor.TryToSnap(args);
             switch (_currentState)
             {
                 case State.TopLeft:
@@ -74,11 +74,11 @@ namespace Core2D.Editor.Tools
                             editor.Project.CurrentStyleLibrary.Selected :
                             editor.Factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
                         _image = factory.CreateImageShape(
-                            sx, sy,
+                            (double)sx, (double)sy,
                             (IShapeStyle)style.Copy(null),
                             key);
 
-                        var result = editor.TryToGetConnectionPoint(sx, sy);
+                        var result = editor.TryToGetConnectionPoint((double)sx, (double)sy);
                         if (result != null)
                         {
                             _image.TopLeft = result;
@@ -96,10 +96,10 @@ namespace Core2D.Editor.Tools
                     {
                         if (_image != null)
                         {
-                            _image.BottomRight.X = sx;
-                            _image.BottomRight.Y = sy;
+                            _image.BottomRight.X = (double)sx;
+                            _image.BottomRight.Y = (double)sy;
 
-                            var result = editor.TryToGetConnectionPoint(sx, sy);
+                            var result = editor.TryToGetConnectionPoint((double)sx, (double)sy);
                             if (result != null)
                             {
                                 _image.BottomRight = result;
@@ -143,13 +143,13 @@ namespace Core2D.Editor.Tools
         public void Move(InputArgs args)
         {
             var editor = _serviceProvider.GetService<IProjectEditor>();
-            (double sx, double sy) = editor.TryToSnap(args);
+            (decimal sx, decimal sy) = editor.TryToSnap(args);
             switch (_currentState)
             {
                 case State.TopLeft:
                     if (editor.Project.Options.TryToConnect)
                     {
-                        editor.TryToHoverShape(sx, sy);
+                        editor.TryToHoverShape((double)sx, (double)sy);
                     }
                     break;
                 case State.BottomRight:
@@ -158,10 +158,10 @@ namespace Core2D.Editor.Tools
                         {
                             if (editor.Project.Options.TryToConnect)
                             {
-                                editor.TryToHoverShape(sx, sy);
+                                editor.TryToHoverShape((double)sx, (double)sy);
                             }
-                            _image.BottomRight.X = sx;
-                            _image.BottomRight.Y = sy;
+                            _image.BottomRight.X = (double)sx;
+                            _image.BottomRight.Y = (double)sy;
                             editor.Project.CurrentContainer.WorkingLayer.InvalidateLayer();
                             Move(_image);
                         }

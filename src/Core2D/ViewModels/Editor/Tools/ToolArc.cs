@@ -58,7 +58,7 @@ namespace Core2D.Editor.Tools
         {
             var factory = _serviceProvider.GetService<IFactory>();
             var editor = _serviceProvider.GetService<IProjectEditor>();
-            (double sx, double sy) = editor.TryToSnap(args);
+            (decimal sx, decimal sy) = editor.TryToSnap(args);
             switch (_currentState)
             {
                 case State.Point1:
@@ -69,12 +69,12 @@ namespace Core2D.Editor.Tools
                         _connectedPoint3 = false;
                         _connectedPoint4 = false;
                         _arc = factory.CreateArcShape(
-                            sx, sy,
+                            (double)sx, (double)sy,
                             (IShapeStyle)style.Copy(null),
                             editor.Project.Options.DefaultIsStroked,
                             editor.Project.Options.DefaultIsFilled);
 
-                        var result = editor.TryToGetConnectionPoint(sx, sy);
+                        var result = editor.TryToGetConnectionPoint((double)sx, (double)sy);
                         if (result != null)
                         {
                             _arc.Point1 = result;
@@ -91,12 +91,12 @@ namespace Core2D.Editor.Tools
                     {
                         if (_arc != null)
                         {
-                            _arc.Point2.X = sx;
-                            _arc.Point2.Y = sy;
-                            _arc.Point3.X = sx;
-                            _arc.Point3.Y = sy;
+                            _arc.Point2.X = (double)sx;
+                            _arc.Point2.Y = (double)sy;
+                            _arc.Point3.X = (double)sx;
+                            _arc.Point3.Y = (double)sy;
 
-                            var result = editor.TryToGetConnectionPoint(sx, sy);
+                            var result = editor.TryToGetConnectionPoint((double)sx, (double)sy);
                             if (result != null)
                             {
                                 _arc.Point2 = result;
@@ -113,12 +113,12 @@ namespace Core2D.Editor.Tools
                     {
                         if (_arc != null)
                         {
-                            _arc.Point3.X = sx;
-                            _arc.Point3.Y = sy;
-                            _arc.Point4.X = sx;
-                            _arc.Point4.Y = sy;
+                            _arc.Point3.X = (double)sx;
+                            _arc.Point3.Y = (double)sy;
+                            _arc.Point4.X = (double)sx;
+                            _arc.Point4.Y = (double)sy;
 
-                            var result = editor.TryToGetConnectionPoint(sx, sy);
+                            var result = editor.TryToGetConnectionPoint((double)sx, (double)sy);
                             if (result != null)
                             {
                                 _arc.Point3 = result;
@@ -141,10 +141,10 @@ namespace Core2D.Editor.Tools
                     {
                         if (_arc != null)
                         {
-                            _arc.Point4.X = sx;
-                            _arc.Point4.Y = sy;
+                            _arc.Point4.X = (double)sx;
+                            _arc.Point4.Y = (double)sy;
 
-                            var result = editor.TryToGetConnectionPoint(sx, sy);
+                            var result = editor.TryToGetConnectionPoint((double)sx, (double)sy);
                             if (result != null)
                             {
                                 _arc.Point4 = result;
@@ -195,14 +195,14 @@ namespace Core2D.Editor.Tools
         public void Move(InputArgs args)
         {
             var editor = _serviceProvider.GetService<IProjectEditor>();
-            (double sx, double sy) = editor.TryToSnap(args);
+            (decimal sx, decimal sy) = editor.TryToSnap(args);
             switch (_currentState)
             {
                 case State.Point1:
                     {
                         if (editor.Project.Options.TryToConnect)
                         {
-                            editor.TryToHoverShape(sx, sy);
+                            editor.TryToHoverShape((double)sx, (double)sy);
                         }
                     }
                     break;
@@ -212,10 +212,10 @@ namespace Core2D.Editor.Tools
                         {
                             if (editor.Project.Options.TryToConnect)
                             {
-                                editor.TryToHoverShape(sx, sy);
+                                editor.TryToHoverShape((double)sx, (double)sy);
                             }
-                            _arc.Point2.X = sx;
-                            _arc.Point2.Y = sy;
+                            _arc.Point2.X = (double)sx;
+                            _arc.Point2.Y = (double)sy;
                             editor.Project.CurrentContainer.WorkingLayer.InvalidateLayer();
                             Move(_arc);
                         }
@@ -227,10 +227,10 @@ namespace Core2D.Editor.Tools
                         {
                             if (editor.Project.Options.TryToConnect)
                             {
-                                editor.TryToHoverShape(sx, sy);
+                                editor.TryToHoverShape((double)sx, (double)sy);
                             }
-                            _arc.Point3.X = sx;
-                            _arc.Point3.Y = sy;
+                            _arc.Point3.X = (double)sx;
+                            _arc.Point3.Y = (double)sy;
                             editor.Project.CurrentContainer.WorkingLayer.InvalidateLayer();
                             Move(_arc);
                         }
@@ -242,10 +242,10 @@ namespace Core2D.Editor.Tools
                         {
                             if (editor.Project.Options.TryToConnect)
                             {
-                                editor.TryToHoverShape(sx, sy);
+                                editor.TryToHoverShape((double)sx, (double)sy);
                             }
-                            _arc.Point4.X = sx;
-                            _arc.Point4.Y = sy;
+                            _arc.Point4.X = (double)sx;
+                            _arc.Point4.Y = (double)sy;
                             editor.Project.CurrentContainer.WorkingLayer.InvalidateLayer();
                             Move(_arc);
                         }

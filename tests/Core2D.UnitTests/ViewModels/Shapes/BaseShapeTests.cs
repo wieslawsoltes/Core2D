@@ -51,7 +51,7 @@ namespace Core2D.Shapes.UnitTests
                 throw new NotImplementedException();
             }
 
-            public override void Move(ISelection selection, double dx, double dy)
+            public override void Move(ISelection selection, decimal dx, decimal dy)
             {
                 throw new NotImplementedException();
             }

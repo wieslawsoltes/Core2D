@@ -71,27 +71,27 @@ namespace Core2D.Layout
                 var point = Points[i];
                 if (i == 0)
                 {
-                    Bounds.Left = point.X;
-                    Bounds.Top = point.Y;
-                    Bounds.Right = point.X;
-                    Bounds.Bottom = point.Y;
+                    Bounds.Left = (decimal)point.X;
+                    Bounds.Top = (decimal)point.Y;
+                    Bounds.Right = (decimal)point.X;
+                    Bounds.Bottom = (decimal)point.Y;
                 }
                 else
                 {
-                    Bounds.Left = Math.Min(Bounds.Left, point.X);
-                    Bounds.Top = Math.Min(Bounds.Top, point.Y);
-                    Bounds.Right = Math.Max(Bounds.Right, point.X);
-                    Bounds.Bottom = Math.Max(Bounds.Bottom, point.Y);
+                    Bounds.Left = Math.Min(Bounds.Left, (decimal)point.X);
+                    Bounds.Top = Math.Min(Bounds.Top, (decimal)point.Y);
+                    Bounds.Right = Math.Max(Bounds.Right, (decimal)point.X);
+                    Bounds.Bottom = Math.Max(Bounds.Bottom, (decimal)point.Y);
                 }
             }
 
-            Bounds.CenterX = (Bounds.Left + Bounds.Right) / 2.0;
-            Bounds.CenterY = (Bounds.Top + Bounds.Bottom) / 2.0;
+            Bounds.CenterX = (Bounds.Left + Bounds.Right) / 2m;
+            Bounds.CenterY = (Bounds.Top + Bounds.Bottom) / 2m;
             Bounds.Width = Math.Abs(Bounds.Right - Bounds.Left);
             Bounds.Height = Math.Abs(Bounds.Bottom - Bounds.Top);
         }
 
-        public void MoveByWithHistory(double dx, double dy, IHistory history)
+        public void MoveByWithHistory(decimal dx, decimal dy, IHistory history)
         {
             var previous = new { DeltaX = -dx, DeltaY = -dy, Shape };
             var next = new { DeltaX = dx, DeltaY = dy, Shape };

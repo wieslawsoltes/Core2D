@@ -3,13 +3,13 @@ namespace Core2D.Layout
 {
     internal struct Box
     {
-        public double Left;
-        public double Top;
-        public double Right;
-        public double Bottom;
-        public double CenterX;
-        public double CenterY;
-        public double Width;
-        public double Height;
+        public decimal Left;
+        public decimal Top;
+        public decimal Right;
+        public decimal Bottom;
+        public decimal CenterX;
+        public decimal CenterY;
+        public decimal Width;
+        public decimal Height;
     }
 }

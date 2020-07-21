@@ -54,7 +54,7 @@ namespace Core2D.Editor.Tools
         {
             var factory = _serviceProvider.GetService<IFactory>();
             var editor = _serviceProvider.GetService<IProjectEditor>();
-            (double sx, double sy) = editor.TryToSnap(args);
+            (decimal sx, decimal sy) = editor.TryToSnap(args);
             switch (_currentState)
             {
                 case State.TopLeft:
@@ -63,12 +63,12 @@ namespace Core2D.Editor.Tools
                             editor.Project.CurrentStyleLibrary.Selected :
                             editor.Factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
                         _text = factory.CreateTextShape(
-                            sx, sy,
+                            (double)sx, (double)sy,
                             (IShapeStyle)style.Copy(null),
                             "Text",
                             editor.Project.Options.DefaultIsStroked);
 
-                        var result = editor.TryToGetConnectionPoint(sx, sy);
+                        var result = editor.TryToGetConnectionPoint((double)sx, (double)sy);
                         if (result != null)
                         {
                             _text.TopLeft = result;
@@ -86,10 +86,10 @@ namespace Core2D.Editor.Tools
                     {
                         if (_text != null)
                         {
-                            _text.BottomRight.X = sx;
-                            _text.BottomRight.Y = sy;
+                            _text.BottomRight.X = (double)sx;
+                            _text.BottomRight.Y = (double)sy;
 
-                            var result = editor.TryToGetConnectionPoint(sx, sy);
+                            var result = editor.TryToGetConnectionPoint((double)sx, (double)sy);
                             if (result != null)
                             {
                                 _text.BottomRight = result;
@@ -133,13 +133,13 @@ namespace Core2D.Editor.Tools
         public void Move(InputArgs args)
         {
             var editor = _serviceProvider.GetService<IProjectEditor>();
-            (double sx, double sy) = editor.TryToSnap(args);
+            (decimal sx, decimal sy) = editor.TryToSnap(args);
             switch (_currentState)
             {
                 case State.TopLeft:
                     if (editor.Project.Options.TryToConnect)
                     {
-                        editor.TryToHoverShape(sx, sy);
+                        editor.TryToHoverShape((double)sx, (double)sy);
                     }
                     break;
                 case State.BottomRight:
@@ -148,10 +148,10 @@ namespace Core2D.Editor.Tools
                         {
                             if (editor.Project.Options.TryToConnect)
                             {
-                                editor.TryToHoverShape(sx, sy);
+                                editor.TryToHoverShape((double)sx, (double)sy);
                             }
-                            _text.BottomRight.X = sx;
-                            _text.BottomRight.Y = sy;
+                            _text.BottomRight.X = (double)sx;
+                            _text.BottomRight.Y = (double)sy;
                             editor.Project.CurrentContainer.WorkingLayer.InvalidateLayer();
                             Move(_text);
                         }
