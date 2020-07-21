@@ -76,7 +76,7 @@ namespace Core2D.Shapes
         public override void Move(ISelection selection, decimal dx, decimal dy)
         {
             X = (double)((decimal)X + dx);
-            Y = (double)((decimal)Y + dx);
+            Y = (double)((decimal)Y + dy);
         }
 
         /// <inheritdoc/>
