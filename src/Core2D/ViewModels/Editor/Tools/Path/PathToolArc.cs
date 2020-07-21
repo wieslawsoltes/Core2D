@@ -61,12 +61,12 @@ namespace Core2D.Editor.Tools.Path
             var factory = _serviceProvider.GetService<IFactory>();
             var editor = _serviceProvider.GetService<IProjectEditor>();
             var pathTool = _serviceProvider.GetService<ToolPath>();
-            (double sx, double sy) = editor.TryToSnap(args);
+            (decimal sx, decimal sy) = editor.TryToSnap(args);
             switch (_currentState)
             {
                 case State.Start:
                     {
-                        _arc.Start = editor.TryToGetConnectionPoint(sx, sy) ?? factory.CreatePointShape(sx, sy);
+                        _arc.Start = editor.TryToGetConnectionPoint((double)sx, (double)sy) ?? factory.CreatePointShape((double)sx, (double)sy);
                         if (!pathTool.IsInitialized)
                         {
                             pathTool.InitializeWorkingPath(_arc.Start);
@@ -76,7 +76,7 @@ namespace Core2D.Editor.Tools.Path
                             _arc.Start = pathTool.GetLastPathPoint();
                         }
 
-                        _arc.End = factory.CreatePointShape(sx, sy);
+                        _arc.End = factory.CreatePointShape((double)sx, (double)sy);
                         pathTool.GeometryContext.ArcTo(
                             _arc.End,
                             factory.CreatePathSize(
@@ -96,18 +96,18 @@ namespace Core2D.Editor.Tools.Path
                     break;
                 case State.End:
                     {
-                        _arc.End.X = sx;
-                        _arc.End.Y = sy;
+                        _arc.End.X = (double)sx;
+                        _arc.End.Y = (double)sy;
                         if (editor.Project.Options.TryToConnect)
                         {
-                            var end = editor.TryToGetConnectionPoint(sx, sy);
+                            var end = editor.TryToGetConnectionPoint((double)sx, (double)sy);
                             if (end != null)
                             {
                                 _arc.End = end;
                             }
                         }
                         _arc.Start = _arc.End;
-                        _arc.End = factory.CreatePointShape(sx, sy);
+                        _arc.End = factory.CreatePointShape((double)sx, (double)sy);
                         pathTool.GeometryContext.ArcTo(
                             _arc.End,
                             factory.CreatePathSize(
@@ -154,14 +154,14 @@ namespace Core2D.Editor.Tools.Path
         {
             var editor = _serviceProvider.GetService<IProjectEditor>();
             var pathTool = _serviceProvider.GetService<ToolPath>();
-            (double sx, double sy) = editor.TryToSnap(args);
+            (decimal sx, decimal sy) = editor.TryToSnap(args);
             switch (_currentState)
             {
                 case State.Start:
                     {
                         if (editor.Project.Options.TryToConnect)
                         {
-                            editor.TryToHoverShape(sx, sy);
+                            editor.TryToHoverShape((double)sx, (double)sy);
                         }
                     }
                     break;
@@ -169,10 +169,10 @@ namespace Core2D.Editor.Tools.Path
                     {
                         if (editor.Project.Options.TryToConnect)
                         {
-                            editor.TryToHoverShape(sx, sy);
+                            editor.TryToHoverShape((double)sx, (double)sy);
                         }
-                        _arc.End.X = sx;
-                        _arc.End.Y = sy;
+                        _arc.End.X = (double)sx;
+                        _arc.End.Y = (double)sy;
                         var figure = pathTool.Geometry.Figures.LastOrDefault();
                         var arc = figure.Segments.LastOrDefault() as ArcSegment;
                         arc.Point = _arc.End;

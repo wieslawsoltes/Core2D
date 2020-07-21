@@ -256,17 +256,17 @@ namespace Core2D.Editor
         }
 
         /// <inheritdoc/>
-        public (double sx, double sy) TryToSnap(InputArgs args)
+        public (decimal sx, decimal sy) TryToSnap(InputArgs args)
         {
             if (Project != null && Project.Options.SnapToGrid == true)
             {
                 return (
-                    PointUtil.Snap(args.X, Project.Options.SnapX),
-                    PointUtil.Snap(args.Y, Project.Options.SnapY));
+                    PointUtil.Snap((decimal)args.X, (decimal)Project.Options.SnapX),
+                    PointUtil.Snap((decimal)args.Y, (decimal)Project.Options.SnapY));
             }
             else
             {
-                return (args.X, args.Y);
+                return ((decimal)args.X, (decimal)args.Y);
             }
         }
 
@@ -1223,7 +1223,7 @@ namespace Core2D.Editor
             var sources = PageState?.SelectedShapes;
             if (sources != null)
             {
-                BoxLayout.Rotate(sources, value, Project?.History);
+                BoxLayout.Rotate(sources, (decimal)value, Project?.History);
                 OnUpdateDecorator();
             }
         }
@@ -1255,8 +1255,8 @@ namespace Core2D.Editor
         {
             MoveBy(
                 PageState?.SelectedShapes,
-                0.0,
-                Project.Options.SnapToGrid ? -Project.Options.SnapY : -1.0);
+                0m,
+                Project.Options.SnapToGrid ? (decimal)-Project.Options.SnapY : -1m);
         }
 
         /// <inheritdoc/>
@@ -1264,8 +1264,8 @@ namespace Core2D.Editor
         {
             MoveBy(
                 PageState?.SelectedShapes,
-                0.0,
-                Project.Options.SnapToGrid ? Project.Options.SnapY : 1.0);
+                0m,
+                Project.Options.SnapToGrid ? (decimal)Project.Options.SnapY : 1m);
         }
 
         /// <inheritdoc/>
@@ -1273,8 +1273,8 @@ namespace Core2D.Editor
         {
             MoveBy(
                 PageState?.SelectedShapes,
-                Project.Options.SnapToGrid ? -Project.Options.SnapX : -1.0,
-                0.0);
+                Project.Options.SnapToGrid ? (decimal)-Project.Options.SnapX : -1m,
+                0m);
         }
 
         /// <inheritdoc/>
@@ -1282,8 +1282,8 @@ namespace Core2D.Editor
         {
             MoveBy(
                 PageState?.SelectedShapes,
-                Project.Options.SnapToGrid ? Project.Options.SnapX : 1.0,
-                0.0);
+                Project.Options.SnapToGrid ? (decimal)Project.Options.SnapX : 1m,
+                0m);
         }
 
         /// <inheritdoc/>
@@ -3139,12 +3139,12 @@ namespace Core2D.Editor
                 Factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
             var style = (IShapeStyle)selected.Copy(null);
             var layer = Project?.CurrentContainer?.CurrentLayer;
-            double sx = Project.Options.SnapToGrid ? PointUtil.Snap(x, Project.Options.SnapX) : x;
-            double sy = Project.Options.SnapToGrid ? PointUtil.Snap(y, Project.Options.SnapY) : y;
+            decimal sx = Project.Options.SnapToGrid ? PointUtil.Snap((decimal)x, (decimal)Project.Options.SnapX) : (decimal)x;
+            decimal sy = Project.Options.SnapToGrid ? PointUtil.Snap((decimal)y, (decimal)Project.Options.SnapY) : (decimal)y;
 
-            var image = Factory.CreateImageShape(sx, sy, style, key);
-            image.BottomRight.X = sx + 320;
-            image.BottomRight.Y = sy + 180;
+            var image = Factory.CreateImageShape((double)sx, (double)sy, style, key);
+            image.BottomRight.X = (double)(sx + 320m);
+            image.BottomRight.Y = (double)(sy + 180m);
 
             Project.AddShape(layer, image);
         }
@@ -3174,8 +3174,8 @@ namespace Core2D.Editor
         /// <inheritdoc/>
         public void OnDropShapeAsClone<T>(T shape, double x, double y) where T : IBaseShape
         {
-            double sx = Project.Options.SnapToGrid ? PointUtil.Snap(x, Project.Options.SnapX) : x;
-            double sy = Project.Options.SnapToGrid ? PointUtil.Snap(y, Project.Options.SnapY) : y;
+            decimal sx = Project.Options.SnapToGrid ? PointUtil.Snap((decimal)x, (decimal)Project.Options.SnapX) : (decimal)x;
+            decimal sy = Project.Options.SnapToGrid ? PointUtil.Snap((decimal)y, (decimal)Project.Options.SnapY) : (decimal)y;
 
             try
             {
@@ -3260,16 +3260,16 @@ namespace Core2D.Editor
                 Factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
             var style = (IShapeStyle)selected.Copy(null);
             var layer = Project?.CurrentContainer?.CurrentLayer;
-            double sx = Project.Options.SnapToGrid ? PointUtil.Snap(x, Project.Options.SnapX) : x;
-            double sy = Project.Options.SnapToGrid ? PointUtil.Snap(y, Project.Options.SnapY) : y;
+            decimal sx = Project.Options.SnapToGrid ? PointUtil.Snap((decimal)x, (decimal)Project.Options.SnapX) : (decimal)x;
+            decimal sy = Project.Options.SnapToGrid ? PointUtil.Snap((decimal)y, (decimal)Project.Options.SnapY) : (decimal)y;
 
             var g = Factory.CreateGroupShape(ProjectEditorConfiguration.DefaulGroupName);
 
             g.Data.Record = record;
 
             var length = record.Values.Length;
-            double px = sx;
-            double py = sy;
+            double px = (double)sx;
+            double py = (double)sy;
             double width = 150;
             double height = 15;
 
@@ -3287,13 +3287,13 @@ namespace Core2D.Editor
                 }
             }
 
-            var rectangle = Factory.CreateRectangleShape(sx, sy, sx + width, sy + (length * height), style);
+            var rectangle = Factory.CreateRectangleShape((double)sx, (double)sy, (double)sx + width, (double)sy + (length * height), style);
             g.AddShape(rectangle);
 
-            var pt = Factory.CreatePointShape(sx + (width / 2), sy);
-            var pb = Factory.CreatePointShape(sx + (width / 2), sy + (length * height));
-            var pl = Factory.CreatePointShape(sx, sy + ((length * height) / 2));
-            var pr = Factory.CreatePointShape(sx + width, sy + ((length * height) / 2));
+            var pt = Factory.CreatePointShape((double)sx + (width / 2), (double)sy);
+            var pb = Factory.CreatePointShape((double)sx + (width / 2), (double)sy + (length * height));
+            var pl = Factory.CreatePointShape((double)sx, (double)sy + ((length * height) / 2));
+            var pr = Factory.CreatePointShape((double)sx + width, (double)sy + ((length * height) / 2));
 
             g.AddConnectorAsNone(pt);
             g.AddConnectorAsNone(pb);
@@ -4036,7 +4036,7 @@ namespace Core2D.Editor
         }
 
         /// <inheritdoc/>
-        public void MoveShapesBy(IEnumerable<IBaseShape> shapes, double dx, double dy)
+        public void MoveShapesBy(IEnumerable<IBaseShape> shapes, decimal dx, decimal dy)
         {
             foreach (var shape in shapes)
             {
@@ -4048,7 +4048,7 @@ namespace Core2D.Editor
             OnUpdateDecorator();
         }
 
-        private void MoveShapesByWithHistory(IEnumerable<IBaseShape> shapes, double dx, double dy)
+        private void MoveShapesByWithHistory(IEnumerable<IBaseShape> shapes, decimal dx, decimal dy)
         {
             MoveShapesBy(shapes, dx, dy);
             OnUpdateDecorator();
@@ -4059,7 +4059,7 @@ namespace Core2D.Editor
         }
 
         /// <inheritdoc/>
-        public void MoveBy(ISet<IBaseShape> shapes, double dx, double dy)
+        public void MoveBy(ISet<IBaseShape> shapes, decimal dx, decimal dy)
         {
             if (shapes != null)
             {

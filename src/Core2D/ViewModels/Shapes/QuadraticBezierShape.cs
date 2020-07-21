@@ -91,7 +91,7 @@ namespace Core2D.Shapes
         }
 
         /// <inheritdoc/>
-        public override void Move(ISelection selection, double dx, double dy)
+        public override void Move(ISelection selection, decimal dx, decimal dy)
         {
             if (!Point1.State.Flags.HasFlag(ShapeStateFlags.Connector))
             {

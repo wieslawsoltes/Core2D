@@ -20,10 +20,10 @@ namespace Core2D.Editor.Tools
         private ToolSettingsSelection _settings;
         private State _currentState = State.None;
         private IRectangleShape _rectangleShape;
-        private double _startX;
-        private double _startY;
-        private double _historyX;
-        private double _historyY;
+        private decimal _startX;
+        private decimal _startY;
+        private decimal _historyX;
+        private decimal _historyY;
         private IEnumerable<IPointShape> _pointsCache;
         private IEnumerable<IBaseShape> _shapesCache;
 
@@ -139,9 +139,9 @@ namespace Core2D.Editor.Tools
         private void MoveSelectionCacheTo(InputArgs args)
         {
             var editor = _serviceProvider.GetService<IProjectEditor>();
-            (double sx, double sy) = editor.TryToSnap(args);
-            double dx = sx - _startX;
-            double dy = sy - _startY;
+            (decimal sx, decimal sy) = editor.TryToSnap(args);
+            decimal dx = sx - _startX;
+            decimal dy = sy - _startY;
 
             _startX = sx;
             _startY = sy;
@@ -187,7 +187,7 @@ namespace Core2D.Editor.Tools
             var factory = _serviceProvider.GetService<IFactory>();
             var editor = _serviceProvider.GetService<IProjectEditor>();
             (double x, double y) = args;
-            (double sx, double sy) = editor.TryToSnap(args);
+            (decimal sx, decimal sy) = editor.TryToSnap(args);
             switch (_currentState)
             {
                 case State.None:
@@ -362,11 +362,11 @@ namespace Core2D.Editor.Tools
 
                         if (IsSelectionAvailable() && !isControl)
                         {
-                            (double sx, double sy) = editor.TryToSnap(args);
+                            (decimal sx, decimal sy) = editor.TryToSnap(args);
                             if (_historyX != sx || _historyY != sy)
                             {
-                                double dx = sx - _historyX;
-                                double dy = sy - _historyY;
+                                decimal dx = sx - _historyX;
+                                decimal dy = sy - _historyY;
 
                                 var previous = new
                                 {

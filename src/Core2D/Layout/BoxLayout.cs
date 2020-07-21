@@ -23,12 +23,12 @@ namespace Core2D.Layout
                 case StackMode.Horizontal:
                     {
                         boxes.Sort(ShapeBox.CompareLeft);
-                        double offset = boxes[0].Bounds.Left + boxes[0].Bounds.Width;
+                        decimal offset = boxes[0].Bounds.Left + boxes[0].Bounds.Width;
                         for (int i = 1; i <= boxes.Count - 1; i++)
                         {
                             var box = boxes[i];
-                            double dx = offset - box.Bounds.Left;
-                            double dy = 0.0;
+                            decimal dx = offset - box.Bounds.Left;
+                            decimal dy = 0m;
                             box.MoveByWithHistory(dx, dy, history);
                             offset += box.Bounds.Width;
                         }
@@ -37,12 +37,12 @@ namespace Core2D.Layout
                 case StackMode.Vertical:
                     {
                         boxes.Sort(ShapeBox.CompareTop);
-                        double offset = boxes[0].Bounds.Top + boxes[0].Bounds.Height;
+                        decimal offset = boxes[0].Bounds.Top + boxes[0].Bounds.Height;
                         for (int i = 1; i <= boxes.Count - 1; i++)
                         {
                             var box = boxes[i];
-                            double dx = 0.0;
-                            double dy = offset - box.Bounds.Top;
+                            decimal dx = 0m;
+                            decimal dy = offset - box.Bounds.Top;
                             box.MoveByWithHistory(dx, dy, history);
                             offset += box.Bounds.Height;
                         }
@@ -61,8 +61,8 @@ namespace Core2D.Layout
 
             var boxes = groupBox.Boxes.ToList();
 
-            double sw = 0.0;
-            double sh = 0.0;
+            decimal sw = 0m;
+            decimal sh = 0m;
 
             foreach (var box in boxes)
             {
@@ -70,8 +70,8 @@ namespace Core2D.Layout
                 sh += box.Bounds.Height;
             }
 
-            double gaph = (groupBox.Bounds.Width - sw) / (groupBox.Boxes.Length - 1);
-            double gapv = (groupBox.Bounds.Height - sh) / (groupBox.Boxes.Length - 1);
+            decimal gaph = (groupBox.Bounds.Width - sw) / (groupBox.Boxes.Length - 1);
+            decimal gapv = (groupBox.Bounds.Height - sh) / (groupBox.Boxes.Length - 1);
 
             switch (mode)
             {
@@ -79,12 +79,12 @@ namespace Core2D.Layout
                     {
 
                         boxes.Sort(ShapeBox.CompareLeft);
-                        double offset = boxes[0].Bounds.Left + boxes[0].Bounds.Width + gaph;
+                        decimal offset = boxes[0].Bounds.Left + boxes[0].Bounds.Width + gaph;
                         for (int i = 1; i <= boxes.Count - 2; i++)
                         {
                             var box = boxes[i];
-                            double dx = offset - box.Bounds.Left;
-                            double dy = 0.0;
+                            decimal dx = offset - box.Bounds.Left;
+                            decimal dy = 0m;
                             box.MoveByWithHistory(dx, dy, history);
                             offset += box.Bounds.Width + gaph;
                         }
@@ -93,12 +93,12 @@ namespace Core2D.Layout
                 case DistributeMode.Vertical:
                     {
                         boxes.Sort(ShapeBox.CompareTop);
-                        double offset = boxes[0].Bounds.Top + boxes[0].Bounds.Height + gapv;
+                        decimal offset = boxes[0].Bounds.Top + boxes[0].Bounds.Height + gapv;
                         for (int i = 1; i <= boxes.Count - 2; i++)
                         {
                             var box = boxes[i];
-                            double dx = 0.0;
-                            double dy = offset - box.Bounds.Top;
+                            decimal dx = 0m;
+                            decimal dy = offset - box.Bounds.Top;
                             box.MoveByWithHistory(dx, dy, history);
                             offset += box.Bounds.Height + gapv;
                         }
@@ -117,8 +117,8 @@ namespace Core2D.Layout
 
             foreach (var box in groupBox.Boxes)
             {
-                double dx = 0.0;
-                double dy = 0.0;
+                decimal dx = 0m;
+                decimal dy = 0m;
 
                 switch (mode)
                 {
@@ -126,7 +126,7 @@ namespace Core2D.Layout
                         dx = groupBox.Bounds.Left - box.Bounds.Left;
                         break;
                     case AlignMode.Centered:
-                        dx = groupBox.Bounds.CenterX - ((box.Bounds.Left + box.Bounds.Right) / 2.0);
+                        dx = groupBox.Bounds.CenterX - ((box.Bounds.Left + box.Bounds.Right) / 2m);
                         break;
                     case AlignMode.Right:
                         dx = groupBox.Bounds.Right - box.Bounds.Right;
@@ -135,14 +135,14 @@ namespace Core2D.Layout
                         dy = groupBox.Bounds.Top - box.Bounds.Top;
                         break;
                     case AlignMode.Center:
-                        dy = groupBox.Bounds.CenterY - ((box.Bounds.Top + box.Bounds.Bottom) / 2.0);
+                        dy = groupBox.Bounds.CenterY - ((box.Bounds.Top + box.Bounds.Bottom) / 2m);
                         break;
                     case AlignMode.Bottom:
                         dy = groupBox.Bounds.Bottom - box.Bounds.Bottom;
                         break;
                 }
 
-                if (dx != 0.0 || dy != 0.0)
+                if (dx != 0m || dy != 0m)
                 {
                     box.MoveByWithHistory(dx, dy, history);
                 }
@@ -163,40 +163,40 @@ namespace Core2D.Layout
             {
                 case FlipMode.Horizontal:
                     {
-                        var previous = new List<(IPointShape point, double x)>();
-                        var next = new List<(IPointShape point, double x)>();
+                        var previous = new List<(IPointShape point, decimal x)>();
+                        var next = new List<(IPointShape point, decimal x)>();
 
                         foreach (var point in boxes.SelectMany(box => box.Points).Distinct())
                         {
-                            double x = groupBox.Bounds.Left + (groupBox.Bounds.Width + groupBox.Bounds.Left) - point.X;
-                            previous.Add((point, point.X));
+                            decimal x = groupBox.Bounds.Left + (groupBox.Bounds.Width + groupBox.Bounds.Left) - (decimal)point.X;
+                            previous.Add((point, (decimal)point.X));
                             next.Add((point, x));
-                            point.X = x;
+                            point.X = (double)x;
                         }
 
-                        history.Snapshot(previous, next, (p) => previous.ForEach(p => p.point.X = p.x));
+                        history.Snapshot(previous, next, (p) => previous.ForEach(p => p.point.X = (double)p.x));
                     }
                     break;
                 case FlipMode.Vertical:
                     {
-                        var previous = new List<(IPointShape point, double y)>();
-                        var next = new List<(IPointShape point, double y)>();
+                        var previous = new List<(IPointShape point, decimal y)>();
+                        var next = new List<(IPointShape point, decimal y)>();
 
                         foreach (var point in boxes.SelectMany(box => box.Points).Distinct())
                         {
-                            double y = groupBox.Bounds.Top + (groupBox.Bounds.Height + groupBox.Bounds.Top) - point.Y;
-                            previous.Add((point, point.Y));
+                            decimal y = groupBox.Bounds.Top + (groupBox.Bounds.Height + groupBox.Bounds.Top) - (decimal)point.Y;
+                            previous.Add((point, (decimal)point.Y));
                             next.Add((point, y));
-                            point.Y = y;
+                            point.Y = (double)y;
                         }
 
-                        history.Snapshot(previous, next, (p) => previous.ForEach(p => p.point.Y = p.y));
+                        history.Snapshot(previous, next, (p) => previous.ForEach(p => p.point.Y = (double)p.y));
                     }
                     break;
             }
         }
 
-        public static void Rotate(IEnumerable<IBaseShape> shapes, double angle, IHistory history)
+        public static void Rotate(IEnumerable<IBaseShape> shapes, decimal angle, IHistory history)
         {
             var groupBox = new GroupBox(shapes.ToList());
             if (groupBox.Boxes.Length <= 0)
@@ -206,26 +206,26 @@ namespace Core2D.Layout
 
             var boxes = groupBox.Boxes.ToList();
 
-            var previous = new List<(IPointShape point, double x, double y)>();
-            var next = new List<(IPointShape point, double x, double y)>();
+            var previous = new List<(IPointShape point, decimal x, decimal y)>();
+            var next = new List<(IPointShape point, decimal x, decimal y)>();
 
-            var radians = angle * Math.PI / 180.0;
+            var radians = angle * (decimal)Math.PI / 180m;
             var centerX = groupBox.Bounds.CenterX;
             var centerY = groupBox.Bounds.CenterY;
 
             foreach (var point in boxes.SelectMany(box => box.Points).Distinct())
             {
                 PointUtil.Rotate(point, radians, centerX, centerY, out var x, out var y);
-                previous.Add((point, point.X, point.Y));
+                previous.Add((point, (decimal)point.X, (decimal)point.Y));
                 next.Add((point, x, y));
-                point.X = x;
-                point.Y = y;
+                point.X = (double)x;
+                point.Y = (double)y;
             }
 
             history.Snapshot(previous, next, (p) => previous.ForEach(p =>
             {
-                p.point.X = p.x;
-                p.point.Y = p.y;
+                p.point.X = (double)p.x;
+                p.point.Y = (double)p.y;
             }));
         }
     }

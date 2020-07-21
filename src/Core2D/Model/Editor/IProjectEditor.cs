@@ -199,7 +199,7 @@ namespace Core2D.Editor
         /// </summary>
         /// <param name="args">The input arguments.</param>
         /// <returns>The snapped value if enabled otherwise original position.</returns>
-        (double sx, double sy) TryToSnap(InputArgs args);
+        (decimal sx, decimal sy) TryToSnap(InputArgs args);
 
         /// <summary>
         /// Get object item name.
@@ -1259,7 +1259,7 @@ namespace Core2D.Editor
         /// <param name="shapes">The shapes collection.</param>
         /// <param name="dx">The X coordinate offset.</param>
         /// <param name="dy">The Y coordinate offset.</param>
-        void MoveShapesBy(IEnumerable<IBaseShape> shapes, double dx, double dy);
+        void MoveShapesBy(IEnumerable<IBaseShape> shapes, decimal dx, decimal dy);
 
         /// <summary>
         /// Move shape(s) by specified offset.
@@ -1267,7 +1267,7 @@ namespace Core2D.Editor
         /// <param name="shapes">The selected shapes.</param>
         /// <param name="dx">The X coordinate offset.</param>
         /// <param name="dy">The Y coordinate offset.</param>
-        void MoveBy(ISet<IBaseShape> shapes, double dx, double dy);
+        void MoveBy(ISet<IBaseShape> shapes, decimal dx, decimal dy);
 
         /// <summary>
         /// Move items in the library.

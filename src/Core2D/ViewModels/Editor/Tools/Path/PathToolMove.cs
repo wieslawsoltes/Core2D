@@ -50,7 +50,7 @@ namespace Core2D.Editor.Tools.Path
         {
             var factory = _serviceProvider.GetService<IFactory>();
             var editor = _serviceProvider.GetService<IProjectEditor>();
-            (double sx, double sy) = editor.TryToSnap(args);
+            (decimal sx, decimal sy) = editor.TryToSnap(args);
             switch (_currentState)
             {
                 case State.Move:
@@ -58,7 +58,7 @@ namespace Core2D.Editor.Tools.Path
                         var pathTool = _serviceProvider.GetService<ToolPath>();
                         editor.CurrentPathTool = pathTool.PreviousPathTool;
 
-                        var start = editor.TryToGetConnectionPoint(sx, sy) ?? factory.CreatePointShape(sx, sy);
+                        var start = editor.TryToGetConnectionPoint((double)sx, (double)sy) ?? factory.CreatePointShape((double)sx, (double)sy);
                         pathTool.GeometryContext.BeginFigure(
                                 start,
                                 editor.Project.Options.DefaultIsFilled,
@@ -89,14 +89,14 @@ namespace Core2D.Editor.Tools.Path
         public void Move(InputArgs args)
         {
             var editor = _serviceProvider.GetService<IProjectEditor>();
-            (double sx, double sy) = editor.TryToSnap(args);
+            (decimal sx, decimal sy) = editor.TryToSnap(args);
             switch (_currentState)
             {
                 case State.Move:
                     {
                         if (editor.Project.Options.TryToConnect)
                         {
-                            editor.TryToHoverShape(sx, sy);
+                            editor.TryToHoverShape((double)sx, (double)sy);
                         }
                     }
                     break;

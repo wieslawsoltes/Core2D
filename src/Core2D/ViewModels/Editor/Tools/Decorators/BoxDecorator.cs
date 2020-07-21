@@ -41,9 +41,9 @@ namespace Core2D.Editor.Tools.Decorators
         private ILayerContainer _layer;
         private IList<IBaseShape> _shapes;
         private readonly IFactory _factory;
-        private readonly double _sizeLarge;
-        private readonly double _sizeSmall;
-        private readonly double _rotateDistance;
+        private readonly decimal _sizeLarge;
+        private readonly decimal _sizeSmall;
+        private readonly decimal _rotateDistance;
         private GroupBox _groupBox;
         private readonly IShapeStyle _handleStyle;
         private readonly IShapeStyle _boundsStyle;
@@ -64,11 +64,11 @@ namespace Core2D.Editor.Tools.Decorators
         private IBaseShape _currentHandle = null;
         private List<IPointShape> _points;
         private Mode _mode = Mode.None;
-        private double _startX;
-        private double _startY;
-        private double _historyX;
-        private double _historyY;
-        private double _rotateAngle = 270.0;
+        private decimal _startX;
+        private decimal _startY;
+        private decimal _historyX;
+        private decimal _historyY;
+        private decimal _rotateAngle = 270m;
         private bool _previousDrawPoints = true;
 
         /// <inheritdoc/>
@@ -117,9 +117,9 @@ namespace Core2D.Editor.Tools.Decorators
         {
             _serviceProvider = serviceProvider;
             _factory = _serviceProvider.GetService<IFactory>();
-            _sizeLarge = 4;
-            _sizeSmall = 4;
-            _rotateDistance = -16.875;
+            _sizeLarge = 4m;
+            _sizeSmall = 4m;
+            _rotateDistance = -16.875m;
             _handleStyle = _factory.CreateShapeStyle("Handle", 255, 0, 191, 255, 255, 255, 255, 255, 2.0);
             _boundsStyle = _factory.CreateShapeStyle("Bounds", 255, 0, 191, 255, 255, 255, 255, 255, 1.0);
             _selectedHandleStyle = _factory.CreateShapeStyle("SelectedHandle", 255, 0, 191, 255, 255, 0, 191, 255, 2.0);
@@ -233,62 +233,62 @@ namespace Core2D.Editor.Tools.Decorators
                 _groupBox.Update();
             }
 
-            _boundsHandle.TopLeft.X = _groupBox.Bounds.Left;
-            _boundsHandle.TopLeft.Y = _groupBox.Bounds.Top;
-            _boundsHandle.BottomRight.X = _groupBox.Bounds.Right;
-            _boundsHandle.BottomRight.Y = _groupBox.Bounds.Bottom;
+            _boundsHandle.TopLeft.X = (double)_groupBox.Bounds.Left;
+            _boundsHandle.TopLeft.Y = (double)_groupBox.Bounds.Top;
+            _boundsHandle.BottomRight.X = (double)_groupBox.Bounds.Right;
+            _boundsHandle.BottomRight.Y = (double)_groupBox.Bounds.Bottom;
 
-            _rotateLine.Start.X = _groupBox.Bounds.CenterX;
-            _rotateLine.Start.Y = _groupBox.Bounds.Top;
-            _rotateLine.End.X = _groupBox.Bounds.CenterX;
-            _rotateLine.End.Y = _groupBox.Bounds.Top + _rotateDistance;
+            _rotateLine.Start.X = (double)_groupBox.Bounds.CenterX;
+            _rotateLine.Start.Y = (double)_groupBox.Bounds.Top;
+            _rotateLine.End.X = (double)_groupBox.Bounds.CenterX;
+            _rotateLine.End.Y = (double)(_groupBox.Bounds.Top + _rotateDistance);
 
-            _rotateHandle.TopLeft.X = _groupBox.Bounds.CenterX - _sizeLarge;
-            _rotateHandle.TopLeft.Y = _groupBox.Bounds.Top + _rotateDistance - _sizeLarge;
-            _rotateHandle.BottomRight.X = _groupBox.Bounds.CenterX + _sizeLarge;
-            _rotateHandle.BottomRight.Y = _groupBox.Bounds.Top + _rotateDistance + _sizeLarge;
+            _rotateHandle.TopLeft.X = (double)(_groupBox.Bounds.CenterX - _sizeLarge);
+            _rotateHandle.TopLeft.Y = (double)(_groupBox.Bounds.Top + _rotateDistance - _sizeLarge);
+            _rotateHandle.BottomRight.X = (double)(_groupBox.Bounds.CenterX + _sizeLarge);
+            _rotateHandle.BottomRight.Y = (double)(_groupBox.Bounds.Top + _rotateDistance + _sizeLarge);
 
-            _topLeftHandle.TopLeft.X = _groupBox.Bounds.Left - _sizeLarge;
-            _topLeftHandle.TopLeft.Y = _groupBox.Bounds.Top - _sizeLarge;
-            _topLeftHandle.BottomRight.X = _groupBox.Bounds.Left + _sizeLarge;
-            _topLeftHandle.BottomRight.Y = _groupBox.Bounds.Top + _sizeLarge;
+            _topLeftHandle.TopLeft.X = (double)(_groupBox.Bounds.Left - _sizeLarge);
+            _topLeftHandle.TopLeft.Y = (double)(_groupBox.Bounds.Top - _sizeLarge);
+            _topLeftHandle.BottomRight.X = (double)(_groupBox.Bounds.Left + _sizeLarge);
+            _topLeftHandle.BottomRight.Y = (double)(_groupBox.Bounds.Top + _sizeLarge);
 
-            _topRightHandle.TopLeft.X = _groupBox.Bounds.Right - _sizeLarge;
-            _topRightHandle.TopLeft.Y = _groupBox.Bounds.Top - _sizeLarge;
-            _topRightHandle.BottomRight.X = _groupBox.Bounds.Right + _sizeLarge;
-            _topRightHandle.BottomRight.Y = _groupBox.Bounds.Top + _sizeLarge;
+            _topRightHandle.TopLeft.X = (double)(_groupBox.Bounds.Right - _sizeLarge);
+            _topRightHandle.TopLeft.Y = (double)(_groupBox.Bounds.Top - _sizeLarge);
+            _topRightHandle.BottomRight.X = (double)(_groupBox.Bounds.Right + _sizeLarge);
+            _topRightHandle.BottomRight.Y = (double)(_groupBox.Bounds.Top + _sizeLarge);
 
-            _bottomLeftHandle.TopLeft.X = _groupBox.Bounds.Left - _sizeLarge;
-            _bottomLeftHandle.TopLeft.Y = _groupBox.Bounds.Bottom - _sizeLarge;
-            _bottomLeftHandle.BottomRight.X = _groupBox.Bounds.Left + _sizeLarge;
-            _bottomLeftHandle.BottomRight.Y = _groupBox.Bounds.Bottom + _sizeLarge;
+            _bottomLeftHandle.TopLeft.X = (double)(_groupBox.Bounds.Left - _sizeLarge);
+            _bottomLeftHandle.TopLeft.Y = (double)(_groupBox.Bounds.Bottom - _sizeLarge);
+            _bottomLeftHandle.BottomRight.X = (double)(_groupBox.Bounds.Left + _sizeLarge);
+            _bottomLeftHandle.BottomRight.Y = (double)(_groupBox.Bounds.Bottom + _sizeLarge);
 
-            _bottomRightHandle.TopLeft.X = _groupBox.Bounds.Right - _sizeLarge;
-            _bottomRightHandle.TopLeft.Y = _groupBox.Bounds.Bottom - _sizeLarge;
-            _bottomRightHandle.BottomRight.X = _groupBox.Bounds.Right + _sizeLarge;
-            _bottomRightHandle.BottomRight.Y = _groupBox.Bounds.Bottom + _sizeLarge;
+            _bottomRightHandle.TopLeft.X = (double)(_groupBox.Bounds.Right - _sizeLarge);
+            _bottomRightHandle.TopLeft.Y = (double)(_groupBox.Bounds.Bottom - _sizeLarge);
+            _bottomRightHandle.BottomRight.X = (double)(_groupBox.Bounds.Right + _sizeLarge);
+            _bottomRightHandle.BottomRight.Y = (double)(_groupBox.Bounds.Bottom + _sizeLarge);
 
-            _topHandle.TopLeft.X = _groupBox.Bounds.CenterX - _sizeSmall;
-            _topHandle.TopLeft.Y = _groupBox.Bounds.Top - _sizeSmall;
-            _topHandle.BottomRight.X = _groupBox.Bounds.CenterX + _sizeSmall;
-            _topHandle.BottomRight.Y = _groupBox.Bounds.Top + _sizeSmall;
+            _topHandle.TopLeft.X = (double)(_groupBox.Bounds.CenterX - _sizeSmall);
+            _topHandle.TopLeft.Y = (double)(_groupBox.Bounds.Top - _sizeSmall);
+            _topHandle.BottomRight.X = (double)(_groupBox.Bounds.CenterX + _sizeSmall);
+            _topHandle.BottomRight.Y = (double)(_groupBox.Bounds.Top + _sizeSmall);
 
-            _bottomHandle.TopLeft.X = _groupBox.Bounds.CenterX - _sizeSmall;
-            _bottomHandle.TopLeft.Y = _groupBox.Bounds.Bottom - _sizeSmall;
-            _bottomHandle.BottomRight.X = _groupBox.Bounds.CenterX + _sizeSmall;
-            _bottomHandle.BottomRight.Y = _groupBox.Bounds.Bottom + _sizeSmall;
+            _bottomHandle.TopLeft.X = (double)(_groupBox.Bounds.CenterX - _sizeSmall);
+            _bottomHandle.TopLeft.Y = (double)(_groupBox.Bounds.Bottom - _sizeSmall);
+            _bottomHandle.BottomRight.X = (double)(_groupBox.Bounds.CenterX + _sizeSmall);
+            _bottomHandle.BottomRight.Y = (double)(_groupBox.Bounds.Bottom + _sizeSmall);
 
-            _leftHandle.TopLeft.X = _groupBox.Bounds.Left - _sizeSmall;
-            _leftHandle.TopLeft.Y = _groupBox.Bounds.CenterY - _sizeSmall;
-            _leftHandle.BottomRight.X = _groupBox.Bounds.Left + _sizeSmall;
-            _leftHandle.BottomRight.Y = _groupBox.Bounds.CenterY + _sizeSmall;
+            _leftHandle.TopLeft.X = (double)(_groupBox.Bounds.Left - _sizeSmall);
+            _leftHandle.TopLeft.Y = (double)(_groupBox.Bounds.CenterY - _sizeSmall);
+            _leftHandle.BottomRight.X = (double)(_groupBox.Bounds.Left + _sizeSmall);
+            _leftHandle.BottomRight.Y = (double)(_groupBox.Bounds.CenterY + _sizeSmall);
 
-            _rightHandle.TopLeft.X = _groupBox.Bounds.Right - _sizeSmall;
-            _rightHandle.TopLeft.Y = _groupBox.Bounds.CenterY - _sizeSmall;
-            _rightHandle.BottomRight.X = _groupBox.Bounds.Right + _sizeSmall;
-            _rightHandle.BottomRight.Y = _groupBox.Bounds.CenterY + _sizeSmall;
+            _rightHandle.TopLeft.X = (double)(_groupBox.Bounds.Right - _sizeSmall);
+            _rightHandle.TopLeft.Y = (double)(_groupBox.Bounds.CenterY - _sizeSmall);
+            _rightHandle.BottomRight.X =(double)( _groupBox.Bounds.Right + _sizeSmall);
+            _rightHandle.BottomRight.Y =(double)( _groupBox.Bounds.CenterY + _sizeSmall);
 
-            if (_groupBox.Bounds.Height <= 0 || _groupBox.Bounds.Width <= 0)
+            if (_groupBox.Bounds.Height <= 0m || _groupBox.Bounds.Width <= 0m)
             {
                 _leftHandle.State.Flags &= ~ShapeStateFlags.Visible;
                 _rightHandle.State.Flags &= ~ShapeStateFlags.Visible;
@@ -333,7 +333,7 @@ namespace Core2D.Editor.Tools.Decorators
                 _currentHandle.Style = _currentHandle == _boundsHandle ? _boundsStyle : _handleStyle;
                 _currentHandle = null;
                 _points = null;
-                _rotateAngle = 0.0;
+                _rotateAngle = 0m;
             }
             _isVisible = true;
 
@@ -374,7 +374,7 @@ namespace Core2D.Editor.Tools.Decorators
                 _currentHandle.Style = _currentHandle == _boundsHandle ? _boundsStyle : _handleStyle;
                 _currentHandle = null;
                 _points = null;
-                _rotateAngle = 0.0;
+                _rotateAngle = 0m;
             }
             _isVisible = false;
 
@@ -404,7 +404,7 @@ namespace Core2D.Editor.Tools.Decorators
 
             var editor = _serviceProvider.GetService<IProjectEditor>();
             (double x, double y) = args;
-            (double sx, double sy) = editor.TryToSnap(args);
+            (decimal sx, decimal sy) = editor.TryToSnap(args);
 
             _mode = Mode.None;
             if (_currentHandle != null)
@@ -412,7 +412,7 @@ namespace Core2D.Editor.Tools.Decorators
                 _currentHandle.Style = _currentHandle == _boundsHandle ? _boundsStyle : _handleStyle;
                 _currentHandle = null;
                 _points = null;
-                _rotateAngle = 0.0;
+                _rotateAngle = 0m;
                 _layer.InvalidateLayer();
             }
 
@@ -471,7 +471,7 @@ namespace Core2D.Editor.Tools.Decorators
                     _historyX = _startX;
                     _historyY = _startY;
                     _points = null;
-                    _rotateAngle = 0.0;
+                    _rotateAngle = 0m;
                     _layer.InvalidateLayer();
                     return true;
                 }
@@ -496,9 +496,9 @@ namespace Core2D.Editor.Tools.Decorators
 
             bool isProportionalResize = args.Modifier.HasFlag(ModifierFlags.Shift);
 
-            (double sx, double sy) = editor.TryToSnap(args);
-            double dx = sx - _startX;
-            double dy = sy - _startY;
+            (decimal sx, decimal sy) = editor.TryToSnap(args);
+            decimal dx = sx - _startX;
+            decimal dy = sy - _startY;
             _startX = sx;
             _startY = sy;
 
@@ -535,8 +535,8 @@ namespace Core2D.Editor.Tools.Decorators
 
                             dx = (width * ratioHeight) - width;
 
-                            _groupBox.ScaleLeft(dx / 2.0, _points);
-                            _groupBox.ScaleRight(-dx / 2.0, _points);
+                            _groupBox.ScaleLeft(dx / 2m, _points);
+                            _groupBox.ScaleRight(-dx / 2m, _points);
 
                             _groupBox.ScaleTop(dy, _points);
                         }
@@ -556,8 +556,8 @@ namespace Core2D.Editor.Tools.Decorators
 
                             dx = (width * ratioHeight) - width;
 
-                            _groupBox.ScaleLeft(-dx / 2.0, _points);
-                            _groupBox.ScaleRight(dx / 2.0, _points);
+                            _groupBox.ScaleLeft(-dx / 2m, _points);
+                            _groupBox.ScaleRight(dx / 2m, _points);
 
                             _groupBox.ScaleBottom(dy, _points);
                         }
@@ -577,8 +577,8 @@ namespace Core2D.Editor.Tools.Decorators
 
                             dy = (height * ratioWidth) - height;
 
-                            _groupBox.ScaleTop(dy / 2.0, _points);
-                            _groupBox.ScaleBottom(-dy / 2.0, _points);
+                            _groupBox.ScaleTop(dy / 2m, _points);
+                            _groupBox.ScaleBottom(-dy / 2m, _points);
 
                             _groupBox.ScaleLeft(dx, _points);
                         }
@@ -598,8 +598,8 @@ namespace Core2D.Editor.Tools.Decorators
 
                             dy = (height * ratioWidth) - height;
 
-                            _groupBox.ScaleTop(-dy / 2.0, _points);
-                            _groupBox.ScaleBottom(dy / 2.0, _points);
+                            _groupBox.ScaleTop(-dy / 2m, _points);
+                            _groupBox.ScaleBottom(dy / 2m, _points);
 
                             _groupBox.ScaleRight(dx, _points);
                         }

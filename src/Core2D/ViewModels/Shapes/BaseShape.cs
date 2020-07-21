@@ -108,7 +108,7 @@ namespace Core2D.Shapes
         }
 
         /// <inheritdoc/>
-        public abstract void Move(ISelection selection, double dx, double dy);
+        public abstract void Move(ISelection selection, decimal dx, decimal dy);
 
         /// <inheritdoc/>
         public virtual void Select(ISelection selection)
