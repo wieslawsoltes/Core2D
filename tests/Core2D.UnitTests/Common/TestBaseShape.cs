@@ -80,7 +80,7 @@ namespace Core2D.Common.UnitTests
             throw new NotImplementedException();
         }
 
-        public void Move(ISelection selection, double dx, double dy)
+        public void Move(ISelection selection, decimal dx, decimal dy)
         {
             throw new NotImplementedException();
         }
