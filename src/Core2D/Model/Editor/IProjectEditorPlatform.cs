@@ -157,5 +157,15 @@ namespace Core2D.Editor
         /// Auto-fit view to the available extents.
         /// </summary>
         void OnZoomAutoFit();
+
+        /// <summary>
+        /// Zoom in.
+        /// </summary>
+        void OnZoomIn();
+
+        /// <summary>
+        /// Zoom out.
+        /// </summary>
+        void OnZoomOut();
     }
 }

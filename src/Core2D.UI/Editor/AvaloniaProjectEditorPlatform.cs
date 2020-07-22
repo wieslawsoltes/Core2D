@@ -727,5 +727,17 @@ namespace Core2D.UI.Editor
         {
             _serviceProvider.GetService<IProjectEditor>().CanvasPlatform?.AutoFitZoom?.Invoke();
         }
+
+        /// <inheritdoc/>
+        public void OnZoomIn()
+        {
+            _serviceProvider.GetService<IProjectEditor>().CanvasPlatform?.InZoom?.Invoke();
+        }
+
+        /// <inheritdoc/>
+        public void OnZoomOut()
+        {
+            _serviceProvider.GetService<IProjectEditor>().CanvasPlatform?.OutZoom?.Invoke();
+        }
     }
 }

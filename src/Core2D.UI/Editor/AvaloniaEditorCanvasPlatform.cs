@@ -17,6 +17,8 @@ namespace Core2D.UI.Editor
         private Action _uniformZoom;
         private Action _uniformToFillZoom;
         private Action _autoFitZoom;
+        private Action _inZoom;
+        private Action _outZoom;
         private object _zoom;
 
         /// <inheritdoc/>
@@ -59,6 +61,20 @@ namespace Core2D.UI.Editor
         {
             get => _autoFitZoom;
             set => Update(ref _autoFitZoom, value);
+        }
+
+        /// <inheritdoc/>
+        public Action InZoom
+        {
+            get => _inZoom;
+            set => Update(ref _inZoom, value);
+        }
+
+        /// <inheritdoc/>
+        public Action OutZoom
+        {
+            get => _outZoom;
+            set => Update(ref _outZoom, value);
         }
 
         /// <inheritdoc/>

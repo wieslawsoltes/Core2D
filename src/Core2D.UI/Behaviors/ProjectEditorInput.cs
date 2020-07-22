@@ -69,6 +69,8 @@ namespace Core2D.UI.Behaviors
                 canvasPlatform.UniformZoom = () => zoomBorder?.Uniform();
                 canvasPlatform.UniformToFillZoom = () => zoomBorder?.UniformToFill();
                 canvasPlatform.AutoFitZoom = () => zoomBorder?.AutoFit();
+                canvasPlatform.InZoom = () => zoomBorder?.ZoomIn();
+                canvasPlatform.OutZoom = () => zoomBorder?.ZoomOut();
                 canvasPlatform.Zoom = zoomBorder;
             }
 
@@ -100,6 +102,8 @@ namespace Core2D.UI.Behaviors
                 canvasPlatform.UniformZoom = null;
                 canvasPlatform.UniformToFillZoom = null;
                 canvasPlatform.AutoFitZoom = null;
+                canvasPlatform.InZoom = null;
+                canvasPlatform.OutZoom = null;
                 canvasPlatform.Zoom = null;
             }
 

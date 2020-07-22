@@ -56,6 +56,10 @@
         <KeyBinding Command="{Binding Platform.OnZoomFill}" Gesture="Ctrl+NumPad3" x:CompileBindings="False"/>
         <KeyBinding Command="{Binding Platform.OnZoomAutoFit}" Gesture="Ctrl+D4" x:CompileBindings="False"/>
         <KeyBinding Command="{Binding Platform.OnZoomAutoFit}" Gesture="Ctrl+NumPad4" x:CompileBindings="False"/>
+        <KeyBinding Command="{Binding Platform.OnZoomIn}" Gesture="Ctrl+Add" x:CompileBindings="False"/>
+        <KeyBinding Command="{Binding Platform.OnZoomIn}" Gesture="Ctrl+OemPlus" x:CompileBindings="False"/>
+        <KeyBinding Command="{Binding Platform.OnZoomOut}" Gesture="Ctrl+Subtract" x:CompileBindings="False"/>
+        <KeyBinding Command="{Binding Platform.OnZoomOut}" Gesture="Ctrl+OemMinus" x:CompileBindings="False"/>
         <!-- Options -->
         <KeyBinding Command="{Binding OnToggleDefaultIsStroked}" Gesture="K" x:CompileBindings="False"/>
         <KeyBinding Command="{Binding OnToggleDefaultIsFilled}" Gesture="F" x:CompileBindings="False"/>

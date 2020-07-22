@@ -43,11 +43,15 @@ namespace Core2D.Editor
         /// <remarks>Auto-fit view to the available extents.</remarks>
         Action AutoFitZoom { get; set; }
 
+        /// <summary>
+        /// Gets or sets zoom in action.
+        /// </summary>
+        Action InZoom { get; set; }
 
-
-
-
-
+        /// <summary>
+        /// Gets or sets zoom out action.
+        /// </summary>
+        Action OutZoom { get; set; }
 
         /// <summary>
         /// Gets or sets zoom control.

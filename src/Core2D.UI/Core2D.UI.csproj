@@ -41,7 +41,7 @@
   <PropertyGroup>
     <AvaloniaVersion>0.10.0-preview1</AvaloniaVersion>
     <AvaloniaBehaviorsVersion>0.10.0-preview1</AvaloniaBehaviorsVersion>
-    <PanAndZoomVersion>3.0.0-preview1</PanAndZoomVersion>
+    <PanAndZoomVersion>3.0.0-build20200722-03</PanAndZoomVersion>
   </PropertyGroup>
 
   <ItemGroup>
