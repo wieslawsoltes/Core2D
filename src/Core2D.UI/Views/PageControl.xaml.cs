@@ -11,7 +11,6 @@ namespace Core2D.UI.Views
     {
         private ScrollViewer _scrollViewer;
         private ZoomBorder _zoomBorder;
-        private Grid _gridTransformed;
         private PresenterControl _presenterControlData;
         private PresenterControl _presenterControlTemplate;
         private PresenterControl _presenterControlEditor;
@@ -25,7 +24,6 @@ namespace Core2D.UI.Views
 
             _scrollViewer = this.FindControl<ScrollViewer>("scrollViewer");
             _zoomBorder = this.FindControl<ZoomBorder>("zoomBorder");
-            _gridTransformed = this.FindControl<Grid>("gridTransformed");
             _presenterControlData = this.FindControl<PresenterControl>("presenterControlData");
             _presenterControlTemplate = this.FindControl<PresenterControl>("presenterControlTemplate");
             _presenterControlEditor = this.FindControl<PresenterControl>("presenterControlEditor");
