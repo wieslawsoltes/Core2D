@@ -20,10 +20,34 @@ namespace Core2D.Editor
         Action ResetZoom { get; set; }
 
         /// <summary>
-        /// Gets or sets extent zoom action.
+        /// Gets or sets fill zoom action.
+        /// </summary>
+        /// <remarks>Fill view to the available extents.</remarks>
+        Action FillZoom { get; set; }
+
+        /// <summary>
+        /// Gets or sets uniform fill zoom action.
+        /// </summary>
+        /// <remarks>Uniform fill view to the available extents.</remarks>
+        Action UniformZoom { get; set; }
+
+        /// <summary>
+        /// Gets or sets uniform to fill zoom action.
+        /// </summary>
+        /// <remarks>Uniform to fill view to the available extents.</remarks>
+        Action UniformToFillZoom { get; set; }
+
+        /// <summary>
+        /// Gets or sets auto-fit zoom action.
         /// </summary>
         /// <remarks>Auto-fit view to the available extents.</remarks>
         Action AutoFitZoom { get; set; }
+
+
+
+
+
+
 
         /// <summary>
         /// Gets or sets zoom control.

@@ -46,8 +46,16 @@
         <KeyBinding Command="{Binding OnPaste}" Gesture="Ctrl+V" x:CompileBindings="False"/>
         <KeyBinding Command="{Binding OnSelectAll}" Gesture="Ctrl+A" x:CompileBindings="False"/>
         <!-- View -->
-        <KeyBinding Command="{Binding Platform.OnZoomReset}" Gesture="Z" x:CompileBindings="False"/>
-        <KeyBinding Command="{Binding Platform.OnZoomAutoFit}" Gesture="X" x:CompileBindings="False"/>
+        <KeyBinding Command="{Binding Platform.OnZoomReset}" Gesture="Ctrl+D0" x:CompileBindings="False"/>
+        <KeyBinding Command="{Binding Platform.OnZoomReset}" Gesture="Ctrl+NumPad0" x:CompileBindings="False"/>
+        <KeyBinding Command="{Binding Platform.OnZoomUniform}" Gesture="Ctrl+D1" x:CompileBindings="False"/>
+        <KeyBinding Command="{Binding Platform.OnZoomUniform}" Gesture="Ctrl+NumPad1" x:CompileBindings="False"/>
+        <KeyBinding Command="{Binding Platform.OnZoomUniformToFill}" Gesture="Ctrl+D2" x:CompileBindings="False"/>
+        <KeyBinding Command="{Binding Platform.OnZoomUniformToFill}" Gesture="Ctrl+NumPad2" x:CompileBindings="False"/>
+        <KeyBinding Command="{Binding Platform.OnZoomFill}" Gesture="Ctrl+D3" x:CompileBindings="False"/>
+        <KeyBinding Command="{Binding Platform.OnZoomFill}" Gesture="Ctrl+NumPad3" x:CompileBindings="False"/>
+        <KeyBinding Command="{Binding Platform.OnZoomAutoFit}" Gesture="Ctrl+D4" x:CompileBindings="False"/>
+        <KeyBinding Command="{Binding Platform.OnZoomAutoFit}" Gesture="Ctrl+NumPad4" x:CompileBindings="False"/>
         <!-- Options -->
         <KeyBinding Command="{Binding OnToggleDefaultIsStroked}" Gesture="K" x:CompileBindings="False"/>
         <KeyBinding Command="{Binding OnToggleDefaultIsFilled}" Gesture="F" x:CompileBindings="False"/>

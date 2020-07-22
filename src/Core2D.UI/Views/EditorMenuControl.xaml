@@ -106,9 +106,11 @@
         </MenuItem>
         <MenuItem Header="_View">
             <MenuItem Header="_Zoom">
-                <MenuItem Header="_Reset" Command="{Binding Platform.OnZoomReset}" InputGesture="Z"/>
-                <Separator/>
-                <MenuItem Header="_AutoFit" Command="{Binding Platform.OnZoomAutoFit}" InputGesture="X"/>
+                <MenuItem Header="_Actual Size" Command="{Binding Platform.OnZoomReset}" InputGesture="Ctrl+D0"/>
+                <MenuItem Header="Fit _Page" Command="{Binding Platform.OnZoomUniform}" InputGesture="Ctrl+D1"/>
+                <MenuItem Header="Fit To F_ill" Command="{Binding Platform.OnZoomUniformToFill}" InputGesture="Ctrl+D2"/>
+                <MenuItem Header="_Fill Page" Command="{Binding Platform.OnZoomFill}" InputGesture="Ctrl+D3"/>
+                <MenuItem Header="A_uto Fit Page" Command="{Binding Platform.OnZoomAutoFit}" InputGesture="Ctrl+D4"/>
             </MenuItem>
             <!--<MenuItem Header="_Theme">
                 <MenuItem Header="Fluent _Light" Command="{x:Static app:App.ChangeTheme}" CommandParameter="FluentLight"/>

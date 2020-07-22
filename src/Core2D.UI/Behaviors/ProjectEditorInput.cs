@@ -65,6 +65,9 @@ namespace Core2D.UI.Behaviors
                     presenterControlEditor?.InvalidateVisual();
                 };
                 canvasPlatform.ResetZoom = () => zoomBorder?.Reset();
+                canvasPlatform.FillZoom = () => zoomBorder?.Fill();
+                canvasPlatform.UniformZoom = () => zoomBorder?.Uniform();
+                canvasPlatform.UniformToFillZoom = () => zoomBorder?.UniformToFill();
                 canvasPlatform.AutoFitZoom = () => zoomBorder?.AutoFit();
                 canvasPlatform.Zoom = zoomBorder;
             }
@@ -93,6 +96,9 @@ namespace Core2D.UI.Behaviors
             {
                 canvasPlatform.InvalidateControl = null;
                 canvasPlatform.ResetZoom = null;
+                canvasPlatform.FillZoom = null;
+                canvasPlatform.UniformZoom = null;
+                canvasPlatform.UniformToFillZoom = null;
                 canvasPlatform.AutoFitZoom = null;
                 canvasPlatform.Zoom = null;
             }

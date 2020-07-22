@@ -699,15 +699,33 @@ namespace Core2D.UI.Editor
         }
 
         /// <inheritdoc/>
-        public void OnZoomAutoFit()
-        {
-            _serviceProvider.GetService<IProjectEditor>().CanvasPlatform?.AutoFitZoom?.Invoke();
-        }
-
-        /// <inheritdoc/>
         public void OnZoomReset()
         {
             _serviceProvider.GetService<IProjectEditor>().CanvasPlatform?.ResetZoom?.Invoke();
+        }
+
+        /// <inheritdoc/>
+        public void OnZoomFill()
+        {
+            _serviceProvider.GetService<IProjectEditor>().CanvasPlatform?.FillZoom?.Invoke();
+        }
+
+        /// <inheritdoc/>
+        public void OnZoomUniform()
+        {
+            _serviceProvider.GetService<IProjectEditor>().CanvasPlatform?.UniformZoom?.Invoke();
+        }
+
+        /// <inheritdoc/>
+        public void OnZoomUniformToFill()
+        {
+            _serviceProvider.GetService<IProjectEditor>().CanvasPlatform?.UniformToFillZoom?.Invoke();
+        }
+
+        /// <inheritdoc/>
+        public void OnZoomAutoFit()
+        {
+            _serviceProvider.GetService<IProjectEditor>().CanvasPlatform?.AutoFitZoom?.Invoke();
         }
     }
 }

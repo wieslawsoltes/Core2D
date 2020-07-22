@@ -134,13 +134,28 @@ namespace Core2D.Editor
         void OnAboutDialog();
 
         /// <summary>
-        /// Auto-fit view to the available extents.
-        /// </summary>
-        void OnZoomAutoFit();
-
-        /// <summary>
         /// Reset view size to defaults.
         /// </summary>
         void OnZoomReset();
+
+        /// <summary>
+        /// Fill view to the available extents.
+        /// </summary>
+        void OnZoomFill();
+
+        /// <summary>
+        /// Uniform fill view to the available extents.
+        /// </summary>
+        void OnZoomUniform();
+
+        /// <summary>
+        /// Uniform to fill view to the available extents.
+        /// </summary>
+        void OnZoomUniformToFill();
+
+        /// <summary>
+        /// Auto-fit view to the available extents.
+        /// </summary>
+        void OnZoomAutoFit();
     }
 }
