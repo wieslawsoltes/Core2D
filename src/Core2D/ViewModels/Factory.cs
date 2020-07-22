@@ -1102,6 +1102,17 @@ namespace Core2D
             template.Width = width;
             template.Height = height;
 
+            template.IsGridEnabled = false;
+            template.IsBorderEnabled = false;
+            template.GridOffsetLeft = 0.0;
+            template.GridOffsetTop = 0.0;
+            template.GridOffsetRight = 0.0;
+            template.GridOffsetBottom = 0.0;
+            template.GridCellWidth = 10.0;
+            template.GridCellHeight = 10.0;
+            template.GridStrokeColor = CreateArgbColor(0xFF, 0xDE, 0xDE, 0xDE);
+            template.GridStrokeThickness = 1.0;
+
             var builder = template.Layers.ToBuilder();
             builder.Add(CreateLayerContainer("TemplateLayer1", template));
             template.Layers = builder.ToImmutable();
