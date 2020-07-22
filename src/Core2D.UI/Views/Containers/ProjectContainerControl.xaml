@@ -18,6 +18,7 @@
              x:DataType="Containers:IProjectContainer" x:CompileBindings="True">
     <UserControl.Resources>
         <handlers:ProjectTreeViewDropHandler x:Key="ProjectTreeViewDropHandler"/>
+        <converters:ObjectEqualityMultiConverter x:Key="ObjectEqualityMultiConverter"/>
     </UserControl.Resources>
     <Grid RowDefinitions="Auto,*,Auto" ColumnDefinitions="*">
         <Grid Grid.Row="0" RowDefinitions="*" ColumnDefinitions="*,Auto">
