@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using Core2D.Renderer;
 using Core2D.Shapes;
-using DocumentFormat.OpenXml.Drawing;
 using Spatial;
 
 namespace Core2D.Editor.Bounds.Shapes
