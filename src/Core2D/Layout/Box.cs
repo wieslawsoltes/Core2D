@@ -1,7 +1,7 @@
 ﻿
 namespace Core2D.Layout
 {
-    internal struct Box
+    public struct Box
     {
         public decimal Left;
         public decimal Top;

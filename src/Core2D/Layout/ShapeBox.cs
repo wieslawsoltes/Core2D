@@ -5,7 +5,7 @@ using Core2D.Shapes;
 
 namespace Core2D.Layout
 {
-    internal struct ShapeBox
+    public struct ShapeBox
     {
         public static int CompareLeft(ShapeBox box1, ShapeBox box2)
         {

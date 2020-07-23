@@ -1,7 +1,7 @@
 ﻿
 namespace Core2D.Layout
 {
-    internal enum AlignMode
+    public enum AlignMode
     {
         Left,
         Centered,

@@ -3,7 +3,7 @@ using Core2D.Shapes;
 
 namespace Core2D.Layout
 {
-    internal static class PointUtil
+    public static class PointUtil
     {
         public static decimal Snap(decimal value, decimal snap)
         {

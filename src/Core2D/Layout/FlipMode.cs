@@ -1,7 +1,7 @@
 ﻿
 namespace Core2D.Layout
 {
-    internal enum FlipMode
+    public enum FlipMode
     {
         Horizontal,
         Vertical

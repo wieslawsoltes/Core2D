@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace Core2D.Layout
 {
-    internal static class BoxLayout
+    public static class BoxLayout
     {
         public static void Stack(IEnumerable<IBaseShape> shapes, StackMode mode, IHistory history)
         {
