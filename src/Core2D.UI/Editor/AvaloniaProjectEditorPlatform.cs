@@ -362,7 +362,7 @@ namespace Core2D.UI.Editor
                 var svgText = await editor.TextClipboard?.GetText();
                 if (!string.IsNullOrEmpty(svgText))
                 {
-                    var shapes = converter.FromString(svgText);
+                    var shapes = converter.FromString(svgText, out _, out _);
                     if (shapes != null)
                     {
                         editor.OnPasteShapes(shapes);

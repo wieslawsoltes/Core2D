@@ -545,11 +545,13 @@ namespace Core2D.Renderer.SkiaSharp
             return stream;
         }
 
-        private IList<IBaseShape> Convert(Svg.SvgDocument document)
+        private IList<IBaseShape> Convert(Svg.SvgDocument document, out double width, out double height)
         {
             var picture = SKSvg.ToModel(document);
             if (picture == null)
             {
+                width = double.NaN;
+                height = double.NaN;
                 return null;
             }
 
@@ -562,30 +564,37 @@ namespace Core2D.Renderer.SkiaSharp
 
             group.Shapes = group.Shapes.AddRange(shapes);
 
+            width = picture.CullRect.Width;
+            height = picture.CullRect.Height;
             return Enumerable.Repeat<IBaseShape>(group, 1).ToList();
         }
 
         /// <inheritdoc/>
-        public IList<IBaseShape> Convert(string path)
+        public IList<IBaseShape> Convert(string path, out double width, out double height)
         {
             var document = SKSvg.Open(path);
             if (document == null)
             {
+                width = double.NaN;
+                height = double.NaN;
                 return null;
             }
-            return Convert(document);
+
+            return Convert(document, out width, out height);
         }
 
         /// <inheritdoc/>
-        public IList<IBaseShape> FromString(string text)
+        public IList<IBaseShape> FromString(string text, out double width, out double height)
         {
             using var stream = ToStream(text);
             var document = SKSvg.Open(stream);
             if (document == null)
             {
+                width = double.NaN;
+                height = double.NaN;
                 return null;
             }
-            return Convert(document);
+            return Convert(document, out width, out height);
         }
     }
 }

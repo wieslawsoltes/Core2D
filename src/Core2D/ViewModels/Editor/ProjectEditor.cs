@@ -699,7 +699,7 @@ namespace Core2D.Editor
             {
                 return;
             }
-            var shapes = SvgConverter.Convert(path);
+            var shapes = SvgConverter.Convert(path, out _, out _);
             if (shapes != null)
             {
                 OnPasteShapes(shapes);
