@@ -15,7 +15,7 @@ var projectName = "fluentui-system-icons-master";
 
 var project = await Task.Run(() => ImportIcons(assetsBasePath, projectName));
 
-var projectPath = Path.Combine(projectBasePath, "{projectName}.project");
+var projectPath = Path.Combine(projectBasePath, $"{projectName}.project");
 Factory.SaveProjectContainer(project, projectPath, FileIO, JsonSerializer);
 
 OnUnload();
