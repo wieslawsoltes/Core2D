@@ -40,6 +40,7 @@
 
   <PropertyGroup>
     <AvaloniaVersion>0.10.0-preview1</AvaloniaVersion>
+    <AvaloniaEditVersion>0.10.0-preview1</AvaloniaEditVersion>
     <AvaloniaBehaviorsVersion>0.10.0-preview1</AvaloniaBehaviorsVersion>
     <PanAndZoomVersion>3.0.0-build20200722-03</PanAndZoomVersion>
   </PropertyGroup>
@@ -56,6 +57,7 @@
     <PackageReference Include="Avalonia.Controls.DataGrid" Version="$(AvaloniaVersion)" />
     <PackageReference Include="Avalonia.Desktop" Version="$(AvaloniaVersion)" />
     <PackageReference Include="Avalonia.Diagnostics" Version="$(AvaloniaVersion)" />
+    <PackageReference Include="Avalonia.AvaloniaEdit" Version="$(AvaloniaBehaviorsVersion)" />
   </ItemGroup>
 
   <ItemGroup>

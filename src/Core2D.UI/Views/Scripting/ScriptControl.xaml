@@ -5,6 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
              xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
+             xmlns:behaviors="clr-namespace:Core2D.UI.Behaviors;assembly=Core2D.UI"
+             xmlns:ae="clr-namespace:AvaloniaEdit;assembly=AvaloniaEdit"
              xmlns:Scripting="clr-namespace:Core2D.Scripting;assembly=Core2D" 
              xmlns:Designer="clr-namespace:Core2D.UI.Designer;assembly=Core2D.UI"
              mc:Ignorable="d"
@@ -15,6 +17,29 @@
         <KeyBinding Command="{Binding $parent[Window].DataContext.OnExecuteRepl}" CommandParameter="{Binding #textCode.Text}" Gesture="Ctrl+Enter" x:CompileBindings="False"/>
     </UserControl.KeyBindings>
     <Grid>
-        <TextBox x:Name="textCode" Text="{Binding Code}" FontFamily="{DynamicResource CodeFontFamily}" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto" AcceptsReturn="True" AcceptsTab="True"/>
+        <!--
+        <TextBox x:Name="textCode" 
+                 Text="{Binding Code}"
+                 FontFamily="{DynamicResource CodeFontFamily}"
+                 ScrollViewer.HorizontalScrollBarVisibility="Auto"
+                 ScrollViewer.VerticalScrollBarVisibility="Auto"
+                 AcceptsReturn="True"
+                 AcceptsTab="True"/>
+        -->
+        <ae:TextEditor x:Name="textCode"
+                       Margin="0"
+                       Background="White"
+                       Foreground="Black"
+                       SyntaxHighlighting="C#"
+                       HorizontalScrollBarVisibility="Auto"
+                       VerticalScrollBarVisibility="Auto"
+                       FontFamily="{DynamicResource CodeFontFamily}" 
+                       FontWeight="Normal" 
+                       FontSize="14"
+                       WordWrap="False">
+            <i:Interaction.Behaviors>
+                <behaviors:DocumentTextBindingBehavior Text="{Binding Code, Mode=TwoWay}"/>
+            </i:Interaction.Behaviors>
+        </ae:TextEditor>
     </Grid>
 </UserControl>
