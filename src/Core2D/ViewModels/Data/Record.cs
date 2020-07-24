@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.Immutable;
 
 namespace Core2D.Data
@@ -8,6 +9,7 @@ namespace Core2D.Data
     /// </summary>
     public class Record : ObservableObject, IRecord
     {
+        private string _id = "";
         private ImmutableArray<IValue> _values;
 
         /// <summary>
@@ -16,7 +18,15 @@ namespace Core2D.Data
         public Record()
             : base()
         {
+            _id = Guid.NewGuid().ToString();
             _values = ImmutableArray.Create<IValue>();
+        }
+
+        /// <inheritdoc/>
+        public string Id
+        {
+            get => _id;
+            set => Update(ref _id, value);
         }
 
         /// <inheritdoc/>
@@ -61,6 +71,12 @@ namespace Core2D.Data
                 value.Invalidate();
             }
         }
+
+        /// <summary>
+        /// Check whether the <see cref="Id"/> property has changed from its default value.
+        /// </summary>
+        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
+        public virtual bool ShouldSerializeId() => !string.IsNullOrWhiteSpace(_id);
 
         /// <summary>
         /// Check whether the <see cref="Values"/> property has changed from its default value.

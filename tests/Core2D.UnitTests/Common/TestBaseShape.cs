@@ -15,7 +15,6 @@ namespace Core2D.Common.UnitTests
         public IObservableObject Owner { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
         public IShapeState State { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
         public IContext Data { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public string Id { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
         public string Name { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
         public IShapeStyle Style { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
         public bool IsStroked { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }

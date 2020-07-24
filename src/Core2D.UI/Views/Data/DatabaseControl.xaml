@@ -74,7 +74,6 @@
                             <DataGridTextColumn Header="Width" Binding="{Binding Width}" x:DataType="Data:IColumn"/>
                             <DataGridCheckBoxColumn Header="IsVisible" Binding="{Binding IsVisible}" x:DataType="Data:IColumn"/>
                             <DataGridTextColumn Header="Owner" Binding="{Binding Owner.Name}" IsReadOnly="True"/>
-                            <DataGridTextColumn Header="Id" Binding="{Binding Id}"/>
                         </DataGrid.Columns>
                     </DataGrid>
                 </Grid>

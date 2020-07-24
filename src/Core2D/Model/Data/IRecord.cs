@@ -8,6 +8,11 @@ namespace Core2D.Data
     public interface IRecord : IObservableObject
     {
         /// <summary>
+        /// Gets or sets record id.
+        /// </summary>
+        string Id { get; set; }
+
+        /// <summary>
         /// Gets or sets record values.
         /// </summary>
         ImmutableArray<IValue> Values { get; set; }

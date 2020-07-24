@@ -16,11 +16,6 @@ namespace Core2D
         /// <summary>
         /// Gets or sets observable object name.
         /// </summary>
-        string Id { get; set; }
-
-        /// <summary>
-        /// Gets or sets observable object name.
-        /// </summary>
         string Name { get; set; }
 
         /// <summary>

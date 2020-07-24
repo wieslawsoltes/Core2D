@@ -12,7 +12,6 @@ namespace Core2D
     {
         private bool _isDirty;
         private IObservableObject _owner = null;
-        private string _id = Guid.NewGuid().ToString();
         private string _name = "";
 
         /// <inheritdoc/>
@@ -20,13 +19,6 @@ namespace Core2D
         {
             get => _owner;
             set => Update(ref _owner, value);
-        }
-
-        /// <inheritdoc/>
-        public virtual string Id
-        {
-            get => _id;
-            set => Update(ref _id, value);
         }
 
         /// <inheritdoc/>
@@ -80,12 +72,6 @@ namespace Core2D
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
         public virtual bool ShouldSerializeOwner() => _owner != null;
-
-        /// <summary>
-        /// Check whether the <see cref="Id"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeId() => !string.IsNullOrWhiteSpace(_id);
 
         /// <summary>
         /// Check whether the <see cref="Name"/> property has changed from its default value.
