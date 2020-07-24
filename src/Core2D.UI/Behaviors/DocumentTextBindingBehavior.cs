@@ -15,7 +15,7 @@ namespace Core2D.UI.Behaviors
         private TextEditor _textEditor = null;
 
         /// <summary>
-        /// Define <see cref="Context"/> property.
+        /// Define <see cref="Text"/> property.
         /// </summary>
         public static readonly StyledProperty<string> TextProperty =
             AvaloniaProperty.Register<DocumentTextBindingBehavior, string>(nameof(Text));
