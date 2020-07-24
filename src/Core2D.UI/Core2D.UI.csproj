@@ -13,7 +13,7 @@
 
   <PropertyGroup>
     <VersionPrefix>0.10.0</VersionPrefix>
-    <VersionSuffix>preview1</VersionSuffix>
+    <VersionSuffix>preview2</VersionSuffix>
     <Authors>Wiesław Šoltés</Authors>
     <Company>Wiesław Šoltés</Company>
     <Description>A multi-platform data driven 2D diagram editor.</Description>
@@ -39,10 +39,10 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <AvaloniaVersion>0.10.0-preview1</AvaloniaVersion>
+    <AvaloniaVersion>0.10.0-preview2</AvaloniaVersion>
     <AvaloniaEditVersion>0.10.0-preview1</AvaloniaEditVersion>
-    <AvaloniaBehaviorsVersion>0.10.0-preview1</AvaloniaBehaviorsVersion>
-    <PanAndZoomVersion>3.0.0-build20200722-03</PanAndZoomVersion>
+    <AvaloniaBehaviorsVersion>0.10.0-preview2</AvaloniaBehaviorsVersion>
+    <PanAndZoomVersion>3.0.0-preview2</PanAndZoomVersion>
   </PropertyGroup>
 
   <ItemGroup>
@@ -57,7 +57,7 @@
     <PackageReference Include="Avalonia.Controls.DataGrid" Version="$(AvaloniaVersion)" />
     <PackageReference Include="Avalonia.Desktop" Version="$(AvaloniaVersion)" />
     <PackageReference Include="Avalonia.Diagnostics" Version="$(AvaloniaVersion)" />
-    <PackageReference Include="Avalonia.AvaloniaEdit" Version="$(AvaloniaBehaviorsVersion)" />
+    <PackageReference Include="Avalonia.AvaloniaEdit" Version="$(AvaloniaEditVersion)" />
   </ItemGroup>
 
   <ItemGroup>
