@@ -1920,18 +1920,21 @@ namespace Core2D.Editor
         /// <inheritdoc/>
         public void OnToolNone()
         {
+            CurrentTool?.Reset();
             CurrentTool = Tools.FirstOrDefault(t => t.Title == "None");
         }
 
         /// <inheritdoc/>
         public void OnToolSelection()
         {
+            CurrentTool?.Reset();
             CurrentTool = Tools.FirstOrDefault(t => t.Title == "Selection");
         }
 
         /// <inheritdoc/>
         public void OnToolPoint()
         {
+            CurrentTool?.Reset();
             CurrentTool = Tools.FirstOrDefault(t => t.Title == "Point");
         }
 
@@ -1945,6 +1948,7 @@ namespace Core2D.Editor
             }
             else
             {
+                CurrentTool?.Reset();
                 CurrentTool = Tools.FirstOrDefault(t => t.Title == "Line");
             }
         }
@@ -1959,6 +1963,7 @@ namespace Core2D.Editor
             }
             else
             {
+                CurrentTool?.Reset();
                 CurrentTool = Tools.FirstOrDefault(t => t.Title == "Arc");
             }
         }
@@ -1973,6 +1978,7 @@ namespace Core2D.Editor
             }
             else
             {
+                CurrentTool?.Reset();
                 CurrentTool = Tools.FirstOrDefault(t => t.Title == "CubicBezier");
             }
         }
@@ -1987,6 +1993,7 @@ namespace Core2D.Editor
             }
             else
             {
+                CurrentTool?.Reset();
                 CurrentTool = Tools.FirstOrDefault(t => t.Title == "QuadraticBezier");
             }
         }
@@ -1994,30 +2001,35 @@ namespace Core2D.Editor
         /// <inheritdoc/>
         public void OnToolPath()
         {
+            CurrentTool?.Reset();
             CurrentTool = Tools.FirstOrDefault(t => t.Title == "Path");
         }
 
         /// <inheritdoc/>
         public void OnToolRectangle()
         {
+            CurrentTool?.Reset();
             CurrentTool = Tools.FirstOrDefault(t => t.Title == "Rectangle");
         }
 
         /// <inheritdoc/>
         public void OnToolEllipse()
         {
+            CurrentTool?.Reset();
             CurrentTool = Tools.FirstOrDefault(t => t.Title == "Ellipse");
         }
 
         /// <inheritdoc/>
         public void OnToolText()
         {
+            CurrentTool?.Reset();
             CurrentTool = Tools.FirstOrDefault(t => t.Title == "Text");
         }
 
         /// <inheritdoc/>
         public void OnToolImage()
         {
+            CurrentTool?.Reset();
             CurrentTool = Tools.FirstOrDefault(t => t.Title == "Image");
         }
 
