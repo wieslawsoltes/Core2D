@@ -19,10 +19,10 @@
             <ItemsControl VerticalAlignment="Stretch" Grid.Column="0" Grid.Row="1" DataContext="{Binding Owner}" Items="{Binding Columns}" x:DataType="Data:IDatabase">
                 <ItemsControl.DataTemplates>
                     <DataTemplate DataType="Data:IColumn">
-                        <Grid VerticalAlignment="Top" Background="Transparent">
-                            <i:Interaction.Behaviors>
+                        <Grid VerticalAlignment="Top" Background="Transparent" Margin="0,2,0,2">
+                            <!--<i:Interaction.Behaviors>
                                 <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}"/>
-                            </i:Interaction.Behaviors>
+                            </i:Interaction.Behaviors>-->
                             <TextBox VerticalAlignment="Center" Text="{Binding Name, Mode=TwoWay}"/>
                         </Grid>
                     </DataTemplate>
@@ -33,10 +33,10 @@
             <ItemsControl VerticalAlignment="Stretch" Grid.Column="2" Grid.Row="1" Items="{Binding Values}">
                 <ItemsControl.DataTemplates>
                     <DataTemplate DataType="Data:IValue">
-                        <Grid VerticalAlignment="Top" Background="Transparent">
-                            <i:Interaction.Behaviors>
+                        <Grid VerticalAlignment="Top" Background="Transparent" Margin="0,2,0,2">
+                            <!--<i:Interaction.Behaviors>
                                 <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}"/>
-                            </i:Interaction.Behaviors>
+                            </i:Interaction.Behaviors>-->
                             <TextBox VerticalAlignment="Center" Text="{Binding Content, Mode=TwoWay}"/>
                         </Grid>
                     </DataTemplate>
