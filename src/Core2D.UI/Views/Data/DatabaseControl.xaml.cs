@@ -53,7 +53,7 @@ namespace Core2D.UI.Views.Data
 
         private void Database_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == "Columns")
+            if (e.PropertyName == nameof(IDatabase.Columns))
             {
                 if (_database != null)
                 {
@@ -65,7 +65,9 @@ namespace Core2D.UI.Views.Data
 
         private void Column_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == "Name" || e.PropertyName == "Width")
+            if (e.PropertyName == nameof(IColumn.Name)
+                || e.PropertyName == nameof(IColumn.Width)
+                || e.PropertyName == nameof(IColumn.IsVisible))
             {
                 if (_database != null)
                 {
@@ -83,7 +85,8 @@ namespace Core2D.UI.Views.Data
                 {
                     Header = $"{column.Name}",
                     Width = double.IsNaN(column.Width) ? DataGridLength.Auto : new DataGridLength(column.Width),
-                    Binding = new Binding($"Values[{i}].Content"),
+                    IsVisible = column.IsVisible,
+                    Binding = new Binding($"{nameof(IRecord.Values)}[{i}].{nameof(IValue.Content)}"),
                     IsReadOnly = true
                 };
                 column.PropertyChanged += Column_PropertyChanged;
@@ -103,6 +106,7 @@ namespace Core2D.UI.Views.Data
                 var column = _database.Columns[i];
                 _rowsDataGrid.Columns[i].Header = column.Name;
                 _rowsDataGrid.Columns[i].Width = double.IsNaN(column.Width) ? DataGridLength.Auto : new DataGridLength(column.Width);
+                _rowsDataGrid.Columns[i].IsVisible = column.IsVisible;
             }
         }
     }
