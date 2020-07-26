@@ -512,7 +512,18 @@ namespace Core2D.Editor.Tools
         public void Reset()
         {
             var editor = _serviceProvider.GetService<IProjectEditor>();
+
+            _currentState = State.None;
+
+            editor.IsToolIdle = true;
+
+            editor.Dehover(editor.Project?.CurrentContainer?.CurrentLayer);
+
+            DisposeMoveSelectionCache();
             editor.OnHideDecorator();
+
+            editor.Project?.CurrentContainer?.CurrentLayer?.InvalidateLayer();
+            editor.Project?.CurrentContainer?.WorkingLayer?.InvalidateLayer();
         }
     }
 }
