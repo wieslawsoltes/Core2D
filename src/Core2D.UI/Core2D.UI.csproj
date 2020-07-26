@@ -48,7 +48,6 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.0" PrivateAssets="All" />
     <PackageReference Include="System.Text.Encoding.CodePages" Version="4.7.1" />
-    <PackageReference Include="reactiveui" Version="11.4.1" />
     <PackageReference Include="Avalonia.Xaml.Interactions" Version="$(AvaloniaBehaviorsVersion)" />
     <PackageReference Include="Avalonia.Xaml.Interactions.Custom" Version="$(AvaloniaBehaviorsVersion)" />
     <PackageReference Include="Avalonia.MatrixExtensions" Version="$(PanAndZoomVersion)" />
