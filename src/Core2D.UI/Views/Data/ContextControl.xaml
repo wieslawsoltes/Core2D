@@ -14,9 +14,6 @@
              x:DataType="Data:IContext" x:CompileBindings="True">
     <Grid RowDefinitions="*">
         <TabControl Grid.Row="0">
-            <TabItem Header="Properties">
-                <data:PropertiesControl/>
-            </TabItem>
             <TabItem Header="Record">
                 <Grid RowDefinitions="Auto,*" ColumnDefinitions="*" IsVisible="{Binding !!Record}">
                     <Menu Grid.Row="0" HorizontalAlignment="Right" IsVisible="{Binding !!Record}">
@@ -24,6 +21,9 @@
                     </Menu>
                     <ContentControl Content="{Binding Record}" Grid.Row="1"/>
                 </Grid>
+            </TabItem>
+            <TabItem Header="Properties">
+                <data:PropertiesControl/>
             </TabItem>
         </TabControl>
     </Grid>
