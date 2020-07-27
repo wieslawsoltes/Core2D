@@ -64,12 +64,11 @@ namespace Core2D
         }
 
         /// <inheritdoc/>
-        public IColumn CreateColumn(IDatabase owner, string name, double width = double.NaN, bool isVisible = true)
+        public IColumn CreateColumn(IDatabase owner, string name, bool isVisible = true)
         {
             return new Column()
             {
                 Name = name,
-                Width = width,
                 IsVisible = isVisible,
                 Owner = owner
             };

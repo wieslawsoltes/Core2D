@@ -7,15 +7,7 @@ namespace Core2D.Data
     /// </summary>
     public class Column : ObservableObject, IColumn
     {
-        private double _width;
         private bool _isVisible;
-
-        /// <inheritdoc/>
-        public double Width
-        {
-            get => _width;
-            set => Update(ref _width, value);
-        }
 
         /// <inheritdoc/>
         public bool IsVisible
@@ -30,7 +22,6 @@ namespace Core2D.Data
             return new Column()
             {
                 Name = this.Name,
-                Width = this.Width,
                 IsVisible = this.IsVisible
             };
         }
@@ -47,12 +38,6 @@ namespace Core2D.Data
         {
             base.Invalidate();
         }
-
-        /// <summary>
-        /// Check whether the <see cref="Width"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeWidth() => _width != default;
 
         /// <summary>
         /// Check whether the <see cref="IsVisible"/> property has changed from its default value.
