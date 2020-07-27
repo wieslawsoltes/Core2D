@@ -1,8 +1,12 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Linq;
+using Avalonia;
+using Avalonia.Collections;
 using Avalonia.Controls;
 using Avalonia.Data;
 using Avalonia.Markup.Xaml;
+using Avalonia.Threading;
 using Core2D.Data;
 
 namespace Core2D.UI.Views.Data
@@ -12,8 +16,11 @@ namespace Core2D.UI.Views.Data
     /// </summary>
     public class DatabaseControl : UserControl
     {
+        private TextBox _filterRecordsText;
         private DataGrid _rowsDataGrid;
         private IDatabase _database;
+        private string _recordsFilter;
+        private DataGridCollectionView _recordsView;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="DatabaseControl"/> class.
@@ -21,6 +28,10 @@ namespace Core2D.UI.Views.Data
         public DatabaseControl()
         {
             InitializeComponent();
+
+            _filterRecordsText = this.FindControl<TextBox>("filterRecordsText");
+            _filterRecordsText.GetObservable(TextBox.TextProperty).Subscribe(_ => OnFilterRecordsTextChanged());
+
             _rowsDataGrid = this.FindControl<DataGrid>("rowsDataGrid");
             _rowsDataGrid.DataContextChanged += RowsDataGrid_DataContextChanged;
         }
@@ -33,10 +44,42 @@ namespace Core2D.UI.Views.Data
             AvaloniaXamlLoader.Load(this);
         }
 
+        private void OnFilterRecordsTextChanged()
+        {
+            Dispatcher.UIThread.Post(() =>
+            {
+                _recordsFilter = _filterRecordsText?.Text;
+                _recordsView?.Refresh();
+            });
+        }
+
+        private bool FilterRecords(object arg)
+        {
+            if (!string.IsNullOrWhiteSpace(_recordsFilter) && arg is IRecord record)
+            {
+                foreach (var value in record.Values)
+                {
+                    if (!string.IsNullOrWhiteSpace(value.Content))
+                    {
+                        if (value.Content.IndexOf(_recordsFilter, StringComparison.OrdinalIgnoreCase) != -1)
+                        {
+                            return true;
+                        }
+                    }
+                }
+                return false;
+            }
+
+            return true;
+        }
+
         private void RowsDataGrid_DataContextChanged(object sender, EventArgs e)
         {
             if (_database != null)
             {
+                _recordsView = null;
+                _rowsDataGrid.Items = null;
+                
                 _database.PropertyChanged -= Database_PropertyChanged;
                 _database = null;
             }
@@ -45,6 +88,10 @@ namespace Core2D.UI.Views.Data
 
             if (DataContext is IDatabase database)
             {
+                _recordsView = new DataGridCollectionView(database.Records);
+                _recordsView.Filter = FilterRecords;
+                _rowsDataGrid.Items = _recordsView;
+
                 _database = database;
                 _database.PropertyChanged += Database_PropertyChanged;
                 CreateColumns();
