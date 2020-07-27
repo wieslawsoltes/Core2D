@@ -82,7 +82,7 @@
         </Grid>
         <Grid x:Name="LAYOUT_EditorGrid" ColumnDefinitions="250,6,*,6,250" RowDefinitions="Auto,*,Auto,Auto" IsVisible="{Binding Project, Converter={x:Static ObjectConverters.IsNotNull}}">
             <views:EditorMenuControl x:Name="EditorMenuControl" Grid.Column="0" Grid.ColumnSpan="5" Grid.Row="0"/>
-            <TabControl x:Name="LAYOUT_LeftTabControl" Grid.Column="0" Grid.Row="1">
+            <TabControl x:Name="LAYOUT_LeftTabControl" Padding="6,0,0,0" Grid.Column="0" Grid.Row="1">
                 <TabItem x:Name="LAYOUT_ProjectTabItem" Header="Project">
                     <containers:ProjectContainerControl DataContext="{Binding Project}"/>
                 </TabItem>
@@ -137,7 +137,7 @@
             <views:PageControl x:Name="Page" Grid.Column="2" Grid.Row="1"/>
             <!--<views:DocumentControl x:Name="Document" Grid.Column="2" Grid.Row="1"/>-->
             <GridSplitter x:Name="RightGridSplitter" ResizeDirection="Columns" ResizeBehavior="PreviousAndNext" Background="Transparent" Width="6" Grid.Column="3" Grid.Row="1"/>
-            <TabControl x:Name="LAYOUT_RightTabControl" Grid.Column="4" Grid.Row="1">
+            <TabControl x:Name="LAYOUT_RightTabControl" Padding="0,0,6,0" Grid.Column="4" Grid.Row="1">
                 <TabItem x:Name="LAYOUT_PageTabItem" Header="Page">
                     <containers:PageContainerControl DataContext="{Binding Project.CurrentContainer}"/>
                 </TabItem>

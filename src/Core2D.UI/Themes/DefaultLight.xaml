@@ -12,6 +12,7 @@
         <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
     </Style>
     <Style Selector="TabControl">
+        <Setter Property="Margin" Value="0,0,0,0"/>
         <Setter Property="Padding" Value="0,0,0,0"/>
     </Style>
     <Style Selector="TabItem">
