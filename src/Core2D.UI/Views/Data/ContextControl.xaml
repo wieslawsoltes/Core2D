@@ -12,14 +12,11 @@
              d:DataContext="{x:Static Designer:DesignerContext.Data}"
              d:DesignWidth="250" d:DesignHeight="400"
              x:DataType="Data:IContext" x:CompileBindings="True">
-    <Grid RowDefinitions="50*,6,50*">
+    <Grid RowDefinitions="*">
         <TabControl Grid.Row="0">
             <TabItem Header="Properties">
                 <data:PropertiesControl/>
             </TabItem>
-        </TabControl>
-        <GridSplitter ResizeDirection="Rows" ResizeBehavior="PreviousAndNext" Background="Transparent" Height="6" Grid.Column="1" Grid.Row="1"/>
-        <TabControl Grid.Row="2">
             <TabItem Header="Record">
                 <Grid RowDefinitions="Auto,*" ColumnDefinitions="*" IsVisible="{Binding !!Record}">
                     <Menu Grid.Row="0" HorizontalAlignment="Right" IsVisible="{Binding !!Record}">

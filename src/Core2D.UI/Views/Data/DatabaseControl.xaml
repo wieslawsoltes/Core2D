@@ -14,8 +14,8 @@
              d:DataContext="{x:Static Designer:DesignerContext.Database}"
              d:DesignWidth="250" d:DesignHeight="400"
              x:DataType="Data:IDatabase" x:CompileBindings="True">
-    <Grid RowDefinitions="Auto,*,6,Auto">
-        <TabControl Grid.Row="1">
+    <Grid RowDefinitions="*">
+        <TabControl Grid.Row="0">
             <TabItem Header="Records">
                 <Grid RowDefinitions="Auto,*">
                     <Menu Grid.Row="0" HorizontalAlignment="Right">
@@ -45,6 +45,9 @@
                     </DataGrid>
                 </Grid>
             </TabItem>
+            <TabItem Header="Current Record">
+                <ContentControl Content="{Binding CurrentRecord}"/>
+            </TabItem>
             <TabItem Header="Columns">
                 <Grid RowDefinitions="Auto,*">
                     <Menu Grid.Row="0" HorizontalAlignment="Right">
@@ -66,7 +69,7 @@
                             <idd:TypedDragBehavior DataType="{x:Type Data:IColumn}"/>
                         </i:Interaction.Behaviors>
                         <DataGrid.KeyBindings>
-                            <KeyBinding Command="{Binding $parent[Window].DataContext.OnRemoveColumn}" CommandParameter="{Binding}" Gesture="Ctrl+N" x:CompileBindings="False"/>
+                            <KeyBinding Command="{Binding $parent[Window].DataContext.OnAddColumn}" CommandParameter="{Binding}" Gesture="Ctrl+N" x:CompileBindings="False"/>
                             <KeyBinding Command="{Binding $parent[Window].DataContext.OnRemoveColumn}" CommandParameter="{Binding #columnsDataGrid.SelectedItem}" Gesture="Delete" x:CompileBindings="False"/>
                         </DataGrid.KeyBindings>
                         <DataGrid.Columns>
@@ -77,35 +80,6 @@
                         </DataGrid.Columns>
                     </DataGrid>
                 </Grid>
-                <!--
-                <Grid RowDefinitions="Auto,Auto,*" ColumnDefinitions="*" >
-                    <Menu Grid.Row="0" Grid.Column="0" HorizontalAlignment="Right">
-                        <MenuItem Header="+" Command="{Binding $parent[Window].DataContext.OnAddColumn}" CommandParameter="{Binding}" x:CompileBindings="False"/>
-                    </Menu>
-                    <TextBlock Grid.Column="0" Grid.Row="1" VerticalAlignment="Center" Text="Name" IsVisible="{Binding !!Columns.Length}"/>
-                    <ScrollViewer Grid.Column="0" Grid.Row="2" IsVisible="{Binding !!Columns.Length}">
-                        <ItemsControl Items="{Binding Columns}" VerticalAlignment="Stretch">
-                            <ItemsControl.DataTemplates>
-                                <DataTemplate DataType="Data:IColumn">
-                                    <Grid VerticalAlignment="Top" ColumnDefinitions="*,30" Background="Transparent">
-                                        <i:Interaction.Behaviors>
-                                            <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}"/>
-                                        </i:Interaction.Behaviors>
-                                        <TextBox Text="{Binding Name, Mode=TwoWay}" Grid.Column="0"/>
-                                        <Button Content="-" Grid.Column="1"Command="{Binding $parent[Window].DataContext.OnRemoveColumn}" CommandParameter="{Binding}" x:CompileBindings="False"/>Z
-                                    </Grid>
-                                </DataTemplate>
-                            </ItemsControl.DataTemplates>
-                        </ItemsControl>
-                    </ScrollViewer>
-                </Grid>
-                -->
-            </TabItem>
-        </TabControl>
-        <GridSplitter ResizeDirection="Rows" ResizeBehavior="PreviousAndNext" Background="Transparent" Height="6" Grid.Column="1" Grid.Row="2"/>
-        <TabControl Grid.Row="3" IsVisible="{Binding !!CurrentRecord}">
-            <TabItem Header="Current Record">
-                <ContentControl Content="{Binding CurrentRecord}"/>
             </TabItem>
         </TabControl>
     </Grid>
