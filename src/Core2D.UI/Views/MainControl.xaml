@@ -93,7 +93,7 @@
                 </TabItem>
                 <TabItem x:Name="LAYOUT_StyleTabItem" Header="Style">
                     <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-                        <ContentControl Margin="0,0,12,0">
+                        <ContentControl>
                             <ContentControl.Content>
                                 <MultiBinding Converter="{StaticResource StyleMultiValueConverter}">
                                     <Binding Path="PageState.SelectedShapes" FallbackValue="{x:Null}" />
@@ -107,27 +107,27 @@
                     <TabControl x:Name="LAYOUT_OptionsTabControl">
                         <TabItem x:Name="LAYOUT_ProjectOptionsTabItem" Header="Project">
                             <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-                                <ContentControl Content="{Binding Project.Options}" Margin="0,0,12,0"/>
+                                <ContentControl Content="{Binding Project.Options}"/>
                             </ScrollViewer>
                         </TabItem>
                         <TabItem x:Name="LAYOUT_RendererOptionsTabItem" Header="Renderer">
                             <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-                                <renderer:ShapeRendererStateControl DataContext="{Binding PageState}" Margin="0,0,12,0"/>
+                                <renderer:ShapeRendererStateControl DataContext="{Binding PageState}"/>
                             </ScrollViewer>
                         </TabItem>
                         <TabItem x:Name="LAYOUT_ZoomOptionsTabItem" Header="Zoom">
                             <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-                                <views:ZoomControl DataContext="{Binding CanvasPlatform.Zoom}" Margin="0,0,12,0"/>
+                                <views:ZoomControl DataContext="{Binding CanvasPlatform.Zoom}"/>
                             </ScrollViewer>
                         </TabItem>
                         <TabItem x:Name="LAYOUT_ImagesOptionsTabItem" Header="Images">
                             <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-                                <libraries:ImagesControl DataContext="{Binding Project}" Margin="0,0,12,0"/>
+                                <libraries:ImagesControl DataContext="{Binding Project}"/>
                             </ScrollViewer>
                         </TabItem>
                         <TabItem x:Name="LAYOUT_ToolsTabItem" Header="Tools">
                             <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-                                <views:ToolsControl DataContext="{Binding}" Margin="0,0,12,0"/>
+                                <views:ToolsControl DataContext="{Binding}"/>
                             </ScrollViewer>
                         </TabItem>
                     </TabControl>
@@ -139,29 +139,29 @@
             <GridSplitter x:Name="RightGridSplitter" ResizeDirection="Columns" ResizeBehavior="PreviousAndNext" Background="Transparent" Width="6" Grid.Column="3" Grid.Row="1"/>
             <TabControl x:Name="LAYOUT_RightTabControl" Grid.Column="4" Grid.Row="1">
                 <TabItem x:Name="LAYOUT_PageTabItem" Header="Page">
-                    <containers:PageContainerControl DataContext="{Binding Project.CurrentContainer}" Margin="0,0,12,0"/>
+                    <containers:PageContainerControl DataContext="{Binding Project.CurrentContainer}"/>
                 </TabItem>
                 <TabItem x:Name="LAYOUT_LibrariesTabItem" Header="Libraries">
                     <TabControl x:Name="LAYOUT_LibrariesTabControl">
                         <TabItem x:Name="LAYOUT_StylesTabItem" Header="Styles">
-                            <libraries:StylesControl DataContext="{Binding Project}" Margin="0,0,12,0"/>
+                            <libraries:StylesControl DataContext="{Binding Project}"/>
                         </TabItem>
                         <TabItem x:Name="LAYOUT_GroupsTabItem" Header="Groups">
-                            <libraries:GroupsControl DataContext="{Binding Project}" Margin="0,0,12,0"/>
+                            <libraries:GroupsControl DataContext="{Binding Project}"/>
                         </TabItem>
                         <TabItem x:Name="LAYOUT_DataTabItem" Header="Data">
-                            <libraries:DatabasesControl DataContext="{Binding Project}" Margin="0,0,12,0"/>
+                            <libraries:DatabasesControl DataContext="{Binding Project}"/>
                         </TabItem>
                         <TabItem x:Name="LAYOUT_TemplatesTabItem" Header="Templates">
-                            <libraries:TemplatesControl DataContext="{Binding Project}" Margin="0,0,12,0"/>
+                            <libraries:TemplatesControl DataContext="{Binding Project}"/>
                         </TabItem>
                     </TabControl>
                 </TabItem>
                 <TabItem x:Name="LAYOUT_ScriptsTabItem" Header="Scripts">
-                    <libraries:ScriptsControl DataContext="{Binding Project}" Margin="0,0,12,0"/>
+                    <libraries:ScriptsControl DataContext="{Binding Project}"/>
                 </TabItem>
                 <TabItem x:Name="LAYOUT_BrowserTabItem" Header="Browser">
-                    <views:BrowserControl Margin="0,0,12,0"/>
+                    <views:BrowserControl/>
                 </TabItem>
             </TabControl>
             <views:StatusControl x:Name="StatusControl" Grid.Column="0" Grid.ColumnSpan="5" Grid.Row="3"/>
