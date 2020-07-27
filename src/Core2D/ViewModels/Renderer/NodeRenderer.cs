@@ -395,12 +395,19 @@ namespace Core2D.Renderer
                     text.Style.Invalidate();
                 }
 
-                if (text.IsDirty())
+                if (text.IsDirty() || IsBoundTextDirty(drawNodeCached, text))
                 {
                     drawNodeCached.UpdateGeometry();
                 }
 
                 drawNodeCached.Draw(dc, _state.ZoomX);
+
+                static bool IsBoundTextDirty(IDrawNode drawNodeCached, ITextShape text)
+                {
+                    var boundTextCheck = text.GetProperty(nameof(ITextShape.Text)) is string boundText ? boundText : text.Text;
+                    return drawNodeCached is ITextDrawNode textDrawNode 
+                        && boundTextCheck != textDrawNode.BoundText;
+                }
             }
             else
             {
