@@ -10,36 +10,36 @@
              d:DataContext="{x:Static Designer:DesignerContext.Path}"
              d:DesignWidth="250" d:DesignHeight="400"
              x:DataType="Shapes:IPathShape" x:CompileBindings="True">
-    <Grid RowDefinitions="Auto,*">
-        <TabControl Grid.Row="0">
-            <TabItem Header="Path">
-                <StackPanel>
+    <TabControl Grid.Row="0">
+        <TabItem Header="Path">
+            <Grid RowDefinitions="Auto,*">
+                <StackPanel Grid.Row="0">
                     <TextBlock Text="Name" Margin="{DynamicResource TextControlThemePadding}"/>
                     <TextBox Text="{Binding Name, Mode=TwoWay}"/>
                     <CheckBox Content="IsStroked" IsChecked="{Binding IsStroked, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
                     <CheckBox Content="IsFilled" IsChecked="{Binding IsFilled, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
                 </StackPanel>
-            </TabItem>
-            <TabItem Header="Data">
-                <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-                    <ContentControl Content="{Binding Data}"/>
-                </ScrollViewer>
-            </TabItem>
-            <TabItem Header="Style">
-                <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-                    <ContentControl Content="{Binding Style}"/>
-                </ScrollViewer>
-            </TabItem>
-            <TabItem Header="State">
-                <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-                    <ContentControl Content="{Binding State}"/>
-                </ScrollViewer>
-            </TabItem>
-        </TabControl>
-        <TabControl Grid.Row="1">
-            <TabItem Header="Geometry">
-                <ContentControl Content="{Binding Geometry}"/>
-            </TabItem>
-        </TabControl>
-    </Grid>
+                <TabControl Grid.Row="1">
+                    <TabItem Header="Geometry">
+                        <ContentControl Content="{Binding Geometry}"/>
+                    </TabItem>
+                </TabControl>
+            </Grid>
+        </TabItem>
+        <TabItem Header="Data">
+            <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                <ContentControl Content="{Binding Data}"/>
+            </ScrollViewer>
+        </TabItem>
+        <TabItem Header="Style">
+            <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                <ContentControl Content="{Binding Style}"/>
+            </ScrollViewer>
+        </TabItem>
+        <TabItem Header="State">
+            <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                <ContentControl Content="{Binding State}"/>
+            </ScrollViewer>
+        </TabItem>
+    </TabControl>
 </UserControl>

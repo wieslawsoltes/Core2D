@@ -10,10 +10,10 @@
              d:DataContext="{x:Static Designer:DesignerContext.Text}"
              d:DesignWidth="250" d:DesignHeight="400"
              x:DataType="Shapes:ITextShape" x:CompileBindings="True">
-    <Grid RowDefinitions="Auto,*">
-        <TabControl Grid.Row="0">
-            <TabItem Header="Text">
-                <StackPanel>
+    <TabControl Grid.Row="0">
+        <TabItem Header="Text">
+            <Grid RowDefinitions="Auto,*">
+                <StackPanel Grid.Row="0">
                     <TextBlock Text="Name" Margin="{DynamicResource TextControlThemePadding}"/>
                     <TextBox Text="{Binding Name, Mode=TwoWay}"/>
                     <CheckBox Content="IsStroked" IsChecked="{Binding IsStroked, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
@@ -21,34 +21,34 @@
                     <TextBlock Text="Text" Margin="{DynamicResource TextControlThemePadding}"/>
                     <TextBox Text="{Binding Text, Mode=TwoWay}" VerticalAlignment="Stretch" AcceptsReturn="True"/>
                 </StackPanel>
-            </TabItem>
-            <TabItem Header="Data">
-                <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-                    <ContentControl Content="{Binding Data}"/>
-                </ScrollViewer>
-            </TabItem>
-            <TabItem Header="Style">
-                <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-                    <ContentControl Content="{Binding Style}"/>
-                </ScrollViewer>
-            </TabItem>
-            <TabItem Header="State">
-                <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-                    <ContentControl Content="{Binding State}"/>
-                </ScrollViewer>
-            </TabItem>
-        </TabControl>
-        <TabControl Grid.Row="1">
-            <TabItem Header="TopLeft">
-                <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-                    <ContentControl Content="{Binding TopLeft}"/>
-                </ScrollViewer>
-            </TabItem>
-            <TabItem Header="BottomRight">
-                <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-                    <ContentControl Content="{Binding BottomRight}"/>
-                </ScrollViewer>
-            </TabItem>
-        </TabControl>
-    </Grid>
+                <TabControl Grid.Row="1">
+                    <TabItem Header="TopLeft">
+                        <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                            <ContentControl Content="{Binding TopLeft}"/>
+                        </ScrollViewer>
+                    </TabItem>
+                    <TabItem Header="BottomRight">
+                        <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                            <ContentControl Content="{Binding BottomRight}"/>
+                        </ScrollViewer>
+                    </TabItem>
+                </TabControl>
+            </Grid>
+        </TabItem>
+        <TabItem Header="Data">
+            <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                <ContentControl Content="{Binding Data}"/>
+            </ScrollViewer>
+        </TabItem>
+        <TabItem Header="Style">
+            <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                <ContentControl Content="{Binding Style}"/>
+            </ScrollViewer>
+        </TabItem>
+        <TabItem Header="State">
+            <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                <ContentControl Content="{Binding State}"/>
+            </ScrollViewer>
+        </TabItem>
+    </TabControl>
 </UserControl>
