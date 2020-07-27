@@ -1,6 +1,6 @@
 ﻿<Styles xmlns="https://github.com/avaloniaui" 
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-    <StyleInclude Source="avares://Avalonia.Themes.Fluent/Accents/FluentDark.xaml"/>
+    <StyleInclude Source="avares://Avalonia.Controls.DataGrid/Themes/Default.xaml"/>
     <StyleInclude Source="avares://Avalonia.Themes.Fluent/DensityStyles/Compact.xaml"/>
     <Style>
         <Style.Resources>
@@ -21,5 +21,20 @@
     </Style>
     <Style Selector="TreeView">
         <Setter Property="Background" Value="{DynamicResource SystemControlBackgroundChromeMediumLowBrush}" />
+    </Style>
+    <Style Selector="DataGrid">
+        <Setter Property="Background" Value="{DynamicResource SystemControlBackgroundChromeMediumLowBrush}" />
+        <Setter Property="HorizontalGridLinesBrush" Value="{DynamicResource SystemChromeMediumColor}" />
+        <Setter Property="VerticalGridLinesBrush" Value="{DynamicResource SystemChromeMediumColor}" />
+    </Style>
+    <Style Selector="DataGridColumnHeader">
+        <Setter Property="Background" Value="{DynamicResource SystemControlBackgroundChromeMediumLowBrush}" />
+        <Setter Property="SeparatorBrush" Value="{DynamicResource SystemChromeMediumColor}" />
+    </Style>
+    <Style Selector="DataGridRow /template/ Rectangle#BackgroundRectangle">
+        <Setter Property="Fill" Value="{DynamicResource SystemControlHighlightListAccentLowBrush}" />
+    </Style>
+    <Style Selector="DataGridRow:selected">
+        <Setter Property="Foreground" Value="{DynamicResource SystemControlHighlightAltBaseHighBrush}" />
     </Style>
 </Styles>

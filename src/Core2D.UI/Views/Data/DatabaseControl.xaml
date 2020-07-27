@@ -28,6 +28,7 @@
                     </Grid>
                     <DataGrid x:Name="rowsDataGrid"
                               SelectedItem="{Binding CurrentRecord, Mode=TwoWay}"
+                              SelectionMode="Single"
                               AutoGenerateColumns="False"
                               IsReadOnly="False"
                               CanUserReorderColumns="False"
@@ -35,7 +36,6 @@
                               CanUserSortColumns="False"
                               BorderThickness="0"
                               RowBackground="Transparent"
-                              Background="Transparent"
                               Grid.Row="1">
                         <i:Interaction.Behaviors>
                             <idd:TypedDragBehavior DataType="{x:Type Data:IRecord}"/>
@@ -58,6 +58,7 @@
                     </Menu>
                     <DataGrid x:Name="columnsDataGrid"
                               Items="{Binding Columns}"
+                              SelectionMode="Single"
                               AutoGenerateColumns="False"
                               IsReadOnly="False"
                               CanUserReorderColumns="False"
@@ -65,7 +66,6 @@
                               CanUserSortColumns="False"
                               BorderThickness="0"
                               RowBackground="Transparent"
-                              Background="Transparent"
                               Grid.Row="1">
                         <i:Interaction.Behaviors>
                             <idd:TypedDragBehavior DataType="{x:Type Data:IColumn}"/>
