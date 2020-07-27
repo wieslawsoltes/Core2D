@@ -31,6 +31,48 @@ namespace Core2D.TextFieldReader.OpenXml
         /// <inheritdoc/>
         public string Extension { get; } = "xlsx";
 
+        private static string ToString(Cell c, SharedStringTablePart stringTable)
+        {
+            if (c.DataType == null)
+            {
+                return c.CellValue?.Text;
+            }
+
+            switch (c.DataType.Value)
+            {
+                case CellValues.SharedString:
+                    {
+                        if (stringTable != null)
+                        {
+                            int index = int.Parse(c.InnerText);
+                            var value = stringTable.SharedStringTable.ElementAt(index).InnerText;
+                            return value;
+                        }
+                    }
+                    break;
+                case CellValues.Boolean:
+                    {
+                        return c.InnerText switch
+                        {
+                            "0" => "FALSE",
+                            _ => "TRUE",
+                        };
+                    }
+                case CellValues.Number:
+                    return c.InnerText;
+                case CellValues.Error:
+                    return c.InnerText;
+                case CellValues.String:
+                    return c.InnerText;
+                case CellValues.InlineString:
+                    return c.InnerText;
+                case CellValues.Date:
+                    return c.InnerText;
+            }
+
+            return null;
+        }
+
         public static IEnumerable<string[]> ReadFields(Stream stream)
         {
             var spreadsheetDocument = SpreadsheetDocument.Open(stream, false);
@@ -43,51 +85,9 @@ namespace Core2D.TextFieldReader.OpenXml
 
             var stringTable = workbookpart.GetPartsOfType<SharedStringTablePart>().FirstOrDefault();
 
-            string ToString(Cell c)
-            {
-                if (c.DataType == null)
-                {
-                    return c.CellValue.Text;
-                }
-
-                switch (c.DataType.Value)
-                {
-                    case CellValues.SharedString:
-                        {
-                            if (stringTable != null)
-                            {
-                                int index = int.Parse(c.InnerText);
-                                var value = stringTable.SharedStringTable.ElementAt(index).InnerText;
-                                return value;
-                            }
-                        }
-                        break;
-                    case CellValues.Boolean:
-                        {
-                            return c.InnerText switch
-                            {
-                                "0" => "FALSE",
-                                _ => "TRUE",
-                            };
-                        }
-                    case CellValues.Number:
-                        return c.InnerText;
-                    case CellValues.Error:
-                        return c.InnerText;
-                    case CellValues.String:
-                        return c.InnerText;
-                    case CellValues.InlineString:
-                        return c.InnerText;
-                    case CellValues.Date:
-                        return c.InnerText;
-                }
-
-                return null;
-            }
-
             foreach (var row in sheetData.Elements<Row>())
             {
-                var fields = row.Elements<Cell>().Select(c => ToString(c)).ToArray();
+                var fields = row.Elements<Cell>().Select(c => ToString(c, stringTable)).ToArray();
                 yield return fields;
             }
 
