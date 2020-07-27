@@ -30,8 +30,4 @@
     <PackageReference Include="Math.Spatial" Version="1.2.0" />
   </ItemGroup>
 
-  <PropertyGroup>
-    <DefineConstants>$(DefineConstants);USE_CUSTOM_OBSERVER</DefineConstants>
-  </PropertyGroup>
-
 </Project>
