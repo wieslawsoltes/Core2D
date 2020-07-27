@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Threading.Tasks;
 using Avalonia;
 using Avalonia.Controls;
@@ -53,6 +54,7 @@ namespace Core2D.UI.DragAndDrop
         {
             base.OnAttached();
             AssociatedObject.AddHandler(InputElement.PointerPressedEvent, AssociatedObject_PointerPressed, RoutingStrategies.Direct | RoutingStrategies.Tunnel | RoutingStrategies.Bubble);
+            AssociatedObject.AddHandler(InputElement.PointerReleasedEvent, AssociatedObject_PointerReleased, RoutingStrategies.Direct | RoutingStrategies.Tunnel | RoutingStrategies.Bubble);
             AssociatedObject.AddHandler(InputElement.PointerMovedEvent, AssociatedObject_PointerMoved, RoutingStrategies.Direct | RoutingStrategies.Tunnel | RoutingStrategies.Bubble);
         }
 
@@ -61,6 +63,7 @@ namespace Core2D.UI.DragAndDrop
         {
             base.OnDetaching();
             AssociatedObject.RemoveHandler(InputElement.PointerPressedEvent, AssociatedObject_PointerPressed);
+            AssociatedObject.RemoveHandler(InputElement.PointerReleasedEvent, AssociatedObject_PointerReleased);
             AssociatedObject.RemoveHandler(InputElement.PointerMovedEvent, AssociatedObject_PointerMoved);
         }
 
@@ -103,6 +106,17 @@ namespace Core2D.UI.DragAndDrop
                     _value = control.DataContext;
                     _lock = true;
                 }
+            }
+        }
+
+        private void AssociatedObject_PointerReleased(object sender, PointerReleasedEventArgs e)
+        {
+            var properties = e.GetCurrentPoint(AssociatedObject).Properties;
+            if (properties.PointerUpdateKind == PointerUpdateKind.LeftButtonReleased && _triggerEvent != null)
+            {
+                _triggerEvent = null;
+                _value = null;
+                _lock = false;
             }
         }
 
