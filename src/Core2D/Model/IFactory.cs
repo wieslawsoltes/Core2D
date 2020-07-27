@@ -54,10 +54,9 @@ namespace Core2D
         /// </summary>
         /// <param name="owner">The owner instance.</param>
         /// <param name="name">The column name.</param>
-        /// <param name="width">The column width.</param>
         /// <param name="isVisible">The flag indicating whether column is visible.</param>
         /// <returns>The new instance of the <see cref="IColumn"/> class.</returns>
-        IColumn CreateColumn(IDatabase owner, string name, double width = double.NaN, bool isVisible = true);
+        IColumn CreateColumn(IDatabase owner, string name, bool isVisible = true);
 
         /// <summary>
         /// Creates a new <see cref="IRecord"/> instance.
