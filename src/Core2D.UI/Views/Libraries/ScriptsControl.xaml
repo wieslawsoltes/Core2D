@@ -26,8 +26,8 @@
                 <MenuItem Header="reset" Command="{Binding $parent[TopLevel].DataContext.OnResetRepl}"/>
                 <MenuItem Header="repl" Command="{Binding $parent[TopLevel].DataContext.OnExecuteRepl}" CommandParameter="{Binding CurrentScript.Code}" IsVisible="{Binding !!#scripts.SelectedItem}"/>
                 <MenuItem Header="execute" Command="{Binding $parent[TopLevel].DataContext.OnExecuteCode}" CommandParameter="{Binding CurrentScript.Code}" IsVisible="{Binding !!#scripts.SelectedItem}"/>
-                <MenuItem Header="+" Command="{Binding $parent[TopLevel].DataContext.OnAddScript}"/>
                 <MenuItem Header="&#727;" Command="{Binding $parent[TopLevel].DataContext.OnRemoveScript}" CommandParameter="{Binding CurrentScript}" IsVisible="{Binding !!#scripts.SelectedItem}"/>
+                <MenuItem Header="+" Command="{Binding $parent[TopLevel].DataContext.OnAddScript}"/>
             </Menu>
             <ListBox x:Name="scripts" Items="{Binding Scripts}" SelectedItem="{Binding CurrentScript, Mode=TwoWay}" Grid.Row="1">
                 <i:Interaction.Behaviors>

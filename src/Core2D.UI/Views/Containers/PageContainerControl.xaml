@@ -56,8 +56,8 @@
             <TabItem Header="Layers" x:CompileBindings="False">
                 <Grid RowDefinitions="Auto,*,Auto">
                     <Menu Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Center">
-                        <MenuItem Header="+" Command="{Binding $parent[TopLevel].DataContext.OnAddLayer}" CommandParameter="{Binding}"/>
                         <MenuItem Header="&#727;" Command="{Binding $parent[TopLevel].DataContext.OnRemoveLayer}" CommandParameter="{Binding CurrentLayer}" IsVisible="{Binding !!CurrentLayer}"/>
+                        <MenuItem Header="+" Command="{Binding $parent[TopLevel].DataContext.OnAddLayer}" CommandParameter="{Binding}"/>
                     </Menu>
                     <ListBox x:Name="layers" Items="{Binding Layers}" SelectedItem="{Binding CurrentLayer, Mode=TwoWay}" Grid.Row="1">
                         <ListBox.KeyBindings>

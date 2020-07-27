@@ -24,8 +24,8 @@
         <Grid Grid.Row="0" RowDefinitions="*" ColumnDefinitions="*,Auto">
             <TextBox Text="{Binding Name, Mode=TwoWay}" BorderBrush="Transparent" Background="Transparent" VerticalAlignment="Center" Margin="0,0,0,0" Grid.Column="0"/>
             <Menu Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center" x:CompileBindings="False">
-                <MenuItem Header="+" Command="{Binding $parent[TopLevel].DataContext.OnNew}" CommandParameter="{Binding Selected}"/>
                 <MenuItem Header="&#727;" Command="{Binding $parent[TopLevel].DataContext.OnDelete}" CommandParameter="{Binding Selected}" IsVisible="{Binding !!Selected}"/>
+                <MenuItem Header="+" Command="{Binding $parent[TopLevel].DataContext.OnNew}" CommandParameter="{Binding Selected}"/>
             </Menu>
         </Grid>
         <TreeView x:Name="documents" Items="{Binding Documents}" SelectedItem="{Binding Selected, Mode=TwoWay}" Grid.Row="1" x:CompileBindings="False">

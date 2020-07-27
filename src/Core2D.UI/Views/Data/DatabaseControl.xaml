@@ -22,8 +22,8 @@
                         <TextBox x:Name="filterRecordsText" Text="" Watermark="Filter records" BorderBrush="Transparent" Background="Transparent" VerticalAlignment="Center" Margin="0,0,0,0" Grid.Column="0" x:CompileBindings="False"/>
                         <Menu Grid.Column="1" HorizontalAlignment="Right">
                             <MenuItem Header="apply" Command="{Binding $parent[TopLevel].DataContext.OnApplyRecord}" CommandParameter="{Binding CurrentRecord}" IsVisible="{Binding !!CurrentRecord}" x:CompileBindings="False"/>
-                            <MenuItem Header="+" Command="{Binding $parent[TopLevel].DataContext.OnAddRecord}" CommandParameter="{Binding}" x:CompileBindings="False"/>
                             <MenuItem Header="&#727;" Command="{Binding $parent[TopLevel].DataContext.OnRemoveRecord}" CommandParameter="{Binding CurrentRecord}" IsVisible="{Binding !!CurrentRecord}" x:CompileBindings="False"/>
+                            <MenuItem Header="+" Command="{Binding $parent[TopLevel].DataContext.OnAddRecord}" CommandParameter="{Binding}" x:CompileBindings="False"/>
                         </Menu>
                     </Grid>
                     <DataGrid x:Name="rowsDataGrid"
