@@ -167,33 +167,4 @@
             <views:StatusControl x:Name="StatusControl" Grid.Column="0" Grid.ColumnSpan="5" Grid.Row="3"/>
         </Grid>
     </Grid>
-    <!--<Grid>
-        <SplitView x:Name="SplitView"
-                    PanePlacement="Left"
-                    PaneBackground="{DynamicResource SystemControlBackgroundChromeMediumLowBrush}"
-                    OpenPaneLength="250"
-                    CompactPaneLength="28"
-                    DisplayMode="Inline"
-                    IsPaneOpen="True">
-            <SplitView.Resources>
-                <DrawingPresenter x:Key="PinIcon" Drawing="{StaticResource Pin}" Width="20" Height="20"/>
-                <DrawingPresenter x:Key="PinOffIcon" Drawing="{StaticResource PinOff}" Width="20" Height="20"/>
-            </SplitView.Resources>
-            <SplitView.Pane>
-                <Grid RowDefinitions="Auto,*" ColumnDefinitions="*,Auto" VerticalAlignment="Stretch">
-                    <LayoutTransformControl x:Name="LayoutTransform" Grid.Row="0" Grid.Column="0" Margin="0">
-                        <LayoutTransformControl.LayoutTransform>
-                            <RotateTransform Angle="0"/>
-                        </LayoutTransformControl.LayoutTransform>
-                        <TextBlock x:Name="PinTextBlock" Text="Project" Background="Transparent" HorizontalAlignment="Stretch" TextAlignment="Left" VerticalAlignment="Center" Margin="0" Padding="4"/>
-                    </LayoutTransformControl>
-                    <Button x:Name="PinButton" IsVisible="{Binding #SplitView.IsPaneOpen}" Content="{StaticResource PinIcon}" Grid.Row="0" Grid.Column="1" Background="Transparent" BorderThickness="0" Margin="4"/>
-                    <containers:ProjectContainerControl DataContext="{Binding Project}" IsVisible="{Binding #SplitView.IsPaneOpen}" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"/>
-                </Grid>
-            </SplitView.Pane>
-            <Grid>
-                <views:PageControl x:Name="Page"/>
-            </Grid>
-        </SplitView>
-    </Grid>-->
 </UserControl>
