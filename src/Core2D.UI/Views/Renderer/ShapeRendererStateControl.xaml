@@ -70,14 +70,14 @@
                         </ItemsPanelTemplate>
                     </ListBox.ItemsPanel>
                     <ListBox.KeyBindings>
-                        <KeyBinding Command="{Binding $parent[Window].DataContext.OnRemoveShape}" CommandParameter="{Binding #shapes.SelectedItem}" Gesture="Delete" x:CompileBindings="False"/>
+                        <KeyBinding Command="{Binding $parent[TopLevel].DataContext.OnRemoveShape}" CommandParameter="{Binding #shapes.SelectedItem}" Gesture="Delete" x:CompileBindings="False"/>
                     </ListBox.KeyBindings>
                     <ListBox.DataTemplates>
                         <DataTemplate DataType="Shapes:IBaseShape">
                             <TextBlock Text="{Binding Mode=OneWay, Converter={StaticResource ObjectToTypeStringConverter}}">
                                 <TextBlock.ContextMenu>
                                     <ContextMenu x:CompileBindings="False">
-                                        <MenuItem Header="_Delete" Command="{Binding $parent[Window].DataContext.OnRemoveShape}" CommandParameter="{Binding}"/>
+                                        <MenuItem Header="_Delete" Command="{Binding $parent[TopLevel].DataContext.OnRemoveShape}" CommandParameter="{Binding}"/>
                                     </ContextMenu>
                                 </TextBlock.ContextMenu>
                             </TextBlock>

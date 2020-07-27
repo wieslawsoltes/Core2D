@@ -20,39 +20,39 @@
     </UserControl.Resources>
     <Grid RowDefinitions="Auto,*,Auto">
         <Menu Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Center" x:CompileBindings="False">
-            <MenuItem Header="apply" Command="{Binding $parent[Window].DataContext.OnApplyTemplate}" CommandParameter="{Binding CurrentTemplate}" IsVisible="{Binding !!#templates.SelectedItem}"/>
-            <MenuItem Header="edit" Command="{Binding $parent[Window].DataContext.OnEditTemplate}" CommandParameter="{Binding CurrentTemplate}" IsVisible="{Binding !!#templates.SelectedItem}"/>
-            <MenuItem Header="+" Command="{Binding $parent[Window].DataContext.OnAddTemplate}"/>
-            <MenuItem Header="&#727;" Command="{Binding $parent[Window].DataContext.OnRemoveTemplate}" CommandParameter="{Binding CurrentTemplate}" IsVisible="{Binding !!#templates.SelectedItem}"/>
+            <MenuItem Header="apply" Command="{Binding $parent[TopLevel].DataContext.OnApplyTemplate}" CommandParameter="{Binding CurrentTemplate}" IsVisible="{Binding !!#templates.SelectedItem}"/>
+            <MenuItem Header="edit" Command="{Binding $parent[TopLevel].DataContext.OnEditTemplate}" CommandParameter="{Binding CurrentTemplate}" IsVisible="{Binding !!#templates.SelectedItem}"/>
+            <MenuItem Header="+" Command="{Binding $parent[TopLevel].DataContext.OnAddTemplate}"/>
+            <MenuItem Header="&#727;" Command="{Binding $parent[TopLevel].DataContext.OnRemoveTemplate}" CommandParameter="{Binding CurrentTemplate}" IsVisible="{Binding !!#templates.SelectedItem}"/>
         </Menu>
         <ListBox x:Name="templates" Items="{Binding Templates}" SelectedItem="{Binding CurrentTemplate, Mode=TwoWay}" Grid.Row="1">
             <i:Interaction.Behaviors>
                 <idd:ContextDropBehavior Context="{Binding FallbackValue={x:Null}}" Handler="{StaticResource TemplatesListBoxDropHandler}"/>
             </i:Interaction.Behaviors>
             <ListBox.KeyBindings>
-                <KeyBinding Command="{Binding $parent[Window].DataContext.OnAddTemplate}" Gesture="Ctrl+N" x:CompileBindings="False"/>
-                <KeyBinding Command="{Binding $parent[Window].DataContext.OnEditTemplate}" CommandParameter="{Binding #templates.SelectedItem}" Gesture="Ctrl+T" x:CompileBindings="False"/>
-                <KeyBinding Command="{Binding $parent[Window].DataContext.OnRemoveTemplate}" CommandParameter="{Binding #templates.SelectedItem}" Gesture="Delete" x:CompileBindings="False"/>
-                <KeyBinding Command="{Binding $parent[Window].DataContext.Platform.OnExportObject}" CommandParameter="{Binding #templates.SelectedItem}" Gesture="Ctrl+E" x:CompileBindings="False"/>
+                <KeyBinding Command="{Binding $parent[TopLevel].DataContext.OnAddTemplate}" Gesture="Ctrl+N" x:CompileBindings="False"/>
+                <KeyBinding Command="{Binding $parent[TopLevel].DataContext.OnEditTemplate}" CommandParameter="{Binding #templates.SelectedItem}" Gesture="Ctrl+T" x:CompileBindings="False"/>
+                <KeyBinding Command="{Binding $parent[TopLevel].DataContext.OnRemoveTemplate}" CommandParameter="{Binding #templates.SelectedItem}" Gesture="Delete" x:CompileBindings="False"/>
+                <KeyBinding Command="{Binding $parent[TopLevel].DataContext.Platform.OnExportObject}" CommandParameter="{Binding #templates.SelectedItem}" Gesture="Ctrl+E" x:CompileBindings="False"/>
             </ListBox.KeyBindings>
             <ListBox.DataTemplates>
                 <DataTemplate DataType="Containers:IPageContainer">
                     <TextBlock x:Name="template" Text="{Binding Name}" Background="Transparent">
                         <i:Interaction.Behaviors>
                             <ia:EventTriggerBehavior EventName="DoubleTapped" SourceObject="{Binding #template}" x:CompileBindings="False">
-                                <ia:InvokeCommandAction Command="{Binding $parent[Window].DataContext.OnApplyTemplate}" CommandParameter="{Binding Mode=OneWay}" x:CompileBindings="False"/>
+                                <ia:InvokeCommandAction Command="{Binding $parent[TopLevel].DataContext.OnApplyTemplate}" CommandParameter="{Binding Mode=OneWay}" x:CompileBindings="False"/>
                             </ia:EventTriggerBehavior>
                             <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}"/>
                         </i:Interaction.Behaviors>
                         <TextBlock.ContextMenu>
                             <ContextMenu x:CompileBindings="False">
-                                <MenuItem Header="_Edit Template" Command="{Binding $parent[Window].DataContext.OnEditTemplate}" CommandParameter="{Binding Mode=OneWay}"/>
+                                <MenuItem Header="_Edit Template" Command="{Binding $parent[TopLevel].DataContext.OnEditTemplate}" CommandParameter="{Binding Mode=OneWay}"/>
                                 <Separator/>
-                                <MenuItem Header="_Add Template" Command="{Binding $parent[Window].DataContext.OnAddTemplate}"/>
+                                <MenuItem Header="_Add Template" Command="{Binding $parent[TopLevel].DataContext.OnAddTemplate}"/>
                                 <Separator/>
-                                <MenuItem Header="_Delete" Command="{Binding $parent[Window].DataContext.OnRemoveTemplate}" CommandParameter="{Binding Mode=OneWay}"/>
+                                <MenuItem Header="_Delete" Command="{Binding $parent[TopLevel].DataContext.OnRemoveTemplate}" CommandParameter="{Binding Mode=OneWay}"/>
                                 <Separator/>
-                                <MenuItem Header="E_xport" Command="{Binding $parent[Window].DataContext.Platform.OnExportObject}" CommandParameter="{Binding Mode=OneWay}"/>
+                                <MenuItem Header="E_xport" Command="{Binding $parent[TopLevel].DataContext.Platform.OnExportObject}" CommandParameter="{Binding Mode=OneWay}"/>
                             </ContextMenu>
                         </TextBlock.ContextMenu>
                     </TextBlock>

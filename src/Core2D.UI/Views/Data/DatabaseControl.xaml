@@ -19,9 +19,9 @@
             <TabItem Header="Records">
                 <Grid RowDefinitions="Auto,*">
                     <Menu Grid.Row="0" HorizontalAlignment="Right">
-                        <MenuItem Header="apply" Command="{Binding $parent[Window].DataContext.OnApplyRecord}" CommandParameter="{Binding CurrentRecord}" IsVisible="{Binding !!CurrentRecord}" x:CompileBindings="False"/>
-                        <MenuItem Header="+" Command="{Binding $parent[Window].DataContext.OnAddRecord}" CommandParameter="{Binding}" x:CompileBindings="False"/>
-                        <MenuItem Header="&#727;" Command="{Binding $parent[Window].DataContext.OnRemoveRecord}" CommandParameter="{Binding CurrentRecord}" IsVisible="{Binding !!CurrentRecord}" x:CompileBindings="False"/>
+                        <MenuItem Header="apply" Command="{Binding $parent[TopLevel].DataContext.OnApplyRecord}" CommandParameter="{Binding CurrentRecord}" IsVisible="{Binding !!CurrentRecord}" x:CompileBindings="False"/>
+                        <MenuItem Header="+" Command="{Binding $parent[TopLevel].DataContext.OnAddRecord}" CommandParameter="{Binding}" x:CompileBindings="False"/>
+                        <MenuItem Header="&#727;" Command="{Binding $parent[TopLevel].DataContext.OnRemoveRecord}" CommandParameter="{Binding CurrentRecord}" IsVisible="{Binding !!CurrentRecord}" x:CompileBindings="False"/>
                     </Menu>
                     <DataGrid x:Name="rowsDataGrid"
                               Items="{Binding Records}"
@@ -39,8 +39,8 @@
                             <idd:TypedDragBehavior DataType="{x:Type Data:IRecord}"/>
                         </i:Interaction.Behaviors>
                         <DataGrid.KeyBindings>
-                            <KeyBinding Command="{Binding $parent[Window].DataContext.OnAddRecord}" CommandParameter="{Binding #rowsDataGrid.DataContext, Mode=OneWay}" Gesture="Ctrl+N" x:CompileBindings="False"/>
-                            <KeyBinding Command="{Binding $parent[Window].DataContext.OnRemoveRecord}" CommandParameter="{Binding #rowsDataGrid.SelectedItem}" Gesture="Delete" x:CompileBindings="False"/>
+                            <KeyBinding Command="{Binding $parent[TopLevel].DataContext.OnAddRecord}" CommandParameter="{Binding #rowsDataGrid.DataContext, Mode=OneWay}" Gesture="Ctrl+N" x:CompileBindings="False"/>
+                            <KeyBinding Command="{Binding $parent[TopLevel].DataContext.OnRemoveRecord}" CommandParameter="{Binding #rowsDataGrid.SelectedItem}" Gesture="Delete" x:CompileBindings="False"/>
                         </DataGrid.KeyBindings>
                     </DataGrid>
                 </Grid>
@@ -51,8 +51,8 @@
             <TabItem Header="Columns">
                 <Grid RowDefinitions="Auto,*">
                     <Menu Grid.Row="0" HorizontalAlignment="Right">
-                        <MenuItem Header="&#727;" Command="{Binding $parent[Window].DataContext.OnRemoveColumn}" CommandParameter="{Binding #columnsDataGrid.SelectedItem}" x:CompileBindings="False"/>
-                        <MenuItem Header="+" Command="{Binding $parent[Window].DataContext.OnAddColumn}" CommandParameter="{Binding}" x:CompileBindings="False"/>
+                        <MenuItem Header="&#727;" Command="{Binding $parent[TopLevel].DataContext.OnRemoveColumn}" CommandParameter="{Binding #columnsDataGrid.SelectedItem}" x:CompileBindings="False"/>
+                        <MenuItem Header="+" Command="{Binding $parent[TopLevel].DataContext.OnAddColumn}" CommandParameter="{Binding}" x:CompileBindings="False"/>
                     </Menu>
                     <DataGrid x:Name="columnsDataGrid"
                               Items="{Binding Columns}"
@@ -69,8 +69,8 @@
                             <idd:TypedDragBehavior DataType="{x:Type Data:IColumn}"/>
                         </i:Interaction.Behaviors>
                         <DataGrid.KeyBindings>
-                            <KeyBinding Command="{Binding $parent[Window].DataContext.OnAddColumn}" CommandParameter="{Binding}" Gesture="Ctrl+N" x:CompileBindings="False"/>
-                            <KeyBinding Command="{Binding $parent[Window].DataContext.OnRemoveColumn}" CommandParameter="{Binding #columnsDataGrid.SelectedItem}" Gesture="Delete" x:CompileBindings="False"/>
+                            <KeyBinding Command="{Binding $parent[TopLevel].DataContext.OnAddColumn}" CommandParameter="{Binding}" Gesture="Ctrl+N" x:CompileBindings="False"/>
+                            <KeyBinding Command="{Binding $parent[TopLevel].DataContext.OnRemoveColumn}" CommandParameter="{Binding #columnsDataGrid.SelectedItem}" Gesture="Delete" x:CompileBindings="False"/>
                         </DataGrid.KeyBindings>
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Name" IsReadOnly="False" Binding="{Binding Name}"/>

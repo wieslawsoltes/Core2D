@@ -26,11 +26,11 @@
                         <TextBlock Text="{Binding OffsetX, Mode=OneWay}" Margin="{DynamicResource TextControlThemePadding}"/>
                         <TextBlock Text="OffsetY" Margin="{DynamicResource TextControlThemePadding}"/>
                         <TextBlock Text="{Binding OffsetY, Mode=OneWay}" Margin="{DynamicResource TextControlThemePadding}"/>
-                        <Button Content="Reset" Command="{Binding $parent[Window].DataContext.Platform.OnZoomReset}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Margin="{DynamicResource TextControlThemePadding}" x:CompileBindings="False"/>
-                        <Button Content="Fill" Command="{Binding $parent[Window].DataContext.Platform.OnZoomFill}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Margin="{DynamicResource TextControlThemePadding}" x:CompileBindings="False"/>
-                        <Button Content="Uniform" Command="{Binding $parent[Window].DataContext.Platform.OnZoomUniform}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Margin="{DynamicResource TextControlThemePadding}" x:CompileBindings="False"/>
-                        <Button Content="UniformToFill" Command="{Binding $parent[Window].DataContext.Platform.OnZoomUniformToFill}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Margin="{DynamicResource TextControlThemePadding}" x:CompileBindings="False"/>
-                        <Button Content="AutoFit" Command="{Binding $parent[Window].DataContext.Platform.OnZoomAutoFit}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Margin="{DynamicResource TextControlThemePadding}" x:CompileBindings="False"/>
+                        <Button Content="Reset" Command="{Binding $parent[TopLevel].DataContext.Platform.OnZoomReset}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Margin="{DynamicResource TextControlThemePadding}" x:CompileBindings="False"/>
+                        <Button Content="Fill" Command="{Binding $parent[TopLevel].DataContext.Platform.OnZoomFill}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Margin="{DynamicResource TextControlThemePadding}" x:CompileBindings="False"/>
+                        <Button Content="Uniform" Command="{Binding $parent[TopLevel].DataContext.Platform.OnZoomUniform}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Margin="{DynamicResource TextControlThemePadding}" x:CompileBindings="False"/>
+                        <Button Content="UniformToFill" Command="{Binding $parent[TopLevel].DataContext.Platform.OnZoomUniformToFill}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Margin="{DynamicResource TextControlThemePadding}" x:CompileBindings="False"/>
+                        <Button Content="AutoFit" Command="{Binding $parent[TopLevel].DataContext.Platform.OnZoomAutoFit}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Margin="{DynamicResource TextControlThemePadding}" x:CompileBindings="False"/>
                     </StackPanel>
                 </ScrollViewer>
             </TabItem>

@@ -56,13 +56,13 @@
             <TabItem Header="Layers" x:CompileBindings="False">
                 <Grid RowDefinitions="Auto,*,Auto">
                     <Menu Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Center">
-                        <MenuItem Header="+" Command="{Binding $parent[Window].DataContext.OnAddLayer}" CommandParameter="{Binding}"/>
-                        <MenuItem Header="&#727;" Command="{Binding $parent[Window].DataContext.OnRemoveLayer}" CommandParameter="{Binding CurrentLayer}" IsVisible="{Binding !!CurrentLayer}"/>
+                        <MenuItem Header="+" Command="{Binding $parent[TopLevel].DataContext.OnAddLayer}" CommandParameter="{Binding}"/>
+                        <MenuItem Header="&#727;" Command="{Binding $parent[TopLevel].DataContext.OnRemoveLayer}" CommandParameter="{Binding CurrentLayer}" IsVisible="{Binding !!CurrentLayer}"/>
                     </Menu>
                     <ListBox x:Name="layers" Items="{Binding Layers}" SelectedItem="{Binding CurrentLayer, Mode=TwoWay}" Grid.Row="1">
                         <ListBox.KeyBindings>
-                            <KeyBinding Command="{Binding $parent[Window].DataContext.OnAddLayer}" CommandParameter="{Binding #layers.DataContext, Mode=OneWay}" Gesture="Ctrl+N"/>
-                            <KeyBinding Command="{Binding $parent[Window].DataContext.OnRemoveLayer}" CommandParameter="{Binding #layers.SelectedItem}" Gesture="Delete"/>
+                            <KeyBinding Command="{Binding $parent[TopLevel].DataContext.OnAddLayer}" CommandParameter="{Binding #layers.DataContext, Mode=OneWay}" Gesture="Ctrl+N"/>
+                            <KeyBinding Command="{Binding $parent[TopLevel].DataContext.OnRemoveLayer}" CommandParameter="{Binding #layers.SelectedItem}" Gesture="Delete"/>
                         </ListBox.KeyBindings>
                         <ListBox.DataTemplates>
                             <DataTemplate DataType="Containers:ILayerContainer">
@@ -72,7 +72,7 @@
                                     </i:Interaction.Behaviors>
                                     <Grid.ContextMenu>
                                         <ContextMenu>
-                                            <MenuItem Header="_Delete" Command="{Binding $parent[Window].DataContext.OnRemoveLayer}" CommandParameter="{Binding Mode=OneWay}"/>
+                                            <MenuItem Header="_Delete" Command="{Binding $parent[TopLevel].DataContext.OnRemoveLayer}" CommandParameter="{Binding Mode=OneWay}"/>
                                         </ContextMenu>
                                     </Grid.ContextMenu>
                                     <CheckBox Content="" IsChecked="{Binding IsVisible, Mode=TwoWay}" MinWidth="0" VerticalAlignment="Center" Grid.Column="0"/>
@@ -87,7 +87,7 @@
             <TabItem Header="Shapes" x:CompileBindings="False">
                 <Grid RowDefinitions="Auto,*,Auto">
                     <Menu Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Center">
-                        <MenuItem Header="&#727;" Command="{Binding $parent[Window].DataContext.OnRemoveShape}" CommandParameter="{Binding CurrentShape}" IsVisible="{Binding !!CurrentShape}"/>
+                        <MenuItem Header="&#727;" Command="{Binding $parent[TopLevel].DataContext.OnRemoveShape}" CommandParameter="{Binding CurrentShape}" IsVisible="{Binding !!CurrentShape}"/>
                     </Menu>
                     <ListBox x:Name="shapes" Items="{Binding CurrentLayer.Shapes}" SelectedItem="{Binding CurrentShape, Mode=TwoWay}" VirtualizationMode="Simple" Grid.Row="1">
                         <ListBox.ItemsPanel>
@@ -96,7 +96,7 @@
                             </ItemsPanelTemplate>
                         </ListBox.ItemsPanel>
                         <ListBox.KeyBindings>
-                            <KeyBinding Command="{Binding $parent[Window].DataContext.OnRemoveShape}" CommandParameter="{Binding #shapes.SelectedItem}" Gesture="Delete"/>
+                            <KeyBinding Command="{Binding $parent[TopLevel].DataContext.OnRemoveShape}" CommandParameter="{Binding #shapes.SelectedItem}" Gesture="Delete"/>
                         </ListBox.KeyBindings>
                         <ListBox.DataTemplates>
                             <DataTemplate DataType="Shapes:IBaseShape">
@@ -106,7 +106,7 @@
                                     </i:Interaction.Behaviors>
                                     <TextBlock.ContextMenu>
                                         <ContextMenu>
-                                            <MenuItem Header="_Delete" Command="{Binding $parent[Window].DataContext.OnRemoveShape}" CommandParameter="{Binding}"/>
+                                            <MenuItem Header="_Delete" Command="{Binding $parent[TopLevel].DataContext.OnRemoveShape}" CommandParameter="{Binding}"/>
                                         </ContextMenu>
                                     </TextBlock.ContextMenu>
                                 </TextBlock>

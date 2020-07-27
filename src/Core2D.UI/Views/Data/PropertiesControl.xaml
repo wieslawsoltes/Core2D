@@ -16,7 +16,7 @@
              x:DataType="Data:IContext" x:CompileBindings="True">
     <Grid RowDefinitions="Auto,*" ColumnDefinitions="*">
         <Menu Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" HorizontalAlignment="Right">
-            <MenuItem Header="+" Command="{Binding $parent[Window].DataContext.OnAddProperty}" CommandParameter="{Binding}" x:CompileBindings="False"/>
+            <MenuItem Header="+" Command="{Binding $parent[TopLevel].DataContext.OnAddProperty}" CommandParameter="{Binding}" x:CompileBindings="False"/>
         </Menu>
         <ScrollViewer Grid.Row="1" Grid.Column="0" IsVisible="{Binding !!Properties.Length}">
             <Grid RowDefinitions="Auto,*" ColumnDefinitions="50*,Auto,50*">
@@ -43,7 +43,7 @@
                                     <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}"/>
                                 </i:Interaction.Behaviors>-->
                                 <TextBox Text="{Binding Value, Mode=TwoWay}" Grid.Column="0"/>
-                                <Button Content="-" Grid.Column="1" Command="{Binding $parent[Window].DataContext.OnRemoveProperty}" CommandParameter="{Binding}" Padding="0" VerticalAlignment="Stretch" VerticalContentAlignment="Center" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Margin="6,0,0,0" x:CompileBindings="False"/>
+                                <Button Content="-" Grid.Column="1" Command="{Binding $parent[TopLevel].DataContext.OnRemoveProperty}" CommandParameter="{Binding}" Padding="0" VerticalAlignment="Stretch" VerticalContentAlignment="Center" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Margin="6,0,0,0" x:CompileBindings="False"/>
                             </Grid>
                         </DataTemplate>
                     </ItemsControl.DataTemplates>

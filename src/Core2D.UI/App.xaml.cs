@@ -25,13 +25,13 @@ namespace Core2D.UI
 {
     public class App : Application
     {
-        public static Styles DefaultDark;
+        public Styles DefaultDark { get; set; }
 
-        public static Styles DefaultLight;
+        public Styles DefaultLight { get; set; }
 
-        public static Styles FluentDark;
+        public Styles FluentDark { get; set; }
 
-        public static Styles FluentLight;
+        public Styles FluentLight { get; set; }
 
         public static ThemeName DefaultTheme { get; set; }
 
@@ -39,9 +39,16 @@ namespace Core2D.UI
 
         private class ChangeThemeCommand : ICommand
         {
+            private App _app;
+
 #pragma warning disable CS0067
             public event EventHandler CanExecuteChanged;
 #pragma warning restore CS0067
+
+            public ChangeThemeCommand(App app)
+            {
+                _app = app;
+            }
 
             public bool CanExecute(object parameter)
             {
@@ -52,48 +59,14 @@ namespace Core2D.UI
             {
                 if (parameter is string value)
                 {
-                    App.SetTheme(value);
+                    _app.SetTheme(value);
                 }
             }
         }
 
         static App()
         {
-            DefaultDark = new Styles
-            {
-                new StyleInclude(new Uri("avares://Core2D.UI/Styles"))
-                {
-                    Source = new Uri("avares://Core2D.UI/Themes/DefaultDark.xaml")
-                }
-            };
-
-            DefaultLight = new Styles
-            {
-                new StyleInclude(new Uri("avares://Core2D.UI/Styles"))
-                {
-                    Source = new Uri("avares://Core2D.UI/Themes/DefaultLight.xaml")
-                }
-            };
-
-            FluentDark = new Styles
-            {
-                new StyleInclude(new Uri("avares://Core2D.UI/Styles"))
-                {
-                    Source = new Uri("avares://Core2D.UI/Themes/FluentDark.xaml")
-                }
-            };
-
-            FluentLight = new Styles
-            {
-                new StyleInclude(new Uri("avares://Core2D.UI/Styles"))
-                {
-                    Source = new Uri("avares://Core2D.UI/Themes/FluentLight.xaml")
-                }
-            };
-
             DefaultTheme = ThemeName.FluentLight;
-
-            ChangeTheme = new ChangeThemeCommand();
 
             InitializeDesigner();
         }
@@ -261,47 +234,47 @@ namespace Core2D.UI
             singleViewLifetime.MainView = mainView;
         }
 
-        public static void InitTheme(ThemeName themeName)
+        public void InitTheme(ThemeName themeName)
         {
             switch (themeName)
             {
                 case ThemeName.DefaultDark:
-                    Current.Styles.Insert(0, DefaultDark);
+                    Styles.Insert(0, DefaultDark);
                     break;
                 case ThemeName.DefaultLight:
-                    Current.Styles.Insert(0, DefaultLight);
+                    Styles.Insert(0, DefaultLight);
                     break;
                 case ThemeName.FluentDark:
-                    Current.Styles.Insert(0, FluentDark);
+                    Styles.Insert(0, FluentDark);
                     break;
                 default:
                 case ThemeName.FluentLight:
-                    Current.Styles.Insert(0, FluentLight);
+                    Styles.Insert(0, FluentLight);
                     break;
             }
         }
 
-        public static void SetTheme(ThemeName themeName)
+        public void SetTheme(ThemeName themeName)
         {
             switch (themeName)
             {
                 case ThemeName.DefaultDark:
-                    Current.Styles[0] = DefaultDark;
+                    Styles[0] = DefaultDark;
                     break;
                 case ThemeName.DefaultLight:
-                    Current.Styles[0] = DefaultLight;
+                    Styles[0] = DefaultLight;
                     break;
                 case ThemeName.FluentDark:
-                    Current.Styles[0] = FluentDark;
+                    Styles[0] = FluentDark;
                     break;
                 default:
                 case ThemeName.FluentLight:
-                    Current.Styles[0] = FluentLight;
+                    Styles[0] = FluentLight;
                     break;
             }
         }
 
-        public static void SetTheme(string themeName)
+        public void SetTheme(string themeName)
         {
             if (Enum.TryParse<ThemeName>(themeName, out var result))
             {
@@ -328,6 +301,40 @@ namespace Core2D.UI
         public override void Initialize()
         {
             AvaloniaXamlLoader.Load(this);
+
+            DefaultDark = new Styles
+            {
+                new StyleInclude(new Uri("avares://Core2D.UI/Styles"))
+                {
+                    Source = new Uri("avares://Core2D.UI/Themes/DefaultDark.xaml")
+                }
+            };
+
+            DefaultLight = new Styles
+            {
+                new StyleInclude(new Uri("avares://Core2D.UI/Styles"))
+                {
+                    Source = new Uri("avares://Core2D.UI/Themes/DefaultLight.xaml")
+                }
+            };
+
+            FluentDark = new Styles
+            {
+                new StyleInclude(new Uri("avares://Core2D.UI/Styles"))
+                {
+                    Source = new Uri("avares://Core2D.UI/Themes/FluentDark.xaml")
+                }
+            };
+
+            FluentLight = new Styles
+            {
+                new StyleInclude(new Uri("avares://Core2D.UI/Styles"))
+                {
+                    Source = new Uri("avares://Core2D.UI/Themes/FluentLight.xaml")
+                }
+            };
+
+            ChangeTheme = new ChangeThemeCommand(this);
 
             InitTheme(DefaultTheme);
         }

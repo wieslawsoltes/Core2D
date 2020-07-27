@@ -14,7 +14,7 @@
              d:DesignWidth="1000" d:DesignHeight="600"
              x:DataType="Scripting:IScript" x:CompileBindings="True">
     <UserControl.KeyBindings>
-        <KeyBinding Command="{Binding $parent[Window].DataContext.OnExecuteRepl}" CommandParameter="{Binding #textCode.Text}" Gesture="Ctrl+Enter" x:CompileBindings="False"/>
+        <KeyBinding Command="{Binding $parent[TopLevel].DataContext.OnExecuteRepl}" CommandParameter="{Binding #textCode.Text}" Gesture="Ctrl+Enter" x:CompileBindings="False"/>
     </UserControl.KeyBindings>
     <Grid>
         <!--

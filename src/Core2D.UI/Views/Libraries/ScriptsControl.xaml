@@ -23,43 +23,43 @@
     <Grid RowDefinitions="50*,6,50*">
         <Grid RowDefinitions="Auto,*,Auto" Grid.Row="0">
             <Menu Grid.Row="0" HorizontalAlignment="Right" x:CompileBindings="False">
-                <MenuItem Header="reset" Command="{Binding $parent[Window].DataContext.OnResetRepl}"/>
-                <MenuItem Header="repl" Command="{Binding $parent[Window].DataContext.OnExecuteRepl}" CommandParameter="{Binding CurrentScript.Code}" IsVisible="{Binding !!#scripts.SelectedItem}"/>
-                <MenuItem Header="execute" Command="{Binding $parent[Window].DataContext.OnExecuteCode}" CommandParameter="{Binding CurrentScript.Code}" IsVisible="{Binding !!#scripts.SelectedItem}"/>
-                <MenuItem Header="+" Command="{Binding $parent[Window].DataContext.OnAddScript}"/>
-                <MenuItem Header="&#727;" Command="{Binding $parent[Window].DataContext.OnRemoveScript}" CommandParameter="{Binding CurrentScript}" IsVisible="{Binding !!#scripts.SelectedItem}"/>
+                <MenuItem Header="reset" Command="{Binding $parent[TopLevel].DataContext.OnResetRepl}"/>
+                <MenuItem Header="repl" Command="{Binding $parent[TopLevel].DataContext.OnExecuteRepl}" CommandParameter="{Binding CurrentScript.Code}" IsVisible="{Binding !!#scripts.SelectedItem}"/>
+                <MenuItem Header="execute" Command="{Binding $parent[TopLevel].DataContext.OnExecuteCode}" CommandParameter="{Binding CurrentScript.Code}" IsVisible="{Binding !!#scripts.SelectedItem}"/>
+                <MenuItem Header="+" Command="{Binding $parent[TopLevel].DataContext.OnAddScript}"/>
+                <MenuItem Header="&#727;" Command="{Binding $parent[TopLevel].DataContext.OnRemoveScript}" CommandParameter="{Binding CurrentScript}" IsVisible="{Binding !!#scripts.SelectedItem}"/>
             </Menu>
             <ListBox x:Name="scripts" Items="{Binding Scripts}" SelectedItem="{Binding CurrentScript, Mode=TwoWay}" Grid.Row="1">
                 <i:Interaction.Behaviors>
                     <idd:ContextDropBehavior Context="{Binding FallbackValue={x:Null}}" Handler="{StaticResource ScriptsListBoxDropHandler}"/>
                 </i:Interaction.Behaviors>
                 <ListBox.KeyBindings>
-                    <KeyBinding Command="{Binding $parent[Window].DataContext.OnAddScript}" Gesture="Ctrl+N" x:CompileBindings="False"/>
-                    <KeyBinding Command="{Binding $parent[Window].DataContext.OnRemoveScript}" CommandParameter="{Binding #scripts.SelectedItem}" Gesture="Delete" x:CompileBindings="False"/>
-                    <KeyBinding Command="{Binding $parent[Window].DataContext.Platform.OnExportObject}" CommandParameter="{Binding #scripts.SelectedItem}" Gesture="Ctrl+E" x:CompileBindings="False"/>
+                    <KeyBinding Command="{Binding $parent[TopLevel].DataContext.OnAddScript}" Gesture="Ctrl+N" x:CompileBindings="False"/>
+                    <KeyBinding Command="{Binding $parent[TopLevel].DataContext.OnRemoveScript}" CommandParameter="{Binding #scripts.SelectedItem}" Gesture="Delete" x:CompileBindings="False"/>
+                    <KeyBinding Command="{Binding $parent[TopLevel].DataContext.Platform.OnExportObject}" CommandParameter="{Binding #scripts.SelectedItem}" Gesture="Ctrl+E" x:CompileBindings="False"/>
                 </ListBox.KeyBindings>
                 <ListBox.DataTemplates>
                     <DataTemplate DataType="Scripting:IScript">
                         <TextBlock x:Name="script" Text="{Binding Name}" Background="Transparent">
                             <i:Interaction.Behaviors>
                                 <ia:EventTriggerBehavior EventName="DoubleTapped" SourceObject="{Binding #script}" x:CompileBindings="False">
-                                    <ia:InvokeCommandAction Command="{Binding $parent[Window].DataContext.OnExecuteScript}" CommandParameter="{Binding Mode=OneWay}" x:CompileBindings="False"/>
+                                    <ia:InvokeCommandAction Command="{Binding $parent[TopLevel].DataContext.OnExecuteScript}" CommandParameter="{Binding Mode=OneWay}" x:CompileBindings="False"/>
                                 </ia:EventTriggerBehavior>
                                 <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}"/>
                             </i:Interaction.Behaviors>
                             <TextBlock.ContextMenu>
                                 <ContextMenu x:CompileBindings="False">
-                                    <MenuItem Header="_Execute" Command="{Binding $parent[Window].DataContext.OnExecuteCode}" CommandParameter="{Binding Path=Code, Mode=OneWay}"/>
+                                    <MenuItem Header="_Execute" Command="{Binding $parent[TopLevel].DataContext.OnExecuteCode}" CommandParameter="{Binding Path=Code, Mode=OneWay}"/>
                                     <Separator/>
-                                    <MenuItem Header="_Repl" Command="{Binding $parent[Window].DataContext.OnExecuteRepl}" CommandParameter="{Binding Path=Code, Mode=OneWay}"/>
+                                    <MenuItem Header="_Repl" Command="{Binding $parent[TopLevel].DataContext.OnExecuteRepl}" CommandParameter="{Binding Path=Code, Mode=OneWay}"/>
                                     <Separator/>
-                                    <MenuItem Header="Re_set" Command="{Binding $parent[Window].DataContext.OnResetRepl}"/>
+                                    <MenuItem Header="Re_set" Command="{Binding $parent[TopLevel].DataContext.OnResetRepl}"/>
                                     <Separator/>
-                                    <MenuItem Header="_Add Script" Command="{Binding $parent[Window].DataContext.OnAddScript}"/>
+                                    <MenuItem Header="_Add Script" Command="{Binding $parent[TopLevel].DataContext.OnAddScript}"/>
                                     <Separator/>
-                                    <MenuItem Header="_Delete" Command="{Binding $parent[Window].DataContext.OnRemoveScript}" CommandParameter="{Binding Mode=OneWay}"/>
+                                    <MenuItem Header="_Delete" Command="{Binding $parent[TopLevel].DataContext.OnRemoveScript}" CommandParameter="{Binding Mode=OneWay}"/>
                                     <Separator/>
-                                    <MenuItem Header="E_xport" Command="{Binding $parent[Window].DataContext.Platform.OnExportObject}" CommandParameter="{Binding Mode=OneWay}"/>
+                                    <MenuItem Header="E_xport" Command="{Binding $parent[TopLevel].DataContext.Platform.OnExportObject}" CommandParameter="{Binding Mode=OneWay}"/>
                                 </ContextMenu>
                             </TextBlock.ContextMenu>
                         </TextBlock>
