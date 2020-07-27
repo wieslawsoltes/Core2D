@@ -77,24 +77,20 @@ namespace Core2D.UI.Views.Data
         {
             if (_database != null)
             {
-                _recordsView = null;
-                _rowsDataGrid.Items = null;
-                
                 _database.PropertyChanged -= Database_PropertyChanged;
                 _database = null;
             }
 
+            ResetRecordsView();
             ResetColumns();
 
             if (DataContext is IDatabase database)
             {
-                _recordsView = new DataGridCollectionView(database.Records);
-                _recordsView.Filter = FilterRecords;
-                _rowsDataGrid.Items = _recordsView;
 
                 _database = database;
                 _database.PropertyChanged += Database_PropertyChanged;
                 CreateColumns();
+                CreateRecordsView();
             }
         }
 
@@ -106,6 +102,15 @@ namespace Core2D.UI.Views.Data
                 {
                     ResetColumns();
                     CreateColumns();
+                }
+            }
+
+            if (e.PropertyName == nameof(IDatabase.Records))
+            {
+                if (_database != null)
+                {
+                    ResetRecordsView();
+                    CreateRecordsView();
                 }
             }
         }
@@ -121,6 +126,22 @@ namespace Core2D.UI.Views.Data
                     UpdateHeaders();
                 }
             }
+        }
+
+        private void CreateRecordsView()
+        {
+            _recordsView = new DataGridCollectionView(_database.Records);
+            _recordsView.Filter = FilterRecords;
+            _rowsDataGrid.Items = _recordsView;
+
+            _recordsFilter = _filterRecordsText?.Text;
+            _recordsView?.Refresh();
+        }
+
+        private void ResetRecordsView()
+        {
+            _rowsDataGrid.Items = null;
+            _recordsView = null;
         }
 
         private void CreateColumns()
