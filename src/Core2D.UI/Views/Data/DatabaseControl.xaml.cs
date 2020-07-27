@@ -154,7 +154,7 @@ namespace Core2D.UI.Views.Data
                     Width = DataGridLength.Auto,
                     IsVisible = column.IsVisible,
                     Binding = new Binding($"{nameof(IRecord.Values)}[{i}].{nameof(IValue.Content)}"),
-                    IsReadOnly = true
+                    IsReadOnly = false
                 };
                 column.PropertyChanged += Column_PropertyChanged;
                 _rowsDataGrid.Columns.Add(dataGridTextColumn);
