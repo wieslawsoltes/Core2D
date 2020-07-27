@@ -23,6 +23,9 @@
         <Setter Property="Background" Value="{DynamicResource SystemControlBackgroundChromeMediumLowBrush}" />
     </Style>
     <Style Selector="DataGrid">
+        <Style.Resources>
+            <x:Double x:Key="ScrollBarThickness">16</x:Double>
+        </Style.Resources>
         <Setter Property="Background" Value="{DynamicResource SystemControlBackgroundChromeMediumLowBrush}" />
         <Setter Property="HorizontalGridLinesBrush" Value="{DynamicResource SystemChromeMediumColor}" />
         <Setter Property="VerticalGridLinesBrush" Value="{DynamicResource SystemChromeMediumColor}" />
