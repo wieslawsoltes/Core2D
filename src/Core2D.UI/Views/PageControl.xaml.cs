@@ -14,6 +14,7 @@ namespace Core2D.UI.Views
         private PresenterControl _presenterControlData;
         private PresenterControl _presenterControlTemplate;
         private PresenterControl _presenterControlEditor;
+        //private TextBox _textEditor;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="PageControl"/> class.
@@ -27,6 +28,7 @@ namespace Core2D.UI.Views
             _presenterControlData = this.FindControl<PresenterControl>("presenterControlData");
             _presenterControlTemplate = this.FindControl<PresenterControl>("presenterControlTemplate");
             _presenterControlEditor = this.FindControl<PresenterControl>("presenterControlEditor");
+            //_textEditor = this.FindControl<TextBox>("textEditor");
         }
 
         /// <summary>
