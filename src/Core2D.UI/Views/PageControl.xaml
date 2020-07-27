@@ -135,6 +135,34 @@
                         <views:PresenterControl x:Name="presenterControlData" ZoomBorder="{Binding #zoomBorder}" Renderer="{Binding PageRenderer}" DataFlow="{Binding DataFlow}" Container="{Binding Project.CurrentContainer}" PresenterType="Data" ClipToBounds="False"/>
                         <views:PresenterControl x:Name="presenterControlTemplate" ZoomBorder="{Binding #zoomBorder}" Renderer="{Binding PageRenderer}" DataFlow="{Binding DataFlow}" Container="{Binding Project.CurrentContainer}" PresenterType="Template" ClipToBounds="False"/>
                         <views:PresenterControl x:Name="presenterControlEditor" ZoomBorder="{Binding #zoomBorder}" Renderer="{Binding PageRenderer}" DataFlow="{Binding DataFlow}" Container="{Binding Project.CurrentContainer}" PresenterType="Editor" ClipToBounds="False"/>
+                        <!--<Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                            <Canvas Background="{x:Null}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                                <TextBox x:Name="textEditor"
+                                         IsVisible="True"
+                                         Text="Text"
+                                         Canvas.Left="300"
+                                         Canvas.Top="300"
+                                         Width="90"
+                                         Height="30"
+                                         FontFamily="Calibri"
+                                         FontSize="12"
+                                         FontStyle="Normal"
+                                         FontWeight="Normal"
+                                         Foreground="Black"
+                                         HorizontalAlignment="Stretch"
+                                         VerticalAlignment="Stretch"
+                                         HorizontalContentAlignment="Center"
+                                         VerticalContentAlignment="Center"
+                                         TextAlignment="Center"
+                                         Background="{x:Null}"
+                                         BorderBrush="{x:Null}"
+                                         BorderThickness="0"
+                                         Margin="0"
+                                         Padding="0"
+                                         MinHeight="0"
+                                         MinWidth="0"/>
+                            </Canvas>
+                        </Grid>-->
                     </Panel>
                 </paz:ZoomBorder>
             </ScrollViewer>
