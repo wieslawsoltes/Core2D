@@ -20,11 +20,6 @@ namespace Core2D.Path
         ImmutableArray<IPathSegment> Segments { get; set; }
 
         /// <summary>
-        /// Gets or sets flag indicating whether path is filled.
-        /// </summary>
-        bool IsFilled { get; set; }
-
-        /// <summary>
         /// Gets or sets flag indicating whether path is closed.
         /// </summary>
         bool IsClosed { get; set; }

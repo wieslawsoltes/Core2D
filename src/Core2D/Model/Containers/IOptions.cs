@@ -48,11 +48,6 @@ namespace Core2D.Containers
         bool DefaultIsClosed { get; set; }
 
         /// <summary>
-        /// Gets or sets value indicating whether path segment is smooth join during creation.
-        /// </summary>
-        bool DefaultIsSmoothJoin { get; set; }
-
-        /// <summary>
         /// Gets or sets value indicating path fill rule during creation.
         /// </summary>
         FillRule DefaultFillRule { get; set; }

@@ -148,11 +148,6 @@
                         <CheckBox IsChecked="{Binding Project.Options.DefaultIsClosed}"/>
                     </MenuItem.Icon>
                 </MenuItem>
-                <MenuItem Header="Default is Smooth _Join" Command="{Binding OnToggleDefaultIsSmoothJoin}" InputGesture="J">
-                    <MenuItem.Icon>
-                        <CheckBox IsChecked="{Binding Project.Options.DefaultIsSmoothJoin}"/>
-                    </MenuItem.Icon>
-                </MenuItem>
                 <Separator/>
                 <MenuItem Header="Snap to _Grid" Command="{Binding OnToggleSnapToGrid}" InputGesture="G">
                     <MenuItem.Icon>

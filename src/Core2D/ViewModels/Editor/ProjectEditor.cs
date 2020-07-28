@@ -2076,14 +2076,6 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
-        public void OnToggleDefaultIsSmoothJoin()
-        {
-            if (Project?.Options != null)
-            {
-                Project.Options.DefaultIsSmoothJoin = !Project.Options.DefaultIsSmoothJoin;
-            }
-        }
 
         /// <inheritdoc/>
         public void OnToggleSnapToGrid()

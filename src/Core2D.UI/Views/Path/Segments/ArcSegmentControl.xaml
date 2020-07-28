@@ -14,7 +14,6 @@
     <Grid RowDefinitions="Auto,*">
         <StackPanel Grid.Row="0">
             <CheckBox Content="IsStroked" IsChecked="{Binding IsStroked, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
-            <CheckBox Content="IsSmoothJoin" IsChecked="{Binding IsSmoothJoin, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
             <TextBlock Text="RotationAngle" Margin="{DynamicResource TextControlThemePadding}"/>
             <TextBox Text="{Binding RotationAngle, Mode=TwoWay}"/>
             <CheckBox Content="IsLargeArc" IsChecked="{Binding IsLargeArc, Mode=TwoWay}" HorizontalAlignment="Stretch"/>

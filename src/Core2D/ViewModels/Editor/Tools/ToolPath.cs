@@ -170,7 +170,6 @@ namespace Core2D.Editor.Tools
 
             GeometryContext.BeginFigure(
                 start,
-                editor.Project.Options.DefaultIsFilled,
                 editor.Project.Options.DefaultIsClosed);
 
             var style = editor.Project.CurrentStyleLibrary?.Selected != null ?

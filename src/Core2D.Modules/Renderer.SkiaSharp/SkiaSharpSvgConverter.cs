@@ -201,7 +201,7 @@ namespace Core2D.Renderer.SkiaSharp
                             var x = moveToPathCommand.X;
                             var y = moveToPathCommand.Y;
                             var point = factory.CreatePointShape(x, y);
-                            context.BeginFigure(point, isFilled, false);
+                            context.BeginFigure(point, false);
                         }
                         break;
                     case SP.LineToPathCommand lineToPathCommand:
@@ -319,7 +319,7 @@ namespace Core2D.Renderer.SkiaSharp
             var startX = addPolyPathCommand.Points[0].X;
             var startY = addPolyPathCommand.Points[0].Y;
             var startPoint = factory.CreatePointShape(startX, startY);
-            context.BeginFigure(startPoint, isFilled, false);
+            context.BeginFigure(startPoint, false);
 
             for (int i = 1; i < addPolyPathCommand.Points.Count; i++)
             {

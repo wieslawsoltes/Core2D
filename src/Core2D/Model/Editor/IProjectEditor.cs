@@ -669,11 +669,6 @@ namespace Core2D.Editor
         void OnToggleDefaultIsClosed();
 
         /// <summary>
-        /// Toggle <see cref="Options.DefaultIsSmoothJoin"/> option.
-        /// </summary>
-        void OnToggleDefaultIsSmoothJoin();
-
-        /// <summary>
         /// Toggle <see cref="Options.SnapToGrid"/> option.
         /// </summary>
         void OnToggleSnapToGrid();

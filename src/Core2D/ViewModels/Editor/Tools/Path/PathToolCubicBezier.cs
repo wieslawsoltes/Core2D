@@ -78,8 +78,7 @@ namespace Core2D.Editor.Tools.Path
                             _cubicBezier.Point2,
                             _cubicBezier.Point3,
                             _cubicBezier.Point4,
-                            editor.Project.Options.DefaultIsStroked,
-                            editor.Project.Options.DefaultIsSmoothJoin);
+                            editor.Project.Options.DefaultIsStroked);
                         editor.Project.CurrentContainer.WorkingLayer.InvalidateLayer();
                         ToStatePoint4();
                         Move(null);
@@ -153,8 +152,7 @@ namespace Core2D.Editor.Tools.Path
                             _cubicBezier.Point2,
                             _cubicBezier.Point3,
                             _cubicBezier.Point4,
-                            editor.Project.Options.DefaultIsStroked,
-                            editor.Project.Options.DefaultIsSmoothJoin);
+                            editor.Project.Options.DefaultIsStroked);
                         editor.Project.CurrentContainer.WorkingLayer.InvalidateLayer();
                         ToStatePoint4();
                         Move(null);

@@ -25,7 +25,6 @@ namespace Core2D.UI.Renderer
             {
                 context.BeginFigure(
                     factory.CreatePointShape(pf.StartPoint.X, pf.StartPoint.Y),
-                    pf.IsFilled,
                     pf.IsClosed);
 
                 foreach (var segment in pf.Segments)
@@ -79,7 +78,7 @@ namespace Core2D.UI.Renderer
 
                 foreach (var xpf in xpg.Figures)
                 {
-                    sgc.BeginFigure(new A.Point(xpf.StartPoint.X, xpf.StartPoint.Y), xpf.IsFilled);
+                    sgc.BeginFigure(new A.Point(xpf.StartPoint.X, xpf.StartPoint.Y), false);
 
                     previous = xpf.StartPoint;
 

@@ -14,7 +14,7 @@ namespace Core2D.UnitTests
         [Trait("Core2D.Path", "Segments")]
         public void GetPoints_Should_Return_All_Segment_Points()
         {
-            var segment = _factory.CreateCubicBezierSegment(_factory.CreatePointShape(), _factory.CreatePointShape(), _factory.CreatePointShape(), true, true);
+            var segment = _factory.CreateCubicBezierSegment(_factory.CreatePointShape(), _factory.CreatePointShape(), _factory.CreatePointShape(), true);
 
             var target = new List<IPointShape>();
             segment.GetPoints(target);
@@ -30,7 +30,7 @@ namespace Core2D.UnitTests
         [Trait("Core2D.Path", "Segments")]
         public void ToXamlString_Should_Return_Path_Markup()
         {
-            var target = _factory.CreateCubicBezierSegment(_factory.CreatePointShape(), _factory.CreatePointShape(), _factory.CreatePointShape(), true, true);
+            var target = _factory.CreateCubicBezierSegment(_factory.CreatePointShape(), _factory.CreatePointShape(), _factory.CreatePointShape(), true);
 
             var actual = target.ToXamlString();
 
@@ -41,7 +41,7 @@ namespace Core2D.UnitTests
         [Trait("Core2D.Path", "Segments")]
         public void ToSvgString_Should_Return_Path_Markup()
         {
-            var target = _factory.CreateCubicBezierSegment(_factory.CreatePointShape(), _factory.CreatePointShape(), _factory.CreatePointShape(), true, true);
+            var target = _factory.CreateCubicBezierSegment(_factory.CreatePointShape(), _factory.CreatePointShape(), _factory.CreatePointShape(), true);
 
             var actual = target.ToSvgString();
 

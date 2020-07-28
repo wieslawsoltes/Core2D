@@ -64,7 +64,6 @@
         <KeyBinding Command="{Binding OnToggleDefaultIsStroked}" Gesture="K" x:CompileBindings="False"/>
         <KeyBinding Command="{Binding OnToggleDefaultIsFilled}" Gesture="F" x:CompileBindings="False"/>
         <KeyBinding Command="{Binding OnToggleDefaultIsClosed}" Gesture="D" x:CompileBindings="False"/>
-        <KeyBinding Command="{Binding OnToggleDefaultIsSmoothJoin}" Gesture="J" x:CompileBindings="False"/>
         <KeyBinding Command="{Binding OnToggleSnapToGrid}" Gesture="G" x:CompileBindings="False"/>
         <KeyBinding Command="{Binding OnToggleTryToConnect}" Gesture="C" x:CompileBindings="False"/>
         <!-- Shape -->

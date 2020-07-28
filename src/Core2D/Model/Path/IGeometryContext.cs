@@ -12,9 +12,8 @@ namespace Core2D.Path
         /// Begins path figure.
         /// </summary>
         /// <param name="startPoint">The start point.</param>
-        /// <param name="isFilled">The flag indicating whether figure is filled.</param>
         /// <param name="isClosed">The flag indicating whether figure is closed.</param>
-        void BeginFigure(IPointShape startPoint, bool isFilled = true, bool isClosed = true);
+        void BeginFigure(IPointShape startPoint, bool isClosed = true);
 
         /// <summary>
         /// Sets the current closed state of the figure. 
@@ -27,8 +26,7 @@ namespace Core2D.Path
         /// </summary>
         /// <param name="point">The end point.</param>
         /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
-        /// <param name="isSmoothJoin">The flag indicating whether shape is smooth join.</param>
-        void LineTo(IPointShape point, bool isStroked = true, bool isSmoothJoin = true);
+        void LineTo(IPointShape point, bool isStroked = true);
 
         /// <summary>
         /// Adds arc segment.
@@ -39,8 +37,7 @@ namespace Core2D.Path
         /// <param name="isLargeArc">The is large flag.</param>
         /// <param name="sweepDirection">The sweep direction flag.</param>
         /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
-        /// <param name="isSmoothJoin">The flag indicating whether shape is smooth join.</param>
-        void ArcTo(IPointShape point, IPathSize size, double rotationAngle, bool isLargeArc = false, SweepDirection sweepDirection = SweepDirection.Clockwise, bool isStroked = true, bool isSmoothJoin = true);
+        void ArcTo(IPointShape point, IPathSize size, double rotationAngle, bool isLargeArc = false, SweepDirection sweepDirection = SweepDirection.Clockwise, bool isStroked = true);
 
         /// <summary>
         /// Adds cubic bezier segment.
@@ -49,8 +46,7 @@ namespace Core2D.Path
         /// <param name="point2">The second control point.</param>
         /// <param name="point3">The end point.</param>
         /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
-        /// <param name="isSmoothJoin">The flag indicating whether shape is smooth join.</param>
-        void CubicBezierTo(IPointShape point1, IPointShape point2, IPointShape point3, bool isStroked = true, bool isSmoothJoin = true);
+        void CubicBezierTo(IPointShape point1, IPointShape point2, IPointShape point3, bool isStroked = true);
 
         /// <summary>
         /// Adds quadratic bezier segment.
@@ -58,7 +54,6 @@ namespace Core2D.Path
         /// <param name="point1">The control point.</param>
         /// <param name="point2">The end point.</param>
         /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
-        /// <param name="isSmoothJoin">The flag indicating whether shape is smooth join.</param>
-        void QuadraticBezierTo(IPointShape point1, IPointShape point2, bool isStroked = true, bool isSmoothJoin = true);
+        void QuadraticBezierTo(IPointShape point1, IPointShape point2, bool isStroked = true);
     }
 }

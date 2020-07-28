@@ -37,7 +37,6 @@ namespace Core2D.UnitTests
 
             target.BeginFigure(_factory.CreatePointShape());
             Assert.NotNull(geometry.Figures[0]);
-            Assert.True(geometry.Figures[0].IsFilled);
             Assert.True(geometry.Figures[0].IsClosed);
 
             target.SetClosedState(false);
@@ -58,7 +57,6 @@ namespace Core2D.UnitTests
             var segment = geometry.Figures[0].Segments[0];
             Assert.IsType<LineSegment>(segment);
             Assert.True(segment.IsStroked);
-            Assert.True(segment.IsSmoothJoin);
         }
 
         [Fact]
@@ -70,12 +68,11 @@ namespace Core2D.UnitTests
             target.BeginFigure(_factory.CreatePointShape());
             Assert.Empty(geometry.Figures[0].Segments);
 
-            target.ArcTo(_factory.CreatePointShape(), _factory.CreatePathSize(), 0.0, false, SweepDirection.Clockwise, true, true);
+            target.ArcTo(_factory.CreatePointShape(), _factory.CreatePathSize(), 0.0, false, SweepDirection.Clockwise, true);
 
             var segment = geometry.Figures[0].Segments[0];
             Assert.IsType<ArcSegment>(segment);
             Assert.True(segment.IsStroked);
-            Assert.True(segment.IsSmoothJoin);
         }
 
         [Fact]
@@ -92,7 +89,6 @@ namespace Core2D.UnitTests
             var segment = geometry.Figures[0].Segments[0];
             Assert.IsType<CubicBezierSegment>(segment);
             Assert.True(segment.IsStroked);
-            Assert.True(segment.IsSmoothJoin);
         }
 
         [Fact]
@@ -109,7 +105,6 @@ namespace Core2D.UnitTests
             var segment = geometry.Figures[0].Segments[0];
             Assert.IsType<QuadraticBezierSegment>(segment);
             Assert.True(segment.IsStroked);
-            Assert.True(segment.IsSmoothJoin);
         }
     }
 }

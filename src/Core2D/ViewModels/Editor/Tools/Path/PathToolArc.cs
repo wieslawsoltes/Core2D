@@ -85,8 +85,7 @@ namespace Core2D.Editor.Tools.Path
                             _defaultRotationAngle,
                             _defaultIsLargeArc,
                             _defaultSweepDirection,
-                            editor.Project.Options.DefaultIsStroked,
-                            editor.Project.Options.DefaultIsSmoothJoin);
+                            editor.Project.Options.DefaultIsStroked);
                         editor.Project.CurrentContainer.WorkingLayer.InvalidateLayer();
                         ToStateEnd();
                         Move(null);
@@ -116,8 +115,7 @@ namespace Core2D.Editor.Tools.Path
                             _defaultRotationAngle,
                             _defaultIsLargeArc,
                             _defaultSweepDirection,
-                            editor.Project.Options.DefaultIsStroked,
-                            editor.Project.Options.DefaultIsSmoothJoin);
+                            editor.Project.Options.DefaultIsStroked);
                         editor.Project.CurrentContainer.WorkingLayer.InvalidateLayer();
                         Move(null);
                         _currentState = State.End;

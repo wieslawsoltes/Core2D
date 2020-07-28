@@ -61,7 +61,6 @@ namespace Core2D.Editor.Tools.Path
                         var start = editor.TryToGetConnectionPoint((double)sx, (double)sy) ?? factory.CreatePointShape((double)sx, (double)sy);
                         pathTool.GeometryContext.BeginFigure(
                                 start,
-                                editor.Project.Options.DefaultIsFilled,
                                 editor.Project.Options.DefaultIsClosed);
 
                         editor.CurrentPathTool.LeftDown(args);

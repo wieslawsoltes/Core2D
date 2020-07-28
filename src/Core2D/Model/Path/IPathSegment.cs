@@ -14,11 +14,6 @@ namespace Core2D.Path
         bool IsStroked { get; set; }
 
         /// <summary>
-        /// Gets or sets flag indicating whether segment is smooth join.
-        /// </summary>
-        bool IsSmoothJoin { get; set; }
-
-        /// <summary>
         /// Get all points in the shape.
         /// </summary>
         /// <param name="points">The points list.</param>

@@ -157,9 +157,8 @@ namespace Core2D
         /// </summary>
         /// <param name="point">The end point.</param>
         /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
-        /// <param name="isSmoothJoin">The flag indicating whether shape is smooth join.</param>
         /// <returns>The new instance of the <see cref="ILineSegment"/> class.</returns>
-        ILineSegment CreateLineSegment(IPointShape point, bool isStroked = true, bool isSmoothJoin = true);
+        ILineSegment CreateLineSegment(IPointShape point, bool isStroked = true);
 
         /// <summary>
         /// Creates a new <see cref="IArcSegment"/> instance.
@@ -170,9 +169,8 @@ namespace Core2D
         /// <param name="isLargeArc">The is large flag.</param>
         /// <param name="sweepDirection">The sweep direction flag.</param>
         /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
-        /// <param name="isSmoothJoin">The flag indicating whether shape is smooth join.</param>
         /// <returns>The new instance of the <see cref="IArcSegment"/> class.</returns>
-        IArcSegment CreateArcSegment(IPointShape point, IPathSize size, double rotationAngle, bool isLargeArc, SweepDirection sweepDirection, bool isStroked = true, bool isSmoothJoin = true);
+        IArcSegment CreateArcSegment(IPointShape point, IPathSize size, double rotationAngle, bool isLargeArc, SweepDirection sweepDirection, bool isStroked = true);
 
         /// <summary>
         /// Creates a new <see cref="IQuadraticBezierSegment"/> instance.
@@ -180,9 +178,8 @@ namespace Core2D
         /// <param name="point1">The control point.</param>
         /// <param name="point2">The end point.</param>
         /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
-        /// <param name="isSmoothJoin">The flag indicating whether shape is smooth join.</param>
         /// <returns>The new instance of the <see cref="IQuadraticBezierSegment"/> class.</returns>
-        IQuadraticBezierSegment CreateQuadraticBezierSegment(IPointShape point1, IPointShape point2, bool isStroked = true, bool isSmoothJoin = true);
+        IQuadraticBezierSegment CreateQuadraticBezierSegment(IPointShape point1, IPointShape point2, bool isStroked = true);
 
         /// <summary>
         /// Creates a new <see cref="ICubicBezierSegment"/> instance.
@@ -191,9 +188,8 @@ namespace Core2D
         /// <param name="point2">The second control point.</param>
         /// <param name="point3">The end point.</param>
         /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
-        /// <param name="isSmoothJoin">The flag indicating whether shape is smooth join.</param>
         /// <returns>The new instance of the <see cref="ICubicBezierSegment"/> class.</returns>
-        ICubicBezierSegment CreateCubicBezierSegment(IPointShape point1, IPointShape point2, IPointShape point3, bool isStroked = true, bool isSmoothJoin = true);
+        ICubicBezierSegment CreateCubicBezierSegment(IPointShape point1, IPointShape point2, IPointShape point3, bool isStroked = true);
 
         /// <summary>
         /// Creates a new <see cref="IPathSize"/> instance.
@@ -233,19 +229,17 @@ namespace Core2D
         /// <summary>
         /// Creates a new <see cref="IPathFigure"/> instance.
         /// </summary>
-        /// <param name="isFilled">The flag indicating whether path is filled.</param>
         /// <param name="isClosed">The flag indicating whether path is closed.</param>
         /// <returns>The new instance of the <see cref="IPathFigure"/> class.</returns>
-        IPathFigure CreatePathFigure(bool isFilled = false, bool isClosed = false);
+        IPathFigure CreatePathFigure(bool isClosed = false);
 
         /// <summary>
         /// Creates a new <see cref="IPathFigure"/> instance.
         /// </summary>
         /// <param name="startPoint">The start point.</param>
-        /// <param name="isFilled">The flag indicating whether path is filled.</param>
         /// <param name="isClosed">The flag indicating whether path is closed.</param>
         /// <returns>The new instance of the <see cref="IPathFigure"/> class.</returns>
-        IPathFigure CreatePathFigure(IPointShape startPoint, bool isFilled = false, bool isClosed = false);
+        IPathFigure CreatePathFigure(IPointShape startPoint, bool isClosed = false);
 
         /// <summary>
         /// Creates a new <see cref="IPointShape"/> instance.

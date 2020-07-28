@@ -25,9 +25,9 @@ namespace Core2D.Path
         }
 
         /// <inheritdoc/>
-        public void BeginFigure(IPointShape startPoint, bool isFilled = true, bool isClosed = true)
+        public void BeginFigure(IPointShape startPoint, bool isClosed = true)
         {
-            _currentFigure = _factory.CreatePathFigure(startPoint, isFilled, isClosed);
+            _currentFigure = _factory.CreatePathFigure(startPoint, isClosed);
             _geometry.Figures = _geometry.Figures.Add(_currentFigure);
         }
 
@@ -38,17 +38,16 @@ namespace Core2D.Path
         }
 
         /// <inheritdoc/>
-        public void LineTo(IPointShape point, bool isStroked = true, bool isSmoothJoin = true)
+        public void LineTo(IPointShape point, bool isStroked = true)
         {
             var segment = _factory.CreateLineSegment(
                 point,
-                isStroked,
-                isSmoothJoin);
+                isStroked);
             _currentFigure.Segments = _currentFigure.Segments.Add(segment);
         }
 
         /// <inheritdoc/>
-        public void ArcTo(IPointShape point, IPathSize size, double rotationAngle = 0.0, bool isLargeArc = false, SweepDirection sweepDirection = SweepDirection.Clockwise, bool isStroked = true, bool isSmoothJoin = true)
+        public void ArcTo(IPointShape point, IPathSize size, double rotationAngle = 0.0, bool isLargeArc = false, SweepDirection sweepDirection = SweepDirection.Clockwise, bool isStroked = true)
         {
             var segment = _factory.CreateArcSegment(
                 point,
@@ -56,31 +55,28 @@ namespace Core2D.Path
                 rotationAngle,
                 isLargeArc,
                 sweepDirection,
-                isStroked,
-                isSmoothJoin);
+                isStroked);
             _currentFigure.Segments = _currentFigure.Segments.Add(segment);
         }
 
         /// <inheritdoc/>
-        public void CubicBezierTo(IPointShape point1, IPointShape point2, IPointShape point3, bool isStroked = true, bool isSmoothJoin = true)
+        public void CubicBezierTo(IPointShape point1, IPointShape point2, IPointShape point3, bool isStroked = true)
         {
             var segment = _factory.CreateCubicBezierSegment(
                 point1,
                 point2,
                 point3,
-                isStroked,
-                isSmoothJoin);
+                isStroked);
             _currentFigure.Segments = _currentFigure.Segments.Add(segment);
         }
 
         /// <inheritdoc/>
-        public void QuadraticBezierTo(IPointShape point1, IPointShape point2, bool isStroked = true, bool isSmoothJoin = true)
+        public void QuadraticBezierTo(IPointShape point1, IPointShape point2, bool isStroked = true)
         {
             var segment = _factory.CreateQuadraticBezierSegment(
                 point1,
                 point2,
-                isStroked,
-                isSmoothJoin);
+                isStroked);
             _currentFigure.Segments = _currentFigure.Segments.Add(segment);
         }
     }

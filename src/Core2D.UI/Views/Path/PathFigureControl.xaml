@@ -18,7 +18,6 @@
     </UserControl.Resources>
     <Grid RowDefinitions="Auto,*">
         <StackPanel Grid.Row="0">
-            <CheckBox Content="IsFilled" IsChecked="{Binding IsFilled, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
             <CheckBox Content="IsClosed" IsChecked="{Binding IsClosed, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
         </StackPanel>
         <TabControl Grid.Row="1">

@@ -74,8 +74,7 @@ namespace Core2D.Editor.Tools.Path
                         _line.End = factory.CreatePointShape((double)sx, (double)sy);
                         pathTool.GeometryContext.LineTo(
                             _line.End,
-                            editor.Project.Options.DefaultIsStroked,
-                            editor.Project.Options.DefaultIsSmoothJoin);
+                            editor.Project.Options.DefaultIsStroked);
                         editor.Project.CurrentContainer.WorkingLayer.InvalidateLayer();
                         ToStateEnd();
                         Move(null);
@@ -101,8 +100,7 @@ namespace Core2D.Editor.Tools.Path
                         _line.Start = _line.End;
                         _line.End = factory.CreatePointShape((double)sx, (double)sy);
                         pathTool.GeometryContext.LineTo(_line.End,
-                            editor.Project.Options.DefaultIsStroked,
-                            editor.Project.Options.DefaultIsSmoothJoin);
+                            editor.Project.Options.DefaultIsStroked);
                         editor.Project.CurrentContainer.WorkingLayer.InvalidateLayer();
                         Move(null);
                         _currentState = State.End;

@@ -14,7 +14,6 @@ namespace Core2D.Path
     {
         private IPointShape _startPoint;
         private ImmutableArray<IPathSegment> _segments;
-        private bool _isFilled;
         private bool _isClosed;
 
         /// <summary>
@@ -33,15 +32,6 @@ namespace Core2D.Path
         {
             get => _segments;
             set => Update(ref _segments, value);
-        }
-
-        /// <summary>
-        /// Gets or sets flag indicating whether path is filled.
-        /// </summary>
-        public bool IsFilled
-        {
-            get => _isFilled;
-            set => Update(ref _isFilled, value);
         }
 
         /// <summary>
@@ -155,12 +145,6 @@ namespace Core2D.Path
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
         public virtual bool ShouldSerializeSegments() => true;
-
-        /// <summary>
-        /// Check whether the <see cref="IsFilled"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeIsFilled() => _isFilled != default;
 
         /// <summary>
         /// Check whether the <see cref="IsClosed"/> property has changed from its default value.

@@ -89,7 +89,6 @@ namespace Core2D.Renderer.SkiaSharp
                             {
                                 context.BeginFigure(
                                     factory.CreatePointShape(points[0].X, points[0].Y),
-                                    false,
                                     false);
                             }
                             break;

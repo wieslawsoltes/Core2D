@@ -272,18 +272,17 @@ namespace Core2D
         }
 
         /// <inheritdoc/>
-        public ILineSegment CreateLineSegment(IPointShape point, bool isStroked = true, bool isSmoothJoin = true)
+        public ILineSegment CreateLineSegment(IPointShape point, bool isStroked = true)
         {
             return new LineSegment()
             {
                 Point = point,
-                IsStroked = isStroked,
-                IsSmoothJoin = isSmoothJoin
+                IsStroked = isStroked
             };
         }
 
         /// <inheritdoc/>
-        public IArcSegment CreateArcSegment(IPointShape point, IPathSize size, double rotationAngle, bool isLargeArc, SweepDirection sweepDirection, bool isStroked = true, bool isSmoothJoin = true)
+        public IArcSegment CreateArcSegment(IPointShape point, IPathSize size, double rotationAngle, bool isLargeArc, SweepDirection sweepDirection, bool isStroked = true)
         {
             return new ArcSegment()
             {
@@ -292,33 +291,30 @@ namespace Core2D
                 RotationAngle = rotationAngle,
                 IsLargeArc = isLargeArc,
                 SweepDirection = sweepDirection,
-                IsStroked = isStroked,
-                IsSmoothJoin = isSmoothJoin
+                IsStroked = isStroked
             };
         }
 
         /// <inheritdoc/>
-        public IQuadraticBezierSegment CreateQuadraticBezierSegment(IPointShape point1, IPointShape point2, bool isStroked = true, bool isSmoothJoin = true)
+        public IQuadraticBezierSegment CreateQuadraticBezierSegment(IPointShape point1, IPointShape point2, bool isStroked = true)
         {
             return new QuadraticBezierSegment()
             {
                 Point1 = point1,
                 Point2 = point2,
-                IsStroked = isStroked,
-                IsSmoothJoin = isSmoothJoin
+                IsStroked = isStroked
             };
         }
 
         /// <inheritdoc/>
-        public ICubicBezierSegment CreateCubicBezierSegment(IPointShape point1, IPointShape point2, IPointShape point3, bool isStroked = true, bool isSmoothJoin = true)
+        public ICubicBezierSegment CreateCubicBezierSegment(IPointShape point1, IPointShape point2, IPointShape point3, bool isStroked = true)
         {
             return new CubicBezierSegment()
             {
                 Point1 = point1,
                 Point2 = point2,
                 Point3 = point3,
-                IsStroked = isStroked,
-                IsSmoothJoin = isSmoothJoin
+                IsStroked = isStroked
             };
         }
 
@@ -365,25 +361,23 @@ namespace Core2D
         }
 
         /// <inheritdoc/>
-        public IPathFigure CreatePathFigure(bool isFilled = false, bool isClosed = false)
+        public IPathFigure CreatePathFigure(bool isClosed = false)
         {
             return new PathFigure()
             {
                 StartPoint = CreatePointShape(),
                 Segments = ImmutableArray.Create<IPathSegment>(),
-                IsFilled = isFilled,
                 IsClosed = isClosed
             };
         }
 
         /// <inheritdoc/>
-        public IPathFigure CreatePathFigure(IPointShape startPoint, bool isFilled = false, bool isClosed = false)
+        public IPathFigure CreatePathFigure(IPointShape startPoint, bool isClosed = false)
         {
             return new PathFigure()
             {
                 StartPoint = startPoint,
                 Segments = ImmutableArray.Create<IPathSegment>(),
-                IsFilled = isFilled,
                 IsClosed = isClosed
             };
         }
@@ -1038,7 +1032,6 @@ namespace Core2D
                 DefaultIsStroked = true,
                 DefaultIsFilled = false,
                 DefaultIsClosed = true,
-                DefaultIsSmoothJoin = true,
                 DefaultFillRule = FillRule.EvenOdd,
                 TryToConnect = false
             };

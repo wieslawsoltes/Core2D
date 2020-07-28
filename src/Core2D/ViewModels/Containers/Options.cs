@@ -19,7 +19,6 @@ namespace Core2D.Containers
         private bool _defaultIsStroked = true;
         private bool _defaultIsFilled = false;
         private bool _defaultIsClosed = true;
-        private bool _defaultIsSmoothJoin = true;
         private FillRule _defaultFillRule = FillRule.EvenOdd;
         private bool _tryToConnect = false;
 
@@ -93,15 +92,6 @@ namespace Core2D.Containers
         {
             get => _defaultIsClosed;
             set => Update(ref _defaultIsClosed, value);
-        }
-
-        /// <summary>
-        /// Gets or sets value indicating whether path segment is smooth join during creation.
-        /// </summary>
-        public bool DefaultIsSmoothJoin
-        {
-            get => _defaultIsSmoothJoin;
-            set => Update(ref _defaultIsSmoothJoin, value);
         }
 
         /// <summary>
@@ -188,12 +178,6 @@ namespace Core2D.Containers
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
         public virtual bool ShouldSerializeDefaultIsClosed() => _defaultIsClosed != default;
-
-        /// <summary>
-        /// Check whether the <see cref="DefaultIsSmoothJoin"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeDefaultIsSmoothJoin() => _defaultIsSmoothJoin != default;
 
         /// <summary>
         /// Check whether the <see cref="DefaultFillRule"/> property has changed from its default value.

@@ -37,7 +37,6 @@
                         <CheckBox Content="IsStroked" IsChecked="{Binding DefaultIsStroked, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
                         <CheckBox Content="IsFilled" IsChecked="{Binding DefaultIsFilled, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
                         <CheckBox Content="IsClosed" IsChecked="{Binding DefaultIsClosed, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
-                        <CheckBox Content="IsSmoothJoin" IsChecked="{Binding DefaultIsSmoothJoin, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
                         <TextBlock Text="FillRule" Margin="{DynamicResource TextControlThemePadding}"/>
                         <ComboBox Items="{x:Static Editor:Enums.XFillRuleValues}" SelectedItem="{Binding DefaultFillRule, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
                     </StackPanel>
