@@ -138,6 +138,7 @@ namespace Core2D.Editor.Tools.Path
                     break;
                 case State.End:
                     Reset();
+                    Finalize(null);
                     break;
             }
         }
@@ -226,16 +227,6 @@ namespace Core2D.Editor.Tools.Path
                 case State.End:
                     {
                         pathTool.RemoveLastSegment<ArcSegment>();
-                        editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(pathTool.Path);
-                        if (pathTool.Path.Geometry.Figures.LastOrDefault().Segments.Length > 0)
-                        {
-                            Finalize(null);
-                            editor.Project.AddShape(editor.Project.CurrentContainer.CurrentLayer, pathTool.Path);
-                        }
-                        else
-                        {
-                            editor.Project.CurrentContainer.WorkingLayer.InvalidateLayer();
-                        }
                     }
                     break;
             }

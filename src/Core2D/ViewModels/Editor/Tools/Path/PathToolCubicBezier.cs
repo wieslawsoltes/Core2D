@@ -178,6 +178,7 @@ namespace Core2D.Editor.Tools.Path
                 case State.Point2:
                 case State.Point3:
                     Reset();
+                    Finalize(null);
                     break;
             }
         }
@@ -305,16 +306,6 @@ namespace Core2D.Editor.Tools.Path
                 case State.Point3:
                     {
                         pathTool.RemoveLastSegment<CubicBezierSegment>();
-                        editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(pathTool.Path);
-                        if (pathTool.Path.Geometry.Figures.LastOrDefault().Segments.Length > 0)
-                        {
-                            Finalize(null);
-                            editor.Project.AddShape(editor.Project.CurrentContainer.CurrentLayer, pathTool.Path);
-                        }
-                        else
-                        {
-                            editor.Project.CurrentContainer.WorkingLayer.InvalidateLayer();
-                        }
                     }
                     break;
             }

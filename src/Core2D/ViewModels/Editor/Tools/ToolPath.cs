@@ -246,6 +246,20 @@ namespace Core2D.Editor.Tools
         public void Reset()
         {
             _serviceProvider.GetService<IProjectEditor>().CurrentPathTool?.Reset();
+
+            var editor = _serviceProvider.GetService<IProjectEditor>();
+
+            if (Path?.Geometry != null)
+            {
+                editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(Path);
+                editor.Project.CurrentContainer.WorkingLayer.InvalidateLayer();
+
+                if (!(Path.Geometry.Figures.Length == 1) || !(Path.Geometry.Figures[0].Segments.Length <= 1))
+                {
+                    editor.Project.AddShape(editor.Project.CurrentContainer.CurrentLayer, Path);
+                }
+            }
+
             DeInitializeWorkingPath();
         }
     }
