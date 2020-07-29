@@ -28,18 +28,18 @@
     <Grid RowDefinitions="50*,6,50*">
         <TreeView x:Name="project" Grid.Row="0">
             <TreeView.KeyBindings>
-                <KeyBinding Command="{Binding $parent[UserControl].DataContext.Platform.OnExportObject}" CommandParameter="{Binding #project.SelectedItem}" Gesture="Ctrl+E" x:CompileBindings="False"/>
+                <KeyBinding Command="{Binding $parent[TopLevel].DataContext.Platform.OnExportObject}" CommandParameter="{Binding #project.SelectedItem}" Gesture="Ctrl+E" x:CompileBindings="False"/>
             </TreeView.KeyBindings>
             <TreeViewItem Header="{Binding Name}" DataContext="{Binding Project}" IsExpanded="True">
                 <TreeViewItem.ContextMenu>
                     <ContextMenu>
-                        <MenuItem Header="E_xport" Command="{Binding $parent[UserControl].DataContext.Platform.OnExportObject}" CommandParameter="{Binding}" x:CompileBindings="False"/>
+                        <MenuItem Header="E_xport" Command="{Binding $parent[TopLevel].DataContext.Platform.OnExportObject}" CommandParameter="{Binding}" x:CompileBindings="False"/>
                     </ContextMenu>
                 </TreeViewItem.ContextMenu>
                 <TreeViewItem Header="Styles" DataContext="{Binding StyleLibraries}" Items="{Binding}">
                     <TreeViewItem.ContextMenu>
                         <ContextMenu x:CompileBindings="False">
-                            <MenuItem Header="E_xport" Command="{Binding $parent[UserControl].DataContext.Platform.OnExportObject}" CommandParameter="{Binding}"/>
+                            <MenuItem Header="E_xport" Command="{Binding $parent[TopLevel].DataContext.Platform.OnExportObject}" CommandParameter="{Binding}"/>
                         </ContextMenu>
                     </TreeViewItem.ContextMenu>
                     <TreeViewItem.Styles>
@@ -55,7 +55,7 @@
                                 </i:Interaction.Behaviors>
                                 <TextBlock.ContextMenu>
                                     <ContextMenu x:CompileBindings="False">
-                                        <MenuItem Header="E_xport" Command="{Binding $parent[UserControl].DataContext.Platform.OnExportObject}" CommandParameter="{Binding}"/>
+                                        <MenuItem Header="E_xport" Command="{Binding $parent[TopLevel].DataContext.Platform.OnExportObject}" CommandParameter="{Binding}"/>
                                     </ContextMenu>
                                 </TextBlock.ContextMenu>
                             </TextBlock>
@@ -67,7 +67,7 @@
                                 </i:Interaction.Behaviors>
                                 <TextBlock.ContextMenu>
                                     <ContextMenu x:CompileBindings="False">
-                                        <MenuItem Header="E_xport" Command="{Binding $parent[UserControl].DataContext.Platform.OnExportObject}" CommandParameter="{Binding}"/>
+                                        <MenuItem Header="E_xport" Command="{Binding $parent[TopLevel].DataContext.Platform.OnExportObject}" CommandParameter="{Binding}"/>
                                     </ContextMenu>
                                 </TextBlock.ContextMenu>
                             </TextBlock>
@@ -77,7 +77,7 @@
                 <TreeViewItem Header="Groups" DataContext="{Binding GroupLibraries}" Items="{Binding}">
                     <TreeViewItem.ContextMenu>
                         <ContextMenu x:CompileBindings="False">
-                            <MenuItem Header="E_xport" Command="{Binding $parent[UserControl].DataContext.Platform.OnExportObject}" CommandParameter="{Binding}"/>
+                            <MenuItem Header="E_xport" Command="{Binding $parent[TopLevel].DataContext.Platform.OnExportObject}" CommandParameter="{Binding}"/>
                         </ContextMenu>
                     </TreeViewItem.ContextMenu>
                     <TreeViewItem.Styles>
@@ -93,7 +93,7 @@
                                 </i:Interaction.Behaviors>
                                 <TextBlock.ContextMenu>
                                     <ContextMenu x:CompileBindings="False">
-                                        <MenuItem Header="E_xport" Command="{Binding $parent[UserControl].DataContext.Platform.OnExportObject}" CommandParameter="{Binding}"/>
+                                        <MenuItem Header="E_xport" Command="{Binding $parent[TopLevel].DataContext.Platform.OnExportObject}" CommandParameter="{Binding}"/>
                                     </ContextMenu>
                                 </TextBlock.ContextMenu>
                             </TextBlock>
@@ -105,7 +105,7 @@
                                 </i:Interaction.Behaviors>
                                 <TextBlock.ContextMenu>
                                     <ContextMenu x:CompileBindings="False">
-                                        <MenuItem Header="E_xport" Command="{Binding $parent[UserControl].DataContext.Platform.OnExportObject}" CommandParameter="{Binding}"/>
+                                        <MenuItem Header="E_xport" Command="{Binding $parent[TopLevel].DataContext.Platform.OnExportObject}" CommandParameter="{Binding}"/>
                                     </ContextMenu>
                                 </TextBlock.ContextMenu>
                             </TextBlock>
@@ -117,7 +117,7 @@
                                 </i:Interaction.Behaviors>
                                 <TextBlock.ContextMenu>
                                     <ContextMenu x:CompileBindings="False">
-                                        <MenuItem Header="E_xport" Command="{Binding $parent[UserControl].DataContext.Platform.OnExportObject}" CommandParameter="{Binding}"/>
+                                        <MenuItem Header="E_xport" Command="{Binding $parent[TopLevel].DataContext.Platform.OnExportObject}" CommandParameter="{Binding}"/>
                                     </ContextMenu>
                                 </TextBlock.ContextMenu>
                             </TextBlock>
@@ -127,7 +127,7 @@
                 <TreeViewItem Header="Databases" DataContext="{Binding Databases}" Items="{Binding}">
                     <TreeViewItem.ContextMenu>
                         <ContextMenu x:CompileBindings="False">
-                            <MenuItem Header="E_xport" Command="{Binding $parent[UserControl].DataContext.Platform.OnExportObject}" CommandParameter="{Binding}"/>
+                            <MenuItem Header="E_xport" Command="{Binding $parent[TopLevel].DataContext.Platform.OnExportObject}" CommandParameter="{Binding}"/>
                         </ContextMenu>
                     </TreeViewItem.ContextMenu>
                     <TreeViewItem.Styles>
@@ -143,7 +143,7 @@
                                 </i:Interaction.Behaviors>
                                 <TextBlock.ContextMenu>
                                     <ContextMenu x:CompileBindings="False">
-                                        <MenuItem Header="E_xport" Command="{Binding $parent[UserControl].DataContext.Platform.OnExportObject}" CommandParameter="{Binding}"/>
+                                        <MenuItem Header="E_xport" Command="{Binding $parent[TopLevel].DataContext.Platform.OnExportObject}" CommandParameter="{Binding}"/>
                                     </ContextMenu>
                                 </TextBlock.ContextMenu>
                             </TextBlock>
@@ -153,7 +153,7 @@
                 <TreeViewItem Header="Templates" DataContext="{Binding Templates}" Items="{Binding}">
                     <TreeViewItem.ContextMenu>
                         <ContextMenu x:CompileBindings="False">
-                            <MenuItem Header="E_xport" Command="{Binding $parent[UserControl].DataContext.Platform.OnExportObject}" CommandParameter="{Binding}"/>
+                            <MenuItem Header="E_xport" Command="{Binding $parent[TopLevel].DataContext.Platform.OnExportObject}" CommandParameter="{Binding}"/>
                         </ContextMenu>
                     </TreeViewItem.ContextMenu>
                     <TreeViewItem.Styles>
@@ -169,7 +169,7 @@
                                 </i:Interaction.Behaviors>
                                 <TextBlock.ContextMenu>
                                     <ContextMenu x:CompileBindings="False">
-                                        <MenuItem Header="E_xport" Command="{Binding $parent[UserControl].DataContext.Platform.OnExportObject}" CommandParameter="{Binding}"/>
+                                        <MenuItem Header="E_xport" Command="{Binding $parent[TopLevel].DataContext.Platform.OnExportObject}" CommandParameter="{Binding}"/>
                                     </ContextMenu>
                                 </TextBlock.ContextMenu>
                             </TextBlock>
@@ -181,7 +181,7 @@
                                 </i:Interaction.Behaviors>
                                 <TextBlock.ContextMenu>
                                     <ContextMenu x:CompileBindings="False">
-                                        <MenuItem Header="E_xport" Command="{Binding $parent[UserControl].DataContext.Platform.OnExportObject}" CommandParameter="{Binding}"/>
+                                        <MenuItem Header="E_xport" Command="{Binding $parent[TopLevel].DataContext.Platform.OnExportObject}" CommandParameter="{Binding}"/>
                                     </ContextMenu>
                                 </TextBlock.ContextMenu>
                             </TextBlock>
@@ -193,7 +193,7 @@
                                 </i:Interaction.Behaviors>
                                 <TextBlock.ContextMenu>
                                     <ContextMenu x:CompileBindings="False">
-                                        <MenuItem Header="E_xport" Command="{Binding $parent[UserControl].DataContext.Platform.OnExportObject}" CommandParameter="{Binding}"/>
+                                        <MenuItem Header="E_xport" Command="{Binding $parent[TopLevel].DataContext.Platform.OnExportObject}" CommandParameter="{Binding}"/>
                                     </ContextMenu>
                                 </TextBlock.ContextMenu>
                             </TextBlock>
@@ -205,7 +205,7 @@
                                 </i:Interaction.Behaviors>
                                 <TextBlock.ContextMenu>
                                     <ContextMenu x:CompileBindings="False">
-                                        <MenuItem Header="E_xport" Command="{Binding $parent[UserControl].DataContext.Platform.OnExportObject}" CommandParameter="{Binding}"/>
+                                        <MenuItem Header="E_xport" Command="{Binding $parent[TopLevel].DataContext.Platform.OnExportObject}" CommandParameter="{Binding}"/>
                                     </ContextMenu>
                                 </TextBlock.ContextMenu>
                             </TextBlock>
@@ -215,7 +215,7 @@
                 <TreeViewItem Header="Scripts" DataContext="{Binding Scripts}" Items="{Binding}">
                     <TreeViewItem.ContextMenu>
                         <ContextMenu x:CompileBindings="False">
-                            <MenuItem Header="E_xport" Command="{Binding $parent[UserControl].DataContext.Platform.OnExportObject}" CommandParameter="{Binding}"/>
+                            <MenuItem Header="E_xport" Command="{Binding $parent[TopLevel].DataContext.Platform.OnExportObject}" CommandParameter="{Binding}"/>
                         </ContextMenu>
                     </TreeViewItem.ContextMenu>
                     <TreeViewItem.Styles>
@@ -231,7 +231,7 @@
                                 </i:Interaction.Behaviors>
                                 <TextBlock.ContextMenu>
                                     <ContextMenu x:CompileBindings="False">
-                                        <MenuItem Header="E_xport" Command="{Binding $parent[UserControl].DataContext.Platform.OnExportObject}" CommandParameter="{Binding}"/>
+                                        <MenuItem Header="E_xport" Command="{Binding $parent[TopLevel].DataContext.Platform.OnExportObject}" CommandParameter="{Binding}"/>
                                     </ContextMenu>
                                 </TextBlock.ContextMenu>
                             </TextBlock>
@@ -241,7 +241,7 @@
                 <TreeViewItem Header="Documents" DataContext="{Binding Documents}" Items="{Binding}">
                     <TreeViewItem.ContextMenu>
                         <ContextMenu x:CompileBindings="False">
-                            <MenuItem Header="E_xport" Command="{Binding $parent[UserControl].DataContext.Platform.OnExportObject}" CommandParameter="{Binding}"/>
+                            <MenuItem Header="E_xport" Command="{Binding $parent[TopLevel].DataContext.Platform.OnExportObject}" CommandParameter="{Binding}"/>
                         </ContextMenu>
                     </TreeViewItem.ContextMenu>
                     <TreeViewItem.Styles>
@@ -257,7 +257,7 @@
                                 </i:Interaction.Behaviors>
                                 <TextBlock.ContextMenu>
                                     <ContextMenu x:CompileBindings="False">
-                                        <MenuItem Header="E_xport" Command="{Binding $parent[UserControl].DataContext.Platform.OnExportObject}" CommandParameter="{Binding}"/>
+                                        <MenuItem Header="E_xport" Command="{Binding $parent[TopLevel].DataContext.Platform.OnExportObject}" CommandParameter="{Binding}"/>
                                     </ContextMenu>
                                 </TextBlock.ContextMenu>
                             </TextBlock>
@@ -269,7 +269,7 @@
                                 </i:Interaction.Behaviors>
                                 <TextBlock.ContextMenu>
                                     <ContextMenu x:CompileBindings="False">
-                                        <MenuItem Header="E_xport" Command="{Binding $parent[UserControl].DataContext.Platform.OnExportObject}" CommandParameter="{Binding}"/>
+                                        <MenuItem Header="E_xport" Command="{Binding $parent[TopLevel].DataContext.Platform.OnExportObject}" CommandParameter="{Binding}"/>
                                     </ContextMenu>
                                 </TextBlock.ContextMenu>
                             </TextBlock>
@@ -281,7 +281,7 @@
                                 </i:Interaction.Behaviors>
                                 <TextBlock.ContextMenu>
                                     <ContextMenu x:CompileBindings="False">
-                                        <MenuItem Header="E_xport" Command="{Binding $parent[UserControl].DataContext.Platform.OnExportObject}" CommandParameter="{Binding}"/>
+                                        <MenuItem Header="E_xport" Command="{Binding $parent[TopLevel].DataContext.Platform.OnExportObject}" CommandParameter="{Binding}"/>
                                     </ContextMenu>
                                 </TextBlock.ContextMenu>
                             </TextBlock>
@@ -293,7 +293,7 @@
                                 </i:Interaction.Behaviors>
                                 <TextBlock.ContextMenu>
                                     <ContextMenu x:CompileBindings="False">
-                                        <MenuItem Header="E_xport" Command="{Binding $parent[UserControl].DataContext.Platform.OnExportObject}" CommandParameter="{Binding}"/>
+                                        <MenuItem Header="E_xport" Command="{Binding $parent[TopLevel].DataContext.Platform.OnExportObject}" CommandParameter="{Binding}"/>
                                     </ContextMenu>
                                 </TextBlock.ContextMenu>
                             </TextBlock>
@@ -305,7 +305,7 @@
                                 </i:Interaction.Behaviors>
                                 <TextBlock.ContextMenu>
                                     <ContextMenu x:CompileBindings="False">
-                                        <MenuItem Header="E_xport" Command="{Binding $parent[UserControl].DataContext.Platform.OnExportObject}" CommandParameter="{Binding}"/>
+                                        <MenuItem Header="E_xport" Command="{Binding $parent[TopLevel].DataContext.Platform.OnExportObject}" CommandParameter="{Binding}"/>
                                     </ContextMenu>
                                 </TextBlock.ContextMenu>
                             </TextBlock>

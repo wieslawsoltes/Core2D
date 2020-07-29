@@ -29,7 +29,7 @@
                 <MenuItem.Styles>
                     <Style Selector="MenuItem">
                         <Setter Property="Header" Value="{Binding Name}"/>
-                        <Setter Property="Command" Value="{Binding $parent[UserControl].DataContext.Platform.OnOpen}"/>
+                        <Setter Property="Command" Value="{Binding $parent[TopLevel].DataContext.Platform.OnOpen}"/>
                         <Setter Property="CommandParameter" Value="{Binding Path}"/>
                     </Style>
                 </MenuItem.Styles>
