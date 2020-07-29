@@ -18,7 +18,6 @@
              x:DataType="Containers:IProjectContainer" x:CompileBindings="True">
     <UserControl.Resources>
         <handlers:ProjectTreeViewDropHandler x:Key="ProjectTreeViewDropHandler"/>
-        <converters:ObjectEqualityMultiConverter x:Key="ObjectEqualityMultiConverter"/>
     </UserControl.Resources>
     <Grid RowDefinitions="Auto,*,Auto" ColumnDefinitions="*">
         <Grid Grid.Row="0" RowDefinitions="*" ColumnDefinitions="*,Auto">
@@ -87,27 +86,12 @@
                         <TextBlock Text="{Binding Name}" Background="Transparent">
                             <TextBlock.ContextMenu>
                                 <ContextMenu x:CompileBindings="False">
-                                    <MenuItem Header="Te_mplate" Items="{Binding #root.Tag.Project.Templates}">
+                                    <MenuItem Header="Te_mplate" Items="{Binding $parent[TopLevel].DataContext.Project.Templates}">
                                         <MenuItem.Styles>
-                                            <Style Selector="MenuItem.template > MenuItem">
+                                            <Style Selector="MenuItem">
                                                 <Setter Property="Header" Value="{Binding Name}"/>
                                                 <Setter Property="Command" Value="{Binding $parent[TopLevel].DataContext.OnApplyTemplate}"/>
                                                 <Setter Property="CommandParameter" Value="{Binding}"/>
-                                                <Setter Property="Icon">
-                                                    <Template>
-                                                        <CheckBox x:Name="icon">
-                                                            <i:Interaction.Behaviors>
-                                                                <iac:BindTagToVisualRootDataContextBehavior/>
-                                                            </i:Interaction.Behaviors>
-                                                            <CheckBox.IsChecked>
-                                                                <MultiBinding Mode="OneWay" Converter="{StaticResource ObjectEqualityMultiConverter}">
-                                                                    <Binding ElementName="icon" Path="DataContext"/>
-                                                                    <Binding ElementName="icon" Path="Tag.Template"/>
-                                                                </MultiBinding>
-                                                            </CheckBox.IsChecked>
-                                                        </CheckBox>
-                                                    </Template>
-                                                </Setter>
                                             </Style>
                                         </MenuItem.Styles>
                                     </MenuItem>
