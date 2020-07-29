@@ -4,6 +4,13 @@
     <StyleInclude Source="avares://Avalonia.Themes.Fluent/DensityStyles/Compact.xaml"/>
     <Style>
         <Style.Resources>
+            <SolidColorBrush x:Key="IconTransparentBrush" Color="#00000000"/>
+            <SolidColorBrush x:Key="IconAccentBrush1" Color="#FFA0A0A0"/>
+            <SolidColorBrush x:Key="IconAccentBrush2" Color="#80A0A0A0"/>
+        </Style.Resources>
+    </Style>
+    <Style>
+        <Style.Resources>
             <GridLength x:Key="SliderPreContentMargin">3</GridLength>
             <GridLength x:Key="SliderPostContentMargin">3</GridLength>
         </Style.Resources>
