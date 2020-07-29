@@ -66,7 +66,7 @@ namespace Core2D.UI
 
         static App()
         {
-            DefaultTheme = ThemeName.FluentLight;
+            DefaultTheme = ThemeName.FluentDark;
 
             InitializeDesigner();
         }
