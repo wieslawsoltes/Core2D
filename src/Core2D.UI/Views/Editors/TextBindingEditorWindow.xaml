@@ -10,7 +10,7 @@
         xmlns:Designer="clr-namespace:Core2D.UI.Designer;assembly=Core2D.UI"
         Width="800" Height="450"
         UseLayoutRounding="True" RenderOptions.BitmapInterpolationMode="HighQuality"
-        WindowState="Normal" WindowStartupLocation="CenterScreen"
+        WindowState="Normal" WindowStartupLocation="CenterOwner"
         FontFamily="{DynamicResource UiFontFamily}"
         Background="{DynamicResource SystemChromeMediumColor}"
         Foreground="{DynamicResource SystemBaseHighColor}"
@@ -98,7 +98,9 @@
                 </ItemsControl>
             </Grid>
         </ScrollViewer>
-        <TextBox Text="{Binding Text.Text, Mode=TwoWay}" Margin="6" VerticalAlignment="Stretch" AcceptsReturn="True" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3">
-        </TextBox>
+        <Grid VerticalAlignment="Top" ColumnDefinitions="*,30" Margin="6" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3">
+            <TextBox Text="{Binding Text.Text, Mode=TwoWay}" Margin="0" VerticalAlignment="Stretch" AcceptsReturn="True" Grid.Column="0"/>
+            <Button Content="x" Grid.Column="1" Command="{Binding $parent[TopLevel].DataContext.OnResetText}" CommandParameter="{Binding}" Padding="0" VerticalAlignment="Stretch" VerticalContentAlignment="Center" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Margin="6,0,0,0" x:CompileBindings="False"/>
+        </Grid>
     </Grid>
 </Window>
