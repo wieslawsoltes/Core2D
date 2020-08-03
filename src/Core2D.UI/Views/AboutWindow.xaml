@@ -9,7 +9,7 @@
         xmlns:Designer="clr-namespace:Core2D.UI.Designer;assembly=Core2D.UI"
         Width="800" Height="450"
         UseLayoutRounding="True" RenderOptions.BitmapInterpolationMode="HighQuality"
-        WindowState="Normal" WindowStartupLocation="CenterScreen"
+        WindowState="Normal" WindowStartupLocation="CenterOwner"
         FontFamily="{DynamicResource UiFontFamily}"
         Background="{DynamicResource SystemChromeMediumColor}"
         Foreground="{DynamicResource SystemBaseHighColor}"
