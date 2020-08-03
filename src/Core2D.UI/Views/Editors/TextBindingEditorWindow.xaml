@@ -22,7 +22,7 @@
     <Grid ColumnDefinitions="30*,30*,30*" RowDefinitions="Auto,*,Auto">
         <TextBlock Text="Columns" Margin="6" Grid.Row="0" Grid.Column="0"/>
         <Grid RowDefinitions="Auto,*" Margin="6" Grid.Row="1" Grid.Column="0">
-            <ComboBox Items="{Binding Editor.Project.Databases}" SelectedItem="{Binding Editor.Project.CurrentDatabase, Mode=TwoWay}" Grid.Row="0" HorizontalAlignment="Stretch">
+            <ComboBox x:Name="databasesComboBox" Items="{Binding Editor.Project.Databases}" SelectedItem="{Binding Editor.Project.CurrentDatabase, Mode=OneWay}" Grid.Row="0" HorizontalAlignment="Stretch">
                 <ComboBox.DataTemplates>
                     <DataTemplate DataType="Data:IDatabase">
                         <TextBlock Text="{Binding Name}"/>
@@ -31,7 +31,7 @@
             </ComboBox>
             <Grid RowDefinitions="Auto,*" Grid.Row="1">
                 <ScrollViewer Grid.Row="1" Grid.Column="1">
-                    <ItemsControl VerticalAlignment="Stretch" Items="{Binding Editor.Project.CurrentDatabase.Columns}">
+                    <ItemsControl VerticalAlignment="Stretch" Items="{Binding #databasesComboBox.SelectedItem.Columns}">
                         <ItemsControl.DataTemplates>
                             <DataTemplate DataType="Data:IColumn">
                                 <Grid VerticalAlignment="Top" ColumnDefinitions="*,30" Background="Transparent" Margin="0,2,0,2">
