@@ -45,8 +45,15 @@ namespace Core2D.Editors
         {
             if (_text != null && column != null)
             {
-                var startIndex = _text.Text.Length;
-                _text.Text = _text.Text.Insert(startIndex, $"{{{column.Name}}}");
+                if (string.IsNullOrEmpty(_text.Text))
+                {
+                    _text.Text = $"{{{column.Name}}}";
+                }
+                else
+                {
+                    var startIndex = _text.Text.Length;
+                    _text.Text = _text.Text.Insert(startIndex, $"{{{column.Name}}}");
+                }
             }
         }
 
@@ -57,8 +64,15 @@ namespace Core2D.Editors
         {
             if (_text != null && property != null)
             {
-                var startIndex = _text.Text.Length;
-                _text.Text = _text.Text.Insert(startIndex, $"{{{property.Name}}}");
+                if (string.IsNullOrEmpty(_text.Text))
+                {
+                    _text.Text = $"{{{property.Name}}}";
+                }
+                else
+                {
+                    var startIndex = _text.Text.Length;
+                    _text.Text = _text.Text.Insert(startIndex, $"{{{property.Name}}}");
+                }
             }
         }
 
@@ -69,8 +83,15 @@ namespace Core2D.Editors
         {
             if (_text != null && property != null)
             {
-                var startIndex = _text.Text.Length;
-                _text.Text = _text.Text.Insert(startIndex, $"{{{property.Name}}}");
+                if (string.IsNullOrEmpty(_text.Text))
+                {
+                    _text.Text = $"{{{property.Name}}}";
+                }
+                else
+                {
+                    var startIndex = _text.Text.Length;
+                    _text.Text = _text.Text.Insert(startIndex, $"{{{property.Name}}}");
+                }
             }
         }
 
