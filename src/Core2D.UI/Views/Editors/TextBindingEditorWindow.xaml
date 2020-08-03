@@ -98,6 +98,6 @@
                 </ItemsControl>
             </Grid>
         </ScrollViewer>
-        <TextBox Text="{Binding Text.Text, Mode=TwoWay}" Margin="6" VerticalAlignment="Stretch" AcceptsReturn="True" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3"/>
+        <TextBox x:Name="textBoxText" Text="{Binding Text.Text, Mode=TwoWay}" CaretIndex="{Binding CaretIndex, Mode=OneWay}" Margin="6" VerticalAlignment="Stretch" AcceptsReturn="True" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3"/>
     </Grid>
 </Window>

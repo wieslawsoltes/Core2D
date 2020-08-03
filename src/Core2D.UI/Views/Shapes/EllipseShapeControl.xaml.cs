@@ -42,7 +42,8 @@ namespace Core2D.UI.Views.Shapes
                     DataContext = new TextBindingEditor()
                     {
                         Editor = editor,
-                        Text = text
+                        Text = text,
+                        CaretIndex = text.Text.Length
                     }
                 };
                 window.ShowDialog(topLevel as Window);
