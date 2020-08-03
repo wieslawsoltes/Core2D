@@ -13,7 +13,6 @@ namespace Core2D.Editors
     {
         private IProjectEditor _editor;
         private ITextShape _text;
-        private int _caretIndex;
 
         /// <summary>
         /// Gets or sets project editor.
@@ -33,15 +32,6 @@ namespace Core2D.Editors
             set => Update(ref _text, value);
         }
 
-        /// <summary>
-        /// Gets or sets caret index.
-        /// </summary>
-        public int CaretIndex
-        {
-            get => _caretIndex;
-            set => Update(ref _caretIndex, value);
-        }
-
         /// <inheritdoc/>
         public override object Copy(IDictionary<object, object> shared)
         {
@@ -55,7 +45,8 @@ namespace Core2D.Editors
         {
             if (_text != null && column != null)
             {
-                _text.Text = _text.Text.Insert(_caretIndex, $"{{{column.Name}}}");
+                var startIndex = _text.Text.Length;
+                _text.Text = _text.Text.Insert(startIndex, $"{{{column.Name}}}");
             }
         }
 
@@ -66,7 +57,8 @@ namespace Core2D.Editors
         {
             if (_text != null && property != null)
             {
-                _text.Text = _text.Text.Insert(_caretIndex, $"{{{property.Name}}}");
+                var startIndex = _text.Text.Length;
+                _text.Text = _text.Text.Insert(startIndex, $"{{{property.Name}}}");
             }
         }
 
@@ -77,7 +69,19 @@ namespace Core2D.Editors
         {
             if (_text != null && property != null)
             {
-                _text.Text = _text.Text.Insert(_caretIndex, $"{{{property.Name}}}");
+                var startIndex = _text.Text.Length;
+                _text.Text = _text.Text.Insert(startIndex, $"{{{property.Name}}}");
+            }
+        }
+
+        /// <summary>
+        /// Reset text.
+        /// </summary>
+        public void OnResetText()
+        {
+            if (_text != null)
+            {
+                _text.Text = "";
             }
         }
     }
