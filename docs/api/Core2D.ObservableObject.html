@@ -133,6 +133,7 @@
       <div class="level2"><a class="xref" href="Core2D.Editor.Tools.ToolRectangle.html">ToolRectangle</a></div>
       <div class="level2"><a class="xref" href="Core2D.Editor.Tools.ToolSelection.html">ToolSelection</a></div>
       <div class="level2"><a class="xref" href="Core2D.Editor.Tools.ToolText.html">ToolText</a></div>
+      <div class="level2"><a class="xref" href="Core2D.Editors.TextBindingEditor.html">TextBindingEditor</a></div>
       <div class="level2"><a class="xref" href="Core2D.Path.PathFigure.html">PathFigure</a></div>
       <div class="level2"><a class="xref" href="Core2D.Path.PathGeometry.html">PathGeometry</a></div>
       <div class="level2"><a class="xref" href="Core2D.Path.PathSegment.html">PathSegment</a></div>
@@ -152,78 +153,23 @@
   <div classs="implements">
     <h5>Implements</h5>
     <div><a class="xref" href="Core2D.IObservableObject.html">IObservableObject</a></div>
-    <div><span class="xref">System.ComponentModel.INotifyPropertyChanged</span></div>
+    <div><span class="xref">INotifyPropertyChanged</span></div>
     <div><a class="xref" href="Core2D.ICopyable.html">ICopyable</a></div>
-  </div>
-  <div class="inheritedMembers">
-    <h5>Inherited Members</h5>
-    <div>
-      <span class="xref">System.Object.Equals(System.Object)</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.GetHashCode()</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.GetType()</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.MemberwiseClone()</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.ToString()</span>
-    </div>
   </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="Core2D.html">Core2D</a></h6>
   <h6><strong>Assembly</strong>: Core2D.dll</h6>
   <h5 id="Core2D_ObservableObject_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public abstract class ObservableObject : IObservableObject, INotifyPropertyChanged, ICopyable</code></pre>
+    <pre><code class="lang-csharp hljs">public abstract class ObservableObject : object, IObservableObject, INotifyPropertyChanged, ICopyable</code></pre>
   </div>
   <h3 id="properties">Properties
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_ObservableObject_Id.md&amp;value=---%0Auid%3A%20Core2D.ObservableObject.Id%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/ObservableObject.cs/#L26">View Source</a>
-  </span>
-  <a id="Core2D_ObservableObject_Id_" data-uid="Core2D.ObservableObject.Id*"></a>
-  <h4 id="Core2D_ObservableObject_Id" data-uid="Core2D.ObservableObject.Id">Id</h4>
-  <div class="markdown level1 summary"><p>Gets or sets observable object name.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public virtual string Id { get; set; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.String</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
     <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_ObservableObject_Name.md&amp;value=---%0Auid%3A%20Core2D.ObservableObject.Name%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/ObservableObject.cs/#L33">View Source</a>
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/ViewModels/ObservableObject.cs/#L25">View Source</a>
   </span>
   <a id="Core2D_ObservableObject_Name_" data-uid="Core2D.ObservableObject.Name*"></a>
   <h4 id="Core2D_ObservableObject_Name" data-uid="Core2D.ObservableObject.Name">Name</h4>
@@ -254,7 +200,7 @@
     <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_ObservableObject_Owner.md&amp;value=---%0Auid%3A%20Core2D.ObservableObject.Owner%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/ObservableObject.cs/#L19">View Source</a>
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/ViewModels/ObservableObject.cs/#L18">View Source</a>
   </span>
   <a id="Core2D_ObservableObject_Owner_" data-uid="Core2D.ObservableObject.Owner*"></a>
   <h4 id="Core2D_ObservableObject_Owner" data-uid="Core2D.ObservableObject.Owner">Owner</h4>
@@ -284,13 +230,13 @@
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_ObservableObject_Copy_System_Collections_Generic_IDictionary_System_Object_System_Object__.md&amp;value=---%0Auid%3A%20Core2D.ObservableObject.Copy(System.Collections.Generic.IDictionary%7BSystem.Object%2CSystem.Object%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_ObservableObject_Copy_IDictionary_System_Object_System_Object__.md&amp;value=---%0Auid%3A%20Core2D.ObservableObject.Copy(IDictionary%7BSystem.Object%2CSystem.Object%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/ObservableObject.cs/#L57">View Source</a>
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/ViewModels/ObservableObject.cs/#L49">View Source</a>
   </span>
   <a id="Core2D_ObservableObject_Copy_" data-uid="Core2D.ObservableObject.Copy*"></a>
-  <h4 id="Core2D_ObservableObject_Copy_System_Collections_Generic_IDictionary_System_Object_System_Object__" data-uid="Core2D.ObservableObject.Copy(System.Collections.Generic.IDictionary{System.Object,System.Object})">Copy(IDictionary&lt;Object, Object&gt;)</h4>
+  <h4 id="Core2D_ObservableObject_Copy_IDictionary_System_Object_System_Object__" data-uid="Core2D.ObservableObject.Copy(IDictionary{System.Object,System.Object})">Copy(IDictionary&lt;Object, Object&gt;)</h4>
   <div class="markdown level1 summary"><p>Copies the object.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -309,7 +255,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.Collections.Generic.IDictionary</span>&lt;<span class="xref">System.Object</span>, <span class="xref">System.Object</span>&gt;</td>
+        <td><span class="xref">IDictionary</span>&lt;<span class="xref">System.Object</span>, <span class="xref">System.Object</span>&gt;</td>
         <td><span class="parametername">shared</span></td>
         <td><p>The shared objects dictionary.</p>
 </td>
@@ -337,7 +283,7 @@
     <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_ObservableObject_Invalidate.md&amp;value=---%0Auid%3A%20Core2D.ObservableObject.Invalidate%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/ObservableObject.cs/#L46">View Source</a>
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/ViewModels/ObservableObject.cs/#L38">View Source</a>
   </span>
   <a id="Core2D_ObservableObject_Invalidate_" data-uid="Core2D.ObservableObject.Invalidate*"></a>
   <h4 id="Core2D_ObservableObject_Invalidate" data-uid="Core2D.ObservableObject.Invalidate">Invalidate()</h4>
@@ -353,7 +299,7 @@
     <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_ObservableObject_IsDirty.md&amp;value=---%0Auid%3A%20Core2D.ObservableObject.IsDirty%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/ObservableObject.cs/#L40">View Source</a>
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/ViewModels/ObservableObject.cs/#L32">View Source</a>
   </span>
   <a id="Core2D_ObservableObject_IsDirty_" data-uid="Core2D.ObservableObject.IsDirty*"></a>
   <h4 id="Core2D_ObservableObject_IsDirty" data-uid="Core2D.ObservableObject.IsDirty">IsDirty()</h4>
@@ -384,7 +330,7 @@
     <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_ObservableObject_Notify_System_String_.md&amp;value=---%0Auid%3A%20Core2D.ObservableObject.Notify(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/ObservableObject.cs/#L60">View Source</a>
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/ViewModels/ObservableObject.cs/#L52">View Source</a>
   </span>
   <a id="Core2D_ObservableObject_Notify_" data-uid="Core2D.ObservableObject.Notify*"></a>
   <h4 id="Core2D_ObservableObject_Notify_System_String_" data-uid="Core2D.ObservableObject.Notify(System.String)">Notify(String)</h4>
@@ -415,42 +361,10 @@
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_ObservableObject_ShouldSerializeId.md&amp;value=---%0Auid%3A%20Core2D.ObservableObject.ShouldSerializeId%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/ObservableObject.cs/#L88">View Source</a>
-  </span>
-  <a id="Core2D_ObservableObject_ShouldSerializeId_" data-uid="Core2D.ObservableObject.ShouldSerializeId*"></a>
-  <h4 id="Core2D_ObservableObject_ShouldSerializeId" data-uid="Core2D.ObservableObject.ShouldSerializeId">ShouldSerializeId()</h4>
-  <div class="markdown level1 summary"><p>Check whether the <a class="xref" href="Core2D.ObservableObject.html#Core2D_ObservableObject_Id">Id</a> property has changed from its default value.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public virtual bool ShouldSerializeId()</code></pre>
-  </div>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.Boolean</span></td>
-        <td><p>Returns true if the property has changed; otherwise, returns false.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
     <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_ObservableObject_ShouldSerializeIsDirty.md&amp;value=---%0Auid%3A%20Core2D.ObservableObject.ShouldSerializeIsDirty%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/ObservableObject.cs/#L100">View Source</a>
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/ViewModels/ObservableObject.cs/#L86">View Source</a>
   </span>
   <a id="Core2D_ObservableObject_ShouldSerializeIsDirty_" data-uid="Core2D.ObservableObject.ShouldSerializeIsDirty*"></a>
   <h4 id="Core2D_ObservableObject_ShouldSerializeIsDirty" data-uid="Core2D.ObservableObject.ShouldSerializeIsDirty">ShouldSerializeIsDirty()</h4>
@@ -482,7 +396,7 @@
     <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_ObservableObject_ShouldSerializeName.md&amp;value=---%0Auid%3A%20Core2D.ObservableObject.ShouldSerializeName%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/ObservableObject.cs/#L94">View Source</a>
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/ViewModels/ObservableObject.cs/#L80">View Source</a>
   </span>
   <a id="Core2D_ObservableObject_ShouldSerializeName_" data-uid="Core2D.ObservableObject.ShouldSerializeName*"></a>
   <h4 id="Core2D_ObservableObject_ShouldSerializeName" data-uid="Core2D.ObservableObject.ShouldSerializeName">ShouldSerializeName()</h4>
@@ -514,7 +428,7 @@
     <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_ObservableObject_ShouldSerializeOwner.md&amp;value=---%0Auid%3A%20Core2D.ObservableObject.ShouldSerializeOwner%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/ObservableObject.cs/#L82">View Source</a>
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/ViewModels/ObservableObject.cs/#L74">View Source</a>
   </span>
   <a id="Core2D_ObservableObject_ShouldSerializeOwner_" data-uid="Core2D.ObservableObject.ShouldSerializeOwner*"></a>
   <h4 id="Core2D_ObservableObject_ShouldSerializeOwner" data-uid="Core2D.ObservableObject.ShouldSerializeOwner">ShouldSerializeOwner()</h4>
@@ -546,7 +460,7 @@
     <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_ObservableObject_Update__1___0____0_System_String_.md&amp;value=---%0Auid%3A%20Core2D.ObservableObject.Update%60%601(%60%600%40%2C%60%600%2CSystem.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/ObservableObject.cs/#L66">View Source</a>
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/ViewModels/ObservableObject.cs/#L58">View Source</a>
   </span>
   <a id="Core2D_ObservableObject_Update_" data-uid="Core2D.ObservableObject.Update*"></a>
   <h4 id="Core2D_ObservableObject_Update__1___0____0_System_String_" data-uid="Core2D.ObservableObject.Update``1(``0@,``0,System.String)">Update&lt;T&gt;(ref T, T, String)</h4>
@@ -626,7 +540,7 @@
     <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_ObservableObject_PropertyChanged.md&amp;value=---%0Auid%3A%20Core2D.ObservableObject.PropertyChanged%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/ObservableObject.cs/#L54">View Source</a>
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/ViewModels/ObservableObject.cs/#L46">View Source</a>
   </span>
   <h4 id="Core2D_ObservableObject_PropertyChanged" data-uid="Core2D.ObservableObject.PropertyChanged">PropertyChanged</h4>
   <div class="markdown level1 summary"><p>Occurs when a property value changes.</p>
@@ -646,7 +560,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.ComponentModel.PropertyChangedEventHandler</span></td>
+        <td><span class="xref">PropertyChangedEventHandler</span></td>
         <td></td>
       </tr>
     </tbody>
@@ -656,7 +570,7 @@
       <a class="xref" href="Core2D.IObservableObject.html">IObservableObject</a>
   </div>
   <div>
-      <span class="xref">System.ComponentModel.INotifyPropertyChanged</span>
+      <span class="xref">INotifyPropertyChanged</span>
   </div>
   <div>
       <a class="xref" href="Core2D.ICopyable.html">ICopyable</a>
@@ -672,7 +586,7 @@
                     <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_ObservableObject.md&amp;value=---%0Auid%3A%20Core2D.ObservableObject%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/ObservableObject.cs/#L11" class="contribution-link">View Source</a>
+                    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/ViewModels/ObservableObject.cs/#L11" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>

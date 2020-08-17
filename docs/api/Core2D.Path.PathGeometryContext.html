@@ -85,35 +85,11 @@
     <h5>Implements</h5>
     <div><a class="xref" href="Core2D.Path.IGeometryContext.html">IGeometryContext</a></div>
   </div>
-  <div class="inheritedMembers">
-    <h5>Inherited Members</h5>
-    <div>
-      <span class="xref">System.Object.Equals(System.Object)</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.GetHashCode()</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.GetType()</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.MemberwiseClone()</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.ToString()</span>
-    </div>
-  </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="Core2D.Path.html">Core2D.Path</a></h6>
   <h6><strong>Assembly</strong>: Core2D.dll</h6>
   <h5 id="Core2D_Path_PathGeometryContext_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class PathGeometryContext : IGeometryContext</code></pre>
+    <pre><code class="lang-csharp hljs">public class PathGeometryContext : object, IGeometryContext</code></pre>
   </div>
   <h3 id="constructors">Constructors
   </h3>
@@ -161,19 +137,19 @@
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Path_PathGeometryContext_ArcTo_Core2D_Shapes_IPointShape_Core2D_Path_IPathSize_System_Double_System_Boolean_Core2D_Path_SweepDirection_System_Boolean_System_Boolean_.md&amp;value=---%0Auid%3A%20Core2D.Path.PathGeometryContext.ArcTo(Core2D.Shapes.IPointShape%2CCore2D.Path.IPathSize%2CSystem.Double%2CSystem.Boolean%2CCore2D.Path.SweepDirection%2CSystem.Boolean%2CSystem.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Path_PathGeometryContext_ArcTo_Core2D_Shapes_IPointShape_Core2D_Path_IPathSize_System_Double_System_Boolean_Core2D_Path_SweepDirection_System_Boolean_.md&amp;value=---%0Auid%3A%20Core2D.Path.PathGeometryContext.ArcTo(Core2D.Shapes.IPointShape%2CCore2D.Path.IPathSize%2CSystem.Double%2CSystem.Boolean%2CCore2D.Path.SweepDirection%2CSystem.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/ViewModels/Path/PathGeometryContext.cs/#L51">View Source</a>
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/ViewModels/Path/PathGeometryContext.cs/#L50">View Source</a>
   </span>
   <a id="Core2D_Path_PathGeometryContext_ArcTo_" data-uid="Core2D.Path.PathGeometryContext.ArcTo*"></a>
-  <h4 id="Core2D_Path_PathGeometryContext_ArcTo_Core2D_Shapes_IPointShape_Core2D_Path_IPathSize_System_Double_System_Boolean_Core2D_Path_SweepDirection_System_Boolean_System_Boolean_" data-uid="Core2D.Path.PathGeometryContext.ArcTo(Core2D.Shapes.IPointShape,Core2D.Path.IPathSize,System.Double,System.Boolean,Core2D.Path.SweepDirection,System.Boolean,System.Boolean)">ArcTo(IPointShape, IPathSize, Double, Boolean, SweepDirection, Boolean, Boolean)</h4>
+  <h4 id="Core2D_Path_PathGeometryContext_ArcTo_Core2D_Shapes_IPointShape_Core2D_Path_IPathSize_System_Double_System_Boolean_Core2D_Path_SweepDirection_System_Boolean_" data-uid="Core2D.Path.PathGeometryContext.ArcTo(Core2D.Shapes.IPointShape,Core2D.Path.IPathSize,System.Double,System.Boolean,Core2D.Path.SweepDirection,System.Boolean)">ArcTo(IPointShape, IPathSize, Double, Boolean, SweepDirection, Boolean)</h4>
   <div class="markdown level1 summary"><p>Adds arc segment.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void ArcTo(IPointShape point, IPathSize size, double rotationAngle = 0, bool isLargeArc = false, SweepDirection sweepDirection = SweepDirection.Clockwise, bool isStroked = true, bool isSmoothJoin = true)</code></pre>
+    <pre><code class="lang-csharp hljs">public void ArcTo(IPointShape point, IPathSize size, double rotationAngle = 0, bool isLargeArc = false, SweepDirection sweepDirection = SweepDirection.Clockwise, bool isStroked = true)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -221,29 +197,23 @@
         <td><p>The flag indicating whether shape is stroked.</p>
 </td>
       </tr>
-      <tr>
-        <td><span class="xref">System.Boolean</span></td>
-        <td><span class="parametername">isSmoothJoin</span></td>
-        <td><p>The flag indicating whether shape is smooth join.</p>
-</td>
-      </tr>
     </tbody>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Path_PathGeometryContext_BeginFigure_Core2D_Shapes_IPointShape_System_Boolean_System_Boolean_.md&amp;value=---%0Auid%3A%20Core2D.Path.PathGeometryContext.BeginFigure(Core2D.Shapes.IPointShape%2CSystem.Boolean%2CSystem.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Path_PathGeometryContext_BeginFigure_Core2D_Shapes_IPointShape_System_Boolean_.md&amp;value=---%0Auid%3A%20Core2D.Path.PathGeometryContext.BeginFigure(Core2D.Shapes.IPointShape%2CSystem.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/ViewModels/Path/PathGeometryContext.cs/#L28">View Source</a>
   </span>
   <a id="Core2D_Path_PathGeometryContext_BeginFigure_" data-uid="Core2D.Path.PathGeometryContext.BeginFigure*"></a>
-  <h4 id="Core2D_Path_PathGeometryContext_BeginFigure_Core2D_Shapes_IPointShape_System_Boolean_System_Boolean_" data-uid="Core2D.Path.PathGeometryContext.BeginFigure(Core2D.Shapes.IPointShape,System.Boolean,System.Boolean)">BeginFigure(IPointShape, Boolean, Boolean)</h4>
+  <h4 id="Core2D_Path_PathGeometryContext_BeginFigure_Core2D_Shapes_IPointShape_System_Boolean_" data-uid="Core2D.Path.PathGeometryContext.BeginFigure(Core2D.Shapes.IPointShape,System.Boolean)">BeginFigure(IPointShape, Boolean)</h4>
   <div class="markdown level1 summary"><p>Begins path figure.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void BeginFigure(IPointShape startPoint, bool isFilled = true, bool isClosed = true)</code></pre>
+    <pre><code class="lang-csharp hljs">public void BeginFigure(IPointShape startPoint, bool isClosed = true)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -263,12 +233,6 @@
       </tr>
       <tr>
         <td><span class="xref">System.Boolean</span></td>
-        <td><span class="parametername">isFilled</span></td>
-        <td><p>The flag indicating whether figure is filled.</p>
-</td>
-      </tr>
-      <tr>
-        <td><span class="xref">System.Boolean</span></td>
         <td><span class="parametername">isClosed</span></td>
         <td><p>The flag indicating whether figure is closed.</p>
 </td>
@@ -277,19 +241,19 @@
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Path_PathGeometryContext_CubicBezierTo_Core2D_Shapes_IPointShape_Core2D_Shapes_IPointShape_Core2D_Shapes_IPointShape_System_Boolean_System_Boolean_.md&amp;value=---%0Auid%3A%20Core2D.Path.PathGeometryContext.CubicBezierTo(Core2D.Shapes.IPointShape%2CCore2D.Shapes.IPointShape%2CCore2D.Shapes.IPointShape%2CSystem.Boolean%2CSystem.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Path_PathGeometryContext_CubicBezierTo_Core2D_Shapes_IPointShape_Core2D_Shapes_IPointShape_Core2D_Shapes_IPointShape_System_Boolean_.md&amp;value=---%0Auid%3A%20Core2D.Path.PathGeometryContext.CubicBezierTo(Core2D.Shapes.IPointShape%2CCore2D.Shapes.IPointShape%2CCore2D.Shapes.IPointShape%2CSystem.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/ViewModels/Path/PathGeometryContext.cs/#L65">View Source</a>
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/ViewModels/Path/PathGeometryContext.cs/#L63">View Source</a>
   </span>
   <a id="Core2D_Path_PathGeometryContext_CubicBezierTo_" data-uid="Core2D.Path.PathGeometryContext.CubicBezierTo*"></a>
-  <h4 id="Core2D_Path_PathGeometryContext_CubicBezierTo_Core2D_Shapes_IPointShape_Core2D_Shapes_IPointShape_Core2D_Shapes_IPointShape_System_Boolean_System_Boolean_" data-uid="Core2D.Path.PathGeometryContext.CubicBezierTo(Core2D.Shapes.IPointShape,Core2D.Shapes.IPointShape,Core2D.Shapes.IPointShape,System.Boolean,System.Boolean)">CubicBezierTo(IPointShape, IPointShape, IPointShape, Boolean, Boolean)</h4>
+  <h4 id="Core2D_Path_PathGeometryContext_CubicBezierTo_Core2D_Shapes_IPointShape_Core2D_Shapes_IPointShape_Core2D_Shapes_IPointShape_System_Boolean_" data-uid="Core2D.Path.PathGeometryContext.CubicBezierTo(Core2D.Shapes.IPointShape,Core2D.Shapes.IPointShape,Core2D.Shapes.IPointShape,System.Boolean)">CubicBezierTo(IPointShape, IPointShape, IPointShape, Boolean)</h4>
   <div class="markdown level1 summary"><p>Adds cubic bezier segment.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void CubicBezierTo(IPointShape point1, IPointShape point2, IPointShape point3, bool isStroked = true, bool isSmoothJoin = true)</code></pre>
+    <pre><code class="lang-csharp hljs">public void CubicBezierTo(IPointShape point1, IPointShape point2, IPointShape point3, bool isStroked = true)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -325,29 +289,23 @@
         <td><p>The flag indicating whether shape is stroked.</p>
 </td>
       </tr>
-      <tr>
-        <td><span class="xref">System.Boolean</span></td>
-        <td><span class="parametername">isSmoothJoin</span></td>
-        <td><p>The flag indicating whether shape is smooth join.</p>
-</td>
-      </tr>
     </tbody>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Path_PathGeometryContext_LineTo_Core2D_Shapes_IPointShape_System_Boolean_System_Boolean_.md&amp;value=---%0Auid%3A%20Core2D.Path.PathGeometryContext.LineTo(Core2D.Shapes.IPointShape%2CSystem.Boolean%2CSystem.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Path_PathGeometryContext_LineTo_Core2D_Shapes_IPointShape_System_Boolean_.md&amp;value=---%0Auid%3A%20Core2D.Path.PathGeometryContext.LineTo(Core2D.Shapes.IPointShape%2CSystem.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/ViewModels/Path/PathGeometryContext.cs/#L41">View Source</a>
   </span>
   <a id="Core2D_Path_PathGeometryContext_LineTo_" data-uid="Core2D.Path.PathGeometryContext.LineTo*"></a>
-  <h4 id="Core2D_Path_PathGeometryContext_LineTo_Core2D_Shapes_IPointShape_System_Boolean_System_Boolean_" data-uid="Core2D.Path.PathGeometryContext.LineTo(Core2D.Shapes.IPointShape,System.Boolean,System.Boolean)">LineTo(IPointShape, Boolean, Boolean)</h4>
+  <h4 id="Core2D_Path_PathGeometryContext_LineTo_Core2D_Shapes_IPointShape_System_Boolean_" data-uid="Core2D.Path.PathGeometryContext.LineTo(Core2D.Shapes.IPointShape,System.Boolean)">LineTo(IPointShape, Boolean)</h4>
   <div class="markdown level1 summary"><p>Adds line segment.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void LineTo(IPointShape point, bool isStroked = true, bool isSmoothJoin = true)</code></pre>
+    <pre><code class="lang-csharp hljs">public void LineTo(IPointShape point, bool isStroked = true)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -371,29 +329,23 @@
         <td><p>The flag indicating whether shape is stroked.</p>
 </td>
       </tr>
-      <tr>
-        <td><span class="xref">System.Boolean</span></td>
-        <td><span class="parametername">isSmoothJoin</span></td>
-        <td><p>The flag indicating whether shape is smooth join.</p>
-</td>
-      </tr>
     </tbody>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Path_PathGeometryContext_QuadraticBezierTo_Core2D_Shapes_IPointShape_Core2D_Shapes_IPointShape_System_Boolean_System_Boolean_.md&amp;value=---%0Auid%3A%20Core2D.Path.PathGeometryContext.QuadraticBezierTo(Core2D.Shapes.IPointShape%2CCore2D.Shapes.IPointShape%2CSystem.Boolean%2CSystem.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Path_PathGeometryContext_QuadraticBezierTo_Core2D_Shapes_IPointShape_Core2D_Shapes_IPointShape_System_Boolean_.md&amp;value=---%0Auid%3A%20Core2D.Path.PathGeometryContext.QuadraticBezierTo(Core2D.Shapes.IPointShape%2CCore2D.Shapes.IPointShape%2CSystem.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/ViewModels/Path/PathGeometryContext.cs/#L77">View Source</a>
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/ViewModels/Path/PathGeometryContext.cs/#L74">View Source</a>
   </span>
   <a id="Core2D_Path_PathGeometryContext_QuadraticBezierTo_" data-uid="Core2D.Path.PathGeometryContext.QuadraticBezierTo*"></a>
-  <h4 id="Core2D_Path_PathGeometryContext_QuadraticBezierTo_Core2D_Shapes_IPointShape_Core2D_Shapes_IPointShape_System_Boolean_System_Boolean_" data-uid="Core2D.Path.PathGeometryContext.QuadraticBezierTo(Core2D.Shapes.IPointShape,Core2D.Shapes.IPointShape,System.Boolean,System.Boolean)">QuadraticBezierTo(IPointShape, IPointShape, Boolean, Boolean)</h4>
+  <h4 id="Core2D_Path_PathGeometryContext_QuadraticBezierTo_Core2D_Shapes_IPointShape_Core2D_Shapes_IPointShape_System_Boolean_" data-uid="Core2D.Path.PathGeometryContext.QuadraticBezierTo(Core2D.Shapes.IPointShape,Core2D.Shapes.IPointShape,System.Boolean)">QuadraticBezierTo(IPointShape, IPointShape, Boolean)</h4>
   <div class="markdown level1 summary"><p>Adds quadratic bezier segment.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void QuadraticBezierTo(IPointShape point1, IPointShape point2, bool isStroked = true, bool isSmoothJoin = true)</code></pre>
+    <pre><code class="lang-csharp hljs">public void QuadraticBezierTo(IPointShape point1, IPointShape point2, bool isStroked = true)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -421,12 +373,6 @@
         <td><span class="xref">System.Boolean</span></td>
         <td><span class="parametername">isStroked</span></td>
         <td><p>The flag indicating whether shape is stroked.</p>
-</td>
-      </tr>
-      <tr>
-        <td><span class="xref">System.Boolean</span></td>
-        <td><span class="parametername">isSmoothJoin</span></td>
-        <td><p>The flag indicating whether shape is smooth join.</p>
 </td>
       </tr>
     </tbody>

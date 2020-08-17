@@ -89,11 +89,11 @@
     <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Editor_IEditorCanvasPlatform_AutoFitZoom.md&amp;value=---%0Auid%3A%20Core2D.Editor.IEditorCanvasPlatform.AutoFitZoom%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Model/Editor/IEditorCanvasPlatform.cs/#L26">View Source</a>
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Model/Editor/IEditorCanvasPlatform.cs/#L44">View Source</a>
   </span>
   <a id="Core2D_Editor_IEditorCanvasPlatform_AutoFitZoom_" data-uid="Core2D.Editor.IEditorCanvasPlatform.AutoFitZoom*"></a>
   <h4 id="Core2D_Editor_IEditorCanvasPlatform_AutoFitZoom" data-uid="Core2D.Editor.IEditorCanvasPlatform.AutoFitZoom">AutoFitZoom</h4>
-  <div class="markdown level1 summary"><p>Gets or sets extent zoom action.</p>
+  <div class="markdown level1 summary"><p>Gets or sets auto-fit zoom action.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -110,13 +110,47 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.Action</span></td>
+        <td><span class="xref">Action</span></td>
         <td></td>
       </tr>
     </tbody>
   </table>
   <h5 id="Core2D_Editor_IEditorCanvasPlatform_AutoFitZoom_remarks">Remarks</h5>
   <div class="markdown level1 remarks"><p>Auto-fit view to the available extents.</p>
+</div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Editor_IEditorCanvasPlatform_FillZoom.md&amp;value=---%0Auid%3A%20Core2D.Editor.IEditorCanvasPlatform.FillZoom%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Model/Editor/IEditorCanvasPlatform.cs/#L26">View Source</a>
+  </span>
+  <a id="Core2D_Editor_IEditorCanvasPlatform_FillZoom_" data-uid="Core2D.Editor.IEditorCanvasPlatform.FillZoom*"></a>
+  <h4 id="Core2D_Editor_IEditorCanvasPlatform_FillZoom" data-uid="Core2D.Editor.IEditorCanvasPlatform.FillZoom">FillZoom</h4>
+  <div class="markdown level1 summary"><p>Gets or sets fill zoom action.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Action FillZoom { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Action</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Core2D_Editor_IEditorCanvasPlatform_FillZoom_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Fill view to the available extents.</p>
 </div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
@@ -144,7 +178,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.Action</span></td>
+        <td><span class="xref">Action</span></td>
         <td></td>
       </tr>
     </tbody>
@@ -152,6 +186,68 @@
   <h5 id="Core2D_Editor_IEditorCanvasPlatform_InvalidateControl_remarks">Remarks</h5>
   <div class="markdown level1 remarks"><p>Invalidate current container control.</p>
 </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Editor_IEditorCanvasPlatform_InZoom.md&amp;value=---%0Auid%3A%20Core2D.Editor.IEditorCanvasPlatform.InZoom%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Model/Editor/IEditorCanvasPlatform.cs/#L49">View Source</a>
+  </span>
+  <a id="Core2D_Editor_IEditorCanvasPlatform_InZoom_" data-uid="Core2D.Editor.IEditorCanvasPlatform.InZoom*"></a>
+  <h4 id="Core2D_Editor_IEditorCanvasPlatform_InZoom" data-uid="Core2D.Editor.IEditorCanvasPlatform.InZoom">InZoom</h4>
+  <div class="markdown level1 summary"><p>Gets or sets zoom in action.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Action InZoom { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Action</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Editor_IEditorCanvasPlatform_OutZoom.md&amp;value=---%0Auid%3A%20Core2D.Editor.IEditorCanvasPlatform.OutZoom%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Model/Editor/IEditorCanvasPlatform.cs/#L54">View Source</a>
+  </span>
+  <a id="Core2D_Editor_IEditorCanvasPlatform_OutZoom_" data-uid="Core2D.Editor.IEditorCanvasPlatform.OutZoom*"></a>
+  <h4 id="Core2D_Editor_IEditorCanvasPlatform_OutZoom" data-uid="Core2D.Editor.IEditorCanvasPlatform.OutZoom">OutZoom</h4>
+  <div class="markdown level1 summary"><p>Gets or sets zoom out action.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Action OutZoom { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Action</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
     <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Editor_IEditorCanvasPlatform_ResetZoom.md&amp;value=---%0Auid%3A%20Core2D.Editor.IEditorCanvasPlatform.ResetZoom%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
@@ -178,7 +274,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.Action</span></td>
+        <td><span class="xref">Action</span></td>
         <td></td>
       </tr>
     </tbody>
@@ -188,10 +284,78 @@
 </div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Editor_IEditorCanvasPlatform_UniformToFillZoom.md&amp;value=---%0Auid%3A%20Core2D.Editor.IEditorCanvasPlatform.UniformToFillZoom%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Model/Editor/IEditorCanvasPlatform.cs/#L38">View Source</a>
+  </span>
+  <a id="Core2D_Editor_IEditorCanvasPlatform_UniformToFillZoom_" data-uid="Core2D.Editor.IEditorCanvasPlatform.UniformToFillZoom*"></a>
+  <h4 id="Core2D_Editor_IEditorCanvasPlatform_UniformToFillZoom" data-uid="Core2D.Editor.IEditorCanvasPlatform.UniformToFillZoom">UniformToFillZoom</h4>
+  <div class="markdown level1 summary"><p>Gets or sets uniform to fill zoom action.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Action UniformToFillZoom { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Action</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Core2D_Editor_IEditorCanvasPlatform_UniformToFillZoom_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Uniform to fill view to the available extents.</p>
+</div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Editor_IEditorCanvasPlatform_UniformZoom.md&amp;value=---%0Auid%3A%20Core2D.Editor.IEditorCanvasPlatform.UniformZoom%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Model/Editor/IEditorCanvasPlatform.cs/#L32">View Source</a>
+  </span>
+  <a id="Core2D_Editor_IEditorCanvasPlatform_UniformZoom_" data-uid="Core2D.Editor.IEditorCanvasPlatform.UniformZoom*"></a>
+  <h4 id="Core2D_Editor_IEditorCanvasPlatform_UniformZoom" data-uid="Core2D.Editor.IEditorCanvasPlatform.UniformZoom">UniformZoom</h4>
+  <div class="markdown level1 summary"><p>Gets or sets uniform fill zoom action.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Action UniformZoom { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Action</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Core2D_Editor_IEditorCanvasPlatform_UniformZoom_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Uniform fill view to the available extents.</p>
+</div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
     <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Editor_IEditorCanvasPlatform_Zoom.md&amp;value=---%0Auid%3A%20Core2D.Editor.IEditorCanvasPlatform.Zoom%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Model/Editor/IEditorCanvasPlatform.cs/#L31">View Source</a>
+    <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Model/Editor/IEditorCanvasPlatform.cs/#L59">View Source</a>
   </span>
   <a id="Core2D_Editor_IEditorCanvasPlatform_Zoom_" data-uid="Core2D.Editor.IEditorCanvasPlatform.Zoom*"></a>
   <h4 id="Core2D_Editor_IEditorCanvasPlatform_Zoom" data-uid="Core2D.Editor.IEditorCanvasPlatform.Zoom">Zoom</h4>

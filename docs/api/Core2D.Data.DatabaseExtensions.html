@@ -81,47 +81,23 @@
     <div class="level0"><span class="xref">System.Object</span></div>
     <div class="level1"><span class="xref">DatabaseExtensions</span></div>
   </div>
-  <div class="inheritedMembers">
-    <h5>Inherited Members</h5>
-    <div>
-      <span class="xref">System.Object.Equals(System.Object)</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.GetHashCode()</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.GetType()</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.MemberwiseClone()</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.ToString()</span>
-    </div>
-  </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="Core2D.Data.html">Core2D.Data</a></h6>
   <h6><strong>Assembly</strong>: Core2D.dll</h6>
   <h5 id="Core2D_Data_DatabaseExtensions_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static class DatabaseExtensions</code></pre>
+    <pre><code class="lang-csharp hljs">public static class DatabaseExtensions : object</code></pre>
   </div>
   <h3 id="methods">Methods
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Data_DatabaseExtensions_Update_Core2D_Data_IDatabase_Core2D_Data_IDatabase_System_Collections_Immutable_ImmutableArray_Core2D_Data_IRecord__Builder__.md&amp;value=---%0Auid%3A%20Core2D.Data.DatabaseExtensions.Update(Core2D.Data.IDatabase%2CCore2D.Data.IDatabase%2CSystem.Collections.Immutable.ImmutableArray%7BCore2D.Data.IRecord%7D.Builder%40)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/wieslawsoltes/Core2D/new/master/apiSpec/new?filename=Core2D_Data_DatabaseExtensions_Update_Core2D_Data_IDatabase_Core2D_Data_IDatabase_ImmutableArray_Core2D_Data_IRecord__Builder__.md&amp;value=---%0Auid%3A%20Core2D.Data.DatabaseExtensions.Update(Core2D.Data.IDatabase%2CCore2D.Data.IDatabase%2CImmutableArray%7BCore2D.Data.IRecord%7D.Builder%40)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/wieslawsoltes/Core2D/blob/master/src/Core2D/Extensions/Data/Extensions/DatabaseExtensions.cs/#L18">View Source</a>
   </span>
   <a id="Core2D_Data_DatabaseExtensions_Update_" data-uid="Core2D.Data.DatabaseExtensions.Update*"></a>
-  <h4 id="Core2D_Data_DatabaseExtensions_Update_Core2D_Data_IDatabase_Core2D_Data_IDatabase_System_Collections_Immutable_ImmutableArray_Core2D_Data_IRecord__Builder__" data-uid="Core2D.Data.DatabaseExtensions.Update(Core2D.Data.IDatabase,Core2D.Data.IDatabase,System.Collections.Immutable.ImmutableArray{Core2D.Data.IRecord}.Builder@)">Update(IDatabase, IDatabase, out ImmutableArray&lt;IRecord&gt;.Builder)</h4>
+  <h4 id="Core2D_Data_DatabaseExtensions_Update_Core2D_Data_IDatabase_Core2D_Data_IDatabase_ImmutableArray_Core2D_Data_IRecord__Builder__" data-uid="Core2D.Data.DatabaseExtensions.Update(Core2D.Data.IDatabase,Core2D.Data.IDatabase,ImmutableArray{Core2D.Data.IRecord}.Builder@)">Update(IDatabase, IDatabase, out ImmutableArray&lt;IRecord&gt;.Builder)</h4>
   <div class="markdown level1 summary"><p>Update the destination database using data from source database using Id column as identification.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -152,7 +128,7 @@
 </td>
       </tr>
       <tr>
-        <td><span class="xref">System.Collections.Immutable.ImmutableArray.Builder</span>&lt;&gt;</td>
+        <td><span class="xref">ImmutableArray.Builder</span>&lt;&gt;</td>
         <td><span class="parametername">records</span></td>
         <td><p>The updated records from destination database.</p>
 </td>
