@@ -89,6 +89,12 @@ namespace Core2D
         public FileInfo[]? Scripts { get; set; }
         public FileInfo? Project { get; set; }
         public bool Repl { get; set; }
+        public bool UseSkia { get; set; }
+        public bool UseDirect2D1 { get; set; }
+        public bool EnableMultiTouch { get; set; } = true;
+        public bool UseGpu { get; set; } = true;
+        public bool AllowEglInitialization { get; set; } = true;
+        public bool UseDeferredRendering { get; set; } = true;
         public bool UseManagedSystemDialogs { get; set; }
         public bool UseHeadless { get; set; }
         public bool UseHeadlessDrawing { get; set; }
@@ -236,6 +242,30 @@ namespace Core2D
                     Repl();
                 }
 
+                if (settings.UseSkia)
+                {
+                    builder.UseSkia();
+                }
+
+                if (settings.UseDirect2D1)
+                {
+                    builder.UseDirect2D1();
+                }
+
+                builder.With(new X11PlatformOptions
+                {
+                    EnableMultiTouch = settings.EnableMultiTouch,
+                    UseGpu = settings.UseGpu,
+                    UseDeferredRendering = settings.UseDeferredRendering
+                });
+
+                builder.With(new Win32PlatformOptions
+                {
+                    EnableMultitouch = settings.EnableMultiTouch,
+                    AllowEglInitialization = settings.AllowEglInitialization,
+                    UseDeferredRendering = settings.UseDeferredRendering
+                });
+
                 if (settings.UseManagedSystemDialogs)
                 {
                     builder.UseManagedSystemDialogs();
@@ -309,6 +339,42 @@ namespace Core2D
                 Argument = new Argument<bool>()
             };
             rootCommand.AddOption(optionUseManagedSystemDialogs);
+
+            var optionUseSkia = new Option(new[] { "--useSkia" }, "Use Skia renderer")
+            {
+                Argument = new Argument<bool>()
+            };
+            rootCommand.AddOption(optionUseSkia);
+
+            var optionUseDirect2D1 = new Option(new[] { "--useDirect2D1" }, "Use Direct2D1 renderer")
+            {
+                Argument = new Argument<bool>()
+            };
+            rootCommand.AddOption(optionUseDirect2D1);
+
+            var optionEnableMultiTouch = new Option(new[] { "--enableMultiTouch" }, "Enable multi-touch")
+            {
+                Argument = new Argument<bool>(getDefaultValue: () => true)
+            };
+            rootCommand.AddOption(optionEnableMultiTouch);
+
+            var optionUseGpu = new Option(new[] { "--useGpu" }, "Use Gpu")
+            {
+                Argument = new Argument<bool>(getDefaultValue: () => true)
+            };
+            rootCommand.AddOption(optionUseGpu);
+
+            var optionAllowEglInitialization = new Option(new[] { "--allowEglInitialization" }, "Allow EGL initialization")
+            {
+                Argument = new Argument<bool>(getDefaultValue: () => true)
+            };
+            rootCommand.AddOption(optionAllowEglInitialization);
+
+            var optionUseDeferredRendering = new Option(new[] { "--useDeferredRendering" }, "Use deferred rendering")
+            {
+                Argument = new Argument<bool>(getDefaultValue: () => true)
+            };
+            rootCommand.AddOption(optionUseDeferredRendering);
 
             var optionUseHeadless = new Option(new[] { "--useHeadless" }, "Use headless")
             {
