@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.CommandLine;
 using System.CommandLine.Invocation;
 using System.IO;
@@ -11,6 +12,7 @@ using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Dialogs;
 using Avalonia.Headless;
 using Avalonia.Media.Imaging;
+using Avalonia.OpenGL;
 using Avalonia.Threading;
 using Core2D.Editor;
 using Core2D.UI;
@@ -95,6 +97,7 @@ namespace Core2D
         public bool UseGpu { get; set; } = true;
         public bool AllowEglInitialization { get; set; } = true;
         public bool UseDeferredRendering { get; set; } = true;
+        public bool UseDirectX11 { get; set; }
         public bool UseManagedSystemDialogs { get; set; }
         public bool UseHeadless { get; set; }
         public bool UseHeadlessDrawing { get; set; }
@@ -266,6 +269,17 @@ namespace Core2D
                     UseDeferredRendering = settings.UseDeferredRendering
                 });
 
+                if (settings.UseDirectX11)
+                {
+                    builder.With(new AngleOptions()
+                    {
+                        AllowedPlatformApis = new List<AngleOptions.PlatformApi>
+                    {
+                        AngleOptions.PlatformApi.DirectX11
+                    }
+                    }); 
+                }
+
                 if (settings.UseManagedSystemDialogs)
                 {
                     builder.UseManagedSystemDialogs();
@@ -375,6 +389,12 @@ namespace Core2D
                 Argument = new Argument<bool>(getDefaultValue: () => true)
             };
             rootCommand.AddOption(optionUseDeferredRendering);
+
+            var optionUseDirectX11 = new Option(new[] { "--useDirectX11" }, "Use UseDirectX11 platform api")
+            {
+                Argument = new Argument<bool>()
+            };
+            rootCommand.AddOption(optionUseDirectX11);
 
             var optionUseHeadless = new Option(new[] { "--useHeadless" }, "Use headless")
             {
