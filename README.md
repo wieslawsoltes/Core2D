@@ -43,6 +43,13 @@ Options:
   -p, --project <project>                                          The relative or absolute path to the project file
   --repl                                                           Run scripting repl
   --useManagedSystemDialogs                                        Use managed system dialogs
+  --useSkia                                                        Use Skia renderer
+  --useDirect2D1                                                   Use Direct2D1 renderer
+  --enableMultiTouch                                               Enable multi-touch [default: True]
+  --useGpu                                                         Use Gpu [default: True]
+  --allowEglInitialization                                         Allow EGL initialization [default: True]
+  --useDeferredRendering                                           Use deferred rendering [default: True]
+  --useDirectX11                                                   Use DirectX11 platform api
   --useHeadless                                                    Use headless
   --useHeadlessDrawing                                             Use headless drawing
   --useHeadlessVnc                                                 Use headless vnc
