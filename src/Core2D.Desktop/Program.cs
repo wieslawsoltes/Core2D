@@ -390,7 +390,7 @@ namespace Core2D
             };
             rootCommand.AddOption(optionUseDeferredRendering);
 
-            var optionUseDirectX11 = new Option(new[] { "--useDirectX11" }, "Use UseDirectX11 platform api")
+            var optionUseDirectX11 = new Option(new[] { "--useDirectX11" }, "Use DirectX11 platform api")
             {
                 Argument = new Argument<bool>()
             };
