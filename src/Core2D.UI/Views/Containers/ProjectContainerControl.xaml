@@ -53,7 +53,7 @@
             </TreeView.Styles>
             <TreeView.DataTemplates>
                 <TreeDataTemplate DataType="Containers:IDocumentContainer" ItemsSource="{Binding Pages}" x:CompileBindings="False">
-                    <Grid Background="Transparent" x:CompileBindings="True">
+                    <Grid Background="Transparent">
                         <i:Interaction.Behaviors>
                             <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}"/>
                         </i:Interaction.Behaviors>
