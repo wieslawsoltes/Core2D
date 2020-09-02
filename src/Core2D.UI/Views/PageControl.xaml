@@ -48,8 +48,10 @@
         <!-- View -->
         <KeyBinding Command="{Binding Platform.OnZoomReset}" Gesture="Ctrl+D0" x:CompileBindings="False"/>
         <KeyBinding Command="{Binding Platform.OnZoomReset}" Gesture="Ctrl+NumPad0" x:CompileBindings="False"/>
+        <KeyBinding Command="{Binding Platform.OnZoomReset}" Gesture="Z" x:CompileBindings="False"/>
         <KeyBinding Command="{Binding Platform.OnZoomUniform}" Gesture="Ctrl+D1" x:CompileBindings="False"/>
         <KeyBinding Command="{Binding Platform.OnZoomUniform}" Gesture="Ctrl+NumPad1" x:CompileBindings="False"/>
+        <KeyBinding Command="{Binding Platform.OnZoomUniform}" Gesture="X" x:CompileBindings="False"/>
         <KeyBinding Command="{Binding Platform.OnZoomUniformToFill}" Gesture="Ctrl+D2" x:CompileBindings="False"/>
         <KeyBinding Command="{Binding Platform.OnZoomUniformToFill}" Gesture="Ctrl+NumPad2" x:CompileBindings="False"/>
         <KeyBinding Command="{Binding Platform.OnZoomFill}" Gesture="Ctrl+D3" x:CompileBindings="False"/>
