@@ -40,7 +40,7 @@
   </ItemGroup>
 
   <PropertyGroup>
-    <AvaloniaVersion>0.10.0-preview4</AvaloniaVersion>
+    <AvaloniaVersion>0.10.0-preview5</AvaloniaVersion>
   </PropertyGroup>
 
   <ItemGroup>

@@ -39,10 +39,10 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <AvaloniaVersion>0.10.0-preview4</AvaloniaVersion>
+    <AvaloniaVersion>0.10.0-preview5</AvaloniaVersion>
     <AvaloniaEditVersion>0.10.0-preview1</AvaloniaEditVersion>
-    <AvaloniaBehaviorsVersion>0.10.0-preview4</AvaloniaBehaviorsVersion>
-    <PanAndZoomVersion>3.0.0-preview4</PanAndZoomVersion>
+    <AvaloniaBehaviorsVersion>0.10.0-preview5</AvaloniaBehaviorsVersion>
+    <PanAndZoomVersion>3.0.0-preview5</PanAndZoomVersion>
   </PropertyGroup>
 
   <ItemGroup>
