@@ -32,7 +32,7 @@
     <PackageReference Include="Autofac" Version="5.2.0" />
     <PackageReference Include="CsvHelper" Version="15.0.5" />
     <PackageReference Include="DocumentFormat.OpenXml" Version="2.11.3" />
-    <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Scripting" Version="3.6.0" />
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Scripting" Version="3.7.0" />
     <PackageReference Include="netDXF.netstandard" Version="2.4.0" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
     <PackageReference Include="PDFsharp" Version="1.50.5147" />
