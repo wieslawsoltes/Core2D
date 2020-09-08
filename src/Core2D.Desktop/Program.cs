@@ -274,9 +274,9 @@ namespace Core2D
                     builder.With(new AngleOptions()
                     {
                         AllowedPlatformApis = new List<AngleOptions.PlatformApi>
-                    {
-                        AngleOptions.PlatformApi.DirectX11
-                    }
+                        {
+                            AngleOptions.PlatformApi.DirectX11
+                        }
                     }); 
                 }
 
