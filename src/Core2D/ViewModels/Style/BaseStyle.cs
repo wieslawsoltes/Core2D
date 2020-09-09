@@ -6,22 +6,22 @@ namespace Core2D.Style
     /// </summary>
     public abstract class BaseStyle : ObservableObject, IBaseStyle
     {
-        private IColor _stroke;
-        private IColor _fill;
+        private IColor? _stroke;
+        private IColor? _fill;
         private double _thickness;
         private LineCap _lineCap;
-        private string _dashes;
+        private string? _dashes;
         private double _dashOffset;
 
         /// <inheritdoc/>
-        public IColor Stroke
+        public IColor? Stroke
         {
             get => _stroke;
             set => Update(ref _stroke, value);
         }
 
         /// <inheritdoc/>
-        public IColor Fill
+        public IColor? Fill
         {
             get => _fill;
             set => Update(ref _fill, value);
@@ -42,7 +42,7 @@ namespace Core2D.Style
         }
 
         /// <inheritdoc/>
-        public string Dashes
+        public string? Dashes
         {
             get => _dashes;
             set => Update(ref _dashes, value);
@@ -60,8 +60,15 @@ namespace Core2D.Style
         {
             var isDirty = base.IsDirty();
 
-            isDirty |= Stroke.IsDirty();
-            isDirty |= Fill.IsDirty();
+            if (Stroke != null)
+            {
+                isDirty |= Stroke.IsDirty(); 
+            }
+
+            if (Fill != null)
+            {
+                isDirty |= Fill.IsDirty(); 
+            }
 
             return isDirty;
         }

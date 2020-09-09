@@ -10,29 +10,29 @@ namespace Core2D.Shapes
     /// </summary>
     public class TextShape : BaseShape, ITextShape
     {
-        private IPointShape _topLeft;
-        private IPointShape _bottomRight;
-        private string _text;
+        private IPointShape? _topLeft;
+        private IPointShape? _bottomRight;
+        private string? _text;
 
         /// <inheritdoc/>
         public override Type TargetType => typeof(ITextShape);
 
         /// <inheritdoc/>
-        public IPointShape TopLeft
+        public IPointShape? TopLeft
         {
             get => _topLeft;
             set => Update(ref _topLeft, value);
         }
 
         /// <inheritdoc/>
-        public IPointShape BottomRight
+        public IPointShape? BottomRight
         {
             get => _bottomRight;
             set => Update(ref _bottomRight, value);
         }
 
         /// <inheritdoc/>
-        public string Text
+        public string? Text
         {
             get => _text;
             set => Update(ref _text, value);

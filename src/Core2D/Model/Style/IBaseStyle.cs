@@ -9,12 +9,12 @@ namespace Core2D.Style
         /// <summary>
         /// Gets or sets stroke color.
         /// </summary>
-        IColor Stroke { get; set; }
+        IColor? Stroke { get; set; }
 
         /// <summary>
         /// Gets or sets fill color.
         /// </summary>
-        IColor Fill { get; set; }
+        IColor? Fill { get; set; }
 
         /// <summary>
         /// Gets or sets stroke thickness.
@@ -29,7 +29,7 @@ namespace Core2D.Style
         /// <summary>
         /// Gets or sets line dashes.
         /// </summary>
-        string Dashes { get; set; }
+        string? Dashes { get; set; }
 
         /// <summary>
         /// Gets or sets line dash offset.
