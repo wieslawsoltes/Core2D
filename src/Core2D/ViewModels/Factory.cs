@@ -719,16 +719,19 @@ namespace Core2D
                 Geometry = geometry
             };
 
-            geometry.Owner = pathShape;
-
-            foreach (var figure in geometry.Figures)
+            if (geometry != null)
             {
-                figure.Owner = pathShape;
+                geometry.Owner = pathShape;
 
-                foreach (var segment in figure.Segments)
+                foreach (var figure in geometry.Figures)
                 {
-                    segment.Owner = pathShape;
-                }
+                    figure.Owner = pathShape;
+
+                    foreach (var segment in figure.Segments)
+                    {
+                        segment.Owner = pathShape;
+                    }
+                } 
             }
 
             return pathShape;
@@ -748,18 +751,20 @@ namespace Core2D
                 Geometry = geometry
             };
 
-            geometry.Owner = pathShape;
-
-            foreach (var figure in geometry.Figures)
+            if (geometry != null)
             {
-                figure.Owner = pathShape;
+                geometry.Owner = pathShape;
 
-                foreach (var segment in figure.Segments)
+                foreach (var figure in geometry.Figures)
                 {
-                    segment.Owner = pathShape;
+                    figure.Owner = pathShape;
+
+                    foreach (var segment in figure.Segments)
+                    {
+                        segment.Owner = pathShape;
+                    }
                 }
             }
-
             return pathShape;
         }
 
