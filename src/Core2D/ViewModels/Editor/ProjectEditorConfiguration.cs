@@ -14,7 +14,7 @@ namespace Core2D.Editor
     public class ProjectEditorConfiguration : ObservableObject, ISettings
     {
         /// <inheritdoc/>
-        public override object Copy(IDictionary<object, object> shared)
+        public override object Copy(IDictionary<object, object>? shared)
         {
             throw new NotImplementedException();
         }

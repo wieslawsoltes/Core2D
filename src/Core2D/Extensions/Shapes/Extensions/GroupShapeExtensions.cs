@@ -26,15 +26,15 @@ namespace Core2D.Shapes
         /// <param name="group">The group shape.</param>
         /// <param name="shapes">The shapes collection.</param>
         /// <param name="source">The source shapes collection.</param>
-        public static void Group(this IGroupShape group, IEnumerable<IBaseShape> shapes, IList<IBaseShape> source = null)
+        public static void Group(this IGroupShape group, IEnumerable<IBaseShape> shapes, IList<IBaseShape>? source = null)
         {
             if (shapes != null)
             {
                 foreach (var shape in shapes)
                 {
-                    if (shape is IPointShape)
+                    if (shape is IPointShape pointShape)
                     {
-                        group.AddConnectorAsNone(shape as IPointShape);
+                        group.AddConnectorAsNone(pointShape);
                     }
                     else
                     {

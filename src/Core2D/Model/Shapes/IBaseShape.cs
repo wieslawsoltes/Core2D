@@ -18,12 +18,12 @@ namespace Core2D.Shapes
         /// <summary>
         /// Indicates shape state options.
         /// </summary>
-        IShapeState State { get; set; }
+        IShapeState? State { get; set; }
 
         /// <summary>
         /// Gets or sets shape <see cref="IContext"/>.
         /// </summary>
-        IContext Data { get; set; }
+        IContext? Data { get; set; }
 
         /// <summary>
         /// Get all points in the shape.

@@ -132,7 +132,7 @@ namespace Core2D.Renderer
         }
 
         /// <inheritdoc/>
-        public override object Copy(IDictionary<object, object> shared)
+        public override object Copy(IDictionary<object, object>? shared)
         {
             throw new NotImplementedException();
         }

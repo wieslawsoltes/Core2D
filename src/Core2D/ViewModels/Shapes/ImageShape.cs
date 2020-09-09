@@ -51,7 +51,7 @@ namespace Core2D.Shapes
         }
 
         /// <inheritdoc/>
-        public override object Copy(IDictionary<object, object> shared)
+        public override object Copy(IDictionary<object, object>? shared)
         {
             throw new NotImplementedException();
         }

@@ -11,7 +11,7 @@ namespace Core2D
         /// <summary>
         /// Gets or sets object owner.
         /// </summary>
-        IObservableObject Owner { get; set; }
+        IObservableObject? Owner { get; set; }
 
         /// <summary>
         /// Gets or sets observable object name.
@@ -32,7 +32,7 @@ namespace Core2D
         /// Notify observers about property changes.
         /// </summary>
         /// <param name="propertyName">The property name that changed.</param>
-        void Notify([CallerMemberName] string propertyName = default);
+        void Notify([CallerMemberName] string? propertyName = default);
 
         /// <summary>
         /// Update property backing field and notify observers about property change.
@@ -42,6 +42,6 @@ namespace Core2D
         /// <param name="value">The new field value.</param>
         /// <param name="propertyName">The property name that changed.</param>
         /// <returns>True if backing field value changed.</returns>
-        bool Update<T>(ref T field, T value, [CallerMemberName] string propertyName = default);
+        bool Update<T>(ref T field, T value, [CallerMemberName] string? propertyName = default);
     }
 }

@@ -33,7 +33,7 @@ namespace Core2D.Editors
         }
 
         /// <inheritdoc/>
-        public override object Copy(IDictionary<object, object> shared)
+        public override object Copy(IDictionary<object, object>? shared)
         {
             throw new NotImplementedException();
         }

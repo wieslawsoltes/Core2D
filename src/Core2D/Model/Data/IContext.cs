@@ -15,6 +15,6 @@ namespace Core2D.Data
         /// <summary>
         /// Gets or sets shape data record.
         /// </summary>
-        IRecord Record { get; set; }
+        IRecord? Record { get; set; }
     }
 }

@@ -7,17 +7,17 @@ namespace Core2D.Data
     /// </summary>
     public class Value : ObservableObject, IValue
     {
-        private string _content;
+        private string? _content;
 
         /// <inheritdoc/>
-        public string Content
+        public string? Content
         {
             get => _content;
             set => Update(ref _content, value);
         }
 
         /// <inheritdoc/>
-        public override object Copy(IDictionary<object, object> shared)
+        public override object Copy(IDictionary<object, object>? shared)
         {
             return new Value()
             {

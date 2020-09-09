@@ -7,7 +7,7 @@
     <EnableDefaultCompileItems>False</EnableDefaultCompileItems>
     <LangVersion>8.0</LangVersion>
     <IsPackable>True</IsPackable>
-    <Nullable>disable</Nullable>
+    <Nullable>enable</Nullable>
     <NoWarn>$(NoWarn);NU1701</NoWarn>
   </PropertyGroup>
 

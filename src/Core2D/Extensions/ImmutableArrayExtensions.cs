@@ -15,7 +15,7 @@ namespace Core2D.Data
         /// <param name="array">The array to copy.</param>
         /// <param name="shared">The shared objects dictionary.</param>
         /// <returns>The copy of immutable array.</returns>
-        public static ImmutableArray<T>.Builder Copy<T>(this ref ImmutableArray<T> array, IDictionary<object, object> shared) where T : IObservableObject
+        public static ImmutableArray<T>.Builder Copy<T>(this ref ImmutableArray<T> array, IDictionary<object, object>? shared) where T : IObservableObject
         {
             var copy = ImmutableArray.CreateBuilder<T>();
 

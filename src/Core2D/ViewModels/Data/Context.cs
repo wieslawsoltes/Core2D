@@ -9,7 +9,7 @@ namespace Core2D.Data
     public class Context : ObservableObject, IContext
     {
         private ImmutableArray<IProperty> _properties;
-        private IRecord _record;
+        private IRecord? _record;
 
         /// <inheritdoc/>
         public ImmutableArray<IProperty> Properties
@@ -19,14 +19,14 @@ namespace Core2D.Data
         }
 
         /// <inheritdoc/>
-        public IRecord Record
+        public IRecord? Record
         {
             get => _record;
             set => Update(ref _record, value);
         }
 
         /// <inheritdoc/>
-        public override object Copy(IDictionary<object, object> shared)
+        public override object Copy(IDictionary<object, object>? shared)
         {
             var properties = this._properties.Copy(shared).ToImmutable();
 
@@ -34,7 +34,7 @@ namespace Core2D.Data
             {
                 Name = this.Name,
                 Properties = properties,
-                Record = (IRecord)this.Record.Copy(shared)
+                Record = this.Record != null ? (IRecord)this.Record.Copy(shared) : default
             };
         }
 

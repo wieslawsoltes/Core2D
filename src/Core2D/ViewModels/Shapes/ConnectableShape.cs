@@ -62,7 +62,7 @@ namespace Core2D.Shapes
         }
 
         /// <inheritdoc/>
-        public override void Move(ISelection selection, decimal dx, decimal dy)
+        public override void Move(ISelection? selection, decimal dx, decimal dy)
         {
             foreach (var connector in _connectors)
             {
@@ -102,7 +102,7 @@ namespace Core2D.Shapes
         }
 
         /// <inheritdoc/>
-        public override object Copy(IDictionary<object, object> shared)
+        public override object Copy(IDictionary<object, object>? shared)
         {
             throw new NotImplementedException();
         }

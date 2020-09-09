@@ -50,7 +50,7 @@ namespace Core2D.Style
         }
 
         /// <inheritdoc/>
-        public override object Copy(IDictionary<object, object> shared)
+        public override object Copy(IDictionary<object, object>? shared)
         {
             return new FontStyle()
             {

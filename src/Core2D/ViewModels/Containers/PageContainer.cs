@@ -14,14 +14,14 @@ namespace Core2D.Containers
     {
         private double _width;
         private double _height;
-        private IColor _background;
+        private IColor? _background;
         private ImmutableArray<ILayerContainer> _layers;
-        private ILayerContainer _currentLayer;
-        private ILayerContainer _workingLayer;
-        private ILayerContainer _helperLayer;
-        private IBaseShape _currentShape;
-        private IPageContainer _template;
-        private IContext _data;
+        private ILayerContainer? _currentLayer;
+        private ILayerContainer? _workingLayer;
+        private ILayerContainer? _helperLayer;
+        private IBaseShape? _currentShape;
+        private IPageContainer? _template;
+        private IContext? _data;
         private bool _isExpanded = false;
         private bool _isGridEnabled;
         private bool _isBorderEnabled;
@@ -31,7 +31,7 @@ namespace Core2D.Containers
         private double _gridOffsetBottom;
         private double _gridCellWidth;
         private double _gridCellHeight;
-        private IColor _gridStrokeColor;
+        private IColor? _gridStrokeColor;
         private double _gridStrokeThickness;
 
         /// <inheritdoc/>
@@ -71,7 +71,7 @@ namespace Core2D.Containers
         }
 
         /// <inheritdoc/>
-        public IColor Background
+        public IColor? Background
         {
             get => _template != null ? _template.Background : _background;
             set
@@ -96,42 +96,42 @@ namespace Core2D.Containers
         }
 
         /// <inheritdoc/>
-        public ILayerContainer CurrentLayer
+        public ILayerContainer? CurrentLayer
         {
             get => _currentLayer;
             set => Update(ref _currentLayer, value);
         }
 
         /// <inheritdoc/>
-        public ILayerContainer WorkingLayer
+        public ILayerContainer? WorkingLayer
         {
             get => _workingLayer;
             set => Update(ref _workingLayer, value);
         }
 
         /// <inheritdoc/>
-        public ILayerContainer HelperLayer
+        public ILayerContainer? HelperLayer
         {
             get => _helperLayer;
             set => Update(ref _helperLayer, value);
         }
 
         /// <inheritdoc/>
-        public IBaseShape CurrentShape
+        public IBaseShape? CurrentShape
         {
             get => _currentShape;
             set => Update(ref _currentShape, value);
         }
 
         /// <inheritdoc/>
-        public IPageContainer Template
+        public IPageContainer? Template
         {
             get => _template;
             set => Update(ref _template, value);
         }
 
         /// <inheritdoc/>
-        public IContext Data
+        public IContext? Data
         {
             get => _data;
             set => Update(ref _data, value);
@@ -289,7 +289,7 @@ namespace Core2D.Containers
         }
 
         /// <inheritdoc/>
-        public IColor GridStrokeColor
+        public IColor? GridStrokeColor
         {
             get => _template != null ? _template.GridStrokeColor : _gridStrokeColor;
             set
@@ -355,7 +355,7 @@ namespace Core2D.Containers
         }
 
         /// <inheritdoc/>
-        public override object Copy(IDictionary<object, object> shared)
+        public override object Copy(IDictionary<object, object>? shared)
         {
             throw new NotImplementedException();
         }

@@ -21,6 +21,7 @@ namespace Core2D
     /// </summary>
     public class Factory : IFactory
     {
+#nullable disable
         /// <inheritdoc/>
         public ILibrary<T> CreateLibrary<T>(string name)
         {
@@ -42,7 +43,7 @@ namespace Core2D
                 Selected = items.FirstOrDefault()
             };
         }
-
+#nullable restore
         /// <inheritdoc/>
         public IValue CreateValue(string content)
         {
@@ -208,13 +209,13 @@ namespace Core2D
 
             return db;
         }
-
+#nullable disable
         /// <inheritdoc/>
         public ICache<TKey, TValue> CreateCache<TKey, TValue>(Action<TValue> dispose = null)
         {
             return new Cache<TKey, TValue>(dispose);
         }
-
+#nullable restore
         /// <inheritdoc/>
         public IShapeState CreateShapeState(ShapeStateFlags flags = ShapeStateFlags.Default)
         {
@@ -607,7 +608,7 @@ namespace Core2D
         }
 
         /// <inheritdoc/>
-        public IRectangleShape CreateRectangleShape(double x1, double y1, double x2, double y2, IShapeStyle style, bool isStroked = true, bool isFilled = false, string text = null, string name = "")
+        public IRectangleShape CreateRectangleShape(double x1, double y1, double x2, double y2, IShapeStyle style, bool isStroked = true, bool isFilled = false, string? text = null, string name = "")
         {
             var rectangleShape = new RectangleShape()
             {
@@ -630,13 +631,13 @@ namespace Core2D
         }
 
         /// <inheritdoc/>
-        public IRectangleShape CreateRectangleShape(double x, double y, IShapeStyle style, bool isStroked = true, bool isFilled = false, string text = null, string name = "")
+        public IRectangleShape CreateRectangleShape(double x, double y, IShapeStyle style, bool isStroked = true, bool isFilled = false, string? text = null, string name = "")
         {
             return CreateRectangleShape(x, y, x, y, style, isStroked, isFilled, text, name);
         }
 
         /// <inheritdoc/>
-        public IRectangleShape CreateRectangleShape(IPointShape topLeft, IPointShape bottomRight, IShapeStyle style, bool isStroked = true, bool isFilled = false, string text = null, string name = "")
+        public IRectangleShape CreateRectangleShape(IPointShape topLeft, IPointShape bottomRight, IShapeStyle style, bool isStroked = true, bool isFilled = false, string? text = null, string name = "")
         {
             var rectangleShape = new RectangleShape()
             {
@@ -656,7 +657,7 @@ namespace Core2D
         }
 
         /// <inheritdoc/>
-        public IEllipseShape CreateEllipseShape(double x1, double y1, double x2, double y2, IShapeStyle style, bool isStroked = true, bool isFilled = false, string text = null, string name = "")
+        public IEllipseShape CreateEllipseShape(double x1, double y1, double x2, double y2, IShapeStyle style, bool isStroked = true, bool isFilled = false, string? text = null, string name = "")
         {
             var ellipseShape = new EllipseShape()
             {
@@ -679,13 +680,13 @@ namespace Core2D
         }
 
         /// <inheritdoc/>
-        public IEllipseShape CreateEllipseShape(double x, double y, IShapeStyle style, bool isStroked = true, bool isFilled = false, string text = null, string name = "")
+        public IEllipseShape CreateEllipseShape(double x, double y, IShapeStyle style, bool isStroked = true, bool isFilled = false, string? text = null, string name = "")
         {
             return CreateEllipseShape(x, y, x, y, style, isStroked, isFilled, text, name);
         }
 
         /// <inheritdoc/>
-        public IEllipseShape CreateEllipseShape(IPointShape topLeft, IPointShape bottomRight, IShapeStyle style, bool isStroked = true, bool isFilled = false, string text = null, string name = "")
+        public IEllipseShape CreateEllipseShape(IPointShape topLeft, IPointShape bottomRight, IShapeStyle style, bool isStroked = true, bool isFilled = false, string? text = null, string name = "")
         {
             var ellipseShape = new EllipseShape()
             {
@@ -818,7 +819,7 @@ namespace Core2D
         }
 
         /// <inheritdoc/>
-        public IImageShape CreateImageShape(double x1, double y1, double x2, double y2, IShapeStyle style, string key, bool isStroked = false, bool isFilled = false, string text = null, string name = "")
+        public IImageShape CreateImageShape(double x1, double y1, double x2, double y2, IShapeStyle style, string key, bool isStroked = false, bool isFilled = false, string? text = null, string name = "")
         {
             var imageShape = new ImageShape()
             {
@@ -842,13 +843,13 @@ namespace Core2D
         }
 
         /// <inheritdoc/>
-        public IImageShape CreateImageShape(double x, double y, IShapeStyle style, string key, bool isStroked = false, bool isFilled = false, string text = null, string name = "")
+        public IImageShape CreateImageShape(double x, double y, IShapeStyle style, string key, bool isStroked = false, bool isFilled = false, string? text = null, string name = "")
         {
             return CreateImageShape(x, y, x, y, style, key, isStroked, isFilled, text, name);
         }
 
         /// <inheritdoc/>
-        public IImageShape CreateImageShape(IPointShape topLeft, IPointShape bottomRight, IShapeStyle style, string key, bool isStroked = false, bool isFilled = false, string text = null, string name = "")
+        public IImageShape CreateImageShape(IPointShape topLeft, IPointShape bottomRight, IShapeStyle style, string key, bool isStroked = false, bool isFilled = false, string? text = null, string name = "")
         {
             var imageShape = new ImageShape()
             {
@@ -944,7 +945,7 @@ namespace Core2D
         }
 
         /// <inheritdoc/>
-        public ILineFixedLength CreateLineFixedLength(LineFixedLengthFlags flags = LineFixedLengthFlags.Disabled, IShapeState startTrigger = null, IShapeState endTrigger = null, double length = 15.0)
+        public ILineFixedLength CreateLineFixedLength(LineFixedLengthFlags flags = LineFixedLengthFlags.Disabled, IShapeState? startTrigger = null, IShapeState? endTrigger = null, double length = 15.0)
         {
             return new LineFixedLength()
             {
@@ -956,7 +957,7 @@ namespace Core2D
         }
 
         /// <inheritdoc/>
-        public ILineStyle CreateLineStyle(string name = "", bool isCurved = false, double curvature = 50.0, CurveOrientation curveOrientation = CurveOrientation.Auto, ILineFixedLength fixedLength = null)
+        public ILineStyle CreateLineStyle(string name = "", bool isCurved = false, double curvature = 50.0, CurveOrientation curveOrientation = CurveOrientation.Auto, ILineFixedLength? fixedLength = null)
         {
             return new LineStyle()
             {
@@ -969,7 +970,7 @@ namespace Core2D
         }
 
         /// <inheritdoc/>
-        public IShapeStyle CreateShapeStyle(string name = null, byte sa = 0xFF, byte sr = 0x00, byte sg = 0x00, byte sb = 0x00, byte fa = 0xFF, byte fr = 0x00, byte fg = 0x00, byte fb = 0x00, double thickness = 2.0, ITextStyle textStyle = null, ILineStyle lineStyle = null, IArrowStyle startArrowStyle = null, IArrowStyle endArrowStyle = null, LineCap lineCap = LineCap.Round, string dashes = default, double dashOffset = 0.0)
+        public IShapeStyle CreateShapeStyle(string? name = null, byte sa = 0xFF, byte sr = 0x00, byte sg = 0x00, byte sb = 0x00, byte fa = 0xFF, byte fr = 0x00, byte fg = 0x00, byte fb = 0x00, double thickness = 2.0, ITextStyle? textStyle = null, ILineStyle? lineStyle = null, IArrowStyle? startArrowStyle = null, IArrowStyle? endArrowStyle = null, LineCap lineCap = LineCap.Round, string? dashes = default, double dashOffset = 0.0)
         {
             var style = new ShapeStyle()
             {
@@ -1010,7 +1011,7 @@ namespace Core2D
         }
 
         /// <inheritdoc/>
-        public ITextStyle CreateTextStyle(string name = "", string fontName = "Calibri", string fontFile = @"C:\Windows\Fonts\calibri.ttf", double fontSize = 12.0, IFontStyle fontStyle = null, TextHAlignment textHAlignment = TextHAlignment.Center, TextVAlignment textVAlignment = TextVAlignment.Center)
+        public ITextStyle CreateTextStyle(string name = "", string fontName = "Calibri", string fontFile = @"C:\Windows\Fonts\calibri.ttf", double fontSize = 12.0, IFontStyle? fontStyle = null, TextHAlignment textHAlignment = TextHAlignment.Center, TextVAlignment textVAlignment = TextVAlignment.Center)
         {
             return new TextStyle()
             {
@@ -1053,7 +1054,7 @@ namespace Core2D
         }
 
         /// <inheritdoc/>
-        public ILayerContainer CreateLayerContainer(string name = "Layer", IPageContainer owner = null, bool isVisible = true)
+        public ILayerContainer CreateLayerContainer(string name = "Layer", IPageContainer? owner = null, bool isVisible = true)
         {
             return new LayerContainer()
             {

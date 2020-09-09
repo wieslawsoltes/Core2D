@@ -50,7 +50,7 @@ namespace Core2D.Renderer
         /// <summary>
         /// Gets or sets grid stroke color.
         /// </summary>
-        IColor GridStrokeColor { get; set; }
+        IColor? GridStrokeColor { get; set; }
 
         /// <summary>
         /// Gets or sets grid stroke thickness.

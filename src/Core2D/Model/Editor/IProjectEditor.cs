@@ -211,7 +211,7 @@ namespace Core2D.Editor
         /// Create new project, document or page.
         /// </summary>
         /// <param name="item">The parent item.</param>
-        void OnNew(object item);
+        void OnNew(object? item);
 
         /// <summary>
         /// Create new page.
@@ -923,7 +923,7 @@ namespace Core2D.Editor
         /// </summary>
         /// <param name="project">The project instance.</param>
         /// <param name="path">The project path.</param>
-        void OnLoad(IProjectContainer project, string path = null);
+        void OnLoad(IProjectContainer project, string? path = null);
 
         /// <summary>
         /// Unload project.

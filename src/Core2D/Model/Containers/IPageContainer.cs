@@ -33,7 +33,7 @@ namespace Core2D.Containers
         /// <remarks>
         /// If template is not null Template.Background property is used.
         /// </remarks>
-        IColor Background { get; set; }
+        IColor? Background { get; set; }
 
         /// <summary>
         /// Gets or sets container layers.
@@ -43,32 +43,32 @@ namespace Core2D.Containers
         /// <summary>
         /// Gets or sets current container layer.
         /// </summary>
-        ILayerContainer CurrentLayer { get; set; }
+        ILayerContainer? CurrentLayer { get; set; }
 
         /// <summary>
         /// Gets or sets working container layer.
         /// </summary>
-        ILayerContainer WorkingLayer { get; set; }
+        ILayerContainer? WorkingLayer { get; set; }
 
         /// <summary>
         /// Gets or sets helper container layer.
         /// </summary>
-        ILayerContainer HelperLayer { get; set; }
+        ILayerContainer? HelperLayer { get; set; }
 
         /// <summary>
         /// Gets or sets current container shape.
         /// </summary>
-        IBaseShape CurrentShape { get; set; }
+        IBaseShape? CurrentShape { get; set; }
 
         /// <summary>
         /// Gets or sets container template.
         /// </summary>
-        IPageContainer Template { get; set; }
+        IPageContainer? Template { get; set; }
 
         /// <summary>
         /// Gets or sets container data.
         /// </summary>
-        IContext Data { get; set; }
+        IContext? Data { get; set; }
 
         /// <summary>
         /// Gets or sets flag indicating whether container is expanded.

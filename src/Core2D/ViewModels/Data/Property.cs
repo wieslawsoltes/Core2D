@@ -7,17 +7,17 @@ namespace Core2D.Data
     /// </summary>
     public class Property : ObservableObject, IProperty
     {
-        private string _value;
+        private string? _value;
 
         /// <inheritdoc/>
-        public string Value
+        public string? Value
         {
             get => _value;
             set => Update(ref _value, value);
         }
 
         /// <inheritdoc/>
-        public override object Copy(IDictionary<object, object> shared)
+        public override object Copy(IDictionary<object, object>? shared)
         {
             return new Property()
             {
@@ -43,7 +43,7 @@ namespace Core2D.Data
         /// Returns a string that represents the current object.
         /// </summary>
         /// <returns>A string that represents the current object.</returns>
-        public override string ToString() => _value.ToString();
+        public override string ToString() => _value is null ? string.Empty :_value.ToString();
 
         /// <summary>
         /// Check whether the <see cref="Value"/> property has changed from its default value.

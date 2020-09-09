@@ -9,6 +9,6 @@ namespace Core2D.Data
         /// <summary>
         /// Gets or sets value content.
         /// </summary>
-        string Content { get; set; }
+        string? Content { get; set; }
     }
 }

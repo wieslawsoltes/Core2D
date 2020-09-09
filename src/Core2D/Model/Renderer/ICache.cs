@@ -1,4 +1,5 @@
-﻿
+﻿#nullable disable
+
 namespace Core2D.Renderer
 {
     /// <summary>

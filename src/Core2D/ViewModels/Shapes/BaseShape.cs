@@ -12,24 +12,24 @@ namespace Core2D.Shapes
     public abstract class BaseShape : ObservableObject, IBaseShape
     {
         private IDictionary<string, object> _properties = new Dictionary<string, object>();
-        private IShapeState _state;
-        private IShapeStyle _style;
+        private IShapeState? _state;
+        private IShapeStyle? _style;
         private bool _isStroked;
         private bool _isFilled;
-        private IContext _data;
+        private IContext? _data;
 
         /// <inheritdoc/>
         public abstract Type TargetType { get; }
 
         /// <inheritdoc/>
-        public virtual IShapeState State
+        public virtual IShapeState? State
         {
             get => _state;
             set => Update(ref _state, value);
         }
 
         /// <inheritdoc/>
-        public virtual IShapeStyle Style
+        public virtual IShapeStyle? Style
         {
             get => _style;
             set => Update(ref _style, value);
@@ -50,7 +50,7 @@ namespace Core2D.Shapes
         }
 
         /// <inheritdoc/>
-        public virtual IContext Data
+        public virtual IContext? Data
         {
             get => _data;
             set => Update(ref _data, value);
@@ -61,8 +61,15 @@ namespace Core2D.Shapes
         {
             var isDirty = base.IsDirty();
 
-            isDirty |= State.IsDirty();
-            isDirty |= Data.IsDirty();
+            if (State != null)
+            {
+                isDirty |= State.IsDirty(); 
+            }
+
+            if (Data != null)
+            {
+                isDirty |= Data.IsDirty(); 
+            }
 
             return isDirty;
         }
@@ -71,8 +78,8 @@ namespace Core2D.Shapes
         public override void Invalidate()
         {
             base.Invalidate();
-            State.Invalidate();
-            Data.Invalidate();
+            State?.Invalidate();
+            Data?.Invalidate();
         }
 
         /// <inheritdoc/>
@@ -91,13 +98,13 @@ namespace Core2D.Shapes
         public abstract void Bind(IDataFlow dataFlow, object db, object r);
 
         /// <inheritdoc/>
-        public virtual void SetProperty(string name, object value)
+        public virtual void SetProperty(string name, object? value)
         {
-            _properties[name] = value;
+            _properties[name] = value!;
         }
 
         /// <inheritdoc/>
-        public virtual object GetProperty(string name)
+        public virtual object? GetProperty(string name)
         {
             if (_properties.ContainsKey(name))
             {
@@ -108,7 +115,7 @@ namespace Core2D.Shapes
         }
 
         /// <inheritdoc/>
-        public abstract void Move(ISelection selection, decimal dx, decimal dy);
+        public abstract void Move(ISelection? selection, decimal dx, decimal dy);
 
         /// <inheritdoc/>
         public virtual void Select(ISelection selection)

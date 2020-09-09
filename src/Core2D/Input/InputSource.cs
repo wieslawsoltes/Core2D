@@ -8,18 +8,18 @@ namespace Core2D.Input
     public abstract class InputSource : IInputSource
     {
         /// <inheritdoc/>
-        public IObservable<InputArgs> LeftDown { get; set; }
+        public IObservable<InputArgs>? LeftDown { get; set; }
 
         /// <inheritdoc/>
-        public IObservable<InputArgs> LeftUp { get; set; }
+        public IObservable<InputArgs>? LeftUp { get; set; }
 
         /// <inheritdoc/>
-        public IObservable<InputArgs> RightDown { get; set; }
+        public IObservable<InputArgs>? RightDown { get; set; }
 
         /// <inheritdoc/>
-        public IObservable<InputArgs> RightUp { get; set; }
+        public IObservable<InputArgs>? RightUp { get; set; }
 
         /// <inheritdoc/>
-        public IObservable<InputArgs> Move { get; set; }
+        public IObservable<InputArgs>? Move { get; set; }
     }
 }

@@ -15,8 +15,13 @@ namespace Core2D.Shapes
         public static void AddConnectorAsNone(this IConnectableShape shape, IPointShape point)
         {
             point.Owner = shape;
-            point.State.Flags |= ShapeStateFlags.Connector | ShapeStateFlags.None;
-            point.State.Flags &= ~ShapeStateFlags.Standalone;
+
+            if (point.State != null)
+            {
+                point.State.Flags |= ShapeStateFlags.Connector | ShapeStateFlags.None;
+                point.State.Flags &= ~ShapeStateFlags.Standalone; 
+            }
+
             shape.Connectors = shape.Connectors.Add(point);
         }
 
@@ -28,8 +33,13 @@ namespace Core2D.Shapes
         public static void AddConnectorAsInput(this IConnectableShape shape, IPointShape point)
         {
             point.Owner = shape;
-            point.State.Flags |= ShapeStateFlags.Connector | ShapeStateFlags.Input;
-            point.State.Flags &= ~ShapeStateFlags.Standalone;
+
+            if (point.State != null)
+            {
+                point.State.Flags |= ShapeStateFlags.Connector | ShapeStateFlags.Input;
+                point.State.Flags &= ~ShapeStateFlags.Standalone; 
+            }
+
             shape.Connectors = shape.Connectors.Add(point);
         }
 
@@ -41,8 +51,13 @@ namespace Core2D.Shapes
         public static void AddConnectorAsOutput(this IConnectableShape shape, IPointShape point)
         {
             point.Owner = shape;
-            point.State.Flags |= ShapeStateFlags.Connector | ShapeStateFlags.Output;
-            point.State.Flags &= ~ShapeStateFlags.Standalone;
+
+            if (point.State != null)
+            {
+                point.State.Flags |= ShapeStateFlags.Connector | ShapeStateFlags.Output;
+                point.State.Flags &= ~ShapeStateFlags.Standalone; 
+            }
+
             shape.Connectors = shape.Connectors.Add(point);
         }
     }

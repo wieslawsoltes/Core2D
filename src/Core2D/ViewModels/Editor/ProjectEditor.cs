@@ -250,7 +250,7 @@ namespace Core2D.Editor
         }
 
         /// <inheritdoc/>
-        public override object Copy(IDictionary<object, object> shared)
+        public override object Copy(IDictionary<object, object>? shared)
         {
             throw new NotImplementedException();
         }
@@ -284,7 +284,7 @@ namespace Core2D.Editor
         }
 
         /// <inheritdoc/>
-        public void OnNew(object item)
+        public void OnNew(object? item)
         {
             if (item is ILayerContainer layer)
             {
@@ -2596,7 +2596,7 @@ namespace Core2D.Editor
         }
 
         /// <inheritdoc/>
-        public void OnLoad(IProjectContainer project, string path = null)
+        public void OnLoad(IProjectContainer project, string? path = null)
         {
             if (project != null)
             {

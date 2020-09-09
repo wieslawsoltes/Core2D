@@ -42,7 +42,7 @@ namespace Core2D.Data
         }
 
         /// <inheritdoc/>
-        public override object Copy(IDictionary<object, object> shared)
+        public override object Copy(IDictionary<object, object>? shared)
         {
             var columns = this._columns.Copy(shared).ToImmutable();
             var records = this._records.Copy(shared).ToImmutable();

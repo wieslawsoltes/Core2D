@@ -1,4 +1,5 @@
-﻿using System;
+﻿#nullable disable
+using System;
 using System.Collections.Generic;
 
 namespace Core2D.Renderer
@@ -38,11 +39,11 @@ namespace Core2D.Renderer
         {
             if (_storage.ContainsKey(key))
             {
-                _storage[key] = value;
+                _storage[key] = value!;
             }
             else
             {
-                _storage.Add(key, value);
+                _storage.Add(key, value!);
             }
         }
 

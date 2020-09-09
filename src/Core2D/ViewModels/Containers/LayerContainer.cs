@@ -11,7 +11,9 @@ namespace Core2D.Containers
     public class LayerContainer : ObservableObject, ILayerContainer
     {
         /// <inheritdoc/>
+#pragma warning disable CS8618 // Non-nullable field is uninitialized. Consider declaring as nullable.
         public event InvalidateLayerEventHandler InvalidateLayerHandler;
+#pragma warning restore CS8618 // Non-nullable field is uninitialized. Consider declaring as nullable.
 
         private bool _isVisible = true;
         private ImmutableArray<IBaseShape> _shapes;
@@ -38,7 +40,7 @@ namespace Core2D.Containers
         public void InvalidateLayer() => InvalidateLayerHandler?.Invoke(this, new InvalidateLayerEventArgs());
 
         /// <inheritdoc/>
-        public override object Copy(IDictionary<object, object> shared)
+        public override object Copy(IDictionary<object, object>? shared)
         {
             throw new NotImplementedException();
         }

@@ -15,7 +15,7 @@ namespace Core2D.Style
         /// </summary>
         /// <param name="value">The line dashes doubles array.</param>
         /// <returns>The converted line dashes string.</returns>
-        public static string ConvertDoubleArrayToDashes(double[] value)
+        public static string? ConvertDoubleArrayToDashes(double[] value)
         {
             try
             {
@@ -37,7 +37,7 @@ namespace Core2D.Style
         /// </summary>
         /// <param name="value">The line dashes floats array.</param>
         /// <returns>The converted line dashes string.</returns>
-        public static string ConvertFloatArrayToDashes(float[] value)
+        public static string? ConvertFloatArrayToDashes(float[] value)
         {
             try
             {
@@ -61,7 +61,7 @@ namespace Core2D.Style
         /// <param name="value">The line dashes string.</param>
         /// <param name="strokeWidth">The stroke width.</param>
         /// <returns>The converted line dashes doubles array.</returns>
-        public static double[] ConvertDashesToDoubleArray(string value, double strokeWidth)
+        public static double[]? ConvertDashesToDoubleArray(string value, double strokeWidth)
         {
             try
             {
@@ -94,7 +94,7 @@ namespace Core2D.Style
         /// <param name="value">The line dashes string.</param>
         /// <param name="strokeWidth">The stroke width.</param>
         /// <returns>The converted line dashes floats array.</returns>
-        public static float[] ConvertDashesToFloatArray(string value, double strokeWidth)
+        public static float[]? ConvertDashesToFloatArray(string value, double strokeWidth)
         {
             try
             {

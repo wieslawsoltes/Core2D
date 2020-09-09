@@ -19,13 +19,13 @@ namespace Core2D.Data
         /// </summary>
         /// <param name="name">The property name.</param>
         /// <param name="value">The property value.</param>
-        void SetProperty(string name, object value);
+        void SetProperty(string name, object? value);
 
         /// <summary>
         /// Gets property value.
         /// </summary>
         /// <param name="name">The property name.</param>
         /// <returns>The property value.</returns>
-        object GetProperty(string name);
+        object? GetProperty(string name);
     }
 }

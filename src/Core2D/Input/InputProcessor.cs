@@ -32,16 +32,16 @@ namespace Core2D.Input
     /// </summary>
     public class InputProcessor : IDisposable
     {
-        private IDisposable _leftDownDisposable = null;
-        private IDisposable _leftUpDisposable = null;
-        private IDisposable _rightDownDisposable = null;
-        private IDisposable _rightUpDisposable = null;
-        private IDisposable _moveDisposable = null;
+        private IDisposable? _leftDownDisposable = null;
+        private IDisposable? _leftUpDisposable = null;
+        private IDisposable? _rightDownDisposable = null;
+        private IDisposable? _rightUpDisposable = null;
+        private IDisposable? _moveDisposable = null;
 
-        private static IDisposable ConnectLeftDown(IInputSource source, IInputTarget target)
+        private static IDisposable? ConnectLeftDown(IInputSource source, IInputTarget target)
         {
             var observer = new InputArgsObserver(target, OnNextLeftDown);
-            return source.LeftDown.Subscribe(observer);
+            return source.LeftDown?.Subscribe(observer);
 
             static void OnNextLeftDown(IInputTarget target, InputArgs args)
             {
@@ -52,10 +52,10 @@ namespace Core2D.Input
             }
         }
 
-        private static IDisposable ConnectLeftUp(IInputSource source, IInputTarget target)
+        private static IDisposable? ConnectLeftUp(IInputSource source, IInputTarget target)
         {
             var observer = new InputArgsObserver(target, OnNextLeftUp);
-            return source.LeftUp.Subscribe(observer);
+            return source.LeftUp?.Subscribe(observer);
 
             static void OnNextLeftUp(IInputTarget target, InputArgs args)
             {
@@ -66,10 +66,10 @@ namespace Core2D.Input
             }
         }
 
-        private static IDisposable ConnectRightDown(IInputSource source, IInputTarget target)
+        private static IDisposable? ConnectRightDown(IInputSource source, IInputTarget target)
         {
             var observer = new InputArgsObserver(target, OnNextRightDown);
-            return source.RightDown.Subscribe(observer);
+            return source.RightDown?.Subscribe(observer);
 
             static void OnNextRightDown(IInputTarget target, InputArgs args)
             {
@@ -80,10 +80,10 @@ namespace Core2D.Input
             }
         }
 
-        private static IDisposable ConnectRightUp(IInputSource source, IInputTarget target)
+        private static IDisposable? ConnectRightUp(IInputSource source, IInputTarget target)
         {
             var observer = new InputArgsObserver(target, OnNextRightUp);
-            return source.RightUp.Subscribe(observer);
+            return source.RightUp?.Subscribe(observer);
 
             static void OnNextRightUp(IInputTarget target, InputArgs args)
             {
@@ -94,10 +94,10 @@ namespace Core2D.Input
             }
         }
 
-        private static IDisposable ConnectMove(IInputSource source, IInputTarget target)
+        private static IDisposable? ConnectMove(IInputSource source, IInputTarget target)
         {
             var observer = new InputArgsObserver(target, OnNextMove);
-            return source.Move.Subscribe(observer);
+            return source.Move?.Subscribe(observer);
 
             static void OnNextMove(IInputTarget target, InputArgs args)
             {
@@ -108,27 +108,27 @@ namespace Core2D.Input
             }
         }
 
-        private static void DisconnectLeftDown(IDisposable disposable)
+        private static void DisconnectLeftDown(IDisposable? disposable)
         {
             disposable?.Dispose();
         }
 
-        private static void DisconnectLeftUp(IDisposable disposable)
+        private static void DisconnectLeftUp(IDisposable? disposable)
         {
             disposable?.Dispose();
         }
 
-        private static void DisconnectRightDown(IDisposable disposable)
+        private static void DisconnectRightDown(IDisposable? disposable)
         {
             disposable?.Dispose();
         }
 
-        private static void DisconnectRightUp(IDisposable disposable)
+        private static void DisconnectRightUp(IDisposable? disposable)
         {
-            disposable.Dispose();
+            disposable?.Dispose();
         }
 
-        private static void DisconnectMove(IDisposable disposable)
+        private static void DisconnectMove(IDisposable? disposable)
         {
             disposable?.Dispose();
         }

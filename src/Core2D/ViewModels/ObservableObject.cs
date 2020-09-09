@@ -11,11 +11,11 @@ namespace Core2D
     public abstract class ObservableObject : IObservableObject
     {
         private bool _isDirty;
-        private IObservableObject _owner = null;
+        private IObservableObject? _owner = null;
         private string _name = "";
 
         /// <inheritdoc/>
-        public virtual IObservableObject Owner
+        public virtual IObservableObject? Owner
         {
             get => _owner;
             set => Update(ref _owner, value);
@@ -43,19 +43,21 @@ namespace Core2D
         /// <summary>
         /// Occurs when a property value changes.
         /// </summary>
+#pragma warning disable CS8618 // Non-nullable field is uninitialized. Consider declaring as nullable.
         public event PropertyChangedEventHandler PropertyChanged;
+#pragma warning restore CS8618 // Non-nullable field is uninitialized. Consider declaring as nullable.
 
         /// <inheritdoc/>
-        public abstract object Copy(IDictionary<object, object> shared);
+        public abstract object Copy(IDictionary<object, object>? shared);
 
         /// <inheritdoc/>
-        public void Notify([CallerMemberName] string propertyName = default)
+        public void Notify([CallerMemberName] string? propertyName = default)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
         /// <inheritdoc/>
-        public bool Update<T>(ref T field, T value, [CallerMemberName] string propertyName = default)
+        public bool Update<T>(ref T field, T value, [CallerMemberName] string? propertyName = default)
         {
             if (!Equals(field, value))
             {

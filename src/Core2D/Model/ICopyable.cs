@@ -12,6 +12,6 @@ namespace Core2D
         /// </summary>
         /// <param name="shared">The shared objects dictionary.</param>
         /// <returns>The copy of the object.</returns>
-        object Copy(IDictionary<object, object> shared);
+        object Copy(IDictionary<object, object>? shared);
     }
 }

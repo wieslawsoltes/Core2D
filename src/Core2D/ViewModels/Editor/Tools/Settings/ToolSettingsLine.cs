@@ -9,7 +9,7 @@ namespace Core2D.Editor.Tools.Settings
     public class ToolSettingsLine : ObservableObject, ISettings
     {
         /// <inheritdoc/>
-        public override object Copy(IDictionary<object, object> shared)
+        public override object Copy(IDictionary<object, object>? shared)
         {
             throw new NotImplementedException();
         }

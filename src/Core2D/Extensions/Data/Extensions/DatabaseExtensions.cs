@@ -15,7 +15,7 @@ namespace Core2D.Data
         /// <param name="source">The source database.</param>
         /// <param name="records">The updated records from destination database.</param>
         /// <returns>True if destination database was updated.</returns>
-        public static bool Update(this IDatabase destination, IDatabase source, out ImmutableArray<IRecord>.Builder records)
+        public static bool Update(this IDatabase destination, IDatabase source, out ImmutableArray<IRecord>.Builder? records)
         {
             bool isDirty = false;
             records = null;

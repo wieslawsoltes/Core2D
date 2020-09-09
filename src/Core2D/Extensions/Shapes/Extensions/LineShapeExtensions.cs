@@ -19,7 +19,12 @@ namespace Core2D.Shapes
         /// <param name="y2">The calculated Y coordinate for <see cref="ILineShape.End"/> point.</param>
         public static void GetMaxLength(this ILineShape line, ref double x1, ref double y1, ref double x2, ref double y2)
         {
-            var ls = line.Style.LineStyle;
+            var ls = line.Style?.LineStyle;
+
+            if (ls == null)
+            {
+                return;
+            }
 
             if (ls.FixedLength.Flags == LineFixedLengthFlags.Disabled)
             {
@@ -62,7 +67,12 @@ namespace Core2D.Shapes
         /// <param name="y2">The calculated Y coordinate for <see cref="ILineShape.End"/> point.</param>
         public static void GetMaxLengthAll(this ILineShape line, ref double x1, ref double y1, ref double x2, ref double y2)
         {
-            var ls = line.Style.LineStyle;
+            var ls = line.Style?.LineStyle;
+
+            if (ls == null)
+            {
+                return;
+            }
 
             bool shortenStart = ls.FixedLength.StartTrigger.Flags != ShapeStateFlags.Default
                 && line.Start.State.Flags.HasFlag(ls.FixedLength.StartTrigger.Flags)
@@ -99,7 +109,12 @@ namespace Core2D.Shapes
         /// <param name="x2">The calculated X coordinate for <see cref="ILineShape.End"/> point.</param>
         public static void GetMaxLengthHorizontal(this ILineShape line, ref double x1, ref double x2)
         {
-            var ls = line.Style.LineStyle;
+            var ls = line.Style?.LineStyle;
+
+            if (ls == null)
+            {
+                return;
+            }
 
             bool shortenStart = ls.FixedLength.StartTrigger.Flags != ShapeStateFlags.Default
                 && line.Start.State.Flags.HasFlag(ls.FixedLength.StartTrigger.Flags)
