@@ -59,7 +59,7 @@ namespace Core2D.UI.Modules
 
             // Dependencies
 
-#if USE_SKIA || USE_SKIA_RTB
+#if USE_SKIA
             builder.RegisterType<SkiaSharpRenderer>().As<IShapeRenderer>().InstancePerDependency();
 #else
             builder.RegisterType<AvaloniaRenderer>().As<IShapeRenderer>().InstancePerDependency();

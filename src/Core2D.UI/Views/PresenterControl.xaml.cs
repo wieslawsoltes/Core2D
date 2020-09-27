@@ -1,15 +1,16 @@
-﻿using System.Diagnostics;
+﻿#if USE_DIAGNOSTICS
+using System.Diagnostics;
+#endif
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.PanAndZoom;
 using Avalonia.Markup.Xaml;
 using Avalonia.Media;
-using Avalonia.Media.Imaging;
+#if USE_SKIA
 using Avalonia.Platform;
 using Avalonia.Rendering.SceneGraph;
 using Avalonia.Skia;
-using Avalonia.Threading;
-using Avalonia.VisualTree;
+#endif
 using Core2D.Containers;
 using Core2D.Data;
 using Core2D.Renderer;
@@ -48,6 +49,48 @@ namespace Core2D.UI.Views
         /// </summary>
         Export = 4
     }
+
+    internal struct CustomState
+    {
+        public IPageContainer Container;
+        public IShapeRenderer Renderer;
+        public IDataFlow DataFlow;
+        public PresenterType PresenterType;
+    }
+
+#if USE_SKIA
+        internal class CustomDrawOperation : ICustomDrawOperation
+        {
+            public PresenterControl PresenterControl { get; set; }
+
+            public CustomState CustomState { get; set; }
+
+            public Rect Bounds { get; set; }
+
+            public void Dispose()
+            {
+            }
+
+            public bool HitTest(Point p) => false;
+
+            public bool Equals(ICustomDrawOperation other) => false;
+
+            public void Render(IDrawingContextImpl context)
+            {
+                var canvas = (context as ISkiaDrawingContextImpl)?.SkCanvas;
+                if (canvas == null)
+                {
+                    return;
+                }
+
+                canvas.Save();
+
+                PresenterControl.Draw(CustomState, canvas);
+
+                canvas.Restore();
+            }
+        }
+#endif
 
     /// <summary>
     /// Interaction logic for <see cref="PresenterControl"/> xaml.
@@ -149,50 +192,6 @@ namespace Core2D.UI.Views
             AvaloniaXamlLoader.Load(this);
         }
 
-        internal struct CustomState
-        {
-            public IPageContainer Container;
-            public IShapeRenderer Renderer;
-            public IDataFlow DataFlow;
-            public PresenterType PresenterType;
-        }
-
-#if USE_SKIA
-        internal class CustomDrawOperation : ICustomDrawOperation
-        {
-            public PresenterControl PresenterControl { get; set; }
-
-            public CustomState CustomState { get; set; }
-
-            public Rect Bounds { get; set; }
-
-            public void Dispose()
-            {
-            }
-
-            public bool HitTest(Point p) => false;
-
-            public bool Equals(ICustomDrawOperation other) => false;
-
-            public void Render(IDrawingContextImpl context)
-            {
-                var canvas = (context as ISkiaDrawingContextImpl)?.SkCanvas;
-                if (canvas == null)
-                {
-                    return;
-                }
-
-                canvas.Save();
-
-                PresenterControl.Draw(CustomState, canvas);
-
-                canvas.Restore();
-            }
-        }
-#elif USE_SKIA_RTB
-        private RenderTargetBitmap _renderTarget;
-#endif
-
         /// <summary>
         /// Renders presenter control contents.
         /// </summary>
@@ -216,38 +215,6 @@ namespace Core2D.UI.Views
                 Bounds = ZoomBorder != null ? ZoomBorder.Bounds : this.Bounds
             };
             context.Custom(customDrawOperation);
-#elif USE_SKIA_RTB
-            double width = Bounds.Width;
-            double height = Bounds.Height;
-
-            if (width > 0 && height > 0)
-            {
-                if (_renderTarget == null)
-                {
-                    _renderTarget = new RenderTargetBitmap(new PixelSize((int)width, (int)height), new Vector(96, 96));
-                }
-                else if (_renderTarget.PixelSize.Width != (int)width || _renderTarget.PixelSize.Height != (int)height)
-                {
-                    _renderTarget.Dispose();
-                    _renderTarget = new RenderTargetBitmap(new PixelSize((int)width, (int)height), new Vector(96, 96));
-                }
-
-                using var drawingContextImpl = _renderTarget.CreateDrawingContext(null);
-                var skiaDrawingContextImpl = drawingContextImpl as ISkiaDrawingContextImpl;
-
-                var canvas = skiaDrawingContextImpl.SkCanvas;
-
-                canvas.Clear();
-                canvas.Save();
-
-                Draw(customState, canvas);
-
-                canvas.Restore();
-
-                context.DrawImage(_renderTarget,
-                    new Rect(0, 0, _renderTarget.PixelSize.Width, _renderTarget.PixelSize.Height),
-                    new Rect(0, 0, width, height));
-            }
 #else
             Draw(customState, context);
 #endif
