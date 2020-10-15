@@ -1,7 +1,7 @@
 ﻿using Avalonia;
 using Avalonia.Controls;
 
-namespace Core2D.UI.Configuration.Windows
+namespace Core2D.Configuration.Windows
 {
     public static class WindowConfigurationFactory
     {

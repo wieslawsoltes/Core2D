@@ -13,7 +13,7 @@ namespace Core2D.Editor.Tools.Path
     /// <summary>
     /// Quadratic bezier path tool.
     /// </summary>
-    public class PathToolQuadraticBezier : ObservableObject, PathTool
+    public class PathToolQuadraticBezier : ObservableObject, IPathTool
     {
         public enum State { Point1, Point3, Point2 }
         private readonly IServiceProvider _serviceProvider;

@@ -11,7 +11,7 @@ namespace Core2D.Containers
     /// <summary>
     /// Page container.
     /// </summary>
-    public class PageContainer : ObservableObject, IGrid
+    public class PageContainer : BaseContainer, IGrid
     {
         private double _width;
         private double _height;

@@ -9,7 +9,7 @@ using Spatial.Arc;
 using A = Avalonia;
 using AM = Avalonia.Media;
 
-namespace Core2D.UI.Renderer
+namespace Core2D.Renderer
 {
     public static class PathGeometryConverter
     {

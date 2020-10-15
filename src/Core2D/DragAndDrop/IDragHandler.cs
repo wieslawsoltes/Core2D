@@ -1,6 +1,6 @@
 ﻿using Avalonia.Input;
 
-namespace Core2D.UI.DragAndDrop
+namespace Core2D.DragAndDrop
 {
     /// <summary>
     /// Drag handler contract.

@@ -1,7 +1,7 @@
 ﻿using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 
-namespace Core2D.UI.Views.Libraries
+namespace Core2D.Views.Libraries
 {
     /// <summary>
     /// Interaction logic for <see cref="TemplatesControl"/> xaml.

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Core2D.Editor;
 
-namespace Core2D.UI.Editor
+namespace Core2D.Editor
 {
     /// <summary>
     /// Editor canvas Avalonia platform.

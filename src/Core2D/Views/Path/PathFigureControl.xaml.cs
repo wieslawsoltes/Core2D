@@ -1,7 +1,7 @@
 ﻿using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 
-namespace Core2D.UI.Views.Path
+namespace Core2D.Views.Path
 {
     /// <summary>
     /// Interaction logic for <see cref="PathFigureControl"/> xaml.

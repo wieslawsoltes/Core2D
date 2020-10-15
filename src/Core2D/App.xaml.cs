@@ -14,14 +14,14 @@ using Avalonia.Platform;
 using Avalonia.Styling;
 using Core2D;
 using Core2D.Editor;
-using Core2D.UI.Configuration.Layouts;
-using Core2D.UI.Configuration.Themes;
-using Core2D.UI.Configuration.Windows;
-using Core2D.UI.Designer;
-using Core2D.UI.Modules;
-using Core2D.UI.Views;
+using Core2D.Configuration.Layouts;
+using Core2D.Configuration.Themes;
+using Core2D.Configuration.Windows;
+using Core2D.Designer;
+using Core2D.Modules;
+using Core2D.Views;
 
-namespace Core2D.UI
+namespace Core2D
 {
     public class App : Application
     {
@@ -304,33 +304,33 @@ namespace Core2D.UI
 
             DefaultDark = new Styles
             {
-                new StyleInclude(new Uri("avares://Core2D.UI/Styles"))
+                new StyleInclude(new Uri("avares://Core2D/Styles"))
                 {
-                    Source = new Uri("avares://Core2D.UI/Themes/DefaultDark.xaml")
+                    Source = new Uri("avares://Core2D/Themes/DefaultDark.xaml")
                 }
             };
 
             DefaultLight = new Styles
             {
-                new StyleInclude(new Uri("avares://Core2D.UI/Styles"))
+                new StyleInclude(new Uri("avares://Core2D/Styles"))
                 {
-                    Source = new Uri("avares://Core2D.UI/Themes/DefaultLight.xaml")
+                    Source = new Uri("avares://Core2D/Themes/DefaultLight.xaml")
                 }
             };
 
             FluentDark = new Styles
             {
-                new StyleInclude(new Uri("avares://Core2D.UI/Styles"))
+                new StyleInclude(new Uri("avares://Core2D/Styles"))
                 {
-                    Source = new Uri("avares://Core2D.UI/Themes/FluentDark.xaml")
+                    Source = new Uri("avares://Core2D/Themes/FluentDark.xaml")
                 }
             };
 
             FluentLight = new Styles
             {
-                new StyleInclude(new Uri("avares://Core2D.UI/Styles"))
+                new StyleInclude(new Uri("avares://Core2D/Styles"))
                 {
-                    Source = new Uri("avares://Core2D.UI/Themes/FluentLight.xaml")
+                    Source = new Uri("avares://Core2D/Themes/FluentLight.xaml")
                 }
             };
 

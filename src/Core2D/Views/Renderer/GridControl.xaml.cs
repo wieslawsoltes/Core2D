@@ -1,7 +1,7 @@
 ﻿using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 
-namespace Core2D.UI.Views.Renderer
+namespace Core2D.Views.Renderer
 {
     /// <summary>
     /// Interaction logic for <see cref="GridControl"/> xaml.

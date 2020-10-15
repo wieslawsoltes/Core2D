@@ -4,7 +4,7 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Data.Converters;
 
-namespace Core2D.UI.Converters
+namespace Core2D.Converters
 {
     /// <summary>
     /// Return valid object when using TreeView.SelectedItem.DataContext source.

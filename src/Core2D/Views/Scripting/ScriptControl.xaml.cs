@@ -8,7 +8,7 @@ using AvaloniaEdit.Highlighting;
 using AvaloniaEdit.Indentation.CSharp;
 using AvaloniaEdit.Rendering;
 
-namespace Core2D.UI.Views.Scripting
+namespace Core2D.Views.Scripting
 {
     /// <summary>
     /// Interaction logic for <see cref="ScriptControl"/> xaml.

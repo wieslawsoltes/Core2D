@@ -1,5 +1,5 @@
 ﻿
-namespace Core2D.UI.Configuration.Themes
+namespace Core2D.Configuration.Themes
 {
     public enum ThemeName
     {

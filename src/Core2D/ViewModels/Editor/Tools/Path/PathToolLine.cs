@@ -13,7 +13,7 @@ namespace Core2D.Editor.Tools.Path
     /// <summary>
     /// Line path tool.
     /// </summary>
-    public class PathToolLine : ObservableObject, PathTool
+    public class PathToolLine : ObservableObject, IPathTool
     {
         public enum State { Start, End }
         private readonly IServiceProvider _serviceProvider;

@@ -6,7 +6,7 @@ using Avalonia;
 using Avalonia.Data.Converters;
 using Avalonia.Media;
 
-namespace Core2D.UI.Converters
+namespace Core2D.Converters
 {
     /// <summary>
     /// Converts multi-binding inputs to a final value.

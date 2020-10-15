@@ -26,11 +26,9 @@ using Core2D.TextFieldReader.CsvHelper;
 using Core2D.TextFieldReader.OpenXml;
 using Core2D.TextFieldWriter.CsvHelper;
 using Core2D.TextFieldWriter.OpenXml;
-using Core2D.UI.Editor;
-using Core2D.UI.Renderer;
-using Core2D.UI.Views;
+using Core2D.Views;
 
-namespace Core2D.UI.Modules
+namespace Core2D.Modules
 {
     /// <summary>
     /// Avalonia module.
@@ -52,9 +50,9 @@ namespace Core2D.UI.Modules
             builder.RegisterType<ContainerFactory>().As<IContainerFactory>().InstancePerLifetimeScope();
             builder.RegisterType<ShapeFactory>().As<IShapeFactory>().InstancePerLifetimeScope();
             builder.RegisterAssemblyTypes(typeof(IEditorTool).GetTypeInfo().Assembly).As<IEditorTool>().AsSelf().InstancePerLifetimeScope();
-            builder.RegisterAssemblyTypes(typeof(PathTool).GetTypeInfo().Assembly).As<PathTool>().AsSelf().InstancePerLifetimeScope();
+            builder.RegisterAssemblyTypes(typeof(IPathTool).GetTypeInfo().Assembly).As<IPathTool>().AsSelf().InstancePerLifetimeScope();
             builder.RegisterType<HitTest>().As<IHitTest>().InstancePerLifetimeScope();
-            builder.RegisterAssemblyTypes(typeof(Bounds).GetTypeInfo().Assembly).As<Bounds>().AsSelf().InstancePerLifetimeScope();
+            builder.RegisterAssemblyTypes(typeof(IBounds).GetTypeInfo().Assembly).As<IBounds>().AsSelf().InstancePerLifetimeScope();
             builder.RegisterType<DataFlow>().As<DataFlow>().InstancePerLifetimeScope();
 
             // Dependencies

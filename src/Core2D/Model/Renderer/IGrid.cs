@@ -5,7 +5,7 @@ namespace Core2D.Renderer
     /// <summary>
     /// Defines grid contract.
     /// </summary>
-    public interface IGrid : ObservableObject
+    public interface IGrid
     {
         /// <summary>
         /// Gets or sets flag indicating whether grid is enabled.
@@ -56,5 +56,10 @@ namespace Core2D.Renderer
         /// Gets or sets grid stroke thickness.
         /// </summary>
         double GridStrokeThickness { get; set; }
+
+        /// <summary>
+        /// Gets is dirty flag.
+        /// </summary>
+        bool IsDirty();
     }
 }

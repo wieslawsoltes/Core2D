@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Core2D.UI.Configuration.Layouts
+namespace Core2D.Configuration.Layouts
 {
     public class GridLayout
     {

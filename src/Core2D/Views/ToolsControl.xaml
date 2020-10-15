@@ -1,12 +1,12 @@
-﻿<UserControl x:Class="Core2D.UI.Views.ToolsControl"
+﻿<UserControl x:Class="Core2D.Views.ToolsControl"
              xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:converters="clr-namespace:Core2D.UI.Converters;assembly=Core2D.UI"
+             xmlns:converters="clr-namespace:Core2D.Converters;assembly=Core2D"
              xmlns:Data="clr-namespace:Core2D.Data;assembly=Core2D"
              xmlns:Editor="clr-namespace:Core2D.Editor;assembly=Core2D"
-             xmlns:Designer="clr-namespace:Core2D.UI.Designer;assembly=Core2D.UI"
+             xmlns:Designer="clr-namespace:Core2D.Designer;assembly=Core2D"
              mc:Ignorable="d"
              d:DataContext="{x:Static Designer:DesignerContext.Editor}"
              d:DesignWidth="250" d:DesignHeight="400"
@@ -17,11 +17,11 @@
                 <ComboBox Items="{Binding Tools}" SelectedItem="{Binding CurrentTool, Mode=TwoWay}" Grid.Row="0" HorizontalAlignment="Stretch">
                     <ComboBox.DataTemplates>
                         <DataTemplate>
-                            <TextBlock Text="{Binding Title}"/>
+                            <TextBlock Text="{Binding Title}" />
                         </DataTemplate>
                     </ComboBox.DataTemplates>
                 </ComboBox>
-                <ContentControl DataContext="{Binding CurrentTool}" Content="{Binding Settings}" Grid.Row="1" x:DataType="Editor:Tool" x:CompileBindings="False"/>
+                <ContentControl DataContext="{Binding CurrentTool}" Content="{Binding Settings}" Grid.Row="1" x:DataType="Editor:ITool" x:CompileBindings="False" />
             </Grid>
         </TabItem>
         <TabItem Header="Path">
@@ -29,11 +29,11 @@
                 <ComboBox Items="{Binding PathTools}" SelectedItem="{Binding CurrentPathTool, Mode=TwoWay}" Grid.Row="0" HorizontalAlignment="Stretch">
                     <ComboBox.DataTemplates>
                         <DataTemplate>
-                            <TextBlock Text="{Binding Title}"/>
+                            <TextBlock Text="{Binding Title}" />
                         </DataTemplate>
                     </ComboBox.DataTemplates>
                 </ComboBox>
-                <ContentControl DataContext="{Binding CurrentPathTool}" Content="{Binding Settings}" Grid.Row="1" x:DataType="Editor:PathTool" x:CompileBindings="False"/>
+                <ContentControl DataContext="{Binding CurrentPathTool}" Content="{Binding Settings}" Grid.Row="1" x:DataType="Editor:IPathTool" x:CompileBindings="False" />
             </Grid>
         </TabItem>
     </TabControl>

@@ -15,9 +15,10 @@ namespace Core2D.Editor.Tools.Path
     /// <summary>
     /// Arc path tool.
     /// </summary>
-    public class PathToolArc : ObservableObject, PathTool
+    public class PathToolArc : ObservableObject, IPathTool
     {
         public enum State { Start, End }
+
         private readonly IServiceProvider _serviceProvider;
         private PathToolSettingsArc _settings;
         private State _currentState = State.Start;
@@ -93,6 +94,7 @@ namespace Core2D.Editor.Tools.Path
                         editor.IsToolIdle = false;
                     }
                     break;
+
                 case State.End:
                     {
                         _arc.End.X = (double)sx;
@@ -136,6 +138,7 @@ namespace Core2D.Editor.Tools.Path
             {
                 case State.Start:
                     break;
+
                 case State.End:
                     Reset();
                     Finalize(null);
@@ -164,6 +167,7 @@ namespace Core2D.Editor.Tools.Path
                         }
                     }
                     break;
+
                 case State.End:
                     {
                         if (editor.Project.Options.TryToConnect)
@@ -224,6 +228,7 @@ namespace Core2D.Editor.Tools.Path
             {
                 case State.Start:
                     break;
+
                 case State.End:
                     {
                         pathTool.RemoveLastSegment<ArcSegment>();

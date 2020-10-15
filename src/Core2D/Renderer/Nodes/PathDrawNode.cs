@@ -3,7 +3,7 @@ using Core2D.Shapes;
 using Core2D.Style;
 using AM = Avalonia.Media;
 
-namespace Core2D.UI.Renderer
+namespace Core2D.Renderer
 {
     internal class PathDrawNode : DrawNode, IPathDrawNode
     {

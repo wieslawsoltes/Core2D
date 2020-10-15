@@ -9,7 +9,7 @@ using Avalonia.Markup.Xaml;
 using Avalonia.Threading;
 using Core2D.Data;
 
-namespace Core2D.UI.Views.Data
+namespace Core2D.Views.Data
 {
     /// <summary>
     /// Interaction logic for <see cref="DatabaseControl"/> xaml.

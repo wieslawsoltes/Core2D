@@ -1,25 +1,25 @@
-<Application x:Class="Core2D.UI.App"
+<Application x:Class="Core2D.App"
              xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:local="clr-namespace:Core2D.UI;assembly=Core2D.UI"
-             xmlns:converters="clr-namespace:Core2D.UI.Converters;assembly=Core2D.UI">
+             xmlns:local="clr-namespace:Core2D;assembly=Core2D"
+             xmlns:converters="clr-namespace:Core2D.Converters;assembly=Core2D">
     <Application.Resources>
         <FontFamily x:Key="UiFontFamily">Segoe UI, SF Pro Display, Noto Sans, Cantarel</FontFamily>
         <FontFamily x:Key="CodeFontFamily">Consolas, Menlo, Monaco, Courier, Courier New, Andale Mono, DejaVu Sans Mono</FontFamily>
         <StaticResource x:Key="ContentControlThemeFontFamily" ResourceKey="UiFontFamily" />
     </Application.Resources>
     <Application.Styles>
-        <!--<StyleInclude Source="avares://Core2D.UI/Themes/DefaultLight.xaml"/>-->
-        <!--<StyleInclude Source="avares://Core2D.UI/Themes/DefaultDark.xaml"/>-->
-        <!--<StyleInclude Source="avares://Core2D.UI/Themes/FluentLight.xaml"/>-->
-        <!--<StyleInclude Source="avares://Core2D.UI/Themes/FluentDark.xaml"/>-->
-        <StyleInclude Source="avares://Avalonia.Controls.DataGrid/Themes/Default.xaml"/>
-        <StyleInclude Source="avares://AvaloniaEdit/AvaloniaEdit.xaml"/>
-        <StyleInclude Source="avares://Core2D.UI/Icons.xaml"/>
+        <!--<StyleInclude Source="avares://Core2D/Themes/DefaultLight.xaml" />-->
+        <!--<StyleInclude Source="avares://Core2D/Themes/DefaultDark.xaml" />-->
+        <!--<StyleInclude Source="avares://Core2D/Themes/FluentLight.xaml" />-->
+        <!--<StyleInclude Source="avares://Core2D/Themes/FluentDark.xaml" />-->
+        <StyleInclude Source="avares://Avalonia.Controls.DataGrid/Themes/Default.xaml" />
+        <StyleInclude Source="avares://AvaloniaEdit/AvaloniaEdit.xaml" />
+        <StyleInclude Source="avares://Core2D/Icons.xaml" />
     </Application.Styles>
     <Application.DataTemplates>
-        <local:ViewLocator/>
+        <local:ViewLocator />
     </Application.DataTemplates>
 </Application>

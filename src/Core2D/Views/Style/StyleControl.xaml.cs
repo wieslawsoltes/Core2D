@@ -1,7 +1,7 @@
 ﻿using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 
-namespace Core2D.UI.Views.Style
+namespace Core2D.Views.Style
 {
     /// <summary>
     /// Interaction logic for <see cref="StyleControl"/> xaml.

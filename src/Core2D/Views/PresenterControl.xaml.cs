@@ -1,23 +1,25 @@
 ﻿#if USE_DIAGNOSTICS
 using System.Diagnostics;
 #endif
+
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.PanAndZoom;
 using Avalonia.Markup.Xaml;
 using Avalonia.Media;
+
 #if USE_SKIA
 using Avalonia.Platform;
 using Avalonia.Rendering.SceneGraph;
 using Avalonia.Skia;
 #endif
+
 using Core2D.Containers;
 using Core2D.Data;
 using Core2D.Renderer;
 using Core2D.Renderer.Presenters;
-using Core2D.UI.Renderer;
 
-namespace Core2D.UI.Views
+namespace Core2D.Views
 {
     /// <summary>
     /// Specifies container presenter type.
@@ -231,6 +233,7 @@ namespace Core2D.UI.Views
             {
                 case PresenterType.None:
                     break;
+
                 case PresenterType.Data:
                     {
                         if (customState.Container != null && customState.DataFlow != null)
@@ -252,6 +255,7 @@ namespace Core2D.UI.Views
                         }
                     }
                     break;
+
                 case PresenterType.Template:
                     {
                         if (customState.Container != null && customState.Renderer != null)
@@ -261,6 +265,7 @@ namespace Core2D.UI.Views
                         }
                     }
                     break;
+
                 case PresenterType.Editor:
                     {
                         if (customState.Container != null && customState.Renderer != null)
@@ -286,6 +291,7 @@ namespace Core2D.UI.Views
                         }
                     }
                     break;
+
                 case PresenterType.Export:
                     {
                         if (customState.Container != null && customState.Renderer != null)

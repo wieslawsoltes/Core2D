@@ -5,7 +5,7 @@ using Avalonia.Media;
 using Avalonia.Xaml.Interactivity;
 using AvaloniaEdit;
 
-namespace Core2D.UI.Behaviors
+namespace Core2D.Behaviors
 {
     /// <summary>
     /// Binds to a document text.

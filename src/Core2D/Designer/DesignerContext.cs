@@ -13,7 +13,7 @@ using Core2D.Scripting;
 using Core2D.Shapes;
 using Core2D.Style;
 
-namespace Core2D.UI.Designer
+namespace Core2D.Designer
 {
     /// <summary>
     /// Design time DataContext base class.

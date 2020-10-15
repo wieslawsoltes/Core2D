@@ -8,7 +8,7 @@ namespace Core2D
     /// <summary>
     /// Observable object.
     /// </summary>
-    public abstract class ObservableObject
+    public abstract class ObservableObject : INotifyPropertyChanged, ICopyable
     {
         private bool _isDirty;
         private ObservableObject _owner = null;

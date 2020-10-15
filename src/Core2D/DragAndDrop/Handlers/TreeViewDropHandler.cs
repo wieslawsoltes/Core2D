@@ -5,7 +5,7 @@ using Avalonia.VisualTree;
 using Core2D.Containers;
 using Core2D.Editor;
 
-namespace Core2D.UI.DragAndDrop.Handlers
+namespace Core2D.DragAndDrop.Handlers
 {
     /// <summary>
     /// Project tree view drop handler.

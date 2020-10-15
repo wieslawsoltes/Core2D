@@ -5,9 +5,16 @@ using System.Collections.Immutable;
 namespace Core2D.Containers
 {
     /// <summary>
+    /// Defines a container contract.
+    /// </summary>
+    public abstract class BaseContainer : ObservableObject
+    {
+    }
+
+    /// <summary>
     /// Document container.
     /// </summary>
-    public class DocumentContainer : ObservableObject
+    public class DocumentContainer : BaseContainer
     {
         private bool _isExpanded = true;
         private ImmutableArray<PageContainer> _pages;

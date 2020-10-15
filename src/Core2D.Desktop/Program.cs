@@ -15,9 +15,9 @@ using Avalonia.Media.Imaging;
 using Avalonia.OpenGL;
 using Avalonia.Threading;
 using Core2D.Editor;
-using Core2D.UI;
-using Core2D.UI.Configuration.Themes;
-using Core2D.UI.Views;
+using Core2D;
+using Core2D.Configuration.Themes;
+using Core2D.Views;
 using Microsoft.CodeAnalysis.CSharp.Scripting;
 using Microsoft.CodeAnalysis.Scripting;
 
@@ -277,7 +277,7 @@ namespace Core2D
                         {
                             AngleOptions.PlatformApi.DirectX11
                         }
-                    }); 
+                    });
                 }
 
                 if (settings.UseManagedSystemDialogs)

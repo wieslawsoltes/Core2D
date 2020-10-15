@@ -3,9 +3,9 @@ using Avalonia.Markup.Xaml;
 using Core2D.Editor;
 using Core2D.Editors;
 using Core2D.Shapes;
-using Core2D.UI.Views.Editors;
+using Core2D.Views.Editors;
 
-namespace Core2D.UI.Views.Shapes
+namespace Core2D.Views.Shapes
 {
     /// <summary>
     /// Interaction logic for <see cref="ImageShapeControl"/> xaml.

@@ -10,7 +10,7 @@ namespace Core2D.Editor.Tools.Path
     /// <summary>
     /// Move path tool.
     /// </summary>
-    public class PathToolMove : ObservableObject, PathTool
+    public class PathToolMove : ObservableObject, IPathTool
     {
         public enum State { Move }
         private readonly IServiceProvider _serviceProvider;

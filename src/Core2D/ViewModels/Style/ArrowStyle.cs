@@ -61,8 +61,8 @@ namespace Core2D.Style
         /// <param name="source">The source style.</param>
         public ArrowStyle(BaseStyle source) : this()
         {
-            Stroke = (Color)source.Stroke.Copy(null);
-            Fill = (Color)source.Fill.Copy(null);
+            Stroke = (BaseColor)source.Stroke.Copy(null);
+            Fill = (BaseColor)source.Fill.Copy(null);
             Thickness = source.Thickness;
             LineCap = source.LineCap;
             Dashes = source.Dashes ?? (default);
@@ -75,8 +75,8 @@ namespace Core2D.Style
             return new ArrowStyle()
             {
                 Name = this.Name,
-                Stroke = (Color)this.Stroke.Copy(shared),
-                Fill = (Color)this.Fill.Copy(shared),
+                Stroke = (BaseColor)this.Stroke.Copy(shared),
+                Fill = (BaseColor)this.Fill.Copy(shared),
                 Thickness = this.Thickness,
                 LineCap = this.LineCap,
                 Dashes = this.Dashes,

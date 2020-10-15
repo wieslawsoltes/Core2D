@@ -1,7 +1,7 @@
 ﻿using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 
-namespace Core2D.UI.Views.Path.Segments
+namespace Core2D.Views.Path.Segments
 {
     /// <summary>
     /// Interaction logic for <see cref="QuadraticBezierSegmentControl"/> xaml.

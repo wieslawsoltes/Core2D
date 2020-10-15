@@ -1,7 +1,7 @@
 ﻿using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 
-namespace Core2D.UI.Views.Editor.Tools.Settings
+namespace Core2D.Views.Editor.Tools.Settings
 {
     /// <summary>
     /// Interaction logic for <see cref="ToolSettingsArcControl"/> xaml.

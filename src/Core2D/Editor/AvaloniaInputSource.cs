@@ -6,7 +6,7 @@ using Avalonia.Controls;
 using Avalonia.Input;
 using Core2D.Input;
 
-namespace Core2D.UI.Editor
+namespace Core2D.Editor
 {
     /// <summary>
     /// Provides mouse input from control.

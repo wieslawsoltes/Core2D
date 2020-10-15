@@ -11,11 +11,11 @@ using Core2D.FileWriter.Emf;
 using Core2D.Renderer;
 using Core2D.Shapes;
 using Core2D.SvgExporter.Svg;
-using Core2D.UI.Views;
+using Core2D.Views;
 using Core2D.XamlExporter.Avalonia;
 using Microsoft.CodeAnalysis;
 
-namespace Core2D.UI.Editor
+namespace Core2D.Editor
 {
     /// <summary>
     /// Project editor Avalonia platform.

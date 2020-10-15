@@ -2,7 +2,7 @@ using System;
 using Avalonia.Controls;
 using Avalonia.Controls.Templates;
 
-namespace Core2D.UI
+namespace Core2D
 {
     public class ViewLocator : IDataTemplate
     {
@@ -10,7 +10,7 @@ namespace Core2D.UI
 
         public IControl Build(object data)
         {
-            var name = data.GetType()?.FullName?.Replace("Core2D", "Core2D.UI.Views") + "Control";
+            var name = data.GetType()?.FullName?.Replace("Core2D", "Core2D.Views") + "Control";
             if (name == null)
             {
                 return new TextBlock { Text = "Invalid Data Type" };

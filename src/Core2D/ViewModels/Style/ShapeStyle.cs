@@ -46,8 +46,8 @@ namespace Core2D.Style
             return new ShapeStyle()
             {
                 Name = this.Name,
-                Stroke = (Color)this.Stroke.Copy(shared),
-                Fill = (Color)this.Fill.Copy(shared),
+                Stroke = (BaseColor)this.Stroke.Copy(shared),
+                Fill = (BaseColor)this.Fill.Copy(shared),
                 Thickness = this.Thickness,
                 LineCap = this.LineCap,
                 Dashes = this.Dashes,

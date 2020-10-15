@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Core2D.Renderer;
 
-namespace Core2D.UI.Renderer
+namespace Core2D.Renderer
 {
     /// <summary>
     /// Native Avalonia shape renderer.

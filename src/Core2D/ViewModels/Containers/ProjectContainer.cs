@@ -13,7 +13,7 @@ namespace Core2D.Containers
     /// <summary>
     /// Project container.
     /// </summary>
-    public partial class ProjectContainer : ObservableObject
+    public partial class ProjectContainer : BaseContainer
     {
         private Options _options;
         private IHistory _history;

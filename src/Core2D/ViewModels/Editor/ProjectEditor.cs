@@ -26,19 +26,19 @@ namespace Core2D.Editor
     public class ProjectEditor : ObservableObject
     {
         private readonly IServiceProvider _serviceProvider;
-        private IShapeEditor _shapeEditor;
+        private ShapeEditor _shapeEditor;
         private ProjectContainer _project;
         private string _projectPath;
         private bool _isProjectDirty;
         private ProjectObserver _observer;
         private bool _isToolIdle;
         private IEditorTool _currentTool;
-        private PathTool _currentPathTool;
+        private IPathTool _currentPathTool;
         private ImmutableArray<RecentFile> _recentProjects;
         private RecentFile _currentRecentProject;
         private AboutInfo _aboutInfo;
         private readonly Lazy<ImmutableArray<IEditorTool>> _tools;
-        private readonly Lazy<ImmutableArray<PathTool>> _pathTools;
+        private readonly Lazy<ImmutableArray<IPathTool>> _pathTools;
         private readonly Lazy<IHitTest> _hitTest;
         private readonly Lazy<ILog> _log;
         private readonly Lazy<DataFlow> _dataFlow;
@@ -104,7 +104,7 @@ namespace Core2D.Editor
         }
 
         /// <inheritdoc/>
-        public PathTool CurrentPathTool
+        public IPathTool CurrentPathTool
         {
             get => _currentPathTool;
             set => Update(ref _currentPathTool, value);
@@ -135,7 +135,7 @@ namespace Core2D.Editor
         public ImmutableArray<IEditorTool> Tools => _tools.Value;
 
         /// <inheritdoc/>
-        public ImmutableArray<PathTool> PathTools => _pathTools.Value;
+        public ImmutableArray<IPathTool> PathTools => _pathTools.Value;
 
         /// <inheritdoc/>
         public IHitTest HitTest => _hitTest.Value;
@@ -225,8 +225,8 @@ namespace Core2D.Editor
             _recentProjects = ImmutableArray.Create<RecentFile>();
             _currentRecentProject = default;
             _tools = _serviceProvider.GetServiceLazily<IEditorTool[], ImmutableArray<IEditorTool>>((tools) => tools.Where(tool => !tool.GetType().Name.StartsWith("PathTool")).ToImmutableArray());
-            _pathTools = _serviceProvider.GetServiceLazily<PathTool[], ImmutableArray<PathTool>>((tools) => tools.ToImmutableArray());
-            _hitTest = _serviceProvider.GetServiceLazily<IHitTest>(hitTests => hitTests.Register(_serviceProvider.GetService<Bounds[]>()));
+            _pathTools = _serviceProvider.GetServiceLazily<IPathTool[], ImmutableArray<IPathTool>>((tools) => tools.ToImmutableArray());
+            _hitTest = _serviceProvider.GetServiceLazily<IHitTest>(hitTests => hitTests.Register(_serviceProvider.GetService<IBounds[]>()));
             _log = _serviceProvider.GetServiceLazily<ILog>();
             _dataFlow = _serviceProvider.GetServiceLazily<DataFlow>();
             _pageRenderer = _serviceProvider.GetServiceLazily<IShapeRenderer>();

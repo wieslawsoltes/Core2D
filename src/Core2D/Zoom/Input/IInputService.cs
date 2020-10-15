@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Core2D.UI.Zoom.Input
+namespace Core2D.Zoom.Input
 {
     public interface IInputService
     {

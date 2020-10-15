@@ -6,7 +6,7 @@ using Core2D.Editor;
 using Core2D.Shapes;
 using Core2D.Style;
 
-namespace Core2D.UI.DragAndDrop.Handlers
+namespace Core2D.DragAndDrop.Handlers
 {
     /// <summary>
     /// Project editor drop handler.

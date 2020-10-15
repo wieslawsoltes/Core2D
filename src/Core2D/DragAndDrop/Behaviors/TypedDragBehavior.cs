@@ -7,7 +7,7 @@ using Avalonia.Input;
 using Avalonia.Interactivity;
 using Avalonia.Xaml.Interactivity;
 
-namespace Core2D.UI.DragAndDrop
+namespace Core2D.DragAndDrop
 {
     /// <summary>
     /// Drag behavior.

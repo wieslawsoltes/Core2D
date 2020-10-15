@@ -6,7 +6,7 @@ using Avalonia;
 using Avalonia.Data.Converters;
 using Core2D.Shapes;
 
-namespace Core2D.UI.Converters
+namespace Core2D.Converters
 {
     /// <summary>
     /// Converts a binding value from selected shapes set to the first shape.

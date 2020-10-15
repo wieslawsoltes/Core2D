@@ -2,7 +2,7 @@
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 
-namespace Core2D.UI.Views.Editors
+namespace Core2D.Views.Editors
 {
     /// <summary>
     /// Interaction logic for <see cref="TextBindingEditorWindow"/> xaml.

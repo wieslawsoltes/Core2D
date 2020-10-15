@@ -2,7 +2,7 @@
 using System.Globalization;
 using Avalonia.Data.Converters;
 
-namespace Core2D.UI.Converters
+namespace Core2D.Converters
 {
     /// <summary>
     /// Pass-through a binding value <see cref="object"/> as <see cref="object"/> to avoid AvaloniaProperty.UnsetValue.

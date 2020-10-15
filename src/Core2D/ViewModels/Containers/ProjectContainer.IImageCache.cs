@@ -7,7 +7,7 @@ namespace Core2D.Containers
     /// <summary>
     /// Project image cache implementation.
     /// </summary>
-    public partial class ProjectContainer : ObservableObject, IImageCache
+    public partial class ProjectContainer : BaseContainer, IImageCache
     {
         private readonly IDictionary<string, byte[]> _images = new Dictionary<string, byte[]>();
 

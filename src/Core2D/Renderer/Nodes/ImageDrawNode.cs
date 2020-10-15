@@ -8,7 +8,7 @@ using A = Avalonia;
 using AM = Avalonia.Media;
 using AMI = Avalonia.Media.Imaging;
 
-namespace Core2D.UI.Renderer
+namespace Core2D.Renderer
 {
     internal class ImageDrawNode : TextDrawNode, IImageDrawNode
     {

@@ -1,7 +1,7 @@
 ﻿using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 
-namespace Core2D.UI.Views.Data
+namespace Core2D.Views.Data
 {
     /// <summary>
     /// Interaction logic for <see cref="RecordControl"/> xaml.

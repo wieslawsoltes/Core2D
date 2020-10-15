@@ -8,7 +8,7 @@ namespace Core2D.Renderer
     /// <summary>
     /// Defines decorator contract.
     /// </summary>
-    public interface IDecorator : ObservableObject, IDrawable
+    public interface IDecorator : IDrawable
     {
         /// <summary>
         ///  Gets or sets decorated layer.

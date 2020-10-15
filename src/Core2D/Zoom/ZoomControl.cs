@@ -6,9 +6,9 @@ using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Media;
 using Avalonia.VisualTree;
-using Core2D.UI.Zoom.Input;
+using Core2D.Zoom.Input;
 
-namespace Core2D.UI.Zoom
+namespace Core2D.Zoom
 {
     public class ZoomControl : Border, IInputService, IZoomService
     {

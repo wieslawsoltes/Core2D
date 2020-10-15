@@ -20,7 +20,7 @@ namespace Core2D.Containers
     /// <summary>
     /// Layer container.
     /// </summary>
-    public class LayerContainer : ObservableObject
+    public class LayerContainer : BaseContainer
     {
         /// <summary>
         /// Invalidate layer event.

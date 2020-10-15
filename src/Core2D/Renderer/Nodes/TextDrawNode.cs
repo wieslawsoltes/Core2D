@@ -5,7 +5,7 @@ using Spatial;
 using A = Avalonia;
 using AM = Avalonia.Media;
 
-namespace Core2D.UI.Renderer
+namespace Core2D.Renderer
 {
     internal class TextDrawNode : DrawNode, ITextDrawNode
     {

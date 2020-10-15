@@ -3,7 +3,7 @@ using Avalonia.Data;
 using Core2D.Data;
 using Core2D.Renderer;
 
-namespace Core2D.UI.Renderer
+namespace Core2D.Renderer
 {
     /// <summary>
     /// Shape renderer avalonia attached properties.

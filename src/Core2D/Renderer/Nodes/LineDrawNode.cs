@@ -7,7 +7,7 @@ using A = Avalonia;
 using AM = Avalonia.Media;
 using AME = Avalonia.MatrixExtensions;
 
-namespace Core2D.UI.Renderer
+namespace Core2D.Renderer
 {
     internal abstract class Marker : IMarker
     {

@@ -2,7 +2,7 @@
 using Avalonia.Xaml.Interactivity;
 using Core2D.Editor;
 
-namespace Core2D.UI.Behaviors
+namespace Core2D.Behaviors
 {
     /// <summary>
     /// Attaches <see cref="ProjectEditor"/> to a control.

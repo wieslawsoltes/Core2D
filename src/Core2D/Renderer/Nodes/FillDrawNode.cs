@@ -3,7 +3,7 @@ using Core2D.Style;
 using A = Avalonia;
 using AM = Avalonia.Media;
 
-namespace Core2D.UI.Renderer
+namespace Core2D.Renderer
 {
     internal class FillDrawNode : DrawNode, IFillDrawNode
     {

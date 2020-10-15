@@ -49,7 +49,7 @@ namespace Core2D.Editor.Tools
         /// <summary>
         /// Gets or sets previous path tool.
         /// </summary>
-        internal PathTool PreviousPathTool { get; set; }
+        internal IPathTool PreviousPathTool { get; set; }
 
         /// <inheritdoc/>
         public string Title => "Path";

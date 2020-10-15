@@ -4,7 +4,7 @@ using Avalonia.Input;
 using Avalonia.Interactivity;
 using Avalonia.VisualTree;
 
-namespace Core2D.UI.DragAndDrop
+namespace Core2D.DragAndDrop
 {
     /// <summary>
     /// Default drop handler.

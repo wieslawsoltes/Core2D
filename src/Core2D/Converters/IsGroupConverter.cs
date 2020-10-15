@@ -3,7 +3,7 @@ using System.Globalization;
 using Avalonia.Data.Converters;
 using Core2D.Shapes;
 
-namespace Core2D.UI.Converters
+namespace Core2D.Converters
 {
     /// <summary>
     /// Converts a binding value object from <see cref="object"/> to <see cref="bool"/> True if value is not equal to null and is of type <see cref="GroupShape"/> otherwise return False.

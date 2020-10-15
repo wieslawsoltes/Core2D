@@ -7,7 +7,7 @@ using Avalonia.Data.Converters;
 using Core2D.Shapes;
 using Core2D.Style;
 
-namespace Core2D.UI.Converters
+namespace Core2D.Converters
 {
     /// <summary>
     /// Converts multi-binding inputs to a final value.

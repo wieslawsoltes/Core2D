@@ -3,7 +3,7 @@ using System.Globalization;
 using Avalonia;
 using Avalonia.Data.Converters;
 
-namespace Core2D.UI.Converters
+namespace Core2D.Converters
 {
     /// <summary>
     /// Converts a binding value <see cref="object"/> <see cref="Type"/> to a <see cref="string"/>.

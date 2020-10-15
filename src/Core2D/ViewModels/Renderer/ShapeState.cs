@@ -6,7 +6,7 @@ namespace Core2D.Renderer
     /// <summary>
     /// Shape state.
     /// </summary>
-    public class ShapeState : ObservableObject, ShapeState
+    public class ShapeState : ObservableObject
     {
         private ShapeStateFlags _flags;
 

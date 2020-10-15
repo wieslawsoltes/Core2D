@@ -7,7 +7,7 @@ namespace Core2D.Containers
     /// <summary>
     /// Named items library.
     /// </summary>
-    public class Library<T> : ObservableObject
+    public class Library<T> : Library
     {
         private ImmutableArray<T> _items;
         private T _selected;

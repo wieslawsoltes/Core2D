@@ -1,7 +1,7 @@
 ﻿using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 
-namespace Core2D.UI.Views.Containers
+namespace Core2D.Views.Containers
 {
     /// <summary>
     /// Interaction logic for <see cref="PageContainerControl"/> xaml.

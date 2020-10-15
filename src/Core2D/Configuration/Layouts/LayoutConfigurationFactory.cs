@@ -4,7 +4,7 @@ using Avalonia.Collections;
 using Avalonia.Controls;
 using Avalonia.LogicalTree;
 
-namespace Core2D.UI.Configuration.Layouts
+namespace Core2D.Configuration.Layouts
 {
     public static class LayoutConfigurationFactory
     {

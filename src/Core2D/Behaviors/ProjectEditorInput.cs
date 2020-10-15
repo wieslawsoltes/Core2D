@@ -4,9 +4,8 @@ using Avalonia.Controls;
 using Avalonia.Controls.PanAndZoom;
 using Core2D.Editor;
 using Core2D.Input;
-using Core2D.UI.Editor;
 
-namespace Core2D.UI.Behaviors
+namespace Core2D.Behaviors
 {
     public class ProjectEditorInput
     {

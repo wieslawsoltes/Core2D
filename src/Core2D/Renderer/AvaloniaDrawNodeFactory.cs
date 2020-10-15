@@ -3,7 +3,7 @@ using Core2D.Renderer;
 using Core2D.Shapes;
 using Core2D.Style;
 
-namespace Core2D.UI.Renderer
+namespace Core2D.Renderer
 {
     internal class AvaloniaDrawNodeFactory : IDrawNodeFactory
     {

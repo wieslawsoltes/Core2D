@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Avalonia;
 
-namespace Core2D.UI.Editor
+namespace Core2D.Editor
 {
     /// <summary>
     /// Wrapper class for App.Current.Clipboard clipboard class.

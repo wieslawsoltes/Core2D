@@ -1,11 +1,12 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel;
 
 namespace Core2D.Renderer
 {
     /// <summary>
     /// Defines key based image data cache contract.
     /// </summary>
-    public interface IImageCache : ObservableObject
+    public interface IImageCache : INotifyPropertyChanged
     {
         /// <summary>
         /// Gets image keys collection.
