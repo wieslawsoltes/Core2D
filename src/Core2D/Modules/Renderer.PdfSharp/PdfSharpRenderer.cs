@@ -446,8 +446,6 @@ namespace Core2D.Renderer.PdfSharp
                     _scaleToPage(rect.Width),
                     _scaleToPage(rect.Height));
             }
-
-            DrawText(dc, rectangle);
         }
 
         /// <inheritdoc/>
@@ -490,8 +488,6 @@ namespace Core2D.Renderer.PdfSharp
                     _scaleToPage(rect.Width),
                     _scaleToPage(rect.Height));
             }
-
-            DrawText(dc, ellipse);
         }
 
         /// <inheritdoc/>
@@ -803,8 +799,6 @@ namespace Core2D.Renderer.PdfSharp
                     }
                 }
             }
-
-            DrawText(dc, image);
         }
 
         /// <inheritdoc/>

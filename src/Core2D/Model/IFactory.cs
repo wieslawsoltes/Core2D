@@ -425,10 +425,9 @@ namespace Core2D
         /// <param name="style">The shape style.</param>
         /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
         /// <param name="isFilled">The flag indicating whether shape is filled.</param>
-        /// <param name="text">The text string.</param>
         /// <param name="name">The shape name.</param>
         /// <returns>The new instance of the <see cref="RectangleShape"/> class.</returns>
-        RectangleShape CreateRectangleShape(double x1, double y1, double x2, double y2, ShapeStyle style, bool isStroked = true, bool isFilled = false, string text = null, string name = "");
+        RectangleShape CreateRectangleShape(double x1, double y1, double x2, double y2, ShapeStyle style, bool isStroked = true, bool isFilled = false, string name = "");
 
         /// <summary>
         /// Creates a new <see cref="RectangleShape"/> instance.
@@ -438,10 +437,9 @@ namespace Core2D
         /// <param name="style">The shape style.</param>
         /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
         /// <param name="isFilled">The flag indicating whether shape is filled.</param>
-        /// <param name="text">The text string.</param>
         /// <param name="name">The shape name.</param>
         /// <returns>The new instance of the <see cref="RectangleShape"/> class.</returns>
-        RectangleShape CreateRectangleShape(double x, double y, ShapeStyle style, bool isStroked = true, bool isFilled = false, string text = null, string name = "");
+        RectangleShape CreateRectangleShape(double x, double y, ShapeStyle style, bool isStroked = true, bool isFilled = false, string name = "");
 
         /// <summary>
         /// Creates a new <see cref="RectangleShape"/> instance.
@@ -451,10 +449,9 @@ namespace Core2D
         /// <param name="style">The shape style.</param>
         /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
         /// <param name="isFilled">The flag indicating whether shape is filled.</param>
-        /// <param name="text">The text string.</param>
         /// <param name="name">The shape name.</param>
         /// <returns>The new instance of the <see cref="RectangleShape"/> class.</returns>
-        RectangleShape CreateRectangleShape(PointShape topLeft, PointShape bottomRight, ShapeStyle style, bool isStroked = true, bool isFilled = false, string text = null, string name = "");
+        RectangleShape CreateRectangleShape(PointShape topLeft, PointShape bottomRight, ShapeStyle style, bool isStroked = true, bool isFilled = false, string name = "");
 
         /// <summary>
         /// Creates a new <see cref="EllipseShape"/> instance.
@@ -466,10 +463,9 @@ namespace Core2D
         /// <param name="style">The shape style.</param>
         /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
         /// <param name="isFilled">The flag indicating whether shape is filled.</param>
-        /// <param name="text">The text string.</param>
         /// <param name="name">The shape name.</param>
         /// <returns>The new instance of the <see cref="EllipseShape"/> class.</returns>
-        EllipseShape CreateEllipseShape(double x1, double y1, double x2, double y2, ShapeStyle style, bool isStroked = true, bool isFilled = false, string text = null, string name = "");
+        EllipseShape CreateEllipseShape(double x1, double y1, double x2, double y2, ShapeStyle style, bool isStroked = true, bool isFilled = false, string name = "");
 
         /// <summary>
         /// Creates a new <see cref="EllipseShape"/> instance.
@@ -479,10 +475,9 @@ namespace Core2D
         /// <param name="style">The shape style.</param>
         /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
         /// <param name="isFilled">The flag indicating whether shape is filled.</param>
-        /// <param name="text">The text string.</param>
         /// <param name="name">The shape name.</param>
         /// <returns>The new instance of the <see cref="EllipseShape"/> class.</returns>
-        EllipseShape CreateEllipseShape(double x, double y, ShapeStyle style, bool isStroked = true, bool isFilled = false, string text = null, string name = "");
+        EllipseShape CreateEllipseShape(double x, double y, ShapeStyle style, bool isStroked = true, bool isFilled = false, string name = "");
 
         /// <summary>
         /// Creates a new <see cref="EllipseShape"/> instance.
@@ -492,10 +487,9 @@ namespace Core2D
         /// <param name="style">The shape style.</param>
         /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
         /// <param name="isFilled">The flag indicating whether shape is filled.</param>
-        /// <param name="text">The text string.</param>
         /// <param name="name">The shape name.</param>
         /// <returns>The new instance of the <see cref="EllipseShape"/> class.</returns>
-        EllipseShape CreateEllipseShape(PointShape topLeft, PointShape bottomRight, ShapeStyle style, bool isStroked = true, bool isFilled = false, string text = null, string name = "");
+        EllipseShape CreateEllipseShape(PointShape topLeft, PointShape bottomRight, ShapeStyle style, bool isStroked = true, bool isFilled = false, string name = "");
 
         /// <summary>
         /// Creates a new <see cref="PathShape"/> instance.
@@ -567,10 +561,9 @@ namespace Core2D
         /// <param name="key">The image key.</param>
         /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
         /// <param name="isFilled">The flag indicating whether shape is filled.</param>
-        /// <param name="text">The text string.</param>
         /// <param name="name">The shape name.</param>
         /// <returns>The new instance of the <see cref="ImageShape"/> class.</returns>
-        ImageShape CreateImageShape(double x1, double y1, double x2, double y2, ShapeStyle style, string key, bool isStroked = false, bool isFilled = false, string text = null, string name = "");
+        ImageShape CreateImageShape(double x1, double y1, double x2, double y2, ShapeStyle style, string key, bool isStroked = false, bool isFilled = false, string name = "");
 
         /// <summary>
         /// Creates a new <see cref="ImageShape"/> instance.
@@ -581,10 +574,9 @@ namespace Core2D
         /// <param name="key">The image key.</param>
         /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
         /// <param name="isFilled">The flag indicating whether shape is filled.</param>
-        /// <param name="text">The text string.</param>
         /// <param name="name">The shape name.</param>
         /// <returns>The new instance of the <see cref="ImageShape"/> class.</returns>
-        ImageShape CreateImageShape(double x, double y, ShapeStyle style, string key, bool isStroked = false, bool isFilled = false, string text = null, string name = "");
+        ImageShape CreateImageShape(double x, double y, ShapeStyle style, string key, bool isStroked = false, bool isFilled = false, string name = "");
 
         /// <summary>
         /// Creates a new <see cref="ImageShape"/> instance.
@@ -595,10 +587,9 @@ namespace Core2D
         /// <param name="key">The image key.</param>
         /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
         /// <param name="isFilled">The flag indicating whether shape is filled.</param>
-        /// <param name="text">The text string.</param>
         /// <param name="name">The shape name.</param>
         /// <returns>The new instance of the <see cref="ImageShape"/> class.</returns>
-        ImageShape CreateImageShape(PointShape topLeft, PointShape bottomRight, ShapeStyle style, string key, bool isStroked = false, bool isFilled = false, string text = null, string name = "");
+        ImageShape CreateImageShape(PointShape topLeft, PointShape bottomRight, ShapeStyle style, string key, bool isStroked = false, bool isFilled = false, string name = "");
 
         /// <summary>
         /// Creates a new <see cref="GroupShape"/> instance.

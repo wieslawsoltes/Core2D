@@ -4,7 +4,7 @@ using Core2D.Shapes;
 
 namespace Core2D.Renderer
 {
-    public interface IImageDrawNode : ITextDrawNode
+    public interface IImageDrawNode : IDrawNode
     {
         ImageShape Image { get; set; }
         IImageCache ImageCache { get; set; }

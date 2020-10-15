@@ -2,7 +2,7 @@
 
 namespace Core2D.Renderer
 {
-    public interface IEllipseDrawNode : ITextDrawNode
+    public interface IEllipseDrawNode : IDrawNode
     {
         EllipseShape Ellipse { get; set; }
     }

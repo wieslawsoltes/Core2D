@@ -7,9 +7,10 @@ using SkiaSharp;
 
 namespace Core2D.Renderer.SkiaSharp
 {
-    internal class ImageDrawNode : TextDrawNode, IImageDrawNode
+    internal class ImageDrawNode : DrawNode, IImageDrawNode
     {
         public ImageShape Image { get; set; }
+        public SKRect Rect { get; set; }
         public IImageCache ImageCache { get; set; }
         public ICache<string, IDisposable> BitmapCache { get; set; }
         public SKBitmap ImageCached { get; set; }
@@ -21,7 +22,6 @@ namespace Core2D.Renderer.SkiaSharp
         {
             Style = style;
             Image = image;
-            Text = image;
             ImageCache = imageCache;
             BitmapCache = bitmapCache;
             UpdateGeometry();
@@ -66,8 +66,6 @@ namespace Core2D.Renderer.SkiaSharp
             var rect2 = Rect2.FromPoints(Image.TopLeft.X, Image.TopLeft.Y, Image.BottomRight.X, Image.BottomRight.Y, 0, 0);
             DestRect = SKRect.Create((float)rect2.X, (float)rect2.Y, (float)rect2.Width, (float)rect2.Height);
             Center = new SKPoint(DestRect.MidX, DestRect.MidY);
-
-            base.UpdateTextGeometry();
         }
 
         public override void OnDraw(object dc, double zoom)
@@ -96,8 +94,6 @@ namespace Core2D.Renderer.SkiaSharp
                     Debug.WriteLine($"{ex.StackTrace}");
                 }
             }
-
-            base.OnDraw(dc, zoom);
         }
     }
 }

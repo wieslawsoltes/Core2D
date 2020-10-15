@@ -1,13 +1,15 @@
 ﻿using Core2D.Renderer;
 using Core2D.Shapes;
 using Core2D.Style;
+using A = Avalonia;
 using AM = Avalonia.Media;
 
 namespace Core2D.Renderer
 {
-    internal class EllipseDrawNode : TextDrawNode, IEllipseDrawNode
+    internal class EllipseDrawNode : DrawNode, IEllipseDrawNode
     {
         public EllipseShape Ellipse { get; set; }
+        public A.Rect Rect { get; set; }
         public AM.Geometry Geometry { get; set; }
 
         public EllipseDrawNode(EllipseShape ellipse, ShapeStyle style)
@@ -15,7 +17,6 @@ namespace Core2D.Renderer
         {
             Style = style;
             Ellipse = ellipse;
-            Text = ellipse;
             UpdateGeometry();
         }
 
@@ -26,8 +27,6 @@ namespace Core2D.Renderer
             Geometry = PathGeometryConverter.ToGeometry(Ellipse);
             Rect = Geometry.Bounds;
             Center = Geometry.Bounds.Center;
-
-            base.UpdateTextGeometry();
         }
 
         public override void OnDraw(object dc, double zoom)
@@ -35,8 +34,6 @@ namespace Core2D.Renderer
             var context = dc as AM.DrawingContext;
 
             context.DrawGeometry(Ellipse.IsFilled ? Fill : null, Ellipse.IsStroked ? Stroke : null, Geometry);
-
-            base.OnDraw(dc, zoom);
         }
     }
 }

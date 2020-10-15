@@ -92,12 +92,14 @@ namespace Core2D.Renderer.SkiaSharp
                                     false);
                             }
                             break;
+
                         case SKPathVerb.Line:
                             {
                                 context.LineTo(
                                     factory.CreatePointShape(points[1].X, points[1].Y));
                             }
                             break;
+
                         case SKPathVerb.Cubic:
                             {
                                 context.CubicBezierTo(
@@ -106,6 +108,7 @@ namespace Core2D.Renderer.SkiaSharp
                                     factory.CreatePointShape(points[3].X, points[3].Y));
                             }
                             break;
+
                         case SKPathVerb.Quad:
                             {
                                 context.QuadraticBezierTo(
@@ -113,6 +116,7 @@ namespace Core2D.Renderer.SkiaSharp
                                     factory.CreatePointShape(points[2].X, points[2].Y));
                             }
                             break;
+
                         case SKPathVerb.Conic:
                             {
                                 var quads = SKPath.ConvertConicToQuads(points[0], points[1], points[2], iterator.ConicWeight(), 1);
@@ -124,6 +128,7 @@ namespace Core2D.Renderer.SkiaSharp
                                     factory.CreatePointShape(quads[4].X, quads[4].Y));
                             }
                             break;
+
                         case SKPathVerb.Close:
                             {
                                 context.SetClosedState(true);
@@ -161,6 +166,7 @@ namespace Core2D.Renderer.SkiaSharp
                             previous = lineShape.End;
                         }
                         break;
+
                     case RectangleShape rectangleShape:
                         {
                             path.AddRect(
@@ -168,6 +174,7 @@ namespace Core2D.Renderer.SkiaSharp
                                 SKPathDirection.Clockwise);
                         }
                         break;
+
                     case EllipseShape ellipseShape:
                         {
                             path.AddOval(
@@ -175,6 +182,7 @@ namespace Core2D.Renderer.SkiaSharp
                                 SKPathDirection.Clockwise);
                         }
                         break;
+
                     case ArcShape arcShape:
                         {
                             var a = new GdiArc(
@@ -190,6 +198,7 @@ namespace Core2D.Renderer.SkiaSharp
                             path.AddArc(rect, (float)a.StartAngle, (float)a.SweepAngle);
                         }
                         break;
+
                     case CubicBezierShape cubicBezierShape:
                         {
                             if (previous == null || previous != cubicBezierShape.Point1)
@@ -208,6 +217,7 @@ namespace Core2D.Renderer.SkiaSharp
                             previous = cubicBezierShape.Point4;
                         }
                         break;
+
                     case QuadraticBezierShape quadraticBezierShape:
                         {
                             if (previous == null || previous != quadraticBezierShape.Point1)
@@ -224,6 +234,7 @@ namespace Core2D.Renderer.SkiaSharp
                             previous = quadraticBezierShape.Point3;
                         }
                         break;
+
                     case TextShape textShape:
                         {
                             var resultPath = ToSKPath(textShape);
@@ -233,6 +244,7 @@ namespace Core2D.Renderer.SkiaSharp
                             }
                         }
                         break;
+
                     case PathShape pathShape:
                         {
                             var resultPath = ToSKPath(pathShape);
@@ -242,6 +254,7 @@ namespace Core2D.Renderer.SkiaSharp
                             }
                         }
                         break;
+
                     case GroupShape groupShape:
                         {
                             var resultPath = ToSKPath(groupShape.Shapes);
@@ -298,14 +311,6 @@ namespace Core2D.Renderer.SkiaSharp
             path.AddRect(
                 SkiaSharpDrawUtil.CreateRect(rectangle.TopLeft, rectangle.BottomRight),
                 SKPathDirection.Clockwise);
-            if (rectangle is TextShape text)
-            {
-                var textPath = ToSKPath(text);
-                if (textPath != null && !textPath.IsEmpty)
-                {
-                    path.AddPath(textPath, SKPathAddMode.Append);
-                }
-            }
             return path;
         }
 
@@ -318,14 +323,6 @@ namespace Core2D.Renderer.SkiaSharp
             path.AddOval(
                 SkiaSharpDrawUtil.CreateRect(ellipse.TopLeft, ellipse.BottomRight),
                 SKPathDirection.Clockwise);
-            if (ellipse is TextShape text)
-            {
-                var textPath = ToSKPath(text);
-                if (textPath != null && !textPath.IsEmpty)
-                {
-                    path.AddPath(textPath, SKPathAddMode.Append);
-                }
-            }
             return path;
         }
 
@@ -338,14 +335,6 @@ namespace Core2D.Renderer.SkiaSharp
             path.AddRect(
                 SkiaSharpDrawUtil.CreateRect(image.TopLeft, image.BottomRight),
                 SKPathDirection.Clockwise);
-            if (image is TextShape text)
-            {
-                var textPath = ToSKPath(text);
-                if (textPath != null && !textPath.IsEmpty)
-                {
-                    path.AddPath(textPath, SKPathAddMode.Append);
-                }
-            }
             return path;
         }
 

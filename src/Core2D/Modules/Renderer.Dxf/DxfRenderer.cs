@@ -555,8 +555,6 @@ namespace Core2D.Renderer.Dxf
 
                 DrawRectangleInternal(dxf, _currentLayer, rectangle.IsFilled, rectangle.IsStroked, style, ref rect);
             }
-
-            DrawText(dc, rectangle);
         }
 
         /// <inheritdoc/>
@@ -575,8 +573,6 @@ namespace Core2D.Renderer.Dxf
 
                 DrawEllipseInternal(dxf, _currentLayer, ellipse.IsFilled, ellipse.IsStroked, style, ref rect);
             }
-
-            DrawText(dc, ellipse);
         }
 
         /// <inheritdoc/>
@@ -875,8 +871,6 @@ namespace Core2D.Renderer.Dxf
                     }
                 }
             }
-
-            DrawText(dc, image);
         }
 
         /// <inheritdoc/>

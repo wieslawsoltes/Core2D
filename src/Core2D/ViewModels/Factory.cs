@@ -607,7 +607,7 @@ namespace Core2D
         }
 
         /// <inheritdoc/>
-        public RectangleShape CreateRectangleShape(double x1, double y1, double x2, double y2, ShapeStyle style, bool isStroked = true, bool isFilled = false, string text = null, string name = "")
+        public RectangleShape CreateRectangleShape(double x1, double y1, double x2, double y2, ShapeStyle style, bool isStroked = true, bool isFilled = false, string name = "")
         {
             var rectangleShape = new RectangleShape()
             {
@@ -616,8 +616,7 @@ namespace Core2D
                 Data = CreateContext(),
                 Style = style,
                 IsStroked = isStroked,
-                IsFilled = isFilled,
-                Text = text
+                IsFilled = isFilled
             };
 
             rectangleShape.TopLeft = CreatePointShape(x1, y1);
@@ -630,13 +629,13 @@ namespace Core2D
         }
 
         /// <inheritdoc/>
-        public RectangleShape CreateRectangleShape(double x, double y, ShapeStyle style, bool isStroked = true, bool isFilled = false, string text = null, string name = "")
+        public RectangleShape CreateRectangleShape(double x, double y, ShapeStyle style, bool isStroked = true, bool isFilled = false, string name = "")
         {
-            return CreateRectangleShape(x, y, x, y, style, isStroked, isFilled, text, name);
+            return CreateRectangleShape(x, y, x, y, style, isStroked, isFilled, name);
         }
 
         /// <inheritdoc/>
-        public RectangleShape CreateRectangleShape(PointShape topLeft, PointShape bottomRight, ShapeStyle style, bool isStroked = true, bool isFilled = false, string text = null, string name = "")
+        public RectangleShape CreateRectangleShape(PointShape topLeft, PointShape bottomRight, ShapeStyle style, bool isStroked = true, bool isFilled = false, string name = "")
         {
             var rectangleShape = new RectangleShape()
             {
@@ -645,8 +644,7 @@ namespace Core2D
                 Data = CreateContext(),
                 Style = style,
                 IsStroked = isStroked,
-                IsFilled = isFilled,
-                Text = text
+                IsFilled = isFilled
             };
 
             rectangleShape.TopLeft = topLeft;
@@ -656,7 +654,7 @@ namespace Core2D
         }
 
         /// <inheritdoc/>
-        public EllipseShape CreateEllipseShape(double x1, double y1, double x2, double y2, ShapeStyle style, bool isStroked = true, bool isFilled = false, string text = null, string name = "")
+        public EllipseShape CreateEllipseShape(double x1, double y1, double x2, double y2, ShapeStyle style, bool isStroked = true, bool isFilled = false, string name = "")
         {
             var ellipseShape = new EllipseShape()
             {
@@ -665,8 +663,7 @@ namespace Core2D
                 Data = CreateContext(),
                 Style = style,
                 IsStroked = isStroked,
-                IsFilled = isFilled,
-                Text = text,
+                IsFilled = isFilled
             };
 
             ellipseShape.TopLeft = CreatePointShape(x1, y1);
@@ -679,13 +676,13 @@ namespace Core2D
         }
 
         /// <inheritdoc/>
-        public EllipseShape CreateEllipseShape(double x, double y, ShapeStyle style, bool isStroked = true, bool isFilled = false, string text = null, string name = "")
+        public EllipseShape CreateEllipseShape(double x, double y, ShapeStyle style, bool isStroked = true, bool isFilled = false, string name = "")
         {
-            return CreateEllipseShape(x, y, x, y, style, isStroked, isFilled, text, name);
+            return CreateEllipseShape(x, y, x, y, style, isStroked, isFilled, name);
         }
 
         /// <inheritdoc/>
-        public EllipseShape CreateEllipseShape(PointShape topLeft, PointShape bottomRight, ShapeStyle style, bool isStroked = true, bool isFilled = false, string text = null, string name = "")
+        public EllipseShape CreateEllipseShape(PointShape topLeft, PointShape bottomRight, ShapeStyle style, bool isStroked = true, bool isFilled = false, string name = "")
         {
             var ellipseShape = new EllipseShape()
             {
@@ -696,8 +693,7 @@ namespace Core2D
                 IsStroked = isStroked,
                 IsFilled = isFilled,
                 TopLeft = topLeft,
-                BottomRight = bottomRight,
-                Text = text,
+                BottomRight = bottomRight
             };
 
             ellipseShape.TopLeft = topLeft;
@@ -818,7 +814,7 @@ namespace Core2D
         }
 
         /// <inheritdoc/>
-        public ImageShape CreateImageShape(double x1, double y1, double x2, double y2, ShapeStyle style, string key, bool isStroked = false, bool isFilled = false, string text = null, string name = "")
+        public ImageShape CreateImageShape(double x1, double y1, double x2, double y2, ShapeStyle style, string key, bool isStroked = false, bool isFilled = false, string name = "")
         {
             var imageShape = new ImageShape()
             {
@@ -828,8 +824,7 @@ namespace Core2D
                 Style = style,
                 IsStroked = isStroked,
                 IsFilled = isFilled,
-                Key = key,
-                Text = text
+                Key = key
             };
 
             imageShape.TopLeft = CreatePointShape(x1, y1);
@@ -842,13 +837,13 @@ namespace Core2D
         }
 
         /// <inheritdoc/>
-        public ImageShape CreateImageShape(double x, double y, ShapeStyle style, string key, bool isStroked = false, bool isFilled = false, string text = null, string name = "")
+        public ImageShape CreateImageShape(double x, double y, ShapeStyle style, string key, bool isStroked = false, bool isFilled = false, string name = "")
         {
-            return CreateImageShape(x, y, x, y, style, key, isStroked, isFilled, text, name);
+            return CreateImageShape(x, y, x, y, style, key, isStroked, isFilled, name);
         }
 
         /// <inheritdoc/>
-        public ImageShape CreateImageShape(PointShape topLeft, PointShape bottomRight, ShapeStyle style, string key, bool isStroked = false, bool isFilled = false, string text = null, string name = "")
+        public ImageShape CreateImageShape(PointShape topLeft, PointShape bottomRight, ShapeStyle style, string key, bool isStroked = false, bool isFilled = false, string name = "")
         {
             var imageShape = new ImageShape()
             {
@@ -860,8 +855,7 @@ namespace Core2D
                 IsFilled = isFilled,
                 TopLeft = topLeft,
                 BottomRight = bottomRight,
-                Key = key,
-                Text = text
+                Key = key
             };
 
             imageShape.TopLeft = topLeft;

@@ -10,9 +10,10 @@ using AMI = Avalonia.Media.Imaging;
 
 namespace Core2D.Renderer
 {
-    internal class ImageDrawNode : TextDrawNode, IImageDrawNode
+    internal class ImageDrawNode : DrawNode, IImageDrawNode
     {
         public ImageShape Image { get; set; }
+        public A.Rect Rect { get; set; }
         public IImageCache ImageCache { get; set; }
         public ICache<string, IDisposable> BitmapCache { get; set; }
         public AMI.Bitmap ImageCached { get; set; }
@@ -24,7 +25,6 @@ namespace Core2D.Renderer
         {
             Style = style;
             Image = image;
-            Text = image;
             ImageCache = imageCache;
             BitmapCache = bitmapCache;
             UpdateGeometry();
@@ -70,8 +70,6 @@ namespace Core2D.Renderer
             var rect2 = Rect2.FromPoints(Image.TopLeft.X, Image.TopLeft.Y, Image.BottomRight.X, Image.BottomRight.Y, 0, 0);
             DestRect = new A.Rect(rect2.X, rect2.Y, rect2.Width, rect2.Height);
             Center = DestRect.Center;
-
-            base.UpdateTextGeometry();
         }
 
         public override void OnDraw(object dc, double zoom)
@@ -100,8 +98,6 @@ namespace Core2D.Renderer
                     Debug.WriteLine($"{ex.StackTrace}");
                 }
             }
-
-            base.OnDraw(dc, zoom);
         }
     }
 }

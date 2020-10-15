@@ -488,8 +488,6 @@ namespace Core2D.Renderer.WinForms
 
             brush.Dispose();
             pen.Dispose();
-
-            DrawText(dc, rectangle);
         }
 
         /// <inheritdoc/>
@@ -527,8 +525,6 @@ namespace Core2D.Renderer.WinForms
 
             brush.Dispose();
             pen.Dispose();
-
-            DrawText(dc, ellipse);
         }
 
         /// <inheritdoc/>
@@ -819,8 +815,6 @@ namespace Core2D.Renderer.WinForms
             }
 
             brush.Dispose();
-
-            DrawText(dc, image);
         }
 
         /// <inheritdoc/>
