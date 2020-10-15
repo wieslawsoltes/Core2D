@@ -7,16 +7,16 @@ using Core2D.Style;
 namespace Core2D.Editor.Tools.Selection
 {
     /// <summary>
-    /// Helper class for <see cref="IEllipseShape"/> shape selection.
+    /// Helper class for <see cref="EllipseShape"/> shape selection.
     /// </summary>
     public class ToolEllipseSelection
     {
         private readonly IServiceProvider _serviceProvider;
-        private readonly ILayerContainer _layer;
-        private readonly IEllipseShape _ellipse;
-        private readonly IShapeStyle _style;
-        private IPointShape _topLeftHelperPoint;
-        private IPointShape _bottomRightHelperPoint;
+        private readonly LayerContainer _layer;
+        private readonly EllipseShape _ellipse;
+        private readonly ShapeStyle _style;
+        private PointShape _topLeftHelperPoint;
+        private PointShape _bottomRightHelperPoint;
 
         /// <summary>
         /// Initialize new instance of <see cref="ToolEllipseSelection"/> class.
@@ -25,7 +25,7 @@ namespace Core2D.Editor.Tools.Selection
         /// <param name="layer">The selection shapes layer.</param>
         /// <param name="shape">The selected shape.</param>
         /// <param name="style">The selection shapes style.</param>
-        public ToolEllipseSelection(IServiceProvider serviceProvider, ILayerContainer layer, IEllipseShape shape, IShapeStyle style)
+        public ToolEllipseSelection(IServiceProvider serviceProvider, LayerContainer layer, EllipseShape shape, ShapeStyle style)
         {
             _serviceProvider = serviceProvider;
             _layer = layer;

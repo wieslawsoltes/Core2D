@@ -8,13 +8,13 @@ namespace Core2D.Path
     /// <summary>
     /// Path geometry.
     /// </summary>
-    public class PathGeometry : ObservableObject, IPathGeometry
+    public class PathGeometry : ObservableObject
     {
-        private ImmutableArray<IPathFigure> _figures;
+        private ImmutableArray<PathFigure> _figures;
         private FillRule _fillRule;
 
         /// <inheritdoc/>
-        public ImmutableArray<IPathFigure> Figures
+        public ImmutableArray<PathFigure> Figures
         {
             get => _figures;
             set => Update(ref _figures, value);
@@ -57,7 +57,7 @@ namespace Core2D.Path
             }
         }
 
-        public string ToXamlString(ImmutableArray<IPathFigure> figures)
+        public string ToXamlString(ImmutableArray<PathFigure> figures)
         {
             if (figures.Length == 0)
             {
@@ -75,7 +75,7 @@ namespace Core2D.Path
             return sb.ToString();
         }
 
-        public string ToSvgString(ImmutableArray<IPathFigure> figures)
+        public string ToSvgString(ImmutableArray<PathFigure> figures)
         {
             if (figures.Length == 0)
             {

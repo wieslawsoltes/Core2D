@@ -12,7 +12,7 @@ namespace Core2D.Renderer
         /// <summary>
         /// Gets or sets renderer state.
         /// </summary>
-        IShapeRendererState State { get; set; }
+        ShapeRendererState State { get; set; }
 
         /// <summary>
         /// Clears renderer cache.
@@ -28,7 +28,7 @@ namespace Core2D.Renderer
         /// <param name="width">The width of rectangle.</param>
         /// <param name="height">The height of rectangle.</param>
         /// <param name="color">The fill color.</param>
-        void Fill(object dc, double x, double y, double width, double height, IColor color);
+        void Fill(object dc, double x, double y, double width, double height, BaseColor color);
 
         /// <summary>
         /// Draws a <see cref="IGrid"/> using drawing context.
@@ -42,87 +42,87 @@ namespace Core2D.Renderer
         void Grid(object dc, IGrid grid, double x, double y, double width, double height);
 
         /// <summary>
-        /// Draws a <see cref="IPageContainer"/> using drawing context.
+        /// Draws a <see cref="PageContainer"/> using drawing context.
         /// </summary>
         /// <param name="dc">The native drawing context.</param>
-        /// <param name="container">The <see cref="IPageContainer"/> object.</param>
-        void DrawPage(object dc, IPageContainer container);
+        /// <param name="container">The <see cref="PageContainer"/> object.</param>
+        void DrawPage(object dc, PageContainer container);
 
         /// <summary>
-        /// Draws a <see cref="ILayerContainer"/> using drawing context.
+        /// Draws a <see cref="LayerContainer"/> using drawing context.
         /// </summary>
         /// <param name="dc">The native drawing context.</param>
-        /// <param name="layer">The <see cref="ILayerContainer"/> object.</param>
-        void DrawLayer(object dc, ILayerContainer layer);
+        /// <param name="layer">The <see cref="LayerContainer"/> object.</param>
+        void DrawLayer(object dc, LayerContainer layer);
 
         /// <summary>
-        /// Draws a <see cref="IPointShape"/> shape using drawing context.
+        /// Draws a <see cref="PointShape"/> shape using drawing context.
         /// </summary>
         /// <param name="dc">The native drawing context.</param>
-        /// <param name="point">The <see cref="IPointShape"/> shape.</param>
-        void DrawPoint(object dc, IPointShape point);
+        /// <param name="point">The <see cref="PointShape"/> shape.</param>
+        void DrawPoint(object dc, PointShape point);
 
         /// <summary>
-        /// Draws a <see cref="ILineShape"/> shape using drawing context.
+        /// Draws a <see cref="LineShape"/> shape using drawing context.
         /// </summary>
         /// <param name="dc">The native drawing context.</param>
-        /// <param name="line">The <see cref="ILineShape"/> shape.</param>
-        void DrawLine(object dc, ILineShape line);
+        /// <param name="line">The <see cref="LineShape"/> shape.</param>
+        void DrawLine(object dc, LineShape line);
 
         /// <summary>
-        /// Draws a <see cref="IRectangleShape"/> shape using drawing context.
+        /// Draws a <see cref="RectangleShape"/> shape using drawing context.
         /// </summary>
         /// <param name="dc">The native drawing context.</param>
-        /// <param name="rectangle">The <see cref="IRectangleShape"/> shape.</param>
-        void DrawRectangle(object dc, IRectangleShape rectangle);
+        /// <param name="rectangle">The <see cref="RectangleShape"/> shape.</param>
+        void DrawRectangle(object dc, RectangleShape rectangle);
 
         /// <summary>
-        /// Draws a <see cref="IEllipseShape"/> shape using drawing context.
+        /// Draws a <see cref="EllipseShape"/> shape using drawing context.
         /// </summary>
         /// <param name="dc">The native drawing context.</param>
-        /// <param name="ellipse">The <see cref="IEllipseShape"/> shape.</param>
-        void DrawEllipse(object dc, IEllipseShape ellipse);
+        /// <param name="ellipse">The <see cref="EllipseShape"/> shape.</param>
+        void DrawEllipse(object dc, EllipseShape ellipse);
 
         /// <summary>
-        /// Draws a <see cref="IArcShape"/> shape using drawing context.
+        /// Draws a <see cref="ArcShape"/> shape using drawing context.
         /// </summary>
         /// <param name="dc">The native drawing context.</param>
-        /// <param name="arc">The <see cref="IArcShape"/> shape.</param>
-        void DrawArc(object dc, IArcShape arc);
+        /// <param name="arc">The <see cref="ArcShape"/> shape.</param>
+        void DrawArc(object dc, ArcShape arc);
 
         /// <summary>
-        /// Draws a <see cref="ICubicBezierShape"/> shape using drawing context.
+        /// Draws a <see cref="CubicBezierShape"/> shape using drawing context.
         /// </summary>
         /// <param name="dc">The native drawing context.</param>
-        /// <param name="cubicBezier">The <see cref="ICubicBezierShape"/> shape.</param>
-        void DrawCubicBezier(object dc, ICubicBezierShape cubicBezier);
+        /// <param name="cubicBezier">The <see cref="CubicBezierShape"/> shape.</param>
+        void DrawCubicBezier(object dc, CubicBezierShape cubicBezier);
 
         /// <summary>
-        /// Draws a <see cref="IQuadraticBezierShape"/> shape using drawing context.
+        /// Draws a <see cref="QuadraticBezierShape"/> shape using drawing context.
         /// </summary>
         /// <param name="dc">The native drawing context.</param>
-        /// <param name="quadraticBezier">The <see cref="IQuadraticBezierShape"/> shape.</param>
-        void DrawQuadraticBezier(object dc, IQuadraticBezierShape quadraticBezier);
+        /// <param name="quadraticBezier">The <see cref="QuadraticBezierShape"/> shape.</param>
+        void DrawQuadraticBezier(object dc, QuadraticBezierShape quadraticBezier);
 
         /// <summary>
-        /// Draws a <see cref="ITextShape"/> shape using drawing context.
+        /// Draws a <see cref="TextShape"/> shape using drawing context.
         /// </summary>
         /// <param name="dc">The native drawing context.</param>
-        /// <param name="text">The <see cref="ITextShape"/> shape.</param>
-        void DrawText(object dc, ITextShape text);
+        /// <param name="text">The <see cref="TextShape"/> shape.</param>
+        void DrawText(object dc, TextShape text);
 
         /// <summary>
-        /// Draws a <see cref="IImageShape"/> shape using drawing context.
+        /// Draws a <see cref="ImageShape"/> shape using drawing context.
         /// </summary>
         /// <param name="dc">The native drawing context.</param>
-        /// <param name="image">The <see cref="IImageShape"/> shape.</param>
-        void DrawImage(object dc, IImageShape image);
+        /// <param name="image">The <see cref="ImageShape"/> shape.</param>
+        void DrawImage(object dc, ImageShape image);
 
         /// <summary>
-        /// Draws a <see cref="IPathShape"/> shape using drawing context.
+        /// Draws a <see cref="PathShape"/> shape using drawing context.
         /// </summary>
         /// <param name="dc">The native drawing context.</param>
-        /// <param name="path">The <see cref="IPathShape"/> shape.</param>
-        void DrawPath(object dc, IPathShape path);
+        /// <param name="path">The <see cref="PathShape"/> shape.</param>
+        void DrawPath(object dc, PathShape path);
     }
 }

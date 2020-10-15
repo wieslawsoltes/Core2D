@@ -7,16 +7,16 @@ using Core2D.Style;
 namespace Core2D.Editor.Tools.Selection
 {
     /// <summary>
-    /// Helper class for <see cref="ILineShape"/> shape selection.
+    /// Helper class for <see cref="LineShape"/> shape selection.
     /// </summary>
     public class ToolLineSelection
     {
         private readonly IServiceProvider _serviceProvider;
-        private readonly ILayerContainer _layer;
-        private readonly ILineShape _line;
-        private readonly IShapeStyle _style;
-        private IPointShape _startHelperPoint;
-        private IPointShape _endHelperPoint;
+        private readonly LayerContainer _layer;
+        private readonly LineShape _line;
+        private readonly ShapeStyle _style;
+        private PointShape _startHelperPoint;
+        private PointShape _endHelperPoint;
 
         /// <summary>
         /// Initialize new instance of <see cref="ToolLineSelection"/> class.
@@ -25,7 +25,7 @@ namespace Core2D.Editor.Tools.Selection
         /// <param name="layer">The selection shapes layer.</param>
         /// <param name="shape">The selected shape.</param>
         /// <param name="style">The selection shapes style.</param>
-        public ToolLineSelection(IServiceProvider serviceProvider, ILayerContainer layer, ILineShape shape, IShapeStyle style)
+        public ToolLineSelection(IServiceProvider serviceProvider, LayerContainer layer, LineShape shape, ShapeStyle style)
         {
             _serviceProvider = serviceProvider;
             _layer = layer;

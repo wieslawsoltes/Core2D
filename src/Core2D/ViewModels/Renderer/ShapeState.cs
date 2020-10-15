@@ -6,7 +6,7 @@ namespace Core2D.Renderer
     /// <summary>
     /// Shape state.
     /// </summary>
-    public class ShapeState : ObservableObject, IShapeState
+    public class ShapeState : ObservableObject, ShapeState
     {
         private ShapeStateFlags _flags;
 
@@ -140,7 +140,7 @@ namespace Core2D.Renderer
         /// </summary>
         /// <param name="s">The shape state string.</param>
         /// <returns>The <see cref="ShapeState"/>.</returns>
-        public static IShapeState Parse(string s)
+        public static ShapeState Parse(string s)
         {
             var flags = (ShapeStateFlags)Enum.Parse(typeof(ShapeStateFlags), s, true);
             return new ShapeState()

@@ -1,0 +1,47 @@
+﻿<UserControl x:Class="Core2D.UI.Views.Containers.OptionsControl"
+             xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:converters="clr-namespace:Core2D.UI.Converters;assembly=Core2D.UI"
+             xmlns:Containers="clr-namespace:Core2D.Containers;assembly=Core2D"
+             xmlns:Editor="clr-namespace:Core2D.Editor;assembly=Core2D"
+             xmlns:Designer="clr-namespace:Core2D.UI.Designer;assembly=Core2D.UI"
+             mc:Ignorable="d"
+             d:DataContext="{x:Static Designer:DesignerContext.Options}"
+             d:DesignWidth="250" d:DesignHeight="400"
+             x:DataType="Containers:Options" x:CompileBindings="True">
+    <StackPanel>
+        <TabControl>
+            <TabItem Header="General">
+                <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                    <StackPanel>
+                        <CheckBox Content="SnapToGrid" IsChecked="{Binding SnapToGrid, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
+                        <TextBlock Text="SnapX" Margin="{DynamicResource TextControlThemePadding}"/>
+                        <TextBox Text="{Binding SnapX, Mode=TwoWay}"/>
+                        <TextBlock Text="SnapY" Margin="{DynamicResource TextControlThemePadding}"/>
+                        <TextBox Text="{Binding SnapY, Mode=TwoWay}"/>
+                        <TextBlock Text="HitThreshold" Margin="{DynamicResource TextControlThemePadding}"/>
+                        <TextBox Text="{Binding HitThreshold, Mode=TwoWay}"/>
+                        <TextBlock Text="MoveMode" Margin="{DynamicResource TextControlThemePadding}"/>
+                        <ComboBox Items="{x:Static Editor:Enums.MoveModeValues}" SelectedItem="{Binding MoveMode, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
+                        <CheckBox Content="TryToConnect" IsChecked="{Binding TryToConnect, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
+                    </StackPanel>
+                </ScrollViewer>
+            </TabItem>
+        </TabControl>
+        <TabControl>
+            <TabItem Header="Defaults">
+                <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                    <StackPanel>
+                        <CheckBox Content="IsStroked" IsChecked="{Binding DefaultIsStroked, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
+                        <CheckBox Content="IsFilled" IsChecked="{Binding DefaultIsFilled, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
+                        <CheckBox Content="IsClosed" IsChecked="{Binding DefaultIsClosed, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
+                        <TextBlock Text="FillRule" Margin="{DynamicResource TextControlThemePadding}"/>
+                        <ComboBox Items="{x:Static Editor:Enums.XFillRuleValues}" SelectedItem="{Binding DefaultFillRule, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
+                    </StackPanel>
+                </ScrollViewer>
+            </TabItem>
+        </TabControl>
+    </StackPanel>
+</UserControl>

@@ -94,7 +94,7 @@ namespace Core2D.Shapes.UnitTests
             point.Data.Properties = point.Data.Properties.Add(_factory.CreateProperty(null, "", ""));
             target.Connectors = target.Connectors.Add(point);
 
-            var points = new List<IPointShape>();
+            var points = new List<PointShape>();
             target.GetPoints(points);
             var count = points.Count();
             Assert.Equal(3, count);
@@ -135,7 +135,7 @@ namespace Core2D.Shapes.UnitTests
             var point1 = _factory.CreatePointShape();
             var point2 = _factory.CreatePointShape();
 
-            var shapes = new List<IBaseShape> { shape1, shape2, point1, point2 };
+            var shapes = new List<BaseShape> { shape1, shape2, point1, point2 };
             var source = shapes.ToList();
 
             var target = _factory.CreateGroupShape("g");
@@ -176,7 +176,7 @@ namespace Core2D.Shapes.UnitTests
             var point1 = _factory.CreatePointShape();
             var point2 = _factory.CreatePointShape();
 
-            var shapes = new IBaseShape[] { shape1, shape2, point1, point2 };
+            var shapes = new BaseShape[] { shape1, shape2, point1, point2 };
             var source = shapes.ToList();
 
             var target = _factory.CreateGroupShape("g");
@@ -210,7 +210,7 @@ namespace Core2D.Shapes.UnitTests
             target.AddConnectorAsInput(point2);
             target.AddConnectorAsOutput(point3);
 
-            var source = new List<IBaseShape> { target };
+            var source = new List<BaseShape> { target };
 
             target.Ungroup(source);
 
@@ -251,12 +251,12 @@ namespace Core2D.Shapes.UnitTests
                 throw new NotImplementedException();
             }
 
-            public override void Bind(IDataFlow dataFlow, object db, object r)
+            public override void Bind(DataFlow dataFlow, object db, object r)
             {
                 throw new NotImplementedException();
             }
 
-            public override void GetPoints(IList<IPointShape> points)
+            public override void GetPoints(IList<PointShape> points)
             {
                 throw new NotImplementedException();
             }

@@ -6,7 +6,7 @@ namespace Core2D.Editor.Tools.Settings
     /// <summary>
     /// Ellipse tool settings.
     /// </summary>
-    public class ToolSettingsEllipse : ObservableObject, ISettings
+    public class ToolSettingsEllipse : ObservableObject
     {
         /// <inheritdoc/>
         public override object Copy(IDictionary<object, object> shared)

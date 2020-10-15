@@ -8,33 +8,33 @@ namespace Core2D
     public interface IContainerFactory
     {
         /// <summary>
-        /// Creates a new instance of the <see cref="IPageContainer"/>.
+        /// Creates a new instance of the <see cref="PageContainer"/>.
         /// </summary>
         /// <param name="project">The new template owner project.</param>
         /// <param name="name">The new template name.</param>
-        /// <returns>The new instance of the <see cref="IPageContainer"/>.</returns>
-        IPageContainer GetTemplate(IProjectContainer project, string name);
+        /// <returns>The new instance of the <see cref="PageContainer"/>.</returns>
+        PageContainer GetTemplate(ProjectContainer project, string name);
 
         /// <summary>
-        /// Creates a new instance of the <see cref="IPageContainer"/>.
+        /// Creates a new instance of the <see cref="PageContainer"/>.
         /// </summary>
         /// <param name="project">The new page owner project.</param>
         /// <param name="name">The new page name.</param>
-        /// <returns>The new instance of the <see cref="IPageContainer"/>.</returns>
-        IPageContainer GetPage(IProjectContainer project, string name);
+        /// <returns>The new instance of the <see cref="PageContainer"/>.</returns>
+        PageContainer GetPage(ProjectContainer project, string name);
 
         /// <summary>
-        /// Creates a new instance of the <see cref="IDocumentContainer"/>.
+        /// Creates a new instance of the <see cref="DocumentContainer"/>.
         /// </summary>
         /// <param name="project">The new document owner project.</param>
         /// <param name="name">The new document name.</param>
-        /// <returns>The new instance of the <see cref="IDocumentContainer"/>.</returns>
-        IDocumentContainer GetDocument(IProjectContainer project, string name);
+        /// <returns>The new instance of the <see cref="DocumentContainer"/>.</returns>
+        DocumentContainer GetDocument(ProjectContainer project, string name);
 
         /// <summary>
-        /// Creates a new instance of the <see cref="IProjectContainer"/>.
+        /// Creates a new instance of the <see cref="ProjectContainer"/>.
         /// </summary>
-        /// <returns>The new instance of the <see cref="IProjectContainer"/>.</returns>
-        IProjectContainer GetProject();
+        /// <returns>The new instance of the <see cref="ProjectContainer"/>.</returns>
+        ProjectContainer GetProject();
     }
 }

@@ -17,7 +17,7 @@ namespace Core2D.UnitTests
         public void Inherits_From_XGeometryContext()
         {
             var target = _factory.CreateGeometryContext(_factory.CreatePathGeometry());
-            Assert.True(target is IGeometryContext);
+            Assert.True(target is GeometryContext);
         }
 
         [Fact]

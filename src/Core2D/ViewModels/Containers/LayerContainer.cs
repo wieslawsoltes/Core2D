@@ -6,17 +6,33 @@ using Core2D.Shapes;
 namespace Core2D.Containers
 {
     /// <summary>
+    /// Invalidate layer event arguments.
+    /// </summary>
+    public class InvalidateLayerEventArgs : EventArgs { }
+
+    /// <summary>
+    /// Invalidate layer event handler.
+    /// </summary>
+    /// <param name="sender">The sender object.</param>
+    /// <param name="e">The event arguments.</param>
+    public delegate void InvalidateLayerEventHandler(object sender, InvalidateLayerEventArgs e);
+
+    /// <summary>
     /// Layer container.
     /// </summary>
-    public class LayerContainer : ObservableObject, ILayerContainer
+    public class LayerContainer : ObservableObject
     {
-        /// <inheritdoc/>
+        /// <summary>
+        /// Invalidate layer event.
+        /// </summary>
         public event InvalidateLayerEventHandler InvalidateLayerHandler;
 
         private bool _isVisible = true;
-        private ImmutableArray<IBaseShape> _shapes;
+        private ImmutableArray<BaseShape> _shapes;
 
-        /// <inheritdoc/>
+        /// <summary>
+        /// Gets or sets flag indicating whether layer is visible.
+        /// </summary>
         public bool IsVisible
         {
             get => _isVisible;
@@ -27,14 +43,18 @@ namespace Core2D.Containers
             }
         }
 
-        /// <inheritdoc/>
-        public ImmutableArray<IBaseShape> Shapes
+        /// <summary>
+        /// Gets or sets layer shapes.
+        /// </summary>
+        public ImmutableArray<BaseShape> Shapes
         {
             get => _shapes;
             set => Update(ref _shapes, value);
         }
 
-        /// <inheritdoc/>
+        /// <summary>
+        /// Invalidate layer shapes.
+        /// </summary>
         public void InvalidateLayer() => InvalidateLayerHandler?.Invoke(this, new InvalidateLayerEventArgs());
 
         /// <inheritdoc/>

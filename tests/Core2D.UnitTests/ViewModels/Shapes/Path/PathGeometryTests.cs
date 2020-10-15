@@ -31,7 +31,7 @@ namespace Core2D.UnitTests
         {
             var geometry = _factory.CreatePathGeometry();
 
-            var target = ImmutableArray.Create<IPathFigure>();
+            var target = ImmutableArray.Create<PathFigure>();
             var actual = (geometry as PathGeometry).ToXamlString(target);
 
             Assert.Equal(string.Empty, actual);
@@ -43,7 +43,7 @@ namespace Core2D.UnitTests
         {
             var geometry = _factory.CreatePathGeometry();
 
-            var target = ImmutableArray.Create<IPathFigure>();
+            var target = ImmutableArray.Create<PathFigure>();
             var actual = (geometry as PathGeometry).ToSvgString(target);
 
             Assert.Equal(string.Empty, actual);

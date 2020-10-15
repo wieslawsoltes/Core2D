@@ -5,12 +5,12 @@ namespace Core2D.Style
     /// <summary>
     /// Line style.
     /// </summary>
-    public class LineStyle : ObservableObject, ILineStyle
+    public class LineStyle : ObservableObject
     {
         private bool _isCurved;
         private double _curvature;
         private CurveOrientation _curveOrientation;
-        private ILineFixedLength _fixedLength;
+        private LineFixedLength _fixedLength;
 
         /// <inheritdoc/>
         public bool IsCurved
@@ -34,7 +34,7 @@ namespace Core2D.Style
         }
 
         /// <inheritdoc/>
-        public ILineFixedLength FixedLength
+        public LineFixedLength FixedLength
         {
             get => _fixedLength;
             set => Update(ref _fixedLength, value);
@@ -49,7 +49,7 @@ namespace Core2D.Style
                 IsCurved = this.IsCurved,
                 Curvature = this.Curvature,
                 CurveOrientation = this.CurveOrientation,
-                FixedLength = (ILineFixedLength)this.FixedLength.Copy(shared)
+                FixedLength = (LineFixedLength)this.FixedLength.Copy(shared)
             };
         }
 

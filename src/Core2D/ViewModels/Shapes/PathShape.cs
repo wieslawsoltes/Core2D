@@ -10,16 +10,16 @@ namespace Core2D.Shapes
     /// <summary>
     /// Path shape.
     /// </summary>
-    public class PathShape : BaseShape, IPathShape
+    public class PathShape : BaseShape
     {
-        private List<IPointShape> _points;
-        private IPathGeometry _geometry;
+        private List<PointShape> _points;
+        private PathGeometry _geometry;
 
         /// <inheritdoc/>
-        public override Type TargetType => typeof(IPathShape);
+        public override Type TargetType => typeof(PathShape);
 
         /// <inheritdoc/>
-        public IPathGeometry Geometry
+        public PathGeometry Geometry
         {
             get => _geometry;
             set => Update(ref _geometry, value);
@@ -29,7 +29,7 @@ namespace Core2D.Shapes
         {
             if (_points == null)
             {
-                _points = new List<IPointShape>();
+                _points = new List<PointShape>();
                 GetPoints(_points);
             }
             else
@@ -78,7 +78,7 @@ namespace Core2D.Shapes
         }
 
         /// <inheritdoc/>
-        public override void Bind(IDataFlow dataFlow, object db, object r)
+        public override void Bind(DataFlow dataFlow, object db, object r)
         {
             var record = Data?.Record ?? r;
 
@@ -130,7 +130,7 @@ namespace Core2D.Shapes
         }
 
         /// <inheritdoc/>
-        public override void GetPoints(IList<IPointShape> points)
+        public override void GetPoints(IList<PointShape> points)
         {
             foreach (var figure in Geometry.Figures)
             {
@@ -164,7 +164,7 @@ namespace Core2D.Shapes
 
             if (Geometry != null)
             {
-                Geometry.Invalidate(); 
+                Geometry.Invalidate();
             }
         }
 

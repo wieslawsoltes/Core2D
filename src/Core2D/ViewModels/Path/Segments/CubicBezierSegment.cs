@@ -7,35 +7,35 @@ namespace Core2D.Path.Segments
     /// <summary>
     /// Cubic bezier path segment.
     /// </summary>
-    public class CubicBezierSegment : PathSegment, ICubicBezierSegment
+    public class CubicBezierSegment : PathSegment
     {
-        private IPointShape _point1;
-        private IPointShape _point2;
-        private IPointShape _point3;
+        private PointShape _point1;
+        private PointShape _point2;
+        private PointShape _point3;
 
         /// <inheritdoc/>
-        public IPointShape Point1
+        public PointShape Point1
         {
             get => _point1;
             set => Update(ref _point1, value);
         }
 
         /// <inheritdoc/>
-        public IPointShape Point2
+        public PointShape Point2
         {
             get => _point2;
             set => Update(ref _point2, value);
         }
 
         /// <inheritdoc/>
-        public IPointShape Point3
+        public PointShape Point3
         {
             get => _point3;
             set => Update(ref _point3, value);
         }
 
         /// <inheritdoc/>
-        public override void GetPoints(IList<IPointShape> points)
+        public override void GetPoints(IList<PointShape> points)
         {
             points.Add(Point1);
             points.Add(Point2);

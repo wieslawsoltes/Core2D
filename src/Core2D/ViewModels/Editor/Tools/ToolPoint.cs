@@ -16,7 +16,7 @@ namespace Core2D.Editor.Tools
         private readonly IServiceProvider _serviceProvider;
         private ToolSettingsPoint _settings;
         private State _currentState = State.Point;
-        private IPointShape _point;
+        private PointShape _point;
 
         /// <inheritdoc/>
         public string Title => "Point";
@@ -50,7 +50,7 @@ namespace Core2D.Editor.Tools
         public void LeftDown(InputArgs args)
         {
             var factory = _serviceProvider.GetService<IFactory>();
-            var editor = _serviceProvider.GetService<IProjectEditor>();
+            var editor = _serviceProvider.GetService<ProjectEditor>();
             (decimal sx, decimal sy) = editor.TryToSnap(args);
             switch (_currentState)
             {
@@ -92,7 +92,7 @@ namespace Core2D.Editor.Tools
         /// <inheritdoc/>
         public void Move(InputArgs args)
         {
-            var editor = _serviceProvider.GetService<IProjectEditor>();
+            var editor = _serviceProvider.GetService<ProjectEditor>();
             (decimal sx, decimal sy) = editor.TryToSnap(args);
             switch (_currentState)
             {
@@ -108,12 +108,12 @@ namespace Core2D.Editor.Tools
         }
 
         /// <inheritdoc/>
-        public void Move(IBaseShape shape)
+        public void Move(BaseShape shape)
         {
         }
 
         /// <inheritdoc/>
-        public void Finalize(IBaseShape shape)
+        public void Finalize(BaseShape shape)
         {
         }
 

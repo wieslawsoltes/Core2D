@@ -56,7 +56,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Core2D.UI\Core2D.UI.csproj" />
+    <ProjectReference Include="..\Core2D\Core2D.csproj" />
   </ItemGroup>
 
 </Project>

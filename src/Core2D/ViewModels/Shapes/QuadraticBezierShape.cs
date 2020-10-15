@@ -8,31 +8,31 @@ namespace Core2D.Shapes
     /// <summary>
     /// Quadratic bezier shape.
     /// </summary>
-    public class QuadraticBezierShape : BaseShape, IQuadraticBezierShape
+    public class QuadraticBezierShape : BaseShape
     {
-        private IPointShape _point1;
-        private IPointShape _point2;
-        private IPointShape _point3;
+        private PointShape _point1;
+        private PointShape _point2;
+        private PointShape _point3;
 
         /// <inheritdoc/>
-        public override Type TargetType => typeof(IQuadraticBezierShape);
+        public override Type TargetType => typeof(QuadraticBezierShape);
 
         /// <inheritdoc/>
-        public IPointShape Point1
+        public PointShape Point1
         {
             get => _point1;
             set => Update(ref _point1, value);
         }
 
         /// <inheritdoc/>
-        public IPointShape Point2
+        public PointShape Point2
         {
             get => _point2;
             set => Update(ref _point2, value);
         }
 
         /// <inheritdoc/>
-        public IPointShape Point3
+        public PointShape Point3
         {
             get => _point3;
             set => Update(ref _point3, value);
@@ -79,7 +79,7 @@ namespace Core2D.Shapes
         }
 
         /// <inheritdoc/>
-        public override void Bind(IDataFlow dataFlow, object db, object r)
+        public override void Bind(DataFlow dataFlow, object db, object r)
         {
             var record = Data?.Record ?? r;
 
@@ -128,7 +128,7 @@ namespace Core2D.Shapes
         }
 
         /// <inheritdoc/>
-        public override void GetPoints(IList<IPointShape> points)
+        public override void GetPoints(IList<PointShape> points)
         {
             points.Add(Point1);
             points.Add(Point2);

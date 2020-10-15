@@ -13,7 +13,7 @@ namespace Core2D.Style
         public void Inherits_From_ObservableObject()
         {
             var target = _factory.CreateLineFixedLength();
-            Assert.True(target is IObservableObject);
+            Assert.True(target is ObservableObject);
         }
 
         [Fact]
@@ -36,13 +36,13 @@ namespace Core2D.Style
 
             var propertyNames = new string[]
             {
-                nameof(ILineFixedLength.Flags),
-                nameof(ILineFixedLength.Disabled),
-                nameof(ILineFixedLength.Start),
-                nameof(ILineFixedLength.End),
-                nameof(ILineFixedLength.Vertical),
-                nameof(ILineFixedLength.Horizontal),
-                nameof(ILineFixedLength.All)
+                nameof(LineFixedLength.Flags),
+                nameof(LineFixedLength.Disabled),
+                nameof(LineFixedLength.Start),
+                nameof(LineFixedLength.End),
+                nameof(LineFixedLength.Vertical),
+                nameof(LineFixedLength.Horizontal),
+                nameof(LineFixedLength.All)
             };
 
             Assert.Equal(propertyNames, target.PropertyNames);

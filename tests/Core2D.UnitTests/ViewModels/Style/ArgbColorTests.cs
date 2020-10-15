@@ -12,7 +12,7 @@ namespace Core2D.Style.UnitTests
         public void Inherits_From_ObservableObject()
         {
             var target = _factory.CreateArgbColor();
-            Assert.True(target is IObservableObject);
+            Assert.True(target is ObservableObject);
         }
 
         [Fact]

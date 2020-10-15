@@ -114,19 +114,19 @@ namespace Core2D.Editor
         /// Import database.
         /// </summary>
         /// <param name="project">The target project.</param>
-        void OnImportData(IProjectContainer project);
+        void OnImportData(ProjectContainer project);
 
         /// <summary>
         /// Export database.
         /// </summary>
         /// <param name="db">The database to export.</param>
-        void OnExportData(IDatabase db);
+        void OnExportData(Database db);
 
         /// <summary>
         /// Update database.
         /// </summary>
         /// <param name="db">The database to update.</param>
-        void OnUpdateData(IDatabase db);
+        void OnUpdateData(Database db);
 
         /// <summary>
         /// Show about dialog.

@@ -6,7 +6,7 @@ namespace Core2D.Style
     /// <summary>
     /// Specifies style flags proxy information applied to text.
     /// </summary>
-    public class FontStyle : ObservableObject, IFontStyle
+    public class FontStyle : ObservableObject
     {
         private FontStyleFlags _flags;
 
@@ -76,7 +76,7 @@ namespace Core2D.Style
         /// </summary>
         /// <param name="s">The font style string.</param>
         /// <returns>The <see cref="FontStyle"/>.</returns>
-        public static IFontStyle Parse(string s)
+        public static FontStyle Parse(string s)
         {
             var flags = (FontStyleFlags)Enum.Parse(typeof(FontStyleFlags), s, true);
             return new FontStyle()

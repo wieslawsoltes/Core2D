@@ -7,25 +7,25 @@ namespace Core2D.Path
     /// <summary>
     /// Path geometry context.
     /// </summary>
-    public class PathGeometryContext : IGeometryContext
+    public class GeometryContext
     {
         private readonly IFactory _factory;
-        private IPathGeometry _geometry;
-        private IPathFigure _currentFigure;
+        private readonly PathGeometry _geometry;
+        private PathFigure _currentFigure;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="PathGeometryContext"/> class.
+        /// Initializes a new instance of the <see cref="GeometryContext"/> class.
         /// </summary>
         /// <param name="factory">The factory instance.</param>
         /// <param name="geometry">The path geometry.</param>
-        public PathGeometryContext(IFactory factory, IPathGeometry geometry)
+        public GeometryContext(IFactory factory, PathGeometry geometry)
         {
             _factory = factory;
             _geometry = geometry ?? throw new ArgumentNullException(nameof(geometry));
         }
 
         /// <inheritdoc/>
-        public void BeginFigure(IPointShape startPoint, bool isClosed = true)
+        public void BeginFigure(PointShape startPoint, bool isClosed = true)
         {
             _currentFigure = _factory.CreatePathFigure(startPoint, isClosed);
             _geometry.Figures = _geometry.Figures.Add(_currentFigure);
@@ -38,7 +38,7 @@ namespace Core2D.Path
         }
 
         /// <inheritdoc/>
-        public void LineTo(IPointShape point, bool isStroked = true)
+        public void LineTo(PointShape point, bool isStroked = true)
         {
             var segment = _factory.CreateLineSegment(
                 point,
@@ -47,7 +47,7 @@ namespace Core2D.Path
         }
 
         /// <inheritdoc/>
-        public void ArcTo(IPointShape point, IPathSize size, double rotationAngle = 0.0, bool isLargeArc = false, SweepDirection sweepDirection = SweepDirection.Clockwise, bool isStroked = true)
+        public void ArcTo(PointShape point, PathSize size, double rotationAngle = 0.0, bool isLargeArc = false, SweepDirection sweepDirection = SweepDirection.Clockwise, bool isStroked = true)
         {
             var segment = _factory.CreateArcSegment(
                 point,
@@ -60,7 +60,7 @@ namespace Core2D.Path
         }
 
         /// <inheritdoc/>
-        public void CubicBezierTo(IPointShape point1, IPointShape point2, IPointShape point3, bool isStroked = true)
+        public void CubicBezierTo(PointShape point1, PointShape point2, PointShape point3, bool isStroked = true)
         {
             var segment = _factory.CreateCubicBezierSegment(
                 point1,
@@ -71,7 +71,7 @@ namespace Core2D.Path
         }
 
         /// <inheritdoc/>
-        public void QuadraticBezierTo(IPointShape point1, IPointShape point2, bool isStroked = true)
+        public void QuadraticBezierTo(PointShape point1, PointShape point2, bool isStroked = true)
         {
             var segment = _factory.CreateQuadraticBezierSegment(
                 point1,

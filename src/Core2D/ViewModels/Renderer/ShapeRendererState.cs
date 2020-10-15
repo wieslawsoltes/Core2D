@@ -8,22 +8,22 @@ namespace Core2D.Renderer
     /// <summary>
     /// Shape renderer state.
     /// </summary>
-    public class ShapeRendererState : ObservableObject, IShapeRendererState
+    public class ShapeRendererState : ObservableObject
     {
         private double _panX;
         private double _panY;
         private double _zoomX;
         private double _zoomY;
-        private IShapeState _drawShapeState;
-        private ISet<IBaseShape> _selectedShapes;
+        private ShapeState _drawShapeState;
+        private ISet<BaseShape> _selectedShapes;
         private IImageCache _imageCache;
         private bool _drawDecorators;
         private bool _drawPoints;
-        private IShapeStyle _pointStyle;
-        private IShapeStyle _selectedPointStyle;
+        private ShapeStyle _pointStyle;
+        private ShapeStyle _selectedPointStyle;
         private double _pointSize;
-        private IShapeStyle _selectionStyle;
-        private IShapeStyle _helperStyle;
+        private ShapeStyle _selectionStyle;
+        private ShapeStyle _helperStyle;
         private IDecorator _decorator;
 
         /// <inheritdoc/>
@@ -55,14 +55,14 @@ namespace Core2D.Renderer
         }
 
         /// <inheritdoc/>
-        public IShapeState DrawShapeState
+        public ShapeState DrawShapeState
         {
             get => _drawShapeState;
             set => Update(ref _drawShapeState, value);
         }
 
         /// <inheritdoc/>
-        public ISet<IBaseShape> SelectedShapes
+        public ISet<BaseShape> SelectedShapes
         {
             get => _selectedShapes;
             set => Update(ref _selectedShapes, value);
@@ -90,14 +90,14 @@ namespace Core2D.Renderer
         }
 
         /// <inheritdoc/>
-        public IShapeStyle PointStyle
+        public ShapeStyle PointStyle
         {
             get => _pointStyle;
             set => Update(ref _pointStyle, value);
         }
 
         /// <inheritdoc/>
-        public IShapeStyle SelectedPointStyle
+        public ShapeStyle SelectedPointStyle
         {
             get => _selectedPointStyle;
             set => Update(ref _selectedPointStyle, value);
@@ -111,14 +111,14 @@ namespace Core2D.Renderer
         }
 
         /// <inheritdoc/>
-        public IShapeStyle SelectionStyle
+        public ShapeStyle SelectionStyle
         {
             get => _selectionStyle;
             set => Update(ref _selectionStyle, value);
         }
 
         /// <inheritdoc/>
-        public IShapeStyle HelperStyle
+        public ShapeStyle HelperStyle
         {
             get => _helperStyle;
             set => Update(ref _helperStyle, value);
@@ -136,7 +136,7 @@ namespace Core2D.Renderer
         {
             throw new NotImplementedException();
         }
-        
+
         /// <inheritdoc/>
         public override bool IsDirty()
         {

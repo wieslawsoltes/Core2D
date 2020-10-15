@@ -14,7 +14,7 @@ namespace Core2D.UnitTests
         public void Inherits_From_Selectable()
         {
             var target = _factory.CreateProjectContainer();
-            Assert.True(target is IObservableObject);
+            Assert.True(target is ObservableObject);
         }
 
         [Fact]
@@ -153,7 +153,7 @@ namespace Core2D.UnitTests
         {
             var target = _factory.CreateProjectContainer();
 
-            var library = _factory.CreateLibrary<IGroupShape>("Library1");
+            var library = _factory.CreateLibrary<GroupShape>("Library1");
             target.GroupLibraries = target.GroupLibraries.Add(library);
 
             target.SetCurrentGroupLibrary(library);
@@ -167,7 +167,7 @@ namespace Core2D.UnitTests
         {
             var target = _factory.CreateProjectContainer();
 
-            var library = _factory.CreateLibrary<IShapeStyle>("Library1");
+            var library = _factory.CreateLibrary<ShapeStyle>("Library1");
             target.StyleLibraries = target.StyleLibraries.Add(library);
 
             target.SetCurrentStyleLibrary(library);

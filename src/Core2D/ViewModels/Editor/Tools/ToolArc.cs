@@ -20,7 +20,7 @@ namespace Core2D.Editor.Tools
         private readonly IServiceProvider _serviceProvider;
         private ToolSettingsArc _settings;
         private State _currentState = State.Point1;
-        private IArcShape _arc;
+        private ArcShape _arc;
         private bool _connectedPoint3;
         private bool _connectedPoint4;
         private ToolArcSelection _selection;
@@ -57,7 +57,7 @@ namespace Core2D.Editor.Tools
         public void LeftDown(InputArgs args)
         {
             var factory = _serviceProvider.GetService<IFactory>();
-            var editor = _serviceProvider.GetService<IProjectEditor>();
+            var editor = _serviceProvider.GetService<ProjectEditor>();
             (decimal sx, decimal sy) = editor.TryToSnap(args);
             switch (_currentState)
             {
@@ -70,7 +70,7 @@ namespace Core2D.Editor.Tools
                         _connectedPoint4 = false;
                         _arc = factory.CreateArcShape(
                             (double)sx, (double)sy,
-                            (IShapeStyle)style.Copy(null),
+                            (ShapeStyle)style.Copy(null),
                             editor.Project.Options.DefaultIsStroked,
                             editor.Project.Options.DefaultIsFilled);
 
@@ -194,7 +194,7 @@ namespace Core2D.Editor.Tools
         /// <inheritdoc/>
         public void Move(InputArgs args)
         {
-            var editor = _serviceProvider.GetService<IProjectEditor>();
+            var editor = _serviceProvider.GetService<ProjectEditor>();
             (decimal sx, decimal sy) = editor.TryToSnap(args);
             switch (_currentState)
             {
@@ -259,7 +259,7 @@ namespace Core2D.Editor.Tools
         /// </summary>
         public void ToStatePoint2()
         {
-            var editor = _serviceProvider.GetService<IProjectEditor>();
+            var editor = _serviceProvider.GetService<ProjectEditor>();
             _selection = new ToolArcSelection(
                 _serviceProvider,
                 editor.Project.CurrentContainer.HelperLayer,
@@ -286,15 +286,15 @@ namespace Core2D.Editor.Tools
         }
 
         /// <inheritdoc/>
-        public void Move(IBaseShape shape)
+        public void Move(BaseShape shape)
         {
             _selection.Move();
         }
 
         /// <inheritdoc/>
-        public void Finalize(IBaseShape shape)
+        public void Finalize(BaseShape shape)
         {
-            var arc = shape as IArcShape;
+            var arc = shape as ArcShape;
             var a = new WpfArc(
                 Point2.FromXY(arc.Point1.X, arc.Point1.Y),
                 Point2.FromXY(arc.Point2.X, arc.Point2.Y),
@@ -317,7 +317,7 @@ namespace Core2D.Editor.Tools
         /// <inheritdoc/>
         public void Reset()
         {
-            var editor = _serviceProvider.GetService<IProjectEditor>();
+            var editor = _serviceProvider.GetService<ProjectEditor>();
 
             switch (_currentState)
             {

@@ -10,22 +10,22 @@ using Spatial.Arc;
 namespace Core2D.Editor.Tools.Selection
 {
     /// <summary>
-    /// Helper class for <see cref="IArcShape"/> shape selection.
+    /// Helper class for <see cref="ArcShape"/> shape selection.
     /// </summary>
     public class ToolArcSelection
     {
         private readonly IServiceProvider _serviceProvider;
-        private readonly ILayerContainer _layer;
-        private readonly IArcShape _arc;
-        private readonly IShapeStyle _style;
-        private ILineShape _startLine;
-        private ILineShape _endLine;
-        private IEllipseShape _ellipse;
-        private IPointShape _p1HelperPoint;
-        private IPointShape _p2HelperPoint;
-        private IPointShape _centerHelperPoint;
-        private IPointShape _startHelperPoint;
-        private IPointShape _endHelperPoint;
+        private readonly LayerContainer _layer;
+        private readonly ArcShape _arc;
+        private readonly ShapeStyle _style;
+        private LineShape _startLine;
+        private LineShape _endLine;
+        private EllipseShape _ellipse;
+        private PointShape _p1HelperPoint;
+        private PointShape _p2HelperPoint;
+        private PointShape _centerHelperPoint;
+        private PointShape _startHelperPoint;
+        private PointShape _endHelperPoint;
 
         /// <summary>
         /// Initialize new instance of <see cref="ToolArcSelection"/> class.
@@ -34,7 +34,7 @@ namespace Core2D.Editor.Tools.Selection
         /// <param name="layer">The selection shapes layer.</param>
         /// <param name="shape">The selected shape.</param>
         /// <param name="style">The selection shapes style.</param>
-        public ToolArcSelection(IServiceProvider serviceProvider, ILayerContainer layer, IArcShape shape, IShapeStyle style)
+        public ToolArcSelection(IServiceProvider serviceProvider, LayerContainer layer, ArcShape shape, ShapeStyle style)
         {
             _serviceProvider = serviceProvider;
             _layer = layer;

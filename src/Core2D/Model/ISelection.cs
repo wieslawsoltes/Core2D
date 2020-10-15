@@ -11,6 +11,6 @@ namespace Core2D
         /// <summary>
         /// Currently selected shapes.
         /// </summary>
-        ISet<IBaseShape> SelectedShapes { get; set; }
+        ISet<BaseShape> SelectedShapes { get; set; }
     }
 }

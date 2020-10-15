@@ -8,17 +8,17 @@ using Core2D.Style;
 namespace Core2D.Editor.Tools.Selection
 {
     /// <summary>
-    /// Helper class for <see cref="ITextShape"/> shape selection.
+    /// Helper class for <see cref="TextShape"/> shape selection.
     /// </summary>
     public class ToolTextSelection
     {
         private readonly IServiceProvider _serviceProvider;
-        private readonly ILayerContainer _layer;
-        private readonly ITextShape _text;
-        private readonly IShapeStyle _style;
-        private IPointShape _topLeftHelperPoint;
-        private IPointShape _bottomRightHelperPoint;
-        private IRectangleShape _helperRectangle;
+        private readonly LayerContainer _layer;
+        private readonly TextShape _text;
+        private readonly ShapeStyle _style;
+        private PointShape _topLeftHelperPoint;
+        private PointShape _bottomRightHelperPoint;
+        private RectangleShape _helperRectangle;
 
         /// <summary>
         /// Initialize new instance of <see cref="ToolTextSelection"/> class.
@@ -28,7 +28,7 @@ namespace Core2D.Editor.Tools.Selection
         /// <param name="shape">The selected shape.</param>
         /// <param name="style">The selection shapes style.</param>
         /// <param name="point">The selection point shape.</param>
-        public ToolTextSelection(IServiceProvider serviceProvider, ILayerContainer layer, ITextShape shape, IShapeStyle style)
+        public ToolTextSelection(IServiceProvider serviceProvider, LayerContainer layer, TextShape shape, ShapeStyle style)
         {
             _serviceProvider = serviceProvider;
             _layer = layer;

@@ -47,15 +47,15 @@ namespace Core2D.Layout
             return (box1.Bounds.Height > box2.Bounds.Height) ? 1 : ((box1.Bounds.Height < box2.Bounds.Height) ? -1 : 0);
         }
 
-        public readonly IBaseShape Shape;
-        public readonly List<IPointShape> Points;
+        public readonly BaseShape Shape;
+        public readonly List<PointShape> Points;
         public Box Bounds;
 
-        public ShapeBox(IBaseShape shape)
+        public ShapeBox(BaseShape shape)
         {
             Shape = shape;
 
-            Points = new List<IPointShape>();
+            Points = new List<PointShape>();
 
             Shape.GetPoints(Points);
 

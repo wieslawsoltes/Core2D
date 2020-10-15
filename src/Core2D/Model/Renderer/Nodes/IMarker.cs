@@ -4,7 +4,7 @@ namespace Core2D.Renderer
 {
     public interface IMarker
     {
-        IArrowStyle Style { get; set; }
+        ArrowStyle Style { get; set; }
         void Draw(object dc);
         void UpdateStyle();
     }

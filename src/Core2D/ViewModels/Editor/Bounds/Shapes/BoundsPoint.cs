@@ -8,11 +8,11 @@ namespace Core2D.Editor.Bounds.Shapes
 {
     public class BoundsPoint : IBounds
     {
-        public Type TargetType => typeof(IPointShape);
+        public Type TargetType => typeof(PointShape);
 
-        public IPointShape TryToGetPoint(IBaseShape shape, Point2 target, double radius, double scale, IDictionary<Type, IBounds> registered)
+        public PointShape TryToGetPoint(BaseShape shape, Point2 target, double radius, double scale, IDictionary<Type, IBounds> registered)
         {
-            if (!(shape is IPointShape point))
+            if (!(shape is PointShape point))
             {
                 throw new ArgumentNullException(nameof(shape));
             }
@@ -35,9 +35,9 @@ namespace Core2D.Editor.Bounds.Shapes
             return null;
         }
 
-        public bool Contains(IBaseShape shape, Point2 target, double radius, double scale, IDictionary<Type, IBounds> registered)
+        public bool Contains(BaseShape shape, Point2 target, double radius, double scale, IDictionary<Type, IBounds> registered)
         {
-            if (!(shape is IPointShape point))
+            if (!(shape is PointShape point))
             {
                 throw new ArgumentNullException(nameof(shape));
             }
@@ -49,12 +49,12 @@ namespace Core2D.Editor.Bounds.Shapes
             else
             {
                 return Point2.FromXY(point.X, point.Y).ExpandToRect(radius).Contains(target.X, target.Y);
-            }  
+            }
         }
 
-        public bool Overlaps(IBaseShape shape, Rect2 target, double radius, double scale, IDictionary<Type, IBounds> registered)
+        public bool Overlaps(BaseShape shape, Rect2 target, double radius, double scale, IDictionary<Type, IBounds> registered)
         {
-            if (!(shape is IPointShape point))
+            if (!(shape is PointShape point))
             {
                 throw new ArgumentNullException(nameof(shape));
             }

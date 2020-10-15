@@ -7,11 +7,11 @@ namespace Core2D.Style
     /// <summary>
     /// Line fixed length.
     /// </summary>
-    public class LineFixedLength : ObservableObject, ILineFixedLength
+    public class LineFixedLength : ObservableObject
     {
         private LineFixedLengthFlags _flags;
-        private IShapeState _startTrigger;
-        private IShapeState _endTrigger;
+        private ShapeState _startTrigger;
+        private ShapeState _endTrigger;
         private double _length;
 
         /// <inheritdoc/>
@@ -78,14 +78,14 @@ namespace Core2D.Style
         }
 
         /// <inheritdoc/>
-        public IShapeState StartTrigger
+        public ShapeState StartTrigger
         {
             get => _startTrigger;
             set => Update(ref _startTrigger, value);
         }
 
         /// <inheritdoc/>
-        public IShapeState EndTrigger
+        public ShapeState EndTrigger
         {
             get => _endTrigger;
             set => Update(ref _endTrigger, value);
@@ -104,8 +104,8 @@ namespace Core2D.Style
             return new LineFixedLength()
             {
                 Flags = this.Flags,
-                StartTrigger = (IShapeState)this.StartTrigger.Copy(shared),
-                EndTrigger = (IShapeState)this.EndTrigger.Copy(shared)
+                StartTrigger = (ShapeState)this.StartTrigger.Copy(shared),
+                EndTrigger = (ShapeState)this.EndTrigger.Copy(shared)
             };
         }
 
@@ -133,7 +133,7 @@ namespace Core2D.Style
         /// </summary>
         /// <param name="s">The line fixed length string.</param>
         /// <returns>The <see cref="LineFixedLength"/>.</returns>
-        public static ILineFixedLength Parse(string s)
+        public static LineFixedLength Parse(string s)
         {
             var flags = (LineFixedLengthFlags)Enum.Parse(typeof(LineFixedLengthFlags), s, true);
             return new LineFixedLength()

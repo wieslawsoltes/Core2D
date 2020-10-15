@@ -10,16 +10,16 @@ namespace Core2D.Path
     /// <summary>
     /// Path figure.
     /// </summary>
-    public class PathFigure : ObservableObject, IPathFigure
+    public class PathFigure : ObservableObject
     {
-        private IPointShape _startPoint;
-        private ImmutableArray<IPathSegment> _segments;
+        private PointShape _startPoint;
+        private ImmutableArray<PathSegment> _segments;
         private bool _isClosed;
 
         /// <summary>
         /// Gets or sets start point.
         /// </summary>
-        public IPointShape StartPoint
+        public PointShape StartPoint
         {
             get => _startPoint;
             set => Update(ref _startPoint, value);
@@ -28,7 +28,7 @@ namespace Core2D.Path
         /// <summary>
         /// Gets or sets segments collection.
         /// </summary>
-        public ImmutableArray<IPathSegment> Segments
+        public ImmutableArray<PathSegment> Segments
         {
             get => _segments;
             set => Update(ref _segments, value);
@@ -44,7 +44,7 @@ namespace Core2D.Path
         }
 
         /// <inheritdoc/>
-        public void GetPoints(IList<IPointShape> points)
+        public void GetPoints(IList<PointShape> points)
         {
             points.Add(StartPoint);
 
@@ -88,7 +88,7 @@ namespace Core2D.Path
             }
         }
 
-        public string ToXamlString(ImmutableArray<IPathSegment> segments)
+        public string ToXamlString(ImmutableArray<PathSegment> segments)
         {
             if (segments.Length == 0)
             {
@@ -102,7 +102,7 @@ namespace Core2D.Path
             return sb.ToString();
         }
 
-        public string ToSvgString(ImmutableArray<IPathSegment> segments)
+        public string ToSvgString(ImmutableArray<PathSegment> segments)
         {
             if (segments.Length == 0)
             {
@@ -131,7 +131,7 @@ namespace Core2D.Path
             return
                 (StartPoint != null ? "M" + StartPoint.ToSvgString() : "")
                 + (Segments != null ? ToSvgString(Segments) : "")
-                + (IsClosed? "z" : "");
+                + (IsClosed ? "z" : "");
         }
 
         /// <summary>

@@ -13,7 +13,7 @@ namespace Core2D.Data.UnitTests
         {
             var db = _factory.CreateDatabase("db");
             var target = _factory.CreateRecord(db, "<empty>");
-            Assert.True(target is IObservableObject);
+            Assert.True(target is ObservableObject);
         }
 
         [Fact]

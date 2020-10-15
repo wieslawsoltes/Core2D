@@ -6,7 +6,7 @@ namespace Core2D.Editor.Tools.Path.Settings
     /// <summary>
     /// Quadratic bezier path tool settings.
     /// </summary>
-    public class PathToolSettingsQuadraticBezier : ObservableObject, ISettings
+    public class PathToolSettingsQuadraticBezier : ObservableObject
     {
         /// <inheritdoc/>
         public override object Copy(IDictionary<object, object> shared)

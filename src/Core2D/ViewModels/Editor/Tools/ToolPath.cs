@@ -34,22 +34,22 @@ namespace Core2D.Editor.Tools
         /// <summary>
         /// Gets or sets current path.
         /// </summary>
-        internal IPathShape Path { get; set; }
+        internal PathShape Path { get; set; }
 
         /// <summary>
         /// Gets or sets current geometry.
         /// </summary>
-        internal IPathGeometry Geometry { get; set; }
+        internal PathGeometry Geometry { get; set; }
 
         /// <summary>
         /// Gets or sets current geometry context.
         /// </summary>
-        internal IGeometryContext GeometryContext { get; set; }
+        internal GeometryContext GeometryContext { get; set; }
 
         /// <summary>
         /// Gets or sets previous path tool.
         /// </summary>
-        internal IPathTool PreviousPathTool { get; set; }
+        internal PathTool PreviousPathTool { get; set; }
 
         /// <inheritdoc/>
         public string Title => "Path";
@@ -127,7 +127,7 @@ namespace Core2D.Editor.Tools
                 _pathToolQuadraticBezier.Reset();
             }
 
-            var editor = _serviceProvider.GetService<IProjectEditor>();
+            var editor = _serviceProvider.GetService<ProjectEditor>();
             editor.Project.CurrentContainer.WorkingLayer.InvalidateLayer();
             editor.Project.CurrentContainer.HelperLayer.InvalidateLayer();
         }
@@ -136,7 +136,7 @@ namespace Core2D.Editor.Tools
         /// Gets last point in the current path.
         /// </summary>
         /// <returns>The last path point.</returns>
-        public IPointShape GetLastPathPoint()
+        public PointShape GetLastPathPoint()
         {
             var figure = Geometry.Figures.LastOrDefault();
             if (figure != null)
@@ -157,13 +157,13 @@ namespace Core2D.Editor.Tools
         /// Initializes working path.
         /// </summary>
         /// <param name="start">The path start point.</param>
-        public void InitializeWorkingPath(IPointShape start)
+        public void InitializeWorkingPath(PointShape start)
         {
             var factory = _serviceProvider.GetService<IFactory>();
-            var editor = _serviceProvider.GetService<IProjectEditor>();
+            var editor = _serviceProvider.GetService<ProjectEditor>();
 
             Geometry = factory.CreatePathGeometry(
-                ImmutableArray.Create<IPathFigure>(),
+                ImmutableArray.Create<PathFigure>(),
                 editor.Project.Options.DefaultFillRule);
 
             GeometryContext = factory.CreateGeometryContext(Geometry);
@@ -177,7 +177,7 @@ namespace Core2D.Editor.Tools
                 editor.Factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
             Path = factory.CreatePathShape(
                 "Path",
-                (IShapeStyle)style.Copy(null),
+                (ShapeStyle)style.Copy(null),
                 Geometry,
                 editor.Project.Options.DefaultIsStroked,
                 editor.Project.Options.DefaultIsFilled);
@@ -202,52 +202,52 @@ namespace Core2D.Editor.Tools
         /// <inheritdoc/>
         public void LeftDown(InputArgs args)
         {
-            _serviceProvider.GetService<IProjectEditor>().CurrentPathTool?.LeftDown(args);
+            _serviceProvider.GetService<ProjectEditor>().CurrentPathTool?.LeftDown(args);
         }
 
         /// <inheritdoc/>
         public void LeftUp(InputArgs args)
         {
-            _serviceProvider.GetService<IProjectEditor>().CurrentPathTool?.LeftUp(args);
+            _serviceProvider.GetService<ProjectEditor>().CurrentPathTool?.LeftUp(args);
         }
 
         /// <inheritdoc/>
         public void RightDown(InputArgs args)
         {
-            _serviceProvider.GetService<IProjectEditor>().CurrentPathTool?.RightDown(args);
+            _serviceProvider.GetService<ProjectEditor>().CurrentPathTool?.RightDown(args);
             Reset();
         }
 
         /// <inheritdoc/>
         public void RightUp(InputArgs args)
         {
-            _serviceProvider.GetService<IProjectEditor>().CurrentPathTool?.RightUp(args);
+            _serviceProvider.GetService<ProjectEditor>().CurrentPathTool?.RightUp(args);
         }
 
         /// <inheritdoc/>
         public void Move(InputArgs args)
         {
-            _serviceProvider.GetService<IProjectEditor>().CurrentPathTool?.Move(args);
+            _serviceProvider.GetService<ProjectEditor>().CurrentPathTool?.Move(args);
         }
 
         /// <inheritdoc/>
-        public void Move(IBaseShape shape)
+        public void Move(BaseShape shape)
         {
-            _serviceProvider.GetService<IProjectEditor>().CurrentPathTool?.Move(shape);
+            _serviceProvider.GetService<ProjectEditor>().CurrentPathTool?.Move(shape);
         }
 
         /// <inheritdoc/>
-        public void Finalize(IBaseShape shape)
+        public void Finalize(BaseShape shape)
         {
-            _serviceProvider.GetService<IProjectEditor>().CurrentPathTool?.Finalize(shape);
+            _serviceProvider.GetService<ProjectEditor>().CurrentPathTool?.Finalize(shape);
         }
 
         /// <inheritdoc/>
         public void Reset()
         {
-            _serviceProvider.GetService<IProjectEditor>().CurrentPathTool?.Reset();
+            _serviceProvider.GetService<ProjectEditor>().CurrentPathTool?.Reset();
 
-            var editor = _serviceProvider.GetService<IProjectEditor>();
+            var editor = _serviceProvider.GetService<ProjectEditor>();
 
             if (Path?.Geometry != null)
             {

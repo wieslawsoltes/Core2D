@@ -13,13 +13,13 @@ namespace Core2D.Bindings
     internal static class TextBinding
     {
         /// <summary>
-        /// Try binding data record to <see cref="ITextShape.Text"/> shape property containing column name.
+        /// Try binding data record to <see cref="TextShape.Text"/> shape property containing column name.
         /// </summary>
         /// <param name="record">The external data record used for binding.</param>
         /// <param name="columnName">The column name.</param>
         /// <param name="value">The output string bound to data record.</param>
         /// <returns>True if binding was successful.</returns>
-        public static bool GetBindingValue(IRecord record, string columnName, out string value)
+        public static bool GetBindingValue(Record record, string columnName, out string value)
         {
             if (string.IsNullOrEmpty(columnName) || record == null)
             {
@@ -27,7 +27,7 @@ namespace Core2D.Bindings
                 return false;
             }
 
-            var db = record.Owner as IDatabase;
+            var db = record.Owner as Database;
             var columns = db.Columns;
             var values = record.Values;
             if (columns == null || values == null || columns.Length != values.Length)
@@ -50,13 +50,13 @@ namespace Core2D.Bindings
         }
 
         /// <summary>
-        /// Try binding properties array to one of <see cref="ITextShape"/> shape properties.
+        /// Try binding properties array to one of <see cref="TextShape"/> shape properties.
         /// </summary>
         /// <param name="properties">The properties database used for binding.</param>
         /// <param name="propertyName">The target property name.</param>
         /// <param name="value">The string bound to properties.</param>
         /// <returns>True if binding was successful.</returns>
-        public static bool GetBindingValue(ImmutableArray<IProperty> properties, string propertyName, out string value)
+        public static bool GetBindingValue(ImmutableArray<Property> properties, string propertyName, out string value)
         {
             if (string.IsNullOrEmpty(propertyName) || properties == null)
             {
@@ -76,13 +76,13 @@ namespace Core2D.Bindings
         }
 
         /// <summary>
-        /// Bind properties or data record to <see cref="ITextShape.Text"/> property.
+        /// Bind properties or data record to <see cref="TextShape.Text"/> property.
         /// </summary>
         /// <param name="shape">The text shape instance.</param>
         /// <param name="properties">The properties database used for binding.</param>
         /// <param name="externalRecord">The external data record used for binding.</param>
         /// <returns>The string bound to properties or data record.</returns>
-        public static string Bind(ITextShape shape, ImmutableArray<IProperty> properties, IRecord externalRecord)
+        public static string Bind(TextShape shape, ImmutableArray<Property> properties, Record externalRecord)
         {
             var text = shape.Text;
             var data = shape.Data;

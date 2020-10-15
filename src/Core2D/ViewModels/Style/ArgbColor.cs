@@ -9,7 +9,7 @@ namespace Core2D.Style
     /// <summary>
     /// Color definition using alpha, red, green and blue channels.
     /// </summary>
-    public class ArgbColor : ObservableObject, IArgbColor
+    public class ArgbColor : BaseColor
     {
         private byte _a;
         private byte _r;
@@ -82,7 +82,7 @@ namespace Core2D.Style
         /// </summary>
         /// <param name="value">The integer value.</param>
         /// <returns>The color.</returns>
-        public static IArgbColor FromUInt32(uint value)
+        public static ArgbColor FromUInt32(uint value)
         {
             return new ArgbColor
             {
@@ -98,7 +98,7 @@ namespace Core2D.Style
         /// </summary>
         /// <param name="s">The color string.</param>
         /// <returns>The new instance of the <see cref="ArgbColor"/> class.</returns>
-        public static IArgbColor Parse(string s)
+        public static ArgbColor Parse(string s)
         {
             if (s[0] == '#')
             {
@@ -135,7 +135,7 @@ namespace Core2D.Style
         /// </summary>
         /// <param name="c">The color instance.</param>
         /// <returns>The color string.</returns>
-        public static string ToXamlHex(IArgbColor c)
+        public static string ToXamlHex(ArgbColor c)
         {
             return string.Concat('#', c.A.ToString("X2"), c.R.ToString("X2"), c.G.ToString("X2"), c.B.ToString("X2"));
         }
@@ -145,7 +145,7 @@ namespace Core2D.Style
         /// </summary>
         /// <param name="c">The color instance.</param>
         /// <returns>The color string.</returns>
-        public static string ToSvgHex(IArgbColor c)
+        public static string ToSvgHex(ArgbColor c)
         {
             return string.Concat('#', c.R.ToString("X2"), c.G.ToString("X2"), c.B.ToString("X2")); // NOTE: Not using c.A.ToString("X2")
         }

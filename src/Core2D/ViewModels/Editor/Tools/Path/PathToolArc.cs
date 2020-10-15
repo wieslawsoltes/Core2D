@@ -15,7 +15,7 @@ namespace Core2D.Editor.Tools.Path
     /// <summary>
     /// Arc path tool.
     /// </summary>
-    public class PathToolArc : ObservableObject, IPathTool
+    public class PathToolArc : ObservableObject, PathTool
     {
         public enum State { Start, End }
         private readonly IServiceProvider _serviceProvider;
@@ -59,7 +59,7 @@ namespace Core2D.Editor.Tools.Path
         public void LeftDown(InputArgs args)
         {
             var factory = _serviceProvider.GetService<IFactory>();
-            var editor = _serviceProvider.GetService<IProjectEditor>();
+            var editor = _serviceProvider.GetService<ProjectEditor>();
             var pathTool = _serviceProvider.GetService<ToolPath>();
             (decimal sx, decimal sy) = editor.TryToSnap(args);
             switch (_currentState)
@@ -151,7 +151,7 @@ namespace Core2D.Editor.Tools.Path
         /// <inheritdoc/>
         public void Move(InputArgs args)
         {
-            var editor = _serviceProvider.GetService<IProjectEditor>();
+            var editor = _serviceProvider.GetService<ProjectEditor>();
             var pathTool = _serviceProvider.GetService<ToolPath>();
             (decimal sx, decimal sy) = editor.TryToSnap(args);
             switch (_currentState)
@@ -189,7 +189,7 @@ namespace Core2D.Editor.Tools.Path
         /// </summary>
         public void ToStateEnd()
         {
-            var editor = _serviceProvider.GetService<IProjectEditor>();
+            var editor = _serviceProvider.GetService<ProjectEditor>();
             _selection?.Reset();
             _selection = new ToolLineSelection(
                 _serviceProvider,
@@ -201,7 +201,7 @@ namespace Core2D.Editor.Tools.Path
         }
 
         /// <inheritdoc/>
-        public void Move(IBaseShape shape)
+        public void Move(BaseShape shape)
         {
             if (_selection != null)
             {
@@ -210,14 +210,14 @@ namespace Core2D.Editor.Tools.Path
         }
 
         /// <inheritdoc/>
-        public void Finalize(IBaseShape shape)
+        public void Finalize(BaseShape shape)
         {
         }
 
         /// <inheritdoc/>
         public void Reset()
         {
-            var editor = _serviceProvider.GetService<IProjectEditor>();
+            var editor = _serviceProvider.GetService<ProjectEditor>();
             var pathTool = _serviceProvider.GetService<ToolPath>();
 
             switch (_currentState)

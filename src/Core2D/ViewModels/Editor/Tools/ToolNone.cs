@@ -68,12 +68,12 @@ namespace Core2D.Editor.Tools
         }
 
         /// <inheritdoc/>
-        public void Move(IBaseShape shape)
+        public void Move(BaseShape shape)
         {
         }
 
         /// <inheritdoc/>
-        public void Finalize(IBaseShape shape)
+        public void Finalize(BaseShape shape)
         {
         }
 

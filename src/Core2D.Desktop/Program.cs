@@ -65,10 +65,10 @@ namespace Core2D
             return mainWindow?.Content as MainControl;
         }
 
-        public static IProjectEditor? GetEditor()
+        public static ProjectEditor? GetEditor()
         {
             var mainWidnow = GetMainwWindow();
-            return mainWidnow?.DataContext as IProjectEditor;
+            return mainWidnow?.DataContext as ProjectEditor;
         }
 
         public static async Task Screenshot(string path = "screenshot.png", double width = 1366, double height = 690)
@@ -170,7 +170,7 @@ namespace Core2D
                 var mainWindow = applicationLifetime?.MainWindow;
                 var headlessWindow = mainWindow?.PlatformImpl as IHeadlessWindow;
                 var mainConntrol = mainWindow?.Content as MainControl;
-                var editor = mainConntrol?.DataContext as IProjectEditor;
+                var editor = mainConntrol?.DataContext as ProjectEditor;
 
                 var pt = new Point(-1, -1);
                 headlessWindow?.MouseMove(pt);
@@ -207,7 +207,7 @@ namespace Core2D
                 var applicationLifetime = (IClassicDesktopStyleApplicationLifetime)Application.Current.ApplicationLifetime;
                 var mainWindow = applicationLifetime?.MainWindow;
                 var mainConntrol = mainWindow?.Content as MainControl;
-                var editor = mainConntrol?.DataContext as IProjectEditor;
+                var editor = mainConntrol?.DataContext as ProjectEditor;
 
                 if (mainConntrol != null)
                 {

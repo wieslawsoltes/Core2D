@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using Core2D.Data;
+using Core2D.Renderer;
 using Core2D.Shapes;
 using Core2D.Style;
 
@@ -10,18 +11,18 @@ namespace Core2D.Containers
     /// <summary>
     /// Page container.
     /// </summary>
-    public class PageContainer : ObservableObject, IPageContainer
+    public class PageContainer : ObservableObject, IGrid
     {
         private double _width;
         private double _height;
-        private IColor _background;
-        private ImmutableArray<ILayerContainer> _layers;
-        private ILayerContainer _currentLayer;
-        private ILayerContainer _workingLayer;
-        private ILayerContainer _helperLayer;
-        private IBaseShape _currentShape;
-        private IPageContainer _template;
-        private IContext _data;
+        private BaseColor _background;
+        private ImmutableArray<LayerContainer> _layers;
+        private LayerContainer _currentLayer;
+        private LayerContainer _workingLayer;
+        private LayerContainer _helperLayer;
+        private BaseShape _currentShape;
+        private PageContainer _template;
+        private Context _data;
         private bool _isExpanded = false;
         private bool _isGridEnabled;
         private bool _isBorderEnabled;
@@ -31,7 +32,7 @@ namespace Core2D.Containers
         private double _gridOffsetBottom;
         private double _gridCellWidth;
         private double _gridCellHeight;
-        private IColor _gridStrokeColor;
+        private BaseColor _gridStrokeColor;
         private double _gridStrokeThickness;
 
         /// <inheritdoc/>
@@ -71,7 +72,7 @@ namespace Core2D.Containers
         }
 
         /// <inheritdoc/>
-        public IColor Background
+        public BaseColor Background
         {
             get => _template != null ? _template.Background : _background;
             set
@@ -89,49 +90,49 @@ namespace Core2D.Containers
         }
 
         /// <inheritdoc/>
-        public ImmutableArray<ILayerContainer> Layers
+        public ImmutableArray<LayerContainer> Layers
         {
             get => _layers;
             set => Update(ref _layers, value);
         }
 
         /// <inheritdoc/>
-        public ILayerContainer CurrentLayer
+        public LayerContainer CurrentLayer
         {
             get => _currentLayer;
             set => Update(ref _currentLayer, value);
         }
 
         /// <inheritdoc/>
-        public ILayerContainer WorkingLayer
+        public LayerContainer WorkingLayer
         {
             get => _workingLayer;
             set => Update(ref _workingLayer, value);
         }
 
         /// <inheritdoc/>
-        public ILayerContainer HelperLayer
+        public LayerContainer HelperLayer
         {
             get => _helperLayer;
             set => Update(ref _helperLayer, value);
         }
 
         /// <inheritdoc/>
-        public IBaseShape CurrentShape
+        public BaseShape CurrentShape
         {
             get => _currentShape;
             set => Update(ref _currentShape, value);
         }
 
         /// <inheritdoc/>
-        public IPageContainer Template
+        public PageContainer Template
         {
             get => _template;
             set => Update(ref _template, value);
         }
 
         /// <inheritdoc/>
-        public IContext Data
+        public Context Data
         {
             get => _data;
             set => Update(ref _data, value);
@@ -289,7 +290,7 @@ namespace Core2D.Containers
         }
 
         /// <inheritdoc/>
-        public IColor GridStrokeColor
+        public BaseColor GridStrokeColor
         {
             get => _template != null ? _template.GridStrokeColor : _gridStrokeColor;
             set
@@ -325,7 +326,7 @@ namespace Core2D.Containers
         }
 
         /// <inheritdoc/>
-        public void SetCurrentLayer(ILayerContainer layer) => CurrentLayer = layer;
+        public void SetCurrentLayer(LayerContainer layer) => CurrentLayer = layer;
 
         /// <inheritdoc/>
         public virtual void InvalidateLayer()
@@ -367,7 +368,7 @@ namespace Core2D.Containers
 
             if (Background != null)
             {
-                isDirty |= Background.IsDirty(); 
+                isDirty |= Background.IsDirty();
             }
 
             foreach (var layer in Layers)
@@ -377,22 +378,22 @@ namespace Core2D.Containers
 
             if (WorkingLayer != null)
             {
-                isDirty |= WorkingLayer.IsDirty(); 
+                isDirty |= WorkingLayer.IsDirty();
             }
 
             if (HelperLayer != null)
             {
-                isDirty |= HelperLayer.IsDirty(); 
+                isDirty |= HelperLayer.IsDirty();
             }
 
             if (Template != null)
             {
-                isDirty |= Template.IsDirty(); 
+                isDirty |= Template.IsDirty();
             }
 
             if (Data != null)
             {
-                isDirty |= Data.IsDirty(); 
+                isDirty |= Data.IsDirty();
             }
 
             if (GridStrokeColor != null)

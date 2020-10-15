@@ -10,19 +10,19 @@ namespace Core2D.Shapes
     /// <summary>
     /// Group shape.
     /// </summary>
-    public class GroupShape : ConnectableShape, IGroupShape
+    public class GroupShape : ConnectableShape
     {
-        private ImmutableArray<IProperty> _shapesProperties;
-        private ImmutableArray<IBaseShape> _shapes;
+        private ImmutableArray<Property> _shapesProperties;
+        private ImmutableArray<BaseShape> _shapes;
 
         /// <inheritdoc/>
-        public override Type TargetType => typeof(IGroupShape);
+        public override Type TargetType => typeof(GroupShape);
 
         /// <inheritdoc/>
-        public ImmutableArray<IProperty> ShapesProperties => GetShapeProperties();
+        public ImmutableArray<Property> ShapesProperties => GetShapeProperties();
 
         /// <inheritdoc/>
-        public ImmutableArray<IBaseShape> Shapes
+        public ImmutableArray<BaseShape> Shapes
         {
             get => _shapes;
             set
@@ -34,13 +34,13 @@ namespace Core2D.Shapes
             }
         }
 
-        private ImmutableArray<IProperty> GetShapeProperties()
+        private ImmutableArray<Property> GetShapeProperties()
         {
             if (_shapesProperties == null)
             {
                 if (_shapes != null)
                 {
-                    var builder = ImmutableArray.CreateBuilder<IProperty>();
+                    var builder = ImmutableArray.CreateBuilder<Property>();
 
                     foreach (var shape in _shapes)
                     {
@@ -93,7 +93,7 @@ namespace Core2D.Shapes
         }
 
         /// <inheritdoc/>
-        public override void Bind(IDataFlow dataFlow, object db, object r)
+        public override void Bind(DataFlow dataFlow, object db, object r)
         {
             var record = Data?.Record ?? r;
 
@@ -132,7 +132,7 @@ namespace Core2D.Shapes
         }
 
         /// <inheritdoc/>
-        public override void GetPoints(IList<IPointShape> points)
+        public override void GetPoints(IList<PointShape> points)
         {
             foreach (var shape in Shapes)
             {

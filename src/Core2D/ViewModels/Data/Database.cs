@@ -6,12 +6,12 @@ namespace Core2D.Data
     /// <summary>
     /// Records database.
     /// </summary>
-    public class Database : ObservableObject, IDatabase
+    public class Database : ObservableObject
     {
         private string _idColumnName;
-        private ImmutableArray<IColumn> _columns;
-        private ImmutableArray<IRecord> _records;
-        private IRecord _currentRecord;
+        private ImmutableArray<Column> _columns;
+        private ImmutableArray<Record> _records;
+        private Record _currentRecord;
 
         /// <inheritdoc/>
         public string IdColumnName
@@ -21,21 +21,21 @@ namespace Core2D.Data
         }
 
         /// <inheritdoc/>
-        public ImmutableArray<IColumn> Columns
+        public ImmutableArray<Column> Columns
         {
             get => _columns;
             set => Update(ref _columns, value);
         }
 
         /// <inheritdoc/>
-        public ImmutableArray<IRecord> Records
+        public ImmutableArray<Record> Records
         {
             get => _records;
             set => Update(ref _records, value);
         }
 
         /// <inheritdoc/>
-        public IRecord CurrentRecord
+        public Record CurrentRecord
         {
             get => _currentRecord;
             set => Update(ref _currentRecord, value);

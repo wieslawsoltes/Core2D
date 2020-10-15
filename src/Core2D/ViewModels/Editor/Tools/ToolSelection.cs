@@ -19,13 +19,13 @@ namespace Core2D.Editor.Tools
         private readonly IServiceProvider _serviceProvider;
         private ToolSettingsSelection _settings;
         private State _currentState = State.None;
-        private IRectangleShape _rectangleShape;
+        private RectangleShape _rectangleShape;
         private decimal _startX;
         private decimal _startY;
         private decimal _historyX;
         private decimal _historyY;
-        private IEnumerable<IPointShape> _pointsCache;
-        private IEnumerable<IBaseShape> _shapesCache;
+        private IEnumerable<PointShape> _pointsCache;
+        private IEnumerable<BaseShape> _shapesCache;
 
         /// <inheritdoc/>
         public string Title => "Selection";
@@ -62,9 +62,9 @@ namespace Core2D.Editor.Tools
         /// <param name="shape">The shape object.</param>
         /// <param name="point">The point to validate.</param>
         /// <returns>True if point is valid, otherwise false.</returns>
-        private static bool IsPointMovable(IBaseShape shape, IPointShape point)
+        private static bool IsPointMovable(BaseShape shape, PointShape point)
         {
-            if (point.State.Flags.HasFlag(ShapeStateFlags.Locked) || (point.Owner is IBaseShape ower && ower.State.Flags.HasFlag(ShapeStateFlags.Locked)))
+            if (point.State.Flags.HasFlag(ShapeStateFlags.Locked) || (point.Owner is BaseShape ower && ower.State.Flags.HasFlag(ShapeStateFlags.Locked)))
             {
                 return false;
             }
@@ -82,16 +82,16 @@ namespace Core2D.Editor.Tools
         /// </summary>
         /// <param name="shapes">The shapes to scan.</param>
         /// <returns>All points in the shape.</returns>
-        private static IEnumerable<IPointShape> GetMovePoints(IEnumerable<IBaseShape> shapes)
+        private static IEnumerable<PointShape> GetMovePoints(IEnumerable<BaseShape> shapes)
         {
-            var points = new List<IPointShape>();
+            var points = new List<PointShape>();
 
             foreach (var shape in shapes)
             {
                 shape.GetPoints(points);
             }
 
-            return points.Where(p => IsPointMovable(p.Owner as IBaseShape, p)).Distinct();
+            return points.Where(p => IsPointMovable(p.Owner as BaseShape, p)).Distinct();
         }
 
         /// <summary>
@@ -99,7 +99,7 @@ namespace Core2D.Editor.Tools
         /// </summary>
         private void GenerateMoveSelectionCache()
         {
-            var editor = _serviceProvider.GetService<IProjectEditor>();
+            var editor = _serviceProvider.GetService<ProjectEditor>();
 
             if (editor.PageState.SelectedShapes != null)
             {
@@ -138,7 +138,7 @@ namespace Core2D.Editor.Tools
         /// <param name="args">The input arguments.</param>
         private void MoveSelectionCacheTo(InputArgs args)
         {
-            var editor = _serviceProvider.GetService<IProjectEditor>();
+            var editor = _serviceProvider.GetService<ProjectEditor>();
             (decimal sx, decimal sy) = editor.TryToSnap(args);
             decimal dx = sx - _startX;
             decimal dy = sy - _startY;
@@ -159,13 +159,13 @@ namespace Core2D.Editor.Tools
 
         private bool IsSelectionAvailable()
         {
-            var editor = _serviceProvider.GetService<IProjectEditor>();
+            var editor = _serviceProvider.GetService<ProjectEditor>();
             return editor?.PageState?.SelectedShapes != null;
         }
 
         private bool HitTestDecorator(InputArgs args, bool isControl, bool isHover)
         {
-            var editor = _serviceProvider.GetService<IProjectEditor>();
+            var editor = _serviceProvider.GetService<ProjectEditor>();
 
             if (isControl == false && editor.PageState.Decorator != null && editor.PageState.Decorator.IsVisible)
             {
@@ -185,7 +185,7 @@ namespace Core2D.Editor.Tools
         public void LeftDown(InputArgs args)
         {
             var factory = _serviceProvider.GetService<IFactory>();
-            var editor = _serviceProvider.GetService<IProjectEditor>();
+            var editor = _serviceProvider.GetService<ProjectEditor>();
             (double x, double y) = args;
             (decimal sx, decimal sy) = editor.TryToSnap(args);
             switch (_currentState)
@@ -213,7 +213,7 @@ namespace Core2D.Editor.Tools
                         {
                             var shapes = editor.Project.CurrentContainer.CurrentLayer.Shapes.Reverse();
                             double radius = editor.Project.Options.HitThreshold / editor.PageState.ZoomX;
-                            IBaseShape result = editor.HitTest.TryToGetPoint(shapes, new Point2(x, y), radius, editor.PageState.ZoomX);
+                            BaseShape result = editor.HitTest.TryToGetPoint(shapes, new Point2(x, y), radius, editor.PageState.ZoomX);
                             if (result == null)
                             {
                                 result = editor.HitTest.TryToGetShape(shapes, new Point2(x, y), radius, editor.PageState.ZoomX);
@@ -223,7 +223,7 @@ namespace Core2D.Editor.Tools
                             {
                                 if (editor.PageState.SelectedShapes == null)
                                 {
-                                    editor.PageState.SelectedShapes = new HashSet<IBaseShape>() { result };
+                                    editor.PageState.SelectedShapes = new HashSet<BaseShape>() { result };
                                     editor.Project.CurrentContainer.CurrentLayer.InvalidateLayer();
                                     editor.OnShowOrHideDecorator();
                                     HitTestDecorator(args, isControl, false);
@@ -233,7 +233,7 @@ namespace Core2D.Editor.Tools
                                 {
                                     if (editor.PageState.SelectedShapes.Contains(result))
                                     {
-                                        var selected = new HashSet<IBaseShape>(editor.PageState.SelectedShapes);
+                                        var selected = new HashSet<BaseShape>(editor.PageState.SelectedShapes);
                                         selected.Remove(result);
 
                                         if (selected.Count == 0)
@@ -252,7 +252,7 @@ namespace Core2D.Editor.Tools
                                     }
                                     else
                                     {
-                                        var selected = new HashSet<IBaseShape>(editor.PageState.SelectedShapes);
+                                        var selected = new HashSet<BaseShape>(editor.PageState.SelectedShapes);
                                         selected.Add(result);
 
                                         editor.PageState.SelectedShapes = selected;
@@ -276,7 +276,7 @@ namespace Core2D.Editor.Tools
                             var shapes = editor.Project.CurrentContainer.CurrentLayer.Shapes.Reverse();
 
                             double radius = editor.Project.Options.HitThreshold / editor.PageState.ZoomX;
-                            IBaseShape result = editor.HitTest.TryToGetPoint(shapes, new Point2(x, y), radius, editor.PageState.ZoomX);
+                            BaseShape result = editor.HitTest.TryToGetPoint(shapes, new Point2(x, y), radius, editor.PageState.ZoomX);
                             if (result == null)
                             {
                                 result = editor.HitTest.TryToGetShape(shapes, new Point2(x, y), radius, editor.PageState.ZoomX);
@@ -343,7 +343,7 @@ namespace Core2D.Editor.Tools
         /// <inheritdoc/>
         public void LeftUp(InputArgs args)
         {
-            var editor = _serviceProvider.GetService<IProjectEditor>();
+            var editor = _serviceProvider.GetService<ProjectEditor>();
             switch (_currentState)
             {
                 case State.None:
@@ -421,7 +421,7 @@ namespace Core2D.Editor.Tools
         /// <inheritdoc/>
         public void RightDown(InputArgs args)
         {
-            var editor = _serviceProvider.GetService<IProjectEditor>();
+            var editor = _serviceProvider.GetService<ProjectEditor>();
             switch (_currentState)
             {
                 case State.None:
@@ -447,7 +447,7 @@ namespace Core2D.Editor.Tools
         /// <inheritdoc/>
         public void Move(InputArgs args)
         {
-            var editor = _serviceProvider.GetService<IProjectEditor>();
+            var editor = _serviceProvider.GetService<ProjectEditor>();
             switch (_currentState)
             {
                 case State.None:
@@ -499,19 +499,19 @@ namespace Core2D.Editor.Tools
         }
 
         /// <inheritdoc/>
-        public void Move(IBaseShape shape)
+        public void Move(BaseShape shape)
         {
         }
 
         /// <inheritdoc/>
-        public void Finalize(IBaseShape shape)
+        public void Finalize(BaseShape shape)
         {
         }
 
         /// <inheritdoc/>
         public void Reset()
         {
-            var editor = _serviceProvider.GetService<IProjectEditor>();
+            var editor = _serviceProvider.GetService<ProjectEditor>();
 
             _currentState = State.None;
 

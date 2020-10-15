@@ -8,17 +8,17 @@ namespace Core2D.Renderer
     /// <summary>
     /// Defines decorator contract.
     /// </summary>
-    public interface IDecorator : IObservableObject, IDrawable
+    public interface IDecorator : ObservableObject, IDrawable
     {
         /// <summary>
         ///  Gets or sets decorated layer.
         /// </summary>
-        ILayerContainer Layer { get; set; }
+        LayerContainer Layer { get; set; }
 
         /// <summary>
         ///  Gets or sets decorated shapes.
         /// </summary>
-        IList<IBaseShape> Shapes { get; set; }
+        IList<BaseShape> Shapes { get; set; }
 
         /// <summary>
         /// Gets or sets flag indicating whether the decorator is visible.

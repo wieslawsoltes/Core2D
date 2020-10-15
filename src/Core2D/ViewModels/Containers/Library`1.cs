@@ -7,7 +7,7 @@ namespace Core2D.Containers
     /// <summary>
     /// Named items library.
     /// </summary>
-    public class Library<T> : ObservableObject, ILibrary<T>
+    public class Library<T> : ObservableObject
     {
         private ImmutableArray<T> _items;
         private T _selected;
@@ -42,7 +42,7 @@ namespace Core2D.Containers
 
             foreach (var item in Items)
             {
-                if (item is IObservableObject observableObject)
+                if (item is ObservableObject observableObject)
                 {
                     isDirty |= observableObject.IsDirty();
                 }
@@ -58,7 +58,7 @@ namespace Core2D.Containers
 
             foreach (var item in Items)
             {
-                if (item is IObservableObject observableObject)
+                if (item is ObservableObject observableObject)
                 {
                     observableObject.Invalidate();
                 }

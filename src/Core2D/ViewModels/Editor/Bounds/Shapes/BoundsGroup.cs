@@ -9,16 +9,16 @@ namespace Core2D.Editor.Bounds.Shapes
 {
     public class BoundsGroup : IBounds
     {
-        public Type TargetType => typeof(IGroupShape);
+        public Type TargetType => typeof(GroupShape);
 
-        public IPointShape TryToGetPoint(IBaseShape shape, Point2 target, double radius, double scale, IDictionary<Type, IBounds> registered)
+        public PointShape TryToGetPoint(BaseShape shape, Point2 target, double radius, double scale, IDictionary<Type, IBounds> registered)
         {
-            if (!(shape is IGroupShape group))
+            if (!(shape is GroupShape group))
             {
                 throw new ArgumentNullException(nameof(shape));
             }
 
-            var pointHitTest = registered[typeof(IPointShape)];
+            var pointHitTest = registered[typeof(PointShape)];
 
             foreach (var groupPoint in group.Connectors.Reverse())
             {
@@ -31,9 +31,9 @@ namespace Core2D.Editor.Bounds.Shapes
             return null;
         }
 
-        public bool Contains(IBaseShape shape, Point2 target, double radius, double scale, IDictionary<Type, IBounds> registered)
+        public bool Contains(BaseShape shape, Point2 target, double radius, double scale, IDictionary<Type, IBounds> registered)
         {
-            if (!(shape is IGroupShape group))
+            if (!(shape is GroupShape group))
             {
                 throw new ArgumentNullException(nameof(shape));
             }
@@ -52,9 +52,9 @@ namespace Core2D.Editor.Bounds.Shapes
             return false;
         }
 
-        public bool Overlaps(IBaseShape shape, Rect2 target, double radius, double scale, IDictionary<Type, IBounds> registered)
+        public bool Overlaps(BaseShape shape, Rect2 target, double radius, double scale, IDictionary<Type, IBounds> registered)
         {
-            if (!(shape is IGroupShape group))
+            if (!(shape is GroupShape group))
             {
                 throw new ArgumentNullException(nameof(shape));
             }

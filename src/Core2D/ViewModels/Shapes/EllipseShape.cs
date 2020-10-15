@@ -8,10 +8,10 @@ namespace Core2D.Shapes
     /// <summary>
     /// Ellipse shape.
     /// </summary>
-    public class EllipseShape : TextShape, IEllipseShape
+    public class EllipseShape : TextShape
     {
         /// <inheritdoc/>
-        public override Type TargetType => typeof(IEllipseShape);
+        public override Type TargetType => typeof(EllipseShape);
 
         /// <inheritdoc/>
         public override void DrawShape(object dc, IShapeRenderer renderer)
@@ -32,7 +32,7 @@ namespace Core2D.Shapes
         }
 
         /// <inheritdoc/>
-        public override void Bind(IDataFlow dataFlow, object db, object r)
+        public override void Bind(DataFlow dataFlow, object db, object r)
         {
             var record = Data?.Record ?? r;
 

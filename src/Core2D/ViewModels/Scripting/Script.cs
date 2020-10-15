@@ -8,7 +8,7 @@ namespace Core2D.Scripting
     /// <summary>
     /// Script.
     /// </summary>
-    public class Script : ObservableObject, IScript
+    public class Script : ObservableObject
     {
         private string _code;
 

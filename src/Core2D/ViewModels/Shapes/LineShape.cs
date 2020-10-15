@@ -8,23 +8,23 @@ namespace Core2D.Shapes
     /// <summary>
     /// Line shape.
     /// </summary>
-    public class LineShape : BaseShape, ILineShape
+    public class LineShape : BaseShape
     {
-        private IPointShape _start;
-        private IPointShape _end;
+        private PointShape _start;
+        private PointShape _end;
 
         /// <inheritdoc/>
-        public override Type TargetType => typeof(ILineShape);
+        public override Type TargetType => typeof(LineShape);
 
         /// <inheritdoc/>
-        public IPointShape Start
+        public PointShape Start
         {
             get => _start;
             set => Update(ref _start, value);
         }
 
         /// <inheritdoc/>
-        public IPointShape End
+        public PointShape End
         {
             get => _end;
             set => Update(ref _end, value);
@@ -65,7 +65,7 @@ namespace Core2D.Shapes
         }
 
         /// <inheritdoc/>
-        public override void Bind(IDataFlow dataFlow, object db, object r)
+        public override void Bind(DataFlow dataFlow, object db, object r)
         {
             var record = Data?.Record ?? r;
 
@@ -106,7 +106,7 @@ namespace Core2D.Shapes
         }
 
         /// <inheritdoc/>
-        public override void GetPoints(IList<IPointShape> points)
+        public override void GetPoints(IList<PointShape> points)
         {
             points.Add(Start);
             points.Add(End);

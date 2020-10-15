@@ -1,0 +1,64 @@
+<UserControl x:Class="Core2D.UI.Views.Style.ShapeStyleControl"
+             xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:converters="clr-namespace:Core2D.UI.Converters;assembly=Core2D.UI"
+             xmlns:Style="clr-namespace:Core2D.Style;assembly=Core2D"
+             xmlns:Editor="clr-namespace:Core2D.Editor;assembly=Core2D"
+             xmlns:Designer="clr-namespace:Core2D.UI.Designer;assembly=Core2D.UI"
+             mc:Ignorable="d"
+             d:DataContext="{x:Static Designer:DesignerContext.Style}"
+             d:DesignWidth="250" d:DesignHeight="400"
+             x:DataType="Style:ShapeStyle" x:CompileBindings="True">
+    <Grid RowDefinitions="Auto,*">
+        <StackPanel Grid.Row="0">
+            <TextBlock Text="Name" Margin="{DynamicResource TextControlThemePadding}"/>
+            <TextBox Text="{Binding Name, Mode=TwoWay}"/>
+            <TextBlock Text="Thickness" Margin="{DynamicResource TextControlThemePadding}"/>
+            <TextBox Text="{Binding Thickness, Mode=TwoWay}" x:DataType="Style:BaseStyle"/>
+            <TextBlock Text="Line Cap" Margin="{DynamicResource TextControlThemePadding}"/>
+            <ComboBox Items="{x:Static Editor:Enums.LineCapValues}" SelectedItem="{Binding LineCap, Mode=TwoWay}" x:DataType="Style:BaseStyle" HorizontalAlignment="Stretch"/>
+            <TextBlock Text="Dashes" Margin="{DynamicResource TextControlThemePadding}"/>
+            <TextBox Text="{Binding Dashes, Mode=TwoWay}" x:DataType="Style:BaseStyle"/>
+            <TextBlock Text="Dash Offset" Margin="{DynamicResource TextControlThemePadding}"/>
+            <TextBox Text="{Binding DashOffset, Mode=TwoWay}" x:DataType="Style:BaseStyle"/>
+        </StackPanel>
+        <TabControl Grid.Row="1">
+            <TabItem Header="Stroke">
+                <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                    <ContentControl Content="{Binding Stroke}" x:DataType="Style:BaseStyle"/>
+                </ScrollViewer>
+            </TabItem>
+            <TabItem Header="Fill">
+                <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                    <ContentControl Content="{Binding Fill}" x:DataType="Style:BaseStyle"/>
+                </ScrollViewer>
+            </TabItem>
+            <TabItem Header="Text">
+                <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                    <ContentControl Content="{Binding TextStyle}"/>
+                </ScrollViewer>
+            </TabItem>
+            <TabItem Header="Line">
+                <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                    <ContentControl Content="{Binding LineStyle}"/>
+                </ScrollViewer>
+            </TabItem>
+            <TabItem Header="Arrow">
+                <TabControl>
+                    <TabItem Header="Start">
+                        <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                            <ContentControl Content="{Binding StartArrowStyle}"/>
+                        </ScrollViewer>
+                    </TabItem>
+                    <TabItem Header="End">
+                        <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                            <ContentControl Content="{Binding EndArrowStyle}"/>
+                        </ScrollViewer>
+                    </TabItem>
+                </TabControl>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</UserControl>

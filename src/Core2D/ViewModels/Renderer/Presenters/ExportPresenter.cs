@@ -8,7 +8,7 @@ namespace Core2D.Renderer.Presenters
     public class ExportPresenter : IContainerPresenter
     {
         /// <inheritdoc/>
-        public void Render(object dc, IShapeRenderer renderer, IPageContainer container, double dx, double dy)
+        public void Render(object dc, IShapeRenderer renderer, PageContainer container, double dx, double dy)
         {
             var flags = renderer.State.DrawShapeState.Flags;
 

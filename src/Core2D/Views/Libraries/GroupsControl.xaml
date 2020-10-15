@@ -1,0 +1,74 @@
+﻿<UserControl x:Class="Core2D.UI.Views.Libraries.GroupsControl"
+             xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
+             xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
+             xmlns:idd="clr-namespace:Core2D.UI.DragAndDrop;assembly=Core2D.UI"
+             xmlns:handlers="clr-namespace:Core2D.UI.DragAndDrop.Handlers;assembly=Core2D.UI"
+             xmlns:converters="clr-namespace:Core2D.UI.Converters;assembly=Core2D.UI"
+             xmlns:Editor="clr-namespace:Core2D.Editor;assembly=Core2D"
+             xmlns:Containers="clr-namespace:Core2D.Containers;assembly=Core2D"
+             xmlns:Shapes="clr-namespace:Core2D.Shapes;assembly=Core2D" 
+             xmlns:Designer="clr-namespace:Core2D.UI.Designer;assembly=Core2D.UI"
+             mc:Ignorable="d"
+             d:DataContext="{x:Static Designer:DesignerContext.Project}"
+             d:DesignWidth="250" d:DesignHeight="400"
+             x:DataType="Containers:ProjectContainer" x:CompileBindings="True">
+    <UserControl.Resources>
+        <converters:IsGroupConverter x:Key="IsGroupConverter"/>
+        <handlers:GroupsListBoxDropHandler x:Key="GroupsListBoxDropHandler"/>
+    </UserControl.Resources>
+    <Grid RowDefinitions="Auto,Auto,Auto,*,Auto">
+        <Grid RowDefinitions="*" ColumnDefinitions="*,Auto" Grid.Row="0">
+            <TextBox Text="{Binding CurrentGroupLibrary.Name, Mode=TwoWay}" BorderBrush="Transparent" Background="Transparent" VerticalAlignment="Center" Margin="0,0,0,0" IsVisible="{Binding !!$self.DataContext.CurrentGroupLibrary}" Grid.Column="0" x:CompileBindings="False"/>
+            <Menu Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center" x:CompileBindings="False">
+                <MenuItem Header="&#727;" Command="{Binding $parent[TopLevel].DataContext.OnRemoveGroupLibrary}" CommandParameter="{Binding CurrentGroupLibrary}" IsVisible="{Binding !!$self.DataContext.CurrentGroupLibrary}}"/>
+                <MenuItem Header="+" Command="{Binding $parent[TopLevel].DataContext.OnAddGroupLibrary}"/>
+            </Menu>
+        </Grid>
+        <ComboBox Items="{Binding GroupLibraries}" SelectedItem="{Binding CurrentGroupLibrary, Mode=TwoWay}" Grid.Row="1" IsVisible="{Binding !!$self.DataContext.CurrentGroupLibrary}" HorizontalAlignment="Stretch" x:CompileBindings="False">
+            <ComboBox.DataTemplates>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Name}"/>
+                </DataTemplate>
+            </ComboBox.DataTemplates>
+        </ComboBox>
+        <Menu Grid.Row="2" HorizontalAlignment="Right" IsVisible="{Binding !!$self.DataContext.CurrentGroupLibrary}" x:CompileBindings="False">
+            <MenuItem Header="insert" Command="{Binding $parent[TopLevel].DataContext.OnInsertGroup}" CommandParameter="{Binding CurrentGroupLibrary.Selected}" IsVisible="{Binding !!CurrentGroupLibrary.Selected}"/>
+            <MenuItem Header="&#727;" Command="{Binding $parent[TopLevel].DataContext.OnRemoveGroup}" CommandParameter="{Binding CurrentGroupLibrary.Selected}" IsVisible="{Binding !!CurrentGroupLibrary.Selected}"/>
+            <MenuItem Header="+" Command="{Binding $parent[TopLevel].DataContext.OnAddGroup}" CommandParameter="{Binding CurrentGroupLibrary}" IsVisible="{Binding $parent[TopLevel].DataContext.Project.CurrentContainer.CurrentShape, Converter={StaticResource IsGroupConverter}}"/>
+        </Menu>
+        <ListBox x:Name="groups" Items="{Binding CurrentGroupLibrary.Items}" SelectedItem="{Binding CurrentGroupLibrary.Selected, Mode=TwoWay}" Grid.Row="3">
+            <i:Interaction.Behaviors>
+                <idd:ContextDropBehavior Context="{Binding CurrentGroupLibrary, FallbackValue={x:Null}}" Handler="{StaticResource GroupsListBoxDropHandler}"/>
+            </i:Interaction.Behaviors>
+            <ListBox.KeyBindings>
+                <KeyBinding Command="{Binding $parent[TopLevel].DataContext.OnAddGroup}" CommandParameter="{Binding #groups.DataContext}" Gesture="Ctrl+N" x:CompileBindings="False"/>
+                <KeyBinding Command="{Binding $parent[TopLevel].DataContext.OnRemoveGroup}" CommandParameter="{Binding #groups.SelectedItem}" Gesture="Delete" x:CompileBindings="False"/>
+                <KeyBinding Command="{Binding $parent[TopLevel].DataContext.Platform.OnExportObject}" CommandParameter="{Binding #groups.SelectedItem}" Gesture="Ctrl+E" x:CompileBindings="False"/>
+            </ListBox.KeyBindings>
+            <ListBox.DataTemplates>
+                <DataTemplate DataType="Shapes:GroupShape">
+                    <TextBlock x:Name="group" Text="{Binding Name}" Background="Transparent">
+                        <i:Interaction.Behaviors>
+                            <ia:EventTriggerBehavior EventName="DoubleTapped" SourceObject="{Binding #group}" x:CompileBindings="False">
+                                <ia:InvokeCommandAction Command="{Binding $parent[TopLevel].DataContext.OnInsertGroup}" CommandParameter="{Binding Mode=OneWay}" x:CompileBindings="False"/>
+                            </ia:EventTriggerBehavior>
+                            <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}"/>
+                        </i:Interaction.Behaviors>
+                        <TextBlock.ContextMenu>
+                            <ContextMenu x:CompileBindings="False">
+                                <MenuItem Header="_Delete" Command="{Binding $parent[TopLevel].DataContext.OnRemoveGroup}" CommandParameter="{Binding Mode=OneWay}"/>
+                                <Separator/>
+                                <MenuItem Header="E_xport" Command="{Binding $parent[TopLevel].DataContext.Platform.OnExportObject}" CommandParameter="{Binding Mode=OneWay}"/>
+                            </ContextMenu>
+                        </TextBlock.ContextMenu>
+                    </TextBlock>
+                </DataTemplate>
+            </ListBox.DataTemplates>
+        </ListBox>
+        <TextBox Text="{Binding #groups.SelectedItem.Name, Mode=TwoWay}" IsVisible="{Binding !!#groups.SelectedItem}" BorderBrush="Transparent" Background="Transparent" Margin="0,12,0,0" Grid.Row="4" x:CompileBindings="False"/>
+    </Grid>
+</UserControl>

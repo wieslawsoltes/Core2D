@@ -1,27 +1,26 @@
-﻿
-namespace Core2D.Style
+﻿namespace Core2D.Style
 {
     /// <summary>
     /// Base style.
     /// </summary>
-    public abstract class BaseStyle : ObservableObject, IBaseStyle
+    public abstract class BaseStyle : ObservableObject
     {
-        private IColor _stroke;
-        private IColor _fill;
+        private BaseColor _stroke;
+        private BaseColor _fill;
         private double _thickness;
         private LineCap _lineCap;
         private string _dashes;
         private double _dashOffset;
 
         /// <inheritdoc/>
-        public IColor Stroke
+        public BaseColor Stroke
         {
             get => _stroke;
             set => Update(ref _stroke, value);
         }
 
         /// <inheritdoc/>
-        public IColor Fill
+        public BaseColor Fill
         {
             get => _fill;
             set => Update(ref _fill, value);

@@ -7,19 +7,19 @@ namespace Core2D.Path.Segments
     /// <summary>
     /// Line path segment.
     /// </summary>
-    public class LineSegment : PathSegment, ILineSegment
+    public class LineSegment : PathSegment
     {
-        private IPointShape _point;
+        private PointShape _point;
 
         /// <inheritdoc/>
-        public IPointShape Point
+        public PointShape Point
         {
             get => _point;
             set => Update(ref _point, value);
         }
 
         /// <inheritdoc/>
-        public override void GetPoints(IList<IPointShape> points)
+        public override void GetPoints(IList<PointShape> points)
         {
             points.Add(Point);
         }

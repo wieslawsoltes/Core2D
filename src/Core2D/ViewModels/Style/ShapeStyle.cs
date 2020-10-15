@@ -5,36 +5,36 @@ namespace Core2D.Style
     /// <summary>
     /// Shape style.
     /// </summary>
-    public class ShapeStyle : BaseStyle, IShapeStyle
+    public class ShapeStyle : BaseStyle
     {
-        private ILineStyle _lineStyle;
-        private IArrowStyle _startArrowStyle;
-        private IArrowStyle _endArrowStyle;
-        private ITextStyle _textStyle;
+        private LineStyle _lineStyle;
+        private ArrowStyle _startArrowStyle;
+        private ArrowStyle _endArrowStyle;
+        private TextStyle _textStyle;
 
         /// <inheritdoc/>
-        public ILineStyle LineStyle
+        public LineStyle LineStyle
         {
             get => _lineStyle;
             set => Update(ref _lineStyle, value);
         }
 
         /// <inheritdoc/>
-        public IArrowStyle StartArrowStyle
+        public ArrowStyle StartArrowStyle
         {
             get => _startArrowStyle;
             set => Update(ref _startArrowStyle, value);
         }
 
         /// <inheritdoc/>
-        public IArrowStyle EndArrowStyle
+        public ArrowStyle EndArrowStyle
         {
             get => _endArrowStyle;
             set => Update(ref _endArrowStyle, value);
         }
 
         /// <inheritdoc/>
-        public ITextStyle TextStyle
+        public TextStyle TextStyle
         {
             get => _textStyle;
             set => Update(ref _textStyle, value);
@@ -46,16 +46,16 @@ namespace Core2D.Style
             return new ShapeStyle()
             {
                 Name = this.Name,
-                Stroke = (IColor)this.Stroke.Copy(shared),
-                Fill = (IColor)this.Fill.Copy(shared),
+                Stroke = (Color)this.Stroke.Copy(shared),
+                Fill = (Color)this.Fill.Copy(shared),
                 Thickness = this.Thickness,
                 LineCap = this.LineCap,
                 Dashes = this.Dashes,
                 DashOffset = this.DashOffset,
-                LineStyle = (ILineStyle)this.LineStyle.Copy(shared),
-                TextStyle = (ITextStyle)this.TextStyle.Copy(shared),
-                StartArrowStyle = (IArrowStyle)this.StartArrowStyle.Copy(shared),
-                EndArrowStyle = (IArrowStyle)this.EndArrowStyle.Copy(shared)
+                LineStyle = (LineStyle)this.LineStyle.Copy(shared),
+                TextStyle = (TextStyle)this.TextStyle.Copy(shared),
+                StartArrowStyle = (ArrowStyle)this.StartArrowStyle.Copy(shared),
+                EndArrowStyle = (ArrowStyle)this.EndArrowStyle.Copy(shared)
             };
         }
 

@@ -5,13 +5,13 @@ using Core2D.Style;
 namespace Core2D.Editor.Tools.Selection
 {
     /// <summary>
-    /// Helper class for <see cref="IPointShape"/> shape selection.
+    /// Helper class for <see cref="PointShape"/> shape selection.
     /// </summary>
     public class ToolPointSelection
     {
-        private readonly ILayerContainer _layer;
-        private readonly IPointShape _shape;
-        private readonly IShapeStyle _style;
+        private readonly LayerContainer _layer;
+        private readonly PointShape _shape;
+        private readonly ShapeStyle _style;
 
         /// <summary>
         /// Initialize new instance of <see cref="ToolPointSelection"/> class.
@@ -19,7 +19,7 @@ namespace Core2D.Editor.Tools.Selection
         /// <param name="layer">The selection shapes layer.</param>
         /// <param name="shape">The selected shape.</param>
         /// <param name="style">The selection shapes style.</param>
-        public ToolPointSelection(ILayerContainer layer, IPointShape shape, IShapeStyle style)
+        public ToolPointSelection(LayerContainer layer, PointShape shape, ShapeStyle style)
         {
             _layer = layer;
             _shape = shape;

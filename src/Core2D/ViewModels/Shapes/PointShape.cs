@@ -10,14 +10,14 @@ namespace Core2D.Shapes
     /// <summary>
     /// Point shape.
     /// </summary>
-    public class PointShape : BaseShape, IPointShape
+    public class PointShape : BaseShape
     {
         private double _x;
         private double _y;
         private PointAlignment _alignment;
 
         /// <inheritdoc/>
-        public override Type TargetType => typeof(IPointShape);
+        public override Type TargetType => typeof(PointShape);
 
         /// <inheritdoc/>
         public double X
@@ -68,7 +68,7 @@ namespace Core2D.Shapes
         }
 
         /// <inheritdoc/>
-        public override void Bind(IDataFlow dataFlow, object db, object r)
+        public override void Bind(DataFlow dataFlow, object db, object r)
         {
         }
 
@@ -80,7 +80,7 @@ namespace Core2D.Shapes
         }
 
         /// <inheritdoc/>
-        public override void GetPoints(IList<IPointShape> points)
+        public override void GetPoints(IList<PointShape> points)
         {
             points.Add(this);
         }
@@ -95,11 +95,11 @@ namespace Core2D.Shapes
         /// Clone current instance of the <see cref="PointShape"/>.
         /// </summary>
         /// <returns>The new instance of the <see cref="PointShape"/> class.</returns>
-        public IPointShape Clone()
+        public PointShape Clone()
         {
             var data = new Context()
             {
-                Properties = ImmutableArray.Create<IProperty>(),
+                Properties = ImmutableArray.Create<Property>(),
                 Record = Data.Record
             };
 

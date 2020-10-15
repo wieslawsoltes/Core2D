@@ -7,10 +7,10 @@ namespace Core2D.Containers
     /// <summary>
     /// Document container.
     /// </summary>
-    public class DocumentContainer : ObservableObject, IDocumentContainer
+    public class DocumentContainer : ObservableObject
     {
         private bool _isExpanded = true;
-        private ImmutableArray<IPageContainer> _pages;
+        private ImmutableArray<PageContainer> _pages;
 
         /// <inheritdoc/>
         public bool IsExpanded
@@ -20,7 +20,7 @@ namespace Core2D.Containers
         }
 
         /// <inheritdoc/>
-        public ImmutableArray<IPageContainer> Pages
+        public ImmutableArray<PageContainer> Pages
         {
             get => _pages;
             set => Update(ref _pages, value);

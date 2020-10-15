@@ -13,7 +13,7 @@ namespace Core2D.Data.UnitTests
         {
             var db = _factory.CreateDatabase("db");
             var target = _factory.CreateColumn(db, "Column");
-            Assert.True(target is IObservableObject);
+            Assert.True(target is ObservableObject);
         }
     }
 }

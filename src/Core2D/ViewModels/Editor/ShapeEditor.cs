@@ -8,7 +8,7 @@ using Core2D.Style;
 
 namespace Core2D.Editor
 {
-    internal class ShapeEditor : IShapeEditor
+    internal class ShapeEditor
     {
         private readonly IServiceProvider _serviceProvider;
 
@@ -17,7 +17,7 @@ namespace Core2D.Editor
             _serviceProvider = serviceProvider;
         }
 
-        public void BreakPathFigure(IPathFigure pathFigure, IShapeStyle style, bool isStroked, bool isFilled, List<IBaseShape> result)
+        public void BreakPathFigure(PathFigure pathFigure, ShapeStyle style, bool isStroked, bool isFilled, List<BaseShape> result)
         {
             var factory = _serviceProvider.GetService<IFactory>();
 
@@ -28,10 +28,10 @@ namespace Core2D.Editor
             {
                 switch (segment)
                 {
-                    case ILineSegment lineSegment:
+                    case LineSegment lineSegment:
                         {
                             var convertedStyle = style != null ?
-                                (IShapeStyle)style?.Copy(null) :
+                                (ShapeStyle)style?.Copy(null) :
                                 factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
 
                             var convertedPathShape = factory.CreateLineShape(
@@ -45,10 +45,11 @@ namespace Core2D.Editor
                             result.Add(convertedPathShape);
                         }
                         break;
-                    case IQuadraticBezierSegment quadraticBezierSegment:
+
+                    case QuadraticBezierSegment quadraticBezierSegment:
                         {
                             var convertedStyle = style != null ?
-                                (IShapeStyle)style?.Copy(null) :
+                                (ShapeStyle)style?.Copy(null) :
                                 factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
 
                             var convertedPathShape = factory.CreateQuadraticBezierShape(
@@ -64,10 +65,11 @@ namespace Core2D.Editor
                             result.Add(convertedPathShape);
                         }
                         break;
-                    case ICubicBezierSegment cubicBezierSegment:
+
+                    case CubicBezierSegment cubicBezierSegment:
                         {
                             var convertedStyle = style != null ?
-                                (IShapeStyle)style?.Copy(null) :
+                                (ShapeStyle)style?.Copy(null) :
                                 factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
 
                             var convertedPathShape = factory.CreateCubicBezierShape(
@@ -84,10 +86,11 @@ namespace Core2D.Editor
                             result.Add(convertedPathShape);
                         }
                         break;
-                    case IArcSegment arcSegment:
+
+                    case ArcSegment arcSegment:
                         {
                             var convertedStyle = style != null ?
-                                (IShapeStyle)style?.Copy(null) :
+                                (ShapeStyle)style?.Copy(null) :
                                 factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
 
                             var point2 = factory.CreatePointShape(0, 0); // TODO:
@@ -114,7 +117,7 @@ namespace Core2D.Editor
             if (pathFigure.Segments.Length > 0 && pathFigure.IsClosed)
             {
                 var convertedStyle = style != null ?
-                    (IShapeStyle)style?.Copy(null) :
+                    (ShapeStyle)style?.Copy(null) :
                     factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
 
                 var convertedPathShape = factory.CreateLineShape(
@@ -127,7 +130,7 @@ namespace Core2D.Editor
             }
         }
 
-        public bool BreakPathShape(IPathShape pathShape, List<IBaseShape> result)
+        public bool BreakPathShape(PathShape pathShape, List<BaseShape> result)
         {
             var factory = _serviceProvider.GetService<IFactory>();
 
@@ -141,10 +144,10 @@ namespace Core2D.Editor
                 foreach (var pathFigure in pathShape.Geometry.Figures)
                 {
                     var style = pathShape.Style != null ?
-                        (IShapeStyle)pathShape.Style?.Copy(null) :
+                        (ShapeStyle)pathShape.Style?.Copy(null) :
                         factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
 
-                    var convertedGeometry = factory.CreatePathGeometry(ImmutableArray.Create<IPathFigure>(), pathShape.Geometry.FillRule);
+                    var convertedGeometry = factory.CreatePathGeometry(ImmutableArray.Create<PathFigure>(), pathShape.Geometry.FillRule);
                     convertedGeometry.Figures = convertedGeometry.Figures.Add(pathFigure);
 
                     var convertedPathShape = factory.CreatePathShape(
@@ -163,11 +166,11 @@ namespace Core2D.Editor
             return false;
         }
 
-        public void BreakShape(IBaseShape shape, List<IBaseShape> result, List<IBaseShape> remove)
+        public void BreakShape(BaseShape shape, List<BaseShape> result, List<BaseShape> remove)
         {
             switch (shape)
             {
-                case IPathShape pathShape:
+                case PathShape pathShape:
                     {
                         if (BreakPathShape(pathShape, result) == true)
                         {
@@ -175,11 +178,12 @@ namespace Core2D.Editor
                         }
                     }
                     break;
-                case IGroupShape groupShape:
+
+                case GroupShape groupShape:
                     {
                         if (groupShape.Shapes.Length > 0)
                         {
-                            var groupShapes = new List<IBaseShape>();
+                            var groupShapes = new List<BaseShape>();
 
                             GroupShapeExtensions.Ungroup(groupShape.Shapes, groupShapes);
 
@@ -192,6 +196,7 @@ namespace Core2D.Editor
                         }
                     }
                     break;
+
                 default:
                     {
                         var pathConverter = _serviceProvider.GetService<IPathConverter>();

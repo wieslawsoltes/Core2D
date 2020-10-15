@@ -27,12 +27,12 @@ namespace Core2D.Editor.Bounds
             }
         }
 
-        public IPointShape TryToGetPoint(IBaseShape shape, Point2 target, double radius, double scale)
+        public PointShape TryToGetPoint(BaseShape shape, Point2 target, double radius, double scale)
         {
             return Registered[shape.TargetType].TryToGetPoint(shape, target, radius, scale, Registered);
         }
 
-        public IPointShape TryToGetPoint(IEnumerable<IBaseShape> shapes, Point2 target, double radius, double scale)
+        public PointShape TryToGetPoint(IEnumerable<BaseShape> shapes, Point2 target, double radius, double scale)
         {
             foreach (var shape in shapes)
             {
@@ -45,17 +45,17 @@ namespace Core2D.Editor.Bounds
             return null;
         }
 
-        public bool Contains(IBaseShape shape, Point2 target, double radius, double scale)
+        public bool Contains(BaseShape shape, Point2 target, double radius, double scale)
         {
             return Registered[shape.TargetType].Contains(shape, target, radius, scale, Registered);
         }
 
-        public bool Overlaps(IBaseShape shape, Rect2 target, double radius, double scale)
+        public bool Overlaps(BaseShape shape, Rect2 target, double radius, double scale)
         {
             return Registered[shape.TargetType].Overlaps(shape, target, radius, scale, Registered);
         }
 
-        public IBaseShape TryToGetShape(IEnumerable<IBaseShape> shapes, Point2 target, double radius, double scale)
+        public BaseShape TryToGetShape(IEnumerable<BaseShape> shapes, Point2 target, double radius, double scale)
         {
             foreach (var shape in shapes)
             {
@@ -68,9 +68,9 @@ namespace Core2D.Editor.Bounds
             return null;
         }
 
-        public ISet<IBaseShape> TryToGetShapes(IEnumerable<IBaseShape> shapes, Rect2 target, double radius, double scale)
+        public ISet<BaseShape> TryToGetShapes(IEnumerable<BaseShape> shapes, Rect2 target, double radius, double scale)
         {
-            var selected = new HashSet<IBaseShape>();
+            var selected = new HashSet<BaseShape>();
             foreach (var shape in shapes)
             {
                 var result = Registered[shape.TargetType].Overlaps(shape, target, radius, scale, Registered);

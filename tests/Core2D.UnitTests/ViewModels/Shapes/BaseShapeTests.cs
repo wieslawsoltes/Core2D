@@ -19,7 +19,7 @@ namespace Core2D.Shapes.UnitTests
             {
                 State = _factory.CreateShapeState()
             };
-            Assert.True(target is IObservableObject);
+            Assert.True(target is ObservableObject);
         }
 
         private class Class1 : BaseShape
@@ -41,12 +41,12 @@ namespace Core2D.Shapes.UnitTests
                 throw new NotImplementedException();
             }
 
-            public override void Bind(IDataFlow dataFlow, object db, object r)
+            public override void Bind(DataFlow dataFlow, object db, object r)
             {
                 throw new NotImplementedException();
             }
 
-            public override void GetPoints(IList<IPointShape> points)
+            public override void GetPoints(IList<PointShape> points)
             {
                 throw new NotImplementedException();
             }

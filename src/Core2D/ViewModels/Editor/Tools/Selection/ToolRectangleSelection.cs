@@ -7,16 +7,16 @@ using Core2D.Style;
 namespace Core2D.Editor.Tools.Selection
 {
     /// <summary>
-    /// Helper class for <see cref="IRectangleShape"/> shape selection.
+    /// Helper class for <see cref="RectangleShape"/> shape selection.
     /// </summary>
     public class ToolRectangleSelection
     {
         private readonly IServiceProvider _serviceProvider;
-        private readonly ILayerContainer _layer;
-        private readonly IRectangleShape _rectangle;
-        private readonly IShapeStyle _style;
-        private IPointShape _topLeftHelperPoint;
-        private IPointShape _bottomRightHelperPoint;
+        private readonly LayerContainer _layer;
+        private readonly RectangleShape _rectangle;
+        private readonly ShapeStyle _style;
+        private PointShape _topLeftHelperPoint;
+        private PointShape _bottomRightHelperPoint;
 
         /// <summary>
         /// Initialize new instance of <see cref="ToolRectangleSelection"/> class.
@@ -25,7 +25,7 @@ namespace Core2D.Editor.Tools.Selection
         /// <param name="layer">The selection shapes layer.</param>
         /// <param name="shape">The selected shape.</param>
         /// <param name="style">The selection shapes style.</param>
-        public ToolRectangleSelection(IServiceProvider serviceProvider, ILayerContainer layer, IRectangleShape shape, IShapeStyle style)
+        public ToolRectangleSelection(IServiceProvider serviceProvider, LayerContainer layer, RectangleShape shape, ShapeStyle style)
         {
             _serviceProvider = serviceProvider;
             _layer = layer;

@@ -5,7 +5,7 @@ namespace Core2D.Data
     /// <summary>
     /// Record value.
     /// </summary>
-    public class Value : ObservableObject, IValue
+    public class Value : ObservableObject
     {
         private string _content;
 

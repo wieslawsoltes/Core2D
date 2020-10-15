@@ -18,7 +18,7 @@ namespace Core2D.Editor.Tools
         private readonly IServiceProvider _serviceProvider;
         private ToolSettingsRectangle _settings;
         private State _currentState = State.TopLeft;
-        private IRectangleShape _rectangle;
+        private RectangleShape _rectangle;
         private ToolRectangleSelection _selection;
 
         /// <inheritdoc/>
@@ -53,7 +53,7 @@ namespace Core2D.Editor.Tools
         public void LeftDown(InputArgs args)
         {
             var factory = _serviceProvider.GetService<IFactory>();
-            var editor = _serviceProvider.GetService<IProjectEditor>();
+            var editor = _serviceProvider.GetService<ProjectEditor>();
             (decimal sx, decimal sy) = editor.TryToSnap(args);
             switch (_currentState)
             {
@@ -64,7 +64,7 @@ namespace Core2D.Editor.Tools
                             editor.Factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
                         _rectangle = factory.CreateRectangleShape(
                             (double)sx, (double)sy,
-                            (IShapeStyle)style.Copy(null),
+                            (ShapeStyle)style.Copy(null),
                             editor.Project.Options.DefaultIsStroked,
                             editor.Project.Options.DefaultIsFilled);
 
@@ -132,7 +132,7 @@ namespace Core2D.Editor.Tools
         /// <inheritdoc/>
         public void Move(InputArgs args)
         {
-            var editor = _serviceProvider.GetService<IProjectEditor>();
+            var editor = _serviceProvider.GetService<ProjectEditor>();
             (decimal sx, decimal sy) = editor.TryToSnap(args);
             switch (_currentState)
             {
@@ -167,7 +167,7 @@ namespace Core2D.Editor.Tools
         /// </summary>
         public void ToStateBottomRight()
         {
-            var editor = _serviceProvider.GetService<IProjectEditor>();
+            var editor = _serviceProvider.GetService<ProjectEditor>();
             _selection = new ToolRectangleSelection(
                 _serviceProvider,
                 editor.Project.CurrentContainer.HelperLayer,
@@ -178,20 +178,20 @@ namespace Core2D.Editor.Tools
         }
 
         /// <inheritdoc/>
-        public void Move(IBaseShape shape)
+        public void Move(BaseShape shape)
         {
             _selection.Move();
         }
 
         /// <inheritdoc/>
-        public void Finalize(IBaseShape shape)
+        public void Finalize(BaseShape shape)
         {
         }
 
         /// <inheritdoc/>
         public void Reset()
         {
-            var editor = _serviceProvider.GetService<IProjectEditor>();
+            var editor = _serviceProvider.GetService<ProjectEditor>();
 
             switch (_currentState)
             {

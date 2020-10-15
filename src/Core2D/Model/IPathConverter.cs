@@ -13,51 +13,51 @@ namespace Core2D
         /// Convert shapes to path shape.
         /// </summary>
         /// <param name="shapes">The shapes to convert.</param>
-        /// <returns>The new instance of object of type <see cref="IPathShape"/>.</returns>
-        IPathShape ToPathShape(IEnumerable<IBaseShape> shapes);
+        /// <returns>The new instance of object of type <see cref="PathShape"/>.</returns>
+        PathShape ToPathShape(IEnumerable<BaseShape> shapes);
 
         /// <summary>
         /// Convert shape to path shape.
         /// </summary>
         /// <param name="shape">The shape to convert.</param>
-        /// <returns>The new instance of object of type <see cref="IPathShape"/>.</returns>
-        IPathShape ToPathShape(IBaseShape shape);
+        /// <returns>The new instance of object of type <see cref="PathShape"/>.</returns>
+        PathShape ToPathShape(BaseShape shape);
 
         /// <summary>
         /// Convert shape to stroke path shape.
         /// </summary>
         /// <param name="shape">The shape to convert.</param>
-        /// <returns>The new instance of object of type <see cref="IPathShape"/>.</returns>
-        IPathShape ToStrokePathShape(IBaseShape shape);
+        /// <returns>The new instance of object of type <see cref="PathShape"/>.</returns>
+        PathShape ToStrokePathShape(BaseShape shape);
 
         /// <summary>
         /// Convert shape to fill path shape.
         /// </summary>
         /// <param name="shape">The shape to convert.</param>
-        /// <returns>The new instance of object of type <see cref="IPathShape"/>.</returns>
-        IPathShape ToFillPathShape(IBaseShape shape);
+        /// <returns>The new instance of object of type <see cref="PathShape"/>.</returns>
+        PathShape ToFillPathShape(BaseShape shape);
 
         /// <summary>
         /// Convert shape to winding path shape.
         /// </summary>
         /// <param name="shape">The shape to convert.</param>
-        /// <returns>The new instance of object of type <see cref="IPathShape"/>.</returns>
-        IPathShape ToWindingPathShape(IBaseShape shape);
+        /// <returns>The new instance of object of type <see cref="PathShape"/>.</returns>
+        PathShape ToWindingPathShape(BaseShape shape);
 
         /// <summary>
         /// Convert shape to simplified path shape.
         /// </summary>
         /// <param name="shape">The shape to convert.</param>
-        /// <returns>The new instance of object of type <see cref="IPathShape"/>.</returns>
-        IPathShape Simplify(IBaseShape shape);
+        /// <returns>The new instance of object of type <see cref="PathShape"/>.</returns>
+        PathShape Simplify(BaseShape shape);
 
         /// <summary>
         /// Convert shapes to path shape.
         /// </summary>
         /// <param name="shapes">The shapes to convert.</param>
         /// <param name="op">The convert operation.</param>
-        /// <returns>The new instance of object of type <see cref="IPathShape"/>.</returns>
-        IPathShape Op(IEnumerable<IBaseShape> shapes, PathOp op);
+        /// <returns>The new instance of object of type <see cref="PathShape"/>.</returns>
+        PathShape Op(IEnumerable<BaseShape> shapes, PathOp op);
 
         /// <summary>
         /// Creates a path based on the SVG path data string.
@@ -65,14 +65,14 @@ namespace Core2D
         /// <param name="svgPath">The SVG path data.</param>
         /// <param name="isStroked">The flag indicating whether path is stroked.</param>
         /// <param name="isFilled">The flag indicating whether path is filled.</param>
-        /// <returns>The new instance of object of type <see cref="IPathShape"/>.</returns>
-        public IPathShape FromSvgPathData(string svgPath, bool isStroked, bool isFilled);
+        /// <returns>The new instance of object of type <see cref="PathShape"/>.</returns>
+        public PathShape FromSvgPathData(string svgPath, bool isStroked, bool isFilled);
 
         /// <summary>
         /// Returns a SVG path data representation of the shape.
         /// </summary>
         /// <param name="shape">The shape to convert.</param>
         /// <returns>The SVG path data.</returns>
-        public string ToSvgPathData(IBaseShape shape);
+        public string ToSvgPathData(BaseShape shape);
     }
 }

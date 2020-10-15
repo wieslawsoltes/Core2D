@@ -8,14 +8,14 @@ namespace Core2D
     /// <summary>
     /// Observable object.
     /// </summary>
-    public abstract class ObservableObject : IObservableObject
+    public abstract class ObservableObject
     {
         private bool _isDirty;
-        private IObservableObject _owner = null;
+        private ObservableObject _owner = null;
         private string _name = "";
 
         /// <inheritdoc/>
-        public virtual IObservableObject Owner
+        public virtual ObservableObject Owner
         {
             get => _owner;
             set => Update(ref _owner, value);

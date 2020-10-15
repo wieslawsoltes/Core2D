@@ -8,24 +8,24 @@ namespace Core2D.Shapes
     /// <summary>
     /// Text shape.
     /// </summary>
-    public class TextShape : BaseShape, ITextShape
+    public class TextShape : BaseShape
     {
-        private IPointShape _topLeft;
-        private IPointShape _bottomRight;
+        private PointShape _topLeft;
+        private PointShape _bottomRight;
         private string _text;
 
         /// <inheritdoc/>
-        public override Type TargetType => typeof(ITextShape);
+        public override Type TargetType => typeof(TextShape);
 
         /// <inheritdoc/>
-        public IPointShape TopLeft
+        public PointShape TopLeft
         {
             get => _topLeft;
             set => Update(ref _topLeft, value);
         }
 
         /// <inheritdoc/>
-        public IPointShape BottomRight
+        public PointShape BottomRight
         {
             get => _bottomRight;
             set => Update(ref _bottomRight, value);
@@ -73,7 +73,7 @@ namespace Core2D.Shapes
         }
 
         /// <inheritdoc/>
-        public override void Bind(IDataFlow dataFlow, object db, object r)
+        public override void Bind(DataFlow dataFlow, object db, object r)
         {
             var record = Data?.Record ?? r;
 
@@ -114,7 +114,7 @@ namespace Core2D.Shapes
         }
 
         /// <inheritdoc/>
-        public override void GetPoints(IList<IPointShape> points)
+        public override void GetPoints(IList<PointShape> points)
         {
             points.Add(TopLeft);
             points.Add(BottomRight);

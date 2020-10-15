@@ -8,16 +8,16 @@ namespace Core2D.Editor.Bounds.Shapes
 {
     public class BoundsArc : IBounds
     {
-        public Type TargetType => typeof(IArcShape);
+        public Type TargetType => typeof(ArcShape);
 
-        public IPointShape TryToGetPoint(IBaseShape shape, Point2 target, double radius, double scale, IDictionary<Type, IBounds> registered)
+        public PointShape TryToGetPoint(BaseShape shape, Point2 target, double radius, double scale, IDictionary<Type, IBounds> registered)
         {
-            if (!(shape is IArcShape arc))
+            if (!(shape is ArcShape arc))
             {
                 throw new ArgumentNullException(nameof(shape));
             }
 
-            var pointHitTest = registered[typeof(IPointShape)];
+            var pointHitTest = registered[typeof(PointShape)];
 
             if (pointHitTest.TryToGetPoint(arc.Point1, target, radius, scale, registered) != null)
             {
@@ -42,9 +42,9 @@ namespace Core2D.Editor.Bounds.Shapes
             return null;
         }
 
-        public bool Contains(IBaseShape shape, Point2 target, double radius, double scale, IDictionary<Type, IBounds> registered)
+        public bool Contains(BaseShape shape, Point2 target, double radius, double scale, IDictionary<Type, IBounds> registered)
         {
-            if (!(shape is IArcShape arc))
+            if (!(shape is ArcShape arc))
             {
                 throw new ArgumentNullException(nameof(shape));
             }
@@ -61,9 +61,9 @@ namespace Core2D.Editor.Bounds.Shapes
             }
         }
 
-        public bool Overlaps(IBaseShape shape, Rect2 target, double radius, double scale, IDictionary<Type, IBounds> registered)
+        public bool Overlaps(BaseShape shape, Rect2 target, double radius, double scale, IDictionary<Type, IBounds> registered)
         {
-            if (!(shape is IArcShape arc))
+            if (!(shape is ArcShape arc))
             {
                 throw new ArgumentNullException(nameof(shape));
             }
@@ -80,7 +80,7 @@ namespace Core2D.Editor.Bounds.Shapes
             }
         }
 
-        public static Rect2 ArcBounds(IArcShape arc)
+        public static Rect2 ArcBounds(ArcShape arc)
         {
             double x1 = arc.Point1.X;
             double y1 = arc.Point1.Y;

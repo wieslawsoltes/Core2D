@@ -5,7 +5,7 @@ namespace Core2D.Data
     /// <summary>
     /// Data property.
     /// </summary>
-    public class Property : ObservableObject, IProperty
+    public class Property : ObservableObject
     {
         private string _value;
 

@@ -9,27 +9,27 @@ namespace Core2D.Shapes
     /// <summary>
     /// Base class for shapes.
     /// </summary>
-    public abstract class BaseShape : ObservableObject, IBaseShape
+    public abstract class BaseShape : ObservableObject
     {
         private IDictionary<string, object> _properties = new Dictionary<string, object>();
-        private IShapeState _state;
-        private IShapeStyle _style;
+        private ShapeState _state;
+        private ShapeStyle _style;
         private bool _isStroked;
         private bool _isFilled;
-        private IContext _data;
+        private Context _data;
 
         /// <inheritdoc/>
         public abstract Type TargetType { get; }
 
         /// <inheritdoc/>
-        public virtual IShapeState State
+        public virtual ShapeState State
         {
             get => _state;
             set => Update(ref _state, value);
         }
 
         /// <inheritdoc/>
-        public virtual IShapeStyle Style
+        public virtual ShapeStyle Style
         {
             get => _style;
             set => Update(ref _style, value);
@@ -50,7 +50,7 @@ namespace Core2D.Shapes
         }
 
         /// <inheritdoc/>
-        public virtual IContext Data
+        public virtual Context Data
         {
             get => _data;
             set => Update(ref _data, value);
@@ -88,7 +88,7 @@ namespace Core2D.Shapes
         }
 
         /// <inheritdoc/>
-        public abstract void Bind(IDataFlow dataFlow, object db, object r);
+        public abstract void Bind(DataFlow dataFlow, object db, object r);
 
         /// <inheritdoc/>
         public virtual void SetProperty(string name, object value)
@@ -129,7 +129,7 @@ namespace Core2D.Shapes
         }
 
         /// <inheritdoc/>
-        public abstract void GetPoints(IList<IPointShape> points);
+        public abstract void GetPoints(IList<PointShape> points);
 
         /// <summary>
         /// Check whether the <see cref="State"/> property has changed from its default value.

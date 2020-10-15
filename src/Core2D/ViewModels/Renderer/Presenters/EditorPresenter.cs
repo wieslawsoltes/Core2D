@@ -8,7 +8,7 @@ namespace Core2D.Renderer.Presenters
     public class EditorPresenter : IContainerPresenter
     {
         /// <inheritdoc/>
-        public void Render(object dc, IShapeRenderer renderer, IPageContainer container, double dx, double dy)
+        public void Render(object dc, IShapeRenderer renderer, PageContainer container, double dx, double dy)
         {
             renderer.DrawPage(dc, container);
 

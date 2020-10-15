@@ -6,7 +6,7 @@ namespace Core2D.Editor.Tools.Settings
     /// <summary>
     /// Rectangle tool settings.
     /// </summary>
-    public class ToolSettingsRectangle : ObservableObject, ISettings
+    public class ToolSettingsRectangle : ObservableObject
     {
         /// <inheritdoc/>
         public override object Copy(IDictionary<object, object> shared)

@@ -10,14 +10,14 @@ namespace Core2D.Shapes
     public static class LineShapeExtensions
     {
         /// <summary>
-        /// Get <see cref="ILineShape"/> maximum length using <see cref="LineFixedLengthFlags"/>.
+        /// Get <see cref="LineShape"/> maximum length using <see cref="LineFixedLengthFlags"/>.
         /// </summary>
         /// <param name="line">The line shape.</param>
-        /// <param name="x1">The calculated X coordinate for <see cref="ILineShape.Start"/> point.</param>
-        /// <param name="y1">The calculated Y coordinate for <see cref="ILineShape.Start"/> point.</param>
-        /// <param name="x2">The calculated X coordinate for <see cref="ILineShape.End"/> point.</param>
-        /// <param name="y2">The calculated Y coordinate for <see cref="ILineShape.End"/> point.</param>
-        public static void GetMaxLength(this ILineShape line, ref double x1, ref double y1, ref double x2, ref double y2)
+        /// <param name="x1">The calculated X coordinate for <see cref="LineShape.Start"/> point.</param>
+        /// <param name="y1">The calculated Y coordinate for <see cref="LineShape.Start"/> point.</param>
+        /// <param name="x2">The calculated X coordinate for <see cref="LineShape.End"/> point.</param>
+        /// <param name="y2">The calculated Y coordinate for <see cref="LineShape.End"/> point.</param>
+        public static void GetMaxLength(this LineShape line, ref double x1, ref double y1, ref double x2, ref double y2)
         {
             var ls = line.Style.LineStyle;
 
@@ -53,14 +53,14 @@ namespace Core2D.Shapes
         }
 
         /// <summary>
-        /// Get <see cref="ILineShape"/> maximum length for <see cref="LineFixedLengthFlags.All"/> mode.
+        /// Get <see cref="LineShape"/> maximum length for <see cref="LineFixedLengthFlags.All"/> mode.
         /// </summary>
         /// <param name="line">The line shape.</param>
-        /// <param name="x1">The calculated X coordinate for <see cref="ILineShape.Start"/> point.</param>
-        /// <param name="y1">The calculated Y coordinate for <see cref="ILineShape.Start"/> point.</param>
-        /// <param name="x2">The calculated X coordinate for <see cref="ILineShape.End"/> point.</param>
-        /// <param name="y2">The calculated Y coordinate for <see cref="ILineShape.End"/> point.</param>
-        public static void GetMaxLengthAll(this ILineShape line, ref double x1, ref double y1, ref double x2, ref double y2)
+        /// <param name="x1">The calculated X coordinate for <see cref="LineShape.Start"/> point.</param>
+        /// <param name="y1">The calculated Y coordinate for <see cref="LineShape.Start"/> point.</param>
+        /// <param name="x2">The calculated X coordinate for <see cref="LineShape.End"/> point.</param>
+        /// <param name="y2">The calculated Y coordinate for <see cref="LineShape.End"/> point.</param>
+        public static void GetMaxLengthAll(this LineShape line, ref double x1, ref double y1, ref double x2, ref double y2)
         {
             var ls = line.Style.LineStyle;
 
@@ -92,12 +92,12 @@ namespace Core2D.Shapes
         }
 
         /// <summary>
-        /// Get <see cref="ILineShape"/> maximum length for <see cref="LineFixedLengthFlags.Horizontal"/> mode.
+        /// Get <see cref="LineShape"/> maximum length for <see cref="LineFixedLengthFlags.Horizontal"/> mode.
         /// </summary>
         /// <param name="line">The line shape.</param>
-        /// <param name="x1">The calculated X coordinate for <see cref="ILineShape.Start"/> point.</param>
-        /// <param name="x2">The calculated X coordinate for <see cref="ILineShape.End"/> point.</param>
-        public static void GetMaxLengthHorizontal(this ILineShape line, ref double x1, ref double x2)
+        /// <param name="x1">The calculated X coordinate for <see cref="LineShape.Start"/> point.</param>
+        /// <param name="x2">The calculated X coordinate for <see cref="LineShape.End"/> point.</param>
+        public static void GetMaxLengthHorizontal(this LineShape line, ref double x1, ref double x2)
         {
             var ls = line.Style.LineStyle;
 
@@ -135,12 +135,12 @@ namespace Core2D.Shapes
         }
 
         /// <summary>
-        /// Get <see cref="ILineShape"/> maximum length for <see cref="LineFixedLengthFlags.Vertical"/> mode.
+        /// Get <see cref="LineShape"/> maximum length for <see cref="LineFixedLengthFlags.Vertical"/> mode.
         /// </summary>
         /// <param name="line">The line shape.</param>
-        /// <param name="y1">The calculated Y coordinate for <see cref="ILineShape.Start"/> point.</param>
-        /// <param name="y2">The calculated Y coordinate for <see cref="ILineShape.End"/> point.</param>
-        public static void GetMaxLengthVertical(this ILineShape line, ref double y1, ref double y2)
+        /// <param name="y1">The calculated Y coordinate for <see cref="LineShape.Start"/> point.</param>
+        /// <param name="y2">The calculated Y coordinate for <see cref="LineShape.End"/> point.</param>
+        public static void GetMaxLengthVertical(this LineShape line, ref double y1, ref double y2)
         {
             var ls = line.Style.LineStyle;
 

@@ -8,23 +8,23 @@ namespace Core2D.Path.Segments
     /// <summary>
     /// Arc path segment.
     /// </summary>
-    public class ArcSegment : PathSegment, IArcSegment
+    public class ArcSegment : PathSegment
     {
-        private IPointShape _point;
-        private IPathSize _size;
+        private PointShape _point;
+        private PathSize _size;
         private double _rotationAngle;
         private bool _isLargeArc;
         private SweepDirection _sweepDirection;
 
         /// <inheritdoc/>
-        public IPointShape Point
+        public PointShape Point
         {
             get => _point;
             set => Update(ref _point, value);
         }
 
         /// <inheritdoc/>
-        public IPathSize Size
+        public PathSize Size
         {
             get => _size;
             set => Update(ref _size, value);
@@ -52,7 +52,7 @@ namespace Core2D.Path.Segments
         }
 
         /// <inheritdoc/>
-        public override void GetPoints(IList<IPointShape> points)
+        public override void GetPoints(IList<PointShape> points)
         {
             points.Add(Point);
         }

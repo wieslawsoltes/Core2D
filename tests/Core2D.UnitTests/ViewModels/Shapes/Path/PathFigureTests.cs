@@ -49,7 +49,7 @@ namespace Core2D.UnitTests
             var segment2 = new TestSegment() { Point = _factory.CreatePointShape() };
             figure.Segments = figure.Segments.Add(segment2);
 
-            var target = new List<IPointShape>();
+            var target = new List<PointShape>();
             figure.GetPoints(target);
 
             Assert.Equal(3, target.Count());
@@ -65,7 +65,7 @@ namespace Core2D.UnitTests
         {
             var figure = _factory.CreatePathFigure();
 
-            var target = ImmutableArray.Create<IPathSegment>();
+            var target = ImmutableArray.Create<PathSegment>();
             var actual = (figure as PathFigure).ToXamlString(target);
 
             Assert.Equal(string.Empty, actual);
@@ -77,7 +77,7 @@ namespace Core2D.UnitTests
         {
             var figure = _factory.CreatePathFigure();
 
-            var target = ImmutableArray.Create<IPathSegment>();
+            var target = ImmutableArray.Create<PathSegment>();
             var actual = (figure as PathFigure).ToSvgString(target);
 
             Assert.Equal(string.Empty, actual);
@@ -133,9 +133,9 @@ namespace Core2D.UnitTests
 
         public class TestSegment : PathSegment
         {
-            public IPointShape Point { get; set; }
+            public PointShape Point { get; set; }
 
-            public override void GetPoints(IList<IPointShape> points)
+            public override void GetPoints(IList<PointShape> points)
             {
                 points.Add(Point);
             }

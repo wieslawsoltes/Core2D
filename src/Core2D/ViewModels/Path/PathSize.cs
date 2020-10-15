@@ -7,7 +7,7 @@ namespace Core2D.Path
     /// <summary>
     /// Path size.
     /// </summary>
-    public class PathSize : ObservableObject, IPathSize
+    public class PathSize : ObservableObject
     {
         private double _width;
         private double _height;

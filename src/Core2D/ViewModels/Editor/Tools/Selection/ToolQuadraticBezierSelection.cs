@@ -8,19 +8,19 @@ using Core2D.Style;
 namespace Core2D.Editor.Tools.Selection
 {
     /// <summary>
-    /// Helper class for <see cref="IQuadraticBezierShape"/> shape selection.
+    /// Helper class for <see cref="QuadraticBezierShape"/> shape selection.
     /// </summary>
     public class ToolQuadraticBezierSelection
     {
         private readonly IServiceProvider _serviceProvider;
-        private readonly ILayerContainer _layer;
-        private readonly IQuadraticBezierShape _quadraticBezier;
-        private readonly IShapeStyle _style;
-        private ILineShape _line12;
-        private ILineShape _line32;
-        private IPointShape _helperPoint1;
-        private IPointShape _helperPoint2;
-        private IPointShape _helperPoint3;
+        private readonly LayerContainer _layer;
+        private readonly QuadraticBezierShape _quadraticBezier;
+        private readonly ShapeStyle _style;
+        private LineShape _line12;
+        private LineShape _line32;
+        private PointShape _helperPoint1;
+        private PointShape _helperPoint2;
+        private PointShape _helperPoint3;
 
         /// <summary>
         /// Initialize new instance of <see cref="ToolQuadraticBezierSelection"/> class.
@@ -30,7 +30,7 @@ namespace Core2D.Editor.Tools.Selection
         /// <param name="shape">The selected shape.</param>
         /// <param name="style">The selection shapes style.</param>
         /// <param name="point">The selection point shape.</param>
-        public ToolQuadraticBezierSelection(IServiceProvider serviceProvider, ILayerContainer layer, IQuadraticBezierShape shape, IShapeStyle style)
+        public ToolQuadraticBezierSelection(IServiceProvider serviceProvider, LayerContainer layer, QuadraticBezierShape shape, ShapeStyle style)
         {
             _serviceProvider = serviceProvider;
             _layer = layer;

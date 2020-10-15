@@ -7,10 +7,10 @@ namespace Core2D.Data
     /// <summary>
     /// Database record.
     /// </summary>
-    public class Record : ObservableObject, IRecord
+    public class Record : ObservableObject
     {
         private string _id = "";
-        private ImmutableArray<IValue> _values;
+        private ImmutableArray<Value> _values;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Record"/> class.
@@ -19,7 +19,7 @@ namespace Core2D.Data
             : base()
         {
             _id = Guid.NewGuid().ToString();
-            _values = ImmutableArray.Create<IValue>();
+            _values = ImmutableArray.Create<Value>();
         }
 
         /// <inheritdoc/>
@@ -30,7 +30,7 @@ namespace Core2D.Data
         }
 
         /// <inheritdoc/>
-        public ImmutableArray<IValue> Values
+        public ImmutableArray<Value> Values
         {
             get => _values;
             set => Update(ref _values, value);

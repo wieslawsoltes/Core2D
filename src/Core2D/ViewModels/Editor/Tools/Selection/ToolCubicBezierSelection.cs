@@ -13,16 +13,16 @@ namespace Core2D.Editor.Tools.Selection
     public class ToolCubicBezierSelection
     {
         private readonly IServiceProvider _serviceProvider;
-        private readonly ILayerContainer _layer;
-        private readonly ICubicBezierShape _cubicBezier;
-        private readonly IShapeStyle _style;
-        private ILineShape _line12;
-        private ILineShape _line43;
-        private ILineShape _line23;
-        private IPointShape _helperPoint1;
-        private IPointShape _helperPoint2;
-        private IPointShape _helperPoint3;
-        private IPointShape _helperPoint4;
+        private readonly LayerContainer _layer;
+        private readonly CubicBezierShape _cubicBezier;
+        private readonly ShapeStyle _style;
+        private LineShape _line12;
+        private LineShape _line43;
+        private LineShape _line23;
+        private PointShape _helperPoint1;
+        private PointShape _helperPoint2;
+        private PointShape _helperPoint3;
+        private PointShape _helperPoint4;
 
         /// <summary>
         /// Initialize new instance of <see cref="ToolCubicBezierSelection"/> class.
@@ -31,7 +31,7 @@ namespace Core2D.Editor.Tools.Selection
         /// <param name="layer">The selection shapes layer.</param>
         /// <param name="shape">The selected shape.</param>
         /// <param name="style">The selection shapes style.</param>
-        public ToolCubicBezierSelection(IServiceProvider serviceProvider, ILayerContainer layer, ICubicBezierShape shape, IShapeStyle style)
+        public ToolCubicBezierSelection(IServiceProvider serviceProvider, LayerContainer layer, CubicBezierShape shape, ShapeStyle style)
         {
             _serviceProvider = serviceProvider;
             _layer = layer;

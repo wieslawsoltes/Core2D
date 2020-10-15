@@ -11,7 +11,7 @@ namespace Core2D.Editor
     /// <summary>
     /// Project editor configuration.
     /// </summary>
-    public class ProjectEditorConfiguration : ObservableObject, ISettings
+    public class ProjectEditorConfiguration : ObservableObject
     {
         /// <inheritdoc/>
         public override object Copy(IDictionary<object, object> shared)
@@ -20,42 +20,42 @@ namespace Core2D.Editor
         }
 
         /// <summary>
-        /// Default <see cref="ILayerContainer"/> name.
+        /// Default <see cref="LayerContainer"/> name.
         /// </summary>
         public static string DefaultLayerName = "Layer";
 
         /// <summary>
-        /// Default <see cref="IPageContainer"/> template name.
+        /// Default <see cref="PageContainer"/> template name.
         /// </summary>
         public static string DefaultTemplateName = "Template";
 
         /// <summary>
-        /// Default <see cref="IPageContainer"/> page name.
+        /// Default <see cref="PageContainer"/> page name.
         /// </summary>
         public static string DefaultPageName = "Page";
 
         /// <summary>
-        /// Default <see cref="IDocumentContainer"/> name.
+        /// Default <see cref="DocumentContainer"/> name.
         /// </summary>
         public static string DefaultDocumentName = "Document";
 
         /// <summary>
-        /// Default <see cref="IScript"/> script name.
+        /// Default <see cref="Script"/> script name.
         /// </summary>
         public static string DefaultScriptName = "Script";
 
         /// <summary>
-        /// Default <see cref="IDatabase"/> name.
+        /// Default <see cref="Database"/> name.
         /// </summary>
         public static string DefaultDatabaseName = "Database";
 
         /// <summary>
-        /// Default <see cref="IColumn"/> name.
+        /// Default <see cref="Column"/> name.
         /// </summary>
         public static string DefaulColumnName = "Column";
 
         /// <summary>
-        /// Default <see cref="IProperty"/> name.
+        /// Default <see cref="Property"/> name.
         /// </summary>
         public static string DefaulPropertyName = "Property";
 
@@ -65,32 +65,32 @@ namespace Core2D.Editor
         public static string DefaulValue = "<empty>";
 
         /// <summary>
-        /// Default <see cref="ILibrary{IGroupShape}"/> name.
+        /// Default <see cref="Library{GroupShape}"/> name.
         /// </summary>
         public static string DefaulGroupLibraryName = "Groups";
 
         /// <summary>
-        /// Default <see cref="IGroupShape"/> name.
+        /// Default <see cref="GroupShape"/> name.
         /// </summary>
         public static string DefaulGroupName = "Group";
 
         /// <summary>
-        /// Default <see cref="ILibrary{ShapeStyle}"/> name.
+        /// Default <see cref="Library{ShapeStyle}"/> name.
         /// </summary>
         public static string DefaulStyleLibraryName = "Styles";
 
         /// <summary>
-        /// Default <see cref="IShapeStyle"/> name.
+        /// Default <see cref="ShapeStyle"/> name.
         /// </summary>
         public static string DefaulStyleName = "Style";
 
         /// <summary>
-        /// Default imported <see cref="ILibrary{ShapeStyle}"/> name.
+        /// Default imported <see cref="Library{ShapeStyle}"/> name.
         /// </summary>
         public static string ImportedStyleLibraryName = "Imported";
 
         /// <summary>
-        /// Default imported <see cref="IDatabase"/> name.
+        /// Default imported <see cref="Database"/> name.
         /// </summary>
         public static string ImportedDatabaseName = "Imported";
 

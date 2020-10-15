@@ -7,16 +7,16 @@ using Core2D.Style;
 namespace Core2D.Editor.Tools.Selection
 {
     /// <summary>
-    /// Helper class for <see cref="IImageShape"/> shape selection.
+    /// Helper class for <see cref="ImageShape"/> shape selection.
     /// </summary>
     public class ToolImageSelection
     {
         private readonly IServiceProvider _serviceProvider;
-        private readonly ILayerContainer _layer;
-        private readonly IImageShape _image;
-        private readonly IShapeStyle _style;
-        private IPointShape _topLeftHelperPoint;
-        private IPointShape _bottomRightHelperPoint;
+        private readonly LayerContainer _layer;
+        private readonly ImageShape _image;
+        private readonly ShapeStyle _style;
+        private PointShape _topLeftHelperPoint;
+        private PointShape _bottomRightHelperPoint;
 
         /// <summary>
         /// Initialize new instance of <see cref="ToolImageSelection"/> class.
@@ -25,7 +25,7 @@ namespace Core2D.Editor.Tools.Selection
         /// <param name="layer">The selection shapes layer.</param>
         /// <param name="shape">The selected shape.</param>
         /// <param name="style">The selection shapes style.</param>
-        public ToolImageSelection(IServiceProvider serviceProvider, ILayerContainer layer, IImageShape shape, IShapeStyle style)
+        public ToolImageSelection(IServiceProvider serviceProvider, LayerContainer layer, ImageShape shape, ShapeStyle style)
         {
             _serviceProvider = serviceProvider;
             _layer = layer;

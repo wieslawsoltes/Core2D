@@ -5,7 +5,7 @@ namespace Core2D.Renderer
     /// <summary>
     /// Defines grid contract.
     /// </summary>
-    public interface IGrid : IObservableObject
+    public interface IGrid : ObservableObject
     {
         /// <summary>
         /// Gets or sets flag indicating whether grid is enabled.
@@ -50,7 +50,7 @@ namespace Core2D.Renderer
         /// <summary>
         /// Gets or sets grid stroke color.
         /// </summary>
-        IColor GridStrokeColor { get; set; }
+        BaseColor GridStrokeColor { get; set; }
 
         /// <summary>
         /// Gets or sets grid stroke thickness.

@@ -5,7 +5,7 @@ namespace Core2D.Style
     /// <summary>
     /// Line ending arrow style.
     /// </summary>
-    public class ArrowStyle : BaseStyle, IArrowStyle
+    public class ArrowStyle : BaseStyle
     {
         private ArrowType _arrowType;
         private bool _isStroked;
@@ -59,10 +59,10 @@ namespace Core2D.Style
         /// Initializes a new instance of the <see cref="ArrowStyle"/> class.
         /// </summary>
         /// <param name="source">The source style.</param>
-        public ArrowStyle(IBaseStyle source) : this()
+        public ArrowStyle(BaseStyle source) : this()
         {
-            Stroke = (IColor)source.Stroke.Copy(null);
-            Fill = (IColor)source.Fill.Copy(null);
+            Stroke = (Color)source.Stroke.Copy(null);
+            Fill = (Color)source.Fill.Copy(null);
             Thickness = source.Thickness;
             LineCap = source.LineCap;
             Dashes = source.Dashes ?? (default);
@@ -75,8 +75,8 @@ namespace Core2D.Style
             return new ArrowStyle()
             {
                 Name = this.Name,
-                Stroke = (IColor)this.Stroke.Copy(shared),
-                Fill = (IColor)this.Fill.Copy(shared),
+                Stroke = (Color)this.Stroke.Copy(shared),
+                Fill = (Color)this.Fill.Copy(shared),
                 Thickness = this.Thickness,
                 LineCap = this.LineCap,
                 Dashes = this.Dashes,

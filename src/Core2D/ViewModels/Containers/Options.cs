@@ -9,7 +9,7 @@ namespace Core2D.Containers
     /// <summary>
     /// Project options.
     /// </summary>
-    public class Options : ObservableObject, IOptions
+    public class Options : ObservableObject
     {
         private bool _snapToGrid = true;
         private double _snapX = 15.0;
@@ -23,7 +23,7 @@ namespace Core2D.Containers
         private bool _tryToConnect = false;
 
         /// <summary>
-        /// Gets or sets how grid snapping is handled. 
+        /// Gets or sets how grid snapping is handled.
         /// </summary>
         public bool SnapToGrid
         {

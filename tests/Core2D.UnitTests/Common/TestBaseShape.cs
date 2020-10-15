@@ -9,14 +9,14 @@ using Core2D.Style;
 
 namespace Core2D.Common.UnitTests
 {
-    public abstract class TestBaseShape : IBaseShape
+    public abstract class TestBaseShape : BaseShape
     {
         public abstract Type TargetType { get; }
-        public IObservableObject Owner { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public IShapeState State { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public IContext Data { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public ObservableObject Owner { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public ShapeState State { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public Context Data { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
         public string Name { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public IShapeStyle Style { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public ShapeStyle Style { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
         public bool IsStroked { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
         public bool IsFilled { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
@@ -54,7 +54,7 @@ namespace Core2D.Common.UnitTests
             throw new NotImplementedException();
         }
 
-        public void GetPoints(IList<IPointShape> points)
+        public void GetPoints(IList<PointShape> points)
         {
             throw new NotImplementedException();
         }
@@ -64,7 +64,7 @@ namespace Core2D.Common.UnitTests
             throw new NotImplementedException();
         }
 
-        public void Bind(IDataFlow dataFlow, object db, object r)
+        public void Bind(DataFlow dataFlow, object db, object r)
         {
             throw new NotImplementedException();
         }

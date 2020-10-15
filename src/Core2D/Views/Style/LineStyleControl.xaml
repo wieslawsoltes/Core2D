@@ -1,0 +1,32 @@
+﻿<UserControl x:Class="Core2D.UI.Views.Style.LineStyleControl"
+             xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:converters="clr-namespace:Core2D.UI.Converters;assembly=Core2D.UI"
+             xmlns:Style="clr-namespace:Core2D.Style;assembly=Core2D"
+             xmlns:Editor="clr-namespace:Core2D.Editor;assembly=Core2D"
+             xmlns:Designer="clr-namespace:Core2D.UI.Designer;assembly=Core2D.UI"
+             mc:Ignorable="d"
+             d:DataContext="{x:Static Designer:DesignerContext.LineStyle}"
+             d:DesignWidth="250" d:DesignHeight="400"
+             x:DataType="Style:LineStyle" x:CompileBindings="True">
+    <Grid RowDefinitions="Auto,*">
+        <StackPanel Grid.Row="0">
+            <TextBlock Text="Name" Margin="{DynamicResource TextControlThemePadding}"/>
+            <TextBox Text="{Binding Name, Mode=TwoWay}"/>
+            <CheckBox Content="IsCurved" IsChecked="{Binding IsCurved, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
+            <TextBlock Text="Curvature" Margin="{DynamicResource TextControlThemePadding}"/>
+            <TextBox Text="{Binding Curvature, Mode=TwoWay}"/>
+            <TextBlock Text="CurveOrientation" Margin="{DynamicResource TextControlThemePadding}"/>
+            <ComboBox Items="{x:Static Editor:Enums.CurveOrientationValues}" SelectedItem="{Binding CurveOrientation, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
+        </StackPanel>
+        <TabControl Grid.Row="1">
+            <TabItem Header="FixedLength">
+                <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                    <ContentControl Content="{Binding FixedLength}"/>
+                </ScrollViewer>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</UserControl>

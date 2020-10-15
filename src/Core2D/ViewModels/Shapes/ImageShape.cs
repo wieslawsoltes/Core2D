@@ -8,12 +8,12 @@ namespace Core2D.Shapes
     /// <summary>
     /// Image shape.
     /// </summary>
-    public class ImageShape : TextShape, IImageShape
+    public class ImageShape : TextShape
     {
         private string _key;
 
         /// <inheritdoc/>
-        public override Type TargetType => typeof(IImageShape);
+        public override Type TargetType => typeof(ImageShape);
 
         /// <inheritdoc/>
         public string Key
@@ -41,7 +41,7 @@ namespace Core2D.Shapes
         }
 
         /// <inheritdoc/>
-        public override void Bind(IDataFlow dataFlow, object db, object r)
+        public override void Bind(DataFlow dataFlow, object db, object r)
         {
             var record = Data?.Record ?? r;
 

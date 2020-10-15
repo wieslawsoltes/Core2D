@@ -6,20 +6,20 @@ namespace Core2D.Data
     /// <summary>
     /// Data context.
     /// </summary>
-    public class Context : ObservableObject, IContext
+    public class Context : ObservableObject
     {
-        private ImmutableArray<IProperty> _properties;
-        private IRecord _record;
+        private ImmutableArray<Property> _properties;
+        private Record _record;
 
         /// <inheritdoc/>
-        public ImmutableArray<IProperty> Properties
+        public ImmutableArray<Property> Properties
         {
             get => _properties;
             set => Update(ref _properties, value);
         }
 
         /// <inheritdoc/>
-        public IRecord Record
+        public Record Record
         {
             get => _record;
             set => Update(ref _record, value);
@@ -34,7 +34,7 @@ namespace Core2D.Data
             {
                 Name = this.Name,
                 Properties = properties,
-                Record = (IRecord)this.Record.Copy(shared)
+                Record = (Record)this.Record.Copy(shared)
             };
         }
 

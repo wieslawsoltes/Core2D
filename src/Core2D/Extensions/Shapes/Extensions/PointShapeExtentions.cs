@@ -13,7 +13,7 @@ namespace Core2D.Shapes
         /// <param name="point">The point instance.</param>
         /// <param name="other">The other point.</param>
         /// <returns>The distance between points.</returns>
-        public static double DistanceTo(this IPointShape point, IPointShape other)
+        public static double DistanceTo(this PointShape point, PointShape other)
         {
             double dx = point.X - other.X;
             double dy = point.Y - other.Y;

@@ -5,12 +5,12 @@ namespace Core2D.Style
     /// <summary>
     /// Text style.
     /// </summary>
-    public class TextStyle : ObservableObject, ITextStyle
+    public class TextStyle : ObservableObject
     {
         private string _fontName;
         private string _fontFile;
         private double _fontSize;
-        private IFontStyle _fontStyle;
+        private FontStyle _fontStyle;
         private TextHAlignment _textHAlignment;
         private TextVAlignment _textVAlignment;
 
@@ -36,7 +36,7 @@ namespace Core2D.Style
         }
 
         /// <inheritdoc/>
-        public IFontStyle FontStyle
+        public FontStyle FontStyle
         {
             get => _fontStyle;
             set => Update(ref _fontStyle, value);
@@ -65,7 +65,7 @@ namespace Core2D.Style
                 FontName = this.FontName,
                 FontFile = this.FontFile,
                 FontSize = this.FontSize,
-                FontStyle = (IFontStyle)this.FontStyle.Copy(shared),
+                FontStyle = (FontStyle)this.FontStyle.Copy(shared),
                 TextHAlignment = this.TextHAlignment,
                 TextVAlignment = this.TextVAlignment
             };

@@ -15,7 +15,7 @@ namespace Core2D
         /// <param name="width">The converted svg width.</param>
         /// <param name="height">The converted svg height.</param>
         /// <returns>The converted shapes.</returns>
-        IList<IBaseShape> Convert(string path, out double width, out double height);
+        IList<BaseShape> Convert(string path, out double width, out double height);
 
         /// <summary>
         /// Converts svg text to shapes.
@@ -24,6 +24,6 @@ namespace Core2D
         /// <param name="width">The converted svg width.</param>
         /// <param name="height">The converted svg height.</param>
         /// <returns>The converted shapes.</returns>
-        IList<IBaseShape> FromString(string text, out double width, out double height);
+        IList<BaseShape> FromString(string text, out double width, out double height);
     }
 }

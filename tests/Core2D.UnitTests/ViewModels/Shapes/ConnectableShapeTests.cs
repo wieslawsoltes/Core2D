@@ -20,7 +20,7 @@ namespace Core2D.Shapes.UnitTests
             var target = new Class2()
             {
                 State = _factory.CreateShapeState(),
-                Connectors = ImmutableArray.Create<IPointShape>()
+                Connectors = ImmutableArray.Create<PointShape>()
             };
             Assert.True(target is BaseShape);
         }
@@ -32,7 +32,7 @@ namespace Core2D.Shapes.UnitTests
             var target = new Class2()
             {
                 State = _factory.CreateShapeState(),
-                Connectors = ImmutableArray.Create<IPointShape>()
+                Connectors = ImmutableArray.Create<PointShape>()
             };
             Assert.False(target.Connectors.IsDefault);
         }
@@ -44,14 +44,14 @@ namespace Core2D.Shapes.UnitTests
             var target = new Class2()
             {
                 State = _factory.CreateShapeState(),
-                Connectors = ImmutableArray.Create<IPointShape>()
+                Connectors = ImmutableArray.Create<PointShape>()
             };
 
             var point = _factory.CreatePointShape();
             point.Data.Properties = point.Data.Properties.Add(_factory.CreateProperty(null, "", ""));
             target.Connectors = target.Connectors.Add(point);
 
-            var points = new List<IPointShape>();
+            var points = new List<PointShape>();
             target.GetPoints(points);
             var count = points.Count();
             Assert.Equal(1, count);
@@ -64,7 +64,7 @@ namespace Core2D.Shapes.UnitTests
             var target = new Class2()
             {
                 State = _factory.CreateShapeState(),
-                Connectors = ImmutableArray.Create<IPointShape>()
+                Connectors = ImmutableArray.Create<PointShape>()
             };
             var point = _factory.CreatePointShape();
 
@@ -86,7 +86,7 @@ namespace Core2D.Shapes.UnitTests
             var target = new Class2()
             {
                 State = _factory.CreateShapeState(),
-                Connectors = ImmutableArray.Create<IPointShape>()
+                Connectors = ImmutableArray.Create<PointShape>()
             };
             var point = _factory.CreatePointShape();
 
@@ -108,7 +108,7 @@ namespace Core2D.Shapes.UnitTests
             var target = new Class2()
             {
                 State = _factory.CreateShapeState(),
-                Connectors = ImmutableArray.Create<IPointShape>()
+                Connectors = ImmutableArray.Create<PointShape>()
             };
             var point = _factory.CreatePointShape();
 
@@ -142,12 +142,12 @@ namespace Core2D.Shapes.UnitTests
                 throw new NotImplementedException();
             }
 
-            public override void Bind(IDataFlow dataFlow, object db, object r)
+            public override void Bind(DataFlow dataFlow, object db, object r)
             {
                 throw new NotImplementedException();
             }
 
-            public override void GetPoints(IList<IPointShape> points)
+            public override void GetPoints(IList<PointShape> points)
             {
                 throw new NotImplementedException();
             }

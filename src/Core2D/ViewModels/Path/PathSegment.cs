@@ -6,7 +6,7 @@ namespace Core2D.Path
     /// <summary>
     /// <see cref="PathFigure"/> segment base class.
     /// </summary>
-    public abstract class PathSegment : ObservableObject, IPathSegment
+    public abstract class PathSegment : ObservableObject
     {
         private bool _isStroked;
 
@@ -18,7 +18,7 @@ namespace Core2D.Path
         }
 
         /// <inheritdoc/>
-        public abstract void GetPoints(IList<IPointShape> points);
+        public abstract void GetPoints(IList<PointShape> points);
 
         /// <inheritdoc/>
         public abstract string ToXamlString();

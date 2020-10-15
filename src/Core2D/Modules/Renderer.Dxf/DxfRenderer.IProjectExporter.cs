@@ -1,0 +1,131 @@
+﻿using System;
+using System.IO;
+using Core2D;
+using Core2D.Containers;
+using Core2D.Data;
+using DXF = netDxf;
+using DXFH = netDxf.Header;
+using DXFO = netDxf.Objects;
+
+namespace Core2D.Renderer.Dxf
+{
+    /// <summary>
+    /// netDxf dxf <see cref="IProjectExporter"/> implementation.
+    /// </summary>
+    public partial class DxfRenderer : IProjectExporter
+    {
+        /// <inheritdoc/>
+        public void Save(Stream stream, PageContainer container)
+        {
+            if (stream is FileStream fileStream)
+            {
+                _outputPath = System.IO.Path.GetDirectoryName(fileStream.Name);
+            }
+            else
+            {
+                _outputPath = string.Empty;
+            }
+
+            var dxf = new DXF.DxfDocument(DXFH.DxfVersion.AutoCad2010);
+
+            Add(dxf, container);
+
+            dxf.Save(stream);
+            ClearCache();
+        }
+
+        /// <inheritdoc/>
+        public void Save(Stream stream, DocumentContainer document)
+        {
+            if (stream is FileStream fileStream)
+            {
+                _outputPath = System.IO.Path.GetDirectoryName(fileStream.Name);
+            }
+            else
+            {
+                _outputPath = string.Empty;
+            }
+
+            var dxf = new DXF.DxfDocument(DXFH.DxfVersion.AutoCad2010);
+
+            Add(dxf, document);
+
+            dxf.Save(stream);
+            ClearCache();
+        }
+
+        /// <inheritdoc/>
+        public void Save(Stream stream, ProjectContainer project)
+        {
+            if (stream is FileStream fileStream)
+            {
+                _outputPath = System.IO.Path.GetDirectoryName(fileStream.Name);
+            }
+            else
+            {
+                _outputPath = string.Empty;
+            }
+
+            var dxf = new DXF.DxfDocument(DXFH.DxfVersion.AutoCad2010);
+
+            Add(dxf, project);
+
+            dxf.Save(stream);
+            ClearCache();
+        }
+
+        private void Add(DXF.DxfDocument dxf, PageContainer container)
+        {
+            var dataFlow = _serviceProvider.GetService<DataFlow>();
+            var db = (object)container.Data.Properties;
+            var record = (object)container.Data.Record;
+
+            dataFlow.Bind(container.Template, db, record);
+            dataFlow.Bind(container, db, record);
+
+            if (container.Template != null)
+            {
+                _pageWidth = container.Template.Width;
+                _pageHeight = container.Template.Height;
+                DrawPage(dxf, container.Template);
+            }
+            else
+            {
+                throw new NullReferenceException("Container template must be set.");
+            }
+
+            DrawPage(dxf, container);
+        }
+
+        private void Add(DXF.DxfDocument dxf, DocumentContainer document)
+        {
+            foreach (var page in document.Pages)
+            {
+                var layout = new DXFO.Layout(page.Name)
+                {
+                    PlotSettings = new DXFO.PlotSettings()
+                    {
+                        PaperSizeName = $"{page.Template.Name}_({page.Template.Width}_x_{page.Template.Height}_MM)",
+                        PaperMargin = new DXFO.PaperMargin(0, 0, 0, 0),
+                        PaperSize = new DXF.Vector2(page.Template.Width, page.Template.Height),
+                        Origin = new DXF.Vector2(0.0, 0.0),
+                        PaperUnits = DXFO.PlotPaperUnits.Milimeters,
+                        PaperRotation = DXFO.PlotRotation.NoRotation
+                    }
+                };
+                dxf.Layouts.Add(layout);
+                dxf.ActiveLayout = layout.Name;
+
+                Add(dxf, page);
+            }
+        }
+
+        private void Add(DXF.DxfDocument dxf, ProjectContainer project)
+        {
+            foreach (var document in project.Documents)
+            {
+                Add(dxf, document);
+            }
+        }
+    }
+}

@@ -5,7 +5,7 @@ namespace Core2D.Data
     /// <summary>
     /// Database column.
     /// </summary>
-    public class Column : ObservableObject, IColumn
+    public class Column : ObservableObject
     {
         private bool _isVisible;
 

@@ -1,0 +1,30 @@
+﻿<UserControl x:Class="Core2D.UI.Views.Data.ContextControl"
+             xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:converters="clr-namespace:Core2D.UI.Converters;assembly=Core2D.UI"
+             xmlns:data="clr-namespace:Core2D.UI.Views.Data;assembly=Core2D.UI"
+             xmlns:Editor="clr-namespace:Core2D.Editor;assembly=Core2D"
+             xmlns:Data="clr-namespace:Core2D.Data;assembly=Core2D"
+             xmlns:Designer="clr-namespace:Core2D.UI.Designer;assembly=Core2D.UI"
+             mc:Ignorable="d"
+             d:DataContext="{x:Static Designer:DesignerContext.Data}"
+             d:DesignWidth="250" d:DesignHeight="400"
+             x:DataType="Data:Context" x:CompileBindings="True">
+    <Grid RowDefinitions="*">
+        <TabControl Grid.Row="0">
+            <TabItem Header="Record">
+                <Grid RowDefinitions="Auto,*" ColumnDefinitions="*" IsVisible="{Binding !!Record}">
+                    <Menu Grid.Row="0" HorizontalAlignment="Right" IsVisible="{Binding !!Record}">
+                        <MenuItem Header="&#727;" Command="{Binding $parent[TopLevel].DataContext.OnResetRecord}" CommandParameter="{Binding}" IsVisible="{Binding !!Record}" x:CompileBindings="False"/>
+                    </Menu>
+                    <ContentControl Content="{Binding Record}" Grid.Row="1"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Properties">
+                <data:PropertiesControl/>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</UserControl>

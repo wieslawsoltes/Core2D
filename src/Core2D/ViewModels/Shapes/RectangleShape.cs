@@ -8,10 +8,10 @@ namespace Core2D.Shapes
     /// <summary>
     /// Rectangle shape.
     /// </summary>
-    public class RectangleShape : TextShape, IRectangleShape
+    public class RectangleShape : TextShape
     {
         /// <inheritdoc/>
-        public override Type TargetType => typeof(IRectangleShape);
+        public override Type TargetType => typeof(RectangleShape);
 
         /// <inheritdoc/>
         public override void DrawShape(object dc, IShapeRenderer renderer)
@@ -32,7 +32,7 @@ namespace Core2D.Shapes
         }
 
         /// <inheritdoc/>
-        public override void Bind(IDataFlow dataFlow, object db, object r)
+        public override void Bind(DataFlow dataFlow, object db, object r)
         {
             var record = Data?.Record ?? r;
 

@@ -9,12 +9,12 @@ namespace Core2D.Shapes
     /// <summary>
     /// Connectable shape.
     /// </summary>
-    public abstract class ConnectableShape : BaseShape, IConnectableShape
+    public abstract class ConnectableShape : BaseShape
     {
-        private ImmutableArray<IPointShape> _connectors;
+        private ImmutableArray<PointShape> _connectors;
 
         /// <inheritdoc/>
-        public ImmutableArray<IPointShape> Connectors
+        public ImmutableArray<PointShape> Connectors
         {
             get => _connectors;
             set => Update(ref _connectors, value);
@@ -51,7 +51,7 @@ namespace Core2D.Shapes
         }
 
         /// <inheritdoc/>
-        public override void Bind(IDataFlow dataFlow, object db, object r)
+        public override void Bind(DataFlow dataFlow, object db, object r)
         {
             var record = Data?.Record ?? r;
 
@@ -93,7 +93,7 @@ namespace Core2D.Shapes
         }
 
         /// <inheritdoc/>
-        public override void GetPoints(IList<IPointShape> points)
+        public override void GetPoints(IList<PointShape> points)
         {
             foreach (var connector in _connectors)
             {

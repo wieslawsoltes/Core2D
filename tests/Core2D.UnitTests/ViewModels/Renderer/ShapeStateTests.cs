@@ -13,7 +13,7 @@ namespace Core2D.Renderer.UnitTests
         public void Inherits_From_ObservableObject()
         {
             var target = _factory.CreateShapeState();
-            Assert.True(target is IObservableObject);
+            Assert.True(target is ObservableObject);
         }
 
         [Fact]
@@ -36,18 +36,18 @@ namespace Core2D.Renderer.UnitTests
 
             var propertyNames = new string[]
             {
-                nameof(IShapeState.Flags),
-                nameof(IShapeState.Default),
-                nameof(IShapeState.Visible),
-                nameof(IShapeState.Printable),
-                nameof(IShapeState.Locked),
-                nameof(IShapeState.Size),
-                nameof(IShapeState.Thickness),
-                nameof(IShapeState.Connector),
-                nameof(IShapeState.None),
-                nameof(IShapeState.Standalone),
-                nameof(IShapeState.Input),
-                nameof(IShapeState.Output)
+                nameof(ShapeState.Flags),
+                nameof(ShapeState.Default),
+                nameof(ShapeState.Visible),
+                nameof(ShapeState.Printable),
+                nameof(ShapeState.Locked),
+                nameof(ShapeState.Size),
+                nameof(ShapeState.Thickness),
+                nameof(ShapeState.Connector),
+                nameof(ShapeState.None),
+                nameof(ShapeState.Standalone),
+                nameof(ShapeState.Input),
+                nameof(ShapeState.Output)
             };
 
             Assert.Equal(propertyNames, target.PropertyNames);
