@@ -5,13 +5,6 @@ using System.Collections.Immutable;
 namespace Core2D.Containers
 {
     /// <summary>
-    /// Defines a container contract.
-    /// </summary>
-    public abstract class BaseContainer : ObservableObject
-    {
-    }
-
-    /// <summary>
     /// Document container.
     /// </summary>
     public class DocumentContainer : BaseContainer
