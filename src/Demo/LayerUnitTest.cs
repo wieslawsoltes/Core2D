@@ -47,6 +47,25 @@ namespace Demo
                 Console.WriteLine($"Changes: {x}");
                 foreach (Change<Item> y in x)
                 {
+                    switch (y.Reason)
+                    {
+                        case ListChangeReason.Add:
+                            break;
+                        case ListChangeReason.AddRange:
+                            break;
+                        case ListChangeReason.Replace:
+                            break;
+                        case ListChangeReason.Remove:
+                            break;
+                        case ListChangeReason.RemoveRange:
+                            break;
+                        case ListChangeReason.Refresh:
+                            break;
+                        case ListChangeReason.Moved:
+                            break;
+                        case ListChangeReason.Clear:
+                            break;
+                    }
                     Console.WriteLine($"  Change: {y}");
                 }
             });
