@@ -75,14 +75,14 @@ namespace Core2D.Editor.Tools.Decorators
         public LayerContainer Layer
         {
             get => _layer;
-            set => Update(ref _layer, value);
+            set => RaiseAndSetIfChanged(ref _layer, value);
         }
 
         /// <inheritdoc/>
         public IList<BaseShape> Shapes
         {
             get => _shapes;
-            set => Update(ref _shapes, value);
+            set => RaiseAndSetIfChanged(ref _shapes, value);
         }
 
         /// <inheritdoc/>
@@ -92,21 +92,21 @@ namespace Core2D.Editor.Tools.Decorators
         public ShapeStyle Style
         {
             get => _style;
-            set => Update(ref _style, value);
+            set => RaiseAndSetIfChanged(ref _style, value);
         }
 
         /// <inheritdoc/>
         public bool IsStroked
         {
             get => _isStroked;
-            set => Update(ref _isStroked, value);
+            set => RaiseAndSetIfChanged(ref _isStroked, value);
         }
 
         /// <inheritdoc/>
         public bool IsFilled
         {
             get => _isFilled;
-            set => Update(ref _isFilled, value);
+            set => RaiseAndSetIfChanged(ref _isFilled, value);
         }
 
         /// <summary>

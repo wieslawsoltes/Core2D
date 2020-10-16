@@ -60,7 +60,7 @@ namespace Core2D.Editor.Tools
         public ToolSettingsPath Settings
         {
             get => _settings;
-            set => Update(ref _settings, value);
+            set => RaiseAndSetIfChanged(ref _settings, value);
         }
 
         /// <summary>

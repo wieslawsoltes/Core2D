@@ -20,14 +20,14 @@ namespace Core2D.Shapes
         public PointShape TopLeft
         {
             get => _topLeft;
-            set => Update(ref _topLeft, value);
+            set => RaiseAndSetIfChanged(ref _topLeft, value);
         }
 
         /// <inheritdoc/>
         public PointShape BottomRight
         {
             get => _bottomRight;
-            set => Update(ref _bottomRight, value);
+            set => RaiseAndSetIfChanged(ref _bottomRight, value);
         }
 
         /// <inheritdoc/>

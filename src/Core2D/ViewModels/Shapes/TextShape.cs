@@ -21,21 +21,21 @@ namespace Core2D.Shapes
         public PointShape TopLeft
         {
             get => _topLeft;
-            set => Update(ref _topLeft, value);
+            set => RaiseAndSetIfChanged(ref _topLeft, value);
         }
 
         /// <inheritdoc/>
         public PointShape BottomRight
         {
             get => _bottomRight;
-            set => Update(ref _bottomRight, value);
+            set => RaiseAndSetIfChanged(ref _bottomRight, value);
         }
 
         /// <inheritdoc/>
         public string Text
         {
             get => _text;
-            set => Update(ref _text, value);
+            set => RaiseAndSetIfChanged(ref _text, value);
         }
 
         /// <inheritdoc/>

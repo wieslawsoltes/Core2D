@@ -19,11 +19,11 @@ namespace Core2D.Editor
             get => _flags;
             set
             {
-                Update(ref _flags, value);
-                Notify(nameof(None));
-                Notify(nameof(Alt));
-                Notify(nameof(Control));
-                Notify(nameof(Shift));
+                RaiseAndSetIfChanged(ref _flags, value);
+                RaisePropertyChanged(nameof(None));
+                RaisePropertyChanged(nameof(Alt));
+                RaisePropertyChanged(nameof(Control));
+                RaisePropertyChanged(nameof(Shift));
             }
         }
 

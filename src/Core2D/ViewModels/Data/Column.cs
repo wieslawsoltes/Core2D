@@ -13,7 +13,7 @@ namespace Core2D.Data
         public bool IsVisible
         {
             get => _isVisible;
-            set => Update(ref _isVisible, value);
+            set => RaiseAndSetIfChanged(ref _isVisible, value);
         }
 
         /// <inheritdoc/>

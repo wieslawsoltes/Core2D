@@ -30,7 +30,7 @@ namespace Core2D.Editor.Tools
         public ToolSettingsRectangle Settings
         {
             get => _settings;
-            set => Update(ref _settings, value);
+            set => RaiseAndSetIfChanged(ref _settings, value);
         }
 
         /// <summary>

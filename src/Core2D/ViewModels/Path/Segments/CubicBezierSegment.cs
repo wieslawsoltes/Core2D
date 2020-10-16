@@ -17,21 +17,21 @@ namespace Core2D.Path.Segments
         public PointShape Point1
         {
             get => _point1;
-            set => Update(ref _point1, value);
+            set => RaiseAndSetIfChanged(ref _point1, value);
         }
 
         /// <inheritdoc/>
         public PointShape Point2
         {
             get => _point2;
-            set => Update(ref _point2, value);
+            set => RaiseAndSetIfChanged(ref _point2, value);
         }
 
         /// <inheritdoc/>
         public PointShape Point3
         {
             get => _point3;
-            set => Update(ref _point3, value);
+            set => RaiseAndSetIfChanged(ref _point3, value);
         }
 
         /// <inheritdoc/>

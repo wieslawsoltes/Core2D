@@ -17,35 +17,35 @@ namespace Core2D.Style
         public ArrowType ArrowType
         {
             get => _arrowType;
-            set => Update(ref _arrowType, value);
+            set => RaiseAndSetIfChanged(ref _arrowType, value);
         }
 
         /// <inheritdoc/>
         public bool IsStroked
         {
             get => _isStroked;
-            set => Update(ref _isStroked, value);
+            set => RaiseAndSetIfChanged(ref _isStroked, value);
         }
 
         /// <inheritdoc/>
         public bool IsFilled
         {
             get => _isFilled;
-            set => Update(ref _isFilled, value);
+            set => RaiseAndSetIfChanged(ref _isFilled, value);
         }
 
         /// <inheritdoc/>
         public double RadiusX
         {
             get => _radiusX;
-            set => Update(ref _radiusX, value);
+            set => RaiseAndSetIfChanged(ref _radiusX, value);
         }
 
         /// <inheritdoc/>
         public double RadiusY
         {
             get => _radiusY;
-            set => Update(ref _radiusY, value);
+            set => RaiseAndSetIfChanged(ref _radiusY, value);
         }
 
         /// <summary>

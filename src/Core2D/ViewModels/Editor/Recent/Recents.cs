@@ -19,7 +19,7 @@ namespace Core2D.Editor.Recent
         public ImmutableArray<RecentFile> Files
         {
             get => _files;
-            set => Update(ref _files, value);
+            set => RaiseAndSetIfChanged(ref _files, value);
         }
 
         /// <summary>
@@ -28,7 +28,7 @@ namespace Core2D.Editor.Recent
         public RecentFile Current
         {
             get => _current;
-            set => Update(ref _current, value);
+            set => RaiseAndSetIfChanged(ref _current, value);
         }
 
         /// <inheritdoc/>

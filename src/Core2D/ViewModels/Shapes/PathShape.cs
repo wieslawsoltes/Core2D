@@ -22,7 +22,7 @@ namespace Core2D.Shapes
         public PathGeometry Geometry
         {
             get => _geometry;
-            set => Update(ref _geometry, value);
+            set => RaiseAndSetIfChanged(ref _geometry, value);
         }
 
         private void UpdatePoints()

@@ -27,7 +27,7 @@ namespace Core2D.Shapes
             get => _shapes;
             set
             {
-                if (Update(ref _shapes, value))
+                if (RaiseAndSetIfChanged(ref _shapes, value))
                 {
                     _shapesProperties = default;
                 }

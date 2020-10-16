@@ -14,7 +14,7 @@ namespace Core2D.Path
         public bool IsStroked
         {
             get => _isStroked;
-            set => Update(ref _isStroked, value);
+            set => RaiseAndSetIfChanged(ref _isStroked, value);
         }
 
         /// <inheritdoc/>

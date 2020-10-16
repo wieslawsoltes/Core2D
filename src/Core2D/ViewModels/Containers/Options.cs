@@ -28,7 +28,7 @@ namespace Core2D.Containers
         public bool SnapToGrid
         {
             get => _snapToGrid;
-            set => Update(ref _snapToGrid, value);
+            set => RaiseAndSetIfChanged(ref _snapToGrid, value);
         }
 
         /// <summary>
@@ -37,7 +37,7 @@ namespace Core2D.Containers
         public double SnapX
         {
             get => _snapX;
-            set => Update(ref _snapX, value);
+            set => RaiseAndSetIfChanged(ref _snapX, value);
         }
 
         /// <summary>
@@ -46,7 +46,7 @@ namespace Core2D.Containers
         public double SnapY
         {
             get => _snapY;
-            set => Update(ref _snapY, value);
+            set => RaiseAndSetIfChanged(ref _snapY, value);
         }
 
         /// <summary>
@@ -55,7 +55,7 @@ namespace Core2D.Containers
         public double HitThreshold
         {
             get => _hitThreshold;
-            set => Update(ref _hitThreshold, value);
+            set => RaiseAndSetIfChanged(ref _hitThreshold, value);
         }
 
         /// <summary>
@@ -64,7 +64,7 @@ namespace Core2D.Containers
         public MoveMode MoveMode
         {
             get => _moveMode;
-            set => Update(ref _moveMode, value);
+            set => RaiseAndSetIfChanged(ref _moveMode, value);
         }
 
         /// <summary>
@@ -73,7 +73,7 @@ namespace Core2D.Containers
         public bool DefaultIsStroked
         {
             get => _defaultIsStroked;
-            set => Update(ref _defaultIsStroked, value);
+            set => RaiseAndSetIfChanged(ref _defaultIsStroked, value);
         }
 
         /// <summary>
@@ -82,7 +82,7 @@ namespace Core2D.Containers
         public bool DefaultIsFilled
         {
             get => _defaultIsFilled;
-            set => Update(ref _defaultIsFilled, value);
+            set => RaiseAndSetIfChanged(ref _defaultIsFilled, value);
         }
 
         /// <summary>
@@ -91,7 +91,7 @@ namespace Core2D.Containers
         public bool DefaultIsClosed
         {
             get => _defaultIsClosed;
-            set => Update(ref _defaultIsClosed, value);
+            set => RaiseAndSetIfChanged(ref _defaultIsClosed, value);
         }
 
         /// <summary>
@@ -100,7 +100,7 @@ namespace Core2D.Containers
         public FillRule DefaultFillRule
         {
             get => _defaultFillRule;
-            set => Update(ref _defaultFillRule, value);
+            set => RaiseAndSetIfChanged(ref _defaultFillRule, value);
         }
 
         /// <summary>
@@ -109,7 +109,7 @@ namespace Core2D.Containers
         public bool TryToConnect
         {
             get => _tryToConnect;
-            set => Update(ref _tryToConnect, value);
+            set => RaiseAndSetIfChanged(ref _tryToConnect, value);
         }
 
         /// <inheritdoc/>

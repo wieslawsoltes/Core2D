@@ -28,7 +28,7 @@ namespace Core2D.Containers
             }
 
             _images.Add(key, bytes);
-            Notify(nameof(Keys));
+            RaisePropertyChanged(nameof(Keys));
             return key;
         }
 
@@ -41,7 +41,7 @@ namespace Core2D.Containers
             }
 
             _images.Add(key, bytes);
-            Notify(nameof(Keys));
+            RaisePropertyChanged(nameof(Keys));
         }
 
         /// <inheritdoc/>
@@ -61,7 +61,7 @@ namespace Core2D.Containers
         public void RemoveImage(string key)
         {
             _images.Remove(key);
-            Notify(nameof(Keys));
+            RaisePropertyChanged(nameof(Keys));
         }
 
         /// <inheritdoc/>
@@ -74,7 +74,7 @@ namespace Core2D.Containers
                     _images.Remove(kvp.Key);
                 }
             }
-            Notify(nameof(Keys));
+            RaisePropertyChanged(nameof(Keys));
         }
     }
 }

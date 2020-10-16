@@ -20,7 +20,7 @@ namespace Core2D.Editors
         public ProjectEditor Editor
         {
             get => _editor;
-            set => Update(ref _editor, value);
+            set => RaiseAndSetIfChanged(ref _editor, value);
         }
 
         /// <summary>
@@ -29,7 +29,7 @@ namespace Core2D.Editors
         public TextShape Text
         {
             get => _text;
-            set => Update(ref _text, value);
+            set => RaiseAndSetIfChanged(ref _text, value);
         }
 
         /// <inheritdoc/>

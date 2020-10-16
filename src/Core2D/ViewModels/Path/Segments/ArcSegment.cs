@@ -20,35 +20,35 @@ namespace Core2D.Path.Segments
         public PointShape Point
         {
             get => _point;
-            set => Update(ref _point, value);
+            set => RaiseAndSetIfChanged(ref _point, value);
         }
 
         /// <inheritdoc/>
         public PathSize Size
         {
             get => _size;
-            set => Update(ref _size, value);
+            set => RaiseAndSetIfChanged(ref _size, value);
         }
 
         /// <inheritdoc/>
         public double RotationAngle
         {
             get => _rotationAngle;
-            set => Update(ref _rotationAngle, value);
+            set => RaiseAndSetIfChanged(ref _rotationAngle, value);
         }
 
         /// <inheritdoc/>
         public bool IsLargeArc
         {
             get => _isLargeArc;
-            set => Update(ref _isLargeArc, value);
+            set => RaiseAndSetIfChanged(ref _isLargeArc, value);
         }
 
         /// <inheritdoc/>
         public SweepDirection SweepDirection
         {
             get => _sweepDirection;
-            set => Update(ref _sweepDirection, value);
+            set => RaiseAndSetIfChanged(ref _sweepDirection, value);
         }
 
         /// <inheritdoc/>

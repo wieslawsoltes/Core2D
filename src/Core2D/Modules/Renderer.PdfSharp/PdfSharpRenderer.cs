@@ -25,7 +25,7 @@ namespace Core2D.Renderer.PdfSharp
         public ShapeRendererState State
         {
             get => _state;
-            set => Update(ref _state, value);
+            set => RaiseAndSetIfChanged(ref _state, value);
         }
 
         /// <summary>

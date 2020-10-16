@@ -16,28 +16,28 @@ namespace Core2D.Style
         public bool IsCurved
         {
             get => _isCurved;
-            set => Update(ref _isCurved, value);
+            set => RaiseAndSetIfChanged(ref _isCurved, value);
         }
 
         /// <inheritdoc/>
         public double Curvature
         {
             get => _curvature;
-            set => Update(ref _curvature, value);
+            set => RaiseAndSetIfChanged(ref _curvature, value);
         }
 
         /// <inheritdoc/>
         public CurveOrientation CurveOrientation
         {
             get => _curveOrientation;
-            set => Update(ref _curveOrientation, value);
+            set => RaiseAndSetIfChanged(ref _curveOrientation, value);
         }
 
         /// <inheritdoc/>
         public LineFixedLength FixedLength
         {
             get => _fixedLength;
-            set => Update(ref _fixedLength, value);
+            set => RaiseAndSetIfChanged(ref _fixedLength, value);
         }
 
         /// <inheritdoc/>

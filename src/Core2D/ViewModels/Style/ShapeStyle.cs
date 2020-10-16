@@ -16,28 +16,28 @@ namespace Core2D.Style
         public LineStyle LineStyle
         {
             get => _lineStyle;
-            set => Update(ref _lineStyle, value);
+            set => RaiseAndSetIfChanged(ref _lineStyle, value);
         }
 
         /// <inheritdoc/>
         public ArrowStyle StartArrowStyle
         {
             get => _startArrowStyle;
-            set => Update(ref _startArrowStyle, value);
+            set => RaiseAndSetIfChanged(ref _startArrowStyle, value);
         }
 
         /// <inheritdoc/>
         public ArrowStyle EndArrowStyle
         {
             get => _endArrowStyle;
-            set => Update(ref _endArrowStyle, value);
+            set => RaiseAndSetIfChanged(ref _endArrowStyle, value);
         }
 
         /// <inheritdoc/>
         public TextStyle TextStyle
         {
             get => _textStyle;
-            set => Update(ref _textStyle, value);
+            set => RaiseAndSetIfChanged(ref _textStyle, value);
         }
 
         /// <inheritdoc/>

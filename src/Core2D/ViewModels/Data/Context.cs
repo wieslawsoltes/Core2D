@@ -15,14 +15,14 @@ namespace Core2D.Data
         public ImmutableArray<Property> Properties
         {
             get => _properties;
-            set => Update(ref _properties, value);
+            set => RaiseAndSetIfChanged(ref _properties, value);
         }
 
         /// <inheritdoc/>
         public Record Record
         {
             get => _record;
-            set => Update(ref _record, value);
+            set => RaiseAndSetIfChanged(ref _record, value);
         }
 
         /// <inheritdoc/>

@@ -16,16 +16,16 @@ namespace Core2D.Style
             get => _flags;
             set
             {
-                Update(ref _flags, value);
+                RaiseAndSetIfChanged(ref _flags, value);
                 NatifyAll();
             }
         }
 
         private void NatifyAll()
         {
-            Notify(nameof(Regular));
-            Notify(nameof(Bold));
-            Notify(nameof(Italic));
+            RaisePropertyChanged(nameof(Regular));
+            RaisePropertyChanged(nameof(Bold));
+            RaisePropertyChanged(nameof(Italic));
         }
 
         /// <inheritdoc/>

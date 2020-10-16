@@ -186,11 +186,11 @@ namespace Core2D.Editor
 
         private void ObserveTemplateBackgroud(object sender, PropertyChangedEventArgs e)
         {
-            _editor.Project.CurrentContainer.Notify(nameof(PageContainer.Background));
+            _editor.Project.CurrentContainer.RaisePropertyChanged(nameof(PageContainer.Background));
             var page = _editor.Project.CurrentContainer;
             if (page != null)
             {
-                page.Template.Notify(nameof(PageContainer.Background));
+                page.Template.RaisePropertyChanged(nameof(PageContainer.Background));
             }
             _invalidateLayers();
             MarkAsDirty();
@@ -198,11 +198,11 @@ namespace Core2D.Editor
 
         private void ObserveGridStrokeColor(object sender, PropertyChangedEventArgs e)
         {
-            _editor.Project.CurrentContainer.Notify(nameof(IGrid.GridStrokeColor));
+            _editor.Project.CurrentContainer.RaisePropertyChanged(nameof(IGrid.GridStrokeColor));
             var page = _editor.Project.CurrentContainer;
             if (page != null)
             {
-                page.Template.Notify(nameof(IGrid.GridStrokeColor));
+                page.Template.RaisePropertyChanged(nameof(IGrid.GridStrokeColor));
             }
             _invalidateLayers();
             MarkAsDirty();

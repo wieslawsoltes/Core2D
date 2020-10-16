@@ -26,14 +26,14 @@ namespace Core2D.Data
         public string Id
         {
             get => _id;
-            set => Update(ref _id, value);
+            set => RaiseAndSetIfChanged(ref _id, value);
         }
 
         /// <inheritdoc/>
         public ImmutableArray<Value> Values
         {
             get => _values;
-            set => Update(ref _values, value);
+            set => RaiseAndSetIfChanged(ref _values, value);
         }
 
         /// <inheritdoc/>

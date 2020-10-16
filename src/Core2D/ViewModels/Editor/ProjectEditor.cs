@@ -65,70 +65,70 @@ namespace Core2D.Editor
         public ProjectContainer Project
         {
             get => _project;
-            set => Update(ref _project, value);
+            set => RaiseAndSetIfChanged(ref _project, value);
         }
 
         /// <inheritdoc/>
         public string ProjectPath
         {
             get => _projectPath;
-            set => Update(ref _projectPath, value);
+            set => RaiseAndSetIfChanged(ref _projectPath, value);
         }
 
         /// <inheritdoc/>
         public bool IsProjectDirty
         {
             get => _isProjectDirty;
-            set => Update(ref _isProjectDirty, value);
+            set => RaiseAndSetIfChanged(ref _isProjectDirty, value);
         }
 
         /// <inheritdoc/>
         public ProjectObserver Observer
         {
             get => _observer;
-            set => Update(ref _observer, value);
+            set => RaiseAndSetIfChanged(ref _observer, value);
         }
 
         /// <inheritdoc/>
         public bool IsToolIdle
         {
             get => _isToolIdle;
-            set => Update(ref _isToolIdle, value);
+            set => RaiseAndSetIfChanged(ref _isToolIdle, value);
         }
 
         /// <inheritdoc/>
         public IEditorTool CurrentTool
         {
             get => _currentTool;
-            set => Update(ref _currentTool, value);
+            set => RaiseAndSetIfChanged(ref _currentTool, value);
         }
 
         /// <inheritdoc/>
         public IPathTool CurrentPathTool
         {
             get => _currentPathTool;
-            set => Update(ref _currentPathTool, value);
+            set => RaiseAndSetIfChanged(ref _currentPathTool, value);
         }
 
         /// <inheritdoc/>
         public ImmutableArray<RecentFile> RecentProjects
         {
             get => _recentProjects;
-            set => Update(ref _recentProjects, value);
+            set => RaiseAndSetIfChanged(ref _recentProjects, value);
         }
 
         /// <inheritdoc/>
         public RecentFile CurrentRecentProject
         {
             get => _currentRecentProject;
-            set => Update(ref _currentRecentProject, value);
+            set => RaiseAndSetIfChanged(ref _currentRecentProject, value);
         }
 
         /// <inheritdoc/>
         public AboutInfo AboutInfo
         {
             get => _aboutInfo;
-            set => Update(ref _aboutInfo, value);
+            set => RaiseAndSetIfChanged(ref _aboutInfo, value);
         }
 
         /// <inheritdoc/>

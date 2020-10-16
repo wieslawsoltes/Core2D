@@ -26,7 +26,7 @@ namespace Core2D.Renderer.WinForms
         public ShapeRendererState State
         {
             get => _state;
-            set => Update(ref _state, value);
+            set => RaiseAndSetIfChanged(ref _state, value);
         }
 
         /// <summary>

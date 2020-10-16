@@ -17,7 +17,7 @@ namespace Core2D.Shapes
         public ImmutableArray<PointShape> Connectors
         {
             get => _connectors;
-            set => Update(ref _connectors, value);
+            set => RaiseAndSetIfChanged(ref _connectors, value);
         }
 
         /// <inheritdoc/>

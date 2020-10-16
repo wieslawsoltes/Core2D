@@ -22,7 +22,7 @@ namespace Core2D.Path
         public PointShape StartPoint
         {
             get => _startPoint;
-            set => Update(ref _startPoint, value);
+            set => RaiseAndSetIfChanged(ref _startPoint, value);
         }
 
         /// <summary>
@@ -31,7 +31,7 @@ namespace Core2D.Path
         public ImmutableArray<PathSegment> Segments
         {
             get => _segments;
-            set => Update(ref _segments, value);
+            set => RaiseAndSetIfChanged(ref _segments, value);
         }
 
         /// <summary>
@@ -40,7 +40,7 @@ namespace Core2D.Path
         public bool IsClosed
         {
             get => _isClosed;
-            set => Update(ref _isClosed, value);
+            set => RaiseAndSetIfChanged(ref _isClosed, value);
         }
 
         /// <inheritdoc/>

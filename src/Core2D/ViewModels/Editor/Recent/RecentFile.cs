@@ -17,7 +17,7 @@ namespace Core2D.Editor.Recent
         public string Path
         {
             get => _path;
-            set => Update(ref _path, value);
+            set => RaiseAndSetIfChanged(ref _path, value);
         }
 
         /// <inheritdoc/>

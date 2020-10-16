@@ -13,7 +13,7 @@ namespace Core2D.Data
         public string Content
         {
             get => _content;
-            set => Update(ref _content, value);
+            set => RaiseAndSetIfChanged(ref _content, value);
         }
 
         /// <inheritdoc/>

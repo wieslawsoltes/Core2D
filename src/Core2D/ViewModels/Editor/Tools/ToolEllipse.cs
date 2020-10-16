@@ -35,7 +35,7 @@ namespace Core2D.Editor.Tools
         public ToolSettingsEllipse Settings
         {
             get => _settings;
-            set => Update(ref _settings, value);
+            set => RaiseAndSetIfChanged(ref _settings, value);
         }
 
         /// <summary>

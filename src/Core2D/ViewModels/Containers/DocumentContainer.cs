@@ -18,7 +18,7 @@ namespace Core2D.Containers
         public bool IsExpanded
         {
             get => _isExpanded;
-            set => Update(ref _isExpanded, value);
+            set => RaiseAndSetIfChanged(ref _isExpanded, value);
         }
 
         /// <summary>
@@ -27,7 +27,7 @@ namespace Core2D.Containers
         public ImmutableArray<PageContainer> Pages
         {
             get => _pages;
-            set => Update(ref _pages, value);
+            set => RaiseAndSetIfChanged(ref _pages, value);
         }
 
         /// <inheritdoc/>

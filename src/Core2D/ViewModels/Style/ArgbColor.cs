@@ -20,28 +20,28 @@ namespace Core2D.Style
         public byte A
         {
             get => _a;
-            set => Update(ref _a, value);
+            set => RaiseAndSetIfChanged(ref _a, value);
         }
 
         /// <inheritdoc/>
         public byte R
         {
             get => _r;
-            set => Update(ref _r, value);
+            set => RaiseAndSetIfChanged(ref _r, value);
         }
 
         /// <inheritdoc/>
         public byte G
         {
             get => _g;
-            set => Update(ref _g, value);
+            set => RaiseAndSetIfChanged(ref _g, value);
         }
 
         /// <inheritdoc/>
         public byte B
         {
             get => _b;
-            set => Update(ref _b, value);
+            set => RaiseAndSetIfChanged(ref _b, value);
         }
 
         /// <inheritdoc/>

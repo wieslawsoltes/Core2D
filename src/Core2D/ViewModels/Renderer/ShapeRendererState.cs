@@ -30,105 +30,105 @@ namespace Core2D.Renderer
         public double PanX
         {
             get => _panX;
-            set => Update(ref _panX, value);
+            set => RaiseAndSetIfChanged(ref _panX, value);
         }
 
         /// <inheritdoc/>
         public double PanY
         {
             get => _panY;
-            set => Update(ref _panY, value);
+            set => RaiseAndSetIfChanged(ref _panY, value);
         }
 
         /// <inheritdoc/>
         public double ZoomX
         {
             get => _zoomX;
-            set => Update(ref _zoomX, value);
+            set => RaiseAndSetIfChanged(ref _zoomX, value);
         }
 
         /// <inheritdoc/>
         public double ZoomY
         {
             get => _zoomY;
-            set => Update(ref _zoomY, value);
+            set => RaiseAndSetIfChanged(ref _zoomY, value);
         }
 
         /// <inheritdoc/>
         public ShapeState DrawShapeState
         {
             get => _drawShapeState;
-            set => Update(ref _drawShapeState, value);
+            set => RaiseAndSetIfChanged(ref _drawShapeState, value);
         }
 
         /// <inheritdoc/>
         public ISet<BaseShape> SelectedShapes
         {
             get => _selectedShapes;
-            set => Update(ref _selectedShapes, value);
+            set => RaiseAndSetIfChanged(ref _selectedShapes, value);
         }
 
         /// <inheritdoc/>
         public IImageCache ImageCache
         {
             get => _imageCache;
-            set => Update(ref _imageCache, value);
+            set => RaiseAndSetIfChanged(ref _imageCache, value);
         }
 
         /// <inheritdoc/>
         public bool DrawDecorators
         {
             get => _drawDecorators;
-            set => Update(ref _drawDecorators, value);
+            set => RaiseAndSetIfChanged(ref _drawDecorators, value);
         }
 
         /// <inheritdoc/>
         public bool DrawPoints
         {
             get => _drawPoints;
-            set => Update(ref _drawPoints, value);
+            set => RaiseAndSetIfChanged(ref _drawPoints, value);
         }
 
         /// <inheritdoc/>
         public ShapeStyle PointStyle
         {
             get => _pointStyle;
-            set => Update(ref _pointStyle, value);
+            set => RaiseAndSetIfChanged(ref _pointStyle, value);
         }
 
         /// <inheritdoc/>
         public ShapeStyle SelectedPointStyle
         {
             get => _selectedPointStyle;
-            set => Update(ref _selectedPointStyle, value);
+            set => RaiseAndSetIfChanged(ref _selectedPointStyle, value);
         }
 
         /// <inheritdoc/>
         public double PointSize
         {
             get => _pointSize;
-            set => Update(ref _pointSize, value);
+            set => RaiseAndSetIfChanged(ref _pointSize, value);
         }
 
         /// <inheritdoc/>
         public ShapeStyle SelectionStyle
         {
             get => _selectionStyle;
-            set => Update(ref _selectionStyle, value);
+            set => RaiseAndSetIfChanged(ref _selectionStyle, value);
         }
 
         /// <inheritdoc/>
         public ShapeStyle HelperStyle
         {
             get => _helperStyle;
-            set => Update(ref _helperStyle, value);
+            set => RaiseAndSetIfChanged(ref _helperStyle, value);
         }
 
         /// <inheritdoc/>
         public IDecorator Decorator
         {
             get => _decorator;
-            set => Update(ref _decorator, value);
+            set => RaiseAndSetIfChanged(ref _decorator, value);
         }
 
         /// <inheritdoc/>

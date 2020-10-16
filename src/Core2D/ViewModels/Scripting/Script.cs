@@ -18,7 +18,7 @@ namespace Core2D.Scripting
         public string Code
         {
             get => _code;
-            set => Update(ref _code, value);
+            set => RaiseAndSetIfChanged(ref _code, value);
         }
 
         /// <inheritdoc/>

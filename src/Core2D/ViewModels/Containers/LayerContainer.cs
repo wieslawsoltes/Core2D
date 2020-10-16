@@ -38,7 +38,7 @@ namespace Core2D.Containers
             get => _isVisible;
             set
             {
-                Update(ref _isVisible, value);
+                RaiseAndSetIfChanged(ref _isVisible, value);
                 InvalidateLayer();
             }
         }
@@ -49,7 +49,7 @@ namespace Core2D.Containers
         public ImmutableArray<BaseShape> Shapes
         {
             get => _shapes;
-            set => Update(ref _shapes, value);
+            set => RaiseAndSetIfChanged(ref _shapes, value);
         }
 
         /// <summary>

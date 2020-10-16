@@ -23,21 +23,21 @@ namespace Core2D.Shapes
         public double X
         {
             get => _x;
-            set => Update(ref _x, value);
+            set => RaiseAndSetIfChanged(ref _x, value);
         }
 
         /// <inheritdoc/>
         public double Y
         {
             get => _y;
-            set => Update(ref _y, value);
+            set => RaiseAndSetIfChanged(ref _y, value);
         }
 
         /// <inheritdoc/>
         public PointAlignment Alignment
         {
             get => _alignment;
-            set => Update(ref _alignment, value);
+            set => RaiseAndSetIfChanged(ref _alignment, value);
         }
 
         /// <inheritdoc/>

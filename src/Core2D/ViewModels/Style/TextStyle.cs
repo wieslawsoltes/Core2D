@@ -18,42 +18,42 @@ namespace Core2D.Style
         public string FontName
         {
             get => _fontName;
-            set => Update(ref _fontName, value);
+            set => RaiseAndSetIfChanged(ref _fontName, value);
         }
 
         /// <inheritdoc/>
         public string FontFile
         {
             get => _fontFile;
-            set => Update(ref _fontFile, value);
+            set => RaiseAndSetIfChanged(ref _fontFile, value);
         }
 
         /// <inheritdoc/>
         public double FontSize
         {
             get => _fontSize;
-            set => Update(ref _fontSize, value);
+            set => RaiseAndSetIfChanged(ref _fontSize, value);
         }
 
         /// <inheritdoc/>
         public FontStyle FontStyle
         {
             get => _fontStyle;
-            set => Update(ref _fontStyle, value);
+            set => RaiseAndSetIfChanged(ref _fontStyle, value);
         }
 
         /// <inheritdoc/>
         public TextHAlignment TextHAlignment
         {
             get => _textHAlignment;
-            set => Update(ref _textHAlignment, value);
+            set => RaiseAndSetIfChanged(ref _textHAlignment, value);
         }
 
         /// <inheritdoc/>
         public TextVAlignment TextVAlignment
         {
             get => _textVAlignment;
-            set => Update(ref _textVAlignment, value);
+            set => RaiseAndSetIfChanged(ref _textVAlignment, value);
         }
 
         /// <inheritdoc/>

@@ -16,14 +16,14 @@ namespace Core2D.Path
         public double Width
         {
             get => _width;
-            set => Update(ref _width, value);
+            set => RaiseAndSetIfChanged(ref _width, value);
         }
 
         /// <inheritdoc/>
         public double Height
         {
             get => _height;
-            set => Update(ref _height, value);
+            set => RaiseAndSetIfChanged(ref _height, value);
         }
 
         /// <inheritdoc/>

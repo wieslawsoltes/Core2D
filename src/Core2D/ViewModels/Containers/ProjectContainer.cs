@@ -36,105 +36,105 @@ namespace Core2D.Containers
         public Options Options
         {
             get => _options;
-            set => Update(ref _options, value);
+            set => RaiseAndSetIfChanged(ref _options, value);
         }
 
         /// <inheritdoc/>
         public IHistory History
         {
             get => _history;
-            set => Update(ref _history, value);
+            set => RaiseAndSetIfChanged(ref _history, value);
         }
 
         /// <inheritdoc/>
         public ImmutableArray<Library<ShapeStyle>> StyleLibraries
         {
             get => _styleLibraries;
-            set => Update(ref _styleLibraries, value);
+            set => RaiseAndSetIfChanged(ref _styleLibraries, value);
         }
 
         /// <inheritdoc/>
         public ImmutableArray<Library<GroupShape>> GroupLibraries
         {
             get => _groupLibraries;
-            set => Update(ref _groupLibraries, value);
+            set => RaiseAndSetIfChanged(ref _groupLibraries, value);
         }
 
         /// <inheritdoc/>
         public ImmutableArray<Database> Databases
         {
             get => _databases;
-            set => Update(ref _databases, value);
+            set => RaiseAndSetIfChanged(ref _databases, value);
         }
 
         /// <inheritdoc/>
         public ImmutableArray<PageContainer> Templates
         {
             get => _templates;
-            set => Update(ref _templates, value);
+            set => RaiseAndSetIfChanged(ref _templates, value);
         }
 
         /// <inheritdoc/>
         public ImmutableArray<Script> Scripts
         {
             get => _scripts;
-            set => Update(ref _scripts, value);
+            set => RaiseAndSetIfChanged(ref _scripts, value);
         }
 
         /// <inheritdoc/>
         public ImmutableArray<DocumentContainer> Documents
         {
             get => _documents;
-            set => Update(ref _documents, value);
+            set => RaiseAndSetIfChanged(ref _documents, value);
         }
 
         /// <inheritdoc/>
         public Library<ShapeStyle> CurrentStyleLibrary
         {
             get => _currentStyleLibrary;
-            set => Update(ref _currentStyleLibrary, value);
+            set => RaiseAndSetIfChanged(ref _currentStyleLibrary, value);
         }
 
         /// <inheritdoc/>
         public Library<GroupShape> CurrentGroupLibrary
         {
             get => _currentGroupLibrary;
-            set => Update(ref _currentGroupLibrary, value);
+            set => RaiseAndSetIfChanged(ref _currentGroupLibrary, value);
         }
 
         /// <inheritdoc/>
         public Database CurrentDatabase
         {
             get => _currentDatabase;
-            set => Update(ref _currentDatabase, value);
+            set => RaiseAndSetIfChanged(ref _currentDatabase, value);
         }
 
         /// <inheritdoc/>
         public PageContainer CurrentTemplate
         {
             get => _currentTemplate;
-            set => Update(ref _currentTemplate, value);
+            set => RaiseAndSetIfChanged(ref _currentTemplate, value);
         }
 
         /// <inheritdoc/>
         public Script CurrentScript
         {
             get => _currentScript;
-            set => Update(ref _currentScript, value);
+            set => RaiseAndSetIfChanged(ref _currentScript, value);
         }
 
         /// <inheritdoc/>
         public DocumentContainer CurrentDocument
         {
             get => _currentDocument;
-            set => Update(ref _currentDocument, value);
+            set => RaiseAndSetIfChanged(ref _currentDocument, value);
         }
 
         /// <inheritdoc/>
         public PageContainer CurrentContainer
         {
             get => _currentContainer;
-            set => Update(ref _currentContainer, value);
+            set => RaiseAndSetIfChanged(ref _currentContainer, value);
         }
 
         /// <inheritdoc/>
@@ -144,7 +144,7 @@ namespace Core2D.Containers
             set
             {
                 SetSelected(value);
-                Update(ref _selected, value);
+                RaiseAndSetIfChanged(ref _selected, value);
             }
         }
 

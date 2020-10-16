@@ -20,19 +20,19 @@ namespace Core2D.Style
             get => _flags;
             set
             {
-                Update(ref _flags, value);
+                RaiseAndSetIfChanged(ref _flags, value);
                 NotifyAll();
             }
         }
 
         private void NotifyAll()
         {
-            Notify(nameof(Disabled));
-            Notify(nameof(Start));
-            Notify(nameof(End));
-            Notify(nameof(Vertical));
-            Notify(nameof(Horizontal));
-            Notify(nameof(All));
+            RaisePropertyChanged(nameof(Disabled));
+            RaisePropertyChanged(nameof(Start));
+            RaisePropertyChanged(nameof(End));
+            RaisePropertyChanged(nameof(Vertical));
+            RaisePropertyChanged(nameof(Horizontal));
+            RaisePropertyChanged(nameof(All));
         }
 
         /// <inheritdoc/>
@@ -81,21 +81,21 @@ namespace Core2D.Style
         public ShapeState StartTrigger
         {
             get => _startTrigger;
-            set => Update(ref _startTrigger, value);
+            set => RaiseAndSetIfChanged(ref _startTrigger, value);
         }
 
         /// <inheritdoc/>
         public ShapeState EndTrigger
         {
             get => _endTrigger;
-            set => Update(ref _endTrigger, value);
+            set => RaiseAndSetIfChanged(ref _endTrigger, value);
         }
 
         /// <inheritdoc/>
         public double Length
         {
             get => _length;
-            set => Update(ref _length, value);
+            set => RaiseAndSetIfChanged(ref _length, value);
         }
 
         /// <inheritdoc/>

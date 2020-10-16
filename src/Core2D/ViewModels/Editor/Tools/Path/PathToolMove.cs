@@ -26,7 +26,7 @@ namespace Core2D.Editor.Tools.Path
         public PathToolSettingsMove Settings
         {
             get => _settings;
-            set => Update(ref _settings, value);
+            set => RaiseAndSetIfChanged(ref _settings, value);
         }
 
         /// <summary>

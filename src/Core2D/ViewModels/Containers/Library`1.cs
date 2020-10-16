@@ -16,14 +16,14 @@ namespace Core2D.Containers
         public ImmutableArray<T> Items
         {
             get => _items;
-            set => Update(ref _items, value);
+            set => RaiseAndSetIfChanged(ref _items, value);
         }
 
         /// <inheritdoc/>
         public T Selected
         {
             get => _selected;
-            set => Update(ref _selected, value);
+            set => RaiseAndSetIfChanged(ref _selected, value);
         }
 
         /// <inheritdoc/>

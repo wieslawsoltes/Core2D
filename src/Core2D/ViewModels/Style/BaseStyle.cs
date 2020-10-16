@@ -16,42 +16,42 @@
         public BaseColor Stroke
         {
             get => _stroke;
-            set => Update(ref _stroke, value);
+            set => RaiseAndSetIfChanged(ref _stroke, value);
         }
 
         /// <inheritdoc/>
         public BaseColor Fill
         {
             get => _fill;
-            set => Update(ref _fill, value);
+            set => RaiseAndSetIfChanged(ref _fill, value);
         }
 
         /// <inheritdoc/>
         public double Thickness
         {
             get => _thickness;
-            set => Update(ref _thickness, value);
+            set => RaiseAndSetIfChanged(ref _thickness, value);
         }
 
         /// <inheritdoc/>
         public LineCap LineCap
         {
             get => _lineCap;
-            set => Update(ref _lineCap, value);
+            set => RaiseAndSetIfChanged(ref _lineCap, value);
         }
 
         /// <inheritdoc/>
         public string Dashes
         {
             get => _dashes;
-            set => Update(ref _dashes, value);
+            set => RaiseAndSetIfChanged(ref _dashes, value);
         }
 
         /// <inheritdoc/>
         public double DashOffset
         {
             get => _dashOffset;
-            set => Update(ref _dashOffset, value);
+            set => RaiseAndSetIfChanged(ref _dashOffset, value);
         }
 
         /// <inheritdoc/>

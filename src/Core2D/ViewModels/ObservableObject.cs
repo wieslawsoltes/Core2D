@@ -8,7 +8,7 @@ namespace Core2D
     /// <summary>
     /// Observable object.
     /// </summary>
-    public abstract class ObservableObject : INotifyPropertyChanged, ICopyable
+    public abstract class ObservableObject : INotifyPropertyChanged
     {
         private bool _isDirty;
         private ObservableObject _owner = null;
@@ -20,7 +20,7 @@ namespace Core2D
         public virtual ObservableObject Owner
         {
             get => _owner;
-            set => Update(ref _owner, value);
+            set => RaiseAndSetIfChanged(ref _owner, value);
         }
 
         /// <summary>
@@ -29,7 +29,7 @@ namespace Core2D
         public virtual string Name
         {
             get => _name;
-            set => Update(ref _name, value);
+            set => RaiseAndSetIfChanged(ref _name, value);
         }
 
         /// <summary>
@@ -64,7 +64,7 @@ namespace Core2D
         /// Notify observers about property changes.
         /// </summary>
         /// <param name="propertyName">The property name that changed.</param>
-        public void Notify([CallerMemberName] string propertyName = default)
+        public void RaisePropertyChanged([CallerMemberName] string propertyName = default)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
@@ -77,13 +77,13 @@ namespace Core2D
         /// <param name="value">The new field value.</param>
         /// <param name="propertyName">The property name that changed.</param>
         /// <returns>True if backing field value changed.</returns>
-        public bool Update<T>(ref T field, T value, [CallerMemberName] string propertyName = default)
+        public bool RaiseAndSetIfChanged<T>(ref T field, T value, [CallerMemberName] string propertyName = default)
         {
             if (!Equals(field, value))
             {
                 field = value;
                 _isDirty = true;
-                Notify(propertyName);
+                RaisePropertyChanged(propertyName);
                 return true;
             }
             return false;

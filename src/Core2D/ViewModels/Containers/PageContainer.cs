@@ -44,11 +44,11 @@ namespace Core2D.Containers
                 if (_template != null)
                 {
                     _template.Width = value;
-                    Notify();
+                    RaisePropertyChanged();
                 }
                 else
                 {
-                    Update(ref _width, value);
+                    RaiseAndSetIfChanged(ref _width, value);
                 }
             }
         }
@@ -62,11 +62,11 @@ namespace Core2D.Containers
                 if (_template != null)
                 {
                     _template.Height = value;
-                    Notify();
+                    RaisePropertyChanged();
                 }
                 else
                 {
-                    Update(ref _height, value);
+                    RaiseAndSetIfChanged(ref _height, value);
                 }
             }
         }
@@ -80,11 +80,11 @@ namespace Core2D.Containers
                 if (_template != null)
                 {
                     _template.Background = value;
-                    Notify();
+                    RaisePropertyChanged();
                 }
                 else
                 {
-                    Update(ref _background, value);
+                    RaiseAndSetIfChanged(ref _background, value);
                 }
             }
         }
@@ -93,56 +93,56 @@ namespace Core2D.Containers
         public ImmutableArray<LayerContainer> Layers
         {
             get => _layers;
-            set => Update(ref _layers, value);
+            set => RaiseAndSetIfChanged(ref _layers, value);
         }
 
         /// <inheritdoc/>
         public LayerContainer CurrentLayer
         {
             get => _currentLayer;
-            set => Update(ref _currentLayer, value);
+            set => RaiseAndSetIfChanged(ref _currentLayer, value);
         }
 
         /// <inheritdoc/>
         public LayerContainer WorkingLayer
         {
             get => _workingLayer;
-            set => Update(ref _workingLayer, value);
+            set => RaiseAndSetIfChanged(ref _workingLayer, value);
         }
 
         /// <inheritdoc/>
         public LayerContainer HelperLayer
         {
             get => _helperLayer;
-            set => Update(ref _helperLayer, value);
+            set => RaiseAndSetIfChanged(ref _helperLayer, value);
         }
 
         /// <inheritdoc/>
         public BaseShape CurrentShape
         {
             get => _currentShape;
-            set => Update(ref _currentShape, value);
+            set => RaiseAndSetIfChanged(ref _currentShape, value);
         }
 
         /// <inheritdoc/>
         public PageContainer Template
         {
             get => _template;
-            set => Update(ref _template, value);
+            set => RaiseAndSetIfChanged(ref _template, value);
         }
 
         /// <inheritdoc/>
         public Context Data
         {
             get => _data;
-            set => Update(ref _data, value);
+            set => RaiseAndSetIfChanged(ref _data, value);
         }
 
         /// <inheritdoc/>
         public bool IsExpanded
         {
             get => _isExpanded;
-            set => Update(ref _isExpanded, value);
+            set => RaiseAndSetIfChanged(ref _isExpanded, value);
         }
 
         /// <inheritdoc/>
@@ -154,11 +154,11 @@ namespace Core2D.Containers
                 if (_template != null)
                 {
                     _template.IsGridEnabled = value;
-                    Notify();
+                    RaisePropertyChanged();
                 }
                 else
                 {
-                    Update(ref _isGridEnabled, value);
+                    RaiseAndSetIfChanged(ref _isGridEnabled, value);
                 }
             }
         }
@@ -172,11 +172,11 @@ namespace Core2D.Containers
                 if (_template != null)
                 {
                     _template.IsBorderEnabled = value;
-                    Notify();
+                    RaisePropertyChanged();
                 }
                 else
                 {
-                    Update(ref _isBorderEnabled, value);
+                    RaiseAndSetIfChanged(ref _isBorderEnabled, value);
                 }
             }
         }
@@ -190,11 +190,11 @@ namespace Core2D.Containers
                 if (_template != null)
                 {
                     _template.GridOffsetLeft = value;
-                    Notify();
+                    RaisePropertyChanged();
                 }
                 else
                 {
-                    Update(ref _gridOffsetLeft, value);
+                    RaiseAndSetIfChanged(ref _gridOffsetLeft, value);
                 }
             }
         }
@@ -208,11 +208,11 @@ namespace Core2D.Containers
                 if (_template != null)
                 {
                     _template.GridOffsetTop = value;
-                    Notify();
+                    RaisePropertyChanged();
                 }
                 else
                 {
-                    Update(ref _gridOffsetTop, value);
+                    RaiseAndSetIfChanged(ref _gridOffsetTop, value);
                 }
             }
         }
@@ -226,11 +226,11 @@ namespace Core2D.Containers
                 if (_template != null)
                 {
                     _template.GridOffsetRight = value;
-                    Notify();
+                    RaisePropertyChanged();
                 }
                 else
                 {
-                    Update(ref _gridOffsetRight, value);
+                    RaiseAndSetIfChanged(ref _gridOffsetRight, value);
                 }
             }
         }
@@ -244,11 +244,11 @@ namespace Core2D.Containers
                 if (_template != null)
                 {
                     _template.GridOffsetBottom = value;
-                    Notify();
+                    RaisePropertyChanged();
                 }
                 else
                 {
-                    Update(ref _gridOffsetBottom, value);
+                    RaiseAndSetIfChanged(ref _gridOffsetBottom, value);
                 }
             }
         }
@@ -262,11 +262,11 @@ namespace Core2D.Containers
                 if (_template != null)
                 {
                     _template.GridCellWidth = value;
-                    Notify();
+                    RaisePropertyChanged();
                 }
                 else
                 {
-                    Update(ref _gridCellWidth, value);
+                    RaiseAndSetIfChanged(ref _gridCellWidth, value);
                 }
             }
         }
@@ -280,11 +280,11 @@ namespace Core2D.Containers
                 if (_template != null)
                 {
                     _template.GridCellHeight = value;
-                    Notify();
+                    RaisePropertyChanged();
                 }
                 else
                 {
-                    Update(ref _gridCellHeight, value);
+                    RaiseAndSetIfChanged(ref _gridCellHeight, value);
                 }
             }
         }
@@ -298,11 +298,11 @@ namespace Core2D.Containers
                 if (_template != null)
                 {
                     _template.GridStrokeColor = value;
-                    Notify();
+                    RaisePropertyChanged();
                 }
                 else
                 {
-                    Update(ref _gridStrokeColor, value);
+                    RaiseAndSetIfChanged(ref _gridStrokeColor, value);
                 }
             }
         }
@@ -316,11 +316,11 @@ namespace Core2D.Containers
                 if (_template != null)
                 {
                     _template.GridStrokeThickness = value;
-                    Notify();
+                    RaisePropertyChanged();
                 }
                 else
                 {
-                    Update(ref _gridStrokeThickness, value);
+                    RaiseAndSetIfChanged(ref _gridStrokeThickness, value);
                 }
             }
         }

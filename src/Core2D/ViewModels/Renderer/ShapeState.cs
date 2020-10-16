@@ -16,24 +16,24 @@ namespace Core2D.Renderer
             get => _flags;
             set
             {
-                Update(ref _flags, value);
+                RaiseAndSetIfChanged(ref _flags, value);
                 NotifyAll();
             }
         }
 
         private void NotifyAll()
         {
-            Notify(nameof(Default));
-            Notify(nameof(Visible));
-            Notify(nameof(Printable));
-            Notify(nameof(Locked));
-            Notify(nameof(Size));
-            Notify(nameof(Thickness));
-            Notify(nameof(Connector));
-            Notify(nameof(None));
-            Notify(nameof(Standalone));
-            Notify(nameof(Input));
-            Notify(nameof(Output));
+            RaisePropertyChanged(nameof(Default));
+            RaisePropertyChanged(nameof(Visible));
+            RaisePropertyChanged(nameof(Printable));
+            RaisePropertyChanged(nameof(Locked));
+            RaisePropertyChanged(nameof(Size));
+            RaisePropertyChanged(nameof(Thickness));
+            RaisePropertyChanged(nameof(Connector));
+            RaisePropertyChanged(nameof(None));
+            RaisePropertyChanged(nameof(Standalone));
+            RaisePropertyChanged(nameof(Input));
+            RaisePropertyChanged(nameof(Output));
         }
 
         /// <inheritdoc/>

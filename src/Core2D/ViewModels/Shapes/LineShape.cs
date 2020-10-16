@@ -20,14 +20,14 @@ namespace Core2D.Shapes
         public PointShape Start
         {
             get => _start;
-            set => Update(ref _start, value);
+            set => RaiseAndSetIfChanged(ref _start, value);
         }
 
         /// <inheritdoc/>
         public PointShape End
         {
             get => _end;
-            set => Update(ref _end, value);
+            set => RaiseAndSetIfChanged(ref _end, value);
         }
 
         /// <inheritdoc/>

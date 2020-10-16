@@ -17,28 +17,28 @@ namespace Core2D.Data
         public string IdColumnName
         {
             get => _idColumnName;
-            set => Update(ref _idColumnName, value);
+            set => RaiseAndSetIfChanged(ref _idColumnName, value);
         }
 
         /// <inheritdoc/>
         public ImmutableArray<Column> Columns
         {
             get => _columns;
-            set => Update(ref _columns, value);
+            set => RaiseAndSetIfChanged(ref _columns, value);
         }
 
         /// <inheritdoc/>
         public ImmutableArray<Record> Records
         {
             get => _records;
-            set => Update(ref _records, value);
+            set => RaiseAndSetIfChanged(ref _records, value);
         }
 
         /// <inheritdoc/>
         public Record CurrentRecord
         {
             get => _currentRecord;
-            set => Update(ref _currentRecord, value);
+            set => RaiseAndSetIfChanged(ref _currentRecord, value);
         }
 
         /// <inheritdoc/>

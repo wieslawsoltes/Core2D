@@ -17,14 +17,14 @@ namespace Core2D.Path
         public ImmutableArray<PathFigure> Figures
         {
             get => _figures;
-            set => Update(ref _figures, value);
+            set => RaiseAndSetIfChanged(ref _figures, value);
         }
 
         /// <inheritdoc/>
         public FillRule FillRule
         {
             get => _fillRule;
-            set => Update(ref _fillRule, value);
+            set => RaiseAndSetIfChanged(ref _fillRule, value);
         }
 
         /// <inheritdoc/>

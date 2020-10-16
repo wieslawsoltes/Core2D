@@ -13,7 +13,7 @@ namespace Core2D.Data
         public string Value
         {
             get => _value;
-            set => Update(ref _value, value);
+            set => RaiseAndSetIfChanged(ref _value, value);
         }
 
         /// <inheritdoc/>
