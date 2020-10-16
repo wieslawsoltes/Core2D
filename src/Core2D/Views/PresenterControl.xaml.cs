@@ -21,34 +21,16 @@ using Core2D.Renderer.Presenters;
 
 namespace Core2D.Views
 {
-    /// <summary>
-    /// Specifies container presenter type.
-    /// </summary>
     public enum PresenterType
     {
-        /// <summary>
-        /// None presenter.
-        /// </summary>
         None = 0,
 
-        /// <summary>
-        /// Data presenter.
-        /// </summary>
         Data = 1,
 
-        /// <summary>
-        /// Template mode.
-        /// </summary>
         Template = 2,
 
-        /// <summary>
-        /// Editor presenter.
-        /// </summary>
         Editor = 3,
 
-        /// <summary>
-        /// Export presenter.
-        /// </summary>
         Export = 4
     }
 
@@ -94,110 +76,67 @@ namespace Core2D.Views
         }
 #endif
 
-    /// <summary>
-    /// Interaction logic for <see cref="PresenterControl"/> xaml.
-    /// </summary>
     public class PresenterControl : UserControl
     {
         private static readonly IContainerPresenter s_editorPresenter = new EditorPresenter();
         private static readonly IContainerPresenter s_templatePresenter = new TemplatePresenter();
         private static readonly IContainerPresenter s_exportPresenter = new ExportPresenter();
 
-        /// <summary>
-        /// Gets or sets zoom border property.
-        /// </summary>
         public static readonly StyledProperty<ZoomBorder> ZoomBorderProperty =
             AvaloniaProperty.Register<PresenterControl, ZoomBorder>(nameof(ZoomBorder), null);
 
-        /// <summary>
-        /// Gets or sets container property.
-        /// </summary>
         public static readonly StyledProperty<PageContainer> ContainerProperty =
             AvaloniaProperty.Register<PresenterControl, PageContainer>(nameof(Container), null);
 
-        /// <summary>
-        /// Gets or sets renderer property.
-        /// </summary>
         public static readonly StyledProperty<IShapeRenderer> RendererProperty =
             AvaloniaProperty.Register<PresenterControl, IShapeRenderer>(nameof(Renderer), null);
 
-        /// <summary>
-        /// Gets or sets data flow property.
-        /// </summary>
         public static readonly StyledProperty<DataFlow> DataFlowProperty =
             AvaloniaProperty.Register<PresenterControl, DataFlow>(nameof(DataFlow), null);
 
-        /// <summary>
-        /// Gets or sets data flow property.
-        /// </summary>
         public static readonly StyledProperty<PresenterType> PresenterTypeProperty =
             AvaloniaProperty.Register<PresenterControl, PresenterType>(nameof(PresenterType), PresenterType.None);
 
-        /// <summary>
-        /// Gets or sets zoom border property.
-        /// </summary>
         public ZoomBorder ZoomBorder
         {
             get => GetValue(ZoomBorderProperty);
             set => SetValue(ZoomBorderProperty, value);
         }
 
-        /// <summary>
-        /// Gets or sets container property.
-        /// </summary>
         public PageContainer Container
         {
             get => GetValue(ContainerProperty);
             set => SetValue(ContainerProperty, value);
         }
 
-        /// <summary>
-        ///  Gets or sets renderer property.
-        /// </summary>
         public IShapeRenderer Renderer
         {
             get => GetValue(RendererProperty);
             set => SetValue(RendererProperty, value);
         }
 
-        /// <summary>
-        ///  Gets or sets data flow property.
-        /// </summary>
         public DataFlow DataFlow
         {
             get => GetValue(DataFlowProperty);
             set => SetValue(DataFlowProperty, value);
         }
 
-        /// <summary>
-        ///  Gets or sets presenter type property.
-        /// </summary>
         public PresenterType PresenterType
         {
             get => GetValue(PresenterTypeProperty);
             set => SetValue(PresenterTypeProperty, value);
         }
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="PresenterControl"/> class.
-        /// </summary>
         public PresenterControl()
         {
             InitializeComponent();
         }
 
-        /// <summary>
-        /// Initialize the Xaml components.
-        /// </summary>
         private void InitializeComponent()
         {
             AvaloniaXamlLoader.Load(this);
         }
 
-        /// <summary>
-        /// Renders presenter control contents.
-        /// </summary>
-        /// <param name="context">The drawing context.</param>
         public override void Render(DrawingContext context)
         {
             base.Render(context);
@@ -222,11 +161,6 @@ namespace Core2D.Views
 #endif
         }
 
-        /// <summary>
-        /// Draws presenter control contents.
-        /// </summary>
-        /// <param name="customState">The custom state.</param>
-        /// <param name="context">The drawing context.</param>
         internal void Draw(CustomState customState, object context)
         {
             switch (customState.PresenterType)

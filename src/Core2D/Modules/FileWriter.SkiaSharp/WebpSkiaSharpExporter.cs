@@ -7,26 +7,17 @@ using SkiaSharp;
 
 namespace Core2D.FileWriter.SkiaSharpWebp
 {
-    /// <summary>
-    /// SkiaSharp webp <see cref="IProjectExporter"/> implementation.
-    /// </summary>
     public sealed class WebpSkiaSharpExporter : IProjectExporter
     {
         private readonly IShapeRenderer _renderer;
         private readonly IContainerPresenter _presenter;
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="WebpSkiaSharpExporter"/> class.
-        /// </summary>
-        /// <param name="renderer">The shape renderer.</param>
-        /// <param name="presenter">The container presenter.</param>
         public WebpSkiaSharpExporter(IShapeRenderer renderer, IContainerPresenter presenter)
         {
             _renderer = renderer;
             _presenter = presenter;
         }
 
-        /// <inheritdoc/>
         public void Save(Stream stream, PageContainer container)
         {
             var info = new SKImageInfo((int)container.Width, (int)container.Height, SKImageInfo.PlatformColorType, SKAlphaType.Unpremul);
@@ -41,13 +32,11 @@ namespace Core2D.FileWriter.SkiaSharpWebp
             data.SaveTo(stream);
         }
 
-        /// <inheritdoc/>
         public void Save(Stream stream, DocumentContainer document)
         {
             throw new NotSupportedException("Saving documents as webp drawing is not supported.");
         }
 
-        /// <inheritdoc/>
         public void Save(Stream stream, ProjectContainer project)
         {
             throw new NotSupportedException("Saving projects as webp drawing is not supported.");

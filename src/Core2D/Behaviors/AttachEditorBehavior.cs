@@ -4,14 +4,10 @@ using Core2D.Editor;
 
 namespace Core2D.Behaviors
 {
-    /// <summary>
-    /// Attaches <see cref="ProjectEditor"/> to a control.
-    /// </summary>
     public class AttachEditorBehavior : Behavior<Control>
     {
         private ProjectEditorInput _input = null;
 
-        /// <inheritdoc/>
         protected override void OnAttached()
         {
             base.OnAttached();
@@ -22,7 +18,6 @@ namespace Core2D.Behaviors
             }
         }
 
-        /// <inheritdoc/>
         protected override void OnDetaching()
         {
             base.OnDetaching();

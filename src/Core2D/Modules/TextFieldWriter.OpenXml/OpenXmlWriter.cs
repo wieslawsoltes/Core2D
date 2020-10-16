@@ -8,26 +8,17 @@ using DocumentFormat.OpenXml.Spreadsheet;
 
 namespace Core2D.TextFieldWriter.OpenXml
 {
-    /// <summary>
-    /// Defines <see cref="Database"/> to the text fields writer.
-    /// </summary>
     public sealed class OpenXmlWriter : ITextFieldWriter<Database>
     {
         private readonly IServiceProvider _serviceProvider;
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="OpenXmlWriter"/> class.
-        /// </summary>
-        /// <param name="serviceProvider">The service provider.</param>
         public OpenXmlWriter(IServiceProvider serviceProvider)
         {
             _serviceProvider = serviceProvider;
         }
 
-        /// <inheritdoc/>
         public string Name { get; } = "Xlsx (OpenXml)";
 
-        /// <inheritdoc/>
         public string Extension { get; } = "xlsx";
 
         private void ToValues(Database database, out object[,] values)
@@ -176,11 +167,6 @@ namespace Core2D.TextFieldWriter.OpenXml
             spreadsheetDocument.Close();
         }
 
-        /// <summary>
-        /// Write database records to text based file format.
-        /// </summary>
-        /// <param name="stream">The fields file stream.</param>
-        /// <param name="database">The source records database.</param>
         public void Write(Stream stream, Database database)
         {
             object[,] values;

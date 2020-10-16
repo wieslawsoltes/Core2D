@@ -7,33 +7,19 @@ using CSV = CsvHelper;
 
 namespace Core2D.TextFieldWriter.CsvHelper
 {
-    /// <summary>
-    /// Defines <see cref="Database"/> to the text fields writer.
-    /// </summary>
     public sealed class CsvHelperWriter : ITextFieldWriter<Database>
     {
         private readonly IServiceProvider _serviceProvider;
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="CsvHelperWriter"/> class.
-        /// </summary>
-        /// <param name="serviceProvider">The service provider.</param>
         public CsvHelperWriter(IServiceProvider serviceProvider)
         {
             _serviceProvider = serviceProvider;
         }
 
-        /// <inheritdoc/>
         public string Name { get; } = "Csv (CsvHelper)";
 
-        /// <inheritdoc/>
         public string Extension { get; } = "csv";
 
-        /// <summary>
-        /// Write database records to text based file format.
-        /// </summary>
-        /// <param name="stream">The fields file stream.</param>
-        /// <param name="database">The source records database.</param>
         public void Write(Stream stream, Database database)
         {
             using var writer = new StringWriter();

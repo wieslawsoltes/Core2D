@@ -11,9 +11,6 @@ using Spatial.Arc;
 
 namespace Core2D.Editor.Tools
 {
-    /// <summary>
-    /// Arc tool.
-    /// </summary>
     public class ToolArc : ObservableObject, IEditorTool
     {
         public enum State { Point1, Point2, Point3, Point4 }
@@ -25,35 +22,25 @@ namespace Core2D.Editor.Tools
         private bool _connectedPoint4;
         private ToolArcSelection _selection;
 
-        /// <inheritdoc/>
         public string Title => "Arc";
 
-        /// <summary>
-        /// Gets or sets the tool settings.
-        /// </summary>
         public ToolSettingsArc Settings
         {
             get => _settings;
             set => RaiseAndSetIfChanged(ref _settings, value);
         }
 
-        /// <summary>
-        /// Initialize new instance of <see cref="ToolArc"/> class.
-        /// </summary>
-        /// <param name="serviceProvider">The service provider.</param>
         public ToolArc(IServiceProvider serviceProvider) : base()
         {
             _serviceProvider = serviceProvider;
             _settings = new ToolSettingsArc();
         }
 
-        /// <inheritdoc/>
         public override object Copy(IDictionary<object, object> shared)
         {
             throw new NotImplementedException();
         }
 
-        /// <inheritdoc/>
         public void LeftDown(InputArgs args)
         {
             var factory = _serviceProvider.GetService<IFactory>();
@@ -166,12 +153,10 @@ namespace Core2D.Editor.Tools
             }
         }
 
-        /// <inheritdoc/>
         public void LeftUp(InputArgs args)
         {
         }
 
-        /// <inheritdoc/>
         public void RightDown(InputArgs args)
         {
             switch (_currentState)
@@ -186,12 +171,10 @@ namespace Core2D.Editor.Tools
             }
         }
 
-        /// <inheritdoc/>
         public void RightUp(InputArgs args)
         {
         }
 
-        /// <inheritdoc/>
         public void Move(InputArgs args)
         {
             var editor = _serviceProvider.GetService<ProjectEditor>();
@@ -254,9 +237,6 @@ namespace Core2D.Editor.Tools
             }
         }
 
-        /// <summary>
-        /// Transfer tool state to <see cref="State.Point2"/>.
-        /// </summary>
         public void ToStatePoint2()
         {
             var editor = _serviceProvider.GetService<ProjectEditor>();
@@ -269,29 +249,21 @@ namespace Core2D.Editor.Tools
             _selection.ToStatePoint2();
         }
 
-        /// <summary>
-        /// Transfer tool state to <see cref="State.Point3"/>.
-        /// </summary>
         public void ToStatePoint3()
         {
             _selection.ToStatePoint3();
         }
 
-        /// <summary>
-        /// Transfer tool state to <see cref="State.Point4"/>.
-        /// </summary>
         public void ToStatePoint4()
         {
             _selection.ToStatePoint4();
         }
 
-        /// <inheritdoc/>
         public void Move(BaseShape shape)
         {
             _selection.Move();
         }
 
-        /// <inheritdoc/>
         public void Finalize(BaseShape shape)
         {
             var arc = shape as ArcShape;
@@ -314,7 +286,6 @@ namespace Core2D.Editor.Tools
             }
         }
 
-        /// <inheritdoc/>
         public void Reset()
         {
             var editor = _serviceProvider.GetService<ProjectEditor>();

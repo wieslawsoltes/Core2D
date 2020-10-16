@@ -7,30 +7,18 @@ using Core2D.Views.Editors;
 
 namespace Core2D.Views.Shapes
 {
-    /// <summary>
-    /// Interaction logic for <see cref="ImageShapeControl"/> xaml.
-    /// </summary>
     public class ImageShapeControl : UserControl
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ImageShapeControl"/> class.
-        /// </summary>
         public ImageShapeControl()
         {
             InitializeComponent();
         }
 
-        /// <summary>
-        /// Initialize the Xaml components.
-        /// </summary>
         private void InitializeComponent()
         {
             AvaloniaXamlLoader.Load(this);
         }
 
-        /// <summary>
-        /// Edit shape text binding.
-        /// </summary>
         public void OnEditTextBinding(object shape)
         {
             if (this.VisualRoot is TopLevel topLevel 

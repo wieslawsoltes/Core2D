@@ -7,9 +7,6 @@ using Core2D.Shapes;
 
 namespace Core2D.Editor.Tools
 {
-    /// <summary>
-    /// Point tool.
-    /// </summary>
     public class ToolPoint : ObservableObject, IEditorTool
     {
         public enum State { Point }
@@ -18,35 +15,25 @@ namespace Core2D.Editor.Tools
         private State _currentState = State.Point;
         private PointShape _point;
 
-        /// <inheritdoc/>
         public string Title => "Point";
 
-        /// <summary>
-        /// Gets or sets the tool settings.
-        /// </summary>
         public ToolSettingsPoint Settings
         {
             get => _settings;
             set => RaiseAndSetIfChanged(ref _settings, value);
         }
 
-        /// <summary>
-        /// Initialize new instance of <see cref="ToolPoint"/> class.
-        /// </summary>
-        /// <param name="serviceProvider">The service provider.</param>
         public ToolPoint(IServiceProvider serviceProvider) : base()
         {
             _serviceProvider = serviceProvider;
             _settings = new ToolSettingsPoint();
         }
 
-        /// <inheritdoc/>
         public override object Copy(IDictionary<object, object> shared)
         {
             throw new NotImplementedException();
         }
 
-        /// <inheritdoc/>
         public void LeftDown(InputArgs args)
         {
             var factory = _serviceProvider.GetService<IFactory>();
@@ -74,22 +61,18 @@ namespace Core2D.Editor.Tools
             }
         }
 
-        /// <inheritdoc/>
         public void LeftUp(InputArgs args)
         {
         }
 
-        /// <inheritdoc/>
         public void RightDown(InputArgs args)
         {
         }
 
-        /// <inheritdoc/>
         public void RightUp(InputArgs args)
         {
         }
 
-        /// <inheritdoc/>
         public void Move(InputArgs args)
         {
             var editor = _serviceProvider.GetService<ProjectEditor>();
@@ -107,17 +90,14 @@ namespace Core2D.Editor.Tools
             }
         }
 
-        /// <inheritdoc/>
         public void Move(BaseShape shape)
         {
         }
 
-        /// <inheritdoc/>
         public void Finalize(BaseShape shape)
         {
         }
 
-        /// <inheritdoc/>
         public void Reset()
         {
         }

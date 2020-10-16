@@ -8,9 +8,6 @@ using Core2D.Style;
 
 namespace Core2D.DragAndDrop.Handlers
 {
-    /// <summary>
-    /// List box drop handler.
-    /// </summary>
     public abstract class ListBoxDropHandler : DefaultDropHandler
     {
         internal bool ValidateLibrary<T>(ListBox listBox, DragEventArgs e, object sourceContext, object targetContext, bool bExecute) where T : ObservableObject
@@ -64,12 +61,8 @@ namespace Core2D.DragAndDrop.Handlers
         }
     }
 
-    /// <summary>
-    /// Styles list box drop handler.
-    /// </summary>
     public class StylesListBoxDropHandler : ListBoxDropHandler
     {
-        /// <inheritdoc/>
         public override bool Validate(object sender, DragEventArgs e, object sourceContext, object targetContext, object state)
         {
             if (e.Source is IControl && sender is ListBox listBox)
@@ -79,7 +72,6 @@ namespace Core2D.DragAndDrop.Handlers
             return false;
         }
 
-        /// <inheritdoc/>
         public override bool Execute(object sender, DragEventArgs e, object sourceContext, object targetContext, object state)
         {
             if (e.Source is IControl && sender is ListBox listBox)
@@ -90,12 +82,8 @@ namespace Core2D.DragAndDrop.Handlers
         }
     }
 
-    /// <summary>
-    /// Groups list box drop handler.
-    /// </summary>
     public class GroupsListBoxDropHandler : ListBoxDropHandler
     {
-        /// <inheritdoc/>
         public override bool Validate(object sender, DragEventArgs e, object sourceContext, object targetContext, object state)
         {
             if (e.Source is IControl && sender is ListBox listBox)
@@ -105,7 +93,6 @@ namespace Core2D.DragAndDrop.Handlers
             return false;
         }
 
-        /// <inheritdoc/>
         public override bool Execute(object sender, DragEventArgs e, object sourceContext, object targetContext, object state)
         {
             if (e.Source is IControl && sender is ListBox listBox)
@@ -116,12 +103,8 @@ namespace Core2D.DragAndDrop.Handlers
         }
     }
 
-    /// <summary>
-    /// Templates list box drop handler.
-    /// </summary>
     public class TemplatesListBoxDropHandler : ListBoxDropHandler
     {
-        /// <inheritdoc/>
         public override bool Validate(object sender, DragEventArgs e, object sourceContext, object targetContext, object state)
         {
             if (e.Source is IControl && sender is ListBox listBox)
@@ -131,7 +114,6 @@ namespace Core2D.DragAndDrop.Handlers
             return false;
         }
 
-        /// <inheritdoc/>
         public override bool Execute(object sender, DragEventArgs e, object sourceContext, object targetContext, object state)
         {
             if (e.Source is IControl && sender is ListBox listBox)
@@ -142,12 +124,8 @@ namespace Core2D.DragAndDrop.Handlers
         }
     }
 
-    /// <summary>
-    /// Scripts list box drop handler.
-    /// </summary>
     public class ScriptsListBoxDropHandler : ListBoxDropHandler
     {
-        /// <inheritdoc/>
         public override bool Validate(object sender, DragEventArgs e, object sourceContext, object targetContext, object state)
         {
             if (e.Source is IControl && sender is ListBox listBox)
@@ -157,7 +135,6 @@ namespace Core2D.DragAndDrop.Handlers
             return false;
         }
 
-        /// <inheritdoc/>
         public override bool Execute(object sender, DragEventArgs e, object sourceContext, object targetContext, object state)
         {
             if (e.Source is IControl && sender is ListBox listBox)

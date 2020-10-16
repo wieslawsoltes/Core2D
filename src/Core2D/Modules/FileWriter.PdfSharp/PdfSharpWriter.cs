@@ -8,29 +8,19 @@ using Core2D.Renderer.PdfSharp;
 
 namespace Core2D.FileWriter.PdfSharp
 {
-    /// <summary>
-    /// PdfSharp file writer.
-    /// </summary>
     public sealed class PdfSharpWriter : IFileWriter
     {
         private readonly IServiceProvider _serviceProvider;
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="PdfSharpWriter"/> class.
-        /// </summary>
-        /// <param name="serviceProvider">The service provider.</param>
         public PdfSharpWriter(IServiceProvider serviceProvider)
         {
             _serviceProvider = serviceProvider;
         }
 
-        /// <inheritdoc/>
         public string Name { get; } = "Pdf (PdfSharp)";
 
-        /// <inheritdoc/>
         public string Extension { get; } = "pdf";
 
-        /// <inheritdoc/>
         public void Save(Stream stream, object item, object options)
         {
             if (item == null)

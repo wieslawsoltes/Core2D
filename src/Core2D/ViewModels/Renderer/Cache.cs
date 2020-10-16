@@ -3,27 +3,17 @@ using System.Collections.Generic;
 
 namespace Core2D.Renderer
 {
-    /// <summary>
-    /// Generic key value cache implemented with generic dictionary collection.
-    /// </summary>
-    /// <typeparam name="TKey">The input type.</typeparam>
-    /// <typeparam name="TValue">The output type.</typeparam>
     public class Cache<TKey, TValue> : ICache<TKey, TValue>
     {
         private IDictionary<TKey, TValue> _storage;
         private readonly Action<TValue> _dispose;
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Cache{TKey, TValue}"/> class.
-        /// </summary>
-        /// <param name="dispose">The dispose action.</param>
         public Cache(Action<TValue> dispose = null)
         {
             _dispose = dispose;
             _storage = new Dictionary<TKey, TValue>();
         }
 
-        /// <inheritdoc/>
         public TValue Get(TKey key)
         {
             if (_storage.TryGetValue(key, out var data))
@@ -33,7 +23,6 @@ namespace Core2D.Renderer
             return default;
         }
 
-        /// <inheritdoc/>
         public void Set(TKey key, TValue value)
         {
             if (_storage.ContainsKey(key))
@@ -46,7 +35,6 @@ namespace Core2D.Renderer
             }
         }
 
-        /// <inheritdoc/>
         public void Reset()
         {
             if (_storage != null)

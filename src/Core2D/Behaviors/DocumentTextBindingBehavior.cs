@@ -7,29 +7,19 @@ using AvaloniaEdit;
 
 namespace Core2D.Behaviors
 {
-    /// <summary>
-    /// Binds to a document text.
-    /// </summary>
     public class DocumentTextBindingBehavior : Behavior<TextEditor>
     {
         private TextEditor _textEditor = null;
 
-        /// <summary>
-        /// Define <see cref="Text"/> property.
-        /// </summary>
         public static readonly StyledProperty<string> TextProperty =
             AvaloniaProperty.Register<DocumentTextBindingBehavior, string>(nameof(Text));
 
-        /// <summary>
-        /// Gets or sets text editor text.
-        /// </summary>
         public string Text
         {
             get => GetValue(TextProperty);
             set => SetValue(TextProperty, value);
         }
 
-        /// <inheritdoc/>
         protected override void OnAttached()
         {
             base.OnAttached();
@@ -42,7 +32,6 @@ namespace Core2D.Behaviors
             }
         }
 
-        /// <inheritdoc/>
         protected override void OnDetaching()
         {
             base.OnDetaching();

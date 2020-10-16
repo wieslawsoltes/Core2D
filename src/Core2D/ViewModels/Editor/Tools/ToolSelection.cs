@@ -10,9 +10,6 @@ using Spatial;
 
 namespace Core2D.Editor.Tools
 {
-    /// <summary>
-    /// Selection tool.
-    /// </summary>
     public class ToolSelection : ObservableObject, IEditorTool
     {
         public enum State { None, Selected }
@@ -27,41 +24,25 @@ namespace Core2D.Editor.Tools
         private IEnumerable<PointShape> _pointsCache;
         private IEnumerable<BaseShape> _shapesCache;
 
-        /// <inheritdoc/>
         public string Title => "Selection";
 
-        /// <summary>
-        /// Gets or sets the tool settings.
-        /// </summary>
         public ToolSettingsSelection Settings
         {
             get => _settings;
             set => RaiseAndSetIfChanged(ref _settings, value);
         }
 
-        /// <summary>
-        /// Initialize new instance of <see cref="ToolSelection"/> class.
-        /// </summary>
-        /// <param name="serviceProvider">The service provider.</param>
         public ToolSelection(IServiceProvider serviceProvider) : base()
         {
             _serviceProvider = serviceProvider;
             _settings = new ToolSettingsSelection();
         }
 
-        /// <inheritdoc/>
         public override object Copy(IDictionary<object, object> shared)
         {
             throw new NotImplementedException();
         }
 
-        /// <summary>
-        /// Validate if point can move.
-        /// </summary>
-        /// <remarks>Do not move points if they are (1) connector and have owner or (2) are locked.</remarks>
-        /// <param name="shape">The shape object.</param>
-        /// <param name="point">The point to validate.</param>
-        /// <returns>True if point is valid, otherwise false.</returns>
         private static bool IsPointMovable(BaseShape shape, PointShape point)
         {
             if (point.State.Flags.HasFlag(ShapeStateFlags.Locked) || (point.Owner is BaseShape ower && ower.State.Flags.HasFlag(ShapeStateFlags.Locked)))
@@ -77,11 +58,6 @@ namespace Core2D.Editor.Tools
             return true;
         }
 
-        /// <summary>
-        /// Get all valid points in the shapes.
-        /// </summary>
-        /// <param name="shapes">The shapes to scan.</param>
-        /// <returns>All points in the shape.</returns>
         private static IEnumerable<PointShape> GetMovePoints(IEnumerable<BaseShape> shapes)
         {
             var points = new List<PointShape>();
@@ -94,9 +70,6 @@ namespace Core2D.Editor.Tools
             return points.Where(p => IsPointMovable(p.Owner as BaseShape, p)).Distinct();
         }
 
-        /// <summary>
-        /// Generate selected shapes cache.
-        /// </summary>
         private void GenerateMoveSelectionCache()
         {
             var editor = _serviceProvider.GetService<ProjectEditor>();
@@ -123,19 +96,12 @@ namespace Core2D.Editor.Tools
             }
         }
 
-        /// <summary>
-        /// Dispose selected shapes cache.
-        /// </summary>
         private void DisposeMoveSelectionCache()
         {
             _pointsCache = null;
             _shapesCache = null;
         }
 
-        /// <summary>
-        /// Move selected shapes to new location.
-        /// </summary>
-        /// <param name="args">The input arguments.</param>
         private void MoveSelectionCacheTo(InputArgs args)
         {
             var editor = _serviceProvider.GetService<ProjectEditor>();
@@ -181,7 +147,6 @@ namespace Core2D.Editor.Tools
             return false;
         }
 
-        /// <inheritdoc/>
         public void LeftDown(InputArgs args)
         {
             var factory = _serviceProvider.GetService<IFactory>();
@@ -340,7 +305,6 @@ namespace Core2D.Editor.Tools
             }
         }
 
-        /// <inheritdoc/>
         public void LeftUp(InputArgs args)
         {
             var editor = _serviceProvider.GetService<ProjectEditor>();
@@ -418,7 +382,6 @@ namespace Core2D.Editor.Tools
             }
         }
 
-        /// <inheritdoc/>
         public void RightDown(InputArgs args)
         {
             var editor = _serviceProvider.GetService<ProjectEditor>();
@@ -439,12 +402,10 @@ namespace Core2D.Editor.Tools
             }
         }
 
-        /// <inheritdoc/>
         public void RightUp(InputArgs args)
         {
         }
 
-        /// <inheritdoc/>
         public void Move(InputArgs args)
         {
             var editor = _serviceProvider.GetService<ProjectEditor>();
@@ -498,17 +459,14 @@ namespace Core2D.Editor.Tools
             }
         }
 
-        /// <inheritdoc/>
         public void Move(BaseShape shape)
         {
         }
 
-        /// <inheritdoc/>
         public void Finalize(BaseShape shape)
         {
         }
 
-        /// <inheritdoc/>
         public void Reset()
         {
             var editor = _serviceProvider.GetService<ProjectEditor>();

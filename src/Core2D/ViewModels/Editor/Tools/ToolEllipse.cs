@@ -10,9 +10,6 @@ using static System.Math;
 
 namespace Core2D.Editor.Tools
 {
-    /// <summary>
-    /// Ellipse tool.
-    /// </summary>
     public class ToolEllipse : ObservableObject, IEditorTool
     {
         public enum State { TopLeft, BottomRight }
@@ -26,29 +23,20 @@ namespace Core2D.Editor.Tools
         private decimal _centerX;
         private decimal _centerY;
 
-        /// <inheritdoc/>
         public string Title => "Ellipse";
 
-        /// <summary>
-        /// Gets or sets the tool settings.
-        /// </summary>
         public ToolSettingsEllipse Settings
         {
             get => _settings;
             set => RaiseAndSetIfChanged(ref _settings, value);
         }
 
-        /// <summary>
-        /// Initialize new instance of <see cref="ToolEllipse"/> class.
-        /// </summary>
-        /// <param name="serviceProvider">The service provider.</param>
         public ToolEllipse(IServiceProvider serviceProvider) : base()
         {
             _serviceProvider = serviceProvider;
             _settings = new ToolSettingsEllipse();
         }
 
-        /// <inheritdoc/>
         public override object Copy(IDictionary<object, object> shared)
         {
             throw new NotImplementedException();
@@ -63,7 +51,6 @@ namespace Core2D.Editor.Tools
             br.Y = (double)(cy + r);
         }
 
-        /// <inheritdoc/>
         public void LeftDown(InputArgs args)
         {
             var factory = _serviceProvider.GetService<IFactory>();
@@ -134,12 +121,10 @@ namespace Core2D.Editor.Tools
 
         }
 
-        /// <inheritdoc/>
         public void LeftUp(InputArgs args)
         {
         }
 
-        /// <inheritdoc/>
         public void RightDown(InputArgs args)
         {
             switch (_currentState)
@@ -152,12 +137,10 @@ namespace Core2D.Editor.Tools
             }
         }
 
-        /// <inheritdoc/>
         public void RightUp(InputArgs args)
         {
         }
 
-        /// <inheritdoc/>
         public void Move(InputArgs args)
         {
             var editor = _serviceProvider.GetService<ProjectEditor>();
@@ -198,9 +181,6 @@ namespace Core2D.Editor.Tools
             }
         }
 
-        /// <summary>
-        /// Transfer tool state to <see cref="State.BottomRight"/>.
-        /// </summary>
         public void ToStateBottomRight()
         {
             var editor = _serviceProvider.GetService<ProjectEditor>();
@@ -213,18 +193,15 @@ namespace Core2D.Editor.Tools
             _selection.ToStateBottomRight();
         }
 
-        /// <inheritdoc/>
         public void Move(BaseShape shape)
         {
             _selection.Move();
         }
 
-        /// <inheritdoc/>
         public void Finalize(BaseShape shape)
         {
         }
 
-        /// <inheritdoc/>
         public void Reset()
         {
             var editor = _serviceProvider.GetService<ProjectEditor>();

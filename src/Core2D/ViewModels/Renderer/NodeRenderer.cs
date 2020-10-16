@@ -5,9 +5,6 @@ using Core2D.Style;
 
 namespace Core2D.Renderer
 {
-    /// <summary>
-    /// Node shape renderer.
-    /// </summary>
     public abstract class NodeRenderer : ObservableObject, IShapeRenderer
     {
         private readonly IServiceProvider _serviceProvider;
@@ -16,18 +13,12 @@ namespace Core2D.Renderer
         private readonly ICache<object, IDrawNode> _drawNodeCache;
         private readonly IDrawNodeFactory _drawNodeFactory;
 
-        /// <inheritdoc/>
         public ShapeRendererState State
         {
             get => _state;
             set => RaiseAndSetIfChanged(ref _state, value);
         }
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="NodeRenderer"/> class.
-        /// </summary>
-        /// <param name="serviceProvider">The service provider.</param>
-        /// <param name="drawNodeFactory">The draw node factory.</param>
         public NodeRenderer(IServiceProvider serviceProvider, IDrawNodeFactory drawNodeFactory)
         {
             _serviceProvider = serviceProvider;
@@ -37,14 +28,12 @@ namespace Core2D.Renderer
             _drawNodeFactory = drawNodeFactory;
         }
 
-        /// <inheritdoc/>
         public void ClearCache()
         {
             _biCache.Reset();
             _drawNodeCache.Reset();
         }
 
-        /// <inheritdoc/>
         public void Fill(object dc, double x, double y, double width, double height, BaseColor color)
         {
             var drawNodeCached = _drawNodeCache.Get(color);
@@ -78,7 +67,6 @@ namespace Core2D.Renderer
             }
         }
 
-        /// <inheritdoc/>
         public void Grid(object dc, IGrid grid, double x, double y, double width, double height)
         {
             var drawNodeCached = _drawNodeCache.Get(grid);
@@ -111,7 +99,6 @@ namespace Core2D.Renderer
             }
         }
 
-        /// <inheritdoc/>
         public void DrawPage(object dc, PageContainer container)
         {
             foreach (var layer in container.Layers)
@@ -123,7 +110,6 @@ namespace Core2D.Renderer
             }
         }
 
-        /// <inheritdoc/>
         public void DrawLayer(object dc, LayerContainer layer)
         {
             foreach (var shape in layer.Shapes)
@@ -143,7 +129,6 @@ namespace Core2D.Renderer
             }
         }
 
-        /// <inheritdoc/>
         public void DrawPoint(object dc, PointShape point)
         {
             var isSelected = _state.SelectedShapes?.Count > 0 && _state.SelectedShapes.Contains(point);
@@ -188,7 +173,6 @@ namespace Core2D.Renderer
             }
         }
 
-        /// <inheritdoc/>
         public void DrawLine(object dc, LineShape line)
         {
             var drawNodeCached = _drawNodeCache.Get(line);
@@ -221,7 +205,6 @@ namespace Core2D.Renderer
             }
         }
 
-        /// <inheritdoc/>
         public void DrawRectangle(object dc, RectangleShape rectangle)
         {
             var drawNodeCached = _drawNodeCache.Get(rectangle);
@@ -253,7 +236,6 @@ namespace Core2D.Renderer
             }
         }
 
-        /// <inheritdoc/>
         public void DrawEllipse(object dc, EllipseShape ellipse)
         {
             var drawNodeCached = _drawNodeCache.Get(ellipse);
@@ -285,7 +267,6 @@ namespace Core2D.Renderer
             }
         }
 
-        /// <inheritdoc/>
         public void DrawArc(object dc, ArcShape arc)
         {
             var drawNodeCached = _drawNodeCache.Get(arc);
@@ -317,7 +298,6 @@ namespace Core2D.Renderer
             }
         }
 
-        /// <inheritdoc/>
         public void DrawCubicBezier(object dc, CubicBezierShape cubicBezier)
         {
             var drawNodeCached = _drawNodeCache.Get(cubicBezier);
@@ -349,7 +329,6 @@ namespace Core2D.Renderer
             }
         }
 
-        /// <inheritdoc/>
         public void DrawQuadraticBezier(object dc, QuadraticBezierShape quadraticBezier)
         {
             var drawNodeCached = _drawNodeCache.Get(quadraticBezier);
@@ -381,7 +360,6 @@ namespace Core2D.Renderer
             }
         }
 
-        /// <inheritdoc/>
         public void DrawText(object dc, TextShape text)
         {
             var drawNodeCached = _drawNodeCache.Get(text);
@@ -421,7 +399,6 @@ namespace Core2D.Renderer
             }
         }
 
-        /// <inheritdoc/>
         public void DrawImage(object dc, ImageShape image)
         {
             var drawNodeCached = _drawNodeCache.Get(image);
@@ -453,7 +430,6 @@ namespace Core2D.Renderer
             }
         }
 
-        /// <inheritdoc/>
         public void DrawPath(object dc, PathShape path)
         {
             var drawNodeCached = _drawNodeCache.Get(path);
@@ -485,10 +461,6 @@ namespace Core2D.Renderer
             }
         }
 
-        /// <summary>
-        /// Check whether the <see cref="State"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
         public bool ShouldSerializeState() => _state != null;
     }
 }

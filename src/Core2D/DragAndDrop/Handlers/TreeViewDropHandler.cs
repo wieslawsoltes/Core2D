@@ -7,9 +7,6 @@ using Core2D.Editor;
 
 namespace Core2D.DragAndDrop.Handlers
 {
-    /// <summary>
-    /// Project tree view drop handler.
-    /// </summary>
     public class ProjectTreeViewDropHandler : DefaultDropHandler
     {
         private bool ValidateContainer(TreeView treeView, DragEventArgs e, object sourceContext, object targetContext, bool bExecute)
@@ -160,7 +157,6 @@ namespace Core2D.DragAndDrop.Handlers
             return false;
         }
 
-        /// <inheritdoc/>
         public override bool Validate(object sender, DragEventArgs e, object sourceContext, object targetContext, object state)
         {
             if (e.Source is IControl && sender is TreeView treeView)
@@ -170,7 +166,6 @@ namespace Core2D.DragAndDrop.Handlers
             return false;
         }
 
-        /// <inheritdoc/>
         public override bool Execute(object sender, DragEventArgs e, object sourceContext, object targetContext, object state)
         {
             if (e.Source is IControl && sender is TreeView treeView)

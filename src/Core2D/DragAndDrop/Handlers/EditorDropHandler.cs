@@ -8,9 +8,6 @@ using Core2D.Style;
 
 namespace Core2D.DragAndDrop.Handlers
 {
-    /// <summary>
-    /// Project editor drop handler.
-    /// </summary>
     public class EditorDropHandler : DefaultDropHandler
     {
         private bool Validate(ProjectEditor editor, object sender, DragEventArgs e, bool bExecute)
@@ -61,7 +58,6 @@ namespace Core2D.DragAndDrop.Handlers
             return false;
         }
 
-        /// <inheritdoc/>
         public override bool Validate(object sender, DragEventArgs e, object sourceContext, object targetContext, object state)
         {
             if (targetContext is ProjectEditor editor)
@@ -71,7 +67,6 @@ namespace Core2D.DragAndDrop.Handlers
             return false;
         }
 
-        /// <inheritdoc/>
         public override bool Execute(object sender, DragEventArgs e, object sourceContext, object targetContext, object state)
         {
             if (targetContext is ProjectEditor editor)

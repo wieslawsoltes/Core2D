@@ -10,29 +10,19 @@ using Core2D.XamlExporter.Avalonia;
 
 namespace Core2D.FileWriter.Xaml
 {
-    /// <summary>
-    /// Xaml file writer.
-    /// </summary>
     public sealed class DrawingGroupXamlWriter : IFileWriter
     {
         private readonly IServiceProvider _serviceProvider;
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="DrawingGroupXamlWriter"/> class.
-        /// </summary>
-        /// <param name="serviceProvider">The service provider.</param>
         public DrawingGroupXamlWriter(IServiceProvider serviceProvider)
         {
             _serviceProvider = serviceProvider;
         }
 
-        /// <inheritdoc/>
         public string Name { get; } = "Xaml (DrawingGroup)";
 
-        /// <inheritdoc/>
         public string Extension { get; } = "xaml";
 
-        /// <inheritdoc/>
         public void Save(Stream stream, object item, object options)
         {
             if (item == null)

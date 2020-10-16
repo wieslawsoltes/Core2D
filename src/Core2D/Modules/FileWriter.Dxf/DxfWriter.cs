@@ -7,29 +7,19 @@ using Core2D.Renderer.Dxf;
 
 namespace Core2D.FileWriter.Dxf
 {
-    /// <summary>
-    /// netDxf file writer.
-    /// </summary>
     public sealed class DxfWriter : IFileWriter
     {
         private readonly IServiceProvider _serviceProvider;
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="DxfWriter"/> class.
-        /// </summary>
-        /// <param name="serviceProvider">The service provider.</param>
         public DxfWriter(IServiceProvider serviceProvider)
         {
             _serviceProvider = serviceProvider;
         }
 
-        /// <inheritdoc/>
         public string Name { get; } = "Dxf (netDxf)";
 
-        /// <inheritdoc/>
         public string Extension { get; } = "dxf";
 
-        /// <inheritdoc/>
         public void Save(Stream stream, object item, object options)
         {
             if (item == null)

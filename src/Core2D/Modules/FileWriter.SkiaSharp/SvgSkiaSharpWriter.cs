@@ -9,29 +9,19 @@ using Core2D.Renderer.SkiaSharp;
 
 namespace Core2D.FileWriter.SkiaSharpSvg
 {
-    /// <summary>
-    /// SkiaSharp svg <see cref="IFileWriter"/> implementation.
-    /// </summary>
     public sealed class SvgSkiaSharpWriter : IFileWriter
     {
         private readonly IServiceProvider _serviceProvider;
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="SvgSkiaSharpWriter"/> class.
-        /// </summary>
-        /// <param name="serviceProvider">The service provider.</param>
         public SvgSkiaSharpWriter(IServiceProvider serviceProvider)
         {
             _serviceProvider = serviceProvider;
         }
 
-        /// <inheritdoc/>
         public string Name { get; } = "Svg (SkiaSharp)";
 
-        /// <inheritdoc/>
         public string Extension { get; } = "svg";
 
-        /// <inheritdoc/>
         public void Save(Stream stream, object item, object options)
         {
             if (item == null)

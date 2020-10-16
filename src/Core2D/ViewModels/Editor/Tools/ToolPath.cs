@@ -13,9 +13,6 @@ using Core2D.Style;
 
 namespace Core2D.Editor.Tools
 {
-    /// <summary>
-    /// Path tool.
-    /// </summary>
     public class ToolPath : ObservableObject, IEditorTool
     {
         private readonly IServiceProvider _serviceProvider;
@@ -26,47 +23,24 @@ namespace Core2D.Editor.Tools
         private readonly PathToolQuadraticBezier _pathToolQuadraticBezier;
         private readonly PathToolMove _pathToolMove;
 
-        /// <summary>
-        /// Gets or sets flag indicating whether path was initialized.
-        /// </summary>
         internal bool IsInitialized { get; set; }
 
-        /// <summary>
-        /// Gets or sets current path.
-        /// </summary>
         internal PathShape Path { get; set; }
 
-        /// <summary>
-        /// Gets or sets current geometry.
-        /// </summary>
         internal PathGeometry Geometry { get; set; }
 
-        /// <summary>
-        /// Gets or sets current geometry context.
-        /// </summary>
         internal GeometryContext GeometryContext { get; set; }
 
-        /// <summary>
-        /// Gets or sets previous path tool.
-        /// </summary>
         internal IPathTool PreviousPathTool { get; set; }
 
-        /// <inheritdoc/>
         public string Title => "Path";
 
-        /// <summary>
-        /// Gets or sets the tool settings.
-        /// </summary>
         public ToolSettingsPath Settings
         {
             get => _settings;
             set => RaiseAndSetIfChanged(ref _settings, value);
         }
 
-        /// <summary>
-        /// Initialize new instance of <see cref="ToolPath"/> class.
-        /// </summary>
-        /// <param name="serviceProvider">The service provider.</param>
         public ToolPath(IServiceProvider serviceProvider) : base()
         {
             _serviceProvider = serviceProvider;
@@ -79,16 +53,11 @@ namespace Core2D.Editor.Tools
             IsInitialized = false;
         }
 
-        /// <inheritdoc/>
         public override object Copy(IDictionary<object, object> shared)
         {
             throw new NotImplementedException();
         }
 
-        /// <summary>
-        /// Remove last <see cref="PathSegment"/> segment from the previous figure.
-        /// </summary>
-        /// <typeparam name="T">The type of the path segment to remove.</typeparam>
         public void RemoveLastSegment<T>() where T : PathSegment
         {
             var figure = Geometry?.Figures.LastOrDefault();
@@ -101,9 +70,6 @@ namespace Core2D.Editor.Tools
             }
         }
 
-        /// <summary>
-        /// Remove last segment from the previous figure.
-        /// </summary>
         public void RemoveLastSegment()
         {
             if (PreviousPathTool == _pathToolLine)
@@ -132,10 +98,6 @@ namespace Core2D.Editor.Tools
             editor.Project.CurrentContainer.HelperLayer.InvalidateLayer();
         }
 
-        /// <summary>
-        /// Gets last point in the current path.
-        /// </summary>
-        /// <returns>The last path point.</returns>
         public PointShape GetLastPathPoint()
         {
             var figure = Geometry.Figures.LastOrDefault();
@@ -153,10 +115,6 @@ namespace Core2D.Editor.Tools
             throw new Exception("Can not find valid last point from path.");
         }
 
-        /// <summary>
-        /// Initializes working path.
-        /// </summary>
-        /// <param name="start">The path start point.</param>
         public void InitializeWorkingPath(PointShape start)
         {
             var factory = _serviceProvider.GetService<IFactory>();
@@ -188,9 +146,6 @@ namespace Core2D.Editor.Tools
             IsInitialized = true;
         }
 
-        /// <summary>
-        ///  De-initializes working path.
-        /// </summary>
         public void DeInitializeWorkingPath()
         {
             IsInitialized = false;
@@ -199,50 +154,42 @@ namespace Core2D.Editor.Tools
             Path = null;
         }
 
-        /// <inheritdoc/>
         public void LeftDown(InputArgs args)
         {
             _serviceProvider.GetService<ProjectEditor>().CurrentPathTool?.LeftDown(args);
         }
 
-        /// <inheritdoc/>
         public void LeftUp(InputArgs args)
         {
             _serviceProvider.GetService<ProjectEditor>().CurrentPathTool?.LeftUp(args);
         }
 
-        /// <inheritdoc/>
         public void RightDown(InputArgs args)
         {
             _serviceProvider.GetService<ProjectEditor>().CurrentPathTool?.RightDown(args);
             Reset();
         }
 
-        /// <inheritdoc/>
         public void RightUp(InputArgs args)
         {
             _serviceProvider.GetService<ProjectEditor>().CurrentPathTool?.RightUp(args);
         }
 
-        /// <inheritdoc/>
         public void Move(InputArgs args)
         {
             _serviceProvider.GetService<ProjectEditor>().CurrentPathTool?.Move(args);
         }
 
-        /// <inheritdoc/>
         public void Move(BaseShape shape)
         {
             _serviceProvider.GetService<ProjectEditor>().CurrentPathTool?.Move(shape);
         }
 
-        /// <inheritdoc/>
         public void Finalize(BaseShape shape)
         {
             _serviceProvider.GetService<ProjectEditor>().CurrentPathTool?.Finalize(shape);
         }
 
-        /// <inheritdoc/>
         public void Reset()
         {
             _serviceProvider.GetService<ProjectEditor>().CurrentPathTool?.Reset();

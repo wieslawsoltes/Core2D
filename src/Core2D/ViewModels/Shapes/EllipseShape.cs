@@ -5,32 +5,25 @@ using Core2D.Renderer;
 
 namespace Core2D.Shapes
 {
-    /// <summary>
-    /// Ellipse shape.
-    /// </summary>
     public class EllipseShape : BaseShape
     {
         private PointShape _topLeft;
         private PointShape _bottomRight;
 
-        /// <inheritdoc/>
         public override Type TargetType => typeof(EllipseShape);
 
-        /// <inheritdoc/>
         public PointShape TopLeft
         {
             get => _topLeft;
             set => RaiseAndSetIfChanged(ref _topLeft, value);
         }
 
-        /// <inheritdoc/>
         public PointShape BottomRight
         {
             get => _bottomRight;
             set => RaiseAndSetIfChanged(ref _bottomRight, value);
         }
 
-        /// <inheritdoc/>
         public override void DrawShape(object dc, IShapeRenderer renderer)
         {
             if (State.Flags.HasFlag(ShapeStateFlags.Visible))
@@ -39,7 +32,6 @@ namespace Core2D.Shapes
             }
         }
 
-        /// <inheritdoc/>
         public override void DrawPoints(object dc, IShapeRenderer renderer)
         {
             if (renderer.State.SelectedShapes != null)
@@ -64,7 +56,6 @@ namespace Core2D.Shapes
             }
         }
 
-        /// <inheritdoc/>
         public override void Bind(DataFlow dataFlow, object db, object r)
         {
             var record = Data?.Record ?? r;
@@ -75,7 +66,6 @@ namespace Core2D.Shapes
             _bottomRight.Bind(dataFlow, db, record);
         }
 
-        /// <inheritdoc/>
         public override void Move(ISelection selection, decimal dx, decimal dy)
         {
             if (!TopLeft.State.Flags.HasFlag(ShapeStateFlags.Connector))
@@ -89,7 +79,6 @@ namespace Core2D.Shapes
             }
         }
 
-        /// <inheritdoc/>
         public override void Select(ISelection selection)
         {
             base.Select(selection);
@@ -97,7 +86,6 @@ namespace Core2D.Shapes
             BottomRight.Select(selection);
         }
 
-        /// <inheritdoc/>
         public override void Deselect(ISelection selection)
         {
             base.Deselect(selection);
@@ -105,20 +93,17 @@ namespace Core2D.Shapes
             BottomRight.Deselect(selection);
         }
 
-        /// <inheritdoc/>
         public override void GetPoints(IList<PointShape> points)
         {
             points.Add(TopLeft);
             points.Add(BottomRight);
         }
 
-        /// <inheritdoc/>
         public override object Copy(IDictionary<object, object> shared)
         {
             throw new NotImplementedException();
         }
 
-        /// <inheritdoc/>
         public override bool IsDirty()
         {
             var isDirty = base.IsDirty();
@@ -129,7 +114,6 @@ namespace Core2D.Shapes
             return isDirty;
         }
 
-        /// <inheritdoc/>
         public override void Invalidate()
         {
             base.Invalidate();
@@ -137,16 +121,8 @@ namespace Core2D.Shapes
             BottomRight.Invalidate();
         }
 
-        /// <summary>
-        /// Check whether the <see cref="TopLeft"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
         public virtual bool ShouldSerializeTopLeft() => _topLeft != null;
 
-        /// <summary>
-        /// Check whether the <see cref="BottomRight"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
         public virtual bool ShouldSerializeBottomRight() => _bottomRight != null;
     }
 }

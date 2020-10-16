@@ -9,29 +9,19 @@ using Core2D.Renderer.SkiaSharp;
 
 namespace Core2D.FileWriter.SkiaSharpJpeg
 {
-    /// <summary>
-    /// SkiaSharp jpeg <see cref="IFileWriter"/> implementation.
-    /// </summary>
     public sealed class JpegSkiaSharpWriter : IFileWriter
     {
         private readonly IServiceProvider _serviceProvider;
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="JpegSkiaSharpWriter"/> class.
-        /// </summary>
-        /// <param name="serviceProvider">The service provider.</param>
         public JpegSkiaSharpWriter(IServiceProvider serviceProvider)
         {
             _serviceProvider = serviceProvider;
         }
 
-        /// <inheritdoc/>
         public string Name { get; } = "Jpeg (SkiaSharp)";
 
-        /// <inheritdoc/>
         public string Extension { get; } = "jpg";
 
-        /// <inheritdoc/>
         public void Save(Stream stream, object item, object options)
         {
             if (item == null)

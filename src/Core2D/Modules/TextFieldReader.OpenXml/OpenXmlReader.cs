@@ -9,26 +9,17 @@ using DocumentFormat.OpenXml.Spreadsheet;
 
 namespace Core2D.TextFieldReader.OpenXml
 {
-    /// <summary>
-    /// Defines the text fields to <see cref="Database"/> reader.
-    /// </summary>
     public sealed class OpenXmlReader : ITextFieldReader<Database>
     {
         private readonly IServiceProvider _serviceProvider;
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="OpenXmlReader"/> class.
-        /// </summary>
-        /// <param name="serviceProvider">The service provider.</param>
         public OpenXmlReader(IServiceProvider serviceProvider)
         {
             _serviceProvider = serviceProvider;
         }
 
-        /// <inheritdoc/>
         public string Name { get; } = "Xlsx (OpenXml)";
 
-        /// <inheritdoc/>
         public string Extension { get; } = "xlsx";
 
         private static string ToString(Cell c, SharedStringTablePart stringTable)
@@ -94,11 +85,6 @@ namespace Core2D.TextFieldReader.OpenXml
             spreadsheetDocument.Close();
         }
 
-        /// <summary>
-        /// Read fields from text database file format.
-        /// </summary>
-        /// <param name="stream">The fields file stream.</param>
-        /// <returns>The new instance of the <see cref="Database"/> class</returns>
         public Database Read(Stream stream)
         {
             var fields = ReadFields(stream).ToList();

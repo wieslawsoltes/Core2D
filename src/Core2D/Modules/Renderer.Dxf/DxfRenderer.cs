@@ -14,9 +14,6 @@ using DXFT = netDxf.Tables;
 
 namespace Core2D.Renderer.Dxf
 {
-    /// <summary>
-    /// Native netDxf shape renderer.
-    /// </summary>
     public partial class DxfRenderer : ObservableObject, IShapeRenderer
     {
         private readonly IServiceProvider _serviceProvider;
@@ -29,17 +26,12 @@ namespace Core2D.Renderer.Dxf
         private double _sourceDpi = 96.0;
         private double _targetDpi = 72.0;
 
-        /// <inheritdoc/>
         public ShapeRendererState State
         {
             get => _state;
             set => RaiseAndSetIfChanged(ref _state, value);
         }
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="DxfRenderer"/> class.
-        /// </summary>
-        /// <param name="serviceProvider">The service provider.</param>
         public DxfRenderer(IServiceProvider serviceProvider)
         {
             _serviceProvider = serviceProvider;
@@ -47,7 +39,6 @@ namespace Core2D.Renderer.Dxf
             _biCache = _serviceProvider.GetService<IFactory>().CreateCache<string, DXFO.ImageDefinition>();
         }
 
-        /// <inheritdoc/>
         public override object Copy(IDictionary<object, object> shared)
         {
             throw new NotImplementedException();
@@ -427,20 +418,17 @@ namespace Core2D.Renderer.Dxf
             }
         }
 
-        /// <inheritdoc/>
         public void ClearCache()
         {
             _biCache.Reset();
         }
 
-        /// <inheritdoc/>
         public void Fill(object dc, double x, double y, double width, double height, BaseColor color)
         {
             var dxf = dc as DXF.DxfDocument;
             FillRectangle(dxf, _currentLayer, x, y, width, height, color);
         }
 
-        /// <inheritdoc/>
         public void Grid(object dc, IGrid grid, double x, double y, double width, double height)
         {
             var dxf = dc as DXF.DxfDocument;
@@ -467,7 +455,6 @@ namespace Core2D.Renderer.Dxf
             }
         }
 
-        /// <inheritdoc/>
         public void DrawPage(object dc, PageContainer container)
         {
             var dxf = dc as DXF.DxfDocument;
@@ -487,7 +474,6 @@ namespace Core2D.Renderer.Dxf
             }
         }
 
-        /// <inheritdoc/>
         public void DrawLayer(object dc, LayerContainer layer)
         {
             var dxf = dc as DXF.DxfDocument;
@@ -509,13 +495,11 @@ namespace Core2D.Renderer.Dxf
             }
         }
 
-        /// <inheritdoc/>
         public void DrawPoint(object dc, PointShape point)
         {
             // TODO:
         }
 
-        /// <inheritdoc/>
         public void DrawLine(object dc, LineShape line)
         {
             if (line.IsStroked)
@@ -539,7 +523,6 @@ namespace Core2D.Renderer.Dxf
             }
         }
 
-        /// <inheritdoc/>
         public void DrawRectangle(object dc, RectangleShape rectangle)
         {
             if (rectangle.IsStroked || rectangle.IsFilled)
@@ -557,7 +540,6 @@ namespace Core2D.Renderer.Dxf
             }
         }
 
-        /// <inheritdoc/>
         public void DrawEllipse(object dc, EllipseShape ellipse)
         {
             if (ellipse.IsStroked || ellipse.IsFilled)
@@ -575,7 +557,6 @@ namespace Core2D.Renderer.Dxf
             }
         }
 
-        /// <inheritdoc/>
         public void DrawArc(object dc, ArcShape arc)
         {
             var dxf = dc as DXF.DxfDocument;
@@ -624,7 +605,6 @@ namespace Core2D.Renderer.Dxf
             }
         }
 
-        /// <inheritdoc/>
         public void DrawCubicBezier(object dc, CubicBezierShape cubicBezier)
         {
             if (cubicBezier.IsStroked || cubicBezier.IsFilled)
@@ -683,7 +663,6 @@ namespace Core2D.Renderer.Dxf
             }
         }
 
-        /// <inheritdoc/>
         public void DrawQuadraticBezier(object dc, QuadraticBezierShape quadraticBezier)
         {
             if (quadraticBezier.IsStroked || quadraticBezier.IsFilled)
@@ -740,7 +719,6 @@ namespace Core2D.Renderer.Dxf
             }
         }
 
-        /// <inheritdoc/>
         public void DrawText(object dc, TextShape text)
         {
             var dxf = dc as DXF.DxfDocument;
@@ -827,7 +805,6 @@ namespace Core2D.Renderer.Dxf
             dxf.AddEntity(dxfMText);
         }
 
-        /// <inheritdoc/>
         public void DrawImage(object dc, ImageShape image)
         {
             var dxf = dc as DXF.DxfDocument;
@@ -873,7 +850,6 @@ namespace Core2D.Renderer.Dxf
             }
         }
 
-        /// <inheritdoc/>
         public void DrawPath(object dc, PathShape path)
         {
             if (path.IsStroked || path.IsFilled)
@@ -922,10 +898,6 @@ namespace Core2D.Renderer.Dxf
             }
         }
 
-        /// <summary>
-        /// Check whether the <see cref="State"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
         public bool ShouldSerializeState() => _state != null;
     }
 }

@@ -13,17 +13,10 @@ using SP = Svg.Picture;
 
 namespace Core2D.Renderer.SkiaSharp
 {
-    /// <summary>
-    /// Svg converter.
-    /// </summary>
     public class SkiaSharpSvgConverter : ISvgConverter
     {
         private readonly IServiceProvider _serviceProvider;
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="SkiaSharpSvgConverter"/> class.
-        /// </summary>
-        /// <param name="serviceProvider">The service provider.</param>
         public SkiaSharpSvgConverter(IServiceProvider serviceProvider)
         {
             _serviceProvider = serviceProvider;
@@ -569,7 +562,6 @@ namespace Core2D.Renderer.SkiaSharp
             return Enumerable.Repeat<BaseShape>(group, 1).ToList();
         }
 
-        /// <inheritdoc/>
         public IList<BaseShape> Convert(string path, out double width, out double height)
         {
             var document = SKSvg.Open(path);
@@ -583,7 +575,6 @@ namespace Core2D.Renderer.SkiaSharp
             return Convert(document, out width, out height);
         }
 
-        /// <inheritdoc/>
         public IList<BaseShape> FromString(string text, out double width, out double height)
         {
             using var stream = ToStream(text);

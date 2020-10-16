@@ -6,9 +6,6 @@ using Core2D.Style;
 
 namespace Core2D.Containers
 {
-    /// <summary>
-    /// Project options.
-    /// </summary>
     public class Options : ObservableObject
     {
         private bool _snapToGrid = true;
@@ -22,173 +19,100 @@ namespace Core2D.Containers
         private FillRule _defaultFillRule = FillRule.EvenOdd;
         private bool _tryToConnect = false;
 
-        /// <summary>
-        /// Gets or sets how grid snapping is handled.
-        /// </summary>
         public bool SnapToGrid
         {
             get => _snapToGrid;
             set => RaiseAndSetIfChanged(ref _snapToGrid, value);
         }
 
-        /// <summary>
-        /// Gets or sets how much grid X axis is snapped.
-        /// </summary>
         public double SnapX
         {
             get => _snapX;
             set => RaiseAndSetIfChanged(ref _snapX, value);
         }
 
-        /// <summary>
-        /// Gets or sets how much grid Y axis is snapped.
-        /// </summary>
         public double SnapY
         {
             get => _snapY;
             set => RaiseAndSetIfChanged(ref _snapY, value);
         }
 
-        /// <summary>
-        /// Gets or sets hit test threshold radius.
-        /// </summary>
         public double HitThreshold
         {
             get => _hitThreshold;
             set => RaiseAndSetIfChanged(ref _hitThreshold, value);
         }
 
-        /// <summary>
-        /// Gets or sets how selected shapes are moved.
-        /// </summary>
         public MoveMode MoveMode
         {
             get => _moveMode;
             set => RaiseAndSetIfChanged(ref _moveMode, value);
         }
 
-        /// <summary>
-        /// Gets or sets value indicating whether path/shape is stroked during creation.
-        /// </summary>
         public bool DefaultIsStroked
         {
             get => _defaultIsStroked;
             set => RaiseAndSetIfChanged(ref _defaultIsStroked, value);
         }
 
-        /// <summary>
-        /// Gets or sets value indicating whether path/shape is filled during creation.
-        /// </summary>
         public bool DefaultIsFilled
         {
             get => _defaultIsFilled;
             set => RaiseAndSetIfChanged(ref _defaultIsFilled, value);
         }
 
-        /// <summary>
-        /// Gets or sets value indicating whether path is closed during creation.
-        /// </summary>
         public bool DefaultIsClosed
         {
             get => _defaultIsClosed;
             set => RaiseAndSetIfChanged(ref _defaultIsClosed, value);
         }
 
-        /// <summary>
-        /// Gets or sets value indicating path fill rule during creation.
-        /// </summary>
         public FillRule DefaultFillRule
         {
             get => _defaultFillRule;
             set => RaiseAndSetIfChanged(ref _defaultFillRule, value);
         }
 
-        /// <summary>
-        /// Gets or sets how point connection is handled.
-        /// </summary>
         public bool TryToConnect
         {
             get => _tryToConnect;
             set => RaiseAndSetIfChanged(ref _tryToConnect, value);
         }
 
-        /// <inheritdoc/>
         public override object Copy(IDictionary<object, object> shared)
         {
             throw new NotImplementedException();
         }
 
-        /// <inheritdoc/>
         public override bool IsDirty()
         {
             var isDirty = base.IsDirty();
             return isDirty;
         }
 
-        /// <inheritdoc/>
         public override void Invalidate()
         {
             base.Invalidate();
         }
 
-        /// <summary>
-        /// Check whether the <see cref="SnapToGrid"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
         public virtual bool ShouldSerializeSnapToGrid() => _snapToGrid != default;
 
-        /// <summary>
-        /// Check whether the <see cref="SnapX"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
         public virtual bool ShouldSerializeSnapX() => _snapX != default;
 
-        /// <summary>
-        /// Check whether the <see cref="SnapY"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
         public virtual bool ShouldSerializeSnapY() => _snapY != default;
 
-        /// <summary>
-        /// Check whether the <see cref="HitThreshold"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
         public virtual bool ShouldSerializeHitThreshold() => _hitThreshold != default;
 
-        /// <summary>
-        /// Check whether the <see cref="MoveMode"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
         public virtual bool ShouldSerializeMoveMode() => _moveMode != default;
 
-        /// <summary>
-        /// Check whether the <see cref="DefaultIsStroked"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
         public virtual bool ShouldSerializeDefaultIsStroked() => _defaultIsStroked != default;
 
-        /// <summary>
-        /// Check whether the <see cref="DefaultIsFilled"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
         public virtual bool ShouldSerializeDefaultIsFilled() => _defaultIsFilled != default;
 
-        /// <summary>
-        /// Check whether the <see cref="DefaultIsClosed"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
         public virtual bool ShouldSerializeDefaultIsClosed() => _defaultIsClosed != default;
 
-        /// <summary>
-        /// Check whether the <see cref="DefaultFillRule"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
         public virtual bool ShouldSerializeDefaultFillRule() => _defaultFillRule != default;
 
-        /// <summary>
-        /// Check whether the <see cref="TryToConnect"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
         public virtual bool ShouldSerializeTryToConnect() => _tryToConnect != default;
     }
 }

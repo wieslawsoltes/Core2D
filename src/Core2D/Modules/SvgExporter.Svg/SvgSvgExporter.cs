@@ -9,23 +9,15 @@ using Core2D.Style;
 
 namespace Core2D.SvgExporter.Svg
 {
-    /// <summary>
-    /// Svg exporter.
-    /// </summary>
     public class SvgSvgExporter : ISvgExporter
     {
         private readonly IServiceProvider _serviceProvider;
 
-        /// <summary>
-        /// Initialize new instance of <see cref="SvgSvgExporter"/> class.
-        /// </summary>
-        /// <param name="serviceProvider">The service provider.</param>
         public SvgSvgExporter(IServiceProvider serviceProvider)
         {
             _serviceProvider = serviceProvider;
         }
 
-        /// <inheritdoc/>
         public string Create(object item, double width, double height)
         {
             var converter = _serviceProvider.GetService<IPathConverter>();

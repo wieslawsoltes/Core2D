@@ -7,18 +7,8 @@ using Core2D.Shapes;
 
 namespace Core2D.Bindings
 {
-    /// <summary>
-    /// Text binding.
-    /// </summary>
     internal static class TextBinding
     {
-        /// <summary>
-        /// Try binding data record to <see cref="TextShape.Text"/> shape property containing column name.
-        /// </summary>
-        /// <param name="record">The external data record used for binding.</param>
-        /// <param name="columnName">The column name.</param>
-        /// <param name="value">The output string bound to data record.</param>
-        /// <returns>True if binding was successful.</returns>
         public static bool GetBindingValue(Record record, string columnName, out string value)
         {
             if (string.IsNullOrEmpty(columnName) || record == null)
@@ -49,13 +39,6 @@ namespace Core2D.Bindings
             return false;
         }
 
-        /// <summary>
-        /// Try binding properties array to one of <see cref="TextShape"/> shape properties.
-        /// </summary>
-        /// <param name="properties">The properties database used for binding.</param>
-        /// <param name="propertyName">The target property name.</param>
-        /// <param name="value">The string bound to properties.</param>
-        /// <returns>True if binding was successful.</returns>
         public static bool GetBindingValue(ImmutableArray<Property> properties, string propertyName, out string value)
         {
             if (string.IsNullOrEmpty(propertyName) || properties == null)
@@ -75,13 +58,6 @@ namespace Core2D.Bindings
             return false;
         }
 
-        /// <summary>
-        /// Bind properties or data record to <see cref="TextShape.Text"/> property.
-        /// </summary>
-        /// <param name="shape">The text shape instance.</param>
-        /// <param name="properties">The properties database used for binding.</param>
-        /// <param name="externalRecord">The external data record used for binding.</param>
-        /// <returns>The string bound to properties or data record.</returns>
         public static string Bind(TextShape shape, ImmutableArray<Property> properties, Record externalRecord)
         {
             var text = shape.Text;

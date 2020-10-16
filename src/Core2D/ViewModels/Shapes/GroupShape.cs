@@ -7,21 +7,15 @@ using Core2D.Renderer;
 
 namespace Core2D.Shapes
 {
-    /// <summary>
-    /// Group shape.
-    /// </summary>
     public class GroupShape : ConnectableShape
     {
         private ImmutableArray<Property> _shapesProperties;
         private ImmutableArray<BaseShape> _shapes;
 
-        /// <inheritdoc/>
         public override Type TargetType => typeof(GroupShape);
 
-        /// <inheritdoc/>
         public ImmutableArray<Property> ShapesProperties => GetShapeProperties();
 
-        /// <inheritdoc/>
         public ImmutableArray<BaseShape> Shapes
         {
             get => _shapes;
@@ -64,7 +58,6 @@ namespace Core2D.Shapes
             return _shapesProperties;
         }
 
-        /// <inheritdoc/>
         public override void DrawShape(object dc, IShapeRenderer renderer)
         {
             if (State.Flags.HasFlag(ShapeStateFlags.Visible))
@@ -78,7 +71,6 @@ namespace Core2D.Shapes
             base.DrawShape(dc, renderer);
         }
 
-        /// <inheritdoc/>
         public override void DrawPoints(object dc, IShapeRenderer renderer)
         {
             if (State.Flags.HasFlag(ShapeStateFlags.Visible))
@@ -92,7 +84,6 @@ namespace Core2D.Shapes
             base.DrawPoints(dc, renderer);
         }
 
-        /// <inheritdoc/>
         public override void Bind(DataFlow dataFlow, object db, object r)
         {
             var record = Data?.Record ?? r;
@@ -105,7 +96,6 @@ namespace Core2D.Shapes
             base.Bind(dataFlow, db, record);
         }
 
-        /// <inheritdoc/>
         public override void Move(ISelection selection, decimal dx, decimal dy)
         {
             foreach (var shape in Shapes)
@@ -119,19 +109,16 @@ namespace Core2D.Shapes
             base.Move(selection, dx, dy);
         }
 
-        /// <inheritdoc/>
         public override void Select(ISelection selection)
         {
             base.Select(selection);
         }
 
-        /// <inheritdoc/>
         public override void Deselect(ISelection selection)
         {
             base.Deselect(selection);
         }
 
-        /// <inheritdoc/>
         public override void GetPoints(IList<PointShape> points)
         {
             foreach (var shape in Shapes)
@@ -142,13 +129,11 @@ namespace Core2D.Shapes
             base.GetPoints(points);
         }
 
-        /// <inheritdoc/>
         public override object Copy(IDictionary<object, object> shared)
         {
             throw new NotImplementedException();
         }
 
-        /// <inheritdoc/>
         public override bool IsDirty()
         {
             var isDirty = base.IsDirty();
@@ -161,7 +146,6 @@ namespace Core2D.Shapes
             return isDirty;
         }
 
-        /// <inheritdoc/>
         public override void Invalidate()
         {
             base.Invalidate();
@@ -172,10 +156,6 @@ namespace Core2D.Shapes
             }
         }
 
-        /// <summary>
-        /// Check whether the <see cref="Shapes"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
         public virtual bool ShouldSerializeShapes() => true;
     }
 }

@@ -9,26 +9,17 @@ using CSV = CsvHelper;
 
 namespace Core2D.TextFieldReader.CsvHelper
 {
-    /// <summary>
-    /// Defines the text fields to <see cref="Database"/> reader.
-    /// </summary>
     public sealed class CsvHelperReader : ITextFieldReader<Database>
     {
         private readonly IServiceProvider _serviceProvider;
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="CsvHelperReader"/> class.
-        /// </summary>
-        /// <param name="serviceProvider">The service provider.</param>
         public CsvHelperReader(IServiceProvider serviceProvider)
         {
             _serviceProvider = serviceProvider;
         }
 
-        /// <inheritdoc/>
         public string Name { get; } = "Csv (CsvHelper)";
 
-        /// <inheritdoc/>
         public string Extension { get; } = "csv";
 
         private static IEnumerable<string[]> ReadFields(Stream stream)
@@ -55,11 +46,6 @@ namespace Core2D.TextFieldReader.CsvHelper
             }
         }
 
-        /// <summary>
-        /// Read fields from text database file format.
-        /// </summary>
-        /// <param name="stream">The fields file stream.</param>
-        /// <returns>The new instance of the <see cref="Database"/> class</returns>
         public Database Read(Stream stream)
         {
             var fields = ReadFields(stream).ToList();

@@ -2,17 +2,8 @@
 
 namespace Core2D.Shapes
 {
-    /// <summary>
-    /// Point shape extension methods.
-    /// </summary>
     public static class PointShapeExtentions
     {
-        /// <summary>
-        /// Calculates distance between points.
-        /// </summary>
-        /// <param name="point">The point instance.</param>
-        /// <param name="other">The other point.</param>
-        /// <returns>The distance between points.</returns>
         public static double DistanceTo(this PointShape point, PointShape other)
         {
             double dx = point.X - other.X;

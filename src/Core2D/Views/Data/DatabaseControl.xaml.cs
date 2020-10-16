@@ -11,9 +11,6 @@ using Core2D.Data;
 
 namespace Core2D.Views.Data
 {
-    /// <summary>
-    /// Interaction logic for <see cref="DatabaseControl"/> xaml.
-    /// </summary>
     public class DatabaseControl : UserControl
     {
         private TextBox _filterRecordsText;
@@ -22,9 +19,6 @@ namespace Core2D.Views.Data
         private string _recordsFilter;
         private DataGridCollectionView _recordsView;
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="DatabaseControl"/> class.
-        /// </summary>
         public DatabaseControl()
         {
             InitializeComponent();
@@ -36,9 +30,6 @@ namespace Core2D.Views.Data
             _rowsDataGrid.DataContextChanged += RowsDataGrid_DataContextChanged;
         }
 
-        /// <summary>
-        /// Initialize the Xaml components.
-        /// </summary>
         private void InitializeComponent()
         {
             AvaloniaXamlLoader.Load(this);

@@ -8,9 +8,6 @@ using Core2D.Input;
 
 namespace Core2D.Editor
 {
-    /// <summary>
-    /// Provides mouse input from control.
-    /// </summary>
     public class AvaloniaInputSource : InputSource
     {
         private static ModifierFlags ToModifierFlags(KeyModifiers inputModifiers)
@@ -35,12 +32,6 @@ namespace Core2D.Editor
             return modifier;
         }
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="AvaloniaInputSource"/> class.
-        /// </summary>
-        /// <param name="source">The source element.</param>
-        /// <param name="relative">The relative element.</param>
-        /// <param name="translate">The translate function.</param>
         public AvaloniaInputSource(Control source, Control relative, Func<Point, Point> translate)
         {
             LeftDown = GetPointerPressedObservable(source, relative, translate, MouseButton.Left);

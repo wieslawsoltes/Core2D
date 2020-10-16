@@ -7,9 +7,6 @@ using Core2D.Shapes;
 
 namespace Core2D.Editor.Tools.Path
 {
-    /// <summary>
-    /// Move path tool.
-    /// </summary>
     public class PathToolMove : ObservableObject, IPathTool
     {
         public enum State { Move }
@@ -17,35 +14,25 @@ namespace Core2D.Editor.Tools.Path
         private PathToolSettingsMove _settings;
         private readonly State _currentState = State.Move;
 
-        /// <inheritdoc/>
         public string Title => "Move";
 
-        /// <summary>
-        /// Gets or sets the path tool settings.
-        /// </summary>
         public PathToolSettingsMove Settings
         {
             get => _settings;
             set => RaiseAndSetIfChanged(ref _settings, value);
         }
 
-        /// <summary>
-        /// Initialize new instance of <see cref="PathToolMove"/> class.
-        /// </summary>
-        /// <param name="serviceProvider">The service provider.</param>
         public PathToolMove(IServiceProvider serviceProvider) : base()
         {
             _serviceProvider = serviceProvider;
             _settings = new PathToolSettingsMove();
         }
 
-        /// <inheritdoc/>
         public override object Copy(IDictionary<object, object> shared)
         {
             throw new NotImplementedException();
         }
 
-        /// <inheritdoc/>
         public void LeftDown(InputArgs args)
         {
             var factory = _serviceProvider.GetService<IFactory>();
@@ -69,22 +56,18 @@ namespace Core2D.Editor.Tools.Path
             }
         }
 
-        /// <inheritdoc/>
         public void LeftUp(InputArgs args)
         {
         }
 
-        /// <inheritdoc/>
         public void RightDown(InputArgs args)
         {
         }
 
-        /// <inheritdoc/>
         public void RightUp(InputArgs args)
         {
         }
 
-        /// <inheritdoc/>
         public void Move(InputArgs args)
         {
             var editor = _serviceProvider.GetService<ProjectEditor>();
@@ -102,17 +85,14 @@ namespace Core2D.Editor.Tools.Path
             }
         }
 
-        /// <inheritdoc/>
         public void Move(BaseShape shape)
         {
         }
 
-        /// <inheritdoc/>
         public void Finalize(BaseShape shape)
         {
         }
 
-        /// <inheritdoc/>
         public void Reset()
         {
         }

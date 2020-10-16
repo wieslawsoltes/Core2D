@@ -30,12 +30,8 @@ using Core2D.Views;
 
 namespace Core2D.Modules
 {
-    /// <summary>
-    /// Avalonia module.
-    /// </summary>
     public class AvaloniaModule : Autofac.Module
     {
-        /// <inheritdoc/>
         protected override void Load(ContainerBuilder builder)
         {
             // Locator

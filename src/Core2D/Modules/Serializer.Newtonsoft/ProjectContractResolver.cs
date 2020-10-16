@@ -8,10 +8,8 @@ using Newtonsoft.Json.Serialization;
 
 namespace Core2D.Serializer.Newtonsoft
 {
-    /// <inheritdoc/>
     internal class ProjectContractResolver : DefaultContractResolver
     {
-        /// <inheritdoc/>
         public override JsonContract ResolveContract(Type type)
         {
             if (type.GetTypeInfo().IsGenericType && type.GetGenericTypeDefinition() == typeof(IList<>))
@@ -23,7 +21,6 @@ namespace Core2D.Serializer.Newtonsoft
             return base.ResolveContract(type);
         }
 
-        /// <inheritdoc/>
         protected override IList<JsonProperty> CreateProperties(Type type, MemberSerialization memberSerialization)
         {
             return base.CreateProperties(type, memberSerialization).Where(p => p.Writable).ToList();

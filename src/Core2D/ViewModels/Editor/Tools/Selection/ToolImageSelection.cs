@@ -6,9 +6,6 @@ using Core2D.Style;
 
 namespace Core2D.Editor.Tools.Selection
 {
-    /// <summary>
-    /// Helper class for <see cref="ImageShape"/> shape selection.
-    /// </summary>
     public class ToolImageSelection
     {
         private readonly IServiceProvider _serviceProvider;
@@ -18,13 +15,6 @@ namespace Core2D.Editor.Tools.Selection
         private PointShape _topLeftHelperPoint;
         private PointShape _bottomRightHelperPoint;
 
-        /// <summary>
-        /// Initialize new instance of <see cref="ToolImageSelection"/> class.
-        /// </summary>
-        /// <param name="serviceProvider">The service provider.</param>
-        /// <param name="layer">The selection shapes layer.</param>
-        /// <param name="shape">The selected shape.</param>
-        /// <param name="style">The selection shapes style.</param>
         public ToolImageSelection(IServiceProvider serviceProvider, LayerContainer layer, ImageShape shape, ShapeStyle style)
         {
             _serviceProvider = serviceProvider;
@@ -33,9 +23,6 @@ namespace Core2D.Editor.Tools.Selection
             _style = style;
         }
 
-        /// <summary>
-        /// Transfer selection state to BottomRight.
-        /// </summary>
         public void ToStateBottomRight()
         {
             _topLeftHelperPoint = _serviceProvider.GetService<IFactory>().CreatePointShape(0, 0);
@@ -45,9 +32,6 @@ namespace Core2D.Editor.Tools.Selection
             _layer.Shapes = _layer.Shapes.Add(_bottomRightHelperPoint);
         }
 
-        /// <summary>
-        /// Move selection.
-        /// </summary>
         public void Move()
         {
             if (_topLeftHelperPoint != null)
@@ -65,9 +49,6 @@ namespace Core2D.Editor.Tools.Selection
             _layer.InvalidateLayer();
         }
 
-        /// <summary>
-        /// Reset selection.
-        /// </summary>
         public void Reset()
         {
             if (_topLeftHelperPoint != null)

@@ -14,37 +14,19 @@ using Core2D.Shapes;
 
 namespace Core2D.FileWriter.Emf
 {
-    /// <summary>
-    /// WinForms file writer.
-    /// </summary>
     public sealed class EmfWriter : IFileWriter
     {
         private readonly IServiceProvider _serviceProvider;
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="EmfWriter"/> class.
-        /// </summary>
-        /// <param name="serviceProvider">The service provider.</param>
         public EmfWriter(IServiceProvider serviceProvider)
         {
             _serviceProvider = serviceProvider;
         }
 
-        /// <inheritdoc/>
         public string Name { get; } = "Emf (WinForms)";
 
-        /// <inheritdoc/>
         public string Extension { get; } = "emf";
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="bitmap"></param>
-        /// <param name="shapes"></param>
-        /// <param name="properties"></param>
-        /// <param name="record"></param>
-        /// <param name="ic"></param>
-        /// <returns></returns>
         public MemoryStream MakeMetafileStream(Bitmap bitmap, IEnumerable<BaseShape> shapes, IImageCache ic)
         {
             var g = default(Graphics);
@@ -97,13 +79,6 @@ namespace Core2D.FileWriter.Emf
             return ms;
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="bitmap"></param>
-        /// <param name="container"></param>
-        /// <param name="ic"></param>
-        /// <returns></returns>
         public MemoryStream MakeMetafileStream(Bitmap bitmap, PageContainer container, IImageCache ic)
         {
             var g = default(Graphics);
@@ -154,12 +129,6 @@ namespace Core2D.FileWriter.Emf
             return ms;
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="stream"></param>
-        /// <param name="container"></param>
-        /// <param name="ic"></param>
         public void Save(Stream stream, PageContainer container, IImageCache ic)
         {
             if (container != null && container.Template != null)
@@ -170,7 +139,6 @@ namespace Core2D.FileWriter.Emf
             }
         }
 
-        /// <inheritdoc/>
         public void Save(Stream stream, object item, object options)
         {
             if (item == null)

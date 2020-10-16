@@ -11,23 +11,15 @@ using SkiaSharp;
 
 namespace Core2D.Renderer.SkiaSharp
 {
-    /// <summary>
-    /// Path converter.
-    /// </summary>
     public class SkiaSharpPathConverter : IPathConverter
     {
         private readonly IServiceProvider _serviceProvider;
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="SkiaSharpPathConverter"/> class.
-        /// </summary>
-        /// <param name="serviceProvider">The service provider.</param>
         public SkiaSharpPathConverter(IServiceProvider serviceProvider)
         {
             _serviceProvider = serviceProvider;
         }
 
-        /// <inheritdoc/>
         public PathShape ToPathShape(IEnumerable<BaseShape> shapes)
         {
             var path = PathGeometryConverter.ToSKPath(shapes);
@@ -50,7 +42,6 @@ namespace Core2D.Renderer.SkiaSharp
             return pathShape;
         }
 
-        /// <inheritdoc/>
         public PathShape ToPathShape(BaseShape shape)
         {
             var path = PathGeometryConverter.ToSKPath(shape);
@@ -72,7 +63,6 @@ namespace Core2D.Renderer.SkiaSharp
             return pathShape;
         }
 
-        /// <inheritdoc/>
         public PathShape ToStrokePathShape(BaseShape shape)
         {
             var path = PathGeometryConverter.ToSKPath(shape);
@@ -110,7 +100,6 @@ namespace Core2D.Renderer.SkiaSharp
             return null;
         }
 
-        /// <inheritdoc/>
         public PathShape ToFillPathShape(BaseShape shape)
         {
             var path = PathGeometryConverter.ToSKPath(shape);
@@ -144,7 +133,6 @@ namespace Core2D.Renderer.SkiaSharp
             return null;
         }
 
-        /// <inheritdoc/>
         public PathShape ToWindingPathShape(BaseShape shape)
         {
             var path = PathGeometryConverter.ToSKPath(shape);
@@ -167,7 +155,6 @@ namespace Core2D.Renderer.SkiaSharp
             return pathShape;
         }
 
-        /// <inheritdoc/>
         public PathShape Simplify(BaseShape shape)
         {
             var path = PathGeometryConverter.ToSKPath(shape)?.Simplify();
@@ -189,7 +176,6 @@ namespace Core2D.Renderer.SkiaSharp
             return pathShape;
         }
 
-        /// <inheritdoc/>
         public PathShape Op(IEnumerable<BaseShape> shapes, PathOp op)
         {
             if (shapes == null || shapes.Count() <= 0)
@@ -235,7 +221,6 @@ namespace Core2D.Renderer.SkiaSharp
             return pathShape;
         }
 
-        /// <inheritdoc/>
         public PathShape FromSvgPathData(string svgPath, bool isStroked, bool isFilled)
         {
             var path = SKPath.ParseSvgPathData(svgPath);
@@ -255,7 +240,6 @@ namespace Core2D.Renderer.SkiaSharp
             return pathShape;
         }
 
-        /// <inheritdoc/>
         public string ToSvgPathData(BaseShape shape)
         {
             var path = PathGeometryConverter.ToSKPath(shape);

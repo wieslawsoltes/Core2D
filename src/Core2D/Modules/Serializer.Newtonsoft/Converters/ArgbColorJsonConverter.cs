@@ -4,16 +4,13 @@ using Newtonsoft.Json;
 
 namespace Core2D.Serializer.Newtonsoft
 {
-    /// <inheritdoc/>
     internal class ArgbColorJsonConverter : JsonConverter
     {
-        /// <inheritdoc/>
         public override bool CanConvert(Type objectType)
         {
             return objectType == typeof(BaseColor) || objectType == typeof(ArgbColor) || objectType == typeof(ArgbColor);
         }
 
-        /// <inheritdoc/>
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
             switch (value as BaseColor)
@@ -27,7 +24,6 @@ namespace Core2D.Serializer.Newtonsoft
             }
         }
 
-        /// <inheritdoc/>
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
         {
             if (objectType == typeof(BaseColor) || objectType == typeof(ArgbColor) || objectType == typeof(ArgbColor))

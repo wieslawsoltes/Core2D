@@ -10,9 +10,6 @@ using Core2D.Shapes;
 
 namespace Core2D.Editor.Tools.Path
 {
-    /// <summary>
-    /// Cubic bezier path tool.
-    /// </summary>
     public class PathToolCubicBezier : ObservableObject, IPathTool
     {
         public enum State { Point1, Point4, Point2, Point3 }
@@ -22,35 +19,25 @@ namespace Core2D.Editor.Tools.Path
         private CubicBezierShape _cubicBezier = new CubicBezierShape();
         private ToolCubicBezierSelection _selection;
 
-        /// <inheritdoc/>
         public string Title => "CubicBezier";
 
-        /// <summary>
-        /// Gets or sets the path tool settings.
-        /// </summary>
         public PathToolSettingsCubicBezier Settings
         {
             get => _settings;
             set => RaiseAndSetIfChanged(ref _settings, value);
         }
 
-        /// <summary>
-        /// Initialize new instance of <see cref="PathToolCubicBezier"/> class.
-        /// </summary>
-        /// <param name="serviceProvider">The service provider.</param>
         public PathToolCubicBezier(IServiceProvider serviceProvider) : base()
         {
             _serviceProvider = serviceProvider;
             _settings = new PathToolSettingsCubicBezier();
         }
 
-        /// <inheritdoc/>
         public override object Copy(IDictionary<object, object> shared)
         {
             throw new NotImplementedException();
         }
 
-        /// <inheritdoc/>
         public void LeftDown(InputArgs args)
         {
             var factory = _serviceProvider.GetService<IFactory>();
@@ -162,12 +149,10 @@ namespace Core2D.Editor.Tools.Path
             }
         }
 
-        /// <inheritdoc/>
         public void LeftUp(InputArgs args)
         {
         }
 
-        /// <inheritdoc/>
         public void RightDown(InputArgs args)
         {
             switch (_currentState)
@@ -183,12 +168,10 @@ namespace Core2D.Editor.Tools.Path
             }
         }
 
-        /// <inheritdoc/>
         public void RightUp(InputArgs args)
         {
         }
 
-        /// <inheritdoc/>
         public void Move(InputArgs args)
         {
             var editor = _serviceProvider.GetService<ProjectEditor>();
@@ -246,9 +229,6 @@ namespace Core2D.Editor.Tools.Path
             }
         }
 
-        /// <summary>
-        /// Transfer tool state to <see cref="State.Point4"/>.
-        /// </summary>
         public void ToStatePoint4()
         {
             var editor = _serviceProvider.GetService<ProjectEditor>();
@@ -261,23 +241,16 @@ namespace Core2D.Editor.Tools.Path
             _selection.ToStatePoint4();
         }
 
-        /// <summary>
-        /// Transfer tool state to <see cref="State.Point2"/>.
-        /// </summary>
         public void ToStatePoint2()
         {
             _selection.ToStatePoint2();
         }
 
-        /// <summary>
-        /// Transfer tool state to <see cref="State.Point3"/>.
-        /// </summary>
         public void ToStateThree()
         {
             _selection.ToStatePoint3();
         }
 
-        /// <inheritdoc/>
         public void Move(BaseShape shape)
         {
             if (_selection != null)
@@ -286,12 +259,10 @@ namespace Core2D.Editor.Tools.Path
             }
         }
 
-        /// <inheritdoc/>
         public void Finalize(BaseShape shape)
         {
         }
 
-        /// <inheritdoc/>
         public void Reset()
         {
             var editor = _serviceProvider.GetService<ProjectEditor>();

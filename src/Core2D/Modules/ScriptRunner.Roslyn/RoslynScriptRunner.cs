@@ -7,23 +7,15 @@ using Microsoft.CodeAnalysis.Scripting;
 
 namespace Core2D.ScriptRunner.Roslyn
 {
-    /// <summary>
-    /// Roslyn C# script runner.
-    /// </summary>
     public class RoslynScriptRunner : IScriptRunner
     {
         private readonly IServiceProvider _serviceProvider;
 
-        /// <summary>
-        /// Initialize new instance of <see cref="RoslynScriptRunner"/> class.
-        /// </summary>
-        /// <param name="serviceProvider">The service provider.</param>
         public RoslynScriptRunner(IServiceProvider serviceProvider)
         {
             _serviceProvider = serviceProvider;
         }
 
-        /// <inheritdoc/>
         public async Task<object> Execute(string code, object state)
         {
             try

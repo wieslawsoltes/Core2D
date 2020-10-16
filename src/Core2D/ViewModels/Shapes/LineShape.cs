@@ -5,32 +5,25 @@ using Core2D.Renderer;
 
 namespace Core2D.Shapes
 {
-    /// <summary>
-    /// Line shape.
-    /// </summary>
     public class LineShape : BaseShape
     {
         private PointShape _start;
         private PointShape _end;
 
-        /// <inheritdoc/>
         public override Type TargetType => typeof(LineShape);
 
-        /// <inheritdoc/>
         public PointShape Start
         {
             get => _start;
             set => RaiseAndSetIfChanged(ref _start, value);
         }
 
-        /// <inheritdoc/>
         public PointShape End
         {
             get => _end;
             set => RaiseAndSetIfChanged(ref _end, value);
         }
 
-        /// <inheritdoc/>
         public override void DrawShape(object dc, IShapeRenderer renderer)
         {
             if (State.Flags.HasFlag(ShapeStateFlags.Visible))
@@ -39,7 +32,6 @@ namespace Core2D.Shapes
             }
         }
 
-        /// <inheritdoc/>
         public override void DrawPoints(object dc, IShapeRenderer renderer)
         {
             if (renderer.State.SelectedShapes != null)
@@ -64,7 +56,6 @@ namespace Core2D.Shapes
             }
         }
 
-        /// <inheritdoc/>
         public override void Bind(DataFlow dataFlow, object db, object r)
         {
             var record = Data?.Record ?? r;
@@ -75,7 +66,6 @@ namespace Core2D.Shapes
             _end.Bind(dataFlow, db, record);
         }
 
-        /// <inheritdoc/>
         public override void Move(ISelection selection, decimal dx, decimal dy)
         {
             if (!Start.State.Flags.HasFlag(ShapeStateFlags.Connector))
@@ -89,7 +79,6 @@ namespace Core2D.Shapes
             }
         }
 
-        /// <inheritdoc/>
         public override void Select(ISelection selection)
         {
             base.Select(selection);
@@ -97,7 +86,6 @@ namespace Core2D.Shapes
             End.Select(selection);
         }
 
-        /// <inheritdoc/>
         public override void Deselect(ISelection selection)
         {
             base.Deselect(selection);
@@ -105,20 +93,17 @@ namespace Core2D.Shapes
             End.Deselect(selection);
         }
 
-        /// <inheritdoc/>
         public override void GetPoints(IList<PointShape> points)
         {
             points.Add(Start);
             points.Add(End);
         }
 
-        /// <inheritdoc/>
         public override object Copy(IDictionary<object, object> shared)
         {
             throw new NotImplementedException();
         }
 
-        /// <inheritdoc/>
         public override bool IsDirty()
         {
             var isDirty = base.IsDirty();
@@ -129,7 +114,6 @@ namespace Core2D.Shapes
             return isDirty;
         }
 
-        /// <inheritdoc/>
         public override void Invalidate()
         {
             base.Invalidate();
@@ -137,16 +121,8 @@ namespace Core2D.Shapes
             End.Invalidate();
         }
 
-        /// <summary>
-        /// Check whether the <see cref="Start"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
         public virtual bool ShouldSerializeStart() => _start != null;
 
-        /// <summary>
-        /// Check whether the <see cref="End"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
         public virtual bool ShouldSerializeEnd() => _end != null;
     }
 }

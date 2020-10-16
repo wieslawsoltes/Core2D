@@ -10,9 +10,6 @@ using Core2D.Shapes;
 
 namespace Core2D.Editor.Tools.Path
 {
-    /// <summary>
-    /// Line path tool.
-    /// </summary>
     public class PathToolLine : ObservableObject, IPathTool
     {
         public enum State { Start, End }
@@ -22,35 +19,25 @@ namespace Core2D.Editor.Tools.Path
         private LineShape _line = new LineShape();
         private ToolLineSelection _selection;
 
-        /// <inheritdoc/>
         public string Title => "Line";
 
-        /// <summary>
-        /// Gets or sets the path tool settings.
-        /// </summary>
         public PathToolSettingsLine Settings
         {
             get => _settings;
             set => RaiseAndSetIfChanged(ref _settings, value);
         }
 
-        /// <summary>
-        /// Initialize new instance of <see cref="PathToolLine"/> class.
-        /// </summary>
-        /// <param name="serviceProvider">The service provider.</param>
         public PathToolLine(IServiceProvider serviceProvider) : base()
         {
             _serviceProvider = serviceProvider;
             _settings = new PathToolSettingsLine();
         }
 
-        /// <inheritdoc/>
         public override object Copy(IDictionary<object, object> shared)
         {
             throw new NotImplementedException();
         }
 
-        /// <inheritdoc/>
         public void LeftDown(InputArgs args)
         {
             var factory = _serviceProvider.GetService<IFactory>();
@@ -109,12 +96,10 @@ namespace Core2D.Editor.Tools.Path
             }
         }
 
-        /// <inheritdoc/>
         public void LeftUp(InputArgs args)
         {
         }
 
-        /// <inheritdoc/>
         public void RightDown(InputArgs args)
         {
             switch (_currentState)
@@ -128,12 +113,10 @@ namespace Core2D.Editor.Tools.Path
             }
         }
 
-        /// <inheritdoc/>
         public void RightUp(InputArgs args)
         {
         }
 
-        /// <inheritdoc/>
         public void Move(InputArgs args)
         {
             var editor = _serviceProvider.GetService<ProjectEditor>();
@@ -163,9 +146,6 @@ namespace Core2D.Editor.Tools.Path
             }
         }
 
-        /// <summary>
-        /// Transfer tool state to <see cref="State.End"/>.
-        /// </summary>
         public void ToStateEnd()
         {
             var editor = _serviceProvider.GetService<ProjectEditor>();
@@ -178,7 +158,6 @@ namespace Core2D.Editor.Tools.Path
             _selection.ToStateEnd();
         }
 
-        /// <inheritdoc/>
         public void Move(BaseShape shape)
         {
             if (_selection != null)
@@ -187,12 +166,10 @@ namespace Core2D.Editor.Tools.Path
             }
         }
 
-        /// <inheritdoc/>
         public void Finalize(BaseShape shape)
         {
         }
 
-        /// <inheritdoc/>
         public void Reset()
         {
             var editor = _serviceProvider.GetService<ProjectEditor>();

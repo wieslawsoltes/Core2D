@@ -6,9 +6,6 @@ using SD = System.Diagnostics;
 
 namespace Core2D.Log.Trace
 {
-    /// <summary>
-    /// Trace message logger.
-    /// </summary>
     public sealed class TraceLog : ILog
     {
         private readonly IServiceProvider _serviceProvider;
@@ -21,21 +18,15 @@ namespace Core2D.Log.Trace
         private SD.TraceListener _listener;
         private System.IO.Stream _stream;
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="TraceLog"/> class.
-        /// </summary>
-        /// <param name="serviceProvider">The service provider.</param>
         public TraceLog(IServiceProvider serviceProvider)
         {
             _serviceProvider = serviceProvider;
         }
 
-        /// <inheritdoc/>
         public string LastMessage => _lastMessage;
 
         private void SetLastMessage(string message) => _lastMessage = message;
 
-        /// <inheritdoc/>
         public void Initialize(string path)
         {
             try
@@ -54,7 +45,6 @@ namespace Core2D.Log.Trace
             }
         }
 
-        /// <inheritdoc/>
         public void Close()
         {
             try
@@ -80,7 +70,6 @@ namespace Core2D.Log.Trace
             }
         }
 
-        /// <inheritdoc/>
         public void LogInformation(string message)
         {
             SD.Trace.TraceInformation(message);
@@ -88,7 +77,6 @@ namespace Core2D.Log.Trace
             SetLastMessage(InformationPrefix + message);
         }
 
-        /// <inheritdoc/>
         public void LogInformation(string format, params object[] args)
         {
             SD.Trace.TraceInformation(format, args);
@@ -96,7 +84,6 @@ namespace Core2D.Log.Trace
             SetLastMessage(InformationPrefix + string.Format(format, args));
         }
 
-        /// <inheritdoc/>
         public void LogWarning(string message)
         {
             SD.Trace.TraceWarning(message);
@@ -104,7 +91,6 @@ namespace Core2D.Log.Trace
             SetLastMessage(WarningPrefix + message);
         }
 
-        /// <inheritdoc/>
         public void LogWarning(string format, params object[] args)
         {
             SD.Trace.TraceWarning(format, args);
@@ -112,7 +98,6 @@ namespace Core2D.Log.Trace
             SetLastMessage(WarningPrefix + string.Format(format, args));
         }
 
-        /// <inheritdoc/>
         public void LogError(string message)
         {
             SD.Trace.TraceError(message);
@@ -120,7 +105,6 @@ namespace Core2D.Log.Trace
             SetLastMessage(ErrorPrefix + message);
         }
 
-        /// <inheritdoc/>
         public void LogError(string format, params object[] args)
         {
             SD.Trace.TraceError(format, args);
@@ -128,7 +112,6 @@ namespace Core2D.Log.Trace
             SetLastMessage(ErrorPrefix + string.Format(format, args));
         }
 
-        /// <inheritdoc/>
         public void LogException(Exception ex)
         {
             LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
@@ -138,9 +121,6 @@ namespace Core2D.Log.Trace
             }
         }
 
-        /// <summary>
-        /// Dispose resources.
-        /// </summary>
         public void Dispose()
         {
             Close();

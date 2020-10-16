@@ -7,23 +7,15 @@ using Core2D.Style;
 
 namespace Core2D.XamlExporter.Avalonia
 {
-    /// <summary>
-    /// Drawing group xaml exporter.
-    /// </summary>
     public class DrawingGroupXamlExporter : IXamlExporter
     {
         private readonly IServiceProvider _serviceProvider;
 
-        /// <summary>
-        /// Initialize new instance of <see cref="DrawingGroupXamlExporter"/> class.
-        /// </summary>
-        /// <param name="serviceProvider">The service provider.</param>
         public DrawingGroupXamlExporter(IServiceProvider serviceProvider)
         {
             _serviceProvider = serviceProvider;
         }
 
-        /// <inheritdoc/>
         public string Create(object item, string key)
         {
             var converter = _serviceProvider.GetService<IPathConverter>();

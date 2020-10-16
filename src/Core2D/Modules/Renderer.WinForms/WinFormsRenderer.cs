@@ -11,9 +11,6 @@ using Spatial.Arc;
 
 namespace Core2D.Renderer.WinForms
 {
-    /// <summary>
-    /// Native Windows Forms shape renderer.
-    /// </summary>
     public class WinFormsRenderer : ObservableObject, IShapeRenderer
     {
         private readonly IServiceProvider _serviceProvider;
@@ -22,18 +19,12 @@ namespace Core2D.Renderer.WinForms
         private readonly Func<double, float> _scaleToPage;
         private readonly double _textScaleFactor;
 
-        /// <inheritdoc/>
         public ShapeRendererState State
         {
             get => _state;
             set => RaiseAndSetIfChanged(ref _state, value);
         }
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="WinFormsRenderer"/> class.
-        /// </summary>
-        /// <param name="serviceProvider">The service provider.</param>
-        /// <param name="textScaleFactor">The text scale factor.</param>
         public WinFormsRenderer(IServiceProvider serviceProvider, double textScaleFactor = 1.0)
         {
             _serviceProvider = serviceProvider;
@@ -43,7 +34,6 @@ namespace Core2D.Renderer.WinForms
             _scaleToPage = (value) => (float)(value);
         }
 
-        /// <inheritdoc/>
         public override object Copy(IDictionary<object, object> shared)
         {
             throw new NotImplementedException();
@@ -332,13 +322,11 @@ namespace Core2D.Renderer.WinForms
             }
         }
 
-        /// <inheritdoc/>
         public void ClearCache()
         {
             _biCache.Reset();
         }
 
-        /// <inheritdoc/>
         public void Fill(object dc, double x, double y, double width, double height, BaseColor color)
         {
             var _gfx = dc as Graphics;
@@ -352,7 +340,6 @@ namespace Core2D.Renderer.WinForms
             brush.Dispose();
         }
 
-        /// <inheritdoc/>
         public void Grid(object dc, IGrid grid, double x, double y, double width, double height)
         {
             var _gfx = dc as Graphics;
@@ -388,7 +375,6 @@ namespace Core2D.Renderer.WinForms
             pen.Dispose();
         }
 
-        /// <inheritdoc/>
         public void DrawPage(object dc, PageContainer container)
         {
             foreach (var layer in container.Layers)
@@ -400,7 +386,6 @@ namespace Core2D.Renderer.WinForms
             }
         }
 
-        /// <inheritdoc/>
         public void DrawLayer(object dc, LayerContainer layer)
         {
             foreach (var shape in layer.Shapes)
@@ -420,13 +405,11 @@ namespace Core2D.Renderer.WinForms
             }
         }
 
-        /// <inheritdoc/>
         public void DrawPoint(object dc, PointShape point)
         {
             // TODO:
         }
 
-        /// <inheritdoc/>
         public void DrawLine(object dc, LineShape line)
         {
             var _gfx = dc as Graphics;
@@ -453,7 +436,6 @@ namespace Core2D.Renderer.WinForms
             strokeLine.Dispose();
         }
 
-        /// <inheritdoc/>
         public void DrawRectangle(object dc, RectangleShape rectangle)
         {
             var _gfx = dc as Graphics;
@@ -490,7 +472,6 @@ namespace Core2D.Renderer.WinForms
             pen.Dispose();
         }
 
-        /// <inheritdoc/>
         public void DrawEllipse(object dc, EllipseShape ellipse)
         {
             var _gfx = dc as Graphics;
@@ -527,7 +508,6 @@ namespace Core2D.Renderer.WinForms
             pen.Dispose();
         }
 
-        /// <inheritdoc/>
         public void DrawArc(object dc, ArcShape arc)
         {
             var a = new GdiArc(
@@ -573,7 +553,6 @@ namespace Core2D.Renderer.WinForms
             }
         }
 
-        /// <inheritdoc/>
         public void DrawCubicBezier(object dc, CubicBezierShape cubicBezier)
         {
             var _gfx = dc as Graphics;
@@ -614,7 +593,6 @@ namespace Core2D.Renderer.WinForms
             pen.Dispose();
         }
 
-        /// <inheritdoc/>
         public void DrawQuadraticBezier(object dc, QuadraticBezierShape quadraticBezier)
         {
             var _gfx = dc as Graphics;
@@ -664,7 +642,6 @@ namespace Core2D.Renderer.WinForms
             pen.Dispose();
         }
 
-        /// <inheritdoc/>
         public void DrawText(object dc, TextShape text)
         {
             var _gfx = dc as Graphics;
@@ -756,7 +733,6 @@ namespace Core2D.Renderer.WinForms
             font.Dispose();
         }
 
-        /// <inheritdoc/>
         public void DrawImage(object dc, ImageShape image)
         {
             var _gfx = dc as Graphics;
@@ -817,7 +793,6 @@ namespace Core2D.Renderer.WinForms
             brush.Dispose();
         }
 
-        /// <inheritdoc/>
         public void DrawPath(object dc, PathShape path)
         {
             var _gfx = dc as Graphics;
@@ -855,10 +830,6 @@ namespace Core2D.Renderer.WinForms
             }
         }
 
-        /// <summary>
-        /// Check whether the <see cref="State"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
         public bool ShouldSerializeState() => _state != null;
     }
 }

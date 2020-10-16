@@ -5,35 +5,28 @@ using System.Text;
 
 namespace Core2D.Path
 {
-    /// <summary>
-    /// Path geometry.
-    /// </summary>
     public class PathGeometry : ObservableObject
     {
         private ImmutableArray<PathFigure> _figures;
         private FillRule _fillRule;
 
-        /// <inheritdoc/>
         public ImmutableArray<PathFigure> Figures
         {
             get => _figures;
             set => RaiseAndSetIfChanged(ref _figures, value);
         }
 
-        /// <inheritdoc/>
         public FillRule FillRule
         {
             get => _fillRule;
             set => RaiseAndSetIfChanged(ref _fillRule, value);
         }
 
-        /// <inheritdoc/>
         public override object Copy(IDictionary<object, object> shared)
         {
             throw new NotImplementedException();
         }
 
-        /// <inheritdoc/>
         public override bool IsDirty()
         {
             var isDirty = base.IsDirty();
@@ -46,7 +39,6 @@ namespace Core2D.Path
             return isDirty;
         }
 
-        /// <inheritdoc/>
         public override void Invalidate()
         {
             base.Invalidate();
@@ -93,7 +85,6 @@ namespace Core2D.Path
             return sb.ToString();
         }
 
-        /// <inheritdoc/>
         public string ToXamlString()
         {
             string figuresString = string.Empty;
@@ -111,7 +102,6 @@ namespace Core2D.Path
             return figuresString;
         }
 
-        /// <inheritdoc/>
         public string ToSvgString()
         {
             if (Figures.Length > 0)
@@ -121,16 +111,8 @@ namespace Core2D.Path
             return string.Empty;
         }
 
-        /// <summary>
-        /// Check whether the <see cref="Figures"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
         public virtual bool ShouldSerializeFigures() => true;
 
-        /// <summary>
-        /// Check whether the <see cref="FillRule"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
         public virtual bool ShouldSerializeFillRule() => _fillRule != default;
     }
 }

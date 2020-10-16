@@ -5,40 +5,32 @@ using Core2D.Renderer;
 
 namespace Core2D.Shapes
 {
-    /// <summary>
-    /// Quadratic bezier shape.
-    /// </summary>
     public class QuadraticBezierShape : BaseShape
     {
         private PointShape _point1;
         private PointShape _point2;
         private PointShape _point3;
 
-        /// <inheritdoc/>
         public override Type TargetType => typeof(QuadraticBezierShape);
 
-        /// <inheritdoc/>
         public PointShape Point1
         {
             get => _point1;
             set => RaiseAndSetIfChanged(ref _point1, value);
         }
 
-        /// <inheritdoc/>
         public PointShape Point2
         {
             get => _point2;
             set => RaiseAndSetIfChanged(ref _point2, value);
         }
 
-        /// <inheritdoc/>
         public PointShape Point3
         {
             get => _point3;
             set => RaiseAndSetIfChanged(ref _point3, value);
         }
 
-        /// <inheritdoc/>
         public override void DrawShape(object dc, IShapeRenderer renderer)
         {
             if (State.Flags.HasFlag(ShapeStateFlags.Visible))
@@ -47,7 +39,6 @@ namespace Core2D.Shapes
             }
         }
 
-        /// <inheritdoc/>
         public override void DrawPoints(object dc, IShapeRenderer renderer)
         {
             if (renderer.State.SelectedShapes != null)
@@ -78,7 +69,6 @@ namespace Core2D.Shapes
             }
         }
 
-        /// <inheritdoc/>
         public override void Bind(DataFlow dataFlow, object db, object r)
         {
             var record = Data?.Record ?? r;
@@ -90,7 +80,6 @@ namespace Core2D.Shapes
             _point3.Bind(dataFlow, db, record);
         }
 
-        /// <inheritdoc/>
         public override void Move(ISelection selection, decimal dx, decimal dy)
         {
             if (!Point1.State.Flags.HasFlag(ShapeStateFlags.Connector))
@@ -109,7 +98,6 @@ namespace Core2D.Shapes
             }
         }
 
-        /// <inheritdoc/>
         public override void Select(ISelection selection)
         {
             base.Select(selection);
@@ -118,7 +106,6 @@ namespace Core2D.Shapes
             Point3.Select(selection);
         }
 
-        /// <inheritdoc/>
         public override void Deselect(ISelection selection)
         {
             base.Deselect(selection);
@@ -127,7 +114,6 @@ namespace Core2D.Shapes
             Point3.Deselect(selection);
         }
 
-        /// <inheritdoc/>
         public override void GetPoints(IList<PointShape> points)
         {
             points.Add(Point1);
@@ -135,13 +121,11 @@ namespace Core2D.Shapes
             points.Add(Point3);
         }
 
-        /// <inheritdoc/>
         public override object Copy(IDictionary<object, object> shared)
         {
             throw new NotImplementedException();
         }
 
-        /// <inheritdoc/>
         public override bool IsDirty()
         {
             var isDirty = base.IsDirty();
@@ -153,7 +137,6 @@ namespace Core2D.Shapes
             return isDirty;
         }
 
-        /// <inheritdoc/>
         public override void Invalidate()
         {
             base.Invalidate();
@@ -162,22 +145,10 @@ namespace Core2D.Shapes
             Point3.Invalidate();
         }
 
-        /// <summary>
-        /// Check whether the <see cref="Point1"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
         public virtual bool ShouldSerializePoint1() => _point1 != null;
 
-        /// <summary>
-        /// Check whether the <see cref="Point2"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
         public virtual bool ShouldSerializePoint2() => _point2 != null;
 
-        /// <summary>
-        /// Check whether the <see cref="Point3"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
         public virtual bool ShouldSerializePoint3() => _point3 != null;
     }
 }

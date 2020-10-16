@@ -16,12 +16,8 @@ using Core2D.Style;
 
 namespace Core2D
 {
-    /// <summary>
-    /// View model factory.
-    /// </summary>
     public class Factory : IFactory
     {
-        /// <inheritdoc/>
         public Library<T> CreateLibrary<T>(string name)
         {
             return new Library<T>()
@@ -32,7 +28,6 @@ namespace Core2D
             };
         }
 
-        /// <inheritdoc/>
         public Library<T> CreateLibrary<T>(string name, IEnumerable<T> items)
         {
             return new Library<T>()
@@ -43,7 +38,6 @@ namespace Core2D
             };
         }
 
-        /// <inheritdoc/>
         public Value CreateValue(string content)
         {
             return new Value()
@@ -52,7 +46,6 @@ namespace Core2D
             };
         }
 
-        /// <inheritdoc/>
         public Property CreateProperty(Context owner, string name, string value)
         {
             return new Property()
@@ -63,7 +56,6 @@ namespace Core2D
             };
         }
 
-        /// <inheritdoc/>
         public Column CreateColumn(Database owner, string name, bool isVisible = true)
         {
             return new Column()
@@ -74,7 +66,6 @@ namespace Core2D
             };
         }
 
-        /// <inheritdoc/>
         public Record CreateRecord(Database owner, ImmutableArray<Value> values)
         {
             return new Record()
@@ -84,7 +75,6 @@ namespace Core2D
             };
         }
 
-        /// <inheritdoc/>
         public Record CreateRecord(Database owner, string id, ImmutableArray<Value> values)
         {
             var record = new Record()
@@ -101,7 +91,6 @@ namespace Core2D
             return record;
         }
 
-        /// <inheritdoc/>
         public Record CreateRecord(Database owner, string value)
         {
             return new Record()
@@ -114,7 +103,6 @@ namespace Core2D
             };
         }
 
-        /// <inheritdoc/>
         public Context CreateContext()
         {
             return new Context()
@@ -123,7 +111,6 @@ namespace Core2D
             };
         }
 
-        /// <inheritdoc/>
         public Context CreateContext(Record record)
         {
             return new Context()
@@ -133,7 +120,6 @@ namespace Core2D
             };
         }
 
-        /// <inheritdoc/>
         public Database CreateDatabase(string name, string idColumnName = "Id")
         {
             return new Database()
@@ -145,7 +131,6 @@ namespace Core2D
             };
         }
 
-        /// <inheritdoc/>
         public Database CreateDatabase(string name, ImmutableArray<Column> columns, string idColumnName = "Id")
         {
             return new Database()
@@ -157,7 +142,6 @@ namespace Core2D
             };
         }
 
-        /// <inheritdoc/>
         public Database CreateDatabase(string name, ImmutableArray<Column> columns, ImmutableArray<Record> records, string idColumnName = "Id")
         {
             return new Database()
@@ -169,7 +153,6 @@ namespace Core2D
             };
         }
 
-        /// <inheritdoc/>
         public Database FromFields(string name, IEnumerable<string[]> fields, string idColumnName = "Id")
         {
             var db = CreateDatabase(name, idColumnName);
@@ -209,13 +192,11 @@ namespace Core2D
             return db;
         }
 
-        /// <inheritdoc/>
         public ICache<TKey, TValue> CreateCache<TKey, TValue>(Action<TValue> dispose = null)
         {
             return new Cache<TKey, TValue>(dispose);
         }
 
-        /// <inheritdoc/>
         public ShapeState CreateShapeState(ShapeStateFlags flags = ShapeStateFlags.Default)
         {
             return new ShapeState()
@@ -224,7 +205,6 @@ namespace Core2D
             };
         }
 
-        /// <inheritdoc/>
         public ShapeRendererState CreateShapeRendererState()
         {
             var state = new ShapeRendererState()
@@ -271,7 +251,6 @@ namespace Core2D
             return state;
         }
 
-        /// <inheritdoc/>
         public LineSegment CreateLineSegment(PointShape point, bool isStroked = true)
         {
             return new LineSegment()
@@ -281,7 +260,6 @@ namespace Core2D
             };
         }
 
-        /// <inheritdoc/>
         public ArcSegment CreateArcSegment(PointShape point, PathSize size, double rotationAngle, bool isLargeArc, SweepDirection sweepDirection, bool isStroked = true)
         {
             return new ArcSegment()
@@ -295,7 +273,6 @@ namespace Core2D
             };
         }
 
-        /// <inheritdoc/>
         public QuadraticBezierSegment CreateQuadraticBezierSegment(PointShape point1, PointShape point2, bool isStroked = true)
         {
             return new QuadraticBezierSegment()
@@ -306,7 +283,6 @@ namespace Core2D
             };
         }
 
-        /// <inheritdoc/>
         public CubicBezierSegment CreateCubicBezierSegment(PointShape point1, PointShape point2, PointShape point3, bool isStroked = true)
         {
             return new CubicBezierSegment()
@@ -318,7 +294,6 @@ namespace Core2D
             };
         }
 
-        /// <inheritdoc/>
         public PathSize CreatePathSize(double width = 0.0, double height = 0.0)
         {
             return new PathSize()
@@ -328,7 +303,6 @@ namespace Core2D
             };
         }
 
-        /// <inheritdoc/>
         public PathGeometry CreatePathGeometry()
         {
             return new PathGeometry()
@@ -338,19 +312,16 @@ namespace Core2D
             };
         }
 
-        /// <inheritdoc/>
         public GeometryContext CreateGeometryContext()
         {
             return new GeometryContext(this, CreatePathGeometry());
         }
 
-        /// <inheritdoc/>
         public GeometryContext CreateGeometryContext(PathGeometry geometry)
         {
             return new GeometryContext(this, geometry);
         }
 
-        /// <inheritdoc/>
         public PathGeometry CreatePathGeometry(ImmutableArray<PathFigure> figures, FillRule fillRule = FillRule.Nonzero)
         {
             return new PathGeometry()
@@ -360,7 +331,6 @@ namespace Core2D
             };
         }
 
-        /// <inheritdoc/>
         public PathFigure CreatePathFigure(bool isClosed = false)
         {
             return new PathFigure()
@@ -371,7 +341,6 @@ namespace Core2D
             };
         }
 
-        /// <inheritdoc/>
         public PathFigure CreatePathFigure(PointShape startPoint, bool isClosed = false)
         {
             return new PathFigure()
@@ -382,7 +351,6 @@ namespace Core2D
             };
         }
 
-        /// <inheritdoc/>
         public PointShape CreatePointShape(double x = 0.0, double y = 0.0, PointAlignment alignment = PointAlignment.None, string name = "")
         {
             var pointShape = new PointShape()
@@ -398,7 +366,6 @@ namespace Core2D
             return pointShape;
         }
 
-        /// <inheritdoc/>
         public LineShape CreateLineShape(PointShape start, PointShape end, ShapeStyle style, bool isStroked = true, string name = "")
         {
             var lineShape = new LineShape()
@@ -417,7 +384,6 @@ namespace Core2D
             return lineShape;
         }
 
-        /// <inheritdoc/>
         public LineShape CreateLineShape(double x1, double y1, double x2, double y2, ShapeStyle style, bool isStroked = true, string name = "")
         {
             var lineShape = new LineShape()
@@ -439,13 +405,11 @@ namespace Core2D
             return lineShape;
         }
 
-        /// <inheritdoc/>
         public LineShape CreateLineShape(double x, double y, ShapeStyle style, bool isStroked = true, string name = "")
         {
             return CreateLineShape(x, y, x, y, style, isStroked, name);
         }
 
-        /// <inheritdoc/>
         public ArcShape CreateArcShape(double x1, double y1, double x2, double y2, double x3, double y3, double x4, double y4, ShapeStyle style, bool isStroked = true, bool isFilled = false, string name = "")
         {
             var arcShape = new ArcShape()
@@ -473,13 +437,11 @@ namespace Core2D
             return arcShape;
         }
 
-        /// <inheritdoc/>
         public ArcShape CreateArcShape(double x, double y, ShapeStyle style, bool isStroked = true, bool isFilled = false, string name = "")
         {
             return CreateArcShape(x, y, x, y, x, y, x, y, style, isStroked, isFilled, name);
         }
 
-        /// <inheritdoc/>
         public ArcShape CreateArcShape(PointShape point1, PointShape point2, PointShape point3, PointShape point4, ShapeStyle style, bool isStroked = true, bool isFilled = false, string name = "")
         {
             var arcShape = new ArcShape()
@@ -500,7 +462,6 @@ namespace Core2D
             return arcShape;
         }
 
-        /// <inheritdoc/>
         public QuadraticBezierShape CreateQuadraticBezierShape(double x1, double y1, double x2, double y2, double x3, double y3, ShapeStyle style, bool isStroked = true, bool isFilled = false, string name = "")
         {
             var quadraticBezierShape = new QuadraticBezierShape()
@@ -525,13 +486,11 @@ namespace Core2D
             return quadraticBezierShape;
         }
 
-        /// <inheritdoc/>
         public QuadraticBezierShape CreateQuadraticBezierShape(double x, double y, ShapeStyle style, bool isStroked = true, bool isFilled = false, string name = "")
         {
             return CreateQuadraticBezierShape(x, y, x, y, x, y, style, isStroked, isFilled, name);
         }
 
-        /// <inheritdoc/>
         public QuadraticBezierShape CreateQuadraticBezierShape(PointShape point1, PointShape point2, PointShape point3, ShapeStyle style, bool isStroked = true, bool isFilled = false, string name = "")
         {
             var quadraticBezierShape = new QuadraticBezierShape()
@@ -551,7 +510,6 @@ namespace Core2D
             return quadraticBezierShape;
         }
 
-        /// <inheritdoc/>
         public CubicBezierShape CreateCubicBezierShape(double x1, double y1, double x2, double y2, double x3, double y3, double x4, double y4, ShapeStyle style, bool isStroked = true, bool isFilled = false, string name = "")
         {
             var cubicBezierShape = new CubicBezierShape()
@@ -579,13 +537,11 @@ namespace Core2D
             return cubicBezierShape;
         }
 
-        /// <inheritdoc/>
         public CubicBezierShape CreateCubicBezierShape(double x, double y, ShapeStyle style, bool isStroked = true, bool isFilled = false, string name = "")
         {
             return CreateCubicBezierShape(x, y, x, y, x, y, x, y, style, isStroked, isFilled, name);
         }
 
-        /// <inheritdoc/>
         public CubicBezierShape CreateCubicBezierShape(PointShape point1, PointShape point2, PointShape point3, PointShape point4, ShapeStyle style, bool isStroked = true, bool isFilled = false, string name = "")
         {
             var cubicBezierShape = new CubicBezierShape()
@@ -606,7 +562,6 @@ namespace Core2D
             return cubicBezierShape;
         }
 
-        /// <inheritdoc/>
         public RectangleShape CreateRectangleShape(double x1, double y1, double x2, double y2, ShapeStyle style, bool isStroked = true, bool isFilled = false, string name = "")
         {
             var rectangleShape = new RectangleShape()
@@ -628,13 +583,11 @@ namespace Core2D
             return rectangleShape;
         }
 
-        /// <inheritdoc/>
         public RectangleShape CreateRectangleShape(double x, double y, ShapeStyle style, bool isStroked = true, bool isFilled = false, string name = "")
         {
             return CreateRectangleShape(x, y, x, y, style, isStroked, isFilled, name);
         }
 
-        /// <inheritdoc/>
         public RectangleShape CreateRectangleShape(PointShape topLeft, PointShape bottomRight, ShapeStyle style, bool isStroked = true, bool isFilled = false, string name = "")
         {
             var rectangleShape = new RectangleShape()
@@ -653,7 +606,6 @@ namespace Core2D
             return rectangleShape;
         }
 
-        /// <inheritdoc/>
         public EllipseShape CreateEllipseShape(double x1, double y1, double x2, double y2, ShapeStyle style, bool isStroked = true, bool isFilled = false, string name = "")
         {
             var ellipseShape = new EllipseShape()
@@ -675,13 +627,11 @@ namespace Core2D
             return ellipseShape;
         }
 
-        /// <inheritdoc/>
         public EllipseShape CreateEllipseShape(double x, double y, ShapeStyle style, bool isStroked = true, bool isFilled = false, string name = "")
         {
             return CreateEllipseShape(x, y, x, y, style, isStroked, isFilled, name);
         }
 
-        /// <inheritdoc/>
         public EllipseShape CreateEllipseShape(PointShape topLeft, PointShape bottomRight, ShapeStyle style, bool isStroked = true, bool isFilled = false, string name = "")
         {
             var ellipseShape = new EllipseShape()
@@ -702,7 +652,6 @@ namespace Core2D
             return ellipseShape;
         }
 
-        /// <inheritdoc/>
         public PathShape CreatePathShape(ShapeStyle style, PathGeometry geometry, bool isStroked = true, bool isFilled = true)
         {
             var pathShape = new PathShape()
@@ -733,7 +682,6 @@ namespace Core2D
             return pathShape;
         }
 
-        /// <inheritdoc/>
         public PathShape CreatePathShape(string name, ShapeStyle style, PathGeometry geometry, bool isStroked = true, bool isFilled = true)
         {
             var pathShape = new PathShape()
@@ -764,7 +712,6 @@ namespace Core2D
             return pathShape;
         }
 
-        /// <inheritdoc/>
         public TextShape CreateTextShape(double x1, double y1, double x2, double y2, ShapeStyle style, string text, bool isStroked = true, string name = "")
         {
             var textShape = new TextShape()
@@ -786,13 +733,11 @@ namespace Core2D
             return textShape;
         }
 
-        /// <inheritdoc/>
         public TextShape CreateTextShape(double x, double y, ShapeStyle style, string text, bool isStroked = true, string name = "")
         {
             return CreateTextShape(x, y, x, y, style, text, isStroked, name);
         }
 
-        /// <inheritdoc/>
         public TextShape CreateTextShape(PointShape topLeft, PointShape bottomRight, ShapeStyle style, string text, bool isStroked = true, string name = "")
         {
             var textShape = new TextShape()
@@ -813,7 +758,6 @@ namespace Core2D
             return textShape;
         }
 
-        /// <inheritdoc/>
         public ImageShape CreateImageShape(double x1, double y1, double x2, double y2, ShapeStyle style, string key, bool isStroked = false, bool isFilled = false, string name = "")
         {
             var imageShape = new ImageShape()
@@ -836,13 +780,11 @@ namespace Core2D
             return imageShape;
         }
 
-        /// <inheritdoc/>
         public ImageShape CreateImageShape(double x, double y, ShapeStyle style, string key, bool isStroked = false, bool isFilled = false, string name = "")
         {
             return CreateImageShape(x, y, x, y, style, key, isStroked, isFilled, name);
         }
 
-        /// <inheritdoc/>
         public ImageShape CreateImageShape(PointShape topLeft, PointShape bottomRight, ShapeStyle style, string key, bool isStroked = false, bool isFilled = false, string name = "")
         {
             var imageShape = new ImageShape()
@@ -864,7 +806,6 @@ namespace Core2D
             return imageShape;
         }
 
-        /// <inheritdoc/>
         public GroupShape CreateGroupShape(string name = "g")
         {
             return new GroupShape()
@@ -877,7 +818,6 @@ namespace Core2D
             };
         }
 
-        /// <inheritdoc/>
         public ArgbColor CreateArgbColor(byte a = 0xFF, byte r = 0x00, byte g = 0x00, byte b = 0x00)
         {
             return new ArgbColor()
@@ -889,7 +829,6 @@ namespace Core2D
             };
         }
 
-        /// <inheritdoc/>
         public ArrowStyle CreateArrowStyle(ArrowType arrowType = ArrowType.None, bool isStroked = true, bool isFilled = false, double radiusX = 5.0, double radiusY = 3.0)
         {
             return new ArrowStyle()
@@ -901,7 +840,6 @@ namespace Core2D
             };
         }
 
-        /// <inheritdoc/>
         public ArrowStyle CreateArrowStyle(BaseStyle source, ArrowType arrowType = ArrowType.None, bool isStroked = true, bool isFilled = false, double radiusX = 5.0, double radiusY = 5.0)
         {
             return new ArrowStyle(source)
@@ -914,7 +852,6 @@ namespace Core2D
             };
         }
 
-        /// <inheritdoc/>
         public ArrowStyle CreateArrowStyle(string name, BaseStyle source, ArrowType arrowType = ArrowType.None, bool isStroked = true, bool isFilled = false, double radiusX = 5.0, double radiusY = 5.0)
         {
             return new ArrowStyle(source)
@@ -928,7 +865,6 @@ namespace Core2D
             };
         }
 
-        /// <inheritdoc/>
         public FontStyle CreateFontStyle(FontStyleFlags flags = FontStyleFlags.Regular)
         {
             return new FontStyle()
@@ -937,7 +873,6 @@ namespace Core2D
             };
         }
 
-        /// <inheritdoc/>
         public LineFixedLength CreateLineFixedLength(LineFixedLengthFlags flags = LineFixedLengthFlags.Disabled, ShapeState startTrigger = null, ShapeState endTrigger = null, double length = 15.0)
         {
             return new LineFixedLength()
@@ -949,7 +884,6 @@ namespace Core2D
             };
         }
 
-        /// <inheritdoc/>
         public LineStyle CreateLineStyle(string name = "", bool isCurved = false, double curvature = 50.0, CurveOrientation curveOrientation = CurveOrientation.Auto, LineFixedLength fixedLength = null)
         {
             return new LineStyle()
@@ -962,7 +896,6 @@ namespace Core2D
             };
         }
 
-        /// <inheritdoc/>
         public ShapeStyle CreateShapeStyle(string name = null, byte sa = 0xFF, byte sr = 0x00, byte sg = 0x00, byte sb = 0x00, byte fa = 0xFF, byte fr = 0x00, byte fg = 0x00, byte fb = 0x00, double thickness = 2.0, TextStyle textStyle = null, LineStyle lineStyle = null, ArrowStyle startArrowStyle = null, ArrowStyle endArrowStyle = null, LineCap lineCap = LineCap.Round, string dashes = default, double dashOffset = 0.0)
         {
             var style = new ShapeStyle()
@@ -984,7 +917,6 @@ namespace Core2D
             return style;
         }
 
-        /// <inheritdoc/>
         public ShapeStyle CreateShapeStyle(string name, BaseColor stroke, BaseColor fill, double thickness, TextStyle textStyle, LineStyle lineStyle, ArrowStyle startArrowStyle, ArrowStyle endArrowStyle)
         {
             return new ShapeStyle()
@@ -1003,7 +935,6 @@ namespace Core2D
             };
         }
 
-        /// <inheritdoc/>
         public TextStyle CreateTextStyle(string name = "", string fontName = "Calibri", string fontFile = @"C:\Windows\Fonts\calibri.ttf", double fontSize = 12.0, FontStyle fontStyle = null, TextHAlignment textHAlignment = TextHAlignment.Center, TextVAlignment textVAlignment = TextVAlignment.Center)
         {
             return new TextStyle()
@@ -1018,7 +949,6 @@ namespace Core2D
             };
         }
 
-        /// <inheritdoc/>
         public Options CreateOptions()
         {
             return new Options()
@@ -1036,7 +966,6 @@ namespace Core2D
             };
         }
 
-        /// <inheritdoc/>
         public Script CreateScript(string name = "Script", string code = "")
         {
             return new Script()
@@ -1046,7 +975,6 @@ namespace Core2D
             };
         }
 
-        /// <inheritdoc/>
         public LayerContainer CreateLayerContainer(string name = "Layer", PageContainer owner = null, bool isVisible = true)
         {
             return new LayerContainer()
@@ -1058,7 +986,6 @@ namespace Core2D
             };
         }
 
-        /// <inheritdoc/>
         public PageContainer CreatePageContainer(string name = "Page")
         {
             var page = new PageContainer()
@@ -1079,7 +1006,6 @@ namespace Core2D
             return page;
         }
 
-        /// <inheritdoc/>
         public PageContainer CreateTemplateContainer(string name = "Template", double width = 840, double height = 600)
         {
             var template = new PageContainer()
@@ -1115,7 +1041,6 @@ namespace Core2D
             return template;
         }
 
-        /// <inheritdoc/>
         public DocumentContainer CreateDocumentContainer(string name = "Document")
         {
             return new DocumentContainer()
@@ -1125,7 +1050,6 @@ namespace Core2D
             };
         }
 
-        /// <inheritdoc/>
         public ProjectContainer CreateProjectContainer(string name = "Project")
         {
             return new ProjectContainer()
@@ -1181,14 +1105,12 @@ namespace Core2D
             }
         }
 
-        /// <inheritdoc/>
         public ProjectContainer OpenProjectContainer(string path, IFileSystem fileIO, IJsonSerializer serializer)
         {
             using var stream = fileIO.Open(path);
             return OpenProjectContainer(stream, fileIO, serializer);
         }
 
-        /// <inheritdoc/>
         public void SaveProjectContainer(ProjectContainer project, string path, IFileSystem fileIO, IJsonSerializer serializer)
         {
             if (project is IImageCache imageCache)
@@ -1198,7 +1120,6 @@ namespace Core2D
             }
         }
 
-        /// <inheritdoc/>
         public ProjectContainer OpenProjectContainer(Stream stream, IFileSystem fileIO, IJsonSerializer serializer)
         {
             using var archive = new ZipArchive(stream, ZipArchiveMode.Read);
@@ -1211,7 +1132,6 @@ namespace Core2D
             return project;
         }
 
-        /// <inheritdoc/>
         public void SaveProjectContainer(ProjectContainer project, IImageCache imageCache, Stream stream, IFileSystem fileIO, IJsonSerializer serializer)
         {
             using var archive = new ZipArchive(stream, ZipArchiveMode.Create);

@@ -8,17 +8,10 @@ using Core2D.Style;
 
 namespace Core2D.Editor.Factories
 {
-    /// <summary>
-    /// Factory used to create containers.
-    /// </summary>
     public sealed class ContainerFactory : IContainerFactory
     {
         private readonly IServiceProvider _serviceProvider;
 
-        /// <summary>
-        /// Initialize new instance of <see cref="ContainerFactory"/> class.
-        /// </summary>
-        /// <param name="serviceProvider">The service provider.</param>
         public ContainerFactory(IServiceProvider serviceProvider)
         {
             _serviceProvider = serviceProvider;
@@ -58,7 +51,6 @@ namespace Core2D.Editor.Factories
             return template;
         }
 
-        /// <inheritdoc/>
         PageContainer IContainerFactory.GetTemplate(ProjectContainer project, string name)
         {
             var factory = _serviceProvider.GetService<IFactory>();
@@ -67,7 +59,6 @@ namespace Core2D.Editor.Factories
             return template;
         }
 
-        /// <inheritdoc/>
         PageContainer IContainerFactory.GetPage(ProjectContainer project, string name)
         {
             var factory = _serviceProvider.GetService<IFactory>();
@@ -76,7 +67,6 @@ namespace Core2D.Editor.Factories
             return container;
         }
 
-        /// <inheritdoc/>
         DocumentContainer IContainerFactory.GetDocument(ProjectContainer project, string name)
         {
             var factory = _serviceProvider.GetService<IFactory>();
@@ -84,7 +74,6 @@ namespace Core2D.Editor.Factories
             return document;
         }
 
-        /// <inheritdoc/>
         ProjectContainer IContainerFactory.GetProject()
         {
             var factory = _serviceProvider.GetService<IFactory>();

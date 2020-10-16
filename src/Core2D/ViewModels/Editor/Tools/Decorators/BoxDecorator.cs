@@ -13,9 +13,6 @@ using Spatial;
 
 namespace Core2D.Editor.Tools.Decorators
 {
-    /// <summary>
-    /// Box decorator.
-    /// </summary>
     public class BoxDecorator : ObservableObject, IDrawable, IDecorator
     {
         private enum Mode
@@ -71,48 +68,38 @@ namespace Core2D.Editor.Tools.Decorators
         private decimal _rotateAngle = 270m;
         private bool _previousDrawPoints = true;
 
-        /// <inheritdoc/>
         public LayerContainer Layer
         {
             get => _layer;
             set => RaiseAndSetIfChanged(ref _layer, value);
         }
 
-        /// <inheritdoc/>
         public IList<BaseShape> Shapes
         {
             get => _shapes;
             set => RaiseAndSetIfChanged(ref _shapes, value);
         }
 
-        /// <inheritdoc/>
         public bool IsVisible => _isVisible;
 
-        /// <inheritdoc/>
         public ShapeStyle Style
         {
             get => _style;
             set => RaiseAndSetIfChanged(ref _style, value);
         }
 
-        /// <inheritdoc/>
         public bool IsStroked
         {
             get => _isStroked;
             set => RaiseAndSetIfChanged(ref _isStroked, value);
         }
 
-        /// <inheritdoc/>
         public bool IsFilled
         {
             get => _isFilled;
             set => RaiseAndSetIfChanged(ref _isFilled, value);
         }
 
-        /// <summary>
-        /// Initialize new instance of <see cref="BoxDecorator"/> class.
-        /// </summary>
-        /// <param name="serviceProvider">The service provider.</param>
         public BoxDecorator(IServiceProvider serviceProvider)
         {
             _serviceProvider = serviceProvider;
@@ -163,13 +150,11 @@ namespace Core2D.Editor.Tools.Decorators
             _rotateLine.State.Flags |= ShapeStateFlags.Thickness;
         }
 
-        /// <inheritdoc/>
         public override object Copy(IDictionary<object, object> shared)
         {
             throw new NotImplementedException();
         }
 
-        /// <inheritdoc/>
         public override bool IsDirty()
         {
             var isDirty = base.IsDirty();
@@ -182,7 +167,6 @@ namespace Core2D.Editor.Tools.Decorators
             return isDirty;
         }
 
-        /// <inheritdoc/>
         public override void Invalidate()
         {
             base.Invalidate();
@@ -193,7 +177,6 @@ namespace Core2D.Editor.Tools.Decorators
             }
         }
 
-        /// <inheritdoc/>
         public virtual void DrawShape(object dc, IShapeRenderer renderer)
         {
             if (_isVisible)
@@ -205,18 +188,15 @@ namespace Core2D.Editor.Tools.Decorators
             }
         }
 
-        /// <inheritdoc/>
         public virtual void DrawPoints(object dc, IShapeRenderer renderer)
         {
         }
 
-        /// <inheritdoc/>
         public virtual bool Invalidate(IShapeRenderer renderer)
         {
             return false;
         }
 
-        /// <inheritdoc/>
         public void Update(bool rebuild = true)
         {
             if (_layer == null || _shapes == null)
@@ -310,7 +290,6 @@ namespace Core2D.Editor.Tools.Decorators
             _layer.InvalidateLayer();
         }
 
-        /// <inheritdoc/>
         public void Show()
         {
             if (_layer == null || _shapes == null)
@@ -354,7 +333,6 @@ namespace Core2D.Editor.Tools.Decorators
             _layer.InvalidateLayer();
         }
 
-        /// <inheritdoc/>
         public void Hide()
         {
             if (_layer == null || _shapes == null)
@@ -394,7 +372,6 @@ namespace Core2D.Editor.Tools.Decorators
             _layer.InvalidateLayer();
         }
 
-        /// <inheritdoc/>
         public bool HitTest(InputArgs args)
         {
             if (_isVisible == false)
@@ -479,7 +456,6 @@ namespace Core2D.Editor.Tools.Decorators
             return false;
         }
 
-        /// <inheritdoc/>
         public void Move(InputArgs args)
         {
             if (_layer == null || _shapes == null)

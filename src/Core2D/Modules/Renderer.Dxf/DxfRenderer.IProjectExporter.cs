@@ -9,12 +9,8 @@ using DXFO = netDxf.Objects;
 
 namespace Core2D.Renderer.Dxf
 {
-    /// <summary>
-    /// netDxf dxf <see cref="IProjectExporter"/> implementation.
-    /// </summary>
     public partial class DxfRenderer : IProjectExporter
     {
-        /// <inheritdoc/>
         public void Save(Stream stream, PageContainer container)
         {
             if (stream is FileStream fileStream)
@@ -34,7 +30,6 @@ namespace Core2D.Renderer.Dxf
             ClearCache();
         }
 
-        /// <inheritdoc/>
         public void Save(Stream stream, DocumentContainer document)
         {
             if (stream is FileStream fileStream)
@@ -54,7 +49,6 @@ namespace Core2D.Renderer.Dxf
             ClearCache();
         }
 
-        /// <inheritdoc/>
         public void Save(Stream stream, ProjectContainer project)
         {
             if (stream is FileStream fileStream)

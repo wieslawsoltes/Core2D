@@ -9,12 +9,8 @@ using PdfSharp.Pdf;
 
 namespace Core2D.Renderer.PdfSharp
 {
-    /// <summary>
-    /// PdfSharp pdf <see cref="IProjectExporter"/> implementation.
-    /// </summary>
     public partial class PdfSharpRenderer : IProjectExporter
     {
-        /// <inheritdoc/>
         public void Save(Stream stream, PageContainer container)
         {
             using var pdf = new PdfDocument();
@@ -22,7 +18,6 @@ namespace Core2D.Renderer.PdfSharp
             pdf.Save(stream);
         }
 
-        /// <inheritdoc/>
         public void Save(Stream stream, DocumentContainer document)
         {
             using var pdf = new PdfDocument();
@@ -54,7 +49,6 @@ namespace Core2D.Renderer.PdfSharp
             ClearCache();
         }
 
-        /// <inheritdoc/>
         public void Save(Stream stream, ProjectContainer project)
         {
             using var pdf = new PdfDocument();

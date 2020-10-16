@@ -3,9 +3,6 @@ using System.Collections.Immutable;
 
 namespace Core2D.Data
 {
-    /// <summary>
-    /// Records database.
-    /// </summary>
     public class Database : ObservableObject
     {
         private string _idColumnName;
@@ -13,35 +10,30 @@ namespace Core2D.Data
         private ImmutableArray<Record> _records;
         private Record _currentRecord;
 
-        /// <inheritdoc/>
         public string IdColumnName
         {
             get => _idColumnName;
             set => RaiseAndSetIfChanged(ref _idColumnName, value);
         }
 
-        /// <inheritdoc/>
         public ImmutableArray<Column> Columns
         {
             get => _columns;
             set => RaiseAndSetIfChanged(ref _columns, value);
         }
 
-        /// <inheritdoc/>
         public ImmutableArray<Record> Records
         {
             get => _records;
             set => RaiseAndSetIfChanged(ref _records, value);
         }
 
-        /// <inheritdoc/>
         public Record CurrentRecord
         {
             get => _currentRecord;
             set => RaiseAndSetIfChanged(ref _currentRecord, value);
         }
 
-        /// <inheritdoc/>
         public override object Copy(IDictionary<object, object> shared)
         {
             var columns = this._columns.Copy(shared).ToImmutable();
@@ -58,7 +50,6 @@ namespace Core2D.Data
             };
         }
 
-        /// <inheritdoc/>
         public override bool IsDirty()
         {
             var isDirty = base.IsDirty();
@@ -76,7 +67,6 @@ namespace Core2D.Data
             return isDirty;
         }
 
-        /// <inheritdoc/>
         public override void Invalidate()
         {
             base.Invalidate();
@@ -92,28 +82,12 @@ namespace Core2D.Data
             }
         }
 
-        /// <summary>
-        /// Check whether the <see cref="IdColumnName"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
         public virtual bool ShouldSerializeIdColumnName() => !string.IsNullOrWhiteSpace(_idColumnName);
 
-        /// <summary>
-        /// Check whether the <see cref="Columns"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
         public virtual bool ShouldSerializeColumns() => true;
 
-        /// <summary>
-        /// Check whether the <see cref="Records"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
         public virtual bool ShouldSerializeRecords() => true;
 
-        /// <summary>
-        /// Check whether the <see cref="CurrentRecord"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
         public virtual bool ShouldSerializeCurrentRecord() => _currentRecord != null;
     }
 }

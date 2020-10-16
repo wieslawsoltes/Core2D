@@ -12,9 +12,6 @@ using Core2D.Style;
 
 namespace Core2D.Editor
 {
-    /// <summary>
-    /// Project property changes observer.
-    /// </summary>
     public class ProjectObserver : IDisposable
     {
         private readonly ProjectEditor _editor;
@@ -23,10 +20,6 @@ namespace Core2D.Editor
         private readonly Action _invalidateLayers;
         private readonly Action _invalidateShapes;
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ProjectObserver"/> class.
-        /// </summary>
-        /// <param name="editor">The current <see cref="ProjectEditor"/> object.</param>
         public ProjectObserver(ProjectEditor editor)
         {
             if (editor?.Project != null)
@@ -1838,9 +1831,6 @@ namespace Core2D.Editor
             }
         }
 
-        /// <summary>
-        /// Dispose resources.
-        /// </summary>
         public void Dispose()
         {
             if (_editor?.Project != null)

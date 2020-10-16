@@ -9,29 +9,19 @@ using Core2D.Renderer.SkiaSharp;
 
 namespace Core2D.FileWriter.SkiaSharpWebp
 {
-    /// <summary>
-    /// SkiaSharp webp <see cref="IFileWriter"/> implementation.
-    /// </summary>
     public sealed class WebpSkiaSharpWriter : IFileWriter
     {
         private readonly IServiceProvider _serviceProvider;
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="WebpSkiaSharpWriter"/> class.
-        /// </summary>
-        /// <param name="serviceProvider">The service provider.</param>
         public WebpSkiaSharpWriter(IServiceProvider serviceProvider)
         {
             _serviceProvider = serviceProvider;
         }
 
-        /// <inheritdoc/>
         public string Name { get; } = "Webp (SkiaSharp)";
 
-        /// <inheritdoc/>
         public string Extension { get; } = "webp";
 
-        /// <inheritdoc/>
         public void Save(Stream stream, object item, object options)
         {
             if (item == null)

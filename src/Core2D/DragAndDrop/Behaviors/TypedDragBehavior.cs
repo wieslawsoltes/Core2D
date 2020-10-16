@@ -9,9 +9,6 @@ using Avalonia.Xaml.Interactivity;
 
 namespace Core2D.DragAndDrop
 {
-    /// <summary>
-    /// Drag behavior.
-    /// </summary>
     public sealed class TypedDragBehavior : Behavior<Control>
     {
         private Point _dragStartPoint;
@@ -19,37 +16,24 @@ namespace Core2D.DragAndDrop
         private object _value;
         private bool _lock = false;
 
-        /// <summary>
-        /// Define <see cref="DataType"/> property.
-        /// </summary>
         public static readonly StyledProperty<Type> DataTypeProperty =
             AvaloniaProperty.Register<TypedDragBehavior, Type>(nameof(DataType));
 
-        /// <summary>
-        /// Define <see cref="Handler"/> property.
-        /// </summary>
         public static readonly StyledProperty<IDragHandler> HandlerProperty =
             AvaloniaProperty.Register<TypedDragBehavior, IDragHandler>(nameof(Handler));
 
-        /// <summary>
-        /// Gets or sets drag behavior data type.
-        /// </summary>
         public Type DataType
         {
             get => GetValue(DataTypeProperty);
             set => SetValue(DataTypeProperty, value);
         }
 
-        /// <summary>
-        /// Gets or sets drag handler.
-        /// </summary>
         public IDragHandler Handler
         {
             get => GetValue(HandlerProperty);
             set => SetValue(HandlerProperty, value);
         }
 
-        /// <inheritdoc/>
         protected override void OnAttached()
         {
             base.OnAttached();
@@ -58,7 +42,6 @@ namespace Core2D.DragAndDrop
             AssociatedObject.AddHandler(InputElement.PointerMovedEvent, AssociatedObject_PointerMoved, RoutingStrategies.Direct | RoutingStrategies.Tunnel | RoutingStrategies.Bubble);
         }
 
-        /// <inheritdoc/>
         protected override void OnDetaching()
         {
             base.OnDetaching();

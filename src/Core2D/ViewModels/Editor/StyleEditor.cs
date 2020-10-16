@@ -10,9 +10,6 @@ using Core2D.Style;
 
 namespace Core2D.Editor
 {
-    /// <summary>
-    /// Style editor.
-    /// </summary>
     public class StyleEditor : ObservableObject
     {
         private const NumberStyles _numberStyles = NumberStyles.AllowLeadingSign | NumberStyles.AllowDecimalPoint | NumberStyles.AllowThousands;
@@ -25,22 +22,16 @@ namespace Core2D.Editor
         private ArrowStyle _startArrowStyleCopy;
         private LineStyle _lineStyleCopy;
 
-        /// <summary>
-        /// Initialize new instance of <see cref="StyleEditor"/> class.
-        /// </summary>
-        /// <param name="serviceProvider">The service provider.</param>
         public StyleEditor(IServiceProvider serviceProvider)
         {
             _serviceProvider = serviceProvider;
         }
 
-        /// <inheritdoc/>
         public override object Copy(IDictionary<object, object> shared)
         {
             throw new NotImplementedException();
         }
 
-        /// <inheritdoc/>
         public void OnCopyStyle()
         {
             var editor = _serviceProvider.GetService<ProjectEditor>();
@@ -52,7 +43,6 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public void OnPasteStyle()
         {
             if (_shapeStyleCopy == null)
@@ -71,7 +61,6 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public void OnCopyStroke()
         {
             var editor = _serviceProvider.GetService<ProjectEditor>();
@@ -83,7 +72,6 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public void OnPasteStroke()
         {
             if (_strokeCopy == null)
@@ -104,7 +92,6 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public void OnCopyFill()
         {
             var editor = _serviceProvider.GetService<ProjectEditor>();
@@ -116,7 +103,6 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public void OnPasteFill()
         {
             if (_fillCopy == null)
@@ -137,7 +123,6 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public void OnCopyLineStyle()
         {
             var editor = _serviceProvider.GetService<ProjectEditor>();
@@ -149,7 +134,6 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public void OnPasteLineStyle()
         {
             if (_lineStyleCopy == null)
@@ -170,7 +154,6 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public void OnCopyStartArrowStyle()
         {
             var editor = _serviceProvider.GetService<ProjectEditor>();
@@ -182,7 +165,6 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public void OnPasteStartArrowStyle()
         {
             if (_startArrowStyleCopy == null)
@@ -203,7 +185,6 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public void OnCopyEndArrowStyle()
         {
             var editor = _serviceProvider.GetService<ProjectEditor>();
@@ -215,7 +196,6 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public void OnPasteEndArrowStyle()
         {
             if (_endArrowStyleCopy == null)
@@ -236,7 +216,6 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public void OnCopyTextStyle()
         {
             var editor = _serviceProvider.GetService<ProjectEditor>();
@@ -248,7 +227,6 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public void OnPasteTextStyle()
         {
             if (_textStyleCopy == null)
@@ -929,7 +907,6 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public void OnStyleSetThickness(string thickness)
         {
             if (!double.TryParse(thickness, _numberStyles, CultureInfo.InvariantCulture, out var value))
@@ -948,7 +925,6 @@ namespace Core2D.Editor
             editor.Project?.CurrentContainer?.InvalidateLayer();
         }
 
-        /// <inheritdoc/>
         public void OnStyleSetLineCap(string lineCap)
         {
             if (!Enum.TryParse<LineCap>(lineCap, true, out var value))
@@ -967,7 +943,6 @@ namespace Core2D.Editor
             editor.Project?.CurrentContainer?.InvalidateLayer();
         }
 
-        /// <inheritdoc/>
         public void OnStyleSetDashes(string dashes)
         {
             var editor = _serviceProvider.GetService<ProjectEditor>();
@@ -981,7 +956,6 @@ namespace Core2D.Editor
             editor.Project?.CurrentContainer?.InvalidateLayer();
         }
 
-        /// <inheritdoc/>
         public void OnStyleSetDashOffset(string dashOffset)
         {
             if (!double.TryParse(dashOffset, _numberStyles, CultureInfo.InvariantCulture, out var value))
@@ -1000,7 +974,6 @@ namespace Core2D.Editor
             editor.Project?.CurrentContainer?.InvalidateLayer();
         }
 
-        /// <inheritdoc/>
         public void OnStyleSetStroke(string color)
         {
             BaseColor value;
@@ -1024,7 +997,6 @@ namespace Core2D.Editor
             editor.Project?.CurrentContainer?.InvalidateLayer();
         }
 
-        /// <inheritdoc/>
         public void OnStyleSetStrokeTransparency(string alpha)
         {
             if (!byte.TryParse(alpha, _numberStyles, CultureInfo.InvariantCulture, out var value))
@@ -1043,7 +1015,6 @@ namespace Core2D.Editor
             editor.Project?.CurrentContainer?.InvalidateLayer();
         }
 
-        /// <inheritdoc/>
         public void OnStyleSetFill(string color)
         {
             BaseColor value;
@@ -1065,7 +1036,6 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public void OnStyleSetFillTransparency(string alpha)
         {
             if (!byte.TryParse(alpha, _numberStyles, CultureInfo.InvariantCulture, out var value))
@@ -1084,7 +1054,6 @@ namespace Core2D.Editor
             editor.Project?.CurrentContainer?.InvalidateLayer();
         }
 
-        /// <inheritdoc/>
         public void OnStyleSetFontName(string fontName)
         {
             var editor = _serviceProvider.GetService<ProjectEditor>();
@@ -1096,7 +1065,6 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public void OnStyleSetFontSize(string fontSize)
         {
             if (!double.TryParse(fontSize, _numberStyles, CultureInfo.InvariantCulture, out var value))
@@ -1113,7 +1081,6 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public void OnStyleSetFontStyle(string fontStyle)
         {
             if (!Enum.TryParse<FontStyleFlags>(fontStyle, true, out var value))
@@ -1130,7 +1097,6 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public void OnStyleSetTextHAlignment(string alignment)
         {
             if (!Enum.TryParse<TextHAlignment>(alignment, true, out var value))
@@ -1147,7 +1113,6 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public void OnStyleSetTextVAlignment(string alignment)
         {
             if (!Enum.TryParse<TextVAlignment>(alignment, true, out var value))
@@ -1164,7 +1129,6 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public void OnStyleToggleLineIsCurved()
         {
             var editor = _serviceProvider.GetService<ProjectEditor>();
@@ -1176,7 +1140,6 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public void OnStyleSetLineCurvature(string curvature)
         {
             if (!double.TryParse(curvature, _numberStyles, CultureInfo.InvariantCulture, out var value))
@@ -1193,7 +1156,6 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public void OnStyleSetLineCurveOrientation(string curveOrientation)
         {
             if (!Enum.TryParse<CurveOrientation>(curveOrientation, true, out var value))
@@ -1210,7 +1172,6 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public void OnStyleSetLineFixedLength(string length)
         {
             if (!double.TryParse(length, _numberStyles, CultureInfo.InvariantCulture, out var value))
@@ -1227,7 +1188,6 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public void OnStyleToggleLineFixedLengthFlags(string flags)
         {
             if (!Enum.TryParse<LineFixedLengthFlags>(flags, true, out var value))
@@ -1244,7 +1204,6 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public void OnStyleToggleLineFixedLengthStartTrigger(string trigger)
         {
             if (!Enum.TryParse<ShapeStateFlags>(trigger, true, out var value))
@@ -1261,7 +1220,6 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public void OnStyleToggleLineFixedLengthEndTrigger(string trigger)
         {
             if (!Enum.TryParse<ShapeStateFlags>(trigger, true, out var value))
@@ -1278,7 +1236,6 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public void OnStyleSetStartArrowType(string type)
         {
             if (!Enum.TryParse<ArrowType>(type, true, out var value))
@@ -1295,7 +1252,6 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public void OnStyleToggleStartArrowIsStroked()
         {
             var editor = _serviceProvider.GetService<ProjectEditor>();
@@ -1307,7 +1263,6 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public void OnStyleToggleStartArrowIsFilled()
         {
             var editor = _serviceProvider.GetService<ProjectEditor>();
@@ -1319,7 +1274,6 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public void OnStyleSetStartArrowRadiusX(string radius)
         {
             if (!double.TryParse(radius, _numberStyles, CultureInfo.InvariantCulture, out var value))
@@ -1336,7 +1290,6 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public void OnStyleSetStartArrowRadiusY(string radius)
         {
             if (!double.TryParse(radius, _numberStyles, CultureInfo.InvariantCulture, out var value))
@@ -1353,7 +1306,6 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public void OnStyleSetStartArrowThickness(string thickness)
         {
             if (!double.TryParse(thickness, _numberStyles, CultureInfo.InvariantCulture, out var value))
@@ -1370,7 +1322,6 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public void OnStyleSetStartArrowLineCap(string lineCap)
         {
             if (!Enum.TryParse<LineCap>(lineCap, true, out var value))
@@ -1387,7 +1338,6 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public void OnStyleSetStartArrowDashes(string dashes)
         {
             var editor = _serviceProvider.GetService<ProjectEditor>();
@@ -1399,7 +1349,6 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public void OnStyleSetStartArrowDashOffset(string dashOffset)
         {
             if (!double.TryParse(dashOffset, _numberStyles, CultureInfo.InvariantCulture, out var value))
@@ -1416,7 +1365,6 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public void OnStyleSetStartArrowStroke(string color)
         {
             BaseColor value;
@@ -1438,7 +1386,6 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public void OnStyleSetStartArrowStrokeTransparency(string alpha)
         {
             if (!byte.TryParse(alpha, _numberStyles, CultureInfo.InvariantCulture, out var value))
@@ -1457,7 +1404,6 @@ namespace Core2D.Editor
             editor.Project?.CurrentContainer?.InvalidateLayer();
         }
 
-        /// <inheritdoc/>
         public void OnStyleSetStartArrowFill(string color)
         {
             BaseColor value;
@@ -1481,7 +1427,6 @@ namespace Core2D.Editor
             editor.Project?.CurrentContainer?.InvalidateLayer();
         }
 
-        /// <inheritdoc/>
         public void OnStyleSetStartArrowFillTransparency(string alpha)
         {
             if (!byte.TryParse(alpha, _numberStyles, CultureInfo.InvariantCulture, out var value))
@@ -1500,7 +1445,6 @@ namespace Core2D.Editor
             editor.Project?.CurrentContainer?.InvalidateLayer();
         }
 
-        /// <inheritdoc/>
         public void OnStyleSetEndArrowType(string type)
         {
             if (!Enum.TryParse<ArrowType>(type, true, out var value))
@@ -1519,7 +1463,6 @@ namespace Core2D.Editor
             editor.Project?.CurrentContainer?.InvalidateLayer();
         }
 
-        /// <inheritdoc/>
         public void OnStyleToggleEndArrowIsStroked()
         {
             var editor = _serviceProvider.GetService<ProjectEditor>();
@@ -1533,7 +1476,6 @@ namespace Core2D.Editor
             editor.Project?.CurrentContainer?.InvalidateLayer();
         }
 
-        /// <inheritdoc/>
         public void OnStyleToggleEndArrowIsFilled()
         {
             var editor = _serviceProvider.GetService<ProjectEditor>();
@@ -1547,7 +1489,6 @@ namespace Core2D.Editor
             editor.Project?.CurrentContainer?.InvalidateLayer();
         }
 
-        /// <inheritdoc/>
         public void OnStyleSetEndArrowRadiusX(string radius)
         {
             if (!double.TryParse(radius, _numberStyles, CultureInfo.InvariantCulture, out var value))
@@ -1566,7 +1507,6 @@ namespace Core2D.Editor
             editor.Project?.CurrentContainer?.InvalidateLayer();
         }
 
-        /// <inheritdoc/>
         public void OnStyleSetEndArrowRadiusY(string radius)
         {
             if (!double.TryParse(radius, _numberStyles, CultureInfo.InvariantCulture, out var value))
@@ -1585,7 +1525,6 @@ namespace Core2D.Editor
             editor.Project?.CurrentContainer?.InvalidateLayer();
         }
 
-        /// <inheritdoc/>
         public void OnStyleSetEndArrowThickness(string thickness)
         {
             if (!double.TryParse(thickness, _numberStyles, CultureInfo.InvariantCulture, out var value))
@@ -1604,7 +1543,6 @@ namespace Core2D.Editor
             editor.Project?.CurrentContainer?.InvalidateLayer();
         }
 
-        /// <inheritdoc/>
         public void OnStyleSetEndArrowLineCap(string lineCap)
         {
             if (!Enum.TryParse<LineCap>(lineCap, true, out var value))
@@ -1623,7 +1561,6 @@ namespace Core2D.Editor
             editor.Project?.CurrentContainer?.InvalidateLayer();
         }
 
-        /// <inheritdoc/>
         public void OnStyleSetEndArrowDashes(string dashes)
         {
             var editor = _serviceProvider.GetService<ProjectEditor>();
@@ -1635,7 +1572,6 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public void OnStyleSetEndArrowDashOffset(string dashOffset)
         {
             if (!double.TryParse(dashOffset, _numberStyles, CultureInfo.InvariantCulture, out var value))
@@ -1654,7 +1590,6 @@ namespace Core2D.Editor
             editor.Project?.CurrentContainer?.InvalidateLayer();
         }
 
-        /// <inheritdoc/>
         public void OnStyleSetEndArrowStroke(string color)
         {
             BaseColor value;
@@ -1678,7 +1613,6 @@ namespace Core2D.Editor
             editor.Project?.CurrentContainer?.InvalidateLayer();
         }
 
-        /// <inheritdoc/>
         public void OnStyleSetEndArrowStrokeTransparency(string alpha)
         {
             if (!byte.TryParse(alpha, _numberStyles, CultureInfo.InvariantCulture, out var value))
@@ -1697,7 +1631,6 @@ namespace Core2D.Editor
             editor.Project?.CurrentContainer?.InvalidateLayer();
         }
 
-        /// <inheritdoc/>
         public void OnStyleSetEndArrowFill(string color)
         {
             BaseColor value;
@@ -1719,7 +1652,6 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public void OnStyleSetEndArrowFillTransparency(string alpha)
         {
             if (!byte.TryParse(alpha, _numberStyles, CultureInfo.InvariantCulture, out var value))

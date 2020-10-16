@@ -17,17 +17,10 @@ using Microsoft.CodeAnalysis;
 
 namespace Core2D.Editor
 {
-    /// <summary>
-    /// Project editor Avalonia platform.
-    /// </summary>
     public class AvaloniaProjectEditorPlatform : IProjectEditorPlatform
     {
         private readonly IServiceProvider _serviceProvider;
 
-        /// <summary>
-        /// Initialize new instance of <see cref="AvaloniaProjectEditorPlatform"/> class.
-        /// </summary>
-        /// <param name="serviceProvider">The service provider.</param>
         public AvaloniaProjectEditorPlatform(IServiceProvider serviceProvider)
         {
             _serviceProvider = serviceProvider;
@@ -38,7 +31,6 @@ namespace Core2D.Editor
             return _serviceProvider.GetService<MainWindow>();
         }
 
-        /// <inheritdoc/>
         public async void OnOpen(string path)
         {
             if (path == null)
@@ -67,7 +59,6 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public void OnSave()
         {
             var editor = _serviceProvider.GetService<ProjectEditor>();
@@ -81,7 +72,6 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public async void OnSaveAs()
         {
             var editor = _serviceProvider.GetService<ProjectEditor>();
@@ -97,7 +87,6 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public async void OnImportJson(string path)
         {
             if (path == null)
@@ -128,7 +117,6 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public async void OnImportSvg(string path)
         {
             if (path == null)
@@ -159,7 +147,6 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public async void OnImportObject(string path)
         {
             if (path == null)
@@ -196,7 +183,6 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public async void OnExportJson(object item)
         {
             var editor = _serviceProvider.GetService<ProjectEditor>();
@@ -212,7 +198,6 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public async void OnExportObject(object item)
         {
             var editor = _serviceProvider.GetService<ProjectEditor>();
@@ -234,7 +219,6 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public async void OnExport(object item)
         {
             var editor = _serviceProvider.GetService<ProjectEditor>();
@@ -285,7 +269,6 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public async void OnExecuteScriptFile(string path)
         {
             if (path == null)
@@ -305,13 +288,11 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public void OnExit()
         {
             GetWindow().Close();
         }
 
-        /// <inheritdoc/>
         public void OnCopyAsSvg(object item)
         {
             try
@@ -351,7 +332,6 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public async void OnPasteSvg()
         {
             try
@@ -375,7 +355,6 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public void OnCopyAsXaml(object item)
         {
             try
@@ -472,7 +451,6 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public void OnCopyAsEmf(object item)
         {
             if (Environment.OSVersion.Platform != PlatformID.Win32NT)
@@ -514,7 +492,6 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public async void OnCopyAsPathData(object item)
         {
             try
@@ -555,7 +532,6 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public async void OnPastePathDataStroked()
         {
             try
@@ -579,7 +555,6 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public async void OnPastePathDataFilled()
         {
             try
@@ -603,7 +578,6 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public async void OnImportData(ProjectContainer project)
         {
             var editor = _serviceProvider.GetService<ProjectEditor>();
@@ -631,7 +605,6 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public async void OnExportData(Database db)
         {
             if (db != null)
@@ -658,7 +631,6 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public async void OnUpdateData(Database db)
         {
             if (db != null)
@@ -688,7 +660,6 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public void OnAboutDialog()
         {
             new AboutWindow()
@@ -698,43 +669,36 @@ namespace Core2D.Editor
             .ShowDialog(GetWindow());
         }
 
-        /// <inheritdoc/>
         public void OnZoomReset()
         {
             _serviceProvider.GetService<ProjectEditor>().CanvasPlatform?.ResetZoom?.Invoke();
         }
 
-        /// <inheritdoc/>
         public void OnZoomFill()
         {
             _serviceProvider.GetService<ProjectEditor>().CanvasPlatform?.FillZoom?.Invoke();
         }
 
-        /// <inheritdoc/>
         public void OnZoomUniform()
         {
             _serviceProvider.GetService<ProjectEditor>().CanvasPlatform?.UniformZoom?.Invoke();
         }
 
-        /// <inheritdoc/>
         public void OnZoomUniformToFill()
         {
             _serviceProvider.GetService<ProjectEditor>().CanvasPlatform?.UniformToFillZoom?.Invoke();
         }
 
-        /// <inheritdoc/>
         public void OnZoomAutoFit()
         {
             _serviceProvider.GetService<ProjectEditor>().CanvasPlatform?.AutoFitZoom?.Invoke();
         }
 
-        /// <inheritdoc/>
         public void OnZoomIn()
         {
             _serviceProvider.GetService<ProjectEditor>().CanvasPlatform?.InZoom?.Invoke();
         }
 
-        /// <inheritdoc/>
         public void OnZoomOut()
         {
             _serviceProvider.GetService<ProjectEditor>().CanvasPlatform?.OutZoom?.Invoke();

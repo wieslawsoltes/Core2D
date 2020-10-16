@@ -8,23 +8,15 @@ using Core2D.Style;
 
 namespace Core2D.Editor.Factories
 {
-    /// <summary>
-    /// Factory used to create shapes.
-    /// </summary>
     public sealed class ShapeFactory : IShapeFactory
     {
         private readonly IServiceProvider _serviceProvider;
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ShapeFactory"/> class.
-        /// </summary>
-        /// <param name="serviceProvider">The service provider.</param>
         public ShapeFactory(IServiceProvider serviceProvider)
         {
             _serviceProvider = serviceProvider;
         }
 
-        /// <inheritdoc/>
         PointShape IShapeFactory.Point(double x, double y, bool isStandalone)
         {
             var factory = _serviceProvider.GetService<IFactory>();
@@ -38,7 +30,6 @@ namespace Core2D.Editor.Factories
             return point;
         }
 
-        /// <inheritdoc/>
         LineShape IShapeFactory.Line(double x1, double y1, double x2, double y2, bool isStroked)
         {
             var factory = _serviceProvider.GetService<IFactory>();
@@ -56,7 +47,6 @@ namespace Core2D.Editor.Factories
             return line;
         }
 
-        /// <inheritdoc/>
         LineShape IShapeFactory.Line(PointShape start, PointShape end, bool isStroked)
         {
             var factory = _serviceProvider.GetService<IFactory>();
@@ -74,7 +64,6 @@ namespace Core2D.Editor.Factories
             return line;
         }
 
-        /// <inheritdoc/>
         ArcShape IShapeFactory.Arc(double x1, double y1, double x2, double y2, double x3, double y3, double x4, double y4, bool isStroked, bool isFilled)
         {
             var factory = _serviceProvider.GetService<IFactory>();
@@ -95,7 +84,6 @@ namespace Core2D.Editor.Factories
             return arc;
         }
 
-        /// <inheritdoc/>
         ArcShape IShapeFactory.Arc(PointShape point1, PointShape point2, PointShape point3, PointShape point4, bool isStroked, bool isFilled)
         {
             var factory = _serviceProvider.GetService<IFactory>();
@@ -116,7 +104,6 @@ namespace Core2D.Editor.Factories
             return arc;
         }
 
-        /// <inheritdoc/>
         CubicBezierShape IShapeFactory.CubicBezier(double x1, double y1, double x2, double y2, double x3, double y3, double x4, double y4, bool isStroked, bool isFilled)
         {
             var factory = _serviceProvider.GetService<IFactory>();
@@ -137,7 +124,6 @@ namespace Core2D.Editor.Factories
             return cubicBezier;
         }
 
-        /// <inheritdoc/>
         CubicBezierShape IShapeFactory.CubicBezier(PointShape point1, PointShape point2, PointShape point3, PointShape point4, bool isStroked, bool isFilled)
         {
             var factory = _serviceProvider.GetService<IFactory>();
@@ -158,7 +144,6 @@ namespace Core2D.Editor.Factories
             return cubicBezier;
         }
 
-        /// <inheritdoc/>
         QuadraticBezierShape IShapeFactory.QuadraticBezier(double x1, double y1, double x2, double y2, double x3, double y3, bool isStroked, bool isFilled)
         {
             var factory = _serviceProvider.GetService<IFactory>();
@@ -178,7 +163,6 @@ namespace Core2D.Editor.Factories
             return quadraticBezier;
         }
 
-        /// <inheritdoc/>
         QuadraticBezierShape IShapeFactory.QuadraticBezier(PointShape point1, PointShape point2, PointShape point3, bool isStroked, bool isFilled)
         {
             var factory = _serviceProvider.GetService<IFactory>();
@@ -198,14 +182,12 @@ namespace Core2D.Editor.Factories
             return quadraticBezier;
         }
 
-        /// <inheritdoc/>
         PathGeometry IShapeFactory.Geometry(FillRule fillRule)
         {
             var factory = _serviceProvider.GetService<IFactory>();
             return factory.CreatePathGeometry(ImmutableArray.Create<PathFigure>(), fillRule);
         }
 
-        /// <inheritdoc/>
         PathShape IShapeFactory.Path(PathGeometry geometry, bool isStroked, bool isFilled)
         {
             var factory = _serviceProvider.GetService<IFactory>();
@@ -224,7 +206,6 @@ namespace Core2D.Editor.Factories
             return path;
         }
 
-        /// <inheritdoc/>
         RectangleShape IShapeFactory.Rectangle(double x1, double y1, double x2, double y2, bool isStroked, bool isFilled, string text)
         {
             var factory = _serviceProvider.GetService<IFactory>();
@@ -244,7 +225,6 @@ namespace Core2D.Editor.Factories
             return rectangle;
         }
 
-        /// <inheritdoc/>
         RectangleShape IShapeFactory.Rectangle(PointShape topLeft, PointShape bottomRight, bool isStroked, bool isFilled, string text)
         {
             var factory = _serviceProvider.GetService<IFactory>();
@@ -264,7 +244,6 @@ namespace Core2D.Editor.Factories
             return rectangle;
         }
 
-        /// <inheritdoc/>
         EllipseShape IShapeFactory.Ellipse(double x1, double y1, double x2, double y2, bool isStroked, bool isFilled, string text)
         {
             var factory = _serviceProvider.GetService<IFactory>();
@@ -284,7 +263,6 @@ namespace Core2D.Editor.Factories
             return ellipse;
         }
 
-        /// <inheritdoc/>
         EllipseShape IShapeFactory.Ellipse(PointShape topLeft, PointShape bottomRight, bool isStroked, bool isFilled, string text)
         {
             var factory = _serviceProvider.GetService<IFactory>();
@@ -304,7 +282,6 @@ namespace Core2D.Editor.Factories
             return ellipse;
         }
 
-        /// <inheritdoc/>
         TextShape IShapeFactory.Text(double x1, double y1, double x2, double y2, string text, bool isStroked)
         {
             var factory = _serviceProvider.GetService<IFactory>();
@@ -323,7 +300,6 @@ namespace Core2D.Editor.Factories
             return txt;
         }
 
-        /// <inheritdoc/>
         TextShape IShapeFactory.Text(PointShape topLeft, PointShape bottomRight, string text, bool isStroked)
         {
             var factory = _serviceProvider.GetService<IFactory>();
@@ -342,7 +318,6 @@ namespace Core2D.Editor.Factories
             return txt;
         }
 
-        /// <inheritdoc/>
         ImageShape IShapeFactory.Image(string path, double x1, double y1, double x2, double y2, bool isStroked, bool isFilled, string text)
         {
             var factory = _serviceProvider.GetService<IFactory>();
@@ -363,7 +338,6 @@ namespace Core2D.Editor.Factories
             return image;
         }
 
-        /// <inheritdoc/>
         ImageShape IShapeFactory.Image(string path, PointShape topLeft, PointShape bottomRight, bool isStroked, bool isFilled, string text)
         {
             var factory = _serviceProvider.GetService<IFactory>();

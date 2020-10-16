@@ -8,9 +8,6 @@ using Core2D.Style;
 
 namespace Core2D.Containers
 {
-    /// <summary>
-    /// Page container.
-    /// </summary>
     public class PageContainer : BaseContainer, IGrid
     {
         private double _width;
@@ -35,12 +32,6 @@ namespace Core2D.Containers
         private BaseColor _gridStrokeColor;
         private double _gridStrokeThickness;
 
-        /// <summary>
-        /// Gets or sets container width.
-        /// </summary>
-        /// <remarks>
-        /// If template is not null Template.Width property is used.
-        /// </remarks>
         public double Width
         {
             get => _template != null ? _template.Width : _width;
@@ -58,12 +49,6 @@ namespace Core2D.Containers
             }
         }
 
-        /// <summary>
-        /// Gets or sets container height.
-        /// </summary>
-        /// <remarks>
-        /// If template is not null Template.Height property is used.
-        /// </remarks>
         public double Height
         {
             get => _template != null ? _template.Height : _height;
@@ -81,12 +66,6 @@ namespace Core2D.Containers
             }
         }
 
-        /// <summary>
-        /// Gets or sets container background color.
-        /// </summary>
-        /// <remarks>
-        /// If template is not null Template.Background property is used.
-        /// </remarks>
         public BaseColor Background
         {
             get => _template != null ? _template.Background : _background;
@@ -104,79 +83,54 @@ namespace Core2D.Containers
             }
         }
 
-        /// <summary>
-        /// Gets or sets container layers.
-        /// </summary>
         public ImmutableArray<LayerContainer> Layers
         {
             get => _layers;
             set => RaiseAndSetIfChanged(ref _layers, value);
         }
 
-        /// <summary>
-        /// Gets or sets current container layer.
-        /// </summary>
         public LayerContainer CurrentLayer
         {
             get => _currentLayer;
             set => RaiseAndSetIfChanged(ref _currentLayer, value);
         }
 
-        /// <summary>
-        /// Gets or sets working container layer.
-        /// </summary>
         public LayerContainer WorkingLayer
         {
             get => _workingLayer;
             set => RaiseAndSetIfChanged(ref _workingLayer, value);
         }
 
-        /// <summary>
-        /// Gets or sets helper container layer.
-        /// </summary>
         public LayerContainer HelperLayer
         {
             get => _helperLayer;
             set => RaiseAndSetIfChanged(ref _helperLayer, value);
         }
 
-        /// <summary>
-        /// Gets or sets current container shape.
-        /// </summary>
         public BaseShape CurrentShape
         {
             get => _currentShape;
             set => RaiseAndSetIfChanged(ref _currentShape, value);
         }
 
-        /// <summary>
-        /// Gets or sets container template.
-        /// </summary>
         public PageContainer Template
         {
             get => _template;
             set => RaiseAndSetIfChanged(ref _template, value);
         }
 
-        /// <summary>
-        /// Gets or sets container data.
-        /// </summary>
         public Context Data
         {
             get => _data;
             set => RaiseAndSetIfChanged(ref _data, value);
         }
 
-        /// <summary>
-        /// Gets or sets flag indicating whether container is expanded.
-        /// </summary>
         public bool IsExpanded
         {
             get => _isExpanded;
             set => RaiseAndSetIfChanged(ref _isExpanded, value);
         }
 
-        /// <inheritdoc/>
         public bool IsGridEnabled
         {
             get => _template != null ? _template.IsGridEnabled : _isGridEnabled;
@@ -194,7 +148,6 @@ namespace Core2D.Containers
             }
         }
 
-        /// <inheritdoc/>
         public bool IsBorderEnabled
         {
             get => _template != null ? _template.IsBorderEnabled : _isBorderEnabled;
@@ -212,7 +165,6 @@ namespace Core2D.Containers
             }
         }
 
-        /// <inheritdoc/>
         public double GridOffsetLeft
         {
             get => _template != null ? _template.GridOffsetLeft : _gridOffsetLeft;
@@ -230,7 +182,6 @@ namespace Core2D.Containers
             }
         }
 
-        /// <inheritdoc/>
         public double GridOffsetTop
         {
             get => _template != null ? _template.GridOffsetTop : _gridOffsetTop;
@@ -248,7 +199,6 @@ namespace Core2D.Containers
             }
         }
 
-        /// <inheritdoc/>
         public double GridOffsetRight
         {
             get => _template != null ? _template.GridOffsetRight : _gridOffsetRight;
@@ -266,7 +216,6 @@ namespace Core2D.Containers
             }
         }
 
-        /// <inheritdoc/>
         public double GridOffsetBottom
         {
             get => _template != null ? _template.GridOffsetBottom : _gridOffsetBottom;
@@ -284,7 +233,6 @@ namespace Core2D.Containers
             }
         }
 
-        /// <inheritdoc/>
         public double GridCellWidth
         {
             get => _template != null ? _template.GridCellWidth : _gridCellWidth;
@@ -302,7 +250,6 @@ namespace Core2D.Containers
             }
         }
 
-        /// <inheritdoc/>
         public double GridCellHeight
         {
             get => _template != null ? _template.GridCellHeight : _gridCellHeight;
@@ -320,7 +267,6 @@ namespace Core2D.Containers
             }
         }
 
-        /// <inheritdoc/>
         public BaseColor GridStrokeColor
         {
             get => _template != null ? _template.GridStrokeColor : _gridStrokeColor;
@@ -338,7 +284,6 @@ namespace Core2D.Containers
             }
         }
 
-        /// <inheritdoc/>
         public double GridStrokeThickness
         {
             get => _template != null ? _template.GridStrokeThickness : _gridStrokeThickness;
@@ -356,15 +301,8 @@ namespace Core2D.Containers
             }
         }
 
-        /// <summary>
-        /// Set current layer.
-        /// </summary>
-        /// <param name="layer">The layer instance.</param>
         public void SetCurrentLayer(LayerContainer layer) => CurrentLayer = layer;
 
-        /// <summary>
-        /// Invalidate container layers.
-        /// </summary>
         public virtual void InvalidateLayer()
         {
             if (Template != null)
@@ -391,13 +329,11 @@ namespace Core2D.Containers
             }
         }
 
-        /// <inheritdoc/>
         public override object Copy(IDictionary<object, object> shared)
         {
             throw new NotImplementedException();
         }
 
-        /// <inheritdoc/>
         public override bool IsDirty()
         {
             var isDirty = base.IsDirty();
@@ -440,7 +376,6 @@ namespace Core2D.Containers
             return isDirty;
         }
 
-        /// <inheritdoc/>
         public override void Invalidate()
         {
             base.Invalidate();
@@ -458,130 +393,46 @@ namespace Core2D.Containers
             Data?.Invalidate();
         }
 
-        /// <summary>
-        /// Check whether the <see cref="Width"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
         public virtual bool ShouldSerializeWidth() => _width != default;
 
-        /// <summary>
-        /// Check whether the <see cref="Height"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
         public virtual bool ShouldSerializeHeight() => _height != default;
 
-        /// <summary>
-        /// Check whether the <see cref="Background"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
         public virtual bool ShouldSerializeBackground() => _background != null;
 
-        /// <summary>
-        /// Check whether the <see cref="Layers"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
         public virtual bool ShouldSerializeLayers() => true;
 
-        /// <summary>
-        /// Check whether the <see cref="CurrentLayer"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
         public virtual bool ShouldSerializeCurrentLayer() => _currentLayer != null;
 
-        /// <summary>
-        /// Check whether the <see cref="WorkingLayer"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
         public virtual bool ShouldSerializeWorkingLayer() => _workingLayer != null;
 
-        /// <summary>
-        /// Check whether the <see cref="HelperLayer"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
         public virtual bool ShouldSerializeHelperLayer() => _helperLayer != null;
 
-        /// <summary>
-        /// Check whether the <see cref="CurrentShape"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
         public virtual bool ShouldSerializeCurrentShape() => _currentShape != null;
 
-        /// <summary>
-        /// Check whether the <see cref="Template"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
         public virtual bool ShouldSerializeTemplate() => _template != null;
 
-        /// <summary>
-        /// Check whether the <see cref="Data"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
         public virtual bool ShouldSerializeData() => _data != null;
 
-        /// <summary>
-        /// Check whether the <see cref="IsExpanded"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
         public virtual bool ShouldSerializeIsExpanded() => _isExpanded != default;
 
-        /// <summary>
-        /// Check whether the <see cref="IsGridEnabled"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
         public virtual bool ShouldSerializeIsGridEnabled() => _isGridEnabled != default;
 
-        /// <summary>
-        /// Check whether the <see cref="IsBorderEnabled"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
         public virtual bool ShouldSerializeIsBorderEnabled() => _isBorderEnabled != default;
 
-        /// <summary>
-        /// Check whether the <see cref="GridOffsetLeft"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
         public virtual bool ShouldSerializeGridOffsetLeft() => _gridOffsetLeft != default;
 
-        /// <summary>
-        /// Check whether the <see cref="GridOffsetTop"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
         public virtual bool ShouldSerializeGridOffsetTop() => _gridOffsetTop != default;
 
-        /// <summary>
-        /// Check whether the <see cref="GridOffsetRight"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
         public virtual bool ShouldSerializeGridOffsetRight() => _gridOffsetRight != default;
 
-        /// <summary>
-        /// Check whether the <see cref="GridOffsetBottom"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
         public virtual bool ShouldSerializeGridOffsetBottom() => _gridOffsetBottom != default;
 
-        /// <summary>
-        /// Check whether the <see cref="GridCellWidth"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
         public virtual bool ShouldSerializeGridCellWidth() => _gridCellWidth != default;
 
-        /// <summary>
-        /// Check whether the <see cref="GridCellHeight"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
         public virtual bool ShouldSerializeGridCellHeight() => _gridCellHeight != default;
 
-        /// <summary>
-        /// Check whether the <see cref="GridStrokeColor"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
         public virtual bool ShouldSerializeGridStrokeColor() => _gridStrokeColor != null;
 
-        /// <summary>
-        /// Check whether the <see cref="GridStrokeThickness"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
         public virtual bool ShouldSerializeGridStrokeThickness() => _gridStrokeThickness != default;
     }
 }

@@ -4,9 +4,6 @@ using Avalonia.Markup.Xaml;
 
 namespace Core2D.Views
 {
-    /// <summary>
-    /// Interaction logic for <see cref="PageControl"/> xaml.
-    /// </summary>
     public class PageControl : UserControl
     {
         private ScrollViewer _scrollViewer;
@@ -16,9 +13,6 @@ namespace Core2D.Views
         private PresenterControl _presenterControlEditor;
         //private TextBox _textEditor;
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="PageControl"/> class.
-        /// </summary>
         public PageControl()
         {
             InitializeComponent();
@@ -31,9 +25,6 @@ namespace Core2D.Views
             //_textEditor = this.FindControl<TextBox>("textEditor");
         }
 
-        /// <summary>
-        /// Initialize the Xaml components.
-        /// </summary>
         private void InitializeComponent()
         {
             AvaloniaXamlLoader.Load(this);

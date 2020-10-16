@@ -4,14 +4,8 @@ using Avalonia.Markup.Xaml;
 
 namespace Core2D.Views
 {
-    /// <summary>
-    /// Interaction logic for <see cref="MainWindow"/> xaml.
-    /// </summary>
     public class MainWindow : Window
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="MainWindow"/> class.
-        /// </summary>
         public MainWindow()
         {
             InitializeComponent();
@@ -20,9 +14,6 @@ namespace Core2D.Views
             //VisualRoot.Renderer.DrawFps = true;
         }
 
-        /// <summary>
-        /// Initialize the Xaml components.
-        /// </summary>
         private void InitializeComponent()
         {
             AvaloniaXamlLoader.Load(this);

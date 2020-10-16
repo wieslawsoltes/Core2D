@@ -2,9 +2,6 @@
 
 namespace Core2D.Style
 {
-    /// <summary>
-    /// Line style.
-    /// </summary>
     public class LineStyle : ObservableObject
     {
         private bool _isCurved;
@@ -12,35 +9,30 @@ namespace Core2D.Style
         private CurveOrientation _curveOrientation;
         private LineFixedLength _fixedLength;
 
-        /// <inheritdoc/>
         public bool IsCurved
         {
             get => _isCurved;
             set => RaiseAndSetIfChanged(ref _isCurved, value);
         }
 
-        /// <inheritdoc/>
         public double Curvature
         {
             get => _curvature;
             set => RaiseAndSetIfChanged(ref _curvature, value);
         }
 
-        /// <inheritdoc/>
         public CurveOrientation CurveOrientation
         {
             get => _curveOrientation;
             set => RaiseAndSetIfChanged(ref _curveOrientation, value);
         }
 
-        /// <inheritdoc/>
         public LineFixedLength FixedLength
         {
             get => _fixedLength;
             set => RaiseAndSetIfChanged(ref _fixedLength, value);
         }
 
-        /// <inheritdoc/>
         public override object Copy(IDictionary<object, object> shared)
         {
             return new LineStyle()
@@ -53,28 +45,12 @@ namespace Core2D.Style
             };
         }
 
-        /// <summary>
-        /// Check whether the <see cref="IsCurved"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
         public virtual bool ShouldSerializeIsCurved() => _isCurved != default;
 
-        /// <summary>
-        /// Check whether the <see cref="Curvature"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
         public virtual bool ShouldSerializeCurvature() => _curvature != default;
 
-        /// <summary>
-        /// Check whether the <see cref="CurveOrientation"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
         public virtual bool ShouldSerializeCurveOrientation() => _curveOrientation != default;
 
-        /// <summary>
-        /// Check whether the <see cref="FixedLength"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
         public virtual bool ShouldSerializeFixedLength() => _fixedLength != null;
     }
 }

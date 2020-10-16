@@ -7,17 +7,10 @@ using Core2D.Views;
 
 namespace Core2D.Editor
 {
-    /// <summary>
-    /// File image importer.
-    /// </summary>
     public class AvaloniaImageImporter : IImageImporter
     {
         private readonly IServiceProvider _serviceProvider;
 
-        /// <summary>
-        /// Initialize new instance of <see cref="AvaloniaImageImporter"/> class.
-        /// </summary>
-        /// <param name="serviceProvider">The service provider.</param>
         public AvaloniaImageImporter(IServiceProvider serviceProvider)
         {
             _serviceProvider = serviceProvider;
@@ -28,7 +21,6 @@ namespace Core2D.Editor
             return _serviceProvider.GetService<MainWindow>();
         }
 
-        /// <inheritdoc/>
         public async Task<string> GetImageKeyAsync()
         {
             try

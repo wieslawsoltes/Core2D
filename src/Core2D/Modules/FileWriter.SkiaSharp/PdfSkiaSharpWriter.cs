@@ -9,29 +9,19 @@ using Core2D.Renderer.SkiaSharp;
 
 namespace Core2D.FileWriter.SkiaSharpPdf
 {
-    /// <summary>
-    /// SkiaSharp pdf <see cref="IFileWriter"/> implementation.
-    /// </summary>
     public sealed class PdfSkiaSharpWriter : IFileWriter
     {
         private readonly IServiceProvider _serviceProvider;
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="PdfSkiaSharpWriter"/> class.
-        /// </summary>
-        /// <param name="serviceProvider">The service provider.</param>
         public PdfSkiaSharpWriter(IServiceProvider serviceProvider)
         {
             _serviceProvider = serviceProvider;
         }
 
-        /// <inheritdoc/>
         public string Name { get; } = "Pdf (SkiaSharp)";
 
-        /// <inheritdoc/>
         public string Extension { get; } = "pdf";
 
-        /// <inheritdoc/>
         public void Save(Stream stream, object item, object options)
         {
             if (item == null)

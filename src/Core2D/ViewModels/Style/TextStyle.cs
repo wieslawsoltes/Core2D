@@ -2,9 +2,6 @@
 
 namespace Core2D.Style
 {
-    /// <summary>
-    /// Text style.
-    /// </summary>
     public class TextStyle : ObservableObject
     {
         private string _fontName;
@@ -14,49 +11,42 @@ namespace Core2D.Style
         private TextHAlignment _textHAlignment;
         private TextVAlignment _textVAlignment;
 
-        /// <inheritdoc/>
         public string FontName
         {
             get => _fontName;
             set => RaiseAndSetIfChanged(ref _fontName, value);
         }
 
-        /// <inheritdoc/>
         public string FontFile
         {
             get => _fontFile;
             set => RaiseAndSetIfChanged(ref _fontFile, value);
         }
 
-        /// <inheritdoc/>
         public double FontSize
         {
             get => _fontSize;
             set => RaiseAndSetIfChanged(ref _fontSize, value);
         }
 
-        /// <inheritdoc/>
         public FontStyle FontStyle
         {
             get => _fontStyle;
             set => RaiseAndSetIfChanged(ref _fontStyle, value);
         }
 
-        /// <inheritdoc/>
         public TextHAlignment TextHAlignment
         {
             get => _textHAlignment;
             set => RaiseAndSetIfChanged(ref _textHAlignment, value);
         }
 
-        /// <inheritdoc/>
         public TextVAlignment TextVAlignment
         {
             get => _textVAlignment;
             set => RaiseAndSetIfChanged(ref _textVAlignment, value);
         }
 
-        /// <inheritdoc/>
         public override object Copy(IDictionary<object, object> shared)
         {
             return new TextStyle()
@@ -71,7 +61,6 @@ namespace Core2D.Style
             };
         }
 
-        /// <inheritdoc/>
         public override bool IsDirty()
         {
             var isDirty = base.IsDirty();
@@ -81,47 +70,22 @@ namespace Core2D.Style
             return isDirty;
         }
 
-        /// <inheritdoc/>
         public override void Invalidate()
         {
             base.Invalidate();
             FontStyle.Invalidate();
         }
 
-        /// <summary>
-        /// Check whether the <see cref="FontName"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
         public virtual bool ShouldSerializeFontName() => !string.IsNullOrWhiteSpace(_fontName);
 
-        /// <summary>
-        /// Check whether the <see cref="FontFile"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
         public virtual bool ShouldSerializeFontFile() => !string.IsNullOrWhiteSpace(_fontFile);
 
-        /// <summary>
-        /// Check whether the <see cref="FontSize"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
         public virtual bool ShouldSerializeFontSize() => _fontSize != default;
 
-        /// <summary>
-        /// Check whether the <see cref="FontStyle"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
         public virtual bool ShouldSerializeFontStyle() => _fontStyle != null;
 
-        /// <summary>
-        /// Check whether the <see cref="TextHAlignment"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
         public virtual bool ShouldSerializeTextHAlignment() => _textHAlignment != default;
 
-        /// <summary>
-        /// Check whether the <see cref="TextVAlignment"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
         public virtual bool ShouldSerializeTextVAlignment() => _textVAlignment != default;
     }
 }

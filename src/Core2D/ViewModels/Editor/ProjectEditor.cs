@@ -20,9 +20,6 @@ using static System.Math;
 
 namespace Core2D.Editor
 {
-    /// <summary>
-    /// Project editor.
-    /// </summary>
     public class ProjectEditor : ObservableObject
     {
         private readonly IServiceProvider _serviceProvider;
@@ -61,149 +58,114 @@ namespace Core2D.Editor
         private readonly Lazy<IPathConverter> _pathConverter;
         private readonly Lazy<ISvgConverter> _svgConverter;
 
-        /// <inheritdoc/>
         public ProjectContainer Project
         {
             get => _project;
             set => RaiseAndSetIfChanged(ref _project, value);
         }
 
-        /// <inheritdoc/>
         public string ProjectPath
         {
             get => _projectPath;
             set => RaiseAndSetIfChanged(ref _projectPath, value);
         }
 
-        /// <inheritdoc/>
         public bool IsProjectDirty
         {
             get => _isProjectDirty;
             set => RaiseAndSetIfChanged(ref _isProjectDirty, value);
         }
 
-        /// <inheritdoc/>
         public ProjectObserver Observer
         {
             get => _observer;
             set => RaiseAndSetIfChanged(ref _observer, value);
         }
 
-        /// <inheritdoc/>
         public bool IsToolIdle
         {
             get => _isToolIdle;
             set => RaiseAndSetIfChanged(ref _isToolIdle, value);
         }
 
-        /// <inheritdoc/>
         public IEditorTool CurrentTool
         {
             get => _currentTool;
             set => RaiseAndSetIfChanged(ref _currentTool, value);
         }
 
-        /// <inheritdoc/>
         public IPathTool CurrentPathTool
         {
             get => _currentPathTool;
             set => RaiseAndSetIfChanged(ref _currentPathTool, value);
         }
 
-        /// <inheritdoc/>
         public ImmutableArray<RecentFile> RecentProjects
         {
             get => _recentProjects;
             set => RaiseAndSetIfChanged(ref _recentProjects, value);
         }
 
-        /// <inheritdoc/>
         public RecentFile CurrentRecentProject
         {
             get => _currentRecentProject;
             set => RaiseAndSetIfChanged(ref _currentRecentProject, value);
         }
 
-        /// <inheritdoc/>
         public AboutInfo AboutInfo
         {
             get => _aboutInfo;
             set => RaiseAndSetIfChanged(ref _aboutInfo, value);
         }
 
-        /// <inheritdoc/>
         public ImmutableArray<IEditorTool> Tools => _tools.Value;
 
-        /// <inheritdoc/>
         public ImmutableArray<IPathTool> PathTools => _pathTools.Value;
 
-        /// <inheritdoc/>
         public IHitTest HitTest => _hitTest.Value;
 
-        /// <inheritdoc/>
         public ILog Log => _log.Value;
 
-        /// <inheritdoc/>
         public DataFlow DataFlow => _dataFlow.Value;
 
-        /// <inheritdoc/>
         public IShapeRenderer PageRenderer => _pageRenderer.Value;
 
-        /// <inheritdoc/>
         public ShapeRendererState PageState => _pageRenderer.Value?.State;
 
-        /// <inheritdoc/>
         public IShapeRenderer DocumentRenderer => _documentRenderer.Value;
 
-        /// <inheritdoc/>
         public ShapeRendererState DocumentState => _documentRenderer.Value?.State;
 
-        /// <inheritdoc/>
         public IFileSystem FileIO => _fileIO.Value;
 
-        /// <inheritdoc/>
         public IFactory Factory => _factory.Value;
 
-        /// <inheritdoc/>
         public IContainerFactory ContainerFactory => _containerFactory.Value;
 
-        /// <inheritdoc/>
         public IShapeFactory ShapeFactory => _shapeFactory.Value;
 
-        /// <inheritdoc/>
         public ITextClipboard TextClipboard => _textClipboard.Value;
 
-        /// <inheritdoc/>
         public IJsonSerializer JsonSerializer => _jsonSerializer.Value;
 
-        /// <inheritdoc/>
         public ImmutableArray<IFileWriter> FileWriters => _fileWriters.Value;
 
-        /// <inheritdoc/>
         public ImmutableArray<ITextFieldReader<Database>> TextFieldReaders => _textFieldReaders.Value;
 
-        /// <inheritdoc/>
         public ImmutableArray<ITextFieldWriter<Database>> TextFieldWriters => _textFieldWriters.Value;
 
-        /// <inheritdoc/>
         public IImageImporter ImageImporter => _imageImporter.Value;
 
-        /// <inheritdoc/>
         public IScriptRunner ScriptRunner => _scriptRunner.Value;
 
-        /// <inheritdoc/>
         public IProjectEditorPlatform Platform => _platform.Value;
 
-        /// <inheritdoc/>
         public IEditorCanvasPlatform CanvasPlatform => _canvasPlatform.Value;
 
-        /// <inheritdoc/>
         public StyleEditor StyleEditor => _styleEditor.Value;
 
-        /// <inheritdoc/>
         public IPathConverter PathConverter => _pathConverter.Value;
 
-        /// <inheritdoc/>
         public ISvgConverter SvgConverter => _svgConverter.Value;
 
         private object ScriptState { get; set; } = default;
@@ -214,10 +176,6 @@ namespace Core2D.Editor
 
         private BaseShape HoveredShape { get; set; } = default;
 
-        /// <summary>
-        /// Initialize new instance of <see cref="ProjectEditor"/> class.
-        /// </summary>
-        /// <param name="serviceProvider">The service provider.</param>
         public ProjectEditor(IServiceProvider serviceProvider)
         {
             _serviceProvider = serviceProvider;
@@ -249,13 +207,11 @@ namespace Core2D.Editor
             _svgConverter = _serviceProvider.GetServiceLazily<ISvgConverter>();
         }
 
-        /// <inheritdoc/>
         public override object Copy(IDictionary<object, object> shared)
         {
             throw new NotImplementedException();
         }
 
-        /// <inheritdoc/>
         public (decimal sx, decimal sy) TryToSnap(InputArgs args)
         {
             if (Project != null && Project.Options.SnapToGrid == true)
@@ -270,7 +226,6 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public string GetName(object item)
         {
             if (item != null)
@@ -283,7 +238,6 @@ namespace Core2D.Editor
             return string.Empty;
         }
 
-        /// <inheritdoc/>
         public void OnNew(object item)
         {
             if (item is LayerContainer layer)
@@ -329,7 +283,6 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public void OnNewPage(PageContainer selected)
         {
             var document = Project?.Documents.FirstOrDefault(d => d.Pages.Contains(selected));
@@ -344,7 +297,6 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public void OnNewPage(DocumentContainer selected)
         {
             var page =
@@ -355,7 +307,6 @@ namespace Core2D.Editor
             Project?.SetCurrentContainer(page);
         }
 
-        /// <inheritdoc/>
         public void OnNewDocument()
         {
             var document =
@@ -367,7 +318,6 @@ namespace Core2D.Editor
             Project?.SetCurrentContainer(document?.Pages.FirstOrDefault());
         }
 
-        /// <inheritdoc/>
         public void OnNewProject()
         {
             OnUnload();
@@ -376,7 +326,6 @@ namespace Core2D.Editor
             CanvasPlatform?.InvalidateControl?.Invoke();
         }
 
-        /// <inheritdoc/>
         public void OnOpenProject(string path)
         {
             try
@@ -399,7 +348,6 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public void OnOpenProject(ProjectContainer project, string path)
         {
             try
@@ -419,14 +367,12 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public void OnCloseProject()
         {
             Project?.History?.Reset();
             OnUnload();
         }
 
-        /// <inheritdoc/>
         public void OnSaveProject(string path)
         {
             try
@@ -461,7 +407,6 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public void OnImportData(ProjectContainer project, string path, ITextFieldReader<Database> reader)
         {
             try
@@ -483,7 +428,6 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public void OnExportData(string path, Database database, ITextFieldWriter<Database> writer)
         {
             try
@@ -497,7 +441,6 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public void OnUpdateData(string path, Database database, ITextFieldReader<Database> reader)
         {
             try
@@ -515,7 +458,6 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public void OnImportObject(object item, bool restore)
         {
             if (item is ShapeStyle style)
@@ -671,7 +613,6 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public void OnImportJson(string path)
         {
             try
@@ -692,7 +633,6 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public void OnImportSvg(string path)
         {
             if (SvgConverter == null)
@@ -706,7 +646,6 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public void OnExportJson(string path, object item)
         {
             try
@@ -723,7 +662,6 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public void OnExport(string path, object item, IFileWriter writer)
         {
             try
@@ -737,7 +675,6 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public async Task OnExecuteCode(string csharp)
         {
             try
@@ -753,7 +690,6 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public async Task OnExecuteRepl(string csharp)
         {
             try
@@ -769,13 +705,11 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public void OnResetRepl()
         {
             ScriptState = null;
         }
 
-        /// <inheritdoc/>
         public async Task OnExecuteScriptFile(string path)
         {
             try
@@ -792,7 +726,6 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public async Task OnExecuteScriptFile(string[] paths)
         {
             foreach (var path in paths)
@@ -801,7 +734,6 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public async Task OnExecuteScript(Script script)
         {
             try
@@ -818,7 +750,6 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public void OnUndo()
         {
             try
@@ -835,7 +766,6 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public void OnRedo()
         {
             try
@@ -852,7 +782,6 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public void OnCut(object item)
         {
             if (item is PageContainer page)
@@ -882,7 +811,6 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public void OnCopy(object item)
         {
             if (item is PageContainer page)
@@ -907,7 +835,6 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public async void OnPaste(object item)
         {
             if (Project != null && item is PageContainer page)
@@ -961,7 +888,6 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public void OnDelete(object item)
         {
             if (item is LayerContainer layer)
@@ -995,7 +921,6 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public void OnShowDecorator()
         {
             if (PageState == null)
@@ -1025,7 +950,6 @@ namespace Core2D.Editor
             PageState.Decorator.Show();
         }
 
-        /// <inheritdoc/>
         public void OnUpdateDecorator()
         {
             if (PageState == null)
@@ -1044,7 +968,6 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public void OnHideDecorator()
         {
             if (PageState == null)
@@ -1063,7 +986,6 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public void OnShowOrHideDecorator()
         {
             if (PageState == null)
@@ -1098,7 +1020,6 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public void OnSelectAll()
         {
             try
@@ -1114,7 +1035,6 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public void OnDeselectAll()
         {
             try
@@ -1128,7 +1048,6 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public void OnClearAll()
         {
             try
@@ -1154,14 +1073,12 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public void OnCancel()
         {
             OnDeselectAll();
             OnResetTool();
         }
 
-        /// <inheritdoc/>
         public void OnDuplicateSelected()
         {
             try
@@ -1191,7 +1108,6 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public void OnGroupSelected()
         {
             var group = Group(PageState?.SelectedShapes, ProjectEditorConfiguration.DefaulGroupName);
@@ -1201,7 +1117,6 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public void OnUngroupSelected()
         {
             var result = Ungroup(PageState?.SelectedShapes);
@@ -1212,7 +1127,6 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public void OnRotateSelected(string degrees)
         {
             if (!double.TryParse(degrees, NumberStyles.AllowLeadingSign | NumberStyles.AllowDecimalPoint | NumberStyles.AllowThousands, CultureInfo.InvariantCulture, out var value))
@@ -1228,7 +1142,6 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public void OnFlipHorizontalSelected()
         {
             var sources = PageState?.SelectedShapes;
@@ -1239,7 +1152,6 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public void OnFlipVerticalSelected()
         {
             var sources = PageState?.SelectedShapes;
@@ -1250,7 +1162,6 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public void OnMoveUpSelected()
         {
             MoveBy(
@@ -1259,7 +1170,6 @@ namespace Core2D.Editor
                 Project.Options.SnapToGrid ? (decimal)-Project.Options.SnapY : -1m);
         }
 
-        /// <inheritdoc/>
         public void OnMoveDownSelected()
         {
             MoveBy(
@@ -1268,7 +1178,6 @@ namespace Core2D.Editor
                 Project.Options.SnapToGrid ? (decimal)Project.Options.SnapY : 1m);
         }
 
-        /// <inheritdoc/>
         public void OnMoveLeftSelected()
         {
             MoveBy(
@@ -1277,7 +1186,6 @@ namespace Core2D.Editor
                 0m);
         }
 
-        /// <inheritdoc/>
         public void OnMoveRightSelected()
         {
             MoveBy(
@@ -1286,7 +1194,6 @@ namespace Core2D.Editor
                 0m);
         }
 
-        /// <inheritdoc/>
         public void OnStackHorizontallySelected()
         {
             var shapes = PageState?.SelectedShapes;
@@ -1298,7 +1205,6 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public void OnStackVerticallySelected()
         {
             var shapes = PageState?.SelectedShapes;
@@ -1310,7 +1216,6 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public void OnDistributeHorizontallySelected()
         {
             var shapes = PageState?.SelectedShapes;
@@ -1322,7 +1227,6 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public void OnDistributeVerticallySelected()
         {
             var shapes = PageState?.SelectedShapes;
@@ -1334,7 +1238,6 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public void OnAlignLeftSelected()
         {
             var shapes = PageState?.SelectedShapes;
@@ -1346,7 +1249,6 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public void OnAlignCenteredSelected()
         {
             var shapes = PageState?.SelectedShapes;
@@ -1358,7 +1260,6 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public void OnAlignRightSelected()
         {
             var shapes = PageState?.SelectedShapes;
@@ -1370,7 +1271,6 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public void OnAlignTopSelected()
         {
             var shapes = PageState?.SelectedShapes;
@@ -1382,7 +1282,6 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public void OnAlignCenterSelected()
         {
             var shapes = PageState?.SelectedShapes;
@@ -1394,7 +1293,6 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public void OnAlignBottomSelected()
         {
             var shapes = PageState?.SelectedShapes;
@@ -1406,7 +1304,6 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public void OnBringToFrontSelected()
         {
             var sources = PageState?.SelectedShapes;
@@ -1419,7 +1316,6 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public void OnBringForwardSelected()
         {
             var sources = PageState?.SelectedShapes;
@@ -1432,7 +1328,6 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public void OnSendBackwardSelected()
         {
             var sources = PageState?.SelectedShapes;
@@ -1445,7 +1340,6 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public void OnSendToBackSelected()
         {
             var sources = PageState?.SelectedShapes;
@@ -1458,7 +1352,6 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public void OnCreatePath()
         {
             if (PathConverter == null)
@@ -1519,7 +1412,6 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public void OnCreateStrokePath()
         {
             if (PathConverter == null)
@@ -1596,7 +1488,6 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public void OnCreateFillPath()
         {
             if (PathConverter == null)
@@ -1673,7 +1564,6 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public void OnCreateWindingPath()
         {
             if (PathConverter == null)
@@ -1750,7 +1640,6 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public void OnPathSimplify()
         {
             if (PathConverter == null)
@@ -1821,7 +1710,6 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public void OnPathBreak()
         {
             if (PathConverter == null)
@@ -1871,7 +1759,6 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public void OnPathOp(string op)
         {
             if (!Enum.TryParse<PathOp>(op, true, out var pathOp))
@@ -1917,28 +1804,24 @@ namespace Core2D.Editor
             Select(layer, path);
         }
 
-        /// <inheritdoc/>
         public void OnToolNone()
         {
             CurrentTool?.Reset();
             CurrentTool = Tools.FirstOrDefault(t => t.Title == "None");
         }
 
-        /// <inheritdoc/>
         public void OnToolSelection()
         {
             CurrentTool?.Reset();
             CurrentTool = Tools.FirstOrDefault(t => t.Title == "Selection");
         }
 
-        /// <inheritdoc/>
         public void OnToolPoint()
         {
             CurrentTool?.Reset();
             CurrentTool = Tools.FirstOrDefault(t => t.Title == "Point");
         }
 
-        /// <inheritdoc/>
         public void OnToolLine()
         {
             if (CurrentTool.Title == "Path" && CurrentPathTool.Title != "Line")
@@ -1953,7 +1836,6 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public void OnToolArc()
         {
             if (CurrentTool.Title == "Path" && CurrentPathTool.Title != "Arc")
@@ -1968,7 +1850,6 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public void OnToolCubicBezier()
         {
             if (CurrentTool.Title == "Path" && CurrentPathTool.Title != "CubicBezier")
@@ -1983,7 +1864,6 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public void OnToolQuadraticBezier()
         {
             if (CurrentTool.Title == "Path" && CurrentPathTool.Title != "QuadraticBezier")
@@ -1998,42 +1878,36 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public void OnToolPath()
         {
             CurrentTool?.Reset();
             CurrentTool = Tools.FirstOrDefault(t => t.Title == "Path");
         }
 
-        /// <inheritdoc/>
         public void OnToolRectangle()
         {
             CurrentTool?.Reset();
             CurrentTool = Tools.FirstOrDefault(t => t.Title == "Rectangle");
         }
 
-        /// <inheritdoc/>
         public void OnToolEllipse()
         {
             CurrentTool?.Reset();
             CurrentTool = Tools.FirstOrDefault(t => t.Title == "Ellipse");
         }
 
-        /// <inheritdoc/>
         public void OnToolText()
         {
             CurrentTool?.Reset();
             CurrentTool = Tools.FirstOrDefault(t => t.Title == "Text");
         }
 
-        /// <inheritdoc/>
         public void OnToolImage()
         {
             CurrentTool?.Reset();
             CurrentTool = Tools.FirstOrDefault(t => t.Title == "Image");
         }
 
-        /// <inheritdoc/>
         public void OnToolMove()
         {
             if (CurrentTool.Title == "Path" && CurrentPathTool.Title != "Move")
@@ -2043,13 +1917,11 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public void OnResetTool()
         {
             CurrentTool?.Reset();
         }
 
-        /// <inheritdoc/>
         public void OnToggleDefaultIsStroked()
         {
             if (Project?.Options != null)
@@ -2058,7 +1930,6 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public void OnToggleDefaultIsFilled()
         {
             if (Project?.Options != null)
@@ -2067,7 +1938,6 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public void OnToggleDefaultIsClosed()
         {
             if (Project?.Options != null)
@@ -2076,7 +1946,6 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public void OnToggleSnapToGrid()
         {
             if (Project?.Options != null)
@@ -2085,7 +1954,6 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public void OnToggleTryToConnect()
         {
             if (Project?.Options != null)
@@ -2094,7 +1962,6 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public void OnAddDatabase()
         {
             var db = Factory.CreateDatabase(ProjectEditorConfiguration.DefaultDatabaseName);
@@ -2102,44 +1969,37 @@ namespace Core2D.Editor
             Project.SetCurrentDatabase(db);
         }
 
-        /// <inheritdoc/>
         public void OnRemoveDatabase(Database db)
         {
             Project.RemoveDatabase(db);
             Project.SetCurrentDatabase(Project.Databases.FirstOrDefault());
         }
 
-        /// <inheritdoc/>
         public void OnAddColumn(Database db)
         {
             Project.AddColumn(db, Factory.CreateColumn(db, ProjectEditorConfiguration.DefaulColumnName));
         }
 
-        /// <inheritdoc/>
         public void OnRemoveColumn(Column column)
         {
             Project.RemoveColumn(column);
         }
 
-        /// <inheritdoc/>
         public void OnAddRecord(Database db)
         {
             Project.AddRecord(db, Factory.CreateRecord(db, ProjectEditorConfiguration.DefaulValue));
         }
 
-        /// <inheritdoc/>
         public void OnRemoveRecord(Record record)
         {
             Project.RemoveRecord(record);
         }
 
-        /// <inheritdoc/>
         public void OnResetRecord(Context data)
         {
             Project.ResetRecord(data);
         }
 
-        /// <inheritdoc/>
         public void OnApplyRecord(Record record)
         {
             if (record != null)
@@ -2163,19 +2023,16 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public void OnAddProperty(Context data)
         {
             Project.AddProperty(data, Factory.CreateProperty(data, ProjectEditorConfiguration.DefaulPropertyName, ProjectEditorConfiguration.DefaulValue));
         }
 
-        /// <inheritdoc/>
         public void OnRemoveProperty(Property property)
         {
             Project.RemoveProperty(property);
         }
 
-        /// <inheritdoc/>
         public void OnAddGroupLibrary()
         {
             var gl = Factory.CreateLibrary<GroupShape>(ProjectEditorConfiguration.DefaulGroupLibraryName);
@@ -2183,14 +2040,12 @@ namespace Core2D.Editor
             Project.SetCurrentGroupLibrary(gl);
         }
 
-        /// <inheritdoc/>
         public void OnRemoveGroupLibrary(Library<GroupShape> library)
         {
             Project.RemoveGroupLibrary(library);
             Project.SetCurrentGroupLibrary(Project?.GroupLibraries.FirstOrDefault());
         }
 
-        /// <inheritdoc/>
         public void OnAddGroup(Library<GroupShape> library)
         {
             if (Project != null && library != null)
@@ -2206,7 +2061,6 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public void OnRemoveGroup(GroupShape group)
         {
             if (Project != null && group != null)
@@ -2216,7 +2070,6 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public void OnInsertGroup(GroupShape group)
         {
             if (Project?.CurrentContainer != null)
@@ -2225,7 +2078,6 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public void OnAddLayer(PageContainer container)
         {
             if (container != null)
@@ -2234,7 +2086,6 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public void OnRemoveLayer(LayerContainer layer)
         {
             if (layer != null)
@@ -2247,7 +2098,6 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public void OnAddStyleLibrary()
         {
             var sl = Factory.CreateLibrary<ShapeStyle>(ProjectEditorConfiguration.DefaulStyleLibraryName);
@@ -2255,14 +2105,12 @@ namespace Core2D.Editor
             Project.SetCurrentStyleLibrary(sl);
         }
 
-        /// <inheritdoc/>
         public void OnRemoveStyleLibrary(Library<ShapeStyle> library)
         {
             Project.RemoveStyleLibrary(library);
             Project.SetCurrentStyleLibrary(Project?.StyleLibraries.FirstOrDefault());
         }
 
-        /// <inheritdoc/>
         public void OnAddStyle(Library<ShapeStyle> library)
         {
             if (PageState?.SelectedShapes != null)
@@ -2283,14 +2131,12 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public void OnRemoveStyle(ShapeStyle style)
         {
             var library = Project.RemoveStyle(style);
             library?.SetSelected(library?.Items.FirstOrDefault());
         }
 
-        /// <inheritdoc/>
         public void OnApplyStyle(ShapeStyle style)
         {
             if (style != null)
@@ -2305,7 +2151,6 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public void OnApplyData(Context data)
         {
             if (data != null)
@@ -2320,7 +2165,6 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public void OnAddShape(BaseShape shape)
         {
             var layer = Project?.CurrentContainer?.CurrentLayer;
@@ -2330,7 +2174,6 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public void OnRemoveShape(BaseShape shape)
         {
             var layer = Project?.CurrentContainer?.CurrentLayer;
@@ -2341,7 +2184,6 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public void OnAddTemplate()
         {
             if (Project != null)
@@ -2356,7 +2198,6 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public void OnRemoveTemplate(PageContainer template)
         {
             if (template != null)
@@ -2366,7 +2207,6 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public void OnEditTemplate(PageContainer template)
         {
             if (Project != null && template != null)
@@ -2376,7 +2216,6 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public void OnAddScript()
         {
             if (Project != null)
@@ -2386,7 +2225,6 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public void OnRemoveScript(Script script)
         {
             if (script != null)
@@ -2396,7 +2234,6 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public void OnApplyTemplate(PageContainer template)
         {
             var page = Project?.CurrentContainer;
@@ -2407,7 +2244,6 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public string OnGetImageKey(string path)
         {
             using var stream = FileIO.Open(path);
@@ -2420,7 +2256,6 @@ namespace Core2D.Editor
             return default;
         }
 
-        /// <inheritdoc/>
         public async Task<string> OnAddImageKey(string path)
         {
             if (Project != null)
@@ -2454,7 +2289,6 @@ namespace Core2D.Editor
             return null;
         }
 
-        /// <inheritdoc/>
         public void OnRemoveImageKey(string key)
         {
             if (key != null)
@@ -2466,7 +2300,6 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public void OnSelectedItemChanged(ObservableObject item)
         {
             if (Project != null)
@@ -2475,7 +2308,6 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public void OnAddPage(object item)
         {
             if (Project?.CurrentDocument != null)
@@ -2489,7 +2321,6 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public void OnInsertPageBefore(object item)
         {
             if (Project?.CurrentDocument != null)
@@ -2507,7 +2338,6 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public void OnInsertPageAfter(object item)
         {
             if (Project?.CurrentDocument != null)
@@ -2525,7 +2355,6 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public void OnAddDocument(object item)
         {
             if (Project != null)
@@ -2540,7 +2369,6 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public void OnInsertDocumentBefore(object item)
         {
             if (Project != null)
@@ -2559,7 +2387,6 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public void OnInsertDocumentAfter(object item)
         {
             if (Project != null)
@@ -2578,7 +2405,6 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         private void SetRenderersImageCache(IImageCache cache)
         {
             if (PageRenderer != null)
@@ -2594,7 +2420,6 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public void OnLoad(ProjectContainer project, string path = null)
         {
             if (project != null)
@@ -2612,7 +2437,6 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public void OnUnload()
         {
             if (Observer != null)
@@ -2642,7 +2466,6 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public void OnInvalidateCache()
         {
             try
@@ -2663,7 +2486,6 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public void OnAddRecent(string path, string name)
         {
             if (_recentProjects != null)
@@ -2686,7 +2508,6 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public void OnLoadRecent(string path)
         {
             if (JsonSerializer != null)
@@ -2725,7 +2546,6 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public void OnSaveRecent(string path)
         {
             if (JsonSerializer != null)
@@ -2743,25 +2563,21 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public bool CanUndo()
         {
             return Project?.History?.CanUndo() ?? false;
         }
 
-        /// <inheritdoc/>
         public bool CanRedo()
         {
             return Project?.History?.CanRedo() ?? false;
         }
 
-        /// <inheritdoc/>
         public bool CanCopy()
         {
             return PageState?.SelectedShapes != null;
         }
 
-        /// <inheritdoc/>
         public async Task<bool> CanPaste()
         {
             try
@@ -2775,7 +2591,6 @@ namespace Core2D.Editor
             return false;
         }
 
-        /// <inheritdoc/>
         public void OnCopyShapes(IList<BaseShape> shapes)
         {
             try
@@ -2792,7 +2607,6 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public void OnTryPaste(string text)
         {
             try
@@ -2838,10 +2652,6 @@ namespace Core2D.Editor
             }
         }
 
-        /// <summary>
-        /// Generates record dictionary with id as the key.
-        /// </summary>
-        /// <returns>The record dictionary with id as the key.</returns>
         private IDictionary<string, Record> GenerateRecordDictionaryById()
         {
             return Project?.Databases
@@ -2850,10 +2660,6 @@ namespace Core2D.Editor
                 .ToDictionary(s => s.Id);
         }
 
-        /// <summary>
-        /// Try to restore shape records.
-        /// </summary>
-        /// <param name="shapes">The shapes collection.</param>
         private void TryToRestoreRecords(IEnumerable<BaseShape> shapes)
         {
             try
@@ -2905,17 +2711,12 @@ namespace Core2D.Editor
             }
         }
 
-        /// <summary>
-        /// Restore shape project references afer closing.
-        /// </summary>
-        /// <param name="shape">The shape to restore.</param>
         private void RestoreShape(BaseShape shape)
         {
             var shapes = Enumerable.Repeat(shape, 1).ToList();
             TryToRestoreRecords(shapes);
         }
 
-        /// <inheritdoc/>
         public void OnPasteShapes(IEnumerable<BaseShape> shapes)
         {
             try
@@ -2931,7 +2732,6 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public void OnSelect(IEnumerable<BaseShape> shapes)
         {
             if (shapes?.Count() == 1)
@@ -2944,7 +2744,6 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public T CloneShape<T>(T shape) where T : BaseShape
         {
             try
@@ -2971,7 +2770,6 @@ namespace Core2D.Editor
             return default;
         }
 
-        /// <inheritdoc/>
         public LayerContainer Clone(LayerContainer container)
         {
             try
@@ -2996,7 +2794,6 @@ namespace Core2D.Editor
             return default;
         }
 
-        /// <inheritdoc/>
         public PageContainer Clone(PageContainer container)
         {
             try
@@ -3023,7 +2820,6 @@ namespace Core2D.Editor
             return default;
         }
 
-        /// <inheritdoc/>
         public DocumentContainer Clone(DocumentContainer document)
         {
             try
@@ -3054,7 +2850,6 @@ namespace Core2D.Editor
             return default;
         }
 
-        /// <inheritdoc/>
         public async Task<bool> OnDropFiles(string[] files, double x, double y)
         {
             try
@@ -3134,7 +2929,6 @@ namespace Core2D.Editor
             return false;
         }
 
-        /// <inheritdoc/>
         public void OnDropImageKey(string key, double x, double y)
         {
             var selected = Project.CurrentStyleLibrary?.Selected != null ?
@@ -3152,7 +2946,6 @@ namespace Core2D.Editor
             Project.AddShape(layer, image);
         }
 
-        /// <inheritdoc/>
         public bool OnDropShape(BaseShape shape, double x, double y, bool bExecute = true)
         {
             try
@@ -3174,7 +2967,6 @@ namespace Core2D.Editor
             return false;
         }
 
-        /// <inheritdoc/>
         public void OnDropShapeAsClone<T>(T shape, double x, double y) where T : BaseShape
         {
             decimal sx = Project.Options.SnapToGrid ? PointUtil.Snap((decimal)x, (decimal)Project.Options.SnapX) : (decimal)x;
@@ -3208,7 +3000,6 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public bool OnDropRecord(Record record, double x, double y, bool bExecute = true)
         {
             try
@@ -3255,7 +3046,6 @@ namespace Core2D.Editor
             return false;
         }
 
-        /// <inheritdoc/>
         public void OnDropRecordAsGroup(Record record, double x, double y)
         {
             var selected = Project.CurrentStyleLibrary?.Selected != null ?
@@ -3306,7 +3096,6 @@ namespace Core2D.Editor
             Project.AddShape(layer, g);
         }
 
-        /// <inheritdoc/>
         public bool OnDropStyle(ShapeStyle style, double x, double y, bool bExecute = true)
         {
             try
@@ -3345,7 +3134,6 @@ namespace Core2D.Editor
             return false;
         }
 
-        /// <inheritdoc/>
         public bool OnDropTemplate(PageContainer template, double x, double y, bool bExecute = true)
         {
             try
@@ -3367,7 +3155,6 @@ namespace Core2D.Editor
             return false;
         }
 
-        /// <inheritdoc/>
         public void OnDeleteSelected()
         {
             if (Project?.CurrentContainer?.CurrentLayer == null || PageState == null)
@@ -3397,7 +3184,6 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public void Deselect()
         {
             if (PageState?.SelectedShapes != null)
@@ -3408,7 +3194,6 @@ namespace Core2D.Editor
             OnHideDecorator();
         }
 
-        /// <inheritdoc/>
         public void Select(LayerContainer layer, BaseShape shape)
         {
             if (PageState != null)
@@ -3447,7 +3232,6 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public void Select(LayerContainer layer, ISet<BaseShape> shapes)
         {
             if (PageState != null)
@@ -3472,7 +3256,6 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public void Deselect(LayerContainer layer)
         {
             Deselect();
@@ -3495,7 +3278,6 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public bool TryToSelectShape(LayerContainer layer, double x, double y, bool deselect = true)
         {
             if (layer != null)
@@ -3526,7 +3308,6 @@ namespace Core2D.Editor
             return false;
         }
 
-        /// <inheritdoc/>
         public bool TryToSelectShapes(LayerContainer layer, RectangleShape rectangle, bool deselect = true, bool includeSelected = false)
         {
             if (layer != null)
@@ -3600,7 +3381,6 @@ namespace Core2D.Editor
             return false;
         }
 
-        /// <inheritdoc/>
         public void Hover(LayerContainer layer, BaseShape shape)
         {
             if (layer != null)
@@ -3610,7 +3390,6 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public void Dehover(LayerContainer layer)
         {
             if (layer != null && HoveredShape != null)
@@ -3620,7 +3399,6 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public bool TryToHoverShape(double x, double y)
         {
             if (Project?.CurrentContainer?.CurrentLayer == null)
@@ -3665,7 +3443,6 @@ namespace Core2D.Editor
             return false;
         }
 
-        /// <inheritdoc/>
         public PointShape TryToGetConnectionPoint(double x, double y)
         {
             if (Project.Options.TryToConnect)
@@ -3699,7 +3476,6 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public bool TryToSplitLine(double x, double y, PointShape point, bool select = false)
         {
             if (Project?.CurrentContainer == null || Project?.Options == null)
@@ -3757,7 +3533,6 @@ namespace Core2D.Editor
             return false;
         }
 
-        /// <inheritdoc/>
         public bool TryToSplitLine(LineShape line, PointShape p0, PointShape p1)
         {
             if (Project?.Options == null)
@@ -3804,7 +3579,6 @@ namespace Core2D.Editor
             return true;
         }
 
-        /// <inheritdoc/>
         public bool TryToConnectLines(IEnumerable<LineShape> lines, ImmutableArray<PointShape> connectors)
         {
             if (connectors.Length > 0)
@@ -3929,7 +3703,6 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public GroupShape Group(ISet<BaseShape> shapes, string name)
         {
             var layer = Project?.CurrentContainer?.CurrentLayer;
@@ -3941,7 +3714,6 @@ namespace Core2D.Editor
             return null;
         }
 
-        /// <inheritdoc/>
         public bool Ungroup(ISet<BaseShape> shapes)
         {
             var layer = Project?.CurrentContainer?.CurrentLayer;
@@ -3954,7 +3726,6 @@ namespace Core2D.Editor
             return false;
         }
 
-        /// <inheritdoc/>
         private void Swap(BaseShape shape, int sourceIndex, int targetIndex)
         {
             var layer = Project?.CurrentContainer?.CurrentLayer;
@@ -3974,7 +3745,6 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public void BringToFront(BaseShape source)
         {
             var layer = Project?.CurrentContainer?.CurrentLayer;
@@ -3990,7 +3760,6 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public void BringForward(BaseShape source)
         {
             var layer = Project?.CurrentContainer?.CurrentLayer;
@@ -4006,7 +3775,6 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public void SendBackward(BaseShape source)
         {
             var layer = Project?.CurrentContainer?.CurrentLayer;
@@ -4022,7 +3790,6 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public void SendToBack(BaseShape source)
         {
             var layer = Project?.CurrentContainer?.CurrentLayer;
@@ -4038,7 +3805,6 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public void MoveShapesBy(IEnumerable<BaseShape> shapes, decimal dx, decimal dy)
         {
             foreach (var shape in shapes)
@@ -4061,7 +3827,6 @@ namespace Core2D.Editor
             Project?.History?.Snapshot(previous, next, (s) => MoveShapesBy(s.Shapes, s.DeltaX, s.DeltaY));
         }
 
-        /// <inheritdoc/>
         public void MoveBy(ISet<BaseShape> shapes, decimal dx, decimal dy)
         {
             if (shapes != null)
@@ -4095,7 +3860,6 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public void MoveItem<T>(Library<T> library, int sourceIndex, int targetIndex)
         {
             if (sourceIndex < targetIndex)
@@ -4128,7 +3892,6 @@ namespace Core2D.Editor
             }
         }
 
-        /// <inheritdoc/>
         public void SwapItem<T>(Library<T> library, int sourceIndex, int targetIndex)
         {
             var item1 = library.Items[sourceIndex];
@@ -4143,7 +3906,6 @@ namespace Core2D.Editor
             library.Items = next;
         }
 
-        /// <inheritdoc/>
         public void InsertItem<T>(Library<T> library, T item, int index)
         {
             var builder = library.Items.ToBuilder();

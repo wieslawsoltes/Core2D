@@ -2,12 +2,8 @@
 
 namespace Core2D.Renderer.Presenters
 {
-    /// <summary>
-    /// Export container presenter.
-    /// </summary>
     public class ExportPresenter : IContainerPresenter
     {
-        /// <inheritdoc/>
         public void Render(object dc, IShapeRenderer renderer, PageContainer container, double dx, double dy)
         {
             var flags = renderer.State.DrawShapeState.Flags;

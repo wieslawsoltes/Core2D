@@ -27,9 +27,6 @@ namespace Core2D.Input
         }
     }
 
-    /// <summary>
-    /// Provides mouse input for target object.
-    /// </summary>
     public class InputProcessor : IDisposable
     {
         private IDisposable _leftDownDisposable = null;
@@ -133,11 +130,6 @@ namespace Core2D.Input
             disposable?.Dispose();
         }
 
-        /// <summary>
-        /// Connects source and target inputs.
-        /// </summary>
-        /// <param name="source">The input source.</param>
-        /// <param name="target">The input target.</param>
         public void Connect(IInputSource source, IInputTarget target)
         {
             _leftDownDisposable = ConnectLeftDown(source, target);
@@ -147,9 +139,6 @@ namespace Core2D.Input
             _moveDisposable = ConnectMove(source, target);
         }
 
-        /// <summary>
-        /// Disconnects source and target inputs.
-        /// </summary>
         public void Disconnect()
         {
             DisconnectLeftDown(_leftDownDisposable);
@@ -159,9 +148,6 @@ namespace Core2D.Input
             DisconnectMove(_moveDisposable);
         }
 
-        /// <summary>
-        /// Dispose resources.
-        /// </summary>
         public void Dispose()
         {
             Disconnect();
