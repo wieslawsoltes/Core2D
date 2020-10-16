@@ -14,27 +14,35 @@ namespace Core2D
         private ObservableObject _owner = null;
         private string _name = "";
 
-        /// <inheritdoc/>
+        /// <summary>
+        /// Gets or sets object owner.
+        /// </summary>
         public virtual ObservableObject Owner
         {
             get => _owner;
             set => Update(ref _owner, value);
         }
 
-        /// <inheritdoc/>
+        /// <summary>
+        /// Gets or sets observable object name.
+        /// </summary>
         public virtual string Name
         {
             get => _name;
             set => Update(ref _name, value);
         }
 
-        /// <inheritdoc/>
+        /// <summary>
+        /// Gets is dirty flag.
+        /// </summary>
         public virtual bool IsDirty()
         {
             return _isDirty;
         }
 
-        /// <inheritdoc/>
+        /// <summary>
+        /// Invalidates dirty flag.
+        /// </summary>
         public virtual void Invalidate()
         {
             _isDirty = false;
@@ -45,16 +53,30 @@ namespace Core2D
         /// </summary>
         public event PropertyChangedEventHandler PropertyChanged;
 
-        /// <inheritdoc/>
+        /// <summary>
+        /// Copies the object.
+        /// </summary>
+        /// <param name="shared">The shared objects dictionary.</param>
+        /// <returns>The copy of the object.</returns>
         public abstract object Copy(IDictionary<object, object> shared);
 
-        /// <inheritdoc/>
+        /// <summary>
+        /// Notify observers about property changes.
+        /// </summary>
+        /// <param name="propertyName">The property name that changed.</param>
         public void Notify([CallerMemberName] string propertyName = default)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        /// <inheritdoc/>
+        /// <summary>
+        /// Update property backing field and notify observers about property change.
+        /// </summary>
+        /// <typeparam name="T">The type of field.</typeparam>
+        /// <param name="field">The field to update.</param>
+        /// <param name="value">The new field value.</param>
+        /// <param name="propertyName">The property name that changed.</param>
+        /// <returns>True if backing field value changed.</returns>
         public bool Update<T>(ref T field, T value, [CallerMemberName] string propertyName = default)
         {
             if (!Equals(field, value))

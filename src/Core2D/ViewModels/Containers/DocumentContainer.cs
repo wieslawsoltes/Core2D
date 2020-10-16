@@ -12,14 +12,18 @@ namespace Core2D.Containers
         private bool _isExpanded = true;
         private ImmutableArray<PageContainer> _pages;
 
-        /// <inheritdoc/>
+        /// <summary>
+        /// Gets or sets flag indicating whether document is expanded.
+        /// </summary>
         public bool IsExpanded
         {
             get => _isExpanded;
             set => Update(ref _isExpanded, value);
         }
 
-        /// <inheritdoc/>
+        /// <summary>
+        /// Gets or sets document pages.
+        /// </summary>
         public ImmutableArray<PageContainer> Pages
         {
             get => _pages;
