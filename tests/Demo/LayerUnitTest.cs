@@ -13,8 +13,8 @@ namespace Demo
     {
         private string _name;
 
-        public string Name 
-        { 
+        public string Name
+        {
             get => _name;
             set => this.RaiseAndSetIfChanged(ref _name, value);
         }
@@ -41,7 +41,7 @@ namespace Demo
 
             var propertyChanges = new Stack<(Action, Item, object)>();
 
-            layer.Items.Connect().Subscribe((IChangeSet<Item> x) => 
+            layer.Items.Connect().Subscribe((IChangeSet<Item> x) =>
             {
                 changes.Push(x);
                 Console.WriteLine($"Changes: {x}");
@@ -51,22 +51,29 @@ namespace Demo
                     {
                         case ListChangeReason.Add:
                             break;
+
                         case ListChangeReason.AddRange:
                             break;
+
                         case ListChangeReason.Replace:
                             break;
+
                         case ListChangeReason.Remove:
                             break;
+
                         case ListChangeReason.RemoveRange:
                             break;
+
                         case ListChangeReason.Refresh:
                             break;
+
                         case ListChangeReason.Moved:
                             break;
+
                         case ListChangeReason.Clear:
                             break;
                     }
-                    Console.WriteLine($"  Change: {y}");
+                    Console.WriteLine($"  Change: {y.Reason} {y}");
                 }
             });
 
