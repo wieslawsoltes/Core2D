@@ -12,21 +12,28 @@ namespace Core2D.Containers
         private ImmutableArray<T> _items;
         private T _selected;
 
-        /// <inheritdoc/>
+        /// <summary>
+        /// Gets or sets a items collection.
+        /// </summary>
         public ImmutableArray<T> Items
         {
             get => _items;
             set => RaiseAndSetIfChanged(ref _items, value);
         }
 
-        /// <inheritdoc/>
+        /// <summary>
+        /// Gets or sets currently selected item from <see cref="Items"/> collection.
+        /// </summary>
         public T Selected
         {
             get => _selected;
             set => RaiseAndSetIfChanged(ref _selected, value);
         }
 
-        /// <inheritdoc/>
+        /// <summary>
+        /// Set selected.
+        /// </summary>
+        /// <param name="item">The item instance.</param>
         public void SetSelected(T item) => Selected = item;
 
         /// <inheritdoc/>

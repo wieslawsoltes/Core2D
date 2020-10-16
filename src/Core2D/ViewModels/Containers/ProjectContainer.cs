@@ -32,112 +32,144 @@ namespace Core2D.Containers
         private PageContainer _currentContainer;
         private ObservableObject _selected;
 
-        /// <inheritdoc/>
+        /// <summary>
+        /// Gets or sets project options.
+        /// </summary>
         public Options Options
         {
             get => _options;
             set => RaiseAndSetIfChanged(ref _options, value);
         }
 
-        /// <inheritdoc/>
+        /// <summary>
+        /// Gets or sets undo/redo history handler.
+        /// </summary>
         public IHistory History
         {
             get => _history;
             set => RaiseAndSetIfChanged(ref _history, value);
         }
 
-        /// <inheritdoc/>
+        /// <summary>
+        /// Gets or sets project style libraries.
+        /// </summary>
         public ImmutableArray<Library<ShapeStyle>> StyleLibraries
         {
             get => _styleLibraries;
             set => RaiseAndSetIfChanged(ref _styleLibraries, value);
         }
 
-        /// <inheritdoc/>
+        /// <summary>
+        /// Gets or sets project group libraries.
+        /// </summary>
         public ImmutableArray<Library<GroupShape>> GroupLibraries
         {
             get => _groupLibraries;
             set => RaiseAndSetIfChanged(ref _groupLibraries, value);
         }
 
-        /// <inheritdoc/>
+        /// <summary>
+        /// Gets or sets project databases.
+        /// </summary>
         public ImmutableArray<Database> Databases
         {
             get => _databases;
             set => RaiseAndSetIfChanged(ref _databases, value);
         }
 
-        /// <inheritdoc/>
+        /// <summary>
+        /// Gets or sets project templates.
+        /// </summary>
         public ImmutableArray<PageContainer> Templates
         {
             get => _templates;
             set => RaiseAndSetIfChanged(ref _templates, value);
         }
 
-        /// <inheritdoc/>
+        /// <summary>
+        /// Gets or sets project scripts.
+        /// </summary>
         public ImmutableArray<Script> Scripts
         {
             get => _scripts;
             set => RaiseAndSetIfChanged(ref _scripts, value);
         }
 
-        /// <inheritdoc/>
+        /// <summary>
+        /// Gets or sets project documents.
+        /// </summary>
         public ImmutableArray<DocumentContainer> Documents
         {
             get => _documents;
             set => RaiseAndSetIfChanged(ref _documents, value);
         }
 
-        /// <inheritdoc/>
+        /// <summary>
+        /// Gets or sets project current style library.
+        /// </summary>
         public Library<ShapeStyle> CurrentStyleLibrary
         {
             get => _currentStyleLibrary;
             set => RaiseAndSetIfChanged(ref _currentStyleLibrary, value);
         }
 
-        /// <inheritdoc/>
+        /// <summary>
+        /// Gets or sets project current group library.
+        /// </summary>
         public Library<GroupShape> CurrentGroupLibrary
         {
             get => _currentGroupLibrary;
             set => RaiseAndSetIfChanged(ref _currentGroupLibrary, value);
         }
 
-        /// <inheritdoc/>
+        /// <summary>
+        /// Gets or sets project current database.
+        /// </summary>
         public Database CurrentDatabase
         {
             get => _currentDatabase;
             set => RaiseAndSetIfChanged(ref _currentDatabase, value);
         }
 
-        /// <inheritdoc/>
+        /// <summary>
+        /// Gets or sets project current template.
+        /// </summary>
         public PageContainer CurrentTemplate
         {
             get => _currentTemplate;
             set => RaiseAndSetIfChanged(ref _currentTemplate, value);
         }
 
-        /// <inheritdoc/>
+        /// <summary>
+        /// Gets or sets project current script.
+        /// </summary>
         public Script CurrentScript
         {
             get => _currentScript;
             set => RaiseAndSetIfChanged(ref _currentScript, value);
         }
 
-        /// <inheritdoc/>
+        /// <summary>
+        /// Gets or sets project current document.
+        /// </summary>
         public DocumentContainer CurrentDocument
         {
             get => _currentDocument;
             set => RaiseAndSetIfChanged(ref _currentDocument, value);
         }
 
-        /// <inheritdoc/>
+        /// <summary>
+        /// Gets or sets project current container.
+        /// </summary>
         public PageContainer CurrentContainer
         {
             get => _currentContainer;
             set => RaiseAndSetIfChanged(ref _currentContainer, value);
         }
 
-        /// <inheritdoc/>
+        /// <summary>
+        /// Gets or sets currently selected object.
+        /// </summary>
         public ObservableObject Selected
         {
             get => _selected;
@@ -205,36 +237,60 @@ namespace Core2D.Containers
             return GetAllShapes(shapes)?.Where(s => s is T).Cast<T>();
         }
 
-        /// <inheritdoc/>
+        /// <summary>
+        /// Set current document.
+        /// </summary>
+        /// <param name="document">The document instance.</param>
         public void SetCurrentDocument(DocumentContainer document)
         {
             CurrentDocument = document;
             Selected = document;
         }
 
-        /// <inheritdoc/>
+        /// <summary>
+        /// Set current container.
+        /// </summary>
+        /// <param name="container">The container instance.</param>
         public void SetCurrentContainer(PageContainer container)
         {
             CurrentContainer = container;
             Selected = container;
         }
 
-        /// <inheritdoc/>
+        /// <summary>
+        /// Set current template.
+        /// </summary>
+        /// <param name="template">The template instance.</param>
         public void SetCurrentTemplate(PageContainer template) => CurrentTemplate = template;
 
-        /// <inheritdoc/>
+        /// <summary>
+        /// Set current script.
+        /// </summary>
+        /// <param name="script">The script instance.</param>
         public void SetCurrentScript(Script script) => CurrentScript = script;
 
-        /// <inheritdoc/>
+        /// <summary>
+        /// Set current database.
+        /// </summary>
+        /// <param name="db">The database instance.</param>
         public void SetCurrentDatabase(Database db) => CurrentDatabase = db;
 
-        /// <inheritdoc/>
+        /// <summary>
+        /// Set current group library.
+        /// </summary>
+        /// <param name="library">The group library instance.</param>
         public void SetCurrentGroupLibrary(Library<GroupShape> library) => CurrentGroupLibrary = library;
 
-        /// <inheritdoc/>
+        /// <summary>
+        /// Set current group.
+        /// </summary>
+        /// <param name="library">The style library instance.</param>
         public void SetCurrentStyleLibrary(Library<ShapeStyle> library) => CurrentStyleLibrary = library;
 
-        /// <inheritdoc/>
+        /// <summary>
+        /// Set selected value.
+        /// </summary>
+        /// <param name="value">The value instance.</param>
         public void SetSelected(ObservableObject value)
         {
             if (value is LayerContainer layer)

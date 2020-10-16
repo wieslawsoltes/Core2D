@@ -35,7 +35,12 @@ namespace Core2D.Containers
         private BaseColor _gridStrokeColor;
         private double _gridStrokeThickness;
 
-        /// <inheritdoc/>
+        /// <summary>
+        /// Gets or sets container width.
+        /// </summary>
+        /// <remarks>
+        /// If template is not null Template.Width property is used.
+        /// </remarks>
         public double Width
         {
             get => _template != null ? _template.Width : _width;
@@ -53,7 +58,12 @@ namespace Core2D.Containers
             }
         }
 
-        /// <inheritdoc/>
+        /// <summary>
+        /// Gets or sets container height.
+        /// </summary>
+        /// <remarks>
+        /// If template is not null Template.Height property is used.
+        /// </remarks>
         public double Height
         {
             get => _template != null ? _template.Height : _height;
@@ -71,7 +81,12 @@ namespace Core2D.Containers
             }
         }
 
-        /// <inheritdoc/>
+        /// <summary>
+        /// Gets or sets container background color.
+        /// </summary>
+        /// <remarks>
+        /// If template is not null Template.Background property is used.
+        /// </remarks>
         public BaseColor Background
         {
             get => _template != null ? _template.Background : _background;
@@ -89,56 +104,72 @@ namespace Core2D.Containers
             }
         }
 
-        /// <inheritdoc/>
+        /// <summary>
+        /// Gets or sets container layers.
+        /// </summary>
         public ImmutableArray<LayerContainer> Layers
         {
             get => _layers;
             set => RaiseAndSetIfChanged(ref _layers, value);
         }
 
-        /// <inheritdoc/>
+        /// <summary>
+        /// Gets or sets current container layer.
+        /// </summary>
         public LayerContainer CurrentLayer
         {
             get => _currentLayer;
             set => RaiseAndSetIfChanged(ref _currentLayer, value);
         }
 
-        /// <inheritdoc/>
+        /// <summary>
+        /// Gets or sets working container layer.
+        /// </summary>
         public LayerContainer WorkingLayer
         {
             get => _workingLayer;
             set => RaiseAndSetIfChanged(ref _workingLayer, value);
         }
 
-        /// <inheritdoc/>
+        /// <summary>
+        /// Gets or sets helper container layer.
+        /// </summary>
         public LayerContainer HelperLayer
         {
             get => _helperLayer;
             set => RaiseAndSetIfChanged(ref _helperLayer, value);
         }
 
-        /// <inheritdoc/>
+        /// <summary>
+        /// Gets or sets current container shape.
+        /// </summary>
         public BaseShape CurrentShape
         {
             get => _currentShape;
             set => RaiseAndSetIfChanged(ref _currentShape, value);
         }
 
-        /// <inheritdoc/>
+        /// <summary>
+        /// Gets or sets container template.
+        /// </summary>
         public PageContainer Template
         {
             get => _template;
             set => RaiseAndSetIfChanged(ref _template, value);
         }
 
-        /// <inheritdoc/>
+        /// <summary>
+        /// Gets or sets container data.
+        /// </summary>
         public Context Data
         {
             get => _data;
             set => RaiseAndSetIfChanged(ref _data, value);
         }
 
-        /// <inheritdoc/>
+        /// <summary>
+        /// Gets or sets flag indicating whether container is expanded.
+        /// </summary>
         public bool IsExpanded
         {
             get => _isExpanded;
@@ -325,10 +356,15 @@ namespace Core2D.Containers
             }
         }
 
-        /// <inheritdoc/>
+        /// <summary>
+        /// Set current layer.
+        /// </summary>
+        /// <param name="layer">The layer instance.</param>
         public void SetCurrentLayer(LayerContainer layer) => CurrentLayer = layer;
 
-        /// <inheritdoc/>
+        /// <summary>
+        /// Invalidate container layers.
+        /// </summary>
         public virtual void InvalidateLayer()
         {
             if (Template != null)
