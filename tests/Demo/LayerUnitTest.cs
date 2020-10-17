@@ -6,6 +6,8 @@ using DynamicData;
 using ReactiveUI;
 using Xunit;
 using System.Collections.ObjectModel;
+using DynamicData.Binding;
+using System.Diagnostics;
 
 namespace Demo
 {
@@ -27,7 +29,7 @@ namespace Demo
 
     public class Layer : Item
     {
-        public SourceList<Item> Items { get; } = new SourceList<Item>();
+        public ObservableCollection<Item> Items { get; } = new ObservableCollection<Item>();
     }
 
     public class LayerUnitTest
@@ -41,13 +43,15 @@ namespace Demo
 
             var propertyChanges = new Stack<(Action, Item, object)>();
 
-            layer.Items.Connect().Subscribe((IChangeSet<Item> x) =>
+            var observableItems = layer.Items.ToObservableChangeSet().AsObservableList();
+
+            observableItems.Connect().Subscribe((IChangeSet<Item> changeSet) =>
             {
-                changes.Push(x);
-                Console.WriteLine($"Changes: {x}");
-                foreach (Change<Item> y in x)
+                changes.Push(changeSet);
+                Console.WriteLine($"Changes: {changeSet}");
+                foreach (Change<Item> change in changeSet)
                 {
-                    switch (y.Reason)
+                    switch (change.Reason)
                     {
                         case ListChangeReason.Add:
                             break;
@@ -73,16 +77,18 @@ namespace Demo
                         case ListChangeReason.Clear:
                             break;
                     }
-                    Console.WriteLine($"  Change: {y.Reason} {y}");
+                    Console.WriteLine($"  Change: {change.Reason} {change}");
                 }
             });
 
-            layer.Items.Connect().WhenPropertyChanged((Item x) => x.Name).Subscribe(x =>
+            observableItems.Connect().WhenPropertyChanged((Item x) => x.Name).Subscribe(x =>
             {
                 var item = x.Sender;
                 var value = x.Value;
                 propertyChanges.Push((() => item.Name = value, item, value));
             });
+
+
 
             var item0 = new Item() { Name = "Item0" };
             var item1 = new Item() { Name = "Item1" };
@@ -91,15 +97,21 @@ namespace Demo
             layer.Items.RemoveAt(0);
             layer.Items.Add(item1);
 
+
+
             foreach (var change in propertyChanges)
             {
                 Console.WriteLine($"propertyChange: {change.Item3}");
             }
 
+
+
             item0.WhenAnyValue(x => x.Name).Skip(1).Subscribe(x => Console.WriteLine($"item0.Name = {x}"));
             item0.Name = "Item0-0";
             item0.Name = "Item0-1";
             item0.Name = "Item0-2";
+
+
         }
     }
 }
