@@ -88,30 +88,27 @@ namespace Demo
                 propertyChanges.Push((() => item.Name = value, item, value));
             });
 
-
-
             var item0 = new Item() { Name = "Item0" };
             var item1 = new Item() { Name = "Item1" };
 
             layer.Items.Add(item0);
             layer.Items.RemoveAt(0);
             layer.Items.Add(item1);
-
-
+            //layer.Items.Insert(0, item0);
+            //layer.Items[0] = item0;
 
             foreach (var change in propertyChanges)
             {
                 Console.WriteLine($"propertyChange: {change.Item3}");
             }
 
-
-
-            item0.WhenAnyValue(x => x.Name).Skip(1).Subscribe(x => Console.WriteLine($"item0.Name = {x}"));
+            item0.WhenAnyValue(x => x.Name).Skip(0).Subscribe(x => 
+            {
+                Console.WriteLine($"item0.Name = {x}");
+            });
             item0.Name = "Item0-0";
             item0.Name = "Item0-1";
             item0.Name = "Item0-2";
-
-
         }
     }
 }
