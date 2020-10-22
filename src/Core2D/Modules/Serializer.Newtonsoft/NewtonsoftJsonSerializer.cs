@@ -24,7 +24,6 @@ namespace Core2D.Serializer.Newtonsoft
                 Converters =
                 {
                     new KeyValuePairConverter(),
-                    new ArgbColorJsonConverter(),
                     new FontStyleConverter(),
                     new ShapeStateConverter()
                 }
