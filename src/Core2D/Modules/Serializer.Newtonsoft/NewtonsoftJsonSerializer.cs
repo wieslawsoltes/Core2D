@@ -37,12 +37,12 @@ namespace Core2D.Serializer.Newtonsoft
 
         string IJsonSerializer.Serialize<T>(T value)
         {
-            return JsonConvert.SerializeObject(value);
+            return JsonConvert.SerializeObject(value, Settings);
         }
 
         T IJsonSerializer.Deserialize<T>(string json)
         {
-            return JsonConvert.DeserializeObject<T>(json);
+            return JsonConvert.DeserializeObject<T>(json, Settings);
         }
     }
 }
