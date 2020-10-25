@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Runtime.Serialization;
 using Core2D.Shapes;
 
 namespace Core2D.Containers
@@ -9,6 +10,7 @@ namespace Core2D.Containers
 
     public delegate void InvalidateLayerEventHandler(object sender, InvalidateLayerEventArgs e);
 
+    [DataContract(IsReference = true)]
     public class LayerContainer : BaseContainer
     {
         public event InvalidateLayerEventHandler InvalidateLayerHandler;
@@ -16,6 +18,7 @@ namespace Core2D.Containers
         private bool _isVisible = true;
         private ImmutableArray<BaseShape> _shapes;
 
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public bool IsVisible
         {
             get => _isVisible;
@@ -26,6 +29,7 @@ namespace Core2D.Containers
             }
         }
 
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public ImmutableArray<BaseShape> Shapes
         {
             get => _shapes;
@@ -60,9 +64,5 @@ namespace Core2D.Containers
                 shape.Invalidate();
             }
         }
-
-        public virtual bool ShouldSerializeIsVisible() => _isVisible != default;
-
-        public virtual bool ShouldSerializeShapes() => true;
     }
 }

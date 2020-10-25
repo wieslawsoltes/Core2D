@@ -1,21 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
-using System.Linq;
+using System.Runtime.Serialization;
 using Core2D.Data;
 using Core2D.Renderer;
 
 namespace Core2D.Shapes
 {
+    [DataContract(IsReference = true)]
     public class GroupShape : ConnectableShape
     {
         private ImmutableArray<Property> _shapesProperties;
         private ImmutableArray<BaseShape> _shapes;
 
+        [IgnoreDataMember]
         public override Type TargetType => typeof(GroupShape);
 
+        [IgnoreDataMember]
         public ImmutableArray<Property> ShapesProperties => GetShapeProperties();
 
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public ImmutableArray<BaseShape> Shapes
         {
             get => _shapes;
@@ -155,7 +159,5 @@ namespace Core2D.Shapes
                 shape.Invalidate();
             }
         }
-
-        public virtual bool ShouldSerializeShapes() => true;
     }
 }

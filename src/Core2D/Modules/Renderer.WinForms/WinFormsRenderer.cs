@@ -829,7 +829,5 @@ namespace Core2D.Renderer.WinForms
                 pen.Dispose();
             }
         }
-
-        public bool ShouldSerializeState() => _state != null;
     }
 }

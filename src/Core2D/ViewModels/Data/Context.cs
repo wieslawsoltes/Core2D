@@ -1,19 +1,23 @@
 ﻿using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Runtime.Serialization;
 
 namespace Core2D.Data
 {
+    [DataContract(IsReference = true)]
     public class Context : ObservableObject
     {
         private ImmutableArray<Property> _properties;
         private Record _record;
 
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public ImmutableArray<Property> Properties
         {
             get => _properties;
             set => RaiseAndSetIfChanged(ref _properties, value);
         }
 
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public Record Record
         {
             get => _record;
@@ -63,9 +67,5 @@ namespace Core2D.Data
                 Record.Invalidate();
             }
         }
-
-        public virtual bool ShouldSerializeProperties() => true;
-
-        public virtual bool ShouldSerializeRecord() => _record != null;
     }
 }

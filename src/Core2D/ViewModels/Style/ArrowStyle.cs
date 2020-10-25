@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
+using System.Runtime.Serialization;
 
 namespace Core2D.Style
 {
+    [DataContract(IsReference = true)]
     public class ArrowStyle : BaseStyle
     {
         private ArrowType _arrowType;
@@ -10,30 +12,35 @@ namespace Core2D.Style
         private double _radiusX;
         private double _radiusY;
 
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public ArrowType ArrowType
         {
             get => _arrowType;
             set => RaiseAndSetIfChanged(ref _arrowType, value);
         }
 
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public bool IsStroked
         {
             get => _isStroked;
             set => RaiseAndSetIfChanged(ref _isStroked, value);
         }
 
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public bool IsFilled
         {
             get => _isFilled;
             set => RaiseAndSetIfChanged(ref _isFilled, value);
         }
 
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public double RadiusX
         {
             get => _radiusX;
             set => RaiseAndSetIfChanged(ref _radiusX, value);
         }
 
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public double RadiusY
         {
             get => _radiusY;
@@ -83,15 +90,5 @@ namespace Core2D.Style
         {
             base.Invalidate();
         }
-
-        public virtual bool ShouldSerializeArrowType() => _arrowType != default;
-
-        public virtual bool ShouldSerializeIsStroked() => _isStroked != default;
-
-        public virtual bool ShouldSerializeIsFilled() => _isFilled != default;
-
-        public virtual bool ShouldSerializeRadiusX() => _radiusX != default;
-
-        public virtual bool ShouldSerializeRadiusY() => _radiusY != default;
     }
 }

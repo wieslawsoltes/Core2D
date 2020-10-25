@@ -1,23 +1,28 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 using Core2D.Data;
 using Core2D.Renderer;
 
 namespace Core2D.Shapes
 {
+    [DataContract(IsReference = true)]
     public class LineShape : BaseShape
     {
         private PointShape _start;
         private PointShape _end;
 
+        [IgnoreDataMember]
         public override Type TargetType => typeof(LineShape);
 
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public PointShape Start
         {
             get => _start;
             set => RaiseAndSetIfChanged(ref _start, value);
         }
 
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public PointShape End
         {
             get => _end;
@@ -120,9 +125,5 @@ namespace Core2D.Shapes
             Start.Invalidate();
             End.Invalidate();
         }
-
-        public virtual bool ShouldSerializeStart() => _start != null;
-
-        public virtual bool ShouldSerializeEnd() => _end != null;
     }
 }

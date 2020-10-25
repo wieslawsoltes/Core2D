@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 using Core2D.Shapes;
 using Core2D.Style;
 
 namespace Core2D.Renderer
 {
+    [DataContract(IsReference = true)]
     public class ShapeRendererState : ObservableObject
     {
         private double _panX;
@@ -23,90 +25,105 @@ namespace Core2D.Renderer
         private ShapeStyle _helperStyle;
         private IDecorator _decorator;
 
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public double PanX
         {
             get => _panX;
             set => RaiseAndSetIfChanged(ref _panX, value);
         }
 
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public double PanY
         {
             get => _panY;
             set => RaiseAndSetIfChanged(ref _panY, value);
         }
 
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public double ZoomX
         {
             get => _zoomX;
             set => RaiseAndSetIfChanged(ref _zoomX, value);
         }
 
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public double ZoomY
         {
             get => _zoomY;
             set => RaiseAndSetIfChanged(ref _zoomY, value);
         }
 
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public ShapeState DrawShapeState
         {
             get => _drawShapeState;
             set => RaiseAndSetIfChanged(ref _drawShapeState, value);
         }
 
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public ISet<BaseShape> SelectedShapes
         {
             get => _selectedShapes;
             set => RaiseAndSetIfChanged(ref _selectedShapes, value);
         }
 
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public IImageCache ImageCache
         {
             get => _imageCache;
             set => RaiseAndSetIfChanged(ref _imageCache, value);
         }
 
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public bool DrawDecorators
         {
             get => _drawDecorators;
             set => RaiseAndSetIfChanged(ref _drawDecorators, value);
         }
 
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public bool DrawPoints
         {
             get => _drawPoints;
             set => RaiseAndSetIfChanged(ref _drawPoints, value);
         }
 
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public ShapeStyle PointStyle
         {
             get => _pointStyle;
             set => RaiseAndSetIfChanged(ref _pointStyle, value);
         }
 
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public ShapeStyle SelectedPointStyle
         {
             get => _selectedPointStyle;
             set => RaiseAndSetIfChanged(ref _selectedPointStyle, value);
         }
 
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public double PointSize
         {
             get => _pointSize;
             set => RaiseAndSetIfChanged(ref _pointSize, value);
         }
 
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public ShapeStyle SelectionStyle
         {
             get => _selectionStyle;
             set => RaiseAndSetIfChanged(ref _selectionStyle, value);
         }
 
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public ShapeStyle HelperStyle
         {
             get => _helperStyle;
             set => RaiseAndSetIfChanged(ref _helperStyle, value);
         }
 
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public IDecorator Decorator
         {
             get => _decorator;
@@ -133,35 +150,5 @@ namespace Core2D.Renderer
 
             DrawShapeState.Invalidate();
         }
-
-        public virtual bool ShouldSerializePanX() => _panX != default;
-
-        public virtual bool ShouldSerializePanY() => _panY != default;
-
-        public virtual bool ShouldSerializeZoomX() => _zoomX != default;
-
-        public virtual bool ShouldSerializeZoomY() => _zoomY != default;
-
-        public virtual bool ShouldSerializeDrawShapeState() => _drawShapeState != null;
-
-        public virtual bool ShouldSerializeSelectedShapes() => true;
-
-        public virtual bool ShouldSerializeImageCache() => _imageCache != null;
-
-        public virtual bool ShouldSerializeDrawDecorators() => _drawDecorators != default;
-
-        public virtual bool ShouldSerializeDrawPoints() => _drawPoints != default;
-
-        public virtual bool ShouldSerializePointStyle() => _pointStyle != null;
-
-        public virtual bool ShouldSerializeSelectedPointStyle() => _selectedPointStyle != null;
-
-        public virtual bool ShouldSerializePointSize() => _pointSize != default;
-
-        public virtual bool ShouldSerializeSelectionStyle() => _selectionStyle != null;
-
-        public virtual bool ShouldSerializeHelperStyle() => _helperStyle != null;
-
-        public virtual bool ShouldSerializeDecorator() => _decorator != null;
     }
 }

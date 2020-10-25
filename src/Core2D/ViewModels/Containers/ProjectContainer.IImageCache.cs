@@ -1,15 +1,18 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using Core2D.Renderer;
 
 namespace Core2D.Containers
 {
+    [DataContract(IsReference = true)]
     public partial class ProjectContainer : BaseContainer, IImageCache
     {
         private readonly IDictionary<string, byte[]> _images = new Dictionary<string, byte[]>();
 
         private IEnumerable<IImageKey> GetKeys() => _images.Select(i => new ImageKey() { Key = i.Key }).ToList();
 
+        [IgnoreDataMember]
         public IEnumerable<IImageKey> Keys => GetKeys();
 
         public string AddImageFromFile(string path, byte[] bytes)

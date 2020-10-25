@@ -1,30 +1,36 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 using Core2D.Data;
 using Core2D.Renderer;
 
 namespace Core2D.Shapes
 {
+    [DataContract(IsReference = true)]
     public class QuadraticBezierShape : BaseShape
     {
         private PointShape _point1;
         private PointShape _point2;
         private PointShape _point3;
 
+        [IgnoreDataMember]
         public override Type TargetType => typeof(QuadraticBezierShape);
 
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public PointShape Point1
         {
             get => _point1;
             set => RaiseAndSetIfChanged(ref _point1, value);
         }
 
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public PointShape Point2
         {
             get => _point2;
             set => RaiseAndSetIfChanged(ref _point2, value);
         }
 
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public PointShape Point3
         {
             get => _point3;
@@ -144,11 +150,5 @@ namespace Core2D.Shapes
             Point2.Invalidate();
             Point3.Invalidate();
         }
-
-        public virtual bool ShouldSerializePoint1() => _point1 != null;
-
-        public virtual bool ShouldSerializePoint2() => _point2 != null;
-
-        public virtual bool ShouldSerializePoint3() => _point3 != null;
     }
 }

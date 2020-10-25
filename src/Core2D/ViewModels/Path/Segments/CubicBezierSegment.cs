@@ -1,27 +1,32 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 using Core2D.Shapes;
 
 namespace Core2D.Path.Segments
 {
+    [DataContract(IsReference = true)]
     public class CubicBezierSegment : PathSegment
     {
         private PointShape _point1;
         private PointShape _point2;
         private PointShape _point3;
 
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public PointShape Point1
         {
             get => _point1;
             set => RaiseAndSetIfChanged(ref _point1, value);
         }
 
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public PointShape Point2
         {
             get => _point2;
             set => RaiseAndSetIfChanged(ref _point2, value);
         }
 
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public PointShape Point3
         {
             get => _point3;
@@ -65,11 +70,5 @@ namespace Core2D.Path.Segments
 
         public override string ToSvgString()
             => $"C{Point1.ToSvgString()} {Point2.ToSvgString()} {Point3.ToSvgString()}";
-
-        public virtual bool ShouldSerializePoint1() => _point1 != null;
-
-        public virtual bool ShouldSerializePoint2() => _point2 != null;
-
-        public virtual bool ShouldSerializePoint3() => _point3 != null;
     }
 }

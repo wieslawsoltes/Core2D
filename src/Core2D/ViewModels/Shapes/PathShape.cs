@@ -1,19 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.Runtime.Serialization;
 using Core2D.Data;
 using Core2D.Path;
 using Core2D.Renderer;
 
 namespace Core2D.Shapes
 {
+    [DataContract(IsReference = true)]
     public class PathShape : BaseShape
     {
         private List<PointShape> _points;
         private PathGeometry _geometry;
 
+        [IgnoreDataMember]
         public override Type TargetType => typeof(PathShape);
 
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public PathGeometry Geometry
         {
             get => _geometry;
@@ -158,7 +161,5 @@ namespace Core2D.Shapes
 
         public string ToSvgString()
             => Geometry?.ToSvgString();
-
-        public virtual bool ShouldSerializeGeometry() => _geometry != null;
     }
 }

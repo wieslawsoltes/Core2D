@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Runtime.Serialization;
 using Core2D.Data;
 using Core2D.Renderer;
 using Core2D.Shapes;
@@ -8,6 +9,7 @@ using Core2D.Style;
 
 namespace Core2D.Containers
 {
+    [DataContract(IsReference = true)]
     public class PageContainer : BaseContainer, IGrid
     {
         private double _width;
@@ -32,6 +34,7 @@ namespace Core2D.Containers
         private BaseColor _gridStrokeColor;
         private double _gridStrokeThickness;
 
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public double Width
         {
             get => _template != null ? _template.Width : _width;
@@ -49,6 +52,7 @@ namespace Core2D.Containers
             }
         }
 
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public double Height
         {
             get => _template != null ? _template.Height : _height;
@@ -66,6 +70,7 @@ namespace Core2D.Containers
             }
         }
 
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public BaseColor Background
         {
             get => _template != null ? _template.Background : _background;
@@ -83,54 +88,63 @@ namespace Core2D.Containers
             }
         }
 
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public ImmutableArray<LayerContainer> Layers
         {
             get => _layers;
             set => RaiseAndSetIfChanged(ref _layers, value);
         }
 
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public LayerContainer CurrentLayer
         {
             get => _currentLayer;
             set => RaiseAndSetIfChanged(ref _currentLayer, value);
         }
 
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public LayerContainer WorkingLayer
         {
             get => _workingLayer;
             set => RaiseAndSetIfChanged(ref _workingLayer, value);
         }
 
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public LayerContainer HelperLayer
         {
             get => _helperLayer;
             set => RaiseAndSetIfChanged(ref _helperLayer, value);
         }
 
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public BaseShape CurrentShape
         {
             get => _currentShape;
             set => RaiseAndSetIfChanged(ref _currentShape, value);
         }
 
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public PageContainer Template
         {
             get => _template;
             set => RaiseAndSetIfChanged(ref _template, value);
         }
 
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public Context Data
         {
             get => _data;
             set => RaiseAndSetIfChanged(ref _data, value);
         }
 
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public bool IsExpanded
         {
             get => _isExpanded;
             set => RaiseAndSetIfChanged(ref _isExpanded, value);
         }
 
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public bool IsGridEnabled
         {
             get => _template != null ? _template.IsGridEnabled : _isGridEnabled;
@@ -148,6 +162,7 @@ namespace Core2D.Containers
             }
         }
 
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public bool IsBorderEnabled
         {
             get => _template != null ? _template.IsBorderEnabled : _isBorderEnabled;
@@ -165,6 +180,7 @@ namespace Core2D.Containers
             }
         }
 
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public double GridOffsetLeft
         {
             get => _template != null ? _template.GridOffsetLeft : _gridOffsetLeft;
@@ -182,6 +198,7 @@ namespace Core2D.Containers
             }
         }
 
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public double GridOffsetTop
         {
             get => _template != null ? _template.GridOffsetTop : _gridOffsetTop;
@@ -199,6 +216,7 @@ namespace Core2D.Containers
             }
         }
 
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public double GridOffsetRight
         {
             get => _template != null ? _template.GridOffsetRight : _gridOffsetRight;
@@ -216,6 +234,7 @@ namespace Core2D.Containers
             }
         }
 
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public double GridOffsetBottom
         {
             get => _template != null ? _template.GridOffsetBottom : _gridOffsetBottom;
@@ -233,6 +252,7 @@ namespace Core2D.Containers
             }
         }
 
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public double GridCellWidth
         {
             get => _template != null ? _template.GridCellWidth : _gridCellWidth;
@@ -250,6 +270,7 @@ namespace Core2D.Containers
             }
         }
 
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public double GridCellHeight
         {
             get => _template != null ? _template.GridCellHeight : _gridCellHeight;
@@ -267,6 +288,7 @@ namespace Core2D.Containers
             }
         }
 
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public BaseColor GridStrokeColor
         {
             get => _template != null ? _template.GridStrokeColor : _gridStrokeColor;
@@ -284,6 +306,7 @@ namespace Core2D.Containers
             }
         }
 
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public double GridStrokeThickness
         {
             get => _template != null ? _template.GridStrokeThickness : _gridStrokeThickness;
@@ -392,47 +415,5 @@ namespace Core2D.Containers
             Template?.Invalidate();
             Data?.Invalidate();
         }
-
-        public virtual bool ShouldSerializeWidth() => _width != default;
-
-        public virtual bool ShouldSerializeHeight() => _height != default;
-
-        public virtual bool ShouldSerializeBackground() => _background != null;
-
-        public virtual bool ShouldSerializeLayers() => true;
-
-        public virtual bool ShouldSerializeCurrentLayer() => _currentLayer != null;
-
-        public virtual bool ShouldSerializeWorkingLayer() => _workingLayer != null;
-
-        public virtual bool ShouldSerializeHelperLayer() => _helperLayer != null;
-
-        public virtual bool ShouldSerializeCurrentShape() => _currentShape != null;
-
-        public virtual bool ShouldSerializeTemplate() => _template != null;
-
-        public virtual bool ShouldSerializeData() => _data != null;
-
-        public virtual bool ShouldSerializeIsExpanded() => _isExpanded != default;
-
-        public virtual bool ShouldSerializeIsGridEnabled() => _isGridEnabled != default;
-
-        public virtual bool ShouldSerializeIsBorderEnabled() => _isBorderEnabled != default;
-
-        public virtual bool ShouldSerializeGridOffsetLeft() => _gridOffsetLeft != default;
-
-        public virtual bool ShouldSerializeGridOffsetTop() => _gridOffsetTop != default;
-
-        public virtual bool ShouldSerializeGridOffsetRight() => _gridOffsetRight != default;
-
-        public virtual bool ShouldSerializeGridOffsetBottom() => _gridOffsetBottom != default;
-
-        public virtual bool ShouldSerializeGridCellWidth() => _gridCellWidth != default;
-
-        public virtual bool ShouldSerializeGridCellHeight() => _gridCellHeight != default;
-
-        public virtual bool ShouldSerializeGridStrokeColor() => _gridStrokeColor != null;
-
-        public virtual bool ShouldSerializeGridStrokeThickness() => _gridStrokeThickness != default;
     }
 }

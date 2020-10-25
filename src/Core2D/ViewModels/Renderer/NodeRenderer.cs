@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Runtime.Serialization;
 using Core2D.Containers;
 using Core2D.Shapes;
 using Core2D.Style;
 
 namespace Core2D.Renderer
 {
+    [DataContract(IsReference = true)]
     public abstract class NodeRenderer : ObservableObject, IShapeRenderer
     {
         private readonly IServiceProvider _serviceProvider;
@@ -13,6 +15,7 @@ namespace Core2D.Renderer
         private readonly ICache<object, IDrawNode> _drawNodeCache;
         private readonly IDrawNodeFactory _drawNodeFactory;
 
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public ShapeRendererState State
         {
             get => _state;
@@ -460,7 +463,5 @@ namespace Core2D.Renderer
                 drawNode.Draw(dc, _state.ZoomX);
             }
         }
-
-        public bool ShouldSerializeState() => _state != null;
     }
 }

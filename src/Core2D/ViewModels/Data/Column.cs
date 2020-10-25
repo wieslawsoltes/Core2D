@@ -1,11 +1,14 @@
 ﻿using System.Collections.Generic;
+using System.Runtime.Serialization;
 
 namespace Core2D.Data
 {
+    [DataContract(IsReference = true)]
     public class Column : ObservableObject
     {
         private bool _isVisible;
 
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public bool IsVisible
         {
             get => _isVisible;
@@ -31,7 +34,5 @@ namespace Core2D.Data
         {
             base.Invalidate();
         }
-
-        public virtual bool ShouldSerializeIsVisible() => _isVisible != default;
     }
 }

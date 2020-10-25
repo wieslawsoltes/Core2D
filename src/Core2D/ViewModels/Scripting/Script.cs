@@ -1,14 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using Core2D.Path;
-using Core2D.Scripting;
+using System.Runtime.Serialization;
 
 namespace Core2D.Scripting
 {
+    [DataContract(IsReference = true)]
     public class Script : ObservableObject
     {
         private string _code;
 
+        [IgnoreDataMember]
         public string Code
         {
             get => _code;
@@ -19,7 +20,5 @@ namespace Core2D.Scripting
         {
             throw new NotImplementedException();
         }
-
-        public virtual bool ShouldSerializeCode() => _code != default;
     }
 }

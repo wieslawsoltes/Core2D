@@ -1,20 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Runtime.Serialization;
 
 namespace Core2D.Containers
 {
+    [DataContract(IsReference = true)]
     public class Library<T> : Library
     {
         private ImmutableArray<T> _items;
         private T _selected;
 
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public ImmutableArray<T> Items
         {
             get => _items;
             set => RaiseAndSetIfChanged(ref _items, value);
         }
 
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public T Selected
         {
             get => _selected;
@@ -55,9 +59,5 @@ namespace Core2D.Containers
                 }
             }
         }
-
-        public virtual bool ShouldSerializeItems() => true;
-
-        public virtual bool ShouldSerializeSelected() => _selected != null;
     }
 }

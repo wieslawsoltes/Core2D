@@ -695,20 +695,20 @@ namespace Core2D
                 Geometry = geometry
             };
 
-            if (geometry != null)
-            {
-                geometry.Owner = pathShape;
-
-                foreach (var figure in geometry.Figures)
-                {
-                    figure.Owner = pathShape;
-
-                    foreach (var segment in figure.Segments)
-                    {
-                        segment.Owner = pathShape;
-                    }
-                }
-            }
+            //if (geometry != null)
+            //{
+            //    geometry.Owner = pathShape;
+            //
+            //    foreach (var figure in geometry.Figures)
+            //    {
+            //        figure.Owner = geometry;
+            //
+            //        foreach (var segment in figure.Segments)
+            //        {
+            //            segment.Owner = figure;
+            //        }
+            //    }
+            //}
             return pathShape;
         }
 

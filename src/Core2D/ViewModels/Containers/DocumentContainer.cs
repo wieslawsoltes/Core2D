@@ -1,20 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Runtime.Serialization;
 
 namespace Core2D.Containers
 {
+    [DataContract(IsReference = true)]
     public class DocumentContainer : BaseContainer
     {
         private bool _isExpanded = true;
         private ImmutableArray<PageContainer> _pages;
 
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public bool IsExpanded
         {
             get => _isExpanded;
             set => RaiseAndSetIfChanged(ref _isExpanded, value);
         }
 
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public ImmutableArray<PageContainer> Pages
         {
             get => _pages;
@@ -47,9 +51,5 @@ namespace Core2D.Containers
                 page.Invalidate();
             }
         }
-
-        public virtual bool ShouldSerializeIsExpanded() => _isExpanded != default;
-
-        public virtual bool ShouldSerializePages() => true;
     }
 }

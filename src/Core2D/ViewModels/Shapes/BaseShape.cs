@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 using Core2D.Data;
 using Core2D.Renderer;
 using Core2D.Style;
 
 namespace Core2D.Shapes
 {
+    [DataContract(IsReference = true)]
     public abstract class BaseShape : ObservableObject
     {
         private IDictionary<string, object> _properties = new Dictionary<string, object>();
@@ -15,32 +17,38 @@ namespace Core2D.Shapes
         private bool _isFilled;
         private Context _data;
 
+        [IgnoreDataMember]
         public abstract Type TargetType { get; }
 
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public virtual ShapeState State
         {
             get => _state;
             set => RaiseAndSetIfChanged(ref _state, value);
         }
 
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public virtual ShapeStyle Style
         {
             get => _style;
             set => RaiseAndSetIfChanged(ref _style, value);
         }
 
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public virtual bool IsStroked
         {
             get => _isStroked;
             set => RaiseAndSetIfChanged(ref _isStroked, value);
         }
 
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public virtual bool IsFilled
         {
             get => _isFilled;
             set => RaiseAndSetIfChanged(ref _isFilled, value);
         }
 
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public virtual Context Data
         {
             get => _data;
@@ -109,15 +117,5 @@ namespace Core2D.Shapes
         }
 
         public abstract void GetPoints(IList<PointShape> points);
-
-        public virtual bool ShouldSerializeState() => _state != null;
-
-        public virtual bool ShouldSerializeStyle() => _style != null;
-
-        public virtual bool ShouldSerializeIsStroked() => _isStroked != default;
-
-        public virtual bool ShouldSerializeIsFilled() => _isFilled != default;
-
-        public virtual bool ShouldSerializeData() => _data != null;
     }
 }

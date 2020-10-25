@@ -1,20 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Runtime.Serialization;
 
 namespace Core2D.Path
 {
+    [DataContract(IsReference = true)]
     public class PathSize : ObservableObject
     {
         private double _width;
         private double _height;
 
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public double Width
         {
             get => _width;
             set => RaiseAndSetIfChanged(ref _width, value);
         }
 
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public double Height
         {
             get => _height;
@@ -42,9 +46,5 @@ namespace Core2D.Path
 
         public string ToSvgString()
             => $"{Width.ToString(CultureInfo.InvariantCulture)},{Height.ToString(CultureInfo.InvariantCulture)}";
-
-        public virtual bool ShouldSerializeWidth() => _width != default;
-
-        public virtual bool ShouldSerializeHeight() => _height != default;
     }
 }

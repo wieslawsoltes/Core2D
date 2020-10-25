@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.Serialization;
 
 namespace Core2D.Style
 {
+    [DataContract(IsReference = true)]
     public class ArgbColor : BaseColor
     {
         private byte _a;
@@ -13,24 +15,28 @@ namespace Core2D.Style
         private byte _g;
         private byte _b;
 
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public byte A
         {
             get => _a;
             set => RaiseAndSetIfChanged(ref _a, value);
         }
 
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public byte R
         {
             get => _r;
             set => RaiseAndSetIfChanged(ref _r, value);
         }
 
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public byte G
         {
             get => _g;
             set => RaiseAndSetIfChanged(ref _g, value);
         }
 
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public byte B
         {
             get => _b;
@@ -117,13 +123,5 @@ namespace Core2D.Style
         {
             return string.Concat('#', c.R.ToString("X2"), c.G.ToString("X2"), c.B.ToString("X2")); // NOTE: Not using c.A.ToString("X2")
         }
-
-        public virtual bool ShouldSerializeA() => _a != default(byte);
-
-        public virtual bool ShouldSerializeR() => _r != default(byte);
-
-        public virtual bool ShouldSerializeG() => _g != default(byte);
-
-        public virtual bool ShouldSerializeB() => _b != default(byte);
     }
 }

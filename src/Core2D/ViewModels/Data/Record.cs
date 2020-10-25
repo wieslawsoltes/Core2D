@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Runtime.Serialization;
 
 namespace Core2D.Data
 {
+    [DataContract(IsReference = true)]
     public class Record : ObservableObject
     {
         private string _id = "";
@@ -16,12 +18,14 @@ namespace Core2D.Data
             _values = ImmutableArray.Create<Value>();
         }
 
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public string Id
         {
             get => _id;
             set => RaiseAndSetIfChanged(ref _id, value);
         }
 
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public ImmutableArray<Value> Values
         {
             get => _values;
@@ -60,9 +64,5 @@ namespace Core2D.Data
                 value.Invalidate();
             }
         }
-
-        public virtual bool ShouldSerializeId() => !string.IsNullOrWhiteSpace(_id);
-
-        public virtual bool ShouldSerializeValues() => true;
     }
 }

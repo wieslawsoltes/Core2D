@@ -1,30 +1,36 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 using Core2D.Data;
 using Core2D.Renderer;
 
 namespace Core2D.Shapes
 {
+    [DataContract(IsReference = true)]
     public class TextShape : BaseShape
     {
         private PointShape _topLeft;
         private PointShape _bottomRight;
         private string _text;
 
+        [IgnoreDataMember]
         public override Type TargetType => typeof(TextShape);
 
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public PointShape TopLeft
         {
             get => _topLeft;
             set => RaiseAndSetIfChanged(ref _topLeft, value);
         }
 
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public PointShape BottomRight
         {
             get => _bottomRight;
             set => RaiseAndSetIfChanged(ref _bottomRight, value);
         }
 
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public string Text
         {
             get => _text;
@@ -127,11 +133,5 @@ namespace Core2D.Shapes
             TopLeft.Invalidate();
             BottomRight.Invalidate();
         }
-
-        public virtual bool ShouldSerializeTopLeft() => _topLeft != null;
-
-        public virtual bool ShouldSerializeBottomRight() => _bottomRight != null;
-
-        public virtual bool ShouldSerializeText() => !string.IsNullOrWhiteSpace(_text);
     }
 }

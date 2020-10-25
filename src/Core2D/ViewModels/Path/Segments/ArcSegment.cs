@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Runtime.Serialization;
 using Core2D.Shapes;
 
 namespace Core2D.Path.Segments
 {
+    [DataContract(IsReference = true)]
     public class ArcSegment : PathSegment
     {
         private PointShape _point;
@@ -13,30 +15,35 @@ namespace Core2D.Path.Segments
         private bool _isLargeArc;
         private SweepDirection _sweepDirection;
 
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public PointShape Point
         {
             get => _point;
             set => RaiseAndSetIfChanged(ref _point, value);
         }
 
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public PathSize Size
         {
             get => _size;
             set => RaiseAndSetIfChanged(ref _size, value);
         }
 
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public double RotationAngle
         {
             get => _rotationAngle;
             set => RaiseAndSetIfChanged(ref _rotationAngle, value);
         }
 
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public bool IsLargeArc
         {
             get => _isLargeArc;
             set => RaiseAndSetIfChanged(ref _isLargeArc, value);
         }
 
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public SweepDirection SweepDirection
         {
             get => _sweepDirection;
@@ -76,15 +83,5 @@ namespace Core2D.Path.Segments
 
         public override string ToSvgString()
             => $"A{Size.ToSvgString()} {RotationAngle.ToString(CultureInfo.InvariantCulture)} {(IsLargeArc ? "1" : "0")} {(SweepDirection == SweepDirection.Clockwise ? "1" : "0")} {Point.ToSvgString()}";
-
-        public virtual bool ShouldSerializePoint() => _point != null;
-
-        public virtual bool ShouldSerializeSize() => _size != null;
-
-        public virtual bool ShouldSerializeRotationAngle() => _rotationAngle != default;
-
-        public virtual bool ShouldSerializeIsLargeArc() => _isLargeArc != default;
-
-        public virtual bool ShouldSerializeSweepDirection() => _sweepDirection != default;
     }
 }

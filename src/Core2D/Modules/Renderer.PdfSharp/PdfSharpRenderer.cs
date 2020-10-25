@@ -804,7 +804,5 @@ namespace Core2D.Renderer.PdfSharp
                     gp);
             }
         }
-
-        public bool ShouldSerializeState() => _state != null;
     }
 }

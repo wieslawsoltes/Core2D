@@ -2,31 +2,37 @@
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Globalization;
+using System.Runtime.Serialization;
 using Core2D.Data;
 using Core2D.Renderer;
 
 namespace Core2D.Shapes
 {
+    [DataContract(IsReference = true)]
     public class PointShape : BaseShape
     {
         private double _x;
         private double _y;
         private PointAlignment _alignment;
 
+        [IgnoreDataMember]
         public override Type TargetType => typeof(PointShape);
 
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public double X
         {
             get => _x;
             set => RaiseAndSetIfChanged(ref _x, value);
         }
 
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public double Y
         {
             get => _y;
             set => RaiseAndSetIfChanged(ref _y, value);
         }
 
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public PointAlignment Alignment
         {
             get => _alignment;
@@ -117,11 +123,5 @@ namespace Core2D.Shapes
 
         public string ToSvgString()
             => $"{_x.ToString(CultureInfo.InvariantCulture)},{_y.ToString(CultureInfo.InvariantCulture)}";
-
-        public virtual bool ShouldSerializeX() => _x != default;
-
-        public virtual bool ShouldSerializeY() => _y != default;
-
-        public virtual bool ShouldSerializeAlignment() => _alignment != default;
     }
 }

@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 
 namespace Core2D.Style
 {
+    [DataContract(IsReference = true)]
     public class FontStyle : ObservableObject
     {
         private FontStyleFlags _flags;
 
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public FontStyleFlags Flags
         {
             get => _flags;
@@ -24,18 +27,21 @@ namespace Core2D.Style
             RaisePropertyChanged(nameof(Italic));
         }
 
+        [IgnoreDataMember]
         public bool Regular
         {
             get => _flags == FontStyleFlags.Regular;
             set => Flags = value ? _flags | FontStyleFlags.Regular : _flags & ~FontStyleFlags.Regular;
         }
 
+        [IgnoreDataMember]
         public bool Bold
         {
             get => _flags.HasFlag(FontStyleFlags.Bold);
             set => Flags = value ? _flags | FontStyleFlags.Bold : _flags & ~FontStyleFlags.Bold;
         }
 
+        [IgnoreDataMember]
         public bool Italic
         {
             get => _flags.HasFlag(FontStyleFlags.Italic);
@@ -74,13 +80,5 @@ namespace Core2D.Style
         {
             return _flags.ToString();
         }
-
-        public virtual bool ShouldSerializeFlags() => _flags != default;
-
-        public virtual bool ShouldSerializeRegular() => false;
-
-        public virtual bool ShouldSerializeBold() => false;
-
-        public virtual bool ShouldSerializeItalic() => false;
     }
 }

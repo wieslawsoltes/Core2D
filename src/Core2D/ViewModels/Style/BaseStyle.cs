@@ -1,5 +1,8 @@
-﻿namespace Core2D.Style
+﻿using System.Runtime.Serialization;
+
+namespace Core2D.Style
 {
+    [DataContract(IsReference = true)]
     public abstract class BaseStyle : ObservableObject
     {
         private BaseColor _stroke;
@@ -9,36 +12,42 @@
         private string _dashes;
         private double _dashOffset;
 
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public BaseColor Stroke
         {
             get => _stroke;
             set => RaiseAndSetIfChanged(ref _stroke, value);
         }
 
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public BaseColor Fill
         {
             get => _fill;
             set => RaiseAndSetIfChanged(ref _fill, value);
         }
 
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public double Thickness
         {
             get => _thickness;
             set => RaiseAndSetIfChanged(ref _thickness, value);
         }
 
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public LineCap LineCap
         {
             get => _lineCap;
             set => RaiseAndSetIfChanged(ref _lineCap, value);
         }
 
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public string Dashes
         {
             get => _dashes;
             set => RaiseAndSetIfChanged(ref _dashes, value);
         }
 
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public double DashOffset
         {
             get => _dashOffset;
@@ -61,17 +70,5 @@
             Stroke.Invalidate();
             Fill.Invalidate();
         }
-
-        public virtual bool ShouldSerializeStroke() => _stroke != null;
-
-        public virtual bool ShouldSerializeFill() => _fill != null;
-
-        public virtual bool ShouldSerializeThickness() => _thickness != default;
-
-        public virtual bool ShouldSerializeLineCap() => _lineCap != default;
-
-        public virtual bool ShouldSerializeDashes() => !string.IsNullOrWhiteSpace(_dashes);
-
-        public virtual bool ShouldSerializeDashOffset() => _dashOffset != default;
     }
 }

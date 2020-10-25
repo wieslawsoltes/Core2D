@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
+using System.Runtime.Serialization;
 
 namespace Core2D.Style
 {
+    [DataContract(IsReference = true)]
     public class ShapeStyle : BaseStyle
     {
         private LineStyle _lineStyle;
@@ -9,24 +11,28 @@ namespace Core2D.Style
         private ArrowStyle _endArrowStyle;
         private TextStyle _textStyle;
 
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public LineStyle LineStyle
         {
             get => _lineStyle;
             set => RaiseAndSetIfChanged(ref _lineStyle, value);
         }
 
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public ArrowStyle StartArrowStyle
         {
             get => _startArrowStyle;
             set => RaiseAndSetIfChanged(ref _startArrowStyle, value);
         }
 
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public ArrowStyle EndArrowStyle
         {
             get => _endArrowStyle;
             set => RaiseAndSetIfChanged(ref _endArrowStyle, value);
         }
 
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public TextStyle TextStyle
         {
             get => _textStyle;
@@ -71,13 +77,5 @@ namespace Core2D.Style
             EndArrowStyle.Invalidate();
             TextStyle.Invalidate();
         }
-
-        public virtual bool ShouldSerializeLineStyle() => _lineStyle != null;
-
-        public virtual bool ShouldSerializeStartArrowStyle() => _startArrowStyle != null;
-
-        public virtual bool ShouldSerializeEndArrowStyle() => _endArrowStyle != null;
-
-        public virtual bool ShouldSerializeTextStyle() => _textStyle != null;
     }
 }

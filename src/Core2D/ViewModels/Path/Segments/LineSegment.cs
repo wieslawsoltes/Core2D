@@ -1,13 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 using Core2D.Shapes;
 
 namespace Core2D.Path.Segments
 {
+    [DataContract(IsReference = true)]
     public class LineSegment : PathSegment
     {
         private PointShape _point;
 
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public PointShape Point
         {
             get => _point;
@@ -45,7 +48,5 @@ namespace Core2D.Path.Segments
 
         public override string ToSvgString()
             => $"L{Point.ToSvgString()}";
-
-        public virtual bool ShouldSerializePoint() => _point != null;
     }
 }

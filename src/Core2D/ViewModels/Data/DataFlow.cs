@@ -1,10 +1,12 @@
 ﻿using System.Collections.Immutable;
+using System.Runtime.Serialization;
 using Core2D.Bindings;
 using Core2D.Containers;
 using Core2D.Shapes;
 
 namespace Core2D.Data
 {
+    [DataContract(IsReference = true)]
     public class DataFlow
     {
         public void Bind(ProjectContainer project)

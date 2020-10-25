@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
+using System.Runtime.Serialization;
 
 namespace Core2D.Style
 {
+    [DataContract(IsReference = true)]
     public class LineStyle : ObservableObject
     {
         private bool _isCurved;
@@ -9,24 +11,28 @@ namespace Core2D.Style
         private CurveOrientation _curveOrientation;
         private LineFixedLength _fixedLength;
 
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public bool IsCurved
         {
             get => _isCurved;
             set => RaiseAndSetIfChanged(ref _isCurved, value);
         }
 
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public double Curvature
         {
             get => _curvature;
             set => RaiseAndSetIfChanged(ref _curvature, value);
         }
 
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public CurveOrientation CurveOrientation
         {
             get => _curveOrientation;
             set => RaiseAndSetIfChanged(ref _curveOrientation, value);
         }
 
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public LineFixedLength FixedLength
         {
             get => _fixedLength;
@@ -44,13 +50,5 @@ namespace Core2D.Style
                 FixedLength = (LineFixedLength)this.FixedLength.Copy(shared)
             };
         }
-
-        public virtual bool ShouldSerializeIsCurved() => _isCurved != default;
-
-        public virtual bool ShouldSerializeCurvature() => _curvature != default;
-
-        public virtual bool ShouldSerializeCurveOrientation() => _curveOrientation != default;
-
-        public virtual bool ShouldSerializeFixedLength() => _fixedLength != null;
     }
 }

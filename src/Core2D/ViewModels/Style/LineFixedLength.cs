@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 using Core2D.Renderer;
 
 namespace Core2D.Style
 {
+    [DataContract(IsReference = true)]
     public class LineFixedLength : ObservableObject
     {
         private LineFixedLengthFlags _flags;
@@ -11,6 +13,7 @@ namespace Core2D.Style
         private ShapeState _endTrigger;
         private double _length;
 
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public LineFixedLengthFlags Flags
         {
             get => _flags;
@@ -31,54 +34,63 @@ namespace Core2D.Style
             RaisePropertyChanged(nameof(All));
         }
 
+        [IgnoreDataMember]
         public bool Disabled
         {
             get => _flags == LineFixedLengthFlags.Disabled;
             set => Flags = value ? _flags | LineFixedLengthFlags.Disabled : _flags & ~LineFixedLengthFlags.Disabled;
         }
 
+        [IgnoreDataMember]
         public bool Start
         {
             get => _flags.HasFlag(LineFixedLengthFlags.Start);
             set => Flags = value ? _flags | LineFixedLengthFlags.Start : _flags & ~LineFixedLengthFlags.Start;
         }
 
+        [IgnoreDataMember]
         public bool End
         {
             get => _flags.HasFlag(LineFixedLengthFlags.End);
             set => Flags = value ? _flags | LineFixedLengthFlags.End : _flags & ~LineFixedLengthFlags.End;
         }
 
+        [IgnoreDataMember]
         public bool Vertical
         {
             get => _flags.HasFlag(LineFixedLengthFlags.Vertical);
             set => Flags = value ? _flags | LineFixedLengthFlags.Vertical : _flags & ~LineFixedLengthFlags.Vertical;
         }
 
+        [IgnoreDataMember]
         public bool Horizontal
         {
             get => _flags.HasFlag(LineFixedLengthFlags.Horizontal);
             set => Flags = value ? _flags | LineFixedLengthFlags.Horizontal : _flags & ~LineFixedLengthFlags.Horizontal;
         }
 
+        [IgnoreDataMember]
         public bool All
         {
             get => _flags.HasFlag(LineFixedLengthFlags.All);
             set => Flags = value ? _flags | LineFixedLengthFlags.All : _flags & ~LineFixedLengthFlags.All;
         }
 
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public ShapeState StartTrigger
         {
             get => _startTrigger;
             set => RaiseAndSetIfChanged(ref _startTrigger, value);
         }
 
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public ShapeState EndTrigger
         {
             get => _endTrigger;
             set => RaiseAndSetIfChanged(ref _endTrigger, value);
         }
 
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public double Length
         {
             get => _length;
@@ -128,25 +140,5 @@ namespace Core2D.Style
         {
             return _flags.ToString();
         }
-
-        public virtual bool ShouldSerializeFlags() => _flags != default;
-
-        public virtual bool ShouldSerializeDisabled() => false;
-
-        public virtual bool ShouldSerializeStart() => false;
-
-        public virtual bool ShouldSerializeEnd() => false;
-
-        public virtual bool ShouldSerializeVertical() => false;
-
-        public virtual bool ShouldSerializeHorizontal() => false;
-
-        public virtual bool ShouldSerializeAll() => false;
-
-        public virtual bool ShouldSerializeStartTrigger() => _startTrigger != null;
-
-        public virtual bool ShouldSerializeEndTrigger() => _endTrigger != null;
-
-        public virtual bool ShouldSerializeLength() => _length != default;
     }
 }

@@ -897,7 +897,5 @@ namespace Core2D.Renderer.Dxf
                 }
             }
         }
-
-        public bool ShouldSerializeState() => _state != null;
     }
 }

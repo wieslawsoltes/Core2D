@@ -1,22 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Runtime.Serialization;
 
 namespace Core2D
 {
+    [DataContract(IsReference = true)]
     public abstract class ObservableObject : INotifyPropertyChanged
     {
         private bool _isDirty;
         private ObservableObject _owner = null;
         private string _name = "";
 
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public virtual ObservableObject Owner
         {
             get => _owner;
             set => RaiseAndSetIfChanged(ref _owner, value);
         }
 
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public virtual string Name
         {
             get => _name;
@@ -53,11 +56,5 @@ namespace Core2D
             }
             return false;
         }
-
-        public virtual bool ShouldSerializeOwner() => _owner != null;
-
-        public virtual bool ShouldSerializeName() => !string.IsNullOrWhiteSpace(_name);
-
-        public virtual bool ShouldSerializeIsDirty() => false;
     }
 }

@@ -1,8 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Runtime.Serialization;
 
 namespace Core2D.Data
 {
+    [DataContract(IsReference = true)]
     public class Database : ObservableObject
     {
         private string _idColumnName;
@@ -10,24 +12,28 @@ namespace Core2D.Data
         private ImmutableArray<Record> _records;
         private Record _currentRecord;
 
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public string IdColumnName
         {
             get => _idColumnName;
             set => RaiseAndSetIfChanged(ref _idColumnName, value);
         }
 
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public ImmutableArray<Column> Columns
         {
             get => _columns;
             set => RaiseAndSetIfChanged(ref _columns, value);
         }
 
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public ImmutableArray<Record> Records
         {
             get => _records;
             set => RaiseAndSetIfChanged(ref _records, value);
         }
 
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public Record CurrentRecord
         {
             get => _currentRecord;
@@ -81,13 +87,5 @@ namespace Core2D.Data
                 record.Invalidate();
             }
         }
-
-        public virtual bool ShouldSerializeIdColumnName() => !string.IsNullOrWhiteSpace(_idColumnName);
-
-        public virtual bool ShouldSerializeColumns() => true;
-
-        public virtual bool ShouldSerializeRecords() => true;
-
-        public virtual bool ShouldSerializeCurrentRecord() => _currentRecord != null;
     }
 }

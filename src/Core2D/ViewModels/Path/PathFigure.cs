@@ -1,30 +1,34 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
-using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using Core2D.Shapes;
 
 namespace Core2D.Path
 {
+    [DataContract(IsReference = true)]
     public class PathFigure : ObservableObject
     {
         private PointShape _startPoint;
         private ImmutableArray<PathSegment> _segments;
         private bool _isClosed;
 
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public PointShape StartPoint
         {
             get => _startPoint;
             set => RaiseAndSetIfChanged(ref _startPoint, value);
         }
 
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public ImmutableArray<PathSegment> Segments
         {
             get => _segments;
             set => RaiseAndSetIfChanged(ref _segments, value);
         }
 
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public bool IsClosed
         {
             get => _isClosed;
@@ -115,11 +119,5 @@ namespace Core2D.Path
                 + (Segments != null ? ToSvgString(Segments) : "")
                 + (IsClosed ? "z" : "");
         }
-
-        public virtual bool ShouldSerializeStartPoint() => _startPoint != null;
-
-        public virtual bool ShouldSerializeSegments() => true;
-
-        public virtual bool ShouldSerializeIsClosed() => _isClosed != default;
     }
 }

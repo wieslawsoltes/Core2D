@@ -1,11 +1,14 @@
 ﻿using System.Collections.Generic;
+using System.Runtime.Serialization;
 
 namespace Core2D.Data
 {
+    [DataContract(IsReference = true)]
     public class Value : ObservableObject
     {
         private string _content;
 
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public string Content
         {
             get => _content;
@@ -31,7 +34,5 @@ namespace Core2D.Data
         {
             base.Invalidate();
         }
-
-        public virtual bool ShouldSerializeContent() => !string.IsNullOrWhiteSpace(_content);
     }
 }

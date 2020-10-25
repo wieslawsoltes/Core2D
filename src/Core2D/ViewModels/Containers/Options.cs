@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 using Core2D.Path;
-using Core2D.Shapes;
-using Core2D.Style;
 
 namespace Core2D.Containers
 {
+    [DataContract(IsReference = true)]
     public class Options : ObservableObject
     {
         private bool _snapToGrid = true;
@@ -19,60 +19,70 @@ namespace Core2D.Containers
         private FillRule _defaultFillRule = FillRule.EvenOdd;
         private bool _tryToConnect = false;
 
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public bool SnapToGrid
         {
             get => _snapToGrid;
             set => RaiseAndSetIfChanged(ref _snapToGrid, value);
         }
 
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public double SnapX
         {
             get => _snapX;
             set => RaiseAndSetIfChanged(ref _snapX, value);
         }
 
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public double SnapY
         {
             get => _snapY;
             set => RaiseAndSetIfChanged(ref _snapY, value);
         }
 
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public double HitThreshold
         {
             get => _hitThreshold;
             set => RaiseAndSetIfChanged(ref _hitThreshold, value);
         }
 
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public MoveMode MoveMode
         {
             get => _moveMode;
             set => RaiseAndSetIfChanged(ref _moveMode, value);
         }
 
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public bool DefaultIsStroked
         {
             get => _defaultIsStroked;
             set => RaiseAndSetIfChanged(ref _defaultIsStroked, value);
         }
 
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public bool DefaultIsFilled
         {
             get => _defaultIsFilled;
             set => RaiseAndSetIfChanged(ref _defaultIsFilled, value);
         }
 
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public bool DefaultIsClosed
         {
             get => _defaultIsClosed;
             set => RaiseAndSetIfChanged(ref _defaultIsClosed, value);
         }
 
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public FillRule DefaultFillRule
         {
             get => _defaultFillRule;
             set => RaiseAndSetIfChanged(ref _defaultFillRule, value);
         }
 
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public bool TryToConnect
         {
             get => _tryToConnect;
@@ -94,25 +104,5 @@ namespace Core2D.Containers
         {
             base.Invalidate();
         }
-
-        public virtual bool ShouldSerializeSnapToGrid() => _snapToGrid != default;
-
-        public virtual bool ShouldSerializeSnapX() => _snapX != default;
-
-        public virtual bool ShouldSerializeSnapY() => _snapY != default;
-
-        public virtual bool ShouldSerializeHitThreshold() => _hitThreshold != default;
-
-        public virtual bool ShouldSerializeMoveMode() => _moveMode != default;
-
-        public virtual bool ShouldSerializeDefaultIsStroked() => _defaultIsStroked != default;
-
-        public virtual bool ShouldSerializeDefaultIsFilled() => _defaultIsFilled != default;
-
-        public virtual bool ShouldSerializeDefaultIsClosed() => _defaultIsClosed != default;
-
-        public virtual bool ShouldSerializeDefaultFillRule() => _defaultFillRule != default;
-
-        public virtual bool ShouldSerializeTryToConnect() => _tryToConnect != default;
     }
 }

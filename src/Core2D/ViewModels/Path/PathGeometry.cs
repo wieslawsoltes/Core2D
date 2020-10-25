@@ -1,21 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Runtime.Serialization;
 using System.Text;
 
 namespace Core2D.Path
 {
+    [DataContract(IsReference = true)]
     public class PathGeometry : ObservableObject
     {
         private ImmutableArray<PathFigure> _figures;
         private FillRule _fillRule;
 
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public ImmutableArray<PathFigure> Figures
         {
             get => _figures;
             set => RaiseAndSetIfChanged(ref _figures, value);
         }
 
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public FillRule FillRule
         {
             get => _fillRule;
@@ -110,9 +114,5 @@ namespace Core2D.Path
             }
             return string.Empty;
         }
-
-        public virtual bool ShouldSerializeFigures() => true;
-
-        public virtual bool ShouldSerializeFillRule() => _fillRule != default;
     }
 }

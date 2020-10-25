@@ -1,12 +1,15 @@
 ﻿using System.Collections.Generic;
+using System.Runtime.Serialization;
 using Core2D.Shapes;
 
 namespace Core2D.Path
 {
+    [DataContract(IsReference = true)]
     public abstract class PathSegment : ObservableObject
     {
         private bool _isStroked;
 
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public bool IsStroked
         {
             get => _isStroked;
@@ -29,7 +32,5 @@ namespace Core2D.Path
         {
             base.Invalidate();
         }
-
-        public virtual bool ShouldSerializeIsStroked() => _isStroked != default;
     }
 }

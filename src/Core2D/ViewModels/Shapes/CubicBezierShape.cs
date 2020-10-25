@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 using Core2D.Data;
 using Core2D.Renderer;
 
 namespace Core2D.Shapes
 {
+    [DataContract(IsReference = true)]
     public class CubicBezierShape : BaseShape
     {
         private PointShape _point1;
@@ -12,26 +14,31 @@ namespace Core2D.Shapes
         private PointShape _point3;
         private PointShape _point4;
 
+        [IgnoreDataMember]
         public override Type TargetType => typeof(CubicBezierShape);
 
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public PointShape Point1
         {
             get => _point1;
             set => RaiseAndSetIfChanged(ref _point1, value);
         }
 
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public PointShape Point2
         {
             get => _point2;
             set => RaiseAndSetIfChanged(ref _point2, value);
         }
 
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public PointShape Point3
         {
             get => _point3;
             set => RaiseAndSetIfChanged(ref _point3, value);
         }
 
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public PointShape Point4
         {
             get => _point4;
@@ -168,13 +175,5 @@ namespace Core2D.Shapes
             Point3.Invalidate();
             Point4.Invalidate();
         }
-
-        public virtual bool ShouldSerializePoint1() => _point1 != null;
-
-        public virtual bool ShouldSerializePoint2() => _point2 != null;
-
-        public virtual bool ShouldSerializePoint3() => _point3 != null;
-
-        public virtual bool ShouldSerializePoint4() => _point4 != null;
     }
 }

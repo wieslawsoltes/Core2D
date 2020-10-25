@@ -1,15 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Runtime.Serialization;
 using Core2D.Data;
 using Core2D.Renderer;
 
 namespace Core2D.Shapes
 {
+    [DataContract(IsReference = true)]
     public abstract class ConnectableShape : BaseShape
     {
         private ImmutableArray<PointShape> _connectors;
 
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public ImmutableArray<PointShape> Connectors
         {
             get => _connectors;
@@ -116,7 +119,5 @@ namespace Core2D.Shapes
                 connector.Invalidate();
             }
         }
-
-        public virtual bool ShouldSerializeConnectors() => true;
     }
 }
