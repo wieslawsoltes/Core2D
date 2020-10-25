@@ -5,7 +5,6 @@ using Core2D.Renderer;
 
 namespace Core2D.Containers
 {
-    [DataContract(IsReference = true)]
     public partial class ProjectContainer : BaseContainer, IImageCache
     {
         private readonly IDictionary<string, byte[]> _images = new Dictionary<string, byte[]>();
