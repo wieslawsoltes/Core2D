@@ -13,28 +13,28 @@
              x:DataType="Editor:ProjectEditor" x:CompileBindings="True">
     <TabControl>
         <TabItem Header="Main">
-            <Grid RowDefinitions="Auto,*">
-                <ComboBox Items="{Binding Tools}" SelectedItem="{Binding CurrentTool, Mode=TwoWay}" Grid.Row="0" HorizontalAlignment="Stretch">
+            <DockPanel>
+                <ComboBox Items="{Binding Tools}" SelectedItem="{Binding CurrentTool, Mode=TwoWay}" DockPanel.Dock="Top" HorizontalAlignment="Stretch">
                     <ComboBox.DataTemplates>
                         <DataTemplate>
                             <TextBlock Text="{Binding Title}" />
                         </DataTemplate>
                     </ComboBox.DataTemplates>
                 </ComboBox>
-                <ContentControl DataContext="{Binding CurrentTool}" Content="{Binding Settings}" Grid.Row="1" x:DataType="Editor:ITool" x:CompileBindings="False" />
-            </Grid>
+                <ContentControl DataContext="{Binding CurrentTool}" Content="{Binding Settings}" x:DataType="Editor:ITool" x:CompileBindings="False" />
+            </DockPanel>
         </TabItem>
         <TabItem Header="Path">
-            <Grid RowDefinitions="Auto,*">
-                <ComboBox Items="{Binding PathTools}" SelectedItem="{Binding CurrentPathTool, Mode=TwoWay}" Grid.Row="0" HorizontalAlignment="Stretch">
+            <DockPanel>
+                <ComboBox Items="{Binding PathTools}" SelectedItem="{Binding CurrentPathTool, Mode=TwoWay}" DockPanel.Dock="Top" HorizontalAlignment="Stretch">
                     <ComboBox.DataTemplates>
                         <DataTemplate>
                             <TextBlock Text="{Binding Title}" />
                         </DataTemplate>
                     </ComboBox.DataTemplates>
                 </ComboBox>
-                <ContentControl DataContext="{Binding CurrentPathTool}" Content="{Binding Settings}" Grid.Row="1" x:DataType="Editor:IPathTool" x:CompileBindings="False" />
-            </Grid>
+                <ContentControl DataContext="{Binding CurrentPathTool}" Content="{Binding Settings}" x:DataType="Editor:IPathTool" x:CompileBindings="False" />
+            </DockPanel>
         </TabItem>
     </TabControl>
 </UserControl>

@@ -17,13 +17,13 @@
     <UserControl.Resources>
         <converters:ObjectToTypeStringConverter x:Key="ObjectToTypeStringConverter"/>
     </UserControl.Resources>
-    <Grid RowDefinitions="Auto,*">
-        <StackPanel Grid.Row="0">
+    <DockPanel>
+        <StackPanel DockPanel.Dock="Top">
             <TextBlock Text="Name" Margin="{DynamicResource TextControlThemePadding}"/>
             <TextBox Text="{Binding Name, Mode=TwoWay}"/>
             <CheckBox Content="IsVisible" IsChecked="{Binding IsVisible, Mode=TwoWay}"/>
         </StackPanel>
-        <TabControl Grid.Row="1">
+        <TabControl>
             <TabItem Header="Shapes">
                 <ListBox x:Name="shapes" Items="{Binding Shapes}">
                     <ListBox.DataTemplates>
@@ -41,5 +41,5 @@
                 <ContentControl Content="{Binding #shapes.SelectedItem}"/>
             </TabItem>
         </TabControl>
-    </Grid>
+    </DockPanel>
 </UserControl>

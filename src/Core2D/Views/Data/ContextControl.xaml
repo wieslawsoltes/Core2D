@@ -12,19 +12,17 @@
              d:DataContext="{x:Static Designer:DesignerContext.Data}"
              d:DesignWidth="250" d:DesignHeight="400"
              x:DataType="Data:Context" x:CompileBindings="True">
-    <Grid RowDefinitions="*">
-        <TabControl Grid.Row="0">
-            <TabItem Header="Record">
-                <Grid RowDefinitions="Auto,*" ColumnDefinitions="*" IsVisible="{Binding !!Record}">
-                    <Menu Grid.Row="0" HorizontalAlignment="Right" IsVisible="{Binding !!Record}">
-                        <MenuItem Header="&#727;" Command="{Binding $parent[TopLevel].DataContext.OnResetRecord}" CommandParameter="{Binding}" IsVisible="{Binding !!Record}" x:CompileBindings="False"/>
-                    </Menu>
-                    <ContentControl Content="{Binding Record}" Grid.Row="1"/>
-                </Grid>
-            </TabItem>
-            <TabItem Header="Properties">
-                <data:PropertiesControl/>
-            </TabItem>
-        </TabControl>
-    </Grid>
+    <TabControl>
+        <TabItem Header="Record">
+            <DockPanel IsVisible="{Binding !!Record}">
+                <Menu HorizontalAlignment="Right" IsVisible="{Binding !!Record}" DockPanel.Dock="Top">
+                    <MenuItem Header="&#727;" Command="{Binding $parent[TopLevel].DataContext.OnResetRecord}" CommandParameter="{Binding}" IsVisible="{Binding !!Record}" x:CompileBindings="False"/>
+                </Menu>
+                <ContentControl Content="{Binding Record}"/>
+            </DockPanel>
+        </TabItem>
+        <TabItem Header="Properties">
+            <data:PropertiesControl/>
+        </TabItem>
+    </TabControl>
 </UserControl>

@@ -136,7 +136,7 @@
                         <views:PresenterControl x:Name="presenterControlData" ZoomBorder="{Binding #zoomBorder}" Renderer="{Binding PageRenderer}" DataFlow="{Binding DataFlow}" Container="{Binding Project.CurrentContainer}" PresenterType="Data" ClipToBounds="False"/>
                         <views:PresenterControl x:Name="presenterControlTemplate" ZoomBorder="{Binding #zoomBorder}" Renderer="{Binding PageRenderer}" DataFlow="{Binding DataFlow}" Container="{Binding Project.CurrentContainer}" PresenterType="Template" ClipToBounds="False"/>
                         <views:PresenterControl x:Name="presenterControlEditor" ZoomBorder="{Binding #zoomBorder}" Renderer="{Binding PageRenderer}" DataFlow="{Binding DataFlow}" Container="{Binding Project.CurrentContainer}" PresenterType="Editor" ClipToBounds="False"/>
-                        <!--<Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                        <!--<Panel VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
                             <Canvas Background="{x:Null}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
                                 <TextBox x:Name="textEditor"
                                          IsVisible="True"
@@ -163,7 +163,7 @@
                                          MinHeight="0"
                                          MinWidth="0"/>
                             </Canvas>
-                        </Grid>-->
+                        </Panel>-->
                     </Panel>
                 </paz:ZoomBorder>
             </ScrollViewer>

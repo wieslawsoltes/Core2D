@@ -10,8 +10,8 @@
              d:DataContext="{x:Static Designer:DesignerContext.LineFixedLength}"
              d:DesignWidth="250" d:DesignHeight="400"
              x:DataType="Style:LineFixedLength" x:CompileBindings="True">
-    <Grid RowDefinitions="Auto,*">
-        <StackPanel Grid.Row="0">
+    <DockPanel>
+        <StackPanel DockPanel.Dock="Top">
             <TextBlock Text="Length" Margin="{DynamicResource TextControlThemePadding}"/>
             <TextBox Text="{Binding Length, Mode=TwoWay}"/>
             <TextBlock Text="Flags" Margin="{DynamicResource TextControlThemePadding}"/>
@@ -24,7 +24,7 @@
                 <CheckBox Content="All" IsChecked="{Binding All, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
             </StackPanel>
         </StackPanel>
-        <TabControl Grid.Row="1">
+        <TabControl>
             <TabItem Header="StartTrigger">
                 <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
                     <ContentControl Content="{Binding StartTrigger}"/>
@@ -36,5 +36,5 @@
                 </ScrollViewer>
             </TabItem>
         </TabControl>
-    </Grid>
+    </DockPanel>
 </UserControl>

@@ -10,22 +10,22 @@
              d:DataContext="{x:Static Designer:DesignerContext.Text}"
              d:DesignWidth="250" d:DesignHeight="400"
              x:DataType="Shapes:TextShape" x:CompileBindings="True">
-    <TabControl Grid.Row="0">
+    <TabControl>
         <TabItem Header="Text">
-            <Grid RowDefinitions="Auto,*">
-                <StackPanel Grid.Row="0">
+            <DockPanel>
+                <StackPanel DockPanel.Dock="Top">
                     <TextBlock Text="Name" Margin="{DynamicResource TextControlThemePadding}"/>
                     <TextBox Text="{Binding Name, Mode=TwoWay}"/>
                     <CheckBox Content="IsStroked" IsChecked="{Binding IsStroked, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
                     <CheckBox Content="IsFilled" IsChecked="{Binding IsFilled, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
                     <TextBlock Text="Text" Margin="{DynamicResource TextControlThemePadding}"/>
                     <!--<TextBox Text="{Binding Text, Mode=TwoWay}" VerticalAlignment="Stretch" AcceptsReturn="True"/>-->
-                    <Grid ColumnDefinitions="*,30" VerticalAlignment="Stretch">
-                        <TextBox Text="{Binding Text, Mode=TwoWay}" AcceptsReturn="True" Grid.Column="0"/>
-                        <Button Content="..." Command="{Binding $parent[UserControl].OnEditTextBinding}" CommandParameter="{Binding}" VerticalAlignment="Stretch" VerticalContentAlignment="Center" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Padding="0" Margin="6,0,0,0" Grid.Column="1" x:CompileBindings="False"/>
-                    </Grid>
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Stretch">
+                        <TextBox Text="{Binding Text, Mode=TwoWay}" AcceptsReturn="True" HorizontalAlignment="Stretch"/>
+                        <Button Content="..." Command="{Binding $parent[UserControl].OnEditTextBinding}" CommandParameter="{Binding}" VerticalAlignment="Stretch" VerticalContentAlignment="Center" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Padding="0" Margin="6,0,0,0" Width="30" x:CompileBindings="False"/>
+                    </StackPanel>
                 </StackPanel>
-                <TabControl Grid.Row="1">
+                <TabControl>
                     <TabItem Header="TopLeft">
                         <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
                             <ContentControl Content="{Binding TopLeft}"/>
@@ -37,7 +37,7 @@
                         </ScrollViewer>
                     </TabItem>
                 </TabControl>
-            </Grid>
+            </DockPanel>
         </TabItem>
         <TabItem Header="Data">
             <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">

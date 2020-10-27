@@ -16,11 +16,11 @@
     <UserControl.Resources>
         <converters:ObjectToTypeStringConverter x:Key="ObjectToTypeStringConverter"/>
     </UserControl.Resources>
-    <Grid RowDefinitions="Auto,*">
-        <StackPanel Grid.Row="0">
+    <DockPanel>
+        <StackPanel DockPanel.Dock="Top">
             <CheckBox Content="IsClosed" IsChecked="{Binding IsClosed, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
         </StackPanel>
-        <TabControl Grid.Row="1">
+        <TabControl>
             <TabItem Header="StartPoint">
                 <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
                     <ContentControl Content="{Binding StartPoint}"/>
@@ -40,5 +40,5 @@
                 </ListBox>
             </TabItem>
         </TabControl>
-    </Grid>
+    </DockPanel>
 </UserControl>

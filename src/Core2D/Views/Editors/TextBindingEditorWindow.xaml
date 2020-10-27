@@ -21,29 +21,27 @@
         x:CompileBindings="False">
     <Grid ColumnDefinitions="30*,30*,30*" RowDefinitions="Auto,*,Auto">
         <TextBlock Text="Columns" Margin="6" Grid.Row="0" Grid.Column="0"/>
-        <Grid RowDefinitions="Auto,*" Margin="6" Grid.Row="1" Grid.Column="0">
-            <ComboBox x:Name="databasesComboBox" Items="{Binding Editor.Project.Databases}" SelectedItem="{Binding Editor.Project.CurrentDatabase, Mode=OneWay}" Grid.Row="0" HorizontalAlignment="Stretch">
+        <DockPanel Margin="6" Grid.Row="1" Grid.Column="0">
+            <ComboBox x:Name="databasesComboBox" Items="{Binding Editor.Project.Databases}" SelectedItem="{Binding Editor.Project.CurrentDatabase, Mode=OneWay}" DockPanel.Dock="Top" HorizontalAlignment="Stretch">
                 <ComboBox.DataTemplates>
                     <DataTemplate DataType="Data:Database">
                         <TextBlock Text="{Binding Name}"/>
                     </DataTemplate>
                 </ComboBox.DataTemplates>
             </ComboBox>
-            <Grid RowDefinitions="Auto,*" Grid.Row="1">
-                <ScrollViewer Grid.Row="1" Grid.Column="1">
-                    <ItemsControl VerticalAlignment="Stretch" Items="{Binding #databasesComboBox.SelectedItem.Columns}">
-                        <ItemsControl.DataTemplates>
-                            <DataTemplate DataType="Data:Column">
-                                <Grid VerticalAlignment="Top" ColumnDefinitions="*,30" Background="Transparent" Margin="0,2,0,2">
-                                    <TextBlock Text="{Binding Name, Mode=TwoWay}" Margin="{DynamicResource TextControlThemePadding}" Grid.Column="0"/>
-                                    <Button Content="+" Grid.Column="1" Command="{Binding $parent[TopLevel].DataContext.OnUseColumnName}" CommandParameter="{Binding}" Padding="0" VerticalAlignment="Stretch" VerticalContentAlignment="Center" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Margin="6,0,0,0" x:CompileBindings="False"/>
-                                </Grid>
-                            </DataTemplate>
-                        </ItemsControl.DataTemplates>
-                    </ItemsControl>
-                </ScrollViewer>
-            </Grid>
-        </Grid>
+            <ScrollViewer>
+                <ItemsControl VerticalAlignment="Stretch" Items="{Binding #databasesComboBox.SelectedItem.Columns}">
+                    <ItemsControl.DataTemplates>
+                        <DataTemplate DataType="Data:Column">
+                            <Grid VerticalAlignment="Top" ColumnDefinitions="*,30" Background="Transparent" Margin="0,2,0,2">
+                                <TextBlock Text="{Binding Name, Mode=TwoWay}" Margin="{DynamicResource TextControlThemePadding}" Grid.Column="0"/>
+                                <Button Content="+" Grid.Column="1" Command="{Binding $parent[TopLevel].DataContext.OnUseColumnName}" CommandParameter="{Binding}" Padding="0" VerticalAlignment="Stretch" VerticalContentAlignment="Center" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Margin="6,0,0,0" x:CompileBindings="False"/>
+                            </Grid>
+                        </DataTemplate>
+                    </ItemsControl.DataTemplates>
+                </ItemsControl>
+            </ScrollViewer>
+        </DockPanel>
         <TextBlock Text="Page Properties" Margin="6" Grid.Row="0" Grid.Column="1"/>
         <ScrollViewer Margin="6" Grid.Row="1" Grid.Column="1">
             <Grid RowDefinitions="Auto,*" ColumnDefinitions="50*,Auto,50*">

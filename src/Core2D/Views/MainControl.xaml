@@ -67,14 +67,14 @@
                 <ListBox x:Name="recent" Items="{Binding RecentProjects}" SelectedItem="{Binding CurrentRecentProject, Mode=TwoWay}" Grid.Column="3" Grid.Row="3" Grid.ColumnSpan="1" Grid.RowSpan="5">
                     <ListBox.DataTemplates>
                         <DataTemplate DataType="Recent:RecentFile">
-                            <Grid x:Name="grid" Cursor="Hand">
+                            <Panel x:Name="grid" Cursor="Hand">
                                 <i:Interaction.Behaviors>
                                     <ia:EventTriggerBehavior EventName="DoubleTapped" SourceObject="{Binding #grid}" x:CompileBindings="False">
                                         <ia:InvokeCommandAction Command="{Binding #recent.DataContext.OnOpenProject}" CommandParameter="{Binding #grid.DataContext.Path}" x:CompileBindings="False"/>
                                     </ia:EventTriggerBehavior>
                                 </i:Interaction.Behaviors>
                                 <TextBlock Text="{Binding Name}" Grid.Column="0" ToolTip.Tip="{Binding Path}"/>
-                            </Grid>
+                            </Panel>
                         </DataTemplate>
                     </ListBox.DataTemplates>
                 </ListBox>

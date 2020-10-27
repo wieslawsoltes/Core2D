@@ -16,7 +16,7 @@
              d:DataContext="{x:Static Designer:DesignerContext.Editor}"
              d:DesignWidth="1200" d:DesignHeight="540"
              x:DataType="Editor:ProjectEditor" x:CompileBindings="True">
-    <Grid renderer:RendererOptions.Renderer="{Binding DocumentRenderer}" renderer:RendererOptions.DataFlow="{Binding DataFlow}">
+    <Panel renderer:RendererOptions.Renderer="{Binding DocumentRenderer}" renderer:RendererOptions.DataFlow="{Binding DataFlow}">
         <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
             <Carousel Items="{Binding Project.Documents}" SelectedItem="{Binding Project.CurrentDocument}" IsVirtualized="False" VerticalAlignment="Center" Margin="2">
                 <Carousel.DataTemplates>
@@ -24,10 +24,10 @@
                         <ItemsControl VerticalAlignment="Stretch" Items="{Binding Pages}">
                             <ItemsControl.DataTemplates>
                                 <DataTemplate DataType="Containers:PageContainer">
-                                    <Grid ClipToBounds="False" Margin="0,4,0,4">
+                                    <Panel ClipToBounds="False" Margin="0,4,0,4">
                                         <views:PresenterControl Container="{Binding}" PresenterType="Data" ClipToBounds="False"/>
                                         <views:PresenterControl Container="{Binding}" PresenterType="Export" ClipToBounds="False"/>
-                                    </Grid>
+                                    </Panel>
                                 </DataTemplate>
                             </ItemsControl.DataTemplates>
                         </ItemsControl>
@@ -35,5 +35,5 @@
                 </Carousel.DataTemplates>
             </Carousel>
         </ScrollViewer>
-    </Grid>
+    </Panel>
 </UserControl>

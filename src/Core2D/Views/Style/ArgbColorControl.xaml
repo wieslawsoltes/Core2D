@@ -27,8 +27,8 @@
             </VisualBrush.Visual>
         </VisualBrush>
     </UserControl.Resources>
-    <Grid RowDefinitions="Auto,*">
-        <Grid Height="30" Margin="{DynamicResource TextControlThemePadding}" Grid.Row="0">
+    <DockPanel>
+        <Panel Height="30" Margin="{DynamicResource TextControlThemePadding}" DockPanel.Dock="Top">
             <Border BorderThickness="0" CornerRadius="2" Background="{DynamicResource ColorCheckerBoard}"/>
             <Border BorderThickness="0" CornerRadius="2">
                 <Border.Background>
@@ -40,8 +40,8 @@
                     </MultiBinding>
                 </Border.Background>
             </Border>
-        </Grid>
-        <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto" ColumnDefinitions="Auto,*" Grid.Row="1">
+        </Panel>
+        <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto" ColumnDefinitions="Auto,*" >
             <TextBlock Text="Red" Margin="{DynamicResource TextControlThemePadding}" VerticalAlignment="Center" Grid.Row="0" Grid.Column="0"/>
             <TextBlock Text="Green" Margin="{DynamicResource TextControlThemePadding}" VerticalAlignment="Center" Grid.Row="1" Grid.Column="0"/>
             <TextBlock Text="Blue" Margin="{DynamicResource TextControlThemePadding}" VerticalAlignment="Center" Grid.Row="2" Grid.Column="0"/>
@@ -57,5 +57,5 @@
                 <TextBox Text="{Binding A, Mode=TwoWay}" TextAlignment="Center" Margin="{DynamicResource TextControlThemePadding}" MinWidth="40" Grid.Column="3"/>
             </Grid>
         </Grid>
-    </Grid>
+    </DockPanel>
 </UserControl>

@@ -19,12 +19,12 @@
     </UserControl.Resources>
     <TabControl>
         <TabItem Header="Group">
-            <Grid RowDefinitions="Auto,*">
-                <StackPanel Grid.Row="0">
+            <DockPanel>
+                <StackPanel DockPanel.Dock="Top">
                     <TextBlock Text="Name"  Margin="{DynamicResource TextControlThemePadding}"/>
                     <TextBox Text="{Binding Name, Mode=TwoWay}"/>
                 </StackPanel>
-                <TabControl Grid.Row="1">
+                <TabControl>
                     <TabItem Header="Properties">
                         <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
                             <Grid RowDefinitions="Auto,*" ColumnDefinitions="50*,Auto,50*" IsVisible="{Binding !!ShapesProperties.Length}">
@@ -97,7 +97,7 @@
                         </Grid>
                     </TabItem>
                 </TabControl>
-            </Grid>
+            </DockPanel>
         </TabItem>
         <TabItem Header="Data">
             <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">

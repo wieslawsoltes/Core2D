@@ -17,12 +17,12 @@
     <UserControl.Resources>
         <converters:ObjectToTypeStringConverter x:Key="ObjectToTypeStringConverter"/>
     </UserControl.Resources>
-    <Grid RowDefinitions="Auto,*">
-        <StackPanel Grid.Row="0">
+    <DockPanel>
+        <StackPanel DockPanel.Dock="Top">
             <TextBlock Text="FillRule" Margin="{DynamicResource TextControlThemePadding}"/>
             <ComboBox Items="{x:Static Editor:Enums.XFillRuleValues}" SelectedItem="{Binding FillRule, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
         </StackPanel>
-        <TabControl Grid.Row="1">
+        <TabControl>
             <TabItem Header="Figures">
                 <TreeView x:Name="tree" Items="{Binding Figures}">
                     <TreeView.Styles>
@@ -46,5 +46,5 @@
                 </ScrollViewer>
             </TabItem>
         </TabControl>
-    </Grid>
+    </DockPanel>
 </UserControl>
