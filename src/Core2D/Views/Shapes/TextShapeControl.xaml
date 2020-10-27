@@ -19,7 +19,6 @@
                     <CheckBox Content="IsStroked" IsChecked="{Binding IsStroked, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
                     <CheckBox Content="IsFilled" IsChecked="{Binding IsFilled, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
                     <TextBlock Text="Text" Margin="{DynamicResource TextControlThemePadding}"/>
-                    <!--<TextBox Text="{Binding Text, Mode=TwoWay}" VerticalAlignment="Stretch" AcceptsReturn="True"/>-->
                     <StackPanel Orientation="Horizontal" VerticalAlignment="Stretch">
                         <TextBox Text="{Binding Text, Mode=TwoWay}" AcceptsReturn="True" HorizontalAlignment="Stretch"/>
                         <Button Content="..." Command="{Binding $parent[UserControl].OnEditTextBinding}" CommandParameter="{Binding}" VerticalAlignment="Stretch" VerticalContentAlignment="Center" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Padding="0" Margin="6,0,0,0" Width="30" x:CompileBindings="False"/>

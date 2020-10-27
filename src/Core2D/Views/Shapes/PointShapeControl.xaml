@@ -11,8 +11,8 @@
              d:DataContext="{x:Static Designer:DesignerContext.Point}"
              d:DesignWidth="250" d:DesignHeight="400"
              x:DataType="Shapes:PointShape" x:CompileBindings="True">
-    <TabControl>
-        <TabItem Header="Point">
+    <StackPanel>
+        <Expander Header="Point" IsExpanded="True">
             <StackPanel>
                 <TextBlock Text="Name" Margin="{DynamicResource TextControlThemePadding}"/>
                 <TextBox Text="{Binding Name, Mode=TwoWay}"/>
@@ -23,16 +23,12 @@
                 <TextBlock Text="Alignment" Margin="{DynamicResource TextControlThemePadding}"/>
                 <ComboBox Items="{x:Static Editor:Enums.PointAlignmentValues}" SelectedItem="{Binding Alignment, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
             </StackPanel>
-        </TabItem>
-        <TabItem Header="Data">
-            <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-                <ContentControl Content="{Binding Data}"/>
-            </ScrollViewer>
-        </TabItem>
-        <TabItem Header="State">
-            <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-                <ContentControl Content="{Binding State}"/>
-            </ScrollViewer>
-        </TabItem>
-    </TabControl>
+        </Expander>
+        <Expander Header="Data" IsExpanded="False">
+            <ContentControl Content="{Binding Data}"/>
+        </Expander>
+        <Expander Header="State">
+            <ContentControl Content="{Binding State}"/>
+        </Expander>
+    </StackPanel>
 </UserControl>

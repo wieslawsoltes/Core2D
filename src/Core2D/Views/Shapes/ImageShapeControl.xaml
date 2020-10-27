@@ -24,12 +24,12 @@
                 <TabControl>
                     <TabItem Header="TopLeft">
                         <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-                            <ContentControl Content="{Binding TopLeft}" x:DataType="Shapes:TextShape" />
+                            <ContentControl Content="{Binding TopLeft}" />
                         </ScrollViewer>
                     </TabItem>
                     <TabItem Header="BottomRight">
                         <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-                            <ContentControl Content="{Binding BottomRight}" x:DataType="Shapes:TextShape" />
+                            <ContentControl Content="{Binding BottomRight}" />
                         </ScrollViewer>
                     </TabItem>
                 </TabControl>
