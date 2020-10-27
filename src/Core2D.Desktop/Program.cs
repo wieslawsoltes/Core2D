@@ -59,7 +59,7 @@ namespace Core2D
             return applicationLifetime?.MainWindow;
         }
 
-        public static MainControl? GetMainwControl()
+        public static MainControl? GetMainControl()
         {
             var mainWindow = GetMainwWindow();
             return mainWindow?.Content as MainControl;
@@ -75,7 +75,7 @@ namespace Core2D
         {
             await Util.RunUIJob(() =>
             {
-                var mainConntrol = GetMainwControl();
+                var mainConntrol = GetMainControl();
                 if (mainConntrol != null)
                 {
                     var size = new Size(width, height);
