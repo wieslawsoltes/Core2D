@@ -17,15 +17,15 @@
         mc:Ignorable="d"
         d:DataContext="{x:Static Designer:DesignerContext.Editor}"
         d:DesignWidth="1200" d:DesignHeight="580"
-             x:DataType="Editor:ProjectEditor" x:CompileBindings="True">
+        x:DataType="Editor:ProjectEditor" x:CompileBindings="True">
     <Window.Resources>
-        <converters:EditorToTitleMultiConverter x:Key="EditorToTitleMultiConverter"/>
+        <converters:EditorToTitleMultiConverter x:Key="EditorToTitleMultiConverter" />
     </Window.Resources>
     <Window.Title>
         <MultiBinding Mode="OneWay" Converter="{StaticResource EditorToTitleMultiConverter}">
-            <Binding Path="Project.Name"/>
-            <Binding Path="IsProjectDirty"/>
+            <Binding Path="Project.Name" />
+            <Binding Path="IsProjectDirty" />
         </MultiBinding>
     </Window.Title>
-    <views:MainControl x:Name="MainControl"/>
+    <views:MainControl x:Name="MainControl" />
 </Window>
