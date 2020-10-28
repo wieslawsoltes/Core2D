@@ -18,6 +18,9 @@
         <StyleInclude Source="avares://Avalonia.Controls.DataGrid/Themes/Default.xaml" />
         <StyleInclude Source="avares://AvaloniaEdit/AvaloniaEdit.xaml" />
         <StyleInclude Source="avares://Core2D/Icons.xaml" />
+        <Style Selector="Expander /template/ ToggleButton#PART_toggle">
+            <Setter Property="HorizontalAlignment" Value="Stretch" />
+        </Style>
     </Application.Styles>
     <Application.DataTemplates>
         <local:ViewLocator />
