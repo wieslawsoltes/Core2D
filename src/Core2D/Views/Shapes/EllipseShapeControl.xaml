@@ -13,7 +13,7 @@
     <StackPanel>
         <Expander Header="Ellipse" IsExpanded="True">
             <StackPanel>
-                <TextBlock Text="Name" Margin="{DynamicResource TextControlThemePadding}" />
+                <Label Content="Name" Margin="{DynamicResource TextControlThemePadding}" />
                 <TextBox Text="{Binding Name, Mode=TwoWay}" />
                 <CheckBox Content="IsStroked" IsChecked="{Binding IsStroked, Mode=TwoWay}" HorizontalAlignment="Stretch" />
                 <CheckBox Content="IsFilled" IsChecked="{Binding IsFilled, Mode=TwoWay}" HorizontalAlignment="Stretch" />

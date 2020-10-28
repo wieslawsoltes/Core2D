@@ -10,42 +10,28 @@
              d:DataContext="{x:Static Designer:DesignerContext.Line}"
              d:DesignWidth="250" d:DesignHeight="400"
              x:DataType="Shapes:LineShape" x:CompileBindings="True">
-    <TabControl>
-        <TabItem Header="Line">
-            <DockPanel>
-                <StackPanel DockPanel.Dock="Top">
-                    <TextBlock Text="Name" Margin="{DynamicResource TextControlThemePadding}"/>
-                    <TextBox Text="{Binding Name, Mode=TwoWay}"/>
-                    <CheckBox Content="IsStroked" IsChecked="{Binding IsStroked, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
-                </StackPanel>
-                <TabControl>
-                    <TabItem Header="Start">
-                        <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-                            <ContentControl Content="{Binding Start}"/>
-                        </ScrollViewer>
-                    </TabItem>
-                    <TabItem Header="End">
-                        <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-                            <ContentControl Content="{Binding End}"/>
-                        </ScrollViewer>
-                    </TabItem>
-                </TabControl>
-            </DockPanel>
-        </TabItem>
-        <TabItem Header="Data">
-            <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-                <ContentControl Content="{Binding Data}"/>
-            </ScrollViewer>
-        </TabItem>
-        <TabItem Header="Style">
-            <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-                <ContentControl Content="{Binding Style}"/>
-            </ScrollViewer>
-        </TabItem>
-        <TabItem Header="State">
-            <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-                <ContentControl Content="{Binding State}"/>
-            </ScrollViewer>
-        </TabItem>
-    </TabControl>
+    <StackPanel>
+        <Expander Header="Line" IsExpanded="True">
+            <StackPanel>
+                <Label Content="Name" Margin="{DynamicResource TextControlThemePadding}" />
+                <TextBox Text="{Binding Name, Mode=TwoWay}" />
+                <CheckBox Content="IsStroked" IsChecked="{Binding IsStroked, Mode=TwoWay}" HorizontalAlignment="Stretch" />
+            </StackPanel>
+        </Expander>
+        <Expander Header="Start" IsExpanded="False">
+            <ContentControl Content="{Binding Start}" />
+        </Expander>
+        <Expander Header="End" IsExpanded="False">
+            <ContentControl Content="{Binding End}" />
+        </Expander>
+        <Expander Header="Data" IsExpanded="False">
+            <ContentControl Content="{Binding Data}" />
+        </Expander>
+        <Expander Header="Style" IsExpanded="False">
+            <ContentControl Content="{Binding Style}" />
+        </Expander>
+        <Expander Header="State" IsExpanded="False">
+            <ContentControl Content="{Binding State}" />
+        </Expander>
+    </StackPanel>>
 </UserControl>

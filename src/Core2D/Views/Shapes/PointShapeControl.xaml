@@ -14,21 +14,21 @@
     <StackPanel>
         <Expander Header="Point" IsExpanded="True">
             <StackPanel>
-                <TextBlock Text="Name" Margin="{DynamicResource TextControlThemePadding}"/>
-                <TextBox Text="{Binding Name, Mode=TwoWay}"/>
-                <TextBlock Text="X" Margin="{DynamicResource TextControlThemePadding}"/>
-                <TextBox Text="{Binding X, Mode=TwoWay}"/>
-                <TextBlock Text="Y" Margin="{DynamicResource TextControlThemePadding}"/>
-                <TextBox Text="{Binding Y, Mode=TwoWay}"/>
-                <TextBlock Text="Alignment" Margin="{DynamicResource TextControlThemePadding}"/>
-                <ComboBox Items="{x:Static Editor:Enums.PointAlignmentValues}" SelectedItem="{Binding Alignment, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
+                <Label Content="Name" Margin="{DynamicResource TextControlThemePadding}" />
+                <TextBox Text="{Binding Name, Mode=TwoWay}" />
+                <Label Content="X" Margin="{DynamicResource TextControlThemePadding}" />
+                <TextBox Text="{Binding X, Mode=TwoWay}" />
+                <Label Content="Y" Margin="{DynamicResource TextControlThemePadding}" />
+                <TextBox Text="{Binding Y, Mode=TwoWay}" />
+                <Label Content="Alignment" Margin="{DynamicResource TextControlThemePadding}" />
+                <ComboBox Items="{x:Static Editor:Enums.PointAlignmentValues}" SelectedItem="{Binding Alignment, Mode=TwoWay}" HorizontalAlignment="Stretch" />
             </StackPanel>
         </Expander>
         <Expander Header="Data" IsExpanded="False">
-            <ContentControl Content="{Binding Data}"/>
+            <ContentControl Content="{Binding Data}" />
         </Expander>
-        <Expander Header="State">
-            <ContentControl Content="{Binding State}"/>
+        <Expander Header="State" IsExpanded="False">
+            <ContentControl Content="{Binding State}" />
         </Expander>
     </StackPanel>
 </UserControl>
