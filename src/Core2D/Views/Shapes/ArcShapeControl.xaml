@@ -12,8 +12,8 @@
              x:DataType="Shapes:ArcShape" x:CompileBindings="True">
     <StackPanel>
         <Expander Header="Arc" IsExpanded="True">
-            <StackPanel DockPanel.Dock="Top">
                 <TextBlock Text="Name" Margin="{DynamicResource TextControlThemePadding}" />
+            <StackPanel>
                 <TextBox Text="{Binding Name, Mode=TwoWay}" />
                 <CheckBox Content="IsStroked" IsChecked="{Binding IsStroked, Mode=TwoWay}" HorizontalAlignment="Stretch" />
                 <CheckBox Content="IsFilled" IsChecked="{Binding IsFilled, Mode=TwoWay}" HorizontalAlignment="Stretch" />
