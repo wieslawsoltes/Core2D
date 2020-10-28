@@ -25,29 +25,19 @@
             </StackPanel>
         </Expander>
         <Expander Header="TopLeft" IsExpanded="False">
-            <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-                <ContentControl Content="{Binding TopLeft}"/>
-            </ScrollViewer>
+            <ContentControl Content="{Binding TopLeft}"/>
         </Expander>
         <Expander Header="BottomRight" IsExpanded="False">
-            <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-                <ContentControl Content="{Binding BottomRight}"/>
-            </ScrollViewer>
+            <ContentControl Content="{Binding BottomRight}"/>
         </Expander>
         <Expander Header="Data" IsExpanded="False">
-            <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-                <ContentControl Content="{Binding Data}"/>
-            </ScrollViewer>
+            <ContentControl Content="{Binding Data}"/>
         </Expander>
         <Expander Header="Style" IsExpanded="False">
-            <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-                <ContentControl Content="{Binding Style}"/>
-            </ScrollViewer>
+            <ContentControl Content="{Binding Style}"/>
         </Expander>
         <Expander Header="State" IsExpanded="False">
-            <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-                <ContentControl Content="{Binding State}"/>
-            </ScrollViewer>
+            <ContentControl Content="{Binding State}"/>
         </Expander>
     </StackPanel>
 </UserControl>
