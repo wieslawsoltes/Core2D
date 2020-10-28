@@ -11,22 +11,18 @@
              d:DataContext="{x:Static Designer:DesignerContext.LineStyle}"
              d:DesignWidth="250" d:DesignHeight="400"
              x:DataType="Style:LineStyle" x:CompileBindings="True">
-    <DockPanel>
-        <StackPanel DockPanel.Dock="Top">
-            <TextBlock Text="Name" Margin="{DynamicResource TextControlThemePadding}"/>
-            <TextBox Text="{Binding Name, Mode=TwoWay}"/>
-            <CheckBox Content="IsCurved" IsChecked="{Binding IsCurved, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
-            <TextBlock Text="Curvature" Margin="{DynamicResource TextControlThemePadding}"/>
-            <TextBox Text="{Binding Curvature, Mode=TwoWay}"/>
-            <TextBlock Text="CurveOrientation" Margin="{DynamicResource TextControlThemePadding}"/>
-            <ComboBox Items="{x:Static Editor:Enums.CurveOrientationValues}" SelectedItem="{Binding CurveOrientation, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
+    <StackPanel>
+        <StackPanel>
+            <Label Content="Name" Margin="{DynamicResource TextControlThemePadding}" />
+            <TextBox Text="{Binding Name, Mode=TwoWay}" />
+            <CheckBox Content="IsCurved" IsChecked="{Binding IsCurved, Mode=TwoWay}" HorizontalAlignment="Stretch" />
+            <Label Content="Curvature" Margin="{DynamicResource TextControlThemePadding}" />
+            <TextBox Text="{Binding Curvature, Mode=TwoWay}" />
+            <Label Content="CurveOrientation" Margin="{DynamicResource TextControlThemePadding}" />
+            <ComboBox Items="{x:Static Editor:Enums.CurveOrientationValues}" SelectedItem="{Binding CurveOrientation, Mode=TwoWay}" HorizontalAlignment="Stretch" />
         </StackPanel>
-        <TabControl>
-            <TabItem Header="FixedLength">
-                <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-                    <ContentControl Content="{Binding FixedLength}"/>
-                </ScrollViewer>
-            </TabItem>
-        </TabControl>
-    </DockPanel>
+        <Expander Header="FixedLength" IsExpanded="False">
+            <ContentControl Content="{Binding FixedLength}" />
+        </Expander>
+    </StackPanel>
 </UserControl>

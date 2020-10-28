@@ -10,31 +10,25 @@
              d:DataContext="{x:Static Designer:DesignerContext.LineFixedLength}"
              d:DesignWidth="250" d:DesignHeight="400"
              x:DataType="Style:LineFixedLength" x:CompileBindings="True">
-    <DockPanel>
-        <StackPanel DockPanel.Dock="Top">
-            <TextBlock Text="Length" Margin="{DynamicResource TextControlThemePadding}"/>
-            <TextBox Text="{Binding Length, Mode=TwoWay}"/>
-            <TextBlock Text="Flags" Margin="{DynamicResource TextControlThemePadding}"/>
+    <StackPanel>
+        <StackPanel>
+            <Label Content="Length" Margin="{DynamicResource TextControlThemePadding}" />
+            <TextBox Text="{Binding Length, Mode=TwoWay}" />
+            <Label Content="Flags" Margin="{DynamicResource TextControlThemePadding}" />
             <StackPanel>
-                <CheckBox Content="Disabled" IsChecked="{Binding Disabled, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
-                <CheckBox Content="Start" IsChecked="{Binding Start, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
-                <CheckBox Content="End" IsChecked="{Binding End, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
-                <CheckBox Content="Vertical" IsChecked="{Binding Vertical, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
-                <CheckBox Content="Horizontal" IsChecked="{Binding Horizontal, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
-                <CheckBox Content="All" IsChecked="{Binding All, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
+                <CheckBox Content="Disabled" IsChecked="{Binding Disabled, Mode=TwoWay}" HorizontalAlignment="Stretch" />
+                <CheckBox Content="Start" IsChecked="{Binding Start, Mode=TwoWay}" HorizontalAlignment="Stretch" />
+                <CheckBox Content="End" IsChecked="{Binding End, Mode=TwoWay}" HorizontalAlignment="Stretch" />
+                <CheckBox Content="Vertical" IsChecked="{Binding Vertical, Mode=TwoWay}" HorizontalAlignment="Stretch" />
+                <CheckBox Content="Horizontal" IsChecked="{Binding Horizontal, Mode=TwoWay}" HorizontalAlignment="Stretch" />
+                <CheckBox Content="All" IsChecked="{Binding All, Mode=TwoWay}" HorizontalAlignment="Stretch" />
             </StackPanel>
         </StackPanel>
-        <TabControl>
-            <TabItem Header="StartTrigger">
-                <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-                    <ContentControl Content="{Binding StartTrigger}"/>
-                </ScrollViewer>
-            </TabItem>
-            <TabItem Header="EndTrigger">
-                <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-                    <ContentControl Content="{Binding EndTrigger}"/>
-                </ScrollViewer>
-            </TabItem>
-        </TabControl>
-    </DockPanel>
+        <Expander Header="StartTrigger" IsExpanded="False">
+            <ContentControl Content="{Binding StartTrigger}" />
+        </Expander>
+        <Expander Header="EndTrigger" IsExpanded="False">
+            <ContentControl Content="{Binding EndTrigger}" />
+        </Expander>
+    </StackPanel>
 </UserControl>

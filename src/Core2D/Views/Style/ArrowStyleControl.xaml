@@ -12,38 +12,36 @@
              d:DataContext="{x:Static Designer:DesignerContext.ArrowStyle}"
              d:DesignWidth="250" d:DesignHeight="400"
              x:DataType="Style:ArrowStyle" x:CompileBindings="True">
-    <DockPanel>
-        <StackPanel DockPanel.Dock="Top">
-            <TextBlock Text="Name" Margin="{DynamicResource TextControlThemePadding}"/>
-            <TextBox Text="{Binding Name, Mode=TwoWay}"/>
-            <TextBlock Text="Arrow Type" Margin="{DynamicResource TextControlThemePadding}"/>
-            <ComboBox Items="{x:Static Editor:Enums.ArrowTypeValues}" SelectedItem="{Binding ArrowType, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
-            <CheckBox Content="IsStroked" IsChecked="{Binding IsStroked, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
-            <CheckBox Content="IsFilled" IsChecked="{Binding IsFilled, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
-            <TextBlock Text="RadiusX" Margin="{DynamicResource TextControlThemePadding}"/>
-            <TextBox Text="{Binding RadiusX, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
-            <TextBlock Text="RadiusY" Margin="{DynamicResource TextControlThemePadding}"/>
-            <TextBox Text="{Binding RadiusY, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
-            <TextBlock Text="Thickness" Margin="{DynamicResource TextControlThemePadding}"/>
-            <TextBox Text="{Binding Thickness, Mode=TwoWay}" x:DataType="Style:BaseStyle"/>
-            <TextBlock Text="Line Cap" Margin="{DynamicResource TextControlThemePadding}"/>
-            <ComboBox Items="{x:Static Editor:Enums.LineCapValues}" x:DataType="Style:BaseStyle" SelectedItem="{Binding LineCap, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
-            <TextBlock Text="Dashes" Margin="{DynamicResource TextControlThemePadding}"/>
-            <TextBox Text="{Binding Dashes, Mode=TwoWay}" x:DataType="Style:BaseStyle"/>
-            <TextBlock Text="Dash Offset" Margin="{DynamicResource TextControlThemePadding}"/>
-            <TextBox Text="{Binding DashOffset, Mode=TwoWay}" x:DataType="Style:BaseStyle"/>
+    <StackPanel>
+        <StackPanel>
+            <Label Content="Name" Margin="{DynamicResource TextControlThemePadding}" />
+            <TextBox Text="{Binding Name, Mode=TwoWay}" />
+            <Label Content="Arrow Type" Margin="{DynamicResource TextControlThemePadding}" />
+            <ComboBox Items="{x:Static Editor:Enums.ArrowTypeValues}" SelectedItem="{Binding ArrowType, Mode=TwoWay}" HorizontalAlignment="Stretch" />
+            <CheckBox Content="IsStroked" IsChecked="{Binding IsStroked, Mode=TwoWay}" HorizontalAlignment="Stretch" />
+            <CheckBox Content="IsFilled" IsChecked="{Binding IsFilled, Mode=TwoWay}" HorizontalAlignment="Stretch" />
+            <Label Content="RadiusX" Margin="{DynamicResource TextControlThemePadding}" />
+            <TextBox Text="{Binding RadiusX, Mode=TwoWay}" HorizontalAlignment="Stretch" />
+            <Label Content="RadiusY" Margin="{DynamicResource TextControlThemePadding}" />
+            <TextBox Text="{Binding RadiusY, Mode=TwoWay}" HorizontalAlignment="Stretch" />
         </StackPanel>
-        <TabControl>
-            <TabItem Header="Stroke">
-                <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-                    <ContentControl Content="{Binding Stroke}" x:DataType="Style:BaseStyle"/>
-                </ScrollViewer>
-            </TabItem>
-            <TabItem Header="Fill">
-                <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-                    <ContentControl Content="{Binding Fill}" x:DataType="Style:BaseStyle"/>
-                </ScrollViewer>
-            </TabItem>
-        </TabControl>
-    </DockPanel>
+        <Expander Header="Stroke" IsExpanded="False">
+            <DockPanel>
+                <StackPanel DockPanel.Dock="Top">
+                    <Label Content="Thickness" Margin="{DynamicResource TextControlThemePadding}" />
+                    <TextBox Text="{Binding Thickness, Mode=TwoWay}" x:DataType="Style:BaseStyle" />
+                    <Label Content="Line Cap" Margin="{DynamicResource TextControlThemePadding}" />
+                    <ComboBox Items="{x:Static Editor:Enums.LineCapValues}" SelectedItem="{Binding LineCap, Mode=TwoWay}" x:DataType="Style:BaseStyle" HorizontalAlignment="Stretch" />
+                    <Label Content="Dashes" Margin="{DynamicResource TextControlThemePadding}" />
+                    <TextBox Text="{Binding Dashes, Mode=TwoWay}" x:DataType="Style:BaseStyle" />
+                    <Label Content="Dash Offset" Margin="{DynamicResource TextControlThemePadding}" />
+                    <TextBox Text="{Binding DashOffset, Mode=TwoWay}" x:DataType="Style:BaseStyle" />
+                </StackPanel>
+                <ContentControl Content="{Binding Stroke}" x:DataType="Style:BaseStyle" />
+            </DockPanel>
+        </Expander>
+        <Expander Header="Fill" IsExpanded="False">
+            <ContentControl Content="{Binding Fill}" x:DataType="Style:BaseStyle" />
+        </Expander>
+    </StackPanel>
 </UserControl>
