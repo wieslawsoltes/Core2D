@@ -40,5 +40,5 @@
         <Expander Header="State" IsExpanded="False">
             <ContentControl Content="{Binding State}" />
         </Expander>
-    </StackPanel>>
+    </StackPanel>
 </UserControl>
