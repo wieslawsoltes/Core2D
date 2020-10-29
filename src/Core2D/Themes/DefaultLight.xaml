@@ -15,6 +15,9 @@
             <Color x:Key="SystemBaseHighColor">#FF000000</Color>
         </Style.Resources>
     </Style>
+    <Style Selector="Expander /template/ ToggleButton#PART_toggle">
+        <Setter Property="HorizontalAlignment" Value="Stretch" />
+    </Style>
     <Style Selector="ListBoxItem">
         <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
     </Style>
