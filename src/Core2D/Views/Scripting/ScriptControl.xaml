@@ -16,16 +16,7 @@
     <UserControl.KeyBindings>
         <KeyBinding Command="{Binding $parent[TopLevel].DataContext.OnExecuteRepl}" CommandParameter="{Binding #textCode.Text}" Gesture="Ctrl+Enter" x:CompileBindings="False"/>
     </UserControl.KeyBindings>
-    <Grid>
-        <!--
-        <TextBox x:Name="textCode" 
-                 Text="{Binding Code}"
-                 FontFamily="{DynamicResource CodeFontFamily}"
-                 ScrollViewer.HorizontalScrollBarVisibility="Auto"
-                 ScrollViewer.VerticalScrollBarVisibility="Auto"
-                 AcceptsReturn="True"
-                 AcceptsTab="True"/>
-        -->
+    <Panel>
         <ae:TextEditor x:Name="textCode"
                        Margin="0"
                        Background="White"
@@ -41,5 +32,5 @@
                 <behaviors:DocumentTextBindingBehavior Text="{Binding Code, Mode=TwoWay}"/>
             </i:Interaction.Behaviors>
         </ae:TextEditor>
-    </Grid>
+    </Panel>
 </UserControl>
