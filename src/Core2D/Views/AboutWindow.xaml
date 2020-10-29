@@ -20,6 +20,6 @@
         d:DesignWidth="1000" d:DesignHeight="600"
         x:DataType="Editor:ProjectEditor" x:CompileBindings="True">
     <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-        <views:AboutControl DataContext="{Binding AboutInfo}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        <views:AboutView DataContext="{Binding AboutInfo}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
     </ScrollViewer>
 </Window>

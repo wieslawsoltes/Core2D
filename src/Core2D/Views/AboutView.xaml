@@ -1,0 +1,40 @@
+﻿<UserControl x:Class="Core2D.Views.AboutView"
+             xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:Editor="clr-namespace:Core2D.Editor;assembly=Core2D"
+             xmlns:Designer="clr-namespace:Core2D.Designer;assembly=Core2D"
+             mc:Ignorable="d"
+             d:DesignWidth="1000" d:DesignHeight="600"
+             x:DataType="Editor:AboutInfo" x:CompileBindings="True">
+    <Grid ColumnDefinitions="Auto,*" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto" Margin="10">
+        <Label Content="{Binding Title}" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Margin="4" FontSize="18" FontWeight="SemiBold"/>
+        <Label Content="Version" Grid.Column="0" Grid.Row="1" Margin="4"/>
+        <Label Content="Description" Grid.Column="0" Grid.Row="2" Margin="4"/>
+        <Label Content="Copyright" Grid.Column="0" Grid.Row="3" Margin="4"/>
+        <Label Content="License" Grid.Column="0" Grid.Row="4" Margin="4"/>
+        <Label Content="OperatingSystem" Grid.Column="0" Grid.Row="5" Margin="4"/>
+        <Label Content="IsDesktop" Grid.Column="0" Grid.Row="6" Margin="4"/>
+        <Label Content="IsMobile" Grid.Column="0" Grid.Row="7" Margin="4"/>
+        <Label Content="IsCoreClr" Grid.Column="0" Grid.Row="8" Margin="4"/>
+        <Label Content="IsMono" Grid.Column="0" Grid.Row="9" Margin="4"/>
+        <Label Content="IsDotNetFramework" Grid.Column="0" Grid.Row="10" Margin="4"/>
+        <Label Content="IsUnix" Grid.Column="0" Grid.Row="11" Margin="4"/>
+        <Label Content="WindowingSubsystem" Grid.Column="0" Grid.Row="12" Margin="4"/>
+        <Label Content="RenderingSubsystem" Grid.Column="0" Grid.Row="13" Margin="4"/>
+        <Label Content="{Binding Version}" Grid.Column="1" Grid.Row="1" Margin="4"/>
+        <Label Content="{Binding Description}" Grid.Column="1" Grid.Row="2" Margin="4"/>
+        <Label Content="{Binding Copyright}" Grid.Column="1" Grid.Row="3" Margin="4"/>
+        <Label Content="{Binding License}" Grid.Column="1" Grid.Row="4" Margin="4"/>
+        <Label Content="{Binding OperatingSystem}" Grid.Column="1" Grid.Row="5" Margin="4"/>
+        <Label Content="{Binding IsDesktop}" Grid.Column="1" Grid.Row="6" Margin="4"/>
+        <Label Content="{Binding IsMobile}" Grid.Column="1" Grid.Row="7" Margin="4"/>
+        <Label Content="{Binding IsCoreClr}" Grid.Column="1" Grid.Row="8" Margin="4"/>
+        <Label Content="{Binding IsMono}" Grid.Column="1" Grid.Row="9" Margin="4"/>
+        <Label Content="{Binding IsDotNetFramework}" Grid.Column="1" Grid.Row="10" Margin="4"/>
+        <Label Content="{Binding IsUnix}" Grid.Column="1" Grid.Row="11" Margin="4"/>
+        <Label Content="{Binding WindowingSubsystemName}" Grid.Column="1" Grid.Row="12" Margin="4"/>
+        <Label Content="{Binding RenderingSubsystemName}" Grid.Column="1" Grid.Row="13" Margin="4"/>
+    </Grid>
+</UserControl>

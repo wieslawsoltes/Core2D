@@ -8,7 +8,7 @@ namespace Core2D
     {
         public IControl Build(object data)
         {
-            var name = data.GetType()?.FullName?.Replace("Core2D", "Core2D.Views") + "Control";
+            var name = data.GetType()?.FullName?.Replace("Core2D", "Core2D.Views") + "View";
             if (name == null)
             {
                 return new TextBlock { Text = "Invalid Data Type" };

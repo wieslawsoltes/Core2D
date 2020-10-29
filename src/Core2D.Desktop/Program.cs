@@ -59,10 +59,10 @@ namespace Core2D
             return applicationLifetime?.MainWindow;
         }
 
-        public static MainControl? GetMainControl()
+        public static MainView? GetMainView()
         {
             var mainWindow = GetMainwWindow();
-            return mainWindow?.Content as MainControl;
+            return mainWindow?.Content as MainView;
         }
 
         public static ProjectEditor? GetEditor()
@@ -75,7 +75,7 @@ namespace Core2D
         {
             await Util.RunUIJob(() =>
             {
-                var mainConntrol = GetMainControl();
+                var mainConntrol = GetMainView();
                 if (mainConntrol != null)
                 {
                     var size = new Size(width, height);
@@ -169,8 +169,8 @@ namespace Core2D
                 var applicationLifetime = (IClassicDesktopStyleApplicationLifetime)Application.Current.ApplicationLifetime;
                 var mainWindow = applicationLifetime?.MainWindow;
                 var headlessWindow = mainWindow?.PlatformImpl as IHeadlessWindow;
-                var mainConntrol = mainWindow?.Content as MainControl;
-                var editor = mainConntrol?.DataContext as ProjectEditor;
+                var mainView = mainWindow?.Content as MainView;
+                var editor = mainView?.DataContext as ProjectEditor;
 
                 var pt = new Point(-1, -1);
                 headlessWindow?.MouseMove(pt);
@@ -178,21 +178,21 @@ namespace Core2D
 
                 var size = new Size(1366, 690);
 
-                if (mainConntrol != null)
+                if (mainView != null)
                 {
-                    Util.Screenshot(mainConntrol, size, $"Core2D-Dashboard-{App.DefaultTheme}.png");
+                    Util.Screenshot(mainView, size, $"Core2D-Dashboard-{App.DefaultTheme}.png");
                     Dispatcher.UIThread.RunJobs();
                 }
 
-                if (mainConntrol != null)
+                if (mainView != null)
                 {
                     editor?.OnNew(null);
                     Dispatcher.UIThread.RunJobs();
                 }
 
-                if (mainConntrol != null)
+                if (mainView != null)
                 {
-                    Util.Screenshot(mainConntrol, size, $"Core2D-Editor-{App.DefaultTheme}.png");
+                    Util.Screenshot(mainView, size, $"Core2D-Editor-{App.DefaultTheme}.png");
                     Dispatcher.UIThread.RunJobs();
                 }
 
@@ -206,10 +206,10 @@ namespace Core2D
             {
                 var applicationLifetime = (IClassicDesktopStyleApplicationLifetime)Application.Current.ApplicationLifetime;
                 var mainWindow = applicationLifetime?.MainWindow;
-                var mainConntrol = mainWindow?.Content as MainControl;
-                var editor = mainConntrol?.DataContext as ProjectEditor;
+                var mainView = mainWindow?.Content as MainView;
+                var editor = mainView?.DataContext as ProjectEditor;
 
-                if (mainConntrol != null)
+                if (mainView != null)
                 {
                     if (settings.Scripts != null)
                     {

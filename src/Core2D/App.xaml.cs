@@ -164,7 +164,7 @@ namespace Core2D
             editor.AboutInfo = aboutInfo;
 
             var mainWindow = serviceProvider.GetService<MainWindow>();
-            var mainControl = mainWindow.FindControl<MainControl>("MainControl");
+            var mainControl = mainWindow.FindControl<MainView>("MainView");
 
             if (windowSettings != null)
             {
@@ -226,7 +226,7 @@ namespace Core2D
             editor.CurrentPathTool = editor.PathTools.FirstOrDefault(t => t.Title == "Line");
             editor.IsToolIdle = true;
 
-            var mainView = new MainControl()
+            var mainView = new MainView()
             {
                 DataContext = editor
             };

@@ -27,5 +27,5 @@
             <Binding Path="IsProjectDirty" />
         </MultiBinding>
     </Window.Title>
-    <views:MainControl x:Name="MainControl" />
+    <views:MainView x:Name="MainView" />
 </Window>

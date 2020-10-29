@@ -1,0 +1,68 @@
+﻿<UserControl x:Class="Core2D.Views.ZoomView"
+             xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
+             xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
+             xmlns:idd="clr-namespace:Core2D.DragAndDrop;assembly=Core2D"
+             xmlns:converters="clr-namespace:Core2D.Converters;assembly=Core2D"
+             xmlns:paz="clr-namespace:Avalonia.Controls.PanAndZoom;assembly=Avalonia.Controls.PanAndZoom"
+             xmlns:Editor="clr-namespace:Core2D.Editor;assembly=Core2D"
+             xmlns:Designer="clr-namespace:Core2D.Designer;assembly=Core2D"
+             mc:Ignorable="d"
+             d:DesignWidth="250" d:DesignHeight="400"
+             x:DataType="paz:ZoomBorder" x:CompileBindings="True">
+    <StackPanel>
+        <Expander Header="Status" IsExpanded="True">
+            <StackPanel>
+                <Label Content="ZoomX" Margin="{DynamicResource TextControlThemePadding}"/>
+                <Label Content="{Binding ZoomX, Mode=OneWay}" Margin="{DynamicResource TextControlThemePadding}"/>
+                <Label Content="ZoomY" Margin="{DynamicResource TextControlThemePadding}"/>
+                <Label Content="{Binding ZoomY, Mode=OneWay}" Margin="{DynamicResource TextControlThemePadding}"/>
+                <Label Content="OffsetX" Margin="{DynamicResource TextControlThemePadding}"/>
+                <Label Content="{Binding OffsetX, Mode=OneWay}" Margin="{DynamicResource TextControlThemePadding}"/>
+                <Label Content="OffsetY" Margin="{DynamicResource TextControlThemePadding}"/>
+                <Label Content="{Binding OffsetY, Mode=OneWay}" Margin="{DynamicResource TextControlThemePadding}"/>
+                <Button Content="Reset" Command="{Binding $parent[TopLevel].DataContext.Platform.OnZoomReset}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Margin="{DynamicResource TextControlThemePadding}" x:CompileBindings="False"/>
+                <Button Content="Fill" Command="{Binding $parent[TopLevel].DataContext.Platform.OnZoomFill}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Margin="{DynamicResource TextControlThemePadding}" x:CompileBindings="False"/>
+                <Button Content="Uniform" Command="{Binding $parent[TopLevel].DataContext.Platform.OnZoomUniform}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Margin="{DynamicResource TextControlThemePadding}" x:CompileBindings="False"/>
+                <Button Content="UniformToFill" Command="{Binding $parent[TopLevel].DataContext.Platform.OnZoomUniformToFill}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Margin="{DynamicResource TextControlThemePadding}" x:CompileBindings="False"/>
+                <Button Content="AutoFit" Command="{Binding $parent[TopLevel].DataContext.Platform.OnZoomAutoFit}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Margin="{DynamicResource TextControlThemePadding}" x:CompileBindings="False"/>
+            </StackPanel>
+        </Expander>
+        <Expander Header="Options" IsExpanded="False">
+            <StackPanel>
+                <Label Content="PanButton" Margin="{DynamicResource TextControlThemePadding}"/>
+                <ComboBox Items="{x:Static paz:ZoomBorder.ButtonNames}" SelectedItem="{Binding PanButton, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
+                <Label Content="Stretch" Margin="{DynamicResource TextControlThemePadding}"/>
+                <ComboBox Items="{x:Static paz:ZoomBorder.StretchModes}" SelectedItem="{Binding Stretch, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
+                <Label Content="ZoomSpeed" Margin="{DynamicResource TextControlThemePadding}"/>
+                <TextBox Text="{Binding ZoomSpeed, Mode=TwoWay}"/>
+                <CheckBox Content="EnablePan" IsChecked="{Binding EnablePan}" HorizontalAlignment="Stretch"/>
+                <CheckBox Content="EnableZoom" IsChecked="{Binding EnableZoom}" HorizontalAlignment="Stretch"/>
+            </StackPanel>
+        </Expander>
+        <Expander Header="Constrains" IsExpanded="False">
+            <StackPanel>
+                <Label Content="MinZoomX" Margin="{DynamicResource TextControlThemePadding}"/>
+                <TextBox Text="{Binding MinZoomX, Mode=TwoWay}"/>
+                <Label Content="MaxZoomX" Margin="{DynamicResource TextControlThemePadding}"/>
+                <TextBox Text="{Binding MaxZoomX, Mode=TwoWay}"/>
+                <Label Content="MinZoomY" Margin="{DynamicResource TextControlThemePadding}"/>
+                <TextBox Text="{Binding MinZoomY, Mode=TwoWay}"/>
+                <Label Content="MaxZoomY" Margin="{DynamicResource TextControlThemePadding}"/>
+                <TextBox Text="{Binding MaxZoomY, Mode=TwoWay}"/>
+                <Label Content="MinOffsetX" Margin="{DynamicResource TextControlThemePadding}"/>
+                <TextBox Text="{Binding MinOffsetX, Mode=TwoWay}"/>
+                <Label Content="MinOffsetY" Margin="{DynamicResource TextControlThemePadding}"/>
+                <TextBox Text="{Binding MinOffsetY, Mode=TwoWay}"/>
+                <Label Content="MaxOffsetX" Margin="{DynamicResource TextControlThemePadding}"/>
+                <TextBox Text="{Binding MaxOffsetX, Mode=TwoWay}"/>
+                <Label Content="MaxOffsetY" Margin="{DynamicResource TextControlThemePadding}"/>
+                <TextBox Text="{Binding MaxOffsetY, Mode=TwoWay}"/>
+                <CheckBox Content="EnableConstrains" IsChecked="{Binding EnableConstrains}" HorizontalAlignment="Stretch"/>
+            </StackPanel>
+        </Expander>
+    </StackPanel>
+</UserControl>

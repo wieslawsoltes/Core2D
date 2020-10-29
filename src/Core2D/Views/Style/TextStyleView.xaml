@@ -1,0 +1,30 @@
+﻿<UserControl x:Class="Core2D.Views.Style.TextStyleView"
+             xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:converters="clr-namespace:Core2D.Converters;assembly=Core2D"
+             xmlns:Style="clr-namespace:Core2D.Style;assembly=Core2D"
+             xmlns:Editor="clr-namespace:Core2D.Editor;assembly=Core2D"
+             xmlns:Designer="clr-namespace:Core2D.Designer;assembly=Core2D"
+             mc:Ignorable="d"
+             d:DataContext="{x:Static Designer:DesignerContext.TextStyle}"
+             d:DesignWidth="250" d:DesignHeight="400"
+             x:DataType="Style:TextStyle" x:CompileBindings="True">
+    <StackPanel>
+        <Label Content="Name" Margin="{DynamicResource TextControlThemePadding}" />
+        <TextBox Text="{Binding Name, Mode=TwoWay}" />
+        <Label Content="FontName" Margin="{DynamicResource TextControlThemePadding}" />
+        <TextBox Text="{Binding FontName, Mode=TwoWay}" />
+        <Label Content="FontFile" Margin="{DynamicResource TextControlThemePadding}" />
+        <TextBox Text="{Binding FontFile, Mode=TwoWay}" />
+        <Label Content="FontSize" Margin="{DynamicResource TextControlThemePadding}" />
+        <TextBox Text="{Binding FontSize, Mode=TwoWay}" />
+        <Label Content="FontStyle" Margin="{DynamicResource TextControlThemePadding}" />
+        <ContentControl Content="{Binding FontStyle}" />
+        <Label Content="HAlignment" Margin="{DynamicResource TextControlThemePadding}" />
+        <ComboBox Items="{x:Static Editor:Enums.TextHAlignmentValues}" SelectedItem="{Binding TextHAlignment, Mode=TwoWay}" HorizontalAlignment="Stretch" />
+        <Label Content="VAlignment" Margin="{DynamicResource TextControlThemePadding}" />
+        <ComboBox Items="{x:Static Editor:Enums.TextVAlignmentValues}" SelectedItem="{Binding TextVAlignment, Mode=TwoWay}" HorizontalAlignment="Stretch" />
+    </StackPanel>
+</UserControl>

@@ -1,0 +1,47 @@
+<UserControl x:Class="Core2D.Views.Style.ArrowStyleView"
+             xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:converters="clr-namespace:Core2D.Converters;assembly=Core2D"
+             xmlns:Style="clr-namespace:Core2D.Style;assembly=Core2D"
+             xmlns:Editor="clr-namespace:Core2D.Editor;assembly=Core2D"
+             xmlns:Designer="clr-namespace:Core2D.Designer;assembly=Core2D"
+             xmlns:style="clr-namespace:Core2D.Views.Style;assembly=Core2D"
+             mc:Ignorable="d"
+             d:DataContext="{x:Static Designer:DesignerContext.ArrowStyle}"
+             d:DesignWidth="250" d:DesignHeight="400"
+             x:DataType="Style:ArrowStyle" x:CompileBindings="True">
+    <StackPanel>
+        <StackPanel>
+            <Label Content="Name" Margin="{DynamicResource TextControlThemePadding}" />
+            <TextBox Text="{Binding Name, Mode=TwoWay}" />
+            <Label Content="Arrow Type" Margin="{DynamicResource TextControlThemePadding}" />
+            <ComboBox Items="{x:Static Editor:Enums.ArrowTypeValues}" SelectedItem="{Binding ArrowType, Mode=TwoWay}" HorizontalAlignment="Stretch" />
+            <CheckBox Content="IsStroked" IsChecked="{Binding IsStroked, Mode=TwoWay}" HorizontalAlignment="Stretch" />
+            <CheckBox Content="IsFilled" IsChecked="{Binding IsFilled, Mode=TwoWay}" HorizontalAlignment="Stretch" />
+            <Label Content="RadiusX" Margin="{DynamicResource TextControlThemePadding}" />
+            <TextBox Text="{Binding RadiusX, Mode=TwoWay}" HorizontalAlignment="Stretch" />
+            <Label Content="RadiusY" Margin="{DynamicResource TextControlThemePadding}" />
+            <TextBox Text="{Binding RadiusY, Mode=TwoWay}" HorizontalAlignment="Stretch" />
+        </StackPanel>
+        <Expander Header="Stroke" IsExpanded="False">
+            <DockPanel>
+                <StackPanel DockPanel.Dock="Top">
+                    <Label Content="Thickness" Margin="{DynamicResource TextControlThemePadding}" />
+                    <TextBox Text="{Binding Thickness, Mode=TwoWay}" x:DataType="Style:BaseStyle" />
+                    <Label Content="Line Cap" Margin="{DynamicResource TextControlThemePadding}" />
+                    <ComboBox Items="{x:Static Editor:Enums.LineCapValues}" SelectedItem="{Binding LineCap, Mode=TwoWay}" x:DataType="Style:BaseStyle" HorizontalAlignment="Stretch" />
+                    <Label Content="Dashes" Margin="{DynamicResource TextControlThemePadding}" />
+                    <TextBox Text="{Binding Dashes, Mode=TwoWay}" x:DataType="Style:BaseStyle" />
+                    <Label Content="Dash Offset" Margin="{DynamicResource TextControlThemePadding}" />
+                    <TextBox Text="{Binding DashOffset, Mode=TwoWay}" x:DataType="Style:BaseStyle" />
+                </StackPanel>
+                <ContentControl Content="{Binding Stroke}" x:DataType="Style:BaseStyle" />
+            </DockPanel>
+        </Expander>
+        <Expander Header="Fill" IsExpanded="False">
+            <ContentControl Content="{Binding Fill}" x:DataType="Style:BaseStyle" />
+        </Expander>
+    </StackPanel>
+</UserControl>

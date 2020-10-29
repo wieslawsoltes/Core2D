@@ -1,0 +1,74 @@
+﻿<UserControl x:Class="Core2D.Views.Libraries.ScriptsView"
+             xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
+             xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
+             xmlns:idd="clr-namespace:Core2D.DragAndDrop;assembly=Core2D"
+             xmlns:handlers="clr-namespace:Core2D.DragAndDrop.Handlers;assembly=Core2D"
+             xmlns:converters="clr-namespace:Core2D.Converters;assembly=Core2D"
+             xmlns:scripting="clr-namespace:Core2D.Views.Scripting;assembly=Core2D"
+             xmlns:Editor="clr-namespace:Core2D.Editor;assembly=Core2D"
+             xmlns:Containers="clr-namespace:Core2D.Containers;assembly=Core2D"
+             xmlns:Scripting="clr-namespace:Core2D.Scripting;assembly=Core2D"
+             xmlns:Designer="clr-namespace:Core2D.Designer;assembly=Core2D"
+             mc:Ignorable="d"
+             d:DataContext="{x:Static Designer:DesignerContext.Project}"
+             d:DesignWidth="250" d:DesignHeight="400"
+             x:DataType="Containers:ProjectContainer" x:CompileBindings="True">
+    <UserControl.Resources>
+        <handlers:ScriptsListBoxDropHandler x:Key="ScriptsListBoxDropHandler"/>
+    </UserControl.Resources>
+    <Grid RowDefinitions="50*,6,50*">
+        <Grid RowDefinitions="Auto,*,Auto" Grid.Row="0">
+            <Menu Grid.Row="0" HorizontalAlignment="Right" x:CompileBindings="False">
+                <MenuItem Header="reset" Command="{Binding $parent[TopLevel].DataContext.OnResetRepl}"/>
+                <MenuItem Header="repl" Command="{Binding $parent[TopLevel].DataContext.OnExecuteRepl}" CommandParameter="{Binding CurrentScript.Code}" IsVisible="{Binding !!#scripts.SelectedItem}"/>
+                <MenuItem Header="execute" Command="{Binding $parent[TopLevel].DataContext.OnExecuteCode}" CommandParameter="{Binding CurrentScript.Code}" IsVisible="{Binding !!#scripts.SelectedItem}"/>
+                <MenuItem Header="&#727;" Command="{Binding $parent[TopLevel].DataContext.OnRemoveScript}" CommandParameter="{Binding CurrentScript}" IsVisible="{Binding !!#scripts.SelectedItem}"/>
+                <MenuItem Header="+" Command="{Binding $parent[TopLevel].DataContext.OnAddScript}"/>
+            </Menu>
+            <ListBox x:Name="scripts" Items="{Binding Scripts}" SelectedItem="{Binding CurrentScript, Mode=TwoWay}" Grid.Row="1">
+                <i:Interaction.Behaviors>
+                    <idd:ContextDropBehavior Context="{Binding FallbackValue={x:Null}}" Handler="{StaticResource ScriptsListBoxDropHandler}"/>
+                </i:Interaction.Behaviors>
+                <ListBox.KeyBindings>
+                    <KeyBinding Command="{Binding $parent[TopLevel].DataContext.OnAddScript}" Gesture="Ctrl+N" x:CompileBindings="False"/>
+                    <KeyBinding Command="{Binding $parent[TopLevel].DataContext.OnRemoveScript}" CommandParameter="{Binding #scripts.SelectedItem}" Gesture="Delete" x:CompileBindings="False"/>
+                    <KeyBinding Command="{Binding $parent[TopLevel].DataContext.Platform.OnExportObject}" CommandParameter="{Binding #scripts.SelectedItem}" Gesture="Ctrl+E" x:CompileBindings="False"/>
+                </ListBox.KeyBindings>
+                <ListBox.DataTemplates>
+                    <DataTemplate DataType="Scripting:Script">
+                        <TextBlock x:Name="script" Text="{Binding Name}" Background="Transparent">
+                            <i:Interaction.Behaviors>
+                                <ia:EventTriggerBehavior EventName="DoubleTapped" SourceObject="{Binding #script}" x:CompileBindings="False">
+                                    <ia:InvokeCommandAction Command="{Binding $parent[TopLevel].DataContext.OnExecuteScript}" CommandParameter="{Binding Mode=OneWay}" x:CompileBindings="False"/>
+                                </ia:EventTriggerBehavior>
+                                <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}"/>
+                            </i:Interaction.Behaviors>
+                            <TextBlock.ContextMenu>
+                                <ContextMenu x:CompileBindings="False">
+                                    <MenuItem Header="_Execute" Command="{Binding $parent[TopLevel].DataContext.OnExecuteCode}" CommandParameter="{Binding Path=Code, Mode=OneWay}"/>
+                                    <Separator/>
+                                    <MenuItem Header="_Repl" Command="{Binding $parent[TopLevel].DataContext.OnExecuteRepl}" CommandParameter="{Binding Path=Code, Mode=OneWay}"/>
+                                    <Separator/>
+                                    <MenuItem Header="Re_set" Command="{Binding $parent[TopLevel].DataContext.OnResetRepl}"/>
+                                    <Separator/>
+                                    <MenuItem Header="_Add Script" Command="{Binding $parent[TopLevel].DataContext.OnAddScript}"/>
+                                    <Separator/>
+                                    <MenuItem Header="_Delete" Command="{Binding $parent[TopLevel].DataContext.OnRemoveScript}" CommandParameter="{Binding Mode=OneWay}"/>
+                                    <Separator/>
+                                    <MenuItem Header="E_xport" Command="{Binding $parent[TopLevel].DataContext.Platform.OnExportObject}" CommandParameter="{Binding Mode=OneWay}"/>
+                                </ContextMenu>
+                            </TextBlock.ContextMenu>
+                        </TextBlock>
+                    </DataTemplate>
+                </ListBox.DataTemplates>
+            </ListBox>
+            <TextBox Text="{Binding #scripts.SelectedItem.Name, Mode=TwoWay}" IsVisible="{Binding !!#scripts.SelectedItem}" BorderBrush="Transparent" Background="Transparent" Margin="0,12,0,0" Grid.Row="2" x:CompileBindings="False"/>
+        </Grid>
+        <GridSplitter ResizeDirection="Rows" ResizeBehavior="PreviousAndNext" Background="Transparent" Height="6" Grid.Row="1"/>
+        <scripting:ScriptView DataContext="{Binding CurrentScript}" Grid.Row="2"/>
+    </Grid>
+</UserControl>
