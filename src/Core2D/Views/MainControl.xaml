@@ -47,7 +47,7 @@
         <Grid x:Name="LAYOUT_DashboardGrid" RowDefinitions="Auto,*" ColumnDefinitions="*" IsVisible="{Binding Project, Converter={x:Static ObjectConverters.IsNull}}">
             <views:DashboardMenuControl Grid.Row="0" />
             <Grid x:Name="LAYOUT_DashboardContentGrid" RowDefinitions="0.2*,50,30,1*,30,1*,30,1*,20,0.2*" ColumnDefinitions="5*,50*,30,40*,5*" MaxWidth="800" MaxHeight="600" Grid.Row="1">
-                <TextBlock Text="Core2D" FontSize="20" FontWeight="SemiBold" Grid.Column="1" Grid.ColumnSpan="3" Grid.Row="1" Grid.RowSpan="1" />
+                <Label Content="Core2D" FontSize="20" FontWeight="SemiBold" Grid.Column="1" Grid.ColumnSpan="3" Grid.Row="1" Grid.RowSpan="1" />
                 <Button Content="New Project" FontSize="14" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="1" Grid.RowSpan="1" Command="{Binding OnNewProject}" x:CompileBindings="False">
                     <i:Interaction.Behaviors>
                         <iac:FocusOnPointerMovedBehavior />
@@ -63,7 +63,7 @@
                         <iac:FocusOnPointerMovedBehavior />
                     </i:Interaction.Behaviors>
                 </Button>
-                <TextBlock Text="recent" Grid.Column="3" Grid.ColumnSpan="1" Grid.Row="2" Grid.RowSpan="1" />
+                <Label Content="recent" Grid.Column="3" Grid.ColumnSpan="1" Grid.Row="2" Grid.RowSpan="1" />
                 <ListBox x:Name="recent" Items="{Binding RecentProjects}" SelectedItem="{Binding CurrentRecentProject, Mode=TwoWay}" Grid.Column="3" Grid.Row="3" Grid.ColumnSpan="1" Grid.RowSpan="5">
                     <ListBox.DataTemplates>
                         <DataTemplate DataType="Recent:RecentFile">

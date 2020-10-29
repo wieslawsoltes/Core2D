@@ -16,7 +16,7 @@
         <converters:ObjectToTypeStringConverter x:Key="ObjectToTypeStringConverter"/>
     </UserControl.Resources>
     <StackPanel>
-        <TabControl>
+
             <TabItem Header="Point">
                 <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
                     <StackPanel>
@@ -37,8 +37,7 @@
                     <ContentControl Content="{Binding SelectedPointStyle}"/>
                 </ScrollViewer>
             </TabItem>
-        </TabControl>
-        <TabControl>
+
             <TabItem Header="Zoom">
                 <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
                     <StackPanel>
@@ -53,57 +52,44 @@
                     </StackPanel>
                 </ScrollViewer>
             </TabItem>
-        </TabControl>
-        <TabControl>
+
             <TabItem Header="DrawShapeState">
                 <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
                     <ContentControl Content="{Binding DrawShapeState}"/>
                 </ScrollViewer>
             </TabItem>
-        </TabControl>
-        <TabControl>
-            <TabItem Header="SelectedShapes">
-                <ListBox x:Name="shapes" Items="{Binding SelectedShapes}" VirtualizationMode="Simple">
-                    <ListBox.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <VirtualizingStackPanel Orientation="Vertical"/>
-                        </ItemsPanelTemplate>
-                    </ListBox.ItemsPanel>
-                    <ListBox.KeyBindings>
-                        <KeyBinding Command="{Binding $parent[TopLevel].DataContext.OnRemoveShape}" CommandParameter="{Binding #shapes.SelectedItem}" Gesture="Delete" x:CompileBindings="False"/>
-                    </ListBox.KeyBindings>
-                    <ListBox.DataTemplates>
-                        <DataTemplate DataType="Shapes:BaseShape">
-                            <TextBlock Text="{Binding Mode=OneWay, Converter={StaticResource ObjectToTypeStringConverter}}">
-                                <TextBlock.ContextMenu>
-                                    <ContextMenu x:CompileBindings="False">
-                                        <MenuItem Header="_Delete" Command="{Binding $parent[TopLevel].DataContext.OnRemoveShape}" CommandParameter="{Binding}"/>
-                                    </ContextMenu>
-                                </TextBlock.ContextMenu>
-                            </TextBlock>
-                        </DataTemplate>
-                    </ListBox.DataTemplates>
-                </ListBox>
-            </TabItem>
-        </TabControl>
-        <TabControl>
-            <TabItem Header="ImageCache">
-                <libraries:ImagesControl DataContext="{Binding ImageCache}"/>
-            </TabItem>
-        </TabControl>
-        <TabControl>
-            <TabItem Header="SelectionStyle">
-                <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-                    <ContentControl Content="{Binding SelectionStyle}"/>
-                </ScrollViewer>
-            </TabItem>
-        </TabControl>
-        <TabControl>
-            <TabItem Header="HelperStyle">
-                <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-                    <ContentControl Content="{Binding HelperStyle}"/>
-                </ScrollViewer>
-            </TabItem>
-        </TabControl>
+
+        <TabItem Header="SelectedShapes">
+            <ListBox x:Name="shapes" Items="{Binding SelectedShapes}" VirtualizationMode="Simple">
+                <ListBox.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <VirtualizingStackPanel Orientation="Vertical"/>
+                    </ItemsPanelTemplate>
+                </ListBox.ItemsPanel>
+                <ListBox.KeyBindings>
+                    <KeyBinding Command="{Binding $parent[TopLevel].DataContext.OnRemoveShape}" CommandParameter="{Binding #shapes.SelectedItem}" Gesture="Delete" x:CompileBindings="False"/>
+                </ListBox.KeyBindings>
+                <ListBox.DataTemplates>
+                    <DataTemplate DataType="Shapes:BaseShape">
+                        <TextBlock Text="{Binding Mode=OneWay, Converter={StaticResource ObjectToTypeStringConverter}}">
+                            <TextBlock.ContextMenu>
+                                <ContextMenu x:CompileBindings="False">
+                                    <MenuItem Header="_Delete" Command="{Binding $parent[TopLevel].DataContext.OnRemoveShape}" CommandParameter="{Binding}"/>
+                                </ContextMenu>
+                            </TextBlock.ContextMenu>
+                        </TextBlock>
+                    </DataTemplate>
+                </ListBox.DataTemplates>
+            </ListBox>
+        </TabItem>
+        <TabItem Header="ImageCache">
+            <libraries:ImagesControl DataContext="{Binding ImageCache}"/>
+        </TabItem>
+        <TabItem Header="SelectionStyle">
+            <ContentControl Content="{Binding SelectionStyle}"/>
+        </TabItem>
+        <TabItem Header="HelperStyle">
+            <ContentControl Content="{Binding HelperStyle}"/>
+        </TabItem>
     </StackPanel>
 </UserControl>
