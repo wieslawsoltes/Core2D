@@ -1,0 +1,12 @@
+{
+    "fileOptions": {
+      "systemExcludeSearchPatterns": [
+        "icon/**/*",
+        "images/**/*",
+        "scripts/**/*",
+        "**/bin/**/*",
+        "**/obj/**/*"
+      ],
+      "excludeSearchPatterns": []
+    }
+  }
