@@ -251,16 +251,15 @@ namespace Core2D
             return state;
         }
 
-        public LineSegment CreateLineSegment(PointShape point, bool isStroked = true)
+        public LineSegment CreateLineSegment(PointShape point)
         {
             return new LineSegment()
             {
-                Point = point,
-                IsStroked = isStroked
+                Point = point
             };
         }
 
-        public ArcSegment CreateArcSegment(PointShape point, PathSize size, double rotationAngle, bool isLargeArc, SweepDirection sweepDirection, bool isStroked = true)
+        public ArcSegment CreateArcSegment(PointShape point, PathSize size, double rotationAngle, bool isLargeArc, SweepDirection sweepDirection)
         {
             return new ArcSegment()
             {
@@ -268,29 +267,26 @@ namespace Core2D
                 Size = size,
                 RotationAngle = rotationAngle,
                 IsLargeArc = isLargeArc,
-                SweepDirection = sweepDirection,
-                IsStroked = isStroked
+                SweepDirection = sweepDirection
             };
         }
 
-        public QuadraticBezierSegment CreateQuadraticBezierSegment(PointShape point1, PointShape point2, bool isStroked = true)
+        public QuadraticBezierSegment CreateQuadraticBezierSegment(PointShape point1, PointShape point2)
         {
             return new QuadraticBezierSegment()
             {
                 Point1 = point1,
-                Point2 = point2,
-                IsStroked = isStroked
+                Point2 = point2
             };
         }
 
-        public CubicBezierSegment CreateCubicBezierSegment(PointShape point1, PointShape point2, PointShape point3, bool isStroked = true)
+        public CubicBezierSegment CreateCubicBezierSegment(PointShape point1, PointShape point2, PointShape point3)
         {
             return new CubicBezierSegment()
             {
                 Point1 = point1,
                 Point2 = point2,
-                Point3 = point3,
-                IsStroked = isStroked
+                Point3 = point3
             };
         }
 

@@ -72,8 +72,7 @@ namespace Core2D.Editor.Tools.Path
                                 Abs(_arc.Start.Y - _arc.End.Y)),
                             _defaultRotationAngle,
                             _defaultIsLargeArc,
-                            _defaultSweepDirection,
-                            editor.Project.Options.DefaultIsStroked);
+                            _defaultSweepDirection);
                         editor.Project.CurrentContainer.WorkingLayer.InvalidateLayer();
                         ToStateEnd();
                         Move(null);
@@ -103,8 +102,7 @@ namespace Core2D.Editor.Tools.Path
                                 Abs(_arc.Start.Y - _arc.End.Y)),
                             _defaultRotationAngle,
                             _defaultIsLargeArc,
-                            _defaultSweepDirection,
-                            editor.Project.Options.DefaultIsStroked);
+                            _defaultSweepDirection);
                         editor.Project.CurrentContainer.WorkingLayer.InvalidateLayer();
                         Move(null);
                         _currentState = State.End;

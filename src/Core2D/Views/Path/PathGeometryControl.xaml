@@ -17,34 +17,30 @@
     <UserControl.Resources>
         <converters:ObjectToTypeStringConverter x:Key="ObjectToTypeStringConverter"/>
     </UserControl.Resources>
-    <DockPanel>
-        <StackPanel DockPanel.Dock="Top">
-            <TextBlock Text="FillRule" Margin="{DynamicResource TextControlThemePadding}"/>
+    <StackPanel>
+        <StackPanel>
+            <Label Content="FillRule" Margin="{DynamicResource TextControlThemePadding}"/>
             <ComboBox Items="{x:Static Editor:Enums.XFillRuleValues}" SelectedItem="{Binding FillRule, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
         </StackPanel>
-        <TabControl>
-            <TabItem Header="Figures">
-                <TreeView x:Name="tree" Items="{Binding Figures}">
-                    <TreeView.Styles>
-                        <Style Selector="TreeViewItem">
-                            <Setter Property="IsExpanded" Value="False"/>
-                        </Style>
-                    </TreeView.Styles>
-                    <TreeView.DataTemplates>
-                        <TreeDataTemplate DataType="Path:PathFigure" ItemsSource="{Binding Segments}" x:CompileBindings="False">
-                            <TextBlock Text="{Binding Mode=OneWay, Converter={StaticResource ObjectToTypeStringConverter}}" Background="Transparent"/>
-                        </TreeDataTemplate>
-                        <DataTemplate DataType="Path:PathSegment">
-                            <TextBlock Text="{Binding Mode=OneWay, Converter={StaticResource ObjectToTypeStringConverter}}" Background="Transparent"/>
-                        </DataTemplate>
-                    </TreeView.DataTemplates>
-                </TreeView>
-            </TabItem>
-            <TabItem Header="Selected Figure">
-                <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-                    <ContentControl Content="{Binding #tree.SelectedItem}"/>
-                </ScrollViewer>
-            </TabItem>
-        </TabControl>
-    </DockPanel>
+        <Expander Header="Figures" IsExpanded="False">
+            <TreeView x:Name="tree" Items="{Binding Figures}">
+                <TreeView.Styles>
+                    <Style Selector="TreeViewItem">
+                        <Setter Property="IsExpanded" Value="False"/>
+                    </Style>
+                </TreeView.Styles>
+                <TreeView.DataTemplates>
+                    <TreeDataTemplate DataType="Path:PathFigure" ItemsSource="{Binding Segments}" x:CompileBindings="False">
+                        <TextBlock Text="{Binding Mode=OneWay, Converter={StaticResource ObjectToTypeStringConverter}}" Background="Transparent"/>
+                    </TreeDataTemplate>
+                    <DataTemplate DataType="Path:PathSegment">
+                        <TextBlock Text="{Binding Mode=OneWay, Converter={StaticResource ObjectToTypeStringConverter}}" Background="Transparent"/>
+                    </DataTemplate>
+                </TreeView.DataTemplates>
+            </TreeView>
+        </Expander>
+        <Expander Header="Selected Figure" IsExpanded="False">
+            <ContentControl Content="{Binding #tree.SelectedItem}"/>
+        </Expander>
+    </StackPanel>
 </UserControl>

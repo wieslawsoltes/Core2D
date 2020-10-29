@@ -49,13 +49,13 @@ namespace Core2D
 
         ShapeRendererState CreateShapeRendererState();
 
-        LineSegment CreateLineSegment(PointShape point, bool isStroked = true);
+        LineSegment CreateLineSegment(PointShape point);
 
-        ArcSegment CreateArcSegment(PointShape point, PathSize size, double rotationAngle, bool isLargeArc, SweepDirection sweepDirection, bool isStroked = true);
+        ArcSegment CreateArcSegment(PointShape point, PathSize size, double rotationAngle, bool isLargeArc, SweepDirection sweepDirection);
 
-        QuadraticBezierSegment CreateQuadraticBezierSegment(PointShape point1, PointShape point2, bool isStroked = true);
+        QuadraticBezierSegment CreateQuadraticBezierSegment(PointShape point1, PointShape point2);
 
-        CubicBezierSegment CreateCubicBezierSegment(PointShape point1, PointShape point2, PointShape point3, bool isStroked = true);
+        CubicBezierSegment CreateCubicBezierSegment(PointShape point1, PointShape point2, PointShape point3);
 
         PathSize CreatePathSize(double width = 0.0, double height = 0.0);
 

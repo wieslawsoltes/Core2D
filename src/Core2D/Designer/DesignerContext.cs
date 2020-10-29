@@ -188,13 +188,13 @@ namespace Core2D.Designer
 
             // Path
 
-            ArcSegment = factory.CreateArcSegment(factory.CreatePointShape(), factory.CreatePathSize(), 180, true, SweepDirection.Clockwise, true);
-            CubicBezierSegment = factory.CreateCubicBezierSegment(factory.CreatePointShape(), factory.CreatePointShape(), factory.CreatePointShape(), true);
-            LineSegment = factory.CreateLineSegment(factory.CreatePointShape(), true);
+            ArcSegment = factory.CreateArcSegment(factory.CreatePointShape(), factory.CreatePathSize(), 180, true, SweepDirection.Clockwise);
+            CubicBezierSegment = factory.CreateCubicBezierSegment(factory.CreatePointShape(), factory.CreatePointShape(), factory.CreatePointShape());
+            LineSegment = factory.CreateLineSegment(factory.CreatePointShape());
             PathFigure = factory.CreatePathFigure(factory.CreatePointShape(), false);
             PathGeometry = factory.CreatePathGeometry(ImmutableArray.Create<PathFigure>(), FillRule.EvenOdd);
             PathSize = factory.CreatePathSize();
-            QuadraticBezierSegment = factory.CreateQuadraticBezierSegment(factory.CreatePointShape(), factory.CreatePointShape(), true);
+            QuadraticBezierSegment = factory.CreateQuadraticBezierSegment(factory.CreatePointShape(), factory.CreatePointShape());
 
             // Renderer
 

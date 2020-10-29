@@ -28,42 +28,38 @@ namespace Core2D.Path
             _currentFigure.IsClosed = isClosed;
         }
 
-        public void LineTo(PointShape point, bool isStroked = true)
+        public void LineTo(PointShape point)
         {
             var segment = _factory.CreateLineSegment(
-                point,
-                isStroked);
+                point);
             _currentFigure.Segments = _currentFigure.Segments.Add(segment);
         }
 
-        public void ArcTo(PointShape point, PathSize size, double rotationAngle = 0.0, bool isLargeArc = false, SweepDirection sweepDirection = SweepDirection.Clockwise, bool isStroked = true)
+        public void ArcTo(PointShape point, PathSize size, double rotationAngle = 0.0, bool isLargeArc = false, SweepDirection sweepDirection = SweepDirection.Clockwise)
         {
             var segment = _factory.CreateArcSegment(
                 point,
                 size,
                 rotationAngle,
                 isLargeArc,
-                sweepDirection,
-                isStroked);
+                sweepDirection);
             _currentFigure.Segments = _currentFigure.Segments.Add(segment);
         }
 
-        public void CubicBezierTo(PointShape point1, PointShape point2, PointShape point3, bool isStroked = true)
+        public void CubicBezierTo(PointShape point1, PointShape point2, PointShape point3)
         {
             var segment = _factory.CreateCubicBezierSegment(
                 point1,
                 point2,
-                point3,
-                isStroked);
+                point3);
             _currentFigure.Segments = _currentFigure.Segments.Add(segment);
         }
 
-        public void QuadraticBezierTo(PointShape point1, PointShape point2, bool isStroked = true)
+        public void QuadraticBezierTo(PointShape point1, PointShape point2)
         {
             var segment = _factory.CreateQuadraticBezierSegment(
                 point1,
-                point2,
-                isStroked);
+                point2);
             _currentFigure.Segments = _currentFigure.Segments.Add(segment);
         }
     }

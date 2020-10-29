@@ -64,8 +64,7 @@ namespace Core2D.Editor.Tools.Path
                         pathTool.GeometryContext.CubicBezierTo(
                             _cubicBezier.Point2,
                             _cubicBezier.Point3,
-                            _cubicBezier.Point4,
-                            editor.Project.Options.DefaultIsStroked);
+                            _cubicBezier.Point4);
                         editor.Project.CurrentContainer.WorkingLayer.InvalidateLayer();
                         ToStatePoint4();
                         Move(null);
@@ -138,8 +137,7 @@ namespace Core2D.Editor.Tools.Path
                         pathTool.GeometryContext.CubicBezierTo(
                             _cubicBezier.Point2,
                             _cubicBezier.Point3,
-                            _cubicBezier.Point4,
-                            editor.Project.Options.DefaultIsStroked);
+                            _cubicBezier.Point4);
                         editor.Project.CurrentContainer.WorkingLayer.InvalidateLayer();
                         ToStatePoint4();
                         Move(null);

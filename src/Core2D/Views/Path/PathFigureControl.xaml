@@ -16,29 +16,25 @@
     <UserControl.Resources>
         <converters:ObjectToTypeStringConverter x:Key="ObjectToTypeStringConverter"/>
     </UserControl.Resources>
-    <DockPanel>
-        <StackPanel DockPanel.Dock="Top">
+    <StackPanel>
+        <StackPanel>
             <CheckBox Content="IsClosed" IsChecked="{Binding IsClosed, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
         </StackPanel>
-        <TabControl>
-            <TabItem Header="StartPoint">
-                <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-                    <ContentControl Content="{Binding StartPoint}"/>
-                </ScrollViewer>
-            </TabItem>
-            <TabItem Header="Segments">
-                <ListBox Items="{Binding Segments}">
-                    <ListBox.DataTemplates>
-                        <DataTemplate>
-                            <TextBlock Text="{Binding Mode=OneWay, Converter={StaticResource ObjectToTypeStringConverter}}" Background="Transparent">
-                                <i:Interaction.Behaviors>
-                                    <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}"/>
-                                </i:Interaction.Behaviors>
-                            </TextBlock>
-                        </DataTemplate>
-                    </ListBox.DataTemplates>
-                </ListBox>
-            </TabItem>
-        </TabControl>
-    </DockPanel>
+        <Expander Header="StartPoint" IsExpanded="False">
+            <ContentControl Content="{Binding StartPoint}"/>
+        </Expander>
+        <Expander Header="Segments" IsExpanded="False">
+            <ListBox Items="{Binding Segments}">
+                <ListBox.DataTemplates>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Mode=OneWay, Converter={StaticResource ObjectToTypeStringConverter}}" Background="Transparent">
+                            <i:Interaction.Behaviors>
+                                <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}"/>
+                            </i:Interaction.Behaviors>
+                        </TextBlock>
+                    </DataTemplate>
+                </ListBox.DataTemplates>
+            </ListBox>
+        </Expander>
+    </StackPanel>
 </UserControl>

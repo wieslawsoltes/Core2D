@@ -62,8 +62,7 @@ namespace Core2D.Editor.Tools.Path
                         _quadraticBezier.Point3 = factory.CreatePointShape((double)sx, (double)sy);
                         pathTool.GeometryContext.QuadraticBezierTo(
                             _quadraticBezier.Point2,
-                            _quadraticBezier.Point3,
-                            editor.Project.Options.DefaultIsStroked);
+                            _quadraticBezier.Point3);
                         editor.Project.CurrentContainer.WorkingLayer.InvalidateLayer();
                         ToStatePoint3();
                         Move(null);
@@ -113,8 +112,7 @@ namespace Core2D.Editor.Tools.Path
                         _quadraticBezier.Point3 = factory.CreatePointShape((double)sx, (double)sy);
                         pathTool.GeometryContext.QuadraticBezierTo(
                             _quadraticBezier.Point2,
-                            _quadraticBezier.Point3,
-                            editor.Project.Options.DefaultIsStroked);
+                            _quadraticBezier.Point3);
                         editor.Project.CurrentContainer.WorkingLayer.InvalidateLayer();
                         ToStatePoint3();
                         Move(null);

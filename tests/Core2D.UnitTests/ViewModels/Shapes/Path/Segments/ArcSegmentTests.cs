@@ -15,7 +15,7 @@ namespace Core2D.UnitTests
         [Trait("Core2D.Path", "Segments")]
         public void GetPoints_Should_Return_All_Segment_Points()
         {
-            var segment = _factory.CreateArcSegment(_factory.CreatePointShape(), _factory.CreatePathSize(), 180, true, SweepDirection.Clockwise, true);
+            var segment = _factory.CreateArcSegment(_factory.CreatePointShape(), _factory.CreatePathSize(), 180, true, SweepDirection.Clockwise);
 
             var target = new List<PointShape>();
             segment.GetPoints(target);
@@ -29,7 +29,7 @@ namespace Core2D.UnitTests
         [Trait("Core2D.Path", "Segments")]
         public void ToXamlString_Should_Return_Path_Markup()
         {
-            var target = _factory.CreateArcSegment(_factory.CreatePointShape(), _factory.CreatePathSize(), 90, true, SweepDirection.Clockwise, true);
+            var target = _factory.CreateArcSegment(_factory.CreatePointShape(), _factory.CreatePathSize(), 90, true, SweepDirection.Clockwise);
 
             target.Size.Width = 10;
             target.Size.Height = 20;
@@ -43,7 +43,7 @@ namespace Core2D.UnitTests
         [Trait("Core2D.Path", "Segments")]
         public void ToSvgString_Should_Return_Path_Markup()
         {
-            var target = _factory.CreateArcSegment(_factory.CreatePointShape(), _factory.CreatePathSize(), 90, true, SweepDirection.Clockwise, true);
+            var target = _factory.CreateArcSegment(_factory.CreatePointShape(), _factory.CreatePathSize(), 90, true, SweepDirection.Clockwise);
 
             target.Size.Width = 10;
             target.Size.Height = 20;

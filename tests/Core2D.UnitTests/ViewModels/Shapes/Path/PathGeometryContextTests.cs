@@ -56,7 +56,6 @@ namespace Core2D.UnitTests
 
             var segment = geometry.Figures[0].Segments[0];
             Assert.IsType<LineSegment>(segment);
-            Assert.True(segment.IsStroked);
         }
 
         [Fact]
@@ -68,11 +67,10 @@ namespace Core2D.UnitTests
             target.BeginFigure(_factory.CreatePointShape());
             Assert.Empty(geometry.Figures[0].Segments);
 
-            target.ArcTo(_factory.CreatePointShape(), _factory.CreatePathSize(), 0.0, false, SweepDirection.Clockwise, true);
+            target.ArcTo(_factory.CreatePointShape(), _factory.CreatePathSize(), 0.0, false, SweepDirection.Clockwise);
 
             var segment = geometry.Figures[0].Segments[0];
             Assert.IsType<ArcSegment>(segment);
-            Assert.True(segment.IsStroked);
         }
 
         [Fact]
@@ -88,7 +86,6 @@ namespace Core2D.UnitTests
 
             var segment = geometry.Figures[0].Segments[0];
             Assert.IsType<CubicBezierSegment>(segment);
-            Assert.True(segment.IsStroked);
         }
 
         [Fact]
@@ -104,7 +101,6 @@ namespace Core2D.UnitTests
 
             var segment = geometry.Figures[0].Segments[0];
             Assert.IsType<QuadraticBezierSegment>(segment);
-            Assert.True(segment.IsStroked);
         }
     }
 }

@@ -11,9 +11,9 @@
              d:DesignWidth="250" d:DesignHeight="400"
              x:DataType="Path:PathSize" x:CompileBindings="True">
     <StackPanel>
-        <TextBlock Text="Width" Margin="{DynamicResource TextControlThemePadding}"/>
+        <Label Content="Width" Margin="{DynamicResource TextControlThemePadding}"/>
         <TextBox Text="{Binding Width, Mode=TwoWay}"/>
-        <TextBlock Text="Height" Margin="{DynamicResource TextControlThemePadding}"/>
+        <Label Content="Height" Margin="{DynamicResource TextControlThemePadding}"/>
         <TextBox Text="{Binding Height, Mode=TwoWay}"/>
     </StackPanel>
 </UserControl>
