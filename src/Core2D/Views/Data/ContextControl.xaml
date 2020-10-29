@@ -12,17 +12,17 @@
              d:DataContext="{x:Static Designer:DesignerContext.Data}"
              d:DesignWidth="250" d:DesignHeight="400"
              x:DataType="Data:Context" x:CompileBindings="True">
-    <TabControl>
-        <TabItem Header="Record">
+    <StackPanel>
+        <Expander Header="Record" IsExpanded="True">
             <DockPanel IsVisible="{Binding !!Record}">
                 <Menu HorizontalAlignment="Right" IsVisible="{Binding !!Record}" DockPanel.Dock="Top">
                     <MenuItem Header="&#727;" Command="{Binding $parent[TopLevel].DataContext.OnResetRecord}" CommandParameter="{Binding}" IsVisible="{Binding !!Record}" x:CompileBindings="False"/>
                 </Menu>
                 <ContentControl Content="{Binding Record}"/>
             </DockPanel>
-        </TabItem>
-        <TabItem Header="Properties">
+        </Expander>
+        <Expander Header="Properties" IsExpanded="True">
             <data:PropertiesControl/>
-        </TabItem>
-    </TabControl>
+        </Expander>
+    </StackPanel>
 </UserControl>

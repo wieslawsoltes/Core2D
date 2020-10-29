@@ -13,35 +13,33 @@
              d:DataContext="{x:Static Designer:DesignerContext.Record}"
              d:DesignWidth="250" d:DesignHeight="400"
              x:DataType="Data:Record" x:CompileBindings="True">
-    <ScrollViewer>
-        <Grid RowDefinitions="Auto,*" ColumnDefinitions="50*,Auto,50*">
-            <TextBlock Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" Text="Name"/>
-            <ItemsControl VerticalAlignment="Stretch" Grid.Column="0" Grid.Row="1" DataContext="{Binding Owner}" Items="{Binding Columns}" x:DataType="Data:Database">
-                <ItemsControl.DataTemplates>
-                    <DataTemplate DataType="Data:Column">
-                        <Grid VerticalAlignment="Top" Background="Transparent" Margin="0,2,0,2">
-                            <!--<i:Interaction.Behaviors>
-                                <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}"/>
-                            </i:Interaction.Behaviors>-->
-                            <TextBox VerticalAlignment="Center" Text="{Binding Name, Mode=TwoWay}"/>
-                        </Grid>
-                    </DataTemplate>
-                </ItemsControl.DataTemplates>
-            </ItemsControl>
-            <GridSplitter ResizeDirection="Columns" ResizeBehavior="PreviousAndNext" Background="Transparent" Width="6" Grid.Column="1" Grid.Row="0" Grid.RowSpan="2"/>
-            <TextBlock Grid.Column="2" Grid.Row="0" VerticalAlignment="Center" Text="Value"/>
-            <ItemsControl VerticalAlignment="Stretch" Grid.Column="2" Grid.Row="1" Items="{Binding Values}">
-                <ItemsControl.DataTemplates>
-                    <DataTemplate DataType="Data:Value">
-                        <Grid VerticalAlignment="Top" Background="Transparent" Margin="0,2,0,2">
-                            <!--<i:Interaction.Behaviors>
-                                <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}"/>
-                            </i:Interaction.Behaviors>-->
-                            <TextBox VerticalAlignment="Center" Text="{Binding Content, Mode=TwoWay}"/>
-                        </Grid>
-                    </DataTemplate>
-                </ItemsControl.DataTemplates>
-            </ItemsControl>
-        </Grid>
-    </ScrollViewer>
+    <Grid RowDefinitions="Auto,*" ColumnDefinitions="50*,Auto,50*">
+        <TextBlock Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" Text="Name"/>
+        <ItemsControl VerticalAlignment="Stretch" Grid.Column="0" Grid.Row="1" DataContext="{Binding Owner}" Items="{Binding Columns}" x:DataType="Data:Database">
+            <ItemsControl.DataTemplates>
+                <DataTemplate DataType="Data:Column">
+                    <Grid VerticalAlignment="Top" Background="Transparent" Margin="0,2,0,2">
+                        <!--<i:Interaction.Behaviors>
+                            <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}"/>
+                        </i:Interaction.Behaviors>-->
+                        <TextBox VerticalAlignment="Center" Text="{Binding Name, Mode=TwoWay}"/>
+                    </Grid>
+                </DataTemplate>
+            </ItemsControl.DataTemplates>
+        </ItemsControl>
+        <GridSplitter ResizeDirection="Columns" ResizeBehavior="PreviousAndNext" Background="Transparent" Width="6" Grid.Column="1" Grid.Row="0" Grid.RowSpan="2"/>
+        <TextBlock Grid.Column="2" Grid.Row="0" VerticalAlignment="Center" Text="Value"/>
+        <ItemsControl VerticalAlignment="Stretch" Grid.Column="2" Grid.Row="1" Items="{Binding Values}">
+            <ItemsControl.DataTemplates>
+                <DataTemplate DataType="Data:Value">
+                    <Grid VerticalAlignment="Top" Background="Transparent" Margin="0,2,0,2">
+                        <!--<i:Interaction.Behaviors>
+                            <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}"/>
+                        </i:Interaction.Behaviors>-->
+                        <TextBox VerticalAlignment="Center" Text="{Binding Content, Mode=TwoWay}"/>
+                    </Grid>
+                </DataTemplate>
+            </ItemsControl.DataTemplates>
+        </ItemsControl>
+    </Grid>
 </UserControl>

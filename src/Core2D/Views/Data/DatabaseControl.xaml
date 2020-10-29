@@ -14,8 +14,8 @@
              d:DataContext="{x:Static Designer:DesignerContext.Database}"
              d:DesignWidth="250" d:DesignHeight="400"
              x:DataType="Data:Database" x:CompileBindings="True">
-    <TabControl>
-        <TabItem Header="Records">
+    <StackPanel>
+        <Expander Header="Records" IsExpanded="True">
             <DockPanel>
                 <Grid RowDefinitions="*" ColumnDefinitions="*,Auto" DockPanel.Dock="Top">
                     <TextBox x:Name="filterRecordsText" Text="" Watermark="Filter records" BorderBrush="Transparent" Background="Transparent" VerticalAlignment="Center" Margin="0,0,0,0" Grid.Column="0" x:CompileBindings="False"/>
@@ -25,16 +25,7 @@
                         <MenuItem Header="+" Command="{Binding $parent[TopLevel].DataContext.OnAddRecord}" CommandParameter="{Binding}" x:CompileBindings="False"/>
                     </Menu>
                 </Grid>
-                <DataGrid x:Name="rowsDataGrid"
-                          SelectedItem="{Binding CurrentRecord, Mode=TwoWay}"
-                          SelectionMode="Single"
-                          AutoGenerateColumns="False"
-                          IsReadOnly="False"
-                          CanUserReorderColumns="False"
-                          CanUserResizeColumns="True"
-                          CanUserSortColumns="False"
-                          BorderThickness="0"
-                          RowBackground="Transparent">
+                <DataGrid x:Name="rowsDataGrid" SelectedItem="{Binding CurrentRecord, Mode=TwoWay}" SelectionMode="Single" AutoGenerateColumns="False" IsReadOnly="False" CanUserReorderColumns="False" CanUserResizeColumns="True" CanUserSortColumns="False" BorderThickness="0" RowBackground="Transparent">
                     <i:Interaction.Behaviors>
                         <idd:TypedDragBehavior DataType="{x:Type Data:Record}"/>
                     </i:Interaction.Behaviors>
@@ -44,26 +35,17 @@
                     </DataGrid.KeyBindings>
                 </DataGrid>
             </DockPanel>
-        </TabItem>
-        <TabItem Header="Current Record">
+        </Expander>
+        <Expander Header="Current Record" IsExpanded="False">
             <ContentControl Content="{Binding CurrentRecord}"/>
-        </TabItem>
-        <TabItem Header="Columns">
+        </Expander>
+        <Expander Header="Columns" IsExpanded="False">
             <DockPanel>
                 <Menu HorizontalAlignment="Right" DockPanel.Dock="Top">
                     <MenuItem Header="&#727;" Command="{Binding $parent[TopLevel].DataContext.OnRemoveColumn}" CommandParameter="{Binding #columnsDataGrid.SelectedItem}" x:CompileBindings="False"/>
                     <MenuItem Header="+" Command="{Binding $parent[TopLevel].DataContext.OnAddColumn}" CommandParameter="{Binding}" x:CompileBindings="False"/>
                 </Menu>
-                <DataGrid x:Name="columnsDataGrid"
-                          Items="{Binding Columns}"
-                          SelectionMode="Single"
-                          AutoGenerateColumns="False"
-                          IsReadOnly="False"
-                          CanUserReorderColumns="False"
-                          CanUserResizeColumns="True"
-                          CanUserSortColumns="False"
-                          BorderThickness="0"
-                          RowBackground="Transparent">
+                <DataGrid x:Name="columnsDataGrid" Items="{Binding Columns}" SelectionMode="Single" AutoGenerateColumns="False" IsReadOnly="False" CanUserReorderColumns="False" CanUserResizeColumns="True" CanUserSortColumns="False" BorderThickness="0" RowBackground="Transparent">
                     <i:Interaction.Behaviors>
                         <idd:TypedDragBehavior DataType="{x:Type Data:Column}"/>
                     </i:Interaction.Behaviors>
@@ -78,6 +60,6 @@
                     </DataGrid.Columns>
                 </DataGrid>
             </DockPanel>
-        </TabItem>
-    </TabControl>
+        </Expander>
+    </StackPanel>
 </UserControl>
