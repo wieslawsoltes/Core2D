@@ -12,36 +12,28 @@
              d:DesignWidth="250" d:DesignHeight="400"
              x:DataType="Containers:Options" x:CompileBindings="True">
     <StackPanel>
-        <TabControl>
-            <TabItem Header="General">
-                <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-                    <StackPanel>
-                        <CheckBox Content="SnapToGrid" IsChecked="{Binding SnapToGrid, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
-                        <TextBlock Text="SnapX" Margin="{DynamicResource TextControlThemePadding}"/>
-                        <TextBox Text="{Binding SnapX, Mode=TwoWay}"/>
-                        <TextBlock Text="SnapY" Margin="{DynamicResource TextControlThemePadding}"/>
-                        <TextBox Text="{Binding SnapY, Mode=TwoWay}"/>
-                        <TextBlock Text="HitThreshold" Margin="{DynamicResource TextControlThemePadding}"/>
-                        <TextBox Text="{Binding HitThreshold, Mode=TwoWay}"/>
-                        <TextBlock Text="MoveMode" Margin="{DynamicResource TextControlThemePadding}"/>
-                        <ComboBox Items="{x:Static Editor:Enums.MoveModeValues}" SelectedItem="{Binding MoveMode, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
-                        <CheckBox Content="TryToConnect" IsChecked="{Binding TryToConnect, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
-                    </StackPanel>
-                </ScrollViewer>
-            </TabItem>
-        </TabControl>
-        <TabControl>
-            <TabItem Header="Defaults">
-                <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-                    <StackPanel>
-                        <CheckBox Content="IsStroked" IsChecked="{Binding DefaultIsStroked, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
-                        <CheckBox Content="IsFilled" IsChecked="{Binding DefaultIsFilled, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
-                        <CheckBox Content="IsClosed" IsChecked="{Binding DefaultIsClosed, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
-                        <TextBlock Text="FillRule" Margin="{DynamicResource TextControlThemePadding}"/>
-                        <ComboBox Items="{x:Static Editor:Enums.XFillRuleValues}" SelectedItem="{Binding DefaultFillRule, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
-                    </StackPanel>
-                </ScrollViewer>
-            </TabItem>
-        </TabControl>
+        <Expander Header="General" IsExpanded="True">
+            <StackPanel>
+                <CheckBox Content="SnapToGrid" IsChecked="{Binding SnapToGrid, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
+                <Label Content="SnapX" Margin="{DynamicResource TextControlThemePadding}"/>
+                <TextBox Text="{Binding SnapX, Mode=TwoWay}"/>
+                <Label Content="SnapY" Margin="{DynamicResource TextControlThemePadding}"/>
+                <TextBox Text="{Binding SnapY, Mode=TwoWay}"/>
+                <Label Content="HitThreshold" Margin="{DynamicResource TextControlThemePadding}"/>
+                <TextBox Text="{Binding HitThreshold, Mode=TwoWay}"/>
+                <Label Content="MoveMode" Margin="{DynamicResource TextControlThemePadding}"/>
+                <ComboBox Items="{x:Static Editor:Enums.MoveModeValues}" SelectedItem="{Binding MoveMode, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
+                <CheckBox Content="TryToConnect" IsChecked="{Binding TryToConnect, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
+            </StackPanel>
+        </Expander>
+        <Expander Header="Defaults" IsExpanded="True">
+            <StackPanel>
+                <CheckBox Content="IsStroked" IsChecked="{Binding DefaultIsStroked, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
+                <CheckBox Content="IsFilled" IsChecked="{Binding DefaultIsFilled, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
+                <CheckBox Content="IsClosed" IsChecked="{Binding DefaultIsClosed, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
+                <Label Content="FillRule" Margin="{DynamicResource TextControlThemePadding}"/>
+                <ComboBox Items="{x:Static Editor:Enums.XFillRuleValues}" SelectedItem="{Binding DefaultFillRule, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
+            </StackPanel>
+        </Expander>
     </StackPanel>
 </UserControl>

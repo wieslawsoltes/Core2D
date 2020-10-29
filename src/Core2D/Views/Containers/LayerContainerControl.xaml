@@ -17,29 +17,27 @@
     <UserControl.Resources>
         <converters:ObjectToTypeStringConverter x:Key="ObjectToTypeStringConverter"/>
     </UserControl.Resources>
-    <DockPanel>
-        <StackPanel DockPanel.Dock="Top">
-            <TextBlock Text="Name" Margin="{DynamicResource TextControlThemePadding}"/>
+    <StackPanel>
+        <StackPanel>
+            <Label Content="Name" Margin="{DynamicResource TextControlThemePadding}"/>
             <TextBox Text="{Binding Name, Mode=TwoWay}"/>
             <CheckBox Content="IsVisible" IsChecked="{Binding IsVisible, Mode=TwoWay}"/>
         </StackPanel>
-        <TabControl>
-            <TabItem Header="Shapes">
-                <ListBox x:Name="shapes" Items="{Binding Shapes}">
-                    <ListBox.DataTemplates>
-                        <DataTemplate DataType="Shapes:BaseShape">
-                            <TextBlock Text="{Binding Mode=OneWay, Converter={StaticResource ObjectToTypeStringConverter}}" Background="Transparent">
-                                <i:Interaction.Behaviors>
-                                    <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}"/>
-                                </i:Interaction.Behaviors>
-                            </TextBlock>
-                        </DataTemplate>
-                    </ListBox.DataTemplates>
-                </ListBox>
-            </TabItem>
-            <TabItem Header="Selected Shape">
-                <ContentControl Content="{Binding #shapes.SelectedItem}"/>
-            </TabItem>
-        </TabControl>
-    </DockPanel>
+        <Expander Header="Shapes" IsExpanded="False">
+            <ListBox x:Name="shapes" Items="{Binding Shapes}">
+                <ListBox.DataTemplates>
+                    <DataTemplate DataType="Shapes:BaseShape">
+                        <TextBlock Text="{Binding Mode=OneWay, Converter={StaticResource ObjectToTypeStringConverter}}" Background="Transparent">
+                            <i:Interaction.Behaviors>
+                                <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}"/>
+                            </i:Interaction.Behaviors>
+                        </TextBlock>
+                    </DataTemplate>
+                </ListBox.DataTemplates>
+            </ListBox>
+        </Expander>
+        <Expander Header="Selected Shape" IsExpanded="False">
+            <ContentControl Content="{Binding #shapes.SelectedItem}"/>
+        </Expander>
+    </StackPanel>
 </UserControl>
