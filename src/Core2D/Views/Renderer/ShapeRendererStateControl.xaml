@@ -16,50 +16,36 @@
         <converters:ObjectToTypeStringConverter x:Key="ObjectToTypeStringConverter"/>
     </UserControl.Resources>
     <StackPanel>
-
-            <TabItem Header="Point">
-                <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-                    <StackPanel>
-                        <CheckBox Content="DrawDecorators" IsChecked="{Binding DrawDecorators, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
-                        <CheckBox Content="DrawPoints" IsChecked="{Binding DrawPoints, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
-                        <TextBlock Text="PointSize" Margin="{DynamicResource TextControlThemePadding}"/>
-                        <TextBox Text="{Binding PointSize, Mode=TwoWay}"/>
-                    </StackPanel>
-                </ScrollViewer>
-            </TabItem>
-            <TabItem Header="Normal Style">
-                <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-                    <ContentControl Content="{Binding PointStyle}"/>
-                </ScrollViewer>
-            </TabItem>
-            <TabItem Header="Selected Style">
-                <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-                    <ContentControl Content="{Binding SelectedPointStyle}"/>
-                </ScrollViewer>
-            </TabItem>
-
-            <TabItem Header="Zoom">
-                <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-                    <StackPanel>
-                        <TextBlock Text="PanX" Margin="{DynamicResource TextControlThemePadding}"/>
-                        <TextBox Text="{Binding PanX, Mode=TwoWay}"/>
-                        <TextBlock Text="PanY" Margin="{DynamicResource TextControlThemePadding}"/>
-                        <TextBox Text="{Binding PanY, Mode=TwoWay}"/>
-                        <TextBlock Text="ZoomX" Margin="{DynamicResource TextControlThemePadding}"/>
-                        <TextBox Text="{Binding ZoomX, Mode=TwoWay}"/>
-                        <TextBlock Text="ZoomY" Margin="{DynamicResource TextControlThemePadding}"/>
-                        <TextBox Text="{Binding ZoomY, Mode=TwoWay}"/>
-                    </StackPanel>
-                </ScrollViewer>
-            </TabItem>
-
-            <TabItem Header="DrawShapeState">
-                <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-                    <ContentControl Content="{Binding DrawShapeState}"/>
-                </ScrollViewer>
-            </TabItem>
-
-        <TabItem Header="SelectedShapes">
+        <Expander Header="Point" IsExpanded="False">
+            <StackPanel>
+                <CheckBox Content="DrawDecorators" IsChecked="{Binding DrawDecorators, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
+                <CheckBox Content="DrawPoints" IsChecked="{Binding DrawPoints, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
+                <Label Content="PointSize" Margin="{DynamicResource TextControlThemePadding}"/>
+                <TextBox Text="{Binding PointSize, Mode=TwoWay}"/>
+            </StackPanel>
+        </Expander>
+        <Expander Header="Normal Style" IsExpanded="False">
+            <ContentControl Content="{Binding PointStyle}"/>
+        </Expander>
+        <Expander Header="Selected Style" IsExpanded="False">
+            <ContentControl Content="{Binding SelectedPointStyle}"/>
+        </Expander>
+        <Expander Header="Zoom" IsExpanded="False">
+            <StackPanel>
+                <Label Content="PanX" Margin="{DynamicResource TextControlThemePadding}"/>
+                <TextBox Text="{Binding PanX, Mode=TwoWay}"/>
+                <Label Content="PanY" Margin="{DynamicResource TextControlThemePadding}"/>
+                <TextBox Text="{Binding PanY, Mode=TwoWay}"/>
+                <Label Content="ZoomX" Margin="{DynamicResource TextControlThemePadding}"/>
+                <TextBox Text="{Binding ZoomX, Mode=TwoWay}"/>
+                <Label Content="ZoomY" Margin="{DynamicResource TextControlThemePadding}"/>
+                <TextBox Text="{Binding ZoomY, Mode=TwoWay}"/>
+            </StackPanel>
+        </Expander>
+        <Expander Header="DrawShapeState" IsExpanded="False">
+            <ContentControl Content="{Binding DrawShapeState}"/>
+        </Expander>
+        <Expander Header="SelectedShapes" IsExpanded="False">
             <ListBox x:Name="shapes" Items="{Binding SelectedShapes}" VirtualizationMode="Simple">
                 <ListBox.ItemsPanel>
                     <ItemsPanelTemplate>
@@ -81,15 +67,15 @@
                     </DataTemplate>
                 </ListBox.DataTemplates>
             </ListBox>
-        </TabItem>
-        <TabItem Header="ImageCache">
+        </Expander>
+        <Expander Header="ImageCache" IsExpanded="False">
             <libraries:ImagesControl DataContext="{Binding ImageCache}"/>
-        </TabItem>
-        <TabItem Header="SelectionStyle">
+        </Expander>
+        <Expander Header="SelectionStyle" IsExpanded="False">
             <ContentControl Content="{Binding SelectionStyle}"/>
-        </TabItem>
-        <TabItem Header="HelperStyle">
+        </Expander>
+        <Expander Header="HelperStyle" IsExpanded="False">
             <ContentControl Content="{Binding HelperStyle}"/>
-        </TabItem>
+        </Expander>
     </StackPanel>
 </UserControl>
