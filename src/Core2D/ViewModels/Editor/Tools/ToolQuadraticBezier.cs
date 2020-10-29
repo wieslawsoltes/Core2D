@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using Core2D;
 using Core2D.Editor.Tools.Selection;
-using Core2D.Editor.Tools.Settings;
 using Core2D.Input;
 using Core2D.Shapes;
 using Core2D.Style;
@@ -13,23 +12,15 @@ namespace Core2D.Editor.Tools
     {
         public enum State { Point1, Point3, Point2 }
         private readonly IServiceProvider _serviceProvider;
-        private ToolSettingsQuadraticBezier _settings;
         private State _currentState = State.Point1;
         private QuadraticBezierShape _quadraticBezier;
         private ToolQuadraticBezierSelection _selection;
 
         public string Title => "QuadraticBezier";
 
-        public ToolSettingsQuadraticBezier Settings
-        {
-            get => _settings;
-            set => RaiseAndSetIfChanged(ref _settings, value);
-        }
-
         public ToolQuadraticBezier(IServiceProvider serviceProvider) : base()
         {
             _serviceProvider = serviceProvider;
-            _settings = new ToolSettingsQuadraticBezier();
         }
 
         public override object Copy(IDictionary<object, object> shared)

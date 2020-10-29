@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using Core2D;
-using Core2D.Editor.Tools.Path.Settings;
 using Core2D.Editor.Tools.Selection;
 using Core2D.Input;
 using Core2D.Path.Segments;
@@ -14,23 +13,15 @@ namespace Core2D.Editor.Tools.Path
     {
         public enum State { Point1, Point4, Point2, Point3 }
         private readonly IServiceProvider _serviceProvider;
-        private PathToolSettingsCubicBezier _settings;
         private State _currentState = State.Point1;
         private CubicBezierShape _cubicBezier = new CubicBezierShape();
         private ToolCubicBezierSelection _selection;
 
         public string Title => "CubicBezier";
 
-        public PathToolSettingsCubicBezier Settings
-        {
-            get => _settings;
-            set => RaiseAndSetIfChanged(ref _settings, value);
-        }
-
         public PathToolCubicBezier(IServiceProvider serviceProvider) : base()
         {
             _serviceProvider = serviceProvider;
-            _settings = new PathToolSettingsCubicBezier();
         }
 
         public override object Copy(IDictionary<object, object> shared)

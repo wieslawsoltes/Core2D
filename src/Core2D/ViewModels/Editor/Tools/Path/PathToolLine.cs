@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using Core2D;
-using Core2D.Editor.Tools.Path.Settings;
 using Core2D.Editor.Tools.Selection;
 using Core2D.Input;
 using Core2D.Path.Segments;
@@ -14,23 +13,15 @@ namespace Core2D.Editor.Tools.Path
     {
         public enum State { Start, End }
         private readonly IServiceProvider _serviceProvider;
-        private PathToolSettingsLine _settings;
         private State _currentState = State.Start;
         private LineShape _line = new LineShape();
         private ToolLineSelection _selection;
 
         public string Title => "Line";
 
-        public PathToolSettingsLine Settings
-        {
-            get => _settings;
-            set => RaiseAndSetIfChanged(ref _settings, value);
-        }
-
         public PathToolLine(IServiceProvider serviceProvider) : base()
         {
             _serviceProvider = serviceProvider;
-            _settings = new PathToolSettingsLine();
         }
 
         public override object Copy(IDictionary<object, object> shared)

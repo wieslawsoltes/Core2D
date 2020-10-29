@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using Core2D;
-using Core2D.Editor.Tools.Settings;
 using Core2D.Input;
 using Core2D.Shapes;
 
@@ -11,22 +10,14 @@ namespace Core2D.Editor.Tools
     {
         public enum State { Point }
         private readonly IServiceProvider _serviceProvider;
-        private ToolSettingsPoint _settings;
         private State _currentState = State.Point;
         private PointShape _point;
 
         public string Title => "Point";
 
-        public ToolSettingsPoint Settings
-        {
-            get => _settings;
-            set => RaiseAndSetIfChanged(ref _settings, value);
-        }
-
         public ToolPoint(IServiceProvider serviceProvider) : base()
         {
             _serviceProvider = serviceProvider;
-            _settings = new ToolSettingsPoint();
         }
 
         public override object Copy(IDictionary<object, object> shared)

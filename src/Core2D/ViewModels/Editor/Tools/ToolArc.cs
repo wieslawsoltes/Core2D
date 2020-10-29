@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using Core2D;
 using Core2D.Editor.Tools.Selection;
-using Core2D.Editor.Tools.Settings;
 using Core2D.Input;
 using Core2D.Shapes;
 using Core2D.Style;
@@ -15,7 +14,6 @@ namespace Core2D.Editor.Tools
     {
         public enum State { Point1, Point2, Point3, Point4 }
         private readonly IServiceProvider _serviceProvider;
-        private ToolSettingsArc _settings;
         private State _currentState = State.Point1;
         private ArcShape _arc;
         private bool _connectedPoint3;
@@ -24,16 +22,9 @@ namespace Core2D.Editor.Tools
 
         public string Title => "Arc";
 
-        public ToolSettingsArc Settings
-        {
-            get => _settings;
-            set => RaiseAndSetIfChanged(ref _settings, value);
-        }
-
         public ToolArc(IServiceProvider serviceProvider) : base()
         {
             _serviceProvider = serviceProvider;
-            _settings = new ToolSettingsArc();
         }
 
         public override object Copy(IDictionary<object, object> shared)

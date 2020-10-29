@@ -4,7 +4,6 @@ using System.Collections.Immutable;
 using System.Linq;
 using Core2D;
 using Core2D.Editor.Tools.Path;
-using Core2D.Editor.Tools.Settings;
 using Core2D.Input;
 using Core2D.Path;
 using Core2D.Path.Segments;
@@ -16,7 +15,6 @@ namespace Core2D.Editor.Tools
     public class ToolPath : ObservableObject, IEditorTool
     {
         private readonly IServiceProvider _serviceProvider;
-        private ToolSettingsPath _settings;
         private readonly PathToolLine _pathToolLine;
         private readonly PathToolArc _pathToolArc;
         private readonly PathToolCubicBezier _pathToolCubicBezier;
@@ -35,16 +33,9 @@ namespace Core2D.Editor.Tools
 
         public string Title => "Path";
 
-        public ToolSettingsPath Settings
-        {
-            get => _settings;
-            set => RaiseAndSetIfChanged(ref _settings, value);
-        }
-
         public ToolPath(IServiceProvider serviceProvider) : base()
         {
             _serviceProvider = serviceProvider;
-            _settings = new ToolSettingsPath();
             _pathToolLine = serviceProvider.GetService<PathToolLine>();
             _pathToolArc = serviceProvider.GetService<PathToolArc>();
             _pathToolCubicBezier = serviceProvider.GetService<PathToolCubicBezier>();

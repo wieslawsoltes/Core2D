@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using Core2D.Containers;
-using Core2D.Editor.Tools.Settings;
 using Core2D.Input;
 using Core2D.Renderer;
 using Core2D.Shapes;
@@ -14,7 +13,6 @@ namespace Core2D.Editor.Tools
     {
         public enum State { None, Selected }
         private readonly IServiceProvider _serviceProvider;
-        private ToolSettingsSelection _settings;
         private State _currentState = State.None;
         private RectangleShape _rectangleShape;
         private decimal _startX;
@@ -26,16 +24,9 @@ namespace Core2D.Editor.Tools
 
         public string Title => "Selection";
 
-        public ToolSettingsSelection Settings
-        {
-            get => _settings;
-            set => RaiseAndSetIfChanged(ref _settings, value);
-        }
-
         public ToolSelection(IServiceProvider serviceProvider) : base()
         {
             _serviceProvider = serviceProvider;
-            _settings = new ToolSettingsSelection();
         }
 
         public override object Copy(IDictionary<object, object> shared)

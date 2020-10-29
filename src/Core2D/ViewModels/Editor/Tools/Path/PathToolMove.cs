@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using Core2D;
-using Core2D.Editor.Tools.Path.Settings;
 using Core2D.Input;
 using Core2D.Shapes;
 
@@ -11,21 +10,13 @@ namespace Core2D.Editor.Tools.Path
     {
         public enum State { Move }
         private readonly IServiceProvider _serviceProvider;
-        private PathToolSettingsMove _settings;
         private readonly State _currentState = State.Move;
 
         public string Title => "Move";
 
-        public PathToolSettingsMove Settings
-        {
-            get => _settings;
-            set => RaiseAndSetIfChanged(ref _settings, value);
-        }
-
         public PathToolMove(IServiceProvider serviceProvider) : base()
         {
             _serviceProvider = serviceProvider;
-            _settings = new PathToolSettingsMove();
         }
 
         public override object Copy(IDictionary<object, object> shared)
