@@ -130,7 +130,6 @@
             </TabControl>
             <GridSplitter x:Name="LeftGridSplitter" ResizeDirection="Columns" ResizeBehavior="PreviousAndNext" Background="Transparent" Width="6" Grid.Column="1" Grid.Row="1" />
             <views:PageControl x:Name="Page" Grid.Column="2" Grid.Row="1" />
-            <!--<views:DocumentControl x:Name="Document" Grid.Column="2" Grid.Row="1" />-->
             <GridSplitter x:Name="RightGridSplitter" ResizeDirection="Columns" ResizeBehavior="PreviousAndNext" Background="Transparent" Width="6" Grid.Column="3" Grid.Row="1" />
             <TabControl x:Name="LAYOUT_RightTabControl" Padding="0,0,6,0" Grid.Column="4" Grid.Row="1">
                 <TabItem x:Name="LAYOUT_PageTabItem" Header="Page">
