@@ -46,8 +46,8 @@ namespace Core2D.FileWriter.SkiaSharpSvg
             if (item is PageContainer page)
             {
                 var dataFlow = _serviceProvider.GetService<DataFlow>();
-                var db = (object)page.Data.Properties;
-                var record = (object)page.Data.Record;
+                var db = (object)page.Properties;
+                var record = (object)page.Record;
 
                 dataFlow.Bind(page.Template, db, record);
                 dataFlow.Bind(page, db, record);

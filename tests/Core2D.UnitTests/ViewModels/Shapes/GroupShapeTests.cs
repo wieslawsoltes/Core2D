@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using Core2D;
 using Core2D.Data;
@@ -37,13 +38,13 @@ namespace Core2D.Shapes.UnitTests
             var shape = new Class1()
             {
                 State = _factory.CreateShapeState(),
-                Data = _factory.CreateContext()
+                Properties = ImmutableArray.Create<Property>()
             };
-            shape.Data.Properties = shape.Data.Properties.Add(_factory.CreateProperty(null, "", ""));
+            shape.Properties = shape.Properties.Add(_factory.CreateProperty(null, "", ""));
             target.Shapes = target.Shapes.Add(shape);
 
             var point = _factory.CreatePointShape();
-            point.Data.Properties = point.Data.Properties.Add(_factory.CreateProperty(null, "", ""));
+            point.Properties = point.Properties.Add(_factory.CreateProperty(null, "", ""));
             target.Connectors = target.Connectors.Add(point);
 
             var length = target.ShapesProperties.Length;
@@ -59,9 +60,9 @@ namespace Core2D.Shapes.UnitTests
             var shape1 = new Class1()
             {
                 State = _factory.CreateShapeState(),
-                Data = _factory.CreateContext()
+                Properties = ImmutableArray.Create<Property>()
             };
-            shape1.Data.Properties = shape1.Data.Properties.Add(_factory.CreateProperty(null, "", ""));
+            shape1.Properties = shape1.Properties.Add(_factory.CreateProperty(null, "", ""));
             target.Shapes = target.Shapes.Add(shape1);
 
             var length1 = target.ShapesProperties.Length;
@@ -70,9 +71,9 @@ namespace Core2D.Shapes.UnitTests
             var shape2 = new Class1()
             {
                 State = _factory.CreateShapeState(),
-                Data = _factory.CreateContext()
+                Properties = ImmutableArray.Create<Property>()
             };
-            shape2.Data.Properties = shape2.Data.Properties.Add(_factory.CreateProperty(null, "", ""));
+            shape2.Properties = shape2.Properties.Add(_factory.CreateProperty(null, "", ""));
             target.Shapes = target.Shapes.Add(shape2);
 
             var length2 = target.ShapesProperties.Length;
@@ -87,11 +88,11 @@ namespace Core2D.Shapes.UnitTests
             var target = _factory.CreateGroupShape();
 
             var text = _factory.CreateTextShape(0, 0, style, "Text");
-            text.Data.Properties = text.Data.Properties.Add(_factory.CreateProperty(null, "", ""));
+            text.Properties = text.Properties.Add(_factory.CreateProperty(null, "", ""));
             target.Shapes = target.Shapes.Add(text);
 
             var point = _factory.CreatePointShape();
-            point.Data.Properties = point.Data.Properties.Add(_factory.CreateProperty(null, "", ""));
+            point.Properties = point.Properties.Add(_factory.CreateProperty(null, "", ""));
             target.Connectors = target.Connectors.Add(point);
 
             var points = new List<PointShape>();

@@ -48,7 +48,7 @@ namespace Core2D.Shapes.UnitTests
             };
 
             var point = _factory.CreatePointShape();
-            point.Data.Properties = point.Data.Properties.Add(_factory.CreateProperty(null, "", ""));
+            point.Properties = point.Properties.Add(_factory.CreateProperty(null, "", ""));
             target.Connectors = target.Connectors.Add(point);
 
             var points = new List<PointShape>();

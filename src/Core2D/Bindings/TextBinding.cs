@@ -61,8 +61,7 @@ namespace Core2D.Bindings
         public static string Bind(TextShape shape, ImmutableArray<Property> properties, Record externalRecord)
         {
             var text = shape.Text;
-            var data = shape.Data;
-            var record = data?.Record ?? externalRecord;
+            var record = shape.Record ?? externalRecord;
 
             if (string.IsNullOrEmpty(text))
             {
@@ -104,9 +103,9 @@ namespace Core2D.Bindings
                     }
 
                     // Try to bind to internal Properties database (e.g. Data.Properties) using Text property as Property.Name name.
-                    if (data?.Properties != null && data.Properties.Length > 0)
+                    if (shape.Properties != null && shape.Properties.Length > 0)
                     {
-                        bool success = GetBindingValue(data.Properties, binding.Path, out string value);
+                        bool success = GetBindingValue(shape.Properties, binding.Path, out string value);
                         if (success)
                         {
                             sb.Replace(binding.Value, value, binding.Start, binding.Length);
@@ -123,11 +122,11 @@ namespace Core2D.Bindings
             }
 
             // Try to bind to Properties using Text as formatting args.
-            if (data?.Properties != null && data.Properties.Length > 0)
+            if (shape.Properties != null && shape.Properties.Length > 0)
             {
                 try
                 {
-                    var args = data.Properties.Where(x => x != null).Select(x => x.Value).ToArray();
+                    var args = shape.Properties.Where(x => x != null).Select(x => x.Value).ToArray();
                     if (args != null && args.Length > 0)
                     {
                         return string.Format(text, args);

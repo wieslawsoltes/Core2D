@@ -42,7 +42,7 @@ namespace Core2D.Shapes
 
                     foreach (var shape in _shapes)
                     {
-                        foreach (var property in shape.Data.Properties)
+                        foreach (var property in shape.Properties)
                         {
                             builder.Add(property);
                         }
@@ -50,7 +50,7 @@ namespace Core2D.Shapes
 
                     foreach (var connector in base.Connectors)
                     {
-                        foreach (var property in connector.Data.Properties)
+                        foreach (var property in connector.Properties)
                         {
                             builder.Add(property);
                         }
@@ -90,7 +90,7 @@ namespace Core2D.Shapes
 
         public override void Bind(DataFlow dataFlow, object db, object r)
         {
-            var record = Data?.Record ?? r;
+            var record = Record ?? r;
 
             foreach (var shape in Shapes)
             {

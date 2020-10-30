@@ -159,11 +159,11 @@ namespace Core2D.Editor
 
         private void ObservePage(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == nameof(Context.Properties))
+            if (e.PropertyName == nameof(IDataObject.Properties))
             {
                 var container = sender as PageContainer;
-                Remove(container.Data.Properties);
-                Add(container.Data.Properties);
+                Remove(container.Properties);
+                Add(container.Properties);
             }
 
             if (e.PropertyName == nameof(PageContainer.Layers))
@@ -290,9 +290,9 @@ namespace Core2D.Editor
 
         private void ObserveData(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == nameof(Context.Properties))
+            if (e.PropertyName == nameof(IDataObject.Properties))
             {
-                var data = sender as Context;
+                var data = sender as IDataObject;
                 Remove(data.Properties);
                 Add(data.Properties);
             }
@@ -599,9 +599,9 @@ namespace Core2D.Editor
                 Add(container.Layers);
             }
 
-            if (container.Data != null)
+            if (container is IDataObject data)
             {
-                Add(container.Data);
+                Add(data);
             }
 
             if (container.WorkingLayer != null)
@@ -641,9 +641,9 @@ namespace Core2D.Editor
                 Remove(container.Layers);
             }
 
-            if (container.Data != null)
+            if (container is IDataObject data)
             {
-                Remove(container.Data);
+                Remove(data);
             }
 
             if (container.WorkingLayer != null)
@@ -705,9 +705,9 @@ namespace Core2D.Editor
                 Add(shape.Style);
             }
 
-            if (shape.Data != null)
+            if (shape is IDataObject data)
             {
-                Add(shape.Data);
+                Add(data);
             }
 
             if (shape.State != null)
@@ -871,9 +871,9 @@ namespace Core2D.Editor
                 Remove(shape.Style);
             }
 
-            if (shape.Data != null)
+            if (shape is IDataObject data)
             {
-                Remove(shape.Data);
+                Remove(data);
             }
 
             if (shape.State != null)
@@ -1171,7 +1171,7 @@ namespace Core2D.Editor
             }
         }
 
-        private void Add(Context data)
+        private void Add(IDataObject data)
         {
             if (data == null)
             {
@@ -1183,10 +1183,13 @@ namespace Core2D.Editor
                 Add(data.Properties);
             }
 
-            data.PropertyChanged += ObserveData;
+            if (data is ObservableObject observable)
+            {
+                observable.PropertyChanged += ObserveData;
+            }
         }
 
-        private void Remove(Context data)
+        private void Remove(IDataObject data)
         {
             if (data == null)
             {
@@ -1198,7 +1201,10 @@ namespace Core2D.Editor
                 Remove(data.Properties);
             }
 
-            data.PropertyChanged -= ObserveData;
+            if (data is ObservableObject observable)
+            {
+                observable.PropertyChanged -= ObserveData;
+            }
         }
 
         private void Add(Library<ShapeStyle> sg)

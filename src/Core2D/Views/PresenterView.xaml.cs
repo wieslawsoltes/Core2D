@@ -172,8 +172,8 @@ namespace Core2D.Views
                     {
                         if (customState.Container != null && customState.DataFlow != null)
                         {
-                            var db = (object)customState.Container.Data.Properties;
-                            var record = (object)customState.Container.Data.Record;
+                            var db = (object)customState.Container.Properties;
+                            var record = (object)customState.Container.Record;
 #if USE_DIAGNOSTICS
                             var swDataFlow = Stopwatch.StartNew();
 #endif

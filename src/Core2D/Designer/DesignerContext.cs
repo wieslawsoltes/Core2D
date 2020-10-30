@@ -41,8 +41,6 @@ namespace Core2D.Designer
 
         public static Database Database { get; set; }
 
-        public static Context Data { get; set; }
-
         public static Record Record { get; set; }
 
         public static ArgbColor ArgbColor { get; set; }
@@ -124,7 +122,6 @@ namespace Core2D.Designer
             db.CurrentRecord = record;
 
             Database = db;
-            Data = factory.CreateContext(record);
             Record = record;
 
             // Project

@@ -466,8 +466,8 @@ namespace Core2D.Editor
                 var shapes = editor.PageState.SelectedShapes;
                 var writer = editor.FileWriters.FirstOrDefault(x => x.GetType() == typeof(EmfWriter)) as EmfWriter;
 
-                var db = (object)page.Data.Properties;
-                var record = (object)page.Data.Record;
+                var db = (object)page.Properties;
+                var record = (object)page.Record;
                 editor.DataFlow.Bind(page.Template, db, record);
                 editor.DataFlow.Bind(page, db, record);
 

@@ -511,21 +511,6 @@ namespace Core2D.Editor
                 TryToRestoreRecords(shapes);
                 Project.AddGroupLibraries(gll);
             }
-            else if (item is Context context)
-            {
-                if (PageState?.SelectedShapes?.Count > 0)
-                {
-                    OnApplyData(context);
-                }
-                else
-                {
-                    var container = Project?.CurrentContainer;
-                    if (container != null)
-                    {
-                        container.Data = context;
-                    }
-                }
-            }
             else if (item is Database db)
             {
                 Project?.AddDatabase(db);
@@ -1995,7 +1980,7 @@ namespace Core2D.Editor
             Project.RemoveRecord(record);
         }
 
-        public void OnResetRecord(Context data)
+        public void OnResetRecord(IDataObject data)
         {
             Project.ResetRecord(data);
         }
@@ -2008,7 +1993,7 @@ namespace Core2D.Editor
                 {
                     foreach (var shape in PageState.SelectedShapes)
                     {
-                        Project.ApplyRecord(shape.Data, record);
+                        Project.ApplyRecord(shape, record);
                     }
                 }
 
@@ -2017,15 +2002,18 @@ namespace Core2D.Editor
                     var container = Project?.CurrentContainer;
                     if (container != null)
                     {
-                        Project?.ApplyRecord(container.Data, record);
+                        Project?.ApplyRecord(container, record);
                     }
                 }
             }
         }
 
-        public void OnAddProperty(Context data)
+        public void OnAddProperty(ObservableObject owner)
         {
-            Project.AddProperty(data, Factory.CreateProperty(data, ProjectEditorConfiguration.DefaulPropertyName, ProjectEditorConfiguration.DefaulValue));
+            if (owner is IDataObject data)
+            {
+                Project.AddProperty(data, Factory.CreateProperty(owner, ProjectEditorConfiguration.DefaulPropertyName, ProjectEditorConfiguration.DefaulValue));
+            }
         }
 
         public void OnRemoveProperty(Property property)
@@ -2146,20 +2134,6 @@ namespace Core2D.Editor
                     foreach (var shape in PageState.SelectedShapes)
                     {
                         Project?.ApplyStyle(shape, style);
-                    }
-                }
-            }
-        }
-
-        public void OnApplyData(Context data)
-        {
-            if (data != null)
-            {
-                if (PageState?.SelectedShapes?.Count > 0)
-                {
-                    foreach (var shape in PageState.SelectedShapes)
-                    {
-                        Project?.ApplyData(shape, data);
                     }
                 }
             }
@@ -2674,20 +2648,20 @@ namespace Core2D.Editor
                 // Try to restore shape record.
                 foreach (var shape in ProjectContainer.GetAllShapes(shapes))
                 {
-                    if (shape?.Data?.Record == null)
+                    if (shape?.Record == null)
                     {
                         continue;
                     }
 
-                    if (records.TryGetValue(shape.Data.Record.Id, out var record))
+                    if (records.TryGetValue(shape.Record.Id, out var record))
                     {
                         // Use existing record.
-                        shape.Data.Record = record;
+                        shape.Record = record;
                     }
                     else
                     {
                         // Create Imported database.
-                        if (Project?.CurrentDatabase == null && shape.Data.Record.Owner is Database owner)
+                        if (Project?.CurrentDatabase == null && shape.Record.Owner is Database owner)
                         {
                             var db = Factory.CreateDatabase(
                                 ProjectEditorConfiguration.ImportedDatabaseName,
@@ -2697,8 +2671,8 @@ namespace Core2D.Editor
                         }
 
                         // Add missing data record.
-                        shape.Data.Record.Owner = Project.CurrentDatabase;
-                        Project?.AddRecord(Project?.CurrentDatabase, shape.Data.Record);
+                        shape.Record.Owner = Project.CurrentDatabase;
+                        Project?.AddRecord(Project?.CurrentDatabase, shape.Record);
 
                         // Recreate records dictionary.
                         records = GenerateRecordDictionaryById();
@@ -3024,7 +2998,7 @@ namespace Core2D.Editor
                         {
                             if (bExecute)
                             {
-                                Project?.ApplyRecord(result.Data, record);
+                                Project?.ApplyRecord(result, record);
                             }
                             return true;
                         }
@@ -3058,7 +3032,7 @@ namespace Core2D.Editor
 
             var g = Factory.CreateGroupShape(ProjectEditorConfiguration.DefaulGroupName);
 
-            g.Data.Record = record;
+            g.Record = record;
 
             var length = record.Values.Length;
             double px = (double)sx;

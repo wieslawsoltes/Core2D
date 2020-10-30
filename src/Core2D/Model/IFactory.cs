@@ -21,7 +21,7 @@ namespace Core2D
 
         Value CreateValue(string content);
 
-        Property CreateProperty(Context owner, string name, string value);
+        Property CreateProperty(ObservableObject owner, string name, string value);
 
         Column CreateColumn(Database owner, string name, bool isVisible = true);
 
@@ -30,10 +30,6 @@ namespace Core2D
         Record CreateRecord(Database owner, string id, ImmutableArray<Value> values);
 
         Record CreateRecord(Database owner, string value);
-
-        Context CreateContext();
-
-        Context CreateContext(Record record);
 
         Database CreateDatabase(string name, string idColumnName = "Id");
 

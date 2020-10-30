@@ -10,7 +10,7 @@ using Core2D.Style;
 namespace Core2D.Containers
 {
     [DataContract(IsReference = true)]
-    public class PageContainer : BaseContainer, IGrid
+    public class PageContainer : BaseContainer, IDataObject, IGrid
     {
         private double _width;
         private double _height;
@@ -21,7 +21,8 @@ namespace Core2D.Containers
         private LayerContainer _helperLayer;
         private BaseShape _currentShape;
         private PageContainer _template;
-        private Context _data;
+        private ImmutableArray<Property> _properties;
+        private Record _record;
         private bool _isExpanded = false;
         private bool _isGridEnabled;
         private bool _isBorderEnabled;
@@ -131,10 +132,17 @@ namespace Core2D.Containers
         }
 
         [DataMember(IsRequired = false, EmitDefaultValue = true)]
-        public Context Data
+        public ImmutableArray<Property> Properties
         {
-            get => _data;
-            set => RaiseAndSetIfChanged(ref _data, value);
+            get => _properties;
+            set => RaiseAndSetIfChanged(ref _properties, value);
+        }
+
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
+        public Record Record
+        {
+            get => _record;
+            set => RaiseAndSetIfChanged(ref _record, value);
         }
 
         [DataMember(IsRequired = false, EmitDefaultValue = true)]
@@ -386,9 +394,14 @@ namespace Core2D.Containers
                 isDirty |= Template.IsDirty();
             }
 
-            if (Data != null)
+            foreach (var property in Properties)
             {
-                isDirty |= Data.IsDirty();
+                isDirty |= property.IsDirty();
+            }
+
+            if (Record != null)
+            {
+                isDirty |= Record.IsDirty();
             }
 
             if (GridStrokeColor != null)
@@ -413,7 +426,16 @@ namespace Core2D.Containers
             WorkingLayer?.Invalidate();
             HelperLayer?.Invalidate();
             Template?.Invalidate();
-            Data?.Invalidate();
+ 
+            foreach (var property in Properties)
+            {
+                property.Invalidate();
+            }
+
+            if (Record != null)
+            {
+                Record.Invalidate();
+            }
         }
     }
 }

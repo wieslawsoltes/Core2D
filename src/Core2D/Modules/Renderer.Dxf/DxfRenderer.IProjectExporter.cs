@@ -71,8 +71,8 @@ namespace Core2D.Renderer.Dxf
         private void Add(DXF.DxfDocument dxf, PageContainer container)
         {
             var dataFlow = _serviceProvider.GetService<DataFlow>();
-            var db = (object)container.Data.Properties;
-            var record = (object)container.Data.Record;
+            var db = (object)container.Properties;
+            var record = (object)container.Record;
 
             dataFlow.Bind(container.Template, db, record);
             dataFlow.Bind(container, db, record);

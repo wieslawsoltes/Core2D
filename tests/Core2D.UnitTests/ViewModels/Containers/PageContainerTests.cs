@@ -106,14 +106,6 @@ namespace Core2D.UnitTests
 
         [Fact]
         [Trait("Core2D.Containers", "Project")]
-        public void Data_Not_Null()
-        {
-            var target = _factory.CreatePageContainer();
-            Assert.NotNull(target.Data);
-        }
-
-        [Fact]
-        [Trait("Core2D.Containers", "Project")]
         public void Invalidate_Should_Invalidate_Template()
         {
             var target = _factory.CreatePageContainer();

@@ -317,7 +317,7 @@ namespace Core2D.Editor
             }
         }
 
-        public static void AddProperty(this ProjectContainer project, Context data, Property property)
+        public static void AddProperty(this ProjectContainer project, IDataObject data, Property property)
         {
             if (data?.Properties != null && property != null)
             {
@@ -330,7 +330,7 @@ namespace Core2D.Editor
 
         public static void RemoveProperty(this ProjectContainer project, Property property)
         {
-            if (property.Owner is Context data && data.Properties != null)
+            if (property.Owner is IDataObject data && data.Properties != null)
             {
                 var previous = data.Properties;
                 var next = data.Properties.Remove(property);
@@ -426,7 +426,7 @@ namespace Core2D.Editor
             }
         }
 
-        public static void ResetRecord(this ProjectContainer project, Context data)
+        public static void ResetRecord(this ProjectContainer project, IDataObject data)
         {
             var record = data?.Record;
             if (record != null)
@@ -438,7 +438,7 @@ namespace Core2D.Editor
             }
         }
 
-        public static void ApplyRecord(this ProjectContainer project, Context data, Record record)
+        public static void ApplyRecord(this ProjectContainer project, IDataObject data, Record record)
         {
             if (data != null && record != null)
             {
@@ -446,17 +446,6 @@ namespace Core2D.Editor
                 var next = record;
                 project?.History?.Snapshot(previous, next, (p) => data.Record = p);
                 data.Record = next;
-            }
-        }
-
-        public static void ApplyData(this ProjectContainer project, BaseShape shape, Context data)
-        {
-            if (shape != null && data != null)
-            {
-                var previous = shape.Data;
-                var next = data;
-                project?.History?.Snapshot(previous, next, (p) => shape.Data = p);
-                shape.Data = data;
             }
         }
 

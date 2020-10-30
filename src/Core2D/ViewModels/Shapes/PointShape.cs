@@ -84,34 +84,30 @@ namespace Core2D.Shapes
 
         public PointShape Clone()
         {
-            var data = new Context()
-            {
-                Properties = ImmutableArray.Create<Property>(),
-                Record = Data.Record
-            };
+            var properties = ImmutableArray.Create<Property>();
 
             // The property Value is of type object and is not cloned.
-            if (Data.Properties.Length > 0)
+            if (Properties.Length > 0)
             {
-                var builder = data.Properties.ToBuilder();
-                foreach (var property in Data.Properties)
+                var builder = properties.ToBuilder();
+                foreach (var property in Properties)
                 {
                     builder.Add(
                         new Property()
                         {
                             Name = property.Name,
                             Value = property.Value,
-                            Owner = data
+                            Owner = this
                         });
                 }
-                data.Properties = builder.ToImmutable();
+                properties = builder.ToImmutable();
             }
 
             return new PointShape()
             {
                 Name = Name,
                 Style = Style,
-                Data = data,
+                Properties = properties,
                 X = X,
                 Y = Y,
                 Alignment = Alignment

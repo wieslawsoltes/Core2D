@@ -46,7 +46,7 @@ namespace Core2D
             };
         }
 
-        public Property CreateProperty(Context owner, string name, string value)
+        public Property CreateProperty(ObservableObject owner, string name, string value)
         {
             return new Property()
             {
@@ -100,23 +100,6 @@ namespace Core2D
                         value,
                         owner.Columns.Length).Select(c => CreateValue(c))),
                 Owner = owner
-            };
-        }
-
-        public Context CreateContext()
-        {
-            return new Context()
-            {
-                Properties = ImmutableArray.Create<Property>()
-            };
-        }
-
-        public Context CreateContext(Record record)
-        {
-            return new Context()
-            {
-                Properties = ImmutableArray.Create<Property>(),
-                Record = record
             };
         }
 
@@ -353,7 +336,7 @@ namespace Core2D
             {
                 Name = name,
                 State = CreateShapeState(ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone),
-                Data = CreateContext(),
+                Properties = ImmutableArray.Create<Property>(),
                 Style = default,
                 X = x,
                 Y = y,
@@ -368,7 +351,7 @@ namespace Core2D
             {
                 Name = name,
                 State = CreateShapeState(ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone),
-                Data = CreateContext(),
+                Properties = ImmutableArray.Create<Property>(),
                 Style = style,
                 IsStroked = isStroked,
                 IsFilled = false
@@ -386,7 +369,7 @@ namespace Core2D
             {
                 Name = name,
                 State = CreateShapeState(ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone),
-                Data = CreateContext(),
+                Properties = ImmutableArray.Create<Property>(),
                 Style = style,
                 IsStroked = isStroked,
                 IsFilled = false
@@ -412,7 +395,7 @@ namespace Core2D
             {
                 Name = name,
                 State = CreateShapeState(ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone),
-                Data = CreateContext(),
+                Properties = ImmutableArray.Create<Property>(),
                 Style = style,
                 IsStroked = isStroked,
                 IsFilled = isFilled
@@ -444,7 +427,7 @@ namespace Core2D
             {
                 Name = name,
                 State = CreateShapeState(ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone),
-                Data = CreateContext(),
+                Properties = ImmutableArray.Create<Property>(),
                 Style = style,
                 IsStroked = isStroked,
                 IsFilled = isFilled
@@ -464,7 +447,7 @@ namespace Core2D
             {
                 Name = name,
                 State = CreateShapeState(ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone),
-                Data = CreateContext(),
+                Properties = ImmutableArray.Create<Property>(),
                 Style = style,
                 IsStroked = isStroked,
                 IsFilled = isFilled
@@ -493,7 +476,7 @@ namespace Core2D
             {
                 Name = name,
                 State = CreateShapeState(ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone),
-                Data = CreateContext(),
+                Properties = ImmutableArray.Create<Property>(),
                 Style = style,
                 IsStroked = isStroked,
                 IsFilled = isFilled
@@ -512,7 +495,7 @@ namespace Core2D
             {
                 Name = name,
                 State = CreateShapeState(ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone),
-                Data = CreateContext(),
+                Properties = ImmutableArray.Create<Property>(),
                 Style = style,
                 IsStroked = isStroked,
                 IsFilled = isFilled
@@ -544,7 +527,7 @@ namespace Core2D
             {
                 Name = name,
                 State = CreateShapeState(ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone),
-                Data = CreateContext(),
+                Properties = ImmutableArray.Create<Property>(),
                 Style = style,
                 IsStroked = isStroked,
                 IsFilled = isFilled
@@ -564,7 +547,7 @@ namespace Core2D
             {
                 Name = name,
                 State = CreateShapeState(ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone),
-                Data = CreateContext(),
+                Properties = ImmutableArray.Create<Property>(),
                 Style = style,
                 IsStroked = isStroked,
                 IsFilled = isFilled
@@ -590,7 +573,7 @@ namespace Core2D
             {
                 Name = name,
                 State = CreateShapeState(ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone),
-                Data = CreateContext(),
+                Properties = ImmutableArray.Create<Property>(),
                 Style = style,
                 IsStroked = isStroked,
                 IsFilled = isFilled
@@ -608,7 +591,7 @@ namespace Core2D
             {
                 Name = name,
                 State = CreateShapeState(ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone),
-                Data = CreateContext(),
+                Properties = ImmutableArray.Create<Property>(),
                 Style = style,
                 IsStroked = isStroked,
                 IsFilled = isFilled
@@ -634,7 +617,7 @@ namespace Core2D
             {
                 Name = name,
                 State = CreateShapeState(ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone),
-                Data = CreateContext(),
+                Properties = ImmutableArray.Create<Property>(),
                 Style = style,
                 IsStroked = isStroked,
                 IsFilled = isFilled,
@@ -653,7 +636,7 @@ namespace Core2D
             var pathShape = new PathShape()
             {
                 State = CreateShapeState(ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone),
-                Data = CreateContext(),
+                Properties = ImmutableArray.Create<Property>(),
                 Style = style,
                 IsStroked = isStroked,
                 IsFilled = isFilled,
@@ -684,7 +667,7 @@ namespace Core2D
             {
                 Name = name,
                 State = CreateShapeState(ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone),
-                Data = CreateContext(),
+                Properties = ImmutableArray.Create<Property>(),
                 Style = style,
                 IsStroked = isStroked,
                 IsFilled = isFilled,
@@ -714,7 +697,7 @@ namespace Core2D
             {
                 Name = name,
                 State = CreateShapeState(ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone),
-                Data = CreateContext(),
+                Properties = ImmutableArray.Create<Property>(),
                 Style = style,
                 IsStroked = isStroked,
                 Text = text
@@ -740,7 +723,7 @@ namespace Core2D
             {
                 Name = name,
                 State = CreateShapeState(ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone),
-                Data = CreateContext(),
+                Properties = ImmutableArray.Create<Property>(),
                 Style = style,
                 IsStroked = isStroked,
                 TopLeft = topLeft,
@@ -760,7 +743,7 @@ namespace Core2D
             {
                 Name = name,
                 State = CreateShapeState(ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone),
-                Data = CreateContext(),
+                Properties = ImmutableArray.Create<Property>(),
                 Style = style,
                 IsStroked = isStroked,
                 IsFilled = isFilled,
@@ -787,7 +770,7 @@ namespace Core2D
             {
                 Name = name,
                 State = CreateShapeState(ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone),
-                Data = CreateContext(),
+                Properties = ImmutableArray.Create<Property>(),
                 Style = style,
                 IsStroked = isStroked,
                 IsFilled = isFilled,
@@ -808,7 +791,7 @@ namespace Core2D
             {
                 Name = name,
                 State = CreateShapeState(ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone),
-                Data = CreateContext(),
+                Properties = ImmutableArray.Create<Property>(),
                 Connectors = ImmutableArray.Create<PointShape>(),
                 Shapes = ImmutableArray.Create<BaseShape>()
             };
@@ -963,7 +946,7 @@ namespace Core2D
             {
                 Name = name,
                 Layers = ImmutableArray.Create<LayerContainer>(),
-                Data = CreateContext()
+                Properties = ImmutableArray.Create<Property>()
             };
 
             var builder = page.Layers.ToBuilder();
@@ -983,7 +966,7 @@ namespace Core2D
             {
                 Name = name,
                 Layers = ImmutableArray.Create<LayerContainer>(),
-                Data = CreateContext()
+                Properties = ImmutableArray.Create<Property>()
             };
 
             template.Background = CreateArgbColor(0x00, 0xFF, 0xFF, 0xFF);
