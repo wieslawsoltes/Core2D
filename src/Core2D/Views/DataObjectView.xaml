@@ -1,0 +1,59 @@
+﻿<UserControl x:Class="Core2D.Views.DataObjectView"
+             xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:converters="clr-namespace:Core2D.Converters;assembly=Core2D"
+             xmlns:Base="clr-namespace:Core2D;assembly=Core2D"
+             xmlns:Data="clr-namespace:Core2D.Data;assembly=Core2D"
+             mc:Ignorable="d"
+             d:DesignWidth="250" d:DesignHeight="400"
+             x:DataType="Base:IDataObject" x:CompileBindings="True">
+    <StackPanel>
+        <Expander Header="Record" IsExpanded="True">
+            <DockPanel IsVisible="{Binding !!Record}">
+                <Menu HorizontalAlignment="Right" IsVisible="{Binding !!Record}" DockPanel.Dock="Top">
+                    <MenuItem Header="&#727;" Command="{Binding $parent[TopLevel].DataContext.OnResetRecord}" CommandParameter="{Binding}" IsVisible="{Binding !!Record}" x:CompileBindings="False" />
+                </Menu>
+                <ContentControl Content="{Binding Record}" />
+            </DockPanel>
+        </Expander>
+        <Expander Header="Properties" IsExpanded="True">
+            <DockPanel>
+                <Menu HorizontalAlignment="Right" DockPanel.Dock="Top">
+                    <MenuItem Header="+" Command="{Binding $parent[TopLevel].DataContext.OnAddProperty}" CommandParameter="{Binding}" x:CompileBindings="False" />
+                </Menu>
+                <Grid RowDefinitions="Auto,*" ColumnDefinitions="50*,Auto,50*" IsVisible="{Binding !!Properties.Length}">
+                    <Label Content="Name" Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" />
+                    <ItemsControl VerticalAlignment="Stretch" Grid.Column="0" Grid.Row="1" Items="{Binding Properties}">
+                        <ItemsControl.DataTemplates>
+                            <DataTemplate DataType="Data:Property">
+                                <Panel VerticalAlignment="Top" Background="Transparent" Margin="0,2,0,2">
+                                    <!--<i:Interaction.Behaviors>
+                                <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}" />
+                            </i:Interaction.Behaviors>-->
+                                    <TextBox VerticalAlignment="Center" Text="{Binding Name, Mode=TwoWay}" />
+                                </Panel>
+                            </DataTemplate>
+                        </ItemsControl.DataTemplates>
+                    </ItemsControl>
+                    <GridSplitter ResizeDirection="Columns" ResizeBehavior="PreviousAndNext" Background="Transparent" Width="6" Grid.Column="1" Grid.Row="1" Grid.RowSpan="2" />
+                    <Label Content="Value" Grid.Column="2" Grid.Row="0" VerticalAlignment="Center" />
+                    <ItemsControl VerticalAlignment="Stretch" Grid.Column="2" Grid.Row="1" Items="{Binding Properties}">
+                        <ItemsControl.DataTemplates>
+                            <DataTemplate DataType="Data:Property">
+                                <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Background="Transparent" Margin="0,2,0,2">
+                                    <!--<i:Interaction.Behaviors>
+                                <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}" />
+                            </i:Interaction.Behaviors>-->
+                                    <TextBox Text="{Binding Value, Mode=TwoWay}" />
+                                    <Button Content="-" Grid.Column="1" Command="{Binding $parent[TopLevel].DataContext.OnRemoveProperty}" CommandParameter="{Binding}" Padding="0" VerticalAlignment="Stretch" VerticalContentAlignment="Center" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Margin="6,0,0,0" Width="30" x:CompileBindings="False" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </ItemsControl.DataTemplates>
+                    </ItemsControl>
+                </Grid>
+            </DockPanel>
+        </Expander>
+    </StackPanel>
+</UserControl>

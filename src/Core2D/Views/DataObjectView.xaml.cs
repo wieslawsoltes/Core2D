@@ -1,11 +1,11 @@
 ﻿using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 
-namespace Core2D.Views.Data
+namespace Core2D.Views
 {
-    public class ContextView : UserControl
+    public class DataObjectView : UserControl
     {
-        public ContextView()
+        public DataObjectView()
         {
             InitializeComponent();
         }

@@ -79,4 +79,5 @@
   <ItemGroup Condition="$(TargetFramework.StartsWith('net4'))">
     <Reference Include="System.Drawing" />
   </ItemGroup>
+
 </Project>

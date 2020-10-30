@@ -7,6 +7,7 @@
              xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
              xmlns:idd="clr-namespace:Core2D.DragAndDrop;assembly=Core2D"
              xmlns:converters="clr-namespace:Core2D.Converters;assembly=Core2D"
+             xmlns:views="clr-namespace:Core2D.Views;assembly=Core2D"
              xmlns:Data="clr-namespace:Core2D.Data;assembly=Core2D"
              xmlns:Shapes="clr-namespace:Core2D.Shapes;assembly=Core2D"
              xmlns:Designer="clr-namespace:Core2D.Designer;assembly=Core2D"
@@ -94,7 +95,7 @@
             </Grid>
         </Expander>
         <Expander Header="Data" IsExpanded="False">
-            <ContentControl Content="{Binding Data}" />
+            <views:DataObjectView />
         </Expander>
         <Expander Header="State" IsExpanded="False">
             <ContentControl Content="{Binding State}" />
