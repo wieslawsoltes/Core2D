@@ -95,7 +95,6 @@ namespace Core2D.Renderer
         public A.Point P1 { get; set; }
         public IMarker StartMarker { get; set; }
         public IMarker EndMarker { get; set; }
-        public AM.StreamGeometry CurveGeometry { get; set; }
 
         public LineDrawNode(LineShape line, ShapeStyle style)
         {
@@ -178,35 +177,12 @@ namespace Core2D.Renderer
             }
         }
 
-        private AM.StreamGeometry CreateCurveGeometry(A.Point p0, A.Point p1, double curvature, CurveOrientation orientation, PointAlignment pt0a, PointAlignment pt1a)
-        {
-            var curveGeometry = new AM.StreamGeometry();
-
-            using (var geometryContext = curveGeometry.Open())
-            {
-                geometryContext.BeginFigure(new A.Point(p0.X, p0.Y), false);
-                double p0x = p0.X;
-                double p0y = p0.Y;
-                double p1x = p1.X;
-                double p1y = p1.Y;
-                LineShapeExtensions.GetCurvedLineBezierControlPoints(orientation, curvature, pt0a, pt1a, ref p0x, ref p0y, ref p1x, ref p1y);
-                var point1 = new A.Point(p0x, p0y);
-                var point2 = new A.Point(p1x, p1y);
-                var point3 = new A.Point(p1.X, p1.Y);
-                geometryContext.CubicBezierTo(point1, point2, point3);
-                geometryContext.EndFigure(false);
-            }
-
-            return curveGeometry;
-        }
-
         private void UpdateMarkers()
         {
             double x1 = Line.Start.X;
             double y1 = Line.Start.Y;
             double x2 = Line.End.X;
             double y2 = Line.End.Y;
-            Line.GetMaxLength(ref x1, ref y1, ref x2, ref y2);
 
             if (Style.StartArrowStyle.ArrowType != ArrowType.None)
             {
@@ -235,18 +211,6 @@ namespace Core2D.Renderer
             }
         }
 
-        private void UpdateCurveGeometry()
-        {
-            if (Style.LineStyle.IsCurved)
-            {
-                CurveGeometry = CreateCurveGeometry(P0, P1, Style.LineStyle.Curvature, Style.LineStyle.CurveOrientation, Line.Start.Alignment, Line.End.Alignment);
-            }
-            else
-            {
-                CurveGeometry = null;
-            }
-        }
-
         public override void UpdateGeometry()
         {
             ScaleThickness = Line.State.Flags.HasFlag(ShapeStateFlags.Thickness);
@@ -255,7 +219,6 @@ namespace Core2D.Renderer
             P1 = new A.Point(Line.End.X, Line.End.Y);
             Center = new A.Point((P0.X + P1.X) / 2.0, (P0.Y + P1.Y) / 2.0);
             UpdateMarkers();
-            UpdateCurveGeometry();
         }
 
         public override void UpdateStyle()
@@ -279,14 +242,7 @@ namespace Core2D.Renderer
 
             if (Line.IsStroked)
             {
-                if (Style.LineStyle.IsCurved)
-                {
-                    context.DrawGeometry(null, Stroke, CurveGeometry);
-                }
-                else
-                {
-                    context.DrawLine(Stroke, P0, P1);
-                }
+                context.DrawLine(Stroke, P0, P1);
 
                 if (Style.StartArrowStyle.ArrowType != ArrowType.None)
                 {

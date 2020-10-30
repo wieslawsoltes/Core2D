@@ -116,26 +116,6 @@ namespace Core2D.Renderer.WinForms
             }
         }
 
-        private static void DrawLineCurveInternal(Graphics gfx, Pen pen, bool isStroked, ref PointF pt1, ref PointF pt2, double curvature, CurveOrientation orientation, PointAlignment pt1a, PointAlignment pt2a)
-        {
-            if (isStroked)
-            {
-                double p1x = pt1.X;
-                double p1y = pt1.Y;
-                double p2x = pt2.X;
-                double p2y = pt2.Y;
-                LineShapeExtensions.GetCurvedLineBezierControlPoints(orientation, curvature, pt1a, pt2a, ref p1x, ref p1y, ref p2x, ref p2y);
-                gfx.DrawBezier(
-                    pen,
-                    pt1.X, pt1.Y,
-                    (float)p1x,
-                    (float)p1y,
-                    (float)p2x,
-                    (float)p2y,
-                    pt2.X, pt2.Y);
-            }
-        }
-
         private void DrawLineArrowsInternal(LineShape line, Graphics gfx, out PointF pt1, out PointF pt2)
         {
             var fillStartArrow = ToBrush(line.Style.StartArrowStyle.Fill);
@@ -148,8 +128,6 @@ namespace Core2D.Renderer.WinForms
             double _y1 = line.Start.Y;
             double _x2 = line.End.X;
             double _y2 = line.End.Y;
-
-            line.GetMaxLength(ref _x1, ref _y1, ref _x2, ref _y2);
 
             float x1 = _scaleToPage(_x1);
             float y1 = _scaleToPage(_y1);
@@ -416,23 +394,7 @@ namespace Core2D.Renderer.WinForms
 
             var strokeLine = ToPen(line.Style, _scaleToPage);
             DrawLineArrowsInternal(line, _gfx, out var pt1, out var pt2);
-
-            if (line.Style.LineStyle.IsCurved)
-            {
-                DrawLineCurveInternal(
-                    _gfx,
-                    strokeLine, line.IsStroked,
-                    ref pt1, ref pt2,
-                    line.Style.LineStyle.Curvature,
-                    line.Style.LineStyle.CurveOrientation,
-                    line.Start.Alignment,
-                    line.End.Alignment);
-            }
-            else
-            {
-                DrawLineInternal(_gfx, strokeLine, line.IsStroked, ref pt1, ref pt2);
-            }
-
+            DrawLineInternal(_gfx, strokeLine, line.IsStroked, ref pt1, ref pt2);
             strokeLine.Dispose();
         }
 

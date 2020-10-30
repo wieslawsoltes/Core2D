@@ -6,17 +6,9 @@ namespace Core2D.Style
     [DataContract(IsReference = true)]
     public class ShapeStyle : BaseStyle
     {
-        private LineStyle _lineStyle;
         private ArrowStyle _startArrowStyle;
         private ArrowStyle _endArrowStyle;
         private TextStyle _textStyle;
-
-        [DataMember(IsRequired = false, EmitDefaultValue = true)]
-        public LineStyle LineStyle
-        {
-            get => _lineStyle;
-            set => RaiseAndSetIfChanged(ref _lineStyle, value);
-        }
 
         [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public ArrowStyle StartArrowStyle
@@ -50,7 +42,6 @@ namespace Core2D.Style
                 LineCap = this.LineCap,
                 Dashes = this.Dashes,
                 DashOffset = this.DashOffset,
-                LineStyle = (LineStyle)this.LineStyle.Copy(shared),
                 TextStyle = (TextStyle)this.TextStyle.Copy(shared),
                 StartArrowStyle = (ArrowStyle)this.StartArrowStyle.Copy(shared),
                 EndArrowStyle = (ArrowStyle)this.EndArrowStyle.Copy(shared)
@@ -61,7 +52,6 @@ namespace Core2D.Style
         {
             var isDirty = base.IsDirty();
 
-            isDirty |= LineStyle.IsDirty();
             isDirty |= StartArrowStyle.IsDirty();
             isDirty |= EndArrowStyle.IsDirty();
             isDirty |= TextStyle.IsDirty();
@@ -72,7 +62,6 @@ namespace Core2D.Style
         public override void Invalidate()
         {
             base.Invalidate();
-            LineStyle.Invalidate();
             StartArrowStyle.Invalidate();
             EndArrowStyle.Invalidate();
             TextStyle.Invalidate();

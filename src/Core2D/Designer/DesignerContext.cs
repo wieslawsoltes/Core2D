@@ -51,10 +51,6 @@ namespace Core2D.Designer
 
         public static FontStyle FontStyle { get; set; }
 
-        public static LineFixedLength LineFixedLength { get; set; }
-
-        public static LineStyle LineStyle { get; set; }
-
         public static ShapeStyle Style { get; set; }
 
         public static TextStyle TextStyle { get; set; }
@@ -167,8 +163,6 @@ namespace Core2D.Designer
             ArgbColor = factory.CreateArgbColor(128, 255, 0, 0);
             ArrowStyle = factory.CreateArrowStyle();
             FontStyle = factory.CreateFontStyle();
-            LineFixedLength = factory.CreateLineFixedLength();
-            LineStyle = factory.CreateLineStyle();
             Style = factory.CreateShapeStyle("Default");
             TextStyle = factory.CreateTextStyle();
 

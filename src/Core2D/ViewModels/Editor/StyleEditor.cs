@@ -20,7 +20,6 @@ namespace Core2D.Editor
         private TextStyle _textStyleCopy;
         private ArrowStyle _endArrowStyleCopy;
         private ArrowStyle _startArrowStyleCopy;
-        private LineStyle _lineStyleCopy;
 
         public StyleEditor(IServiceProvider serviceProvider)
         {
@@ -120,37 +119,6 @@ namespace Core2D.Editor
                 var next = (BaseColor)_fillCopy?.Copy(null);
                 editor.Project?.History?.Snapshot(previous, next, (p) => style.Fill = p);
                 style.Fill = next;
-            }
-        }
-
-        public void OnCopyLineStyle()
-        {
-            var editor = _serviceProvider.GetService<ProjectEditor>();
-
-            if (editor.PageState?.SelectedShapes != null)
-            {
-                var lineStyle = editor.PageState?.SelectedShapes.FirstOrDefault()?.Style?.LineStyle;
-                _lineStyleCopy = (LineStyle)lineStyle?.Copy(null);
-            }
-        }
-
-        public void OnPasteLineStyle()
-        {
-            if (_lineStyleCopy == null)
-            {
-                return;
-            }
-
-            var editor = _serviceProvider.GetService<ProjectEditor>();
-
-            foreach (var shape in GetShapes(editor))
-            {
-                var style = shape.Style;
-
-                var previous = style.LineStyle;
-                var next = (LineStyle)_lineStyleCopy?.Copy(null);
-                editor.Project?.History?.Snapshot(previous, next, (p) => style.LineStyle = p);
-                style.LineStyle = next;
             }
         }
 
@@ -416,104 +384,6 @@ namespace Core2D.Editor
                 var next = value;
                 history?.Snapshot(previous, next, (p) => textStyle.TextVAlignment = p);
                 textStyle.TextVAlignment = next;
-            }
-        }
-
-        private void ToggleLineIsCurved(BaseShape shape, IHistory history)
-        {
-            var style = shape.Style;
-            if (style != null && style.LineStyle != null)
-            {
-                var lineStyle = style.LineStyle;
-
-                var previous = lineStyle.IsCurved;
-                var next = !lineStyle.IsCurved;
-                history?.Snapshot(previous, next, (p) => lineStyle.IsCurved = p);
-                lineStyle.IsCurved = next;
-            }
-        }
-
-        private void SetLineCurvature(BaseShape shape, double value, IHistory history)
-        {
-            var style = shape.Style;
-            if (style != null && style.LineStyle != null)
-            {
-                var lineStyle = style.LineStyle;
-
-                var previous = lineStyle.Curvature;
-                var next = value;
-                history?.Snapshot(previous, next, (p) => lineStyle.Curvature = p);
-                lineStyle.Curvature = next;
-            }
-        }
-
-        private void SetLineCurveOrientation(BaseShape shape, CurveOrientation value, IHistory history)
-        {
-            var style = shape.Style;
-            if (style != null && style.LineStyle != null)
-            {
-                var lineStyle = style.LineStyle;
-
-                var previous = lineStyle.CurveOrientation;
-                var next = value;
-                history?.Snapshot(previous, next, (p) => lineStyle.CurveOrientation = p);
-                lineStyle.CurveOrientation = next;
-            }
-        }
-
-        private void SetLineFixedLength(BaseShape shape, double value, IHistory history)
-        {
-            var style = shape.Style;
-            if (style != null && style.LineStyle != null && style.LineStyle.FixedLength != null)
-            {
-                var fixedLength = style.LineStyle.FixedLength;
-
-                var previous = fixedLength.Length;
-                var next = value;
-                history?.Snapshot(previous, next, (p) => fixedLength.Length = p);
-                fixedLength.Length = next;
-            }
-        }
-
-        private void ToggleLineFixedLengthFlags(BaseShape shape, LineFixedLengthFlags value, IHistory history)
-        {
-            var style = shape.Style;
-            if (style != null && style.LineStyle != null && style.LineStyle.FixedLength != null)
-            {
-                var fixedLength = style.LineStyle.FixedLength;
-
-                var previous = fixedLength.Flags;
-                var next = fixedLength.Flags ^ value;
-                history?.Snapshot(previous, next, (p) => fixedLength.Flags = p);
-                fixedLength.Flags = next;
-            }
-        }
-
-        private void ToggleLineFixedLengthStartTrigger(BaseShape shape, ShapeStateFlags value, IHistory history)
-        {
-            var style = shape.Style;
-            if (style != null && style.LineStyle != null && style.LineStyle.FixedLength != null && style.LineStyle.FixedLength.StartTrigger != null)
-            {
-                var startTrigger = style.LineStyle.FixedLength.StartTrigger;
-
-                var previous = startTrigger.Flags;
-                var next = startTrigger.Flags ^ value;
-                history?.Snapshot(previous, next, (p) => startTrigger.Flags = p);
-                startTrigger.Flags = next;
-            }
-        }
-
-        private void ToggleLineFixedLengthEndTrigger(BaseShape shape, ShapeStateFlags value, IHistory history)
-        {
-            var style = shape.Style;
-            if (style != null && style.LineStyle != null && style.LineStyle.FixedLength != null && style.LineStyle.FixedLength.EndTrigger != null)
-            {
-                var endTrigger = style.LineStyle.FixedLength.EndTrigger;
-
-                var previous = endTrigger.Flags;
-                var next = endTrigger.Flags ^ value;
-                history?.Snapshot(previous, next, (p) => endTrigger.Flags = p);
-                endTrigger.Flags = next;
             }
         }
 
@@ -1126,113 +996,6 @@ namespace Core2D.Editor
             foreach (var shape in GetShapes(editor))
             {
                 SetTextVAlignment(shape, value, history);
-            }
-        }
-
-        public void OnStyleToggleLineIsCurved()
-        {
-            var editor = _serviceProvider.GetService<ProjectEditor>();
-            var history = editor.Project?.History;
-
-            foreach (var shape in GetShapes(editor))
-            {
-                ToggleLineIsCurved(shape, history);
-            }
-        }
-
-        public void OnStyleSetLineCurvature(string curvature)
-        {
-            if (!double.TryParse(curvature, _numberStyles, CultureInfo.InvariantCulture, out var value))
-            {
-                return;
-            }
-
-            var editor = _serviceProvider.GetService<ProjectEditor>();
-            var history = editor.Project?.History;
-
-            foreach (var shape in GetShapes(editor))
-            {
-                SetLineCurvature(shape, value, history);
-            }
-        }
-
-        public void OnStyleSetLineCurveOrientation(string curveOrientation)
-        {
-            if (!Enum.TryParse<CurveOrientation>(curveOrientation, true, out var value))
-            {
-                return;
-            }
-
-            var editor = _serviceProvider.GetService<ProjectEditor>();
-            var history = editor.Project?.History;
-
-            foreach (var shape in GetShapes(editor))
-            {
-                SetLineCurveOrientation(shape, value, history);
-            }
-        }
-
-        public void OnStyleSetLineFixedLength(string length)
-        {
-            if (!double.TryParse(length, _numberStyles, CultureInfo.InvariantCulture, out var value))
-            {
-                return;
-            }
-
-            var editor = _serviceProvider.GetService<ProjectEditor>();
-            var history = editor.Project?.History;
-
-            foreach (var shape in GetShapes(editor))
-            {
-                SetLineFixedLength(shape, value, history);
-            }
-        }
-
-        public void OnStyleToggleLineFixedLengthFlags(string flags)
-        {
-            if (!Enum.TryParse<LineFixedLengthFlags>(flags, true, out var value))
-            {
-                return;
-            }
-
-            var editor = _serviceProvider.GetService<ProjectEditor>();
-            var history = editor.Project?.History;
-
-            foreach (var shape in GetShapes(editor))
-            {
-                ToggleLineFixedLengthFlags(shape, value, history);
-            }
-        }
-
-        public void OnStyleToggleLineFixedLengthStartTrigger(string trigger)
-        {
-            if (!Enum.TryParse<ShapeStateFlags>(trigger, true, out var value))
-            {
-                return;
-            }
-
-            var editor = _serviceProvider.GetService<ProjectEditor>();
-            var history = editor.Project?.History;
-
-            foreach (var shape in GetShapes(editor))
-            {
-                ToggleLineFixedLengthStartTrigger(shape, value, history);
-            }
-        }
-
-        public void OnStyleToggleLineFixedLengthEndTrigger(string trigger)
-        {
-            if (!Enum.TryParse<ShapeStateFlags>(trigger, true, out var value))
-            {
-                return;
-            }
-
-            var editor = _serviceProvider.GetService<ProjectEditor>();
-            var history = editor.Project?.History;
-
-            foreach (var shape in GetShapes(editor))
-            {
-                ToggleLineFixedLengthEndTrigger(shape, value, history);
             }
         }
 

@@ -10,8 +10,6 @@ namespace Core2D.Views
         {
             InitializeComponent();
             this.AttachDevTools();
-            //VisualRoot.Renderer.DrawDirtyRects = true;
-            //VisualRoot.Renderer.DrawFps = true;
         }
 
         private void InitializeComponent()

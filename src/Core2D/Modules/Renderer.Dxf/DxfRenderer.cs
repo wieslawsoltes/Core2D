@@ -511,13 +511,9 @@ namespace Core2D.Renderer.Dxf
                 double _x2 = line.End.X;
                 double _y2 = line.End.Y;
 
-                LineShapeExtensions.GetMaxLength(line, ref _x1, ref _y1, ref _x2, ref _y2);
-
                 // TODO: Draw line start arrow.
 
                 // TODO: Draw line end arrow.
-
-                // TODO: Draw line curve.
 
                 DrawLineInternal(dxf, _currentLayer, line.Style, line.IsStroked, _x1, _y1, _x2, _y2);
             }

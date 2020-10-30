@@ -1280,16 +1280,6 @@ namespace Core2D.Editor
                 style.Fill.PropertyChanged += ObserveStyle;
             }
 
-            if (style.LineStyle != null)
-            {
-                style.LineStyle.PropertyChanged += ObserveStyle;
-
-                if (style.LineStyle.FixedLength != null)
-                {
-                    style.LineStyle.FixedLength.PropertyChanged += ObserveStyle;
-                }
-            }
-
             if (style.StartArrowStyle != null)
             {
                 style.StartArrowStyle.PropertyChanged += ObserveStyle;
@@ -1348,16 +1338,6 @@ namespace Core2D.Editor
             if (style.Fill != null)
             {
                 style.Fill.PropertyChanged -= ObserveStyle;
-            }
-
-            if (style.LineStyle != null)
-            {
-                style.LineStyle.PropertyChanged -= ObserveStyle;
-
-                if (style.LineStyle.FixedLength != null)
-                {
-                    style.LineStyle.FixedLength.PropertyChanged -= ObserveStyle;
-                }
             }
 
             if (style.StartArrowStyle != null)

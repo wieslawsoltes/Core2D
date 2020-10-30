@@ -14,8 +14,6 @@
              x:DataType="Style:ArrowStyle" x:CompileBindings="True">
     <StackPanel>
         <StackPanel>
-            <Label Content="Name" Margin="{DynamicResource TextControlThemePadding}" />
-            <TextBox Text="{Binding Name, Mode=TwoWay}" />
             <Label Content="Arrow Type" Margin="{DynamicResource TextControlThemePadding}" />
             <ComboBox Items="{x:Static Editor:Enums.ArrowTypeValues}" SelectedItem="{Binding ArrowType, Mode=TwoWay}" HorizontalAlignment="Stretch" />
             <CheckBox Content="IsStroked" IsChecked="{Binding IsStroked, Mode=TwoWay}" HorizontalAlignment="Stretch" />

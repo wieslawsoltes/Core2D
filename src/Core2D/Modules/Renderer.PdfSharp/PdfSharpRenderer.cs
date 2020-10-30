@@ -104,25 +104,6 @@ namespace Core2D.Renderer.PdfSharp
             }
         }
 
-        private static void DrawLineCurveInternal(XGraphics gfx, XPen pen, bool isStroked, ref XPoint pt1, ref XPoint pt2, double curvature, CurveOrientation orientation, Core2D.Renderer.PointAlignment pt1a, Core2D.Renderer.PointAlignment pt2a)
-        {
-            if (isStroked)
-            {
-                var path = new XGraphicsPath();
-                double p1x = pt1.X;
-                double p1y = pt1.Y;
-                double p2x = pt2.X;
-                double p2y = pt2.Y;
-                LineShapeExtensions.GetCurvedLineBezierControlPoints(orientation, curvature, pt1a, pt2a, ref p1x, ref p1y, ref p2x, ref p2y);
-                path.AddBezier(
-                    pt1.X, pt1.Y,
-                    p1x, p1y,
-                    p2x, p2y,
-                    pt2.X, pt2.Y);
-                gfx.DrawPath(pen, path);
-            }
-        }
-
         private void DrawLineArrowsInternal(XGraphics gfx, LineShape line, out XPoint pt1, out XPoint pt2)
         {
             var fillStartArrow = ToXBrush(line.Style.StartArrowStyle.Fill);
@@ -135,8 +116,6 @@ namespace Core2D.Renderer.PdfSharp
             double _y1 = line.Start.Y;
             double _x2 = line.End.X;
             double _y2 = line.End.Y;
-
-            LineShapeExtensions.GetMaxLength(line, ref _x1, ref _y1, ref _x2, ref _y2);
 
             double x1 = _scaleToPage(_x1);
             double y1 = _scaleToPage(_y1);
@@ -372,22 +351,7 @@ namespace Core2D.Renderer.PdfSharp
 
             var strokeLine = ToXPen(line.Style, _scaleToPage, _sourceDpi, _targetDpi);
             DrawLineArrowsInternal(_gfx, line, out var pt1, out var pt2);
-
-            if (line.Style.LineStyle.IsCurved)
-            {
-                DrawLineCurveInternal(
-                    _gfx,
-                    strokeLine, line.IsStroked,
-                    ref pt1, ref pt2,
-                    line.Style.LineStyle.Curvature,
-                    line.Style.LineStyle.CurveOrientation,
-                    line.Start.Alignment,
-                    line.End.Alignment);
-            }
-            else
-            {
-                DrawLineInternal(_gfx, strokeLine, line.IsStroked, ref pt1, ref pt2);
-            }
+            DrawLineInternal(_gfx, strokeLine, line.IsStroked, ref pt1, ref pt2);
         }
 
         public void DrawRectangle(object dc, RectangleShape rectangle)

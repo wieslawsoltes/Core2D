@@ -12,8 +12,6 @@
              d:DesignWidth="250" d:DesignHeight="400"
              x:DataType="Style:TextStyle" x:CompileBindings="True">
     <StackPanel>
-        <Label Content="Name" Margin="{DynamicResource TextControlThemePadding}" />
-        <TextBox Text="{Binding Name, Mode=TwoWay}" />
         <Label Content="FontName" Margin="{DynamicResource TextControlThemePadding}" />
         <TextBox Text="{Binding FontName, Mode=TwoWay}" />
         <Label Content="FontFile" Margin="{DynamicResource TextControlThemePadding}" />

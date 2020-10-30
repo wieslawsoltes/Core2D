@@ -106,7 +106,6 @@ namespace Core2D.Renderer.SkiaSharp
         public SKPoint P1 { get; set; }
         public IMarker StartMarker { get; set; }
         public IMarker EndMarker { get; set; }
-        public SKPath CurveGeometry { get; set; }
 
         public LineDrawNode(LineShape line, ShapeStyle style)
         {
@@ -188,31 +187,12 @@ namespace Core2D.Renderer.SkiaSharp
             }
         }
 
-        private SKPath CreateCurveGeometry(SKPoint p0, SKPoint p1, double curvature, CurveOrientation orientation, PointAlignment pt0a, PointAlignment pt1a)
-        {
-            var curveGeometry = new SKPath();
-
-            curveGeometry.MoveTo(new SKPoint((float)p0.X, (float)p0.Y));
-            double p0x = p0.X;
-            double p0y = p0.Y;
-            double p1x = p1.X;
-            double p1y = p1.Y;
-            LineShapeExtensions.GetCurvedLineBezierControlPoints(orientation, curvature, pt0a, pt1a, ref p0x, ref p0y, ref p1x, ref p1y);
-            var point1 = new SKPoint((float)p0x, (float)p0y);
-            var point2 = new SKPoint((float)p1x, (float)p1y);
-            var point3 = new SKPoint(p1.X, p1.Y);
-            curveGeometry.CubicTo(point1, point2, point3);
-
-            return curveGeometry;
-        }
-
         private void UpdateMarkers()
         {
             double x1 = Line.Start.X;
             double y1 = Line.Start.Y;
             double x2 = Line.End.X;
             double y2 = Line.End.Y;
-            Line.GetMaxLength(ref x1, ref y1, ref x2, ref y2);
 
             if (Style.StartArrowStyle.ArrowType != ArrowType.None)
             {
@@ -241,18 +221,6 @@ namespace Core2D.Renderer.SkiaSharp
             }
         }
 
-        private void UpdateCurveGeometry()
-        {
-            if (Style.LineStyle.IsCurved)
-            {
-                CurveGeometry = CreateCurveGeometry(P0, P1, Style.LineStyle.Curvature, Style.LineStyle.CurveOrientation, Line.Start.Alignment, Line.End.Alignment);
-            }
-            else
-            {
-                CurveGeometry = null;
-            }
-        }
-
         public override void UpdateGeometry()
         {
             ScaleThickness = Line.State.Flags.HasFlag(ShapeStateFlags.Thickness);
@@ -261,7 +229,6 @@ namespace Core2D.Renderer.SkiaSharp
             P1 = new SKPoint((float)Line.End.X, (float)Line.End.Y);
             Center = new SKPoint((float)((P0.X + P1.X) / 2.0), (float)((P0.Y + P1.Y) / 2.0));
             UpdateMarkers();
-            UpdateCurveGeometry();
         }
 
         public override void UpdateStyle()
@@ -285,15 +252,8 @@ namespace Core2D.Renderer.SkiaSharp
 
             if (Line.IsStroked)
             {
-                if (Style.LineStyle.IsCurved)
-                {
-                    canvas.DrawPath(CurveGeometry, Stroke);
-                }
-                else
-                {
-                    canvas.DrawLine(P0, P1, Stroke);
-                }
-
+                canvas.DrawLine(P0, P1, Stroke);
+ 
                 if (Style.StartArrowStyle.ArrowType != ArrowType.None)
                 {
                     StartMarker?.Draw(dc);
