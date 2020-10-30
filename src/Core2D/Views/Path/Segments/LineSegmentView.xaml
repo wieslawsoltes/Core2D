@@ -12,7 +12,7 @@
              x:DataType="Segments:LineSegment" x:CompileBindings="True">
     <StackPanel>
         <Expander Header="Point" IsExpanded="False">
-            <ContentControl Content="{Binding Point}"/>
+            <ContentControl Content="{Binding Point}" />
         </Expander>
     </StackPanel>
 </UserControl>

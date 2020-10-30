@@ -1,7 +1,7 @@
 ﻿<UserControl x:Class="Core2D.Views.Containers.DocumentContainerView"
              xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
              xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
@@ -15,8 +15,8 @@
              x:DataType="Containers:DocumentContainer" x:CompileBindings="True">
     <StackPanel>
         <StackPanel>
-            <Label Content="Name" Margin="{DynamicResource TextControlThemePadding}"/>
-            <TextBox Text="{Binding Name, Mode=TwoWay}"/>
+            <Label Content="Name" Margin="{DynamicResource TextControlThemePadding}" />
+            <TextBox Text="{Binding Name, Mode=TwoWay}" />
         </StackPanel>
         <Expander Header="Pages" IsExpanded="False">
             <ListBox x:Name="pages" Items="{Binding Pages}">
@@ -24,7 +24,7 @@
                     <DataTemplate DataType="Containers:PageContainer">
                         <TextBlock Text="{Binding Name}" Background="Transparent">
                             <i:Interaction.Behaviors>
-                                <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}"/>
+                                <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}" />
                             </i:Interaction.Behaviors>
                         </TextBlock>
                     </DataTemplate>
@@ -32,7 +32,7 @@
             </ListBox>
         </Expander>
         <Expander Header="Selected Page" IsExpanded="False">
-            <ContentControl Content="{Binding #pages.SelectedItem}"/>
+            <ContentControl Content="{Binding #pages.SelectedItem}" />
         </Expander>
     </StackPanel>
 </UserControl>

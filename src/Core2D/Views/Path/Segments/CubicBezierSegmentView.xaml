@@ -12,13 +12,13 @@
              x:DataType="Segments:CubicBezierSegment" x:CompileBindings="True">
     <StackPanel>
         <Expander Header="Point1" IsExpanded="False">
-            <ContentControl Content="{Binding Point1}"/>
+            <ContentControl Content="{Binding Point1}" />
         </Expander>
         <Expander Header="Point2" IsExpanded="False">
-            <ContentControl Content="{Binding Point2}"/>
+            <ContentControl Content="{Binding Point2}" />
         </Expander>
         <Expander Header="Point3" IsExpanded="False">
-            <ContentControl Content="{Binding Point3}"/>
+            <ContentControl Content="{Binding Point3}" />
         </Expander>
     </StackPanel>
 </UserControl>

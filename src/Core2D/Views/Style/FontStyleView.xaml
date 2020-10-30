@@ -1,7 +1,7 @@
 ﻿<UserControl x:Class="Core2D.Views.Style.FontStyleView"
              xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:converters="clr-namespace:Core2D.Converters;assembly=Core2D"
              xmlns:Style="clr-namespace:Core2D.Style;assembly=Core2D"
@@ -11,8 +11,8 @@
              d:DesignWidth="250" d:DesignHeight="400"
              x:DataType="Style:FontStyle" x:CompileBindings="True">
     <StackPanel>
-        <CheckBox Content="Regular" IsChecked="{Binding Regular, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
-        <CheckBox Content="Bold" IsChecked="{Binding Bold, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
-        <CheckBox Content="Italic" IsChecked="{Binding Italic, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
+        <CheckBox Content="Regular" IsChecked="{Binding Regular, Mode=TwoWay}" HorizontalAlignment="Stretch" />
+        <CheckBox Content="Bold" IsChecked="{Binding Bold, Mode=TwoWay}" HorizontalAlignment="Stretch" />
+        <CheckBox Content="Italic" IsChecked="{Binding Italic, Mode=TwoWay}" HorizontalAlignment="Stretch" />
     </StackPanel>
 </UserControl>

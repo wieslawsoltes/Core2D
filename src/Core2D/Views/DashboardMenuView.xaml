@@ -19,26 +19,26 @@
              x:DataType="Editor:ProjectEditor" x:CompileBindings="True">
     <Menu x:CompileBindings="False">
         <MenuItem Header="_File">
-            <MenuItem Header="_New" Command="{Binding OnNew}" CommandParameter="{Binding}" InputGesture="Ctrl+N"/>
-            <Separator/>
-            <MenuItem Header="_Open..." Command="{Binding Platform.OnOpen}" InputGesture="Ctrl+O"/>
-            <Separator/>
-            <MenuItem Header="Execu_te Script..." Command="{Binding Platform.OnExecuteScriptFile}"/>
-            <Separator/>
+            <MenuItem Header="_New" Command="{Binding OnNew}" CommandParameter="{Binding}" InputGesture="Ctrl+N" />
+            <Separator />
+            <MenuItem Header="_Open..." Command="{Binding Platform.OnOpen}" InputGesture="Ctrl+O" />
+            <Separator />
+            <MenuItem Header="Execu_te Script..." Command="{Binding Platform.OnExecuteScriptFile}" />
+            <Separator />
             <MenuItem Header="_Recent" Items="{Binding RecentProjects}">
                 <MenuItem.Styles>
                     <Style Selector="MenuItem">
-                        <Setter Property="Header" Value="{Binding Name}"/>
-                        <Setter Property="Command" Value="{Binding $parent[TopLevel].DataContext.Platform.OnOpen}"/>
-                        <Setter Property="CommandParameter" Value="{Binding Path}"/>
+                        <Setter Property="Header" Value="{Binding Name}" />
+                        <Setter Property="Command" Value="{Binding $parent[TopLevel].DataContext.Platform.OnOpen}" />
+                        <Setter Property="CommandParameter" Value="{Binding Path}" />
                     </Style>
                 </MenuItem.Styles>
             </MenuItem>
-            <Separator/>
-            <MenuItem Header="E_xit" Command="{Binding Platform.OnExit}" InputGesture="Alt+F4"/>
+            <Separator />
+            <MenuItem Header="E_xit" Command="{Binding Platform.OnExit}" InputGesture="Alt+F4" />
         </MenuItem>
         <MenuItem Header="_Help">
-            <MenuItem Header="_About Core2D" Command="{Binding Platform.OnAboutDialog}"/>
+            <MenuItem Header="_About Core2D" Command="{Binding Platform.OnAboutDialog}" />
         </MenuItem>
     </Menu>
 </UserControl>

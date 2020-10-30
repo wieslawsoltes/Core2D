@@ -1,7 +1,7 @@
 ﻿<UserControl x:Class="Core2D.Views.StatusView"
              xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
              xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
@@ -14,19 +14,19 @@
              d:DesignWidth="1200" d:DesignHeight="540"
              x:DataType="Editor:ProjectEditor" x:CompileBindings="True">
     <UserControl.Resources>
-        <converters:EditorToStatsMultiConverter x:Key="EditorToStatsMultiConverter"/>
-        <converters:ObjectToObjectConverter x:Key="ObjectToObjectConverter"/>
-        <converters:ObjectEqualityMultiConverter x:Key="ObjectEqualityMultiConverter"/>
+        <converters:EditorToStatsMultiConverter x:Key="EditorToStatsMultiConverter" />
+        <converters:ObjectToObjectConverter x:Key="ObjectToObjectConverter" />
+        <converters:ObjectEqualityMultiConverter x:Key="ObjectEqualityMultiConverter" />
     </UserControl.Resources>
     <Grid ColumnDefinitions="Auto,*">
         <TextBlock Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="12,0,12,0">
             <TextBlock.Text>
                 <MultiBinding Mode="OneWay" Converter="{StaticResource EditorToStatsMultiConverter}">
-                    <Binding Path="Project.Documents"/>
-                    <Binding Path="Project.CurrentDocument.Pages"/>
-                    <Binding Path="Project.CurrentContainer.Layers"/>
-                    <Binding Path="Project.CurrentContainer.CurrentLayer.Shapes"/>
-                    <Binding Path="PageState.SelectedShapes" Converter="{StaticResource ObjectToObjectConverter}"/>
+                    <Binding Path="Project.Documents" />
+                    <Binding Path="Project.CurrentDocument.Pages" />
+                    <Binding Path="Project.CurrentContainer.Layers" />
+                    <Binding Path="Project.CurrentContainer.CurrentLayer.Shapes" />
+                    <Binding Path="PageState.SelectedShapes" Converter="{StaticResource ObjectToObjectConverter}" />
                 </MultiBinding>
             </TextBlock.Text>
         </TextBlock>
@@ -34,30 +34,30 @@
             <ComboBox Items="{Binding Tools}" SelectedItem="{Binding CurrentTool, Mode=TwoWay}" Margin="12,0,0,0" VerticalAlignment="Center">
                 <ComboBox.DataTemplates>
                     <DataTemplate>
-                        <TextBlock Text="{Binding Title}"/>
+                        <TextBlock Text="{Binding Title}" />
                     </DataTemplate>
                 </ComboBox.DataTemplates>
             </ComboBox>
             <ComboBox Items="{Binding PathTools}" SelectedItem="{Binding CurrentPathTool, Mode=TwoWay}" Margin="12,0,0,0" VerticalAlignment="Center">
                 <ComboBox.DataTemplates>
                     <DataTemplate>
-                        <TextBlock Text="{Binding Title}"/>
+                        <TextBlock Text="{Binding Title}" />
                     </DataTemplate>
                 </ComboBox.DataTemplates>
                 <ComboBox.IsVisible>
                     <MultiBinding Mode="OneWay" Converter="{StaticResource ObjectEqualityMultiConverter}">
-                        <Binding Path="CurrentTool.Title"/>
-                        <Binding Source="Path"/>
+                        <Binding Path="CurrentTool.Title" />
+                        <Binding Source="Path" />
                     </MultiBinding>
                 </ComboBox.IsVisible>
             </ComboBox>
-            <CheckBox Content="Stroked" IsChecked="{Binding Project.Options.DefaultIsStroked, Mode=TwoWay}" MinWidth="0" Margin="12,0,0,0" VerticalAlignment="Center"/>
-            <CheckBox Content="Filled" IsChecked="{Binding Project.Options.DefaultIsFilled, Mode=TwoWay}" MinWidth="0" Margin="12,0,0,0" VerticalAlignment="Center"/>
-            <CheckBox Content="Closed" IsChecked="{Binding Project.Options.DefaultIsClosed, Mode=TwoWay}" MinWidth="0" Margin="12,0,0,0" VerticalAlignment="Center"/>
-            <CheckBox Content="Snap" IsChecked="{Binding Project.Options.SnapToGrid, Mode=TwoWay}" MinWidth="0" Margin="12,0,0,0" VerticalAlignment="Center"/>
-            <CheckBox Content="Decorators" IsChecked="{Binding PageState.DrawDecorators, Mode=TwoWay}" MinWidth="0" Margin="12,0,0,0" VerticalAlignment="Center"/>
-            <CheckBox Content="Points" IsChecked="{Binding PageState.DrawPoints, Mode=TwoWay}" MinWidth="0" Margin="12,0,0,0" VerticalAlignment="Center"/>
-            <CheckBox Content="Connect" IsChecked="{Binding Project.Options.TryToConnect, Mode=TwoWay}" MinWidth="0" Margin="12,0,12,0" VerticalAlignment="Center"/>
+            <CheckBox Content="Stroked" IsChecked="{Binding Project.Options.DefaultIsStroked, Mode=TwoWay}" MinWidth="0" Margin="12,0,0,0" VerticalAlignment="Center" />
+            <CheckBox Content="Filled" IsChecked="{Binding Project.Options.DefaultIsFilled, Mode=TwoWay}" MinWidth="0" Margin="12,0,0,0" VerticalAlignment="Center" />
+            <CheckBox Content="Closed" IsChecked="{Binding Project.Options.DefaultIsClosed, Mode=TwoWay}" MinWidth="0" Margin="12,0,0,0" VerticalAlignment="Center" />
+            <CheckBox Content="Snap" IsChecked="{Binding Project.Options.SnapToGrid, Mode=TwoWay}" MinWidth="0" Margin="12,0,0,0" VerticalAlignment="Center" />
+            <CheckBox Content="Decorators" IsChecked="{Binding PageState.DrawDecorators, Mode=TwoWay}" MinWidth="0" Margin="12,0,0,0" VerticalAlignment="Center" />
+            <CheckBox Content="Points" IsChecked="{Binding PageState.DrawPoints, Mode=TwoWay}" MinWidth="0" Margin="12,0,0,0" VerticalAlignment="Center" />
+            <CheckBox Content="Connect" IsChecked="{Binding Project.Options.TryToConnect, Mode=TwoWay}" MinWidth="0" Margin="12,0,12,0" VerticalAlignment="Center" />
         </WrapPanel>
     </Grid>
 </UserControl>

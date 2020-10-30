@@ -1,20 +1,20 @@
 ﻿<UserControl x:Class="Core2D.Views.Scripting.ScriptView"
              xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
              xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
              xmlns:behaviors="clr-namespace:Core2D.Behaviors;assembly=Core2D"
              xmlns:ae="clr-namespace:AvaloniaEdit;assembly=AvaloniaEdit"
-             xmlns:Scripting="clr-namespace:Core2D.Scripting;assembly=Core2D" 
+             xmlns:Scripting="clr-namespace:Core2D.Scripting;assembly=Core2D"
              xmlns:Designer="clr-namespace:Core2D.Designer;assembly=Core2D"
              mc:Ignorable="d"
              d:DataContext="{x:Static Designer:DesignerContext.Script}"
              d:DesignWidth="1000" d:DesignHeight="600"
              x:DataType="Scripting:Script" x:CompileBindings="True">
     <UserControl.KeyBindings>
-        <KeyBinding Command="{Binding $parent[TopLevel].DataContext.OnExecuteRepl}" CommandParameter="{Binding #textCode.Text}" Gesture="Ctrl+Enter" x:CompileBindings="False"/>
+        <KeyBinding Command="{Binding $parent[TopLevel].DataContext.OnExecuteRepl}" CommandParameter="{Binding #textCode.Text}" Gesture="Ctrl+Enter" x:CompileBindings="False" />
     </UserControl.KeyBindings>
     <Panel>
         <ae:TextEditor x:Name="textCode"
@@ -24,12 +24,12 @@
                        SyntaxHighlighting="C#"
                        HorizontalScrollBarVisibility="Auto"
                        VerticalScrollBarVisibility="Auto"
-                       FontFamily="{DynamicResource CodeFontFamily}" 
-                       FontWeight="Normal" 
+                       FontFamily="{DynamicResource CodeFontFamily}"
+                       FontWeight="Normal"
                        FontSize="14"
                        WordWrap="False">
             <i:Interaction.Behaviors>
-                <behaviors:DocumentTextBindingBehavior Text="{Binding Code, Mode=TwoWay}"/>
+                <behaviors:DocumentTextBindingBehavior Text="{Binding Code, Mode=TwoWay}" />
             </i:Interaction.Behaviors>
         </ae:TextEditor>
     </Panel>

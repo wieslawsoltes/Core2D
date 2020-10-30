@@ -1,13 +1,13 @@
 ﻿<UserControl x:Class="Core2D.Views.Containers.LayerContainerView"
              xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
              xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
              xmlns:idd="clr-namespace:Core2D.DragAndDrop;assembly=Core2D"
              xmlns:converters="clr-namespace:Core2D.Converters;assembly=Core2D"
-             xmlns:Shapes="clr-namespace:Core2D.Shapes;assembly=Core2D" 
+             xmlns:Shapes="clr-namespace:Core2D.Shapes;assembly=Core2D"
              xmlns:Containers="clr-namespace:Core2D.Containers;assembly=Core2D"
              xmlns:Designer="clr-namespace:Core2D.Designer;assembly=Core2D"
              mc:Ignorable="d"
@@ -15,13 +15,13 @@
              d:DesignWidth="250" d:DesignHeight="400"
              x:DataType="Containers:LayerContainer" x:CompileBindings="True">
     <UserControl.Resources>
-        <converters:ObjectToTypeStringConverter x:Key="ObjectToTypeStringConverter"/>
+        <converters:ObjectToTypeStringConverter x:Key="ObjectToTypeStringConverter" />
     </UserControl.Resources>
     <StackPanel>
         <StackPanel>
-            <Label Content="Name" Margin="{DynamicResource TextControlThemePadding}"/>
-            <TextBox Text="{Binding Name, Mode=TwoWay}"/>
-            <CheckBox Content="IsVisible" IsChecked="{Binding IsVisible, Mode=TwoWay}"/>
+            <Label Content="Name" Margin="{DynamicResource TextControlThemePadding}" />
+            <TextBox Text="{Binding Name, Mode=TwoWay}" />
+            <CheckBox Content="IsVisible" IsChecked="{Binding IsVisible, Mode=TwoWay}" />
         </StackPanel>
         <Expander Header="Shapes" IsExpanded="False">
             <ListBox x:Name="shapes" Items="{Binding Shapes}">
@@ -29,7 +29,7 @@
                     <DataTemplate DataType="Shapes:BaseShape">
                         <TextBlock Text="{Binding Mode=OneWay, Converter={StaticResource ObjectToTypeStringConverter}}" Background="Transparent">
                             <i:Interaction.Behaviors>
-                                <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}"/>
+                                <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}" />
                             </i:Interaction.Behaviors>
                         </TextBlock>
                     </DataTemplate>
@@ -37,7 +37,7 @@
             </ListBox>
         </Expander>
         <Expander Header="Selected Shape" IsExpanded="False">
-            <ContentControl Content="{Binding #shapes.SelectedItem}"/>
+            <ContentControl Content="{Binding #shapes.SelectedItem}" />
         </Expander>
     </StackPanel>
 </UserControl>

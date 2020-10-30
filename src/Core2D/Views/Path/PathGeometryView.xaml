@@ -15,32 +15,32 @@
              d:DesignWidth="250" d:DesignHeight="400"
              x:DataType="Path:PathGeometry" x:CompileBindings="True">
     <UserControl.Resources>
-        <converters:ObjectToTypeStringConverter x:Key="ObjectToTypeStringConverter"/>
+        <converters:ObjectToTypeStringConverter x:Key="ObjectToTypeStringConverter" />
     </UserControl.Resources>
     <StackPanel>
         <StackPanel>
-            <Label Content="FillRule" Margin="{DynamicResource TextControlThemePadding}"/>
-            <ComboBox Items="{x:Static Editor:Enums.XFillRuleValues}" SelectedItem="{Binding FillRule, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
+            <Label Content="FillRule" Margin="{DynamicResource TextControlThemePadding}" />
+            <ComboBox Items="{x:Static Editor:Enums.XFillRuleValues}" SelectedItem="{Binding FillRule, Mode=TwoWay}" HorizontalAlignment="Stretch" />
         </StackPanel>
         <Expander Header="Figures" IsExpanded="False">
             <TreeView x:Name="tree" Items="{Binding Figures}">
                 <TreeView.Styles>
                     <Style Selector="TreeViewItem">
-                        <Setter Property="IsExpanded" Value="False"/>
+                        <Setter Property="IsExpanded" Value="False" />
                     </Style>
                 </TreeView.Styles>
                 <TreeView.DataTemplates>
                     <TreeDataTemplate DataType="Path:PathFigure" ItemsSource="{Binding Segments}" x:CompileBindings="False">
-                        <TextBlock Text="{Binding Mode=OneWay, Converter={StaticResource ObjectToTypeStringConverter}}" Background="Transparent"/>
+                        <TextBlock Text="{Binding Mode=OneWay, Converter={StaticResource ObjectToTypeStringConverter}}" Background="Transparent" />
                     </TreeDataTemplate>
                     <DataTemplate DataType="Path:PathSegment">
-                        <TextBlock Text="{Binding Mode=OneWay, Converter={StaticResource ObjectToTypeStringConverter}}" Background="Transparent"/>
+                        <TextBlock Text="{Binding Mode=OneWay, Converter={StaticResource ObjectToTypeStringConverter}}" Background="Transparent" />
                     </DataTemplate>
                 </TreeView.DataTemplates>
             </TreeView>
         </Expander>
         <Expander Header="Selected Figure" IsExpanded="False">
-            <ContentControl Content="{Binding #tree.SelectedItem}"/>
+            <ContentControl Content="{Binding #tree.SelectedItem}" />
         </Expander>
     </StackPanel>
 </UserControl>

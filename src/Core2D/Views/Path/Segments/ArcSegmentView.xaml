@@ -13,17 +13,17 @@
              x:DataType="Segments:ArcSegment" x:CompileBindings="True">
     <StackPanel>
         <StackPanel>
-            <Label Content="RotationAngle" Margin="{DynamicResource TextControlThemePadding}"/>
-            <TextBox Text="{Binding RotationAngle, Mode=TwoWay}"/>
-            <CheckBox Content="IsLargeArc" IsChecked="{Binding IsLargeArc, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
-            <Label Content="SweepDirection" Margin="{DynamicResource TextControlThemePadding}"/>
-            <ComboBox Items="{x:Static Editor:Enums.XSweepDirectionValues}" SelectedItem="{Binding SweepDirection, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
+            <Label Content="RotationAngle" Margin="{DynamicResource TextControlThemePadding}" />
+            <TextBox Text="{Binding RotationAngle, Mode=TwoWay}" />
+            <CheckBox Content="IsLargeArc" IsChecked="{Binding IsLargeArc, Mode=TwoWay}" HorizontalAlignment="Stretch" />
+            <Label Content="SweepDirection" Margin="{DynamicResource TextControlThemePadding}" />
+            <ComboBox Items="{x:Static Editor:Enums.XSweepDirectionValues}" SelectedItem="{Binding SweepDirection, Mode=TwoWay}" HorizontalAlignment="Stretch" />
         </StackPanel>
         <Expander Header="Point" IsExpanded="False">
-            <ContentControl Content="{Binding Point}"/>
+            <ContentControl Content="{Binding Point}" />
         </Expander>
         <Expander Header="Size" IsExpanded="False">
-            <ContentControl Content="{Binding Size}"/>
+            <ContentControl Content="{Binding Size}" />
         </Expander>
     </StackPanel>
 </UserControl>
