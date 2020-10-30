@@ -22,8 +22,7 @@
              d:DesignWidth="1000" d:DesignHeight="600"
              x:DataType="Editor:ProjectEditor" x:CompileBindings="True">
     <UserControl.Resources>
-        <converters:ObjectToTypeStringConverter x:Key="ObjectToTypeStringConverter"/>
-        <converters:TreeViewSelectedItemToObjectConverter x:Key="TreeViewSelectedItemToObjectConverter"/>
+        <converters:ObjectToTypeStringConverter x:Key="ObjectToTypeStringConverter" />
     </UserControl.Resources>
     <TreeView x:Name="project">
         <TreeView.KeyBindings>
