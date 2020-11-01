@@ -28,10 +28,28 @@
                 <Label Content="Dashes" Margin="{DynamicResource TextControlThemePadding}" />
                 <TextBox Text="{Binding Dashes, Mode=TwoWay}" />
                 <Expander Header="Start Arrow" IsExpanded="False">
-                    <ContentControl Content="{Binding StartArrowStyle}" />
+                    <StackPanel DataContext="{Binding StartArrowStyle}">
+                        <Label Content="Arrow Type" Margin="{DynamicResource TextControlThemePadding}" />
+                        <ComboBox Items="{x:Static Editor:Enums.ArrowTypeValues}" SelectedItem="{Binding ArrowType, Mode=TwoWay}" HorizontalAlignment="Stretch" />
+                        <CheckBox Content="IsStroked" IsChecked="{Binding IsStroked, Mode=TwoWay}" HorizontalAlignment="Stretch" />
+                        <CheckBox Content="IsFilled" IsChecked="{Binding IsFilled, Mode=TwoWay}" HorizontalAlignment="Stretch" />
+                        <Label Content="RadiusX" Margin="{DynamicResource TextControlThemePadding}" />
+                        <TextBox Text="{Binding RadiusX, Mode=TwoWay}" HorizontalAlignment="Stretch" />
+                        <Label Content="RadiusY" Margin="{DynamicResource TextControlThemePadding}" />
+                        <TextBox Text="{Binding RadiusY, Mode=TwoWay}" HorizontalAlignment="Stretch" />
+                    </StackPanel>
                 </Expander>
                 <Expander Header="End Arrow" IsExpanded="False">
-                    <ContentControl Content="{Binding EndArrowStyle}" />
+                    <StackPanel DataContext="{Binding EndArrowStyle}">
+                        <Label Content="Arrow Type" Margin="{DynamicResource TextControlThemePadding}" />
+                        <ComboBox Items="{x:Static Editor:Enums.ArrowTypeValues}" SelectedItem="{Binding ArrowType, Mode=TwoWay}" HorizontalAlignment="Stretch" />
+                        <CheckBox Content="IsStroked" IsChecked="{Binding IsStroked, Mode=TwoWay}" HorizontalAlignment="Stretch" />
+                        <CheckBox Content="IsFilled" IsChecked="{Binding IsFilled, Mode=TwoWay}" HorizontalAlignment="Stretch" />
+                        <Label Content="RadiusX" Margin="{DynamicResource TextControlThemePadding}" />
+                        <TextBox Text="{Binding RadiusX, Mode=TwoWay}" HorizontalAlignment="Stretch" />
+                        <Label Content="RadiusY" Margin="{DynamicResource TextControlThemePadding}" />
+                        <TextBox Text="{Binding RadiusY, Mode=TwoWay}" HorizontalAlignment="Stretch" />
+                    </StackPanel>
                 </Expander>
             </StackPanel>
         </Expander>
