@@ -819,31 +819,6 @@ namespace Core2D
             };
         }
 
-        public ArrowStyle CreateArrowStyle(BaseStyle source, ArrowType arrowType = ArrowType.None, bool isStroked = true, bool isFilled = false, double radiusX = 5.0, double radiusY = 5.0)
-        {
-            return new ArrowStyle(source)
-            {
-                ArrowType = arrowType,
-                IsStroked = isStroked,
-                IsFilled = isFilled,
-                RadiusX = radiusX,
-                RadiusY = radiusY
-            };
-        }
-
-        public ArrowStyle CreateArrowStyle(string name, BaseStyle source, ArrowType arrowType = ArrowType.None, bool isStroked = true, bool isFilled = false, double radiusX = 5.0, double radiusY = 5.0)
-        {
-            return new ArrowStyle(source)
-            {
-                Name = name,
-                ArrowType = arrowType,
-                IsStroked = isStroked,
-                IsFilled = isFilled,
-                RadiusX = radiusX,
-                RadiusY = radiusY
-            };
-        }
-
         public FontStyle CreateFontStyle(FontStyleFlags flags = FontStyleFlags.Regular)
         {
             return new FontStyle()
@@ -866,8 +841,8 @@ namespace Core2D
                 TextStyle = textStyle ?? CreateTextStyle()
             };
 
-            style.StartArrowStyle = startArrowStyle ?? CreateArrowStyle(style);
-            style.EndArrowStyle = endArrowStyle ?? CreateArrowStyle(style);
+            style.StartArrowStyle = startArrowStyle ?? CreateArrowStyle();
+            style.EndArrowStyle = endArrowStyle ?? CreateArrowStyle();
 
             return style;
         }

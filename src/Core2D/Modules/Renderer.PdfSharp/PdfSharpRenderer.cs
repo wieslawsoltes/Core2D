@@ -106,11 +106,11 @@ namespace Core2D.Renderer.PdfSharp
 
         private void DrawLineArrowsInternal(XGraphics gfx, LineShape line, out XPoint pt1, out XPoint pt2)
         {
-            var fillStartArrow = ToXBrush(line.Style.StartArrowStyle.Fill);
-            var strokeStartArrow = ToXPen(line.Style.StartArrowStyle, _scaleToPage, _sourceDpi, _targetDpi);
+            var fillStartArrow = ToXBrush(line.Style.Fill);
+            var strokeStartArrow = ToXPen(line.Style, _scaleToPage, _sourceDpi, _targetDpi);
 
-            var fillEndArrow = ToXBrush(line.Style.EndArrowStyle.Fill);
-            var strokeEndArrow = ToXPen(line.Style.EndArrowStyle, _scaleToPage, _sourceDpi, _targetDpi);
+            var fillEndArrow = ToXBrush(line.Style.Fill);
+            var strokeEndArrow = ToXPen(line.Style, _scaleToPage, _sourceDpi, _targetDpi);
 
             double _x1 = line.Start.X;
             double _y1 = line.Start.Y;

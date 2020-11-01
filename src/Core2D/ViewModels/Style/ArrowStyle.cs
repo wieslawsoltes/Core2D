@@ -4,7 +4,7 @@ using System.Runtime.Serialization;
 namespace Core2D.Style
 {
     [DataContract(IsReference = true)]
-    public class ArrowStyle : BaseStyle
+    public class ArrowStyle : ObservableObject
     {
         private ArrowType _arrowType;
         private bool _isStroked;
@@ -51,27 +51,11 @@ namespace Core2D.Style
         {
         }
 
-        public ArrowStyle(BaseStyle source) : this()
-        {
-            Stroke = (BaseColor)source.Stroke.Copy(null);
-            Fill = (BaseColor)source.Fill.Copy(null);
-            Thickness = source.Thickness;
-            LineCap = source.LineCap;
-            Dashes = source.Dashes ?? (default);
-            DashOffset = source.DashOffset;
-        }
-
         public override object Copy(IDictionary<object, object> shared)
         {
             return new ArrowStyle()
             {
                 Name = this.Name,
-                Stroke = (BaseColor)this.Stroke.Copy(shared),
-                Fill = (BaseColor)this.Fill.Copy(shared),
-                Thickness = this.Thickness,
-                LineCap = this.LineCap,
-                Dashes = this.Dashes,
-                DashOffset = this.DashOffset,
                 ArrowType = this.ArrowType,
                 IsStroked = this.IsStroked,
                 IsFilled = this.IsFilled,

@@ -11,6 +11,7 @@ namespace Core2D.Renderer
 {
     internal abstract class Marker : IMarker
     {
+        public BaseStyle BaseStyle { get; set; }
         public ArrowStyle Style { get; set; }
         public AM.IBrush Brush { get; set; }
         public AM.IPen Pen { get; set; }
@@ -21,8 +22,8 @@ namespace Core2D.Renderer
 
         public virtual void UpdateStyle()
         {
-            Brush = AvaloniaDrawUtil.ToBrush(Style.Fill);
-            Pen = AvaloniaDrawUtil.ToPen(Style, Style.Thickness);
+            Brush = AvaloniaDrawUtil.ToBrush(BaseStyle.Fill);
+            Pen = AvaloniaDrawUtil.ToPen(BaseStyle, BaseStyle.Thickness);
         }
     }
 
@@ -103,7 +104,7 @@ namespace Core2D.Renderer
             UpdateGeometry();
         }
 
-        private Marker CreatArrowMarker(double x, double y, double angle, ArrowStyle style)
+        private Marker CreatArrowMarker(double x, double y, double angle, BaseStyle baseStyle, ArrowStyle style)
         {
             switch (style.ArrowType)
             {
@@ -112,6 +113,7 @@ namespace Core2D.Renderer
                     {
                         var marker = new NoneMarker();
 
+                        marker.BaseStyle = baseStyle;
                         marker.Style = style;
                         marker.Point = new A.Point(x, y);
 
@@ -126,6 +128,7 @@ namespace Core2D.Renderer
 
                         var marker = new RectangleMarker();
 
+                        marker.BaseStyle = baseStyle;
                         marker.Style = style;
                         marker.Rotation = AME.MatrixHelper.Rotation(angle, new A.Vector(x, y));
                         marker.Point = AME.MatrixHelper.TransformPoint(marker.Rotation, new A.Point(x - sx, y));
@@ -144,6 +147,7 @@ namespace Core2D.Renderer
 
                         var marker = new EllipseMarker();
 
+                        marker.BaseStyle = baseStyle;
                         marker.Style = style;
                         marker.Rotation = AME.MatrixHelper.Rotation(angle, new A.Vector(x, y));
                         marker.Point = AME.MatrixHelper.TransformPoint(marker.Rotation, new A.Point(x - sx, y));
@@ -163,6 +167,7 @@ namespace Core2D.Renderer
 
                         var marker = new ArrowMarker();
 
+                        marker.BaseStyle = baseStyle;
                         marker.Style = style;
                         marker.Rotation = AME.MatrixHelper.Rotation(angle, new A.Vector(x, y));
                         marker.Point = AME.MatrixHelper.TransformPoint(marker.Rotation, new A.Point(x, y));
@@ -187,7 +192,7 @@ namespace Core2D.Renderer
             if (Style.StartArrowStyle.ArrowType != ArrowType.None)
             {
                 double a1 = Math.Atan2(y1 - y2, x1 - x2);
-                StartMarker = CreatArrowMarker(x1, y1, a1, Style.StartArrowStyle);
+                StartMarker = CreatArrowMarker(x1, y1, a1, Style, Style.StartArrowStyle);
                 StartMarker.UpdateStyle();
                 P0 = (StartMarker as Marker).Point;
             }
@@ -200,7 +205,7 @@ namespace Core2D.Renderer
             if (Style.EndArrowStyle.ArrowType != ArrowType.None)
             {
                 double a2 = Math.Atan2(y2 - y1, x2 - x1);
-                EndMarker = CreatArrowMarker(x2, y2, a2, Style.EndArrowStyle);
+                EndMarker = CreatArrowMarker(x2, y2, a2, Style, Style.EndArrowStyle);
                 EndMarker.UpdateStyle();
                 P1 = (EndMarker as Marker).Point;
             }

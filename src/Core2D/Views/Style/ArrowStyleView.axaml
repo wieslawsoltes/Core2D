@@ -13,31 +13,13 @@
              d:DesignWidth="250" d:DesignHeight="400"
              x:DataType="Style:ArrowStyle" x:CompileBindings="True">
     <StackPanel>
-        <StackPanel>
-            <Label Content="Arrow Type" Margin="{DynamicResource TextControlThemePadding}" />
-            <ComboBox Items="{x:Static Editor:Enums.ArrowTypeValues}" SelectedItem="{Binding ArrowType, Mode=TwoWay}" HorizontalAlignment="Stretch" />
-            <CheckBox Content="IsStroked" IsChecked="{Binding IsStroked, Mode=TwoWay}" HorizontalAlignment="Stretch" />
-            <CheckBox Content="IsFilled" IsChecked="{Binding IsFilled, Mode=TwoWay}" HorizontalAlignment="Stretch" />
-            <Label Content="RadiusX" Margin="{DynamicResource TextControlThemePadding}" />
-            <TextBox Text="{Binding RadiusX, Mode=TwoWay}" HorizontalAlignment="Stretch" />
-            <Label Content="RadiusY" Margin="{DynamicResource TextControlThemePadding}" />
-            <TextBox Text="{Binding RadiusY, Mode=TwoWay}" HorizontalAlignment="Stretch" />
-        </StackPanel>
-        <Expander Header="Stroke" IsExpanded="False">
-            <StackPanel>
-                <ContentControl Content="{Binding Stroke}" />
-                <Label Content="Thickness" Margin="{DynamicResource TextControlThemePadding}" />
-                <TextBox Text="{Binding Thickness, Mode=TwoWay}" />
-                <Label Content="Line Cap" Margin="{DynamicResource TextControlThemePadding}" />
-                <ComboBox Items="{x:Static Editor:Enums.LineCapValues}" SelectedItem="{Binding LineCap, Mode=TwoWay}" HorizontalAlignment="Stretch" />
-                <Label Content="Dash Offset" Margin="{DynamicResource TextControlThemePadding}" />
-                <TextBox Text="{Binding DashOffset, Mode=TwoWay}" />
-                <Label Content="Dashes" Margin="{DynamicResource TextControlThemePadding}" />
-                <TextBox Text="{Binding Dashes, Mode=TwoWay}" />
-            </StackPanel>
-        </Expander>
-        <Expander Header="Fill" IsExpanded="False">
-            <ContentControl Content="{Binding Fill}" />
-        </Expander>
+        <Label Content="Arrow Type" Margin="{DynamicResource TextControlThemePadding}" />
+        <ComboBox Items="{x:Static Editor:Enums.ArrowTypeValues}" SelectedItem="{Binding ArrowType, Mode=TwoWay}" HorizontalAlignment="Stretch" />
+        <CheckBox Content="IsStroked" IsChecked="{Binding IsStroked, Mode=TwoWay}" HorizontalAlignment="Stretch" />
+        <CheckBox Content="IsFilled" IsChecked="{Binding IsFilled, Mode=TwoWay}" HorizontalAlignment="Stretch" />
+        <Label Content="RadiusX" Margin="{DynamicResource TextControlThemePadding}" />
+        <TextBox Text="{Binding RadiusX, Mode=TwoWay}" HorizontalAlignment="Stretch" />
+        <Label Content="RadiusY" Margin="{DynamicResource TextControlThemePadding}" />
+        <TextBox Text="{Binding RadiusY, Mode=TwoWay}" HorizontalAlignment="Stretch" />
     </StackPanel>
 </UserControl>

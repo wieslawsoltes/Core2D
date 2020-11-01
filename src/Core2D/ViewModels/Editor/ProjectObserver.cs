@@ -1289,31 +1289,11 @@ namespace Core2D.Editor
             if (style.StartArrowStyle != null)
             {
                 style.StartArrowStyle.PropertyChanged += ObserveStyle;
-
-                if (style.StartArrowStyle.Stroke != null)
-                {
-                    style.StartArrowStyle.Stroke.PropertyChanged += ObserveStyle;
-                }
-
-                if (style.StartArrowStyle.Fill != null)
-                {
-                    style.StartArrowStyle.Fill.PropertyChanged += ObserveStyle;
-                }
             }
 
             if (style.EndArrowStyle != null)
             {
                 style.EndArrowStyle.PropertyChanged += ObserveStyle;
-
-                if (style.EndArrowStyle.Stroke != null)
-                {
-                    style.EndArrowStyle.Stroke.PropertyChanged += ObserveStyle;
-                }
-
-                if (style.EndArrowStyle.Fill != null)
-                {
-                    style.EndArrowStyle.Fill.PropertyChanged += ObserveStyle;
-                }
             }
 
             if (style.TextStyle != null)
@@ -1349,31 +1329,11 @@ namespace Core2D.Editor
             if (style.StartArrowStyle != null)
             {
                 style.StartArrowStyle.PropertyChanged -= ObserveStyle;
-
-                if (style.StartArrowStyle.Stroke != null)
-                {
-                    style.StartArrowStyle.Stroke.PropertyChanged -= ObserveStyle;
-                }
-
-                if (style.StartArrowStyle.Fill != null)
-                {
-                    style.StartArrowStyle.Fill.PropertyChanged -= ObserveStyle;
-                }
             }
 
             if (style.EndArrowStyle != null)
             {
                 style.EndArrowStyle.PropertyChanged -= ObserveStyle;
-
-                if (style.EndArrowStyle.Stroke != null)
-                {
-                    style.EndArrowStyle.Stroke.PropertyChanged -= ObserveStyle;
-                }
-
-                if (style.EndArrowStyle.Fill != null)
-                {
-                    style.EndArrowStyle.Fill.PropertyChanged -= ObserveStyle;
-                }
             }
 
             if (style.TextStyle != null)

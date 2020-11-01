@@ -8,6 +8,7 @@ namespace Core2D.Renderer.SkiaSharp
 {
     internal abstract class Marker : IMarker
     {
+        public BaseStyle BaseStyle { get; set; }
         public ArrowStyle Style { get; set; }
         public SKPaint Brush { get; set; }
         public SKPaint Pen { get; set; }
@@ -18,8 +19,8 @@ namespace Core2D.Renderer.SkiaSharp
 
         public virtual void UpdateStyle()
         {
-            Brush = SkiaSharpDrawUtil.ToSKPaintBrush(Style.Fill);
-            Pen = SkiaSharpDrawUtil.ToSKPaintPen(Style, Style.Thickness);
+            Brush = SkiaSharpDrawUtil.ToSKPaintBrush(BaseStyle.Fill);
+            Pen = SkiaSharpDrawUtil.ToSKPaintPen(BaseStyle, BaseStyle.Thickness);
         }
     }
 
@@ -114,7 +115,7 @@ namespace Core2D.Renderer.SkiaSharp
             UpdateGeometry();
         }
 
-        private Marker CreatArrowMarker(double x, double y, double angle, ArrowStyle style)
+        private Marker CreatArrowMarker(double x, double y, double angle, BaseStyle baseStyle, ArrowStyle style)
         {
             switch (style.ArrowType)
             {
@@ -123,6 +124,7 @@ namespace Core2D.Renderer.SkiaSharp
                     {
                         var marker = new NoneMarker();
 
+                        marker.BaseStyle = baseStyle;
                         marker.Style = style;
                         marker.Point = new SKPoint((float)x, (float)y);
 
@@ -137,6 +139,7 @@ namespace Core2D.Renderer.SkiaSharp
 
                         var marker = new RectangleMarker();
 
+                        marker.BaseStyle = baseStyle;
                         marker.Style = style;
                         marker.Rotation = MatrixHelper.Rotation(angle, new SKPoint((float)x, (float)y));
                         marker.Point = MatrixHelper.TransformPoint(marker.Rotation, new SKPoint((float)(x - sx), (float)y));
@@ -155,6 +158,7 @@ namespace Core2D.Renderer.SkiaSharp
 
                         var marker = new EllipseMarker();
 
+                        marker.BaseStyle = baseStyle;
                         marker.Style = style;
                         marker.Rotation = MatrixHelper.Rotation(angle, new SKPoint((float)x, (float)y));
                         marker.Point = MatrixHelper.TransformPoint(marker.Rotation, new SKPoint((float)(x - sx), (float)y));
@@ -173,6 +177,7 @@ namespace Core2D.Renderer.SkiaSharp
 
                         var marker = new ArrowMarker();
 
+                        marker.BaseStyle = baseStyle;
                         marker.Style = style;
                         marker.Rotation = MatrixHelper.Rotation(angle, new SKPoint((float)x, (float)y));
                         marker.Point = MatrixHelper.TransformPoint(marker.Rotation, new SKPoint((float)x, (float)y));
@@ -197,7 +202,7 @@ namespace Core2D.Renderer.SkiaSharp
             if (Style.StartArrowStyle.ArrowType != ArrowType.None)
             {
                 double a1 = Math.Atan2(y1 - y2, x1 - x2);
-                StartMarker = CreatArrowMarker(x1, y1, a1, Style.StartArrowStyle);
+                StartMarker = CreatArrowMarker(x1, y1, a1, Style, Style.StartArrowStyle);
                 StartMarker.UpdateStyle();
                 P0 = (StartMarker as Marker).Point;
             }
@@ -210,7 +215,7 @@ namespace Core2D.Renderer.SkiaSharp
             if (Style.EndArrowStyle.ArrowType != ArrowType.None)
             {
                 double a2 = Math.Atan2(y2 - y1, x2 - x1);
-                EndMarker = CreatArrowMarker(x2, y2, a2, Style.EndArrowStyle);
+                EndMarker = CreatArrowMarker(x2, y2, a2, Style, Style.EndArrowStyle);
                 EndMarker.UpdateStyle();
                 P1 = (EndMarker as Marker).Point;
             }
@@ -253,7 +258,7 @@ namespace Core2D.Renderer.SkiaSharp
             if (Line.IsStroked)
             {
                 canvas.DrawLine(P0, P1, Stroke);
- 
+
                 if (Style.StartArrowStyle.ArrowType != ArrowType.None)
                 {
                     StartMarker?.Draw(dc);

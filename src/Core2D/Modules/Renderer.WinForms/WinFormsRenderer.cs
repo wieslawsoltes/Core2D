@@ -118,11 +118,11 @@ namespace Core2D.Renderer.WinForms
 
         private void DrawLineArrowsInternal(LineShape line, Graphics gfx, out PointF pt1, out PointF pt2)
         {
-            var fillStartArrow = ToBrush(line.Style.StartArrowStyle.Fill);
-            var strokeStartArrow = ToPen(line.Style.StartArrowStyle, _scaleToPage);
+            var fillStartArrow = ToBrush(line.Style.Fill);
+            var strokeStartArrow = ToPen(line.Style, _scaleToPage);
 
-            var fillEndArrow = ToBrush(line.Style.EndArrowStyle.Fill);
-            var strokeEndArrow = ToPen(line.Style.EndArrowStyle, _scaleToPage);
+            var fillEndArrow = ToBrush(line.Style.Fill);
+            var strokeEndArrow = ToPen(line.Style, _scaleToPage);
 
             double _x1 = line.Start.X;
             double _y1 = line.Start.Y;

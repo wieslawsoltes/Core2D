@@ -12,7 +12,7 @@ namespace Core2D.Style.UnitTests
         public void Inherits_From_ObservableObject()
         {
             var target = _factory.CreateArrowStyle();
-            Assert.True(target is BaseStyle);
+            Assert.True(target is ObservableObject);
         }
     }
 }
