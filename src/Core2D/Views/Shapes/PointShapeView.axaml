@@ -14,12 +14,13 @@
              x:DataType="Shapes:PointShape" x:CompileBindings="True">
     <StackPanel>
         <StackPanel>
-            <Grid ColumnDefinitions="50*,50*">
+            <Grid ColumnDefinitions="50*,6,50*">
                 <StackPanel Grid.Column="0">
                     <Label Content="X" Margin="{DynamicResource TextControlThemePadding}" />
                     <TextBox Text="{Binding X, Mode=TwoWay}" />
                 </StackPanel>
-                <StackPanel Grid.Column="1">
+                <GridSplitter ResizeDirection="Columns" ResizeBehavior="PreviousAndNext" Background="Transparent" Width="6" Grid.Column="1" />
+                <StackPanel Grid.Column="2">
                     <Label Content="Y" Margin="{DynamicResource TextControlThemePadding}" />
                     <TextBox Text="{Binding Y, Mode=TwoWay}" />
                 </StackPanel>
