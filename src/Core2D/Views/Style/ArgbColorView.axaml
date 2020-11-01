@@ -20,10 +20,9 @@
     </UserControl.Resources>
     <DockPanel>
         <Panel Height="30" Margin="{DynamicResource TextControlThemePadding}" DockPanel.Dock="Top">
-            <Border BorderThickness="0" CornerRadius="2" Background="DarkGray" />
-            <Border BorderThickness="0" CornerRadius="2" Background="{DynamicResource ColorCheckerBoard}" />
-            <Border BorderThickness="0" CornerRadius="2" Background="{DynamicResource ColorCheckerBoard}" />
-            <Border BorderThickness="0" CornerRadius="2">
+            <Border BorderThickness="0" CornerRadius="0" Background="DarkGray" />
+            <Border BorderThickness="0" CornerRadius="0" Background="{DynamicResource ColorCheckerBoard}" />
+            <Border BorderThickness="0" CornerRadius="0">
                 <Border.Background>
                     <MultiBinding Mode="OneWay" Converter="{StaticResource ArgbColorToBrushMultiConverter}">
                         <Binding Path="A" />
