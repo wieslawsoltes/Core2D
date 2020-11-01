@@ -1,13 +1,15 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 
 namespace Core2D.Editor.Recent
 {
+    [DataContract(IsReference = true)]
     public class RecentFile : ObservableObject
     {
         private string _path;
 
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public string Path
         {
             get => _path;
