@@ -18,36 +18,59 @@
             </VisualBrush.Visual>
         </VisualBrush>
     </UserControl.Resources>
-    <DockPanel>
-        <Panel Height="30" Margin="{DynamicResource TextControlThemePadding}" DockPanel.Dock="Top">
-            <Border BorderThickness="0" CornerRadius="0" Background="DarkGray" />
-            <Border BorderThickness="0" CornerRadius="0" Background="{DynamicResource ColorCheckerBoard}" />
-            <Border BorderThickness="0" CornerRadius="0">
-                <Border.Background>
-                    <MultiBinding Mode="OneWay" Converter="{StaticResource ArgbColorToBrushMultiConverter}">
-                        <Binding Path="A" />
-                        <Binding Path="R" />
-                        <Binding Path="G" />
-                        <Binding Path="B" />
-                    </MultiBinding>
-                </Border.Background>
+    <Grid Margin="{DynamicResource TextControlThemePadding}">
+        <ToggleButton Name="PopupButton" BorderThickness="0" Background="Transparent" Padding="0" Height="30" HorizontalAlignment="Stretch" VerticalAlignment="Top">
+            <ToggleButton.Styles>
+                <Style Selector="Button, RepeatButton, ToggleButton">
+                    <Setter Property="RenderTransform" Value="none" />
+                    <Setter Property="Transitions" Value="{x:Null}" />
+                </Style>
+                <Style Selector="ToggleButton:pressed">
+                    <Setter Property="RenderTransform" Value="none" />
+                </Style>
+            </ToggleButton.Styles>
+            <Panel Height="30" DockPanel.Dock="Top">
+                <Border BorderThickness="0" CornerRadius="0" Background="DarkGray" />
+                <Border BorderThickness="0" CornerRadius="0" Background="{DynamicResource ColorCheckerBoard}" />
+                <Border BorderThickness="0" CornerRadius="0">
+                    <Border.Background>
+                        <MultiBinding Mode="OneWay" Converter="{StaticResource ArgbColorToBrushMultiConverter}">
+                            <Binding Path="A" />
+                            <Binding Path="R" />
+                            <Binding Path="G" />
+                            <Binding Path="B" />
+                        </MultiBinding>
+                    </Border.Background>
+                </Border>
+            </Panel>
+            <ToggleButton.Styles>
+                <Style Selector="ToggleButton:checked /template/ ContentPresenter, ToggleButton:pressed /template/ ContentPresenter">
+                    <Setter Property="Background" Value="{DynamicResource ThemeBackgroundBrush}" />
+                </Style>
+                <Style Selector="ToggleButton:checked /template/ ContentPresenter">
+                    <Setter Property="BorderBrush" Value="{DynamicResource ThemeBorderHighBrush}" />
+                </Style>
+            </ToggleButton.Styles>
+        </ToggleButton>
+        <Popup IsOpen="{Binding #PopupButton.IsChecked, Mode=TwoWay}" StaysOpen="False">
+            <Border Background="{DynamicResource SystemChromeMediumColor}" CornerRadius="4">
+                <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto" ColumnDefinitions="Auto,*" Margin="10">
+                    <Label Content="R" Margin="{DynamicResource TextControlThemePadding}" VerticalAlignment="Center" Grid.Row="0" Grid.Column="0" />
+                    <Label Content="G" Margin="{DynamicResource TextControlThemePadding}" VerticalAlignment="Center" Grid.Row="1" Grid.Column="0" />
+                    <Label Content="B" Margin="{DynamicResource TextControlThemePadding}" VerticalAlignment="Center" Grid.Row="2" Grid.Column="0" />
+                    <Label Content="A" Margin="{DynamicResource TextControlThemePadding}" VerticalAlignment="Center" Grid.Row="3" Grid.Column="0" />
+                    <Slider Value="{Binding R}" Minimum="0" Maximum="255" TickFrequency="1" Margin="{DynamicResource TextControlThemePadding}" Grid.Row="0" Grid.Column="1" />
+                    <Slider Value="{Binding G}" Minimum="0" Maximum="255" TickFrequency="1" Margin="{DynamicResource TextControlThemePadding}" Grid.Row="1" Grid.Column="1" />
+                    <Slider Value="{Binding B}" Minimum="0" Maximum="255" TickFrequency="1" Margin="{DynamicResource TextControlThemePadding}" Grid.Row="2" Grid.Column="1" />
+                    <Slider Value="{Binding A}" Minimum="0" Maximum="255" TickFrequency="1" Margin="{DynamicResource TextControlThemePadding}" Grid.Row="3" Grid.Column="1" />
+                    <Grid ColumnDefinitions="25*,25*,25*,25*" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2">
+                        <TextBox Text="{Binding R, Mode=TwoWay}" TextAlignment="Center" Margin="{DynamicResource TextControlThemePadding}" MinWidth="40" Grid.Column="0" />
+                        <TextBox Text="{Binding G, Mode=TwoWay}" TextAlignment="Center" Margin="{DynamicResource TextControlThemePadding}" MinWidth="40" Grid.Column="1" />
+                        <TextBox Text="{Binding B, Mode=TwoWay}" TextAlignment="Center" Margin="{DynamicResource TextControlThemePadding}" MinWidth="40" Grid.Column="2" />
+                        <TextBox Text="{Binding A, Mode=TwoWay}" TextAlignment="Center" Margin="{DynamicResource TextControlThemePadding}" MinWidth="40" Grid.Column="3" />
+                    </Grid>
+                </Grid>
             </Border>
-        </Panel>
-        <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto" ColumnDefinitions="Auto,*">
-            <Label Content="R" Margin="{DynamicResource TextControlThemePadding}" VerticalAlignment="Center" Grid.Row="0" Grid.Column="0" />
-            <Label Content="G" Margin="{DynamicResource TextControlThemePadding}" VerticalAlignment="Center" Grid.Row="1" Grid.Column="0" />
-            <Label Content="B" Margin="{DynamicResource TextControlThemePadding}" VerticalAlignment="Center" Grid.Row="2" Grid.Column="0" />
-            <Label Content="A" Margin="{DynamicResource TextControlThemePadding}" VerticalAlignment="Center" Grid.Row="3" Grid.Column="0" />
-            <Slider Value="{Binding R}" Minimum="0" Maximum="255" TickFrequency="1" Margin="{DynamicResource TextControlThemePadding}" Grid.Row="0" Grid.Column="1" />
-            <Slider Value="{Binding G}" Minimum="0" Maximum="255" TickFrequency="1" Margin="{DynamicResource TextControlThemePadding}" Grid.Row="1" Grid.Column="1" />
-            <Slider Value="{Binding B}" Minimum="0" Maximum="255" TickFrequency="1" Margin="{DynamicResource TextControlThemePadding}" Grid.Row="2" Grid.Column="1" />
-            <Slider Value="{Binding A}" Minimum="0" Maximum="255" TickFrequency="1" Margin="{DynamicResource TextControlThemePadding}" Grid.Row="3" Grid.Column="1" />
-            <Grid ColumnDefinitions="25*,25*,25*,25*" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2">
-                <TextBox Text="{Binding R, Mode=TwoWay}" TextAlignment="Center" Margin="{DynamicResource TextControlThemePadding}" MinWidth="40" Grid.Column="0" />
-                <TextBox Text="{Binding G, Mode=TwoWay}" TextAlignment="Center" Margin="{DynamicResource TextControlThemePadding}" MinWidth="40" Grid.Column="1" />
-                <TextBox Text="{Binding B, Mode=TwoWay}" TextAlignment="Center" Margin="{DynamicResource TextControlThemePadding}" MinWidth="40" Grid.Column="2" />
-                <TextBox Text="{Binding A, Mode=TwoWay}" TextAlignment="Center" Margin="{DynamicResource TextControlThemePadding}" MinWidth="40" Grid.Column="3" />
-            </Grid>
-        </Grid>
-    </DockPanel>
+        </Popup>
+    </Grid>
 </UserControl>
