@@ -39,7 +39,7 @@ namespace Core2D
 
         private class ChangeThemeCommand : ICommand
         {
-            private App _app;
+            private readonly App _app;
 
 #pragma warning disable CS0067
 
