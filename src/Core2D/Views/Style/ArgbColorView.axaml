@@ -28,6 +28,12 @@
                 <Style Selector="ToggleButton:pressed">
                     <Setter Property="RenderTransform" Value="none" />
                 </Style>
+                <Style Selector="ToggleButton:checked /template/ ContentPresenter, ToggleButton:pressed /template/ ContentPresenter">
+                    <Setter Property="Background" Value="{DynamicResource ThemeBackgroundBrush}" />
+                </Style>
+                <Style Selector="ToggleButton:checked /template/ ContentPresenter">
+                    <Setter Property="BorderBrush" Value="{DynamicResource ThemeBorderHighBrush}" />
+                </Style>
             </ToggleButton.Styles>
             <Panel Height="30" DockPanel.Dock="Top">
                 <Border BorderThickness="0" CornerRadius="0" Background="DarkGray" />
@@ -43,16 +49,8 @@
                     </Border.Background>
                 </Border>
             </Panel>
-            <ToggleButton.Styles>
-                <Style Selector="ToggleButton:checked /template/ ContentPresenter, ToggleButton:pressed /template/ ContentPresenter">
-                    <Setter Property="Background" Value="{DynamicResource ThemeBackgroundBrush}" />
-                </Style>
-                <Style Selector="ToggleButton:checked /template/ ContentPresenter">
-                    <Setter Property="BorderBrush" Value="{DynamicResource ThemeBorderHighBrush}" />
-                </Style>
-            </ToggleButton.Styles>
         </ToggleButton>
-        <Popup IsOpen="{Binding #PopupButton.IsChecked, Mode=TwoWay}" StaysOpen="False">
+        <Popup IsOpen="{Binding #PopupButton.IsChecked, Mode=TwoWay}" StaysOpen="False" Width="300">
             <Border Background="{DynamicResource SystemChromeMediumColor}" CornerRadius="4">
                 <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto" ColumnDefinitions="Auto,*" Margin="10">
                     <Label Content="R" Margin="{DynamicResource TextControlThemePadding}" VerticalAlignment="Center" Grid.Row="0" Grid.Column="0" />
