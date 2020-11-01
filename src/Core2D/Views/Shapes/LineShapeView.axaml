@@ -17,6 +17,7 @@
                 <Label Content="Name" Margin="{DynamicResource TextControlThemePadding}" />
                 <TextBox Text="{Binding Name, Mode=TwoWay}" />
                 <CheckBox Content="IsStroked" IsChecked="{Binding IsStroked, Mode=TwoWay}" HorizontalAlignment="Stretch" />
+                <CheckBox Content="IsFilled" IsChecked="{Binding IsFilled, Mode=TwoWay}" HorizontalAlignment="Stretch" />
             </StackPanel>
         </Expander>
         <Expander Header="Start" IsExpanded="False">
