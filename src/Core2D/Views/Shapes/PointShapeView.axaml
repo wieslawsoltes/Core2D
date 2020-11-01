@@ -13,21 +13,22 @@
              d:DesignWidth="250" d:DesignHeight="400"
              x:DataType="Shapes:PointShape" x:CompileBindings="True">
     <StackPanel>
-        <StackPanel>
-            <Grid ColumnDefinitions="50*,6,50*">
-                <StackPanel Grid.Column="0">
-                    <Label Content="X" Margin="{DynamicResource TextControlThemePadding}" />
-                    <TextBox Text="{Binding X, Mode=TwoWay}" />
-                </StackPanel>
-                <GridSplitter ResizeDirection="Columns" ResizeBehavior="PreviousAndNext" Background="Transparent" Width="6" Grid.Column="1" />
-                <StackPanel Grid.Column="2">
-                    <Label Content="Y" Margin="{DynamicResource TextControlThemePadding}" />
-                    <TextBox Text="{Binding Y, Mode=TwoWay}" />
-                </StackPanel>
-            </Grid>
-            <Label Content="Alignment" Margin="{DynamicResource TextControlThemePadding}" />
-            <ComboBox Items="{x:Static Editor:Enums.PointAlignmentValues}" SelectedItem="{Binding Alignment, Mode=TwoWay}" HorizontalAlignment="Stretch" />
-        </StackPanel>
+        <Grid ColumnDefinitions="30*,6,30*,6,40*">
+            <StackPanel Grid.Column="0">
+                <Label Content="X" Margin="{DynamicResource TextControlThemePadding}" />
+                <TextBox Text="{Binding X, Mode=TwoWay}" />
+            </StackPanel>
+            <GridSplitter ResizeDirection="Columns" ResizeBehavior="PreviousAndNext" Background="Transparent" Width="6" Grid.Column="1" />
+            <StackPanel Grid.Column="2">
+                <Label Content="Y" Margin="{DynamicResource TextControlThemePadding}" />
+                <TextBox Text="{Binding Y, Mode=TwoWay}" />
+            </StackPanel>
+            <GridSplitter ResizeDirection="Columns" ResizeBehavior="PreviousAndNext" Background="Transparent" Width="6" Grid.Column="3" />
+            <StackPanel Grid.Column="4">
+                <Label Content="Alignment" Margin="{DynamicResource TextControlThemePadding}" />
+                <ComboBox Items="{x:Static Editor:Enums.PointAlignmentValues}" Padding="3" SelectedItem="{Binding Alignment, Mode=TwoWay}" HorizontalAlignment="Stretch" />
+            </StackPanel>
+        </Grid>
         <Expander Header="State" IsExpanded="False">
             <ContentControl Content="{Binding State}" />
         </Expander>
