@@ -42,7 +42,9 @@ namespace Core2D
             private App _app;
 
 #pragma warning disable CS0067
+
             public event EventHandler CanExecuteChanged;
+
 #pragma warning restore CS0067
 
             public ChangeThemeCommand(App app)
@@ -241,12 +243,15 @@ namespace Core2D
                 case ThemeName.DefaultDark:
                     Styles.Insert(0, DefaultDark);
                     break;
+
                 case ThemeName.DefaultLight:
                     Styles.Insert(0, DefaultLight);
                     break;
+
                 case ThemeName.FluentDark:
                     Styles.Insert(0, FluentDark);
                     break;
+
                 default:
                 case ThemeName.FluentLight:
                     Styles.Insert(0, FluentLight);
@@ -261,12 +266,15 @@ namespace Core2D
                 case ThemeName.DefaultDark:
                     Styles[0] = DefaultDark;
                     break;
+
                 case ThemeName.DefaultLight:
                     Styles[0] = DefaultLight;
                     break;
+
                 case ThemeName.FluentDark:
                     Styles[0] = FluentDark;
                     break;
+
                 default:
                 case ThemeName.FluentLight:
                     Styles[0] = FluentLight;
@@ -306,7 +314,7 @@ namespace Core2D
             {
                 new StyleInclude(new Uri("avares://Core2D/Styles"))
                 {
-                    Source = new Uri("avares://Core2D/Themes/DefaultDark.xaml")
+                    Source = new Uri("avares://Core2D/Themes/DefaultDark.axaml")
                 }
             };
 
@@ -314,7 +322,7 @@ namespace Core2D
             {
                 new StyleInclude(new Uri("avares://Core2D/Styles"))
                 {
-                    Source = new Uri("avares://Core2D/Themes/DefaultLight.xaml")
+                    Source = new Uri("avares://Core2D/Themes/DefaultLight.axaml")
                 }
             };
 
@@ -322,7 +330,7 @@ namespace Core2D
             {
                 new StyleInclude(new Uri("avares://Core2D/Styles"))
                 {
-                    Source = new Uri("avares://Core2D/Themes/FluentDark.xaml")
+                    Source = new Uri("avares://Core2D/Themes/FluentDark.axaml")
                 }
             };
 
@@ -330,7 +338,7 @@ namespace Core2D
             {
                 new StyleInclude(new Uri("avares://Core2D/Styles"))
                 {
-                    Source = new Uri("avares://Core2D/Themes/FluentLight.xaml")
+                    Source = new Uri("avares://Core2D/Themes/FluentLight.axaml")
                 }
             };
 
