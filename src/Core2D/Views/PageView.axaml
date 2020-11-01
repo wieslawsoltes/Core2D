@@ -20,18 +20,9 @@
              x:DataType="Editor:ProjectEditor" x:CompileBindings="True">
     <UserControl.Resources>
         <handlers:EditorDropHandler x:Key="EditorDropHandler" />
-        <VisualBrush x:Key="TemplateCheckerBoard" TileMode="Tile" Stretch="None" AlignmentX="Left" AlignmentY="Top" SourceRect="0,0,20,20" DestinationRect="0,0,20,20">
+        <VisualBrush x:Key="TemplateCheckerBoard" TileMode="Tile" SourceRect="0,0,20,20" DestinationRect="0,0,20,20">
             <VisualBrush.Visual>
-                <StackPanel Orientation="Horizontal">
-                    <StackPanel Orientation="Vertical">
-                        <Rectangle Width="10" Height="10" Fill="#FFF0F0F0" />
-                        <Rectangle Width="10" Height="10" Fill="#FFF5F5F5" />
-                    </StackPanel>
-                    <StackPanel Orientation="Vertical">
-                        <Rectangle Width="10" Height="10" Fill="#FFF5F5F5" />
-                        <Rectangle Width="10" Height="10" Fill="#FFF0F0F0" />
-                    </StackPanel>
-                </StackPanel>
+                <Path Data="M 0,0 L 0,10 L 10,10 L 10,0 Z M 10,10 L 10,20 L 20,20 L 20,10 Z" Fill="LightGray" />
             </VisualBrush.Visual>
         </VisualBrush>
     </UserControl.Resources>
@@ -125,18 +116,21 @@
         <idd:ContextDropBehavior Context="{Binding FallbackValue={x:Null}}" Handler="{StaticResource EditorDropHandler}" />
         <behaviors:AttachEditorBehavior />
     </i:Interaction.Behaviors>
-    <Border Background="{DynamicResource TemplateCheckerBoard}">
-        <i:Interaction.Behaviors>
-            <idd:ContextDropBehavior Context="{Binding FallbackValue={x:Null}}" Handler="{StaticResource EditorDropHandler}" />
-        </i:Interaction.Behaviors>
-        <Border ClipToBounds="True">
-            <ScrollViewer x:Name="scrollViewer" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Disabled">
-                <paz:ZoomBorder x:Name="zoomBorder" Stretch="None" ZoomSpeed="1.2" PanButton="Right" EnablePan="{Binding IsToolIdle}" EnableZoom="True" Background="Transparent" ClipToBounds="False" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-                    <Panel HorizontalAlignment="Center" VerticalAlignment="Center" Width="{Binding #presenterControlTemplate.Container.Width}" Height="{Binding #presenterControlTemplate.Container.Height}">
-                        <views:PresenterView x:Name="presenterControlData" ZoomBorder="{Binding #zoomBorder}" Renderer="{Binding PageRenderer}" DataFlow="{Binding DataFlow}" Container="{Binding Project.CurrentContainer}" PresenterType="Data" ClipToBounds="False" />
-                        <views:PresenterView x:Name="presenterControlTemplate" ZoomBorder="{Binding #zoomBorder}" Renderer="{Binding PageRenderer}" DataFlow="{Binding DataFlow}" Container="{Binding Project.CurrentContainer}" PresenterType="Template" ClipToBounds="False" />
-                        <views:PresenterView x:Name="presenterControlEditor" ZoomBorder="{Binding #zoomBorder}" Renderer="{Binding PageRenderer}" DataFlow="{Binding DataFlow}" Container="{Binding Project.CurrentContainer}" PresenterType="Editor" ClipToBounds="False" />
-                        <!--<Panel VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+    <Panel>
+        <Panel Background="#FFF5F5F5" />
+        <Panel Background="{DynamicResource TemplateCheckerBoard}" />
+        <Panel>
+            <i:Interaction.Behaviors>
+                <idd:ContextDropBehavior Context="{Binding FallbackValue={x:Null}}" Handler="{StaticResource EditorDropHandler}" />
+            </i:Interaction.Behaviors>
+            <Panel ClipToBounds="True">
+                <ScrollViewer x:Name="scrollViewer" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Disabled">
+                    <paz:ZoomBorder x:Name="zoomBorder" Stretch="None" ZoomSpeed="1.2" PanButton="Right" EnablePan="{Binding IsToolIdle}" EnableZoom="True" Background="Transparent" ClipToBounds="False" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                        <Panel HorizontalAlignment="Center" VerticalAlignment="Center" Width="{Binding #presenterControlTemplate.Container.Width}" Height="{Binding #presenterControlTemplate.Container.Height}">
+                            <views:PresenterView x:Name="presenterControlData" ZoomBorder="{Binding #zoomBorder}" Renderer="{Binding PageRenderer}" DataFlow="{Binding DataFlow}" Container="{Binding Project.CurrentContainer}" PresenterType="Data" ClipToBounds="False" />
+                            <views:PresenterView x:Name="presenterControlTemplate" ZoomBorder="{Binding #zoomBorder}" Renderer="{Binding PageRenderer}" DataFlow="{Binding DataFlow}" Container="{Binding Project.CurrentContainer}" PresenterType="Template" ClipToBounds="False" />
+                            <views:PresenterView x:Name="presenterControlEditor" ZoomBorder="{Binding #zoomBorder}" Renderer="{Binding PageRenderer}" DataFlow="{Binding DataFlow}" Container="{Binding Project.CurrentContainer}" PresenterType="Editor" ClipToBounds="False" />
+                            <!--<Panel VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
                             <Canvas Background="{x:Null}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
                                 <TextBox x:Name="textEditor"
                                          IsVisible="True"
@@ -164,9 +158,10 @@
                                          MinWidth="0" />
                             </Canvas>
                         </Panel>-->
-                    </Panel>
-                </paz:ZoomBorder>
-            </ScrollViewer>
-        </Border>
-    </Border>
+                        </Panel>
+                    </paz:ZoomBorder>
+                </ScrollViewer>
+            </Panel>
+        </Panel>
+    </Panel>
 </UserControl>
