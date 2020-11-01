@@ -77,7 +77,7 @@
         </Expander>
         <Expander Header="Connectors" IsExpanded="False">
             <Grid RowDefinitions="50*,6,50*">
-                <ListBox x:Name="connectors" Items="{Binding Connectors}" x:DataType="Shapes:ConnectableShape" Grid.Row="0">
+                <ListBox x:Name="connectors" Items="{Binding Connectors}" Grid.Row="0">
                     <ListBox.DataTemplates>
                         <DataTemplate DataType="Shapes:PointShape">
                             <TextBlock Text="{Binding Mode=OneWay, Converter={StaticResource ObjectToTypeStringConverter}}" Background="Transparent" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
