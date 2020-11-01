@@ -30,7 +30,7 @@
                 <TextBox Text="{Binding Height, Mode=TwoWay}" />
             </StackPanel>
         </Grid>
-        <Expander Header="Background" IsExpanded="False">
+        <Expander Header="Background" IsExpanded="True">
             <ContentControl Content="{Binding Background}" />
         </Expander>
         <Expander Header="Grid" IsExpanded="False">
