@@ -128,13 +128,13 @@ namespace Core2D.Renderer.PdfSharp
             double a2 = Math.Atan2(y2 - y1, x2 - x1) * 180.0 / Math.PI;
 
             // Draw start arrow.
-            pt1 = DrawLineArrowInternal(gfx, strokeStartArrow, fillStartArrow, x1, y1, a1, sas);
+            pt1 = DrawLineArrowInternal(gfx, strokeStartArrow, fillStartArrow, x1, y1, a1, sas, line);
 
             // Draw end arrow.
-            pt2 = DrawLineArrowInternal(gfx, strokeEndArrow, fillEndArrow, x2, y2, a2, eas);
+            pt2 = DrawLineArrowInternal(gfx, strokeEndArrow, fillEndArrow, x2, y2, a2, eas, line);
         }
 
-        private static XPoint DrawLineArrowInternal(XGraphics gfx, XPen pen, XBrush brush, double x, double y, double angle, ArrowStyle style)
+        private static XPoint DrawLineArrowInternal(XGraphics gfx, XPen pen, XBrush brush, double x, double y, double angle, ArrowStyle style, BaseShape shape)
         {
             XPoint pt;
             var rt = new XMatrix();
@@ -160,7 +160,7 @@ namespace Core2D.Renderer.PdfSharp
                         var rect = new XRect(x - sx, y - ry, sx, sy);
                         gfx.Save();
                         gfx.RotateAtTransform(angle, c);
-                        DrawRectangleInternal(gfx, brush, pen, style.IsStroked, style.IsFilled, ref rect);
+                        DrawRectangleInternal(gfx, brush, pen, shape.IsStroked, shape.IsFilled, ref rect);
                         gfx.Restore();
                     }
                     break;
@@ -171,7 +171,7 @@ namespace Core2D.Renderer.PdfSharp
                         gfx.Save();
                         gfx.RotateAtTransform(angle, c);
                         var rect = new XRect(x - sx, y - ry, sx, sy);
-                        DrawEllipseInternal(gfx, brush, pen, style.IsStroked, style.IsFilled, ref rect);
+                        DrawEllipseInternal(gfx, brush, pen, shape.IsStroked, shape.IsFilled, ref rect);
                         gfx.Restore();
                     }
                     break;
@@ -183,8 +183,8 @@ namespace Core2D.Renderer.PdfSharp
                         var p21 = rt.Transform(new XPoint(x, y));
                         var p12 = rt.Transform(new XPoint(x - sx, y - sy));
                         var p22 = rt.Transform(new XPoint(x, y));
-                        DrawLineInternal(gfx, pen, style.IsStroked, ref p11, ref p21);
-                        DrawLineInternal(gfx, pen, style.IsStroked, ref p12, ref p22);
+                        DrawLineInternal(gfx, pen, shape.IsStroked, ref p11, ref p21);
+                        DrawLineInternal(gfx, pen, shape.IsStroked, ref p12, ref p22);
                     }
                     break;
             }

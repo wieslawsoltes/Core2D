@@ -11,6 +11,7 @@ namespace Core2D.Renderer
 {
     internal abstract class Marker : IMarker
     {
+        public BaseShape Shape { get; set; }
         public BaseStyle BaseStyle { get; set; }
         public ArrowStyle Style { get; set; }
         public AM.IBrush Brush { get; set; }
@@ -44,12 +45,12 @@ namespace Core2D.Renderer
 
             using var rotationDisposable = context.PushPreTransform(Rotation);
 
-            if (Style.IsFilled)
+            if (Shape.IsFilled)
             {
                 context.FillRectangle(Brush, Rect);
             }
 
-            if (Style.IsStroked)
+            if (Shape.IsStroked)
             {
                 context.DrawRectangle(Pen, Rect);
             }
@@ -66,7 +67,7 @@ namespace Core2D.Renderer
 
             using var rotationDisposable = context.PushPreTransform(Rotation);
 
-            context.DrawGeometry(Style.IsFilled ? Brush : null, Style.IsStroked ? Pen : null, EllipseGeometry);
+            context.DrawGeometry(Shape.IsFilled ? Brush : null, Shape.IsStroked ? Pen : null, EllipseGeometry);
         }
     }
 
@@ -81,7 +82,7 @@ namespace Core2D.Renderer
         {
             var context = dc as AM.DrawingContext;
 
-            if (Style.IsStroked)
+            if (Shape.IsStroked)
             {
                 context.DrawLine(Pen, P11, P21);
                 context.DrawLine(Pen, P12, P22);
@@ -113,6 +114,7 @@ namespace Core2D.Renderer
                     {
                         var marker = new NoneMarker();
 
+                        marker.Shape = Line;
                         marker.BaseStyle = baseStyle;
                         marker.Style = style;
                         marker.Point = new A.Point(x, y);
@@ -128,6 +130,7 @@ namespace Core2D.Renderer
 
                         var marker = new RectangleMarker();
 
+                        marker.Shape = Line;
                         marker.BaseStyle = baseStyle;
                         marker.Style = style;
                         marker.Rotation = AME.MatrixHelper.Rotation(angle, new A.Vector(x, y));
@@ -147,6 +150,7 @@ namespace Core2D.Renderer
 
                         var marker = new EllipseMarker();
 
+                        marker.Shape = Line;
                         marker.BaseStyle = baseStyle;
                         marker.Style = style;
                         marker.Rotation = AME.MatrixHelper.Rotation(angle, new A.Vector(x, y));
@@ -167,6 +171,7 @@ namespace Core2D.Renderer
 
                         var marker = new ArrowMarker();
 
+                        marker.Shape = Line;
                         marker.BaseStyle = baseStyle;
                         marker.Style = style;
                         marker.Rotation = AME.MatrixHelper.Rotation(angle, new A.Vector(x, y));

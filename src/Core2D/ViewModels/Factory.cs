@@ -808,12 +808,11 @@ namespace Core2D
             };
         }
 
-        public ArrowStyle CreateArrowStyle(ArrowType arrowType = ArrowType.None, bool isStroked = true, bool isFilled = false, double radiusX = 5.0, double radiusY = 3.0)
+        public ArrowStyle CreateArrowStyle(ArrowType arrowType = ArrowType.None, double radiusX = 5.0, double radiusY = 3.0)
         {
             return new ArrowStyle()
             {
                 ArrowType = arrowType,
-                IsFilled = isFilled,
                 RadiusX = radiusX,
                 RadiusY = radiusY
             };

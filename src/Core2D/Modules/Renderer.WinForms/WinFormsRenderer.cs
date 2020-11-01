@@ -140,10 +140,10 @@ namespace Core2D.Renderer.WinForms
             float a2 = (float)(Math.Atan2(y2 - y1, x2 - x1) * 180.0 / Math.PI);
 
             // Draw start arrow.
-            pt1 = DrawLineArrowInternal(gfx, strokeStartArrow, fillStartArrow, x1, y1, a1, sas);
+            pt1 = DrawLineArrowInternal(gfx, strokeStartArrow, fillStartArrow, x1, y1, a1, sas, line);
 
             // Draw end arrow.
-            pt2 = DrawLineArrowInternal(gfx, strokeEndArrow, fillEndArrow, x2, y2, a2, eas);
+            pt2 = DrawLineArrowInternal(gfx, strokeEndArrow, fillEndArrow, x2, y2, a2, eas, line);
 
             fillStartArrow.Dispose();
             strokeStartArrow.Dispose();
@@ -152,7 +152,7 @@ namespace Core2D.Renderer.WinForms
             strokeEndArrow.Dispose();
         }
 
-        private static PointF DrawLineArrowInternal(Graphics gfx, Pen pen, Brush brush, float x, float y, float angle, ArrowStyle style)
+        private static PointF DrawLineArrowInternal(Graphics gfx, Pen pen, Brush brush, float x, float y, float angle, ArrowStyle style, BaseShape shape)
         {
             PointF pt;
             var rt = new Matrix();
@@ -179,7 +179,7 @@ namespace Core2D.Renderer.WinForms
                         var rect = new Rect2(x - sx, y - ry, sx, sy);
                         var gs = gfx.Save();
                         gfx.MultiplyTransform(rt);
-                        DrawRectangleInternal(gfx, brush, pen, style.IsStroked, style.IsFilled, ref rect);
+                        DrawRectangleInternal(gfx, brush, pen, shape.IsStroked, shape.IsFilled, ref rect);
                         gfx.Restore(gs);
                     }
                     break;
@@ -192,7 +192,7 @@ namespace Core2D.Renderer.WinForms
                         var gs = gfx.Save();
                         gfx.MultiplyTransform(rt);
                         var rect = new Rect2(x - sx, y - ry, sx, sy);
-                        DrawEllipseInternal(gfx, brush, pen, style.IsStroked, style.IsFilled, ref rect);
+                        DrawEllipseInternal(gfx, brush, pen, shape.IsStroked, shape.IsFilled, ref rect);
                         gfx.Restore(gs);
                     }
                     break;
@@ -213,8 +213,8 @@ namespace Core2D.Renderer.WinForms
                         var p21 = pts[2];
                         var p12 = pts[3];
                         var p22 = pts[4];
-                        DrawLineInternal(gfx, pen, style.IsStroked, ref p11, ref p21);
-                        DrawLineInternal(gfx, pen, style.IsStroked, ref p12, ref p22);
+                        DrawLineInternal(gfx, pen, shape.IsStroked, ref p11, ref p21);
+                        DrawLineInternal(gfx, pen, shape.IsStroked, ref p12, ref p22);
                     }
                     break;
             }

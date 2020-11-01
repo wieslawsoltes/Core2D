@@ -7,8 +7,6 @@ namespace Core2D.Style
     public class ArrowStyle : ObservableObject
     {
         private ArrowType _arrowType;
-        private bool _isStroked;
-        private bool _isFilled;
         private double _radiusX;
         private double _radiusY;
 
@@ -17,20 +15,6 @@ namespace Core2D.Style
         {
             get => _arrowType;
             set => RaiseAndSetIfChanged(ref _arrowType, value);
-        }
-
-        [DataMember(IsRequired = false, EmitDefaultValue = true)]
-        public bool IsStroked
-        {
-            get => _isStroked;
-            set => RaiseAndSetIfChanged(ref _isStroked, value);
-        }
-
-        [DataMember(IsRequired = false, EmitDefaultValue = true)]
-        public bool IsFilled
-        {
-            get => _isFilled;
-            set => RaiseAndSetIfChanged(ref _isFilled, value);
         }
 
         [DataMember(IsRequired = false, EmitDefaultValue = true)]
@@ -47,18 +31,12 @@ namespace Core2D.Style
             set => RaiseAndSetIfChanged(ref _radiusY, value);
         }
 
-        public ArrowStyle() : base()
-        {
-        }
-
         public override object Copy(IDictionary<object, object> shared)
         {
             return new ArrowStyle()
             {
                 Name = this.Name,
                 ArrowType = this.ArrowType,
-                IsStroked = this.IsStroked,
-                IsFilled = this.IsFilled,
                 RadiusX = this.RadiusX,
                 RadiusY = this.RadiusY
             };

@@ -401,34 +401,6 @@ namespace Core2D.Editor
             }
         }
 
-        private void ToggleStartArrowIsStroked(BaseShape shape, IHistory history)
-        {
-            var style = shape.Style;
-            if (style != null && style.StartArrowStyle != null)
-            {
-                var startArrowStyle = style.StartArrowStyle;
-
-                var previous = startArrowStyle.IsStroked;
-                var next = !startArrowStyle.IsStroked;
-                history?.Snapshot(previous, next, (p) => startArrowStyle.IsStroked = p);
-                startArrowStyle.IsStroked = next;
-            }
-        }
-
-        private void ToggleStartArrowIsFilled(BaseShape shape, IHistory history)
-        {
-            var style = shape.Style;
-            if (style != null && style.StartArrowStyle != null)
-            {
-                var startArrowStyle = style.StartArrowStyle;
-
-                var previous = startArrowStyle.IsFilled;
-                var next = !startArrowStyle.IsFilled;
-                history?.Snapshot(previous, next, (p) => startArrowStyle.IsFilled = p);
-                startArrowStyle.IsFilled = next;
-            }
-        }
-
         private void SetStartArrowRadiusX(BaseShape shape, double value, IHistory history)
         {
             var style = shape.Style;
@@ -468,34 +440,6 @@ namespace Core2D.Editor
                 var next = value;
                 history?.Snapshot(previous, next, (p) => endArrowStyle.ArrowType = p);
                 endArrowStyle.ArrowType = next;
-            }
-        }
-
-        private void ToggleEndArrowIsStroked(BaseShape shape, IHistory history)
-        {
-            var style = shape.Style;
-            if (style != null && style.EndArrowStyle != null)
-            {
-                var endArrowStyle = style.EndArrowStyle;
-
-                var previous = endArrowStyle.IsStroked;
-                var next = !endArrowStyle.IsStroked;
-                history?.Snapshot(previous, next, (p) => endArrowStyle.IsStroked = p);
-                endArrowStyle.IsStroked = next;
-            }
-        }
-
-        private void ToggleEndArrowIsFilled(BaseShape shape, IHistory history)
-        {
-            var style = shape.Style;
-            if (style != null && style.EndArrowStyle != null)
-            {
-                var endArrowStyle = style.EndArrowStyle;
-
-                var previous = endArrowStyle.IsFilled;
-                var next = !endArrowStyle.IsFilled;
-                history?.Snapshot(previous, next, (p) => endArrowStyle.IsFilled = p);
-                endArrowStyle.IsFilled = next;
             }
         }
 
@@ -787,28 +731,6 @@ namespace Core2D.Editor
             }
         }
 
-        public void OnStyleToggleStartArrowIsStroked()
-        {
-            var editor = _serviceProvider.GetService<ProjectEditor>();
-            var history = editor.Project?.History;
-
-            foreach (var shape in GetShapes(editor))
-            {
-                ToggleStartArrowIsStroked(shape, history);
-            }
-        }
-
-        public void OnStyleToggleStartArrowIsFilled()
-        {
-            var editor = _serviceProvider.GetService<ProjectEditor>();
-            var history = editor.Project?.History;
-
-            foreach (var shape in GetShapes(editor))
-            {
-                ToggleStartArrowIsFilled(shape, history);
-            }
-        }
-
         public void OnStyleSetStartArrowRadiusX(string radius)
         {
             if (!double.TryParse(radius, _numberStyles, CultureInfo.InvariantCulture, out var value))
@@ -854,32 +776,6 @@ namespace Core2D.Editor
             foreach (var shape in GetShapes(editor))
             {
                 SetEndArrowType(shape, value, history);
-            }
-
-            editor.Project?.CurrentContainer?.InvalidateLayer();
-        }
-
-        public void OnStyleToggleEndArrowIsStroked()
-        {
-            var editor = _serviceProvider.GetService<ProjectEditor>();
-            var history = editor.Project?.History;
-
-            foreach (var shape in GetShapes(editor))
-            {
-                ToggleEndArrowIsStroked(shape, history);
-            }
-
-            editor.Project?.CurrentContainer?.InvalidateLayer();
-        }
-
-        public void OnStyleToggleEndArrowIsFilled()
-        {
-            var editor = _serviceProvider.GetService<ProjectEditor>();
-            var history = editor.Project?.History;
-
-            foreach (var shape in GetShapes(editor))
-            {
-                ToggleEndArrowIsFilled(shape, history);
             }
 
             editor.Project?.CurrentContainer?.InvalidateLayer();

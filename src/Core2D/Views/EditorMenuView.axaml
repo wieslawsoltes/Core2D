@@ -345,8 +345,6 @@
                         <MenuItem Header="_Ellipse" Command="{Binding StyleEditor.OnStyleSetStartArrowType}" CommandParameter="Ellipse" />
                         <MenuItem Header="_Arrow" Command="{Binding StyleEditor.OnStyleSetStartArrowType}" CommandParameter="Arrow" />
                     </MenuItem>
-                    <MenuItem Header="Toggle Is_Stroked" Command="{Binding StyleEditor.OnStyleToggleStartArrowIsStroked}" />
-                    <MenuItem Header="Toggle Is_Filled" Command="{Binding StyleEditor.OnStyleToggleStartArrowIsFilled}" />
                     <MenuItem Header="Radius_X">
                         <MenuItem Header="0" Command="{Binding StyleEditor.OnStyleSetStartArrowRadiusX}" CommandParameter="0" />
                         <MenuItem Header="1" Command="{Binding StyleEditor.OnStyleSetStartArrowRadiusX}" CommandParameter="1" />
@@ -381,8 +379,6 @@
                         <MenuItem Header="_Ellipse" Command="{Binding StyleEditor.OnStyleSetEndArrowType}" CommandParameter="Ellipse" />
                         <MenuItem Header="_Arrow" Command="{Binding StyleEditor.OnStyleSetEndArrowType}" CommandParameter="Arrow" />
                     </MenuItem>
-                    <MenuItem Header="Toggle Is_Stroked" Command="{Binding StyleEditor.OnStyleToggleEndArrowIsStroked}" />
-                    <MenuItem Header="Toggle Is_Filled" Command="{Binding StyleEditor.OnStyleToggleEndArrowIsFilled}" />
                     <MenuItem Header="Radius_X">
                         <MenuItem Header="0" Command="{Binding StyleEditor.OnStyleSetEndArrowRadiusX}" CommandParameter="0" />
                         <MenuItem Header="1" Command="{Binding StyleEditor.OnStyleSetEndArrowRadiusX}" CommandParameter="1" />
