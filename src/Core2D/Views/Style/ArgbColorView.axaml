@@ -8,27 +8,20 @@
              xmlns:Designer="clr-namespace:Core2D.Designer;assembly=Core2D"
              mc:Ignorable="d"
              d:DataContext="{x:Static Designer:DesignerContext.ArgbColor}"
-             d:DesignWidth="250" d:DesignHeight="400"
+             d:DesignWidth="300" d:DesignHeight="400"
              x:DataType="Style:ArgbColor" x:CompileBindings="True">
     <UserControl.Resources>
         <converters:ArgbColorToBrushMultiConverter x:Key="ArgbColorToBrushMultiConverter" />
-        <VisualBrush x:Key="ColorCheckerBoard" TileMode="Tile" Stretch="None" AlignmentX="Left" AlignmentY="Top" SourceRect="0,0,20,20" DestinationRect="0,0,20,20">
+        <VisualBrush x:Key="ColorCheckerBoard" TileMode="Tile" SourceRect="0,0,20,20" DestinationRect="0,0,20,20">
             <VisualBrush.Visual>
-                <StackPanel Orientation="Horizontal">
-                    <StackPanel Orientation="Vertical">
-                        <Rectangle Width="10" Height="10" Fill="DarkGray" />
-                        <Rectangle Width="10" Height="10" Fill="LightGray" />
-                    </StackPanel>
-                    <StackPanel Orientation="Vertical">
-                        <Rectangle Width="10" Height="10" Fill="LightGray" />
-                        <Rectangle Width="10" Height="10" Fill="DarkGray" />
-                    </StackPanel>
-                </StackPanel>
+                <Path Data="M 0,0 L 0,10 L 10,10 L 10,0 Z M 10,10 L 10,20 L 20,20 L 20,10 Z" Fill="LightGray" />
             </VisualBrush.Visual>
         </VisualBrush>
     </UserControl.Resources>
     <DockPanel>
         <Panel Height="30" Margin="{DynamicResource TextControlThemePadding}" DockPanel.Dock="Top">
+            <Border BorderThickness="0" CornerRadius="2" Background="DarkGray" />
+            <Border BorderThickness="0" CornerRadius="2" Background="{DynamicResource ColorCheckerBoard}" />
             <Border BorderThickness="0" CornerRadius="2" Background="{DynamicResource ColorCheckerBoard}" />
             <Border BorderThickness="0" CornerRadius="2">
                 <Border.Background>
@@ -42,10 +35,10 @@
             </Border>
         </Panel>
         <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto" ColumnDefinitions="Auto,*">
-            <Label Content="Red" Margin="{DynamicResource TextControlThemePadding}" VerticalAlignment="Center" Grid.Row="0" Grid.Column="0" />
-            <Label Content="Green" Margin="{DynamicResource TextControlThemePadding}" VerticalAlignment="Center" Grid.Row="1" Grid.Column="0" />
-            <Label Content="Blue" Margin="{DynamicResource TextControlThemePadding}" VerticalAlignment="Center" Grid.Row="2" Grid.Column="0" />
-            <Label Content="Alpha" Margin="{DynamicResource TextControlThemePadding}" VerticalAlignment="Center" Grid.Row="3" Grid.Column="0" />
+            <Label Content="R" Margin="{DynamicResource TextControlThemePadding}" VerticalAlignment="Center" Grid.Row="0" Grid.Column="0" />
+            <Label Content="G" Margin="{DynamicResource TextControlThemePadding}" VerticalAlignment="Center" Grid.Row="1" Grid.Column="0" />
+            <Label Content="B" Margin="{DynamicResource TextControlThemePadding}" VerticalAlignment="Center" Grid.Row="2" Grid.Column="0" />
+            <Label Content="A" Margin="{DynamicResource TextControlThemePadding}" VerticalAlignment="Center" Grid.Row="3" Grid.Column="0" />
             <Slider Value="{Binding R}" Minimum="0" Maximum="255" TickFrequency="1" Margin="{DynamicResource TextControlThemePadding}" Grid.Row="0" Grid.Column="1" />
             <Slider Value="{Binding G}" Minimum="0" Maximum="255" TickFrequency="1" Margin="{DynamicResource TextControlThemePadding}" Grid.Row="1" Grid.Column="1" />
             <Slider Value="{Binding B}" Minimum="0" Maximum="255" TickFrequency="1" Margin="{DynamicResource TextControlThemePadding}" Grid.Row="2" Grid.Column="1" />
