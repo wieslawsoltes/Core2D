@@ -23,10 +23,10 @@
     <Grid RowDefinitions="Auto,Auto,Auto,*,Auto">
         <Grid RowDefinitions="*" ColumnDefinitions="*,Auto" Grid.Row="0">
             <TextBox Text="{Binding CurrentGroupLibrary.Name, Mode=TwoWay}" BorderBrush="Transparent" Background="Transparent" VerticalAlignment="Center" Margin="0,0,0,0" IsVisible="{Binding !!$self.DataContext.CurrentGroupLibrary}" Grid.Column="0" x:CompileBindings="False" />
-            <Menu Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center" x:CompileBindings="False">
-                <MenuItem Header="&#727;" Command="{Binding $parent[TopLevel].DataContext.OnRemoveGroupLibrary}" CommandParameter="{Binding CurrentGroupLibrary}" IsVisible="{Binding !!$self.DataContext.CurrentGroupLibrary}}" />
-                <MenuItem Header="+" Command="{Binding $parent[TopLevel].DataContext.OnAddGroupLibrary}" />
-            </Menu>
+            <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" x:CompileBindings="False">
+                <Button Content="&#727;" Command="{Binding $parent[TopLevel].DataContext.OnRemoveGroupLibrary}" CommandParameter="{Binding CurrentGroupLibrary}" IsVisible="{Binding !!$self.DataContext.CurrentGroupLibrary}}" BorderBrush="Transparent" Background="Transparent" Padding="12,4,12,4" />
+                <Button Content="+" Command="{Binding $parent[TopLevel].DataContext.OnAddGroupLibrary}" BorderBrush="Transparent" Background="Transparent" Padding="12,4,12,4" />
+            </StackPanel>
         </Grid>
         <ComboBox Items="{Binding GroupLibraries}" SelectedItem="{Binding CurrentGroupLibrary, Mode=TwoWay}" Grid.Row="1" IsVisible="{Binding !!$self.DataContext.CurrentGroupLibrary}" HorizontalAlignment="Stretch" x:CompileBindings="False">
             <ComboBox.DataTemplates>
@@ -35,11 +35,11 @@
                 </DataTemplate>
             </ComboBox.DataTemplates>
         </ComboBox>
-        <Menu Grid.Row="2" HorizontalAlignment="Right" IsVisible="{Binding !!$self.DataContext.CurrentGroupLibrary}" x:CompileBindings="False">
-            <MenuItem Header="insert" Command="{Binding $parent[TopLevel].DataContext.OnInsertGroup}" CommandParameter="{Binding CurrentGroupLibrary.Selected}" IsVisible="{Binding !!CurrentGroupLibrary.Selected}" />
-            <MenuItem Header="&#727;" Command="{Binding $parent[TopLevel].DataContext.OnRemoveGroup}" CommandParameter="{Binding CurrentGroupLibrary.Selected}" IsVisible="{Binding !!CurrentGroupLibrary.Selected}" />
-            <MenuItem Header="+" Command="{Binding $parent[TopLevel].DataContext.OnAddGroup}" CommandParameter="{Binding CurrentGroupLibrary}" IsVisible="{Binding $parent[TopLevel].DataContext.Project.CurrentContainer.CurrentShape, Converter={StaticResource IsGroupConverter}}" />
-        </Menu>
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" IsVisible="{Binding !!$self.DataContext.CurrentGroupLibrary}" x:CompileBindings="False">
+            <Button Content="insert" Command="{Binding $parent[TopLevel].DataContext.OnInsertGroup}" CommandParameter="{Binding CurrentGroupLibrary.Selected}" IsVisible="{Binding !!CurrentGroupLibrary.Selected}" BorderBrush="Transparent" Background="Transparent" Padding="12,4,12,4" />
+            <Button Content="&#727;" Command="{Binding $parent[TopLevel].DataContext.OnRemoveGroup}" CommandParameter="{Binding CurrentGroupLibrary.Selected}" IsVisible="{Binding !!CurrentGroupLibrary.Selected}" BorderBrush="Transparent" Background="Transparent" Padding="12,4,12,4" />
+            <Button Content="+" Command="{Binding $parent[TopLevel].DataContext.OnAddGroup}" CommandParameter="{Binding CurrentGroupLibrary}" IsVisible="{Binding $parent[TopLevel].DataContext.Project.CurrentContainer.CurrentShape, Converter={StaticResource IsGroupConverter}}" BorderBrush="Transparent" Background="Transparent" Padding="12,4,12,4" />
+        </StackPanel>
         <ListBox x:Name="groups" Items="{Binding CurrentGroupLibrary.Items}" SelectedItem="{Binding CurrentGroupLibrary.Selected, Mode=TwoWay}" Grid.Row="3">
             <i:Interaction.Behaviors>
                 <idd:ContextDropBehavior Context="{Binding CurrentGroupLibrary, FallbackValue={x:Null}}" Handler="{StaticResource GroupsListBoxDropHandler}" />

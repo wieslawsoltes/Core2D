@@ -19,12 +19,12 @@
         <handlers:TemplatesListBoxDropHandler x:Key="TemplatesListBoxDropHandler" />
     </UserControl.Resources>
     <Grid RowDefinitions="Auto,*,Auto">
-        <Menu Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Center" x:CompileBindings="False">
-            <MenuItem Header="apply" Command="{Binding $parent[TopLevel].DataContext.OnApplyTemplate}" CommandParameter="{Binding CurrentTemplate}" IsVisible="{Binding !!#templates.SelectedItem}" />
-            <MenuItem Header="edit" Command="{Binding $parent[TopLevel].DataContext.OnEditTemplate}" CommandParameter="{Binding CurrentTemplate}" IsVisible="{Binding !!#templates.SelectedItem}" />
-            <MenuItem Header="&#727;" Command="{Binding $parent[TopLevel].DataContext.OnRemoveTemplate}" CommandParameter="{Binding CurrentTemplate}" IsVisible="{Binding !!#templates.SelectedItem}" />
-            <MenuItem Header="+" Command="{Binding $parent[TopLevel].DataContext.OnAddTemplate}" />
-        </Menu>
+        <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" x:CompileBindings="False">
+            <Button Content="apply" Command="{Binding $parent[TopLevel].DataContext.OnApplyTemplate}" CommandParameter="{Binding CurrentTemplate}" IsVisible="{Binding !!#templates.SelectedItem}" BorderBrush="Transparent" Background="Transparent" Padding="12,4,12,4" />
+            <Button Content="edit" Command="{Binding $parent[TopLevel].DataContext.OnEditTemplate}" CommandParameter="{Binding CurrentTemplate}" IsVisible="{Binding !!#templates.SelectedItem}" BorderBrush="Transparent" Background="Transparent" Padding="12,4,12,4" />
+            <Button Content="&#727;" Command="{Binding $parent[TopLevel].DataContext.OnRemoveTemplate}" CommandParameter="{Binding CurrentTemplate}" IsVisible="{Binding !!#templates.SelectedItem}" BorderBrush="Transparent" Background="Transparent" Padding="12,4,12,4" />
+            <Button Content="+" Command="{Binding $parent[TopLevel].DataContext.OnAddTemplate}" BorderBrush="Transparent" Background="Transparent" Padding="12,4,12,4" />
+        </StackPanel>
         <ListBox x:Name="templates" Items="{Binding Templates}" SelectedItem="{Binding CurrentTemplate, Mode=TwoWay}" Grid.Row="1">
             <i:Interaction.Behaviors>
                 <idd:ContextDropBehavior Context="{Binding FallbackValue={x:Null}}" Handler="{StaticResource TemplatesListBoxDropHandler}" />

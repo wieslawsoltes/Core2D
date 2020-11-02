@@ -19,11 +19,11 @@
             <DockPanel>
                 <Grid RowDefinitions="*" ColumnDefinitions="*,Auto" DockPanel.Dock="Top">
                     <TextBox x:Name="filterRecordsText" Text="" Watermark="Filter records" BorderBrush="Transparent" Background="Transparent" VerticalAlignment="Center" Margin="0,0,0,0" Grid.Column="0" x:CompileBindings="False" />
-                    <Menu Grid.Column="1" HorizontalAlignment="Right">
-                        <MenuItem Header="apply" Command="{Binding $parent[TopLevel].DataContext.OnApplyRecord}" CommandParameter="{Binding CurrentRecord}" IsVisible="{Binding !!CurrentRecord}" x:CompileBindings="False" />
-                        <MenuItem Header="&#727;" Command="{Binding $parent[TopLevel].DataContext.OnRemoveRecord}" CommandParameter="{Binding CurrentRecord}" IsVisible="{Binding !!CurrentRecord}" x:CompileBindings="False" />
-                        <MenuItem Header="+" Command="{Binding $parent[TopLevel].DataContext.OnAddRecord}" CommandParameter="{Binding}" x:CompileBindings="False" />
-                    </Menu>
+                    <StackPanel Grid.Column="1"  Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
+                        <Button Content="apply" Command="{Binding $parent[TopLevel].DataContext.OnApplyRecord}" CommandParameter="{Binding CurrentRecord}" IsVisible="{Binding !!CurrentRecord}" BorderBrush="Transparent" Background="Transparent" Padding="12,4,12,4" x:CompileBindings="False" />
+                        <Button Content="&#727;" Command="{Binding $parent[TopLevel].DataContext.OnRemoveRecord}" CommandParameter="{Binding CurrentRecord}" IsVisible="{Binding !!CurrentRecord}" BorderBrush="Transparent" Background="Transparent" Padding="12,4,12,4" x:CompileBindings="False" />
+                        <Button Content="+" Command="{Binding $parent[TopLevel].DataContext.OnAddRecord}" CommandParameter="{Binding}" BorderBrush="Transparent" Background="Transparent" Padding="12,4,12,4" x:CompileBindings="False" />
+                    </StackPanel>
                 </Grid>
                 <DataGrid x:Name="rowsDataGrid" SelectedItem="{Binding CurrentRecord, Mode=TwoWay}" SelectionMode="Single" AutoGenerateColumns="False" IsReadOnly="False" CanUserReorderColumns="False" CanUserResizeColumns="True" CanUserSortColumns="False" BorderThickness="0" RowBackground="Transparent">
                     <i:Interaction.Behaviors>
@@ -41,10 +41,10 @@
         </Expander>
         <Expander Header="Columns" IsExpanded="False">
             <DockPanel>
-                <Menu HorizontalAlignment="Right" DockPanel.Dock="Top">
-                    <MenuItem Header="&#727;" Command="{Binding $parent[TopLevel].DataContext.OnRemoveColumn}" CommandParameter="{Binding #columnsDataGrid.SelectedItem}" x:CompileBindings="False" />
-                    <MenuItem Header="+" Command="{Binding $parent[TopLevel].DataContext.OnAddColumn}" CommandParameter="{Binding}" x:CompileBindings="False" />
-                </Menu>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" DockPanel.Dock="Top">
+                    <Button Content="&#727;" Command="{Binding $parent[TopLevel].DataContext.OnRemoveColumn}" CommandParameter="{Binding #columnsDataGrid.SelectedItem}" BorderBrush="Transparent" Background="Transparent" Padding="12,4,12,4" x:CompileBindings="False" />
+                    <Button Content="+" Command="{Binding $parent[TopLevel].DataContext.OnAddColumn}" CommandParameter="{Binding}" BorderBrush="Transparent" Background="Transparent" Padding="12,4,12,4" x:CompileBindings="False" />
+                </StackPanel>
                 <DataGrid x:Name="columnsDataGrid" Items="{Binding Columns}" SelectionMode="Single" AutoGenerateColumns="False" IsReadOnly="False" CanUserReorderColumns="False" CanUserResizeColumns="True" CanUserSortColumns="False" BorderThickness="0" RowBackground="Transparent">
                     <i:Interaction.Behaviors>
                         <idd:TypedDragBehavior DataType="{x:Type Data:Column}" />

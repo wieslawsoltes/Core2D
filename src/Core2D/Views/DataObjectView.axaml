@@ -12,17 +12,17 @@
     <StackPanel>
         <Expander Header="Record" IsExpanded="True">
             <DockPanel IsVisible="{Binding !!Record}">
-                <Menu HorizontalAlignment="Right" IsVisible="{Binding !!Record}" DockPanel.Dock="Top">
-                    <MenuItem Header="&#727;" Command="{Binding $parent[TopLevel].DataContext.OnResetRecord}" CommandParameter="{Binding}" IsVisible="{Binding !!Record}" x:CompileBindings="False" />
-                </Menu>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" IsVisible="{Binding !!Record}" DockPanel.Dock="Top">
+                    <Button Content="&#727;" Command="{Binding $parent[TopLevel].DataContext.OnResetRecord}" CommandParameter="{Binding}" IsVisible="{Binding !!Record}" BorderBrush="Transparent" Background="Transparent" Padding="12,4,12,4" x:CompileBindings="False" />
+                </StackPanel>
                 <ContentControl Content="{Binding Record}" />
             </DockPanel>
         </Expander>
         <Expander Header="Properties" IsExpanded="True">
             <DockPanel>
-                <Menu HorizontalAlignment="Right" DockPanel.Dock="Top">
-                    <MenuItem Header="+" Command="{Binding $parent[TopLevel].DataContext.OnAddProperty}" CommandParameter="{Binding}" x:CompileBindings="False" />
-                </Menu>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" DockPanel.Dock="Top">
+                    <Button Content="+" Command="{Binding $parent[TopLevel].DataContext.OnAddProperty}" CommandParameter="{Binding}" BorderBrush="Transparent" Background="Transparent" Padding="12,4,12,4" x:CompileBindings="False" />
+                </StackPanel>
                 <Grid RowDefinitions="Auto,*" ColumnDefinitions="50*,Auto,50*" IsVisible="{Binding !!Properties.Length}">
                     <Label Content="Name" Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" />
                     <ItemsControl VerticalAlignment="Stretch" Grid.Column="0" Grid.Row="1" Items="{Binding Properties}">

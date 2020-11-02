@@ -22,13 +22,13 @@
     </UserControl.Resources>
     <Grid RowDefinitions="50*,6,50*">
         <Grid RowDefinitions="Auto,*,Auto" Grid.Row="0">
-            <Menu Grid.Row="0" HorizontalAlignment="Right" x:CompileBindings="False">
-                <MenuItem Header="reset" Command="{Binding $parent[TopLevel].DataContext.OnResetRepl}" />
-                <MenuItem Header="repl" Command="{Binding $parent[TopLevel].DataContext.OnExecuteRepl}" CommandParameter="{Binding CurrentScript.Code}" IsVisible="{Binding !!#scripts.SelectedItem}" />
-                <MenuItem Header="execute" Command="{Binding $parent[TopLevel].DataContext.OnExecuteCode}" CommandParameter="{Binding CurrentScript.Code}" IsVisible="{Binding !!#scripts.SelectedItem}" />
-                <MenuItem Header="&#727;" Command="{Binding $parent[TopLevel].DataContext.OnRemoveScript}" CommandParameter="{Binding CurrentScript}" IsVisible="{Binding !!#scripts.SelectedItem}" />
-                <MenuItem Header="+" Command="{Binding $parent[TopLevel].DataContext.OnAddScript}" />
-            </Menu>
+            <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" x:CompileBindings="False">
+                <Button Content="reset" Command="{Binding $parent[TopLevel].DataContext.OnResetRepl}" BorderBrush="Transparent" Background="Transparent" Padding="12,4,12,4" />
+                <Button Content="repl" Command="{Binding $parent[TopLevel].DataContext.OnExecuteRepl}" CommandParameter="{Binding CurrentScript.Code}" IsVisible="{Binding !!#scripts.SelectedItem}" BorderBrush="Transparent" Background="Transparent" Padding="12,4,12,4" />
+                <Button Content="execute" Command="{Binding $parent[TopLevel].DataContext.OnExecuteCode}" CommandParameter="{Binding CurrentScript.Code}" IsVisible="{Binding !!#scripts.SelectedItem}" BorderBrush="Transparent" Background="Transparent" Padding="12,4,12,4" />
+                <Button Content="&#727;" Command="{Binding $parent[TopLevel].DataContext.OnRemoveScript}" CommandParameter="{Binding CurrentScript}" IsVisible="{Binding !!#scripts.SelectedItem}" BorderBrush="Transparent" Background="Transparent" Padding="12,4,12,4" />
+                <Button Content="+" Command="{Binding $parent[TopLevel].DataContext.OnAddScript}" BorderBrush="Transparent" Background="Transparent" Padding="12,4,12,4" />
+            </StackPanel>
             <ListBox x:Name="scripts" Items="{Binding Scripts}" SelectedItem="{Binding CurrentScript, Mode=TwoWay}" Grid.Row="1">
                 <i:Interaction.Behaviors>
                     <idd:ContextDropBehavior Context="{Binding FallbackValue={x:Null}}" Handler="{StaticResource ScriptsListBoxDropHandler}" />

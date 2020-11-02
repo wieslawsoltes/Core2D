@@ -22,10 +22,10 @@
     <Grid RowDefinitions="Auto,Auto,Auto,*,Auto">
         <Grid RowDefinitions="*" ColumnDefinitions="*,Auto" Grid.Row="0">
             <TextBox Text="{Binding CurrentStyleLibrary.Name, Mode=TwoWay}" BorderBrush="Transparent" Background="Transparent" VerticalAlignment="Center" Margin="0,0,0,0" IsVisible="{Binding !!$self.DataContext.CurrentStyleLibrary}" Grid.Column="0" x:CompileBindings="False" />
-            <Menu Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center" x:CompileBindings="False">
-                <MenuItem Header="&#727;" Command="{Binding $parent[TopLevel].DataContext.OnRemoveStyleLibrary}" CommandParameter="{Binding CurrentStyleLibrary}" IsVisible="{Binding !!$self.DataContext.CurrentStyleLibrary}" />
-                <MenuItem Header="+" Command="{Binding $parent[TopLevel].DataContext.OnAddStyleLibrary}" />
-            </Menu>
+            <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" x:CompileBindings="False">
+                <Button Content="&#727;" Command="{Binding $parent[TopLevel].DataContext.OnRemoveStyleLibrary}" CommandParameter="{Binding CurrentStyleLibrary}" IsVisible="{Binding !!$self.DataContext.CurrentStyleLibrary}" BorderBrush="Transparent" Background="Transparent" Padding="12,4,12,4" />
+                <Button Content="+" Command="{Binding $parent[TopLevel].DataContext.OnAddStyleLibrary}" BorderBrush="Transparent" Background="Transparent" Padding="12,4,12,4" />
+            </StackPanel>
         </Grid>
         <ComboBox Items="{Binding StyleLibraries}" SelectedItem="{Binding CurrentStyleLibrary, Mode=TwoWay}" Grid.Row="1" IsVisible="{Binding !!$self.DataContext.CurrentStyleLibrary}" HorizontalAlignment="Stretch" x:CompileBindings="False">
             <ComboBox.DataTemplates>
@@ -34,11 +34,11 @@
                 </DataTemplate>
             </ComboBox.DataTemplates>
         </ComboBox>
-        <Menu Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Center" IsVisible="{Binding !!$self.DataContext.CurrentStyleLibrary}" x:CompileBindings="False">
-            <MenuItem Header="apply" Command="{Binding $parent[TopLevel].DataContext.OnApplyStyle}" CommandParameter="{Binding CurrentStyleLibrary.Selected}" IsVisible="{Binding !!CurrentStyleLibrary.Selected}" />
-            <MenuItem Header="&#727;" Command="{Binding $parent[TopLevel].DataContext.OnRemoveStyle}" CommandParameter="{Binding CurrentStyleLibrary.Selected}" IsVisible="{Binding !!CurrentStyleLibrary.Selected}" />
-            <MenuItem Header="+" Command="{Binding $parent[TopLevel].DataContext.OnAddStyle}" CommandParameter="{Binding CurrentStyleLibrary}" />
-        </Menu>
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" IsVisible="{Binding !!$self.DataContext.CurrentStyleLibrary}" x:CompileBindings="False">
+            <Button Content="apply" Command="{Binding $parent[TopLevel].DataContext.OnApplyStyle}" CommandParameter="{Binding CurrentStyleLibrary.Selected}" IsVisible="{Binding !!CurrentStyleLibrary.Selected}" BorderBrush="Transparent" Background="Transparent" Padding="12,4,12,4" />
+            <Button Content="&#727;" Command="{Binding $parent[TopLevel].DataContext.OnRemoveStyle}" CommandParameter="{Binding CurrentStyleLibrary.Selected}" IsVisible="{Binding !!CurrentStyleLibrary.Selected}" BorderBrush="Transparent" Background="Transparent" Padding="12,4,12,4" />
+            <Button Content="+" Command="{Binding $parent[TopLevel].DataContext.OnAddStyle}" CommandParameter="{Binding CurrentStyleLibrary}" BorderBrush="Transparent" Background="Transparent" Padding="12,4,12,4" />
+        </StackPanel>
         <ListBox x:Name="styles" Items="{Binding CurrentStyleLibrary.Items}" SelectedItem="{Binding CurrentStyleLibrary.Selected, Mode=TwoWay}" Grid.Row="3">
             <i:Interaction.Behaviors>
                 <idd:ContextDropBehavior Context="{Binding CurrentStyleLibrary, FallbackValue={x:Null}}" Handler="{StaticResource StylesListBoxDropHandler}" />
