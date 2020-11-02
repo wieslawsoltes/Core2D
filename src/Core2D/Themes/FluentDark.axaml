@@ -1,12 +1,12 @@
-﻿<Styles xmlns="https://github.com/avaloniaui" 
+﻿<Styles xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-    <StyleInclude Source="avares://Avalonia.Themes.Fluent/Accents/FluentDark.xaml"/>
-    <StyleInclude Source="avares://Avalonia.Themes.Fluent/DensityStyles/Compact.xaml"/>
+    <StyleInclude Source="avares://Avalonia.Themes.Fluent/Accents/FluentDark.xaml" />
+    <StyleInclude Source="avares://Avalonia.Themes.Fluent/DensityStyles/Compact.xaml" />
     <Style>
         <Style.Resources>
-            <SolidColorBrush x:Key="IconTransparentBrush" Color="#00000000"/>
-            <SolidColorBrush x:Key="IconAccentBrush1" Color="#FFA0A0A0"/>
-            <SolidColorBrush x:Key="IconAccentBrush2" Color="#80A0A0A0"/>
+            <SolidColorBrush x:Key="IconTransparentBrush" Color="#00000000" />
+            <SolidColorBrush x:Key="IconAccentBrush1" Color="#FFA0A0A0" />
+            <SolidColorBrush x:Key="IconAccentBrush2" Color="#80A0A0A0" />
         </Style.Resources>
     </Style>
     <Style>
@@ -19,15 +19,19 @@
         <Setter Property="HorizontalAlignment" Value="Stretch" />
     </Style>
     <Style Selector="ListBoxItem">
-        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+        <Setter Property="Padding" Value="0,0,0,0" />
+    </Style>
+    <Style Selector="ListBoxItem TextBlock">
+        <Setter Property="Padding" Value="12,9,12,12" />
     </Style>
     <Style Selector="TabControl">
-        <Setter Property="Margin" Value="0,0,0,0"/>
-        <Setter Property="Padding" Value="0,0,0,0"/>
+        <Setter Property="Margin" Value="0,0,0,0" />
+        <Setter Property="Padding" Value="0,0,0,0" />
     </Style>
     <Style Selector="TabItem">
-        <Setter Property="FontWeight" Value="Normal"/>
-        <Setter Property="Padding" Value="6,0,6,0"/>
+        <Setter Property="FontWeight" Value="Normal" />
+        <Setter Property="Padding" Value="6,0,6,0" />
     </Style>
     <Style Selector="TreeView">
         <Setter Property="Background" Value="{DynamicResource SystemControlBackgroundChromeMediumLowBrush}" />
