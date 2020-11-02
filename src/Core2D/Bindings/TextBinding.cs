@@ -90,7 +90,7 @@ namespace Core2D.Bindings
                         }
                     }
 
-                    // Try to bind to external Properties database (e.g. Container.Data.Properties) using Text property as Property.Name name.
+                    // Try to bind to external Properties database (e.g. Container.Properties) using Text property as Property.Name name.
                     if (properties != null && properties.Length > 0)
                     {
                         bool success = GetBindingValue(properties, binding.Path, out string value);
@@ -102,7 +102,7 @@ namespace Core2D.Bindings
                         }
                     }
 
-                    // Try to bind to internal Properties database (e.g. Data.Properties) using Text property as Property.Name name.
+                    // Try to bind to internal Properties database (e.g. Properties) using Text property as Property.Name name.
                     if (shape.Properties != null && shape.Properties.Length > 0)
                     {
                         bool success = GetBindingValue(shape.Properties, binding.Path, out string value);
