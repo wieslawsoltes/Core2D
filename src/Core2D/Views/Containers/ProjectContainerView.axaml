@@ -55,7 +55,7 @@
             </TreeView.Styles>
             <TreeView.DataTemplates>
                 <TreeDataTemplate DataType="Containers:DocumentContainer" ItemsSource="{Binding Pages}" x:CompileBindings="False">
-                    <Grid Background="Transparent">
+                    <StackPanel Orientation="Horizontal" Background="Transparent">
                         <i:Interaction.Behaviors>
                             <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}" />
                         </i:Interaction.Behaviors>
@@ -77,10 +77,10 @@
                                 </ContextMenu>
                             </TextBlock.ContextMenu>
                         </TextBlock>
-                    </Grid>
+                    </StackPanel>
                 </TreeDataTemplate>
                 <TreeDataTemplate DataType="Containers:PageContainer" ItemsSource="{Binding Layers}" x:CompileBindings="False">
-                    <Grid x:Name="root" Background="Transparent">
+                    <StackPanel Orientation="Horizontal" Background="Transparent">
                         <i:Interaction.Behaviors>
                             <iac:BindTagToVisualRootDataContextBehavior />
                             <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}" />
@@ -111,7 +111,7 @@
                                 </ContextMenu>
                             </TextBlock.ContextMenu>
                         </TextBlock>
-                    </Grid>
+                    </StackPanel>
                 </TreeDataTemplate>
                 <TreeDataTemplate DataType="Containers:LayerContainer" ItemsSource="{Binding Shapes}" x:CompileBindings="False">
                     <StackPanel Orientation="Horizontal" Background="Transparent">
@@ -136,7 +136,7 @@
                     </StackPanel>
                 </TreeDataTemplate>
                 <DataTemplate DataType="Shapes:BaseShape">
-                    <Grid x:Name="root" Background="Transparent">
+                    <StackPanel Orientation="Horizontal" Background="Transparent">
                         <i:Interaction.Behaviors>
                             <iac:BindTagToVisualRootDataContextBehavior />
                             <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}" />
@@ -154,7 +154,7 @@
                                 </ContextMenu>
                             </TextBlock.ContextMenu>
                         </TextBlock>
-                    </Grid>
+                    </StackPanel>
                 </DataTemplate>
             </TreeView.DataTemplates>
         </TreeView>
