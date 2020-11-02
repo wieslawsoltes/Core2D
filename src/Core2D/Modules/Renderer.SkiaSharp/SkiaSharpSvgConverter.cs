@@ -56,8 +56,10 @@ namespace Core2D.Renderer.SkiaSharp
                 default:
                 case SP.StrokeCap.Butt:
                     return LineCap.Flat;
+
                 case SP.StrokeCap.Round:
                     return LineCap.Round;
+
                 case SP.StrokeCap.Square:
                     return LineCap.Square;
             }
@@ -70,8 +72,10 @@ namespace Core2D.Renderer.SkiaSharp
                 default:
                 case SP.TextAlign.Left:
                     return TextHAlignment.Left;
+
                 case SP.TextAlign.Center:
                     return TextHAlignment.Center;
+
                 case SP.TextAlign.Right:
                     return TextHAlignment.Right;
             }
@@ -92,15 +96,19 @@ namespace Core2D.Renderer.SkiaSharp
                     style.Stroke = ToArgbColor(colorShader, factory);
                     style.Fill = ToArgbColor(colorShader, factory);
                     break;
+
                 case SP.LinearGradientShader linearGradientShader:
                     // TODO:
                     break;
+
                 case SP.TwoPointConicalGradientShader twoPointConicalGradientShader:
                     // TODO:
                     break;
+
                 case SP.PictureShader pictureShader:
                     // TODO:
                     break;
+
                 default:
                     break;
             }
@@ -197,6 +205,7 @@ namespace Core2D.Renderer.SkiaSharp
                             context.BeginFigure(point, false);
                         }
                         break;
+
                     case SP.LineToPathCommand lineToPathCommand:
                         {
                             if (endFigure == false)
@@ -210,6 +219,7 @@ namespace Core2D.Renderer.SkiaSharp
                             context.LineTo(point);
                         }
                         break;
+
                     case SP.ArcToPathCommand arcToPathCommand:
                         {
                             if (endFigure == false)
@@ -229,6 +239,7 @@ namespace Core2D.Renderer.SkiaSharp
                             context.ArcTo(point, size, rotationAngle, isLargeArc, sweep);
                         }
                         break;
+
                     case SP.QuadToPathCommand quadToPathCommand:
                         {
                             if (endFigure == false)
@@ -245,6 +256,7 @@ namespace Core2D.Renderer.SkiaSharp
                             context.QuadraticBezierTo(control, endPoint);
                         }
                         break;
+
                     case SP.CubicToPathCommand cubicToPathCommand:
                         {
                             if (endFigure == false)
@@ -264,6 +276,7 @@ namespace Core2D.Renderer.SkiaSharp
                             context.CubicBezierTo(point1, point2, point3);
                         }
                         break;
+
                     case SP.ClosePathCommand _:
                         {
                             if (endFigure == false)
@@ -279,6 +292,7 @@ namespace Core2D.Renderer.SkiaSharp
                             context.SetClosedState(true);
                         }
                         break;
+
                     default:
                         break;
                 }
@@ -338,36 +352,43 @@ namespace Core2D.Renderer.SkiaSharp
                             // TODO:
                         }
                         break;
+
                     case SP.ClipRectCanvasCommand clipRectCanvasCommand:
                         {
                             // TODO:
                         }
                         break;
+
                     case SP.SaveCanvasCommand _:
                         {
                             // TODO:
                         }
                         break;
+
                     case SP.RestoreCanvasCommand _:
                         {
                             // TODO:
                         }
                         break;
+
                     case SP.SetMatrixCanvasCommand setMatrixCanvasCommand:
                         {
                             // TODO:
                         }
                         break;
+
                     case SP.SaveLayerCanvasCommand saveLayerCanvasCommand:
                         {
                             // TODO:
                         }
                         break;
+
                     case SP.DrawImageCanvasCommand drawImageCanvasCommand:
                         {
                             // TODO:
                         }
                         break;
+
                     case SP.DrawPathCanvasCommand drawPathCanvasCommand:
                         {
                             if (drawPathCanvasCommand.Path != null && drawPathCanvasCommand.Paint != null)
@@ -394,11 +415,13 @@ namespace Core2D.Renderer.SkiaSharp
                                                 success = true;
                                             }
                                             break;
+
                                         case SP.AddRoundRectPathCommand addRoundRectPathCommand:
                                             {
                                                 // TODO:
                                             }
                                             break;
+
                                         case SP.AddOvalPathCommand addOvalPathCommand:
                                             {
                                                 var style = ToStyle(drawPathCanvasCommand.Paint, factory);
@@ -414,6 +437,7 @@ namespace Core2D.Renderer.SkiaSharp
                                                 success = true;
                                             }
                                             break;
+
                                         case SP.AddCirclePathCommand addCirclePathCommand:
                                             {
                                                 var style = ToStyle(drawPathCanvasCommand.Paint, factory);
@@ -432,6 +456,7 @@ namespace Core2D.Renderer.SkiaSharp
                                                 success = true;
                                             }
                                             break;
+
                                         case SP.AddPolyPathCommand addPolyPathCommand:
                                             {
                                                 if (addPolyPathCommand.Points != null)
@@ -497,11 +522,13 @@ namespace Core2D.Renderer.SkiaSharp
                             }
                         }
                         break;
+
                     case SP.DrawTextBlobCanvasCommand drawTextBlobCanvasCommand:
                         {
                             // TODO:
                         }
                         break;
+
                     case SP.DrawTextCanvasCommand drawTextCanvasCommand:
                         {
                             if (drawTextCanvasCommand.Paint != null)
@@ -517,11 +544,13 @@ namespace Core2D.Renderer.SkiaSharp
                             }
                         }
                         break;
+
                     case SP.DrawTextOnPathCanvasCommand drawTextOnPathCanvasCommand:
                         {
                             // TODO:
                         }
                         break;
+
                     default:
                         break;
                 }
