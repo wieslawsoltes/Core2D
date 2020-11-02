@@ -18,6 +18,7 @@
              d:DesignWidth="250" d:DesignHeight="400"
              x:DataType="Containers:ProjectContainer" x:CompileBindings="True">
     <UserControl.Resources>
+        <converters:BaseShapeIconConverter x:Key="BaseShapeIconConverter" />
         <converters:ObjectToTypeStringConverter x:Key="ObjectToTypeStringConverter" />
         <handlers:ProjectTreeViewDropHandler x:Key="ProjectTreeViewDropHandler" />
     </UserControl.Resources>
@@ -59,24 +60,23 @@
                         <i:Interaction.Behaviors>
                             <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}" />
                         </i:Interaction.Behaviors>
-                        <TextBlock Text="{Binding Name}" Background="Transparent">
-                            <TextBlock.ContextMenu>
-                                <ContextMenu x:CompileBindings="False">
-                                    <MenuItem Header="_Add Page" Command="{Binding $parent[TopLevel].DataContext.OnAddPage}" CommandParameter="{Binding Mode=OneWay}" />
-                                    <Separator />
-                                    <MenuItem Header="Insert Document Bef_ore" Command="{Binding $parent[TopLevel].DataContext.OnInsertDocumentBefore}" CommandParameter="{Binding Mode=OneWay}" />
-                                    <MenuItem Header="Insert Document Aft_er" Command="{Binding $parent[TopLevel].DataContext.OnInsertDocumentAfter}" CommandParameter="{Binding Mode=OneWay}" />
-                                    <Separator />
-                                    <MenuItem Header="Cu_t" Command="{Binding $parent[TopLevel].DataContext.OnCut}" CommandParameter="{Binding Mode=OneWay}" />
-                                    <MenuItem Header="_Copy" Command="{Binding $parent[TopLevel].DataContext.OnCopy}" CommandParameter="{Binding Mode=OneWay}" />
-                                    <MenuItem Header="_Paste" Command="{Binding $parent[TopLevel].DataContext.OnPaste}" CommandParameter="{Binding Mode=OneWay}" />
-                                    <Separator />
-                                    <MenuItem Header="_Delete" Command="{Binding $parent[TopLevel].DataContext.OnDelete}" CommandParameter="{Binding Mode=OneWay}" />
-                                    <Separator />
-                                    <MenuItem Header="E_xport" Command="{Binding $parent[TopLevel].DataContext.Platform.OnExport}" CommandParameter="{Binding Mode=OneWay}" />
-                                </ContextMenu>
-                            </TextBlock.ContextMenu>
-                        </TextBlock>
+                        <StackPanel.ContextMenu>
+                            <ContextMenu x:CompileBindings="False">
+                                <MenuItem Header="_Add Page" Command="{Binding $parent[TopLevel].DataContext.OnAddPage}" CommandParameter="{Binding Mode=OneWay}" />
+                                <Separator />
+                                <MenuItem Header="Insert Document Bef_ore" Command="{Binding $parent[TopLevel].DataContext.OnInsertDocumentBefore}" CommandParameter="{Binding Mode=OneWay}" />
+                                <MenuItem Header="Insert Document Aft_er" Command="{Binding $parent[TopLevel].DataContext.OnInsertDocumentAfter}" CommandParameter="{Binding Mode=OneWay}" />
+                                <Separator />
+                                <MenuItem Header="Cu_t" Command="{Binding $parent[TopLevel].DataContext.OnCut}" CommandParameter="{Binding Mode=OneWay}" />
+                                <MenuItem Header="_Copy" Command="{Binding $parent[TopLevel].DataContext.OnCopy}" CommandParameter="{Binding Mode=OneWay}" />
+                                <MenuItem Header="_Paste" Command="{Binding $parent[TopLevel].DataContext.OnPaste}" CommandParameter="{Binding Mode=OneWay}" />
+                                <Separator />
+                                <MenuItem Header="_Delete" Command="{Binding $parent[TopLevel].DataContext.OnDelete}" CommandParameter="{Binding Mode=OneWay}" />
+                                <Separator />
+                                <MenuItem Header="E_xport" Command="{Binding $parent[TopLevel].DataContext.Platform.OnExport}" CommandParameter="{Binding Mode=OneWay}" />
+                            </ContextMenu>
+                        </StackPanel.ContextMenu>
+                        <TextBlock Text="{Binding Name}" VerticalAlignment="Center" />
                     </StackPanel>
                 </TreeDataTemplate>
                 <TreeDataTemplate DataType="Containers:PageContainer" ItemsSource="{Binding Layers}" x:CompileBindings="False">
@@ -85,32 +85,31 @@
                             <iac:BindTagToVisualRootDataContextBehavior />
                             <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}" />
                         </i:Interaction.Behaviors>
-                        <TextBlock Text="{Binding Name}" Background="Transparent">
-                            <TextBlock.ContextMenu>
-                                <ContextMenu x:CompileBindings="False">
-                                    <MenuItem Header="Te_mplate" Items="{Binding $parent[TopLevel].DataContext.Project.Templates}">
-                                        <MenuItem.Styles>
-                                            <Style Selector="MenuItem">
-                                                <Setter Property="Header" Value="{Binding Name}" />
-                                                <Setter Property="Command" Value="{Binding $parent[TopLevel].DataContext.OnApplyTemplate}" />
-                                                <Setter Property="CommandParameter" Value="{Binding}" />
-                                            </Style>
-                                        </MenuItem.Styles>
-                                    </MenuItem>
-                                    <Separator />
-                                    <MenuItem Header="Insert Page Bef_ore" Command="{Binding $parent[TopLevel].DataContext.OnInsertPageBefore}" CommandParameter="{Binding Mode=OneWay}" />
-                                    <MenuItem Header="Insert Page Aft_er" Command="{Binding $parent[TopLevel].DataContext.OnInsertPageAfter}" CommandParameter="{Binding Mode=OneWay}" />
-                                    <Separator />
-                                    <MenuItem Header="Cu_t" Command="{Binding $parent[TopLevel].DataContext.OnCut}" CommandParameter="{Binding Mode=OneWay}" />
-                                    <MenuItem Header="_Copy" Command="{Binding $parent[TopLevel].DataContext.OnCopy}" CommandParameter="{Binding Mode=OneWay}" />
-                                    <MenuItem Header="_Paste" Command="{Binding $parent[TopLevel].DataContext.OnPaste}" CommandParameter="{Binding Mode=OneWay}" />
-                                    <Separator />
-                                    <MenuItem Header="_Delete" Command="{Binding $parent[TopLevel].DataContext.OnDelete}" CommandParameter="{Binding Mode=OneWay}" />
-                                    <Separator />
-                                    <MenuItem Header="E_xport" Command="{Binding $parent[TopLevel].DataContext.Platform.OnExport}" CommandParameter="{Binding Mode=OneWay}" />
-                                </ContextMenu>
-                            </TextBlock.ContextMenu>
-                        </TextBlock>
+                        <StackPanel.ContextMenu>
+                            <ContextMenu x:CompileBindings="False">
+                                <MenuItem Header="Te_mplate" Items="{Binding $parent[TopLevel].DataContext.Project.Templates}">
+                                    <MenuItem.Styles>
+                                        <Style Selector="MenuItem">
+                                            <Setter Property="Header" Value="{Binding Name}" />
+                                            <Setter Property="Command" Value="{Binding $parent[TopLevel].DataContext.OnApplyTemplate}" />
+                                            <Setter Property="CommandParameter" Value="{Binding}" />
+                                        </Style>
+                                    </MenuItem.Styles>
+                                </MenuItem>
+                                <Separator />
+                                <MenuItem Header="Insert Page Bef_ore" Command="{Binding $parent[TopLevel].DataContext.OnInsertPageBefore}" CommandParameter="{Binding Mode=OneWay}" />
+                                <MenuItem Header="Insert Page Aft_er" Command="{Binding $parent[TopLevel].DataContext.OnInsertPageAfter}" CommandParameter="{Binding Mode=OneWay}" />
+                                <Separator />
+                                <MenuItem Header="Cu_t" Command="{Binding $parent[TopLevel].DataContext.OnCut}" CommandParameter="{Binding Mode=OneWay}" />
+                                <MenuItem Header="_Copy" Command="{Binding $parent[TopLevel].DataContext.OnCopy}" CommandParameter="{Binding Mode=OneWay}" />
+                                <MenuItem Header="_Paste" Command="{Binding $parent[TopLevel].DataContext.OnPaste}" CommandParameter="{Binding Mode=OneWay}" />
+                                <Separator />
+                                <MenuItem Header="_Delete" Command="{Binding $parent[TopLevel].DataContext.OnDelete}" CommandParameter="{Binding Mode=OneWay}" />
+                                <Separator />
+                                <MenuItem Header="E_xport" Command="{Binding $parent[TopLevel].DataContext.Platform.OnExport}" CommandParameter="{Binding Mode=OneWay}" />
+                            </ContextMenu>
+                        </StackPanel.ContextMenu>
+                        <TextBlock Text="{Binding Name}" VerticalAlignment="Center" />
                     </StackPanel>
                 </TreeDataTemplate>
                 <TreeDataTemplate DataType="Containers:LayerContainer" ItemsSource="{Binding Shapes}" x:CompileBindings="False">
@@ -132,7 +131,7 @@
                             </ContextMenu>
                         </StackPanel.ContextMenu>
                         <CheckBox IsChecked="{Binding IsVisible, Mode=TwoWay}" MinWidth="0" VerticalAlignment="Center" />
-                        <TextBlock Text="{Binding Name}" VerticalAlignment="Center" Background="Transparent" />
+                        <TextBlock Text="{Binding Name}" VerticalAlignment="Center" />
                     </StackPanel>
                 </TreeDataTemplate>
                 <DataTemplate DataType="Shapes:BaseShape">
@@ -141,19 +140,19 @@
                             <iac:BindTagToVisualRootDataContextBehavior />
                             <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}" />
                         </i:Interaction.Behaviors>
-                        <TextBlock Text="{Binding Mode=OneWay, Converter={StaticResource ObjectToTypeStringConverter}}" Background="Transparent">
-                            <TextBlock.ContextMenu>
-                                <ContextMenu x:CompileBindings="False">
-                                    <MenuItem Header="Cu_t" Command="{Binding $parent[TopLevel].DataContext.OnCut}" CommandParameter="{Binding Mode=OneWay}" />
-                                    <MenuItem Header="_Copy" Command="{Binding $parent[TopLevel].DataContext.OnCopy}" CommandParameter="{Binding Mode=OneWay}" />
-                                    <MenuItem Header="_Paste" Command="{Binding $parent[TopLevel].DataContext.OnPaste}" CommandParameter="{Binding Mode=OneWay}" />
-                                    <Separator />
-                                    <MenuItem Header="_Delete" Command="{Binding $parent[TopLevel].DataContext.OnDelete}" CommandParameter="{Binding Mode=OneWay}" />
-                                    <Separator />
-                                    <MenuItem Header="E_xport" Command="{Binding $parent[TopLevel].DataContext.Platform.OnExport}" CommandParameter="{Binding Mode=OneWay}" />
-                                </ContextMenu>
-                            </TextBlock.ContextMenu>
-                        </TextBlock>
+                        <StackPanel.ContextMenu>
+                            <ContextMenu x:CompileBindings="False">
+                                <MenuItem Header="Cu_t" Command="{Binding $parent[TopLevel].DataContext.OnCut}" CommandParameter="{Binding Mode=OneWay}" />
+                                <MenuItem Header="_Copy" Command="{Binding $parent[TopLevel].DataContext.OnCopy}" CommandParameter="{Binding Mode=OneWay}" />
+                                <MenuItem Header="_Paste" Command="{Binding $parent[TopLevel].DataContext.OnPaste}" CommandParameter="{Binding Mode=OneWay}" />
+                                <Separator />
+                                <MenuItem Header="_Delete" Command="{Binding $parent[TopLevel].DataContext.OnDelete}" CommandParameter="{Binding Mode=OneWay}" />
+                                <Separator />
+                                <MenuItem Header="E_xport" Command="{Binding $parent[TopLevel].DataContext.Platform.OnExport}" CommandParameter="{Binding Mode=OneWay}" />
+                            </ContextMenu>
+                        </StackPanel.ContextMenu>
+                        <DrawingPresenter Drawing="{Binding Mode=OneWay, Converter={StaticResource BaseShapeIconConverter}}" Width="16" Height="16" Margin="8" />
+                        <TextBlock Text="{Binding Mode=OneWay, Converter={StaticResource ObjectToTypeStringConverter}}" VerticalAlignment="Center" />
                     </StackPanel>
                 </DataTemplate>
             </TreeView.DataTemplates>
