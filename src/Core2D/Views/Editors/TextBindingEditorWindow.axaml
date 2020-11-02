@@ -46,7 +46,7 @@
         <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Margin="6" Grid.Row="1" Grid.Column="1">
             <Grid RowDefinitions="Auto,*" ColumnDefinitions="50*,Auto,50*">
                 <Label Content="Name" Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" />
-                <ItemsControl VerticalAlignment="Stretch" Grid.Column="0" Grid.Row="1" Items="{Binding Editor.Project.CurrentContainer.Data.Properties}">
+                <ItemsControl VerticalAlignment="Stretch" Grid.Column="0" Grid.Row="1" Items="{Binding Editor.Project.CurrentContainer.Properties}">
                     <ItemsControl.DataTemplates>
                         <DataTemplate DataType="Data:Property">
                             <Grid VerticalAlignment="Top" Background="Transparent" Margin="0,2,0,2">
@@ -57,7 +57,7 @@
                 </ItemsControl>
                 <GridSplitter ResizeDirection="Columns" ResizeBehavior="PreviousAndNext" Background="Transparent" Width="6" Grid.Column="1" Grid.Row="1" Grid.RowSpan="2" />
                 <Label Content="Value" Grid.Column="2" Grid.Row="0" VerticalAlignment="Center" />
-                <ItemsControl VerticalAlignment="Stretch" Grid.Column="2" Grid.Row="1" Items="{Binding Editor.Project.CurrentContainer.Data.Properties}">
+                <ItemsControl VerticalAlignment="Stretch" Grid.Column="2" Grid.Row="1" Items="{Binding Editor.Project.CurrentContainer.Properties}">
                     <ItemsControl.DataTemplates>
                         <DataTemplate DataType="Data:Property">
                             <Grid VerticalAlignment="Top" ColumnDefinitions="*,30" Background="Transparent" Margin="0,2,0,2">
@@ -73,7 +73,7 @@
         <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Margin="6" Grid.Row="1" Grid.Column="2">
             <Grid RowDefinitions="Auto,*" ColumnDefinitions="50*,Auto,50*">
                 <Label Content="Name" Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" />
-                <ItemsControl VerticalAlignment="Stretch" Grid.Column="0" Grid.Row="1" Items="{Binding Text.Data.Properties}">
+                <ItemsControl VerticalAlignment="Stretch" Grid.Column="0" Grid.Row="1" Items="{Binding Text.Properties}">
                     <ItemsControl.DataTemplates>
                         <DataTemplate DataType="Data:Property">
                             <Grid VerticalAlignment="Top" Background="Transparent" Margin="0,2,0,2">
@@ -84,7 +84,7 @@
                 </ItemsControl>
                 <GridSplitter ResizeDirection="Columns" ResizeBehavior="PreviousAndNext" Background="Transparent" Width="6" Grid.Column="1" Grid.Row="1" Grid.RowSpan="2" />
                 <Label Content="Value" Grid.Column="2" Grid.Row="0" VerticalAlignment="Center" />
-                <ItemsControl VerticalAlignment="Stretch" Grid.Column="2" Grid.Row="1" Items="{Binding Text.Data.Properties}">
+                <ItemsControl VerticalAlignment="Stretch" Grid.Column="2" Grid.Row="1" Items="{Binding Text.Properties}">
                     <ItemsControl.DataTemplates>
                         <DataTemplate DataType="Data:Property">
                             <Grid VerticalAlignment="Top" ColumnDefinitions="*,30" Background="Transparent" Margin="0,2,0,2">
