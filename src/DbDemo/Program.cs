@@ -7,19 +7,23 @@ using Value = System.Object;
 
 namespace DbDemo
 {
-    public class PropertiesDictionary : Dictionary<Property, Value>
+    public class PropertyDictionary : Dictionary<Property, Value>
     {
     }
 
-    public class ObjectsDictionary : Dictionary<ObjectID, PropertiesDictionary>
+    public class ObjectDictionary : Dictionary<ObjectID, PropertyDictionary>
+    {
+    }
+
+    public class ValueDictionary : Dictionary<ObjectID, Value>
     {
     }
 
     public class Store
     {
-        public Dictionary<ObjectID, Dictionary<Property, Value>> Objects { get; set; }
+        public ObjectDictionary Objects { get; set; }
 
-        public Dictionary<ObjectID, Value> Cache { get; set; }
+        public ValueDictionary Cache { get; set; }
 
         public Value GetValue(ObjectID id, ObjectType type)
         {
@@ -79,8 +83,17 @@ namespace DbDemo
 
         public ObjectType Type
         {
-            get => (ObjectType)Store.Objects[Id][nameof(Type)];
-            set => Store.Objects[Id][nameof(Type)] = value;
+            get => GetValue<ObjectType>(Id, nameof(Type));
+            set => SetValue(Id, nameof(Type), value);
+        }
+  
+        public T GetValue<T>(ObjectID id, string key)
+        {
+            return (T)_store.Objects[id][key];
+        }
+        public void SetValue<T>(ObjectID id, string key, T value)
+        {
+            _store.Objects[id][key] = value;
         }
     }
 
@@ -92,14 +105,14 @@ namespace DbDemo
 
         public double X
         {
-            get => (double)Store.Objects[Id][nameof(X)];
-            set => Store.Objects[Id][nameof(X)] = value;
+            get => GetValue<double>(Id, nameof(X));
+            set => SetValue(Id, nameof(X), value);
         }
 
         public double Y
         {
-            get => (double)Store.Objects[Id][nameof(Y)];
-            set => Store.Objects[Id][nameof(Y)] = value;
+            get => GetValue<double>(Id, nameof(Y));
+            set => SetValue(Id, nameof(Y), value);
         }
     }
 
@@ -111,14 +124,14 @@ namespace DbDemo
 
         public ObjectID StartID
         {
-            get => (ObjectID)Store.Objects[Id][nameof(Start)];
-            set => Store.Objects[Id][nameof(Start)] = value;
+            get => GetValue<double>(Id, nameof(Start));
+            set => SetValue(Id, nameof(Start), value);
         }
 
         public ObjectID EndID
         {
-            get => (ObjectID)Store.Objects[Id][nameof(End)];
-            set => Store.Objects[Id][nameof(End)] = value;
+            get => GetValue<double>(Id, nameof(End));
+            set => SetValue(Id, nameof(End), value);
         }
 
         public Point Start => (Point)Store.GetValue(StartID, Types.Point);
@@ -132,12 +145,12 @@ namespace DbDemo
         {
             var store = new Store()
             {
-                Objects = new Dictionary<ObjectID, Dictionary<Property, Value>>(),
-                Cache = new Dictionary<ObjectID, object>()
+                Objects = new ObjectDictionary(),
+                Cache = new ValueDictionary()
             };
 
             // Point, Start
-            store.Objects[0] = new Dictionary<Property, Value>()
+            store.Objects[0] = new PropertyDictionary()
             {
                 ["Type"] = Types.Point, // ObjectType
                 ["X"] = 5.0, // double
@@ -145,7 +158,7 @@ namespace DbDemo
             };
 
             // Point, End
-            store.Objects[1] = new Dictionary<Property, Value>()
+            store.Objects[1] = new PropertyDictionary()
             {
                 ["Type"] = Types.Point, // ObjectType
                 ["X"] = 27.0, // double
@@ -153,7 +166,7 @@ namespace DbDemo
             };
 
             // Line
-            store.Objects[2] = new Dictionary<Property, Value>()
+            store.Objects[2] = new PropertyDictionary()
             {
                 ["Type"] = Types.Line, // ObjectType
                 ["Start"] = (ObjectID)0, // Point, ObjectID
