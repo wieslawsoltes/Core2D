@@ -173,6 +173,7 @@ namespace DbDemo
                 ["End"] = (ObjectID)1 // Point, ObjectID
             };
 
+            Console.WriteLine($"{store.Objects}");
             foreach (var obj in store.Objects)
             {
                 Console.WriteLine($"[{obj.Key}]={obj.Value}");
