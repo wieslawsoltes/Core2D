@@ -124,13 +124,13 @@ namespace DbDemo
 
         public ObjectID StartID
         {
-            get => GetValue<double>(Id, nameof(Start));
+            get => GetValue<ObjectID>(Id, nameof(Start));
             set => SetValue(Id, nameof(Start), value);
         }
 
         public ObjectID EndID
         {
-            get => GetValue<double>(Id, nameof(End));
+            get => GetValue<ObjectID>(Id, nameof(End));
             set => SetValue(Id, nameof(End), value);
         }
 
