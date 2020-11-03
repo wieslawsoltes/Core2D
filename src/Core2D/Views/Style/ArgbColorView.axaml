@@ -19,9 +19,9 @@
         </VisualBrush>
     </UserControl.Resources>
     <Grid Margin="{DynamicResource TextControlThemePadding}">
-        <ToggleButton Name="PopupButton" BorderThickness="0" Background="Transparent" Padding="0" Height="30" HorizontalAlignment="Stretch" VerticalAlignment="Top">
+        <ToggleButton Name="PopupButton" BorderThickness="0" Background="Transparent" Padding="0" Height="30" HorizontalAlignment="Stretch" VerticalAlignment="Top" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
             <ToggleButton.Styles>
-                <Style Selector="Button, RepeatButton, ToggleButton">
+                <Style Selector="ToggleButton">
                     <Setter Property="RenderTransform" Value="none" />
                     <Setter Property="Transitions" Value="{x:Null}" />
                 </Style>
