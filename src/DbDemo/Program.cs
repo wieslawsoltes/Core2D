@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Newtonsoft.Json;
 using ObjectType = System.Int32;
 using ObjectID = System.Int64;
 using Property = System.String;
@@ -172,6 +173,10 @@ namespace DbDemo
                 ["Start"] = (ObjectID)0, // Point, ObjectID
                 ["End"] = (ObjectID)1 // Point, ObjectID
             };
+
+            var json = JsonConvert.SerializeObject(store.Objects, new JsonSerializerSettings() { Formatting = Formatting.Indented });
+            Console.WriteLine($"{json}");
+            store.Objects = JsonConvert.DeserializeObject<ObjectDictionary>(json);
 
             Console.WriteLine($"{store.Objects}");
             foreach (var obj in store.Objects)
