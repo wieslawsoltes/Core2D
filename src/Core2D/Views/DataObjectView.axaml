@@ -46,7 +46,7 @@
                                     <!--<i:Interaction.Behaviors>
                                         <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}" />
                                     </i:Interaction.Behaviors>-->
-                                    <Button Content="-" Grid.Column="1" Command="{Binding $parent[TopLevel].DataContext.OnRemoveProperty}" CommandParameter="{Binding}" Padding="0" VerticalAlignment="Stretch" VerticalContentAlignment="Center" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Margin="6,0,0,0" Width="30" DockPanel.Dock="Right" x:CompileBindings="False" />
+                                    <Button Content="-" Command="{Binding $parent[TopLevel].DataContext.OnRemoveProperty}" CommandParameter="{Binding}" Padding="0" VerticalAlignment="Stretch" VerticalContentAlignment="Center" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Margin="6,0,0,0" Width="30" DockPanel.Dock="Right" x:CompileBindings="False" />
                                     <TextBox Text="{Binding Value, Mode=TwoWay}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
                                 </DockPanel>
                             </DataTemplate>
