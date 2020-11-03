@@ -25,7 +25,7 @@ namespace DbDemo
 
         public ValueDictionary Cache { get; set; }
 
-        public Value GetValue(ObjectID id, ObjectType type)
+        public T GetValueObject<T>(ObjectID id, ObjectType type) where T : Base
         {
             switch (type)
             {
@@ -33,30 +33,30 @@ namespace DbDemo
                     {
                         if (Cache.TryGetValue(id, out var value))
                         {
-                            return value;
+                            return value as T;
                         }
 
                         var point = new Point(this, id);
 
                         Cache[id] = point;
 
-                        return point;
+                        return  point as T;
                     }
                 case Types.Line:
                     {
                         if (Cache.TryGetValue(id, out var value))
                         {
-                            return value;
+                            return value as T;
                         }
 
                         var line = new Line(this, id);
 
                         Cache[id] = line;
 
-                        return line;
+                        return line as T;
                     }
             }
-            return null;
+            return default(T);
         }
     }
 
@@ -134,9 +134,9 @@ namespace DbDemo
             set => SetValue(Id, nameof(End), value);
         }
 
-        public Point Start => (Point)Store.GetValue(StartID, Types.Point);
+        public Point Start => Store.GetValueObject<Point>(StartID, Types.Point);
 
-        public Point End => (Point)Store.GetValue(EndID, Types.Point);
+        public Point End => Store.GetValueObject<Point>(EndID, Types.Point);
     }
 
     public static class Program
@@ -182,7 +182,7 @@ namespace DbDemo
                 }
             }
 
-            var line = (Line)store.GetValue(2, Types.Line);
+            var line = store.GetValueObject<Line>(2, Types.Line);
             Console.WriteLine($"{line.Start.X}");
             Console.WriteLine($"{line.Start.Y}");
             Console.WriteLine($"{line.End.X}");
