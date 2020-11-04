@@ -1,0 +1,110 @@
+﻿<UserControl x:Class="Core2D.Views.EditorView"
+             xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
+             xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
+             xmlns:iac="clr-namespace:Avalonia.Xaml.Interactions.Custom;assembly=Avalonia.Xaml.Interactions.Custom"
+             xmlns:idd="clr-namespace:Core2D.DragAndDrop;assembly=Core2D"
+             xmlns:handlers="clr-namespace:Core2D.DragAndDrop.Handlers;assembly=Core2D"
+             xmlns:converters="clr-namespace:Core2D.Converters;assembly=Core2D"
+             xmlns:views="clr-namespace:Core2D.Views;assembly=Core2D"
+             xmlns:containers="clr-namespace:Core2D.Views.Containers;assembly=Core2D"
+             xmlns:renderer="clr-namespace:Core2D.Views.Renderer;assembly=Core2D"
+             xmlns:style="clr-namespace:Core2D.Views.Style;assembly=Core2D"
+             xmlns:libraries="clr-namespace:Core2D.Views.Libraries;assembly=Core2D"
+             xmlns:Editor="clr-namespace:Core2D.Editor;assembly=Core2D"
+             xmlns:Designer="clr-namespace:Core2D.Designer;assembly=Core2D"
+             mc:Ignorable="d"
+             d:DataContext="{x:Static Designer:DesignerContext.Editor}"
+             d:DesignWidth="1200" d:DesignHeight="580"
+             x:DataType="Editor:ProjectEditor" x:CompileBindings="True">
+    <UserControl.Resources>
+        <converters:FirstSelectedItemValueConverter x:Key="FirstSelectedItemValueConverter" />
+        <converters:StyleMultiValueConverter x:Key="StyleMultiValueConverter" />
+        <handlers:EditorDropHandler x:Key="EditorDropHandler" />
+    </UserControl.Resources>
+    <i:Interaction.Behaviors>
+        <idd:ContextDropBehavior Context="{Binding FallbackValue={x:Null}}" Handler="{StaticResource EditorDropHandler}" />
+    </i:Interaction.Behaviors>
+    <Grid x:Name="LAYOUT_EditorGrid" ColumnDefinitions="250,6,*,6,250" RowDefinitions="*,Auto">
+        <TabControl x:Name="LAYOUT_LeftTabControl" Padding="6,0,0,0" Grid.Column="0" Grid.Row="0">
+            <TabItem x:Name="LAYOUT_ProjectTabItem" Header="Project">
+                <containers:ProjectContainerView DataContext="{Binding Project}" />
+            </TabItem>
+            <TabItem x:Name="LAYOUT_PropertiesTabItem" Header="Properties">
+                <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                    <ContentControl Content="{Binding PageState.SelectedShapes, Converter={StaticResource FirstSelectedItemValueConverter}}" />
+                </ScrollViewer>
+            </TabItem>
+            <TabItem x:Name="LAYOUT_StyleTabItem" Header="Style">
+                <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                    <style:ShapeStyleView>
+                        <style:ShapeStyleView.DataContext>
+                            <MultiBinding Converter="{StaticResource StyleMultiValueConverter}">
+                                <Binding Path="PageState.SelectedShapes" FallbackValue="{x:Null}" />
+                                <Binding Path="Project.CurrentStyleLibrary.Selected" FallbackValue="{x:Null}" />
+                            </MultiBinding>
+                        </style:ShapeStyleView.DataContext>
+                    </style:ShapeStyleView>
+                </ScrollViewer>
+            </TabItem>
+            <TabItem x:Name="LAYOUT_OptionsTabItem" Header="Options">
+                <TabControl x:Name="LAYOUT_OptionsTabControl">
+                    <TabItem x:Name="LAYOUT_ProjectOptionsTabItem" Header="Project">
+                        <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                            <containers:OptionsView DataContext="{Binding Project.Options}" />
+                        </ScrollViewer>
+                    </TabItem>
+                    <TabItem x:Name="LAYOUT_RendererOptionsTabItem" Header="Renderer">
+                        <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                            <renderer:ShapeRendererStateView DataContext="{Binding PageState}" />
+                        </ScrollViewer>
+                    </TabItem>
+                    <TabItem x:Name="LAYOUT_ZoomOptionsTabItem" Header="Zoom">
+                        <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                            <views:ZoomView DataContext="{Binding CanvasPlatform.Zoom}" />
+                        </ScrollViewer>
+                    </TabItem>
+                    <TabItem x:Name="LAYOUT_ImagesOptionsTabItem" Header="Images">
+                        <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                            <libraries:ImagesView DataContext="{Binding Project}" />
+                        </ScrollViewer>
+                    </TabItem>
+                </TabControl>
+            </TabItem>
+        </TabControl>
+        <GridSplitter x:Name="LeftGridSplitter" ResizeDirection="Columns" ResizeBehavior="PreviousAndNext" Background="Transparent" Width="6" Grid.Column="1" Grid.Row="0" />
+        <views:PageView x:Name="Page" Grid.Column="2" Grid.Row="0" />
+        <GridSplitter x:Name="RightGridSplitter" ResizeDirection="Columns" ResizeBehavior="PreviousAndNext" Background="Transparent" Width="6" Grid.Column="3" Grid.Row="0" />
+        <TabControl x:Name="LAYOUT_RightTabControl" Padding="0,0,6,0" Grid.Column="4" Grid.Row="0">
+            <TabItem x:Name="LAYOUT_PageTabItem" Header="Page">
+                <containers:PageContainerView DataContext="{Binding Project.CurrentContainer}" />
+            </TabItem>
+            <TabItem x:Name="LAYOUT_LibrariesTabItem" Header="Libraries">
+                <TabControl x:Name="LAYOUT_LibrariesTabControl">
+                    <TabItem x:Name="LAYOUT_StylesTabItem" Header="Styles">
+                        <libraries:StylesView DataContext="{Binding Project}" />
+                    </TabItem>
+                    <TabItem x:Name="LAYOUT_GroupsTabItem" Header="Groups">
+                        <libraries:GroupsView DataContext="{Binding Project}" />
+                    </TabItem>
+                    <TabItem x:Name="LAYOUT_DataTabItem" Header="Data">
+                        <libraries:DatabasesView DataContext="{Binding Project}" />
+                    </TabItem>
+                    <TabItem x:Name="LAYOUT_TemplatesTabItem" Header="Templates">
+                        <libraries:TemplatesView DataContext="{Binding Project}" />
+                    </TabItem>
+                </TabControl>
+            </TabItem>
+            <TabItem x:Name="LAYOUT_ScriptsTabItem" Header="Scripts">
+                <libraries:ScriptsView DataContext="{Binding Project}" />
+            </TabItem>
+            <TabItem x:Name="LAYOUT_BrowserTabItem" Header="Browser">
+                <views:BrowserView />
+            </TabItem>
+        </TabControl>
+        <views:StatusView x:Name="StatusControl" Grid.Column="0" Grid.ColumnSpan="5" Grid.Row="1" />
+    </Grid>
+</UserControl>
