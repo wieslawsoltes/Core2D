@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using Core2D;
-using Core2D.Editor.Tools.Path.Settings;
 using Core2D.Editor.Tools.Selection;
 using Core2D.Input;
 using Core2D.Path;
@@ -12,14 +11,11 @@ using static System.Math;
 
 namespace Core2D.Editor.Tools.Path
 {
-    /// <summary>
-    /// Arc path tool.
-    /// </summary>
     public class PathToolArc : ObservableObject, IPathTool
     {
         public enum State { Start, End }
+
         private readonly IServiceProvider _serviceProvider;
-        private PathToolSettingsArc _settings;
         private State _currentState = State.Start;
         private LineShape _arc = new LineShape();
         private ToolLineSelection _selection;
@@ -27,39 +23,22 @@ namespace Core2D.Editor.Tools.Path
         private const bool _defaultIsLargeArc = false;
         private const SweepDirection _defaultSweepDirection = SweepDirection.Clockwise;
 
-        /// <inheritdoc/>
         public string Title => "Arc";
 
-        /// <summary>
-        /// Gets or sets the path tool settings.
-        /// </summary>
-        public PathToolSettingsArc Settings
-        {
-            get => _settings;
-            set => Update(ref _settings, value);
-        }
-
-        /// <summary>
-        /// Initialize new instance of <see cref="PathToolArc"/> class.
-        /// </summary>
-        /// <param name="serviceProvider">The service provider.</param>
         public PathToolArc(IServiceProvider serviceProvider) : base()
         {
             _serviceProvider = serviceProvider;
-            _settings = new PathToolSettingsArc();
         }
 
-        /// <inheritdoc/>
         public override object Copy(IDictionary<object, object> shared)
         {
             throw new NotImplementedException();
         }
 
-        /// <inheritdoc/>
         public void LeftDown(InputArgs args)
         {
             var factory = _serviceProvider.GetService<IFactory>();
-            var editor = _serviceProvider.GetService<IProjectEditor>();
+            var editor = _serviceProvider.GetService<ProjectEditor>();
             var pathTool = _serviceProvider.GetService<ToolPath>();
             (decimal sx, decimal sy) = editor.TryToSnap(args);
             switch (_currentState)
@@ -84,8 +63,7 @@ namespace Core2D.Editor.Tools.Path
                                 Abs(_arc.Start.Y - _arc.End.Y)),
                             _defaultRotationAngle,
                             _defaultIsLargeArc,
-                            _defaultSweepDirection,
-                            editor.Project.Options.DefaultIsStroked);
+                            _defaultSweepDirection);
                         editor.Project.CurrentContainer.WorkingLayer.InvalidateLayer();
                         ToStateEnd();
                         Move(null);
@@ -93,6 +71,7 @@ namespace Core2D.Editor.Tools.Path
                         editor.IsToolIdle = false;
                     }
                     break;
+
                 case State.End:
                     {
                         _arc.End.X = (double)sx;
@@ -114,8 +93,7 @@ namespace Core2D.Editor.Tools.Path
                                 Abs(_arc.Start.Y - _arc.End.Y)),
                             _defaultRotationAngle,
                             _defaultIsLargeArc,
-                            _defaultSweepDirection,
-                            editor.Project.Options.DefaultIsStroked);
+                            _defaultSweepDirection);
                         editor.Project.CurrentContainer.WorkingLayer.InvalidateLayer();
                         Move(null);
                         _currentState = State.End;
@@ -124,18 +102,17 @@ namespace Core2D.Editor.Tools.Path
             }
         }
 
-        /// <inheritdoc/>
         public void LeftUp(InputArgs args)
         {
         }
 
-        /// <inheritdoc/>
         public void RightDown(InputArgs args)
         {
             switch (_currentState)
             {
                 case State.Start:
                     break;
+
                 case State.End:
                     Reset();
                     Finalize(null);
@@ -143,15 +120,13 @@ namespace Core2D.Editor.Tools.Path
             }
         }
 
-        /// <inheritdoc/>
         public void RightUp(InputArgs args)
         {
         }
 
-        /// <inheritdoc/>
         public void Move(InputArgs args)
         {
-            var editor = _serviceProvider.GetService<IProjectEditor>();
+            var editor = _serviceProvider.GetService<ProjectEditor>();
             var pathTool = _serviceProvider.GetService<ToolPath>();
             (decimal sx, decimal sy) = editor.TryToSnap(args);
             switch (_currentState)
@@ -164,6 +139,7 @@ namespace Core2D.Editor.Tools.Path
                         }
                     }
                     break;
+
                 case State.End:
                     {
                         if (editor.Project.Options.TryToConnect)
@@ -184,12 +160,9 @@ namespace Core2D.Editor.Tools.Path
             }
         }
 
-        /// <summary>
-        /// Transfer tool state to <see cref="State.End"/>.
-        /// </summary>
         public void ToStateEnd()
         {
-            var editor = _serviceProvider.GetService<IProjectEditor>();
+            var editor = _serviceProvider.GetService<ProjectEditor>();
             _selection?.Reset();
             _selection = new ToolLineSelection(
                 _serviceProvider,
@@ -200,8 +173,7 @@ namespace Core2D.Editor.Tools.Path
             _selection.ToStateEnd();
         }
 
-        /// <inheritdoc/>
-        public void Move(IBaseShape shape)
+        public void Move(BaseShape shape)
         {
             if (_selection != null)
             {
@@ -209,21 +181,20 @@ namespace Core2D.Editor.Tools.Path
             }
         }
 
-        /// <inheritdoc/>
-        public void Finalize(IBaseShape shape)
+        public void Finalize(BaseShape shape)
         {
         }
 
-        /// <inheritdoc/>
         public void Reset()
         {
-            var editor = _serviceProvider.GetService<IProjectEditor>();
+            var editor = _serviceProvider.GetService<ProjectEditor>();
             var pathTool = _serviceProvider.GetService<ToolPath>();
 
             switch (_currentState)
             {
                 case State.Start:
                     break;
+
                 case State.End:
                     {
                         pathTool.RemoveLastSegment<ArcSegment>();

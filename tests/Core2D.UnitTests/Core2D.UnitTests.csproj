@@ -26,7 +26,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\Core2D\Core2D.csproj" />
-    <ProjectReference Include="..\..\src\Core2D.Modules\Core2D.Modules.csproj" />
   </ItemGroup>
 
 </Project>

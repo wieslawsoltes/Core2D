@@ -1,35 +1,33 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.Runtime.Serialization;
 using Core2D.Data;
 using Core2D.Path;
 using Core2D.Renderer;
 
 namespace Core2D.Shapes
 {
-    /// <summary>
-    /// Path shape.
-    /// </summary>
-    public class PathShape : BaseShape, IPathShape
+    [DataContract(IsReference = true)]
+    public class PathShape : BaseShape
     {
-        private List<IPointShape> _points;
-        private IPathGeometry _geometry;
+        private List<PointShape> _points;
+        private PathGeometry _geometry;
 
-        /// <inheritdoc/>
-        public override Type TargetType => typeof(IPathShape);
+        [IgnoreDataMember]
+        public override Type TargetType => typeof(PathShape);
 
-        /// <inheritdoc/>
-        public IPathGeometry Geometry
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
+        public PathGeometry Geometry
         {
             get => _geometry;
-            set => Update(ref _geometry, value);
+            set => RaiseAndSetIfChanged(ref _geometry, value);
         }
 
         private void UpdatePoints()
         {
             if (_points == null)
             {
-                _points = new List<IPointShape>();
+                _points = new List<PointShape>();
                 GetPoints(_points);
             }
             else
@@ -39,7 +37,6 @@ namespace Core2D.Shapes
             }
         }
 
-        /// <inheritdoc/>
         public override void DrawShape(object dc, IShapeRenderer renderer)
         {
             if (State.Flags.HasFlag(ShapeStateFlags.Visible))
@@ -48,7 +45,6 @@ namespace Core2D.Shapes
             }
         }
 
-        /// <inheritdoc/>
         public override void DrawPoints(object dc, IShapeRenderer renderer)
         {
             if (renderer.State.SelectedShapes != null)
@@ -77,10 +73,9 @@ namespace Core2D.Shapes
             }
         }
 
-        /// <inheritdoc/>
-        public override void Bind(IDataFlow dataFlow, object db, object r)
+        public override void Bind(DataFlow dataFlow, object db, object r)
         {
-            var record = Data?.Record ?? r;
+            var record = Record ?? r;
 
             dataFlow.Bind(this, db, record);
 
@@ -92,7 +87,6 @@ namespace Core2D.Shapes
             }
         }
 
-        /// <inheritdoc/>
         public override void Move(ISelection selection, decimal dx, decimal dy)
         {
             UpdatePoints();
@@ -103,7 +97,6 @@ namespace Core2D.Shapes
             }
         }
 
-        /// <inheritdoc/>
         public override void Select(ISelection selection)
         {
             base.Select(selection);
@@ -116,7 +109,6 @@ namespace Core2D.Shapes
             }
         }
 
-        /// <inheritdoc/>
         public override void Deselect(ISelection selection)
         {
             base.Deselect(selection);
@@ -129,8 +121,7 @@ namespace Core2D.Shapes
             }
         }
 
-        /// <inheritdoc/>
-        public override void GetPoints(IList<IPointShape> points)
+        public override void GetPoints(IList<PointShape> points)
         {
             foreach (var figure in Geometry.Figures)
             {
@@ -138,13 +129,11 @@ namespace Core2D.Shapes
             }
         }
 
-        /// <inheritdoc/>
         public override object Copy(IDictionary<object, object> shared)
         {
             throw new NotImplementedException();
         }
 
-        /// <inheritdoc/>
         public override bool IsDirty()
         {
             var isDirty = base.IsDirty();
@@ -157,29 +146,20 @@ namespace Core2D.Shapes
             return isDirty;
         }
 
-        /// <inheritdoc/>
         public override void Invalidate()
         {
             base.Invalidate();
 
             if (Geometry != null)
             {
-                Geometry.Invalidate(); 
+                Geometry.Invalidate();
             }
         }
 
-        /// <inheritdoc/>
         public string ToXamlString()
             => Geometry?.ToXamlString();
 
-        /// <inheritdoc/>
         public string ToSvgString()
             => Geometry?.ToSvgString();
-
-        /// <summary>
-        /// Check whether the <see cref="Geometry"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeGeometry() => _geometry != null;
     }
 }

@@ -1,0 +1,18 @@
+﻿<UserControl x:Class="Core2D.Views.Path.Segments.LineSegmentView"
+             xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:converters="clr-namespace:Core2D.Converters;assembly=Core2D"
+             xmlns:Segments="clr-namespace:Core2D.Path.Segments;assembly=Core2D"
+             xmlns:Designer="clr-namespace:Core2D.Designer;assembly=Core2D"
+             mc:Ignorable="d"
+             d:DataContext="{x:Static Designer:DesignerContext.LineSegment}"
+             d:DesignWidth="250" d:DesignHeight="400"
+             x:DataType="Segments:LineSegment" x:CompileBindings="True">
+    <StackPanel>
+        <Expander Header="Point" IsExpanded="False">
+            <ContentControl Content="{Binding Point}" />
+        </Expander>
+    </StackPanel>
+</UserControl>

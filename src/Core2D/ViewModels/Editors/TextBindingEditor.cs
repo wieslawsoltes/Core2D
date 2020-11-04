@@ -6,42 +6,29 @@ using Core2D.Shapes;
 
 namespace Core2D.Editors
 {
-    /// <summary>
-    /// Text binding editor.
-    /// </summary>
     public class TextBindingEditor : ObservableObject
     {
-        private IProjectEditor _editor;
-        private ITextShape _text;
+        private ProjectEditor _editor;
+        private TextShape _text;
 
-        /// <summary>
-        /// Gets or sets project editor.
-        /// </summary>
-        public IProjectEditor Editor
+        public ProjectEditor Editor
         {
             get => _editor;
-            set => Update(ref _editor, value);
+            set => RaiseAndSetIfChanged(ref _editor, value);
         }
 
-        /// <summary>
-        /// Gets or sets text shape.
-        /// </summary>
-        public ITextShape Text
+        public TextShape Text
         {
             get => _text;
-            set => Update(ref _text, value);
+            set => RaiseAndSetIfChanged(ref _text, value);
         }
 
-        /// <inheritdoc/>
         public override object Copy(IDictionary<object, object> shared)
         {
             throw new NotImplementedException();
         }
 
-        /// <summary>
-        /// Use column name.
-        /// </summary>
-        public void OnUseColumnName(IColumn column)
+        public void OnUseColumnName(Column column)
         {
             if (_text != null && column != null)
             {
@@ -57,10 +44,7 @@ namespace Core2D.Editors
             }
         }
 
-        /// <summary>
-        /// Use page property.
-        /// </summary>
-        public void OnUsePageProperty(IProperty property)
+        public void OnUsePageProperty(Property property)
         {
             if (_text != null && property != null)
             {
@@ -76,10 +60,7 @@ namespace Core2D.Editors
             }
         }
 
-        /// <summary>
-        /// Use shape property.
-        /// </summary>
-        public void OnUseShapeProperty(IProperty property)
+        public void OnUseShapeProperty(Property property)
         {
             if (_text != null && property != null)
             {
@@ -95,9 +76,6 @@ namespace Core2D.Editors
             }
         }
 
-        /// <summary>
-        /// Reset text.
-        /// </summary>
         public void OnResetText()
         {
             if (_text != null)

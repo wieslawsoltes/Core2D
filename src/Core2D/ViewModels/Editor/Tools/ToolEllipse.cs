@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using Core2D;
 using Core2D.Editor.Tools.Selection;
-using Core2D.Editor.Tools.Settings;
 using Core2D.Input;
 using Core2D.Shapes;
 using Core2D.Style;
@@ -10,51 +9,31 @@ using static System.Math;
 
 namespace Core2D.Editor.Tools
 {
-    /// <summary>
-    /// Ellipse tool.
-    /// </summary>
     public class ToolEllipse : ObservableObject, IEditorTool
     {
         public enum State { TopLeft, BottomRight }
         public enum Mode { Rectangle, Circle }
         private readonly IServiceProvider _serviceProvider;
-        private ToolSettingsEllipse _settings;
         private State _currentState = State.TopLeft;
         private Mode _currentMode = Mode.Rectangle;
-        private IEllipseShape _ellipse;
+        private EllipseShape _ellipse;
         private ToolEllipseSelection _selection;
         private decimal _centerX;
         private decimal _centerY;
 
-        /// <inheritdoc/>
         public string Title => "Ellipse";
 
-        /// <summary>
-        /// Gets or sets the tool settings.
-        /// </summary>
-        public ToolSettingsEllipse Settings
-        {
-            get => _settings;
-            set => Update(ref _settings, value);
-        }
-
-        /// <summary>
-        /// Initialize new instance of <see cref="ToolEllipse"/> class.
-        /// </summary>
-        /// <param name="serviceProvider">The service provider.</param>
         public ToolEllipse(IServiceProvider serviceProvider) : base()
         {
             _serviceProvider = serviceProvider;
-            _settings = new ToolSettingsEllipse();
         }
 
-        /// <inheritdoc/>
         public override object Copy(IDictionary<object, object> shared)
         {
             throw new NotImplementedException();
         }
 
-        private static void CircleConstrain(IPointShape tl, IPointShape br, decimal cx, decimal cy, decimal px, decimal py)
+        private static void CircleConstrain(PointShape tl, PointShape br, decimal cx, decimal cy, decimal px, decimal py)
         {
             decimal r = Max(Abs(cx - px), Abs(cy - py));
             tl.X = (double)(cx - r);
@@ -63,11 +42,10 @@ namespace Core2D.Editor.Tools
             br.Y = (double)(cy + r);
         }
 
-        /// <inheritdoc/>
         public void LeftDown(InputArgs args)
         {
             var factory = _serviceProvider.GetService<IFactory>();
-            var editor = _serviceProvider.GetService<IProjectEditor>();
+            var editor = _serviceProvider.GetService<ProjectEditor>();
             (decimal sx, decimal sy) = editor.TryToSnap(args);
             switch (_currentState)
             {
@@ -84,7 +62,7 @@ namespace Core2D.Editor.Tools
                             editor.Factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
                         _ellipse = factory.CreateEllipseShape(
                             (double)sx, (double)sy,
-                            (IShapeStyle)style.Copy(null),
+                            (ShapeStyle)style.Copy(null),
                             editor.Project.Options.DefaultIsStroked,
                             editor.Project.Options.DefaultIsFilled);
 
@@ -134,12 +112,10 @@ namespace Core2D.Editor.Tools
 
         }
 
-        /// <inheritdoc/>
         public void LeftUp(InputArgs args)
         {
         }
 
-        /// <inheritdoc/>
         public void RightDown(InputArgs args)
         {
             switch (_currentState)
@@ -152,15 +128,13 @@ namespace Core2D.Editor.Tools
             }
         }
 
-        /// <inheritdoc/>
         public void RightUp(InputArgs args)
         {
         }
 
-        /// <inheritdoc/>
         public void Move(InputArgs args)
         {
-            var editor = _serviceProvider.GetService<IProjectEditor>();
+            var editor = _serviceProvider.GetService<ProjectEditor>();
             (decimal sx, decimal sy) = editor.TryToSnap(args);
             switch (_currentState)
             {
@@ -198,12 +172,9 @@ namespace Core2D.Editor.Tools
             }
         }
 
-        /// <summary>
-        /// Transfer tool state to <see cref="State.BottomRight"/>.
-        /// </summary>
         public void ToStateBottomRight()
         {
-            var editor = _serviceProvider.GetService<IProjectEditor>();
+            var editor = _serviceProvider.GetService<ProjectEditor>();
             _selection = new ToolEllipseSelection(
                 _serviceProvider,
                 editor.Project.CurrentContainer.HelperLayer,
@@ -213,21 +184,18 @@ namespace Core2D.Editor.Tools
             _selection.ToStateBottomRight();
         }
 
-        /// <inheritdoc/>
-        public void Move(IBaseShape shape)
+        public void Move(BaseShape shape)
         {
             _selection.Move();
         }
 
-        /// <inheritdoc/>
-        public void Finalize(IBaseShape shape)
+        public void Finalize(BaseShape shape)
         {
         }
 
-        /// <inheritdoc/>
         public void Reset()
         {
-            var editor = _serviceProvider.GetService<IProjectEditor>();
+            var editor = _serviceProvider.GetService<ProjectEditor>();
 
             switch (_currentState)
             {

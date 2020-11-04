@@ -2,58 +2,36 @@
 using System.Collections.Generic;
 using Core2D;
 using Core2D.Editor.Tools.Selection;
-using Core2D.Editor.Tools.Settings;
 using Core2D.Input;
 using Core2D.Shapes;
 using Core2D.Style;
 
 namespace Core2D.Editor.Tools
 {
-    /// <summary>
-    /// Quadratic bezier tool.
-    /// </summary>
     public class ToolQuadraticBezier : ObservableObject, IEditorTool
     {
         public enum State { Point1, Point3, Point2 }
         private readonly IServiceProvider _serviceProvider;
-        private ToolSettingsQuadraticBezier _settings;
         private State _currentState = State.Point1;
-        private IQuadraticBezierShape _quadraticBezier;
+        private QuadraticBezierShape _quadraticBezier;
         private ToolQuadraticBezierSelection _selection;
 
-        /// <inheritdoc/>
         public string Title => "QuadraticBezier";
 
-        /// <summary>
-        /// Gets or sets the tool settings.
-        /// </summary>
-        public ToolSettingsQuadraticBezier Settings
-        {
-            get => _settings;
-            set => Update(ref _settings, value);
-        }
-
-        /// <summary>
-        /// Initialize new instance of <see cref="ToolQuadraticBezier"/> class.
-        /// </summary>
-        /// <param name="serviceProvider">The service provider.</param>
         public ToolQuadraticBezier(IServiceProvider serviceProvider) : base()
         {
             _serviceProvider = serviceProvider;
-            _settings = new ToolSettingsQuadraticBezier();
         }
 
-        /// <inheritdoc/>
         public override object Copy(IDictionary<object, object> shared)
         {
             throw new NotImplementedException();
         }
 
-        /// <inheritdoc/>
         public void LeftDown(InputArgs args)
         {
             var factory = _serviceProvider.GetService<IFactory>();
-            var editor = _serviceProvider.GetService<IProjectEditor>();
+            var editor = _serviceProvider.GetService<ProjectEditor>();
             (decimal sx, decimal sy) = editor.TryToSnap(args);
             switch (_currentState)
             {
@@ -64,7 +42,7 @@ namespace Core2D.Editor.Tools
                             editor.Factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
                         _quadraticBezier = factory.CreateQuadraticBezierShape(
                             (double)sx, (double)sy,
-                            (IShapeStyle)style.Copy(null),
+                            (ShapeStyle)style.Copy(null),
                             editor.Project.Options.DefaultIsStroked,
                             editor.Project.Options.DefaultIsFilled);
 
@@ -128,12 +106,10 @@ namespace Core2D.Editor.Tools
             }
         }
 
-        /// <inheritdoc/>
         public void LeftUp(InputArgs args)
         {
         }
 
-        /// <inheritdoc/>
         public void RightDown(InputArgs args)
         {
             switch (_currentState)
@@ -147,15 +123,13 @@ namespace Core2D.Editor.Tools
             }
         }
 
-        /// <inheritdoc/>
         public void RightUp(InputArgs args)
         {
         }
 
-        /// <inheritdoc/>
         public void Move(InputArgs args)
         {
-            var editor = _serviceProvider.GetService<IProjectEditor>();
+            var editor = _serviceProvider.GetService<ProjectEditor>();
             (decimal sx, decimal sy) = editor.TryToSnap(args);
             switch (_currentState)
             {
@@ -202,12 +176,9 @@ namespace Core2D.Editor.Tools
             }
         }
 
-        /// <summary>
-        /// Transfer tool state to <see cref="State.Point3"/>.
-        /// </summary>
         public void ToStatePoint3()
         {
-            var editor = _serviceProvider.GetService<IProjectEditor>();
+            var editor = _serviceProvider.GetService<ProjectEditor>();
             _selection = new ToolQuadraticBezierSelection(
                 _serviceProvider,
                 editor.Project.CurrentContainer.HelperLayer,
@@ -217,29 +188,23 @@ namespace Core2D.Editor.Tools
             _selection.ToStatePoint3();
         }
 
-        /// <summary>
-        /// Transfer tool state to <see cref="State.Point2"/>.
-        /// </summary>
         public void ToStatePoint2()
         {
             _selection.ToStatePoint2();
         }
 
-        /// <inheritdoc/>
-        public void Move(IBaseShape shape)
+        public void Move(BaseShape shape)
         {
             _selection.Move();
         }
 
-        /// <inheritdoc/>
-        public void Finalize(IBaseShape shape)
+        public void Finalize(BaseShape shape)
         {
         }
 
-        /// <inheritdoc/>
         public void Reset()
         {
-            var editor = _serviceProvider.GetService<IProjectEditor>();
+            var editor = _serviceProvider.GetService<ProjectEditor>();
 
             switch (_currentState)
             {

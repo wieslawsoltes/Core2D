@@ -1,143 +1,140 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 using Core2D.Shapes;
 using Core2D.Style;
 
 namespace Core2D.Renderer
 {
-    /// <summary>
-    /// Shape renderer state.
-    /// </summary>
-    public class ShapeRendererState : ObservableObject, IShapeRendererState
+    [DataContract(IsReference = true)]
+    public class ShapeRendererState : ObservableObject
     {
         private double _panX;
         private double _panY;
         private double _zoomX;
         private double _zoomY;
-        private IShapeState _drawShapeState;
-        private ISet<IBaseShape> _selectedShapes;
+        private ShapeState _drawShapeState;
+        private ISet<BaseShape> _selectedShapes;
         private IImageCache _imageCache;
         private bool _drawDecorators;
         private bool _drawPoints;
-        private IShapeStyle _pointStyle;
-        private IShapeStyle _selectedPointStyle;
+        private ShapeStyle _pointStyle;
+        private ShapeStyle _selectedPointStyle;
         private double _pointSize;
-        private IShapeStyle _selectionStyle;
-        private IShapeStyle _helperStyle;
+        private ShapeStyle _selectionStyle;
+        private ShapeStyle _helperStyle;
         private IDecorator _decorator;
 
-        /// <inheritdoc/>
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public double PanX
         {
             get => _panX;
-            set => Update(ref _panX, value);
+            set => RaiseAndSetIfChanged(ref _panX, value);
         }
 
-        /// <inheritdoc/>
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public double PanY
         {
             get => _panY;
-            set => Update(ref _panY, value);
+            set => RaiseAndSetIfChanged(ref _panY, value);
         }
 
-        /// <inheritdoc/>
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public double ZoomX
         {
             get => _zoomX;
-            set => Update(ref _zoomX, value);
+            set => RaiseAndSetIfChanged(ref _zoomX, value);
         }
 
-        /// <inheritdoc/>
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public double ZoomY
         {
             get => _zoomY;
-            set => Update(ref _zoomY, value);
+            set => RaiseAndSetIfChanged(ref _zoomY, value);
         }
 
-        /// <inheritdoc/>
-        public IShapeState DrawShapeState
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
+        public ShapeState DrawShapeState
         {
             get => _drawShapeState;
-            set => Update(ref _drawShapeState, value);
+            set => RaiseAndSetIfChanged(ref _drawShapeState, value);
         }
 
-        /// <inheritdoc/>
-        public ISet<IBaseShape> SelectedShapes
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
+        public ISet<BaseShape> SelectedShapes
         {
             get => _selectedShapes;
-            set => Update(ref _selectedShapes, value);
+            set => RaiseAndSetIfChanged(ref _selectedShapes, value);
         }
 
-        /// <inheritdoc/>
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public IImageCache ImageCache
         {
             get => _imageCache;
-            set => Update(ref _imageCache, value);
+            set => RaiseAndSetIfChanged(ref _imageCache, value);
         }
 
-        /// <inheritdoc/>
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public bool DrawDecorators
         {
             get => _drawDecorators;
-            set => Update(ref _drawDecorators, value);
+            set => RaiseAndSetIfChanged(ref _drawDecorators, value);
         }
 
-        /// <inheritdoc/>
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public bool DrawPoints
         {
             get => _drawPoints;
-            set => Update(ref _drawPoints, value);
+            set => RaiseAndSetIfChanged(ref _drawPoints, value);
         }
 
-        /// <inheritdoc/>
-        public IShapeStyle PointStyle
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
+        public ShapeStyle PointStyle
         {
             get => _pointStyle;
-            set => Update(ref _pointStyle, value);
+            set => RaiseAndSetIfChanged(ref _pointStyle, value);
         }
 
-        /// <inheritdoc/>
-        public IShapeStyle SelectedPointStyle
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
+        public ShapeStyle SelectedPointStyle
         {
             get => _selectedPointStyle;
-            set => Update(ref _selectedPointStyle, value);
+            set => RaiseAndSetIfChanged(ref _selectedPointStyle, value);
         }
 
-        /// <inheritdoc/>
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public double PointSize
         {
             get => _pointSize;
-            set => Update(ref _pointSize, value);
+            set => RaiseAndSetIfChanged(ref _pointSize, value);
         }
 
-        /// <inheritdoc/>
-        public IShapeStyle SelectionStyle
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
+        public ShapeStyle SelectionStyle
         {
             get => _selectionStyle;
-            set => Update(ref _selectionStyle, value);
+            set => RaiseAndSetIfChanged(ref _selectionStyle, value);
         }
 
-        /// <inheritdoc/>
-        public IShapeStyle HelperStyle
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
+        public ShapeStyle HelperStyle
         {
             get => _helperStyle;
-            set => Update(ref _helperStyle, value);
+            set => RaiseAndSetIfChanged(ref _helperStyle, value);
         }
 
-        /// <inheritdoc/>
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public IDecorator Decorator
         {
             get => _decorator;
-            set => Update(ref _decorator, value);
+            set => RaiseAndSetIfChanged(ref _decorator, value);
         }
 
-        /// <inheritdoc/>
         public override object Copy(IDictionary<object, object> shared)
         {
             throw new NotImplementedException();
         }
-        
-        /// <inheritdoc/>
+
         public override bool IsDirty()
         {
             var isDirty = base.IsDirty();
@@ -147,102 +144,11 @@ namespace Core2D.Renderer
             return isDirty;
         }
 
-        /// <inheritdoc/>
         public override void Invalidate()
         {
             base.Invalidate();
 
             DrawShapeState.Invalidate();
         }
-
-        /// <summary>
-        /// Check whether the <see cref="PanX"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializePanX() => _panX != default;
-
-        /// <summary>
-        /// Check whether the <see cref="PanY"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializePanY() => _panY != default;
-
-        /// <summary>
-        /// Check whether the <see cref="ZoomX"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeZoomX() => _zoomX != default;
-
-        /// <summary>
-        /// Check whether the <see cref="ZoomY"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeZoomY() => _zoomY != default;
-
-        /// <summary>
-        /// Check whether the <see cref="DrawShapeState"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeDrawShapeState() => _drawShapeState != null;
-
-        /// <summary>
-        /// Check whether the <see cref="SelectedShapes"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeSelectedShapes() => true;
-
-        /// <summary>
-        /// Check whether the <see cref="ImageCache"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeImageCache() => _imageCache != null;
-
-        /// <summary>
-        /// Check whether the <see cref="DrawDecorators"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeDrawDecorators() => _drawDecorators != default;
-
-        /// <summary>
-        /// Check whether the <see cref="DrawPoints"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeDrawPoints() => _drawPoints != default;
-
-        /// <summary>
-        /// Check whether the <see cref="PointStyle"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializePointStyle() => _pointStyle != null;
-
-        /// <summary>
-        /// Check whether the <see cref="SelectedPointStyle"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeSelectedPointStyle() => _selectedPointStyle != null;
-
-        /// <summary>
-        /// Check whether the <see cref="PointSize"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializePointSize() => _pointSize != default;
-
-        /// <summary>
-        /// Check whether the <see cref="SelectionStyle"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeSelectionStyle() => _selectionStyle != null;
-
-        /// <summary>
-        /// Check whether the <see cref="HelperStyle"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeHelperStyle() => _helperStyle != null;
-
-        /// <summary>
-        /// Check whether the <see cref="Decorator"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeDecorator() => _decorator != null;
     }
 }

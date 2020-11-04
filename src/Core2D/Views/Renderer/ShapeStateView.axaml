@@ -1,0 +1,26 @@
+﻿<UserControl x:Class="Core2D.Views.Renderer.ShapeStateView"
+             xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:converters="clr-namespace:Core2D.Converters;assembly=Core2D"
+             xmlns:Renderer="clr-namespace:Core2D.Renderer;assembly=Core2D"
+             xmlns:Designer="clr-namespace:Core2D.Designer;assembly=Core2D"
+             mc:Ignorable="d"
+             d:DataContext="{x:Static Designer:DesignerContext.State}"
+             d:DesignWidth="250" d:DesignHeight="400"
+             x:DataType="Renderer:ShapeState" x:CompileBindings="True">
+    <StackPanel>
+        <CheckBox Content="Default" IsChecked="{Binding Default, Mode=TwoWay}" HorizontalAlignment="Stretch" />
+        <CheckBox Content="Visible" IsChecked="{Binding Visible, Mode=TwoWay}" HorizontalAlignment="Stretch" />
+        <CheckBox Content="Printable" IsChecked="{Binding Printable, Mode=TwoWay}" HorizontalAlignment="Stretch" />
+        <CheckBox Content="Locked" IsChecked="{Binding Locked, Mode=TwoWay}" HorizontalAlignment="Stretch" />
+        <CheckBox Content="Size" IsChecked="{Binding Size, Mode=TwoWay}" HorizontalAlignment="Stretch" />
+        <CheckBox Content="Thickness" IsChecked="{Binding Thickness, Mode=TwoWay}" HorizontalAlignment="Stretch" />
+        <CheckBox Content="Connector" IsChecked="{Binding Connector, Mode=TwoWay}" HorizontalAlignment="Stretch" />
+        <CheckBox Content="None" IsChecked="{Binding None, Mode=TwoWay}" HorizontalAlignment="Stretch" />
+        <CheckBox Content="Standalone" IsChecked="{Binding Standalone, Mode=TwoWay}" HorizontalAlignment="Stretch" />
+        <CheckBox Content="Input" IsChecked="{Binding Input, Mode=TwoWay}" HorizontalAlignment="Stretch" />
+        <CheckBox Content="Output" IsChecked="{Binding Output, Mode=TwoWay}" HorizontalAlignment="Stretch" />
+    </StackPanel>
+</UserControl>

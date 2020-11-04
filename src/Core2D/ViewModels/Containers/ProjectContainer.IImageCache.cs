@@ -1,22 +1,19 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using Core2D.Renderer;
 
 namespace Core2D.Containers
 {
-    /// <summary>
-    /// Project image cache implementation.
-    /// </summary>
-    public partial class ProjectContainer : ObservableObject, IImageCache
+    public partial class ProjectContainer : BaseContainer, IImageCache
     {
         private readonly IDictionary<string, byte[]> _images = new Dictionary<string, byte[]>();
 
         private IEnumerable<IImageKey> GetKeys() => _images.Select(i => new ImageKey() { Key = i.Key }).ToList();
 
-        /// <inheritdoc/>
+        [IgnoreDataMember]
         public IEnumerable<IImageKey> Keys => GetKeys();
 
-        /// <inheritdoc/>
         public string AddImageFromFile(string path, byte[] bytes)
         {
             var name = System.IO.Path.GetFileName(path);
@@ -28,11 +25,10 @@ namespace Core2D.Containers
             }
 
             _images.Add(key, bytes);
-            Notify(nameof(Keys));
+            RaisePropertyChanged(nameof(Keys));
             return key;
         }
 
-        /// <inheritdoc/>
         public void AddImage(string key, byte[] bytes)
         {
             if (_images.Keys.Contains(key))
@@ -41,10 +37,9 @@ namespace Core2D.Containers
             }
 
             _images.Add(key, bytes);
-            Notify(nameof(Keys));
+            RaisePropertyChanged(nameof(Keys));
         }
 
-        /// <inheritdoc/>
         public byte[] GetImage(string key)
         {
             if (_images.TryGetValue(key, out byte[] bytes))
@@ -57,14 +52,12 @@ namespace Core2D.Containers
             }
         }
 
-        /// <inheritdoc/>
         public void RemoveImage(string key)
         {
             _images.Remove(key);
-            Notify(nameof(Keys));
+            RaisePropertyChanged(nameof(Keys));
         }
 
-        /// <inheritdoc/>
         public void PurgeUnusedImages(ICollection<string> used)
         {
             foreach (var kvp in _images.ToList())
@@ -74,7 +67,7 @@ namespace Core2D.Containers
                     _images.Remove(kvp.Key);
                 }
             }
-            Notify(nameof(Keys));
+            RaisePropertyChanged(nameof(Keys));
         }
     }
 }

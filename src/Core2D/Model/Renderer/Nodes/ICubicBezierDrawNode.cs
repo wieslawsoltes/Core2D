@@ -4,6 +4,6 @@ namespace Core2D.Renderer
 {
     public interface ICubicBezierDrawNode : IDrawNode
     {
-        ICubicBezierShape CubicBezier { get; set; }
+        CubicBezierShape CubicBezier { get; set; }
     }
 }

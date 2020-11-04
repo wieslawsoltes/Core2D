@@ -1,0 +1,57 @@
+﻿<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <StyleInclude Source="avares://Avalonia.Themes.Fluent/Accents/FluentLight.xaml" />
+    <StyleInclude Source="avares://Avalonia.Themes.Fluent/DensityStyles/Compact.xaml" />
+    <Style>
+        <Style.Resources>
+            <SolidColorBrush x:Key="IconTransparentBrush" Color="#00000000" />
+            <SolidColorBrush x:Key="IconAccentBrush1" Color="#FF424242" />
+            <SolidColorBrush x:Key="IconAccentBrush2" Color="#80424242" />
+        </Style.Resources>
+    </Style>
+    <Style>
+        <Style.Resources>
+            <GridLength x:Key="SliderPreContentMargin">3</GridLength>
+            <GridLength x:Key="SliderPostContentMargin">3</GridLength>
+        </Style.Resources>
+    </Style>
+    <Style Selector="Expander /template/ ToggleButton#PART_toggle">
+        <Setter Property="HorizontalAlignment" Value="Stretch" />
+    </Style>
+    <Style Selector="ListBoxItem">
+        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+        <Setter Property="Padding" Value="0,0,0,0" />
+    </Style>
+    <Style Selector="ListBoxItem TextBlock">
+        <Setter Property="Padding" Value="12,9,12,12" />
+    </Style>
+    <Style Selector="TabControl">
+        <Setter Property="Margin" Value="0,0,0,0" />
+        <Setter Property="Padding" Value="0,0,0,0" />
+    </Style>
+    <Style Selector="TabItem">
+        <Setter Property="FontWeight" Value="Normal" />
+        <Setter Property="Padding" Value="6,0,6,0" />
+    </Style>
+    <Style Selector="TreeView">
+        <Setter Property="Background" Value="{DynamicResource SystemControlBackgroundChromeMediumLowBrush}" />
+    </Style>
+    <Style Selector="DataGrid">
+        <Style.Resources>
+            <x:Double x:Key="ScrollBarThickness">16</x:Double>
+        </Style.Resources>
+        <Setter Property="Background" Value="{DynamicResource SystemControlBackgroundChromeMediumLowBrush}" />
+        <Setter Property="HorizontalGridLinesBrush" Value="{DynamicResource SystemChromeMediumColor}" />
+        <Setter Property="VerticalGridLinesBrush" Value="{DynamicResource SystemChromeMediumColor}" />
+    </Style>
+    <Style Selector="DataGridColumnHeader">
+        <Setter Property="Background" Value="{DynamicResource SystemControlBackgroundChromeMediumLowBrush}" />
+        <Setter Property="SeparatorBrush" Value="{DynamicResource SystemChromeMediumColor}" />
+    </Style>
+    <Style Selector="DataGridRow /template/ Rectangle#BackgroundRectangle">
+        <Setter Property="Fill" Value="{DynamicResource SystemControlHighlightListAccentLowBrush}" />
+    </Style>
+    <Style Selector="DataGridRow:selected">
+        <Setter Property="Foreground" Value="{DynamicResource SystemControlHighlightAltBaseHighBrush}" />
+    </Style>
+</Styles>

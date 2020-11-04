@@ -3,8 +3,6 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <OutputType>WinExe</OutputType>
-    <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
-    <EnableDefaultCompileItems>False</EnableDefaultCompileItems>
     <LangVersion>8.0</LangVersion>
     <IsPackable>False</IsPackable>
     <Nullable>enable</Nullable>
@@ -28,19 +26,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="**\*.cs" Exclude="obj\**" />
-    <Compile Update="**\*.xaml.cs">
-      <DependentUpon>%(Filename)</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
-    <AvaloniaResource Include="**\*.xaml">
-      <SubType>Designer</SubType>
-    </AvaloniaResource>
     <AvaloniaResource Include="Assets\**" />
   </ItemGroup>
 
   <PropertyGroup>
-    <AvaloniaVersion>0.10.0-preview5</AvaloniaVersion>
+    <AvaloniaVersion>0.10.0-preview6</AvaloniaVersion>
   </PropertyGroup>
 
   <ItemGroup>
@@ -56,7 +46,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Core2D.UI\Core2D.UI.csproj" />
+    <ProjectReference Include="..\Core2D\Core2D.csproj" />
   </ItemGroup>
 
 </Project>

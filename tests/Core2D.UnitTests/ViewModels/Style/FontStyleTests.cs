@@ -13,7 +13,7 @@ namespace Core2D.Style.UnitTests
         public void Inherits_From_ObservableObject()
         {
             var target = _factory.CreateFontStyle();
-            Assert.True(target is IObservableObject);
+            Assert.True(target is ObservableObject);
         }
 
         [Fact]
@@ -35,10 +35,10 @@ namespace Core2D.Style.UnitTests
 
             var propertyNames = new string[]
             {
-                nameof(IFontStyle.Flags),
-                nameof(IFontStyle.Regular),
-                nameof(IFontStyle.Bold),
-                nameof(IFontStyle.Italic)
+                nameof(FontStyle.Flags),
+                nameof(FontStyle.Regular),
+                nameof(FontStyle.Bold),
+                nameof(FontStyle.Italic)
             };
 
             Assert.Equal(propertyNames, target.PropertyNames);

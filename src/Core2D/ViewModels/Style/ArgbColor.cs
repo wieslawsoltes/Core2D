@@ -3,48 +3,46 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.Serialization;
 
 namespace Core2D.Style
 {
-    /// <summary>
-    /// Color definition using alpha, red, green and blue channels.
-    /// </summary>
-    public class ArgbColor : ObservableObject, IArgbColor
+    [DataContract(IsReference = true)]
+    public class ArgbColor : BaseColor
     {
         private byte _a;
         private byte _r;
         private byte _g;
         private byte _b;
 
-        /// <inheritdoc/>
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public byte A
         {
             get => _a;
-            set => Update(ref _a, value);
+            set => RaiseAndSetIfChanged(ref _a, value);
         }
 
-        /// <inheritdoc/>
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public byte R
         {
             get => _r;
-            set => Update(ref _r, value);
+            set => RaiseAndSetIfChanged(ref _r, value);
         }
 
-        /// <inheritdoc/>
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public byte G
         {
             get => _g;
-            set => Update(ref _g, value);
+            set => RaiseAndSetIfChanged(ref _g, value);
         }
 
-        /// <inheritdoc/>
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public byte B
         {
             get => _b;
-            set => Update(ref _b, value);
+            set => RaiseAndSetIfChanged(ref _b, value);
         }
 
-        /// <inheritdoc/>
         public override object Copy(IDictionary<object, object> shared)
         {
             return new ArgbColor()
@@ -56,33 +54,24 @@ namespace Core2D.Style
             };
         }
 
-        /// <inheritdoc/>
         public override bool IsDirty()
         {
             var isDirty = base.IsDirty();
             return isDirty;
         }
 
-        /// <inheritdoc/>
         public override void Invalidate()
         {
             base.Invalidate();
         }
 
-        /// <inheritdoc/>
         public string ToXamlString()
             => ToXamlHex(this);
 
-        /// <inheritdoc/>
         public string ToSvgString()
             => ToSvgHex(this);
 
-        /// <summary>
-        /// Creates a <see cref="ArgbColor"/> from an integer.
-        /// </summary>
-        /// <param name="value">The integer value.</param>
-        /// <returns>The color.</returns>
-        public static IArgbColor FromUInt32(uint value)
+        public static ArgbColor FromUInt32(uint value)
         {
             return new ArgbColor
             {
@@ -93,12 +82,7 @@ namespace Core2D.Style
             };
         }
 
-        /// <summary>
-        /// Parses a color string.
-        /// </summary>
-        /// <param name="s">The color string.</param>
-        /// <returns>The new instance of the <see cref="ArgbColor"/> class.</returns>
-        public static IArgbColor Parse(string s)
+        public static ArgbColor Parse(string s)
         {
             if (s[0] == '#')
             {
@@ -130,48 +114,14 @@ namespace Core2D.Style
             }
         }
 
-        /// <summary>
-        /// Converts a color to xaml hex string.
-        /// </summary>
-        /// <param name="c">The color instance.</param>
-        /// <returns>The color string.</returns>
-        public static string ToXamlHex(IArgbColor c)
+        public static string ToXamlHex(ArgbColor c)
         {
             return string.Concat('#', c.A.ToString("X2"), c.R.ToString("X2"), c.G.ToString("X2"), c.B.ToString("X2"));
         }
 
-        /// <summary>
-        /// Converts a color to svg hex string.
-        /// </summary>
-        /// <param name="c">The color instance.</param>
-        /// <returns>The color string.</returns>
-        public static string ToSvgHex(IArgbColor c)
+        public static string ToSvgHex(ArgbColor c)
         {
             return string.Concat('#', c.R.ToString("X2"), c.G.ToString("X2"), c.B.ToString("X2")); // NOTE: Not using c.A.ToString("X2")
         }
-
-        /// <summary>
-        /// Check whether the <see cref="A"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeA() => _a != default(byte);
-
-        /// <summary>
-        /// Check whether the <see cref="R"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeR() => _r != default(byte);
-
-        /// <summary>
-        /// Check whether the <see cref="G"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeG() => _g != default(byte);
-
-        /// <summary>
-        /// Check whether the <see cref="B"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeB() => _b != default(byte);
     }
 }

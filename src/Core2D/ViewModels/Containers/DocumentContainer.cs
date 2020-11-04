@@ -1,38 +1,35 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Runtime.Serialization;
 
 namespace Core2D.Containers
 {
-    /// <summary>
-    /// Document container.
-    /// </summary>
-    public class DocumentContainer : ObservableObject, IDocumentContainer
+    [DataContract(IsReference = true)]
+    public class DocumentContainer : BaseContainer
     {
         private bool _isExpanded = true;
-        private ImmutableArray<IPageContainer> _pages;
+        private ImmutableArray<PageContainer> _pages;
 
-        /// <inheritdoc/>
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public bool IsExpanded
         {
             get => _isExpanded;
-            set => Update(ref _isExpanded, value);
+            set => RaiseAndSetIfChanged(ref _isExpanded, value);
         }
 
-        /// <inheritdoc/>
-        public ImmutableArray<IPageContainer> Pages
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
+        public ImmutableArray<PageContainer> Pages
         {
             get => _pages;
-            set => Update(ref _pages, value);
+            set => RaiseAndSetIfChanged(ref _pages, value);
         }
 
-        /// <inheritdoc/>
         public override object Copy(IDictionary<object, object> shared)
         {
             throw new NotImplementedException();
         }
 
-        /// <inheritdoc/>
         public override bool IsDirty()
         {
             var isDirty = base.IsDirty();
@@ -45,7 +42,6 @@ namespace Core2D.Containers
             return isDirty;
         }
 
-        /// <inheritdoc/>
         public override void Invalidate()
         {
             base.Invalidate();
@@ -55,17 +51,5 @@ namespace Core2D.Containers
                 page.Invalidate();
             }
         }
-
-        /// <summary>
-        /// Check whether the <see cref="IsExpanded"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeIsExpanded() => _isExpanded != default;
-
-        /// <summary>
-        /// Check whether the <see cref="Pages"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializePages() => true;
     }
 }

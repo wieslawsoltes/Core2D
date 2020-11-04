@@ -13,9 +13,6 @@ using Spatial;
 
 namespace Core2D.Editor.Tools.Decorators
 {
-    /// <summary>
-    /// Box decorator.
-    /// </summary>
     public class BoxDecorator : ObservableObject, IDrawable, IDecorator
     {
         private enum Mode
@@ -35,34 +32,34 @@ namespace Core2D.Editor.Tools.Decorators
 
         private bool _isVisible;
         private readonly IServiceProvider _serviceProvider;
-        private IShapeStyle _style;
+        private ShapeStyle _style;
         private bool _isStroked;
         private bool _isFilled;
-        private ILayerContainer _layer;
-        private IList<IBaseShape> _shapes;
+        private LayerContainer _layer;
+        private IList<BaseShape> _shapes;
         private readonly IFactory _factory;
         private readonly decimal _sizeLarge;
         private readonly decimal _sizeSmall;
         private readonly decimal _rotateDistance;
         private GroupBox _groupBox;
-        private readonly IShapeStyle _handleStyle;
-        private readonly IShapeStyle _boundsStyle;
-        private readonly IShapeStyle _selectedHandleStyle;
-        private readonly IShapeStyle _selectedBoundsStyle;
-        private readonly IRectangleShape _boundsHandle;
-        private readonly ILineShape _rotateLine;
-        private readonly IEllipseShape _rotateHandle;
-        private readonly IEllipseShape _topLeftHandle;
-        private readonly IEllipseShape _topRightHandle;
-        private readonly IEllipseShape _bottomLeftHandle;
-        private readonly IEllipseShape _bottomRightHandle;
-        private readonly IRectangleShape _topHandle;
-        private readonly IRectangleShape _bottomHandle;
-        private readonly IRectangleShape _leftHandle;
-        private readonly IRectangleShape _rightHandle;
-        private List<IBaseShape> _handles;
-        private IBaseShape _currentHandle = null;
-        private List<IPointShape> _points;
+        private readonly ShapeStyle _handleStyle;
+        private readonly ShapeStyle _boundsStyle;
+        private readonly ShapeStyle _selectedHandleStyle;
+        private readonly ShapeStyle _selectedBoundsStyle;
+        private readonly RectangleShape _boundsHandle;
+        private readonly LineShape _rotateLine;
+        private readonly EllipseShape _rotateHandle;
+        private readonly EllipseShape _topLeftHandle;
+        private readonly EllipseShape _topRightHandle;
+        private readonly EllipseShape _bottomLeftHandle;
+        private readonly EllipseShape _bottomRightHandle;
+        private readonly RectangleShape _topHandle;
+        private readonly RectangleShape _bottomHandle;
+        private readonly RectangleShape _leftHandle;
+        private readonly RectangleShape _rightHandle;
+        private List<BaseShape> _handles;
+        private BaseShape _currentHandle = null;
+        private List<PointShape> _points;
         private Mode _mode = Mode.None;
         private decimal _startX;
         private decimal _startY;
@@ -71,48 +68,38 @@ namespace Core2D.Editor.Tools.Decorators
         private decimal _rotateAngle = 270m;
         private bool _previousDrawPoints = true;
 
-        /// <inheritdoc/>
-        public ILayerContainer Layer
+        public LayerContainer Layer
         {
             get => _layer;
-            set => Update(ref _layer, value);
+            set => RaiseAndSetIfChanged(ref _layer, value);
         }
 
-        /// <inheritdoc/>
-        public IList<IBaseShape> Shapes
+        public IList<BaseShape> Shapes
         {
             get => _shapes;
-            set => Update(ref _shapes, value);
+            set => RaiseAndSetIfChanged(ref _shapes, value);
         }
 
-        /// <inheritdoc/>
         public bool IsVisible => _isVisible;
 
-        /// <inheritdoc/>
-        public IShapeStyle Style
+        public ShapeStyle Style
         {
             get => _style;
-            set => Update(ref _style, value);
+            set => RaiseAndSetIfChanged(ref _style, value);
         }
 
-        /// <inheritdoc/>
         public bool IsStroked
         {
             get => _isStroked;
-            set => Update(ref _isStroked, value);
+            set => RaiseAndSetIfChanged(ref _isStroked, value);
         }
 
-        /// <inheritdoc/>
         public bool IsFilled
         {
             get => _isFilled;
-            set => Update(ref _isFilled, value);
+            set => RaiseAndSetIfChanged(ref _isFilled, value);
         }
 
-        /// <summary>
-        /// Initialize new instance of <see cref="BoxDecorator"/> class.
-        /// </summary>
-        /// <param name="serviceProvider">The service provider.</param>
         public BoxDecorator(IServiceProvider serviceProvider)
         {
             _serviceProvider = serviceProvider;
@@ -135,7 +122,7 @@ namespace Core2D.Editor.Tools.Decorators
             _rightHandle = _factory.CreateRectangleShape(0, 0, 0, 0, _handleStyle, true, true, name: "_rightHandle");
             _boundsHandle = _factory.CreateRectangleShape(0, 0, 0, 0, _boundsStyle, true, false, name: "_boundsHandle");
             _rotateLine = _factory.CreateLineShape(0, 0, 0, 0, _boundsStyle, true, name: "_rotateLine");
-            _handles = new List<IBaseShape>
+            _handles = new List<BaseShape>
             {
                 //_rotateHandle,
                 _topLeftHandle,
@@ -163,13 +150,11 @@ namespace Core2D.Editor.Tools.Decorators
             _rotateLine.State.Flags |= ShapeStateFlags.Thickness;
         }
 
-        /// <inheritdoc/>
         public override object Copy(IDictionary<object, object> shared)
         {
             throw new NotImplementedException();
         }
 
-        /// <inheritdoc/>
         public override bool IsDirty()
         {
             var isDirty = base.IsDirty();
@@ -182,7 +167,6 @@ namespace Core2D.Editor.Tools.Decorators
             return isDirty;
         }
 
-        /// <inheritdoc/>
         public override void Invalidate()
         {
             base.Invalidate();
@@ -193,7 +177,6 @@ namespace Core2D.Editor.Tools.Decorators
             }
         }
 
-        /// <inheritdoc/>
         public virtual void DrawShape(object dc, IShapeRenderer renderer)
         {
             if (_isVisible)
@@ -205,18 +188,15 @@ namespace Core2D.Editor.Tools.Decorators
             }
         }
 
-        /// <inheritdoc/>
         public virtual void DrawPoints(object dc, IShapeRenderer renderer)
         {
         }
 
-        /// <inheritdoc/>
         public virtual bool Invalidate(IShapeRenderer renderer)
         {
             return false;
         }
 
-        /// <inheritdoc/>
         public void Update(bool rebuild = true)
         {
             if (_layer == null || _shapes == null)
@@ -310,7 +290,6 @@ namespace Core2D.Editor.Tools.Decorators
             _layer.InvalidateLayer();
         }
 
-        /// <inheritdoc/>
         public void Show()
         {
             if (_layer == null || _shapes == null)
@@ -323,7 +302,7 @@ namespace Core2D.Editor.Tools.Decorators
                 return;
             }
 
-            var editor = _serviceProvider.GetService<IProjectEditor>();
+            var editor = _serviceProvider.GetService<ProjectEditor>();
             _previousDrawPoints = editor.PageState.DrawPoints;
             editor.PageState.DrawPoints = false;
 
@@ -354,7 +333,6 @@ namespace Core2D.Editor.Tools.Decorators
             _layer.InvalidateLayer();
         }
 
-        /// <inheritdoc/>
         public void Hide()
         {
             if (_layer == null || _shapes == null)
@@ -364,7 +342,7 @@ namespace Core2D.Editor.Tools.Decorators
 
             if (_isVisible == true)
             {
-                var editor = _serviceProvider.GetService<IProjectEditor>();
+                var editor = _serviceProvider.GetService<ProjectEditor>();
                 editor.PageState.DrawPoints = _previousDrawPoints;
             }
 
@@ -394,7 +372,6 @@ namespace Core2D.Editor.Tools.Decorators
             _layer.InvalidateLayer();
         }
 
-        /// <inheritdoc/>
         public bool HitTest(InputArgs args)
         {
             if (_isVisible == false)
@@ -402,7 +379,7 @@ namespace Core2D.Editor.Tools.Decorators
                 return false;
             }
 
-            var editor = _serviceProvider.GetService<IProjectEditor>();
+            var editor = _serviceProvider.GetService<ProjectEditor>();
             (double x, double y) = args;
             (decimal sx, decimal sy) = editor.TryToSnap(args);
 
@@ -479,7 +456,6 @@ namespace Core2D.Editor.Tools.Decorators
             return false;
         }
 
-        /// <inheritdoc/>
         public void Move(InputArgs args)
         {
             if (_layer == null || _shapes == null)
@@ -492,7 +468,7 @@ namespace Core2D.Editor.Tools.Decorators
                 return;
             }
 
-            var editor = _serviceProvider.GetService<IProjectEditor>();
+            var editor = _serviceProvider.GetService<ProjectEditor>();
 
             bool isProportionalResize = args.Modifier.HasFlag(ModifierFlags.Shift);
 

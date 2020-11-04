@@ -1,61 +1,59 @@
-﻿
+﻿using System.Runtime.Serialization;
+
 namespace Core2D.Style
 {
-    /// <summary>
-    /// Base style.
-    /// </summary>
-    public abstract class BaseStyle : ObservableObject, IBaseStyle
+    [DataContract(IsReference = true)]
+    public abstract class BaseStyle : ObservableObject
     {
-        private IColor _stroke;
-        private IColor _fill;
+        private BaseColor _stroke;
+        private BaseColor _fill;
         private double _thickness;
         private LineCap _lineCap;
         private string _dashes;
         private double _dashOffset;
 
-        /// <inheritdoc/>
-        public IColor Stroke
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
+        public BaseColor Stroke
         {
             get => _stroke;
-            set => Update(ref _stroke, value);
+            set => RaiseAndSetIfChanged(ref _stroke, value);
         }
 
-        /// <inheritdoc/>
-        public IColor Fill
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
+        public BaseColor Fill
         {
             get => _fill;
-            set => Update(ref _fill, value);
+            set => RaiseAndSetIfChanged(ref _fill, value);
         }
 
-        /// <inheritdoc/>
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public double Thickness
         {
             get => _thickness;
-            set => Update(ref _thickness, value);
+            set => RaiseAndSetIfChanged(ref _thickness, value);
         }
 
-        /// <inheritdoc/>
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public LineCap LineCap
         {
             get => _lineCap;
-            set => Update(ref _lineCap, value);
+            set => RaiseAndSetIfChanged(ref _lineCap, value);
         }
 
-        /// <inheritdoc/>
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public string Dashes
         {
             get => _dashes;
-            set => Update(ref _dashes, value);
+            set => RaiseAndSetIfChanged(ref _dashes, value);
         }
 
-        /// <inheritdoc/>
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public double DashOffset
         {
             get => _dashOffset;
-            set => Update(ref _dashOffset, value);
+            set => RaiseAndSetIfChanged(ref _dashOffset, value);
         }
 
-        /// <inheritdoc/>
         public override bool IsDirty()
         {
             var isDirty = base.IsDirty();
@@ -66,48 +64,11 @@ namespace Core2D.Style
             return isDirty;
         }
 
-        /// <inheritdoc/>
         public override void Invalidate()
         {
             base.Invalidate();
             Stroke.Invalidate();
             Fill.Invalidate();
         }
-
-        /// <summary>
-        /// Check whether the <see cref="Stroke"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeStroke() => _stroke != null;
-
-        /// <summary>
-        /// Check whether the <see cref="Fill"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeFill() => _fill != null;
-
-        /// <summary>
-        /// Check whether the <see cref="Thickness"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeThickness() => _thickness != default;
-
-        /// <summary>
-        /// Check whether the <see cref="LineCap"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeLineCap() => _lineCap != default;
-
-        /// <summary>
-        /// Check whether the <see cref="Dashes"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeDashes() => !string.IsNullOrWhiteSpace(_dashes);
-
-        /// <summary>
-        /// Check whether the <see cref="DashOffset"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeDashOffset() => _dashOffset != default;
     }
 }

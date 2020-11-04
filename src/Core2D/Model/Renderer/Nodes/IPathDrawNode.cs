@@ -4,6 +4,6 @@ namespace Core2D.Renderer
 {
     public interface IPathDrawNode : IDrawNode
     {
-        IPathShape Path { get; set; }
+        PathShape Path { get; set; }
     }
 }

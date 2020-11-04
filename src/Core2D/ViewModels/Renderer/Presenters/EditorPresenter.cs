@@ -2,13 +2,9 @@
 
 namespace Core2D.Renderer.Presenters
 {
-    /// <summary>
-    /// Editor container presenter.
-    /// </summary>
     public class EditorPresenter : IContainerPresenter
     {
-        /// <inheritdoc/>
-        public void Render(object dc, IShapeRenderer renderer, IPageContainer container, double dx, double dy)
+        public void Render(object dc, IShapeRenderer renderer, PageContainer container, double dx, double dy)
         {
             renderer.DrawPage(dc, container);
 

@@ -1,39 +1,36 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Runtime.Serialization;
 using System.Text;
 
 namespace Core2D.Path
 {
-    /// <summary>
-    /// Path geometry.
-    /// </summary>
-    public class PathGeometry : ObservableObject, IPathGeometry
+    [DataContract(IsReference = true)]
+    public class PathGeometry : ObservableObject
     {
-        private ImmutableArray<IPathFigure> _figures;
+        private ImmutableArray<PathFigure> _figures;
         private FillRule _fillRule;
 
-        /// <inheritdoc/>
-        public ImmutableArray<IPathFigure> Figures
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
+        public ImmutableArray<PathFigure> Figures
         {
             get => _figures;
-            set => Update(ref _figures, value);
+            set => RaiseAndSetIfChanged(ref _figures, value);
         }
 
-        /// <inheritdoc/>
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public FillRule FillRule
         {
             get => _fillRule;
-            set => Update(ref _fillRule, value);
+            set => RaiseAndSetIfChanged(ref _fillRule, value);
         }
 
-        /// <inheritdoc/>
         public override object Copy(IDictionary<object, object> shared)
         {
             throw new NotImplementedException();
         }
 
-        /// <inheritdoc/>
         public override bool IsDirty()
         {
             var isDirty = base.IsDirty();
@@ -46,7 +43,6 @@ namespace Core2D.Path
             return isDirty;
         }
 
-        /// <inheritdoc/>
         public override void Invalidate()
         {
             base.Invalidate();
@@ -57,7 +53,7 @@ namespace Core2D.Path
             }
         }
 
-        public string ToXamlString(ImmutableArray<IPathFigure> figures)
+        public string ToXamlString(ImmutableArray<PathFigure> figures)
         {
             if (figures.Length == 0)
             {
@@ -75,7 +71,7 @@ namespace Core2D.Path
             return sb.ToString();
         }
 
-        public string ToSvgString(ImmutableArray<IPathFigure> figures)
+        public string ToSvgString(ImmutableArray<PathFigure> figures)
         {
             if (figures.Length == 0)
             {
@@ -93,7 +89,6 @@ namespace Core2D.Path
             return sb.ToString();
         }
 
-        /// <inheritdoc/>
         public string ToXamlString()
         {
             string figuresString = string.Empty;
@@ -111,7 +106,6 @@ namespace Core2D.Path
             return figuresString;
         }
 
-        /// <inheritdoc/>
         public string ToSvgString()
         {
             if (Figures.Length > 0)
@@ -120,17 +114,5 @@ namespace Core2D.Path
             }
             return string.Empty;
         }
-
-        /// <summary>
-        /// Check whether the <see cref="Figures"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeFigures() => true;
-
-        /// <summary>
-        /// Check whether the <see cref="FillRule"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeFillRule() => _fillRule != default;
     }
 }

@@ -1,116 +1,132 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
+using System.Runtime.Serialization;
 using Core2D.Data;
 using Core2D.Renderer;
 using Core2D.Style;
 
 namespace Core2D.Shapes
 {
-    /// <summary>
-    /// Base class for shapes.
-    /// </summary>
-    public abstract class BaseShape : ObservableObject, IBaseShape
+    [DataContract(IsReference = true)]
+    public abstract class BaseShape : ObservableObject, IDataObject
     {
-        private IDictionary<string, object> _properties = new Dictionary<string, object>();
-        private IShapeState _state;
-        private IShapeStyle _style;
+        private IDictionary<string, object> _propertyCache = new Dictionary<string, object>();
+        private ShapeState _state;
+        private ShapeStyle _style;
         private bool _isStroked;
         private bool _isFilled;
-        private IContext _data;
+        private ImmutableArray<Property> _properties;
+        private Record _record;
 
-        /// <inheritdoc/>
+        [IgnoreDataMember]
         public abstract Type TargetType { get; }
 
-        /// <inheritdoc/>
-        public virtual IShapeState State
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
+        public ShapeState State
         {
             get => _state;
-            set => Update(ref _state, value);
+            set => RaiseAndSetIfChanged(ref _state, value);
         }
 
-        /// <inheritdoc/>
-        public virtual IShapeStyle Style
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
+        public ShapeStyle Style
         {
             get => _style;
-            set => Update(ref _style, value);
+            set => RaiseAndSetIfChanged(ref _style, value);
         }
 
-        /// <inheritdoc/>
-        public virtual bool IsStroked
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
+        public bool IsStroked
         {
             get => _isStroked;
-            set => Update(ref _isStroked, value);
+            set => RaiseAndSetIfChanged(ref _isStroked, value);
         }
 
-        /// <inheritdoc/>
-        public virtual bool IsFilled
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
+        public bool IsFilled
         {
             get => _isFilled;
-            set => Update(ref _isFilled, value);
+            set => RaiseAndSetIfChanged(ref _isFilled, value);
         }
 
-        /// <inheritdoc/>
-        public virtual IContext Data
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
+        public ImmutableArray<Property> Properties
         {
-            get => _data;
-            set => Update(ref _data, value);
+            get => _properties;
+            set => RaiseAndSetIfChanged(ref _properties, value);
         }
 
-        /// <inheritdoc/>
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
+        public Record Record
+        {
+            get => _record;
+            set => RaiseAndSetIfChanged(ref _record, value);
+        }
+
         public override bool IsDirty()
         {
             var isDirty = base.IsDirty();
 
             isDirty |= State.IsDirty();
-            isDirty |= Data.IsDirty();
+
+            foreach (var property in Properties)
+            {
+                isDirty |= property.IsDirty();
+            }
+
+            if (Record != null)
+            {
+                isDirty |= Record.IsDirty();
+            }
 
             return isDirty;
         }
 
-        /// <inheritdoc/>
         public override void Invalidate()
         {
             base.Invalidate();
+
             State.Invalidate();
-            Data.Invalidate();
+
+            foreach (var property in Properties)
+            {
+                property.Invalidate();
+            }
+
+            if (Record != null)
+            {
+                Record.Invalidate();
+            }
         }
 
-        /// <inheritdoc/>
         public abstract void DrawShape(object dc, IShapeRenderer renderer);
 
-        /// <inheritdoc/>
         public abstract void DrawPoints(object dc, IShapeRenderer renderer);
 
-        /// <inheritdoc/>
         public virtual bool Invalidate(IShapeRenderer renderer)
         {
             return false;
         }
 
-        /// <inheritdoc/>
-        public abstract void Bind(IDataFlow dataFlow, object db, object r);
+        public abstract void Bind(DataFlow dataFlow, object db, object r);
 
-        /// <inheritdoc/>
         public virtual void SetProperty(string name, object value)
         {
-            _properties[name] = value;
+            _propertyCache[name] = value;
         }
 
-        /// <inheritdoc/>
         public virtual object GetProperty(string name)
         {
-            if (_properties.ContainsKey(name))
+            if (_propertyCache.ContainsKey(name))
             {
-                return _properties[name];
+                return _propertyCache[name];
             }
-
             return null;
         }
 
-        /// <inheritdoc/>
         public abstract void Move(ISelection selection, decimal dx, decimal dy);
 
-        /// <inheritdoc/>
         public virtual void Select(ISelection selection)
         {
             if (!selection.SelectedShapes.Contains(this))
@@ -119,7 +135,6 @@ namespace Core2D.Shapes
             }
         }
 
-        /// <inheritdoc/>
         public virtual void Deselect(ISelection selection)
         {
             if (selection.SelectedShapes.Contains(this))
@@ -128,37 +143,6 @@ namespace Core2D.Shapes
             }
         }
 
-        /// <inheritdoc/>
-        public abstract void GetPoints(IList<IPointShape> points);
-
-        /// <summary>
-        /// Check whether the <see cref="State"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeState() => _state != null;
-
-        /// <summary>
-        /// Check whether the <see cref="Style"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeStyle() => _style != null;
-
-        /// <summary>
-        /// Check whether the <see cref="IsStroked"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeIsStroked() => _isStroked != default;
-
-        /// <summary>
-        /// Check whether the <see cref="IsFilled"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeIsFilled() => _isFilled != default;
-
-        /// <summary>
-        /// Check whether the <see cref="Data"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeData() => _data != null;
+        public abstract void GetPoints(IList<PointShape> points);
     }
 }

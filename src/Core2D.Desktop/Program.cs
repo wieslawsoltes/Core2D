@@ -15,9 +15,9 @@ using Avalonia.Media.Imaging;
 using Avalonia.OpenGL;
 using Avalonia.Threading;
 using Core2D.Editor;
-using Core2D.UI;
-using Core2D.UI.Configuration.Themes;
-using Core2D.UI.Views;
+using Core2D;
+using Core2D.Configuration.Themes;
+using Core2D.Views;
 using Microsoft.CodeAnalysis.CSharp.Scripting;
 using Microsoft.CodeAnalysis.Scripting;
 
@@ -59,23 +59,23 @@ namespace Core2D
             return applicationLifetime?.MainWindow;
         }
 
-        public static MainControl? GetMainwControl()
+        public static MainView? GetMainView()
         {
             var mainWindow = GetMainwWindow();
-            return mainWindow?.Content as MainControl;
+            return mainWindow?.Content as MainView;
         }
 
-        public static IProjectEditor? GetEditor()
+        public static ProjectEditor? GetEditor()
         {
             var mainWidnow = GetMainwWindow();
-            return mainWidnow?.DataContext as IProjectEditor;
+            return mainWidnow?.DataContext as ProjectEditor;
         }
 
         public static async Task Screenshot(string path = "screenshot.png", double width = 1366, double height = 690)
         {
             await Util.RunUIJob(() =>
             {
-                var mainConntrol = GetMainwControl();
+                var mainConntrol = GetMainView();
                 if (mainConntrol != null)
                 {
                     var size = new Size(width, height);
@@ -169,8 +169,8 @@ namespace Core2D
                 var applicationLifetime = (IClassicDesktopStyleApplicationLifetime)Application.Current.ApplicationLifetime;
                 var mainWindow = applicationLifetime?.MainWindow;
                 var headlessWindow = mainWindow?.PlatformImpl as IHeadlessWindow;
-                var mainConntrol = mainWindow?.Content as MainControl;
-                var editor = mainConntrol?.DataContext as IProjectEditor;
+                var mainView = mainWindow?.Content as MainView;
+                var editor = mainView?.DataContext as ProjectEditor;
 
                 var pt = new Point(-1, -1);
                 headlessWindow?.MouseMove(pt);
@@ -178,21 +178,21 @@ namespace Core2D
 
                 var size = new Size(1366, 690);
 
-                if (mainConntrol != null)
+                if (mainView != null)
                 {
-                    Util.Screenshot(mainConntrol, size, $"Core2D-Dashboard-{App.DefaultTheme}.png");
+                    Util.Screenshot(mainView, size, $"Core2D-Dashboard-{App.DefaultTheme}.png");
                     Dispatcher.UIThread.RunJobs();
                 }
 
-                if (mainConntrol != null)
+                if (mainView != null)
                 {
                     editor?.OnNew(null);
                     Dispatcher.UIThread.RunJobs();
                 }
 
-                if (mainConntrol != null)
+                if (mainView != null)
                 {
-                    Util.Screenshot(mainConntrol, size, $"Core2D-Editor-{App.DefaultTheme}.png");
+                    Util.Screenshot(mainView, size, $"Core2D-Editor-{App.DefaultTheme}.png");
                     Dispatcher.UIThread.RunJobs();
                 }
 
@@ -206,10 +206,10 @@ namespace Core2D
             {
                 var applicationLifetime = (IClassicDesktopStyleApplicationLifetime)Application.Current.ApplicationLifetime;
                 var mainWindow = applicationLifetime?.MainWindow;
-                var mainConntrol = mainWindow?.Content as MainControl;
-                var editor = mainConntrol?.DataContext as IProjectEditor;
+                var mainView = mainWindow?.Content as MainView;
+                var editor = mainView?.DataContext as ProjectEditor;
 
-                if (mainConntrol != null)
+                if (mainView != null)
                 {
                     if (settings.Scripts != null)
                     {
@@ -277,7 +277,7 @@ namespace Core2D
                         {
                             AngleOptions.PlatformApi.DirectX11
                         }
-                    }); 
+                    });
                 }
 
                 if (settings.UseManagedSystemDialogs)
@@ -462,6 +462,6 @@ namespace Core2D
         public static AppBuilder BuildAvaloniaApp()
             => AppBuilder.Configure<App>()
                          .UsePlatformDetect()
-                         .LogToDebug();
+                         .LogToTrace();
     }
 }

@@ -1,0 +1,46 @@
+﻿<UserControl x:Class="Core2D.Views.Containers.PageContainerView"
+             xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
+             xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
+             xmlns:iac="clr-namespace:Avalonia.Xaml.Interactions.Custom;assembly=Avalonia.Xaml.Interactions.Custom"
+             xmlns:idd="clr-namespace:Core2D.DragAndDrop;assembly=Core2D"
+             xmlns:handlers="clr-namespace:Core2D.DragAndDrop.Handlers;assembly=Core2D"
+             xmlns:converters="clr-namespace:Core2D.Converters;assembly=Core2D"
+             xmlns:views="clr-namespace:Core2D.Views;assembly=Core2D"
+             xmlns:renderer="clr-namespace:Core2D.Views.Renderer;assembly=Core2D"
+             xmlns:Containers="clr-namespace:Core2D.Containers;assembly=Core2D"
+             xmlns:Shapes="clr-namespace:Core2D.Shapes;assembly=Core2D"
+             xmlns:Designer="clr-namespace:Core2D.Designer;assembly=Core2D"
+             mc:Ignorable="d"
+             d:DataContext="{x:Static Designer:DesignerContext.Page}"
+             d:DesignWidth="250" d:DesignHeight="400"
+             x:DataType="Containers:PageContainer" x:CompileBindings="True">
+    <StackPanel>
+        <Grid ColumnDefinitions="50*,6,50*">
+            <StackPanel Grid.Column="0">
+                <Label Content="Width" Margin="{DynamicResource TextControlThemePadding}" />
+                <TextBox Text="{Binding Width, Mode=TwoWay}" />
+            </StackPanel>
+            <GridSplitter ResizeDirection="Columns" ResizeBehavior="PreviousAndNext" Background="Transparent" Width="6" Grid.Column="1" />
+            <StackPanel Grid.Column="2">
+                <Label Content="Height" Margin="{DynamicResource TextControlThemePadding}" />
+                <TextBox Text="{Binding Height, Mode=TwoWay}" />
+            </StackPanel>
+        </Grid>
+        <Expander Header="Background" IsExpanded="True">
+            <ContentControl Content="{Binding Background}" />
+        </Expander>
+        <Expander Header="Grid" IsExpanded="False">
+            <renderer:GridView />
+        </Expander>
+        <Expander Header="Data" IsExpanded="False">
+            <views:DataObjectView />
+        </Expander>
+        <Expander Header="Template" IsExpanded="False">
+            <ContentControl Content="{Binding Template}" />
+        </Expander>
+    </StackPanel>
+</UserControl>

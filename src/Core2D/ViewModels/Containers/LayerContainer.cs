@@ -1,49 +1,48 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Runtime.Serialization;
 using Core2D.Shapes;
 
 namespace Core2D.Containers
 {
-    /// <summary>
-    /// Layer container.
-    /// </summary>
-    public class LayerContainer : ObservableObject, ILayerContainer
+    public class InvalidateLayerEventArgs : EventArgs { }
+
+    public delegate void InvalidateLayerEventHandler(object sender, InvalidateLayerEventArgs e);
+
+    [DataContract(IsReference = true)]
+    public class LayerContainer : BaseContainer
     {
-        /// <inheritdoc/>
         public event InvalidateLayerEventHandler InvalidateLayerHandler;
 
         private bool _isVisible = true;
-        private ImmutableArray<IBaseShape> _shapes;
+        private ImmutableArray<BaseShape> _shapes;
 
-        /// <inheritdoc/>
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public bool IsVisible
         {
             get => _isVisible;
             set
             {
-                Update(ref _isVisible, value);
+                RaiseAndSetIfChanged(ref _isVisible, value);
                 InvalidateLayer();
             }
         }
 
-        /// <inheritdoc/>
-        public ImmutableArray<IBaseShape> Shapes
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
+        public ImmutableArray<BaseShape> Shapes
         {
             get => _shapes;
-            set => Update(ref _shapes, value);
+            set => RaiseAndSetIfChanged(ref _shapes, value);
         }
 
-        /// <inheritdoc/>
         public void InvalidateLayer() => InvalidateLayerHandler?.Invoke(this, new InvalidateLayerEventArgs());
 
-        /// <inheritdoc/>
         public override object Copy(IDictionary<object, object> shared)
         {
             throw new NotImplementedException();
         }
 
-        /// <inheritdoc/>
         public override bool IsDirty()
         {
             var isDirty = base.IsDirty();
@@ -56,7 +55,6 @@ namespace Core2D.Containers
             return isDirty;
         }
 
-        /// <inheritdoc/>
         public override void Invalidate()
         {
             base.Invalidate();
@@ -66,17 +64,5 @@ namespace Core2D.Containers
                 shape.Invalidate();
             }
         }
-
-        /// <summary>
-        /// Check whether the <see cref="IsVisible"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeIsVisible() => _isVisible != default;
-
-        /// <summary>
-        /// Check whether the <see cref="Shapes"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeShapes() => true;
     }
 }

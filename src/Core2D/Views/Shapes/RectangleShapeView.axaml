@@ -1,0 +1,39 @@
+﻿<UserControl x:Class="Core2D.Views.Shapes.RectangleShapeView"
+             xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:converters="clr-namespace:Core2D.Converters;assembly=Core2D"
+             xmlns:views="clr-namespace:Core2D.Views;assembly=Core2D"
+             xmlns:Shapes="clr-namespace:Core2D.Shapes;assembly=Core2D"
+             xmlns:Designer="clr-namespace:Core2D.Designer;assembly=Core2D"
+             mc:Ignorable="d"
+             d:DataContext="{x:Static Designer:DesignerContext.Rectangle}"
+             d:DesignWidth="250" d:DesignHeight="400"
+             x:DataType="Shapes:RectangleShape" x:CompileBindings="True">
+    <StackPanel>
+        <Expander Header="Rectangle" IsExpanded="True">
+            <StackPanel>
+                <Label Content="Name" Margin="{DynamicResource TextControlThemePadding}" />
+                <TextBox Text="{Binding Name, Mode=TwoWay}" />
+                <CheckBox Content="IsStroked" IsChecked="{Binding IsStroked, Mode=TwoWay}" HorizontalAlignment="Stretch" />
+                <CheckBox Content="IsFilled" IsChecked="{Binding IsFilled, Mode=TwoWay}" HorizontalAlignment="Stretch" />
+            </StackPanel>
+        </Expander>
+        <Expander Header="TopLeft" IsExpanded="False">
+            <ContentControl Content="{Binding TopLeft}" />
+        </Expander>
+        <Expander Header="BottomRight" IsExpanded="False">
+            <ContentControl Content="{Binding BottomRight}" />
+        </Expander>
+        <Expander Header="Data" IsExpanded="False">
+            <views:DataObjectView />
+        </Expander>
+        <Expander Header="Style" IsExpanded="False">
+            <ContentControl Content="{Binding Style}" />
+        </Expander>
+        <Expander Header="State" IsExpanded="False">
+            <ContentControl Content="{Binding State}" />
+        </Expander>
+    </StackPanel>
+</UserControl>

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
+using System.Runtime.Serialization;
 using Core2D.Data;
 using Core2D.History;
 using Core2D.Scripting;
@@ -10,150 +11,143 @@ using Core2D.Style;
 
 namespace Core2D.Containers
 {
-    /// <summary>
-    /// Project container.
-    /// </summary>
-    public partial class ProjectContainer : ObservableObject, IProjectContainer
+    [DataContract(IsReference = true)]
+    public partial class ProjectContainer : BaseContainer
     {
-        private IOptions _options;
+        private Options _options;
         private IHistory _history;
-        private ImmutableArray<ILibrary<IShapeStyle>> _styleLibraries;
-        private ImmutableArray<ILibrary<IGroupShape>> _groupLibraries;
-        private ImmutableArray<IDatabase> _databases;
-        private ImmutableArray<IPageContainer> _templates;
-        private ImmutableArray<IScript> _scripts;
-        private ImmutableArray<IDocumentContainer> _documents;
-        private ILibrary<IShapeStyle> _currentStyleLibrary;
-        private ILibrary<IGroupShape> _currentGroupLibrary;
-        private IDatabase _currentDatabase;
-        private IPageContainer _currentTemplate;
-        private IScript _currentScript;
-        private IDocumentContainer _currentDocument;
-        private IPageContainer _currentContainer;
-        private IObservableObject _selected;
+        private ImmutableArray<Library<ShapeStyle>> _styleLibraries;
+        private ImmutableArray<Library<GroupShape>> _groupLibraries;
+        private ImmutableArray<Database> _databases;
+        private ImmutableArray<PageContainer> _templates;
+        private ImmutableArray<Script> _scripts;
+        private ImmutableArray<DocumentContainer> _documents;
+        private Library<ShapeStyle> _currentStyleLibrary;
+        private Library<GroupShape> _currentGroupLibrary;
+        private Database _currentDatabase;
+        private PageContainer _currentTemplate;
+        private Script _currentScript;
+        private DocumentContainer _currentDocument;
+        private PageContainer _currentContainer;
+        private ObservableObject _selected;
 
-        /// <inheritdoc/>
-        public IOptions Options
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
+        public Options Options
         {
             get => _options;
-            set => Update(ref _options, value);
+            set => RaiseAndSetIfChanged(ref _options, value);
         }
 
-        /// <inheritdoc/>
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public IHistory History
         {
             get => _history;
-            set => Update(ref _history, value);
+            set => RaiseAndSetIfChanged(ref _history, value);
         }
 
-        /// <inheritdoc/>
-        public ImmutableArray<ILibrary<IShapeStyle>> StyleLibraries
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
+        public ImmutableArray<Library<ShapeStyle>> StyleLibraries
         {
             get => _styleLibraries;
-            set => Update(ref _styleLibraries, value);
+            set => RaiseAndSetIfChanged(ref _styleLibraries, value);
         }
 
-        /// <inheritdoc/>
-        public ImmutableArray<ILibrary<IGroupShape>> GroupLibraries
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
+        public ImmutableArray<Library<GroupShape>> GroupLibraries
         {
             get => _groupLibraries;
-            set => Update(ref _groupLibraries, value);
+            set => RaiseAndSetIfChanged(ref _groupLibraries, value);
         }
 
-        /// <inheritdoc/>
-        public ImmutableArray<IDatabase> Databases
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
+        public ImmutableArray<Database> Databases
         {
             get => _databases;
-            set => Update(ref _databases, value);
+            set => RaiseAndSetIfChanged(ref _databases, value);
         }
 
-        /// <inheritdoc/>
-        public ImmutableArray<IPageContainer> Templates
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
+        public ImmutableArray<PageContainer> Templates
         {
             get => _templates;
-            set => Update(ref _templates, value);
+            set => RaiseAndSetIfChanged(ref _templates, value);
         }
 
-        /// <inheritdoc/>
-        public ImmutableArray<IScript> Scripts
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
+        public ImmutableArray<Script> Scripts
         {
             get => _scripts;
-            set => Update(ref _scripts, value);
+            set => RaiseAndSetIfChanged(ref _scripts, value);
         }
 
-        /// <inheritdoc/>
-        public ImmutableArray<IDocumentContainer> Documents
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
+        public ImmutableArray<DocumentContainer> Documents
         {
             get => _documents;
-            set => Update(ref _documents, value);
+            set => RaiseAndSetIfChanged(ref _documents, value);
         }
 
-        /// <inheritdoc/>
-        public ILibrary<IShapeStyle> CurrentStyleLibrary
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
+        public Library<ShapeStyle> CurrentStyleLibrary
         {
             get => _currentStyleLibrary;
-            set => Update(ref _currentStyleLibrary, value);
+            set => RaiseAndSetIfChanged(ref _currentStyleLibrary, value);
         }
 
-        /// <inheritdoc/>
-        public ILibrary<IGroupShape> CurrentGroupLibrary
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
+        public Library<GroupShape> CurrentGroupLibrary
         {
             get => _currentGroupLibrary;
-            set => Update(ref _currentGroupLibrary, value);
+            set => RaiseAndSetIfChanged(ref _currentGroupLibrary, value);
         }
 
-        /// <inheritdoc/>
-        public IDatabase CurrentDatabase
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
+        public Database CurrentDatabase
         {
             get => _currentDatabase;
-            set => Update(ref _currentDatabase, value);
+            set => RaiseAndSetIfChanged(ref _currentDatabase, value);
         }
 
-        /// <inheritdoc/>
-        public IPageContainer CurrentTemplate
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
+        public PageContainer CurrentTemplate
         {
             get => _currentTemplate;
-            set => Update(ref _currentTemplate, value);
+            set => RaiseAndSetIfChanged(ref _currentTemplate, value);
         }
 
-        /// <inheritdoc/>
-        public IScript CurrentScript
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
+        public Script CurrentScript
         {
             get => _currentScript;
-            set => Update(ref _currentScript, value);
+            set => RaiseAndSetIfChanged(ref _currentScript, value);
         }
 
-        /// <inheritdoc/>
-        public IDocumentContainer CurrentDocument
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
+        public DocumentContainer CurrentDocument
         {
             get => _currentDocument;
-            set => Update(ref _currentDocument, value);
+            set => RaiseAndSetIfChanged(ref _currentDocument, value);
         }
 
-        /// <inheritdoc/>
-        public IPageContainer CurrentContainer
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
+        public PageContainer CurrentContainer
         {
             get => _currentContainer;
-            set => Update(ref _currentContainer, value);
+            set => RaiseAndSetIfChanged(ref _currentContainer, value);
         }
 
-        /// <inheritdoc/>
-        public IObservableObject Selected
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
+        public ObservableObject Selected
         {
             get => _selected;
             set
             {
                 SetSelected(value);
-                Update(ref _selected, value);
+                RaiseAndSetIfChanged(ref _selected, value);
             }
         }
 
-        /// <summary>
-        /// Get all shapes including grouped shapes.
-        /// </summary>
-        /// <param name="shapes">The shapes collection.</param>
-        /// <returns>All shapes including grouped shapes.</returns>
-        public static IEnumerable<IBaseShape> GetAllShapes(IEnumerable<IBaseShape> shapes)
+        public static IEnumerable<BaseShape> GetAllShapes(IEnumerable<BaseShape> shapes)
         {
             if (shapes == null)
             {
@@ -162,7 +156,7 @@ namespace Core2D.Containers
 
             foreach (var shape in shapes)
             {
-                if (shape is IGroupShape groupShape)
+                if (shape is GroupShape groupShape)
                 {
                     foreach (var s in GetAllShapes(groupShape.Shapes))
                     {
@@ -178,24 +172,12 @@ namespace Core2D.Containers
             }
         }
 
-        /// <summary>
-        /// Get all shapes including grouped shapes of specified type.
-        /// </summary>
-        /// <typeparam name="T">The type of shape to include.</typeparam>
-        /// <param name="shapes">The shapes collection.</param>
-        /// <returns>All shapes including grouped shapes of specified type.</returns>
-        public static IEnumerable<T> GetAllShapes<T>(IEnumerable<IBaseShape> shapes)
+        public static IEnumerable<T> GetAllShapes<T>(IEnumerable<BaseShape> shapes)
         {
             return GetAllShapes(shapes)?.Where(s => s is T).Cast<T>();
         }
 
-        /// <summary>
-        /// Get all shapes including grouped shapes of specified type.
-        /// </summary>
-        /// <typeparam name="T">The type of shapes to include.</typeparam>
-        /// <param name="project">The project object.</param>
-        /// <returns>All shapes including grouped shapes of specified type.</returns>
-        public static IEnumerable<T> GetAllShapes<T>(IProjectContainer project)
+        public static IEnumerable<T> GetAllShapes<T>(ProjectContainer project)
         {
             var shapes = project?.Documents
                 .SelectMany(d => d.Pages)
@@ -205,41 +187,33 @@ namespace Core2D.Containers
             return GetAllShapes(shapes)?.Where(s => s is T).Cast<T>();
         }
 
-        /// <inheritdoc/>
-        public void SetCurrentDocument(IDocumentContainer document)
+        public void SetCurrentDocument(DocumentContainer document)
         {
             CurrentDocument = document;
             Selected = document;
         }
 
-        /// <inheritdoc/>
-        public void SetCurrentContainer(IPageContainer container)
+        public void SetCurrentContainer(PageContainer container)
         {
             CurrentContainer = container;
             Selected = container;
         }
 
-        /// <inheritdoc/>
-        public void SetCurrentTemplate(IPageContainer template) => CurrentTemplate = template;
+        public void SetCurrentTemplate(PageContainer template) => CurrentTemplate = template;
 
-        /// <inheritdoc/>
-        public void SetCurrentScript(IScript script) => CurrentScript = script;
+        public void SetCurrentScript(Script script) => CurrentScript = script;
 
-        /// <inheritdoc/>
-        public void SetCurrentDatabase(IDatabase db) => CurrentDatabase = db;
+        public void SetCurrentDatabase(Database db) => CurrentDatabase = db;
 
-        /// <inheritdoc/>
-        public void SetCurrentGroupLibrary(ILibrary<IGroupShape> library) => CurrentGroupLibrary = library;
+        public void SetCurrentGroupLibrary(Library<GroupShape> library) => CurrentGroupLibrary = library;
 
-        /// <inheritdoc/>
-        public void SetCurrentStyleLibrary(ILibrary<IShapeStyle> library) => CurrentStyleLibrary = library;
+        public void SetCurrentStyleLibrary(Library<ShapeStyle> library) => CurrentStyleLibrary = library;
 
-        /// <inheritdoc/>
-        public void SetSelected(IObservableObject value)
+        public void SetSelected(ObservableObject value)
         {
-            if (value is ILayerContainer layer)
+            if (value is LayerContainer layer)
             {
-                if (layer.Owner is IPageContainer owner)
+                if (layer.Owner is PageContainer owner)
                 {
                     if (owner.CurrentLayer != layer)
                     {
@@ -247,7 +221,7 @@ namespace Core2D.Containers
                     }
                 }
             }
-            else if (value is IPageContainer container && _documents != null)
+            else if (value is PageContainer container && _documents != null)
             {
                 var document = _documents.FirstOrDefault(d => d.Pages.Contains(container));
                 if (document != null)
@@ -264,7 +238,7 @@ namespace Core2D.Containers
                     }
                 }
             }
-            else if (value is IDocumentContainer document)
+            else if (value is DocumentContainer document)
             {
                 if (CurrentDocument != document)
                 {
@@ -281,13 +255,11 @@ namespace Core2D.Containers
             }
         }
 
-        /// <inheritdoc/>
         public override object Copy(IDictionary<object, object> shared)
         {
             throw new NotImplementedException();
         }
 
-        /// <inheritdoc/>
         public override bool IsDirty()
         {
             var isDirty = base.IsDirty();
@@ -327,7 +299,6 @@ namespace Core2D.Containers
             return isDirty;
         }
 
-        /// <inheritdoc/>
         public override void Invalidate()
         {
             base.Invalidate();
@@ -364,101 +335,5 @@ namespace Core2D.Containers
                 document.Invalidate();
             }
         }
-
-        /// <summary>
-        /// Check whether the <see cref="Options"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeOptions() => _options != null;
-
-        /// <summary>
-        /// Check whether the <see cref="History"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeHistory() => false;
-
-        /// <summary>
-        /// Check whether the <see cref="StyleLibraries"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeStyleLibraries() => true;
-
-        /// <summary>
-        /// Check whether the <see cref="GroupLibraries"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeGroupLibraries() => true;
-
-        /// <summary>
-        /// Check whether the <see cref="Databases"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeDatabases() => true;
-
-        /// <summary>
-        /// Check whether the <see cref="Templates"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeTemplates() => true;
-
-        /// <summary>
-        /// Check whether the <see cref="Scripts"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeScripts() => true;
-
-        /// <summary>
-        /// Check whether the <see cref="Documents"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeDocuments() => true;
-
-        /// <summary>
-        /// Check whether the <see cref="CurrentStyleLibrary"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeCurrentStyleLibrary() => _currentStyleLibrary != null;
-
-        /// <summary>
-        /// Check whether the <see cref="CurrentGroupLibrary"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeCurrentGroupLibrary() => _currentGroupLibrary != null;
-
-        /// <summary>
-        /// Check whether the <see cref="CurrentDatabase"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeCurrentDatabase() => _currentDatabase != null;
-
-        /// <summary>
-        /// Check whether the <see cref="CurrentTemplate"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeCurrentTemplate() => _currentTemplate != null;
-
-        /// <summary>
-        /// Check whether the <see cref="CurrentScript"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeCurrentScript() => _currentScript != null;
-
-        /// <summary>
-        /// Check whether the <see cref="CurrentDocument"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeCurrentDocument() => _currentDocument != null;
-
-        /// <summary>
-        /// Check whether the <see cref="CurrentContainer"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeCurrentContainer() => _currentContainer != null;
-
-        /// <summary>
-        /// Check whether the <see cref="Selected"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeSelected() => _selected != null;
     }
 }

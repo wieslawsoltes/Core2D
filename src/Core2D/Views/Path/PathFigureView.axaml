@@ -1,0 +1,40 @@
+﻿<UserControl x:Class="Core2D.Views.Path.PathFigureView"
+             xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
+             xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
+             xmlns:idd="clr-namespace:Core2D.DragAndDrop;assembly=Core2D"
+             xmlns:converters="clr-namespace:Core2D.Converters;assembly=Core2D"
+             xmlns:Path="clr-namespace:Core2D.Path;assembly=Core2D"
+             xmlns:Designer="clr-namespace:Core2D.Designer;assembly=Core2D"
+             mc:Ignorable="d"
+             d:DataContext="{x:Static Designer:DesignerContext.PathFigure}"
+             d:DesignWidth="250" d:DesignHeight="400"
+             x:DataType="Path:PathFigure" x:CompileBindings="True">
+    <UserControl.Resources>
+        <converters:ObjectToTypeStringConverter x:Key="ObjectToTypeStringConverter" />
+    </UserControl.Resources>
+    <StackPanel>
+        <StackPanel>
+            <CheckBox Content="IsClosed" IsChecked="{Binding IsClosed, Mode=TwoWay}" HorizontalAlignment="Stretch" />
+        </StackPanel>
+        <Expander Header="StartPoint" IsExpanded="False">
+            <ContentControl Content="{Binding StartPoint}" />
+        </Expander>
+        <Expander Header="Segments" IsExpanded="False">
+            <ListBox Items="{Binding Segments}">
+                <ListBox.DataTemplates>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Mode=OneWay, Converter={StaticResource ObjectToTypeStringConverter}}" Background="Transparent">
+                            <i:Interaction.Behaviors>
+                                <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}" />
+                            </i:Interaction.Behaviors>
+                        </TextBlock>
+                    </DataTemplate>
+                </ListBox.DataTemplates>
+            </ListBox>
+        </Expander>
+    </StackPanel>
+</UserControl>

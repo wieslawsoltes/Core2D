@@ -12,7 +12,7 @@ namespace Core2D.UnitTests
         public void Inherits_From_ObservableObject()
         {
             var target = _factory.CreatePageContainer();
-            Assert.True(target is IObservableObject);
+            Assert.True(target is ObservableObject);
         }
 
         [Fact]
@@ -102,14 +102,6 @@ namespace Core2D.UnitTests
             target.Template.Background = _factory.CreateArgbColor();
 
             Assert.Equal(target.Template.Background, target.Background);
-        }
-
-        [Fact]
-        [Trait("Core2D.Containers", "Project")]
-        public void Data_Not_Null()
-        {
-            var target = _factory.CreatePageContainer();
-            Assert.NotNull(target.Data);
         }
 
         [Fact]

@@ -1,19 +1,34 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 using Core2D.Data;
 using Core2D.Renderer;
 
 namespace Core2D.Shapes
 {
-    /// <summary>
-    /// Ellipse shape.
-    /// </summary>
-    public class EllipseShape : TextShape, IEllipseShape
+    [DataContract(IsReference = true)]
+    public class EllipseShape : BaseShape
     {
-        /// <inheritdoc/>
-        public override Type TargetType => typeof(IEllipseShape);
+        private PointShape _topLeft;
+        private PointShape _bottomRight;
 
-        /// <inheritdoc/>
+        [IgnoreDataMember]
+        public override Type TargetType => typeof(EllipseShape);
+
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
+        public PointShape TopLeft
+        {
+            get => _topLeft;
+            set => RaiseAndSetIfChanged(ref _topLeft, value);
+        }
+
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
+        public PointShape BottomRight
+        {
+            get => _bottomRight;
+            set => RaiseAndSetIfChanged(ref _bottomRight, value);
+        }
+
         public override void DrawShape(object dc, IShapeRenderer renderer)
         {
             if (State.Flags.HasFlag(ShapeStateFlags.Visible))
@@ -22,42 +37,93 @@ namespace Core2D.Shapes
             }
         }
 
-        /// <inheritdoc/>
         public override void DrawPoints(object dc, IShapeRenderer renderer)
         {
-            if (State.Flags.HasFlag(ShapeStateFlags.Visible))
+            if (renderer.State.SelectedShapes != null)
             {
-                base.DrawPoints(dc, renderer);
+                if (renderer.State.SelectedShapes.Contains(this))
+                {
+                    _topLeft.DrawShape(dc, renderer);
+                    _bottomRight.DrawShape(dc, renderer);
+                }
+                else
+                {
+                    if (renderer.State.SelectedShapes.Contains(_topLeft))
+                    {
+                        _topLeft.DrawShape(dc, renderer);
+                    }
+
+                    if (renderer.State.SelectedShapes.Contains(_bottomRight))
+                    {
+                        _bottomRight.DrawShape(dc, renderer);
+                    }
+                }
             }
         }
 
-        /// <inheritdoc/>
-        public override void Bind(IDataFlow dataFlow, object db, object r)
+        public override void Bind(DataFlow dataFlow, object db, object r)
         {
-            var record = Data?.Record ?? r;
+            var record = Record ?? r;
 
             dataFlow.Bind(this, db, record);
 
-            base.Bind(dataFlow, db, record);
+            _topLeft.Bind(dataFlow, db, record);
+            _bottomRight.Bind(dataFlow, db, record);
         }
 
-        /// <inheritdoc/>
+        public override void Move(ISelection selection, decimal dx, decimal dy)
+        {
+            if (!TopLeft.State.Flags.HasFlag(ShapeStateFlags.Connector))
+            {
+                TopLeft.Move(selection, dx, dy);
+            }
+
+            if (!BottomRight.State.Flags.HasFlag(ShapeStateFlags.Connector))
+            {
+                BottomRight.Move(selection, dx, dy);
+            }
+        }
+
+        public override void Select(ISelection selection)
+        {
+            base.Select(selection);
+            TopLeft.Select(selection);
+            BottomRight.Select(selection);
+        }
+
+        public override void Deselect(ISelection selection)
+        {
+            base.Deselect(selection);
+            TopLeft.Deselect(selection);
+            BottomRight.Deselect(selection);
+        }
+
+        public override void GetPoints(IList<PointShape> points)
+        {
+            points.Add(TopLeft);
+            points.Add(BottomRight);
+        }
+
         public override object Copy(IDictionary<object, object> shared)
         {
             throw new NotImplementedException();
         }
 
-        /// <inheritdoc/>
         public override bool IsDirty()
         {
             var isDirty = base.IsDirty();
+
+            isDirty |= TopLeft.IsDirty();
+            isDirty |= BottomRight.IsDirty();
+
             return isDirty;
         }
 
-        /// <inheritdoc/>
         public override void Invalidate()
         {
             base.Invalidate();
+            TopLeft.Invalidate();
+            BottomRight.Invalidate();
         }
     }
 }

@@ -1,0 +1,45 @@
+﻿<UserControl x:Class="Core2D.Views.Data.RecordView"
+             xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
+             xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
+             xmlns:idd="clr-namespace:Core2D.DragAndDrop;assembly=Core2D"
+             xmlns:converters="clr-namespace:Core2D.Converters;assembly=Core2D"
+             xmlns:Data="clr-namespace:Core2D.Data;assembly=Core2D"
+             xmlns:Designer="clr-namespace:Core2D.Designer;assembly=Core2D"
+             mc:Ignorable="d"
+             d:DataContext="{x:Static Designer:DesignerContext.Record}"
+             d:DesignWidth="250" d:DesignHeight="400"
+             x:DataType="Data:Record" x:CompileBindings="True">
+    <Grid RowDefinitions="Auto,*" ColumnDefinitions="50*,Auto,50*">
+        <TextBlock Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" Text="Name" />
+        <ItemsControl VerticalAlignment="Stretch" Grid.Column="0" Grid.Row="1" DataContext="{Binding Owner}" Items="{Binding Columns}" x:DataType="Data:Database">
+            <ItemsControl.DataTemplates>
+                <DataTemplate DataType="Data:Column">
+                    <Grid VerticalAlignment="Top" Background="Transparent" Margin="0,2,0,2">
+                        <!--<i:Interaction.Behaviors>
+                            <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}" />
+                        </i:Interaction.Behaviors>-->
+                        <TextBox VerticalAlignment="Center" Text="{Binding Name, Mode=TwoWay}" />
+                    </Grid>
+                </DataTemplate>
+            </ItemsControl.DataTemplates>
+        </ItemsControl>
+        <GridSplitter ResizeDirection="Columns" ResizeBehavior="PreviousAndNext" Background="Transparent" Width="6" Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" />
+        <TextBlock Grid.Column="2" Grid.Row="0" VerticalAlignment="Center" Text="Value" />
+        <ItemsControl VerticalAlignment="Stretch" Grid.Column="2" Grid.Row="1" Items="{Binding Values}">
+            <ItemsControl.DataTemplates>
+                <DataTemplate DataType="Data:Value">
+                    <Grid VerticalAlignment="Top" Background="Transparent" Margin="0,2,0,2">
+                        <!--<i:Interaction.Behaviors>
+                            <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}" />
+                        </i:Interaction.Behaviors>-->
+                        <TextBox VerticalAlignment="Center" Text="{Binding Content, Mode=TwoWay}" />
+                    </Grid>
+                </DataTemplate>
+            </ItemsControl.DataTemplates>
+        </ItemsControl>
+    </Grid>
+</UserControl>

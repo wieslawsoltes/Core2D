@@ -8,26 +8,19 @@ using Core2D.Style;
 
 namespace Core2D.Editor.Factories
 {
-    /// <summary>
-    /// Factory used to create containers.
-    /// </summary>
     public sealed class ContainerFactory : IContainerFactory
     {
         private readonly IServiceProvider _serviceProvider;
 
-        /// <summary>
-        /// Initialize new instance of <see cref="ContainerFactory"/> class.
-        /// </summary>
-        /// <param name="serviceProvider">The service provider.</param>
         public ContainerFactory(IServiceProvider serviceProvider)
         {
             _serviceProvider = serviceProvider;
         }
 
-        private ILibrary<IShapeStyle> DefaultStyleLibrary()
+        private Library<ShapeStyle> DefaultStyleLibrary()
         {
             var factory = _serviceProvider.GetService<IFactory>();
-            var sgd = factory.CreateLibrary<IShapeStyle>("Default");
+            var sgd = factory.CreateLibrary<ShapeStyle>("Default");
 
             var builder = sgd.Items.ToBuilder();
 
@@ -39,7 +32,7 @@ namespace Core2D.Editor.Factories
             return sgd;
         }
 
-        private IPageContainer CreateDefaultTemplate(IContainerFactory containerFactory, IProjectContainer project, string name)
+        private PageContainer CreateDefaultTemplate(IContainerFactory containerFactory, ProjectContainer project, string name)
         {
             var factory = _serviceProvider.GetService<IFactory>();
             var template = containerFactory.GetTemplate(project, name);
@@ -58,8 +51,7 @@ namespace Core2D.Editor.Factories
             return template;
         }
 
-        /// <inheritdoc/>
-        IPageContainer IContainerFactory.GetTemplate(IProjectContainer project, string name)
+        PageContainer IContainerFactory.GetTemplate(ProjectContainer project, string name)
         {
             var factory = _serviceProvider.GetService<IFactory>();
             var template = factory.CreateTemplateContainer(name);
@@ -67,8 +59,7 @@ namespace Core2D.Editor.Factories
             return template;
         }
 
-        /// <inheritdoc/>
-        IPageContainer IContainerFactory.GetPage(IProjectContainer project, string name)
+        PageContainer IContainerFactory.GetPage(ProjectContainer project, string name)
         {
             var factory = _serviceProvider.GetService<IFactory>();
             var container = factory.CreatePageContainer(name);
@@ -76,16 +67,14 @@ namespace Core2D.Editor.Factories
             return container;
         }
 
-        /// <inheritdoc/>
-        IDocumentContainer IContainerFactory.GetDocument(IProjectContainer project, string name)
+        DocumentContainer IContainerFactory.GetDocument(ProjectContainer project, string name)
         {
             var factory = _serviceProvider.GetService<IFactory>();
             var document = factory.CreateDocumentContainer(name);
             return document;
         }
 
-        /// <inheritdoc/>
-        IProjectContainer IContainerFactory.GetProject()
+        ProjectContainer IContainerFactory.GetProject()
         {
             var factory = _serviceProvider.GetService<IFactory>();
             var containerFactory = this as IContainerFactory;
@@ -93,7 +82,7 @@ namespace Core2D.Editor.Factories
 
             // Group Libraries
             var glBuilder = project.GroupLibraries.ToBuilder();
-            glBuilder.Add(factory.CreateLibrary<IGroupShape>("Default"));
+            glBuilder.Add(factory.CreateLibrary<GroupShape>("Default"));
             project.GroupLibraries = glBuilder.ToImmutable();
 
             project.SetCurrentGroupLibrary(project.GroupLibraries.FirstOrDefault());

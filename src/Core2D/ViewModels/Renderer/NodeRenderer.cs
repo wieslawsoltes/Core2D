@@ -1,33 +1,27 @@
 ﻿using System;
+using System.Runtime.Serialization;
 using Core2D.Containers;
 using Core2D.Shapes;
 using Core2D.Style;
 
 namespace Core2D.Renderer
 {
-    /// <summary>
-    /// Node shape renderer.
-    /// </summary>
+    [DataContract(IsReference = true)]
     public abstract class NodeRenderer : ObservableObject, IShapeRenderer
     {
         private readonly IServiceProvider _serviceProvider;
-        private IShapeRendererState _state;
+        private ShapeRendererState _state;
         private readonly ICache<string, IDisposable> _biCache;
         private readonly ICache<object, IDrawNode> _drawNodeCache;
         private readonly IDrawNodeFactory _drawNodeFactory;
 
-        /// <inheritdoc/>
-        public IShapeRendererState State
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
+        public ShapeRendererState State
         {
             get => _state;
-            set => Update(ref _state, value);
+            set => RaiseAndSetIfChanged(ref _state, value);
         }
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="NodeRenderer"/> class.
-        /// </summary>
-        /// <param name="serviceProvider">The service provider.</param>
-        /// <param name="drawNodeFactory">The draw node factory.</param>
         public NodeRenderer(IServiceProvider serviceProvider, IDrawNodeFactory drawNodeFactory)
         {
             _serviceProvider = serviceProvider;
@@ -37,15 +31,13 @@ namespace Core2D.Renderer
             _drawNodeFactory = drawNodeFactory;
         }
 
-        /// <inheritdoc/>
         public void ClearCache()
         {
             _biCache.Reset();
             _drawNodeCache.Reset();
         }
 
-        /// <inheritdoc/>
-        public void Fill(object dc, double x, double y, double width, double height, IColor color)
+        public void Fill(object dc, double x, double y, double width, double height, BaseColor color)
         {
             var drawNodeCached = _drawNodeCache.Get(color);
             if (drawNodeCached != null)
@@ -78,7 +70,6 @@ namespace Core2D.Renderer
             }
         }
 
-        /// <inheritdoc/>
         public void Grid(object dc, IGrid grid, double x, double y, double width, double height)
         {
             var drawNodeCached = _drawNodeCache.Get(grid);
@@ -111,8 +102,7 @@ namespace Core2D.Renderer
             }
         }
 
-        /// <inheritdoc/>
-        public void DrawPage(object dc, IPageContainer container)
+        public void DrawPage(object dc, PageContainer container)
         {
             foreach (var layer in container.Layers)
             {
@@ -123,8 +113,7 @@ namespace Core2D.Renderer
             }
         }
 
-        /// <inheritdoc/>
-        public void DrawLayer(object dc, ILayerContainer layer)
+        public void DrawLayer(object dc, LayerContainer layer)
         {
             foreach (var shape in layer.Shapes)
             {
@@ -143,8 +132,7 @@ namespace Core2D.Renderer
             }
         }
 
-        /// <inheritdoc/>
-        public void DrawPoint(object dc, IPointShape point)
+        public void DrawPoint(object dc, PointShape point)
         {
             var isSelected = _state.SelectedShapes?.Count > 0 && _state.SelectedShapes.Contains(point);
             var pointStyle = isSelected ? _state.SelectedPointStyle : _state.PointStyle;
@@ -188,8 +176,7 @@ namespace Core2D.Renderer
             }
         }
 
-        /// <inheritdoc/>
-        public void DrawLine(object dc, ILineShape line)
+        public void DrawLine(object dc, LineShape line)
         {
             var drawNodeCached = _drawNodeCache.Get(line);
             if (drawNodeCached != null)
@@ -221,8 +208,7 @@ namespace Core2D.Renderer
             }
         }
 
-        /// <inheritdoc/>
-        public void DrawRectangle(object dc, IRectangleShape rectangle)
+        public void DrawRectangle(object dc, RectangleShape rectangle)
         {
             var drawNodeCached = _drawNodeCache.Get(rectangle);
             if (drawNodeCached != null)
@@ -253,8 +239,7 @@ namespace Core2D.Renderer
             }
         }
 
-        /// <inheritdoc/>
-        public void DrawEllipse(object dc, IEllipseShape ellipse)
+        public void DrawEllipse(object dc, EllipseShape ellipse)
         {
             var drawNodeCached = _drawNodeCache.Get(ellipse);
             if (drawNodeCached != null)
@@ -285,8 +270,7 @@ namespace Core2D.Renderer
             }
         }
 
-        /// <inheritdoc/>
-        public void DrawArc(object dc, IArcShape arc)
+        public void DrawArc(object dc, ArcShape arc)
         {
             var drawNodeCached = _drawNodeCache.Get(arc);
             if (drawNodeCached != null)
@@ -317,8 +301,7 @@ namespace Core2D.Renderer
             }
         }
 
-        /// <inheritdoc/>
-        public void DrawCubicBezier(object dc, ICubicBezierShape cubicBezier)
+        public void DrawCubicBezier(object dc, CubicBezierShape cubicBezier)
         {
             var drawNodeCached = _drawNodeCache.Get(cubicBezier);
             if (drawNodeCached != null)
@@ -349,8 +332,7 @@ namespace Core2D.Renderer
             }
         }
 
-        /// <inheritdoc/>
-        public void DrawQuadraticBezier(object dc, IQuadraticBezierShape quadraticBezier)
+        public void DrawQuadraticBezier(object dc, QuadraticBezierShape quadraticBezier)
         {
             var drawNodeCached = _drawNodeCache.Get(quadraticBezier);
             if (drawNodeCached != null)
@@ -381,8 +363,7 @@ namespace Core2D.Renderer
             }
         }
 
-        /// <inheritdoc/>
-        public void DrawText(object dc, ITextShape text)
+        public void DrawText(object dc, TextShape text)
         {
             var drawNodeCached = _drawNodeCache.Get(text);
             if (drawNodeCached != null)
@@ -402,10 +383,10 @@ namespace Core2D.Renderer
 
                 drawNodeCached.Draw(dc, _state.ZoomX);
 
-                static bool IsBoundTextDirty(IDrawNode drawNodeCached, ITextShape text)
+                static bool IsBoundTextDirty(IDrawNode drawNodeCached, TextShape text)
                 {
-                    var boundTextCheck = text.GetProperty(nameof(ITextShape.Text)) is string boundText ? boundText : text.Text;
-                    return drawNodeCached is ITextDrawNode textDrawNode 
+                    var boundTextCheck = text.GetProperty(nameof(TextShape.Text)) is string boundText ? boundText : text.Text;
+                    return drawNodeCached is ITextDrawNode textDrawNode
                         && boundTextCheck != textDrawNode.BoundText;
                 }
             }
@@ -421,8 +402,7 @@ namespace Core2D.Renderer
             }
         }
 
-        /// <inheritdoc/>
-        public void DrawImage(object dc, IImageShape image)
+        public void DrawImage(object dc, ImageShape image)
         {
             var drawNodeCached = _drawNodeCache.Get(image);
             if (drawNodeCached != null)
@@ -453,8 +433,7 @@ namespace Core2D.Renderer
             }
         }
 
-        /// <inheritdoc/>
-        public void DrawPath(object dc, IPathShape path)
+        public void DrawPath(object dc, PathShape path)
         {
             var drawNodeCached = _drawNodeCache.Get(path);
             if (drawNodeCached != null)
@@ -484,11 +463,5 @@ namespace Core2D.Renderer
                 drawNode.Draw(dc, _state.ZoomX);
             }
         }
-
-        /// <summary>
-        /// Check whether the <see cref="State"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public bool ShouldSerializeState() => _state != null;
     }
 }

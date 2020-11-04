@@ -1,0 +1,55 @@
+﻿<UserControl x:Class="Core2D.Views.Renderer.GridView"
+             xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:converters="clr-namespace:Core2D.Converters;assembly=Core2D"
+             xmlns:Renderer="clr-namespace:Core2D.Renderer;assembly=Core2D"
+             xmlns:Designer="clr-namespace:Core2D.Designer;assembly=Core2D"
+             mc:Ignorable="d"
+             d:DataContext="{x:Static Designer:DesignerContext.Page}"
+             d:DesignWidth="250" d:DesignHeight="400"
+             x:DataType="Renderer:IGrid" x:CompileBindings="True">
+    <StackPanel>
+        <StackPanel>
+            <CheckBox Content="IsGridEnabled" IsChecked="{Binding IsGridEnabled, Mode=TwoWay}" HorizontalAlignment="Stretch" />
+            <CheckBox Content="IsBorderEnabled" IsChecked="{Binding IsBorderEnabled, Mode=TwoWay}" HorizontalAlignment="Stretch" />
+        </StackPanel>
+        <Expander Header="Offset" IsExpanded="False">
+            <Grid ColumnDefinitions="25*,25*,25*,25*" RowDefinitions="Auto,Auto">
+                <Label Content="Left" Margin="{DynamicResource TextControlThemePadding}" Grid.Row="0" Grid.Column="0" />
+                <Label Content="Top" Margin="{DynamicResource TextControlThemePadding}" Grid.Row="0" Grid.Column="1" />
+                <Label Content="Right" Margin="{DynamicResource TextControlThemePadding}" Grid.Row="0" Grid.Column="2" />
+                <Label Content="Bottom" Margin="{DynamicResource TextControlThemePadding}" Grid.Row="0" Grid.Column="3" />
+                <TextBox Text="{Binding GridOffsetLeft, Mode=TwoWay}" TextAlignment="Center" Margin="{DynamicResource TextControlThemePadding}" MinWidth="35" Grid.Row="1" Grid.Column="0" />
+                <TextBox Text="{Binding GridOffsetTop, Mode=TwoWay}" TextAlignment="Center" Margin="{DynamicResource TextControlThemePadding}" MinWidth="35" Grid.Row="1" Grid.Column="1" />
+                <TextBox Text="{Binding GridOffsetRight, Mode=TwoWay}" TextAlignment="Center" Margin="{DynamicResource TextControlThemePadding}" MinWidth="35" Grid.Row="1" Grid.Column="2" />
+                <TextBox Text="{Binding GridOffsetBottom, Mode=TwoWay}" TextAlignment="Center" Margin="{DynamicResource TextControlThemePadding}" MinWidth="35" Grid.Row="1" Grid.Column="3" />
+            </Grid>
+        </Expander>
+        <Expander Header="Cell" IsExpanded="False">
+            <Grid ColumnDefinitions="50*,6,50*">
+                <StackPanel Grid.Column="0">
+                    <Label Content="Width" Margin="{DynamicResource TextControlThemePadding}" />
+                    <TextBox Text="{Binding GridCellWidth, Mode=TwoWay}" />
+                </StackPanel>
+                <GridSplitter ResizeDirection="Columns" ResizeBehavior="PreviousAndNext" Background="Transparent" Width="6" Grid.Column="1" />
+                <StackPanel Grid.Column="2">
+                    <Label Content="Height" Margin="{DynamicResource TextControlThemePadding}" />
+                    <TextBox Text="{Binding GridCellHeight, Mode=TwoWay}" />
+                </StackPanel>
+            </Grid>
+        </Expander>
+        <Expander Header="Color" IsExpanded="False">
+            <StackPanel>
+                <ContentControl Content="{Binding GridStrokeColor}" />
+            </StackPanel>
+        </Expander>
+        <Expander Header="Thickness" IsExpanded="False">
+            <StackPanel>
+                <Label Content="Thickness" Margin="{DynamicResource TextControlThemePadding}" />
+                <TextBox Text="{Binding GridStrokeThickness, Mode=TwoWay}" />
+            </StackPanel>
+        </Expander>
+    </StackPanel>
+</UserControl>

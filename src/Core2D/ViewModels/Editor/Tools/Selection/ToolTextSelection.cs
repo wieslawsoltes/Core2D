@@ -7,28 +7,17 @@ using Core2D.Style;
 
 namespace Core2D.Editor.Tools.Selection
 {
-    /// <summary>
-    /// Helper class for <see cref="ITextShape"/> shape selection.
-    /// </summary>
     public class ToolTextSelection
     {
         private readonly IServiceProvider _serviceProvider;
-        private readonly ILayerContainer _layer;
-        private readonly ITextShape _text;
-        private readonly IShapeStyle _style;
-        private IPointShape _topLeftHelperPoint;
-        private IPointShape _bottomRightHelperPoint;
-        private IRectangleShape _helperRectangle;
+        private readonly LayerContainer _layer;
+        private readonly TextShape _text;
+        private readonly ShapeStyle _style;
+        private PointShape _topLeftHelperPoint;
+        private PointShape _bottomRightHelperPoint;
+        private RectangleShape _helperRectangle;
 
-        /// <summary>
-        /// Initialize new instance of <see cref="ToolTextSelection"/> class.
-        /// </summary>
-        /// <param name="serviceProvider">The service provider.</param>
-        /// <param name="layer">The selection shapes layer.</param>
-        /// <param name="shape">The selected shape.</param>
-        /// <param name="style">The selection shapes style.</param>
-        /// <param name="point">The selection point shape.</param>
-        public ToolTextSelection(IServiceProvider serviceProvider, ILayerContainer layer, ITextShape shape, IShapeStyle style)
+        public ToolTextSelection(IServiceProvider serviceProvider, LayerContainer layer, TextShape shape, ShapeStyle style)
         {
             _serviceProvider = serviceProvider;
             _layer = layer;
@@ -36,9 +25,6 @@ namespace Core2D.Editor.Tools.Selection
             _style = style;
         }
 
-        /// <summary>
-        /// Transfer selection state to BottomRight.
-        /// </summary>
         public void ToStateBottomRight()
         {
             _helperRectangle = _serviceProvider.GetService<IFactory>().CreateRectangleShape(0, 0, _style);
@@ -52,9 +38,6 @@ namespace Core2D.Editor.Tools.Selection
             _layer.Shapes = _layer.Shapes.Add(_bottomRightHelperPoint);
         }
 
-        /// <summary>
-        /// Move selection.
-        /// </summary>
         public void Move()
         {
             if (_helperRectangle != null)
@@ -80,9 +63,6 @@ namespace Core2D.Editor.Tools.Selection
             _layer.InvalidateLayer();
         }
 
-        /// <summary>
-        /// Reset selection.
-        /// </summary>
         public void Reset()
         {
             if (_helperRectangle != null)

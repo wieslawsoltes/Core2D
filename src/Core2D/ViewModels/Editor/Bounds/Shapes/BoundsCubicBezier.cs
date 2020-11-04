@@ -8,18 +8,18 @@ namespace Core2D.Editor.Bounds.Shapes
 {
     public class BoundsCubicBezier : IBounds
     {
-        private List<IPointShape> _points = new List<IPointShape>();
+        private List<PointShape> _points = new List<PointShape>();
 
-        public Type TargetType => typeof(ICubicBezierShape);
+        public Type TargetType => typeof(CubicBezierShape);
 
-        public IPointShape TryToGetPoint(IBaseShape shape, Point2 target, double radius, double scale, IDictionary<Type, IBounds> registered)
+        public PointShape TryToGetPoint(BaseShape shape, Point2 target, double radius, double scale, IDictionary<Type, IBounds> registered)
         {
-            if (!(shape is ICubicBezierShape cubic))
+            if (!(shape is CubicBezierShape cubic))
             {
                 throw new ArgumentNullException(nameof(shape));
             }
 
-            var pointHitTest = registered[typeof(IPointShape)];
+            var pointHitTest = registered[typeof(PointShape)];
 
             if (pointHitTest.TryToGetPoint(cubic.Point1, target, radius, scale, registered) != null)
             {
@@ -44,9 +44,9 @@ namespace Core2D.Editor.Bounds.Shapes
             return null;
         }
 
-        public bool Contains(IBaseShape shape, Point2 target, double radius, double scale, IDictionary<Type, IBounds> registered)
+        public bool Contains(BaseShape shape, Point2 target, double radius, double scale, IDictionary<Type, IBounds> registered)
         {
-            if (!(shape is ICubicBezierShape cubic))
+            if (!(shape is CubicBezierShape cubic))
             {
                 throw new ArgumentNullException(nameof(shape));
             }
@@ -64,9 +64,9 @@ namespace Core2D.Editor.Bounds.Shapes
             }
         }
 
-        public bool Overlaps(IBaseShape shape, Rect2 target, double radius, double scale, IDictionary<Type, IBounds> registered)
+        public bool Overlaps(BaseShape shape, Rect2 target, double radius, double scale, IDictionary<Type, IBounds> registered)
         {
-            if (!(shape is ICubicBezierShape cubic))
+            if (!(shape is CubicBezierShape cubic))
             {
                 throw new ArgumentNullException(nameof(shape));
             }

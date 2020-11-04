@@ -1,0 +1,39 @@
+﻿<UserControl x:Class="Core2D.Views.Containers.OptionsView"
+             xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:converters="clr-namespace:Core2D.Converters;assembly=Core2D"
+             xmlns:Containers="clr-namespace:Core2D.Containers;assembly=Core2D"
+             xmlns:Editor="clr-namespace:Core2D.Editor;assembly=Core2D"
+             xmlns:Designer="clr-namespace:Core2D.Designer;assembly=Core2D"
+             mc:Ignorable="d"
+             d:DataContext="{x:Static Designer:DesignerContext.Options}"
+             d:DesignWidth="250" d:DesignHeight="400"
+             x:DataType="Containers:Options" x:CompileBindings="True">
+    <StackPanel>
+        <Expander Header="General" IsExpanded="True">
+            <StackPanel>
+                <CheckBox Content="SnapToGrid" IsChecked="{Binding SnapToGrid, Mode=TwoWay}" HorizontalAlignment="Stretch" />
+                <Label Content="SnapX" Margin="{DynamicResource TextControlThemePadding}" />
+                <TextBox Text="{Binding SnapX, Mode=TwoWay}" />
+                <Label Content="SnapY" Margin="{DynamicResource TextControlThemePadding}" />
+                <TextBox Text="{Binding SnapY, Mode=TwoWay}" />
+                <Label Content="HitThreshold" Margin="{DynamicResource TextControlThemePadding}" />
+                <TextBox Text="{Binding HitThreshold, Mode=TwoWay}" />
+                <Label Content="MoveMode" Margin="{DynamicResource TextControlThemePadding}" />
+                <ComboBox Items="{x:Static Editor:Enums.MoveModeValues}" SelectedItem="{Binding MoveMode, Mode=TwoWay}" HorizontalAlignment="Stretch" />
+                <CheckBox Content="TryToConnect" IsChecked="{Binding TryToConnect, Mode=TwoWay}" HorizontalAlignment="Stretch" />
+            </StackPanel>
+        </Expander>
+        <Expander Header="Defaults" IsExpanded="True">
+            <StackPanel>
+                <CheckBox Content="IsStroked" IsChecked="{Binding DefaultIsStroked, Mode=TwoWay}" HorizontalAlignment="Stretch" />
+                <CheckBox Content="IsFilled" IsChecked="{Binding DefaultIsFilled, Mode=TwoWay}" HorizontalAlignment="Stretch" />
+                <CheckBox Content="IsClosed" IsChecked="{Binding DefaultIsClosed, Mode=TwoWay}" HorizontalAlignment="Stretch" />
+                <Label Content="FillRule" Margin="{DynamicResource TextControlThemePadding}" />
+                <ComboBox Items="{x:Static Editor:Enums.XFillRuleValues}" SelectedItem="{Binding DefaultFillRule, Mode=TwoWay}" HorizontalAlignment="Stretch" />
+            </StackPanel>
+        </Expander>
+    </StackPanel>
+</UserControl>

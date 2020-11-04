@@ -1,49 +1,20 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel;
 
 namespace Core2D.Renderer
 {
-    /// <summary>
-    /// Defines key based image data cache contract.
-    /// </summary>
-    public interface IImageCache : IObservableObject
+    public interface IImageCache : INotifyPropertyChanged
     {
-        /// <summary>
-        /// Gets image keys collection.
-        /// </summary>
         IEnumerable<IImageKey> Keys { get; }
 
-        /// <summary>
-        /// Add image key using file name as key.
-        /// </summary>
-        /// <param name="path">The image file path.</param>
-        /// <param name="bytes">The image data.</param>
-        /// <returns>The image key.</returns>
         string AddImageFromFile(string path, byte[] bytes);
 
-        /// <summary>
-        /// Add image key.
-        /// </summary>
-        /// <param name="key">The image key.</param>
-        /// <param name="bytes">The image data.</param>
         void AddImage(string key, byte[] bytes);
 
-        /// <summary>
-        /// Get image data.
-        /// </summary>
-        /// <param name="key">The image key.</param>
-        /// <returns>The image data.</returns>
         byte[] GetImage(string key);
 
-        /// <summary>
-        /// Remove image key.
-        /// </summary>
-        /// <param name="key">The image key.</param>
         void RemoveImage(string key);
 
-        /// <summary>
-        /// Removed unused image keys.
-        /// </summary>
-        /// <param name="used">The used keys collection.</param>
         void PurgeUnusedImages(ICollection<string> used);
     }
 }

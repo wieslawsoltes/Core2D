@@ -1,22 +1,20 @@
 ﻿using System.Collections.Generic;
+using System.Runtime.Serialization;
 
 namespace Core2D.Data
 {
-    /// <summary>
-    /// Data property.
-    /// </summary>
-    public class Property : ObservableObject, IProperty
+    [DataContract(IsReference = true)]
+    public class Property : ObservableObject
     {
         private string _value;
 
-        /// <inheritdoc/>
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public string Value
         {
             get => _value;
-            set => Update(ref _value, value);
+            set => RaiseAndSetIfChanged(ref _value, value);
         }
 
-        /// <inheritdoc/>
         public override object Copy(IDictionary<object, object> shared)
         {
             return new Property()
@@ -26,29 +24,17 @@ namespace Core2D.Data
             };
         }
 
-        /// <inheritdoc/>
         public override bool IsDirty()
         {
             var isDirty = base.IsDirty();
             return isDirty;
         }
 
-        /// <inheritdoc/>
         public override void Invalidate()
         {
             base.Invalidate();
         }
 
-        /// <summary>
-        /// Returns a string that represents the current object.
-        /// </summary>
-        /// <returns>A string that represents the current object.</returns>
         public override string ToString() => _value.ToString();
-
-        /// <summary>
-        /// Check whether the <see cref="Value"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeValue() => !string.IsNullOrWhiteSpace(_value);
     }
 }

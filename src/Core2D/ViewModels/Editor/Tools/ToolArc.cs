@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using Core2D;
 using Core2D.Editor.Tools.Selection;
-using Core2D.Editor.Tools.Settings;
 using Core2D.Input;
 using Core2D.Shapes;
 using Core2D.Style;
@@ -11,53 +10,32 @@ using Spatial.Arc;
 
 namespace Core2D.Editor.Tools
 {
-    /// <summary>
-    /// Arc tool.
-    /// </summary>
     public class ToolArc : ObservableObject, IEditorTool
     {
         public enum State { Point1, Point2, Point3, Point4 }
         private readonly IServiceProvider _serviceProvider;
-        private ToolSettingsArc _settings;
         private State _currentState = State.Point1;
-        private IArcShape _arc;
+        private ArcShape _arc;
         private bool _connectedPoint3;
         private bool _connectedPoint4;
         private ToolArcSelection _selection;
 
-        /// <inheritdoc/>
         public string Title => "Arc";
 
-        /// <summary>
-        /// Gets or sets the tool settings.
-        /// </summary>
-        public ToolSettingsArc Settings
-        {
-            get => _settings;
-            set => Update(ref _settings, value);
-        }
-
-        /// <summary>
-        /// Initialize new instance of <see cref="ToolArc"/> class.
-        /// </summary>
-        /// <param name="serviceProvider">The service provider.</param>
         public ToolArc(IServiceProvider serviceProvider) : base()
         {
             _serviceProvider = serviceProvider;
-            _settings = new ToolSettingsArc();
         }
 
-        /// <inheritdoc/>
         public override object Copy(IDictionary<object, object> shared)
         {
             throw new NotImplementedException();
         }
 
-        /// <inheritdoc/>
         public void LeftDown(InputArgs args)
         {
             var factory = _serviceProvider.GetService<IFactory>();
-            var editor = _serviceProvider.GetService<IProjectEditor>();
+            var editor = _serviceProvider.GetService<ProjectEditor>();
             (decimal sx, decimal sy) = editor.TryToSnap(args);
             switch (_currentState)
             {
@@ -70,7 +48,7 @@ namespace Core2D.Editor.Tools
                         _connectedPoint4 = false;
                         _arc = factory.CreateArcShape(
                             (double)sx, (double)sy,
-                            (IShapeStyle)style.Copy(null),
+                            (ShapeStyle)style.Copy(null),
                             editor.Project.Options.DefaultIsStroked,
                             editor.Project.Options.DefaultIsFilled);
 
@@ -166,12 +144,10 @@ namespace Core2D.Editor.Tools
             }
         }
 
-        /// <inheritdoc/>
         public void LeftUp(InputArgs args)
         {
         }
 
-        /// <inheritdoc/>
         public void RightDown(InputArgs args)
         {
             switch (_currentState)
@@ -186,15 +162,13 @@ namespace Core2D.Editor.Tools
             }
         }
 
-        /// <inheritdoc/>
         public void RightUp(InputArgs args)
         {
         }
 
-        /// <inheritdoc/>
         public void Move(InputArgs args)
         {
-            var editor = _serviceProvider.GetService<IProjectEditor>();
+            var editor = _serviceProvider.GetService<ProjectEditor>();
             (decimal sx, decimal sy) = editor.TryToSnap(args);
             switch (_currentState)
             {
@@ -254,12 +228,9 @@ namespace Core2D.Editor.Tools
             }
         }
 
-        /// <summary>
-        /// Transfer tool state to <see cref="State.Point2"/>.
-        /// </summary>
         public void ToStatePoint2()
         {
-            var editor = _serviceProvider.GetService<IProjectEditor>();
+            var editor = _serviceProvider.GetService<ProjectEditor>();
             _selection = new ToolArcSelection(
                 _serviceProvider,
                 editor.Project.CurrentContainer.HelperLayer,
@@ -269,32 +240,24 @@ namespace Core2D.Editor.Tools
             _selection.ToStatePoint2();
         }
 
-        /// <summary>
-        /// Transfer tool state to <see cref="State.Point3"/>.
-        /// </summary>
         public void ToStatePoint3()
         {
             _selection.ToStatePoint3();
         }
 
-        /// <summary>
-        /// Transfer tool state to <see cref="State.Point4"/>.
-        /// </summary>
         public void ToStatePoint4()
         {
             _selection.ToStatePoint4();
         }
 
-        /// <inheritdoc/>
-        public void Move(IBaseShape shape)
+        public void Move(BaseShape shape)
         {
             _selection.Move();
         }
 
-        /// <inheritdoc/>
-        public void Finalize(IBaseShape shape)
+        public void Finalize(BaseShape shape)
         {
-            var arc = shape as IArcShape;
+            var arc = shape as ArcShape;
             var a = new WpfArc(
                 Point2.FromXY(arc.Point1.X, arc.Point1.Y),
                 Point2.FromXY(arc.Point2.X, arc.Point2.Y),
@@ -314,10 +277,9 @@ namespace Core2D.Editor.Tools
             }
         }
 
-        /// <inheritdoc/>
         public void Reset()
         {
-            var editor = _serviceProvider.GetService<IProjectEditor>();
+            var editor = _serviceProvider.GetService<ProjectEditor>();
 
             switch (_currentState)
             {

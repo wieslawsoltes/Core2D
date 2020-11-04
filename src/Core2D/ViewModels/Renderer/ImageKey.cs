@@ -1,20 +1,12 @@
 ﻿
+using System.Runtime.Serialization;
+
 namespace Core2D.Renderer
 {
-    /// <summary>
-    /// Image key.
-    /// </summary>
+    [DataContract(IsReference = true)]
     public class ImageKey : IImageKey
     {
-        /// <summary>
-        /// Gets or sets image key.
-        /// </summary>
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public string Key { get; set; }
-
-        /// <summary>
-        /// Check whether the <see cref="Key"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public bool ShouldSerializeKey() => !string.IsNullOrWhiteSpace(Key);
     }
 }

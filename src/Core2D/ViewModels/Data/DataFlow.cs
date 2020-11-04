@@ -1,17 +1,15 @@
 ﻿using System.Collections.Immutable;
+using System.Runtime.Serialization;
 using Core2D.Bindings;
 using Core2D.Containers;
 using Core2D.Shapes;
 
 namespace Core2D.Data
 {
-    /// <summary>
-    /// Data flow.
-    /// </summary>
-    public class DataFlow : IDataFlow
+    [DataContract(IsReference = true)]
+    public class DataFlow
     {
-        /// <inheritdoc/>
-        public void Bind(IProjectContainer project)
+        public void Bind(ProjectContainer project)
         {
             foreach (var document in project.Documents)
             {
@@ -19,21 +17,19 @@ namespace Core2D.Data
             }
         }
 
-        /// <inheritdoc/>
-        public void Bind(IDocumentContainer document)
+        public void Bind(DocumentContainer document)
         {
             foreach (var container in document.Pages)
             {
-                var db = container.Data.Properties;
-                var r = container.Data.Record;
+                var db = container.Properties;
+                var r = container.Record;
 
                 Bind(container.Template, db, r);
                 Bind(container, db, r);
             }
         }
 
-        /// <inheritdoc/>
-        public void Bind(IPageContainer container, object db, object r)
+        public void Bind(PageContainer container, object db, object r)
         {
             foreach (var layer in container.Layers)
             {
@@ -41,8 +37,7 @@ namespace Core2D.Data
             }
         }
 
-        /// <inheritdoc/>
-        public void Bind(ILayerContainer layer, object db, object r)
+        public void Bind(LayerContainer layer, object db, object r)
         {
             foreach (var shape in layer.Shapes)
             {
@@ -50,52 +45,43 @@ namespace Core2D.Data
             }
         }
 
-        /// <inheritdoc/>
-        public void Bind(ILineShape line, object db, object r)
+        public void Bind(LineShape line, object db, object r)
         {
         }
 
-        /// <inheritdoc/>
-        public void Bind(IRectangleShape rectangle, object db, object r)
+        public void Bind(RectangleShape rectangle, object db, object r)
         {
         }
 
-        /// <inheritdoc/>
-        public void Bind(IEllipseShape ellipse, object db, object r)
+        public void Bind(EllipseShape ellipse, object db, object r)
         {
         }
 
-        /// <inheritdoc/>
-        public void Bind(IArcShape arc, object db, object r)
+        public void Bind(ArcShape arc, object db, object r)
         {
         }
 
-        /// <inheritdoc/>
-        public void Bind(ICubicBezierShape cubicBezier, object db, object r)
+        public void Bind(CubicBezierShape cubicBezier, object db, object r)
         {
         }
 
-        /// <inheritdoc/>
-        public void Bind(IQuadraticBezierShape quadraticBezier, object db, object r)
+        public void Bind(QuadraticBezierShape quadraticBezier, object db, object r)
         {
         }
 
-        /// <inheritdoc/>
-        public void Bind(ITextShape text, object db, object r)
+        public void Bind(TextShape text, object db, object r)
         {
-            var properties = (ImmutableArray<IProperty>)db;
-            var record = (IRecord)r;
+            var properties = (ImmutableArray<Property>)db;
+            var record = (Record)r;
             var tbind = TextBinding.Bind(text, properties, record);
-            text.SetProperty(nameof(ITextShape.Text), tbind);
+            text.SetProperty(nameof(TextShape.Text), tbind);
         }
 
-        /// <inheritdoc/>
-        public void Bind(IImageShape image, object db, object r)
+        public void Bind(ImageShape image, object db, object r)
         {
         }
 
-        /// <inheritdoc/>
-        public void Bind(IPathShape path, object db, object r)
+        public void Bind(PathShape path, object db, object r)
         {
         }
     }

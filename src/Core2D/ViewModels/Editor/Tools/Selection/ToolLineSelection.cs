@@ -6,26 +6,16 @@ using Core2D.Style;
 
 namespace Core2D.Editor.Tools.Selection
 {
-    /// <summary>
-    /// Helper class for <see cref="ILineShape"/> shape selection.
-    /// </summary>
     public class ToolLineSelection
     {
         private readonly IServiceProvider _serviceProvider;
-        private readonly ILayerContainer _layer;
-        private readonly ILineShape _line;
-        private readonly IShapeStyle _style;
-        private IPointShape _startHelperPoint;
-        private IPointShape _endHelperPoint;
+        private readonly LayerContainer _layer;
+        private readonly LineShape _line;
+        private readonly ShapeStyle _style;
+        private PointShape _startHelperPoint;
+        private PointShape _endHelperPoint;
 
-        /// <summary>
-        /// Initialize new instance of <see cref="ToolLineSelection"/> class.
-        /// </summary>
-        /// <param name="serviceProvider">The service provider.</param>
-        /// <param name="layer">The selection shapes layer.</param>
-        /// <param name="shape">The selected shape.</param>
-        /// <param name="style">The selection shapes style.</param>
-        public ToolLineSelection(IServiceProvider serviceProvider, ILayerContainer layer, ILineShape shape, IShapeStyle style)
+        public ToolLineSelection(IServiceProvider serviceProvider, LayerContainer layer, LineShape shape, ShapeStyle style)
         {
             _serviceProvider = serviceProvider;
             _layer = layer;
@@ -33,9 +23,6 @@ namespace Core2D.Editor.Tools.Selection
             _style = style;
         }
 
-        /// <summary>
-        /// Transfer selection state to End.
-        /// </summary>
         public void ToStateEnd()
         {
             _startHelperPoint = _serviceProvider.GetService<IFactory>().CreatePointShape(0, 0);
@@ -45,9 +32,6 @@ namespace Core2D.Editor.Tools.Selection
             _layer.Shapes = _layer.Shapes.Add(_endHelperPoint);
         }
 
-        /// <summary>
-        /// Move selection.
-        /// </summary>
         public void Move()
         {
             if (_startHelperPoint != null)
@@ -65,9 +49,6 @@ namespace Core2D.Editor.Tools.Selection
             _layer.InvalidateLayer();
         }
 
-        /// <summary>
-        /// Reset selection.
-        /// </summary>
         public void Reset()
         {
             if (_startHelperPoint != null)

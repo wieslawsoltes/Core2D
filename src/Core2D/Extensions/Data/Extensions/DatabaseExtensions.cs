@@ -3,19 +3,9 @@ using System.Linq;
 
 namespace Core2D.Data
 {
-    /// <summary>
-    /// Database extensions.
-    /// </summary>
     public static class DatabaseExtensions
     {
-        /// <summary>
-        /// Update the destination database using data from source database using Id column as identification.
-        /// </summary>
-        /// <param name="destination">The destination database.</param>
-        /// <param name="source">The source database.</param>
-        /// <param name="records">The updated records from destination database.</param>
-        /// <returns>True if destination database was updated.</returns>
-        public static bool Update(this IDatabase destination, IDatabase source, out ImmutableArray<IRecord>.Builder records)
+        public static bool Update(this Database destination, Database source, out ImmutableArray<Record>.Builder records)
         {
             bool isDirty = false;
             records = null;

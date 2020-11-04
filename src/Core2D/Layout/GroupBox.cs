@@ -8,14 +8,14 @@ namespace Core2D.Layout
 {
     public struct GroupBox
     {
-        public static void TransformPoint(ref MatrixD matrix, IPointShape point)
+        public static void TransformPoint(ref MatrixD matrix, PointShape point)
         {
             var transformed = MatrixD.TransformPoint(matrix, new PointD((decimal)point.X, (decimal)point.Y));
             point.X = (double)transformed.X;
             point.Y = (double)transformed.Y;
         }
 
-        public static void TransformPoints(ref MatrixD matrix, IList<IPointShape> points)
+        public static void TransformPoints(ref MatrixD matrix, IList<PointShape> points)
         {
             if (points == null || points.Count == 0)
             {
@@ -28,9 +28,9 @@ namespace Core2D.Layout
             }
         }
 
-        public static bool IsPointMovable(IPointShape point, IBaseShape parent)
+        public static bool IsPointMovable(PointShape point, BaseShape parent)
         {
-            if (point.State.Flags.HasFlag(ShapeStateFlags.Locked) || (point.Owner is IBaseShape ower && ower.State.Flags.HasFlag(ShapeStateFlags.Locked)))
+            if (point.State.Flags.HasFlag(ShapeStateFlags.Locked) || (point.Owner is BaseShape ower && ower.State.Flags.HasFlag(ShapeStateFlags.Locked)))
             {
                 return false;
             }
@@ -46,7 +46,7 @@ namespace Core2D.Layout
         public readonly ShapeBox[] Boxes;
         public Box Bounds;
 
-        public GroupBox(IList<IBaseShape> shapes)
+        public GroupBox(IList<BaseShape> shapes)
         {
             Boxes = new ShapeBox[shapes.Count];
 
@@ -92,9 +92,9 @@ namespace Core2D.Layout
             Bounds.Height = Math.Abs(Bounds.Bottom - Bounds.Top);
         }
 
-        public List<IPointShape> GetMovablePoints()
+        public List<PointShape> GetMovablePoints()
         {
-            var points = new HashSet<IPointShape>();
+            var points = new HashSet<PointShape>();
 
             for (int i = 0; i < Boxes.Length; i++)
             {
@@ -107,10 +107,10 @@ namespace Core2D.Layout
                 }
             }
 
-            return new List<IPointShape>(points);
+            return new List<PointShape>(points);
         }
 
-        public void Rotate(decimal sx, decimal sy, List<IPointShape> points, ref decimal rotateAngle)
+        public void Rotate(decimal sx, decimal sy, List<PointShape> points, ref decimal rotateAngle)
         {
             var centerX = Bounds.CenterX;
             var centerY = Bounds.CenterY;
@@ -125,7 +125,7 @@ namespace Core2D.Layout
             Update();
         }
 
-        public void Translate(decimal dx, decimal dy, List<IPointShape> points)
+        public void Translate(decimal dx, decimal dy, List<PointShape> points)
         {
             decimal offsetX = dx;
             decimal offsetY = dy;
@@ -134,7 +134,7 @@ namespace Core2D.Layout
             Update();
         }
 
-        public void ScaleTop(decimal dy, List<IPointShape> points)
+        public void ScaleTop(decimal dy, List<PointShape> points)
         {
             var oldSize = Bounds.Height;
             var newSize = oldSize - dy;
@@ -152,7 +152,7 @@ namespace Core2D.Layout
             Update();
         }
 
-        public void ScaleBottom(decimal dy, List<IPointShape> points)
+        public void ScaleBottom(decimal dy, List<PointShape> points)
         {
             var oldSize = Bounds.Height;
             var newSize = oldSize + dy;
@@ -170,7 +170,7 @@ namespace Core2D.Layout
             Update();
         }
 
-        public void ScaleLeft(decimal dx, List<IPointShape> points)
+        public void ScaleLeft(decimal dx, List<PointShape> points)
         {
             var oldSize = Bounds.Width;
             var newSize = oldSize - dx;
@@ -188,7 +188,7 @@ namespace Core2D.Layout
             Update();
         }
 
-        public void ScaleRight(decimal dx, List<IPointShape> points)
+        public void ScaleRight(decimal dx, List<PointShape> points)
         {
             var oldSize = Bounds.Width;
             var newSize = oldSize + dx;

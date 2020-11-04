@@ -8,17 +8,17 @@ namespace Core2D.Editor.Bounds.Shapes
 {
     public class BoundsQuadraticBezier : IBounds
     {
-        private List<IPointShape> _points = new List<IPointShape>();
-        public Type TargetType => typeof(IQuadraticBezierShape);
+        private List<PointShape> _points = new List<PointShape>();
+        public Type TargetType => typeof(QuadraticBezierShape);
 
-        public IPointShape TryToGetPoint(IBaseShape shape, Point2 target, double radius, double scale, IDictionary<Type, IBounds> registered)
+        public PointShape TryToGetPoint(BaseShape shape, Point2 target, double radius, double scale, IDictionary<Type, IBounds> registered)
         {
-            if (!(shape is IQuadraticBezierShape quadratic))
+            if (!(shape is QuadraticBezierShape quadratic))
             {
                 throw new ArgumentNullException(nameof(shape));
             }
 
-            var pointHitTest = registered[typeof(IPointShape)];
+            var pointHitTest = registered[typeof(PointShape)];
 
             if (pointHitTest.TryToGetPoint(quadratic.Point1, target, radius, scale, registered) != null)
             {
@@ -38,9 +38,9 @@ namespace Core2D.Editor.Bounds.Shapes
             return null;
         }
 
-        public bool Contains(IBaseShape shape, Point2 target, double radius, double scale, IDictionary<Type, IBounds> registered)
+        public bool Contains(BaseShape shape, Point2 target, double radius, double scale, IDictionary<Type, IBounds> registered)
         {
-            if (!(shape is IQuadraticBezierShape quadratic))
+            if (!(shape is QuadraticBezierShape quadratic))
             {
                 throw new ArgumentNullException(nameof(shape));
             }
@@ -58,9 +58,9 @@ namespace Core2D.Editor.Bounds.Shapes
             }
         }
 
-        public bool Overlaps(IBaseShape shape, Rect2 target, double radius, double scale, IDictionary<Type, IBounds> registered)
+        public bool Overlaps(BaseShape shape, Rect2 target, double radius, double scale, IDictionary<Type, IBounds> registered)
         {
-            if (!(shape is IQuadraticBezierShape quadratic))
+            if (!(shape is QuadraticBezierShape quadratic))
             {
                 throw new ArgumentNullException(nameof(shape));
             }

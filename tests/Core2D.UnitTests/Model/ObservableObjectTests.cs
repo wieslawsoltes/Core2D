@@ -90,7 +90,7 @@ namespace Core2D.UnitTests
                 get { return _testProperty; }
                 set
                 {
-                    TestPropertyUpdated = Update(ref _testProperty, value);
+                    TestPropertyUpdated = RaiseAndSetIfChanged(ref _testProperty, value);
                 }
             }
 

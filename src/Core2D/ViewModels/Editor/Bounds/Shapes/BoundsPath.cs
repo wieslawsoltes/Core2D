@@ -9,18 +9,18 @@ namespace Core2D.Editor.Bounds.Shapes
 {
     public class BoundsPath : IBounds
     {
-        private List<IPointShape> _points = new List<IPointShape>();
+        private List<PointShape> _points = new List<PointShape>();
 
-        public Type TargetType => typeof(IPathShape);
+        public Type TargetType => typeof(PathShape);
 
-        public IPointShape TryToGetPoint(IBaseShape shape, Point2 target, double radius, double scale, IDictionary<Type, IBounds> registered)
+        public PointShape TryToGetPoint(BaseShape shape, Point2 target, double radius, double scale, IDictionary<Type, IBounds> registered)
         {
-            if (!(shape is IPathShape path))
+            if (!(shape is PathShape path))
             {
                 throw new ArgumentNullException(nameof(shape));
             }
 
-            var pointHitTest = registered[typeof(IPointShape)];
+            var pointHitTest = registered[typeof(PointShape)];
 
             _points.Clear();
             path.GetPoints(_points);
@@ -36,9 +36,9 @@ namespace Core2D.Editor.Bounds.Shapes
             return null;
         }
 
-        public bool Contains(IBaseShape shape, Point2 target, double radius, double scale, IDictionary<Type, IBounds> registered)
+        public bool Contains(BaseShape shape, Point2 target, double radius, double scale, IDictionary<Type, IBounds> registered)
         {
-            if (!(shape is IPathShape path))
+            if (!(shape is PathShape path))
             {
                 throw new ArgumentNullException(nameof(shape));
             }
@@ -61,9 +61,9 @@ namespace Core2D.Editor.Bounds.Shapes
             return false;
         }
 
-        public bool Overlaps(IBaseShape shape, Rect2 target, double radius, double scale, IDictionary<Type, IBounds> registered)
+        public bool Overlaps(BaseShape shape, Rect2 target, double radius, double scale, IDictionary<Type, IBounds> registered)
         {
-            if (!(shape is IPathShape path))
+            if (!(shape is PathShape path))
             {
                 throw new ArgumentNullException(nameof(shape));
             }

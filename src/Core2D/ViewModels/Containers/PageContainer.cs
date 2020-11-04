@@ -1,27 +1,28 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Runtime.Serialization;
 using Core2D.Data;
+using Core2D.Renderer;
 using Core2D.Shapes;
 using Core2D.Style;
 
 namespace Core2D.Containers
 {
-    /// <summary>
-    /// Page container.
-    /// </summary>
-    public class PageContainer : ObservableObject, IPageContainer
+    [DataContract(IsReference = true)]
+    public class PageContainer : BaseContainer, IDataObject, IGrid
     {
         private double _width;
         private double _height;
-        private IColor _background;
-        private ImmutableArray<ILayerContainer> _layers;
-        private ILayerContainer _currentLayer;
-        private ILayerContainer _workingLayer;
-        private ILayerContainer _helperLayer;
-        private IBaseShape _currentShape;
-        private IPageContainer _template;
-        private IContext _data;
+        private BaseColor _background;
+        private ImmutableArray<LayerContainer> _layers;
+        private LayerContainer _currentLayer;
+        private LayerContainer _workingLayer;
+        private LayerContainer _helperLayer;
+        private BaseShape _currentShape;
+        private PageContainer _template;
+        private ImmutableArray<Property> _properties;
+        private Record _record;
         private bool _isExpanded = false;
         private bool _isGridEnabled;
         private bool _isBorderEnabled;
@@ -31,10 +32,10 @@ namespace Core2D.Containers
         private double _gridOffsetBottom;
         private double _gridCellWidth;
         private double _gridCellHeight;
-        private IColor _gridStrokeColor;
+        private BaseColor _gridStrokeColor;
         private double _gridStrokeThickness;
 
-        /// <inheritdoc/>
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public double Width
         {
             get => _template != null ? _template.Width : _width;
@@ -43,16 +44,16 @@ namespace Core2D.Containers
                 if (_template != null)
                 {
                     _template.Width = value;
-                    Notify();
+                    RaisePropertyChanged();
                 }
                 else
                 {
-                    Update(ref _width, value);
+                    RaiseAndSetIfChanged(ref _width, value);
                 }
             }
         }
 
-        /// <inheritdoc/>
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public double Height
         {
             get => _template != null ? _template.Height : _height;
@@ -61,17 +62,17 @@ namespace Core2D.Containers
                 if (_template != null)
                 {
                     _template.Height = value;
-                    Notify();
+                    RaisePropertyChanged();
                 }
                 else
                 {
-                    Update(ref _height, value);
+                    RaiseAndSetIfChanged(ref _height, value);
                 }
             }
         }
 
-        /// <inheritdoc/>
-        public IColor Background
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
+        public BaseColor Background
         {
             get => _template != null ? _template.Background : _background;
             set
@@ -79,72 +80,79 @@ namespace Core2D.Containers
                 if (_template != null)
                 {
                     _template.Background = value;
-                    Notify();
+                    RaisePropertyChanged();
                 }
                 else
                 {
-                    Update(ref _background, value);
+                    RaiseAndSetIfChanged(ref _background, value);
                 }
             }
         }
 
-        /// <inheritdoc/>
-        public ImmutableArray<ILayerContainer> Layers
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
+        public ImmutableArray<LayerContainer> Layers
         {
             get => _layers;
-            set => Update(ref _layers, value);
+            set => RaiseAndSetIfChanged(ref _layers, value);
         }
 
-        /// <inheritdoc/>
-        public ILayerContainer CurrentLayer
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
+        public LayerContainer CurrentLayer
         {
             get => _currentLayer;
-            set => Update(ref _currentLayer, value);
+            set => RaiseAndSetIfChanged(ref _currentLayer, value);
         }
 
-        /// <inheritdoc/>
-        public ILayerContainer WorkingLayer
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
+        public LayerContainer WorkingLayer
         {
             get => _workingLayer;
-            set => Update(ref _workingLayer, value);
+            set => RaiseAndSetIfChanged(ref _workingLayer, value);
         }
 
-        /// <inheritdoc/>
-        public ILayerContainer HelperLayer
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
+        public LayerContainer HelperLayer
         {
             get => _helperLayer;
-            set => Update(ref _helperLayer, value);
+            set => RaiseAndSetIfChanged(ref _helperLayer, value);
         }
 
-        /// <inheritdoc/>
-        public IBaseShape CurrentShape
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
+        public BaseShape CurrentShape
         {
             get => _currentShape;
-            set => Update(ref _currentShape, value);
+            set => RaiseAndSetIfChanged(ref _currentShape, value);
         }
 
-        /// <inheritdoc/>
-        public IPageContainer Template
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
+        public PageContainer Template
         {
             get => _template;
-            set => Update(ref _template, value);
+            set => RaiseAndSetIfChanged(ref _template, value);
         }
 
-        /// <inheritdoc/>
-        public IContext Data
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
+        public ImmutableArray<Property> Properties
         {
-            get => _data;
-            set => Update(ref _data, value);
+            get => _properties;
+            set => RaiseAndSetIfChanged(ref _properties, value);
         }
 
-        /// <inheritdoc/>
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
+        public Record Record
+        {
+            get => _record;
+            set => RaiseAndSetIfChanged(ref _record, value);
+        }
+
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public bool IsExpanded
         {
             get => _isExpanded;
-            set => Update(ref _isExpanded, value);
+            set => RaiseAndSetIfChanged(ref _isExpanded, value);
         }
 
-        /// <inheritdoc/>
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public bool IsGridEnabled
         {
             get => _template != null ? _template.IsGridEnabled : _isGridEnabled;
@@ -153,16 +161,16 @@ namespace Core2D.Containers
                 if (_template != null)
                 {
                     _template.IsGridEnabled = value;
-                    Notify();
+                    RaisePropertyChanged();
                 }
                 else
                 {
-                    Update(ref _isGridEnabled, value);
+                    RaiseAndSetIfChanged(ref _isGridEnabled, value);
                 }
             }
         }
 
-        /// <inheritdoc/>
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public bool IsBorderEnabled
         {
             get => _template != null ? _template.IsBorderEnabled : _isBorderEnabled;
@@ -171,16 +179,16 @@ namespace Core2D.Containers
                 if (_template != null)
                 {
                     _template.IsBorderEnabled = value;
-                    Notify();
+                    RaisePropertyChanged();
                 }
                 else
                 {
-                    Update(ref _isBorderEnabled, value);
+                    RaiseAndSetIfChanged(ref _isBorderEnabled, value);
                 }
             }
         }
 
-        /// <inheritdoc/>
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public double GridOffsetLeft
         {
             get => _template != null ? _template.GridOffsetLeft : _gridOffsetLeft;
@@ -189,16 +197,16 @@ namespace Core2D.Containers
                 if (_template != null)
                 {
                     _template.GridOffsetLeft = value;
-                    Notify();
+                    RaisePropertyChanged();
                 }
                 else
                 {
-                    Update(ref _gridOffsetLeft, value);
+                    RaiseAndSetIfChanged(ref _gridOffsetLeft, value);
                 }
             }
         }
 
-        /// <inheritdoc/>
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public double GridOffsetTop
         {
             get => _template != null ? _template.GridOffsetTop : _gridOffsetTop;
@@ -207,16 +215,16 @@ namespace Core2D.Containers
                 if (_template != null)
                 {
                     _template.GridOffsetTop = value;
-                    Notify();
+                    RaisePropertyChanged();
                 }
                 else
                 {
-                    Update(ref _gridOffsetTop, value);
+                    RaiseAndSetIfChanged(ref _gridOffsetTop, value);
                 }
             }
         }
 
-        /// <inheritdoc/>
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public double GridOffsetRight
         {
             get => _template != null ? _template.GridOffsetRight : _gridOffsetRight;
@@ -225,16 +233,16 @@ namespace Core2D.Containers
                 if (_template != null)
                 {
                     _template.GridOffsetRight = value;
-                    Notify();
+                    RaisePropertyChanged();
                 }
                 else
                 {
-                    Update(ref _gridOffsetRight, value);
+                    RaiseAndSetIfChanged(ref _gridOffsetRight, value);
                 }
             }
         }
 
-        /// <inheritdoc/>
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public double GridOffsetBottom
         {
             get => _template != null ? _template.GridOffsetBottom : _gridOffsetBottom;
@@ -243,16 +251,16 @@ namespace Core2D.Containers
                 if (_template != null)
                 {
                     _template.GridOffsetBottom = value;
-                    Notify();
+                    RaisePropertyChanged();
                 }
                 else
                 {
-                    Update(ref _gridOffsetBottom, value);
+                    RaiseAndSetIfChanged(ref _gridOffsetBottom, value);
                 }
             }
         }
 
-        /// <inheritdoc/>
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public double GridCellWidth
         {
             get => _template != null ? _template.GridCellWidth : _gridCellWidth;
@@ -261,16 +269,16 @@ namespace Core2D.Containers
                 if (_template != null)
                 {
                     _template.GridCellWidth = value;
-                    Notify();
+                    RaisePropertyChanged();
                 }
                 else
                 {
-                    Update(ref _gridCellWidth, value);
+                    RaiseAndSetIfChanged(ref _gridCellWidth, value);
                 }
             }
         }
 
-        /// <inheritdoc/>
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public double GridCellHeight
         {
             get => _template != null ? _template.GridCellHeight : _gridCellHeight;
@@ -279,17 +287,17 @@ namespace Core2D.Containers
                 if (_template != null)
                 {
                     _template.GridCellHeight = value;
-                    Notify();
+                    RaisePropertyChanged();
                 }
                 else
                 {
-                    Update(ref _gridCellHeight, value);
+                    RaiseAndSetIfChanged(ref _gridCellHeight, value);
                 }
             }
         }
 
-        /// <inheritdoc/>
-        public IColor GridStrokeColor
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
+        public BaseColor GridStrokeColor
         {
             get => _template != null ? _template.GridStrokeColor : _gridStrokeColor;
             set
@@ -297,16 +305,16 @@ namespace Core2D.Containers
                 if (_template != null)
                 {
                     _template.GridStrokeColor = value;
-                    Notify();
+                    RaisePropertyChanged();
                 }
                 else
                 {
-                    Update(ref _gridStrokeColor, value);
+                    RaiseAndSetIfChanged(ref _gridStrokeColor, value);
                 }
             }
         }
 
-        /// <inheritdoc/>
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public double GridStrokeThickness
         {
             get => _template != null ? _template.GridStrokeThickness : _gridStrokeThickness;
@@ -315,19 +323,17 @@ namespace Core2D.Containers
                 if (_template != null)
                 {
                     _template.GridStrokeThickness = value;
-                    Notify();
+                    RaisePropertyChanged();
                 }
                 else
                 {
-                    Update(ref _gridStrokeThickness, value);
+                    RaiseAndSetIfChanged(ref _gridStrokeThickness, value);
                 }
             }
         }
 
-        /// <inheritdoc/>
-        public void SetCurrentLayer(ILayerContainer layer) => CurrentLayer = layer;
+        public void SetCurrentLayer(LayerContainer layer) => CurrentLayer = layer;
 
-        /// <inheritdoc/>
         public virtual void InvalidateLayer()
         {
             if (Template != null)
@@ -354,20 +360,18 @@ namespace Core2D.Containers
             }
         }
 
-        /// <inheritdoc/>
         public override object Copy(IDictionary<object, object> shared)
         {
             throw new NotImplementedException();
         }
 
-        /// <inheritdoc/>
         public override bool IsDirty()
         {
             var isDirty = base.IsDirty();
 
             if (Background != null)
             {
-                isDirty |= Background.IsDirty(); 
+                isDirty |= Background.IsDirty();
             }
 
             foreach (var layer in Layers)
@@ -377,22 +381,27 @@ namespace Core2D.Containers
 
             if (WorkingLayer != null)
             {
-                isDirty |= WorkingLayer.IsDirty(); 
+                isDirty |= WorkingLayer.IsDirty();
             }
 
             if (HelperLayer != null)
             {
-                isDirty |= HelperLayer.IsDirty(); 
+                isDirty |= HelperLayer.IsDirty();
             }
 
             if (Template != null)
             {
-                isDirty |= Template.IsDirty(); 
+                isDirty |= Template.IsDirty();
             }
 
-            if (Data != null)
+            foreach (var property in Properties)
             {
-                isDirty |= Data.IsDirty(); 
+                isDirty |= property.IsDirty();
+            }
+
+            if (Record != null)
+            {
+                isDirty |= Record.IsDirty();
             }
 
             if (GridStrokeColor != null)
@@ -403,7 +412,6 @@ namespace Core2D.Containers
             return isDirty;
         }
 
-        /// <inheritdoc/>
         public override void Invalidate()
         {
             base.Invalidate();
@@ -418,133 +426,16 @@ namespace Core2D.Containers
             WorkingLayer?.Invalidate();
             HelperLayer?.Invalidate();
             Template?.Invalidate();
-            Data?.Invalidate();
+ 
+            foreach (var property in Properties)
+            {
+                property.Invalidate();
+            }
+
+            if (Record != null)
+            {
+                Record.Invalidate();
+            }
         }
-
-        /// <summary>
-        /// Check whether the <see cref="Width"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeWidth() => _width != default;
-
-        /// <summary>
-        /// Check whether the <see cref="Height"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeHeight() => _height != default;
-
-        /// <summary>
-        /// Check whether the <see cref="Background"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeBackground() => _background != null;
-
-        /// <summary>
-        /// Check whether the <see cref="Layers"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeLayers() => true;
-
-        /// <summary>
-        /// Check whether the <see cref="CurrentLayer"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeCurrentLayer() => _currentLayer != null;
-
-        /// <summary>
-        /// Check whether the <see cref="WorkingLayer"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeWorkingLayer() => _workingLayer != null;
-
-        /// <summary>
-        /// Check whether the <see cref="HelperLayer"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeHelperLayer() => _helperLayer != null;
-
-        /// <summary>
-        /// Check whether the <see cref="CurrentShape"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeCurrentShape() => _currentShape != null;
-
-        /// <summary>
-        /// Check whether the <see cref="Template"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeTemplate() => _template != null;
-
-        /// <summary>
-        /// Check whether the <see cref="Data"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeData() => _data != null;
-
-        /// <summary>
-        /// Check whether the <see cref="IsExpanded"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeIsExpanded() => _isExpanded != default;
-
-        /// <summary>
-        /// Check whether the <see cref="IsGridEnabled"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeIsGridEnabled() => _isGridEnabled != default;
-
-        /// <summary>
-        /// Check whether the <see cref="IsBorderEnabled"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeIsBorderEnabled() => _isBorderEnabled != default;
-
-        /// <summary>
-        /// Check whether the <see cref="GridOffsetLeft"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeGridOffsetLeft() => _gridOffsetLeft != default;
-
-        /// <summary>
-        /// Check whether the <see cref="GridOffsetTop"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeGridOffsetTop() => _gridOffsetTop != default;
-
-        /// <summary>
-        /// Check whether the <see cref="GridOffsetRight"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeGridOffsetRight() => _gridOffsetRight != default;
-
-        /// <summary>
-        /// Check whether the <see cref="GridOffsetBottom"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeGridOffsetBottom() => _gridOffsetBottom != default;
-
-        /// <summary>
-        /// Check whether the <see cref="GridCellWidth"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeGridCellWidth() => _gridCellWidth != default;
-
-        /// <summary>
-        /// Check whether the <see cref="GridCellHeight"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeGridCellHeight() => _gridCellHeight != default;
-
-        /// <summary>
-        /// Check whether the <see cref="GridStrokeColor"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeGridStrokeColor() => _gridStrokeColor != null;
-
-        /// <summary>
-        /// Check whether the <see cref="GridStrokeThickness"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeGridStrokeThickness() => _gridStrokeThickness != default;
     }
 }

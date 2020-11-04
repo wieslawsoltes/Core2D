@@ -1,31 +1,28 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Runtime.Serialization;
 using Core2D.Data;
 using Core2D.Renderer;
 
 namespace Core2D.Shapes
 {
-    /// <summary>
-    /// Connectable shape.
-    /// </summary>
-    public abstract class ConnectableShape : BaseShape, IConnectableShape
+    [DataContract(IsReference = true)]
+    public abstract class ConnectableShape : BaseShape
     {
-        private ImmutableArray<IPointShape> _connectors;
+        private ImmutableArray<PointShape> _connectors;
 
-        /// <inheritdoc/>
-        public ImmutableArray<IPointShape> Connectors
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
+        public ImmutableArray<PointShape> Connectors
         {
             get => _connectors;
-            set => Update(ref _connectors, value);
+            set => RaiseAndSetIfChanged(ref _connectors, value);
         }
 
-        /// <inheritdoc/>
         public override void DrawShape(object dc, IShapeRenderer renderer)
         {
         }
 
-        /// <inheritdoc/>
         public override void DrawPoints(object dc, IShapeRenderer renderer)
         {
             if (renderer.State.SelectedShapes != null)
@@ -50,10 +47,9 @@ namespace Core2D.Shapes
             }
         }
 
-        /// <inheritdoc/>
-        public override void Bind(IDataFlow dataFlow, object db, object r)
+        public override void Bind(DataFlow dataFlow, object db, object r)
         {
-            var record = Data?.Record ?? r;
+            var record = Record ?? r;
 
             foreach (var connector in _connectors)
             {
@@ -61,7 +57,6 @@ namespace Core2D.Shapes
             }
         }
 
-        /// <inheritdoc/>
         public override void Move(ISelection selection, decimal dx, decimal dy)
         {
             foreach (var connector in _connectors)
@@ -70,7 +65,6 @@ namespace Core2D.Shapes
             }
         }
 
-        /// <inheritdoc/>
         public override void Select(ISelection selection)
         {
             base.Select(selection);
@@ -81,7 +75,6 @@ namespace Core2D.Shapes
             }
         }
 
-        /// <inheritdoc/>
         public override void Deselect(ISelection selection)
         {
             base.Deselect(selection);
@@ -92,8 +85,7 @@ namespace Core2D.Shapes
             }
         }
 
-        /// <inheritdoc/>
-        public override void GetPoints(IList<IPointShape> points)
+        public override void GetPoints(IList<PointShape> points)
         {
             foreach (var connector in _connectors)
             {
@@ -101,13 +93,11 @@ namespace Core2D.Shapes
             }
         }
 
-        /// <inheritdoc/>
         public override object Copy(IDictionary<object, object> shared)
         {
             throw new NotImplementedException();
         }
 
-        /// <inheritdoc/>
         public override bool IsDirty()
         {
             var isDirty = base.IsDirty();
@@ -120,7 +110,6 @@ namespace Core2D.Shapes
             return isDirty;
         }
 
-        /// <inheritdoc/>
         public override void Invalidate()
         {
             base.Invalidate();
@@ -130,11 +119,5 @@ namespace Core2D.Shapes
                 connector.Invalidate();
             }
         }
-
-        /// <summary>
-        /// Check whether the <see cref="Connectors"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeConnectors() => true;
     }
 }

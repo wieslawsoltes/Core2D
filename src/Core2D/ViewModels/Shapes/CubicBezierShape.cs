@@ -1,52 +1,50 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 using Core2D.Data;
 using Core2D.Renderer;
 
 namespace Core2D.Shapes
 {
-    /// <summary>
-    /// Cubic bezier shape.
-    /// </summary>
-    public class CubicBezierShape : BaseShape, ICubicBezierShape
+    [DataContract(IsReference = true)]
+    public class CubicBezierShape : BaseShape
     {
-        private IPointShape _point1;
-        private IPointShape _point2;
-        private IPointShape _point3;
-        private IPointShape _point4;
+        private PointShape _point1;
+        private PointShape _point2;
+        private PointShape _point3;
+        private PointShape _point4;
 
-        /// <inheritdoc/>
-        public override Type TargetType => typeof(ICubicBezierShape);
+        [IgnoreDataMember]
+        public override Type TargetType => typeof(CubicBezierShape);
 
-        /// <inheritdoc/>
-        public IPointShape Point1
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
+        public PointShape Point1
         {
             get => _point1;
-            set => Update(ref _point1, value);
+            set => RaiseAndSetIfChanged(ref _point1, value);
         }
 
-        /// <inheritdoc/>
-        public IPointShape Point2
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
+        public PointShape Point2
         {
             get => _point2;
-            set => Update(ref _point2, value);
+            set => RaiseAndSetIfChanged(ref _point2, value);
         }
 
-        /// <inheritdoc/>
-        public IPointShape Point3
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
+        public PointShape Point3
         {
             get => _point3;
-            set => Update(ref _point3, value);
+            set => RaiseAndSetIfChanged(ref _point3, value);
         }
 
-        /// <inheritdoc/>
-        public IPointShape Point4
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
+        public PointShape Point4
         {
             get => _point4;
-            set => Update(ref _point4, value);
+            set => RaiseAndSetIfChanged(ref _point4, value);
         }
 
-        /// <inheritdoc/>
         public override void DrawShape(object dc, IShapeRenderer renderer)
         {
             if (State.Flags.HasFlag(ShapeStateFlags.Visible))
@@ -55,7 +53,6 @@ namespace Core2D.Shapes
             }
         }
 
-        /// <inheritdoc/>
         public override void DrawPoints(object dc, IShapeRenderer renderer)
         {
             if (renderer.State.SelectedShapes != null)
@@ -92,10 +89,9 @@ namespace Core2D.Shapes
             }
         }
 
-        /// <inheritdoc/>
-        public override void Bind(IDataFlow dataFlow, object db, object r)
+        public override void Bind(DataFlow dataFlow, object db, object r)
         {
-            var record = Data?.Record ?? r;
+            var record = Record ?? r;
 
             dataFlow.Bind(this, db, record);
 
@@ -105,7 +101,6 @@ namespace Core2D.Shapes
             _point4.Bind(dataFlow, db, record);
         }
 
-        /// <inheritdoc/>
         public override void Move(ISelection selection, decimal dx, decimal dy)
         {
             if (!Point1.State.Flags.HasFlag(ShapeStateFlags.Connector))
@@ -129,7 +124,6 @@ namespace Core2D.Shapes
             }
         }
 
-        /// <inheritdoc/>
         public override void Select(ISelection selection)
         {
             base.Select(selection);
@@ -139,7 +133,6 @@ namespace Core2D.Shapes
             Point4.Select(selection);
         }
 
-        /// <inheritdoc/>
         public override void Deselect(ISelection selection)
         {
             base.Deselect(selection);
@@ -149,8 +142,7 @@ namespace Core2D.Shapes
             Point4.Deselect(selection);
         }
 
-        /// <inheritdoc/>
-        public override void GetPoints(IList<IPointShape> points)
+        public override void GetPoints(IList<PointShape> points)
         {
             points.Add(Point1);
             points.Add(Point2);
@@ -158,13 +150,11 @@ namespace Core2D.Shapes
             points.Add(Point4);
         }
 
-        /// <inheritdoc/>
         public override object Copy(IDictionary<object, object> shared)
         {
             throw new NotImplementedException();
         }
 
-        /// <inheritdoc/>
         public override bool IsDirty()
         {
             var isDirty = base.IsDirty();
@@ -177,7 +167,6 @@ namespace Core2D.Shapes
             return isDirty;
         }
 
-        /// <inheritdoc/>
         public override void Invalidate()
         {
             base.Invalidate();
@@ -186,29 +175,5 @@ namespace Core2D.Shapes
             Point3.Invalidate();
             Point4.Invalidate();
         }
-
-        /// <summary>
-        /// Check whether the <see cref="Point1"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializePoint1() => _point1 != null;
-
-        /// <summary>
-        /// Check whether the <see cref="Point2"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializePoint2() => _point2 != null;
-
-        /// <summary>
-        /// Check whether the <see cref="Point3"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializePoint3() => _point3 != null;
-
-        /// <summary>
-        /// Check whether the <see cref="Point4"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializePoint4() => _point4 != null;
     }
 }

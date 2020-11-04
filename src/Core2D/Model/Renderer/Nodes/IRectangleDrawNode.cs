@@ -2,8 +2,8 @@
 
 namespace Core2D.Renderer
 {
-    public interface IRectangleDrawNode : ITextDrawNode
+    public interface IRectangleDrawNode : IDrawNode
     {
-        IRectangleShape Rectangle { get; set; }
+        RectangleShape Rectangle { get; set; }
     }
 }
