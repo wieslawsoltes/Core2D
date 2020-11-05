@@ -14,7 +14,6 @@ using Avalonia.Platform;
 using Avalonia.Styling;
 using Core2D;
 using Core2D.Editor;
-using Core2D.Configuration.Layouts;
 using Core2D.Configuration.Themes;
 using Core2D.Configuration.Windows;
 using Core2D.Designer;
@@ -134,17 +133,6 @@ namespace Core2D
                 }
             }
 
-            var windowLayout = default(LayoutConfiguration);
-            var windowLayoutPath = System.IO.Path.Combine(fileIO?.GetBaseDirectory(), "Core2D.layout");
-            if (fileIO.Exists(windowLayoutPath))
-            {
-                var jsonWindowLayout = fileIO?.ReadUtf8Text(windowLayoutPath);
-                if (!string.IsNullOrEmpty(jsonWindowLayout))
-                {
-                    windowLayout = JsonSerializer.Deserialize<LayoutConfiguration>(jsonWindowLayout);
-                }
-            }
-
             var editor = serviceProvider.GetService<ProjectEditor>();
 
             var recentPath = System.IO.Path.Combine(fileIO.GetBaseDirectory(), "Core2D.recent");
@@ -166,16 +154,10 @@ namespace Core2D
             editor.AboutInfo = aboutInfo;
 
             var mainWindow = serviceProvider.GetService<MainWindow>();
-            var mainControl = mainWindow.FindControl<MainView>("MainView");
 
             if (windowSettings != null)
             {
                 WindowConfigurationFactory.Load(mainWindow, windowSettings);
-            }
-
-            if (mainControl != null && windowLayout != null)
-            {
-                LayoutConfigurationFactory.Load(mainControl, windowLayout);
             }
 
             mainWindow.DataContext = editor;
@@ -189,13 +171,6 @@ namespace Core2D
                 if (!string.IsNullOrEmpty(jsonWindowSettings))
                 {
                     fileIO?.WriteUtf8Text(windowSettingsPath, jsonWindowSettings);
-                }
-
-                windowLayout = LayoutConfigurationFactory.Save(mainControl);
-                var jsonWindowLayout = JsonSerializer.Serialize(windowLayout, new JsonSerializerOptions() { WriteIndented = true });
-                if (!string.IsNullOrEmpty(jsonWindowLayout))
-                {
-                    fileIO?.WriteUtf8Text(windowLayoutPath, jsonWindowLayout);
                 }
             };
 

@@ -1,8 +1,4 @@
-﻿#if USE_DIAGNOSTICS
-using System.Diagnostics;
-#endif
-
-using Avalonia;
+﻿using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.PanAndZoom;
 using Avalonia.Markup.Xaml;
@@ -174,18 +170,12 @@ namespace Core2D.Views
                         {
                             var db = (object)customState.Container.Properties;
                             var record = (object)customState.Container.Record;
-#if USE_DIAGNOSTICS
-                            var swDataFlow = Stopwatch.StartNew();
-#endif
+
                             if (customState.Container.Template != null)
                             {
                                 customState.DataFlow.Bind(customState.Container.Template, db, record);
                             }
                             customState.DataFlow.Bind(customState.Container, db, record);
-#if USE_DIAGNOSTICS
-                            swDataFlow.Stop();
-                            Trace.WriteLine($"DataFlow {swDataFlow.Elapsed.TotalMilliseconds}ms");
-#endif
                         }
                     }
                     break;
@@ -204,24 +194,11 @@ namespace Core2D.Views
                     {
                         if (customState.Container != null && customState.Renderer != null)
                         {
-#if USE_DIAGNOSTICS
-                            var swRender = Stopwatch.StartNew();
-#endif
                             s_editorPresenter.Render(context, customState.Renderer, customState.Container, 0.0, 0.0);
-#if USE_DIAGNOSTICS
-                            swRender.Stop();
-                            Trace.WriteLine($"Render {swRender.Elapsed.TotalMilliseconds}ms");
-#endif
-#if USE_DIAGNOSTICS
-                            var swInvalidate = Stopwatch.StartNew();
-#endif
+
                             customState.Container?.Invalidate();
                             customState.Renderer.State.PointStyle.Invalidate();
                             customState.Renderer.State.SelectedPointStyle.Invalidate();
-#if USE_DIAGNOSTICS
-                            swInvalidate.Stop();
-                            Trace.WriteLine($"Invalidate {swInvalidate.Elapsed.TotalMilliseconds}ms");
-#endif
                         }
                     }
                     break;

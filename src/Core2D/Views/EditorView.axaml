@@ -28,17 +28,17 @@
     <i:Interaction.Behaviors>
         <idd:ContextDropBehavior Context="{Binding FallbackValue={x:Null}}" Handler="{StaticResource EditorDropHandler}" />
     </i:Interaction.Behaviors>
-    <Grid x:Name="LAYOUT_EditorGrid" ColumnDefinitions="250,6,*,6,250" RowDefinitions="*,Auto">
-        <TabControl x:Name="LAYOUT_LeftTabControl" Padding="6,0,0,0" Grid.Column="0" Grid.Row="0">
-            <TabItem x:Name="LAYOUT_ProjectTabItem" Header="Project">
+    <Grid ColumnDefinitions="250,6,*,6,250" RowDefinitions="*,Auto">
+        <TabControl Padding="6,0,0,0" Grid.Column="0" Grid.Row="0">
+            <TabItem Header="Project">
                 <containers:ProjectContainerView DataContext="{Binding Project}" />
             </TabItem>
-            <TabItem x:Name="LAYOUT_PropertiesTabItem" Header="Properties">
+            <TabItem Header="Properties">
                 <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
                     <ContentControl Content="{Binding PageState.SelectedShapes, Converter={StaticResource FirstSelectedItemValueConverter}}" />
                 </ScrollViewer>
             </TabItem>
-            <TabItem x:Name="LAYOUT_StyleTabItem" Header="Style">
+            <TabItem Header="Style">
                 <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
                     <style:ShapeStyleView>
                         <style:ShapeStyleView.DataContext>
@@ -50,24 +50,24 @@
                     </style:ShapeStyleView>
                 </ScrollViewer>
             </TabItem>
-            <TabItem x:Name="LAYOUT_OptionsTabItem" Header="Options">
-                <TabControl x:Name="LAYOUT_OptionsTabControl">
-                    <TabItem x:Name="LAYOUT_ProjectOptionsTabItem" Header="Project">
+            <TabItem Header="Options">
+                <TabControl>
+                    <TabItem Header="Project">
                         <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
                             <containers:OptionsView DataContext="{Binding Project.Options}" />
                         </ScrollViewer>
                     </TabItem>
-                    <TabItem x:Name="LAYOUT_RendererOptionsTabItem" Header="Renderer">
+                    <TabItem Header="Renderer">
                         <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
                             <renderer:ShapeRendererStateView DataContext="{Binding PageState}" />
                         </ScrollViewer>
                     </TabItem>
-                    <TabItem x:Name="LAYOUT_ZoomOptionsTabItem" Header="Zoom">
+                    <TabItem Header="Zoom">
                         <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
                             <views:ZoomView DataContext="{Binding CanvasPlatform.Zoom}" />
                         </ScrollViewer>
                     </TabItem>
-                    <TabItem x:Name="LAYOUT_ImagesOptionsTabItem" Header="Images">
+                    <TabItem Header="Images">
                         <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
                             <libraries:ImagesView DataContext="{Binding Project}" />
                         </ScrollViewer>
@@ -75,36 +75,36 @@
                 </TabControl>
             </TabItem>
         </TabControl>
-        <GridSplitter x:Name="LeftGridSplitter" ResizeDirection="Columns" ResizeBehavior="PreviousAndNext" Background="Transparent" Width="6" Grid.Column="1" Grid.Row="0" />
-        <views:PageView x:Name="Page" Grid.Column="2" Grid.Row="0" />
-        <GridSplitter x:Name="RightGridSplitter" ResizeDirection="Columns" ResizeBehavior="PreviousAndNext" Background="Transparent" Width="6" Grid.Column="3" Grid.Row="0" />
-        <TabControl x:Name="LAYOUT_RightTabControl" Padding="0,0,6,0" Grid.Column="4" Grid.Row="0">
-            <TabItem x:Name="LAYOUT_PageTabItem" Header="Page">
+        <GridSplitter ResizeDirection="Columns" ResizeBehavior="PreviousAndNext" Background="Transparent" Width="6" Grid.Column="1" Grid.Row="0" />
+        <views:PageView Grid.Column="2" Grid.Row="0" />
+        <GridSplitter ResizeDirection="Columns" ResizeBehavior="PreviousAndNext" Background="Transparent" Width="6" Grid.Column="3" Grid.Row="0" />
+        <TabControl Padding="0,0,6,0" Grid.Column="4" Grid.Row="0">
+            <TabItem Header="Page">
                 <containers:PageContainerView DataContext="{Binding Project.CurrentContainer}" />
             </TabItem>
-            <TabItem x:Name="LAYOUT_LibrariesTabItem" Header="Libraries">
-                <TabControl x:Name="LAYOUT_LibrariesTabControl">
-                    <TabItem x:Name="LAYOUT_StylesTabItem" Header="Styles">
+            <TabItem Header="Libraries">
+                <TabControl>
+                    <TabItem Header="Styles">
                         <libraries:StylesView DataContext="{Binding Project}" />
                     </TabItem>
-                    <TabItem x:Name="LAYOUT_GroupsTabItem" Header="Groups">
+                    <TabItem Header="Groups">
                         <libraries:GroupsView DataContext="{Binding Project}" />
                     </TabItem>
-                    <TabItem x:Name="LAYOUT_DataTabItem" Header="Data">
+                    <TabItem Header="Data">
                         <libraries:DatabasesView DataContext="{Binding Project}" />
                     </TabItem>
-                    <TabItem x:Name="LAYOUT_TemplatesTabItem" Header="Templates">
+                    <TabItem Header="Templates">
                         <libraries:TemplatesView DataContext="{Binding Project}" />
                     </TabItem>
                 </TabControl>
             </TabItem>
-            <TabItem x:Name="LAYOUT_ScriptsTabItem" Header="Scripts">
+            <TabItem Header="Scripts">
                 <libraries:ScriptsView DataContext="{Binding Project}" />
             </TabItem>
-            <TabItem x:Name="LAYOUT_BrowserTabItem" Header="Browser">
+            <TabItem Header="Browser">
                 <views:BrowserView />
             </TabItem>
         </TabControl>
-        <views:StatusView x:Name="StatusControl" Grid.Column="0" Grid.ColumnSpan="5" Grid.Row="1" />
+        <views:StatusView Grid.Column="0" Grid.ColumnSpan="5" Grid.Row="1" />
     </Grid>
 </UserControl>
