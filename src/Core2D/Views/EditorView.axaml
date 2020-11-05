@@ -89,9 +89,6 @@
                     </TabItem>
                 </TabControl>
             </TabItem>
-            <TabItem Header="Browser">
-                <views:BrowserView />
-            </TabItem>
             <TabItem Header="Options">
                 <TabControl>
                     <TabItem Header="Project">
@@ -113,6 +110,9 @@
                         <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
                             <libraries:ImagesView DataContext="{Binding Project}" />
                         </ScrollViewer>
+                    </TabItem>
+                    <TabItem Header="Browser">
+                        <views:BrowserView />
                     </TabItem>
                 </TabControl>
             </TabItem>
