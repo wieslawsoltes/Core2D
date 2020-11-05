@@ -29,26 +29,68 @@
         <idd:ContextDropBehavior Context="{Binding FallbackValue={x:Null}}" Handler="{StaticResource EditorDropHandler}" />
     </i:Interaction.Behaviors>
     <Grid ColumnDefinitions="250,6,*,6,250" RowDefinitions="*,Auto">
-        <TabControl Padding="6,0,0,0" Grid.Column="0" Grid.Row="0">
-            <TabItem Header="Project">
-                <containers:ProjectContainerView DataContext="{Binding Project}" />
-            </TabItem>
+        <containers:ProjectContainerView DataContext="{Binding Project}" Padding="6,0,0,0" Grid.Column="0" Grid.Row="0" />
+        <GridSplitter ResizeDirection="Columns" ResizeBehavior="PreviousAndNext" Background="Transparent" Width="6" Grid.Column="1" Grid.Row="0" />
+        <views:PageView Grid.Column="2" Grid.Row="0" />
+        <GridSplitter ResizeDirection="Columns" ResizeBehavior="PreviousAndNext" Background="Transparent" Width="6" Grid.Column="3" Grid.Row="0" />
+        <TabControl Padding="0,0,6,0" Grid.Column="4" Grid.Row="0">
             <TabItem Header="Properties">
-                <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-                    <ContentControl Content="{Binding PageState.SelectedShapes, Converter={StaticResource FirstSelectedItemValueConverter}}" />
-                </ScrollViewer>
+                <TabControl>
+                    <TabItem Header="Page">
+                        <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                            <containers:PageContainerView DataContext="{Binding Project.CurrentContainer}" />
+                        </ScrollViewer>
+                    </TabItem>
+                    <TabItem Header="Shape">
+                        <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                            <ContentControl Content="{Binding PageState.SelectedShapes, Converter={StaticResource FirstSelectedItemValueConverter}}" />
+                        </ScrollViewer>
+                    </TabItem>
+                    <TabItem Header="Style">
+                        <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                            <style:ShapeStyleView>
+                                <style:ShapeStyleView.DataContext>
+                                    <MultiBinding Converter="{StaticResource StyleMultiValueConverter}">
+                                        <Binding Path="PageState.SelectedShapes" FallbackValue="{x:Null}" />
+                                        <Binding Path="Project.CurrentStyleLibrary.Selected" FallbackValue="{x:Null}" />
+                                    </MultiBinding>
+                                </style:ShapeStyleView.DataContext>
+                            </style:ShapeStyleView>
+                        </ScrollViewer>
+                    </TabItem>
+                    <TabItem Header="Data" DataContext="{Binding PageState.SelectedShapes, Converter={StaticResource FirstSelectedItemValueConverter}}">
+                        <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                            <views:DataObjectView />
+                        </ScrollViewer>
+                    </TabItem>
+                    <TabItem Header="State" DataContext="{Binding PageState.SelectedShapes, Converter={StaticResource FirstSelectedItemValueConverter}}">
+                        <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                            <renderer:ShapeStateView DataContext="{Binding State}" x:CompileBindings="False"/>
+                        </ScrollViewer>
+                    </TabItem>
+                </TabControl>
             </TabItem>
-            <TabItem Header="Style">
-                <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-                    <style:ShapeStyleView>
-                        <style:ShapeStyleView.DataContext>
-                            <MultiBinding Converter="{StaticResource StyleMultiValueConverter}">
-                                <Binding Path="PageState.SelectedShapes" FallbackValue="{x:Null}" />
-                                <Binding Path="Project.CurrentStyleLibrary.Selected" FallbackValue="{x:Null}" />
-                            </MultiBinding>
-                        </style:ShapeStyleView.DataContext>
-                    </style:ShapeStyleView>
-                </ScrollViewer>
+            <TabItem Header="Libraries">
+                <TabControl>
+                    <TabItem Header="Styles">
+                        <libraries:StylesView DataContext="{Binding Project}" />
+                    </TabItem>
+                    <TabItem Header="Groups">
+                        <libraries:GroupsView DataContext="{Binding Project}" />
+                    </TabItem>
+                    <TabItem Header="Databases">
+                        <libraries:DatabasesView DataContext="{Binding Project}" />
+                    </TabItem>
+                    <TabItem Header="Templates">
+                        <libraries:TemplatesView DataContext="{Binding Project}" />
+                    </TabItem>
+                    <TabItem Header="Scripts">
+                        <libraries:ScriptsView DataContext="{Binding Project}" />
+                    </TabItem>
+                </TabControl>
+            </TabItem>
+            <TabItem Header="Browser">
+                <views:BrowserView />
             </TabItem>
             <TabItem Header="Options">
                 <TabControl>
@@ -73,36 +115,6 @@
                         </ScrollViewer>
                     </TabItem>
                 </TabControl>
-            </TabItem>
-        </TabControl>
-        <GridSplitter ResizeDirection="Columns" ResizeBehavior="PreviousAndNext" Background="Transparent" Width="6" Grid.Column="1" Grid.Row="0" />
-        <views:PageView Grid.Column="2" Grid.Row="0" />
-        <GridSplitter ResizeDirection="Columns" ResizeBehavior="PreviousAndNext" Background="Transparent" Width="6" Grid.Column="3" Grid.Row="0" />
-        <TabControl Padding="0,0,6,0" Grid.Column="4" Grid.Row="0">
-            <TabItem Header="Page">
-                <containers:PageContainerView DataContext="{Binding Project.CurrentContainer}" />
-            </TabItem>
-            <TabItem Header="Libraries">
-                <TabControl>
-                    <TabItem Header="Styles">
-                        <libraries:StylesView DataContext="{Binding Project}" />
-                    </TabItem>
-                    <TabItem Header="Groups">
-                        <libraries:GroupsView DataContext="{Binding Project}" />
-                    </TabItem>
-                    <TabItem Header="Data">
-                        <libraries:DatabasesView DataContext="{Binding Project}" />
-                    </TabItem>
-                    <TabItem Header="Templates">
-                        <libraries:TemplatesView DataContext="{Binding Project}" />
-                    </TabItem>
-                </TabControl>
-            </TabItem>
-            <TabItem Header="Scripts">
-                <libraries:ScriptsView DataContext="{Binding Project}" />
-            </TabItem>
-            <TabItem Header="Browser">
-                <views:BrowserView />
             </TabItem>
         </TabControl>
         <views:StatusView Grid.Column="0" Grid.ColumnSpan="5" Grid.Row="1" />
