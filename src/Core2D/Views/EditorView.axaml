@@ -58,13 +58,13 @@
                             </style:ShapeStyleView>
                         </ScrollViewer>
                     </TabItem>
-                    <TabItem Header="Data" DataContext="{Binding PageState.SelectedShapes, Converter={StaticResource FirstSelectedItemValueConverter}}">
-                        <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                    <TabItem Header="Data">
+                        <ScrollViewer DataContext="{Binding PageState.SelectedShapes, Converter={StaticResource FirstSelectedItemValueConverter}}" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
                             <views:DataObjectView />
                         </ScrollViewer>
                     </TabItem>
-                    <TabItem Header="State" DataContext="{Binding PageState.SelectedShapes, Converter={StaticResource FirstSelectedItemValueConverter}}">
-                        <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                    <TabItem Header="State">
+                        <ScrollViewer DataContext="{Binding PageState.SelectedShapes, Converter={StaticResource FirstSelectedItemValueConverter}}" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
                             <renderer:ShapeStateView DataContext="{Binding State}" x:CompileBindings="False"/>
                         </ScrollViewer>
                     </TabItem>
