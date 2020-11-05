@@ -59,13 +59,20 @@
                         </ScrollViewer>
                     </TabItem>
                     <TabItem Header="Data">
-                        <ScrollViewer DataContext="{Binding PageState.SelectedShapes, Converter={StaticResource FirstSelectedItemValueConverter}}" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-                            <views:DataObjectView />
+                        <ScrollViewer DataContext="{Binding PageState.SelectedShapes, Converter={StaticResource FirstSelectedItemValueConverter}}"
+                                      HorizontalScrollBarVisibility="Auto"
+                                      VerticalScrollBarVisibility="Auto">
+                            <views:DataObjectView IsVisible="{Binding $self.DataContext, Converter={x:Static ObjectConverters.IsNotNull}}"
+                                                  x:CompileBindings="False" />
                         </ScrollViewer>
                     </TabItem>
                     <TabItem Header="State">
-                        <ScrollViewer DataContext="{Binding PageState.SelectedShapes, Converter={StaticResource FirstSelectedItemValueConverter}}" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-                            <renderer:ShapeStateView DataContext="{Binding State}" x:CompileBindings="False"/>
+                        <ScrollViewer DataContext="{Binding PageState.SelectedShapes, Converter={StaticResource FirstSelectedItemValueConverter}}"
+                                      HorizontalScrollBarVisibility="Auto"
+                                      VerticalScrollBarVisibility="Auto">
+                            <renderer:ShapeStateView IsVisible="{Binding $self.DataContext, Converter={x:Static ObjectConverters.IsNotNull}}" 
+                                                     DataContext="{Binding State}"
+                                                     x:CompileBindings="False" />
                         </ScrollViewer>
                     </TabItem>
                 </TabControl>
