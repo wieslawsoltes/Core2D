@@ -24,7 +24,7 @@
         <Grid RowDefinitions="*" ColumnDefinitions="*,Auto" Grid.Row="0">
             <TextBox Text="{Binding CurrentGroupLibrary.Name, Mode=TwoWay}" BorderBrush="Transparent" Background="Transparent" VerticalAlignment="Center" Margin="0,0,0,0" IsVisible="{Binding !!$self.DataContext.CurrentGroupLibrary}" Grid.Column="0" x:CompileBindings="False" />
             <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" x:CompileBindings="False">
-                <Button Content="&#727;" Command="{Binding $parent[TopLevel].DataContext.OnRemoveGroupLibrary}" CommandParameter="{Binding CurrentGroupLibrary}" IsVisible="{Binding !!$self.DataContext.CurrentGroupLibrary}}" BorderBrush="Transparent" Background="Transparent" Padding="12,4,12,4" />
+                <Button Content="&#727;" Command="{Binding $parent[TopLevel].DataContext.OnRemoveGroupLibrary}" CommandParameter="{Binding CurrentGroupLibrary}" IsVisible="{Binding !!$self.DataContext.CurrentGroupLibrary}" BorderBrush="Transparent" Background="Transparent" Padding="12,4,12,4" />
                 <Button Content="+" Command="{Binding $parent[TopLevel].DataContext.OnAddGroupLibrary}" BorderBrush="Transparent" Background="Transparent" Padding="12,4,12,4" />
             </StackPanel>
         </Grid>
