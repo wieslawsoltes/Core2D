@@ -52,7 +52,7 @@
                     </TabItem>
                     <TabItem Header="Style">
                         <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-                            <style:ShapeStyleView>
+                            <style:ShapeStyleView x:DataType="Editor:ProjectEditor">
                                 <style:ShapeStyleView.DataContext>
                                     <MultiBinding Converter="{StaticResource StyleMultiValueConverter}">
                                         <Binding Path="PageState.SelectedShapes" FallbackValue="{x:Null}" />
