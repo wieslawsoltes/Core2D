@@ -77,7 +77,6 @@ namespace Core2D.Views.Data
 
             if (DataContext is Database database)
             {
-
                 _database = database;
                 _database.PropertyChanged += Database_PropertyChanged;
                 CreateColumns();
