@@ -77,7 +77,6 @@ namespace Core2D.Layout
             {
                 case DistributeMode.Horizontal:
                     {
-
                         boxes.Sort(ShapeBox.CompareLeft);
                         decimal offset = boxes[0].Bounds.Left + boxes[0].Bounds.Width + gaph;
                         for (int i = 1; i <= boxes.Count - 2; i++)

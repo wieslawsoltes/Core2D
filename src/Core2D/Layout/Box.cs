@@ -1,5 +1,4 @@
-﻿
-namespace Core2D.Layout
+﻿namespace Core2D.Layout
 {
     public struct Box
     {

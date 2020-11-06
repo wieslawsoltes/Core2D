@@ -109,7 +109,6 @@ namespace Core2D.Editor.Tools
                     }
                     break;
             }
-
         }
 
         public void LeftUp(InputArgs args)

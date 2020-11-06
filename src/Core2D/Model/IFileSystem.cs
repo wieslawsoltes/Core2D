@@ -1,5 +1,4 @@
-﻿
-namespace Core2D
+﻿namespace Core2D
 {
     public interface IFileSystem
     {

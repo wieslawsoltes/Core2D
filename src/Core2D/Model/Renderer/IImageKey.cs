@@ -1,5 +1,4 @@
-﻿
-namespace Core2D.Renderer
+﻿namespace Core2D.Renderer
 {
     public interface IImageKey
     {

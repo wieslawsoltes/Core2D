@@ -10,8 +10,6 @@ namespace Core2D.Editor
     {
         public static LineCap[] LineCapValues { get; } = (LineCap[])Enum.GetValues(typeof(LineCap));
 
-        public static CurveOrientation[] CurveOrientationValues { get; } = (CurveOrientation[])Enum.GetValues(typeof(CurveOrientation));
-
         public static ArrowType[] ArrowTypeValues { get; } = (ArrowType[])Enum.GetValues(typeof(ArrowType));
 
         public static TextHAlignment[] TextHAlignmentValues { get; } = (TextHAlignment[])Enum.GetValues(typeof(TextHAlignment));

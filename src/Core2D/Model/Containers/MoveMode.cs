@@ -1,5 +1,4 @@
-﻿
-namespace Core2D.Containers
+﻿namespace Core2D.Containers
 {
     public enum MoveMode
     {

@@ -1,5 +1,4 @@
-﻿
-namespace Core2D.Input
+﻿namespace Core2D.Input
 {
     public interface IInputTarget
     {

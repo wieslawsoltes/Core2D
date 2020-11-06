@@ -1,5 +1,4 @@
-﻿
-namespace Core2D.Bindings
+﻿namespace Core2D.Bindings
 {
     internal struct Binding
     {

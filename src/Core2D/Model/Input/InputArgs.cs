@@ -1,7 +1,6 @@
-﻿
-namespace Core2D.Input
+﻿namespace Core2D.Input
 {
-    public struct InputArgs
+    public readonly struct InputArgs
     {
         public double X { get; }
 

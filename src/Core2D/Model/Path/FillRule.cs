@@ -1,5 +1,4 @@
-﻿
-namespace Core2D.Path
+﻿namespace Core2D.Path
 {
     public enum FillRule
     {
