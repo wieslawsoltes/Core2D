@@ -337,7 +337,7 @@ namespace Core2D.Editor
                         var project = Factory.OpenProjectContainer(path, FileIO, JsonSerializer);
                         if (project != null)
                         {
-                            OnOpenProject(project, path);
+                            OnOpenProjectImpl(project, path);
                         }
                     }
                 }
@@ -348,7 +348,7 @@ namespace Core2D.Editor
             }
         }
 
-        public void OnOpenProject(ProjectContainer project, string path)
+        private void OnOpenProjectImpl(ProjectContainer project, string path)
         {
             try
             {
