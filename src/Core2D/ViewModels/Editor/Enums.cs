@@ -21,7 +21,5 @@ namespace Core2D.Editor
         public static FillRule[] XFillRuleValues { get; } = (FillRule[])Enum.GetValues(typeof(FillRule));
 
         public static SweepDirection[] XSweepDirectionValues { get; } = (SweepDirection[])Enum.GetValues(typeof(SweepDirection));
-
-        public static PointAlignment[] PointAlignmentValues { get; } = (PointAlignment[])Enum.GetValues(typeof(PointAlignment));
     }
 }

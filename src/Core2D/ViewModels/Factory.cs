@@ -330,7 +330,7 @@ namespace Core2D
             };
         }
 
-        public PointShape CreatePointShape(double x = 0.0, double y = 0.0, PointAlignment alignment = PointAlignment.None, string name = "")
+        public PointShape CreatePointShape(double x = 0.0, double y = 0.0, string name = "")
         {
             var pointShape = new PointShape()
             {
@@ -339,8 +339,7 @@ namespace Core2D
                 Properties = ImmutableArray.Create<Property>(),
                 Style = default,
                 X = x,
-                Y = y,
-                Alignment = alignment
+                Y = y
             };
             return pointShape;
         }

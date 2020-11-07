@@ -67,7 +67,7 @@ namespace Core2D
 
         PathFigure CreatePathFigure(PointShape startPoint, bool isClosed = false);
 
-        PointShape CreatePointShape(double x = 0.0, double y = 0.0, PointAlignment alignment = PointAlignment.None, string name = "");
+        PointShape CreatePointShape(double x = 0.0, double y = 0.0, string name = "");
 
         LineShape CreateLineShape(PointShape start, PointShape end, ShapeStyle style, bool isStroked = true, string name = "");
 

@@ -13,7 +13,6 @@ namespace Core2D.Shapes
     {
         private double _x;
         private double _y;
-        private PointAlignment _alignment;
 
         [IgnoreDataMember]
         public override Type TargetType => typeof(PointShape);
@@ -30,13 +29,6 @@ namespace Core2D.Shapes
         {
             get => _y;
             set => RaiseAndSetIfChanged(ref _y, value);
-        }
-
-        [DataMember(IsRequired = false, EmitDefaultValue = true)]
-        public PointAlignment Alignment
-        {
-            get => _alignment;
-            set => RaiseAndSetIfChanged(ref _alignment, value);
         }
 
         public override bool IsDirty()
@@ -109,8 +101,7 @@ namespace Core2D.Shapes
                 Style = Style,
                 Properties = properties,
                 X = X,
-                Y = Y,
-                Alignment = Alignment
+                Y = Y
             };
         }
 
