@@ -174,7 +174,7 @@ namespace Core2D.Editor
             MarkAsDirty();
         }
 
-        private void ObserveTemplateBackgroud(object sender, PropertyChangedEventArgs e)
+        private void ObserveTemplateBackground(object sender, PropertyChangedEventArgs e)
         {
             _editor.Project.CurrentContainer.RaisePropertyChanged(nameof(PageContainer.Background));
             var page = _editor.Project.CurrentContainer;
@@ -575,7 +575,7 @@ namespace Core2D.Editor
 
             if (container.Background != null)
             {
-                container.Background.PropertyChanged += ObserveTemplateBackgroud;
+                container.Background.PropertyChanged += ObserveTemplateBackground;
             }
 
             if (container.GridStrokeColor != null)
@@ -617,7 +617,7 @@ namespace Core2D.Editor
 
             if (container.Background != null)
             {
-                container.Background.PropertyChanged -= ObserveTemplateBackgroud;
+                container.Background.PropertyChanged -= ObserveTemplateBackground;
             }
 
             if (container.GridStrokeColor != null)
@@ -1093,31 +1093,23 @@ namespace Core2D.Editor
 
             segment.PropertyChanged += ObserveShape;
 
-            if (segment is LineSegment)
+            if (segment is LineSegment lineSegment)
             {
-                var lineSegment = segment as LineSegment;
-
                 lineSegment.Point.PropertyChanged += ObserveShape;
             }
-            else if (segment is ArcSegment)
+            else if (segment is ArcSegment arcSegment)
             {
-                var arcSegment = segment as ArcSegment;
-
                 arcSegment.Point.PropertyChanged += ObserveShape;
                 arcSegment.Size.PropertyChanged += ObserveShape;
             }
-            else if (segment is CubicBezierSegment)
+            else if (segment is CubicBezierSegment cubicBezierSegment)
             {
-                var cubicBezierSegment = segment as CubicBezierSegment;
-
                 cubicBezierSegment.Point1.PropertyChanged += ObserveShape;
                 cubicBezierSegment.Point2.PropertyChanged += ObserveShape;
                 cubicBezierSegment.Point3.PropertyChanged += ObserveShape;
             }
-            else if (segment is QuadraticBezierSegment)
+            else if (segment is QuadraticBezierSegment quadraticBezierSegment)
             {
-                var quadraticBezierSegment = segment as QuadraticBezierSegment;
-
                 quadraticBezierSegment.Point1.PropertyChanged += ObserveShape;
                 quadraticBezierSegment.Point2.PropertyChanged += ObserveShape;
             }
@@ -1132,31 +1124,23 @@ namespace Core2D.Editor
 
             segment.PropertyChanged -= ObserveShape;
 
-            if (segment is LineSegment)
+            if (segment is LineSegment lineSegment)
             {
-                var lineSegment = segment as LineSegment;
-
                 lineSegment.Point.PropertyChanged -= ObserveShape;
             }
-            else if (segment is ArcSegment)
+            else if (segment is ArcSegment arcSegment)
             {
-                var arcSegment = segment as ArcSegment;
-
                 arcSegment.Point.PropertyChanged -= ObserveShape;
                 arcSegment.Size.PropertyChanged -= ObserveShape;
             }
-            else if (segment is CubicBezierSegment)
+            else if (segment is CubicBezierSegment cubicBezierSegment)
             {
-                var cubicBezierSegment = segment as CubicBezierSegment;
-
                 cubicBezierSegment.Point1.PropertyChanged -= ObserveShape;
                 cubicBezierSegment.Point2.PropertyChanged -= ObserveShape;
                 cubicBezierSegment.Point3.PropertyChanged -= ObserveShape;
             }
-            else if (segment is QuadraticBezierSegment)
+            else if (segment is QuadraticBezierSegment quadraticBezierSegment)
             {
-                var quadraticBezierSegment = segment as QuadraticBezierSegment;
-
                 quadraticBezierSegment.Point1.PropertyChanged -= ObserveShape;
                 quadraticBezierSegment.Point2.PropertyChanged -= ObserveShape;
             }
