@@ -1270,21 +1270,31 @@ namespace Core2D.Editor
             if (style.Stroke != null)
             {
                 style.Stroke.PropertyChanged += ObserveStyle;
+                
+                if (style.Stroke.Color != null)
+                {
+                    style.Stroke.Color.PropertyChanged += ObserveStyle;
+                }
+
+                if (style.Stroke.StartArrowStyle != null)
+                {
+                    style.Stroke.StartArrowStyle.PropertyChanged += ObserveStyle;
+                }
+
+                if (style.Stroke.EndArrowStyle != null)
+                {
+                    style.Stroke.EndArrowStyle.PropertyChanged += ObserveStyle;
+                }
             }
 
             if (style.Fill != null)
             {
                 style.Fill.PropertyChanged += ObserveStyle;
-            }
 
-            if (style.StartArrowStyle != null)
-            {
-                style.StartArrowStyle.PropertyChanged += ObserveStyle;
-            }
-
-            if (style.EndArrowStyle != null)
-            {
-                style.EndArrowStyle.PropertyChanged += ObserveStyle;
+                if (style.Fill.Color != null)
+                {
+                    style.Fill.Color.PropertyChanged += ObserveStyle;
+                }
             }
 
             if (style.TextStyle != null)
@@ -1310,21 +1320,31 @@ namespace Core2D.Editor
             if (style.Stroke != null)
             {
                 style.Stroke.PropertyChanged -= ObserveStyle;
+                
+                if (style.Stroke.Color != null)
+                {
+                    style.Stroke.Color.PropertyChanged -= ObserveStyle;
+                }
+
+                if (style.Stroke.StartArrowStyle != null)
+                {
+                    style.Stroke.StartArrowStyle.PropertyChanged -= ObserveStyle;
+                }
+
+                if (style.Stroke.EndArrowStyle != null)
+                {
+                    style.Stroke.EndArrowStyle.PropertyChanged -= ObserveStyle;
+                }
             }
 
             if (style.Fill != null)
             {
                 style.Fill.PropertyChanged -= ObserveStyle;
-            }
-
-            if (style.StartArrowStyle != null)
-            {
-                style.StartArrowStyle.PropertyChanged -= ObserveStyle;
-            }
-
-            if (style.EndArrowStyle != null)
-            {
-                style.EndArrowStyle.PropertyChanged -= ObserveStyle;
+                
+                if (style.Fill.Color != null)
+                {
+                    style.Fill.Color.PropertyChanged -= ObserveStyle;
+                }
             }
 
             if (style.TextStyle != null)
