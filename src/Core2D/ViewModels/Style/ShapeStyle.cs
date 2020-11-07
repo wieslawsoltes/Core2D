@@ -7,13 +7,13 @@ namespace Core2D.Style
     public class ShapeStyle : ViewModelBase
     {
         private BaseColor _stroke;
-        private BaseColor _fill;
         private double _thickness;
         private LineCap _lineCap;
         private string _dashes;
         private double _dashOffset;
         private ArrowStyle _startArrowStyle;
         private ArrowStyle _endArrowStyle;
+        private BaseColor _fill;
         private TextStyle _textStyle;
 
         [DataMember(IsRequired = false, EmitDefaultValue = true)]
@@ -21,13 +21,6 @@ namespace Core2D.Style
         {
             get => _stroke;
             set => RaiseAndSetIfChanged(ref _stroke, value);
-        }
-
-        [DataMember(IsRequired = false, EmitDefaultValue = true)]
-        public BaseColor Fill
-        {
-            get => _fill;
-            set => RaiseAndSetIfChanged(ref _fill, value);
         }
 
         [DataMember(IsRequired = false, EmitDefaultValue = true)]
@@ -73,6 +66,13 @@ namespace Core2D.Style
         }
 
         [DataMember(IsRequired = false, EmitDefaultValue = true)]
+        public BaseColor Fill
+        {
+            get => _fill;
+            set => RaiseAndSetIfChanged(ref _fill, value);
+        }
+
+        [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public TextStyle TextStyle
         {
             get => _textStyle;
@@ -85,14 +85,14 @@ namespace Core2D.Style
             {
                 Name = this.Name,
                 Stroke = (BaseColor)this.Stroke.Copy(shared),
-                Fill = (BaseColor)this.Fill.Copy(shared),
                 Thickness = this.Thickness,
                 LineCap = this.LineCap,
                 Dashes = this.Dashes,
                 DashOffset = this.DashOffset,
-                TextStyle = (TextStyle)this.TextStyle.Copy(shared),
                 StartArrowStyle = (ArrowStyle)this.StartArrowStyle.Copy(shared),
-                EndArrowStyle = (ArrowStyle)this.EndArrowStyle.Copy(shared)
+                EndArrowStyle = (ArrowStyle)this.EndArrowStyle.Copy(shared),
+                Fill = (BaseColor)this.Fill.Copy(shared),
+                TextStyle = (TextStyle)this.TextStyle.Copy(shared)
             };
         }
 
@@ -101,9 +101,9 @@ namespace Core2D.Style
             var isDirty = base.IsDirty();
 
             isDirty |= Stroke.IsDirty();
-            isDirty |= Fill.IsDirty();
             isDirty |= StartArrowStyle.IsDirty();
             isDirty |= EndArrowStyle.IsDirty();
+            isDirty |= Fill.IsDirty();
             isDirty |= TextStyle.IsDirty();
 
             return isDirty;
@@ -113,9 +113,9 @@ namespace Core2D.Style
         {
             base.Invalidate();
             Stroke.Invalidate();
-            Fill.Invalidate();
             StartArrowStyle.Invalidate();
             EndArrowStyle.Invalidate();
+            Fill.Invalidate();
             TextStyle.Invalidate();
         }
     }
