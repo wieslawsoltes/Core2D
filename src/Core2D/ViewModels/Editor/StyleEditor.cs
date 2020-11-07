@@ -278,15 +278,12 @@ namespace Core2D.Editor
         private void SetStrokeTransparency(BaseShape shape, byte value, IHistory history)
         {
             var style = shape.Style;
-            if (style != null)
+            if (style?.Stroke is ArgbColor argbColor)
             {
-                if (style.Stroke is ArgbColor argbColor)
-                {
-                    var previous = argbColor.A;
-                    var next = value;
-                    history?.Snapshot(previous, next, (p) => argbColor.A = p);
-                    argbColor.A = next;
-                }
+                var previous = argbColor.A;
+                var next = value;
+                history?.Snapshot(previous, next, (p) => argbColor.A = p);
+                argbColor.A = next;
             }
         }
 
@@ -305,15 +302,12 @@ namespace Core2D.Editor
         private void SetFillTransparency(BaseShape shape, byte value, IHistory history)
         {
             var style = shape.Style;
-            if (style != null)
+            if (style?.Fill is ArgbColor argbColor)
             {
-                if (style.Fill is ArgbColor argbColor)
-                {
-                    var previous = argbColor.A;
-                    var next = value;
-                    history?.Snapshot(previous, next, (p) => argbColor.A = p);
-                    argbColor.A = next;
-                }
+                var previous = argbColor.A;
+                var next = value;
+                history?.Snapshot(previous, next, (p) => argbColor.A = p);
+                argbColor.A = next;
             }
         }
 

@@ -66,15 +66,9 @@ namespace Core2D.FileWriter.Emf
             }
             finally
             {
-                if (g != null)
-                {
-                    g.Dispose();
-                }
+                g?.Dispose();
 
-                if (mf != null)
-                {
-                    mf.Dispose();
-                }
+                mf?.Dispose();
             }
             return ms;
         }
@@ -116,15 +110,9 @@ namespace Core2D.FileWriter.Emf
             }
             finally
             {
-                if (g != null)
-                {
-                    g.Dispose();
-                }
+                g?.Dispose();
 
-                if (mf != null)
-                {
-                    mf.Dispose();
-                }
+                mf?.Dispose();
             }
             return ms;
         }

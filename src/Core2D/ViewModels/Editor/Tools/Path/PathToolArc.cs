@@ -175,10 +175,7 @@ namespace Core2D.Editor.Tools.Path
 
         public void Move(BaseShape shape)
         {
-            if (_selection != null)
-            {
-                _selection.Move();
-            }
+            _selection?.Move();
         }
 
         public void Finalize(BaseShape shape)

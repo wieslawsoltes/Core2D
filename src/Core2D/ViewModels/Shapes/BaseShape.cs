@@ -94,10 +94,7 @@ namespace Core2D.Shapes
                 property.Invalidate();
             }
 
-            if (Record != null)
-            {
-                Record.Invalidate();
-            }
+            Record?.Invalidate();
         }
 
         public abstract void DrawShape(object dc, IShapeRenderer renderer);

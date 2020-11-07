@@ -39,15 +39,12 @@ namespace Core2D.Editor
                 dlg.Filters.Add(new FileDialogFilter() { Name = "Project", Extensions = { "project" } });
                 dlg.Filters.Add(new FileDialogFilter() { Name = "All", Extensions = { "*" } });
                 var result = await dlg.ShowAsync(GetWindow());
-                if (result != null)
+                var item = result?.FirstOrDefault();
+                if (item != null)
                 {
-                    var item = result.FirstOrDefault();
-                    if (item != null)
-                    {
-                        var editor = _serviceProvider.GetService<ProjectEditor>();
-                        editor.OnOpenProject(item);
-                        editor.CanvasPlatform?.InvalidateControl?.Invoke();
-                    }
+                    var editor = _serviceProvider.GetService<ProjectEditor>();
+                    editor.OnOpenProject(item);
+                    editor.CanvasPlatform?.InvalidateControl?.Invoke();
                 }
             }
             else
