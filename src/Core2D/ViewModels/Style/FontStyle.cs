@@ -16,11 +16,11 @@ namespace Core2D.Style
             set
             {
                 RaiseAndSetIfChanged(ref _flags, value);
-                NatifyAll();
+                NotifyAll();
             }
         }
 
-        private void NatifyAll()
+        private void NotifyAll()
         {
             RaisePropertyChanged(nameof(Regular));
             RaisePropertyChanged(nameof(Bold));
