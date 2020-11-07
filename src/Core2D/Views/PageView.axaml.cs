@@ -8,9 +8,9 @@ namespace Core2D.Views
     {
         private ScrollViewer _scrollViewer;
         private ZoomBorder _zoomBorder;
-        private PresenterView _presenterControlData;
-        private PresenterView _presenterControlTemplate;
-        private PresenterView _presenterControlEditor;
+        private PresenterView _presenterViewData;
+        private PresenterView _presenterViewTemplate;
+        private PresenterView _presenterViewEditor;
         //private TextBox _textEditor;
 
         public PageView()
@@ -19,9 +19,9 @@ namespace Core2D.Views
 
             _scrollViewer = this.FindControl<ScrollViewer>("scrollViewer");
             _zoomBorder = this.FindControl<ZoomBorder>("zoomBorder");
-            _presenterControlData = this.FindControl<PresenterView>("presenterControlData");
-            _presenterControlTemplate = this.FindControl<PresenterView>("presenterControlTemplate");
-            _presenterControlEditor = this.FindControl<PresenterView>("presenterControlEditor");
+            _presenterViewData = this.FindControl<PresenterView>("presenterViewData");
+            _presenterViewTemplate = this.FindControl<PresenterView>("presenterViewTemplate");
+            _presenterViewEditor = this.FindControl<PresenterView>("presenterViewEditor");
             //_textEditor = this.FindControl<TextBox>("textEditor");
         }
 
