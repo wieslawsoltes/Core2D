@@ -8,7 +8,7 @@ using Core2D.Style;
 
 namespace Core2D.Editor.Tools
 {
-    public class ToolCubicBezier : ObservableObject, IEditorTool
+    public class ToolCubicBezier : ViewModelBase, IEditorTool
     {
         public enum State { Point1, Point4, Point2, Point3 }
         private readonly IServiceProvider _serviceProvider;

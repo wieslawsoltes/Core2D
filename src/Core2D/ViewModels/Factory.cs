@@ -46,7 +46,7 @@ namespace Core2D
             };
         }
 
-        public Property CreateProperty(ObservableObject owner, string name, string value)
+        public Property CreateProperty(ViewModelBase owner, string name, string value)
         {
             return new Property()
             {

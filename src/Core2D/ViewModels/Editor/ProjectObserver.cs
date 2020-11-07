@@ -1183,7 +1183,7 @@ namespace Core2D.Editor
                 Add(data.Properties);
             }
 
-            if (data is ObservableObject observable)
+            if (data is ViewModelBase observable)
             {
                 observable.PropertyChanged += ObserveData;
             }
@@ -1201,7 +1201,7 @@ namespace Core2D.Editor
                 Remove(data.Properties);
             }
 
-            if (data is ObservableObject observable)
+            if (data is ViewModelBase observable)
             {
                 observable.PropertyChanged -= ObserveData;
             }

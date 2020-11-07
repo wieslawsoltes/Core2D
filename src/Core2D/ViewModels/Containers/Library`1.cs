@@ -38,9 +38,9 @@ namespace Core2D.Containers
 
             foreach (var item in Items)
             {
-                if (item is ObservableObject observableObject)
+                if (item is ViewModelBase viewModelBase)
                 {
-                    isDirty |= observableObject.IsDirty();
+                    isDirty |= viewModelBase.IsDirty();
                 }
             }
 
@@ -53,9 +53,9 @@ namespace Core2D.Containers
 
             foreach (var item in Items)
             {
-                if (item is ObservableObject observableObject)
+                if (item is ViewModelBase viewModelBase)
                 {
-                    observableObject.Invalidate();
+                    viewModelBase.Invalidate();
                 }
             }
         }

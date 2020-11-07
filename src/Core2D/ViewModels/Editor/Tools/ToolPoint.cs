@@ -6,7 +6,7 @@ using Core2D.Shapes;
 
 namespace Core2D.Editor.Tools
 {
-    public class ToolPoint : ObservableObject, IEditorTool
+    public class ToolPoint : ViewModelBase, IEditorTool
     {
         public enum State { Point }
         private readonly IServiceProvider _serviceProvider;

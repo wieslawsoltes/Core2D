@@ -4,7 +4,7 @@ using System.Runtime.Serialization;
 namespace Core2D.Data
 {
     [DataContract(IsReference = true)]
-    public class Column : ObservableObject
+    public class Column : ViewModelBase
     {
         private bool _isVisible;
 

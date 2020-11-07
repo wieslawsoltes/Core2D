@@ -3,7 +3,7 @@
 namespace Core2D.Style
 {
     [DataContract(IsReference = true)]
-    public abstract class BaseColor : ObservableObject
+    public abstract class BaseColor : ViewModelBase
     {
     }
 }

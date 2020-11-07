@@ -4,7 +4,7 @@ using System.Runtime.Serialization;
 namespace Core2D.Data
 {
     [DataContract(IsReference = true)]
-    public class Value : ObservableObject
+    public class Value : ViewModelBase
     {
         private string _content;
 

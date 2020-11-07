@@ -8,7 +8,7 @@ using Core2D.Style;
 
 namespace Core2D.Editor
 {
-    public class ProjectEditorConfiguration : ObservableObject
+    public class ProjectEditorConfiguration : ViewModelBase
     {
         public override object Copy(IDictionary<object, object> shared)
         {

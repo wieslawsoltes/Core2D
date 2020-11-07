@@ -6,7 +6,7 @@ using System.Runtime.Serialization;
 namespace Core2D.Data
 {
     [DataContract(IsReference = true)]
-    public class Record : ObservableObject
+    public class Record : ViewModelBase
     {
         private string _id = "";
         private ImmutableArray<Value> _values;

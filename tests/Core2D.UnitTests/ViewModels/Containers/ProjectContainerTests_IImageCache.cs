@@ -21,10 +21,10 @@ namespace Core2D.UnitTests
 
         [Fact]
         [Trait("Core2D.Containers", "IImageCache")]
-        public void Inherits_From_ObservableObject()
+        public void Inherits_From_ViewModelBase()
         {
             var target = _factory.CreateProjectContainer();
-            Assert.True(target is ObservableObject);
+            Assert.True(target is ViewModelBase);
         }
 
         [Fact]

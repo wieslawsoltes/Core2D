@@ -4,7 +4,7 @@ using System.Runtime.Serialization;
 namespace Core2D.Style
 {
     [DataContract(IsReference = true)]
-    public class ArrowStyle : ObservableObject
+    public class ArrowStyle : ViewModelBase
     {
         private ArrowType _arrowType;
         private double _radiusX;

@@ -14,7 +14,7 @@ namespace Core2D.UnitTests
         public void Inherits_From_Selectable()
         {
             var target = _factory.CreateProjectContainer();
-            Assert.True(target is ObservableObject);
+            Assert.True(target is ViewModelBase);
         }
 
         [Fact]

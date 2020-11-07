@@ -9,7 +9,7 @@ using PdfSharp.Pdf;
 
 namespace Core2D.Renderer.PdfSharp
 {
-    public partial class PdfSharpRenderer : ObservableObject, IShapeRenderer
+    public partial class PdfSharpRenderer : ViewModelBase, IShapeRenderer
     {
         private readonly IServiceProvider _serviceProvider;
         private ShapeRendererState _state;

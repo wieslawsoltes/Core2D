@@ -108,7 +108,7 @@
                             </TextBlock.ContextMenu>
                         </TextBlock>
                     </TreeDataTemplate>
-                    <DataTemplate DataType="Base:ObservableObject">
+                    <DataTemplate DataType="Base:ViewModelBase">
                         <TextBlock Text="{Binding Mode=OneWay, Converter={StaticResource ObjectToTypeStringConverter}}" Background="Transparent">
                             <i:Interaction.Behaviors>
                                 <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}" />
@@ -196,7 +196,7 @@
                             </TextBlock.ContextMenu>
                         </TextBlock>
                     </TreeDataTemplate>
-                    <DataTemplate DataType="Base:ObservableObject">
+                    <DataTemplate DataType="Base:ViewModelBase">
                         <TextBlock Text="{Binding Mode=OneWay, Converter={StaticResource ObjectToTypeStringConverter}}" Background="Transparent">
                             <i:Interaction.Behaviors>
                                 <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}" />
@@ -222,7 +222,7 @@
                     </Style>
                 </TreeViewItem.Styles>
                 <TreeViewItem.DataTemplates>
-                    <DataTemplate DataType="Base:ObservableObject">
+                    <DataTemplate DataType="Base:ViewModelBase">
                         <TextBlock Text="{Binding Mode=OneWay, Converter={StaticResource ObjectToTypeStringConverter}}" Background="Transparent">
                             <i:Interaction.Behaviors>
                                 <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}" />
@@ -296,7 +296,7 @@
                             </TextBlock.ContextMenu>
                         </TextBlock>
                     </TreeDataTemplate>
-                    <DataTemplate DataType="Base:ObservableObject">
+                    <DataTemplate DataType="Base:ViewModelBase">
                         <TextBlock Text="{Binding Mode=OneWay, Converter={StaticResource ObjectToTypeStringConverter}}" Background="Transparent">
                             <i:Interaction.Behaviors>
                                 <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}" />

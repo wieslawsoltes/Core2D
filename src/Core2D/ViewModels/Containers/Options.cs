@@ -6,7 +6,7 @@ using Core2D.Path;
 namespace Core2D.Containers
 {
     [DataContract(IsReference = true)]
-    public class Options : ObservableObject
+    public class Options : ViewModelBase
     {
         private bool _snapToGrid = true;
         private double _snapX = 15.0;

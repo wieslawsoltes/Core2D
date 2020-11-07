@@ -6,7 +6,7 @@ using System.Runtime.Serialization;
 namespace Core2D.Editor.Recent
 {
     [DataContract(IsReference = true)]
-    public class Recents : ObservableObject
+    public class Recents : ViewModelBase
     {
         private ImmutableArray<RecentFile> _files = ImmutableArray.Create<RecentFile>();
         private RecentFile _current = default;

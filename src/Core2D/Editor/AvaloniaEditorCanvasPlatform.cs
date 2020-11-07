@@ -4,7 +4,7 @@ using Core2D.Editor;
 
 namespace Core2D.Editor
 {
-    public class AvaloniaEditorCanvasPlatform : ObservableObject, IEditorCanvasPlatform
+    public class AvaloniaEditorCanvasPlatform : ViewModelBase, IEditorCanvasPlatform
     {
         private readonly IServiceProvider _serviceProvider;
 

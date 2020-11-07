@@ -9,7 +9,7 @@ using Core2D.Shapes;
 
 namespace Core2D.Editor.Tools.Path
 {
-    public class PathToolQuadraticBezier : ObservableObject, IPathTool
+    public class PathToolQuadraticBezier : ViewModelBase, IPathTool
     {
         public enum State { Point1, Point3, Point2 }
         private readonly IServiceProvider _serviceProvider;

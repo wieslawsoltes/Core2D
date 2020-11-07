@@ -11,7 +11,7 @@ using static System.Math;
 
 namespace Core2D.Editor.Tools.Path
 {
-    public class PathToolArc : ObservableObject, IPathTool
+    public class PathToolArc : ViewModelBase, IPathTool
     {
         public enum State { Start, End }
 

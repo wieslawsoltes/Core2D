@@ -11,7 +11,7 @@ using Spatial.Arc;
 
 namespace Core2D.Renderer.WinForms
 {
-    public class WinFormsRenderer : ObservableObject, IShapeRenderer
+    public class WinFormsRenderer : ViewModelBase, IShapeRenderer
     {
         private readonly IServiceProvider _serviceProvider;
         private ShapeRendererState _state;

@@ -13,7 +13,7 @@ using Spatial;
 
 namespace Core2D.Editor.Tools.Decorators
 {
-    public class BoxDecorator : ObservableObject, IDrawable, IDecorator
+    public class BoxDecorator : ViewModelBase, IDrawable, IDecorator
     {
         private enum Mode
         {

@@ -8,7 +8,7 @@ using Core2D.Style;
 
 namespace Core2D.Editor.Tools
 {
-    public class ToolImage : ObservableObject, IEditorTool
+    public class ToolImage : ViewModelBase, IEditorTool
     {
         public enum State { TopLeft, BottomRight }
         private readonly IServiceProvider _serviceProvider;

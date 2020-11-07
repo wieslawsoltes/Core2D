@@ -7,7 +7,7 @@ using Core2D.Style;
 namespace Core2D.Renderer
 {
     [DataContract(IsReference = true)]
-    public class ShapeRendererState : ObservableObject
+    public class ShapeRendererState : ViewModelBase
     {
         private double _panX;
         private double _panY;

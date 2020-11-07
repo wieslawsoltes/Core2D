@@ -5,7 +5,7 @@ using System.Runtime.Serialization;
 namespace Core2D.Style
 {
     [DataContract(IsReference = true)]
-    public class FontStyle : ObservableObject
+    public class FontStyle : ViewModelBase
     {
         private FontStyleFlags _flags;
 

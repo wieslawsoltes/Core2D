@@ -5,7 +5,7 @@ using System.Runtime.Serialization;
 namespace Core2D.Renderer
 {
     [DataContract(IsReference = true)]
-    public class ShapeState : ObservableObject
+    public class ShapeState : ViewModelBase
     {
         private ShapeStateFlags _flags;
 

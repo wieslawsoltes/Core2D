@@ -7,7 +7,7 @@ using System.Text;
 namespace Core2D.Path
 {
     [DataContract(IsReference = true)]
-    public class PathGeometry : ObservableObject
+    public class PathGeometry : ViewModelBase
     {
         private ImmutableArray<PathFigure> _figures;
         private FillRule _fillRule;

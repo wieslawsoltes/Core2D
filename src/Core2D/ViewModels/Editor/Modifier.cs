@@ -4,7 +4,7 @@ using Core2D.Input;
 
 namespace Core2D.Editor
 {
-    public class Modifier : ObservableObject
+    public class Modifier : ViewModelBase
     {
         private ModifierFlags _flags;
 

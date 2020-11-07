@@ -5,7 +5,7 @@ using System.Runtime.Serialization;
 namespace Core2D.Scripting
 {
     [DataContract(IsReference = true)]
-    public class Script : ObservableObject
+    public class Script : ViewModelBase
     {
         private string _code;
 

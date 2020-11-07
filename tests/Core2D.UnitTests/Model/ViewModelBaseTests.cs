@@ -5,7 +5,7 @@ using Xunit;
 
 namespace Core2D.UnitTests
 {
-    public class ObservableObjectTests
+    public class ViewModelBaseTests
     {
         [Fact]
         [Trait("Core2D", "Base")]
@@ -80,7 +80,7 @@ namespace Core2D.UnitTests
             Assert.False(target.TestPropertyUpdated);
         }
 
-        private class Class1 : ObservableObject
+        private class Class1 : ViewModelBase
         {
             public bool TestPropertyUpdated;
 

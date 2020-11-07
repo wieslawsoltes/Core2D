@@ -29,7 +29,7 @@ namespace Core2D.Containers
         private Script _currentScript;
         private DocumentContainer _currentDocument;
         private PageContainer _currentContainer;
-        private ObservableObject _selected;
+        private ViewModelBase _selected;
 
         [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public Options Options
@@ -137,7 +137,7 @@ namespace Core2D.Containers
         }
 
         [DataMember(IsRequired = false, EmitDefaultValue = true)]
-        public ObservableObject Selected
+        public ViewModelBase Selected
         {
             get => _selected;
             set
@@ -209,7 +209,7 @@ namespace Core2D.Containers
 
         public void SetCurrentStyleLibrary(Library<ShapeStyle> library) => CurrentStyleLibrary = library;
 
-        public void SetSelected(ObservableObject value)
+        public void SetSelected(ViewModelBase value)
         {
             if (value is LayerContainer layer)
             {

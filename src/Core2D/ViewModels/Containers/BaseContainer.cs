@@ -3,7 +3,7 @@ using System.Runtime.Serialization;
 namespace Core2D.Containers
 {
     [DataContract(IsReference = true)]
-    public abstract class BaseContainer : ObservableObject
+    public abstract class BaseContainer : ViewModelBase
     {
     }
 }

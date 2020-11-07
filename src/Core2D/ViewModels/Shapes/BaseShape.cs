@@ -9,7 +9,7 @@ using Core2D.Style;
 namespace Core2D.Shapes
 {
     [DataContract(IsReference = true)]
-    public abstract class BaseShape : ObservableObject, IDataObject
+    public abstract class BaseShape : ViewModelBase, IDataObject
     {
         private IDictionary<string, object> _propertyCache = new Dictionary<string, object>();
         private ShapeState _state;

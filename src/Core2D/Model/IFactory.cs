@@ -21,7 +21,7 @@ namespace Core2D
 
         Value CreateValue(string content);
 
-        Property CreateProperty(ObservableObject owner, string name, string value);
+        Property CreateProperty(ViewModelBase owner, string name, string value);
 
         Column CreateColumn(Database owner, string name, bool isVisible = true);
 

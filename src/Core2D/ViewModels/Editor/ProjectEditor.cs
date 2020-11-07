@@ -20,7 +20,7 @@ using static System.Math;
 
 namespace Core2D.Editor
 {
-    public class ProjectEditor : ObservableObject
+    public class ProjectEditor : ViewModelBase
     {
         private readonly IServiceProvider _serviceProvider;
         private ShapeEditor _shapeEditor;
@@ -230,7 +230,7 @@ namespace Core2D.Editor
         {
             if (item != null)
             {
-                if (item is ObservableObject observable)
+                if (item is ViewModelBase observable)
                 {
                     return observable.Name;
                 }
@@ -2008,7 +2008,7 @@ namespace Core2D.Editor
             }
         }
 
-        public void OnAddProperty(ObservableObject owner)
+        public void OnAddProperty(ViewModelBase owner)
         {
             if (owner is IDataObject data)
             {
@@ -2274,7 +2274,7 @@ namespace Core2D.Editor
             }
         }
 
-        public void OnSelectedItemChanged(ObservableObject item)
+        public void OnSelectedItemChanged(ViewModelBase item)
         {
             if (Project != null)
             {

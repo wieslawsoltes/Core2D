@@ -8,7 +8,7 @@ using Core2D.Shapes;
 namespace Core2D.Path
 {
     [DataContract(IsReference = true)]
-    public class PathFigure : ObservableObject
+    public class PathFigure : ViewModelBase
     {
         private PointShape _startPoint;
         private ImmutableArray<PathSegment> _segments;

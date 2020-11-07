@@ -6,7 +6,7 @@ using Core2D.Shapes;
 
 namespace Core2D.Editor.Tools.Path
 {
-    public class PathToolMove : ObservableObject, IPathTool
+    public class PathToolMove : ViewModelBase, IPathTool
     {
         public enum State { Move }
         private readonly IServiceProvider _serviceProvider;

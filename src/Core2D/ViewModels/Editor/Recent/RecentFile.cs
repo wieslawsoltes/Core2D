@@ -5,7 +5,7 @@ using System.Runtime.Serialization;
 namespace Core2D.Editor.Recent
 {
     [DataContract(IsReference = true)]
-    public class RecentFile : ObservableObject
+    public class RecentFile : ViewModelBase
     {
         private string _path;
 

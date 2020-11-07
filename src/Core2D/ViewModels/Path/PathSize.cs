@@ -6,7 +6,7 @@ using System.Runtime.Serialization;
 namespace Core2D.Path
 {
     [DataContract(IsReference = true)]
-    public class PathSize : ObservableObject
+    public class PathSize : ViewModelBase
     {
         private double _width;
         private double _height;

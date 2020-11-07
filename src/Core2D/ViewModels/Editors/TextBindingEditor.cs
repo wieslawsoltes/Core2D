@@ -6,7 +6,7 @@ using Core2D.Shapes;
 
 namespace Core2D.Editors
 {
-    public class TextBindingEditor : ObservableObject
+    public class TextBindingEditor : ViewModelBase
     {
         private ProjectEditor _editor;
         private TextShape _text;

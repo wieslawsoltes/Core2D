@@ -12,7 +12,7 @@ using Core2D.Style;
 
 namespace Core2D.Editor.Tools
 {
-    public class ToolPath : ObservableObject, IEditorTool
+    public class ToolPath : ViewModelBase, IEditorTool
     {
         private readonly IServiceProvider _serviceProvider;
         private readonly PathToolLine _pathToolLine;

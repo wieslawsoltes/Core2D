@@ -8,7 +8,7 @@ using Core2D.Style;
 
 namespace Core2D.Editor.Tools
 {
-    public class ToolLine : ObservableObject, IEditorTool
+    public class ToolLine : ViewModelBase, IEditorTool
     {
         public enum State { Start, End }
         private readonly IServiceProvider _serviceProvider;

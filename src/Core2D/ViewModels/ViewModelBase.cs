@@ -6,14 +6,14 @@ using System.Runtime.Serialization;
 namespace Core2D
 {
     [DataContract(IsReference = true)]
-    public abstract class ObservableObject : INotifyPropertyChanged
+    public abstract class ViewModelBase : INotifyPropertyChanged
     {
         private bool _isDirty;
-        private ObservableObject _owner = null;
+        private ViewModelBase _owner = null;
         private string _name = "";
 
         [DataMember(IsRequired = false, EmitDefaultValue = true)]
-        public virtual ObservableObject Owner
+        public virtual ViewModelBase Owner
         {
             get => _owner;
             set => RaiseAndSetIfChanged(ref _owner, value);
@@ -45,16 +45,16 @@ namespace Core2D
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        public bool RaiseAndSetIfChanged<T>(ref T field, T value, [CallerMemberName] string propertyName = default)
+        protected bool RaiseAndSetIfChanged<T>(ref T field, T value, [CallerMemberName] string propertyName = default)
         {
-            if (!Equals(field, value))
+            if (Equals(field, value))
             {
-                field = value;
-                _isDirty = true;
-                RaisePropertyChanged(propertyName);
-                return true;
+                return false;
             }
-            return false;
+            field = value;
+            _isDirty = true;
+            RaisePropertyChanged(propertyName);
+            return true;
         }
     }
 }

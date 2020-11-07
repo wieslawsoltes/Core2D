@@ -5,7 +5,7 @@ using Core2D.Shapes;
 
 namespace Core2D.Editor.Tools
 {
-    public class ToolNone : ObservableObject, IEditorTool
+    public class ToolNone : ViewModelBase, IEditorTool
     {
         private readonly IServiceProvider _serviceProvider;
 

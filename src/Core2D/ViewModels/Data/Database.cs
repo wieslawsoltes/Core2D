@@ -5,7 +5,7 @@ using System.Runtime.Serialization;
 namespace Core2D.Data
 {
     [DataContract(IsReference = true)]
-    public class Database : ObservableObject
+    public class Database : ViewModelBase
     {
         private string _idColumnName;
         private ImmutableArray<Column> _columns;

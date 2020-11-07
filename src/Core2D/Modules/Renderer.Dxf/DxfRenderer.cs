@@ -14,7 +14,7 @@ using DXFT = netDxf.Tables;
 
 namespace Core2D.Renderer.Dxf
 {
-    public partial class DxfRenderer : ObservableObject, IShapeRenderer
+    public partial class DxfRenderer : ViewModelBase, IShapeRenderer
     {
         private readonly IServiceProvider _serviceProvider;
         private ShapeRendererState _state;

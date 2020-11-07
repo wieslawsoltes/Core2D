@@ -7,7 +7,7 @@ using Core2D.Style;
 namespace Core2D.Renderer
 {
     [DataContract(IsReference = true)]
-    public abstract class NodeRenderer : ObservableObject, IShapeRenderer
+    public abstract class NodeRenderer : ViewModelBase, IShapeRenderer
     {
         private readonly IServiceProvider _serviceProvider;
         private ShapeRendererState _state;

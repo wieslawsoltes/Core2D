@@ -3,7 +3,7 @@
 namespace Core2D.Containers
 {
     [DataContract(IsReference = true)]
-    public abstract class Library : ObservableObject
+    public abstract class Library : ViewModelBase
     {
     }
 }

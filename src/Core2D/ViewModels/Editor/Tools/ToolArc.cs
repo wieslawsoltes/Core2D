@@ -10,7 +10,7 @@ using Spatial.Arc;
 
 namespace Core2D.Editor.Tools
 {
-    public class ToolArc : ObservableObject, IEditorTool
+    public class ToolArc : ViewModelBase, IEditorTool
     {
         public enum State { Point1, Point2, Point3, Point4 }
         private readonly IServiceProvider _serviceProvider;

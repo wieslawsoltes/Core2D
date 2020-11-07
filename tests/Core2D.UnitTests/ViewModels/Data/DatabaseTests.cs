@@ -9,10 +9,10 @@ namespace Core2D.Data.UnitTests
 
         [Fact]
         [Trait("Core2D.Data", "Database")]
-        public void Inherits_From_ObservableObject()
+        public void Inherits_From_ViewModelBase()
         {
             var target = _factory.CreateDatabase("db");
-            Assert.True(target is ObservableObject);
+            Assert.True(target is ViewModelBase);
         }
 
         [Fact]

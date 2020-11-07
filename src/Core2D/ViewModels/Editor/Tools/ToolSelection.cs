@@ -9,7 +9,7 @@ using Spatial;
 
 namespace Core2D.Editor.Tools
 {
-    public class ToolSelection : ObservableObject, IEditorTool
+    public class ToolSelection : ViewModelBase, IEditorTool
     {
         public enum State { None, Selected }
         private readonly IServiceProvider _serviceProvider;

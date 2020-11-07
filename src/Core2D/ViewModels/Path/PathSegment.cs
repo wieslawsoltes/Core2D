@@ -5,7 +5,7 @@ using Core2D.Shapes;
 namespace Core2D.Path
 {
     [DataContract(IsReference = true)]
-    public abstract class PathSegment : ObservableObject
+    public abstract class PathSegment : ViewModelBase
     {
         private bool _isStroked;
 
