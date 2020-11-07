@@ -37,10 +37,7 @@ namespace Core2D.Editor
 
         private void Invalidate()
         {
-            if (_editor?.Project?.CurrentContainer != null)
-            {
-                _editor.Project.CurrentContainer.InvalidateLayer();
-            }
+            _editor?.Project?.CurrentContainer?.InvalidateLayer();
         }
 
         private void MarkAsDirty()
@@ -181,10 +178,7 @@ namespace Core2D.Editor
         {
             _editor.Project.CurrentContainer.RaisePropertyChanged(nameof(PageContainer.Background));
             var page = _editor.Project.CurrentContainer;
-            if (page != null)
-            {
-                page.Template.RaisePropertyChanged(nameof(PageContainer.Background));
-            }
+            page?.Template.RaisePropertyChanged(nameof(PageContainer.Background));
             _invalidateLayers();
             MarkAsDirty();
         }
@@ -193,10 +187,7 @@ namespace Core2D.Editor
         {
             _editor.Project.CurrentContainer.RaisePropertyChanged(nameof(IGrid.GridStrokeColor));
             var page = _editor.Project.CurrentContainer;
-            if (page != null)
-            {
-                page.Template.RaisePropertyChanged(nameof(IGrid.GridStrokeColor));
-            }
+            page?.Template.RaisePropertyChanged(nameof(IGrid.GridStrokeColor));
             _invalidateLayers();
             MarkAsDirty();
         }

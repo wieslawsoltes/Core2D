@@ -52,12 +52,9 @@ namespace Core2D.Editor.Tools
         public void RemoveLastSegment<T>() where T : PathSegment
         {
             var figure = Geometry?.Figures.LastOrDefault();
-            if (figure != null)
+            if (figure?.Segments.LastOrDefault() is T segment)
             {
-                if (figure.Segments.LastOrDefault() is T segment)
-                {
-                    figure.Segments = figure.Segments.Remove(segment);
-                }
+                figure.Segments = figure.Segments.Remove(segment);
             }
         }
 
