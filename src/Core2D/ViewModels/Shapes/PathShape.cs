@@ -150,7 +150,10 @@ namespace Core2D.Shapes
         {
             base.Invalidate();
 
-            Geometry?.Invalidate();
+            if (Geometry != null)
+            {
+                Geometry.Invalidate();
+            }
         }
 
         public string ToXamlString()

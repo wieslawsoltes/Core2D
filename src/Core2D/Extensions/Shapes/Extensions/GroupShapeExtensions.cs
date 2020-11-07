@@ -27,11 +27,17 @@ namespace Core2D.Shapes
                         group.AddShape(shape);
                     }
 
-                    source?.Remove(shape);
+                    if (source != null)
+                    {
+                        source.Remove(shape);
+                    }
                 }
             }
 
-            source?.Add(@group);
+            if (source != null)
+            {
+                source.Add(group);
+            }
         }
 
         public static void Ungroup(IEnumerable<BaseShape> shapes, IList<BaseShape> source)
@@ -51,7 +57,10 @@ namespace Core2D.Shapes
 
                     shape.State.Flags |= ShapeStateFlags.Standalone;
 
-                    source?.Add(shape);
+                    if (source != null)
+                    {
+                        source.Add(shape);
+                    }
                 }
             }
         }
@@ -61,7 +70,10 @@ namespace Core2D.Shapes
             Ungroup(group.Shapes, source);
             Ungroup(group.Connectors, source);
 
-            source?.Remove(@group);
+            if (source != null)
+            {
+                source.Remove(group);
+            }
         }
     }
 }

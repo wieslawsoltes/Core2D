@@ -336,7 +336,10 @@ namespace Core2D.Containers
 
         public virtual void InvalidateLayer()
         {
-            Template?.InvalidateLayer();
+            if (Template != null)
+            {
+                Template.InvalidateLayer();
+            }
 
             if (Layers != null)
             {
@@ -346,9 +349,15 @@ namespace Core2D.Containers
                 }
             }
 
-            WorkingLayer?.InvalidateLayer();
+            if (WorkingLayer != null)
+            {
+                WorkingLayer.InvalidateLayer();
+            }
 
-            HelperLayer?.InvalidateLayer();
+            if (HelperLayer != null)
+            {
+                HelperLayer.InvalidateLayer();
+            }
         }
 
         public override object Copy(IDictionary<object, object> shared)
@@ -423,7 +432,10 @@ namespace Core2D.Containers
                 property.Invalidate();
             }
 
-            Record?.Invalidate();
+            if (Record != null)
+            {
+                Record.Invalidate();
+            }
         }
     }
 }

@@ -228,9 +228,12 @@ namespace Core2D.Editor
 
         public string GetName(object item)
         {
-            if (item is ViewModelBase observable)
+            if (item != null)
             {
-                return observable.Name;
+                if (item is ViewModelBase observable)
+                {
+                    return observable.Name;
+                }
             }
             return string.Empty;
         }
@@ -944,7 +947,10 @@ namespace Core2D.Editor
                 return;
             }
 
-            PageState.Decorator?.Update(false);
+            if (PageState.Decorator != null)
+            {
+                PageState.Decorator.Update(false);
+            }
         }
 
         public void OnHideDecorator()
@@ -959,7 +965,10 @@ namespace Core2D.Editor
                 return;
             }
 
-            PageState.Decorator?.Hide();
+            if (PageState.Decorator != null)
+            {
+                PageState.Decorator.Hide();
+            }
         }
 
         public void OnShowOrHideDecorator()
@@ -2435,9 +2444,15 @@ namespace Core2D.Editor
         {
             try
             {
-                PageRenderer?.ClearCache();
+                if (PageRenderer != null)
+                {
+                    PageRenderer.ClearCache();
+                }
 
-                DocumentRenderer?.ClearCache();
+                if (DocumentRenderer != null)
+                {
+                    DocumentRenderer.ClearCache();
+                }
             }
             catch (Exception ex)
             {
@@ -3230,7 +3245,10 @@ namespace Core2D.Editor
             }
             else
             {
-                CanvasPlatform?.InvalidateControl?.Invoke();
+                if (CanvasPlatform?.InvalidateControl != null)
+                {
+                    CanvasPlatform?.InvalidateControl();
+                }
             }
         }
 
@@ -3282,17 +3300,20 @@ namespace Core2D.Editor
                     {
                         if (includeSelected)
                         {
-                            if (PageState?.SelectedShapes != null)
+                            if (PageState != null)
                             {
-                                foreach (var shape in PageState.SelectedShapes)
+                                if (PageState.SelectedShapes != null)
                                 {
-                                    if (result.Contains(shape))
+                                    foreach (var shape in PageState.SelectedShapes)
                                     {
-                                        result.Remove(shape);
-                                    }
-                                    else
-                                    {
-                                        result.Add(shape);
+                                        if (result.Contains(shape))
+                                        {
+                                            result.Remove(shape);
+                                        }
+                                        else
+                                        {
+                                            result.Add(shape);
+                                        }
                                     }
                                 }
                             }

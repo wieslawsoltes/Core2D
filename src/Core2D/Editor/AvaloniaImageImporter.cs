@@ -28,10 +28,13 @@ namespace Core2D.Editor
                 var dlg = new OpenFileDialog() { Title = "Open" };
                 dlg.Filters.Add(new FileDialogFilter() { Name = "All", Extensions = { "*" } });
                 var result = await dlg.ShowAsync(GetWindow());
-                var path = result?.FirstOrDefault();
-                if (path != null)
+                if (result != null)
                 {
-                    return _serviceProvider.GetService<ProjectEditor>().OnGetImageKey(path);
+                    var path = result.FirstOrDefault();
+                    if (path != null)
+                    {
+                        return _serviceProvider.GetService<ProjectEditor>().OnGetImageKey(path);
+                    }
                 }
             }
             catch (Exception ex)

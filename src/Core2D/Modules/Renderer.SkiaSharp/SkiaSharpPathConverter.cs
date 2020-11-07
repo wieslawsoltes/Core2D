@@ -243,7 +243,11 @@ namespace Core2D.Renderer.SkiaSharp
         public string ToSvgPathData(BaseShape shape)
         {
             var path = PathGeometryConverter.ToSKPath(shape);
-            return path?.ToSvgPathData();
+            if (path == null)
+            {
+                return null;
+            }
+            return path.ToSvgPathData();
         }
     }
 }
