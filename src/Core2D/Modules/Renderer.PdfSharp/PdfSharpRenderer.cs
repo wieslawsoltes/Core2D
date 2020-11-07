@@ -46,7 +46,7 @@ namespace Core2D.Renderer.PdfSharp
             };
         }
 
-        private static XPen ToXPen(BaseStyle style, Func<double, double> scale, double sourceDpi, double targetDpi)
+        private static XPen ToXPen(ShapeStyle style, Func<double, double> scale, double sourceDpi, double targetDpi)
         {
             var strokeWidth = scale(style.Thickness * targetDpi / sourceDpi);
             var pen = new XPen(ToXColor(style.Stroke), strokeWidth);

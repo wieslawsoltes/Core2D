@@ -24,7 +24,7 @@ namespace Core2D.Renderer
             UpdateGeometry();
         }
 
-        private Marker CreatArrowMarker(double x, double y, double angle, BaseStyle baseStyle, ArrowStyle style)
+        private Marker CreatArrowMarker(double x, double y, double angle, ShapeStyle shapeStyle, ArrowStyle style)
         {
             switch (style.ArrowType)
             {
@@ -34,7 +34,7 @@ namespace Core2D.Renderer
                         var marker = new NoneMarker();
 
                         marker.Shape = Line;
-                        marker.BaseStyle = baseStyle;
+                        marker.ShapeStyle = shapeStyle;
                         marker.Style = style;
                         marker.Point = new A.Point(x, y);
 
@@ -50,7 +50,7 @@ namespace Core2D.Renderer
                         var marker = new RectangleMarker();
 
                         marker.Shape = Line;
-                        marker.BaseStyle = baseStyle;
+                        marker.ShapeStyle = shapeStyle;
                         marker.Style = style;
                         marker.Rotation = AME.MatrixHelper.Rotation(angle, new A.Vector(x, y));
                         marker.Point = AME.MatrixHelper.TransformPoint(marker.Rotation, new A.Point(x - sx, y));
@@ -70,7 +70,7 @@ namespace Core2D.Renderer
                         var marker = new EllipseMarker();
 
                         marker.Shape = Line;
-                        marker.BaseStyle = baseStyle;
+                        marker.ShapeStyle = shapeStyle;
                         marker.Style = style;
                         marker.Rotation = AME.MatrixHelper.Rotation(angle, new A.Vector(x, y));
                         marker.Point = AME.MatrixHelper.TransformPoint(marker.Rotation, new A.Point(x - sx, y));
@@ -91,7 +91,7 @@ namespace Core2D.Renderer
                         var marker = new ArrowMarker();
 
                         marker.Shape = Line;
-                        marker.BaseStyle = baseStyle;
+                        marker.ShapeStyle = shapeStyle;
                         marker.Style = style;
                         marker.Rotation = AME.MatrixHelper.Rotation(angle, new A.Vector(x, y));
                         marker.Point = AME.MatrixHelper.TransformPoint(marker.Rotation, new A.Point(x, y));

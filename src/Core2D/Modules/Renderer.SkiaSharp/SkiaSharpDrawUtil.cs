@@ -48,7 +48,7 @@ namespace Core2D.Renderer.SkiaSharp
             return brush;
         }
 
-        public static SKStrokeCap ToStrokeCap(BaseStyle style)
+        public static SKStrokeCap ToStrokeCap(ShapeStyle style)
         {
             return style.LineCap switch
             {
@@ -58,7 +58,7 @@ namespace Core2D.Renderer.SkiaSharp
             };
         }
 
-        public static SKPaint ToSKPaintPen(BaseStyle style, double strokeWidth)
+        public static SKPaint ToSKPaintPen(ShapeStyle style, double strokeWidth)
         {
             var pen = new SKPaint();
 

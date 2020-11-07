@@ -7,7 +7,7 @@ namespace Core2D.Renderer.SkiaSharp
     internal abstract class Marker : IMarker
     {
         public BaseShape Shape { get; set; }
-        public BaseStyle BaseStyle { get; set; }
+        public ShapeStyle ShapeStyle { get; set; }
         public ArrowStyle Style { get; set; }
         public SKPaint Brush { get; set; }
         public SKPaint Pen { get; set; }
@@ -18,8 +18,8 @@ namespace Core2D.Renderer.SkiaSharp
 
         public virtual void UpdateStyle()
         {
-            Brush = SkiaSharpDrawUtil.ToSKPaintBrush(BaseStyle.Fill);
-            Pen = SkiaSharpDrawUtil.ToSKPaintPen(BaseStyle, BaseStyle.Thickness);
+            Brush = SkiaSharpDrawUtil.ToSKPaintBrush(ShapeStyle.Fill);
+            Pen = SkiaSharpDrawUtil.ToSKPaintPen(ShapeStyle, ShapeStyle.Thickness);
         }
     }
 }

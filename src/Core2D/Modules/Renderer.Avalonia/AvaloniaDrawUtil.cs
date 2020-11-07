@@ -17,7 +17,7 @@ namespace Core2D.Renderer
             _ => throw new NotSupportedException($"The {color.GetType()} color type is not supported.")
         };
 
-        public static AM.IPen ToPen(BaseStyle style, double thickness)
+        public static AM.IPen ToPen(ShapeStyle style, double thickness)
         {
             var dashStyle = default(AM.Immutable.ImmutableDashStyle);
             if (style.Dashes != null)
