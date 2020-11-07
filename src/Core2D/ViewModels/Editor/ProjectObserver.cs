@@ -174,7 +174,7 @@ namespace Core2D.Editor
             MarkAsDirty();
         }
 
-        private void ObserveTemplateBackgroud(object sender, PropertyChangedEventArgs e)
+        private void ObserveTemplateBackground(object sender, PropertyChangedEventArgs e)
         {
             _editor.Project.CurrentContainer.RaisePropertyChanged(nameof(PageContainer.Background));
             var page = _editor.Project.CurrentContainer;
@@ -575,7 +575,7 @@ namespace Core2D.Editor
 
             if (container.Background != null)
             {
-                container.Background.PropertyChanged += ObserveTemplateBackgroud;
+                container.Background.PropertyChanged += ObserveTemplateBackground;
             }
 
             if (container.GridStrokeColor != null)
@@ -617,7 +617,7 @@ namespace Core2D.Editor
 
             if (container.Background != null)
             {
-                container.Background.PropertyChanged -= ObserveTemplateBackgroud;
+                container.Background.PropertyChanged -= ObserveTemplateBackground;
             }
 
             if (container.GridStrokeColor != null)
