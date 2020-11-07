@@ -27,12 +27,12 @@
         <KeyBinding Command="{Binding Platform.OnExport}" Gesture="Ctrl+E" x:CompileBindings="False" />
         <KeyBinding Command="{Binding Platform.OnExit}" Gesture="Alt+F4" x:CompileBindings="False" />
     </UserControl.KeyBindings>
-    <Grid x:Name="LAYOUT_MainGrid" ColumnDefinitions="*" RowDefinitions="*">
-        <Grid x:Name="LAYOUT_DashboardMainGrid" RowDefinitions="Auto,*" ColumnDefinitions="*" IsVisible="{Binding Project, Converter={x:Static ObjectConverters.IsNull}}">
+    <Grid ColumnDefinitions="*" RowDefinitions="*">
+        <Grid RowDefinitions="Auto,*" ColumnDefinitions="*" IsVisible="{Binding Project, Converter={x:Static ObjectConverters.IsNull}}">
             <views:DashboardMenuView Grid.Row="0" />
             <views:DashboardView Grid.Row="1" />
         </Grid>
-        <Grid x:Name="LAYOUT_EditorMainGrid" RowDefinitions="Auto,*" ColumnDefinitions="*" IsVisible="{Binding Project, Converter={x:Static ObjectConverters.IsNotNull}}">
+        <Grid RowDefinitions="Auto,*" ColumnDefinitions="*" IsVisible="{Binding Project, Converter={x:Static ObjectConverters.IsNotNull}}">
             <views:EditorMenuView Grid.Row="0" />
             <views:EditorView Grid.Row="1" />
         </Grid>
