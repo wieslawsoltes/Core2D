@@ -20,17 +20,17 @@ namespace Core2D.Renderer
         public static AM.IPen ToPen(ShapeStyle style, double thickness)
         {
             var dashStyle = default(AM.Immutable.ImmutableDashStyle);
-            if (style.Dashes != null)
+            if (style.Stroke.Dashes != null)
             {
-                var dashes = StyleHelper.ConvertDashesToDoubleArray(style.Dashes, 1.0);
-                var dashOffset = style.DashOffset;
+                var dashes = StyleHelper.ConvertDashesToDoubleArray(style.Stroke.Dashes, 1.0);
+                var dashOffset = style.Stroke.DashOffset;
                 if (dashes != null)
                 {
                     dashStyle = new AM.Immutable.ImmutableDashStyle(dashes, dashOffset);
                 }
             }
 
-            var lineCap = style.LineCap switch
+            var lineCap = style.Stroke.LineCap switch
             {
                 LineCap.Flat => AM.PenLineCap.Flat,
                 LineCap.Square => AM.PenLineCap.Square,
@@ -38,7 +38,7 @@ namespace Core2D.Renderer
                 _ => throw new NotImplementedException()
             };
 
-            var brush = ToBrush(style.Stroke);
+            var brush = ToBrush(style.Stroke.Color);
             var pen = new AM.Immutable.ImmutablePen(brush, thickness, dashStyle, lineCap);
 
             return pen;

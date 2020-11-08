@@ -119,7 +119,7 @@ namespace Core2D.FileWriter.Emf
 
         public void Save(Stream stream, PageContainer container, IImageCache ic)
         {
-            if (container != null && container.Template != null)
+            if (container?.Template != null)
             {
                 using var bitmap = new Bitmap((int)container.Template.Width, (int)container.Template.Height);
                 using var ms = MakeMetafileStream(bitmap, container, ic);

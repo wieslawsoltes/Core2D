@@ -74,11 +74,11 @@ namespace Core2D.Renderer.SkiaSharp
             var style = shape.Style != null ?
                 (ShapeStyle)shape.Style?.Copy(null) :
                 factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
-            var stroke = (BaseColor)style.Stroke.Copy(null);
-            var fill = (BaseColor)style.Fill.Copy(null);
-            style.Stroke = fill;
-            style.Fill = stroke;
-            using var pen = SkiaSharpDrawUtil.ToSKPaintPen(style, style.Thickness);
+            var stroke = (BaseColor)style.Stroke.Color.Copy(null);
+            var fill = (BaseColor)style.Fill.Color.Copy(null);
+            style.Stroke.Color = fill;
+            style.Fill.Color = stroke;
+            using var pen = SkiaSharpDrawUtil.ToSKPaintPen(style, style.Stroke.Thickness);
             var result = pen.GetFillPath(path, 1.0f);
             if (result != null)
             {
@@ -111,7 +111,7 @@ namespace Core2D.Renderer.SkiaSharp
             var style = shape.Style != null ?
                 (ShapeStyle)shape.Style?.Copy(null) :
                 factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
-            using var brush = SkiaSharpDrawUtil.ToSKPaintBrush(style.Fill);
+            using var brush = SkiaSharpDrawUtil.ToSKPaintBrush(style.Fill.Color);
             var result = brush.GetFillPath(path, 1.0f);
             if (result != null)
             {

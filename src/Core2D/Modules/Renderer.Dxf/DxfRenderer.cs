@@ -183,9 +183,9 @@ namespace Core2D.Renderer.Dxf
         {
             if (isStroked)
             {
-                var stroke = ToColor(style.Stroke);
-                var strokeTansparency = ToTransparency(style.Stroke);
-                var lineweight = ToLineweight(style.Thickness);
+                var stroke = ToColor(style.Stroke.Color);
+                var strokeTansparency = ToTransparency(style.Stroke.Color);
+                var lineweight = ToLineweight(style.Stroke.Thickness);
 
                 var dxfLine = CreateLine(x1, y1, x2, y2);
 
@@ -218,7 +218,7 @@ namespace Core2D.Renderer.Dxf
         {
             if (isFilled)
             {
-                FillRectangle(dxf, layer, rect.X, rect.Y, rect.Width, rect.Height, style.Fill);
+                FillRectangle(dxf, layer, rect.X, rect.Y, rect.Width, rect.Height, style.Fill.Color);
             }
 
             if (isStroked)
@@ -277,12 +277,12 @@ namespace Core2D.Renderer.Dxf
 
             if (isFilled)
             {
-                FillEllipse(dxf, layer, dxfEllipse, style.Fill);
+                FillEllipse(dxf, layer, dxfEllipse, style.Fill.Color);
             }
 
             if (isStroked)
             {
-                StrokeEllipse(dxf, layer, dxfEllipse, style.Stroke, style.Thickness);
+                StrokeEllipse(dxf, layer, dxfEllipse, style.Stroke.Color, style.Stroke.Thickness);
             }
         }
 
@@ -346,7 +346,7 @@ namespace Core2D.Renderer.Dxf
             }
         }
 
-        private void CreateHatchBoundsAndEntitiess(PathGeometry pg, out IList<DXFE.HatchBoundaryPath> bounds, out ICollection<DXFE.EntityObject> entities)
+        private void CreateHatchBoundsAndEntities(PathGeometry pg, out IList<DXFE.HatchBoundaryPath> bounds, out ICollection<DXFE.EntityObject> entities)
         {
             bounds = new List<DXFE.HatchBoundaryPath>();
             entities = new List<DXFE.EntityObject>();
@@ -562,8 +562,8 @@ namespace Core2D.Renderer.Dxf
 
             if (arc.IsFilled)
             {
-                var fill = ToColor(style.Fill);
-                var fillTransparency = ToTransparency(style.Fill);
+                var fill = ToColor(style.Fill.Color);
+                var fillTransparency = ToTransparency(style.Fill.Color);
 
                 // TODO: The netDxf does not create hatch for Ellipse with end angle equal to 360.
                 var bounds =
@@ -588,9 +588,9 @@ namespace Core2D.Renderer.Dxf
 
             if (arc.IsStroked)
             {
-                var stroke = ToColor(style.Stroke);
-                var strokeTansparency = ToTransparency(style.Stroke);
-                var lineweight = ToLineweight(style.Thickness);
+                var stroke = ToColor(style.Stroke.Color);
+                var strokeTansparency = ToTransparency(style.Stroke.Color);
+                var lineweight = ToLineweight(style.Stroke.Thickness);
 
                 dxfEllipse.Layer = _currentLayer;
                 dxfEllipse.Color = stroke;
@@ -620,8 +620,8 @@ namespace Core2D.Renderer.Dxf
 
                 if (cubicBezier.IsFilled)
                 {
-                    var fill = ToColor(style.Fill);
-                    var fillTransparency = ToTransparency(style.Fill);
+                    var fill = ToColor(style.Fill.Color);
+                    var fillTransparency = ToTransparency(style.Fill.Color);
 
                     var bounds =
                         new List<DXFE.HatchBoundaryPath>
@@ -645,9 +645,9 @@ namespace Core2D.Renderer.Dxf
 
                 if (cubicBezier.IsStroked)
                 {
-                    var stroke = ToColor(style.Stroke);
-                    var strokeTansparency = ToTransparency(style.Stroke);
-                    var lineweight = ToLineweight(style.Thickness);
+                    var stroke = ToColor(style.Stroke.Color);
+                    var strokeTansparency = ToTransparency(style.Stroke.Color);
+                    var lineweight = ToLineweight(style.Stroke.Thickness);
 
                     dxfSpline.Layer = _currentLayer;
                     dxfSpline.Color = stroke;
@@ -676,8 +676,8 @@ namespace Core2D.Renderer.Dxf
 
                 if (quadraticBezier.IsFilled)
                 {
-                    var fill = ToColor(style.Fill);
-                    var fillTransparency = ToTransparency(style.Fill);
+                    var fill = ToColor(style.Fill.Color);
+                    var fillTransparency = ToTransparency(style.Fill.Color);
 
                     var bounds =
                         new List<DXFE.HatchBoundaryPath>
@@ -701,9 +701,9 @@ namespace Core2D.Renderer.Dxf
 
                 if (quadraticBezier.IsStroked)
                 {
-                    var stroke = ToColor(style.Stroke);
-                    var strokeTansparency = ToTransparency(style.Stroke);
-                    var lineweight = ToLineweight(style.Thickness);
+                    var stroke = ToColor(style.Stroke.Color);
+                    var strokeTansparency = ToTransparency(style.Stroke.Color);
+                    var lineweight = ToLineweight(style.Stroke.Thickness);
 
                     dxfSpline.Layer = _currentLayer;
                     dxfSpline.Color = stroke;
@@ -730,8 +730,8 @@ namespace Core2D.Renderer.Dxf
             }
 
             var style = text.Style;
-            var stroke = ToColor(style.Stroke);
-            var strokeTansparency = ToTransparency(style.Stroke);
+            var stroke = ToColor(style.Stroke.Color);
+            var strokeTansparency = ToTransparency(style.Stroke.Color);
 
             var attachmentPoint = default(DXFE.MTextAttachmentPoint);
             var rect = Spatial.Rect2.FromPoints(
@@ -853,7 +853,7 @@ namespace Core2D.Renderer.Dxf
                 var dxf = dc as DXF.DxfDocument;
                 var style = path.Style;
 
-                CreateHatchBoundsAndEntitiess(path.Geometry, out var bounds, out var entities);
+                CreateHatchBoundsAndEntities(path.Geometry, out var bounds, out var entities);
                 if (entities == null || bounds == null)
                 {
                     return;
@@ -861,8 +861,8 @@ namespace Core2D.Renderer.Dxf
 
                 if (path.IsFilled)
                 {
-                    var fill = ToColor(style.Fill);
-                    var fillTransparency = ToTransparency(style.Fill);
+                    var fill = ToColor(style.Fill.Color);
+                    var fillTransparency = ToTransparency(style.Fill.Color);
 
                     var hatch = new DXFE.Hatch(DXFE.HatchPattern.Solid, bounds, false)
                     {
@@ -878,9 +878,9 @@ namespace Core2D.Renderer.Dxf
                 {
                     // TODO: Add support for Closed paths.
 
-                    var stroke = ToColor(style.Stroke);
-                    var strokeTansparency = ToTransparency(style.Stroke);
-                    var lineweight = ToLineweight(style.Thickness);
+                    var stroke = ToColor(style.Stroke.Color);
+                    var strokeTansparency = ToTransparency(style.Stroke.Color);
+                    var lineweight = ToLineweight(style.Stroke.Thickness);
 
                     foreach (var entity in entities)
                     {

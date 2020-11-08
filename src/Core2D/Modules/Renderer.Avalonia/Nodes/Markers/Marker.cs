@@ -17,8 +17,8 @@ namespace Core2D.Renderer
 
         public virtual void UpdateStyle()
         {
-            Brush = AvaloniaDrawUtil.ToBrush(ShapeStyle.Fill);
-            Pen = AvaloniaDrawUtil.ToPen(ShapeStyle, ShapeStyle.Thickness);
+            Brush = AvaloniaDrawUtil.ToBrush(ShapeStyle.Fill.Color);
+            Pen = AvaloniaDrawUtil.ToPen(ShapeStyle, ShapeStyle.Stroke.Thickness);
         }
     }
 }

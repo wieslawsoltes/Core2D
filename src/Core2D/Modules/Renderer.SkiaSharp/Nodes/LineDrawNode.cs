@@ -109,10 +109,10 @@ namespace Core2D.Renderer.SkiaSharp
             double x2 = Line.End.X;
             double y2 = Line.End.Y;
 
-            if (Style.StartArrowStyle.ArrowType != ArrowType.None)
+            if (Style.Stroke.StartArrowStyle.ArrowType != ArrowType.None)
             {
                 double a1 = Math.Atan2(y1 - y2, x1 - x2);
-                StartMarker = CreateArrowMarker(x1, y1, a1, Style, Style.StartArrowStyle);
+                StartMarker = CreateArrowMarker(x1, y1, a1, Style, Style.Stroke.StartArrowStyle);
                 StartMarker.UpdateStyle();
                 P0 = (StartMarker as Marker).Point;
             }
@@ -122,10 +122,10 @@ namespace Core2D.Renderer.SkiaSharp
                 P0 = new SKPoint((float)x1, (float)y1);
             }
 
-            if (Style.EndArrowStyle.ArrowType != ArrowType.None)
+            if (Style.Stroke.EndArrowStyle.ArrowType != ArrowType.None)
             {
                 double a2 = Math.Atan2(y2 - y1, x2 - x1);
-                EndMarker = CreateArrowMarker(x2, y2, a2, Style, Style.EndArrowStyle);
+                EndMarker = CreateArrowMarker(x2, y2, a2, Style, Style.Stroke.EndArrowStyle);
                 EndMarker.UpdateStyle();
                 P1 = (EndMarker as Marker).Point;
             }
@@ -150,12 +150,12 @@ namespace Core2D.Renderer.SkiaSharp
         {
             base.UpdateStyle();
 
-            if (Style.StartArrowStyle.ArrowType != ArrowType.None)
+            if (Style.Stroke.StartArrowStyle.ArrowType != ArrowType.None)
             {
                 StartMarker?.UpdateStyle();
             }
 
-            if (Style.EndArrowStyle.ArrowType != ArrowType.None)
+            if (Style.Stroke.EndArrowStyle.ArrowType != ArrowType.None)
             {
                 EndMarker?.UpdateStyle();
             }
@@ -169,12 +169,12 @@ namespace Core2D.Renderer.SkiaSharp
             {
                 canvas.DrawLine(P0, P1, Stroke);
 
-                if (Style.StartArrowStyle.ArrowType != ArrowType.None)
+                if (Style.Stroke.StartArrowStyle.ArrowType != ArrowType.None)
                 {
                     StartMarker?.Draw(dc);
                 }
 
-                if (Style.EndArrowStyle.ArrowType != ArrowType.None)
+                if (Style.Stroke.EndArrowStyle.ArrowType != ArrowType.None)
                 {
                     EndMarker?.Draw(dc);
                 }
