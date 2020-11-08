@@ -56,8 +56,8 @@ namespace Core2D.TextFieldWriter.CsvHelper
 
             var csv = writer.ToString();
 
-            var fileIO = _serviceProvider.GetService<IFileSystem>();
-            fileIO?.WriteUtf8Text(stream, csv);
+            var fileSystem = _serviceProvider.GetService<IFileSystem>();
+            fileSystem?.WriteUtf8Text(stream, csv);
         }
     }
 }

@@ -42,7 +42,7 @@ namespace Core2D.Editor
         private readonly Lazy<DataFlow> _dataFlow;
         private readonly Lazy<IShapeRenderer> _pageRenderer;
         private readonly Lazy<IShapeRenderer> _documentRenderer;
-        private readonly Lazy<IFileSystem> _fileIO;
+        private readonly Lazy<IFileSystem> _fileSystem;
         private readonly Lazy<IFactory> _factory;
         private readonly Lazy<IContainerFactory> _containerFactory;
         private readonly Lazy<IShapeFactory> _shapeFactory;
@@ -143,7 +143,7 @@ namespace Core2D.Editor
 
         public ShapeRendererState DocumentState => _documentRenderer.Value?.State;
 
-        public IFileSystem FileIO => _fileIO.Value;
+        public IFileSystem FileSystem => _fileSystem.Value;
 
         public IFactory Factory => _factory.Value;
 
@@ -196,7 +196,7 @@ namespace Core2D.Editor
             _dataFlow = _serviceProvider.GetServiceLazily<DataFlow>();
             _pageRenderer = _serviceProvider.GetServiceLazily<IShapeRenderer>();
             _documentRenderer = _serviceProvider.GetServiceLazily<IShapeRenderer>();
-            _fileIO = _serviceProvider.GetServiceLazily<IFileSystem>();
+            _fileSystem = _serviceProvider.GetServiceLazily<IFileSystem>();
             _factory = _serviceProvider.GetServiceLazily<IFactory>();
             _containerFactory = _serviceProvider.GetServiceLazily<IContainerFactory>();
             _shapeFactory = _serviceProvider.GetServiceLazily<IShapeFactory>();
@@ -339,11 +339,11 @@ namespace Core2D.Editor
         {
             try
             {
-                if (FileIO != null && JsonSerializer != null)
+                if (FileSystem != null && JsonSerializer != null)
                 {
-                    if (!string.IsNullOrEmpty(path) && FileIO.Exists(path))
+                    if (!string.IsNullOrEmpty(path) && FileSystem.Exists(path))
                     {
-                        var project = Factory.OpenProjectContainer(path, FileIO, JsonSerializer);
+                        var project = Factory.OpenProjectContainer(path, FileSystem, JsonSerializer);
                         if (project != null)
                         {
                             OnOpenProjectImpl(project, path);
@@ -386,7 +386,7 @@ namespace Core2D.Editor
         {
             try
             {
-                if (Project != null && FileIO != null && JsonSerializer != null)
+                if (Project != null && FileSystem != null && JsonSerializer != null)
                 {
                     var isDecoratorVisible = PageState.Decorator?.IsVisible == true;
                     if (isDecoratorVisible)
@@ -394,7 +394,7 @@ namespace Core2D.Editor
                         OnHideDecorator();
                     }
 
-                    Factory.SaveProjectContainer(Project, path, FileIO, JsonSerializer);
+                    Factory.SaveProjectContainer(Project, path, FileSystem, JsonSerializer);
                     OnAddRecent(path, Project.Name);
 
                     if (string.IsNullOrEmpty(ProjectPath))
@@ -422,7 +422,7 @@ namespace Core2D.Editor
             {
                 if (project != null)
                 {
-                    using var stream = FileIO.Open(path);
+                    using var stream = FileSystem.Open(path);
                     var db = reader?.Read(stream);
                     if (db != null)
                     {
@@ -441,7 +441,7 @@ namespace Core2D.Editor
         {
             try
             {
-                using var stream = FileIO.Create(path);
+                using var stream = FileSystem.Create(path);
                 writer?.Write(stream, database);
             }
             catch (Exception ex)
@@ -454,7 +454,7 @@ namespace Core2D.Editor
         {
             try
             {
-                using var stream = FileIO.Open(path);
+                using var stream = FileSystem.Open(path);
                 var db = reader?.Read(stream);
                 if (db != null)
                 {
@@ -611,7 +611,7 @@ namespace Core2D.Editor
         {
             try
             {
-                var json = FileIO?.ReadUtf8Text(path);
+                var json = FileSystem?.ReadUtf8Text(path);
                 if (!string.IsNullOrWhiteSpace(json))
                 {
                     var item = JsonSerializer.Deserialize<object>(json);
@@ -647,7 +647,7 @@ namespace Core2D.Editor
                 var json = JsonSerializer?.Serialize(item);
                 if (!string.IsNullOrWhiteSpace(json))
                 {
-                    FileIO?.WriteUtf8Text(path, json);
+                    FileSystem?.WriteUtf8Text(path, json);
                 }
             }
             catch (Exception ex)
@@ -660,7 +660,7 @@ namespace Core2D.Editor
         {
             try
             {
-                using var stream = FileIO.Create(path);
+                using var stream = FileSystem.Create(path);
                 writer?.Save(stream, item, Project);
             }
             catch (Exception ex)
@@ -708,7 +708,7 @@ namespace Core2D.Editor
         {
             try
             {
-                var csharp = FileIO?.ReadUtf8Text(path);
+                var csharp = FileSystem?.ReadUtf8Text(path);
                 if (!string.IsNullOrWhiteSpace(csharp))
                 {
                     await OnExecuteCode(csharp);
@@ -2223,8 +2223,8 @@ namespace Core2D.Editor
 
         public string OnGetImageKey(string path)
         {
-            using var stream = FileIO.Open(path);
-            var bytes = FileIO.ReadBinary(stream);
+            using var stream = FileSystem.Open(path);
+            var bytes = FileSystem.ReadBinary(stream);
             if (Project is IImageCache imageCache)
             {
                 var key = imageCache.AddImageFromFile(path, bytes);
@@ -2250,9 +2250,9 @@ namespace Core2D.Editor
                 else
                 {
                     byte[] bytes;
-                    using (var stream = FileIO?.Open(path))
+                    using (var stream = FileSystem?.Open(path))
                     {
-                        bytes = FileIO?.ReadBinary(stream);
+                        bytes = FileSystem?.ReadBinary(stream);
                     }
                     if (Project is IImageCache imageCache)
                     {
@@ -2485,11 +2485,11 @@ namespace Core2D.Editor
             {
                 try
                 {
-                    var json = FileIO.ReadUtf8Text(path);
+                    var json = FileSystem.ReadUtf8Text(path);
                     var recent = JsonSerializer.Deserialize<Recents>(json);
                     if (recent != null)
                     {
-                        var remove = recent.Files.Where(x => FileIO?.Exists(x.Path) == false).ToList();
+                        var remove = recent.Files.Where(x => FileSystem?.Exists(x.Path) == false).ToList();
                         var builder = recent.Files.ToBuilder();
 
                         foreach (var file in remove)
@@ -2500,7 +2500,7 @@ namespace Core2D.Editor
                         RecentProjects = builder.ToImmutable();
 
                         if (recent.Current != null
-                            && (FileIO?.Exists(recent.Current.Path) ?? false))
+                            && (FileSystem?.Exists(recent.Current.Path) ?? false))
                         {
                             CurrentRecentProject = recent.Current;
                         }
@@ -2525,7 +2525,7 @@ namespace Core2D.Editor
                 {
                     var recent = Recents.Create(_recentProjects, _currentRecentProject);
                     var json = JsonSerializer.Serialize(recent);
-                    FileIO.WriteUtf8Text(path, json);
+                    FileSystem.WriteUtf8Text(path, json);
                 }
                 catch (Exception ex)
                 {

@@ -1033,75 +1033,75 @@ namespace Core2D
             return ProjectContainer.GetAllShapes<ImageShape>(project).Select(i => i.Key).Distinct();
         }
 
-        private ProjectContainer ReadProjectContainer(ZipArchiveEntry projectEntry, IFileSystem fileIO, IJsonSerializer serializer)
+        private ProjectContainer ReadProjectContainer(ZipArchiveEntry projectEntry, IFileSystem fileSystem, IJsonSerializer serializer)
         {
             using var entryStream = projectEntry.Open();
-            return serializer.Deserialize<ProjectContainer>(fileIO.ReadUtf8Text(entryStream));
+            return serializer.Deserialize<ProjectContainer>(fileSystem.ReadUtf8Text(entryStream));
         }
 
-        private void WriteProjectContainer(ProjectContainer project, ZipArchiveEntry projectEntry, IFileSystem fileIO, IJsonSerializer serializer)
+        private void WriteProjectContainer(ProjectContainer project, ZipArchiveEntry projectEntry, IFileSystem fileSystem, IJsonSerializer serializer)
         {
             using var jsonStream = projectEntry.Open();
-            fileIO.WriteUtf8Text(jsonStream, serializer.Serialize(project));
+            fileSystem.WriteUtf8Text(jsonStream, serializer.Serialize(project));
         }
 
-        private void ReadImages(IImageCache cache, ZipArchive archive, IFileSystem fileIO)
+        private void ReadImages(IImageCache cache, ZipArchive archive, IFileSystem fileSystem)
         {
             foreach (var entry in archive.Entries)
             {
                 if (entry.FullName.StartsWith("Images\\"))
                 {
                     using var entryStream = entry.Open();
-                    var bytes = fileIO.ReadBinary(entryStream);
+                    var bytes = fileSystem.ReadBinary(entryStream);
                     cache.AddImage(entry.FullName, bytes);
                 }
             }
         }
 
-        private void WriteImages(IImageCache cache, IEnumerable<string> keys, ZipArchive archive, IFileSystem fileIO)
+        private void WriteImages(IImageCache cache, IEnumerable<string> keys, ZipArchive archive, IFileSystem fileSystem)
         {
             foreach (var key in keys)
             {
                 var imageEntry = archive.CreateEntry(key);
                 using var imageStream = imageEntry.Open();
-                fileIO.WriteBinary(imageStream, cache.GetImage(key));
+                fileSystem.WriteBinary(imageStream, cache.GetImage(key));
             }
         }
 
-        public ProjectContainer OpenProjectContainer(string path, IFileSystem fileIO, IJsonSerializer serializer)
+        public ProjectContainer OpenProjectContainer(string path, IFileSystem fileSystem, IJsonSerializer serializer)
         {
-            using var stream = fileIO.Open(path);
-            return OpenProjectContainer(stream, fileIO, serializer);
+            using var stream = fileSystem.Open(path);
+            return OpenProjectContainer(stream, fileSystem, serializer);
         }
 
-        public void SaveProjectContainer(ProjectContainer project, string path, IFileSystem fileIO, IJsonSerializer serializer)
+        public void SaveProjectContainer(ProjectContainer project, string path, IFileSystem fileSystem, IJsonSerializer serializer)
         {
             if (project is IImageCache imageCache)
             {
-                using var stream = fileIO.Create(path);
-                SaveProjectContainer(project, imageCache, stream, fileIO, serializer);
+                using var stream = fileSystem.Create(path);
+                SaveProjectContainer(project, imageCache, stream, fileSystem, serializer);
             }
         }
 
-        public ProjectContainer OpenProjectContainer(Stream stream, IFileSystem fileIO, IJsonSerializer serializer)
+        public ProjectContainer OpenProjectContainer(Stream stream, IFileSystem fileSystem, IJsonSerializer serializer)
         {
             using var archive = new ZipArchive(stream, ZipArchiveMode.Read);
             var projectEntry = archive.Entries.FirstOrDefault(e => e.FullName == "Project.json");
-            var project = ReadProjectContainer(projectEntry, fileIO, serializer);
+            var project = ReadProjectContainer(projectEntry, fileSystem, serializer);
             if (project is IImageCache imageCache)
             {
-                ReadImages(imageCache, archive, fileIO);
+                ReadImages(imageCache, archive, fileSystem);
             }
             return project;
         }
 
-        public void SaveProjectContainer(ProjectContainer project, IImageCache imageCache, Stream stream, IFileSystem fileIO, IJsonSerializer serializer)
+        public void SaveProjectContainer(ProjectContainer project, IImageCache imageCache, Stream stream, IFileSystem fileSystem, IJsonSerializer serializer)
         {
             using var archive = new ZipArchive(stream, ZipArchiveMode.Create);
             var projectEntry = archive.CreateEntry("Project.json");
-            WriteProjectContainer(project, projectEntry, fileIO, serializer);
+            WriteProjectContainer(project, projectEntry, fileSystem, serializer);
             var keys = GetUsedKeys(project);
-            WriteImages(imageCache, keys, archive, fileIO);
+            WriteImages(imageCache, keys, archive, fileSystem);
         }
     }
 }

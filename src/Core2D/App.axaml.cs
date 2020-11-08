@@ -118,15 +118,15 @@ namespace Core2D
             var serviceProvider = container.Resolve<IServiceProvider>();
 
             var log = serviceProvider.GetService<ILog>();
-            var fileIO = serviceProvider.GetService<IFileSystem>();
+            var fileSystem = serviceProvider.GetService<IFileSystem>();
 
-            log?.Initialize(System.IO.Path.Combine(fileIO?.GetBaseDirectory(), "Core2D.log"));
+            log?.Initialize(System.IO.Path.Combine(fileSystem?.GetBaseDirectory(), "Core2D.log"));
 
             var windowSettings = default(WindowConfiguration);
-            var windowSettingsPath = System.IO.Path.Combine(fileIO?.GetBaseDirectory(), "Core2D.window");
-            if (fileIO.Exists(windowSettingsPath))
+            var windowSettingsPath = System.IO.Path.Combine(fileSystem?.GetBaseDirectory(), "Core2D.window");
+            if (fileSystem.Exists(windowSettingsPath))
             {
-                var jsonWindowSettings = fileIO?.ReadUtf8Text(windowSettingsPath);
+                var jsonWindowSettings = fileSystem?.ReadUtf8Text(windowSettingsPath);
                 if (!string.IsNullOrEmpty(jsonWindowSettings))
                 {
                     windowSettings = JsonSerializer.Deserialize<WindowConfiguration>(jsonWindowSettings);
@@ -135,8 +135,8 @@ namespace Core2D
 
             var editor = serviceProvider.GetService<ProjectEditor>();
 
-            var recentPath = System.IO.Path.Combine(fileIO.GetBaseDirectory(), "Core2D.recent");
-            if (fileIO.Exists(recentPath))
+            var recentPath = System.IO.Path.Combine(fileSystem.GetBaseDirectory(), "Core2D.recent");
+            if (fileSystem.Exists(recentPath))
             {
                 editor.OnLoadRecent(recentPath);
             }
@@ -170,7 +170,7 @@ namespace Core2D
                 var jsonWindowSettings = JsonSerializer.Serialize(windowSettings, new JsonSerializerOptions() { WriteIndented = true });
                 if (!string.IsNullOrEmpty(jsonWindowSettings))
                 {
-                    fileIO?.WriteUtf8Text(windowSettingsPath, jsonWindowSettings);
+                    fileSystem?.WriteUtf8Text(windowSettingsPath, jsonWindowSettings);
                 }
             };
 
@@ -193,9 +193,9 @@ namespace Core2D
             var serviceProvider = container.Resolve<IServiceProvider>();
 
             var log = serviceProvider.GetService<ILog>(); // TODO: Dispose()
-            var fileIO = serviceProvider.GetService<IFileSystem>();
+            var fileSystem = serviceProvider.GetService<IFileSystem>();
 
-            log?.Initialize(System.IO.Path.Combine(fileIO?.GetBaseDirectory(), "Core2D.log"));
+            log?.Initialize(System.IO.Path.Combine(fileSystem?.GetBaseDirectory(), "Core2D.log"));
 
             var editor = serviceProvider.GetService<ProjectEditor>();
 

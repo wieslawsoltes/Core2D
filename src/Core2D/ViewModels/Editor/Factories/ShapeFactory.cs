@@ -343,11 +343,11 @@ namespace Core2D.Editor.Factories
             var factory = _serviceProvider.GetService<IFactory>();
             var editor = _serviceProvider.GetService<ProjectEditor>();
             var project = editor.Project;
-            var fileIO = editor.FileIO;
+            var fileSystem = editor.FileSystem;
             byte[] bytes;
-            using (var stream = fileIO?.Open(path))
+            using (var stream = fileSystem?.Open(path))
             {
-                bytes = fileIO?.ReadBinary(stream);
+                bytes = fileSystem?.ReadBinary(stream);
             }
             if (project is IImageCache imageCache)
             {

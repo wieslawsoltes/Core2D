@@ -157,12 +157,12 @@ namespace Core2D
 
         ProjectContainer CreateProjectContainer(string name = "Project");
 
-        ProjectContainer OpenProjectContainer(string path, IFileSystem fileIO, IJsonSerializer serializer);
+        ProjectContainer OpenProjectContainer(string path, IFileSystem fileSystem, IJsonSerializer serializer);
 
-        void SaveProjectContainer(ProjectContainer project, string path, IFileSystem fileIO, IJsonSerializer serializer);
+        void SaveProjectContainer(ProjectContainer project, string path, IFileSystem fileSystem, IJsonSerializer serializer);
 
-        ProjectContainer OpenProjectContainer(Stream stream, IFileSystem fileIO, IJsonSerializer serializer);
+        ProjectContainer OpenProjectContainer(Stream stream, IFileSystem fileSystem, IJsonSerializer serializer);
 
-        void SaveProjectContainer(ProjectContainer project, IImageCache imageCache, Stream stream, IFileSystem fileIO, IJsonSerializer serializer);
+        void SaveProjectContainer(ProjectContainer project, IImageCache imageCache, Stream stream, IFileSystem fileSystem, IJsonSerializer serializer);
     }
 }
