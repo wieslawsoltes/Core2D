@@ -48,9 +48,9 @@
             </ListBox.KeyBindings>
             <ListBox.DataTemplates>
                 <DataTemplate DataType="vms:ShapeStyle">
-                    <TextBlock x:Name="style" Text="{Binding Name}" Background="Transparent">
+                    <TextBlock x:Name="StyleTextBlock" Text="{Binding Name}" Background="Transparent">
                         <i:Interaction.Behaviors>
-                            <ia:EventTriggerBehavior EventName="DoubleTapped" SourceObject="{Binding #style}" x:CompileBindings="False">
+                            <ia:EventTriggerBehavior EventName="DoubleTapped" SourceObject="{Binding #StyleTextBlock}" x:CompileBindings="False">
                                 <ia:InvokeCommandAction Command="{Binding $parent[TopLevel].DataContext.OnApplyStyle}" CommandParameter="{Binding Mode=OneWay}" x:CompileBindings="False" />
                             </ia:EventTriggerBehavior>
                             <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}" />
